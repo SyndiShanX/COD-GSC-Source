@@ -458,7 +458,7 @@ trycharge(var_0, var_1, var_2) {
   var_6 = var_4.origin;
   var_7 = var_6 - self.origin;
   var_5 = (var_5[0], var_5[1], 0);
-  var_7 = vectornormalize((var_7[0], var_7[1], 0));
+  var_7 = vectorNormalize((var_7[0], var_7[1], 0));
   var_8 = vectordot(var_5, var_7);
 
   if(var_8 < 0.707) {
@@ -776,7 +776,7 @@ tryflash(var_0, var_1, var_2, var_3) {
   if(!scripts\engine\utility::is_true(var_3)) {
     var_6 = var_5 getplayerangles();
     var_7 = anglesToForward(var_6);
-    var_8 = vectornormalize(self.origin - var_5.origin);
+    var_8 = vectorNormalize(self.origin - var_5.origin);
     var_9 = vectordot(var_7, var_8);
 
     if(var_9 < var_4.flash_dot) {

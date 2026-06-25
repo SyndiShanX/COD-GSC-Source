@@ -39,7 +39,7 @@ on_begin() {
   callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_25ee130(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_1e902f3b();
   }
 }
@@ -50,7 +50,7 @@ on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_dc0859e();
     player thread zm_trial_util::function_73ff0096();
   }
@@ -90,7 +90,7 @@ setup_lighthouse() {
       var_611e46b7 thread zm_orange_pap::function_69a4b74b(1);
 
       if(isDefined(var_611e46b7.target)) {
-        clip_brush = getent(var_611e46b7.target, "targetname");
+        clip_brush = getEnt(var_611e46b7.target, "targetname");
         clip_brush thread zm_orange_pap::function_4d7320f5(1);
       }
     }
@@ -121,7 +121,7 @@ function_dbad2f5a() {
   self endon(#"death", #"hash_2b53ed06a97eb26c");
   level.var_ab11c23d notify(#"lighthouse_state_change");
 
-  for(vh_target = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
+  for(vh_target = spawner::simple_spawn_single(getEnt("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getEnt("virgil", "targetname"))) {
     waitframe(1);
   }
 
@@ -132,8 +132,8 @@ function_dbad2f5a() {
   self.vh_target = vh_target;
   self zm_orange_lighthouse::function_1b488412(vh_target.origin, 1);
   self.vh_target.e_spotlight = util::spawn_model("tag_origin", self.vh_target.origin);
-  self.vh_target.e_spotlight enablelinkto();
-  self.vh_target.e_spotlight linkto(self.vh_target, "tag_origin", (0, 0, 390), (90, 0, 0));
+  self.vh_target.e_spotlight enablelinkTo();
+  self.vh_target.e_spotlight linkTo(self.vh_target, "tag_origin", (0, 0, 390), (90, 0, 0));
   self waittill(#"rotatedone");
   level.var_ab11c23d clientfield::set("lighthouse_on", 3);
   self.vh_target.e_spotlight clientfield::set("" + #"trials_lighthouse_beam", 2);

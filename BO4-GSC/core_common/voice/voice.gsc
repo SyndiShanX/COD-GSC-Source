@@ -210,7 +210,7 @@ play_next() {
     if(isDefined(voice.var_17ee4803) && isentity(voice.var_17ee4803)) {
       voice.var_17ee4803 thread function_9b502d8d(str_line, n_wait_time);
     } else {
-      a_e_teammates = getplayers(self.team);
+      a_e_teammates = getPlayers(self.team);
 
       foreach(e_player in a_e_teammates) {
         if(isbot(e_player)) {
@@ -318,7 +318,7 @@ mask_sound(soundent, params, var_17ee4803) {
 
   if(mask == #"all") {
     if(isDefined(self.var_54d07407)) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         self show_portrait_to(player);
       }
     }
@@ -329,13 +329,13 @@ mask_sound(soundent, params, var_17ee4803) {
   soundent hide();
 
   if(mask == #"friendly") {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.team == self.team) {
         self play_to(soundent, player);
       }
     }
   } else if(mask == #"enemy") {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.team != self.team) {
         self play_to(soundent, player);
       }
@@ -399,7 +399,7 @@ play_notetrack(scriptid) {
   if(isDefined(str_team) && str_team != #"any") {
     soundent hide();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player._scene_object) && isDefined(player._scene_object._o_scene) && isDefined(self._scene_object._o_scene) && player._scene_object._o_scene == self._scene_object._o_scene) {
         self play_to(soundent, player);
         continue;

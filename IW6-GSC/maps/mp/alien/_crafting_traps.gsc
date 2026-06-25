@@ -494,7 +494,7 @@ electric_ball_lightning_movement(var_0) {
     var_2 = get_center_of_alive_players();
 
     if(distance2dsquared(var_0.origin, var_2) > var_1) {
-      var_0 moveto(var_2, 1);
+      var_0 moveTo(var_2, 1);
       wait 0.75;
     }
 
@@ -574,7 +574,7 @@ perimiter_defense_think(var_0, var_1) {
 tesla_bolt_death(var_0) {
   self endon("death");
   playFXOnTag(level._effect["tesla_attack"], var_0.attack_bolt, "TAG_ORIGIN");
-  var_0.attack_bolt moveto(self.origin + (0, 0, 30), 0.05);
+  var_0.attack_bolt moveTo(self.origin + (0, 0, 30), 0.05);
   var_0.attack_bolt waittill("movedone");
   playFXOnTag(level._effect["tesla_shock"], var_0.attack_bolt, "tag_origin");
   self playSound("tesla_shock");
@@ -958,7 +958,7 @@ drop_pillagable_item(var_0, var_1, var_2, var_3, var_4) {
   var_5.pillage_trigger.angles = self.angles;
   var_5.pillage_trigger setModel(get_pillage_model(var_0));
   var_6 = maps\mp\alien\_pillage::get_hintstring_for_item_pickup(var_0);
-  var_5.pillage_trigger sethintstring(var_6);
+  var_5.pillage_trigger setHintString(var_6);
   var_5.pillage_trigger makeusable();
 
   if(isDefined(var_4)) {

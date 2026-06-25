@@ -48,11 +48,11 @@ main() {
 }
 
 remove_sp_elements() {
-  getent("fake_backwards_door", "targetname") delete();
-  getent("fake_backwards_door_clip", "targetname") delete();
-  getent("recroom_closed_doors", "targetname") delete();
-  getent("dsm", "targetname") delete();
-  getent("dsm_obj", "targetname") delete();
+  getEnt("fake_backwards_door", "targetname") delete();
+  getEnt("fake_backwards_door_clip", "targetname") delete();
+  getEnt("recroom_closed_doors", "targetname") delete();
+  getEnt("dsm", "targetname") delete();
+  getEnt("dsm_obj", "targetname") delete();
 
   array_call(getEntArray("window_newspaper", "targetname"), ::delete);
   array_call(getEntArray("window_pane", "targetname"), ::delete);

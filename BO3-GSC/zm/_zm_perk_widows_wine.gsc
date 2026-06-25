@@ -424,7 +424,7 @@ function widows_wine_override_melee_wallbuy_purchase(vo_dialog_id, flourish_weap
       cost = wallbuy.stub.cost;
       if(self zm_score::can_player_purchase(cost)) {
         if(wallbuy.first_time_triggered == 0) {
-          model = getent(wallbuy.target, "targetname");
+          model = getEnt(wallbuy.target, "targetname");
           if(isDefined(model)) {
             model thread zm_melee_weapon::melee_weapon_show(self);
           } else if(isDefined(wallbuy.clientfieldname)) {

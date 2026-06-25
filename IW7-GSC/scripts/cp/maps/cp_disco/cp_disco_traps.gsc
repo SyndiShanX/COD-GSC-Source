@@ -8,7 +8,7 @@ init_buffer_trap() {
 }
 
 power_on_buffer() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 setnonstick(1);
   if(scripts\engine\utility::istrue(self.requires_power)) {
     var_1 = undefined;
@@ -29,7 +29,7 @@ power_on_buffer() {
 use_buffer_trap(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   if(!isDefined(var_2.var_127C9)) {
     var_3 = [];
     foreach(var_5 in scripts\engine\utility::getStructArray(var_0.target, "targetname")) {
@@ -37,8 +37,8 @@ use_buffer_trap(var_0, var_1) {
     }
 
     foreach(var_8 in var_3) {
-      var_8 enablelinkto();
-      var_8 linkto(var_2);
+      var_8 enablelinkTo();
+      var_8 linkTo(var_2);
     }
 
     var_2.var_127C9 = var_3;
@@ -56,7 +56,7 @@ use_buffer_trap(var_0, var_1) {
   var_10 = var_2.origin;
   var_11 = 0;
   while(var_11 < 2) {
-    var_2 moveto(var_2.origin + (0, 0, 5), 0.1);
+    var_2 moveTo(var_2.origin + (0, 0, 5), 0.1);
     foreach(var_1 in level.players) {
       var_13 = var_1.origin[2] - var_2.origin[2];
       if(distance(var_2.origin, var_1.origin) < 72 && var_1.origin[2] > var_2.origin[2] && var_13 < 72) {
@@ -65,7 +65,7 @@ use_buffer_trap(var_0, var_1) {
     }
 
     wait(0.1);
-    var_2 moveto(var_10, 0.1);
+    var_2 moveTo(var_10, 0.1);
     wait(0.2);
     var_11 = var_11 + 0.3;
   }
@@ -77,10 +77,10 @@ use_buffer_trap(var_0, var_1) {
   var_2 thread buffer_move();
   wait(16);
   var_2 notify("stop_buffer");
-  var_2 rotateyaw(30, 1, 0, 0);
-  var_2 rotateyaw(-30, 1, 0, 1);
+  var_2 rotateYaw(30, 1, 0, 0);
+  var_2 rotateYaw(-30, 1, 0, 1);
   stopFXOnTag(level._effect["buffer_smoke"], var_2, "tag_origin");
-  var_2 moveto(var_2.origin + anglesToForward(var_2.last_spot.angles) * 2, 0.25, 0, 0.25);
+  var_2 moveTo(var_2.origin + anglesToForward(var_2.last_spot.angles) * 2, 0.25, 0, 0.25);
   var_2 playsoundonmovingent("trap_buffer_stop");
   wait(1);
   var_2 stoploopsound("trap_buffer_spin_lp");
@@ -123,13 +123,13 @@ buffer_move() {
     if(!isDefined(self.last_spot)) {
       var_11 = var_3[var_9];
       var_10 = sqrt(var_4[var_9]) / 180;
-      self moveto(var_11.origin, var_10, 1, 0);
+      self moveTo(var_11.origin, var_10, 1, 0);
     } else {
       var_11 = var_3[var_9];
       var_10 = sqrt(var_4[var_9]) / 180;
       self playsoundonmovingent("trap_buffer_bump_edge");
-      self moveto(var_11.origin, var_10, 0, 0);
-      self rotateyaw(randomintrange(500, 1080) * var_0, var_10, randomfloatrange(0, var_10 * 0.5), 0);
+      self moveTo(var_11.origin, var_10, 0, 0);
+      self rotateYaw(randomintrange(500, 1080) * var_0, var_10, randomfloatrange(0, var_10 * 0.5), 0);
       var_0 = var_0 * -1;
     }
 
@@ -207,10 +207,10 @@ init_hydrant_trap() {
 }
 
 use_hydrant_trap(var_0, var_1) {
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_3 = [];
   foreach(var_5 in scripts\engine\utility::getStructArray(var_0.target, "targetname")) {
-    var_5.pool_spot = scripts\engine\utility::getstruct(var_5.target, "targetname");
+    var_5.pool_spot = scripts\engine\utility::getStruct(var_5.target, "targetname");
     foreach(var_7 in getEntArray(var_5.target, "targetname")) {
       if(issubstr(var_7.classname, "phys")) {
         var_5.physvolume = var_7;
@@ -233,7 +233,7 @@ use_hydrant_trap(var_0, var_1) {
   var_1 playlocalsound("purchase_generic");
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
   wait(0.5);
-  var_2 rotateyaw(360, 1);
+  var_2 rotateYaw(360, 1);
   playsoundatpos(var_2.origin, "trap_hydrant_valve");
   wait(0.5);
   playrumbleonposition("light_3s", var_2.origin);

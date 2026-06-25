@@ -66,7 +66,7 @@ function_73c1ecd4(predictedspawn) {
     }
 
     if(isDefined(self.var_9a79d89d)) {
-      self setorigin(self.var_9a79d89d);
+      self setOrigin(self.var_9a79d89d);
       self setplayerangles(self.var_5ab7c19c);
     }
   }
@@ -136,8 +136,8 @@ function_872c9404(mode) {
 
     for(index = 0; index < var_932b0566.size; index++) {
       e_trigger = var_932b0566[index];
-      e_model = getent(e_trigger.target, "targetname");
-      var_d3b9972d = getent(e_model.target, "targetname");
+      e_model = getEnt(e_trigger.target, "targetname");
+      var_d3b9972d = getEnt(e_model.target, "targetname");
       e_model show();
       var_d3b9972d hide();
       e_model clientfield::set("enemyobj_keyline_render", 0);
@@ -152,8 +152,8 @@ function_872c9404(mode) {
 
   for(index = 0; index < var_932b0566.size; index++) {
     e_trigger = var_932b0566[index];
-    e_model = getent(e_trigger.target, "targetname");
-    var_d3b9972d = getent(e_model.target, "targetname");
+    e_model = getEnt(e_trigger.target, "targetname");
+    var_d3b9972d = getEnt(e_model.target, "targetname");
     e_model ghost();
     e_model connectpaths();
     e_model notsolid();
@@ -315,8 +315,8 @@ function_4b5c96a0() {
   }
 
   while(!level.gameended) {
-    e_model = getent(self.target, "targetname");
-    var_d3b9972d = getent(e_model.target, "targetname");
+    e_model = getEnt(self.target, "targetname");
+    var_d3b9972d = getEnt(e_model.target, "targetname");
 
     if(!(isDefined(b_keyline) && b_keyline)) {
       e_model clientfield::set("enemyobj_keyline_render", 1);

@@ -96,7 +96,7 @@ so_demoman_init() {
   enemy_list = array_merge(enemy_list, getEntArray("upper_level_enemies", "script_noteworthy"));
   enemy_list = array_merge(enemy_list, getEntArray("rappel_bridge_seek", "script_noteworthy"));
   enemy_list = array_merge(enemy_list, getEntArray("rappel_bridge", "script_noteworthy"));
-  enemy_list = array_add(enemy_list, getent("kill_heli", "targetname"));
+  enemy_list = array_add(enemy_list, getEnt("kill_heli", "targetname"));
   array_thread(enemy_list, ::add_spawn_function, ::register_bridge_enemy);
 
   level.vehicle_list = getEntArray("vehicle_undestroyed", "script_noteworthy");
@@ -211,7 +211,7 @@ precacheModel("vehicle_coupe_gold");
 thread collapsed_section_shakes();
 thread bridge_collapse_prep();
 
-trigger = GetEnt("bridge_collapse", "targetname");
+trigger = getEnt("bridge_collapse", "targetname");
 
 if(getDvar("test_bridge_collapse") == "1") {
   trigger thread notify_delay("trigger", 10);
@@ -223,7 +223,7 @@ foreach(player in level.players) {
   player blend_movespeedscale(0.7, 2);
 }
 
-dmg_trigger = GetEnt("so_bridge_damage_trigger", "targetname");
+dmg_trigger = getEnt("so_bridge_damage_trigger", "targetname");
 
 count = 0;
 while(1) {

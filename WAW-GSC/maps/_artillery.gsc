@@ -133,7 +133,7 @@ arty_crew_play_anim(vehicle, animname, tag) {
   tagAngles = vehicle getTagAngles(tag);
 
   if(isalive(self)) {
-    self animscripted("arty_anim_done", tagOrigin, tagAngles, level.scr_anim[self.animname][animname]);
+    self animScripted("arty_anim_done", tagOrigin, tagAngles, level.scr_anim[self.animname][animname]);
     self.allowDeath = 1;
     self waittillmatch("arty_anim_done", "end");
 
@@ -159,7 +159,7 @@ arty_fire_loop() {
 }
 
 arty_fire_without_move() {
-  self disconnectpaths();
+  self disconnectPaths();
 
   for(i = 0; i < self.arty_crew.size; i++) {
     if(isalive(self.arty_crew[i])) {
@@ -169,7 +169,7 @@ arty_fire_without_move() {
 
   for(i = 0; i < self.arty_crew.size; i++) {
     if(isalive(self.arty_crew[i])) {
-      self.arty_crew[i] linkto(self, self.arty_crew[i].tag_b);
+      self.arty_crew[i] linkTo(self, self.arty_crew[i].tag_b);
     }
   }
 
@@ -218,10 +218,10 @@ arty_move(goal_pos, stopAtGoal) {
     self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "none");
   }
 
-  self disconnectpaths();
+  self disconnectPaths();
 
   for(i = 0; i < self.arty_crew.size; i++) {
-    self.arty_crew[i] linkto(self, self.arty_crew[i].tag_a);
+    self.arty_crew[i] linkTo(self, self.arty_crew[i].tag_a);
   }
 
   for(i = 0; i < self.arty_crew.size; i++) {
@@ -264,10 +264,10 @@ arty_move(goal_pos, stopAtGoal) {
     self.arty_crew[i] animscripts\shared::placeWeaponOn(self.arty_crew[i].primaryweapon, "none");
   }
 
-  self disconnectpaths();
+  self disconnectPaths();
 
   for(i = 0; i < self.arty_crew.size; i++) {
-    self.arty_crew[i] linkto(self, self.arty_crew[i].tag_b);
+    self.arty_crew[i] linkTo(self, self.arty_crew[i].tag_b);
   }
 
   for(i = 0; i < self.arty_crew.size; i++) {

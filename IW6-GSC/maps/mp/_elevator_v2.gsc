@@ -16,7 +16,7 @@ ELEVATOR_DOOR_STATE_OPEN = 2;
 ELEVATOR_DOOR_STATE_CLOSING = 3;
 
 init_elevator(config) {
-  elevator = GetEnt(config.name, "targetname");
+  elevator = getEnt(config.name, "targetname");
   AssertEx(isDefined(elevator), "Could not find an elevator entity named " + config.name);
   elevator.unresolved_collision_func = ::handleUnreslovedCollision;
 
@@ -46,7 +46,7 @@ init_elevator(config) {
       elevator.autoCloseTimeout = ELEVATOR_AUTOCLOSE_TIMEOUT;
     }
 
-    elevator.trigBlock = GetEnt(config.trigBlockName, "targetname");
+    elevator.trigBlock = getEnt(config.trigBlockName, "targetname");
     AssertEx(isDefined(elevator.trigBlock), "Could not find an elevator trigger named " + config.trigBlockName);
 
     if(isDefined(config.autoCloseTimeout)) {
@@ -86,7 +86,7 @@ init_elevator(config) {
     elevatorModels = getEntArray(config.models, "targetname");
     if(isDefined(elevatorModels)) {
       foreach(eleModel in elevatorModels) {
-        eleModel LinkTo(elevator);
+        eleModel linkTo(elevator);
       }
     }
   }
@@ -109,11 +109,11 @@ init_elevator(config) {
 }
 
 setupDoor(doorName, isRightSide, moveDistance) {
-  door = GetEnt(doorName, "targetname");
+  door = getEnt(doorName, "targetname");
   if(isDefined(door)) {
     door.closePos = door.origin;
     if(isDefined(door.target)) {
-      targetStruct = getstruct(door.target, "targetname");
+      targetStruct = getStruct(door.target, "targetname");
       door.openPos = targetStruct.origin;
     } else {
       offset = anglesToForward(door.angles) * moveDistance;
@@ -132,7 +132,7 @@ setupButton(elevator) {
   self.owner = elevator;
 
   if(isDefined(self.target)) {
-    destination = getstruct(self.target, "targetname");
+    destination = getStruct(self.target, "targetname");
     self setupDestination(destination);
   }
 
@@ -143,7 +143,7 @@ setupDestination(destination) {
   if(isDefined(destination)) {
     self.destinations[destination.script_label] = destination.origin;
     if(isDefined(destination.target)) {
-      blocker = GetEnt(destination.target, "targetname");
+      blocker = getEnt(destination.target, "targetname");
       if(isDefined(blocker)) {
         self.pathBlockers[destination.script_label] = blocker;
       }
@@ -152,7 +152,7 @@ setupDestination(destination) {
 }
 
 enableButton() {
-  self SetHintString(&"MP_ELEVATOR_USE");
+  self setHintString(&"MP_ELEVATOR_USE");
   self MakeUsable();
 
   self thread buttonThink();
@@ -269,7 +269,7 @@ openElevatorDoors(floorName, autoClose) {
   }
 
   foreach(door in doorset) {
-    door MoveTo((door.openPos[0], door.openPos[1], door.origin[2]), movetime, 0.0, accelTime);
+    door moveTo((door.openPos[0], door.openPos[1], door.origin[2]), movetime, 0.0, accelTime);
   }
   wait(movetime);
 
@@ -301,7 +301,7 @@ closeElevatorDoors(floorName) {
   if(moveDist != 0.0) {
     movetime = moveDist / self.doorSpeed;
     foreach(door in doorset) {
-      door MoveTo((door.closePos[0], door.closePos[1], door.origin[2]), movetime, 0.0, 0.25);
+      door moveTo((door.closePos[0], door.closePos[1], door.origin[2]), movetime, 0.0, 0.25);
     }
     self playSound(self.doorCloseSfx);
     wait(movetime);
@@ -367,6 +367,6 @@ elevatorBlockPath(floorName) {
   if(isDefined(blocker)) {
     blocker Show();
     blocker Solid();
-    blocker DisconnectPaths();
+    blocker disconnectPaths();
   }
 }

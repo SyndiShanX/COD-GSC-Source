@@ -30,7 +30,7 @@ function private preinit() {
 
 function grab_nuke(player) {
   level thread nuke_powerup(self, player.team, player);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     if(isDefined(e_player) && isPlayer(e_player) && isDefined(self.hint)) {
@@ -46,7 +46,7 @@ function grab_nuke(player) {
 
 function function_8d3a47ed() {
   if(zm_utility::is_survival()) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       a_enemies = player getenemiesinradius(player.origin, 3000);
@@ -173,7 +173,7 @@ function nuke_powerup(drop_item, player_team, var_264cf1f9) {
 
 function nuke_flash(team, location) {
   if(isDefined(location) && zm_utility::is_survival()) {
-    a_players = arraysortclosest(getplayers(), location, undefined, 0, 3000);
+    a_players = arraysortclosest(getPlayers(), location, undefined, 0, 3000);
 
     foreach(player in a_players) {
       player playsoundtoplayer(#"evt_nuke_flash", player);
@@ -182,9 +182,9 @@ function nuke_flash(team, location) {
 
     return;
   } else if(isDefined(team)) {
-    getplayers()[0] playsoundtoteam("evt_nuke_flash", team);
+    getPlayers()[0] playsoundtoteam("evt_nuke_flash", team);
   } else {
-    getplayers()[0] playSound(#"evt_nuke_flash");
+    getPlayers()[0] playSound(#"evt_nuke_flash");
   }
 
   lui::screen_flash(0.2, 0.5, 1, 0.8, "white", undefined, 1);

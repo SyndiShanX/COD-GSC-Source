@@ -30,8 +30,8 @@ func_127EB(var_0) {
   var_2 = var_0.angles;
   var_3 = spawn("trigger_rotatable_radius", var_1, 0, 3, 1000);
   var_3.angles = var_2;
-  var_3 enablelinkto();
-  var_3 linkto(var_0);
+  var_3 enablelinkTo();
+  var_3 linkTo(var_0);
   var_3 hide();
   return var_3;
 }
@@ -39,8 +39,8 @@ func_127EB(var_0) {
 func_127EC(var_0) {
   var_1 = spawn("trigger_rotatable_radius", var_0.origin, 0, 32, 32);
   var_1.angles = var_0.angles;
-  var_1 enablelinkto();
-  var_1 linkto(var_0);
+  var_1 enablelinkTo();
+  var_1 linkTo(var_0);
   var_1 hide();
   return var_1;
 }
@@ -119,7 +119,7 @@ func_127E7(var_0) {
   var_1.power = "power_tripMine";
   var_1.killcament = self;
   thread func_127D7(0.2);
-  var_1 moveto(var_0, 0.2, 0.1);
+  var_1 moveTo(var_0, 0.2, 0.1);
   wait(0.2);
   var_2 = undefined;
   if(isDefined(var_1.owner)) {
@@ -245,8 +245,8 @@ func_127E0(var_0, var_1) {
   var_3 setModel("tag_origin");
   self.var_10D97 = var_2;
   self.var_6316 = var_3;
-  self.var_10D97 linkto(self);
-  self.var_6316 linkto(self.var_10D97);
+  self.var_10D97 linkTo(self);
+  self.var_6316 linkTo(self.var_10D97);
   self.var_41F6 = [];
   self.var_41EF = [];
   scripts\engine\utility::waitframe();
@@ -345,7 +345,7 @@ func_127F1() {
 
     self.var_6316 unlink();
     self.var_6316.origin = var_2;
-    self.var_6316 linkto(self.var_10D97);
+    self.var_6316 linkTo(self.var_10D97);
     scripts\engine\utility::waitframe();
   }
 }

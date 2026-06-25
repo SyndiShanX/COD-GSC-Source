@@ -520,7 +520,7 @@ setDropped() {
     dropOrigin = trace;
     if(angleTrace["fraction"] < 1 && distance(angleTrace["position"], trace) < 10.0) {
       forward = (cos(tempAngle), sin(tempAngle), 0);
-      forward = vectornormalize(forward - common_scripts\utility::vector_multiply(angleTrace["normal"], vectordot(forward, angleTrace["normal"])));
+      forward = vectorNormalize(forward - common_scripts\utility::vector_multiply(angleTrace["normal"], vectordot(forward, angleTrace["normal"])));
       dropAngles = vectortoangles(forward);
     } else {
       dropAngles = (0, tempAngle, 0);
@@ -1155,7 +1155,7 @@ attachUseModel() {
 
 useHoldThink(player) {
   player notify("use_hold");
-  player playerLinkTo(self.trigger);
+  player playerlinkTo(self.trigger);
   player PlayerLinkedOffsetEnable();
   player clientClaimTrigger(self.trigger);
   player.claimTrigger = self.trigger;

@@ -58,7 +58,7 @@ function function_705159cd() {
 
       if(isDefined(self.propclones)) {
         foreach(clone in self.propclones) {
-          if((clone.model === "p8_aml_chicken_female_02" || clone.model === "p8_aml_chicken_female_03") && !clone isplayinganimscripted()) {
+          if((clone.model === "p8_aml_chicken_female_02" || clone.model === "p8_aml_chicken_female_03") && !clone isplayinganimScripted()) {
             prop = clone;
             break;
           }
@@ -69,11 +69,11 @@ function function_705159cd() {
         prop = self.prop;
       }
 
-      if((prop.model === "p8_aml_chicken_female_02" || prop.model === "p8_aml_chicken_female_03") && !prop isplayinganimscripted()) {
+      if((prop.model === "p8_aml_chicken_female_02" || prop.model === "p8_aml_chicken_female_03") && !prop isplayinganimScripted()) {
         prop useanimtree("generic");
-        prop animscripted("chicken_idle", prop.origin, prop.angles, "a_chicken_idle", "normal", "root", 1, 0);
-      } else if(!(prop.model === "p8_aml_chicken_female_02" || prop.model === "p8_aml_chicken_female_03") && prop isplayinganimscripted()) {
-        prop stopanimscripted();
+        prop animScripted("chicken_idle", prop.origin, prop.angles, "a_chicken_idle", "normal", "root", 1, 0);
+      } else if(!(prop.model === "p8_aml_chicken_female_02" || prop.model === "p8_aml_chicken_female_03") && prop isplayinganimScripted()) {
+        prop stopanimScripted();
       }
     }
 
@@ -88,19 +88,19 @@ function isprop() {
 function on_end_game() {}
 
 function function_74906a8b(var_8f9fbf19) {
-  var_56411b8a = getent("prb_tn_us_heli_lg_cockpit", "targetname");
-  var_2ad45d4e = getent("prb_tn_us_heli_lg_cabin", "targetname");
+  var_56411b8a = getEnt("prb_tn_us_heli_lg_cockpit", "targetname");
+  var_2ad45d4e = getEnt("prb_tn_us_heli_lg_cabin", "targetname");
   var_56411b8a unlink();
   var_2ad45d4e unlink();
   var_56411b8a dontinterpolate();
   var_2ad45d4e dontinterpolate();
 
   if(isDefined(var_8f9fbf19 gettagorigin("tag_probe_cockpit"))) {
-    var_56411b8a linkto(var_8f9fbf19, "tag_probe_cockpit", (0, 0, 0), (0, 0, 0));
+    var_56411b8a linkTo(var_8f9fbf19, "tag_probe_cockpit", (0, 0, 0), (0, 0, 0));
   }
 
   if(isDefined(var_8f9fbf19 gettagorigin("tag_probe_cabin"))) {
-    var_2ad45d4e linkto(var_8f9fbf19, "tag_probe_cabin", (0, 0, 0), (0, 0, 0));
+    var_2ad45d4e linkTo(var_8f9fbf19, "tag_probe_cabin", (0, 0, 0), (0, 0, 0));
   }
 }
 

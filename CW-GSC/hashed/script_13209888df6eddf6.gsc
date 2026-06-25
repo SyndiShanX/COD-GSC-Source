@@ -265,7 +265,7 @@ function function_26af2826() {
 
 function function_9a288202() {
   level.player endon(#"death");
-  trig = getent("mortar_orbit_building_upper_trig", "targetname");
+  trig = getEnt("mortar_orbit_building_upper_trig", "targetname");
 
   while(flag::get("flag_mortar_orbit_rappel_start")) {
     trig waittill(#"trigger");

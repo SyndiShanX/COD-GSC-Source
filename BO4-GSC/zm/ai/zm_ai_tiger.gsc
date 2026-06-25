@@ -327,7 +327,7 @@ function_8fc19416(notetrack) {
 }
 
 get_favorite_enemy() {
-  var_7c746996 = getplayers();
+  var_7c746996 = getPlayers();
   least_hunted = var_7c746996[0];
 
   for(i = 0; i < var_7c746996.size; i++) {

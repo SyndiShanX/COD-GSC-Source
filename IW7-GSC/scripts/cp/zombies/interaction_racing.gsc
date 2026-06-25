@@ -58,7 +58,7 @@ func_DBB7(var_0) {
         var_3.powered_on = 1;
       }
 
-      var_5 = getent("arcade_zz_neon_light", "targetname");
+      var_5 = getEnt("arcade_zz_neon_light", "targetname");
       var_5 setModel("zmb_theater_sign_05");
       continue;
     }
@@ -134,18 +134,18 @@ func_E1F4(var_0, var_1) {
 
   foreach(var_5 in var_3) {
     if(var_0 == "afterlife") {
-      var_5.horse moveto(var_5.horse.og_origin + (-0.25, 0, 0), 1);
+      var_5.horse moveTo(var_5.horse.og_origin + (-0.25, 0, 0), 1);
       continue;
     }
 
-    var_5.horse moveto(var_5.horse.og_origin + (0, 0.25, 0), 1);
+    var_5.horse moveTo(var_5.horse.og_origin + (0, 0.25, 0), 1);
   }
 
   if(var_1.origin != var_1.og_origin) {
     thread scripts\engine\utility::play_sound_in_space("arcade_horserace_reset", var_1.origin);
   }
 
-  var_1 moveto(var_1.og_origin, 1);
+  var_1 moveTo(var_1.og_origin, 1);
 }
 
 func_DBB2(var_0, var_1) {

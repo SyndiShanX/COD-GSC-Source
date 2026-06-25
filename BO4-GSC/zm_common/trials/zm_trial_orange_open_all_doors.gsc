@@ -49,12 +49,12 @@ on_end(round_reset) {
     var_de1def71 = function_e242d7a8();
 
     if(var_eeba6731 < var_de1def71) {
-      zm_trial::fail(#"hash_2c31c30f3d0b0484", getplayers());
+      zm_trial::fail(#"hash_2c31c30f3d0b0484", getPlayers());
     }
   }
 
   if(isDefined(self.n_timer)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_trial_util::function_885fb2c8();
     }
   }
@@ -124,18 +124,18 @@ monitor_timer(n_timer) {
   level endon(#"trial_round_end");
   wait 12;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_128378c9(n_timer, 1, #"hash_c2b77be4cf5b142");
   }
 
   level waittilltimeout(n_timer + 1, #"all_doors_opened");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_885fb2c8();
   }
 
   if(function_d2a5d1f0() < function_e242d7a8()) {
-    zm_trial::fail(#"hash_2c31c30f3d0b0484", getplayers());
+    zm_trial::fail(#"hash_2c31c30f3d0b0484", getPlayers());
   }
 }
 

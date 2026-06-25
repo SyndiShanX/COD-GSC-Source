@@ -50,7 +50,7 @@ createentityeventdata(var_0, var_1, var_2) {
   var_7 thread func_13A19(var_5);
   if(var_2 != "equipment" && var_2 != "super") {
     var_5 thread func_90DE();
-    var_5 rotateyaw(1000, 30, 0.2, 0.2);
+    var_5 rotateYaw(1000, 30, 0.2, 0.2);
   } else {
     var_5 thread func_11A17(var_7);
   }
@@ -135,9 +135,9 @@ func_90DE() {
   self endon("death");
   var_0 = self.origin;
   for(;;) {
-    self moveto(var_0 + (0, 0, 15), 1, 0.2, 0.2);
+    self moveTo(var_0 + (0, 0, 15), 1, 0.2, 0.2);
     wait(1);
-    self moveto(var_0, 1, 0.2, 0.2);
+    self moveTo(var_0, 1, 0.2, 0.2);
     wait(1);
   }
 }

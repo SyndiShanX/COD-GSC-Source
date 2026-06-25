@@ -37,18 +37,18 @@ function start_grapple(var_683c052c, var_a2613153, n_type, n_speed = 1800) {
     var_b7c15e33.origin = var_683c052c function_1e702195();
     var_c35f0f99 = var_a2613153 function_1e702195();
     var_b7c15e33 playSound("zmb_grapple_start");
-    var_b7c15e33 moveto(var_c35f0f99, n_time);
+    var_b7c15e33 moveTo(var_c35f0f99, n_time);
     var_b7c15e33 waittill("movedone");
     var_8986f6e8 = var_c35f0f99 - var_a2613153.origin;
     var_b7c15e33.origin = var_a2613153.origin;
     if(isPlayer(var_a2613153)) {
-      var_a2613153 playerlinkto(var_b7c15e33, "tag_origin");
+      var_a2613153 playerlinkTo(var_b7c15e33, "tag_origin");
     } else {
-      var_a2613153 linkto(var_b7c15e33);
+      var_a2613153 linkTo(var_b7c15e33);
     }
     var_a2613153 playSound("zmb_grapple_grab");
     var_de84fe14 = var_683c052c function_1e702195() - var_8986f6e8;
-    var_b7c15e33 moveto(var_de84fe14, n_time);
+    var_b7c15e33 moveTo(var_de84fe14, n_time);
     var_b7c15e33 playSound("zmb_grapple_pull");
     var_b7c15e33 waittill("movedone");
     function_b7c692b0();
@@ -94,7 +94,7 @@ function private function_63b4b8a5(var_365c612) {
     self.var_14f171d3 = var_365c612;
     if(isPlayer(self)) {
       self util::freeze_player_controls(var_365c612);
-      self setplayercollision(!var_365c612);
+      self setPlayerCollision(!var_365c612);
       if(var_365c612) {
         self zm_utility::increment_ignoreme();
         self.var_61f01d73 = self enableinvulnerability();

@@ -347,7 +347,7 @@ function_28291f40(localclientnum, e_target) {
     self.var_2723e767[localclientnum] = util::spawn_model(localclientnum, "tag_origin", e_target.origin);
   }
 
-  self.var_2723e767[localclientnum] linkto(e_target, var_1f694afe);
+  self.var_2723e767[localclientnum] linkTo(e_target, var_1f694afe);
   self.var_3e52c79e[localclientnum] = level beam::function_cfb2f62a(localclientnum, self, "tag_shield_key_fx", self.var_2723e767[localclientnum], "tag_origin", "beam8_zm_shield_key_ray_targeted");
 }
 
@@ -447,12 +447,12 @@ function_5ab769d8(localclientnum) {
 
   self notify(#"hash_360be32d770a6eb2");
   self endon(#"death", #"hash_360be32d770a6eb2", #"spectral_key_beam_end");
-  self playrumbleonentity(localclientnum, "zm_weap_scepter_ray_hit_rumble");
+  self playRumbleOnEntity(localclientnum, "zm_weap_scepter_ray_hit_rumble");
   wait 0.5;
 
   while(true) {
     if(isPlayer(self) && self function_21c0fa55()) {
-      self playrumbleonentity(localclientnum, "zm_weap_scepter_ray_rumble");
+      self playRumbleOnEntity(localclientnum, "zm_weap_scepter_ray_rumble");
     }
 
     wait 0.5;
@@ -715,7 +715,7 @@ function_6b58c030(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   util::playFXOnTag(localclientnum, level._effect[#"air_blast"], self, "tag_origin");
   mdl_blast = util::spawn_model(localclientnum, "tag_origin", self gettagorigin("tag_flash_window"), self gettagangles("tag_flash_window"));
-  mdl_blast linkto(self, "tag_flash_window");
+  mdl_blast linkTo(self, "tag_flash_window");
   mdl_blast scene::play(#"p8_fxanim_zm_esc_blast_afterlife_bundle");
   mdl_blast unlink();
   mdl_blast delete();

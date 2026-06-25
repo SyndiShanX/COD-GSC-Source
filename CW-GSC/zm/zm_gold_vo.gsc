@@ -733,7 +733,7 @@ function function_c732de82(e_player) {
     return false;
   }
 
-  self sethintstring(#"hash_78573012d7272fae");
+  self setHintString(#"hash_78573012d7272fae");
   return true;
 }
 

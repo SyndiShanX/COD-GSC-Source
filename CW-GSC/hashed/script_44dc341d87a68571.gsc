@@ -590,7 +590,7 @@ function registerhud_message_electricity_(entity, mocompanim, mocompanimblendout
   mocompanimflag collidewithactors(0);
 
   if(isDefined(mocompanimflag.favoriteenemy)) {
-    dirtoenemy = vectornormalize(mocompanimflag.favoriteenemy.origin - mocompanimflag.origin);
+    dirtoenemy = vectorNormalize(mocompanimflag.favoriteenemy.origin - mocompanimflag.origin);
     mocompanimflag forceteleport(mocompanimflag.origin, vectortoangles(dirtoenemy));
   }
 
@@ -630,7 +630,7 @@ function function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompani
       }
     }
 
-    var_83fd29ee = vectornormalize(predictedenemypos - mocompanimflag.origin);
+    var_83fd29ee = vectorNormalize(predictedenemypos - mocompanimflag.origin);
     var_1efb2395 = predictedenemypos - var_83fd29ee * mocompanimflag getpathfindingradius();
     self.meleeinfo.adjustedendpos = var_1efb2395;
     var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
@@ -648,7 +648,7 @@ function function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompani
       var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
       myforward = anglesToForward(self.angles);
       var_1c3641f2 = (mocompanimflag.favoriteenemy.origin[0], mocompanimflag.favoriteenemy.origin[1], mocompanimflag.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - mocompanimflag.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - mocompanimflag.origin);
       zdiff = self.meleeinfo.var_cb28f380[2] - mocompanimflag.favoriteenemy.origin[2];
       withinzrange = abs(zdiff) <= 45;
       withinfov = vectordot(myforward, dirtoenemy) > cos(30);
@@ -665,7 +665,7 @@ function function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompani
         starttime = floor(starttime / timestep);
         stoptime = floor(stoptime / timestep);
         adjustduration = stoptime - starttime;
-        self.meleeinfo.var_10b8b6d1 = vectornormalize(self.meleeinfo.adjustedendpos - self.meleeinfo.var_cb28f380);
+        self.meleeinfo.var_10b8b6d1 = vectorNormalize(self.meleeinfo.adjustedendpos - self.meleeinfo.var_cb28f380);
         self.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
         self.meleeinfo.var_425c4c8b = 1;
         self.meleeinfo.adjustmentstarted = 1;
@@ -696,7 +696,7 @@ function mocompgladiatorleapend(entity, mocompanim, mocompanimblendouttime, moco
 
 function function_3137174f(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(mocompduration.favoriteenemy)) {
-    to_enemy = vectornormalize(mocompduration.favoriteenemy.origin - mocompduration.origin);
+    to_enemy = vectorNormalize(mocompduration.favoriteenemy.origin - mocompduration.origin);
     angles_to_enemy = vectortoangles(to_enemy);
     mocompduration orientmode("face angle", angles_to_enemy[1]);
   }
@@ -705,7 +705,7 @@ function function_3137174f(entity, mocompanim, mocompanimblendouttime, mocompani
 function function_64cd870(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(mocompduration.favoriteenemy)) {
     if(!is_true(mocompduration.var_ba481973)) {
-      to_enemy = vectornormalize(mocompduration.favoriteenemy.origin - mocompduration.origin);
+      to_enemy = vectorNormalize(mocompduration.favoriteenemy.origin - mocompduration.origin);
       angles_to_enemy = vectortoangles(to_enemy);
       mocompduration orientmode("face angle", angles_to_enemy[1]);
     }
@@ -934,7 +934,7 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
 
           if(namespace_ec06fe4a::function_a8975c67()) {
             if(validateorigin(self.origin)) {
-              playsoundatposition(#"hash_10711c56d7aa52d5", self.origin + (0, 0, 30));
+              playSoundAtPosition(#"hash_10711c56d7aa52d5", self.origin + (0, 0, 30));
             }
           }
         }
@@ -1121,7 +1121,7 @@ function private function_fbc2806e(var_a4388d06, spin_dir) {
   time_to_target = dist_to_target / var_bb95ea0c;
   total_dist = 0;
   max_dist = 450;
-  var_7900b267 = vectornormalize(var_6a774ef - var_23f0c5b3);
+  var_7900b267 = vectorNormalize(var_6a774ef - var_23f0c5b3);
   var_285f5e05 = vectortoangles(var_7900b267);
 
   while(true) {
@@ -1131,7 +1131,7 @@ function private function_fbc2806e(var_a4388d06, spin_dir) {
       break;
     }
 
-    axe moveto(move_pos, 0.1);
+    axe moveTo(move_pos, 0.1);
     wait 0.1;
     total_dist += interval_dist;
 
@@ -1210,17 +1210,17 @@ function private function_137ed431(axe, var_a4388d06, spin_dir) {
   var_6cdcefc1 = interval_dist * interval_dist;
   total_dist = 0;
   max_dist = 450;
-  var_7900b267 = vectornormalize(tag_pos - var_a4388d06.origin);
+  var_7900b267 = vectorNormalize(tag_pos - var_a4388d06.origin);
   new_yaw = absangleclamp360(var_a4388d06.angles[1] + 180);
   var_a4388d06.angles = (0, new_yaw, 0);
   self thread function_c3712093(var_a4388d06, spin_dir, var_bb95ea0c);
 
   while(true) {
     tag_pos = self gettagorigin(spin_dir);
-    var_7900b267 = vectornormalize(tag_pos - var_a4388d06.origin);
+    var_7900b267 = vectorNormalize(tag_pos - var_a4388d06.origin);
     move_pos = var_a4388d06.origin + var_7900b267 * interval_dist;
     self function_88d65504(var_a4388d06, var_7900b267, move_pos);
-    var_a4388d06 moveto(move_pos, 0.1);
+    var_a4388d06 moveTo(move_pos, 0.1);
     wait 0.1;
     var_8abea022 = distancesquared(var_a4388d06.origin, tag_pos);
 

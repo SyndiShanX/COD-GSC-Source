@@ -85,7 +85,7 @@ postattack_begin(var_0) {
     scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(var_0, "taunt", "taunt");
     scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(var_0, "taunt");
   } else {
-    var_4 = vectornormalize((var_3.origin - self.origin) * (1, 1, 0));
+    var_4 = vectorNormalize((var_3.origin - self.origin) * (1, 1, 0));
     var_5 = anglesToForward(self.angles);
     var_6 = vectordot(var_4, var_5);
     var_7 = distancesquared(var_3.origin, self.origin);

@@ -321,7 +321,7 @@ update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shitloc, fata
   self playhitmarker(hitalias, damagestage, perkfeedback, is_dead, var_594a2d34, is_vehicle, var_32f65675, is_friendly);
 
   if(isDefined(inflictor) && isPlayer(inflictor)) {
-    inflictor playrumbleonentity("hitmarker_rumble");
+    inflictor playRumbleOnEntity("hitmarker_rumble");
   }
 
   if(isDefined(perkfeedback)) {

@@ -639,9 +639,9 @@ box_ModelTeamUpdater(showForTeam) {
 
 useHoldThink(player, useTime) {
   if(isPlayer(player)) {
-    player playerLinkTo(self);
+    player playerlinkTo(self);
   } else {
-    player LinkTo(self);
+    player linkTo(self);
   }
   player playerLinkedOffsetEnable();
 

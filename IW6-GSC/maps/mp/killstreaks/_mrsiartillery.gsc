@@ -54,7 +54,7 @@ doStrike(owner, killstreakName, startPosition, endPosition) {
 
   dir = endPosition - startPosition;
   xyDir = (dir[0], dir[1], 0);
-  dir = VectorNormalize(dir);
+  dir = vectorNormalize(dir);
 
   strikeTarget = endPosition;
 

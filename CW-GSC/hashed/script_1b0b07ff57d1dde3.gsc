@@ -275,7 +275,7 @@ function gib_random_part(damage = 100) {
   }
 
   if(namespace_ec06fe4a::function_a8975c67() && validateorigin(self.origin)) {
-    playsoundatposition(#"zmb_death_gibss", self.origin);
+    playSoundAtPosition(#"zmb_death_gibss", self.origin);
   }
 
   val = randomint(100);

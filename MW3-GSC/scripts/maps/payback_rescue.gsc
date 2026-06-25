@@ -32,10 +32,10 @@ _id_6506() {
   wait 2;
   thread maps\payback_sandstorm::_id_6509();
   setsunflareposition((343.8, 313.993, 0));
-  var_0 = getent("sslight_01", "targetname");
+  var_0 = getEnt("sslight_01", "targetname");
   var_0 setlightintensity(7);
   thread _id_5698::_id_5682(5);
-  var_1 = getent("street_light_gate", "targetname");
+  var_1 = getEnt("street_light_gate", "targetname");
   var_1 setlightintensity(3);
 }
 
@@ -119,7 +119,7 @@ _id_650C() {
     level thread maps\payback_util::_id_64D6("final_technicals");
     level thread maps\payback_util::_id_64D6("ridge_contain");
     level thread maps\payback_util::_id_64D6("winning");
-    var_5 = getent("jeep_flare", "targetname");
+    var_5 = getEnt("jeep_flare", "targetname");
     var_5 setlightintensity(0);
 
     if(!isDefined(level._id_64A5)) {
@@ -127,7 +127,7 @@ _id_650C() {
       level._id_64A5.ignoreall = 1;
     }
 
-    level._id_650D = common_scripts\utility::getstruct("chopper_rescue_reference", "targetname");
+    level._id_650D = common_scripts\utility::getStruct("chopper_rescue_reference", "targetname");
     level thread _id_6520();
     level._id_650C = 1;
     thread _id_651D();
@@ -158,7 +158,7 @@ _id_6510() {
   thread _id_6511();
   level waittill("all_pre_rescue_enemies_dead");
   objective_state(maps\_utility::_id_2816("obj_find_chopper"), "done");
-  var_0 = common_scripts\utility::getstruct("rescue_nikolai_obj_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("rescue_nikolai_obj_spot", "targetname");
   objective_state(maps\_utility::_id_2816("obj_rescue"), "current");
   objective_position(maps\_utility::_id_2816("obj_rescue"), var_0.origin);
   thread _id_6513();
@@ -174,7 +174,7 @@ _id_6511() {
 _id_6512() {
   common_scripts\utility::flag_wait("rescue_intro_firing_at_nikolai");
   var_0 = maps\payback_util::_id_5DD7("rescue_intro_firing_at_nikolai");
-  var_1 = getent("rescue_intro_fire_at_nikolai_spot", "targetname");
+  var_1 = getEnt("rescue_intro_fire_at_nikolai_spot", "targetname");
 
   foreach(var_3 in var_0) {
     var_3 setentitytarget(var_1);
@@ -212,21 +212,21 @@ _id_6513() {
 _id_6514() {
   level endon("clear_echo_stuff");
   setlasermaterial("gfx_laser_bright", "");
-  level._id_6515 = getent("rescue_echo_1_spawner", "targetname") maps\_utility::_id_166F(1);
+  level._id_6515 = getEnt("rescue_echo_1_spawner", "targetname") maps\_utility::_id_166F(1);
   level._id_6515 maps\_utility::_id_0D04();
   level._id_6515._id_1032 = "rescue_echo_1";
   level._id_6515._id_6516 = level._effect["dust_kickup"];
   level._id_6515._id_6517 = "j_mainroot";
   level._id_6515 thread _id_651B();
   level._id_6515 thread _id_6528();
-  level._id_6518 = getent("rescue_echo_2_spawner", "targetname") maps\_utility::_id_166F(1);
+  level._id_6518 = getEnt("rescue_echo_2_spawner", "targetname") maps\_utility::_id_166F(1);
   level._id_6518 maps\_utility::_id_0D04();
   level._id_6518._id_1032 = "rescue_echo_2";
   level._id_6518 thread _id_651B();
   level._id_6518._id_6516 = level._effect["dust_kickup"];
   level._id_6518._id_6517 = "j_mainroot";
   level._id_6518 thread _id_6528();
-  level._id_6519 = getent("rescue_echo_3_spawner", "targetname") maps\_utility::_id_166F(1);
+  level._id_6519 = getEnt("rescue_echo_3_spawner", "targetname") maps\_utility::_id_166F(1);
   level._id_6519 maps\_utility::_id_0D04();
   level._id_6519._id_1032 = "rescue_echo_3";
   level._id_6519 thread _id_6528();
@@ -389,7 +389,7 @@ _id_6525() {
 }
 
 _id_52A4() {
-  var_0 = getent("jeep_flare", "targetname");
+  var_0 = getEnt("jeep_flare", "targetname");
   level waittill("flare_explodes");
   var_0 setlightintensity(6.0);
   var_0 setlightradius(1800);
@@ -446,7 +446,7 @@ _id_652A() {
 }
 
 _id_652B() {
-  var_0 = common_scripts\utility::getstruct("slide_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("slide_ref", "targetname");
   level waittill("move_echo_2_and_3");
   level._id_6515 maps\_utility::_id_27A1(getnode("rescue_echo_1_run_start_spot", "targetname"));
   level._id_6515 _id_6527();
@@ -454,7 +454,7 @@ _id_652B() {
   var_0 maps\_anim::_id_124A(level._id_6515, "rescue_echo_1_slide");
   var_0 maps\_anim::_id_1246(level._id_6515, "rescue_echo_1_slide");
   level._id_6515 setgoalnode(getnode("rescue_echo_1_goal", "targetname"));
-  var_1 = common_scripts\utility::getstruct("shoot_echo_1_and_2_bullet_spot", "targetname");
+  var_1 = common_scripts\utility::getStruct("shoot_echo_1_and_2_bullet_spot", "targetname");
   level._id_6515 waittill("goal");
   level._id_6515 maps\_utility::_id_1902();
   magicbullet("ak47", var_1.origin, level._id_6515 gettagorigin("J_SpineUpper") + (4, 2, 10));
@@ -471,7 +471,7 @@ _id_652B() {
 }
 
 _id_652C() {
-  var_0 = common_scripts\utility::getstruct("slide_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("slide_ref", "targetname");
   level waittill("move_echo_2_and_3");
   level._id_6518 maps\_utility::_id_27A1(getnode("rescue_echo_2_run_start_spot", "targetname"));
   level._id_6518 _id_6527();
@@ -479,7 +479,7 @@ _id_652C() {
   var_0 maps\_anim::_id_124A(level._id_6518, "rescue_echo_2_slide");
   var_0 maps\_anim::_id_1246(level._id_6518, "rescue_echo_2_slide");
   level._id_6518 setgoalnode(getnode("rescue_echo_2_goal", "targetname"));
-  var_1 = common_scripts\utility::getstruct("shoot_echo_1_and_2_bullet_spot", "targetname");
+  var_1 = common_scripts\utility::getStruct("shoot_echo_1_and_2_bullet_spot", "targetname");
   level._id_6518 waittill("goal");
   level._id_6518 maps\_utility::_id_1902();
   magicbullet("ak47", var_1.origin, level._id_6518 gettagorigin("J_SpineUpper") + (4, 2, 10));
@@ -496,7 +496,7 @@ _id_652C() {
 }
 
 _id_652D() {
-  var_0 = common_scripts\utility::getstruct("rescue_echo_3_bullet_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("rescue_echo_3_bullet_spot", "targetname");
   level waittill("move_echo_2_and_3");
   level._id_6519 maps\_utility::_id_27A1(getnode("rescue_echo_3_run_start_spot", "targetname"));
   level._id_6519 _id_6527();
@@ -578,16 +578,16 @@ _id_6531() {
   level._id_4877._id_0FC6 = 1.2;
   level._id_4877._id_10F7 = 1.2;
   wait 1;
-  var_0 = common_scripts\utility::getstruct("price_run_anim_ref_1", "targetname");
-  var_1 = common_scripts\utility::getstruct("price_run_anim_ref_2", "targetname");
-  var_2 = common_scripts\utility::getstruct("price_run_anim_ref_2_debris", "targetname");
+  var_0 = common_scripts\utility::getStruct("price_run_anim_ref_1", "targetname");
+  var_1 = common_scripts\utility::getStruct("price_run_anim_ref_2", "targetname");
+  var_2 = common_scripts\utility::getStruct("price_run_anim_ref_2_debris", "targetname");
   var_3 = maps\_utility::_id_1287("escape_debris");
   var_3._id_10F7 = 1.2;
   var_2 thread maps\_anim::_id_11CF(var_3, "escape_debris_dodge");
-  var_4 = common_scripts\utility::getstruct("price_run_anim_ref_3", "targetname");
-  var_5 = common_scripts\utility::getstruct("price_dodge_rpg_spot", "targetname");
-  var_6 = common_scripts\utility::getstruct(var_5.target, "targetname");
-  var_7 = common_scripts\utility::getstruct("price_run_anim_ref_4", "targetname");
+  var_4 = common_scripts\utility::getStruct("price_run_anim_ref_3", "targetname");
+  var_5 = common_scripts\utility::getStruct("price_dodge_rpg_spot", "targetname");
+  var_6 = common_scripts\utility::getStruct(var_5.target, "targetname");
+  var_7 = common_scripts\utility::getStruct("price_run_anim_ref_4", "targetname");
   var_8 = getnode("price_run_spot_4", "targetname");
   var_9 = getnode("price_rpg_dodge_alt", "targetname");
   var_0 maps\_anim::_id_11CF(level._id_4877, "payback_escape_start_backpedal_price");
@@ -636,11 +636,11 @@ _id_6532() {
   level._id_54E0._id_6517 = "j_mainroot";
   level._id_54E0._id_6516 = level._effect["dust_kickup"];
   level._id_54E0._id_10F7 = 1.3;
-  var_0 = common_scripts\utility::getstruct("soap_run_anim_ref_1", "targetname");
-  var_1 = common_scripts\utility::getstruct("soap_run_anim_ref_2", "targetname");
-  var_2 = common_scripts\utility::getstruct("soap_run_anim_ref_3", "targetname");
-  var_3 = common_scripts\utility::getstruct("soap_run_anim_ref_4", "targetname");
-  var_4 = common_scripts\utility::getstruct("soap_run_anim_ref_5", "targetname");
+  var_0 = common_scripts\utility::getStruct("soap_run_anim_ref_1", "targetname");
+  var_1 = common_scripts\utility::getStruct("soap_run_anim_ref_2", "targetname");
+  var_2 = common_scripts\utility::getStruct("soap_run_anim_ref_3", "targetname");
+  var_3 = common_scripts\utility::getStruct("soap_run_anim_ref_4", "targetname");
+  var_4 = common_scripts\utility::getStruct("soap_run_anim_ref_5", "targetname");
   var_5 = getnode("soap_slide_goal", "targetname");
   var_0 maps\_anim::_id_11CF(level._id_54E0, "payback_escape_start_wave_soap");
   wait 4.4;
@@ -696,46 +696,46 @@ _id_6536() {
   thread _id_6560();
   thread _id_654B();
   var_0 = [];
-  level._id_6537 = common_scripts\utility::getstruct("slide_ref", "targetname");
+  level._id_6537 = common_scripts\utility::getStruct("slide_ref", "targetname");
   level._id_6538 = maps\_vehicle::_id_2A99("escape_jeep_1");
   level._id_6538 setCanDamage(0);
   level._id_6538 maps\_vehicle::_id_2B17();
-  level._id_6534 = getent("player_enter_jeep_trigger", "targetname");
+  level._id_6534 = getEnt("player_enter_jeep_trigger", "targetname");
   level._id_6539 = spawn("script_model", level._id_6538.origin);
-  level._id_6539 linkto(level._id_6538, "tag_brakelight_right", (0, 0, 0), (0, 0, 0));
+  level._id_6539 linkTo(level._id_6538, "tag_brakelight_right", (0, 0, 0), (0, 0, 0));
   level._id_653A = maps\_vehicle::_id_2A99("escape_jeep_2");
   level._id_653A setCanDamage(0);
   level._id_653A maps\_vehicle::_id_2B17();
   thread _id_6558();
   thread _id_6552();
   thread _id_6553();
-  level._id_653B = getent("escape_jeep_1_driver", "targetname") maps\_utility::_id_166F(1);
+  level._id_653B = getEnt("escape_jeep_1_driver", "targetname") maps\_utility::_id_166F(1);
   level._id_653B maps\_utility::_id_0D04();
   level._id_653B maps\_utility::_id_265A();
   level._id_653B maps\_utility::_id_24F5();
   level._id_653B._id_1032 = "escape_jeep_1_driver";
-  level._id_653B linkto(level._id_6538, "tag_driver", (0, 0, 0), (0, 0, 0));
+  level._id_653B linkTo(level._id_6538, "tag_driver", (0, 0, 0), (0, 0, 0));
   level._id_6538 thread maps\_anim::_id_124E(level._id_653B, "escape_jeep_1_driver_loop", "stop_escape_jeep_1_driver_loop_1", "tag_driver");
-  level._id_653C = getent("escape_jeep_2_driver", "targetname") maps\_utility::_id_166F(1);
+  level._id_653C = getEnt("escape_jeep_2_driver", "targetname") maps\_utility::_id_166F(1);
   level._id_653C maps\_utility::_id_0D04();
   level._id_653C maps\_utility::_id_265A();
   level._id_653C maps\_utility::_id_24F5();
   level._id_653C._id_1032 = "escape_jeep_2_driver";
-  level._id_653C linkto(level._id_653A, "tag_driver", (0, 0, 0), (0, 0, 0));
+  level._id_653C linkTo(level._id_653A, "tag_driver", (0, 0, 0), (0, 0, 0));
   level._id_653A thread maps\_anim::_id_124E(level._id_653C, "escape_jeep_2_driver_loop", "stop_escape_jeep_2_driver_loop_1", "tag_driver");
-  level._id_653D = getent("escape_jeep_1_gunner", "targetname") maps\_utility::_id_166F(1);
+  level._id_653D = getEnt("escape_jeep_1_gunner", "targetname") maps\_utility::_id_166F(1);
   level._id_653D maps\_utility::_id_0D04();
   level._id_653D laserforceon();
   level._id_653D._id_1032 = "escape_jeep_1_gunner";
-  level._id_653D linkto(level._id_6538, "tag_passenger", (0, 0, 0), (0, 0, 0));
+  level._id_653D linkTo(level._id_6538, "tag_passenger", (0, 0, 0), (0, 0, 0));
   level._id_6538 thread maps\_anim::_id_124E(level._id_653D, "escape_jeep_1_gunner_shoot_loop", "stop_gunner_1_shoot_loop", "tag_passenger");
-  level._id_653E = getent("escape_jeep_2_gunner", "targetname") maps\_utility::_id_166F(1);
+  level._id_653E = getEnt("escape_jeep_2_gunner", "targetname") maps\_utility::_id_166F(1);
   level._id_653E maps\_utility::_id_0D04();
   level._id_653E laserforceon();
   level._id_653E._id_1032 = "escape_jeep_2_gunner";
-  level._id_653E linkto(level._id_653A, "tag_guy0", (0, 0, 0), (0, 0, 0));
+  level._id_653E linkTo(level._id_653A, "tag_guy0", (0, 0, 0), (0, 0, 0));
   level._id_653A thread maps\_anim::_id_124E(level._id_653E, "escape_jeep_2_gunner_shoot_loop", "stop_gunner_2_shoot_loop", "tag_guy0");
-  level._id_653F = getent("nikolai_jeep_escape", "targetname") maps\_utility::_id_166F(1);
+  level._id_653F = getEnt("nikolai_jeep_escape", "targetname") maps\_utility::_id_166F(1);
   level._id_653F._id_1032 = "nikolai_jeep_escape";
   level._id_653F setCanDamage(0);
   level._id_653F maps\_utility::_id_265A();
@@ -764,7 +764,7 @@ _id_6536() {
   level._id_6537 thread maps\_anim::_id_11CF(level._id_6541, "jeep_slide_escape");
   level._id_6542 = maps\_utility::_id_1287("player_jeep_arms");
   level._id_6542 hide();
-  level._id_6542 linkto(level._id_6538, "tag_guy1", (0, 0, 0), (0, 0, 0));
+  level._id_6542 linkTo(level._id_6538, "tag_guy1", (0, 0, 0), (0, 0, 0));
   level._id_6542 thread maps\_anim::_id_11CF(level._id_6542, "end_mount");
   level._id_6542 thread _id_6557();
   common_scripts\utility::flag_wait("start_player_slide");
@@ -802,7 +802,7 @@ _id_6536() {
 
 _id_6547() {
   self waittillmatch("single anim", "slide_fx_on");
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 0.4;
   level.player playrumblelooponentity("subtle_tank_rumble");
   self waittillmatch("single anim", "slide_fx_off");
@@ -918,7 +918,7 @@ _id_654F() {
 
 _id_6550() {
   self waittillmatch("single anim", "end");
-  level._id_4877 linkto(level._id_6538, "tag_guy0", (0, 0, 0), (0, 0, 0));
+  level._id_4877 linkTo(level._id_6538, "tag_guy0", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_set("price_in_escape_jeep_1");
   level._id_6538 thread maps\_anim::_id_124E(level._id_4877, "price_jeep_shoot_loop", "stop_price_jeep_wave_and_shoot_loop", "tag_guy0");
   level._id_6538 waittill("stop_price_jeep_wave_and_shoot_loop");
@@ -929,7 +929,7 @@ _id_6550() {
 _id_6551() {
   level endon("player_entering_jeep");
   self waittillmatch("single anim", "end");
-  self linkto(level._id_653A, "tag_guy1", (0, 0, 0), (0, 0, 0));
+  self linkTo(level._id_653A, "tag_guy1", (0, 0, 0), (0, 0, 0));
   level._id_653A thread maps\_anim::_id_124E(self, "soap_jeep_shoot_loop", "stop_soap_and_nikolai_loops", "tag_guy1");
 }
 
@@ -937,7 +937,7 @@ _id_6552() {
   common_scripts\utility::flag_wait("player_entering_jeep");
   wait 0.05;
   level._id_54E0 maps\_utility::_id_1414();
-  level._id_54E0 linkto(level._id_653A, "tag_guy1", (0, 0, 0), (0, 0, 0));
+  level._id_54E0 linkTo(level._id_653A, "tag_guy1", (0, 0, 0), (0, 0, 0));
   level._id_653A thread maps\_anim::_id_124E(level._id_54E0, "soap_jeep_shoot_loop_2", "stop_soap_new_fire_loop", "tag_guy1");
   level._id_653A waittill("stop_soap_new_fire_loop");
   level._id_653A maps\_anim::_id_1246(level._id_54E0, "soap_jeep_sit_down", "tag_guy1");
@@ -949,7 +949,7 @@ _id_6553() {
   common_scripts\utility::flag_wait("player_entering_jeep");
   wait 0.05;
   level._id_653F maps\_utility::_id_1414();
-  level._id_653F linkto(level._id_653A, "tag_passenger", (0, 0, 0), (0, 0, 0));
+  level._id_653F linkTo(level._id_653A, "tag_passenger", (0, 0, 0), (0, 0, 0));
   level._id_653A maps\_anim::_id_124E(level._id_653F, "nikolai_passenger_loop", undefined, "tag_passenger");
 }
 
@@ -957,7 +957,7 @@ _id_6554() {
   level endon("player_entering_jeep");
   self waittillmatch("single anim", "end");
   level notify("nikolai_attached_to_jeep_natural");
-  self linkto(level._id_653A, "tag_passenger", (0, 0, 0), (0, 0, 0));
+  self linkTo(level._id_653A, "tag_passenger", (0, 0, 0), (0, 0, 0));
   level._id_653A maps\_anim::_id_124E(self, "nikolai_passenger_loop", "stop_soap_and_nikolai_loops", "tag_passenger");
 }
 
@@ -1031,7 +1031,7 @@ _id_6558() {
 
 _id_6559() {
   wait 0.5;
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 0.4;
   level._id_02A5 = level.player maps\_utility::_id_27AB("subtle_tank_rumble");
 }
@@ -1082,8 +1082,8 @@ _id_6560() {
 }
 
 _id_6561(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
-  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
   magicbullet("rpg", var_1.origin, var_2.origin);
 }
 
@@ -1111,14 +1111,14 @@ _id_6562() {
   thread _id_6563();
   objective_position(maps\_utility::_id_2816("obj_rescue"), level._id_64A5.origin + (0, 0, 20));
   objective_setpointertextoverride(maps\_utility::_id_2816("obj_rescue"), &"PAYBACK_NIKOLAI");
-  level._id_6521 sethintstring(&"PAYBACK_USE_FREE_NIKOLAI");
-  level._id_6521 usetriggerrequirelookat();
+  level._id_6521 setHintString(&"PAYBACK_USE_FREE_NIKOLAI");
+  level._id_6521 useTriggerRequireLookAt();
   level._id_6521 common_scripts\utility::trigger_on();
 }
 
 _id_6563() {
   level endon("rescue_picking_up_nikolai");
-  var_0 = getent("rescue_nikolai_disable_weapons_trigger", "targetname");
+  var_0 = getEnt("rescue_nikolai_disable_weapons_trigger", "targetname");
   var_1 = getdvarint("cg_fov");
   setsaveddvar("objectiveHide", 0);
 
@@ -1140,7 +1140,7 @@ _id_6563() {
 
 _id_6564() {
   level endon("slide_started");
-  var_0 = getent("player_out_in_open", "targetname");
+  var_0 = getEnt("player_out_in_open", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -1194,15 +1194,15 @@ _id_6567() {
   var_0 = maps\_utility::_id_1287("rescue_nikolai_player_rig");
   var_0 hide();
   level._id_650D maps\_anim::_id_11CF(var_0, "rescue_nikolai");
-  level._id_6521 = getent("nikolai_use_trigger", "targetname");
+  level._id_6521 = getEnt("nikolai_use_trigger", "targetname");
   level._id_6521 common_scripts\utility::trigger_off();
   level._id_6521 waittill("trigger");
   thread _id_6569();
-  var_1 = getent("ignore_player_trigger_1", "targetname");
-  var_2 = getent("ignore_player_target_1", "targetname");
+  var_1 = getEnt("ignore_player_trigger_1", "targetname");
+  var_2 = getEnt("ignore_player_target_1", "targetname");
   thread _id_6565(var_1, var_2);
-  var_1 = getent("ignore_player_trigger_2", "targetname");
-  var_2 = getent("ignore_player_target_2", "targetname");
+  var_1 = getEnt("ignore_player_trigger_2", "targetname");
+  var_2 = getEnt("ignore_player_target_2", "targetname");
   thread _id_6565(var_1, var_2);
   level.player enableinvulnerability();
   thread _id_651F();
@@ -1349,7 +1349,7 @@ _id_656F() {
 
 _id_6570() {
   var_0 = maps\_utility::_id_1287("chopper_tail");
-  var_1 = common_scripts\utility::getstruct("crashed_chopper_tail_spot", "targetname");
+  var_1 = common_scripts\utility::getStruct("crashed_chopper_tail_spot", "targetname");
   var_0.origin = var_1.origin;
   var_0.angles = var_1.angles;
   var_0 maps\_anim::_id_124E(var_0, "payback_sstorm_chopper_rescue_tail_rotor");
@@ -1470,15 +1470,15 @@ _id_6578() {
   var_0 = common_scripts\utility::getStructArray("rescue_phantom_fire_source1", "targetname");
   thread maps\payback_util::_id_64E9(level._id_64A5, "ak47", var_0, 0.05, 1.5, 3000, 5000, 0.5);
   thread _id_6581(level.player, "rescue_escape_dialogue");
-  getent("pb_end_vista", "targetname") show();
+  getEnt("pb_end_vista", "targetname") show();
 }
 
 _id_6579() {
-  var_0 = common_scripts\utility::getstruct("jeep_escape_objective_spot_1", "targetname");
+  var_0 = common_scripts\utility::getStruct("jeep_escape_objective_spot_1", "targetname");
   objective_position(maps\_utility::_id_2816("obj_rescue"), var_0.origin);
   level waittill("run_objective_spot_2");
   _id_657A();
-  var_1 = common_scripts\utility::getstruct("jeep_escape_objective_spot_2", "targetname");
+  var_1 = common_scripts\utility::getStruct("jeep_escape_objective_spot_2", "targetname");
   objective_position(maps\_utility::_id_2816("obj_rescue"), var_1.origin);
   wait 1;
   thread _id_6548();
@@ -1560,7 +1560,7 @@ _id_6580() {
         self waittill("trigger", var_2);
 
         if(!isDefined(self._id_164F) || self._id_164F != "force") {
-          while(vectordot(vectornormalize(var_0.origin - level.player.origin), anglesToForward(level.player.angles)) > 0.5) {
+          while(vectordot(vectorNormalize(var_0.origin - level.player.origin), anglesToForward(level.player.angles)) > 0.5) {
             wait 0.1;
           }
           magicbullet("rpg_straight", var_0.origin, var_1.origin);

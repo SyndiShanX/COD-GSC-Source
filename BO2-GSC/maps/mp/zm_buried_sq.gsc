@@ -42,9 +42,9 @@ init() {
   ss_buttons = getEntArray("sq_ss_button", "targetname");
 
   for(i = 0; i < ss_buttons.size; i++) {
-    ss_buttons[i] usetriggerrequirelookat();
-    ss_buttons[i] sethintstring("");
-    ss_buttons[i] setcursorhint("HINT_NOICON");
+    ss_buttons[i] useTriggerRequireLookAt();
+    ss_buttons[i] setHintString("");
+    ss_buttons[i] setCursorHint("HINT_NOICON");
   }
 
   flag_init("sq_players_out_of_sync");
@@ -157,7 +157,7 @@ sq_buried_register_visionset() {
 }
 
 sq_easy_cleanup() {
-  computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
+  computer_buildable_trig = getEnt("sq_common_buildable_trigger", "targetname");
   computer_buildable_trig delete();
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
@@ -165,7 +165,7 @@ sq_easy_cleanup() {
     item delete();
   }
 
-  t_generator = getent("generator_use_trigger", "targetname");
+  t_generator = getEnt("generator_use_trigger", "targetname");
 
   if(isDefined(t_generator)) {
     t_generator delete();
@@ -278,7 +278,7 @@ sq_spawn_props() {
 }
 
 sq_spawn_model_at_struct(str_struct, str_model) {
-  s_struct = getstruct(str_struct, "targetname");
+  s_struct = getStruct(str_struct, "targetname");
 
   if(!isDefined(s_struct)) {
     return undefined;
@@ -385,7 +385,7 @@ playfx_on_tower(str_fx, delete_old) {
     }
   }
 
-  s_spot = getstruct("sq_end_smoke", "targetname");
+  s_spot = getStruct("sq_end_smoke", "targetname");
   m_fx_spot = spawn("script_model", s_spot.origin);
   m_fx_spot.angles = s_spot.angles;
   m_fx_spot setModel("tag_origin");
@@ -571,19 +571,19 @@ navcomputer_waitfor_navcard() {
   if(!spawn_trigger) {
     return;
   }
-  computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
-  trig_pos = getstruct("sq_common_key", "targetname");
+  computer_buildable_trig = getEnt("sq_common_buildable_trigger", "targetname");
+  trig_pos = getStruct("sq_common_key", "targetname");
   navcomputer_use_trig = spawn("trigger_radius_use", trig_pos.origin, 0, 48, 48);
-  navcomputer_use_trig setcursorhint("HINT_NOICON");
-  navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
-  navcomputer_use_trig triggerignoreteam();
+  navcomputer_use_trig setCursorHint("HINT_NOICON");
+  navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_USE");
+  navcomputer_use_trig triggerIgnoreTeam();
 
   while(true) {
     navcomputer_use_trig waittill("trigger", who);
 
     if(isPlayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_SUCCESS");
         who playSound("zmb_sq_navcard_success");
         update_sidequest_stats("navcard_applied_zm_buried");
         who.navcard_grabbed = undefined;
@@ -592,10 +592,10 @@ navcomputer_waitfor_navcard() {
         sq_metagame_reset_machine();
         return;
       } else {
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_FAIL");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_FAIL");
         who playSound("zmb_sq_navcard_fail");
         wait 1;
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_USE");
       }
     }
   }
@@ -736,7 +736,7 @@ maxissay(vox_line, m_spot_override, b_wait_for_nearby_speakers) {
   level endon("intermission");
 
   if(!isDefined(level.m_maxis_vo_spot)) {
-    s_spot = getstruct("maxis_vo_spot", "targetname");
+    s_spot = getStruct("maxis_vo_spot", "targetname");
     level.m_maxis_vo_spot = spawn("script_model", s_spot.origin);
     level.m_maxis_vo_spot setModel("tag_origin");
   }
@@ -946,7 +946,7 @@ warp_to_struct_position(str_value, str_key) {
   assert(a_warp_structs.size > a_players.size, "warp_to_struct_position found more players than structs for '" + str_key + "' = '" + str_value + "'! Add more structs to fix this");
 
   for(i = 0; i < a_players.size; i++) {
-    a_players[i] setorigin(a_warp_structs[i].origin);
+    a_players[i] setOrigin(a_warp_structs[i].origin);
     a_players[i] setplayerangles(a_warp_structs[i].angles);
   }
 }
@@ -994,7 +994,7 @@ sq_metagame() {
   level thread sq_metagame_turn_off_watcher();
   is_blue_on = 0;
   is_orange_on = 0;
-  m_endgame_machine = getstruct("sq_endgame_machine", "targetname");
+  m_endgame_machine = getStruct("sq_endgame_machine", "targetname");
   a_tags = [];
   a_tags[0][0] = "TAG_LIGHT_1";
   a_tags[0][1] = "TAG_LIGHT_2";
@@ -1076,15 +1076,15 @@ sq_metagame() {
   m_endgame_machine.activate_trig = undefined;
   level setclientfield("buried_sq_egm_animate", 1);
   m_endgame_machine.endgame_trig = spawn("trigger_radius_use", m_endgame_machine.origin, 0, 16, 16);
-  m_endgame_machine.endgame_trig setcursorhint("HINT_NOICON");
-  m_endgame_machine.endgame_trig sethintstring(&"ZM_BURIED_SQ_EGM_BUT");
-  m_endgame_machine.endgame_trig triggerignoreteam();
-  m_endgame_machine.endgame_trig usetriggerrequirelookat();
+  m_endgame_machine.endgame_trig setCursorHint("HINT_NOICON");
+  m_endgame_machine.endgame_trig setHintString(&"ZM_BURIED_SQ_EGM_BUT");
+  m_endgame_machine.endgame_trig triggerIgnoreTeam();
+  m_endgame_machine.endgame_trig useTriggerRequireLookAt();
   m_endgame_machine.endgame_trig waittill("trigger");
   m_endgame_machine.endgame_trig delete();
   m_endgame_machine.endgame_trig = undefined;
   level thread sq_metagame_clear_tower_pieces();
-  playsoundatposition("zmb_endgame_mach_button", m_endgame_machine.origin);
+  playSoundAtPosition("zmb_endgame_mach_button", m_endgame_machine.origin);
   players = get_players();
 
   foreach(player in players) {
@@ -1135,7 +1135,7 @@ sq_metagame_turn_off_watcher() {
 
 sq_metagame_reset_machine() {
   level notify("sq_metagame_player_connected");
-  m_endgame_machine = getstruct("sq_endgame_machine", "targetname");
+  m_endgame_machine = getStruct("sq_endgame_machine", "targetname");
 
   if(isDefined(m_endgame_machine.activate_trig)) {
     m_endgame_machine.activate_trig delete();
@@ -1177,7 +1177,7 @@ stuhlingerpossessed(bool) {
 }
 
 reward_maxis_vo() {
-  m_endgame_machine = getstruct("sq_endgame_machine", "targetname");
+  m_endgame_machine = getStruct("sq_endgame_machine", "targetname");
   m_endgame_machine_ent = spawn("script_origin", m_endgame_machine.origin);
   maxissay("vox_maxi_end_game_maxis_wins_0", m_endgame_machine_ent);
   maxissay("vox_zmba_end_game_maxis_wins_1", m_endgame_machine_ent);
@@ -1190,7 +1190,7 @@ reward_maxis_vo() {
 }
 
 reward_richtofen_vo() {
-  m_endgame_machine = getstruct("sq_endgame_machine", "targetname");
+  m_endgame_machine = getStruct("sq_endgame_machine", "targetname");
   m_endgame_machine_ent = spawn("script_origin", m_endgame_machine.origin);
   maxissay("vox_zmba_end_game_richtofen_wins_0", m_endgame_machine_ent);
   maxissay("vox_maxi_end_game_richtofen_wins_1", m_endgame_machine_ent);

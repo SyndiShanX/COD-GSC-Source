@@ -163,7 +163,7 @@ function get_players_in_zone(zone_name, return_players) {
 
   zone = level.zones[zone_name];
   players_in_zone = [];
-  players = getplayers();
+  players = getPlayers();
 
   if(zm_utility::function_c85ebbbc()) {
     foreach(player in players) {
@@ -223,7 +223,7 @@ function any_player_in_zone(zone_name) {
   zone = level.zones[zone_name];
 
   if(zm_utility::function_c85ebbbc()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.sessionstate === "spectator") {
         continue;
       }
@@ -240,7 +240,7 @@ function any_player_in_zone(zone_name) {
   }
 
   if(zm_utility::function_21f4ac36()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.sessionstate === "spectator") {
         continue;
       }
@@ -1349,7 +1349,7 @@ function private function_8a9003ae() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     if(!isDefined(players) || players.size == 0) {
       continue;

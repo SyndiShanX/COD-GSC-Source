@@ -166,7 +166,7 @@ function_d83f6c8c() {
     total_pop = [];
     mannequins = getEntArray("mannequin", "targetname");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isalive(player)) {
         if(!isDefined(total_pop)) {
           total_pop = [];
@@ -204,7 +204,7 @@ function_d83f6c8c() {
 mannequin_init() {
   scene::add_scene_func(#"p8_fxanim_mp_nt4_missile_launch_bundle", &function_25cf04b2, "play");
   scene::add_scene_func(#"p8_fxanim_mp_nt4_uaz_flip_bundle", &function_c2bd6a1f, "play");
-  train_mannequin = getent("mannequin_destructible_inside_train", "targetname");
+  train_mannequin = getEnt("mannequin_destructible_inside_train", "targetname");
   mannequins = getEntArray("mannequin_destructible", "targetname");
   array::push(mannequins, train_mannequin, mannequins.size);
   array::randomize(mannequins);
@@ -221,17 +221,17 @@ mannequin_init() {
 }
 
 function_25cf04b2(a_ents) {
-  blue_train = getent("blue_train", "targetname");
-  orange_train = getent("orange_train", "targetname");
+  blue_train = getEnt("blue_train", "targetname");
+  orange_train = getEnt("orange_train", "targetname");
 
   if(isDefined(a_ents[#"prop 1"]) && isDefined(blue_train)) {
     hatch_left = a_ents[#"prop 1"];
-    blue_train linkto(hatch_left, "tag_link_train_engine", (0, 0, 0));
+    blue_train linkTo(hatch_left, "tag_link_train_engine", (0, 0, 0));
   }
 
   if(isDefined(a_ents[#"prop 2"]) && isDefined(orange_train)) {
     hatch_right = a_ents[#"prop 2"];
-    orange_train linkto(hatch_right, "tag_link_train_carriage", (0, 0, 0));
+    orange_train linkTo(hatch_right, "tag_link_train_carriage", (0, 0, 0));
   }
 
   var_e837992 = getEntArray("ee_hide", "targetname");
@@ -246,103 +246,103 @@ function_25cf04b2(a_ents) {
 on_game_playing() {
   level.mannequin_time = gettime();
   array::delete_all(getEntArray("sun_block", "targetname"));
-  playsoundatposition("evt_spawn_alarm", (-1000, 401, 164));
-  playsoundatposition("evt_spawn_alarm", (-576, 464, 41));
-  playsoundatposition("evt_spawn_alarm", (744, -45, 163));
-  playsoundatposition("evt_spawn_alarm", (1251, 471, 194));
+  playSoundAtPosition("evt_spawn_alarm", (-1000, 401, 164));
+  playSoundAtPosition("evt_spawn_alarm", (-576, 464, 41));
+  playSoundAtPosition("evt_spawn_alarm", (744, -45, 163));
+  playSoundAtPosition("evt_spawn_alarm", (1251, 471, 194));
   wait 3;
   var_d362b824 = randomint(2);
 
   if(var_d362b824 == 1) {
-    playsoundatposition("vox_pa_generic_spawn_a_01", (1356, 159, 165));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (726, 3, 181));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (353, 962, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (-344, 961, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (-507, 672, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (-1183, 84, 89));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (-1118, 873, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (-461, 1547, -121));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (345, 1540, -134));
-    playsoundatposition("vox_pa_generic_spawn_a_01", (721, 730, 56));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (1356, 159, 165));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (726, 3, 181));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (353, 962, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (-344, 961, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (-507, 672, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (-1183, 84, 89));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (-1118, 873, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (-461, 1547, -121));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (345, 1540, -134));
+    playSoundAtPosition("vox_pa_generic_spawn_a_01", (721, 730, 56));
     wait 2;
-    playsoundatposition("vox_pa_generic_spawn_a_02", (1356, 159, 165));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (726, 3, 181));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (353, 962, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (-344, 961, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (-507, 672, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (-1183, 84, 89));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (-1118, 873, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (-461, 1547, -121));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (345, 1540, -134));
-    playsoundatposition("vox_pa_generic_spawn_a_02", (721, 730, 56));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (1356, 159, 165));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (726, 3, 181));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (353, 962, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (-344, 961, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (-507, 672, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (-1183, 84, 89));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (-1118, 873, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (-461, 1547, -121));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (345, 1540, -134));
+    playSoundAtPosition("vox_pa_generic_spawn_a_02", (721, 730, 56));
     wait 2;
-    playsoundatposition("vox_pa_generic_spawn_a_03", (1356, 159, 165));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (726, 3, 181));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (353, 962, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (-344, 961, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (-507, 672, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (-1183, 84, 89));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (-1118, 873, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (-461, 1547, -121));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (345, 1540, -134));
-    playsoundatposition("vox_pa_generic_spawn_a_03", (721, 730, 56));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (1356, 159, 165));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (726, 3, 181));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (353, 962, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (-344, 961, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (-507, 672, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (-1183, 84, 89));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (-1118, 873, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (-461, 1547, -121));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (345, 1540, -134));
+    playSoundAtPosition("vox_pa_generic_spawn_a_03", (721, 730, 56));
     wait 2;
-    playsoundatposition("vox_pa_generic_spawn_a_04", (1356, 159, 165));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (726, 3, 181));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (353, 962, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (-344, 961, 284));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (-507, 672, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (-1183, 84, 89));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (-1118, 873, 201));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (-461, 1547, -121));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (345, 1540, -134));
-    playsoundatposition("vox_pa_generic_spawn_a_04", (721, 730, 56));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (1356, 159, 165));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (726, 3, 181));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (353, 962, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (-344, 961, 284));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (-507, 672, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (-1183, 84, 89));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (-1118, 873, 201));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (-461, 1547, -121));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (345, 1540, -134));
+    playSoundAtPosition("vox_pa_generic_spawn_a_04", (721, 730, 56));
     return;
   }
 
-  playsoundatposition("vox_pa_generic_spawn_b_01", (1356, 159, 165));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (726, 3, 181));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (353, 962, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (-344, 961, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (-507, 672, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (-1183, 84, 89));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (-1118, 873, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (-461, 1547, -121));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (345, 1540, -134));
-  playsoundatposition("vox_pa_generic_spawn_b_01", (721, 730, 56));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (1356, 159, 165));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (726, 3, 181));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (353, 962, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (-344, 961, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (-507, 672, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (-1183, 84, 89));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (-1118, 873, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (-461, 1547, -121));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (345, 1540, -134));
+  playSoundAtPosition("vox_pa_generic_spawn_b_01", (721, 730, 56));
   wait 2;
-  playsoundatposition("vox_pa_generic_spawn_b_02", (1356, 159, 165));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (726, 3, 181));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (353, 962, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (-344, 961, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (-507, 672, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (-1183, 84, 89));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (-1118, 873, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (-461, 1547, -121));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (345, 1540, -134));
-  playsoundatposition("vox_pa_generic_spawn_b_02", (721, 730, 56));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (1356, 159, 165));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (726, 3, 181));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (353, 962, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (-344, 961, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (-507, 672, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (-1183, 84, 89));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (-1118, 873, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (-461, 1547, -121));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (345, 1540, -134));
+  playSoundAtPosition("vox_pa_generic_spawn_b_02", (721, 730, 56));
   wait 2;
-  playsoundatposition("vox_pa_generic_spawn_b_03", (1356, 159, 165));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (726, 3, 181));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (353, 962, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (-344, 961, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (-507, 672, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (-1183, 84, 89));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (-1118, 873, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (-461, 1547, -121));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (345, 1540, -134));
-  playsoundatposition("vox_pa_generic_spawn_b_03", (721, 730, 56));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (1356, 159, 165));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (726, 3, 181));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (353, 962, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (-344, 961, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (-507, 672, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (-1183, 84, 89));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (-1118, 873, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (-461, 1547, -121));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (345, 1540, -134));
+  playSoundAtPosition("vox_pa_generic_spawn_b_03", (721, 730, 56));
   wait 2;
-  playsoundatposition("vox_pa_generic_spawn_b_04", (1356, 159, 165));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (726, 3, 181));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (353, 962, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (-344, 961, 284));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (-507, 672, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (-1183, 84, 89));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (-1118, 873, 201));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (-461, 1547, -121));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (345, 1540, -134));
-  playsoundatposition("vox_pa_generic_spawn_b_04", (721, 730, 56));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (1356, 159, 165));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (726, 3, 181));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (353, 962, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (-344, 961, 284));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (-507, 672, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (-1183, 84, 89));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (-1118, 873, 201));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (-461, 1547, -121));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (345, 1540, -134));
+  playSoundAtPosition("vox_pa_generic_spawn_b_04", (721, 730, 56));
 }
 
 function_c0616fac() {
@@ -377,16 +377,16 @@ function_ff61a79d() {
 }
 
 function_36b1fa1c(index) {
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (1356, 159, 165));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (726, 3, 181));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (353, 962, 284));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (-344, 961, 284));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (-507, 672, 201));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (-1183, 84, 89));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (-1118, 873, 201));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (-461, 1547, -121));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (345, 1540, -134));
-  playsoundatposition("vox_pa_ee_countdown_0" + index, (721, 730, 56));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (1356, 159, 165));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (726, 3, 181));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (353, 962, 284));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (-344, 961, 284));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (-507, 672, 201));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (-1183, 84, 89));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (-1118, 873, 201));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (-461, 1547, -121));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (345, 1540, -134));
+  playSoundAtPosition("vox_pa_ee_countdown_0" + index, (721, 730, 56));
 }
 
 mannequin_mode() {
@@ -400,7 +400,7 @@ mannequin_mode() {
   }
 
   if(getdvarint(#"hash_7c2178505e616da3", 0)) {
-    train_mannequin = getent("mannequin_destructible_inside_train", "targetname");
+    train_mannequin = getEnt("mannequin_destructible_inside_train", "targetname");
 
     if(isDefined(train_mannequin)) {
       train_mannequin delete();
@@ -421,16 +421,16 @@ mannequin_mode() {
     return;
   }
 
-  playsoundatposition("vox_pa_ee_warning", (1356, 159, 165));
-  playsoundatposition("vox_pa_ee_warning", (726, 3, 181));
-  playsoundatposition("vox_pa_ee_warning", (353, 962, 284));
-  playsoundatposition("vox_pa_ee_warning", (-344, 961, 284));
-  playsoundatposition("vox_pa_ee_warning", (-507, 672, 201));
-  playsoundatposition("vox_pa_ee_warning", (-1183, 84, 89));
-  playsoundatposition("vox_pa_ee_warning", (-1118, 873, 201));
-  playsoundatposition("vox_pa_ee_warning", (-461, 1547, -121));
-  playsoundatposition("vox_pa_ee_warning", (345, 1540, -134));
-  playsoundatposition("vox_pa_ee_warning", (721, 730, 56));
+  playSoundAtPosition("vox_pa_ee_warning", (1356, 159, 165));
+  playSoundAtPosition("vox_pa_ee_warning", (726, 3, 181));
+  playSoundAtPosition("vox_pa_ee_warning", (353, 962, 284));
+  playSoundAtPosition("vox_pa_ee_warning", (-344, 961, 284));
+  playSoundAtPosition("vox_pa_ee_warning", (-507, 672, 201));
+  playSoundAtPosition("vox_pa_ee_warning", (-1183, 84, 89));
+  playSoundAtPosition("vox_pa_ee_warning", (-1118, 873, 201));
+  playSoundAtPosition("vox_pa_ee_warning", (-461, 1547, -121));
+  playSoundAtPosition("vox_pa_ee_warning", (345, 1540, -134));
+  playSoundAtPosition("vox_pa_ee_warning", (721, 730, 56));
   wait 17;
   function_36b1fa1c(0);
   wait 3;
@@ -455,7 +455,7 @@ mannequin_mode() {
   function_36b1fa1c(10);
   wait 3;
   function_36b1fa1c(11);
-  train_mannequin = getent("mannequin_destructible_inside_train", "targetname");
+  train_mannequin = getEnt("mannequin_destructible_inside_train", "targetname");
 
   if(isDefined(train_mannequin)) {
     train_mannequin delete();
@@ -511,10 +511,10 @@ function_f062b7d9(bhide) {
 }
 
 function_c2bd6a1f(a_ents) {
-  truck = getent("truck_destructible", "targetname");
+  truck = getEnt("truck_destructible", "targetname");
 
   if(isDefined(a_ents[#"prop 1"]) && isDefined(truck)) {
-    truck linkto(a_ents[#"prop 1"], "tag_link_uaz", (0, 0, 0));
+    truck linkTo(a_ents[#"prop 1"], "tag_link_uaz", (0, 0, 0));
   }
 }
 
@@ -549,7 +549,7 @@ spawn_mannequin() {
   spawn_point = struct::get("mannequin_spawn_point", "targetname");
   var_ed5bd910 = struct::get_array("mannequin_spawn_landing_target", "targetname");
   var_e5031929 = spawn("script_model", spawn_point.origin);
-  var_e5031929 enablelinkto();
+  var_e5031929 enablelinkTo();
   var_e5031929 setModel("tag_origin");
   var_e5031929.angles = (0, 0, 0);
   random = randomint(2);
@@ -565,9 +565,9 @@ spawn_mannequin() {
   fall_speed = 1000;
   var_a25e6eb7 = distance(landing_point.origin, spawn_point.origin);
   var_9d78b877 = var_a25e6eb7 / fall_speed;
-  mannequin linkto(var_e5031929, "tag_origin", (0, 0, 0), (0, 0, 0));
+  mannequin linkTo(var_e5031929, "tag_origin", (0, 0, 0), (0, 0, 0));
   mannequin thread function_4eca5590();
-  var_e5031929 moveto(landing_point.origin, var_9d78b877, 3);
+  var_e5031929 moveTo(landing_point.origin, var_9d78b877, 3);
   mannequin thread mannequin_falling(var_e5031929);
   rand = randomint(100);
 

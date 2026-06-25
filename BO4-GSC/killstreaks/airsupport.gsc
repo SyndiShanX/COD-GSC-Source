@@ -204,7 +204,7 @@ planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, flytime, fl
   plane.angles = direction;
   plane.team = owner.team;
   plane setowner(owner);
-  plane moveto(pathend, flytime, 0, 0);
+  plane moveTo(pathend, flytime, 0, 0);
 
   thread debug_plane_line(flytime, flyspeed, pathstart, pathend);
 
@@ -808,7 +808,7 @@ initrotatingrig() {
 
 rotaterig() {
   for(;;) {
-    self rotateyaw(-360, 60);
+    self rotateYaw(-360, 60);
     wait 60;
   }
 }
@@ -819,11 +819,11 @@ swayrig() {
   for(;;) {
     z = randomintrange(-200, -100);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
     z = randomintrange(100, 200);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
   }
 }
@@ -896,7 +896,7 @@ leave(duration) {
     self setspeed(length(exitvector) / duration / 17.6, 60);
     self setgoal(exitpoint, 0, 0);
   } else {
-    self moveto(exitpoint, duration, 0, 0);
+    self moveTo(exitpoint, duration, 0, 0);
   }
 
   self notify(#"leaving");
@@ -914,7 +914,7 @@ getrandomhelicopterstartorigin() {
       index = randomintrange(0, level.noflyzones.size);
       delta = level.noflyzones[index].origin;
       delta = (delta[0] + randomint(10), delta[1] + randomint(10), 0);
-      delta = vectornormalize(delta);
+      delta = vectorNormalize(delta);
       start_origin = delta * dist;
     }
   }
@@ -931,7 +931,7 @@ debug_no_fly_zones() {
 debug_plane_line(flytime, flyspeed, pathstart, pathend) {
   thread debug_line(pathstart, pathend, (1, 1, 1));
 
-  delta = vectornormalize(pathend - pathstart);
+  delta = vectorNormalize(pathend - pathstart);
 
   for(i = 0; i < flytime; i++) {
     thread debug_star(pathstart + vectorscale(delta, i * flyspeed), (1, 0, 0));

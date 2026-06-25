@@ -43,7 +43,7 @@ function function_4b462025(enemy, b_ignore_cleanup) {
 
   if(isPlayer(enemy)) {
     var_11b59192 = abs(math::random_normal_distribution(0, getdvarfloat(#"hash_24c8c69455c84258", 750) * 0.25, undefined, getdvarfloat(#"hash_24c8c69455c84258", 750)));
-    var_389d01c3 = vectornormalize(target_pos - self gettagorigin("j_pocket5_le"));
+    var_389d01c3 = vectorNormalize(target_pos - self gettagorigin("j_pocket5_le"));
     target_pos -= var_389d01c3 * (getdvarfloat(#"hash_24c8c69455c84258", 750) - var_11b59192);
     var_18ee0f33 = (randomfloat(1) - 0.5) * 100;
     target_pos += rotatepoint(var_389d01c3, (0, 90, 0)) * var_18ee0f33;
@@ -102,11 +102,11 @@ function function_4b462025(enemy, b_ignore_cleanup) {
   }
 
   grenade = self magicgrenadetype(var_d54a1968, var_8598bad6, velocity);
-  playsoundatposition(#"hash_4897d1a140f146f5", var_8598bad6);
+  playSoundAtPosition(#"hash_4897d1a140f146f5", var_8598bad6);
   var_9f0ffc57 = (0, 0, 30);
   var_b1d0a64 = util::spawn_model(#"c_t9_zmb_hellhound", var_8598bad6 + var_9f0ffc57, grenade.angles);
   var_b1d0a64 clientfield::set("" + #"dog_projectile_fx", 1);
-  var_b1d0a64 linkto(grenade, "tag_origin", var_9f0ffc57);
+  var_b1d0a64 linkTo(grenade, "tag_origin", var_9f0ffc57);
   var_b1d0a64 useanimtree("generic");
   var_b1d0a64 thread animation::play(#"ai_t9_zm_zombie_dog_orda_pose_hellhound_01", var_b1d0a64, (30, var_b1d0a64.angles[1], var_b1d0a64.angles[2]));
 
@@ -289,7 +289,7 @@ function private function_6b6fce46(target) {
 
 function function_2d86c7c9() {
   self endon(#"death");
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
   var_fc398f5e = n_players * 2;
   var_8214bfd5 = floor(var_fc398f5e / 4) + (3 - self.var_f01add23 > var_fc398f5e % 4 ? 0 : 1);
   self.var_f01add23 += 1;
@@ -333,10 +333,10 @@ function private function_187bcbe() {
 
   if(isDefined(self.var_66a3d186)) {
     var_b048de07 = vectorlerp(self.var_66a3d186 gettagorigin("j_head_mouth1"), self.var_66a3d186 gettagorigin("j_head_mouth5"), 0.5);
-    launch_dir = vectornormalize(var_b048de07 - self.origin);
-    self moveto(self.origin + launch_dir * 200, 0.25);
+    launch_dir = vectorNormalize(var_b048de07 - self.origin);
+    self moveTo(self.origin + launch_dir * 200, 0.25);
     wait 0.25;
-    self moveto(self.origin + launch_dir * 100, 0.25, 0, 0.1875);
+    self moveTo(self.origin + launch_dir * 100, 0.25, 0, 0.1875);
     wait 0.25;
   }
 
@@ -354,7 +354,7 @@ function private function_187bcbe() {
 
       var_f6107d1 = (self.origin[0], self.origin[1], var_2f769fb1[2] + sin(var_2d0b175) * 100);
       var_2d0b175 += 0.02;
-      var_8a380e81 = vectornormalize(var_2f769fb1 - var_f6107d1);
+      var_8a380e81 = vectorNormalize(var_2f769fb1 - var_f6107d1);
       circle_pos = -1 * var_8a380e81 * 200 + var_2f769fb1;
 
       if(getdvarint(#"hash_7b1300b093008e51", 0) > 0) {
@@ -388,7 +388,7 @@ function private function_187bcbe() {
     while(true) {
       if(isDefined(self.target_ent)) {
         var_2f769fb1 = self.target_ent.origin + (0, 0, 70);
-        to_target = vectornormalize(var_2f769fb1 - self.origin);
+        to_target = vectorNormalize(var_2f769fb1 - self.origin);
         target_pos = to_target * self.var_88b20e7f + self.origin;
         self.var_88b20e7f = min(self.var_88b20e7f + 0.1, 100);
         target_pos += function_d321dcc8(1, to_target);
@@ -421,7 +421,7 @@ function private function_187bcbe() {
 
     for(i = 0; i < var_dd660bcf; i++) {
       if(zombie_utility::is_player_valid(self.target_ent, 1, 1)) {
-        self moveto(self.target_ent getEye(), 0.2);
+        self moveTo(self.target_ent getEye(), 0.2);
       }
 
       wait 0.2;
@@ -437,9 +437,9 @@ function private function_187bcbe() {
       }
 
       self.var_88b20e7f = min(self.var_88b20e7f + 0.1, 100);
-      to_target = vectornormalize(var_2f769fb1 - (self.origin[0], self.origin[1], var_2f769fb1[2]));
+      to_target = vectorNormalize(var_2f769fb1 - (self.origin[0], self.origin[1], var_2f769fb1[2]));
       circle_pos = var_2f769fb1 - to_target * 200;
-      target_pos = vectornormalize(circle_pos - self.origin) * self.var_88b20e7f + self.origin;
+      target_pos = vectorNormalize(circle_pos - self.origin) * self.var_88b20e7f + self.origin;
       target_pos += function_4e15ba87(var_2f769fb1);
       target_pos += function_3a260c9e(var_c0500b76, to_target, var_584124bc, var_1f2ee4ae);
 
@@ -459,8 +459,8 @@ function private function_c9bcf1cb(var_2f769fb1, var_1f14bda8, var_4717cb50) {
     var_4717cb50 = var_2f769fb1;
   }
 
-  target_pos = vectornormalize(var_4717cb50 - self.origin) * self.var_88b20e7f + self.origin;
-  self moveto(target_pos, 0.2);
+  target_pos = vectorNormalize(var_4717cb50 - self.origin) * self.var_88b20e7f + self.origin;
+  self moveTo(target_pos, 0.2);
   waitresult = self waittilltimeout(0.2, #"movedone");
 
   if(waitresult._notify === "movedone") {
@@ -540,7 +540,7 @@ function private function_d321dcc8(var_af0000ca, to_target) {
     recordline(self.origin, var_d01d9a4b, (1, 1, 0));
 
     if(fraction > 0 && fraction < 1) {
-      debugstar(vectornormalize(var_d01d9a4b - self.origin) * fraction + self.origin, 20, (1, 0, 0));
+      debugstar(vectorNormalize(var_d01d9a4b - self.origin) * fraction + self.origin, 20, (1, 0, 0));
     }
   }
 

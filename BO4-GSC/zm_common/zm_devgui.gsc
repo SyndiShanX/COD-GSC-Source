@@ -117,7 +117,7 @@ function_5ac8947e() {
     if(strstartswith(cmd, "<dev string:x95>")) {
       str = strreplace(cmd, "<dev string:x95>", "<dev string:x38>");
       score = int(str);
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         if(isPlayer(player)) {
@@ -557,7 +557,7 @@ validate_to_board(spawn_point, spawn_point_origin_backup) {
     }
 
     nodeforward = anglesToForward(node.angles);
-    nodeforward = vectornormalize(nodeforward);
+    nodeforward = vectorNormalize(nodeforward);
     spawn_point_origin = node.origin + nodeforward * 100;
     return spawn_point_origin;
   }
@@ -676,12 +676,12 @@ zone_adjacencies_validation() {
 
   while(true) {
     if(isDefined(level.toggle_zone_adjacencies_validation) && level.toggle_zone_adjacencies_validation) {
-      if(!isDefined(getplayers()[0].zone_name)) {
+      if(!isDefined(getPlayers()[0].zone_name)) {
         waitframe(1);
         continue;
       }
 
-      str_zone = getplayers()[0].zone_name;
+      str_zone = getPlayers()[0].zone_name;
       keys = getarraykeys(level.zones);
       offset = 0;
 
@@ -903,7 +903,7 @@ function_3b534f9c() {
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size >= 1) {
         players[0] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
@@ -917,7 +917,7 @@ function_3b534f9c() {
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size >= 2) {
         players[1] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
@@ -931,7 +931,7 @@ function_3b534f9c() {
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size >= 3) {
         players[2] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
@@ -945,7 +945,7 @@ function_3b534f9c() {
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size >= 4) {
         players[3] thread zombie_devgui_weapon_give(level.zombie_devgui_gun);
@@ -965,7 +965,7 @@ zombie_weapon_devgui_think() {
 
     if(isDefined(cmd) && cmd.size > 0) {
       level.zombie_devgui_gun = cmd;
-      array::thread_all(getplayers(), &zombie_devgui_weapon_give, level.zombie_devgui_gun);
+      array::thread_all(getPlayers(), &zombie_devgui_weapon_give, level.zombie_devgui_gun);
       setDvar(#"zombie_devgui_gun", "<dev string:x38>");
     }
   }
@@ -1074,7 +1074,7 @@ zombie_ability_devgui_think() {
         level flag::clear("<dev string:xb70>");
       } else {
         level.zombie_devgui_give_ability = cmd;
-        array::thread_all(getplayers(), &zombie_devgui_ability_give, level.zombie_devgui_give_ability);
+        array::thread_all(getPlayers(), &zombie_devgui_ability_give, level.zombie_devgui_give_ability);
       }
     }
 
@@ -1083,7 +1083,7 @@ zombie_ability_devgui_think() {
 
     if(!isDefined(level.zombie_devgui_take_ability) || level.zombie_devgui_take_ability != cmd) {
       level.zombie_devgui_take_ability = cmd;
-      array::thread_all(getplayers(), &zombie_devgui_ability_take, level.zombie_devgui_take_ability);
+      array::thread_all(getPlayers(), &zombie_devgui_ability_take, level.zombie_devgui_take_ability);
     }
   }
 }
@@ -1107,7 +1107,7 @@ zombie_healthbar(pos, dsquared) {
 devgui_zombie_healthbar() {
   while(true) {
     if(getdvarint(#"scr_zombie_healthbars", 0) == 1) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
 
       if(isalive(e_player)) {
         a_ai_zombies = getaispeciesarray("<dev string:xb8f>", "<dev string:xb8f>");
@@ -1125,7 +1125,7 @@ devgui_zombie_healthbar() {
 zombie_devgui_watch_input() {
   level flag::wait_till("<dev string:xa6>");
   wait 1;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] thread watch_debug_input();
@@ -1197,11 +1197,11 @@ zombie_devgui_think() {
 
     switch (cmd) {
       case #"money":
-        players = getplayers();
+        players = getPlayers();
         array::thread_all(players, &zombie_devgui_give_money);
         break;
       case #"player1_money":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_give_money();
@@ -1209,7 +1209,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_money":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_give_money();
@@ -1217,7 +1217,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_money":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_give_money();
@@ -1225,7 +1225,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_money":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_give_money();
@@ -1233,11 +1233,11 @@ zombie_devgui_think() {
 
         break;
       case #"moneydown":
-        players = getplayers();
+        players = getPlayers();
         array::thread_all(players, &zombie_devgui_take_money);
         break;
       case #"player1_moneydown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_take_money();
@@ -1245,7 +1245,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_moneydown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_take_money();
@@ -1253,7 +1253,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_moneydown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_take_money();
@@ -1261,7 +1261,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_moneydown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_take_money();
@@ -1269,11 +1269,11 @@ zombie_devgui_think() {
 
         break;
       case #"ammodown":
-        players = getplayers();
+        players = getPlayers();
         array::thread_all(players, &function_dc7312be);
         break;
       case #"player1_ammodown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread function_dc7312be();
@@ -1281,7 +1281,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_ammodown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread function_dc7312be();
@@ -1289,7 +1289,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_ammodown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread function_dc7312be();
@@ -1297,7 +1297,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_ammodown":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread function_dc7312be();
@@ -1305,7 +1305,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_59a96f9816430398":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_give_xp(1000);
@@ -1313,7 +1313,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_423b4f1fbe6391dd":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_give_xp(1000);
@@ -1321,7 +1321,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_50580bf75ed9e65e":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_give_xp(1000);
@@ -1329,7 +1329,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_4e18caaf131ec443":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_give_xp(1000);
@@ -1337,7 +1337,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_1dec476dd3df3678":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_give_xp(10000);
@@ -1345,7 +1345,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_6e595ff08330f5b7":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_give_xp(10000);
@@ -1353,7 +1353,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_5f82c3562c428cea":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_give_xp(10000);
@@ -1361,7 +1361,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_52e4da7d7d47cf69":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_give_xp(10000);
@@ -1369,10 +1369,10 @@ zombie_devgui_think() {
 
         break;
       case #"health":
-        array::thread_all(getplayers(), &zombie_devgui_give_health);
+        array::thread_all(getPlayers(), &zombie_devgui_give_health);
         break;
       case #"player1_health":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_give_health();
@@ -1380,7 +1380,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_health":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_give_health();
@@ -1388,7 +1388,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_health":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_give_health();
@@ -1396,7 +1396,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_health":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_give_health();
@@ -1404,10 +1404,10 @@ zombie_devgui_think() {
 
         break;
       case #"minhealth":
-        array::thread_all(getplayers(), &zombie_devgui_low_health);
+        array::thread_all(getPlayers(), &zombie_devgui_low_health);
         break;
       case #"player1_minhealth":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_low_health();
@@ -1415,7 +1415,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_minhealth":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_low_health();
@@ -1423,7 +1423,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_minhealth":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_low_health();
@@ -1431,7 +1431,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_minhealth":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_low_health();
@@ -1439,13 +1439,13 @@ zombie_devgui_think() {
 
         break;
       case #"ammo":
-        array::thread_all(getplayers(), &zombie_devgui_toggle_ammo);
+        array::thread_all(getPlayers(), &zombie_devgui_toggle_ammo);
         break;
       case #"ignore":
-        array::thread_all(getplayers(), &zombie_devgui_toggle_ignore);
+        array::thread_all(getPlayers(), &zombie_devgui_toggle_ignore);
         break;
       case #"player1_ignore":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_toggle_ignore();
@@ -1453,7 +1453,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_ignore":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_toggle_ignore();
@@ -1461,7 +1461,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_ignore":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_toggle_ignore();
@@ -1469,7 +1469,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_ignore":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_toggle_ignore();
@@ -1507,10 +1507,10 @@ zombie_devgui_think() {
         zombie_devgui_invulnerable(3, 0);
         break;
       case #"revive_all":
-        array::thread_all(getplayers(), &zombie_devgui_revive);
+        array::thread_all(getPlayers(), &zombie_devgui_revive);
         break;
       case #"player1_revive":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_revive();
@@ -1518,7 +1518,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_revive":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_revive();
@@ -1526,7 +1526,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_revive":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_revive();
@@ -1534,7 +1534,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_revive":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_revive();
@@ -1542,7 +1542,7 @@ zombie_devgui_think() {
 
         break;
       case #"player1_kill":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zombie_devgui_kill();
@@ -1550,7 +1550,7 @@ zombie_devgui_think() {
 
         break;
       case #"player2_kill":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zombie_devgui_kill();
@@ -1558,7 +1558,7 @@ zombie_devgui_think() {
 
         break;
       case #"player3_kill":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zombie_devgui_kill();
@@ -1566,7 +1566,7 @@ zombie_devgui_think() {
 
         break;
       case #"player4_kill":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zombie_devgui_kill();
@@ -1575,13 +1575,13 @@ zombie_devgui_think() {
         break;
       case #"hash_7f4d70c7ded8e94a":
         if(zm_utility::get_story() === 2) {
-          array::random(getplayers()) giveweapon(getweapon(#"homunculus"));
+          array::random(getPlayers()) giveweapon(getweapon(#"homunculus"));
         }
 
-        array::thread_all(getplayers(), &function_8d799ebd);
+        array::thread_all(getPlayers(), &function_8d799ebd);
         break;
       case #"hash_505efa1825e2cb99":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread function_8d799ebd();
@@ -1589,7 +1589,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_15233852e3dc3500":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread function_8d799ebd();
@@ -1597,7 +1597,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_5cb5edc4858d92f7":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread function_8d799ebd();
@@ -1605,7 +1605,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_6d57ff86c541a5fe":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread function_8d799ebd();
@@ -1613,10 +1613,10 @@ zombie_devgui_think() {
 
         break;
       case #"100_self_revives":
-        array::thread_all(getplayers(), &zm_laststand::function_3d685b5f, 100);
+        array::thread_all(getPlayers(), &zm_laststand::function_3d685b5f, 100);
         break;
       case #"hash_72783b08840a3ab7":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 1) {
           players[0] thread zm_laststand::function_3d685b5f(100);
@@ -1624,7 +1624,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_447712ef48d6ea0":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 2) {
           players[1] thread zm_laststand::function_3d685b5f(100);
@@ -1632,7 +1632,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_2a15f60adbba0cf5":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 3) {
           players[2] thread zm_laststand::function_3d685b5f(100);
@@ -1640,7 +1640,7 @@ zombie_devgui_think() {
 
         break;
       case #"hash_430eb4715f49a5fe":
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size >= 4) {
           players[3] thread zm_laststand::function_3d685b5f(100);
@@ -1720,10 +1720,10 @@ zombie_devgui_think() {
         zombie_devgui_goto_round(level.round_number - 1);
         break;
       case #"chest_warp":
-        array::thread_all(getplayers(), &function_4bb7eb36);
+        array::thread_all(getPlayers(), &function_4bb7eb36);
         break;
       case #"pap_warp":
-        array::thread_all(getplayers(), &function_84f0a909);
+        array::thread_all(getPlayers(), &function_84f0a909);
         break;
       case #"chest_move":
         if(isDefined(level.chest_accessed)) {
@@ -1744,31 +1744,31 @@ zombie_devgui_think() {
 
         break;
       case #"give_claymores":
-        array::thread_all(getplayers(), &zombie_devgui_give_placeable_mine, getweapon(#"claymore"));
+        array::thread_all(getPlayers(), &zombie_devgui_give_placeable_mine, getweapon(#"claymore"));
         break;
       case #"give_bouncingbetties":
-        array::thread_all(getplayers(), &zombie_devgui_give_placeable_mine, getweapon(#"bouncingbetty"));
+        array::thread_all(getPlayers(), &zombie_devgui_give_placeable_mine, getweapon(#"bouncingbetty"));
         break;
       case #"give_frags":
-        array::thread_all(getplayers(), &zombie_devgui_give_frags);
+        array::thread_all(getPlayers(), &zombie_devgui_give_frags);
         break;
       case #"give_sticky":
-        array::thread_all(getplayers(), &zombie_devgui_give_sticky);
+        array::thread_all(getPlayers(), &zombie_devgui_give_sticky);
         break;
       case #"give_monkey":
-        array::thread_all(getplayers(), &zombie_devgui_give_monkey);
+        array::thread_all(getPlayers(), &zombie_devgui_give_monkey);
         break;
       case #"give_bhb":
-        array::thread_all(getplayers(), &zombie_devgui_give_bhb);
+        array::thread_all(getPlayers(), &zombie_devgui_give_bhb);
         break;
       case #"give_quantum":
-        array::thread_all(getplayers(), &zombie_devgui_give_qed);
+        array::thread_all(getPlayers(), &zombie_devgui_give_qed);
         break;
       case #"give_dolls":
-        array::thread_all(getplayers(), &zombie_devgui_give_dolls);
+        array::thread_all(getPlayers(), &zombie_devgui_give_dolls);
         break;
       case #"give_emp_bomb":
-        array::thread_all(getplayers(), &zombie_devgui_give_emp_bomb);
+        array::thread_all(getPlayers(), &zombie_devgui_give_emp_bomb);
         break;
       case #"dog_round":
         zombie_devgui_dog_round(getdvarint(#"scr_zombie_dogs", 0));
@@ -1857,16 +1857,16 @@ zombie_devgui_think() {
 
         break;
       case #"zombie_dpad_none":
-        array::thread_all(getplayers(), &zombie_devgui_dpad_none);
+        array::thread_all(getPlayers(), &zombie_devgui_dpad_none);
         break;
       case #"zombie_dpad_damage":
-        array::thread_all(getplayers(), &zombie_devgui_dpad_damage);
+        array::thread_all(getPlayers(), &zombie_devgui_dpad_damage);
         break;
       case #"zombie_dpad_kill":
-        array::thread_all(getplayers(), &zombie_devgui_dpad_death);
+        array::thread_all(getPlayers(), &zombie_devgui_dpad_death);
         break;
       case #"zombie_dpad_drink":
-        array::thread_all(getplayers(), &zombie_devgui_dpad_changeweapon);
+        array::thread_all(getPlayers(), &zombie_devgui_dpad_changeweapon);
         break;
       case #"director_easy":
         zombie_devgui_director_easy();
@@ -1920,7 +1920,7 @@ zombie_devgui_think() {
         function_bbeaa2da();
         break;
       case #"debug_hud":
-        array::thread_all(getplayers(), &devgui_debug_hud);
+        array::thread_all(getPlayers(), &devgui_debug_hud);
         break;
       case #"reverse_carpenter":
         function_f12b8a34();
@@ -2078,7 +2078,7 @@ function_567ee21f() {
 }
 
 devgui_zombie_spawn() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   spawnername = undefined;
   spawnername = "<dev string:xbf1>";
   direction = player getplayerangles();
@@ -2102,7 +2102,7 @@ devgui_zombie_spawn() {
 }
 
 function_6f066ef() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   forward = anglesToForward(player.angles);
   spawn = player.origin + forward * 25;
   guy = devgui_zombie_spawn();
@@ -2114,7 +2114,7 @@ function_6f066ef() {
 }
 
 function_7c17d00f() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   forward = anglesToForward(player.angles);
   spawn = player.origin + forward * 100;
   guy = devgui_zombie_spawn();
@@ -2158,7 +2158,7 @@ zombie_devgui_open_sesame() {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
   array::thread_all(players, &zombie_devgui_give_money);
   zombie_doors = getEntArray("<dev string:xc4c>", "<dev string:xbd1>");
 
@@ -2203,7 +2203,7 @@ zombie_devgui_open_sesame() {
 }
 
 any_player_in_noclip() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player isinmovemode("<dev string:xc7f>", "<dev string:xc85>")) {
       return 1;
     }
@@ -2304,7 +2304,7 @@ zombie_devgui_give_xp(amount) {
 }
 
 zombie_devgui_turn_player(index) {
-  players = getplayers();
+  players = getPlayers();
 
   if(!isDefined(index) || index >= players.size) {
     player = players[0];
@@ -2351,7 +2351,7 @@ function_4bb7eb36() {
       break;
   }
 
-  self setorigin(plorigin);
+  self setOrigin(plorigin);
   self setplayerangles(var_21f5823e);
 }
 
@@ -2385,7 +2385,7 @@ function_84f0a909() {
       break;
   }
 
-  self setorigin(plorigin);
+  self setOrigin(plorigin);
   self setplayerangles(var_21f5823e);
 }
 
@@ -2654,7 +2654,7 @@ zombie_devgui_give_emp_bomb() {
 }
 
 zombie_devgui_invulnerable(playerindex, onoff) {
-  players = getplayers();
+  players = getPlayers();
 
   if(!isDefined(playerindex)) {
     for(i = 0; i < players.size; i++) {
@@ -2796,7 +2796,7 @@ zombie_devgui_give_perk(perk) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     for(i = 0; i < vending_machines.size; i++) {
       if(vending_machines[i].script_noteworthy == perk) {
         vending_machines[i] notify(#"trigger", {
@@ -2824,7 +2824,7 @@ zombie_devgui_take_perks(cmd) {
     perks[perks.size] = perk;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     foreach(perk in perks) {
       perk_str = perk + "<dev string:xcf6>";
       player notify(perk_str);
@@ -2875,7 +2875,7 @@ function_18fc6a29(cmd) {
 }
 
 zombie_devgui_give_powerup(powerup_name, now, origin) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   found = 0;
   level.devcheater = 1;
 
@@ -2951,7 +2951,7 @@ zombie_devgui_give_powerup_player(powerup_name, now) {
 }
 
 zombie_devgui_goto_round(target_round) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(target_round < 1) {
     target_round = 1;
@@ -3036,7 +3036,7 @@ zombie_devgui_dump_zombie_vars() {
 }
 
 zombie_devgui_pack_current_weapon() {
-  players = getplayers();
+  players = getPlayers();
   reviver = players[0];
   level.devcheater = 1;
 
@@ -3057,7 +3057,7 @@ zombie_devgui_pack_current_weapon() {
 }
 
 zombie_devgui_repack_current_weapon() {
-  players = getplayers();
+  players = getPlayers();
   reviver = players[0];
   level.devcheater = 1;
 
@@ -3074,7 +3074,7 @@ zombie_devgui_repack_current_weapon() {
 }
 
 zombie_devgui_unpack_current_weapon() {
-  players = getplayers();
+  players = getPlayers();
   reviver = players[0];
   level.devcheater = 1;
 
@@ -3147,7 +3147,7 @@ function_af7d932(weapon) {
 }
 
 function_c8949116() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3164,7 +3164,7 @@ function_c8949116() {
 }
 
 function_9d21f44b() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3181,7 +3181,7 @@ function_9d21f44b() {
 }
 
 function_e2a97bab() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3197,7 +3197,7 @@ function_e2a97bab() {
 }
 
 function_1a560cfc() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3212,7 +3212,7 @@ function_1a560cfc() {
 }
 
 function_c8ee84ba() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
   a_weapons = enumerateweapons("<dev string:xd5f>");
 
@@ -3237,7 +3237,7 @@ function_c8ee84ba() {
 }
 
 function_c83c6fa() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
   a_weapons = enumerateweapons("<dev string:xd5f>");
 
@@ -3282,7 +3282,7 @@ function_5da832fa() {
 }
 
 function_8c9f2dea() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3297,7 +3297,7 @@ function_8c9f2dea() {
 }
 
 function_b7ef4b8() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3312,7 +3312,7 @@ function_b7ef4b8() {
 }
 
 function_9b4d61fa() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3326,7 +3326,7 @@ function_9b4d61fa() {
 }
 
 function_cdc3d061() {
-  players = getplayers();
+  players = getPlayers();
   level.devcheater = 1;
 
   for(i = 0; i < players.size; i++) {
@@ -3339,7 +3339,7 @@ function_cdc3d061() {
 }
 
 zombie_devgui_reopt_current_weapon() {
-  players = getplayers();
+  players = getPlayers();
   reviver = players[0];
   level.devcheater = 1;
 
@@ -3360,7 +3360,7 @@ zombie_devgui_reopt_current_weapon() {
 }
 
 zombie_devgui_take_weapon() {
-  players = getplayers();
+  players = getPlayers();
   reviver = players[0];
   level.devcheater = 1;
 
@@ -3373,7 +3373,7 @@ zombie_devgui_take_weapon() {
 }
 
 zombie_devgui_take_weapons(give_fallback) {
-  players = getplayers();
+  players = getPlayers();
   reviver = players[0];
   level.devcheater = 1;
 
@@ -3865,7 +3865,7 @@ function_f12b8a34() {
 
     if(isDefined(barrier.clip)) {
       barrier.clip triggerenable(1);
-      barrier.clip disconnectpaths();
+      barrier.clip disconnectPaths();
     } else {
       zm_blockers::blocker_connect_paths(barrier.neg_start, barrier.neg_end);
     }
@@ -4004,7 +4004,7 @@ function_c774d870() {
 }
 
 function_255c7194() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   queryresult = positionquery_source_navigation(player.origin, 256, 512, 128, 20);
 
   if(isDefined(queryresult) && queryresult.data.size > 0) {
@@ -4017,7 +4017,7 @@ function_255c7194() {
 }
 
 function_b4dcb9ce() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   direction = player getplayerangles();
   direction_vec = anglesToForward(direction);
   eye = player getEye();
@@ -4380,7 +4380,7 @@ function_2cde0af9(text, color, start, velocity, frames) {
 }
 
 function_61a7bb28() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(!e_player laststand::player_is_in_laststand() && e_player.sessionstate !== "<dev string:xd53>") {
       weapon = e_player getcurrentweapon();
 
@@ -4396,7 +4396,7 @@ function_61a7bb28() {
 }
 
 function_986a2585() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(!e_player laststand::player_is_in_laststand() && e_player.sessionstate !== "<dev string:xd53>") {
       weapon = e_player getcurrentweapon();
 
@@ -4410,7 +4410,7 @@ function_986a2585() {
 }
 
 function_184b9c6a() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(!e_player laststand::player_is_in_laststand() && e_player.sessionstate !== "<dev string:xd53>") {
       weapon = e_player getcurrentweapon();
 
@@ -4436,7 +4436,7 @@ function_f45a88df(weapon) {
 }
 
 function_faf7abce() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(!e_player laststand::player_is_in_laststand() && e_player.sessionstate !== "<dev string:xd53>") {
       weapon = e_player getcurrentweapon();
       var_1c3b8b11 = e_player function_b1298bfb(weapon);

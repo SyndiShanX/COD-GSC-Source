@@ -137,11 +137,11 @@ init_flags() {
 }
 
 init_spawn_funcs() {
-  sp = getent("defalco", "targetname");
+  sp = getEnt("defalco", "targetname");
   sp add_spawn_function(::spawn_func_defalco);
-  sp = getent("harper", "targetname");
+  sp = getEnt("harper", "targetname");
   sp add_spawn_function(::spawn_func_harper);
-  sp = getent("salazar", "targetname");
+  sp = getEnt("salazar", "targetname");
   sp add_spawn_function(::spawn_func_salazar);
   maps\karma_arrival::init_spawn_funcs();
   maps\karma_checkin::init_spawn_funcs();
@@ -228,7 +228,7 @@ skipto_cleanup() {
   }
   maps\_glasses::play_bootup();
   skip_objective(level.obj_security);
-  t_obj = getent("trig_tower_lift", "targetname");
+  t_obj = getEnt("trig_tower_lift", "targetname");
   set_objective(level.obj_find_crc, t_obj);
 
   if(skipto == "dropdown") {
@@ -335,5 +335,5 @@ setup_challenges() {
 }
 
 add_argus_info() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 }

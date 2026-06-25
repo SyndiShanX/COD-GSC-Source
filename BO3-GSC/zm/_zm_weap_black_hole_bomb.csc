@@ -90,7 +90,7 @@ function black_hole_zombie_being_pulled(localclientnum, oldval, newval, bnewent,
   if(newval) {
     self._bhb_pulled_in_fx = spawn(localclientnum, self.origin, "script_model");
     self._bhb_pulled_in_fx.angles = self.angles;
-    self._bhb_pulled_in_fx linkto(self, "tag_origin");
+    self._bhb_pulled_in_fx linkTo(self, "tag_origin");
     self._bhb_pulled_in_fx setModel("tag_origin");
     level thread black_hole_bomb_pulled_in_fx_clean(self, self._bhb_pulled_in_fx);
     players = getlocalplayers();

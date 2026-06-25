@@ -107,8 +107,8 @@ collectible_init(map_collectibles, n_intel_index) {
     }
 
     map_collectibles[i].trigger = spawn("trigger_radius", map_collectibles[i].origin, 0, 64, 64);
-    map_collectibles[i].trigger sethintstring("");
-    map_collectibles[i].trigger setcursorhint("HINT_NOICON");
+    map_collectibles[i].trigger setHintString("");
+    map_collectibles[i].trigger setCursorHint("HINT_NOICON");
     assert(isDefined(map_collectibles[i].trigger), "ERROR: _collectibles: Unable to create collectible trigger");
     collectibles[items] = map_collectibles[i];
     items++;
@@ -123,7 +123,7 @@ collectible_remove_found(collectible_item) {
   }
 
   if(isDefined(collectible_item.target)) {
-    m_stand = getent(collectible_item.target, "targetname");
+    m_stand = getEnt(collectible_item.target, "targetname");
     m_stand delete();
   }
 
@@ -138,20 +138,20 @@ collectible_wait_for_pickup() {
     player_is_looking_at = player is_player_looking_at(self.origin, 0.8, 0);
 
     if(player_is_looking_at) {
-      self.trigger sethintstring(&"SCRIPT_COLLECTIBLE_PICKUP");
+      self.trigger setHintString(&"SCRIPT_COLLECTIBLE_PICKUP");
     } else {
-      self.trigger sethintstring("");
+      self.trigger setHintString("");
     }
 
     if(isalive(player) && player_is_looking_at && player use_button_held()) {
-      playsoundatposition("uin_aar_unlock_loud", (0, 0, 0));
+      playSoundAtPosition("uin_aar_unlock_loud", (0, 0, 0));
       break;
     }
 
     wait 0.05;
 
     if(!player istouching(self.trigger)) {
-      self.trigger sethintstring("");
+      self.trigger setHintString("");
     }
   }
 

@@ -49,13 +49,13 @@ function pack_clock_init() {
   }
   minutes = curr_time[1];
   seconds = curr_time[2];
-  hour_hand = getent(clientnum, "zom_clock_hour_hand", "targetname");
+  hour_hand = getEnt(clientnum, "zom_clock_hour_hand", "targetname");
   hour_values = [];
   hour_values["hand_time"] = hours;
   hour_values["rotate"] = 30;
   hour_values["rotate_bit"] = 0.008333334;
   hour_values["first_rotate"] = ((minutes * 60) + seconds) * hour_values["rotate_bit"];
-  minute_hand = getent(clientnum, "zom_clock_minute_hand", "targetname");
+  minute_hand = getEnt(clientnum, "zom_clock_minute_hand", "targetname");
   minute_values = [];
   minute_values["hand_time"] = minutes;
   minute_values["rotate"] = 6;
@@ -90,7 +90,7 @@ function pack_clock_run(time_values) {
 
 function function_667aa0b4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    level.cameraent = getent(localclientnum, "theater_extracam_eye", "targetname");
+    level.cameraent = getEnt(localclientnum, "theater_extracam_eye", "targetname");
     level.cam_corona = util::spawn_model(localclientnum, "tag_origin", level.cameraent.origin, level.cameraent.angles);
     level.cam_corona.var_e39fd443 = playFXOnTag(localclientnum, level._effect["fx_mp_light_lamp"], level.cam_corona, "tag_origin");
     if(level.extracamactive[localclientnum] == 0 && level.localplayers.size < 3) {
@@ -151,7 +151,7 @@ function function_6776dea9(localclientnum, oldval, newval, bnewent, binitialsnap
 function play_fly_me_to_the_moon_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self.fx_spot = util::spawn_model(localclientnum, "tag_origin", self.origin + (vectorscale((0, 0, -1), 19)), vectorscale((1, 0, 0), 90));
-    self.fx_spot linkto(self);
+    self.fx_spot linkTo(self);
     n_fx_id = playFXOnTag(localclientnum, level._effect["fx_mp_pipe_steam"], self.fx_spot, "tag_origin");
     setfxignorepause(localclientnum, n_fx_id, 1);
   } else if(isDefined(self) && isDefined(self.fx_spot)) {

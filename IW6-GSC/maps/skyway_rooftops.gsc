@@ -27,16 +27,16 @@ section_post_inits() {
   thread setup_spawners();
   var_0 = getEntArray("rt_helos", "script_noteworthy");
   common_scripts\utility::array_call(var_0, ::hide);
-  var_1 = getent("rt0_trig_jump", "targetname");
+  var_1 = getEnt("rt0_trig_jump", "targetname");
   var_1 setmovingplatformtrigger();
 }
 
 start() {
   iprintln("rooftops");
-  var_0 = getent("rt1_start_player", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("rt1_start_player", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getent("rt1_start_ally", "targetname");
+  var_1 = getEnt("rt1_start_ally", "targetname");
   level._ally forceteleport(var_1.origin, var_1.angles);
   common_scripts\utility::flag_set("flag_helo_ready");
   thread maps\skyway_util::ambient_airbursts_startpoint();
@@ -50,7 +50,7 @@ main() {
     common_scripts\utility::array_call(level._train.cars[var_2].trigs, ::setmovingplatformtrigger);
   }
 
-  level.ally_impact_org = getent("rt_helo_crash_ally", "targetname");
+  level.ally_impact_org = getEnt("rt_helo_crash_ally", "targetname");
   level.old_goalradius = level.default_goalradius;
   level.default_goalradius = 768;
   level._ally.a.bdisablemovetwitch = undefined;
@@ -77,7 +77,7 @@ rt_start() {
   level._ally thread maps\_utility::set_force_color("r");
   thread rt_hero_train_impact(level._train.cars["train_rt0"], level._ally);
   common_scripts\utility::flag_wait("flag_rt0_move_up");
-  getent("rt1_color_reach", "targetname") notify("trigger");
+  getEnt("rt1_color_reach", "targetname") notify("trigger");
 }
 
 rt_hero_train_impact(var_0, var_1) {
@@ -103,8 +103,8 @@ rt_hero_train_impact(var_0, var_1) {
   if(var_3 < 160000 && var_4 < 144400) {
     var_5 = level._ally common_scripts\utility::spawn_tag_origin();
     var_6 = maps\skyway_util::get_local_coords(level._ally.origin, var_0.body gettagorigin("j_spineupper"), var_0.body gettagangles("j_spineupper"), 1);
-    var_5 linkto(var_0.body, "j_spineupper", var_6, (0, 0, 0));
-    level._ally linkto(var_5, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_5 linkTo(var_0.body, "j_spineupper", var_6, (0, 0, 0));
+    level._ally linkTo(var_5, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_5 maps\_anim::anim_single_solo(level._ally, "rt_train_impact", undefined, 0.1);
     level._ally unlink();
     wait 0.1;
@@ -148,8 +148,8 @@ rt_helos(var_0) {
   setthreatbias("axis", "player", 500);
   thread rt_helos_fic();
   level._ally thread maps\_utility::set_force_color("b");
-  getent("rt1_color_mid", "targetname") notify("trigger");
-  level.helos = [getent("rt_helo0", "targetname"), getent("rt_helo1", "targetname")];
+  getEnt("rt1_color_mid", "targetname") notify("trigger");
+  level.helos = [getEnt("rt_helo0", "targetname"), getEnt("rt_helo1", "targetname")];
   var_1 = level.helos.size;
 
   foreach(var_4, var_3 in level.helos) {
@@ -180,7 +180,7 @@ rt_helos(var_0) {
     return;
   }
   var_5 = level.helos[0].linked_car;
-  var_3 = getent("rt_helo2", "targetname");
+  var_3 = getEnt("rt_helo2", "targetname");
   level.helos[level.helos.size] = var_3;
   var_3.org = maps\_utility::spawn_anim_model("rt_helo1_mover");
   var_3.org.link1 = common_scripts\utility::spawn_tag_origin();
@@ -224,7 +224,7 @@ rt_helos_dead() {
   level._ally thread maps\_utility::set_force_color("r");
 
   if(!common_scripts\utility::flag("flag_rt2_combat_start")) {
-    getent("rt2_color_start", "targetname") notify("trigger");
+    getEnt("rt2_color_start", "targetname") notify("trigger");
   }
 
   common_scripts\utility::flag_wait("flag_rt2_combat_start");
@@ -303,7 +303,7 @@ rt_helo_proc(var_0, var_1, var_2) {
 
   if(isDefined(var_3) && var_3.size > 0) {
     foreach(var_5 in var_3) {
-      var_5 linkto(self);
+      var_5 linkTo(self);
     }
   }
 
@@ -329,12 +329,12 @@ rt_helo_proc(var_0, var_1, var_2) {
   self.deathanims = var_7;
   maps\_utility::assign_animtree("rt_helo_small");
   self setanim(level.scr_anim["rt_helo_small"]["blades"]);
-  self.org.link1 linkto(var_1.body, "j_mainroot", (0, 0, 0), (0, 0, 0));
-  self.org.link2 linkto(var_1.body, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  self.org.link1 linkTo(var_1.body, "j_mainroot", (0, 0, 0), (0, 0, 0));
+  self.org.link2 linkTo(var_1.body, "j_spineupper", (0, 0, 0), (0, 0, 0));
   self.org thread maps\skyway_util::blended_link(self.org.link1, self.org.link2, 1);
   wait 0.05;
   self teleportentityrelative(self, self.org);
-  self linkto(self.org, "tag_helo", (0, 0, 0), (0, 0, 0));
+  self linkTo(self.org, "tag_helo", (0, 0, 0), (0, 0, 0));
   self.org setanimknob(level.scr_anim[self.org.animname]["flyin"]);
 
   if(!isDefined(var_2)) {
@@ -452,7 +452,7 @@ rt_helo_crash_train(var_0) {
   thread common_scripts\utility::play_loop_sound_on_entity("aascout72x_helicopter_dying_loop");
   self.crashed = maps\_utility::spawn_anim_model("rt_helo_crashed");
   self.crashed hide();
-  self.crashed linkto(self.org, "tag_helo", (0, 0, 0), (0, 0, 0));
+  self.crashed linkTo(self.org, "tag_helo", (0, 0, 0), (0, 0, 0));
   self.crashed playLoopSound("emt_sw_fire_metal_large");
   self.crashed setanim(level.scr_anim["rt_helo_crashed"]["rt_helo_crash"]);
   self.car thread maps\skyway_util::train_overlay_solo("rt_helo_crash", undefined, undefined, undefined, 2, undefined, 1);
@@ -477,13 +477,13 @@ rt_helo_crash_train(var_0) {
   maps\skyway_util::delay_multi_fx(0, self.crashed.fx_org_tail_rotor, ["rt_helo_tail_fire_rotor"]);
   maps\skyway_util::delay_multi_fx(0, self.crashed.fx_org_tail_break, ["rt_helo_tail_fire_break"]);
   maps\skyway_util::delay_multi_fx(0, var_2, ["roofhit_wheel_break", "roofhit_wheel_sparks_small"]);
-  thread rt_fire_proc(getent("rt1_dam_fire", "targetname"), 200, 4, 0.1, "flag_rooftops_combat_done");
+  thread rt_fire_proc(getEnt("rt1_dam_fire", "targetname"), 200, 4, 0.1, "flag_rooftops_combat_done");
   level._train thread maps\skyway_util::train_new_sus_path_anims("train_rt1", "sus_r_broken");
-  var_4 = getent("rt1_helo_col", "targetname");
-  var_5 = getent("rt1_sus_col", "targetname");
-  var_4 linkto(level._train.cars["train_rt1"].body, "j_spineupper", (374, -2, -58), (0, 0, 0));
-  var_5 linkto(level._train.cars["train_rt1"].sus_f, "j_mainroot", (0, 0, 63), (0, 0, 0));
-  self.org linkto(level._train.cars["train_rt1"].body, "j_spineupper");
+  var_4 = getEnt("rt1_helo_col", "targetname");
+  var_5 = getEnt("rt1_sus_col", "targetname");
+  var_4 linkTo(level._train.cars["train_rt1"].body, "j_spineupper", (374, -2, -58), (0, 0, 0));
+  var_5 linkTo(level._train.cars["train_rt1"].sus_f, "j_mainroot", (0, 0, 63), (0, 0, 0));
+  self.org linkTo(level._train.cars["train_rt1"].body, "j_spineupper");
   self.crashed show();
   self hide();
   maps\_vehicle::vehicle_lights_off("running");
@@ -495,7 +495,7 @@ rt_helo_crash_train(var_0) {
 }
 
 rt_helo_crash_ally() {
-  level._ally linkto(level.ally_impact_org);
+  level._ally linkTo(level.ally_impact_org);
   level.ally_impact_org maps\_anim::anim_single_solo(level._ally, "rt_helo_crash", undefined, 0.1);
   level._ally unlink();
 }
@@ -851,7 +851,7 @@ player_push(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_6 < var_1) {
     var_7 = clamp(var_6 / var_1, 0, 1);
-    var_8 = vectornormalize(level.player.origin - var_0);
+    var_8 = vectorNormalize(level.player.origin - var_0);
     var_8 = var_8 * (var_2 * var_7 + var_3 * (1 - var_7));
     thread player_push_impulse(var_8, var_4);
   }
@@ -893,7 +893,7 @@ player_push_impulse(var_0, var_1) {
 }
 
 rumble_player_push(var_0, var_1) {
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   maps\skyway_util::train_quake(0.3, 1.2, level.player.origin, 256);
   level.player viewkick(10, var_0);
 }
@@ -901,10 +901,10 @@ rumble_player_push(var_0, var_1) {
 rumble_helo_hit(var_0, var_1) {
   if(level.player.car == "train_rt1") {
     if(var_0 > 1) {
-      level.player playrumbleonentity("grenade_rumble");
+      level.player playRumbleOnEntity("grenade_rumble");
       maps\skyway_util::train_quake(0.33, 1.4, level.player.origin, 128);
     } else {
-      level.player playrumbleonentity("grenade_rumble");
+      level.player playRumbleOnEntity("grenade_rumble");
       maps\skyway_util::train_quake(0.45, 1.6, level.player.origin, 256);
       level.player shellshock("default_nosound", 2);
       level.player dodamage(50, var_1);
@@ -986,7 +986,7 @@ helo_ai_handle_death() {
   if(self.vehicle_position > 1) {
     self.ridingvehicle.shooters = common_scripts\utility::array_remove(self.ridingvehicle.shooters, self);
   } else {
-    self linkto(self.ridingvehicle, "tag_pilot1", (0, 0, -16), (16, 16, 0));
+    self linkTo(self.ridingvehicle, "tag_pilot1", (0, 0, -16), (16, 16, 0));
   }
 }
 

@@ -277,8 +277,8 @@ function_4ee74b24() {
   if(isDefined(self.favoriteenemy) && self.var_6d5a7a2d < gettime()) {
     var_4bd2cffc = self.favoriteenemy.origin - self.origin;
     var_7453ab4f = anglesToForward(self.angles);
-    var_4bd2cffc = vectornormalize(var_4bd2cffc * (1, 1, 0));
-    var_7453ab4f = vectornormalize(var_7453ab4f * (1, 1, 0));
+    var_4bd2cffc = vectorNormalize(var_4bd2cffc * (1, 1, 0));
+    var_7453ab4f = vectorNormalize(var_7453ab4f * (1, 1, 0));
     dot = vectordot(var_7453ab4f, var_4bd2cffc);
     cosine_angle = cos(3);
     self.var_6d5a7a2d = gettime() + 50;
@@ -692,7 +692,7 @@ function_7d162bd0(projectile, entity) {
 }
 
 function_c36cef22(origin) {
-  players = getplayers();
+  players = getPlayers();
   zombies = getaiteamarray(level.zombie_team);
 
   foreach(zombie in zombies) {
@@ -744,7 +744,7 @@ function_3ec863f5() {
   self endon(#"death");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player istouching(self)) {
@@ -930,7 +930,7 @@ shoot_spore(spore, target) {
   spore.origin = start_location;
   wait 0.1;
   spore clientfield::set("white_nova_crawler_spore_clientfield", 1);
-  spore moveto(target_location, 0.5);
+  spore moveTo(target_location, 0.5);
   spore waittill(#"movedone");
 
   if(isDefined(target) && isalive(target)) {

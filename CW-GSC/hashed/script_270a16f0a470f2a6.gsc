@@ -92,16 +92,16 @@ function function_3e0af5bf(var_a276c861) {
   level flag::wait_till("start_zombie_round_logic");
   level thread function_f71a8c71();
   var_73e56d89 = struct::get("pizza_kitchen_radio", "targetname");
-  var_73888042 = getent("pizza_kitchen_door", "targetname");
-  var_73888042 disconnectpaths();
+  var_73888042 = getEnt("pizza_kitchen_door", "targetname");
+  var_73888042 disconnectPaths();
   var_5a015138 = struct::get("ronnie_the_baker", "targetname");
   scene::add_scene_func(#"hash_414c49236edfc1d4", &function_a7cf8b16, "show");
   level thread scene::play(#"hash_414c49236edfc1d4", "show");
   level thread function_abd5cecb();
-  var_363dd5ac = getent("vol_pizza_kitchen", "targetname");
+  var_363dd5ac = getEnt("vol_pizza_kitchen", "targetname");
 
   while(!level flag::get(#"hash_75daa75b71ca3c65")) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(istouching(player.origin, var_363dd5ac)) {
         level flag::set(#"hash_75daa75b71ca3c65");
         break;
@@ -158,7 +158,7 @@ function function_16dfcdea() {
     level.var_a70c997e += 1;
     hidemiscmodels("ts_pz_bx_" + level.var_a70c997e);
     var_1efd6e0f = struct::get("pizza_box_loc");
-    playsoundatposition(#"hash_5ee8279df26f0e2a", var_1efd6e0f.origin);
+    playSoundAtPosition(#"hash_5ee8279df26f0e2a", var_1efd6e0f.origin);
     e_player thread function_51989322(45);
   }
 }
@@ -238,8 +238,8 @@ function function_a7cf8b16(a_ents) {
   var_e82701bb clientfield::set("" + #"hash_5808d23568bc787", 1);
   var_e82701bb setCanDamage(1);
   var_e82701bb.health = 1000;
-  var_22a80ca2 = getent("col_ronnie_raygun", "targetname");
-  var_22a80ca2 disconnectpaths();
+  var_22a80ca2 = getEnt("col_ronnie_raygun", "targetname");
+  var_22a80ca2 disconnectPaths();
 
   while(var_e82701bb.health > 0) {
     s_waitresult = var_e82701bb waittill(#"damage");
@@ -269,7 +269,7 @@ function function_abd5cecb() {
   scene::remove_scene_func(#"hash_414c49236edfc1d4", &function_a7cf8b16, "show");
   level thread scene::play(#"hash_414c49236edfc1d4", "dead");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player flag::clear(#"hash_467e4279ccacfd8a");
   }
 
@@ -290,13 +290,13 @@ function function_372852d() {
 function open_kitchen_door() {
   level endon(#"end_game");
   self connectpaths();
-  var_e2316f6f = getent(self.target, "targetname");
+  var_e2316f6f = getEnt(self.target, "targetname");
   var_6b28b1ce = struct::get("kitchen_door_node");
   var_458d730c = util::spawn_model("tag_origin", var_6b28b1ce.origin, var_6b28b1ce.angles);
-  self linkto(var_458d730c);
-  var_e2316f6f linkto(var_458d730c);
-  var_458d730c rotateto(var_458d730c.angles + (0, 105, 0), 0.5);
-  playsoundatposition(#"hash_7480a28d0d9f00f6", (3496, 8079, -332));
+  self linkTo(var_458d730c);
+  var_e2316f6f linkTo(var_458d730c);
+  var_458d730c rotateTo(var_458d730c.angles + (0, 105, 0), 0.5);
+  playSoundAtPosition(#"hash_7480a28d0d9f00f6", (3496, 8079, -332));
   var_458d730c waittill(#"rotatedone");
   self unlink();
   var_e2316f6f unlink();
@@ -308,7 +308,7 @@ function open_kitchen_door() {
 
 function function_d75885b9(var_a276c861, var_19e802fa) {
   if(var_a276c861 || var_19e802fa) {
-    var_73888042 = getent("pizza_kitchen_door", "targetname");
+    var_73888042 = getEnt("pizza_kitchen_door", "targetname");
     var_73888042 open_kitchen_door();
     level flag::set(#"kitchen_door_open");
     level flag::set(#"hash_7c11e78fdf8aff43");
@@ -335,7 +335,7 @@ function function_4e808365() {
   e_activator flag::clear(#"hash_467e4279ccacfd8a");
   e_activator flag::set(#"hash_56cc1795fa5f8e21");
   util::spawn_model(self.model, self.origin, self.angles);
-  playsoundatposition(#"hash_2b489ac23b273781", self.origin + (0, 0, 5));
+  playSoundAtPosition(#"hash_2b489ac23b273781", self.origin + (0, 0, 5));
 }
 
 function function_56d84(e_player) {
@@ -352,7 +352,7 @@ function function_bb997270(var_a276c861, var_19e802fa) {
     level flag::set(#"hash_2dfa9988c9edb5dc");
     function_505b6d6d();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player flag::set(#"hash_56cc1795fa5f8e21");
     }
   }
@@ -417,7 +417,7 @@ function function_a32f14f8() {
 
     if(is_true(e_activator.var_87eb8981)) {
       zm_powerups::specific_powerup_drop(var_aa4f9213, var_53313495.origin - (0, 0, 28));
-      playsoundatposition(#"hash_f7813ab3479b297", var_53313495.origin);
+      playSoundAtPosition(#"hash_f7813ab3479b297", var_53313495.origin);
     } else {
       point = function_4ba8fde(var_aa4f9213);
       var_9e536071 = item_drop::drop_item(0, undefined, 1, 0, point.id, v_pos, var_53313495.angles, 0);
@@ -478,7 +478,7 @@ function function_a42c42c2() {
 }
 
 function function_f23f302d() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.var_72249004 === 0) {
       return true;
     }

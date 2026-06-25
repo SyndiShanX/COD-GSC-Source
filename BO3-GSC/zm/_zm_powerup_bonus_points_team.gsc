@@ -41,7 +41,7 @@ function bonus_points_team_powerup(item) {
   if(isDefined(level.bonus_points_powerup_override)) {
     points = [[level.bonus_points_powerup_override]]();
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!players[i] laststand::player_is_in_laststand() && !players[i].sessionstate == "spectator") {
       players[i] zm_score::player_add_points("bonus_points_powerup", points);

@@ -51,7 +51,7 @@ function skipto_apartment_igc_init(str_objective, b_starting) {
   battlechatter::function_d9f49fba(0);
   level.ai_bomber = spawner::simple_spawn_single("chase_bomber", &bomber_spawn_function);
   util::delay(2, undefined, &function_62976d31);
-  var_b2afdf94 = getent("nw_apt_breach_decals", "targetname");
+  var_b2afdf94 = getEnt("nw_apt_breach_decals", "targetname");
   var_b2afdf94 hide();
   apartment_breach();
   skipto::objective_completed(str_objective);
@@ -138,7 +138,7 @@ function function_241c1e7a(a_ents) {
   a_ents["apartment_igc_robot04"] ai::set_ignoreall(1);
   a_ents["apartment_igc_robot04"] ai::set_ignoreme(1);
   a_ents["apartment_igc_robot04"] setignorepauseworld(1);
-  var_b2afdf94 = getent("nw_apt_breach_decals", "targetname");
+  var_b2afdf94 = getEnt("nw_apt_breach_decals", "targetname");
   var_b2afdf94 show();
 }
 
@@ -711,7 +711,7 @@ function skipto_bridge_collapse_igc_init(str_objective, b_starting) {
 }
 
 function skipto_bridge_collapse_igc_done(str_objective, b_starting, b_direct, player) {
-  e_clip = getent("bridge_collapse_player_clip", "targetname");
+  e_clip = getEnt("bridge_collapse_player_clip", "targetname");
   if(isDefined(e_clip)) {
     e_clip delete();
   }
@@ -744,7 +744,7 @@ function function_cba88b2() {
 function function_28e6c236(a_ents) {
   level waittill("hash_741a928d");
   radiusdamage(a_ents["newworld_bridge_collapse_hunter"].origin, 850, 300, 20, level.ai_bomber, "MOD_EXPLOSIVE");
-  e_clip = getent("bridge_collapse_player_clip", "targetname");
+  e_clip = getEnt("bridge_collapse_player_clip", "targetname");
   if(isDefined(e_clip)) {
     e_clip delete();
   }
@@ -1124,11 +1124,11 @@ function function_205aeba5() {
   var_18252b2c = spawner::simple_spawn_single("chase_civilian_elevator1_4");
   var_18252b2c.var_a0f70d54 = level.ai_bomber;
   var_7545bc63 = array(var_a61dbbf1, var_cc20365a, var_f222b0c3, var_18252b2c);
-  e_elevator = getent("station_elevator_01", "targetname");
+  e_elevator = getEnt("station_elevator_01", "targetname");
   e_elevator.origin = e_elevator.origin + vectorscale((0, 0, 1), 274);
   e_elevator setmovingplatformenabled(1);
-  e_door_left = getent("station_elevator_door_top_left", "targetname");
-  e_door_right = getent("station_elevator_door_top_right", "targetname");
+  e_door_left = getEnt("station_elevator_door_top_left", "targetname");
+  e_door_right = getEnt("station_elevator_door_top_right", "targetname");
   e_door_left movey(38, 0.25);
   e_door_right movey(-38, 0.25);
   s_scene = struct::get("chase_train_elevator1", "targetname");
@@ -1157,7 +1157,7 @@ function function_465d660e() {
   var_18252b2c = spawner::simple_spawn_single("chase_civilian_elevator2_4");
   var_18252b2c.var_a0f70d54 = level.ai_bomber;
   var_7545bc63 = array(var_a61dbbf1, var_cc20365a, var_f222b0c3, var_18252b2c);
-  e_elevator = getent("station_elevator_02", "targetname");
+  e_elevator = getEnt("station_elevator_02", "targetname");
   e_elevator.origin = e_elevator.origin + vectorscale((0, 0, 1), 224);
   e_elevator setmovingplatformenabled(1);
   s_scene = struct::get("chase_train_elevator2", "targetname");
@@ -1169,8 +1169,8 @@ function function_543d2dbf(e_elevator, var_7545bc63, s_scene) {
   level waittill("hash_b112b97b");
   e_elevator movez(70, 2);
   e_elevator waittill("movedone");
-  e_door_left = getent("chase_elevator_2_door_upper_left", "targetname");
-  e_door_right = getent("chase_elevator_2_door_upper_right", "targetname");
+  e_door_left = getEnt("chase_elevator_2_door_upper_left", "targetname");
+  e_door_right = getEnt("chase_elevator_2_door_upper_right", "targetname");
   e_door_left movex(38, 0.25);
   e_door_right movex(-38, 0.25);
   e_door_right waittill("movedone");
@@ -1202,7 +1202,7 @@ function function_a7ce33a6(str_objective, b_starting) {
     level.var_ebe3b234 = 1;
     level.ai_bomber = spawner::simple_spawn_single("chase_bomber", &bomber_spawn_function);
     function_f423f05a(str_objective);
-    e_clip = getent("train_ped_blocker_clip", "targetname");
+    e_clip = getEnt("train_ped_blocker_clip", "targetname");
     e_clip delete();
     exploder::exploder_stop("cin_new_05_01_sun_on");
     level flag::init("chase_train_move");
@@ -1314,7 +1314,7 @@ function teleport_hall_at_slide() {
   nd_hall_goto = getnode("teleport_hall_at_slide_node", "targetname");
   level.ai_hall newworld_util::function_d0aa2f4f();
   level notify("hash_de039dbd");
-  level.ai_hall stopanimscripted();
+  level.ai_hall stopanimScripted();
   level scene::stop("cin_new_06_01_chase_vign_hall_traversal_train");
   level scene::stop("cin_new_06_01_chase_vign_hall_traversal_rooftops");
   level.ai_hall forceteleport(nd_hall_goto.origin, nd_hall_goto.angles, 0, 1);
@@ -1406,11 +1406,11 @@ function skipto_glass_ceiling_igc_done(str_objective, b_starting, b_direct, play
   level notify("hash_3d00ae0c");
   callback::remove_on_disconnect(&function_25e57b80);
   function_b83ef318();
-  e_door = getent("chase_door_breach", "targetname");
+  e_door = getEnt("chase_door_breach", "targetname");
   if(isDefined(e_door)) {
     e_door delete();
   }
-  e_glass = getent("newworld_chase_window_break_", "targetname");
+  e_glass = getEnt("newworld_chase_window_break_", "targetname");
   if(isDefined(e_glass)) {
     e_glass delete();
   }
@@ -1420,9 +1420,9 @@ function skipto_glass_ceiling_igc_done(str_objective, b_starting, b_direct, play
   scene::stop("p7_fxanim_gp_wasp_tower_arms_03_bundle", 1);
   scene::stop("p7_fxanim_gp_wasp_tower_arms_04_bundle", 1);
   scene::stop("p7_fxanim_cp_newworld_chase_wasp_billboard_bundle", 1);
-  e_clip = getent("chase_wasp_billboard_clip", "targetname");
+  e_clip = getEnt("chase_wasp_billboard_clip", "targetname");
   e_clip delete();
-  var_b2afdf94 = getent("nw_apt_breach_decals", "targetname");
+  var_b2afdf94 = getEnt("nw_apt_breach_decals", "targetname");
   var_b2afdf94 delete();
   objectives::set("cp_level_newworld_underground_locate_terrorist");
   function_776190fe();
@@ -1505,7 +1505,7 @@ function glass_ceiling_igc() {
   scene::add_scene_func("cin_new_09_01_glassceiling_1st_tackle_part02", &function_47edd0a5);
   scene::add_scene_func("p7_fxanim_cp_newworld_chase_glass_roof_bundle", &function_920e3893, "play");
   level thread function_bc6c3aa5();
-  var_5b5cfed1 = getent("start_glass_ceiling_igc", "targetname");
+  var_5b5cfed1 = getEnt("start_glass_ceiling_igc", "targetname");
   level.var_f2a5cb1e = var_5b5cfed1;
   while(true) {
     var_5b5cfed1 waittill("trigger", ent);
@@ -1692,7 +1692,7 @@ function function_c2c5155b() {
   }
   level flag::set("bridge_collapse_vo_started");
   level.ai_hall dialog::say("hall_our_boy_s_hacking_th_0", 0.5);
-  playsoundatposition("amb_train_horn_distant", (-10536, -23636, 10075));
+  playSoundAtPosition("amb_train_horn_distant", (-10536, -23636, 10075));
   level dialog::player_say("plyr_he_s_running_scared_0", 0.5);
   level.ai_hall dialog::say("hall_you_re_a_smart_one_n_0", 0.25);
   level flag::set("bridge_collapse_vo_complete");
@@ -2082,7 +2082,7 @@ function bomber_chase_path(str_objective) {
     level thread scene::stop("cin_new_08_01_rooftops_vign_encounter110");
     function_c2f8c75f();
     level thread scene::play("cin_new_08_01_rooftops_vign_encounter120");
-    var_5b5cfed1 = getent("start_glass_ceiling_igc", "targetname");
+    var_5b5cfed1 = getEnt("start_glass_ceiling_igc", "targetname");
     level.var_f2a5cb1e = var_5b5cfed1;
   }
 }
@@ -2186,7 +2186,7 @@ function function_480f8035() {
 
 function function_d212a60d(a_ents) {
   level waittill("hash_b1604833");
-  ai_civ = getent("robot_hits_civ_scene_civ_ai", "targetname");
+  ai_civ = getEnt("robot_hits_civ_scene_civ_ai", "targetname");
   if(isDefined(ai_civ)) {
     ai_civ clientfield::set("derez_ai_deaths", 1);
   }
@@ -2205,7 +2205,7 @@ function function_65fe4a2f(a_ents) {
     }
   }
   if(isDefined(ai_robot) && isalive(ai_robot)) {
-    e_goalvolume = getent("chase_bar_balcony_goalvolume", "targetname");
+    e_goalvolume = getEnt("chase_bar_balcony_goalvolume", "targetname");
     ai_robot setgoal(e_goalvolume, 1);
   }
 }
@@ -2343,7 +2343,7 @@ function function_c24ce0f9(a_s_teleports) {
       self enableinvulnerability();
       self ghost();
       self util::freeze_player_controls(1);
-      self setorigin(s_spot.origin);
+      self setOrigin(s_spot.origin);
       self setplayerangles(s_spot.angles);
       self clientfield::increment_to_player("postfx_igc");
       util::wait_network_frame();
@@ -2452,9 +2452,9 @@ function function_93cf0e75(n_id) {
     s_scene scene::skipto_end();
   }
   for(i = 1; i < 5; i++) {
-    var_608b08b0 = getent(((("wasp_tower_arms_0" + i) + "_wasp_0") + i) + "_a", "targetname");
+    var_608b08b0 = getEnt(((("wasp_tower_arms_0" + i) + "_wasp_0") + i) + "_a", "targetname");
     var_608b08b0 delete();
-    var_d29277eb = getent(((("wasp_tower_arms_0" + i) + "_wasp_0") + i) + "_b", "targetname");
+    var_d29277eb = getEnt(((("wasp_tower_arms_0" + i) + "_wasp_0") + i) + "_b", "targetname");
     var_d29277eb delete();
   }
 }
@@ -2508,15 +2508,15 @@ function function_ce2ec89f(a_ents) {
   level notify("hash_fb8f6850");
   switch (self.targetname) {
     case "chase_wasp_tower_1_arms": {
-      e_goalvolume = getent("wasp_tower_1_goalvolume", "targetname");
+      e_goalvolume = getEnt("wasp_tower_1_goalvolume", "targetname");
       break;
     }
     case "chase_wasp_tower_2_arms": {
-      e_goalvolume = getent("wasp_tower_2_goalvolume", "targetname");
+      e_goalvolume = getEnt("wasp_tower_2_goalvolume", "targetname");
       break;
     }
     case "chase_wasp_tower_3_arms": {
-      e_goalvolume = getent("wasp_tower_3_goalvolume", "targetname");
+      e_goalvolume = getEnt("wasp_tower_3_goalvolume", "targetname");
       break;
     }
     default: {
@@ -2544,13 +2544,13 @@ function function_f489203(a_ents) {
 
 function function_2ac6fe38() {
   scene::init("p7_fxanim_cp_newworld_chase_wasp_billboard_bundle");
-  e_clip = getent("chase_wasp_billboard_clip", "targetname");
+  e_clip = getEnt("chase_wasp_billboard_clip", "targetname");
   e_clip notsolid();
 }
 
 function function_de250dc9() {
   level waittill("hash_ab14955f");
-  ai_wasp = getent("billboard_fxanim_rocket_wasp", "targetname");
+  ai_wasp = getEnt("billboard_fxanim_rocket_wasp", "targetname");
   ai_wasp util::magic_bullet_shield();
   ai_wasp.cybercomtargetstatusoverride = 0;
   ai_wasp.nocybercom = 1;
@@ -2559,7 +2559,7 @@ function function_de250dc9() {
   e_target.health = 100;
   ai_wasp thread ai::shoot_at_target("shoot_until_target_dead", e_target);
   ai_wasp thread function_f85e3014(e_target);
-  t_damage = getent("fxanim_billboard_damage_trigger", "targetname");
+  t_damage = getEnt("fxanim_billboard_damage_trigger", "targetname");
   t_damage thread function_797186a5(ai_wasp);
   level waittill("hash_828a35af");
   level thread function_f4151d2d();
@@ -2588,9 +2588,9 @@ function function_797186a5(ai_wasp) {
 
 function function_f4151d2d() {
   level waittill("hash_ae133e20");
-  e_clip = getent("chase_wasp_billboard_clip", "targetname");
+  e_clip = getEnt("chase_wasp_billboard_clip", "targetname");
   e_clip solid();
-  var_a80eedb1 = getent("chase_billboard_fxanim_damage_trigger", "targetname");
+  var_a80eedb1 = getEnt("chase_billboard_fxanim_damage_trigger", "targetname");
   a_ai = getaiarray();
   a_all_actors = arraycombine(a_ai, level.players, 1, 0);
   foreach(e_actor in a_all_actors) {
@@ -2616,7 +2616,7 @@ function glass_breaker() {
 function function_4cd03714(str_trigger_name, var_37713607, var_4b204b1c, str_flag_name, var_10057083, b_reverse = 0, b_timeout = 0, var_76f5cbe9 = 0) {
   level endon("hash_bdb23e9d");
   level flag::init(str_trigger_name);
-  t_trigger = getent(str_trigger_name, "targetname");
+  t_trigger = getEnt(str_trigger_name, "targetname");
   if(isDefined(t_trigger)) {
     trigger::wait_till(str_trigger_name);
   } else {
@@ -2639,7 +2639,7 @@ function function_4cd03714(str_trigger_name, var_37713607, var_4b204b1c, str_fla
   }
   var_7af45315[0] = var_5ae02fb7;
   var_934a157 = struct::get(var_4b204b1c, "targetname");
-  var_e5a4a905 = getent(var_37048efd.target, "targetname");
+  var_e5a4a905 = getEnt(var_37048efd.target, "targetname");
   if(var_37713607 == "train_station_train_org") {
     level thread function_69747207();
   }
@@ -2668,7 +2668,7 @@ function function_4cd03714(str_trigger_name, var_37713607, var_4b204b1c, str_fla
       var_3ebf068e.script_noteworthy = "chase_train";
       var_3ebf068e playLoopSound("amb_train_engine");
       var_7af45315[var_7af45315.size] = var_3ebf068e;
-      playsoundatposition("amb_train_fades_away", (-12413, -25844, 9837));
+      playSoundAtPosition("amb_train_fades_away", (-12413, -25844, 9837));
       if(var_76f5cbe9) {
         var_3ebf068e thread function_db738b68();
       }
@@ -2711,16 +2711,16 @@ function function_db738b68() {
 }
 
 function function_69747207() {
-  var_668efd10 = getent("train_station_gate_old_side", "targetname");
+  var_668efd10 = getEnt("train_station_gate_old_side", "targetname");
   var_668efd10 movez(-340, 0.5);
-  var_d8966c4b = getent("train_station_gate_modern_side", "targetname");
+  var_d8966c4b = getEnt("train_station_gate_modern_side", "targetname");
   var_d8966c4b movez(-340, 0.5);
 }
 
 function function_4332c4dc(var_7af45315) {
   if(!level flag::get("train_station_start_gate_closed")) {
-    var_668efd10 = getent("train_station_gate_old_side", "targetname");
-    t_start = getent("train_station_spawn_closet", "targetname");
+    var_668efd10 = getEnt("train_station_gate_old_side", "targetname");
+    t_start = getEnt("train_station_spawn_closet", "targetname");
     var_6d7bb3d1 = 1;
     foreach(e_train in var_7af45315) {
       if(e_train istouching(t_start)) {
@@ -2734,8 +2734,8 @@ function function_4332c4dc(var_7af45315) {
     }
   }
   if(!level flag::get("train_station_end_gate_closed")) {
-    var_d8966c4b = getent("train_station_gate_modern_side", "targetname");
-    var_e5a4a905 = getent("train_station_end_closet", "targetname");
+    var_d8966c4b = getEnt("train_station_gate_modern_side", "targetname");
+    var_e5a4a905 = getEnt("train_station_end_closet", "targetname");
     var_fe4ad5ca = 1;
     foreach(e_train in var_7af45315) {
       if(e_train istouching(var_e5a4a905)) {
@@ -2768,13 +2768,13 @@ function function_dfd78ed7() {
 function function_b02cee6() {
   level flag::wait_till("train_station_end_gate_closed");
   level clientfield::set("chase_pedestrian_blockers", 0);
-  e_clip = getent("train_ped_blocker_clip", "targetname");
+  e_clip = getEnt("train_ped_blocker_clip", "targetname");
   e_clip delete();
 }
 
 function function_c9af9d76(var_10057083) {
   level endon("rooftops_terminate");
-  t_rumble = getent(var_10057083, "targetname");
+  t_rumble = getEnt(var_10057083, "targetname");
   while(level flag::get("chase_train_move")) {
     t_rumble waittill("trigger", ent);
     if(isPlayer(ent) && (!(isDefined(ent.var_c9af9d76) && ent.var_c9af9d76))) {

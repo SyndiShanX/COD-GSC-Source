@@ -1433,7 +1433,7 @@ function limited_weapon_below_quota(weapon, ignore_player) {
       upgradedweapon = level.zombie_weapons[weapon].upgrade;
     }
 
-    players = getplayers();
+    players = getPlayers();
     count = 0;
     limit = level.limited_weapons[weapon];
 
@@ -1965,7 +1965,7 @@ function get_weapon_hint_ammo() {
 }
 
 function weapon_set_first_time_hint(cost, ammo_cost) {
-  self sethintstring(get_weapon_hint_ammo());
+  self setHintString(get_weapon_hint_ammo());
 }
 
 function get_pack_a_punch_weapon_options(weapon) {
@@ -4138,7 +4138,7 @@ function function_8610a5cc(params) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     item = function_4ba8fde(hash(tokens[1]));
 
     if(isDefined(item)) {

@@ -107,7 +107,7 @@ function function_8cde51de() {
   flag::wait_till_all(var_7f5d5c6);
   level flag::set("dragon_wings_items_aquired");
   if(!level flag::get("dragon_platforms_all_used")) {
-    playsoundatposition("zmb_wearable_wing_success_step", (0, 0, 0));
+    playSoundAtPosition("zmb_wearable_wing_success_step", (0, 0, 0));
   }
 }
 
@@ -134,7 +134,7 @@ function function_1fc9779e() {
       level flag::set("dragon_platforms_all_used");
       callback::remove_on_connect(&function_1fc9779e);
       if(!level flag::get("dragon_wings_items_aquired")) {
-        playsoundatposition("zmb_wearable_wing_success_step", (0, 0, 0));
+        playSoundAtPosition("zmb_wearable_wing_success_step", (0, 0, 0));
       }
       return;
     }
@@ -146,7 +146,7 @@ function function_1a6de86e() {
   array::add(var_20843b0d, "dragon_wings_items_aquired", 0);
   array::add(var_20843b0d, "dragon_platforms_all_used", 0);
   level flag::wait_till_all(var_20843b0d);
-  playsoundatposition("zmb_wearable_wing_success", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_wing_success", (0, 0, 0));
   var_24f783f3 = struct::get("wearable_dragon_wings", "targetname");
   var_24f783f3.model = spawn("script_model", var_24f783f3.origin);
   var_24f783f3.model.angles = var_24f783f3.angles;
@@ -156,14 +156,14 @@ function function_1a6de86e() {
 
 function function_2c1e6f00(e_player) {
   if(e_player.var_e7d196cc === "dragon_wings") {
-    self sethintstring(&"ZM_STALINGRAD_WEARABLE_EQUIPPED");
+    self setHintString(&"ZM_STALINGRAD_WEARABLE_EQUIPPED");
     return false;
   }
   if(level flag::get("dragon_platforms_all_used") && level flag::get("dragon_wings_items_aquired")) {
-    self sethintstring(&"ZM_STALINGRAD_WEARABLE_WINGS_EQUIP");
+    self setHintString(&"ZM_STALINGRAD_WEARABLE_WINGS_EQUIP");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -222,10 +222,10 @@ function function_7e873fe6() {
 
 function function_9a167439(e_player) {
   if(e_player.var_e7d196cc === "dragon_wings") {
-    self sethintstring(&"ZM_STALINGRAD_WINGS_TRANSPORT");
+    self setHintString(&"ZM_STALINGRAD_WINGS_TRANSPORT");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -235,7 +235,7 @@ function function_cc32e7df() {
   s_pavlov_player = struct::get_array("s_pavlov_player", "targetname");
   n_player_number = self getentitynumber();
   self dontinterpolate();
-  self setorigin(s_pavlov_player[n_player_number].origin);
+  self setOrigin(s_pavlov_player[n_player_number].origin);
   self setplayerangles(s_pavlov_player[n_player_number].angles + vectorscale((0, 1, 0), 180));
   self notify("hash_2e47bc4a");
   level notify("hash_9a634383");
@@ -257,7 +257,7 @@ function function_42a9380e() {
     level.var_f090ed38.var_6755afc7++;
     if(level.var_f090ed38.var_6755afc7 >= level.var_f090ed38.var_68da43c3) {
       if(!level flag::get("wearables_raz_mask_complete")) {
-        playsoundatposition("zmb_wearable_raz_success_step", (0, 0, 0));
+        playSoundAtPosition("zmb_wearable_raz_success_step", (0, 0, 0));
       }
       level flag::set("wearables_raz_arms_complete");
     }
@@ -271,7 +271,7 @@ function function_ac75c48f() {
     level.var_f090ed38.var_8fefef40++;
     if(level.var_f090ed38.var_8fefef40 >= level.var_f090ed38.var_7c69aa76) {
       if(!level flag::get("wearables_raz_arms_complete")) {
-        playsoundatposition("zmb_wearable_raz_success_step", (0, 0, 0));
+        playSoundAtPosition("zmb_wearable_raz_success_step", (0, 0, 0));
       }
       level flag::set("wearables_raz_mask_complete");
     }
@@ -283,7 +283,7 @@ function function_69f1fce3() {
   array::add(var_17eaa53a, "wearables_raz_mask_complete", 0);
   array::add(var_17eaa53a, "wearables_raz_arms_complete", 0);
   level flag::wait_till_all(var_17eaa53a);
-  playsoundatposition("zmb_wearable_raz_success", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_raz_success", (0, 0, 0));
   var_94cd901e = struct::get("wearable_raz_hat", "targetname");
   var_94cd901e.model = spawn("script_model", var_94cd901e.origin);
   var_94cd901e.model.angles = var_94cd901e.angles;
@@ -292,14 +292,14 @@ function function_69f1fce3() {
 
 function function_449ba539(e_player) {
   if(e_player.var_e7d196cc === "raz_hat") {
-    self sethintstring(&"ZM_STALINGRAD_WEARABLE_EQUIPPED");
+    self setHintString(&"ZM_STALINGRAD_WEARABLE_EQUIPPED");
     return false;
   }
   if(level flag::get("wearables_raz_mask_complete") && level flag::get("wearables_raz_arms_complete")) {
-    self sethintstring(&"ZM_STALINGRAD_WEARABLE_RAZ_MASK_EQUIP");
+    self setHintString(&"ZM_STALINGRAD_WEARABLE_RAZ_MASK_EQUIP");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -333,7 +333,7 @@ function function_fe559f6c() {
     level.var_f090ed38.var_4da5ec78++;
     if(level.var_f090ed38.var_4da5ec78 >= level.var_f090ed38.var_e34dd99e) {
       if(!level flag::get("wearables_sentinel_camera_complete")) {
-        playsoundatposition("zmb_wearable_sent_success_step", (0, 0, 0));
+        playSoundAtPosition("zmb_wearable_sent_success_step", (0, 0, 0));
       }
       level flag::set("wearables_sentinel_arms_complete");
     }
@@ -347,7 +347,7 @@ function function_ba204ad8() {
     level.var_f090ed38.var_24859f92++;
     if(level.var_f090ed38.var_24859f92 >= level.var_f090ed38.var_10d3c700) {
       if(!level flag::get("wearables_sentinel_arms_complete")) {
-        playsoundatposition("zmb_wearable_sent_success_step", (0, 0, 0));
+        playSoundAtPosition("zmb_wearable_sent_success_step", (0, 0, 0));
       }
       level flag::set("wearables_sentinel_camera_complete");
     }
@@ -359,7 +359,7 @@ function function_14b98ab6() {
   array::add(var_830c4b35, "wearables_sentinel_camera_complete", 0);
   array::add(var_830c4b35, "wearables_sentinel_arms_complete", 0);
   level flag::wait_till_all(var_830c4b35);
-  playsoundatposition("zmb_wearable_sent_success", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_sent_success", (0, 0, 0));
   var_494ee1d1 = struct::get("wearable_sentinel_hat", "targetname");
   var_494ee1d1.model = spawn("script_model", var_494ee1d1.origin);
   var_494ee1d1.model.angles = var_494ee1d1.angles;
@@ -368,14 +368,14 @@ function function_14b98ab6() {
 
 function function_a6595bd6(e_player) {
   if(e_player.var_e7d196cc === "sentinel_hat") {
-    self sethintstring(&"ZM_STALINGRAD_WEARABLE_EQUIPPED");
+    self setHintString(&"ZM_STALINGRAD_WEARABLE_EQUIPPED");
     return false;
   }
   if(level flag::get("wearables_sentinel_arms_complete") && level flag::get("wearables_sentinel_camera_complete")) {
-    self sethintstring(&"ZM_STALINGRAD_WEARABLE_VALKYRIE_HAT_EQUIP");
+    self setHintString(&"ZM_STALINGRAD_WEARABLE_VALKYRIE_HAT_EQUIP");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -471,11 +471,11 @@ function function_19458e73() {
   level thread function_5e8bb6cc();
   level thread function_4052556b();
   level flag::wait_till_all(array("drshup_factory_rune_hit", "drshup_judicial_rune_hit", "drshup_library_rune_hit"));
-  playsoundatposition("zmb_dragshield_success_medium", (0, 0, 0));
+  playSoundAtPosition("zmb_dragshield_success_medium", (0, 0, 0));
   level flag::set("drshup_rune_step_done");
   callback::remove_on_connect(&function_70aa26aa);
   level flag::wait_till("drshup_bathed_in_flame");
-  playsoundatposition("zmb_dragshield_success_medium", (0, 0, 0));
+  playSoundAtPosition("zmb_dragshield_success_medium", (0, 0, 0));
   level.var_8f92a57b.var_3297395c = struct::get("drshup_quench_loc", "targetname");
   level.var_8f92a57b.var_3297395c zm_unitrigger::create_unitrigger("", 32, &function_cf47076, &function_ac90554d);
   level flag::wait_till("drshup_quest_done");
@@ -505,7 +505,7 @@ function function_a3232de(e_attacker) {
     if(level.var_8f92a57b.n_shield_kills >= level.var_8f92a57b.var_31e59fa8) {
       zm_spawner::deregister_zombie_death_event_callback(&function_a3232de);
       level flag::set("drshup_step_1_done");
-      playsoundatposition("zmb_dragshield_success_medium", (0, 0, 0));
+      playSoundAtPosition("zmb_dragshield_success_medium", (0, 0, 0));
     }
   }
 }
@@ -542,7 +542,7 @@ function function_70aa26aa() {
       if(var_8112eb05 > knockdown_range_squared) {
         break;
       }
-      v_normal = vectornormalize(var_cb78916d - var_7dda366c);
+      v_normal = vectorNormalize(var_cb78916d - var_7dda366c);
       dot = vectordot(forward_view_angles, v_normal);
       if(0 > dot) {
         break;
@@ -550,17 +550,17 @@ function function_70aa26aa() {
       s_rune.model delete();
       arrayremovevalue(level.var_8f92a57b.var_3ec0a9c2, s_rune);
       level flag::set(("drshup_" + s_rune.script_string) + "_rune_hit");
-      playsoundatposition("zmb_dragshield_success_small", (0, 0, 0));
+      playSoundAtPosition("zmb_dragshield_success_small", (0, 0, 0));
     }
   }
 }
 
 function function_cf47076(e_player) {
   if(!level flag::get("drshup_bathed_in_blood") && level flag::get("drshup_bathed_in_flame") && level flag::get("drshup_rune_step_done")) {
-    self sethintstring(&"ZM_STALINGRAD_SHIELD_UPGRADE");
+    self setHintString(&"ZM_STALINGRAD_SHIELD_UPGRADE");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -593,7 +593,7 @@ function function_771fddfa() {
   var_8df43d42 waittill("movedone");
   var_8df43d42 delete();
   level flag::set("drshup_quest_done");
-  playsoundatposition("zmb_dragshield_success_large", (0, 0, 0));
+  playSoundAtPosition("zmb_dragshield_success_large", (0, 0, 0));
 }
 
 function function_fa020cda() {

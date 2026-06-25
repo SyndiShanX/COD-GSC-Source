@@ -48,7 +48,7 @@ function function_1f275908(params) {
 function function_d9bd950c(params) {
   level endon(#"game_ended");
   waitframe(1);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(params.name == "<dev string:x38>");
   var_443e3ea5 = params.value;
   setDvar(#"hash_6e0caf373bd4af27", 0);
@@ -93,7 +93,7 @@ function private function_690435a2() {
 }
 
 function private function_5db7f789(params) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(params.name == "<dev string:x294>");
 
   if(params.value) {

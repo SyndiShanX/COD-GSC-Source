@@ -115,7 +115,7 @@ convoy_add_glow_shader() {
 police_sirens() {
   siren_ent = spawn("script_origin", self.origin);
   siren_ent playLoopSound("amb_cop_siren");
-  siren_ent linkto(self);
+  siren_ent linkTo(self);
   waittill_any("death", "delete", "kill_siren");
   siren_ent stoploopsound(1);
   siren_ent delete();
@@ -384,7 +384,7 @@ convoy_vehicle_think_van(node_or_string) {
   self.drivepath = 1;
   self thread go_path(nd_path);
   self ent_flag_set("is_moving");
-  s_check = getstruct("player_out_of_intro", "targetname");
+  s_check = getStruct("player_out_of_intro", "targetname");
 
   while(self.origin[0] < s_check.origin[0]) {
     wait 0.05;

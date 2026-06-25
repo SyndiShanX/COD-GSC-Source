@@ -250,7 +250,7 @@ spawndart(grenade, killstreak_id, spawn_origin) {
     params.ksdartacceleration = 35;
   }
 
-  dart = spawnvehicle(params.ksvehicle, spawn_origin, player_angles, "dynamic_spawn_ai");
+  dart = spawnVehicle(params.ksvehicle, spawn_origin, player_angles, "dynamic_spawn_ai");
 
   if(isDefined(dart)) {
     player killstreaks::play_killstreak_start_dialog("dart", player.team, killstreak_id);
@@ -561,7 +561,7 @@ leave_dart() {
       dart clientfield::set("vehicletransition", 0);
 
       if(isDefined(params.ksexplosionrumble)) {
-        owner playrumbleonentity(params.ksexplosionrumble);
+        owner playRumbleOnEntity(params.ksexplosionrumble);
       }
 
       owner vehicle::stop_monitor_missiles_locked_on_to_me();
@@ -579,7 +579,7 @@ leave_dart() {
       trace = physicstrace(dart.origin, dart.origin + moveamount, (size * -1, size * -1, size * -1), (size, size, size), undefined, 1);
       cam = spawn("script_model", trace[#"position"]);
       cam setModel(#"tag_origin");
-      cam linkto(dart);
+      cam linkTo(dart);
       dart setspeedimmediate(0);
       owner camerasetposition(cam.origin);
       owner camerasetlookat(dart.origin);

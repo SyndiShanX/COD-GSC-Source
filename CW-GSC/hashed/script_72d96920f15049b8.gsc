@@ -77,7 +77,7 @@ function function_5160bb1e(killstreaktype) {
   bundle = killstreaks::get_script_bundle("chopper_gunner");
   assert(isDefined(bundle));
   spawnpos = level.mapcenter + (0, bundle.var_42d6fcc1, bundle.var_4325e427);
-  level.chopper_gunner = spawnvehicle(bundle.ksvehicle, spawnpos, (0, 0, 0), "chopper_gunner");
+  level.chopper_gunner = spawnVehicle(bundle.ksvehicle, spawnpos, (0, 0, 0), "chopper_gunner");
   level.chopper_gunner.identifier_weapon = getweapon("chopper_gunner");
   level.chopper_gunner killstreaks::configure_team(killstreaktype, killstreak_id, self, "helicopter");
   level.chopper_gunner.killstreak_id = killstreak_id;
@@ -185,7 +185,7 @@ function function_5160bb1e(killstreaktype) {
         var_ceaada96 = distance2d(position, level.mapcenter);
 
         if(var_ceaada96 > clampdistance) {
-          tocenter = vectornormalize(level.mapcenter - position);
+          tocenter = vectorNormalize(level.mapcenter - position);
           tocenter = (tocenter[0], tocenter[1], 0);
           var_a338f16a = isDefined(level.var_782b91f2) ? level.var_782b91f2 : 1;
 
@@ -378,7 +378,7 @@ function function_294e90d4(ents) {
 }
 
 function function_4e4267e0(ents) {
-  ents[#"gunner"] linkto(level.chopper_gunner);
+  ents[#"gunner"] linkTo(level.chopper_gunner);
 }
 
 function init_shared() {
@@ -727,7 +727,7 @@ function function_77784598(einflictor, eattacker, idamage, idflags, smeansofdeat
         var_74d40edb = idamage getvelocity();
 
         if(lengthsquared(var_74d40edb) > sqr(50)) {
-          var_29edfc10 = vectornormalize(var_74d40edb);
+          var_29edfc10 = vectorNormalize(var_74d40edb);
           playFX(bundle.var_888a5ff7, shitloc, var_29edfc10, undefined, undefined, self.team);
         }
       }

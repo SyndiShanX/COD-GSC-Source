@@ -72,7 +72,7 @@ main() {
   level notify("start_drone_control_canopies");
   maps\createart\yemen_art::alleyway();
   level thread drone_control_ambient_fx();
-  level.salazar = getent("sp_salazar_ai", "targetname");
+  level.salazar = getEnt("sp_salazar_ai", "targetname");
   level.salazar thread handle_ai_hero_movement();
   level.salazar thread salazar_finish_level_color_trigger();
   level thread drone_control_morals_rail_vtol_go();
@@ -190,7 +190,7 @@ drone_control_threat_control_think() {
   e_turret thread drone_control_turret_death_cleanup();
   e_turret thread drone_control_turret_kill();
   e_turret endon("death");
-  t_street_trig = getent("trig_drone_control_street_exposed", "targetname");
+  t_street_trig = getEnt("trig_drone_control_street_exposed", "targetname");
 
   while(true) {
     t_street_trig trigger_wait();
@@ -264,7 +264,7 @@ terrorist_shot_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, 
 
 gauntlet_upper_left_terrorists_trigger(str_level_endon, str_category) {
   level endon(str_level_endon);
-  e_trigger = getent("gauntlet_upper_left_terrorists_trigger", "targetname");
+  e_trigger = getEnt("gauntlet_upper_left_terrorists_trigger", "targetname");
   e_trigger waittill("trigger");
   a_spawners = getEntArray("gauntlet_upper_left_terrorists_spawner", "targetname");
   simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 0, 0);
@@ -286,7 +286,7 @@ drone_control_cleanup() {
   flag_wait("drone_control_farmhouse_cleanup");
   spawn_manager_kill("farmhouse_terrorist_roof_trig");
   spawn_manager_kill("farmhouse_terrorist_trig");
-  e_turret = getent("guantlet_turret", "targetname");
+  e_turret = getEnt("guantlet_turret", "targetname");
   flag_clear("drone_control_player_override");
   e_turret.delete_on_death = 1;
   e_turret notify("death");
@@ -353,7 +353,7 @@ handle_ai_hero_movement() {
 
 salazar_finish_level_color_trigger() {
   self endon("death");
-  e_trigger = getent("set_salazar_finish_level_color_trigger", "targetname");
+  e_trigger = getEnt("set_salazar_finish_level_color_trigger", "targetname");
   e_trigger waittill("trigger");
   self set_force_color("r");
 }
@@ -419,7 +419,7 @@ setup_allied_quadrotors() {
 }
 
 drone_control_morals_rail_vtol_go() {
-  veh_vtol = getent("yemen_morals_rail_vtol_spawner", "targetname");
+  veh_vtol = getEnt("yemen_morals_rail_vtol_spawner", "targetname");
   nd_vtol_start = getvehiclenode("nd_drone_control_vtol_start", "targetname");
 }
 
@@ -489,7 +489,7 @@ allied_quadrotor_control() {
 _get_player_look_position() {
   v_eye_pos = level.player getEye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
+  v_player_eye = vectorNormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * randomfloatrange(400, 900);
   a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
   return a_trace["position"];
@@ -497,7 +497,7 @@ _get_player_look_position() {
 
 drone_control_fire_magic_rpgs_at_target(str_s_rpgs_name, str_s_rpg_target) {
   a_rpgs = getStructArray(str_s_rpgs_name, "targetname");
-  s_target = getstruct(str_s_rpg_target, "targetname");
+  s_target = getStruct(str_s_rpg_target, "targetname");
 
   foreach(s_rpg in a_rpgs) {
     magicbullet("usrpg_magic_bullet_sp", s_rpg.origin, s_target.origin);
@@ -519,12 +519,12 @@ drone_control_do_ambient_vtols(str_trig_name, str_struct, str_nd_name, str_flag_
 
 drone_control_splitpath_cliffside_ambient() {
   level endon("fxanim_bridge_explode_start");
-  s_gun1 = getstruct("s_hijacked_cliffside_magicbullet_gun1", "targetname");
-  s_gun1_target = getstruct(s_gun1.target, "targetname");
-  s_gun2 = getstruct("s_hijacked_cliffside_magicbullet_gun2", "targetname");
-  s_gun2_target = getstruct(s_gun2.target, "targetname");
-  s_gun3 = getstruct("s_hijacked_cliffside_magicbullet_gun3", "targetname");
-  s_gun3_target = getstruct(s_gun3.target, "targetname");
+  s_gun1 = getStruct("s_hijacked_cliffside_magicbullet_gun1", "targetname");
+  s_gun1_target = getStruct(s_gun1.target, "targetname");
+  s_gun2 = getStruct("s_hijacked_cliffside_magicbullet_gun2", "targetname");
+  s_gun2_target = getStruct(s_gun2.target, "targetname");
+  s_gun3 = getStruct("s_hijacked_cliffside_magicbullet_gun3", "targetname");
+  s_gun3_target = getStruct(s_gun3.target, "targetname");
 
   while(true) {
     for(i = 0; i < 60; i++) {

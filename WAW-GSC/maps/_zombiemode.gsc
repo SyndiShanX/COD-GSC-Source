@@ -199,7 +199,7 @@ add_no_ammo_dialog() {
 spawn_vo() {
   wait(1);
 
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size > 1) {
     player = random(players);
@@ -219,7 +219,7 @@ testing_spawner_bug() {
   level.round_number = 7;
 
   spawners = [];
-  spawners[0] = GetEnt("testy", "targetname");
+  spawners[0] = getEnt("testy", "targetname");
   while(1) {
     wait(1);
     level.enemy_spawns = spawners;
@@ -1157,7 +1157,7 @@ create_chalk_hud(x) {
 }
 play_intro_VO() {
   wait(3);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     index = maps\_zombiemode_weapons::get_player_index(players[i]);
     player_index = "plr_" + index + "_";
@@ -1933,13 +1933,13 @@ limp() {
 stumble(stumble_angles, stumble_time, recover_time, no_notify) {
   stumble_angles = self adjust_angles_to_player(stumble_angles);
 
-  self.ground_ref_ent RotateTo(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
+  self.ground_ref_ent rotateTo(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
   self.ground_ref_ent waittill("rotatedone");
 
   base_angles = (RandomFloat(4) - 4, RandomFloat(5), 0);
   base_angles = self adjust_angles_to_player(base_angles);
 
-  self.ground_ref_ent RotateTo(base_angles, recover_time, 0, (recover_time / 2));
+  self.ground_ref_ent rotateTo(base_angles, recover_time, 0, (recover_time / 2));
   self.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(no_notify)) {
@@ -1972,7 +1972,7 @@ coop_player_spawn_placement() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(structs[i].origin);
+    players[i] setOrigin(structs[i].origin);
     players[i] setplayerangles(structs[i].angles);
     players[i].spectator_respawn = structs[i];
   }
@@ -2311,7 +2311,7 @@ player_intermission() {
           org = spawn("script_origin", self.origin + (0, 0, -60));
         }
 
-        self LinkTo(org, "", (0, 0, -60), (0, 0, 0));
+        self linkTo(org, "", (0, 0, -60), (0, 0, 0));
         self SetPlayerAngles(points[i].angles);
         org.origin = points[i].origin;
 
@@ -2320,7 +2320,7 @@ player_intermission() {
           speed = points[i].speed;
         }
 
-        target_point = getstruct(points[i].target, "targetname");
+        target_point = getStruct(points[i].target, "targetname");
         dist = Distance(points[i].origin, target_point.origin);
         time = dist / speed;
 
@@ -2332,7 +2332,7 @@ player_intermission() {
         self.game_over_bg FadeOverTime(q_time);
         self.game_over_bg.alpha = 0;
 
-        org MoveTo(target_point.origin, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
         wait(time - q_time);
 
         self.game_over_bg FadeOverTime(q_time);
@@ -2405,7 +2405,7 @@ check_to_kill_near_origin(player1, player2) {
 
 check_for_jugg_perk() {
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(players[i] hasperk("specialty_armorvest") && !isDefined(players[i].is_burning) && !is_magic_bullet_shield_enabled(players[i])) {} {
         if(!flag("dog_round")) {

@@ -12,7 +12,7 @@ init() {
   level._effect["white_phosphorus_screen"] = loadfx("vfx/iw8_mp/killstreak/vfx_white_phosphorus_screen.vfx");
   level._id_0F6C = [];
   level._id_0F6B = [];
-  level._id_10E0A = getent("white_phosphorus_damage", "targetname");
+  level._id_10E0A = getEnt("white_phosphorus_damage", "targetname");
 }
 
 _id_10F9E() {
@@ -286,7 +286,7 @@ _id_10F62(var_0) {
   var_7 = 30;
   self.owner thread _id_10F92(var_0, var_7);
   self.owner thread _id_10F99(var_0);
-  self moveto(var_2, var_3);
+  self moveTo(var_2, var_3);
   self setscriptablepartstate("bodyFX", "on", 0);
   self _meth_82CB("mp_suniform25_flyin");
   thread _id_10F64();
@@ -394,9 +394,9 @@ _id_10F79(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_1 = var_1 - var_2 * 3500;
   var_4 = var_1 - var_2 * 1000;
-  self moveto(var_1, var_0 + 3);
+  self moveTo(var_1, var_0 + 3);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0 + 2);
-  self moveto(var_4, 3);
+  self moveTo(var_4, 3);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_3);
   self delete();
 }

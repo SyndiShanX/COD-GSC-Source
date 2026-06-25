@@ -96,8 +96,8 @@ watchplayerconnect() {
 
 toggleocean() {
   var_00 = getEntArray("ocean", "targetname");
-  var_01 = getent("ocean_disable", "targetname");
-  var_02 = getent("ocean_enable", "targetname");
+  var_01 = getEnt("ocean_disable", "targetname");
+  var_02 = getEnt("ocean_enable", "targetname");
   level endon("game_ended");
   self endon("disconnect");
   common_scripts\utility::func_F71(var_00, ::showtoclient, self);
@@ -167,7 +167,7 @@ func_54D7() {
   var_01 = level.var_54D0["allies"].var_1D;
   var_02 = level.var_54D0["allies"].var_8097;
   var_03 = lib_0502::func_4627(game["attackers"]);
-  var_04 = getent("allies_intro_blocker", "targetname");
+  var_04 = getEnt("allies_intro_blocker", "targetname");
   if(isDefined(var_04)) {
     var_04 method_805C();
   }
@@ -457,8 +457,8 @@ func_54D3() {
         level.bucket02 = spawn("script_model", var_01.var_116);
         level.bucket01 setModel("npc_usa_m1919_higgins_bucket_turret");
         level.bucket02 setModel("npc_usa_m1919_higgins_bucket_turret");
-        level.bucket01 linkto(var_01, "TAG_TURRET_R", (0, 2, -8), (0, 0, 0));
-        level.bucket02 linkto(var_01, "TAG_TURRET_L", (0, -2, -8), (0, 0, 0));
+        level.bucket01 linkTo(var_01, "TAG_TURRET_R", (0, 2, -8), (0, 0, 0));
+        level.bucket02 linkTo(var_01, "TAG_TURRET_L", (0, -2, -8), (0, 0, 0));
         continue;
       }
 
@@ -504,7 +504,7 @@ func_54E1() {
   var_04 setcostumemodels([2, 1, 2, 2, 2, 0], "axis");
   var_04 method_8495("mp_raids_normandy_axis_start_npc_shot_01", var_00, var_01);
   var_05 = spawn("weapon_mp40_mp", (0, 0, 0), 1);
-  var_05 linkto(var_04, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_05 linkTo(var_04, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   var_03[var_03.size] = var_05;
   level.shot_soldier = [];
   level.shot_soldier["soldier"] = var_04;
@@ -744,7 +744,7 @@ func_6C8D() {
     }
 
     var_0C = spawn("weapon_" + var_0B, (0, 0, 0), 1);
-    var_0C linkto(var_0A, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_0C linkTo(var_0A, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_06[var_06.size] = var_0C;
     var_0A method_8495(var_07[var_09], var_01, var_02);
     var_05[var_05.size] = var_0A;
@@ -766,7 +766,7 @@ func_6C8D() {
 
     if(var_09 != 8) {
       var_0C = spawn("weapon_" + var_0B, (0, 0, 0), 1);
-      var_0C linkto(var_10, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_0C linkTo(var_10, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_06[var_06.size] = var_0C;
     }
 
@@ -947,7 +947,7 @@ func_6C94() {
     var_29 method_8495(var_28, var_01, var_02);
     var_25[var_25.size] = var_29;
     var_2A = spawn("weapon_m1garand_mp", (0, 0, 0), 1);
-    var_2A linkto(var_29, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_2A linkTo(var_29, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_24[var_24.size] = var_2A;
   }
 
@@ -1489,7 +1489,7 @@ func_6368() {
       var_06 = getEntArray(var_05.var_1A2, "targetname");
       if(var_06.size) {
         foreach(var_08 in var_06) {
-          var_08 linkto(var_05);
+          var_08 linkTo(var_05);
         }
       }
     }
@@ -1510,7 +1510,7 @@ func_6368() {
     level.var_15CD++;
     foreach(var_05 in var_03) {
       if(var_0B == var_05.var_81E1) {
-        var_05 moveto(var_05.var_92F0, 3, 1, 1);
+        var_05 moveTo(var_05.var_92F0, 3, 1, 1);
       }
     }
   }
@@ -1545,10 +1545,10 @@ func_1BB2() {
 }
 
 func_7F97() {
-  var_00 = getent("counter_tank", "targetname");
-  var_01 = getent("counter_tank", "targetname");
+  var_00 = getEnt("counter_tank", "targetname");
+  var_01 = getEnt("counter_tank", "targetname");
   level.ddaytank = func_2A3A(var_01);
-  var_02 = getent("tank_turret_trigger", "targetname");
+  var_02 = getEnt("tank_turret_trigger", "targetname");
   level.ddaytank thread func_2A3B(var_02, game["defenders"]);
   if(isDefined(level.ddaytank.var_9EDD)) {
     level.ddaytank.var_9EDD thread lib_0504::func_9F9B(game["defenders"]);
@@ -1701,15 +1701,15 @@ func_2A3A(param_00) {
 func_2A3B(param_00, param_01) {
   param_00 endon("death");
   param_00 makeunusable();
-  param_00 enablelinkto();
+  param_00 enablelinkTo();
   param_00 method_83EF();
-  param_00 sethintstring(&"RAIDS_USE_TANK_TURRET");
-  param_00 setcursorhint("HINT_NOICON");
+  param_00 setHintString(&"RAIDS_USE_TANK_TURRET");
+  param_00 setCursorHint("HINT_NOICON");
   if(!isDefined(self.var_9EDD)) {
     return;
   }
 
-  param_00 linkto(self);
+  param_00 linkTo(self);
   param_00.var_9EDD = self.var_9EDD;
   param_00 thread lib_0504::func_9F9B(param_01);
   param_00.var_6DB2 = param_01;
@@ -1767,7 +1767,7 @@ func_90B7() {
   foreach(var_02 in var_00) {
     var_03 = spawn("script_model", self.var_116);
     var_03 setModel("usa_bomber_b17_raid");
-    var_03 moveto(common_scripts\utility::func_46B5(self.var_1A2, "targetname").var_116, 20);
+    var_03 moveTo(common_scripts\utility::func_46B5(self.var_1A2, "targetname").var_116, 20);
     wait(20);
     var_03 delete();
   }

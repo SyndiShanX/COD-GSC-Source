@@ -106,7 +106,7 @@ func_6CE4(var_0, var_1, var_2, var_3) {
   self notify("used");
   var_4 = (0, var_2, 0);
   var_5 = 12000;
-  var_6 = getent("airstrikeheight", "targetname");
+  var_6 = getEnt("airstrikeheight", "targetname");
   var_7 = var_6.origin[2];
   var_8 = level.var_8D96[randomint(level.var_8D96.size)];
   var_9 = var_8.origin;
@@ -124,7 +124,7 @@ func_6CDF(var_0, var_1, var_2, var_3) {
   self notify("used");
   var_4 = (0, var_2, 0);
   var_5 = 12000;
-  var_6 = getent("airstrikeheight", "targetname");
+  var_6 = getEnt("airstrikeheight", "targetname");
   var_7 = var_6.origin[2];
   var_8 = level.var_8D96[randomint(level.var_8D96.size)];
   var_9 = var_8.origin;
@@ -264,7 +264,7 @@ func_4983(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_8 = var_6.origin + (anglesToForward(var_6.angles) * -200 + anglestoright(var_6.angles) * -200) + (0, 0, 200);
     var_6.killcament = spawn("script_model", var_8);
     var_6.killcament setscriptmoverkillcam("explosive");
-    var_6.killcament linkto(var_6, "tag_origin");
+    var_6.killcament linkTo(var_6, "tag_origin");
   }
 
   return var_6;
@@ -462,7 +462,7 @@ func_1AEB() {
 func_7DFC(var_0) {
   self endon("helicopter_removed");
   self endon("heightReturned");
-  var_1 = getent("airstrikeheight", "targetname");
+  var_1 = getEnt("airstrikeheight", "targetname");
 
   if(isDefined(var_1)) {
     var_2 = var_1.origin[2];
@@ -645,7 +645,7 @@ func_1B01(var_0, var_1) {
   self endon("helicopter_removed");
   self endon("leaving");
   var_0 endon("death");
-  self setturrettargetent(var_0);
+  self setturrettargetEnt(var_0);
   self setlookatent(var_0);
   thread func_1155A(var_0);
   var_2 = 6;

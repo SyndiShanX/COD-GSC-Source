@@ -62,7 +62,7 @@ mig29_wait_fire_missile() {
   maps\_utility::ent_flag_wait("fire_missile");
 
   if(isDefined(self.script_parameters)) {
-    var_0 = getent(self.script_parameters, "targetname");
+    var_0 = getEnt(self.script_parameters, "targetname");
     thread mig29_fire_missiles(var_0);
   } else
     thread mig29_fire_missiles();
@@ -72,7 +72,7 @@ mig29_wait_fire_missile() {
 
 mig29_missile_set_target(var_0) {
   wait 0.2;
-  self missile_settargetent(var_0);
+  self missile_settargetEnt(var_0);
 
   if(isDefined(var_0.godmode) && var_0.godmode == 1) {
     var_0 maps\_vehicle::godoff();

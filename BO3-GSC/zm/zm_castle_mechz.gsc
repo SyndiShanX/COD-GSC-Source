@@ -169,7 +169,7 @@ function enable_mechz_rounds() {
 
 function mechz_health_increases() {
   if(!isDefined(level.mechz_last_spawn_round) || level.round_number > level.mechz_last_spawn_round) {
-    a_players = getplayers();
+    a_players = getPlayers();
     n_player_modifier = 1;
     switch (a_players.size) {
       case 0:

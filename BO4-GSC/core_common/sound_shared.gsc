@@ -53,11 +53,11 @@ loop_on_tag(alias, tag, bstopsoundondeath) {
   }
 
   if(isDefined(tag)) {
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -73,11 +73,11 @@ play_on_tag(alias, tag, ends_on_death) {
 
   if(isDefined(tag)) {
     org.origin = self gettagorigin(tag);
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playsoundwithnotify(alias, "sounddone");
@@ -114,11 +114,11 @@ loop_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);

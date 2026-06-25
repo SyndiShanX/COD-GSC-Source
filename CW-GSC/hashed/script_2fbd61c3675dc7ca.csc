@@ -355,7 +355,7 @@ function function_526b12c4(localclientnum, var_99c4ce87) {
 
   if(!var_99c4ce87 flag::get(#"stop") && isalive(ai_target)) {
     mdl_beam = util::spawn_model(localclientnum, #"tag_origin");
-    mdl_beam linkto(ai_target, "j_spine4");
+    mdl_beam linkTo(ai_target, "j_spine4");
     mdl_beam playSound(localclientnum, #"hash_52762fd483a6e3fa");
     mdl_beam.var_c7c0197d = mdl_beam playLoopSound(#"hash_48762d210569c49");
     beam::launch(var_b39864d6, "j_spine4", mdl_beam, "tag_origin", "beam9_zm_soo_drain_health", 1);

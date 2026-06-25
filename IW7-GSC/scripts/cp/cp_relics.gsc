@@ -1090,7 +1090,7 @@ scrambler_executevisuals(var_0) {
   var_1 setotherent(self);
   var_1 setscriptablepartstate("effects", "active", 0);
   var_2 = var_1.origin + anglesToForward(var_1.angles) * 256;
-  var_1 moveto(var_2, var_0);
+  var_1 moveTo(var_2, var_0);
   scripts\engine\utility::waittill_any_timeout(var_0, "last_stand", "death");
   if(isDefined(var_1)) {
     var_1 delete();
@@ -1784,7 +1784,7 @@ scoperadar_executevisuals(var_0, var_1) {
   var_0.fxent setotherent(var_0);
   var_0.fxent setscriptablepartstate("effects", "active", 0);
   var_2 = var_0.fxent.origin + anglesToForward(var_0.fxent.angles) * 1750;
-  var_0.fxent moveto(var_2, var_1);
+  var_0.fxent moveTo(var_2, var_1);
   var_0 scripts\engine\utility::waittill_any_timeout_no_endon_death(var_1, "last_stand", "death", "scope_radar_ads_out", "weapon_change", "unsetScopeRadar");
   if(isDefined(var_0.closestenemies)) {
     foreach(var_4 in var_0.closestenemies) {

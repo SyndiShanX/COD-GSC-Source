@@ -84,7 +84,7 @@ function_6b5dfd6c(localclientnum, playfx, var_484cae2, id, player) {
         player.var_c1c8ef9c[id].var_9d888717 = 1;
         player.var_c1c8ef9c[id].fxent = spawn(localclientnum, self.origin, "script_model");
         player.var_c1c8ef9c[id].fxent setModel("tag_origin");
-        player.var_c1c8ef9c[id].fxent linkto(self);
+        player.var_c1c8ef9c[id].fxent linkTo(self);
         player.var_c1c8ef9c[id].fx_id = function_239993de(localclientnum, #"hash_3235e29f5bf57d5a", player.var_c1c8ef9c[id].fxent, "tag_origin");
       } else {
         player.var_c1c8ef9c[id].var_9d888717 = 1;
@@ -95,7 +95,7 @@ function_6b5dfd6c(localclientnum, playfx, var_484cae2, id, player) {
         player.var_c1c8ef9c[id].var_9d888717 = 1;
         player.var_c1c8ef9c[id].fxent = spawn(localclientnum, self.origin, "script_model");
         player.var_c1c8ef9c[id].fxent setModel("tag_origin");
-        player.var_c1c8ef9c[id].fxent linkto(self);
+        player.var_c1c8ef9c[id].fxent linkTo(self);
         player.var_c1c8ef9c[id].fx_id = function_239993de(localclientnum, #"hash_3235e29f5bf57d5a", player.var_c1c8ef9c[id].fxent, "tag_origin");
       } else {
         player.var_c1c8ef9c[id].var_9d888717 = 1;

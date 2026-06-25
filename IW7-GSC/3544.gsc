@@ -58,7 +58,7 @@ func_CEE7(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     var_8 = spawn("script_model", var_7);
     var_8 setModel("tag_origin");
-    var_8 linkto(self, "tag_origin", (0, 0, 0), (90, 0, 0));
+    var_8 linkTo(self, "tag_origin", (0, 0, 0), (90, 0, 0));
     var_8 thread scripts\mp\utility::delayentdelete(var_2);
     for(;;) {
       playfxontagforclients(scripts\engine\utility::getfx(var_0), var_8, "tag_origin", var_6);

@@ -17,7 +17,7 @@ init() {
 }
 
 init_ee_vanishing_shore() {
-  var_0 = scripts\engine\utility::getstruct("s_instrument", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s_instrument", "targetname");
   var_0 thread play_string_sound();
   _id_0737::_id_C266("music_ee_interact", ::music_ee_interact_hint_func, ::on_music_ee_interact, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 64);
   _id_0737::addinteractionhinttypecallback("music_ee_interact", ::music_ee_interact_type);

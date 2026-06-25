@@ -388,7 +388,7 @@ _id_10CFF(var_0) {
 }
 
 _id_881E(var_0, var_1) {
-  var_2 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
+  var_2 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
 
@@ -1060,7 +1060,7 @@ _id_4327(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread _id_ABD9(var_0, var_1, var_2, var_3, var_5);
 
   if(!isai(self)) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -1438,9 +1438,9 @@ _id_8263() {
 _id_825F() {
   self.damage = spawnStruct();
   self.damage._id_7D55 = scripts\engine\utility::_id_E1E9();
-  self.damage._id_7D55 linkto(self);
+  self.damage._id_7D55 linkTo(self);
   self.damage._id_BE25 = scripts\engine\utility::_id_E1E9();
-  self.damage._id_BE25 linkto(self);
+  self.damage._id_BE25 linkTo(self);
   self.damage._id_0F59 = [];
   self.damage._id_01C4 = 0;
   self.damage._id_5B68 = 0;
@@ -1626,9 +1626,9 @@ _id_4324(var_0, var_1, var_2) {
 
 _id_4321(var_0, var_1, var_2) {
   if(var_1 > 0.4) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   } else {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
   }
 }
 
@@ -1955,9 +1955,9 @@ _id_4044(var_0, var_1, var_2) {
 }
 
 _id_6C5E(var_0) {
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = [];

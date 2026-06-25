@@ -43,7 +43,7 @@ function init() {
     log setModel("p7_zm_moo_data_reel");
     log thread zm_sidequests::fake_use("pickedup");
     log waittill("pickedup", who);
-    playsoundatposition("fly_log_pickup", who.origin);
+    playSoundAtPosition("fly_log_pickup", who.origin);
     who._has_log = 1;
     log delete();
     who zm_sidequests::add_sidequest_icon("sq", "datalog");

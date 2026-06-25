@@ -151,7 +151,7 @@ fx_init() {
 fx_origin_link_with_train_angles(var_0, var_1, var_2, var_3) {
   var_0 endon("stop_link_train_angles");
   self.origin = var_0 gettagorigin(var_2);
-  self linkto(var_0, var_2);
+  self linkTo(var_0, var_2);
   self endon("death");
 
   if(isDefined(var_3)) {
@@ -161,7 +161,7 @@ fx_origin_link_with_train_angles(var_0, var_1, var_2, var_3) {
   for(;;) {
     self unlink();
     self.angles = var_1 gettagangles("j_mainroot");
-    self linkto(var_0, var_2);
+    self linkTo(var_0, var_2);
     wait(level.timestep);
   }
 }
@@ -253,7 +253,7 @@ fx_playerview_pit_raindrops() {
   wait 0.2;
   common_scripts\utility::exploder("pit_lightning");
   playFXOnTag(common_scripts\utility::getfx("pit_raindrops"), level.view_particle_source_locked, "tag_origin");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_rog_ent, 0.5, 0.0, 0.05, 0.0, 5.0);
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_ent, 1.0, 0.0, 0.05, 0.0, 1.0);
   level waittill("notify_clean_pit");
@@ -274,7 +274,7 @@ fx_create_sunflare_source() {
     level.sunflare = spawn("script_model", (0, 0, 0));
     level.sunflare setModel("tag_origin");
     playFXOnTag(common_scripts\utility::getfx("sunflare_01"), level.sunflare, "tag_origin");
-    var_0 = vectornormalize((-0.119599, 0.881644, 0.509885));
+    var_0 = vectorNormalize((-0.119599, 0.881644, 0.509885));
 
     while(common_scripts\utility::flag("flag_endbeach_start") == 0) {
       level.sunflare.origin = level.player.origin + var_0 * 100000;
@@ -294,14 +294,14 @@ fx_create_sunflare_beach() {
     playFXOnTag(common_scripts\utility::getfx("sunflare_01"), level.sunflare, "tag_origin");
 
     if(maps\_utility::is_gen4()) {
-      var_0 = vectornormalize((0.0954011, 0.766644, 0.509885));
+      var_0 = vectorNormalize((0.0954011, 0.766644, 0.509885));
 
       for(;;) {
         level.sunflare.origin = level.player.origin + var_0 * 50000;
         common_scripts\utility::waitframe();
       }
     } else {
-      var_0 = vectornormalize((0.0954011, 0.731644, 0.509885));
+      var_0 = vectorNormalize((0.0954011, 0.731644, 0.509885));
 
       for(;;) {
         level.sunflare.origin = level.player.origin + var_0 * 30000;
@@ -361,8 +361,8 @@ fx_turnon_loco_exterior_lights() {
 }
 
 fx_turnon_loco_interior_lights() {
-  var_0 = getent("loco_breach_engine_1", "targetname");
-  var_1 = getent("loco_breach_engine_4", "targetname");
+  var_0 = getEnt("loco_breach_engine_1", "targetname");
+  var_1 = getEnt("loco_breach_engine_4", "targetname");
   playFXOnTag(common_scripts\utility::getfx("traincar_taillight"), var_0, "tag_light_r");
   playFXOnTag(common_scripts\utility::getfx("traincar_taillight"), var_1, "tag_light_l");
   playFXOnTag(common_scripts\utility::getfx("loco_enginelight"), var_1, "tag_light_illuminate");
@@ -380,14 +380,14 @@ fx_bridgefall(var_0, var_1) {
   var_7 = common_scripts\utility::spawn_tag_origin();
   var_8 = common_scripts\utility::spawn_tag_origin();
   var_9 = common_scripts\utility::spawn_tag_origin();
-  var_2 linkto(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
-  var_3 linkto(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
-  var_4 linkto(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
-  var_5 linkto(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
-  var_6 linkto(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
-  var_7 linkto(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
-  var_8 linkto(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
-  var_9 linkto(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_0, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_6 linkTo(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_7 linkTo(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_8 linkTo(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
+  var_9 linkTo(var_1, "tag_splash", (0, 0, 0), (0, 0, 0));
   var_10 = [var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9];
 
   foreach(var_12 in var_10) {
@@ -489,7 +489,7 @@ fx_sea_spray() {
 fx_sea_spray_player_effect() {
   wait 1.6;
   earthquake(0.28, 0.9, level.player.origin, 2000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_ent, 0.3, 0.0, 0.05, 0.0, 2.0);
 }
 
@@ -503,7 +503,7 @@ fx_swim_door_light() {
 }
 
 fx_underwater_amb_01() {
-  var_0 = getent("sea_floor_animated", "targetname");
+  var_0 = getEnt("sea_floor_animated", "targetname");
   playFXOnTag(common_scripts\utility::getfx("underwater_particulate cloud_01"), var_0, "tag_fx_outside_F");
   playFXOnTag(common_scripts\utility::getfx("underwater_particulate cloud_01"), var_0, "tag_fx_outside_FL");
   playFXOnTag(common_scripts\utility::getfx("underwater_particulate cloud_01"), var_0, "tag_fx_outside_FR");
@@ -582,7 +582,7 @@ fx_perif_fleet_mainguns() {
 fx_hesh_neck_cut() {
   var_0 = level._allies[0];
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0, "j_neck", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "j_neck", (0, 0, 0), (0, 0, 0));
   wait 1;
   playFXOnTag(common_scripts\utility::getfx("vfx_neck_slash"), var_1, "tag_origin");
 }

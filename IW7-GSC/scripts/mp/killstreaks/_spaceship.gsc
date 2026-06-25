@@ -148,7 +148,7 @@ func_1057F(var_0, var_1, var_2) {
 
 func_105C3() {
   if(!isDefined(level.var_105BB)) {
-    level.var_105BB = scripts\engine\utility::getstruct("player_safe_zone", "targetname");
+    level.var_105BB = scripts\engine\utility::getStruct("player_safe_zone", "targetname");
     level.var_105BB.origin = (0, 0, 0);
   }
 
@@ -756,7 +756,7 @@ func_10581(var_0, var_1, var_2) {
     return;
   }
 
-  var_1 setorigin(var_3);
+  var_1 setOrigin(var_3);
   var_1 setplayerangles(var_0.angles);
   func_105B6(var_0, var_1);
   thread func_1057E(var_0);
@@ -1066,7 +1066,7 @@ func_10576(var_0, var_1) {
   level endon("game_ended");
   var_1 endon("death");
   var_1 endon("disconnect");
-  var_2 = vectornormalize(var_1.origin - var_0.origin);
+  var_2 = vectorNormalize(var_1.origin - var_0.origin);
   var_3 = anglestoright(var_0.angles);
   var_4 = vectordot(var_2, var_3) > 0;
   if(!var_4) {
@@ -1092,10 +1092,10 @@ func_105B7(var_0, var_1, var_2, var_3) {
   var_4.angles = var_0.angles;
   var_4 setModel("tag_origin");
   var_0.var_A40D = 1;
-  var_0 playerlinkto(var_4, "tag_origin");
+  var_0 playerlinkTo(var_4, "tag_origin");
   var_5 = var_0 setcontents(0);
-  var_4 moveto(var_1, var_3, 0, 0);
-  var_4 rotateto(var_2, 0.25 * var_3, 0.05 * var_3, 0);
+  var_4 moveTo(var_1, var_3, 0, 0);
+  var_4 rotateTo(var_2, 0.25 * var_3, 0.05 * var_3, 0);
   wait(var_3);
   if(isDefined(var_0)) {
     var_0 setcontents(var_5);
@@ -1269,7 +1269,7 @@ func_105BA(var_0, var_1) {
       continue;
     }
 
-    var_4 = vectornormalize(var_2);
+    var_4 = vectorNormalize(var_2);
     thread func_105B9(var_0, var_1, "space_particles", var_4 * 256, 1);
     wait(0.1);
   }

@@ -103,7 +103,7 @@ friendly_stance_handler_check_mightbeseen(stances) {
 
 friendly_stance_handler_return_ai_sight(ai, stance) {
   vec1 = anglesToForward(ai.angles);
-  vec2 = vectornormalize(self.origin - ai.origin);
+  vec2 = vectorNormalize(self.origin - ai.origin);
 
   vecdot = vectordot(vec1, vec2);
 

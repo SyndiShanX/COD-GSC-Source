@@ -558,7 +558,7 @@ function private function_147224(entity, animation) {
     return false;
   }
 
-  entrypoint = midpoint + vectornormalize(entity.origin - midpoint) * length(localdeltahalfvector);
+  entrypoint = midpoint + vectorNormalize(entity.origin - midpoint) * length(localdeltahalfvector);
   entrypoint = entity function_fe8e7e36(entrypoint);
 
   if(entity maymovefrompointtopoint(entrypoint, midpoint, 1, 1, entity, 0.75)) {

@@ -440,7 +440,7 @@ function private function_20e100b4(entity, mocompanim, mocompanimblendouttime, m
   mocompanimflag animmode("zonly_physics");
   mocompanimflag.blockingpain = 1;
   health_multiplier = 1;
-  n_player_count = getplayers().size;
+  n_player_count = getPlayers().size;
   var_9385094f = n_player_count - 1;
 
   if(isDefined(self.var_b3c613a7) && isDefined(self.var_b3c613a7[var_9385094f])) {
@@ -501,7 +501,7 @@ function get_target_ent(entity) {
 
 function private function_ca603f82(forward_dir, var_d3db66ab, var_5107adf5, max_angle) {
   vec_to_enemy = var_5107adf5 - var_d3db66ab;
-  vec_to_enemy_normal = vectornormalize(vec_to_enemy);
+  vec_to_enemy_normal = vectorNormalize(vec_to_enemy);
   angle_to_enemy = vectordot(forward_dir, vec_to_enemy_normal);
 
   if(angle_to_enemy >= max_angle) {
@@ -533,7 +533,7 @@ function private function_4860f26d(var_ad2d46ff, var_e6e4425) {
   vec_to_enemy = function_ca603f82(anglesToForward(self.angles), var_d3db66ab, var_5107adf5, 0.7);
   angles_to_enemy = vectortoangles(vec_to_enemy);
   var_36dbf72a.angles = angles_to_enemy;
-  normal_vector = vectornormalize(vec_to_enemy);
+  normal_vector = vectorNormalize(vec_to_enemy);
   var_36dbf72a.var_d070aa8d = normal_vector;
   var_36dbf72a.knockdown_iterations = 0;
   var_36dbf72a thread function_8e224906(var_ad2d46ff);
@@ -602,9 +602,9 @@ function private function_edb8ac3f(var_ad2d46ff) {
   if(isDefined(self.var_d070aa8d)) {
     var_30c2c6c3 = function_3848e282(var_ad2d46ff);
     vector_to_target = var_30c2c6c3 - self.origin;
-    normal_vector = vectornormalize(vector_to_target);
-    var_700ba47b = vectornormalize((normal_vector[0], normal_vector[1], 0));
-    var_cb266a = vectornormalize((self.var_d070aa8d[0], self.var_d070aa8d[1], 0));
+    normal_vector = vectorNormalize(vector_to_target);
+    var_700ba47b = vectorNormalize((normal_vector[0], normal_vector[1], 0));
+    var_cb266a = vectorNormalize((self.var_d070aa8d[0], self.var_d070aa8d[1], 0));
     dot = vectordot(var_700ba47b, var_cb266a);
 
     if(dot >= 1) {
@@ -634,7 +634,7 @@ function private function_edb8ac3f(var_ad2d46ff) {
 
       new_vector *= ratio;
       new_vector += self.var_d070aa8d;
-      normal_vector = vectornormalize(new_vector);
+      normal_vector = vectorNormalize(new_vector);
     }
   }
 
@@ -653,7 +653,7 @@ function private function_edb8ac3f(var_ad2d46ff) {
   }
 
   self.var_d070aa8d = normal_vector;
-  self moveto(move_to_point, 0.1);
+  self moveTo(move_to_point, 0.1);
 
   if(getdvarint(#"hash_4901482f884b01dc", 0)) {
     line(self.origin, move_to_point, (0, 0, 1), 1, 0, 500);
@@ -703,7 +703,7 @@ function private function_f95c27a2(target) {
 
       self.knockdown_iterations += 1;
       vector_to_target = var_71872c01 - self.origin;
-      normal_vector = vectornormalize(vector_to_target);
+      normal_vector = vectorNormalize(vector_to_target);
       move_distance = 700 * prediction_time;
       move_vector = move_distance * normal_vector;
       self.angles = vectortoangles(move_vector);
@@ -784,7 +784,7 @@ function private function_ddf221f2(delay) {
 }
 
 function private function_a90fe496(var_cf34de7a) {
-  players = getplayers();
+  players = getPlayers();
   v_length = sqr(100);
 
   for(i = 0; i < players.size; i++) {
@@ -823,7 +823,7 @@ function private function_a90fe496(var_cf34de7a) {
     if(n_distance < v_length) {
       v_dir = player.origin - var_cf34de7a;
       v_dir = (v_dir[0], v_dir[1], 0.1);
-      v_dir = vectornormalize(v_dir);
+      v_dir = vectorNormalize(v_dir);
       n_push_strength = getdvarint(#"hash_3ce74fce73494ef0", 500);
       n_push_strength = 200 + randomint(n_push_strength - 200);
       v_player_velocity = player getvelocity();
@@ -837,7 +837,7 @@ function private function_abaec088() {
   players = getentitiesinradius(self.origin, 48, 1);
 
   foreach(player in players) {
-    player playrumbleonentity("damage_heavy");
+    player playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -851,8 +851,8 @@ function private function_2171139f(zombie, target) {
   enemy_vec = zombie.origin - origin;
   var_660d1fec = (enemy_vec[0], enemy_vec[1], 0);
   var_58877074 = (facing_vec[0], facing_vec[1], 0);
-  var_660d1fec = vectornormalize(var_660d1fec);
-  var_58877074 = vectornormalize(var_58877074);
+  var_660d1fec = vectorNormalize(var_660d1fec);
+  var_58877074 = vectorNormalize(var_58877074);
   enemy_dot = vectordot(var_58877074, var_660d1fec);
 
   if(enemy_dot < 0) {
@@ -1049,7 +1049,7 @@ function function_3c2e8416() {
 function function_1f9940b8() {
   self endon(#"death");
   playFX(#"zombie/fx9_onslaught_spawn_sm", self.origin);
-  playsoundatposition(#"hash_14247392847093a6", self.origin + (0, 0, 75));
+  playSoundAtPosition(#"hash_14247392847093a6", self.origin + (0, 0, 75));
   self.in_the_ground = 1;
   self ghost();
   self pathmode("dont move", 1);
@@ -1063,7 +1063,7 @@ function function_1f9940b8() {
 
   if(!self isragdoll()) {
     self playSound(#"hash_4b49f05e8c054fd9");
-    self animscripted("rise_anim", self.origin, self.angles, #"ai_t9_zm_zombie_base_traverse_ground_dugup", "normal");
+    self animScripted("rise_anim", self.origin, self.angles, #"ai_t9_zm_zombie_base_traverse_ground_dugup", "normal");
     waitframe(1);
   }
 

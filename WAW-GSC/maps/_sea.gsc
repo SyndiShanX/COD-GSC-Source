@@ -10,20 +10,20 @@ main() {
   level._effect["watersplash"] = loadfx("misc/cargoship_splash");
   level._sea_scale = 1;
 
-  level.sea_model = getent("sea", "targetname");
+  level.sea_model = getEnt("sea", "targetname");
   level._sea_org = spawn("script_origin", level.sea_model.origin);
   level._sea_org.offset = vector_multiply(level.sea_model.origin, -1);
   level._sea_org.sway = "sway2";
   level._sea_link = spawn("script_origin", level.sea_model.origin);
   level._sea_link.offset = level._sea_org.offset;
-  level.sea_model linkto(level._sea_link);
+  level.sea_model linkTo(level._sea_link);
 
-  level.sea_foam = getent("sea_foam", "targetname");
-  level.sea_foam linkto(level._sea_link);
+  level.sea_foam = getEnt("sea_foam", "targetname");
+  level.sea_foam linkTo(level._sea_link);
   level.sea_foam hide();
 
-  level.sea_black = getent("sea_black", "targetname");
-  level.sea_black linkto(level._sea_link);
+  level.sea_black = getEnt("sea_black", "targetname");
+  level.sea_black linkTo(level._sea_link);
 
   flag_init("_sea_waves");
   flag_init("_sea_viewbob");
@@ -101,7 +101,7 @@ sea_objectbob(org) {
   if(isDefined(self.targetname)) {
     dependants = getEntArray(self.targetname, "target");
     for(i = 0; i < dependants.size; i++) {
-      dependants[i] linkto(self);
+      dependants[i] linkTo(self);
     }
   }
 
@@ -185,7 +185,7 @@ sea_objectbob(org) {
 
   wait .05;
 
-  self linkto(ent);
+  self linkTo(ent);
   if(isDefined(self.script_parameters)) {
     token = strtok(self.script_parameters, ":;, ");
     for(i = 0; i < token.size; i++) {
@@ -219,7 +219,7 @@ sea_objectbob_logic(org, ent) {
       wait ent.waittime;
     }
 
-    ent rotateto(ent.ang, org.time, org.time * .5, org.time * .5);
+    ent rotateTo(ent.ang, org.time, org.time * .5, org.time * .5);
 
     if(org.sway == "sway1") {
       org waittill("sway2");
@@ -231,13 +231,13 @@ sea_objectbob_logic(org, ent) {
       wait ent.waittime;
     }
 
-    ent rotateto(ent.ang, org.time, org.time * .5, org.time * .5);
+    ent rotateTo(ent.ang, org.time, org.time * .5, org.time * .5);
   }
 }
 
 sea_objectbob_follow(ref) {
   while(1) {
-    self moveto(ref.origin, .1);
+    self moveTo(ref.origin, .1);
     wait .1;
   }
 }
@@ -246,7 +246,7 @@ sea_objectbob_findparent(ent, org) {
   if(!isDefined(self.target)) {
     return;
   }
-  ent.parent = getent(self.target, "targetname");
+  ent.parent = getEnt(self.target, "targetname");
   if(!isDefined(ent.parent.link)) {
     ent.parent waittill("got_link");
   }
@@ -257,7 +257,7 @@ sea_objectbob_findparent(ent, org) {
   base.angles = link.angles;
   ref = spawn("script_origin", (ent.origin));
   ref.angles = ent.angles;
-  ref linkto(base);
+  ref linkTo(base);
 
   ent thread sea_objectbob_follow(ref);
 
@@ -265,11 +265,11 @@ sea_objectbob_findparent(ent, org) {
     link waittill("precalcdone1");
 
     wait link.waittime - .05;
-    base rotateto(link.ang, org.time, org.time * .5, org.time * .5);
+    base rotateTo(link.ang, org.time, org.time * .5, org.time * .5);
 
     link waittill("precalcdone2");
     wait link.waittime - .05;
-    base rotateto(link.ang, org.time, org.time * .5, org.time * .5);
+    base rotateTo(link.ang, org.time, org.time * .5, org.time * .5);
   }
 }
 
@@ -290,9 +290,9 @@ sea_bob() {
     self.sway = "sway1";
     self notify("sway1");
     if(flag("_sea_bob")) {
-      level._sea_link rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
+      level._sea_link rotateTo(self.rotation, self.time, self.time * .5, self.time * .5);
     }
-    self rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
+    self rotateTo(self.rotation, self.time, self.time * .5, self.time * .5);
     wait self.time;
 
     self.rotation = vector_multiply(self.rotation, -1);
@@ -300,9 +300,9 @@ sea_bob() {
     self.sway = "sway2";
     self notify("sway2");
     if(flag("_sea_bob")) {
-      level._sea_link rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
+      level._sea_link rotateTo(self.rotation, self.time, self.time * .5, self.time * .5);
     }
-    self rotateto(self.rotation, self.time, self.time * .5, self.time * .5);
+    self rotateTo(self.rotation, self.time, self.time * .5, self.time * .5);
     wait self.time;
   }
 }
@@ -325,7 +325,7 @@ sea_bob_reset() {
   time = (1.5);
   rotation = (0, 0, 0);
 
-  level._sea_link rotateto(rotation, time, time * .5, time * .5);
+  level._sea_link rotateTo(rotation, time, time * .5, time * .5);
   wait time;
   wait .05;
   level.new_lite_settings = level.lite_settings;
@@ -413,7 +413,7 @@ sea_closestWaveLogic(array, object) {
 
 sea_waves_setup() {
   nodes = getStructArray("wave_fx", "targetname");
-  center = getstruct("wave_fx_center", "targetname");
+  center = getStruct("wave_fx_center", "targetname");
 
   if(!nodes.size) {
     return undefined;

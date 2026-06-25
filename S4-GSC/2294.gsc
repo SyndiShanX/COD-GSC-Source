@@ -426,7 +426,7 @@ _id_2E79(var_0, var_1) {
 
   if(!isDefined(var_0._id_440D)) {
     var_0._id_440D = spawn("script_origin", var_0.origin);
-    var_0._id_440D linkto(var_0, "");
+    var_0._id_440D linkTo(var_0, "");
   }
 
   var_4 = var_0._id_440D;
@@ -1054,7 +1054,7 @@ _id_4CF8() {
   }
 
   if(isDefined(self._id_4C3C) && self._id_4C3C == 1) {
-    var_5 = vectornormalize((self._id_0147[0], self._id_0147[1], self._id_0147[2]));
+    var_5 = vectorNormalize((self._id_0147[0], self._id_0147[1], self._id_0147[2]));
     var_5 = var_5 * 1500;
   }
 
@@ -1289,8 +1289,8 @@ _id_AC70(var_0) {
     } else {
       var_5 = self._id_0147;
       var_6 = anglesToForward(self.angles);
-      var_7 = vectornormalize((var_5[0], var_5[1], 0));
-      var_8 = vectornormalize((var_6[0], var_6[1], 0));
+      var_7 = vectorNormalize((var_5[0], var_5[1], 0));
+      var_8 = vectorNormalize((var_6[0], var_6[1], 0));
       var_9 = _id_9D86(var_8, var_7);
       var_10 = var_9 * 90;
       var_11 = (-1 * var_7[0], -1 * var_7[1], 0);
@@ -1494,12 +1494,12 @@ _id_DBAE(var_0, var_1, var_2, var_3) {
 _id_4E71(var_0, var_1, var_2, var_3) {
   _id_E8DE();
   scripts\anim\shared::_id_5009();
-  var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30));
+  var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30));
   var_5 = self.damageweapon;
   var_6 = var_5.basename;
 
   if(var_6 == "iw7_c6hack_melee" || var_6 == "iw7_c6worker_fists") {
-    var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
+    var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
   }
 
   self _meth_82E8(_id_0009::_id_1C6D(), 0);
@@ -1585,8 +1585,8 @@ _id_35E8(var_0, var_1, var_2) {
   }
 
   var_5 = anglesToForward(self.angles);
-  var_6 = vectornormalize((self._id_0147[0], self._id_0147[1], 0));
-  var_7 = vectornormalize((var_5[0], var_5[1], 0));
+  var_6 = vectorNormalize((self._id_0147[0], self._id_0147[1], 0));
+  var_7 = vectorNormalize((var_5[0], var_5[1], 0));
   var_8 = _id_9D86(var_7, var_6);
   var_9 = undefined;
 
@@ -1611,8 +1611,8 @@ _id_35E8(var_0, var_1, var_2) {
 
 choosesimpledirectionaldeathanim(var_0, var_1, var_2) {
   var_3 = anglesToForward(self.angles);
-  var_4 = vectornormalize((self._id_0147[0], self._id_0147[1], 0));
-  var_5 = vectornormalize((var_3[0], var_3[1], 0));
+  var_4 = vectorNormalize((self._id_0147[0], self._id_0147[1], 0));
+  var_5 = vectorNormalize((var_3[0], var_3[1], 0));
   var_6 = _id_9D86(var_5, var_4);
   var_7 = undefined;
 
@@ -1634,8 +1634,8 @@ _id_35E7(var_0, var_1, var_2) {
   var_3 = _id_6C08();
   var_4 = getweapondeathanimdamagetype();
   var_5 = anglesToForward(self.angles);
-  var_6 = vectornormalize((self._id_0147[0], self._id_0147[1], 0));
-  var_7 = vectornormalize((var_5[0], var_5[1], 0));
+  var_6 = vectorNormalize((self._id_0147[0], self._id_0147[1], 0));
+  var_7 = vectorNormalize((var_5[0], var_5[1], 0));
   var_8 = _id_9D86(var_7, var_6);
   var_9 = undefined;
 
@@ -1705,8 +1705,8 @@ _id_35EB(var_0, var_1, var_2) {
   var_3 = "lowerbody";
   var_4 = "_lg";
   var_5 = anglesToForward(self.angles);
-  var_6 = vectornormalize((self._id_0147[0], self._id_0147[1], 0));
-  var_7 = vectornormalize((var_5[0], var_5[1], 0));
+  var_6 = vectorNormalize((self._id_0147[0], self._id_0147[1], 0));
+  var_7 = vectorNormalize((var_5[0], var_5[1], 0));
   var_8 = _id_9D86(var_7, var_6);
   var_9 = undefined;
 

@@ -145,11 +145,11 @@ follow_path() {
   }
 
   self.following_path = 1;
-  self scragentsetgoalradius(32.0);
+  self scragentsetgoalRadius(32.0);
   self scragentsetgoalnode(self.pathnode);
 
   if(self.currentanimstate == "move") {
-    var_0 = vectornormalize(self.pathnode.origin - self.origin);
+    var_0 = vectorNormalize(self.pathnode.origin - self.origin);
     self notify("path_dir_change", var_0);
   }
 
@@ -230,7 +230,7 @@ should_grab(var_0) {
     if(isDefined(var_6.next_valid_grab_time) && var_6.next_valid_grab_time > var_4) {
       continue;
     }
-    var_7 = vectornormalize(var_6.origin - self.origin);
+    var_7 = vectorNormalize(var_6.origin - self.origin);
 
     if(vectordot(var_2, var_7) < var_3) {
       continue;
@@ -319,7 +319,7 @@ attack_enemy(var_0, var_1) {
     self.melee_type = var_0;
     self scragentbeginmelee(var_1);
     self scragentsetgoalpos(self.origin);
-    self scragentsetgoalradius(4096.0);
+    self scragentsetgoalRadius(4096.0);
     self waittill("melee_complete");
     self.last_attack_time = gettime();
   } else
@@ -370,16 +370,16 @@ ancestor_path_to_node(var_0) {
     return;
   }
   self.pathnode = var_1;
-  self scragentsetgoalradius(28);
+  self scragentsetgoalRadius(28);
   self scragentsetgoalnode(self.pathnode);
   self waittill("goal_reached");
 }
 
 ancestor_do_forced_grab(var_0) {
-  var_0 = getent(var_0, "targetname");
+  var_0 = getEnt(var_0, "targetname");
   self scragentsetorientmode("face angle abs", var_0.angles);
   force_grab_attack(var_0.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   self scragentsetgoalnode(self.pathnode);
   maps\mp\alien\_utility::disable_alien_scripted();
   self waittill("forced_grab_damage_start");
@@ -396,7 +396,7 @@ ancestor_play_traversal(var_0, var_1) {
   self scragentsetanimmode("anim deltas");
   maps\mp\agents\_scriptedagents::playanimuntilnotetrack(var_1, "traverse", "end");
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(28.0);
+  self scragentsetgoalRadius(28.0);
   self scragentsetscripted(0);
 }
 

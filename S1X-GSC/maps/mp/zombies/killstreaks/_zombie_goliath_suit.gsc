@@ -608,9 +608,9 @@ setupcoopturret(var_0, var_1) {
   var_3 common_scripts\utility::make_entity_sentient_mp(var_1.team);
   var_3 maps\mp\killstreaks\_autosentry::addtoturretlist(var_3 getentitynumber());
   var_3 thread maps\mp\killstreaks\_remoteturret::turret_watchdisabled();
-  var_3 linkto(var_1, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_1, "tag_turret", (0, 0, 0), (0, 0, 0));
   var_3.effect = spawnattachmenteffect(var_2, var_1);
-  var_3.effect linkto(var_3, "tag_player", (29, -7, -6), (0, 0, 0));
+  var_3.effect linkTo(var_3, "tag_player", (29, -7, -6), (0, 0, 0));
   var_3.effect hide();
   var_0.coopturret = var_3;
   thread stopturret(var_0, var_3, var_1);
@@ -778,7 +778,7 @@ setuprocketswarm(var_0, var_1) {
   var_5.enemytargets = [];
   var_5.rockets = [];
   var_5.icons = [];
-  var_5 linkto(var_0, var_3, (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_0, var_3, (0, 0, 0), (0, 0, 0));
   var_5 hide();
   var_0.rocketattachment = var_5;
   thread scanforrocketenemies(var_5, var_0);
@@ -841,7 +841,7 @@ getbestenemies(var_0, var_1) {
       var_10 = var_9.origin + (0, 0, 55);
     }
 
-    var_11 = vectornormalize(var_10 - var_4);
+    var_11 = vectorNormalize(var_10 - var_4);
     var_12 = vectordot(var_3, var_11);
 
     if(var_12 > var_2) {
@@ -952,16 +952,16 @@ firerocketswarm(var_0, var_1, var_2) {
       var_6++;
     }
 
-    var_11 thread rockettargetent(var_0, var_7, var_5[var_8]);
+    var_11 thread rockettargetEnt(var_0, var_7, var_5[var_8]);
     var_11 thread rocketdestroyaftertime(7);
   }
 }
 
-rockettargetent(var_0, var_1, var_2) {
+rockettargetEnt(var_0, var_1, var_2) {
   var_0 endon("death");
 
   if(isDefined(var_1)) {
-    self missile_settargetent(var_1, var_2);
+    self missile_settargetEnt(var_1, var_2);
   }
 
   self waittill("death");
@@ -1433,7 +1433,7 @@ firedroppod(var_0, var_1, var_2) {
   var_9.cratetype = "juggernaut";
   var_9.droptype = "juggernaut";
   var_9 thread control_goliath_usability();
-  var_9 sethintstring(&"KILLSTREAKS_HEAVY_EXO_PICKUP");
+  var_9 setHintString(&"KILLSTREAKS_HEAVY_EXO_PICKUP");
   var_9 thread cratecapturethink();
   var_9 thread usegoliathupdater();
   var_11 = spawnStruct();
@@ -1443,7 +1443,7 @@ firedroppod(var_0, var_1, var_2) {
   var_11.touchingplatformvalid = ::movingplatformtouchvalid;
   var_9 thread maps\mp\_movers::handle_moving_platforms(var_11);
   var_9 droppodmovenearbyallies(var_5);
-  var_9 disconnectpaths();
+  var_9 disconnectPaths();
   var_12 = var_9 playerwaittillgoliathactivated();
 
   if(isDefined(var_12) && isalive(var_12)) {
@@ -1477,7 +1477,7 @@ firedroppod(var_0, var_1, var_2) {
     var_12 is_entering_goliath(var_17, var_4);
 
     if(isDefined(var_12) && isalive(var_12)) {
-      var_12 setorigin(var_4, 1);
+      var_12 setOrigin(var_4, 1);
       var_12 setplayerangles(var_17.angles);
       var_12 enableweapons();
       var_12 givejuggernaut("juggernaut_exosuit", var_1);
@@ -1555,9 +1555,9 @@ cratecapturethink(var_0) {
 
 useholdthink(var_0, var_1, var_2) {
   if(isPlayer(var_0)) {
-    var_0 playerlinkto(self);
+    var_0 playerlinkTo(self);
   } else {
-    var_0 linkto(self);
+    var_0 linkTo(self);
   }
 
   var_0 playerlinkedoffsetenable();
@@ -1758,7 +1758,7 @@ control_goliath_usability() {
 is_entering_goliath(var_0, var_1) {
   var_2 = anglesToForward(var_0.angles);
   var_1 = var_1 - var_2 * 37;
-  self setorigin(var_1, 0);
+  self setOrigin(var_1, 0);
   self setplayerangles(var_0.angles);
 
   if(level.currentgen) {
@@ -1772,7 +1772,7 @@ is_entering_goliath(var_0, var_1) {
 }
 
 createcollision(var_0) {
-  var_1 = getent("goliath_collision", "targetname");
+  var_1 = getEnt("goliath_collision", "targetname");
 
   if(isDefined(var_1)) {
     self clonebrushmodeltoscriptmodel(var_1);
@@ -1841,7 +1841,7 @@ adjustlink(var_0, var_1, var_2, var_3, var_4) {
     var_5 = var_7;
     var_6 = var_8;
     var_0 unlink();
-    var_0 linkto(var_2, var_1, var_6, var_5);
+    var_0 linkTo(var_2, var_1, var_6, var_5);
   }
 }
 

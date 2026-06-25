@@ -60,7 +60,7 @@ function private function_4ba28b7e(s_instance) {
   s_instance.var_85c920d0 = content_manager::spawn_script_model(s_spawn, #"hash_7c38d5db2819b6f8");
   var_85c920d0 = s_instance.var_85c920d0;
   var_85c920d0.targetname = "sr_demented_echo";
-  playsoundatposition(#"hash_45cee0561a5b0142", var_85c920d0.origin);
+  playSoundAtPosition(#"hash_45cee0561a5b0142", var_85c920d0.origin);
   var_85c920d0 playLoopSound(#"hash_6e9b8f3f3b006d28");
   var_85c920d0 thread scene::play(#"ai_t9_vign_cust_demented_echo", "idle", var_85c920d0);
   var_85c920d0 clientfield::set("sr_demented_echo_fx", 1);
@@ -132,12 +132,12 @@ function private function_6f4653fd(player) {
   self clientfield::set("sr_demented_echo_fx", 3);
   n_time = 1.2;
   var_ea405096 = sqr(48);
-  self linkto(var_55e11aa9);
+  self linkTo(var_55e11aa9);
 
   while(isalive(player) && distance2dsquared(var_55e11aa9.origin, player.origin) > var_ea405096) {
     v_facing = vectortoangles(player.origin - var_55e11aa9.origin);
-    var_55e11aa9 moveto(player.origin, n_time);
-    var_55e11aa9 rotateto(v_facing, n_time);
+    var_55e11aa9 moveTo(player.origin, n_time);
+    var_55e11aa9 rotateTo(v_facing, n_time);
     wait 0.2;
     n_time = max(n_time - 0.1, 0.2);
   }
@@ -149,9 +149,9 @@ function private function_6f4653fd(player) {
   iprintlnbold("<dev string:x4d>");
 
   if(isDefined(player)) {
-    self linkto(var_55e11aa9);
+    self linkTo(var_55e11aa9);
     v_facing = vectortoangles(player.origin - self.origin);
-    var_55e11aa9 rotateto(v_facing, 0.3);
+    var_55e11aa9 rotateTo(v_facing, 0.3);
     player namespace_68a80213::damageinfirearea(player.origin, undefined, undefined, getweapon(#"molotov_fire"), self, undefined, getscriptbundle("molotov_custom_settings"));
   }
 
@@ -168,18 +168,18 @@ function private function_6f4653fd(player) {
 function private function_6003bca8(var_55e11aa9, v_player) {
   self endon(#"death", #"hash_1a42ae1b66d06a7d");
   self thread scene::play(#"ai_t9_vign_cust_demented_echo", "react", self);
-  self linkto(var_55e11aa9);
+  self linkTo(var_55e11aa9);
   var_1c408bb3 = self.instance.contentgroups[#"hash_4e469ee1df801af0"][0];
 
   if(isDefined(var_1c408bb3)) {
-    var_55e11aa9 moveto(var_1c408bb3.origin, 0.333);
+    var_55e11aa9 moveTo(var_1c408bb3.origin, 0.333);
   }
 
   v_facing = vectortoangles(v_player - self.origin);
-  var_55e11aa9 rotateto(v_facing, 0.3);
+  var_55e11aa9 rotateTo(v_facing, 0.3);
   level flag::wait_till(#"hash_437a8fa2063abd31");
   self thread scene::play(#"ai_t9_vign_cust_demented_echo", "chase", self);
-  self linkto(var_55e11aa9);
+  self linkTo(var_55e11aa9);
 }
 
 function private function_491bb6b7(instance, var_cf21a49f) {
@@ -248,7 +248,7 @@ function private function_a1ce8017(var_85c920d0) {
       }
 
       playFX(#"hash_55ac30dd21addebb", var_85c920d0 gettagorigin("j_spineupper"));
-      playsoundatposition(#"hash_70cca8a3d457a438", var_85c920d0.origin);
+      playSoundAtPosition(#"hash_70cca8a3d457a438", var_85c920d0.origin);
       var_ec6368f9 = namespace_58949729::function_257d7203(#"elite");
       dropstruct = {
         #origin: var_85c920d0 gettagorigin("j_spineupper"), #angles: var_85c920d0.angles, #var_738dfc81: 3

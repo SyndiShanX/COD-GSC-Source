@@ -236,7 +236,7 @@ fire_large_cortex_blast() {
   var_5 = self getEye();
   var_6 = var_5 + var_4 * 1000;
   earthquake(0.5, 1, self.origin + (0, 0, 30), 64);
-  self playrumbleonentity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
   var_7 = magicbullet("iw6_aliendlc42_mp", var_5, var_6, self);
 
   if(!isDefined(var_7)) {

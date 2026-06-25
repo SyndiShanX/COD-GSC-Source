@@ -22,7 +22,7 @@ ai_default_setup(array) {
   level.anim_ai[array][level.anim_ai[array].size] = self;
   node = self;
   if(isDefined(self.target)) {
-    node = getstruct(self.target, "targetname");
+    node = getStruct(self.target, "targetname");
     self.animation = node.animation;
   }
   self.anim_node = node;
@@ -457,7 +457,7 @@ civ_talkers() {
 
   node = self;
   if(isDefined(self.target)) {
-    node = getstruct(self.target, "targetname");
+    node = getStruct(self.target, "targetname");
     self.animation = node.animation;
   }
 
@@ -803,12 +803,12 @@ custom_ai_loop_dog() {
 
 panic_button() {
   self setHintString(&"CHAR_MUSEUM_DO_NOT_PRESS");
-  self usetriggerrequirelookat();
+  self useTriggerRequireLookAt();
 
   self thread panic_icon();
   self thread panic_trig_on_off();
 
-  model = getent(self.target, "targetname");
+  model = getEnt(self.target, "targetname");
   model ent_flag_init("ready");
   model ent_flag_set("ready");
 
@@ -959,7 +959,7 @@ panic_ai_attack() {
   }
   self notify("panic_button");
   self notify("stop_first_frame");
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(self.anim_node.animation == "gulag_end_evac_soap") {
     self unlink();

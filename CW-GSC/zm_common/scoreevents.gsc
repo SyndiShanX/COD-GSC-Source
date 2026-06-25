@@ -744,7 +744,7 @@ function function_970a97b2(params) {
 
   if(isPlayer(params.eattacker) && params.eattacker isinvehicle()) {
     var_ab120e5 = params.eattacker getvehicleoccupied();
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player != params.eattacker) {

@@ -116,7 +116,7 @@ function add_bot(team) {
 }
 
 function remove_bots(count, team) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!player istestclient()) {
       continue;
@@ -335,7 +335,7 @@ function goal_in_trigger(trigger) {
 
 function point_in_goal(point) {
   deltasq = distance2dsquared(self botgetgoalposition(), point);
-  goalradius = self botgetgoalradius();
+  goalradius = self botgetgoalRadius();
   return deltasq <= (goalradius * goalradius);
 }
 
@@ -647,13 +647,13 @@ function navmesh_wander(fwd, radiusmin = (isDefined(level.botsettings.wandermin)
   if(!isDefined(fwd)) {
     fwd = anglesToForward(self.angles);
   }
-  fwd = vectornormalize((fwd[0], fwd[1], 0));
+  fwd = vectorNormalize((fwd[0], fwd[1], 0));
   queryresult = positionquery_source_navigation(self.origin, radiusmin, radiusmax, 150, spacing, self);
   best_point = undefined;
   origin = (self.origin[0], self.origin[1], 0);
   foreach(point in queryresult.data) {
     movepoint = (point.origin[0], point.origin[1], 0);
-    movedir = vectornormalize(movepoint - origin);
+    movedir = vectorNormalize(movepoint - origin);
     dot = vectordot(movedir, fwd);
     point.score = mapfloat(radiusmin, radiusmax, 0, 50, point.disttoorigin2d);
     if(dot > fwddot) {
@@ -704,7 +704,7 @@ function approach_point(point, radiusmin = 0, radiusmax = 1500, spacing = 128) {
   best_point = undefined;
   foreach(point in queryresult.data) {
     movepoint = (point.origin[0], point.origin[1], 0);
-    movedir = vectornormalize(movepoint - origin);
+    movedir = vectorNormalize(movepoint - origin);
     dot = vectordot(movedir, fwd);
     point.score = randomfloatrange(0, 50);
     if(dot < 0.5) {
@@ -802,7 +802,7 @@ function finish_corner() {
 }
 
 function get_host_player() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player ishost()) {
       return player;
@@ -815,7 +815,7 @@ function fwd_dot(point) {
   angles = self getplayerangles();
   fwd = anglesToForward(angles);
   delta = point - self getEye();
-  delta = vectornormalize(delta);
+  delta = vectorNormalize(delta);
   dot = vectordot(fwd, delta);
   return dot;
 }
@@ -851,7 +851,7 @@ function add_bot_at_eye_trace(team) {
   bot = add_bot(team);
   if(isDefined(bot)) {
     bot waittill("spawned_player");
-    bot setorigin(trace[""]);
+    bot setOrigin(trace[""]);
     bot setplayerangles((bot.angles[0], yaw, bot.angles[2]));
   }
   return bot;
@@ -874,7 +874,7 @@ function devgui_debug_route() {
     return;
   }
   iprintln("");
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!player util::is_bot()) {
       continue;

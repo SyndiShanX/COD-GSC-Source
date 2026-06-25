@@ -39,10 +39,10 @@ box_open_sequence(var_0) {
   var_5.angles = var_0.skull_struct.angles;
   var_0.skull = var_5;
   var_5 setscriptablepartstate("skull_vfx", "green");
-  var_0.var_5978 rotateto(var_0.door_open_struct.angles, var_1);
+  var_0.var_5978 rotateTo(var_0.door_open_struct.angles, var_1);
   wait(var_1);
   var_6 = var_5.origin + anglesToForward(var_5.angles) * var_2;
-  var_5 moveto(var_6, var_3);
+  var_5 moveTo(var_6, var_3);
   return var_5;
 }
 
@@ -244,12 +244,12 @@ skull_meter_move_to_collection_loc() {
   playFX(level._effect["gns_skull_meter_burst"], level.skull_meter.origin);
   var_0 = [(1923, 3117, -72), (1650, 2449, -72), (1173, 3407, 76), (1311, 2369, 76)];
   var_1 = scripts\engine\utility::random(var_0);
-  level.skull_meter moveto(var_1, 0.5, 0.5);
+  level.skull_meter moveTo(var_1, 0.5, 0.5);
   level.skull_meter waittill("movedone");
 }
 
 skull_meter_move_up(var_0) {
-  var_0 moveto(var_0.origin + (0, 0, 200), 60);
+  var_0 moveTo(var_0.origin + (0, 0, 200), 60);
 }
 
 skull_meter_glow_manager(var_0) {
@@ -265,7 +265,7 @@ skull_meter_glow_manager(var_0) {
 keep_rotate(var_0) {
   var_0 endon("death");
   for(;;) {
-    var_0 rotateyaw(360, 3);
+    var_0 rotateYaw(360, 3);
     wait(3);
   }
 }
@@ -295,7 +295,7 @@ debug_stay_on_pressure_plates() {}
 
 all_players_on_pressure_plate_monitor() {
   level endon("complete_stay_on_pressure_plates");
-  var_0 = getent("pressure_plate_volume", "targetname");
+  var_0 = getEnt("pressure_plate_volume", "targetname");
   for(;;) {
     if(all_players_touch_volume(var_0)) {
       level notify("all_player_on_pressure_plate");
@@ -764,7 +764,7 @@ follow_the_light_manager() {
   reset_follow_the_light_setup();
   wait_players_trigger_start();
   var_0 delete();
-  create_follow_the_light_node(scripts\engine\utility::getstruct("gns_path_start", "targetname"));
+  create_follow_the_light_node(scripts\engine\utility::getStruct("gns_path_start", "targetname"));
   level waittill("follow_the_light_start_node_picked_up");
   level thread follow_the_light_time_out_monitor();
   for(;;) {
@@ -1072,7 +1072,7 @@ get_regular_light_path_color(var_0) {
 
 wait_players_trigger_start() {
   var_0 = int(30);
-  var_1 = getent("gns_path_start_volume", "targetname");
+  var_1 = getEnt("gns_path_start_volume", "targetname");
   var_2 = 0;
   for(;;) {
     if(any_player_touch_volume(var_1)) {
@@ -1455,7 +1455,7 @@ is_empty_queen_piece_struct(var_0) {
 }
 
 set_up_controlling_struct() {
-  var_0 = scripts\engine\utility::getstruct("eight_queen_control", "targetname");
+  var_0 = scripts\engine\utility::getStruct("eight_queen_control", "targetname");
   var_0.queen_piece_struct = [];
   for(var_1 = 1; var_1 <= 8; var_1++) {
     var_0.queen_piece_struct[var_1 + ""] = [];

@@ -1050,7 +1050,7 @@ weapondamagetrace(from, to, startradius, ignore) {
     midpos = to;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
 
@@ -1135,7 +1135,7 @@ playconcussionsound(duration) {
   self endon("disconnect");
   concussionsound = spawn("script_origin", (0, 0, 1));
   concussionsound.origin = self.origin;
-  concussionsound linkto(self);
+  concussionsound linkTo(self);
   concussionsound thread deleteentonownerdeath(self);
   concussionsound playSound("");
   concussionsound playLoopSound("");

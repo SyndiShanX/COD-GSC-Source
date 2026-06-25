@@ -194,7 +194,7 @@ function function_3864f6a5() {
 
   var_d71f280f = self.origin;
   upposition = var_d71f280f + (0, 0, 12);
-  self.script_model moveto(upposition, 0.5);
+  self.script_model moveTo(upposition, 0.5);
 
   while(isDefined(self)) {
     waitframe(1);
@@ -212,7 +212,7 @@ function function_3864f6a5() {
 
     result = self.trigger waittill(#"trigger");
     self.script_model namespace_e32bb68::function_3a59ec34("zmb_press_pad_down");
-    self.script_model moveto(var_d71f280f, 0.5);
+    self.script_model moveTo(var_d71f280f, 0.5);
     array::notify_all(self.var_84a0207b, "plate_activated");
 
     while(isDefined(result.activator) && result.activator istouching(self.trigger)) {
@@ -220,7 +220,7 @@ function function_3864f6a5() {
     }
 
     self.script_model namespace_e32bb68::function_3a59ec34("zmb_press_pad_up");
-    self.script_model moveto(upposition, 0.5);
+    self.script_model moveTo(upposition, 0.5);
     array::notify_all(self.var_84a0207b, "plate_deactivated");
   }
 }

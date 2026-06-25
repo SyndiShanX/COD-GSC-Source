@@ -52,7 +52,7 @@ leper_despawn() {
   self.maxhealth = 30000;
 
   self ScrAgentSetGoalPos(self.origin);
-  self ScrAgentSetGoalRadius(2048);
+  self ScrAgentSetgoalRadius(2048);
   playFXOnTag(level._effect["alien_teleport"], self, "tag_origin");
   wait 1.0;
   self Suicide();
@@ -66,7 +66,7 @@ leper_approach(enemy) {
   }
 
   self ScrAgentSetGoalNode(retreat_node);
-  self ScrAgentSetGoalRadius(64);
+  self ScrAgentSetgoalRadius(64);
   self waittill("goal_reached");
 }
 

@@ -68,7 +68,7 @@ func_14C9() {
       var_0F.var_3F2F = var_00;
       var_0F.var_116 = var_07;
       var_0F.var_1D = self gettagangles("body_animate_jnt");
-      var_0F linkto(self, "body_animate_jnt");
+      var_0F linkTo(self, "body_animate_jnt");
       self.var_29B1[self.var_29B1.size] = var_0F;
       playFXOnTag(var_0F.var_3F2F, var_0F, "tag_origin");
     } else {
@@ -216,7 +216,7 @@ func_14D6(param_00) {
   var_01.var_116 = self gettagorigin(param_00.var_109);
   var_01.var_1D = self gettagangles("body_animate_jnt");
   var_01.var_3F2F = common_scripts\utility::func_44F5("b17_dmg_engine");
-  var_01 linkto(self, "body_animate_jnt");
+  var_01 linkTo(self, "body_animate_jnt");
   param_00.var_95A6 = var_01;
   param_00.var_56C0 = 1;
   self.var_3786++;

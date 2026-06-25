@@ -728,7 +728,7 @@ function_b2602782(entity) {
     speed = length(velocity);
 
     if(speed > 0) {
-      var_7ee6937e = vectornormalize((targetpos[0], targetpos[1], 0) - (launchpos[0], launchpos[1], 0));
+      var_7ee6937e = vectorNormalize((targetpos[0], targetpos[1], 0) - (launchpos[0], launchpos[1], 0));
       dot = vectordot(-1 * var_7ee6937e, velocity / speed);
 
       if(dot >= entity ai::function_9139c839().var_cd8b7a6c) {

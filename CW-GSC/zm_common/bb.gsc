@@ -99,7 +99,7 @@ function logpowerupevent(powerup, optplayer, eventname) {
   zmpowerups.playername = playername;
   function_92d1707f(#"hash_7edbd2a2dee992e9", zmpowerups);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     logplayerevent(player, "powerup_" + powerup.powerup_name + "_" + eventname);
   }
 }

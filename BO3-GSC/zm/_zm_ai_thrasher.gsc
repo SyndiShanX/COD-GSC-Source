@@ -375,7 +375,7 @@ function spawn_thrasher(var_42fbb5b1 = 1) {
   var_e3372b59 = zombie_utility::spawn_zombie(level.var_feebf312[0], "thrasher", s_loc);
   if(isDefined(var_e3372b59) && isDefined(s_loc)) {
     var_e3372b59 forceteleport(s_loc.origin, s_loc.angles);
-    playsoundatposition("zmb_vocals_thrash_spawn", var_e3372b59.origin);
+    playSoundAtPosition("zmb_vocals_thrash_spawn", var_e3372b59.origin);
     if(!var_e3372b59 zm_utility::in_playable_area()) {
       player = array::random(level.players);
       if(zm_utility::is_player_valid(player, 0, 1)) {
@@ -398,7 +398,7 @@ function function_89976d94(v_pos) {
   var_72436e1a = arraygetfarthest(v_pos, a_v_points);
   if(isDefined(var_72436e1a)) {
     v_dir = v_pos - var_72436e1a;
-    v_dir = vectornormalize(v_dir);
+    v_dir = vectorNormalize(v_dir);
     v_angles = vectortoangles(v_dir);
     var_948d85e3 = util::spawn_model("tag_origin", var_72436e1a, v_angles);
     var_2e57f81c scene::stop("scene_zm_dlc2_thrasher_teleport_out");
@@ -494,7 +494,7 @@ function function_a716de1f() {
 function function_bd6d26aa(v_origin, player) {}
 
 function function_cb4aac76(zombie) {
-  if(isDefined(zombie) && isalive(zombie) && zombie isonground() && zombie.archetype == "zombie" && !zombie isplayinganimscripted() && zm_utility::check_point_in_playable_area(zombie.origin) && function_eeeff8b3(zombie.origin)) {
+  if(isDefined(zombie) && isalive(zombie) && zombie isonground() && zombie.archetype == "zombie" && !zombie isplayinganimScripted() && zm_utility::check_point_in_playable_area(zombie.origin) && function_eeeff8b3(zombie.origin)) {
     return true;
   }
   return false;
@@ -541,11 +541,11 @@ function function_74b91821(entity) {
     }
     forward = anglesToForward(entity.angles);
     forward = (forward[0], forward[1], 0);
-    forward = vectornormalize(forward);
+    forward = vectorNormalize(forward);
     var_537120b8 = zombie.origin - entity.origin;
     var_537120b8 = (var_537120b8[0], var_537120b8[1], 0);
-    var_537120b8 = vectornormalize(var_537120b8);
-    if(isalive(zombie) && zombie.archetype == "zombie" && zombie !== entity && !zombie isplayinganimscripted() && vectordot(forward, var_537120b8) >= 0.9063 && zm_utility::check_point_in_playable_area(zombie.origin)) {
+    var_537120b8 = vectorNormalize(var_537120b8);
+    if(isalive(zombie) && zombie.archetype == "zombie" && zombie !== entity && !zombie isplayinganimScripted() && vectordot(forward, var_537120b8) >= 0.9063 && zm_utility::check_point_in_playable_area(zombie.origin)) {
       return zombie;
     }
   }
@@ -749,7 +749,7 @@ function function_eafe225a(thrasher) {
 
 function function_13a79919() {
   thrashers = getaiarchetypearray("");
-  players = getplayers();
+  players = getPlayers();
   if(players.size > 0 && thrashers.size > 0) {
     thrasher = arraygetclosest(players[0].origin, thrashers);
     if(isDefined(thrasher) && zm_utility::check_point_in_playable_area(thrasher.origin)) {
@@ -761,7 +761,7 @@ function function_13a79919() {
 function function_da954e93(cmd) {
   switch (cmd) {
     case "": {
-      players = getplayers();
+      players = getPlayers();
       queryresult = positionquery_source_navigation(players[0].origin, 128, 256, 128, 20);
       spot = spawnStruct();
       spot.origin = players[0].origin;
@@ -772,7 +772,7 @@ function function_da954e93(cmd) {
       if(isDefined(thrasher)) {
         e_player = zm_utility::get_closest_player(spot.origin);
         v_dir = e_player.origin - spot.origin;
-        v_dir = vectornormalize(v_dir);
+        v_dir = vectorNormalize(v_dir);
         v_angles = vectortoangles(v_dir);
         trace = bulletTrace(spot.origin, spot.origin + (vectorscale((0, 0, -1), 256)), 0, spot);
         v_ground_position = trace[""];
@@ -793,7 +793,7 @@ function function_da954e93(cmd) {
     case "":
     case "": {
       zombies = getaiarchetypearray("");
-      players = getplayers();
+      players = getPlayers();
       if(players.size > 0 && zombies.size > 0) {
         zombie = arraygetclosest(players[0].origin, zombies);
         if(function_cb4aac76(zombie)) {
@@ -817,7 +817,7 @@ function function_da954e93(cmd) {
       thrasher = function_13a79919();
       if(isDefined(thrasher)) {
         thrasher ai::set_behavior_attribute("", "");
-        players = getplayers();
+        players = getPlayers();
         if(players.size > 0) {
           thrasher.owner = players[0];
         }
@@ -826,7 +826,7 @@ function function_da954e93(cmd) {
     }
     case "": {
       thrasher = function_13a79919();
-      players = getplayers();
+      players = getPlayers();
       if(isDefined(thrasher)) {
         thrasher thread thrasherserverutils::thrasherconsumeplayerutil(thrasher, players[0]);
       }

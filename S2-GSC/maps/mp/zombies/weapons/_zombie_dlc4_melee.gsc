@@ -295,7 +295,7 @@ wep_spin() {
   self endon("death");
   var_00 = 850;
   for(;;) {
-    self rotateyaw(-29536, var_00);
+    self rotateYaw(-29536, var_00);
     wait(var_00);
   }
 }
@@ -304,9 +304,9 @@ wep_bounce() {
   self endon("death");
   var_00 = 4;
   for(;;) {
-    self moveto(self.var_116 - (0, 0, 4), var_00, 0.5, 0.5);
+    self moveTo(self.var_116 - (0, 0, 4), var_00, 0.5, 0.5);
     wait(var_00);
-    self moveto(self.var_116 + (0, 0, 4), var_00, 0.5, 0.5);
+    self moveTo(self.var_116 + (0, 0, 4), var_00, 0.5, 0.5);
     wait(var_00);
   }
 }
@@ -970,7 +970,7 @@ shield_emp_init() {
   level.var_4D3D["zom_dlc4_shield_emp_zm"] = 1;
   level.var_2FE9["shield_cleave_emp_zm"] = 1;
   level.var_4D3D["shield_cleave_emp_zm"] = 1;
-  level.obj_shield = getent("blood_shield_dome", "targetname");
+  level.obj_shield = getEnt("blood_shield_dome", "targetname");
   level.obj_shield.hidden_org = level.obj_shield.var_116;
   level.obj_shield notsolid();
   setup_melee_weapon_ownership(::has_shield_emp, ::shield_emp_gained, ::shield_emp_lost);
@@ -1351,10 +1351,10 @@ shield_punish(param_00) {
   self method_8308(0);
   self method_8322();
   self method_8326();
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_02 = self.var_116 - self.var_116 + anglesToForward(self.var_1D) * 10;
   var_02 = (var_02[0], var_02[1], 0);
-  var_02 = var_01 * vectornormalize(var_02);
+  var_02 = var_01 * vectorNormalize(var_02);
   var_02 = (var_02[0], var_02[1], 125);
   self setvelocity(var_02);
   lib_0378::func_8D74("zmb_shield_break");
@@ -2008,11 +2008,11 @@ handle_hammer_grenade(param_00) {
   var_02 = undefined;
   var_01 childthread do_zombie_damage_better(::hammer_do_flight_damage);
   var_03 = undefined;
-  var_04 = vectornormalize(anglesToForward(var_01.var_117 geteyeangles()));
+  var_04 = vectorNormalize(anglesToForward(var_01.var_117 geteyeangles()));
   var_05 = var_01.var_117 getEye() + var_04 * 2000;
   var_01.tag_tracker.end_point = var_05;
   var_01.tag_tracker.forward_dir = var_04;
-  var_06 = vectornormalize(anglestoright(var_01.var_117 geteyeangles()));
+  var_06 = vectorNormalize(anglestoright(var_01.var_117 geteyeangles()));
   var_07 = 0.4;
   var_08 = 6;
   var_09 = 1000;
@@ -2020,7 +2020,7 @@ handle_hammer_grenade(param_00) {
   var_09 = var_09 * 0.9;
   var_0B = (0, 0, 0.12);
   var_0B = var_0B + -0.2 * var_06;
-  var_0C = vectornormalize(var_04 + var_0B);
+  var_0C = vectorNormalize(var_04 + var_0B);
   var_01.forward_dir = var_0C;
   var_01.var_1D = hammer_modelangles_fromdir(var_01.forward_dir);
   var_01.var_116 = var_01.var_116 - 38 * var_04;
@@ -2063,29 +2063,29 @@ handle_hammer_grenade(param_00) {
     var_15 = var_14 / var_09;
     var_16 = clamp(var_15, 0.05, 1);
     var_17 = var_0F + var_10 * var_16;
-    var_18 = vectornormalize(var_17 - var_01.var_116);
+    var_18 = vectorNormalize(var_17 - var_01.var_116);
     var_19 = var_18 - var_01.forward_dir;
     if(vectordot(var_19, var_19) > var_13) {
-      var_19 = var_12 * vectornormalize(var_19);
+      var_19 = var_12 * vectorNormalize(var_19);
     }
 
-    var_01.forward_dir = vectornormalize(var_01.forward_dir + var_19);
+    var_01.forward_dir = vectorNormalize(var_01.forward_dir + var_19);
     var_01.var_1D = hammer_modelangles_fromdir(var_01.forward_dir);
     var_01.next_hammer_pos = var_01.var_116 + var_01.forward_dir * var_09 * var_0D;
     var_1A = bulletTrace(var_01.var_116, var_01.next_hammer_pos, 0, var_01, 1);
     if(var_1A["fraction"] < 1) {
       var_1B = max(var_1A["fraction"] * var_0D, 0.05);
-      var_01 moveto(var_1A["position"], var_1B);
+      var_01 moveTo(var_1A["position"], var_1B);
       wait(var_1B);
       hammer_detonate_attack(var_1A["position"], param_00);
       break;
     }
 
-    var_01 moveto(var_01.next_hammer_pos, var_0D);
+    var_01 moveTo(var_01.next_hammer_pos, var_0D);
     wait(var_0D);
   }
 
-  var_01.forward_dir = vectornormalize(var_01.var_117.var_116 - var_01.var_116);
+  var_01.forward_dir = vectorNormalize(var_01.var_117.var_116 - var_01.var_116);
   var_01.var_1D = hammer_modelangles_fromdir(var_01.forward_dir);
   wait 0.05;
   var_1C = 0.05;
@@ -2099,9 +2099,9 @@ handle_hammer_grenade(param_00) {
 
     var_16 = min(var_1F, 1);
     var_20 = var_1D + var_01.var_117 getvelocity() * var_16;
-    var_01.forward_dir = vectornormalize(var_20 - var_01.var_116);
+    var_01.forward_dir = vectorNormalize(var_20 - var_01.var_116);
     var_01.var_1D = hammer_modelangles_fromdir(var_01.forward_dir);
-    var_01 moveto(var_20, var_1F);
+    var_01 moveTo(var_20, var_1F);
     var_01 lib_0378::func_8D74("dlc4_hammer_catch", var_01.var_116, var_1E);
     wait(var_1C);
   }
@@ -2625,7 +2625,7 @@ moonorb_active_think(param_00) {
       level.moon_orb_manager["moonscepter_orb_active"] = var_02;
       if(isDefined(var_09[1]) && function_01EF(var_09[1]) && var_09[1].var_BC > 0) {
         var_03 = var_09[1];
-        var_02 linkto(var_09[1], var_09[1] get_closest_tag_from_array(var_02.var_116, ["tag_origin", "tag_eye", "J_Head", "J_Hip_RI", "J_Hip_LE", "J_Knee_LE", "J_Knee_RI", "J_SpineLower", "J_SpineUpper", "J_Shoulder_RI", "J_Shoulder_LE", "J_MainRoot"]));
+        var_02 linkTo(var_09[1], var_09[1] get_closest_tag_from_array(var_02.var_116, ["tag_origin", "tag_eye", "J_Head", "J_Hip_RI", "J_Hip_LE", "J_Knee_LE", "J_Knee_RI", "J_SpineLower", "J_SpineUpper", "J_Shoulder_RI", "J_Shoulder_LE", "J_MainRoot"]));
       } else if(var_0A == "moonorb_near_orrery") {
         var_0B = common_scripts\utility::func_8FFC();
         var_0B.var_116 = common_scripts\utility::func_46B5("moonraven_orrery_teleport_node", "targetname").var_116;
@@ -2708,7 +2708,7 @@ moonorb_active_think(param_00) {
         var_13.var_116 = var_07.var_116;
         var_13.var_1D = var_07.var_1D;
         var_07.old_destination = var_13;
-        var_07 setorigin(var_12.var_116, 1);
+        var_07 setOrigin(var_12.var_116, 1);
         common_scripts\utility::func_3C8F("moon_trial_entered");
         var_07 thread maps\mp\mp_zombie_descent_ee_main::run_weapon_ritual("zom_dlc4_spike_zm");
         var_01 delete();
@@ -2809,7 +2809,7 @@ do_moon_orb_teleportation(param_00, param_01, param_02, param_03) {
     }
   }
 
-  var_04 setorigin(param_00);
+  var_04 setOrigin(param_00);
   if(isDefined(self.wing_fx)) {
     thread maps\mp\zombies\zombie_king::spawn_wings();
   }
@@ -3123,7 +3123,7 @@ moon_orb_teleport_validation(param_00) {
     if(var_01[0] == 1) {
       var_02 = 1;
       var_0A = var_01[1];
-      if(ispointinvolume(var_09, getent("zone_crash", "targetname"))) {
+      if(ispointinvolume(var_09, getEnt("zone_crash", "targetname"))) {
         var_0B = undefined;
         var_0B = getgroundposition(var_09, 64);
         if(distance(var_09, var_0B) > var_05) {
@@ -3838,9 +3838,9 @@ scythe_throw_blades(param_00) {
   var_01 = anglesToForward(self geteyeangles() + (6, 6, 0));
   var_02 = anglesToForward(self geteyeangles());
   var_03 = anglesToForward(self geteyeangles() - (6, 6, 0));
-  var_04 = magicgrenademanual("scythe_shard_zm", self getEye() + (3, 0, 0), vectornormalize(var_01) * 1600, 10, self, 1, 1);
-  var_05 = magicgrenademanual("scythe_shard_zm", self getEye(), vectornormalize(var_02) * 1600, 10, self, 1, 1);
-  var_06 = magicgrenademanual("scythe_shard_zm", self getEye() - (3, 0, 0), vectornormalize(var_03) * 1600, 10, self, 1, 1);
+  var_04 = magicgrenademanual("scythe_shard_zm", self getEye() + (3, 0, 0), vectorNormalize(var_01) * 1600, 10, self, 1, 1);
+  var_05 = magicgrenademanual("scythe_shard_zm", self getEye(), vectorNormalize(var_02) * 1600, 10, self, 1, 1);
+  var_06 = magicgrenademanual("scythe_shard_zm", self getEye() - (3, 0, 0), vectorNormalize(var_03) * 1600, 10, self, 1, 1);
   var_04.var_117 = self;
   var_05.var_117 = self;
   var_06.var_117 = self;
@@ -4171,10 +4171,10 @@ run_death_shellshock(param_00) {
   self endon("death");
   self shellshock("zm_heavy_hit", var_02, var_01);
   self method_8308(0);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_04 = self.var_116 - param_00;
   var_04 = (var_04[0], var_04[1], 0);
-  var_04 = var_03 * vectornormalize(var_04);
+  var_04 = var_03 * vectorNormalize(var_04);
   var_04 = (var_04[0], var_04[1], 125);
   wait(var_02);
   self setvelocity(var_04);
@@ -4545,16 +4545,16 @@ is_this_right_wep(param_00, param_01) {
 
 plinth_weapon_move_into_place(param_00, param_01) {
   if(param_01 == "shield_emp" && isDefined(param_00.var_6C50)) {
-    param_00 rotateto(param_00.var_6C50, 0.05);
+    param_00 rotateTo(param_00.var_6C50, 0.05);
     wait(0.1);
   }
 
-  param_00 moveto(param_00.goalposition + (0, 0, 24), 0.05);
+  param_00 moveTo(param_00.goalposition + (0, 0, 24), 0.05);
   wait 0.05;
   param_00 method_805B();
   lib_0378::func_8D74("aud_citadel_wpn_placement", param_01, param_00.goalposition);
   wait(1);
-  param_00 moveto(param_00.goalposition, 3, 0.5, 1.25);
+  param_00 moveTo(param_00.goalposition, 3, 0.5, 1.25);
   wait(3);
   var_02 = common_scripts\utility::func_46B7("citadel_tower_fx_struct", "targetname");
   var_03 = undefined;
@@ -4594,8 +4594,8 @@ plinth_weapon_move_into_place(param_00, param_01) {
 }
 
 plinth_shield_rotate(param_00) {
-  var_01 = getent("shield_angles_destination", "targetname");
-  var_02 = getent("shield_manual_pivot", "targetname");
+  var_01 = getEnt("shield_angles_destination", "targetname");
+  var_02 = getEnt("shield_manual_pivot", "targetname");
   if(!isDefined(var_02.var_6C50)) {
     var_02.var_6C50 = var_02.var_1D;
   }
@@ -4606,11 +4606,11 @@ plinth_shield_rotate(param_00) {
 
   param_00 method_8449(var_02);
   waittillframeend;
-  var_02 rotateto(var_01.var_1D, 3, 1.5, 1.5);
+  var_02 rotateTo(var_01.var_1D, 3, 1.5, 1.5);
   wait(3);
   param_00 unlink();
   wait 0.05;
-  var_02 rotateto(var_02.var_6C50, 0.1);
+  var_02 rotateTo(var_02.var_6C50, 0.1);
 }
 
 plinth_check_for_all_weapons() {
@@ -4633,7 +4633,7 @@ plinth_check_for_all_weapons() {
     }
   }
 
-  var_01 = getent("shield", "script_noteworthy");
+  var_01 = getEnt("shield", "script_noteworthy");
   plinth_shield_rotate(var_01);
   level.bossceremonyactive = 1;
   common_scripts\utility::func_3C8F("flag_plinth_all_weapons_placed");

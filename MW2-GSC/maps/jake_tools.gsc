@@ -96,7 +96,7 @@ get_all_ents_in_chain(sEntityType) {
           ePathpoint = getnode(ePathpoint.target, "targetname");
           break;
         case "ent":
-          ePathpoint = getent(ePathpoint.target, "targetname");
+          ePathpoint = getEnt(ePathpoint.target, "targetname");
           break;
         default:
           assertmsg("sEntityType needs to be 'vehiclenode', 'pathnode' or 'ent'");
@@ -171,7 +171,7 @@ vehicle_go_to_end_and_delete(sPath, sVehicleType) {
       assertmsg("you need to define a valid sVehicletype");
   }
 
-  eVehicle = spawnvehicle(sVehicleModel, "plane", "truck", eStartNode.origin, eStartNode.angles);
+  eVehicle = spawnVehicle(sVehicleModel, "plane", "truck", eStartNode.origin, eStartNode.angles);
   if(sVehicleType == "truck") {
     eVehicle truck_headlights_on();
   }
@@ -190,7 +190,7 @@ truck_headlights_on() {
 set_goalvolume(sVolumeName, eVolume) {
   self endon("death");
   if(isDefined(sVolumeName)) {
-    eVolume = getent(sVolumeName, "targetname");
+    eVolume = getEnt(sVolumeName, "targetname");
   }
 
   assertEx((isDefined(eVolume)), "Need to pass a valid room volume");
@@ -295,7 +295,7 @@ trigArrayWait2(aTrigArray) {
 }
 
 trigWait(sTrig) {
-  trigger = getent(sTrig, "targetname");
+  trigger = getEnt(sTrig, "targetname");
   assert(isDefined(trigger));
   trigger waittill("trigger");
   trigger trigger_off();
@@ -313,7 +313,7 @@ triggersEnable(triggerName, noteworthyOrTargetname, bool) {
 }
 
 triggerActivate(sTriggerName) {
-  eTrig = getent(sTriggerName, "targetname");
+  eTrig = getEnt(sTriggerName, "targetname");
   assert(isDefined(eTrig));
   eTrig notify("trigger", level.player);
   eTrig trigger_off();
@@ -421,14 +421,14 @@ reset_threatbiasgroup() {
   self.old_threatBiasGroupName = undefined;
 }
 
-setGoalRadius(fRadius) {
+setgoalRadius(fRadius) {
   if(!isDefined(self.old_goalradius)) {
     self.old_goalradius = self.goalradius;
   }
   self.goalradius = fRadius;
 }
 
-resetGoalRadius() {
+resetgoalRadius() {
   if(isDefined(self.old_goalradius)) {
     self.goalradius = self.old_goalradius;
   }
@@ -497,7 +497,7 @@ groupWarp(aGroupToBeWarped, sNodesToWarpTo) {
 }
 getAIarrayTouchingVolume(sTeamName, sVolumeName, eVolume) {
   if(!isDefined(eVolume)) {
-    eVolume = getent(sVolumeName, "targetname");
+    eVolume = getEnt(sVolumeName, "targetname");
     assertEx(isDefined(eVolume), sVolumeName + " does not exist");
   }
 
@@ -598,11 +598,11 @@ goToNode(sNode) {
   node = getnode(sNode, "targetname");
   assertEx(isDefined(node), sNode + "node does not exist");
 
-  self setGoalRadius(node.radius);
+  self setgoalRadius(node.radius);
   self setgoalnode(node);
 
   self waittill("goal");
-  self resetGoalRadius();
+  self resetgoalRadius();
 }
 
 goToNodeAndDelete(sNode) {
@@ -618,7 +618,7 @@ goToNodeAndDelete(sNode) {
   assert(isDefined(node));
 
   self setgoalnode(node);
-  self setGoalRadius(node.radius);
+  self setgoalRadius(node.radius);
 
   self waittill("goal");
 
@@ -638,7 +638,7 @@ goToNodeAndWait(sNode) {
   assert(isDefined(eNode));
 
   self setgoalnode(eNode);
-  self setGoalRadius(eNode.radius);
+  self setgoalRadius(eNode.radius);
 
   self waittill("goal");
 
@@ -646,7 +646,7 @@ goToNodeAndWait(sNode) {
 
   self waittill("stop_waiting_at_node");
 
-  self resetGoalRadius();
+  self resetgoalRadius();
 }
 
 forceToNode(sNode) {
@@ -662,7 +662,7 @@ forceToNode(sNode) {
 
   self pushplayer(false);
 
-  self resetGoalRadius();
+  self resetgoalRadius();
 }
 
 setPosture(posture) {
@@ -729,12 +729,12 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
   }
 
   if(self.classname == "script_brushmodel") {
-    eExploder = getent(self.target, "targetname");
+    eExploder = getEnt(self.target, "targetname");
     assertex(isDefined(eExploder), "A script_brushmodel door needs to target an exploder to play particles when opened. Targetname:" + self.targetname);
   } else {
-    blocker = getent(self.target, "targetname");
+    blocker = getEnt(self.target, "targetname");
     assertex(isDefined(blocker), "A script_model door needs to target a script_brushmodel that blocks the door.");
-    eExploder = getent(blocker.script_linkto, "script_linkname");
+    eExploder = getEnt(blocker.script_linkto, "script_linkname");
     assertex(isDefined(eExploder), "A script_model door blocker needs to script_linkTo an exploder to play particles when opened. Targetname:" + self.targetname);
   }
 
@@ -747,7 +747,7 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
       radiusdamage(self.origin, 56, level.maxDetpackDamage, level.minDetpackDamage);
       break;
     case "kicked":
-      self rotateyaw(-175, 0.5);
+      self rotateYaw(-175, 0.5);
       self door_connectpaths(bPlayDefaultFx);
       break;
     case "kicked_down":
@@ -756,7 +756,7 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
 
       break;
     default:
-      self rotateyaw(-175, 0.5);
+      self rotateYaw(-175, 0.5);
       self door_connectpaths();
       break;
   }
@@ -770,7 +770,7 @@ door_connectpaths(bPlayDefaultFx) {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
   } else {
-    blocker = getent(self.target, "targetname");
+    blocker = getEnt(self.target, "targetname");
     assertex(isDefined(blocker), "A script_model door needs to target a script_brushmodel that blocks the door.");
     blocker hide();
     blocker notsolid();
@@ -782,7 +782,7 @@ door_fall_over() {
   vector = anglesToForward(self.angles);
   dist = (vector[0] * 20, vector[1] * 20, vector[2] * 20);
 
-  self moveto(self.origin + dist, .5, 0, .5);
+  self moveTo(self.origin + dist, .5, 0, .5);
   self rotatepitch(90, 0.45, 0.40);
   wait 0.449;
   self rotatepitch(-4, 0.2, 0, 0.2);

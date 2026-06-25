@@ -88,7 +88,7 @@ function objective_cloudmountain_init(str_objective, b_starting) {
     cp_mi_sing_biodomes_util::init_hendricks(str_objective);
     cp_mi_sing_biodomes::function_cef897cf(str_objective);
     level flag::set("back_door_opened");
-    e_player_clip = getent("back_door_player_clip", "targetname");
+    e_player_clip = getEnt("back_door_player_clip", "targetname");
     e_player_clip delete();
     spawn_manager::enable("cloud_mountain_siegebot_manager");
     level thread cp_mi_sing_biodomes_util::function_753a859(str_objective);
@@ -345,9 +345,9 @@ function function_8ce887a2(str_objective, b_starting, b_direct, player) {
     objectives::set("cp_level_biodomes_servers");
     cp_mi_sing_biodomes_util::init_hendricks(str_objective);
     level flag::set("back_door_opened");
-    e_player_clip = getent("back_door_player_clip", "targetname");
+    e_player_clip = getEnt("back_door_player_clip", "targetname");
     e_player_clip delete();
-    var_31861e2e = getent("trig_level_2_robot_spawns", "targetname");
+    var_31861e2e = getEnt("trig_level_2_robot_spawns", "targetname");
     if(isDefined(var_31861e2e)) {
       var_31861e2e delete();
     }
@@ -374,9 +374,9 @@ function function_2013f39c(str_objective, b_starting, b_direct, player) {
 }
 
 function function_8232942d() {
-  var_82ac908a = getent("trig_cloudmountain_left_stairs_spawns", "targetname");
+  var_82ac908a = getEnt("trig_cloudmountain_left_stairs_spawns", "targetname");
   var_82ac908a delete();
-  var_7870fb88 = getent("trig_sm_level_1_rushers", "targetname");
+  var_7870fb88 = getEnt("trig_sm_level_1_rushers", "targetname");
   var_7870fb88 delete();
 }
 
@@ -390,7 +390,7 @@ function function_56019233() {
 
 function exhibit_audio(str_ident) {
   level endon("turret_hallway_clear");
-  t_exhibit = getent("trig_exhibit_" + str_ident, "targetname");
+  t_exhibit = getEnt("trig_exhibit_" + str_ident, "targetname");
   while(true) {
     t_exhibit trigger::wait_till();
     switch (str_ident) {
@@ -421,7 +421,7 @@ function exhibit_audio(str_ident) {
 
 function catwalk_supertree_spawns() {
   trigger::wait_till("level_2_catwalk_spawns", "targetname");
-  e_door = getent("dome_side_door", "targetname");
+  e_door = getEnt("dome_side_door", "targetname");
   e_door connectpaths();
   e_door movez(100, 2);
   e_door waittill("movedone");
@@ -483,7 +483,7 @@ function cloud_mountain_level_3_surprised() {
   trigger::wait_till("trig_lookat_level_3_surprised");
   wait(randomfloatrange(0.1, 0.5));
   self scene::play("cin_gen_vign_confusion_02", self);
-  t_goal = getent("trig_level_3_catwalks_goal", "targetname");
+  t_goal = getEnt("trig_level_3_catwalks_goal", "targetname");
   if(isDefined(t_goal)) {
     self setgoal(t_goal);
     self waittill("goal");
@@ -496,7 +496,7 @@ function robot_pod_spawn() {
   self endon("death");
   self ai::set_ignoreme(1);
   self thread cleanup_pod_robots();
-  e_pod = getent(self.target, "targetname");
+  e_pod = getEnt(self.target, "targetname");
   e_pod thread scene::init("p7_fxanim_cp_sgen_charging_station_open_01_bundle", e_pod);
   str_scene = "cin_bio_07_03_climb_aie_charging_station";
   s_align = struct::get(e_pod.target, "targetname");
@@ -710,7 +710,7 @@ function function_58b4a5d6() {
 }
 
 function function_50c932d0() {
-  var_53efc9b3 = getent("turret_hallway_enemy_check_volume", "targetname");
+  var_53efc9b3 = getEnt("turret_hallway_enemy_check_volume", "targetname");
   a_enemy_ai = getaispeciesarray("axis", "all");
   foreach(e_enemy in a_enemy_ai) {
     if(e_enemy istouching(var_53efc9b3)) {
@@ -724,8 +724,8 @@ function objective_turret_hallway_done(str_objective, b_starting, b_direct, play
   objectives::complete("cp_level_biodomes_destroy_hallway_turrets");
   objectives::set("cp_level_biodomes_awaiting_update");
   cp_mi_sing_biodomes_util::objective_message("turret_hallway_done");
-  getent("trig_turret_hallway_enemy_spawns", "targetname") delete();
-  getent("trig_turret_hallway_defender_spawns", "targetname") delete();
+  getEnt("trig_turret_hallway_enemy_spawns", "targetname") delete();
+  getEnt("trig_turret_hallway_defender_spawns", "targetname") delete();
 }
 
 function objective_xiulan_vignette_init(str_objective, b_starting) {
@@ -750,11 +750,11 @@ function objective_xiulan_vignette_init(str_objective, b_starting) {
   var_5cb57398 = getnode("nd_turret_win_idle", "targetname");
   level.ai_hendricks setgoal(var_5cb57398);
   level thread setup_server_room_door_use_object();
-  e_clip = getent("turret_hallway_door_ai_clip", "targetname");
+  e_clip = getEnt("turret_hallway_door_ai_clip", "targetname");
   e_clip delete();
-  var_e5214b43 = getent("server_room_initial_bullet_brush_outer", "targetname");
+  var_e5214b43 = getEnt("server_room_initial_bullet_brush_outer", "targetname");
   var_e5214b43 hide();
-  var_f3ad8f26 = getent("server_room_initial_bullet_brush_inner", "targetname");
+  var_f3ad8f26 = getEnt("server_room_initial_bullet_brush_inner", "targetname");
   var_f3ad8f26 hide();
   level thread scene::init("p7_fxanim_cp_biodomes_server_room_window_break_01_bundle");
   level vo_xiulan_intro();
@@ -785,7 +785,7 @@ function xiulan_init() {
 function setup_server_room_door_use_object() {
   level waittill("hash_9b74c38e");
   v_offset = (0, 0, 0);
-  t_door_use_object = getent("trig_server_room_door_use_object", "targetname");
+  t_door_use_object = getEnt("trig_server_room_door_use_object", "targetname");
   t_door_use_object show();
   e_door_use_object = util::init_interactive_gameobject(t_door_use_object, &"cp_level_biodomes_server_door", &"CP_MI_SING_BIODOMES_CLOUDMOUNTAIN_ACCESS_TERMINAL", &function_9a82e132);
   level waittill("hash_69d6458d");
@@ -816,7 +816,7 @@ function function_934481ae(e_door) {
 function function_9a82e132(e_player) {
   level.var_f2be4c1f = e_player;
   var_485a1dbf = struct::get("s_server_room_hack_pos");
-  playsoundatposition("evt_hack_panel", var_485a1dbf.origin);
+  playSoundAtPosition("evt_hack_panel", var_485a1dbf.origin);
   self gameobjects::disable_object();
   objectives::complete("cp_level_biodomes_server_door");
   level notify("hash_69d6458d");
@@ -848,7 +848,7 @@ function function_d065fdd0(a_ents) {
 function server_room_door_open(team, player, success) {
   if(isDefined(success) && success) {
     self gameobjects::disable_object();
-    e_server_room_door = getent("server_room_door", "targetname");
+    e_server_room_door = getEnt("server_room_door", "targetname");
     e_server_room_door movez(100, 2);
     e_server_room_door connectpaths();
     e_server_room_door waittill("movedone");
@@ -869,7 +869,7 @@ function function_f1df85b9(a_ents) {
 }
 
 function hendricks_server_control_room_door_open(b_open) {
-  e_server_control_room_door = getent("server_control_room_door", "targetname");
+  e_server_control_room_door = getEnt("server_control_room_door", "targetname");
   if(b_open) {
     e_server_control_room_door movey(50, 0.5);
     e_server_control_room_door waittill("movedone");
@@ -884,23 +884,23 @@ function hendricks_server_control_room_door_open(b_open) {
 function objective_xiulan_vignette_done(str_objective, b_starting, b_direct, player) {
   cp_mi_sing_biodomes_util::objective_message("xiulan_vignette_done");
   objectives::complete("cp_level_biodomes_mainobj_capture_data_drives");
-  e_server_room_door = getent("server_room_door", "targetname");
+  e_server_room_door = getEnt("server_room_door", "targetname");
   if(isDefined(e_server_room_door)) {
     e_server_room_door connectpaths();
     e_server_room_door delete();
   }
-  e_server_room_door_clip = getent("server_room_door_clip", "targetname");
+  e_server_room_door_clip = getEnt("server_room_door_clip", "targetname");
   if(isDefined(e_server_room_door_clip)) {
     e_server_room_door_clip connectpaths();
     e_server_room_door_clip delete();
   }
-  getent("trig_server_room_door_use_object", "targetname") delete();
+  getEnt("trig_server_room_door_use_object", "targetname") delete();
 }
 
 function function_d28364c1() {
   level waittill("hash_67213d76");
-  var_e5214b43 = getent("server_room_initial_bullet_brush_outer", "targetname");
-  var_f3ad8f26 = getent("server_room_initial_bullet_brush_inner", "targetname");
+  var_e5214b43 = getEnt("server_room_initial_bullet_brush_outer", "targetname");
+  var_f3ad8f26 = getEnt("server_room_initial_bullet_brush_inner", "targetname");
   var_1c634edb = spawner::simple_spawn_single("server_room_initial_bullet_shooter");
   var_1c634edb endon("death");
   var_6b372cba = getnode("initial_shooter_node", "targetname");
@@ -912,7 +912,7 @@ function function_d28364c1() {
     level waittill("hash_ab045282");
     var_1c634edb ai::set_ignoreall(0);
     var_1c634edb ai::shoot_at_target("normal", var_e5214b43, "tag_origin");
-    var_18ee9c37 = getent("trig_initial_bullet_damage", "targetname");
+    var_18ee9c37 = getEnt("trig_initial_bullet_damage", "targetname");
     var_18ee9c37 util::waittill_notify_or_timeout("damage", 3);
     var_1c634edb.perfectaim = 0;
     var_1c634edb ai::set_ignoreme(0);
@@ -928,7 +928,7 @@ function function_d28364c1() {
 function objective_server_room_defend_init(str_objective, b_starting) {
   cp_mi_sing_biodomes_util::objective_message("server_room_defend_init");
   objectives::complete("cp_level_biodomes_awaiting_update");
-  getent("server_koolaid", "targetname") disconnectpaths();
+  getEnt("server_koolaid", "targetname") disconnectPaths();
   level thread function_a78ec4a();
   if(b_starting) {
     cp_mi_sing_biodomes_util::init_hendricks(str_objective);
@@ -939,7 +939,7 @@ function objective_server_room_defend_init(str_objective, b_starting) {
     var_777355da = getEntArray("hallway_turret", "script_noteworthy");
     a_turrets = spawner::simple_spawn(var_777355da);
     array::run_all(a_turrets, &kill);
-    e_clip = getent("turret_hallway_door_ai_clip", "targetname");
+    e_clip = getEnt("turret_hallway_door_ai_clip", "targetname");
     e_clip delete();
     level thread cp_mi_sing_biodomes_util::function_753a859(str_objective);
     level flag::wait_till("all_players_spawned");
@@ -966,21 +966,21 @@ function function_17d3780e() {
 
 function function_a78ec4a() {
   level trigger::wait_till("server_room_all_players_in");
-  var_2d1826b2 = getent("turret_hallway_front_door", "targetname");
-  var_f2087d4a = getent("turret_hallway_door_clip", "targetname");
-  var_f2087d4a linkto(var_2d1826b2);
+  var_2d1826b2 = getEnt("turret_hallway_front_door", "targetname");
+  var_f2087d4a = getEnt("turret_hallway_door_clip", "targetname");
+  var_f2087d4a linkTo(var_2d1826b2);
   var_2d1826b2 connectpaths();
   var_2d1826b2 movez(-100, 1);
   var_2d1826b2 waittill("movedone");
-  var_2d1826b2 disconnectpaths();
+  var_2d1826b2 disconnectPaths();
 }
 
 function server_room_spawning() {
   level.a_window_targets = [];
-  level.a_window_targets[0] = getent("server_room_window_target0", "targetname");
-  level.a_window_targets[1] = getent("server_room_window_target1", "targetname");
-  level.a_window_targets[2] = getent("server_room_window_target2", "targetname");
-  level.a_window_targets[3] = getent("server_room_window_target3", "targetname");
+  level.a_window_targets[0] = getEnt("server_room_window_target0", "targetname");
+  level.a_window_targets[1] = getEnt("server_room_window_target1", "targetname");
+  level.a_window_targets[2] = getEnt("server_room_window_target2", "targetname");
+  level.a_window_targets[3] = getEnt("server_room_window_target3", "targetname");
   a_nodes = getnodearray("swat_node", "script_noteworthy");
   foreach(node in a_nodes) {
     setenablenode(node, 0);
@@ -993,8 +993,8 @@ function server_room_spawning() {
   level thread dialog::remote("kane_he_s_fine_0");
   savegame::checkpoint_save();
   level thread namespace_f1b4cbbc::function_46333a8a();
-  playsoundatposition("evt_server_def_walla_1st", (603, 12812, 1184));
-  playsoundatposition("evt_server_def_walla_2nd", (900, 12750, 1140));
+  playSoundAtPosition("evt_server_def_walla_1st", (603, 12812, 1184));
+  playSoundAtPosition("evt_server_def_walla_2nd", (900, 12750, 1140));
   level notify("hash_f3c45157");
   wait(2);
   spawner::simple_spawn("server_room_enemy_window");
@@ -1012,7 +1012,7 @@ function server_room_spawning() {
   }
   savegame::checkpoint_save();
   level thread dialog::remote("kane_download_at_twenty_p_0");
-  playsoundatposition("evt_server_def_walla_3rd", (900, 12750, 1140));
+  playSoundAtPosition("evt_server_def_walla_3rd", (900, 12750, 1140));
   spawner::add_spawn_function_group("sp_server_room_background", "targetname", &cp_mi_sing_biodomes_fighttothedome::function_76c56ee1);
   spawn_manager::enable("sm_server_room_background");
   level thread function_963807b1();
@@ -1024,7 +1024,7 @@ function server_room_spawning() {
   }
   savegame::checkpoint_save();
   level dialog::remote("kane_download_at_forty_pe_0");
-  playsoundatposition("evt_server_def_walla_bots_a", (1117, 13871, 1116));
+  playSoundAtPosition("evt_server_def_walla_bots_a", (1117, 13871, 1116));
   level function_88e395d2();
   spawner::simple_spawn("server_room_enemy_elevator1");
   if(level.players.size > 2) {
@@ -1046,7 +1046,7 @@ function server_room_spawning() {
   }
   level dialog::player_say("plyr_more_hostiles_from_t_0");
   level thread dialog::remote("kane_download_at_sixty_pe_0", 1);
-  playsoundatposition("evt_server_def_walla_bots_b", (1117, 13871, 1116));
+  playSoundAtPosition("evt_server_def_walla_bots_b", (1117, 13871, 1116));
   wave_wait(2, 5, "hallway");
   if(level.players.size > 1) {
     spawn_manager::enable("server_room_fodder_manager_stairs", &set_goal_server_room);
@@ -1056,7 +1056,7 @@ function server_room_spawning() {
   savegame::checkpoint_save();
   level dialog::player_say("plyr_we_gotta_get_the_hel_0");
   level thread dialog::remote("kane_download_at_eighty_p_0");
-  playsoundatposition("evt_server_def_walla_4th", (1278, 13578, 1276));
+  playSoundAtPosition("evt_server_def_walla_4th", (1278, 13578, 1276));
   wait(3);
   function_560d15cf();
   wait(3);
@@ -1112,14 +1112,14 @@ function function_229a8bc9() {
   level waittill("vtol_spawned");
   self scene::play(str_scene_name, self);
   level flag::wait_till("window_broken");
-  self setgoal(getent("server_room_entrance_goal_volume", "targetname"));
+  self setgoal(getEnt("server_room_entrance_goal_volume", "targetname"));
 }
 
 function toss_smoke_grenade(a_enemies, str_grenade_start_struct) {
   w_smoke_grenade = getweapon("willy_pete_nd");
   s_throw_start = struct::get(str_grenade_start_struct, "targetname");
   s_throw_end = struct::get(s_throw_start.target, "targetname");
-  v_throw = (vectornormalize(s_throw_end.origin - s_throw_start.origin)) * 200;
+  v_throw = (vectorNormalize(s_throw_end.origin - s_throw_start.origin)) * 200;
   foreach(ai in a_enemies) {
     if(isalive(ai) && isweapon(w_smoke_grenade)) {
       s_throw_end fx::play("smoke_grenade", s_throw_end.origin);
@@ -1133,12 +1133,12 @@ function toss_smoke_grenade(a_enemies, str_grenade_start_struct) {
 
 function function_560d15cf() {
   s_smash = struct::get("warlord_smash", "targetname");
-  playsoundatposition("evt_breach_warning", s_smash.origin);
+  playSoundAtPosition("evt_breach_warning", s_smash.origin);
   wait(2);
   level thread scene::play("p7_fxanim_cp_biodomes_warlord_breach_01_bundle");
   playrumbleonposition("cp_biodomes_server_room_breach_rumble", s_smash.origin);
   spawn_manager::enable("sm_server_room_riot_shield_breach");
-  e_warlord_entrance = getent("server_koolaid", "targetname");
+  e_warlord_entrance = getEnt("server_koolaid", "targetname");
   e_warlord_entrance connectpaths();
   e_warlord_entrance delete();
   level thread dialog::remote("kane_hostiles_breaching_t_0", 1);
@@ -1153,7 +1153,7 @@ function function_7ed3a33e() {
   var_e17601b = arraycombine(var_ca9eeae1, var_4ba8bf11, 1, 0);
   var_e17601b = arraycombine(var_e17601b, var_ef02bf0d, 1, 0);
   var_e17601b = arraycombine(var_e17601b, var_be5f20b9, 1, 0);
-  e_goal = getent("server_room_window_goal_volume", "targetname");
+  e_goal = getEnt("server_room_window_goal_volume", "targetname");
   foreach(enemy in var_e17601b) {
     enemy setgoal(e_goal, 1);
   }
@@ -1162,7 +1162,7 @@ function function_7ed3a33e() {
 function wait_for_position(ai_shooter) {
   ai_shooter endon("death");
   ai_shooter.ignoreall = 1;
-  e_window_volume = getent("server_room_window_goal_volume", "targetname");
+  e_window_volume = getEnt("server_room_window_goal_volume", "targetname");
   while(ai_shooter istouching(e_window_volume) == 0) {
     wait(0.1);
     if(self getvelocity() == 0) {
@@ -1174,7 +1174,7 @@ function wait_for_position(ai_shooter) {
 
 function shoot_at_window() {
   self endon("death");
-  e_server_room = getent("server_room_entrance_goal_volume", "targetname");
+  e_server_room = getEnt("server_room_entrance_goal_volume", "targetname");
   if(level flag::get("window_broken") == 0) {
     wait_for_position(self);
   } else {
@@ -1214,7 +1214,7 @@ function objective_server_room_defend_done(str_objective, b_starting, b_direct, 
   cp_mi_sing_biodomes_util::objective_message("server_room_defend_done");
   objectives::complete("cp_level_biodomes_defend_server_room", level.ai_hendricks);
   objectives::complete("cp_level_biodomes_mainobj_upload_data");
-  e_window = getent("server_window", "targetname");
+  e_window = getEnt("server_window", "targetname");
   if(isDefined(e_window)) {
     e_window delete();
   }
@@ -1229,20 +1229,20 @@ function objective_server_room_defend_done(str_objective, b_starting, b_direct, 
 
 function elevator_spawning(str_location) {
   self endon("death");
-  e_my_elevator_l = getent(self.script_noteworthy + "_l", "targetname");
-  e_my_elevator_r = getent(self.script_noteworthy + "_r", "targetname");
+  e_my_elevator_l = getEnt(self.script_noteworthy + "_l", "targetname");
+  e_my_elevator_r = getEnt(self.script_noteworthy + "_r", "targetname");
   self ai::set_ignoreall(1);
   self.goalradius = 1;
   level thread elevator_light(str_location);
-  playsoundatposition("evt_elevator_ding", e_my_elevator_l.origin);
+  playSoundAtPosition("evt_elevator_ding", e_my_elevator_l.origin);
   e_my_elevator_l.v_closed = e_my_elevator_l.origin;
   e_my_elevator_r.v_closed = e_my_elevator_r.origin;
   s_elevator_l_open = struct::get(e_my_elevator_l.target, "targetname");
   s_elevator_r_open = struct::get(e_my_elevator_r.target, "targetname");
   e_my_elevator_l.v_open = s_elevator_l_open.origin;
   e_my_elevator_r.v_open = s_elevator_r_open.origin;
-  e_my_elevator_l moveto(e_my_elevator_l.v_open, 1);
-  e_my_elevator_r moveto(e_my_elevator_r.v_open, 1);
+  e_my_elevator_l moveTo(e_my_elevator_l.v_open, 1);
+  e_my_elevator_r moveTo(e_my_elevator_r.v_open, 1);
   e_my_elevator_l waittill("movedone");
   level thread elevator_close(self, e_my_elevator_l, e_my_elevator_r);
   nd_target = getnode(self.target, "targetname");
@@ -1255,15 +1255,15 @@ function elevator_spawning(str_location) {
     self util::waittill_any("goal", "near_goal");
     self.goalradius = 2048;
     self util::waittill_any_timeout(5, "damage", "pain");
-    e_volume = getent("server_room_entrance_goal_volume", "targetname");
+    e_volume = getEnt("server_room_entrance_goal_volume", "targetname");
     self setgoal(e_volume);
   }
 }
 
 function elevator_backup() {
   self endon("death");
-  e_my_elevator_l = getent(self.script_noteworthy + "_l", "targetname");
-  e_my_elevator_r = getent(self.script_noteworthy + "_r", "targetname");
+  e_my_elevator_l = getEnt(self.script_noteworthy + "_l", "targetname");
+  e_my_elevator_r = getEnt(self.script_noteworthy + "_r", "targetname");
   self ai::set_ignoreall(1);
   self.goalradius = 1;
   e_my_elevator_l waittill("movedone");
@@ -1302,7 +1302,7 @@ function swat_team_control() {
   if(level.players.size > 2) {
     spawner::simple_spawn("server_room_enemy_swat2");
   }
-  e_staging_area = getent("staging_area", "targetname");
+  e_staging_area = getEnt("staging_area", "targetname");
   b_gotime = 0;
   while(b_gotime == 0) {
     wait(1);
@@ -1340,7 +1340,7 @@ function swat_team_ai() {
 }
 
 function set_goal_server_room() {
-  e_goal = getent("server_room_entrance_goal_volume", "targetname");
+  e_goal = getEnt("server_room_entrance_goal_volume", "targetname");
   self setgoal(e_goal);
 }
 
@@ -1353,14 +1353,14 @@ function top_floor_door() {
     if(!level scene::is_playing("p7_fxanim_gp_door_broken_open_01_bundle")) {
       level thread scene::play("p7_fxanim_gp_door_broken_open_01_bundle");
     }
-    e_door = getent("top_floor_door_clip", "targetname");
+    e_door = getEnt("top_floor_door_clip", "targetname");
     if(isDefined(e_door)) {
       playrumbleonposition("cp_biodomes_server_room_top_floor_door_rumble", e_door.origin);
       e_door delete();
     }
     level flag::wait_till("top_floor_breached");
   }
-  self setgoal(getent("server_room_entrance_goal_volume", "targetname"));
+  self setgoal(getEnt("server_room_entrance_goal_volume", "targetname"));
 }
 
 function top_floor_flag() {
@@ -1373,7 +1373,7 @@ function function_963807b1() {
   level notify("vtol_spawned");
   level thread scene::play("p7_fxanim_cp_biodomes_server_room_window_break_01_bundle");
   level waittill("hash_53ff6d53");
-  e_window = getent("server_window", "targetname");
+  e_window = getEnt("server_window", "targetname");
   foreach(player in level.activeplayers) {
     if(player util::is_looking_at(e_window, 0.3)) {
       player thread dialog::player_say("plyr_shit_they_re_blowin_0", 0.25);
@@ -1432,11 +1432,11 @@ function rope_guy_init() {
   var_c312dab9 = util::spawn_model("tag_origin", s_vtol.origin, s_vtol.angles);
   var_c312dab9 thread scene::play("cin_gen_traversal_zipline_enemy02_idle", self);
   var_b39127dd = util::spawn_model("wpn_t7_zipline_trolley_prop", self gettagorigin("tag_weapon_left"), self gettagangles("tag_weapon_left"));
-  var_b39127dd linkto(self, "tag_weapon_left");
+  var_b39127dd linkTo(self, "tag_weapon_left");
   self thread function_e87de176(array(var_c312dab9, var_b39127dd));
   n_dist = distance(s_vtol.origin, s_landing.origin);
   n_time = n_dist / 500;
-  var_c312dab9 moveto(s_landing.origin, n_time);
+  var_c312dab9 moveTo(s_landing.origin, n_time);
   var_c312dab9 playLoopSound("evt_vtol_npc_move");
   self thread rope_guy_stop_snd(var_c312dab9);
   var_c312dab9 waittill("movedone");
@@ -1444,7 +1444,7 @@ function rope_guy_init() {
   var_c312dab9 playSound("evt_vtol_npc_detach");
   v_on_navmesh = getclosestpointonnavmesh(var_c312dab9.origin, 100, 48);
   if(isDefined(v_on_navmesh)) {
-    var_c312dab9 moveto(v_on_navmesh, 0.25);
+    var_c312dab9 moveTo(v_on_navmesh, 0.25);
   }
   var_c312dab9 scene::play("cin_gen_traversal_zipline_enemy02_dismount", self);
   self notify("dismount_zipline");
@@ -1452,7 +1452,7 @@ function rope_guy_init() {
   util::wait_network_frame();
   var_c312dab9 delete();
   var_b39127dd delete();
-  self setgoal(getent("server_room_entrance_goal_volume", "targetname"));
+  self setgoal(getEnt("server_room_entrance_goal_volume", "targetname"));
   level waittill("server_defend_done");
 }
 
@@ -1489,26 +1489,26 @@ function function_4df7264d() {
 
 function elevator_close(ai_spawn, e_my_elevator_l, e_my_elevator_r) {
   level flag::wait_till(ai_spawn.script_noteworthy + "_cleared");
-  e_my_elevator_l moveto(e_my_elevator_l.v_closed, 1);
-  e_my_elevator_r moveto(e_my_elevator_r.v_closed, 1);
+  e_my_elevator_l moveTo(e_my_elevator_l.v_closed, 1);
+  e_my_elevator_r moveTo(e_my_elevator_r.v_closed, 1);
   e_my_elevator_l waittill("movedone");
-  e_my_elevator_l disconnectpaths();
-  e_my_elevator_r disconnectpaths();
+  e_my_elevator_l disconnectPaths();
+  e_my_elevator_r disconnectPaths();
 }
 
 function elevator_wait(ai_spawn) {
   ai_spawn endon("death");
-  t_elevator = getent(ai_spawn.script_noteworthy + "_elevator_trigger", "targetname");
+  t_elevator = getEnt(ai_spawn.script_noteworthy + "_elevator_trigger", "targetname");
   while(ai_spawn istouching(t_elevator) || util::any_player_is_touching(t_elevator, "allies")) {
     wait(0.5);
   }
 }
 
 function function_6f311542() {
-  var_b05a0766 = getent("lobby_elevator_door_01_l", "targetname");
-  var_c3cad8fd = getent("lobby_elevator_door_01_r", "targetname");
-  var_b05a0766 disconnectpaths();
-  var_c3cad8fd disconnectpaths();
+  var_b05a0766 = getEnt("lobby_elevator_door_01_l", "targetname");
+  var_c3cad8fd = getEnt("lobby_elevator_door_01_r", "targetname");
+  var_b05a0766 disconnectPaths();
+  var_c3cad8fd disconnectPaths();
 }
 
 function wave_wait(n_new_wave_threshold, n_timer, str_ai_group1, str_ai_group2, str_ai_group3, var_f0bb9dad) {
@@ -1543,6 +1543,6 @@ function wave_wait(n_new_wave_threshold, n_timer, str_ai_group1, str_ai_group2, 
 
 function function_947a1ae8() {
   self endon("death");
-  e_volume = getent(self.target, "targetname");
+  e_volume = getEnt(self.target, "targetname");
   self setgoal(e_volume, 1);
 }

@@ -19,7 +19,7 @@ skipto_mason_bunker() {
   level.woods = init_hero("woods");
   level.hudson = init_hero("hudson");
   skipto_teleport("player_skipto_mason_bunker", get_heroes());
-  sp_redshirt = getent("redshirt_pdf", "script_noteworthy");
+  sp_redshirt = getEnt("redshirt_pdf", "script_noteworthy");
   ai_redshirt = simple_spawn_single(sp_redshirt);
   ai_redshirt.takedamage = 0;
   wait 0.1;
@@ -92,12 +92,12 @@ load_bunker_gump() {
 nicaragua_mason_bunker_objectives() {
   set_objective(level.obj_mason_bunker);
   flag_wait("bunker_entry_objective");
-  set_objective(level.obj_mason_bunker, getstruct("enter_bunker_objective"), "");
+  set_objective(level.obj_mason_bunker, getStruct("enter_bunker_objective"), "");
   flag_set("player_near_bunker_entrance");
   flag_wait("bunker_entry_objective_remove");
   set_objective(level.obj_mason_bunker, undefined, "remove");
   trigger_wait("mason_bunker_down_hatch");
-  set_objective(level.obj_mason_bunker, getstruct("bunker_objective_1"), "");
+  set_objective(level.obj_mason_bunker, getStruct("bunker_objective_1"), "");
   trigger_wait("bunker_2ndroom_start_trigger");
   set_objective(level.obj_mason_bunker, undefined, "remove");
   flag_wait("nicaragua_mason_bunker_complete");
@@ -106,13 +106,13 @@ nicaragua_mason_bunker_objectives() {
 }
 
 mason_mission_lockbreaker_perk() {
-  t_open = getent("lockbreaker_perk_trigger", "targetname");
-  t_open sethintstring(&"SCRIPT_HINT_LOCK_BREAKER");
-  t_open setcursorhint("HINT_NOICON");
+  t_open = getEnt("lockbreaker_perk_trigger", "targetname");
+  t_open setHintString(&"SCRIPT_HINT_LOCK_BREAKER");
+  t_open setCursorHint("HINT_NOICON");
   t_open trigger_off();
   level.player waittill_player_has_lock_breaker_perk();
   t_open trigger_on();
-  e_volume = getent("lockbreaker_volume", "targetname");
+  e_volume = getEnt("lockbreaker_volume", "targetname");
   add_cleanup_ent("mason_bunker_cleanup", e_volume);
   set_objective_perk(level.obj_mason_lockbreaker_perk, t_open, 1024, e_volume);
   t_open waittill("trigger");
@@ -185,7 +185,7 @@ bunker_setup() {
     setenablenode(node, 0);
   }
 
-  e_trigger = getent("mason_bunker_firetrigger", "targetname");
+  e_trigger = getEnt("mason_bunker_firetrigger", "targetname");
 
   if(isDefined(e_trigger)) {
     e_trigger trigger_off();
@@ -196,12 +196,12 @@ bunker_setup() {
 }
 
 bunker_table_clip_setup() {
-  e_clip1 = getent("cartel_tabel_clip_01", "targetname");
-  e_table1 = getent("bunker_cartel_tabel_01", "targetname");
-  e_clip1 linkto(e_table1);
-  e_clip3 = getent("cartel_tabel_clip_03", "targetname");
-  e_table3 = getent("bunker_cartel_tabel_03", "targetname");
-  e_clip3 linkto(e_table3);
+  e_clip1 = getEnt("cartel_tabel_clip_01", "targetname");
+  e_table1 = getEnt("bunker_cartel_tabel_01", "targetname");
+  e_clip1 linkTo(e_table1);
+  e_clip3 = getEnt("cartel_tabel_clip_03", "targetname");
+  e_table3 = getEnt("bunker_cartel_tabel_03", "targetname");
+  e_clip3 linkTo(e_table3);
 }
 
 bunker_cocaine_fog() {
@@ -221,10 +221,10 @@ bunker_cocaine_fog() {
 
 fake_destructible_blue_bowl() {
   level endon("player_left_bunker");
-  e_bowl = getent("cocaine_bowl", "targetname");
+  e_bowl = getEnt("cocaine_bowl", "targetname");
   add_cleanup_ent("mason_bunker_cleanup", e_bowl);
-  e_cocaine = getent("cocaine_bowl_cocaine", "targetname");
-  s_origin = getstruct("cocaine_bowl_struct", "targetname");
+  e_cocaine = getEnt("cocaine_bowl_cocaine", "targetname");
+  s_origin = getStruct("cocaine_bowl_struct", "targetname");
   trigger_wait("cocaine_bowl_damage_trigger");
   n_x = randomfloatrange(-2.5, 2.5);
   n_y = randomfloatrange(-2.5, 2.5);
@@ -265,7 +265,7 @@ bunker_splitup_anims() {
     level waittill("buddy_down_hatch");
   }
 
-  e_clip = getent("bunker_entrance_clip", "targetname");
+  e_clip = getEnt("bunker_entrance_clip", "targetname");
   e_clip delete();
   flag_set("bunker_entry_objective");
   trigger_wait("bunker_entry_trigger");
@@ -310,7 +310,7 @@ run_split_up_pdf_enter_scene() {
 }
 
 splitup_start_objective() {
-  s_struct = getstruct("bunker_entrance_struct", "targetname");
+  s_struct = getStruct("bunker_entrance_struct", "targetname");
   set_objective(level.obj_mason_bunker_entrance, s_struct, "");
   flag_wait("player_near_bunker_entrance");
   set_objective(level.obj_mason_bunker_entrance, undefined, "delete");
@@ -319,7 +319,7 @@ splitup_start_objective() {
 
 split_up_door_kick(e_redshirt) {
   level.player rumble_loop(2, 0.5, "damage_light");
-  e_clip = getent("bunker_entry_clip", "targetname");
+  e_clip = getEnt("bunker_entry_clip", "targetname");
   e_clip trigger_off();
   e_clip connectpaths();
   e_clip delete();
@@ -338,9 +338,9 @@ bunker_civilian_runs() {
 }
 
 bunker_civilian_run_01() {
-  e_brick = getent("bunker_cocaine_run_brick01", "targetname");
+  e_brick = getEnt("bunker_cocaine_run_brick01", "targetname");
   add_cleanup_ent("mason_bunker_cleanup", e_brick);
-  sp_spawner = getent("bunker_civilian_run_01", "targetname");
+  sp_spawner = getEnt("bunker_civilian_run_01", "targetname");
 
   while(!flag("bunker_1stroom_alerted")) {
     wait(randomfloatrange(1.0, 3.0));
@@ -349,7 +349,7 @@ bunker_civilian_run_01() {
     ai_civ = get_ais_from_scene("bunker_civilian_run_01", "bunker_civilian_run_01");
     ai_civ.cocaine_brick = e_brick;
     wait 0.1;
-    e_brick linkto(ai_civ, "TAG_WEAPON_LEFT", (0, 0, 0), (0, 0, 0));
+    e_brick linkTo(ai_civ, "TAG_WEAPON_LEFT", (0, 0, 0), (0, 0, 0));
     e_brick show();
     ai_civ.deathfunction = ::bunker_civilian_run_drops_cocaine;
     scene_wait("bunker_civilian_run_01");
@@ -375,7 +375,7 @@ bunker_table_civilian_run_01_begin_anim(e_guy) {
 }
 
 bunker_civilian_run_02() {
-  sp_spawner = getent("bunker_civilian_run_02", "targetname");
+  sp_spawner = getEnt("bunker_civilian_run_02", "targetname");
 
   while(!flag("bunker_1stroom_alerted")) {
     level thread run_scene("bunker_civilian_run_02");
@@ -402,8 +402,8 @@ bunker_table_civilian_run_02_begin_anim(e_guy) {
 }
 
 bunker_civilian_run_03() {
-  e_brick = getent("bunker_cocaine_run_brick03", "targetname");
-  sp_spawner = getent("bunker_civilian_run_03", "targetname");
+  e_brick = getEnt("bunker_cocaine_run_brick03", "targetname");
+  sp_spawner = getEnt("bunker_civilian_run_03", "targetname");
 
   while(!flag("bunker_1stroom_alerted")) {
     level thread run_scene("bunker_civilian_run_03");
@@ -434,13 +434,13 @@ bunker_table_civilian_run_03_begin_anim(e_guy) {
 }
 
 bunker_table_civilian_run_03_attach_cocaine(e_guy) {
-  e_guy.cocaine_brick linkto(e_guy, "TAG_WEAPON_LEFT", (0, 0, 0), (0, 0, 0));
+  e_guy.cocaine_brick linkTo(e_guy, "TAG_WEAPON_LEFT", (0, 0, 0), (0, 0, 0));
   e_guy.cocaine_brick show();
   e_guy.deathfunction = ::bunker_civilian_run_drops_cocaine;
 }
 
 bunker_civilian_run_drops_cocaine() {
-  self.cocaine_brick stopanimscripted();
+  self.cocaine_brick stopanimScripted();
   self.cocaine_brick unlink();
   self.cocaine_brick physicslaunch(self.cocaine_brick.origin, (0, 0, 1));
   self.cocaine_brick = undefined;
@@ -699,7 +699,7 @@ pick_new_ai_table_kick_2() {
 
 bunker_table_flipped_01(e_table) {
   flag_set("bunker_table_01_flipped");
-  s_org = getstruct("bunker_tabel_01_physics_pulse", "targetname");
+  s_org = getStruct("bunker_tabel_01_physics_pulse", "targetname");
   physicsjolt(s_org.origin, 40, 8, (-1, 0.01, 1));
   a_nd_table1 = getnodearray("post_table1_kick", "script_noteworthy");
 
@@ -713,9 +713,9 @@ bunker_table_flipped_01(e_table) {
 
 bunker_table_flipped_03(e_table) {
   flag_set("bunker_table_03_flipped");
-  e_coke = getent("cokepile", "targetname");
+  e_coke = getEnt("cokepile", "targetname");
   add_cleanup_ent("mason_bunker_cleanup", e_coke);
-  s_org = getstruct("bunker_tabel_03_physics_pulse", "targetname");
+  s_org = getStruct("bunker_tabel_03_physics_pulse", "targetname");
   physicsjolt(s_org.origin, 46, 8, (-1, 0.01, 1));
   play_fx("cocaine_powder", e_coke.origin);
   level notify("cocaine_fog");
@@ -731,7 +731,7 @@ bunker_table_flipped_03(e_table) {
 }
 
 woods_kicks_off_coke_fog() {
-  e_origin = getent("fake_coke_shot", "targetname");
+  e_origin = getEnt("fake_coke_shot", "targetname");
   e_origin.health = 100;
   add_cleanup_ent("mason_bunker_cleanup", e_origin);
   self shoot_at_target(e_origin, undefined, undefined, 2.0);
@@ -792,7 +792,7 @@ bunker_1stroom_retreat() {
     trigger_use("mason_bunker_colortrigger2");
   }
 
-  e_goalvolume = getent("bunker_1stroom_back_goalvolume", "targetname");
+  e_goalvolume = getEnt("bunker_1stroom_back_goalvolume", "targetname");
   a_ai_enemies = getaiarray("axis");
 
   foreach(guy in a_ai_enemies) {
@@ -890,7 +890,7 @@ bunker_paper_burners() {
 
 paper_burner_1_deathfunction() {
   e_box = get_model_or_models_from_scene("bunker_paper_burner_1", "evidence_box");
-  e_box stopanimscripted();
+  e_box stopanimScripted();
   e_box physicslaunch(e_box.origin, vectorscale((0, 0, 1), 0.5));
   level notify("bunker_1stroom_alerted");
   return false;
@@ -940,7 +940,7 @@ end_bunker_paper_burner_scenes(n_index) {
 gascan_drop(e_guy) {
   level notify("paper_burner_dropped_gascan");
   e_gascan = get_model_or_models_from_scene("bunker_paper_burner_2", "evidence_gascan");
-  e_gascan stopanimscripted();
+  e_gascan stopanimScripted();
   e_gascan physicslaunch(e_gascan.origin, vectorscale((0, 0, 1), 0.5));
 }
 
@@ -950,7 +950,7 @@ match_flame(e_guy) {
     level clientnotify("frs_on");
     flag_set("bunker_fire_started");
     level thread bunker_fire_timer();
-    e_trigger = getent("mason_bunker_firetrigger", "targetname");
+    e_trigger = getEnt("mason_bunker_firetrigger", "targetname");
 
     if(isDefined(e_trigger)) {
       e_trigger trigger_on();
@@ -986,10 +986,10 @@ check_bunker_near_clear(a_ai_rearbunker) {
 
 cia_easter_egg() {
   level endon("player_left_bunker");
-  e_cia_card = getent("easteregg_cia_card", "targetname");
-  t_cia = getent("bunker_CIA_pickup", "targetname");
+  e_cia_card = getEnt("easteregg_cia_card", "targetname");
+  t_cia = getEnt("bunker_CIA_pickup", "targetname");
   level endon("cia_easter_egg_timer_expired");
-  t_cia sethintstring(&"NICARAGUA_CIA");
+  t_cia setHintString(&"NICARAGUA_CIA");
   t_cia waittill("trigger");
   level notify("cia_easter_egg_success");
   level.player set_story_stat("FOUND_NICARAGUA_EASTEREGG", 1);
@@ -1003,11 +1003,11 @@ bunker_fire_timer() {
   level endon("cia_easter_egg_success");
   wait 60.0;
   level notify("cia_easter_egg_timer_expired");
-  t_cia = getent("bunker_CIA_pickup", "targetname");
+  t_cia = getEnt("bunker_CIA_pickup", "targetname");
   t_cia end_cia_easter_egg();
   exploder(669);
   wait 0.1;
-  e_cia_card = getent("easteregg_cia_card", "targetname");
+  e_cia_card = getEnt("easteregg_cia_card", "targetname");
   e_cia_card delete();
 }
 
@@ -1112,8 +1112,8 @@ bunker_ambient_mortars() {
   level.player thread bunker_mortar_swinging_lights();
   level thread maps\createart\nicaragua_art::bunker_exposure_scale();
   level thread setup_bunker_lookat_physics_pulses();
-  t_room1 = getent("bunker_mortars_room1", "targetname");
-  t_room2 = getent("bunker_mortars_room2", "targetname");
+  t_room1 = getEnt("bunker_mortars_room1", "targetname");
+  t_room2 = getEnt("bunker_mortars_room2", "targetname");
   level.player thread bunker_mortar_dust_fx(t_room1, t_room2);
   a_s_mortarspots = getStructArray("mason_bunker_mortar", "targetname");
 
@@ -1171,7 +1171,7 @@ bunker_lookat_physics_pulse(str_flag) {
     level waittill("mason_bunker_fake_mortar");
 
     if(flag(str_flag)) {
-      s_struct = getstruct(str_flag, "targetname");
+      s_struct = getStruct(str_flag, "targetname");
       n_x = randomfloatrange(-0.15, 0.15);
       n_y = randomfloatrange(-0.15, 0.15);
       n_z = randomfloatrange(0.0, 0.15);

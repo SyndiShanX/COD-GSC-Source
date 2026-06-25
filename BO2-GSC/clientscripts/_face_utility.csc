@@ -154,7 +154,7 @@ shouldplayfaceevent(player, face_state) {
     return true;
   }
 
-  if(isDefined(player) && distancesquared(self.origin, player.origin) < 40000.0 && vectordot(anglesToForward(player.angles), vectornormalize(self.origin - player.origin)) >= cos(35)) {
+  if(isDefined(player) && distancesquared(self.origin, player.origin) < 40000.0 && vectordot(anglesToForward(player.angles), vectorNormalize(self.origin - player.origin)) >= cos(35)) {
     return true;
   }
 

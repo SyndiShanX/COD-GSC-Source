@@ -44,7 +44,7 @@ func_B608(var_0, var_1, var_2, var_3) {
       return 0;
     }
 
-    var_6 = vectornormalize(var_5 - var_4);
+    var_6 = vectorNormalize(var_5 - var_4);
     var_7 = var_4 - var_6 * 36;
     var_8 = scripts\common\trace::ai_trace_passed(var_4, var_7, undefined, [self, self.melee.target], undefined, 4);
     return var_8;
@@ -83,7 +83,7 @@ func_D3F9() {
   level.player.melee.partner = self;
   level.player.melee.var_E505 = var_1;
   var_2 = clearpotentialthreat();
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   var_3 = "meleeAnim";
   var_1 func_82E4(var_3, var_2["chokePlayer"], var_1.var_E6E5, 1, 0.2, 1);
   level.player notify("choke_scene_music");
@@ -326,7 +326,7 @@ func_B61F(var_0, var_1, var_2, var_3) {
   var_10.var_B650 = spawn("script_model", var_11);
   var_10.var_B650 setModel("tag_origin");
   var_10.var_B650.angles = var_12;
-  var_10.var_B650 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  var_10.var_B650 linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   level.player thread func_B062();
   var_10 linktoblendtotag(var_10.var_B650, "tag_origin", 1, 0);
   var_10 lib_0A1E::func_2307(::func_EB7C, ::saviorcleanup);
@@ -392,7 +392,7 @@ func_3675(var_0, var_1, var_2) {
   var_3 glinton(#animtree);
   var_3.origin = self gettagorigin("j_head_pv_z");
   var_3.angles = self gettagangles("j_head_pv_z");
-  var_3 linkto(self, "j_head_pv_z");
+  var_3 linkTo(self, "j_head_pv_z");
   var_3 func_82E7(var_0, var_1, 1, var_2, 1);
   scripts\engine\utility::waittill_notify_or_timeout("death", 7);
   if(isDefined(var_3)) {
@@ -507,10 +507,10 @@ func_B617(var_0) {
 
     case "rm_damage_heavy":
       if(scripts\engine\utility::cointoss()) {
-        level.player playrumbleonentity("heavy_1s");
+        level.player playRumbleOnEntity("heavy_1s");
         return;
       }
-      level.player playrumbleonentity("light_1s");
+      level.player playRumbleOnEntity("light_1s");
       break;
   }
 }
@@ -536,7 +536,7 @@ func_D456() {
   level.player notify("bt_stop_meleegrab");
   if(isDefined(level.player)) {
     if(isDefined(level.player.melee) && isDefined(level.player.melee.partner)) {
-      var_0 = vectornormalize(level.player.origin - level.player.melee.partner.origin);
+      var_0 = vectorNormalize(level.player.origin - level.player.melee.partner.origin);
       var_0 = var_0 * 100;
       level.player setvelocity(var_0);
     }
@@ -750,7 +750,7 @@ func_4883(var_0) {
 
 func_17CD(var_0) {
   level.player.var_8675 = spawn("script_origin", level.player.origin);
-  level.player.var_8675 linkto(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
+  level.player.var_8675 linkTo(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player getwholescenedurationmin(level.player.var_8675);
 }
 

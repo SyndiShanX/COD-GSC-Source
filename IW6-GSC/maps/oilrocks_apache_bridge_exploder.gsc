@@ -7,7 +7,7 @@
 
 main() {
   var_0 = "bridge_exploder";
-  var_1 = getent("bridge_exploder_ref", "targetname");
+  var_1 = getEnt("bridge_exploder_ref", "targetname");
 
   if(!isDefined(var_1)) {
     return;

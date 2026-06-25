@@ -1235,7 +1235,7 @@ function endgame(winner, endreasontext, endimage) {
   if(isDefined(level.endgamefunction)) {
     level thread[[level.endgamefunction]]();
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] setclientuivisibilityflag("weapon_hud_visible", 0);
     players[i] setclientminiscoreboardhide(1);
@@ -1246,7 +1246,7 @@ function endgame(winner, endreasontext, endimage) {
     [[level.intermission_override_func]]();
     level.intermission_override_func = undefined;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] cameraactivate(0);
   }

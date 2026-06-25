@@ -1149,7 +1149,7 @@ _id_0B40(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_9 <= var_4) {
       var_10 = var_8.origin - var_1;
-      var_11 = vectornormalize(var_10);
+      var_11 = vectorNormalize(var_10);
       var_12 = vectordot(var_2, var_11);
 
       if(var_12 >= var_5) {
@@ -1171,7 +1171,7 @@ _id_0B3F(var_0, var_1, var_2, var_3) {
 
     if(var_8 <= var_3) {
       var_9 = var_7.origin - var_0;
-      var_10 = vectornormalize(var_9);
+      var_10 = vectorNormalize(var_9);
       var_11 = vectordot(var_1, var_10);
 
       if(var_11 > var_5) {

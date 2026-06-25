@@ -833,7 +833,7 @@ _id_D51F() {
           continue;
         }
         var_23 = var_22 getEye();
-        var_24 = vectordot(var_14, vectornormalize(var_23 - var_12));
+        var_24 = vectordot(var_14, vectorNormalize(var_23 - var_12));
 
         if(var_24 < var_6) {
           continue;
@@ -894,7 +894,7 @@ _id_D524() {
   self endon("death_delay_finished");
   var_0 = ["physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_characterproxy", "physicscontents_glass", "physicscontents_itemclip"];
   var_1 = physics_createcontents(var_0);
-  var_2 = vectornormalize(self.origin - self._id_8FFD.origin);
+  var_2 = vectorNormalize(self.origin - self._id_8FFD.origin);
   var_3 = self.origin + (0, 0, 42);
   var_4 = var_3 + var_2 * 120.0;
   var_5 = scripts\engine\trace::_id_E409(var_3, var_4, 2.0, self, var_1, 0);

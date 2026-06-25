@@ -306,8 +306,8 @@ mall_crane() {
   var_3 = var_2 common_scripts\utility::get_linked_ent();
   var_1.origin = var_2.origin;
   var_1.angles = var_2.angles;
-  var_3 linkto(var_1);
-  var_2 linkto(var_1);
+  var_3 linkTo(var_1);
+  var_2 linkTo(var_1);
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_4.origin = var_0.origin;
   var_4.angles = var_0.angles;
@@ -346,13 +346,13 @@ delayed_setup() {
 
   foreach(var_3 in var_1) {
     var_3 retargetscriptmodellighting(var_0);
-    var_3 moveto(var_3.origin - (0, 0, -0.01), 1);
+    var_3 moveTo(var_3.origin - (0, 0, -0.01), 1);
   }
 
-  var_0 = getent("church_cliff", "targetname");
-  var_5 = getent("church_light_target", "targetname");
+  var_0 = getEnt("church_cliff", "targetname");
+  var_5 = getEnt("church_light_target", "targetname");
   var_0 retargetscriptmodellighting(var_5);
-  var_0 moveto(var_0.origin - (0, 0, -0.01), 1);
+  var_0 moveTo(var_0.origin - (0, 0, -0.01), 1);
 }
 
 breach_explosion_notify(var_0) {

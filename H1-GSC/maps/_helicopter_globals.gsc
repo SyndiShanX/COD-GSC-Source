@@ -31,11 +31,11 @@ chopper_turret_on() {
 }
 
 heli_firelink(var_0) {
-  var_1 = getent(var_0.script_linkto, "script_linkname");
+  var_1 = getEnt(var_0.script_linkto, "script_linkname");
   var_2 = !isDefined(var_1);
 
   if(!isDefined(var_1)) {
-    var_1 = common_scripts\utility::getstruct(var_0.script_linkto, "script_linkname");
+    var_1 = common_scripts\utility::getStruct(var_0.script_linkto, "script_linkname");
   }
 
   var_3 = var_0.script_firelink;
@@ -61,7 +61,7 @@ heli_firelink(var_0) {
       var_4 = [0.1, 0.2, 0.3];
       wait 1;
       var_1.origin = var_1.origin + (0, 0, -150);
-      var_1 moveto(var_1.origin + (0, 0, 150), 0.6, 0, 0);
+      var_1 moveTo(var_1.origin + (0, 0, 150), 0.6, 0, 0);
 
       foreach(var_6 in var_4) {
         if(!isDefined(self)) {
@@ -218,7 +218,7 @@ flares_redirect_missiles(var_0, var_1) {
 
   if(isDefined(var_0.incomming_missiles)) {
     for(var_5 = 0; var_5 < var_0.incomming_missiles.size; var_5++) {
-      var_0.incomming_missiles[var_5] missile_settargetent(var_3);
+      var_0.incomming_missiles[var_5] missile_settargetEnt(var_3);
     }
   }
 
@@ -242,7 +242,7 @@ flares_redirect_missiles(var_0, var_1) {
     return;
   }
   for(var_5 = 0; var_5 < var_0.incomming_missiles.size; var_5++) {
-    var_0.incomming_missiles[var_5] missile_settargetent(var_0, var_6);
+    var_0.incomming_missiles[var_5] missile_settargetEnt(var_0, var_6);
   }
 }
 
@@ -334,7 +334,7 @@ getenemytarget(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(isDefined(var_1)) {
-      var_15 = vectornormalize(var_10[var_11].origin - self.origin);
+      var_15 = vectorNormalize(var_10[var_11].origin - self.origin);
       var_16 = vectordot(var_13, var_15);
 
       if(var_16 <= var_1) {
@@ -394,7 +394,7 @@ shootenemytarget_bullets(var_0) {
     var_1 = (0, 0, 32);
   }
 
-  self setturrettargetent(var_0, var_1);
+  self setturrettargetEnt(var_0, var_1);
 
   while(self.health > 0) {
     var_2 = randomintrange(1, 25);
@@ -622,7 +622,7 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
     if(var_0 == "ffar_mi28_village_assault") {
       if(isDefined(var_2) && isDefined(var_2.origin)) {
         var_11 = self gettagorigin(var_8[var_9]);
-        var_12 = vectornormalize(var_2.origin - var_11);
+        var_12 = vectorNormalize(var_2.origin - var_11);
         var_12 = var_12 * 50;
         magicbullet(var_5, var_11 + var_12, var_2.origin);
 

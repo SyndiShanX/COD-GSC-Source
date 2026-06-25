@@ -1148,7 +1148,7 @@ proplockwatch() {
         if(maps\mp\_utility::is_true(self.lock)) {
           self.propent unlink();
           self.propent set_pitch_roll_for_ground_normal(self.prop);
-          self.propent linkto(self.propanchor);
+          self.propent linkTo(self.propanchor);
         }
 
         if(common_scripts\utility::is_player_gamepad_enabled()) {
@@ -1273,7 +1273,7 @@ propmoveunlock() {
 
 allowmove(var_0) {
   if(var_0) {
-    self playerlinkto(level.ph_linker, "tag_player");
+    self playerlinkTo(level.ph_linker, "tag_player");
   } else {
     self unlink();
   }
@@ -1297,7 +1297,7 @@ unlockprop() {
 lockprop() {
   self.propanchor unlink();
   self.propanchor.origin = self.origin;
-  self playerlinkto(self.propanchor);
+  self playerlinkTo(self.propanchor);
 
   if(self.slopelocked) {
     self.propent unlink();
@@ -1463,9 +1463,9 @@ spectateprop() {
   self.spectatingthisplayer = var_0;
   self.propanchor unlink();
   self.propanchor.origin = self.origin;
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   self.angles = var_0.angles;
-  self playerlinkto(var_0.propanchor);
+  self playerlinkTo(var_0.propanchor);
 }
 
 movetonewprop() {
@@ -1473,15 +1473,15 @@ movetonewprop() {
   self unlink();
   self.origin = var_0.origin;
   self.angles = var_0.angles;
-  self playerlinkto(var_0.propanchor);
+  self playerlinkTo(var_0.propanchor);
 }
 
 returntoprop() {
   self unlink();
-  self setorigin(self.propanchor.origin);
+  self setOrigin(self.propanchor.origin);
 
   if(self.lock) {
-    self playerlinkto(self.propanchor);
+    self playerlinkTo(self.propanchor);
   } else {
     self.propanchor linktosynchronizedparent(self);
     self.propanchor.origin = self.origin;
@@ -1629,7 +1629,7 @@ flashenemies(var_0, var_1) {
         var_8 = 1 - (var_5 - var_7) / (var_6 - var_7);
       }
 
-      var_9 = vectornormalize(var_4);
+      var_9 = vectorNormalize(var_4);
       var_10 = anglesToForward(var_3 getplayerangles());
       var_11 = vectordot(var_10, var_9);
       var_3 notify("flashbang", var_1 + (0, 0, 4), var_8, var_11, var_0);

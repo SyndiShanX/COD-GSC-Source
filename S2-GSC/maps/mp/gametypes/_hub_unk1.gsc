@@ -44,7 +44,7 @@ func_7471(param_00) {
   var_01 notify("virtualLobbyActive");
   if(level.var_A220) {} else {
     if(!isDefined(var_01.var_1E99) && isDefined(param_00)) {
-      var_02 = getent(param_00, "targetname");
+      var_02 = getEnt(param_00, "targetname");
       var_03 = var_02.var_0116;
       var_04 = var_02.var_001D;
       var_05 = spawn("script_model", var_03);
@@ -941,8 +941,8 @@ func_1553() {
     var_00 thread func_6FA2();
     var_01 = 24;
     var_02 = spawn("trigger_radius", var_00.var_0116 - (0, 0, var_01 / 2), 0, var_01, var_01);
-    var_02 enablelinkto();
-    var_02 linkto(var_00);
+    var_02 enablelinkTo();
+    var_02 linkTo(var_00);
     var_02.var_66F0 = 1;
     var_03 = [var_00];
     var_04 = maps\mp\gametypes\_gameobjects::func_27D6("any", var_02, var_03, (0, 0, 32), 0, 0, 1);
@@ -1220,7 +1220,7 @@ func_1541() {
 
   var_01 = var_00 method_841B();
   var_02 = length(var_01) / 10;
-  var_03 = -1 * vectornormalize(var_01);
+  var_03 = -1 * vectorNormalize(var_01);
   var_00 method_84E0();
   var_00 physicslaunchserver(var_00.var_0116, var_03 * var_02);
 }
@@ -1359,12 +1359,12 @@ func_1EB6(param_00, param_01, param_02, param_03, param_04) {
   var_09.var_001D = var_08;
   self method_81E2(var_09, "tag_player", 250);
   wait(0.25);
-  var_09 moveto(param_00, param_02, var_05, var_06);
-  var_09 rotateto(vectortoangles(param_01 - param_00), param_02);
+  var_09 moveTo(param_00, param_02, var_05, var_06);
+  var_09 rotateTo(vectortoangles(param_01 - param_00), param_02);
   wait(param_02);
   wait(param_03);
-  var_09 moveto(var_07, param_04, var_05, var_06);
-  var_09 rotateto(var_08, param_04);
+  var_09 moveTo(var_07, param_04, var_05, var_06);
+  var_09 rotateTo(var_08, param_04);
   wait(param_04);
   self method_81E3(250);
   wait(0.25);
@@ -1759,11 +1759,11 @@ func_8698(param_00, param_01) {
 
   var_02 = getgroundposition(param_00, 20, 512, 120, 0);
   if(isDefined(var_02)) {
-    self setorigin(var_02, param_01);
+    self setOrigin(var_02, param_01);
     return;
   }
 
-  self setorigin(param_00, param_01);
+  self setOrigin(param_00, param_01);
 }
 
 func_83DE(param_00) {
@@ -1905,7 +1905,7 @@ func_4B90() {
 removeunusedpatchclip() {
   var_00 = ["patchclip_item_16_128_128", "patchclip_item_16_64_64", "patchclip_player_16_256_256", "patchclip_player_16_128_128", "patchclip_player_16_64_64", "patchclip_player_128_128_128", "patchclip_player_64_64_64", "patchclip_player_32_32_32", "patchclip_nosight_16_128_128", "patchclip_vehicle_16_256_256", "patchclip_vehicle_16_128_128", "patchclip_vehicle_16_64_64", "patchclip_nosight_16_64_64", "patchclip_vehicle_128_128_128", "patchclip_vehicle_64_64_64", "patchclip_vehicle_32_32_32", "patchclip_nosight_64_64_64", "patchclip_nosight_32_32_32"];
   foreach(var_02 in var_00) {
-    var_03 = getent(var_02, "targetname");
+    var_03 = getEnt(var_02, "targetname");
     if(isDefined(var_03)) {
       var_03 delete();
     }

@@ -90,7 +90,7 @@ _id_CDD6() {
         self._id_AC78 = spawn("script_model", var_2.origin);
         self._id_AC78.angles = var_2.angles;
         self._id_AC78 setModel("tag_origin");
-        self._id_AC78 linkto(self);
+        self._id_AC78 linkTo(self);
         break;
       default:
         break;
@@ -106,14 +106,14 @@ _id_CDD6() {
     switch (var_2._id_039B) {
       case "use_trigger_link":
         var_2 _meth_80DB();
-        var_2 linkto(self);
+        var_2 linkTo(self);
       case "use_trigger":
         var_2 _id_CDDF();
         thread _id_CDE9(var_2);
         self._id_FE17[self._id_FE17.size] = var_2;
         break;
       case "link":
-        var_2 linkto(self);
+        var_2 linkTo(self);
         self._id_94FD[self._id_94FD.size] = var_2;
         break;
       default:
@@ -325,7 +325,7 @@ _id_CDDA(var_0) {
         var_5 = var_2._id_AE4A["decel_frac"] * var_3;
       }
 
-      var_2 moveto(var_8["origin"], var_3, var_4, var_5);
+      var_2 moveTo(var_8["origin"], var_3, var_4, var_5);
 
       foreach(var_11 in var_1._id_9301) {
         thread _id_CDE0(var_11.origin, var_11._id_CE18, self.origin, var_1.origin);
@@ -335,7 +335,7 @@ _id_CDDA(var_0) {
     }
 
     if(_id_1796(var_8["angles"]) != _id_1796(var_2.angles)) {
-      var_2 rotateto(var_8["angles"], var_3, var_4, var_5);
+      var_2 rotateTo(var_8["angles"], var_3, var_4, var_5);
       var_7 = 1;
     }
 
@@ -389,10 +389,10 @@ _id_CDDA(var_0) {
 _id_CDE0(var_0, var_1, var_2, var_3) {
   self endon("move_end");
   var_4 = self;
-  var_5 = vectornormalize(var_3 - var_2);
+  var_5 = vectorNormalize(var_3 - var_2);
 
   for(;;) {
-    var_6 = vectornormalize(var_0 - var_4.origin);
+    var_6 = vectorNormalize(var_0 - var_4.origin);
 
     if(vectordot(var_5, var_6) <= 0) {
       break;
@@ -523,8 +523,8 @@ _id_CDCB(var_0) {
 _id_CDE4(var_0, var_1) {
   if(var_1) {
     var_0 makeuseable();
-    var_0 setcursorhint("HINT_NOICON");
-    var_0 sethintstring(level._id_CDD4[self._id_AE4A["hintstring"]]);
+    var_0 setCursorHint("HINT_NOICON");
+    var_0 setHintString(level._id_CDD4[self._id_AE4A["hintstring"]]);
   } else
     var_0 makeunusable();
 }
@@ -659,7 +659,7 @@ _id_F9AA(var_0, var_1) {
         var_3 = scripts\cp_mp\vehicles\vehicle_occupancy::_id_1019E(self, var_0, var_2, 1);
 
         if(isDefined(var_3)) {
-          var_0 setorigin(var_3[0]);
+          var_0 setOrigin(var_3[0]);
           return;
         }
       }
@@ -677,7 +677,7 @@ _id_F9AA(var_0, var_1) {
     var_5 = (0, 0, -100);
     var_0 _meth_8063();
     var_0 dontinterpolate();
-    var_0 setorigin(var_0.origin + var_5);
+    var_0 setOrigin(var_0.origin + var_5);
 
     for(var_6 = 0; var_6 < var_4.size; var_6++) {
       var_7 = var_4[var_6];
@@ -693,11 +693,11 @@ _id_F9AA(var_0, var_1) {
         var_0 setstance("crouch");
       }
 
-      var_0 setorigin(var_8);
+      var_0 setOrigin(var_8);
       return;
     }
 
-    var_0 setorigin(var_0.origin - var_5);
+    var_0 setOrigin(var_0.origin - var_5);
   }
 
   if(!isDefined(var_1)) {
@@ -825,9 +825,9 @@ _id_CDD8(var_0) {
       var_0 thread _id_CBD4(var_2);
     }
 
-    var_0 playerlinkto(var_2);
+    var_0 playerlinkTo(var_2);
   } else
-    var_0 linkto(self);
+    var_0 linkTo(self);
 
   var_0 _meth_8263();
 }
@@ -944,7 +944,7 @@ _id_7403(var_0) {
     var_1 = self _meth_8151();
 
     if(!isDefined(var_1) || var_1 != var_0._id_950E) {
-      self linkto(var_0._id_950E);
+      self linkTo(var_0._id_950E);
     }
   }
 
@@ -954,7 +954,7 @@ _id_7403(var_0) {
         var_1 = self _meth_8151();
 
         if(!isDefined(var_1) || var_1 != var_3) {
-          self linkto(var_3);
+          self linkTo(var_3);
         }
       }
     }

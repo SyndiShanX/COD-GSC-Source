@@ -195,7 +195,7 @@ disable_vo(b_disable, n_delay) {
 
 function_3ca1b77d(var_d9da07d1 = 1) {
   level endon(#"combattraining_logic_finished");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   if(isalive(e_player)) {
     e_player endon(#"death");
@@ -234,7 +234,7 @@ function_3ca1b77d(var_d9da07d1 = 1) {
 }
 
 function_5d127774() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   if(isalive(e_player) && isDefined(e_player.var_9e2e6113) && e_player.var_9e2e6113 > 0) {
     return true;
@@ -457,7 +457,7 @@ function_5172b052(str_vo, str_endon_notify) {
   level endon(#"combattraining_logic_finished", str_endon_notify);
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(!isalive(e_player)) {
       while(function_5d127774()) {
@@ -467,7 +467,7 @@ function_5172b052(str_vo, str_endon_notify) {
       function_831e0584(array(str_vo), 1);
 
       while(true) {
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
 
         if(isalive(e_player)) {
           break;
@@ -485,14 +485,14 @@ function_accb34a7(v_target_pos, var_9a9916cf, a_str_vo, str_endon, var_b181ba65)
   level endon(#"combattraining_logic_finished", str_endon);
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     v_eye = e_player util::get_eye();
     n_dist = distance(v_eye, v_target_pos);
 
     if(n_dist < var_9a9916cf) {
       if(e_player ct_utils::can_see(v_target_pos, 1)) {
         if(isDefined(var_b181ba65)) {
-          e_player = getplayers()[0];
+          e_player = getPlayers()[0];
           e_player thread ct_utils::function_61c3d59c(var_b181ba65, undefined);
         }
 

@@ -68,8 +68,8 @@ append(left, right) {
 }
 setupCurtains() {
   flag_wait("power_on");
-  curtains = getent("theater_curtains", "targetname");
-  curtains_clip = getent("theater_curtains_clip", "targetname");
+  curtains = getEnt("theater_curtains", "targetname");
+  curtains_clip = getEnt("theater_curtains_clip", "targetname");
   curtains_clip notsolid();
   curtains_clip connectpaths();
   curtains maps\zombie_theater::theater_playanim("curtains_move");
@@ -78,22 +78,22 @@ setupCurtains() {
   level thread lower_movie_screen();
 }
 moveCurtains(curtent) {
-  curtain = getent(curtent, "targetname");
+  curtain = getEnt(curtent, "targetname");
   curtorg = curtain.origin;
   time = 2;
   curtain thread monitorCurtain(curtorg);
   curtain connectpaths();
-  curtain MoveTo(curtain.origin + curtain.script_vector, time, time * 0.25, time * 0.25);
+  curtain moveTo(curtain.origin + curtain.script_vector, time, time * 0.25, time * 0.25);
   curtain playSound("curtain_open");
 }
 monitorCurtain(curtorg) {
-  clip = getent(self.target, "targetname");
+  clip = getEnt(self.target, "targetname");
   while(isDefined(clip)) {
     if((abs(curtorg[0] - self.origin[0])) >= 38) {
       clip connectpaths();
       clip NotSolid();
       if(isDefined(clip.target)) {
-        clip = getent(clip.target, "targetname");
+        clip = getEnt(clip.target, "targetname");
       } else {
         clip = undefined;
       }
@@ -103,7 +103,7 @@ monitorCurtain(curtorg) {
 }
 open_left_curtain() {
   flag_wait("power_on");
-  curtain = GetEnt("left_curtain", "targetname");
+  curtain = getEnt("left_curtain", "targetname");
   if(isDefined(curtain)) {
     wait(2);
     curtain_clip = getEntArray("left_curtain_clip", "targetname");
@@ -117,7 +117,7 @@ open_left_curtain() {
 }
 open_right_curtain() {
   flag_wait("power_on");
-  curtain = GetEnt("right_curtain", "targetname");
+  curtain = getEnt("right_curtain", "targetname");
   if(isDefined(curtain)) {
     wait(2);
     curtain_clip = getEntArray("right_curtain_clip", "targetname");
@@ -130,7 +130,7 @@ open_right_curtain() {
   }
 }
 lower_movie_screen() {
-  screen = GetEnt("movie_screen", "targetname");
+  screen = getEnt("movie_screen", "targetname");
   if(isDefined(screen)) {
     screen movez(-466, 6);
     screen playSound("evt_screen_lower");
@@ -188,19 +188,19 @@ movie_reels() {
   if(!isDefined(self.target)) {
     return;
   }
-  self.reel_model = GetEnt(self.target, "targetname");
+  self.reel_model = getEnt(self.target, "targetname");
   if(!isDefined(self.reel_active)) {
     self.reel_active = false;
   }
   if(isDefined(self.reel_active) && self.reel_active == false) {
     self.reel_model Hide();
-    self SetCursorHint("HINT_NOICON");
-    self SetHintString("");
+    self setCursorHint("HINT_NOICON");
+    self setHintString("");
     self trigger_off();
     return;
   } else if(isDefined(self.reel_active) && self.reel_active == true) {
     self.reel_model setModel("zombie_theater_reelcase_obj");
-    self SetCursorHint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
   flag_wait("power_on");
   self waittill("trigger", who);
@@ -211,9 +211,9 @@ movie_reels() {
   who thread theater_movie_reel_hud();
 }
 movie_projector_reel_change() {
-  screen_struct = getstruct("struct_theater_screen", "targetname");
-  projector_trigger = GetEnt("trigger_change_projector_reels", "targetname");
-  projector_trigger SetCursorHint("HINT_NOICON");
+  screen_struct = getStruct("struct_theater_screen", "targetname");
+  projector_trigger = getEnt("trigger_change_projector_reels", "targetname");
+  projector_trigger setCursorHint("HINT_NOICON");
   if(!isDefined(screen_struct.script_string)) {
     screen_struct.script_string = "ps0";
   }

@@ -46,7 +46,7 @@ function init_node_scan(targetname) {
     if(isDefined(node.script_linkto)) {
       node.var_57357d16 = struct::get(node.script_linkto, "script_linkname");
       if(!isDefined(node.var_57357d16)) {
-        node.var_57357d16 = getent(node.script_linkto, "script_linkname");
+        node.var_57357d16 = getEnt(node.script_linkto, "script_linkname");
       }
     }
   }
@@ -268,9 +268,9 @@ function target_lase_points_ally_track(v_eye, entity_or_point_array, a_owner) {
     level.var_2b420add = 0;
   }
   while(true) {
-    var_6121992f = vectornormalize(self.origin - v_eye);
+    var_6121992f = vectorNormalize(self.origin - v_eye);
     if(gettime() > level.var_2b420add) {
-      level.var_b8032721 = getplayers();
+      level.var_b8032721 = getPlayers();
       actorlist = getaiteamarray("allies");
       foreach(actor in actorlist) {
         if(isDefined(actor.ignoreme) && actor.ignoreme) {
@@ -291,7 +291,7 @@ function target_lase_points_ally_track(v_eye, entity_or_point_array, a_owner) {
         continue;
       }
       var_633cfa62 = lase_point(ally);
-      var_c4827684 = vectornormalize(var_633cfa62 - v_eye);
+      var_c4827684 = vectorNormalize(var_633cfa62 - v_eye);
       if(vectordot(var_6121992f, var_c4827684) < 0.7) {
         continue;
       }
@@ -370,7 +370,7 @@ function function_9c1ac1cb(endposition, totaltime, var_5d61a864) {
   self endon("death");
   startposition = self.origin;
   var_e651c736 = self.velocity;
-  var_c8240fdb = vectornormalize(self.velocity);
+  var_c8240fdb = vectorNormalize(self.velocity);
   var_ed017668 = totaltime * 4;
   phase = length(self.velocity) / (var_ed017668 * 2);
   starttime = gettime();

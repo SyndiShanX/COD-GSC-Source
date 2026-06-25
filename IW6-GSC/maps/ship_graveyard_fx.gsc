@@ -268,7 +268,7 @@ water_particulates_while_moving() {
 }
 
 trigger_fish_school(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   var_2 notify(var_1);
 }
 

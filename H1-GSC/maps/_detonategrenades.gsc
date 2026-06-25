@@ -469,7 +469,7 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
     var_4 = var_1;
   }
 
-  var_6 = vectornormalize(var_5);
+  var_6 = vectorNormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
   var_7 = bulletTrace(var_4, var_1, 0, var_3);
 

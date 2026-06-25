@@ -4,12 +4,12 @@
 *****************************************************/
 
 move_player_to_start_point(var_0) {
-  var_1 = getent(var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = getEnt(var_0, "targetname");
+  level.player setOrigin(var_1.origin);
   var_2 = undefined;
 
   if(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
   }
 
   if(isDefined(var_2)) {
@@ -20,17 +20,17 @@ move_player_to_start_point(var_0) {
 }
 
 actor_teleport(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(isPlayer(var_0)) {
     var_0 setplayerangles(var_2.angles);
-    var_0 setorigin(var_2.origin);
+    var_0 setOrigin(var_2.origin);
   } else if(isai(var_0))
     var_0 forceteleport(var_2.origin, var_2.angles);
 }
 
 safe_trigger_by_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -43,7 +43,7 @@ safe_trigger_by_targetname(var_0) {
 }
 
 safe_trigger_by_noteworthy(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
 
   if(!isDefined(var_1)) {
     return;
@@ -203,7 +203,7 @@ spawn_odin_actor_array(var_0, var_1) {
 }
 
 spawn_odin_actor_single(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_2)) {
     return undefined;
@@ -254,7 +254,7 @@ add_light_to_actor(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_2 = self gettagorigin("tag_eye");
   var_1.origin = var_2 + (-9, 0, 2);
-  var_1 linkto(self, "tag_eye");
+  var_1 linkTo(self, "tag_eye");
   var_3 = common_scripts\utility::getfx("light_blue_steady_FX");
 
   if(var_0 == "ally") {
@@ -391,16 +391,16 @@ moving_objects_handler(var_0) {
 
   foreach(var_6 in var_4) {
     if(var_6.script_parameters == "moving_object") {
-      var_6 linkto(var_3);
+      var_6 linkTo(var_3);
     }
 
     if(var_6.script_parameters == "path_connector") {
-      var_6 linkto(var_3);
+      var_6 linkTo(var_3);
       var_3.connector = var_6;
     }
 
     if(var_6.script_parameters == "path_disconnector") {
-      var_6 linkto(var_3);
+      var_6 linkTo(var_3);
       var_3.disconnector = var_6;
     }
   }
@@ -419,7 +419,7 @@ path_disconnector(var_0, var_1) {
   for(;;) {
     var_0 solid();
     var_1 solid();
-    var_0 disconnectpaths();
+    var_0 disconnectPaths();
     var_1 connectpaths();
     var_0 notsolid();
     var_1 notsolid();
@@ -470,7 +470,7 @@ create_sliding_space_door(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_8.parts = var_14;
 
     foreach(var_12 in var_14) {
-      var_12 linkto(var_8.door);
+      var_12 linkTo(var_8.door);
     }
 
     var_8.trigger = spawn("trigger_radius", var_8.origin, 3, var_8.radius, 64);
@@ -506,7 +506,7 @@ automatic_sliding_door_logic() {
           wait(self.delay);
         }
 
-        self.door moveto(self.door_open.origin, self.time, self.accel);
+        self.door moveTo(self.door_open.origin, self.time, self.accel);
         thread maps\odin_audio::sfx_interior_door_open(self);
       }
     } else if(self.state == "opening" || self.state == "open") {
@@ -516,7 +516,7 @@ automatic_sliding_door_logic() {
         wait(self.delay);
       }
 
-      self.door moveto(self.origin, self.time, self.accel);
+      self.door moveTo(self.origin, self.time, self.accel);
       thread maps\odin_audio::sfx_interior_door_close(self);
     }
 
@@ -542,7 +542,7 @@ sliding_door_logic() {
 
   if(isDefined(self.unlock_flag) && !common_scripts\utility::flag(self.unlock_flag)) {
     self.state = "closed";
-    self.door moveto(self.origin, 0.1, self.accel);
+    self.door moveTo(self.origin, 0.1, self.accel);
     common_scripts\utility::flag_wait(self.unlock_flag);
 
     if(self.state == "closing" || self.state == "closed") {
@@ -552,7 +552,7 @@ sliding_door_logic() {
         wait(self.delay);
       }
 
-      self.door moveto(self.door_open.origin, self.time, self.accel);
+      self.door moveTo(self.door_open.origin, self.time, self.accel);
 
       if(self.door_name == "post_z_door" || self.door_name == "escape_door_blocker") {
         thread maps\odin_audio::sfx_escape_door_open();
@@ -575,7 +575,7 @@ sliding_door_lock() {
     wait(self.delay);
   }
 
-  self.door moveto(self.origin, self.time, self.accel);
+  self.door moveTo(self.origin, self.time, self.accel);
   thread maps\odin_audio::sfx_interior_door_close(self);
 
   if(isDefined(self.trigger)) {
@@ -631,9 +631,9 @@ god_rays_from_moving_source(var_0, var_1, var_2) {
 
 initial_satellite_placement() {
   var_0 = satellite_get_script_mover();
-  var_1 = getent("sat_intro_initial_position", "targetname");
-  var_0 moveto(var_1.origin, 0.1);
-  var_0 rotateto(var_1.angles, 0.1);
+  var_1 = getEnt("sat_intro_initial_position", "targetname");
+  var_0 moveTo(var_1.origin, 0.1);
+  var_0 rotateTo(var_1.angles, 0.1);
   var_0 waittill("movedone");
   wait 4;
   var_2 = [];
@@ -737,13 +737,13 @@ struggle_flashlight(var_0) {
 
 satellite_get_script_mover() {
   if(!isDefined(level.satellite_script_mover)) {
-    var_0 = getent("satellite_link_org", "targetname");
+    var_0 = getEnt("satellite_link_org", "targetname");
     level.satellite_script_mover = var_0;
     spawn_and_assemble_animated_satellite(var_0);
     var_1 = getEntArray("spacejump_sat", "targetname");
 
     foreach(var_3 in var_1) {
-      var_3 linkto(var_0);
+      var_3 linkTo(var_0);
       level.sat_ent_del[level.sat_ent_del.size] = var_3;
     }
 
@@ -756,7 +756,7 @@ satellite_get_script_mover() {
 spawn_and_assemble_animated_satellite(var_0) {
   level.odin_animnode = var_0;
   var_1 = getEntArray("odin_satellite_animated", "targetname");
-  level.odin_rotator = getent("odin_sat_section_03_rot", "script_noteworthy");
+  level.odin_rotator = getEnt("odin_sat_section_03_rot", "script_noteworthy");
   level.sat_ent_del[level.sat_ent_del.size] = level.odin_rotator;
   level.odin_rotator.animname = "odin_sat_section_03_rot";
   level.odin_rotator maps\_utility::assign_animtree("odin_sat_section_03_rot");
@@ -767,33 +767,33 @@ spawn_and_assemble_animated_satellite(var_0) {
       var_3.animname = var_3.script_noteworthy;
       level.animated_sat_part[var_3.script_noteworthy] = var_3;
       level.animated_sat_part[var_3.script_noteworthy] maps\_utility::assign_animtree(var_3.script_noteworthy);
-      var_3 linkto(level.odin_animnode);
+      var_3 linkTo(level.odin_animnode);
       level.sat_ent_del[level.sat_ent_del.size] = var_3;
     }
   }
 
   level.odin_animnode maps\_anim::anim_first_frame(level.animated_sat_part, "sat_blossom_close");
-  level.odin_rotator linkto(level.odin_animnode);
+  level.odin_rotator linkTo(level.odin_animnode);
 
   foreach(var_6 in level.animated_sat_part) {
-    var_6 linkto(level.odin_animnode);
+    var_6 linkTo(level.odin_animnode);
   }
 
   level.odin_animnode thread maps\_anim::anim_loop_solo(level.odin_rotator, "odin_sat_blossom_close_spin", "stop_sat_loops");
 
   foreach(var_6 in level.animated_sat_part) {
-    var_6 stopanimscripted();
+    var_6 stopanimScripted();
   }
 }
 
 satellite_move_to(var_0, var_1, var_2, var_3) {
   var_4 = satellite_get_script_mover();
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
 
   if(isDefined(var_2)) {
-    var_4 moveto(var_5.origin, var_1, var_2, var_3);
+    var_4 moveTo(var_5.origin, var_1, var_2, var_3);
   } else {
-    var_4 moveto(var_5.origin, var_1);
+    var_4 moveTo(var_5.origin, var_1);
   }
 }
 
@@ -821,7 +821,7 @@ earth_get_script_mover() {
 
     if(isDefined(var_1.target)) {
       foreach(var_4 in var_0) {
-        var_4 linkto(var_1);
+        var_4 linkTo(var_1);
       }
     }
 
@@ -1007,7 +1007,7 @@ odin_drop_weapon() {
     var_1 hide();
     var_1.origin = self gettagorigin("tag_weapon");
     var_1.angles = self gettagangles("tag_weapon");
-    var_1 linkto(self, "tag_weapon");
+    var_1 linkTo(self, "tag_weapon");
     self waittill("death");
     var_2 = create_drop_weapon_trigger(var_1);
     var_1 show();
@@ -1085,8 +1085,8 @@ wait_for_use_trigger_stop(var_0) {
   destroy_qte_prompt();
   var_0 makeunusable();
   var_1 = spawn("trigger_radius", var_0.origin, 0, 20, 20);
-  var_1 enablelinkto();
-  var_1 linkto(var_0);
+  var_1 enablelinkTo();
+  var_1 linkTo(var_0);
   var_1 thread odin_drop_weapon_trigger(var_0);
   return var_1;
 }
@@ -1206,8 +1206,8 @@ view_control_lerp(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_5 = 0;
   }
 
-  var_7 moveto(var_1, var_3, var_4, var_5);
-  var_7 rotateto(var_2, var_3, var_4, var_5);
+  var_7 moveTo(var_1, var_3, var_4, var_5);
+  var_7 rotateTo(var_2, var_3, var_4, var_5);
   wait(var_3);
   level.player playerlinktodelta(var_6, "tag_player", 1, var_0, var_0, var_0, var_0, 1);
   var_7 delete();
@@ -1215,18 +1215,18 @@ view_control_lerp(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 dynamic_object_pusher() {
   var_0 = [];
-  var_0[0] = getent("odin_escape_ally_tp", "targetname");
-  var_0[1] = getent("player_escape_door_blocker_origin", "targetname");
-  var_0[2] = getent("final_dyn_push_dest", "script_noteworthy");
+  var_0[0] = getEnt("odin_escape_ally_tp", "targetname");
+  var_0[1] = getEnt("player_escape_door_blocker_origin", "targetname");
+  var_0[2] = getEnt("final_dyn_push_dest", "script_noteworthy");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0[0].origin;
   thread pusher_pulses(var_1);
   thread dynamic_repulsor(var_0[1]);
-  var_1 moveto(var_0[1].origin, 3, 0, 0);
+  var_1 moveTo(var_0[1].origin, 3, 0, 0);
   wait 3;
   var_1 notify("stop_pushing");
   common_scripts\utility::flag_wait("esc_combat_done");
-  var_1 moveto(var_0[2].origin, 3, 0, 0);
+  var_1 moveTo(var_0[2].origin, 3, 0, 0);
   wait 2;
   thread pusher_pulses(var_1);
   wait 1;

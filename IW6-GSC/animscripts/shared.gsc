@@ -555,7 +555,7 @@ movetonodeovertime(var_0, var_1) {
   for(var_6 = 0; var_6 < var_5; var_6++) {
     var_2 = var_0.origin;
     var_7 = self.origin - var_2;
-    var_7 = vectornormalize(var_7);
+    var_7 = vectorNormalize(var_7);
     var_8 = var_2 + var_7 * var_4;
     var_9 = var_8 + (var_2 - var_8) * ((var_6 + 1) / var_5);
     self safeteleport(var_9);

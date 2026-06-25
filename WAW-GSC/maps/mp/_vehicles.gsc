@@ -1000,10 +1000,10 @@ respawn_vehicle(respawn_parameters) {
     iprintln("Vehicle can't respawn because MAX_VEHICLES has been reached and none of the vehicles could be cleaned up.");
   } else {
     if(isDefined(respawn_parameters.destructibledef)) {
-      vehicle = SpawnVehicle(
+      vehicle = spawnVehicle(
         respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.destructibledef);
     } else {
-      vehicle = SpawnVehicle(
+      vehicle = spawnVehicle(
         respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles);
     }
 
@@ -1177,12 +1177,12 @@ vehicle_damage_t() {
           {}
           println("Playing heavy rumble.");
 
-          players[i] PlayRumbleOnEntity("tank_damage_heavy_mp");
+          players[i] playRumbleOnEntity("tank_damage_heavy_mp");
         } else if(damage > 10.0) {
           {}
           println("Playing light rumble.");
 
-          players[i] PlayRumbleOnEntity("tank_damage_light_mp");
+          players[i] playRumbleOnEntity("tank_damage_light_mp");
         }
       }
     }
@@ -1358,7 +1358,7 @@ vehicle_disconnect_paths() {
   while(isDefined(self)) {
     if(self getspeed() < 1) {
       if(!isDefined(self.dontDisconnectPaths)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
       self notify("speed_zero_path_disconnect");
       while(self getspeed() < 1) {

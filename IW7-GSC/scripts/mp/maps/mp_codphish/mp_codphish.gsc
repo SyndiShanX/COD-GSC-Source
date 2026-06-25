@@ -23,7 +23,7 @@ main() {
 
 apex_not_outofbounds() {
   level.outofboundstriggerpatches = [];
-  var_0 = getent("apex_unoutofbounds", "targetname");
+  var_0 = getEnt("apex_unoutofbounds", "targetname");
   level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
   foreach(var_0 in level.outofboundstriggerpatches) {

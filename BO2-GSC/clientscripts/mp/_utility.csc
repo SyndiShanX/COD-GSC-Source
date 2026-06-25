@@ -10,7 +10,7 @@ error(message) {
   wait 0.05;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   if(!isDefined(level.struct_class_names)) {
     return undefined;
   }
@@ -249,7 +249,7 @@ waittill_any(string1, string2, string3, string4, string5) {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;

@@ -334,14 +334,14 @@ playbeaufordvo(var_0) {
 }
 
 murderbot_animate(var_0) {
-  var_1 = getent("murderbot_animscripted", "targetname");
+  var_1 = getEnt("murderbot_animscripted", "targetname");
   var_1 scriptmodelplayanim(var_0);
   var_1 playSound("sq_burger_offering");
 }
 
 toilet_interact() {
   level endon("game_ended");
-  var_0 = common_scripts\utility::getstruct("toilet_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("toilet_use", "targetname");
 
   for(;;) {
     var_0 thread maps\mp\zombies\_zombies_sidequests::fake_use("flushed", undefined, undefined, undefined, 80);
@@ -354,8 +354,8 @@ toilet_interact() {
 
 fingerprint_scanner_fail_fx() {
   level endon("main_stage13_over");
-  var_0 = common_scripts\utility::getstruct("warehouse_safe_use", "targetname");
-  var_1 = getent("fingerprint_scanner", "targetname");
+  var_0 = common_scripts\utility::getStruct("warehouse_safe_use", "targetname");
+  var_1 = getEnt("fingerprint_scanner", "targetname");
 
   for(;;) {
     wait 1;
@@ -369,8 +369,8 @@ fingerprint_scanner_fail_fx() {
 stage1_init() {}
 
 stage1_logic() {
-  var_0 = getent("golden_skillet_roof", "targetname");
-  var_1 = common_scripts\utility::getstruct("golden_skillet_roof_use", "targetname");
+  var_0 = getEnt("golden_skillet_roof", "targetname");
+  var_1 = common_scripts\utility::getStruct("golden_skillet_roof_use", "targetname");
   var_1 thread maps\mp\zombies\_zombies_sidequests::fake_use("grabbed", undefined, undefined, "main_stage1_over", 100);
   var_1 waittill("grabbed", var_2);
   playsoundatpos(var_0.origin, "sq_skillet_grab");
@@ -514,7 +514,7 @@ stage2_cave_triggers(var_0) {
     var_1 = spawnfx(common_scripts\utility::getfx("steam_pipe_leak_interior_sm"), self.origin, anglesToForward(self.angles + (0, -90, 0)));
   }
 
-  var_2 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(self.target, "targetname");
   var_2 thread maps\mp\zombies\_zombies_sidequests::fake_use("activated", undefined, undefined, "main_stage2_over", 100);
   var_2 waittill("activated", var_3);
 
@@ -555,8 +555,8 @@ stage3_init() {
 
 stage3_logic() {
   level thread stage3_playerenter();
-  var_0 = getent("golden_skillet_unseasoned", "targetname");
-  var_1 = common_scripts\utility::getstruct("skillet_unseasoned_use", "targetname");
+  var_0 = getEnt("golden_skillet_unseasoned", "targetname");
+  var_1 = common_scripts\utility::getStruct("skillet_unseasoned_use", "targetname");
   var_1 thread maps\mp\zombies\_zombies_sidequests::fake_use("placed", ::playerhasskilletgolden, undefined, "main_stage3_over", 80);
 
   if(level.nextgen) {
@@ -567,11 +567,11 @@ stage3_logic() {
   var_0 playsoundonmovingent("sq_skillet_put_down_altar");
   var_2 playertakeitem("skillet_golden");
   var_0 show();
-  var_3 = getent("golden_skillet_seasoned", "targetname");
-  var_4 = getent("skillet_altar", "targetname");
-  var_5 = getent("skillet_altar_coll", "targetname");
-  var_3 linkto(var_4);
-  var_0 linkto(var_4);
+  var_3 = getEnt("golden_skillet_seasoned", "targetname");
+  var_4 = getEnt("skillet_altar", "targetname");
+  var_5 = getEnt("skillet_altar_coll", "targetname");
+  var_3 linkTo(var_4);
+  var_0 linkTo(var_4);
   var_4 thread stage3_altar_move();
   var_5 thread stage3_altar_move();
   earthquake(0.15, 3.0, var_4.origin, 200);
@@ -591,7 +591,7 @@ stage3_logic() {
 
 stage3_playerenter() {
   level endon("main_stage3_over");
-  var_0 = getent("sacrifice_trigger", "targetname");
+  var_0 = getEnt("sacrifice_trigger", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -624,8 +624,8 @@ stage3_altar_move() {
 
 stage3_sacrifice_setup() {
   level endon("main_stage3_over");
-  var_0 = getent("sacrifice_trigger", "targetname");
-  var_1 = getent("blood_pool_mover", "targetname");
+  var_0 = getEnt("sacrifice_trigger", "targetname");
+  var_1 = getEnt("blood_pool_mover", "targetname");
   var_1 thread stage3_raise_blood();
 
   while(level.sacrificeactive == 1) {
@@ -659,7 +659,7 @@ stage3_sacrifice_trigmonitor(var_0) {
 stage3_sacrifice_killmonitor(var_0) {
   self endon("ZombieLeftSacrificeArea");
   level endon("main_stage3_over");
-  var_1 = common_scripts\utility::getstruct("skillet_glow_fx", "targetname");
+  var_1 = common_scripts\utility::getStruct("skillet_glow_fx", "targetname");
 
   if(!isDefined(self.alreadytriggered)) {
     self.alreadytriggered = 0;
@@ -690,7 +690,7 @@ stage3_raise_blood() {
 
     if(level.sacrificekillcount > 0 && level.sacrificekillcount < 66) {
       var_1 = level.sacrificekillcount * 2;
-      self moveto(var_0 + (0, 0, var_1), 2);
+      self moveTo(var_0 + (0, 0, var_1), 2);
     }
   }
 }
@@ -701,8 +701,8 @@ stage3_sacrifice_killcounter() {
   }
 
   level.sacrificeactive = 0;
-  var_0 = getent("golden_skillet_unseasoned", "targetname");
-  var_1 = getent("golden_skillet_seasoned", "targetname");
+  var_0 = getEnt("golden_skillet_unseasoned", "targetname");
+  var_1 = getEnt("golden_skillet_seasoned", "targetname");
   var_0 delete();
   var_1 show();
   level notify("sq_raise_altar");
@@ -717,15 +717,15 @@ stage3_end(var_0) {
 stage4_init() {}
 
 stage4_logic() {
-  var_0 = getent("golden_skillet_seasoned", "targetname");
-  var_1 = common_scripts\utility::getstruct("skillet_unseasoned_use", "targetname");
+  var_0 = getEnt("golden_skillet_seasoned", "targetname");
+  var_1 = common_scripts\utility::getStruct("skillet_unseasoned_use", "targetname");
   var_1 thread maps\mp\zombies\_zombies_sidequests::fake_use("acquired", undefined, undefined, "main_stage4_over", 80);
   var_1 waittill("acquired", var_2);
   playsoundatpos(var_0.origin, "sq_skillet_grab");
   var_0 hide();
   var_2 playergiveskillet("seasoned");
-  var_3 = getent("golden_skillet_stove", "targetname");
-  var_4 = common_scripts\utility::getstruct("burgertown_stove_interact", "targetname");
+  var_3 = getEnt("golden_skillet_stove", "targetname");
+  var_4 = common_scripts\utility::getStruct("burgertown_stove_interact", "targetname");
   var_4 thread maps\mp\zombies\_zombies_sidequests::fake_use("placed", ::playerhasskilletseasoned, undefined, "main_stage4_over");
   var_4 waittill("placed", var_2);
   var_3 show();
@@ -757,31 +757,31 @@ stage5_initrandommeatchunks(var_0) {
 }
 
 stage5_logic() {
-  var_0 = getent("zombie_meat_chunk_gs", "targetname");
+  var_0 = getEnt("zombie_meat_chunk_gs", "targetname");
 
   if(isDefined(var_0)) {
     var_0 thread stage5_meat_handler();
   }
 
-  var_1 = getent("zombie_meat_chunk_ac", "targetname");
+  var_1 = getEnt("zombie_meat_chunk_ac", "targetname");
 
   if(isDefined(var_1)) {
     var_1 thread stage5_meat_handler();
   }
 
-  var_2 = getent("zombie_meat_chunk_sw", "targetname");
+  var_2 = getEnt("zombie_meat_chunk_sw", "targetname");
 
   if(isDefined(var_2)) {
     var_2 thread stage5_meat_handler();
   }
 
-  var_3 = getent("zombie_meat_chunk_bt", "targetname");
+  var_3 = getEnt("zombie_meat_chunk_bt", "targetname");
 
   if(isDefined(var_3)) {
     var_3 thread stage5_meat_handler();
   }
 
-  var_4 = common_scripts\utility::getstruct("burgertown_stove_interact", "targetname");
+  var_4 = common_scripts\utility::getStruct("burgertown_stove_interact", "targetname");
   var_4 thread stage5_stove_handler();
 }
 
@@ -790,7 +790,7 @@ stage5_meat_handler() {
   self show();
   var_0 = spawnfx(common_scripts\utility::getfx("insects_flies_landing"), self.origin);
   triggerfx(var_0);
-  var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.target, "targetname");
   var_1 thread maps\mp\zombies\_zombies_sidequests::fake_use("acquired", ::playerhasnomeat, undefined, "main_stage5_over", 80);
   var_1 waittill("acquired", var_2);
 
@@ -856,7 +856,7 @@ stage5_end(var_0) {
     var_6 delete();
   }
 
-  var_8 = getent("zombie_patty_raw", "targetname");
+  var_8 = getEnt("zombie_patty_raw", "targetname");
   var_8 show();
   playFX(common_scripts\utility::getfx("dlc_zombie_blood_splat_sm"), var_8.origin);
   playsoundatpos(var_8.origin, "sq_meat_patty");
@@ -866,7 +866,7 @@ stage5_end(var_0) {
 stage6_init() {}
 
 stage6_logic() {
-  var_0 = getent("zombie_patty_raw", "targetname");
+  var_0 = getEnt("zombie_patty_raw", "targetname");
   level waittill("burger_patty_cooked", var_1);
 
   if(isDefined(var_1)) {
@@ -1026,9 +1026,9 @@ playergiveburgerinfected() {
 }
 
 stage8_logic() {
-  var_0 = getent("zombie_patty_raw", "targetname");
-  var_1 = getent("zombie_burger", "targetname");
-  var_2 = common_scripts\utility::getstruct("burgertown_stove_interact", "targetname");
+  var_0 = getEnt("zombie_patty_raw", "targetname");
+  var_1 = getEnt("zombie_burger", "targetname");
+  var_2 = common_scripts\utility::getStruct("burgertown_stove_interact", "targetname");
   var_2 thread maps\mp\zombies\_zombies_sidequests::fake_use("assembled", ::playerhasbun, undefined, "main_stage8_over");
   var_2 waittill("assembled", var_3);
   var_3 thread playertakeitem("bun");
@@ -1074,10 +1074,10 @@ playerhasburger() {
 }
 
 stage9_logic() {
-  var_0 = getent("murderbot_static_thumbsup", "targetname");
-  var_1 = getent("murderbot_animscripted", "targetname");
+  var_0 = getEnt("murderbot_static_thumbsup", "targetname");
+  var_1 = getEnt("murderbot_animscripted", "targetname");
   level.zmbsqbeaufordnoresponse = 1;
-  var_2 = common_scripts\utility::getstruct("murderbot_use", "targetname");
+  var_2 = common_scripts\utility::getStruct("murderbot_use", "targetname");
   var_2 thread maps\mp\zombies\_zombies_sidequests::fake_use("feed", ::playerhasburger, undefined, "main_stage9_over", 80);
   var_2 waittill("feed", var_3);
   var_0 delete();
@@ -1111,9 +1111,9 @@ beaufordburgerbatteryhint() {
 
 stage9_end(var_0) {
   maps\mp\zombies\_zombies_sidequests::sidequest_iprintlnbold("Beauford enjoyed your offering!");
-  var_4 = getent("battery_screen_on", "targetname");
+  var_4 = getEnt("battery_screen_on", "targetname");
   var_4 playLoopSound("sq_screen_on_lp");
-  var_5 = getent("battery_screen_off", "targetname");
+  var_5 = getEnt("battery_screen_off", "targetname");
   var_5 hide();
   var_4 show();
   var_4 playSound("sq_screen_on");
@@ -1121,7 +1121,7 @@ stage9_end(var_0) {
 
 stage10_init() {
   level.batteryacquired = 0;
-  var_0 = common_scripts\utility::getstruct("battery_pickup_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("battery_pickup_use", "targetname");
   var_0 thread stage10_battery_pickup();
 }
 
@@ -1153,8 +1153,8 @@ playergivebattery(var_0) {
 }
 
 stage10_logic() {
-  var_0 = common_scripts\utility::getstruct("battery_compartment_activate", "targetname");
-  var_1 = getent("battery_door", "targetname");
+  var_0 = common_scripts\utility::getStruct("battery_compartment_activate", "targetname");
+  var_1 = getEnt("battery_door", "targetname");
 
   while(level.batteryacquired == 0) {
     if(getdvarint("battery_open") == 0) {
@@ -1197,7 +1197,7 @@ stage10_end(var_0) {
 }
 
 stage10_battery_pickup() {
-  var_0 = getent("battery_depleted", "targetname");
+  var_0 = getEnt("battery_depleted", "targetname");
   thread maps\mp\zombies\_zombies_sidequests::fake_use("acquired", ::batterydooropen, undefined, "main_stage10_over");
   self waittill("acquired", var_1);
   var_0 playSound("sq_battery_grab");
@@ -1213,12 +1213,12 @@ stage11_init() {
 }
 
 stage11_logic() {
-  var_0 = getent("battery_charging", "targetname");
-  var_1 = getent("battery_charged", "targetname");
-  var_2 = getent("battery_charge_fxorg", "targetname");
+  var_0 = getEnt("battery_charging", "targetname");
+  var_1 = getEnt("battery_charged", "targetname");
+  var_2 = getEnt("battery_charge_fxorg", "targetname");
   var_0.charged = 0;
   var_0 thread stage11_battery_fx(var_2);
-  var_3 = common_scripts\utility::getstruct("battery_charge_use", "targetname");
+  var_3 = common_scripts\utility::getStruct("battery_charge_use", "targetname");
   var_3 thread maps\mp\zombies\_zombies_sidequests::fake_use("placed", ::playerhasbatteryempty, undefined, "main_stage11_over");
   var_3 waittill("placed", var_4);
   var_0 playSound("sq_battery_plugin");
@@ -1264,8 +1264,8 @@ stage11_monitor_battery_damage() {
 stage11_knockout_battery() {
   level endon("main_stage11_over");
   self endon("charged");
-  var_0 = getent("battery_removed", "targetname");
-  var_1 = common_scripts\utility::getstruct("battery_replace_use", "targetname");
+  var_0 = getEnt("battery_removed", "targetname");
+  var_1 = common_scripts\utility::getStruct("battery_replace_use", "targetname");
 
   for(;;) {
     self waittill("removed");
@@ -1291,8 +1291,8 @@ stage11_knockout_battery() {
 stage11_battery_move(var_0) {
   var_1 = self.origin;
   var_2 = self.angles;
-  self moveto(var_0.origin, 0.35);
-  self rotateto(var_0.angles, 0.35);
+  self moveTo(var_0.origin, 0.35);
+  self rotateTo(var_0.angles, 0.35);
   wait 0.35;
   self hide();
   var_0 show();
@@ -1345,9 +1345,9 @@ stage11_battery_charge_counter() {
 }
 
 stage11_swap_batteries() {
-  var_0 = getent("battery_charging", "targetname");
-  var_1 = getent("battery_charged", "targetname");
-  var_2 = common_scripts\utility::getstruct("battery_charge_use", "targetname");
+  var_0 = getEnt("battery_charging", "targetname");
+  var_1 = getEnt("battery_charged", "targetname");
+  var_2 = common_scripts\utility::getStruct("battery_charge_use", "targetname");
   self waittill("charged");
   self stoploopsound();
   var_0 delete();
@@ -1385,7 +1385,7 @@ playergivekey() {
 
 stage12_logic() {
   level.zmbsqbeaufordnoresponse = 1;
-  var_0 = common_scripts\utility::getstruct("murderbot_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("murderbot_use", "targetname");
   var_0 thread maps\mp\zombies\_zombies_sidequests::fake_use("offered", undefined, undefined, "main_stage12_over", 80);
   var_0 waittill("offered", var_1);
   var_1 playlocalsound("sq_battery_grab");
@@ -1395,13 +1395,13 @@ stage12_logic() {
   thread stage12_spawn_key();
   maps\mp\zombies\_zombies_sidequests::sidequest_iprintlnbold("Beauford is energized!");
   level thread playbeaufordsqvo(5);
-  var_2 = common_scripts\utility::getstruct("burger_tower_use", "targetname");
+  var_2 = common_scripts\utility::getStruct("burger_tower_use", "targetname");
   var_2 thread stage12_tower_access();
 }
 
 stage12_spawn_key() {
-  var_0 = common_scripts\utility::getstruct("burgerkey_use", "targetname");
-  var_1 = getent("burger_tower_key", "targetname");
+  var_0 = common_scripts\utility::getStruct("burgerkey_use", "targetname");
+  var_1 = getEnt("burger_tower_key", "targetname");
   wait 1.5;
   var_1 show();
   var_1 scriptmodelplayanimdeltamotion("mp_dogtag_spin");
@@ -1417,9 +1417,9 @@ stage12_spawn_key() {
 
 stage12_tower_access() {
   var_0 = common_scripts\utility::getStructArray("burger_tower_destination", "targetname");
-  var_1 = common_scripts\utility::getstruct("drive_decrypted_use", "targetname");
-  var_2 = getent("burger_screen_disabled", "targetname");
-  var_3 = getent("burger_screen_decrypt", "targetname");
+  var_1 = common_scripts\utility::getStruct("drive_decrypted_use", "targetname");
+  var_2 = getEnt("burger_screen_disabled", "targetname");
+  var_3 = getEnt("burger_screen_decrypt", "targetname");
   thread maps\mp\zombies\_zombies_sidequests::fake_use("unlocked", ::playerhaskey, undefined, "main_stage12_over", 100);
   self waittill("unlocked", var_4);
   level.burgerhatchlocked = 0;
@@ -1443,24 +1443,24 @@ stage12_tower_access() {
 }
 
 burger_room_valve_lock(var_0) {
-  var_1 = getent("burger_tower_valve", "targetname");
+  var_1 = getEnt("burger_tower_valve", "targetname");
   var_1.islocked = 1;
 
   switch (var_0) {
     case "locked":
       level.burgerislocked = 1;
-      var_1 rotateto((0, -90, 90), 0.2);
+      var_1 rotateTo((0, -90, 90), 0.2);
       break;
     case "unlocked":
       level.burgerislocked = 0;
-      var_1 rotateto((0, 0, 90), 0.2);
+      var_1 rotateTo((0, 0, 90), 0.2);
       break;
   }
 }
 
 burger_room_locked_audio() {
   level endon("game_ended");
-  var_0 = common_scripts\utility::getstruct("burger_tower_lock_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("burger_tower_lock_use", "targetname");
 
   for(;;) {
     var_0 thread maps\mp\zombies\_zombies_sidequests::fake_use("used", undefined, undefined, undefined, 80);
@@ -1482,7 +1482,7 @@ burger_room_free_access() {
   }
   level.zmbsqburgerroomopen = 1;
   var_0 = common_scripts\utility::getStructArray("burger_tower_destination", "targetname");
-  var_1 = common_scripts\utility::getstruct("burger_tower_use", "targetname");
+  var_1 = common_scripts\utility::getStruct("burger_tower_use", "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -1523,7 +1523,7 @@ burger_room_free_access() {
 
 burger_room_lockdown() {
   var_0 = common_scripts\utility::getStructArray("burger_tower_exit", "targetname");
-  var_1 = getent("burger_tower_vol", "targetname");
+  var_1 = getEnt("burger_tower_vol", "targetname");
   wait 2;
   level notify("close_burger_for_rocket");
 
@@ -1552,7 +1552,7 @@ burger_room_lockdown() {
 
 burger_room_monitor() {
   var_0 = common_scripts\utility::getStructArray("burger_tower_exit", "targetname");
-  var_1 = getent("burger_tower_vol", "targetname");
+  var_1 = getEnt("burger_tower_vol", "targetname");
   var_2 = gettime() + 20000;
 
   while(gettime() < var_2) {
@@ -1578,7 +1578,7 @@ burger_room_monitor() {
 
 burger_room_escape() {
   var_0 = common_scripts\utility::getStructArray("burger_tower_exit", "targetname");
-  var_1 = common_scripts\utility::getstruct("burger_tower_escape_use", "targetname");
+  var_1 = common_scripts\utility::getStruct("burger_tower_escape_use", "targetname");
 
   for(;;) {
     var_1 thread maps\mp\zombies\_zombies_sidequests::fake_use("used", undefined, undefined, undefined, 80);
@@ -1615,7 +1615,7 @@ playergivearm() {
 }
 
 stage13_logic() {
-  var_0 = common_scripts\utility::getstruct("warehouse_safe_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("warehouse_safe_use", "targetname");
 
   for(;;) {
     var_0 thread maps\mp\zombies\_zombies_sidequests::fake_use("opened", undefined, undefined, "main_stage13_over");
@@ -1634,7 +1634,7 @@ stage13_logic() {
 stage13_spawn_arm() {
   level notify("arm_spawned");
   level.sqarmspawned = 1;
-  var_0 = common_scripts\utility::getstruct("gator_water_level", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("gator_water_level", "script_noteworthy");
   var_1 = var_0.origin[2] - self.origin[2];
   var_2 = spawn("script_model", self.origin + (0, 0, var_1));
   var_2 setModel("dlc2_zom_gib_arm_pickup");
@@ -1674,23 +1674,23 @@ playergivedriveencrypted() {
 }
 
 stage14_logic() {
-  var_0 = getent("safe_door_org", "targetname");
+  var_0 = getEnt("safe_door_org", "targetname");
   var_1 = getEntArray("warehouse_safe_door", "targetname");
-  var_2 = getent("thumb_drive_encrypted", "targetname");
-  var_3 = getent("fingerprint_scanner", "targetname");
+  var_2 = getEnt("thumb_drive_encrypted", "targetname");
+  var_3 = getEnt("fingerprint_scanner", "targetname");
 
   foreach(var_5 in var_1) {
     var_5 linktosynchronizedparent(var_0);
   }
 
-  var_7 = common_scripts\utility::getstruct("warehouse_safe_use", "targetname");
+  var_7 = common_scripts\utility::getStruct("warehouse_safe_use", "targetname");
   var_7 thread maps\mp\zombies\_zombies_sidequests::fake_use("opened", ::playerhasarm, undefined, "main_stage14_over", 80);
   var_7 waittill("opened", var_8);
   maps\mp\zombies\_util::playfxontagnetwork(common_scripts\utility::getfx("dlc_prop_scanner_door_lock_pass"), var_3, "tag_origin");
   var_8 playertakeitem("arm");
-  var_0 rotateyaw(-125, 1);
+  var_0 rotateYaw(-125, 1);
   var_0 playSound("sq_safe_door_open");
-  var_9 = common_scripts\utility::getstruct("thumb_drive_use", "targetname");
+  var_9 = common_scripts\utility::getStruct("thumb_drive_use", "targetname");
   var_9 thread maps\mp\zombies\_zombies_sidequests::fake_use("acquired", undefined, undefined, "main_stage14_over", 80);
   var_9 waittill("acquired", var_8);
   var_2 playSound("sq_drive_grab");
@@ -1706,10 +1706,10 @@ stage14_end(var_0) {
 stage15_init() {}
 
 stage15_logic() {
-  var_0 = getent("thumb_drive_decrypting", "targetname");
-  var_1 = getent("burger_screen_decrypt", "targetname");
-  var_2 = getent("burger_screen_disabled", "targetname");
-  var_3 = common_scripts\utility::getstruct("drive_decrypted_use", "targetname");
+  var_0 = getEnt("thumb_drive_decrypting", "targetname");
+  var_1 = getEnt("burger_screen_decrypt", "targetname");
+  var_2 = getEnt("burger_screen_disabled", "targetname");
+  var_3 = common_scripts\utility::getStruct("drive_decrypted_use", "targetname");
   var_3 thread maps\mp\zombies\_zombies_sidequests::fake_use("placed", ::playerhasdriveencrypted, undefined, "main_stage15_over", 80);
   var_3 waittill("placed", var_4);
   var_0 show();
@@ -1786,10 +1786,10 @@ update_countdown() {
 }
 
 burger_rocket_launch() {
-  var_0 = getent("burger_rocket_org", "targetname");
-  var_1 = getent("burger_rocket_dest", "targetname");
-  var_2 = getent("burger_rocket", "targetname");
-  var_3 = getent("burger_rocket_fins", "targetname");
+  var_0 = getEnt("burger_rocket_org", "targetname");
+  var_1 = getEnt("burger_rocket_dest", "targetname");
+  var_2 = getEnt("burger_rocket", "targetname");
+  var_3 = getEnt("burger_rocket_fins", "targetname");
   var_4 = getEntArray("burger_rocket_static", "targetname");
   var_0 thread rocket_attach(var_2, var_3);
   var_0 thread rocket_thruster_fx();
@@ -1823,7 +1823,7 @@ rocket_attach(var_0, var_1) {
 }
 
 rocket_thruster_fx() {
-  var_0 = getent("burger_rocket_fx", "targetname");
+  var_0 = getEnt("burger_rocket_fx", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("dlc2_brg_burger_bomb");
   var_1 linktosynchronizedparent(self);
@@ -1872,7 +1872,7 @@ burger_firing_event() {
 bombs_init() {
   wait 1;
   level.bombsonstandby = [];
-  level.launch_point = common_scripts\utility::getstruct("org_bomb_launch", "targetname");
+  level.launch_point = common_scripts\utility::getStruct("org_bomb_launch", "targetname");
   level.bomb_targets = common_scripts\utility::getStructArray("org_bomb_targets", "targetname");
   level.bomb_count_max = 12;
   level.bomb_count_min = 2;
@@ -1882,7 +1882,7 @@ bombs_init() {
     var_1 setModel("dlc2_brg_burger_bomb");
     var_1 thread bomb_physics_impact_watch();
     var_2 = 24;
-    var_3 = getent("bomb_pickup_" + (var_0 + 1), "targetname");
+    var_3 = getEnt("bomb_pickup_" + (var_0 + 1), "targetname");
 
     if(isDefined(var_3)) {
       var_3.origin = var_1.origin;
@@ -1890,8 +1890,8 @@ bombs_init() {
       var_3 = spawn("trigger_radius", var_1.origin - (0, 0, var_2 / 2), 0, var_2, var_2);
     }
 
-    var_3 enablelinkto();
-    var_3 linkto(var_1);
+    var_3 enablelinkTo();
+    var_3 linkTo(var_1);
     var_3.no_moving_platfrom_unlink = 1;
     var_4 = [var_1];
     var_5 = maps\mp\gametypes\_gameobjects::createcarryobject("any", var_3, var_4, (0, 0, 32));
@@ -1932,7 +1932,7 @@ bomb_fires(var_0) {
   level.mines[level.mines.size] = var_2;
   var_3 = var_1.origin + (randomfloatrange(-10, 10), randomfloatrange(-10, 10), randomfloatrange(-10, 10));
   var_1.origin = (var_1.origin[0], var_1.origin[1], var_2.origin[2] + 600);
-  var_4 = vectornormalize(var_1.origin - var_2.origin) * randomintrange(200, 300);
+  var_4 = vectorNormalize(var_1.origin - var_2.origin) * randomintrange(200, 300);
   var_5 = (0, 0, 0);
   var_2 physicslaunchserver(var_2.origin + var_5, var_4);
   aud_event_fire_bomb();
@@ -2214,7 +2214,7 @@ bomb_create_killcam_ent() {
   }
 
   self.killcament = spawn("script_model", self.visuals[0].origin);
-  self.killcament linkto(self.visuals[0]);
+  self.killcament linkTo(self.visuals[0]);
   self.killcament setcontents(0);
   self.killcament setscriptmoverkillcam("explosive");
 }
@@ -2319,8 +2319,8 @@ stage15_end(var_0) {
 }
 
 stage16_init() {
-  var_0 = getent("thumb_drive_decrypted", "targetname");
-  var_1 = getent("thumb_drive_decrypting", "targetname");
+  var_0 = getEnt("thumb_drive_decrypted", "targetname");
+  var_1 = getEnt("thumb_drive_decrypting", "targetname");
   var_1 delete();
   var_0 show();
 }
@@ -2336,8 +2336,8 @@ playergivedrivedecrypted() {
 }
 
 stage16_logic() {
-  var_0 = getent("thumb_drive_decrypted", "targetname");
-  var_1 = common_scripts\utility::getstruct("drive_decrypted_use", "targetname");
+  var_0 = getEnt("thumb_drive_decrypted", "targetname");
+  var_1 = common_scripts\utility::getStruct("drive_decrypted_use", "targetname");
   var_1 thread maps\mp\zombies\_zombies_sidequests::fake_use("acquired", undefined, undefined, "main_stage16_over", 80);
   var_1 waittill("acquired", var_2);
   var_0 playSound("sq_drive_grab");
@@ -2352,7 +2352,7 @@ stage17_init() {}
 
 stage17_logic() {
   level.zmbsqbeaufordnoresponse = 1;
-  var_0 = common_scripts\utility::getstruct("murderbot_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("murderbot_use", "targetname");
   var_0 thread maps\mp\zombies\_zombies_sidequests::fake_use("activated", ::playerhasdrivedecrypted, undefined, "main_stage17_over", 80);
   var_0 waittill("activated", var_1);
   var_1 playertakeitem("drive_decrypted");
@@ -2381,7 +2381,7 @@ set_side_quest_coop_data_burgertown() {
 }
 
 murderbot_test_setup() {
-  var_0 = common_scripts\utility::getstruct("murderbot_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("murderbot_use", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2406,7 +2406,7 @@ beauford_greetings() {
   }
 
   var_0 = 10000;
-  var_1 = common_scripts\utility::getstruct("murderbot_use", "targetname");
+  var_1 = common_scripts\utility::getStruct("murderbot_use", "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -2436,7 +2436,7 @@ playercanhearbeaufordresponse() {
 
 beauford_interact() {
   level endon("main_stage16_over");
-  var_0 = common_scripts\utility::getstruct("murderbot_use", "targetname");
+  var_0 = common_scripts\utility::getStruct("murderbot_use", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2451,7 +2451,7 @@ beauford_interact() {
 
 beauford_hit() {
   level endon("main_stage16_over");
-  var_0 = getent("murderbot_static_thumbsup", "targetname");
+  var_0 = getEnt("murderbot_static_thumbsup", "targetname");
   var_0.health = 99999;
   var_0.maxhealth = 99999;
   var_0 setCanDamage(1);
@@ -2491,10 +2491,10 @@ beauford_kills() {
 
 spawn_murderbot(var_0) {
   level.zmbsqmurderbotstarted = 1;
-  var_1 = getent("murderbot_animscripted", "targetname");
-  var_2 = getent("speaker_box", "targetname");
+  var_1 = getEnt("murderbot_animscripted", "targetname");
+  var_2 = getEnt("speaker_box", "targetname");
   var_3 = getEntArray("speaker_box_coll", "targetname");
-  var_4 = getent("bubby_clip", "targetname");
+  var_4 = getEnt("bubby_clip", "targetname");
   var_4 notsolid();
   var_4 delete();
 
@@ -2503,14 +2503,14 @@ spawn_murderbot(var_0) {
     var_6 delete();
   }
 
-  var_8 = common_scripts\utility::getstruct("murderbot_start", "script_noteworthy");
+  var_8 = common_scripts\utility::getStruct("murderbot_start", "script_noteworthy");
   var_9 = maps\mp\zombies\zombie_murderbot::spawnmurderbot(var_8, var_1, var_2);
   level notify("beauford_spawned", var_9);
   var_10 = maps\mp\zombies\_zombies_audio_announcer::getannouncers("beauford");
   var_11 = var_10[0];
 
   if(isDefined(var_11)) {
-    var_11 linkto(var_9, "j_head", (0, 0, 0), (0, 0, 0));
+    var_11 linkTo(var_9, "j_head", (0, 0, 0), (0, 0, 0));
   }
 
   level thread spawn_murderbot_vo(var_0);
@@ -2527,7 +2527,7 @@ spawn_murderbot_vo(var_0) {
 }
 
 init_song_sidequest() {
-  level.sq_song_ent = getent("sq_song", "targetname");
+  level.sq_song_ent = getEnt("sq_song", "targetname");
 
   if(!isDefined(level.sq_song_ent)) {
     level.sq_song_ent = spawn("script_model", (0, 0, 0));
@@ -2603,7 +2603,7 @@ song_fake_use(var_0, var_1, var_2) {
 songstage1_init() {}
 
 songstage1_logic() {
-  var_0 = common_scripts\utility::getstruct("song_use_1", "targetname");
+  var_0 = common_scripts\utility::getStruct("song_use_1", "targetname");
   var_1 = song_fake_use(var_0.origin, 1);
   maps\mp\zombies\_zombies_sidequests::stage_completed("song", "stage1");
 }
@@ -2613,7 +2613,7 @@ songstage1_end(var_0) {}
 songstage2_init() {}
 
 songstage2_logic() {
-  var_0 = common_scripts\utility::getstruct("song_use_2", "targetname");
+  var_0 = common_scripts\utility::getStruct("song_use_2", "targetname");
   var_1 = song_fake_use(var_0.origin, 2);
   maps\mp\zombies\_zombies_sidequests::stage_completed("song", "stage2");
 }
@@ -2623,7 +2623,7 @@ songstage2_end(var_0) {}
 songstage3_init() {}
 
 songstage3_logic() {
-  var_0 = common_scripts\utility::getstruct("song_use_3", "targetname");
+  var_0 = common_scripts\utility::getStruct("song_use_3", "targetname");
   var_1 = song_fake_use(var_0.origin, 3);
   maps\mp\zombies\_zombies_sidequests::stage_completed("song", "stage3");
 }

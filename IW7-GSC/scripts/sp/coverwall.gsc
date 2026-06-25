@@ -531,7 +531,7 @@ func_475C(var_0, var_1) {
 
   playworldsound("deployable_cover_explode", var_2);
   earthquake(0.4, 0.6, var_0.owner.origin, 450);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   var_0 notify("death");
   scripts\engine\utility::flag_wait_or_timeout("coverwall_force_delete", 0.1);
   if(!isDefined(var_1)) {

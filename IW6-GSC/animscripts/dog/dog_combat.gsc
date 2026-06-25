@@ -146,7 +146,7 @@ attackmiss() {
 
   if(isDefined(self.enemy)) {
     var_1 = anglesToForward((0, self.desiredangle, 0));
-    var_2 = vectornormalize(self.enemy.origin - self.origin);
+    var_2 = vectorNormalize(self.enemy.origin - self.origin);
     var_3 = self.enemy.origin - (self.origin + var_1 * 40);
 
     if(vectordot(var_2, var_1) > 0.707 || vectordot(var_3, var_1) > 0) {
@@ -1258,7 +1258,7 @@ domeleevsdog(var_0, var_1, var_2) {
   self setflaggedanimrestart("aianim", var_0[1], 1, 0.1, 1);
   thread animscripts\shared::donotetracks("aianim");
   wait 0.15;
-  self.syncedmeleetarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedmeleetarget linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   thread meleestrugglevsdog_collision(var_2);
   self waittillmatch("aianim", "end");
   self.syncedmeleetarget notify("end_dog_interrupted_check");
@@ -1404,7 +1404,7 @@ playerview_startsequence(var_0) {
   thread playerview_knockdownanim(var_0);
   self dontinterpolate();
   var_1 playerlinktoabsolute(self, "tag_player");
-  var_0 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   var_5 = self gettagangles("tag_sync");
   var_0 orientmode("face angle", var_5[1]);
   var_0 orientmode("face default");
@@ -1477,7 +1477,7 @@ playerview_endsequence(var_0) {
 playerview_unlinkplayeranddelete(var_0) {
   var_0 show();
   var_0 unlink();
-  var_0 setorigin(self.origin);
+  var_0 setOrigin(self.origin);
   var_0 setplayerangles(self.startangles);
   var_0 setCanDamage(1);
   var_1 = var_0.player_view;
@@ -1505,7 +1505,7 @@ playerview_show(var_0) {
 
   if(maps\_utility::is_coop()) {
     var_1 = playerdrone_create(var_0);
-    var_1 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_1 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_1 thread playerdrone_anim_knockdown(1);
     self.playerdrone = var_1;
 

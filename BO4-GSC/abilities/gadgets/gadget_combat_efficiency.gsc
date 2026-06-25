@@ -153,7 +153,7 @@ function_f53ac86e() {
   enabled = self ability_util::function_43cda488();
 
   if(isDefined(self.team)) {
-    teammates = getplayers(self.team);
+    teammates = getPlayers(self.team);
 
     foreach(player in teammates) {
       player clientfield::set_player_uimodel("hudItems.combatEfficiencyActive", enabled);

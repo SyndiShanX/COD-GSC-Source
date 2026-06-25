@@ -45,7 +45,7 @@ function player_cam_bubbles(localclientnum, oldval, newval, bnewent, binitialsna
     }
 
     self.n_fx_id = playfxoncamera(fieldname, "player/fx_plyr_swim_bubbles_body", (0, 0, 0), (1, 0, 0), (0, 0, 1));
-    self playrumbleonentity(fieldname, "damage_heavy");
+    self playRumbleOnEntity(fieldname, "damage_heavy");
     return;
   }
 

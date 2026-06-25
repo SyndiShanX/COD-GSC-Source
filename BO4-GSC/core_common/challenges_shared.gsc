@@ -894,7 +894,7 @@ function_57d8515c() {
   for(;;) {
     wait level.controllerparticipationcheckinterval;
     playerschecked = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player) || !isPlayer(player) || isbot(player)) {
@@ -1215,7 +1215,7 @@ earnedempassistscore(score) {
 }
 
 teamcompletedchallenge(team, challenge) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].team) && players[i].team == team) {
@@ -1889,7 +1889,7 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shitloc, atta
         data.var_cf13980c[data.var_cf13980c.size] = sensor_dart;
       }
     } else if(isDefined(attacker.team)) {
-      var_8ddd9a81 = getplayers(attacker.team);
+      var_8ddd9a81 = getPlayers(attacker.team);
 
       foreach(attacking_player in var_8ddd9a81) {
         if(!isPlayer(attacking_player)) {

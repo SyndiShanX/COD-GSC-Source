@@ -77,7 +77,7 @@ _id_0F23() {
     var_6 = anglesToForward(self.angles);
 
     if(isDefined(self._id_0F24)) {
-      var_7 = vectornormalize(self._id_0F24.origin - self.origin);
+      var_7 = vectorNormalize(self._id_0F24.origin - self.origin);
     } else {
       var_7 = var_6;
     }
@@ -137,7 +137,7 @@ _id_0F29() {
 
   if(self nearclaimnodeandangle() && isDefined(anim._id_0F1F[self.prevscript])) {
     var_1 = anglesToForward(self.node.angles);
-    var_2 = vectornormalize(self.reactiontargetpos - self.origin);
+    var_2 = vectorNormalize(self.reactiontargetpos - self.origin);
 
     if(vectordot(var_1, var_2) < -0.5) {
       self orientmode("face current");
@@ -157,7 +157,7 @@ _id_0F29() {
       self orientmode("face point", self.reactiontargetpos);
     }
     if(self.a._id_0D26 == "crouch") {
-      var_2 = vectornormalize(self.reactiontargetpos - self.origin);
+      var_2 = vectorNormalize(self.reactiontargetpos - self.origin);
       var_5 = anglesToForward(self.angles);
 
       if(vectordot(var_5, var_2) < -0.5) {

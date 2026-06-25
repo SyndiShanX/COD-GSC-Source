@@ -639,7 +639,7 @@ _id_5B03() {
   var_2 = distance2dsquared(var_0, var_1);
   var_3 = var_2 < self._id_ADAB;
   var_4 = length(self.owner getvelocity());
-  var_5 = vectornormalize(self.origin - self.owner.origin);
+  var_5 = vectorNormalize(self.origin - self.owner.origin);
 
   if(var_3) {
     return self _meth_87E3();
@@ -670,7 +670,7 @@ _id_5B03() {
   var_14 = undefined;
   var_15 = anglesToForward(self.owner.angles);
   var_15 = (var_15[0], var_15[1], 0);
-  var_15 = vectornormalize(var_15);
+  var_15 = vectorNormalize(var_15);
   var_8[var_8.size] = var_7;
 
   foreach(var_17 in var_8) {
@@ -722,7 +722,7 @@ _id_5B03() {
     if(vectordot(var_28, var_26 / var_27) < 0) {
       var_6 = var_14.origin;
     } else {
-      var_29 = vectornormalize(var_14.origin - var_7.origin);
+      var_29 = vectorNormalize(var_14.origin - var_7.origin);
       var_6 = var_7.origin + var_29 * self._id_BB8D;
     }
   } else
@@ -907,7 +907,7 @@ _id_10A87() {
   self._id_FE90 = spawn("script_model", self.origin);
   self._id_FE90 setModel("tag_origin");
   self._id_FE90 scripts\mp\utility\killstreak::_id_D5D2(var_0, var_1, 360, 360, 30000, 30000, 2);
-  self._id_FE90 linkto(self);
+  self._id_FE90 linkTo(self);
   self._id_FE90 waittill("trigger", var_0);
   self._id_FE90 disableplayeruse(var_0);
   self._id_FE90 delete();
@@ -1033,7 +1033,7 @@ _id_AA9A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self._id_F220 = gettime();
 
   if(isDefined(self.owner)) {
-    self._id_42F4 = vectornormalize(self.origin - self.owner.origin);
+    self._id_42F4 = vectorNormalize(self.origin - self.owner.origin);
   }
 }
 

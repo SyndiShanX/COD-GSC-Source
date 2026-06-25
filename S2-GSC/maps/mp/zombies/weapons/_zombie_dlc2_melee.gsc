@@ -308,7 +308,7 @@ bat_hc_blast(param_00) {
   var_06.var_1D = var_01.var_1D;
   var_06 setModel("tag_origin");
   var_06.var_2DA7 = var_05["position"];
-  var_06.var_2F0C = vectornormalize(var_06.var_2DA7 - var_06.var_116);
+  var_06.var_2F0C = vectorNormalize(var_06.var_2DA7 - var_06.var_116);
   var_06.var_9B7F = var_05["fraction"];
   var_06.var_721C = var_01;
   var_06.var_953E = "baseballbat_hc_aoe_zm";
@@ -324,13 +324,13 @@ bat_hc_blast_think(param_00) {
   var_01 = distance(param_00.var_116, param_00.var_2DA7);
   var_02 = var_01 / param_00.var_18A;
   if(var_02 > 0) {
-    param_00 moveto(param_00.var_2DA7, var_02, 0, 0);
+    param_00 moveTo(param_00.var_2DA7, var_02, 0, 0);
   }
 
   var_03 = param_00.var_116 - param_00.hit_height * 0.5 * (0, 0, 1);
   param_00.var_9D65 = spawn("trigger_radius", var_03, 0, param_00.hit_radius, param_00.hit_height);
-  param_00.var_9D65 enablelinkto();
-  param_00.var_9D65 linkto(param_00);
+  param_00.var_9D65 enablelinkTo();
+  param_00.var_9D65 linkTo(param_00);
   thread bat_hc_blast_watch_collision(param_00);
   playFXOnTag(common_scripts\utility::func_44F5("zmb_hc_bat_aoe_fx"), param_00, "tag_origin");
   lib_0378::func_8D74("zmb_hc_bat_aoe_fx", param_00, "tag_origin");

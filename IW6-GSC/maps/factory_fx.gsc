@@ -258,7 +258,7 @@ fx_init() {
   level.assemblysmokeflir2 = undefined;
   level.assemblysmokepos = (5434.46, -1387.37, 279.125);
   level.smokeintensity = 0;
-  level.smokevolume = getent("ambush_smoke_volume", "targetname");
+  level.smokevolume = getEnt("ambush_smoke_volume", "targetname");
   maps\_utility::setsaveddvar_cg_ng("fx_alphathreshold", 9, 2);
   maps\_utility::setsaveddvar_cg_ng("r_thermalColorOffset", 0, 0.23);
   maps\_utility::setsaveddvar_cg_ng("r_thermalDetailScale", 0.375, 0.1);
@@ -393,7 +393,7 @@ trigger_vf_intro() {
 }
 
 trigger_vf_factory_reveal() {
-  var_0 = getent("lgt_main_hall_door", "script_noteworthy");
+  var_0 = getEnt("lgt_main_hall_door", "script_noteworthy");
   var_1 = getEntArray("lgt_main_hall_flr", "script_noteworthy");
   var_2 = var_0 getlightradius();
   var_0 setlightradius(var_2 / 10.0);
@@ -446,20 +446,20 @@ trigger_vf_powerstealth() {
 
 trigger_vf_presat() {
   common_scripts\utility::flag_wait("presat_entrance");
-  var_0 = getent("lgt_presat_revolving_door", "script_noteworthy");
+  var_0 = getEnt("lgt_presat_revolving_door", "script_noteworthy");
 
   if(isDefined(var_0)) {
     var_0 setlightintensity(2.5);
   }
 
-  var_1 = getent("lgt_presat_warning", "script_noteworthy");
+  var_1 = getEnt("lgt_presat_warning", "script_noteworthy");
 
   if(isDefined(var_1)) {
     var_2 = randomintrange(5, 7) * 8;
     var_1 setlightintensity(1.25);
 
     for(var_3 = 0; var_3 < var_2; var_3++) {
-      var_1 rotateyaw(45, 1);
+      var_1 rotateYaw(45, 1);
     }
 
     var_1 setlightintensity(0.1);
@@ -531,15 +531,15 @@ trigger_vf_weapon_reveal() {
   if(maps\_utility::is_gen4()) {
     lgt_weapon_reveal_sequence_ng();
   } else {
-    var_0 = getent("satellite_room_vert_pieces", "targetname");
-    var_1 = getent("satellite_ROG_01", "targetname");
-    var_2 = getent("satellite_ROG_02", "targetname");
-    var_3 = getent("satellite_ROG_03", "targetname");
-    var_4 = getent("satellite_ROG_04", "targetname");
-    var_5 = getent("satellite_ROG_05", "targetname");
-    var_6 = getent("satellite_ROG_06", "targetname");
-    var_7 = getent("satellite_room_rack_system", "targetname");
-    var_8 = getent("satellite_room_rog_holder", "targetname");
+    var_0 = getEnt("satellite_room_vert_pieces", "targetname");
+    var_1 = getEnt("satellite_ROG_01", "targetname");
+    var_2 = getEnt("satellite_ROG_02", "targetname");
+    var_3 = getEnt("satellite_ROG_03", "targetname");
+    var_4 = getEnt("satellite_ROG_04", "targetname");
+    var_5 = getEnt("satellite_ROG_05", "targetname");
+    var_6 = getEnt("satellite_ROG_06", "targetname");
+    var_7 = getEnt("satellite_room_rack_system", "targetname");
+    var_8 = getEnt("satellite_room_rog_holder", "targetname");
     var_9 = spawn("script_model", (7202, -984, 324));
     var_9 setModel("tag_origin");
     var_0 retargetscriptmodellighting(var_9);
@@ -791,7 +791,7 @@ fx_ambush_spawn_assembly_smoke() {
   level.assemblysmoke = spawn("script_model", level.player.origin);
   level.assemblysmoke setModel("tag_origin");
   level.assemblysmoke addpitch(270);
-  level.assemblysmoke linkto(level.player);
+  level.assemblysmoke linkTo(level.player);
   playFXOnTag(level._effect["factory_ambush_assembly_smoke"], level.assemblysmoke, "tag_origin");
   thread maps\factory_audio::ambush_smoke_grenade_explo_sfx();
   level.assemblysmokeflir2 = spawn("script_model", level.assemblysmokepos);
@@ -899,7 +899,7 @@ fx_ambush_piece_stop(var_0) {
 fx_ambush_chest_blood(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_0.allowdeath = 0;
-  var_1 linkto(var_0, "j_pectoral_le", (0, -5, 0), (0, 270, 0));
+  var_1 linkTo(var_0, "j_pectoral_le", (0, -5, 0), (0, 270, 0));
   playFXOnTag(level._effect["factory_ambush_chest_blood"], var_1, "tag_origin");
   wait 20;
   var_1 delete();
@@ -1735,12 +1735,12 @@ fx_sat_revolving_door_light() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = self.origin - (0, 0, 5);
   var_0.angles = self.angles - (0, 90, 0);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   playFXOnTag(level._effect["amber_light_45_beacon_nolight_beam"], var_0, "tag_origin");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = self.origin - (0, 0, 5);
   var_1.angles = self.angles;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   playFXOnTag(level._effect["amber_light_45_beacon_nglight_glow"], var_1, "tag_origin");
   thread fx_sat_revolving_door_light_rotate();
   common_scripts\utility::flag_wait("presat_revolving_door_closed");
@@ -1753,14 +1753,14 @@ fx_sat_revolving_door_light_rotate() {
   self endon("death");
 
   while(!common_scripts\utility::flag("presat_revolving_door_closed")) {
-    self rotateyaw(360, 1.5);
+    self rotateYaw(360, 1.5);
     wait 1.5;
   }
 }
 
 fx_intro_kill_ally_stab(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0, "j_neck", (3, -2, 6), (270, 0, 0));
+  var_1 linkTo(var_0, "j_neck", (3, -2, 6), (270, 0, 0));
   playFXOnTag(level._effect["factory_ambush_chest_blood"], var_1, "tag_origin");
   wait 20.0;
   var_1 delete();
@@ -1768,7 +1768,7 @@ fx_intro_kill_ally_stab(var_0) {
 
 fx_intro_kill_player_stab(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0, "j_spineupper", (12, -14, 0), (0, 275, 0));
+  var_1 linkTo(var_0, "j_spineupper", (12, -14, 0), (0, 275, 0));
   playFXOnTag(level._effect["factory_intro_stab_blood_player"], var_1, "tag_origin");
   wait 20.0;
   var_1 delete();
@@ -1776,7 +1776,7 @@ fx_intro_kill_player_stab(var_0) {
 
 fx_intro_kill_player_jump_stab(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0, "j_pectoral_le", (0, -5, 0), (0, 270, 0));
+  var_1 linkTo(var_0, "j_pectoral_le", (0, -5, 0), (0, 270, 0));
   playFXOnTag(level._effect["factory_ambush_chest_blood"], var_1, "tag_origin");
   wait 20.0;
   var_1 delete();
@@ -1844,7 +1844,7 @@ fx_chase_stack_small_break(var_0) {
 fx_chase_first_explosion(var_0) {
   maps\_utility::vision_set_fog_changes("factory_chase_explosion", 0.1);
   common_scripts\utility::exploder("chase_000");
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   level.third_opfor_car thread fx_chase_first_explosion_jeep();
   wait 2.0;
   maps\_utility::vision_set_fog_changes("", 1.0);

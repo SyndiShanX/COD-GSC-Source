@@ -441,9 +441,9 @@ function function_126fc77c(player) {
   if(isDefined(level.var_a6f62e91) && isDefined(self.stub.cost) && self.stub[[level.var_a6f62e91]](player, #"crafting_table")) {
     self sethintstringforplayer(player, self.stub.hint_string, self.stub.cost);
   } else if(isDefined(self.stub.cost) && self.stub.cost != 0) {
-    self sethintstring(self.stub.hint_string, self.stub.cost);
+    self setHintString(self.stub.hint_string, self.stub.cost);
   } else {
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
   }
 
   return can_use;
@@ -458,12 +458,12 @@ function function_f665fde0(trig) {
   unitrigger_stub.craftfoundry = trig.craftfoundry;
 
   if(zm_utility::get_story() == 1 && isDefined(trig.target2)) {
-    unitrigger_stub.var_c2f40a58 = getent(trig.target2, "targetname");
+    unitrigger_stub.var_c2f40a58 = getEnt(trig.target2, "targetname");
     unitrigger_stub.var_c2f40a58 ghost();
   }
 
   if(zm_utility::get_story() == 1 && isDefined(trig.target3)) {
-    unitrigger_stub.var_4f749ffe = getent(trig.target3, "targetname");
+    unitrigger_stub.var_4f749ffe = getEnt(trig.target3, "targetname");
     unitrigger_stub.var_4f749ffe ghost();
   }
 
@@ -536,7 +536,7 @@ function function_f665fde0(trig) {
   }
 
   if(isDefined(unitrigger_stub.target)) {
-    m_target = getent(unitrigger_stub.target, "targetname");
+    m_target = getEnt(unitrigger_stub.target, "targetname");
 
     if(isDefined(m_target)) {
       unitrigger_stub.model = m_target;
@@ -983,7 +983,7 @@ function private function_f37c4bb5(player) {
     }
 
     if(isDefined(self.stub.blueprint.w_result) && is_true(self.stub.blueprint.w_result.isriotshield)) {
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         e_player zm_challenges::debug_print("<dev string:x1c2>");
 
         e_player zm_stats::increment_challenge_stat(#"shields_built", undefined, 1);
@@ -1259,7 +1259,7 @@ function private function_df8ce6e2(player) {
 
   if(!is_true(self.stub.crafted)) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return;
   }
 
@@ -1288,7 +1288,7 @@ function private function_df8ce6e2(player) {
 
   if(player function_7bffa1ac(self.stub.blueprint.w_result)) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return;
   }
 
@@ -1352,7 +1352,7 @@ function private function_df8ce6e2(player) {
   self.stub.bought = 1;
   self.stub.hint_string = "";
   self.stub.cost = undefined;
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
   self.stub.var_ad7ae074 = 1;
   self.stub thread function_d94efa98();
   player zm_stats::track_craftables_pickedup(self.stub.blueprint.w_result);
@@ -1405,7 +1405,7 @@ function private function_42673a26(player) {
 
   if(!is_true(self.stub.crafted)) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return;
   }
 
@@ -1432,7 +1432,7 @@ function private function_42673a26(player) {
     self.stub.hint_string = #"hash_48157c44f8771b6c";
   }
 
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
 }
 
 function function_3012605d(unitrigger) {
@@ -1487,14 +1487,14 @@ function devgui_get_players() {
   if(var_4ab6b47 != "<dev string:x1e9>") {
     player_id = int(var_4ab6b47);
 
-    if(player_id > 0 && player_id <= 4 && isDefined(getplayers()[player_id - 1])) {
+    if(player_id > 0 && player_id <= 4 && isDefined(getPlayers()[player_id - 1])) {
       result = [];
-      result[player_id - 1] = getplayers()[player_id - 1];
+      result[player_id - 1] = getPlayers()[player_id - 1];
       return result;
     }
   }
 
-  return getplayers();
+  return getPlayers();
 }
 
 function devgui_think() {
@@ -1558,6 +1558,6 @@ function function_fe738a08(table_id) {
       break;
   }
 
-  self setorigin(plorigin);
+  self setOrigin(plorigin);
   self setplayerangles(var_21f5823e);
 }

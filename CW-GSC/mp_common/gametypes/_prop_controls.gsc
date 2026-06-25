@@ -384,7 +384,7 @@ function propspin() {
     self.propent set_pitch_roll_for_ground_normal(self.prop);
   }
 
-  self.propent linkto(self.propanchor);
+  self.propent linkTo(self.propanchor);
 }
 
 function registerpreviousprop(inplayer) {
@@ -518,13 +518,13 @@ function propchangeto(info) {
     self.angles = var_fd85abcf;
   }
 
-  self.prop linkto(self.propent);
+  self.prop linkTo(self.propent);
 
   if(self.slopelocked && is_true(self.lock)) {
     self.propent set_pitch_roll_for_ground_normal(self.prop);
   }
 
-  self.propent linkto(self.propanchor);
+  self.propent linkTo(self.propanchor);
   self.thirdpersonrange = info.proprange;
   self.thirdpersonheightoffset = info.propheight;
   self setclientthirdperson(1);
@@ -540,7 +540,7 @@ function propmatchslope() {
     if(is_true(self.lock) && !is_true(self.var_635e22e7)) {
       self.propent unlink();
       self.propent set_pitch_roll_for_ground_normal(self.prop);
-      self.propent linkto(self.propanchor);
+      self.propent linkTo(self.propanchor);
     }
 
     if(prop::useprophudserver()) {
@@ -560,7 +560,7 @@ function propmatchslope() {
     self.propent unlink();
     self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
     self.propent.origin = self.propanchor.origin;
-    self.propent linkto(self.propanchor);
+    self.propent linkTo(self.propanchor);
   }
 
   if(prop::useprophudserver()) {
@@ -824,7 +824,7 @@ function unlockprop() {
     self.propent unlink();
     self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
     self.propent.origin = self.propanchor.origin;
-    self.propent linkto(self.propanchor);
+    self.propent linkTo(self.propanchor);
   }
 
   self.var_635e22e7 = 1;
@@ -834,7 +834,7 @@ function unlockprop() {
     if(isDefined(self.propanchor)) {
       self.propanchor.angles = self.angles + offsetangles;
       self.propanchor.origin = self.origin + offset;
-      self.propanchor linkto(self);
+      self.propanchor linkTo(self);
     }
 
     self.lock = 0;
@@ -854,13 +854,13 @@ function lockprop() {
 
   self.propanchor unlink();
   self.propanchor.origin = self.origin;
-  self playerlinkto(self.propanchor);
+  self playerlinkTo(self.propanchor);
 
   if(self.slopelocked) {
     self.propent unlink();
     self.propent set_pitch_roll_for_ground_normal(self.prop);
     self.propent.origin = self.origin;
-    self.propent linkto(self.propanchor);
+    self.propent linkTo(self.propanchor);
   }
 
   self.lock = 1;
@@ -1109,7 +1109,7 @@ function flashtheprops(var_c8c9bf0f) {
 
 function flashenemies(var_c8c9bf0f = self, position = self.origin) {
   fwd = anglesToForward(var_c8c9bf0f getplayerangles());
-  fwd = vectornormalize((fwd[0], fwd[1], 0));
+  fwd = vectorNormalize((fwd[0], fwd[1], 0));
   var_ec24ae95 = fwd * 60;
   spawn_pos = position + (0, 0, 10) + fwd * 30;
   concuss = var_c8c9bf0f magicmissile(getweapon(#"eq_slow_grenade"), spawn_pos, var_ec24ae95);
@@ -1180,7 +1180,7 @@ function cloneprop() {
   var_6e55957c.maxhealth = 99999;
   var_6e55957c.playerowner = self;
   var_6e55957c thread prop::function_aa8db165(&damageclonewatch);
-  var_6e55957c setplayercollision(0);
+  var_6e55957c setPlayerCollision(0);
   var_6e55957c makesentient();
   var_6e55957c clientfield::set("enemyequip", 2);
 
@@ -1236,7 +1236,7 @@ function function_d1a1cc8d() {
     self.isdying = 1;
   }
 
-  playsoundatposition("wpn_flash_grenade_explode", self.origin + (0, 0, 4));
+  playSoundAtPosition("wpn_flash_grenade_explode", self.origin + (0, 0, 4));
   playFX(fx::get("propDeathFX"), self.origin + (0, 0, 4));
   waittillframeend();
 

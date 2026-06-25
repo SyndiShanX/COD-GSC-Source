@@ -274,7 +274,7 @@ function function_be5f206(start_pos, target_pos, var_22041b45) {
 
   vehicle = self getvehicleoccupied();
   velocity = vehicle getvelocity();
-  var_8a263da1 = vectornormalize(velocity);
+  var_8a263da1 = vectorNormalize(velocity);
   var_1e74aaf8 = length(velocity);
   var_e42cca13 = var_1e74aaf8;
   velocity = var_8a263da1 * var_e42cca13;
@@ -319,7 +319,7 @@ function private function_f45f4725(entity) {
     }
 
     launch_speed = (0.5 * getdvarfloat(#"bg_lowgravity", 400) * sqr(time) + to_target[2]) / time;
-    to_target = vectornormalize((to_target[0], to_target[1], 0));
+    to_target = vectorNormalize((to_target[0], to_target[1], 0));
     grenade = entity magicgrenademanual(start_pos, (to_target[0] * 700, to_target[1] * 700, launch_speed), 6);
     grenade.angles = entity gettagangles(entity.var_1087b4ab);
     grenade thread function_6f78caa9();
@@ -350,11 +350,11 @@ function private function_6f78caa9() {
     player playSound(#"hash_7531b73b4b99b19d");
     player dodamage(self.weapon.damagevalues[0], start_pos, attacker, self);
     var_622f0175 = player.origin - self.origin;
-    var_f1ff3ca1 = vectornormalize((var_622f0175[0], var_622f0175[1], 0));
+    var_f1ff3ca1 = vectorNormalize((var_622f0175[0], var_622f0175[1], 0));
     player_forward = anglesToForward(player.angles);
-    var_d885fce5 = vectornormalize((player_forward[0], player_forward[1], 0));
+    var_d885fce5 = vectorNormalize((player_forward[0], player_forward[1], 0));
     player_right = anglestoright(player.angles);
-    var_f39d8ba7 = vectornormalize((player_right[0], player_right[1], 0));
+    var_f39d8ba7 = vectorNormalize((player_right[0], player_right[1], 0));
     dot = vectordot(var_f1ff3ca1, var_d885fce5);
 
     if(dot >= 0.5) {

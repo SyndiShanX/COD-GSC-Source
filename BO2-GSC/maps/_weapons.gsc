@@ -142,14 +142,14 @@ metalstorm_mms_charge_watch() {
     switch (self.chargeshotlevel) {
       case 1:
       case 2:
-        level.player playrumbleonentity("anim_light");
+        level.player playRumbleOnEntity("anim_light");
         break;
       case 3:
       case 4:
-        level.player playrumbleonentity("anim_med");
+        level.player playRumbleOnEntity("anim_med");
         break;
       case 5:
-        level.player playrumbleonentity("anim_heavy");
+        level.player playRumbleOnEntity("anim_heavy");
         break;
     }
 
@@ -246,7 +246,7 @@ getdamageableents(pos, radius, dolos, startradius) {
     startradius = 0;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(!isalive(players[i]) || players[i].sessionstate != "playing") {
@@ -356,7 +356,7 @@ weapondamagetracepassed(from, to, startradius, ignore) {
     midpos = to;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
   return trace["fraction"] == 1;
@@ -383,7 +383,7 @@ watchsmokegrenadedetonation() {
   smokesound playSound("wpn_smoke_hiss_start");
   smokesound playLoopSound("wpn_smoke_hiss_lp");
   wait 6;
-  playsoundatposition("wpn_smoke_hiss_end", position);
+  playSoundAtPosition("wpn_smoke_hiss_end", position);
   smokesound stoploopsound(0.5);
   wait 0.5;
   smokesound delete();

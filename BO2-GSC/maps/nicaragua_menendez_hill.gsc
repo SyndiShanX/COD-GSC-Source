@@ -68,7 +68,7 @@ menendez_hill_intro_vo() {
     n_pdf_line++;
   }
 
-  ai_mh_intro = getent("mh_intro_brutality_ai", "targetname");
+  ai_mh_intro = getEnt("mh_intro_brutality_ai", "targetname");
 
   if(isalive(ai_mh_intro)) {
     ai_mh_intro say_dialog("pdf3_stop_where_you_are_0");
@@ -98,11 +98,11 @@ init_flags() {
 }
 
 menendez_hill_spawn_funcs() {
-  sp_pdf = getent("mh_front_door_pdf", "targetname");
+  sp_pdf = getEnt("mh_front_door_pdf", "targetname");
   sp_pdf add_spawn_function(::menendez_hill_door_front_logic, "mh_door_clip", "mh_door", 90);
-  sp_pdf = getent("mh_back_door_pdf", "targetname");
+  sp_pdf = getEnt("mh_back_door_pdf", "targetname");
   sp_pdf add_spawn_function(::menendez_hill_door_back_logic, "mh_door_clip", "mh_door", -90);
-  sp_pdf = getent("mh_coke_dest_pdf", "targetname");
+  sp_pdf = getEnt("mh_coke_dest_pdf", "targetname");
   sp_pdf add_spawn_function(::fall_destruction);
   sp_pdf add_spawn_function(::trigger_mh_coke_destruction);
   add_spawn_function_group("mh_2nd_floor_left", "targetname", ::force_goal, undefined, 16);
@@ -123,7 +123,7 @@ fall_destruction() {
     wait 0.05;
   }
 
-  s_dyn_ents_center = getstruct("struct_mh_coke_dest", "targetname");
+  s_dyn_ents_center = getStruct("struct_mh_coke_dest", "targetname");
   radiusdamage(s_dyn_ents_center.origin, 32, 1, 1);
 }
 
@@ -263,7 +263,7 @@ menendez_hill_brutality_scene() {
 menendez_hill_door_back_logic(str_door_clip, m_door, n_rotate_angle) {
   level endon("door_death_front_started");
   level endon("nicaragua_gump_menendez");
-  m_door_clip = getent(str_door_clip, "targetname");
+  m_door_clip = getEnt(str_door_clip, "targetname");
 
   if(isDefined(m_door_clip)) {
     self door_death_ai_setup();
@@ -271,7 +271,7 @@ menendez_hill_door_back_logic(str_door_clip, m_door, n_rotate_angle) {
     level.player thread mh_door_guy_hide_and_show(m_door_clip);
     self waittill("door_death_started");
     level notify("door_death_back_started");
-    ai_pdf = getent("mh_front_door_pdf_ai", "targetname");
+    ai_pdf = getEnt("mh_front_door_pdf_ai", "targetname");
 
     if(isalive(ai_pdf)) {
       ai_pdf delete();
@@ -286,9 +286,9 @@ mh_door_guy_hide_and_show(m_door_clip) {
   level endon("door_death_back_started");
   level endon("nicaragua_gump_menendez");
   b_is_back_hiding = 0;
-  t_hide_and_show = getent("trig_door_guy_show_hide", "targetname");
-  ai_back = getent("mh_back_door_pdf_ai", "targetname");
-  ai_front = getent("mh_front_door_pdf_ai", "targetname");
+  t_hide_and_show = getEnt("trig_door_guy_show_hide", "targetname");
+  ai_back = getEnt("mh_back_door_pdf_ai", "targetname");
+  ai_front = getEnt("mh_front_door_pdf_ai", "targetname");
 
   while(isDefined(m_door_clip)) {
     if(self istouching(t_hide_and_show) && (isDefined(b_is_back_hiding) && !b_is_back_hiding)) {
@@ -308,7 +308,7 @@ mh_door_guy_hide_and_show(m_door_clip) {
 menendez_hill_door_front_logic(str_door_clip, m_door, n_rotate_angle) {
   level endon("door_death_back_started");
   level endon("nicaragua_gump_menendez");
-  m_door_clip = getent(str_door_clip, "targetname");
+  m_door_clip = getEnt(str_door_clip, "targetname");
 
   if(isDefined(m_door_clip)) {
     self door_death_ai_setup();
@@ -316,7 +316,7 @@ menendez_hill_door_front_logic(str_door_clip, m_door, n_rotate_angle) {
     nd_pillar = getnode("pillar_wait", "targetname");
     self setgoalnode(nd_pillar);
     trigger_wait("trig_mh_move_to_front_door");
-    m_door_block = getent("mh_door_front_block", "targetname");
+    m_door_block = getEnt("mh_door_front_block", "targetname");
     m_door_block connectpaths();
     wait 0.15;
     m_door_block delete();
@@ -327,13 +327,13 @@ menendez_hill_door_front_logic(str_door_clip, m_door, n_rotate_angle) {
     self stop_magic_bullet_shield();
     self waittill("door_death_started");
     level notify("door_death_front_started");
-    t_back_door_pdf = getent("trig_mh_back_door_pdf", "targetname");
+    t_back_door_pdf = getEnt("trig_mh_back_door_pdf", "targetname");
 
     if(isDefined(t_back_door_pdf)) {
       t_back_door_pdf delete();
     }
 
-    ai_pdf = getent("mh_back_door_pdf_ai", "targetname");
+    ai_pdf = getEnt("mh_back_door_pdf_ai", "targetname");
 
     if(isalive(ai_pdf)) {
       ai_pdf delete();
@@ -357,9 +357,9 @@ door_death_ai_setup() {
 }
 
 door_death_path_connect(str_door_clip, m_door, n_rotate_angle) {
-  m_door_clip = getent(str_door_clip, "targetname");
+  m_door_clip = getEnt(str_door_clip, "targetname");
   m_door_clip connectpaths();
-  m_door = getent(m_door, "targetname");
+  m_door = getEnt(m_door, "targetname");
   m_door rotateroll(n_rotate_angle, 0.25);
   wait 0.15;
   m_door_clip delete();
@@ -421,7 +421,7 @@ cartel_react_to_menendez_arrival() {
 
 haycart_enter_village_anim() {
   run_scene_first_frame("village_heycart_scene");
-  e_trigger = getent("moving_cart_trigger", "targetname");
+  e_trigger = getEnt("moving_cart_trigger", "targetname");
   e_trigger waittill("trigger");
   run_scene("village_heycart_scene");
 }
@@ -508,7 +508,7 @@ ladder_ai_drop() {
   ai_ladder = simple_spawn_single("mh_ladder_guy");
   ai_ladder.ignoreall = 1;
   ai_ladder force_goal(undefined, 16);
-  s_ladder = getstruct("ladder_look_at_org", "targetname");
+  s_ladder = getStruct("ladder_look_at_org", "targetname");
   level.player waittill_player_looking_at(s_ladder.origin, 60, 0);
   level notify("fxanim_bridge_drop_start");
   wait 1;

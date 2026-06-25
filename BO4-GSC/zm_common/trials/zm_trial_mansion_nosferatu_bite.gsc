@@ -26,7 +26,7 @@ __init__() {
 on_begin(var_53c7b205 = #"1") {
   level.var_53c7b205 = zm_trial::function_5769f26a(var_53c7b205);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_13db986c(level.var_53c7b205);
   }
 

@@ -184,7 +184,7 @@ function_2f63dc81(cmd) {
     case #"hash_2a785bbd314ac393":
       if(isarray(level.var_eaaa1d75) && level.var_eaaa1d75.size) {
         iprintlnbold("<dev string:x227>" + level.var_eaaa1d75[0].origin);
-        level.players[0] setorigin(level.var_eaaa1d75[0].origin);
+        level.players[0] setOrigin(level.var_eaaa1d75[0].origin);
       }
 
       break;
@@ -549,17 +549,17 @@ function_45a520db(params) {
       case #"enhanced":
         if(self.archetype === #"catalyst") {
           var_487ba56d = function_c3a8f243(2);
-          playsoundatposition(#"hash_5755957467fab7c0", self.origin);
+          playSoundAtPosition(#"hash_5755957467fab7c0", self.origin);
         }
 
         break;
       case #"heavy":
         var_487ba56d = 5;
-        playsoundatposition(#"hash_57559c7467fac3a5", self.origin);
+        playSoundAtPosition(#"hash_57559c7467fac3a5", self.origin);
         break;
       case #"miniboss":
         var_487ba56d = 10;
-        playsoundatposition(#"hash_612ef6ccaf0effeb", self.origin);
+        playSoundAtPosition(#"hash_612ef6ccaf0effeb", self.origin);
         break;
       case #"boss":
         var_487ba56d = 15;
@@ -1480,7 +1480,7 @@ function_7acf9d9b(e_door) {
     level notify(#"hash_4ffec9c5f552e6fc", {
       #e_door: e_door
     });
-    playsoundatposition(#"hash_27dc220231c7b8b3", e_door.origin);
+    playSoundAtPosition(#"hash_27dc220231c7b8b3", e_door.origin);
     return 1;
   }
 
@@ -1499,12 +1499,12 @@ set_door_hint_string(e_door) {
     while(true) {
       if(zm_utility::function_5f8f4d1b(e_door)) {
         if(function_8b1a219a()) {
-          e_door sethintstring(#"hash_57cd1cbe21e94751");
+          e_door setHintString(#"hash_57cd1cbe21e94751");
         } else {
-          e_door sethintstring(#"hash_7960cdc72d34a2db");
+          e_door setHintString(#"hash_7960cdc72d34a2db");
         }
       } else {
-        e_door sethintstring(#"");
+        e_door setHintString(#"");
       }
 
       waitframe(1);
@@ -1515,11 +1515,11 @@ set_door_hint_string(e_door) {
 
   if(e_door.script_noteworthy === "electric_door" || e_door.script_noteworthy === "electric_buyable_door" || isDefined(e_door.var_c947f134) && e_door.var_c947f134) {
     if(isDefined(level.var_d5bd7049)) {
-      e_door sethintstring(level.var_d5bd7049);
+      e_door setHintString(level.var_d5bd7049);
     } else if(zm_utility::get_story() == 1) {
-      e_door sethintstring(#"zombie/need_power");
+      e_door setHintString(#"zombie/need_power");
     } else {
-      e_door sethintstring(#"hash_3dc033ef1e67a5c0");
+      e_door setHintString(#"hash_3dc033ef1e67a5c0");
     }
 
     return;
@@ -1528,11 +1528,11 @@ set_door_hint_string(e_door) {
   var_7c804894 = function_6a326935(e_door.target);
 
   if(isDefined(var_7c804894) && !e_door zm_utility::function_1a4d2910()) {
-    e_door sethintstring(#"hash_5253833fcb69e672", var_7c804894);
+    e_door setHintString(#"hash_5253833fcb69e672", var_7c804894);
     return;
   }
 
-  e_door sethintstring(#"hash_17758d1de3b1fe6a");
+  e_door setHintString(#"hash_17758d1de3b1fe6a");
 }
 
 function_f6a30a49(n_round) {
@@ -1814,7 +1814,7 @@ function function_21669ebc(restart = 0) {
     }
 
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         player zm_stats::set_global_stat("rounds", level.round_number);
@@ -1842,7 +1842,7 @@ function function_21669ebc(restart = 0) {
     }
 
     zm_powerups::powerup_round_start();
-    players = getplayers();
+    players = getPlayers();
     array::thread_all(players, &zm_blockers::rebuild_barrier_reward_reset);
 
     if(!(isDefined(level.headshots_only) && level.headshots_only) && !restart) {
@@ -1874,7 +1874,7 @@ function function_21669ebc(restart = 0) {
     recordnumzombierounds(level.round_number - 1);
     recordzombieroundstart();
     bb::logroundevent("start_of_round");
-    players = getplayers();
+    players = getPlayers();
 
     for(index = 0; index < players.size; index++) {
       players[index] zm_round_logic::recordroundstartstats();

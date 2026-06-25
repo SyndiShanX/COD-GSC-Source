@@ -10,7 +10,7 @@ idle_anim_think() {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0.script_animation)) {
     return;
@@ -38,7 +38,7 @@ idle_anim_think() {
   }
 
   self.allowdeath = 1;
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self.ref_node = var_0;
 
   if(var_0.script_animation == "sleep") {
@@ -77,7 +77,7 @@ icbm_friendly_state_spotted() {
   self.accuracy = self._stealth.behavior.badaccuracy;
   self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
   self allowedstances("prone", "crouch", "stand");
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = 0;
   self.ignoreme = 0;
   maps\_utility::disable_cqbwalk();
@@ -270,7 +270,7 @@ flashlight_light(var_0) {
     var_2 = spawn("script_model", (0, 0, 0));
     var_2 setModel("tag_origin");
     var_2 hide();
-    var_2 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
     thread flashlight_light_death(var_2);
     playFXOnTag(level._effect["flashlight"], var_2, "tag_origin");
   } else if(isDefined(self.have_flashlight))
@@ -309,7 +309,7 @@ whitein() {
   var_0.vertalign = "fullscreen";
   var_0.alpha = 1;
   var_0.sort = 2;
-  var_1 = getent("cloud", "targetname");
+  var_1 = getEnt("cloud", "targetname");
   var_1 waittill("trigger");
   wait 1;
   var_0 fadewhiteout(2, 0, 6);
@@ -422,7 +422,7 @@ chopper_fail_mission() {
 
       if(var_4 < var_2 && level.player attackButtonPressed() && var_3 != "c4") {
         var_5 = anglesToForward(level.player getplayerangles());
-        var_6 = vectornormalize(var_0.origin - level.player.origin);
+        var_6 = vectorNormalize(var_0.origin - level.player.origin);
         var_7 = vectordot(var_6, var_5);
 
         if(var_7 > var_1) {
@@ -614,10 +614,10 @@ parachute_player() {
   level thread whitein();
   level.player allowprone(0);
   level.player allowcrouch(0);
-  var_0 = getent("para_start", "targetname");
-  var_1 = getent("para_stop", "targetname");
-  level.player linkto(var_0);
-  var_0 moveto(var_1.origin, 3, 0, 0);
+  var_0 = getEnt("para_start", "targetname");
+  var_1 = getEnt("para_stop", "targetname");
+  level.player linkTo(var_0);
+  var_0 moveTo(var_1.origin, 3, 0, 0);
   var_0 waittill("movedone");
   level.player unlink();
   level.player enableweapons();
@@ -627,7 +627,7 @@ parachute_player() {
 
 trigger_wait_and_set_flag(var_0) {
   common_scripts\utility::flag_init("trigger_" + var_0);
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
   var_1 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_set("trigger_" + var_0);
@@ -644,7 +644,7 @@ sound_fade_then_delete() {
 }
 
 start_interogation() {
-  var_0 = getent("interogation_speaker", "script_noteworthy");
+  var_0 = getEnt("interogation_speaker", "script_noteworthy");
   var_0 maps\_utility::add_spawn_function(::interogation_speaker_think);
   var_1 = getEntArray("interogators", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, ::ignore_all_till_flag, "breach_started");
@@ -668,10 +668,10 @@ interogation_speaker_think() {
 }
 
 knife_kill_setup() {
-  var_0 = getent("price_knife_kill", "targetname");
+  var_0 = getEnt("price_knife_kill", "targetname");
   var_0 waittill("trigger");
   var_0 common_scripts\utility::trigger_off();
-  var_1 = getent("house01_badguy01", "script_noteworthy");
+  var_1 = getEnt("house01_badguy01", "script_noteworthy");
   level.knifekillnode = getnode("knifeKillNode", "targetname");
   createthreatbiasgroup("victims");
   setignoremegroup("icbm_friendlies", "victims");
@@ -719,7 +719,7 @@ ai_hostile_knife_kill_think() {
   thread ai_hostile_knife_kill_abort_think();
   level.price_knife = spawn("script_model", level.price gettagorigin("TAG_INHAND"));
   level.price_knife.angles = level.price gettagangles("TAG_INHAND");
-  level.price_knife linkto(level.price, "TAG_INHAND", (0, 0, 0), (0, 0, 0));
+  level.price_knife linkTo(level.price, "TAG_INHAND", (0, 0, 0), (0, 0, 0));
   level.price_knife setModel("weapon_parabolic_knife");
   level.price_knife hide();
   level.price playSound("scn_icbm_knife_melee");
@@ -732,7 +732,7 @@ ai_hostile_knife_kill_think() {
   level.knifekillnode waittill("phoneguy_death");
   level notify("knife_kill_done");
   level.price setgoalpos(level.price.origin);
-  level.price stopanimscripted();
+  level.price stopanimScripted();
   self.a.nodeath = 1;
   self.allowdeath = 1;
   animscripts\shared::dropallaiweapons();
@@ -756,7 +756,7 @@ ai_hostile_knife_kill_abort_think() {
   level.price stopsound("scn_icbm_knife_melee");
   level.price_knife unlink();
   level.price_knife delete();
-  level.price stopanimscripted();
+  level.price stopanimScripted();
 }
 
 knife_kill_fx() {
@@ -784,14 +784,14 @@ beehive_attack() {
   var_0 = getEntArray("beehive_enemy", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   wait 4;
-  var_1 = getent("house1_upstairs_first_door", "targetname");
-  var_2 = getent("house1_upstairs_first_door_model", "targetname");
-  var_2 linkto(var_1);
+  var_1 = getEnt("house1_upstairs_first_door", "targetname");
+  var_2 = getEnt("house1_upstairs_first_door_model", "targetname");
+  var_2 linkTo(var_1);
   thread open_door(var_1, -178);
   wait 1;
-  var_3 = getent("house1_upstairs_second_door", "targetname");
-  var_4 = getent("house1_upstairs_second_door_model", "targetname");
-  var_4 linkto(var_3);
+  var_3 = getEnt("house1_upstairs_second_door", "targetname");
+  var_4 = getEnt("house1_upstairs_second_door_model", "targetname");
+  var_4 linkTo(var_3);
   var_5 = getEntArray("beehive_enemy_second_door", "targetname");
   open_door(var_3, 176, var_5);
   wait 0.1;
@@ -807,7 +807,7 @@ open_door(var_0, var_1, var_2) {
     common_scripts\utility::array_thread(var_2, maps\_utility::spawn_ai);
   }
 
-  var_0 rotateto(var_0.angles + (0, var_1, 0), 0.5, 0, 0);
+  var_0 rotateTo(var_0.angles + (0, var_1, 0), 0.5, 0, 0);
   var_0 connectpaths();
   var_0 playSound("icbm_door_slams_open");
 }
@@ -847,22 +847,22 @@ beehive2_attack() {
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   wait 4;
   level notify("beehive2_door_open");
-  var_1 = getent("beehive2_front_door", "targetname");
-  var_2 = getent("beehive2_front_door_model", "targetname");
-  var_2 linkto(var_1);
-  var_3 = getent("doorknob7", "targetname");
-  var_3 linkto(var_1);
-  var_3 = getent("doorknob8", "targetname");
-  var_3 linkto(var_1);
-  var_1 rotateto(var_1.angles + (0, -92, 0), 0.5, 0, 0);
+  var_1 = getEnt("beehive2_front_door", "targetname");
+  var_2 = getEnt("beehive2_front_door_model", "targetname");
+  var_2 linkTo(var_1);
+  var_3 = getEnt("doorknob7", "targetname");
+  var_3 linkTo(var_1);
+  var_3 = getEnt("doorknob8", "targetname");
+  var_3 linkTo(var_1);
+  var_1 rotateTo(var_1.angles + (0, -92, 0), 0.5, 0, 0);
   var_1 connectpaths();
   var_1 playSound("icbm_door_slams_open");
   wait 1;
   level notify("dog_door_open");
-  var_4 = getent("beehive1_front_door", "targetname");
-  var_5 = getent("beehive1_front_door_model", "targetname");
-  var_5 linkto(var_4);
-  var_4 rotateto(var_4.angles + (0, -87, 0), 0.5, 0, 0);
+  var_4 = getEnt("beehive1_front_door", "targetname");
+  var_5 = getEnt("beehive1_front_door_model", "targetname");
+  var_5 linkTo(var_4);
+  var_4 rotateTo(var_4.angles + (0, -87, 0), 0.5, 0, 0);
   var_4 connectpaths();
   var_4 playSound("icbm_door_slams_open");
 }
@@ -885,7 +885,7 @@ price_opens_door(var_0, var_1, var_2) {
   var_3 = getEntArray(var_1.target, "targetname");
 
   for(var_4 = 0; var_4 < var_3.size; var_4++) {
-    var_3[var_4] linkto(var_1);
+    var_3[var_4] linkTo(var_1);
   }
 
   var_1 maps\_utility::hunted_style_door_open();
@@ -970,17 +970,17 @@ tower_earthquakes() {
 
 tower_legbreak_fx(var_0) {
   playFXOnTag(common_scripts\utility::getfx("powerTower_leg"), var_0, "tag_foot_left");
-  var_1 = getent("tower_base_left", "targetname");
+  var_1 = getEnt("tower_base_left", "targetname");
   thread common_scripts\utility::play_sound_in_space("scn_icbm_tower_base1", var_1.origin);
   wait 0.1;
   playFXOnTag(common_scripts\utility::getfx("powerTower_leg"), var_0, "tag_foot_right");
-  var_2 = getent("tower_base_right", "targetname");
+  var_2 = getEnt("tower_base_right", "targetname");
   thread common_scripts\utility::play_sound_in_space("scn_icbm_tower_base2", var_2.origin);
 }
 
 tower_collapse() {
   common_scripts\utility::flag_wait("house1_cleared");
-  var_0 = getent("tower", "targetname");
+  var_0 = getEnt("tower", "targetname");
   var_0 maps\_utility::assign_animtree("tower");
   var_1 = 18;
   var_2 = [];
@@ -1006,7 +1006,7 @@ tower_collapse() {
 
   for(var_4 = 0; var_4 < var_1; var_4++) {
     var_5 = var_2[var_4];
-    var_3[var_4] = getent(var_5, "targetname");
+    var_3[var_4] = getEnt(var_5, "targetname");
     var_3[var_4] maps\_utility::assign_animtree("wire");
   }
 
@@ -1116,29 +1116,29 @@ anim_reach_solo_set_flag(var_0, var_1, var_2) {
 }
 
 missile_launch01() {
-  var_0 = getent("missile01_start", "targetname");
-  var_1 = getent("missile01_end", "targetname");
-  var_2 = getent("icbm_missile01", "targetname");
+  var_0 = getEnt("missile01_start", "targetname");
+  var_1 = getEnt("missile01_end", "targetname");
+  var_2 = getEnt("icbm_missile01", "targetname");
   common_scripts\utility::flag_wait("launch_01");
   common_scripts\_exploder::exploder(1);
   earthquake(0.1, 8, level.player.origin, 8000);
-  var_2 linkto(var_0);
-  var_0 moveto(var_1.origin, 50, 10, 0);
+  var_2 linkTo(var_0);
+  var_0 moveTo(var_1.origin, 50, 10, 0);
   playFXOnTag(level._effect["smoke_geotrail_icbm"], var_2, "tag_nozzle");
   var_0 waittill("movedone");
   var_2 delete();
 }
 
 missile_launch02() {
-  var_0 = getent("missile02_start", "targetname");
-  var_1 = getent("missile02_end", "targetname");
-  var_2 = getent("icbm_missile02", "targetname");
+  var_0 = getEnt("missile02_start", "targetname");
+  var_1 = getEnt("missile02_end", "targetname");
+  var_2 = getEnt("icbm_missile02", "targetname");
   common_scripts\utility::flag_wait("launch_02");
   wait 1.5;
   common_scripts\_exploder::exploder(2);
   earthquake(0.1, 8, level.player.origin, 8000);
-  var_2 linkto(var_0);
-  var_0 moveto(var_1.origin, 50, 10, 0);
+  var_2 linkTo(var_0);
+  var_0 moveTo(var_1.origin, 50, 10, 0);
   playFXOnTag(level._effect["smoke_geotrail_icbm"], var_2, "tag_nozzle");
   var_0 waittill("movedone");
   var_2 delete();

@@ -164,7 +164,7 @@ busisonormovingbuildableupdateprompt(player, sethintstringnow, buildabletrigger)
       self.hint_string = "";
 
       if(isDefined(sethintstringnow) && sethintstringnow && isDefined(buildabletrigger)) {
-        buildabletrigger sethintstring(self.hint_string);
+        buildabletrigger setHintString(self.hint_string);
       }
     }
 
@@ -259,14 +259,14 @@ onuseplantobject_powerswitch(player) {
   }
   switch (player player_get_buildable_piece().modelname) {
     case "p6_zm_buildable_pswitch_hand":
-      getent("powerswitch_p6_zm_buildable_pswitch_hand", "targetname") show();
+      getEnt("powerswitch_p6_zm_buildable_pswitch_hand", "targetname") show();
       break;
     case "p6_zm_buildable_pswitch_body":
-      panel = getent("powerswitch_p6_zm_buildable_pswitch_body", "targetname");
+      panel = getEnt("powerswitch_p6_zm_buildable_pswitch_body", "targetname");
       panel show();
       break;
     case "p6_zm_buildable_pswitch_lever":
-      getent("powerswitch_p6_zm_buildable_pswitch_lever", "targetname") show();
+      getEnt("powerswitch_p6_zm_buildable_pswitch_lever", "targetname") show();
       break;
   }
 }
@@ -358,7 +358,7 @@ onenduse_sidequestcommon(team, player, result) {
 
 droponbus(player) {
   if(isDefined(player) && (isDefined(player.isonbus) && player.isonbus)) {
-    self.model linkto(level.the_bus);
+    self.model linkTo(level.the_bus);
     self.linked_to_bus = 1;
     self.unitrigger.link_parent = level.the_bus;
   } else

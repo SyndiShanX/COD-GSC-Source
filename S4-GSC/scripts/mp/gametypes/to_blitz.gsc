@@ -127,7 +127,7 @@ _id_2AE0() {
 
 _id_D8B7() {
   level waittill("goal_opened");
-  var_0 = getent("tank_goal", "targetname");
+  var_0 = getEnt("tank_goal", "targetname");
 
   if(!isDefined(var_0)) {
     _id_E323();
@@ -376,8 +376,8 @@ _id_D8AB() {
     var_0[var_2]._id_DDC9 = 1;
     var_0[var_2].trigger = var_1[var_2];
     var_0[var_2].trigger.angles = var_0[var_2].angles;
-    var_0[var_2].trigger setcursorhint("HINT_NOICON");
-    var_0[var_2].trigger sethintstring(&"MP/PICKUP_RPG7");
+    var_0[var_2].trigger setCursorHint("HINT_NOICON");
+    var_0[var_2].trigger setHintString(&"MP/PICKUP_RPG7");
     var_0[var_2].trigger.team = "axis";
     var_0[var_2].trigger._id_4823 = var_0[var_2].origin;
     var_0[var_2]._id_ABCB = ::_id_C982;

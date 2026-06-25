@@ -215,8 +215,8 @@ ball_spawn(var_0) {
     var_4 = spawn("trigger_radius", var_2.origin - (0, 0, var_3 / 2), 0, var_3, var_3);
   }
 
-  var_4 enablelinkto();
-  var_4 linkto(var_2);
+  var_4 enablelinkTo();
+  var_4 linkTo(var_2);
   var_4.no_moving_platfrom_unlink = 1;
   var_4.linktoenabledflag = 1;
   var_4.baseorigin = var_4.origin;
@@ -457,7 +457,7 @@ ball_on_pickup(var_0) {
   self.visuals[0] stop_fx_idle();
   self.visuals[0] show();
   self.visuals[0] hide(1);
-  self.visuals[0] linkto(var_0, "j_wrist_ri", (0, 0, 0), var_0.angles);
+  self.visuals[0] linkTo(var_0, "j_wrist_ri", (0, 0, 0), var_0.angles);
   self.visuals[0] setscriptablepartstate("uplink_drone_hide", "hide", 0);
   self.trigger scripts\mp\movers::stop_handling_moving_platforms();
   self.current_start.in_use = 0;
@@ -536,7 +536,7 @@ detonateball() {
   var_0 = spawn("script_model", self.curorigin);
   var_0 setModel("tag_origin");
   var_1 = self.lastcarrier scripts\mp\utility::_launchgrenade("blackhole_grenade_mp", self.curorigin, (0, 0, 0));
-  var_1 linkto(var_0, "tag_origin");
+  var_1 linkTo(var_0, "tag_origin");
   var_1.owner = self.lastcarrier;
   var_1 hide(1);
   var_1.owner thread scripts\mp\blackholegrenade::func_2B3E(var_1);
@@ -761,7 +761,7 @@ ball_on_reset() {
   ball_waypoint_download();
   if(level.gametype != "tdef") {
     scripts\mp\gameobjects::setposition(var_0.baseorigin + (0, 0, 4000), (0, 0, 0));
-    var_0 moveto(var_0.baseorigin, 3, 0, 3);
+    var_0 moveTo(var_0.baseorigin, 3, 0, 3);
     var_0 rotatevelocity((0, 720, 0), 3, 0, 3);
   } else {
     if(!level.timerstoppedforgamemode) {
@@ -1009,12 +1009,12 @@ ball_pass_projectile(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     self.projectile = scripts\mp\utility::_magicbullet("uplinkball_tracking_mp", var_7 + var_6 * var_10, var_8, var_0);
-    self.projectile missile_settargetent(var_1, var_1 gettargetoffset());
+    self.projectile missile_settargetEnt(var_1, var_1 gettargetoffset());
   }
 
   self.trigger.origin = self.trigger.origin - (0, 0, 10000);
   var_1 thread adjust_for_stance(self.projectile);
-  self.visuals[0] linkto(self.projectile);
+  self.visuals[0] linkTo(self.projectile);
   ball_dont_interpolate();
   ball_create_killcam_ent();
   ball_clear_contents();
@@ -1089,7 +1089,7 @@ validatepasstarget(var_0, var_1, var_2) {
     return 0;
   }
 
-  var_8 = vectornormalize(var_6 - var_4);
+  var_8 = vectorNormalize(var_6 - var_4);
   var_9 = vectordot(var_5, var_8);
   if(var_9 > var_3) {
     var_10 = var_5 * 30;
@@ -1173,7 +1173,7 @@ adjust_for_stance(var_0) {
   var_1 = self;
   var_0 endon("pass_end");
   while(isDefined(var_1) && isDefined(var_0)) {
-    var_0 missile_settargetent(var_1, var_1 gettargetoffset());
+    var_0 missile_settargetEnt(var_1, var_1 gettargetoffset());
     scripts\engine\utility::waitframe();
   }
 }
@@ -1322,11 +1322,11 @@ ball_track_pass_velocity(var_0) {
   self.visuals[0] endon("pass_end");
   self.projectile endon("projectile_impact_player");
   self.projectile endon("death");
-  self.lastpassdir = vectornormalize(var_0.origin - self.projectile.origin);
+  self.lastpassdir = vectorNormalize(var_0.origin - self.projectile.origin);
   var_1 = undefined;
   for(;;) {
     if(isDefined(var_1)) {
-      self.lastpassdir = vectornormalize(self.projectile.origin - var_1);
+      self.lastpassdir = vectorNormalize(self.projectile.origin - var_1);
     }
 
     var_1 = self.projectile.origin;
@@ -1417,7 +1417,7 @@ ball_physics_launch(var_0, var_1) {
     }
 
     var_6 = var_3;
-    var_7 = vectornormalize(var_0) * 80;
+    var_7 = vectorNormalize(var_0) * 80;
     var_8 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_player", "physicscontents_actor", "physicscontents_glass", "physicscontents_itemclip"];
     var_9 = physics_createcontents(var_8);
     var_10 = scripts\common\trace::sphere_trace(var_6, var_6 + var_7, 38, var_1, var_9);
@@ -1434,7 +1434,7 @@ ball_physics_launch(var_0, var_1) {
   self.visuals[0] physics_registerforcollisioncallback();
   scripts\mp\utility::register_physics_collision_func(self.visuals[0], ::ball_impact_sounds);
   self.visuals[0].origin = self.trigger.origin;
-  self.trigger linkto(self.visuals[0]);
+  self.trigger linkTo(self.visuals[0]);
   level.codcasterball = self.visuals[0];
   level.codcasterballowner = var_4;
   level.codcasterballinitialforcevector = var_0;
@@ -1500,7 +1500,7 @@ ball_physics_fake_bounce(var_0) {
     var_4 = length(var_4) / 10;
   }
 
-  var_5 = vectornormalize(var_3);
+  var_5 = vectorNormalize(var_3);
   var_5 = (-1, -1, -0.5) * var_5;
   var_1 physicslaunchserver(var_1.origin, (0, 0, 0));
   var_1 physicsstopserver();
@@ -1629,11 +1629,11 @@ starthoveranim() {
   self notify("hoverAnimStart");
   self endon("hoverAnimStart");
   var_0 = self.visuals[0].origin;
-  self.visuals[0] rotateyaw(2000, 60, 0.2, 0.2);
+  self.visuals[0] rotateYaw(2000, 60, 0.2, 0.2);
   for(;;) {
-    self.visuals[0] moveto(var_0 + (0, 0, 5), 1, 0.5, 0.5);
+    self.visuals[0] moveTo(var_0 + (0, 0, 5), 1, 0.5, 0.5);
     wait(1);
-    self.visuals[0] moveto(var_0 - (0, 0, 5), 1, 0.5, 0.5);
+    self.visuals[0] moveTo(var_0 - (0, 0, 5), 1, 0.5, 0.5);
     wait(1);
   }
 }
@@ -1888,7 +1888,7 @@ ball_create_killcam_ent() {
   }
 
   self.killcament = spawn("script_model", self.visuals[0].origin);
-  self.killcament linkto(self.visuals[0]);
+  self.killcament linkTo(self.visuals[0]);
   self.killcament setcontents(0);
   self.killcament setscriptmoverkillcam("explosive");
 }
@@ -2165,7 +2165,7 @@ moveballtoplayer() {
             break;
         }
 
-        level.balls[0].visuals[0] moveto(self.origin + (0, 0, var_0), 0.3, 0.15, 0.1);
+        level.balls[0].visuals[0] moveTo(self.origin + (0, 0, var_0), 0.3, 0.15, 0.1);
         wait(0.1);
       }
     }

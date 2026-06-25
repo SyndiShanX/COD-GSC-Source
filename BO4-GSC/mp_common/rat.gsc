@@ -56,7 +56,7 @@ rscaddenemy(params) {
   bot thread deathcounter();
   wait 2;
   pos = (float(params.x), float(params.y), float(params.z));
-  bot setorigin(pos);
+  bot setOrigin(pos);
 
   if(isDefined(params.ax)) {
     angles = (float(params.ax), float(params.ay), float(params.az));

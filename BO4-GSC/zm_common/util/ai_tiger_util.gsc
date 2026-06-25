@@ -55,7 +55,7 @@ spawn_single(b_force_spawn = 0, var_eb3a8721) {
     return undefined;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(var_eb3a8721)) {
     s_spawn_loc = var_eb3a8721;
@@ -98,7 +98,7 @@ function_66cfd7d() {
 }
 
 function_cbfb0da4() {
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   switch (n_player_count) {
     case 1:

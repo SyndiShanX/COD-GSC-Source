@@ -91,7 +91,7 @@ func_A6A0(param_00, param_01) {
   func_A6CD(param_01);
   self solid();
   level.var_4D74 = lib_0547::func_8FBA(param_00, "zmb_hilt_sphere");
-  var_02 = getent("hilt_model", "targetname");
+  var_02 = getEnt("hilt_model", "targetname");
   triggerfx(level.var_4D74);
   var_02 lib_0378::func_8D74("aud_start_hilt_sphere_sound");
   wait(5);
@@ -114,7 +114,7 @@ func_A6A0(param_00, param_01) {
 
   playFX(level.var_0611["zmb_hilt_sphere_explosion"], param_00.var_0116, anglesToForward(param_00.var_001D));
   level.var_4D74 delete();
-  var_05 = getent("nest_ee_shard_intro_start_trig", "targetname");
+  var_05 = getEnt("nest_ee_shard_intro_start_trig", "targetname");
   var_05 common_scripts\utility::func_9DA3();
   var_06 = undefined;
   foreach(var_08 in level.var_744A) {
@@ -132,7 +132,7 @@ func_A6A0(param_00, param_01) {
     lib_0557::func_7822("8A The Hilt", &"ZOMBIE_NEST_HINT_STEP_TAKE_HILT");
   }
 
-  var_05 sethintstring(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
+  var_05 setHintString(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
   var_05 waittill("trigger", var_04);
   var_05 common_scripts\utility::func_9D9F();
   lib_0378::func_8D74("aud_pickup_raven_sword");
@@ -345,7 +345,7 @@ func_283B(param_00) {
   var_01.var_01D7 = param_00.var_0116[1];
   var_01.var_01D9 = param_00.var_0116[2];
   var_01 setwaypoint(1);
-  var_01 settargetent(param_00);
+  var_01 settargetEnt(param_00);
   return var_01;
 }
 
@@ -490,7 +490,7 @@ func_9030(param_00, param_01, param_02) {
     var_04 setModel("tag_origin");
     playFXOnTag(common_scripts\utility::func_44F5("zmb_elec_trail"), var_04, "tag_origin");
     var_05 = distance(self.var_0116, param_00.var_0116) / param_01;
-    var_04 moveto(param_00.var_0116, var_05);
+    var_04 moveTo(param_00.var_0116, var_05);
     wait(var_05);
     var_04 delete();
   }
@@ -575,7 +575,7 @@ func_649B(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
   if(param_05) {
     param_06 unlink();
-    var_13 = vectornormalize(param_00[param_00.size - 1].var_0116 - param_00[param_00.size - 2].var_0116);
+    var_13 = vectorNormalize(param_00[param_00.size - 1].var_0116 - param_00[param_00.size - 2].var_0116);
     var_14 = param_01;
     var_15 = (var_14 * var_13[0], var_14 * var_13[1], var_14 * var_13[2]);
     param_06 setvelocity(var_15);
@@ -749,9 +749,9 @@ func_8CD6(param_00, param_01, param_02) {
   var_06 = var_05[2] - self.var_0116[2];
   if(var_06 > 0) {
     var_07 = common_scripts\utility::func_8FFC();
-    self playerlinkto(var_07);
+    self playerlinkTo(var_07);
     var_08 = var_06 / var_04;
-    var_07 moveto((self.var_0116[0], self.var_0116[1], var_05[2]), var_08);
+    var_07 moveTo((self.var_0116[0], self.var_0116[1], var_05[2]), var_08);
     wait(var_08);
     self unlink();
     var_07 delete();
@@ -764,7 +764,7 @@ func_8CD6(param_00, param_01, param_02) {
   var_0C = sqrt(2 * var_03 * var_0A);
   var_0D = abs(func_8F12(0.5 * var_03, var_0C, var_05[2] - self.var_0116[2]));
   var_0E = var_0C / var_03;
-  var_0F = vectornormalize(self.var_0116 - (var_05[0], var_05[1], self.var_0116[2]));
+  var_0F = vectorNormalize(self.var_0116 - (var_05[0], var_05[1], self.var_0116[2]));
   var_10 = var_0B / var_0D;
   var_11 = (var_10 * var_0F[0], var_10 * var_0F[1], var_0C);
   var_12 = common_scripts\utility::func_46B5("nest_ee_arm_fire_objective_angle", "targetname");
@@ -822,8 +822,8 @@ func_64D3(param_00, param_01, param_02) {
 }
 
 func_321A(param_00, param_01, param_02) {
-  self moveto(param_00.var_0116, param_01, 0, param_02);
-  self rotateto(param_00.var_001D, param_01 / 2);
+  self moveTo(param_00.var_0116, param_01, 0, param_02);
+  self rotateTo(param_00.var_001D, param_01 / 2);
   wait(param_01);
   self notify("reached node");
 }
@@ -847,7 +847,7 @@ func_38DF(param_00, param_01, param_02, param_03, param_04) {
       var_09 = 0.1;
     }
 
-    self moveto(var_08, var_09);
+    self moveTo(var_08, var_09);
     wait(var_09);
   }
 
@@ -979,7 +979,7 @@ func_64DC(param_00, param_01, param_02, param_03) {
   var_04 = self.var_0116;
   var_05 = param_01 / param_03;
   for(var_06 = 0; var_06 < param_01; var_06 = var_06 + var_05) {
-    self moveto(vectorlerp(var_04, param_00, var_06 / param_01), var_05);
+    self moveTo(vectorlerp(var_04, param_00, var_06 / param_01), var_05);
     wait(var_05);
   }
 }
@@ -1040,7 +1040,7 @@ func_44C8(param_00, param_01) {
   if(param_01) {
     var_02[0] = common_scripts\utility::func_46B5(param_00, "targetname");
   } else {
-    var_02[0] = getent(param_00, "targetname");
+    var_02[0] = getEnt(param_00, "targetname");
   }
 
   while(isDefined(var_02[var_02.size - 1].var_01A2)) {
@@ -1049,7 +1049,7 @@ func_44C8(param_00, param_01) {
       continue;
     }
 
-    var_02 = common_scripts\utility::func_0F6F(var_02, getent(var_02[var_02.size - 1].var_01A2, "targetname"));
+    var_02 = common_scripts\utility::func_0F6F(var_02, getEnt(var_02[var_02.size - 1].var_01A2, "targetname"));
   }
 
   return var_02;
@@ -1200,31 +1200,31 @@ func_08A8() {
 
 func_8A53() {
   var_00 = spawnStruct();
-  var_00.var_6FC5 = getent("ww_part_01_pickup", "targetname");
-  var_00.var_6FC2 = getent(var_00.var_6FC5.var_01A2, "targetname");
+  var_00.var_6FC5 = getEnt("ww_part_01_pickup", "targetname");
+  var_00.var_6FC2 = getEnt(var_00.var_6FC5.var_01A2, "targetname");
   playFXOnTag(level.var_0611["zmb_tesla_barrel_prop_idle"], var_00.var_6FC2, "TAG_ORIGIN");
   var_01 = spawnStruct();
-  var_01.var_6FC5 = getent("ww_part_02_pickup", "targetname");
-  var_01.var_6FC2 = getent(var_01.var_6FC5.var_01A2, "targetname");
+  var_01.var_6FC5 = getEnt("ww_part_02_pickup", "targetname");
+  var_01.var_6FC2 = getEnt(var_01.var_6FC5.var_01A2, "targetname");
   playFXOnTag(level.var_0611["zmb_tesla_tube_prop_idle"], var_01.var_6FC2, "TAG_ORIGIN");
   var_00.var_6FC5 common_scripts\utility::func_9D9F();
   var_01.var_6FC5 common_scripts\utility::func_9D9F();
-  var_00.var_6FC5 usetriggerrequirelookat();
-  var_01.var_6FC5 usetriggerrequirelookat();
+  var_00.var_6FC5 useTriggerRequireLookAt();
+  var_01.var_6FC5 useTriggerRequireLookAt();
   if(isDefined(var_00.var_6FC2) && isDefined(var_01.var_6FC2)) {
     var_00.var_6FC2 method_805C();
     var_01.var_6FC2 method_805C();
   }
 
   var_02 = function_021F("rnd_forge_machine_parts", "targetname");
-  var_00.var_6FC2 linkto(var_02[0], "input");
+  var_00.var_6FC2 linkTo(var_02[0], "input");
   level.var_3E3B = var_00;
   level.var_5981 = var_01;
 }
 
 func_8BEC(param_00, param_01, param_02, param_03) {
   if(isDefined(param_03)) {
-    self.var_6FC5 sethintstring(param_03);
+    self.var_6FC5 setHintString(param_03);
   }
 
   if(isDefined(param_00)) {
@@ -1376,7 +1376,7 @@ func_8A38(param_00, param_01, param_02) {
 
   if(isDefined(param_01) && isDefined(var_03.var_9D65)) {
     var_03 lib_0547::func_A28D(param_01, param_02);
-    var_03.var_9D65 sethintstring(param_01);
+    var_03.var_9D65 setHintString(param_01);
   }
 
   return var_03;

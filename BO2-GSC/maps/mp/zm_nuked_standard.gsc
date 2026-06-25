@@ -32,11 +32,11 @@ enemy_location_override(zombie, enemy) {
 }
 
 nuked_treasure_chest_init() {
-  chest1 = getstruct("start_chest1", "script_noteworthy");
-  chest2 = getstruct("start_chest2", "script_noteworthy");
-  chest3 = getstruct("culdesac_chest", "script_noteworthy");
-  chest4 = getstruct("oh2_chest", "script_noteworthy");
-  chest5 = getstruct("oh1_chest", "script_noteworthy");
+  chest1 = getStruct("start_chest1", "script_noteworthy");
+  chest2 = getStruct("start_chest2", "script_noteworthy");
+  chest3 = getStruct("culdesac_chest", "script_noteworthy");
+  chest4 = getStruct("oh2_chest", "script_noteworthy");
+  chest5 = getStruct("oh1_chest", "script_noteworthy");
   level.chests = [];
   level.chests[level.chests.size] = chest1;
   level.chests[level.chests.size] = chest2;

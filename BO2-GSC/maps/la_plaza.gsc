@@ -25,49 +25,49 @@ autoexec init_plaza() {
   add_spawn_function_group("plaza_balcony_rpg0", "script_noteworthy", ::init_balcony_ai);
   add_spawn_function_group("plaza_balcony_sniper0", "script_noteworthy", ::init_balcony_ai);
   add_spawn_function_group("plaza_gunner", "targetname", ::plaza_gunner);
-  a_prop = getent("plaza_cart_1", "targetname");
+  a_prop = getEnt("plaza_cart_1", "targetname");
   a_prop_links = getEntArray("plaza_cart_1_link", "targetname");
   level thread cart_1_watcher();
 
   foreach(m_prop_link in a_prop_links) {
-    m_prop_link linkto(a_prop);
+    m_prop_link linkTo(a_prop);
   }
 
-  a_prop = getent("plaza_cart_2", "targetname");
+  a_prop = getEnt("plaza_cart_2", "targetname");
   a_prop_links = getEntArray("plaza_cart_2_link", "targetname");
   level thread cart_2_watcher();
 
   foreach(m_prop_link in a_prop_links) {
-    m_prop_link linkto(a_prop);
+    m_prop_link linkTo(a_prop);
   }
 }
 
 cart_1_watcher() {
-  scene_trigger = getent("spawn_shopguy01", "targetname");
+  scene_trigger = getEnt("spawn_shopguy01", "targetname");
   scene_trigger waittill("trigger");
-  path_clip = getent("cart_clip_1", "script_noteworthy");
+  path_clip = getEnt("cart_clip_1", "script_noteworthy");
   path_clip connectpaths();
   scene_wait("plaza_shopguy01");
-  path_clip disconnectpaths();
+  path_clip disconnectPaths();
 }
 
 cart_2_watcher() {
-  scene_trigger = getent("spawn_shopguy02", "targetname");
+  scene_trigger = getEnt("spawn_shopguy02", "targetname");
   scene_trigger waittill("trigger");
-  path_clip = getent("cart_clip_2", "script_noteworthy");
+  path_clip = getEnt("cart_clip_2", "script_noteworthy");
   path_clip connectpaths();
   scene_wait("plaza_shopguy02");
-  path_clip disconnectpaths();
+  path_clip disconnectPaths();
 }
 
 plaza_planter() {
-  a_prop = getent("plaza_stairs_planter", "targetname");
-  m_prop_link = getent("plaza_stairs_planter_collision", "targetname");
-  m_prop_link linkto(a_prop);
+  a_prop = getEnt("plaza_stairs_planter", "targetname");
+  m_prop_link = getEnt("plaza_stairs_planter_collision", "targetname");
+  m_prop_link linkTo(a_prop);
   flag_wait("plaza_planter_started");
   m_prop_link connectpaths();
   flag_wait("plaza_planter_done");
-  m_prop_link disconnectpaths();
+  m_prop_link disconnectPaths();
 }
 
 plaza_grate_01() {
@@ -124,8 +124,8 @@ main() {
     level.harper.plaza_right = 0;
   }
 
-  getent("lockbreaker_left_door", "targetname") ignorecheapentityflag(1);
-  getent("lockbreaker_right_door", "targetname") ignorecheapentityflag(1);
+  getEnt("lockbreaker_left_door", "targetname") ignorecheapentityflag(1);
+  getEnt("lockbreaker_right_door", "targetname") ignorecheapentityflag(1);
   level thread setup_street_cops_for_plaza();
   a_av_allies_spawner_targetnames = array("f35_fast");
   a_av_axis_spawner_targetnames = array("avenger_fast", "pegasus_fast");
@@ -147,10 +147,10 @@ main() {
   level thread maps\la_intersection::intersection_vo();
   level thread vo_lapd_plaza();
   wait 0.05;
-  path_clip1 = getent("cart_clip_1", "script_noteworthy");
-  path_clip1 disconnectpaths();
-  path_clip2 = getent("cart_clip_2", "script_noteworthy");
-  path_clip2 disconnectpaths();
+  path_clip1 = getEnt("cart_clip_1", "script_noteworthy");
+  path_clip1 disconnectPaths();
+  path_clip2 = getEnt("cart_clip_2", "script_noteworthy");
+  path_clip2 disconnectPaths();
   f35_crash();
   simple_spawn_single("plaza_right_rpg");
 }
@@ -588,7 +588,7 @@ force_goal_after_unload() {
 }
 
 f35_crash() {
-  m_clip = getent("plaza_f38_clip", "targetname");
+  m_clip = getEnt("plaza_f38_clip", "targetname");
   m_clip connectpaths();
   m_clip notsolid();
   trig = trigger_wait("t_f35_crash");
@@ -601,7 +601,7 @@ f35_crash() {
   flag_set("f35_la_plaza_crash_start");
   wait 3.5;
   m_clip solid();
-  m_clip disconnectpaths();
+  m_clip disconnectPaths();
 
   if(level.player istouching(m_clip)) {
     level.player suicide();
@@ -627,11 +627,11 @@ f35_crash_sound() {
   wait 2;
   clientnotify("snd_f35_crash");
   level.player playSound("evt_f35_crash_impact");
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   earthquake(0.5, 4.0, level.player.origin, 100);
   temp_ent delete();
   wait 1;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 kill_player_if_run_over(str_scene_name) {
@@ -704,11 +704,11 @@ plaza_and_intersect_transition() {
 lockbreaker() {
   trigger_off("lockbreaker_use", "targetname");
   level.player waittill_player_has_lock_breaker_perk();
-  t_perk_use = getent("lockbreaker_use", "targetname");
-  t_perk_use setcursorhint("HINT_NOICON");
-  t_perk_use sethintstring(&"SCRIPT_HINT_HACK");
+  t_perk_use = getEnt("lockbreaker_use", "targetname");
+  t_perk_use setCursorHint("HINT_NOICON");
+  t_perk_use setHintString(&"SCRIPT_HINT_HACK");
   trigger_on("lockbreaker_use", "targetname");
-  m_lock = getent("lockbreaker_position", "targetname");
+  m_lock = getEnt("lockbreaker_position", "targetname");
   set_objective_perk(level.obj_lock_perk, m_lock);
   trigger_wait("lockbreaker_use");
   remove_objective_perk(level.obj_lock_perk);
@@ -721,20 +721,20 @@ lockbreaker() {
 lockbreaker_planted(m_player) {}
 
 lockbreaker_door_open(m_player) {
-  m_left_org = getent("lockbreaker_left", "targetname");
-  m_left_door = getent("lockbreaker_left_door", "targetname");
-  m_right_org = getent("lockbreaker_right", "targetname");
-  m_right_door = getent("lockbreaker_right_door", "targetname");
-  m_left_door linkto(m_left_org);
-  m_right_door linkto(m_right_org);
-  m_left_org rotateyaw(100, 2.0);
-  m_right_org rotateyaw(-100, 2.0);
+  m_left_org = getEnt("lockbreaker_left", "targetname");
+  m_left_door = getEnt("lockbreaker_left_door", "targetname");
+  m_right_org = getEnt("lockbreaker_right", "targetname");
+  m_right_door = getEnt("lockbreaker_right_door", "targetname");
+  m_left_door linkTo(m_left_org);
+  m_right_door linkTo(m_right_org);
+  m_left_org rotateYaw(100, 2.0);
+  m_right_org rotateYaw(-100, 2.0);
 }
 
 intruder_sam() {
   level.b_sam_success = 0;
   level.player thread sam_visionset();
-  set_objective_perk(level.obj_lock_perk, getent("near_intruder_sam", "targetname"));
+  set_objective_perk(level.obj_lock_perk, getEnt("near_intruder_sam", "targetname"));
   trigger_wait("near_intruder_sam");
   remove_objective_perk(level.obj_lock_perk);
   level.player.ignoreme = 1;
@@ -748,7 +748,7 @@ intruder_sam() {
   run_scene("sam_in");
   flag_set("rooftop_sam_in");
   level.player thread magic_bullet_shield();
-  vh_sam = getent("intruder_sam", "targetname");
+  vh_sam = getEnt("intruder_sam", "targetname");
   vh_sam usevehicle(level.player, 2);
   vh_sam thread intruder_sam_death();
   vh_sam.overridevehicledamage = ::sam_damage_override;

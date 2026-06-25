@@ -134,7 +134,7 @@ func_3596() {
 }
 
 func_358C() {
-  var_00 = getent("trig_ee_piano", "targetname");
+  var_00 = getEnt("trig_ee_piano", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(common_scripts\utility::func_3C77("flag_all_signs_hit") && common_scripts\utility::func_3C77("flag_all_lamps_hit") && var_01 maps\mp\gametypes\zombies::func_11C2(10000, 1)) {
@@ -263,7 +263,7 @@ func_327D() {
 func_327C() {
   level.var_4EE7 = getEntArray("house_door", "targetname");
   foreach(var_01 in level.var_4EE7) {
-    var_02 = getent(var_01.var_1A2, "targetname");
+    var_02 = getEnt(var_01.var_1A2, "targetname");
     var_03 = common_scripts\utility::func_46B5(var_02.var_1A2, "targetname");
     var_04 = common_scripts\utility::func_46B5(var_03.var_1A2, "targetname");
     var_01.var_326B = var_02;
@@ -276,14 +276,14 @@ func_3281(param_00, param_01) {
   if(common_scripts\utility::func_562E(param_01)) {
     if(isDefined(param_00.var_326C) && isDefined(param_00.var_326D)) {
       if(param_00.var_326C.var_116 != param_00.var_6BF1) {
-        param_00.var_326C moveto(param_00.var_6BF1, 1, 0.25, 0.5);
+        param_00.var_326C moveTo(param_00.var_6BF1, 1, 0.25, 0.5);
       }
 
       if(param_00.var_326D.var_116 != param_00.var_6BF2) {
-        param_00.var_326D moveto(param_00.var_6BF2, 1, 0.25, 0.5);
+        param_00.var_326D moveTo(param_00.var_6BF2, 1, 0.25, 0.5);
       }
     } else if(param_00.var_326B.var_1D != param_00.var_6BE3) {
-      param_00.var_326B rotateto(param_00.var_6BE3, 1, 0.25, 0.5);
+      param_00.var_326B rotateTo(param_00.var_6BE3, 1, 0.25, 0.5);
     }
 
     param_00 notsolid();
@@ -293,14 +293,14 @@ func_3281(param_00, param_01) {
 
   if(isDefined(param_00.var_326C) && isDefined(param_00.var_326D)) {
     if(param_00.var_326C.var_116 != param_00.var_2445) {
-      param_00.var_326C moveto(param_00.var_2445, 1, 0.25, 0.5);
+      param_00.var_326C moveTo(param_00.var_2445, 1, 0.25, 0.5);
     }
 
     if(param_00.var_326D.var_116 != param_00.var_2446) {
-      param_00.var_326D moveto(param_00.var_2446, 1, 0.25, 0.5);
+      param_00.var_326D moveTo(param_00.var_2446, 1, 0.25, 0.5);
     }
   } else if(param_00.var_326B.var_1D != param_00.var_2443) {
-    param_00.var_326B rotateto(param_00.var_2443, 1, 0.25, 0.5);
+    param_00.var_326B rotateTo(param_00.var_2443, 1, 0.25, 0.5);
   }
 
   param_00 solid();

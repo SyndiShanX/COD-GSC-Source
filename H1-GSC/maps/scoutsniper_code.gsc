@@ -5,8 +5,8 @@
 ********************************/
 
 updatefog() {
-  var_0 = getent("trigger_fogdist3000", "targetname");
-  var_1 = getent("trigger_fogdist5000", "targetname");
+  var_0 = getEnt("trigger_fogdist3000", "targetname");
+  var_1 = getEnt("trigger_fogdist5000", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -102,7 +102,7 @@ dynamic_run_speed(var_0, var_1) {
   for(;;) {
     wait 0.05;
     var_2 = anglesToForward(self.angles);
-    var_3 = vectornormalize(level.player.origin - self.origin);
+    var_3 = vectorNormalize(level.player.origin - self.origin);
     var_4 = vectordot(var_2, var_3);
     var_5 = distance(self.origin, level.player.origin);
     var_6 = 0;
@@ -165,14 +165,14 @@ dynamic_run_set(var_0) {
       }
 
       self notify("stop_loop");
-      self stopanimscripted();
+      self stopanimScripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
     case "run":
       self.moveplaybackrate = 1;
       maps\_utility::clear_run_anim();
       self notify("stop_loop");
-      self stopanimscripted();
+      self stopanimScripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
     case "stop":
@@ -182,13 +182,13 @@ dynamic_run_set(var_0) {
       self.moveplaybackrate = 1;
       maps\_utility::set_generic_run_anim("combat_jog", 1, 0);
       self notify("stop_loop");
-      self stopanimscripted();
+      self stopanimScripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
     case "traverse":
       self.moveplaybackrate = 1;
       self notify("stop_loop");
-      self stopanimscripted();
+      self stopanimScripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
   }
@@ -352,13 +352,13 @@ wait_for_player(var_0, var_1, var_2) {
 
   var_3 = undefined;
   var_3 = anglesToForward(self.angles);
-  var_4 = vectornormalize(level.player.origin - self.origin);
+  var_4 = vectorNormalize(level.player.origin - self.origin);
 
   if(isDefined(var_0.target)) {
     var_5 = [[var_1]](var_0.target, "targetname");
 
     if(var_5.size == 1) {
-      var_3 = vectornormalize(var_5[0].origin - var_0.origin);
+      var_3 = vectorNormalize(var_5[0].origin - var_0.origin);
     } else {
       var_3 = anglesToForward(var_0.angles);
     }
@@ -408,7 +408,7 @@ crawl_path(var_0, var_1, var_2) {
         self.goalradius = 16;
         self waittill("goal");
         self allowedstances("prone");
-        var_7 = getent(var_3.target, "targetname");
+        var_7 = getEnt(var_3.target, "targetname");
         var_5 = var_7.origin - self.origin;
         var_6 = vectortoangles(var_5);
         self.ref_node.origin = self.origin;
@@ -429,14 +429,14 @@ crawl_path(var_0, var_1, var_2) {
       break;
     }
 
-    var_3 = getent(var_3.target, "targetname");
+    var_3 = getEnt(var_3.target, "targetname");
     self.crawl_ref_node = var_3;
   }
 
   self notify("stop_crawl_anim");
   self notify("stop_animmode");
   self.ref_node notify("stop_animmode");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("scoutsniper_path_end_reached");
   thread maps\_anim::anim_generic_loop(self, "prone_idle_under_truck", undefined, "stop_loop");
 }
@@ -473,7 +473,7 @@ crawl_anim_rotate() {
     var_0 = self.crawl_ref_node;
     var_1 = var_0.origin - self.origin;
     var_2 = vectortoangles(var_1);
-    self.ref_node rotateto(var_2, 0.25);
+    self.ref_node rotateTo(var_2, 0.25);
     wait 0.25;
   }
 }
@@ -520,7 +520,7 @@ fly_path(var_0) {
   self endon("death");
 
   if(!isDefined(var_0)) {
-    var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   }
 
   self setneargoalnotifydist(512);
@@ -536,7 +536,7 @@ fly_path(var_0) {
       break;
     }
 
-    var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   }
 }
 
@@ -638,7 +638,7 @@ dialogprint(var_0, var_1, var_2) {
 
 scripted_spawn2(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
-    var_3 = getent(var_0, var_1);
+    var_3 = getEnt(var_0, var_1);
   }
 
   if(isDefined(var_2)) {
@@ -840,7 +840,7 @@ scoutsniper_music_play(var_0, var_1) {
 }
 
 teleport_actor(var_0) {
-  level.player setorigin(level.player.origin + (0, 0, -34341));
+  level.player setOrigin(level.player.origin + (0, 0, -34341));
   self teleport(var_0.origin, var_0.angles);
   self setgoalpos(var_0.origin);
 }
@@ -854,7 +854,7 @@ teleport_player_to_start_point(var_0) {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(var_1[var_2].script_noteworthy == var_0) {
-      level.player setorigin(var_1[var_2].origin + (0, 0, 4));
+      level.player setOrigin(var_1[var_2].origin + (0, 0, 4));
       level.player setplayerangles(var_1[var_2].angles);
       return;
     }
@@ -913,7 +913,7 @@ idle_anim_think() {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0.script_animation)) {
     return;
@@ -941,7 +941,7 @@ idle_anim_think() {
   }
 
   self.allowdeath = 1;
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self.ref_node = var_0;
 
   if(var_0.script_animation == "sleep") {
@@ -958,11 +958,11 @@ dash_door_slow(var_0) {
   var_1 = getEntArray(self.targetname, "target");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_1[var_2] linkto(self);
+    var_1[var_2] linkTo(self);
   }
 
   self.old_angles = self.angles;
-  self rotateto(self.angles + (0, 70 * var_0, 0), 2, 0.5, 0);
+  self rotateTo(self.angles + (0, 70 * var_0, 0), 2, 0.5, 0);
   self connectpaths();
   self waittill("rotatedone");
 }
@@ -971,10 +971,10 @@ dash_door_super_fast(var_0) {
   var_1 = getEntArray(self.targetname, "target");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_1[var_2] linkto(self);
+    var_1[var_2] linkTo(self);
   }
 
-  self rotateto(self.angles + (0, 70 * var_0, 0), 0.1 * abs(var_0), 0.05 * abs(var_0), 0);
+  self rotateTo(self.angles + (0, 70 * var_0, 0), 0.1 * abs(var_0), 0.05 * abs(var_0), 0);
   self connectpaths();
   self waittill("rotatedone");
 }
@@ -983,10 +983,10 @@ dash_door_fast(var_0) {
   var_1 = getEntArray(self.targetname, "target");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_1[var_2] linkto(self);
+    var_1[var_2] linkTo(self);
   }
 
-  self rotateto(self.angles + (0, 70 * var_0, 0), 0.3 * abs(var_0), 0.15 * abs(var_0), 0);
+  self rotateTo(self.angles + (0, 70 * var_0, 0), 0.3 * abs(var_0), 0.15 * abs(var_0), 0);
   self connectpaths();
   self waittill("rotatedone");
 }
@@ -1000,7 +1000,7 @@ door_open_kick() {
   wait 0.6;
   self.old_angles = self.angles;
   self playSound("wood_door_kick");
-  self rotateto(self.angles + (0, 130, 0), 0.3, 0, 0.15);
+  self rotateTo(self.angles + (0, 130, 0), 0.3, 0, 0.15);
   self connectpaths();
   self waittill("rotatedone");
 }
@@ -1009,7 +1009,7 @@ door_close() {
   if(!isDefined(self.old_angles)) {
     return;
   }
-  self rotateto(self.old_angles, 0.2);
+  self rotateTo(self.old_angles, 0.2);
 }
 
 church_lookout_stealth_behavior_alert_level_investigate(var_0) {
@@ -1070,7 +1070,7 @@ church_lookout_fire() {
     for(;;) {
       if(isDefined(self.enemy)) {
         var_0 = anglesToForward(self gettagangles("tag_flash"));
-        var_1 = vectornormalize(self.enemy.origin - self.origin);
+        var_1 = vectorNormalize(self.enemy.origin - self.origin);
         var_2 = vectordot(var_0, var_1);
 
         if(var_2 > 0.75) {
@@ -1091,7 +1091,7 @@ church_lookout_fire() {
       wait 0.1;
     }
   } else {
-    var_5 = getent("church_tower_sight_blocker", "script_noteworthy");
+    var_5 = getEnt("church_tower_sight_blocker", "script_noteworthy");
 
     if(isDefined(var_5)) {
       var_5 delete();
@@ -1103,7 +1103,7 @@ church_lookout_stealth_behavior_saw_corpse() {
   thread maps\_stealth_behavior::enemy_announce_huh();
 
   if(isDefined(level.intro_last_patroller_corpse_name)) {
-    var_0 = getent(level.intro_last_patroller_corpse_name, "script_noteworthy");
+    var_0 = getEnt(level.intro_last_patroller_corpse_name, "script_noteworthy");
 
     if(isDefined(var_0)) {
       level._stealth.logic.corpse.array = common_scripts\utility::array_remove(level._stealth.logic.corpse.array, var_0);
@@ -1184,13 +1184,13 @@ graveyard_hind_strafe_path(var_0, var_1, var_2) {
   }
 
   var_3 = [];
-  var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
 
   while(isDefined(var_4)) {
     var_3[var_3.size] = var_4;
 
     if(isDefined(var_4.target)) {
-      var_4 = common_scripts\utility::getstruct(var_4.target, "targetname");
+      var_4 = common_scripts\utility::getStruct(var_4.target, "targetname");
       continue;
     }
 
@@ -1215,7 +1215,7 @@ graveyard_hind_stinger_logic(var_0) {
 
   if(!isDefined(var_0)) {
     var_1 = spawn("script_model", self.origin);
-    var_1 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_1 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     target_set(var_1, (0, 0, -80));
     target_setjavelinonly(var_1, 1);
     level.player waittill("stinger_fired");
@@ -1360,13 +1360,13 @@ graveyard_church_breakable() {
     var_12[var_7] delete();
   }
 
-  var_13 = getent("church_ladder_entity", "targetname");
+  var_13 = getEnt("church_ladder_entity", "targetname");
   var_13 delete();
   var_14 = getEntArray("intelligence_item", "targetname");
 
   if(var_14.size) {
     var_14 = common_scripts\utility::get_array_of_closest(var_0, var_14);
-    var_15 = getent(var_14[0].target, "targetname");
+    var_15 = getEnt(var_14[0].target, "targetname");
     var_15 hide();
   }
 
@@ -1386,7 +1386,7 @@ chopper_ai_mode(var_0) {
     common_scripts\utility::flag_waitopen("heli_rocket");
     self setvehweapon("hind_turret");
     var_1 = anglesToForward(self.angles);
-    var_2 = vectornormalize(var_0.origin - self.origin);
+    var_2 = vectorNormalize(var_0.origin - self.origin);
 
     if(vectordot(var_1, var_2) < 0.25) {
       common_scripts\utility::flag_clear("heli_gun");
@@ -1403,7 +1403,7 @@ chopper_ai_mode_missiles(var_0) {
   self endon("death");
   level endon("air_support_over");
   var_1 = spawn("script_origin", var_0.origin);
-  var_2 = getent("graveyard_inside_church_trig", "targetname");
+  var_2 = getEnt("graveyard_inside_church_trig", "targetname");
   common_scripts\utility::flag_clear("heli_gun");
   common_scripts\utility::flag_clear("heli_rocket");
 
@@ -1413,7 +1413,7 @@ chopper_ai_mode_missiles(var_0) {
     common_scripts\utility::flag_set("heli_rocket");
     common_scripts\utility::flag_waitopen("heli_gun");
     var_3 = anglesToForward(self.angles);
-    var_4 = vectornormalize(var_0.origin - self.origin);
+    var_4 = vectorNormalize(var_0.origin - self.origin);
 
     if(vectordot(var_3, var_4) < 0.85) {
       common_scripts\utility::flag_clear("heli_rocket");
@@ -1495,15 +1495,15 @@ pond_handle_backup() {
   common_scripts\utility::flag_wait("pond_patrol_spawned");
   pond_handle_backup_wait();
   wait 2;
-  var_0 = getent("pond_door_right", "script_noteworthy");
-  var_1 = getent(var_0.targetname, "target");
-  var_1 linkto(var_0);
-  var_2 = getent("pond_door_left", "script_noteworthy");
-  var_1 = getent(var_2.targetname, "target");
-  var_1 linkto(var_2);
-  var_0 rotateyaw(130, 0.3, 0, 0.15);
+  var_0 = getEnt("pond_door_right", "script_noteworthy");
+  var_1 = getEnt(var_0.targetname, "target");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("pond_door_left", "script_noteworthy");
+  var_1 = getEnt(var_2.targetname, "target");
+  var_1 linkTo(var_2);
+  var_0 rotateYaw(130, 0.3, 0, 0.15);
   var_0 connectpaths();
-  var_2 rotateyaw(-130, 0.4, 0, 0.2);
+  var_2 rotateYaw(-130, 0.4, 0, 0.2);
   var_2 connectpaths();
 }
 
@@ -1564,7 +1564,7 @@ field_bmp_make_followme() {
   var_0 = anglesToForward(self.angles);
   var_1 = self.origin + maps\_utility::vector_multiply(var_0, -128);
   var_2 = spawn("script_origin", var_1);
-  var_2 linkto(self);
+  var_2 linkTo(self);
   self.followme = var_2;
 }
 
@@ -1791,7 +1791,7 @@ cargo_sleeper_wait_wakeup() {
 cargo_handle_patroller() {
   common_scripts\utility::array_thread(getEntArray("cargo_patrol_flag_set", "script_noteworthy"), ::cargo_handle_patroller_flag, 1);
   common_scripts\utility::array_thread(getEntArray("cargo_patrol_flag_clear", "script_noteworthy"), ::cargo_handle_patroller_flag, 0);
-  var_0 = getent("cargo_patrol_kill_flag", "script_noteworthy");
+  var_0 = getEnt("cargo_patrol_kill_flag", "script_noteworthy");
   var_0 thread cargo_handle_patroller_kill_trig();
 }
 
@@ -1974,7 +1974,7 @@ dash_ai() {
   level endon("_stealth_spotted");
   self endon("death");
   self waittill("jumpedout");
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(isDefined(var_0.target)) {
     thread maps\_patrol::patrol();
@@ -2000,7 +2000,7 @@ dash_intro_common() {
   self.fixednode = 0;
   self.goalradius = 4;
   common_scripts\utility::flag_wait("dash_start");
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   thread scoutsniper_follow_path(var_0);
   thread deleteontruegoal();
 }
@@ -2010,9 +2010,9 @@ dash_idler() {
   maps\_utility::set_generic_run_anim("patrol_walk", 1);
   self.fixednode = 0;
   self.goalradius = 64;
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   thread scoutsniper_follow_path(var_0);
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
 
   for(;;) {
     maps\_utility::set_goal_pos(var_1.origin);
@@ -2022,7 +2022,7 @@ dash_idler() {
       break;
     }
 
-    var_1 = getent(var_1.target, "targetname");
+    var_1 = getEnt(var_1.target, "targetname");
   }
 
   self.target = var_1.targetname;
@@ -2108,10 +2108,10 @@ dash_handle_doors_blowopen() {
 
   var_3 = var_1.origin + (0, 0, 75);
   common_scripts\utility::flag_wait("_stealth_spotted");
-  var_4 = getent("dash_door_right", "script_noteworthy");
-  var_5 = getent("dash_door_left", "script_noteworthy");
+  var_4 = getEnt("dash_door_right", "script_noteworthy");
+  var_5 = getEnt("dash_door_left", "script_noteworthy");
   var_6 = var_4 getorigin();
-  var_7 = vectornormalize(var_6 - var_3);
+  var_7 = vectorNormalize(var_6 - var_3);
   var_7 = maps\_utility::vector_multiply(var_7, 48);
   var_3 = var_3 + var_7;
   magicbullet("rpg", var_3, var_6);
@@ -2136,7 +2136,7 @@ dash_handle_nosight_clip() {
     common_scripts\utility::flag_wait_or_timeout("_stealth_spotted", 5);
   }
 
-  var_0 = getent("dash_nosight_clip", "targetname");
+  var_0 = getEnt("dash_nosight_clip", "targetname");
   var_0 delete();
 }
 
@@ -2147,7 +2147,7 @@ dash_crawl_patrol() {
   var_1.angles = (0.17992, 214.91, 1.77098);
   var_1 setModel("vehicle_bm21_mobile_cover");
   var_1 hide();
-  self linkto(var_1, "tag_detach");
+  self linkTo(var_1, "tag_detach");
   self.allowdeath = 1;
   var_2 = undefined;
 
@@ -2285,7 +2285,7 @@ dash_sniper_attack(var_0) {
 dash_handle_heli() {
   thread dash_hind();
   level endon("_stealth_spotted");
-  var_0 = getent("dash_heli_land", "script_noteworthy");
+  var_0 = getEnt("dash_heli_land", "script_noteworthy");
   var_0 waittill("trigger", var_1);
   var_1 endon("death");
   var_1 thread dash_heli_liftoff();
@@ -2300,7 +2300,7 @@ dash_heli_liftoff() {
 
 dash_hind() {
   soundscripts\_snd::snd_message("aud_start_dash_heli_flyby_sequence");
-  var_0 = getent("dash_heli_path", "targetname");
+  var_0 = getEnt("dash_heli_path", "targetname");
   var_0 waittill("trigger");
   var_1 = maps\_utility::get_vehicle("dash_hind", "targetname");
   maps\_wibble::wibble_add_heli_to_track(var_1);
@@ -2351,7 +2351,7 @@ dash_stander() {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self.goalradius = 4;
   self orientmode("face angle", var_0.angles[1] + 35);
 }
@@ -2381,11 +2381,11 @@ dogs_eater_eat() {
   self notify("stop_loop");
   self.ref_node notify("stop_loop");
   self.ref_node.angles = self.angles;
-  self linkto(self.ref_node);
+  self linkTo(self.ref_node);
   self.ref_node thread maps\_anim::anim_generic_loop(self, "dog_idle");
   wait(randomfloatrange(1, 3));
   self.ref_node notify("stop_loop");
-  self.ref_node rotateto(self.ref_angles, 0.4);
+  self.ref_node rotateTo(self.ref_angles, 0.4);
 
   for(;;) {
     self playSound("anml_dog_eating_body");
@@ -2405,7 +2405,7 @@ dogs_eater_growl() {
   self unlink();
   self notify("stop_loop");
   self.ref_node notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self setgoalpos(self gettagorigin("tag_origin"));
   wait 0.05;
   self orientmode("face angle", self.angles[1]);
@@ -2424,7 +2424,7 @@ dogs_eater_bark() {
   self unlink();
   self notify("stop_loop");
   self.ref_node notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self stopsounds();
 }
 
@@ -2519,7 +2519,7 @@ field_waittill_player_near_price() {
       return;
     }
     var_0 = anglesToForward(level.price.angles);
-    var_1 = vectornormalize(level.player.origin - level.price.origin);
+    var_1 = vectorNormalize(level.player.origin - level.price.origin);
 
     if(vectordot(var_0, var_1) > 0.1) {
       return;
@@ -2537,7 +2537,7 @@ field_waittill_player_passed_guards() {
     var_3 = 1;
 
     for(var_4 = 0; var_4 < var_2.size; var_4++) {
-      var_5 = vectornormalize(level.player.origin - var_2[var_4].origin);
+      var_5 = vectorNormalize(level.player.origin - var_2[var_4].origin);
 
       if(vectordot(var_5, var_1) < 0) {
         continue;
@@ -2781,10 +2781,10 @@ player_grenade_check2(var_0) {
 jumptoactor(var_0) {
   self notify("overtakenow");
   self unlink();
-  self stopanimscripted();
+  self stopanimScripted();
   var_1 = spawn("script_origin", self.origin);
-  self linkto(var_1);
-  var_1 moveto(var_0, 0.2);
+  self linkTo(var_1);
+  var_1 moveTo(var_0, 0.2);
   wait 0.25;
   self unlink();
   var_1 delete();
@@ -2820,7 +2820,7 @@ default_spotted_dialogue() {
 }
 
 pond_dump_bodies() {
-  var_0 = getent("pond_deadguy1", "script_noteworthy");
+  var_0 = getEnt("pond_deadguy1", "script_noteworthy");
   common_scripts\utility::flag_wait("pond_thrower_spawned");
   thread pond_create_body_piles();
   common_scripts\utility::flag_init("pond_abort");
@@ -2890,7 +2890,7 @@ pond_create_body_pile(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_1)) {
-    var_3 rotateto(var_1, 0.1);
+    var_3 rotateTo(var_1, 0.1);
     wait 0.15;
   }
 
@@ -2898,7 +2898,7 @@ pond_create_body_pile(var_0, var_1, var_2) {
 }
 
 pond_create_drone(var_0, var_1, var_2) {
-  var_3 = getent("pond_deadguy1", "script_noteworthy");
+  var_3 = getEnt("pond_deadguy1", "script_noteworthy");
   var_3.count = 1;
   var_4 = maps\_utility::dronespawn(var_3);
   var_4.script_noteworthy = undefined;
@@ -2908,7 +2908,7 @@ pond_create_drone(var_0, var_1, var_2) {
   var_4 detach(getweaponmodel("ak47"), "TAG_WEAPON_RIGHT");
   var_4.origin = var_1;
   var_4.angles = var_3.angles + var_2;
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   wait 0.05;
   return var_4;
 }
@@ -2934,7 +2934,7 @@ pond_dump_bodies_abort_thrower() {
   self endon("death");
   self endon("stealth_enemy_endon_alert");
   common_scripts\utility::flag_wait("pond_abort");
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::gun_recall();
 }
 
@@ -2971,7 +2971,7 @@ pond_dump_createbody(var_0) {
 }
 
 pond_dump_createbody2() {
-  var_0 = getent("pond_deadguy1", "script_noteworthy");
+  var_0 = getEnt("pond_deadguy1", "script_noteworthy");
   var_0.count = 1;
   var_1 = var_0 stalingradspawn(1);
   maps\_utility::spawn_failed(var_1);
@@ -3012,7 +3012,7 @@ shootenemywrapper_ssnotify(var_0) {
 }
 
 player_noprone_water() {
-  var_0 = getent("water_no_prone", "targetname");
+  var_0 = getEnt("water_no_prone", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -3168,7 +3168,7 @@ play_sound(var_0) {
   thread maps\_utility::delete_on_death_wait_sound(var_1, "sounddone");
   var_1.origin = self.origin;
   var_1.angles = self.angles;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 playSound(var_0, "sounddone");
   play_sound_wait(var_1);
 
@@ -3192,7 +3192,7 @@ dash_state_spotted() {
   self.baseaccuracy = self._stealth.behavior.badaccuracy;
   self.accuracy = self._stealth.behavior.badaccuracy;
   self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreme = 0;
   self.disablearrivals = 1;
   self.disableexits = 1;
@@ -3535,21 +3535,21 @@ setkeyforbinding(var_0, var_1) {
 }
 
 h1_dash_container_door_push1(var_0) {
-  var_1 = getent("dash_door_right", "script_noteworthy");
-  var_2 = getent("dash_door_left", "script_noteworthy");
+  var_1 = getEnt("dash_door_right", "script_noteworthy");
+  var_2 = getEnt("dash_door_left", "script_noteworthy");
   common_scripts\utility::flag_set("dash_door_R_open");
   var_1 playSound("door_cargo_container_push_open");
   var_1 dash_door_slow(1);
 }
 
 h1_dash_container_door_push2(var_0) {
-  var_1 = getent("dash_door_right", "script_noteworthy");
-  var_2 = getent("dash_door_left", "script_noteworthy");
+  var_1 = getEnt("dash_door_right", "script_noteworthy");
+  var_2 = getEnt("dash_door_left", "script_noteworthy");
   common_scripts\utility::flag_set("dash_door_L_open");
   var_1 thread dash_door_fast(0.35);
   var_2 thread dash_door_fast(-1.35);
   var_2 playSound("door_cargo_container_burst_open");
-  var_3 = getent("price_intro_path", "targetname");
+  var_3 = getEnt("price_intro_path", "targetname");
   maps\_utility::delaythread(0.25, ::scoutsniper_music_play, "scoutsniper_dash_music");
   maps\_utility::set_generic_run_anim("sprint_h1", 1, 0);
   level endon("_stealth_spotted");

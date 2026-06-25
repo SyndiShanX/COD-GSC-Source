@@ -55,7 +55,7 @@ _id_3199(var_0, var_1, var_2, var_3, var_4) {
 
 _id_68E7(var_0) {
   var_1 = var_0.origin - self.origin;
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_2 = self._id_1DF5;
 
   if(!isDefined(var_2)) {

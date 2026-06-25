@@ -183,7 +183,7 @@ function shrink_zombie(upgraded, attacker) {
       test_origin = self getcentroid();
       test_range_squared = distancesquared(view_pos, test_origin);
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-      fling_vec = vectornormalize(test_origin - view_pos);
+      fling_vec = vectorNormalize(test_origin - view_pos);
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 100 + (100 * dist_mult));
       self dodamage(self.health + 666, attacker.origin, attacker);
@@ -322,10 +322,10 @@ function function_643fa9c8() {
   self endon("death");
   self endon("unshrink");
   self.var_f0dec186 = spawn("trigger_radius", self.origin, 0, 30, 24);
-  self.var_f0dec186 sethintstring("");
-  self.var_f0dec186 setcursorhint("HINT_NOICON");
-  self.var_f0dec186 enablelinkto();
-  self.var_f0dec186 linkto(self);
+  self.var_f0dec186 setHintString("");
+  self.var_f0dec186 setCursorHint("HINT_NOICON");
+  self.var_f0dec186 enablelinkTo();
+  self.var_f0dec186 linkTo(self);
   self.var_f0dec186 thread function_2c318bd(self);
   self.var_f0dec186 endon("death");
   while(true) {
@@ -345,7 +345,7 @@ function function_643fa9c8() {
     }
     toenemy = self.origin - who.origin;
     toenemy = (toenemy[0], toenemy[1], 0);
-    toenemy = vectornormalize(toenemy);
+    toenemy = vectorNormalize(toenemy);
     forward_view_angles = anglesToForward(who.angles);
     var_884fd8ec = vectordot(forward_view_angles, toenemy);
     if(var_884fd8ec > 0.5 && movement[0] > 0) {
@@ -419,11 +419,11 @@ function function_9ac50518() {
     return;
   }
   level.var_1b24c8b0++;
-  playsoundatposition("zmb_mini_kicked", self.origin);
+  playSoundAtPosition("zmb_mini_kicked", self.origin);
 }
 
 function function_6140a171(killer) {
-  playsoundatposition("zmb_mini_squashed", self.origin);
+  playSoundAtPosition("zmb_mini_squashed", self.origin);
   if(level flag::get("world_is_paused")) {
     self setignorepauseworld(1);
   }
@@ -485,7 +485,7 @@ function function_66ab6f95(upgraded, var_5eafa9ab) {
       zombies[i] function_9ae4cf1b("range", (1, 0, 0));
       break;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(0 > dot) {
       zombies[i] function_9ae4cf1b("dot", (1, 0, 0));

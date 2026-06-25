@@ -73,8 +73,8 @@ init_color_helper_triggers() {
 
 color_helper_trigger() {
   wait 1.05;
-  var_0 = getent(self.target, "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
 
   if(!isDefined(var_1)) {
     if(!maps\_utility::is_default_start()) {

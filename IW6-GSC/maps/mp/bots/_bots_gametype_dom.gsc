@@ -871,7 +871,7 @@ monitor_flag_status(flag) {
       if(self IsTouching(flag) && flag.useObj.useRate <= 0) {
         if(self BotHasScriptGoal()) {
           script_goal = self BotGetScriptGoal();
-          script_goal_radius = self BotGetScriptGoalRadius();
+          script_goal_radius = self BotGetScriptgoalRadius();
           if(DistanceSquared(self.origin, script_goal) < squared(script_goal_radius)) {
             nearest_node_bot = self GetNearestNode();
             if(isDefined(nearest_node_bot)) {

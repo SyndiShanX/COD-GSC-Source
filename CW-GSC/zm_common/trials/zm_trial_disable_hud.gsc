@@ -31,7 +31,7 @@ function function_afe4a356() {
   level.var_dc60105c = 1;
   level clientfield::set_world_uimodel("ZMHudGlobal.trials.hudDeactivated", 1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player showcrosshair(0);
     player playsoundtoplayer(#"hash_79fced3c02a68283", player);
   }
@@ -45,7 +45,7 @@ function private on_end(round_reset) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player showcrosshair(1);
     player playsoundtoplayer(#"hash_18aab7ffde259877", player);
   }

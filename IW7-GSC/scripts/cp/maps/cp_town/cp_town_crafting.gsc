@@ -42,7 +42,7 @@ setup_crafting_stations() {
   wait(15);
   var_0 = scripts\engine\utility::getStructArray("crafting_station", "script_noteworthy");
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
+    var_3 = getEnt(var_2.target, "targetname");
     var_3 setscriptablepartstate("crafting_bench", "off");
   }
 }
@@ -60,7 +60,7 @@ init_crafting_pieces() {
       level.crafting_pieces[var_3[0]][var_3[1]] = [];
     }
 
-    var_2.part_location_struct = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_2.part_location_struct = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_2.part_model = var_2.part_location_struct.script_parameters;
     level.crafting_pieces[var_3[0]][var_3[1]] = ::scripts\engine\utility::add_to_array(level.crafting_pieces[var_3[0]][var_3[1]], var_2);
   }
@@ -106,9 +106,9 @@ init_crafting_blueprints() {
 
 spawn_crafting_blueprint(var_0, var_1) {
   var_2 = scripts\engine\utility::random(var_0);
-  var_3 = spawn("script_model", scripts\engine\utility::getstruct(var_2.target, "targetname").origin);
+  var_3 = spawn("script_model", scripts\engine\utility::getStruct(var_2.target, "targetname").origin);
   var_3 setModel(var_1);
-  var_3.angles = scripts\engine\utility::getstruct(var_2.target, "targetname").angles;
+  var_3.angles = scripts\engine\utility::getStruct(var_2.target, "targetname").angles;
   var_2.blueprintmodel = var_3;
 }
 
@@ -151,7 +151,7 @@ use_crafting_station(var_0, var_1) {
   if(!scripts\engine\utility::istrue(var_0.blueprint_added) && isDefined(var_1.has_blueprint)) {
     var_1 scripts\cp\utility::play_interaction_gesture("iw7_souvenircoin_zm");
     var_0.blueprint_added = 1;
-    var_0.var_113AF = getent(var_0.target, "targetname");
+    var_0.var_113AF = getEnt(var_0.target, "targetname");
     var_0.var_113AF.blueprint = spawn("script_model", var_0.var_113AF.origin);
     var_0.var_113AF.blueprint.angles = var_0.var_113AF.angles;
     var_0.active_blueprint = var_1.has_blueprint;

@@ -49,7 +49,7 @@ iplane_crash() {
   maps\iplane_code::player_on_back();
   common_scripts\utility::flag_set("large_crate_movement");
   wait 1;
-  level.new_org maps\_utility::anim_stopanimscripted();
+  level.new_org maps\_utility::anim_stopanimScripted();
   level thread play_destroy_plane_spark_fx();
   level thread play_destroy_plane_burst_fx();
   player_falling();
@@ -196,7 +196,7 @@ start_opening_setup() {
   thread rotate_plane();
   maps\iplane_code::player_on_back();
   common_scripts\utility::flag_set("large_crate_movement");
-  level.new_org maps\_utility::anim_stopanimscripted();
+  level.new_org maps\_utility::anim_stopanimScripted();
   level thread play_destroy_plane_spark_fx();
   level thread play_destroy_plane_burst_fx();
   player_falling();
@@ -210,7 +210,7 @@ player_falling() {
   level.player thread maps\_utility::play_sound_on_entity("scn_iplane_fall_01_lr");
   var_0 = spawn("script_model", level.player_rig.origin);
   var_0 setModel("tag_origin");
-  level.player_rig linkto(var_0);
+  level.player_rig linkTo(var_0);
   level.player_rig thread maps\_anim::anim_single_solo(level.player_rig, "player_fall_2");
   level thread play_spark_fx_when_falling();
   var_0 movex(25000, 20, 2);
@@ -222,21 +222,21 @@ player_falling() {
   level.player thread player_face_fx();
   level.player thread maps\_utility::play_sound_on_entity("crate_impact");
   wait 0.3;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player thread maps\_gameskill::blood_splat_on_screen("bottom");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player setblurforplayer(5, 0.25);
-  var_0 rotateto((0, 180, 0), 1.5, 0.5, 0.1);
+  var_0 rotateTo((0, 180, 0), 1.5, 0.5, 0.1);
   level.player setclienttriggeraudiozone("jungle_ghosts_falling_through_air_black_out", 1);
   maps\_hud_util::fade_out(1, "white");
   level.player lerpfov(65, 0.05);
   level.player setblurforplayer(0, 0.25);
   wait 1;
-  level.player playrumbleonentity("grenade_rumble");
-  var_0 rotateyaw(5220, 4, 0.5);
+  level.player playRumbleOnEntity("grenade_rumble");
+  var_0 rotateYaw(5220, 4, 0.5);
   var_0 movex(25000, 20, 2);
   wait 2;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   player_falling_2(var_0);
 }
 
@@ -297,11 +297,11 @@ player_falling_2(var_0) {
   level.player_rig delete();
   level.player_rig = maps\_utility::spawn_anim_model("player_rig", var_0.origin);
   level.player_rig.angles = (-90, 180, 0);
-  level.player_rig linkto(var_0);
+  level.player_rig linkTo(var_0);
   var_2 = [];
   var_2[0] = maps\_utility::spawn_anim_model("exfil_ripcord_player", level.player_rig.origin);
-  level.player playrumbleonentity("damage_heavy");
-  var_2[0] linkto(level.player_rig, "tag_origin");
+  level.player playRumbleOnEntity("damage_heavy");
+  var_2[0] linkTo(level.player_rig, "tag_origin");
   var_2[1] = level.player_rig;
   level.player playerlinktoabsolute(level.player_rig, "tag_player");
   level.earthquake_min = 0.2;
@@ -310,8 +310,8 @@ player_falling_2(var_0) {
   level.player enabledeathshield(1);
   level.player lerpfov(80, 5);
   wait 1;
-  var_3 = common_scripts\utility::getstruct("player_falling_teleport_origin", "targetname");
-  var_0 moveto(var_3.origin, 0.05);
+  var_3 = common_scripts\utility::getStruct("player_falling_teleport_origin", "targetname");
+  var_0 moveTo(var_3.origin, 0.05);
   var_0.angles = (180, 0, 0);
   level.player setblurforplayer(10, 0.05);
   wait 0.25;
@@ -323,11 +323,11 @@ player_falling_2(var_0) {
   wait 1.1;
   var_0 rotatepitch(680, 5.5, 1, 1);
   level waittill("player_fall_wing");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.5;
-  var_0 rotateto((180, 0, 0), 0.8, 0, 0);
+  var_0 rotateTo((180, 0, 0), 0.8, 0, 0);
   level waittill("player_fall_wing2");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level notify("stop_plane_quakes");
   earthquake(0.6, 1, level.player.origin, 99999);
   level.player maps\_utility::delaythread(0.3, maps\_gameskill::blood_splat_on_screen, "left");
@@ -340,19 +340,19 @@ player_falling_2(var_0) {
   level.player_rig thread maps\_anim::anim_single(var_2, "parachute_fall");
   level.player maps\_utility::delaythread(0.5, maps\_utility::play_sound_on_entity, "iplane_chute_deploy");
   wait 0.7;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player setblurforplayer(5, 0.05);
   var_0 thread parachute_open_rotate();
   wait 0.05;
   level.player setblurforplayer(0, 0.05);
   var_0 movez(-15000, 20, 2);
   wait 0.5;
-  level.player_rig maps\_utility::anim_stopanimscripted();
+  level.player_rig maps\_utility::anim_stopanimScripted();
   level.player_rig thread maps\_anim::anim_single_solo(level.player_rig, "highfive_sky");
   wait 1.5;
   level.player thread maps\_utility::play_sound_on_entity("scn_iplane_fall_hit_01");
   level notify("player_look_down");
-  var_0 rotateto((180, 0, 0), 2, 1, 1);
+  var_0 rotateTo((180, 0, 0), 2, 1, 1);
   level.player thread maps\_utility::lerp_fov_overtime(2, 55);
   wait 1.5;
   level.player common_scripts\utility::delaycall(0.2, ::playrumbleonentity, "grenade_rumble");
@@ -375,17 +375,17 @@ player_falling_2(var_0) {
 parachute_open_rotate() {
   level endon("player_look_down");
   wait 0.2;
-  self rotateto((-140, 10, 5), 0.2, 0, 0.2);
+  self rotateTo((-140, 10, 5), 0.2, 0, 0.2);
   wait 0.2;
-  self rotateto((-90, -10, -4), 1, 0.3, 0.5);
+  self rotateTo((-90, -10, -4), 1, 0.3, 0.5);
   wait 1;
-  self rotateto((-140, 10, 5), 1, 0.5, 0.5);
+  self rotateTo((-140, 10, 5), 1, 0.5, 0.5);
   wait 1;
-  self rotateto((-100, -4, -3), 0.5, 0.2, 0.2);
+  self rotateTo((-100, -4, -3), 0.5, 0.2, 0.2);
   wait 0.5;
-  self rotateto((-120, 4, 2), 0.5, 0.2, 0.2);
+  self rotateTo((-120, 4, 2), 0.5, 0.2, 0.2);
   wait 0.5;
-  self rotateto((-110, -4, -3), 1, 0.5, 0.5);
+  self rotateTo((-110, -4, -3), 1, 0.5, 0.5);
 }
 
 assemble_debris() {
@@ -394,34 +394,34 @@ assemble_debris() {
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
     var_3 setModel(var_2.script_noteworthy);
-    var_3 rotateto((randomintrange(500, 720), randomintrange(500, 720), randomintrange(500, 720)), randomintrange(10, 20));
+    var_3 rotateTo((randomintrange(500, 720), randomintrange(500, 720), randomintrange(500, 720)), randomintrange(10, 20));
     var_3.targetname = "iplane_clearup";
   }
 }
 
 assemble_plane_wing() {
-  var_0 = getent("plane_wing_1", "targetname");
+  var_0 = getEnt("plane_wing_1", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel(var_0.script_noteworthy);
   var_1.angles = var_0.angles;
   var_1 rotateroll(-1800, 9);
   var_1.targetname = "iplane_clearup";
   playFX(level._effect["vfx_helicrash_sparkrain"], var_1.origin);
-  var_2 = getent("plane_wing_mid", "targetname");
+  var_2 = getEnt("plane_wing_mid", "targetname");
   var_3 = spawn("script_model", var_2.origin + (0, 60, -550));
   var_3 setModel(var_2.script_noteworthy);
   var_3.angles = var_2.angles + (0, 180, 0);
-  var_3 rotateyaw(7600, 20);
+  var_3 rotateYaw(7600, 20);
   var_3 movex(12666, 40);
   var_3.targetname = "iplane_clearup";
   var_3 thread hide_unhide();
-  var_4 = getent("plane_wing_2", "targetname");
+  var_4 = getEnt("plane_wing_2", "targetname");
   var_5 = spawn("script_model", var_4.origin);
   var_5 setModel(var_4.script_noteworthy);
   var_5.angles = var_4.angles;
-  var_6 = getent("plane_wing_2_trigger", "targetname");
-  var_6 enablelinkto();
-  var_6 linkto(var_5);
+  var_6 = getEnt("plane_wing_2_trigger", "targetname");
+  var_6 enablelinkTo();
+  var_6 linkTo(var_5);
   var_5 rotatepitch(1900, 15);
   var_5.targetname = "iplane_clearup";
   var_6 thread check_for_player_impact();
@@ -457,111 +457,111 @@ do_hand_wheeling_anim(var_0) {
 
 setup() {
   level.player setclienttriggeraudiozone("jungle_ghosts_start_black");
-  var_0 = getent("baddy_plane", "targetname");
+  var_0 = getEnt("baddy_plane", "targetname");
   var_0 hide();
   level.fly_away_or = spawn("script_origin", (-560, 4696, -1968));
-  level.ent_parachute_from_plane_one = getent("parachute_from_plane_one", "targetname");
-  level.ent_parachute_from_plane_two = getent("parachute_from_plane_two", "targetname");
-  level.bay_door_lower = getent("saf_c17_lower_backdoor", "script_noteworthy");
-  level.bay_door_upper = getent("saf_c17_lower_backdoor_top", "script_noteworthy");
+  level.ent_parachute_from_plane_one = getEnt("parachute_from_plane_one", "targetname");
+  level.ent_parachute_from_plane_two = getEnt("parachute_from_plane_two", "targetname");
+  level.bay_door_lower = getEnt("saf_c17_lower_backdoor", "script_noteworthy");
+  level.bay_door_upper = getEnt("saf_c17_lower_backdoor_top", "script_noteworthy");
   var_1 = getEntArray("saf_c17_lower_backdoor_script_model", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.bay_door_lower);
+    var_3 linkTo(level.bay_door_lower);
   }
 
   var_1 = getEntArray("saf_c17_lower_backdoor_top_script_model", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.bay_door_upper);
+    var_3 linkTo(level.bay_door_upper);
   }
 
-  level.chair_vargas = getent("vargas_chair", "targetname");
+  level.chair_vargas = getEnt("vargas_chair", "targetname");
   level.chair_vargas hide();
-  level.plane_tail = getent("plane_tail", "targetname");
-  level.plane_core = getent("plane_fuselage", "targetname");
+  level.plane_tail = getEnt("plane_tail", "targetname");
+  level.plane_core = getEnt("plane_fuselage", "targetname");
   level.plane_core setModel("tag_origin");
   level.destroy_plane_middles = getEntArray("destroyed_plane_middle", "targetname");
 
   for(var_7 = 0; var_7 < level.destroy_plane_middles.size; var_7++) {
-    level.destroy_plane_middles[var_7] linkto(level.plane_core);
+    level.destroy_plane_middles[var_7] linkTo(level.plane_core);
     level.destroy_plane_middles[var_7] hide();
   }
 
-  level.plane_tail linkto(level.plane_core);
-  var_8 = getent("escape_enemy_plane_location", "targetname");
-  var_8 linkto(level.plane_core);
+  level.plane_tail linkTo(level.plane_core);
+  var_8 = getEnt("escape_enemy_plane_location", "targetname");
+  var_8 linkTo(level.plane_core);
   level.plane_test_origin = spawn("script_model", level.plane_core.origin);
   level.plane_test_origin setModel("tag_origin");
-  var_9 = getent("metal_clip", "targetname");
-  var_9 linkto(level.plane_core);
-  getent("inb", "targetname").origin = getent("inb", "targetname").origin + (-100, 0, 0);
+  var_9 = getEnt("metal_clip", "targetname");
+  var_9 linkTo(level.plane_core);
+  getEnt("inb", "targetname").origin = getEnt("inb", "targetname").origin + (-100, 0, 0);
   level.baddies = getEntArray("baddies_enter", "script_noteworthy");
 
   foreach(var_11 in level.baddies) {
-    var_11 linkto(level.plane_core);
+    var_11 linkTo(level.plane_core);
   }
 
   var_13 = getEntArray("falling_spark_location", "targetname");
 
   foreach(var_15 in var_13) {
-    var_15 linkto(level.plane_core);
+    var_15 linkTo(level.plane_core);
   }
 
   var_1 = getEntArray("plane_interior_debris", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.plane_core);
+    var_3 linkTo(level.plane_core);
     var_3 hide();
   }
 
   maps\_utility::vision_set_fog_changes("iplane", 0.1);
-  level.ent_parachute_from_plane_one linkto(level.plane_core);
-  level.ent_parachute_from_plane_two linkto(level.plane_core);
+  level.ent_parachute_from_plane_one linkTo(level.plane_core);
+  level.ent_parachute_from_plane_two linkTo(level.plane_core);
   thread wing_break_off();
-  var_19 = getent("bracket_c17", "targetname");
-  var_19 linkto(level.plane_tail);
+  var_19 = getEnt("bracket_c17", "targetname");
+  var_19 linkTo(level.plane_tail);
   var_20 = getEntArray("brush_model", "script_noteworthy");
   var_21 = getEntArray("brush_model", "targetname");
   var_22 = common_scripts\utility::array_combine(var_20, var_21);
 
   foreach(var_24 in var_22) {
-    var_24 linkto(level.plane_core);
+    var_24 linkTo(level.plane_core);
   }
 
   var_26 = common_scripts\utility::array_combine(level.enemies, level.heroes);
 
   foreach(var_28 in var_26) {
-    var_28 linkto(level.plane_core);
+    var_28 linkTo(level.plane_core);
   }
 
-  var_30 = getent("m_p_l_r_tracker", "targetname");
+  var_30 = getEnt("m_p_l_r_tracker", "targetname");
   var_31 = getEntArray("link_me_tail", "script_noteworthy");
 
   foreach(var_33 in var_31) {
-    var_33 linkto(level.plane_tail);
+    var_33 linkTo(level.plane_tail);
   }
 
   var_35 = getEntArray("plane_core_tarp", "script_noteworthy");
 
   foreach(var_37 in var_35) {
-    var_37 linkto(level.plane_core);
+    var_37 linkTo(level.plane_core);
   }
 
   var_1 = getEntArray("iplane_bracket", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.plane_tail);
+    var_3 linkTo(level.plane_tail);
   }
 
   var_41 = getEntArray("destroy_plane_fx", "targetname");
 
   foreach(var_43 in var_41) {
-    var_43 linkto(level.plane_core);
+    var_43 linkTo(level.plane_core);
   }
 
-  level.kersey_anim_org = getent("kersey_anim_start", "targetname");
-  level.mccoy_anim_org = getent("mccoy_anim_start", "targetname");
+  level.kersey_anim_org = getEnt("kersey_anim_start", "targetname");
+  level.mccoy_anim_org = getEnt("mccoy_anim_start", "targetname");
   level.chair_vargas_2 = spawn("script_model", level.vargas.origin);
   level.chair_vargas_2 setModel("com_folding_chair");
   level.chair_vargas_2.animname = "chair_real";
@@ -570,19 +570,19 @@ setup() {
   level.chair_vargas_2.reference setModel("tag_origin");
   level.bay_door_upper_model = spawn("script_model", level.bay_door_upper.origin);
   level.bay_door_upper_model setModel("tag_origin");
-  level.bay_door_upper_model linkto(level.plane_core);
-  level.bay_door_upper linkto(level.bay_door_upper_model);
+  level.bay_door_upper_model linkTo(level.plane_core);
+  level.bay_door_upper linkTo(level.bay_door_upper_model);
   level.bay_door_lower_model = spawn("script_model", level.bay_door_lower.origin);
   level.bay_door_lower_model setModel("tag_origin");
-  level.bay_door_lower_model linkto(level.plane_core);
-  level.bay_door_lower linkto(level.bay_door_lower_model);
-  var_45 = getent("outside_of_plane", "targetname");
-  var_45 linkto(level.plane_core);
+  level.bay_door_lower_model linkTo(level.plane_core);
+  level.bay_door_lower linkTo(level.bay_door_lower_model);
+  var_45 = getEnt("outside_of_plane", "targetname");
+  var_45 linkTo(level.plane_core);
   var_45 hide();
   level.rope_main_org = common_scripts\utility::spawn_tag_origin();
   level.rope_main_org.origin = level.plane_core.origin;
   level.rope_main_org.angles = level.plane_core.angles;
-  level.rope_main_org linkto(level.plane_core);
+  level.rope_main_org linkTo(level.plane_core);
 }
 
 window_god_rays() {
@@ -600,7 +600,7 @@ window_god_rays() {
 
     var_3 = common_scripts\utility::spawn_tag_origin();
     var_3.origin = var_2.origin;
-    var_2 linkto(var_3);
+    var_2 linkTo(var_3);
   }
 }
 
@@ -636,18 +636,18 @@ ramp_red_light() {
   var_4 = getEntArray("tail_lights_red_off_three_model", "targetname");
 
   foreach(var_6 in var_1) {
-    var_6 linkto(level.plane_tail);
+    var_6 linkTo(level.plane_tail);
     var_6.light_model = spawn("script_model", var_6.origin);
     var_6.light_model setModel("tag_origin");
-    var_6.light_model linkto(level.plane_tail);
+    var_6.light_model linkTo(level.plane_tail);
     var_6.light_model thread delete_light_on_clearup();
   }
 
   foreach(var_6 in var_0) {
-    var_6 linkto(level.plane_tail);
+    var_6 linkTo(level.plane_tail);
     var_6.light_model = spawn("script_model", var_6.origin);
     var_6.light_model setModel("tag_origin");
-    var_6.light_model linkto(level.plane_tail);
+    var_6.light_model linkTo(level.plane_tail);
     var_6.light_model thread delete_light_on_clearup();
   }
 
@@ -669,7 +669,7 @@ mid_dlight() {
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_4 in var_2) {
-    var_4 linkto(level.plane_core);
+    var_4 linkTo(level.plane_core);
     var_4 setModel("tag_origin");
   }
 
@@ -695,7 +695,7 @@ core_lights_red() {
   var_0 = getEntArray("lights_red_fuselage", "targetname");
 
   foreach(var_2 in var_0) {
-    var_2 linkto(level.plane_core);
+    var_2 linkTo(level.plane_core);
     var_2 setModel("tag_origin");
   }
 
@@ -749,18 +749,18 @@ light_blink() {
 }
 
 rip_tail_off() {
-  level.bay_door_upper_model linkto(level.plane_tail);
-  level.bay_door_lower_model linkto(level.plane_tail);
+  level.bay_door_upper_model linkTo(level.plane_tail);
+  level.bay_door_lower_model linkTo(level.plane_tail);
   level.plane_tail_model = spawn("script_model", level.plane_tail.origin);
   level.plane_tail_model setModel("tag_origin");
   level.plane_tail_model.angles = level.plane_tail_model.angles;
-  level.plane_tail linkto(level.plane_tail_model);
-  level.plane_tail_model linkto(level.plane_core);
+  level.plane_tail linkTo(level.plane_tail_model);
+  level.plane_tail_model linkTo(level.plane_core);
   level.plane_tail_model.animname = "tail";
   level.plane_tail_model maps\_anim::setanimtree();
   var_0 = spawn("script_model", level.plane_tail.origin + (-100, 0, 0));
   var_0.angles = var_0.angles + (0, 0, 180);
-  var_0 linkto(level.plane_tail);
+  var_0 linkTo(level.plane_tail);
   var_0 setModel("tag_origin");
   level.plane_core_model thread maps\_anim::anim_single_solo(level.plane_tail_model, "tail_ripoff");
   common_scripts\utility::exploder("az_tail_separate");
@@ -769,17 +769,17 @@ rip_tail_off() {
 }
 
 rip_left_wing_off() {
-  var_0 = getent("c17_left_wing", "targetname");
-  var_1 = getent("c17_left_wing_flap", "targetname");
+  var_0 = getEnt("c17_left_wing", "targetname");
+  var_1 = getEnt("c17_left_wing_flap", "targetname");
   var_1.angles = var_1.angles + (0, 0, 0);
   var_1 thread move_flaps();
   var_2 = spawn("script_model", var_0.origin);
   var_2 setModel("tag_origin");
-  var_0 linkto(var_2);
-  var_2 linkto(level.plane_core);
+  var_0 linkTo(var_2);
+  var_2 linkTo(level.plane_core);
   var_2.animname = "wing_L";
   var_2 maps\_anim::setanimtree();
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_2 maps\_anim::anim_single_solo(var_2, "wing_L_ripoff");
   var_2 hide();
   var_1 hide();
@@ -791,27 +791,27 @@ batman_rotate_plane() {
   level.plane_core_model_dummy = spawn("script_model", level.plane_core.origin);
   level.plane_core_model_dummy setModel("tag_origin");
   level.plane_core_model_dummy.angles = level.plane_core.angles;
-  self linkto(level.plane_core_model);
+  self linkTo(level.plane_core_model);
   remove_junk_behind_player();
 
   if(!isDefined(level.player_rig)) {
     level.player_rig = maps\_utility::spawn_anim_model("player_rig");
   }
 
-  level.player_rig linkto(level.plane_core);
+  level.player_rig linkTo(level.plane_core);
   level.plane_core_model.animname = "plane_body";
   level.plane_core_model maps\_anim::setanimtree();
-  level.chair_vargas_2 maps\_utility::anim_stopanimscripted();
-  level.chair_vargas_2.reference maps\_utility::anim_stopanimscripted();
-  level.plane_core maps\_utility::anim_stopanimscripted();
+  level.chair_vargas_2 maps\_utility::anim_stopanimScripted();
+  level.chair_vargas_2.reference maps\_utility::anim_stopanimScripted();
+  level.plane_core maps\_utility::anim_stopanimScripted();
 
   if(isDefined(level.vargas.anim_node)) {
     level.vargas.anim_node notify("stop_loop");
   }
 
-  level.vargas maps\_utility::anim_stopanimscripted();
+  level.vargas maps\_utility::anim_stopanimScripted();
   level.vargas unlink();
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   thread player_rotate_plane01();
   level.plane_core_model_dummy thread maps\_anim::anim_single([level.vargas, level.chair_vargas_2], "vargas_fall_1");
   var_0 = maps\_utility::spawn_anim_model("rappel_rope");
@@ -822,9 +822,9 @@ batman_rotate_plane() {
   var_1 thread do_firework_fx();
   wait 2;
   level notify("end_firework");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread batman_begins();
-  var_2 = getent("batman00", "targetname");
+  var_2 = getEnt("batman00", "targetname");
   level.bad_guy = var_2 maps\_utility::spawn_ai(1, 1);
   level.bad_guy.animname = "generic";
   level.bad_guy maps\_utility::set_ignoreall(1);
@@ -833,7 +833,7 @@ batman_rotate_plane() {
   maps\_utility::delaythread(14.5, common_scripts\utility::play_sound_in_space, "scn_iplane_rorke_arm_around_baddy", level.player.origin);
   maps\_utility::delaythread(18.2, common_scripts\utility::play_sound_in_space, "scn_iplane_baddy_center_away", level.player.origin);
   wait 6;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.plane_core_model_dummy waittill("vargas_fall_1");
   common_scripts\utility::flag_set("baddies_leave_plane");
   var_3 = maps\_utility::spawn_anim_model("rappel_rope");
@@ -920,8 +920,8 @@ send_friends_in(var_0) {
   if(var_0 == 0) {
     wait 5.4;
     var_1 = 7.6;
-    var_2 = getent("in", "targetname");
-    self linkto(var_2);
+    var_2 = getEnt("in", "targetname");
+    self linkTo(var_2);
     self show();
     var_2 thread do_rope_animation(1, var_1);
     thread common_scripts\utility::play_sound_in_space("scn_iplane_baddy_left_roping_in", (15084, -29619, -36925));
@@ -929,7 +929,7 @@ send_friends_in(var_0) {
     var_2 thread maps\_anim::anim_loop_solo(self, "p_soldier_a_idle");
     common_scripts\utility::flag_wait("baddies_leave_plane");
     wait 7.6;
-    var_2 maps\_utility::anim_stopanimscripted();
+    var_2 maps\_utility::anim_stopanimScripted();
     thread common_scripts\utility::play_sound_in_space("scn_iplane_baddy_left_away", (15084, -29619, -36925));
     var_2 maps\_anim::anim_single_solo(self, "p_soldier_a_out");
   }
@@ -937,8 +937,8 @@ send_friends_in(var_0) {
   if(var_0 == 1) {
     wait 0.5;
     var_1 = 6.5;
-    var_3 = getent("ind", "targetname");
-    self linkto(var_3);
+    var_3 = getEnt("ind", "targetname");
+    self linkTo(var_3);
     self show();
     var_3 thread do_rope_animation(2, var_1);
     thread common_scripts\utility::play_sound_in_space("scn_iplane_baddy_right_center_roping_in", (15011, -29395, -36992));
@@ -948,17 +948,17 @@ send_friends_in(var_0) {
     wait 5.0;
     thread common_scripts\utility::play_sound_in_space("scn_iplane_baddy_right_center_away", (15011, -29395, -36992));
     wait 1.5;
-    var_3 maps\_utility::anim_stopanimscripted();
+    var_3 maps\_utility::anim_stopanimScripted();
     var_3 maps\_anim::anim_single_solo(self, "p_soldier_b_out");
   }
 
   if(var_0 == 2) {
     wait 3.5;
     var_1 = 3.6;
-    var_4 = getent("inc", "targetname");
+    var_4 = getEnt("inc", "targetname");
     var_4 unlink();
     var_4 movex(-100, 0.05);
-    self linkto(var_4);
+    self linkTo(var_4);
     self show();
     wait 0.05;
     var_4 thread do_rope_animation(3, var_1);
@@ -967,7 +967,7 @@ send_friends_in(var_0) {
     var_4 thread maps\_anim::anim_loop_solo(self, "p_soldier_c_idle");
     common_scripts\utility::flag_wait("baddies_leave_plane");
     wait 3.6;
-    var_4 maps\_utility::anim_stopanimscripted();
+    var_4 maps\_utility::anim_stopanimScripted();
     thread common_scripts\utility::play_sound_in_space("scn_iplane_baddy_right_away", (14957, -29360, -36901));
     var_4 maps\_anim::anim_single_solo(self, "p_soldier_c_out");
   }
@@ -975,8 +975,8 @@ send_friends_in(var_0) {
   if(var_0 == 3) {
     wait 0.6;
     var_1 = 2.6;
-    var_5 = getent("inb", "targetname");
-    self linkto(var_5);
+    var_5 = getEnt("inb", "targetname");
+    self linkTo(var_5);
     self show();
     var_5 thread do_rope_animation(4, var_1);
     thread common_scripts\utility::play_sound_in_space("scn_iplane_baddy_left_center_roping_in", (15117, -29542, -36984));
@@ -984,7 +984,7 @@ send_friends_in(var_0) {
     var_5 thread maps\_anim::anim_loop_solo(self, "p_soldier_d_idle");
     common_scripts\utility::flag_wait("baddies_leave_plane");
     wait(var_1);
-    var_5 maps\_utility::anim_stopanimscripted();
+    var_5 maps\_utility::anim_stopanimScripted();
     thread common_scripts\utility::play_sound_in_space("scn_iplane_baddy_left_center_away", (15117, -29542, -36984));
     var_5 maps\_anim::anim_single_solo(self, "p_soldier_d_out");
   }
@@ -994,10 +994,10 @@ send_friends_in(var_0) {
 
 ground_movement() {
   common_scripts\utility::flag_wait("player_activated_ramps_open");
-  level.ground_brush rotateyaw(-900, 1000);
-  level.ground_brush moveto(level.ground_brush.origin + (100, 0, 100), 25, 5, 5);
+  level.ground_brush rotateYaw(-900, 1000);
+  level.ground_brush moveTo(level.ground_brush.origin + (100, 0, 100), 25, 5, 5);
   level.ground_brush waittill("movedone");
-  level.ground_brush moveto(level.ground_brush.origin + (-100, 0, -100), 25, 5, 5);
+  level.ground_brush moveTo(level.ground_brush.origin + (-100, 0, -100), 25, 5, 5);
   level.ground_brush waittill("movedone");
 }
 
@@ -1020,42 +1020,42 @@ moving_jeeps_and_crates() {
   level.tail_lights = getEntArray("lights_off_rear", "targetname");
   var_0 = getEntArray("lights_off_non_moving", "targetname");
   var_1 = getEntArray("lights_on_non_moving", "targetname");
-  var_2 = getent("netting_front_r", "targetname");
-  var_3 = getent("netting_front_l", "targetname");
-  var_4 = getent("netting_middle", "targetname");
-  var_5 = getent("netting_rear", "targetname");
+  var_2 = getEnt("netting_front_r", "targetname");
+  var_3 = getEnt("netting_front_l", "targetname");
+  var_4 = getEnt("netting_middle", "targetname");
+  var_5 = getEnt("netting_rear", "targetname");
   var_6 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_8 in level.moving_crates_plane) {
-    var_8 linkto(level.plane_core);
+    var_8 linkTo(level.plane_core);
   }
 
   foreach(var_11 in level.lights_on) {
-    var_11 linkto(level.plane_core);
+    var_11 linkTo(level.plane_core);
   }
 
   foreach(var_14 in level.lights_off) {
-    var_14 linkto(level.plane_core);
+    var_14 linkTo(level.plane_core);
   }
 
   thread jeep_offset_anims();
 
   foreach(var_17 in level.fire_ext_models) {
-    var_17 linkto(level.plane_core);
+    var_17 linkTo(level.plane_core);
   }
 
   foreach(var_20 in level.tail_lights) {
-    var_20 linkto(level.plane_tail);
+    var_20 linkTo(level.plane_tail);
   }
 
   foreach(var_23 in var_6) {
-    var_23 linkto(level.plane_core);
+    var_23 linkTo(level.plane_core);
   }
 }
 
 jeep_offset_anims() {
   foreach(var_1 in level.jeeps_plane) {
-    var_1 linkto(level.plane_core);
+    var_1 linkTo(level.plane_core);
     var_1.animname = "hummer";
     var_1 maps\_utility::assign_animtree("hummer");
     wait 1;
@@ -1068,22 +1068,22 @@ loop_guy_in_chair_beg() {
 }
 
 wing_break_off() {
-  var_0 = getent("c17_left_wing", "targetname");
-  var_1 = getent("full_engine", "targetname");
-  var_2 = getent("engine_top", "targetname");
-  var_3 = getent("engine_bottom", "targetname");
-  var_4 = getent("c17_right_wing_engines", "targetname");
-  var_5 = getent("engine_fan_one", "targetname");
-  var_5 linkto(var_2);
-  var_2 linkto(var_0);
-  var_6 = getent("engine_moving_fan", "targetname");
-  var_6 linkto(var_1);
+  var_0 = getEnt("c17_left_wing", "targetname");
+  var_1 = getEnt("full_engine", "targetname");
+  var_2 = getEnt("engine_top", "targetname");
+  var_3 = getEnt("engine_bottom", "targetname");
+  var_4 = getEnt("c17_right_wing_engines", "targetname");
+  var_5 = getEnt("engine_fan_one", "targetname");
+  var_5 linkTo(var_2);
+  var_2 linkTo(var_0);
+  var_6 = getEnt("engine_moving_fan", "targetname");
+  var_6 linkTo(var_1);
   var_6 thread rotate_fan_on_engine();
-  var_1 linkto(var_0);
-  var_7 = getent("end_left_holder", "targetname");
-  var_8 = getent("end_right_holder", "targetname");
-  var_7 linkto(var_0);
-  var_8 linkto(var_0);
+  var_1 linkTo(var_0);
+  var_7 = getEnt("end_left_holder", "targetname");
+  var_8 = getEnt("end_right_holder", "targetname");
+  var_7 linkTo(var_0);
+  var_8 linkTo(var_0);
   common_scripts\utility::flag_wait("player_in_position_to_see_wing_enemies");
   wait 6.3;
   thread rip_left_wing_off();
@@ -1094,19 +1094,19 @@ setup_engine_fx(var_0, var_1) {
   var_2 = spawn("script_model", (15592, 5426, -340));
   var_2 setModel("tag_origin");
   var_2.angles = var_2.angles + (0, 180, 0);
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_3 = spawn("script_model", (15730, 5116, -322));
   var_3 setModel("tag_origin");
   var_3.angles = var_3.angles + (0, 180, 0);
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   var_4 = spawn("script_model", (15592, 4010, -340));
   var_4 setModel("tag_origin");
   var_4.angles = var_4.angles + (0, 140, 0);
-  var_4 linkto(var_1);
+  var_4 linkTo(var_1);
   var_5 = spawn("script_model", (15726, 4312, -322));
   var_5 setModel("tag_origin");
   var_5.angles = var_5.angles + (0, 140, 0);
-  var_5 linkto(var_1);
+  var_5 linkTo(var_1);
   playFXOnTag(common_scripts\utility::getfx("jet_engine"), var_2, "tag_origin");
   playFXOnTag(common_scripts\utility::getfx("jet_engine"), var_4, "tag_origin");
   playFXOnTag(common_scripts\utility::getfx("jet_engine"), var_3, "tag_origin");
@@ -1114,14 +1114,14 @@ setup_engine_fx(var_0, var_1) {
 }
 
 setup_contrails() {
-  var_0 = getent("c17_left_wing", "targetname");
+  var_0 = getEnt("c17_left_wing", "targetname");
   var_1 = spawn("script_model", (15232, 5844, -280));
   var_1 setModel("tag_origin");
-  var_1 linkto(var_0);
-  var_2 = getent("c17_right_wing", "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("c17_right_wing", "targetname");
   var_3 = spawn("script_model", (15232, 3590, -280));
   var_3 setModel("tag_origin");
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   playFXOnTag(common_scripts\utility::getfx("contrail"), var_1, "tag_origin");
   playFXOnTag(common_scripts\utility::getfx("contrail"), var_3, "tag_origin");
 }
@@ -1149,27 +1149,27 @@ rotate_engine() {
       continue;
     }
     if(self.targetname == "engine_top") {
-      self rotateto((0, 0, 10), 1);
+      self rotateTo((0, 0, 10), 1);
       self waittill("rotatedone");
-      self rotateto((0, 230, 40), 1);
+      self rotateTo((0, 230, 40), 1);
       self waittill("rotatedone");
     } else if(self.targetname == "engine_bottom") {
-      self rotateto((0, 0, 10), 0.1);
+      self rotateTo((0, 0, 10), 0.1);
       self waittill("rotatedone");
-      self rotateto((0, 230, 40), 0.1);
+      self rotateTo((0, 230, 40), 0.1);
       self waittill("rotatedone");
     } else
-      self rotateto((0, 0, 10), 10);
+      self rotateTo((0, 0, 10), 10);
 
     self waittill("rotatedone");
-    self rotateto((0, 230, 40), 1);
+    self rotateTo((0, 230, 40), 1);
     self waittill("rotatedone");
   }
 }
 
 trigger_wing_guys() {
-  var_0 = getent("look_out_window", "targetname");
-  var_1 = getent("button_model_on", "targetname");
+  var_0 = getEnt("look_out_window", "targetname");
+  var_1 = getEnt("button_model_on", "targetname");
   wait 1;
   var_2 = spawn("trigger_radius", var_1.origin, 0, 50, 50);
 
@@ -1199,8 +1199,8 @@ rotate_plane() {
 #using_animtree("player");
 
 player_rotate_plane01() {
-  var_0 = getent("outside_of_plane", "targetname");
-  var_0 linkto(level.plane_core);
+  var_0 = getEnt("outside_of_plane", "targetname");
+  var_0 linkTo(level.plane_core);
   var_0 hide();
 
   if(!isDefined(level.player_rig)) {
@@ -1209,7 +1209,7 @@ player_rotate_plane01() {
 
   level.player_rig unlink();
   level.player_rig hide();
-  level.player_rig linkto(level.plane_core);
+  level.player_rig linkTo(level.plane_core);
   var_1 = getanimlength(%plane_player_fall);
   level.player thread maps\_utility::play_sound_on_entity("scn_iplane_player_grab_bar");
   level.plane_core thread maps\_anim::anim_single_solo(level.player_rig, "player_fall", "tag_origin");
@@ -1227,7 +1227,7 @@ player_rotate_plane01() {
   level.hesh hide();
   level.player playerlinktodelta(level.player_rig, "tag_player", 1, 5, 5, 5, 0, 1);
   wait(var_1 - 2.5);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player playrumblelooponentity("tank_rumble");
   level.plane_core thread maps\_anim::anim_loop_solo(level.player_rig, "hanging_idle", "tag_origin");
   wait 2.5;
@@ -1252,7 +1252,7 @@ enemy_plane_behind() {
   var_0 = common_scripts\utility::get_target_ent("enemy_plane");
   var_0.animname = "enemy_plane";
   var_0 maps\_anim::setanimtree();
-  var_1 = getent("fake_gun_fire", "targetname");
+  var_1 = getEnt("fake_gun_fire", "targetname");
   var_2 = var_1 maps\_utility::spawn_ai(1, 1);
   var_2 teleport(var_0.origin);
   level.enemy_plane_engine_loop_01 = spawn("script_origin", var_0.origin + (300, 500, -250));
@@ -1260,39 +1260,39 @@ enemy_plane_behind() {
   level.enemy_plane_engine_loop_03 = spawn("script_origin", var_0.origin);
   level.enemy_plane_engine_loop_04 = spawn("script_origin", var_0.origin);
   common_scripts\utility::waitframe();
-  var_2 linkto(var_0, "tag_body", (0, 0, -100), (0, 0, 0));
-  level.enemy_plane_engine_loop_01 linkto(var_0);
-  level.enemy_plane_engine_loop_02 linkto(var_0);
-  level.enemy_plane_engine_loop_03 linkto(var_0);
-  level.enemy_plane_engine_loop_04 linkto(var_0);
+  var_2 linkTo(var_0, "tag_body", (0, 0, -100), (0, 0, 0));
+  level.enemy_plane_engine_loop_01 linkTo(var_0);
+  level.enemy_plane_engine_loop_02 linkTo(var_0);
+  level.enemy_plane_engine_loop_03 linkTo(var_0);
+  level.enemy_plane_engine_loop_04 linkTo(var_0);
   thread enemy_plane_looping_sounds_start();
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   var_3 = var_0 common_scripts\utility::get_target_ent();
-  var_0 moveto(var_3.origin, 6, 2, 4);
-  var_0 rotateto(var_3.angles, 6, 0, 4);
+  var_0 moveTo(var_3.origin, 6, 2, 4);
+  var_0 rotateTo(var_3.angles, 6, 0, 4);
   wait 5;
   level.alarm_ent = common_scripts\utility::spawn_tag_origin();
   level.alarm_ent.origin = level.plane_core.origin;
-  level.alarm_ent linkto(level.plane_core);
+  level.alarm_ent linkTo(level.plane_core);
   level.alarm_ent playLoopSound("iplane_warning_alarm");
   wait 2.5;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   common_scripts\utility::flag_set("fire_ropes");
   thread common_scripts\utility::play_sound_in_space("scn_iplane_hookup_l", (12206, -30991, -37000));
   thread common_scripts\utility::play_sound_in_space("scn_iplane_hookup_r", (13070, -28463, -37000));
   thread common_scripts\utility::play_sound_in_space("scn_iplane_hookup_ls", (15050, -29319, -36915));
   thread common_scripts\utility::play_sound_in_space("scn_iplane_hookup_rs", (15050, -29633, -36915));
   wait 4;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   common_scripts\utility::flag_set("start_explosion_breach");
   thread plane_explosion();
   thread show_inplane_debris();
   var_3 = var_3 common_scripts\utility::get_target_ent();
   thread common_scripts\utility::play_sound_in_space("scn_iplane_explosion", level.player.origin);
-  var_0 moveto(var_3.origin + (0, 0, 0), 6, 2, 2);
-  var_0 rotateto(var_3.angles, 6, 0, 4);
+  var_0 moveTo(var_3.origin + (0, 0, 0), 6, 2, 2);
+  var_0 rotateTo(var_3.angles, 6, 0, 4);
   var_0 waittill("movedone");
-  var_0 moveto(var_3.origin, 3);
+  var_0 moveTo(var_3.origin, 3);
   var_0 waittill("movedone");
   thread plane_sway(var_0);
 }
@@ -1330,7 +1330,7 @@ plane_sway(var_0) {
   var_2 = 5;
   var_3 = 6;
   level.rope_main_org rotatebylinked((-1 * var_2, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
-  var_0 moveto(var_0.origin - (var_1, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
+  var_0 moveTo(var_0.origin - (var_1, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
   var_0 rotatepitch(-1 * var_2, var_3, var_3 * 0.4, var_3 * 0.4);
   var_0 waittill("movedone");
   var_1 = var_1 * 2;
@@ -1340,12 +1340,12 @@ plane_sway(var_0) {
   for(;;) {
     var_3 = 6;
     level.rope_main_org rotatebylinked((var_2, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
-    var_0 moveto(var_0.origin + (var_1, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
-    var_0 rotateyaw(var_2, var_3, var_3 * 0.4, var_3 * 0.4);
+    var_0 moveTo(var_0.origin + (var_1, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
+    var_0 rotateYaw(var_2, var_3, var_3 * 0.4, var_3 * 0.4);
     var_0 waittill("movedone");
     level.rope_main_org rotatebylinked((-1 * var_2, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
-    var_0 moveto(var_0.origin - (var_1, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
-    var_0 rotateyaw(-1 * var_2, var_3, var_3 * 0.4, var_3 * 0.4);
+    var_0 moveTo(var_0.origin - (var_1, 0, 0), var_3, var_3 * 0.4, var_3 * 0.4);
+    var_0 rotateYaw(-1 * var_2, var_3, var_3 * 0.4, var_3 * 0.4);
     var_0 waittill("movedone");
   }
 }
@@ -1383,18 +1383,18 @@ enemy_plane_behind_skipto() {
   var_0 = common_scripts\utility::get_target_ent("enemy_plane");
   var_0.animname = "enemy_plane";
   var_0 maps\_anim::setanimtree();
-  var_1 = getent("fake_gun_fire", "targetname");
+  var_1 = getEnt("fake_gun_fire", "targetname");
   var_2 = var_1 maps\_utility::spawn_ai(1, 1);
   var_2 teleport(var_0.origin);
   common_scripts\utility::waitframe();
-  var_2 linkto(var_0, "tag_body", (0, 0, -100), (0, 0, 0));
+  var_2 linkTo(var_0, "tag_body", (0, 0, -100), (0, 0, 0));
   var_3 = var_0 common_scripts\utility::get_target_ent();
-  var_0 moveto(var_3.origin, 0.1);
-  var_0 rotateto(var_3.angles, 0.1);
+  var_0 moveTo(var_3.origin, 0.1);
+  var_0 rotateTo(var_3.angles, 0.1);
   var_0 waittill("movedone");
   var_3 = var_3 common_scripts\utility::get_target_ent();
-  var_0 moveto(var_3.origin, 0.1);
-  var_0 rotateto(var_3.angles, 0.1);
+  var_0 moveTo(var_3.origin, 0.1);
+  var_0 rotateTo(var_3.angles, 0.1);
   var_0 waittill("movedone");
   thread plane_sway(var_0);
   var_4 = getEntArray("ropes_hidden", "targetname");
@@ -1407,13 +1407,13 @@ hidden_rope_skipto() {
   var_0.angles = self.angles;
   self.animname = "rope";
   maps\_anim::setanimtree();
-  self linkto(level.rope_main_org);
+  self linkTo(level.rope_main_org);
   var_0 thread maps\_anim::anim_single_solo(self, "rope_fire");
 }
 
 friends_reaction_to_enemy_plane() {
-  level.mccoy_anim_org maps\_utility::anim_stopanimscripted();
-  level.kersey_anim_org maps\_utility::anim_stopanimscripted();
+  level.mccoy_anim_org maps\_utility::anim_stopanimScripted();
+  level.kersey_anim_org maps\_utility::anim_stopanimScripted();
   wait 1;
 }
 
@@ -1498,8 +1498,8 @@ sound_test() {
   level.player_plane_wind_04 = spawn("script_origin", (15334, -29406, -36912));
   level.player_plane_wind_05 = spawn("script_origin", (14652, -29569, -37098));
   level.player_plane_wind_06 = spawn("script_origin", (14652, -29415, -37098));
-  level.player_plane_engine_right linkto(level.plane_core);
-  level.player_plane_engine_left linkto(level.plane_core);
+  level.player_plane_engine_right linkTo(level.plane_core);
+  level.player_plane_engine_left linkTo(level.plane_core);
   wait 5.4;
   common_scripts\utility::flag_wait("player_activated_ramps_open");
   level.player setclienttriggeraudiozone("jungle_ghosts_plane_int_open", 4.0);
@@ -1532,12 +1532,12 @@ fx_climb_out_test() {
   var_0 = spawn("script_model", level.player.origin + (0, 0, 0));
   var_0 setModel("tag_origin");
   var_0.angles = var_0.angles + (0, 0, 90);
-  var_0 linkto(level.player_anim_origin);
-  level.player_anim_origin linkto(level.player);
+  var_0 linkTo(level.player_anim_origin);
+  level.player_anim_origin linkTo(level.player);
   var_1 = spawn("script_model", level.player.origin + (0, 0, 0));
   var_1 setModel("tag_origin");
   var_1.angles = var_1.angles + (0, 180, 180);
-  var_1 linkto(level.player_anim_origin);
+  var_1 linkTo(level.player_anim_origin);
   wait 2;
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = level.plane_core.origin + (100, 0, 0);
@@ -1546,7 +1546,7 @@ fx_climb_out_test() {
   playFXOnTag(common_scripts\utility::getfx("dirt_two"), var_1, "tag_origin");
   level.player_anim_origin.tags = [var_0, var_1];
   level.sound_org_four.origin = level.player.origin + (0, 50, -50);
-  level.sound_org_four linkto(level.player);
+  level.sound_org_four linkTo(level.player);
   var_3 = 0;
 
   for(;;) {
@@ -1577,7 +1577,7 @@ do_tarps() {
 
   foreach(var_2 in var_5) {
     var_2.animname = "taprs0_rock";
-    var_2 linkto(level.plane_core);
+    var_2 linkTo(level.plane_core);
     var_2 maps\_anim::setanimtree();
     var_2 thread maps\_anim::anim_loop_solo(var_2, "taprs0_anim");
   }
@@ -1586,13 +1586,13 @@ do_tarps() {
 do_rope_animation(var_0, var_1) {
   var_2 = maps\_utility::spawn_anim_model("rappel_rope", (0, 0, 0));
   var_2 hide();
-  var_2 linkto(self);
+  var_2 linkTo(self);
   var_2 show();
   maps\_anim::anim_single_solo(var_2, "rope_in_" + var_0);
   thread maps\_anim::anim_loop_solo(var_2, "rope_idle_" + var_0);
   common_scripts\utility::flag_wait("baddies_leave_plane");
   wait(var_1);
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   maps\_anim::anim_single_solo(var_2, "rope_out_" + var_0);
   var_2 delete();
 }
@@ -1601,18 +1601,18 @@ do_fx_plane_break() {
   wait 1.7;
   var_0 = spawn("script_model", level.plane_tail.origin + (-100, 0, 0));
   var_0.angles = var_0.angles + (0, 0, 180);
-  var_0 linkto(level.plane_tail);
+  var_0 linkTo(level.plane_tail);
   var_0 setModel("tag_origin");
   wait 1;
-  var_1 = getent("rip_apart_fx_ref00", "script_noteworthy");
-  var_2 = getent("rip_apart_fx_ref02", "script_noteworthy");
+  var_1 = getEnt("rip_apart_fx_ref00", "script_noteworthy");
+  var_2 = getEnt("rip_apart_fx_ref02", "script_noteworthy");
   var_3 = spawn("script_model", var_1.origin + (-100, 0, 0));
   var_3.angles = var_3.angles + (-90, 0, -90);
-  var_3 linkto(level.plane_core);
+  var_3 linkTo(level.plane_core);
   var_3 setModel("tag_origin");
   var_4 = spawn("script_model", var_2.origin + (-100, 0, 0));
   var_4.angles = var_4.angles + (-90, 0, 0);
-  var_4 linkto(level.plane_core);
+  var_4 linkTo(level.plane_core);
   var_4 setModel("tag_origin");
   thread fx_climb_out_test();
   wait 2.7;
@@ -1623,7 +1623,7 @@ do_fx_plane_break() {
   common_scripts\utility::waitframe();
   var_4 = spawn("script_model", var_2.origin + (310, 80, 300));
   var_4.angles = var_2.angles + (180, 0, 0);
-  var_4 linkto(level.plane_core);
+  var_4 linkTo(level.plane_core);
   var_4 setModel("tag_origin");
 }
 
@@ -1717,7 +1717,7 @@ fling_object() {
 
   for(var_14 = 1; var_14 < var_7; var_14++) {
     var_15 = var_6 + get_fling_forward(var_8, var_11, var_14) + get_fling_up(var_10, var_12, var_14);
-    self moveto(var_15, var_13);
+    self moveTo(var_15, var_13);
     wait 0.5;
   }
 
@@ -1897,7 +1897,7 @@ setup_plane_debris(var_0, var_1) {
 }
 
 start_f15_attack() {
-  var_0 = getent("f15_attacker", "targetname");
+  var_0 = getEnt("f15_attacker", "targetname");
   var_1 = getvehiclenode("f15_start_attack_node", "targetname");
   var_2 = getvehiclenode("f15_second_attack_node", "targetname");
   var_3 = getvehiclenode("f15_start_attack_node_1", "targetname");
@@ -1943,13 +1943,13 @@ do_f15_raise_and_attack(var_0, var_1, var_2) {
   var_6 = spawn("script_model", var_5.origin + (0, 0, -30));
   var_6 setModel("tag_origin");
   var_6.targetname = "f15_missiles";
-  var_5 linkto(var_6);
+  var_5 linkTo(var_6);
   var_6 rotateroll(-1800, randomfloatrange(4, 6));
 
   if(var_0.targetname == "f15_second_start_node_2" || var_0.targetname == "f15_start_attack_node_3") {
-    var_6 moveto(var_4[0].origin, randomfloatrange(5, 6), 1);
+    var_6 moveTo(var_4[0].origin, randomfloatrange(5, 6), 1);
   } else {
-    var_6 moveto(var_4[0].origin, randomfloatrange(2, 3), 0.5);
+    var_6 moveTo(var_4[0].origin, randomfloatrange(2, 3), 0.5);
   }
 
   var_5 = spawn("script_model", var_3 gettagorigin("tag_right_wingtip") - (0, 0, -40));
@@ -1960,13 +1960,13 @@ do_f15_raise_and_attack(var_0, var_1, var_2) {
   var_6 = spawn("script_model", var_5.origin + (0, 0, -30));
   var_6 setModel("tag_origin");
   var_6.targetname = "f15_missiles";
-  var_5 linkto(var_6);
+  var_5 linkTo(var_6);
   var_6 rotateroll(1800, randomfloatrange(4, 6));
 
   if(var_0.targetname == "f15_second_start_node_2" || var_0.targetname == "f15_start_attack_node_3") {
-    var_6 moveto(var_4[0].origin, randomfloatrange(5, 6), 1);
+    var_6 moveTo(var_4[0].origin, randomfloatrange(5, 6), 1);
   } else {
-    var_6 moveto(var_4[0].origin, randomfloatrange(2, 3), 0.5);
+    var_6 moveTo(var_4[0].origin, randomfloatrange(2, 3), 0.5);
   }
 
   wait 3;
@@ -1981,7 +1981,7 @@ plane_ramp_light() {
   var_1 = getEntArray("lower_ramp_light", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.bay_door_lower);
+    var_3 linkTo(level.bay_door_lower);
   }
 
   common_scripts\utility::flag_wait("player_activated_ramps_open");
@@ -2009,7 +2009,7 @@ do_ramp_light() {
     stopFXOnTag(level._effect["red_new_2"], var_0, "tag_origin");
 
     if(isDefined(var_0.target)) {
-      var_0 = getent(var_0.target, "targetname");
+      var_0 = getEnt(var_0.target, "targetname");
       continue;
     }
 
@@ -2030,13 +2030,13 @@ player_flap_sleeves_setup(var_0) {
   self.sleeve_flap_l.angles = self.angles + (0, 60, 0);
   self.sleeve_flap_l setModel("cnd_sleeve_flap_LE");
   self.sleeve_flap_l useanimtree(#animtree);
-  self.sleeve_flap_l linkto(level.vargas, "j_shoulder_le", (-5.5, 0, -5), (0, 0, 0));
+  self.sleeve_flap_l linkTo(level.vargas, "j_shoulder_le", (-5.5, 0, -5), (0, 0, 0));
   self.sleeve_flap_l.is_view_linked = 1;
   self.sleeve_flap_r = spawn("script_model", self.origin);
   self.sleeve_flap_r.angles = self.angles + (90, 90, 90);
   self.sleeve_flap_r setModel("cnd_sleeve_flap_ri");
   self.sleeve_flap_r useanimtree(#animtree);
-  self.sleeve_flap_r linkto(level.vargas, "j_shoulder_ri", (-4.5, 2, 5.8), (-30, 190, 0));
+  self.sleeve_flap_r linkTo(level.vargas, "j_shoulder_ri", (-4.5, 2, 5.8), (-30, 190, 0));
   self.sleeve_flap_r.is_view_linked = 1;
   player_flap_sleeves();
 }
@@ -2103,13 +2103,13 @@ _sleeves_flap_internal() {
 }
 
 spawn_trigger_wait_open_doors() {
-  var_0 = getent("ramp_button", "targetname");
+  var_0 = getEnt("ramp_button", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
-  var_2 = getent("button_model_on", "targetname");
+  var_2 = getEnt("button_model_on", "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("tag_origin");
-  var_4 = getent("button_model_off", "targetname");
+  var_4 = getEnt("button_model_off", "targetname");
   var_5 = spawn("script_model", var_4.origin);
   var_5 setModel("tag_origin");
   playFXOnTag(common_scripts\utility::getfx("red_small_front"), var_5, "tag_origin");
@@ -2130,30 +2130,30 @@ spawn_trigger_wait_open_doors() {
 }
 
 rotate_camera_pre_crash_one() {
-  var_0 = getent("org_view_roll", "targetname");
+  var_0 = getEnt("org_view_roll", "targetname");
   level.player playersetgroundreferenceent(var_0);
-  var_0 rotateto((0, 0, 0), 0.1);
+  var_0 rotateTo((0, 0, 0), 0.1);
   var_0 waittill("rotatedone");
 
   while(!common_scripts\utility::flag("ground_rotate_ref_off")) {
     var_1 = randomfloatrange(10, 12);
-    var_0 rotateto((0, 0, -5), var_1);
+    var_0 rotateTo((0, 0, -5), var_1);
     wait(var_1);
-    var_0 rotateto((0, 0, 5), var_1);
+    var_0 rotateTo((0, 0, 5), var_1);
     wait(var_1);
   }
 
-  var_0 rotateto((0, 0, 0), 0.3);
+  var_0 rotateTo((0, 0, 0), 0.3);
 }
 
 light_fx() {
   var_0 = 0;
   var_1 = 0;
   var_2 = 0;
-  var_3 = getent("light_inside", "targetname");
+  var_3 = getEnt("light_inside", "targetname");
 
   if(maps\_utility::is_gen4()) {
-    level.light_outside = getent("ng_outside_light", "targetname");
+    level.light_outside = getEnt("ng_outside_light", "targetname");
     level.light_outside setlightintensity(0);
   }
 

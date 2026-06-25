@@ -120,11 +120,11 @@ fixed_spawn_override(origin, yaw, node = undefined, force = 1) {
     self waittill(#"spawned_player");
 
     if(isDefined(node)) {
-      self setorigin(node.origin);
+      self setOrigin(node.origin);
       self setplayerangles(node.angles);
       self setgoal(node, force);
     } else {
-      self setorigin(origin);
+      self setOrigin(origin);
       self setplayerangles(angles);
       self setgoal(origin, force);
     }
@@ -159,7 +159,7 @@ function_7dc6049e(vehicle, seatindex = undefined) {
 }
 
 remove_bots(team) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!player istestclient()) {
@@ -198,7 +198,7 @@ remove_bot(bot) {
 }
 
 get_bots() {
-  players = getplayers();
+  players = getPlayers();
   return filter_bots(players);
 }
 
@@ -215,7 +215,7 @@ filter_bots(players) {
 }
 
 get_friendly_bots() {
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
   bots = [];
 
   foreach(player in players) {
@@ -230,7 +230,7 @@ get_friendly_bots() {
 }
 
 get_enemy_bots() {
-  players = getplayers();
+  players = getPlayers();
   bots = [];
 
   foreach(player in players) {
@@ -247,7 +247,7 @@ get_enemy_bots() {
 }
 
 function_a0f5b7f5(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
   bots = [];
 
   foreach(player in players) {
@@ -262,7 +262,7 @@ function_a0f5b7f5(team) {
 }
 
 get_bot_by_entity_number(entnum) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isbot(player)) {
@@ -466,7 +466,7 @@ update_loop() {
     self function_23c46f6e();
     self function_92b0ec6b();
 
-    if(!self isplayinganimscripted() && !self arecontrolsfrozen() && !self function_5972c3cf() && !self isinvehicle() && !self util::isflashed() && isDefined(self.sessionstate) && self.sessionstate == "playing") {
+    if(!self isplayinganimScripted() && !self arecontrolsfrozen() && !self function_5972c3cf() && !self isinvehicle() && !self util::isflashed() && isDefined(self.sessionstate) && self.sessionstate == "playing") {
       self bot_action::update();
       self thread bot_position::update(tacbundle);
       self bot_stance::update(tacbundle);
@@ -802,7 +802,7 @@ fwd_dot(point) {
   fwd = anglesToForward(angles);
   eye = self getEye();
   dir = point - eye;
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   dot = vectordot(fwd, dir);
   return dot;
 }
@@ -1479,7 +1479,7 @@ devgui_get_bots(host, botarg) {
 function_7090aa98() {
   targetentity = undefined;
   targetdot = undefined;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -1666,7 +1666,7 @@ bot_joinleave_loop() {
 function_301f229d(team) {
   var_9e7013f = [];
   var_52e61055 = [];
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -1803,8 +1803,8 @@ monitor_bot_team_population(maxallies, maxaxis) {
 
   while(true) {
     wait 3;
-    allies = getplayers(#"allies");
-    axis = getplayers(#"axis");
+    allies = getPlayers(#"allies");
+    axis = getPlayers(#"axis");
 
     if(allies.size > maxallies && remove_best_bot(allies)) {
       continue;
@@ -1821,12 +1821,12 @@ monitor_bot_team_population(maxallies, maxaxis) {
 }
 
 fill_balanced_teams(maxallies, maxaxis) {
-  allies = getplayers(#"allies");
+  allies = getPlayers(#"allies");
 
-  for(axis = getplayers(#"axis");
-    (allies.size < maxallies || axis.size < maxaxis) && add_balanced_bot(allies, maxallies, axis, maxaxis); axis = getplayers(#"axis")) {
+  for(axis = getPlayers(#"axis");
+    (allies.size < maxallies || axis.size < maxaxis) && add_balanced_bot(allies, maxallies, axis, maxaxis); axis = getPlayers(#"axis")) {
     waitframe(1);
-    allies = getplayers(#"allies");
+    allies = getPlayers(#"allies");
   }
 }
 
@@ -1837,14 +1837,14 @@ monitor_bot_population(maxfree) {
     return;
   }
 
-  for(players = getplayers(); players.size < maxfree; players = getplayers()) {
+  for(players = getPlayers(); players.size < maxfree; players = getPlayers()) {
     add_bot();
     waitframe(1);
   }
 
   while(true) {
     wait 3;
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size < maxfree) {
       add_bot();

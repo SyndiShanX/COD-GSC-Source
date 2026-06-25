@@ -308,7 +308,7 @@ function private function_c62829da(destination) {
       var_6c486d1a = destination.contentgroups[#"hash_3460aae6bb799a99"][0];
 
       if(isDefined(var_6c486d1a)) {
-        var_f6b2bc6f = getent(var_6c486d1a.targetname, "target");
+        var_f6b2bc6f = getEnt(var_6c486d1a.targetname, "target");
 
         if(isDefined(var_f6b2bc6f)) {
           return var_f6b2bc6f;

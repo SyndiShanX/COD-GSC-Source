@@ -581,7 +581,7 @@ function private function_65f0fe7f() {
   level endon(#"game_ended");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isalive(player) || player inlaststand()) {
         continue;
       }
@@ -605,10 +605,10 @@ function private function_8249279b() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     var_cf0783b8 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       var_cf0783b8[player getentitynumber()] = player;
     }
 
@@ -621,7 +621,7 @@ function private function_8249279b() {
         continue;
       }
 
-      playersinradius = getplayers(undefined, bomb.origin, 120);
+      playersinradius = getPlayers(undefined, bomb.origin, 120);
 
       foreach(player in playersinradius) {
         if(player istouching(bomb.trigger)) {
@@ -687,11 +687,11 @@ function function_f917644c() {
 }
 
 function function_277ec378(var_c18a13b5) {
-  globallogic_audio::function_61e17de0("dirtyBombRadExpand", getplayers(undefined, var_c18a13b5, 4500));
+  globallogic_audio::function_61e17de0("dirtyBombRadExpand", getPlayers(undefined, var_c18a13b5, 4500));
 }
 
 function function_334e317(var_c18a13b5) {
-  globallogic_audio::function_61e17de0("dirtyBombRadRecede", getplayers(undefined, var_c18a13b5, 4500));
+  globallogic_audio::function_61e17de0("dirtyBombRadRecede", getPlayers(undefined, var_c18a13b5, 4500));
 }
 
 function function_8e2fb040() {
@@ -934,7 +934,7 @@ function function_18b08e66() {
 
 function function_a9d8729c(dialogkey, origin, radius) {
   var_4b3fe4a6 = [];
-  nearbyplayers = getplayers(undefined, origin, radius);
+  nearbyplayers = getPlayers(undefined, origin, radius);
 
   foreach(player in nearbyplayers) {
     if(!array::contains(var_4b3fe4a6, player.team)) {
@@ -955,7 +955,7 @@ function function_93098bd9(dialogkey, team, origin, radius) {
     return;
   }
 
-  players = getplayers(team, origin, radius);
+  players = getPlayers(team, origin, radius);
 
   if(players.size > 0) {
     globallogic_audio::function_61e17de0(dialogkey, players);
@@ -1001,14 +1001,14 @@ function function_c5d8437d() {
   }
 
   if(!is_true(level.var_169e6bcb)) {
-    globallogic_audio::function_61e17de0("dirtyBombOnline", getplayers());
+    globallogic_audio::function_61e17de0("dirtyBombOnline", getPlayers());
     level.var_169e6bcb = 1;
     return;
   }
 
   if(level.var_96cdb906 > 1) {
-    globallogic_audio::function_61e17de0("dirtyBombActive" + level.var_2f418a15.size, getplayers());
-    globallogic_audio::function_61e17de0("dirtyBombRespawnEnabled", getplayers());
+    globallogic_audio::function_61e17de0("dirtyBombActive" + level.var_2f418a15.size, getPlayers());
+    globallogic_audio::function_61e17de0("dirtyBombRespawnEnabled", getPlayers());
   }
 }
 
@@ -1063,12 +1063,12 @@ function private function_b801b00c() {
 
 function private function_fb51b5a4() {
   self.trigger = spawn("trigger_radius", self.origin + (0, 0, 45), 0, 120, 90, 1);
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger triggerenable(1);
   self.trigger callback::on_trigger(&function_fcc87504);
   self.trigger setinvisibletoall();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player clientfield::get_player_uimodel("hudItems.uraniumCarryCount") > 0) {
       self.trigger setinvisibletoplayer(player, 0);
     }
@@ -1316,7 +1316,7 @@ function function_3b72c4b2(player) {
     if(isDefined(player)) {
       function_93098bd9("dirtyBombPrimedFriendly", player.team, self.origin, 4500);
       function_e43bca0f("dirtyBombPrimedEnemy", player.team, self.origin, 4500);
-      players = getplayers(player.team);
+      players = getPlayers(player.team);
 
       foreach(var_7b66d20c in players) {
         if(!isDefined(var_7b66d20c.var_b0a8d09c) && isalive(var_7b66d20c)) {
@@ -1419,12 +1419,12 @@ function function_a05584ae() {
   }
 
   if(var_a737309d == 1) {
-    globallogic_audio::function_61e17de0("dirtyBombOffline", getplayers());
+    globallogic_audio::function_61e17de0("dirtyBombOffline", getPlayers());
   } else if(var_a737309d > 1) {
-    globallogic_audio::function_61e17de0("dirtyBombOfflineMult", getplayers());
+    globallogic_audio::function_61e17de0("dirtyBombOfflineMult", getPlayers());
   }
 
-  globallogic_audio::function_61e17de0("dirtyBombRespawnDisabled", getplayers());
+  globallogic_audio::function_61e17de0("dirtyBombRespawnDisabled", getPlayers());
 }
 
 function function_b43466d5() {
@@ -1472,15 +1472,15 @@ function function_99c4c4e5() {
 
 function private function_6a9ca122() {
   self.trigger = spawn("trigger_radius_use", self.origin + (0, 0, 45), 0, 120, 90, 1);
-  self.trigger triggerignoreteam();
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger triggerIgnoreTeam();
+  self.trigger setCursorHint("HINT_NOICON");
   self.trigger triggerenable(1);
   self.trigger usetriggerignoreuseholdtime();
-  self.trigger sethintstring("MENU/PROMPT_DIRTY_BOMB_DETONATE");
+  self.trigger setHintString("MENU/PROMPT_DIRTY_BOMB_DETONATE");
   self.trigger callback::on_trigger(&function_2f5dd98c);
   self.trigger.bomb = self;
   self.var_dac45cd5 = spawn("trigger_radius", self.origin + (0, 0, 45), 0, 120, 90, 1);
-  self.var_dac45cd5 triggerignoreteam();
+  self.var_dac45cd5 triggerIgnoreTeam();
   self.var_dac45cd5 triggerenable(0);
   self.var_dac45cd5 callback::on_trigger(&function_43bfe93d);
   self.var_dac45cd5 setinvisibletoall();
@@ -1848,7 +1848,7 @@ function function_ad44b97e(player) {
   }
 
   if(isDefined(player.team) && isDefined(self.origin)) {
-    var_57fa318b = getplayers(player.team, self.origin, 600);
+    var_57fa318b = getPlayers(player.team, self.origin, 600);
 
     foreach(var_bcf15b4 in var_57fa318b) {
       if(!isPlayer(var_bcf15b4)) {
@@ -1923,7 +1923,7 @@ function function_1a29cdb0(winningteam) {
   if(!level.var_edac6118) {
     foreach(losingteam, _ in level.teams) {
       if(losingteam != winningteam) {
-        globallogic_audio::function_61e17de0("objLosing", getplayers(losingteam));
+        globallogic_audio::function_61e17de0("objLosing", getPlayers(losingteam));
       }
     }
 
@@ -1949,7 +1949,7 @@ function function_e2d09d87(team) {
 
   if(scorepercentage >= 0.75) {
     if(!isDefined(level.dirtyBombScore75[team])) {
-      globallogic_audio::function_61e17de0("dirtyBombScore75", getplayers(team));
+      globallogic_audio::function_61e17de0("dirtyBombScore75", getPlayers(team));
     }
 
     level.dirtyBombScore75[team] = 1;
@@ -1959,7 +1959,7 @@ function function_e2d09d87(team) {
 
   if(scorepercentage >= 0.5) {
     if(!isDefined(level.dirtyBombScore50[team])) {
-      globallogic_audio::function_61e17de0("dirtyBombScore50", getplayers(team));
+      globallogic_audio::function_61e17de0("dirtyBombScore50", getPlayers(team));
     }
 
     level.dirtyBombScore50[team] = 1;
@@ -2060,13 +2060,13 @@ function bombcountdown(player) {
 function function_91c39737(player, team) {
   origin = self.origin;
   damage = level.var_60e3f99c;
-  playsoundatposition("exp_dirty_bomb_explo", origin + (0, 0, 60));
+  playSoundAtPosition("exp_dirty_bomb_explo", origin + (0, 0, 60));
 
   if(isDefined(player)) {
     function_93098bd9("dirtyBombDetonatedFriendly", player.team, self.origin, 4500);
     function_e43bca0f("dirtyBombDetonatedEnemy", player.team, self.origin, 4500);
   } else {
-    globallogic_audio::function_61e17de0("dirtyBombDetonatedEnemy", getplayers(undefined, self.origin, 4500));
+    globallogic_audio::function_61e17de0("dirtyBombDetonatedEnemy", getPlayers(undefined, self.origin, 4500));
   }
 
   if(level.var_77720414 && isDefined(team)) {
@@ -2151,7 +2151,7 @@ function private function_6e23e4cb(var_f87ac426 = undefined) {
   if(isDefined(var_f87ac426)) {
     self setinvisibletoall();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player != var_f87ac426 && player.team == var_f87ac426.team) {
         self setvisibletoplayer(player);
       }

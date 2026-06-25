@@ -49,26 +49,26 @@ function function_3ffcd2d5() {
   adddebugcommand("<dev string:x38>");
   adddebugcommand("<dev string:x74>" + mapname + "<dev string:x86>");
 
-  car = getent("rotating_platform_car", "script_noteworthy");
-  platform = getent("rotating_platform", "targetname");
-  car_clip = getent("rotating_platform_car_clip", "targetname");
+  car = getEnt("rotating_platform_car", "script_noteworthy");
+  platform = getEnt("rotating_platform", "targetname");
+  car_clip = getEnt("rotating_platform_car_clip", "targetname");
   var_fd220054 = [];
-  var_fd220054[0] = getent("sn_light_car_01", "script_noteworthy");
-  var_fd220054[1] = getent("sn_light_car_02", "script_noteworthy");
+  var_fd220054[0] = getEnt("sn_light_car_01", "script_noteworthy");
+  var_fd220054[1] = getEnt("sn_light_car_02", "script_noteworthy");
 
   if(isDefined(car) && isDefined(platform)) {
     car setmovingplatformenabled(1, 0, 0);
-    car linkto(platform);
+    car linkTo(platform);
 
     foreach(var_9f2a8e14 in var_fd220054) {
       if(isDefined(var_9f2a8e14)) {
-        var_9f2a8e14 linkto(platform);
+        var_9f2a8e14 linkTo(platform);
       }
     }
 
     if(isDefined(car_clip)) {
       car_clip setmovingplatformenabled(1, 0, 0);
-      car_clip linkto(car);
+      car_clip linkTo(car);
     }
   } else if(!isDefined(platform)) {
     return;
@@ -77,14 +77,14 @@ function function_3ffcd2d5() {
   platform setmovingplatformenabled(1, 0, 0);
 
   while(isDefined(platform)) {
-    platform rotateyaw(360, getdvarint(#"hash_262b953a67597cc5", 15));
+    platform rotateYaw(360, getdvarint(#"hash_262b953a67597cc5", 15));
     wait getdvarint(#"hash_262b953a67597cc5", 15);
   }
 }
 
 function function_baa39f6d() {
-  var_8758aaea = getent("rotating_wheel_trig", "targetname");
-  var_8758aaea.wheel = getent("platform_wheel", "targetname");
+  var_8758aaea = getEnt("rotating_wheel_trig", "targetname");
+  var_8758aaea.wheel = getEnt("platform_wheel", "targetname");
   var_8758aaea callback::on_trigger(&function_bb08b9f6);
 }
 
@@ -152,7 +152,7 @@ function function_ed6e936b(var_626fec81, var_dcaf4972) {
   trigger endon(#"death");
   trigger.busy = 1;
   var_89c89228 = var_dcaf4972.origin;
-  playsoundatposition("amb_buzzer", var_89c89228);
+  playSoundAtPosition("amb_buzzer", var_89c89228);
   wait 5;
   trigger.busy = 0;
 }

@@ -51,7 +51,7 @@ _id_99FE(var_0) {
   var_5 = (var_2 + var_3) % 360;
   var_6 = (var_1 * cos(var_2), var_1 * sin(var_2), _id_0797::_id_693D()) + var_4;
   var_7 = (var_1 * cos(var_5), var_1 * sin(var_5), _id_0797::_id_693D()) + var_4;
-  var_8 = vectornormalize(var_7 - var_6);
+  var_8 = vectorNormalize(var_7 - var_6);
   var_7 = var_7 + var_8 * var_1;
   var_6 = var_6 - var_8 * var_1 * 2;
   var_9 = spawnStruct();
@@ -83,8 +83,8 @@ _id_89BD(var_0, var_1, var_2) {
   var_3 = (var_0[0], var_0[1], 0);
   var_4 = (var_1[0], var_1[1], 0);
   var_5 = (var_2[0], var_2[1], 0);
-  var_6 = vectornormalize(var_3 - var_4);
-  var_7 = vectornormalize(var_5 - var_4);
+  var_6 = vectorNormalize(var_3 - var_4);
+  var_7 = vectorNormalize(var_5 - var_4);
   var_8 = vectordot(var_6, var_7);
   return var_8 > 0;
 }
@@ -274,7 +274,7 @@ _id_E273(var_0, var_1, var_2) {
   var_5 = _id_DEAF(var_0, var_5);
   var_6 = var_4;
   var_7 = var_5;
-  var_3 = vectornormalize(var_5 - var_4);
+  var_3 = vectorNormalize(var_5 - var_4);
   var_4 = var_4 - var_3 * _id_6940() * 10;
   var_5 = var_5 + var_3 * 100000;
 
@@ -390,7 +390,7 @@ _id_AC5E(var_0) {
 
   if(isDefined(level._id_7E5E) && level._id_7E5E == "script_model") {
     self.angles = var_0.angles;
-    self playerlinkto(var_0, "");
+    self playerlinkTo(var_0, "");
     self playerhide();
   }
 
@@ -418,12 +418,12 @@ _id_72F7(var_0, var_1, var_2, var_3, var_4) {
   var_5.health = var_5.maxhealth;
   var_5._id_3841 = 1;
   var_5._id_E715 = var_0;
-  var_5._id_49C1 = vectornormalize(var_1 - var_0);
+  var_5._id_49C1 = vectorNormalize(var_1 - var_0);
   var_5.angles = vectortoangles(var_5._id_49C1);
   var_5._id_82CD = spawn("script_model", var_0);
   var_5._id_82CD setModel("veh8_mil_air_acharlie130_magma_rigid");
   var_5._id_82CD._id_3841 = 1;
-  var_5._id_82CD linkto(var_5, "", (0, 0, 0), (0, 0, 0));
+  var_5._id_82CD linkTo(var_5, "", (0, 0, 0), (0, 0, 0));
   var_5._id_B72B = [(32, 30, -500), (-32, 30, -500), (0, 30, -500), (16, 30, -500), (-16, 30, -500)];
   var_5._id_41E2 = 0;
 
@@ -448,7 +448,7 @@ _id_72DE(var_0, var_1) {
   self waittill("start_moving");
   self show();
   self._id_82CD show();
-  self moveto(var_0, var_1);
+  self moveTo(var_0, var_1);
   thread _id_8D5D(var_1, "c130");
   thread _id_72F8();
   self playLoopSound("br_ac130_lp");
@@ -529,7 +529,7 @@ _id_B197() {
   var_0 = anglesToForward(self.angles);
 
   for(;;) {
-    var_1 = vectornormalize(self._id_AEE7._id_E716 - self.origin);
+    var_1 = vectorNormalize(self._id_AEE7._id_E716 - self.origin);
     var_2 = vectordot(var_0, var_1) < 0;
 
     if(var_2) {
@@ -557,7 +557,7 @@ _id_8CEC(var_0) {
 
   for(;;) {
     var_2 = anglesToForward(self.angles);
-    var_3 = vectornormalize(self._id_AEE7._id_3392 - self.origin);
+    var_3 = vectorNormalize(self._id_AEE7._id_3392 - self.origin);
     var_4 = vectordot(var_2, var_3) < 0;
 
     if(var_4) {

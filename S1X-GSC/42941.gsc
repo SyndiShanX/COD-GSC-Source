@@ -28,14 +28,14 @@ getdronespawnpoint(var_0) {
   var_4.placementok = 1;
 
   if(common_scripts\utility::array_contains(var_0, "mp_terrace")) {
-    var_5 = getent("killstreak_orbit_initial", "targetname");
-    var_6 = getent("killstreak_orbit_lookat", "targetname");
+    var_5 = getEnt("killstreak_orbit_initial", "targetname");
+    var_6 = getEnt("killstreak_orbit_lookat", "targetname");
 
     if(isDefined(var_5) && isDefined(var_6)) {
       var_4.origin = var_5.origin;
       var_4.angles = vectortoangles(var_6.origin - var_5.origin);
     } else {
-      var_7 = common_scripts\utility::getstruct("mp_terrace_killstreak_start", "targetname");
+      var_7 = common_scripts\utility::getStruct("mp_terrace_killstreak_start", "targetname");
       var_4.origin = var_7.origin;
       var_4.angles = var_7.angles;
     }
@@ -244,9 +244,9 @@ setupcommonassaultdroneproperties(var_0, var_1, var_2, var_3) {
   thread maps\mp\killstreaks\_drone_common::playerwatchfordroneemp(var_0);
 
   if(var_0.mp_terrace) {
-    var_4 = getent("killstreak_orbit_origin", "targetname");
-    var_5 = getent("killstreak_orbit_initial", "targetname");
-    var_6 = getent("killstreak_orbit_lookat", "targetname");
+    var_4 = getEnt("killstreak_orbit_origin", "targetname");
+    var_5 = getEnt("killstreak_orbit_initial", "targetname");
+    var_6 = getEnt("killstreak_orbit_lookat", "targetname");
 
     if(isDefined(var_4) && isDefined(var_5) && isDefined(var_6)) {
       var_0 setorbiterents(self, var_4, var_5, var_6);
@@ -302,7 +302,7 @@ playerstartusingassaultvehicle(var_0) {
   var_1 maps\mp\_utility::playersaveangles();
 
   if(!var_0.mp_terrace) {
-    var_1 cameralinkto(var_0, "tag_origin");
+    var_1 cameralinkTo(var_0, "tag_origin");
   }
 
   var_1 remotecontrolvehicle(var_0);
@@ -403,7 +403,7 @@ playerdohunterkillerbehavior(var_0) {
   }
 
   var_5 = var_0.targetent.origin;
-  var_6 = vectornormalize(var_5 - var_4);
+  var_6 = vectorNormalize(var_5 - var_4);
   var_5 = var_4 + var_6 * 20000;
   var_7 = bulletTrace(var_4, var_5, 0, var_0, 0, 0, 1, 0, 0);
   var_8 = var_7["position"];
@@ -421,7 +421,7 @@ playerdohunterkillerbehavior(var_0) {
       var_0.camlinkent = spawn("script_model", var_11);
       var_0.camlinkent setModel("tag_player");
       var_0.camlinkent.angles = var_12;
-      var_0.camlinkent linkto(var_0, "tag_origin");
+      var_0.camlinkent linkTo(var_0, "tag_origin");
       waitframe();
       self playerlinkweaponviewtodelta(var_0.camlinkent, "tag_player", 1, 0, 0, 0, 0, 1);
       self playerlinkedsetviewznear(0);
@@ -476,7 +476,7 @@ playerdohunterkillerbehavior(var_0) {
 
 playerplaythrustersound(var_0) {
   var_1 = spawn("script_model", var_0.origin);
-  var_1 linkto(var_0, "tag_origin");
+  var_1 linkTo(var_0, "tag_origin");
   var_1 hide();
 
   foreach(var_3 in level.players) {
@@ -523,7 +523,7 @@ spawnmgturret(var_0) {
   var_8.angles = var_0.angles;
   var_8 setModel(var_2);
   var_8 setdefaultdroppitch(var_3);
-  var_8 linkto(var_0, var_4, var_5, var_6);
+  var_8 linkTo(var_0, var_4, var_5, var_6);
   var_8.owner = self;
   var_8.health = 99999;
   var_8 setCanDamage(0);
@@ -630,7 +630,7 @@ setuprockets(var_0) {
 
     self notify("ForceUncloak");
     earthquake(0.3, 1, var_0.origin, 500);
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     var_1 = var_0.mgturret gettagorigin("tag_flash");
     var_2 = var_0.targetent.origin;
 
@@ -641,7 +641,7 @@ setuprockets(var_0) {
     }
 
     var_4 = magicbullet("ugv_missile_mp", var_1 + var_3 / 10, var_2, self);
-    var_4 missile_settargetent(var_0.targetent);
+    var_4 missile_settargetEnt(var_0.targetent);
     var_4 missile_setflightmodedirect();
 
     if(var_0.hasaioption) {

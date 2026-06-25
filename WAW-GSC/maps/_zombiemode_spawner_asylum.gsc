@@ -366,9 +366,9 @@ zombie_think() {
 
 get_desired_origin() {
   if(isDefined(self.target)) {
-    ent = GetEnt(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     if(!isDefined(ent)) {
-      ent = getstruct(self.target, "targetname");
+      ent = getStruct(self.target, "targetname");
     }
 
     if(!isDefined(ent)) {
@@ -544,7 +544,7 @@ tear_into_building() {
       self zombie_history("tear_into_building -> animating");
 
       tear_anim = get_tear_anim(chunk);
-      self AnimScripted("tear_anim", self.origin, self.first_node.angles, tear_anim);
+      self animScripted("tear_anim", self.origin, self.first_node.angles, tear_anim);
       self zombie_tear_notetracks("tear_anim", chunk, self.first_node);
 
       if(level.script != "nazi_zombie_prototype") {
@@ -573,7 +573,7 @@ do_a_taunt() {
 
   if(freq >= randomint(100)) {
     anime = random(level._zombie_board_taunt);
-    self animscripted("zombie_taunt", self.origin, self.angles, anime);
+    self animScripted("zombie_taunt", self.origin, self.angles, anime);
     wait(getanimlength(anime));
   }
 }
@@ -599,16 +599,16 @@ should_attack_player_thru_boards() {
   if(attack && freq >= randomint(100)) {
     if(self.attacking_spot_index == 0) {
       if(randomint(100) > 50) {
-        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out);
+        self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out);
       } else {
-        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out);
+        self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out);
       }
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 2) {
-      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out);
+      self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out);
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 1) {
-      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out);
+      self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out);
       self window_notetracks("window_melee");
     }
   } else {
@@ -1376,7 +1376,7 @@ zombie_flame_damage(mod, player) {
 zombie_death_event(zombie) {
   zombie waittill("death");
   zombie thread zombie_eye_glow_stop();
-  playsoundatposition("death_vocals", zombie.origin);
+  playSoundAtPosition("death_vocals", zombie.origin);
   if(isDefined(zombie.attacker) && isPlayer(zombie.attacker) && level.script != "nazi_zombie_prototype") {
     if(!isDefined(zombie.attacker.killcounter)) {
       zombie.attacker.killcounter = 1;
@@ -1684,7 +1684,7 @@ zombie_eye_glow() {
   self.fx_eye_glow = spawn("script_model", self GetTagOrigin(linkTag));
   self.fx_eye_glow.angles = self GetTagAngles(linkTag);
   self.fx_eye_glow setModel(fxModel);
-  self.fx_eye_glow LinkTo(self, linkTag);
+  self.fx_eye_glow linkTo(self, linkTag);
 
   playFXOnTag(level._effect["eye_glow"], self.fx_eye_glow, fxTag);
 }
@@ -1707,7 +1707,7 @@ zombie_dog_eye_glow() {
     self.fx_eye_glow = spawn("script_model", self GetTagOrigin("TAG_EYE"));
     self.fx_eye_glow.angles = self GetTagAngles("TAG_EYE");
     self.fx_eye_glow setModel("tag_origin");
-    self.fx_eye_glow LinkTo(self, "TAG_EYE");
+    self.fx_eye_glow linkTo(self, "TAG_EYE");
     playFXOnTag(level._effect["eye_glow"], self.fx_eye_glow, "tag_origin");
   }
 }
@@ -1743,7 +1743,7 @@ do_zombie_rise() {
 
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   spots = getStructArray("zombie_rise", "targetname");
   spot = random(spots);
@@ -1764,13 +1764,13 @@ do_zombie_rise() {
   }
 
   self Hide();
-  self.anchor moveto(anim_org, .05);
+  self.anchor moveTo(anim_org, .05);
   self.anchor waittill("movedone");
 
   target_org = maps\_zombiemode_spawner_asylum::get_desired_origin();
   if(isDefined(target_org)) {
     anim_ang = VectorToAngles(target_org - self.origin);
-    self.anchor RotateTo((0, anim_ang[1], 0), .05);
+    self.anchor rotateTo((0, anim_ang[1], 0), .05);
     self.anchor waittill("rotatedone");
   }
 
@@ -1782,7 +1782,7 @@ do_zombie_rise() {
   level thread zombie_rise_death(self, spot);
   spot thread zombie_rise_fx(self);
 
-  self AnimScripted("rise", self.origin, self.angles, self get_rise_anim());
+  self animScripted("rise", self.origin, self.angles, self get_rise_anim());
   self animscripts\shared::DoNoteTracks("rise", ::handle_rise_notetracks, undefined, spot);
 
   self notify("rise_anim_finished");
@@ -1818,13 +1818,13 @@ zombie_rise_death(zombie, spot) {
   spot notify("stop_zombie_rise_fx");
 
   zombie.deathanim = zombie get_rise_death_anim();
-  zombie StopAnimScripted();
+  zombie StopanimScripted();
 }
 
 zombie_rise_fx(zombie) {
   self thread zombie_rise_dust_fx(zombie);
   self thread zombie_rise_burst_fx();
-  playsoundatposition("zombie_spawn", self.origin);
+  playSoundAtPosition("zombie_spawn", self.origin);
   zombie endon("death");
   self endon("stop_zombie_rise_fx");
   wait 1;

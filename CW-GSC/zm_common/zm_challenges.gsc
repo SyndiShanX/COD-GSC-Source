@@ -78,7 +78,7 @@ function private preinit() {
 
 function private function_74872db6() {
   if(getdvarint(#"hash_1ad35129069d0b0a", 0) && zm_utility::get_round_number() === 15) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::function_17ee4529(#"hash_4941bc4d64a8e38", 1, #"hash_5c49df97f4f82e12");
     }
   }
@@ -89,7 +89,7 @@ function private function_1f01cc3b() {
 
   if(getdvarint(#"hash_1ad35129069d0b0a", 0)) {
     if(zm_utility::get_round_number() >= 5) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player zm_stats::function_17ee4529(#"hash_5677d9133114a8ac", 1, #"hash_5c49df97f4f82e12");
       }
     }
@@ -97,7 +97,7 @@ function private function_1f01cc3b() {
 
   if(is_true(getgametypesetting(#"hash_5183877c20675325"))) {
     if(zm_utility::get_round_number() >= 5) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player zm_stats::function_17ee4529(#"hash_513bd1963a91e24d", 1, #"hash_735ace6b22542a65");
       }
     }
@@ -113,7 +113,7 @@ function private function_37c1c391(eventstruct) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player stats::function_dad108fa(#"hash_184d672dc3614f1f", 1);
     player zm_stats::function_7ec42fbf(#"hash_6d52ae8b2b73008b", 1);
     player contracts::increment_zm_contract(#"hash_5641c97526886d16");
@@ -2018,7 +2018,7 @@ function function_f6cfe355() {
   while(true) {
     level waittill(#"captured_control_point");
     var_6012e65d = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(zm_utility::is_player_valid(player, 0, 1) && !zm_utility::function_c4b020f8()) {
@@ -2074,7 +2074,7 @@ function function_4f4a3c59() {
 function function_874334a5() {
   self endon(#"disconnect");
   level flag::wait_till(#"main_quest_completed");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!is_true(player.var_4a996ccb)) {
@@ -2211,7 +2211,7 @@ function function_a9f6b8ef() {
   if(is_true(level.var_775a83a7)) {
     level flag::wait_till(#"hash_20afa38b1f1c339e");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::increment_challenge_stat(#"hash_63e962bd4021d604");
     }
 
@@ -2221,7 +2221,7 @@ function function_a9f6b8ef() {
   if(is_true(level.var_f937a06e)) {
     level flag::wait_till(#"hash_3814c5c6793e2b2d");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::increment_challenge_stat(#"hash_73bcca6cdadc5ddc");
     }
   }
@@ -2444,7 +2444,7 @@ function function_e71942eb() {
   level endon(#"end_game");
   waittillframeend();
   level flag::wait_till("all_players_spawned");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread function_eb3f0817();
@@ -2505,7 +2505,7 @@ function function_eb3f0817() {
 
 function on_game_playing(params) {
   level flag::wait_till("initial_fade_in_complete");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread function_1dd9fc03();

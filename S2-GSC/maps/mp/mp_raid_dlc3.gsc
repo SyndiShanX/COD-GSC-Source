@@ -726,28 +726,28 @@ vistatankvignettes() {
   function_01DF("usa_tank_sherman_mp");
   wait(5);
   maps\mp\_utility::func_3FA5("finished_intro_vignette_allies");
-  var_00 = getent("sherman_tank_vista01", "targetname");
+  var_00 = getEnt("sherman_tank_vista01", "targetname");
   var_01 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_01 setCanDamage(0);
   var_01 lib_0378::func_8D74("aud_npc_tank_enter");
   var_02 = spawn("script_model", var_01.var_116);
   var_02 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
   var_02 method_8449(var_01, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
-  var_00 = getent("sherman_tank_vista02", "targetname");
+  var_00 = getEnt("sherman_tank_vista02", "targetname");
   var_03 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_03 setCanDamage(0);
   var_03 lib_0378::func_8D74("aud_npc_tank_enter");
   var_02 = spawn("script_model", var_03.var_116);
   var_02 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
   var_02 method_8449(var_03, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
-  var_00 = getent("sherman_tank_vista03", "targetname");
+  var_00 = getEnt("sherman_tank_vista03", "targetname");
   var_04 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_04 setCanDamage(0);
   var_04 lib_0378::func_8D74("aud_npc_tank_enter");
   var_02 = spawn("script_model", var_04.var_116);
   var_02 setModel("usa_tank_sherman_m1919_bucket_turret_mp");
   var_02 method_8449(var_04, "TAG_TURRET_ATTACH2", (0, 0, 0), (0, 0, 0));
-  var_00 = getent("sherman_tank_vista04", "targetname");
+  var_00 = getEnt("sherman_tank_vista04", "targetname");
   var_05 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_05 setCanDamage(0);
   var_05 lib_0378::func_8D74("aud_npc_tank_enter");
@@ -777,7 +777,7 @@ vistatankvignettestankmove(param_00, param_01, param_02, param_03, param_04) {
   self attachpath(var_05);
   self startpath(var_05);
   wait(param_02);
-  var_06 = getent(param_03, "targetname");
+  var_06 = getEnt(param_03, "targetname");
   self method_825B(var_06.var_116);
   wait(3);
   for(;;) {
@@ -788,34 +788,34 @@ vistatankvignettestankmove(param_00, param_01, param_02, param_03, param_04) {
 
 vistatankvignettesfinalobjective() {
   level waittill("momentum_point_0_attackers");
-  var_00 = getent("flag01_tank01", "targetname");
+  var_00 = getEnt("flag01_tank01", "targetname");
   var_01 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_01 setCanDamage(0);
   var_01 thread vistatankvignettestankmove(var_00.var_1A2, 0, 2, "sherman01_target03", "game_over");
   var_01 lib_0378::func_8D74("aud_npc_tank_enter");
-  var_00 = getent("flag01_tank02", "targetname");
+  var_00 = getEnt("flag01_tank02", "targetname");
   var_02 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_02 setCanDamage(0);
   var_02 thread vistatankvignettestankmove(var_00.var_1A2, 3, 2, "sherman01_target03", "game_over");
   var_02 lib_0378::func_8D74("aud_npc_tank_enter");
   level waittill("momentum_point_1_attackers");
-  var_00 = getent("flag02_tank01", "targetname");
+  var_00 = getEnt("flag02_tank01", "targetname");
   var_03 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_03 setCanDamage(0);
   var_03 thread vistatankvignettestankmove(var_00.var_1A2, 0, 2, "sherman01_target03", "game_over");
   var_03 lib_0378::func_8D74("aud_npc_tank_enter");
   level waittill("momentum_point_2_attackers");
-  var_00 = getent("flag03_tank01", "targetname");
+  var_00 = getEnt("flag03_tank01", "targetname");
   var_04 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_04 setCanDamage(0);
   var_04 thread vistatankvignettestankmove(var_00.var_1A2, 0, 2, "sherman01_target04", "game_over");
   var_04 lib_0378::func_8D74("aud_npc_tank_enter");
-  var_00 = getent("flag03_tank02", "targetname");
+  var_00 = getEnt("flag03_tank02", "targetname");
   var_05 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_05 setCanDamage(0);
   var_05 thread vistatankvignettestankmove(var_00.var_1A2, 8, 2, "sherman01_target05", "game_over");
   var_05 lib_0378::func_8D74("aud_npc_tank_enter");
-  var_00 = getent("flag03_tank03", "targetname");
+  var_00 = getEnt("flag03_tank03", "targetname");
   var_06 = function_01E0(var_00.var_106, var_00.var_1A5, var_00.var_1C8, var_00.var_116, var_00.var_1D);
   var_06 setCanDamage(0);
   var_06 thread vistatankvignettestankmove(var_00.var_1A2, 4, 2, "sherman01_target05", "game_over");
@@ -901,7 +901,7 @@ func_6C8D() {
     var_09.var_1A7 = "allies";
     var_09 setcostumemodels(var_09.var_267E, "allies");
     var_0A = spawn("weapon_" + var_08, (0, 0, 0), 1);
-    var_0A linkto(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_0A linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_03[var_03.size] = var_0A;
     var_09 animscripts\notetracks_common::give_player_xp(var_07, var_01, var_02);
     var_05[var_05.size] = var_09;
@@ -916,7 +916,7 @@ func_6C8D() {
     var_09.var_1A7 = "allies";
     var_09 setcostumemodels(var_09.var_267E, "allies");
     var_0A = spawn("weapon_" + var_08 + var_0D, (0, 0, 0), 1);
-    var_0A linkto(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_0A linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_03[var_03.size] = var_0A;
     var_09 animscripts\notetracks_common::give_player_xp(var_07, var_01, var_02);
     var_05[var_05.size] = var_09;
@@ -931,7 +931,7 @@ func_6C8D() {
     var_09.var_1A7 = "axis";
     var_09 setcostumemodels(var_09.var_267E, "axis");
     var_0A = spawn("weapon_" + var_08, (0, 0, 0), 1);
-    var_0A linkto(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_0A linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_03[var_03.size] = var_0A;
     var_09 animscripts\notetracks_common::give_player_xp(var_11, var_01, var_02);
     var_0F[var_0F.size] = var_09;
@@ -1256,7 +1256,7 @@ removebridgedebris() {
 
             var_06 = var_05;
             var_06.var_8066 = var_06.var_116 + (0, 0, 2000);
-            var_06.hurttrigger = getent(var_06.var_1A2, "targetname");
+            var_06.hurttrigger = getEnt(var_06.var_1A2, "targetname");
             var_02.storeddata.clipdestruction[var_02.storeddata.clipdestruction.size] = var_06;
             continue;
           }
@@ -1292,7 +1292,7 @@ removebridgedebris() {
 handlebridgedebrispaths() {
   level waittill("connect_bridge_debris_paths");
   wait(0.25);
-  var_00 = getent("bridge_nodes_connect_clip", "targetname");
+  var_00 = getEnt("bridge_nodes_connect_clip", "targetname");
   var_00.var_116 = var_00.var_116 + (0, 0, 1024);
   wait(0.25);
   var_00 method_8060();
@@ -1410,9 +1410,9 @@ waitforbridgenote(param_00, param_01) {
     foreach(var_06 in var_02.debrisarray) {
       var_06 method_805B();
       var_06.var_A046 = 1;
-      var_06 moveto(var_06.var_8066, 0.25, 0, 0.1);
+      var_06 moveTo(var_06.var_8066, 0.25, 0, 0.1);
       if(!isDefined(var_04) && isDefined(var_06.var_1A2)) {
-        var_04 = getent(var_06.var_1A2, "targetname");
+        var_04 = getEnt(var_06.var_1A2, "targetname");
       }
     }
   }
@@ -1495,8 +1495,8 @@ turret_build_armored_train(param_00, param_01, param_02, param_03) {
 armoredtrainsetup() {
   waittillframeend;
   maps\mp\_utility::func_3FA5("prematch_done");
-  var_00 = getent("armored_train", "targetname");
-  var_01 = getent("train_engine_01", "targetname");
+  var_00 = getEnt("armored_train", "targetname");
+  var_01 = getEnt("train_engine_01", "targetname");
   var_01.var_EA4 = "mp_raids_tun_train_01";
   var_00.train_engine = var_01;
   var_02 = getEntArray("armored_train_turret", "targetname");
@@ -1515,11 +1515,11 @@ armoredtrainsetup() {
   }
 
   foreach(var_09 in var_03) {
-    var_09 linkto(var_00);
+    var_09 linkTo(var_00);
     var_00.towers[var_00.towers.size] = var_09;
   }
 
-  var_01 linkto(var_00);
+  var_01 linkTo(var_00);
   var_00 thread traincleanup();
   var_00 armoredtrainthink();
 }
@@ -1543,7 +1543,7 @@ turretdiscovertarget(param_00, param_01) {
   level endon("game_ended");
   param_00 endon("Armored_Train_Inactive");
   var_02 = (-335, 3775, 500);
-  var_03 = getent("tank_targets", "targetname");
+  var_03 = getEnt("tank_targets", "targetname");
   var_04 = 0;
   if(param_01 == 0) {
     var_04 = 1;
@@ -1626,15 +1626,15 @@ turretshoottarget(param_00) {
 }
 
 turretaimedatenemy() {
-  return isDefined(self getturrettargetent()) && targetwithinturretangles();
+  return isDefined(self getturrettargetEnt()) && targetwithinturretangles();
 }
 
 targetwithinturretangles() {
   var_00 = self gettagorigin("tag_aim");
   var_01 = self gettagangles("tag_aim");
-  var_02 = self getturrettargetent();
+  var_02 = self getturrettargetEnt();
   var_03 = var_02.var_116;
-  var_04 = vectornormalize(var_03 - var_00);
+  var_04 = vectorNormalize(var_03 - var_00);
   var_05 = anglesToForward(var_01);
   var_06 = vectordot(var_05, var_04);
   return var_06 >= 0.995;
@@ -1645,7 +1645,7 @@ setupkillcam(param_00) {
   param_00 endon("Armored_Train_Inactive");
   var_01 = spawn("script_model", (0, 0, 0));
   var_01 setModel("tag_origin");
-  var_01 linkto(self, "tag_flash", (-225, 0, 40), (5, 0, 0));
+  var_01 linkTo(self, "tag_flash", (-225, 0, 40), (5, 0, 0));
   var_01 setscriptmoverkillcam("script_entity");
   self.var_5A2C = var_01;
   var_01 thread cleanupkillcam(param_00);
@@ -1675,7 +1675,7 @@ armoredtrainthink() {
   level waittill("objective_A_complete");
   lib_0378::func_8D74("aud_train_start_moving");
   wait(5);
-  self moveto(self.var_116 + anglesToForward(self.var_1D) * var_00, 25, 4);
+  self moveTo(self.var_116 + anglesToForward(self.var_1D) * var_00, 25, 4);
   self.train_engine scriptmodelplayanim(self.train_engine.var_EA4);
   wait(13);
   self notify("Armored_Train_Inactive");
@@ -1717,8 +1717,8 @@ initbunkerturrets() {
   maps\mp\_utility::func_3FA5("prematch_done");
   var_00 = getEntArray("raid_tank_bunker", "targetname");
   foreach(var_02 in var_00) {
-    var_02 sethintstring("Press and hold X to use turret");
-    var_02.ownedturret = getent(var_02.var_1A2, "targetname");
+    var_02 setHintString("Press and hold X to use turret");
+    var_02.ownedturret = getEnt(var_02.var_1A2, "targetname");
     var_02 thread watchbunkerturretuse();
     if(isDefined(var_02.ownedturret)) {
       var_02.ownedturret setdamagecallbackon(1);

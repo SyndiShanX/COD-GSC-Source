@@ -119,7 +119,7 @@ exo_hover_update() {
   var_1 = self batterygetsize(level.hoverweapon);
 
   for(;;) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     var_2 = self getvelocity();
     var_3 = length2d(var_2);
     var_4 = 1.0;

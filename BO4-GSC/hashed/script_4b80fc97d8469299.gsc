@@ -278,12 +278,12 @@ pap_charging() {
 function_3f15613f() {
   if(level flag::get(#"hash_11d64d1f93c196cc") && !(isDefined(self.stub.pap_machine.var_b6d21cc2) && self.stub.pap_machine.var_b6d21cc2)) {
     str_prompt = zm_utility::function_d6046228(#"hash_546b9ae85f7a9448", #"hash_38d87fd576702a44");
-    self sethintstring(str_prompt);
+    self setHintString(str_prompt);
     return 1;
   }
 
   str_prompt = "";
-  self sethintstring(str_prompt);
+  self setHintString(str_prompt);
   return 0;
 }
 
@@ -317,12 +317,12 @@ function_dc380897() {
   self.vessel playSound(#"hash_8655fa14e357e9a");
   self.vessel playLoopSound(#"hash_3c00e3a927df9b2e");
   var_deb6871b = struct::get(self.vessel.target, "targetname");
-  self.vessel moveto(var_deb6871b.origin, 1.5);
+  self.vessel moveTo(var_deb6871b.origin, 1.5);
   self.vessel waittill(#"movedone");
   self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", 0);
   var_deb6871b.var_7944be4a = 0;
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       var_deb6871b.n_souls_required = 20;
       break;
@@ -361,7 +361,7 @@ function_dc380897() {
     wait 1;
     level notify(#"hash_39b6629ce957cce9");
     self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
-    self.vessel moveto(self.vessel.return_loc, 0.5);
+    self.vessel moveTo(self.vessel.return_loc, 0.5);
     self.vessel playSound(#"hash_1ae6116ea0aa080f");
     self.vessel stoploopsound();
     wait 0.5;

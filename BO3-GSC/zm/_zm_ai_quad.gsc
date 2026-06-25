@@ -133,17 +133,17 @@ function quad_location() {
   }
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
   self ghost();
-  self.anchor moveto(spot.origin, 0.05);
+  self.anchor moveTo(spot.origin, 0.05);
   self.anchor waittill("movedone");
   target_org = zombie_utility::get_desired_origin();
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
   if(isDefined(level.zombie_spawn_fx)) {
@@ -162,7 +162,7 @@ function quad_vox() {
   wait(5);
   quad_wait = 5;
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(distancesquared(self.origin, players[i].origin) > 1440000) {
         self playSound("zmb_quad_amb");
@@ -206,8 +206,8 @@ function quad_gas_explo_death() {
 }
 
 function quad_death_explo(origin, death_vars) {
-  playsoundatposition("zmb_quad_explo", origin);
-  players = getplayers();
+  playSoundAtPosition("zmb_quad_explo", origin);
+  players = getPlayers();
   zombies = getaiteamarray(level.zombie_team);
   for(i = 0; i < players.size; i++) {
     if(distance(origin, players[i].origin) <= death_vars["explo_radius_plr"]) {
@@ -236,7 +236,7 @@ function quad_gas_area_of_effect(origin, death_vars) {
   playFX(level._effect["quad_explo_gas"], origin);
   gas_time = 0;
   while(gas_time <= death_vars["gas_time"]) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       is_immune = 0;
       if(isDefined(level.quad_gas_immune_func)) {
@@ -251,7 +251,7 @@ function quad_gas_area_of_effect(origin, death_vars) {
     wait(1);
     gas_time = gas_time + 1;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     visionset_mgr::deactivate("overlay", "zm_ai_quad_blur", players[i]);
   }
@@ -263,7 +263,7 @@ function quad_trail() {
   self.fx_quad_trail = spawn("script_model", self gettagorigin("tag_origin"));
   self.fx_quad_trail.angles = self gettagangles("tag_origin");
   self.fx_quad_trail setModel("tag_origin");
-  self.fx_quad_trail linkto(self, "tag_origin");
+  self.fx_quad_trail linkTo(self, "tag_origin");
   zm_net::network_safe_play_fx_on_tag("quad_fx", 2, level._effect["quad_trail"], self.fx_quad_trail, "tag_origin");
 }
 
@@ -304,7 +304,7 @@ function quad_post_teleport() {
     self.fx_quad_trail = spawn("script_model", self gettagorigin("tag_origin"));
     self.fx_quad_trail.angles = self gettagangles("tag_origin");
     self.fx_quad_trail setModel("tag_origin");
-    self.fx_quad_trail linkto(self, "tag_origin");
+    self.fx_quad_trail linkTo(self, "tag_origin");
     zm_net::network_safe_play_fx_on_tag("quad_fx", 2, level._effect["quad_trail"], self.fx_quad_trail, "tag_origin");
   }
 }

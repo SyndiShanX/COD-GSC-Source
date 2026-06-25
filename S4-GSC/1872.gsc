@@ -1877,7 +1877,7 @@ _id_FF4A(var_0, var_1) {
   }
 
   var_6 = var_1 _id_6B11();
-  var_7 = vectornormalize(var_4 - var_3);
+  var_7 = vectorNormalize(var_4 - var_3);
   var_8 = vectordot(var_6, var_7);
 
   if(var_8 < var_2) {

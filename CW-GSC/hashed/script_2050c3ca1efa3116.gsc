@@ -194,13 +194,13 @@ function function_20cf5ee5() {
   while(true) {
     self.state = 1;
     self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_pungi_spike_down");
-    self.script_model moveto(self.origin + var_cae2bc5d, 0.15);
+    self.script_model moveTo(self.origin + var_cae2bc5d, 0.15);
     self.script_model waittill(#"movedone");
     self.script_model hide();
     wait 12;
     self.script_model show();
     self.state = 2;
-    self.script_model moveto(self.origin + var_16ddcf3, 0.15);
+    self.script_model moveTo(self.origin + var_16ddcf3, 0.15);
     self.script_model waittill(#"movedone");
     self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_pungi_spike_set");
     self.script_model namespace_83eb6304::function_3ecfde67("pungi_hint");
@@ -209,7 +209,7 @@ function function_20cf5ee5() {
     self thread function_1e690b43(0.15, 6);
     self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_pungi_spike_up");
     self.script_model namespace_83eb6304::function_3ecfde67("pungi_activate");
-    self.script_model moveto(self.origin, 0.15);
+    self.script_model moveTo(self.origin, 0.15);
     wait 6;
     self.script_model namespace_83eb6304::turnofffx("pungi_hint");
   }

@@ -214,7 +214,7 @@ function_7a850245(statname, value) {
 }
 
 function_62b271d8(statname, value) {
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(player in teammates) {
     if(!player function_f94325d3()) {
@@ -241,7 +241,7 @@ function_62b271d8(statname, value) {
 }
 
 function_b7f80d87(statname, value) {
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(player in teammates) {
     if(!player function_f94325d3()) {

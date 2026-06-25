@@ -42,7 +42,7 @@ tree_sniper() {
   self waittill("spawned", spawn);
 
   anim_node = getnode(self.target, "targetname");
-  anim_point = getent(anim_node.target, "targetname");
+  anim_point = getEnt(anim_node.target, "targetname");
 
   if(maps\_utility::spawn_failed(spawn)) {
     return;
@@ -78,7 +78,7 @@ do_climb(anim_point) {
 }
 
 tree_death(guy, anim_point) {
-  guy linkto(anim_point);
+  guy linkTo(anim_point);
 
   guy thread watch_for_fake_death();
 
@@ -250,7 +250,7 @@ helmet_eject() {
     return;
   }
 
-  forward = VectorNormalize(pos2 - pos1);
+  forward = vectorNormalize(pos2 - pos1);
   velocities = forward * RandomIntRange(600, 1000);
 
   helmet_model setModel(helmet);

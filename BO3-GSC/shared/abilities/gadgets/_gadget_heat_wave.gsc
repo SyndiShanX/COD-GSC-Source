@@ -87,7 +87,7 @@ function watch_entity_shutdown() {
 }
 
 function gadget_heat_wave_on_activate(slot, weapon) {
-  self playrumbleonentity("heat_wave_activate");
+  self playRumbleOnEntity("heat_wave_activate");
   self thread toggle_activate_clientfields();
   visionset_mgr::activate("visionset", "heatwave", self, 0.01, 0.1, 1.1);
   self thread heat_wave_think(slot, weapon);
@@ -157,7 +157,7 @@ function heat_wave_fx(origin, direction) {
   if(direction == (0, 0, 0)) {
     direction = (0, 0, 1);
   }
-  dirvec = vectornormalize(direction);
+  dirvec = vectorNormalize(direction);
   angles = vectortoangles(dirvec);
   fxorg = spawn("script_model", origin + (vectorscale((0, 0, -1), 30)), 0, angles);
   fxorg.angles = angles;
@@ -348,7 +348,7 @@ function update_last_burned_by(heatwave) {
 
 function heat_wave_burn_sound(shellshock_duration) {
   fire_sound_ent = spawn("script_origin", self.origin);
-  fire_sound_ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  fire_sound_ent linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   fire_sound_ent playLoopSound("mpl_heatwave_burn_loop");
   wait(shellshock_duration);
   if(isDefined(fire_sound_ent)) {

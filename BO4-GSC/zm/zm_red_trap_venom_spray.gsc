@@ -19,7 +19,7 @@ init() {
   clientfield::register("toplayer", "" + #"venom_spray_postfx", 16000, 1, "int");
   zm_traps::register_trap_basic_info("venom_spray", &trap_activate, &trap_audio);
   zm_traps::register_trap_damage("venom_spray", &trap_player_damage, &trap_damage);
-  t_trap = getent("venom_spray", "script_noteworthy");
+  t_trap = getEnt("venom_spray", "script_noteworthy");
   t_trap._trap_duration = 25;
   t_trap._trap_cooldown_time = 25;
   level.var_a19e2d89 = spawn("script_origin", (-873, 8877, 527));
@@ -28,7 +28,7 @@ init() {
 trap_activate() {
   level exploder::exploder("fxexp_trap_venom_switch");
   self thread zm_traps::trap_damage();
-  playsoundatposition(#"hash_1a3423b6a6b71330", level.var_a19e2d89.origin);
+  playSoundAtPosition(#"hash_1a3423b6a6b71330", level.var_a19e2d89.origin);
   level exploder::exploder("fxexp_trap_poison");
   level.var_a19e2d89 playLoopSound(#"zmb_venom_spray");
   level.var_7012847c = 1;
@@ -39,7 +39,7 @@ trap_activate() {
   level.var_a19e2d89 stoploopsound(0.5);
   self notify(#"trap_done");
   self thread trap_cooldown();
-  playsoundatposition(#"hash_a9fa517453baef3", level.var_a19e2d89.origin);
+  playSoundAtPosition(#"hash_a9fa517453baef3", level.var_a19e2d89.origin);
 }
 
 trap_cooldown() {

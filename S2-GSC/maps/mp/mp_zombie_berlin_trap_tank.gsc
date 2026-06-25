@@ -16,7 +16,7 @@ trap_tank(param_00) {
   }
 
   lib_0378::func_8D74("start_trap_tank", 1, var_01);
-  var_09 = getent("puddle_damage", "script_noteworthy");
+  var_09 = getEnt("puddle_damage", "script_noteworthy");
   var_09.var_9C92 = param_00;
   var_09.var_9CBB = "trap_tank";
   wait(0.3);

@@ -166,19 +166,19 @@ precacheFX() {
 }
 
 tunnel_light() {
-  lantern = getent("lantern", "script_noteworthy");
-  lght = getent("lamp_light", "targetname");
+  lantern = getEnt("lantern", "script_noteworthy");
+  lght = getEnt("lamp_light", "targetname");
 
   if(!isDefined(lght)) {
     return;
   }
-  lght linkto(lantern);
+  lght linkTo(lantern);
   lght setlightintensity(2.1);
 
   mdl = spawn("script_model", lantern.origin);
   mdl.angles = (90, 0, 0);
   mdl setModel("tag_origin");
-  mdl linkto(lantern);
+  mdl linkTo(lantern);
   playFXOnTag(level._effect["tunnel_light_fx"], mdl, "tag_origin");
 
   lantern thread monitor_lantern_dmg(mdl, lght);
@@ -220,7 +220,7 @@ monitor_lantern_dmg(mdl, lght) {
         self setModel("lights_tinhatlamp_off");
         mdl delete();
         mdl2 = spawn("script_model", self.origin);
-        mdl2 linkto(self);
+        mdl2 linkTo(self);
         mdl2 setModel("tag_origin");
         self thread light_zort(mdl2);
         maps\_utility::arcademode_assignpoints("arcademode_score_generic250", attacker);
@@ -254,11 +254,11 @@ mortarpits_fake_launch() {
 
 fake_launch(org) {
   targs = getStructArray("dirt_mortar", "targetname");
-  playsoundatposition(level.scr_sound["mortar_flash"], org.origin);
+  playSoundAtPosition(level.scr_sound["mortar_flash"], org.origin);
   playFX(level._effect["mortar_flash"], org.origin, anglesToForward(org.angles));
   wait(randomintrange(4, 7));
   targ = targs[randomint(targs.size)];
-  playsoundatposition("mortar_dirt", targ.origin);
+  playSoundAtPosition("mortar_dirt", targ.origin);
   playFX(level._effect["dirt_mortar"], targ.origin);
   earthquake(0.15, 2.5, targ.origin, 3000);
 }

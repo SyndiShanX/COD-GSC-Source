@@ -289,7 +289,7 @@ play_player_anim_outro(i, player, anim_node) {
   hands.origin = anim_node.origin;
   hands.angles = anim_node.angles;
 
-  player PlayerLinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
+  player PlayerlinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
   flag_set("player_ready_for_outro");
 
   setmusicstate("LEVEL_END");

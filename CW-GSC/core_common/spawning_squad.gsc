@@ -341,7 +341,7 @@ function function_a0bd2fd6(enabled) {
 }
 
 function function_279d5c68(team, enabled) {
-  team_players = getplayers(enabled);
+  team_players = getPlayers(enabled);
 
   foreach(team_player in team_players) {
     team_player function_e2ec8e07(0);
@@ -900,7 +900,7 @@ function function_d072f205() {
 function function_d95ba61f(origin, angles, var_92d9ac4b) {
   var_6e8e0d1a = var_92d9ac4b + (0, 0, 72) - origin;
   var_5bc46b67 = lengthsquared(var_6e8e0d1a);
-  var_b8a577cc = vectornormalize(var_6e8e0d1a);
+  var_b8a577cc = vectorNormalize(var_6e8e0d1a);
   forward = var_b8a577cc;
   var_8792667 = (0, 0, 1);
 

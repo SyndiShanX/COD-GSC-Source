@@ -488,7 +488,7 @@ createfxlogic() {
     for(var_19 = 0; var_19 < level.createfxent.size; var_19++) {
       var_4 = level.createfxent[var_19];
       var_20 = level.player getvieworigin();
-      var_21 = vectornormalize(var_4.v["origin"] - var_20);
+      var_21 = vectorNormalize(var_4.v["origin"] - var_20);
       var_22 = vectordot(var_9, var_21);
 
       if(var_22 < var_11) {
@@ -2558,7 +2558,7 @@ frame_selected() {
   var_3 = var_2 * (-1 * var_1);
   var_4 = level.player getEye();
   var_5 = var_4 - level.player.origin;
-  level.player setorigin(var_0 + var_3 - var_5);
+  level.player setOrigin(var_0 + var_3 - var_5);
 }
 
 clear_all_loopers() {

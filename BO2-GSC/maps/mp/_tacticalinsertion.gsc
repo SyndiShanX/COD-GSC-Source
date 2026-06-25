@@ -189,8 +189,8 @@ spawntacticalinsertion() {
   triggerheight = 64;
   triggerradius = 128;
   self.tacticalinsertion.friendlytrigger = spawn("trigger_radius_use", self.tacticalinsertion.origin + vectorscale((0, 0, 1), 3.0));
-  self.tacticalinsertion.friendlytrigger setcursorhint("HINT_NOICON", self.tacticalinsertion);
-  self.tacticalinsertion.friendlytrigger sethintstring(&"MP_TACTICAL_INSERTION_PICKUP");
+  self.tacticalinsertion.friendlytrigger setCursorHint("HINT_NOICON", self.tacticalinsertion);
+  self.tacticalinsertion.friendlytrigger setHintString(&"MP_TACTICAL_INSERTION_PICKUP");
 
   if(level.teambased) {
     self.tacticalinsertion.friendlytrigger setteamfortrigger(self.team);
@@ -200,8 +200,8 @@ spawntacticalinsertion() {
   self clientclaimtrigger(self.tacticalinsertion.friendlytrigger);
   self.tacticalinsertion.friendlytrigger.claimedby = self;
   self.tacticalinsertion.enemytrigger = spawn("trigger_radius_use", self.tacticalinsertion.origin + vectorscale((0, 0, 1), 3.0));
-  self.tacticalinsertion.enemytrigger setcursorhint("HINT_NOICON", self.tacticalinsertion);
-  self.tacticalinsertion.enemytrigger sethintstring(&"MP_TACTICAL_INSERTION_DESTROY");
+  self.tacticalinsertion.enemytrigger setCursorHint("HINT_NOICON", self.tacticalinsertion);
+  self.tacticalinsertion.enemytrigger setHintString(&"MP_TACTICAL_INSERTION_DESTROY");
   self.tacticalinsertion.enemytrigger setinvisibletoplayer(self);
 
   if(level.teambased) {

@@ -276,7 +276,7 @@ playfxatpoint(var_0) {
     var_7 = spawn("script_model", var_4);
     var_7 setModel("tag_origin");
     var_7.angles = (90, randomintrange(-180, 179), 0);
-    var_7 linkto(var_5);
+    var_7 linkTo(var_5);
     thread playlinkedsmokeeffect(scripts\engine\utility::getfx("signal_chest_drop_mover"), var_7);
     return;
   }

@@ -413,7 +413,7 @@ func_48E4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   var_0E = param_03;
   var_0F = param_04 - param_03;
-  param_02 = vectornormalize(param_02 - param_01);
+  param_02 = vectorNormalize(param_02 - param_01);
   var_10 = spawnfx(level.var_0611[param_00], param_01, param_02);
   if(!level.var_27F6) {
     var_10 method_80D4();
@@ -454,7 +454,7 @@ func_8834() {
 
   var_00 = undefined;
   if(isDefined(self.var_01A2)) {
-    var_01 = getent(self.var_01A2, "targetname");
+    var_01 = getEnt(self.var_01A2, "targetname");
     if(isDefined(var_01)) {
       var_00 = var_01.var_0116;
     }
@@ -615,8 +615,8 @@ func_8F21(param_00, param_01) {
   foreach(var_05 in var_02) {
     var_09 = func_A2B8(var_05.var_A265["origin"] - level.var_721C.var_0116);
     var_0A = func_A2B8(param_00 - level.var_721C.var_0116);
-    var_0B = vectornormalize(var_09);
-    var_0C = vectornormalize(var_0A);
+    var_0B = vectorNormalize(var_09);
+    var_0C = vectorNormalize(var_0A);
     var_05.var_32B1 = vectordot(var_0B, var_0C);
   }
 

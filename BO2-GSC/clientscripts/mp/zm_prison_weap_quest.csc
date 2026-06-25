@@ -46,13 +46,13 @@ tomahawk_rune_init() {
     level.wolf_bodies[j] = [];
 
     for(i = 0; i < level.a_wolf_structs.size; i++) {
-      level.wolf_heads[j][level.a_wolf_structs[i].script_parameters] = getent(j, level.a_wolf_structs[i].script_label, "targetname");
+      level.wolf_heads[j][level.a_wolf_structs[i].script_parameters] = getEnt(j, level.a_wolf_structs[i].script_label, "targetname");
       level.wolf_heads[j][level.a_wolf_structs[i].script_parameters] hide();
       level.wolf_heads[j][level.a_wolf_structs[i].script_parameters] useanimtree(#animtree);
-      level.wolf_bodies[j][level.a_wolf_structs[i].script_parameters] = getent(j, level.a_wolf_structs[i].script_friendname, "targetname");
+      level.wolf_bodies[j][level.a_wolf_structs[i].script_parameters] = getEnt(j, level.a_wolf_structs[i].script_friendname, "targetname");
       level.wolf_bodies[j][level.a_wolf_structs[i].script_parameters] hide();
       level.wolf_bodies[j][level.a_wolf_structs[i].script_parameters] useanimtree(#animtree);
-      level.wolf_runes[j][level.a_wolf_structs[i].script_parameters] = getent(j, level.a_wolf_structs[i].script_noteworthy, "targetname");
+      level.wolf_runes[j][level.a_wolf_structs[i].script_parameters] = getEnt(j, level.a_wolf_structs[i].script_noteworthy, "targetname");
     }
   }
 
@@ -242,7 +242,7 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
       m_hat = spawn(localclientnum, m_head gettagorigin("J_Head"), "script_model");
       m_hat setModel("c_zom_guard_hat");
       m_hat.angles = m_head.angles;
-      m_hat linkto(m_head, "j_head");
+      m_hat linkTo(m_head, "j_head");
       m_hat hide();
       m_head.hat = m_hat;
     } else
@@ -250,7 +250,7 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     m_head hide();
     m_head.angles = m_body gettagangles("J_Spine4");
-    m_head linkto(m_body, "j_spine4");
+    m_head linkTo(m_body, "j_spine4");
     m_body.head = m_head;
     level.wolf_bodies[localclientnum][fieldname] = m_body;
   }
@@ -277,7 +277,7 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     m_body hide();
     m_body.origin = self.origin;
     m_body.angles = self.angles;
-    m_body linkto(self, "tag_origin");
+    m_body linkTo(self, "tag_origin");
   }
 }
 
@@ -307,15 +307,15 @@ body_moveto_wolf(m_wolf, localclientnum) {
   vec_dir = m_wolf.origin - self.origin;
   vec_dir_scaled = vectorscale(vec_dir, 0.2);
   self.m_soul_fx_player.angles = vectortoangles(vec_dir);
-  self.m_soul_fx_player linkto(self);
+  self.m_soul_fx_player linkTo(self);
   move_fx = playFXOnTag(localclientnum, level._effect["soul_charge_start"], self.m_soul_fx_player, "tag_origin");
   self playSound(0, "evt_soulsuck_body");
-  self moveto(self.origin + vec_dir_scaled, 1.5, 1.5);
+  self moveTo(self.origin + vec_dir_scaled, 1.5, 1.5);
   self waittill("movedone");
   self clearanim(%root, 0.1);
   self setanimrestart(%ai_zombie_dreamcatch_shrink_a, 1, 0.2, 1);
   zombie_move_offset = anglesToForward(m_wolf.angles) * 36 + anglestoup(m_wolf.angles) * 0;
-  self moveto(m_wolf.origin + zombie_move_offset, 0.5, 0.5);
+  self moveTo(m_wolf.origin + zombie_move_offset, 0.5, 0.5);
   self waittill("movedone");
 
   if(!isDefined(self)) {
@@ -339,7 +339,7 @@ wolfhead_eat_aligned(body, localclientnum, direction) {
   self wolfhead_pre_eat_aligned(body, localclientnum, direction);
   body.origin = self gettagorigin("tag_mouth_fx");
   body.angles = self gettagangles("tag_mouth_fx");
-  body linkto(self, "tag_mouth_fx", (0, 0, 0), (0, 0, 0));
+  body linkTo(self, "tag_mouth_fx", (0, 0, 0), (0, 0, 0));
   self clearanim(%root, 0.1);
   body clearanim(%root, 0.1);
   n_anim_length = getanimlength(level.wolfhead_eat_anims[direction]);

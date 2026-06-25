@@ -40,9 +40,9 @@ spawn_func_menendez() {
 }
 
 init_doors() {
-  e_exit_door = getent("menendez_exit_door", "targetname");
-  e_exit_door_collision = getent(e_exit_door.target, "targetname");
-  e_exit_door_collision linkto(e_exit_door);
+  e_exit_door = getEnt("menendez_exit_door", "targetname");
+  e_exit_door_collision = getEnt(e_exit_door.target, "targetname");
+  e_exit_door_collision linkTo(e_exit_door);
 }
 
 skipto_intro() {
@@ -413,7 +413,7 @@ speech_vtols_arrive() {
 
 speech_vtol() {
   wait 1.8;
-  nd_vtol_stop_spot = getstruct("speech_vtol_stop", "script_noteworthy");
+  nd_vtol_stop_spot = getStruct("speech_vtol_stop", "script_noteworthy");
   exploder(27);
   level clientnotify("speech_done");
   rpc("clientscripts/yemen", "speech_crowd_delete");
@@ -427,9 +427,9 @@ speech_vtol() {
   level thread run_scene("vtol_pilot");
   veh_vtol waittill("goal");
   wait 0.5;
-  magicbullet("usrpg_magic_bullet_sp", getstruct("speech_rpg_start").origin, veh_vtol.origin - vectorscale((0, 0, 1), 32.0));
+  magicbullet("usrpg_magic_bullet_sp", getStruct("speech_rpg_start").origin, veh_vtol.origin - vectorscale((0, 0, 1), 32.0));
   wait 0.2;
-  magicbullet("usrpg_magic_bullet_sp", getstruct("speech_rpg_start").origin, veh_vtol.origin - (0, 50, -50));
+  magicbullet("usrpg_magic_bullet_sp", getStruct("speech_rpg_start").origin, veh_vtol.origin - (0, 50, -50));
   wait 2.6;
   stop_exploder(27);
   playFXOnTag(getfx("speech_vtol_exp"), veh_vtol, "tag_origin");

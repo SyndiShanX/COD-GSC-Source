@@ -24,7 +24,7 @@ main() {
   zm_round_spawning::register_archetype(#"zombie_electric", &function_5df3e3dd, &function_c7e59327, &function_27695a82, 5);
   zm_score::function_e5d6e6dd(#"zombie_electric", zombie_utility::get_zombie_var(#"zombie_score_kill"));
   zm_cleanup::function_cdf5a512(#"zombie", &function_a2f2a9a3);
-  level.var_621701e5 = array(getent("zombie_electric_spawner", "script_noteworthy"));
+  level.var_621701e5 = array(getEnt("zombie_electric_spawner", "script_noteworthy"));
   array::thread_all(level.var_621701e5, &spawner::add_spawn_function, &zm_behavior::function_57d3b5eb);
   level.var_1c921b2b = 0;
 
@@ -69,7 +69,7 @@ function_5df3e3dd(var_dbce0c44) {
 }
 
 function_c6959cf1() {
-  spawner = getent("zombie_electric_spawner", "script_noteworthy");
+  spawner = getEnt("zombie_electric_spawner", "script_noteworthy");
   return spawner;
 }
 

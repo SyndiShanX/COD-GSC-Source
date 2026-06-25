@@ -984,7 +984,7 @@ checkdistancetoobject(area, object, ignoreteam, ignoreent) {
 }
 
 get_closest_player_enemy() {
-  players = getplayers();
+  players = getPlayers();
   players = arraysort(players, self.origin);
 
   foreach(player in players) {
@@ -1011,7 +1011,7 @@ get_closest_player_ally() {
     return undefined;
   }
 
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
   players = arraysort(players, self.origin);
 
   foreach(player in players) {

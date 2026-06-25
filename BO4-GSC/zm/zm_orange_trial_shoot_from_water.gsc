@@ -28,7 +28,7 @@ on_begin() {
   callback::on_player_loadout_changed(&on_player_loadout_changed);
   level zm_trial::function_25ee130(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_9e0e99e1();
   }
 }
@@ -37,7 +37,7 @@ on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_dc0859e();
     player thread zm_trial_util::function_73ff0096();
   }

@@ -430,7 +430,7 @@ get_projectile_path() {
   var_00 = self.var_0116;
   wait 0.05;
   var_01 = self.var_0116;
-  return 10000 * vectornormalize(anglesToForward(vectortoangles(var_01 - var_00)));
+  return 10000 * vectorNormalize(anglesToForward(vectortoangles(var_01 - var_00)));
 }
 
 draw_destination() {
@@ -442,7 +442,7 @@ draw_destination() {
       break;
     }
 
-    var_02 = vectornormalize(anglesToForward(vectortoangles(var_01 - var_00)));
+    var_02 = vectorNormalize(anglesToForward(vectortoangles(var_01 - var_00)));
   }
 }
 

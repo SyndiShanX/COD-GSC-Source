@@ -97,12 +97,12 @@ function function_2f9d6aee(a_ents) {
 
 function function_7ccb07c6() {
   level endon(#"end_game");
-  var_6152b664 = getent("use_elec_switch", "targetname");
+  var_6152b664 = getEnt("use_elec_switch", "targetname");
   var_f5c1bd65 = struct::get("fuse_box_loc", "targetname");
   wait 1;
   level scene::init("p9_fxanim_zm_platinum_fuse_box_open_bundle");
   var_6152b664 setinvisibletoall();
-  level.var_7b6eae07 = getent("elec_switch", "script_noteworthy");
+  level.var_7b6eae07 = getEnt("elec_switch", "script_noteworthy");
   var_bd1ab5ba = level.var_7b6eae07 zm_unitrigger::function_fac87205(#"zombie/electric_switch", 50);
   level.var_7b6eae07 rotateroll(-90, 0.5);
   level.var_7b6eae07 playSound(#"hash_33440052dad5d98b");
@@ -352,15 +352,15 @@ function function_ce636e() {
 function function_4e0c00e9() {
   level flag::set(#"hash_63567177313a4f07");
   level.var_3dc80578 = util::spawn_model(#"p9_zm_platinum_fuse", level.fuse_box gettagorigin("tag_fuse_01"), level.fuse_box gettagangles("tag_fuse_01"));
-  level.var_3dc80578 linkto(level.fuse_box);
-  playsoundatposition(#"hash_52fca246f03a334c", level.var_3dc80578.origin);
+  level.var_3dc80578 linkTo(level.fuse_box);
+  playSoundAtPosition(#"hash_52fca246f03a334c", level.var_3dc80578.origin);
 }
 
 function function_f021f2da() {
   level flag::set(#"hash_1937be129b1e59eb");
   var_78afc843 = util::spawn_model(#"p9_zm_platinum_fuse", level.fuse_box gettagorigin("tag_fuse_02"), level.fuse_box gettagangles("tag_fuse_02"));
-  var_78afc843 linkto(level.fuse_box);
-  playsoundatposition(#"hash_52fca246f03a334c", var_78afc843.origin);
+  var_78afc843 linkTo(level.fuse_box);
+  playSoundAtPosition(#"hash_52fca246f03a334c", var_78afc843.origin);
 }
 
 function function_9f6ba259() {
@@ -374,14 +374,14 @@ function function_a2e9d398(var_6152b664) {
 
   iprintlnbold("<dev string:x88>");
 
-  var_6152b664 = getent("use_elec_switch", "targetname");
+  var_6152b664 = getEnt("use_elec_switch", "targetname");
 
   if(!level flag::get(#"hash_1d6357b2512a35e5")) {
     zm_unitrigger::unregister_unitrigger(level.var_7b6eae07.s_unitrigger);
   }
 
   var_6152b664 setvisibletoall();
-  var_6152b664 usetriggerrequirelookat();
+  var_6152b664 useTriggerRequireLookAt();
 
   iprintlnbold("<dev string:xa4>");
 }

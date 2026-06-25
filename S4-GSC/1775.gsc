@@ -117,7 +117,7 @@ _id_D74A(var_0, var_1) {
   var_2 = 0;
 
   foreach(var_4 in var_1) {
-    var_5 = scripts\engine\utility::getstruct(var_4);
+    var_5 = scripts\engine\utility::getStruct(var_4);
     level._id_3BE9._id_4828[var_0]._id_1189[var_2] = var_5;
     var_2++;
   }
@@ -140,7 +140,7 @@ _id_D7E2() {
     level._id_3BE9._id_96DE[var_2._id_0481] = var_2;
 
     if(isDefined(var_2.target)) {
-      var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
       if(isDefined(var_3._id_FFC5) && var_3._id_FFC5 == "content_destination") {
         var_2._id_4823 = var_3;
@@ -270,7 +270,7 @@ _id_E1E5(var_0, var_1, var_2, var_3, var_4) {
       break;
     }
 
-    var_6 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+    var_6 = scripts\engine\utility::getStruct(var_6.target, "targetname");
 
     if(!isDefined(var_6)) {
       break;
@@ -300,7 +300,7 @@ _id_E257(var_0, var_1, var_2) {
       break;
     }
 
-    var_4 = scripts\engine\utility::getstruct(var_4.target);
+    var_4 = scripts\engine\utility::getStruct(var_4.target);
 
     if(!isDefined(var_4)) {
       break;

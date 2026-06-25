@@ -166,7 +166,7 @@ alienNavTest() {
         }
       } else {
         alien ScrAgentSetGoalPos(level.goalposition);
-        alien ScrAgentSetGoalRadius(64);
+        alien ScrAgentSetgoalRadius(64);
         alien common_scripts\utility::waittill_any("goal_reached", "death");
       }
     }
@@ -635,7 +635,7 @@ remove_hives(hives_name_list) {
   hives_name_list = delete_already_removed_hives(hives_name_list);
 
   foreach(hive_name in hives_name_list) {
-    location_ent = getent(hive_name, "target");
+    location_ent = getEnt(hive_name, "target");
     level.stronghold_hive_locs = array_remove(level.stronghold_hive_locs, location_ent);
   }
 
@@ -645,7 +645,7 @@ remove_hives(hives_name_list) {
 delete_already_removed_hives(hives_name_list) {
   new_list = [];
   foreach(hive_name in hives_name_list) {
-    location_ent = getent(hive_name, "target");
+    location_ent = getEnt(hive_name, "target");
     if(isDefined(location_ent)) {
       new_list[new_list.size] = hive_name;
     }
@@ -660,7 +660,7 @@ getStartPointIndex() {
 }
 
 delete_intro_heli_collision() {
-  helibrush = GetEnt("helicoptercoll", "targetname");
+  helibrush = getEnt("helicoptercoll", "targetname");
   helibrush delete();
 }
 

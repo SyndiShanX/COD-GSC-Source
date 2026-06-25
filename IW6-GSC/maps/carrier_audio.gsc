@@ -117,7 +117,7 @@ aud_zodiac_to_sparrow_zone() {
   level.player setclienttriggeraudiozone("sparrow_run", 3);
   wait 1;
   level.aud_gunship_loc = spawn("script_origin", level.ac_130.origin);
-  level.aud_gunship_loc linkto(level.ac_130);
+  level.aud_gunship_loc linkTo(level.ac_130);
   level.aud_gunship_loc maps\_utility::sound_fade_in("scn_gunship_circling_pattern", 1, 0.5, 1);
   level waittill("circling_pattern_off");
   level.aud_gunship_loc maps\_utility::sound_fade_and_delete(7);
@@ -155,7 +155,7 @@ aud_carr_promotion_hsh() {
   wait 30.53;
   var_0 playSound("scn_carr_promotion_hsh");
   wait 2;
-  var_0 moveto((-707, 7493, 1300), 5);
+  var_0 moveTo((-707, 7493, 1300), 5);
   wait 30;
   var_0 delete();
 }
@@ -212,11 +212,11 @@ aud_deck_tugger() {
   thread aud_deck_jet_idle();
   var_0 = spawn("script_origin", (-565, 4811, 1542));
   var_0 playSound("scn_carr_deck_tugger");
-  var_0 moveto((-751, 4221, 1524), 2);
+  var_0 moveTo((-751, 4221, 1524), 2);
   wait 2;
-  var_0 moveto((-431, 4039, 1524), 2.7);
+  var_0 moveTo((-431, 4039, 1524), 2.7);
   wait 3;
-  var_0 moveto((-835, 4034, 1524), 3.2);
+  var_0 moveTo((-835, 4034, 1524), 3.2);
   wait 7;
   var_0 delete();
 }
@@ -241,17 +241,17 @@ aud_play_jets_zoomby() {
   thread aud_deck_siren();
   var_0 = spawn("script_origin", (-4738, 5784, 2187));
   var_0 playSound("carr_jetby_01");
-  var_0 moveto((5749, 2716, 2533), 2);
+  var_0 moveTo((5749, 2716, 2533), 2);
   wait 0.6;
   var_1 = spawn("script_origin", (-4799, 5024, 1762));
   var_1 playSound("carr_jetby_02");
-  var_1 moveto((4824, 2030, 2649), 2);
+  var_1 moveTo((4824, 2030, 2649), 2);
 }
 
 aud_deck_jet_catapult_01() {
-  var_0 = getent("anim_jet_launcher2", "targetname");
+  var_0 = getEnt("anim_jet_launcher2", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 4;
   var_1 playSound("elm_jet_catapult", "sounddone");
   var_1 waittill("sounddone");
@@ -260,9 +260,9 @@ aud_deck_jet_catapult_01() {
 }
 
 aud_deck_jet_catapult_02() {
-  var_0 = getent("anim_jet_launcher1", "targetname");
+  var_0 = getEnt("anim_jet_launcher1", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 7.5;
   var_1 playSound("elm_jet_catapult", "sounddone");
   var_1 waittill("sounddone");
@@ -271,12 +271,12 @@ aud_deck_jet_catapult_02() {
 }
 
 aud_wave2_ambient_jets() {
-  var_0 = getent("low_flyby_enemy", "targetname");
+  var_0 = getEnt("low_flyby_enemy", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
-  var_2 = getent("low_flyby_ally", "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("low_flyby_ally", "targetname");
   var_3 = spawn("script_origin", var_2.origin);
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   wait 15;
   var_1 playSound("carr_jetby_01", "sounddone");
   var_3 playSound("carr_jetby_02", "sounddone");
@@ -289,12 +289,12 @@ aud_wave2_ambient_jets() {
 }
 
 aud_wave3_ambient_jets() {
-  var_0 = getent("jet_dogfighter_enemy", "targetname");
+  var_0 = getEnt("jet_dogfighter_enemy", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
-  var_2 = getent("jet_dogfighter_ally", "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("jet_dogfighter_ally", "targetname");
   var_3 = spawn("script_origin", var_2.origin);
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_1 playSound("carr_jetby_01", "sounddone");
   var_3 playSound("carr_jetby_02", "sounddone");
   var_1 waittill("sounddone");
@@ -306,19 +306,19 @@ aud_wave3_ambient_jets() {
 }
 
 aud_carr_osprey_engines() {
-  var_0 = getent("taxing_osprey_clip", "targetname");
+  var_0 = getEnt("taxing_osprey_clip", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
-  var_2 = getent("taxing_osprey_clip", "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("taxing_osprey_clip", "targetname");
   var_3 = spawn("script_origin", var_2.origin);
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_1 playSound("scn_carr_osprey_engines");
   wait 33;
   var_1 stopsounds();
   var_3 playLoopSound("scn_carr_osprey_liftoff");
   common_scripts\utility::flag_wait("aud_osprey_takeoff");
   var_3 unlink(var_2);
-  var_3 moveto((176, 7154, 2016), 5);
+  var_3 moveTo((176, 7154, 2016), 5);
   wait 1;
   var_3 maps\_utility::sound_fade_and_delete(8);
   var_1 delete();
@@ -326,7 +326,7 @@ aud_carr_osprey_engines() {
 
 aud_carr_elevator_front() {
   var_0 = spawn("script_origin", level.front_elevator.origin);
-  var_0 linkto(level.front_elevator);
+  var_0 linkTo(level.front_elevator);
   var_0 playSound("amb_carr_deck_elevator_start");
   wait 0.08;
   var_0 playLoopSound("amb_carr_deck_elevator_loop");
@@ -348,7 +348,7 @@ aud_carr_osprey_doors() {
 aud_carr_osprey_loader(var_0) {
   wait 0.75;
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playSound("scn_osprey_loader", "sounddone");
   var_1 waittill("sounddone");
   waittillframeend;
@@ -364,7 +364,7 @@ jet_attack_1() {
   wait 2.8;
   var_0 = spawn("script_origin", (-881, 15679, 3129));
   var_0 playSound("carr_jetby_med_01", "sounddone");
-  var_0 moveto((1681, -14348, 4036), 7.5);
+  var_0 moveTo((1681, -14348, 4036), 7.5);
   var_0 waittill("sounddone");
   waittillframeend;
   var_0 delete();
@@ -374,7 +374,7 @@ jet_attack_2() {
   wait 3.4;
   var_0 = spawn("script_origin", (-1246, 19016, 3266));
   var_0 playSound("carr_jetby_med_02", "sounddone");
-  var_0 moveto((1999, -8523, 3147), 6);
+  var_0 moveTo((1999, -8523, 3147), 6);
   var_0 waittill("sounddone");
   waittillframeend;
   var_0 delete();
@@ -384,7 +384,7 @@ jet_attack_3() {
   wait 2.8;
   var_0 = spawn("script_origin", (-9220, 13672, 4443));
   var_0 playSound("carr_jetby_med_02", "sounddone");
-  var_0 moveto((11512, -2897, 3500), 6);
+  var_0 moveTo((11512, -2897, 3500), 6);
   var_0 waittill("sounddone");
   waittillframeend;
   var_0 delete();
@@ -420,7 +420,7 @@ aud_carr_player_cuts_rope() {
 
 aud_carr_elevator_rear() {
   var_0 = spawn("script_origin", level.rear_elevator.origin);
-  var_0 linkto(level.rear_elevator);
+  var_0 linkTo(level.rear_elevator);
   var_0 playSound("amb_carr_deck_elevator_start");
   wait 0.08;
   var_0 playLoopSound("amb_carr_deck_elevator_loop");
@@ -459,9 +459,9 @@ aud_osprey_controller_off() {
 }
 
 aud_zodiac_jet_catapult_01() {
-  var_0 = getent("anim_jet_launcher2", "targetname");
+  var_0 = getEnt("anim_jet_launcher2", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 17;
   var_1 playSound("elm_jet_catapult_zodiac", "sounddone");
   var_1 waittill("sounddone");
@@ -527,7 +527,7 @@ aud_carr_sparrow_zone_off() {
   wait 1;
   var_0 = spawn("script_origin", (5084, 6906, 3832));
   var_0 playSound("scn_carr_gunship_death");
-  var_0 moveto((-6829, 3888, 2126), 13);
+  var_0 moveTo((-6829, 3888, 2126), 13);
   wait 15;
   var_0 delete();
 }
@@ -562,7 +562,7 @@ aud_carr_victory_deck_checkpoint() {
   wait 1;
   var_0 = spawn("script_origin", (5084, 6906, 3832));
   var_0 playSound("scn_carr_gunship_death");
-  var_0 moveto((-6829, 3888, 2126), 12);
+  var_0 moveTo((-6829, 3888, 2126), 12);
   wait 15;
   var_0 delete();
 }
@@ -575,14 +575,14 @@ aud_gunship_loc() {}
 
 aud_carr_gunship_attack_run() {
   level.aud_gunship_loc2 = spawn("script_origin", level.ac_130.origin);
-  level.aud_gunship_loc2 linkto(level.ac_130);
+  level.aud_gunship_loc2 linkTo(level.ac_130);
   level.aud_gunship_loc2 playSound("scn_carr_gunship_attack_run");
 }
 
 aud_gunship_circling_pattern() {
   wait 1;
   level.aud_gunship_loc = spawn("script_origin", level.ac_130.origin);
-  level.aud_gunship_loc linkto(level.ac_130);
+  level.aud_gunship_loc linkTo(level.ac_130);
   level.aud_gunship_loc maps\_utility::sound_fade_in("scn_gunship_circling_pattern", 1, 0.5, 1);
   level waittill("circling_pattern_off");
   level.aud_gunship_loc maps\_utility::sound_fade_and_delete(7);
@@ -609,7 +609,7 @@ aud_carr_sparrow_105_hit(var_0) {
 
 aud_carr_gunship_killed() {
   var_0 = spawn("script_origin", level.ac_130.origin);
-  var_0 linkto(level.ac_130);
+  var_0 linkTo(level.ac_130);
   var_0 playSound("scn_gunship_killed_01");
   wait 0.47;
   var_0 playSound("scn_gunship_killed_02");
@@ -650,13 +650,13 @@ aud_zodiac_gunship_attack_105_fake(var_0) {
 aud_gunship_incoming_zodiac() {}
 
 aud_gunship_trans_4_105_01() {
-  var_0 = common_scripts\utility::getstruct("sparrow_trans_105_pre_01", "targetname");
+  var_0 = common_scripts\utility::getStruct("sparrow_trans_105_pre_01", "targetname");
   wait 2;
   thread common_scripts\utility::play_sound_in_space("scn_carr_deck_105mm", var_0.origin);
 }
 
 aud_gunship_trans_4_105_02() {
-  var_0 = common_scripts\utility::getstruct("sparrow_trans_105_pre_02", "targetname");
+  var_0 = common_scripts\utility::getStruct("sparrow_trans_105_pre_02", "targetname");
   wait 2;
   thread common_scripts\utility::play_sound_in_space("scn_carr_deck_105mm", var_0.origin);
 }
@@ -701,7 +701,7 @@ aud_tilt_barrels_01() {
   wait 1;
   var_0 = spawn("script_origin", (-690, 7353, 1514));
   var_0 playSound("carr_barrels_roll");
-  var_0 moveto((885, 7353, 1514), 4);
+  var_0 moveTo((885, 7353, 1514), 4);
   wait 8;
   var_0 delete();
 }
@@ -757,7 +757,7 @@ aud_tilt_sliding_guya() {
   var_0 = spawn("script_origin", (-687, 4425, 1486));
   var_1 = (515, 4403, 1474);
   wait 8;
-  var_0 moveto(var_1, 6);
+  var_0 moveTo(var_1, 6);
   var_0 playSound("scn_sliding_guya_1");
   wait 1.5;
   var_0 playSound("scn_sliding_guya_2");
@@ -775,7 +775,7 @@ aud_tilt_sliding_guyb() {
   var_0 = spawn("script_origin", (-371, 4390, 1495));
   var_1 = (332, 4437, 1500);
   wait 2;
-  var_0 moveto(var_1, 4);
+  var_0 moveTo(var_1, 4);
   var_0 playSound("scn_sliding_guyb_1");
   wait 1.5;
   var_0 playSound("scn_sliding_guyb_2");
@@ -786,12 +786,12 @@ aud_tilt_sliding_guyb() {
 }
 
 aud_carr_deck_tilt_osprey() {
-  var_0 = getent("tilt_osprey_clip", "targetname");
+  var_0 = getEnt("tilt_osprey_clip", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
-  var_2 = getent("tilt_osprey_clip", "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("tilt_osprey_clip", "targetname");
   var_3 = spawn("script_origin", var_2.origin);
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   wait 1.2;
   var_1 playSound("scn_carr_deck_tilt_osprey");
   var_3 playSound("carr_sliding_06");
@@ -807,33 +807,33 @@ aud_carr_exp_heli_exp() {
 }
 
 aud_carr_exp_heli_blade() {
-  var_0 = getent("e_heli_clip_rotor_blade", "targetname");
+  var_0 = getEnt("e_heli_clip_rotor_blade", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 0.6;
   var_1 playSound("scn_carr_exploding_heli_blades");
 }
 
 aud_carr_exp_heli_bounce() {
-  var_0 = getent("e_heli_clip_body", "targetname");
+  var_0 = getEnt("e_heli_clip_body", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 1.88;
   var_1 playSound("scn_carr_exploding_heli_bounce");
 }
 
 aud_carr_exp_heli_whoosh() {
-  var_0 = getent("e_heli_clip_body", "targetname");
+  var_0 = getEnt("e_heli_clip_body", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 3.05;
   var_1 playSound("scn_carr_exploding_heli_whoosh");
 }
 
 aud_carr_bg_rog_01() {
-  var_0 = getent("deck_tilt_bg_rog_01", "targetname");
+  var_0 = getEnt("deck_tilt_bg_rog_01", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playSound("scn_carr_rog_bg");
   wait 6;
   waittillframeend;
@@ -841,9 +841,9 @@ aud_carr_bg_rog_01() {
 }
 
 aud_carr_bg_rog_02() {
-  var_0 = getent("deck_tilt_bg_rog_02", "targetname");
+  var_0 = getEnt("deck_tilt_bg_rog_02", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playSound("scn_carr_rog_bg");
   wait 6;
   waittillframeend;
@@ -851,9 +851,9 @@ aud_carr_bg_rog_02() {
 }
 
 aud_carr_bg_rog_03() {
-  var_0 = getent("deck_tilt_bg_rog_03", "targetname");
+  var_0 = getEnt("deck_tilt_bg_rog_03", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playSound("scn_carr_rog_bg");
   wait 6;
   waittillframeend;
@@ -883,9 +883,9 @@ aud_tilt_front_deck() {
 aud_carr_exfil_heli(var_0) {
   var_0 vehicle_turnengineoff();
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_2 = spawn("script_origin", var_0.origin);
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_1 playLoopSound("carr_exfil_heli_drone");
   common_scripts\utility::flag_wait_all("player_can_exfil", "player_at_silenthawk");
   level.player playSound("scn_carr_plr_into_exfil");
@@ -906,7 +906,7 @@ aud_carr_exfil_rog() {
 aud_carr_exfil_bg_heli(var_0) {
   var_0 vehicle_turnengineoff();
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 2.78;
   var_1 playSound("scn_carr_exfil_bg_heli");
 }
@@ -961,7 +961,7 @@ ocean_line_emitter_logic(var_0, var_1, var_2) {
     }
 
     var_12 = pointonsegmentnearesttopoint(var_4.origin, var_5.origin, level.player.origin);
-    var_3 moveto(var_12, 0.01);
+    var_3 moveTo(var_12, 0.01);
 
     if(var_6 == 0) {
       var_3 playLoopSound(var_1);

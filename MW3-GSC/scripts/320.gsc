@@ -177,15 +177,15 @@ _id_1DEC() {
 
   if(isDefined(self.target)) {
     if(isDefined(level._id_1DF0)) {
-      var_0 = getent(self.target, "targetname");
+      var_0 = getEnt(self.target, "targetname");
 
       if(isDefined(var_0)) {
         var_0 delete();
       }
     } else {
-      self._id_1DF1 = getent(self.target, "targetname");
-      self._id_1DF1 usetriggerrequirelookat();
-      self._id_1DF1 setcursorhint("HINT_NOICON");
+      self._id_1DF1 = getEnt(self.target, "targetname");
+      self._id_1DF1 useTriggerRequireLookAt();
+      self._id_1DF1 setCursorHint("HINT_NOICON");
     }
   }
 
@@ -273,12 +273,12 @@ _id_1DF7() {
   var_3 = 0;
 
   if(isDefined(self.target)) {
-    var_2 = getent(self.target, "targetname");
+    var_2 = getEnt(self.target, "targetname");
   }
   if(isDefined(self.script_linkto)) {
     var_4 = common_scripts\utility::get_links();
-    var_5 = getent(var_4[0], "script_linkname");
-    self linkto(var_5);
+    var_5 = getEnt(var_4[0], "script_linkname");
+    self linkTo(var_5);
   }
 
   switch (self.destructible_type) {
@@ -294,7 +294,7 @@ _id_1DF7() {
 
   if(isDefined(var_2)) {
     var_3 = 99;
-    var_2 linkto(self);
+    var_2 linkTo(self);
     var_2 hide();
     var_1 = var_2 setcontents(0);
   }
@@ -365,8 +365,8 @@ _id_1DF9(var_0, var_1, var_2) {
 }
 
 oil_spill_think() {
-  self.end = common_scripts\utility::getstruct(self.target, "targetname");
-  self.start = common_scripts\utility::getstruct(self.end.target, "targetname");
+  self.end = common_scripts\utility::getStruct(self.target, "targetname");
+  self.start = common_scripts\utility::getStruct(self.end.target, "targetname");
   self.barrel = getclosestent(self.start.origin, getEntArray("explodable_barrel", "targetname"));
 
   if(isDefined(self.barrel)) {
@@ -374,7 +374,7 @@ oil_spill_think() {
     thread oil_spill_burn_after();
   }
 
-  self.extra = getent(self.target, "targetname");
+  self.extra = getEnt(self.target, "targetname");
   self setCanDamage(1);
 
   for(;;) {
@@ -416,7 +416,7 @@ oil_spill_burn_after() {
 }
 
 oil_spill_burn(var_0, var_1) {
-  var_2 = vectornormalize(var_1 - var_0);
+  var_2 = vectorNormalize(var_1 - var_0);
   var_3 = distance(var_0, var_1);
   var_4 = 8;
   var_5 = var_2 * var_4;
@@ -658,7 +658,7 @@ _id_1E07() {
   } else {
     var_2 = var_1.origin;
   }
-  var_3 = vectornormalize(self.origin - var_2);
+  var_3 = vectorNormalize(self.origin - var_2);
   var_3 = var_3 * 0.5 + randomfloat(1);
   self notify("death");
   playFX(level.breakables_fx["tincan"], self.origin, var_3);
@@ -682,7 +682,7 @@ _id_1E09() {
   } else {
     var_2 = var_1.origin;
   }
-  var_3 = vectornormalize(self.origin - var_2);
+  var_3 = vectorNormalize(self.origin - var_2);
 
   if(!isDefined(self._id_1E0A) && isPlayer(var_1)) {
     thread animscripts\death::_id_0ED0(var_3);
@@ -869,7 +869,7 @@ _id_1E0E() {
     return;
   }
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
 
     if(isDefined(var_1) && var_1.classname == "trigger_multiple") {
       var_1 thread _id_1E0D(self);
@@ -1027,7 +1027,7 @@ _id_1E17(var_0) {
 
 breakable_clip() {
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(var_0.classname == "script_brushmodel") {
       self.remove = var_0;
@@ -1221,7 +1221,7 @@ _id_1E1D(var_0) {
     return;
   }
   var_1 = spawn("script_origin", self.origin);
-  self linkto(var_1);
+  self linkTo(var_1);
   var_2 = self.origin + (randomfloat(10) - 5, randomfloat(10) - 5, randomfloat(10) + 5);
   var_3 = undefined;
 
@@ -1242,7 +1242,7 @@ _id_1E1D(var_0) {
     }
     var_1 rotatevelocity((250 * var_4, 250 * var_5, randomfloat(100) * var_6), 2, 0, 0.5);
   } else if(isDefined(self.type) && self.type == "plate") {
-    var_3 = vectornormalize(var_2 - var_0);
+    var_3 = vectorNormalize(var_2 - var_0);
     var_3 = var_3 * (125 + randomfloat(25));
 
     if(randomint(100) > 50) {
@@ -1251,7 +1251,7 @@ _id_1E1D(var_0) {
       var_1 rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
-    var_3 = vectornormalize(var_2 - var_0);
+    var_3 = vectorNormalize(var_2 - var_0);
     var_3 = var_3 * (60 + randomfloat(50));
 
     if(randomint(100) > 50) {

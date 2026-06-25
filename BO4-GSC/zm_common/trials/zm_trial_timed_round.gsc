@@ -37,7 +37,7 @@ on_begin(var_6325d314, var_52b8b3a2, n_time) {
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::close(player);
       player zm_trial_util::stop_timer();
@@ -56,7 +56,7 @@ function_8b87e57c(var_6325d314, n_grace, n_time_limit) {
   wait n_grace;
   level thread function_14a98a41(var_6325d314, n_time_limit);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::open(player);
       level.var_f995ece6 zm_trial_timer::set_timer_text(player, var_6325d314);
@@ -68,7 +68,7 @@ function_8b87e57c(var_6325d314, n_grace, n_time_limit) {
 
   wait n_time_limit;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::close(player);
       player zm_trial_util::stop_timer();
@@ -117,7 +117,7 @@ function_14a98a41(str_label, n_time_limit) {
 function_ff66b979() {
   level endon(#"end_of_round");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::close(player);
     }

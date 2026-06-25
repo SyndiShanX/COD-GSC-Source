@@ -447,8 +447,8 @@ function function_f59ac31d(door_struct) {
 function function_cd37b55f() {
   level thread namespace_d9b153b9::function_c318ce4a("slide_projector_1_light");
   level thread namespace_d9b153b9::function_c318ce4a("slide_projector_2_light");
-  level.projector_1_background = getent("projector_1_background", "targetname");
-  level.projector_2_background = getent("projector_2_background", "targetname");
+  level.projector_1_background = getEnt("projector_1_background", "targetname");
+  level.projector_2_background = getEnt("projector_2_background", "targetname");
   level.slide_projector_1_slides = getEntArray("slide_projector_1_slides", "targetname");
   level.slide_projector_2_slides = getEntArray("slide_projector_2_slides", "targetname");
   level function_4fc0917f(level.projector_1_background, 1);
@@ -493,8 +493,8 @@ function function_146b013() {
   var_fbfb5ea0 = struct::get("slide_projector_2_interact", "targetname");
   var_765442a.str = "slide_projector_1";
   var_fbfb5ea0.str = "slide_projector_2";
-  var_765442a.slide_projector = getent("slide_projector_1", "targetname");
-  var_fbfb5ea0.slide_projector = getent("slide_projector_2", "targetname");
+  var_765442a.slide_projector = getEnt("slide_projector_1", "targetname");
+  var_fbfb5ea0.slide_projector = getEnt("slide_projector_2", "targetname");
   var_765442a.slide_projector useanimtree("generic");
   var_fbfb5ea0.slide_projector useanimtree("generic");
   var_765442a.slides = level.slide_projector_1_slides;
@@ -639,17 +639,17 @@ function function_dc9da967() {
 function function_ec67c2bd() {
   var_b17fef8d = getEntArray("bunker_black_void_room_lights", "script_noteworthy");
   array::thread_all(var_b17fef8d, &namespace_d9b153b9::ent_cleanup);
-  slide_projector_1 = getent("slide_projector_1", "targetname");
+  slide_projector_1 = getEnt("slide_projector_1", "targetname");
   slide_projector_1 thread namespace_d9b153b9::ent_cleanup();
-  slide_projector_2 = getent("slide_projector_2", "targetname");
+  slide_projector_2 = getEnt("slide_projector_2", "targetname");
   slide_projector_2 thread namespace_d9b153b9::ent_cleanup();
 
   if(!isDefined(level.projector_1_background)) {
-    level.projector_1_background = getent("projector_1_background", "targetname");
+    level.projector_1_background = getEnt("projector_1_background", "targetname");
   }
 
   if(!isDefined(level.projector_2_background)) {
-    level.projector_2_background = getent("projector_2_background", "targetname");
+    level.projector_2_background = getEnt("projector_2_background", "targetname");
   }
 
   level.projector_1_background thread namespace_d9b153b9::ent_cleanup();
@@ -666,7 +666,7 @@ function function_ec67c2bd() {
   }
 
   array::thread_all(level.slide_projector_2_slides, &namespace_d9b153b9::ent_cleanup);
-  bunker_room_puzzle_door_model = getent("bunker_room_puzzle_door_model", "targetname");
+  bunker_room_puzzle_door_model = getEnt("bunker_room_puzzle_door_model", "targetname");
   bunker_room_puzzle_door_model thread namespace_d9b153b9::ent_cleanup();
 }
 
@@ -678,7 +678,7 @@ function function_f870d144() {
 
   while(true) {
     level flag::wait_till("bunker_puzzle_room_solved");
-    door_struct.door_left = getent("bunker_room_puzzle_door_model", "targetname");
+    door_struct.door_left = getEnt("bunker_room_puzzle_door_model", "targetname");
     door_interact util::create_cursor_hint("tag_origin", (0, 0, 0), #"hash_1cbb97e6dd4209d1");
     util::waittill_any_ents(door_interact, "trigger", level, "bunker_puzzle_room_unsolved");
 
@@ -1008,9 +1008,9 @@ function function_208bb35a() {
   self endon(#"stop_heartbeat");
 
   while(true) {
-    level.player playrumbleonentity("heartbeat_low");
+    level.player playRumbleOnEntity("heartbeat_low");
     wait 0.25;
-    level.player playrumbleonentity("heartbeat_low");
+    level.player playRumbleOnEntity("heartbeat_low");
     wait 0.75;
   }
 }
@@ -1197,7 +1197,7 @@ function function_c066544() {
 }
 
 function function_b332d74d(str_trigger_name, str_door_name, var_690e93a6) {
-  e_trigger = getent(str_trigger_name, "targetname");
+  e_trigger = getEnt(str_trigger_name, "targetname");
   e_trigger waittill(#"trigger");
   s_door = struct::get(str_door_name, "script_noteworthy");
   s_door = namespace_d9b153b9::door_setup(undefined, s_door, undefined, undefined, 1);
@@ -1219,7 +1219,7 @@ function function_b332d74d(str_trigger_name, str_door_name, var_690e93a6) {
   level.player clientfield::set_to_player("lerp_fov", 8);
   wait 0.5;
   thread namespace_b6fe1dbe::function_501657c8(linked_ent, var_690e93a6);
-  linked_ent playrumbleonentity("explosion_generic");
+  linked_ent playRumbleOnEntity("explosion_generic");
   level.player clientfield::set_to_player("lerp_fov", 0);
   waitframe(1);
 
@@ -1472,7 +1472,7 @@ function function_cae214f4(var_c79d614f, scene) {
 }
 
 function function_c07fb5b0() {
-  level thread scene::init_streamer(#"scene_pri_bunker_room_final", getplayers());
+  level thread scene::init_streamer(#"scene_pri_bunker_room_final", getPlayers());
   level flag::wait_till("flag_start_memory");
   level.player util::streamer_wait(undefined, 0, 0, undefined, #"scene_pri_bunker_room_final");
 }
@@ -1821,7 +1821,7 @@ function function_aad550cf(number) {
   var_f4204486 setModel("tag_origin");
   var_f4204486 util::create_cursor_hint("tag_origin", (0, 0, 0), #"hash_4aba34f692d535a6");
   var_f4204486.cursor_hint = 1;
-  window = getent("long_hall_window_0" + number, "targetname");
+  window = getEnt("long_hall_window_0" + number, "targetname");
   window clientfield::set("render_texture_switch_window", 2);
   util::waittill_any_ents(var_f4204486, "trigger", level, "lab_hallway_exited");
   var_f4204486 util::remove_cursor_hint();
@@ -1861,7 +1861,7 @@ function function_aad550cf(number) {
       teleport = struct::get("long_hall_player_teleport", "targetname");
       var_48587765 = level.player getplayerangles();
       new_angles = (var_48587765[0], var_48587765[1] + 180, var_48587765[2]);
-      level.player setorigin(teleport.origin);
+      level.player setOrigin(teleport.origin);
       level.player setplayerangles(new_angles);
       level flag::set("lab_hallway_teleport_into_lab");
     }
@@ -1892,7 +1892,7 @@ function function_5a11fdd5() {
   var_cc1a036 = 7;
 
   for(i = 1; i < var_cc1a036; i++) {
-    window = getent("long_hall_window_0" + i, "targetname");
+    window = getEnt("long_hall_window_0" + i, "targetname");
 
     if(isDefined(window)) {
       window delete();

@@ -346,7 +346,7 @@ destructible_car_explosion_animate() {
     }
   }
 
-  self moveto(end_origin, 0.3, 0.15);
+  self moveTo(end_origin, 0.3, 0.15);
   self clearclientflag(12);
 }
 
@@ -403,7 +403,7 @@ destructible_barrel_explosion(attacker, physics_explosion) {
   self notify("barrel_dead");
 
   if(isDefined(self.target)) {
-    dest_clip = getent(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     dest_clip delete();
   }
 

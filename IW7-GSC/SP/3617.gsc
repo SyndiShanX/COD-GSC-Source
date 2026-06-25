@@ -34,7 +34,7 @@ func_2013(var_0) {
   var_2 = scripts\engine\utility::spawn_tag_origin();
   var_2.origin = var_0.origin;
   var_2.objective_position = var_0;
-  var_2 linkto(var_2.objective_position);
+  var_2 linkTo(var_2.objective_position);
   level.var_2006.var_522B[level.var_2006.var_522B.size] = var_2;
   var_3 = var_2.objective_position func_201A();
   if(!isDefined(var_2.objective_position)) {
@@ -325,7 +325,7 @@ func_197D(var_0) {
     return;
   }
 
-  if(scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(scripts\asm\asm_bb::bb_isanimScripted()) {
     self givescorefortrophyblocks();
   }
 
@@ -665,10 +665,10 @@ func_1066C(var_0) {
 
     var_6 = self.var_378E[var_4].origin;
     var_7 = self.var_378E[var_5].origin;
-    var_8 = scripts\engine\utility::flatten_vector(vectornormalize(var_7 - var_6));
+    var_8 = scripts\engine\utility::flatten_vector(vectorNormalize(var_7 - var_6));
     var_9 = rotatevector(var_8, (0, -90, 0));
     if(length(var_9) == 0) {
-      var_9 = vectornormalize(var_1 - self.var_378E[var_3].origin);
+      var_9 = vectorNormalize(var_1 - self.var_378E[var_3].origin);
       if(length(var_9) == 0) {
         var_9 = (0, 0, 1);
       }
@@ -710,7 +710,7 @@ func_1066C(var_0) {
       }
 
       var_14 = distance(self.var_378E[var_3].origin, var_1);
-      var_15 = vectornormalize(self.var_378E[var_3].origin - var_1);
+      var_15 = vectorNormalize(self.var_378E[var_3].origin - var_1);
       if(self.var_378E[var_3].origin[2] < var_1[2]) {
         var_15 = scripts\engine\utility::flatten_vector(var_15);
       }
@@ -776,7 +776,7 @@ func_1066B(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = var_1;
   var_6 = var_0 + (0, 0, 2);
   var_7 = spawn("script_model", var_6);
@@ -831,7 +831,7 @@ func_378B(var_0, var_1, var_2) {
 
 func_3789(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
-  var_4 = vectornormalize(var_2 - var_1);
+  var_4 = vectorNormalize(var_2 - var_1);
   var_5 = distance(var_2, var_1);
   var_6 = var_1 + var_4 * var_5;
   var_7 = randomfloatrange(30, 70);
@@ -845,20 +845,20 @@ func_3789(var_0, var_1, var_2, var_3) {
   }
 
   var_0 ghost_killed_update_func((randomfloatrange(360, 900), 0, randomfloatrange(360, 900)), var_3 - 0.05);
-  var_0 moveto(var_8, var_3 / 4, 0, 0);
+  var_0 moveTo(var_8, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_9, var_3 / 4, 0, 0);
+  var_0 moveTo(var_9, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_10, var_3 / 4, 0, 0);
+  var_0 moveTo(var_10, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_11, var_3 / 4, 0, 0);
+  var_0 moveTo(var_11, var_3 / 4, 0, 0);
   wait(var_3 / 4);
   var_13 = 0.2;
   var_14 = randomfloat(5);
   var_0 ghost_killed_update_func((randomfloatrange(-40, 40), 0, randomfloatrange(-40, 40)), var_13 - 0.05);
-  var_0 moveto(var_11 + var_4 * var_14 / 2 + (0, 0, var_14), var_13 / 2, 0, var_13 / 2);
+  var_0 moveTo(var_11 + var_4 * var_14 / 2 + (0, 0, var_14), var_13 / 2, 0, var_13 / 2);
   wait(var_13 / 2);
-  var_0 moveto(var_11 + var_4 * var_14, var_13 / 2, var_13 / 2, 0);
+  var_0 moveTo(var_11 + var_4 * var_14, var_13 / 2, var_13 / 2, 0);
   wait(var_13 / 2);
   func_DFC4(var_0);
 }
@@ -1021,7 +1021,7 @@ func_CE2E(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.origin = self.origin;
   var_1.angles = self.angles;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 playSound(var_0, "sounddone");
   var_1 scripts\engine\utility::waittill_any("sounddone", "antigrav_force_delete");
   var_1 delete();

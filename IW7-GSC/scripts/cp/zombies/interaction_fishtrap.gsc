@@ -101,7 +101,7 @@ fish_kill_zombie(var_0, var_1) {
   var_0.anchor = spawn("script_origin", var_0.origin);
   var_0.anchor.angles = var_0.angles;
   thread spawn_zombie_fish_fx(var_0);
-  var_0 linkto(var_0.anchor);
+  var_0 linkTo(var_0.anchor);
   var_0.nocorpse = 1;
   var_0.marked_for_death = 1;
   var_0.customdeath = 1;

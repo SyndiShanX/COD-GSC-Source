@@ -47,13 +47,13 @@ attach_to_zipline_and_go() {
   self.zipline_ent = spawn("script_model", self.origin);
   self.zipline_ent setModel("tag_origin");
   self.zipline_ent.angles = self.angles;
-  self linkto(self.zipline_ent, "tag_origin");
+  self linkTo(self.zipline_ent, "tag_origin");
   var_0 = self.zipline.var_13EFC.origin + (0, 0, -84);
   var_1 = self.zipline.var_13EFB.origin + (0, 0, -84);
   var_2 = distance(var_0, var_1);
   var_3 = 500;
   var_4 = int(var_2 / var_3);
-  self.zipline_ent moveto(var_1, var_4, 2);
+  self.zipline_ent moveTo(var_1, var_4, 2);
   self.zipline.var_6393 = gettime() + int(var_4 * 1000);
 }
 

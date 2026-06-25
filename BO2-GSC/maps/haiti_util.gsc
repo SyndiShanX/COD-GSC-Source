@@ -243,7 +243,7 @@ camo_suit_think() {
   self ent_flag_init("camo_suit_on");
   self ent_flag_set("camo_suit_on");
   self.camo_sound_ent = spawn("script_origin", self.origin);
-  self.camo_sound_ent linkto(self, "tag_origin");
+  self.camo_sound_ent linkTo(self, "tag_origin");
   self playSound("fly_camo_suit_npc_on", self.origin);
   self.camo_sound_ent playLoopSound("fly_camo_suit_npc_loop", 0.5);
   self thread enemy_battle_think(1);
@@ -496,7 +496,7 @@ spawn_ambient_drones(trig_name, kill_trig_name, str_targetname, str_targetname_a
 play_fake_flyby() {
   wait 0.1;
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent linkto(self, "tag_body");
+  sound_ent linkTo(self, "tag_body");
   wait(randomfloatrange(1, 3));
   sound_ent playSound("evt_fake_flyby");
   self waittill("reached_end_node");
@@ -527,7 +527,7 @@ ambient_drone_die() {
   }
   if(!isDefined(self.delete_on_death) && isDefined(level._effect["fireball_trail_lg"])) {
     playFXOnTag(level._effect["fireball_trail_lg"], self, "tag_origin");
-    playsoundatposition("evt_amb_drone_explo", self.origin);
+    playSoundAtPosition("evt_amb_drone_explo", self.origin);
     wait 5;
 
     if(isDefined(self)) {
@@ -591,7 +591,7 @@ spawn_static_actors(str_structname, n_delay_max) {
     m_drone useanimtree(#animtree);
 
     if(!issubstr(s_static_loc.script_animation, "loop")) {
-      m_drone animscripted("drone_anim", m_drone.origin, m_drone.angles, level.scr_anim[s_static_loc.script_animation]);
+      m_drone animScripted("drone_anim", m_drone.origin, m_drone.angles, level.scr_anim[s_static_loc.script_animation]);
     } else {
       m_drone delay_thread(randomfloat(n_delay_max), ::loop_anim, level.drones.anims[s_static_loc.script_animation]);
     }
@@ -608,7 +608,7 @@ loop_anim(anim_loop) {
   self endon("death");
 
   while(isDefined(self)) {
-    self animscripted("drone_idle_anim", self.origin, self.angles, anim_loop);
+    self animScripted("drone_idle_anim", self.origin, self.angles, anim_loop);
     self waittillmatch("drone_idle_anim", "end");
   }
 }
@@ -628,11 +628,11 @@ door_think(str_targetname, str_flag_open, str_flag_close, v_slide, n_time) {
       a_m_link = getEntArray(m_door.target, "targetname");
 
       foreach(m_link in a_m_link) {
-        m_link linkto(m_door);
+        m_link linkTo(m_door);
       }
     }
 
-    m_door disconnectpaths();
+    m_door disconnectPaths();
   }
 
   if(isDefined(str_flag_open)) {
@@ -640,7 +640,7 @@ door_think(str_targetname, str_flag_open, str_flag_close, v_slide, n_time) {
   }
 
   foreach(m_door in a_m_doors) {
-    m_door moveto(m_door.origin + v_slide, n_time);
+    m_door moveTo(m_door.origin + v_slide, n_time);
     m_door connectpaths();
   }
 
@@ -648,8 +648,8 @@ door_think(str_targetname, str_flag_open, str_flag_close, v_slide, n_time) {
     flag_wait(str_flag_close);
 
     foreach(m_door in a_m_doors) {
-      m_door moveto(m_door.origin - v_slide, n_time);
-      m_door disconnectpaths();
+      m_door moveTo(m_door.origin - v_slide, n_time);
+      m_door disconnectPaths();
     }
   }
 }

@@ -80,7 +80,7 @@ function function_e16148c8() {
     }
     level flag::set("tram_moving");
     level flag::clear("tram_docked");
-    playsoundatposition("vox_maxis_gondola_pa_departing_0", (400, 675, 40));
+    playSoundAtPosition("vox_maxis_gondola_pa_departing_0", (400, 675, 40));
     level function_1ff56fb0("p7_fxanim_zm_castle_tram_car_02_b_bundle");
     level scene::play("p7_fxanim_zm_castle_tram_car_02_b_bundle");
     level flag::set("tram_cooldown");
@@ -91,7 +91,7 @@ function function_e16148c8() {
 }
 
 function function_9d4a523c(var_24ee4867) {
-  var_9fa821d4 = getent(var_24ee4867, "targetname");
+  var_9fa821d4 = getEnt(var_24ee4867, "targetname");
   foreach(player in level.activeplayers) {
     if(zm_utility::is_player_valid(player, undefined, 1) && player istouching(var_9fa821d4)) {
       return true;
@@ -188,15 +188,15 @@ function function_38a21d48() {
 }
 
 function function_350d7037(a_ents) {
-  level.var_423f296e = getent("ee_gondola_clip", "targetname");
+  level.var_423f296e = getEnt("ee_gondola_clip", "targetname");
   a_ents["tram_car_01"] thread function_38a21d48();
-  var_fd0bd09e = getent("castle_tram_2", "script_noteworthy");
+  var_fd0bd09e = getEnt("castle_tram_2", "script_noteworthy");
   if(isDefined(var_fd0bd09e)) {
-    var_fd0bd09e linkto(a_ents["tram_car_01"], "probe_jnt", (0, 0, 0));
+    var_fd0bd09e linkTo(a_ents["tram_car_01"], "probe_jnt", (0, 0, 0));
   }
-  var_abcc129 = getent("castle_tram", "script_noteworthy");
+  var_abcc129 = getEnt("castle_tram", "script_noteworthy");
   if(isDefined(var_abcc129)) {
-    var_abcc129 linkto(a_ents["tram_car_02"], "probe_jnt", (0, 0, 0));
+    var_abcc129 linkTo(a_ents["tram_car_02"], "probe_jnt", (0, 0, 0));
   }
 }
 
@@ -233,16 +233,16 @@ function function_7b56c646() {
       e_clip connectpaths();
     }
     foreach(e_gate in var_5cbc86c9) {
-      e_gate moveto(e_gate.open_pos, 1.5);
+      e_gate moveTo(e_gate.open_pos, 1.5);
       e_gate playSound("evt_tram_station_gate");
     }
     level flag::wait_till_clear("tram_docked");
     foreach(e_clip in var_b86004b6) {
       e_clip solid();
-      e_clip disconnectpaths();
+      e_clip disconnectPaths();
     }
     foreach(e_gate in var_5cbc86c9) {
-      e_gate moveto(e_gate.start_pos, 0.5);
+      e_gate moveTo(e_gate.start_pos, 0.5);
       e_gate playSound("evt_tram_station_gate");
     }
   }
@@ -266,16 +266,16 @@ function function_3fb91800() {
       e_clip connectpaths();
     }
     foreach(e_gate in var_5cbc86c9) {
-      e_gate moveto(e_gate.open_pos, 1.5);
+      e_gate moveTo(e_gate.open_pos, 1.5);
       e_gate playSound("evt_tram_station_gate");
     }
     level flag::wait_till_clear("player_tram_docked");
     foreach(e_clip in var_b86004b6) {
       e_clip solid();
-      e_clip disconnectpaths();
+      e_clip disconnectPaths();
     }
     foreach(e_gate in var_5cbc86c9) {
-      e_gate moveto(e_gate.start_pos, 0.5);
+      e_gate moveTo(e_gate.start_pos, 0.5);
       e_gate playSound("evt_tram_station_gate");
     }
   }
@@ -395,7 +395,7 @@ function timer_til_despawn(v_float, n_dist) {
   n_total_time = 0;
   self clientfield::set("powerup_fx", 1);
   while(12 > n_total_time) {
-    self rotateyaw(360, 1);
+    self rotateYaw(360, 1);
     wait(1);
     n_total_time = (gettime() - n_start_time) / 1000;
   }
@@ -411,8 +411,8 @@ function timer_til_despawn(v_float, n_dist) {
 }
 
 function weapon_trigger_update_prompt(player) {
-  self setcursorhint("HINT_WEAPON", self.stub.wpn);
-  self sethintstring(&"ZOMBIE_TRADE_WEAPON_FILL");
+  self setCursorHint("HINT_WEAPON", self.stub.wpn);
+  self setHintString(&"ZOMBIE_TRADE_WEAPON_FILL");
   return true;
 }
 
@@ -429,8 +429,8 @@ function function_97f09efd() {
         e_who.var_66e0478a++;
       }
       level.var_f0adc88a showpart("j_fuse_main");
-      e_who playrumbleonentity("zm_castle_interact_rumble");
-      playsoundatposition("vox_maxis_gondola_pa_called_0", (400, 675, 40));
+      e_who playRumbleOnEntity("zm_castle_interact_rumble");
+      playSoundAtPosition("vox_maxis_gondola_pa_called_0", (400, 675, 40));
       n_randy = randomint(100);
       if(isDefined(e_who.var_a1ba5103) && e_who.var_a1ba5103 && e_who.var_66e0478a >= 5) {
         level notify("player_tram_moving", e_who);
@@ -508,30 +508,30 @@ function function_5ea427bf(player) {
   if(isDefined(self.stub.var_5be78056) && self.stub.var_5be78056) {
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = self.stub.weapon_pickup;
-    self setcursorhint(cursor_hint, cursor_hint_weapon);
+    self setCursorHint(cursor_hint, cursor_hint_weapon);
   } else {
     if(level flag::get("tram_docked") || level flag::get("player_tram_docked")) {
       self.stub.hint_string = &"ZM_CASTLE_TRAM_DOCKED";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return false;
     }
     if(level flag::get("tram_moving")) {
       self.stub.hint_string = &"ZM_CASTLE_TRAM_MOVING";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return false;
     }
     if(level flag::get("tram_cooldown")) {
       self.stub.hint_string = &"ZM_CASTLE_TRAM_COOLDOWN";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return false;
     }
     if(zm_powerup_castle_tram_token::function_83ef471e(player)) {
       self.stub.hint_string = &"ZM_CASTLE_TRAM_CALL";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return true;
     }
     self.stub.hint_string = &"ZM_CASTLE_TRAM_REQUIRES_TOKEN";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return true;
   }
 }
@@ -553,7 +553,7 @@ function function_ccc738b1() {}
 
 function function_ce881a6() {
   self.sndent = spawn("script_origin", self.origin);
-  self.sndent linkto(self);
+  self.sndent linkTo(self);
   self.sndent playLoopSound("evt_tram_track");
   level waittill("hash_a9fe9747");
   if(isDefined(self.sndent)) {
@@ -567,7 +567,7 @@ function function_ce881a6() {
 
 function function_ccd0cc8e() {
   wait(5.4);
-  playsoundatposition("vox_maxis_gondola_pa_arriving_0", (400, 675, 40));
+  playSoundAtPosition("vox_maxis_gondola_pa_arriving_0", (400, 675, 40));
 }
 
 function function_57f998e3() {

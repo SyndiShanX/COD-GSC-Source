@@ -27,16 +27,16 @@ section_precache() {
 }
 
 section_post_inits() {
-  getent("loco_breach_door_obj", "targetname") hide();
-  getent("flag_loco_enter", "targetname") setmovingplatformtrigger();
+  getEnt("loco_breach_door_obj", "targetname") hide();
+  getEnt("flag_loco_enter", "targetname") setmovingplatformtrigger();
 }
 
 start_loco() {
   iprintln("locomotive");
   level.player setclienttriggeraudiozone("skyway_tunnel2_int", 2);
   common_scripts\utility::flag_set("flag_loco_ready");
-  var_0 = getent("ally1_start_loco1", "targetname");
-  var_1 = getent("player_start_loco1", "targetname");
+  var_0 = getEnt("ally1_start_loco1", "targetname");
+  var_1 = getEnt("player_start_loco1", "targetname");
   maps\skyway_util::player_start(var_1);
   thread maps\skyway_fx::fx_turnon_tunnel_lights_01();
   thread maps\skyway_fx::fx_turnon_loco_exterior_lights();
@@ -53,8 +53,8 @@ start_loco() {
 main_loco() {
   common_scripts\utility::array_call(level._train.cars["train_loco"].trigs, ::setmovingplatformtrigger);
   level.player setclienttriggeraudiozone("skyway_tunnel2_int", 2);
-  level.loco_breach_org = getent("loco_breach_org", "targetname");
-  level.loco_breach_anim_node = getent("vignette_vargasstandoff", "targetname");
+  level.loco_breach_org = getEnt("loco_breach_org", "targetname");
+  level.loco_breach_anim_node = getEnt("vignette_vargasstandoff", "targetname");
   level.slowmo_breach_player_speed = 0.2;
   level.loco_player_impulse_move_speed = 0.5;
   thread transient_load_outro();
@@ -144,8 +144,8 @@ start_loco_standoff() {
 
   thread standoff_sunlight();
   thread break_cockpit_glass();
-  var_0 = getent("ally1_start_loco1", "targetname");
-  var_1 = getent("player_start_loco1", "targetname");
+  var_0 = getEnt("ally1_start_loco1", "targetname");
+  var_1 = getEnt("player_start_loco1", "targetname");
   maps\skyway_util::player_start(var_1);
   level._ally forceteleport(var_0.origin, var_0.angles);
 }
@@ -157,10 +157,10 @@ main_loco_standoff() {
   if(level.start_point == "loco_standoff" || level.start_point == "loco_standoff_nomove") {
     enemy_setup();
     maps\skyway_util::setup_player_for_animated_sequence(1, 60, level.player.origin, level.player.angles, 1, undefined, "player_rig");
-    level.player_rig linkto(level.loco_breach_anim_node);
+    level.player_rig linkTo(level.loco_breach_anim_node);
     level.player_legs = maps\_utility::spawn_anim_model("player_legs");
-    level.player_legs linkto(level.loco_breach_anim_node);
-    level._ally linkto(level.loco_breach_anim_node);
+    level.player_legs linkTo(level.loco_breach_anim_node);
+    level._ally linkTo(level.loco_breach_anim_node);
     thread loco_bridge_rog_strike();
     loco_slide_logic(1);
   }
@@ -198,14 +198,14 @@ hide_end_bridge_geo() {
 }
 
 break_cockpit_glass() {
-  var_0 = getent("loco_navi_glass", "targetname");
-  var_1 = getent("loco_navi_glass_broken", "targetname");
+  var_0 = getEnt("loco_navi_glass", "targetname");
+  var_1 = getEnt("loco_navi_glass_broken", "targetname");
   var_1.animname = "loco_control_room_glass";
   var_1 maps\_anim::setanimtree();
   var_1 hide();
   level waittill("notify_break_cockpit_glass");
   thread maps\skyway_audio::loco_standoff_slowmo_sfx();
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   var_1 show();
   var_0 hide();
   var_1 setanim(level.scr_anim["loco_control_room_glass"]["loco_slide"]);
@@ -214,7 +214,7 @@ break_cockpit_glass() {
 
 loco_standoff_init_vars() {
   if(!isDefined(level.loco_breach_anim_node)) {
-    level.loco_breach_anim_node = getent("vignette_vargasstandoff", "targetname");
+    level.loco_breach_anim_node = getEnt("vignette_vargasstandoff", "targetname");
   }
 
   if(!isDefined(level.slowmo_breach_player_speed)) {
@@ -258,12 +258,12 @@ loco_breach_logic() {
   ally_setup();
   enemy_setup();
   props_setup();
-  getent("loco_breach_door_obj", "targetname") show();
-  getent("loco_breach_door", "targetname") hide();
+  getEnt("loco_breach_door_obj", "targetname") show();
+  getEnt("loco_breach_door", "targetname") hide();
   maps\skyway_util::waittill_trigger_activate_looking_at(level.loco_breach_org, "hint_breach_init", 54, undefined, undefined, 5);
   common_scripts\utility::flag_set("flag_stop_ambient_airbursts");
-  getent("loco_breach_door", "targetname") show();
-  getent("loco_breach_door_obj", "targetname") delete();
+  getEnt("loco_breach_door", "targetname") show();
+  getEnt("loco_breach_door_obj", "targetname") delete();
   level.player enablebreaching();
   level.player enableinvulnerability();
   thread maps\skyway_audio::sfx_loco_breach();
@@ -276,9 +276,9 @@ loco_breach_logic() {
     level.player setweaponammoclip(var_0, var_1);
   }
 
-  level._ally linkto(level.loco_breach_anim_node);
+  level._ally linkTo(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level._ally, "loco_breach");
-  level.player_legs linkto(level.loco_breach_anim_node);
+  level.player_legs linkTo(level.loco_breach_anim_node);
   level.player_legs show();
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.player_legs, "loco_breach");
   var_2 = 0.5;
@@ -287,10 +287,10 @@ loco_breach_logic() {
   var_3.origin = level.player.origin;
   var_3.angles = level.player.angles;
   var_3 hide();
-  var_3 linkto(level.loco_breach_anim_node);
+  var_3 linkTo(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(var_3, "loco_breach");
   level.player playerlinktoblend(var_3, "tag_player", var_2);
-  var_4 = getent("loco_breach_door", "targetname");
+  var_4 = getEnt("loco_breach_door", "targetname");
   var_4.animname = "loco_breach_door";
   var_4 maps\_anim::setanimtree();
   var_4 setanim(level.scr_anim["loco_breach_door"]["loco_breach"]);
@@ -302,7 +302,7 @@ loco_breach_logic() {
   level.player forcemovingplatformentity(level.loco_moving_platform);
   player_setup("player_rig", 1, 60, var_3.origin, var_3.angles);
   var_5 = var_3 getanimtime(level.scr_anim["player_rig"]["loco_breach"]);
-  level.player_rig linkto(level.loco_breach_anim_node);
+  level.player_rig linkTo(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.player_rig, "loco_breach");
   level.player_rig setanimtime(level.scr_anim["player_rig"]["loco_breach"], var_5);
   var_3 delete();
@@ -313,9 +313,9 @@ loco_breach_logic() {
   level.player disableinvulnerability();
   thread end_breach_player_death_logic("notify_player_can_die");
   wait_for_rpg_guy_to_appear(1.5);
-  level.end_breach_rpg_guy linkto(level.loco_breach_anim_node);
+  level.end_breach_rpg_guy linkTo(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.end_breach_rpg_guy, "loco_breach");
-  level.loco_breach_rpg_model linkto(level.loco_breach_anim_node);
+  level.loco_breach_rpg_model linkTo(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.loco_breach_rpg_model, "loco_breach");
   level.loco_breach_rpg_model show();
   level.end_breach_rpg_guy thread end_breach_success_rpg();
@@ -415,7 +415,7 @@ end_breach_success_rpg() {
   level notify("notify_start_loco_control_lights");
   wait 0.15;
   player_setup("player_rig", 0, 60);
-  level.player_rig linkto(level.loco_breach_anim_node);
+  level.player_rig linkTo(level.loco_breach_anim_node);
   level.player playerlinktoblend(level.player_rig, "tag_player", 0.3, 0, 0);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.player_rig, "loco_breach_blast");
   thread end_breach_player_unlink();
@@ -448,10 +448,10 @@ end_breach_success_rpg_rambo() {
   level notify("notify_start_loco_control_lights");
   wait 0.05;
   player_setup("player_rig", 0, 60);
-  level.player_rig linkto(level.loco_breach_anim_node);
+  level.player_rig linkTo(level.loco_breach_anim_node);
   level.player playerlinktoblend(level.player_rig, "tag_player", 0.35, 0, 0);
   earthquake(1.0, 1.0, level.player.origin, 2048);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   thread maps\skyway_util::player_sway_bump(level.timestep, 1.0, level.timestep, 1.0);
   thread maps\skyway_util::player_wind_bump(level.timestep, 1.0, level.timestep, 1.0);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.player_rig, "loco_breach_blast");
@@ -491,11 +491,11 @@ end_breach_rpg_guy_fire(var_0, var_1, var_2, var_3, var_4) {
 
   level.rpg_fx_model = maps\_utility::spawn_anim_model("loco_breach_RPG_fx");
   level.loco_breach_anim_node maps\_anim::anim_first_frame_solo(level.rpg_fx_model, var_3);
-  level.rpg_fx_model linkto(level.loco_breach_anim_node);
+  level.rpg_fx_model linkTo(level.loco_breach_anim_node);
   level.rpg_org = common_scripts\utility::spawn_tag_origin();
-  level.rpg_org linkto(level.rpg_fx_model, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.rpg_org linkTo(level.rpg_fx_model, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.rpg_fx_explosion = common_scripts\utility::spawn_tag_origin();
-  level.rpg_fx_explosion linkto(level.rpg_org, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.rpg_fx_explosion linkTo(level.rpg_org, "tag_origin", (0, 0, 0), (0, 0, 0));
   level waittill(var_0);
   thread player_rambo_rpg(distance2d(level.player.origin, level.rpg_org.origin));
   playFXOnTag(common_scripts\utility::getfx("loco_breach_smoke_geotrail_rpg"), level.rpg_org, "tag_origin");
@@ -509,7 +509,7 @@ end_breach_rpg_guy_fire(var_0, var_1, var_2, var_3, var_4) {
 }
 
 end_breach_rpg_explosion() {
-  level.rpg_fx_explosion linkto(level.loco_breach_anim_node);
+  level.rpg_fx_explosion linkTo(level.loco_breach_anim_node);
   playFXOnTag(common_scripts\utility::getfx("loco_breach_rpg_wall_impact"), level.rpg_fx_explosion, "tag_origin");
   wait 0.2;
   stopFXOnTag(common_scripts\utility::getfx("loco_breach_smoke_geotrail_rpg"), level.rpg_org, "tag_origin");
@@ -526,9 +526,9 @@ end_breach_rpg_explosion() {
 
 player_rambo_rpg(var_0) {
   level endon("flag_loco_breach_end");
-  var_1 = getent("rambo_RPG_collision", "targetname");
+  var_1 = getEnt("rambo_RPG_collision", "targetname");
   var_1 setCanDamage(1);
-  var_1 linkto(level.rpg_org, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(level.rpg_org, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_1 waittill("damage");
   thread end_breach_rpg_explosion();
   killfxontag(common_scripts\utility::getfx("loco_breach_smoke_geotrail_rpg"), level.rpg_org, "tag_origin");
@@ -555,10 +555,10 @@ player_rambo_rpg(var_0) {
 }
 
 end_breach_impulse_player_logic() {
-  var_0 = getent("end_breach_impulse_player_focus", "targetname");
+  var_0 = getEnt("end_breach_impulse_player_focus", "targetname");
   level._train.cars["train_loco"].body thread maps\_utility::play_sound_on_entity("scn_skyway_mtl_huge_stress_lr");
   level._train.cars["train_loco"].body thread maps\_utility::play_sound_on_entity("emt_skyway_mtl_groan");
-  level.end_breach_impulse_player_dir = vectornormalize(var_0.origin - level.player.origin);
+  level.end_breach_impulse_player_dir = vectorNormalize(var_0.origin - level.player.origin);
   var_1 = 0.8;
   level.end_breach_impulse_force = 50.0;
   thread end_breach_engines_sieze();
@@ -569,7 +569,7 @@ end_breach_impulse_player_logic() {
 end_breach_engines_sieze() {
   var_0 = level._train.cars["train_loco"].body;
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "j_spineupper", (0, 0, 0), (0, 0, 0));
   wait 0.5;
   level._allies[0] thread maps\_utility::smart_dialogue("skyway_hsh_engineshitholdon");
   wait 0.2;
@@ -577,7 +577,7 @@ end_breach_engines_sieze() {
   var_0 thread maps\_utility::play_sound_on_tag("scn_skyway_engine_explode", "tag_engine_blow_1");
   wait 0.1;
   earthquake(0.42, 0.8, level.player.origin, 3000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.1;
   level notify("notify_start_impulse");
   thread maps\skyway_util::player_sway_blendto(0.1, 1.0);
@@ -592,7 +592,7 @@ end_breach_engines_sieze() {
   var_0 thread maps\_utility::play_sound_on_tag("scn_skyway_engine_explode", "tag_engine_blow_2");
   wait 0.1;
   earthquake(0.5, 1.0, level.player.origin, 3000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread end_slide_effects(var_1);
   level.player disableweapons();
 }
@@ -613,7 +613,7 @@ end_breach_impulse_player_single(var_0, var_1, var_2, var_3) {
   thread push_player_impulse(var_1, var_2, var_3);
 
   for(;;) {
-    level.end_breach_impulse_player_dir = vectornormalize(var_0.origin - level.player.origin);
+    level.end_breach_impulse_player_dir = vectorNormalize(var_0.origin - level.player.origin);
     wait(level.timestep);
   }
 }
@@ -658,15 +658,15 @@ loco_slide_logic(var_0) {
   common_scripts\utility::array_call(level.end_control_enemies, ::linkto, level.loco_breach_anim_node);
 
   if(!isDefined(var_0)) {
-    level.end_enemies[0] linkto(level.loco_breach_anim_node);
-    level.end_enemies[1] linkto(level.loco_breach_anim_node);
+    level.end_enemies[0] linkTo(level.loco_breach_anim_node);
+    level.end_enemies[1] linkTo(level.loco_breach_anim_node);
   }
 
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.end_enemies[0], "loco_slide");
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.end_enemies[1], "loco_slide");
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.end_breach_rpg_guy, "loco_slide");
   var_1 = maps\_utility::spawn_anim_model("pt2_extinguisher");
-  var_1 linkto(level.loco_breach_anim_node);
+  var_1 linkTo(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(var_1, "loco_slide");
 
   if(!isDefined(var_0)) {
@@ -675,12 +675,12 @@ loco_slide_logic(var_0) {
 
   thread train_sync_end_stop_anim();
   thread maps\skyway_audio::skyway_checkmate_music();
-  var_2 = getent("loco_control_room_door", "targetname");
+  var_2 = getEnt("loco_control_room_door", "targetname");
   var_2.animname = "loco_control_room_door";
   var_2 maps\_anim::setanimtree();
   var_2 setanim(level.scr_anim["loco_control_room_door"]["loco_slide"]);
   level.loco_breach_anim_node thread maps\_anim::anim_single(level.end_control_enemies, "loco_slide");
-  level._boss linkto(level.loco_breach_anim_node);
+  level._boss linkTo(level.loco_breach_anim_node);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level._boss, "loco_slide");
   var_3 = 0.2;
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.player_rig, "loco_slide");
@@ -758,7 +758,7 @@ handle_revolver_bullet_fiction() {
 
   while(var_1 > var_0) {
     wait(randomfloatrange(0.28, 0.32));
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     playFXOnTag(common_scripts\utility::getfx("magnum_flash"), var_2, "tag_origin");
     level.player playSound("weap_mag44_fire_plr");
     var_1--;
@@ -838,7 +838,7 @@ loco_standoff() {
   level.player unlink();
   level.player_rig delete();
   player_setup("player_rig_struggle", 0, 60);
-  level.player_rig linkto(level.loco_breach_anim_node);
+  level.player_rig linkTo(level.loco_breach_anim_node);
   level.player_rig thread loco_standoff_struggle_logic();
   level.player playerlinktoblend(level.player_rig, "tag_player", var_0, 0, 0);
   level.loco_breach_anim_node thread maps\_anim::anim_single_solo(level.player_rig, "loco_standoff");
@@ -861,11 +861,11 @@ loco_standoff() {
   level.player playerlinktodelta(level.player_rig, "tag_player", 1, 25, 25, 10, 10, 1);
   level.player springcamenabled(0.5);
   var_4 = common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(level._train.cars["train_loco"].body, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(level._train.cars["train_loco"].body, "j_spineupper", (0, 0, 0), (0, 0, 0));
   var_5 = maps\_utility::spawn_anim_model("player_rig");
   var_5 hide();
   var_4 maps\_anim::anim_first_frame_solo(var_5, "loco_blasthit");
-  var_5 linkto(var_4);
+  var_5 linkTo(var_4);
   level waittill("notify_shockwave_hit");
   level notify("loco_blasthit");
   thread loco_fall_dof();
@@ -890,14 +890,14 @@ loco_standoff() {
     }
   }
 
-  var_19 = common_scripts\utility::getstruct("anim_track_ending", "targetname");
+  var_19 = common_scripts\utility::getStruct("anim_track_ending", "targetname");
   var_19 thread maps\_anim::anim_single(var_15, "loco_blasthit");
-  level._ally linkto(var_4);
+  level._ally linkTo(var_4);
   var_4 thread maps\_anim::anim_single_solo(level._ally, "loco_blasthit");
   level._ally detach("weapon_p226", "tag_weapon_right");
-  level._boss linkto(var_4);
+  level._boss linkTo(var_4);
   var_4 thread maps\_anim::anim_single_solo(level._boss, "loco_blasthit");
-  var_16 linkto(var_4);
+  var_16 linkTo(var_4);
   var_4 thread maps\_anim::anim_single_solo(var_16, "loco_blasthit");
   level.player_rig delete();
   var_5 show();
@@ -967,7 +967,7 @@ end_breach_enemy_spawn_single(var_0) {
       level.end_breach_enemies[var_0] = var_1;
       break;
     case 2:
-      var_2 = getent("loco_breach_enemy_RPG", "targetname");
+      var_2 = getEnt("loco_breach_enemy_RPG", "targetname");
       var_2 thread maps\_utility::add_spawn_function(maps\_vignette_util::vignette_actor_spawn_func);
       var_1 = var_2 maps\_utility::spawn_ai(1);
       var_1 hidepart("tag_weapon");
@@ -990,7 +990,7 @@ end_breach_enemy_spawn_single(var_0) {
   }
 
   var_1.animname = "opfor" + (var_0 + 1);
-  var_1 linkto(level.loco_breach_anim_node);
+  var_1 linkTo(level.loco_breach_anim_node);
   var_1 thread breach_shot_blood_fx("notify_loco_standoff");
   return var_1;
 }
@@ -1028,7 +1028,7 @@ breach_shot_blood_fx(var_0) {
     var_9 = common_scripts\utility::spawn_tag_origin();
     var_9.origin = var_4;
     var_9.angles = var_3;
-    var_9 linkto(self, var_8, (0, 0, 0), (0, 0, 0));
+    var_9 linkTo(self, var_8, (0, 0, 0), (0, 0, 0));
     playFXOnTag(level._effect["blood_spatter"], var_9, "tag_origin");
     wait(level.timestep);
   }

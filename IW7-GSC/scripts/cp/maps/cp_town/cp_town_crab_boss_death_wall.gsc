@@ -95,7 +95,7 @@ teleport_to_clear_pos(var_0) {
   var_5 = var_1 + (var_3, var_4, 0);
   var_5 = getclosestpointonnavmesh(var_5) + (0, 0, 2);
   var_0 dontinterpolate();
-  var_0 setorigin(var_5);
+  var_0 setOrigin(var_5);
 }
 
 toxic_gas_attack() {
@@ -150,33 +150,33 @@ wall_goo_geiger_sfx(var_0) {
 
     case 2:
       if(isDefined(level.boss_goo_geiger_1)) {
-        level.boss_goo_geiger_1 moveto((2638, 2200, -130), 2);
+        level.boss_goo_geiger_1 moveTo((2638, 2200, -130), 2);
       }
 
       if(isDefined(level.boss_goo_geiger_2)) {
-        level.boss_goo_geiger_2 moveto((3545, 2058, -113), 2);
+        level.boss_goo_geiger_2 moveTo((3545, 2058, -113), 2);
       }
 
       if(isDefined(level.boss_goo_geiger_3)) {
-        level.boss_goo_geiger_3 moveto((3461, 1862, -50), 2);
+        level.boss_goo_geiger_3 moveTo((3461, 1862, -50), 2);
       }
 
       if(isDefined(level.boss_goo_bubble_1)) {
-        level.boss_goo_bubble_1 moveto((2638, 2200, -130), 2);
+        level.boss_goo_bubble_1 moveTo((2638, 2200, -130), 2);
       }
 
       if(isDefined(level.boss_goo_bubble_2)) {
-        level.boss_goo_bubble_2 moveto((3480, 2310, -102), 2);
+        level.boss_goo_bubble_2 moveTo((3480, 2310, -102), 2);
       }
       break;
 
     case 3:
       if(isDefined(level.boss_goo_geiger_1)) {
-        level.boss_goo_geiger_1 moveto((2818, 1258, -40), 2);
+        level.boss_goo_geiger_1 moveTo((2818, 1258, -40), 2);
       }
 
       if(isDefined(level.boss_goo_bubble_1)) {
-        level.boss_goo_bubble_1 moveto((2818, 1258, -40), 2);
+        level.boss_goo_bubble_1 moveTo((2818, 1258, -40), 2);
       }
 
       if(isDefined(level.boss_goo_geiger_2)) {
@@ -340,15 +340,15 @@ toxic_attack() {
 
 activate_toxic_patch_and_trigger(var_0) {
   play_toxic_ground_vfx(var_0);
-  var_1 = getent("toxic_waste_patch_" + var_0, "targetname");
+  var_1 = getEnt("toxic_waste_patch_" + var_0, "targetname");
   var_1 dontinterpolate();
   var_2 = get_toxic_patch_offset(var_0);
   var_1.origin = var_1.origin + (0, 0, 1026 - var_2);
   var_3 = get_toxic_patch_move_time(var_0);
-  var_1 moveto(var_1.origin + (0, 0, var_2), var_3, 0, var_3);
+  var_1 moveTo(var_1.origin + (0, 0, var_2), var_3, 0, var_3);
   var_1 waittill("movedone");
   var_1.activated = 1;
-  var_4 = getent("toxic_waste_trigger_" + var_0, "targetname");
+  var_4 = getEnt("toxic_waste_trigger_" + var_0, "targetname");
   var_4 dontinterpolate();
   var_4.origin = var_4.origin + (0, 0, 1024);
   var_4 thread func_D051(var_4);
@@ -430,8 +430,8 @@ delay_stop_geiger_counter(var_0) {
 }
 
 deactivate_toxic_patch_and_trigger(var_0) {
-  var_1 = getent("toxic_waste_patch_" + var_0, "targetname");
-  var_2 = getent("toxic_waste_trigger_" + var_0, "targetname");
+  var_1 = getEnt("toxic_waste_patch_" + var_0, "targetname");
+  var_2 = getEnt("toxic_waste_trigger_" + var_0, "targetname");
   if(scripts\engine\utility::istrue(var_1.activated)) {
     var_1 dontinterpolate();
     var_2 dontinterpolate();
@@ -448,7 +448,7 @@ get_patch_submerge_time() {
 
 toxic_patch_submerge(var_0, var_1, var_2) {
   var_3 = get_patch_submerge_time();
-  var_0 moveto(var_0.origin - (0, 0, var_1), var_3);
+  var_0 moveTo(var_0.origin - (0, 0, var_1), var_3);
   var_0 waittill("movedone");
   var_0.origin = var_0.origin + (0, 0, -1024 + var_1);
   var_0.activated = 0;
@@ -468,7 +468,7 @@ activate_final_sequence_blocker() {
     level.wall_of_death_blocker_models[level.wall_of_death_blocker_models.size] = var_3;
   }
 
-  var_5 = getent("death_wall_door_clip", "targetname");
+  var_5 = getEnt("death_wall_door_clip", "targetname");
   var_5 dontinterpolate();
   var_5.origin = var_5.origin + (0, 0, 1024);
   level.final_sequence_blocker_activated = 1;
@@ -483,7 +483,7 @@ deactivate_final_sequence_blocker() {
     }
   }
 
-  var_3 = getent("death_wall_door_clip", "targetname");
+  var_3 = getEnt("death_wall_door_clip", "targetname");
   if(isDefined(var_3)) {
     var_3 delete();
   }

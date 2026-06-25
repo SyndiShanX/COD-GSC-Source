@@ -36,7 +36,7 @@ _id_1D49(var_0) {
   var_0 waittill("missile_stuck", var_2);
 
   if(isDefined(var_2)) {
-    var_0 linkto(var_2);
+    var_0 linkTo(var_2);
   }
 
   thread _id_1D44(var_0);
@@ -219,7 +219,7 @@ _id_1D45(var_0) {
   self setscriptablepartstate("arm", "neutral", 0);
   self setscriptablepartstate("trigger", "active", 0);
   var_1 = scripts\mp\utility\weapon::_id_0C48("s4_mine_ger_s44_mp", self.origin, (0, 0, 0), 100, 1);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   thread _id_1D36(var_1);
   var_1._id_10D0C = makeweapon("s4_mine_ger_s44_mp");
   self._id_4341 = var_1;
@@ -244,7 +244,7 @@ _id_1D4F(var_0) {
   self._id_0203 scripts\engine\utility::_id_108A8(var_0, "death", "mine_destroyed");
 
   if(isDefined(self._id_0203)) {
-    self moveto(self.origin, 0.05, 0, 0);
+    self moveTo(self.origin, 0.05, 0, 0);
   }
 
   while(isDefined(self._id_0203)) {
@@ -299,8 +299,8 @@ _id_1D4D() {
       var_12 setModel("tag_origin");
       self._id_A24C = var_12;
       var_12._id_0203 = self;
-      self linkto(var_12, "tag_origin", (0, 0, 0), (0, 0, 0));
-      var_12 moveto(var_2, var_0, var_11, var_10);
+      self linkTo(var_12, "tag_origin", (0, 0, 0), (0, 0, 0));
+      var_12 moveTo(var_2, var_0, var_11, var_10);
       var_12 thread _id_1D4F(var_0);
       thread _id_1D4E(var_0);
       wait(var_0);

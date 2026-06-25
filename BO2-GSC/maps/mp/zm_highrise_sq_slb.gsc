@@ -61,16 +61,16 @@ snipe_balls_watch_ball() {
 
     if(maps\mp\zm_highrise_sq::sq_is_weapon_sniper(weaponname)) {
       level notify("zm_ball_shot");
-      playsoundatposition("zmb_sq_ball_ding", self.origin);
+      playSoundAtPosition("zmb_sq_ball_ding", self.origin);
       playFX(level._effect["sidequest_flash"], self.origin);
       str_noteworthy = self.script_noteworthy;
       self delete();
       wait 0.5;
       clientnotify(str_noteworthy);
-      m_ball = getent("sq_sliquify_r", "script_noteworthy");
+      m_ball = getEnt("sq_sliquify_r", "script_noteworthy");
 
       if(str_noteworthy == "m_drg_tail") {
-        m_ball = getent("sq_sliquify_m", "script_noteworthy");
+        m_ball = getEnt("sq_sliquify_m", "script_noteworthy");
       }
 
       playFX(level._effect["sidequest_flash"], m_ball.origin);
@@ -145,11 +145,11 @@ ball_pickup_waittill_change() {
 
 sq_slb_create_use_trigger(v_origin, radius, height, str_hint_string) {
   t_pickup = spawn("trigger_radius_use", v_origin, 0, radius, height);
-  t_pickup setcursorhint("HINT_NOICON");
-  t_pickup sethintstring(str_hint_string);
+  t_pickup setCursorHint("HINT_NOICON");
+  t_pickup setHintString(str_hint_string);
   t_pickup.targetname = "ball_pickup_trig";
-  t_pickup triggerignoreteam();
-  t_pickup usetriggerrequirelookat();
+  t_pickup triggerIgnoreTeam();
+  t_pickup useTriggerRequireLookAt();
   return t_pickup;
 }
 

@@ -297,7 +297,7 @@ nodeGetRemoteMissleEntOrg(node, remoteMissileSpawns) {
 
   Assert(isDefined(remoteMissileEnt));
 
-  dir = VectorNormalize(remoteMissileEnt.origin - node.origin);
+  dir = vectorNormalize(remoteMissileEnt.origin - node.origin);
   return (node.origin + (dir * ORBITAL_TRACE_DIST));
 }
 
@@ -682,7 +682,7 @@ playerGetClosestNodeInternal(maxRadius, minRadius, point, checkExposed, checkPla
 
 playerWithinFov2D(origin) {
   fov = cos(60);
-  normal = VectorNormalize((origin[0], origin[1], 0) - (self.origin[0], self.origin[1], 0));
+  normal = vectorNormalize((origin[0], origin[1], 0) - (self.origin[0], self.origin[1], 0));
   forward = anglesToForward((0, self.angles[1], 0));
   return VectorDot(forward, normal) >= fov;
 }

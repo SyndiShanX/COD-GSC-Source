@@ -212,13 +212,13 @@ boltstucktoenemyrumbles(param_00, param_01) {
   var_02 = self;
   var_03 = param_00.boltstruct;
   while(isDefined(var_02) && isalive(var_02) && isDefined(param_01) && isalive(param_01) && isDefined(param_00) && !common_scripts\utility::func_562E(var_03.targetdrained)) {
-    var_02 playrumbleonentity("viewmodel_small");
+    var_02 playRumbleOnEntity("viewmodel_small");
     wait(0.25);
   }
 
-  var_02 playrumbleonentity("viewmodel_small");
+  var_02 playRumbleOnEntity("viewmodel_small");
   wait(0.2);
-  var_02 playrumbleonentity("viewmodel_small");
+  var_02 playRumbleOnEntity("viewmodel_small");
 }
 
 boltfx_stuck(param_00) {
@@ -244,7 +244,7 @@ boltfx_chargebeam(param_00, param_01, param_02, param_03) {
 
   if(param_02.wunder_beams.size < 1) {
     var_05 = param_00 common_scripts\utility::func_8FFC();
-    var_05 linkto(param_00, "Tag_FX", (0, 0, 0), (0, 180, 0));
+    var_05 linkTo(param_00, "Tag_FX", (0, 0, 0), (0, 180, 0));
     var_05 thread boltfx_chargebeamupdateangle(param_02);
     var_04 = launchbeam("zmb_wunderbuss_charge_beam", var_05, "tag_origin", param_02, "Tag_Origin");
     var_04 lib_0378::func_8D74("aud_ber_wunderbuss_charge_beam", var_05.var_116, param_02.var_116);
@@ -403,8 +403,8 @@ createpickuptrigger(param_00, param_01, param_02) {
   }
 
   var_03 = spawn("trigger_radius", param_01.var_116, 0, 64, 64);
-  var_03 enablelinkto();
-  var_03 linkto(param_01);
+  var_03 enablelinkTo();
+  var_03 linkTo(param_01);
   var_03.var_1A5 = "stuck_wunderbuss_bolt";
   param_00.var_6FD8 = var_03;
   if(1) {

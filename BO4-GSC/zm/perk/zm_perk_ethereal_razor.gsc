@@ -108,7 +108,7 @@ function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
   self endon(#"disconnect");
   v_view_pos = self getplayercamerapos();
   v_angles = self getplayerangles();
-  v_norm = vectornormalize(anglesToForward(v_angles));
+  v_norm = vectorNormalize(anglesToForward(v_angles));
   a_e_targets = function_fa63958c();
   a_e_targets = arraysortclosest(a_e_targets, self.origin);
   var_5f96a3db = 0;

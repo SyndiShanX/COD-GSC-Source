@@ -1013,7 +1013,7 @@ init_trigger_flags() {
   level.trigger_func[0] = ::trigger_off;
 }
 
-getstruct(var_0, var_1) {
+getStruct(var_0, var_1) {
   var_2 = level.struct_class_names[var_1][var_0];
 
   if(!isDefined(var_2)) {
@@ -2213,7 +2213,7 @@ get_target_ent(var_0) {
     var_0 = self.target;
   }
 
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -2227,7 +2227,7 @@ get_target_ent(var_0) {
     }
   }
 
-  var_1 = getstruct(var_0, "targetname");
+  var_1 = getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -2241,7 +2241,7 @@ get_target_ent(var_0) {
 }
 
 get_noteworthy_ent(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -2255,7 +2255,7 @@ get_noteworthy_ent(var_0) {
     }
   }
 
-  var_1 = getstruct(var_0, "script_noteworthy");
+  var_1 = getStruct(var_0, "script_noteworthy");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -2548,7 +2548,7 @@ tag_project(var_0, var_1) {
   var_2 = self gettagorigin(var_0);
   var_3 = self gettagangles(var_0);
   var_4 = anglesToForward(var_3);
-  var_4 = vectornormalize(var_4) * var_1;
+  var_4 = vectorNormalize(var_4) * var_1;
   return var_2 + var_4;
 }
 
@@ -2753,7 +2753,7 @@ add_destructible_type_transient(var_0, var_1) {
 }
 
 within_fov(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_2 - var_0);
+  var_4 = vectorNormalize(var_2 - var_0);
   var_5 = anglesToForward(var_1);
   var_6 = vectordot(var_5, var_4);
   return var_6 >= var_3;
@@ -2794,7 +2794,7 @@ entity_path_disconnect_thread(var_0) {
 
     if(var_4 != var_1 || var_5) {
       if(var_4) {
-        self disconnectpaths();
+        self disconnectPaths();
       } else {
         self connectpaths();
       }
@@ -2885,7 +2885,7 @@ getfarthest(var_0, var_1, var_2) {
 
 missile_settargetandflightmode(var_0, var_1, var_2) {
   var_2 = ter_op(isDefined(var_2), var_2, (0, 0, 0));
-  self missile_settargetent(var_0, var_2);
+  self missile_settargetEnt(var_0, var_2);
 
   switch (var_1) {
     case "direct":

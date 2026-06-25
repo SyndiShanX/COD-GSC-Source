@@ -12,8 +12,8 @@ ride_uaz_mount() {
   flag_wait("wait_for_player");
 
   trigger = spawn("trigger_radius", self gettagorigin("tag_passenger"), 0, 72, 64);
-  trigger enablelinkto();
-  trigger linkto(self, "tag_passenger", (0, -48, -48), (0, 0, 0));
+  trigger enablelinkTo();
+  trigger linkTo(self, "tag_passenger", (0, -48, -48), (0, 0, 0));
   trigger waittill("trigger");
 
   flag_set("uaz_mounted");
@@ -38,7 +38,7 @@ uaz_control() {
   level.player.rig = spawn_anim_model("player_rig");
   level.player.rig hide();
 
-  level.player.rig linkto(self, "tag_body");
+  level.player.rig linkTo(self, "tag_body");
   self thread anim_single_solo(level.player.rig, "boneyard_uaz_mount", "tag_body");
   self thread ride_uaz_door();
 
@@ -319,11 +319,11 @@ ride_uaz_door() {
 }
 
 park_uaz() {
-  park_goal = getent("uaz_park", "script_noteworthy");
+  park_goal = getEnt("uaz_park", "script_noteworthy");
   park_goal setModel("tag_origin");
 
   tag_origin = park_goal spawn_tag_origin();
-  tag_origin linkto(park_goal, "tag_origin", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(park_goal, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   forward = anglesToForward(park_goal.angles);
   goal = self.origin + forward * 500;
@@ -338,9 +338,9 @@ park_uaz() {
 
   self.dummy = dummy;
 
-  level.player.rig linkto(dummy, "tag_body");
-  dummy linkto(tag_origin, "tag_origin", (0, 0, 0), (0, 0, 0));
-  dummy animscripted("uaz_parked", tag_origin.origin, tag_origin.angles, level.scr_anim["generic"]["boneyard_jeep_evac"]);
+  level.player.rig linkTo(dummy, "tag_body");
+  dummy linkTo(tag_origin, "tag_origin", (0, 0, 0), (0, 0, 0));
+  dummy animScripted("uaz_parked", tag_origin.origin, tag_origin.angles, level.scr_anim["generic"]["boneyard_jeep_evac"]);
 
   thread park_rumble();
 
@@ -348,15 +348,15 @@ park_uaz() {
 }
 
 park_rumble() {
-  level.player PlayRumbleOnEntity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait .5;
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait .2;
-  level.player PlayRumbleOnEntity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait .2;
-  level.player PlayRumbleOnEntity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait .2;
-  level.player PlayRumbleOnEntity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 #using_animtree("generic_human");
@@ -403,7 +403,7 @@ ride_rumble() {
     rumble = self.script_rumble;
   }
 
-  level.player PlayRumbleOnEntity(rumble);
+  level.player playRumbleOnEntity(rumble);
 }
 
 vehicle_event_node_setup() {
@@ -651,7 +651,7 @@ launch_object() {
 
   foreach(obj in obj_array) {
     if(vehicle == level.uaz) {
-      level.player PlayRumbleOnEntity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
     }
 
     velocity = vehicle vehicle_getvelocity();
@@ -681,11 +681,11 @@ launch_object() {
 
     velocity *= force_multiplier;
 
-    direction = vectornormalize(velocity * -1);
+    direction = vectorNormalize(velocity * -1);
     contact_point = obj.origin + direction * 16;
     obj PhysicsLaunchClient(contact_point, velocity);
 
-    dir = vectornormalize(velocity);
+    dir = vectorNormalize(velocity);
   }
 }
 
@@ -699,64 +699,64 @@ collapse_wing() {
   flag_wait("wing_fall");
   exploder("wing_fall");
 
-  wing = getent("wing", "targetname");
-  pivot_1 = getent("pivot_1", "targetname");
-  pivot_2 = getent("pivot_2", "targetname");
+  wing = getEnt("wing", "targetname");
+  pivot_1 = getEnt("pivot_1", "targetname");
+  pivot_2 = getEnt("pivot_2", "targetname");
 
   pivot_1.angles = vectortoangles(pivot_2.origin - pivot_1.origin);
   pivot_2.angles = vectortoangles(pivot_1.origin - pivot_2.origin);
 
-  wing linkto(pivot_1);
-  pivot_2 linkto(pivot_1);
+  wing linkTo(pivot_1);
+  pivot_2 linkTo(pivot_1);
 
   ground_1 = PhysicsTrace(pivot_2.origin + (0, 0, -64), pivot_2.origin + (0, 0, -256));
   ground_2 = PhysicsTrace(pivot_1.origin + (0, 0, -65), pivot_1.origin + (0, 0, -256));
 
   angles = vectortoangles(ground_1 - pivot_1.origin);
-  pivot_1 rotateto(angles, .4, .3, 0);
+  pivot_1 rotateTo(angles, .4, .3, 0);
   pivot_1 waittill("rotatedone");
   angles = vectortoangles((ground_1 + (0, 0, 40)) - pivot_1.origin);
-  pivot_1 rotateto(angles, .25, 0, .25);
+  pivot_1 rotateTo(angles, .25, 0, .25);
   pivot_1 waittill("rotatedone");
   angles = vectortoangles(ground_1 - pivot_1.origin);
-  pivot_1 rotateto(angles, .25, .25, 0);
+  pivot_1 rotateTo(angles, .25, .25, 0);
   pivot_1 waittill("rotatedone");
   angles = vectortoangles((ground_1 + (0, 0, 10)) - pivot_1.origin);
-  pivot_1 rotateto(angles, .1, 0, .1);
+  pivot_1 rotateTo(angles, .1, 0, .1);
   pivot_1 waittill("rotatedone");
   angles = vectortoangles(ground_1 - pivot_1.origin);
-  pivot_1 rotateto(angles, .1, .1, 0);
+  pivot_1 rotateTo(angles, .1, .1, 0);
   pivot_1 waittill("rotatedone");
 
   wing unlink();
   pivot_2 unlink();
-  wing linkto(pivot_2);
+  wing linkTo(pivot_2);
 
   angles = vectortoangles(ground_2 - pivot_2.origin);
-  pivot_2 rotateto(angles, .3, .2, 0);
+  pivot_2 rotateTo(angles, .3, .2, 0);
   pivot_2 waittill("rotatedone");
   angles = vectortoangles((ground_2 + (0, 0, 20)) - pivot_2.origin);
-  pivot_2 rotateto(angles, .2, 0, .2);
+  pivot_2 rotateTo(angles, .2, 0, .2);
   pivot_2 waittill("rotatedone");
   angles = vectortoangles(ground_2 - pivot_2.origin);
-  pivot_2 rotateto(angles, .2, .2, 0);
+  pivot_2 rotateTo(angles, .2, .2, 0);
   pivot_2 waittill("rotatedone");
   angles = vectortoangles((ground_2 + (0, 0, 5)) - pivot_2.origin);
-  pivot_2 rotateto(angles, .1, 0, .1);
+  pivot_2 rotateTo(angles, .1, 0, .1);
   pivot_2 waittill("rotatedone");
   angles = vectortoangles(ground_2 - pivot_2.origin);
-  pivot_2 rotateto(angles, .1, .1, 0);
+  pivot_2 rotateTo(angles, .1, .1, 0);
   pivot_2 waittill("rotatedone");
 }
 
 assemble_c130() {
-  c130 = getent("c130_flight", "targetname");
-  lower_hatch = getent("lower_hatch", "targetname");
-  upper_hatch = getent("upper_hatch", "targetname");
+  c130 = getEnt("c130_flight", "targetname");
+  lower_hatch = getEnt("lower_hatch", "targetname");
+  upper_hatch = getEnt("upper_hatch", "targetname");
   hinge_arr = getEntArray("hinge", "targetname");
 
-  lower_hatch_origin = getent("lower_hatch_origin", "targetname");
-  upper_hatch_origin = getent("upper_hatch_origin", "targetname");
+  lower_hatch_origin = getEnt("lower_hatch_origin", "targetname");
+  upper_hatch_origin = getEnt("upper_hatch_origin", "targetname");
   hinge_origin_arr = getEntArray("hinge_origin", "targetname");
 
   array_call(getEntArray(c130.target, "targetname"), ::linkto, c130);
@@ -779,9 +779,9 @@ assemble_c130() {
 
   thread extra_row_of_sparks_from_ramp(lower_hatch);
 
-  c130.ramp_trigger = getent("ramp_trigger", "targetname");
-  c130.ramp_trigger enablelinkto();
-  c130.ramp_trigger LinkTo(c130);
+  c130.ramp_trigger = getEnt("ramp_trigger", "targetname");
+  c130.ramp_trigger enablelinkTo();
+  c130.ramp_trigger linkTo(c130);
 
   array_thread(getEntArray("ramp_death_trigger", "targetname"), ::ramp_death_trigger, c130);
 
@@ -822,7 +822,7 @@ spawn_spark_between_hinges(hinges) {
   ent.origin = hinges[0].origin * org_dif + hinges[1].origin * (1 - org_dif);
   ent.origin += (0, -10, -14);
   ent.angles = (308, 270, 0);
-  ent linkto(hinges[0]);
+  ent linkTo(hinges[0]);
 
   spark_fx = getfx("scrape_sparks");
   playFXOnTag(spark_fx, ent, "tag_origin");
@@ -838,8 +838,8 @@ spawn_spark_between_hinges(hinges) {
 ramp_death_trigger(c130) {
   level endon("uaz_park");
 
-  self enablelinkto();
-  self LinkTo(c130);
+  self enablelinkTo();
+  self linkTo(c130);
 
   flag_wait("uaz_player_in_control");
 
@@ -872,9 +872,9 @@ c130_rotate_hatch(hatch, hinge_origin, rate, stop_time, delay) {
   hinge = spawn("script_model", hinge_origin);
   hinge.angles = (0, 0, 0);
   hinge setModel("tag_origin");
-  hinge linkto(self);
+  hinge linkTo(self);
   hatch.origin = hinge_origin;
-  hatch linkto(hinge);
+  hatch linkTo(hinge);
 
   flag_wait("c130_hatch_open");
   wait(wait_time);
@@ -888,7 +888,7 @@ c130_rotate_hatch(hatch, hinge_origin, rate, stop_time, delay) {
 
   hinge_anim = level.scr_anim["c130_propeller"]["rotate"][0];
 
-  hinge AnimScripted("rotate_hatch", hinge.origin, hinge.angles, hinge_anim);
+  hinge animScripted("rotate_hatch", hinge.origin, hinge.angles, hinge_anim);
   hinge SetFlaggedAnim("rotate_hatch", hinge_anim, 1, 0, rate);
   wait stop_time;
   hinge SetFlaggedAnim("rotate_hatch", hinge_anim, 1, 0, 0);
@@ -910,7 +910,7 @@ c130_sparks() {
   ent = self spawn_tag_origin();
   ent.origin += origin_offset;
   ent.angles = angles_offset;
-  ent linkto(self);
+  ent linkTo(self);
 
   wait 5;
   wait 12;
@@ -924,7 +924,7 @@ c130_sparks() {
 }
 
 flyby_rumble() {
-  level.player PlayRumbleOnEntity("c130_flyby");
+  level.player playRumbleOnEntity("c130_flyby");
   level thread screenshake(.2, 5, 1, 4);
 
   wait 1.5;
@@ -1215,10 +1215,10 @@ fake_target() {
 
   offset = right * 320;
   self.fake_target[0] = spawn("script_origin", self.origin + offset);
-  self.fake_target[0] linkto(self);
+  self.fake_target[0] linkTo(self);
   offset = right * -320;
   self.fake_target[1] = spawn("script_origin", self.origin + offset);
-  self.fake_target[1] linkto(self);
+  self.fake_target[1] linkTo(self);
 
   self waittill("death");
   self.fake_target[0] delete();
@@ -1326,7 +1326,7 @@ rpg_guy() {
   if(isDefined(goal)) {
     self setgoalnode(goal);
   } else {
-    goal = getent(self.target, "targetname");
+    goal = getEnt(self.target, "targetname");
     self setgoalpos(goal.origin);
   }
 
@@ -1362,7 +1362,7 @@ rpg_guy() {
 
     if(issentient(etarget)) {
       ent = spawn("script_origin", etarget.origin);
-      ent linkto(etarget);
+      ent linkTo(etarget);
       self SetEntityTarget(ent, 1);
     } else
       self SetEntityTarget(etarget, 1);
@@ -1420,7 +1420,7 @@ spray_guy() {
   self waittill_notify_or_timeout("goal", 5);
 
   assert(move_time >= 1);
-  target_arr[0] MoveTo(target_arr[1].origin, move_time, move_time / 2, move_time / 4);
+  target_arr[0] moveTo(target_arr[1].origin, move_time, move_time / 2, move_time / 4);
   wait move_time;
 
   self ClearEntityTarget();
@@ -1456,7 +1456,7 @@ delete_excess_trigger() {
   level.delete_excess_safe_volume = undefined;
 
   if(isDefined(self.target)) {
-    level.delete_excess_safe_volume = getent(self.target, "targetname");
+    level.delete_excess_safe_volume = getEnt(self.target, "targetname");
   }
 
   flag_set("delete_excess");
@@ -1513,12 +1513,12 @@ higround_littlebird_hunt_btr80(node_name) {
   old_goal = undefined;
 
   while(true) {
-    btr80_vect = VectorNormalize(level.btr80.origin - level.player.origin);
+    btr80_vect = vectorNormalize(level.btr80.origin - level.player.origin);
     goal = undefined;
     hi_dot = -1;
 
     foreach(ent in goal_arr) {
-      goal_vect = VectorNormalize(ent.origin - level.player.origin);
+      goal_vect = vectorNormalize(ent.origin - level.player.origin);
       dot = VectorDot(btr80_vect, goal_vect);
       if(dot > hi_dot) {
         hi_dot = dot;
@@ -1578,7 +1578,7 @@ higround_littlebird_aligned(end_msg) {
 higround_littlebird_failed_attack() {
   self endon("death");
 
-  center_ent = getent("btr80_miss_target", "targetname");
+  center_ent = getEnt("btr80_miss_target", "targetname");
   temp_miss_target_arr = getEntArray(center_ent.target, "targetname");
   temp_miss_target_arr = array_index_by_script_index(temp_miss_target_arr);
 
@@ -1659,7 +1659,7 @@ guy_free_attack(guy, pos) {
   guy endon("newanim");
   guy endon("death");
   guy notify("animontag_thread");
-  guy StopAnimScripted();
+  guy StopanimScripted();
 
   guy.noragdoll = true;
 
@@ -1912,7 +1912,7 @@ killer_bird() {
     end_ent = ent_arr[0];
   }
 
-  heli_spawner = getent("killer_bird", "targetname");
+  heli_spawner = getEnt("killer_bird", "targetname");
 
   heli_spawner.origin = start_ent.origin;
   heli_spawner.angles = start_ent.angles;
@@ -1954,7 +1954,7 @@ killer_bird_goal(goal_origin) {
   while(true) {
     vector = anglesToForward(level.player.angles);
     new_origin = level.player.origin + (dist * vector) + (0, 0, height);
-    vector = VectorNormalize(new_origin - level.player.origin);
+    vector = vectorNormalize(new_origin - level.player.origin);
 
     if(SightTracePassed(level.player getEye(), new_origin, false, self)) {
       self SetVehGoalPos(new_origin, true);
@@ -2214,7 +2214,7 @@ main_turret_aim_straight() {
   self ent_flag_set("hold_fire");
 
   ent = spawn("script_origin", (0, 0, 0));
-  ent linkto(self, "tag_origin", (500, 0, 100), (0, 0, 0));
+  ent linkTo(self, "tag_origin", (500, 0, 100), (0, 0, 0));
   self setTurretTargetEnt(ent);
 
   self waittill_either("turret_on_target", "death");
@@ -2290,7 +2290,7 @@ flyby_magic_rocket(delete_time) {
 
 magic_rocket(delete_time) {
   wait self.script_delay;
-  target = getent(self.target, "targetname");
+  target = getEnt(self.target, "targetname");
   rocket = MagicBullet("rpg_distant", self.origin, target.origin);
 
   if(isDefined(delete_time)) {
@@ -2346,7 +2346,7 @@ move_and_delete(add_delay) {
 
 origin_is_behind(node_origin) {
   forward = anglesToForward((0, 0, 0));
-  vector = VectorNormalize(node_origin - self.origin);
+  vector = vectorNormalize(node_origin - self.origin);
   dot = VectorDot(forward, vector);
   return (dot < -0.2);
 }
@@ -2550,7 +2550,7 @@ mark_heli_path(ent) {
     if(!isDefined(ent.target)) {
       break;
     }
-    ent = getent(ent.target, "targetname");
+    ent = getEnt(ent.target, "targetname");
     Line(ent.origin, old_ent.origin, (0.7, 0, 0), 1, false, 500);
     old_ent = ent;
   }

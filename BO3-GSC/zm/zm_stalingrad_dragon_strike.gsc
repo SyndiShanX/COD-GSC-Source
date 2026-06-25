@@ -69,7 +69,7 @@ function function_43b5419a(einflictor, eattacker, idamage, idflags, smeansofdeat
 
 function function_ea7e3000(s_unitrigger, var_df61c394, var_60e07243) {
   self endon("disconnect");
-  var_8de3e280 = getent("pavlovs_second_floor", "targetname");
+  var_8de3e280 = getEnt("pavlovs_second_floor", "targetname");
   while(!level flag::get(var_df61c394)) {
     if(!self istouching(var_8de3e280)) {
       self flag::clear(var_60e07243);
@@ -240,7 +240,7 @@ function function_68299355() {
 
 function function_f25c1083() {
   level flag::wait_till("dragon_strike_quest_complete");
-  var_8de3e280 = getent("pavlovs_second_floor", "targetname");
+  var_8de3e280 = getEnt("pavlovs_second_floor", "targetname");
   while(!util::any_player_is_touching(var_8de3e280, "allies")) {
     wait(1);
   }
@@ -310,12 +310,12 @@ function function_93510b8b() {
   }
   level.var_d4286019 = 0;
   level flag::set("draconite_available");
-  playsoundatposition("zmb_ee_dragon_success", (0, 0, 0));
+  playSoundAtPosition("zmb_ee_dragon_success", (0, 0, 0));
 }
 
 function function_e6794c49() {
   wait(10);
-  playsoundatposition("zmb_drag_strike_lockdown_over", (0, 0, 0));
+  playSoundAtPosition("zmb_drag_strike_lockdown_over", (0, 0, 0));
   iprintlnbold("");
 }
 
@@ -374,9 +374,9 @@ function function_75a7ba2d() {
   level.var_65d93bca--;
   if(level.var_65d93bca < 1) {
     level flag::set("dragon_stage3_started");
-    playsoundatposition("zmb_ee_success", (0, 0, 0));
+    playSoundAtPosition("zmb_ee_success", (0, 0, 0));
   } else {
-    playsoundatposition("zmb_ee_step_success", (0, 0, 0));
+    playSoundAtPosition("zmb_ee_step_success", (0, 0, 0));
   }
   self delete();
 }

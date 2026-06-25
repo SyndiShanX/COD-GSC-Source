@@ -31,7 +31,7 @@ on_begin() {
   level zm_trial::function_2b3a3307(1);
   assert(isDefined(level.a_str_vapors));
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_f0b698a7();
 
     if(!isDefined(player.var_7864a0f6)) {
@@ -49,7 +49,7 @@ on_end(round_reset) {
   level zm_trial::function_2b3a3307(0);
 
   if(!round_reset) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       assert(isDefined(player.var_7864a0f6));
       player zm_trial_util::function_d37a769(player.var_7864a0f6);
       player function_2c0ae6d1();

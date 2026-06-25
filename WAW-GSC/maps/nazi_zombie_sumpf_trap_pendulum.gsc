@@ -11,21 +11,21 @@ initPendulumTrap() {
   penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
 
   for(i = 0; i < penBuyTrigger.size; i++) {
-    penBuyTrigger[i].lever = getent(penBuyTrigger[i].target, "targetname");
-    penBuyTrigger[i].penDamageTrig = getent((penBuyTrigger[i].lever).target, "targetname");
-    penBuyTrigger[i].pen = getent((penBuyTrigger[i].penDamageTrig).target, "targetname");
-    penBuyTrigger[i].pulley = getent((penBuyTrigger[i].pen).target, "targetname");
+    penBuyTrigger[i].lever = getEnt(penBuyTrigger[i].target, "targetname");
+    penBuyTrigger[i].penDamageTrig = getEnt((penBuyTrigger[i].lever).target, "targetname");
+    penBuyTrigger[i].pen = getEnt((penBuyTrigger[i].penDamageTrig).target, "targetname");
+    penBuyTrigger[i].pulley = getEnt((penBuyTrigger[i].pen).target, "targetname");
   }
 
-  penBuyTrigger[0].penDamageTrig EnableLinkTo();
-  penBuyTrigger[0].penDamageTrig LinkTo(penBuyTrigger[0].pen);
+  penBuyTrigger[0].penDamageTrig EnablelinkTo();
+  penBuyTrigger[0].penDamageTrig linkTo(penBuyTrigger[0].pen);
 
   level thread maps\nazi_zombie_sumpf::turnLightGreen("pendulum_light");
 }
 
 moveLeverDown() {
-  soundent_left = getent("switch_left", "targetname");
-  soundent_right = getent("switch_right", "targetname");
+  soundent_left = getEnt("switch_left", "targetname");
+  soundent_right = getEnt("switch_right", "targetname");
   self.lever rotatepitch(180, .5);
   soundent_left playSound("switch");
   soundent_right playSound("switch");
@@ -35,8 +35,8 @@ moveLeverDown() {
 }
 
 moveLeverUp() {
-  soundent_left = getent("switch_left", "targetname");
-  soundent_right = getent("switch_right", "targetname");
+  soundent_left = getEnt("switch_left", "targetname");
+  soundent_right = getEnt("switch_right", "targetname");
 
   self.lever rotatepitch(-180, .5);
 
@@ -72,11 +72,11 @@ play_trap_dialog() {
   }
 }
 penThink() {
-  self sethintstring("");
-  pa_system = getent("speaker_by_log", "targetname");
+  self setHintString("");
+  pa_system = getEnt("speaker_by_log", "targetname");
   wait(0.5);
 
-  self sethintstring(&"ZOMBIE_ACTIVATE_TRAP");
+  self setHintString(&"ZOMBIE_ACTIVATE_TRAP");
   self.zombie_cost = 750;
   self.in_use = 0;
 
@@ -102,11 +102,11 @@ penThink() {
 
           self thread moveLeverDown();
           self waittill("leverDown");
-          motor_left = getent("engine_loop_left", "targetname");
-          motor_right = getent("engine_loop_right", "targetname");
+          motor_left = getEnt("engine_loop_left", "targetname");
+          motor_right = getEnt("engine_loop_right", "targetname");
 
-          playsoundatposition("motor_start_left", motor_left.origin);
-          playsoundatposition("motor_start_right", motor_right.origin);
+          playSoundAtPosition("motor_start_left", motor_left.origin);
+          playSoundAtPosition("motor_start_right", motor_right.origin);
 
           wait(0.5);
 
@@ -177,8 +177,8 @@ activatePen(motor_left, motor_right, who) {
 blade_sounds() {
   self endon("rotatedone");
 
-  blade_left = getent("blade_left", "targetname");
-  blade_right = getent("blade_right", "targetname");
+  blade_left = getEnt("blade_left", "targetname");
+  blade_right = getEnt("blade_right", "targetname");
 
   lastAngle = self.angles[0];
 

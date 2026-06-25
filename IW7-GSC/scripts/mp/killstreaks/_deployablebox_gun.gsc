@@ -139,8 +139,8 @@ func_E2B7(var_0) {
   var_1.owner = self;
   thread scripts\mp\weapons::deleteondeath(var_1);
   if(isDefined(self.moving_platform)) {
-    var_1 enablelinkto();
-    var_1 linkto(self.moving_platform);
+    var_1 enablelinkTo();
+    var_1 linkTo(self.moving_platform);
   }
 
   var_2 = var_0.var_127C8 * var_0.var_127C8;

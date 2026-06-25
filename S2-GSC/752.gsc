@@ -489,21 +489,21 @@ lib_02F0::func_8009(param_00, param_01, param_02, param_03) {
   }
 
   if(isDefined(var_04.var_8F4E) == 0 && lib_02EF::func_56DB(var_04) == 1) {
-    var_04 moveto(param_00, param_01, param_02, param_03);
+    var_04 moveTo(param_00, param_01, param_02, param_03);
     return;
   }
 
   switch (var_04.var_8F4E) {
     case "entity":
     default:
-      var_04 moveto(param_00, param_01, param_02, param_03);
+      var_04 moveTo(param_00, param_01, param_02, param_03);
       break;
 
     case "sndentity":
       if(isDefined(var_04.var_8F45) == 1) {
-        var_04.var_8F45 moveto(param_00, param_01, param_02, param_03);
+        var_04.var_8F45 moveTo(param_00, param_01, param_02, param_03);
       } else {
-        var_04 moveto(param_00, param_01, param_02, param_03);
+        var_04 moveTo(param_00, param_01, param_02, param_03);
       }
       break;
 

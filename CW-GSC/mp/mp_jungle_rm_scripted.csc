@@ -32,6 +32,6 @@ function spawn_flavor_napalm_rumble(localclientnum, oldval, newval, bnewent, bin
   localplayer = function_5c10bd79(bwastimejump);
 
   if(isDefined(localplayer)) {
-    localplayer playrumbleonentity(bwastimejump, "napalm_rumble");
+    localplayer playRumbleOnEntity(bwastimejump, "napalm_rumble");
   }
 }

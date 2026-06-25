@@ -73,7 +73,7 @@ function wait_for_death(var_bc2b55eb) {
 }
 
 function function_c68fb2ec() {
-  var_13fa77c6 = getent("pillar_rpg_collapse_clip", "targetname");
+  var_13fa77c6 = getEnt("pillar_rpg_collapse_clip", "targetname");
   wait 2.3;
   level scene::play("p9_fxanim_gp_pillar_rpg_collapse_scene", "play");
   wait 1;
@@ -129,8 +129,8 @@ function function_986b3cba(var_afde181b, var_82527dbb) {
 function function_3a0e41ed() {
   a_ents = [];
   level flag::wait_till("play_scene_hands_up");
-  a_ents[#"hash_86fe5b596d46e2f"] = spawner::simple_spawn_single(getent("vig_handsup_contra_spawner", "targetname"));
-  a_ents[#"hash_5dd01c989f26191b"] = spawner::simple_spawn_single(getent("vig_handsup_civ_spawner", "targetname"));
+  a_ents[#"hash_86fe5b596d46e2f"] = spawner::simple_spawn_single(getEnt("vig_handsup_contra_spawner", "targetname"));
+  a_ents[#"hash_5dd01c989f26191b"] = spawner::simple_spawn_single(getEnt("vig_handsup_civ_spawner", "targetname"));
   a_ents[#"hash_86fe5b596d46e2f"] endon(#"death");
   a_ents[#"hash_5dd01c989f26191b"] endon(#"death");
   level scene::init("scene_vig_0000_amb_execution_wall_handsup", a_ents);
@@ -148,8 +148,8 @@ function function_3a0e41ed() {
 function function_d13f90cb() {
   a_ents = [];
   level flag::wait_till("play_scene_civ_ground");
-  a_ents[#"hash_86fe5b596d46e2f"] = spawner::simple_spawn_single(getent("vig_struggle_contra_spawner", "targetname"));
-  a_ents[#"hash_5dd01c989f26191b"] = spawner::simple_spawn_single(getent("vig_struggle_civ_spawner", "targetname"));
+  a_ents[#"hash_86fe5b596d46e2f"] = spawner::simple_spawn_single(getEnt("vig_struggle_contra_spawner", "targetname"));
+  a_ents[#"hash_5dd01c989f26191b"] = spawner::simple_spawn_single(getEnt("vig_struggle_civ_spawner", "targetname"));
   a_ents[#"hash_86fe5b596d46e2f"] endon(#"death");
   a_ents[#"hash_5dd01c989f26191b"] endon(#"death");
   level scene::init("scene_vig_0000_amb_struggle_ground", a_ents);
@@ -184,10 +184,10 @@ function function_cca11e21() {
 function function_afa9528d(var_2250555) {
   if(level.var_884e01f1 !== 1) {
     a_ents = [];
-    a_ents[#"hash_363ff12eba02d468"] = getent("flip_table", "targetname");
+    a_ents[#"hash_363ff12eba02d468"] = getEnt("flip_table", "targetname");
 
     if(var_2250555) {
-      a_ents[#"enemy"] = spawner::simple_spawn_single(getent("vig_right_1_enemy_table_flip_spawner", "targetname"));
+      a_ents[#"enemy"] = spawner::simple_spawn_single(getEnt("vig_right_1_enemy_table_flip_spawner", "targetname"));
     }
 
     s_scene = struct::get("scene_table_flip");
@@ -244,7 +244,7 @@ function function_5629159e() {
   level endon(#"game_ended", #"death");
 
   while(!isDefined(level.var_7ddb94fb)) {
-    level.var_7ddb94fb = getent("mine_intro", "script_noteworthy");
+    level.var_7ddb94fb = getEnt("mine_intro", "script_noteworthy");
     waitframe(1);
   }
 
@@ -301,7 +301,7 @@ function function_cf0e1871(e_mine) {
 
 function function_103e5f20() {
   a_ents = [];
-  a_ents[#"enemy"] = spawner::simple_spawn_single(getent("vig_right_1_enemy_door_kick_spawner", "targetname"));
+  a_ents[#"enemy"] = spawner::simple_spawn_single(getEnt("vig_right_1_enemy_door_kick_spawner", "targetname"));
   a_ents[#"enemy"] endon(#"death");
   level flag::wait_till("flg_vig_first_floor_door_kick");
   var_4a3daa0b = struct::get("first_floor_cctv_door_look_at", "targetname");
@@ -324,8 +324,8 @@ function function_103e5f20() {
 function function_8b3f291() {
   a_ents = [];
   level flag::wait_till("play_scene_civ_execute");
-  a_ents[#"contra"] = spawner::simple_spawn_single(getent("vig_execute_contra_spawner", "targetname"));
-  a_ents[#"civilian"] = spawner::simple_spawn_single(getent("vig_execute_civ_spawner", "targetname"));
+  a_ents[#"contra"] = spawner::simple_spawn_single(getEnt("vig_execute_contra_spawner", "targetname"));
+  a_ents[#"civilian"] = spawner::simple_spawn_single(getEnt("vig_execute_civ_spawner", "targetname"));
   a_ents[#"contra"] endon(#"death");
   a_ents[#"civilian"] endon(#"death");
   a_ents[#"contra"] function_628aec92("scene_vig_0000_amb_surrender_to_execution");
@@ -404,7 +404,7 @@ function function_c1f6c87c() {
 
 function function_c54af28a() {
   s_scene = struct::get("cctv_nuke_room_scene");
-  var_34d58d57 = getent("clean_room_door", "targetname");
+  var_34d58d57 = getEnt("clean_room_door", "targetname");
   var_34d58d57 hide();
   s_scene scene::init();
   s_scene.scene_ents[#"guy01"] thread function_d46f031f(["gut"], "hastings");
@@ -520,11 +520,11 @@ function function_604a3e80() {
 
 function function_c9b603f3(var_57ef78ed) {
   level endon(#"hash_604e61bc28aebaeb");
-  actors[#"door2"] = getent("cctv_exit_door_left", "targetname");
-  actors[#"door1"] = getent("cctv_exit_door_right", "targetname");
+  actors[#"door2"] = getEnt("cctv_exit_door_left", "targetname");
+  actors[#"door1"] = getEnt("cctv_exit_door_right", "targetname");
   level.lazar sethighdetail(1);
-  e_clip = getent("cctv_exit_door_left_clip", "targetname");
-  e_clip disconnectpaths();
+  e_clip = getEnt("cctv_exit_door_left_clip", "targetname");
+  e_clip disconnectPaths();
   level thread function_39beb73c(actors);
 
   if(var_57ef78ed == "floor_one") {
@@ -626,7 +626,7 @@ function function_78f15dd1() {
 }
 
 function function_e73fa40e(var_57ef78ed) {
-  a_ents[#"door"] = getent("clean_room_door", "targetname");
+  a_ents[#"door"] = getEnt("clean_room_door", "targetname");
   level thread scene::init("scene_rev_4010_nuke_room_lazar", a_ents);
 
   if(var_57ef78ed != "2nd_floor") {
@@ -642,7 +642,7 @@ function function_e73fa40e(var_57ef78ed) {
   level thread scene::play("scene_rev_4010_nuke_room_lazar", "loop", a_ents);
   level flag::wait_till("play_nuke_room");
   level.lazar val::set("nuke_room_ignore_all", "ignoreall", 0);
-  e_door_clip = getent("nuke_room_door_clip", "targetname");
+  e_door_clip = getEnt("nuke_room_door_clip", "targetname");
   e_door_clip show();
   level thread scene::play("scene_rev_4010_nuke_room_lazar", "close", a_ents);
   level waittill(#"hash_40c545f8691fd139");
@@ -665,16 +665,16 @@ function function_ee30e713() {
 
 function function_b91f9a58(var_57ef78ed) {
   a_ents = [];
-  var_602672df = getent("vip_door_player_clip", "targetname");
+  var_602672df = getEnt("vip_door_player_clip", "targetname");
 
   hms_util::print("<dev string:x88>");
 
   var_602672df hide();
-  a_ents[#"park"] = getent("park", "targetname", 1);
-  a_ents[#"scientist"] = spawner::simple_spawn_single(getent("vip_room_scientist_spawner", "targetname"));
+  a_ents[#"park"] = getEnt("park", "targetname", 1);
+  a_ents[#"scientist"] = spawner::simple_spawn_single(getEnt("vip_room_scientist_spawner", "targetname"));
   a_ents[#"scientist"] setModel("c_t9_cp_cub_civ_scientist_hastings_bloody");
   level thread function_abdca9ef(a_ents);
-  a_ents[#"nuke_room_park_gun"] = getent("nuke_room_park_gun", "targetname");
+  a_ents[#"nuke_room_park_gun"] = getEnt("nuke_room_park_gun", "targetname");
   a_ents[#"nuke_room_park_gun"] hide();
   a_ents[#"nuke_room_park_gun"] thread function_c2bb9d98();
 
@@ -730,9 +730,9 @@ function private function_fe6c4ca4() {
 }
 
 function function_ad98871a() {
-  e_door_clip = getent("nuke_room_door_clip", "targetname");
+  e_door_clip = getEnt("nuke_room_door_clip", "targetname");
   e_door_clip delete();
-  a_ents[#"door"] = getent("clean_room_door", "targetname");
+  a_ents[#"door"] = getEnt("clean_room_door", "targetname");
   level scene::play_from_time("scene_rev_4010_nuke_room_lazar", "exit", a_ents, 1, 1, 1, 1, 1);
 }
 
@@ -775,11 +775,11 @@ function function_b3ef71a8() {
 }
 
 function function_59320958() {
-  var_63802c77 = getent("left_window_bullet_origin", "targetname");
-  var_79f11353 = getent("right_window_bullet_origin", "targetname");
-  var_3cca49f5 = getent("bullet_destination_1", "targetname");
-  var_2e72ad46 = getent("bullet_destination_2", "targetname");
-  var_603a10d8 = getent("bullet_destination_3", "targetname");
+  var_63802c77 = getEnt("left_window_bullet_origin", "targetname");
+  var_79f11353 = getEnt("right_window_bullet_origin", "targetname");
+  var_3cca49f5 = getEnt("bullet_destination_1", "targetname");
+  var_2e72ad46 = getEnt("bullet_destination_2", "targetname");
+  var_603a10d8 = getEnt("bullet_destination_3", "targetname");
   level flag::wait_till("flg_escape_bullets_start");
   level thread scene::play("p9_fxanim_gp_hallway_glass_break_scene", "play");
   magicbullet(getweapon(#"ar_accurate_t9"), var_63802c77.origin, var_3cca49f5.origin);
@@ -815,7 +815,7 @@ function function_a1651470() {
   [[c_door]] - > function_e7be6e76(0, 1, 0, 0);
   level thread function_9f83193();
   a_ents = [];
-  a_ents[#"lazar"] = getent("lazar", "targetname", 1);
+  a_ents[#"lazar"] = getEnt("lazar", "targetname", 1);
   a_ents[#"prop 1"] = c_door.m_e_door;
   level scene::add_scene_func("scene_rev_5010_esc_trapped_breach", &function_aecde30d, "breach_enter");
   level scene::play("scene_rev_5010_esc_trapped_breach", "breach_enter", a_ents);
@@ -962,7 +962,7 @@ function function_1c03801f() {
 
 function function_23334bfb() {
   level.player endon(#"death");
-  var_bcbd3ddd = getent("skyhook_hook", "targetname");
+  var_bcbd3ddd = getEnt("skyhook_hook", "targetname");
   level.player val::set(#"hash_3de08cce7bf91456", "disable_weapons", 1);
   level.player val::set(#"hash_3de08cce7bf91456", "freezecontrols_allowlook", 1);
   wait 0.4;
@@ -975,7 +975,7 @@ function function_23334bfb() {
   s_tag = struct::get("tag_align_rev_skyhook");
   var_60a25e22 = getcorpsearray(s_tag.origin, 256);
   array::delete_all(var_60a25e22);
-  e_debris = getent("rooftop_rpg_debris", "targetname");
+  e_debris = getEnt("rooftop_rpg_debris", "targetname");
   e_debris show();
   level.lazar detach(level.lazar.head);
   level.park detach(level.park.head);
@@ -1029,13 +1029,13 @@ function function_dbd5c057() {
   level flag::wait_till("flg_escape_on_scaffolding");
 
   if(isDefined(level.player)) {
-    level.player playrumbleonentity(#"fallimpact_med");
+    level.player playRumbleOnEntity(#"fallimpact_med");
     level thread scene::play("p9_fxanim_cp_yamanatua_birds_scare_01_bundle", "shot1");
     wait randomfloatrange(0.1, 0.3);
-    level.player playrumbleonentity(#"fallimpact_med");
+    level.player playRumbleOnEntity(#"fallimpact_med");
     level thread scene::play("p9_fxanim_cp_yamanatua_birds_scare_02_bundle", "shot1");
     wait randomfloatrange(0.2, 0.5);
-    level.player playrumbleonentity(#"fallimpact_med");
+    level.player playRumbleOnEntity(#"fallimpact_med");
     level thread scene::play("p9_fxanim_cp_yamanatua_birds_scare_03_bundle", "shot1");
   }
 }

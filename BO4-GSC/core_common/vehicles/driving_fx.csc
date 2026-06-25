@@ -71,7 +71,7 @@ collision_thread(localclientnum) {
         self playSound(localclientnum, alias, undefined, volume);
 
         if(isDefined(self.heavycollisionrumble) && player function_21c0fa55() && self isdrivingvehicle(player)) {
-          player playrumbleonentity(localclientnum, self.heavycollisionrumble);
+          player playRumbleOnEntity(localclientnum, self.heavycollisionrumble);
         }
 
         continue;
@@ -90,7 +90,7 @@ collision_thread(localclientnum) {
         self playSound(localclientnum, alias, undefined, volume);
 
         if(isDefined(self.lightcollisionrumble) && player function_21c0fa55() && self isdrivingvehicle(player)) {
-          player playrumbleonentity(localclientnum, self.lightcollisionrumble);
+          player playRumbleOnEntity(localclientnum, self.lightcollisionrumble);
         }
       }
     }
@@ -123,7 +123,7 @@ jump_landing_thread(localclientnum) {
       self playSound(localclientnum, alias, undefined, volume);
 
       if(isDefined(self.jumplandingrumble) && player function_21c0fa55() && self isdrivingvehicle(player)) {
-        player playrumbleonentity(localclientnum, self.jumplandingrumble);
+        player playRumbleOnEntity(localclientnum, self.jumplandingrumble);
       }
     }
   }
@@ -150,7 +150,7 @@ suspension_thread(localclientnum) {
       self playSound(localclientnum, alias, undefined, volume);
 
       if(player function_21c0fa55() && self isdrivingvehicle(player)) {
-        player playrumbleonentity(localclientnum, "damage_light");
+        player playRumbleOnEntity(localclientnum, "damage_light");
       }
     }
   }

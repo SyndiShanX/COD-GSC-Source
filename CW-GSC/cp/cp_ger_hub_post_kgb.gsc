@@ -29,12 +29,12 @@ function main(str_skipto, b_starting) {
   setlightingstate(3);
   level thread function_9a76d250();
   level thread namespace_31c67f6d::function_15231086("eboard_ready");
-  var_a2279767 = getent("map_table", "targetname");
+  var_a2279767 = getEnt("map_table", "targetname");
   var_a2279767 hide();
-  var_475021af = getent("hub_mdl_car_01_clip", "targetname");
+  var_475021af = getEnt("hub_mdl_car_01_clip", "targetname");
   var_475021af hide();
   s_player_start = struct::get("s_post_kgb_player_start", "targetname");
-  level.player setorigin(s_player_start.origin);
+  level.player setOrigin(s_player_start.origin);
   level.player setplayerangles(s_player_start.angles);
   level thread namespace_31c67f6d::function_29279de1("post_kgb");
   level thread namespace_31c67f6d::function_b0558ba2("6");
@@ -224,9 +224,9 @@ function function_b58272a1(str_skipto) {
   level namespace_31c67f6d::function_6194f34a("post_kgb");
   level thread function_53ea6532();
   setlightingstate(3);
-  var_a2279767 = getent("map_table", "targetname");
+  var_a2279767 = getEnt("map_table", "targetname");
   var_a2279767 hide();
-  var_475021af = getent("hub_mdl_car_01_clip", "targetname");
+  var_475021af = getEnt("hub_mdl_car_01_clip", "targetname");
   var_475021af hide();
   level notify(#"eboard_ready");
   level thread function_d51cce5a();
@@ -238,7 +238,7 @@ function function_d51cce5a() {
   level thread function_9a76d250();
   level namespace_31c67f6d::function_7fd3a4d8(1, undefined, 1);
   level thread scene::play("scene_hub_post_kgb_dialog_woods", "zone_idle");
-  phone = getent("cellphone", "targetname");
+  phone = getEnt("cellphone", "targetname");
   level thread scene::play("scene_hub_post_kgb_dialog_hudson", "zone_idle", [phone]);
   level.hudson util::delay_notify(0.5, "dialog_ready");
 }

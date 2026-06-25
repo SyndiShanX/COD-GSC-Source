@@ -291,7 +291,7 @@ function getnextmoveposition_unaware() {
     }
     point._scoredebug[""] = randomfloatrange(0, 30);
     point.score = point.score + randomfloatrange(0, 30);
-    pointdirection = vectornormalize(point.origin - self.origin);
+    pointdirection = vectorNormalize(point.origin - self.origin);
     factor = vectordot(pointdirection, forward);
     if(factor > 0.7) {
       if(!isDefined(point._scoredebug)) {
@@ -392,7 +392,7 @@ function state_jump_update(params) {
   self.jump.linkent.origin = self.origin;
   self.jump.linkent.angles = self.angles;
   wait(0.05);
-  self linkto(self.jump.linkent);
+  self linkTo(self.jump.linkent);
   self.jump.in_air = 1;
   if(0) {
     debugstar(goal, 60000, (0, 1, 0));
@@ -463,7 +463,7 @@ function state_jump_update(params) {
       if(abs(direction[0]) < 0.01 && abs(direction[1]) < 0.01) {
         direction = (randomfloatrange(1, 2), randomfloatrange(1, 2), 0);
       }
-      direction = vectornormalize(direction);
+      direction = vectorNormalize(direction);
       strength = 700;
       player setvelocity(player getvelocity() + (direction * strength));
       if(player.health > 80) {
@@ -577,7 +577,7 @@ function path_update_interrupt() {
       closeengagementdist = self.settings.engagementdistmin - 150;
       if(self vehcansee(self.enemy)) {
         self setlookatent(self.enemy);
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
         if(selfdisttotarget < farengagementdist && selfdisttotarget > closeengagementdist) {
           canseeenemycount++;
           if(canseeenemycount > 3 && (vehicle_ai::timesince(startpath) > 5 || distance2dsquared(old_origin, self.origin) > (move_dist * move_dist))) {
@@ -641,7 +641,7 @@ function movement_thread() {
     if(foundpath) {
       if(isDefined(self.enemy) && self vehseenrecently(self.enemy, 1)) {
         self setlookatent(self.enemy);
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
       }
       locomotion_start();
       self thread path_update_interrupt();
@@ -673,7 +673,7 @@ function stopmovementandsetbrake() {
 
 function face_target(position, targetanglediff = 30) {
   v_to_enemy = (position - self.origin[0], position - self.origin[1], 0);
-  v_to_enemy = vectornormalize(v_to_enemy);
+  v_to_enemy = vectorNormalize(v_to_enemy);
   goalangles = vectortoangles(v_to_enemy);
   anglediff = absangleclamp180(self.angles[1] - goalangles[1]);
   if(anglediff <= targetanglediff) {
@@ -706,7 +706,7 @@ function scan() {
     msg = self util::waittill_any_timeout(0.5, "turret_on_target");
     wait(0.1);
     if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
       self setlookatent(self.enemy);
       self face_target(self.enemy);
       return;
@@ -730,15 +730,15 @@ function attack_thread_machinegun() {
   while(true) {
     if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
       self setlookatent(self.enemy);
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
       if(!spinning) {
         spinning = 1;
         self setturretspinning(1);
         wait(0.5);
         continue;
       }
-      self setgunnertargetent(self.enemy, (0, 0, 0), 0);
-      self setgunnertargetent(self.enemy, (0, 0, 0), 1);
+      self setgunnertargetEnt(self.enemy, (0, 0, 0), 0);
+      self setgunnertargetEnt(self.enemy, (0, 0, 0), 1);
       self vehicle_ai::fire_for_time(randomfloatrange(0.75, 1.5) * self.difficulty_scale_up, 1);
       if(isDefined(self.enemy) && isai(self.enemy)) {
         wait(randomfloatrange(0.1, 0.2));
@@ -757,8 +757,8 @@ function attack_thread_machinegun() {
 
 function attack_rocket(target) {
   if(isDefined(target)) {
-    self setturrettargetent(target);
-    self setgunnertargetent(target, vectorscale((0, 0, -1), 10), 2);
+    self setturrettargetEnt(target);
+    self setgunnertargetEnt(target, vectorscale((0, 0, -1), 10), 2);
     msg = self util::waittill_any_timeout(1, "turret_on_target");
     self fireweapon(2, target, vectorscale((0, 0, -1), 10));
     self cleargunnertarget(1);
@@ -774,8 +774,8 @@ function attack_thread_rocket() {
   vehicle_ai::cooldown("rocket", 3);
   while(true) {
     if(isDefined(self.enemy) && self vehseenrecently(self.enemy, 3) && vehicle_ai::iscooldownready("rocket", 1.5)) {
-      self setgunnertargetent(self.enemy, (0, 0, 0), 0);
-      self setgunnertargetent(self.enemy, vectorscale((0, 0, -1), 10), 2);
+      self setgunnertargetEnt(self.enemy, (0, 0, 0), 0);
+      self setgunnertargetEnt(self.enemy, vectorscale((0, 0, -1), 10), 2);
       self thread weapon_doors_state(1);
       wait(1.5);
       if(isDefined(self.enemy) && self vehseenrecently(self.enemy, 1)) {
@@ -798,7 +798,7 @@ function attack_thread_rocket() {
 }
 
 function siegebot_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  num_players = getplayers().size;
+  num_players = getPlayers().size;
   maxdamage = self.healthdefault * (0.4 - (0.02 * num_players));
   if(smeansofdeath !== "MOD_UNKNOWN" && idamage > maxdamage) {
     idamage = maxdamage;

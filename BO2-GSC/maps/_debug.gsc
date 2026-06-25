@@ -751,7 +751,7 @@ debugdvars() {
     }
 
     if(getdebugdvar("debug_goalradius") == "on") {
-      level thread debug_goalradius();
+      level thread debug_goalRadius();
     }
 
     if(getdebugdvar("debug_maxvisibledist") == "on") {
@@ -944,7 +944,7 @@ create_reflection_object(model) {
   level.debug_reflectionobject = spawn("script_model", player getEye() + vectorscale(anglesToForward(player.angles), 100));
   level.debug_reflectionobject setModel(model);
   level.debug_reflectionobject.origin = player getEye() + vectorscale(anglesToForward(player getplayerangles()), 100);
-  level.debug_reflectionobject linkto(player);
+  level.debug_reflectionobject linkTo(player);
   thread debug_reflection_buttons();
 }
 
@@ -1036,7 +1036,7 @@ debug_reflection_buttons() {
     wait 0.05;
 
     if(isDefined(level.debug_reflectionobject)) {
-      level.debug_reflectionobject linkto(players[0]);
+      level.debug_reflectionobject linkTo(players[0]);
     }
   }
 }
@@ -1144,7 +1144,7 @@ camera() {
   cameras = getEntArray("camera", "targetname");
 
   for(i = 0; i < cameras.size; i++) {
-    ent = getent(cameras[i].target, "targetname");
+    ent = getEnt(cameras[i].target, "targetname");
     cameras[i].origin2 = ent.origin;
     cameras[i].angles = vectortoangles(ent.origin - cameras[i].origin);
   }
@@ -1195,7 +1195,7 @@ camera() {
       angles = (0, difference[1], 0);
       forward = anglesToForward(angles);
       players = get_players();
-      difference = vectornormalize(end - players[0].origin);
+      difference = vectorNormalize(end - players[0].origin);
       dot = vectordot(forward, difference);
 
       if(dot < 0.85) {
@@ -1465,7 +1465,7 @@ getchain() {
       break;
     }
 
-    ent = getent(ent.target, "targetname");
+    ent = getEnt(ent.target, "targetname");
 
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
@@ -1492,10 +1492,10 @@ drawminimapbounds(viewpos, mincorner, maxcorner) {
   viewheight = viewpos[2] - maxcorner[2];
   diaglen = length(mincorner - maxcorner);
   mincorneroffset = mincorner - viewpos;
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800 * 0);
   maxcorneroffset = maxcorner - viewpos;
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800 * 0);
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   diagonal = maxcorner - mincorner;
@@ -1547,8 +1547,8 @@ debug_vehiclesittags() {
 }
 
 islookingatorigin(origin) {
-  normalvec = vectornormalize(origin - self getshootatpos());
-  veccomp = vectornormalize(origin - vectorscale((0, 0, 1), 24.0) - self getshootatpos());
+  normalvec = vectorNormalize(origin - self getshootatpos());
+  veccomp = vectorNormalize(origin - vectorscale((0, 0, 1), 24.0) - self getshootatpos());
   insidedot = vectordot(normalvec, veccomp);
   anglevec = anglesToForward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
@@ -2012,7 +2012,7 @@ debug_animsound() {
     for(i = 0; i < level.animsounds_thisframe.size; i++) {
       animsound = level.animsounds_thisframe[i];
       animsound.animsound_color = (0.25, 1.0, 0.5);
-      difference = vectornormalize(animsound.origin + vectorscale((0, 0, 1), 40.0) - (players[0].origin + vectorscale((0, 0, 1), 55.0)));
+      difference = vectorNormalize(animsound.origin + vectorscale((0, 0, 1), 40.0) - (players[0].origin + vectorscale((0, 0, 1), 55.0)));
       newdot = vectordot(forward, difference);
 
       if(newdot < dot) {
@@ -3018,7 +3018,7 @@ display_module_text() {
   iprintlnbold("Please open and read " + level.script + ".gsc for complete understanding");
 }
 
-debug_goalradius() {
+debug_goalRadius() {
   guys = getaiarray();
 
   for(i = 0; i < guys.size; i++) {
@@ -3223,7 +3223,7 @@ ai_puppet_manager() {
 ai_puppet_set() {
   level.ai_puppet = level.playercursorai;
   level.ai_puppet.old_goalradius = level.ai_puppet.goalradius;
-  level.ai_puppet stopanimscripted();
+  level.ai_puppet stopanimScripted();
 }
 
 ai_puppet_release(restore) {
@@ -3339,11 +3339,11 @@ ai_puppeteer_destroy_hud() {
 
 ai_puppeteer_render_point(point, normal, forward, color) {
   surface_vector = vectorcross(forward, normal);
-  surface_vector = vectornormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vectorscale(surface_vector, 5), color, 1, 1);
   line(point, point + vectorscale(surface_vector, -5), color, 1, 1);
   surface_vector = vectorcross(normal, surface_vector);
-  surface_vector = vectornormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vectorscale(surface_vector, 5), color, 1, 1);
   line(point, point + vectorscale(surface_vector, -5), color, 1, 1);
 }

@@ -277,7 +277,7 @@ function function_27ef9857(player) {
 }
 
 function function_6c41d7f2(player) {
-  var_6f73bd35 = getent("police_box", "targetname");
+  var_6f73bd35 = getEnt("police_box", "targetname");
   if(isDefined(var_6f73bd35)) {
     var_6f73bd35 playSound("zmb_zod_fuse_place");
   }
@@ -470,7 +470,7 @@ function oncrafted_ritual_piece(player) {
     player zm_zod_vo::function_c41d3e2e(self.piecename);
   } else {
     level clientfield::set("quest_state_" + get_character_name_from_value(self.piecename), 5);
-    quest_ritual_relic_placed = getent("quest_ritual_relic_placed_" + get_character_name_from_value(self.piecename), "targetname");
+    quest_ritual_relic_placed = getEnt("quest_ritual_relic_placed_" + get_character_name_from_value(self.piecename), "targetname");
     quest_ritual_relic_placed show();
   }
   level clientfield::set("holder_of_" + get_character_name_from_value(self.piecename), 0);
@@ -555,7 +555,7 @@ function function_a0e4fb00(v_origin, v_angles, n_gun_index) {
 
 function function_e983d2a0(player) {
   n_gun_index = self.stub.n_gun_index;
-  self sethintstring(&"ZM_ZOD_PICKUP_IDGUN");
+  self setHintString(&"ZM_ZOD_PICKUP_IDGUN");
   b_is_invis = isDefined(player.beastmode) && player.beastmode;
   self setinvisibletoplayer(player, b_is_invis);
   return !b_is_invis;

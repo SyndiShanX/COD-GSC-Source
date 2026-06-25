@@ -876,7 +876,7 @@ init_trigger_flags() {
   level.trigger_func[true] = ::trigger_on;
   level.trigger_func[false] = ::trigger_off;
 }
-getstruct(name, type) {
+getStruct(name, type) {
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
   if(!isDefined(type)) {
     type = "targetname";

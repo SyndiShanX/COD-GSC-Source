@@ -162,7 +162,7 @@ watch_devgui_quadrotor() {
     wait 0.1;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player set_player_equipment("equip_dieseldrone_zm");
@@ -490,7 +490,7 @@ dug_zombie_rise(spot, func_rise_fx) {
   self.no_eye_glow = 1;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
@@ -499,13 +499,13 @@ dug_zombie_rise(spot, func_rise_fx) {
   anim_org = spot.origin;
   anim_ang = spot.angles;
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill("movedone");
   target_org = get_desired_origin();
 
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
 
@@ -530,7 +530,7 @@ dug_zombie_rise(spot, func_rise_fx) {
 
   self orientmode("face default");
   self playSound("zmb_vocals_capzomb_spawn");
-  self animscripted(self.origin, spot.angles, "zm_dug_rise");
+  self animScripted(self.origin, spot.angles, "zm_dug_rise");
   self maps\mp\animscripts\zm_shared::donotetracks("rise_anim", ::handle_rise_notetracks, spot);
   self.no_eye_glow = 0;
   self thread zombie_eye_glow();
@@ -710,7 +710,7 @@ placeholder_puzzle_spin_model() {
   self endon("death");
 
   while(true) {
-    self rotateyaw(360, 10, 0, 0);
+    self rotateYaw(360, 10, 0, 0);
     wait 9.9;
   }
 }
@@ -731,7 +731,7 @@ setting_tutorial_hud() {
 }
 
 tomb_trigger_update_message(func_per_player_msg) {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(e_player in a_players) {
     n_player = e_player getentitynumber();
@@ -741,7 +741,7 @@ tomb_trigger_update_message(func_per_player_msg) {
     }
     new_msg = self[[func_per_player_msg]](e_player);
     self.stub.playertrigger[n_player].stored_hint_string = new_msg;
-    self.stub.playertrigger[n_player] sethintstring(new_msg);
+    self.stub.playertrigger[n_player] setHintString(new_msg);
   }
 }
 
@@ -930,7 +930,7 @@ weather_manager() {
     level setclientfield("snow_level", level.weather_snow);
     wait 2;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(is_player_valid(player, 0, 1)) {
         player set_weather_to_player();
       }
@@ -958,7 +958,7 @@ rotate_skydome() {
 }
 
 play_puzzle_stinger_on_all_players() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player playSound("zmb_squest_step2_finished");
@@ -972,7 +972,7 @@ puzzle_orb_move(v_to_pos) {
     return;
   }
   movetime = dist / 300;
-  self moveto(v_to_pos, movetime, 0, 0);
+  self moveTo(v_to_pos, movetime, 0, 0);
   self waittill("movedone");
 }
 
@@ -983,7 +983,7 @@ puzzle_orb_follow_path(s_start) {
     self puzzle_orb_move(s_next_pos.origin);
 
     if(isDefined(s_next_pos.target)) {
-      s_next_pos = getstruct(s_next_pos.target, "targetname");
+      s_next_pos = getStruct(s_next_pos.target, "targetname");
     } else {
       s_next_pos = undefined;
     }
@@ -998,7 +998,7 @@ puzzle_orb_follow_return_path(s_start, n_element) {
     a_path[a_path.size] = s_next;
 
     if(isDefined(s_next.target)) {
-      s_next = getstruct(s_next.target, "targetname");
+      s_next = getStruct(s_next.target, "targetname");
     } else {
       s_next = undefined;
     }
@@ -1020,7 +1020,7 @@ puzzle_orb_follow_return_path(s_start, n_element) {
 puzzle_orb_pillar_show() {
   level notify("sky_pillar_reset");
   level endon("sky_pillar_reset");
-  s_pillar = getstruct("crypt_pillar", "targetname");
+  s_pillar = getStruct("crypt_pillar", "targetname");
   exploder(333);
 
   if(isDefined(s_pillar.e_model)) {
@@ -1042,7 +1042,7 @@ puzzle_orb_pillar_show() {
 }
 
 any_player_looking_at_plinth(min_lookat_dot, n_near_dist_sq) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     dist_sq = distance2dsquared(player.origin, self.origin);
@@ -1050,7 +1050,7 @@ any_player_looking_at_plinth(min_lookat_dot, n_near_dist_sq) {
     if(dist_sq < n_near_dist_sq) {
       fvec = anglesToForward(player.angles);
       to_self = self.origin - player.origin;
-      to_self = vectornormalize(to_self);
+      to_self = vectorNormalize(to_self);
       dot_to_self = vectordot(to_self, fvec);
 
       if(dot_to_self > min_lookat_dot) {
@@ -1079,7 +1079,7 @@ puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   }
 
   flag_wait(a_puzzle_flags[0]);
-  s_start = getstruct(str_start_point, "targetname");
+  s_start = getStruct(str_start_point, "targetname");
   e_model = spawn("script_model", s_start.origin);
   e_model setModel(s_start.model);
   e_model.script_int = e_gem_pos.script_int;
@@ -1105,15 +1105,15 @@ puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   wait_network_frame();
   playFXOnTag(level._effect["puzzle_orb_trail"], e_model, "tag_origin");
   wait_network_frame();
-  s_next_pos = getstruct(s_start.target, "targetname");
+  s_next_pos = getStruct(s_start.target, "targetname");
   e_model puzzle_orb_follow_path(s_next_pos);
   v_sky_pos = e_model.origin;
   v_sky_pos = (v_sky_pos[0], v_sky_pos[1], v_sky_pos[2] + 1000);
   e_model puzzle_orb_move(v_sky_pos);
   e_model ghost();
-  s_descend_start = getstruct("orb_crypt_descent_path", "targetname");
+  s_descend_start = getStruct("orb_crypt_descent_path", "targetname");
   v_pos_above_gem = s_descend_start.origin + vectorscale((0, 0, 1), 3000.0);
-  e_model moveto(v_pos_above_gem, 0.05, 0, 0);
+  e_model moveTo(v_pos_above_gem, 0.05, 0, 0);
   e_model waittill("movedone");
   flag_wait(a_puzzle_flags[1]);
   e_model show();
@@ -1229,7 +1229,7 @@ rumble_players_in_chamber(n_rumble_enum, n_rumble_time) {
     n_rumble_time = 0.1;
   }
 
-  a_players = getplayers();
+  a_players = getPlayers();
   a_rumbled_players = [];
 
   foreach(e_player in a_players) {
@@ -1248,7 +1248,7 @@ rumble_players_in_chamber(n_rumble_enum, n_rumble_time) {
 
 rumble_nearby_players(v_center, n_range, n_rumble_enum) {
   n_range_sq = n_range * n_range;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_rumbled_players = [];
 
   foreach(e_player in a_players) {
@@ -1308,7 +1308,7 @@ whirlwind_rumble_nearby_players(str_active_flag) {
   range_sq = 90000;
 
   while(flag(str_active_flag)) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       dist_sq = distancesquared(self.origin, player.origin);
@@ -1390,7 +1390,7 @@ zone_capture_powerup() {
 
 traversal_blocker() {
   flag_wait("activate_zone_nml");
-  m_traversal_blocker = getent("traversal_blocker", "targetname");
+  m_traversal_blocker = getEnt("traversal_blocker", "targetname");
   m_traversal_blocker connectpaths();
   m_traversal_blocker delete();
 }

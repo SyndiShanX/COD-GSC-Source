@@ -75,7 +75,7 @@ init() {
   level thread machine_watcher_sumpf_jugg();
 }
 turn_sleight_on() {
-  machine = getent("vending_sleight", "targetname");
+  machine = getEnt("vending_sleight", "targetname");
   level waittill("sleight_on");
   machine setModel("zombie_vending_sleight_on");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
@@ -99,7 +99,7 @@ turn_sleight_on() {
 }
 
 turn_revive_on() {
-  machine = getent("vending_revive", "targetname");
+  machine = getEnt("vending_revive", "targetname");
   level waittill("revive_on");
   machine setModel("zombie_vending_revive_on");
   machine playSound("perks_power_on");
@@ -123,7 +123,7 @@ turn_revive_on() {
 }
 
 turn_jugger_on() {
-  machine = getent("vending_jugg", "targetname");
+  machine = getEnt("vending_jugg", "targetname");
   level waittill("juggernog_on");
   machine setModel("zombie_vending_jugg_on");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
@@ -146,7 +146,7 @@ turn_jugger_on() {
   playFXOnTag(level._effect["jugger_light"], machine, "tag_origin");
 }
 turn_doubletap_on() {
-  machine = getent("vending_doubletap", "targetname");
+  machine = getEnt("vending_doubletap", "targetname");
   level waittill("doubletap_on");
   machine setModel("zombie_vending_doubletap_on");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
@@ -169,7 +169,7 @@ turn_doubletap_on() {
   playFXOnTag(level._effect["doubletap_light"], machine, "tag_origin");
 }
 turn_doubletap_sumpf_on() {
-  machine = getent("vending_doubletap", "targetname");
+  machine = getEnt("vending_doubletap", "targetname");
   level waittill("doubletap_sumpf_on");
   machine setModel("zombie_vending_doubletap_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
@@ -193,7 +193,7 @@ turn_doubletap_sumpf_on() {
 }
 
 turn_jugger_sumpf_on() {
-  machine = getent("vending_jugg", "targetname");
+  machine = getEnt("vending_jugg", "targetname");
   level waittill("juggernog_sumpf_on");
   machine setModel("zombie_vending_jugg_on_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
@@ -217,7 +217,7 @@ turn_jugger_sumpf_on() {
 }
 
 turn_revive_sumpf_on() {
-  machine = getent("vending_revive", "targetname");
+  machine = getEnt("vending_revive", "targetname");
   level waittill("revive_sumpf_on");
   machine setModel("zombie_vending_revive_on_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
@@ -241,7 +241,7 @@ turn_revive_sumpf_on() {
 }
 
 turn_sleight_sumpf_on() {
-  machine = getent("vending_sleight", "targetname");
+  machine = getEnt("vending_sleight", "targetname");
   level waittill("sleight_sumpf_on");
   machine setModel("zombie_vending_sleight_on_price");
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
@@ -270,7 +270,7 @@ vending_machine_flicker_light(fx_light, duration) {
   fxobj.angles = self.angles;
   playFXOnTag(level._effect[fx_light], fxObj, "tag_origin");
   fxObj playLoopSound("elec_current_loop");
-  playsoundatposition("perks_rattle", fxObj.origin);
+  playSoundAtPosition("perks_rattle", fxObj.origin);
   wait(duration);
   fxobj stoploopsound();
   fxobj delete();
@@ -305,11 +305,11 @@ vending_trigger_think() {
   perk = self.script_noteworthy;
 
   if(isDefined(level.script) && level.script != "nazi_zombie_sumpf") {
-    self SetHintString(&"ZOMBIE_FLAMES_UNAVAILABLE");
+    self setHintString(&"ZOMBIE_FLAMES_UNAVAILABLE");
   }
 
-  self SetCursorHint("HINT_NOICON");
-  self UseTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
 
   notify_name = perk + "_power_on";
   level waittill(notify_name);
@@ -317,7 +317,7 @@ vending_trigger_think() {
   self thread check_player_has_perk(perk);
 
   if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
-    self SetHintString(&"ZOMBIE_PERK_GENERIC");
+    self setHintString(&"ZOMBIE_PERK_GENERIC");
   } else {
     self vending_set_hintstring(perk);
   }
@@ -375,7 +375,7 @@ vending_trigger_think() {
     }
 
     sound = "bottle_dispense3d";
-    playsoundatposition(sound, self.origin);
+    playSoundAtPosition(sound, self.origin);
 
     switch (perk) {
       case "specialty_armorvest":
@@ -478,23 +478,23 @@ check_player_has_perk(perk) {
 vending_set_hintstring(perk) {
   switch (perk) {
     case "specialty_armorvest":
-      self SetHintString(&"ZOMBIE_PERK_JUGGERNAUT");
+      self setHintString(&"ZOMBIE_PERK_JUGGERNAUT");
       break;
 
     case "specialty_quickrevive":
-      self SetHintString(&"ZOMBIE_PERK_QUICKREVIVE");
+      self setHintString(&"ZOMBIE_PERK_QUICKREVIVE");
       break;
 
     case "specialty_fastreload":
-      self SetHintString(&"ZOMBIE_PERK_FASTRELOAD");
+      self setHintString(&"ZOMBIE_PERK_FASTRELOAD");
       break;
 
     case "specialty_rof":
-      self SetHintString(&"ZOMBIE_PERK_DOUBLETAP");
+      self setHintString(&"ZOMBIE_PERK_DOUBLETAP");
       break;
 
     default:
-      self SetHintString(perk + " Cost: " + level.zombie_vars["zombie_perk_cost"]);
+      self setHintString(perk + " Cost: " + level.zombie_vars["zombie_perk_cost"]);
       break;
   }
 }
@@ -845,7 +845,7 @@ perks_a_cola_jingle_sumpf(jingle) {
     wait(randomfloatrange(31, 45));
     if(randomint(100) < 15 && level.eggs == 0) {
       level notify("jingle_playing");
-      playsoundatposition("electrical_surge", self.origin);
+      playSoundAtPosition("electrical_surge", self.origin);
 
       if(self.script_sound == "mx_speed_jingle" && level.speed_jingle == 0) {
         level.speed_jingle = 1;
@@ -900,7 +900,7 @@ perks_a_cola_jingle() {
     if(randomint(100) < 15 && level.eggs == 0) {
       level notify("jingle_playing");
 
-      playsoundatposition("electrical_surge", self.origin);
+      playSoundAtPosition("electrical_surge", self.origin);
 
       if(self.script_sound == "mx_speed_jingle" && level.speed_jingle == 0) {
         level.speed_jingle = 1;
@@ -951,15 +951,15 @@ play_random_broken_sounds() {
   if(self.script_sound == "mx_revive_jingle") {
     while(1) {
       wait(randomfloatrange(7, 18));
-      playsoundatposition("broken_random_jingle", self.origin);
+      playSoundAtPosition("broken_random_jingle", self.origin);
 
-      playsoundatposition("electrical_surge", self.origin);
+      playSoundAtPosition("electrical_surge", self.origin);
     }
   } else {
     while(1) {
       wait(randomfloatrange(7, 18));
 
-      playsoundatposition("electrical_surge", self.origin);
+      playSoundAtPosition("electrical_surge", self.origin);
     }
   }
 }

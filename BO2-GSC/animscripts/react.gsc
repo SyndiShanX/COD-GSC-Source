@@ -148,7 +148,7 @@ shouldreact() {
     if(dist < anim.reactiondistancesquaredmax && dist > anim.reactiondistancesquaredmin) {
       if(distancesquared(self.reactorigin, self.origin) < 16384) {
         forwardvec = anglesToForward(self.angles);
-        dirtoreactorigin = vectornormalize(self.reactorigin - self.origin);
+        dirtoreactorigin = vectorNormalize(self.reactorigin - self.origin);
         isreactoriginfront = vectordot(dirtoreactorigin, forwardvec) >= 0;
 
         if(isreactoriginfront && sighttracepassed(self getEye(), self.reactorigin, 0, undefined)) {
@@ -325,7 +325,7 @@ getnewenemyreactionanim() {
     }
 
     nodeforward = anglesToForward(self.node.angles);
-    dirtoreactiontarget = vectornormalize(self.newenemyreactionpos - self.origin);
+    dirtoreactiontarget = vectorNormalize(self.newenemyreactionpos - self.origin);
 
     if(vectordot(nodeforward, dirtoreactiontarget) < -0.5) {
       self orientmode("face current");
@@ -343,7 +343,7 @@ getnewenemyreactionanim() {
     }
 
     if(self.a.pose == "crouch") {
-      dirtoreactiontarget = vectornormalize(self.newenemyreactionpos - self.origin);
+      dirtoreactiontarget = vectorNormalize(self.newenemyreactionpos - self.origin);
       forward = anglesToForward(self.angles);
 
       if(vectordot(forward, dirtoreactiontarget) < -0.5) {

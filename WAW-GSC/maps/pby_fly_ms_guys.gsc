@@ -140,7 +140,7 @@ ms_soldier_deaththread() {
   }
 
   drone notify("death");
-  drone stopAnimScripted();
+  drone stopanimScripted();
 
   if(isDefined(drone.special_death_fx)) {
     drone.special_death_fx = "drone_burst";
@@ -184,12 +184,12 @@ init_drone_manager() {
   }
 }
 ms_soldier_run_and_rail(spawner_name, path_name, cover_name, amount_of_cover) {
-  spawner = GetStruct(spawner_name, "targetname");
-  path = GetStruct(path_name, "targetname");
+  spawner = getStruct(spawner_name, "targetname");
+  path = getStruct(path_name, "targetname");
   cover_array = [];
 
   for(i = 0; i < amount_of_cover; i++) {
-    cover_array[i] = GetStruct(cover_name + "_" + i, "targetname");
+    cover_array[i] = getStruct(cover_name + "_" + i, "targetname");
   }
 
   drones_spawned = [];
@@ -237,7 +237,7 @@ ms_soldier_triple_25_add_gunners() {
   gunner_tower_right = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_tower_right_pos);
   gunner_tower_right.animname = "triple25_gunner1";
   gunner_tower_right useAnimTree(#animtree);
-  gunner_tower_right LinkTo(self, "tag_gunner_turret1");
+  gunner_tower_right linkTo(self, "tag_gunner_turret1");
   gunner_tower_right thread maps\_anim::anim_loop_solo(gunner_tower_right, "fire_loop");
   gunner_tower_right thread reset_position(temp);
 
@@ -251,7 +251,7 @@ ms_soldier_triple_25_add_gunners() {
   gunner_tower_left = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_tower_left_pos);
   gunner_tower_left.animname = "triple25_gunner2";
   gunner_tower_left useAnimTree(#animtree);
-  gunner_tower_left LinkTo(self, "tag_gunner_turret1");
+  gunner_tower_left linkTo(self, "tag_gunner_turret1");
   gunner_tower_left thread maps\_anim::anim_loop_solo(gunner_tower_left, "fire_loop");
   gunner_tower_left thread reset_position(temp);
 
@@ -264,7 +264,7 @@ ms_soldier_triple_25_add_gunners() {
   gunner_deck_right = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_deck_right_pos);
   gunner_deck_right.animname = "triple25_gunner1";
   gunner_deck_right useAnimTree(#animtree);
-  gunner_deck_right LinkTo(self, "tag_gunner_turret2");
+  gunner_deck_right linkTo(self, "tag_gunner_turret2");
   gunner_deck_right thread maps\_anim::anim_loop_solo(gunner_deck_right, "fire_loop");
   gunner_deck_right thread reset_position(temp);
 
@@ -277,7 +277,7 @@ ms_soldier_triple_25_add_gunners() {
   gunner_deck_left = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", gunner_deck_left_pos);
   gunner_deck_left.animname = "triple25_gunner2";
   gunner_deck_left useAnimTree(#animtree);
-  gunner_deck_left LinkTo(self, "tag_gunner_turret2");
+  gunner_deck_left linkTo(self, "tag_gunner_turret2");
   gunner_deck_left thread maps\_anim::anim_loop_solo(gunner_deck_left, "fire_loop");
   gunner_deck_left thread reset_position(temp);
 }
@@ -300,11 +300,11 @@ kill_all_ms_guys() {
 
       if(isDefined(drones[i].boat)) {
         if(!isDefined(drones[i].script_string)) {
-          drones[i] LinkTo(level.boats[drones[i].boat], "aft_break_jnt");
+          drones[i] linkTo(level.boats[drones[i].boat], "aft_break_jnt");
         } else if(drones[i].script_string == "bow") {
-          drones[i] LinkTo(level.boats[drones[i].boat], "bow_break_jnt");
+          drones[i] linkTo(level.boats[drones[i].boat], "bow_break_jnt");
         } else {
-          drones[i] LinkTo(level.boats[drones[i].boat], "aft_break_jnt");
+          drones[i] linkTo(level.boats[drones[i].boat], "aft_break_jnt");
         }
       }
     }

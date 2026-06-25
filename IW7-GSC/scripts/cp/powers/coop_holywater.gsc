@@ -56,7 +56,7 @@ holywater_projectile_instance() {
     level notify("holyWater_landed", self);
     var_2 = spawn("script_model", self.origin);
     var_2 setModel("cp_holywater_trap");
-    var_2 linkto(self);
+    var_2 linkTo(self);
     wait(1);
     var_2 setscriptablepartstate("fx", "start");
     var_2 thread create_aod(var_0);

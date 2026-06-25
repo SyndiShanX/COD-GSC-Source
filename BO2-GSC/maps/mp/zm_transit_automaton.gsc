@@ -90,14 +90,14 @@ initaudioaliases() {
 }
 
 main() {
-  level.automaton = getent("bus_driver_head", "targetname");
+  level.automaton = getEnt("bus_driver_head", "targetname");
   level.automaton thread automatonsetup();
   level.timesplayerattackingautomaton = 0;
   level.automaton.greeting_timer = 0;
 }
 
 automatonsetup() {
-  self linkto(level.the_bus);
+  self linkTo(level.the_bus);
   self setmovingplatformenabled(1);
   self useanimtree(#animtree);
   self setanim(%ai_zombie_bus_driver_idle);
@@ -140,7 +140,7 @@ automatondamagecallback() {
           self.dmgfxorigin.origin = self gettagorigin("tag_origin") + vectorscale((0, 0, 1), 40.0);
         }
 
-        self.dmgfxorigin linkto(self, "J_neck");
+        self.dmgfxorigin linkTo(self, "J_neck");
       }
 
       wait 0.5;
@@ -380,9 +380,9 @@ automaton_attack_reset_timer() {
 }
 
 bus_upgrade_vox() {
-  ladder_trig = getent("bus_ladder_trigger", "targetname");
-  plow_trig = getent("trigger_plow", "targetname");
-  hatch_trig = getent("bus_hatch_bottom_trigger", "targetname");
+  ladder_trig = getEnt("bus_ladder_trigger", "targetname");
+  plow_trig = getEnt("trigger_plow", "targetname");
+  hatch_trig = getEnt("bus_hatch_bottom_trigger", "targetname");
 
   while(true) {
     if(isDefined(level.stops) && isDefined(level.stops["depot"]) && level.stops["depot"] < 1) {
@@ -430,7 +430,7 @@ shove_players_off_bus() {
   foreach(player in players) {
     if(isDefined(player.isonbus) && player.isonbus) {
       dir = anglestoright(level.the_bus.angles);
-      dir = vectornormalize(dir);
+      dir = vectorNormalize(dir);
       player_velocity = dir * 900;
       player setvelocity(player_velocity);
       earthquake(0.25, 1.0, player.origin, 256, player);

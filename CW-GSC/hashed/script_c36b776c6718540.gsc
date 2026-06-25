@@ -42,9 +42,9 @@ function function_7eb604b9() {
 }
 
 function function_50989881(s_scene) {
-  var_257cdc92 = getent("hms_cap", "targetname");
+  var_257cdc92 = getEnt("hms_cap", "targetname");
   var_257cdc92 setscale(1.25);
-  var_257cdc92 linkto(s_scene.scene_ents[#"belikov"], "j_helmet", (2, 1, 0), (-140, -90, 0));
+  var_257cdc92 linkTo(s_scene.scene_ents[#"belikov"], "j_helmet", (2, 1, 0), (-140, -90, 0));
   var_257cdc92 hide();
   level waittill(#"hash_661c404db1017413");
   var_257cdc92 show();
@@ -56,9 +56,9 @@ function function_50989881(s_scene) {
 }
 
 function function_fbb0d73f() {
-  collision_r_heli = getent("collision_r_heli", "targetname");
-  collision_l_heli = getent("collision_l_heli", "targetname");
-  collision_f_heli = getent("collision_f_heli", "targetname");
+  collision_r_heli = getEnt("collision_r_heli", "targetname");
+  collision_l_heli = getEnt("collision_l_heli", "targetname");
+  collision_f_heli = getEnt("collision_f_heli", "targetname");
   var_58d24ca9 = [];
 
   if(!isDefined(var_58d24ca9)) {
@@ -104,15 +104,15 @@ function function_fbb0d73f() {
 function function_23320f08(b_condition, var_6c91f8cd) {
   if(b_condition) {
     foreach(ent in var_6c91f8cd) {
-      ent moveto(ent.origin + (0, 0, -400), 5);
+      ent moveTo(ent.origin + (0, 0, -400), 5);
     }
 
     return;
   }
 
-  var_6c91f8cd[0] moveto((-6796, -470, 3910), 5);
-  var_6c91f8cd[1] moveto((-6629, -397, 3909), 5);
-  var_6c91f8cd[2] moveto((-6840, -140, 3903), 5);
+  var_6c91f8cd[0] moveTo((-6796, -470, 3910), 5);
+  var_6c91f8cd[1] moveTo((-6629, -397, 3909), 5);
+  var_6c91f8cd[2] moveTo((-6840, -140, 3903), 5);
 }
 
 function function_63264d28(a_ents) {
@@ -126,7 +126,7 @@ function function_63264d28(a_ents) {
 function function_485aed5c(a_ents) {
   var_3793dd70 = a_ents[#"belikov"];
   var_3f59f311 = a_ents[#"heli"];
-  var_3793dd70 linkto(var_3f59f311);
+  var_3793dd70 linkTo(var_3f59f311);
 }
 
 function function_f21e84b4() {
@@ -162,7 +162,7 @@ function function_6240e40f() {
 }
 
 function function_517fe722() {
-  var_6976e02a = getent("zipline_intro_bird_scare", "targetname");
+  var_6976e02a = getEnt("zipline_intro_bird_scare", "targetname");
   a_s_birds = struct::get_array(var_6976e02a.target, "targetname");
   level flag::wait_till("flg_satcom_birds_trigger");
 
@@ -259,7 +259,7 @@ function function_94b72d13() {
     }
   }
 
-  t_woods_bunker_ladder = getent("t_woods_bunker_ladder", "targetname");
+  t_woods_bunker_ladder = getEnt("t_woods_bunker_ladder", "targetname");
   level flag::wait_till_any(array("flg_bunker_ladder_reached", "flg_woods_regroup_look_at_woods"));
 
   if(!level.player istouching(t_woods_bunker_ladder)) {

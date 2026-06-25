@@ -25,7 +25,7 @@ shoot_out_glass() {
 
   activate_trigger("enemy_dining_area_riot_movein_trig", "targetname");
 
-  start = getstruct("shoot_out_glass_start", "script_noteworthy");
+  start = getStruct("shoot_out_glass_start", "script_noteworthy");
   ends = getStructArray("shoot_out_glass_end", "script_noteworthy");
   combat_start = undefined;
   foreach(end in ends) {
@@ -155,7 +155,7 @@ enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
   self.ignoreall = false;
   node = getnode(self.target, "targetname");
   if(!isDefined(node)) {
-    node = getstruct(self.target, "targetname");
+    node = getStruct(self.target, "targetname");
   }
 
   goal_type = undefined;
@@ -334,7 +334,7 @@ crash_elevator() {
 
   wait .05;
   exploder(1);
-  struct = getstruct("elevator_pick", "targetname");
+  struct = getStruct("elevator_pick", "targetname");
   array = getEntArray("elevator_casing_glass", "targetname");
   glass = getclosest(struct.origin, array);
   glass delete();
@@ -378,21 +378,21 @@ objective_breadcrumb() {
   flag_init("obj_escalators_end");
   flag_init("obj_finish");
 
-  obj_origin = getstruct("obj_escalator_top", "script_noteworthy").origin;
+  obj_origin = getStruct("obj_escalator_top", "script_noteworthy").origin;
   Objective_Add(1, "current", level.challenge_objective, obj_origin);
 
   flag_wait("obj_shopping");
 
-  obj_origin = getstruct("obj_shopping", "script_noteworthy").origin;
+  obj_origin = getStruct("obj_shopping", "script_noteworthy").origin;
   Objective_Position(1, obj_origin);
 
   flag_wait("obj_escalators_end");
 
-  obj_origin = getstruct("obj_escalators_end", "script_noteworthy").origin;
+  obj_origin = getStruct("obj_escalators_end", "script_noteworthy").origin;
   Objective_Position(1, obj_origin);
 
   flag_wait("obj_finish");
 
-  obj_origin = getstruct("obj_finish", "script_noteworthy").origin;
+  obj_origin = getStruct("obj_finish", "script_noteworthy").origin;
   Objective_Position(1, obj_origin);
 }

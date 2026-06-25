@@ -410,7 +410,7 @@ playerHandleJoining(streakPrompt, useTime) {
 useHoldThink(player, useTimeMS, streakPrompt) {
   Assert(isPlayer(player));
 
-  player PlayerLinkTo(streakPrompt);
+  player PlayerlinkTo(streakPrompt);
   player PlayerLinkedOffsetEnable();
   player.manuallyJoiningKillStreak = true;
 

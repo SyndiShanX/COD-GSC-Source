@@ -258,9 +258,9 @@ cspline_findPathnodes(first_node) {
     if(!isDefined(next_node)) {
       next_node = GetVehicleNode(targetname, "targetname");
       if(!isDefined(next_node)) {
-        next_node = GetEnt(targetname, "targetname");
+        next_node = getEnt(targetname, "targetname");
         if(!isDefined(next_node)) {
-          next_node = getstruct(targetname, "targetname");
+          next_node = getStruct(targetname, "targetname");
         }
       }
     }
@@ -348,7 +348,7 @@ cspline_makePathToPoint(startOrg, endOrg, startVel, endVel, forceCreateIntermedi
           offsetAlongPath = offsetDotPath * pathDir;
           offsetVec -= offsetAlongPath;
           AssertEx(VectorDot(offsetVec, pathDir) == 0, "Dot result should be 0: " + VectorDot(offsetVec, pathDir));
-          offsetVec = VectorNormalize(offsetVec);
+          offsetVec = vectorNormalize(offsetVec);
           offsetVec += offsetAlongPath;
         }
 

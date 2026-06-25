@@ -21,16 +21,16 @@ runway_bad_places() {
 
 runway_sat_launch() {
   common_scripts\utility::flag_wait("field_dialogue_cue");
-  var_0 = getent("missile01_start", "targetname");
-  var_1 = getent("missile01_end", "targetname");
-  var_2 = getent("icbm_missile01", "targetname");
+  var_0 = getEnt("missile01_start", "targetname");
+  var_1 = getEnt("missile01_end", "targetname");
+  var_2 = getEnt("icbm_missile01", "targetname");
   var_2 thread sat_launch_piece_fall_away();
   playFX(level._effect["icbm_launch"], var_2.origin);
   var_3 = 70;
   thread sat_launch_sound_earthquake_rumble(var_2);
-  var_2 linkto(var_0);
-  var_0 moveto(var_1.origin, var_3, 10, 0);
-  var_0 rotateto((20, 0, 0), 8, 8, 0);
+  var_2 linkTo(var_0);
+  var_0 moveTo(var_1.origin, var_3, 10, 0);
+  var_0 rotateTo((20, 0, 0), 8, 8, 0);
   playFXOnTag(level._effect["smoke_geotrail_icbm"], var_2, "tag_nozzle");
   common_scripts\utility::exploder("rocketwash");
   thread delete_rocket_wash();
@@ -44,26 +44,26 @@ delete_rocket_wash() {
 }
 
 sat_launch_piece_fall_away() {
-  var_0 = getent("large_fuel1", "script_noteworthy");
-  var_1 = getent("large_fuel2", "script_noteworthy");
-  var_2 = getent("small_fuel1", "script_noteworthy");
-  var_3 = getent("small_fuel2", "script_noteworthy");
-  var_4 = common_scripts\utility::getstruct("large_fuel1_fx", "script_noteworthy");
-  var_5 = common_scripts\utility::getstruct("large_fuel2_fx", "script_noteworthy");
-  var_6 = common_scripts\utility::getstruct("small_fuel1_fx", "script_noteworthy");
-  var_7 = common_scripts\utility::getstruct("small_fuel2_fx", "script_noteworthy");
-  var_0 linkto(self, "");
-  var_1 linkto(self, "");
-  var_2 linkto(self, "");
-  var_3 linkto(self, "");
+  var_0 = getEnt("large_fuel1", "script_noteworthy");
+  var_1 = getEnt("large_fuel2", "script_noteworthy");
+  var_2 = getEnt("small_fuel1", "script_noteworthy");
+  var_3 = getEnt("small_fuel2", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("large_fuel1_fx", "script_noteworthy");
+  var_5 = common_scripts\utility::getStruct("large_fuel2_fx", "script_noteworthy");
+  var_6 = common_scripts\utility::getStruct("small_fuel1_fx", "script_noteworthy");
+  var_7 = common_scripts\utility::getStruct("small_fuel2_fx", "script_noteworthy");
+  var_0 linkTo(self, "");
+  var_1 linkTo(self, "");
+  var_2 linkTo(self, "");
+  var_3 linkTo(self, "");
   var_8 = var_4 common_scripts\utility::spawn_tag_origin();
   var_9 = var_5 common_scripts\utility::spawn_tag_origin();
   var_10 = var_6 common_scripts\utility::spawn_tag_origin();
   var_11 = var_7 common_scripts\utility::spawn_tag_origin();
-  var_8 linkto(var_0, "");
-  var_9 linkto(var_1, "");
-  var_10 linkto(var_2, "");
-  var_11 linkto(var_3, "");
+  var_8 linkTo(var_0, "");
+  var_9 linkTo(var_1, "");
+  var_10 linkTo(var_2, "");
+  var_11 linkTo(var_3, "");
   wait 3.5;
   wait 0.5;
   wait 1.5;
@@ -171,7 +171,7 @@ warp_up_friendlies_if_necessary() {
   var_0 = (1332, 14368, 1320);
 
   foreach(var_2 in level.squad) {
-    if(var_2 istouching(getent("no_go_back_chopper", "targetname"))) {
+    if(var_2 istouching(getEnt("no_go_back_chopper", "targetname"))) {
       var_2 notify("stop_path");
       var_2 forceteleport(var_0, (0, 225, 0));
       var_0 = var_0 - (50, 15, 0);
@@ -182,7 +182,7 @@ warp_up_friendlies_if_necessary() {
 no_go_back_into_field() {
   level endon("slide_start");
   level endon("choppers_are_gone");
-  var_0 = getent("no_go_back_chopper", "targetname");
+  var_0 = getEnt("no_go_back_chopper", "targetname");
   common_scripts\utility::flag_wait("choppers_get_down");
 
   for(;;) {
@@ -203,7 +203,7 @@ cliff_choppers_move_on(var_0) {
   common_scripts\utility::flag_set("choppers_are_gone");
 
   foreach(var_4, var_2 in var_0) {
-    var_3 = getent("runway_choppers_flyaway" + var_4, "targetname");
+    var_3 = getEnt("runway_choppers_flyaway" + var_4, "targetname");
     var_2 setlookatent(var_3);
     var_2 setvehgoalpos(var_3.origin, 1);
     wait 1;
@@ -212,7 +212,7 @@ cliff_choppers_move_on(var_0) {
   wait 3;
 
   foreach(var_4, var_2 in var_0) {
-    var_3 = getent("runway_choppers_flyaway" + var_4, "targetname");
+    var_3 = getEnt("runway_choppers_flyaway" + var_4, "targetname");
     var_2 setlookatent(var_3);
     var_2 setvehgoalpos(var_3.origin, 1);
     var_2 vehicle_setspeed(60, 15, 1);
@@ -222,7 +222,7 @@ cliff_choppers_move_on(var_0) {
   wait 7;
 
   foreach(var_4, var_2 in var_0) {
-    var_3 = getent("runway_choppers_flyaway" + (var_4 + 2), "targetname");
+    var_3 = getEnt("runway_choppers_flyaway" + (var_4 + 2), "targetname");
     var_2 setlookatent(var_3);
     var_2 setvehgoalpos(var_3.origin, 1);
     var_2 vehicle_setspeed(60, 15, 1);
@@ -377,7 +377,7 @@ fake_rocket(var_0, var_1) {
   playFXOnTag(var_3, var_2, "tag_origin");
   var_4 = bulletTrace(var_0, var_1, 1);
   var_2.angles = vectortoangles(var_0 - var_1);
-  var_2 moveto(var_4["position"], 1.5, 1.5);
+  var_2 moveTo(var_4["position"], 1.5, 1.5);
   var_2 thread rocket_delete();
   return var_2;
 }
@@ -414,7 +414,7 @@ generic_gun_fire_at_player(var_0) {
   var_8 = anglesToForward(level.player.angles);
   var_8 = level.player.origin - var_8 * var_4;
   var_6.origin = var_8;
-  var_6 moveto(var_7, 2);
+  var_6 moveTo(var_7, 2);
 
   if(isDefined(var_0) && var_0) {
     level.player enabledeathshield(0);
@@ -427,9 +427,9 @@ generic_gun_fire_at_player(var_0) {
 
   for(var_10 = 0; var_10 < var_9; var_10++) {
     if(var_5) {
-      self setturrettargetent(level.player);
+      self setturrettargetEnt(level.player);
     } else {
-      self setturrettargetent(var_6);
+      self setturrettargetEnt(var_6);
     }
 
     common_scripts\utility::waitframe();
@@ -535,7 +535,7 @@ runway_apache_logic(var_0) {
         var_1 = maps\_utility::getent_or_struct("attack_trees", "script_noteworthy");
         self setvehgoalpos(var_1.origin, 1);
         self vehicle_setspeedimmediate(50);
-        var_2 = getent("attack_trees_lookat", "script_noteworthy");
+        var_2 = getEnt("attack_trees_lookat", "script_noteworthy");
         self setlookatent(var_2);
         self waittill("goal");
         var_3 = getEntArray("dest_top", "script_noteworthy");
@@ -553,7 +553,7 @@ runway_apache_logic(var_0) {
               var_11 = var_11 * -1;
             }
 
-            self setturrettargetent(var_7);
+            self setturrettargetEnt(var_7);
             wait 0.05;
             self fireweapon();
             wait(randomfloatrange(0.05, 0.15));
@@ -598,14 +598,14 @@ runway_apache_logic(var_0) {
 
       if(common_scripts\utility::flag("choppers_saw_player")) {
         var_15 = spawn("script_origin", level.player getEye() + (0, 0, 50));
-        var_15 linkto(level.player);
+        var_15 linkTo(level.player);
         level.player common_scripts\utility::delaycall(0.5, ::playsound, "slowmo_bullet_whoosh");
         level.player common_scripts\utility::delaycall(1, ::playsound, "slowmo_bullet_whoosh");
         level.player common_scripts\utility::delaycall(1.5, ::playsound, "slowmo_bullet_whoosh");
         var_9 = 20;
 
         for(var_10 = 0; var_10 < var_9; var_10++) {
-          self setturrettargetent(var_15, (100, 100, 50));
+          self setturrettargetEnt(var_15, (100, 100, 50));
           self fireweapon();
           wait(randomfloatrange(0.05, 0.15));
         }
@@ -640,7 +640,7 @@ runway_apache_logic_cliff_chopper(var_0) {
         var_1 = maps\_utility::getent_or_struct("attack_trees_chopper2", "script_noteworthy");
         self setvehgoalpos(var_1.origin, 1);
         self vehicle_setspeedimmediate(50);
-        var_2 = getent("attack_trees_lookat", "script_noteworthy");
+        var_2 = getEnt("attack_trees_lookat", "script_noteworthy");
         self setlookatent(var_2);
         self waittill("goal");
         common_scripts\utility::flag_wait("escape_halfway");
@@ -667,7 +667,7 @@ escape_apache_pressure_player_until_flag(var_0) {
   var_2 = randomintrange(15, 30);
 
   while(!common_scripts\utility::flag(var_0)) {
-    self setturrettargetent(level.player, (var_1, var_1, 10));
+    self setturrettargetEnt(level.player, (var_1, var_1, 10));
     wait 2;
 
     for(var_3 = 0; var_3 < var_2; var_3++) {
@@ -675,7 +675,7 @@ escape_apache_pressure_player_until_flag(var_0) {
         var_1 = var_1 * -1;
       }
 
-      self setturrettargetent(level.player, (var_1, var_1, 10));
+      self setturrettargetEnt(level.player, (var_1, var_1, 10));
       wait 0.05;
       self fireweapon();
     }
@@ -711,7 +711,7 @@ turret_burst_fire_at_ent(var_0, var_1) {
     }
 
     var_4 = randomintrange(var_2, var_3);
-    self setturrettargetent(var_0, (var_4, var_4, 0));
+    self setturrettargetEnt(var_0, (var_4, var_4, 0));
     wait 2;
 
     if(common_scripts\utility::flag("chopper_kill_player")) {
@@ -730,7 +730,7 @@ turret_burst_fire_at_ent(var_0, var_1) {
         var_4 = var_4 * -1;
       }
 
-      self setturrettargetent(var_0, (var_4, var_4, 0));
+      self setturrettargetEnt(var_0, (var_4, var_4, 0));
       wait 0.05;
 
       if(level.player.health > 50 && !common_scripts\utility::flag("chopper_kill_player")) {
@@ -776,7 +776,7 @@ escape_globals(var_0) {
 water_push_player() {
   var_0 = common_scripts\utility::get_target_ent("water_push");
   var_0 waittill("trigger");
-  var_1 = vectornormalize(common_scripts\utility::getstruct(var_0.target, "targetname").origin - var_0.origin);
+  var_1 = vectorNormalize(common_scripts\utility::getStruct(var_0.target, "targetname").origin - var_0.origin);
   var_2 = 0;
   var_3 = 10;
 
@@ -824,7 +824,7 @@ escape_socr_turret_own_target(var_0, var_1) {
   self.health = self.maxhealth;
   self setmode("manual");
   var_2 = spawn("script_origin", var_0.origin - (0, 0, 40));
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
 
   if(isDefined(var_1)) {
     self waittill(var_1);
@@ -1072,18 +1072,18 @@ escape_player_jump() {
 }
 
 new_player_jump() {
-  var_0 = common_scripts\utility::getstruct("struct_player_bigjump_edge_reference", "targetname");
-  var_1 = common_scripts\utility::getstruct("struct_player_recovery_animref", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_player_bigjump_edge_reference", "targetname");
+  var_1 = common_scripts\utility::getStruct("struct_player_recovery_animref", "targetname");
   var_2 = anglesToForward(var_0.angles);
   var_3 = level.player;
 
   if(level.start_point != "underwater") {
-    var_4 = getent("player_waterfall_jump_trig", "targetname");
-    var_0 = common_scripts\utility::getstruct("struct_player_bigjump_edge_reference", "targetname");
-    var_1 = common_scripts\utility::getstruct("struct_player_recovery_animref", "targetname");
+    var_4 = getEnt("player_waterfall_jump_trig", "targetname");
+    var_0 = common_scripts\utility::getStruct("struct_player_bigjump_edge_reference", "targetname");
+    var_1 = common_scripts\utility::getStruct("struct_player_recovery_animref", "targetname");
     var_2 = anglesToForward(var_0.angles);
     thread maps\jungle_ghosts_util::player_jump_watcher();
-    var_5 = getent("player_waterfall_jump_trig_back_up", "targetname");
+    var_5 = getEnt("player_waterfall_jump_trig_back_up", "targetname");
 
     for(;;) {
       var_6 = 0;
@@ -1138,7 +1138,7 @@ new_player_jump() {
   setslowmotion(1.5, 0.3, 0.1);
   wait 3;
   setslowmotion(0.3, 1, 1);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 escape_waterfall_player_link_logic(var_0) {
@@ -1154,16 +1154,16 @@ escape_waterfall_player_link_logic(var_0) {
 
   var_1 = (0, 0, 250);
   var_2 = common_scripts\utility::spawn_tag_origin();
-  var_2.origin = common_scripts\utility::getstruct("in_the_water", "targetname").origin + var_1;
-  var_2.angles = common_scripts\utility::getstruct("in_the_water", "targetname").angles + (5, 0, 0);
-  level.player setorigin(var_2.origin);
+  var_2.origin = common_scripts\utility::getStruct("in_the_water", "targetname").origin + var_1;
+  var_2.angles = common_scripts\utility::getStruct("in_the_water", "targetname").angles + (5, 0, 0);
+  level.player setOrigin(var_2.origin);
   level.player setplayerangles(var_2.angles);
   level.player.float_ent = var_2;
   level.player playerlinktodelta(var_2, "tag_origin", 1, 50, 50, 20, 20, 1);
   var_3 = 0.6;
   thread maps\jungle_ghosts_jungle::player_heartbeat();
   var_4 = maps\_vehicle::spawn_vehicle_from_targetname("river_run");
-  var_5 = common_scripts\utility::getstruct("player_underwater", "targetname");
+  var_5 = common_scripts\utility::getStruct("player_underwater", "targetname");
 
   if(common_scripts\utility::flag("choppers_saw_player")) {
     level.apache1 thread turret_burst_fire_at_ent(level.player);
@@ -1171,16 +1171,16 @@ escape_waterfall_player_link_logic(var_0) {
   }
 
   var_3 = 4;
-  var_6 = common_scripts\utility::getstruct("waterfall_player_land", "targetname");
-  var_7 = common_scripts\utility::getstruct("in_the_water", "targetname").angles;
+  var_6 = common_scripts\utility::getStruct("waterfall_player_land", "targetname");
+  var_7 = common_scripts\utility::getStruct("in_the_water", "targetname").angles;
   var_8 = level.player.float_ent.origin + (0, 0, 253) - var_1;
-  level.player.float_ent moveto(level.player.float_ent.origin - (100, 100, 200), 1.5, 0, 1.5);
+  level.player.float_ent moveTo(level.player.float_ent.origin - (100, 100, 200), 1.5, 0, 1.5);
   level.player.float_ent waittill("movedone");
-  level.player.float_ent moveto(var_8, 2.5, 0.7, 0.7);
-  level.player.float_ent rotateto(var_7 + (40, 0, 10), 2);
+  level.player.float_ent moveTo(var_8, 2.5, 0.7, 0.7);
+  level.player.float_ent rotateTo(var_7 + (40, 0, 10), 2);
   level.player thread maps\_utility::notify_delay("stop_underwater_fx", 1);
   wait 2;
-  level.player.float_ent rotateto(var_7, 2);
+  level.player.float_ent rotateTo(var_7, 2);
   level.player setstance("stand");
   level.player setclienttriggeraudiozone("jungle_ghosts_exfil", 0.8);
   common_scripts\utility::flag_set("player_surfaces");
@@ -1206,7 +1206,7 @@ escape_waterfall_player_link_logic(var_0) {
 
 escape_player_fall_check() {
   level endon("player_jump_watcher_stop");
-  var_0 = getent("player_fall_check", "targetname");
+  var_0 = getEnt("player_fall_check", "targetname");
   var_0 waittill("trigger");
   var_0 delete();
   common_scripts\utility::flag_set("player_fell_off_waterfall");
@@ -1227,11 +1227,11 @@ escape_mg_bullets_at_player_river_run() {
     var_0 = anglesToForward(level.player.angles);
     var_1 = level.player.origin + var_0 * 200;
     var_2 = spawn("script_origin", var_1);
-    var_2 linkto(level.player);
+    var_2 linkTo(level.player);
     var_3 = 60;
 
     for(var_4 = 0; var_4 < var_3; var_4++) {
-      level.river_apache setturrettargetent(var_2);
+      level.river_apache setturrettargetEnt(var_2);
       level.river_apache fireweapon();
       wait(randomfloatrange(0.05, 0.15));
     }
@@ -1305,8 +1305,8 @@ escape_friendly_jumps_waterfall_to_swimming(var_0, var_1) {
   thread maps\jungle_ghosts_util::enable_ai_swim();
   wait 3;
   var_2 = common_scripts\utility::spawn_tag_origin();
-  self linkto(var_2);
-  var_2 moveto(var_1.origin, 3);
+  self linkTo(var_2);
+  var_2 moveTo(var_1.origin, 3);
 }
 
 splashdown_fx() {
@@ -1386,23 +1386,23 @@ escape_enemies_and_vehicles(var_0) {
           var_3.animname = "seal_boat1";
           var_3.spawners = getEntArray("left_boat_guys", "targetname");
           var_3 thread boat1_in_sounds();
-          var_4 = getent("boat1_clip", "targetname");
+          var_4 = getEnt("boat1_clip", "targetname");
           var_4.origin = var_3.origin;
           var_4.angles = var_3.angles;
-          var_4 linkto(var_3, "tag_origin");
+          var_4 linkTo(var_3, "tag_origin");
         } else {
           var_3.animname = "seal_boat2";
           var_3.spawners = getEntArray("right_boat_guys", "targetname");
           var_3 thread dog_on_a_boat();
           var_3 thread man_on_a_boat_waving();
           var_3 thread boat2_in_sounds();
-          var_4 = getent("boat2_clip", "targetname");
+          var_4 = getEnt("boat2_clip", "targetname");
           var_4.origin = var_3.origin;
           var_4.angles = var_3.angles;
-          var_4 linkto(var_3, "tag_origin");
+          var_4 linkTo(var_3, "tag_origin");
         }
 
-        var_5 = getent("boat_light_ref_ent", "targetname");
+        var_5 = getEnt("boat_light_ref_ent", "targetname");
         var_3 useanimtree(level.scr_animtree["seal_boat1"]);
         var_3 thread boat_populate();
         var_3 retargetscriptmodellighting(var_5);
@@ -1457,16 +1457,16 @@ boat_populate() {
 }
 
 man_on_a_boat_waving() {
-  var_0 = getent("boat_waver", "targetname");
+  var_0 = getEnt("boat_waver", "targetname");
   wait 5;
   var_1 = var_0 maps\_utility::spawn_ai(1);
   var_1.animname = "waving_man";
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
   var_2.origin = self gettagorigin("TAG_TURRET_MIDDLE_RIGHT");
   var_2.angles = self gettagangles("TAG_TURRET_MIDDLE_RIGHT");
-  var_2 linkto(self, "TAG_TURRET_MIDDLE_RIGHT", (-11, 0, -45), (0, 0, 0));
+  var_2 linkTo(self, "TAG_TURRET_MIDDLE_RIGHT", (-11, 0, -45), (0, 0, 0));
   var_1 forceteleport(var_2.origin, var_2.angles);
-  var_1 linkto(var_2, "tag_origin");
+  var_1 linkTo(var_2, "tag_origin");
   var_2 thread maps\_anim::anim_single_solo(var_1, "wave");
 }
 
@@ -1476,8 +1476,8 @@ dog_on_a_boat() {
   var_0.name = "Riley";
   var_1 = var_0 common_scripts\utility::spawn_tag_origin();
   var_1 thread maps\_anim::anim_loop_solo(var_0, "idle", "stop_loop");
-  var_1 linkto(self, "TAG_TURRET_MIDDLE_RIGHT", (-11, 150, -8), (0, 0, 0));
-  var_0 linkto(var_1, "tag_origin");
+  var_1 linkTo(self, "TAG_TURRET_MIDDLE_RIGHT", (-11, 150, -8), (0, 0, 0));
+  var_0 linkTo(var_1, "tag_origin");
 
   while(distance(var_0.origin, level.player.origin) > 700) {
     common_scripts\utility::waitframe();
@@ -1567,7 +1567,7 @@ escape_temp_ai_slide(var_0, var_1) {
     var_2 = "jungle_ghost_ai_slide2";
   }
 
-  var_3 = common_scripts\utility::getstruct("ai_slide_anim_ent", "targetname");
+  var_3 = common_scripts\utility::getStruct("ai_slide_anim_ent", "targetname");
   maps\_utility::disable_ai_color();
   maps\_utility::set_forcegoal();
 
@@ -1601,8 +1601,8 @@ escape_play_slide_fx_on_npc() {
 escape_play_slide_fx_on_player() {
   common_scripts\utility::flag_wait("slide_start");
   var_0 = level.player common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(level.player);
-  level.player playrumbleonentity("damage_heavy");
+  var_0 linkTo(level.player);
+  level.player playRumbleOnEntity("damage_heavy");
   level.player common_scripts\utility::delaycall(0.25, ::playrumblelooponentity, "slide_loop");
   level.player common_scripts\utility::delaycall(2.5, ::stoprumble, "slide_loop");
   level.player common_scripts\utility::delaycall(2.55, ::playrumbleonentity, "damage_light");
@@ -1662,7 +1662,7 @@ escape_do_tree_damage_trig_logic(var_0) {
   if(!common_scripts\utility::flag("choppers_saw_player")) {
     return;
   }
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
   magic_missile_fire_at_ent(var_1, 6);
   wait 1;
   var_0 = common_scripts\utility::get_array_of_closest(var_1.origin, var_0);
@@ -1707,8 +1707,8 @@ escape_dest_tree_parts_logic(var_0) {
       }
 
       self hide();
-      self.clip_brush = getent(self.target, "targetname");
-      self.clip_brush linkto(self);
+      self.clip_brush = getEnt(self.target, "targetname");
+      self.clip_brush linkTo(self);
       self waittill("tree_destroyed");
       playFX(common_scripts\utility::getfx("tree_explosion"), self.origin);
       self show();
@@ -1719,13 +1719,13 @@ escape_dest_tree_parts_logic(var_0) {
 
       self playSound("explo_tree");
       earthquake(0.3, 0.5, level.player.origin, 300);
-      level.player playrumbleonentity("grenade_rumble");
+      level.player playRumbleOnEntity("grenade_rumble");
       common_scripts\utility::noself_delaycall(var_10 * 0.8, ::playfx, var_12, var_11);
       self.final_angles = var_0;
-      self rotateto(var_0, var_10, var_10 * 0.9, var_10 * 0.1);
+      self rotateTo(var_0, var_10, var_10 * 0.9, var_10 * 0.1);
       var_16 = common_scripts\utility::spawn_tag_origin();
       var_16.origin = var_16.origin + (0, 0, 375);
-      var_16 linkto(self);
+      var_16 linkTo(self);
 
       if(!self.is_small) {
         self.kill_trig thread falling_tree_player_detection(var_10, self.clip_brush);
@@ -1758,14 +1758,14 @@ escape_dest_tree_parts_logic(var_0) {
 
 after_fall_bounce() {
   var_0 = 0.7;
-  self rotateto(self.og_angles, var_0, var_0 / 2, var_0 / 2);
+  self rotateTo(self.og_angles, var_0, var_0 / 2, var_0 / 2);
   wait(var_0);
-  self rotateto(self.final_angles, var_0, var_0 / 2, var_0 / 2);
+  self rotateTo(self.final_angles, var_0, var_0 / 2, var_0 / 2);
 }
 
 play_impact_sound(var_0) {
   self playSound(var_0, "sound_done");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   self waittill("sound_done");
   self delete();
 }
@@ -1792,7 +1792,7 @@ radius_damage_when_player_is_close() {
 falling_tree_player_detection(var_0, var_1) {
   var_0 = var_0 - 0.25;
   wait(var_0);
-  var_1 disconnectpaths();
+  var_1 disconnectPaths();
   self endon("timeout");
   thread maps\_utility::notify_delay("timeout", 1);
 
@@ -1817,7 +1817,7 @@ escape_fake_underwater_bullets() {
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
     var_3 = randomintrange(-25, 25);
-    var_4 = vectornormalize(self.origin - level.player.origin);
+    var_4 = vectorNormalize(self.origin - level.player.origin);
     var_5 = level.player.origin + var_4 * randomintrange(85, 100);
     var_5 = var_5 + (var_3, var_3, 0);
     var_6 = vectortoangles(var_4);

@@ -385,7 +385,7 @@ function function_57ba1474(var_648a2ef0) {
 
       level flag::wait_till("all_players_connected");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_player_uimodel("hudItems.serverDifficulty", level.gameskill);
         player stats::set_stat(#"currentdifficulty", level.gameskill);
         uploadstats(player);

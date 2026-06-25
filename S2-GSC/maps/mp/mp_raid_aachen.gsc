@@ -132,7 +132,7 @@ func_54D7() {
   }
 
   var_15 = spawn("weapon_mp40_mp", (0, 0, 0), 1);
-  var_15 linkto(var_0F[0], "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_15 linkTo(var_0F[0], "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   var_15 thread lib_0502::func_2FA6();
   level.var_BFF = spawnStruct();
   level.var_BFF.var_9600 = var_03;
@@ -321,7 +321,7 @@ func_54E1() {
   for(var_12 = 0; var_12 < var_0F.size; var_12++) {
     var_13 = spawn("script_model", var_01);
     var_13 setModel(var_0F[var_12]);
-    var_13 linkto(var_0E, var_10[var_12], (0, 0, 0), (0, 0, 0));
+    var_13 linkTo(var_0E, var_10[var_12], (0, 0, 0), (0, 0, 0));
     var_11[var_11.size] = var_13;
   }
 
@@ -477,7 +477,7 @@ func_6C8D() {
   for(var_0A = 0; var_0A < var_07.size; var_0A++) {
     var_0B = spawn("script_model", var_01);
     var_0B setModel(var_07[var_0A]);
-    var_0B linkto(var_06, var_08[var_0A], (0, 0, 0), (0, 0, 0));
+    var_0B linkTo(var_06, var_08[var_0A], (0, 0, 0), (0, 0, 0));
     var_09[var_09.size] = var_0B;
   }
 
@@ -603,12 +603,12 @@ func_6C94() {
       if(var_0A != "none") {
         var_0B = "weapon_" + var_0A;
         var_0C = spawn(var_0B, (0, 0, 0), 1);
-        var_0C linkto(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+        var_0C linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
         var_08[var_08.size] = var_0C;
       }
     } else {
       var_0C = spawn("weapon_mp40_mp", (0, 0, 0), 1);
-      var_0C linkto(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_0C linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_08[var_08.size] = var_0C;
     }
 
@@ -911,7 +911,7 @@ runtrammoveobjective() {
 
 func_97DE(param_00) {
   vfxbarrierexplosion();
-  var_01 = getent("tram_bust_wall", "targetname");
+  var_01 = getEnt("tram_bust_wall", "targetname");
   if(isDefined(var_01)) {
     var_01 lib_0502::func_7997();
   }

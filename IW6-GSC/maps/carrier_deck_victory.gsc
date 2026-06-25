@@ -25,9 +25,9 @@ setup_deck_victory() {
   level.player notify("remove_sam_control");
   thread maps\carrier_audio::aud_check("victory_deck");
   common_scripts\utility::waitframe();
-  var_0 = getent("sparrow_launcher_damage", "targetname");
+  var_0 = getEnt("sparrow_launcher_damage", "targetname");
   var_0 maps\_utility::show_entity();
-  var_1 = getent("water_wake_intro", "targetname");
+  var_1 = getEnt("water_wake_intro", "targetname");
   var_1 delete();
 }
 
@@ -61,7 +61,7 @@ begin_deck_victory() {
 victory_player() {
   level.player endon("death");
   level endon("player_failed_gunship");
-  var_0 = common_scripts\utility::getstruct("sparrow_run_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("sparrow_run_animnode", "targetname");
   var_1 = maps\_utility::spawn_anim_model("player_rig");
   var_1 hide();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "carrier_deck_victory_player");
@@ -103,7 +103,7 @@ run_hesh() {
   level.hesh setgoalpos(level.hesh.origin);
   level.hesh setgoalnode(var_0);
   level.hesh.a.pose = "stand";
-  var_1 = common_scripts\utility::getstruct("sparrow_run_animnode", "targetname");
+  var_1 = common_scripts\utility::getStruct("sparrow_run_animnode", "targetname");
   var_1 maps\_anim::anim_single_solo(level.hesh, "carrier_deck_victory_hesh");
   common_scripts\utility::flag_set("deck_victory_finished");
 }
@@ -134,13 +134,13 @@ victory_ac130() {
     var_1.origin = var_0 gettagorigin("tag_fx_engine_le_1");
     var_1.angles = var_0 gettagangles("tag_fx_engine_le_1");
     var_1.angles = var_1.angles;
-    var_1 linkto(var_0, "tag_fx_engine_le_1");
+    var_1 linkTo(var_0, "tag_fx_engine_le_1");
     playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), var_1, "tag_origin");
   } else {
     var_1.origin = var_0 gettagorigin("tag_fx_engine_ri_1");
     var_1.angles = var_0 gettagangles("tag_fx_engine_ri_1");
     var_1.angles = var_1.angles;
-    var_1 linkto(var_0, "tag_fx_engine_ri_1");
+    var_1 linkTo(var_0, "tag_fx_engine_ri_1");
     playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), var_1, "tag_origin");
   }
 
@@ -148,13 +148,13 @@ victory_ac130() {
     var_2.origin = var_0 gettagorigin("tag_fx_engine_ri_2");
     var_2.angles = var_0 gettagangles("tag_fx_engine_ri_2");
     var_2.angles = var_2.angles;
-    var_2 linkto(var_0, "tag_fx_engine_ri_2");
+    var_2 linkTo(var_0, "tag_fx_engine_ri_2");
     playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), var_2, "tag_origin");
   } else {
     var_2.origin = var_0 gettagorigin("tag_fx_engine_le_2");
     var_2.angles = var_0 gettagangles("tag_fx_engine_le_2");
     var_2.angles = var_2.angles;
-    var_2 linkto(var_0, "tag_fx_engine_le_2");
+    var_2 linkTo(var_0, "tag_fx_engine_le_2");
     playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), var_2, "tag_origin");
   }
 

@@ -35,7 +35,7 @@ endlog_common() {
   cafe_ceiling_pristines = getEntArray("cafe_ceiling_pristine", "targetname");
   array_thread(cafe_ceiling_pristines, ::self_delete);
 
-  rubble = GetEnt("cafeteria_hallway_rubble", "targetname");
+  rubble = getEnt("cafeteria_hallway_rubble", "targetname");
   rubble thread rubble_think();
 
   maps\gulag_ending_anim::gulag_ending_anim_main();
@@ -44,7 +44,7 @@ endlog_common() {
   level._effect["flashlight"] = LoadFX("misc/flashlight");
   level._pipe_fx_time = 2.5;
 
-  hookup_rope_ent = GetEnt("hookup_rope_ent", "targetname");
+  hookup_rope_ent = getEnt("hookup_rope_ent", "targetname");
   if(isDefined(hookup_rope_ent)) {
     hookup_rope_ent Delete();
   }
@@ -130,19 +130,19 @@ endlog_common() {
   ceiling_collapses = getEntArray("ceiling_collapse", "targetname");
   array_thread(ceiling_collapses, ::ceiling_collapse_think);
 
-  chase_brush = GetEnt("chase_brush", "targetname");
+  chase_brush = getEnt("chase_brush", "targetname");
   chase_brush Hide();
   chase_brush ConnectPaths();
 
-  spawner = GetEnt("price_spawner", "targetname");
+  spawner = getEnt("price_spawner", "targetname");
   spawner thread add_spawn_function(::become_price);
 
-  set_friendly_endpoint = getstruct("set_friendly_endpoint", "targetname");
+  set_friendly_endpoint = getStruct("set_friendly_endpoint", "targetname");
   set_friendly_endpoint thread set_friendly_endpoint_think();
 
   array_spawn_function_targetname("endlog_redshirt_spawner", ::become_redshirt);
 
-  ending_window_littlebird = GetEnt("ending_window_littlebird", "script_noteworthy");
+  ending_window_littlebird = getEnt("ending_window_littlebird", "script_noteworthy");
   ending_window_littlebird add_spawn_function(::ending_window_littlebird);
 
   delete_trees = getEntArray("delete_tree", "targetname");
@@ -152,7 +152,7 @@ endlog_common() {
 
   flag_wait("rescue_begins");
 
-  evac_rock = GetEnt("evac_rock", "targetname");
+  evac_rock = getEnt("evac_rock", "targetname");
   evac_rock NotSolid();
 
   swing_light_orgs = getStructArray("swing_light_org", "targetname");
@@ -172,7 +172,7 @@ endlog_common() {
   ambient_flicker_lights = getEntArray("ambient_flicker_light", "targetname");
   array_thread(ambient_flicker_lights, ::ambient_flicker_light_think);
 
-  friendly_car_slide_trigger = GetEnt("friendly_car_slide_trigger", "targetname");
+  friendly_car_slide_trigger = getEnt("friendly_car_slide_trigger", "targetname");
   friendly_car_slide_trigger thread friendly_car_slide_trigger();
 
   trigger_damages = getEntArray("trigger_damage", "targetname");
@@ -190,19 +190,19 @@ start_run() {
   flag_set("rescue_begins");
 
   spawners = [];
-  spawner = GetEnt("price_spawner", "targetname");
+  spawner = getEnt("price_spawner", "targetname");
   spawners[spawners.size] = spawner;
 
-  spawner = GetEnt("endlog_soap_spawner", "targetname");
+  spawner = getEnt("endlog_soap_spawner", "targetname");
   spawners[spawners.size] = spawner;
 
   spawner = getEntArray("endlog_redshirt_spawner", "targetname")[0];
   spawners[spawners.size] = spawner;
 
   guys = array_spawn(spawners);
-  player_org = getstruct("ending_breach_org", "targetname");
+  player_org = getStruct("ending_breach_org", "targetname");
 
-  level.player SetOrigin(player_org.origin);
+  level.player setOrigin(player_org.origin);
   level.player SetPlayerAngles(player_org.angles);
   gulag_player_loadout();
 
@@ -264,8 +264,8 @@ gulag_run_for_it() {
 
   wait(1);
 
-  ending_window_littlebird = GetEnt("ending_window_littlebird", "script_noteworthy");
-  targ = getstruct(ending_window_littlebird.target, "targetname");
+  ending_window_littlebird = getEnt("ending_window_littlebird", "script_noteworthy");
+  targ = getStruct(ending_window_littlebird.target, "targetname");
   ending_window_littlebird.origin = targ.origin;
 
   flag_wait("there_is_chopper");
@@ -324,10 +324,10 @@ gulag_run_for_it() {
 }
 
 start_endshow() {
-  soap_spawner = GetEnt("endlog_soap_spawner", "targetname");
+  soap_spawner = getEnt("endlog_soap_spawner", "targetname");
   soap = soap_spawner spawn_ai();
 
-  price_spawner = GetEnt("price_spawner", "targetname");
+  price_spawner = getEnt("price_spawner", "targetname");
   price = price_spawner spawn_ai();
 
   redshirt_spawner = getEntArray("endlog_redshirt_spawner", "targetname");
@@ -349,7 +349,7 @@ start_endshow() {
   create_dvar("altview", 0);
 
   if(GetDvarInt("altview")) {
-    level.player SetOrigin((-4594, -765, 240 - 60));
+    level.player setOrigin((-4594, -765, 240 - 60));
     level.player SetPlayerAngles((-21, -88, 0));
   } else {
     level.player PlayerLinkToBlend(player, "tag_player", 0, 0, 0);
@@ -357,7 +357,7 @@ start_endshow() {
 
   level.player TakeAllWeapons();
 
-  ent = GetEnt("mound_scene_export", "targetname");
+  ent = getEnt("mound_scene_export", "targetname");
   for(;;) {
     ent anim_single(guys, "ending");
   }
@@ -374,8 +374,8 @@ start_cafeteria() {
     guy thread endlog_friendly_runout_settings();
   }
 
-  player_org = getstruct("start_cafe_player", "targetname");
-  level.player SetOrigin(player_org.origin);
+  player_org = getStruct("start_cafe_player", "targetname");
+  level.player setOrigin(player_org.origin);
   level.player SetPlayerAngles(player_org.angles);
   gulag_player_loadout();
 
@@ -393,7 +393,7 @@ start_cafeteria() {
 
   thread cafe_lights_explode();
 
-  hunted_swing_light = GetEnt("hunted_swing_light", "targetname");
+  hunted_swing_light = getEnt("hunted_swing_light", "targetname");
 }
 
 gulag_cafeteria() {
@@ -423,18 +423,18 @@ gulag_cafeteria() {
   priceRed[priceRed.size] = level.price;
   priceRed[priceRed.size] = level.redshirt;
 
-  ent = GetEnt("mound_scene_export", "targetname");
+  ent = getEnt("mound_scene_export", "targetname");
   ent thread anim_reach(guys, "cafe_entrance");
 
   anim_post = spawn_anim_model("post");
   anim_post Hide();
   ent anim_first_frame_solo(anim_post, "gate");
 
-  evac_post = GetEnt("gulag_post_slab", "targetname");
+  evac_post = getEnt("gulag_post_slab", "targetname");
   evac_post NotSolid();
   evac_post add_target_pivot();
   evac_post CastShadows();
-  evac_post.pivot LinkTo(anim_post, "body_animate", (0, 0, 0), (0, 0, 0));
+  evac_post.pivot linkTo(anim_post, "body_animate", (0, 0, 0), (0, 0, 0));
 
   flag_wait("match_up_for_final_room");
 
@@ -482,10 +482,10 @@ gulag_cafeteria() {
 }
 
 start_evac() {
-  spawner = GetEnt("price_spawner", "targetname");
+  spawner = getEnt("price_spawner", "targetname");
   spawner spawn_ai();
 
-  spawner = GetEnt("endlog_soap_spawner", "targetname");
+  spawner = getEnt("endlog_soap_spawner", "targetname");
   spawner spawn_ai();
 
   spawner = getEntArray("endlog_redshirt_spawner", "targetname")[0];
@@ -509,7 +509,7 @@ gulag_evac() {
 
   ai = GetAIArray("allies");
   foreach(guy in ai) {
-    guy anim_stopanimscripted();
+    guy anim_stopanimScripted();
   }
 
   flag_set("time_to_evac");
@@ -554,7 +554,7 @@ gulag_evac() {
 
   level.player_rig = player_rig;
   player_carabiner = spawn_anim_model("player_carabiner");
-  ent = GetEnt("mound_scene_export", "targetname");
+  ent = getEnt("mound_scene_export", "targetname");
 
   level.soap forceUseWeapon("m4m203_acog", "primary");
 
@@ -581,11 +581,11 @@ gulag_evac() {
 
   guys["ending_rope"] MakeUsable();
 
-  evac_rock = GetEnt("evac_rock", "targetname");
+  evac_rock = getEnt("evac_rock", "targetname");
   evac_rock add_target_pivot();
   evac_rock CastShadows();
 
-  evac_rock.pivot LinkTo(anim_rock, "body_animate", (0, 0, 0), (0, 0, 0));
+  evac_rock.pivot linkTo(anim_rock, "body_animate", (0, 0, 0), (0, 0, 0));
 
   arcRight = 15;
   arcLeft = 15;
@@ -634,11 +634,11 @@ gulag_evac() {
   player_carabiner Hide();
 
   tag_origin = spawn_tag_origin();
-  tag_origin LinkTo(extra_player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(extra_player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
 
   trigger = getEntWithFlag("player_uses_rig");
 
-  trigger SetHintString(&"GULAG_HOLD_1_TO_SPIE");
+  trigger setHintString(&"GULAG_HOLD_1_TO_SPIE");
 
   SetSavedDvar("hud_drawhud", 1);
 
@@ -708,7 +708,7 @@ gulag_evac() {
 fly_away_rumble() {
   wait(1);
   PlayRumbleOnPosition("heavy_3s", level.player.origin);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player PlayRumbleLoopOnEntity("light_1s");
 }
 
@@ -775,7 +775,7 @@ gulag_ending_startpoint_catchup_thread() {
   delayThread(0.1, ::vision_set_fog_changes, "gulag_ending", 0);
 
   if(level.script != "endlog") {
-    volume = GetEnt("gulag_endlog_destructibles", "script_noteworthy");
+    volume = getEnt("gulag_endlog_destructibles", "script_noteworthy");
     volume activate_destructibles_in_volume();
     volume activate_interactives_in_volume();
   }

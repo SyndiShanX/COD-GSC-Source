@@ -21,12 +21,12 @@ phone_egg() {
   if(!isDefined(self)) {
     return;
   }
-  phone = GetEnt(self.target, "targetname");
+  phone = getEnt(self.target, "targetname");
   if(isDefined(phone)) {
     blinky = playFXOnTag(level._effect["fx_zombie_light_glow_telephone"], phone, "tag_light");
   }
-  self UseTriggerRequireLookAt();
-  self SetCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
   self playLoopSound("zmb_egg_phone_loop");
   self waittill("trigger", player);
   self StopLoopSound(1);
@@ -34,7 +34,7 @@ phone_egg() {
   level.phone_counter = level.phone_counter + 1;
   if(level.phone_counter == 3) {
     level pentagon_unlock_doa();
-    playsoundatposition("evt_doa_unlock", (0, 0, 0));
+    playSoundAtPosition("evt_doa_unlock", (0, 0, 0));
     wait(5);
     level thread play_music_easter_egg();
   }
@@ -71,7 +71,7 @@ play_pentagon_announcer_vox(alias, defcon_level) {
 play_initial_alarm() {
   structs = getStructArray("defcon_alarms", "targetname");
   for(i = 0; i < structs.size; i++) {
-    playsoundatposition("evt_thief_alarm_single", structs[i].origin);
+    playSoundAtPosition("evt_thief_alarm_single", structs[i].origin);
   }
   wait(.5);
 }

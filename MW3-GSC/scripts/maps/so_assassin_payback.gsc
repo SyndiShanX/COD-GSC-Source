@@ -31,10 +31,10 @@ main() {
   thread maps\_specialops::_id_17F3();
   thread maps\_specialops::_id_17F5("so_assassin_payback_complete");
   wait 0.1;
-  getent("pb_end_vista", "targetname") hide();
-  var_0 = getent("intro_gate_right", "targetname");
+  getEnt("pb_end_vista", "targetname") hide();
+  var_0 = getEnt("intro_gate_right", "targetname");
   var_0 delete();
-  var_1 = getent("intro_gate_left", "targetname");
+  var_1 = getEnt("intro_gate_left", "targetname");
   var_1 delete();
   level._id_0C59["generic"]["casual_killer_walk_f"][0] = % casual_killer_walk_f;
   level._id_0C59["generic"]["casual_stand_idle"] = % casual_stand_idle;
@@ -226,7 +226,7 @@ _id_5633() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(isDefined(var_0[var_1].target)) {
-      var_2 = getent(var_0[var_1].target, "targetname");
+      var_2 = getEnt(var_0[var_1].target, "targetname");
 
       if(isDefined(var_2)) {
         var_2 maps\_utility::_id_27C5();
@@ -274,7 +274,7 @@ _id_5562(var_0, var_1, var_2) {
     if(isDefined(var_5)) {
       if(isDefined(var_2) && var_2) {
         if(isDefined(var_5.target)) {
-          var_6 = getent(var_5.target, "targetname");
+          var_6 = getEnt(var_5.target, "targetname");
 
           if(isDefined(var_6)) {
             var_6 maps\_utility::_id_27C5();
@@ -292,7 +292,7 @@ _id_02F1() {
   var_0 = getEntArray("assassin_box_clip", "targetname");
 
   foreach(var_2 in var_0) {}
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
 }
 
 _id_3F71() {
@@ -378,12 +378,12 @@ _id_5BD7() {
 }
 
 _id_5BD8() {
-  var_0 = getent("vip_1_spawner", "targetname");
+  var_0 = getEnt("vip_1_spawner", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1, 0);
   _id_5BD9(var_1, 1);
   var_1.targetname = "vip_1";
   level._id_5BB6[0] = var_1;
-  var_2 = getent("vip_2_spawner", "targetname");
+  var_2 = getEnt("vip_2_spawner", "targetname");
   var_3 = var_2 maps\_utility::_id_166F(1, 0);
   _id_5BD9(var_3, 2);
   var_3.targetname = "vip_2";
@@ -415,7 +415,7 @@ _id_5BDA() {
   maps\_utility::_id_27CA("hostage_spawner", ::_id_5BDB);
   maps\_utility::_id_272C("hostage_spawner", 1);
   maps\_utility::_id_26BA("hostages", "axis");
-  var_0 = common_scripts\utility::getstruct("hostage_loc", "targetname");
+  var_0 = common_scripts\utility::getStruct("hostage_loc", "targetname");
   level._id_5BBF = var_0;
 }
 
@@ -482,7 +482,7 @@ _id_5BE0(var_0, var_1) {
           var_4 _id_5BE2();
 
           if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "vips") {
-            var_5 = common_scripts\utility::getstruct("vip1_hide_spot", "targetname");
+            var_5 = common_scripts\utility::getStruct("vip1_hide_spot", "targetname");
             var_4 setgoalpos(var_5.origin);
             var_4.goalradius = 64;
           } else {
@@ -507,7 +507,7 @@ _id_5BE0(var_0, var_1) {
           var_4 _id_5BE2();
 
           if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "vips") {
-            var_5 = common_scripts\utility::getstruct("vip2_hide_spot", "targetname");
+            var_5 = common_scripts\utility::getStruct("vip2_hide_spot", "targetname");
             var_4 setgoalpos(var_5.origin);
             var_4.goalradius = 24;
             var_4.pathenemyfightdist = 8;
@@ -534,7 +534,7 @@ _id_5BE0(var_0, var_1) {
           var_4 _id_5BE2();
 
           if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "vips") {
-            var_5 = common_scripts\utility::getstruct("vip_escape_wait_3", "targetname");
+            var_5 = common_scripts\utility::getStruct("vip_escape_wait_3", "targetname");
             var_4 setgoalpos(var_5.origin);
             var_4.goalradius = 64;
           } else {
@@ -594,7 +594,7 @@ _id_5BE3() {
   for(var_0 = 0; var_0 < level._id_5BBC.size; var_0++) {
     if(isalive(level._id_5BBC[var_0])) {
       level._id_5BBC[var_0] maps\_utility::_id_2521();
-      var_1 = common_scripts\utility::getstruct("vip_escape_wait_" + (var_0 + 1), "targetname");
+      var_1 = common_scripts\utility::getStruct("vip_escape_wait_" + (var_0 + 1), "targetname");
       level._id_5BBC[var_0] setgoalpos(var_1.origin);
     }
   }
@@ -783,7 +783,7 @@ _id_5BE7() {
   common_scripts\utility::flag_set("out_of_stage_1");
   thread maps\ss_util::_id_4421("so_assassin_enemy_heading_your_way");
   var_3 = getEntArray("hostage_guard", "script_noteworthy");
-  var_4 = common_scripts\utility::getstruct("hostage_loc", "targetname");
+  var_4 = common_scripts\utility::getStruct("hostage_loc", "targetname");
 
   foreach(var_6 in var_3) {
     var_7 = var_6 maps\_utility::_id_166F(1, 0);
@@ -860,22 +860,22 @@ _id_5BE7() {
   thread maps\_specialops::_id_17FF(level._id_5BC7, 0, &"SO_ASSASSIN_PAYBACK_EXFIL_HUD");
   thread _id_5BEC();
   wait(level._id_5BC7 - level._id_5BC9 - level._id_5BC8);
-  var_13 = getent("cobra", "targetname");
+  var_13 = getEnt("cobra", "targetname");
   var_14 = var_13 maps\_vehicle::_id_1F9E();
   var_14 thread _id_5BFB();
   wait(level._id_5BC8);
-  var_15 = getent("blackhawk", "targetname");
+  var_15 = getEnt("blackhawk", "targetname");
   var_16 = var_15 maps\_vehicle::_id_1F9E();
-  var_17 = getent("blackhawk_pilot", "targetname");
+  var_17 = getEnt("blackhawk_pilot", "targetname");
   var_18 = var_17 maps\_utility::_id_166F(1, 0);
   var_18 thread maps\_utility::_id_0D72(0);
   var_16 thread maps\_vehicle_aianim::_id_24E5(var_18);
-  var_19 = getent("blackhawk_copilot", "targetname");
+  var_19 = getEnt("blackhawk_copilot", "targetname");
   var_20 = var_19 maps\_utility::_id_166F(1, 0);
   var_20 thread maps\_utility::_id_0D72(0);
   var_16 thread maps\_vehicle_aianim::_id_24E5(var_20);
   wait(level._id_5BCA);
-  var_21 = common_scripts\utility::getstruct("last_wave_flee", "targetname");
+  var_21 = common_scripts\utility::getStruct("last_wave_flee", "targetname");
   var_9 = getaiarray("axis");
 
   for(var_10 = 0; var_10 < var_9.size; var_10++) {
@@ -927,15 +927,15 @@ _id_50E5() {
 
 _id_5BEC() {
   level endon("special_op_terminated");
-  var_0 = getent("intro_gate_right_so", "targetname");
-  var_1 = getent("intro_gate_left_so", "targetname");
-  var_2 = getent("gate_clip", "targetname");
+  var_0 = getEnt("intro_gate_right_so", "targetname");
+  var_1 = getEnt("intro_gate_left_so", "targetname");
+  var_2 = getEnt("gate_clip", "targetname");
   var_2 delete();
-  var_3 = common_scripts\utility::getstruct("end_gate_origin", "targetname");
-  var_4 = common_scripts\utility::getstruct("right_gate_dest", "targetname");
-  var_0 moveto(var_4.origin, 3.0, 0.5, 0.5);
-  var_5 = common_scripts\utility::getstruct("left_gate_dest", "targetname");
-  var_1 moveto(var_5.origin, 3.0, 0.5, 0.5);
+  var_3 = common_scripts\utility::getStruct("end_gate_origin", "targetname");
+  var_4 = common_scripts\utility::getStruct("right_gate_dest", "targetname");
+  var_0 moveTo(var_4.origin, 3.0, 0.5, 0.5);
+  var_5 = common_scripts\utility::getStruct("left_gate_dest", "targetname");
+  var_1 moveTo(var_5.origin, 3.0, 0.5, 0.5);
   var_6 = getEntArray("last_wave", "script_noteworthy");
   var_7 = getaiarray("axis");
 
@@ -1006,7 +1006,7 @@ _id_5BED() {
 
 _id_4FA4(var_0, var_1, var_2, var_3) {
   var_4 = _id_4C9A(var_1);
-  var_4 rotateto((180, 180, 0), 0.1);
+  var_4 rotateTo((180, 180, 0), 0.1);
   playFXOnTag(common_scripts\utility::getfx(var_0), var_4, "tag_origin");
   common_scripts\utility::flag_wait(var_2);
   stopFXOnTag(common_scripts\utility::getfx(var_0), var_4, "tag_origin");
@@ -1049,9 +1049,9 @@ _id_5BEE() {
     return;
   }
   thread maps\ss_util::_id_4421("so_assassin_enemy_contacts");
-  var_3 = common_scripts\utility::getstruct("patrol_goal_struct1", "targetname");
-  var_4 = common_scripts\utility::getstruct("patrol_goal_struct2", "targetname");
-  var_5 = common_scripts\utility::getstruct("patrol_goal_struct3", "targetname");
+  var_3 = common_scripts\utility::getStruct("patrol_goal_struct1", "targetname");
+  var_4 = common_scripts\utility::getStruct("patrol_goal_struct2", "targetname");
+  var_5 = common_scripts\utility::getStruct("patrol_goal_struct3", "targetname");
   level._id_5BB9[0] setgoalpos(var_3.origin);
   level._id_5BB9[1] setgoalpos(var_4.origin);
   level._id_5BB9[2] setgoalpos(var_5.origin);
@@ -1086,11 +1086,11 @@ _id_5BEF() {
 }
 
 _id_5BF0(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   var_4 = var_3 maps\_vehicle::_id_1F9E();
-  var_5 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_1, "targetname");
   var_4.health = 2 * var_4.health - var_4._id_163B;
-  var_6 = getent(var_2, "targetname");
+  var_6 = getEnt(var_2, "targetname");
   var_7 = var_6 maps\_utility::_id_166F(1, 0);
   var_4 thread maps\_vehicle_aianim::_id_24E5(var_7);
   var_4 thread _id_0619::_id_3D0C(var_5);
@@ -1105,8 +1105,8 @@ _id_5BF0(var_0, var_1, var_2) {
 }
 
 _id_5BF1(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct(var_1, "targetname");
-  var_5 = common_scripts\utility::getstruct(var_2, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_1, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_2, "targetname");
   var_6 = 0;
 
   while(!var_6) {
@@ -1239,7 +1239,7 @@ _id_5BF8() {
 
 _id_5BF9() {
   level endon("special_op_terminated");
-  var_0 = getent("hostage_trigger", "targetname");
+  var_0 = getEnt("hostage_trigger", "targetname");
   level thread _id_5BFA();
   maps\_utility::_id_262B("hostage_trigger", "targetname");
   common_scripts\utility::flag_set("hostage_reached");
@@ -1390,9 +1390,9 @@ _id_5BFF() {
   self endon("death");
   self endon("pain");
   self endon("group_wake");
-  var_0 = common_scripts\utility::getstruct("vip1_struct1", "targetname");
-  var_1 = common_scripts\utility::getstruct("vip1_struct2", "targetname");
-  var_2 = common_scripts\utility::getstruct("vip1_struct3", "targetname");
+  var_0 = common_scripts\utility::getStruct("vip1_struct1", "targetname");
+  var_1 = common_scripts\utility::getStruct("vip1_struct2", "targetname");
+  var_2 = common_scripts\utility::getStruct("vip1_struct3", "targetname");
 
   for(;;) {
     self setgoalpos(var_0.origin);
@@ -1412,9 +1412,9 @@ _id_5C00() {
   self endon("death");
   self endon("pain");
   self endon("group_wake");
-  var_0 = common_scripts\utility::getstruct("vip2_struct1", "targetname");
-  var_1 = common_scripts\utility::getstruct("vip2_struct2", "targetname");
-  var_2 = common_scripts\utility::getstruct("vip2_struct3", "targetname");
+  var_0 = common_scripts\utility::getStruct("vip2_struct1", "targetname");
+  var_1 = common_scripts\utility::getStruct("vip2_struct2", "targetname");
+  var_2 = common_scripts\utility::getStruct("vip2_struct3", "targetname");
 
   for(;;) {
     self setgoalpos(var_0.origin);
@@ -1436,7 +1436,7 @@ _id_5C01() {
   self endon("group_wake");
   common_scripts\utility::waitframe();
   self notify("stop_going_to_node");
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
 
   for(;;) {
     self.pathenemylookahead = 8;
@@ -1447,7 +1447,7 @@ _id_5C01() {
     self waittill("goal");
     self._id_1382 = 1;
     wait 6.0;
-    var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   }
 }
 

@@ -93,7 +93,7 @@ function _maze_mover_move(goal, time) {
   if(self.isactive === 0) {
     _maze_mover_play_fx(self.var_f88b106c, self.var_2f5c5654);
   }
-  self moveto(goal, time);
+  self moveTo(goal, time);
   self waittill("movedone");
   self.ismoving = 0;
   if(self.isactive === 1) {

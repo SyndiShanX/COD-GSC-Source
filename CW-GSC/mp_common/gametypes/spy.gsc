@@ -219,7 +219,7 @@ function function_5eb6288f(val) {
 
 function function_c83b8450() {
   if(self issplitscreen()) {
-    allplayers = getplayers();
+    allplayers = getPlayers();
 
     foreach(otherplayer in allplayers) {
       if(!isalive(otherplayer) || otherplayer === self) {
@@ -412,7 +412,7 @@ function onendround(var_c1e98979) {
   game.telemetry.var_b02e1bf6 = function_24d1cd4f(3).size;
   game.telemetry.var_726204bf = function_24d1cd4f(2).size;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player namespace_e51f0bc1::function_80d6d39b();
     level.spyhud hud_spy::set_state(player, #"hash_6724d4bba3d5bf31");
 
@@ -483,7 +483,7 @@ function onendround(var_c1e98979) {
 function onendgame(var_c1e98979) {
   var_ca002956 = int(getgametypesetting(#"roundlimit") / 2);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.pers[#"rounds_won"]) && player.pers[#"rounds_won"] > var_ca002956) {
       match::function_af2e264f(player);
     }
@@ -591,7 +591,7 @@ function on_game_playing() {
 }
 
 function function_7ad7cae9() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       return;
     }
@@ -606,7 +606,7 @@ function function_7dd63f6c() {
   level endon(#"game_ended");
   level thread function_2c7d73e9();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player)) {
       level.spyhud hud_spy::set_state(player, #"hash_75ae26cee1b43762");
 
@@ -1149,7 +1149,7 @@ function function_7ef70910() {
   if(self.spyRole === 2) {
     reward = level.var_7e569431.var_c77b4162;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.spyRole === 3) {
         player spy_skill::function_53a81144(reward);
       }
@@ -1270,13 +1270,13 @@ function function_63b1b505(victim) {
 
   util::wait_network_frame();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.spyhud hud_spy::function_727bf185(player, 1);
   }
 
   util::wait_network_frame();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.spyhud hud_spy::function_727bf185(player, 0);
   }
 }
@@ -2357,7 +2357,7 @@ function private function_2c7d73e9() {
 
   while(true) {
     wait 30;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player)) {

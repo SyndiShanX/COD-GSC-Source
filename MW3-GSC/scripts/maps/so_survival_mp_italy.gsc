@@ -20,8 +20,8 @@ main() {
 }
 
 delete_stupid_curtains() {
-  var_0 = getent("stage_curtain", "targetname");
+  var_0 = getEnt("stage_curtain", "targetname");
   var_0 delete();
-  var_1 = getent("stage_curtain_clip", "targetname");
+  var_1 = getEnt("stage_curtain_clip", "targetname");
   var_1 delete();
 }

@@ -312,7 +312,7 @@ gamerepupdateinformationforround() {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -325,7 +325,7 @@ gamerepanalyzeandreport() {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     player = players[i];

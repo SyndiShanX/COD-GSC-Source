@@ -310,12 +310,12 @@ sam_cougar() {
   vh_sam = spawn_vehicle_from_targetname("sam_cougar");
   vh_sam.takedamage = 0;
   level endon("stop_sam_cougar");
-  vh_sam = getent("sam_cougar", "targetname");
+  vh_sam = getEnt("sam_cougar", "targetname");
   vh_sam set_turret_ignore_line_of_sight(1, 2);
   e_target = spawn_model("tag_origin");
 
   while(true) {
-    e_target.origin = vh_sam.origin + vectorscale((0, 0, 1), 5000.0) + vectornormalize(anglesToForward(vh_sam.angles)) * 7000 + random_vector(2000);
+    e_target.origin = vh_sam.origin + vectorscale((0, 0, 1), 5000.0) + vectorNormalize(anglesToForward(vh_sam.angles)) * 7000 + random_vector(2000);
     vh_sam set_turret_target(e_target, (0, 0, 0), 2);
     vh_sam fire_turret_for_time(2, 2);
     wait 6;
@@ -349,7 +349,7 @@ intersection_last_truck() {
 
 drop_building1() {
   flag_wait_array(array("ok_to_drop_building1", "looking_down_the_street"));
-  playsoundatposition("evt_small_bldg_collapse", (9602, 2746, 293));
+  playSoundAtPosition("evt_small_bldg_collapse", (9602, 2746, 293));
   earthquake(0.2, 1, level.player.origin, 20000);
   level notify("fxanim_bldg_convoy_block_start");
 }
@@ -367,7 +367,7 @@ building_collapse() {
   level notify("fxanim_skyscraper02_start");
   flag_set("building_collapsing");
   earthquake(0.3, 12, level.player.origin, 20000);
-  level.player playrumbleonentity("la_1b_building_collapse");
+  level.player playRumbleOnEntity("la_1b_building_collapse");
   delay_thread(3, ::set_player_invulnerable);
   wait 12;
   level clientnotify("fade_out");
@@ -395,7 +395,7 @@ player_knocked_down() {
   e_temp.angles = self getplayerangles();
   wait 8.5;
 
-  e_temp moveto(e_temp.origin + vectorscale((0, -1, 0), 150.0), 2, 0.2, 1.5);
+  e_temp moveTo(e_temp.origin + vectorscale((0, -1, 0), 150.0), 2, 0.2, 1.5);
   self setstance("prone");
   self allowstand(0);
   self allowsprint(0);
@@ -406,7 +406,7 @@ player_knocked_down() {
   self take_weapons();
 
   self shellshock("explosion", 20);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   level thread run_scene("building_collapse_player");
 }
 
@@ -415,7 +415,7 @@ set_player_invulnerable() {
 }
 
 la_2_transition() {
-  e_align = getent("f35_vtol", "targetname");
+  e_align = getEnt("f35_vtol", "targetname");
   str_local_player_coordinates = level.player get_relative_position_string(e_align);
   setDvar("la_2_player_start_pos", str_local_player_coordinates);
   setDvar("la_1_ending_position", 1);

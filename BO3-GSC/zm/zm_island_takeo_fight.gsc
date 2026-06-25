@@ -63,7 +63,7 @@ function function_a85ea965() {
   level.var_bbdc1f95.var_e7eb4096.script_int = 4;
   level.var_bbdc1f95.var_e7eb4096.b_dead = 0;
   level.var_bbdc1f95.var_e7eb4096.var_7168c71c = [];
-  var_9f68aa5 = getent("final_vine_postule", "targetname");
+  var_9f68aa5 = getEnt("final_vine_postule", "targetname");
   var_9f68aa5.var_74d299dc = 1;
   var_9f68aa5.var_7117876c = var_9f68aa5.origin;
   var_9f68aa5.v_off_pos = var_9f68aa5.origin + (vectorscale((-1, 0, 0), 32));
@@ -74,11 +74,11 @@ function function_a85ea965() {
     var_fb97f73d.v_off_pos = var_fb97f73d.origin + (vectorscale((-1, 0, 0), 32));
     array::add(level.var_bbdc1f95.var_69943735[var_fb97f73d.script_int].var_7168c71c, var_fb97f73d);
   }
-  level.var_bbdc1f95.var_cf5e2435 = getent("clip_takeofight_door", "targetname");
-  level.var_bbdc1f95.var_c093c394 = getent("mdl_takeofight_room_seal", "targetname");
+  level.var_bbdc1f95.var_cf5e2435 = getEnt("clip_takeofight_door", "targetname");
+  level.var_bbdc1f95.var_c093c394 = getEnt("mdl_takeofight_room_seal", "targetname");
   level.var_bbdc1f95.var_c093c394.var_9c93e17 = level.var_bbdc1f95.var_c093c394.origin;
   level.var_bbdc1f95.var_c093c394.v_open_pos = level.var_bbdc1f95.var_c093c394.origin + vectorscale((0, 0, 1), 120);
-  level.var_bbdc1f95.var_cf5e2435 linkto(level.var_bbdc1f95.var_c093c394);
+  level.var_bbdc1f95.var_cf5e2435 linkTo(level.var_bbdc1f95.var_c093c394);
   level flag::init("takeo_freed");
   level.var_4d97351 = 0;
   level.var_c70a4f00 = 0;
@@ -89,7 +89,7 @@ function function_a85ea965() {
       var_fb97f73d thread function_9c58350b();
     }
   }
-  level.mdl_alttakeo = getent("mdl_alttakeo", "targetname");
+  level.mdl_alttakeo = getEnt("mdl_alttakeo", "targetname");
   level.mdl_alttakeo thread function_75174ee();
   level.mdl_alttakeo playLoopSound("zmb_takeo_heartbeat_far");
   level thread function_a49f3a92();
@@ -204,7 +204,7 @@ function function_54d91dfb() {
     var_fb97f73d notify("hash_c8e5500f");
   }
   var_9f49d930 = "takeo_arm" + self.script_int;
-  var_90f16638 = getent(var_9f49d930, "targetname");
+  var_90f16638 = getEnt(var_9f49d930, "targetname");
   var_90f16638 clientfield::set("takeo_arm_hit_fx", self.script_int);
   level thread function_6addaa9e("pain_big");
   if(level flag::get("takeo_freed")) {
@@ -219,9 +219,9 @@ function function_54d91dfb() {
   var_87504ba3 = function_b64005e8(self.script_int, "retract");
   self thread scene::play(var_87504ba3);
   if(self.script_int === 2) {
-    getent("takeo_boss_vine_clip_1", "targetname") notsolid();
+    getEnt("takeo_boss_vine_clip_1", "targetname") notsolid();
   } else if(self.script_int === 4) {
-    getent("takeo_boss_vine_clip_2", "targetname") notsolid();
+    getEnt("takeo_boss_vine_clip_2", "targetname") notsolid();
   }
 }
 
@@ -273,7 +273,7 @@ function function_75174ee() {
   level endon("flag_play_outro_cutscene");
   var_a175a10b = util::spawn_model("tag_origin", self.origin, self.angles);
   var_a175a10b thread function_5c1adaf1();
-  self linkto(var_a175a10b);
+  self linkTo(var_a175a10b);
   var_a175a10b rotateroll(1, 2.5);
   while(!level flag::get("flag_play_outro_cutscene")) {
     var_a175a10b rotateroll(-2, 5);
@@ -472,10 +472,10 @@ function function_a49f3a92() {
 
 function function_bc851c3a(b_on) {
   if(isDefined(b_on) && b_on) {
-    level.var_bbdc1f95.var_c093c394 moveto(level.var_bbdc1f95.var_c093c394.var_9c93e17, 0.5);
+    level.var_bbdc1f95.var_c093c394 moveTo(level.var_bbdc1f95.var_c093c394.var_9c93e17, 0.5);
     level.var_bbdc1f95.var_c093c394 playSound("zmb_takeoboss_door_close");
   } else {
-    level.var_bbdc1f95.var_c093c394 moveto(level.var_bbdc1f95.var_c093c394.v_open_pos, 2.5, 0.5);
+    level.var_bbdc1f95.var_c093c394 moveTo(level.var_bbdc1f95.var_c093c394.v_open_pos, 2.5, 0.5);
     level.var_bbdc1f95.var_c093c394 playSound("zmb_takeoboss_door_open");
   }
 }
@@ -885,11 +885,11 @@ function function_fe7b0c13() {
 
 function function_75275516() {
   zm_utility::increment_ignoreme();
-  playsoundatposition("zmb_bgb_abh_teleport_out", self.origin);
+  playSoundAtPosition("zmb_bgb_abh_teleport_out", self.origin);
   var_7fcbf214 = struct::get_array("s_takeofight_player_teleport", "targetname");
   s_respawn_point = var_7fcbf214[self.characterindex];
   self hide();
-  self setorigin(s_respawn_point.origin);
+  self setOrigin(s_respawn_point.origin);
   self freezecontrols(1);
   v_return_pos = self.origin + vectorscale((0, 0, 1), 60);
   a_ai = getaiteamarray(level.zombie_team);
@@ -1028,7 +1028,7 @@ function function_5ff8dc0c() {
         }
         var_9c458cf5 show();
       }
-      getent("", "") show();
+      getEnt("", "") show();
     } else {
       foreach(var_9c458cf5 in level.var_bbdc1f95.var_69943735) {
         foreach(var_fb97f73d in var_9c458cf5.var_7168c71c) {
@@ -1036,7 +1036,7 @@ function function_5ff8dc0c() {
         }
         var_9c458cf5 hide();
       }
-      getent("", "") hide();
+      getEnt("", "") hide();
     }
   }
 }

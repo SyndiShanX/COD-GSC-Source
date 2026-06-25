@@ -285,7 +285,7 @@ OrbitalStrikeBeginChargeUp(OrbitalStrike, chargeTimeRemaining) {
 
   self SetClientOmnvar("ui_orbital_laser_mode", 1);
 
-  self PlayRumbleOnEntity("orbital_laser_charge");
+  self playRumbleOnEntity("orbital_laser_charge");
   PlayWarmupSounds(OrbitalStrike, false);
   wait 0.1;
   PlayWarmupEffects(OrbitalStrike);
@@ -297,7 +297,7 @@ OrbitalStrikChargeUpSpeedUp(OrbitalStrike, chargeTimeRemaining) {
   self SetClientOmnvar("ui_orbital_laser_charge", endTime);
 
   self StopRumble("orbital_laser_charge");
-  self PlayRumbleOnEntity("orbital_laser_charge_quick");
+  self playRumbleOnEntity("orbital_laser_charge_quick");
 
   PlayWarmupSounds(OrbitalStrike, true);
 }
@@ -424,7 +424,7 @@ PlayerControlOrbitalStrike(OrbitalStrike) {
   self RemoteControlVehicle(OrbitalStrike);
   wait(0.05);
 
-  self CameraLinkTo(OrbitalStrike, "tag_origin");
+  self CameralinkTo(OrbitalStrike, "tag_origin");
 
   wait 0.55;
   maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();

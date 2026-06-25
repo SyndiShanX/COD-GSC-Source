@@ -1001,7 +1001,7 @@ init_trigger_flags() {
   level.trigger_func[false] = ::trigger_off;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   assertex(isDefined(name) && isDefined(type), "Did not fill in name and type");
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
@@ -2322,7 +2322,7 @@ fileprint_launcher_start_file()
 
         AssertEx(isDefined(target), "Self had no target!");
 
-        ent = GetEnt(target, "targetname");
+        ent = getEnt(target, "targetname");
         if(isDefined(ent)) {
           return ent;
         }
@@ -2334,7 +2334,7 @@ fileprint_launcher_start_file()
           }
         }
 
-        ent = getstruct(target, "targetname");
+        ent = getStruct(target, "targetname");
         if(isDefined(ent)) {
           return ent;
         }
@@ -2350,7 +2350,7 @@ fileprint_launcher_start_file()
       get_noteworthy_ent(noteworthy) {
         AssertEx(isDefined(noteworthy), "No script_noteworthy provided!");
 
-        ent = GetEnt(noteworthy, "script_noteworthy");
+        ent = getEnt(noteworthy, "script_noteworthy");
         if(isDefined(ent)) {
           return ent;
         }
@@ -2362,7 +2362,7 @@ fileprint_launcher_start_file()
           }
         }
 
-        ent = getstruct(noteworthy, "script_noteworthy");
+        ent = getStruct(noteworthy, "script_noteworthy");
         if(isDefined(ent)) {
           return ent;
         }
@@ -2642,7 +2642,7 @@ fileprint_launcher_start_file()
         org = self GetTagOrigin(tagname);
         angle = self GetTagAngles(tagname);
         vector = anglesToForward(angle);
-        vector = VectorNormalize(vector) * dist;
+        vector = vectorNormalize(vector) * dist;
         return org + vector;
       }
 
@@ -2848,7 +2848,7 @@ fileprint_launcher_start_file()
       }
 
       within_fov(start_origin, start_angles, end_origin, fov) {
-        normal = VectorNormalize(end_origin - start_origin);
+        normal = vectorNormalize(end_origin - start_origin);
         forward = anglesToForward(start_angles);
         dot = VectorDot(forward, normal);
 
@@ -2896,7 +2896,7 @@ fileprint_launcher_start_file()
 
           if((newDisconnect != disconnect) || moved) {
             if(newDisconnect) {
-              self DisconnectPaths();
+              self disconnectPaths();
             } else {
               self ConnectPaths();
             }

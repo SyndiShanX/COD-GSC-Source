@@ -305,7 +305,7 @@ serverphysicsobj(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_model", self.obj.origin);
   var_5.angles = self.obj.angles;
   var_5 setModel(self.obj.model);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
 
   if(var_4 != "splash") {
     var_0 = var_0 * 10;

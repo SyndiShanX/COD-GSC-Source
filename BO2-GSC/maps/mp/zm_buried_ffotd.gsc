@@ -494,7 +494,7 @@ is_player_using_thumbstick() {
 }
 
 get_push_vector() {
-  return vectornormalize(self.push_player_towards_point - self.origin) * 100;
+  return vectorNormalize(self.push_player_towards_point - self.origin) * 100;
 }
 
 bar_spawner_fix() {

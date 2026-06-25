@@ -245,7 +245,7 @@ function portal_think(b_show_fx) {
       if(e_portee getstance() != "prone") {
         playFX(level._effect["portal_3p"], e_portee.origin);
         e_portee playlocalsound("zmb_teleporter_teleport_2d");
-        playsoundatposition("zmb_teleporter_teleport_out", e_portee.origin);
+        playSoundAtPosition("zmb_teleporter_teleport_out", e_portee.origin);
         e_portee thread portal_teleport_player(b_show_fx, self.a_s_port_locs, str_zone, self.origin, var_759fb311);
       }
     }
@@ -335,7 +335,7 @@ function portal_teleport_player(show_fx = 1, a_s_port_locs, str_zone, var_6d359b
   if(show_fx) {
     self clientfield::set_to_player("player_stargate_fx", 0);
   }
-  a_players = getplayers();
+  a_players = getPlayers();
   arrayremovevalue(a_players, self);
   s_pos = array::random(a_s_port_locs);
   if(a_players.size > 0) {
@@ -354,9 +354,9 @@ function portal_teleport_player(show_fx = 1, a_s_port_locs, str_zone, var_6d359b
   }
   playFX(level._effect["portal_3p"], s_pos.origin);
   self unlink();
-  playsoundatposition("zmb_teleporter_teleport_in", s_pos.origin);
+  playSoundAtPosition("zmb_teleporter_teleport_in", s_pos.origin);
   self thread function_bfba39d8();
-  self setorigin(s_pos.origin);
+  self setOrigin(s_pos.origin);
   self setplayerangles(s_pos.angles);
   if(isDefined(var_d9543609)) {
     var_d9543609 ball::reset_ball(0);
@@ -459,7 +459,7 @@ function portal_teleport_ai(e_portee) {
   e_portee.b_teleporting = 1;
   e_portee pathmode("dont move");
   playFX(level._effect["portal_3p"], e_portee.origin);
-  playsoundatposition("zmb_teleporter_teleport_out", e_portee.origin);
+  playSoundAtPosition("zmb_teleporter_teleport_out", e_portee.origin);
   e_portee notsolid();
   util::wait_network_frame();
   image_room = struct::get("teleport_room_zombies", "targetname");
@@ -477,7 +477,7 @@ function portal_teleport_ai(e_portee) {
     e_portee.origin = s_port_loc.origin;
     e_portee.angles = s_port_loc.angles;
   }
-  playsoundatposition("zmb_teleporter_teleport_in", s_port_loc.origin);
+  playSoundAtPosition("zmb_teleporter_teleport_in", s_port_loc.origin);
   playFX(level._effect["portal_3p"], s_port_loc.origin);
   e_portee solid();
   wait(1);

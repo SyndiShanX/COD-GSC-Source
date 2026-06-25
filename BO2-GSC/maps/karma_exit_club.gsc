@@ -44,22 +44,22 @@ loading_movie_2_main() {
 }
 
 init_loading_movie_cctv() {
-  ai = getent("defalco_drone", "targetname");
+  ai = getEnt("defalco_drone", "targetname");
   str_weapon_model = getweaponmodel("beretta93r_sp");
   ai attach(str_weapon_model, "tag_weapon_right");
-  ai = getent("han_drone", "targetname");
+  ai = getEnt("han_drone", "targetname");
   str_weapon_model = getweaponmodel("beretta93r_sp");
   ai attach(str_weapon_model, "tag_weapon_right");
-  ai = getent("defalco_escort_left_drone", "targetname");
+  ai = getEnt("defalco_escort_left_drone", "targetname");
   str_weapon_model = getweaponmodel("sa58_sp");
   ai attach(str_weapon_model, "tag_weapon_right");
 }
 
 init_loading_movie_cctv2() {
-  ai = getent("defalco_drone", "targetname");
+  ai = getEnt("defalco_drone", "targetname");
   str_weapon_model = getweaponmodel("beretta93r_sp");
   ai attach(str_weapon_model, "tag_weapon_right");
-  ai = getent("defalco_escort_left_drone", "targetname");
+  ai = getEnt("defalco_escort_left_drone", "targetname");
   str_weapon_model = getweaponmodel("sa58_sp");
   ai attach(str_weapon_model, "tag_weapon_right");
 }
@@ -89,7 +89,7 @@ main() {
 }
 
 init_door_collision() {
-  getent("armory_door_right_collision", "targetname") linkto(getent("armory_door_right", "targetname"), "tag_animate");
+  getEnt("armory_door_right_collision", "targetname") linkTo(getEnt("armory_door_right", "targetname"), "tag_animate");
 }
 
 init_han_head() {
@@ -103,9 +103,9 @@ init_han_head() {
 }
 
 exit_club_objectives() {
-  t_trigger = getent("trigger_end_event7", "targetname");
+  t_trigger = getEnt("trigger_end_event7", "targetname");
   str_struct_name = t_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   scene_wait("intro_explosion_aftermath");
   set_objective(level.obj_stop_defalco, s_struct, "");
   t_trigger waittill("trigger");
@@ -113,7 +113,7 @@ exit_club_objectives() {
 }
 
 exit_club_clean_up() {
-  t_cleanup = getent("clean_up_exit_club", "targetname");
+  t_cleanup = getEnt("clean_up_exit_club", "targetname");
 
   while(true) {
     t_cleanup trigger_wait();
@@ -142,12 +142,12 @@ intro_explosion_aftermath() {
   level.ai_harper = get_ais_from_scene("intro_explosion_aftermath", "harper");
   level.ai_salazar = get_ais_from_scene("intro_explosion_aftermath", "salazar");
   scene_wait("intro_explosion_aftermath");
-  m_door = getent("security_door", "targetname");
-  m_door_clip = getent(m_door.target, "targetname");
-  m_door_clip linkto(m_door);
-  m_door rotateyaw(88, 0.05);
+  m_door = getEnt("security_door", "targetname");
+  m_door_clip = getEnt(m_door.target, "targetname");
+  m_door_clip linkTo(m_door);
+  m_door rotateYaw(88, 0.05);
   level thread aftermath_guard_walk_to_idle();
-  getent("armory_door_right_collision", "targetname") connectpaths();
+  getEnt("armory_door_right_collision", "targetname") connectpaths();
   flag_set("intro_explosion_dialog");
   level.ai_harper post_intro_position(0, "harper_exit_club_node");
   level.ai_salazar post_intro_position(0, "salazar_exit_club_node");
@@ -303,10 +303,10 @@ titanic_event_boat() {
 }
 
 setup_boat(m_boat, nd_goal) {
-  m_boat = getent(m_boat, "targetname");
-  nd_node = getstruct(nd_goal, "targetname");
+  m_boat = getEnt(m_boat, "targetname");
+  nd_node = getStruct(nd_goal, "targetname");
   nd_node_org = nd_node.origin;
-  m_boat moveto(nd_node_org, 7.5, 1.0, 0.05);
+  m_boat moveTo(nd_node_org, 7.5, 1.0, 0.05);
   m_boat play_fx("fx_kar_boat_wake1", undefined, undefined, undefined, 1, "tag_origin");
   m_boat waittill("movedone");
   m_boat delete();
@@ -330,9 +330,9 @@ spawn_lift_boat(str_drone_pos, n_move_time) {
     m_drone = spawn("script_model", s_drone_pos.origin);
     m_drone.angles = vectorscale((0, -1, 0), 90.0);
     m_drone setModel("p6_boat_small_closed");
-    s_drone_target = getstruct(s_drone_pos.target, "targetname");
+    s_drone_target = getStruct(s_drone_pos.target, "targetname");
     playFXOnTag(level._effect["fx_kar_boat_wake1"], m_drone, "tag_origin");
-    m_drone moveto(s_drone_target.origin, n_move_time);
+    m_drone moveTo(s_drone_target.origin, n_move_time);
     m_drone waittill("movedone");
     m_drone delete();
   }
@@ -347,7 +347,7 @@ exit_club_dialog() {
 }
 
 intruder_perk() {
-  t_intruder_use = getent("t_intruder_use", "targetname");
+  t_intruder_use = getEnt("t_intruder_use", "targetname");
   t_intruder_use trigger_off();
   run_scene_first_frame("intruder_knuckles");
   a_weapons = getEntArray("intruder_weapons", "targetname");
@@ -357,12 +357,12 @@ intruder_perk() {
   }
 
   if(level.player hasperk("specialty_intruder")) {
-    s_intruder = getstruct("intruder_use_pos", "targetname");
+    s_intruder = getStruct("intruder_use_pos", "targetname");
     set_objective(level.obj_intruder, s_intruder.origin, "interact");
     t_intruder_use trigger_on();
-    t_intruder_use sethintstring(&"SCRIPT_HINT_INTRUDER");
+    t_intruder_use setHintString(&"SCRIPT_HINT_INTRUDER");
     t_intruder_use trigger_wait();
-    intruder_blocker_clip = getent("intruder_blocker_clip", "targetname");
+    intruder_blocker_clip = getEnt("intruder_blocker_clip", "targetname");
     intruder_blocker_clip delete();
 
     foreach(weapon in a_weapons) {
@@ -380,21 +380,21 @@ intruder_perk() {
 }
 
 intruder_glow_hide() {
-  e_armory_doors = getent("intruder_armory_door", "targetname");
+  e_armory_doors = getEnt("intruder_armory_door", "targetname");
   e_armory_doors hidepart("tag_glow_left");
   e_armory_doors hidepart("tag_glow_right");
 }
 
 intruder_zap_start(m_cutter) {
   m_cutter play_fx("cutter_spark", undefined, undefined, "stop_fx", 1, "tag_fx");
-  m_door = getent("intruder_armory_door", "targetname");
+  m_door = getEnt("intruder_armory_door", "targetname");
   m_door play_fx("intruder_door_smoke_left", undefined, undefined, -1, 1, "tag_fx1");
   m_door play_fx("intruder_door_smoke_right", undefined, undefined, -1, 1, "tag_fx");
 }
 
 intruder_zap_end(m_cutter) {
   m_cutter notify("stop_fx");
-  m_door = getent("intruder_armory_door", "targetname");
+  m_door = getEnt("intruder_armory_door", "targetname");
   m_door clearclientflag(12);
 }
 
@@ -417,12 +417,12 @@ setup_heli(v_heli_name, str_node) {
 }
 
 karma2_hide_tower_and_shell() {
-  e_shell = getent("shell_hide", "targetname");
+  e_shell = getEnt("shell_hide", "targetname");
   e_shell.script_convert = 0;
   e_shell hide();
 }
 
 karma2_show_tower_and_shell() {
-  e_shell = getent("shell_hide", "targetname");
+  e_shell = getEnt("shell_hide", "targetname");
   e_shell show();
 }

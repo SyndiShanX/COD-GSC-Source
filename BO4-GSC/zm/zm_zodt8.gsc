@@ -126,10 +126,10 @@ event_handler[level_init] main(eventstruct) {
   level clientfield::set("" + #"reveal_ee_space", 0);
   level clientfield::set("" + #"hash_2994a957c49bf321", 1);
   level clientfield::set("" + #"hash_7e91637e80ad93", 1);
-  e_clip = getent("e_clip_lifeboat", "targetname");
+  e_clip = getEnt("e_clip_lifeboat", "targetname");
 
   if(isDefined(e_clip)) {
-    e_clip disconnectpaths();
+    e_clip disconnectPaths();
   }
 
   level flag::wait_till("all_players_spawned");
@@ -196,13 +196,13 @@ function_5988b12(a_ents) {
   var_492eb620 = getEntArray("ocean_water", "targetname");
 
   foreach(e_tile in var_492eb620) {
-    e_tile linkto(level.e_sway);
+    e_tile linkTo(level.e_sway);
     e_tile clientfield::set("ocean_water", 1);
   }
 
   callback::on_spawned(&function_6beeab1d);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_6beeab1d();
   }
 
@@ -460,7 +460,7 @@ function_5716ed83(e_player) {
 
 function_d4fea86c(zbarrier_magicbox) {
   if(zbarrier_magicbox.weapon === level.w_tricannon_base) {
-    v_offset = vectornormalize(anglesToForward(zbarrier_magicbox.angles)) * 16;
+    v_offset = vectorNormalize(anglesToForward(zbarrier_magicbox.angles)) * 16;
     self.origin += v_offset;
   }
 
@@ -471,10 +471,10 @@ function_d4fea86c(zbarrier_magicbox) {
 lore_room_door() {
   level endon(#"end_game");
   level flag::init(#"open_lore_room");
-  var_48e9f58e = getent("baphomets_entry", "targetname");
-  var_61bca073 = getent("baphomets_entry" + "_clip", "targetname");
+  var_48e9f58e = getEnt("baphomets_entry", "targetname");
+  var_61bca073 = getEnt("baphomets_entry" + "_clip", "targetname");
   var_61bca073 solid();
-  var_61bca073 disconnectpaths();
+  var_61bca073 disconnectPaths();
 
   while(true) {
     level flag::wait_till(#"open_lore_room");
@@ -489,27 +489,27 @@ function_2c0f0869(b_open, e_door, var_a34c7e62) {
   var_3f3938b6 = (0, 35, 0);
 
   if(!isDefined(e_door)) {
-    e_door = getent("baphomets_entry", "targetname");
+    e_door = getEnt("baphomets_entry", "targetname");
   }
 
   if(!isDefined(var_a34c7e62)) {
-    var_a34c7e62 = getent("baphomets_entry" + "_clip", "targetname");
+    var_a34c7e62 = getEnt("baphomets_entry" + "_clip", "targetname");
   }
 
   if(isDefined(b_open) && b_open) {
     level clientfield::set("narrative_trigger", 1);
-    e_door rotateto(var_3f3938b6, 1, 0, 0);
+    e_door rotateTo(var_3f3938b6, 1, 0, 0);
     var_a34c7e62 connectpaths();
     var_a34c7e62 notsolid();
     e_door waittill(#"rotatedone");
     e_door solid();
-    e_door disconnectpaths();
+    e_door disconnectPaths();
     return;
   }
 
   var_a34c7e62 solid();
-  var_a34c7e62 disconnectpaths();
-  e_door rotateto(var_e077e352, 1, 0, 0);
+  var_a34c7e62 disconnectPaths();
+  e_door rotateTo(var_e077e352, 1, 0, 0);
 }
 
 function_a987d50f() {
@@ -517,7 +517,7 @@ function_a987d50f() {
   var_40d9ad40 = 0;
   var_3f2d17a4 = 0;
   var_69083fb0 = array("zone_grand_stairs_b_deck", "zone_grand_stairs_c_deck", "zone_grand_stairs_d_deck", "zone_dining_hall_fore", "zone_dining_hall_aft", "zone_galley");
-  var_58686f84 = getent("moonlight_on_volume", "targetname");
+  var_58686f84 = getEnt("moonlight_on_volume", "targetname");
 
   while(true) {
     var_40d9ad40 = 0;
@@ -611,14 +611,14 @@ function_ed8a8823() {
 
 function_704f6133() {
   level thread function_ed8a8823();
-  mdl_artifact = getent("artifact_mind", "script_noteworthy");
+  mdl_artifact = getEnt("artifact_mind", "script_noteworthy");
   mdl_artifact clientfield::set("activate_sentinel_artifact", 1);
   mdl_artifact bobbing((0, 0, 1), 0.5, 5);
   level thread scene::play("p8_fxanim_zm_zod_sent_trail1_boat_bundle", "boat_idle");
   var_198b4e5c = getEntArray("fc_hatch_cover", "targetname");
 
   foreach(e_blocker in var_198b4e5c) {
-    e_blocker disconnectpaths();
+    e_blocker disconnectPaths();
   }
 
   s_result = level waittill(#"artifact_picked_up");
@@ -631,14 +631,14 @@ function_704f6133() {
   array::run_all(util::get_active_players(), &forcestreambundle, "p8_fxanim_zm_zod_smokestack_01_bundle", 3);
   mdl_artifact clientfield::set("activate_sentinel_artifact", 2);
   var_7b8000e5 = (0, 18, -32);
-  mdl_artifact moveto(mdl_artifact.origin + var_7b8000e5, 5, 1, 3);
+  mdl_artifact moveTo(mdl_artifact.origin + var_7b8000e5, 5, 1, 3);
   mdl_artifact waittill(#"movedone");
   mdl_artifact setModel(#"hash_2c0078538e398b4f");
   wait 2.5;
   mdl_artifact clientfield::set("activate_sentinel_artifact", 0);
 
   foreach(player in util::get_active_players()) {
-    player playrumbleonentity("zm_power_on_rumble");
+    player playRumbleOnEntity("zm_power_on_rumble");
   }
 
   exploder::exploder("fxexp_power_artifact_burst");
@@ -646,7 +646,7 @@ function_704f6133() {
   level flag::set(level.var_5bfd847e);
   earthquake(0.3, 3, mdl_artifact.origin, 1024);
   level thread zm_audio::sndmusicsystem_playstate("sentinel_artifact_activated");
-  var_5314bd63 = getent("veh_fasttravel_cam", "targetname");
+  var_5314bd63 = getEnt("veh_fasttravel_cam", "targetname");
 
   for(i = 1; i <= 4; i++) {
     var_a11e6097[i] = spawner::simple_spawn_single(var_5314bd63);
@@ -699,7 +699,7 @@ function_377b1d6d() {
 function_aa7ff2d9() {
   level thread scene::play("p8_fxanim_zm_zod_sent_trail1_boat_bundle", "boat_break");
   level waittill(#"power_remove_lifeboat_clip");
-  e_clip = getent("e_clip_lifeboat", "targetname");
+  e_clip = getEnt("e_clip_lifeboat", "targetname");
 
   if(isDefined(e_clip)) {
     e_clip connectpaths();
@@ -725,7 +725,7 @@ function_6058ef28() {
     e_blocker delete();
   }
 
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   nd_cargo_hatch = getvehiclenode("nd_cargo_hatch", "targetname");
   var_91e8678a = 312 * 312;
 
@@ -734,7 +734,7 @@ function_6058ef28() {
       e_player playerknockback(1);
       e_player applyknockback(100, e_player.origin - (nd_cargo_hatch.origin[0], nd_cargo_hatch.origin[1], e_player.origin[2]));
       e_player playerknockback(0);
-      e_player playrumbleonentity("damage_heavy");
+      e_player playRumbleOnEntity("damage_heavy");
     }
   }
 
@@ -760,10 +760,10 @@ function_531fd4b6() {
 }
 
 water_init() {
-  level.e_clip_water_fore = getent("e_clip_water_fore", "targetname");
+  level.e_clip_water_fore = getEnt("e_clip_water_fore", "targetname");
   level.var_af197ec = struct::get("s_water_height_flooded_fore").origin[2];
   level.var_1b85943e = struct::get("s_water_height_drained_fore").origin[2];
-  level.e_clip_water_aft = getent("e_clip_water_aft", "targetname");
+  level.e_clip_water_aft = getEnt("e_clip_water_aft", "targetname");
   level.var_d47c96d5 = struct::get("s_water_height_flooded_aft").origin[2];
   level.var_7836c664 = struct::get("s_water_height_drained_aft").origin[2];
   level.e_clip_water_fore.origin = (level.e_clip_water_fore.origin[0], level.e_clip_water_fore.origin[1], level.var_af197ec);
@@ -780,7 +780,7 @@ water_init() {
 
 function_ea9f953(b_fore = 1, b_aft = 1) {
   if(b_fore) {
-    t_use_water_pump_fore = getent("t_use_water_pump_fore", "targetname");
+    t_use_water_pump_fore = getEnt("t_use_water_pump_fore", "targetname");
     var_52a797c0 = struct::get("water_pump_fore", "targetname");
     var_52a797c0 scene::play(#"p8_fxanim_zm_zod_water_pump_bundle", "end");
     level thread function_b0a7ca7(t_use_water_pump_fore, var_52a797c0, level.e_clip_water_fore, "water_drained_fore", 40, level.var_1b85943e, -1.5, "fxexp_ambient_drain_cargo", "exp_lgt_underwater_cargo", "sfx_waterdrain_fore");
@@ -788,7 +788,7 @@ function_ea9f953(b_fore = 1, b_aft = 1) {
   }
 
   if(b_aft) {
-    t_use_water_pump_aft = getent("t_use_water_pump_aft", "targetname");
+    t_use_water_pump_aft = getEnt("t_use_water_pump_aft", "targetname");
     var_a3423419 = struct::get("water_pump_aft", "targetname");
     var_a3423419 scene::play(#"p8_fxanim_zm_zod_water_pump_bundle", "end");
     level thread function_b0a7ca7(t_use_water_pump_aft, var_a3423419, level.e_clip_water_aft, "water_drained_aft", 30, level.var_7836c664, -0.75, "fxexp_ambient_drain_boilers", "exp_lgt_underwater_engine", "sfx_waterdrain_aft");
@@ -801,9 +801,9 @@ function_b0a7ca7(var_32be30af, var_4c2f2156, var_eb6a4856, var_bbaf1a87, n_time,
   self endon(var_bbaf1a87 + "_water_pump");
 
   if(function_8b1a219a()) {
-    var_32be30af sethintstring(#"hash_674fd03e212ed707");
+    var_32be30af setHintString(#"hash_674fd03e212ed707");
   } else {
-    var_32be30af sethintstring(#"hash_200f613f8001b6b9");
+    var_32be30af setHintString(#"hash_200f613f8001b6b9");
   }
 
   var_32be30af setvisibletoall();
@@ -907,7 +907,7 @@ function_b40f577b(var_eb6a4856, var_bbaf1a87, n_time, var_65feb6ff, var_c6653d4,
 
 function_8faf37bb(n_time, var_65feb6ff, var_c6653d4) {
   self clientfield::set("change_wave_water_height", 1);
-  self moveto((self.origin[0], self.origin[1], var_65feb6ff), n_time);
+  self moveTo((self.origin[0], self.origin[1], var_65feb6ff), n_time);
   self rotateroll(var_c6653d4, n_time);
   self waittill(#"movedone");
   self.origin = (self.origin[0], self.origin[1], var_65feb6ff);
@@ -953,7 +953,7 @@ function_3ad6764f() {
 function_b8378fa9(str_shot, str_trigger) {
   trigger::wait_till(str_trigger, "targetname");
   level thread scene::play("p8_fxanim_zm_zod_iceberg_bundle", str_shot);
-  t_trigger = getent(str_trigger, "targetname");
+  t_trigger = getEnt(str_trigger, "targetname");
 
   if(isDefined(t_trigger)) {
     t_trigger delete();
@@ -1127,7 +1127,7 @@ function_18f12f69(str_zone_name) {
   switch (str_zone_name) {
     case #"zone_zipline_fore":
     case #"zone_zipline_aft":
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         if(isDefined(e_player.var_16735873) && e_player.var_16735873) {
           if(e_player.var_5817f611 === "aft_to_fore" && str_zone_name == "zone_zipline_fore") {
             return 1;
@@ -1191,7 +1191,7 @@ custom_add_vox() {
 }
 
 function_d2ba8baa() {
-  a_e_valid_players = getplayers();
+  a_e_valid_players = getPlayers();
   a_e_valid_players = function_5ad4b9b0(a_e_valid_players);
 
   foreach(e_target in a_e_valid_players) {
@@ -1672,7 +1672,7 @@ function_4ec55dd() {
 
 function_5ef52c07() {
   self endon(#"death", #"disconnect");
-  e_water = getent("ocean_water_hidden", "script_noteworthy");
+  e_water = getEnt("ocean_water_hidden", "script_noteworthy");
   var_67382c0b = array("zone_mail_room", "zone_cargo", "zone_upper_engine_room", "zone_engine", "zone_boiler_room", "zone_turbine_room");
   self thread function_e9642771(e_water);
 
@@ -1695,7 +1695,7 @@ function_5ef52c07() {
 
 function_e9642771(e_water) {
   self endon(#"death", #"disconnect");
-  e_trigger = getent("water_vis_trigger", "targetname");
+  e_trigger = getEnt("water_vis_trigger", "targetname");
 
   while(true) {
     self.var_14dd80fb = 0;

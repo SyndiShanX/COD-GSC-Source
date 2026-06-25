@@ -10,7 +10,7 @@ _id_CE2A() {
   }
 
   if(isDefined(self.target)) {
-    var_0 = getent(self.target).origin;
+    var_0 = getEnt(self.target).origin;
   } else {
     var_0 = "undefined";
   }

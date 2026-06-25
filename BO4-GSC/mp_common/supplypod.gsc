@@ -321,9 +321,9 @@ on_player_spawned() {
 
 function_46d74bb7(var_70150641) {
   if(isDefined(var_70150641) ? var_70150641 : 0) {
-    players = getplayers(self.team);
+    players = getPlayers(self.team);
   } else {
-    players = getplayers();
+    players = getPlayers();
   }
 
   foreach(player in players) {
@@ -679,10 +679,10 @@ function_9abdee8c(object) {
   triggerradius = level.var_934fb97.bundle.kstriggerradius;
   triggerheight = level.var_934fb97.bundle.kstriggerheight;
   var_b1a6d849 = level.var_934fb97.bundle.var_2d890f85;
-  upangle = vectorscale(vectornormalize(anglestoup(supplypod.angles)), 5);
+  upangle = vectorscale(vectorNormalize(anglestoup(supplypod.angles)), 5);
   var_40989bda = supplypod.origin + upangle;
   usetrigger = spawn("trigger_radius_use", var_40989bda, 0, triggerradius, triggerheight);
-  usetrigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  usetrigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   usetrigger function_49462027(1, 1 | 4096 | 2 | 8388608 | 2048);
   supplypod.gameobject = gameobjects::create_use_object(player getteam(), usetrigger, [], undefined, level.var_934fb97.bundle.var_9333131b, 1, 1);
   supplypod.gameobject gameobjects::set_visible_team(#"friendly");
@@ -734,7 +734,7 @@ function_a1434496(team, player, result) {
     if(isDefined(player) && isPlayer(player)) {
       if(supplypod.owner != player) {
         scoreevents::processscoreevent(#"supply_pod_used", supplypod.owner, undefined, level.var_934fb97.weapon);
-        relativepos = vectornormalize(player.origin - supplypod.owner.origin);
+        relativepos = vectorNormalize(player.origin - supplypod.owner.origin);
         dir = anglesToForward(supplypod.owner getplayerangles());
         dotproduct = vectordot(dir, relativepos);
 
@@ -787,7 +787,7 @@ supplypod_catch(supplypod) {
     }
 
     beamlaunch(supplypod, self, "tag_origin_animate", var_715428d3, level.var_934fb97.weapon);
-    playsoundatposition(#"mpl_supply_pod_can_launch", supplypod.origin);
+    playSoundAtPosition(#"mpl_supply_pod_can_launch", supplypod.origin);
   }
 }
 
@@ -849,7 +849,7 @@ function_63c23d02(supplypod) {
 
   if(isDefined(supplypod.var_3823265d)) {
     self function_9abdee8c(supplypod);
-    playsoundatposition(#"mpl_supply_pod_deploy", supplypod.origin);
+    playSoundAtPosition(#"mpl_supply_pod_deploy", supplypod.origin);
   }
 
   if(isDefined(level.var_84bf013e)) {

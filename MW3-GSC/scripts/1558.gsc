@@ -235,8 +235,8 @@ _id_3C7E(var_0) {
 _id_3C7F(var_0) {
   self setModel(self.model);
   self.sentrytype = var_0;
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"SENTRY_PICKUP");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"SENTRY_PICKUP");
   self makeusable();
   thread _id_3CBA(var_0);
 }

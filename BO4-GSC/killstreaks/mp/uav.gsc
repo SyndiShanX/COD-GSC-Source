@@ -137,7 +137,7 @@ initrotatingrig() {
 
 rotaterig() {
   for(;;) {
-    self rotateyaw(-360, 60);
+    self rotateYaw(-360, 60);
     wait 60;
   }
 }
@@ -148,11 +148,11 @@ swayrig() {
   for(;;) {
     z = randomintrange(-200, -100);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
     z = randomintrange(100, 200);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
   }
 }
@@ -227,10 +227,10 @@ activateuav() {
   radiusoffset = (isDefined(level.uav_rotation_radius) ? level.uav_rotation_radius : 4000) + randomint(isDefined(level.uav_rotation_random_offset) ? level.uav_rotation_random_offset : 1000);
   xoffset = cos(angle) * radiusoffset;
   yoffset = sin(angle) * radiusoffset;
-  anglevector = vectornormalize((xoffset, yoffset, zoffset));
+  anglevector = vectorNormalize((xoffset, yoffset, zoffset));
   anglevector *= zoffset;
   anglevector = (anglevector[0], anglevector[1], zoffset - rotator.origin[2]);
-  uav linkto(rotator, "tag_origin", anglevector, (0, angle + attach_angle, 0));
+  uav linkTo(rotator, "tag_origin", anglevector, (0, angle + attach_angle, 0));
   self stats::function_e24eec31(getweapon("uav"), #"used", 1);
   uav thread killstreaks::waitfortimeout("uav", 30000, &ontimeout, "delete", "death", "crashing");
   uav thread killstreaks::waitfortimecheck(30000 / 2, &ontimecheck, "delete", "death", "crashing");

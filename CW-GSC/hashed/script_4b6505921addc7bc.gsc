@@ -55,8 +55,8 @@ function function_28def7d4() {
 function function_921afb87() {
   level endon(#"flag_inside_lobby");
   level flag::wait_till("flag_apt_st_stasi_approach");
-  e_vol = getent("vol_near_lobby_door", "targetname");
-  player = getplayers()[0];
+  e_vol = getEnt("vol_near_lobby_door", "targetname");
+  player = getPlayers()[0];
 
   if(player istouching(e_vol)) {
     if(!is_true(level.var_b9661e24)) {
@@ -71,8 +71,8 @@ function function_8af8d6fd() {
   var_38d138fb[var_38d138fb.size] = "vox_cp_stkt_10100_park_bellyouneedtogo_ba";
   var_38d138fb[var_38d138fb.size] = "vox_cp_stkt_10100_park_wedonthavealoto_20";
   var_38d138fb[var_38d138fb.size] = "vox_cp_stkt_10100_park_bellwhereareyou_3c";
-  e_vol = getent("vol_apt_street_main_path", "targetname");
-  player = getplayers()[0];
+  e_vol = getEnt("vol_apt_street_main_path", "targetname");
+  player = getPlayers()[0];
 
   while(true) {
     if(player istouching(e_vol)) {
@@ -166,9 +166,9 @@ function function_ba5c6b95() {
 
 function function_e1af55d1() {
   level waittill(#"hash_341edafabf8168e4");
-  vol = getent("apt_downstairs_bedroom_vol", "targetname");
+  vol = getEnt("apt_downstairs_bedroom_vol", "targetname");
 
-  if(getplayers()[0] istouching(vol)) {
+  if(getPlayers()[0] istouching(vol)) {
     dialogue::radio("vox_cp_stkt_11210_park_krausiscomingge_cd");
     wait 0.5;
     dialogue::radio("vox_cp_stkt_11210_park_ifkrausseesyout_d7");
@@ -235,7 +235,7 @@ function function_74866b7c(wait_notify) {
 function function_70af88ce() {
   level endon(#"flag_kraus_spotted_player");
   wait 1;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   a_vols = getEntArray("vol_apt_lower_level", "targetname");
 
   foreach(e_vol in a_vols) {

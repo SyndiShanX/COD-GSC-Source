@@ -126,7 +126,7 @@ function function_9b3b2351(var_f3fd3234, vehicle) {
   self.doa.var_cfe0bf1b = self.doa.var_61c7a559 + 1000;
 
   if(isDefined(spot)) {
-    self setorigin(spot.origin);
+    self setOrigin(spot.origin);
   }
 
   self clientfield::increment_to_player("controlBinding");

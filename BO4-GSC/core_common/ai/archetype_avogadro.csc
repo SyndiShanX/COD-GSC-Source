@@ -79,7 +79,7 @@ function_ae4cd3d4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(!isDefined(self.jammer_interface)) {
     self.jammer_interface = util::spawn_model(localclientnum, "tag_origin");
-    self.jammer_interface linkto(self, "j_spine4");
+    self.jammer_interface linkTo(self, "j_spine4");
   }
 
   if(isDefined(self.health_fx)) {

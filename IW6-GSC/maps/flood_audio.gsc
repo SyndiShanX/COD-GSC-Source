@@ -96,10 +96,10 @@ audio_stereo_line_emitter(var_0, var_1, var_2) {
     var_13 = pointonsegmentnearesttopoint(var_5.origin, var_6.origin, level.player.origin);
 
     if(isDefined(var_2)) {
-      var_3 moveto(var_13 + (0, 30, 0), 0.01);
-      var_4 moveto(var_13 - (0, 30, 0), 0.01);
+      var_3 moveTo(var_13 + (0, 30, 0), 0.01);
+      var_4 moveTo(var_13 - (0, 30, 0), 0.01);
     } else
-      var_3 moveto(var_13, 0.01);
+      var_3 moveTo(var_13, 0.01);
 
     if(var_7 == 0) {
       if(isDefined(var_2)) {
@@ -128,7 +128,7 @@ sfx_start_heartbeat_countdown() {
   if(!level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     level.cw_heartbeat_sfx_on = 1;
     var_0 = spawn("script_origin", level.player.origin);
-    var_0 linkto(level.player);
+    var_0 linkTo(level.player);
     var_0 playSound("scn_flood_underwater_heartbeat");
     level thread sfx_start_heartbeat_countdown_off(var_0);
   }
@@ -153,7 +153,7 @@ sfx_start_heartbeat_countdown_off(var_0) {
 sfx_start_heartbeat_countdown_lp() {
   if(!level.player maps\_utility::ent_flag("player_has_red_flashing_overlay")) {
     var_0 = spawn("script_origin", level.player.origin);
-    var_0 linkto(level.player);
+    var_0 linkTo(level.player);
     var_0 playLoopSound("scn_flood_underwater_heartbeat_lp");
 
     for(;;) {
@@ -204,7 +204,7 @@ sfx_missile_buzzer(var_0, var_1) {
   var_2 = level.dam_break_m880;
   var_2 = var_0;
   level.buzzer_node = spawn("script_origin", var_2.origin);
-  level.buzzer_node linkto(var_2);
+  level.buzzer_node linkTo(var_2);
   waittillframeend;
   maps\_utility::battlechatter_on("axis");
   thread missile_launcher_battlechatter(var_1);
@@ -257,7 +257,7 @@ setup_sfx_dam_siren() {
   level.sirenorg_ext_s = spawn("script_origin", (-25, -13632, 1962));
   level.sirenorg_ext_s playLoopSound("scn_flood_dam_siren_lp_s");
   level.sirenorg_int = spawn("script_origin", level.player.origin);
-  level.sirenorg_int linkto(level.player);
+  level.sirenorg_int linkTo(level.player);
   level.sirenorg_int playLoopSound("scn_flood_dam_siren_int_lp");
   level.player clearclienttriggeraudiozone(4);
 }
@@ -586,7 +586,7 @@ mssl_launch_front_wheels() {
 
 mssl_launch_destory_sfx() {
   level.lnchr_dstry_sfx = spawn("script_origin", (-1560, -7899, 25));
-  level.lnchr_dstry_sfx linkto(level.player);
+  level.lnchr_dstry_sfx linkTo(level.player);
   level.lnchr_dstry_sfx playSound("scn_flood_mssl_destroy_ss");
   wait 9.72;
   level.back_wheel_sfx stoploopsound();
@@ -599,7 +599,7 @@ mssl_launch_destory_sfx() {
 
 launcher_destroy_slomo_sfx() {
   level.lnchr_slomo_sfx = spawn("script_origin", (-1560, -7899, 25));
-  level.lnchr_slomo_sfx linkto(level.player);
+  level.lnchr_slomo_sfx linkTo(level.player);
   level.player setclienttriggeraudiozone("flood_streets_slomo", 0.3);
   waittillframeend;
   level.lnchr_slomo_sfx playSound("scn_flood_lnchr_destroy_slowin");
@@ -607,7 +607,7 @@ launcher_destroy_slomo_sfx() {
 
 launcher_destroy_stop_slomo_sfx() {
   level.lnchr_slomo2_sfx = spawn("script_origin", (-1560, -7899, 25));
-  level.lnchr_slomo2_sfx linkto(level.player);
+  level.lnchr_slomo2_sfx linkTo(level.player);
   level.player clearclienttriggeraudiozone(0.5);
   waittillframeend;
   level.lnchr_slomo2_sfx playSound("scn_flood_lnchr_destroy_slowout");
@@ -668,7 +668,7 @@ sfx_flood_int_alarm_stop() {
 }
 
 trigger_heli_staircase() {
-  var_0 = getent("sfx_trigger_heli", "targetname");
+  var_0 = getEnt("sfx_trigger_heli", "targetname");
   var_0 thread trigger_heli_wait();
 }
 
@@ -676,20 +676,20 @@ trigger_heli_wait() {
   self waittill("trigger");
   var_0 = spawn("script_origin", (-2255, -1872, 1290));
   var_0 playSound("emt_flood_roof_heli_02");
-  var_0 moveto((1734, -1812, 1290), 12);
+  var_0 moveTo((1734, -1812, 1290), 12);
   wait 5;
   var_1 = spawn("script_origin", (1734, -1812, 1290));
   var_1 playSound("emt_flood_roof_heli_01");
-  var_1 moveto((-2255, -1872, 1290), 16);
+  var_1 moveTo((-2255, -1872, 1290), 16);
   wait 13;
   var_2 = spawn("script_origin", (-2963, -613, 1307));
   var_2 playSound("emt_flood_roof_heli_03");
-  var_2 moveto((4092, -6121, 2233), 11);
+  var_2 moveTo((4092, -6121, 2233), 11);
 }
 
 sfx_play_chopper_5(var_0) {
   level.destruc_chopper = spawn("script_origin", var_0.origin);
-  level.destruc_chopper linkto(var_0);
+  level.destruc_chopper linkTo(var_0);
   wait 1;
   level.destruc_chopper playSound("emt_flood_roof_heli_05");
   level waittill("swept_away");
@@ -718,9 +718,9 @@ sfx_chooper_wait_and_play(var_0) {
 }
 
 trigger_int_building_hits() {
-  var_0 = getent("int_building_shake_sfx_01", "targetname");
+  var_0 = getEnt("int_building_shake_sfx_01", "targetname");
   var_0 thread trigger_int_building_hit_01_wait();
-  var_1 = getent("int_building_shake_sfx_02", "targetname");
+  var_1 = getEnt("int_building_shake_sfx_02", "targetname");
   var_1 thread trigger_int_building_hit_02_wait();
 }
 
@@ -737,7 +737,7 @@ trigger_int_building_hit_02_wait() {
 sfx_rooftop_collapse() {
   level.rooftop_collapse_crumble_01_sfx = spawn("script_origin", (31, -2198, 341));
   level.rooftop_collapse_end_build_sfx = spawn("script_origin", level.player.origin);
-  level.rooftop_collapse_end_build_sfx linkto(level.player);
+  level.rooftop_collapse_end_build_sfx linkTo(level.player);
   level.player setclienttriggeraudiozone("flood_mall_rooftop_crumble", 1.0);
   level.player playSound("scn_flood_mall_crumble_build_up");
   wait 2.95;
@@ -765,7 +765,7 @@ sfx_rocket_explosion_sound(var_0) {
   var_1 = spawn("script_origin", (-1585, -2111, 153));
   var_1 playSound("scn_flood_rocket_explosion_aftermath2_ss");
   wait 0.5;
-  var_1 moveto((-1536, -4392, 153), 6.5);
+  var_1 moveTo((-1536, -4392, 153), 6.5);
 }
 
 sfx_mall_ceiling_debris() {
@@ -778,9 +778,9 @@ sfx_mall_ceiling_debris() {
 
 sfx_mall_exit_door() {
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   level.rooftop_collapse_sfx = spawn("script_origin", level.player.origin);
-  level.rooftop_collapse_sfx linkto(level.player);
+  level.rooftop_collapse_sfx linkTo(level.player);
   thread common_scripts\utility::play_sound_in_space("scn_flood_mall_wave_hit", (498, -1849, 284));
   maps\_utility::delaythread(7, common_scripts\utility::play_sound_in_space, "scn_flood_mall_wave_hit", (498, -1849, 284));
   maps\_utility::delaythread(15, common_scripts\utility::play_sound_in_space, "scn_flood_mall_wave_hit", (498, -1849, 284));
@@ -847,7 +847,7 @@ sfx_rooftops_ally_jumpdown() {
 }
 
 sfx_rooftops_player_jumpdown() {
-  var_0 = getent("sfx_player_rooftop_jumpdown", "targetname");
+  var_0 = getEnt("sfx_player_rooftop_jumpdown", "targetname");
   var_0 thread trigger_player_jumpdown_wait();
 }
 
@@ -862,7 +862,7 @@ sfx_rooftops_ally_jump() {
 }
 
 sfx_rooftops_player_jump() {
-  var_0 = getent("sfx_player_rooftop_vault_land", "targetname");
+  var_0 = getEnt("sfx_player_rooftop_vault_land", "targetname");
   var_0 thread trigger_player_jum_wait();
 }
 
@@ -878,7 +878,7 @@ sfx_heli_rooftops_sequence(var_0) {
   common_scripts\utility::flag_wait("rooftops_exterior_encounter_start");
   common_scripts\utility::flag_set("rooftop_heli_flyaway");
   level.rooftops_heli_flyaway = spawn("script_origin", var_0.origin);
-  level.rooftops_heli_flyaway linkto(var_0);
+  level.rooftops_heli_flyaway linkTo(var_0);
   level.rooftops_heli_flyaway playSound("scn_flood_rooftop_heli_away");
 
   if(!common_scripts\utility::flag("rooftop_stairwell_mid")) {
@@ -901,14 +901,14 @@ sfx_heli_rooftops_wind(var_0) {
   level.heli_wind endon("death");
   thread common_scripts\utility::delete_on_death(level.heli_wind);
   level.heli_wind.origin = var_0.origin + (0, 0, -200);
-  level.heli_wind linkto(var_0);
+  level.heli_wind linkTo(var_0);
   level.heli_wind playLoopSound("scn_flood_rooftop_heli_wind_lp");
   common_scripts\utility::flag_wait("rooftop_stairwell_mid");
 
   if(!common_scripts\utility::flag("rooftop_heli_flyaway")) {
     level.heli_wind_debris = spawn("script_origin", (0, 0, 0));
     level.heli_wind_debris playLoopSound("scn_flood_rooftop_heli_debris_lp");
-    level.heli_wind_debris linkto(level.player);
+    level.heli_wind_debris linkTo(level.player);
   }
 
   common_scripts\utility::flag_wait("rooftop_stairwell_top");
@@ -935,7 +935,7 @@ sfx_heli_rooftops_wind(var_0) {
 
 sfx_heli_rooftops_engine(var_0) {
   level.rooftops_heli_engine_lp = spawn("script_origin", var_0.origin);
-  level.rooftops_heli_engine_lp linkto(var_0);
+  level.rooftops_heli_engine_lp linkTo(var_0);
   level.rooftops_heli_engine_lp playLoopSound("scn_flood_rooftop_heli_lp");
   level.rooftops_heli_engine_lp endon("death");
   thread common_scripts\utility::delete_on_death(level.rooftops_heli_engine_lp);
@@ -947,7 +947,7 @@ sfx_heli_rooftops_engine(var_0) {
 sfx_heli_rooftops_water_idle() {
   self vehicle_turnengineoff();
   level.rooftops_water_heli_engine_lp = spawn("script_origin", self.origin);
-  level.rooftops_water_heli_engine_lp linkto(self);
+  level.rooftops_water_heli_engine_lp linkTo(self);
   level.rooftops_water_heli_engine_lp playLoopSound("scn_flood_rooftop_water_heli_lp");
 }
 
@@ -982,7 +982,7 @@ sfx_stairwell_wind() {
 }
 
 sfx_stairwell_heli_trig_setup() {
-  var_0 = getent("trigger_rooftop_exit_stairwell", "targetname");
+  var_0 = getEnt("trigger_rooftop_exit_stairwell", "targetname");
   var_0 thread sfx_stairwell_heli_trig();
 }
 
@@ -992,7 +992,7 @@ sfx_stairwell_heli_trig() {
 }
 
 sfx_stairwell_mid_trig_setup() {
-  var_0 = getent("trigger_rooftop_mid_stairwell", "targetname");
+  var_0 = getEnt("trigger_rooftop_mid_stairwell", "targetname");
   var_0 thread sfx_stairwell_mid_trig();
 }
 

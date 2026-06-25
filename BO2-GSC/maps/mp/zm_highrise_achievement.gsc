@@ -89,7 +89,7 @@ achievement_facing_the_dragon() {
     dist = distance(self.origin, v_achievement_location);
 
     if(dist <= is_touching_distance) {
-      v_dir = vectornormalize(v_dragon_position - self.origin);
+      v_dir = vectorNormalize(v_dragon_position - self.origin);
       v_forward = self getweaponforwarddir();
       dp = vectordot(v_dir, v_forward);
 

@@ -745,7 +745,7 @@ func_393F() {
   }
 
   func_3930();
-  level.var_721C playrumbleonentity(self.var_A265["rumble"]);
+  level.var_721C playRumbleOnEntity(self.var_A265["rumble"]);
 }
 
 func_3930() {

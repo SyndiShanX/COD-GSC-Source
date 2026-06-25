@@ -86,7 +86,7 @@ init() {
 
       if(zm_utility::is_standard()) {
         level flag::set(#"pap_disabled");
-        mdl_blocker = getent("pap_arena_blocker", "targetname");
+        mdl_blocker = getEnt("pap_arena_blocker", "targetname");
         mdl_blocker delete();
         return;
       }
@@ -163,11 +163,11 @@ pap_quest_init() {
   level scene::init(#"p8_fxanim_zm_red_drakaina_bundle");
   w_component = zm_crafting::get_component(#"zitem_zhield_zpear_part_1");
   zm_items::function_4d230236(w_component, &function_86531922);
-  mdl_blocker = getent("pap_arena_blocker", "targetname");
+  mdl_blocker = getEnt("pap_arena_blocker", "targetname");
   mdl_blocker setinvisibletoall();
-  mdl_weapon_clip = getent("pap_arena_weapon_clip", "targetname");
+  mdl_weapon_clip = getEnt("pap_arena_weapon_clip", "targetname");
   mdl_weapon_clip notsolid();
-  mdl_rune = getent("pegasus_ride_rune", "targetname");
+  mdl_rune = getEnt("pegasus_ride_rune", "targetname");
   mdl_rune hide();
 
   if(zm_utility::is_standard()) {
@@ -176,7 +176,7 @@ pap_quest_init() {
     level flag::set(#"pap_quest_completed");
     level flag::set(#"zm_red_fasttravel_open");
     level flag::set(#"pegasus_ride_started");
-    var_6800d950 = getent("pap_chaos_clip", "targetname");
+    var_6800d950 = getEnt("pap_chaos_clip", "targetname");
 
     if(isDefined(var_6800d950)) {
       var_6800d950 delete();
@@ -186,7 +186,7 @@ pap_quest_init() {
 
     foreach(var_3e9d57b3 in var_71da3f5a) {
       if(isDefined(var_3e9d57b3.target)) {
-        mdl_clip = getent(var_3e9d57b3.target, "targetname");
+        mdl_clip = getEnt(var_3e9d57b3.target, "targetname");
         mdl_clip delete();
       }
 
@@ -229,7 +229,7 @@ function_ce84849b(var_5ea5c94d) {
     level function_23f28dd1(0);
   }
 
-  var_6800d950 = getent("pap_chaos_clip", "targetname");
+  var_6800d950 = getEnt("pap_chaos_clip", "targetname");
 
   if(isDefined(var_6800d950)) {
     var_6800d950 delete();
@@ -360,7 +360,7 @@ function_5a06e111(player) {
     level thread function_9e285681(level.round_number);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player forcestreambundle(#"cin_zm_red_pegasus_ride");
   }
 
@@ -446,7 +446,7 @@ function_62cca067(var_46bfea0) {
 function_ed6e29a3() {
   self endon(#"death");
   self waittill(#"spear_impact");
-  self playrumbleonentity("zm_red_gegenees_land_rumble");
+  self playRumbleOnEntity("zm_red_gegenees_land_rumble");
 }
 
 function_b2d4de9a(player) {
@@ -560,7 +560,7 @@ function_38a41b56(w_component, ai) {
   w_item.e_linkto = util::spawn_model("tag_origin", w_item.origin);
 
   if(isDefined(w_item.e_linkto)) {
-    w_item linkto(w_item.e_linkto);
+    w_item linkTo(w_item.e_linkto);
   }
 
   w_item.e_linkto thread function_e56c27aa();
@@ -604,7 +604,7 @@ function_8a6324d(w_item) {
     yaw = math::clamp(randomint(360), 60, 300);
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }
@@ -657,7 +657,7 @@ function_4710f794() {
   level endon(#"pegasus_spooked", #"hash_32ff7a456732ef09");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(self.origin, player.origin) <= 200 * 200 && !level flag::get(#"hash_3764b0cb106568ec")) {
         level notify(#"pegasus_spooked");
       }
@@ -686,7 +686,7 @@ spawn_pegasus() {
     waitframe(1);
   }
 
-  mdl_pegasus linkto(level.var_cb0e9f8e);
+  mdl_pegasus linkTo(level.var_cb0e9f8e);
   mdl_pegasus thread function_79c0fdf3();
   mdl_pegasus thread function_551b832a();
   mdl_pegasus clientfield::set("" + #"pegasus_teleport", 1);
@@ -711,7 +711,7 @@ function_79c0fdf3() {
   wait 20;
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     if(isDefined(a_players)) {
       for(i = 0; i < a_players.size; i++) {
@@ -777,12 +777,12 @@ function_9cb4723(mdl_pegasus, e_player) {
   if(isDefined(e_player)) {
     v_to_player = e_player.origin - mdl_pegasus.origin;
     v_angles = vectortoangles(v_to_player);
-    mdl_pegasus rotateto(v_angles, 0.5);
+    mdl_pegasus rotateTo(v_angles, 0.5);
     mdl_pegasus waittill(#"rotatedone");
   }
 
   wait 0.5;
-  mdl_pegasus rotateyaw(-180, 0.75);
+  mdl_pegasus rotateYaw(-180, 0.75);
   mdl_pegasus waittill(#"rotatedone");
   mdl_pegasus movez(600, 3);
   mdl_pegasus waittill(#"movedone");
@@ -839,7 +839,7 @@ function_9878a5b8() {
 function_3ca8556b(s_ride) {
   self thread scene::play("aib_zm_red_vign_peg_inair_flapattack_01", "loop", self);
   self thread function_810c4f44(s_ride);
-  mdl_rune = getent("pegasus_ride_rune", "targetname");
+  mdl_rune = getEnt("pegasus_ride_rune", "targetname");
   mdl_rune show();
   level thread function_fd484520();
   level.var_7dab4a52.var_1d920c6c = s_ride thread zm_unitrigger::create(&function_852915f8, 200, &function_e11818f4);
@@ -867,7 +867,7 @@ function_d851273d() {
   level endon(#"pegasus_takeoff");
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     if(isDefined(a_players) && a_players.size === 1) {
       return;
@@ -892,7 +892,7 @@ function_41fbdcd5() {
   level endon(#"pegasus_takeoff");
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     if(zm_zonemgr::get_players_in_zone("zone_spartan_monument_east") == a_players.size) {
       level flag::set(#"pegasus_takeoff");
@@ -945,7 +945,7 @@ pegasus_strike(ai_target) {
 
 function_fd484520() {
   level endon(#"pegasus_ride");
-  t_takeoff = getent("trigger_pegasus_takeoff", "targetname");
+  t_takeoff = getEnt("trigger_pegasus_takeoff", "targetname");
 
   while(true) {
     foreach(player in util::get_human_players(#"allies")) {
@@ -963,13 +963,13 @@ function_fd484520() {
 }
 
 function_852915f8(e_player) {
-  t_takeoff = getent("trigger_pegasus_takeoff", "targetname");
+  t_takeoff = getEnt("trigger_pegasus_takeoff", "targetname");
 
   if(level flag::get(#"hash_32ff7a456732ef09")) {
     if(level.var_9ab86086 && isDefined(self) && isDefined(e_player)) {
       str_prompt = zm_utility::function_d6046228(#"hash_1bda4036c638cd3e", #"hash_3255047731d03c2a");
       self sethintstringforplayer(e_player, str_prompt);
-    } else if(getplayers().size > 1 && e_player istouching(t_takeoff)) {
+    } else if(getPlayers().size > 1 && e_player istouching(t_takeoff)) {
       self sethintstringforplayer(e_player, #"hash_60a3e7841c86cad1");
     } else {
       self sethintstringforplayer(e_player, "");
@@ -1034,7 +1034,7 @@ function_fe0a763c() {
 
   level flag::set(#"pegasus_ride_started");
   a_e_pegasus = [];
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(zm_utility::is_player_valid(player)) {
@@ -1071,8 +1071,8 @@ function_fe0a763c() {
     }
   }
 
-  mdl_perseus = getent("perseus_scene", "targetname");
-  mdl_sword = getent("perseus_sword", "targetname");
+  mdl_perseus = getEnt("perseus_scene", "targetname");
+  mdl_sword = getEnt("perseus_sword", "targetname");
 
   if(!isDefined(a_e_pegasus)) {
     a_e_pegasus = [];
@@ -1105,7 +1105,7 @@ function_fe0a763c() {
   level thread zm_audio::sndmusicsystem_playstate("the_ride");
   level thread lui::screen_fade_in(0.5);
   var_ff91be3a = struct::get_array("s_zm_red_p_t_d_s", "targetname");
-  var_a10268d3 = getplayers();
+  var_a10268d3 = getPlayers();
 
   for(i = 0; i < var_a10268d3.size; i++) {
     if(zm_utility::is_player_valid(var_a10268d3[i])) {
@@ -1149,8 +1149,8 @@ function_ac395ad7() {
   while(true) {
     self waittill(#"wing_flap");
 
-    foreach(player in getplayers()) {
-      player playrumbleonentity("damage_heavy");
+    foreach(player in getPlayers()) {
+      player playRumbleOnEntity("damage_heavy");
     }
   }
 }
@@ -1199,7 +1199,7 @@ function_6a7cfd6() {
 
 pegasus_ride_skipped(a_ents) {
   level lui::screen_fade_out(0, "black");
-  playsoundatposition("bik_zm_red_pegride_kill_audio", (0, 0, 0));
+  playSoundAtPosition("bik_zm_red_pegride_kill_audio", (0, 0, 0));
   level flag::set(#"pegasus_ride_skipped");
   s_result = level waittilltimeout(2.5, #"crash_land");
   level lui::screen_fade_in(0.5);
@@ -1242,14 +1242,14 @@ function_9a6c8f2b(var_c34665fc) {
 
 function_8c5f16dd() {
   level waittill(#"waterfall");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player clientfield::set_to_player("" + #"waterfall_passthrough", 1);
   }
 
   wait 2.5;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_players = array::randomize(a_players);
 
   for(i = 0; i < 2; i++) {
@@ -1263,7 +1263,7 @@ function_8c5f16dd() {
   }
 
   wait 2;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player clientfield::set_to_player("" + #"waterfall_passthrough", 0);
@@ -1295,7 +1295,7 @@ function_db68db95(s_pos) {
   self val::reset(#"pegasus_prep", "freezecontrols");
   self unlink();
   waitframe(1);
-  self setorigin(s_pos.origin);
+  self setOrigin(s_pos.origin);
   self setplayerangles(s_pos.angles);
   self enableweapons();
   self.var_f4e33249 = 1;
@@ -1383,7 +1383,7 @@ function_5a557985(a_ents) {
     mdl_door thread function_697a602a(mdl_cage);
   }
 
-  mdl_chain = getent("clip_cage_chain", "targetname");
+  mdl_chain = getEnt("clip_cage_chain", "targetname");
   mdl_chain thread function_bb898a46();
 }
 
@@ -1506,7 +1506,7 @@ function_697a602a(mdl_cage) {
   }
 
   if(isDefined(mdl_scene)) {
-    mdl_scene linkto(mdl_cage, "eagle_link_jnt");
+    mdl_scene linkTo(mdl_cage, "eagle_link_jnt");
     scene::add_scene_func(#"aib_vign_cust_zm_red_eagle_1_caged", &function_1dceae50, "init");
     mdl_scene thread scene::play(#"aib_vign_cust_zm_red_eagle_1_caged", "init");
   }
@@ -1626,7 +1626,7 @@ function_d8db57f6() {
       }
 
       if(isDefined(var_3e9d57b3.target)) {
-        mdl_clip = getent(var_3e9d57b3.target, "targetname");
+        mdl_clip = getEnt(var_3e9d57b3.target, "targetname");
         mdl_clip delete();
       }
 
@@ -1683,7 +1683,7 @@ rock_fall() {
 
 function_c67711a8(s_goal, n_time) {
   self setscale(randomfloatrange(0.25, 0.6));
-  self moveto(s_goal.origin, n_time);
+  self moveTo(s_goal.origin, n_time);
   self waittill(#"movedone");
   self delete();
 }
@@ -1706,7 +1706,7 @@ function_23f28dd1(var_5ea5c94d) {
   level.var_c7e9961f = 1;
   level flag::wait_till(#"eagle_attack");
   a_players = util::get_active_players();
-  t_egg = getent("trigger_pap_arena", "targetname");
+  t_egg = getEnt("trigger_pap_arena", "targetname");
 
   for(i = 0; i < a_players.size; i++) {
     if(isalive(a_players[i]) && a_players[i] istouching(t_egg)) {
@@ -1724,9 +1724,9 @@ function_23f28dd1(var_5ea5c94d) {
   level.var_c7e9961f = undefined;
   exploder::exploder("exp_lgt_back_chaos");
   exploder::stop_exploder("Fxexp_barrier_pap");
-  getent("trigger_pap_defend", "targetname") delete();
-  getent("pap_arena_blocker", "targetname") delete();
-  getent("pap_arena_weapon_clip", "targetname") delete();
+  getEnt("trigger_pap_defend", "targetname") delete();
+  getEnt("pap_arena_blocker", "targetname") delete();
+  getEnt("pap_arena_weapon_clip", "targetname") delete();
   level.zm_bgb_anywhere_but_here_validation_override = undefined;
   level thread function_5f5ee5ed();
 }
@@ -1741,7 +1741,7 @@ function_da5ce34c() {
 
 function_5f5ee5ed() {
   a_players = util::get_active_players();
-  t_egg = getent("trigger_pap_arena", "targetname");
+  t_egg = getEnt("trigger_pap_arena", "targetname");
 
   for(i = 0; i < a_players.size; i++) {
     if(isalive(a_players[i]) && a_players[i] istouching(t_egg)) {
@@ -1791,7 +1791,7 @@ function_20bd10b1() {
   level endon(#"egg_free");
   level flag::wait_till(#"pap_defend");
   exploder::exploder("Fxexp_barrier_pap");
-  mdl_weapon_clip = getent("pap_arena_weapon_clip", "targetname");
+  mdl_weapon_clip = getEnt("pap_arena_weapon_clip", "targetname");
   mdl_weapon_clip solid();
   mdl_weapon_clip thread zm_red_util::barrier_impact();
 
@@ -1833,7 +1833,7 @@ function_76678dd2() {
 
 function_c97fc55b() {
   self.mdl_bones clientfield::set("" + #"spartoi_reassemble_clientfield", 1);
-  self.mdl_bones moveto(self.s_pt.origin, 1);
+  self.mdl_bones moveTo(self.s_pt.origin, 1);
   self.mdl_bones waittill(#"movedone");
   ai_zombie = zombie_skeleton_util::function_1ea880bd(1, self.s_pt, level.round_number);
 
@@ -1853,9 +1853,9 @@ function_c97fc55b() {
 }
 
 function_2db78acd() {
-  if(getplayers().size > 2) {
+  if(getPlayers().size > 2) {
     n_max_zombies = 6;
-  } else if(getplayers().size > 1) {
+  } else if(getPlayers().size > 1) {
     n_max_zombies = 4;
   } else {
     n_max_zombies = 3;
@@ -1973,7 +1973,7 @@ function_1984219e(nd_start) {
 
 function_a2b76316() {
   level endon(#"egg_free");
-  t_egg = getent("trigger_pap_arena", "targetname");
+  t_egg = getEnt("trigger_pap_arena", "targetname");
 
   while(true) {
     var_65449625 = 0;
@@ -1983,7 +1983,7 @@ function_a2b76316() {
       zm_trial::function_ae725d63();
     }
 
-    a_players = getplayers();
+    a_players = getPlayers();
 
     if(isDefined(a_players) && a_players.size > 0) {
       for(i = 0; i < a_players.size; i++) {
@@ -2034,7 +2034,7 @@ function_a8f9c9c4() {
       s_scene thread scene::play(str_scene, "hover_attack", self);
       self waittill(#"impact");
       self clientfield::increment("" + #"crystal_explosion");
-      self playrumbleonentity("zm_red_eagle_impact_rumble");
+      self playRumbleOnEntity("zm_red_eagle_impact_rumble");
 
       if(level.n_attacks) {
         level.n_attacks--;
@@ -2131,8 +2131,8 @@ function_deb1409b(var_b40c658f) {
 
 one_way_blocker() {
   level endon(#"egg_free");
-  t_pap = getent("trigger_pap_defend", "targetname");
-  mdl_blocker = getent("pap_arena_blocker", "targetname");
+  t_pap = getEnt("trigger_pap_defend", "targetname");
+  mdl_blocker = getEnt("pap_arena_blocker", "targetname");
 
   while(true) {
     s_result = t_pap waittill(#"trigger");
@@ -2152,7 +2152,7 @@ function_d420d273() {
     return 0;
   }
 
-  var_a44eef3a = getent("trigger_pap_arena", "targetname");
+  var_a44eef3a = getEnt("trigger_pap_arena", "targetname");
 
   if(self istouching(var_a44eef3a)) {
     return 0;
@@ -2162,7 +2162,7 @@ function_d420d273() {
 }
 
 function_6e57d6c6(var_5ea5c94d) {
-  var_e47d1e33 = getent("trigger_pap_arena", "targetname");
+  var_e47d1e33 = getEnt("trigger_pap_arena", "targetname");
   var_e47d1e33 endon(#"death");
   var_e47d1e33 waittill(#"trigger");
   level flag::set(#"pap_quest_completed");
@@ -2335,9 +2335,9 @@ function_df55fcc8(e_player) {
     str = self.stub.blueprint.purchaseprompt;
     str_pc = self.stub.blueprint.purchaseprompt + "_KEYBOARD";
     hint_str = zm_utility::function_d6046228(str, str_pc);
-    self sethintstring(hint_str);
+    self setHintString(hint_str);
   } else {
-    self sethintstring("");
+    self setHintString("");
   }
 
   return can_use;

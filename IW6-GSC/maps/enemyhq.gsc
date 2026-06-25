@@ -128,13 +128,13 @@ enemyhq_pre_load() {
 setup_common(var_0) {
   setup_player(var_0);
   spawn_allies(var_0);
-  var_1 = getent("finale_dead_truck_clip", "targetname");
+  var_1 = getEnt("finale_dead_truck_clip", "targetname");
 
   if(isDefined(var_1)) {
     var_1 notsolid();
   }
 
-  var_1 = getent("finale_dead_truck", "targetname");
+  var_1 = getEnt("finale_dead_truck", "targetname");
 
   if(isDefined(var_1)) {
     var_1 hide();
@@ -148,10 +148,10 @@ setup_player(var_0) {
     var_1 = level.start_point + "_start";
   }
 
-  var_2 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2)) {
-    level.player setorigin(var_2.origin);
+    level.player setOrigin(var_2.origin);
     level.player setplayerangles(var_2.angles);
   } else
     iprintlnbold("can't find startpoint for " + level.start_point);
@@ -250,7 +250,7 @@ flareflicker() {
 }
 
 flare_flicker(var_0, var_1) {
-  var_2 = getent(self.target, "targetname");
+  var_2 = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0)) {
     var_0 = 0.6;

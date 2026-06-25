@@ -125,17 +125,17 @@ function_41509519(var_d25bbdd5) {
 }
 
 function_4c350e72() {
-  if(getplayers().size < 3) {
-    n_max = getplayers().size * 6;
+  if(getPlayers().size < 3) {
+    n_max = getPlayers().size * 6;
   } else {
-    n_max = getplayers().size * 8;
+    n_max = getPlayers().size * 8;
   }
 
   return n_max;
 }
 
 function_ffa01525() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_default_wait = 2.25;
       break;
@@ -253,7 +253,7 @@ function_18f5f327(s_spawn_loc) {
 }
 
 get_favorite_enemy() {
-  a_targets = getplayers();
+  a_targets = getPlayers();
   least_hunted = a_targets[0];
 
   for(i = 0; i < a_targets.size; i++) {
@@ -337,7 +337,7 @@ function_38c0c907() {
 }
 
 p9_wood_lumber_01_1x4_64_01() {
-  players = getplayers();
+  players = getPlayers();
   num = randomintrange(0, players.size);
   players[num] zm_audio::create_and_play_dialog(#"general", #"dog_spawn");
 }
@@ -359,7 +359,7 @@ function_988438a7(sp_spawner = level.var_38f5f109[0], s_spawn, n_round_number) {
 }
 
 function_f46db405() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_default_wait = 2.25;
       break;
@@ -413,7 +413,7 @@ function_50ec1ddf() {
 }
 
 function_e91102ad() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player util::is_player_looking_at(self.origin + (0, 0, 64))) {
       return true;
     }
@@ -423,7 +423,7 @@ function_e91102ad() {
 }
 
 function_1a27cc15() {
-  var_c9e3c7bc = arraycombine(getplayers(), getaiarchetypearray(#"werewolf"), 0, 0);
+  var_c9e3c7bc = arraycombine(getPlayers(), getaiarchetypearray(#"werewolf"), 0, 0);
   str_current_zone = self zm_utility::get_current_zone();
 
   foreach(e_entity in var_c9e3c7bc) {
@@ -521,7 +521,7 @@ function_bc0facd3() {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(zm_utility::is_player_valid(player) && player != self.favoriteenemy && distancesquared(player.origin, self.origin) < 300 * 300 && distancesquared(self.favoriteenemy.origin, self.origin) > 150 * 150) {
       self function_f3ce0f2b(player);
       return;

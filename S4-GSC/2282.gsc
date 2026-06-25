@@ -245,7 +245,7 @@ _id_A146() {
         var_2 = distancesquared(self.origin, var_1.origin);
 
         if(var_2 < _func_0219(15)) {
-          self setorigin(var_1.origin, 0);
+          self setOrigin(var_1.origin, 0);
         }
       }
     }
@@ -263,7 +263,7 @@ _id_5B1C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(!isai(self)) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 

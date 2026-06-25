@@ -104,9 +104,9 @@ function private spawn_vehicle(vehicletype, spawnpos, spawnangles, index, callba
     presetname = params.var_45e1ab0.presetname;
     var_389eb4d4 = params.var_45e1ab0.var_389eb4d4;
     var_6900386f = params.var_45e1ab0.var_6900386f;
-    vehicle = spawnvehicle(vehicletype, spawnpos, spawnangles, undefined, 0, undefined, presetname, var_389eb4d4, var_6900386f);
+    vehicle = spawnVehicle(vehicletype, spawnpos, spawnangles, undefined, 0, undefined, presetname, var_389eb4d4, var_6900386f);
   } else {
-    vehicle = spawnvehicle(vehicletype, spawnpos, spawnangles);
+    vehicle = spawnVehicle(vehicletype, spawnpos, spawnangles);
   }
 
   assert(isDefined(vehicle));
@@ -211,7 +211,7 @@ function function_ef4c0e24(vehicle) {
 
   foreach(player in players) {
     direction = vehicle.origin - player.origin;
-    dir = vectornormalize(direction);
+    dir = vectorNormalize(direction);
     forward = anglesToForward(player.angles);
 
     if(vectordot(forward, dir) > 0.707) {

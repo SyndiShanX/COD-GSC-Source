@@ -34,11 +34,11 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = getEntArray(self.targetname, "targetname");
   var_7 = self.targetname;
   self._id_401F = "badplace_" + var_7;
-  self._id_4020 = getent("badplace_" + var_7, "targetname");
+  self._id_4020 = getEnt("badplace_" + var_7, "targetname");
 
   if(isDefined(self._id_4020)) {}
 
-  self._id_4021 = getent("trigger_" + var_7, "targetname");
+  self._id_4021 = getEnt("trigger_" + var_7, "targetname");
 
   if(!isDefined(var_4)) {
     var_4 = 1;
@@ -74,25 +74,25 @@ _id_4010(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(self._id_401C == 1) {
-    self._id_4023 = getent(self.script_linkto, "script_linkname");
+    self._id_4023 = getEnt(self.script_linkto, "script_linkname");
 
     if(self._id_4023.classname == "script_model") {
       self._id_4013 = spawn("script_origin", self._id_4023.origin);
       self._id_4013.angles = self._id_4023.angles;
     } else if(self._id_4023.classname == "script_brushmodel") {
-      self._id_4013 = getent(self._id_4023.target, "targetname");
+      self._id_4013 = getEnt(self._id_4023.target, "targetname");
       self._id_4023._id_4024 = anglesToForward(self._id_4013.angles);
     }
 
     self._id_4013.type = "Cover Right";
-    self._id_4025 = getent(self._id_4023.script_linkto, "script_linkname");
+    self._id_4025 = getEnt(self._id_4023.script_linkto, "script_linkname");
     self._id_4026 = self._id_4025.script_exploder;
   } else if(self._id_401C == 0) {
-    self._id_4013 = getent(self.script_linkto, "script_linkname");
+    self._id_4013 = getEnt(self.script_linkto, "script_linkname");
   }
   if(self._id_401D == 1) {
-    self._id_4027 = getent("flashthrow_" + var_7, "targetname");
-    self._id_4028 = getent(self._id_4027.target, "targetname");
+    self._id_4027 = getEnt("flashthrow_" + var_7, "targetname");
+    self._id_4028 = getEnt(self._id_4027.target, "targetname");
   }
 
   thread _id_403B(var_0);
@@ -513,7 +513,7 @@ _id_4045() {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
   } else {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
     var_0 hide();
     var_0 notsolid();
     var_0 connectpaths();
@@ -530,11 +530,11 @@ _id_4046(var_0) {
   } else {}
 
   var_2 = (var_1[0] * 20, var_1[1] * 20, var_1[2] * 20);
-  self moveto(self.origin + var_2, 0.5, 0, 0.5);
+  self moveTo(self.origin + var_2, 0.5, 0, 0.5);
   var_3 = spawn("script_origin", (0, 0, 0));
   var_3.angles = var_0.angles;
   var_3.origin = (self.origin[0], self.origin[1], var_0.origin[2]);
-  self linkto(var_3);
+  self linkTo(var_3);
   var_3 rotatepitch(90, 0.45, 0.4);
   wait 0.45;
   var_3 rotatepitch(-4, 0.2, 0, 0.2);

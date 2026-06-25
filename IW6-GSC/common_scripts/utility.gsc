@@ -954,7 +954,7 @@ init_trigger_flags() {
   level.trigger_func[false] = ::trigger_off;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   assertex(isDefined(name) && isDefined(type), "Did not fill in name and type");
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
@@ -2115,7 +2115,7 @@ get_target_ent(target) {
 
   AssertEx(isDefined(target), "Self had no target!");
 
-  ent = GetEnt(target, "targetname");
+  ent = getEnt(target, "targetname");
   if(isDefined(ent)) {
     return ent;
   }
@@ -2127,7 +2127,7 @@ get_target_ent(target) {
     }
   }
 
-  ent = getstruct(target, "targetname");
+  ent = getStruct(target, "targetname");
   if(isDefined(ent)) {
     return ent;
   }
@@ -2143,7 +2143,7 @@ get_target_ent(target) {
 get_noteworthy_ent(noteworthy) {
   AssertEx(isDefined(noteworthy), "No script_noteworthy provided!");
 
-  ent = GetEnt(noteworthy, "script_noteworthy");
+  ent = getEnt(noteworthy, "script_noteworthy");
   if(isDefined(ent)) {
     return ent;
   }
@@ -2155,7 +2155,7 @@ get_noteworthy_ent(noteworthy) {
     }
   }
 
-  ent = getstruct(noteworthy, "script_noteworthy");
+  ent = getStruct(noteworthy, "script_noteworthy");
   if(isDefined(ent)) {
     return ent;
   }
@@ -2347,11 +2347,11 @@ play_loop_sound_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -2396,7 +2396,7 @@ tag_project(tagname, dist) {
   org = self GetTagOrigin(tagname);
   angle = self GetTagAngles(tagname);
   vector = anglesToForward(angle);
-  vector = VectorNormalize(vector) * dist;
+  vector = vectorNormalize(vector) * dist;
   return org + vector;
 }
 
@@ -2599,7 +2599,7 @@ add_destructible_type_transient(destructible_type, name) {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = VectorNormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = VectorDot(forward, normal);
 
@@ -2647,7 +2647,7 @@ entity_path_disconnect_thread(updateRate) {
 
     if((newDisconnect != disconnect) || moved) {
       if(newDisconnect) {
-        self DisconnectPaths();
+        self disconnectPaths();
       } else {
         self ConnectPaths();
       }

@@ -156,7 +156,7 @@ start_bridge_collapse_mix() {
 }
 
 handle_bridge_collapse_mix() {
-  var_0 = getent("remove_bridge_collapse_mix", "targetname");
+  var_0 = getEnt("remove_bridge_collapse_mix", "targetname");
   var_0 waittill("trigger", var_1);
   soundscripts\_audio_mix_manager::mm_clear_submix("bridge_collapsing_mix");
 }
@@ -322,13 +322,13 @@ monitor_end_chase_music() {
 }
 
 play_hind_first_arrival() {
-  var_0 = getent("auto2140", "targetname");
+  var_0 = getEnt("auto2140", "targetname");
   var_0 waittill("trigger", var_1);
   var_1 thread maps\_utility::play_sound_on_entity("scn_hind_first_appear");
 }
 
 play_hind_post_tanker_explosion() {
-  var_0 = getent("auto2498", "targetname");
+  var_0 = getEnt("auto2498", "targetname");
   var_0 waittill("trigger", var_1);
   var_1 thread maps\_utility::play_sound_on_entity("scn_hind_post_tanker_explosion");
 }
@@ -369,8 +369,8 @@ play_bm21_unload_troops_sequence() {
 }
 
 play_mi17_unload_ennemies(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
-  var_4 = getent(var_1, "targetname");
+  var_3 = getEnt(var_0, "targetname");
+  var_4 = getEnt(var_1, "targetname");
   var_3 waittill("trigger", var_5);
   var_5 vehicle_turnengineoff();
   var_5.script_disablevehicleaudio = 1;

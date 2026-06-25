@@ -190,7 +190,7 @@ func_6388(param_00) {
   self.var_34D0.var_01D7 = self.var_0116[1];
   self.var_34D0.var_01D9 = self.var_0116[2];
   self.var_34D0 setwaypoint(1, 0, 0);
-  self.var_34D0 settargetent(self);
+  self.var_34D0 settargetEnt(self);
   self.var_34D0.var_35B2 = "icon";
   self.var_34D0.var_6E74 = level.var_A012;
   self.var_34D0.var_6E74 maps\mp\gametypes\_hud_util::func_09A6(self.var_34D0);

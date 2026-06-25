@@ -211,7 +211,7 @@ function function_2560e153(localclientnum, bwastimejump) {
 
   self.iconent = spawn(localclientnum, self.origin, "script_model", localplayer getentitynumber(), self.team);
   self.iconent setModel(#"tag_origin");
-  self.iconent linkto(self);
+  self.iconent linkTo(self);
   self.iconent setcompassicon("ui_hud_minimap_shroud_flipbook");
   self.iconent function_a5edb367(#"neutral");
   self.iconent enableonradar();

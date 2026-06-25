@@ -243,7 +243,7 @@ gesture_getrockpaperscissorsplayers() {
       continue;
     }
     var_3 = var_2.origin - self.origin;
-    var_3 = vectornormalize(var_3);
+    var_3 = vectorNormalize(var_3);
     var_4 = vectordot(var_3, var_0);
 
     if(var_4 < 0.707107) {

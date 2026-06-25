@@ -10,7 +10,7 @@
 #namespace zm_orange_ice_slide;
 
 init() {
-  var_fa0bcfcc = getent("ice_slide", "targetname");
+  var_fa0bcfcc = getEnt("ice_slide", "targetname");
   var_fa0bcfcc callback::on_trigger(&function_a8fc3bf1);
   var_fa0bcfcc.var_80360a02 = 0;
 }
@@ -23,7 +23,7 @@ function_a8fc3bf1(s_info) {
     mdl_sound = util::spawn_model(#"tag_origin", e_player gettagorigin("tag_origin"), e_player gettagangles("tag_origin"));
 
     if(isDefined(mdl_sound)) {
-      mdl_sound linkto(e_player, "tag_origin");
+      mdl_sound linkTo(e_player, "tag_origin");
       mdl_sound playLoopSound("evt_ice_slide");
     }
 

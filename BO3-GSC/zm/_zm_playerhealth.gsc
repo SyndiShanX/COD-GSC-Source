@@ -421,7 +421,7 @@ function printhealthdebug() {
   level flag::wait_till("");
   while(true) {
     wait(0.05);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < level.healthbarkeys.size && players.size > 0; i++) {
       key = level.healthbarkeys[i];
       player = players[0];

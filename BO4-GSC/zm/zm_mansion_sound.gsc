@@ -162,7 +162,7 @@ function_ad05f6f3() {
     }
   }
 
-  playsoundatposition(#"hash_2cf59d6222de4f6f", self.origin);
+  playSoundAtPosition(#"hash_2cf59d6222de4f6f", self.origin);
   self delete();
 }
 
@@ -252,9 +252,9 @@ function_63491fbd() {
 function_a3a23636() {
   level endon(#"end_game");
   level flag::wait_till_any(array(#"power_on", #"power_on1", #"hash_2daf5bdda85cc660"));
-  var_79bd8bd4 = getent("knight_model_cemetery", "targetname");
-  var_38c25a0c = getent("knight_model_greenhouse", "targetname");
-  var_170ef705 = getent("knight_model_main_hall", "targetname");
+  var_79bd8bd4 = getEnt("knight_model_cemetery", "targetname");
+  var_38c25a0c = getEnt("knight_model_greenhouse", "targetname");
+  var_170ef705 = getEnt("knight_model_main_hall", "targetname");
 
   while(!(isDefined(level.var_d2867f97) && level.var_d2867f97) && !level flag::get_all(array(#"knight_main_hall_stationed", #"knight_cemetery_stationed", #"knight_greenhouse_stationed"))) {
     b_play_vo = 0;
@@ -299,17 +299,17 @@ function_eb112701() {
 
   switch (s_result._notify) {
     case #"bedroom_charged":
-      mdl_stone = getent("gazing_stone_main_hall", "targetname");
+      mdl_stone = getEnt("gazing_stone_main_hall", "targetname");
       break;
     case #"library_charged":
-      mdl_stone = getent("gazing_stone_library", "targetname");
+      mdl_stone = getEnt("gazing_stone_library", "targetname");
       break;
     case #"cellar_charged":
-      mdl_stone = getent("gazing_stone_cellar", "targetname");
+      mdl_stone = getEnt("gazing_stone_cellar", "targetname");
       break;
   }
 
-  e_closest_player = arraygetclosest(mdl_stone.origin, getplayers());
+  e_closest_player = arraygetclosest(mdl_stone.origin, getPlayers());
 
   if(isalive(e_closest_player)) {
     e_closest_player zm_audio::create_and_play_dialog(#"seer_stone", #"active", undefined, 1);
@@ -526,7 +526,7 @@ function_1f4ab5ec(str_category, var_39acfdda) {
 function_a3a92098() {
   level endon(#"cellar_located");
   self endon(#"death");
-  var_39ef2390 = getent("cellar_location_vo", "targetname");
+  var_39ef2390 = getEnt("cellar_location_vo", "targetname");
 
   while(true) {
     s_result = var_39ef2390 waittill(#"trigger");

@@ -121,7 +121,7 @@ function function_eb09e7df() {
 
 function intro() {
   music("intro");
-  missile = getent("tundra_intro_missile", "targetname");
+  missile = getEnt("tundra_intro_missile", "targetname");
   level waittill(#"hash_227caa557c6d6e99");
 
   if(isDefined(missile)) {

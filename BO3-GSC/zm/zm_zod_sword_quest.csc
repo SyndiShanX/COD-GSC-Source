@@ -144,7 +144,7 @@ function function_4d020922(localclientnum, newval, n_character_index) {
       var_4126c532.e_egg unlink();
       var_4126c532.e_egg.origin = v_origin;
       var_4126c532.e_egg.angles = v_angles;
-      var_4126c532.e_egg linkto(var_4126c532.var_d88e6f5f, "tag_weapon_right");
+      var_4126c532.e_egg linkTo(var_4126c532.var_d88e6f5f, "tag_weapon_right");
       var_4126c532.var_d88e6f5f show();
       var_4126c532.e_sword hide();
       var_4126c532.e_egg show();
@@ -224,7 +224,7 @@ function function_4d020922(localclientnum, newval, n_character_index) {
       var_4126c532.e_sword unlink();
       var_4126c532.e_sword.origin = v_origin;
       var_4126c532.e_sword.angles = v_angles;
-      var_4126c532.e_sword linkto(var_4126c532.var_d88e6f5f, "tag_weapon_right");
+      var_4126c532.e_sword linkTo(var_4126c532.var_d88e6f5f, "tag_weapon_right");
       var_4126c532.var_d88e6f5f show();
       var_4126c532.e_sword show();
       var_4126c532.e_egg hide();

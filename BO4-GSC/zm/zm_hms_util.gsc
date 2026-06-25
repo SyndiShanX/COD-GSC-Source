@@ -56,7 +56,7 @@ function_e308175e(alias, v_pos, e_player) {
       e_tag playsoundtoplayer(alias, e_player);
     }
   } else {
-    playsoundatposition(alias, v_pos);
+    playSoundAtPosition(alias, v_pos);
   }
 
   wait n_wait_time;
@@ -201,7 +201,7 @@ function_29fe9a5d() {
 }
 
 function_3815943c(a_players) {
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(a_players)) {
     players = a_players;
@@ -293,30 +293,30 @@ function_b649cf93() {
 function_b2e1326(var_58df9892, var_1dc9c1bf = 1) {
   switch (var_58df9892) {
     case 0:
-      self sethintstring(#"zombie/trap_locked");
+      self setHintString(#"zombie/trap_locked");
       break;
     case 1:
-      self sethintstring(#"zombie/need_power");
+      self setHintString(#"zombie/need_power");
       break;
     case 2:
       if(util::get_game_type() == "zstandard") {
         if(function_8b1a219a()) {
-          self sethintstring(#"hash_61d85c966dd9e83f");
+          self setHintString(#"hash_61d85c966dd9e83f");
         } else {
-          self sethintstring(#"hash_24a438482954901");
+          self setHintString(#"hash_24a438482954901");
         }
       } else if(function_8b1a219a()) {
-        self sethintstring(#"hash_6e8ef1b690e98e51", var_1dc9c1bf);
+        self setHintString(#"hash_6e8ef1b690e98e51", var_1dc9c1bf);
       } else {
-        self sethintstring(#"zombie/button_buy_trap", var_1dc9c1bf);
+        self setHintString(#"zombie/button_buy_trap", var_1dc9c1bf);
       }
 
       break;
     case 3:
-      self sethintstring(#"zombie/trap_active");
+      self setHintString(#"zombie/trap_active");
       break;
     case 4:
-      self sethintstring(#"zombie/trap_cooldown");
+      self setHintString(#"zombie/trap_cooldown");
       break;
   }
 }
@@ -395,7 +395,7 @@ function_4e7f5b2e(str_value, str_key = "targetname") {
 }
 
 function_b8a27acc() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     if(zm_utility::is_player_valid(e_player) && e_player istouching(self)) {
@@ -435,8 +435,8 @@ function_45bb11e4(spot) {
     spot.angles = (0, 0, 0);
   }
 
-  self.mdl_anchor moveto(spot.origin, 0.05);
-  self.mdl_anchor rotateto(spot.angles, 0.05);
+  self.mdl_anchor moveTo(spot.origin, 0.05);
+  self.mdl_anchor rotateTo(spot.angles, 0.05);
   self.mdl_anchor waittill(#"movedone", #"death");
   waitframe(1);
   self.create_eyes = 1;
@@ -482,7 +482,7 @@ function_45bb11e4(spot) {
 function_9258efe1(str_zone) {
   var_cb24ec97 = 1;
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     str_current_zone = e_player zm_zonemgr::get_player_zone();
 
     if(!isDefined(str_current_zone) || str_current_zone != str_zone) {
@@ -614,21 +614,21 @@ function_49dc915f(n_distance, n_move_time) {
   vector = anglesToForward(self.angles);
   vector = n_distance * vector;
   goal_pos = self.origin + vector;
-  self moveto(goal_pos, n_move_time);
+  self moveTo(goal_pos, n_move_time);
 }
 
 function_5c1535d0(n_distance, n_move_time) {
   vector = anglestoright(self.angles);
   vector = n_distance * vector;
   goal_pos = self.origin + vector;
-  self moveto(goal_pos, n_move_time);
+  self moveTo(goal_pos, n_move_time);
 }
 
 function_dc4ab629(n_distance, n_move_time) {
   vector = anglestoup(self.angles);
   vector = n_distance * vector;
   goal_pos = self.origin + vector;
-  self moveto(goal_pos, n_move_time);
+  self moveTo(goal_pos, n_move_time);
 }
 
 function_df67a12d(category, subcategory) {

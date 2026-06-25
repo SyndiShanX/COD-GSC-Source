@@ -78,7 +78,7 @@ function spawn_smokescreen(owner, upgraded = 0) {
   center = (40 * forward) + owner.origin;
   frontspot = (140 * forward) + center;
   owner thread _cloudcreate(frontspot, weapon, upgraded);
-  playsoundatposition("gdt_cybercore_smokescreen", frontspot);
+  playSoundAtPosition("gdt_cybercore_smokescreen", frontspot);
   rotated = rotateforwardxy(forward, 23);
   var_ae0aa92 = (rotated * 140) + center;
   rotated = rotateforwardxy(forward, 46);
@@ -211,7 +211,7 @@ function private _ionizedhazardthink(player, cloud) {
 function private _moveindirection(dir, unitstomove, seconds) {
   self endon("death");
   ticks = seconds * 20;
-  dxstep = (unitstomove / ticks) * vectornormalize(dir);
+  dxstep = (unitstomove / ticks) * vectorNormalize(dir);
   while(ticks) {
     ticks--;
     self.origin = self.origin + dxstep;
@@ -277,7 +277,7 @@ function ai_activatesmokescreen(var_9bc2efcb = 1, upgraded = 0) {
   if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
-    self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
+    self animScripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self waittillmatch("ai_cybercom_anim");
   }
   level thread spawn_smokescreen(self, upgraded);

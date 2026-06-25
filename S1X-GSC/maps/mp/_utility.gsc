@@ -209,7 +209,7 @@ orientToNormal(normal) {
     return (0, 0, 0);
   }
 
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
@@ -3482,8 +3482,8 @@ findIsFacing(ent1, ent2, tolerance) {
   ent1ForwardVector *= (1, 1, 0);
   ent1ToTarget *= (1, 1, 0);
 
-  ent1ToTarget = VectorNormalize(ent1ToTarget);
-  ent1ForwardVector = VectorNormalize(ent1ForwardVector);
+  ent1ToTarget = vectorNormalize(ent1ToTarget);
+  ent1ForwardVector = vectorNormalize(ent1ForwardVector);
 
   targetCosine = VectorDot(ent1ToTarget, ent1ForwardVector);
 
@@ -4822,8 +4822,8 @@ makeGloballyUsableByType(type, hintString, player, team) {
   _insertIntoGlobalUsableList(priority, type, player, team);
 
   self MakeGlobalUsable(priority, player, team);
-  self SetHintString(hintString);
-  self SetCursorHint("HINT_NOICON");
+  self setHintString(hintString);
+  self setCursorHint("HINT_NOICON");
 }
 
 _insertIntoGlobalUsableList(priority, type, player, team) {
@@ -5057,7 +5057,7 @@ setMLGIcons(object, icon) {
 }
 
 spawnPatchClip(name, clip_origin, clip_angles) {
-  copy_ent = GetEnt(name, "targetname");
+  copy_ent = getEnt(name, "targetname");
   if(!isDefined(copy_ent)) {
     return undefined;
   }

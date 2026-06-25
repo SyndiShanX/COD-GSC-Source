@@ -496,7 +496,7 @@ function function_dd8587b2(target, maxtargets) {
     }
 
     newitem = spawnStruct();
-    newitem.dot = vectordot(playerforward, vectornormalize(locktarget.origin - self.origin));
+    newitem.dot = vectordot(playerforward, vectorNormalize(locktarget.origin - self.origin));
     var_3d797059 = isDefined(self.var_25fa785.lockon.var_3d797059) ? self.var_25fa785.lockon.var_3d797059 : 0.95;
 
     if(newitem.dot > var_3d797059) {
@@ -506,7 +506,7 @@ function function_dd8587b2(target, maxtargets) {
   }
 
   newitem = spawnStruct();
-  newitem.dot = vectordot(playerforward, vectornormalize(target.origin - self.origin));
+  newitem.dot = vectordot(playerforward, vectorNormalize(target.origin - self.origin));
   newitem.target = target;
   array::add_sorted(dots, newitem, 0, &function_568e9d1f);
   var_fa05e32a = dots[dots.size - 1].target;
@@ -609,7 +609,7 @@ function function_d2bc8bb1(enemies, weapon, var_efb1ea62, earlyout = 0) {
 
   foreach(enemy in enemies) {
     center = enemy getcentroid();
-    dirtotarget = vectornormalize(center - var_9c8f2bcc);
+    dirtotarget = vectorNormalize(center - var_9c8f2bcc);
     enemy.var_5425b76c = vectordot(dirtotarget, playerforward);
     var_3d797059 = isDefined(self.var_25fa785.lockon.var_3d797059) ? self.var_25fa785.lockon.var_3d797059 : 0.95;
 
@@ -728,7 +728,7 @@ function function_4b7f8060(slot, weapon, maxtargets, var_e08793c0, var_efb1ea62,
 
     foreach(enemy in enemies) {
       center = enemy getcentroid();
-      dirtotarget = vectornormalize(center - var_9c8f2bcc);
+      dirtotarget = vectorNormalize(center - var_9c8f2bcc);
       enemy.var_5425b76c = vectordot(dirtotarget, playerforward);
       var_3d797059 = isDefined(self.var_25fa785.lockon.var_3d797059) ? self.var_25fa785.lockon.var_3d797059 : 0.95;
 
@@ -815,7 +815,7 @@ function function_4b7f8060(slot, weapon, maxtargets, var_e08793c0, var_efb1ea62,
       }
 
       if(var_56842206 < self.var_25fa785.lockon.var_1ce9ea0e.size) {
-        self playrumbleonentity("damage_light");
+        self playRumbleOnEntity("damage_light");
       }
     }
   }

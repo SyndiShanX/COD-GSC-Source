@@ -86,11 +86,11 @@ update_fade_angle_lights() {
   var_4 = var_1 / 180.0;
   var_5 = (var_1 - var_0) / 180.0;
   var_6 = anglesToForward(self.angles);
-  var_7 = vectornormalize((var_6[0], var_6[1], 0.0));
+  var_7 = vectorNormalize((var_6[0], var_6[1], 0.0));
 
   for(;;) {
     var_8 = level.player.origin - (self.origin + var_6 * self.radius * 0.75);
-    var_8 = vectornormalize((var_8[0], var_8[1], 0.0));
+    var_8 = vectorNormalize((var_8[0], var_8[1], 0.0));
     var_9 = vectordot(var_7, var_8);
     var_10 = (clamp((var_9 + 1.0) * 0.5, var_3, var_4) - var_3) / var_5;
     self setlightintensity(5000.0 * var_10);
@@ -100,7 +100,7 @@ update_fade_angle_lights() {
 
 handle_heli_flight_lighting_init() {
   common_scripts\utility::flag_wait("aa_flight");
-  var_0 = getent("crash_blackhawk", "targetname");
+  var_0 = getEnt("crash_blackhawk", "targetname");
   var_1 = var_0.last_spawned_vehicle.attachedguys;
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -164,7 +164,7 @@ handle_flight_going_down() {
   var_2 thread maps\_cinematography::cinseq_start_sequence();
   common_scripts\utility::flag_wait("blackhawk_hit");
   thread common_scripts\_exploder::exploder(44);
-  level.player playrumbleonentity("blackhawk_down_crash_rumble");
+  level.player playRumbleOnEntity("blackhawk_down_crash_rumble");
   common_scripts\utility::flag_wait("blackhawk_down");
   var_1 destroy();
   var_0 thread fade_overlay(0, 4);
@@ -276,7 +276,7 @@ create_crash_cinseq(var_0) {
 }
 
 remove_crash_terrain_mask() {
-  var_0 = getent("crash_mask", "targetname");
+  var_0 = getEnt("crash_mask", "targetname");
   var_0 delete();
 }
 
@@ -351,7 +351,7 @@ handle_wakeup_done() {
 }
 
 post_crash_flashlight_off() {
-  var_0 = getent("post_crash_flashlight", "targetname");
+  var_0 = getEnt("post_crash_flashlight", "targetname");
   var_0 setlightintensity(0);
 }
 
@@ -361,7 +361,7 @@ handle_barn_lighting_init() {
   thread maps\_cinematography::dyndof_system_start(1);
   thread handle_barn_combat_start();
   level waittill("barn_interrogation_start");
-  var_0 = getent("farmer", "targetname");
+  var_0 = getEnt("farmer", "targetname");
   var_0 waittill("spawned", var_1);
 
   if(isDefined(var_1)) {

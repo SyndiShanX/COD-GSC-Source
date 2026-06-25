@@ -52,15 +52,15 @@ main() {
 
 init_fuse() {
   level.s_fuse = struct::get("tin_foil", "targetname");
-  level.s_fuse.e_model = getent(level.s_fuse.target, "targetname");
+  level.s_fuse.e_model = getEnt(level.s_fuse.target, "targetname");
   level.s_fuse.e_model hide();
 }
 
 init_transformers() {
   level.var_d02bca0 = 2;
   level flag::init(#"hash_5630cdbbb58f1b1e");
-  level.var_9d5b2598 = getent("big_bird_wing_n", "targetname");
-  level.var_e48733ef = getent("big_bird_wing_s", "targetname");
+  level.var_9d5b2598 = getEnt("big_bird_wing_n", "targetname");
+  level.var_e48733ef = getEnt("big_bird_wing_s", "targetname");
 }
 
 function_6bd2a719() {
@@ -70,11 +70,11 @@ function_6bd2a719() {
   for(i = 0; i < a_s_generators.size; i++) {
     a_s_generators[i].var_7944be4a = 0;
     a_s_generators[i].var_b9989e12 = hash(a_s_generators[i].script_noteworthy);
-    a_s_generators[i].e_vol = getent(a_s_generators[i].target, "targetname");
+    a_s_generators[i].e_vol = getEnt(a_s_generators[i].target, "targetname");
   }
 
   level.a_s_generators = a_s_generators;
-  e_shard = getent("chicken_nugget", "targetname");
+  e_shard = getEnt("chicken_nugget", "targetname");
   e_shard playLoopSound(#"hash_52058ae478647502");
   e_shard setscale(0.5);
   e_shard clientfield::set("elemental_shard_glow", 1);
@@ -115,7 +115,7 @@ function_95dff91b() {
 
 function_afa2f621() {
   s_activation = self waittill(#"trigger_activated");
-  playsoundatposition(#"hash_fdb4c0b271c6e36", self.origin);
+  playSoundAtPosition(#"hash_fdb4c0b271c6e36", self.origin);
 }
 
 setup_door_interact() {
@@ -135,10 +135,10 @@ door_think() {
 
 function_206702d8() {
   level flag::set(#"hash_778a2b8282d704f");
-  e_door = getent("grover", "targetname");
-  playsoundatposition("zmb_lighthouse_double_door", (-472, 1172, 315));
-  e_door rotateyaw(148, 0.5, 0.1, 0.1);
-  var_cee2ebbb = getent(e_door.target, "targetname");
+  e_door = getEnt("grover", "targetname");
+  playSoundAtPosition("zmb_lighthouse_double_door", (-472, 1172, 315));
+  e_door rotateYaw(148, 0.5, 0.1, 0.1);
+  var_cee2ebbb = getEnt(e_door.target, "targetname");
 
   if(isDefined(var_cee2ebbb)) {
     var_cee2ebbb delete();
@@ -146,7 +146,7 @@ function_206702d8() {
 }
 
 function_16386d70() {
-  e_shard = getent("chicken_nugget", "targetname");
+  e_shard = getEnt("chicken_nugget", "targetname");
   s_unitrigger = e_shard zm_unitrigger::create("", 96);
   e_shard shard_think();
   e_shard zm_unitrigger::unregister_unitrigger(s_unitrigger);
@@ -154,7 +154,7 @@ function_16386d70() {
 
 shard_think() {
   s_activation = self waittill(#"trigger_activated");
-  playsoundatposition(#"hash_2e9ec816b70bb70e", self.origin);
+  playSoundAtPosition(#"hash_2e9ec816b70bb70e", self.origin);
   self delete();
   level shard_vo(s_activation.e_who);
 }
@@ -175,7 +175,7 @@ function_d6a4619a() {
       }
 
       self playSound(#"hash_47433d730d8027ed");
-      e_target = getent(self.target, "targetname");
+      e_target = getEnt(self.target, "targetname");
       level.var_d02bca0 -= 1;
       e_target hide();
       self setCanDamage(0);
@@ -261,7 +261,7 @@ function_a66f0de2() {
   }
 
   zm_sq_modules::function_2a94055d(self.var_b9989e12);
-  playsoundatposition(#"hash_7cef2cb8d950a50", self.origin);
+  playSoundAtPosition(#"hash_7cef2cb8d950a50", self.origin);
   level.var_6b43507a -= 1;
   self notify(#"soul_capture_complete");
 }
@@ -270,6 +270,6 @@ function_3d5a45fb(var_a276c861, var_19e802fa) {
   if(var_a276c861 || var_19e802fa) {
     level.var_6b43507a = 0;
     level function_206702d8();
-    getent("chicken_nugget", "targetname") delete();
+    getEnt("chicken_nugget", "targetname") delete();
   }
 }

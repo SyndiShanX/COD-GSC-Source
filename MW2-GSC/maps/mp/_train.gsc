@@ -44,7 +44,7 @@ train_setup() {
   wheel_model = wheels[0].model;
   wheel_offset = [];
   foreach(wheel in wheels) {
-    wheel linkto(self);
+    wheel linkTo(self);
     wheel.offset = self.origin - wheel.origin;
   }
 
@@ -56,7 +56,7 @@ train_setup() {
     car = spawn("script_model", self.origin - car_separation_vec);
     car.angles = self.angles;
     car setModel(self.model);
-    car linkto(self);
+    car linkTo(self);
     car_separation_vec += forward;
     cars[cars.size] = car;
     car.wheels = [];
@@ -65,15 +65,15 @@ train_setup() {
       wheel = spawn("script_model", car.origin + owner_wheel.offset);
       wheel setModel(wheel_model);
       wheel.angles = owner_wheel.angles;
-      wheel linkto(car);
+      wheel linkTo(car);
       car.wheels[car.wheels.size] = wheel;
     }
   }
 
-  start = getent(self.target, "targetname");
+  start = getEnt(self.target, "targetname");
   start.origin = (start.origin[0], start.origin[1], self.origin[2]);
 
-  end = getent(start.target, "targetname");
+  end = getEnt(start.target, "targetname");
   end.origin = (end.origin[0], end.origin[1], self.origin[2]);
   forward = anglesToForward(self.angles);
   start.origin = start.origin - forward * lead_in_dist;
@@ -126,7 +126,7 @@ train_setup() {
     thread train_kills_players(train_cars, distance_between_cars);
     thread train_spawns_dust();
 
-    self moveto(end.origin + car_separation_vec, travel_time);
+    self moveTo(end.origin + car_separation_vec, travel_time);
     train_play_sounds(train_car_sound_interval);
 
     wait(travel_time);
@@ -314,7 +314,7 @@ train_kills_players(train_cars, distance_between_cars) {
         ent.damageOwner = self;
         ent.eInflictor = self;
 
-        ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", "train_mp", ent.pos, vectornormalize(ent.damageCenter - ent.pos)
+        ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", "train_mp", ent.pos, vectorNormalize(ent.damageCenter - ent.pos)
         }
 
         wait(0.05);

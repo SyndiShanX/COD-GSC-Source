@@ -27,8 +27,8 @@ main() {
 
 trench_intel_drop() {
   common_scripts\utility::flag_wait("start_new_canyon");
-  var_0 = getent("intelligence_item", "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt("intelligence_item", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = 800;
   var_3 = 185;
   var_4 = 20;
@@ -37,8 +37,8 @@ trench_intel_drop() {
   var_0.origin = var_0.origin + (0, 0, -1 * var_2);
   var_1.origin = var_1.origin + (0, 0, var_2);
   var_1.angles = var_1.angles + (var_3, var_3, var_3);
-  var_1 moveto(var_1.old_org, var_4);
-  var_1 rotateto(var_1.old_ang, var_4);
+  var_1 moveTo(var_1.old_org, var_4);
+  var_1 rotateTo(var_1.old_ang, var_4);
   var_1 waittill("movedone");
   var_0.origin = var_0.origin + (0, 0, var_2);
 }
@@ -94,7 +94,7 @@ trench_drowning() {
   var_10 = common_scripts\utility::spawn_tag_origin();
   var_10.origin = var_9.origin;
   var_10.angles = var_9.angles;
-  var_10 linkto(var_9, "tag_player", var_8, (0, 0, 0));
+  var_10 linkTo(var_9, "tag_player", var_8, (0, 0, 0));
   level.player playerlinktoabsolute(var_10, "tag_origin");
   var_11 = [var_9, var_2, level.baker, var_5, var_7, var_6];
   var_12 = common_scripts\utility::get_target_ent("new_trench_anim_node");
@@ -105,7 +105,7 @@ trench_drowning() {
   level.f_min["gasmask_overlay"] = 0.7;
   level.f_max["gasmask_overlay"] = 0.9;
   level.player.breathing_overlay["gasmask_overlay"].alpha = 0.9;
-  var_3 linkto(var_5);
+  var_3 linkTo(var_5);
   common_scripts\utility::exploder("lcs_collapsing");
   wait 2;
   common_scripts\utility::exploder("dead_bodies_underwater");
@@ -256,7 +256,7 @@ wait_for_x_input() {
   level notify("player_hit_x");
   thread fade_in_to_alpha(0.1, level.drown_max_alpha);
   earthquake(0.25, 0.2, level.player.origin, 512);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level.occumulator = level.occumulator + 1;
 }
 
@@ -421,7 +421,7 @@ lcs_back() {
   var_1 = var_0 common_scripts\utility::get_linked_ents();
   var_0 hide();
   var_2 = var_0 common_scripts\utility::spawn_tag_origin();
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_3 = [];
   var_4 = maps\_utility::getstructarray_delete("lcs_back_bubble_fx", "targetname");
   var_5 = 0.0;
@@ -434,7 +434,7 @@ lcs_back() {
     var_8.script_delay = var_5;
     var_5 = var_5 + 0.2;
     var_3 = common_scripts\utility::array_add(var_3, var_8);
-    var_8 linkto(var_0);
+    var_8 linkTo(var_0);
   }
 
   common_scripts\utility::flag_wait("drown_drop_lcs");
@@ -527,7 +527,7 @@ unlink_player(var_0, var_1, var_2, var_3) {
   common_scripts\utility::exploder(49);
   common_scripts\utility::flag_wait("drown_player_impact");
   earthquake(0.4, 0.5, level.player.origin, 512);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   common_scripts\utility::flag_wait("drown_pre_unlink_player");
   setsaveddvar("sv_znear", "4");
   level.player enableweapons();
@@ -586,10 +586,10 @@ chopper_fx() {
   earthquake(0.7, 1.5, self.origin, 3000);
   common_scripts\utility::exploder(52);
   player_shake(100);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level.player common_scripts\utility::delaycall(0.25, ::playrumbleonentity, "damage_heavy");
   common_scripts\utility::flag_wait("drown_chopper_i3");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   common_scripts\utility::exploder(53);
   wait 4;
   stopFXOnTag(common_scripts\utility::getfx("ship_wreckage_spark_underwater"), self, "tag_fire");
@@ -715,7 +715,7 @@ trench_things_crashing() {
   wait 0.1;
 
   foreach(var_4 in var_2) {
-    var_4 linkto(var_1, "tag_" + var_4.script_parameters);
+    var_4 linkTo(var_1, "tag_" + var_4.script_parameters);
     wait 0.1;
     var_5 = var_4 common_scripts\utility::get_linked_ents();
     common_scripts\utility::array_thread(var_5, ::trigger_enablelinkto);
@@ -747,7 +747,7 @@ trench_lcs_crashing() {
   var_3 = var_1 common_scripts\utility::get_linked_ents();
   common_scripts\utility::array_call(var_3, ::linkto, var_1, "j_front");
   var_4 = var_1 common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(var_1, "j_front");
+  var_4 linkTo(var_1, "j_front");
   wait 0.1;
   var_0 thread maps\_anim::anim_first_frame([var_1, var_2], "lcs_crash");
   common_scripts\utility::flag_wait("trench_lcs_crash");
@@ -822,14 +822,14 @@ crash_model_go(var_0) {
     var_12 = 1;
   } else if(var_1.model == "vehicle_mi24p_hind_plaza_body_destroy_animated") {
     var_11 = common_scripts\utility::spawn_tag_origin();
-    var_11 linkto(var_1, "tag_origin", (28, 152, -48), (0, 0, 0));
+    var_11 linkTo(var_1, "tag_origin", (28, 152, -48), (0, 0, 0));
     playFXOnTag(common_scripts\utility::getfx("ship_wreckage_spark_underwater"), var_11, "tag_origin");
     var_8 = "falling_box_bubbles";
     var_9 = "tag_origin";
     var_10 = 1;
   } else if(var_1.model == "com_boat_fishing_1") {
     self.fxorg = var_1 common_scripts\utility::spawn_tag_origin();
-    self.fxorg linkto(var_1);
+    self.fxorg linkTo(var_1);
     var_8 = "falling_box_bubbles";
     var_9 = "tag_origin";
     var_10 = 1;
@@ -885,7 +885,7 @@ crash_model_go(var_0) {
         var_16 = common_scripts\utility::spawn_tag_origin();
         var_16.origin = var_15["position"];
         var_16.angles = var_1.angles;
-        var_16 linkto(var_1);
+        var_16 linkTo(var_1);
         playFX(common_scripts\utility::getfx(var_5.script_fxid), var_16.origin, (0, 0, 1), var_16.origin - level.player.origin);
         var_7[var_7.size] = var_16;
       }
@@ -906,7 +906,7 @@ crash_model_go(var_0) {
           var_1.sliding_fx_org = common_scripts\utility::spawn_tag_origin();
           var_1.sliding_fx_org.origin = var_1.origin;
           var_1.sliding_fx_org.angles = var_1.angles;
-          var_1.sliding_fx_org linkto(var_1);
+          var_1.sliding_fx_org linkTo(var_1);
           var_7[var_7.size] = var_1.sliding_fx_org;
         }
 
@@ -943,7 +943,7 @@ crash_model_go(var_0) {
 
     if(var_13 < 300 && !var_12) {
       earthquake(0.35, 0.7, var_1.origin, 1500);
-      level.player playrumbleonentity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
       thread maps\ship_graveyard_util::thrash_player(300, 0.1, var_1.origin);
     }
   }
@@ -981,22 +981,22 @@ play_boat_crash_fx_early(var_0, var_1) {
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_4.origin = var_3["position"];
   var_4.angles = var_1.angles;
-  var_4 linkto(var_1);
+  var_4 linkTo(var_1);
   playFX(common_scripts\utility::getfx(self.script_fxid), var_4.origin, (0, 0, 1), var_4.origin - level.player.origin);
   var_0[var_0.size] = var_4;
 }
 
 player_shake(var_0) {
   if(var_0 < 200) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     level.player shellshock("nearby_crash_underwater", 3.5);
     level.player thread maps\ship_graveyard_util::delay_reset_swim_shock(5);
   } else if(var_0 < 300) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     level.player shellshock("nearby_crash_underwater", 2.5);
     level.player thread maps\ship_graveyard_util::delay_reset_swim_shock(3);
   } else
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
 }
 
 sliding_earthquake(var_0) {
@@ -1113,9 +1113,9 @@ generate_cheap_falling_object(var_0, var_1) {
   var_3 delete();
 }
 
-trigger_enablelinkto() {
+trigger_enablelinkTo() {
   if(self.classname == "trigger_multiple") {
-    self enablelinkto();
+    self enablelinkTo();
   }
 }
 
@@ -1148,10 +1148,10 @@ trench_death_warning() {
   var_1 = level.player.origin - var_0 * 64;
   playFX(common_scripts\utility::getfx("boat_fall_impact"), var_1, (0, 0, 1), var_1 - level.player.origin);
   thread common_scripts\utility::play_sound_in_space("middle_boat_crash", var_1);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.35, 0.7, var_1, 1500);
   level.player viewkick(100, var_1);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player thread maps\_gameskill::blood_splat_on_screen("bottom");
   level.player maps\_utility::delaythread(0.1, maps\_utility::playlocalsoundwrapper, "breathing_hurt");
   level.player dodamage(30, var_1);
@@ -1234,7 +1234,7 @@ trench_boat_think() {
   thread common_scripts\utility::play_sound_in_space("enemy_water_splash", var_5.origin);
   var_3 waittill("death_boat_A");
   var_7 = var_4 common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(var_7, "tag_origin");
+  var_4 linkTo(var_7, "tag_origin");
   var_8 = getweaponmodel(var_4.weapon);
   var_9 = var_4.weapon;
 

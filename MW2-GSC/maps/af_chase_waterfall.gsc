@@ -12,30 +12,30 @@
 #include maps\_vehicle_spline_zodiac;
 
 main() {
-  enemy_pickup_heli = GetEnt("enemy_pickup_heli", "targetname");
+  enemy_pickup_heli = getEnt("enemy_pickup_heli", "targetname");
   enemy_pickup_heli add_spawn_function(::setup_enemy_pickup_heli);
 
-  pre_rapids_trigger = GetEnt("pre_rapids_trigger", "targetname");
+  pre_rapids_trigger = getEnt("pre_rapids_trigger", "targetname");
   pre_rapids_trigger thread trigger_pre_rapids();
 
-  trigger_just_before_boatride_end = GetEnt("trigger_just_before_boatride_end", "targetname");
+  trigger_just_before_boatride_end = getEnt("trigger_just_before_boatride_end", "targetname");
   trigger_just_before_boatride_end thread trigger_just_before_boatride_end();
 
-  trigger_pavelow_pilot_dialogue = getent("trigger_pavelow_pilot_dialogue", "targetname");
+  trigger_pavelow_pilot_dialogue = getEnt("trigger_pavelow_pilot_dialogue", "targetname");
   trigger_pavelow_pilot_dialogue thread trigger_pavelow_pilot_dialogue();
 
   over_waterfall = GetVehicleNode("over_waterfall_test", "script_noteworthy");
   over_waterfall thread trigger_over_waterfall();
 
-  zodiac_blend_target = GetEnt("zodiac_blend_target", "targetname");
+  zodiac_blend_target = getEnt("zodiac_blend_target", "targetname");
   zodiac_blend_target Hide();
 
   thread player_in_sight_of_boarding_trigger();
 
-  weapon_pullout_before_waterfall = GetEnt("weapon_pullout_before_waterfall", "targetname");
+  weapon_pullout_before_waterfall = getEnt("weapon_pullout_before_waterfall", "targetname");
   weapon_pullout_before_waterfall thread trigger_steady_the_boat();
 
-  trigger_stop_boat_nagging = getent("trigger_stop_boat_nagging", "targetname");
+  trigger_stop_boat_nagging = getEnt("trigger_stop_boat_nagging", "targetname");
   trigger_stop_boat_nagging thread trigger_stop_boat_nagging();
 
   thread slow_enemy_zodiac_for_player();
@@ -67,9 +67,9 @@ rumbly_rocks_bumps() {
       continue;
     }
     if(cointoss()) {
-      level.player PlayRumbleOnEntity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
     } else {
-      level.player PlayRumbleOnEntity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
     }
   }
 }
@@ -90,8 +90,8 @@ create_ent_for_going_over_edge() {
   level.over_edge_ent = ent;
 
   trigger = getentwithflag("full_brake_until_waterfall_end");
-  struct = getstruct(trigger.target, "targetname");
-  targ = getstruct(struct.target, "targetname");
+  struct = getStruct(trigger.target, "targetname");
+  targ = getStruct(struct.target, "targetname");
   dist = distance(struct.origin, targ.origin);
   speed = 175;
   time = dist / speed;
@@ -101,7 +101,7 @@ create_ent_for_going_over_edge() {
 
   flag_wait("full_brake_until_waterfall_end");
 
-  ent moveto(targ.origin, time, 0, 0);
+  ent moveTo(targ.origin, time, 0, 0);
 }
 
 boatline() {
@@ -320,7 +320,7 @@ price_snipes_from_boat() {
   level.price endon("death");
 
   level.price radio_dialogue_stop();
-  level.price linkto(level.players_boat, "tag_guy2", (0, 0, 0), (0, 0, 0));
+  level.price linkTo(level.players_boat, "tag_guy2", (0, 0, 0), (0, 0, 0));
 
   thread price_does_steady_boat_anims_and_sound();
 
@@ -381,7 +381,7 @@ trigger_steady_the_boat() {
 }
 
 water_fall_edge() {
-  trigger = GetEnt("water_fall_edge_trigger", "targetname");
+  trigger = getEnt("water_fall_edge_trigger", "targetname");
 
   level.players_boat notify("stop_targetting");
 
@@ -395,8 +395,8 @@ water_fall_edge() {
 
   cleanup_stuff_on_players_boat();
 
-  targent = GetEnt(trigger.target, "targetname");
-  on_foot_destination = GetEnt("on_foot_destination", "targetname");
+  targent = getEnt(trigger.target, "targetname");
+  on_foot_destination = getEnt("on_foot_destination", "targetname");
 
   level.player DisableWeapons();
   level notify("player_over_the_waterfall");
@@ -444,7 +444,7 @@ water_fall_edge() {
   AmbientStop();
 
   SetBlur(6, 1.5);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 
   thread play_sound_in_space("scn_afchase_player_plunge", level.player.origin);
   fog_set_changes("afch_fog_underwater", 0);
@@ -477,7 +477,7 @@ water_fall_edge() {
 
   AmbientStop(2);
 
-  level.eq_ent MoveTo((1, 0, 0), 5, 0, 0);
+  level.eq_ent moveTo((1, 0, 0), 5, 0, 0);
 
   wait 2;
   setDvar("ui_char_museum_mode", "credits_1");
@@ -487,7 +487,7 @@ water_fall_edge() {
 }
 
 send_player_to_blend_boat() {
-  zodiac_blend_target = GetEnt("zodiac_blend_target", "targetname");
+  zodiac_blend_target = getEnt("zodiac_blend_target", "targetname");
   level.players_boat MakeUsable();
   level.player PlayerLinkToBlend(zodiac_blend_target, "tag_player", .05, 0, 0);
 
@@ -538,7 +538,7 @@ delete_end_seaknight() {
 
 #using_animtree("vehicles");
 enemy_pickup_boat_spot() {
-  anim_scene = getstruct("rapids_anim_scene", "targetname");
+  anim_scene = getStruct("rapids_anim_scene", "targetname");
   anim_scene.angles = (0, 0, 0);
   enemy_heli = self;
   level.enemy_ending_seaknight = self;
@@ -574,7 +574,7 @@ enemy_pickup_boat_spot() {
   level.enemy_boat vehicleDriveTo((25648, 26920, -10168), 500);
 
   heli_linker = spawn("script_origin", enemy_heli.origin);
-  heli_linker linkto(enemy_heli, "tag_body", (0, 0, 0), (0, 0, 0));
+  heli_linker linkTo(enemy_heli, "tag_body", (0, 0, 0), (0, 0, 0));
   dummy delaycall(.05, ::LinkTo, heli_linker);
 
   level.player thread play_sound_on_entity("afchase_plp_onboard");
@@ -609,13 +609,13 @@ movetotag_internal(ent, tag, time) {
   timer = GetTime() + (time * 1000);
   tag_origin = ent GetTagOrigin(tag);
   self Unlink();
-  self MoveTo(tag_origin, time);
+  self moveTo(tag_origin, time);
   while(GetTime() < timer) {
     updated_tag_origin = ent GetTagOrigin(tag);
     if(updated_tag_origin != tag_origin) {
       tag_origin = updated_tag_origin;
       time = (timer - GetTime()) / 1000;
-      self MoveTo(tag_origin, time);
+      self moveTo(tag_origin, time);
     }
     wait .05;
   }
@@ -636,7 +636,7 @@ miniguns_on_pickup_heli() {
 
   turret = SpawnTurret("misc_turret", heli.origin, "minigun_littlebird_spinnup");
   turret setModel("vehicle_little_bird_minigun_right");
-  turret LinkTo(heli, "tag_gunner_right", (33, 0, 0), (60, 76, 0));
+  turret linkTo(heli, "tag_gunner_right", (33, 0, 0), (60, 76, 0));
 
   turret.ownerVehicle = self;
   turret SetLeftArc(85);
@@ -662,10 +662,10 @@ miniguns_on_pickup_heli() {
 }
 
 minigun_path() {
-  minigun_path = getstruct("minigun_path", "targetname");
+  minigun_path = getStruct("minigun_path", "targetname");
   target_ent = spawn("script_origin", minigun_path.origin);
 
-  minigun_splasher = getent("minigun_splasher", "targetname");
+  minigun_splasher = getEnt("minigun_splasher", "targetname");
   minigun_splasher thread minigun_splasher_think();
   self endon("death");
   self SetTargetEntity(target_ent);
@@ -676,14 +676,14 @@ minigun_path() {
     if(!isDefined(minigun_path.target)) {
       return;
     }
-    minigun_path = getstruct(minigun_path.target, "targetname");
+    minigun_path = getStruct(minigun_path.target, "targetname");
     if(!isDefined(minigun_path)) {
       return;
     }
-    target_ent MoveTo(minigun_path.origin, 1, 0, 0);
+    target_ent moveTo(minigun_path.origin, 1, 0, 0);
     target_ent waittill("movedone");
   }
-  target_ent MoveTo(level.player.origin, 2.5, 0, 0);
+  target_ent moveTo(level.player.origin, 2.5, 0, 0);
 
   self SetTargetEntity(level.player);
   self SetAISpread(.4);
@@ -817,10 +817,10 @@ helicopter_sound_blend() {
   idle = "afchase_pavelow_idle";
 
   flyblend = spawn("sound_blend", (0.0, 0.0, 0.0));
-  flyblend thread manual_linkto(self, (0, 0, 0));
+  flyblend thread manual_linkTo(self, (0, 0, 0));
 
   idleblend = spawn("sound_blend", (0.0, 0.0, 0.0));
-  idleblend thread manual_linkto(self, (0, 0, 64));
+  idleblend thread manual_linkTo(self, (0, 0, 64));
 
   idleblend thread mix_up(idle);
 

@@ -347,12 +347,12 @@ hidehudelementongameend(var_0) {
 }
 
 createteamflag(var_0, var_1) {
-  var_2 = getent("ctf_zone_" + var_1, "targetname");
+  var_2 = getEnt("ctf_zone_" + var_1, "targetname");
 
   if(!isDefined(var_2)) {
     common_scripts\utility::error("No ctf_zone_" + var_1 + " trigger found in map.");
   } else {
-    var_3 = getent("ctf_zone_augmented_" + var_1, "targetname");
+    var_3 = getEnt("ctf_zone_augmented_" + var_1, "targetname");
 
     if(isDefined(var_3)) {
       if(maps\mp\_utility::isaugmentedgamemode()) {
@@ -363,14 +363,14 @@ createteamflag(var_0, var_1) {
       }
     }
 
-    var_4[0] = getent("ctf_flag_" + var_1, "targetname");
+    var_4[0] = getEnt("ctf_flag_" + var_1, "targetname");
 
     if(!isDefined(var_4[0])) {
       common_scripts\utility::error("No ctf_flag_" + var_1 + " script_model found in map.");
       return;
     }
 
-    var_5[0] = getent("ctf_flag_augmented_" + var_1, "targetname");
+    var_5[0] = getEnt("ctf_flag_augmented_" + var_1, "targetname");
 
     if(isDefined(var_5[0])) {
       if(maps\mp\_utility::isaugmentedgamemode()) {
@@ -451,8 +451,8 @@ createteamflag(var_0, var_1) {
 }
 
 createcapzone(var_0, var_1) {
-  var_2 = getent("ctf_zone_" + var_1, "targetname");
-  var_3 = getent("ctf_zone_augmented_" + var_1, "targetname");
+  var_2 = getEnt("ctf_zone_" + var_1, "targetname");
+  var_3 = getEnt("ctf_zone_augmented_" + var_1, "targetname");
 
   if(isDefined(var_3) && maps\mp\_utility::isaugmentedgamemode()) {
     var_2 = var_3;

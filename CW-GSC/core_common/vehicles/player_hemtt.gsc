@@ -35,7 +35,7 @@ function private function_3fbda54b(params) {
     playFXOnTag("vehicle/fx8_exhaust_truck_cargo_startup_os", self, "tag_fx_exhaust");
 
     if(isDefined(player)) {
-      player playrumbleonentity("jet_rumble");
+      player playRumbleOnEntity("jet_rumble");
     }
   }
 }
@@ -48,7 +48,7 @@ function private function_4a8e844a(params) {
     playFXOnTag("vehicle/fx8_exhaust_truck_cargo_startup_os", self, "tag_fx_exhaust");
 
     if(isDefined(player)) {
-      player playrumbleonentity("jet_rumble");
+      player playRumbleOnEntity("jet_rumble");
     }
   }
 }

@@ -11,7 +11,7 @@ function main() {
 }
 
 function snd_dmg_chant() {
-  trigger = getent("snd_chant", "targetname");
+  trigger = getEnt("snd_chant", "targetname");
   if(!isDefined(trigger)) {
     return;
   }

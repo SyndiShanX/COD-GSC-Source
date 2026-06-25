@@ -123,7 +123,7 @@ func_101B3() {
 
     var_2 = "tag_turret_mount_" + var_2;
     var_3 = spawn("script_model", self gettagorigin(var_2));
-    var_3 linkto(self, var_2, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(self, var_2, (0, 0, 0), (0, 0, 0));
     var_3 setModel("veh_mil_air_ca_dropship_mount");
   }
 }
@@ -411,7 +411,7 @@ func_A5DA(var_0) {
   if(isDefined(self.var_65CD[var_0].var_2C40) && isDefined(self.var_65CD[var_0].var_2C41)) {
     self.var_65CD[var_0].var_9BB8 = 1;
     var_1 = spawn("script_model", self gettagorigin(self.var_65CD[var_0].var_2C41));
-    var_1 linkto(self, self.var_65CD[var_0].var_2C41, (0, 0, 0), (0, 0, 0));
+    var_1 linkTo(self, self.var_65CD[var_0].var_2C41, (0, 0, 0), (0, 0, 0));
     var_1 setModel(self.var_65CD[var_0].var_2C40);
     thread scripts\engine\utility::delete_on_death(var_1);
   }
@@ -451,14 +451,14 @@ func_A5DA(var_0) {
 func_CD70(var_0, var_1, var_2) {
   self notify("custom_death_begin");
   self.var_1FEB = scripts\engine\utility::spawn_tag_origin();
-  self linkto(self.var_1FEB);
+  self linkTo(self.var_1FEB);
   var_3 = undefined;
   if(isstring(var_1)) {
     var_3 = getanimlength(level.var_EC85[self.var_1FBB][var_1]);
     self.var_1FEB thread scripts\sp\anim::func_1F35(self, var_1);
   } else {
     var_3 = getanimlength(var_1);
-    self animscripted("single anim", self.origin, self.angles, var_1);
+    self animScripted("single anim", self.origin, self.angles, var_1);
   }
 
   if(!isDefined(var_2)) {
@@ -469,8 +469,8 @@ func_CD70(var_0, var_1, var_2) {
     thread scripts\sp\utility::func_5B51(var_0.origin, self, 1, 0, 0, var_3);
   }
 
-  self.var_1FEB moveto(var_0.origin, var_2);
-  self.var_1FEB rotateto(var_0.angles, var_2);
+  self.var_1FEB moveTo(var_0.origin, var_2);
+  self.var_1FEB rotateTo(var_0.angles, var_2);
   wait(var_3);
   self.var_1FEB delete();
   self notify("custom_death_end");

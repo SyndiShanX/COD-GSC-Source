@@ -258,7 +258,7 @@ kill_peeking_zombie() {
   playFX(level._effect["flash_fx"], self.origin);
 
   if(isDefined(self._id_122C)) {
-    self._id_122C setorigin((0, 0, 0));
+    self._id_122C setOrigin((0, 0, 0));
     self._id_122C _meth_81FA();
   }
 }
@@ -352,7 +352,7 @@ start_split_shooting_gallery() {
   self.mdl_head _meth_82CB("s4_zm_orb_follow_anim");
   self.mdl_head setCanDamage(1);
   self.mdl_head thread head_damage_listener();
-  self.mdl_head linkto(self.moving_proxy);
+  self.mdl_head linkTo(self.moving_proxy);
   playFXOnTag(level._effect["zombie_head_trail"], self.moving_proxy, "tag_origin");
   self.zombie_head _meth_8746(self.moving_proxy);
   thread look_at_players();
@@ -478,7 +478,7 @@ spawn_orb_piece(var_0) {
   var_4.orb_piece.zombie_head = self;
   var_4.damage_proxy = scripts\cp\utility::_id_E190("s4_zm_sumpf_orb_ball_big", var_2);
   var_4.damage_proxy setCanDamage(1);
-  var_4.damage_proxy linkto(var_4);
+  var_4.damage_proxy linkTo(var_4);
   var_4.damage_proxy.parent = var_4;
   var_4.damage_proxy thread orb_damage_listener(self);
 
@@ -535,7 +535,7 @@ _id_0402(var_0) {
   level endon("game_enden");
   level endon("complete_shooting_gallery");
   self endon("death");
-  self moveto(var_0, 10);
+  self moveTo(var_0, 10);
   thread flash_listener();
   self waittill("movedone");
 
@@ -928,9 +928,9 @@ complete_shooting_gallery() {
   wait 1;
 
   if(istrue(var_0)) {
-    self.moving_proxy rotateto(vectortoangles(self.s_chest_pos.origin - self.moving_proxy.origin), 1);
+    self.moving_proxy rotateTo(vectortoangles(self.s_chest_pos.origin - self.moving_proxy.origin), 1);
     self.mdl_head notsolid();
-    self.moving_proxy moveto(self.s_chest_pos.origin, 5);
+    self.moving_proxy moveTo(self.s_chest_pos.origin, 5);
 
     foreach(var_2 in level.players) {
       if(isPlayer(var_2)) {
@@ -1020,7 +1020,7 @@ start_flash_shooting_gallery() {
   self.mdl_head _meth_82CB("s4_zm_orb_follow_anim");
   self.mdl_head setCanDamage(1);
   self.mdl_head thread head_damage_listener();
-  self.mdl_head linkto(self.moving_proxy);
+  self.mdl_head linkTo(self.moving_proxy);
   self.zombie_head _meth_8746(self.moving_proxy);
   thread look_at_players();
   scripts\cp\utility::_id_B8ED(self.origin, "zmb_orb_spawn");
@@ -1143,7 +1143,7 @@ start_flying_shooting_gallery() {
   self.mdl_head _meth_82CB("s4_zm_orb_follow_anim");
   self.mdl_head setCanDamage(1);
   self.mdl_head thread head_damage_listener();
-  self.mdl_head linkto(self.moving_proxy);
+  self.mdl_head linkTo(self.moving_proxy);
   self.zombie_head _meth_8746(self.moving_proxy);
   thread start_fly();
   self.zombie_head thread split_orb_piece_think(self.red_orb_rate, self.n_max_spawn_count, 1, 1);
@@ -1191,9 +1191,9 @@ start_fly() {
         var_3 = 1;
       }
 
-      self.moving_proxy moveto(var_0[var_1].origin, var_3, 0.5, 0.5);
+      self.moving_proxy moveTo(var_0[var_1].origin, var_3, 0.5, 0.5);
       var_4 = var_0[var_1].origin - self.moving_proxy.origin;
-      self.moving_proxy rotateto(vectortoangles(var_4), 1);
+      self.moving_proxy rotateTo(vectortoangles(var_4), 1);
       self.moving_proxy waittill("movedone");
       scripts\cp\utility::_id_B8ED(self.moving_proxy.origin, "zmb_orb_sg_moving_stop");
     }

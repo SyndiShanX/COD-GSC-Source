@@ -349,7 +349,7 @@ enemy_alert_level_forget(var_0, var_1) {
 
 enemy_stop_current_behavior() {
   if(!maps\_utility::ent_flag("_stealth_behavior_reaction_anim")) {
-    maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
     self notify("stop_animmode");
     self notify("stop_loop");
   }
@@ -403,7 +403,7 @@ enemy_react_and_displace_to(var_0, var_1) {
   }
 
   var_3 = anglesToForward(self.angles);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - self.origin);
   var_7 = var_5[1] - var_6[1];
@@ -730,7 +730,7 @@ ai_clear_custom_animation_reaction_and_idle(var_0) {
   self._stealth.behavior.event.custom_animation.node notify("stop_loop");
 
   if(!isDefined(var_0) || var_0 == 0) {
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   ai_clear_custom_animation_reaction();

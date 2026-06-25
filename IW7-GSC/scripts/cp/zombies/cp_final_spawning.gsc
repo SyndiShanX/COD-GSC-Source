@@ -28,7 +28,7 @@ no_shamblers() {
 }
 
 turn_on_flood_room_trigger() {
-  var_0 = getent("flood_room_tunnel_trigger", "targetname");
+  var_0 = getEnt("flood_room_tunnel_trigger", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(isPlayer(var_1)) {
@@ -444,7 +444,7 @@ func_1B99(var_0) {
 move_to_spot(var_0) {
   var_1 = getclosestpointonnavmesh(var_0.origin);
   self dontinterpolate();
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
   self ghostskulls_complete_status(var_0.origin);
   self.precacheleaderboards = 0;
 }
@@ -1453,7 +1453,7 @@ get_boss_to_spawn() {
 }
 
 boss_spawn_in_box(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct("brute_hide_org", "targetname");
+  var_2 = scripts\engine\utility::getStruct("brute_hide_org", "targetname");
   var_3 = var_2 spawn_brute_wave_enemy(var_1);
   return var_3;
 }

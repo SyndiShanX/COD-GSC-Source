@@ -83,7 +83,7 @@ napalmplane(localclientnum, planemodel, team, owner, exittype, startpoint, endpo
   plane planesounds("veh_mig_flyby_2d", "evt_us_napalm_wash", undefined, 2362);
   plane thread playplanefx(localclientnum);
   destpoint = (startpoint[0] / 2 + endpoint[0] / 2, startpoint[1] / 2 + endpoint[1] / 2, startpoint[2] / 2 + endpoint[2] / 2);
-  plane moveto(destpoint, flytime / 2, 0, 0);
+  plane moveTo(destpoint, flytime / 2, 0, 0);
   waitrealtime(flytime / 2);
   halflife = getdvarfloatdefault("scr_napalmhalflife", 6.0);
 
@@ -121,7 +121,7 @@ flareplane(localclientnum, planemodel, team, owner, startpoint, endpoint, flytim
   plane.angles = direction;
   plane planesounds("evt_us_napalm_flare_flyby_2d", "evt_us_napalm_flare_wash", undefined, 2362);
   plane thread playplanefx(localclientnum);
-  plane moveto(endpoint, flytime, 0, 0);
+  plane moveTo(endpoint, flytime, 0, 0);
   waitrealtime(flytime + 3);
   plane notify("delete");
   plane delete();

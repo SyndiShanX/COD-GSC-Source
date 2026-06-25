@@ -18,7 +18,7 @@ dead_script() {
 }
 
 player_start() {
-  level.player setorigin((48, -618, 0));
+  level.player setOrigin((48, -618, 0));
 }
 
 main() {
@@ -110,7 +110,7 @@ main() {
   level.car_idle_engine_sound_node scalevolume(0.71, 0);
   level.car_idle_engine_sound_node scalepitch(0.85, 0);
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(level.car, "body_animate_jnt", (0, 0, 43.2), (125, 0, 90));
+  var_0 linkTo(level.car, "body_animate_jnt", (0, 0, 43.2), (125, 0, 90));
   playFXOnTag(level._effect["car_interior"], var_0, "tag_origin");
   var_0 thread maps\_debug::drawtagforever("tag_origin", (0, 1, 0));
   playFXOnTag(level._effect["steam_coffee_slow_coup"], level.car, "body_animate_jnt");
@@ -145,8 +145,8 @@ startdoorkick() {
 
 starttrashstumble() {
   soundscripts\_snd::snd_message("start_trashstumble_checkpoint");
-  var_0 = getent("start_trashstumble", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("start_trashstumble", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread execdrive(0.32);
   common_scripts\utility::flag_set("drive");
@@ -160,8 +160,8 @@ startrunners2() {
 
 startalley() {
   soundscripts\_snd::snd_message("start_alley_checkpoint");
-  var_0 = getent("start_alley", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("start_alley", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread execdrive(0.55);
   common_scripts\utility::flag_set("drive");
@@ -169,8 +169,8 @@ startalley() {
 
 startshore() {
   soundscripts\_snd::snd_message("start_shore_checkpoint");
-  var_0 = getent("start_shore", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("start_shore", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread execdrive(0.8);
   common_scripts\utility::flag_set("drive");
@@ -178,8 +178,8 @@ startshore() {
 
 startcarexit() {
   soundscripts\_snd::snd_message("start_carexit_checkpoint");
-  var_0 = getent("start_carexit", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("start_carexit", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread execdrive(0.88);
   common_scripts\utility::flag_set("drive");
@@ -187,8 +187,8 @@ startcarexit() {
 
 startending() {
   soundscripts\_snd::snd_message("start_ending_checkpoint");
-  var_0 = getent("start_ending", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("start_ending", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread execending();
 }
@@ -223,7 +223,7 @@ execintro() {
   thread playmirrorvideo();
   level.oldnearclip = getDvar("r_znear");
   setsaveddvar("r_znear", 2.0);
-  var_0 = getent("car_events_node", "targetname");
+  var_0 = getEnt("car_events_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("intro_leftguard", "targetname", 1);
   var_2 = maps\coup_code::scripted_spawn2("intro_rightguard", "targetname", 1);
   var_3 = maps\coup_code::scripted_spawn2("intro_carguard", "targetname", 1);
@@ -421,10 +421,10 @@ h1_couplerpviewangles_carridelogic() {
     var_12 = level.car gettagorigin("tag_wheel_front_left");
     var_13 = level.car gettagorigin("tag_wheel_back_left");
     var_2 = var_12 - var_13;
-    var_2 = vectornormalize(var_2);
+    var_2 = vectorNormalize(var_2);
     var_3 = level.player getplayerangles();
     var_3 = anglesToForward(var_3);
-    var_3 = vectornormalize(var_3);
+    var_3 = vectorNormalize(var_3);
     var_14 = atan2(var_3[1], var_3[0]) - atan2(var_2[1], var_2[0]);
     var_14 = angleclamp180(var_14);
     var_14 = abs(var_14);
@@ -749,7 +749,7 @@ h1_drive_shakesandrumbleslogic(var_0) {
 
   if(var_1 == "normal") {
     if(var_5 != "") {
-      level.player playrumbleonentity(var_5);
+      level.player playRumbleOnEntity(var_5);
     }
 
     earthquake(var_2, var_4, var_9, 100);
@@ -760,7 +760,7 @@ h1_drive_shakesandrumbleslogic(var_0) {
     }
   } else if(var_1 == "fade") {
     if(var_5 != "") {
-      level.player playrumbleonentity(var_5);
+      level.player playRumbleOnEntity(var_5);
     }
 
     earthquake(var_2 * 0.6, var_4 / 4.0, var_9, 10000);
@@ -828,12 +828,12 @@ execdrive(var_0) {
   thread animvarietyforalleyrunners();
   var_1 = maps\coup_code::scripted_spawn2("car_driver", "targetname", 1);
   var_1.animname = "human";
-  var_1 linkto(level.car, "tag_driver");
+  var_1 linkTo(level.car, "tag_driver");
   var_1 thread maps\_utility::magic_bullet_shield(1);
   var_1 removedroneweapon();
   var_2 = maps\coup_code::scripted_spawn2("car_passenger", "targetname", 1);
   var_2.animname = "human";
-  var_2 linkto(level.car, "tag_passenger");
+  var_2 linkTo(level.car, "tag_passenger");
   var_2 thread maps\_utility::magic_bullet_shield(1);
   var_2.tracksuit_ignore = 1;
   level.car.driver = var_1;
@@ -843,17 +843,17 @@ execdrive(var_0) {
   level.car.passenger.head = spawn("script_origin", level.car.passenger.origin + (20, 5, 50));
   level.car.passenger.body = spawn("script_origin", level.car.passenger.origin + (25, 12, 25));
   level.car.passenger.phone = spawn("script_origin", level.car.passenger.origin + (22, 15, 35));
-  level.car.passenger.head linkto(level.car.passenger);
-  level.car.passenger.body linkto(level.car.passenger);
-  level.car.passenger.phone linkto(level.car.passenger);
+  level.car.passenger.head linkTo(level.car.passenger);
+  level.car.passenger.body linkTo(level.car.passenger);
+  level.car.passenger.phone linkTo(level.car.passenger);
   level.car.playerview = level.playerview;
   common_scripts\utility::flag_wait("drive");
   level.handsrope thread maps\coup_code::update_handsrope_lighting_origin();
   thread h1_drive_depthoffieldforcestart();
-  level.playerview linkto(level.car, "tag_guy1");
+  level.playerview linkTo(level.car, "tag_guy1");
   level.car thread maps\_anim::anim_single_solo(level.playerview, "car_idle_fullbody");
   level.car thread maps\coup_code::play_anim_on_ropehands("car_idle_fullbody", 1);
-  var_3 = getent("car_events_node", "targetname");
+  var_3 = getEnt("car_events_node", "targetname");
   var_3 thread maps\_anim::anim_single_solo(level.car, "coup_car_driving");
 
   if(isDefined(var_0)) {
@@ -896,7 +896,7 @@ h1_drive_depthoffieldforcestart() {
 
 execcarexit() {
   common_scripts\utility::flag_wait("drive_carexit");
-  var_0 = getent("carexit_node", "targetname");
+  var_0 = getEnt("carexit_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("carexit_leftguard", "targetname", 1);
   var_1.animname = "human";
   var_0 maps\_anim::anim_first_frame_solo(var_1, "carexit_leftguard");
@@ -927,8 +927,8 @@ execcarexit() {
   common_scripts\utility::flag_set("music_part4");
   wait(var_4);
   wait 6.8;
-  level.car.driver maps\_utility::anim_stopanimscripted();
-  level.car.passenger maps\_utility::anim_stopanimscripted();
+  level.car.driver maps\_utility::anim_stopanimScripted();
+  level.car.passenger maps\_utility::anim_stopanimScripted();
   var_5 = newhudelem();
   var_5.x = 0;
   var_5.y = 0;
@@ -947,7 +947,7 @@ execcarexit() {
   level.player shellshock("coup_blackout1", 8);
   thread music_end();
   var_5 maps\coup_code::blackout(1, 6);
-  var_6 = getent("deleteai_special", "script_noteworthy");
+  var_6 = getEnt("deleteai_special", "script_noteworthy");
   var_6.origin = level.player.origin;
   wait 2;
   level notify("handsrope_deleted");
@@ -955,7 +955,7 @@ execcarexit() {
   common_scripts\utility::flag_set("start_dragged_aftercarexit");
   thread h1_draggingcorridors_depthoffield();
   thread h1_corridors_shakesandrumble();
-  var_0 = getent("enddrag1_node_h1", "targetname");
+  var_0 = getEnt("enddrag1_node_h1", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("enddrag_leftguard", "targetname", 1);
   var_2 = maps\coup_code::scripted_spawn2("enddrag_rightguard", "targetname", 1);
   var_2.animname = "human";
@@ -1004,9 +1004,9 @@ execcarexit() {
   level.zakhaev maps\_utility::gun_remove();
   level.zakhaev attach("weapon_desert_eagle_silver_HR_promo", "tag_inhand");
   level.zakhaev.tracksuit_ignore = 1;
-  var_12 = getent("tunnel_node", "targetname");
+  var_12 = getEnt("tunnel_node", "targetname");
   var_12 thread first_frame_delay_anim(level.zakhaev, "ending_zakhaev", 6);
-  var_0 = getent("enddrag4_node_h1", "targetname");
+  var_0 = getEnt("enddrag4_node_h1", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(level.playerview, "intro");
   var_0 thread maps\_anim::anim_single_solo(var_2, "intro_rightguard");
   var_0 thread maps\_anim::anim_single_solo(var_1, "intro_leftguard");
@@ -1108,7 +1108,7 @@ execending() {
   thread ending_speech();
   thread ending_slowmo();
   setsaveddvar("cg_fov", 50);
-  var_0 = getent("ending_node", "targetname");
+  var_0 = getEnt("ending_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("ending_alasad", "targetname", 1);
   var_1 hide();
   var_1.animname = "human";
@@ -1125,7 +1125,7 @@ execending() {
   var_0 maps\_anim::anim_first_frame_solo(level.playerview, "ending");
   level.player unlink();
   var_6 = level.playerview gettagorigin("tag_player");
-  level.player setorigin(var_6);
+  level.player setOrigin(var_6);
   level.player playerlinktodelta(level.playerview, "tag_player", 1);
   thread h1_couplerpviewangles("meet_zak");
   level.dragsound delete();
@@ -1208,10 +1208,10 @@ intro_scuffle() {}
 
 intro_doors() {
   level.player thread maps\_utility::play_sound_on_entity("scn_coup_intro_door");
-  var_0 = getent("intro_leftdoor", "targetname");
+  var_0 = getEnt("intro_leftdoor", "targetname");
   var_0.origin = (-15, -510, 70);
   var_0.angles = var_0.angles + (0, 180, 0);
-  var_1 = getent("intro_rightdoor", "targetname");
+  var_1 = getEnt("intro_rightdoor", "targetname");
   var_1.origin = (143, -510, 70);
   var_1.angles = var_1.angles + (0, 180, 0);
   setsaveddvar("r_glow_allowed_script_forced", 1);
@@ -1229,7 +1229,7 @@ intro_doors() {
   level.player freezecontrols(1);
   common_scripts\utility::flag_wait("doors_open");
   level.player freezecontrols(0);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player thread maps\_utility::play_sound_on_entity("scn_coup_drag_to_car");
   maps\_utility::set_vision_set("coup_sunblind", 0.2);
   var_2 fadeovertime(0.5);
@@ -1265,7 +1265,7 @@ intro_birds() {
 
 drive_talkingguards1() {
   common_scripts\utility::flag_wait("drive_talkingguards1");
-  var_0 = getent("talkingguards1_node", "targetname");
+  var_0 = getEnt("talkingguards1_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("talkingguards1_leftguard", "targetname", 1);
   var_2 = maps\coup_code::scripted_spawn2("talkingguards1_rightguard", "targetname", 1);
   var_1.animname = "human";
@@ -1309,7 +1309,7 @@ drive_eatingdog1() {
 
 drive_doorkick1() {
   common_scripts\utility::flag_wait("drive_doorkick1");
-  var_0 = getent("doorkick1_node", "targetname");
+  var_0 = getEnt("doorkick1_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("doorkick1_leftguard", "targetname", 1);
   var_2 = maps\coup_code::scripted_spawn2("doorkick1_rightguard", "targetname", 1);
   var_0 doorkick(var_1, var_2, 7, 10);
@@ -1327,7 +1327,7 @@ drive_ziptie2() {
 
 drive_doorkick2() {
   common_scripts\utility::flag_wait("drive_doorkick2");
-  var_0 = getent("doorkick2_node", "targetname");
+  var_0 = getEnt("doorkick2_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("doorkick2_leftguard", "targetname", 1);
   var_2 = maps\coup_code::scripted_spawn2("doorkick2_rightguard", "targetname", 1);
   var_0 doorkick(var_1, var_2, undefined, 10, 1);
@@ -1351,7 +1351,7 @@ drive_runners1() {
   var_0 setrandomrun(var_3);
   var_1 setrandomrun(var_3);
   var_2 setrandomrun(var_3);
-  var_4 = getent("intro_node", "targetname");
+  var_4 = getEnt("intro_node", "targetname");
   var_4 thread maps\_anim::anim_single_solo(var_0, "civilians_running_02");
   var_4 thread maps\_anim::anim_single_solo(var_1, "civilians_running_03");
   var_4 thread maps\_anim::anim_single_solo(var_2, "civilians_running_04");
@@ -1422,12 +1422,12 @@ drive_interrogation1() {
   var_8.animname = "human";
   var_9 = maps\coup_code::scripted_spawn2("interrogation1_suspect_d2", "targetname", 1);
   var_9.animname = "human";
-  var_10 = getent("tag_interrogation_5", "targetname");
+  var_10 = getEnt("tag_interrogation_5", "targetname");
   var_11 = maps\coup_code::scripted_spawn2("ziptie5_civilian", "targetname", 1);
   var_11.animname = "human";
   var_12 = maps\coup_code::scripted_spawn2("ziptie5_guard", "targetname", 1);
   var_12.animname = "human";
-  var_13 = getent("tag_interrogation_5b", "targetname");
+  var_13 = getEnt("tag_interrogation_5b", "targetname");
   level.suspect_5b = maps\coup_code::scripted_spawn2("ziptie5b_civilian", "targetname", 1);
   level.suspect_5b.animname = "human";
   var_14 = maps\coup_code::scripted_spawn2("ziptie5b_guard", "targetname", 1);
@@ -1468,7 +1468,7 @@ drive_ziptie3() {
 }
 
 drive_trashstumble() {
-  var_0 = getent("intro_node", "targetname");
+  var_0 = getEnt("intro_node", "targetname");
   common_scripts\utility::flag_wait("drive_trashstumble");
   thread trashstumble_guards();
   level.runner = maps\coup_code::scripted_spawn2("trashstumble_runner", "targetname", 1);
@@ -1485,7 +1485,7 @@ drive_trashstumble() {
 trashstumble_guards() {
   var_0 = maps\coup_code::scripted_spawn2("trashstumble_guard1", "targetname", 1);
   var_1 = maps\coup_code::scripted_spawn2("trashstumble_guard2", "targetname", 1);
-  var_2 = getent("intro_node", "targetname");
+  var_2 = getEnt("intro_node", "targetname");
   var_0.animname = "human";
   var_1.animname = "human";
   var_2 thread maps\_anim::anim_single_solo(var_0, "civiliankilled_guard_a");
@@ -1507,7 +1507,7 @@ drive_casualguards2() {
 
 drive_spraypaint1() {
   common_scripts\utility::flag_wait("drive_spraypaint1");
-  var_0 = getent("spraypaint1_node", "targetname");
+  var_0 = getEnt("spraypaint1_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("spraypaint1_civilian", "targetname", 1);
   var_1.animname = "human";
   var_1.disableexits = 1;
@@ -1555,7 +1555,7 @@ drive_ziptie4() {
     thread ziptied(var_0[var_1], 20);
   }
 
-  var_2 = getent("tag_ziptie4_replacing_generic", "targetname");
+  var_2 = getEnt("tag_ziptie4_replacing_generic", "targetname");
   var_3 = maps\coup_code::scripted_spawn2("ziptie4_civilian", "targetname", 1);
   var_3.animname = "human";
   var_4 = maps\coup_code::scripted_spawn2("ziptie4_guard", "targetname", 1);
@@ -1593,7 +1593,7 @@ drive_runners2() {
   var_4 maps\_utility::stop_magic_bullet_shield();
   var_5 maps\_utility::stop_magic_bullet_shield();
   var_6 maps\_utility::stop_magic_bullet_shield();
-  var_7 = getent("runners2_guardsgoal", "targetname");
+  var_7 = getEnt("runners2_guardsgoal", "targetname");
   var_4 thread maps\_spawner::go_to_origin(var_7);
   var_5 thread maps\_spawner::go_to_origin(var_7);
   var_6 thread maps\_spawner::go_to_origin(var_7);
@@ -1615,11 +1615,11 @@ runners2deathsounds(var_0, var_1, var_2, var_3) {
 
 drive_garage2() {
   common_scripts\utility::flag_wait("drive_runtogarage");
-  var_0 = getent("garage2_node", "targetname");
+  var_0 = getEnt("garage2_node", "targetname");
   var_1 = maps\coup_code::scripted_spawn2("garage2_civilian", "targetname", 1);
   var_1 removedroneweapon();
   var_2 = maps\coup_code::scripted_spawn2("garage2_runner", "targetname", 1);
-  var_3 = getent("garage2_door", "targetname");
+  var_3 = getEnt("garage2_door", "targetname");
   var_0 garage(var_1, var_2, var_3, 4);
 }
 
@@ -1727,10 +1727,10 @@ drive_endcrowd() {
   common_scripts\utility::array_thread(var_2, maps\coup_code::deleteentity);
   common_scripts\utility::array_thread(var_3, maps\coup_code::deleteentity);
   common_scripts\utility::array_thread(var_4, maps\coup_code::deleteentity);
-  var_10 stopanimscripted();
-  var_11 stopanimscripted();
-  var_12 stopanimscripted();
-  var_13 stopanimscripted();
+  var_10 stopanimScripted();
+  var_11 stopanimScripted();
+  var_12 stopanimScripted();
+  var_13 stopanimScripted();
   var_10 delete();
   var_11 delete();
   var_12 delete();
@@ -1875,7 +1875,7 @@ drive_phonering() {
 }
 
 dumpsterhide(var_0, var_1, var_2) {
-  var_3 = getent(var_0 + "_dumpster", "targetname");
+  var_3 = getEnt(var_0 + "_dumpster", "targetname");
   var_3.animname = "dumpster";
   var_3 maps\_utility::assign_animtree();
   var_4 = maps\coup_code::scripted_spawn2(var_0 + "_civilian", "targetname", 1);
@@ -1940,7 +1940,7 @@ carjacker(var_0, var_1, var_2) {
 }
 
 fenceclimb(var_0, var_1, var_2) {
-  var_3 = getent(var_0 + "_fenceclimb_node", "targetname");
+  var_3 = getEnt(var_0 + "_fenceclimb_node", "targetname");
   var_4 = maps\coup_code::scripted_spawn2(var_0 + "_fenceclimb_civilian", "targetname", 1);
   var_4.animname = "human";
   var_4.disableexits = 1;
@@ -1952,14 +1952,14 @@ fenceclimb(var_0, var_1, var_2) {
 
   var_3 maps\_anim::anim_reach_solo(var_4, "wall_climb");
   var_3 thread maps\_anim::anim_single_solo(var_4, "wall_climb");
-  var_5 = getent(var_4.target, "targetname");
+  var_5 = getEnt(var_4.target, "targetname");
   var_4 thread maps\_spawner::go_to_origin(var_5);
   maps\coup_code::deleteentity(var_3);
   var_4 thread maps\coup_code::deleteongoal();
 }
 
 fencedog(var_0, var_1, var_2) {
-  var_3 = getent(var_0 + "_fencedog_node", "targetname");
+  var_3 = getEnt(var_0 + "_fencedog_node", "targetname");
   var_4 = maps\coup_code::scripted_spawn2(var_0 + "_fencedog_dog", "targetname", 1);
   var_4.animname = "dog";
 
@@ -2002,7 +2002,7 @@ passenger_event() {
 }
 
 animthread(var_0) {
-  level.car.passenger stopanimscripted();
+  level.car.passenger stopanimScripted();
   level.car maps\coup_anim::playpassengeranim(var_0);
   level.car maps\coup_anim::looppassengeranim("carpassenger_idle");
 }
@@ -2017,7 +2017,7 @@ loudspeaker_event() {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(isDefined(var_0.script_noteworthy)) {
     var_0 playSound(var_0.script_noteworthy);
@@ -2123,15 +2123,15 @@ ending_heartbeat() {
   level.player thread maps\_utility::play_sound_on_entity("coup_breathing_heartbeat");
   level.player thread maps\_utility::play_sound_on_entity("scn_coup_assassination_tension_rise");
   wait 0.05;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 0.95;
   level.player thread maps\_utility::play_sound_on_entity("coup_breathing_heartbeat");
   wait 0.05;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 1.1;
   level.player thread maps\_utility::play_sound_on_entity("coup_breathing_heartbeat");
   wait 0.05;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 initcredits() {
@@ -2402,21 +2402,21 @@ openintrodoors() {
 }
 
 openintroleftdoor() {
-  var_0 = getent("intro_leftdoor", "targetname");
+  var_0 = getEnt("intro_leftdoor", "targetname");
   var_1 = 1;
-  var_0 rotateyaw(180, var_1, var_1 * 0.5, var_1 * 0);
+  var_0 rotateYaw(180, var_1, var_1 * 0.5, var_1 * 0);
   var_0 waittill("rotatedone");
   var_1 = 1;
-  var_0 rotateyaw(-60, var_1, var_1 * 0, var_1 * 1);
+  var_0 rotateYaw(-60, var_1, var_1 * 0, var_1 * 1);
 }
 
 openintrorightdoor() {
-  var_0 = getent("intro_rightdoor", "targetname");
+  var_0 = getEnt("intro_rightdoor", "targetname");
   var_1 = 1;
-  var_0 rotateyaw(-180, var_1, var_1 * 0.5, var_1 * 0);
+  var_0 rotateYaw(-180, var_1, var_1 * 0.5, var_1 * 0);
   var_0 waittill("rotatedone");
   var_1 = 1;
-  var_0 rotateyaw(60, var_1, var_1 * 0, var_1 * 1);
+  var_0 rotateYaw(60, var_1, var_1 * 0, var_1 * 1);
 }
 
 removedroneweapon() {
@@ -2499,7 +2499,7 @@ ziptie(var_0, var_1, var_2) {
     case "ziptie1a":
       var_3 = "intro_soldierholdcivilian";
       var_4 = "intro_civilianliesdown";
-      var_5 = getent("car_events_node", "targetname");
+      var_5 = getEnt("car_events_node", "targetname");
       var_6 = 0;
       var_7 = 0;
       var_8 = 1;
@@ -2507,7 +2507,7 @@ ziptie(var_0, var_1, var_2) {
     default:
       var_3 = "ziptie_guard";
       var_4 = "ziptie_civilian";
-      var_5 = getent(var_0 + "_node", "targetname");
+      var_5 = getEnt(var_0 + "_node", "targetname");
       var_6 = 1;
       var_7 = 1;
       var_8 = 0;
@@ -2548,7 +2548,7 @@ ziptie(var_0, var_1, var_2) {
 ziptied(var_0, var_1) {
   var_0.animname = "human";
   var_0 removedroneweapon();
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2 thread maps\_anim::anim_loop_solo(var_0, "ziptie_civilian_idle");
   maps\_utility::delaythread(var_1, maps\coup_code::deleteentity, var_0);
   maps\_utility::delaythread(var_1, maps\coup_code::deleteentity, var_2);
@@ -2582,18 +2582,18 @@ garage(var_0, var_1, var_2, var_3) {
   var_5 = anglesToForward(self.angles) * -22;
   self.origin = self.origin + var_5;
   var_2.origin = var_2.origin + (0, 0, 51.013);
-  var_6 = getent("intro_node", "targetname");
+  var_6 = getEnt("intro_node", "targetname");
   var_6 thread maps\_anim::anim_single_solo(var_1, "civilians_running_garage");
   common_scripts\utility::flag_wait("spawn_garage_operator");
   maps\_anim::anim_first_frame_solo(var_0, "close_garage_a");
   common_scripts\utility::flag_wait("animate_garage_operator");
   thread maps\_anim::anim_single_solo(var_0, "close_garage_a");
   wait 1;
-  var_2 linkto(var_0, "TAG_WEAPON_CHEST");
+  var_2 linkTo(var_0, "TAG_WEAPON_CHEST");
   var_0 waittillmatch("single anim", "end");
   var_2 unlink();
   var_0 delete();
-  var_1 stopanimscripted();
+  var_1 stopanimScripted();
   var_1 delete();
 }
 

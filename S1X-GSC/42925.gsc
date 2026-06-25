@@ -57,9 +57,9 @@ dirteffect(var_0) {
   if(!maps\mp\_utility::isreallyalive(self)) {
     return;
   }
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = ["death", "damage"];
@@ -83,9 +83,9 @@ bloodeffect(var_0) {
   if(!maps\mp\_utility::isreallyalive(self)) {
     return;
   }
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = ["death", "damage"];

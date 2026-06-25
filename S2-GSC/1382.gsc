@@ -202,7 +202,7 @@ lib_0566::func_ABB2(param_00, param_01, param_02, param_03, param_04, param_05, 
         var_0C = spawn("script_model", var_0B.var_0116);
         var_0C setModel("helmet_collision");
         var_0C.var_001D = var_0B.var_001D;
-        var_0B linkto(var_0C);
+        var_0B linkTo(var_0C);
         var_0C.var_6292 = var_0B;
         var_0C thread decoratorlaunch(param_07);
         var_0C hideallparts();

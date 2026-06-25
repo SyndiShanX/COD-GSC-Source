@@ -125,7 +125,7 @@ lineEmitter_Thread(localClientNum) {
   endOfLineEntity = undefined;
 
   if(isDefined(self.target)) {
-    endOfLineEntity = getstruct(self.target, "targetname");
+    endOfLineEntity = getStruct(self.target, "targetname");
   }
 
   if(isDefined(endOfLineEntity)) {

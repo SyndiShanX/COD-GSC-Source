@@ -663,7 +663,7 @@ fx_dam_explosion() {
   common_scripts\utility::exploder("dam_water_burst");
   wait 2.0;
   wait 0.9;
-  var_0 = getent("dam_waterfall", "targetname");
+  var_0 = getEnt("dam_waterfall", "targetname");
   var_0 show();
   wait 1.5;
   wait 0.5;
@@ -673,12 +673,12 @@ fx_dam_explosion() {
 }
 
 fx_dam_waterfall_hide() {
-  var_0 = getent("dam_waterfall", "targetname");
+  var_0 = getEnt("dam_waterfall", "targetname");
   var_0 hide();
 }
 
 fx_dam_waterfall_show() {
-  var_0 = getent("dam_waterfall", "targetname");
+  var_0 = getEnt("dam_waterfall", "targetname");
   var_0 show();
 }
 
@@ -726,11 +726,11 @@ setup_flood_water_anims() {
   level.scr_animtree["mall_rooftop_debris"] = #animtree;
   level.scr_model["mall_rooftop_debris"] = "flood_mall_rooftop_wh_debri";
   level.scr_anim["mall_rooftop_debris"]["flood_mall_rooftop_wh_debri0_anim"] = % flood_mall_rooftop_wh_debri0_anim;
-  var_0 = getent("angry_flood_water_model", "targetname");
+  var_0 = getEnt("angry_flood_water_model", "targetname");
   var_0 hide();
-  var_1 = getent("alley_flood_water_model", "targetname");
+  var_1 = getEnt("alley_flood_water_model", "targetname");
   var_1 hide();
-  var_2 = getent("angry_flood_big_wave_water_model", "targetname");
+  var_2 = getEnt("angry_flood_big_wave_water_model", "targetname");
   var_2 hide();
 }
 
@@ -740,7 +740,7 @@ attach_fx_anim_model_street_flood(var_0, var_1, var_2, var_3) {
   var_6 = spawn("script_model", var_4);
   var_6.angles = var_5;
   var_6 setModel(var_1);
-  var_6 linkto(var_0, var_2);
+  var_6 linkTo(var_0, var_2);
   var_6 common_scripts\utility::delaycall(var_3, ::delete);
 }
 
@@ -752,7 +752,7 @@ attach_fx_anim_model_mall_debris(var_0, var_1, var_2, var_3, var_4) {
   var_8.angles = var_7;
   var_8.origin = var_8.origin + (0, 0, var_0);
   var_8 setModel(var_2);
-  var_8 linkto(var_1, var_3);
+  var_8 linkTo(var_1, var_3);
 
   for(var_9 = 0; var_9 <= var_4; var_9++) {
     if(distance2d(var_5, var_8.origin) >= 2176) {
@@ -775,7 +775,7 @@ attach_fx_anim_model_alley_flood(var_0, var_1, var_2, var_3) {
   var_6.angles = var_5;
   var_6.origin = var_6.origin + (-20, 0, 20);
   var_6 setModel(var_1);
-  var_6 linkto(var_0, var_2);
+  var_6 linkTo(var_0, var_2);
   var_6 common_scripts\utility::delaycall(var_3, ::delete);
 }
 
@@ -848,7 +848,7 @@ alley_end_of_alley_fx() {
 }
 
 alley_flood_water() {
-  var_0 = common_scripts\utility::getstruct("alley_flood_script", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("alley_flood_script", "script_noteworthy");
   var_0.angles = (0, 0, 0);
   var_1 = spawn("script_model", var_0.origin);
   var_1 hide();
@@ -902,9 +902,9 @@ alley_fill_shallow(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_8 = getent(var_1, "targetname");
-  var_8 moveto(var_2, var_3);
-  var_9 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_8 = getEnt(var_1, "targetname");
+  var_8 moveTo(var_2, var_3);
+  var_9 = common_scripts\utility::getStruct(var_0, "targetname");
   var_10 = spawn("script_model", var_9.origin);
   var_10 setModel("tag_origin");
   var_10.angles = var_9.angles;
@@ -1020,14 +1020,14 @@ playfxontagspecial(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_1.origin);
   var_3 setModel("tag_origin");
   var_3.targetname = "DELETEME";
-  var_3 linkto(var_1, var_2, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_1, var_2, (0, 0, 0), (0, 0, 0));
   playFXOnTag(var_0, var_3, "tag_origin");
   return [var_3, var_0];
 }
 
 angry_flood_water() {
-  var_0 = common_scripts\utility::getstruct("angry_flood_script", "script_noteworthy");
-  var_1 = getent("angry_flood_water_model", "targetname");
+  var_0 = common_scripts\utility::getStruct("angry_flood_script", "script_noteworthy");
+  var_1 = getEnt("angry_flood_water_model", "targetname");
   var_1.animname = "angry_water";
   var_1 maps\_utility::assign_animtree();
   var_2 = spawn("script_model", (-1677, -3443.8, 42.3));
@@ -1116,8 +1116,8 @@ angry_flood_street_mist() {
 }
 
 angry_flood_big_wave_water() {
-  var_0 = common_scripts\utility::getstruct("angry_flood_big_wave_script", "script_noteworthy");
-  var_1 = getent("angry_flood_big_wave_water_model", "targetname");
+  var_0 = common_scripts\utility::getStruct("angry_flood_big_wave_script", "script_noteworthy");
+  var_1 = getEnt("angry_flood_big_wave_water_model", "targetname");
   var_1.animname = "angry_water_bigwave_0";
   var_1 maps\_utility::assign_animtree();
   var_2 = [];
@@ -1198,7 +1198,7 @@ angry_flood_big_wave_water() {
 
 big_wave_2() {
   wait 8.2;
-  var_0 = common_scripts\utility::getstruct("angry_flood_big_wave_script", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("angry_flood_big_wave_script", "script_noteworthy");
   var_1 = spawn("script_model", var_0.origin);
   var_1 hide();
   var_1 setModel("flood_angryflood_big_wave_1");
@@ -1251,8 +1251,8 @@ big_wave_2() {
 
   foreach(var_7 in var_5) {
     var_8 = spawn("trigger_radius", var_1 gettagorigin(var_7), 0, 256, 256);
-    var_8 enablelinkto();
-    var_8 linkto(var_1, var_7);
+    var_8 enablelinkTo();
+    var_8 linkTo(var_1, var_7);
     var_8 thread fx_angry_flood_nearmiss(1);
   }
 
@@ -1362,7 +1362,7 @@ stop_looping_splashes() {
 
 fx_mall_rooftop_debris() {
   common_scripts\utility::flag_wait("breach_door_open");
-  var_0 = common_scripts\utility::getstruct("mall_rooftop_wh_debri_01", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("mall_rooftop_wh_debri_01", "script_noteworthy");
   var_0.angles = (0, 0, 0);
   var_0.origin = var_0.origin + (-5, -5, -32);
   var_1 = spawn("script_model", var_0.origin);
@@ -1492,7 +1492,7 @@ fx_warehouse_ally_mantle(var_0, var_1) {
 }
 
 fx_warehouse_door_burst() {
-  var_0 = getent("wh_splashes_upper", "targetname");
+  var_0 = getEnt("wh_splashes_upper", "targetname");
   level.door_burst_splashes = [];
   common_scripts\utility::exploder("warehouse_doorbreak");
   wait 0.3;
@@ -1507,8 +1507,8 @@ fx_warehouse_door_burst() {
 }
 
 fx_wh_splashes() {
-  var_0 = getent("wh_splashes_lower", "targetname");
-  var_1 = getent("wh_splashes_upper", "targetname");
+  var_0 = getEnt("wh_splashes_lower", "targetname");
+  var_1 = getEnt("wh_splashes_upper", "targetname");
   level.wh_amb_fx = [];
   level.wh_amb_fx[level.wh_amb_fx.size] = playfxontagspecial(common_scripts\utility::getfx("vfx_warehouse_door_splashes_lrg_dark"), var_0, "tag_fx_big_door_splash_001");
   level.wh_amb_fx[level.wh_amb_fx.size] = playfxontagspecial(common_scripts\utility::getfx("vfx_warehouse_lip_froth_01"), var_0, "tag_fx_lip_splash_001");
@@ -1525,7 +1525,7 @@ fx_wh_splashes() {
 }
 
 fx_warehouse_door_burst_02() {
-  var_0 = getent("wh_splashes_upper", "targetname");
+  var_0 = getEnt("wh_splashes_upper", "targetname");
   common_scripts\utility::exploder("wh_thick");
   playFXOnTag(common_scripts\utility::getfx("vfx_warehouse_door_splashes_lrg"), var_0, "tag_fx_small_door_splash_002");
   wait 15;
@@ -1633,8 +1633,8 @@ fx_warehouse_underwater_fx_off() {
 }
 
 destroy_fx_warehouse_floating_debris() {
-  var_0 = getent("warehouse_upper_floating_debris", "script_noteworthy");
-  var_1 = getent("coverwater_warehouse_premantle_debris", "script_noteworthy");
+  var_0 = getEnt("warehouse_upper_floating_debris", "script_noteworthy");
+  var_1 = getEnt("coverwater_warehouse_premantle_debris", "script_noteworthy");
 
   if(isDefined(level.wh_debris_01_vfx)) {
     foreach(var_3 in level.wh_debris_01_vfx) {
@@ -1743,8 +1743,8 @@ fx_warehouse_floating_debris() {
   level.wh_debris_01_top_vfx = [];
   level.wh_debris_02_top_vfx = [];
   level.wh_debris_03_top_vfx = [];
-  var_0 = getent("warehouse_upper_floating_debris", "script_noteworthy");
-  var_1 = getent("coverwater_warehouse_premantle_debris", "script_noteworthy");
+  var_0 = getEnt("warehouse_upper_floating_debris", "script_noteworthy");
+  var_1 = getEnt("coverwater_warehouse_premantle_debris", "script_noteworthy");
   level.lip_cascade_vfx = playfxontagspecial(common_scripts\utility::getfx("flood_warehouse_lip_cascade_debris"), var_1, "tag_fx_debri_lip");
 
   for(var_2 = 1; var_2 <= 2; var_2++) {
@@ -1845,7 +1845,7 @@ rooftop_01_misc_fx() {
 trigger_debris_bridge_water() {
   common_scripts\utility::flag_init("trigger_debris_bridge_water");
   common_scripts\utility::flag_wait("trigger_debris_bridge_water");
-  var_0 = getent("debri_bridge_water", "targetname");
+  var_0 = getEnt("debri_bridge_water", "targetname");
   var_1 = getEntArray("swept_water_swim", "targetname");
   var_0 show();
 
@@ -1860,14 +1860,14 @@ exit_stealth_misc_fx() {
 }
 
 fx_mall_rooftop_hide_shadow_geo() {
-  var_0 = getent("mall_rooftop_water_shadow_geo", "targetname");
-  var_1 = getent("mall_rooftop_water_geo_chunk", "targetname");
+  var_0 = getEnt("mall_rooftop_water_shadow_geo", "targetname");
+  var_1 = getEnt("mall_rooftop_water_geo_chunk", "targetname");
   var_0 hide();
   var_1 hide();
 }
 
 fx_rooftops_water_hide() {
-  var_0 = getent("debri_bridge_water", "targetname");
+  var_0 = getEnt("debri_bridge_water", "targetname");
   var_0 hide();
 }
 
@@ -1880,18 +1880,18 @@ fx_swept_water_hide() {
 }
 
 fx_mall_roof_water_hide() {
-  var_0 = getent("mall_roof_water", "targetname");
+  var_0 = getEnt("mall_roof_water", "targetname");
   var_0 hide();
   var_0 notsolid();
-  var_1 = getent("mall_roof_water_geo", "targetname");
+  var_1 = getEnt("mall_roof_water_geo", "targetname");
   var_1 hide();
   var_1 notsolid();
 }
 
 fx_mall_roof_water_show() {
-  var_0 = getent("mall_roof_water", "targetname");
-  var_1 = getent("mall_roof_water_geo", "targetname");
-  var_2 = getent("mall_rooftop_water_target", "targetname");
+  var_0 = getEnt("mall_roof_water", "targetname");
+  var_1 = getEnt("mall_roof_water_geo", "targetname");
+  var_2 = getEnt("mall_rooftop_water_target", "targetname");
   var_1 retargetscriptmodellighting(var_2);
   var_0 show();
   var_0 solid();
@@ -1900,12 +1900,12 @@ fx_mall_roof_water_show() {
 }
 
 fx_retarget_warehouse_waters_lighting() {
-  var_0 = getent("warehouse_waters_retarget", "targetname");
-  var_1 = getent("warehouse_waters_foam_retarget", "targetname");
-  var_2 = getent("coverwater_warehouse_above", "targetname");
-  var_3 = getent("coverwater_warehouse_postmantle_above", "targetname");
-  var_4 = getent("coverwater_warehouse_premantle_above", "targetname");
-  var_5 = getent("coverwater_warehouse_foam", "targetname");
+  var_0 = getEnt("warehouse_waters_retarget", "targetname");
+  var_1 = getEnt("warehouse_waters_foam_retarget", "targetname");
+  var_2 = getEnt("coverwater_warehouse_above", "targetname");
+  var_3 = getEnt("coverwater_warehouse_postmantle_above", "targetname");
+  var_4 = getEnt("coverwater_warehouse_premantle_above", "targetname");
+  var_5 = getEnt("coverwater_warehouse_foam", "targetname");
   var_2 retargetscriptmodellighting(var_0);
   var_3 retargetscriptmodellighting(var_0);
   var_4 retargetscriptmodellighting(var_0);
@@ -1916,11 +1916,11 @@ fx_retarget_warehouse_waters_lighting() {
 }
 
 fx_retarget_rooftop_water_lighting() {
-  var_0 = getent("rooftops_water_retarget", "targetname");
-  var_1 = getent("debri_bridge_water", "targetname");
-  var_2 = getent("ending_water", "targetname");
+  var_0 = getEnt("rooftops_water_retarget", "targetname");
+  var_1 = getEnt("debri_bridge_water", "targetname");
+  var_2 = getEnt("ending_water", "targetname");
   var_3 = getEntArray("swept_water_swim", "targetname");
-  var_4 = getent("rooftop2_water", "script_noteworthy");
+  var_4 = getEnt("rooftop2_water", "script_noteworthy");
 
   foreach(var_6 in var_3) {
     var_6 retargetscriptmodellighting(var_0);
@@ -2153,12 +2153,12 @@ gamestart_light_fix() {
   maps\_utility::setsaveddvar_cg_ng("r_specularColorScale", 2.5, 9.01);
   maps\_utility::setsaveddvar_cg_ng("r_diffuseColorScale", 1.4, 4.6);
   maps\_utility::setsaveddvar_cg_ng("r_lightGridIntensity", 0, 0);
-  var_0 = getent("skybridge_room_light", "targetname");
-  var_1 = getent("warehouse_door_int_l_lock", "targetname");
-  var_2 = getent("warehouse_door_int_r_lock", "targetname");
+  var_0 = getEnt("skybridge_room_light", "targetname");
+  var_1 = getEnt("warehouse_door_int_l_lock", "targetname");
+  var_2 = getEnt("warehouse_door_int_r_lock", "targetname");
   var_3 = getEntArray("door1_target_from", "script_noteworthy");
-  var_4 = getent("garage_door_light_target", "targetname");
-  var_5 = getent("magnetic_door_light_target", "targetname");
+  var_4 = getEnt("garage_door_light_target", "targetname");
+  var_5 = getEnt("magnetic_door_light_target", "targetname");
   var_1 retargetscriptmodellighting(var_5);
   var_2 retargetscriptmodellighting(var_5);
 
@@ -2217,7 +2217,7 @@ set_mall_lights_off() {
 }
 
 set_warelights_off() {
-  var_0 = getent("mall_light_off_trig", "targetname");
+  var_0 = getEnt("mall_light_off_trig", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -2251,7 +2251,7 @@ set_enter_canope_vf() {
 }
 
 set_enter_loadingdocks_vf() {
-  var_0 = getent("inside_loadingdocks_vf", "targetname");
+  var_0 = getEnt("inside_loadingdocks_vf", "targetname");
   level.player maps\flood_util::set_water_fog("flood_underwater");
   level.player visionsetwaterforplayer("flood_underwater", 0);
 
@@ -2277,7 +2277,7 @@ set_enter_stairwell() {
     }
   }
 
-  var_4 = getent("enter_stairwell", "targetname");
+  var_4 = getEnt("enter_stairwell", "targetname");
 
   if(isDefined(var_4)) {
     var_4 waittill("trigger");
@@ -2297,8 +2297,8 @@ set_enter_stairwell() {
 mall_light_cleanup() {
   var_0 = getEntArray("warevolumes", "targetname");
   var_1 = getEntArray("warelights", "targetname");
-  var_2 = getent("punchLight", "targetname");
-  var_3 = getent("upperFill", "targetname");
+  var_2 = getEnt("punchLight", "targetname");
+  var_3 = getEnt("upperFill", "targetname");
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
   setsaveddvar("sm_sunshadowscale", 1);
 
@@ -2417,7 +2417,7 @@ change_light(var_0) {
 }
 
 set_stairs_hall_vf() {
-  var_0 = getent("stairwell_hall_vs", "script_noteworthy");
+  var_0 = getEnt("stairwell_hall_vs", "script_noteworthy");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -2426,7 +2426,7 @@ set_stairs_hall_vf() {
 }
 
 set_enter_rooftop_1_vf() {
-  var_0 = getent("fx_mall_rooftop", "targetname");
+  var_0 = getEnt("fx_mall_rooftop", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -2469,7 +2469,7 @@ set_enter_stealth_vf() {
     maps\_utility::vision_set_fog_changes("flood_two", 3);
     level.cw_vision_above = "flood_two";
     level.cw_fog_above = "flood_two";
-    var_0 = getent("underwater_light", "targetname");
+    var_0 = getEnt("underwater_light", "targetname");
 
     if(isDefined(var_0)) {
       var_0 setlightintensity(0.15);
@@ -2479,7 +2479,7 @@ set_enter_stealth_vf() {
 }
 
 set_enter_rooftop_water() {
-  var_0 = getent("flood_rooftop_water_vs", "targetname");
+  var_0 = getEnt("flood_rooftop_water_vs", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -2525,7 +2525,7 @@ set_enter_skybridge_room_vf() {
     maps\_utility::vision_set_changes("flood_skybridge_room", 3);
     maps\_utility::fog_set_changes("flood_two", 3);
     enableforcedsunshadows();
-    var_0 = getent("skybridge_room_light", "targetname");
+    var_0 = getEnt("skybridge_room_light", "targetname");
 
     if(isDefined(var_0)) {
       var_0 setlightradius(800);
@@ -2727,7 +2727,7 @@ fx_angry_flood_nearmiss(var_0) {
 fx_stealth_ambient() {
   level endon("skybridge_done");
   common_scripts\utility::exploder("stealth_abovewater_fx");
-  var_0 = getent("stealth_fx", "targetname");
+  var_0 = getEnt("stealth_fx", "targetname");
   var_1 = spawn("script_model", (4305.04, -2671.81, 10.0624));
   var_1 setModel("tag_origin");
   var_1.angles = (9.20515, 151.609, 176.876);
@@ -3144,12 +3144,12 @@ fx_rooftop2_ambient() {
 }
 
 fx_parking_garage_hide_godrays() {
-  var_0 = getent("garage_godrays", "targetname");
+  var_0 = getEnt("garage_godrays", "targetname");
   var_0 hide();
 }
 
 fx_parking_garage_ambient() {
-  var_0 = getent("garage_godrays", "targetname");
+  var_0 = getEnt("garage_godrays", "targetname");
   var_0 show();
   var_1 = spawn("script_model", (5632.1, 3284.31, 112.468));
   var_1 setModel("tag_origin");
@@ -3429,7 +3429,7 @@ debris_bridge_bus_sparks(var_0) {
   var_1 = spawn("script_model", (5893.46, 2462.16, 56.2248));
   var_1 setModel("tag_origin");
   playFXOnTag(level._effect["vfx_jetscrape_short_runner"], var_1, "tag_origin");
-  var_1 moveto((5831.19, 2383.35, 56.2248), 2);
+  var_1 moveTo((5831.19, 2383.35, 56.2248), 2);
   wait 3;
   stopFXOnTag(level._effect["vfx_jetscrape_short_runner"], var_1, "tag_origin");
 }

@@ -106,7 +106,7 @@ function soul_swap(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
 function ctt_trail_runner(localclientnum, fx_name, dest) {
   playFXOnTag(localclientnum, level._effect[fx_name], self, "tag_origin");
-  self moveto(dest, 0.5);
+  self moveTo(dest, 0.5);
   self waittill("movedone");
   playSound(0, "zmb_squest_soul_impact", dest);
   self delete();
@@ -183,7 +183,7 @@ function sq_wire_init(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
 function sam_rise_and_bob(struct) {
   endpos = struct::get(struct.target, "targetname");
-  self moveto(endpos.origin, 3);
+  self moveTo(endpos.origin, 3);
   self waittill("movedone");
   start_z = self.origin;
   amplitude = 7;
@@ -289,7 +289,7 @@ function do_sr_rumble(localclientnum) {
         continue;
       }
       if(distancesquared(var_845cd5d1.origin, a_players[i].origin) < 562500) {
-        a_players[i] playrumbleonentity(localclientnum, "slide_rumble");
+        a_players[i] playRumbleOnEntity(localclientnum, "slide_rumble");
       }
     }
     wait(randomfloatrange(0.05, 0.15));
@@ -309,7 +309,7 @@ function function_9b1295b1(localclientnum) {
   level endon("hash_306cf2d4");
   while(true) {
     self earthquake(randomfloatrange(0.2, 0.25), 5, self.origin, 100);
-    self playrumbleonentity(localclientnum, "slide_rumble");
+    self playRumbleOnEntity(localclientnum, "slide_rumble");
     wait(randomfloatrange(0.1, 0.15));
   }
 }
@@ -329,7 +329,7 @@ function do_rr_rumble() {
         continue;
       }
       player earthquake(randomfloatrange(0.15, 0.2), 5, player.origin, 100);
-      player playrumbleonentity(i, "slide_rumble");
+      player playRumbleOnEntity(i, "slide_rumble");
     }
     wait(randomfloatrange(0.1, 0.15));
   }
@@ -350,7 +350,7 @@ function do_rl_rumble() {
         continue;
       }
       player earthquake(randomfloatrange(0.26, 0.31), 5, player.origin, 100);
-      player playrumbleonentity(i, "damage_light");
+      player playRumbleOnEntity(i, "damage_light");
     }
     wait(randomfloatrange(0.1, 0.15));
   }
@@ -372,7 +372,7 @@ function do_de_rumble() {
       continue;
     }
     player earthquake(randomfloatrange(0.4, 0.45), 5, player.origin, 100);
-    player playrumbleonentity(i, "damage_heavy");
+    player playRumbleOnEntity(i, "damage_heavy");
   }
   wait(0.2);
   while(true) {
@@ -382,7 +382,7 @@ function do_de_rumble() {
         continue;
       }
       player earthquake(randomfloatrange(0.35, 0.4), 5, player.origin, 100);
-      player playrumbleonentity(i, "damage_light");
+      player playRumbleOnEntity(i, "damage_light");
     }
     wait(randomfloatrange(0.1, 0.15));
   }

@@ -39,7 +39,7 @@ _id_5547(var_0, var_1) {
   var_4 setModel(var_2.model);
   var_4.angles = var_0.angles;
   var_4._id_58FA = var_2.health;
-  var_4 linkto(var_0, var_2._id_0427, var_2._id_96BE, var_2._id_1787);
+  var_4 linkTo(var_0, var_2._id_0427, var_2._id_96BE, var_2._id_1787);
   var_4 thread _id_1B35(var_4, var_0);
   var_0._id_554D[var_2._id_79A8] = var_4;
 }
@@ -135,9 +135,9 @@ _id_9FFE(var_0) {
     return undefined;
   }
 
-  var_0 = vectornormalize((var_0[0], var_0[1], 0));
+  var_0 = vectorNormalize((var_0[0], var_0[1], 0));
   var_0 = var_0 + (0, 0, 1);
-  return vectornormalize(var_0) * 1250;
+  return vectorNormalize(var_0) * 1250;
 }
 
 _id_464F(var_0) {

@@ -53,7 +53,7 @@ main() {
     array_thread(temp_clips, ::self_delete);
   }
 
-  elev_bldg3b = getent("elevator_bldg3b_body", "targetname");
+  elev_bldg3b = getEnt("elevator_bldg3b_body", "targetname");
   elev_bldg3b.origin = elev_bldg3b.origin + vectorscale((0, 0, 1), 8.0);
   level thread maps\mp\zm_highrise_elevators::init_elevator("1b");
   level thread maps\mp\zm_highrise_elevators::init_elevator("1c", 1);
@@ -76,7 +76,7 @@ main() {
   level._chugabud_post_respawn_override_func = ::highrise_chugabud_post_respawn_func;
   level.insta_kill_triggers = getEntArray("instant_death", "targetname");
   array_thread(level.insta_kill_triggers, ::squashed_death_init, 0);
-  e_trigger = getent("instant_death_escape_pod_shaft", "targetname");
+  e_trigger = getEnt("instant_death_escape_pod_shaft", "targetname");
 
   if(isDefined(e_trigger)) {
     e_trigger thread squashed_death_init(1);
@@ -137,11 +137,11 @@ highrise_pap_move_in(trigger, origin_offset, angles_offset) {
   worldgun = trigger.worldgun;
   worldgundw = trigger.worldgun.worldgundw;
   offset = origin_offset[2];
-  trigger.worldgun rotateto(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
+  trigger.worldgun rotateTo(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
   offsetdw = vectorscale((1, 1, 1), 3.0);
 
   if(isDefined(trigger.worldgun.worldgundw)) {
-    worldgundw rotateto(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
+    worldgundw rotateTo(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
   }
 
   wait 0.5;
@@ -213,7 +213,7 @@ escape_pod_death_trigger_think() {
 }
 
 zm_treasure_chest_init() {
-  chest1 = getstruct("start_chest", "script_noteworthy");
+  chest1 = getStruct("start_chest", "script_noteworthy");
   level.chests = [];
   level.chests[level.chests.size] = chest1;
   maps\mp\zombies\_zm_magicbox::treasure_chest_init("start_chest");
@@ -326,7 +326,7 @@ insta_kill_player(perks_can_respawn_player, kill_if_falling) {
     if(getnumconnectedplayers() == 1) {
       if(isDefined(self.lives) && self.lives > 0) {
         self.waiting_to_revive = 1;
-        points = getstruct("zone_green_start", "script_noteworthy");
+        points = getStruct("zone_green_start", "script_noteworthy");
         spawn_points = getStructArray(points.target, "targetname");
         point = spawn_points[0];
 
@@ -337,7 +337,7 @@ insta_kill_player(perks_can_respawn_player, kill_if_falling) {
         wait 0.5;
         self freezecontrols(1);
         wait 0.25;
-        self setorigin(point.origin + vectorscale((0, 0, 1), 20.0));
+        self setOrigin(point.origin + vectorscale((0, 0, 1), 20.0));
         self.angles = point.angles;
 
         if(in_last_stand) {
@@ -398,7 +398,7 @@ highrise_chugabud_reject_node_func(v_corpse_pos, nd_node) {
   }
 
   if(!isDefined(level.chugabud_info_volume1)) {
-    level.chugabud_info_volume1 = getent("zone_orange_level1_whos_who_info_volume", "targetname");
+    level.chugabud_info_volume1 = getEnt("zone_orange_level1_whos_who_info_volume", "targetname");
   }
 
   scr_org.origin = v_corpse_pos;
@@ -413,7 +413,7 @@ highrise_chugabud_reject_node_func(v_corpse_pos, nd_node) {
 
   if(!reject) {
     if(!isDefined(level.chugabud_info_volume2)) {
-      level.chugabud_info_volume2 = getent("whos_who_slide_info_volume", "targetname");
+      level.chugabud_info_volume2 = getEnt("whos_who_slide_info_volume", "targetname");
     }
 
     scr_org.origin = v_corpse_pos;
@@ -471,8 +471,8 @@ highrise_chugabud_post_respawn_func(v_new_player_position) {
 
   if(isDefined(e_corpse)) {
     a_escape_pod_ents = [];
-    a_escape_pod_ents[a_escape_pod_ents.size] = getent("escape_pod_trigger", "targetname");
-    a_escape_pod_ents[a_escape_pod_ents.size] = getent("zone_green_escape_pod", "targetname");
+    a_escape_pod_ents[a_escape_pod_ents.size] = getEnt("escape_pod_trigger", "targetname");
+    a_escape_pod_ents[a_escape_pod_ents.size] = getEnt("zone_green_escape_pod", "targetname");
     scr_org.origin = e_corpse.origin;
     touching = 0;
 
@@ -618,10 +618,10 @@ init_escape_elevators_anims() {
 }
 
 escape_pod() {
-  escape_pod = getent("elevator_bldg1a_body", "targetname");
+  escape_pod = getEnt("elevator_bldg1a_body", "targetname");
   escape_pod setmovingplatformenabled(1);
   escape_pod escapeelevatoruseanimtree();
-  escape_pod_trigger = getent("escape_pod_trigger", "targetname");
+  escape_pod_trigger = getEnt("escape_pod_trigger", "targetname");
   escape_pod.is_elevator = 1;
   escape_pod._post_host_migration_thread = maps\mp\zm_highrise_elevators::escape_pod_host_migration_respawn_check;
 
@@ -631,7 +631,7 @@ escape_pod() {
   escape_pod.home_origin = escape_pod.origin;
   escape_pod.link_start = [];
   escape_pod.link_end = [];
-  escape_pod_blocker_door = getent("elevator_bldg1a_body_door_clip", "targetname");
+  escape_pod_blocker_door = getEnt("elevator_bldg1a_body_door_clip", "targetname");
   number_of_times_used = 0;
   used_at_least_once = 0;
   escape_pod setanim(level.escape_elevator_1_state);
@@ -695,7 +695,7 @@ escape_pod() {
 
     if(isDefined(escape_pod_blocker_door)) {
       escape_pod_blocker_door trigger_on();
-      escape_pod_blocker_door linkto(escape_pod);
+      escape_pod_blocker_door linkTo(escape_pod);
       escape_pod escape_pod_unlinknodes("escape_pod_door_l_node");
       escape_pod escape_pod_unlinknodes("escape_pod_door_r_node");
     }
@@ -742,12 +742,12 @@ escape_pod() {
 
     if(isDefined(escape_pod_blocker_door)) {
       escape_pod_blocker_door trigger_on();
-      escape_pod_blocker_door linkto(escape_pod);
+      escape_pod_blocker_door linkTo(escape_pod);
       escape_pod escape_pod_unlinknodes("escape_pod_door_l_node");
       escape_pod escape_pod_unlinknodes("escape_pod_door_r_node");
     }
 
-    escape_pod moveto(escape_pod.home_origin, 3, 0.1, 0.1);
+    escape_pod moveTo(escape_pod.home_origin, 3, 0.1, 0.1);
     escape_pod waittill("movedone");
     escape_pod stoploopsound(1);
     escape_pod playSound("zmb_esc_pod_crash");
@@ -773,13 +773,13 @@ escape_pod_walk_on_off(escape_pod) {
 escape_pod_walk_on_off_watch(who, escape_pod) {
   who endon("disconnect");
   who.in_escape_pod_trigger = 1;
-  playsoundatposition("zmb_esc_pod_bump", escape_pod.origin + vectorscale((0, 0, 1), 15.0));
+  playSoundAtPosition("zmb_esc_pod_bump", escape_pod.origin + vectorscale((0, 0, 1), 15.0));
 
   while(who istouching(self)) {
     wait 1;
   }
 
-  playsoundatposition("zmb_esc_pod_bump", escape_pod.origin + vectorscale((0, 0, 1), 15.0));
+  playSoundAtPosition("zmb_esc_pod_bump", escape_pod.origin + vectorscale((0, 0, 1), 15.0));
   who.in_escape_pod_trigger = 0;
 }
 
@@ -931,10 +931,10 @@ escape_pod_rotate() {
 
 escape_pod_move() {
   shock_radius = 117.6;
-  destination_struct = getstruct(self.target, "targetname");
+  destination_struct = getStruct(self.target, "targetname");
   level notify("free_fall");
   self playSound("zmb_esc_pod_break");
-  self moveto(destination_struct.origin, 3, 0.1, 0.1);
+  self moveTo(destination_struct.origin, 3, 0.1, 0.1);
   self waittill("movedone");
   self playSound("zmb_esc_pod_crash");
   earthquake(0.3, 1.5, self.origin, 256);

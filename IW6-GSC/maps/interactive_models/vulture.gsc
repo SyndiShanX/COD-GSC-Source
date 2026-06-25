@@ -78,7 +78,7 @@ vulture() {
   var_1 = undefined;
 
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
   }
 
   if(isDefined(var_1)) {
@@ -116,7 +116,7 @@ vulture() {
     self notify("stop_idle");
   }
 
-  self animscripted("fly_anim", var_2, var_3, var_0.anims["fly_away"]);
+  self animScripted("fly_anim", var_2, var_3, var_0.anims["fly_away"]);
 
   if(isDefined(var_1)) {
     var_1 setanimknobrestart(var_0.anims["idle_body_pose"], 1, 0.2);
@@ -155,7 +155,7 @@ vulture_circle(var_0) {
 
   var_6 = self.angles[1] - 90;
   var_7 = 0;
-  self stopanimscripted();
+  self stopanimScripted();
   thread maps\interactive_models\_interactive_utility::loop_anim(var_1.anims, "fly_loop");
 
   for(;;) {
@@ -205,7 +205,7 @@ vulture_idle(var_0, var_1, var_2, var_3) {
   self endon("stop_idle");
 
   for(;;) {
-    self animscripted("idle_anim", var_2, var_3, var_1["idle"]);
+    self animScripted("idle_anim", var_2, var_3, var_1["idle"]);
 
     if(isDefined(var_0)) {
       var_0 setanimknobrestart(var_1["idle_body"], 1);
@@ -218,7 +218,7 @@ vulture_idle(var_0, var_1, var_2, var_3) {
 vulture_react(var_0, var_1, var_2, var_3) {
   self endon("death");
   self endon("stop_idle");
-  self animscripted("react_anim", var_2, var_3, var_1["react"]);
+  self animScripted("react_anim", var_2, var_3, var_1["react"]);
 
   if(isDefined(var_0)) {
     var_0 setanimknobrestart(var_1["idle_body_pose"], 1, 0.2);
@@ -242,7 +242,7 @@ vulture_savetostructandwaitfortriggerstart() {
 
 vulture_deletewithbody() {
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0)) {
       var_0 delete();
@@ -262,7 +262,7 @@ vulture_savetostruct() {
   var_0.target = self.target;
 
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
 
     if(isDefined(var_1)) {
       var_0.body = spawnStruct();

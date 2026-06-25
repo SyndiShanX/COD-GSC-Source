@@ -92,7 +92,7 @@ __init__() {
   level thread aat::register_immunity("zm_aat_frostbite", #"blight_father", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_kill_o_watt", #"blight_father", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_plasmatic_burst", #"blight_father", 1, 1, 1);
-  blight_father_spawner = getent("zombie_spawner_blight_father", "targetname");
+  blight_father_spawner = getEnt("zombie_spawner_blight_father", "targetname");
   zm_transform::function_cfca77a7(blight_father_spawner, #"blight_father", &function_39212989, 10, &function_3a0cdf7f, &function_8e4c43d3, "aib_vign_zm_zod_bltfthr_spawn_pre_split", "aib_vign_zm_zod_bltfthr_spawn_post_split");
   zm_spawner::register_zombie_death_event_callback(&killed_callback);
   callback::on_ai_killed(&function_7bef9c3c);
@@ -105,7 +105,7 @@ __init__() {
 
     for(i = 0; i < 12; i++) {
       trigger = spawn("trigger_damage", (0, 0, 0), 0, 40, 40);
-      trigger enablelinkto();
+      trigger enablelinkTo();
       trigger.inuse = 0;
       trigger triggerenable(0);
 
@@ -438,7 +438,7 @@ function_b78adc65(entity) {
 
   if(isDefined(entity.gib_model)) {
     entity.gib_model clientfield::set("blight_father_gib_explosion", 1);
-    entity.gib_model stopanimscripted(0, 1);
+    entity.gib_model stopanimScripted(0, 1);
     entity.gib_model startragdoll();
   }
 
@@ -513,8 +513,8 @@ function_3d752709(enemy, target) {
   enemyvec = enemy.origin - target.origin;
   var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
   var_c2ee8451 = (facingvec[0], facingvec[1], 0);
-  var_3e3c8075 = vectornormalize(var_3e3c8075);
-  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  var_3e3c8075 = vectorNormalize(var_3e3c8075);
+  var_c2ee8451 = vectorNormalize(var_c2ee8451);
   enemydot = vectordot(var_c2ee8451, var_3e3c8075);
 
   if(enemydot < 0) {
@@ -602,7 +602,7 @@ blightfatherdeathstart(entity) {
       return;
     }
 
-    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"ai_t8_zm_zod_bltfthr_dth_destroy_head_01_nofx", "normal");
+    gib_model animScripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"ai_t8_zm_zod_bltfthr_dth_destroy_head_01_nofx", "normal");
     gib_model thread function_529b7fb9();
     entity.gib_model = gib_model;
   }
@@ -656,7 +656,7 @@ function_ac921de9(entity) {
   meleerangesq = meleerange * meleerange;
   potential_players = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(meleerangesq < distancesquared(entity.origin, player.origin)) {
       continue;
     }
@@ -688,7 +688,7 @@ function_ac921de9(entity) {
   }
 
   foreach(player in potential_players) {
-    vec_to_player = vectornormalize(player.origin - entity.origin);
+    vec_to_player = vectorNormalize(player.origin - entity.origin);
 
     if(vectordot(vec_to_player, registernotice_walla) < var_9b246038) {
       continue;
@@ -903,7 +903,7 @@ function_cacd1506(var_84ed9a13, entity, inflictor, attacker, damage, flags, mean
       entity[[level.var_c2981ce9[var_84ed9a13.hittag1]]](entity, inflictor, attacker, damage, flags, meansofdamage, weapon, point, dir, hitloc, offsettime, boneindex, modelindex);
     }
 
-    if(!entity isplayinganimscripted()) {
+    if(!entity isplayinganimScripted()) {
       entity.var_fbec06fa = var_84ed9a13.hittag1;
       entity setblackboardattribute("_blight_father_weak_point", var_84ed9a13.hittag1);
     }
@@ -1088,7 +1088,7 @@ function_2784f3ff(entity) {
       continue;
     }
 
-    if(vectordot(vectornormalize(player.origin - entity.origin), anglesToForward(entity.angles)) < entity ai::function_9139c839().var_b2656f44) {
+    if(vectordot(vectorNormalize(player.origin - entity.origin), anglesToForward(entity.angles)) < entity ai::function_9139c839().var_b2656f44) {
       continue;
     }
 
@@ -1126,7 +1126,7 @@ function_96f5d05a(entity, var_4c0587b) {
   grapple_start = zm_grappler::create_mover(entity gettagorigin("tag_jaw"), entity.angles);
   grapple_end = zm_grappler::create_mover(entity gettagorigin("tag_jaw"), entity.angles * -1);
   grapple_end.prone_2_run_roll = entity;
-  grapple_start linkto(entity, "tag_jaw");
+  grapple_start linkTo(entity, "tag_jaw");
   entity.var_54c1950f = {
     #beamstart: grapple_start, #beamend: grapple_end, #status: 0, #ignore_ents: []
   };
@@ -1136,14 +1136,14 @@ function_96f5d05a(entity, var_4c0587b) {
   n_time = max(0.1, n_time);
   entity.var_54c1950f.status = 1;
   grapple_end playSound(#"zmb_grapple_start");
-  grapple_end moveto(var_4c0587b, n_time, 0, n_time * 0.1);
+  grapple_end moveTo(var_4c0587b, n_time, 0, n_time * 0.1);
   grapple_end.return_pos = entity zm_grappler::grapple_point();
   thread function_9d1a26f1(entity, entity ai::function_9139c839().var_23426e9a * entity ai::function_9139c839().var_23426e9a, level.players);
   grapple_end flagsys::wait_till("grapple_moveto_done");
   grapple_end flagsys::clear("grapple_moveto_done");
   entity.var_54c1950f.status = 2;
   n_time = distance(grapple_end.origin, grapple_end.return_pos) / entity ai::function_9139c839().var_4a5ffac;
-  grapple_end moveto(grapple_end.return_pos, n_time, n_time * 0.1, 0);
+  grapple_end moveTo(grapple_end.return_pos, n_time, n_time * 0.1, 0);
   var_51c441a4 = entity.e_grapplee;
   grapple_end playSound(#"zmb_grapple_pull");
   thread function_9d1a26f1(entity, entity ai::function_9139c839().var_23426e9a * entity ai::function_9139c839().var_23426e9a, level.players);
@@ -1152,7 +1152,7 @@ function_96f5d05a(entity, var_4c0587b) {
 
   if(!isDefined(var_51c441a4) && isDefined(entity.e_grapplee)) {
     n_time = distance(grapple_end.origin, grapple_end.return_pos) / entity ai::function_9139c839().var_4a5ffac;
-    grapple_end moveto(grapple_end.return_pos, n_time, 0, 0);
+    grapple_end moveTo(grapple_end.return_pos, n_time, 0, 0);
     grapple_end waittill(#"movedone");
   }
 
@@ -1187,7 +1187,7 @@ function_28dddd64(entity) {
 
   if(zombie_utility::is_player_valid(entity.var_bef7624d, 1, 1, 0)) {
     dir = entity.var_bef7624d zm_grappler::grapple_point() - entity zm_grappler::grapple_point();
-    dir_norm = vectornormalize(dir);
+    dir_norm = vectorNormalize(dir);
 
     if(vectordot(dir_norm, anglesToForward(entity.angles)) < entity ai::function_9139c839().var_b2656f44) {
       dir_norm = anglesToForward(entity.angles);
@@ -1338,11 +1338,11 @@ grapple_entity(prone_2_run_roll, var_a424c06a, e_grapplee) {
 
   var_a424c06a.return_pos = var_148b92ae;
   var_ca015b6f = util::spawn_model("tag_origin", e_grapplee.origin, e_grapplee.angles);
-  var_ca015b6f linkto(var_a424c06a, "tag_origin", (0, 0, 35) * -1);
+  var_ca015b6f linkTo(var_a424c06a, "tag_origin", (0, 0, 35) * -1);
   e_grapplee.var_ca015b6f = var_ca015b6f;
 
   if(isPlayer(e_grapplee)) {
-    e_grapplee playerlinkto(var_ca015b6f, "tag_origin", 1, 40, 40, 80, 15);
+    e_grapplee playerlinkTo(var_ca015b6f, "tag_origin", 1, 40, 40, 80, 15);
 
     recordstar(var_148b92ae, (1, 0, 0));
     recordstar(e_grapplee getEye(), (0, 0, 1));
@@ -1355,7 +1355,7 @@ grapple_entity(prone_2_run_roll, var_a424c06a, e_grapplee) {
     e_grapplee allowprone(0);
     e_grapplee function_babdb8e7();
   } else {
-    e_grapplee linkto(var_a424c06a);
+    e_grapplee linkTo(var_a424c06a);
   }
 
   if(isDefined(prone_2_run_roll) && isDefined(e_grapplee) && isPlayer(e_grapplee)) {
@@ -1409,13 +1409,13 @@ function_c526065b(entity, var_e0ef3075) {
     }
 
     if(isPlayer(grapplee)) {
-      grapplee setorigin(droppoint);
+      grapplee setOrigin(droppoint);
     } else {
       grapplee forceteleport(droppoint);
     }
   } else if(isPlayer(grapplee)) {
     if(isDefined(grapplee.last_valid_position)) {
-      grapplee setorigin(grapplee.last_valid_position);
+      grapplee setOrigin(grapplee.last_valid_position);
     }
   }
 
@@ -1566,8 +1566,8 @@ function private function_62b3b7a3(entity) {
       grapplee.var_ca015b6f unlink();
       var_938dbbaa = vectortoangles(entity.origin - grapplee.var_ca015b6f.origin);
       var_7e28b231 = entity gettagangles("tag_tongue");
-      grapplee.var_ca015b6f linkto(entity, "tag_tongue", (0, 0, 35) * -1, (var_7e28b231[0] * -1, var_938dbbaa[1] - var_7e28b231[1], var_7e28b231[2] * -1));
-      grapplee setplayercollision(1);
+      grapplee.var_ca015b6f linkTo(entity, "tag_tongue", (0, 0, 35) * -1, (var_7e28b231[0] * -1, var_938dbbaa[1] - var_7e28b231[1], var_7e28b231[2] * -1));
+      grapplee setPlayerCollision(1);
     } else {
       function_c526065b(entity);
     }
@@ -1721,7 +1721,7 @@ function_bb6aa70c(entity) {
 function_7fe36aac(entity, minplayerdist) {
   playerpositions = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(playerpositions)) {
       playerpositions = [];
     } else if(!isarray(playerpositions)) {
@@ -1904,14 +1904,14 @@ function_7055b26(entity) {
 function_b57f31b6(player) {
   if(isDefined(level.var_3e10516a) && level.var_3e10516a) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_1fa0254afe1fa66");
+      self setHintString(#"hash_1fa0254afe1fa66");
     } else {
-      self sethintstring(#"hash_3aa47b7b8258ebd2");
+      self setHintString(#"hash_3aa47b7b8258ebd2");
     }
   } else if(function_8b1a219a()) {
-    self sethintstring(#"hash_76208e521ab783c1", 500);
+    self setHintString(#"hash_76208e521ab783c1", 500);
   } else {
-    self sethintstring(#"hash_5ef6d21d81a0250b", 500);
+    self setHintString(#"hash_5ef6d21d81a0250b", 500);
   }
 
   return zm_lockdown_util::function_b5dd9241(self.stub);
@@ -2129,9 +2129,9 @@ function_19249d10(entity) {
   }
 
   forward = anglesToForward(entity.angles);
-  forward2d = vectornormalize((forward[0], forward[1], 0));
+  forward2d = vectorNormalize((forward[0], forward[1], 0));
   dirtotarget = entity.favoriteenemy.origin - entity.origin;
-  dirtotarget2d = vectornormalize((dirtotarget[0], dirtotarget[1], 0));
+  dirtotarget2d = vectorNormalize((dirtotarget[0], dirtotarget[1], 0));
   dot = vectordot(forward2d, dirtotarget2d);
 
   if(dot < entity ai::function_9139c839().var_aa503e5a) {
@@ -2230,7 +2230,7 @@ blightfatherlaunchchaosmissile(var_f794172e, var_61622673, var_f3486358) {
 
   var_a9494306.origin = var_892397fd.origin;
   var_a9494306.angles = var_892397fd.angles;
-  var_a9494306 linkto(var_892397fd, "tag_origin");
+  var_a9494306 linkTo(var_892397fd, "tag_origin");
   var_892397fd.trigger = var_a9494306;
   var_892397fd thread function_b2be1340(self ai::function_9139c839().var_a2519bb8);
   var_892397fd thread function_ebd22bba();
@@ -2245,7 +2245,7 @@ blightfatherlaunchchaosmissile(var_f794172e, var_61622673, var_f3486358) {
   var_892397fd.missile_target = var_f794172e;
   var_892397fd thread function_5f3390fd(var_61622673, 40);
   var_892397fd playLoopSound(#"hash_5b21b7c645692f8", 0.1);
-  var_892397fd moveto(self gettagorigin(var_f3486358) + var_61622673, self ai::function_9139c839().var_20c6e4ca);
+  var_892397fd moveTo(self gettagorigin(var_f3486358) + var_61622673, self ai::function_9139c839().var_20c6e4ca);
   var_eb325a79 = self ai::function_9139c839().var_9e5ebf3c;
   var_b446b077 = self ai::function_9139c839().var_94fefe66;
   var_3fa92868 = self ai::function_9139c839().var_52bddd4;
@@ -2254,7 +2254,7 @@ blightfatherlaunchchaosmissile(var_f794172e, var_61622673, var_f3486358) {
   while(isDefined(var_892397fd)) {
     if(!zombie_utility::is_player_valid(var_892397fd.missile_target, 1)) {
       var_892397fd.missile_target = undefined;
-      players = getplayers();
+      players = getPlayers();
       players = arraysortclosest(players, var_892397fd.origin);
 
       foreach(player in players) {
@@ -2299,7 +2299,7 @@ function_b2be1340(starting_health) {
 
 function_581a06c7(forward_dir, var_ced3ec54, var_27e1ee12, max_angle) {
   vec_to_enemy = var_27e1ee12 - var_ced3ec54;
-  vec_to_enemy_normal = vectornormalize(vec_to_enemy);
+  vec_to_enemy_normal = vectorNormalize(vec_to_enemy);
   angle_to_enemy = vectordot(forward_dir, vec_to_enemy_normal);
 
   if(angle_to_enemy >= max_angle) {
@@ -2318,7 +2318,7 @@ function_5f3390fd(var_61622673, var_4fee43d4) {
 
   while(isDefined(var_892397fd)) {
     player_origins = [];
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player_origins)) {
@@ -2355,7 +2355,7 @@ function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
     }
 
     vector_to_target = var_6d0a510 - self.origin;
-    normal_vector = vectornormalize(vector_to_target);
+    normal_vector = vectorNormalize(vector_to_target);
     dot = vectordot(normal_vector, self.var_209ff2fa);
 
     if(dot >= 1) {
@@ -2383,7 +2383,7 @@ function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
 
     new_vector *= ratio;
     new_vector += self.var_209ff2fa;
-    normal_vector = vectornormalize(new_vector);
+    normal_vector = vectorNormalize(new_vector);
   } else {
     normal_vector = self.var_209ff2fa;
   }
@@ -2403,7 +2403,7 @@ function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   }
 
   self.var_209ff2fa = normal_vector;
-  self moveto(move_to_point, var_eb325a79);
+  self moveTo(move_to_point, var_eb325a79);
 }
 
 function_124486ee(delay) {
@@ -2424,7 +2424,7 @@ function_124486ee(delay) {
 
   if(isDefined(var_892397fd)) {
     var_892397fd notify(#"detonated");
-    var_892397fd moveto(var_892397fd.origin, 0.05);
+    var_892397fd moveTo(var_892397fd.origin, 0.05);
     var_892397fd clientfield::set("blight_father_chaos_missile_explosion_clientfield", 1);
     e_blightfather = var_892397fd.var_52334e8c;
     w_weapon = getweapon(#"none");
@@ -2438,7 +2438,7 @@ function_124486ee(delay) {
     }
 
     util::wait_network_frame();
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       player.var_c29c44ca = player.health;
@@ -2455,7 +2455,7 @@ function_124486ee(delay) {
 }
 
 function_44e3e0d1(var_51a7ab9c) {
-  players = getplayers();
+  players = getPlayers();
   v_length = 100 * 100;
 
   for(i = 0; i < players.size; i++) {
@@ -2498,7 +2498,7 @@ function_44e3e0d1(var_51a7ab9c) {
     if(n_distance < v_length) {
       v_dir = player.origin - var_51a7ab9c;
       v_dir = (v_dir[0], v_dir[1], 0.1);
-      v_dir = vectornormalize(v_dir);
+      v_dir = vectorNormalize(v_dir);
       n_push_strength = getdvarint(#"blightfather_n_push_strength", 500);
       n_push_strength = 200 + randomint(n_push_strength - 200);
       v_player_velocity = player getvelocity();
@@ -2830,7 +2830,7 @@ function_a2751530() {
 }
 
 function_255c7194() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   queryresult = positionquery_source_navigation(player.origin, 128, 256, 128, 20);
 
   if(isDefined(queryresult) && queryresult.data.size > 0) {

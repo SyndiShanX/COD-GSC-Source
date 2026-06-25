@@ -63,19 +63,19 @@ setup_combat() {
 }
 
 begin_combat() {
-  var_0 = getent("clubhouse_breach_light", "targetname");
+  var_0 = getEnt("clubhouse_breach_light", "targetname");
   var_0 setlightintensity(0);
   maps\_utility::disable_trigger_with_targetname("breach_trigger");
-  var_1 = getent("clubhouse_doorhandle2_obj", "targetname");
-  var_2 = getent("clubhouse_doorhandle3_obj", "targetname");
+  var_1 = getEnt("clubhouse_doorhandle2_obj", "targetname");
+  var_2 = getEnt("clubhouse_doorhandle3_obj", "targetname");
   var_1 hide();
   var_2 hide();
-  var_3 = getent("clubhouse_door1a_handle", "targetname");
-  var_4 = getent("clubhouse_door1a", "targetname");
-  var_3 linkto(var_4);
-  var_3 = getent("clubhouse_door1_handle", "targetname");
-  var_4 = getent("clubhouse_door1", "targetname");
-  var_3 linkto(var_4);
+  var_3 = getEnt("clubhouse_door1a_handle", "targetname");
+  var_4 = getEnt("clubhouse_door1a", "targetname");
+  var_3 linkTo(var_4);
+  var_3 = getEnt("clubhouse_door1_handle", "targetname");
+  var_4 = getEnt("clubhouse_door1", "targetname");
+  var_3 linkTo(var_4);
   thread basement_ally_movement();
   thread basement_combat_handlers();
   thread combat_vo();
@@ -281,7 +281,7 @@ stop_externalfx() {
 }
 
 wait_for_player_gas() {
-  var_0 = getent("batting_cage_volume", "script_noteworthy");
+  var_0 = getEnt("batting_cage_volume", "script_noteworthy");
   level.player waittill("teargas_thrown");
   common_scripts\utility::flag_set("tossed_gas");
   var_0 waittill("teargas_exploded");
@@ -290,13 +290,13 @@ wait_for_player_gas() {
 
 handle_gas() {
   thread wait_for_player_gas();
-  var_0 = getent("batting_cage_volume", "script_noteworthy");
+  var_0 = getEnt("batting_cage_volume", "script_noteworthy");
   common_scripts\utility::flag_wait("gassed_out");
   wait 2;
   wait 1;
   common_scripts\utility::exploder(999);
-  var_1 = getent("maintenance_door1", "targetname");
-  var_1 rotateyaw(-90, 1.0, 0.1, 0.75);
+  var_1 = getEnt("maintenance_door1", "targetname");
+  var_1 rotateYaw(-90, 1.0, 0.1, 0.75);
   var_1 connectpaths();
   stop_externalfx();
   common_scripts\utility::exploder(308);
@@ -321,17 +321,17 @@ handle_gas() {
   thread maps\enemyhq_code::set_flag_on_killcount(var_3, var_3.size - 2, "gas_flee_guys");
   thread maps\enemyhq_code::set_flag_on_killcount(var_3, var_3.size, "gas_guys_dead");
   level.dog maps\enemyhq_code::unlock_player_control();
-  var_1 = getent("maintenance_roll_door1", "targetname");
-  var_7 = getent("teargas_door_clip", "targetname");
-  var_8 = getent("teargas_door_clip_ai", "targetname");
-  var_9 = common_scripts\utility::getstruct("battingcage_gas", "targetname");
+  var_1 = getEnt("maintenance_roll_door1", "targetname");
+  var_7 = getEnt("teargas_door_clip", "targetname");
+  var_8 = getEnt("teargas_door_clip_ai", "targetname");
+  var_9 = common_scripts\utility::getStruct("battingcage_gas", "targetname");
   var_10 = maps\_utility::spawn_anim_model("teargas_door_prop");
   var_9 thread maps\_anim::anim_first_frame_solo(var_10, "teargas_dooropen");
   wait 0.05;
-  var_1 linkto(var_10, "J_prop_2");
+  var_1 linkTo(var_10, "J_prop_2");
   level.allies[1].animname = "generic";
   var_1 notsolid();
-  var_7 linkto(var_1);
+  var_7 linkTo(var_1);
   var_9 thread maps\_anim::anim_single([level.allies[1], var_10], "teargas_dooropen");
   var_10 waittillmatch("single anim", "end");
   var_1 unlink();
@@ -356,23 +356,23 @@ handle_gas() {
 keegan_throw_gas() {
   var_0 = getnode("battingcage_gas_node", "targetname");
   level.allies[1].oldgoalradius = level.allies[1].goalradius;
-  level.allies[1] maps\_utility::set_goalradius(20);
+  level.allies[1] maps\_utility::set_goalRadius(20);
   level.allies[1] setgoalnode(var_0);
   level.allies[1] waittill("goal");
-  level.allies[1] maps\_utility::set_goalradius(level.allies[1].oldgoalradius);
+  level.allies[1] maps\_utility::set_goalRadius(level.allies[1].oldgoalradius);
   common_scripts\utility::flag_set("keegan_at_gas_door");
   common_scripts\utility::flag_wait_any("tossed_gas", "ready_to_throw");
   var_1 = maps\_utility::spawn_anim_model("clubhouse_grenade");
   var_2 = maps\_utility::spawn_anim_model("teargas_grenade_prop");
-  var_1 linkto(var_2, "J_prop_1");
-  var_3 = common_scripts\utility::getstruct("battingcage_gas", "targetname");
+  var_1 linkTo(var_2, "J_prop_1");
+  var_3 = common_scripts\utility::getStruct("battingcage_gas", "targetname");
   level.allies[1].animname = "generic";
   var_3 thread maps\_anim::anim_single([level.allies[1], var_2], "teargas_initiate");
   thread breach_grenade_smoke(var_1, 1.6);
   wait 3.6;
-  var_3 = common_scripts\utility::getstruct("cage_door_gas_targ", "targetname");
+  var_3 = common_scripts\utility::getStruct("cage_door_gas_targ", "targetname");
   var_4 = var_3.origin;
-  var_3 = common_scripts\utility::getstruct("cage_door_gas_org", "targetname");
+  var_3 = common_scripts\utility::getStruct("cage_door_gas_org", "targetname");
   var_5 = var_3.origin;
   var_6 = magicgrenade("teargas_grenade", var_5, var_4, 1.5, 1);
   var_6 thread maps\_teargas::track_teargas();
@@ -399,8 +399,8 @@ gas_flee_guys() {
 }
 
 battingcage_door_peek() {
-  var_0 = getent("basement_door1", "targetname");
-  var_0 rotateyaw(20, 2.5, 0.1, 0.75);
+  var_0 = getEnt("basement_door1", "targetname");
+  var_0 rotateYaw(20, 2.5, 0.1, 0.75);
 }
 
 merrick_shoots_first_guy(var_0) {
@@ -420,9 +420,9 @@ cage_guys3() {
   common_scripts\utility::flag_wait("cage_guys3");
   var_0 = maps\enemyhq_code::array_spawn_targetname_allow_fail("cage_guys3");
   wait 1;
-  var_1 = common_scripts\utility::getstruct("battingcage_gas_origin", "targetname");
+  var_1 = common_scripts\utility::getStruct("battingcage_gas_origin", "targetname");
   var_2 = var_1.origin;
-  var_1 = common_scripts\utility::getstruct("battingcage_gas_target", "targetname");
+  var_1 = common_scripts\utility::getStruct("battingcage_gas_target", "targetname");
   var_3 = var_1.origin;
   var_4 = magicgrenade("teargas_grenade", var_2, var_3, 0.5, 1);
   var_4 thread maps\_teargas::track_teargas();
@@ -451,8 +451,8 @@ monitor_teargas_lookat(var_0, var_1) {
 }
 
 cage_fake_firing(var_0) {
-  var_1 = getent("battingcage_shoot_from", "targetname");
-  var_2 = getent("battingcage_shoot_at", "targetname");
+  var_1 = getEnt("battingcage_shoot_from", "targetname");
+  var_2 = getEnt("battingcage_shoot_at", "targetname");
 
   while(!common_scripts\utility::flag(var_0)) {
     var_3 = randomintrange(30, 120);
@@ -496,7 +496,7 @@ teargas_hot_vo() {
   if(!common_scripts\utility::flag("gassed_out")) {
     maps\enemyhq_code::radio_dialog_add_and_go("enemyhq_mrk_adamgasem");
     wait 0.5;
-    var_0 = getent("enemy_yell_loc", "targetname");
+    var_0 = getEnt("enemy_yell_loc", "targetname");
     var_0 playSound("enemyhq_pmc3_weareunderattack");
   }
 }
@@ -537,7 +537,7 @@ dog_scratch_scene() {
   level.dog maps\enemyhq_code::lock_player_control();
   level.dog maps\enemyhq_code::set_dog_scripted_mode(level.player);
   wait 0.05;
-  var_0 = common_scripts\utility::getstruct("dog_at_door", "targetname");
+  var_0 = common_scripts\utility::getStruct("dog_at_door", "targetname");
   maps\enemyhq_code::safe_activate_trigger_with_targetname("clubhouse1");
   level.dog maps\_utility::delaythread(0.5, maps\_utility::set_goalradius, 30);
   var_0 maps\_anim::anim_reach_solo(level.dog, "found_door");
@@ -576,7 +576,7 @@ spawn_animate_and_get_shot(var_0, var_1, var_2, var_3) {
   var_6 = undefined;
 
   if(isDefined(self.target)) {
-    var_6 = common_scripts\utility::getstruct(self.target, "targetname");
+    var_6 = common_scripts\utility::getStruct(self.target, "targetname");
   }
 
   var_7 = maps\_utility::spawn_ai();
@@ -633,7 +633,7 @@ media_guys() {
 }
 
 cqb_time() {
-  var_0 = getent("start_cqb", "targetname");
+  var_0 = getEnt("start_cqb", "targetname");
 
   while(!common_scripts\utility::flag("breach_setup1_ready")) {
     var_0 waittill("trigger", var_1);
@@ -650,12 +650,12 @@ dog_ambush() {
 }
 
 glowstick_scene() {
-  var_0 = common_scripts\utility::getstruct("light_glowstick", "targetname");
+  var_0 = common_scripts\utility::getStruct("light_glowstick", "targetname");
   common_scripts\utility::flag_wait("breach_setup1_ready");
   maps\enemyhq_code::safe_activate_trigger_with_targetname("ch_door_positions1");
   var_1 = maps\_utility::spawn_anim_model("glowstick_prop", var_0.origin);
   var_2 = maps\_utility::spawn_anim_model("glowstick", var_0.origin);
-  var_2 linkto(var_1, "J_prop_1");
+  var_2 linkTo(var_1, "J_prop_1");
   var_3 = level.allies[1];
   var_3.animname = "keegan";
   var_4 = maps\_utility::make_array(var_3, var_1);
@@ -667,10 +667,10 @@ glowstick_scene() {
     wait 0.05;
   }
 
-  var_3 maps\_utility::anim_stopanimscripted();
-  var_1 maps\_utility::anim_stopanimscripted();
+  var_3 maps\_utility::anim_stopanimScripted();
+  var_1 maps\_utility::anim_stopanimScripted();
   var_1 unlink();
-  var_1 linkto(var_3, "TAG_STOWED_BACK", (12, 0, 0), (0, 90, 0));
+  var_1 linkTo(var_3, "TAG_STOWED_BACK", (12, 0, 0), (0, 90, 0));
   var_3 maps\_utility::enable_ai_color();
   common_scripts\utility::flag_set("basement_combat_done");
 }
@@ -678,7 +678,7 @@ glowstick_scene() {
 handle_glowstick(var_0) {
   var_1 = maps\_utility::spawn_anim_model("glowstick", (0, 0, 0));
   wait 3;
-  var_1 linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["glowstick"], var_0, "tag_inhand");
   common_scripts\utility::flag_wait("drop_flare");
   var_1 unlink();
@@ -687,10 +687,10 @@ handle_glowstick(var_0) {
 }
 
 handle_pickup_flare() {
-  level.rubble_flare = getent("keegan_flare", "targetname");
+  level.rubble_flare = getEnt("keegan_flare", "targetname");
   playFXOnTag(level._effect["vfx_handflare_ehq_lit"], level.rubble_flare, "tag_fire_fx");
   common_scripts\utility::flag_wait("pickup_flare");
-  level.rubble_flare linkto(level.allies[1], "tag_inhand", (0, 0, 0), (0, 0, 0));
+  level.rubble_flare linkTo(level.allies[1], "tag_inhand", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_wait("drop_flare");
   level.rubble_flare unlink();
 }
@@ -711,13 +711,13 @@ handle_flare_slow() {
 }
 
 turn_off_player_clip(var_0) {
-  var_1 = getent("flare_blocker", "targetname");
+  var_1 = getEnt("flare_blocker", "targetname");
   wait(2.88 / var_0);
   var_1 notsolid();
 }
 
 new_glowstick_scene() {
-  var_0 = common_scripts\utility::getstruct("club_traverse", "targetname");
+  var_0 = common_scripts\utility::getStruct("club_traverse", "targetname");
   thread handle_flare_slow();
   common_scripts\utility::flag_wait("breach_setup1_ready");
   thread maps\enemyhq_audio::aud_music("lookfordoor");
@@ -829,8 +829,8 @@ setup_clubhouse() {
 
 begin_clubhouse() {
   maps\_utility::disable_trigger_with_targetname("breach_trigger");
-  var_0 = getent("clubhouse_doorhandle2_obj", "targetname");
-  var_1 = getent("clubhouse_doorhandle3_obj", "targetname");
+  var_0 = getEnt("clubhouse_doorhandle2_obj", "targetname");
+  var_1 = getEnt("clubhouse_doorhandle3_obj", "targetname");
   var_0 hide();
   var_1 hide();
   common_scripts\utility::flag_wait("clubhouse_ready");
@@ -842,7 +842,7 @@ begin_clubhouse() {
 }
 
 spawn_bishop(var_0) {
-  var_1 = getent("bishop", "targetname");
+  var_1 = getEnt("bishop", "targetname");
   var_2 = var_1 maps\_utility::spawn_ai(1);
   var_2 maps\_utility::gun_remove();
   var_2 maps\_utility::magic_bullet_shield();
@@ -850,32 +850,32 @@ spawn_bishop(var_0) {
   var_2 maps\_utility::disable_pain();
   var_2.animname = "bishop";
   level.bishop = var_2;
-  var_3 = common_scripts\utility::getstruct("hvt_find_struct", "targetname");
+  var_3 = common_scripts\utility::getStruct("hvt_find_struct", "targetname");
 
   if(var_0) {
-    var_3 = common_scripts\utility::getstruct("hvt_find_struct", "targetname");
+    var_3 = common_scripts\utility::getStruct("hvt_find_struct", "targetname");
     var_3 thread maps\_anim::anim_first_frame_solo(level.bishop, "find_bishop");
   }
 
   level.flashlight_prop = maps\_utility::spawn_anim_model("bishop_flashlight_prop", var_3.origin);
   level.ajax_flare = maps\_utility::spawn_anim_model("ajax_flare", var_3.origin);
-  level.ajax_flare linkto(level.flashlight_prop, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  level.ajax_flare linkTo(level.flashlight_prop, "J_prop_2", (0, 0, 0), (0, 0, 0));
   level.ajax_flare hide();
   level.flashlight = maps\_utility::spawn_anim_model("flashlight");
-  level.flashlight linkto(level.flashlight_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  level.flashlight linkTo(level.flashlight_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
   level.flashlight hide();
   level.stool_prop = maps\_utility::spawn_anim_model("bishop_chair_prop", var_3.origin);
   var_3 maps\_anim::anim_first_frame_solo(level.stool_prop, "find_bishop");
-  var_4 = getent("bishop_chair_clip", "targetname");
-  var_5 = getent("bishop_chair", "targetname");
+  var_4 = getEnt("bishop_chair_clip", "targetname");
+  var_5 = getEnt("bishop_chair", "targetname");
   level.bishop_stool = var_5;
-  var_4 linkto(var_5);
-  var_5 linkto(level.stool_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
-  var_4 = getent("ajax_chair2_clip", "targetname");
-  var_5 = getent("ajax_chair2", "targetname");
+  var_4 linkTo(var_5);
+  var_5 linkTo(level.stool_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  var_4 = getEnt("ajax_chair2_clip", "targetname");
+  var_5 = getEnt("ajax_chair2", "targetname");
   level.bishop_chair = var_5;
-  var_4 linkto(var_5);
-  var_5 linkto(level.stool_prop, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_5);
+  var_5 linkTo(level.stool_prop, "J_prop_2", (0, 0, 0), (0, 0, 0));
   level.bishop_mask = maps\_utility::spawn_anim_model("bishop_mask", var_3.origin);
   var_3 maps\_anim::anim_first_frame_solo(level.bishop_mask, "find_bishop");
 }
@@ -894,14 +894,14 @@ get_base_weapon_name(var_0) {
 
 clubhouse_breach() {
   level.allies[1] maps\_utility::disable_surprise();
-  var_0 = getent("clubhouse_door2", "targetname");
-  var_1 = getent("clubhouse_door3", "targetname");
-  var_2 = getent("clubhouse_doorhandle2", "targetname");
-  var_3 = getent("clubhouse_doorhandle3", "targetname");
-  var_2 linkto(var_0);
-  var_3 linkto(var_1);
-  var_4 = getent("clubhouse_doorhandle2_obj", "targetname");
-  var_5 = getent("clubhouse_doorhandle3_obj", "targetname");
+  var_0 = getEnt("clubhouse_door2", "targetname");
+  var_1 = getEnt("clubhouse_door3", "targetname");
+  var_2 = getEnt("clubhouse_doorhandle2", "targetname");
+  var_3 = getEnt("clubhouse_doorhandle3", "targetname");
+  var_2 linkTo(var_0);
+  var_3 linkTo(var_1);
+  var_4 = getEnt("clubhouse_doorhandle2_obj", "targetname");
+  var_5 = getEnt("clubhouse_doorhandle3_obj", "targetname");
   var_4 show();
   var_5 show();
   var_2 hide();
@@ -973,16 +973,16 @@ breach_end_early() {
 ally_breach_gas() {
   wait 2.0;
   common_scripts\utility::array_thread(level.allies, maps\_utility::set_ignoreall, 1);
-  var_0 = getent("clubhouse_door1", "targetname");
-  var_0 rotateyaw(20, 0.5, 0.1, 0.1);
+  var_0 = getEnt("clubhouse_door1", "targetname");
+  var_0 rotateYaw(20, 0.5, 0.1, 0.1);
   wait 0.5;
-  var_1 = common_scripts\utility::getstruct("clubhouse_ally_gas_targ", "targetname");
+  var_1 = common_scripts\utility::getStruct("clubhouse_ally_gas_targ", "targetname");
   var_2 = var_1.origin;
-  var_1 = common_scripts\utility::getstruct("clubhouse_ally_gas_start", "targetname");
+  var_1 = common_scripts\utility::getStruct("clubhouse_ally_gas_start", "targetname");
   var_3 = var_1.origin;
   var_4 = magicgrenade("teargas_grenade", var_3, var_2, 1.5, 1);
   wait 1.5;
-  var_0 rotateyaw(-20, 0.25, 0.1, 0.1);
+  var_0 rotateYaw(-20, 0.25, 0.1, 0.1);
   wait 0.25;
   common_scripts\utility::array_thread(level.allies, maps\_utility::set_ignoreall, 0);
 }
@@ -1011,13 +1011,13 @@ pre_breach_guys() {
 
 far_allies_breach() {
   thread ch_dog_breach();
-  var_0 = getent("clubhouse_door1", "targetname");
-  var_0 rotateyaw(92, 0.2, 0.1, 0.1);
+  var_0 = getEnt("clubhouse_door1", "targetname");
+  var_0 rotateYaw(92, 0.2, 0.1, 0.1);
   var_0 connectpaths();
-  var_1 = getent("clubhouse_door1a", "targetname");
-  var_1 rotateyaw(-95, 0.2, 0.1, 0.1);
+  var_1 = getEnt("clubhouse_door1a", "targetname");
+  var_1 rotateYaw(-95, 0.2, 0.1, 0.1);
   var_1 connectpaths();
-  var_2 = common_scripts\utility::getstruct("breach_struct", "targetname");
+  var_2 = common_scripts\utility::getStruct("breach_struct", "targetname");
   level.allies[0].animname = "ally1";
   level.allies[2].animname = "ally3";
   var_2 thread maps\_anim::anim_single([level.allies[0], level.allies[2]], "ch_breach");
@@ -1059,15 +1059,15 @@ ch_vo() {
 
 enemy_breach_vo() {
   common_scripts\utility::flag_wait("enemies_surprised");
-  var_0 = getent("enemy_vo_struct2", "targetname");
+  var_0 = getEnt("enemy_vo_struct2", "targetname");
   var_0 playSound("enemyhq_fs5_whatwasthat", "done");
   var_0 waittill("done");
   var_0 playSound("enemyhq_pmc3_teargastapersoffinto", "done");
 }
 
 ch_dog_breach() {
-  var_0 = common_scripts\utility::getstruct("breach_struct3", "targetname");
-  var_1 = getent("CH_dog_guy", "targetname");
+  var_0 = common_scripts\utility::getStruct("breach_struct3", "targetname");
+  var_1 = getEnt("CH_dog_guy", "targetname");
   var_2 = var_1 maps\_utility::spawn_ai(1);
   var_2.animname = "generic";
   var_2 maps\_utility::gun_remove();
@@ -1088,13 +1088,13 @@ near_allies_breach() {
   var_0 = getnode("keegan_breach_node2", "targetname");
   level.allies[1] maps\_utility::teleport_ai(var_0);
   wait 0.5;
-  var_1 = common_scripts\utility::getstruct("breach_struct2", "targetname");
+  var_1 = common_scripts\utility::getStruct("breach_struct2", "targetname");
   level.allies[1].animname = "ally2";
   var_1 thread maps\_anim::anim_single([level.allies[1]], "ch_breach");
 }
 
 kick_breach_anim(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_2 = maps\_utility::spawn_anim_model("clubhouse_doors");
   level.breach_player_rig = maps\_utility::spawn_anim_model("player_rig");
   level.breach_player_rig hide();
@@ -1104,10 +1104,10 @@ kick_breach_anim(var_0) {
   level.breach_grenade hide();
   var_3 = [level.breach_player_rig, level.breach_player_legs, var_2, level.breach_grenade];
   var_1 maps\_anim::anim_first_frame(var_3, "ch_breach");
-  var_4 = getent("clubhouse_door2", "targetname");
-  var_5 = getent("clubhouse_door3", "targetname");
-  var_4 linkto(var_2, "J_prop_1");
-  var_5 linkto(var_2, "J_prop_2");
+  var_4 = getEnt("clubhouse_door2", "targetname");
+  var_5 = getEnt("clubhouse_door3", "targetname");
+  var_4 linkTo(var_2, "J_prop_1");
+  var_5 linkTo(var_2, "J_prop_2");
   level.player playerlinktoblend(level.breach_player_rig, "tag_player", 0.4, 0.2, 0.2);
   var_6 = 0.4;
   wait(var_6);
@@ -1128,15 +1128,15 @@ kick_breach_anim(var_0) {
 }
 
 keegan_breach_anim() {
-  var_0 = common_scripts\utility::getstruct("club_traverse", "targetname");
-  var_1 = common_scripts\utility::getstruct("breach_struct_player", "targetname");
+  var_0 = common_scripts\utility::getStruct("club_traverse", "targetname");
+  var_1 = common_scripts\utility::getStruct("breach_struct_player", "targetname");
   var_2 = maps\_utility::spawn_anim_model("ch_breach_gun_l");
   var_3 = maps\_utility::spawn_anim_model("ch_breach_gun_r");
   var_4 = level.allies[1];
   level.keegan_gun_l = var_2;
   level.keegan_gun_r = var_3;
-  var_3 linkto(var_4, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
-  var_2 linkto(var_4, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_4, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_4, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   var_2 hide();
   var_3 hide();
   var_5 = [var_4];
@@ -1165,7 +1165,7 @@ keegan_breach_enemies() {
 
   for(var_1 = 1; var_1 <= level.keegan_shoot_guys; var_1++) {
     var_2 = var_0 + maps\_utility::string(var_1);
-    var_3 = getent(var_2, "targetname");
+    var_3 = getEnt(var_2, "targetname");
     var_4 = var_3 spawn_animate_and_get_shot(256, 5, 1);
     level.keegan_breach_guys[level.keegan_breach_guys.size] = var_4;
   }
@@ -1240,7 +1240,7 @@ new_hvt_find() {
   maps\_utility::stop_exploder(306);
   maps\_utility::stop_exploder(307);
   thread hvt_dog_bark();
-  var_0 = common_scripts\utility::getstruct("hvt_find_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("hvt_find_struct", "targetname");
   var_1 = level.bishop;
   thread start_hvt_scene(var_0);
   thread hvt_dog_bishop_anims(var_0);
@@ -1301,7 +1301,7 @@ animate_chairs(var_0) {
 }
 
 unclip(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   wait(var_1);
   var_2 notsolid();
 }
@@ -1332,7 +1332,7 @@ hvt_dog_bark() {
 }
 
 breach_gun_up(var_0) {
-  level.player playerlinkto(level.breach_player_rig, "tag_player", 1, 70, 70, 70, 70);
+  level.player playerlinkTo(level.breach_player_rig, "tag_player", 1, 70, 70, 70, 70);
   level.player enableweapons();
 }
 
@@ -1352,12 +1352,12 @@ setup_hvt_test() {
 }
 
 begin_hvt_test() {
-  var_0 = getent("bishop", "targetname");
+  var_0 = getEnt("bishop", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai(1);
   var_1 maps\_utility::gun_remove();
   var_1.animname = "bishop";
   level.bishop = var_1;
-  var_2 = common_scripts\utility::getstruct("new_hvt_find_struct", "targetname");
+  var_2 = common_scripts\utility::getStruct("new_hvt_find_struct", "targetname");
   var_2 maps\_anim::anim_first_frame_solo(level.bishop, "find_bishop");
   common_scripts\utility::flag_wait("hvt_done");
 }

@@ -42,7 +42,7 @@ playerbashmonitorcoremp() {
 
 isfacingwallmp(var_0) {
   var_1 = undefined;
-  var_2 = vectornormalize(var_0._id_109BB - self getEye());
+  var_2 = vectorNormalize(var_0._id_109BB - self getEye());
   var_3 = scripts\engine\utility::_id_5CDB(anglesToForward(self.angles));
   var_4 = vectordot(var_3, scripts\engine\utility::_id_5CDB(var_2));
 
@@ -73,7 +73,7 @@ isplayerdashingmp() {
 }
 
 dealdamagemp(var_0) {
-  var_0 playrumbleonentity("heavy_2s");
+  var_0 playRumbleOnEntity("heavy_2s");
   var_0 earthquakeforplayer(0.65, 0.6, var_0.origin, 200);
   self setscriptablepartstate("main_part", "no_more_collmap");
   var_0 notify("wall_break");

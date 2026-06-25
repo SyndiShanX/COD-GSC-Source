@@ -123,7 +123,7 @@ spawn_next_weapon(var_0, var_1, var_2) {
 rotate_weapon_model() {
   self endon("death");
   for(;;) {
-    self rotateyaw(360, 2);
+    self rotateYaw(360, 2);
     wait(2);
   }
 }
@@ -278,7 +278,7 @@ escape_game_logic() {
       wait(var_4);
     }
 
-    var_9 = getent(var_8, "script_noteworthy");
+    var_9 = getEnt(var_8, "script_noteworthy");
     var_10 = make_waypoint_to_door(var_9);
     scripts\engine\utility::flag_wait("score goal reached");
     var_5 = var_8;
@@ -297,7 +297,7 @@ enable_escape_exit_interaction() {
   make_waypoint_on_escape_exit(var_1);
   var_2 = spawn("script_origin", var_1.origin);
   var_2 makeusable();
-  var_2 sethintstring(&"CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK");
+  var_2 setHintString(&"CP_ZMB_INTERACTIONS_ESCAPE_THE_PARK");
   var_2 thread wait_for_escape_exit(var_1);
 }
 
@@ -363,7 +363,7 @@ make_waypoint_to_door(var_0) {
     if(var_4.script_noteworthy == "waypoint_spot") {
       var_5 = spawn("script_origin", var_4.origin);
       scripts\engine\utility::waitframe();
-      var_1 settargetent(var_5);
+      var_1 settargetEnt(var_5);
       return var_1;
     }
   }
@@ -375,7 +375,7 @@ make_waypoint_on_escape_exit(var_0) {
   var_2 setshader("waypoint_blitz_goal", 8, 8);
   var_2 setwaypoint(1, 1);
   var_3 = spawn("script_origin", var_0.origin + var_1);
-  var_2 settargetent(var_3);
+  var_2 settargetEnt(var_3);
 }
 
 open_current_door(var_0) {
@@ -396,7 +396,7 @@ open_current_door(var_0) {
     var_6 setclientomnvar("zombie_wave_number", level.var_76EC);
   }
 
-  level.current_exit_path = getent(var_0.script_noteworthy + "_exit_path", "script_noteworthy");
+  level.current_exit_path = getEnt(var_0.script_noteworthy + "_exit_path", "script_noteworthy");
   if(isDefined(level.current_exit_path)) {
     level.current_exit_path show();
     level.current_exit_path notsolid();
@@ -411,7 +411,7 @@ move_up_and_delete(var_0) {
   self endon("death");
   wait(var_0 * 0.2);
   self movez(10, 0.5);
-  self rotateto(self.angles + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(-10, 10)), 0.5);
+  self rotateTo(self.angles + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(-10, 10)), 0.5);
   wait(0.5);
   self movez(1000, 3, 2, 1);
   wait(2);
@@ -1051,7 +1051,7 @@ player_escape(var_0, var_1) {
   var_2 = "player_after_escape_pos";
   var_1 iprintlnbold("You successfully escaped from the park!");
   var_3 = scripts\engine\utility::getStructArray(var_2, "targetname")[0];
-  var_1 setorigin(var_3.origin);
+  var_1 setOrigin(var_3.origin);
   var_1.successfully_escaped = 1;
   test_win_condition(var_1);
 }

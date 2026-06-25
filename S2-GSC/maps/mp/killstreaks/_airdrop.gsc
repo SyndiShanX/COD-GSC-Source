@@ -51,7 +51,7 @@ func_8620(param_00) {
     return;
   }
 
-  level.var_0B80 = getent(var_01[0].var_01A2, "targetname");
+  level.var_0B80 = getEnt(var_01[0].var_01A2, "targetname");
   foreach(var_03 in var_01) {
     var_03 func_2D30();
   }
@@ -109,7 +109,7 @@ func_90C6(param_00, param_01) {
 }
 
 func_2D43(param_00) {
-  self linkto(param_00, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(param_00, "tag_origin", (0, 0, 0), (0, 0, 0));
   param_00 waittill("death");
   self delete();
 }
@@ -258,13 +258,13 @@ func_27CB(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
   var_09.var_5A2C = spawn("script_model", var_09.var_0116 + (0, 0, -200));
   var_09.var_5A2C setscriptmoverkillcam("missile");
   var_09.var_5A2C method_80B1();
-  var_09.var_5A2C linkto(var_09);
+  var_09.var_5A2C linkTo(var_09);
   return var_09;
 }
 
 func_275B(param_00) {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(param_00);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(param_00);
 }
 
 func_275A(param_00) {
@@ -599,9 +599,9 @@ func_27DF(param_00, param_01) {
 
 func_A213(param_00, param_01) {
   if(isPlayer(param_00)) {
-    param_00 playerlinkto(self);
+    param_00 playerlinkTo(self);
   } else {
-    param_00 linkto(self);
+    param_00 linkTo(self);
   }
 
   param_00 common_scripts\utility::func_0602();

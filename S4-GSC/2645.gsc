@@ -139,7 +139,7 @@ _id_503E(var_0, var_1, var_2) {
   var_3 setentityowner(self);
   var_3 setotherent(self);
   var_3._id_57B8 = spawn("script_model", var_3.origin);
-  var_3._id_57B8 linkto(var_3);
+  var_3._id_57B8 linkTo(var_3);
   var_3._id_57B8 dontinterpolate();
   var_3._id_57B8 setentityowner(self);
   var_3.owner = self;
@@ -444,7 +444,7 @@ _id_1D49(var_0, var_1) {
   var_0 waittill("missile_stuck", var_2);
 
   if(isDefined(var_2)) {
-    var_0 linkto(var_2);
+    var_0 linkTo(var_2);
   }
 
   thread _id_1D44(var_0);

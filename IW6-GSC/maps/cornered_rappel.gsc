@@ -48,10 +48,10 @@ cornered_rappel_pre_load() {
   precachemodel("cnd_garden_glass_entry_baker");
   precachemodel("cnd_garden_glass_entry_player");
   maps\_utility::add_hint_string("rappel_down", &"CORNERED_RAPPEL_DOWN", ::player_combat_rappel_is_jumping);
-  level.copymachine = getent("photocopier", "script_noteworthy");
-  level.grenade_roll_grenade = getent("grenade_roll_grenade", "targetname");
+  level.copymachine = getEnt("photocopier", "script_noteworthy");
+  level.grenade_roll_grenade = getEnt("grenade_roll_grenade", "targetname");
   level.grenade_roll_grenade hide();
-  level.cnd_rappel_railing_obj = getent("cnd_rappel_railing_obj", "targetname");
+  level.cnd_rappel_railing_obj = getEnt("cnd_rappel_railing_obj", "targetname");
   level.cnd_rappel_railing_obj hide();
 }
 
@@ -69,7 +69,7 @@ setup_rappel() {
   thread maps\cornered_audio::aud_check("rappel");
   maps\cornered_code::delete_building_glow();
   thread maps\cornered_code::cleanup_outside_ents_on_entry();
-  var_0 = getent("combat_rappel_fall_volume", "targetname");
+  var_0 = getEnt("combat_rappel_fall_volume", "targetname");
   var_0 thread maps\cornered_code::cornered_falling_death();
   thread maps\cornered_lighting::fireworks_junction_post();
   level.combat_rappel_rope_coil_rorke show();
@@ -105,7 +105,7 @@ rappel_section() {
 
 player_combat_rappel_begin() {
   level.player endon("death");
-  level.player_start_rappel_struct = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
+  level.player_start_rappel_struct = common_scripts\utility::getStruct("player_start_rappel_struct", "targetname");
   level.player_start_rappel_struct thread maps\_anim::anim_first_frame(level.arms_and_legs, "rappel_combat_start");
   level.rappel_max_lateral_dist_right = 300;
   level.rappel_max_lateral_dist_left = 300;
@@ -115,15 +115,15 @@ player_combat_rappel_begin() {
   level.cnd_rappel_railing_obj show();
   level.cnd_rappel_railing_obj maps\_utility::glow();
   level.combat_rappel_rope_coil_player maps\_utility::glow();
-  var_0 = getent("player_rappel_trigger", "targetname");
+  var_0 = getEnt("player_rappel_trigger", "targetname");
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-    var_0 sethintstring(&"CORNERED_EXIT_BUILDING_CONSOLE");
+    var_0 setHintString(&"CORNERED_EXIT_BUILDING_CONSOLE");
   } else {
-    var_0 sethintstring(&"CORNERED_EXIT_BUILDING");
+    var_0 setHintString(&"CORNERED_EXIT_BUILDING");
   }
 
-  var_1 = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("player_start_rappel_struct", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_0, level.player_start_rappel_struct, cos(60), 0, 1);
   common_scripts\utility::flag_set("c_rappel_player_on_rope");
 
@@ -152,7 +152,7 @@ player_combat_rappel_begin() {
   var_2 = maps\_utility::spawn_anim_model("combat_exit_rope");
   level.cnd_rappel_player_rope = maps\_utility::spawn_anim_model("cnd_rappel_player_rope");
   level.cnd_rappel_player_rope hide();
-  level.cnd_rappel_player_rope linkto(var_2, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  level.cnd_rappel_player_rope linkTo(var_2, "j_prop_1", (0, 0, 0), (0, 0, 0));
   maps\cornered_code_rappel::cnd_plyr_rope_set_idle();
   level.player playerlinktoblend(level.cornered_player_arms, "tag_player", 0.6);
   thread maps\cornered_audio::aud_rappel_combat("event");
@@ -160,7 +160,7 @@ player_combat_rappel_begin() {
   level.player_start_rappel_struct thread maps\_anim::anim_single(level.arms_and_legs, "rappel_combat_start");
   level.player_start_rappel_struct thread maps\_anim::anim_single_solo(level.player_exit_to_combat_rappel_rope, "rappel_combat_start");
   level.player_start_rappel_struct thread maps\_anim::anim_first_frame_solo(var_2, "rappel_combat_start");
-  var_3 = getent("combat_rappel_fall_volume", "targetname");
+  var_3 = getEnt("combat_rappel_fall_volume", "targetname");
   var_3 delete();
   wait 0.6;
   level.cornered_player_arms show();
@@ -204,13 +204,13 @@ player_exit_to_combat_rappel_notetrack_handler(var_0) {
       case "camera_look":
         break;
       case "glass_hit_1":
-        level.player playrumbleonentity("light_1s");
+        level.player playRumbleOnEntity("light_1s");
         break;
       case "baker_start":
         common_scripts\utility::flag_set("baker_start_jump");
         break;
       case "glass_hit_2":
-        level.player playrumbleonentity("light_1s");
+        level.player playRumbleOnEntity("light_1s");
         break;
       case "gun_up":
         level.player enableweapons();
@@ -300,7 +300,7 @@ handle_rope_hitting_enemies() {
   for(;;) {
     var_0 = level.cnd_rappel_player_rope gettagorigin("joint9");
     var_1 = level.cnd_rappel_player_rope gettagorigin("joint1");
-    var_2 = vectornormalize(var_1 - var_0);
+    var_2 = vectorNormalize(var_1 - var_0);
     var_3 = var_0 + var_2 * 400;
     var_4 = bulletTrace(var_0, var_3, 1, level.player, 0, 1);
     var_5 = var_4["entity"];
@@ -412,7 +412,7 @@ combat_rappel_garden_entry_ropes(var_0) {
 }
 
 get_tree() {
-  var_0 = common_scripts\utility::getstruct("garden_baker", "targetname");
+  var_0 = common_scripts\utility::getStruct("garden_baker", "targetname");
   var_1 = getEntArray("garden_entry_tree", "targetname");
 
   if(var_1.size == 1) {
@@ -435,7 +435,7 @@ get_tree() {
 }
 
 get_bush() {
-  var_0 = common_scripts\utility::getstruct("garden_baker", "targetname");
+  var_0 = common_scripts\utility::getStruct("garden_baker", "targetname");
   var_1 = getEntArray("garden_entry_bush", "targetname");
 
   if(var_1.size == 1) {
@@ -467,8 +467,8 @@ combat_rappel_garden_entry_tree() {
   var_2 useanimtree(#animtree);
   var_2.animname = "tree";
   var_1.origin = var_0.origin;
-  var_0 linkto(var_2, "j_prop_1");
-  var_1 linkto(var_2, "j_prop_2");
+  var_0 linkTo(var_2, "j_prop_1");
+  var_1 linkTo(var_2, "j_prop_2");
   level.player_start_rappel_struct thread maps\_anim::anim_single_solo(var_2, "cornered_combat_rappel_garden_entry_tree_shake");
 }
 
@@ -478,9 +478,9 @@ combat_rappel_garden_entry_grenades() {
   var_0 useanimtree(#animtree);
   var_0.animname = "grenades";
   var_1 = level.allies[0] magicgrenade((0, 0, 0), (0, 0, 0), 100, 0);
-  var_1 linkto(var_0, "J_prop_1");
+  var_1 linkTo(var_0, "J_prop_1");
   var_2 = level.allies[0] magicgrenade((0, 0, 0), (0, 0, 0), 100, 0);
-  var_2 linkto(var_0, "J_prop_2");
+  var_2 linkTo(var_0, "J_prop_2");
   level.player_start_rappel_struct thread maps\_anim::anim_single_solo(var_0, "cornered_combat_rappel_garden_entry_grenades");
   var_3 = level.allies[level.const_baker];
   var_4 = 0;
@@ -515,7 +515,7 @@ combat_rappel_spawn_garden_entry_enemies() {
     if(var_1 + 1 == 2) {
       continue;
     }
-    var_2 = getent("garden_entry_enemies", "targetname");
+    var_2 = getEnt("garden_entry_enemies", "targetname");
     var_2.count = 1;
     var_3 = maps\_utility::spawn_targetname("garden_entry_enemies", 1);
     var_3.animname = "generic";
@@ -568,7 +568,7 @@ combat_rappel_garden_entry_enemy_death() {
 
 combat_rappel_garden_entry_setup_jumpoints() {
   if(!isDefined(level.player_start_rappel_struct)) {
-    level.player_start_rappel_struct = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
+    level.player_start_rappel_struct = common_scripts\utility::getStruct("player_start_rappel_struct", "targetname");
   }
 
   var_0 = level.player_start_rappel_struct;
@@ -633,9 +633,9 @@ spawn_jump_point(var_0) {
 }
 
 combat_rappel_garden_entry_setup_glass() {
-  var_0 = getent("garden_entry_glass_player_still", "targetname");
-  var_1 = getent("garden_entry_glass_ally_still", "targetname");
-  var_2 = getent("garden_entry_glass_player_still2", "targetname");
+  var_0 = getEnt("garden_entry_glass_player_still", "targetname");
+  var_1 = getEnt("garden_entry_glass_ally_still", "targetname");
+  var_2 = getEnt("garden_entry_glass_player_still2", "targetname");
   var_0 hide();
   var_1 hide();
   var_2 hide();
@@ -660,11 +660,11 @@ combat_rappel_garden_entry_glass() {
   level.player_start_rappel_struct thread maps\_anim::anim_single_solo(var_0, "cornered_combat_rappel_garden_entry_ally_glass");
   level.player_start_rappel_struct thread maps\_anim::anim_single_solo(var_1, "cornered_combat_rappel_garden_entry_baker_glass");
   level.player_start_rappel_struct thread maps\_anim::anim_single_solo(var_2, "cornered_combat_rappel_garden_entry_player_glass");
-  var_3 = getent("garden_entry_glass_player_clean", "targetname");
-  var_4 = getent("garden_entry_glass_ally_clean", "targetname");
-  var_5 = getent("garden_entry_glass_player_still", "targetname");
-  var_6 = getent("garden_entry_glass_player_still2", "targetname");
-  var_7 = getent("garden_entry_glass_ally_still", "targetname");
+  var_3 = getEnt("garden_entry_glass_player_clean", "targetname");
+  var_4 = getEnt("garden_entry_glass_ally_clean", "targetname");
+  var_5 = getEnt("garden_entry_glass_player_still", "targetname");
+  var_6 = getEnt("garden_entry_glass_player_still2", "targetname");
+  var_7 = getEnt("garden_entry_glass_ally_still", "targetname");
   var_8 = level.allies[level.const_rorke];
   var_9 = 0;
 
@@ -698,7 +698,7 @@ combat_rappel_garden_entry_glass() {
       var_2 show();
       var_9++;
       thread maps\cornered_audio::aud_rappel_combat("window3");
-      level.player playrumbleonentity("light_1s");
+      level.player playRumbleOnEntity("light_1s");
     }
   }
 }
@@ -748,7 +748,7 @@ combat_rappel_garden_entry_first_frame(var_0, var_1) {
   level.rappel_player_arms.angles = var_2;
   level.rappel_player_arms dontcastshadows();
   level.rappel_player_arms hide();
-  level.rappel_player_arms linkto(var_0, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  level.rappel_player_arms linkTo(var_0, "J_prop_1", (0, 0, 0), (0, 0, 0));
   var_4 = maps\cornered_code_rappel::rpl_get_garden_entry_arms_static_anim();
   level.rappel_player_arms setanimknob(var_4, 1.0, 0, 0);
   common_scripts\utility::waitframe();
@@ -760,7 +760,7 @@ combat_rappel_garden_entry_set_small_rotate_jump() {
 
 combat_rappel_garden_entry() {
   if(!isDefined(level.player_start_rappel_struct)) {
-    level.player_start_rappel_struct = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
+    level.player_start_rappel_struct = common_scripts\utility::getStruct("player_start_rappel_struct", "targetname");
   }
 
   thread combat_rappel_garden_entry_setup_weapon();
@@ -820,7 +820,7 @@ combat_rappel_garden_entry_player(var_0, var_1) {
     level.rappel_player_legs dontcastshadows();
     var_6 = maps\cornered_code_rappel::rpl_get_legs_idle_anim();
     level.rappel_player_legs setanim(var_6, 1.0, 0, 1.0);
-    level.player playerlinkto(level.rappel_player_legs, "tag_origin", 0, 120, 120, 60, 50, 0);
+    level.player playerlinkTo(level.rappel_player_legs, "tag_origin", 0, 120, 120, 60, 50, 0);
     wait 2;
   }
 
@@ -857,7 +857,7 @@ combat_rappel_garden_entry_double_jump(var_0) {
   var_5 = getanimlength(level.rappel_legs_jump_anim);
   var_6 = var_5 * var_4;
   var_7 = var_5 * 0.8;
-  level.player_torso_offset_origin linkto(level.rappel_player_legs, "tag_origin");
+  level.player_torso_offset_origin linkTo(level.rappel_player_legs, "tag_origin");
   level.rpl_physical_rope_origin delete();
   maps\cornered_code_rappel::player_rappel_force_jump_away(var_1);
   thread combat_rappel_garden_entry_rotate_legs(var_6);
@@ -882,7 +882,7 @@ combat_rappel_garden_entry_rotate_legs(var_0) {
     var_5 = level.rappel_player_legs.angles[2] + var_3;
     var_6 = (level.rappel_player_legs.angles[0], level.rappel_player_legs.angles[1], var_5);
     level.rappel_player_legs.angles = var_6;
-    level.rappel_player_legs linkto(level.rpl_plyr_legs_link_ent);
+    level.rappel_player_legs linkTo(level.rpl_plyr_legs_link_ent);
     common_scripts\utility::waitframe();
   }
 }
@@ -907,8 +907,8 @@ combat_rappel_garden_entry_blend_to_position(var_0, var_1) {
   }
 
   wait(var_0);
-  level.rappel_player_legs linkto(var_1, "J_prop_1", (0, 0, 0), (0, 0, 0));
-  level.cnd_rappel_player_rope linkto(var_1, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  level.rappel_player_legs linkTo(var_1, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  level.cnd_rappel_player_rope linkTo(var_1, "J_prop_2", (0, 0, 0), (0, 0, 0));
 }
 
 combat_rappel_garden_entry_finish_player_rope(var_0) {
@@ -994,7 +994,7 @@ allies_rappel_anims() {
 die_hard_explosion_fx() {
   wait 0.95;
   common_scripts\utility::exploder("diehard_explosion");
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   earthquake(0.25, 1, level.player.origin, 800);
 }
 
@@ -1035,8 +1035,8 @@ combat_rappel_enemies_pt1() {
   thread enemy_drones_junction_hallway();
   thread enemy_drones_pt1_upper();
   thread enemy_drones_pt1_lower();
-  level.cr_rorke_volume = getent("cr_rorke_side", "targetname");
-  level.cr_baker_volume = getent("cr_baker_side", "targetname");
+  level.cr_rorke_volume = getEnt("cr_rorke_side", "targetname");
+  level.cr_baker_volume = getEnt("cr_baker_side", "targetname");
   wait 5.0;
   thread enemy_drones_pt1_lower_runners();
   common_scripts\utility::flag_wait("part_one_start");
@@ -1229,7 +1229,7 @@ eliminate_used_nodes(var_0) {
 copymachine_window_event() {
   var_0 = getnodearray("p1_junction_floor_node", "targetname");
   var_1 = common_scripts\utility::getclosest(level.player.origin, var_0);
-  level.closest_start_struct = common_scripts\utility::getstruct(var_1.target, "targetname");
+  level.closest_start_struct = common_scripts\utility::getStruct(var_1.target, "targetname");
   common_scripts\utility::waitframe();
   maps\_utility::array_spawn_function_targetname("copier_dude", maps\cornered_code::death_func);
   maps\_utility::array_spawn_function_targetname("copier_dude", ::copymachine_ai);
@@ -1242,14 +1242,14 @@ copymachine_window_event() {
   level.copymachine_rig = maps\_utility::spawn_anim_model("copymachine_rig", level.closest_start_struct.origin);
   level.copymachine_rig.angles = level.closest_start_struct.angles;
   waittillframeend;
-  level.copymachine linkto(level.copymachine_rig, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  level.copymachine linkTo(level.copymachine_rig, "J_prop_1", (0, 0, 0), (0, 0, 0));
   level.copymachine_rig maps\_anim::anim_first_frame_solo(level.copymachine_rig, "copymachine_fall");
   level.copymachine show();
   level.copymachine_rig thread maps\_anim::anim_single_solo(level.copymachine_rig, "copymachine_fall");
   thread maps\cornered_audio::aud_rappel_combat("copy", level.copymachine_rig);
   common_scripts\utility::flag_set("copymachine_go");
-  var_3 = getent("copymachine_clip", "targetname");
-  var_3 linkto(level.copymachine_rig, "J_prop_1", (0, -8, 20), (0, 0, 0));
+  var_3 = getEnt("copymachine_clip", "targetname");
+  var_3 linkTo(level.copymachine_rig, "J_prop_1", (0, -8, 20), (0, 0, 0));
   var_3 thread copymachine_hit_detect("copymachine_anim_done");
   level.copymachine_rig waittillmatch("single anim", "end");
   level.copymachine unlink();
@@ -1329,8 +1329,8 @@ combat_rappel_enemies_pt2() {
   maps\_utility::array_spawn_function_targetname("p2_first_wave_upstairs", ::pt2_upper_enemy_anim);
   maps\_utility::array_spawn_function_targetname("p2_second_wave_downstairs", ::enemy_spawner_setup);
   maps\_utility::array_spawn_function_targetname("p2_second_wave_upstairs", ::enemy_spawner_setup);
-  level.rappel_combat_two_volume_upstairs = getent("rappel_combat_two_volume_upstairs", "targetname");
-  level.rappel_combat_two_volume_downstairs = getent("rappel_combat_two_volume_downstairs", "targetname");
+  level.rappel_combat_two_volume_upstairs = getEnt("rappel_combat_two_volume_upstairs", "targetname");
+  level.rappel_combat_two_volume_downstairs = getEnt("rappel_combat_two_volume_downstairs", "targetname");
   level.all_rappel_pt3_enemies = [];
   level.all_rappel_pt3_downstairs_enemies = [];
   var_0 = maps\_utility::array_spawn_targetname("p2_first_wave_downstairs", 1);
@@ -1360,7 +1360,7 @@ enemy_spawner_setup() {
 pt2_upper_enemy_anim() {
   if(isDefined(self.script_animation)) {
     self.allowdeath = 1;
-    var_0 = getent("rappel_combat_two_volume_upstairs", "targetname");
+    var_0 = getEnt("rappel_combat_two_volume_upstairs", "targetname");
     maps\_anim::anim_generic(self, self.script_animation);
     self setgoalvolumeauto(var_0);
   }
@@ -1443,7 +1443,7 @@ break_enemy_windows() {
 
 break_window(var_0) {
   for(var_1 = 1; var_1 <= 8; var_1++) {
-    var_2 = common_scripts\utility::getstruct(var_0 + "_glass_damage_struct_" + var_1, "script_noteworthy");
+    var_2 = common_scripts\utility::getStruct(var_0 + "_glass_damage_struct_" + var_1, "script_noteworthy");
 
     if(isDefined(var_2)) {
       glassradiusdamage(var_2.origin, 96, 50, 50);
@@ -1456,11 +1456,11 @@ send_to_death_volume() {
   var_0 = undefined;
 
   if(isalive(self) && self.script_noteworthy == "p1_upper") {
-    var_0 = getent("p1_upper_volume", "targetname");
+    var_0 = getEnt("p1_upper_volume", "targetname");
   } else if(isalive(self) && self.script_noteworthy == "copymachine_ai" || isalive(self) && self.script_noteworthy == "p1_junction") {
-    var_0 = getent("p1_junction_volume", "targetname");
+    var_0 = getEnt("p1_junction_volume", "targetname");
   } else if(isalive(self) && self.script_noteworthy == "p1_lower") {
-    var_0 = getent("p1_lower_volume", "targetname");
+    var_0 = getEnt("p1_lower_volume", "targetname");
   } else if(isalive(self) && self.script_noteworthy == "p1_ahead") {
     var_1 = getEntArray("p1_ahead_volume", "targetname");
     var_1 = sortbydistance(var_1, self.origin);

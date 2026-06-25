@@ -113,10 +113,10 @@ func_AC41(param_00, param_01, param_02) {
     self.var_9D65.var_116 = param_02;
   }
 
-  self.var_9D65 linkto(self);
+  self.var_9D65 linkTo(self);
   self.var_9D65 makeusable();
   if(isDefined(param_00)) {
-    self.var_9D65 sethintstring(param_00);
+    self.var_9D65 setHintString(param_00);
   }
 
   self.var_9D65 thread func_AC51();
@@ -721,7 +721,7 @@ func_2204(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
   }
 
-  param_07 = vectornormalize(common_scripts\utility::func_3D5D(param_07));
+  param_07 = vectorNormalize(common_scripts\utility::func_3D5D(param_07));
   var_0F = anglesToForward(self.var_1D);
   var_10 = var_0F * vectordot(var_0F, param_07);
   var_11 = param_07 - var_10;
@@ -979,7 +979,7 @@ func_649D() {
   var_01 = vectortoangles(self.var_9D07);
   var_02 = anglestoup(var_01);
   var_03 = self.var_116 + var_02 * var_00;
-  self setorigin(var_03);
+  self setOrigin(var_03);
 }
 
 func_463F(param_00) {
@@ -4463,13 +4463,13 @@ func_A299() {
     }
 
     if(isDefined(self.var_9D65.var_2984)) {
-      self.var_9D65 sethintstring(self.var_9D65.var_2984);
+      self.var_9D65 setHintString(self.var_9D65.var_2984);
     } else {
-      self.var_9D65 sethintstring(&"ZOMBIES_TURN_VALVE");
+      self.var_9D65 setHintString(&"ZOMBIES_TURN_VALVE");
     }
   }
 
-  self.var_9D65 usetriggerrequirelookat(1);
+  self.var_9D65 useTriggerRequireLookAt(1);
   while(!isDefined(self.var_721C)) {
     self.var_9D65 waittill("trigger", var_03);
     if(isPlayer(var_03)) {
@@ -4477,9 +4477,9 @@ func_A299() {
     }
   }
 
-  self.var_9D65 usetriggerrequirelookat(0);
+  self.var_9D65 useTriggerRequireLookAt(0);
   if(isDefined(self.var_9D65.var_2985)) {
-    self.var_9D65 sethintstring(self.var_9D65.var_2985);
+    self.var_9D65 setHintString(self.var_9D65.var_2985);
     return;
   }
 
@@ -5032,7 +5032,7 @@ is_in_scripted_state(param_00) {
 
 func_7419(param_00, param_01) {
   var_02 = self.var_116 - param_00;
-  var_03 = param_01 * vectornormalize(var_02);
+  var_03 = param_01 * vectorNormalize(var_02);
   var_03 = (var_03[0], var_03[1], 250);
   if(param_01 > 0) {
     self setvelocity(var_03);
@@ -5297,7 +5297,7 @@ func_56D0(param_00) {
 }
 
 func_AAFA(param_00, param_01) {
-  var_02 = getent(param_00, param_01);
+  var_02 = getEnt(param_00, param_01);
   if(!isDefined(var_02)) {
     return;
   }
@@ -6374,9 +6374,9 @@ zmdeletesustainedholdent(param_00) {
 
 zmsustainedholdthink(param_00, param_01, param_02) {
   if(isPlayer(param_00)) {
-    param_00 playerlinkto(self);
+    param_00 playerlinkTo(self);
   } else {
-    param_00 linkto(self);
+    param_00 linkTo(self);
   }
 
   param_00 common_scripts\utility::func_602();
@@ -6635,7 +6635,7 @@ obj_fall_to_ent_location(param_00) {
   var_03 = 1 / var_02;
   var_04 = var_01 * (var_03, var_03, 0);
   self gravitymove(var_04, var_02);
-  self rotateto(param_00.var_1D, var_02, 0, var_02);
+  self rotateTo(param_00.var_1D, var_02, 0, var_02);
   wait(var_02);
   self.var_116 = param_00.var_116;
 }
@@ -6668,7 +6668,7 @@ unset_player_cinematic_mode(param_00, param_01) {
   var_02 method_848C();
   var_02.incinematicmode = 0;
   if(common_scripts\utility::func_562E(param_00)) {
-    var_02 setorigin(getclosestpointonnavmesh(var_02.var_116));
+    var_02 setOrigin(getclosestpointonnavmesh(var_02.var_116));
     var_02 method_8004();
     var_02 method_8323();
   }

@@ -38,7 +38,7 @@ quad_roof_crumble_fx_play() {
   }
 }
 play_quad_first_sounds() {
-  location = getstruct(self.target, "targetname");
+  location = getStruct(self.target, "targetname");
   self playSound("zmb_vocals_quad_spawn", "sounddone");
   self waittill("sounddone");
   self playSound("zmb_quad_roof_hit");
@@ -46,19 +46,19 @@ play_quad_first_sounds() {
 }
 play_wood_land_sound(origin) {
   wait(1);
-  playsoundatposition("zmb_quad_roof_break_land", origin - (0, 0, 150));
+  playSoundAtPosition("zmb_quad_roof_break_land", origin - (0, 0, 150));
 }
 rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playrumbleonentity(high_rumble_string);
+        players[i] playRumbleOnEntity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playrumbleonentity(low_rumble_string);
+        players[i] playRumbleOnEntity(low_rumble_string);
       }
     } else {
-      players[i] playrumbleonentity(high_rumble_string);
+      players[i] playRumbleOnEntity(high_rumble_string);
     }
   }
 }
@@ -246,7 +246,7 @@ quad_lobby_roof_break() {
   maps\_zombiemode_zone_manager::reinit_zone_spawners();
 }
 quad_dining_roof_break() {
-  trigger = getent("dining_first_floor", "targetname");
+  trigger = getEnt("dining_first_floor", "targetname");
   trigger waittill("trigger");
   flag_set("dining_occupied");
   quad_stage_roof_break_single(9);
@@ -278,12 +278,12 @@ quad_stage_roof_break() {
   maps\_zombiemode_zone_manager::reinit_zone_spawners();
 }
 quad_stage_roof_break_single(index) {
-  trigger = getent("quad_roof_crumble_fx_origin_" + index, "target");
+  trigger = getEnt("quad_roof_crumble_fx_origin_" + index, "target");
   trigger thread quad_roof_crumble_fx_play();
 }
 play_quad_start_vo() {
   wait(3);
-  players = getplayers();
+  players = getPlayers();
   player = players[RandomIntRange(0, players.size)];
   player maps\_zombiemode_audio::create_and_play_dialog("general", "quad_spawn");
 }

@@ -109,16 +109,16 @@ run_mason_bridge() {
   level thread scene_cic_hackers();
   level thread scene_front_bridge_hackers();
   level thread scene_cic_custom_entrances();
-  bridge_turret = getent("bridge_turret", "targetname");
+  bridge_turret = getEnt("bridge_turret", "targetname");
   bridge_turret thread bridge_turret_spawns();
   bridge_turret thread bridge_turret_death();
   flag_wait("start_bridge_friendlies");
   delay_thread(20, ::flag_set, "play_bridge_arrivals");
   spawn_manager_enable("sm_bridge");
   flag_wait("at_bridge");
-  hack_trigger = getent("bridge_hack_trigger", "targetname");
-  hack_trigger setcursorhint("HINT_NOICON");
-  hack_trigger sethintstring(&"BLACKOUT_ACCESS_TERMINAL");
+  hack_trigger = getEnt("bridge_hack_trigger", "targetname");
+  hack_trigger setCursorHint("HINT_NOICON");
+  hack_trigger setHintString(&"BLACKOUT_ACCESS_TERMINAL");
   set_objective(level.obj_restore_control, hack_trigger, "use", undefined, 0);
   hack_trigger waittill("trigger");
   hack_trigger delete();
@@ -129,7 +129,7 @@ run_mason_bridge() {
   flag_set("bridge_combat_done");
   level thread maps\_drones::drones_delete("pmc_deck_drones_port_01");
   level thread maps\_drones::drones_delete("navy_deck_drones_port_01");
-  bridge_turret = getent("bridge_turret", "targetname");
+  bridge_turret = getEnt("bridge_turret", "targetname");
 
   if(isDefined(bridge_turret)) {
     bridge_turret.delete_on_death = 1;
@@ -200,7 +200,7 @@ clean_up_mason_catwalk() {}
 
 scene_salazar_exit() {
   level.salazar change_movemode("cqb_sprint");
-  level.salazar set_goalradius(16);
+  level.salazar set_goalRadius(16);
   level.salazar set_goal_node(getnode("salazar_exit_reach_setup", "targetname"));
   level.salazar waittill("goal");
   level.salazar change_movemode("cqb_walk");
@@ -220,16 +220,16 @@ dialog_deck_exit() {
 
 moment_stairfall() {
   m_door = get_model_or_models_from_scene("stairfall", "stairfall_door");
-  m_clip = getent("stairfall_door_clip", "targetname");
-  m_clip linkto(m_door, "tag_animate");
+  m_clip = getEnt("stairfall_door_clip", "targetname");
+  m_clip linkTo(m_door, "tag_animate");
   t_stairfall = trigger_wait("stairfall_trigger");
   t_stairfall delete();
   m_door playSound("evt_deck_door_open");
   level thread run_scene_and_delete("stairfall");
   scene_wait("stairfall");
   m_clip connectpaths();
-  m_clip disconnectpaths();
-  trigger = getent("reveal_color_trigger", "targetname");
+  m_clip disconnectPaths();
+  trigger = getEnt("reveal_color_trigger", "targetname");
 
   if(isDefined(trigger)) {
     trigger trigger_use();
@@ -309,7 +309,7 @@ sniper_plane_takeoff() {
   path = getvehiclenode(plane.target, "targetname");
   plane thread fa38_init_fx(0);
   plane.m_landing_gear = spawn_model("veh_t6_air_fa38_landing_gear", plane gettagorigin("tag_landing_gear_down"), plane gettagangles("tag_landing_gear_down"));
-  plane.m_landing_gear linkto(plane, "tag_landing_gear_down");
+  plane.m_landing_gear linkTo(plane, "tag_landing_gear_down");
   plane endon("death");
   plane veh_magic_bullet_shield(1);
   trigger_wait("catwalk_enter_trigger");
@@ -324,7 +324,7 @@ bridge_break_windows() {
   a_s_bullets = getStructArray("bridge_magic_bullet", "targetname");
 
   foreach(s_bullet in a_s_bullets) {
-    s_bullet_end = getstruct(s_bullet.target, "targetname");
+    s_bullet_end = getStruct(s_bullet.target, "targetname");
     magicbullet("xm8_sp", s_bullet.origin, s_bullet_end.origin);
     wait 0.05;
     magicbullet("xm8_sp", s_bullet.origin, s_bullet_end.origin);
@@ -363,7 +363,7 @@ catwalk_random_rockets() {
   self endon("spec_ops_completed");
   self endon("spec_ops_failed");
   self endon("random_rockets_stop");
-  done_trigger = getent("catwalk_exit_trigger", "targetname");
+  done_trigger = getEnt("catwalk_exit_trigger", "targetname");
   done_trigger endon("trigger");
   structs = getStructArray("catwalk_magic_bullet_target", "targetname");
   assert(structs.size > 0);
@@ -394,7 +394,7 @@ get_catwalk_ally_victims(force_all) {
 catwalk_random_shooting() {
   self endon("spec_ops_completed");
   self endon("spec_ops_failed");
-  done_trigger = getent("catwalk_exit_trigger", "targetname");
+  done_trigger = getEnt("catwalk_exit_trigger", "targetname");
   done_trigger endon("trigger");
   structs = getStructArray("catwalk_magic_bullet_target", "targetname");
   assert(structs.size > 0);
@@ -448,7 +448,7 @@ bridge_turret_spawns() {
   self endon("death");
   self waittill("turret_hacked");
   delay_thread(8, ::trigger_on, "cic_custom_entrances_trigger", "script_noteworthy");
-  e_target = getstruct("bridge_turret_goal", "targetname");
+  e_target = getStruct("bridge_turret_goal", "targetname");
   self setturrettargetvec(e_target.origin);
   self waittill("turret_entered");
   self clearturrettarget();
@@ -590,7 +590,7 @@ fa38_fire_weapon(fire_time) {
 
 hacker_wait_trigger_or_damage(str_trigger_name) {
   if(isDefined(str_trigger_name)) {
-    trig = getent(str_trigger_name, "targetname");
+    trig = getEnt(str_trigger_name, "targetname");
     trig endon("trigger");
   }
 
@@ -664,7 +664,7 @@ scene_familiar_face_rumble() {
   wait 0.5;
 
   for(i = 0; i < 10; i++) {
-    self playrumbleonentity("tank_rumble");
+    self playRumbleOnEntity("tank_rumble");
     earthquake(0.1, 0.1, self.origin, 1000, self);
     wait 0.1;
   }
@@ -673,7 +673,7 @@ scene_familiar_face_rumble() {
 alt_bridge_breadcrumb() {
   wait_for_either_trigger("bridge_front_trigger", "bridge_front_trigger_alt");
   trigger_use("bridge_front_trigger");
-  e_trigger = getent("bridge_front_trigger_alt", "targetname");
+  e_trigger = getEnt("bridge_front_trigger_alt", "targetname");
   e_trigger delete();
 }
 
@@ -682,7 +682,7 @@ open_catwalk_door(do_open) {
     do_open = 1;
   }
 
-  catwalk_door = getent("catwalk_door_collision", "targetname");
+  catwalk_door = getEnt("catwalk_door_collision", "targetname");
 
   if(!isDefined(catwalk_door.is_open)) {
     catwalk_door.is_open = 0;
@@ -692,10 +692,10 @@ open_catwalk_door(do_open) {
     return;
   }
   if(!do_open) {
-    catwalk_door rotateyaw(-110 * -1, 0.5, 0, 0);
-    catwalk_door disconnectpaths();
+    catwalk_door rotateYaw(-110 * -1, 0.5, 0, 0);
+    catwalk_door disconnectPaths();
   } else {
-    catwalk_door rotateyaw(-110, 0.5, 0, 0);
+    catwalk_door rotateYaw(-110, 0.5, 0, 0);
     catwalk_door connectpaths();
   }
 
@@ -703,9 +703,9 @@ open_catwalk_door(do_open) {
 }
 
 init_doors() {
-  catwalk_door = getent("catwalk_door", "targetname");
-  catwalk_door_collision = getent(catwalk_door.target, "targetname");
-  catwalk_door linkto(catwalk_door_collision);
+  catwalk_door = getEnt("catwalk_door", "targetname");
+  catwalk_door_collision = getEnt(catwalk_door.target, "targetname");
+  catwalk_door linkTo(catwalk_door_collision);
   catwalk_door_collision.is_open = 0;
 }
 
@@ -938,7 +938,7 @@ spec_ops_ally_exit() {
   self endon("death");
   self.fixednode = 0;
   wait(randomfloat(15.0));
-  self force_goal(getstruct("deck_reveal_end", "targetname").origin, 32, 0);
+  self force_goal(getStruct("deck_reveal_end", "targetname").origin, 32, 0);
   level.num_seals_saved++;
   level notify("seal_saved");
   self delete();
@@ -960,8 +960,8 @@ spec_ops_kill_clear_battle() {
 }
 
 holo_table_flicker_out() {
-  m_image = getent("P6_hologram_city_buildings", "targetname");
-  m_table = getent("war_holo_table", "targetname");
+  m_image = getEnt("P6_hologram_city_buildings", "targetname");
+  m_table = getEnt("war_holo_table", "targetname");
   time_elapsed = 0.0;
   flicker_on = 1;
   flag_wait("holo_table_off");
@@ -1052,7 +1052,7 @@ start_catwalk_allies() {
   i = 0;
 
   foreach(ai_ally in a_ai_allies) {
-    ai_ally set_goalradius(64);
+    ai_ally set_goalRadius(64);
     ai_ally thread force_goal(a_nd_goals[i]);
     i++;
   }
@@ -1131,11 +1131,11 @@ bridge_catwalk_jetpack_drones(str_flag, str_targetname) {
 }
 
 bridge_drone_spawning() {
-  sp_pmc_spawner = getent("pmc_drone_guy", "targetname");
+  sp_pmc_spawner = getEnt("pmc_drone_guy", "targetname");
   drones_assign_spawner("pmc_deck_drones_bow_01", sp_pmc_spawner);
   drones_assign_spawner("pmc_deck_drones_port_01", sp_pmc_spawner);
   drones_assign_spawner("port_deck_reveal_drones", sp_pmc_spawner);
-  sp_sailor_spawner = getent("navy_assault_guy", "targetname");
+  sp_sailor_spawner = getEnt("navy_assault_guy", "targetname");
   drones_assign_spawner("navy_deck_drones_port_01", sp_sailor_spawner);
   wait_network_frame();
   drones_start("pmc_deck_drones_bow_01");

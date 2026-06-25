@@ -421,7 +421,7 @@ function function_2598b1bd() {
 function function_abc08ce8() {
   level endon(#"hash_1314cbd25bca805d");
   level.player endon(#"death");
-  vol = getent("creek_path_water_volume", "targetname");
+  vol = getEnt("creek_path_water_volume", "targetname");
 
   while(true) {
     while(!level.player istouching(vol)) {

@@ -24,7 +24,7 @@ set_level_lighting_values() {
 }
 
 setup_church_lighting() {
-  var_0 = getent("village_defend_church_light", "targetname");
+  var_0 = getEnt("village_defend_church_light", "targetname");
   var_1 = getEntArray("village_defend_church_models", "script_noteworthy");
 
   foreach(var_3 in var_1) {

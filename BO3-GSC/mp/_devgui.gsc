@@ -84,7 +84,7 @@ function devgui_player_spawn() {
   wait(1);
   player_devgui_base_mp = "";
   wait(0.05);
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player != self) {
       continue;
@@ -101,7 +101,7 @@ function devgui_player_spawn_think() {
       wait(0.05);
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(player.playername != playername) {
         continue;
@@ -444,7 +444,7 @@ function devgui_attachment_cycling_think() {
       state = "";
     }
     if("" == state) {
-      array::thread_all(getplayers(), &devgui_attachment_cycling_update);
+      array::thread_all(getPlayers(), &devgui_attachment_cycling_update);
     }
     wait(0.5);
   }
@@ -461,7 +461,7 @@ function devgui_test_chart_think() {
         level.test_chart_model = undefined;
       }
       if(val) {
-        player = getplayers()[0];
+        player = getPlayers()[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward((0, direction[1], 0));
         scale = 120;
@@ -564,7 +564,7 @@ function devgui_update_attachment_cosmetic_variant(attachment_1, attachment_2) {
 function devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
   pid = getdvarint("");
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
     if(isDefined(player)) {
       if(isDefined(pcb_param_2)) {
         player thread[[playercallback]](pcb_param_1, pcb_param_2);
@@ -577,7 +577,7 @@ function devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) 
       }
     }
   } else {
-    array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
+    array::thread_all(getPlayers(), playercallback, pcb_param_1, pcb_param_2);
   }
   setDvar("", "");
 }
@@ -633,7 +633,7 @@ function debug_center_screen() {
 function add_vehicle_at_eye_trace(vehiclename) {
   host = util::gethostplayer();
   trace = host bot::eye_trace();
-  veh_spawner = getent(vehiclename + "", "");
+  veh_spawner = getEnt(vehiclename + "", "");
   vehicle = veh_spawner spawnfromspawner(vehiclename, 1, 1, 1);
   if(isDefined(vehicle.archetype)) {
     vehicle asmrequestsubstate("");

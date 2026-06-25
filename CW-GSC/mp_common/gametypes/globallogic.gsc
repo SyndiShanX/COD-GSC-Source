@@ -739,7 +739,7 @@ function function_388d5c92() {
 function function_bd737249() {
   var_775d7a3c = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.team)) {
       if(!isDefined(var_775d7a3c[player.team])) {
         var_775d7a3c[player.team] = 0;
@@ -2124,7 +2124,7 @@ function function_4e7d44bd() {
   foreach(team, _ in level.teams) {
     if(level.everexisted[team]) {
       teamranking = isDefined(level.var_eed7c027[team]) ? level.var_eed7c027[team] : 1;
-      players = getplayers(team);
+      players = getPlayers(team);
 
       foreach(player in players) {
         player luinotifyevent(#"team_eliminated", 1, teamranking);
@@ -2248,7 +2248,7 @@ function private function_5c159ad3() {
 }
 
 function function_9a022fbc(str_state) {
-  players = getplayers();
+  players = getPlayers();
   var_7e05b6e9 = [];
 
   foreach(player in players) {
@@ -2285,7 +2285,7 @@ function function_9a022fbc(str_state) {
 }
 
 function private beacon_cp_biodomes_server_room_top_floor_door_rumble() {
-  function_2f890b73(getplayers());
+  function_2f890b73(getPlayers());
   function_f30cfedb();
   hvo::function_323c6715();
   [[level.onendgame]](match::function_3624d032());
@@ -2863,7 +2863,7 @@ function updateteamstatus() {
 
   resetteamvariables(#"none");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.teambased || player.team == #"spectator") {
       team = player.team;
     } else {
@@ -3193,7 +3193,7 @@ function timelimitclock() {
 }
 
 function private function_54987b67() {
-  players = getplayers();
+  players = getPlayers();
   totalplayers = 0;
 
   foreach(player in players) {
@@ -3384,7 +3384,7 @@ function function_bf2901cf() {
     temp_player_ready = [];
     time = gettime();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.classname == "noclass") {
         continue;
       }
@@ -3551,7 +3551,7 @@ function prematchperiod() {
           player::function_80e763a4();
         } else {
           thread matchstarttimer(level.prematchperiod);
-          namespace_66d6aa44::function_c0622ccd(getplayers(), 0);
+          namespace_66d6aa44::function_c0622ccd(getPlayers(), 0);
           player::function_80e763a4();
           function_7277d8f1();
         }
@@ -3564,19 +3564,19 @@ function prematchperiod() {
       }
     } else {
       thread matchstarttimer(level.prematchperiod);
-      namespace_66d6aa44::function_c0622ccd(getplayers(), 0);
+      namespace_66d6aa44::function_c0622ccd(getPlayers(), 0);
       player::function_80e763a4();
       function_7277d8f1();
     }
   } else {
     thread matchstarttimer(level.prematchperiod);
-    namespace_66d6aa44::function_c0622ccd(getplayers(), 0);
+    namespace_66d6aa44::function_c0622ccd(getPlayers(), 0);
     player::function_80e763a4();
     matchstarttimerskip();
     waitframe(1);
   }
 
-  namespace_66d6aa44::function_c0622ccd(getplayers(), 1);
+  namespace_66d6aa44::function_c0622ccd(getPlayers(), 1);
   level.inprematchperiod = 0;
 
   foreach(player in level.players) {
@@ -4221,7 +4221,7 @@ function pineapplegunplayerkilleffect(attacker) {
     return;
   }
 
-  playsoundatposition(#"evt_annihilation_npc", self.origin);
+  playSoundAtPosition(#"evt_annihilation_npc", self.origin);
   codesetclientfield(self, "pineapplegun_effect", 1);
   self shake_and_rumble(0, 0.3, 0.35, 1);
   wait 0.1;
@@ -4241,7 +4241,7 @@ function bowplayerkilleffect() {
     return;
   }
 
-  playsoundatposition(#"evt_annihilation_npc", self.origin);
+  playSoundAtPosition(#"evt_annihilation_npc", self.origin);
   codesetclientfield(self, "annihilate_effect", 1);
   self shake_and_rumble(0, 0.3, 0.35, 1);
 
@@ -4263,7 +4263,7 @@ function pineapplegunactorkilleffect() {
     return;
   }
 
-  playsoundatposition(#"evt_annihilation_npc", self.origin);
+  playSoundAtPosition(#"evt_annihilation_npc", self.origin);
 
   if(!isDefined(body)) {
     return;
@@ -4287,7 +4287,7 @@ function shake_and_rumble(n_delay, shake_size, shake_time, rumble_num) {
   earthquake(nmagnitude, nduration, v_pos, nradius);
 
   for(i = 0; i < rumble_num; i++) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.1;
   }
 }
@@ -4411,7 +4411,7 @@ function function_a4156fb2() {
   level.strobefov = cos(getdvarint(#"strobe_fov", 45));
 
   while(true) {
-    enemyplayers = getplayers("all", self.origin, level.stroberange * 2);
+    enemyplayers = getPlayers("all", self.origin, level.stroberange * 2);
 
     foreach(player in enemyplayers) {
       if(self function_fdb8b430(player)) {
@@ -4435,7 +4435,7 @@ function function_a4156fb2() {
 
 function function_b761e219() {
   self notify(#"strobe_off");
-  enemyplayers = getplayers();
+  enemyplayers = getPlayers();
 
   foreach(player in enemyplayers) {
     if(!player util::isenemyteam(self.team)) {

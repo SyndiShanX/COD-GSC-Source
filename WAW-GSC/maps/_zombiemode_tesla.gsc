@@ -296,9 +296,9 @@ tesla_play_arc_fx(target) {
   fxOrg setModel("tag_origin");
 
   fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
-  playsoundatposition("tesla_bounce", fxOrg.origin);
+  playSoundAtPosition("tesla_bounce", fxOrg.origin);
 
-  fxOrg MoveTo(target_origin, level.zombie_vars["tesla_arc_travel_time"]);
+  fxOrg moveTo(target_origin, level.zombie_vars["tesla_arc_travel_time"]);
   fxOrg waittill("movedone");
   fxOrg delete();
 }
@@ -414,7 +414,7 @@ play_tesla_sound(emotion) {
     level.var_counter++;
     level.one_emo_at_a_time = 1;
     org = spawn("script_origin", self.origin);
-    org LinkTo(self);
+    org linkTo(self);
     org playSound(emotion, "sound_complete" + "_" + level.var_counter);
     org waittill("sound_complete" + "_" + level.var_counter);
     org delete();

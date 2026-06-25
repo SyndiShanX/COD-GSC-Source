@@ -88,7 +88,7 @@ function function_504c79a0() {
 function function_4c27ed84() {
   level flag::wait_till("flg_amk_player_spawned");
   level.player endon(#"death");
-  vol_forest_branch_reveal = getent("vol_forest_branch_reveal", "targetname");
+  vol_forest_branch_reveal = getEnt("vol_forest_branch_reveal", "targetname");
   s_forest_branch_reveal = struct::get("s_forest_branch_reveal", "targetname");
   var_2b8afaa2 = 0;
 
@@ -199,7 +199,7 @@ function private function_bc29dab9(var_2503a21f) {
 function scene_amk_3010_arc_enter() {
   assert(isDefined(level.woods));
   a_scene_ents[#"woods"] = level.woods;
-  a_scene_ents[#"arc_door"] = getent("arc_door", "targetname");
+  a_scene_ents[#"arc_door"] = getEnt("arc_door", "targetname");
   e_door = a_scene_ents[#"arc_door"];
   level thread function_6fe3f44f(e_door);
   level.woods flag::set("flg_pause_photo_react");
@@ -222,9 +222,9 @@ function function_6fe3f44f(e_door) {
   level flag::wait_till("flg_arcade_street_photo_taken");
   e_door delete();
   level scene::init("scene_amk_3050_arc_door");
-  e_clip = getent("e_arcade_entrance_door_clip", "targetname");
+  e_clip = getEnt("e_arcade_entrance_door_clip", "targetname");
   e_clip movey(128, 0.1, 0.05, 0.05);
-  e_clip disconnectpaths();
+  e_clip disconnectPaths();
   snd::client_msg("flg_audio_tunnel_generator_off");
 }
 
@@ -387,7 +387,7 @@ function function_e19a72c1() {
   level flag::wait_till("flg_escape_apc_interact_triggered");
   level flag::wait_till("flg_apc_ride_town_square_enter");
   var_4baf0b18 = 0;
-  var_6de6260d = getent("gazebo_trigger", "targetname");
+  var_6de6260d = getEnt("gazebo_trigger", "targetname");
   level scene::function_27f5972e("p9_fxanim_cp_amerika_gazebo_destruction_bundle");
 
   while(var_4baf0b18 <= 6) {

@@ -78,15 +78,15 @@ function spawn_callback(s_instance) {
   s_instance.var_f9cc146 notsolid();
   var_3bb47a83 = s_instance.contentgroups[#"hash_4d27846c8a4b01a1"][0];
   s_instance.var_5ea363c = content_manager::spawn_script_model(var_3bb47a83, #"p9_fxanim_sv_dragon_console_mod", 1);
-  s_instance.var_5ea363c disconnectpaths();
+  s_instance.var_5ea363c disconnectPaths();
   s_instance.var_5ea363c clientfield::set("soul_capture_timer", 1);
   s_instance.var_5ea363c.mdl_screen = util::spawn_model(#"hash_69c0563efeddad47", s_instance.var_5ea363c.origin, s_instance.var_5ea363c.angles);
   s_fx = s_instance.contentgroups[#"eyes"][0];
   s_instance.var_ff3e0c53 = content_manager::spawn_script_model(s_fx, "tag_origin");
-  s_instance.var_ff3e0c53 linkto(s_instance.var_5ea363c);
+  s_instance.var_ff3e0c53 linkTo(s_instance.var_5ea363c);
   playFXOnTag(#"hash_56b5ae0fe9c0a0b3", s_instance.var_ff3e0c53, "tag_origin");
   s_instance.var_31309e7a = content_manager::spawn_script_model(s_fx, "tag_origin");
-  s_instance.var_31309e7a linkto(s_instance.var_5ea363c);
+  s_instance.var_31309e7a linkTo(s_instance.var_5ea363c);
   playFXOnTag(#"hash_1e6eecfa05dea663", s_instance.var_31309e7a, "tag_origin");
   s_instance.var_5ea363c thread scene::play("p9_fxanim_sv_dragon_console_bundle", "fuel init", s_instance.var_5ea363c);
   v_origin = getclosestpointonnavmesh(s_instance.contentgroups[#"boundary"][0].origin, 256);
@@ -214,7 +214,7 @@ function function_3f808d3d(eventstruct) {
       instance.var_5ea363c.mdl_screen = util::spawn_model(#"hash_2fb1773fccdfb090", instance.var_5ea363c.origin, instance.var_5ea363c.angles);
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     if(isDefined(instance.var_3f0d6dc1) && isDefined(instance.var_53be7e08) && instance.var_3f0d6dc1 * instance.var_53be7e08 >= 15) {
       level scoreevents::doscoreeventcallback("scoreEventSR", {
@@ -243,7 +243,7 @@ function function_98382cc9() {
   s_fx = self.contentgroups[#"eyes"][0];
   playFX(#"hash_2a096914a9161bb8", s_fx.origin, anglesToForward(s_fx.angles), anglestoup(s_fx.angles));
   earthquake(0.2, 6, self.var_f9cc146.origin, 512);
-  playsoundatposition(#"hash_39088d45201c4160", self.var_f9cc146.origin);
+  playSoundAtPosition(#"hash_39088d45201c4160", self.var_f9cc146.origin);
   self.var_f9cc146 playrumblelooponentity(#"hash_7d1934b3d40a60c2");
   wait 1;
   var_c309b891 = self.contentgroups[#"boundary"][0];
@@ -277,7 +277,7 @@ function function_98382cc9() {
 }
 
 function function_b8691499() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   var_4b08438 = getdvarint(#"hash_4b8ad6985e0ad109", 0);
 
@@ -704,7 +704,7 @@ function function_29db9d5f(ai_zombie, e_killer, var_f3a93cf1 = 0) {
   mdl_anchor = util::spawn_model("tag_origin", v_death, ai_zombie.angles);
   ai_zombie thread util::delete_on_death(mdl_anchor);
   ai_zombie.var_c1a29994 = mdl_anchor;
-  ai_zombie linkto(mdl_anchor);
+  ai_zombie linkTo(mdl_anchor);
   ai_zombie.script_animname = "zombie_eaten";
   ai_zombie.targetname = "zombie_eaten";
   self thread function_fd47174(ai_zombie, mdl_anchor, var_f3a93cf1, e_killer);
@@ -715,7 +715,7 @@ function function_29db9d5f(ai_zombie, e_killer, var_f3a93cf1 = 0) {
 
   self flag::set("looking_at_zombie");
   s_capture_point = self.contentgroups[#"capture_point"][0];
-  var_7caa77 = vectordot(anglesToForward(self.var_934133c0.angles), vectornormalize(v_death - s_capture_point.origin));
+  var_7caa77 = vectordot(anglesToForward(self.var_934133c0.angles), vectorNormalize(v_death - s_capture_point.origin));
 
   if(var_7caa77 > 0.85) {
     self.var_ed23159a = "right";
@@ -765,8 +765,8 @@ function function_29db9d5f(ai_zombie, e_killer, var_f3a93cf1 = 0) {
     var_4dd8873d = scene::function_8582657c(var_d6a665db, var_a4fc6c63) - var_f415f7b8;
     n_move_time = min(var_4dd8873d, n_move_time);
     n_move_time = max(n_move_time, 0.1);
-    mdl_anchor moveto(var_6d57992d, n_move_time, n_move_time);
-    mdl_anchor rotateto(var_462c2689, n_move_time, n_move_time);
+    mdl_anchor moveTo(var_6d57992d, n_move_time, n_move_time);
+    mdl_anchor rotateTo(var_462c2689, n_move_time, n_move_time);
     mdl_anchor waittilltimeout(n_move_time, #"movedone", #"death");
   }
 
@@ -839,7 +839,7 @@ function function_fd47174(ai_zombie, mdl_anchor, var_f3a93cf1 = 0, e_killer) {
     var_1ace4b9e = self.var_f9cc146 gettagorigin("tag_mouth_fx_anim") - mdl_anchor.origin;
     var_1ace4b9e = vectorscale(var_1ace4b9e, 0.8);
     n_move_time = scene::function_8582657c("ai_zm_esc_zombie_dreamcatch_rise_sr", "rise");
-    mdl_anchor moveto(mdl_anchor.origin + var_1ace4b9e, n_move_time, n_move_time);
+    mdl_anchor moveTo(mdl_anchor.origin + var_1ace4b9e, n_move_time, n_move_time);
     mdl_anchor waittilltimeout(n_move_time, #"movedone");
   }
 
@@ -858,7 +858,7 @@ function function_fd47174(ai_zombie, mdl_anchor, var_f3a93cf1 = 0, e_killer) {
     return;
   }
 
-  ai_zombie kill(ai_zombie.origin, getplayers()[0], getplayers()[0], undefined, undefined, 1);
+  ai_zombie kill(ai_zombie.origin, getPlayers()[0], getPlayers()[0], undefined, undefined, 1);
 }
 
 function function_c2cda275(ai_zombie, mdl_anchor) {
@@ -914,7 +914,7 @@ function function_a221b3a(var_273eefec) {
   }
 
   self.var_ff3e0c53 = content_manager::spawn_script_model(self.contentgroups[#"eyes"][0], #"tag_origin");
-  self.var_ff3e0c53 linkto(var_5ea363c);
+  self.var_ff3e0c53 linkTo(var_5ea363c);
   playFXOnTag(#"hash_7e801405f1644de5", self.var_ff3e0c53, "tag_origin");
 
   if(self flag::get("times_up")) {
@@ -923,7 +923,7 @@ function function_a221b3a(var_273eefec) {
   }
 
   if(isDefined(var_5ea363c.mdl_screen)) {
-    var_5ea363c.mdl_screen linkto(var_5ea363c);
+    var_5ea363c.mdl_screen linkTo(var_5ea363c);
   }
 
   if(isDefined(self.var_31309e7a)) {
@@ -931,7 +931,7 @@ function function_a221b3a(var_273eefec) {
   }
 
   self.var_31309e7a = content_manager::spawn_script_model(self.contentgroups[#"eyes"][0], #"tag_origin");
-  self.var_31309e7a linkto(var_5ea363c);
+  self.var_31309e7a linkTo(var_5ea363c);
   playFXOnTag(#"hash_75b8555ea6711aff", self.var_31309e7a, "tag_origin");
   var_5ea363c clientfield::set("soul_capture_leave", 1);
   earthquake(0.1, 5, var_5ea363c.origin, 512);
@@ -980,7 +980,7 @@ function private function_1ed83293(v_loc) {
   self util::delay_notify(3, #"hash_4ff1a851360e18da");
 
   while(isDefined(self.var_5ea363c)) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(zm_utility::is_player_valid(player)) {
@@ -1082,7 +1082,7 @@ function private function_6bee2a79(v_loc, v_angles) {
 function private function_14674c4f() {
   callback::remove_on_spawned(&on_player_spawned);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player callback::function_52ac9652(#"grenade_fired", &function_6e33721e);
   }
 

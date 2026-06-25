@@ -211,7 +211,7 @@ dononattackcoverbehavior(behaviorcallbacks) {
 
 throwgrenadeatenemyasap(behaviorcallbacks) {
   if(isDefined(anim.throwgrenadeatplayerasap) && anim.throwgrenadeatplayerasap) {
-    players = getplayers();
+    players = getPlayers();
 
     if(isalive(players[0])) {
       self.grenadeammo++;
@@ -700,7 +700,7 @@ trythrowinggrenade(behaviorcallbacks, throwat, forcethrow) {
   }
 
   forward = anglesToForward(self.angles);
-  dir = vectornormalize(throwat.origin - self.origin);
+  dir = vectorNormalize(throwat.origin - self.origin);
 
   if(vectordot(forward, dir) < 0 && self.a.script != "cover_pillar") {
     self animscripts\debug::debugpopstate("tryThrowingGrenade", "don't want to throw backwards");
@@ -710,7 +710,7 @@ trythrowinggrenade(behaviorcallbacks, throwat, forcethrow) {
 
   if(self.a.script == "cover_pillar" && isDefined(self.covernode)) {
     forward = anglesToForward(self.covernode.angles);
-    dir = vectornormalize(throwat.origin - self.covernode.origin);
+    dir = vectorNormalize(throwat.origin - self.covernode.origin);
 
     if(vectordot(forward, dir) < 0) {
       self animscripts\debug::debugpopstate("tryThrowingGrenade", "don't want to throw backwards");

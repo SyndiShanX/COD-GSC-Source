@@ -109,7 +109,7 @@ func_3CFB() {
     var_6 = anglestoup(self.angles);
     var_7 = anglesToForward(self.angles);
     var_8 = var_2 - self.origin;
-    var_9 = vectornormalize(var_8 - var_6 * vectordot(var_6, var_8));
+    var_9 = vectorNormalize(var_8 - var_6 * vectordot(var_6, var_8));
     var_10 = vectordot(var_1, var_9);
     if(var_10 < 85) {
       continue;
@@ -365,7 +365,7 @@ func_3D04() {
   self endon("chargeMode_end");
   self endon("chargeMode_unset");
   var_0 = spawn("trigger_rotatable_radius", self.origin, 0, 30, 72);
-  var_0 enablelinkto();
+  var_0 enablelinkTo();
   var_0 endon("death");
   childthread func_3D07(var_0);
   childthread func_3D06(var_0);
@@ -392,7 +392,7 @@ func_3D07(var_0) {
       var_0 dontinterpolate();
       var_0.origin = var_6 - var_4 * 36;
       var_0.angles = var_2;
-      var_0 linkto(self);
+      var_0 linkTo(self);
     }
 
     scripts\engine\utility::waitframe();
@@ -457,8 +457,8 @@ func_3D18(var_0, var_1) {
   var_5 = vectortoangles(var_4);
   var_6 = anglesToForward(var_5);
   if(scripts\mp\utility::func_9F22(var_1)) {
-    var_7 = vectornormalize(var_1.origin - self.origin * (1, 1, 0));
-    var_8 = vectornormalize(var_6 * (1, 1, 0));
+    var_7 = vectorNormalize(var_1.origin - self.origin * (1, 1, 0));
+    var_8 = vectorNormalize(var_6 * (1, 1, 0));
     var_9 = scripts\engine\utility::anglebetweenvectorsunit(var_7, var_8);
     thread func_3D14(var_0, var_1);
     if(!func_3CE7(var_1)) {
@@ -825,7 +825,7 @@ chargemode_isdamageimmunedestructibleimpact(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = anglesToForward(var_1.angles);
-  var_5 = vectornormalize(var_3 - var_1.origin);
+  var_5 = vectorNormalize(var_3 - var_1.origin);
   return scripts\engine\utility::anglebetweenvectorsunit(var_4, var_5) <= 65;
 }
 

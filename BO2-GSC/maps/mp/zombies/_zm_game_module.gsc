@@ -334,7 +334,7 @@ game_module_custom_intermission(intermission_struct) {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
-  s_point = getstruct(intermission_struct, "targetname");
+  s_point = getStruct(intermission_struct, "targetname");
 
   if(!isDefined(level.intermission_cam_model)) {
     level.intermission_cam_model = spawn("script_model", s_point.origin);
@@ -351,11 +351,11 @@ game_module_custom_intermission(intermission_struct) {
   self camerasetposition(level.intermission_cam_model);
   self camerasetlookat();
   self cameraactivate(1);
-  self linkto(level.intermission_cam_model);
-  level.intermission_cam_model moveto(getstruct(s_point.target, "targetname").origin, 12);
+  self linkTo(level.intermission_cam_model);
+  level.intermission_cam_model moveTo(getStruct(s_point.target, "targetname").origin, 12);
 
   if(isDefined(level.intermission_cam_model.angles)) {
-    level.intermission_cam_model rotateto(getstruct(s_point.target, "targetname").angles, 12);
+    level.intermission_cam_model rotateTo(getStruct(s_point.target, "targetname").angles, 12);
   }
 
   self.game_over_bg fadeovertime(2);
@@ -396,7 +396,7 @@ fireworks_launch(launch_spot) {
     dest = new_dest;
     dist = distance(new_dest.origin + random_offset, firework.origin);
     time = dist / 700;
-    firework moveto(new_dest.origin + random_offset, time);
+    firework moveTo(new_dest.origin + random_offset, time);
     firework waittill("movedone");
   }
 

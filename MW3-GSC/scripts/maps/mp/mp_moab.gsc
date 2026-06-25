@@ -25,7 +25,7 @@ audio_settings() {
 }
 
 moab_wheel() {
-  var_0 = getent("wheel_model", "targetname");
+  var_0 = getEnt("wheel_model", "targetname");
   var_1 = getEntArray("animated_model", "targetname");
 
   if(!isDefined(var_0)) {
@@ -33,7 +33,7 @@ moab_wheel() {
   }
   foreach(var_3 in var_1) {
     if(var_3.model == "generic_prop_raven") {
-      var_0 linkto(var_3, "J_prop_1");
+      var_0 linkTo(var_3, "J_prop_1");
       break;
     }
   }

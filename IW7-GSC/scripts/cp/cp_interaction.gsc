@@ -227,7 +227,7 @@ func_7A4A(var_0, var_1) {
   var_3 = var_0.origin;
   if(interaction_is_weapon_buy(var_0)) {
     if(isDefined(var_0.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_0.target, "targetname");
       if(isDefined(var_4)) {
         var_3 = var_4.origin;
       } else {
@@ -1037,7 +1037,7 @@ func_8220(var_0) {
 func_F422(var_0, var_1) {
   var_2 = func_7A49(var_1, self);
   if(isDefined(var_2)) {
-    self.interaction_trigger sethintstring(var_2);
+    self.interaction_trigger setHintString(var_2);
   }
 
   if(var_1.script_noteworthy == "weapon_purchase" && isDefined(self.weapon_purchase_looking_at)) {
@@ -1063,22 +1063,22 @@ func_F422(var_0, var_1) {
       func_F474(self);
     }
   } else if(interaction_is_window_entrance(var_1) || func_9A19(var_1) || func_9A1C(var_1) || func_9A1E(var_1) || interaction_is_weapon_upgrade(var_1) || func_9A16(var_1)) {
-    self.interaction_trigger usetriggerrequirelookat(0);
+    self.interaction_trigger useTriggerRequireLookAt(0);
     self.interaction_trigger setusefov(360);
   } else if(var_1.script_noteworthy == "coaster") {
-    self.interaction_trigger usetriggerrequirelookat(1);
+    self.interaction_trigger useTriggerRequireLookAt(1);
     self.interaction_trigger setusefov(245);
   } else if(var_1.script_noteworthy == "dj_quest_speaker_mid" || var_1.script_noteworthy == "dj_quest_speaker" || var_1.script_noteworthy == "weapon_purchase" || var_1.script_noteworthy == "boss_fight_activation") {
-    self.interaction_trigger usetriggerrequirelookat(0);
+    self.interaction_trigger useTriggerRequireLookAt(0);
     self.interaction_trigger setusefov(360);
   } else if(var_1.script_noteworthy == "spawned_essence") {
-    self.interaction_trigger usetriggerrequirelookat(1);
+    self.interaction_trigger useTriggerRequireLookAt(1);
     self.interaction_trigger setusefov(360);
   } else if(var_1.script_noteworthy == "dj_quest_part_1" || var_1.script_noteworthy == "dj_quest_part_2" || var_1.script_noteworthy == "dj_quest_part_3") {
-    self.interaction_trigger usetriggerrequirelookat(0);
+    self.interaction_trigger useTriggerRequireLookAt(0);
     self.interaction_trigger setusefov(245);
   } else {
-    self.interaction_trigger usetriggerrequirelookat(1);
+    self.interaction_trigger useTriggerRequireLookAt(1);
     self.interaction_trigger setusefov(160);
   }
 
@@ -2005,7 +2005,7 @@ interaction_fail_internal(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   level notify("interaction", "purchase_denied", level.interactions[var_0.script_noteworthy], self);
   self.delay_hint = 1;
-  self.interaction_trigger sethintstring(var_1);
+  self.interaction_trigger setHintString(var_1);
   wait(1);
   self.delay_hint = undefined;
   func_F422(self.interaction_trigger, var_0);

@@ -113,7 +113,7 @@ function private function_f70e30a9() {
   self endon(#"death");
 
   while(true) {
-    var_31f7011a = arraysortclosest(getplayers(), self.origin);
+    var_31f7011a = arraysortclosest(getPlayers(), self.origin);
 
     foreach(player in var_31f7011a) {
       if(zm_utility::is_player_valid(player)) {
@@ -432,10 +432,10 @@ function private get_favorite_enemy(dog) {
     if(self.team == #"allies") {
       dog_targets = getaiteamarray(level.zombie_team);
     } else {
-      dog_targets = getplayers();
+      dog_targets = getPlayers();
     }
   } else {
-    dog_targets = arraycombine(getplayers(), getaiarray(), 0, 0);
+    dog_targets = arraycombine(getPlayers(), getaiarray(), 0, 0);
   }
 
   least_hunted = dog_targets[0];
@@ -505,7 +505,7 @@ function get_locomotion_target(behaviortreeentity) {
     spacing_horz_dist = ai::get_behavior_attribute("spacing_horz_dist");
     spacing_value = ai::get_behavior_attribute("spacing_value");
     to_enemy = behaviortreeentity.favoriteenemy.origin - behaviortreeentity.origin;
-    perp = vectornormalize((to_enemy[1] * -1, to_enemy[0], 0));
+    perp = vectorNormalize((to_enemy[1] * -1, to_enemy[0], 0));
     offset = perp * spacing_horz_dist * spacing_value;
     spacing_dist = math::clamp(length(to_enemy), spacing_near_dist, spacing_far_dist);
     lerp_amount = math::clamp((spacing_dist - spacing_near_dist) / (spacing_far_dist - spacing_near_dist), 0, 1);
@@ -1021,7 +1021,7 @@ function function_70daebd0(entity) {
   if(in_vehicle) {
     if(sqr(vehicle getspeed()) < length2dsquared(entity getvelocity())) {
       forward_vector = rotatepointaroundaxis((1, 0, 0), (0, 0, 1), vehicle.angles[1]);
-      dot = vectordot(vectornormalize(entity.origin - entity.favoriteenemy.origin), forward_vector);
+      dot = vectordot(vectorNormalize(entity.origin - entity.favoriteenemy.origin), forward_vector);
 
       if(abs(dot) > 0.5) {
         return false;
@@ -1557,7 +1557,7 @@ function private function_473c71d0(entity) {
     goal = namespace_85745671::function_401070dd(vehicle, entity.favoriteenemy);
 
     if(isvec(goal)) {
-      goal += vectornormalize(goal - vehicle.origin) * 100;
+      goal += vectorNormalize(goal - vehicle.origin) * 100;
       goal = getclosestpointonnavmesh(goal, 200, entity getpathfindingradius());
 
       if(isvec(goal)) {
@@ -1857,7 +1857,7 @@ function function_2e0abd15(entity) {
 
 function function_35b4cc91(tiger, entity) {
   forward = anglesToForward(tiger.angles);
-  to_enemy = vectornormalize(entity.origin - tiger.origin);
+  to_enemy = vectorNormalize(entity.origin - tiger.origin);
   return vectordot(forward, to_enemy) >= 0.966;
 }
 
@@ -1892,7 +1892,7 @@ function function_fba7325a(entity, mocompanim, mocompanimblendouttime, mocompani
       debugstar(enemypos, 50, (0, 0, 1));
     }
 
-    dirtoenemy = vectornormalize(enemypos - mocompanimflag.origin);
+    dirtoenemy = vectorNormalize(enemypos - mocompanimflag.origin);
     mocompanimflag forceteleport(mocompanimflag.origin, vectortoangles(dirtoenemy));
   }
 
@@ -1934,7 +1934,7 @@ function function_b1b9da60(entity, mocompanim, mocompanimblendouttime, mocompani
       }
     }
 
-    var_83fd29ee = vectornormalize(predictedenemypos - mocompanimflag.origin);
+    var_83fd29ee = vectorNormalize(predictedenemypos - mocompanimflag.origin);
     var_1efb2395 = predictedenemypos - var_83fd29ee * mocompanimflag getpathfindingradius() * 1.1;
     self.meleeinfo.adjustedendpos = var_1efb2395;
     var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
@@ -1958,7 +1958,7 @@ function function_b1b9da60(entity, mocompanim, mocompanimblendouttime, mocompani
       var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
       myforward = anglesToForward(self.angles);
       var_1c3641f2 = (mocompanimflag.favoriteenemy.origin[0], mocompanimflag.favoriteenemy.origin[1], mocompanimflag.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - mocompanimflag.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - mocompanimflag.origin);
       zdiff = self.meleeinfo.var_cb28f380[2] - mocompanimflag.favoriteenemy.origin[2];
       withinzrange = abs(zdiff) <= 30;
       withinfov = vectordot(myforward, dirtoenemy) > cos(30);
@@ -2137,16 +2137,16 @@ function function_f7d44ebf() {
     nearbyzombies = getentitiesinradius(self.origin, 512, 15);
 
     if(isalive(self) && !var_c2113d3e && !isDefined(self.var_73d04341) && nearbyzombies.size <= 1) {
-      closestplayer = arraygetclosest(self.origin, getplayers());
+      closestplayer = arraygetclosest(self.origin, getPlayers());
 
       if(isPlayer(closestplayer)) {
         self setgoal(closestplayer.origin, 1);
       }
 
       usetrigger = spawn("trigger_radius_use", self.origin + (0, 0, 32), 0, 128, 128, 1);
-      usetrigger triggerignoreteam();
-      usetrigger setcursorhint("HINT_NOICON");
-      usetrigger sethintstring(#"hash_c0744e442e94c14");
+      usetrigger triggerIgnoreTeam();
+      usetrigger setCursorHint("HINT_NOICON");
+      usetrigger setHintString(#"hash_c0744e442e94c14");
       usetrigger.dog = self;
       usetrigger thread function_d442eca6();
       usetrigger callback::on_trigger(&function_eee6f04);
@@ -2188,26 +2188,26 @@ function function_71b1652b() {
   self.var_bb8bba59 = 1;
   self forceteleport(self.origin, self.var_47d9e0ed);
   self animmode("gravity");
-  self animscripted(#"ai_t9_zm_zombie_dog_com_pet_intro", self.origin, self.angles, #"ai_t9_zm_zombie_dog_com_pet_intro", "custom", undefined, 1, 0.2);
+  self animScripted(#"ai_t9_zm_zombie_dog_com_pet_intro", self.origin, self.angles, #"ai_t9_zm_zombie_dog_com_pet_intro", "custom", undefined, 1, 0.2);
   anim_time = getanimlength("ai_t9_zm_zombie_dog_com_pet_intro");
   self waittillmatchtimeout(anim_time, {
     #notetrack: "end"}, #"ai_t9_zm_zombie_dog_com_pet_intro");
-  self animscripted(#"hash_2fdc6d4cc63c0d4c", self.origin, self.angles, #"hash_2fdc6d4cc63c0d4c", "custom", undefined, 1, 0.2);
+  self animScripted(#"hash_2fdc6d4cc63c0d4c", self.origin, self.angles, #"hash_2fdc6d4cc63c0d4c", "custom", undefined, 1, 0.2);
   wait 20;
 }
 
 function function_ba44fcfa() {
   self endon(#"death");
   self forceteleport(self.origin, self.var_47d9e0ed);
-  self animscripted(#"hash_6884c6c87674c98", self.origin, self.angles, #"hash_6884c6c87674c98", "custom", undefined, 1, 0.2);
+  self animScripted(#"hash_6884c6c87674c98", self.origin, self.angles, #"hash_6884c6c87674c98", "custom", undefined, 1, 0.2);
   wait 1;
-  self animscripted(#"hash_2fdc6d4cc63c0d4c", self.origin, self.angles, #"hash_2fdc6d4cc63c0d4c", "custom", undefined, 1, 0.2);
+  self animScripted(#"hash_2fdc6d4cc63c0d4c", self.origin, self.angles, #"hash_2fdc6d4cc63c0d4c", "custom", undefined, 1, 0.2);
   wait 20;
 }
 
 function function_82cc0356() {
   self endon(#"death");
-  self animscripted(#"hash_2591bae3caaef873", self.origin, self.angles, #"hash_2591bae3caaef873", "custom", undefined, 1, 0.2);
+  self animScripted(#"hash_2591bae3caaef873", self.origin, self.angles, #"hash_2591bae3caaef873", "custom", undefined, 1, 0.2);
   anim_time = getanimlength(#"hash_2591bae3caaef873");
   self waittillmatchtimeout(anim_time, {
     #notetrack: "end"}, #"hash_2591bae3caaef873");
@@ -2231,7 +2231,7 @@ function function_d442eca6() {
     if(!is_true(self.dog.var_bb8bba59) && !self.dog function_dd070839()) {
       foreach(player in function_a1ef346b(undefined, self.origin, 512)) {
         target = player.origin - self.dog.origin;
-        target = vectornormalize(target);
+        target = vectorNormalize(target);
         angles = vectortoangles(target);
         self.dog.var_bb8bba59 = 1;
         self.dog.var_47d9e0ed = angles;
@@ -2258,7 +2258,7 @@ function function_eee6f04(eventstruct) {
     }
 
     target = player.origin - self.dog.origin;
-    target = vectornormalize(target);
+    target = vectorNormalize(target);
     angles = vectortoangles(target);
     player gestures::function_56e00fbf(#"hash_6ecc1d58899727bb", undefined, 0);
     self.dog.var_47d9e0ed = angles;

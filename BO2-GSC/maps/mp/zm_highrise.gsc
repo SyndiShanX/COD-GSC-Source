@@ -686,14 +686,14 @@ fall_down(vdir, stance) {
 
   if(isDefined(vdir) && length(vdir) > 0) {
     xyspeedmag = 40 + randomint(12) + randomint(12);
-    xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+    xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
   }
 
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = origin;
   linker.angles = angles;
   self._fall_down_anchor = linker;
-  self playerlinkto(linker);
+  self playerlinkTo(linker);
   self playsoundtoplayer("zmb_player_death_fall", self);
   falling = stance != "prone";
 
@@ -703,8 +703,8 @@ fall_down(vdir, stance) {
     floor_height = 10 + origin[2] - eye[2];
     origin = origin + (0, 0, floor_height);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
   }
 
   self freezecontrols(1);
@@ -720,13 +720,13 @@ fall_down(vdir, stance) {
     bounce = randomint(4) + 8;
     origin = origin + (0, 0, bounce) - xyspeed * 0.1;
     lerptime = bounce / 50.0;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = origin + (0, 0, bounce * -1) + xyspeed * 0.1;
     lerptime = lerptime / 2.0;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
   }
 
   wait 15;
@@ -1043,10 +1043,10 @@ enable_zone_on_flag(str_zone_name, str_flag_name) {
 }
 
 electric_switch() {
-  trig = getent("use_elec_switch", "targetname");
-  master_switch = getent("elec_switch", "targetname");
+  trig = getEnt("use_elec_switch", "targetname");
+  master_switch = getEnt("elec_switch", "targetname");
   master_switch notsolid();
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
   trig setvisibletoall();
   trig waittill("trigger", user);
   trig setinvisibletoall();
@@ -1331,7 +1331,7 @@ toggle_leaper_traversals() {
 
     foreach(clip_brush in a_leaper_traversals) {
       clip_brush solid();
-      clip_brush disconnectpaths();
+      clip_brush disconnectPaths();
       clip_brush notsolid();
     }
 
@@ -1360,7 +1360,7 @@ toggle_zombie_traversals() {
 
     foreach(clip_brush in a_zombie_only_traversals) {
       clip_brush solid();
-      clip_brush disconnectpaths();
+      clip_brush disconnectPaths();
       clip_brush notsolid();
     }
   }
@@ -1441,7 +1441,7 @@ equipment_planted(weapon, equipname, groundfrom) {
   if(isDefined(self) && weaponelevator) {
     if(isDefined(weapon)) {
       parent = groundfrom.elevator_parent;
-      weapon linkto(parent);
+      weapon linkTo(parent);
       weapon setmovingplatformenabled(1);
 
       if(isDefined(weapon.stub)) {
@@ -1600,15 +1600,15 @@ highrise_audio_custom_response_line(player, index, category, type) {
 
 survivor_vox() {
   trigger = spawn("trigger_radius_use", (2398.5, -366, 1332.5), 0, 40, 72);
-  trigger setcursorhint("HINT_NOICON");
-  trigger sethintstring("");
-  trigger triggerignoreteam();
+  trigger setCursorHint("HINT_NOICON");
+  trigger setHintString("");
+  trigger triggerIgnoreTeam();
   level waittill("power_on");
   initiated = 0;
 
   while(!initiated) {
     trigger waittill("trigger", player);
-    playsoundatposition("zmb_zombie_arc", trigger.origin);
+    playSoundAtPosition("zmb_zombie_arc", trigger.origin);
     start_time = gettime();
     end_time = start_time + 5000;
 
@@ -1624,7 +1624,7 @@ survivor_vox() {
   sur_num = 1;
   index = 0;
   count = 0;
-  playsoundatposition("zmb_buildable_piece_add", trigger.origin);
+  playSoundAtPosition("zmb_buildable_piece_add", trigger.origin);
 
   while(true) {
     trigger waittill("trigger", player);

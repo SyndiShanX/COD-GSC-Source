@@ -39,7 +39,7 @@ __init__() {
       rock.isfishing = 0;
 
       if(isDefined(rock.target)) {
-        buoy = getent(rock.target, "targetname");
+        buoy = getEnt(rock.target, "targetname");
 
         if(isDefined(buoy)) {
           rock.var_87de0f0d = buoy.origin;
@@ -164,7 +164,7 @@ function_7a1e21a9(fishing_rock, v_origin, player) {
   dest_origin = function_e1cd5954(final_origin);
 
   if(isDefined(fishing_rock.target)) {
-    buoy = getent(fishing_rock.target, "targetname");
+    buoy = getEnt(fishing_rock.target, "targetname");
   }
 
   buoy thread fishing_splash();
@@ -182,7 +182,7 @@ function_e8c63c15(player) {
   self endon("148aaf4bd55078f9");
 
   if(isDefined(self.target)) {
-    buoy = getent(self.target, "targetname");
+    buoy = getEnt(self.target, "targetname");
   }
 
   if(isDefined(buoy)) {
@@ -329,13 +329,13 @@ function_b828bd39(player, dynent) {
     time = randomintrange(5, 7);
     wait time;
     dynent.var_3fa8a746 = 1;
-    player playrumbleonentity("fishing_rumble");
+    player playRumbleOnEntity("fishing_rumble");
     self thread fishing_buoy_splash();
     new_pos = self.origin + (0, 0, -5);
-    self moveto(new_pos, 0.5);
+    self moveTo(new_pos, 0.5);
     self waittill(#"movedone");
     new_pos = self.origin + (0, 0, 5);
-    self moveto(new_pos, 0.5);
+    self moveTo(new_pos, 0.5);
     self waittill(#"movedone");
     dynent.var_3fa8a746 = 0;
     waitframe(1);
@@ -390,7 +390,7 @@ function_ed446f40(dynent) {
 
   if(isDefined(dynent.buoy)) {
     dynent.buoy notify(#"fishing_done");
-    dynent.buoy moveto(dynent.var_87de0f0d, 1);
+    dynent.buoy moveTo(dynent.var_87de0f0d, 1);
     dynent.buoy hide();
   }
 
@@ -465,7 +465,7 @@ function_73532e4f() {
 
     if(isDefined(rock.buoy) && isDefined(rock.var_87de0f0d)) {
       rock.buoy notify(#"fishing_done");
-      rock.buoy moveto(rock.var_87de0f0d, 0.1);
+      rock.buoy moveTo(rock.var_87de0f0d, 0.1);
       rock.buoy hide();
     }
   }

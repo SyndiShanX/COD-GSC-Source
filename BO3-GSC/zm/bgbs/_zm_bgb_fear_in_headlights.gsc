@@ -59,7 +59,7 @@ function private function_31a2964e(ai) {
 
 function private function_723d94f5(allai, trace, degree = 45) {
   var_f1649153 = allai;
-  players = getplayers();
+  players = getPlayers();
   var_445b9352 = cos(degree);
   foreach(player in players) {
     var_f1649153 = player cantseeentities(var_f1649153, var_445b9352, trace);

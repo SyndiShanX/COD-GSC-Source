@@ -832,13 +832,13 @@ geticonforcrate() {
 
 crateactivate(hacker) {
   self makeusable();
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   if(!isDefined(self.cratetype)) {
     return;
   }
 
-  self sethintstring(self.cratetype.hint);
+  self setHintString(self.cratetype.hint);
 
   if(isDefined(self.cratetype.hint_gambler)) {
     self sethintstringforperk(#"specialty_showenemyequipment", self.cratetype.hint_gambler);
@@ -1036,7 +1036,7 @@ cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_angle, _crat
   }
 
   if(isDefined(context) && !(isDefined(context.dontdisconnectpaths) && context.dontdisconnectpaths)) {
-    crate disconnectpaths();
+    crate disconnectPaths();
   }
 
   switch (killstreak) {
@@ -1141,7 +1141,7 @@ cratephysics() {
   self thread update_crate_velocity();
   self thread play_impact_sound();
   self waittill(#"stationary");
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 function_1f686c3b(v_target_location) {
@@ -1183,7 +1183,7 @@ cratecontrolleddrop(killstreak, v_target_location) {
   deceltime = params.kstotaldroptime - acceltime;
   target = (v_target_location[0], v_target_location[1], v_target_location[2] + var_ae4c0bf9);
   hostmigration::waittillhostmigrationdone();
-  crate moveto(target, params.kstotaldroptime, acceltime, deceltime);
+  crate moveTo(target, params.kstotaldroptime, acceltime, deceltime);
   crate thread watchforcratekill(v_target_location[2] + (isDefined(params.ksstartcratekillheightfromground) ? params.ksstartcratekillheightfromground : 200));
   crate waittill(#"movedone");
   hostmigration::waittillhostmigrationdone();
@@ -1297,12 +1297,12 @@ dropcrate(origin, angle, killstreak, owner, team, killcament, killstreak_id, pac
   }
 
   if(isDefined(context.vehicledrop) && context.vehicledrop) {
-    context.vehicle = spawnvehicle(#"archetype_mini_quadtank_mp", origin, angles, "talon", undefined, 1, self);
+    context.vehicle = spawnVehicle(#"archetype_mini_quadtank_mp", origin, angles, "talon", undefined, 1, self);
   }
 
   crate = cratespawn(killstreak, killstreak_id, owner, team, origin, angles);
   killcament unlink();
-  killcament linkto(crate);
+  killcament linkTo(crate);
   crate.killcament = killcament;
   crate.killstreak_id = killstreak_id;
   crate.package_contents_id = package_contents_id;
@@ -1367,12 +1367,12 @@ unlinkonrotation(crate) {
   wait waitbeforerotationcheck;
   mincos = getdvarfloat(#"scr_supplydrop_killcam_max_rot", 0.999);
   cosine = 1;
-  currentdirection = vectornormalize(anglesToForward(crate.angles));
+  currentdirection = vectorNormalize(anglesToForward(crate.angles));
 
   while(cosine > mincos) {
     olddirection = currentdirection;
     waitframe(1);
-    currentdirection = vectornormalize(anglesToForward(crate.angles));
+    currentdirection = vectorNormalize(anglesToForward(crate.angles));
     cosine = vectordot(olddirection, currentdirection);
   }
 
@@ -1459,10 +1459,10 @@ watch_explosive_crate() {
 
         self radiusdamage(self.origin, 256, 500, 300, self.hacker, "MOD_EXPLOSIVE", getweapon(#"supplydrop"));
         playFX(level._supply_drop_explosion_fx, self.origin);
-        playsoundatposition(#"wpn_grenade_explode", self.origin);
+        playSoundAtPosition(#"wpn_grenade_explode", self.origin);
       }
     } else {
-      playsoundatposition(#"mpl_turret_alert", self.origin);
+      playSoundAtPosition(#"mpl_turret_alert", self.origin);
       scoreevents::processscoreevent(#"disarm_hacked_care_package", player, undefined, undefined);
       player challenges::disarmedhackedcarepackage();
     }
@@ -1481,7 +1481,7 @@ loop_sound(alias, interval) {
   self endon(#"death");
 
   while(true) {
-    playsoundatposition(alias, self.origin);
+    playSoundAtPosition(alias, self.origin);
     wait interval;
     interval /= 1.2;
 
@@ -1567,7 +1567,7 @@ cratedroptogroundkill() {
   self endon(#"death", #"stationary");
 
   for(;;) {
-    players = getplayers();
+    players = getPlayers();
     dotrace = 0;
 
     for(i = 0; i < players.size; i++) {
@@ -1653,7 +1653,7 @@ is_touching_crate() {
 
   crate = self;
   extraboundary = (10, 10, 10);
-  players = getplayers();
+  players = getPlayers();
   crate_bottom_point = self.origin;
 
   foreach(player in level.players) {
@@ -1960,7 +1960,7 @@ crategamblerthink() {
 }
 
 cratereactivate() {
-  self sethintstring(self.cratetype.hint);
+  self setHintString(self.cratetype.hint);
   icon = self geticonforcrate();
   self thread entityheadicons::setentityheadicon(self.team, self, icon);
 }
@@ -2015,7 +2015,7 @@ personalusebar(object) {
 }
 
 spawn_helicopter(owner, team, origin, angles, vehicledef, targetname, killstreak_id, context) {
-  chopper = spawnvehicle(vehicledef, origin, angles, targetname);
+  chopper = spawnVehicle(vehicledef, origin, angles, targetname);
   chopper setowner(owner);
 
   if(!isDefined(chopper)) {
@@ -2136,7 +2136,7 @@ gethelistart(drop_origin, drop_direction) {
       index = randomintrange(0, level.noflyzones.size);
       delta = drop_origin - level.noflyzones[index].origin;
       delta = (delta[0] + randomint(10), delta[1] + randomint(10), 0);
-      delta = vectornormalize(delta);
+      delta = vectorNormalize(delta);
       start_origin = drop_origin + delta * dist;
     }
   }
@@ -2622,7 +2622,7 @@ helidelivercrate(origin, weapon, owner, team, killstreak_id, package_contents_id
   killcament = spawn("script_model", chopper.origin + (0, 0, 800));
   killcament.angles = (100, chopper.angles[1], chopper.angles[2]);
   killcament.starttime = gettime();
-  killcament linkto(chopper);
+  killcament linkTo(chopper);
 
   if(!isDefined(chopper)) {
     return;
@@ -2770,10 +2770,10 @@ helidropcrate(killstreak, originalowner, offset, killcament, killstreak_id, pack
   crate = cratespawn(killstreak, killstreak_id, originalowner, self.team, self.origin, self.angles, undefined, context);
 
   if(killstreak == "inventory_supply_drop" || killstreak == "supply_drop") {
-    crate linkto(helicopter, isDefined(context.droptag) ? context.droptag : "tag_origin", isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0));
+    crate linkTo(helicopter, isDefined(context.droptag) ? context.droptag : "tag_origin", isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0));
     helicopter clientfield::set("supplydrop_care_package_state", 1);
   } else if(killstreak == "inventory_tank_robot" || killstreak == "tank_robot" || killstreak == "ai_tank_marker") {
-    crate linkto(helicopter, isDefined(context.droptag) ? context.droptag : "tag_origin", isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0));
+    crate linkTo(helicopter, isDefined(context.droptag) ? context.droptag : "tag_origin", isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0));
     helicopter clientfield::set("supplydrop_ai_tank_state", 1);
 
     if(isDefined(level.var_14151f16)) {

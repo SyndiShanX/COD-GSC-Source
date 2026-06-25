@@ -39,12 +39,12 @@ init() {
   level.var_fcde6b4 = &function_d838227c;
   level.var_14961f90 = &function_e4b73b34;
   level.var_2783a5a7 = getEntArray("special_round_gate", "targetname");
-  var_72a846ab = getent("arena_gate_east", "targetname");
-  var_b21a763b = getent("arena_gate_west", "targetname");
-  var_9a4626f1 = getent("arena_gate_east_clip", "targetname");
-  var_3dcd92b2 = getent("arena_gate_west_clip", "targetname");
-  var_9a4626f1 linkto(var_72a846ab);
-  var_3dcd92b2 linkto(var_b21a763b);
+  var_72a846ab = getEnt("arena_gate_east", "targetname");
+  var_b21a763b = getEnt("arena_gate_west", "targetname");
+  var_9a4626f1 = getEnt("arena_gate_east_clip", "targetname");
+  var_3dcd92b2 = getEnt("arena_gate_west_clip", "targetname");
+  var_9a4626f1 linkTo(var_72a846ab);
+  var_3dcd92b2 linkTo(var_b21a763b);
   array::add(level.var_2783a5a7, var_72a846ab, 0);
   array::add(level.var_2783a5a7, var_b21a763b, 0);
   function_23873006("tiger_spawn_0", 4);
@@ -77,7 +77,7 @@ init() {
 
 function_23873006(str_prefix, n_count) {
   for(i = 1; i <= n_count; i++) {
-    var_d9b71c6d = getent(str_prefix + i, "targetname");
+    var_d9b71c6d = getEnt(str_prefix + i, "targetname");
 
     if(isDefined(var_d9b71c6d)) {
       var_d9b71c6d.script_vector = (0, 0, 45);
@@ -201,7 +201,7 @@ function_9a74f284(var_d25bbdd5) {
 }
 
 function_a5dc8595() {
-  players = getplayers();
+  players = getPlayers();
 
   if(level.var_3f8640e8 <= 1) {
     n_max = players.size * 5;
@@ -248,7 +248,7 @@ function_1e895d4(var_d25bbdd5) {
 }
 
 function_f8ae1232() {
-  players = getplayers();
+  players = getPlayers();
 
   if(level.var_f8ae1232 < 1) {
     n_max = players.size * 2;
@@ -290,7 +290,7 @@ function_93eab559(var_b45e3d90 = 0) {
 
   foreach(e_gate in level.var_2783a5a7) {
     v_amount = vectorscale(e_gate.script_vector, 1);
-    e_gate moveto(e_gate.origin + v_amount, 1);
+    e_gate moveTo(e_gate.origin + v_amount, 1);
 
     if(isDefined(e_gate.targetname) && (e_gate.targetname == "arena_gate_east" || e_gate.targetname == "arena_gate_west")) {
       e_gate playSound(#"hash_1259041350e5f60d");
@@ -347,7 +347,7 @@ function_417990b9(var_b45e3d90 = 0) {
   foreach(e_gate in level.var_2783a5a7) {
     if(isDefined(e_gate.script_vector)) {
       v_amount = vectorscale(e_gate.script_vector, -1);
-      e_gate moveto(e_gate.origin + v_amount, 1);
+      e_gate moveTo(e_gate.origin + v_amount, 1);
 
       if(isDefined(e_gate.targetname) && (e_gate.targetname == "arena_gate_east" || e_gate.targetname == "arena_gate_west")) {
         e_gate playSound(#"hash_35413bdf3d48cfa7");
@@ -411,7 +411,7 @@ function_85324f75(var_8657f7ff = 0) {
 
 function_3cba3938(var_c34665fc) {
   if(var_c34665fc == "kill_special_round_fog") {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       e_player.var_7b2f6755 = undefined;
       e_player.var_b9b1038f = undefined;
     }
@@ -422,8 +422,8 @@ function_618c268f(e_source) {
   self endon(#"disconnect");
   var_c1538db = e_source.origin;
   self dodamage(25, var_c1538db);
-  var_60bb2505 = getent("vol_spawn_area", "targetname");
-  vol_opposite_tunnel = getent("vol_opposite_tunnel", "targetname");
+  var_60bb2505 = getEnt("vol_spawn_area", "targetname");
+  vol_opposite_tunnel = getEnt("vol_opposite_tunnel", "targetname");
   n_delay = 0.666;
 
   if(self istouching(var_60bb2505) || self istouching(vol_opposite_tunnel)) {
@@ -446,8 +446,8 @@ function_39a9e7ce() {
   var_629da31e = zm_custom::function_901b751c(#"zmlaststandduration");
   wait 1.5;
   level notify(#"kill_special_round_fog");
-  var_60bb2505 = getent("vol_spawn_area", "targetname");
-  vol_opposite_tunnel = getent("vol_opposite_tunnel", "targetname");
+  var_60bb2505 = getEnt("vol_spawn_area", "targetname");
+  vol_opposite_tunnel = getEnt("vol_opposite_tunnel", "targetname");
 
   foreach(e_player in util::get_active_players()) {
     if(e_player istouching(var_60bb2505) || e_player istouching(vol_opposite_tunnel)) {

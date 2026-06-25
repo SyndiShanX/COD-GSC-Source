@@ -125,7 +125,7 @@ function _fire(lifeid, player, team, killstreak_id) {
   remotemissilespawnarray = getEntArray("remoteMissileSpawn", "targetname");
   foreach(spawn in remotemissilespawnarray) {
     if(isDefined(spawn.target)) {
-      spawn.targetent = getent(spawn.target, "targetname");
+      spawn.targetent = getEnt(spawn.target, "targetname");
     }
   }
   if(remotemissilespawnarray.size > 0) {
@@ -136,7 +136,7 @@ function _fire(lifeid, player, team, killstreak_id) {
   if(isDefined(remotemissilespawn)) {
     startpos = remotemissilespawn.origin;
     targetpos = remotemissilespawn.targetent.origin;
-    vector = vectornormalize(startpos - targetpos);
+    vector = vectorNormalize(startpos - targetpos);
     startpos = (vector * level.missileremotelaunchvert) + targetpos;
   } else {
     upvector = (0, 0, level.missileremotelaunchvert);
@@ -161,7 +161,7 @@ function _fire(lifeid, player, team, killstreak_id) {
   }
   rocket = magicbullet(getweapon("remote_missile_missile"), startpos, targetpos, player);
   rocket.forceonemissile = 1;
-  forceanglevector = vectornormalize(targetpos - startpos);
+  forceanglevector = vectorNormalize(targetpos - startpos);
   rocket.angles = vectortoangles(forceanglevector);
   rocket.targetname = "remote_missile";
   rocket killstreaks::configure_team("remote_missile", killstreak_id, self, undefined, undefined, undefined);
@@ -243,7 +243,7 @@ function player_missile_end(rocket, performplayerkillstreakend, unlink, team, ki
   if(isDefined(self)) {
     self thread destroy_missile_hud();
     if(isDefined(performplayerkillstreakend) && performplayerkillstreakend) {
-      self playrumbleonentity("grenade_rumble");
+      self playRumbleOnEntity("grenade_rumble");
       if(level.gameended == 0) {
         self sendkillstreakdamageevent(600);
       }
@@ -346,14 +346,14 @@ function rocket_cleanupondeath() {
 function missile_sound_play(player) {
   self.snd_first = spawn("script_model", self.origin);
   self.snd_first setModel("tag_origin");
-  self.snd_first linkto(self);
+  self.snd_first linkTo(self);
   self.snd_first setinvisibletoall();
   self.snd_first setvisibletoplayer(player);
   self.snd_first playLoopSound("wpn_remote_missile_loop_plr", 0.5);
   self thread stopondeath(self.snd_first);
   self.snd_third = spawn("script_model", self.origin);
   self.snd_third setModel("tag_origin");
-  self.snd_third linkto(self);
+  self.snd_third linkTo(self);
   self.snd_third setvisibletoall();
   self.snd_third setinvisibletoplayer(player);
   self.snd_third playLoopSound("wpn_remote_missile_loop_npc", 0.2);
@@ -370,7 +370,7 @@ function missile_sound_boost(rocket) {
   rocket.snd_third playLoopSound("wpn_remote_missile_boost_npc");
   self playlocalsound("wpn_remote_missile_fire_boost_plr");
   rocket.snd_first playLoopSound("wpn_remote_missile_boost_plr");
-  self playrumbleonentity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
   if((rocket.origin[2] - self.origin[2]) > 4000) {
     rocket notify("stop_impact_sound");
     rocket thread missile_sound_impact(self, 6250);
@@ -637,7 +637,7 @@ function missile_deploy(rocket, hacked) {
   }
   playFX(level.missileremotedeployfx, rocket.origin, anglesToForward(rocket.angles));
   self playlocalsound("mpl_rc_exp");
-  self playrumbleonentity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
   earthquake(0.2, 0.2, rocket.origin, 200);
   rocket hide();
   rocket setmissilecoasting(1);

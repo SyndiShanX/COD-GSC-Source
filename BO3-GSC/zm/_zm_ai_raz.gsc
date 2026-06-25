@@ -133,7 +133,7 @@ function function_684ce0() {
       } else {
         level.var_51a5abd0 = level.var_51a5abd0 + randomintrange(5, 8);
       }
-      getplayers()[0] iprintln("" + level.var_51a5abd0);
+      getPlayers()[0] iprintln("" + level.var_51a5abd0);
     } else if(level flag::get("raz_round")) {
       function_783ab6ac();
       level.round_spawn_func = old_spawn_func;
@@ -161,7 +161,7 @@ function function_783ab6ac() {
 function function_a33bc00f() {
   level endon("intermission");
   level endon("raz_round");
-  level.var_bc3f44bf = getplayers();
+  level.var_bc3f44bf = getPlayers();
   for(i = 0; i < level.var_bc3f44bf.size; i++) {
     level.var_bc3f44bf[i].hunted_by = 0;
   }
@@ -369,7 +369,7 @@ function function_25561504() {
 }
 
 function get_favorite_enemy() {
-  var_bc3f44bf = getplayers();
+  var_bc3f44bf = getPlayers();
   e_least_hunted = undefined;
   foreach(e_target in var_bc3f44bf) {
     if(!isDefined(e_target.hunted_by)) {
@@ -411,7 +411,7 @@ function function_bdf13070() {
   self playlocalsound("zmb_raz_round_start");
   variation_count = 5;
   wait(4.5);
-  players = getplayers();
+  players = getPlayers();
   num = randomintrange(0, players.size);
   players[num] zm_audio::create_and_play_dialog("general", "raz_spawn");
 }
@@ -512,7 +512,7 @@ function function_7ed6c714(n_to_spawn = 1, var_e41e673a, b_force_spawn = 0, var_
     if(!b_force_spawn && !function_ea911683()) {
       return n_spawned;
     }
-    players = getplayers();
+    players = getPlayers();
     var_19764360 = get_favorite_enemy();
     if(isDefined(var_b7959229)) {
       s_spawn_loc = var_b7959229;
@@ -539,7 +539,7 @@ function function_7ed6c714(n_to_spawn = 1, var_e41e673a, b_force_spawn = 0, var_
       if(isDefined(var_e41e673a)) {
         ai thread[[var_e41e673a]]();
       }
-      playsoundatposition("zmb_raz_spawn", s_spawn_loc.origin);
+      playSoundAtPosition("zmb_raz_spawn", s_spawn_loc.origin);
     }
     function_a74c2884();
   }

@@ -1221,7 +1221,7 @@ tryexposedreacquire() {
   }
 
   if(!isDefined(self.reacquire_without_facing) || !self.reacquire_without_facing) {
-    var_0 = vectornormalize(self.enemy.origin - self.origin);
+    var_0 = vectorNormalize(self.enemy.origin - self.origin);
     var_1 = anglesToForward(self.angles);
 
     if(vectordot(var_0, var_1) < 0.5) {

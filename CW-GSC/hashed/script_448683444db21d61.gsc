@@ -110,7 +110,7 @@ function function_3ba2978d() {
 }
 
 function function_57cc7ff7() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player clientfield::set("" + #"hash_63af42145e260fb5", 0);

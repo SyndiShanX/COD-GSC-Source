@@ -216,7 +216,7 @@ apply_ghettotag(var_0, var_1) {
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     var_0 = spawn("script_model", self.origin);
     var_0 setModel("axis");
-    var_0 linkto(self, var_1, var_2[var_3].origin, var_2[var_3].angles);
+    var_0 linkTo(self, var_1, var_2[var_3].origin, var_2[var_3].angles);
     var_0 notsolid();
     self.ghettotags[self.ghettotags.size] = var_0;
   }
@@ -370,7 +370,7 @@ init_collapsing_bridge_parts() {
           if(var_7.classname != "script_model") {
             continue;
           }
-          var_4 linkto(var_7);
+          var_4 linkTo(var_7);
           break;
         }
       }

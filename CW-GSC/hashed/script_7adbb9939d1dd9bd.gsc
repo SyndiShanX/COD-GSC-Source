@@ -50,7 +50,7 @@ function zombie_open_sesame() {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
   zombie_doors = getEntArray("zombie_door", "targetname");
 
   for(i = 0; i < zombie_doors.size; i++) {
@@ -98,7 +98,7 @@ function function_97346595() {
 
   while(true) {
     new_value = getdvarint(#"hash_6d3c5317001d4fc6", 0);
-    players = getplayers();
+    players = getPlayers();
 
     if(new_value != var_2e0b8925) {
       if(!(var_2e0b8925 && new_value)) {
@@ -112,7 +112,7 @@ function function_97346595() {
 
         remainingplayers = 4 - players.size;
         callback::on_spawned(&function_c5342e8d);
-        players = getplayers();
+        players = getPlayers();
 
         foreach(player in players) {
           player val::set(#"bot_soak", "takedamage", 0);
@@ -127,7 +127,7 @@ function function_97346595() {
         adddebugcommand("<dev string:x1fc>");
 
         callback::remove_on_spawned(&function_c5342e8d);
-        players = getplayers();
+        players = getPlayers();
 
         foreach(player in players) {
           player val::reset(#"bot_soak", "takedamage");
@@ -186,12 +186,12 @@ function function_57bf0556() {
       continue;
     }
 
-    if(getdvarint(#"hash_4a501e2ed929dd5b", 1) && getplayers().size < 4 && randomint(100) < 30) {
+    if(getdvarint(#"hash_4a501e2ed929dd5b", 1) && getPlayers().size < 4 && randomint(100) < 30) {
       bot = bot::add_bot(#"allies", function_a161addf(), "ZM");
 
       if(isDefined(bot)) {
-        plr = getplayers()[0];
-        bot setorigin(plr.origin);
+        plr = getPlayers()[0];
+        bot setOrigin(plr.origin);
         level.botcount++;
         debugmsg("Bot is being added.Count=" + level.botcount);
       }
@@ -225,7 +225,7 @@ function debugmsg(txt) {
 function function_a161addf() {
   colors = array("green", "blue", "red", "yellow");
   used = [];
-  guys = getplayers();
+  guys = getPlayers();
 
   foreach(guy in guys) {
     used[used.size] = guy.doa.color;

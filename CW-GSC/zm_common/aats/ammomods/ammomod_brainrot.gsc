@@ -237,7 +237,7 @@ function private function_eb8a62bc(var_c5ad44f1, n_damage, e_attacker, weapon) {
   n_random_x = randomfloatrange(-3, 3);
   n_random_y = randomfloatrange(-3, 3);
   self zm_utility::start_ragdoll(1);
-  self launchragdoll(60 * vectornormalize(v_curr_zombie_origin - var_c5ad44f1 + (n_random_x, n_random_y, 10)), "torso_lower");
+  self launchragdoll(60 * vectorNormalize(v_curr_zombie_origin - var_c5ad44f1 + (n_random_x, n_random_y, 10)), "torso_lower");
 }
 
 function function_6f735de0() {

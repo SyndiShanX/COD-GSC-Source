@@ -31,8 +31,8 @@ agent_float_in_air(var_0) {
   var_6 = spawn("script_origin", var_0.origin);
   var_6.angles = var_0.angles;
   var_0.do_immediate_ragdoll = 1;
-  var_0 linkto(var_6);
-  var_6 moveto(var_0.origin + (0, 0, var_5), var_1);
+  var_0 linkTo(var_6);
+  var_6 moveTo(var_0.origin + (0, 0, var_5), var_1);
   var_7 = var_6 scripts\cp\utility::waittill_any_ents_return(level, "deactivate zero g", var_0, "death");
 
   if(isDefined(var_0)) {
@@ -202,20 +202,20 @@ dischord_death_logic(var_0, var_1, var_2, var_3, var_4) {
   self.link_ent thread kill_link_ent_on_death(self);
 
   if(!var_6) {
-    self linkto(self.link_ent);
+    self linkTo(self.link_ent);
   }
 
   thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 0.5);
-  self.link_ent rotateyaw(360, 1.0);
+  self.link_ent rotateYaw(360, 1.0);
   wait 0.5;
   thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 0.5);
-  self.link_ent rotateyaw(720, 1.0);
+  self.link_ent rotateYaw(720, 1.0);
   wait 0.5;
   thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 1);
-  self.link_ent rotateyaw(1080, 1.0);
+  self.link_ent rotateYaw(1080, 1.0);
   wait 1;
   thread dischord_spin_attack(var_0, var_1, var_2, var_3, var_7, 1);
-  self.link_ent rotateyaw(1240, 1.0);
+  self.link_ent rotateYaw(1240, 1.0);
   wait 1;
 
   if(var_6) {
@@ -328,7 +328,7 @@ fling_zombie(var_0, var_1, var_2, var_3) {
       self getrandomarmkillstreak(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", "iw7_dischorddummy_zm");
     }
   } else {
-    self giveflagcapturexp(vectornormalize(self.origin - var_1.origin) * 200 + (0, 0, 800));
+    self giveflagcapturexp(vectorNormalize(self.origin - var_1.origin) * 200 + (0, 0, 800));
     wait 0.1;
 
     if(isDefined(var_2)) {
@@ -400,7 +400,7 @@ facemelter_death_logic(var_0, var_1, var_2, var_3, var_4) {
     self.link_ent = spawn("script_origin", self.origin);
     self.link_ent.angles = self.angles;
     self.link_ent thread kill_link_ent_on_death(self);
-    self linkto(self.link_ent);
+    self linkTo(self.link_ent);
     var_6 = self.origin + (0, 0, 200);
     var_7 = self aiphysicstrace(self.origin, self.origin + (0, 0, 200), 15, 60, 1, 1);
     var_8 = 1;
@@ -417,7 +417,7 @@ facemelter_death_logic(var_0, var_1, var_2, var_3, var_4) {
       var_8 = var_8 / 200;
     }
 
-    self.link_ent moveto(var_6, var_8);
+    self.link_ent moveTo(var_6, var_8);
     wait 0.1;
     self setscriptablepartstate("left_leg", "detached", 1);
     self setscriptablepartstate("right_leg", "detached", 1);
@@ -1025,7 +1025,7 @@ get_melee_weapon_melee_damage(var_0, var_1) {
 
 create_explosion_sphere(var_0) {
   var_1 = var_0 / 2;
-  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglesToForward(self.angles));
   var_3 = var_2 * var_1;
   var_4 = self.origin + var_3;
   physicsexplosionsphere(var_4, var_1, 1, 2.0);
@@ -1035,7 +1035,7 @@ playredrepulsorfx() {
   var_0 = spawnfxforclient(level._effect["repulsor_view_red"], self gettagorigin("tag_eye"), self);
   triggerfx(var_0);
   var_0 thread scripts\cp\utility::delayentdelete(1);
-  playrumbleonentity("slide_collision", self.origin);
+  playRumbleOnEntity("slide_collision", self.origin);
   self earthquakeforplayer(0.5, 0.5, self.origin, 62.5);
 }
 
@@ -1051,7 +1051,7 @@ checkenemiesinfov(var_0, var_1, var_2) {
 
   foreach(var_8 in var_6) {
     var_9 = anglesToForward(self.angles);
-    var_10 = vectornormalize(var_9) * -25;
+    var_10 = vectorNormalize(var_9) * -25;
     var_11 = 0;
     var_12 = var_8.origin;
     var_13 = scripts\engine\utility::within_fov(self getEye() + var_10, self.angles, var_12 + (0, 0, 30), var_3);

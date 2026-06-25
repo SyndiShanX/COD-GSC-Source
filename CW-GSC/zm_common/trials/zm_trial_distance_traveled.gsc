@@ -28,7 +28,7 @@ function private preinit() {
 function private on_begin(var_38282db8) {
   var_38282db8 = zm_trial::function_5769f26a(var_38282db8);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_ed4d5d4(var_38282db8);
   }
 

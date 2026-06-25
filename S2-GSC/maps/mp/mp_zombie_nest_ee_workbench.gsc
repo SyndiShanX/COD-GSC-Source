@@ -5,7 +5,7 @@
 
 func_536B() {
   var_00 = spawnStruct();
-  var_00.var_10BD = getent("assemble_ww_trig", "targetname");
+  var_00.var_10BD = getEnt("assemble_ww_trig", "targetname");
   var_00.var_AA68 = function_021F(var_00.var_10BD.var_01A2, "targetname");
   foreach(var_02 in var_00.var_AA68) {
     var_03 = var_02 method_85CE();
@@ -53,8 +53,8 @@ func_536B() {
     }
   }
 
-  var_00.var_10BE linkto(var_00.var_10C0);
-  var_00.var_10BF linkto(var_00.var_10C0);
+  var_00.var_10BE linkTo(var_00.var_10C0);
+  var_00.var_10BF linkTo(var_00.var_10C0);
   var_00.var_6FDB = getEntArray(var_00.var_10C0.var_01A2, "targetname");
   foreach(var_0B in var_00.var_6FDB) {
     var_0B common_scripts\utility::func_9D9F();
@@ -133,7 +133,7 @@ func_AA6B() {
 }
 
 func_AA70() {
-  self.var_10BD usetriggerrequirelookat();
+  self.var_10BD useTriggerRequireLookAt();
   self.var_10BD thread func_AA6A();
   var_00 = undefined;
   var_01 = "flag_ww_part_01_placed";
@@ -154,7 +154,7 @@ func_AA70() {
       break;
     } else if(common_scripts\utility::func_3C77(var_04) && common_scripts\utility::func_3C77(var_05)) {
       if(!common_scripts\utility::func_3C77(var_01) || !common_scripts\utility::func_3C77(var_02)) {
-        self.var_10C0 linkto(self.var_48F2, "clamp");
+        self.var_10C0 linkTo(self.var_48F2, "clamp");
         self.var_10BF method_805B();
         self.var_10BE method_805B();
         common_scripts\utility::func_3C8F(var_01);
@@ -192,7 +192,7 @@ func_AA70() {
 }
 
 func_AA6A() {
-  self sethintstring(&"ZOMBIES_BUILDABLE_NO_PARTS");
+  self setHintString(&"ZOMBIES_BUILDABLE_NO_PARTS");
   var_00 = "flag_ww_part_01_picked_up";
   var_01 = "flag_ww_part_02_picked_up";
   var_02 = "flag_ww_part_01_placed";
@@ -200,21 +200,21 @@ func_AA6A() {
   var_04 = lib_0557::func_7838("4 cart", "head to com");
   common_scripts\utility::func_3C9F(var_00);
   func_7C05();
-  self sethintstring(&"ZOMBIE_NEST_PLACE_WW_PART");
+  self setHintString(&"ZOMBIE_NEST_PLACE_WW_PART");
   var_05 = common_scripts\utility::func_3CA4(var_02, var_01);
   if(var_05 == var_02) {
-    self sethintstring(&"ZOMBIES_BUILDABLE_NO_PARTS");
+    self setHintString(&"ZOMBIES_BUILDABLE_NO_PARTS");
     common_scripts\utility::func_3C9F(var_01);
-    self sethintstring(&"ZOMBIE_NEST_PLACE_WW_PART");
+    self setHintString(&"ZOMBIE_NEST_PLACE_WW_PART");
   }
 
   var_05 = common_scripts\utility::func_3CA4(var_03, var_04);
   if(var_05 == var_03) {
-    self sethintstring(&"ZOMBIE_NEST_WAITING_FOR_CART");
+    self setHintString(&"ZOMBIE_NEST_WAITING_FOR_CART");
     common_scripts\utility::func_3C9F(var_04);
   }
 
-  self sethintstring(&"ZOMBIE_NEST_ASSEMBLE_WW");
+  self setHintString(&"ZOMBIE_NEST_ASSEMBLE_WW");
 }
 
 func_7C05() {
@@ -312,7 +312,7 @@ func_AA6C() {
   level.var_AA67.var_48F2 method_805B();
   if(isDefined(level.var_AA67.var_10C0)) {
     level.var_AA67.var_10C0 method_805B();
-    level.var_AA67.var_10C0 linkto(level.var_AA67.var_48F2, "clamp");
+    level.var_AA67.var_10C0 linkTo(level.var_AA67.var_48F2, "clamp");
   }
 
   level.var_AA67.var_48F2 method_8278(getanimname(var_00));
@@ -354,12 +354,12 @@ func_AA6F(param_00) {
 
     var_0A = param_00 getcurrentprimaryweapon();
     if(0) {
-      self setcursorhint("HINT_NOICON");
+      self setCursorHint("HINT_NOICON");
     }
 
     if(lib_0547::func_57AF(var_0A) || lib_0547::func_5862(var_0A) || lib_0547::iszombieconsumableweapon(var_0A)) {
       if(0) {
-        self sethintstring("");
+        self setHintString("");
         self setsecondaryhintstring("");
         self.var_3006 = undefined;
       }
@@ -376,14 +376,14 @@ func_AA6F(param_00) {
       if(0) {
         self.var_3006 = self.var_2925;
         if(0) {
-          self sethintstring(maps\mp\zombies\_zombies_magicbox::func_4412(self));
+          self setHintString(maps\mp\zombies\_zombies_magicbox::func_4412(self));
           self setsecondaryhintstring(maps\mp\zombies\_zombies_magicbox::func_4411(self, 0));
         }
 
         if(1) {}
       } else {
         if(0) {
-          self sethintstring("");
+          self setHintString("");
           self setsecondaryhintstring("");
           self.var_3006 = undefined;
         }
@@ -409,7 +409,7 @@ func_AA6F(param_00) {
 
     self.var_3006 = 0;
     if(0) {
-      self sethintstring(&"ZOMBIE_NEST_PICKUP_WW");
+      self setHintString(&"ZOMBIE_NEST_PICKUP_WW");
     }
 
     if(1) {
@@ -480,15 +480,15 @@ func_AA75() {
   }
 
   if(isDefined(self.var_48F2) && isDefined(self.var_AAC8)) {
-    self.var_AAC8 linkto(self.var_48F2, "clamp");
+    self.var_AAC8 linkTo(self.var_48F2, "clamp");
   }
 
   if(isDefined(self.var_48F2) && isDefined(self.var_AAC7)) {
-    self.var_AAC7 linkto(self.var_48F2, "clamp");
+    self.var_AAC7 linkTo(self.var_48F2, "clamp");
   }
 
   if(isDefined(self.var_48F2) && isDefined(self.var_AAC6)) {
-    self.var_AAC6 linkto(self.var_48F2, "clamp");
+    self.var_AAC6 linkTo(self.var_48F2, "clamp");
   }
 }
 

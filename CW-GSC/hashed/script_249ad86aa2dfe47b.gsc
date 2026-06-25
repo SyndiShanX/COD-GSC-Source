@@ -292,7 +292,7 @@ function function_c833f9a3() {
   namespace_b6fe1dbe::function_d282054f(var_736f7cf8[0], var_736f7cf8[1]);
 
   if(isDefined(var_736f7cf8[0]) && isDefined(level.var_56894b06)) {
-    level.var_56894b06 linkto(var_736f7cf8[0], "tag_origin", level.var_56894b06.origin);
+    level.var_56894b06 linkTo(var_736f7cf8[0], "tag_origin", level.var_56894b06.origin);
   }
 
   foreach(heli in var_736f7cf8) {
@@ -392,8 +392,8 @@ function function_1384307e(a_allies, a_enemies) {
 }
 
 function function_6444a0e8() {
-  level.var_a8dd4628 = getent("flag_waterfall_path_player_left_trigger", "targetname");
-  level.var_db471312 = getent("flag_waterfall_path_player_right_trigger", "targetname");
+  level.var_a8dd4628 = getEnt("flag_waterfall_path_player_left_trigger", "targetname");
+  level.var_db471312 = getEnt("flag_waterfall_path_player_right_trigger", "targetname");
   waitframe(1);
   level.var_a8dd4628 triggerenable(0);
   level.var_db471312 triggerenable(0);
@@ -413,7 +413,7 @@ function function_306abb40(a_allies, a_enemies) {
             return;
           }
 
-          ai stopanimscripted();
+          ai stopanimScripted();
         }
       }
     }
@@ -525,13 +525,13 @@ function function_d1f683f0(var_a6be88da, triggername, shotname, var_74ad35de) {
   childthread function_db10087a(triggername, shotname, var_74ad35de);
   thread scene::init("waterfall_kill_player_right");
   thread scene::init("waterfall_kill_player_left");
-  trigger = getent(shotname, "targetname");
+  trigger = getEnt(shotname, "targetname");
   trigger triggerenable(1);
-  trigger triggerignoreteam();
+  trigger triggerIgnoreTeam();
   trigger setvisibletoall();
-  trigger setcursorhint("HINT_NOICON");
+  trigger setCursorHint("HINT_NOICON");
   trigger setteamfortrigger(#"none");
-  trigger usetriggerrequirelookat();
+  trigger useTriggerRequireLookAt();
   flag::wait_till("flag_waterfall_path_ambush");
   struct = struct::get("struct_" + shotname, "targetname");
   objectives::function_4eb5c04a(shotname, struct.origin);
@@ -542,7 +542,7 @@ function function_db10087a(var_a6be88da, var_74ad35de, shotname) {
   level.player endon(#"death");
   level endon(#"flag_waterfall_path_exit_water");
   level endon(#"flag_waterfall_path_player_melee");
-  trigger = getent(var_74ad35de, "targetname");
+  trigger = getEnt(var_74ad35de, "targetname");
 
   while(true) {
     if(!isDefined(trigger)) {
@@ -771,7 +771,7 @@ function function_9224fc8() {
   level endon(#"flag_waterfall_path_player_shot2");
   level endon(#"flag_waterfall_path_player_shot");
   thread function_6d00113d();
-  volume = getent("volume_waterfall_kill_stand", "targetname");
+  volume = getEnt("volume_waterfall_kill_stand", "targetname");
 
   while(true) {
     while(isDefined(volume) && !level.player istouching(volume)) {
@@ -846,7 +846,7 @@ function function_182d1f98() {
       return;
     }
 
-    self stopanimscripted();
+    self stopanimScripted();
   } else if(!level flag::get("flag_waterfall_path_player_melee")) {
     if(!level flag::get_all(array("flag_waterfall_path_intro_complete", "flag_waterfall_path_heli_complete")) || level flag::get_all(array("flag_waterfall_path_intro_complete", "flag_waterfall_path_heli_complete")) && isDefined(self.var_d3ed217c) && !isalive(self.var_d3ed217c)) {
       if(!level flag::get("flag_waterfall_path_heli_complete")) {
@@ -859,7 +859,7 @@ function function_182d1f98() {
         return;
       }
 
-      self stopanimscripted();
+      self stopanimScripted();
 
       if(isDefined(self.prop)) {
         self.prop delete();
@@ -882,14 +882,14 @@ function function_3781040d(var_cb357a94, key) {
         return;
       }
 
-      ai stopanimscripted();
+      ai stopanimScripted();
     } else if(!flag::get("flag_waterfall_path_player_melee")) {
       if(!level flag::get_all(array("flag_waterfall_path_intro_complete", "flag_waterfall_path_heli_complete")) || level flag::get_all(array("flag_waterfall_path_intro_complete", "flag_waterfall_path_heli_complete")) && isDefined(ai.var_d3ed217c) && !isalive(ai.var_d3ed217c)) {
         if(ai flag::get("in_action")) {
           return;
         }
 
-        ai stopanimscripted();
+        ai stopanimScripted();
 
         if(isDefined(ai.prop)) {
           ai.prop delete();

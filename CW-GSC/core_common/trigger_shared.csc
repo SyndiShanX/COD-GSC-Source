@@ -83,7 +83,7 @@ function trigger_wait(n_clientnum) {
   self endon(#"trigger");
 
   if(isDefined(self.targetname)) {
-    trig = getent(n_clientnum, self.targetname, "target");
+    trig = getEnt(n_clientnum, self.targetname, "target");
 
     if(isDefined(trig)) {
       trig waittill(#"trigger");

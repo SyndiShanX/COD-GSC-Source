@@ -167,7 +167,7 @@ function function_6de0bb32() {
 }
 
 function on_team_eliminated(params) {
-  players = getplayers(params.team);
+  players = getPlayers(params.team);
 
   foreach(player in players) {
     if(isDefined(player.reinsertionvehicle)) {
@@ -180,7 +180,7 @@ function on_player_killed(params) {
   self.var_26074a5b = undefined;
 
   if(!isDefined(self.reinsertionvehicle)) {
-    vehicle = spawnvehicle(#"hash_3effd1dd89ee3d36", (0, 0, 0), (0, 0, 0));
+    vehicle = spawnVehicle(#"hash_3effd1dd89ee3d36", (0, 0, 0), (0, 0, 0));
 
     if(isDefined(vehicle)) {
       vehicle.targetname = "reinsertionvehicle";
@@ -284,13 +284,13 @@ function function_2ec1bf5c(origin) {
     #origin: circle.origin, #radius: circle.radius - 1500
   };
   var_d9100e0 = isDefined(level.deathcircle.nextcircle) ? level.deathcircle.nextcircle.origin : circle.origin;
-  dir = vectornormalize(origin - var_d9100e0);
+  dir = vectorNormalize(origin - var_d9100e0);
   var_51c8b128 = death_circle::function_936b3f09(origin, dir, var_bab1ee6b);
   point = (var_51c8b128[0], var_51c8b128[1], 0);
 
   if(isDefined(level.territory) && isarray(level.territory.bounds) && level.territory.bounds.size > 0) {
     inbounds = 0;
-    var_ddd29fdc = vectornormalize((var_d9100e0[0], var_d9100e0[1], 0) - point);
+    var_ddd29fdc = vectorNormalize((var_d9100e0[0], var_d9100e0[1], 0) - point);
 
     while(!inbounds) {
       foreach(bound in level.territory.bounds) {
@@ -341,7 +341,7 @@ function function_b74c009d(groundpoint, var_6b4313e9) {
 function function_2613549d(origin, var_6b4313e9) {
   level endon(#"game_ended");
   self endon(#"disconnect", #"end_respawn");
-  self setorigin(origin);
+  self setOrigin(origin);
   fwd = var_6b4313e9 - origin;
   var_7d48f39e = vectortoangles(fwd);
   launchvelocity = fwd;

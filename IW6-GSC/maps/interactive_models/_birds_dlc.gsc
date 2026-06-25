@@ -77,7 +77,7 @@ birds_createEnts() {
     self.birds[i] = spawn("script_model", self GetTagOrigin("tag_bird" + i));
     self.birds[i] setModel(info.bird_model["idle"]);
     self.birds[i].angles = self.angles;
-    self.birds[i] LinkTo(self, ("tag_bird" + i));
+    self.birds[i] linkTo(self, ("tag_bird" + i));
     if(isSP()) {
       self.birds[i] call[[level.func["useanimtree"]]](info.bird_animtree);
     }
@@ -108,7 +108,7 @@ birds_setUpConnectedPerches(perchEnt, path) {
   if(!isDefined(perchEnt)) {
     Assert(isDefined(self));
     AssertEx(isDefined(self.target), "Birds must target a perch.Bird at " + self.origin + " does not have a target.");
-    perchEnt = GetEnt(self.target, "targetname");
+    perchEnt = getEnt(self.target, "targetname");
     AssertEx(isDefined(perchEnt), "Birds must target a perch.Cannot find perch with targetname " + self.target + " for bird at " + self.origin + ".");
   }
 
@@ -182,7 +182,7 @@ birds_setUpConnectedPerches(perchEnt, path) {
         if(!isDefined(next_node)) {
           next_node = GetNode(targetname, "targetname");
           if(!isDefined(next_node)) {
-            next_node = GetEnt(targetname, "targetname");
+            next_node = getEnt(targetname, "targetname");
             if(isDefined(next_node)) {
               AssertEx(next_node.script_noteworthy == "bird_perch", "Bird paths must be made of nodes and bird perches.Path node at " + next_node.origin + " ia neither.");
               next_node = birds_setUpConnectedPerches(next_node);
@@ -475,7 +475,7 @@ birds_set_flying_angles(birdFlock, flockVel, birds) {
       newAngles = VectorToAngles(newForward);
       anglesToTag = newAngles - tagAngles;
       anglesToTag = (AngleClamp180(anglesToTag[0]) / 3, AngleClamp180(anglesToTag[1]), 0);
-      birds[i] LinkTo(birdFlock, ("tag_bird" + i), (0, 0, 0), anglesToTag);
+      birds[i] linkTo(birdFlock, ("tag_bird" + i), (0, 0, 0), anglesToTag);
 
       if(GetDvarInt("interactives_debug")) {
         tagOrigin = birdFlock GetTagOrigin("tag_bird" + i);

@@ -20,7 +20,7 @@ power_clangs() {
   clangs = getStructArray("amb_power_clang", "targetname");
   if(clangs.size) {}
   for(i = 0; i < clangs.size; i++) {
-    playsoundatposition("zmb_circuit", clangs[i].origin);
+    playSoundAtPosition("zmb_circuit", clangs[i].origin);
     wait(RandomFloatrange(0.25, 0.7));
   }
 }
@@ -64,7 +64,7 @@ play_gersh_vox(alias) {
 play_initial_alarm() {
   structs = getStructArray("amb_warning_siren", "targetname");
   for(i = 0; i < structs.size; i++) {
-    playsoundatposition("evt_cosmo_alarm_single", structs[i].origin);
+    playSoundAtPosition("evt_cosmo_alarm_single", structs[i].origin);
   }
   wait(.5);
 }
@@ -80,18 +80,18 @@ monkey_round_announcer() {
 }
 radio_easter_eggs() {
   wait(3);
-  testent = GetEnt("radio_egg_1", "targetname");
+  testent = getEnt("radio_egg_1", "targetname");
   if(!isDefined(testent)) {
     return;
   }
   for(i = 1; i < 7; i++) {
-    ent[i] = GetEnt("radio_egg_" + i, "targetname");
+    ent[i] = getEnt("radio_egg_" + i, "targetname");
     ent[i] Hide();
   }
   level thread activate_radio_egg(1);
 }
 activate_radio_egg(num) {
-  radio = GetEnt("radio_egg_" + num, "targetname");
+  radio = getEnt("radio_egg_" + num, "targetname");
   radio Show();
   radio_trig = spawn("trigger_radius", radio.origin - (0, 0, 200), 0, 75, 400);
   radio_trig.completed = false;
@@ -170,7 +170,7 @@ play_music_easter_egg(player) {
 }
 dancing_teddy_bear() {
   level waittill("teddybear_music_started");
-  self moveto(self.origin + (0, 0, 50), 3);
+  self moveTo(self.origin + (0, 0, 50), 3);
   wait(3);
   self RotateVelocity((20, 45, 35), 362);
   wait(362);
@@ -180,7 +180,7 @@ init_redphone_eggs() {
   wait(10);
   redphone_egg_array = [];
   for(i = 0; i < 3; i++) {
-    redphone_egg_array[i] = getstruct("egg_phone_" + i, "targetname");
+    redphone_egg_array[i] = getStruct("egg_phone_" + i, "targetname");
     redphone_egg_array[i].num = i;
   }
   level thread redphone_egg(redphone_egg_array);
@@ -199,7 +199,7 @@ redphone_egg(array) {
     if(!activation) {
       wait(RandomIntRange(wait_min, wait_max));
     } else if(activation) {
-      playsoundatposition("vox_redphone_egg_" + phone.num, phone.origin);
+      playSoundAtPosition("vox_redphone_egg_" + phone.num, phone.origin);
       array = array_remove(array, phone);
     }
   }
@@ -243,7 +243,7 @@ redphone_timeout_failsafe(time) {
 init_doll_eggs() {
   wait(10);
   for(i = 0; i < 4; i++) {
-    ent = GetEnt("doll_egg_" + i, "targetname");
+    ent = getEnt("doll_egg_" + i, "targetname");
     if(!isDefined(ent)) {
       return;
     }
@@ -254,8 +254,8 @@ doll_egg(num) {
   if(!isDefined(self)) {
     return;
   }
-  self UseTriggerRequireLookAt();
-  self SetCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
   alias = undefined;
   while(1) {
     self waittill("trigger", player);

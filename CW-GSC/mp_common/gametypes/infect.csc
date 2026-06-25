@@ -35,7 +35,7 @@ function on_localplayer_spawned(localclientnum) {
 function function_fd78da38(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
     if(self getlocalclientnumber() === fieldname) {
-      foreach(player in getplayers(fieldname)) {
+      foreach(player in getPlayers(fieldname)) {
         if(player.team !== self.team && !player function_21c0fa55()) {
           if(player flag::exists(#"friendly")) {
             player renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendly_cp" : #"rob_sonar_set_friendly_mp", 0);

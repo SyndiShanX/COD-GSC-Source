@@ -22,7 +22,7 @@ function adjust_side_death_dir_if_trace_fail(origin, side_dir, fxlength, up_dir)
   trace = bulletTrace(origin, end, 0, self);
 
   if(trace[#"fraction"] < 1) {
-    new_side_dir = vectornormalize(side_dir + up_dir);
+    new_side_dir = vectorNormalize(side_dir + up_dir);
     end = origin + new_side_dir * fxlength;
     new_trace = bulletTrace(origin, end, 0, self);
 
@@ -55,7 +55,7 @@ function do_side_death_fx(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
 
     right_direction = vectorcross(forward_direction, up_direction);
-    right_direction = vectornormalize(right_direction);
+    right_direction = vectorNormalize(right_direction);
     right_start = origin + right_direction * radius;
     right_direction = adjust_side_death_dir_if_trace_fail(right_start, right_direction, fxlength, up_direction);
     left_direction = right_direction * -1;

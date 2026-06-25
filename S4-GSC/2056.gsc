@@ -73,7 +73,7 @@ _id_BBBD(var_0, var_1) {
   }
 
   var_0._id_24C6 = 1;
-  var_6 = vectornormalize(anglesToForward(var_1.angles));
+  var_6 = vectorNormalize(anglesToForward(var_1.angles));
   var_6 = var_6 * -175 + var_1.origin;
   var_0._id_5EC7 = _func_02AB(var_6);
   waitframe();

@@ -12,13 +12,13 @@ lui_update_gunbench() {
 }
 
 gunbench_startup() {
-  level.primaryammo = getent("ammo_box_primary", "targetname");
+  level.primaryammo = getEnt("ammo_box_primary", "targetname");
 
   if(isDefined(level.primaryammo)) {
     level.primaryammo hide();
   }
 
-  level.secondaryammo = getent("ammo_box_secondary", "targetname");
+  level.secondaryammo = getEnt("ammo_box_secondary", "targetname");
 
   if(isDefined(level.secondaryammo)) {
     level.secondaryammo hide();

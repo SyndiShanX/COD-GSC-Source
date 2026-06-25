@@ -690,7 +690,7 @@ function function_49779a9c() {
   scene::add_scene_func(#"p9_fxanim_zm_platinum_rappel_bundle", &function_8d8f7e79, "init");
   level thread scene::init("p9_fxanim_zm_platinum_rappel_bundle");
   level flag::wait_till("connect_backlot_to_mainstreet");
-  t_door = getent("connect_backlot_to_mainstreet", "script_flag");
+  t_door = getEnt("connect_backlot_to_mainstreet", "script_flag");
   t_door notify(#"hash_57b465b557811eb7");
   scene::remove_scene_func(#"p9_fxanim_zm_platinum_rappel_bundle", &function_8d8f7e79, "init");
   scene::add_scene_func(#"p9_fxanim_zm_platinum_rappel_bundle", &function_2a1cfabb, "play");

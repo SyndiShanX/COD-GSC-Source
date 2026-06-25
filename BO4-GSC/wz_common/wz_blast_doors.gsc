@@ -103,7 +103,7 @@ function_cd4de84f(doors) {
   foreach(vehicle in vehicles) {
     if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == #"cargo_truck_wz") {
       var_7344b4ac = 1;
-      playsoundatposition(#"hash_694b6b5d665c7a5e", centerposition);
+      playSoundAtPosition(#"hash_694b6b5d665c7a5e", centerposition);
       break;
     }
   }
@@ -118,7 +118,7 @@ function_ed401dbd(activator, laststate, state) {
     if(function_cd4de84f(var_fe1d375b)) {
       currentstate = function_ffdbe8c2(self);
       waitframe(1);
-      playsoundatposition(#"hash_3559ba9c4c9b08f", self.origin);
+      playSoundAtPosition(#"hash_3559ba9c4c9b08f", self.origin);
       setdynentstate(self, currentstate);
       return;
     }

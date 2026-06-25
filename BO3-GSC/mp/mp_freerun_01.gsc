@@ -23,12 +23,12 @@ function precache() {}
 function init() {}
 
 function speed_test_init() {
-  trigger1 = getent("speed_trigger1", "targetname");
-  trigger2 = getent("speed_trigger2", "targetname");
-  trigger3 = getent("speed_trigger3", "targetname");
-  trigger4 = getent("speed_trigger4", "targetname");
-  trigger5 = getent("speed_trigger5", "targetname");
-  trigger6 = getent("speed_trigger6", "targetname");
+  trigger1 = getEnt("speed_trigger1", "targetname");
+  trigger2 = getEnt("speed_trigger2", "targetname");
+  trigger3 = getEnt("speed_trigger3", "targetname");
+  trigger4 = getEnt("speed_trigger4", "targetname");
+  trigger5 = getEnt("speed_trigger5", "targetname");
+  trigger6 = getEnt("speed_trigger6", "targetname");
   trigger1 thread speed_test();
   trigger2 thread speed_test();
   trigger3 thread speed_test();

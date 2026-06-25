@@ -320,8 +320,8 @@ func_9371(var_0) {
 
 func_6D9E() {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_6DA3[self.var_6DA4].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.var_6DA3[self.var_6DA4].hintstring);
   scripts\cp\utility::addtotraplist();
   var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
@@ -348,7 +348,7 @@ func_6D9E() {
   var_7 = spawn("trigger_radius", self.origin, 0, 256, 100);
   self.var_2536 = var_7;
   self.var_2536 getrankxp();
-  self.var_2536 linkto(self);
+  self.var_2536 linkTo(self);
   self.var_2528 = length(self.var_2514) / 400;
   wait 0.75;
   self setscriptablepartstate("base", "on");
@@ -426,7 +426,7 @@ func_AA75(var_0, var_1) {
   var_2 setscriptablepartstate("rocket", "launch");
   var_3 = self.config.weaponinfo;
   var_4 = self.owner;
-  var_2 moveto(self.var_2514 + self.origin, self.var_2528, self.var_2528 * 0.5, 0);
+  var_2 moveTo(self.var_2514 + self.origin, self.var_2528, self.var_2528 * 0.5, 0);
   var_2 waittill("movedone");
   var_2 setscriptablepartstate("rocket", "explode");
   wait 0.1;

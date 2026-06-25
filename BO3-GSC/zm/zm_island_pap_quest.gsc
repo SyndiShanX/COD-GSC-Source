@@ -101,22 +101,22 @@ function function_f7c8e279(a_ents) {
 }
 
 function function_aa37ce2d() {
-  var_b1e70b95 = getent("trigger_pap_hint", "targetname");
-  var_b1e70b95 setcursorhint("HINT_NOICON");
-  var_b1e70b95 sethintstring("");
-  mdl_gate = getent("pap_gate", "targetname");
+  var_b1e70b95 = getEnt("trigger_pap_hint", "targetname");
+  var_b1e70b95 setCursorHint("HINT_NOICON");
+  var_b1e70b95 setHintString("");
+  mdl_gate = getEnt("pap_gate", "targetname");
   mdl_gate.s_pos = struct::get(mdl_gate.target);
   level flag::wait_till("pap_water_drained");
   if(zm_utility::is_player_valid(level.var_16e32c2f)) {
     level.var_16e32c2f notify("player_opened_pap");
   }
-  mdl_gate moveto(mdl_gate.s_pos.origin, 3);
+  mdl_gate moveTo(mdl_gate.s_pos.origin, 3);
   mdl_gate playSound("zmb_papquest_gate_move");
   level thread zm_island_vo::function_3bf2d62a("pap_opens", 0, 1, 0);
   mdl_gate waittill("movedone");
   level flag::set("pap_open");
   var_b1e70b95 delete();
-  t_door = getent("trigger_pap", "script_noteworthy");
+  t_door = getEnt("trigger_pap", "script_noteworthy");
   t_door zm_blockers::door_opened(0);
 }
 
@@ -275,7 +275,7 @@ function function_d0901c34() {
   var_1daee2f1 = getEntArray("cocoon_bunker", "targetname");
   foreach(mdl_cocoon in var_1daee2f1) {
     mdl_cocoon.is_open = 0;
-    mdl_cocoon.clip = getent(mdl_cocoon.target, "targetname");
+    mdl_cocoon.clip = getEnt(mdl_cocoon.target, "targetname");
     mdl_cocoon.var_aa12511 = struct::get(mdl_cocoon.clip.target);
     mdl_cocoon.clip setCanDamage(1);
     mdl_cocoon.clip.health = 100000;
@@ -323,7 +323,7 @@ function function_bd8082d1() {
 
 function function_7a0ede5() {
   self playLoopSound("zmb_cocoon_lp", 1);
-  playsoundatposition("evt_cocoon_explode", self.origin + (vectorscale((0, 0, -1), 100)));
+  playSoundAtPosition("evt_cocoon_explode", self.origin + (vectorscale((0, 0, -1), 100)));
   self stoploopsound();
   if(isDefined(self.var_166a0518)) {
     self function_14c57bc9();
@@ -356,8 +356,8 @@ function private function_9bd3096f(player) {
 
 function function_f4a071bb() {
   level flag::init("defend_over");
-  level.mdl_gate = getent("defend_gate", "targetname");
-  level.mdl_clip = getent("defend_clip", "targetname");
+  level.mdl_gate = getEnt("defend_gate", "targetname");
+  level.mdl_clip = getEnt("defend_clip", "targetname");
   level.mdl_clip notsolid();
   level.mdl_clip connectpaths();
   s_part = struct::get("valvethree_part_lever");
@@ -398,8 +398,8 @@ function defend_start() {
   level.mdl_gate.v_org = level.mdl_gate.origin;
   level.mdl_gate.v_pos = struct::get(level.mdl_gate.target).origin;
   level.mdl_clip solid();
-  level.mdl_clip disconnectpaths();
-  level.mdl_gate moveto(level.mdl_gate.v_pos, 3);
+  level.mdl_clip disconnectPaths();
+  level.mdl_gate moveTo(level.mdl_gate.v_pos, 3);
   level.mdl_gate playSound("zmb_papquest_defend_gate_close");
   exploder::exploder("fxexp_202");
   level.disable_nuke_delay_spawning = 1;
@@ -452,13 +452,13 @@ function function_9fcd89f7() {
   level notify("defend_success");
   exploder::exploder("fxexp_201");
   exploder::exploder_stop("lgt_penstock_event");
-  level.var_ced49fc moveto(level.var_ced49fc.v_org, 3);
-  level.var_ced49fc rotateto(level.var_ced49fc.v_ang, 3);
+  level.var_ced49fc moveTo(level.var_ced49fc.v_org, 3);
+  level.var_ced49fc rotateTo(level.var_ced49fc.v_ang, 3);
   level.var_ced49fc waittill("movedone");
   level.var_ced49fc.trigger = zm_island_util::spawn_trigger_radius(level.var_ced49fc.origin, 50, 1, &function_9bd3096f);
   level.var_ced49fc thread function_1a519eae("valve3_found");
   level flag::set("defend_success");
-  level.mdl_gate moveto(level.mdl_gate.v_org, 3);
+  level.mdl_gate moveTo(level.mdl_gate.v_org, 3);
   level.mdl_gate playSound("zmb_papquest_defend_gate_open");
   exploder::exploder("fxexp_202");
   level.mdl_gate waittill("movedone");
@@ -467,7 +467,7 @@ function function_9fcd89f7() {
 
 function function_a3ebebe() {
   var_ca238230 = 0;
-  var_34dc7362 = getent("penstock_defend", "script_noteworthy");
+  var_34dc7362 = getEnt("penstock_defend", "script_noteworthy");
   a_ai_zombies = getaiteamarray(level.zombie_team);
   foreach(ai_zombie in a_ai_zombies) {
     if(ai_zombie istouching(var_34dc7362) && isalive(ai_zombie) && ai_zombie.var_6eb9188d === 1) {
@@ -479,7 +479,7 @@ function function_a3ebebe() {
 
 function function_2870b97d() {
   var_4399a34 = [];
-  var_34dc7362 = getent("penstock_defend", "script_noteworthy");
+  var_34dc7362 = getEnt("penstock_defend", "script_noteworthy");
   foreach(player in level.players) {
     if(player istouching(var_34dc7362) && zm_utility::is_player_valid(player) && !player laststand::player_is_in_laststand()) {
       if(!isDefined(var_4399a34)) {
@@ -556,14 +556,14 @@ function function_4fdc8e70() {
 }
 
 function function_851f0b97() {
-  var_1af0fcd8 = getent("bunker_penstock_blue_sign_reveal", "targetname");
+  var_1af0fcd8 = getEnt("bunker_penstock_blue_sign_reveal", "targetname");
   var_1af0fcd8 clientfield::set("do_emissive_material", 0);
 }
 
 function function_145f4b1a() {
   self endon("disconnect");
   level endon("hash_62f73de6");
-  var_1af0fcd8 = getent("bunker_penstock_blue_sign_reveal", "targetname");
+  var_1af0fcd8 = getEnt("bunker_penstock_blue_sign_reveal", "targetname");
   self zm_island_util::function_7448e472(var_1af0fcd8);
   var_1af0fcd8 thread function_336744d2();
 }

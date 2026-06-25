@@ -155,7 +155,7 @@ idle_anim(node, notifyname, character, bitflags) {
   }
 
   while(isalive(self)) {
-    self animscripted("scriptedanimdone", node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][randomint(level.scr_anim[notifyname][character]["idle"].size)]);
+    self animScripted("scriptedanimdone", node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][randomint(level.scr_anim[notifyname][character]["idle"].size)]);
     self waittillmatch("scriptedanimdone", "end");
   }
 }
@@ -177,7 +177,7 @@ doscriptedanim(notifyname) {
   if(isDefined(level.scr_anim[notifyname][self.character]["facial"])) {
     self.facial_animation = level.scr_anim[notifyname][self.character]["facial"];
   }
-  self animscripted("scriptedanimdone", self.seeknode.origin, self.seeknode.angles, level.scr_anim[notifyname][self.character]["animation"]);
+  self animScripted("scriptedanimdone", self.seeknode.origin, self.seeknode.angles, level.scr_anim[notifyname][self.character]["animation"]);
 
   thread abort_sequence(notifyname);
   soundnum = undefined;

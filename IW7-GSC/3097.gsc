@@ -37,7 +37,7 @@ func_FF26() {
 
 func_51FA() {
   var_0 = (1500, 0, 0);
-  var_1 = spawnvehicle("veh_mil_air_un_jackal_02", "player_attack_drone_anchor", "jackal_un", level.var_D127.origin + rotatevector(var_0, level.var_D127.angles), level.var_D127.angles);
+  var_1 = spawnVehicle("veh_mil_air_un_jackal_02", "player_attack_drone_anchor", "jackal_un", level.var_D127.origin + rotatevector(var_0, level.var_D127.angles), level.var_D127.angles);
   func_0BDC::func_1994(level.var_D127, var_0, 200, 1.0, 500, 1.0);
 }
 

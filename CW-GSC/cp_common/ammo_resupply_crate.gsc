@@ -30,7 +30,7 @@ function private resupply_ammo(s_info) {
   player endon(#"death");
   player playgestureviewmodel(#"ges_drophand");
   wait 0.3;
-  player playrumbleonentity("damage_light");
+  player playRumbleOnEntity("damage_light");
   a_w_weapons = player getweaponslist(0);
 
   foreach(w_weapon in a_w_weapons) {

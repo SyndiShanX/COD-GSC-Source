@@ -67,7 +67,7 @@ function summoning_key_charge_state(localclientnum, oldval, newval, bnewent, bin
 }
 
 function arena_timeout_warning(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  a_players = getplayers(localclientnum);
+  a_players = getPlayers(localclientnum);
   foreach(player in a_players) {
     if(newval > 0) {
       var_946b7723 = 5;
@@ -327,7 +327,7 @@ function summoning_key_pickup(localclientnum, oldval, newval, bnewent, binitials
     case 2: {
       level.var_530ae70[localclientnum].origin = var_1f5092c.origin + vectorscale((0, 0, 1), 196);
       level.var_530ae70[localclientnum] show();
-      level.var_530ae70[localclientnum] moveto(var_1f5092c.origin, 3);
+      level.var_530ae70[localclientnum] moveTo(var_1f5092c.origin, 3);
       if(!isDefined(level.var_530ae70[localclientnum].fxid)) {
         level.var_530ae70[localclientnum].fxid = playFXOnTag(localclientnum, level._effect["summoning_key_glow"], level.var_530ae70[localclientnum], "key_root_jnt");
       }
@@ -444,7 +444,7 @@ function function_3d5c3a74(var_9494ad2f) {
   if(!var_9494ad2f) {
     v_offset = (0, 0, 0);
   }
-  self moveto(s_summoning_key.origin + v_offset, 3);
+  self moveTo(s_summoning_key.origin + v_offset, 3);
 }
 
 function function_17ef53cd() {
@@ -453,11 +453,11 @@ function function_17ef53cd() {
   v_origin = self.v_origin;
   n_duration = randomfloatrange(4.75, 5);
   while(true) {
-    self.var_b079127 moveto(v_origin + vectorscale((0, 0, 1), 4), n_duration);
-    self.var_4100f709 moveto(v_origin + vectorscale((0, 0, 1), 4), n_duration);
+    self.var_b079127 moveTo(v_origin + vectorscale((0, 0, 1), 4), n_duration);
+    self.var_4100f709 moveTo(v_origin + vectorscale((0, 0, 1), 4), n_duration);
     wait(n_duration);
-    self.var_b079127 moveto(v_origin, n_duration);
-    self.var_4100f709 moveto(v_origin, n_duration);
+    self.var_b079127 moveTo(v_origin, n_duration);
+    self.var_4100f709 moveTo(v_origin, n_duration);
     wait(n_duration);
   }
 }
@@ -473,20 +473,20 @@ function function_fad1f25a(n_height) {
   switch (n_height) {
     case 0: {
       n_duration = randomfloatrange(1.75, 2);
-      self.var_b079127 moveto(self.v_origin + (vectorscale((0, 0, -1), 128)), n_duration);
-      self.var_4100f709 moveto(self.v_origin + (vectorscale((0, 0, -1), 128)), n_duration);
+      self.var_b079127 moveTo(self.v_origin + (vectorscale((0, 0, -1), 128)), n_duration);
+      self.var_4100f709 moveTo(self.v_origin + (vectorscale((0, 0, -1), 128)), n_duration);
       break;
     }
     case 1: {
       n_duration = randomfloatrange(1.75, 2);
-      self.var_b079127 moveto(self.v_origin, n_duration);
-      self.var_4100f709 moveto(self.v_origin, n_duration);
+      self.var_b079127 moveTo(self.v_origin, n_duration);
+      self.var_4100f709 moveTo(self.v_origin, n_duration);
       break;
     }
     case 2: {
       n_duration = randomfloatrange(1.75, 2);
-      self.var_b079127 moveto(self.v_origin + vectorscale((0, 0, 1), 128), n_duration);
-      self.var_4100f709 moveto(self.v_origin + vectorscale((0, 0, 1), 128), n_duration);
+      self.var_b079127 moveTo(self.v_origin + vectorscale((0, 0, 1), 128), n_duration);
+      self.var_4100f709 moveTo(self.v_origin + vectorscale((0, 0, 1), 128), n_duration);
       break;
     }
   }
@@ -524,7 +524,7 @@ function function_3de943fb(state, e_model) {
       e_model playSound(0, "evt_zod_ritual_ready");
       if(!isDefined(e_model.sndent)) {
         e_model.sndent = spawn(0, e_model.origin, "script_origin");
-        e_model.sndent linkto(e_model, "tag_origin");
+        e_model.sndent linkTo(e_model, "tag_origin");
       }
       e_model.sndent playLoopSound("evt_zod_ritual_ready_loop", 2);
       break;
@@ -533,7 +533,7 @@ function function_3de943fb(state, e_model) {
       e_model playSound(0, "evt_zod_ritual_started");
       if(!isDefined(e_model.sndent)) {
         e_model.sndent = spawn(0, e_model.origin, "script_origin");
-        e_model.sndent linkto(e_model, "tag_origin");
+        e_model.sndent linkTo(e_model, "tag_origin");
       }
       looper = e_model.sndent playLoopSound("evt_zod_ritual_started_loop", 2);
       pitch = 0.5;
@@ -572,7 +572,7 @@ function function_2bcc6bd2(state, e_model) {
       e_model playSound(0, "evt_zod_ritual_ready");
       if(!isDefined(e_model.sndent)) {
         e_model.sndent = spawn(0, e_model.origin, "script_origin");
-        e_model.sndent linkto(e_model, "tag_origin");
+        e_model.sndent linkTo(e_model, "tag_origin");
       }
       e_model.sndent playLoopSound("evt_zod_ritual_ready_loop", 2);
       break;
@@ -581,7 +581,7 @@ function function_2bcc6bd2(state, e_model) {
       e_model playSound(0, "evt_zod_ritual_started");
       if(!isDefined(e_model.sndent)) {
         e_model.sndent = spawn(0, e_model.origin, "script_origin");
-        e_model.sndent linkto(e_model, "tag_origin");
+        e_model.sndent linkTo(e_model, "tag_origin");
       }
       looper = e_model.sndent playLoopSound("evt_zod_ritual_started_loop", 2);
       pitch = 0.5;
@@ -597,7 +597,7 @@ function function_2bcc6bd2(state, e_model) {
       e_model playSound(0, "evt_zod_ritual_started");
       if(!isDefined(e_model.sndent)) {
         e_model.sndent = spawn(0, e_model.origin, "script_origin");
-        e_model.sndent linkto(e_model, "tag_origin");
+        e_model.sndent linkTo(e_model, "tag_origin");
       }
       looper = e_model.sndent playLoopSound("evt_zod_ritual_started_loop", 2);
       pitch = 0.5;

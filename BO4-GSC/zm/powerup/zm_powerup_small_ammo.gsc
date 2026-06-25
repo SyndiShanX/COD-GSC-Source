@@ -53,7 +53,7 @@ function_d7d24283(e_powerup, player) {
 }
 
 function_8be02874(drop_item, player) {
-  players = getplayers(player.team);
+  players = getPlayers(player.team);
 
   if(isDefined(level._get_game_module_players)) {
     players = [[level._get_game_module_players]](player);
@@ -104,7 +104,7 @@ function_ae7afb91(player) {
 }
 
 function_71bf1101(drop_item, player_team) {
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
   players[0] playsoundtoteam("zmb_full_ammo", player_team);
 }
 

@@ -293,15 +293,15 @@ on_spawn_retrievable_weapon_object(watcher, player) {
   self.owner = player;
   self waittill_not_moving();
   self.pickUpTrigger = spawn("trigger_radius_use", self.origin, 0, 64, 64);
-  self.pickUpTrigger SetCursorHint("HINT_NOICON");
+  self.pickUpTrigger setCursorHint("HINT_NOICON");
   if(isDefined(level.retrieveHints[watcher.name])) {
-    self.pickUpTrigger SetHintString(level.retrieveHints[watcher.name].hint);
+    self.pickUpTrigger setHintString(level.retrieveHints[watcher.name].hint);
   } else {
-    self.pickUpTrigger SetHintString(&"WEAPON_GENERIC_PICKUP");
+    self.pickUpTrigger setHintString(&"WEAPON_GENERIC_PICKUP");
   }
   player ClientClaimTrigger(self.pickUpTrigger);
-  self.pickupTrigger enablelinkto();
-  self.pickupTrigger linkto(self);
+  self.pickupTrigger enablelinkTo();
+  self.pickupTrigger linkTo(self);
   thread watch_use_trigger(self.pickUpTrigger, watcher.pickUp);
   if(isDefined(watcher.pickup_trigger_listener)) {
     self thread[[watcher.pickup_trigger_listener]](self.pickUpTrigger, player);

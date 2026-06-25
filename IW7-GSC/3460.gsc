@@ -178,7 +178,7 @@ func_10DC4(var_0, var_1, var_2) {
 
     foreach(var_6 in var_2) {
       if(isvalidmissile(var_6)) {
-        var_6 missile_settargetent(var_0, var_4);
+        var_6 missile_settargetEnt(var_0, var_4);
         var_6 missile_setflightmodedirect();
       }
     }

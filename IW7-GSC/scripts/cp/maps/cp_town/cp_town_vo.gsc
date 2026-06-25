@@ -106,7 +106,7 @@ one_to_one_dialogue_vo_handler(var_0, var_1, var_2, var_3, var_4, var_5, var_6) 
         if(isDefined(level.elvira)) {
           scripts\engine\utility::play_sound_in_space(var_10.alias, level.elvira.origin, 0, level.elvira);
           var_11 = scripts\cp\cp_vo::get_sound_length(var_10.alias);
-          var_12 = scripts\engine\utility::getstruct("elvira_talk", "script_noteworthy");
+          var_12 = scripts\engine\utility::getStruct("elvira_talk", "script_noteworthy");
           var_12 thread scripts\cp\maps\cp_town\cp_town_elvira::elvira_talks(var_11, 1);
           wait(scripts\cp\cp_vo::get_sound_length(var_10.alias));
         } else {

@@ -59,13 +59,13 @@ getDroneSpawnPoint(modules) {
   results.placementOK = true;
 
   if(array_contains(modules, "mp_terrace")) {
-    orbit_initial_ent = GetEnt("killstreak_orbit_initial", "targetname");
-    orbit_lookat_ent = GetEnt("killstreak_orbit_lookat", "targetname");
+    orbit_initial_ent = getEnt("killstreak_orbit_initial", "targetname");
+    orbit_lookat_ent = getEnt("killstreak_orbit_lookat", "targetname");
     if(isDefined(orbit_initial_ent) && isDefined(orbit_lookat_ent)) {
       results.origin = orbit_initial_ent.origin;
       results.angles = VectorToAngles(orbit_lookat_ent.origin - orbit_initial_ent.origin);
     } else {
-      spawn_loc = GetStruct("mp_terrace_killstreak_start", "targetname");
+      spawn_loc = getStruct("mp_terrace_killstreak_start", "targetname");
       results.origin = spawn_loc.origin;
       results.angles = spawn_loc.angles;
     }
@@ -294,9 +294,9 @@ SetupCommonAssaultDroneProperties(vehicle, lifeId, lifespan, modules) {
   self thread playerWatchForDroneEMP(vehicle);
 
   if(vehicle.mp_terrace) {
-    orbit_ent = GetEnt("killstreak_orbit_origin", "targetname");
-    orbit_initial = GetEnt("killstreak_orbit_initial", "targetname");
-    orbit_lookat = GetEnt("killstreak_orbit_lookat", "targetname");
+    orbit_ent = getEnt("killstreak_orbit_origin", "targetname");
+    orbit_initial = getEnt("killstreak_orbit_initial", "targetname");
+    orbit_lookat = getEnt("killstreak_orbit_lookat", "targetname");
 
     if(isDefined(orbit_ent) && isDefined(orbit_initial) && isDefined(orbit_lookat)) {
       vehicle SetOrbiterEnts(self, orbit_ent, orbit_initial, orbit_lookat);
@@ -354,7 +354,7 @@ PlayerStartUsingAssaultVehicle(vehicle) {
   owner playerSaveAngles();
 
   if(!vehicle.mp_terrace) {
-    owner CameraLinkTo(vehicle, "tag_origin");
+    owner CameralinkTo(vehicle, "tag_origin");
   }
 
   owner RemoteControlVehicle(vehicle);
@@ -466,7 +466,7 @@ playerDoHunterKillerBehavior(vehicle) {
     start = self GetViewOrigin(true);
   }
   end = vehicle.targetEnt.origin;
-  dir = VectorNormalize(end - start);
+  dir = vectorNormalize(end - start);
   end = start + (dir * 20000);
   trace = bulletTrace(start, end, false, vehicle, false, false, true, false, false);
 
@@ -483,7 +483,7 @@ playerDoHunterKillerBehavior(vehicle) {
       vehicle.camLinkEnt = spawn("script_model", pos);
       vehicle.camLinkEnt setModel("tag_player");
       vehicle.camLinkEnt.angles = ang;
-      vehicle.camLinkEnt LinkTo(vehicle, "tag_origin");
+      vehicle.camLinkEnt linkTo(vehicle, "tag_origin");
       waitframe();
       self PlayerLinkWeaponViewToDelta(vehicle.camLinkEnt, "tag_player", 1, 0, 0, 0, 0, true);
       self PlayerLinkedSetViewZnear(false);
@@ -535,7 +535,7 @@ playerDoHunterKillerBehavior(vehicle) {
 
 playerPlayThrusterSound(vehicle) {
   soundEnt = spawn("script_model", vehicle.origin);
-  soundEnt LinkTo(vehicle, "tag_origin");
+  soundEnt linkTo(vehicle, "tag_origin");
   soundEnt Hide();
   foreach(player in level.players) {
     if(self == player) {
@@ -590,7 +590,7 @@ SpawnMgTurret(vehicle) {
   mgTurret.angles = vehicle.angles;
   mgTurret setModel(turretModel);
   mgTurret SetDefaultDropPitch(dropPitch);
-  mgTurret LinkTo(vehicle, tagName, tagOriginOffset, tagAngleOffset);
+  mgTurret linkTo(vehicle, tagName, tagOriginOffset, tagAngleOffset);
   mgTurret.owner = self;
   mgTurret.health = 99999;
   mgTurret setCanDamage(false);
@@ -702,7 +702,7 @@ SetupRockets(vehicle) {
     self notify("ForceUncloak");
 
     Earthquake(0.3, 1, vehicle.origin, 500);
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     missile_tag_origin = vehicle.mgTurret GetTagOrigin("tag_flash");
     missile_end = vehicle.TargetEnt.origin;
 

@@ -737,7 +737,7 @@ throwgun() {
   var_3 = "weapon_" + self.weapon;
   var_4 = spawn(var_3, var_0.origin);
   var_4.angles = self gettagangles("tag_weapon_right");
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   var_5 = var_0.origin;
 
   while(isDefined(var_4) && isDefined(var_4.origin)) {
@@ -1224,7 +1224,7 @@ findgoodsuppressspot(var_0) {
   var_2 = bulletTrace(self.lastenemysightpos, var_1, 0, undefined);
   var_3 = var_2["position"];
   var_4 = self.lastenemysightpos - var_3;
-  var_5 = vectornormalize(self.lastenemysightpos - var_0);
+  var_5 = vectorNormalize(self.lastenemysightpos - var_0);
   var_4 = var_4 - var_5 * vectordot(var_4, var_5);
   var_6 = 20.0;
   var_7 = int(length(var_4) / var_6 + 0.5);
@@ -2142,9 +2142,9 @@ follow_enemy_with_laser(var_0, var_1) {
     if(isDefined(var_0.enemy)) {
       var_2.origin = var_0 gettagorigin("tag_flash");
       var_5 = var_0 gettagangles("tag_flash");
-      var_6 = vectornormalize(var_0.enemy getshootatpos() - var_2.origin);
+      var_6 = vectorNormalize(var_0.enemy getshootatpos() - var_2.origin);
       var_7 = anglesToForward(var_5);
-      var_8 = vectornormalize(var_6);
+      var_8 = vectorNormalize(var_6);
       var_9 = vectortoangles(var_8);
       var_10 = vectordot(var_7, var_8);
 

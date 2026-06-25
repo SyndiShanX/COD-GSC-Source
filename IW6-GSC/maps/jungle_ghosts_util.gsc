@@ -155,7 +155,7 @@ player_jump_watcher() {
 
 bigjump_player_blend_to_anim(var_0) {
   var_1 = var_0 common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0, "tag_player", (5, 0, 3), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_player", (5, 0, 3), (0, 0, 0));
   var_2 = 0.5;
   level.player playerlinktoblend(var_1, "tag_origin", var_2);
   wait(var_2);
@@ -245,7 +245,7 @@ escape_earthquake_on_missile_impact() {
   }
 
   earthquake(0.3, 0.5, level.player.origin, 300);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 set_flag_when_x_remain(var_0, var_1, var_2) {
@@ -443,21 +443,21 @@ arm_player(var_0, var_1, var_2) {
 }
 
 move_player_to_start(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
 
     if(!isDefined(var_1)) {
       return;
     }
   }
 
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   var_2 = undefined;
 
   if(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
   }
 
   if(isDefined(var_2)) {
@@ -882,7 +882,7 @@ enable_ai_swim() {
   self.animname = "generic";
   maps\_utility::disable_cqbwalk();
   maps\_utility::disable_sprint();
-  self stopanimscripted();
+  self stopanimScripted();
   set_generic_idle_forever("swim_idle");
   maps\_utility::set_moveplaybackrate(1);
   maps\_utility::set_generic_run_anim("swim_fast", 1);
@@ -963,9 +963,9 @@ pitch_and_roll() {
   for(;;) {
     var_6 = (randomfloatrange(var_3, var_2), 0, randomfloatrange(var_3, var_2));
     var_7 = randomfloatrange(var_5, var_4);
-    self rotateto(var_1 + var_6, var_7, var_7 * 0.2, var_7 * 0.2);
+    self rotateTo(var_1 + var_6, var_7, var_7 * 0.2, var_7 * 0.2);
     self waittill("rotatedone");
-    self rotateto(var_1 - var_6, var_7, var_7 * 0.2, var_7 * 0.2);
+    self rotateTo(var_1 - var_6, var_7, var_7 * 0.2, var_7 * 0.2);
     self waittill("rotatedone");
   }
 }
@@ -975,14 +975,14 @@ stop_anim_on_damage_stealth(var_0) {
   level endon("_stealth_spotted");
   self waittill("damage");
   var_0 notify("stop_loop");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 stop_anim_on_spotted_or_chopper_leaves(var_0) {
   self endon("death");
   level common_scripts\utility::waittill_any("_stealth_spotted", "stream_heli_out");
   var_0 notify("stop_loop");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 generic_ignore_on() {

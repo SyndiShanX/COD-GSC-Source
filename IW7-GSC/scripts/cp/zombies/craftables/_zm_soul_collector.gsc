@@ -79,7 +79,7 @@ func_A630(var_0, var_1, var_2) {
     var_8 = 0.05;
   }
 
-  var_4 moveto(var_1 gettagorigin("tag_fx"), var_8);
+  var_4 moveTo(var_1 gettagorigin("tag_fx"), var_8);
   var_4 waittill("movedone");
   var_4 setscriptablepartstate("tag", "collect");
   wait(0.5);
@@ -360,8 +360,8 @@ func_B543(var_0, var_1) {
 }
 
 func_B541(var_0, var_1) {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_B549["crafted_medusa"].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.var_B549["crafted_medusa"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
@@ -379,7 +379,7 @@ func_B541(var_0, var_1) {
 
   if(self.var_3CC3 >= 10) {
     self.fully_charged = 1;
-    self sethintstring(level.var_B549["crafted_medusa"].var_74BF);
+    self setHintString(level.var_B549["crafted_medusa"].var_74BF);
   }
 
   func_1862();
@@ -418,7 +418,7 @@ func_B547() {
       if(self.var_3CC3 != 10) {
         self setscriptablepartstate("base", "charge_level_1");
       } else {
-        self sethintstring(level.var_B549["crafted_medusa"].var_74BF);
+        self setHintString(level.var_B549["crafted_medusa"].var_74BF);
         self.fully_charged = 1;
         self setscriptablepartstate("base", "charge_level_2");
       }

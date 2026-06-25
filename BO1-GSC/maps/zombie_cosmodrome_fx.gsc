@@ -143,18 +143,18 @@ wirespark_med(delay_min, delay_max) {
 wirespark_fx_1(guy) {
   wire_model = spawn("script_model", guy.origin);
   wire_model setModel("tag_origin");
-  wire_model LinkTo(guy, "long_spark_06_jnt", (0, 0, 0), (0, 0, 0));
+  wire_model linkTo(guy, "long_spark_06_jnt", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["dangling_wire"], wire_model, "tag_origin");
-  playsoundatposition("amb_spark_special", wire_model.origin);
+  playSoundAtPosition("amb_spark_special", wire_model.origin);
   wait(0.5);
   wire_model Delete();
 }
 wirespark_fx_2(guy) {
   wire_model = spawn("script_model", guy.origin);
   wire_model setModel("tag_origin");
-  wire_model LinkTo(guy, "med_spark_06_jnt", (0, 0, 0), (0, 0, 0));
+  wire_model linkTo(guy, "med_spark_06_jnt", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["dangling_wire"], wire_model, "tag_origin");
-  playsoundatposition("amb_spark_special", wire_model.origin);
+  playSoundAtPosition("amb_spark_special", wire_model.origin);
   wait(0.5);
   wire_model Delete();
 }

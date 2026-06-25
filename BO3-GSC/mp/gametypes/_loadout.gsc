@@ -298,7 +298,7 @@ function on_damage_special_discgun(eattacker, einflictor, weapon, meansofdeath, 
   if(weapon != level.weaponspecialdiscgun) {
     return;
   }
-  playsoundatposition("wpn_disc_bounce_fatal", self.origin);
+  playSoundAtPosition("wpn_disc_bounce_fatal", self.origin);
 }
 
 function create_class_exclusion_list() {

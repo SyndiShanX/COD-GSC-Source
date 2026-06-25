@@ -9,7 +9,7 @@
 
 hack_packapunch() {
   vending_weapon_upgrade_trigger = getEntArray("zombie_vending_upgrade", "targetname");
-  perk = getent(vending_weapon_upgrade_trigger[0].target, "targetname");
+  perk = getEnt(vending_weapon_upgrade_trigger[0].target, "targetname");
   if(isDefined(perk)) {
     struct = spawnStruct();
     struct.origin = perk.origin + (AnglesToRight(perk.angles) * 26) + (0, 0, 48);

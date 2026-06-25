@@ -338,7 +338,7 @@ domflags() {
     var_8 = level.magicbullet[var_7];
     var_8.origin = getflagpos(var_8.script_label, var_8.origin);
     if(isDefined(var_8.target)) {
-      var_9[0] = getent(var_8.target, "targetname");
+      var_9[0] = getEnt(var_8.target, "targetname");
     } else {
       var_9[0] = spawn("script_model", var_8.origin);
       var_9[0].angles = var_8.angles;

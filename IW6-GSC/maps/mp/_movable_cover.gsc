@@ -17,7 +17,7 @@ init() {
   cover_proxy = getStructArray("movable_cover", "targetname");
   foreach(proxy in cover_proxy) {
     if(isDefined(proxy.target)) {
-      cover = GetEnt(proxy.target, "targetname");
+      cover = getEnt(proxy.target, "targetname");
       if(isDefined(cover)) {
         covers[covers.size] = cover;
       }
@@ -66,7 +66,7 @@ movable_cover_init() {
 
   links = self get_links();
   foreach(link in links) {
-    point = getstruct(link, "script_linkname");
+    point = getStruct(link, "script_linkname");
     if(isDefined(point) && isDefined(point.script_label)) {
       point.auto = isDefined(point.script_parameters) && point.script_parameters == "auto";
       point.stay = isDefined(point.script_parameters) && point.script_parameters == "stay";
@@ -102,8 +102,8 @@ movable_cover_init() {
         if(!isDefined(target.script_label) || !isDefined(end_points[target.script_label])) {
           continue;
         }
-        target EnableLinkTo();
-        target LinkTo(self);
+        target EnablelinkTo();
+        target linkTo(self);
         self thread movable_cover_trigger(target, end_points[target.script_label]);
         self thread movable_cover_update_use_icon(target, end_points[target.script_label]);
         break;
@@ -126,9 +126,9 @@ movable_cover_init() {
 
   foreach(ent in self.linked_ents) {
     if(isDefined(link_to_tag)) {
-      ent LinkTo(link_to_ent, link_to_tag);
+      ent linkTo(link_to_ent, link_to_tag);
     } else {
-      ent LinkTo(link_to_ent);
+      ent linkTo(link_to_ent);
     }
   }
 
@@ -152,7 +152,7 @@ movable_cover_init() {
       case "radius3d":
       case "radius2d":
         if(isDefined(node.target)) {
-          target = getstruct(node.target, "targetname");
+          target = getStruct(node.target, "targetname");
           if(isDefined(target) && isDefined(target.radius)) {
             node.test_origin = target.origin;
             node.test_radius = target.radius;
@@ -348,7 +348,7 @@ movable_cover_trigger(trigger, move_to) {
     if(self movable_cover_at_goal(move_to.origin)) {
       continue;
     }
-    move_dir = VectorNormalize(move_to.origin - self.origin);
+    move_dir = vectorNormalize(move_to.origin - self.origin);
     if(!auto && !self movable_cover_move_delay(self.start_delay, player, trigger, move_dir)) {
       continue;
     }
@@ -390,7 +390,7 @@ movable_cover_trigger(trigger, move_to) {
       self.animate_ent scriptmodelPlayanim(level.movable_cover_move_anim[self.movable_type]["move"]);
     }
 
-    self MoveTo(move_to.origin, time, accel_time);
+    self moveTo(move_to.origin, time, accel_time);
 
     if(auto) {
       self movable_cover_wait_for_user_or_timeout(time);
@@ -411,7 +411,7 @@ movable_cover_trigger(trigger, move_to) {
         stop_dist = min(dist, current_speed * self.decel_time);
       }
       time = (2 * stop_dist) / self.max_speed;
-      self MoveTo(self.origin + (stop_dist * move_dir), time, 0, time);
+      self moveTo(self.origin + (stop_dist * move_dir), time, 0, time);
       wait time;
     }
 
@@ -430,7 +430,7 @@ movable_cover_trigger(trigger, move_to) {
     }
 
     if(self.updatePaths) {
-      self DisconnectPaths();
+      self disconnectPaths();
     }
     self movable_cover_connect_traversals();
     self.moving = false;
@@ -531,7 +531,7 @@ movable_cover_is_pushed(player, trigger, move_dir) {
   if(self.requires_push) {
     player_move_dir = player GetNormalizedMovement();
     player_move_dir = RotateVector(player_move_dir, -1 * player.angles);
-    player_move_dir = VectorNormalize((player_move_dir[0], -1 * player_move_dir[1], 0));
+    player_move_dir = vectorNormalize((player_move_dir[0], -1 * player_move_dir[1], 0));
     dot = VectorDot(move_dir, player_move_dir);
     return dot > 0.2;
   } else {

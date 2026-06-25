@@ -297,7 +297,7 @@ idleTargetMover(ent) {
     if(isReallyAlive(self) && !self isUsingRemote() && anglesToForward(self.angles) != forward) {
       forward = anglesToForward(self.angles);
       pos = self.origin + (forward * -100) + (0, 0, 40);
-      ent MoveTo(pos, 0.5);
+      ent moveTo(pos, 0.5);
     }
     wait(0.5);
   }

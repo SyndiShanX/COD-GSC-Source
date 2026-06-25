@@ -38,7 +38,7 @@ init_records() {
   var_f9d547ec = getEntArray("audiolog_record", "targetname");
   array::run_all(var_f9d547ec, &zm_item_pickup::create_item_pickup, &pickup_record, "", undefined, 96);
   level.s_audiologs.s_records.s_playback = struct::get("audiolog_record_player");
-  level.s_audiologs.s_records.var_d9a8e3e4 = getent(level.s_audiologs.s_records.s_playback.target, "targetname");
+  level.s_audiologs.s_records.var_d9a8e3e4 = getEnt(level.s_audiologs.s_records.s_playback.target, "targetname");
   level.s_audiologs.s_records.var_d9a8e3e4 hide();
   level.s_audiologs.s_records.s_playback zm_unitrigger::create(&function_4164ac1d);
   level.s_audiologs.s_records.s_playback thread function_aef698f1();

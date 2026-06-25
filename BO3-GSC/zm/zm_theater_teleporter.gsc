@@ -43,15 +43,15 @@ function teleporter_init() {
   level.teleport_cost = 0;
   level.teleport_ae_funcs = [];
   level.eeroomsinuse = undefined;
-  level.second_hand = getent("zom_clock_second_hand", "targetname");
+  level.second_hand = getEnt("zom_clock_second_hand", "targetname");
   level.second_hand_angles = level.second_hand.angles;
   level.zombietheaterteleporterseeklogicfunc = &zombietheaterteleporterseeklogic;
   level flag::init("teleporter_linked");
   level flag::init("core_linked");
   setDvar("theaterAftereffectOverride", "-1");
-  poi1 = getent("teleporter_poi1", "targetname");
-  poi2 = getent("teleporter_poi2", "targetname");
-  players = getplayers();
+  poi1 = getEnt("teleporter_poi1", "targetname");
+  poi2 = getEnt("teleporter_poi2", "targetname");
+  players = getPlayers();
   if(players.size > 1) {
     poi1 zm_utility::create_zombie_point_of_interest(undefined, 30, 0, 0);
     poi2 zm_utility::create_zombie_point_of_interest(256, 15, 0, 0);
@@ -66,7 +66,7 @@ function teleporter_init() {
   thread teleport_pad_think();
   thread theater_fly_me_to_the_moon_init();
   thread function_9272aa0();
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     util::setclientsysstate("levelNotify", "pack_clock_start", players[i]);
   }
@@ -98,9 +98,9 @@ function teleport_core_think(index) {
   trigger_name = "trigger_teleport_pad_" + index;
   active = 0;
   user = undefined;
-  trigger = getent(trigger_name, "targetname");
-  trigger setcursorhint("HINT_NOICON");
-  trigger sethintstring("");
+  trigger = getEnt(trigger_name, "targetname");
+  trigger setCursorHint("HINT_NOICON");
+  trigger setHintString("");
   exploder::exploder("teleporter_light_red");
   if(isDefined(trigger)) {
     while(!active) {
@@ -108,19 +108,19 @@ function teleport_core_think(index) {
       exploder::exploder("fxexp_200");
       exploder::kill_exploder("teleporter_light_red");
       exploder::exploder("teleporter_light_green");
-      trigger sethintstring(&"ZM_THEATER_USE_TELEPORTER");
+      trigger setHintString(&"ZM_THEATER_USE_TELEPORTER");
       trigger waittill("trigger", user);
       if(zombie_utility::is_player_valid(user) && user zm_score::can_player_purchase(level.teleport_cost)) {
         active = 1;
         exploder::kill_exploder("teleporter_light_green");
         exploder::exploder("teleporter_light_red");
-        trigger sethintstring("");
+        trigger setHintString("");
         user zm_score::minus_to_player_score(level.teleport_cost);
         exploder::kill_exploder("fxexp_200");
         level clientfield::increment("teleporter_initiate_fx");
         trigger player_teleporting(index);
         level.var_4f3df77f clientfield::set("teleporter_link_cable_mtl", 0);
-        trigger sethintstring(&"ZOMBIE_TELEPORT_COOLDOWN");
+        trigger setHintString(&"ZOMBIE_TELEPORT_COOLDOWN");
         wait(90);
         active = 0;
         exploder::delete_exploder_on_clients("fxexp_202");
@@ -135,17 +135,17 @@ function teleport_core_think(index) {
 
 function teleport_link_think() {
   trigger_name = "trigger_teleport_pad_0";
-  core = getent(trigger_name, "targetname");
+  core = getEnt(trigger_name, "targetname");
   user = undefined;
   while(true) {
     if(!level flag::get("core_linked")) {
-      core sethintstring(&"ZM_THEATER_LINK_CORE");
+      core setHintString(&"ZM_THEATER_LINK_CORE");
       core waittill("trigger", user);
       core playSound("evt_teleporter_activate_start");
       level flag::set("core_linked");
-      core sethintstring("");
-      pad = getent(core.target, "targetname");
-      pad sethintstring(&"ZM_THEATER_LINK_PAD");
+      core setHintString("");
+      pad = getEnt(core.target, "targetname");
+      pad setHintString(&"ZM_THEATER_LINK_PAD");
     }
     util::wait_network_frame();
   }
@@ -153,24 +153,24 @@ function teleport_link_think() {
 
 function teleport_pad_hide_use() {
   trigger_name = "trigger_teleport_pad_0";
-  core = getent(trigger_name, "targetname");
-  pad = getent(core.target, "targetname");
-  pad setcursorhint("HINT_NOICON");
-  level.var_4f3df77f = getent("teleporter_link_cable", "targetname");
-  pad sethintstring(&"ZOMBIE_NEED_POWER");
+  core = getEnt(trigger_name, "targetname");
+  pad = getEnt(core.target, "targetname");
+  pad setCursorHint("HINT_NOICON");
+  level.var_4f3df77f = getEnt("teleporter_link_cable", "targetname");
+  pad setHintString(&"ZOMBIE_NEED_POWER");
   level flag::wait_till("power_on");
-  pad sethintstring(&"ZM_THEATER_START_CORE");
+  pad setHintString(&"ZM_THEATER_START_CORE");
 }
 
 function teleport_pad_think() {
   trigger_name = "trigger_teleport_pad_0";
-  core = getent(trigger_name, "targetname");
-  pad = getent(core.target, "targetname");
+  core = getEnt(trigger_name, "targetname");
+  pad = getEnt(core.target, "targetname");
   user = undefined;
   while(true) {
     if(!level flag::get("teleporter_linked") && level flag::get("core_linked")) {
       pad waittill("trigger", user);
-      pad sethintstring("");
+      pad setHintString("");
       pad playSound("evt_teleporter_activate_finish");
       level flag::set("teleporter_linked");
       level.var_4f3df77f clientfield::set("teleporter_link_cable_mtl", 1);
@@ -231,7 +231,7 @@ function player_teleporting(index) {
 }
 
 function teleport_trigger_invisible(enable) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
       self setinvisibletoplayer(players[i], enable);
@@ -250,7 +250,7 @@ function teleport_pad_player_fx(players) {
   self endon("fx_done");
   inprojroom = 0;
   if(!isDefined(players)) {
-    players = getplayers();
+    players = getPlayers();
   } else {
     inprojroom = 1;
   }
@@ -267,7 +267,7 @@ function teleport_pad_player_fx(players) {
 }
 
 function function_1488cf91(e_player) {
-  var_1de511b3 = getent("teleportation_area", "targetname");
+  var_1de511b3 = getEnt("teleportation_area", "targetname");
   return isalive(e_player) && e_player.sessionstate !== "spectator" && e_player istouching(var_1de511b3);
 }
 
@@ -328,13 +328,13 @@ function teleport_players(var_1bea176e, loc) {
         }
       }
       util::setclientsysstate("levelNotify", "black_box_start", players[i]);
-      players[i] setorigin(dest_room[i].origin);
+      players[i] setOrigin(dest_room[i].origin);
       players[i] setplayerangles(dest_room[i].angles);
       players[i].teleport_origin = spawn("script_origin", players[i].origin);
       players[i].teleport_origin.angles = players[i].angles;
-      players[i] linkto(players[i].teleport_origin);
+      players[i] linkTo(players[i].teleport_origin);
       players[i] thread function_7e0ed731(slot, desired_offset);
-      players[i] playrumbleonentity("zm_castle_moon_explosion_rumble");
+      players[i] playRumbleOnEntity("zm_castle_moon_explosion_rumble");
     }
   }
   if(!isDefined(var_1bea176e) || (isDefined(var_1bea176e) && var_1bea176e.size < 1)) {
@@ -351,7 +351,7 @@ function teleport_players(var_1bea176e, loc) {
       dest_room = get_array_spots("ee_teleport_player", dest_room);
     } else if(loc == "theater") {
       if(isDefined(self.target)) {
-        ent = getent(self.target, "targetname");
+        ent = getEnt(self.target, "targetname");
         self thread teleport_nuke(undefined, 20);
       }
       dest_room = get_array_spots("theater_teleport_player", dest_room);
@@ -377,7 +377,7 @@ function teleport_players(var_1bea176e, loc) {
       assert(isDefined(var_1bea176e[i].teleport_origin));
       var_1bea176e[i].teleport_origin delete();
       var_1bea176e[i].teleport_origin = undefined;
-      var_1bea176e[i] setorigin(dest_room[slot].origin);
+      var_1bea176e[i] setOrigin(dest_room[slot].origin);
       var_1bea176e[i] setplayerangles(dest_room[slot].angles);
       var_1bea176e[i] clientfield::increment("player_teleport_fx");
       if(loc != "eerooms") {
@@ -427,7 +427,7 @@ function extra_cam_startup() {
 
 function get_array_spots(sname, spots) {
   for(i = 0; i < 4; i++) {
-    spots[i] = getent(sname + i, "targetname");
+    spots[i] = getEnt(sname + i, "targetname");
   }
   return spots;
 }
@@ -456,7 +456,7 @@ function check_for_occupied_spots(dest, players, player_radius) {
 function teleport_2d_audio() {
   self endon("fx_done");
   util::clientnotify("tpa");
-  players = getplayers();
+  players = getPlayers();
   wait(1.7);
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
@@ -506,7 +506,7 @@ function teleport_nuke(max_zombies, range) {
       zombies[i] zombie_utility::zombie_head_gib();
     }
     zombies[i] dodamage(zombies[i].health + 100, zombies[i].origin);
-    playsoundatposition("nuked", zombies[i].origin);
+    playSoundAtPosition("nuked", zombies[i].origin);
   }
 }
 
@@ -578,9 +578,9 @@ function teleport_aftereffect_flare_vision(localclientnum) {
 function zombietheaterteleporterseeklogic() {
   inteleportcount = 0;
   nonteleportinvalidcount = 0;
-  poi1 = getent("teleporter_poi1", "targetname");
-  poi2 = getent("teleporter_poi2", "targetname");
-  players = getplayers();
+  poi1 = getEnt("teleporter_poi1", "targetname");
+  poi2 = getEnt("teleporter_poi2", "targetname");
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].inteleportation) && players[i].inteleportation == 1) {
       inteleportcount++;
@@ -628,7 +628,7 @@ function start_wall_clock() {
     wait(1);
   }
   wait(5);
-  self rotateto(level.second_hand_angles, 0.05);
+  self rotateTo(level.second_hand_angles, 0.05);
 }
 
 function eeroom_powerup_drop() {
@@ -647,8 +647,8 @@ function eeroom_powerup_drop() {
 }
 
 function theater_fly_me_to_the_moon_init() {
-  var_37cacae8 = getent("trigger_jump", "targetname");
-  to_the_moon_alice_trigger = getent("trigger_fly_me_to_the_moon", "targetname");
+  var_37cacae8 = getEnt("trigger_jump", "targetname");
+  to_the_moon_alice_trigger = getEnt("trigger_fly_me_to_the_moon", "targetname");
   var_37cacae8 thread function_2cdd3a26();
   to_the_moon_alice_trigger thread theater_fly_me_to_the_moon();
 }
@@ -704,8 +704,8 @@ function function_bc057378(var_4e54c41) {
 
 function theater_fly_me_to_the_moon() {
   self endon("hash_64fcb4a6");
-  self sethintstring("");
-  self setcursorhint("HINT_NOICON");
+  self setHintString("");
+  self setCursorHint("HINT_NOICON");
   while(isDefined(self)) {
     self waittill("trigger", e_player);
     if(!isDefined(e_player._moon_jumps) || e_player._moon_jumps < 5) {
@@ -720,7 +720,7 @@ function theater_fly_me_to_the_moon() {
 }
 
 function theater_moon_jump_go() {
-  ship = getent("model_zombie_rocket", "targetname");
+  ship = getEnt("model_zombie_rocket", "targetname");
   ship_base_origin = ship.origin;
   wait(0.05);
   ship clientfield::set("play_fly_me_to_the_moon_fx", 1);
@@ -728,9 +728,9 @@ function theater_moon_jump_go() {
   ship waittill("movedone");
   ship clientfield::set("play_fly_me_to_the_moon_fx", 0);
   ship delete();
-  var_4e54c41 = getent("trigger_jump", "targetname");
+  var_4e54c41 = getEnt("trigger_jump", "targetname");
   var_4e54c41 notify("hash_88782877");
-  to_the_moon_alice_trigger = getent("trigger_fly_me_to_the_moon", "targetname");
+  to_the_moon_alice_trigger = getEnt("trigger_fly_me_to_the_moon", "targetname");
   to_the_moon_alice_trigger delete();
 }
 

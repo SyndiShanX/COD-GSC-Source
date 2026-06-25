@@ -297,7 +297,7 @@ notetrack_super_kill_alive_a_dof_10_salazar(ai_salazar) {
 notetrack_super_kill_alive_b_dof_5_farid(ai_salazar) {
   ai_defalco = get_ent("defalco_ai", "targetname");
   e_streamer_hint = createstreamerhint(ai_defalco gettagorigin("tag_origin"), 1.0);
-  e_streamer_hint linkto(ai_defalco, "tag_origin");
+  e_streamer_hint linkTo(ai_defalco, "tag_origin");
   level.player depth_of_field_tween(0, 5, 5, 100, 6, 2, 0.2);
   wait 6;
   e_streamer_hint unlink();

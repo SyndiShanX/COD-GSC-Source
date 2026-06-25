@@ -71,7 +71,7 @@ color_trig_moves_enemies() {
 set_new_enemy_volume(var_0) {
   level endon("stop_custom_color_system");
   level notify("new_volume");
-  level.current_enemy_vol = getent(var_0.target, "targetname");
+  level.current_enemy_vol = getEnt(var_0.target, "targetname");
   update_debug_hud(level.hud1, level.current_enemy_vol.targetname);
   level thread notify_baddies_to_retreat();
   level.current_enemy_vol thread enemy_volume_logic();
@@ -199,7 +199,7 @@ enemy_volume_logic() {
   level.current_color_line++;
   color_debug_println("One guy left, moving up friendlies");
 
-  if(!isDefined(getent(level.color_trig_targetname_prefix + level.current_color_line, "targetname"))) {
+  if(!isDefined(getEnt(level.color_trig_targetname_prefix + level.current_color_line, "targetname"))) {
     var_0 = "NO COLOR TRIG TO ACTIVATE ( " + level.color_trig_targetname_prefix + level.current_color_line + " )";
     color_debug_println(var_0);
     return;

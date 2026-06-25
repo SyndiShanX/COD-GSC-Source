@@ -68,7 +68,7 @@ board_hack(hacker) {
     self.window thread maps\_zombiemode_blockers::replace_chunk(chunk, undefined, true);
     last_repaired_chunk = chunk;
     self.window.clip enable_trigger();
-    self.window.clip DisconnectPaths();
+    self.window.clip disconnectPaths();
     wait_network_frame();
     num_chunks_checked++;
     if(num_chunks_checked >= 20) {

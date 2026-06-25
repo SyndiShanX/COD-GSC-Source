@@ -274,7 +274,7 @@ CanMeleeInternal(state) {
   return true;
 }
 isMeleePathClear(vecToEnemy, enemyPoint) {
-  dirToEnemy = VectorNormalize((vecToEnemy[0], vecToEnemy[1], 0));
+  dirToEnemy = vectorNormalize((vecToEnemy[0], vecToEnemy[1], 0));
   meleePoint = enemyPoint - (dirToEnemy[0] * 28, dirToEnemy[1] * 28, 0);
   thread debug_melee_line(self.origin, meleePoint, (1, 0, 0), 1.5);
   if(!self IsInGoal(meleePoint)) {

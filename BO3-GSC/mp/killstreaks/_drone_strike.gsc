@@ -146,7 +146,7 @@ function spawndrone(startpoint, endpoint, targetpoint, angles, team, killstreak_
   drone clientfield::set("enemyvehicle", 1);
   drone setupdamagehandling();
   drone thread watchforemp(self);
-  drone moveto(endpoint, 1.8, 0, 0);
+  drone moveTo(endpoint, 1.8, 0, 0);
   wait(1.8);
   weapon = getweapon("drone_strike");
   velocity = drone getvelocity();
@@ -154,7 +154,7 @@ function spawndrone(startpoint, endpoint, targetpoint, angles, team, killstreak_
   dxy = abs(-6000);
   dz = endpoint[2] - targetpoint[2];
   dvxy = dxy * (sqrt(halfgravity / dz));
-  nvel = vectornormalize(velocity);
+  nvel = vectorNormalize(velocity);
   launchvel = nvel * dvxy;
   bomb = self launchbomb(weapon, drone.origin, launchvel);
   target_set(bomb);

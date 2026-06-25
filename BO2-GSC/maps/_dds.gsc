@@ -882,10 +882,10 @@ dds_getclock_position(pos) {
   }
   playerangles = level.player getplayerangles();
   playerforwardvec = anglesToForward(playerangles);
-  playerunitforwardvec = vectornormalize(playerforwardvec);
+  playerunitforwardvec = vectorNormalize(playerforwardvec);
   playerpos = level.player getorigin();
   playertobanzaivec = pos - playerpos;
-  playertobanzaiunitvec = vectornormalize(playertobanzaivec);
+  playertobanzaiunitvec = vectorNormalize(playertobanzaivec);
   forwarddotbanzai = vectordot(playerunitforwardvec, playertobanzaiunitvec);
   anglefromcenter = acos(forwarddotbanzai);
   crossplayerenemy = vectorcross(playerunitforwardvec, playertobanzaiunitvec);

@@ -264,10 +264,10 @@ wait_for_my_sploder() {
   self notify("stop firing");
 }
 do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_drones_at_spawn) {
-  trigger = GetEnt(bunker_name + " damage trigger", "script_noteworthy");
-  trigger.swap_trigger = GetEnt(bunker_name + " anim trigger", "script_noteworthy");
+  trigger = getEnt(bunker_name + " damage trigger", "script_noteworthy");
+  trigger.swap_trigger = getEnt(bunker_name + " anim trigger", "script_noteworthy");
 
-  tank_trigger = GetEnt(bunker_name + " tank trigger", "script_noteworthy");
+  tank_trigger = getEnt(bunker_name + " tank trigger", "script_noteworthy");
 
   tank_Trigger thread debug_line_on_damage();
 
@@ -513,7 +513,7 @@ do_secondary_fb_effects(bunker_name, tank_kill, attacker) {
   exploder_trigger = getEnt(bunker_name + " damage trigger exploder", "script_noteworthy");
   exploder_trigger notify("trigger");
 
-  damage_trigger = GetEnt(bunker_name + " damage trigger", "script_noteworthy");
+  damage_trigger = getEnt(bunker_name + " damage trigger", "script_noteworthy");
   exit_points = getStructArray(damage_trigger.target, "targetname");
 
   for(i = 0; i < exit_points.size; i++) {

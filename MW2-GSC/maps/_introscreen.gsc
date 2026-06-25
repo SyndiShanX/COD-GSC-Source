@@ -1125,19 +1125,19 @@ flying_intro() {
     ent.angles = level.player.angles;
   }
 
-  level.player PlayerLinkTo(ent, undefined, 1, 0, 0, 0, 0);
+  level.player PlayerlinkTo(ent, undefined, 1, 0, 0, 0, 0);
   ent.angles = (ent.angles[0] + 89, ent.angles[1], 0);
 
   wait(extra_delay);
-  ent MoveTo(origin + (0, 0, 0), 2, 0, 2);
+  ent moveTo(origin + (0, 0, 0), 2, 0, 2);
 
   wait(1.00);
   wait(0.5);
 
   if(override_angles) {
-    ent RotateTo(level.customIntroAngles, 0.5, 0.3, 0.2);
+    ent rotateTo(level.customIntroAngles, 0.5, 0.3, 0.2);
   } else {
-    ent RotateTo((ent.angles[0] - 89, ent.angles[1], 0), 0.5, 0.3, 0.2);
+    ent rotateTo((ent.angles[0] - 89, ent.angles[1], 0), 0.5, 0.3, 0.2);
   }
 
   if(!special_save) {}

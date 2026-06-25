@@ -929,7 +929,7 @@ _id_4E8C(var_0, var_1, var_2) {
     return;
   }
   self._id_533E = var_4;
-  self._id_F4D2 = vectornormalize(var_4 - var_3.origin);
+  self._id_F4D2 = vectorNormalize(var_4 - var_3.origin);
   var_5 = undefined;
   var_5 = var_3._id_005D;
 
@@ -1027,7 +1027,7 @@ _id_4E8B(var_0, var_1, var_2) {
     return;
   }
   self._id_533E = var_4;
-  self._id_F4D2 = vectornormalize(var_4 - var_3.origin);
+  self._id_F4D2 = vectorNormalize(var_4 - var_3.origin);
   var_5 = undefined;
   var_5 = var_3._id_005D;
 
@@ -1121,7 +1121,7 @@ _id_4E8B(var_0, var_1, var_2) {
 
     if(var_18.size > 0) {
       _id_0017::_id_4E88(var_5 + "_norestart", var_6, var_12, "traverse", var_13, var_17, 0, ::_id_110AF);
-      var_30 = scripts\engine\utility::getstruct(self._id_532B.target, "targetname");
+      var_30 = scripts\engine\utility::getStruct(self._id_532B.target, "targetname");
 
       if(isDefined(var_30._id_039B) && var_30._id_039B == "continue_flex_height") {
         _id_0017::_id_4E88(var_5 + "_norestart", var_6, var_12, "traverse", var_17, var_15, 1, ::_id_110AF);
@@ -1141,7 +1141,7 @@ _id_4E8B(var_0, var_1, var_2) {
 
       _id_0017::_id_B356(var_5 + "_norestart", var_6, "traverse", "end", ::_id_110AF);
     } else {
-      var_30 = scripts\engine\utility::getstruct(self._id_532B.target, "targetname");
+      var_30 = scripts\engine\utility::getStruct(self._id_532B.target, "targetname");
       var_31 = var_20[0];
       _id_0017::_id_4E89(var_5 + "_norestart", var_6, "traverse", var_12, var_13, var_15, var_30.origin, var_31, ::_id_110AF);
 
@@ -1356,7 +1356,7 @@ _id_F4DC(var_0, var_1, var_2) {
     }
 
     var_6 = _id_0B05::_id_91A9(var_5, var_0, var_1);
-    self setorigin((self.origin[0], self.origin[1], var_6), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_6), 0);
     wait 0.05;
   }
 }
@@ -1380,7 +1380,7 @@ _id_91DD() {
   var_3 = self.origin[2];
 
   if(var_3 < var_2) {
-    self setorigin((self.origin[0], self.origin[1], var_2 + var_0), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_2 + var_0), 0);
   }
 }
 

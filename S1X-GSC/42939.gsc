@@ -384,7 +384,7 @@ playerhandlejoining(var_0, var_1) {
 }
 
 useholdthink(var_0, var_1, var_2) {
-  var_0 playerlinkto(var_2);
+  var_0 playerlinkTo(var_2);
   var_0 playerlinkedoffsetenable();
   var_0.manuallyjoiningkillstreak = 1;
   thread useholdthinkcleanuponplayerdeath(var_0);

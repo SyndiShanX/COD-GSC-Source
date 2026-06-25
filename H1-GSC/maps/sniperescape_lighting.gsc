@@ -35,7 +35,7 @@ handle_player_on_sniper_rifle() {
   wait 0.05;
   common_scripts\utility::flag_wait("player_is_on_turret");
   setsaveddvar("sv_znear", "100");
-  setsaveddvar("sm_sunShadowCenter", getent("blood_pool", "targetname").origin);
+  setsaveddvar("sm_sunShadowCenter", getEnt("blood_pool", "targetname").origin);
   var_0 = getEntArray("zakhaev_light", "targetname");
 
   foreach(var_2 in var_0) {

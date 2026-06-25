@@ -562,7 +562,7 @@ _id_DB0A(var_0, var_1, var_2, var_3) {
   var_7 = _id_0009::_id_1C6C(var_0, var_2);
   var_8 = _id_0009::_id_1C6E(var_1, var_7);
   var_9 = self._id_0B67._id_03D5.origin - self.origin;
-  var_10 = vectornormalize(var_9);
+  var_10 = vectorNormalize(var_9);
   var_11 = _func_00B0(var_8, 0, 1);
   var_12 = length(var_11);
   var_13 = self._id_0B67._id_03D5.origin - var_10 * var_12;

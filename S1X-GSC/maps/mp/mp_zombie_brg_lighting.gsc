@@ -16,7 +16,7 @@ set_level_lighting_values() {
 }
 
 lightintensityflicker(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_5)) {
     return;

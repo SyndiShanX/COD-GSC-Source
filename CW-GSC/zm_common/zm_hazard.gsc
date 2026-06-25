@@ -201,7 +201,7 @@ function function_b5cd0ae5() {
 }
 
 function function_eccc5dbd() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   v_direction = player getplayerangles();
   v_direction = anglesToForward(v_direction) * 500;
   eye = player getEye();

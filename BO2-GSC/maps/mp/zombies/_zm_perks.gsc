@@ -283,18 +283,18 @@ default_vending_precaching() {
 pap_weapon_move_in(trigger, origin_offset, angles_offset) {
   level endon("Pack_A_Punch_off");
   trigger endon("pap_player_disconnected");
-  trigger.worldgun rotateto(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
+  trigger.worldgun rotateTo(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
   offsetdw = vectorscale((1, 1, 1), 3.0);
 
   if(isDefined(trigger.worldgun.worldgundw)) {
-    trigger.worldgun.worldgundw rotateto(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
+    trigger.worldgun.worldgundw rotateTo(self.angles + angles_offset + vectorscale((0, 1, 0), 90.0), 0.35, 0, 0);
   }
 
   wait 0.5;
-  trigger.worldgun moveto(self.origin + origin_offset, 0.5, 0, 0);
+  trigger.worldgun moveTo(self.origin + origin_offset, 0.5, 0, 0);
 
   if(isDefined(trigger.worldgun.worldgundw)) {
-    trigger.worldgun.worldgundw moveto(self.origin + origin_offset + offsetdw, 0.5, 0, 0);
+    trigger.worldgun.worldgundw moveTo(self.origin + origin_offset + offsetdw, 0.5, 0, 0);
   }
 }
 
@@ -306,10 +306,10 @@ pap_weapon_move_out(trigger, origin_offset, interact_offset) {
   if(!isDefined(trigger.worldgun)) {
     return;
   }
-  trigger.worldgun moveto(self.origin + interact_offset, 0.5, 0, 0);
+  trigger.worldgun moveTo(self.origin + interact_offset, 0.5, 0, 0);
 
   if(isDefined(trigger.worldgun.worldgundw)) {
-    trigger.worldgun.worldgundw moveto(self.origin + interact_offset + offsetdw, 0.5, 0, 0);
+    trigger.worldgun.worldgundw moveTo(self.origin + interact_offset + offsetdw, 0.5, 0, 0);
   }
 
   wait 0.5;
@@ -317,10 +317,10 @@ pap_weapon_move_out(trigger, origin_offset, interact_offset) {
   if(!isDefined(trigger.worldgun)) {
     return;
   }
-  trigger.worldgun moveto(self.origin + origin_offset, level.packapunch_timeout, 0, 0);
+  trigger.worldgun moveTo(self.origin + origin_offset, level.packapunch_timeout, 0, 0);
 
   if(isDefined(trigger.worldgun.worldgundw)) {
-    trigger.worldgun.worldgundw moveto(self.origin + origin_offset + offsetdw, level.packapunch_timeout, 0, 0);
+    trigger.worldgun.worldgundw moveTo(self.origin + origin_offset + offsetdw, level.packapunch_timeout, 0, 0);
   }
 }
 
@@ -358,7 +358,7 @@ third_person_weapon_upgrade(current_weapon, upgrade_weapon, packa_rollers, perk_
     perk_machine.fx_ent = spawn("script_model", origin_base + origin_offset + (0, 1, -34));
     perk_machine.fx_ent.angles = angles_base + angles_offset;
     perk_machine.fx_ent setModel("tag_origin");
-    perk_machine.fx_ent linkto(perk_machine);
+    perk_machine.fx_ent linkTo(perk_machine);
   }
 
   if(isDefined(level._effect["packapunch_fx"])) {
@@ -385,7 +385,7 @@ third_person_weapon_upgrade(current_weapon, upgrade_weapon, packa_rollers, perk_
   self playSound("zmb_perks_packa_upgrade");
 
   if(isDefined(perk_machine.wait_flag)) {
-    perk_machine.wait_flag rotateto(perk_machine.wait_flag.angles + vectorscale((1, 0, 0), 179.0), 0.25, 0, 0);
+    perk_machine.wait_flag rotateTo(perk_machine.wait_flag.angles + vectorscale((1, 0, 0), 179.0), 0.25, 0, 0);
   }
 
   wait 0.35;
@@ -416,7 +416,7 @@ third_person_weapon_upgrade(current_weapon, upgrade_weapon, packa_rollers, perk_
   trigger.worldgun.worldgundw = worldgundw;
 
   if(isDefined(perk_machine.wait_flag)) {
-    perk_machine.wait_flag rotateto(perk_machine.wait_flag.angles - vectorscale((1, 0, 0), 179.0), 0.25, 0, 0);
+    perk_machine.wait_flag rotateTo(perk_machine.wait_flag.angles - vectorscale((1, 0, 0), 179.0), 0.25, 0, 0);
   }
 
   if(isDefined(level.custom_pap_move_out)) {
@@ -493,16 +493,16 @@ vending_machine_trigger_think() {
 vending_weapon_upgrade() {
   level endon("Pack_A_Punch_off");
   wait 0.01;
-  perk_machine = getent(self.target, "targetname");
+  perk_machine = getEnt(self.target, "targetname");
   self.perk_machine = perk_machine;
   perk_machine_sound = getEntArray("perksacola", "targetname");
   packa_rollers = spawn("script_origin", self.origin);
   packa_timer = spawn("script_origin", self.origin);
-  packa_rollers linkto(self);
-  packa_timer linkto(self);
+  packa_rollers linkTo(self);
+  packa_timer linkTo(self);
 
   if(isDefined(perk_machine.target)) {
-    perk_machine.wait_flag = getent(perk_machine.target, "targetname");
+    perk_machine.wait_flag = getEnt(perk_machine.target, "targetname");
   }
 
   pap_is_buildable = self is_buildable();
@@ -524,9 +524,9 @@ vending_weapon_upgrade() {
     }
   }
 
-  self usetriggerrequirelookat();
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self setcursorhint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
   power_off = !self maps\mp\zombies\_zm_power::pap_is_on();
 
   if(power_off) {
@@ -628,7 +628,7 @@ vending_weapon_upgrade() {
     self thread destroy_weapon_on_disconnect(player);
     player maps\mp\zombies\_zm_score::minus_to_player_score(current_cost, 1);
     sound = "evt_bottle_dispense";
-    playsoundatposition(sound, self.origin);
+    playSoundAtPosition(sound, self.origin);
     self thread maps\mp\zombies\_zm_audio::play_jingle_or_stinger("mus_perks_packa_sting");
     player maps\mp\zombies\_zm_audio::create_and_play_dialog("weapon_pickup", "upgrade_wait");
     self disable_trigger();
@@ -644,7 +644,7 @@ vending_weapon_upgrade() {
     upgrade_name = maps\mp\zombies\_zm_weapons::get_upgrade_weapon(current_weapon, upgrade_as_attachment);
     player third_person_weapon_upgrade(current_weapon, upgrade_name, packa_rollers, perk_machine, self);
     self enable_trigger();
-    self sethintstring(&"ZOMBIE_GET_UPGRADED");
+    self setHintString(&"ZOMBIE_GET_UPGRADED");
 
     if(isDefined(player)) {
       self setinvisibletoall();
@@ -665,9 +665,9 @@ vending_weapon_upgrade() {
     }
 
     if(isDefined(level.zombiemode_reusing_pack_a_punch) && level.zombiemode_reusing_pack_a_punch) {
-      self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH_ATT", self.cost);
+      self setHintString(&"ZOMBIE_PERK_PACKAPUNCH_ATT", self.cost);
     } else {
-      self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
+      self setHintString(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
     }
 
     self setvisibletoall();
@@ -699,9 +699,9 @@ vending_weapon_upgrade_cost() {
     self.attachment_cost = 2000;
 
     if(isDefined(level.zombiemode_reusing_pack_a_punch) && level.zombiemode_reusing_pack_a_punch) {
-      self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH_ATT", self.cost);
+      self setHintString(&"ZOMBIE_PERK_PACKAPUNCH_ATT", self.cost);
     } else {
-      self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
+      self setHintString(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
     }
 
     level waittill("powerup bonfire sale");
@@ -709,9 +709,9 @@ vending_weapon_upgrade_cost() {
     self.attachment_cost = 1000;
 
     if(isDefined(level.zombiemode_reusing_pack_a_punch) && level.zombiemode_reusing_pack_a_punch) {
-      self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH_ATT", self.cost);
+      self setHintString(&"ZOMBIE_PERK_PACKAPUNCH_ATT", self.cost);
     } else {
-      self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
+      self setHintString(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
     }
 
     level waittill("bonfire_sale_off");
@@ -843,7 +843,7 @@ destroy_weapon_in_blackout(player) {
   level waittill("Pack_A_Punch_off");
 
   if(isDefined(self.worldgun)) {
-    self.worldgun rotateto(self.worldgun.angles + (randomint(90) - 45, 0, randomint(360) - 180), 1.5, 0, 0);
+    self.worldgun rotateTo(self.worldgun.angles + (randomint(90) - 45, 0, randomint(360) - 180), 1.5, 0, 0);
     player playlocalsound(level.zmb_laugh_alias);
     wait 1.5;
 
@@ -911,7 +911,7 @@ turn_packapunch_on() {
   level.pap_triggers = vending_weapon_upgrade_trigger;
 
   for(i = 0; i < vending_weapon_upgrade_trigger.size; i++) {
-    perk = getent(vending_weapon_upgrade_trigger[i].target, "targetname");
+    perk = getEnt(vending_weapon_upgrade_trigger[i].target, "targetname");
 
     if(isDefined(perk)) {
       perk setModel(level.machine_assets["packapunch"].off_model);
@@ -922,7 +922,7 @@ turn_packapunch_on() {
     level waittill("Pack_A_Punch_on");
 
     for(i = 0; i < vending_weapon_upgrade_trigger.size; i++) {
-      perk = getent(vending_weapon_upgrade_trigger[i].target, "targetname");
+      perk = getEnt(vending_weapon_upgrade_trigger[i].target, "targetname");
 
       if(isDefined(perk)) {
         perk thread activate_packapunch();
@@ -932,7 +932,7 @@ turn_packapunch_on() {
     level waittill("Pack_A_Punch_off");
 
     for(i = 0; i < vending_weapon_upgrade_trigger.size; i++) {
-      perk = getent(vending_weapon_upgrade_trigger[i].target, "targetname");
+      perk = getEnt(vending_weapon_upgrade_trigger[i].target, "targetname");
 
       if(isDefined(perk)) {
         perk thread deactivate_packapunch();
@@ -1158,13 +1158,13 @@ revive_solo_fx(machine_clip, blocker_model) {
 
   wait 2.0;
   self playSound("zmb_box_move");
-  playsoundatposition("zmb_whoosh", self.origin);
+  playSoundAtPosition("zmb_whoosh", self.origin);
 
   if(isDefined(self._linked_ent)) {
     self unlink();
   }
 
-  self moveto(self.origin + vectorscale((0, 0, 1), 40.0), 3);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 40.0), 3);
 
   if(isDefined(level.custom_vibrate_func)) {
     [[level.custom_vibrate_func]](self);
@@ -1183,7 +1183,7 @@ revive_solo_fx(machine_clip, blocker_model) {
 
   self waittill("movedone");
   playFX(level._effect["poltergeist"], self.origin);
-  playsoundatposition("zmb_box_poof", self.origin);
+  playSoundAtPosition("zmb_box_poof", self.origin);
   level clientnotify("drb");
 
   if(isDefined(self.fx)) {
@@ -1511,7 +1511,7 @@ play_loop_on_machine() {
   }
   sound_ent = spawn("script_origin", self.origin);
   sound_ent playLoopSound("zmb_perks_machine_loop");
-  sound_ent linkto(self);
+  sound_ent linkTo(self);
   self waittill("stop_loopsound");
   sound_ent unlink();
   sound_ent delete();
@@ -1584,52 +1584,52 @@ reset_vending_hint_string() {
   switch (perk) {
     case "specialty_armorvest":
     case "specialty_armorvest_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_JUGGERNAUT", self.cost);
+      self setHintString(&"ZOMBIE_PERK_JUGGERNAUT", self.cost);
       break;
     case "specialty_quickrevive":
     case "specialty_quickrevive_upgrade":
       if(solo) {
-        self sethintstring(&"ZOMBIE_PERK_QUICKREVIVE_SOLO", self.cost);
+        self setHintString(&"ZOMBIE_PERK_QUICKREVIVE_SOLO", self.cost);
       } else {
-        self sethintstring(&"ZOMBIE_PERK_QUICKREVIVE", self.cost);
+        self setHintString(&"ZOMBIE_PERK_QUICKREVIVE", self.cost);
       }
 
       break;
     case "specialty_fastreload":
     case "specialty_fastreload_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_FASTRELOAD", self.cost);
+      self setHintString(&"ZOMBIE_PERK_FASTRELOAD", self.cost);
       break;
     case "specialty_rof":
     case "specialty_rof_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_DOUBLETAP", self.cost);
+      self setHintString(&"ZOMBIE_PERK_DOUBLETAP", self.cost);
       break;
     case "specialty_longersprint":
     case "specialty_longersprint_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_MARATHON", self.cost);
+      self setHintString(&"ZOMBIE_PERK_MARATHON", self.cost);
       break;
     case "specialty_deadshot":
     case "specialty_deadshot_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_DEADSHOT", self.cost);
+      self setHintString(&"ZOMBIE_PERK_DEADSHOT", self.cost);
       break;
     case "specialty_additionalprimaryweapon":
     case "specialty_additionalprimaryweapon_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_ADDITIONALPRIMARYWEAPON", self.cost);
+      self setHintString(&"ZOMBIE_PERK_ADDITIONALPRIMARYWEAPON", self.cost);
       break;
     case "specialty_scavenger":
     case "specialty_scavenger_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_TOMBSTONE", self.cost);
+      self setHintString(&"ZOMBIE_PERK_TOMBSTONE", self.cost);
       break;
     case "specialty_finalstand":
     case "specialty_finalstand_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_CHUGABUD", self.cost);
+      self setHintString(&"ZOMBIE_PERK_CHUGABUD", self.cost);
       break;
     default:
-      self sethintstring(perk + " Cost: " + level.zombie_vars["zombie_perk_cost"]);
+      self setHintString(perk + " Cost: " + level.zombie_vars["zombie_perk_cost"]);
   }
 
   if(isDefined(level._custom_perks)) {
     if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].cost) && isDefined(level._custom_perks[perk].hint_string)) {
-      self sethintstring(level._custom_perks[perk].hint_string, level._custom_perks[perk].cost);
+      self setHintString(level._custom_perks[perk].hint_string, level._custom_perks[perk].cost);
     }
   }
 }
@@ -1666,9 +1666,9 @@ vending_trigger_think() {
     }
   }
 
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self setcursorhint("HINT_NOICON");
-  self usetriggerrequirelookat();
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
   cost = level.zombie_vars["zombie_perk_cost"];
 
   switch (perk) {
@@ -1736,51 +1736,51 @@ vending_trigger_think() {
   switch (perk) {
     case "specialty_armorvest":
     case "specialty_armorvest_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_JUGGERNAUT", cost);
+      self setHintString(&"ZOMBIE_PERK_JUGGERNAUT", cost);
       break;
     case "specialty_quickrevive":
     case "specialty_quickrevive_upgrade":
       if(solo) {
-        self sethintstring(&"ZOMBIE_PERK_QUICKREVIVE_SOLO", cost);
+        self setHintString(&"ZOMBIE_PERK_QUICKREVIVE_SOLO", cost);
       } else {
-        self sethintstring(&"ZOMBIE_PERK_QUICKREVIVE", cost);
+        self setHintString(&"ZOMBIE_PERK_QUICKREVIVE", cost);
       }
 
       break;
     case "specialty_fastreload":
     case "specialty_fastreload_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_FASTRELOAD", cost);
+      self setHintString(&"ZOMBIE_PERK_FASTRELOAD", cost);
       break;
     case "specialty_rof":
     case "specialty_rof_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_DOUBLETAP", cost);
+      self setHintString(&"ZOMBIE_PERK_DOUBLETAP", cost);
       break;
     case "specialty_longersprint":
     case "specialty_longersprint_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_MARATHON", cost);
+      self setHintString(&"ZOMBIE_PERK_MARATHON", cost);
       break;
     case "specialty_deadshot":
     case "specialty_deadshot_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_DEADSHOT", cost);
+      self setHintString(&"ZOMBIE_PERK_DEADSHOT", cost);
       break;
     case "specialty_additionalprimaryweapon":
     case "specialty_additionalprimaryweapon_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_ADDITIONALPRIMARYWEAPON", cost);
+      self setHintString(&"ZOMBIE_PERK_ADDITIONALPRIMARYWEAPON", cost);
       break;
     case "specialty_scavenger":
     case "specialty_scavenger_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_TOMBSTONE", cost);
+      self setHintString(&"ZOMBIE_PERK_TOMBSTONE", cost);
       break;
     case "specialty_finalstand":
     case "specialty_finalstand_upgrade":
-      self sethintstring(&"ZOMBIE_PERK_CHUGABUD", cost);
+      self setHintString(&"ZOMBIE_PERK_CHUGABUD", cost);
       break;
     default:
-      self sethintstring(perk + " Cost: " + level.zombie_vars["zombie_perk_cost"]);
+      self setHintString(perk + " Cost: " + level.zombie_vars["zombie_perk_cost"]);
   }
 
   if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].hint_string)) {
-    self sethintstring(level._custom_perks[perk].hint_string, cost);
+    self setHintString(level._custom_perks[perk].hint_string, cost);
   }
 
   for(;;) {
@@ -1854,7 +1854,7 @@ vending_trigger_think() {
     }
 
     sound = "evt_bottle_dispense";
-    playsoundatposition(sound, self.origin);
+    playSoundAtPosition(sound, self.origin);
     player maps\mp\zombies\_zm_score::minus_to_player_score(current_cost, 1);
     player.perk_purchased = perk;
     self thread maps\mp\zombies\_zm_audio::play_jingle_or_stinger(self.script_label);
@@ -2731,7 +2731,7 @@ perk_machine_removal(machine, replacement_model) {
   if(!isDefined(machine)) {
     return;
   }
-  trig = getent(machine, "script_noteworthy");
+  trig = getEnt(machine, "script_noteworthy");
   machine_model = undefined;
 
   if(isDefined(trig)) {
@@ -2822,7 +2822,7 @@ perk_machine_spawn_init() {
       use_trigger = spawn("trigger_radius_use", pos[i].origin + vectorscale((0, 0, 1), 30.0), 0, 40, 70);
       use_trigger.targetname = "zombie_vending";
       use_trigger.script_noteworthy = perk;
-      use_trigger triggerignoreteam();
+      use_trigger triggerIgnoreTeam();
       perk_machine = spawn("script_model", pos[i].origin);
       perk_machine.angles = pos[i].angles;
       perk_machine setModel(pos[i].model);
@@ -2844,7 +2844,7 @@ perk_machine_spawn_init() {
       collision.angles = pos[i].angles;
       collision setModel("zm_collision_perks1");
       collision.script_noteworthy = "clip";
-      collision disconnectpaths();
+      collision disconnectPaths();
       use_trigger.clip = collision;
       use_trigger.machine = perk_machine;
       use_trigger.bump = bump_trigger;
@@ -2981,7 +2981,7 @@ perk_machine_spawn_init() {
           use_trigger.script_label = "mus_perks_packa_sting";
           use_trigger.longjinglewait = 1;
           perk_machine.targetname = "vending_packapunch";
-          flag_pos = getstruct(pos[i].target, "targetname");
+          flag_pos = getStruct(pos[i].target, "targetname");
 
           if(isDefined(flag_pos)) {
             perk_machine_flag = spawn("script_model", flag_pos.origin);
@@ -3292,7 +3292,7 @@ disable_quickrevive(machine_clip) {
       level.quick_revive_machine unlink();
     }
 
-    level.quick_revive_machine moveto(move_org + vectorscale((0, 0, 1), 40.0), 3);
+    level.quick_revive_machine moveTo(move_org + vectorscale((0, 0, 1), 40.0), 3);
     direction = level.quick_revive_machine.origin;
     direction = (direction[1], direction[0], 0);
 
@@ -3329,7 +3329,7 @@ unhide_quickrevive() {
 
   if(isDefined(level.quick_revive_machine_clip)) {
     level.quick_revive_machine_clip trigger_on();
-    level.quick_revive_machine_clip disconnectpaths();
+    level.quick_revive_machine_clip disconnectPaths();
   }
 
   if(isDefined(level.quick_revive_final_pos)) {
@@ -3369,7 +3369,7 @@ unhide_quickrevive() {
   }
 
   if(!(isDefined(level.quick_revive_linked_ent_moves) && level.quick_revive_linked_ent_moves) && level.quick_revive_machine.origin != org) {
-    level.quick_revive_machine moveto(org, 3);
+    level.quick_revive_machine moveTo(org, 3);
     level.quick_revive_machine vibrate(direction, 10, 0.5, 2.9);
     level.quick_revive_machine waittill("movedone");
     level.quick_revive_machine.angles = level.quick_revive_default_angles;
@@ -3388,7 +3388,7 @@ unhide_quickrevive() {
   }
 
   if(isDefined(level.quick_revive_linked_ent)) {
-    level.quick_revive_machine linkto(level.quick_revive_linked_ent);
+    level.quick_revive_machine linkTo(level.quick_revive_linked_ent);
   }
 
   level.quick_revive_machine.ishidden = 0;

@@ -410,8 +410,8 @@ _id_4481(var_0, var_1) {
       break;
     case "aud_link_engine_entities_to_scripted_node":
       var_15 = var_1;
-      level._id_16F5._id_4971 linkto(var_15, "tag_origin");
-      level._id_16F5._id_4972 linkto(var_15, "tag_origin");
+      level._id_16F5._id_4971 linkTo(var_15, "tag_origin");
+      level._id_16F5._id_4972 linkTo(var_15, "tag_origin");
       break;
     case "aud_limpet_mine_anim":
       _id_49B6(1.0);
@@ -487,7 +487,7 @@ _id_4481(var_0, var_1) {
       var_16 = level._id_16F5._id_4973 maps\_audio::_id_170D("harb_se_grenadethrow_foley");
       level._id_16F5._id_4973 maps\_audio::_id_170F("harb_se_grenadethrow_foley");
       level._id_16F5._id_4973.origin = level._id_45C0.origin;
-      level._id_16F5._id_4973 linkto(level._id_45C0, "tag_origin");
+      level._id_16F5._id_4973 linkTo(level._id_45C0, "tag_origin");
       level._id_16F5._id_4973 playSound("harb_se_grenadethrow_foley", "sounddone");
       thread maps\_audio::_id_1783(level._id_16F5._id_4973);
       wait 4.2;
@@ -629,7 +629,7 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_19)) {
         var_22 = spawn("script_origin", var_19.origin);
-        var_22 linkto(var_19);
+        var_22 linkTo(var_19);
         var_22 playSound("skybattle_missile_overhead", "sounddone");
         var_22 waittill("sounddone");
         wait 0.1;
@@ -743,7 +743,7 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_19)) {
         var_27 = spawn("script_origin", var_19.origin);
-        var_27 linkto(var_19);
+        var_27 linkTo(var_19);
         var_27 playSound("missile_boat_travel_1", "sounddone");
         common_scripts\utility::flag_wait("big_missile0_landed");
         var_27 scalevolume(0.0, 0.1);
@@ -769,7 +769,7 @@ _id_4481(var_0, var_1) {
 
       if(isDefined(var_19)) {
         var_27 = spawn("script_origin", var_19.origin);
-        var_27 linkto(var_19);
+        var_27 linkTo(var_19);
         var_27 playSound("missile_boat_travel_2", "sounddone");
         var_27 waittill("sounddone");
         wait 0.1;
@@ -1217,7 +1217,7 @@ _id_4985(var_0) {
 
 _id_4986(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", self.origin);
-  var_3 linkto(self);
+  var_3 linkTo(self);
   var_4 = randomintrange(5, 15);
   wait(var_0);
   var_3 playLoopSound("harb_battleship_sink_bubbles_post");
@@ -1803,7 +1803,7 @@ _id_49B9(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 < var_2) {
       var_8 = spawn("script_origin", var_0.origin);
-      var_8 linkto(var_0);
+      var_8 linkTo(var_0);
       var_8 playSound(var_1, "sounddone");
       var_8 thread _id_49B7(var_0);
       var_8 thread _id_49B8();
@@ -1932,8 +1932,8 @@ _id_49C0(var_0, var_1, var_2, var_3) {
   level._id_16F5._id_4971 unlink();
   level._id_16F5._id_4972 unlink();
   wait 0.05;
-  level._id_16F5._id_4971 linkto(level._id_49C1, "tag_player");
-  level._id_16F5._id_4972 linkto(level._id_49C1, "tag_player");
+  level._id_16F5._id_4971 linkTo(level._id_49C1, "tag_player");
+  level._id_16F5._id_4972 linkTo(level._id_49C1, "tag_player");
   common_scripts\utility::flag_wait("aud_engine_fade_out");
   level._id_16F5._id_4971 setvolume(0.0, var_7);
   level._id_16F5._id_4972 setvolume(0.0, var_7);
@@ -1963,7 +1963,7 @@ _id_49C2() {
   } else {
     self._id_49C4 = 1;
   }
-  var_9 = vectornormalize(var_9);
+  var_9 = vectorNormalize(var_9);
   var_11 = vectordot(var_7, var_9);
   var_12 = vectordot(var_8, var_9);
 
@@ -2018,8 +2018,8 @@ _id_49C6(var_0, var_1, var_2) {
       level._id_16F5._id_4972 playLoopSound(level._id_16F5._id_4972.name);
     }
 
-    level._id_16F5._id_4972 moveto(var_4._id_49C5, 0.1);
-    level._id_16F5._id_4971 moveto(var_4._id_49C5, 0.1);
+    level._id_16F5._id_4972 moveTo(var_4._id_49C5, 0.1);
+    level._id_16F5._id_4971 moveTo(var_4._id_49C5, 0.1);
     wait 0.1;
   }
 }
@@ -2060,7 +2060,7 @@ _id_49C8() {
 _id_49C9(var_0, var_1, var_2) {
   level endon("aud_notify_inside_sub");
   var_0 playSound("skybattle_dist_jet", "sounddone");
-  var_0 moveto(var_1, var_2);
+  var_0 moveTo(var_1, var_2);
   var_0 waittill("sounddone");
 }
 
@@ -2090,7 +2090,7 @@ _id_49CF() {
 
   for(var_1 = 0; var_1 < level._id_16F5._id_49D2; var_1++) {
     level._id_16F5._id_49CE[var_1] = spawn("script_origin", level.player.origin);
-    level._id_16F5._id_49CE[var_1] linkto(level.player);
+    level._id_16F5._id_49CE[var_1] linkTo(level.player);
   }
 
   level waittill("aud_stop_minewarn_loop");
@@ -2118,7 +2118,7 @@ _id_49D5(var_0) {
     wait 0.3;
     thread maps\_audio::_id_15D7("distant_slava_missile_travel", var_0, "oneshot");
     var_1 = spawn("script_origin", var_0.origin);
-    var_1 linkto(var_0);
+    var_1 linkTo(var_0);
     var_1 playSound("distant_slava_missile_whistle_oneshot");
     var_2 = randomfloatrange(0.5, 0.9);
     var_3 = randomfloatrange(3, 9);

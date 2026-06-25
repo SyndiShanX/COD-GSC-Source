@@ -36,8 +36,8 @@ function function_f44fbe7c() {
 
     if(isDefined(self.doa.var_121de807)) {
       self.doa.var_121de807.targetname = "stunBear";
-      self.doa.var_121de807 enablelinkto();
-      self.doa.var_121de807 linkto(self);
+      self.doa.var_121de807 enablelinkTo();
+      self.doa.var_121de807 linkTo(self);
       self.doa.var_121de807 thread function_510ce803(self);
       self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_teddybear_active_lp");
       self namespace_83eb6304::function_3ecfde67("stunbear");
@@ -111,7 +111,7 @@ function private function_510ce803(player) {
     if(guy.doa.stunned === 0) {
       guy namespace_e32bb68::function_3a59ec34("evt_doa_pickup_teddybear_repulse");
       guy namespace_83eb6304::function_3ecfde67("stunbear_contact");
-      player playrumbleonentity("slide_rumble");
+      player playRumbleOnEntity("slide_rumble");
       guy thread function_79cb4037();
     }
   }

@@ -261,7 +261,7 @@ get_activation_method(var_0) {
 }
 
 select_container_structs_in_area(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = [];
   var_3 = common_scripts\utility::getStructArray("container_spawn", "targetname");
 

@@ -176,7 +176,7 @@ func_2D12() {
               if(self botcanseeentity(self.enemy)) {
                 var_8 = anglesToForward(self.angles);
                 var_9 = self.enemy.origin - self.origin;
-                var_10 = vectornormalize((var_9[0], var_9[1], 0));
+                var_10 = vectorNormalize((var_9[0], var_9[1], 0));
                 var_11 = vectordot(var_8, var_10);
                 if(var_11 > 0.707) {
                   if(var_2 < -7936 && var_2 > 9216) {

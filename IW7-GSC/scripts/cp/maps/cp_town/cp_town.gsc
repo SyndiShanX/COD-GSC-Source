@@ -312,8 +312,8 @@ watch_for_cdc_shade(var_0) {
   level endon("game_ended");
   level thread hide_on_game_ended();
   wait(5);
-  var_1 = getent("cdc_shade", "targetname");
-  var_2 = getent("cdc_shade_volume", "targetname");
+  var_1 = getEnt("cdc_shade", "targetname");
+  var_2 = getEnt("cdc_shade_volume", "targetname");
   var_0.shade_hidden = 0;
   for(;;) {
     if(var_0 istouching(var_2) && !scripts\engine\utility::istrue(var_0.zoom_out_camera)) {
@@ -333,7 +333,7 @@ watch_for_cdc_shade(var_0) {
 hide_on_game_ended() {
   level waittill("game_ended");
   wait(0.1);
-  var_0 = getent("cdc_shade", "targetname");
+  var_0 = getEnt("cdc_shade", "targetname");
   var_0 hide();
 }
 
@@ -694,7 +694,7 @@ run_pap_machine_logic(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   wait(3);
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   if(scripts\engine\utility::istrue(level.placed_alien_fuses)) {
@@ -1235,7 +1235,7 @@ movepentstostructs(var_0) {
       foreach(var_6 in var_4) {
         var_7 = undefined;
         if(isDefined(var_6.target)) {
-          var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+          var_7 = scripts\engine\utility::getStruct(var_6.target, "targetname");
         }
 
         var_8 = 0;
@@ -1294,7 +1294,7 @@ movepentstostructs(var_0) {
           var_9.used = 1;
           var_9 dontinterpolate();
           if(isDefined(var_6.target)) {
-            var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+            var_7 = scripts\engine\utility::getStruct(var_6.target, "targetname");
             var_9.origin = var_7.origin;
             if(isDefined(var_7.angles)) {
               var_9.angles = var_7.angles;
@@ -1367,7 +1367,7 @@ resetents(var_0, var_1) {
       }
 
       if(isDefined(var_7.target)) {
-        var_8 = scripts\engine\utility::getstruct(var_7.target, "targetname");
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
         if(var_4.origin == var_8.origin) {
           var_5 = 1;
           break;
@@ -1456,7 +1456,7 @@ hasplayerentattached(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       if(var_3.origin == var_4.origin) {
         var_3.used = 1;
         return 1;
@@ -1520,7 +1520,7 @@ getattachedpersonalent(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_5 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       if(var_4.origin == var_5.origin) {
         return var_4;
       }
@@ -1547,7 +1547,7 @@ getunclaimedpersonalent(var_0, var_1) {
       }
 
       if(isDefined(var_7.target)) {
-        var_8 = scripts\engine\utility::getstruct(var_7.target, "targetname");
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
         if(var_4.origin == var_8.origin) {
           var_5 = 1;
           break;
@@ -1572,7 +1572,7 @@ watchforplayerzonechange(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   scripts\engine\utility::flag_wait("init_interaction_done");
-  var_1 = getent("zone_change", "targetname");
+  var_1 = getEnt("zone_change", "targetname");
   if(isDefined(var_1)) {
     for(;;) {
       if(var_0 istouching(var_1)) {
@@ -1726,28 +1726,28 @@ interactiontriggerproperties(var_0, var_1, var_2) {
     switch (var_1.script_noteworthy) {
       case "bomb_start":
       case "push_bomb":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(360);
         break;
 
       case "crafting_piece":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
 
       case "iw7_knife_zm_crowbar":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         self.interaction_trigger.origin = var_1.origin + (0, 0, 10);
         break;
 
       case "iw7_knife_zm_cleaver":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
 
       case "hidden_song_record":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(30);
         if(var_1.target == "45_record_2") {
           self.interaction_trigger.origin = var_1.origin + (20, 8, 10);
@@ -1765,7 +1765,7 @@ interactiontriggerproperties(var_0, var_1, var_2) {
 
       case "mpq_zom_body_part":
         self.interaction_trigger.origin = var_1.origin + (0, 0, 10);
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
 
@@ -1778,7 +1778,7 @@ interactiontriggerproperties(var_0, var_1, var_2) {
       case "generator_field_center":
       case "bomb_teleporter_part":
         self.interaction_trigger.origin = var_1.origin + (0, 0, 10);
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
 
@@ -1791,13 +1791,13 @@ interactiontriggerproperties(var_0, var_1, var_2) {
       case "chem_container_02":
       case "chem_container_01":
         self.interaction_trigger.origin = var_1.origin + (0, 0, 10);
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
 
       case "discard_chem_interaction":
         self.interaction_trigger.origin = var_1.origin + (0, 0, 20);
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
     }
@@ -1840,7 +1840,7 @@ cp_town_should_do_damage_check_func(var_0, var_1, var_2, var_3, var_4, var_5) {
 setupdamagetriggers(var_0) {
   var_0 endon("disconnect");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_1 = getent("boundary_toxic_line", "targetname");
+  var_1 = getEnt("boundary_toxic_line", "targetname");
   var_2 = scripts\engine\utility::getStructArray("boundary_toxic_line_center", "targetname");
   for(;;) {
     if(var_0 scripts\cp\utility::is_valid_player() && ispointinvolume(var_0.origin, var_1)) {
@@ -1892,7 +1892,7 @@ setupdamagetriggers(var_0) {
 car_trap_test() {
   wait(10);
   var_0 = getvehiclenode("car_path_1", "targetname");
-  var_1 = spawnvehicle("park_roller_coaster_cart", "vehicle_car", "cp_town_temp_vehicle", var_0.origin, var_0.angles);
+  var_1 = spawnVehicle("park_roller_coaster_cart", "vehicle_car", "cp_town_temp_vehicle", var_0.origin, var_0.angles);
   var_1 attachpath(var_0);
   var_1 startpath();
   for(;;) {
@@ -2118,7 +2118,7 @@ move_player_to_closest_spot(var_0) {
     var_3 = var_1.origin;
   }
 
-  var_0 setorigin(var_3);
+  var_0 setOrigin(var_3);
   wait(0.5);
 }
 

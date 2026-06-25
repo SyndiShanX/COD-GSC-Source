@@ -16,7 +16,7 @@
 init() {
   zm_traps::register_trap_basic_info("boiling_bath", &trap_activate, &trap_audio);
   zm_traps::register_trap_damage("boiling_bath", &trap_player_damage, &trap_damage);
-  t_trap = getent("boiling_bath", "script_noteworthy");
+  t_trap = getEnt("boiling_bath", "script_noteworthy");
   t_trap._trap_duration = 20;
   t_trap._trap_cooldown_time = 30;
   clientfield::register("actor", "boiling_trap_death_fx", 16000, 1, "int");
@@ -28,14 +28,14 @@ init() {
 trap_activate() {
   level notify(#"boil_trap_activated");
   level exploder::exploder("fxexp_trap_bath_switch");
-  playsoundatposition("zmb_water_activate", level.var_d6ef5bfd.origin);
+  playSoundAtPosition("zmb_water_activate", level.var_d6ef5bfd.origin);
   level.var_d6ef5bfd playLoopSound(#"hash_7aab9873087e7a2d");
   level.var_c33299e2 = 0;
   level.var_bae901ce = 1;
   level function_922c05f();
   self thread zm_traps::trap_damage();
   wait self._trap_duration;
-  playsoundatposition("zmb_water_deactivate", level.var_d6ef5bfd.origin);
+  playSoundAtPosition("zmb_water_deactivate", level.var_d6ef5bfd.origin);
   level.var_d6ef5bfd stoploopsound(0.5);
   level notify(#"boil_trap_done");
   level function_5bf5b467();

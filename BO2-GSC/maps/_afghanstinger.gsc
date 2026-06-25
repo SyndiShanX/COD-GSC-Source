@@ -123,7 +123,7 @@ _fireball_drop(v_start) {
       n_accel_time = n_fall_time;
     }
 
-    m_fireball moveto(a_ground_trace["position"], n_fall_time, n_accel_time);
+    m_fireball moveTo(a_ground_trace["position"], n_fall_time, n_accel_time);
     m_fireball waittill("movedone");
   }
 

@@ -198,7 +198,7 @@ function debugjump(num) {
     if(ai[i] getentnum() != num) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     line(players[0].origin, ai[i].origin, (0.2, 0.3, 1));
     return;
   }
@@ -327,7 +327,7 @@ function debugdvars() {
       }
     }
     if(getdvarstring("") == "") {
-      level thread debug_goalradius();
+      level thread debug_goalRadius();
     }
     if(getdvarstring("") == "") {
       level thread debug_maxvisibledist();
@@ -368,14 +368,14 @@ function debugdvars() {
     }
     if(getdvarstring("") == "") {
       setDvar("", "");
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
       }
     }
     if(getdvarstring("") == "") {
       setDvar("", "");
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
       }
@@ -399,7 +399,7 @@ function debugdvars() {
       if(!isDefined(level.tracestart)) {
         thread showdebugtrace();
       }
-      players = getplayers();
+      players = getPlayers();
       level.tracestart = players[0] getEye();
       setDvar("", "");
     }
@@ -444,7 +444,7 @@ function showdebugtrace() {
   endoverride = (947.2, -10918, 64.9514);
   assert(!isDefined(level.traceend));
   for(;;) {
-    players = getplayers();
+    players = getPlayers();
     wait(0.05);
     start = startoverride;
     end = endoverride;
@@ -495,7 +495,7 @@ function hatmodel() {
 }
 
 function debug_nuke() {
-  players = getplayers();
+  players = getPlayers();
   player = players[0];
   dvar = getdvarstring("");
   if(dvar == "") {
@@ -568,7 +568,7 @@ function getchain() {
     if(!isDefined(ent) || !isDefined(ent.target)) {
       break;
     }
-    ent = getent(ent.target, "");
+    ent = getEnt(ent.target, "");
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
       break;
@@ -586,8 +586,8 @@ function vecscale(vec, scalar) {
 }
 
 function islookingatorigin(origin) {
-  normalvec = vectornormalize(origin - self getshootatpos());
-  veccomp = vectornormalize((origin - vectorscale((0, 0, 1), 24)) - self getshootatpos());
+  normalvec = vectorNormalize(origin - self getshootatpos());
+  veccomp = vectorNormalize((origin - vectorscale((0, 0, 1), 24)) - self getshootatpos());
   insidedot = vectordot(normalvec, veccomp);
   anglevec = anglesToForward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
@@ -618,7 +618,7 @@ function debugthreatcalc() {
   ai = getaiarray();
   entnum = getdvarstring("");
   entity = undefined;
-  players = getplayers();
+  players = getPlayers();
   if(entnum == 0) {
     entity = players[0];
   } else {
@@ -661,7 +661,7 @@ function displaythreat(entity, entitygroup) {
   if(self.ignoreme || selfthreat < -900000) {
     selfthreat = "";
   }
-  players = getplayers();
+  players = getPlayers();
   col = (1, 0.5, 0.2);
   col2 = (0.2, 0.5, 1);
   pacifist = self != players[0] && self.pacifist;
@@ -821,7 +821,7 @@ function debug_animsound() {
   level.animsounds_thisframe = [];
   arrayremovevalue(level.animsounds, undefined);
   array::thread_all(level.animsounds, &display_animsound);
-  players = getplayers();
+  players = getPlayers();
   if(level.animsound_locked) {
     for(i = 0; i < level.animsounds_thisframe.size; i++) {
       animsound = level.animsounds_thisframe[i];
@@ -833,7 +833,7 @@ function debug_animsound() {
     for(i = 0; i < level.animsounds_thisframe.size; i++) {
       animsound = level.animsounds_thisframe[i];
       animsound.animsound_color = (0.25, 1, 0.5);
-      difference = vectornormalize((animsound.origin + vectorscale((0, 0, 1), 40)) - (players[0].origin + vectorscale((0, 0, 1), 55)));
+      difference = vectorNormalize((animsound.origin + vectorscale((0, 0, 1), 40)) - (players[0].origin + vectorscale((0, 0, 1), 55)));
       newdot = vectordot(forward, difference);
       if(newdot < dot) {
         continue;
@@ -867,7 +867,7 @@ function draw_animsounds_in_hud() {
     animname = guy.animname;
   }
   level.animsound_hud_animname.label = "" + animname;
-  players = getplayers();
+  players = getPlayers();
   if(players[0] buttonPressed("")) {
     if(!level.animsound_locked_pressed) {
       level.animsound_locked = !level.animsound_locked;
@@ -948,7 +948,7 @@ function draw_animsounds_in_hud() {
       }
     }
   }
-  players = getplayers();
+  players = getPlayers();
   if(players[0] buttonPressed("")) {
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
@@ -981,7 +981,7 @@ function is_from_animsound(animname, anime, notetrack) {
 }
 
 function display_animsound() {
-  players = getplayers();
+  players = getPlayers();
   if(distance(players[0].origin, self.origin) > 1500) {
     return;
   }
@@ -1078,7 +1078,7 @@ function function_2ceda325() {
   if(!isDefined(level.a_npcdeaths) || getdvarint("") != 1) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   filename = ((("" + level.savename) + "") + players[0].playername) + "";
   file = openfile(filename, "");
   if(file == -1) {
@@ -1184,7 +1184,7 @@ function debug_show_viewpos() {
   hud_z.fontscale = 1.2;
   hud_z setvalue(0);
   setDvar("", "");
-  players = getplayers();
+  players = getPlayers();
   while(true) {
     if(getdvarint("") > 0) {
       hud_title.alpha = 1;
@@ -1674,7 +1674,7 @@ function dynamic_ai_spawner() {
     dynamic_ai_spawner_find_spawners();
     level.debug_dynamic_ai_spawner = 1;
   }
-  getplayers()[0] thread spawn_guy_placement();
+  getPlayers()[0] thread spawn_guy_placement();
   level waittill("hash_d123a0a5");
   if(isDefined(level.dynamic_spawn_hud)) {
     level.dynamic_spawn_hud destroy();
@@ -1711,7 +1711,7 @@ function dynamic_ai_spawner_find_spawners() {
 function spawn_guy_placement() {
   level endon("hash_d123a0a5");
   assert(isDefined(level.aitypes) && level.aitypes.size > 0, "");
-  level.dynamic_spawn_hud = newclienthudelem(getplayers()[0]);
+  level.dynamic_spawn_hud = newclienthudelem(getPlayers()[0]);
   level.dynamic_spawn_hud.alignx = "";
   level.dynamic_spawn_hud.x = 0;
   level.dynamic_spawn_hud.y = 245;
@@ -1739,7 +1739,7 @@ function spawn_guy_placement() {
     if(self useButtonPressed()) {
       level.dynamic_spawn_dummy_model hide();
       if(level.aitypes[level.aitype_index].isvehicle) {
-        spawn = spawnvehicle(level.aitypes[level.aitype_index].classname, origin, angles, "");
+        spawn = spawnVehicle(level.aitypes[level.aitype_index].classname, origin, angles, "");
       } else {
         spawn = spawnactor(level.aitypes[level.aitype_index].classname, origin, angles, "", 1);
       }
@@ -1778,7 +1778,7 @@ function display_module_text() {
   iprintlnbold(("" + level.script) + "");
 }
 
-function debug_goalradius() {
+function debug_goalRadius() {
   guys = getaiarray();
   for(i = 0; i < guys.size; i++) {
     if(guys[i].team == "") {

@@ -37,7 +37,7 @@ tutorial_player_recover() {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = level.player_rig.origin;
   var_2.angles = level.player_rig.angles;
-  var_2 linkto(level.player_rig, "tag_player", var_1, (0, 0, 0));
+  var_2 linkTo(level.player_rig, "tag_player", var_1, (0, 0, 0));
   var_3 = spawn("script_model", (0, 0, 0));
   var_3 setModel(level.baker.model);
   var_3.animname = "legs";
@@ -48,7 +48,7 @@ tutorial_player_recover() {
   playFXOnTag(common_scripts\utility::getfx("dive_in_bubbles_feet"), var_3, "J_Ankle_LE");
   playFXOnTag(common_scripts\utility::getfx("dive_in_bubbles_feet"), var_3, "J_Ankle_RI");
   common_scripts\utility::exploder("dive_in");
-  var_4 = getent("start_boat", "targetname");
+  var_4 = getEnt("start_boat", "targetname");
   var_4.script_max_left_angle = 1;
   var_4 thread maps\ship_graveyard_surface::pitch_and_roll();
   var_0 maps\_anim::anim_single([level.player_rig, var_3], "below_water_tutorial_dive");
@@ -139,7 +139,7 @@ wreck_reveal_spotted(var_0) {
   thread common_scripts\utility::play_sound_in_space("enemy_water_splash", var_8.origin);
   var_5 waittill("death_boat_A");
   var_9 = var_6 common_scripts\utility::spawn_tag_origin();
-  var_6 linkto(var_9, "tag_origin");
+  var_6 linkTo(var_9, "tag_origin");
   var_10 = getweaponmodel(var_6.weapon);
   var_11 = var_6.weapon;
 
@@ -195,7 +195,7 @@ ai_go_to_player() {
 
 sonar_ping(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(self, "tag_origin", (0, 0, -80), (0, 0, 0));
+  var_1 linkTo(self, "tag_origin", (0, 0, -80), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("sonar_ping_light"), var_1, "tag_origin");
   playFXOnTag(common_scripts\utility::getfx("sonar_ping_distortion"), var_1, "tag_origin");
   wait 0.1;
@@ -523,7 +523,7 @@ wreck_spotted_reaction() {
     thread maps\_utility::smart_radio_dialogue_interrupt("shipg_bkr_ontous");
   }
 
-  level.baker stopanimscripted();
+  level.baker stopanimScripted();
   level.baker notify("stop_loop");
 
   if(isDefined(level.baker.my_animnode)) {
@@ -733,7 +733,7 @@ baker_move_to_stealth_2() {
 }
 
 stealth_2_light_off() {
-  var_0 = common_scripts\utility::getstruct("rounding_corner", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("rounding_corner", "script_noteworthy");
   var_0 waittill("trigger");
   maps\ship_graveyard_util::baker_glint_off();
 }
@@ -941,8 +941,8 @@ stealth_2_middle_boat_think() {
   common_scripts\utility::array_thread(var_2, ::middle_boat_balloon_think, var_2);
   level waittill("middle_boat_pop");
   var_8 = common_scripts\utility::get_target_ent("middle_ship_hurttrigger");
-  var_8 enablelinkto();
-  var_8 linkto(var_0);
+  var_8 enablelinkTo();
+  var_8 linkTo(var_0);
   var_8 thread maps\ship_graveyard_util::trigger_hurt();
 
   if(!common_scripts\utility::flag("_stealth_spotted")) {
@@ -956,11 +956,11 @@ stealth_2_middle_boat_think() {
   var_0 connectpaths();
   var_13 = 5;
   var_0 thread middle_boat_audio_explode_crash(var_13);
-  var_0 maps\ship_graveyard_util::moveto_rotateto(var_3, var_13, 3, 0);
+  var_0 maps\ship_graveyard_util::moveto_rotateTo(var_3, var_13, 3, 0);
   earthquake(0.5, 1.0, var_0.origin, 3000);
   common_scripts\utility::exploder("plane_wreck_impact");
   var_8 delete();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   common_scripts\utility::flag_set("middle_boat_fell");
 }
 
@@ -1101,7 +1101,7 @@ cave_dust() {
     var_3 = randomfloatrange(0.3, 0.5);
     level notify("sonar_ping_go");
     thread common_scripts\utility::play_sound_in_space("weaponized_sonar_muffled", var_1.origin);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     cave_shake(var_3, var_2);
     wait(randomfloatrange(3, 6));
   }
@@ -1152,22 +1152,22 @@ sonar_boat_cave_quake() {
   var_2 = common_scripts\utility::spawn_tag_origin();
   level.sonar_quake_org = var_2;
   var_2 thread boat_quake(var_0);
-  var_2 linkto(self);
-  var_1 linkto(self);
+  var_2 linkTo(self);
+  var_1 linkTo(self);
   var_1 playrumblelooponentity("littoral_ship_rumble");
   maps\_utility::trigger_wait_targetname("cave_past_hole");
-  var_0 moveto((0, 0, 300), 3);
-  var_1 moveto(var_1.origin + (0, 0, 2000), 4);
+  var_0 moveTo((0, 0, 300), 3);
+  var_1 moveTo(var_1.origin + (0, 0, 2000), 4);
   common_scripts\utility::flag_wait("start_sonar");
   waittillframeend;
   common_scripts\utility::flag_wait("welding_done");
   var_2 unlink();
-  var_2 moveto(level.sonar_boat.origin, 2);
-  var_1 moveto(level.sonar_boat.origin, 3);
+  var_2 moveTo(level.sonar_boat.origin, 2);
+  var_1 moveTo(level.sonar_boat.origin, 3);
   var_1 waittill("movedone");
-  var_2 linkto(level.sonar_boat);
-  var_1 linkto(level.sonar_boat);
-  var_0 moveto((0, 0, 1200), 6);
+  var_2 linkTo(level.sonar_boat);
+  var_1 linkTo(level.sonar_boat);
+  var_0 moveTo((0, 0, 1200), 6);
   level.sonar_boat waittill("death");
   var_2 delete();
   var_1 stoprumble("littoral_ship_rumble");
@@ -1185,7 +1185,7 @@ boat_quake(var_0) {
 
 baker_weld_door() {
   var_0 = common_scripts\utility::get_target_ent("weld_use_trigger");
-  var_0 sethintstring(&"SHIP_GRAVEYARD_HINT_WELD");
+  var_0 setHintString(&"SHIP_GRAVEYARD_HINT_WELD");
   var_0 common_scripts\utility::trigger_off();
   var_1 = common_scripts\utility::get_target_ent("baker_weld_node_final");
   var_2 = common_scripts\utility::get_target_ent("baker_weld_door_L");
@@ -1200,7 +1200,7 @@ baker_weld_door() {
   var_4.origin = var_2.origin;
   var_4.angles = var_2.angles;
   var_4 setModel("shpg_wrkdoor_a1_normal");
-  var_4 linkto(var_2);
+  var_4 linkTo(var_2);
   var_5 = maps\_utility::spawn_anim_model("pipe");
   var_1 maps\_anim::anim_first_frame([var_2, var_3, var_5], "weld_approach");
   common_scripts\utility::flag_wait("inside_cave");
@@ -1217,7 +1217,7 @@ baker_weld_door() {
     var_7 = common_scripts\utility::array_add(var_7, var_10);
     var_8[var_9].origin = var_7[var_9].origin;
     var_8[var_9].angles = var_7[var_9].angles;
-    var_8[var_9] linkto(var_7[var_9]);
+    var_8[var_9] linkTo(var_7[var_9]);
   }
 
   var_1 maps\_anim::anim_first_frame(var_7, "weld_breach");
@@ -1240,16 +1240,16 @@ baker_weld_door() {
   var_13.angles = var_2.angles;
   var_13 setModel(var_2.model + "_obj");
   var_13 hide();
-  var_13 linkto(var_2);
+  var_13 linkTo(var_2);
   var_13.top = var_4;
   var_0 common_scripts\utility::trigger_on();
   var_14 = maps\_utility::spawn_anim_model("torch_f", (0, 0, 0));
   var_15 = maps\_utility::spawn_anim_model("torch_p", (0, 0, 0));
   var_16 = common_scripts\utility::spawn_tag_origin();
-  var_16 linkto(var_15, "j_gun", (8, 0, 0), (0, 0, 0));
+  var_16 linkTo(var_15, "j_gun", (8, 0, 0), (0, 0, 0));
   level.player.torch_fx_org = var_16;
   var_17 = common_scripts\utility::spawn_tag_origin();
-  var_17 linkto(var_14, "j_gun", (8, 0, 0), (0, 0, 0));
+  var_17 linkTo(var_14, "j_gun", (8, 0, 0), (0, 0, 0));
   level.baker.torch_fx_org = var_17;
   var_16 thread maps\ship_graveyard_fx::weld_breach_fx(var_15, "");
   var_17 thread maps\ship_graveyard_fx::weld_breach_fx(var_14, "_npc");
@@ -1355,7 +1355,7 @@ player_approach_weld(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_3 show();
   var_4 delete();
   var_7 = (0, 0, 48);
-  var_2 linkto(var_1, "tag_player", var_7, (0, 0, 0));
+  var_2 linkTo(var_1, "tag_player", var_7, (0, 0, 0));
   level.player disableweapons();
   level.player playerlinktoblend(var_2, "tag_origin", 1, 0.1, 0);
   var_1 common_scripts\utility::delaycall(1, ::show);
@@ -1422,7 +1422,7 @@ first_sonar_ping() {
   var_2 = 30 * anglesToForward(level.player.angles);
   level.player disableweapons();
   level.player allowsprint(0);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player common_scripts\utility::delaycall(0.1, ::playrumbleonentity, "damage_heavy");
   level.player common_scripts\utility::delaycall(0.2, ::playrumbleonentity, "damage_heavy");
   level.player common_scripts\utility::delaycall(0.3, ::playrumbleonentity, "damage_light");
@@ -1546,13 +1546,13 @@ weaponized_sonar_pings() {
 
     if(player_safe_from_sonar()) {
       earthquake(0.3, 1, level.player.origin, 512);
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
       level.player shellshock("sonar_ping_light", 2);
       continue;
     }
 
     earthquake(0.6, 1, level.player.origin, 512);
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     level.player shellshock("sonar_ping", 6);
     var_1 = 200;
 
@@ -1621,7 +1621,7 @@ sonar_movers() {
 
 sonar_wreck_think() {
   var_0 = common_scripts\utility::get_target_ent("sonar_big_wreck_start");
-  var_1 = getent("main_lighthouse", "script_noteworthy");
+  var_1 = getEnt("main_lighthouse", "script_noteworthy");
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_3 = getglassarray("lighthouse_glass");
 
@@ -1632,7 +1632,7 @@ sonar_wreck_think() {
   var_7 = getEntArray("sonar_big_wreck_d", "targetname");
 
   foreach(var_9 in var_7) {
-    var_9 linkto(var_1);
+    var_9 linkTo(var_1);
   }
 
   var_2.target = "sonar_wreck_move";
@@ -1640,16 +1640,16 @@ sonar_wreck_think() {
   var_2.angles = var_0.angles;
   var_2.script_wait = 2.5;
   var_2.script_radius = 1500;
-  var_1 linkto(var_2);
+  var_1 linkTo(var_2);
   level.sonar_wreck = var_1;
   level.sonar_wreck.glass = spawn("script_model", level.sonar_wreck.origin);
   level.sonar_wreck.glass.angles = level.sonar_wreck.angles;
   level.sonar_wreck.glass setModel("shpg_lighthouse_glass");
-  level.sonar_wreck.glass linkto(level.sonar_wreck);
+  level.sonar_wreck.glass linkTo(level.sonar_wreck);
   level.sonar_wreck.top = spawn("script_model", level.sonar_wreck.origin);
   level.sonar_wreck.top.angles = level.sonar_wreck.angles;
   level.sonar_wreck.top setModel("shpg_lighthouse_top");
-  level.sonar_wreck.top linkto(level.sonar_wreck);
+  level.sonar_wreck.top linkTo(level.sonar_wreck);
   level.sonar_wreck.damage_states = [];
   level.sonar_wreck.mover = var_2;
   var_11 = [];
@@ -1703,7 +1703,7 @@ sonar_wreck_think() {
           var_21 = var_9.origin - level.player.origin;
           var_21 = vectortoangles(var_21);
           var_21 = anglesToForward((var_21[0], var_21[1] * 1.3, var_21[2]));
-          var_21 = vectornormalize(var_21);
+          var_21 = vectorNormalize(var_21);
           playFX(common_scripts\utility::getfx("sm_dust"), var_9.origin);
           var_9 unlink();
           var_9 rotatevelocity(var_21 * common_scripts\utility::random([50, 12.5, 20.0, 32.5]), 10);
@@ -1714,13 +1714,13 @@ sonar_wreck_think() {
     } else {
       common_scripts\utility::exploder("lighthouse_glass_break");
       level.sonar_wreck.glass setModel("shpg_lighthouse_glass_broken");
-      var_23 = common_scripts\utility::getstruct("lighthouse_break_org", "targetname");
+      var_23 = common_scripts\utility::getStruct("lighthouse_break_org", "targetname");
       common_scripts\utility::play_sound_in_space("scn_shipg_lighthouse_wood_hit", var_23.origin);
     }
 
     common_scripts\utility::flag_set("first_damage_state");
     var_17++;
-    var_24 = getent("inside_sonar_boat", "script_noteworthy");
+    var_24 = getEnt("inside_sonar_boat", "script_noteworthy");
 
     if(isDefined(var_24)) {
       if(level.player istouching(var_24)) {
@@ -1774,11 +1774,11 @@ sonar_mover_think() {
   }
 
   thread common_scripts\utility::play_sound_in_space("metal_sonar_hit", self.origin);
-  self moveto(var_0.origin, var_4, 0, var_4);
-  self rotateto(var_0.angles, var_4, 0, var_4);
+  self moveTo(var_0.origin, var_4, 0, var_4);
+  self rotateTo(var_0.angles, var_4, 0, var_4);
   wait(var_4);
-  self moveto(var_2, var_4, var_4, 0);
-  self rotateto(var_3, var_4, var_4, 0);
+  self moveTo(var_2, var_4, var_4, 0);
+  self rotateTo(var_3, var_4, var_4, 0);
   wait(var_4);
   earthquake(0.35, 0.5, self.origin, self.script_radius);
 }
@@ -1797,48 +1797,48 @@ sonar_door_think() {
   for(;;) {
     common_scripts\utility::flag_wait("sonar_clear_to_go");
     var_5 = 0.3 * var_4;
-    var_0 moveto(var_2.origin, var_5, var_5, 0);
-    var_0 rotateto(var_2.angles, var_5, var_5, 0);
+    var_0 moveTo(var_2.origin, var_5, var_5, 0);
+    var_0 rotateTo(var_2.angles, var_5, var_5, 0);
     wait(var_5);
     var_5 = 0.4 * var_4;
-    var_0 moveto(var_3.origin, var_5, 0, var_5);
-    var_0 rotateto(var_3.angles, var_5, 0, var_5);
+    var_0 moveTo(var_3.origin, var_5, 0, var_5);
+    var_0 rotateTo(var_3.angles, var_5, 0, var_5);
     wait(var_5);
     var_5 = 0.35 * var_4;
-    var_0 moveto(var_2.origin, var_5, var_5 / 2, var_5 / 2);
-    var_0 rotateto(var_2.angles, var_5, var_5 / 2, var_5 / 2);
+    var_0 moveTo(var_2.origin, var_5, var_5 / 2, var_5 / 2);
+    var_0 rotateTo(var_2.angles, var_5, var_5 / 2, var_5 / 2);
     wait(var_5);
     var_5 = 0.6 * var_4;
-    var_0 moveto(var_3.origin, var_5, var_5 / 2, var_5 / 2);
-    var_0 rotateto(var_3.angles, var_5, var_5 / 2, var_5 / 2);
+    var_0 moveTo(var_3.origin, var_5, var_5 / 2, var_5 / 2);
+    var_0 rotateTo(var_3.angles, var_5, var_5 / 2, var_5 / 2);
     wait(var_5);
 
     if(!common_scripts\utility::flag("sonar_door_fly")) {
       var_5 = 2 * var_4;
-      var_0 moveto(var_1.origin, var_5, 0, var_5);
-      var_0 rotateto(var_1.angles, var_5, 0, var_5);
+      var_0 moveTo(var_1.origin, var_5, 0, var_5);
+      var_0 rotateTo(var_1.angles, var_5, 0, var_5);
       wait(var_5);
       continue;
     }
 
     var_0 thread maps\_utility::play_sound_on_entity("scn_shipg_mtl_door_flap");
     var_5 = 1.75;
-    var_0 rotateto((15, 0, 0), var_5, 0, var_5);
+    var_0 rotateTo((15, 0, 0), var_5, 0, var_5);
     wait(var_5 - 0.4);
     var_1 = common_scripts\utility::get_target_ent("sonar_cargo_door_fly");
     var_5 = 3;
-    var_0 moveto(var_1.origin, var_5, 0, 0);
-    var_0 rotateto(var_1.angles, var_5, 0, 0);
-    var_0 moveto((2601, -60053, 157), var_5, 0, 0);
-    var_0 rotateto((25.6015, 355.278, 3.16485), var_5, 0, 0);
+    var_0 moveTo(var_1.origin, var_5, 0, 0);
+    var_0 rotateTo(var_1.angles, var_5, 0, 0);
+    var_0 moveTo((2601, -60053, 157), var_5, 0, 0);
+    var_0 rotateTo((25.6015, 355.278, 3.16485), var_5, 0, 0);
     wait(var_5);
     var_5 = 3;
-    var_0 moveto((2609, -60087, 154), var_5, 0, 0);
-    var_0 rotateto((20.7217, 29.665, 93.757), var_5, 0, 0);
+    var_0 moveTo((2609, -60087, 154), var_5, 0, 0);
+    var_0 rotateTo((20.7217, 29.665, 93.757), var_5, 0, 0);
     wait(var_5);
     var_5 = 2;
-    var_0 moveto((2600, -60098, 111), var_5, 0, var_5);
-    var_0 rotateto((334.31, 34.0427, 92.4214), var_5, 0, var_5);
+    var_0 moveTo((2600, -60098, 111), var_5, 0, var_5);
+    var_0 rotateTo((334.31, 34.0427, 92.4214), var_5, 0, var_5);
     common_scripts\utility::array_call(var_0.linked, ::delete);
     break;
   }
@@ -1909,26 +1909,26 @@ sonar_boat_audio(var_0) {
   }
 
   level.sonar_boat vehicle_turnengineoff();
-  var_1 linkto(level.sonar_boat, "tag_splash_front", (0, 0, 0), (0, 0, 0));
-  var_2 linkto(level.sonar_boat, "tag_splash_front", (-800, 0, 0), (0, 0, 0));
-  var_3 linkto(level.sonar_boat, "tag_splash_front", (-1600, 0, 0), (0, 0, 0));
-  var_4 linkto(level.sonar_boat, "tag_splash_back", (0, 100, 0), (0, 0, 0));
-  var_5 linkto(level.sonar_boat, "tag_splash_back", (0, -100, 0), (0, 0, 0));
+  var_1 linkTo(level.sonar_boat, "tag_splash_front", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(level.sonar_boat, "tag_splash_front", (-800, 0, 0), (0, 0, 0));
+  var_3 linkTo(level.sonar_boat, "tag_splash_front", (-1600, 0, 0), (0, 0, 0));
+  var_4 linkTo(level.sonar_boat, "tag_splash_back", (0, 100, 0), (0, 0, 0));
+  var_5 linkTo(level.sonar_boat, "tag_splash_back", (0, -100, 0), (0, 0, 0));
   thread sonar_boat_audio_mover(var_1, var_2, var_3, var_4, var_5);
   common_scripts\utility::flag_wait("player_ready_to_weld");
   common_scripts\utility::flag_wait("ai_ready_to_weld");
   var_6 = 10;
-  var_1 moveto(level.sonar_boat gettagorigin("tag_splash_front"), var_6, var_6 * 0.5, var_6 * 0.5);
-  var_2 moveto(level.sonar_boat gettagorigin("tag_splash_front") + (-800, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
-  var_3 moveto(level.sonar_boat gettagorigin("tag_splash_front") + (-1600, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
-  var_4 moveto(level.sonar_boat gettagorigin("tag_splash_back") + (0, 100, 0), var_6, var_6 * 0.5, var_6 * 0.5);
-  var_5 moveto(level.sonar_boat gettagorigin("tag_splash_back") + (0, -100, 0), var_6, var_6 * 0.5, var_6 * 0.5);
+  var_1 moveTo(level.sonar_boat gettagorigin("tag_splash_front"), var_6, var_6 * 0.5, var_6 * 0.5);
+  var_2 moveTo(level.sonar_boat gettagorigin("tag_splash_front") + (-800, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
+  var_3 moveTo(level.sonar_boat gettagorigin("tag_splash_front") + (-1600, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
+  var_4 moveTo(level.sonar_boat gettagorigin("tag_splash_back") + (0, 100, 0), var_6, var_6 * 0.5, var_6 * 0.5);
+  var_5 moveTo(level.sonar_boat gettagorigin("tag_splash_back") + (0, -100, 0), var_6, var_6 * 0.5, var_6 * 0.5);
   wait(var_6);
-  var_1 linkto(level.sonar_boat, "tag_splash_front", (0, 0, 0), (0, 0, 0));
-  var_2 linkto(level.sonar_boat, "tag_splash_front", (-800, 0, 0), (0, 0, 0));
-  var_3 linkto(level.sonar_boat, "tag_splash_front", (-1600, 0, 0), (0, 0, 0));
-  var_4 linkto(level.sonar_boat, "tag_splash_back", (0, 100, 0), (0, 0, 0));
-  var_5 linkto(level.sonar_boat, "tag_splash_back", (0, -100, 0), (0, 0, 0));
+  var_1 linkTo(level.sonar_boat, "tag_splash_front", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(level.sonar_boat, "tag_splash_front", (-800, 0, 0), (0, 0, 0));
+  var_3 linkTo(level.sonar_boat, "tag_splash_front", (-1600, 0, 0), (0, 0, 0));
+  var_4 linkTo(level.sonar_boat, "tag_splash_back", (0, 100, 0), (0, 0, 0));
+  var_5 linkTo(level.sonar_boat, "tag_splash_back", (0, -100, 0), (0, 0, 0));
   common_scripts\utility::flag_wait("sonar_boat_explode");
   var_1 delete();
   var_2 delete();
@@ -1969,17 +1969,17 @@ sonar_boat_audio_mover(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 30;
 
   for(;;) {
-    var_0 moveto(var_0.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_1 moveto(var_1.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_2 moveto(var_2.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_3 moveto(var_3.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_4 moveto(var_4.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_0 moveTo(var_0.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_1 moveTo(var_1.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_2 moveTo(var_2.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_3 moveTo(var_3.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_4 moveTo(var_4.old_org - (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
     wait(var_6);
-    var_0 moveto(var_0.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_1 moveto(var_1.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_2 moveto(var_2.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_3 moveto(var_3.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
-    var_4 moveto(var_4.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_0 moveTo(var_0.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_1 moveTo(var_1.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_2 moveTo(var_2.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_3 moveTo(var_3.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
+    var_4 moveTo(var_4.old_org + (var_5, var_5, 0), var_6, var_6 / 2, var_6 / 2);
     wait(var_6);
   }
 }
@@ -1998,15 +1998,15 @@ sonar_boat_audio_e3(var_0) {
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_5 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(self, "tag_splash_front", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "tag_splash_front", (0, 0, 0), (0, 0, 0));
   var_1 playLoopSound("scn_sub_fronts_lp");
-  var_2 linkto(self, "tag_splash_front", (-800, 0, 0), (0, 0, 0));
+  var_2 linkTo(self, "tag_splash_front", (-800, 0, 0), (0, 0, 0));
   var_2 playLoopSound("scn_sub_engine_lp");
-  var_3 linkto(self, "tag_splash_front", (-1600, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, "tag_splash_front", (-1600, 0, 0), (0, 0, 0));
   var_3 playLoopSound("scn_sub_rumble_lp");
-  var_4 linkto(self, "tag_splash_back", (0, 100, 0), (0, 0, 0));
+  var_4 linkTo(self, "tag_splash_back", (0, 100, 0), (0, 0, 0));
   var_4 playLoopSound("scn_sub_prop_l_lp");
-  var_5 linkto(self, "tag_splash_back", (0, -100, 0), (0, 0, 0));
+  var_5 linkTo(self, "tag_splash_back", (0, -100, 0), (0, 0, 0));
   var_5 playLoopSound("scn_sub_prop_r_lp");
   thread scale_lcs_audio_fade(var_1, var_2, var_3, var_4, var_5);
   common_scripts\utility::flag_wait("sonar_boat_explode");
@@ -2096,7 +2096,7 @@ torpedo_the_ship() {
   thread sonar_mines_boat_reaction();
   var_1 = common_scripts\utility::get_target_ent("lighthouse_node");
   var_2 = level.baker;
-  var_3 = getent("grab_torpedo", "targetname");
+  var_3 = getEnt("grab_torpedo", "targetname");
   level.baker notify("stop_path");
   level.baker notify("stop_sonar_paths");
   var_1 maps\_anim::anim_reach_solo(level.baker, "lighthouse_entry");
@@ -2108,8 +2108,8 @@ torpedo_the_ship() {
   var_3 thread watch_if_used();
 
   if(!maps\ship_graveyard_util::greenlight_check()) {
-    var_2 sethintstring(&"SHIP_GRAVEYARD_USE_TORPEDO");
-    var_3 sethintstring(&"SHIP_GRAVEYARD_USE_TORPEDO");
+    var_2 setHintString(&"SHIP_GRAVEYARD_USE_TORPEDO");
+    var_3 setHintString(&"SHIP_GRAVEYARD_USE_TORPEDO");
   }
 
   common_scripts\utility::flag_wait("grabbed_torpedo");
@@ -2154,8 +2154,8 @@ torpedo_the_ship() {
   thread maps\ship_graveyard_torpedo::torpedo_go(var_6, var_4);
   level waittill("torpedo_ready");
   var_7 = 1.5;
-  level.player.dom.ref_ent moveto(level.player.dom.ref_ent.origin + var_5 * 32, var_7, 0, var_7);
-  level.player.dom.ref_ent rotateto(level.player.dom.ref_ent.angles - (level.player.dom.ref_ent.angles[0], 0, 0), var_7, 0, var_7);
+  level.player.dom.ref_ent moveTo(level.player.dom.ref_ent.origin + var_5 * 32, var_7, 0, var_7);
+  level.player.dom.ref_ent rotateTo(level.player.dom.ref_ent.angles - (level.player.dom.ref_ent.angles[0], 0, 0), var_7, 0, var_7);
   wait(var_7);
   var_1 notify("stop_loop");
 
@@ -2305,7 +2305,7 @@ sonar_mines_boat_reaction() {
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_2.origin;
   var_3.angles = var_2.angles;
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_3 thread maps\ship_graveyard_util::lcs_lights_front();
   var_4 = spawn("script_model", var_1.origin);
   var_4 setModel("vehicle_lcs_destroyed_back");
@@ -2319,7 +2319,7 @@ sonar_mines_boat_reaction() {
   var_7 = common_scripts\utility::spawn_tag_origin();
   var_7.origin = var_6.origin;
   var_7.angles = var_6.angles;
-  var_7 linkto(var_6, "tag_player", var_5, (0, 0, 0));
+  var_7 linkTo(var_6, "tag_player", var_5, (0, 0, 0));
   var_8 = spawn("script_model", (0, 0, 0));
   var_8 setModel("body_fed_udt_assault_a_ally_trailer");
   var_8.animname = "legs";
@@ -2342,7 +2342,7 @@ sonar_mines_boat_reaction() {
   level notify("stop_earthquake");
   earthquake(0.8, 0.5, level.player.origin, 2000);
   level.player_rig stoprumble("subtle_tank_rumble");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   maps\_hud_util::fade_out(0.05);
   wait 1;
   level.player stopshellshock();
@@ -2378,9 +2378,9 @@ sonar_crash_fx(var_0, var_1, var_2) {
   var_8 = level.sonar_wreck common_scripts\utility::spawn_tag_origin();
   var_8.angles = vectortoangles(var_6);
   var_9 = level.sonar_wreck common_scripts\utility::spawn_tag_origin();
-  var_8 linkto(level.sonar_wreck);
-  var_7 linkto(var_8, "tag_origin", (-400, 0, 0), (0, 0, 0));
-  var_9 linkto(var_8, "tag_origin", (-600, 0, 0), (-90, 0, 0));
+  var_8 linkTo(level.sonar_wreck);
+  var_7 linkTo(var_8, "tag_origin", (-400, 0, 0), (0, 0, 0));
+  var_9 linkTo(var_8, "tag_origin", (-600, 0, 0), (-90, 0, 0));
   wait 0.1;
   var_10 = common_scripts\utility::spawn_tag_origin();
   var_10.origin = (2810, -61853, 89);
@@ -2490,7 +2490,7 @@ base_alarm() {
 
   if(var_0) {
     common_scripts\utility::flag_wait("start_base_alarm");
-    var_1 = getent("origin_base_alarm", "targetname");
+    var_1 = getEnt("origin_base_alarm", "targetname");
     var_1 base_alarm_loop();
     common_scripts\utility::flag_waitopen("start_base_alarm");
   }
@@ -2704,13 +2704,13 @@ depth_charge_boat_fall_trigger() {
 middle_room_fall() {
   var_0 = common_scripts\utility::get_target_ent("big_wreck_middle_room_beam");
   var_1 = var_0 common_scripts\utility::get_linked_ent();
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_2 = var_0 common_scripts\utility::get_target_ent();
   var_3 = var_0 common_scripts\utility::spawn_tag_origin();
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   playFXOnTag(common_scripts\utility::getfx("underwater_object_trail"), var_3, "Tag_origin");
   var_0 thread maps\_utility::play_sound_on_entity("scn_shipg_titanic_debris_fall");
-  var_0 maps\ship_graveyard_util::moveto_rotateto(var_2, 5, 3, 0);
+  var_0 maps\ship_graveyard_util::moveto_rotateTo(var_2, 5, 3, 0);
   stopFXOnTag(common_scripts\utility::getfx("underwater_object_trail"), var_3, "Tag_origin");
   earthquake(0.4, 0.7, var_0.origin, 2000);
   common_scripts\utility::play_sound_in_space("scn_shipg_titanic_debris_crash", var_0.origin);
@@ -2797,7 +2797,7 @@ shark_room_pusher() {
 
   for(;;) {
     var_1 waittill("trigger");
-    var_2 = vectornormalize(level.player.origin - var_1.origin);
+    var_2 = vectorNormalize(level.player.origin - var_1.origin);
     level.player setvelocity(level.player getvelocity() + var_2 * 5);
     common_scripts\utility::waitframe();
   }
@@ -2929,7 +2929,7 @@ shark_room_end() {
     level.baker thread maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("baker_wreck_stealth_path_4"), 250);
   } else if(common_scripts\utility::flag("player_warp_hesh")) {
     level.baker notify("stop_loop");
-    level.baker stopanimscripted();
+    level.baker stopanimScripted();
     level.baker.moveplaybackrate = 1;
     level.baker.goalradius = 196;
     var_0 = common_scripts\utility::get_target_ent("baker_shark_room_teleport");
@@ -2966,7 +2966,7 @@ player_shoots_sharks() {
     level.baker.my_animnode notify("stop_loop");
   }
 
-  level.baker stopanimscripted();
+  level.baker stopanimScripted();
   var_1 = 1;
 
   while(var_1) {
@@ -3277,7 +3277,7 @@ player_notify_on_lookup() {
 door_open() {
   var_0 = common_scripts\utility::get_target_ent();
   var_1 = var_0.angles;
-  self rotateto(var_1, 0.5, 0, 0.3);
+  self rotateTo(var_1, 0.5, 0, 0.3);
 }
 
 underwater_flood_spawn() {
@@ -3300,13 +3300,13 @@ big_wreck_tilt() {
   thread wreck_tilt_baker_hurt();
   var_0 = common_scripts\utility::spawn_tag_origin();
   level.player playersetgroundreferenceent(var_0);
-  var_0 rotateto((330, 0, 0), 0.6, 0, 0.4);
+  var_0 rotateTo((330, 0, 0), 0.6, 0, 0.4);
   level.player disableweapons();
   level.player shellshock("default", 2);
   level.player thread maps\ship_graveyard_util::delay_reset_swim_shock(3);
   level.player common_scripts\utility::delaycall(3, ::enableweapons);
   var_0 waittill("rotatedone");
-  var_0 rotateto((0, 0, 0), 0.8, 0.6, 0.1);
+  var_0 rotateTo((0, 0, 0), 0.8, 0.6, 0.1);
   var_0 waittill("rotatedone");
   level.player playersetgroundreferenceent(undefined);
   var_0 delete();
@@ -3315,11 +3315,11 @@ big_wreck_tilt() {
 wreck_tilt_baker_hurt() {
   thread maps\_utility::smart_radio_dialogue("shipg_bkr_pain2", 0.1);
   var_0 = level.baker common_scripts\utility::spawn_tag_origin();
-  level.baker linkto(var_0, "tag_origin");
+  level.baker linkTo(var_0, "tag_origin");
   level.baker dodamage(50, level.baker.origin + (0, 0, 0));
-  var_0 rotateto((30, 0, 0), 0.6, 0, 0.4);
+  var_0 rotateTo((30, 0, 0), 0.6, 0, 0.4);
   var_0 waittill("rotatedone");
-  var_0 rotateto((0, 0, 0), 0.8, 0.6, 0.1);
+  var_0 rotateTo((0, 0, 0), 0.8, 0.6, 0.1);
   var_0 waittill("rotatedone");
   level.baker unlink();
   var_0 delete();
@@ -3360,7 +3360,7 @@ greenlight_end() {
 }
 
 end_tunnel_swim() {
-  var_0 = getent("trig_swim_up_transition_out", "targetname");
+  var_0 = getEnt("trig_swim_up_transition_out", "targetname");
   var_0 waittill("trigger");
   var_1 = 2;
   maps\_hud_util::fade_out(var_1);
@@ -3376,7 +3376,7 @@ stop_player_fire_sounds(var_0) {
 
 end_surface() {
   var_0 = common_scripts\utility::get_target_ent("surface_ai_clip_end");
-  var_0 moveto(var_0.origin + (0, 0, -28.5), 0.01);
+  var_0 moveTo(var_0.origin + (0, 0, -28.5), 0.01);
   common_scripts\utility::flag_wait("go_to_surface");
   level.player setclienttriggeraudiozone("ship_graveyard_abovewater_end", 1);
   level notify("stop_particulates");
@@ -3389,7 +3389,7 @@ end_surface() {
   level.ground_ref_ent.script_max_left_angle = 1;
   level.player playersetgroundreferenceent(level.ground_ref_ent);
   level.ground_ref_ent thread maps\ship_graveyard_surface::pitch_and_roll();
-  level.player setorigin(common_scripts\utility::get_target_ent("end_tunnel_above_surface").origin);
+  level.player setOrigin(common_scripts\utility::get_target_ent("end_tunnel_above_surface").origin);
   level.player setplayerangles(common_scripts\utility::get_target_ent("end_tunnel_above_surface").angles);
   level notify("end_swimming");
   setsaveddvar("player_swimWaterCurrent", "0 0 0");

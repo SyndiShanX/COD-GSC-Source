@@ -50,7 +50,7 @@ function function_2435d3e(str_objective, b_starting) {
   namespace_61e6d095::set_color(#"hash_26ccd69d3e6f3b56", 0, 0, 0);
   namespace_61e6d095::function_39710437(#"hash_26ccd69d3e6f3b56", "fullscreen");
   namespace_61e6d095::function_46df0bc7(#"hash_26ccd69d3e6f3b56", 999);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player val::set(#"hash_75e1db7c3af8ae06", "freezecontrols", 1);
   e_player val::set(#"hash_383e66ab943657f9", "disable_weapons", 0);
   e_player val::set(#"hash_fa9cf212730562d", "show_hud", 0);
@@ -125,6 +125,6 @@ function function_8f77588(str_objective, b_starting, var_aa1a6455, player) {}
 function function_50f30bc3() {
   wait 0.1;
   var_82af4def = struct::get("loose_ends", "targetname");
-  level.player setorigin(var_82af4def.origin);
+  level.player setOrigin(var_82af4def.origin);
   level.player setplayerangles((0, 0, 0));
 }

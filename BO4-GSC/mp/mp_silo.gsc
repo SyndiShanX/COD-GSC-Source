@@ -81,7 +81,7 @@ watchkilltrigger() {
 }
 
 init_gameobjects() {
-  level.e_bridge = getent("silo_moving_catwalk", "targetname");
+  level.e_bridge = getEnt("silo_moving_catwalk", "targetname");
   level.var_f5272e32 = 0;
   level.var_7804ffe3 = 0;
 
@@ -112,7 +112,7 @@ init_gameobjects() {
   var_d6948fd6 = getEntArray("elevator_rail_guide", "targetname");
 
   foreach(var_e1f63988 in var_d6948fd6) {
-    var_e1f63988 linkto(level.e_bridge);
+    var_e1f63988 linkTo(level.e_bridge);
   }
 }
 
@@ -148,7 +148,7 @@ move_bridge(var_60d70418) {
 
     level.var_f5272e32 = 1;
     neworigin = level.e_bridge.origin + (0, 0, 128);
-    level.e_bridge moveto(neworigin, 2.5);
+    level.e_bridge moveTo(neworigin, 2.5);
     level.e_bridge playSound("amb_silo_elev_start");
     level.e_bridge playLoopSound("amb_silo_elev_loop");
     level.e_bridge waittill(#"movedone");
@@ -170,7 +170,7 @@ move_bridge(var_60d70418) {
 
     level.var_f5272e32 = 1;
     neworigin = level.e_bridge.origin + (0, 0, -128);
-    level.e_bridge moveto(neworigin, 2.5);
+    level.e_bridge moveTo(neworigin, 2.5);
     level.e_bridge playSound("amb_silo_elev_start");
     level.e_bridge playLoopSound("amb_silo_elev_loop");
     level.e_bridge waittill(#"movedone");
@@ -195,9 +195,9 @@ move_bridge(var_60d70418) {
 function_2cdcf5c3() {
   if(util::isfirstround()) {
     level scene::init(#"p8_fxanim_mp_silo_helicopter_crash_bundle");
-    level.damaged_globe = getent("radar_globe_damaged", "targetname");
+    level.damaged_globe = getEnt("radar_globe_damaged", "targetname");
     level.damaged_globe hide();
-    level.pristine_globe = getent("radar_globe_pristine", "targetname");
+    level.pristine_globe = getEnt("radar_globe_pristine", "targetname");
   }
 }
 
@@ -227,10 +227,10 @@ prematch_init() {
   waitframe(4);
   level scene::skipto_end(#"p8_fxanim_mp_silo_missle_deploy_bundle", undefined, undefined, 1);
   level scene::skipto_end(#"p8_fxanim_mp_silo_helicopter_crash_bundle", undefined, undefined, 1);
-  level.damaged_globe = getent("radar_globe_damaged", "targetname");
+  level.damaged_globe = getEnt("radar_globe_damaged", "targetname");
   level.damaged_globe show();
   wait 1;
-  level.pristine_globe = getent("radar_globe_pristine", "targetname");
+  level.pristine_globe = getEnt("radar_globe_pristine", "targetname");
   level.pristine_globe hide();
 }
 

@@ -441,10 +441,10 @@ playbombfx() {
   self endon("airstrike_complete");
   self.bomb_tag_left = spawn("script_model", (0, 0, 0));
   self.bomb_tag_left setModel("tag_origin");
-  self.bomb_tag_left linkto(self, "bombaydoor_left_jnt", (0, 0, 0), (0, -90, 0));
+  self.bomb_tag_left linkTo(self, "bombaydoor_left_jnt", (0, 0, 0), (0, -90, 0));
   self.bomb_tag_right = spawn("script_model", (0, 0, 0));
   self.bomb_tag_right setModel("tag_origin");
-  self.bomb_tag_right linkto(self, "bombaydoor_right_jnt", (0, 0, 0), (0, -90, 0));
+  self.bomb_tag_right linkTo(self, "bombaydoor_right_jnt", (0, 0, 0), (0, -90, 0));
 
   for(;;) {
     playFXOnTag(common_scripts\utility::getfx("airstrike_bombs"), self.bomb_tag_left, "tag_origin");
@@ -463,7 +463,7 @@ stealthbomber_killcam(var_0, var_1) {
   var_0.airstriketype = var_1;
   var_3.starttime = gettime();
   var_3 thread deleteaftertime(16.0);
-  var_3 linkto(var_0, "tag_origin", (-256, 768, 768), (0, 0, 0));
+  var_3 linkTo(var_0, "tag_origin", (-256, 768, 768), (0, 0, 0));
 }
 
 callstrike_bomb(var_0, var_1, var_2, var_3) {
@@ -625,7 +625,7 @@ targetisclose(var_0, var_1, var_2) {
 
 targetisinfront(var_0, var_1) {
   var_2 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
-  var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {
@@ -989,8 +989,8 @@ missileeyesgo(var_0, var_1, var_2) {
   var_0 thread maps\mp\killstreaks\_missile_strike::player_cleanuponteamchange(var_1, var_2);
   var_0 thread hudgo(var_1, var_2);
   var_0 thread playerwaitreset(var_2);
-  var_0 cameralinkto(var_1, "tag_origin");
-  var_0 controlslinkto(var_1);
+  var_0 cameralinkTo(var_1, "tag_origin");
+  var_0 controlslinkTo(var_1);
   var_0 thread maps\mp\killstreaks\_missile_strike::playerwatchforearlyexit(var_2);
   var_1 common_scripts\utility::waittill_notify_or_timeout("death", 10);
   var_2 notify("missile_strike_complete");

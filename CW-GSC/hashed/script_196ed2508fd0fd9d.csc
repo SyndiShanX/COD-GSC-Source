@@ -753,7 +753,7 @@ function function_50e92688(ent) {
   var_305bf397 = snd::play("emt_train_ext_alcove_whoosh_lp", [ent, var_f29db55e]);
 
   if(snd::function_a6779cbd(var_305bf397)) {
-    var_305bf397 linkto(ent);
+    var_305bf397 linkTo(ent);
     level waittill(#"hash_19e230299ea7fcb3");
     snd::stop(var_305bf397, 2);
   }
@@ -800,7 +800,7 @@ function function_87b5665d() {
     if(isDefined(snd)) {
       players = snd::function_da785aa8();
       player = players[0];
-      snd linkto(player);
+      snd linkTo(player);
     }
   }
 
@@ -862,7 +862,7 @@ function function_876b47e1(alias, time_min, time_max) {
 
 function function_39b2a7f0(end_point) {
   speed = 5;
-  self moveto(end_point, speed);
+  self moveTo(end_point, speed);
   wait speed;
   snd::stop(self);
 }
@@ -1037,7 +1037,7 @@ function function_6bd221d6() {
   snd::emitter("amb_alley_traffic", (-2568, 7930, 118), [12, 22]);
   snd::play("evt_police_intro", (-927, 8304, 143));
   siren = snd::play("amb_police_siren_intro", (-1376, 8118, 128));
-  siren moveto((-787, 8113, 134), 1.5);
+  siren moveTo((-787, 8113, 134), 1.5);
   var_d36489ab = snd::play("amb_police_siren_lp", (-787, 8113, 134));
   wait 5;
   snd::play("evt_police_intro_lp_01", (-933, 8326, 93));

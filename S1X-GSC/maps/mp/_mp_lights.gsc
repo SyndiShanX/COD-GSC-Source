@@ -182,7 +182,7 @@ play_flickerLight_preset(name, targetName, intensity_) {
   assert(IsString(name));
   assert(IsString(targetName));
 
-  ent = GetEnt(targetName, "targetname");
+  ent = getEnt(targetName, "targetname");
   if(!isDefined(ent)) {
     println("Error Light Scripts: play_flickerLight_preset with name, \"" + name + "\", was called on a non-existant targetName, \"" + targetName + "\".");
     return;
@@ -214,7 +214,7 @@ play_flickerLight_preset(name, targetName, intensity_) {
 }
 
 stop_flickerLight(name, targetName, intensity_) {
-  ent = GetEnt(targetName, "targetname");
+  ent = getEnt(targetName, "targetname");
 
   if(!isDefined(ent)) {
     println("Error Light Scripts: stop_flickerLight, \"" + name + "\", was called on a non-existant targetName, \"" + targetName + "\".");
@@ -239,7 +239,7 @@ stop_flickerLight(name, targetName, intensity_) {
 }
 
 pause_flickerLight(name, targetName) {
-  ent = GetEnt(targetName, "targetname");
+  ent = getEnt(targetName, "targetname");
 
   if(!isDefined(ent)) {
     println("Error Light Scripts: pause_flickerLight, \"" + name + "\", was called on a non-existant targetName, \"" + targetName + "\".");
@@ -255,7 +255,7 @@ pause_flickerLight(name, targetName) {
 }
 
 unpause_flickerLight(name, targetName) {
-  ent = GetEnt(targetName, "targetname");
+  ent = getEnt(targetName, "targetname");
 
   if(!isDefined(ent)) {
     println("Error Light Scripts: unpause_flickerLight, \"" + name + "\", was called on a non-existant targetName, \"" + targetName + "\".");

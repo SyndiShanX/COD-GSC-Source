@@ -88,7 +88,7 @@ function nuke_powerup(drop_item, player_team) {
     level thread zm_daily_challenges::increment_nuked_zombie();
   }
   level notify("nuke_complete");
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
   for(i = 0; i < players.size; i++) {
     players[i] zm_score::player_add_points("nuke_powerup", 400);
   }
@@ -96,9 +96,9 @@ function nuke_powerup(drop_item, player_team) {
 
 function nuke_flash(team) {
   if(isDefined(team)) {
-    getplayers()[0] playsoundtoteam("evt_nuke_flash", team);
+    getPlayers()[0] playsoundtoteam("evt_nuke_flash", team);
   } else {
-    getplayers()[0] playSound("evt_nuke_flash");
+    getPlayers()[0] playSound("evt_nuke_flash");
   }
   lui::screen_flash(0.2, 0.5, 1, 0.8, "white");
 }

@@ -293,7 +293,7 @@ function_765cb1de(var_f4d3512f, player) {
   player_info.player.var_d18573c9 = gettime() + 1000;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   self.anchor thread zm_utility::anchor_delete_failsafe(self);
 
   if(!isDefined(spot.angles)) {
@@ -301,7 +301,7 @@ function_765cb1de(var_f4d3512f, player) {
   }
 
   self ghost();
-  self.anchor moveto(spot.origin, 0.05);
+  self.anchor moveTo(spot.origin, 0.05);
   self.anchor waittill(#"movedone");
   self unlink();
 
@@ -410,7 +410,7 @@ function_f1ec5df(player, direction, var_ef0ae03b) {
 function_dad4891b(player_in) {
   var_a83960b5 = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player_in == player) {
       continue;
     }
@@ -521,10 +521,10 @@ function_af31614c() {
   function_1dbfb733("<dev string:xc2>", "<dev string:xed>", undefined, &function_766c006e);
 
   while(true) {
-    var_f6c7efda = getplayers().size;
+    var_f6c7efda = getPlayers().size;
     waitframe(1);
 
-    if(!getdvarint(#"hash_1067641cdc653b13", 0) || var_f6c7efda != getplayers().size) {
+    if(!getdvarint(#"hash_1067641cdc653b13", 0) || var_f6c7efda != getPlayers().size) {
       if(isDefined(level.var_3d62686d)) {
         foreach(hudelem in level.var_3d62686d) {
           hudelem destroy();

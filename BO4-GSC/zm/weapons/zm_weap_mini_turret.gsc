@@ -185,7 +185,7 @@ onplaceturret(turret) {
     turret.vehicle thread util::ghost_wait_show(0.05);
     turret.vehicle playSound(#"mpl_turret_startup");
   } else {
-    turret.vehicle = spawnvehicle("veh_mini_turret_zm", turret.origin, turret.angles, "dynamic_spawn_ai");
+    turret.vehicle = spawnVehicle("veh_mini_turret_zm", turret.origin, turret.angles, "dynamic_spawn_ai");
     turret.vehicle.owner = player;
     turret.vehicle setowner(player);
     turret.vehicle.ownerentnum = player.entnum;

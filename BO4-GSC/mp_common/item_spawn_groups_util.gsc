@@ -255,7 +255,7 @@ _spawn_item(point, row, stashitem = 0) {
     vehicle = undefined;
 
     if(item_world_util::function_74e1e547(spawnpoint)) {
-      vehicle = spawnvehicle(itementry.vehicle, spawnpoint, point.angles);
+      vehicle = spawnVehicle(itementry.vehicle, spawnpoint, point.angles);
     }
 
     if(isDefined(vehicle)) {
@@ -1386,7 +1386,7 @@ function_5eada592(scriptbundlename, linkto = 1) {
     item.origin = self.origin;
 
     if(linkto) {
-      item linkto(self);
+      item linkTo(self);
     }
 
     item.spawning = 0;

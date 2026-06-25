@@ -627,7 +627,7 @@ function function_c5fb4741(var_79291fdb = 0) {
     if(!is_true(self.var_c000552f) && isDefined(var_8f2bdcca)) {
       self.var_c000552f = 1;
       var_dfeb1fd = float(max(isDefined(soundgetplaybacktime(var_8f2bdcca)) ? soundgetplaybacktime(var_8f2bdcca) : 500, 500)) / 1000;
-      playsoundatposition(var_8f2bdcca, self.origin + (0, 0, 50));
+      playSoundAtPosition(var_8f2bdcca, self.origin + (0, 0, 50));
       wait var_dfeb1fd;
       self.var_c000552f = 0;
     }
@@ -782,7 +782,7 @@ function function_3e9d8a8e(var_11868f5d) {
 
   if(isDefined(str_alias)) {
     self.var_c000552f = 1;
-    playsoundatposition(str_alias, self.origin + (0, 0, 50));
+    playSoundAtPosition(str_alias, self.origin + (0, 0, 50));
     wait 5;
     self.var_c000552f = 0;
   }
@@ -947,7 +947,7 @@ function function_1d36527d(params) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(tokens[0] === #"hash_6149e7b90451c6cd") {
       switch (tokens[1]) {
         case #"0":

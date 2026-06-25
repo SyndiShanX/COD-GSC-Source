@@ -119,7 +119,7 @@ start(ai) {
   ai.animname = "_meatshield:ai";
   ai gun_remove();
   ai.team = "allies";
-  ai LinkTo(_meatshield.align, "tag_origin");
+  ai linkTo(_meatshield.align, "tag_origin");
   ai notify("_meatshield:start");
   if(!isDefined(level.meatshield_custom_audio)) {
     ai thread meatshield_audio_init(_meatshield);
@@ -220,7 +220,7 @@ get_struct() {
 }
 get_align_pt(ai) {
   if(isDefined(ai.target)) {
-    temp_struct = getstruct(ai.target, "targetname");
+    temp_struct = getStruct(ai.target, "targetname");
     align_point = spawn("script_model", temp_struct.origin);
     align_point.angles = temp_struct.angles;
   } else {
@@ -237,7 +237,7 @@ link_player(absolute) {
   } else {
     setDvar("bg_gunXOffset", 100);
   }
-  self.player_hands LinkTo(self._meatshield.align);
+  self.player_hands linkTo(self._meatshield.align);
   if(is_true(absolute)) {
     self StartCameraTween(.3);
     self PlayerLinkToAbsolute(self.player_hands, "tag_player");
@@ -267,13 +267,13 @@ turn_loop(left_constraint, right_constraint) {
       zeroed_ang = ang - original_angle;
       clamped_ang = AngleClamp180(zeroed_ang[1]);
       if(clamped_ang < left_constraint && clamped_ang > right_constraint) {
-        self.align RotateTo(ang, .06);
+        self.align rotateTo(ang, .06);
         wait(0.05);
       } else {
         wait(0.05);
       }
     } else {
-      self.align RotateTo(ang, .06);
+      self.align rotateTo(ang, .06);
       wait .05;
     }
   }
@@ -290,7 +290,7 @@ do_anims(ents) {
   }
   self.ai.overrideActorDamage = undefined;
   self.player link_player(true);
-  playsoundatposition("evt_s01_ms_push_body", (0, 0, 0));
+  playSoundAtPosition("evt_s01_ms_push_body", (0, 0, 0));
   self.align anim_single_aligned(self.anim_ents, "drop");
   self notify("_meatshield:anims_done");
 }
@@ -348,7 +348,7 @@ ms_idle_fail_player() {
   for(i = 1; i < 11; i++) {
     x = i * 0.1;
     self blood_hud(x);
-    self.player PlayRumbleOnEntity("grenade_rumble");
+    self.player playRumbleOnEntity("grenade_rumble");
     wait 0.1;
   }
   MissionFailed();

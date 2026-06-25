@@ -48,11 +48,11 @@ function init_doors() {
     door_struct.s_boards = arraygetclosest(door_struct.origin, struct::get_array("survival_door_boards"));
     use_trigger = spawn("trigger_radius_use", door_struct.origin, 0, 96, 96, 1);
     assert(isDefined(use_trigger));
-    use_trigger triggerignoreteam();
+    use_trigger triggerIgnoreTeam();
     use_trigger setvisibletoall();
     use_trigger setteamfortrigger(#"none");
-    use_trigger setcursorhint("HINT_NOICON");
-    use_trigger sethintstring(#"hash_e0e56e669b6a886");
+    use_trigger setCursorHint("HINT_NOICON");
+    use_trigger setHintString(#"hash_e0e56e669b6a886");
     use_trigger usetriggerignoreuseholdtime();
     door_model = spawn("script_model", door_struct.origin);
     assert(isDefined(door_model));
@@ -105,7 +105,7 @@ function function_6a3e8a89() {
           player function_3dfeef3b(1);
 
           if(isDefined(self.parent_struct.trigger)) {
-            self.parent_struct.trigger sethintstring("");
+            self.parent_struct.trigger setHintString("");
           }
         }
       }
@@ -132,7 +132,7 @@ function function_6a3e8a89() {
 
           if(isDefined(self.parent_struct.trigger)) {
             self.parent_struct.trigger function_dae4ab9b(0.3);
-            self.parent_struct.trigger sethintstring(#"");
+            self.parent_struct.trigger setHintString(#"");
           }
         }
       }
@@ -141,20 +141,20 @@ function function_6a3e8a89() {
     }
 
     if(!isDefined(self.parent_struct.door)) {
-      self.parent_struct.trigger sethintstring(#"hash_3d9e6b6b1984617d");
+      self.parent_struct.trigger setHintString(#"hash_3d9e6b6b1984617d");
       continue;
     }
 
     if(self.parent_struct.door.var_27a45076 === -1 || self.parent_struct.door.var_27a45076 === 1) {
       if(!is_true(self.parent_struct.door.reinforced)) {
-        self.parent_struct.trigger sethintstring(#"hash_3197c6dc91249ca2");
+        self.parent_struct.trigger setHintString(#"hash_3197c6dc91249ca2");
       }
 
       continue;
     }
 
     if(!is_true(self.parent_struct.door.reinforced)) {
-      self.parent_struct.trigger sethintstring(#"hash_e0e56e669b6a886");
+      self.parent_struct.trigger setHintString(#"hash_e0e56e669b6a886");
     }
   }
 }
@@ -176,40 +176,40 @@ function private door_think(eventstruct) {
     in_front = vectordot(player.origin - door.origin, anglesToForward(door.angles)) > 0;
 
     if(door.var_27a45076 == 0 && in_front) {
-      door rotateto(var_f6f828b2, 0.5);
+      door rotateTo(var_f6f828b2, 0.5);
       door.var_27a45076 = 1;
       function_be2c24a3(parent_struct.target, 1);
 
       if(!is_true(door.reinforced)) {
-        self sethintstring(#"hash_3197c6dc91249ca2");
+        self setHintString(#"hash_3197c6dc91249ca2");
       } else {
-        self sethintstring(#"hash_3df5eb7de3fa5e80");
+        self setHintString(#"hash_3df5eb7de3fa5e80");
       }
     } else if(door.var_27a45076 == 0 && !in_front) {
-      door rotateto(var_bc7389e4, 0.5);
+      door rotateTo(var_bc7389e4, 0.5);
       door.var_27a45076 = -1;
       function_be2c24a3(parent_struct.target, 1);
 
       if(!is_true(door.reinforced)) {
-        self sethintstring(#"hash_3197c6dc91249ca2");
+        self setHintString(#"hash_3197c6dc91249ca2");
       } else {
-        self sethintstring(#"hash_3df5eb7de3fa5e80");
+        self setHintString(#"hash_3df5eb7de3fa5e80");
       }
     } else if(door.var_27a45076 == 1) {
-      door rotateto(var_bc7389e4, 0.5);
+      door rotateTo(var_bc7389e4, 0.5);
       door.var_27a45076 = 0;
       function_be2c24a3(parent_struct.target, 0);
 
       if(!is_true(door.reinforced)) {
-        self sethintstring(#"hash_e0e56e669b6a886");
+        self setHintString(#"hash_e0e56e669b6a886");
       }
     } else if(door.var_27a45076 == -1) {
-      door rotateto(var_f6f828b2, 0.5);
+      door rotateTo(var_f6f828b2, 0.5);
       door.var_27a45076 = 0;
       function_be2c24a3(parent_struct.target, 0);
 
       if(!is_true(door.reinforced)) {
-        self sethintstring(#"hash_e0e56e669b6a886");
+        self setHintString(#"hash_e0e56e669b6a886");
       }
     }
 
@@ -223,7 +223,7 @@ function private door_think(eventstruct) {
     return;
   }
 
-  self sethintstring(#"hash_3d9e6b6b1984617d");
+  self setHintString(#"hash_3d9e6b6b1984617d");
   self thread function_48a16d8d(player, &door_think);
 }
 
@@ -257,7 +257,7 @@ function function_ae47792b(eventstruct) {
     self.damage_level++;
 
     if(self.var_27a45076 === 0) {
-      self.parent_struct.trigger sethintstring(#"hash_330249c707d8e92b");
+      self.parent_struct.trigger setHintString(#"hash_330249c707d8e92b");
     }
   }
 
@@ -282,7 +282,7 @@ function function_ae47792b(eventstruct) {
     }
 
     function_be2c24a3(self.parent_struct.target, 1);
-    self.parent_struct.trigger sethintstring(#"hash_3d9e6b6b1984617d");
+    self.parent_struct.trigger setHintString(#"hash_3d9e6b6b1984617d");
     waittillframeend();
     self delete();
     return;
@@ -352,11 +352,11 @@ function private function_e5d01ba1() {
 
     window_trigger = spawn("trigger_radius", window_boards.origin, 0, 64, 80, 1);
     assert(isDefined(window_trigger));
-    window_trigger triggerignoreteam();
+    window_trigger triggerIgnoreTeam();
     window_trigger setvisibletoall();
-    window_trigger usetriggerrequirelookat();
-    window_trigger setcursorhint("HINT_NOICON");
-    window_trigger sethintstring(#"hash_3766e0d30f6782ad");
+    window_trigger useTriggerRequireLookAt();
+    window_trigger setCursorHint("HINT_NOICON");
+    window_trigger setHintString(#"hash_3766e0d30f6782ad");
     window_trigger.window_boards = window_boards;
     window_boards.trigger = window_trigger;
     window_trigger.parent_struct = window_boards;
@@ -389,7 +389,7 @@ function private function_51095a3d() {
         if(isDefined(n_resource) && n_resource >= var_b9fbcc94 && elapsed_time > 0.1) {
           player clientfield::set_player_uimodel("hudItems.dynentUseHoldProgress", progress);
           player function_3dfeef3b(1);
-          self sethintstring("");
+          self setHintString("");
         }
 
         waitframe(1);
@@ -413,7 +413,7 @@ function private function_51095a3d() {
 
           if(var_c598073c) {
             player zm_score::minus_to_player_score(var_b9fbcc94);
-            self sethintstring("");
+            self setHintString("");
             self.parent_struct.window notify(#"repaired");
           }
         }
@@ -423,12 +423,12 @@ function private function_51095a3d() {
     }
 
     if(!isDefined(self.parent_struct.window)) {
-      self sethintstring(#"hash_3766e0d30f6782ad");
+      self setHintString(#"hash_3766e0d30f6782ad");
       continue;
     }
 
     if(isDefined(self.parent_struct.window.damage_level) && self.parent_struct.window.damage_level > 0) {
-      self sethintstring(#"hash_7b18ee0053fc3a7b");
+      self setHintString(#"hash_7b18ee0053fc3a7b");
     }
   }
 }
@@ -454,7 +454,7 @@ function private function_994e81b7(eventstruct) {
   if(self.damage_level > 5) {
     self.parent_struct.fx_org clientfield::increment("" + #"hash_4719ef7fda616f3a");
     self playSound(#"hash_bf0f566d836c8a2");
-    self.parent_struct.trigger sethintstring(#"hash_3766e0d30f6782ad");
+    self.parent_struct.trigger setHintString(#"hash_3766e0d30f6782ad");
     waittillframeend();
     self delete();
     return;
@@ -467,7 +467,7 @@ function private function_994e81b7(eventstruct) {
 
     self playSound(#"hash_6d3a81cd3c4049f4");
     self setModel(self.parent_struct.var_811c2d3a[self.damage_level]);
-    self.parent_struct.trigger sethintstring(#"hash_7b18ee0053fc3a7b");
+    self.parent_struct.trigger setHintString(#"hash_7b18ee0053fc3a7b");
 
     if(!isPlayer(eventstruct.attacker)) {
       self thread function_82c85f70();

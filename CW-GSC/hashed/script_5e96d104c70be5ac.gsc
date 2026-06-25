@@ -52,7 +52,7 @@ function private preinit() {
 }
 
 function function_72c32279() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player on_player_connect();
@@ -101,7 +101,7 @@ function function_d519e318() {
     game.telemetry.var_36b58be2 = 1;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_143fa1b9();
@@ -161,7 +161,7 @@ function private on_round_end(data) {
   var_a5722144.var_b0ab3472 = function_f8d53445();
   var_a5722144.var_b4da50f0 = var_a5722144.var_b0ab3472 - var_a5722144.var_29d0de09;
   var_a5722144.round_number = zm_utility::get_round_number();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_2d28a3b3(data);
@@ -711,7 +711,7 @@ function private function_8a38be09(params) {
   }
 
   level.var_7cb19409 = function_f8d53445();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(player.pers)) {
@@ -737,7 +737,7 @@ function private function_8a38be09(params) {
   }
 
   var_bdad1c21 = {
-    #var_579fb993: level.script, #var_e4ca5a4b: level.var_7cb19409, #var_c2b4f8d0: level.var_b48509f9, #var_ea3397d3: getplayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : #"")
+    #var_579fb993: level.script, #var_e4ca5a4b: level.var_7cb19409, #var_c2b4f8d0: level.var_b48509f9, #var_ea3397d3: getPlayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : #"")
   };
   function_92d1707f(#"hash_424c5668eaeebb31", var_bdad1c21);
 }
@@ -748,7 +748,7 @@ function private function_e89b1c3f(params) {
   }
 
   var_b48509f9 = level.var_b48509f9;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_2d28a3b3();
@@ -759,7 +759,7 @@ function private function_e89b1c3f(params) {
   }
 
   var_bdad1c21 = {
-    #var_579fb993: isDefined(level.script) ? level.script : "", #var_e4ca5a4b: isDefined(level.var_7cb19409) ? level.var_7cb19409 : 0, #var_44bf1770: function_f8d53445(), #var_395efa0a: isDefined(var_199a2a04) ? var_199a2a04 : 0, #var_c2b4f8d0: isDefined(var_b48509f9) ? var_b48509f9 : 0, #var_ea3397d3: getplayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : #"")
+    #var_579fb993: isDefined(level.script) ? level.script : "", #var_e4ca5a4b: isDefined(level.var_7cb19409) ? level.var_7cb19409 : 0, #var_44bf1770: function_f8d53445(), #var_395efa0a: isDefined(var_199a2a04) ? var_199a2a04 : 0, #var_c2b4f8d0: isDefined(var_b48509f9) ? var_b48509f9 : 0, #var_ea3397d3: getPlayers().size, #var_b8cbcff2: hash(isDefined(level.contentmanager.var_1fcbdf50) ? level.contentmanager.var_1fcbdf50 : #"")
   };
   level.var_7cb19409 = undefined;
   function_92d1707f(#"hash_424c5668eaeebb31", var_bdad1c21);
@@ -770,7 +770,7 @@ function private function_e38db3d4(params, activator) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player.pers[#"telemetry"].var_6cdd00ea = 1;
@@ -785,7 +785,7 @@ function private function_e38db3d4(params, activator) {
 
   level.var_f099aebe = function_f8d53445();
   var_8c24333b = {
-    #var_4472945a: isDefined(activator.instance.content_script_name) ? activator.instance.content_script_name : "", #var_fffcd514: isDefined(level.var_f099aebe) ? level.var_f099aebe : 0, #var_90f03449: isDefined(level.script) ? level.script : "", #var_ac2606df: isDefined(activator.instance.location.targetname) ? activator.instance.location.targetname : "", #var_174b4191: isDefined(level.var_b48509f9) ? level.var_b48509f9 : 0, #var_adfc9a7e: getplayers().size
+    #var_4472945a: isDefined(activator.instance.content_script_name) ? activator.instance.content_script_name : "", #var_fffcd514: isDefined(level.var_f099aebe) ? level.var_f099aebe : 0, #var_90f03449: isDefined(level.script) ? level.script : "", #var_ac2606df: isDefined(activator.instance.location.targetname) ? activator.instance.location.targetname : "", #var_174b4191: isDefined(level.var_b48509f9) ? level.var_b48509f9 : 0, #var_adfc9a7e: getPlayers().size
   };
   function_92d1707f(#"hash_7c94738a8f65d945", var_8c24333b);
 }
@@ -800,11 +800,11 @@ function private function_f13d2749(params) {
   }
 
   var_8c24333b = {
-    #var_4472945a: isDefined(params.instance.content_script_name) ? params.instance.content_script_name : "", #var_fffcd514: isDefined(level.var_f099aebe) ? level.var_f099aebe : 0, #var_26d27f23: function_f8d53445(), #var_90f03449: isDefined(level.script) ? level.script : "", #var_ac2606df: isDefined(params.instance.location.targetname) ? params.instance.location.targetname : "", #var_85aa2ee9: isDefined(var_ecd4394f) ? var_ecd4394f : 0, #var_a32e2b21: is_true(params.completed), #var_174b4191: isDefined(level.var_b48509f9) ? level.var_b48509f9 : 0, #var_adfc9a7e: getplayers().size
+    #var_4472945a: isDefined(params.instance.content_script_name) ? params.instance.content_script_name : "", #var_fffcd514: isDefined(level.var_f099aebe) ? level.var_f099aebe : 0, #var_26d27f23: function_f8d53445(), #var_90f03449: isDefined(level.script) ? level.script : "", #var_ac2606df: isDefined(params.instance.location.targetname) ? params.instance.location.targetname : "", #var_85aa2ee9: isDefined(var_ecd4394f) ? var_ecd4394f : 0, #var_a32e2b21: is_true(params.completed), #var_174b4191: isDefined(level.var_b48509f9) ? level.var_b48509f9 : 0, #var_adfc9a7e: getPlayers().size
   };
   level.var_f099aebe = undefined;
   function_92d1707f(#"hash_7c94738a8f65d945", var_8c24333b);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!is_true(player.pers[#"telemetry"].var_6cdd00ea)) {
@@ -819,7 +819,7 @@ function private function_f13d2749(params) {
     var_7284764c = player rank::function_5b197def(5) - (isDefined(player.pers[#"telemetry"].var_ccd5da9e) ? player.pers[#"telemetry"].var_ccd5da9e : 0);
     var_5ebc1188 = player.kills - (isDefined(player.pers[#"telemetry"].var_89b3f8b0) ? player.pers[#"telemetry"].var_89b3f8b0 : 0);
     var_b1c6f834 = {
-      #var_df4d256: isDefined(var_6e09d7) ? var_6e09d7 : 0, #var_7ce7929c: isDefined(var_f4090d6e) ? var_f4090d6e : 0, #var_6cf5475f: isDefined(var_8ce60ee4) ? var_8ce60ee4 : 0, #var_30171d91: isDefined(var_c0c8369d) ? var_c0c8369d : 0, #var_f58a5ef3: isDefined(var_7284764c) ? var_7284764c : 0, #var_c56e97ce: isDefined(var_5ebc1188) ? var_5ebc1188 : 0, #var_4472945a: isDefined(params.instance.content_script_name) ? params.instance.content_script_name : "", #var_174b4191: isDefined(level.var_b48509f9) ? level.var_b48509f9 : 0, #var_adfc9a7e: getplayers().size
+      #var_df4d256: isDefined(var_6e09d7) ? var_6e09d7 : 0, #var_7ce7929c: isDefined(var_f4090d6e) ? var_f4090d6e : 0, #var_6cf5475f: isDefined(var_8ce60ee4) ? var_8ce60ee4 : 0, #var_30171d91: isDefined(var_c0c8369d) ? var_c0c8369d : 0, #var_f58a5ef3: isDefined(var_7284764c) ? var_7284764c : 0, #var_c56e97ce: isDefined(var_5ebc1188) ? var_5ebc1188 : 0, #var_4472945a: isDefined(params.instance.content_script_name) ? params.instance.content_script_name : "", #var_174b4191: isDefined(level.var_b48509f9) ? level.var_b48509f9 : 0, #var_adfc9a7e: getPlayers().size
     };
     function_92d1707f(#"hash_7a17213a42c58963", var_b1c6f834);
   }

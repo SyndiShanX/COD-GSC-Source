@@ -65,13 +65,13 @@ function on_player_spawned(localclientnum) {
     self setsoundentcontext("npc_gender", "male");
   }
 
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     player function_f22aa227(localclientnum);
   }
 }
 
 function function_5bec2ba9(params) {
-  foreach(player in getplayers(params.localclientnum)) {
+  foreach(player in getPlayers(params.localclientnum)) {
     player function_e450e3e1(params);
     player function_4ff4a239(params.localclientnum);
   }

@@ -67,7 +67,7 @@ function function_8d1f7bc9() {
   level.var_3e9c9ee4 = 0;
   level.var_49ae1c91 = 0;
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     actors = getactorarray();
     count = 0;
     foreach(player in players) {
@@ -137,7 +137,7 @@ function function_9071119b() {
       var_4c401d78 hide();
     }
     clientfield::set("nuketown_endgame", 1);
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       player camerasetposition(camera);
       player camerasetlookat();
@@ -212,7 +212,7 @@ function nuked_mannequin_init() {
   var_c5761915 = 0;
   for(i = 0; i < mannequins.size; i++) {
     if("p7_dest_ntx_mannequin_female_04_purple_ddef" == mannequins[i].destructibledef) {
-      collision = getent(mannequins[i].target, "targetname");
+      collision = getEnt(mannequins[i].target, "targetname");
       assert(isDefined(collision));
       collision delete();
       mannequins[i] delete();
@@ -225,7 +225,7 @@ function nuked_mannequin_init() {
     assert(isDefined(mannequins[i].target));
     if(level.gametype == "dem" || level.gametype == "dom") {
       if(mannequins[i].target == "pf1160_auto1" || mannequins[i].target == "pf1179_auto1") {
-        collision = getent(mannequins[i].target, "targetname");
+        collision = getEnt(mannequins[i].target, "targetname");
         assert(isDefined(collision));
         collision delete();
         mannequins[i] delete();
@@ -244,14 +244,14 @@ function nuked_mannequin_init() {
     }
     assert(isDefined(mannequins[i].target));
     if(i < remove_count) {
-      collision = getent(mannequins[i].target, "targetname");
+      collision = getEnt(mannequins[i].target, "targetname");
       assert(isDefined(collision));
       collision delete();
       mannequins[i] delete();
       level.mannequin_count--;
       continue;
     }
-    mannequins[i] disconnectpaths();
+    mannequins[i] disconnectPaths();
   }
   arrayremovevalue(mannequins, undefined);
   level.mannequins = mannequins;
@@ -286,7 +286,7 @@ function private function_66d1dfaa() {
   mannequins = nuked_mannequin_filter(destructibles);
   foreach(mannequin in mannequins) {
     mannequin connectpaths();
-    collision = getent(mannequin.target, "targetname");
+    collision = getEnt(mannequin.target, "targetname");
     collision delete();
     mannequin delete();
   }
@@ -404,7 +404,7 @@ function function_2f2fa868() {
 }
 
 function function_4b855423() {
-  players = getplayers();
+  players = getPlayers();
   if(players.size > 12) {
     return false;
   }

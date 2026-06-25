@@ -108,7 +108,7 @@ function function_ab4fad2f() {
 }
 
 function function_ff07e778() {
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     foreach(var_3ef7692 in level.placeable_mines) {
       if(a_players[i] zm_utility::is_player_placeable_mine(var_3ef7692)) {
@@ -388,7 +388,7 @@ function function_7fcb14a8() {
       continue;
     }
     self.mdl_target clientfield::increment(var_78f8828b);
-    self.mdl_target moveto(self.var_be00572f + var_b912cdaf, 0.05);
+    self.mdl_target moveTo(self.var_be00572f + var_b912cdaf, 0.05);
     wait(0.1);
   }
   if(self flag::get("dragon_strike_active")) {
@@ -426,7 +426,7 @@ function function_c7832a90(v_loc) {
 
 function function_5a9be7d8(var_854898eb) {
   self.mdl_target clientfield::increment(var_854898eb);
-  self.mdl_target moveto(self.var_be00572f, 0.05);
+  self.mdl_target moveTo(self.var_be00572f, 0.05);
   self.var_be00572f = undefined;
 }
 

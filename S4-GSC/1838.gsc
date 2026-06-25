@@ -398,11 +398,11 @@ _id_7D5B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_15 = anglestoup(var_0.angles);
     var_16 = _func_025B(var_14, var_15);
     var_17 = scripts\engine\utility::spawn_tag_origin(var_4, _func_0017(var_14, var_16, var_15));
-    var_17 moveto(var_10, var_13);
+    var_17 moveTo(var_10, var_13);
     var_18 = _func_0212(var_1, var_6, var_7, var_8);
     var_18.origin = var_17.origin;
     var_18.angles = var_17.angles;
-    var_18 linkto(var_17);
+    var_18 linkTo(var_17);
     thread _id_7D5C(var_1, var_17, var_13 + 0.05, var_18);
   }
 }
@@ -978,7 +978,7 @@ _id_F3DA() {
 
     self._id_9928 = var_7;
     self._id_1F99 = var_9 / self._id_9928.size;
-    self._id_1039D = self.origin + vectornormalize(self._id_1F9A) * self._id_1F99;
+    self._id_1039D = self.origin + vectorNormalize(self._id_1F9A) * self._id_1F99;
     wait 0.5;
   }
 }

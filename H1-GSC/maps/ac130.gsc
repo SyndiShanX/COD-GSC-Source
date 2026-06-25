@@ -66,7 +66,7 @@ start_start() {
 
 start_church() {
   maps\ac130_code::spawn_friendlies("friends_church");
-  level.ac130.origin = getent("ac130_waypoint_fight1", "targetname").origin;
+  level.ac130.origin = getEnt("ac130_waypoint_fight1", "targetname").origin;
   common_scripts\utility::flag_set("clear_to_engage");
   common_scripts\utility::flag_set("allow_context_sensative_dialog");
   thread dialog_cleared_to_engage();
@@ -75,7 +75,7 @@ start_church() {
 
 start_field() {
   maps\ac130_code::spawn_friendlies("friends_field1");
-  level.ac130.origin = getent("ac130_waypoint_field1", "targetname").origin;
+  level.ac130.origin = getEnt("ac130_waypoint_field1", "targetname").origin;
   common_scripts\utility::flag_set("clear_to_engage");
   common_scripts\utility::flag_set("allow_context_sensative_dialog");
   thread gameplay_fields();
@@ -83,7 +83,7 @@ start_field() {
 
 start_hijack() {
   maps\ac130_code::spawn_friendlies("friends_hijack");
-  level.ac130.origin = getent("ac130_waypoint_hijack", "targetname").origin;
+  level.ac130.origin = getEnt("ac130_waypoint_hijack", "targetname").origin;
   common_scripts\utility::flag_set("clear_to_engage");
   common_scripts\utility::flag_set("allow_context_sensative_dialog");
   wait 0.05;
@@ -92,7 +92,7 @@ start_hijack() {
 
 start_junkyard() {
   maps\ac130_code::spawn_friendlies("friends_junkyard");
-  level.ac130.origin = getent("ac130_waypoint_junkyard1", "targetname").origin;
+  level.ac130.origin = getEnt("ac130_waypoint_junkyard1", "targetname").origin;
   common_scripts\utility::flag_set("clear_to_engage");
   common_scripts\utility::flag_set("allow_context_sensative_dialog");
   wait 0.05;

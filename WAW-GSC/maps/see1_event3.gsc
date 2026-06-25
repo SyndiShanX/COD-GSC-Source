@@ -128,13 +128,13 @@ ev3_throw_guy_out_tower(ai_guy, dir) {
 
 tower_4_destroy_mg() {
   level waittill("tower4_blows_up");
-  mg = getent("ev3_tower_mg", "targetname");
+  mg = getEnt("ev3_tower_mg", "targetname");
   mg delete();
 }
 
 tower_5_destroy_mg() {
   level waittill("tower5_blows_up");
-  mg = getent("ev3_tower_mg2", "targetname");
+  mg = getEnt("ev3_tower_mg2", "targetname");
   mg delete();
 }
 
@@ -176,14 +176,14 @@ ev3_objectives() {
 
   setmusicstate("AT_CAMP");
 
-  camp_entered_trigger = getent("ev3_opel_move", "targetname");
+  camp_entered_trigger = getEnt("ev3_opel_move", "targetname");
   camp_entered_trigger waittill("trigger");
   objective_state(4, "done");
   objective_delete(4);
 
   objective_add(4, "current", level.obj9_string, (-3942, 14799, -66.9));
 
-  halftracks_move_trigger = getent("ev3_halftracks_move", "targetname");
+  halftracks_move_trigger = getEnt("ev3_halftracks_move", "targetname");
   halftracks_move_trigger waittill("trigger");
   objective_position(4, (-4192, 14650, -73.7286));
 
@@ -194,7 +194,7 @@ ev3_objectives() {
 
   objective_add(5, "current", level.obj11_string, (-5254, 15555, 58));
 
-  regroup_trigger = getent("final_regroup", "targetname");
+  regroup_trigger = getEnt("final_regroup", "targetname");
   regroup_trigger waittill("trigger");
   objective_state(5, "done");
 
@@ -306,14 +306,14 @@ friendly_respawners_init() {
 }
 
 ending_tank_1_think() {
-  trigger = getent("ending_spawn_tank1", "targetname");
+  trigger = getEnt("ending_spawn_tank1", "targetname");
   trigger waittill("trigger");
 
-  trigger = getent("ev3_side_spawn_trigger", "targetname");
+  trigger = getEnt("ev3_side_spawn_trigger", "targetname");
   trigger notify("trigger");
 
   wait(1);
-  tank = getent("ending_tank_side_1", "targetname");
+  tank = getEnt("ending_tank_side_1", "targetname");
   tank maps\_vehicle::mgoff();
 
   wait(1);
@@ -343,16 +343,16 @@ ending_dying_near_goal_node() {
 }
 
 ev3_opel_move() {
-  spawner = getent("ev3_opel_spawn", "targetname");
+  spawner = getEnt("ev3_opel_spawn", "targetname");
   spawner waittill("trigger");
 
   wait(1);
 
-  opel1 = getent("ev3_opel1", "targetname");
+  opel1 = getEnt("ev3_opel1", "targetname");
   opel1.unload_group = "all";
   opel1 thread ev3_destructible_truck_death_run("ev3_trucks_stop", "ev3_truck11_safe_point");
 
-  opel2 = getent("ev3_opel2", "targetname");
+  opel2 = getEnt("ev3_opel2", "targetname");
   opel2.unload_group = "all";
   opel2 thread ev3_destructible_truck_death_run("ev3_trucks_stop", "ev3_truck12_safe_point");
 
@@ -362,7 +362,7 @@ ev3_opel_move() {
   level.hero1 thread scripted_molotov_throw("molotov_toss_point_8", "end_truck1_spawns");
   wait(15);
 
-  mover = getent("ev3_opel_move", "targetname");
+  mover = getEnt("ev3_opel_move", "targetname");
   mover notify("trigger");
 }
 
@@ -403,12 +403,12 @@ wait_for_opel_death(opel) {
 }
 
 ev3_halftracks_move() {
-  spawn_trigger = getent("ev3_halftrack_spawn_trigger", "targetname");
+  spawn_trigger = getEnt("ev3_halftrack_spawn_trigger", "targetname");
   spawn_trigger waittill("trigger");
 
   wait(1.5);
 
-  level.ev3_halftrack2 = getent("ev3_halftrack2", "targetname");
+  level.ev3_halftrack2 = getEnt("ev3_halftrack2", "targetname");
 
   level.ev3_halftrack2 thread ev3_halftrack_mg_ai("ev3_halftrack2_gunner");
 
@@ -485,7 +485,7 @@ death_at_end() {
 }
 
 ev3_opel2_event() {
-  move_trigger = getent("ev3_spawn_opels_2", "targetname");
+  move_trigger = getEnt("ev3_spawn_opels_2", "targetname");
   move_trigger waittill("trigger");
 
   level thread dialog_truck_road_shoot();
@@ -493,7 +493,7 @@ ev3_opel2_event() {
   wait(1);
 
   russians = getEntArray("ev3_truck_blowup_russians", "script_noteworthy");
-  truck1 = getent("ev3_truck_blowup_truck1", "targetname");
+  truck1 = getEnt("ev3_truck_blowup_truck1", "targetname");
   truck1.health = 99999;
   truck1.unload_group = "all";
 
@@ -585,13 +585,13 @@ outro(do_it_now) {
   wait(2);
   share_screen(get_host(), true, true);
 
-  link = getent("player_temp_ending_pos", "script_noteworthy");
+  link = getEnt("player_temp_ending_pos", "script_noteworthy");
   players = get_players();
-  anim_node = getent("temp_center", "targetname");
+  anim_node = getEnt("temp_center", "targetname");
 
   for(i = 0; i < players.size; i++) {
     players[i] hide();
-    players[i] setorigin(link.origin + (0, 0, 4));
+    players[i] setOrigin(link.origin + (0, 0, 4));
     players[i] setplayerangles(link.angles);
 
     {
@@ -621,7 +621,7 @@ outro(do_it_now) {
 }
 
 play_center_car_anims_side() {
-  anim_node = getent("temp_center", "targetname");
+  anim_node = getEnt("temp_center", "targetname");
 
   guys = [];
 
@@ -645,7 +645,7 @@ play_center_car_anims_side() {
 }
 
 play_center_car_anims_middle() {
-  anim_node = getent("temp_center", "targetname");
+  anim_node = getEnt("temp_center", "targetname");
 
   guys = [];
 
@@ -681,7 +681,7 @@ spawn_fake_guy_outro(startpoint, startangles, anim_name) {
 }
 
 camp_center() {
-  trigger = getent("camp_center_trig", "targetname");
+  trigger = getEnt("camp_center_trig", "targetname");
   trigger waittill("trigger");
   level notify("both_halftracks_eliminated");
   level thread ev3_ambient_tank_hits();
@@ -690,23 +690,23 @@ camp_center() {
 }
 
 retreat_trucks() {
-  trigger = getent("retreat_starts", "targetname");
+  trigger = getEnt("retreat_starts", "targetname");
   trigger waittill("trigger");
 
-  truck_spawn_1 = getent("ending_move_truck1", "targetname");
-  truck_spawn_2 = getent("ending_move_truck2", "targetname");
-  truck_spawn_3 = getent("ending_move_truck3", "targetname");
+  truck_spawn_1 = getEnt("ending_move_truck1", "targetname");
+  truck_spawn_2 = getEnt("ending_move_truck2", "targetname");
+  truck_spawn_3 = getEnt("ending_move_truck3", "targetname");
 
   truck_spawn_1 notify("trigger");
   wait(0.5);
-  truck1 = getent("ending_truck1", "targetname");
+  truck1 = getEnt("ending_truck1", "targetname");
   truck1.health = 99999;
   level notify("end_truck1_spawns");
 
   wait(1.5);
   truck_spawn_2 notify("trigger");
   wait(0.5);
-  truck2 = getent("ending_truck2", "targetname");
+  truck2 = getEnt("ending_truck2", "targetname");
   truck2.health = 99999;
   level notify("end_truck2_spawns");
 
@@ -755,7 +755,7 @@ ending_run_explosion() {
 ending_allies_run() {
   wait(3);
 
-  trigger = getent("final_friends_spawn", "targetname");
+  trigger = getEnt("final_friends_spawn", "targetname");
   trigger notify("trigger");
 
   allies_ai = GetAiArray("allies");
@@ -813,10 +813,10 @@ rejoice_at_end() {
 
     flag_wait("ending_tank_ready");
 
-    regroup_trigger = getent("final_regroup", "targetname");
+    regroup_trigger = getEnt("final_regroup", "targetname");
     regroup_trigger waittill("trigger");
 
-    tank = getent("ev3_ending_tanks_ride", "targetname");
+    tank = getEnt("ev3_ending_tanks_ride", "targetname");
     tank anim_reach_solo(self, "cheer_tank", "tag_origin");
 
     level thread play_and_loop_cheer_anim(tank, self);
@@ -844,7 +844,7 @@ ev3_chasing_tank_think(trigger) {
   trigger notify("trigger");
   flag_set("ev3_flood_spawners_end");
   wait(0.5);
-  truck3 = getent("ending_truck3", "targetname");
+  truck3 = getEnt("ending_truck3", "targetname");
   truck3.health = 99999;
   level notify("end_truck3_spawns");
   truck3 waittill("reached_end_node");
@@ -872,16 +872,16 @@ retreat_tanks() {
 
   wait(3.5);
 
-  tanks_spawn = getent("ev3_escape_tanks_1", "script_noteworthy");
+  tanks_spawn = getEnt("ev3_escape_tanks_1", "script_noteworthy");
   tanks_spawn notify("trigger");
 
   wait(0.5);
 
-  tank1 = getent("ending_tank_1", "targetname");
+  tank1 = getEnt("ending_tank_1", "targetname");
   tank1.health = 99999;
   tank1.turretrotscale = 1;
 
-  tank_mounting = getent("ev3_ending_tanks_ride", "targetname");
+  tank_mounting = getEnt("ev3_ending_tanks_ride", "targetname");
   tank_mounting thread ending_ready_to_mount();
 
   other_tanks = getEntArray("ev3_ending_tanks", "targetname");
@@ -889,11 +889,11 @@ retreat_tanks() {
     other_tanks[i] thread ev3_tank_shoot_and_run();
   }
 
-  riding_tank = getent("ev3_ending_tanks_ride", "targetname");
+  riding_tank = getEnt("ev3_ending_tanks_ride", "targetname");
 
   wait(3);
 
-  enemy_1 = getent("ev4_tank1", "targetname");
+  enemy_1 = getEnt("ev4_tank1", "targetname");
   if(isDefined(enemy_1)) {
     enemy_1 dodamage(enemy_1.health + 100, (0, 0, 0));
     enemy_1 notify("death");
@@ -901,7 +901,7 @@ retreat_tanks() {
 
   wait(2);
 
-  enemy_2 = getent("ev4_tank2", "targetname");
+  enemy_2 = getEnt("ev4_tank2", "targetname");
   if(isDefined(enemy_2)) {
     enemy_2 dodamage(enemy_2.health + 100, (0, 0, 0));
     enemy_2 notify("death");
@@ -915,7 +915,7 @@ ending_ready_to_mount() {
 }
 
 retreat_runners() {
-  trigger = getent("retreat_starts", "targetname");
+  trigger = getEnt("retreat_starts", "targetname");
   trigger waittill("trigger");
 
   spawners = getEntArray("ev3_runner", "script_noteworthy");
@@ -935,7 +935,7 @@ retreat_runners() {
 retreat_final() {
   flag_wait("ev3_flood_spawners_end");
 
-  stop_flood = getent("ev3_flood_defender_stop", "script_noteworthy");
+  stop_flood = getEnt("ev3_flood_defender_stop", "script_noteworthy");
   stop_flood notify("trigger");
   wait(0.1);
 
@@ -980,9 +980,9 @@ load_bombs(bomb_num) {
     self.bomb[i].dropped = false;
     wait(.1);
     if(i % 2 == 0) {
-      self.bomb[i] LinkTo(self, "tag_gunLeft", (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, "tag_gunLeft", (0, 0, -4), (-10, 0, 0));
     } else {
-      self.bomb[i] LinkTo(self, "tag_gunRight", (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, "tag_gunRight", (0, 0, -4), (-10, 0, 0));
     }
   }
 }
@@ -1021,8 +1021,8 @@ ev3_retreat_final_plane1() {
   level waittill("firing_starts_3");
   wait(1);
 
-  explosion_1 = getstruct("ev3_retreat_explode_31", "targetname");
-  explosion_2 = getstruct("ev3_retreat_explode_32", "targetname");
+  explosion_1 = getStruct("ev3_retreat_explode_31", "targetname");
+  explosion_2 = getStruct("ev3_retreat_explode_32", "targetname");
 
   playFX(level._effect["dirt_blow_up"], explosion_1.origin);
   wait(1);
@@ -1033,9 +1033,9 @@ ev3_retreat_final_plane2() {
   level waittill("firing_starts_4");
   wait(1);
 
-  explosion_1 = getstruct("ev3_retreat_explode_41", "targetname");
-  explosion_2 = getstruct("ev3_retreat_explode_42", "targetname");
-  explosion_3 = getstruct("ev3_retreat_explode_43", "targetname");
+  explosion_1 = getStruct("ev3_retreat_explode_41", "targetname");
+  explosion_2 = getStruct("ev3_retreat_explode_42", "targetname");
+  explosion_3 = getStruct("ev3_retreat_explode_43", "targetname");
 
   playFX(level._effect["dirt_blow_up"], explosion_1.origin);
   wait(1);
@@ -1045,13 +1045,13 @@ ev3_retreat_final_plane2() {
 }
 
 ev3_retreat_final_tanks1() {
-  spawn_trigger = getent("ev3_escape_tanks_1", "script_noteworthy");
+  spawn_trigger = getEnt("ev3_escape_tanks_1", "script_noteworthy");
   spawn_trigger notify("trigger");
 
   wait(1.5);
 
   tanks = getEntArray("ev3_ending_tanks", "targetname");
-  tanks_special = getent("ev3_ending_tank1", "targetname");
+  tanks_special = getEnt("ev3_ending_tank1", "targetname");
 
   for(i = 0; i < tanks.size; i++) {
     tanks[i] thread ev3_tank_shoot_and_run();
@@ -1062,7 +1062,7 @@ ev3_retreat_final_tanks1() {
 
 ev3_retreat_final_tanks2() {
   wait(3);
-  spawn_trigger = getent("ev3_escape_tank", "script_noteworthy");
+  spawn_trigger = getEnt("ev3_escape_tank", "script_noteworthy");
   spawn_trigger notify("trigger");
 }
 
@@ -1079,11 +1079,11 @@ ev3_end_tank_1() {
   self setwaitnode(node_fire);
   self waittill("reached_wait_node");
 
-  stop_flood = getent("ev3_escape_trigger_stop_spawn_3", "targetname");
+  stop_flood = getEnt("ev3_escape_trigger_stop_spawn_3", "targetname");
   stop_flood notify("trigger");
 
-  explosion_1 = getent("ev3_retreat_explode_51", "targetname");
-  explosion_2 = getent("ev3_retreat_explode_52", "targetname");
+  explosion_1 = getEnt("ev3_retreat_explode_51", "targetname");
+  explosion_2 = getEnt("ev3_retreat_explode_52", "targetname");
 
   self SetTurretTargetEnt(explosion_1);
   self waittill("turret_on_target");
@@ -1096,9 +1096,9 @@ ev3_end_tank_1() {
   self FireWeapon();
   playFX(level._effect["house_blow_up"], explosion_2.origin);
 
-  explosion_3 = getstruct("ev3_retreat_explode_53", "targetname");
-  explosion_4 = getstruct("ev3_retreat_explode_54", "targetname");
-  explosion_5 = getstruct("ev3_retreat_explode_55", "targetname");
+  explosion_3 = getStruct("ev3_retreat_explode_53", "targetname");
+  explosion_4 = getStruct("ev3_retreat_explode_54", "targetname");
+  explosion_5 = getStruct("ev3_retreat_explode_55", "targetname");
 
   playFX(level._effect["tree_brush_fire"], explosion_3.origin);
   playFX(level._effect["tree_brush_fire"], explosion_4.origin);
@@ -1121,7 +1121,7 @@ ev3_end_tank_1() {
   wait(3);
   level notify("retreat_done");
 
-  trigger = getent("to_train_station", "targetname");
+  trigger = getEnt("to_train_station", "targetname");
   trigger waittill("trigger");
 
   level notify("retreat_done_done");
@@ -1130,7 +1130,7 @@ ev3_end_tank_1() {
 ev3_retreat_plane(node_name, bomb_drop_start, msg) {
   start_node = getvehiclenode(node_name, "targetname");
 
-  plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
+  plane = spawnVehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
 
   plane attachPath(start_node);
   plane startpath();
@@ -1205,12 +1205,12 @@ ev3_retreat_random_death(goal_origin) {
 }
 
 ev3_initial_planes() {
-  trigger1 = getent("ev3_opel_spawn", "targetname");
+  trigger1 = getEnt("ev3_opel_spawn", "targetname");
   trigger1 waittill("trigger");
 
   level thread dialog_enter_compound();
 
-  trigger2 = getent("ev3_opel_move", "targetname");
+  trigger2 = getEnt("ev3_opel_move", "targetname");
   trigger2 waittill("trigger");
 }
 
@@ -1350,7 +1350,7 @@ force_reaction_anim_truck(end_msg) {
 }
 
 ev3_tower_event(tower_name, shreck) {
-  exploder_trigger = getent(tower_name, "script_noteworthy");
+  exploder_trigger = getEnt(tower_name, "script_noteworthy");
 
   blow_up_msg = tower_name + "_blows_up";
 
@@ -1370,18 +1370,18 @@ ev3_tower_event_ai_spawn(tower_name, blow_up_msg) {
   level waittill("blow_up_msg");
 
   if(tower_name == "tower4") {
-    trigger = getent("tower_2_guy_spawn_trig", "targetname");
+    trigger = getEnt("tower_2_guy_spawn_trig", "targetname");
     trigger trigger_off();
 
-    spawner = getent("ev3_tower_guys2", "script_noteworthy");
+    spawner = getEnt("ev3_tower_guys2", "script_noteworthy");
     if(isDefined(spawner)) {
       spawner.count = 0;
     }
   } else if(tower_name == "tower5") {
-    trigger = getent("tower_3_guy_spawn_trig", "targetname");
+    trigger = getEnt("tower_3_guy_spawn_trig", "targetname");
     trigger trigger_off();
 
-    spawner = getent("ev3_tower_guys3", "script_noteworthy");
+    spawner = getEnt("ev3_tower_guys3", "script_noteworthy");
     if(isDefined(spawner)) {
       spawner.count = 0;
     }
@@ -1397,7 +1397,7 @@ ev3_tower_event_tracers_loop(tower_name, blow_up_msg) {
   fire_start_name = tower_name + "_start";
   fire_end_name = tower_name + "_end";
 
-  fire_start = getstruct(fire_start_name, "script_noteworthy");
+  fire_start = getStruct(fire_start_name, "script_noteworthy");
   fire_ends = getStructArray(fire_end_name, "script_noteworthy");
 
   level endon(blow_up_msg);
@@ -1416,7 +1416,7 @@ ev3_tower_event_panzershreck_loop(tower_name, blow_up_msg) {
   fire_start_name = tower_name + "_start";
   fire_end_name = tower_name + "_end";
 
-  fire_start = getstruct(fire_start_name, "script_noteworthy");
+  fire_start = getStruct(fire_start_name, "script_noteworthy");
   fire_ends = getStructArray(fire_end_name, "script_noteworthy");
 
   level endon(blow_up_msg);
@@ -1440,7 +1440,7 @@ ev3_tower_event_spawn_t34(tower_name, spawn_trigger, tank_stops_msg) {
   wait(1);
 
   tank_name = tower_name + "_tank";
-  tank = getent(tank_name, "targetname");
+  tank = getEnt(tank_name, "targetname");
   tank endon("death");
 
   tank thread ev3_tower_event_t34_fire_loop(tower_name);
@@ -1460,7 +1460,7 @@ ev3_tower_event_t34_fire_loop(tower_name) {
   self endon("death");
 
   fire_at_target_name = tower_name + "_fire_at";
-  fire_at_target = getent(fire_at_target_name, "targetname");
+  fire_at_target = getEnt(fire_at_target_name, "targetname");
   self SetTurretTargetEnt(fire_at_target);
 
   while(1) {
@@ -1473,14 +1473,14 @@ ev3_tower_event_t34_fire_loop(tower_name) {
 
 ev3_tower_event_blow_up_t34(tower_name, blow_up_msg, tank_stops_msg) {
   fire_start_name = tower_name + "_start";
-  fire_start = getstruct(fire_start_name, "script_noteworthy");
+  fire_start = getStruct(fire_start_name, "script_noteworthy");
 
   level endon(blow_up_msg);
 
   level waittill(tank_stops_msg);
 
   tank_name = tower_name + "_tank";
-  tank = getent(tank_name, "targetname");
+  tank = getEnt(tank_name, "targetname");
   if(isDefined(tank) && isalive(tank)) {
     level thread fire_shreck(fire_start, tank, 1);
     wait(1);
@@ -1531,7 +1531,7 @@ dialog_enter_compound() {
 }
 
 dialog_halftracks() {
-  spawn_trigger = getent("ev3_halftracks_move", "targetname");
+  spawn_trigger = getEnt("ev3_halftracks_move", "targetname");
   spawn_trigger waittill("trigger");
 
   level.hero1 say_dialogue("reznov", "halftrack");
@@ -1570,7 +1570,7 @@ dialog_germans_retreating() {
 dialog_germans_running() {}
 
 dialog_last_charge() {
-  trigger = getent("retreat_starts", "targetname");
+  trigger = getEnt("retreat_starts", "targetname");
   trigger waittill("trigger");
   level.hero1 say_dialogue("reznov", "victory_at_hand");
   level.hero1 say_dialogue("reznov", "cockroaches");

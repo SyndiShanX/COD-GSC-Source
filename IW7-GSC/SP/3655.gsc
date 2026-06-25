@@ -96,12 +96,12 @@ func_4D8A() {
     earthquake(var_10, var_9 * 0.5, self.origin, 512);
     self setstance("stand");
     if(func_9C57()) {
-      self playerlinkto(var_3, "tag_origin", 1);
+      self playerlinkTo(var_3, "tag_origin", 1);
       earthquake(0.2, 0.3, self.origin, 256);
     } else {
       earthquake(var_11, var_12, self.origin, 2048);
       level notify("player_SwimWaterCurrent_lerp_savedDvar");
-      var_7 = vectornormalize(var_7);
+      var_7 = vectorNormalize(var_7);
       setsaveddvar("player_SwimWaterCurrent", var_7 * var_14);
       if(var_8 != 1) {
         thread func_118C4(var_0, var_7);
@@ -192,10 +192,10 @@ func_118C4(var_0, var_1) {
   var_6 = var_4[0] * var_5;
   var_7 = var_4[1] * -1 * var_5;
   var_8 = 0.25;
-  var_0 rotateto((var_6, 0, var_7), var_8, 0, var_8);
+  var_0 rotateTo((var_6, 0, var_7), var_8, 0, var_8);
   var_0 waittill("rotatedone");
   var_9 = 0.75;
-  var_0 rotateto((0, 0, 0), var_9, var_9 * 0.25, var_9 * 0.5);
+  var_0 rotateTo((0, 0, 0), var_9, var_9 * 0.25, var_9 * 0.5);
   var_0 waittill("rotatedone");
 }
 

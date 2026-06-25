@@ -296,7 +296,7 @@ function zeus_bird_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   if(bwastimejump) {
     while(!isDefined(level.var_aaf8da70)) {
       waitframe(1);
-      level.var_aaf8da70 = getent(fieldname, "zeus_bird_head", "targetname");
+      level.var_aaf8da70 = getEnt(fieldname, "zeus_bird_head", "targetname");
     }
 
     util::playFXOnTag(fieldname, level._effect[#"zeus_bird_fx"], level.var_aaf8da70, "bird_follow_jnt");
@@ -327,7 +327,7 @@ function function_ab7cd429(localclientnum, oldval, newval, bnewent, binitialsnap
   level endon(#"demo_jump");
 
   if(!isDefined(level.var_aaf8da70)) {
-    level.var_aaf8da70 = getent(fieldname, "zeus_bird_head", "targetname");
+    level.var_aaf8da70 = getEnt(fieldname, "zeus_bird_head", "targetname");
   }
 
   var_aaf8da70 = level.var_aaf8da70;
@@ -351,14 +351,14 @@ function function_ab7cd429(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwastimejump == 0) {
     var_6d877f48 = array::random(array((7, 7, 7), (-7, -7, -7), (-7, 7, 7), (7, -7, -7)));
-    var_aaf8da70 rotateto(level.var_245eb09f + var_6d877f48, 0.2);
+    var_aaf8da70 rotateTo(level.var_245eb09f + var_6d877f48, 0.2);
     wait 0.8;
-    var_aaf8da70 rotateto(level.var_245eb09f, 0.1);
+    var_aaf8da70 rotateTo(level.var_245eb09f, 0.1);
     return;
   }
 
   var_165f12bb = array::random(array((17, 30, 25), (-10, -30, -25), (-10, 30, 25), (17, -30, -25)));
-  var_aaf8da70 rotateto(level.var_245eb09f + var_165f12bb, 0.15);
+  var_aaf8da70 rotateTo(level.var_245eb09f + var_165f12bb, 0.15);
   var_aaf8da70 thread function_1625e105(self);
 }
 
@@ -379,9 +379,9 @@ function function_1625e105(e_player) {
       var_d1d1cc92 = e_player.origin;
     }
 
-    if(vectordot(vectornormalize(var_d1d1cc92 - self.origin), anglesToForward(level.var_245eb09f)) > 0.5) {
+    if(vectordot(vectorNormalize(var_d1d1cc92 - self.origin), anglesToForward(level.var_245eb09f)) > 0.5) {
       var_a8dcfa = vectortoangles(var_d1d1cc92 - self.origin);
-      self rotateto(var_a8dcfa, 0.15);
+      self rotateTo(var_a8dcfa, 0.15);
     }
 
     wait 0.15;

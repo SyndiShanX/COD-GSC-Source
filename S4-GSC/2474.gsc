@@ -167,11 +167,11 @@ _id_1392(var_0) {
 }
 
 _id_1394(var_0) {
-  var_1 = vectornormalize(anglesToForward(self.angles));
+  var_1 = vectorNormalize(anglesToForward(self.angles));
   var_2 = var_0 - var_1 * 70000 / 2.0;
   var_3 = var_0 + var_1 * 70000 / 2.0;
   self.origin = var_2;
-  self moveto(var_3, 19.5);
+  self moveTo(var_3, 19.5);
   var_4 = 100;
   var_5 = 3589.74;
   var_6 = 0.4;

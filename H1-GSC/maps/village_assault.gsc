@@ -97,7 +97,7 @@ gameplay_start() {
   thread battlechatter_trigger_on();
   maps\village_assault_code::opening_sequence();
   maps\village_assault_code::friendly_stance("stand", "crouch", "prone");
-  var_0 = getent("first_trigger_after_gas_station", "script_noteworthy");
+  var_0 = getEnt("first_trigger_after_gas_station", "script_noteworthy");
 
   if(!isDefined(var_0.trigger_off) || var_0.trigger_off == 0) {
     var_0 notify("trigger");
@@ -107,7 +107,7 @@ gameplay_start() {
     level.friendlies[var_1] pushplayer(1);
   }
 
-  getent("pushplayer_off", "targetname") waittill("trigger");
+  getEnt("pushplayer_off", "targetname") waittill("trigger");
 
   for(var_1 = 0; var_1 < level.friendlies.size; var_1++) {
     level.friendlies[var_1] pushplayer(0);
@@ -117,7 +117,7 @@ gameplay_start() {
 battlechatter_trigger_on() {
   maps\_utility::battlechatter_off("allies");
   maps\_utility::battlechatter_off("axis");
-  getent("battlechatter_on_trigger", "targetname") waittill("trigger");
+  getEnt("battlechatter_on_trigger", "targetname") waittill("trigger");
   maps\_utility::battlechatter_on("allies");
   maps\_utility::battlechatter_on("axis");
   thread maps\village_assault_code::doautosave("entered_town");

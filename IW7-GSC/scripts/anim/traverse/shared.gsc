@@ -442,9 +442,9 @@ func_D999(var_0) {
 }
 
 func_D9BD(var_0) {
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   if(!isDefined(var_1)) {
-    var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   }
 
   self.var_138A6 = spawnStruct();
@@ -455,13 +455,13 @@ func_D9BD(var_0) {
   while(isDefined(var_3)) {
     self.var_138A6.var_C050[var_4] = var_3.origin - self.origin;
     var_4++;
-    var_7 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+    var_7 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     scripts\sp\utility::func_51D4(var_3);
     var_3 = var_7;
     self.var_138A6.var_C050[var_4] = var_3.origin - self.origin;
     var_4++;
     if(isDefined(var_3.target)) {
-      var_10 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+      var_10 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     } else {
       var_10 = undefined;
     }
@@ -488,9 +488,9 @@ func_D9BD(var_0) {
 }
 
 func_126ED() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   if(!isDefined(var_0)) {
-    var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
   }
 
   switch (self.opcode::OP_ScriptMethodCallPointer) {

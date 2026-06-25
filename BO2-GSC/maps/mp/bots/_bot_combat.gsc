@@ -531,7 +531,7 @@ bot_dot_product(origin) {
   angles = self getplayerangles();
   forward = anglesToForward(angles);
   delta = origin - self getplayercamerapos();
-  delta = vectornormalize(delta);
+  delta = vectorNormalize(delta);
   dot = vectordot(forward, delta);
   return dot;
 }
@@ -1430,7 +1430,7 @@ bot_turret_set_dangerous(turret) {
     nodes = getvisiblenodes(nearest);
 
     foreach(node in nodes) {
-      dir = vectornormalize(node.origin - turret.origin);
+      dir = vectorNormalize(node.origin - turret.origin);
       dot = vectordot(forward, dir);
 
       if(dot >= 0.5) {
@@ -1444,7 +1444,7 @@ bot_turret_set_dangerous(turret) {
       if(!nodesvisible(nearest, node)) {
         continue;
       }
-      dir = vectornormalize(node.origin - turret.origin);
+      dir = vectorNormalize(node.origin - turret.origin);
       dot = vectordot(forward, dir);
 
       if(dot >= level.microwave_turret_cone_dot) {
@@ -1459,7 +1459,7 @@ bot_turret_nearest_node(turret) {
   forward = anglesToForward(turret.angles);
 
   foreach(node in nodes) {
-    dir = vectornormalize(node.origin - turret.origin);
+    dir = vectorNormalize(node.origin - turret.origin);
     dot = vectordot(forward, dir);
 
     if(dot > 0.5) {
@@ -1499,7 +1499,7 @@ turret_get_attack_node() {
     if(!nodesvisible(node, nearest)) {
       continue;
     }
-    dir = vectornormalize(node.origin - self.origin);
+    dir = vectorNormalize(node.origin - self.origin);
     dot = vectordot(forward, dir);
 
     if(dot < 0.5) {
@@ -1563,7 +1563,7 @@ bot_riotshield_dangerous_think(enemy, goal) {
     if(!nodesvisible(node, nearest)) {
       continue;
     }
-    dir = vectornormalize(node.origin - enemy.origin);
+    dir = vectorNormalize(node.origin - enemy.origin);
     dot = vectordot(forward, dir);
 
     if(dot < 0) {
@@ -1583,7 +1583,7 @@ bot_riotshield_dangerous_think(enemy, goal) {
   nodes = getnodesinradius(enemy.origin, 512, 0);
 
   foreach(node in nodes) {
-    dir = vectornormalize(node.origin - enemy.origin);
+    dir = vectorNormalize(node.origin - enemy.origin);
     dot = vectordot(forward, dir);
 
     if(dot >= 0.5) {

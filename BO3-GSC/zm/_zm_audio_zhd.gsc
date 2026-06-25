@@ -72,13 +72,13 @@ function function_513f51e1(restart = 0) {
     return;
   }
   if(!(isDefined(restart) && restart)) {
-    playsoundatposition("zmb_sam_egg_success", (0, 0, 0));
+    playSoundAtPosition("zmb_sam_egg_success", (0, 0, 0));
     var_ac086ffb = util::spawn_model(s_ballerina_start.model, s_ballerina_start.origin - vectorscale((0, 0, 1), 20), s_ballerina_start.angles);
     var_ac086ffb clientfield::set("snd_zhdegg", 2);
-    var_ac086ffb moveto(s_ballerina_start.origin, 2);
+    var_ac086ffb moveTo(s_ballerina_start.origin, 2);
     var_ac086ffb waittill("movedone");
   } else {
-    playsoundatposition("zmb_sam_egg_fail", (0, 0, 0));
+    playSoundAtPosition("zmb_sam_egg_fail", (0, 0, 0));
     var_ac086ffb = util::spawn_model(s_ballerina_start.model, s_ballerina_start.origin, s_ballerina_start.angles);
     var_ac086ffb clientfield::set("snd_zhdegg", 1);
   }
@@ -132,7 +132,7 @@ function function_9d55fd08() {
   self endon("ballerina_destroyed");
   self endon("ballerina_timeout");
   while(true) {
-    self.var_ac086ffb rotateyaw(360, 4);
+    self.var_ac086ffb rotateYaw(360, 4);
     wait(4);
   }
 }
@@ -172,7 +172,7 @@ function function_a9a34039() {
 }
 
 function function_5b2770da() {
-  playsoundatposition("zmb_sam_egg_success", (0, 0, 0));
+  playSoundAtPosition("zmb_sam_egg_success", (0, 0, 0));
   s_ballerina_end = struct::get("s_ballerina_end", "targetname");
   s_ballerina_end.var_ac086ffb = util::spawn_model(s_ballerina_end.model, s_ballerina_end.origin, s_ballerina_end.angles);
   s_ballerina_end.var_ac086ffb clientfield::set("snd_zhdegg", 1);
@@ -267,7 +267,7 @@ function snd_monty_radio() {
   }
   s_radio zm_unitrigger::create_unitrigger();
   s_radio waittill("trigger_activated");
-  playsoundatposition("vox_abcd_radio", s_radio.origin);
+  playSoundAtPosition("vox_abcd_radio", s_radio.origin);
   zm_unitrigger::unregister_unitrigger(s_radio.s_unitrigger);
 }
 

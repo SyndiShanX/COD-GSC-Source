@@ -49,9 +49,9 @@ play_nikolai_farting() {
   }
 }
 play_intro_audio() {
-  playsoundatposition("evt_sq_lgs_meteor_incoming", (-1680, -780, 147));
+  playSoundAtPosition("evt_sq_lgs_meteor_incoming", (-1680, -780, 147));
   wait(3.3);
-  playsoundatposition("evt_sq_lgs_meteor_impact", (-1229, -1642, 198));
+  playSoundAtPosition("evt_sq_lgs_meteor_impact", (-1229, -1642, 198));
 }
 first_damage() {
   self endon("death");
@@ -118,7 +118,7 @@ check_for_closed_slide(ent) {
               players[i] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 7);
             }
           }
-          self._crystal StopAnimScripted();
+          self._crystal StopanimScripted();
           while(!flag("waterslide_open")) {
             self SetSpeedImmediate(0);
             wait(0.05);
@@ -161,12 +161,12 @@ lgs_crystal() {
   self playSound("evt_sq_lgs_crystal_pry");
   target = self.target;
   while(isDefined(target)) {
-    struct = getstruct(target, "targetname");
+    struct = getStruct(target, "targetname");
     time = struct.script_float;
     if(!isDefined(time)) {
       time = 1.0;
     }
-    self moveto(struct.origin, time, time / 10);
+    self moveTo(struct.origin, time, time / 10);
     self waittill("movedone");
     self playSound("evt_sq_lgs_crystal_hit1");
     target = struct.target;
@@ -197,15 +197,15 @@ lgs_crystal() {
   self NotSolid();
   self UseAnimTree(#animtree);
   self.animname = "crystal";
-  vehicle = SpawnVehicle("p_ztem_glyphs_00", "crystal_mover", "misc_freefall", self.origin, self.angles);
+  vehicle = spawnVehicle("p_ztem_glyphs_00", "crystal_mover", "misc_freefall", self.origin, self.angles);
   vehicle Hide();
   vehicle._crystal = self;
   level._lgs_veh = vehicle;
   wait_network_frame();
   origin_animate = spawn("script_model", vehicle.origin);
   origin_animate setModel("tag_origin_animate");
-  self LinkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (90, 0, 0));
-  origin_animate LinkTo(vehicle);
+  self linkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (90, 0, 0));
+  origin_animate linkTo(vehicle);
   origin_animate thread maps\_anim::anim_loop_aligned(self, "spin", "tag_origin_animate_jnt");
   vehicle attachpath(getvehiclenode("sq_lgs_node_start", "targetname"));
   vehicle startpath();
@@ -213,7 +213,7 @@ lgs_crystal() {
   vehicle thread water_trail(self);
   vehicle thread check_for_closed_slide(self);
   vehicle waittill("reached_end_node");
-  self StopAnimScripted();
+  self StopanimScripted();
   self Unlink();
   self thread crystal_bobble();
   vehicle Delete();
@@ -221,7 +221,7 @@ lgs_crystal() {
   flag_wait("minecart_geyser_active");
   self notify("kill_bobble");
   self setclientflag(level._CF_SCRIPTMOVER_CLIENT_FLAG_WATER_TRAIL);
-  self moveto(self.origin + (0, 0, 4000), 2, 0.1);
+  self moveTo(self.origin + (0, 0, 4000), 2, 0.1);
   level notify("suspend_timer");
   level notify("raise_crystal_1");
   level notify("raise_crystal_2");
@@ -229,11 +229,11 @@ lgs_crystal() {
   level waittill("raised_crystal_3");
   self clearclientflag(level._CF_SCRIPTMOVER_CLIENT_FLAG_WATER_TRAIL);
   wait(2);
-  holder = GetEnt("empty_holder", "script_noteworthy");
+  holder = getEnt("empty_holder", "script_noteworthy");
   self.origin = (holder.origin[0], holder.origin[1], self.origin[2]);
   self setModel("p_ztem_crystal");
-  playsoundatposition("evt_sq_lgs_crystal_incoming", (holder.origin[0], holder.origin[1], holder.origin[2] + 134));
-  self moveto((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
+  playSoundAtPosition("evt_sq_lgs_crystal_incoming", (holder.origin[0], holder.origin[1], holder.origin[2] + 134));
+  self moveTo((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
   self waittill("movedone");
   self stoploopsound(1);
   self playSound("evt_sq_lgs_crystal_landinholder");
@@ -249,7 +249,7 @@ crystal_spin() {
   self endon("kill_bobble");
   while(1) {
     t = RandomFloatRange(0.2, 0.8);
-    self RotateTo((180 + RandomFloat(180), 300 + RandomFloat(60), 180 + RandomFloat(180)), t);
+    self rotateTo((180 + RandomFloat(180), 300 + RandomFloat(60), 180 + RandomFloat(180)), t);
     wait t;
   }
 }
@@ -261,9 +261,9 @@ crystal_bobble() {
   bottom_pos = node.origin + (0, 0, 4);
   top_pos = bottom_pos + (0, 0, 3);
   while(1) {
-    self moveto(top_pos + (0, 0, RandomFloat(3)), 0.2 + RandomFloat(0.1), 0.1);
+    self moveTo(top_pos + (0, 0, RandomFloat(3)), 0.2 + RandomFloat(0.1), 0.1);
     self waittill("movedone");
-    self moveto(bottom_pos + (0, 0, RandomFloat(5)), 0.05 + RandomFloat(0.07), 0, 0.03);
+    self moveTo(bottom_pos + (0, 0, RandomFloat(5)), 0.05 + RandomFloat(0.07), 0, 0.03);
     self waittill("movedone");
   }
 }

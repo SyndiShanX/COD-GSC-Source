@@ -241,7 +241,7 @@ pickup_placeable_mine_trigger_listener_enable(trigger, player) {
     }
 
     trigger triggerenable(1);
-    trigger linkto(self);
+    trigger linkTo(self);
   }
 }
 
@@ -321,7 +321,7 @@ replenish_after_rounds() {
     }
 
     if(!level flag::exists("teleporter_used") || !level flag::get("teleporter_used")) {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         foreach(mine in zm_loadout::function_5a5a742a("placeable_mine")) {

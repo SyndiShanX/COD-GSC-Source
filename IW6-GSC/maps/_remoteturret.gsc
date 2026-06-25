@@ -54,7 +54,7 @@ remote_turret_terminal_think() {
   var_0.angles = self.angles;
   var_0 setModel("com_laptop_2_open_obj");
   var_0 makeusable();
-  var_0 sethintstring(&"PLATFORM_HOLD_TO_USE");
+  var_0 setHintString(&"PLATFORM_HOLD_TO_USE");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -250,7 +250,7 @@ turret_activate(var_0, var_1) {
   }
 
   self setplayerangles((var_3[0], var_3[1], self.angles[2]));
-  self playerlinkto(var_0, "tag_player", 0, var_0.rightarc * 0.9, var_0.leftarc * 0.9, var_0.toparc * 0.9, var_0.bottomarc * 0.9);
+  self playerlinkTo(var_0, "tag_player", 0, var_0.rightarc * 0.9, var_0.leftarc * 0.9, var_0.toparc * 0.9, var_0.bottomarc * 0.9);
   var_0 turretfireenable();
   var_0 makeusable();
   var_0 useby(self);

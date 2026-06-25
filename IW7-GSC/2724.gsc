@@ -5,7 +5,7 @@
 
 func_13A12() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   self.killcament = var_0;
   thread func_A639(var_0);
   thread scripts\mp\utility\game::notifyafterframeend("death", "end_explode");
@@ -131,7 +131,7 @@ empsitewatcher(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait 0.05;
   }
 }

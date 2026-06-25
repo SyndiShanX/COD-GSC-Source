@@ -145,10 +145,10 @@ function watchplacement(placeable) {
     if(placeable.canbeplaced != lastattempt) {
       if(placeable.canbeplaced) {
         placeable setModel(placeable.validmodel);
-        player sethintstring(istring(placeable.placehintstring));
+        player setHintString(istring(placeable.placehintstring));
       } else {
         placeable setModel(placeable.invalidmodel);
-        player sethintstring(istring(placeable.invalidlocationhintstring));
+        player setHintString(istring(placeable.invalidlocationhintstring));
       }
       lastattempt = placeable.canbeplaced;
     }
@@ -159,7 +159,7 @@ function watchplacement(placeable) {
       if(placement["result"]) {
         placeable.origin = placement["origin"];
         placeable.angles = placement["angles"];
-        player sethintstring("");
+        player setHintString("");
         player stopcarryturret(placeable);
         if(!player util::isweaponenabled()) {
           player util::_enableweapon();
@@ -267,8 +267,8 @@ function cancelongameend(placeable) {
 function spawnmovetrigger(placeable, player) {
   pos = placeable.origin + vectorscale((0, 0, 1), 15);
   placeable.pickuptrigger = spawn("trigger_radius_use", pos);
-  placeable.pickuptrigger setcursorhint("HINT_NOICON", placeable);
-  placeable.pickuptrigger sethintstring(placeable.pickupstring);
+  placeable.pickuptrigger setCursorHint("HINT_NOICON", placeable);
+  placeable.pickuptrigger setHintString(placeable.pickupstring);
   placeable.pickuptrigger setteamfortrigger(player.team);
   player clientclaimtrigger(placeable.pickuptrigger);
   placeable thread watchpickup(player);
@@ -346,7 +346,7 @@ function shutdownoncancelevent(placeable) {
   assert(isPlayer(player));
   placeable util::waittill_any("cancelled", "death");
   if(isDefined(player) && isDefined(placeable) && placeable.held === 1) {
-    player sethintstring("");
+    player setHintString("");
     player stopcarryturret(placeable);
     if(!player util::isweaponenabled()) {
       player util::_enableweapon();

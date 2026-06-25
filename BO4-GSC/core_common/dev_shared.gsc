@@ -35,7 +35,7 @@ devgui_test_chart_think() {
       }
 
       if(val) {
-        player = getplayers()[0];
+        player = getPlayers()[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward((0, direction[1], 0));
         direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
@@ -46,7 +46,7 @@ devgui_test_chart_think() {
     }
 
     if(val) {
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(val == 1) {
         level.test_chart_model setModel(#"test_chart_model");
@@ -95,7 +95,7 @@ updateminimapsetting() {
 
     if(minimapheight > 0) {
       level.minimapheight = minimapheight;
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size > 0) {
         player = util::gethostplayer();
@@ -226,10 +226,10 @@ drawminimapbounds(viewpos, mincorner, maxcorner) {
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   diaglen = length(mincorner - maxcorner);
   mincorneroffset = mincorner - viewpos;
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner += vecscale(mincorneroffset, diaglen * 1 / 800);
   maxcorneroffset = maxcorner - viewpos;
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner += vecscale(maxcorneroffset, diaglen * 1 / 800);
   diagonal = maxcorner - mincorner;
   side = vecscale(north, vectordot(diagonal, north));
@@ -255,7 +255,7 @@ minimapwarn(corners) {}
 
 function_e5746ec1() {
   host = util::gethostplayer();
-  all_players = getplayers();
+  all_players = getPlayers();
   var_1645eaac = host getstance() == "<dev string:xbf>";
 
   if(!isDefined(host) || var_1645eaac) {

@@ -3381,7 +3381,7 @@ rumbler() {
   self endon("disconnect");
   while(1) {
     wait(0.1);
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -5297,7 +5297,7 @@ finishPlayerDamageWrapper(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath
 
 damageShellshockAndRumble(eInflictor, sWeapon, sMeansOfDeath, iDamage) {
   self thread maps\mp\gametypes\_weapons::onWeaponDamage(eInflictor, sWeapon, sMeansOfDeath, iDamage);
-  self PlayRumbleOnEntity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 default_getTeamKillPenalty(eInflictor, attacker, sMeansOfDeath, sWeapon) {

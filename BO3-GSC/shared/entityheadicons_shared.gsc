@@ -107,7 +107,7 @@ function updateentityheadteamicon(entity, team, icon, constant_size) {
   headicon.color = (friendly_blue_color[0], friendly_blue_color[1], friendly_blue_color[2]);
   headicon setshader(icon, 6, 6);
   headicon setwaypoint(constant_size);
-  headicon settargetent(entity);
+  headicon settargetEnt(entity);
   entity.entityheadicons[entity.entityheadicons.size] = headicon;
 }
 
@@ -120,7 +120,7 @@ function updateentityheadclienticon(entity, icon, constant_size) {
   headicon.alpha = 0.8;
   headicon setshader(icon, 6, 6);
   headicon setwaypoint(constant_size);
-  headicon settargetent(entity);
+  headicon settargetEnt(entity);
   entity.entityheadicons[entity.entityheadicons.size] = headicon;
 }
 

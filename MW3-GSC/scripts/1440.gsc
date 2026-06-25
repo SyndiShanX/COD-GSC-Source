@@ -96,7 +96,7 @@ _id_43FC(var_0) {
 }
 
 _id_43FD(var_0) {
-  var_1 = vectornormalize(self.origin - var_0);
+  var_1 = vectorNormalize(self.origin - var_0);
   var_1 = var_1 * (250 + randomint(100));
   var_2 = var_1[0];
   var_3 = var_1[1];
@@ -125,7 +125,7 @@ _id_43FE(var_0, var_1) {
       var_2[var_3] setModel("woodgib_small2");
     }
     var_1 = var_1 + (50 - randomint(100), 50 - randomint(100), 0);
-    var_4 = vectornormalize(var_0 - var_1);
+    var_4 = vectorNormalize(var_0 - var_1);
     var_4 = var_4 * (300 + randomint(150));
     var_5 = var_4[0];
     var_6 = var_4[1];

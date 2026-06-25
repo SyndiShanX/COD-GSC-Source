@@ -93,7 +93,7 @@ _id_4095() {
 _id_4096() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_intro"], var_0, "tag_origin");
   self waittillmatch("noteworthy", "flare_intro_node");
   var_0 delete();
@@ -103,7 +103,7 @@ _id_4097() {
   level notify("flare_explodes");
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner"], var_0, "tag_origin");
   self waittillmatch("noteworthy", "flare_fade_node");
   var_0 delete();
@@ -112,7 +112,7 @@ _id_4097() {
 _id_409A() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_fizzout"], var_0, "tag_origin");
   var_0 delete();
   level notify("flare_done");

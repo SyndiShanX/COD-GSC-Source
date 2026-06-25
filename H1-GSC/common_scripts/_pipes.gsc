@@ -57,7 +57,7 @@ pipe_calc_splash(var_0, var_1) {
     return undefined;
   }
 
-  var_2 = vectornormalize(vectorfromlinetopoint(self.a, self.b, var_0));
+  var_2 = vectorNormalize(vectorfromlinetopoint(self.a, self.b, var_0));
   var_0 = pointonsegmentnearesttopoint(self.a, self.b, var_0);
   return var_0 + common_scripts\utility::vectorscale(var_2, 4);
 }
@@ -140,7 +140,7 @@ pipebreakinit(var_0) {
     self[var_1].fxnode.up = anglesToForward(self[var_1].angles);
 
     if(self[var_1].script_noteworthy == "fueltanker") {
-      var_2 = common_scripts\utility::getstruct(self[var_1].whole.target, "targetname");
+      var_2 = common_scripts\utility::getStruct(self[var_1].whole.target, "targetname");
       self[var_1].fxnode.origin = var_2.origin;
       self[var_1].fxnode.forward = anglestoup(var_2.angles);
       self[var_1].fxnode.up = anglesToForward(var_2.angles);
@@ -362,7 +362,7 @@ pipesetup() {
   if(isDefined(self.script_parameters) && self.script_parameters == "use_bullet_hitnormal") {
     self.use_bullet_hitnormal = 1;
   } else if(isDefined(self.target)) {
-    var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(self.target, "targetname");
 
     if(isDefined(var_0)) {
       self.a = var_0.origin;

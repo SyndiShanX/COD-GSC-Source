@@ -267,7 +267,7 @@ function function_1e962dea() {
     }
 
     anim_ang = vectortoangles(level.doa.var_e3c3fa5a.origin - self.origin);
-    self rotateto((0, anim_ang[1], 0), randomfloatrange(0.5, 2));
+    self rotateTo((0, anim_ang[1], 0), randomfloatrange(0.5, 2));
     self waittill(#"rotatedone");
   }
 }
@@ -371,7 +371,7 @@ function function_52be2241() {
   silverback thread namespace_ec06fe4a::function_d55f042c(level, "podiumAllDone");
   silverback.takedamage = 0;
   silverback.ignoreall = 1;
-  silverback linkto(org);
+  silverback linkTo(org);
   wait 0.5;
   org namespace_83eb6304::function_3ecfde67("lightningStrike");
   org namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
@@ -382,13 +382,13 @@ function function_52be2241() {
   level notify(#"hash_6b71fd0ed387fe82");
   silverback thread namespace_6e90e490::function_47e11416(47, 3, 1);
   wait 2;
-  org moveto(org.origin + (0, 0, 1500), 2);
+  org moveTo(org.origin + (0, 0, 1500), 2);
   org namespace_83eb6304::function_3ecfde67("turret_impact");
   org namespace_e32bb68::function_3a59ec34("evt_doa_outro_mamaback_takeoff");
   wait 2;
   org.origin = var_48fff83e.origin + (0, 0, 1500);
   org.angles = var_48fff83e.angles;
-  org moveto(var_48fff83e.origin, 2);
+  org moveTo(var_48fff83e.origin, 2);
   wait 2;
   org namespace_83eb6304::function_3ecfde67("turret_impact");
   org namespace_e32bb68::function_3a59ec34("evt_doa_outro_mamaback_land");
@@ -407,7 +407,7 @@ function function_52be2241() {
   level notify(#"hash_691cb7b4a4340202");
   org namespace_83eb6304::function_3ecfde67("turret_impact");
   org namespace_e32bb68::function_3a59ec34("evt_doa_outro_mamaback_takeoff");
-  org moveto(var_48fff83e.origin + (0, 0, 1500), 2);
+  org moveTo(var_48fff83e.origin + (0, 0, 1500), 2);
   wait 1;
   level thread function_c6630cce(weapon, org, level.doa.var_258d537d.var_b969d349[3]);
   wait 0.25;
@@ -419,7 +419,7 @@ function function_52be2241() {
   wait 0.25;
   level notify(#"hash_749ca0969fe37f63");
   org.origin = var_dde0062d.origin + (0, 0, 1500);
-  org moveto(var_dde0062d.origin, 2);
+  org moveTo(var_dde0062d.origin, 2);
   org namespace_83eb6304::function_3ecfde67("turret_impact");
 
   if(namespace_ec06fe4a::function_a8975c67()) {
@@ -512,7 +512,7 @@ function function_c6630cce(weapon, org, var_ec941905, killnote) {
 }
 
 function function_258d537d() {
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     return;
   }
 
@@ -531,7 +531,7 @@ function function_258d537d() {
   level clientfield::set("banner_event", 0);
   level.var_7dcdbe16 = 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       continue;
     }
@@ -626,7 +626,7 @@ function function_258d537d() {
 
   level.var_7dcdbe16 = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("cutscene", 0);
     player clientfield::increment_to_player("resetCamera");
     level clientfield::set_world_uimodel(player.doa.score.var_d252ca7f, 1);

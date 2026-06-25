@@ -128,7 +128,7 @@ run_scene(str_scene, n_lerp_time, b_test_run, clientside_linkto) {
 
   foreach(e_asset in a_active_anims) {
     if(level.script == "mov_av7") {
-      e_asset anim_stopanimscripted();
+      e_asset anim_stopanimScripted();
     }
 
     e_asset thread _animate_asset(str_scene, align_object, n_lerp_time, b_test_run);
@@ -213,7 +213,7 @@ end_scene(str_scene) {
       s_scene_info.a_ai_anims = __new;
 
       foreach(ai_anim in s_scene_info.a_ai_anims) {
-        ai_anim anim_stopanimscripted(0.2);
+        ai_anim anim_stopanimScripted(0.2);
       }
     }
 
@@ -234,7 +234,7 @@ end_scene(str_scene) {
       s_scene_info.a_model_anims = __new;
 
       foreach(m_anim in s_scene_info.a_model_anims) {
-        m_anim anim_stopanimscripted(0.2);
+        m_anim anim_stopanimScripted(0.2);
       }
     }
 
@@ -535,7 +535,7 @@ _get_align_object(str_scene) {
   if(isDefined(self.align_object)) {
     align_object = self.align_object;
   } else if(isDefined(self.str_align_targetname)) {
-    align_object = getstruct(self.str_align_targetname, "targetname");
+    align_object = getStruct(self.str_align_targetname, "targetname");
 
     if(!isDefined(align_object)) {
       align_object = getnode(self.str_align_targetname, "targetname");
@@ -543,7 +543,7 @@ _get_align_object(str_scene) {
       if(isDefined(align_object)) {
         align_object.is_node = 1;
       } else {
-        align_object = getent(self.str_align_targetname, "targetname");
+        align_object = getEnt(self.str_align_targetname, "targetname");
       }
     } else {
       s_align = spawnStruct();
@@ -576,7 +576,7 @@ _assemble_assets(str_scene, clientside_linkto, b_test_run, b_skip_ai, b_first_fr
     if(str_anim_key == "generic") {
       continue;
     }
-    m_model = getent(s_asset_info.str_name, "targetname");
+    m_model = getEnt(s_asset_info.str_name, "targetname");
     b_model_exists = isDefined(m_model) && !(isDefined(m_model._scene_deleting) && m_model._scene_deleting);
 
     if((isDefined(s_asset_info.str_model) || isDefined(s_asset_info.str_vehicletype) || isDefined(s_asset_info.n_player_number)) && !isDefined(level.scene_sys.a_active_anim_models[s_asset_info.str_name]) && !b_model_exists) {
@@ -656,9 +656,9 @@ _assemble_non_existent_model(str_scene, b_first_frame, clientside_linkto) {
   m_ready.targetname = self.str_name;
 
   if(clientside_linkto) {
-    m_ready enableclientlinkto();
+    m_ready enableclientlinkTo();
   } else {
-    m_ready disableclientlinkto();
+    m_ready disableclientlinkTo();
   }
 
   s_scene_info = level.a_scenes[str_scene];
@@ -753,7 +753,7 @@ _setup_model_for_scene(s_asset_info, s_scene_info, b_first_frame) {
   if(isDefined(s_asset_info.b_connect_paths) && s_asset_info.b_connect_paths) {
     if(b_first_frame) {
       wait_network_frame();
-      self disconnectpaths();
+      self disconnectPaths();
     } else {
       self connectpaths();
       self.b_disconnect_paths_after_scene = 1;
@@ -910,9 +910,9 @@ _assemble_already_exist_model(str_scene, b_first_frame, clientside_linkto) {
     m_exist init_anim_model(self.str_name, self.is_simple_prop, s_asset_info.anim_tree);
 
     if(clientside_linkto) {
-      m_exist enableclientlinkto();
+      m_exist enableclientlinkTo();
     } else {
-      m_exist disableclientlinkto();
+      m_exist disableclientlinkTo();
     }
 
     m_exist thread _setup_asset_for_scene(self, s_scene_info, b_first_frame);
@@ -967,9 +967,9 @@ _assemble_multiple_ais(str_scene, b_test_run, clientside_linkto) {
   if(a_ai_spawned.size > 0) {
     foreach(ai_spawned in a_ai_spawned) {
       if(clientside_linkto) {
-        ai_spawned enableclientlinkto();
+        ai_spawned enableclientlinkTo();
       } else {
-        ai_spawned disableclientlinkto();
+        ai_spawned disableclientlinkTo();
       }
 
       ai_spawned thread _setup_asset_for_scene(self, s_scene_info);
@@ -1028,9 +1028,9 @@ _assemble_single_ai(str_scene, str_anim_key, b_test_run, clientside_linkto) {
 
   if(isalive(ai_found)) {
     if(clientside_linkto) {
-      ai_found enableclientlinkto();
+      ai_found enableclientlinkTo();
     } else {
-      ai_found disableclientlinkto();
+      ai_found disableclientlinkTo();
     }
 
     ai_found thread _setup_asset_for_scene(self, s_scene_info);
@@ -1232,7 +1232,7 @@ _run_anim_single_on_asset(str_scene, align_object, n_lerp_time) {
     }
 
     if(isDefined(self.b_connect_paths) && self.b_connect_paths) {
-      self disconnectpaths();
+      self disconnectPaths();
     }
 
     if(isDefined(align_object.is_node) && align_object.is_node) {
@@ -1267,7 +1267,7 @@ _scene_set_goal(align_object, str_scene) {
 _scene_link(align_object, str_tag) {
   self endon("death");
   self._scene_linking = 1;
-  self linkto(align_object, str_tag);
+  self linkTo(align_object, str_tag);
   waittillframeend;
   self._scene_linking = undefined;
 }
@@ -1288,7 +1288,7 @@ _run_anim_first_frame_on_asset(str_scene, align_object, b_clear_anim) {
     self anim_first_frame(self, str_scene);
   } else {
     if(isDefined(self.str_tag) && self != align_object) {
-      self linkto(align_object, self.str_tag);
+      self linkTo(align_object, self.str_tag);
     }
 
     align_object anim_first_frame(self, str_scene, self.str_tag);
@@ -1301,7 +1301,7 @@ _run_anim_first_frame_on_asset(str_scene, align_object, b_clear_anim) {
 
 _clear_anim_first_frame() {
   wait_network_frame();
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 _get_models_from_radiant(str_scene) {
@@ -1404,7 +1404,7 @@ _delete_models(str_scene, b_specific_models, b_keep_radiant_ents) {
   }
   foreach(model in level.a_scenes[str_scene].a_model_anims) {
     if(isDefined(model)) {
-      model enableclientlinkto();
+      model enableclientlinkTo();
 
       if(isDefined(model.do_delete) && model.do_delete && !(isDefined(model.is_drone_corpse) && model.is_drone_corpse) || !b_specific_models && (!(isDefined(b_keep_radiant_ents) && b_keep_radiant_ents) || !(isDefined(model._radiant_ent) && model._radiant_ent))) {
         if(isDefined(model.n_player_number)) {
@@ -1417,7 +1417,7 @@ _delete_models(str_scene, b_specific_models, b_keep_radiant_ents) {
       }
 
       if(isDefined(model.b_disconnect_paths_after_scene) && model.b_disconnect_paths_after_scene) {
-        model disconnectpaths();
+        model disconnectPaths();
       }
     }
   }
@@ -1498,7 +1498,7 @@ _delete_ais(str_scene, b_specific_ais) {
 
   foreach(ai in level.a_scenes[str_scene].a_ai_anims) {
     if(isDefined(ai)) {
-      ai enableclientlinkto();
+      ai enableclientlinkTo();
 
       if(!b_specific_ais || isDefined(ai.do_delete) && ai.do_delete) {
         ai thread _delete_at_frame_end();
@@ -1904,7 +1904,7 @@ add_vehicle_anim(str_animname, animation, do_delete, a_parts, str_tag, b_animate
 }
 
 _spawn_vehicle_for_anim() {
-  veh = spawnvehicle(self.str_model, self.str_name, self.str_vehicletype, (0, 0, 0), (0, 0, 0), self.str_destructibledef);
+  veh = spawnVehicle(self.str_model, self.str_name, self.str_vehicletype, (0, 0, 0), (0, 0, 0), self.str_destructibledef);
   maps\_vehicle::vehicle_init(veh);
   return veh;
 }
@@ -2213,15 +2213,15 @@ _scene_time_scale_off(e_scene_object) {
 }
 
 _scene_rumble_light(e_scene_object) {
-  e_scene_object playrumbleonentity("anim_light");
+  e_scene_object playRumbleOnEntity("anim_light");
 }
 
 _scene_rumble_med(e_scene_object) {
-  e_scene_object playrumbleonentity("anim_med");
+  e_scene_object playRumbleOnEntity("anim_med");
 }
 
 _scene_rumble_heavy(e_scene_object) {
-  e_scene_object playrumbleonentity("anim_heavy");
+  e_scene_object playRumbleOnEntity("anim_heavy");
 }
 
 autoexec run_scene_tests() {

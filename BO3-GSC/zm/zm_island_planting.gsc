@@ -127,38 +127,38 @@ function function_fedc998b(var_e7abf7d0 = 0) {
 
 function planting_spot_trigger_visibility(e_player) {
   if(e_player zm_utility::in_revive_trigger()) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(e_player.is_drinking > 0) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(!zm_utility::is_player_valid(e_player)) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.s_parent.s_plant.var_198c12a1 == 1) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.s_parent.var_75c7a97e == 0) {
     if(e_player clientfield::get_to_player("has_island_seed")) {
-      self sethintstring(&"ZM_ISLAND_PLANT_SEED");
+      self setHintString(&"ZM_ISLAND_PLANT_SEED");
       return true;
     }
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.s_parent.var_594609f9 == 0 && self.stub.s_parent.s_plant.var_4d34f582 == 0 && self.stub.s_parent.s_plant.var_5a41bc99 == 0 && self.stub.s_parent.var_e7abf7d0 == 0) {
     if(isDefined(e_player.var_6fd3d65c) && e_player.var_6fd3d65c && e_player.var_bb2fd41c > 0) {
-      self sethintstring(&"ZM_ISLAND_WATER_PLANT");
+      self setHintString(&"ZM_ISLAND_WATER_PLANT");
       return true;
     }
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"");
+  self setHintString(&"");
   return false;
 }
 
@@ -252,7 +252,7 @@ function function_447658c7(var_9636d237, var_f40460f5) {
         }
         case 2: {
           self.s_plant.model solid();
-          self.s_plant.model disconnectpaths();
+          self.s_plant.model disconnectPaths();
           self.s_plant.model clientfield::set("plant_growth_siege_anims", 2);
           self scene::play("p7_fxanim_zm_island_plant_stage2_bundle", self.s_plant.model);
           self.s_plant.model playSound("evt_island_seed_grow_stage_3");
@@ -322,7 +322,7 @@ function function_49a83594() {
             wait(0.05);
           }
           player playlocalsound(level.zmb_laugh_alias);
-          player setorigin(v_moveto);
+          player setOrigin(v_moveto);
           player dodamage(player.health, self.origin);
         }
       }
@@ -610,11 +610,11 @@ function function_41663231(b_upgraded = 0) {
     self.var_561a9c48 notify("minor_cache_plant_spawned");
   }
   level notify("minor_cache_plant_spawned");
-  self.s_plant.model stopanimscripted();
+  self.s_plant.model stopanimScripted();
   self.s_plant.model setModel("p7_fxanim_zm_island_plant_cache_minor_mod");
   self.s_plant.model show();
   self.s_plant.model solid();
-  self.s_plant.model disconnectpaths();
+  self.s_plant.model disconnectPaths();
   self.s_plant.model clientfield::set("cache_plant_interact_fx", 1);
   self thread scene::init("p7_fxanim_zm_island_plant_cache_minor_bundle", self.s_plant.model);
   self.s_plant.model waittill("hash_1879b5e4");
@@ -721,22 +721,22 @@ function function_a6ebbe13() {
 
 function function_be57d4be(e_player) {
   if(e_player zm_utility::in_revive_trigger()) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(e_player.is_drinking > 0) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(!zm_utility::is_player_valid(e_player)) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.s_parent.s_plant flag::get("plant_interact_trigger_used")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_ISLAND_CACHE_PLANT");
+  self setHintString(&"ZM_ISLAND_CACHE_PLANT");
   return true;
 }
 
@@ -810,7 +810,7 @@ function function_a6084535(b_upgraded = 0, var_98b687fa) {
     self.var_561a9c48 notify("major_cache_plant_spawned");
   }
   level notify("major_cache_plant_spawned");
-  self.s_plant.model stopanimscripted();
+  self.s_plant.model stopanimScripted();
   if(b_upgraded == 1) {
     self.s_plant.model setModel("p7_fxanim_zm_island_plant_cache_major_glow_mod");
   } else {
@@ -819,7 +819,7 @@ function function_a6084535(b_upgraded = 0, var_98b687fa) {
   self.s_plant.model clientfield::set("cache_plant_interact_fx", 1);
   self.s_plant.model show();
   self.s_plant.model solid();
-  self.s_plant.model disconnectpaths();
+  self.s_plant.model disconnectPaths();
   self thread scene::init("p7_fxanim_zm_island_plant_cache_major_bundle", self.s_plant.model);
   self.s_plant.model waittill("hash_aa2731d8");
   self thread function_192bd777();
@@ -917,22 +917,22 @@ function function_192bd777() {
 
 function function_4fdc4f62(e_player) {
   if(e_player zm_utility::in_revive_trigger()) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(e_player.is_drinking > 0) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(!zm_utility::is_player_valid(e_player)) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.s_parent.s_plant flag::get("plant_interact_trigger_used")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_ISLAND_CACHE_PLANT");
+  self setHintString(&"ZM_ISLAND_CACHE_PLANT");
   return true;
 }
 
@@ -976,7 +976,7 @@ function function_12c8548e(b_upgraded = 0) {
   }
   self.s_plant.model show();
   self.s_plant.model solid();
-  self.s_plant.model disconnectpaths();
+  self.s_plant.model disconnectPaths();
   self.model clientfield::set("babysitter_plant_fx", 1);
   self scene::init("zm_dlc2_plant_babysitter_intro", self.s_plant.model);
   self.s_plant.model waittill("hash_fca5370b");
@@ -1060,7 +1060,7 @@ function function_12c8548e(b_upgraded = 0) {
   self.model clientfield::set("babysitter_plant_fx", 0);
   self.s_plant.trigger delete();
   wait(0.05);
-  self.s_plant.model stopanimscripted();
+  self.s_plant.model stopanimScripted();
   wait(0.05);
 }
 
@@ -1095,7 +1095,7 @@ function function_14ae573d(a_ents) {
     n_dist = distance2dsquared(player.origin, v_org);
     if(n_dist < 2304) {
       player dodamage(50, player.origin);
-      player playrumbleonentity("damage_light");
+      player playRumbleOnEntity("damage_light");
     }
   }
   a_enemy_ai = getaiteamarray("axis");
@@ -1186,7 +1186,7 @@ function function_5d62716(b_upgraded = 0, var_f40460f5) {
   }
   self.s_plant.model show();
   self.s_plant.model solid();
-  self.s_plant.model disconnectpaths();
+  self.s_plant.model disconnectPaths();
   self.model clientfield::set("trap_plant_fx", 1);
   self scene::init("zm_dlc2_plant_trap_intro", self.s_plant.model);
   self.s_plant.model waittill("hash_73ada233");
@@ -1202,7 +1202,7 @@ function function_5d62716(b_upgraded = 0, var_f40460f5) {
   self thread scene::play("zm_dlc2_plant_trap_outro", self.s_plant.model);
   self.s_plant.model waittill("hash_2df6714");
   wait(0.05);
-  self.s_plant.model stopanimscripted();
+  self.s_plant.model stopanimScripted();
   wait(0.05);
 }
 
@@ -1496,7 +1496,7 @@ function function_9e124689(a_ents) {
     v_org = var_31678178 gettagorigin("tag_plant_grab");
     v_angles = var_31678178 gettagangles("tag_plant_grab");
     var_c40b12dc = util::spawn_model(var_fdbb0645, v_org, v_angles);
-    var_c40b12dc linkto(var_31678178, "tag_plant_grab");
+    var_c40b12dc linkTo(var_31678178, "tag_plant_grab");
     var_31678178 waittill("hash_af56254a");
     var_c40b12dc delete();
   }
@@ -1543,7 +1543,7 @@ function function_7f34488a(str_loc, var_23237415 = 0) {
     n_dist = distance2dsquared(player.origin, v_org);
     if(n_dist < 2304) {
       player dodamage(50, player.origin);
-      player playrumbleonentity("damage_light");
+      player playRumbleOnEntity("damage_light");
       player zm_island_vo::function_1881817("trap", "plant_attacked", 10, 3);
     }
   }
@@ -1579,7 +1579,7 @@ function function_3e429652() {
   self.s_plant.model setModel("p7_fxanim_zm_island_plant_clone_grow_mod");
   self.s_plant.model show();
   self.s_plant.model solid();
-  self.s_plant.model disconnectpaths();
+  self.s_plant.model disconnectPaths();
   self thread scene::init("p7_fxanim_zm_island_plant_clone_grow1_bundle", self.s_plant.model);
   self.s_plant.model waittill("hash_83d08c0f");
   self thread function_b78c42da();
@@ -1610,7 +1610,7 @@ function function_3e429652() {
     }
   }
   wait(0.05);
-  self.s_plant.model stopanimscripted();
+  self.s_plant.model stopanimScripted();
   wait(0.05);
 }
 
@@ -1665,26 +1665,26 @@ function function_b78c42da() {
 
 function function_d4d40251(e_player) {
   if(e_player zm_utility::in_revive_trigger()) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(e_player.is_drinking > 0) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(!zm_utility::is_player_valid(e_player)) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(!e_player zm_magicbox::can_buy_weapon()) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.s_parent.s_plant flag::get("plant_interact_trigger_used")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_ISLAND_CLONE_PLANT");
+  self setHintString(&"ZM_ISLAND_CLONE_PLANT");
   return true;
 }
 
@@ -1776,7 +1776,7 @@ function func_clone_plant_respawn() {
   }
   self notify("stop_revive_trigger");
   wait(0.05);
-  self setorigin(self.s_clone_plant.origin);
+  self setOrigin(self.s_clone_plant.origin);
   self setplayerangles(self.s_clone_plant.angles);
   self.s_clone_plant = undefined;
   self zm_laststand::auto_revive(self);
@@ -1924,7 +1924,7 @@ function function_fd098f17(b_upgraded = 0) {
   self.s_plant.model setModel(var_d583f9d);
   self.s_plant.model show();
   self.s_plant.model solid();
-  self.s_plant.model disconnectpaths();
+  self.s_plant.model disconnectPaths();
   self thread scene::init("p7_fxanim_zm_island_plant_fruit_bundle", self.s_plant.model);
   self.s_plant.model waittill("hash_334ee3df");
   self thread function_bf89dc95();
@@ -1975,22 +1975,22 @@ function function_bf89dc95() {
 
 function function_7187558(e_player) {
   if(e_player zm_utility::in_revive_trigger()) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(e_player.is_drinking > 0) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(!zm_utility::is_player_valid(e_player)) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.s_parent.s_plant flag::get("plant_interact_trigger_used")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_ISLAND_FRUIT_PLANT");
+  self setHintString(&"ZM_ISLAND_FRUIT_PLANT");
   return true;
 }
 
@@ -2115,7 +2115,7 @@ function function_5726c670(var_98b687fa) {
     self.s_plant.model setModel("p7_fxanim_zm_island_plant_underwater_teal_mod");
     self.s_plant.model show();
     self.s_plant.model solid();
-    self.s_plant.model disconnectpaths();
+    self.s_plant.model disconnectPaths();
     self scene::play("p7_fxanim_zm_island_plant_underwater_bundle", self.s_plant.model);
     level flag::set("ww_upgrade_spawned_from_plant");
     level flag::wait_till("wwup3_found");
@@ -2199,15 +2199,15 @@ function weapon_show(visible) {
 
 function weapon_trigger_update_prompt(player) {
   if(!zm_utility::is_player_valid(player) || player.is_drinking > 0 || !player zm_magicbox::can_buy_weapon() || player bgb::is_enabled("zm_bgb_disorderly_combat")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub flag::get("weapon_grabbed_or_timed_out")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self setcursorhint("HINT_WEAPON", self.stub.wpn);
-  self sethintstring(&"ZOMBIE_TRADE_WEAPON_FILL");
+  self setCursorHint("HINT_WEAPON", self.stub.wpn);
+  self setHintString(&"ZOMBIE_TRADE_WEAPON_FILL");
   return true;
 }
 

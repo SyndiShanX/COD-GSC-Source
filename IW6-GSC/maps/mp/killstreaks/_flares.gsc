@@ -296,8 +296,8 @@ ks_manualFlares_handleIncoming(omnvar_name) {
     self.owner thread ks_watch_death_stop_sound(self, "missile_incoming");
 
     if(isDefined(omnvar_name)) {
-      vec_to_target = VectorNormalize(missiles[0].origin - self.origin);
-      vec_to_right = VectorNormalize(AnglesToRight(self.angles));
+      vec_to_target = vectorNormalize(missiles[0].origin - self.origin);
+      vec_to_right = vectorNormalize(AnglesToRight(self.angles));
       vec_dot = VectorDot(vec_to_target, vec_to_right);
       dir_index = 1;
       if(vec_dot > 0) {

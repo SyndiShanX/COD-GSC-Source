@@ -199,35 +199,35 @@ main() {
 fix_bad_drill_spots() {
   level endon("game_ended");
   level waittill("spawn_nondeterministic_entities");
-  var_0 = getent("player64x64x256", "targetname");
+  var_0 = getEnt("player64x64x256", "targetname");
 
   if(isDefined(var_0)) {
-    var_0 moveto((-347.4, 2044.1, 1033.04), 0.05);
+    var_0 moveTo((-347.4, 2044.1, 1033.04), 0.05);
     var_0.angles = (0, 0, 0);
   }
 
-  var_1 = getent("clip64x64x64", "targetname");
+  var_1 = getEnt("clip64x64x64", "targetname");
 
   if(isDefined(var_1)) {
-    var_1 moveto((-811.5, -2114.5, 75), 0.05);
+    var_1 moveTo((-811.5, -2114.5, 75), 0.05);
     var_1.angles = (0, 0, 0);
   }
 
-  var_2 = getent("monsterjplayerclip512x8x256", "targetname");
+  var_2 = getEnt("monsterjplayerclip512x8x256", "targetname");
 
   if(isDefined(var_2)) {
     var_2.origin = (-856, 3590, 1152);
     var_2.angles = (0, 270, 0);
   }
 
-  var_3 = getent("clip64x64x128", "targetname");
+  var_3 = getEnt("clip64x64x128", "targetname");
 
   if(isDefined(var_3)) {
     var_3.origin = (276, 6176, 1152);
     var_3.angles = (0, 0, 0);
   }
 
-  var_4 = getent("player512x512x8", "targetname");
+  var_4 = getEnt("player512x512x8", "targetname");
 
   if(isDefined(var_4)) {
     var_4.origin = (752, 3398, 64);
@@ -238,7 +238,7 @@ fix_bad_drill_spots() {
     var_5.angles = (270, 180, 180);
   }
 
-  var_6 = getent("monsterplayer512x512x8", "targetname");
+  var_6 = getEnt("monsterplayer512x512x8", "targetname");
 
   if(isDefined(var_6)) {
     var_6.origin = (1098, 3046, 440);
@@ -314,13 +314,13 @@ use_drillbot_door(var_0, var_1) {
     var_2 = var_2 * -1;
   }
 
-  var_1 moveto(var_1.origin + var_2, 2);
+  var_1 moveTo(var_1.origin + var_2, 2);
   playsoundatpos(var_1.origin, "scn_drillbot_door");
 }
 
 spawn_beacon_cargo_drillbot() {
   var_0 = getvehiclenode("cargo_drillbot_start", "targetname");
-  level.drill_vehicle = spawnvehicle("vehicle_drill_bot", "drill", "mp_alien_drill_bot", var_0.origin, var_0.angles);
+  level.drill_vehicle = spawnVehicle("vehicle_drill_bot", "drill", "mp_alien_drill_bot", var_0.origin, var_0.angles);
   level.drill_vehicle.team = "allies";
   level.drill_vehicle.health = 1000000;
   level.drill_vehicle makevehiclesolidcapsule(1, 1, 1);
@@ -329,7 +329,7 @@ spawn_beacon_cargo_drillbot() {
   level.drill_headlight_fx setModel("tag_origin");
   wait 0.5;
   playFXOnTag(level._effect["bot_headlight"], level.drill_headlight_fx, "tag_origin");
-  level.drill_headlight_fx linkto(level.drill_vehicle);
+  level.drill_headlight_fx linkTo(level.drill_vehicle);
   var_1 = "waypoint_alien_blocker";
   var_2 = 14;
   var_3 = 14;
@@ -373,7 +373,7 @@ link_drill_to_container(var_0) {
   level.drill_linked_to_container = 1;
   wait 0.1;
   var_1 = getEntArray("move_container", "targetname");
-  level.drill linkto(var_1[0]);
+  level.drill linkTo(var_1[0]);
   level.drill makeunusable();
 
   if(isDefined(level.drill_icon)) {
@@ -418,7 +418,7 @@ cargo_drillbot_logic(var_0) {
   var_0 common_scripts\utility::_enableoffhandweapons();
   wait 0.1;
   level.prevent_drill_pickup = undefined;
-  level.drill linkto(level.drill_vehicle, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
+  level.drill linkTo(level.drill_vehicle, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
   level.drill makeunusable();
   var_2 = undefined;
 
@@ -437,7 +437,7 @@ cargo_drillbot_logic(var_0) {
 
   wait_for_player_to_activate_platform();
   level.non_player_drill_plant = 1;
-  use_drillbot_door(1, getent("cargo_bot_entrance_door", "targetname"));
+  use_drillbot_door(1, getEnt("cargo_bot_entrance_door", "targetname"));
   send_bot_to_hive_and_drill(var_0);
   var_6 = common_scripts\utility::getclosest(level.drill_vehicle.origin, getvehiclenodearray("drill_path", "targetname"));
   level.drill_vehicle attachpath(var_6);
@@ -446,7 +446,7 @@ cargo_drillbot_logic(var_0) {
   level.drill_vehicle vehicle_setspeed(5, 1, 1);
   level.drill_vehicle waittill("reached_end_node");
   var_7 = undefined;
-  use_drillbot_door(var_7, getent("cargo_bot_exit_door", "targetname"));
+  use_drillbot_door(var_7, getEnt("cargo_bot_exit_door", "targetname"));
   level.drill makeusable();
 
   foreach(var_9 in level.players) {
@@ -491,7 +491,7 @@ send_bot_to_hive_and_drill(var_0) {
   level.drill_icon_draw_dist_override = undefined;
   wait 8;
   level.drill makeunusable();
-  level.drill linkto(level.drill_vehicle, "tag_turret_attach", (0, 0, -2), (0, 0, 0));
+  level.drill linkTo(level.drill_vehicle, "tag_turret_attach", (0, 0, -2), (0, 0, 0));
 
   if(isDefined(level.drill_icon)) {
     level.drill_icon destroy();
@@ -499,7 +499,7 @@ send_bot_to_hive_and_drill(var_0) {
 }
 
 wait_for_player_to_activate_platform() {
-  var_0 = getent("bot_switch", "targetname");
+  var_0 = getEnt("bot_switch", "targetname");
   maps\mp\alien\_outline_proto::add_to_outline_watch_list(var_0, 0);
   var_1 = "waypoint_alien_blocker";
   var_2 = 14;
@@ -508,7 +508,7 @@ wait_for_player_to_activate_platform() {
   var_5 = var_0.origin + (0, 0, 40);
   var_6 = maps\mp\alien\_hud::make_waypoint(var_1, var_2, var_3, var_4, var_5);
   var_0 makeusable();
-  var_0 sethintstring(&"MP_ALIEN_BEACON_ACTIVATE_BOT");
+  var_0 setHintString(&"MP_ALIEN_BEACON_ACTIVATE_BOT");
   var_0 waittill("trigger", var_7);
   playsoundatpos(var_0.origin + (0, 0, 40), "scn_drillbot_activate");
   maps\mp\alien\_outline_proto::remove_from_outline_watch_list(var_0);
@@ -621,7 +621,7 @@ register_encounter() {
 }
 
 encounter_init() {
-  var_0 = getent("drill_pickup_trig", "targetname");
+  var_0 = getEnt("drill_pickup_trig", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
@@ -958,24 +958,24 @@ mp_alien_beacon_intro_ride() {
 intro_boat_ride() {
   common_scripts\utility::flag_init("boat_ride_over");
   thread maps\mp\mp_alien_beacon_vignettes::drill_swap();
-  level.boat_vehicle = getent("intro_hovercraft", "targetname");
-  var_0 = getent("hovercraft_clip", "targetname");
-  var_0 linkto(level.boat_vehicle);
-  var_1 = getent("hovercraft_back_clip", "targetname");
+  level.boat_vehicle = getEnt("intro_hovercraft", "targetname");
+  var_0 = getEnt("hovercraft_clip", "targetname");
+  var_0 linkTo(level.boat_vehicle);
+  var_1 = getEnt("hovercraft_back_clip", "targetname");
   var_1 notsolid();
-  var_2 = getent("hovercraft_clip_gate", "targetname");
-  var_2 linkto(level.boat_vehicle);
+  var_2 = getEnt("hovercraft_clip_gate", "targetname");
+  var_2 linkTo(level.boat_vehicle);
   level.boat_vehicle.spawn_locations = [];
 
   for(var_3 = 0; var_3 < 4; var_3++) {
-    level.boat_vehicle.spawn_locations[var_3] = getent("beacon_hovercraft_spot" + (var_3 + 1), "targetname");
-    level.boat_vehicle.spawn_locations[var_3] linkto(level.boat_vehicle);
+    level.boat_vehicle.spawn_locations[var_3] = getEnt("beacon_hovercraft_spot" + (var_3 + 1), "targetname");
+    level.boat_vehicle.spawn_locations[var_3] linkTo(level.boat_vehicle);
   }
 
   foreach(var_3, var_5 in level.players) {
-    var_6 = getent("beacon_hovercraft_spot" + (var_3 + 1), "targetname");
+    var_6 = getEnt("beacon_hovercraft_spot" + (var_3 + 1), "targetname");
     var_6.used_spot = 1;
-    var_5 setorigin(var_6.origin);
+    var_5 setOrigin(var_6.origin);
     var_5 setplayerangles(var_6.angles);
   }
 
@@ -1023,10 +1023,10 @@ boat_intro_on_connect(var_0, var_1) {
   }
 
   wait 0.1;
-  var_0 setorigin(var_2.origin + (0, 0, 0));
+  var_0 setOrigin(var_2.origin + (0, 0, 0));
   var_0 setplayerangles(var_2.angles);
   wait 0.05;
-  var_0 playerlinkto(var_2);
+  var_0 playerlinkTo(var_2);
   wait 0.2;
   var_0 unlink();
 }
@@ -1098,7 +1098,7 @@ cargo_hive() {
     wait 5;
     spawn_beacon_cargo_drillbot();
     var_0 = undefined;
-    level thread use_drillbot_door(var_0, getent("cargo_bot_entrance_door", "targetname"));
+    level thread use_drillbot_door(var_0, getEnt("cargo_bot_entrance_door", "targetname"));
     wait 3;
     level.drillbot_door_open = 1;
   }
@@ -1181,11 +1181,11 @@ final_deck_hive() {
   maps\mp\alien\_hive::regular_hive();
   var_0 = [];
   var_0 = getEntArray("deck_to_lab_door", "targetname");
-  var_1 = getent("deck_to_lab_door_linker", "targetname");
+  var_1 = getEnt("deck_to_lab_door_linker", "targetname");
 
   foreach(var_3 in var_0) {
     if(isDefined(var_3) && isDefined(var_1)) {
-      var_3 linkto(var_1);
+      var_3 linkTo(var_1);
     }
   }
 
@@ -1232,10 +1232,10 @@ mp_alien_beacon_top_deck_hive() {
   give_gas_encounter_rewards();
   common_scripts\utility::flag_set("top_deck_blocker_dead");
   common_scripts\utility::flag_set("boss_turrets_on");
-  var_0 = getent("player128x128x128", "targetname");
+  var_0 = getEnt("player128x128x128", "targetname");
 
   if(isDefined(var_0)) {
-    var_0 moveto((-136.5, 6465.5, 1444), 0.05);
+    var_0 moveTo((-136.5, 6465.5, 1444), 0.05);
     var_0.angles = (0, 0, 0);
   }
 }
@@ -1261,7 +1261,7 @@ get_gas_encounter_score_components() {
 mp_alien_beacon_story_moment() {}
 
 mp_alien_beacon_boss_encounter() {
-  var_0 = getent("boss_trigger", "targetname");
+  var_0 = getEnt("boss_trigger", "targetname");
   var_0 waittill("trigger");
   setDvar("sm_sunSampleSizeNear", 0.7);
   level thread clean_aliens_for_kraken();
@@ -1277,7 +1277,7 @@ mp_alien_beacon_boss_encounter() {
   maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::initkrakententacle();
   thread play_kraken_intro_music();
   wait 5.0;
-  var_1 = common_scripts\utility::getstruct("kraken_position_1", "targetname");
+  var_1 = common_scripts\utility::getStruct("kraken_position_1", "targetname");
   level.kraken = maps\mp\agents\alien\alien_kraken\_alien_kraken::alienkrakenspawn(var_1.origin, var_1.angles);
   level.kraken maps\mp\agents\alien\alien_kraken\_alien_kraken::attachtentacles();
   level.kraken.feral_occludes = 1;
@@ -1605,9 +1605,9 @@ spawn_elites_from_container() {
 }
 
 notify_and_remove_door(var_0, var_1) {
-  var_2 = getent(var_1 + "_start", "targetname");
+  var_2 = getEnt(var_1 + "_start", "targetname");
   common_scripts\utility::waitframe();
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
     var_3 setscriptablepartstate(0, 1);
@@ -1739,13 +1739,13 @@ player_containment() {
   var_1 = spawn("script_model", (-742, 765, 136));
   var_1 setModel("beacon_single_sliding_door_left");
   var_1.angles = (0, 0, 0);
-  var_2 = getent("player256x256x8", "targetname");
+  var_2 = getEnt("player256x256x8", "targetname");
   var_2.origin = (-745, 760, 120);
   var_2.angles = (270, 270, 0);
   var_3 = spawn("script_model", (-410.3, 785, 280));
   var_3 setModel("armory_weapon_chest");
   var_3.angles = (0, 180, 0);
-  var_4 = getent("player512x512x8", "targetname");
+  var_4 = getEnt("player512x512x8", "targetname");
 
   if(isDefined(var_4)) {
     var_4.origin = (752, 3398, 64);
@@ -1756,7 +1756,7 @@ player_containment() {
     var_5.angles = (270, 180, 180);
   }
 
-  var_6 = getent("monsterplayer512x512x8", "targetname");
+  var_6 = getEnt("monsterplayer512x512x8", "targetname");
 
   if(isDefined(var_6)) {
     var_6.origin = (1098, 3046, 440);
@@ -1838,14 +1838,14 @@ beacon_door_encounter_logic() {
 lower_cargo_container() {
   var_0 = 5;
   wait 4;
-  var_1 = getent("beacon_crane_top", "targetname");
-  var_2 = getent("beacon_crane_bottom", "targetname");
+  var_1 = getEnt("beacon_crane_top", "targetname");
+  var_2 = getEnt("beacon_crane_bottom", "targetname");
   var_1 scriptmodelplayanimdeltamotion("alien_beacon_crane_enter_base");
   var_2 scriptmodelplayanim("alien_beacon_crane_enter_base");
-  var_3 = getent("cargo_container_3_door_01_start", "targetname");
-  var_4 = getent("cargo_container_3_door_02_start", "targetname");
-  var_5 = getent("crane_sound_origin_1", "targetname");
-  var_6 = getent("crane_sound_origin_2", "targetname");
+  var_3 = getEnt("cargo_container_3_door_01_start", "targetname");
+  var_4 = getEnt("cargo_container_3_door_02_start", "targetname");
+  var_5 = getEnt("crane_sound_origin_1", "targetname");
+  var_6 = getEnt("crane_sound_origin_2", "targetname");
   var_7 = getEntArray("crane_container_top_bad_place", "targetname");
   var_8 = getEntArray("move_container_clip", "targetname");
   var_9 = getEntArray("move_container", "targetname");
@@ -1857,10 +1857,10 @@ lower_cargo_container() {
   var_9 = common_scripts\utility::array_combine(var_9, var_7);
 
   foreach(var_11 in var_9) {
-    var_11 linkto(var_1, "j_Base_Wire_07");
+    var_11 linkTo(var_1, "j_Base_Wire_07");
   }
 
-  var_13 = getent("crane_container_bad_place", "targetname");
+  var_13 = getEnt("crane_container_bad_place", "targetname");
   badplace_brush("crane_lower_spot", 0, var_13, "axis");
   var_4 thread lower_cargo_container_sfx();
   wait(var_0 + 1);
@@ -1875,7 +1875,7 @@ lower_cargo_container() {
   }
 
   foreach(var_17 in var_7) {
-    var_17 disconnectpaths();
+    var_17 disconnectPaths();
   }
 }
 
@@ -1894,9 +1894,9 @@ raise_cargo_container_sfx(var_0) {
 }
 
 raise_cargo_container() {
-  var_0 = getent("cargo_room_control_switch", "targetname");
-  var_0 sethintstring(&"MP_ALIEN_BEACON_CRANE_HINT");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt("cargo_room_control_switch", "targetname");
+  var_0 setHintString(&"MP_ALIEN_BEACON_CRANE_HINT");
+  var_1 = getEnt(var_0.target, "targetname");
   maps\mp\alien\_outline_proto::add_to_outline_watch_list(var_1, 0);
   var_0 waittill("trigger", var_2);
   var_2 playlocalsound("scn_drillbot_activate");
@@ -1906,15 +1906,15 @@ raise_cargo_container() {
   thread maps\mp\mp_alien_beacon_vignettes::pre_crane_vo();
   maps\mp\alien\_outline_proto::remove_from_outline_watch_list(var_1);
   wait 5;
-  var_3 = getent("beacon_crane_top", "targetname");
-  var_4 = getent("beacon_crane_bottom", "targetname");
+  var_3 = getEnt("beacon_crane_top", "targetname");
+  var_4 = getEnt("beacon_crane_bottom", "targetname");
   var_5 = getEntArray("move_container_clip", "targetname");
   var_6 = getEntArray("crane_container_top_bad_place", "targetname");
   var_7 = getEntArray("move_container", "targetname");
-  var_8 = getent("crane_tag", "targetname");
+  var_8 = getEnt("crane_tag", "targetname");
   var_8.origin = var_3 gettagorigin("j_Base_Wire_07");
   var_8.angles = var_3 gettagangles("j_Base_Wire_07");
-  var_9 = getent("cargo_players_trigger", "targetname");
+  var_9 = getEnt("cargo_players_trigger", "targetname");
   var_9 wait_for_players_to_enter_container(var_8);
   var_9 thread update_player_in_container_status();
 
@@ -1926,17 +1926,17 @@ raise_cargo_container() {
   common_scripts\utility::flag_set("everyone_in_cargo_container");
   level thread disable_cargo_door_drill_spots();
   level thread teleport_drill_to_container_if_needed();
-  var_9 enablelinkto();
-  var_9 linkto(var_8);
-  var_13 = getent("crane_sound_origin_1", "targetname");
-  var_14 = getent("crane_sound_origin_2", "targetname");
+  var_9 enablelinkTo();
+  var_9 linkTo(var_8);
+  var_13 = getEnt("crane_sound_origin_1", "targetname");
+  var_14 = getEnt("crane_sound_origin_2", "targetname");
   var_7 = common_scripts\utility::add_to_array(var_7, var_13);
   var_7 = common_scripts\utility::add_to_array(var_7, var_14);
   var_7 = common_scripts\utility::array_combine(var_7, var_6);
   var_7 = common_scripts\utility::array_combine(var_7, var_5);
 
   foreach(var_16 in var_7) {
-    var_16 linkto(var_8);
+    var_16 linkTo(var_8);
   }
 
   thread update_override_info((659, 1494, 1024.13), (0, 90, 0));
@@ -1954,7 +1954,7 @@ raise_cargo_container() {
   badplace_delete("crane_lower_spot");
 
   foreach(var_11 in var_6) {
-    var_11 disconnectpaths();
+    var_11 disconnectPaths();
   }
 
   level notify("beacon_starting_topdeck");
@@ -1986,7 +1986,7 @@ disable_cargo_door_drill_spots() {
       }
 
       var_2 makeunusable();
-      var_2 sethintstring("");
+      var_2 setHintString("");
       var_2 notify("stop_listening");
       var_2.target = undefined;
       var_0[var_0.size] = var_2;
@@ -2000,7 +2000,7 @@ teleport_player_to_spot(var_0, var_1) {
   self endon("disconnect");
   self cancelmantle();
   self dontinterpolate();
-  self setorigin(var_0);
+  self setOrigin(var_0);
   self.forceteleportorigin = var_0;
 
   if(isDefined(var_1)) {
@@ -2211,7 +2211,7 @@ crane_walls_show_and_link(var_0) {
 
   foreach(var_3 in var_1) {
     var_3 solid();
-    var_3 linkto(var_0);
+    var_3 linkTo(var_0);
   }
 }
 
@@ -2279,7 +2279,7 @@ beacon_cargo_drill_onconnect() {
 beacon_play_sound_on_moving_tag(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     var_3 = spawn("script_model", (0, 0, 0));
-    var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
     wait 0.1;
     var_3 playsoundonmovingent(var_0);
 
@@ -2767,7 +2767,7 @@ disable_lab_doors() {
       }
 
       var_1 makeunusable();
-      var_1 sethintstring("");
+      var_1 setHintString("");
       var_1 notify("stop_listening");
       var_1.target = undefined;
       level.stronghold_hive_locs = common_scripts\utility::array_remove(level.stronghold_hive_locs, var_1);
@@ -2788,14 +2788,14 @@ beacon_randombox_item_check(var_0) {
 }
 
 setintermissioncam() {
-  var_0 = getent("mp_global_intermission", "classname");
+  var_0 = getEnt("mp_global_intermission", "classname");
   var_0.origin = (-316.775, 6480.45, 1528);
   var_0.angles = (10, 90, 0);
 }
 
 fix_beacon_jump_exploit() {
   wait 3.0;
-  var_0 = getent("player128x128x128", "targetname");
+  var_0 = getEnt("player128x128x128", "targetname");
 
   if(!isDefined(var_0)) {
     return;

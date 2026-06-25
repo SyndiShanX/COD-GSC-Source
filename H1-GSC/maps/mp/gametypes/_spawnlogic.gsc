@@ -161,7 +161,7 @@ addstartspawnpoints(var_0, var_1) {
       if(var_5 == var_8) {
         continue;
       }
-      var_9 = vectornormalize(var_8.origin - var_5.origin);
+      var_9 = vectorNormalize(var_8.origin - var_5.origin);
       var_10 = vectordot(var_6, var_9);
 
       if(var_10 > 0.86) {

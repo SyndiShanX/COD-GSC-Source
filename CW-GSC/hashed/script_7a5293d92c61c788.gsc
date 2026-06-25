@@ -98,7 +98,7 @@ function function_93a99046(struct) {
   }
 
   forward = anglesToForward(scriptmodel.angles);
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   offset = forward * 24;
   offset = (offset[0], offset[1], offset[2] + 50);
 
@@ -397,7 +397,7 @@ function function_cb2d9b9b(machine, trigger) {
                 self give_armor(var_1a988176);
               }
 
-              self playrumbleonentity(#"zm_interact_rumble");
+              self playRumbleOnEntity(#"zm_interact_rumble");
               machine scene::stop("p9_fxanim_zm_gp_armor_station_bundle");
               machine animation::stop();
               waitframe(1);
@@ -461,7 +461,7 @@ function function_cb2d9b9b(machine, trigger) {
                           self item_inventory::function_d92c6b5b(weapon, undefined, item.paplv);
                         }
 
-                        self playrumbleonentity(#"zm_interact_rumble");
+                        self playRumbleOnEntity(#"zm_interact_rumble");
                         machine scene::stop("p9_fxanim_zm_gp_armor_station_bundle");
                         machine animation::stop();
                         waitframe(1);
@@ -481,7 +481,7 @@ function function_cb2d9b9b(machine, trigger) {
                 }
 
                 if(var_3069fe3) {
-                  self playrumbleonentity(#"zm_interact_rumble");
+                  self playRumbleOnEntity(#"zm_interact_rumble");
                   currentweapon = self getcurrentweapon();
                   clipsize = self getweaponammoclip(currentweapon);
                   var_9839b3b1 = self getweaponammostock(currentweapon);

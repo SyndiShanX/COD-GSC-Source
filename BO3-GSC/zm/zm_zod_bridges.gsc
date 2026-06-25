@@ -31,7 +31,7 @@ class cbridge {
   destructor() {}
 
   function move_blocker() {
-    self moveto(origin - vectorscale((0, 0, 1), 10000), 0.05);
+    self moveTo(origin - vectorscale((0, 0, 1), 10000), 0.05);
     wait(0.05);
   }
 

@@ -57,7 +57,7 @@ main() {
   zm_sq::register(#"trinket_tincture", #"step_1", #"trinket_quest", &trinket_quest, &trinket_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_1", #"edge_quest", &edge_quest, &edge_quest_cleanup);
   zm_sq::register(#"edge_of_the_world", #"step_2", #"edge_quest", &function_8bc27fd3, &security_balcony_time_);
-  level.var_4ac8ef63 = getent("edge_flinger_spot", "targetname");
+  level.var_4ac8ef63 = getEnt("edge_flinger_spot", "targetname");
   level flag::init(#"hash_72bd35eacb1940de");
   level flag::init(#"hash_59d5ba61f4b8f405");
   zm_sq::register(#"hash_66685502a7dee586", #"step_1", #"hash_66685502a7dee586", &function_a589e722, &function_239ae2e1);
@@ -131,7 +131,7 @@ trinket_think() {
     if(pap_lock flag::get("Pack_A_Punch_on")) {
       level.var_b4b3ecd1.a_e_trinkets[self.script_int].b_pickedup = 1;
       self playSound("zmb_trinket_pickup");
-      e_who playrumbleonentity("zm_office_drawer_rumble");
+      e_who playRumbleOnEntity("zm_office_drawer_rumble");
       self hide();
       return;
     }
@@ -155,7 +155,7 @@ function_abf8d5ce() {
       }
 
       self.a_e_trinkets[0] playSound("zmb_trinket_drop");
-      e_who playrumbleonentity("zm_office_drawer_rumble");
+      e_who playRumbleOnEntity("zm_office_drawer_rumble");
     }
 
     if(self.n_collected >= 5) {
@@ -245,7 +245,7 @@ trinket_cleanup() {
 }
 
 function_500dfb49() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size < 2) {
     level.var_c03f9529 = 0;
@@ -269,7 +269,7 @@ function_a1b4b25d(var_d25bbdd5) {
 }
 
 function_c83f59db() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_max = 10;
 
   switch (a_e_players.size) {
@@ -381,13 +381,13 @@ function_130c65ff() {
 function_301c7dca(player) {
   if(isDefined(self.stub.related_parent.b_picked_up) && self.stub.related_parent.b_picked_up) {
     str_hint = zm_utility::function_d6046228(#"hash_15b81856e839fed9", #"hash_eb543cd4ec82ae7");
-    self sethintstring(str_hint);
+    self setHintString(str_hint);
     return 1;
   }
 
   if(isDefined(self.stub.related_parent.b_picked_up) && !self.stub.related_parent.b_picked_up) {
     str_hint = zm_utility::function_d6046228(#"hash_4ed14fd62a0c189c", #"hash_b9eef4c2cef38d0");
-    self sethintstring(str_hint);
+    self setHintString(str_hint);
     return 1;
   }
 
@@ -397,7 +397,7 @@ function_301c7dca(player) {
 function_a2993671() {
   s_notify = self waittill(#"trigger_activated");
   player = s_notify.e_who;
-  playsoundatposition(#"hash_20807cb66d31146e", self.origin);
+  playSoundAtPosition(#"hash_20807cb66d31146e", self.origin);
   flinger = struct::get(self.target, "targetname");
   flinger zm_orange_fasttravel_flinger::function_60325438(0);
 
@@ -414,7 +414,7 @@ function_a2993671() {
 function_1856c416() {
   s_notify = self waittill(#"trigger_activated");
   player = s_notify.e_who;
-  playsoundatposition(#"hash_30a5ec16dcd18c49", self.origin);
+  playSoundAtPosition(#"hash_30a5ec16dcd18c49", self.origin);
   flinger = struct::get(self.target, "targetname");
   flinger zm_orange_fasttravel_flinger::function_60325438(1);
   player thread zm_orange_util::function_51b752a9("vox_generic_responses_positive", -1, 0, 0);
@@ -480,12 +480,12 @@ function_7619040c() {
 
 function_ab759b3a(player) {
   if(isDefined(self.stub.related_parent.b_picked_up) && self.stub.related_parent.b_picked_up) {
-    self sethintstring(zm_utility::function_d6046228(#"hash_494d7fc0d10e2ff6", #"hash_9af968cebf182d2"));
+    self setHintString(zm_utility::function_d6046228(#"hash_494d7fc0d10e2ff6", #"hash_9af968cebf182d2"));
     return 1;
   }
 
   if(isDefined(self.stub.related_parent.b_picked_up) && !self.stub.related_parent.b_picked_up) {
-    self sethintstring(zm_utility::function_d6046228(#"hash_3b3769bc56dab413", #"hash_28eeceb083aa7339"));
+    self setHintString(zm_utility::function_d6046228(#"hash_3b3769bc56dab413", #"hash_28eeceb083aa7339"));
     return 1;
   }
 
@@ -658,8 +658,8 @@ edge_quest(var_5ea5c94d) {
 edge_quest_cleanup(var_5ea5c94d, ended_early) {
   if(var_5ea5c94d || ended_early) {
     s_pos = struct::get("ee_edge_teleport", "targetname");
-    a_e_players = getplayers();
-    a_e_players[0] setorigin(s_pos.origin);
+    a_e_players = getPlayers();
+    a_e_players[0] setOrigin(s_pos.origin);
     a_e_players[0] setplayerangles(s_pos.angles);
   }
 }
@@ -710,14 +710,14 @@ function_8bc27fd3(var_5ea5c94d) {
   level endon(#"end_game", #"hell_on_earth", #"trials_hell_on_earth");
 
   if(!var_5ea5c94d) {
-    if(getplayers().size == 1) {
+    if(getPlayers().size == 1) {
       zm_hms_util::pause_zombies(1, 0);
     }
 
-    edge_volume = getent("edge_of_the_world", "targetname");
+    edge_volume = getEnt("edge_of_the_world", "targetname");
 
     while(true) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player istouching(edge_volume)) {
           level.edge_player = player;
           level notify(#"edge_reached");
@@ -742,7 +742,7 @@ security_balcony_time_(var_5ea5c94d, ended_early) {
 
 function_1b0e51b5() {
   level endon(#"end_game", #"edge_reached");
-  edge_life_brush = getent("edge_life_brush", "targetname");
+  edge_life_brush = getEnt("edge_life_brush", "targetname");
   s_notify = self waittilltimeout(160, #"entering_last_stand");
 
   if(isalive(self) && (self zm_zonemgr::is_player_in_zone(array("edge")) || self istouching(edge_life_brush))) {
@@ -753,7 +753,7 @@ function_1b0e51b5() {
     self notify(#"water_player_freeze_broken");
     self zm_bgb_anywhere_but_here::activation(0);
 
-    if(getplayers().size == 1) {
+    if(getPlayers().size == 1) {
       zm_hms_util::pause_zombies(0);
     }
 
@@ -764,7 +764,7 @@ function_1b0e51b5() {
 
 edge_exit_watcher() {
   level endon(#"end_game");
-  edge_life_brush = getent("edge_life_brush", "targetname");
+  edge_life_brush = getEnt("edge_life_brush", "targetname");
   s_notify = self waittilltimeout(120, #"entering_last_stand", #"edge_exit");
 
   if(isalive(self) && (self zm_zonemgr::is_player_in_zone(array("edge")) || self istouching(edge_life_brush))) {
@@ -778,7 +778,7 @@ edge_exit_watcher() {
     self notify(#"water_player_freeze_broken");
     self zm_bgb_anywhere_but_here::activation(0);
 
-    if(getplayers().size == 1) {
+    if(getPlayers().size == 1) {
       zm_hms_util::pause_zombies(0);
     }
 
@@ -851,11 +851,11 @@ function_cabcfdd2() {
   while(true) {
     self waittill(#"trigger_activated");
     var_b3ee22cc++;
-    playsoundatposition(#"hash_71d9e237e73ab437", self.origin);
+    playSoundAtPosition(#"hash_71d9e237e73ab437", self.origin);
     wait 0.5;
 
     if(var_b3ee22cc >= 3) {
-      playsoundatposition(#"hash_4d9caefa6e6dd2e7", self.origin);
+      playSoundAtPosition(#"hash_4d9caefa6e6dd2e7", self.origin);
       wait 3;
       level flag::set(#"hidden_song_2_activated");
     }

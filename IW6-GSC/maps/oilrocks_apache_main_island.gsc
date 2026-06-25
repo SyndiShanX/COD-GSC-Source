@@ -32,7 +32,7 @@ apache_escort_encounter_final_wave_on_spawn() {
 
 move_apache_to_main_island() {
   var_0 = maps\oilrocks_apache_code::get_blackhawk_ally();
-  var_0 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct("path_blackhawk_to_main_island", "targetname"));
+  var_0 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct("path_blackhawk_to_main_island", "targetname"));
 }
 
 enemies() {

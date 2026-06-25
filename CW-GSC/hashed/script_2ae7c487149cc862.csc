@@ -66,7 +66,7 @@ function function_94fa6eb5(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_1f2ef20a = undefined;
   }
 
-  self playrumbleonentity(fieldname, "sr_payload_portal_final_rumble");
+  self playRumbleOnEntity(fieldname, "sr_payload_portal_final_rumble");
   earthquake(fieldname, 0.25, 1, self.origin, 4000);
 }
 
@@ -135,7 +135,7 @@ function function_f002c513(localclientnum, oldval, newval, bnewent, binitialsnap
       self.var_706728bf = playfxoncamera(fieldname, "sr/fx9_obj_holdout_camera_signifier", (0, 0, 0), (1, 0, 0), (0, 0, 1));
     }
 
-    self playrumbleonentity(fieldname, "sr_transmitter_clear");
+    self playRumbleOnEntity(fieldname, "sr_transmitter_clear");
     earthquake(fieldname, 0.25, 0.5, self.origin, 80);
     self postfx::playpostfxbundle(#"pstfx_speedblur");
     self function_116b95e5(#"pstfx_speedblur", #"inner mask", 0.2);
@@ -163,7 +163,7 @@ function function_f002c513(localclientnum, oldval, newval, bnewent, binitialsnap
   if(isDefined(self.var_706728bf)) {
     stopfx(fieldname, self.var_706728bf);
     self.var_706728bf = undefined;
-    self playrumbleonentity(fieldname, "sr_transmitter_clear");
+    self playRumbleOnEntity(fieldname, "sr_transmitter_clear");
     earthquake(fieldname, 0.25, 0.5, self.origin, 80);
   }
 
@@ -194,7 +194,7 @@ function function_d233fb1f(localclientnum) {
     var_9b8a1091 += 0.01;
 
     if(var_9b8a1091 == 0.1) {
-      self playrumbleonentity(localclientnum, "damage_light");
+      self playRumbleOnEntity(localclientnum, "damage_light");
     }
 
     if(var_9b8a1091 > 0.1) {
@@ -317,7 +317,7 @@ function function_53ab1c7(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function barrier_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    self.n_fx_id = playFX(fieldname, "sr/fx9_obj_holdout_barrier_window", self.origin + vectornormalize(anglestoright(self.angles)) * 6, anglestoright(self.angles), anglestoup(self.angles));
+    self.n_fx_id = playFX(fieldname, "sr/fx9_obj_holdout_barrier_window", self.origin + vectorNormalize(anglestoright(self.angles)) * 6, anglestoright(self.angles), anglestoup(self.angles));
     self.var_b3673abf = self playLoopSound(#"hash_3cf13a0072fc0aae");
     return;
   }
@@ -339,7 +339,7 @@ function function_9609c8b9(localclientnum, oldval, newval, bnewent, binitialsnap
   wait 2.5;
   playFX(bwastimejump, "sr/fx9_obj_holdout_crystal_shockwave_blast", self.origin + (0, 0, 128), anglesToForward(self.angles), anglestoup(self.angles));
   playSound(bwastimejump, #"hash_716354440fd93185", self.origin + (0, 0, 128));
-  self playrumbleonentity(bwastimejump, "sr_payload_portal_final_rumble");
+  self playRumbleOnEntity(bwastimejump, "sr_payload_portal_final_rumble");
   earthquake(bwastimejump, 0.25, 1.5, self.origin + (0, 0, 128), 4000);
 }
 

@@ -68,12 +68,12 @@ function function_d5ab66bf() {
     var_87f8ede0 playLoopSound(#"hash_350fcc9c7101d9b5");
     var_87f8ede0 clientfield::set("zm_round_accelerant_fx", 1);
     level.var_b03d5c95 = spawn("trigger_radius_use", var_155f12e4.origin, 0, 100);
-    level.var_b03d5c95 setcursorhint("HINT_NOICON");
-    level.var_b03d5c95 sethintstring(#"hash_67f5a549d99a3f56");
+    level.var_b03d5c95 setCursorHint("HINT_NOICON");
+    level.var_b03d5c95 setHintString(#"hash_67f5a549d99a3f56");
     level.var_b03d5c95 usetriggerignoreuseholdtime();
     level.var_b03d5c95 function_268e4500();
-    level.var_b03d5c95 usetriggerrequirelookat(0);
-    level.var_b03d5c95 triggerignoreteam();
+    level.var_b03d5c95 useTriggerRequireLookAt(0);
+    level.var_b03d5c95 triggerIgnoreTeam();
     level.var_b03d5c95.var_9d7362a4 = #"hash_67f5a549d99a3f56";
     level.var_b03d5c95.var_f0468c71 = #"hash_5b07da139f0eb5d3";
     level.var_b03d5c95.var_51c14c0b = var_87f8ede0;
@@ -168,19 +168,19 @@ function function_2da3ba2e() {
   self endon(#"death");
   level.var_b03d5c95.gameobject gameobjects::disable_object();
   var_3ac1a2d6 = spawn("trigger_radius_use", level.var_b03d5c95.origin, 0, 100);
-  var_3ac1a2d6 setcursorhint("HINT_NOICON");
-  var_3ac1a2d6 sethintstring(#"hash_1c6d037475c27bd2");
-  var_3ac1a2d6 usetriggerrequirelookat(0);
-  var_3ac1a2d6 triggerignoreteam();
+  var_3ac1a2d6 setCursorHint("HINT_NOICON");
+  var_3ac1a2d6 setHintString(#"hash_1c6d037475c27bd2");
+  var_3ac1a2d6 useTriggerRequireLookAt(0);
+  var_3ac1a2d6 triggerIgnoreTeam();
   var_3ac1a2d6 triggerenable(1);
   self.var_f0e39b30 = 1;
-  self sethintstring(#"hash_1c6d037475c27bd2");
+  self setHintString(#"hash_1c6d037475c27bd2");
   wait 5;
 
   if(is_true(level.var_41eb9e50)) {
-    level.var_b03d5c95 sethintstring(level.var_b03d5c95.var_f0468c71);
+    level.var_b03d5c95 setHintString(level.var_b03d5c95.var_f0468c71);
   } else {
-    level.var_b03d5c95 sethintstring(level.var_b03d5c95.var_9d7362a4);
+    level.var_b03d5c95 setHintString(level.var_b03d5c95.var_9d7362a4);
   }
 
   level.var_b03d5c95.gameobject gameobjects::enable_object();
@@ -247,7 +247,7 @@ function function_74872db6() {
 
 function on_round_end() {
   if(is_true(level.var_41eb9e50) && is_true(level.var_c50b705e)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::increment_challenge_stat(#"hash_7e74c2c266f4b3a8");
     }
   }
@@ -265,7 +265,7 @@ function function_c531a378() {
   if(level.round_number >= 55) {
     if(isDefined(level.var_b03d5c95)) {
       playFX(#"sr/fx9_safehouse_mchn_upgrades_spawn", level.var_b03d5c95.origin);
-      playsoundatposition(#"hash_5c80b67921d4c89", level.var_b03d5c95.var_51c14c0b.origin);
+      playSoundAtPosition(#"hash_5c80b67921d4c89", level.var_b03d5c95.var_51c14c0b.origin);
       var_ce288ad4 = 0;
 
       if(is_true(level.var_41eb9e50)) {

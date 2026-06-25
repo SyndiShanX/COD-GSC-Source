@@ -80,9 +80,9 @@ event1_fakefire_think(firepoints) {
   }
 }
 event1_katyusha_rocket_barrage(truck_name, trigger_name) {
-  truck = getent(truck_name, "targetname");
+  truck = getEnt(truck_name, "targetname");
 
-  trigger = getent(trigger_name, "targetname");
+  trigger = getEnt(trigger_name, "targetname");
   trigger waittill("trigger");
 
   attack_range = (0, 10000, 0);
@@ -115,7 +115,7 @@ event1_katyusha_rocket_barrage(truck_name, trigger_name) {
 
 event1_katyusha_rocket_barrage_side(struct_name, trigger_name) {
   trucks = getStructArray(struct_name, "targetname");
-  trigger = getent(trigger_name, "targetname");
+  trigger = getEnt(trigger_name, "targetname");
 
   for(i = 0; i < trucks.size; i++) {
     event1_katyusha_rocket_barrage_side_single(trucks[i], trigger);

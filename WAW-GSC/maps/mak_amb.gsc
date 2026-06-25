@@ -25,9 +25,9 @@ music_switch_delay(time, state) {
 ambush_stuff() {
   setbusstate("ambush");
   wait(0.5);
-  playsoundatposition("Mak1_IGD_050A_ROEB", (0, 0, 0));
-  playsoundatposition("amb_yelling_japanese", (-702, -15232.5, 200));
-  playsoundatposition("amb_yelling", (-1358, -15008.5, 200));
+  playSoundAtPosition("Mak1_IGD_050A_ROEB", (0, 0, 0));
+  playSoundAtPosition("amb_yelling_japanese", (-702, -15232.5, 200));
+  playSoundAtPosition("amb_yelling", (-1358, -15008.5, 200));
   wait(0.5);
   setbusstate("RESET_SLOW");
   setmusicstate("AMBUSH");
@@ -44,10 +44,10 @@ play_tower_creaks() {
 
 start_explosion_test() {
   wait(1);
-  origin_left = getent("exp_origin_left", "targetname");
-  origin_right = getent("exp_origin_right", "targetname");
-  target_left = getent("exp_target_left", "targetname");
-  target_right = getent("exp_target_right", "targetname");
+  origin_left = getEnt("exp_origin_left", "targetname");
+  origin_right = getEnt("exp_origin_right", "targetname");
+  target_left = getEnt("exp_target_left", "targetname");
+  target_right = getEnt("exp_target_right", "targetname");
 
   ent1 = spawn("script_origin", origin_left.origin);
   ent2 = spawn("script_origin", origin_right.origin);
@@ -55,8 +55,8 @@ start_explosion_test() {
   ent1 playSound("exp_hut_4_sweet_L");
   ent2 playSound("exp_hut_4_sweet_R");
 
-  ent1 moveto(target_left.origin, 1.5);
-  ent2 moveto(target_right.origin, 1.5);
+  ent1 moveTo(target_left.origin, 1.5);
+  ent2 moveTo(target_right.origin, 1.5);
 }
 line_to_me(guy) {
   self endon("movedone");
@@ -66,9 +66,9 @@ line_to_me(guy) {
   }
 }
 hut_4_exp() {
-  piece = GetEnt("hut4_sound_piece", "script_noteworthy");
+  piece = getEnt("hut4_sound_piece", "script_noteworthy");
   dest_pos = piece.origin + (0, -2500, 0);
-  piece MoveTo(dest_pos, 3);
+  piece moveTo(dest_pos, 3);
 
   wait(0.5);
   piece playSound("exp_whoosh");
@@ -81,7 +81,7 @@ hut_4_exp() {
 flare_fire_1() {
   level waittill("flare_fire_1");
   wait(0.1);
-  flare_fire_1 = getent("flare_starter1", "targetname");
+  flare_fire_1 = getEnt("flare_starter1", "targetname");
   flare_fire_1 playSound("flare1");
   wait(55);
 }
@@ -89,7 +89,7 @@ flare_fire_1() {
 flare_fire_2() {
   level waittill("flare_fire_2");
   wait(0.1);
-  flare_fire_2 = getent("flare_starter2", "targetname");
+  flare_fire_2 = getEnt("flare_starter2", "targetname");
   flare_fire_2 playSound("flare2");
 }
 play_environmental_sound(sound_to_play, pos) {
@@ -130,13 +130,13 @@ play_dragging_sound() {
   while(1) {
     wait(randomintrange(1, 3));
     {
-      playsoundatposition("drag", (0, 0, 0));
+      playSoundAtPosition("drag", (0, 0, 0));
     }
   }
 
 }
 play_shock_loop_manual() {
-  playsoundatposition("player_shock_loop", (0, 0, 0));
+  playSoundAtPosition("player_shock_loop", (0, 0, 0));
   level waittill("IN_BOAT");
-  playsoundatposition("player_shock_end", (0, 0, 0));
+  playSoundAtPosition("player_shock_end", (0, 0, 0));
 }

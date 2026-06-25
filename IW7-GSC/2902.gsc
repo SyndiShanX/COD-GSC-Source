@@ -85,13 +85,13 @@ func_BE55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 }
 
 func_48A9() {
-  if(isDefined(self.target) && isDefined(getent(self.target, "targetname"))) {
-    var_0 = getent(self.target, "targetname");
+  if(isDefined(self.target) && isDefined(getEnt(self.target, "targetname"))) {
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0.script_parameters) && var_0.script_parameters == "big_collision") {
       var_0.origin = self.origin;
       var_0.angles = self.angles;
-      var_0 linkto(self);
+      var_0 linkTo(self);
       self.var_2AC1 = var_0;
     }
   }

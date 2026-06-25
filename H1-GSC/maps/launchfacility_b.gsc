@@ -98,15 +98,15 @@ main() {
   level.secondaryprogressbarfontsize = 1;
   level.usetimer = 1;
   level.missionfailedquote = &"LAUNCHFACILITY_B_BOMBS_GO_BOOM";
-  level.c4 = getent("c4", "targetname");
-  level.keyboard = getent("keyboard", "targetname");
-  level.elevator_upper = getent("elevator_upper", "targetname");
+  level.c4 = getEnt("c4", "targetname");
+  level.keyboard = getEnt("keyboard", "targetname");
+  level.elevator_upper = getEnt("elevator_upper", "targetname");
   level.wallexplosionsmall_fx = loadfx("fx\explosions\wall_explosion_small");
-  var_0 = getent("price", "script_noteworthy");
+  var_0 = getEnt("price", "script_noteworthy");
   var_0 maps\_utility::add_spawn_function(::price_think);
-  var_1 = getent("grigsby", "script_noteworthy");
+  var_1 = getEnt("grigsby", "script_noteworthy");
   var_1 maps\_utility::add_spawn_function(::grigsby_think);
-  var_2 = getent("team1", "script_noteworthy");
+  var_2 = getEnt("team1", "script_noteworthy");
   var_2 maps\_utility::add_spawn_function(::team1_think);
   var_3 = getEntArray("vent_friendlies_group1", "script_noteworthy");
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, ::vent_friendlies_group1_spawner_think);
@@ -257,12 +257,12 @@ start_warehouse() {
   soundscripts\_snd::snd_message("start_warehouse_checkpoint");
   common_scripts\utility::flag_set("begin_countdown");
   level notify("use_start");
-  var_0 = getent("warehouse_price", "targetname");
+  var_0 = getEnt("warehouse_price", "targetname");
   level.price teleport(var_0.origin, var_0.angles);
-  var_1 = getent("warehouse_grigsby", "targetname");
+  var_1 = getEnt("warehouse_grigsby", "targetname");
   level.grigsby teleport(var_1.origin, var_1.angles);
-  var_2 = getent("warehouse_player", "targetname");
-  level.player setorigin(var_2.origin);
+  var_2 = getEnt("warehouse_player", "targetname");
+  level.player setOrigin(var_2.origin);
   level.player setplayerangles(var_2.angles);
   common_scripts\utility::flag_set("walk");
   common_scripts\utility::flag_set("move_faster");
@@ -275,12 +275,12 @@ start_launchtubes() {
   soundscripts\_snd::snd_message("start_launchtubes_checkpoint");
   common_scripts\utility::flag_set("begin_countdown");
   level notify("use_start");
-  var_0 = getent("launchtubes_price", "targetname");
+  var_0 = getEnt("launchtubes_price", "targetname");
   level.price teleport(var_0.origin, var_0.angles);
-  var_1 = getent("launchtubes_grigsby", "targetname");
+  var_1 = getEnt("launchtubes_grigsby", "targetname");
   level.grigsby teleport(var_1.origin, var_1.angles);
-  var_2 = getent("launchtubes_player", "targetname");
-  level.player setorigin(var_2.origin);
+  var_2 = getEnt("launchtubes_player", "targetname");
+  level.player setOrigin(var_2.origin);
   level.player setplayerangles(var_2.angles);
   common_scripts\utility::flag_set("walk");
   common_scripts\utility::flag_set("move_faster");
@@ -292,12 +292,12 @@ start_vaultdoors() {
   soundscripts\_snd::snd_message("start_vaultdoors_checkpoint");
   common_scripts\utility::flag_set("begin_countdown");
   level notify("use_start");
-  var_0 = getent("vaultdoors_price", "targetname");
+  var_0 = getEnt("vaultdoors_price", "targetname");
   level.price teleport(var_0.origin, var_0.angles);
-  var_1 = getent("vaultdoors_grigsby", "targetname");
+  var_1 = getEnt("vaultdoors_grigsby", "targetname");
   level.grigsby teleport(var_1.origin, var_1.angles);
-  var_2 = getent("vaultdoors_player", "targetname");
-  level.player setorigin(var_2.origin);
+  var_2 = getEnt("vaultdoors_player", "targetname");
+  level.player setOrigin(var_2.origin);
   level.player setplayerangles(var_2.angles);
   common_scripts\utility::flag_set("walk");
   common_scripts\utility::flag_set("move_faster");
@@ -312,12 +312,12 @@ start_controlroom() {
   soundscripts\_snd::snd_message("start_controlroom_checkpoint");
   common_scripts\utility::flag_set("begin_countdown");
   level notify("use_start");
-  var_0 = getent("controlroom_price", "targetname");
+  var_0 = getEnt("controlroom_price", "targetname");
   level.price teleport(var_0.origin, var_0.angles);
-  var_1 = getent("controlroom_grigsby", "targetname");
+  var_1 = getEnt("controlroom_grigsby", "targetname");
   level.grigsby teleport(var_1.origin, var_1.angles);
-  var_2 = getent("controlroom_player", "targetname");
-  level.player setorigin(var_2.origin);
+  var_2 = getEnt("controlroom_player", "targetname");
+  level.player setOrigin(var_2.origin);
   level.player setplayerangles(var_2.angles);
   common_scripts\utility::flag_set("walk");
   common_scripts\utility::flag_set("move_faster");
@@ -330,14 +330,14 @@ start_controlroom() {
   maps\_utility::activate_trigger_with_targetname("control_room_friendlies_attack");
   wait 1;
   level.team1[0] delete();
-  var_4 = getent("vault_door_left", "targetname");
-  var_5 = getent(var_4.target, "targetname");
-  var_5 linkto(var_4);
-  var_6 = getent("vault_door_right", "targetname");
-  var_7 = getent(var_6.target, "targetname");
-  var_7 linkto(var_6);
-  var_4 rotateyaw(-103, 1, 0, 1);
-  var_6 rotateyaw(103, 1, 0, 1);
+  var_4 = getEnt("vault_door_left", "targetname");
+  var_5 = getEnt(var_4.target, "targetname");
+  var_5 linkTo(var_4);
+  var_6 = getEnt("vault_door_right", "targetname");
+  var_7 = getEnt(var_6.target, "targetname");
+  var_7 linkTo(var_6);
+  var_4 rotateYaw(-103, 1, 0, 1);
+  var_6 rotateYaw(103, 1, 0, 1);
   var_5 connectpaths();
   var_7 connectpaths();
 }
@@ -346,25 +346,25 @@ start_escape() {
   soundscripts\_snd::snd_message("start_escape_checkpoint");
   level notify("use_start");
   level thread hide_triggers("attacking");
-  var_0 = getent("vault_door_left", "targetname");
-  var_1 = getent(var_0.target, "targetname");
-  var_1 linkto(var_0);
-  var_2 = getent("vault_door_right", "targetname");
-  var_3 = getent(var_2.target, "targetname");
-  var_3 linkto(var_2);
-  var_0 rotateyaw(-103, 1, 0, 1);
-  var_2 rotateyaw(103, 1, 0, 1);
+  var_0 = getEnt("vault_door_left", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("vault_door_right", "targetname");
+  var_3 = getEnt(var_2.target, "targetname");
+  var_3 linkTo(var_2);
+  var_0 rotateYaw(-103, 1, 0, 1);
+  var_2 rotateYaw(103, 1, 0, 1);
   var_1 connectpaths();
   var_3 connectpaths();
-  var_4 = getent("blasted_wall", "targetname");
+  var_4 = getEnt("blasted_wall", "targetname");
   var_4 connectpaths();
   common_scripts\_exploder::exploder(100);
-  var_5 = getent("escape_price", "targetname");
+  var_5 = getEnt("escape_price", "targetname");
   level.price teleport(var_5.origin, var_5.angles);
-  var_6 = getent("escape_grigsby", "targetname");
+  var_6 = getEnt("escape_grigsby", "targetname");
   level.grigsby teleport(var_6.origin, var_6.angles);
-  var_7 = getent("escape_player", "targetname");
-  level.player setorigin(var_7.origin);
+  var_7 = getEnt("escape_player", "targetname");
+  level.player setOrigin(var_7.origin);
   level.player setplayerangles(var_7.angles);
   common_scripts\utility::flag_set("walk");
   common_scripts\utility::flag_set("move_faster");
@@ -385,12 +385,12 @@ start_escape() {
 start_elevator() {
   soundscripts\_snd::snd_message("start_elevator_checkpoint");
   level notify("use_start");
-  var_0 = getent("elevator_player", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("elevator_player", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getent("elevator_grigsby", "targetname");
+  var_1 = getEnt("elevator_grigsby", "targetname");
   level.price forceteleport(var_1.origin, var_1.angles);
-  var_2 = getent("elevator_price", "targetname");
+  var_2 = getEnt("elevator_price", "targetname");
   level.grigsby forceteleport(var_2.origin, var_2.angles);
   common_scripts\utility::flag_set("walk");
   common_scripts\utility::flag_set("move_faster");
@@ -462,9 +462,9 @@ vent_trigger_move_out() {
 }
 
 vent_trigger_air_raid_siren() {
-  var_0 = getent("trigger_air_raid", "targetname");
+  var_0 = getEnt("trigger_air_raid", "targetname");
   var_0 waittill("trigger");
-  var_1 = getent("air_raid", "targetname");
+  var_1 = getEnt("air_raid", "targetname");
   var_1 playLoopSound("emt_alarm_missile_siren");
 }
 
@@ -482,7 +482,7 @@ vent_dialogue1() {
 }
 
 vent_dialogue2() {
-  var_0 = getent("yankee_six_regroup", "script_noteworthy");
+  var_0 = getEnt("yankee_six_regroup", "script_noteworthy");
   var_0 thread vent_dialogue2_01();
 }
 
@@ -495,19 +495,19 @@ vent_dialogue2_01() {
 }
 
 barracks_dialogue() {
-  var_0 = getent("barracks_warning", "targetname");
+  var_0 = getEnt("barracks_warning", "targetname");
   var_0 waittill("trigger");
   play_sound_on_speaker("launchfacility_b_rul_barracks");
 }
 
 team1_walk_trigger() {
-  var_0 = getent("team1_walk", "script_noteworthy");
+  var_0 = getEnt("team1_walk", "script_noteworthy");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("walk");
 }
 
 team1_run_trigger() {
-  var_0 = getent("team1_run", "script_noteworthy");
+  var_0 = getEnt("team1_run", "script_noteworthy");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("move_faster");
 }
@@ -515,12 +515,12 @@ team1_run_trigger() {
 obj_control_room() {
   level endon("use_start");
   var_0 = 0;
-  var_1 = getent("origin_obj_stairs", "targetname");
+  var_1 = getEnt("origin_obj_stairs", "targetname");
   wait 6;
   objective_add(var_0, "active", &"LAUNCHFACILITY_B_GET_TO_THE_TELEMETRY", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("location_change_stairs");
-  var_1 = getent("origin_obj_breach_telemetry_room", "targetname");
+  var_1 = getEnt("origin_obj_breach_telemetry_room", "targetname");
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("control_room");
   wait 1;
@@ -528,14 +528,14 @@ obj_control_room() {
 }
 
 obj_which_way_to_control_room() {
-  var_0 = getent("pointing_to_control_room", "targetname");
+  var_0 = getEnt("pointing_to_control_room", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("location_change_stairs");
   thread obj_player_reached_control_room();
 }
 
 obj_player_reached_control_room() {
-  var_0 = getent("control_room", "targetname");
+  var_0 = getEnt("control_room", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("control_room");
 }
@@ -543,7 +543,7 @@ obj_player_reached_control_room() {
 obj_plant_the_c4() {
   common_scripts\utility::flag_wait("update_objectives");
   var_0 = 1;
-  var_1 = getent("wall_explosives", "targetname");
+  var_1 = getEnt("wall_explosives", "targetname");
   objective_add(var_0, "active", &"LAUNCHFACILITY_B_PLANT_THE_C4", var_1.origin);
   objective_indentlevel(var_0, 1);
   objective_current(var_0);
@@ -561,7 +561,7 @@ obj_plant_the_c4() {
 obj_upload_the_abort_codes() {
   maps\_utility::waittill_aigroupcleared("control_room");
   soundscripts\_snd::snd_message("start_code_input_mix");
-  var_0 = getent("control_room_friendlies_group", "targetname");
+  var_0 = getEnt("control_room_friendlies_group", "targetname");
 
   if(isDefined(var_0)) {
     var_0 maps\_utility::activate_trigger();
@@ -575,7 +575,7 @@ obj_upload_the_abort_codes() {
   var_2 = (0, 0, 0);
 
   if(!common_scripts\utility::flag("codes_uploaded")) {
-    var_3 = getent("keyboard_use_trigger", "targetname");
+    var_3 = getEnt("keyboard_use_trigger", "targetname");
     var_2 = var_3.origin;
   }
 
@@ -800,14 +800,14 @@ vent_enemies_group2_spawner_think() {
 }
 
 vent_trigger_friendlies_vent_jump() {
-  var_0 = getent("price_grigsby_jump", "targetname");
+  var_0 = getEnt("price_grigsby_jump", "targetname");
   var_0 waittill("trigger");
   thread vent_friendlies_vent_jump();
   thread vent_grisby_vent_jump();
 }
 
 vent_trigger_team1_vent_jump() {
-  var_0 = getent("team1_jump", "targetname");
+  var_0 = getEnt("team1_jump", "targetname");
   var_0 waittill("trigger");
   wait 1;
   thread vent_team1_vent_jump();
@@ -815,7 +815,7 @@ vent_trigger_team1_vent_jump() {
 
 vent_friendlies_vent_jump() {
   common_scripts\utility::flag_set("grisby_jump");
-  var_0 = getent("vent_jump_animent", "targetname");
+  var_0 = getEnt("vent_jump_animent", "targetname");
   var_0 maps\_anim::anim_reach_solo(level.price, "vent_drop_l");
   var_0 maps\_anim::anim_single_solo(level.price, "vent_drop_l");
   level.price maps\_utility::set_force_color("r");
@@ -825,21 +825,21 @@ vent_friendlies_vent_jump() {
 
 vent_grisby_vent_jump() {
   common_scripts\utility::flag_wait("grisby_jump");
-  var_0 = getent("vent_jump_animent", "targetname");
+  var_0 = getEnt("vent_jump_animent", "targetname");
   var_0 maps\_anim::anim_reach_solo(level.grigsby, "vent_drop_r");
   var_0 maps\_anim::anim_single_solo(level.grigsby, "vent_drop_r");
   level.grigsby maps\_utility::set_force_color("o");
 }
 
 vent_team1_vent_jump() {
-  var_0 = getent("vent_jump_animent", "targetname");
+  var_0 = getEnt("vent_jump_animent", "targetname");
   var_0 maps\_anim::anim_single_solo(level.team1[0], "vent_drop_team1");
   level.team1[0] maps\_utility::set_force_color("y");
   maps\_utility::activate_trigger_with_targetname("team1_setup_shower");
 }
 
 hide_triggers_1st_floor() {
-  var_0 = getent("attacking_1st_floor", "targetname");
+  var_0 = getEnt("attacking_1st_floor", "targetname");
   var_0 waittill("trigger");
   level thread hide_triggers("attacking_1st_floor");
   common_scripts\utility::flag_clear("aa_first_floor");
@@ -854,7 +854,7 @@ warehouse_retreating_enemies_think() {
 }
 
 warehouse_trigger_kill_allied_teammate() {
-  var_0 = getent("kill_yellow_allied", "targetname");
+  var_0 = getEnt("kill_yellow_allied", "targetname");
   var_0 waittill("trigger");
 
   if(isalive(level.team1[0])) {
@@ -863,7 +863,7 @@ warehouse_trigger_kill_allied_teammate() {
 }
 
 warehouse_trigger_kill_enemies() {
-  var_0 = getent("warehouse_killer", "targetname");
+  var_0 = getEnt("warehouse_killer", "targetname");
   var_0 waittill("trigger");
   thread warehouse_kill_all_enemy();
   common_scripts\utility::flag_clear("aa_warehouse");
@@ -872,7 +872,7 @@ warehouse_trigger_kill_enemies() {
 }
 
 warehouse_kill_all_enemy() {
-  var_0 = getent("killer_warehouse", "targetname");
+  var_0 = getEnt("killer_warehouse", "targetname");
   var_1 = getaiarray("axis");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -906,7 +906,7 @@ play_sound_on_speaker(var_0, var_1) {
 }
 
 launch_tube_dialogue() {
-  var_0 = getent("times_running_out", "targetname");
+  var_0 = getEnt("times_running_out", "targetname");
   var_0 waittill("trigger");
   maps\_utility::radio_dialogue("grg_gottamove");
   level endon("speaker_interrupt");
@@ -919,7 +919,7 @@ launch_tube_dialogue() {
 }
 
 rocket_powering_up() {
-  var_0 = getent("rocket_power_up", "targetname");
+  var_0 = getEnt("rocket_power_up", "targetname");
   var_0 waittill("trigger");
   play_sound_on_speaker("launchfacility_b_rul_30secs");
   soundscripts\_snd::snd_message("start_missile_silo_mix");
@@ -932,7 +932,7 @@ rocket_powering_up() {
 }
 
 launchtubes_teleport_friendlies() {
-  var_0 = getent("teleport_the_team", "targetname");
+  var_0 = getEnt("teleport_the_team", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("10sec_till_blastoff");
   level.player setthreatbiasgroup("player");
@@ -940,11 +940,11 @@ launchtubes_teleport_friendlies() {
   setignoremegroup("axis", "allies");
   thread launchtubes_clear();
   hide_triggers("countdown_remove");
-  var_1 = getent("launchtubes_teleport_price", "targetname");
+  var_1 = getEnt("launchtubes_teleport_price", "targetname");
   level.price.a.disablepain = 1;
   level.price forceteleport(var_1.origin, var_1.angles);
   level.price.grenadeawareness = 0;
-  var_2 = getent("launchtubes_teleport_grigsby", "targetname");
+  var_2 = getEnt("launchtubes_teleport_grigsby", "targetname");
   level.grigsby.a.disablepain = 1;
   level.grigsby forceteleport(var_2.origin, var_2.angles);
   level.grigsby pushplayer(1);
@@ -963,7 +963,7 @@ launchtubes_effects() {
 }
 
 launchtubes_clear() {
-  var_0 = getent("kill_hallway_enemies", "targetname");
+  var_0 = getEnt("kill_hallway_enemies", "targetname");
   var_1 = getaiarray("axis");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -996,12 +996,12 @@ rocket_powering_up_dialogue() {
 
 launchtubes_missile_alarm() {
   common_scripts\utility::flag_wait("start_missile_alarm");
-  var_0 = getent("alarm_missile_warning", "targetname");
+  var_0 = getEnt("alarm_missile_warning", "targetname");
   var_0 playSound("emt_alarm_missile_warning");
 }
 
 in_volume() {
-  var_0 = getent("shut_blast_door", "targetname");
+  var_0 = getEnt("shut_blast_door", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -1022,11 +1022,11 @@ in_volume() {
 
 run_to_the_door() {
   level thread guard_the_vaultdoors();
-  var_0 = getent("close_blastdoor_animent", "targetname");
-  var_1 = getent("blast_door_slam", "targetname");
-  var_2 = getent("blast_door_col", "targetname");
-  var_2 linkto(var_1, "hinge_jnt", (0, 0, 0), (0, 0, 0));
-  var_3 = getent("shut_blast_door", "targetname");
+  var_0 = getEnt("close_blastdoor_animent", "targetname");
+  var_1 = getEnt("blast_door_slam", "targetname");
+  var_2 = getEnt("blast_door_col", "targetname");
+  var_2 linkTo(var_1, "hinge_jnt", (0, 0, 0), (0, 0, 0));
+  var_3 = getEnt("shut_blast_door", "targetname");
   wait 2;
   var_1.animname = "door";
   var_1 maps\_anim::setanimtree();
@@ -1067,7 +1067,7 @@ run_to_the_door() {
 
   level thread hide_triggers("kill_tube_volume");
   level thread kill_enemy_in_tubes();
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
 }
 
 price_warning() {
@@ -1080,7 +1080,7 @@ launchtubes_hatch_close_sound() {
   level.player playSound("scn_launchb_missile_launch");
   common_scripts\_exploder::exploder(2);
   maps\_utility::stop_exploder(1);
-  var_0 = getent("inc_fireball_sfx", "targetname");
+  var_0 = getEnt("inc_fireball_sfx", "targetname");
   var_0 playSound("h1_launchtube_fireball");
   level thread fireballdlight();
   level thread kill_launchtube_steam_fx();
@@ -1099,13 +1099,13 @@ fireballdlight() {
   var_1 = spawn("script_model", (395.177, 2955.42, -300.614));
   var_1 setModel("tag_origin");
   playFXOnTag(level._effect["launchtube_fire_light"], var_1, "tag_origin");
-  var_1 moveto((-524, 3898, -292), var_0, 0, 1);
+  var_1 moveTo((-524, 3898, -292), var_0, 0, 1);
   wait(var_0);
   var_1 delete();
 }
 
 kill_player_in_tubes() {
-  var_0 = getent("kill_player_tubes", "targetname");
+  var_0 = getEnt("kill_player_tubes", "targetname");
 
   if(level.player istouching(var_0)) {
     level.player playSound("scn_launchb_missile_launch");
@@ -1117,7 +1117,7 @@ kill_player_in_tubes() {
 }
 
 player_death_effect() {
-  var_0 = getent("player", "classname");
+  var_0 = getEnt("player", "classname");
   playFX(level._effect["player_death_explosion"], var_0.origin);
   earthquake(1, 1, level.player.origin, 100);
 }
@@ -1133,7 +1133,7 @@ kill_launchtube_steam_fx() {
 }
 
 blast_door_clip() {
-  var_0 = getent("blast_player_clip", "targetname");
+  var_0 = getEnt("blast_player_clip", "targetname");
   var_0 notsolid();
   common_scripts\utility::flag_wait("blast_door_player_clip_on");
   var_0 solid();
@@ -1142,7 +1142,7 @@ blast_door_clip() {
 }
 
 kill_enemy_in_tubes() {
-  var_0 = getent("killer_tubes", "targetname");
+  var_0 = getEnt("killer_tubes", "targetname");
   var_1 = getaiarray("axis");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -1153,7 +1153,7 @@ kill_enemy_in_tubes() {
 }
 
 guard_the_vaultdoors() {
-  var_0 = getent("guard_vaultdoors", "targetname");
+  var_0 = getEnt("guard_vaultdoors", "targetname");
   common_scripts\utility::flag_wait("open_vault_doors");
   var_1[0] = level.price;
   var_1[1] = level.grigsby;
@@ -1176,7 +1176,7 @@ guard_the_vaultdoors_grigsby_wait_for_approach(var_0) {
 
 guard_the_vaultdoors_grigsby() {
   level endon("open_vault_doors");
-  var_0 = getent("guard_vaultdoors", "targetname");
+  var_0 = getEnt("guard_vaultdoors", "targetname");
   level.grigsby.approachtypefunc = ::returnexposedcrouch;
   level.grigsby.a.dontstartaim = 1;
   var_0 maps\_anim::anim_reach_and_approach_solo(level.grigsby, "guard_vaultdoors");
@@ -1251,17 +1251,17 @@ vault_door_scene_completed() {
 
 vault_doors_open() {
   common_scripts\utility::flag_wait("vault_doors_unlocked");
-  var_0 = getent("vault_door_left", "targetname");
-  var_1 = getent(var_0.target, "targetname");
-  var_1 linkto(var_0);
-  var_2 = getent("vault_door_sfx", "targetname");
+  var_0 = getEnt("vault_door_left", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("vault_door_sfx", "targetname");
   var_2 playSound("scn_vault_door_open");
-  var_3 = getent("vault_door_right", "targetname");
-  var_4 = getent(var_3.target, "targetname");
-  var_4 linkto(var_3);
+  var_3 = getEnt("vault_door_right", "targetname");
+  var_4 = getEnt(var_3.target, "targetname");
+  var_4 linkTo(var_3);
   wait 1;
-  var_0 rotateyaw(-0.3, 0.05);
-  var_3 rotateyaw(0.3, 0.05);
+  var_0 rotateYaw(-0.3, 0.05);
+  var_3 rotateYaw(0.3, 0.05);
   var_0 playSound("mtl_steam_pipe_burst");
   var_3 playSound("expl_steam_pipe_body");
   wait 1;
@@ -1269,11 +1269,11 @@ vault_doors_open() {
   wait 2;
   var_3 playSound("expl_steam_pipe_body");
   var_0 playSound("gate_open");
-  var_0 rotateyaw(-50, 40, 0, 40);
-  var_3 rotateyaw(50, 40, 0, 40);
+  var_0 rotateYaw(-50, 40, 0, 40);
+  var_3 rotateYaw(50, 40, 0, 40);
   wait 20;
-  var_0 rotateyaw(-50, 30, 0, 30);
-  var_3 rotateyaw(50, 30, 0, 30);
+  var_0 rotateYaw(-50, 30, 0, 30);
+  var_3 rotateYaw(50, 30, 0, 30);
   common_scripts\utility::flag_clear("aa_launchtubes");
   maps\_utility::arcademode_checkpoint(5, "d");
   common_scripts\utility::flag_set("vault_door_opened");
@@ -1304,7 +1304,7 @@ preparing_to_breach() {
 }
 
 blow_the_wall_dialogue() {
-  var_0 = getent("plant_explosives_dialogue", "targetname");
+  var_0 = getEnt("plant_explosives_dialogue", "targetname");
   var_0 waittill("trigger");
   level.price maps\_anim::anim_single_queue(level.price, "status");
   maps\_utility::radio_dialogue("gm2_inposition");
@@ -1330,7 +1330,7 @@ blow_the_wall_dialogue() {
 
 plant_the_c4() {
   level.player endon("death");
-  var_0 = getent("wall_explosives", "targetname");
+  var_0 = getEnt("wall_explosives", "targetname");
   var_0 maps\_c4::c4_location(undefined, (0, 0, 0), (0, 0, 0), var_0.origin);
   var_0 waittill("c4_planted");
   level notify("wall_c4_planted");
@@ -1362,10 +1362,10 @@ griggs_c4_take_cover_path() {
 }
 
 blow_the_wall() {
-  var_0 = getent("blasted_wall", "targetname");
+  var_0 = getEnt("blasted_wall", "targetname");
   var_0 connectpaths();
   common_scripts\_exploder::exploder(100);
-  var_1 = getent("wall_explosives", "targetname");
+  var_1 = getEnt("wall_explosives", "targetname");
   playFX(level.wallexplosionsmall_fx, var_1.origin);
   thread common_scripts\utility::play_sound_in_space("h1_c4_explosion_main", var_1.origin);
   radiusdamage(var_1.origin, 256, 200, 50);
@@ -1403,9 +1403,9 @@ telemetry_friendlies_think() {
 }
 
 upload_codes_h1() {
-  var_0 = getent("keyboard_use_trigger", "targetname");
+  var_0 = getEnt("keyboard_use_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
-  var_1 = getent("keyboard_use_trigger_h1", "targetname");
+  var_1 = getEnt("keyboard_use_trigger_h1", "targetname");
   var_2 = spawn("script_model", level.keyboard.origin);
   var_2.angles = (0, 315, 0);
   var_2 setModel("com_computer_keyboard");
@@ -1427,19 +1427,19 @@ upload_codes_h1() {
     var_12 = level.player getplayerangles();
 
     if(level.player isleaning() || !level.player istouching(var_1) || !common_scripts\utility::within_fov(var_11, var_12, var_0.realorigin, var_10)) {
-      var_1 sethintstring(" ");
+      var_1 setHintString(" ");
       waitframe();
       continue;
     }
 
-    var_1 sethintstring(&"LAUNCHFACILITY_B_HINT_UPLOAD_CODES");
+    var_1 setHintString(&"LAUNCHFACILITY_B_HINT_UPLOAD_CODES");
 
     if(!level.player useButtonPressed()) {
       waitframe();
       continue;
     }
 
-    var_1 sethintstring(" ");
+    var_1 setHintString(" ");
     level.player allowcrouch(0);
     level.player allowprone(0);
     level.player disableweapons();
@@ -1504,15 +1504,15 @@ upload_codes_h1() {
 }
 
 upload_codes() {
-  var_0 = getent("keyboard_use_trigger", "targetname");
+  var_0 = getEnt("keyboard_use_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   maps\_utility::waittill_aigroupcleared("control_room");
   var_1 = 0.05;
   var_2 = 0;
   var_3 = 3;
   var_0 common_scripts\utility::trigger_on();
-  var_0 sethintstring(&"LAUNCHFACILITY_B_HINT_UPLOAD_CODES");
-  var_0 usetriggerrequirelookat();
+  var_0 setHintString(&"LAUNCHFACILITY_B_HINT_UPLOAD_CODES");
+  var_0 useTriggerRequireLookAt();
   var_4 = spawn("script_model", level.keyboard.origin);
   var_4.angles = (0, 315, 0);
   var_4 setModel("com_computer_keyboard_obj");
@@ -1628,7 +1628,7 @@ control_room_dialogue() {
 
 control_room_noradscreen() {
   common_scripts\utility::flag_wait("change_films");
-  var_0 = getent("noradscreen", "targetname");
+  var_0 = getEnt("noradscreen", "targetname");
   var_0 delete();
 }
 
@@ -1640,8 +1640,8 @@ control_room_bigscreen() {
 }
 
 control_room_screen_h1() {
-  var_0 = getent("display_name_sfx", "targetname");
-  var_1 = getent("noradscreen", "targetname");
+  var_0 = getEnt("display_name_sfx", "targetname");
+  var_1 = getEnt("noradscreen", "targetname");
   var_1 delete();
   level waittill("wall_c4_planted");
   setsaveddvar("cg_cinematicFullScreen", "0");
@@ -1666,7 +1666,7 @@ control_room_screen_h1() {
 }
 
 play_display_change_sfx() {
-  var_0 = getent("display_name_sfx", "targetname");
+  var_0 = getEnt("display_name_sfx", "targetname");
   var_0 maps\_utility::play_sound_on_entity("h1_Inchb_display_on");
 }
 
@@ -1678,7 +1678,7 @@ update_keyboard_monitor_screen(var_0, var_1) {
   }
 
   level waittill("wall_c4_planted");
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = 0;
   var_4 = [];
 
@@ -1713,20 +1713,20 @@ update_keyboard_monitor_screen(var_0, var_1) {
 }
 
 telemetry_doors_open() {
-  var_0 = getent("open_telemetry_door", "targetname");
+  var_0 = getEnt("open_telemetry_door", "targetname");
   var_0 waittill("trigger");
-  var_1 = getent("telemetry_room_door", "targetname");
-  var_1 rotateyaw(-70, 1, 1, 0);
+  var_1 = getEnt("telemetry_room_door", "targetname");
+  var_1 rotateYaw(-70, 1, 1, 0);
   var_1 playSound("gate_open");
   var_1 connectpaths();
 }
 
 escape_doors_open() {
-  var_0 = getent("open_escape_door", "targetname");
+  var_0 = getEnt("open_escape_door", "targetname");
   var_0 waittill("trigger");
-  var_1 = getent("escape_door_right", "targetname");
-  var_2 = getent(var_1.target, "targetname");
-  var_1 moveto(var_2.origin, 3, 1, 2);
+  var_1 = getEnt("escape_door_right", "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
+  var_1 moveTo(var_2.origin, 3, 1, 2);
   var_1 connectpaths();
 }
 
@@ -1740,14 +1740,14 @@ follow_price() {
 }
 
 grigsby_warning() {
-  var_0 = getent("incoming_enemy", "script_noteworthy");
+  var_0 = getEnt("incoming_enemy", "script_noteworthy");
   var_0 waittill("spawned");
   wait 1;
   level.grigsby maps\_anim::anim_single_queue(level.grigsby, "grg_company");
 }
 
 delete_controlroom_friendlies() {
-  var_0 = getent("delete_team2", "targetname");
+  var_0 = getEnt("delete_team2", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("delete_team2");
 }
@@ -1760,7 +1760,7 @@ elevator() {
   }
 
   level.price maps\_anim::anim_single_queue(level.price, "pri_movemove");
-  level.anim_ent = getent("tunnel_animent", "targetname");
+  level.anim_ent = getEnt("tunnel_animent", "targetname");
 
   if(getdvarint("use_old_elevator") == 1) {
     level.price thread ai_to_elevator("r");
@@ -1775,12 +1775,12 @@ elevator() {
   }
 
   level thread elevator_think();
-  var_0 = getent("elevator", "targetname");
-  level.anim_ent linkto(var_0);
+  var_0 = getEnt("elevator", "targetname");
+  level.anim_ent linkTo(var_0);
 }
 
 elevator_player_clip() {
-  var_0 = getent("elevator_player_clip", "targetname");
+  var_0 = getEnt("elevator_player_clip", "targetname");
   var_0 notsolid();
   common_scripts\utility::flag_wait("elevator_player_clip_on");
   var_0 solid();
@@ -1801,11 +1801,11 @@ price_to_elevator(var_0) {
   level.anim_ent maps\_anim::anim_single_solo(self, "h1_elevator_entering");
   level.anim_ent thread maps\_anim::anim_loop_solo(self, "h1_elevator_idle2", undefined, "stop_price_idle2");
   common_scripts\utility::flag_wait("all_in_elevator");
-  self linkto(level.anim_ent);
+  self linkTo(level.anim_ent);
   common_scripts\utility::flag_wait("elevator_dialogue");
   level.anim_ent notify("stop_price_idle2");
   level.anim_ent thread maps\_anim::anim_single_solo(self, "h1_elevator_elevator");
-  var_1 = getent("elevator_top", "targetname");
+  var_1 = getEnt("elevator_top", "targetname");
   var_1 waittill("trigger");
   wait 2;
   self unlink(level.anim_ent);
@@ -1820,11 +1820,11 @@ griggs_to_elevator(var_0) {
   common_scripts\utility::flag_wait("all_in_elevator");
   level.anim_ent notify("stop_griggs_idle1");
   level.anim_ent thread maps\_anim::anim_loop_solo(self, "h1_elevator_idle2", undefined, "stop_griggs_idle2");
-  self linkto(level.anim_ent);
+  self linkTo(level.anim_ent);
   common_scripts\utility::flag_wait("elevator_dialogue");
   level.anim_ent notify("stop_griggs_idle2");
   level.anim_ent thread maps\_anim::anim_single_solo(self, "h1_elevator_elevator");
-  var_1 = getent("elevator_top", "targetname");
+  var_1 = getEnt("elevator_top", "targetname");
   var_1 waittill("trigger");
   wait 2.5;
   self unlink(level.anim_ent);
@@ -1833,7 +1833,7 @@ griggs_to_elevator(var_0) {
 }
 
 check_elevator() {
-  var_0 = getent("standing_in_elevator", "targetname");
+  var_0 = getEnt("standing_in_elevator", "targetname");
 
   for(;;) {
     wait 0.05;
@@ -1856,8 +1856,8 @@ ai_to_elevator(var_0) {
   level.anim_ent maps\_anim::anim_reach_solo(self, "elevator_runin");
   level.anim_ent maps\_anim::anim_single_solo(self, "elevator_runin");
   level.anim_ent thread maps\_anim::anim_loop_solo(self, "elevator_idle", undefined, "stop_idle");
-  self linkto(level.anim_ent);
-  var_1 = getent("elevator_top", "targetname");
+  self linkTo(level.anim_ent);
+  var_1 = getEnt("elevator_top", "targetname");
   var_1 waittill("trigger");
   wait 2;
   self unlink(level.anim_ent);
@@ -1867,7 +1867,7 @@ ai_to_elevator(var_0) {
 }
 
 in_the_elevator() {
-  var_0 = getent("standing_in_elevator", "targetname");
+  var_0 = getEnt("standing_in_elevator", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -1879,59 +1879,59 @@ in_the_elevator() {
 }
 
 linkto_elevator(var_0) {
-  self linkto(var_0);
+  self linkTo(var_0);
 }
 
 elevator_think() {
   common_scripts\utility::flag_set("elevator_player_clip_on");
-  var_0 = getent("elevator", "targetname");
+  var_0 = getEnt("elevator", "targetname");
   var_1 = getEntArray("elevator_lights", "targetname");
   common_scripts\utility::array_thread(var_1, ::linkto_elevator, var_0);
   var_2 = getEntArray("elevator_detail", "targetname");
   common_scripts\utility::array_thread(var_2, ::linkto_elevator, var_0);
-  level.elevator_door_inner_top = getent("elevator_door_inner_top", "targetname");
-  level.elevator_door_inner_top linkto(var_0);
-  level.elevator_door_inner_bottom = getent("elevator_door_inner_bottom", "targetname");
-  var_3 = getent("elevator_door_inner_bottom", "targetname");
+  level.elevator_door_inner_top = getEnt("elevator_door_inner_top", "targetname");
+  level.elevator_door_inner_top linkTo(var_0);
+  level.elevator_door_inner_bottom = getEnt("elevator_door_inner_bottom", "targetname");
+  var_3 = getEnt("elevator_door_inner_bottom", "targetname");
   var_3 movez(-102, 2, 1, 1);
   var_3 playSound("scn_elevator_door_close");
   var_3 maps\_utility::play_sound_on_entity("scn_launchb_elevator_sequence");
   var_3 waittill("movedone");
-  level.elevator_door_inner_bottom linkto(var_0);
-  var_4 = getent("elevator_door_outside1_bottom", "targetname");
-  var_5 = getent(var_4.target, "targetname");
-  var_4 moveto(var_5.origin, 2, 1, 1);
-  var_6 = getent("elevator_door_outside2_bottom", "targetname");
-  var_5 = getent(var_6.target, "targetname");
-  var_6 moveto(var_5.origin, 2, 1, 1);
+  level.elevator_door_inner_bottom linkTo(var_0);
+  var_4 = getEnt("elevator_door_outside1_bottom", "targetname");
+  var_5 = getEnt(var_4.target, "targetname");
+  var_4 moveTo(var_5.origin, 2, 1, 1);
+  var_6 = getEnt("elevator_door_outside2_bottom", "targetname");
+  var_5 = getEnt(var_6.target, "targetname");
+  var_6 moveTo(var_5.origin, 2, 1, 1);
   var_4 waittill("movedone");
-  var_0 moveto(level.elevator_upper.origin, 15, 0.5, 0.1);
+  var_0 moveTo(level.elevator_upper.origin, 15, 0.5, 0.1);
   var_0 playSound("scn_elevator_move");
   common_scripts\utility::flag_set("elevator_dialogue");
   var_0 waittill("movedone");
   maps\_utility::autosave_by_name("On our way");
   maps\_utility::arcademode_checkpoint(3, "f");
-  level.elevator_door_inner_top = getent("elevator_door_inner_top", "targetname");
+  level.elevator_door_inner_top = getEnt("elevator_door_inner_top", "targetname");
   level.elevator_door_inner_top unlink(var_0);
-  level.elevator_door_inner_top = getent("elevator_door_inner_top", "targetname");
-  var_7 = getent("elevator_door_inner_top", "targetname");
+  level.elevator_door_inner_top = getEnt("elevator_door_inner_top", "targetname");
+  var_7 = getEnt("elevator_door_inner_top", "targetname");
   var_7 movez(102, 2, 1, 1);
   var_7 connectpaths();
   var_7 playSound("scn_elevator_door_open");
   var_7 waittill("movedone");
-  var_8 = getent("elevator_door_outside1_top", "targetname");
-  var_5 = getent(var_8.target, "targetname");
-  var_8 moveto(var_5.origin, 2, 1, 1);
+  var_8 = getEnt("elevator_door_outside1_top", "targetname");
+  var_5 = getEnt(var_8.target, "targetname");
+  var_8 moveTo(var_5.origin, 2, 1, 1);
   var_8 connectpaths();
-  var_9 = getent("elevator_door_outside2_top", "targetname");
-  var_5 = getent(var_9.target, "targetname");
-  var_9 moveto(var_5.origin, 2, 1, 1);
+  var_9 = getEnt("elevator_door_outside2_top", "targetname");
+  var_5 = getEnt(var_9.target, "targetname");
+  var_9 moveTo(var_5.origin, 2, 1, 1);
   var_9 connectpaths();
 }
 
 elevator_dialogue() {
   common_scripts\utility::flag_wait("elevator_dialogue");
-  var_0 = getent("the_gaz_man", "script_noteworthy");
+  var_0 = getEnt("the_gaz_man", "script_noteworthy");
   var_0 maps\_utility::add_spawn_function(::protect_gaz);
 
   if(getdvarint("use_old_elevator") == 1) {
@@ -1965,8 +1965,8 @@ end_of_level() {
 }
 
 compass_maps() {
-  var_0 = getent("compass_map_upper", "targetname");
-  var_1 = getent("compass_map_lower", "targetname");
+  var_0 = getEnt("compass_map_upper", "targetname");
+  var_1 = getEnt("compass_map_lower", "targetname");
   var_0 thread map_change("compass_map_launchfacility_b");
   var_1 thread map_change("compass_map_launchfacility_b_2");
 }
@@ -1981,7 +1981,7 @@ map_change(var_0) {
 #using_animtree("animated_props");
 
 airduct_fan_large() {
-  var_0 = getent("airduct_fan_large", "targetname");
+  var_0 = getEnt("airduct_fan_large", "targetname");
   var_0 useanimtree(#animtree);
   var_0 setanim(%icbm_turbofan176_spin, 1, 0.1, 1);
 }
@@ -2191,9 +2191,9 @@ show_triggers(var_0) {
 }
 
 keep_price_griggs_distance_hallway_after_staircase() {
-  getent("kill_yellow_allied", "targetname") waittill("trigger");
+  getEnt("kill_yellow_allied", "targetname") waittill("trigger");
   var_0 = [level.price, level.grigsby];
   level thread maps\_utility::keep_distance(var_0);
-  getent("trigger_big_blast_door", "targetname") waittill("trigger");
+  getEnt("trigger_big_blast_door", "targetname") waittill("trigger");
   level thread maps\_utility::stop_keep_distance(var_0);
 }

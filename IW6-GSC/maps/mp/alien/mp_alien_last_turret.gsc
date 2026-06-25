@@ -48,11 +48,11 @@ remote_turret_monitoruse() {
   }
 
   self makeusable();
-  self sethintstring(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
+  self setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
   self setModel("tag_origin");
 
   if(maps\mp\alien\_utility::alien_mode_has("outline")) {
-    self.outline_model = getent(self.script_noteworthy, "targetname");
+    self.outline_model = getEnt(self.script_noteworthy, "targetname");
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.outline_model, 750);
   }
 
@@ -64,7 +64,7 @@ remote_turret_monitoruse() {
     var_0 maps\mp\_utility::delaythread(2, ::play_turret_fx, 0);
   } else {
     var_0 maps\mp\_utility::delaythread(2, ::play_turret_fx, 1);
-    self sethintstring("");
+    self setHintString("");
   }
 
   for(;;) {
@@ -109,7 +109,7 @@ remote_turret_monitoruse() {
     if(!var_0 is_turret_enabled()) {
       if(var_2 can_activate_turret(var_3)) {
         var_2 maps\mp\alien\_persistence::take_player_currency(var_3, 1, "trap");
-        self sethintstring("");
+        self setHintString("");
         var_0.enabled = 1;
         self.outline_model.enabled = 1;
         var_0.turret_ammo = int(var_1 * var_2 maps\mp\alien\_perk_utility::perk_gettrapdurationscalar());
@@ -135,7 +135,7 @@ remote_turret_monitoruse() {
 }
 
 build_turret_func() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = "mg_turret";
   var_2 = "turret_dlc4_alien_shock";
   var_3 = "killstreak_remote_turret_remote_mp";
@@ -200,7 +200,7 @@ send_notify_on_player_disconnect(var_0) {
   self notify("exit");
   self notify("player_exit");
   self.use_trigger show();
-  self.use_trigger sethintstring(&"ALIEN_COLLECTIBLES_USE_TURRET");
+  self.use_trigger setHintString(&"ALIEN_COLLECTIBLES_USE_TURRET");
   maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.use_trigger.outline_model, 750);
   self notify("stop_watching");
 }
@@ -330,7 +330,7 @@ watch_for_turret_reloading() {
   while(!isDefined(self.broken)) {
     if(self.reloading && !self.overloaded) {
       thread play_turret_fx(1);
-      self.use_trigger sethintstring("");
+      self.use_trigger setHintString("");
       maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.use_trigger.outline_model);
       wait(var_0 - 5);
 
@@ -349,7 +349,7 @@ watch_for_turret_reloading() {
 
       maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.use_trigger.outline_model, 750);
       self.reloading = 0;
-      self.use_trigger sethintstring(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
+      self.use_trigger setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
     }
 
     wait 0.1;
@@ -362,13 +362,13 @@ watch_for_turret_overloading() {
   level waittill("traps_disabled");
   self.overloaded = 1;
   level thread maps\mp\mp_alien_last_traps::play_disabled_fx(self.use_trigger.outline_model);
-  self.use_trigger sethintstring(&"MP_ALIEN_LAST_TURRET_OFFLINE");
+  self.use_trigger setHintString(&"MP_ALIEN_LAST_TURRET_OFFLINE");
   maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.use_trigger.outline_model);
   maps\mp\alien\_outline_proto::enable_outline(self.use_trigger.outline_model, 4, 1);
   level waittill("traps_reenabled");
   self.overloaded = 0;
   self.reloading = 0;
-  self.use_trigger sethintstring(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
+  self.use_trigger setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
   self.overloading_func_done = 1;
   maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.use_trigger.outline_model, 750);
 }
@@ -419,7 +419,7 @@ is_remote_enabled() {
 
 disable_turret() {
   self.enabled = 0;
-  self.use_trigger sethintstring(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
+  self.use_trigger setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
   self turretfiredisable();
   self maketurretinoperable();
 
@@ -437,7 +437,7 @@ play_broken_fx() {
 }
 
 enable_turret_use() {
-  self sethintstring("");
+  self setHintString("");
   self turretfireenable();
   self maketurretoperable();
 }
@@ -452,7 +452,7 @@ monitor_player_exit(var_0) {
 
   for(;;) {
     var_0 waittill("player_pressed_use");
-    self.use_trigger sethintstring(&"ALIEN_COLLECTIBLES_USE_TURRET");
+    self.use_trigger setHintString(&"ALIEN_COLLECTIBLES_USE_TURRET");
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(self.use_trigger.outline_model, 750);
     var_0.pressed_use = 1;
   }
@@ -579,7 +579,7 @@ zap_periodically_when_firing(var_0) {
 
     if(self.heatlevel > 0.1) {
       var_1 = self gettagorigin("tag_player");
-      var_2 = vectornormalize(anglesToForward(self gettagangles("tag_player")));
+      var_2 = vectorNormalize(anglesToForward(self gettagangles("tag_player")));
       var_3 = var_1 + var_2 * 10000;
       var_4 = bulletTrace(var_1, var_3, 1, undefined, 1, 1);
 
@@ -693,7 +693,7 @@ turret_tesla_bolt_death(var_0) {
   }
 
   if(isDefined(var_1)) {
-    var_0.death_struct.attack_bolt moveto(var_1, 0.05);
+    var_0.death_struct.attack_bolt moveTo(var_1, 0.05);
     wait 0.05;
 
     if(isDefined(self) && distancesquared(self.origin, var_0.death_struct.attack_bolt.origin) > 40000) {
@@ -768,7 +768,7 @@ turret_tesla_bolt_no_target(var_0, var_1) {
   }
 
   var_8 = var_0 + (0, 0, 5);
-  var_2.death_struct.attack_bolt moveto(var_8, 0.05);
+  var_2.death_struct.attack_bolt moveTo(var_8, 0.05);
   wait 0.05;
 
   if(isDefined(self) && distancesquared(self.origin, var_2.death_struct.attack_bolt.origin) > 40000) {
@@ -904,7 +904,7 @@ turret_is_broken(var_0) {
 
   var_0 disable_turret();
   self makeunusable();
-  self sethintstring("");
+  self setHintString("");
   maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self.outline_model);
   var_0 thread play_broken_fx();
   playFX(level._effect["electrical_sparks_20_funner"], self.origin);

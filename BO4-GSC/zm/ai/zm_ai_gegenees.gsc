@@ -236,7 +236,7 @@ function_7fe60e9e(entity) {
     speed = length(velocity);
 
     if(speed > 0) {
-      var_7ee6937e = vectornormalize((targetpos[0], targetpos[1], 0) - (launchpos[0], launchpos[1], 0));
+      var_7ee6937e = vectorNormalize((targetpos[0], targetpos[1], 0) - (launchpos[0], launchpos[1], 0));
       dot = vectordot(-1 * var_7ee6937e, velocity / speed);
 
       if(dot >= 0.8) {
@@ -475,7 +475,7 @@ function_60164697() {
       break;
     }
 
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     waitframe(1);
   }
 }
@@ -658,8 +658,8 @@ function_3d752709(enemy, target) {
   enemyvec = enemy.origin - target.origin;
   var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
   var_c2ee8451 = (facingvec[0], facingvec[1], 0);
-  var_3e3c8075 = vectornormalize(var_3e3c8075);
-  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  var_3e3c8075 = vectorNormalize(var_3e3c8075);
+  var_c2ee8451 = vectorNormalize(var_c2ee8451);
   enemydot = vectordot(var_c2ee8451, var_3e3c8075);
 
   if(enemydot < 0) {
@@ -799,7 +799,7 @@ function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
         playFX("impacts/fx8_bul_impact_metal_sm", point, dir * -1);
 
         if(isDefined(point)) {
-          playsoundatposition(#"hash_72db6f3f0e602a33", point);
+          playSoundAtPosition(#"hash_72db6f3f0e602a33", point);
         }
       }
 

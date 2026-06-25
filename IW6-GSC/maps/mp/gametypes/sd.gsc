@@ -448,7 +448,7 @@ bombs() {
 
     level.bombZones[level.bombZones.size] = bombZone;
 
-    bombZone.bombDefuseTrig = getent(visuals[0].target, "targetname");
+    bombZone.bombDefuseTrig = getEnt(visuals[0].target, "targetname");
     assert(isDefined(bombZone.bombDefuseTrig));
     bombZone.bombDefuseTrig.origin += (0, 0, -10000);
     bombZone.bombDefuseTrig.label = label;
@@ -468,7 +468,7 @@ bombs() {
 setupKillCamEnt(bombZone) {
   tempOrg = spawn("script_origin", self.origin);
   tempOrg.angles = self.angles;
-  tempOrg RotateYaw(-45, 0.05);
+  tempOrg rotateYaw(-45, 0.05);
   wait(0.05);
 
   camPos = undefined;

@@ -56,7 +56,7 @@ initpillars() {
           var_1.pathblockertop = var_4;
         } else if(var_4.script_noteworthy == "pillar_path_blocker_ground") {
           var_4 solid();
-          var_4 disconnectpaths();
+          var_4 disconnectPaths();
           var_1.pathblockerbottom = var_4;
         }
 
@@ -83,7 +83,7 @@ getrandomactivepillar() {
 
 destroypillar() {
   self.pathblockertop solid();
-  self.pathblockertop disconnectpaths();
+  self.pathblockertop disconnectPaths();
   self.pathblockertop notsolid();
   self.pathblockerbottom connectpaths();
   self.pathblockerbottom notsolid();
@@ -343,7 +343,7 @@ handlemagicbox() {
     if(maps\mp\zombies\_wall_buys::isscriptedmagicbox(var_1)) {
       var_1 thread maps\mp\zombies\_wall_buys::activatemagicboxeffects(var_1.modelent, var_1.light);
       level thread maps\mp\zombies\_wall_buys::watchmagicboxtrigger(var_1, 0);
-      var_1 sethintstring(maps\mp\zombies\_wall_buys::getmagicboxhintsting());
+      var_1 setHintString(maps\mp\zombies\_wall_buys::getmagicboxhintsting());
       var_1 setsecondaryhintstring(var_1 maps\mp\zombies\_wall_buys::getmagicboxhintstringcost());
       var_1 maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(var_1.cost));
       var_1 maps\mp\zombies\_util::tokenhintstring(1);
@@ -358,7 +358,7 @@ handlemagicbox() {
     if(maps\mp\zombies\_wall_buys::isscriptedmagicbox(var_1)) {
       var_1 thread maps\mp\zombies\_wall_buys::deactivatemagicboxeffects(var_1.modelent, var_1.light);
       var_1 maps\mp\zombies\_wall_buys::deactivatemagicbox();
-      var_1 sethintstring(maps\mp\zombies\_wall_buys::getmagicboxhintsting(1));
+      var_1 setHintString(maps\mp\zombies\_wall_buys::getmagicboxhintsting(1));
       var_1 setsecondaryhintstring(var_1 maps\mp\zombies\_wall_buys::getmagicboxhintstringcost(1));
       var_1 maps\mp\zombies\_util::tokenhintstring(0);
       var_1.active = 0;
@@ -506,7 +506,7 @@ teleporttostructandbackatend(var_0) {
   maps\mp\zombies\_teleport::teleport_players_through_chute([self], 0);
   thread maps\mp\zombies\_teleport::reset_teleport_flag_after_time([self], 0.75);
   var_1 = playerphysicstrace(var_0.origin, var_0.origin - (0, 0, 300), self) - (0, 0, 0.9);
-  self setorigin(var_1, 1);
+  self setOrigin(var_1, 1);
 
   if(isDefined(var_0.angles)) {
     self.prebossangles = self getplayerangles();
@@ -527,7 +527,7 @@ teleporttostructandbackatend(var_0) {
     self.prebossorigin = var_2;
   }
 
-  self setorigin(self.prebossorigin, 1);
+  self setOrigin(self.prebossorigin, 1);
 
   if(isDefined(self.prebossangles)) {
     self setplayerangles(self.prebossangles);
@@ -595,7 +595,7 @@ giverewardtoplayer(var_0) {
     var_2 = var_0 maps\mp\killstreaks\_airdrop::createairdropcrate(var_0, "airdrop_assault", "ozMoney", var_1.origin, undefined, 0, 1);
     playFX(common_scripts\utility::getfx("crate_teleport"), var_1.origin, (1, 0, 0), (0, 0, 1));
     var_2 thread[[level.cratetypes["airdrop_assault"]["ozMoney"].func]]("airdrop_assault");
-    var_2 disconnectpaths();
+    var_2 disconnectPaths();
     var_2 thread deletecrateonteleport();
 
     while(isDefined(var_2)) {
@@ -654,7 +654,7 @@ handleammodrops() {
     level.ammocrate = var_1 maps\mp\killstreaks\_airdrop::createairdropcrate(var_1, "airdrop_assault", "ammo", var_2.origin, undefined, 0, 1);
     playFX(common_scripts\utility::getfx("crate_teleport"), var_2.origin, (1, 0, 0), (0, 0, 1));
     level.ammocrate thread[[level.cratetypes["airdrop_assault"]["ammo"].func]]("airdrop_assault");
-    level.ammocrate disconnectpaths();
+    level.ammocrate disconnectPaths();
 
     while(isDefined(level.ammocrate)) {
       wait 0.05;

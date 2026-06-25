@@ -549,7 +549,7 @@ function private function_b506b922() {
     var_1556c25 = getlevelframenumber();
     now = gettime();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if((player getentitynumber() + var_1556c25 & 1) != 0) {
         continue;
       }

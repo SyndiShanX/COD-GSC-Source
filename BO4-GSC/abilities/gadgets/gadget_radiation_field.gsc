@@ -199,7 +199,7 @@ function_1503c832(weapon) {
   player function_f985d66c(1);
   player.var_342564dd = 1;
   player callback::function_d8abfc3d(#"on_player_killed_with_params", &on_player_killed);
-  fwd = vecscale(vectornormalize(anglesToForward(player.angles)), 20);
+  fwd = vecscale(vectorNormalize(anglesToForward(player.angles)), 20);
   player.var_ab42e44e = player.origin;
   player.var_ab42e44e += fwd;
   player.var_e9791ff9 = gameobjects::get_next_obj_id();
@@ -212,7 +212,7 @@ function_1503c832(weapon) {
   anchor setteam(player.team);
   anchor setModel(#"wpn_t8_sig_radiation_device_world");
   anchor ghost();
-  anchor linkto(player);
+  anchor linkTo(player);
   player thread sndonoverride_eye_();
   anchor clientfield::set("cf_overclock_fx", 1);
   anchor clientfield::set("self_destruct_start", 0);
@@ -221,7 +221,7 @@ function_1503c832(weapon) {
   killcament = spawn("script_model", player.origin + (0, 0, 100));
   killcament util::deleteaftertime(15);
   killcament.starttime = gettime();
-  killcament linkto(anchor);
+  killcament linkTo(anchor);
   killcament setweapon(getweapon(#"gadget_radiation_field"));
   anchor killcam::store_killcam_entity_on_entity(killcament);
   player thread function_a1cc4c59(weapon, killcament);
@@ -309,7 +309,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
   var_1d93ec08 = int(level.radiationfield_bundle.scoreeventsfrequency * 1000);
 
   while(true) {
-    fwd = vecscale(vectornormalize(anglesToForward(player.angles)), 20);
+    fwd = vecscale(vectorNormalize(anglesToForward(player.angles)), 20);
     player.var_ab42e44e = player.origin;
     player.var_ab42e44e += fwd;
     radius += player_radius;

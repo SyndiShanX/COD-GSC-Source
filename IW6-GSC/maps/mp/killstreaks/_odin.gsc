@@ -131,7 +131,7 @@ init() {
   level.odinSettings["odin_assault"].weapon["juggernaut"].plr_fire_sound = "odin_jugg_launch";
 
   if(!isDefined(level.heli_pilot_mesh)) {
-    level.heli_pilot_mesh = GetEnt("heli_pilot_mesh", "targetname");
+    level.heli_pilot_mesh = getEnt("heli_pilot_mesh", "targetname");
     if(!isDefined(level.heli_pilot_mesh)) {
       PrintLn("heli_pilot_mesh doesn't exist in this level: " + level.script);
     } else {
@@ -752,7 +752,7 @@ watchJuggernautUse() {
       if(isDefined(node)) {
         owner leaderDialogOnPlayer(weaponStruct.voJugg);
         owner _playLocalSound("odin_positive_action");
-        owner PlayRumbleOnEntity("pistol_fire");
+        owner playRumbleOnEntity("pistol_fire");
         self.juggernaut maps\mp\bots\_bots_strategy::bot_protect_point(node.origin, 128);
         owner SetClientOmnvar(weaponStruct.ammoOmnvar, level.odinSettings[self.odinType].ui_num);
       } else
@@ -853,14 +853,14 @@ odin_fireWeapon(weaponType) {
 
   if(weaponType == "large_rod") {
     wait(0.5);
-    owner PlayRumbleOnEntity(weaponStruct.rumble);
+    owner playRumbleOnEntity(weaponStruct.rumble);
     Earthquake(0.3, 1.5, self.origin, 1000);
     owner PlaySoundToPlayer(weaponStruct.plr_fire_sound, owner);
     playSoundAtPos(self.origin, weaponStruct.npc_fire_sound);
     wait(1.5);
   } else if(weaponType == "small_rod") {
     wait(0.5);
-    owner PlayRumbleOnEntity(weaponStruct.rumble);
+    owner playRumbleOnEntity(weaponStruct.rumble);
     Earthquake(0.2, 1, self.origin, 1000);
     owner PlaySoundToPlayer(weaponStruct.plr_fire_sound, owner);
     playSoundAtPos(self.origin, weaponStruct.npc_fire_sound);
@@ -872,7 +872,7 @@ odin_fireWeapon(weaponType) {
     if(isDefined(weaponStruct.npc_fire_sound)) {
       playSoundAtPos(self.origin, weaponStruct.npc_fire_sound);
     }
-    owner PlayRumbleOnEntity(weaponStruct.rumble);
+    owner playRumbleOnEntity(weaponStruct.rumble);
   }
 
   projectile = MagicBullet(weaponStruct.projectile, start, target_pos, owner);
@@ -1048,7 +1048,7 @@ doMarkingFlash(pos) {
     forward = anglesToForward(player GetPlayerAngles());
 
     toBlast = pos - viewOrigin;
-    toBlast = VectorNormalize(toBlast);
+    toBlast = vectorNormalize(toBlast);
 
     percent_angle = 0.5 * (1.0 + VectorDot(forward, toBlast));
 

@@ -709,7 +709,7 @@ _id_B83A(var_0, var_1) {
   anim endon("battlechatter disabled");
   var_2 = undefined;
   var_2 = spawn("script_origin", var_0 gettagorigin("j_head"));
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
 
   if(_id_235D()) {
     _id_2370([var_1]);
@@ -895,7 +895,7 @@ _id_E7F4(var_0) {
   } else {
     thread _id_B8C0(var_0, 1);
     var_1 = spawn("script_origin", self gettagorigin("j_head"));
-    var_1 linkto(self);
+    var_1 linkTo(self);
 
     if(_id_235D()) {
       _id_2370([var_0 + " cusBC"]);
@@ -1032,13 +1032,13 @@ _id_B8B7(var_0, var_1, var_2) {
 
     if(self == anim.player) {
       var_9 = spawn("script_origin", anim.player getEye());
-      var_9 linkto(self);
+      var_9 linkTo(self);
     } else if(_id_89D4(var_0._id_E05F[var_5])) {
       var_9 = spawn("script_origin", self gettagorigin("J_Hip_RI"));
-      var_9 linkto(var_1);
+      var_9 linkTo(var_1);
     } else {
       var_9 = spawn("script_origin", self gettagorigin("j_head"));
-      var_9 linkto(var_1);
+      var_9 linkTo(var_1);
     }
 
     thread _id_E8E3(var_0._id_E05F[var_5], var_9);
@@ -1830,10 +1830,10 @@ _id_E7F3(var_0) {
 _id_B8BF(var_0) {
   if(self == anim.player) {
     var_1 = spawn("script_origin", anim.player getEye());
-    var_1 linkto(self);
+    var_1 linkTo(self);
   } else {
     var_1 = spawn("script_origin", self gettagorigin("J_Hip_RI"));
-    var_1 linkto(self);
+    var_1 linkTo(self);
   }
 
   if(_id_235D()) {
@@ -4140,7 +4140,7 @@ _id_4F37(var_0, var_1, var_2, var_3) {
 
 _id_69E1(var_0, var_1, var_2) {
   var_3 = anglesToForward(var_0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - var_1);
   var_7 = var_5[1] - var_6[1];

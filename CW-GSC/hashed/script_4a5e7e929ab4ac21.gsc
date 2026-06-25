@@ -149,7 +149,7 @@ function function_44e72b9e(var_e25c39ec = 0, start_node) {
     level.var_6fb3a1e6.angles = start_node.angles;
     return;
   } else {
-    level.var_6fb3a1e6 = spawnvehicle("vehicle_t9_mil_us_helicopter_large_cp_armada_player", start_node.origin, start_node.angles);
+    level.var_6fb3a1e6 = spawnVehicle("vehicle_t9_mil_us_helicopter_large_cp_armada_player", start_node.origin, start_node.angles);
     level.var_6fb3a1e6.ignoreme = 1;
     level.var_6fb3a1e6 setCanDamage(0);
     level.var_6fb3a1e6 setowner(level.players[0]);
@@ -306,7 +306,7 @@ function function_d9bd5da4() {
   while(level.var_288d6225) {
     var_babdf1a9 = function_b7ead280();
     cameraaxis = anglestoaxis(player getplayerangles());
-    var_7617eec7 = vectornormalize(cameraaxis.forward * var_babdf1a9[0] - cameraaxis.right * var_babdf1a9[1]);
+    var_7617eec7 = vectorNormalize(cameraaxis.forward * var_babdf1a9[0] - cameraaxis.right * var_babdf1a9[1]);
     var_7c12791f = 0;
     var_bcb27448 = 0;
 
@@ -323,7 +323,7 @@ function function_d9bd5da4() {
       var_7c12791f = level.var_a5a07145.size - 1;
     }
 
-    var_7f0b913e = vectornormalize(level.var_a5a07145[var_7c12791f].origin - level.var_a5a07145[var_bcb27448].origin);
+    var_7f0b913e = vectorNormalize(level.var_a5a07145[var_7c12791f].origin - level.var_a5a07145[var_bcb27448].origin);
     var_2e35e6c1 = (0, vectordot(var_7f0b913e, var_7617eec7), 0);
 
     if(abs(var_2e35e6c1[1]) > abs(chopper.var_bc484af[1])) {
@@ -359,7 +359,7 @@ function function_d9bd5da4() {
     var_2a900db9 = level.var_a5a07145[chopper.var_66016ac4];
     var_93b51755 = level.var_a5a07145[chopper.var_e998ed14];
     var_23ebc694 = var_2a900db9.origin - var_93b51755.origin;
-    var_1403f864 = vectornormalize(var_23ebc694);
+    var_1403f864 = vectorNormalize(var_23ebc694);
     var_328f28c8 = chopper.origin - var_93b51755.origin;
     var_434b5786 = vectordot(var_328f28c8, var_1403f864);
     var_a3cbce30 = var_434b5786 - abs(var_2e35e6c1[1]) * chopper.var_7bd4891b;
@@ -445,7 +445,7 @@ function function_3028905b() {
     var_2a900db9 = level.var_a5a07145[chopper.var_66016ac4];
     var_93b51755 = level.var_a5a07145[chopper.var_e998ed14];
     var_23ebc694 = var_2a900db9.origin - var_93b51755.origin;
-    var_1403f864 = vectornormalize(var_23ebc694);
+    var_1403f864 = vectorNormalize(var_23ebc694);
     target_point = chopper.origin - var_c9250ee0;
     target_point += vectorscale(var_1403f864, randomfloatrange(-150, 150) * var_ff21af1);
     var_b1b75f05 = vectorscale(perpendicularvector(var_1403f864), randomfloatrange(-40, 40) * var_ff21af1);
@@ -584,7 +584,7 @@ function function_adf2ea57() {
   var_6402a3dd = util::spawn_model("tag_origin", var_f7317c23, start_angles);
   level.players[0] playerlinktodelta(var_6402a3dd, "tag_origin", 1, 45, 45, 45, 45);
   time = 3;
-  var_6402a3dd moveto(var_7eee2432, time);
+  var_6402a3dd moveTo(var_7eee2432, time);
   wait time;
   level.players[0] unlink();
 }

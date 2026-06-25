@@ -132,7 +132,7 @@ function orb_spawn(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
       v_spawn_pos = level.var_df7b46d1.origin + (0, 0, 10);
       level.var_df7b46d1.var_606d06a1 = util::spawn_model(bwastimejump, "tag_origin", v_spawn_pos, level.var_df7b46d1.angles);
       level.var_df7b46d1.var_606d06a1.var_fc558e74 = isDefined(level.var_a0b1f787[#"p7_zm_ctl_deathray_sphere"]) ? level.var_a0b1f787[#"p7_zm_ctl_deathray_sphere"] : undefined;
-      level.var_df7b46d1.var_606d06a1 linkto(level.var_df7b46d1, "tag_origin");
+      level.var_df7b46d1.var_606d06a1 linkTo(level.var_df7b46d1, "tag_origin");
       level.var_df7b46d1.var_606d06a1 function_619a5c20();
     }
   }
@@ -242,7 +242,7 @@ function function_40deac72(localclientnum) {
       earthquake(localclientnum, var_1826041c, 0.1, self.origin, 128);
     }
 
-    e_player playrumbleonentity(localclientnum, "onslaught_orb");
+    e_player playRumbleOnEntity(localclientnum, "onslaught_orb");
     wait 0.3;
   }
 }

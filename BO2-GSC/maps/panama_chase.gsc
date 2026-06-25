@@ -20,7 +20,7 @@ skipto_chase() {
   level.noriega = init_hero("noriega");
   level.noriega thread check_for_friendly_fire_noriega();
   a_heroes = array(level.mason, level.noriega);
-  hurt_trigger = getent("fight_room_hurt_trigger", "targetname");
+  hurt_trigger = getEnt("fight_room_hurt_trigger", "targetname");
   hurt_trigger trigger_off();
   skipto_teleport("player_skipto_chase", a_heroes);
 }
@@ -51,11 +51,11 @@ chase_setup() {
   trigger_off("noriega_rescue_trigger", "targetname");
   trigger_off("checkpoint_end_trigger", "targetname");
   level thread maps\createart\panama3_art::chase();
-  m_clinic_stairs_blocker = getent("clinic_stairs_blocker", "targetname");
+  m_clinic_stairs_blocker = getEnt("clinic_stairs_blocker", "targetname");
   m_clinic_stairs_blocker notsolid();
-  m_noriega_bookshelf_door = getent("noriega_bookshelf_door", "targetname");
+  m_noriega_bookshelf_door = getEnt("noriega_bookshelf_door", "targetname");
   m_noriega_bookshelf_door trigger_off();
-  m_noriega_door_close = getent("noriega_door_closed", "targetname");
+  m_noriega_door_close = getEnt("noriega_door_closed", "targetname");
   m_noriega_door_close trigger_off();
   level thread chase_vo();
 }
@@ -94,24 +94,24 @@ noriega_rescue_event() {
   level thread noriega_rescue_timer();
   level thread marine_search_party();
   wait 0.05;
-  playFXOnTag(level._effect["flashlight"], getent("marine_searcher1_ai", "targetname"), "tag_flash");
-  playFXOnTag(level._effect["flashlight"], getent("marine_searcher2_ai", "targetname"), "tag_flash");
+  playFXOnTag(level._effect["flashlight"], getEnt("marine_searcher1_ai", "targetname"), "tag_flash");
+  playFXOnTag(level._effect["flashlight"], getEnt("marine_searcher2_ai", "targetname"), "tag_flash");
   stop_exploder(106);
   level.player allowsprint(1);
   wait 0.15;
   wait 4;
   trigger_on("noriega_rescue_trigger", "targetname");
   trigger_wait("noriega_rescue_trigger");
-  m_clinic_stairs_blocker = getent("clinic_stairs_blocker", "targetname");
+  m_clinic_stairs_blocker = getEnt("clinic_stairs_blocker", "targetname");
   m_clinic_stairs_blocker show();
   m_clinic_stairs_blocker solid();
-  m_noriega_door_open = getent("noriega_door_open", "targetname");
+  m_noriega_door_open = getEnt("noriega_door_open", "targetname");
   m_noriega_door_open hide();
-  m_noriega_door_close = getent("noriega_door_closed", "targetname");
+  m_noriega_door_close = getEnt("noriega_door_closed", "targetname");
   m_noriega_door_close trigger_on();
-  m_noriega_bookshelf_floor = getent("noriega_bookshelf_floor", "targetname");
+  m_noriega_bookshelf_floor = getEnt("noriega_bookshelf_floor", "targetname");
   m_noriega_bookshelf_floor hide();
-  m_noriega_bookshelf_door = getent("noriega_bookshelf_door", "targetname");
+  m_noriega_bookshelf_door = getEnt("noriega_bookshelf_door", "targetname");
   m_noriega_bookshelf_door trigger_on();
   level notify("noriega_rescued");
   end_scene("noriega_falls");
@@ -143,28 +143,28 @@ start_ac130_shooting() {
   level thread turn_fight_room_unsafe();
   exploder(730);
   level notify("fxanim_ceiling_01_start");
-  initial_target = getent("apache_reveal_target", "targetname");
+  initial_target = getEnt("apache_reveal_target", "targetname");
   level thread ac130_shoot(initial_target.origin, 1);
   level thread ac130_target_player();
   trigger_wait("apache_strafe_start_trigger");
-  second_target = getent("apache_jump_attack_target", "targetname");
+  second_target = getEnt("apache_jump_attack_target", "targetname");
   level thread ac130_shoot(second_target.origin, 1);
   level notify("fxanim_ceiling_02_start");
   level thread ac130_target_player();
   trigger_wait("chase_go_for_it_trigger");
   level notify("fxanim_ceiling_03_start");
-  third_target = getent("apache_missile_target2", "targetname");
+  third_target = getEnt("apache_missile_target2", "targetname");
   level thread ac130_shoot(third_target.origin, 1);
   level thread ac130_target_player();
   trigger_wait("apache_chase_jump_trigger");
   level.player thread magic_bullet_shield();
-  water_tower_target = getent("apache_missile_target1", "targetname");
+  water_tower_target = getEnt("apache_missile_target1", "targetname");
   level thread ac130_shoot(water_tower_target.origin, 1);
   level notify("player_moved");
 }
 
 turn_fight_room_unsafe() {
-  hurt_trigger = getent("fight_room_hurt_trigger", "targetname");
+  hurt_trigger = getEnt("fight_room_hurt_trigger", "targetname");
   wait 5;
   hurt_trigger trigger_on();
 }
@@ -221,9 +221,9 @@ apache_jump_event() {
   level.temp_flash_light = spawn("script_model", little_bird gettagorigin("tag_flash"));
   level.temp_flash_light.angles = little_bird gettagangles("tag_flash");
   level.temp_flash_light setModel("tag_origin");
-  level.temp_flash_light linkto(little_bird);
+  level.temp_flash_light linkTo(little_bird);
   playFXOnTag(level._effect["apache_spotlight_cheap"], level.temp_flash_light, "tag_origin");
-  water_tower_origin = getent("litte_bird_water_tower_origin", "targetname");
+  water_tower_origin = getEnt("litte_bird_water_tower_origin", "targetname");
   little_bird setvehgoalpos(water_tower_origin.origin, 1);
   little_bird thread look_at_water_tower();
   little_bird_checkpoint = spawn_vehicle_from_targetname("little_bird_patroller_checkpoint");
@@ -234,11 +234,11 @@ apache_jump_event() {
 }
 
 heli_check_for_spotlight() {
-  spotlight_trigger = getent("flash_light_trigger", "targetname");
-  spotlight_linkto = getent("flash_light_trigger_linkto", "targetname");
-  spotlight_trigger enablelinkto();
-  spotlight_trigger linkto(spotlight_linkto);
-  spot_dest = getstruct("spot_light_destination", "targetname");
+  spotlight_trigger = getEnt("flash_light_trigger", "targetname");
+  spotlight_linkto = getEnt("flash_light_trigger_linkto", "targetname");
+  spotlight_trigger enablelinkTo();
+  spotlight_trigger linkTo(spotlight_linkto);
+  spot_dest = getStruct("spot_light_destination", "targetname");
   wait 3;
   spotlight_linkto movey(-1550, 10);
   spotlight_trigger waittill("trigger");
@@ -286,24 +286,24 @@ look_at_water_tower() {
 }
 
 little_bird_checkpoint_hovering() {
-  lb_checkpoint_destination = getent("litte_bird_checkpoint_origin", "targetname");
-  lb_checkpoint_flyto = getent("litte_bird_checkpoint_destination", "targetname");
-  lb_lookat = getent("apache_checkpoint_target", "targetname");
-  self setturrettargetent(level.player);
+  lb_checkpoint_destination = getEnt("litte_bird_checkpoint_origin", "targetname");
+  lb_checkpoint_flyto = getEnt("litte_bird_checkpoint_destination", "targetname");
+  lb_lookat = getEnt("apache_checkpoint_target", "targetname");
+  self setturrettargetEnt(level.player);
   self clearvehgoalpos();
   self setvehgoalpos(lb_checkpoint_flyto.origin, 1);
   self sethoverparams(30, 120, 80);
   trigger_wait("checkpoint_reached_trigger");
-  self setturrettargetent(level.player);
+  self setturrettargetEnt(level.player);
   flag_wait("checkpoint_reached");
   level.temp_flash_light unlink();
   level.temp_flash_light.origin = self gettagorigin("tag_flash");
   level.temp_flash_light.angles = self gettagangles("tag_flash");
-  level.temp_flash_light linkto(self);
+  level.temp_flash_light linkTo(self);
   wait 2;
-  self setturrettargetent(level.noriega);
+  self setturrettargetEnt(level.noriega);
   wait 7;
-  lb_checkpoit_goal = getent("litte_bird_checkpoint_goal", "targetname");
+  lb_checkpoit_goal = getEnt("litte_bird_checkpoint_goal", "targetname");
   self setvehgoalpos(lb_checkpoit_goal.origin, 1);
   flag_wait("checkpoint_cleared");
   self delete();
@@ -314,21 +314,21 @@ little_bird_investigate_water_tower() {
   level endon("player_detected");
   self waittill("goal");
   self sethoverparams(30, 0, 10);
-  target1 = getent("apache_spotlight_search_target1", "targetname");
-  target2 = getent("apache_spotlight_search_target3", "targetname");
+  target1 = getEnt("apache_spotlight_search_target1", "targetname");
+  target2 = getEnt("apache_spotlight_search_target3", "targetname");
   lookat = spawn("script_model", target1.origin);
   lookat setModel("tag_origin");
-  self setturrettargetent(lookat);
-  lookat moveto(target2.origin, 2);
+  self setturrettargetEnt(lookat);
+  lookat moveTo(target2.origin, 2);
   lookat waittill("movedone");
-  lookat moveto(target1.origin, 2);
+  lookat moveTo(target1.origin, 2);
   lookat waittill("movedone");
-  lookat moveto(target2.origin, 2);
+  lookat moveTo(target2.origin, 2);
   lookat waittill("movedone");
-  lookat moveto(target1.origin, 2);
+  lookat moveTo(target1.origin, 2);
   lookat waittill("movedone");
   self clearturrettarget();
-  lb_destination = getent("litte_bird_checkpoint_goal", "targetname");
+  lb_destination = getEnt("litte_bird_checkpoint_goal", "targetname");
   self setvehgoalpos(lb_destination.origin);
   self waittill("goal");
   self.delete_on_death = 1;
@@ -363,8 +363,8 @@ clinic_break_wall_think() {
 }
 
 clinic_break_window_think() {
-  s_chase_window_impulse_position = getstruct("chase_window_impulse_position", "targetname");
-  ai_firing_soldier = getent("marine_struggler1_ai", "targetname");
+  s_chase_window_impulse_position = getStruct("chase_window_impulse_position", "targetname");
+  ai_firing_soldier = getEnt("marine_struggler1_ai", "targetname");
   wait 0.75;
   playFXOnTag(level._effect["soldier_impact_blood"], ai_firing_soldier, "j_clavicle_le");
   wait 0.25;
@@ -409,7 +409,7 @@ apache_player_kill_timer(n_time, v_offset, do_target_player) {
 }
 
 apache_player_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
-  e_apache = getent("attack_apache", "targetname");
+  e_apache = getEnt("attack_apache", "targetname");
 
   if((!isDefined(level.player.n_previous_damage_time) || level.player issprinting() && gettime() - level.player.n_previous_damage_time > 500) && eattacker == e_apache) {
     level.player.n_previous_damage_time = gettime();
@@ -499,7 +499,7 @@ checkpoint_event() {
 }
 
 player_look_check() {
-  lookat = getent("apache_checkpoint_target", "targetname");
+  lookat = getEnt("apache_checkpoint_target", "targetname");
 
   while(true) {
     if(level.player is_player_looking_at(lookat.origin, 0.1, 1)) {
@@ -520,18 +520,18 @@ checkpoint_passthrough() {
 heli_path_manager() {
   e_apache = spawn_vehicle_from_targetname("attack_apache");
   playFXOnTag(getfx("apache_exterior_lights"), e_apache, "tag_origin");
-  s_apache_strafe_start = getstruct("apache_strafe_start", "targetname");
+  s_apache_strafe_start = getStruct("apache_strafe_start", "targetname");
   e_apache godon();
   e_apache setspeed(20.0);
-  e_apache thread heli_go_struct_path(getstruct("apache_attack_start", "targetname"));
-  e_target = getent("apache_reveal_target", "targetname");
+  e_apache thread heli_go_struct_path(getStruct("apache_attack_start", "targetname"));
+  e_target = getEnt("apache_reveal_target", "targetname");
   e_apache setlookatent(e_target);
   e_apache set_turret_target(e_target, undefined, 0);
   e_apache thread set_pitch(0, 20, 1);
   e_apache waittill("path_finished");
   wait 2.0;
   e_apache_barrel = spawn_model("tag_origin", e_apache gettagorigin("tag_barrel"), e_apache gettagangles("tag_barrel"));
-  e_apache_barrel linkto(e_apache, "tag_barrel");
+  e_apache_barrel linkTo(e_apache, "tag_barrel");
   playFXOnTag(getfx("apache_spotlight"), e_apache_barrel, "tag_origin");
   e_apache thread heli_go_struct_path(s_apache_strafe_start);
   e_apache waittill("path_finished");
@@ -552,20 +552,20 @@ heli_path_manager() {
   e_apache clearlookatent();
   e_apache clear_turret_target(0);
   wait 0.05;
-  e_apache setlookatent(getent("apache_jump_attack_target", "targetname"));
+  e_apache setlookatent(getEnt("apache_jump_attack_target", "targetname"));
   e_apache setspeed(60.0, 60.0, 60.0);
-  e_apache thread heli_go_struct_path(getstruct("jump_missile_fire_position_start", "targetname"));
+  e_apache thread heli_go_struct_path(getStruct("jump_missile_fire_position_start", "targetname"));
   e_apache waittill("path_finished");
   e_apache setspeed(30.0);
-  e_apache shoot_turret_at_target_once(getent("apache_missile_target1", "targetname"), undefined, 1);
-  e_apache shoot_turret_at_target_once(getent("apache_missile_target2", "targetname"), undefined, 2);
+  e_apache shoot_turret_at_target_once(getEnt("apache_missile_target1", "targetname"), undefined, 1);
+  e_apache shoot_turret_at_target_once(getEnt("apache_missile_target2", "targetname"), undefined, 2);
   e_apache clear_turret_target(1);
   e_apache clear_turret_target(2);
-  e_spotlight_search_target1 = getent("apache_spotlight_search_target1", "targetname");
-  e_spotlight_search_target2 = getent("apache_spotlight_search_target2", "targetname");
-  e_spotlight_search_target3 = getent("apache_spotlight_search_target3", "targetname");
+  e_spotlight_search_target1 = getEnt("apache_spotlight_search_target1", "targetname");
+  e_spotlight_search_target2 = getEnt("apache_spotlight_search_target2", "targetname");
+  e_spotlight_search_target3 = getEnt("apache_spotlight_search_target3", "targetname");
   e_apache setspeed(60.0);
-  e_apache thread heli_go_struct_path(getstruct("apache_spotlight_search_start", "targetname"));
+  e_apache thread heli_go_struct_path(getStruct("apache_spotlight_search_start", "targetname"));
   e_apache setlookatent(e_spotlight_search_target1);
   e_apache set_turret_target(e_spotlight_search_target1, undefined, 0);
   e_apache waittill("path_finished");
@@ -575,23 +575,23 @@ heli_path_manager() {
   wait 1.0;
   e_apache set_turret_target(e_spotlight_search_target3, undefined, 0);
   wait 2.0;
-  e_apache_checkpoint_target = getent("apache_checkpoint_target", "targetname");
+  e_apache_checkpoint_target = getEnt("apache_checkpoint_target", "targetname");
   e_apache_barrel delete();
   e_apache clearlookatent();
   e_apache clear_turret_target(0);
-  e_apache thread heli_go_struct_path(getstruct("apache_checkpoint_wait_position", "targetname"));
+  e_apache thread heli_go_struct_path(getStruct("apache_checkpoint_wait_position", "targetname"));
   wait 2.0;
   e_apache setlookatent(e_apache_checkpoint_target);
   e_apache set_turret_target(e_apache_checkpoint_target, undefined, 0);
   e_apache_barrel = spawn_model("tag_origin", e_apache gettagorigin("tag_barrel"), e_apache gettagangles("tag_barrel"));
-  e_apache_barrel linkto(e_apache, "tag_barrel");
+  e_apache_barrel linkTo(e_apache, "tag_barrel");
   trigger_wait("checkpoint_reached_trigger");
   playFXOnTag(getfx("apache_spotlight"), e_apache_barrel, "tag_origin");
   wait 4.0;
   e_apache_barrel delete();
   e_apache clearlookatent();
   e_apache clear_turret_target(0);
-  e_apache thread heli_go_struct_path(getstruct("apache_delete_position", "targetname"));
+  e_apache thread heli_go_struct_path(getStruct("apache_delete_position", "targetname"));
   e_apache waittill("path_finished");
   e_apache delete();
 }
@@ -604,11 +604,11 @@ heli_strafe_follow_player(s_start_position, n_distance) {
 }
 
 heli_missile_damage_event_manager() {
-  water_tower = getent("ac130_water_tower", "targetname");
+  water_tower = getEnt("ac130_water_tower", "targetname");
   trigger_wait("apache_chase_jump_trigger");
   level notify("fxanim_water_tower_start");
   wait 0.05;
-  water_tower = getent("ac130_water_tower", "targetname");
+  water_tower = getEnt("ac130_water_tower", "targetname");
   playFXOnTag(level._effect["fx_pan_water_tower_collapse"], water_tower, "base_jnt");
   activate_exploder(700);
 }
@@ -638,7 +638,7 @@ heli_go_struct_path(s_start) {
     self waittill("goal");
 
     if(isDefined(s_current.target)) {
-      s_current = getstruct(s_current.target, "targetname");
+      s_current = getStruct(s_current.target, "targetname");
       assert(isDefined(s_current), "Target entity is not a struct or is undefined: " + s_current.targetname);
     } else
       self.is_pathing = 0;
@@ -691,9 +691,9 @@ chase_dialog() {
 }
 
 vo_before_struggle_room() {
-  trigger = getent("chase_door_trigger", "targetname");
+  trigger = getEnt("chase_door_trigger", "targetname");
   trigger endon("trigger");
-  solider = getent("marine_struggler1_ai", "targetname");
+  solider = getEnt("marine_struggler1_ai", "targetname");
   solider say_dialog("usr3_woah_woah_hold_fi_0");
   solider say_dialog("usr2_hold_it_okay_0");
   solider say_dialog("usr3_hey_what_d_he_tell_0");

@@ -312,7 +312,7 @@ createfxlogic() {
       playerpos[1] = getdvarint(#"_id_274F266D");
       playerpos[2] = getdvarint(#"_id_274F266E");
       player = get_players()[0];
-      player setorigin((playerpos[0], playerpos[1], playerpos[2]));
+      player setOrigin((playerpos[0], playerpos[1], playerpos[2]));
     }
   }
 
@@ -606,7 +606,7 @@ createfxlogic() {
           if(!ent.drawn) {
             continue;
           }
-          difference = vectornormalize(ent.v["origin"] - (player.origin + vectorscale((0, 0, 1), 55.0)));
+          difference = vectorNormalize(ent.v["origin"] - (player.origin + vectorscale((0, 0, 1), 55.0)));
           newdot = vectordot(forward, difference);
 
           if(newdot < dot) {
@@ -1628,7 +1628,7 @@ process_fx_rotater() {
     for(i = 0; i < level.selected_fx_ents.size; i++) {
       rotater[i] = spawn("script_origin", level.selected_fx_ents[i].v["origin"]);
       rotater[i].angles = level.selected_fx_ents[i].v["angles"];
-      rotater[i] linkto(org);
+      rotater[i] linkTo(org);
     }
 
     rotate_over_time(org, rotater);
@@ -2249,7 +2249,7 @@ move_player_around_map_fast() {
   trace = bulletTrace(eye, eye + vectorscale(direction_vec, 20000), 0, undefined);
   dist = distance(eye, trace["position"]);
   position = eye + vectorscale(direction_vec, dist - 64);
-  player setorigin(position);
+  player setOrigin(position);
 }
 
 move_player_to_next_same_effect(forward_search, lastselectentity) {
@@ -2277,7 +2277,7 @@ move_player_to_next_same_effect(forward_search, lastselectentity) {
       if(index >= 0) {
         select_entity(index, ent);
         position = ent.v["origin"] - vectorscale(direction_vec, 175);
-        player setorigin(position);
+        player setOrigin(position);
         level.cfx_previous_ent = ent;
         level.cfx_next_ent = get_next_ent_with_same_id(index, ent.v["fxid"]);
       } else if(forward_search)
@@ -2304,7 +2304,7 @@ move_player_to_next_same_effect(forward_search, lastselectentity) {
       ent = get_next_ent_with_same_id(i, ent.v["fxid"]);
       select_entity(level.ent_found_index, ent);
       position = ent.v["origin"] - vectorscale(direction_vec, 175);
-      player setorigin(position);
+      player setOrigin(position);
       level.cfx_next_ent = get_next_ent_with_same_id(level.ent_found_index, ent.v["fxid"]);
       return;
     } else {
@@ -2312,7 +2312,7 @@ move_player_to_next_same_effect(forward_search, lastselectentity) {
       ent = get_previous_ent_with_same_id(i, ent.v["fxid"]);
       select_entity(level.ent_found_index, ent);
       position = ent.v["origin"] - vectorscale(direction_vec, 175);
-      player setorigin(position);
+      player setOrigin(position);
       level.cfx_previous_ent = get_previous_ent_with_same_id(level.ent_found_index, ent.v["fxid"]);
       return;
     }
@@ -2341,7 +2341,7 @@ move_player_to_next_same_effect(forward_search, lastselectentity) {
 
     level.last_ent_moved_to = ent;
     position = ent.v["origin"] - vectorscale(direction_vec, 175);
-    player setorigin(position);
+    player setOrigin(position);
   }
 }
 
@@ -2576,7 +2576,7 @@ handle_camera() {
             model.origin = level.current_select_ent.v["origin"];
           }
 
-          level.camera linkto(model, "tag_origin", level.cameravec, anglesoffset);
+          level.camera linkTo(model, "tag_origin", level.cameravec, anglesoffset);
         } else {
           wait 0.05;
           continue;

@@ -312,7 +312,7 @@ mocomptraversalproceduralinit(entity, mocompanim, mocompanimblendouttime, mocomp
   traversal.endposition = traversal.startposition + rotatepoint(getmovedelta(mocompanim, 0, end_time), traversal.startangles);
 
   if(isDefined(traversal.endnode) && isDefined(traversal.endnode.script_linkname)) {
-    traversal.endnodeparent = getent(traversal.endnode.script_linkname, "targetname");
+    traversal.endnodeparent = getEnt(traversal.endnode.script_linkname, "targetname");
 
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
@@ -364,7 +364,7 @@ mocomptraversalproceduralpivotinit(entity, mocompanim, mocompanimblendouttime, m
   traversal.endposition = traversal.startposition + rotatepoint(getmovedelta(mocompanim, 0, end_time), traversal.startangles);
 
   if(isDefined(traversal.endnode) && isDefined(traversal.endnode.script_linkname)) {
-    traversal.endnodeparent = getent(traversal.endnode.script_linkname, "targetname");
+    traversal.endnodeparent = getEnt(traversal.endnode.script_linkname, "targetname");
 
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
@@ -700,7 +700,7 @@ mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendouttime, mocompanim
   movevector = entity.nodeoffsetorigin - entity.origin;
 
   if(lengthsquared(movevector) > 1) {
-    movevector = vectornormalize(movevector) * 1;
+    movevector = vectorNormalize(movevector) * 1;
   }
 
   entity forceteleport(entity.origin + movevector, entity.angles, 0);

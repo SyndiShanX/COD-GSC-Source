@@ -94,7 +94,7 @@ function function_bbadd47c(localclientnum, oldval, newval, bnewent, binitialsnap
     case 1:
       self playSound(fieldname, #"hash_b315ff59968763f");
       self postfx::playpostfxbundle(#"hash_48d5efe2859096e0");
-      self playrumbleonentity(fieldname, #"damage_heavy");
+      self playRumbleOnEntity(fieldname, #"damage_heavy");
       earthquake(fieldname, 0.3, 1.5, self.origin, 1024);
       break;
     case 2:

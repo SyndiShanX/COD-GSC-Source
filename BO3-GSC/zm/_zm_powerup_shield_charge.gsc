@@ -68,7 +68,7 @@ function shield_on_hud(drop_item, player_team) {
 }
 
 function full_ammo_move_hud(player_team) {
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
   players[0] playsoundtoteam("zmb_full_ammo", player_team);
   wait(0.5);
   move_fade_time = 1.5;
@@ -89,7 +89,7 @@ function function_f3127c4f() {
 }
 
 function function_b6937313(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
   switch (cmd) {
     case "": {

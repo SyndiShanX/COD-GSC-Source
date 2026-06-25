@@ -109,7 +109,7 @@ planespawn(lifeId, owner, startPoint, directionVector, streakName) {
 planeMove(destination, flyTime, attackTime, streakName) {
   configData = level.planeConfigs[streakName];
 
-  self MoveTo(destination, flyTime, 0, 0);
+  self moveTo(destination, flyTime, 0, 0);
 
   if(isDefined(configData.onAttackDelegate)) {
     self thread[[configData.onAttackDelegate]](destination, flyTime, attackTime, self.owner, streakName);
@@ -221,7 +221,7 @@ playPlaneFX() {
 }
 
 getPlaneFlyHeight() {
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
   if(isDefined(heightEnt)) {
     return heightEnt.origin[2];
   } else {
@@ -239,7 +239,7 @@ getPlaneFlightPlan(distFromPlayer) {
   result = spawnStruct();
   result.height = getPlaneFlyHeight();
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
   if(isDefined(heightEnt) && isDefined(heightEnt.script_noteworthy) && heightEnt.script_noteworthy == "fixedposition") {
     result.targetPos = heightEnt.origin;
     result.flightDir = anglesToForward(heightEnt.angles);
@@ -346,7 +346,7 @@ createKillCam(streakName) {
     killCamEnt = spawn("script_model", self.origin + (0, 0, 100) - planedir * 200);
     killCamEnt.startTime = GetTime();
     killCamEnt SetScriptMoverKillCam("airstrike");
-    killCamEnt LinkTo(self, "tag_origin", configData.killCamOffset, (0, 0, 0));
+    killCamEnt linkTo(self, "tag_origin", configData.killCamOffset, (0, 0, 0));
 
     self.killCamEnt = killCamEnt;
   }

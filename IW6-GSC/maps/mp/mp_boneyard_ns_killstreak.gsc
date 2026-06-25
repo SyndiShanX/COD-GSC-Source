@@ -9,15 +9,15 @@
 
 boneyard_killstreak_setup() {
   level.ks_vertical = spawnStruct();
-  level.ks_vertical.sfx = GetEnt("ks_vertical_org", "targetname");
-  level.ks_vertical.dam = GetEnt("ks_vertical_damage_vol", "targetname");
+  level.ks_vertical.sfx = getEnt("ks_vertical_org", "targetname");
+  level.ks_vertical.dam = getEnt("ks_vertical_damage_vol", "targetname");
   level.ks_vertical.destructibles = [(481, -74, -100)];
   level.ks_vertical.uses = 0;
   level.ks_vertical.max_uses = 1;
   level.ks_vertical.player = undefined;
   level.ks_vertical.team = undefined;
 
-  level.ks_vertical.inflictor = GetEnt("vert_fire_ent", "targetname");
+  level.ks_vertical.inflictor = getEnt("vert_fire_ent", "targetname");
 
   level.ks_vertical.ui_icon = [];
   level.ks_vertical.ui_icon[0] = "compass_icon_vf_idle";
@@ -318,8 +318,7 @@ damage_characters(rocket, attacker, damage) {
         if(isDefined(rocket.player) && victim == rocket.player) {
           victim maps\mp\gametypes\_damage::finishPlayerDamageWrapper(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0, 0);
         }
-      } else {
-      }
+      } else {}
       victim DoDamage(damage, rocket.inflictor.origin, attacker, rocket.inflictor, "MOD_EXPLOSIVE");
       else if(isDefined(victim.owner) && victim.owner == rocket.player) {
         victim maps\mp\agents\_agents::on_agent_player_damaged(undefined, undefined, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);

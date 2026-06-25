@@ -303,7 +303,7 @@ waittill_combat() {
     self allowedstances("stand", "crouch", "prone");
     self.disablearrivals = 0;
     self.disableexits = 0;
-    self stopanimscripted();
+    self stopanimScripted();
     self notify("stop_animmode");
   }
 

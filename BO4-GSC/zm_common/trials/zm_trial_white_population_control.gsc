@@ -28,7 +28,7 @@ on_begin(var_80bd7996, var_49d28bc1, var_5b932f42, var_a53dc296, var_60bdad5f) {
   n_base = 99;
   level.population_count = n_base;
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_base = zm_trial::function_5769f26a(var_80bd7996);
       break;
@@ -96,10 +96,10 @@ function_75f0aac6() {
 
 nuked_population_sign_think(n_base = 99) {
   level endon(#"trial_round_end");
-  var_50f6b3f4 = getent("counter_tens", "targetname");
-  var_d02e9cd = getent("counter_ones", "targetname");
-  var_50f6b3f4 rotateto(var_50f6b3f4.start_angles, 0.05);
-  var_d02e9cd rotateto(var_d02e9cd.start_angles, 0.05);
+  var_50f6b3f4 = getEnt("counter_tens", "targetname");
+  var_d02e9cd = getEnt("counter_ones", "targetname");
+  var_50f6b3f4 rotateTo(var_50f6b3f4.start_angles, 0.05);
+  var_d02e9cd rotateTo(var_d02e9cd.start_angles, 0.05);
   var_d02e9cd waittill(#"rotatedone");
   n_step = 36;
   var_b09f093e = 0;

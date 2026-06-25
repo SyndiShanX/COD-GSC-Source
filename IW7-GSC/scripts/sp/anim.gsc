@@ -144,7 +144,7 @@ func_C0DB(var_0) {
 
   if(var_2 == "rm_") {
     var_4 = getsubstr(var_1, 3);
-    level.player playrumbleonentity(var_4);
+    level.player playRumbleOnEntity(var_4);
     return 1;
   }
 

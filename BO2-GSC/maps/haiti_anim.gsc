@@ -103,7 +103,7 @@ swap_tablet(m_prop) {
 
 quadrotor_glove_on(m_player_body) {
   e_hint = createstreamerhint(m_player_body.origin, 1.0);
-  e_hint linkto(m_player_body, "tag_origin", vectorscale((0, 0, 1), 8.0));
+  e_hint linkTo(m_player_body, "tag_origin", vectorscale((0, 0, 1), 8.0));
   m_player_body attach("c_usa_cia_quad_viewbody_vson", "J_WristTwist_LE");
   wait 10;
   e_hint delete();
@@ -273,18 +273,18 @@ start_planes(ent) {
   level thread play_vtol_exhaust();
   level thread spawn_moving_cloud("moving_cloud_struct", "swap_vtol", "right");
   level thread spawn_moving_cloud("moving_cloud_2_struct", "swap_vtol", "left");
-  vtol_1 = getent("vtol_explode", "targetname");
+  vtol_1 = getEnt("vtol_explode", "targetname");
   wait 1;
-  vtol_10 = getent("intro_v78_10", "targetname");
+  vtol_10 = getEnt("intro_v78_10", "targetname");
   playFXOnTag(level._effect["vtol_chaff"], vtol_10, "tag_origin");
-  vtol_23 = getent("intro_v78_23", "targetname");
+  vtol_23 = getEnt("intro_v78_23", "targetname");
   playFXOnTag(level._effect["vtol_chaff"], vtol_23, "tag_origin");
   vtol_1 thread do_vtol_halo_jump();
   vtol_1 waittill("halo_jump_go");
   wait 4;
-  vtol_10 = getent("intro_v78_10", "targetname");
+  vtol_10 = getEnt("intro_v78_10", "targetname");
   playFXOnTag(level._effect["vtol_chaff"], vtol_10, "tag_origin");
-  vtol_16 = getent("intro_v78_16", "targetname");
+  vtol_16 = getEnt("intro_v78_16", "targetname");
   vtol_16 thread do_vtol_halo_jump();
   wait 2;
 }
@@ -306,7 +306,7 @@ vtol_explode_trail(ent) {
 show_numbers() {
   while(true) {
     for(i = 0; i < 26; i++) {
-      vtol = getent("intro_v78_" + (i + 1), "targetname");
+      vtol = getEnt("intro_v78_" + (i + 1), "targetname");
 
       if(isDefined(vtol)) {
         print3d(vtol.origin, i + 1, (0, 1, 0), 1, 10, 1);
@@ -318,12 +318,12 @@ show_numbers() {
 }
 
 play_vtol_exhaust() {
-  vtol_explode = getent("vtol_explode", "targetname");
+  vtol_explode = getEnt("vtol_explode", "targetname");
   vtol_explode thread play_vtol_lights();
   playFXOnTag(level._effect["vtol_exhaust"], vtol_explode, "tag_engine_left");
 
   for(i = 0; i < 26; i++) {
-    vtol = getent("intro_v78_" + (i + 1), "targetname");
+    vtol = getEnt("intro_v78_" + (i + 1), "targetname");
 
     if(isDefined(vtol)) {
       vtol thread play_vtol_lights();
@@ -347,9 +347,9 @@ take_off_mask(ent) {
 swap_vtol(ent) {
   exploder(125);
   spawn_clouds("intro_cloud_struct", "avoid_missiles", getvehiclenode("path_jetwing", "targetname").angles);
-  harper_intro_jetwing = getent("intro_jetwing_1", "targetname");
+  harper_intro_jetwing = getEnt("intro_jetwing_1", "targetname");
   playFXOnTag(level._effect["jetwing_hero_exhaust"], harper_intro_jetwing, "tag_engine_left");
-  redshirt_intro_jetwing = getent("intro_jetwing_3", "targetname");
+  redshirt_intro_jetwing = getEnt("intro_jetwing_3", "targetname");
   playFXOnTag(level._effect["jetwing_hero_exhaust"], redshirt_intro_jetwing, "tag_engine_left");
   level.player freezecontrols(1);
   level thread vtol_swap();
@@ -370,9 +370,9 @@ vtol_explosion() {
 }
 
 vtol_swap() {
-  vtol = getent("intro_v78_player", "targetname");
+  vtol = getEnt("intro_v78_player", "targetname");
   vtol hide();
-  vtol_exterior = getent("intro_v78_exterior", "targetname");
+  vtol_exterior = getEnt("intro_v78_exterior", "targetname");
   vtol_exterior show();
   level.player setclientdvar("cg_fov", 75);
   level notify("swap_vtol");
@@ -489,26 +489,26 @@ delay_notify(time, str_notify) {
 intro_flak_knockdown(ent) {
   stop_exploder(102);
   level.player playSound("exp_vtol_imp");
-  vtol_interior = getent("fxanim_vtol_interior", "targetname");
+  vtol_interior = getEnt("fxanim_vtol_interior", "targetname");
   playFXOnTag(level._effect["wire_sparks"], vtol_interior, "tag_fx_wire1");
   playFXOnTag(level._effect["wire_sparks"], vtol_interior, "tag_fx_wire2");
-  struct = getstruct("intro_flak_struct_knockdown", "targetname");
+  struct = getStruct("intro_flak_struct_knockdown", "targetname");
   playFX(level._effect["flak_explode"], struct.origin);
   earthquake(1.5, 1, struct.origin, 512, level.player);
   level.player thread rumble_loop(10, 0.1);
   wait 3;
-  struct = getstruct("intro_flak_struct_window", "script_noteworthy");
+  struct = getStruct("intro_flak_struct_window", "script_noteworthy");
   playFX(level._effect["flak_explode"], struct.origin);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 intro_impact_missile() {
   level waittill("fxanim_vtol_int_hit_start");
   wait 12.2;
-  missile = getent("intro_impact_missile", "targetname");
-  end = getstruct("intro_impact_end", "targetname");
+  missile = getEnt("intro_impact_missile", "targetname");
+  end = getStruct("intro_impact_end", "targetname");
   playFXOnTag(level._effect["missile_trail"], missile, "tag_origin");
-  missile moveto(end.origin, 0.5, 0.05);
+  missile moveTo(end.origin, 0.5, 0.05);
   missile waittill("movedone");
   earthquake(0.5, 2, level.player.origin, 512);
   level.player thread rumble_loop(10, 0.1);
@@ -529,12 +529,12 @@ intro_vtol_pieces() {
 
 setup_vtol_pieces(str_pieces, str_parent) {
   pieces = getEntArray(str_pieces, "script_noteworthy");
-  parent = getent(str_parent, "targetname");
+  parent = getEnt(str_parent, "targetname");
   parent.pieces = [];
   parent maps\haiti_util::add_cleanup_ent("cleanup_intro");
 
   foreach(piece in pieces) {
-    piece linkto(parent, piece.script_string, (0, 0, 0), (0, 0, 0));
+    piece linkTo(parent, piece.script_string, (0, 0, 0), (0, 0, 0));
     piece maps\haiti_util::add_cleanup_ent("cleanup_intro");
     parent.pieces[parent.pieces.size] = piece;
   }
@@ -543,9 +543,9 @@ setup_vtol_pieces(str_pieces, str_parent) {
 }
 
 vtol_piece_think(str_end, time, accel, fx_tag) {
-  end_point = getstruct(str_end, "targetname");
+  end_point = getStruct(str_end, "targetname");
   playFXOnTag(level._effect["vtol_trail_cheap"], self, fx_tag);
-  self moveto(end_point.origin, time, accel);
+  self moveTo(end_point.origin, time, accel);
   self waittill("movedone");
   wait 3;
   array_delete(self.pieces);
@@ -1288,31 +1288,31 @@ endlookyloosnap(guy) {
 }
 
 sndplaydoorbell(guy) {
-  playsoundatposition("evt_endout04_door_bell", (-21050, 4279, 32));
+  playSoundAtPosition("evt_endout04_door_bell", (-21050, 4279, 32));
 }
 
 sndplaydoorleft(guy) {
   wait 0.15;
-  playsoundatposition("evt_endout04_door_left", (-21146, 4180, -35));
+  playSoundAtPosition("evt_endout04_door_left", (-21146, 4180, -35));
 }
 
 sndplaydoorright(guy) {
   wait 0.15;
-  playsoundatposition("evt_endout04_door_right", (-21135, 4350, -58));
+  playSoundAtPosition("evt_endout04_door_right", (-21135, 4350, -58));
 }
 
 sndplayvtolland(guy) {
-  playsoundatposition("evt_endout04_vtol_land", (-21507, 4309, -56));
+  playSoundAtPosition("evt_endout04_vtol_land", (-21507, 4309, -56));
 }
 
 sndplayvtolland5(guy) {
-  playsoundatposition("evt_endout05_vtol_land", (-21507, 4309, -56));
+  playSoundAtPosition("evt_endout05_vtol_land", (-21507, 4309, -56));
 }
 
 sndplayvtolland6(guy) {
-  playsoundatposition("evt_endout06_vtol_land", (-21507, 4309, -56));
+  playSoundAtPosition("evt_endout06_vtol_land", (-21507, 4309, -56));
 }
 
 sndplayvtoltakeoff(guy) {
-  playsoundatposition("evt_endout04_vtol_takeoff", (-21507, 4309, -56));
+  playSoundAtPosition("evt_endout04_vtol_takeoff", (-21507, 4309, -56));
 }

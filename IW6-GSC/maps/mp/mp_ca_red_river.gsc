@@ -78,7 +78,7 @@ redriver_breach_init() {
     if(!isDefined(p.target)) {
       continue;
     }
-    breach = getstruct(p.target, "targetname");
+    breach = getStruct(p.target, "targetname");
     if(!isDefined(breach)) {
       continue;
     }
@@ -204,17 +204,17 @@ chain_gate_trigger_wait_damage(gate_trigger) {
 }
 
 chain_gate() {
-  left_gate = GetEnt("left_gate", "targetname");
+  left_gate = getEnt("left_gate", "targetname");
 
-  lock = GetEnt("lock", "targetname");
-  gate_clip = GetEnt("gate_clip", "targetname");
+  lock = getEnt("lock", "targetname");
+  gate_clip = getEnt("gate_clip", "targetname");
   gate_triggers = getEntArray("gate_trigger", "targetname");
 
   gate_anim_node = spawn("script_model", left_gate.origin);
   gate_anim_node setModel("generic_prop_raven");
   gate_anim_node.angles = left_gate.angles;
   waitframe();
-  gate_clip DisconnectPaths();
+  gate_clip disconnectPaths();
   waitframe();
 
   waitframe();
@@ -259,10 +259,10 @@ chain_gate() {
 
   if(open_in) {
     left_gate ScriptModelPlayAnim("rr_gate_open_in");
-    gate_clip RotateYaw(130.00, .66);
+    gate_clip rotateYaw(130.00, .66);
   } else {
     left_gate ScriptModelPlayAnim("rr_gate_open_out");
-    gate_clip RotateYaw(-130.00, .66);
+    gate_clip rotateYaw(-130.00, .66);
   }
 
   left_gate playSound("scn_breach_gate_open_left");
@@ -278,7 +278,7 @@ bot_outside_gate_watch() {
   level endon("chain_broken");
 
   gate_triggers = getEntArray("gate_trigger", "targetname");
-  near_gate_volume = GetEnt("near_gate_volume", "targetname");
+  near_gate_volume = getEnt("near_gate_volume", "targetname");
 
   while(1) {
     if(isDefined(level.participants)) {

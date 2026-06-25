@@ -181,7 +181,7 @@ function function_d99e101d(localclientnum, var_86cccd7b) {
 function function_6333cd88(var_bea4648f) {
   level endon(#"end_game");
   self endon(#"death");
-  self moveto(var_bea4648f.origin, 0.1);
+  self moveTo(var_bea4648f.origin, 0.1);
   wait 0.1;
 
   if(isDefined(self)) {

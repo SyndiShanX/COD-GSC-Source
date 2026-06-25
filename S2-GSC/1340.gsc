@@ -295,7 +295,7 @@ lib_053C::func_298D(param_00) {
 
     var_07 = anglesToForward(var_06);
     var_07 = common_scripts\utility::func_3D5D(var_07);
-    var_07 = vectornormalize(var_07);
+    var_07 = vectorNormalize(var_07);
     var_08 = self.var_0116 + var_07 * var_04 / var_05 + 1;
     if(var_05 < var_01 - 1) {
       var_09 = getclosestpointonnavmesh(var_08, self);
@@ -322,11 +322,11 @@ lib_053C::func_1436() {
 lib_053C::func_5724(param_00) {
   var_01 = anglesToForward(param_00.var_001D + (0, 0, 0));
   var_01 = common_scripts\utility::func_3D5D(var_01);
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   var_02 = param_00.var_0116 + 64 * var_01;
   var_01 = anglesToForward(param_00.var_001D + (0, 180, 0));
   var_01 = common_scripts\utility::func_3D5D(var_01);
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   var_03 = param_00.var_0116 + 64 * var_01;
   return distance(self.var_0116, var_02) < distance(self.var_0116, var_03);
 }
@@ -334,11 +334,11 @@ lib_053C::func_5724(param_00) {
 lib_053C::func_5769(param_00) {
   var_01 = anglesToForward(param_00.var_001D + (0, -90, 0));
   var_01 = common_scripts\utility::func_3D5D(var_01);
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   var_02 = param_00.var_0116 + 64 * var_01;
   var_01 = anglesToForward(param_00.var_001D + (0, 90, 0));
   var_01 = common_scripts\utility::func_3D5D(var_01);
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   var_03 = param_00.var_0116 + 64 * var_01;
   return distance(self.var_0116, var_02) < distance(self.var_0116, var_03);
 }
@@ -1134,7 +1134,7 @@ lib_053C::func_346C(param_00, param_01, param_02, param_03) {
 
   var_0A = getstartorigin(param_01.var_8310, param_01.var_830F, var_07);
   var_0B = getstartangles(param_01.var_8310, param_01.var_830F, var_07);
-  self setorigin(var_0A, 0);
+  self setOrigin(var_0A, 0);
   self method_839C("anim deltas");
   self scragentsetorientmode("face angle abs", var_0B);
   maps\mp\agents\_scripted_agent_anim_util::func_71FA(var_05, var_06, 1, "gj_gate_drop", "end_start");

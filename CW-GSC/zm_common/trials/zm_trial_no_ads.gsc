@@ -27,7 +27,7 @@ function private on_begin() {
   callback::on_spawned(&function_dc856fd8);
   callback::on_ai_spawned(&on_ai_spawned);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_8677ce00(1);
     player allowads(0);
     player._allow_ads = 0;
@@ -55,7 +55,7 @@ function private on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
   callback::remove_on_ai_spawned(&on_ai_spawned);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"allow_ads");
     player._allow_ads = undefined;
     player allowads(1);

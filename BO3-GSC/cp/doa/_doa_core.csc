@@ -139,7 +139,7 @@ function function_d5eb029a() {
   level endon("hash_d5eb029a");
   while(true) {
     level waittill("hash_aae01d5a", playernum, newstate);
-    players = getplayers(0);
+    players = getPlayers(0);
     foreach(player in players) {
       if(!isDefined(player.entnum)) {
         player.entnum = player getentitynumber();
@@ -194,7 +194,7 @@ function function_ae0a4fc5() {
   self notify("hash_ae0a4fc5");
   self endon("hash_ae0a4fc5");
   while(true) {
-    players = getplayers(0);
+    players = getPlayers(0);
     foreach(player in players) {
       if(isDefined(player.doa)) {
         continue;
@@ -329,7 +329,7 @@ function function_ca593121(localclientnum, oldval, newval, bnewent, binitialsnap
     }
     level.doa.var_db180da = spawn(localclientnum, level.var_6383030e, "script_model");
     level.doa.var_db180da setModel("tag_origin");
-    level.doa.var_db180da moveto(self.origin + vectorscale((0, 0, 1), 72), 0.15);
+    level.doa.var_db180da moveTo(self.origin + vectorscale((0, 0, 1), 72), 0.15);
     wait(0.1);
     playFX(localclientnum, level._effect["bomb"], self.origin);
     level.doa.var_db180da util::waittill_any_timeout(0.1, "movedone");
@@ -520,7 +520,7 @@ function function_10477d98(localclientnum) {
       if(!(isDefined(level.doa.var_2836c8ee) && level.doa.var_2836c8ee) && localclientnum != 0) {
         continue;
       }
-      normal = vectornormalize(self.origin - lastposition);
+      normal = vectorNormalize(self.origin - lastposition);
       step = normal * stepsize;
       dist = distance(self.origin, lastposition);
       if(dist < 10) {
@@ -768,7 +768,7 @@ function function_4ac9a8ba(localclientnum, oldval, newval, bnewent, binitialsnap
   level.doa.roundnumber = 1;
   level.doa.var_160ae6c6 = 1;
   setuimodelvalue(getuimodel(level.var_7e2a814c, "level"), level.doa.var_160ae6c6);
-  foreach(player in getplayers(0)) {
+  foreach(player in getPlayers(0)) {
     player.doa = undefined;
     player thread function_12c2fbcb();
   }
@@ -809,7 +809,7 @@ function function_f87ff72d(localclientnum, oldval, newval, bnewent, binitialsnap
   bomb = spawn(localclientnum, origin, "script_model");
   bomb setModel("zombietron_nuke");
   bomb.angles = vectorscale((1, 0, 0), 90);
-  bomb moveto(var_ec8a4984, 0.3, 0, 0);
+  bomb moveTo(var_ec8a4984, 0.3, 0, 0);
   playSound(0, "zmb_nuke_incoming", self.origin);
   bomb waittill("movedone");
   playSound(localclientnum, "zmb_nuke_impact", var_ec8a4984);
@@ -960,7 +960,7 @@ function function_36c61ba6(localclientnum, var_4faf5231 = 1, var_ad5de66e = 1) {
       }
       wait(0.016);
     }
-    self rotateto(baseangles, 0.6 - (self.rate / 10));
+    self rotateTo(baseangles, 0.6 - (self.rate / 10));
     wait(0.6 - (self.rate / 10));
   }
 }
@@ -1018,7 +1018,7 @@ function delay_for_clients_then_execute(func) {
 }
 
 function function_ddbc17b4(localclientnum, var_bac17ccf, var_2ca34dda) {
-  if(var_bac17ccf == 1 && getplayers(localclientnum).size == level.localplayers.size) {
+  if(var_bac17ccf == 1 && getPlayers(localclientnum).size == level.localplayers.size) {
     var_bac17ccf++;
   }
   if(var_bac17ccf == 4 && isDefined(level.doa.var_708cc739) && level.doa.var_708cc739 != 1) {

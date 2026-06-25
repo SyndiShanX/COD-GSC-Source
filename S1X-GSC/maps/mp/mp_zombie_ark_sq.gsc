@@ -96,55 +96,55 @@ startarksidequest() {
     }
   }
 
-  var_8 = getent("sqCageSwitch", "targetname");
+  var_8 = getEnt("sqCageSwitch", "targetname");
 
   if(isDefined(var_8)) {
     var_8 hide();
   }
 
-  var_9 = getent("sqPoolClip", "targetname");
+  var_9 = getEnt("sqPoolClip", "targetname");
 
   if(isDefined(var_9)) {
     var_9.origin = var_9.origin + (0, 0, -1000);
   }
 
-  var_10 = getent("sqPoolDoor1", "targetname");
+  var_10 = getEnt("sqPoolDoor1", "targetname");
 
   if(isDefined(var_10)) {
     var_10.unresolved_collision_func = maps\mp\_movers::unresolved_collision_void;
   }
 
-  var_11 = getent("sqPoolDoor2", "targetname");
+  var_11 = getEnt("sqPoolDoor2", "targetname");
 
   if(isDefined(var_11)) {
     var_11.unresolved_collision_func = maps\mp\_movers::unresolved_collision_void;
   }
 
-  var_12 = getent("sqArm", "targetname");
+  var_12 = getEnt("sqArm", "targetname");
 
   if(isDefined(var_12)) {
     var_12 hide();
   }
 
-  var_13 = getent("sqIslandCrate2", "targetname");
+  var_13 = getEnt("sqIslandCrate2", "targetname");
 
   if(isDefined(var_13)) {
     var_13 hide();
   }
 
-  var_14 = getent("sqCode2", "targetname");
+  var_14 = getEnt("sqCode2", "targetname");
 
   if(isDefined(var_14)) {
     var_14 hide();
   }
 
-  var_14 = getent("sqCode3", "targetname");
+  var_14 = getEnt("sqCode3", "targetname");
 
   if(isDefined(var_14)) {
     var_14 hide();
   }
 
-  var_15 = getent("sqTeleporterLights", "targetname");
+  var_15 = getEnt("sqTeleporterLights", "targetname");
 
   if(isDefined(var_15)) {
     level thread setupteleportlightmodel(var_15, 0);
@@ -166,18 +166,18 @@ startarksidequest() {
 }
 
 setupsharkcage() {
-  var_0 = common_scripts\utility::getstruct("shark_anim_node", "targetname");
-  var_1 = getent("sqCageModel", "targetname");
-  var_2 = getent("sqCrane", "targetname");
-  var_3 = getent("sqCage", "targetname");
-  var_4 = getent("sqCageDoorClip", "targetname");
-  var_5 = getent("sqCageDoorBottomClip", "targetname");
-  var_6 = getent("sqCageVolume", "targetname");
+  var_0 = common_scripts\utility::getStruct("shark_anim_node", "targetname");
+  var_1 = getEnt("sqCageModel", "targetname");
+  var_2 = getEnt("sqCrane", "targetname");
+  var_3 = getEnt("sqCage", "targetname");
+  var_4 = getEnt("sqCageDoorClip", "targetname");
+  var_5 = getEnt("sqCageDoorBottomClip", "targetname");
+  var_6 = getEnt("sqCageVolume", "targetname");
 
   if(!isDefined(var_0) || !isDefined(var_1) || !isDefined(var_2) || !isDefined(var_3) || !isDefined(var_4) || !isDefined(var_5) || !isDefined(var_6)) {
     return;
   }
-  var_6 enablelinkto();
+  var_6 enablelinkTo();
   var_6 linktosynchronizedparent(var_1);
   var_4 linktosynchronizedparent(var_1);
   var_5 linktosynchronizedparent(var_1);
@@ -210,7 +210,7 @@ initvo() {
   level.vox maps\mp\zombies\_zombies_audio::zmbvoxadd("announcer_oz", "machine_all_players", "weap_dis_cred", "weap_dis_cred", undefined);
 
   if(!isDefined(level.sqarm)) {
-    level.sqarm = getent("sqArm", "targetname");
+    level.sqarm = getEnt("sqArm", "targetname");
   }
 
   level.vox maps\mp\zombies\_zombies_audio::zmbvoxinitspeaker("announcer_zom", "zombie_", level.sqarm, 0);
@@ -402,7 +402,7 @@ playerintoxicatedrotateground(var_0) {
       var_9 = (0, 0, 0);
     }
 
-    self.groundref rotateto(var_9, var_4, var_10, var_11);
+    self.groundref rotateTo(var_9, var_4, var_10, var_11);
     wait(var_4);
   }
 
@@ -472,12 +472,12 @@ updateintoxicatedentities() {
 }
 
 weapondisposallogic() {
-  var_0 = getent("weaponDisposalUse", "targetname");
+  var_0 = getEnt("weaponDisposalUse", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = getent("sqWeaponDisposalSign", "targetname");
+  var_1 = getEnt("sqWeaponDisposalSign", "targetname");
 
   if(isDefined(var_1)) {
     var_1 hide();
@@ -493,7 +493,7 @@ weapondisposallogic() {
   setupweapontoitemmapping();
 
   if(!isDefined(level.sqarm)) {
-    level.sqarm = getent("sqArm", "targetname");
+    level.sqarm = getEnt("sqArm", "targetname");
 
     if(!isDefined(level.sqarm)) {
       return;
@@ -1057,15 +1057,15 @@ init_fishing_sidequest() {
 sidequest_fishing_logic() {
   maps\mp\zombies\_zombies_sidequests::stage_start("fishing", "stage1");
   level waittill("fishing_stage1_over");
-  var_0 = getent("sqPole2", "targetname");
+  var_0 = getEnt("sqPole2", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_0 setcursorhint("HINT_NOICON");
+  var_0 setCursorHint("HINT_NOICON");
 
   for(;;) {
-    var_0 sethintstring(&"ZOMBIE_ARK_SQ_FISH");
+    var_0 setHintString(&"ZOMBIE_ARK_SQ_FISH");
     var_0 setsecondaryhintstring(&"ZOMBIES_COST_100");
     var_0 makeusable();
     var_0 waittill("trigger", var_1);
@@ -1086,7 +1086,7 @@ sidequest_fishing_logic() {
     var_0 waittillmatch("fishing_notetrack", "item_reachable");
 
     if(isDefined(var_1)) {
-      var_0 sethintstring(&"ZOMBIE_ARK_SQ_FISH_GRAB");
+      var_0 setHintString(&"ZOMBIE_ARK_SQ_FISH_GRAB");
       var_0 setsecondaryhintstring("");
       var_0 makeusable();
       var_0.owner = var_1;
@@ -1126,7 +1126,7 @@ sidequest_fishing_logic() {
 fishinghint() {
   level endon("code1_stage2_over");
   level waittill("code1_stage1_over");
-  var_0 = getent("sqPole2", "targetname");
+  var_0 = getEnt("sqPole2", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1149,7 +1149,7 @@ fishinghint() {
 }
 
 fishonsounds(var_0) {
-  var_1 = common_scripts\utility::getstruct("sqFishingSplash", "targetname");
+  var_1 = common_scripts\utility::getStruct("sqFishingSplash", "targetname");
 
   if(isDefined(var_0) && !isDefined(var_0.sqfishinggotoneplayed)) {
     var_0 playerplaysqvo(13, undefined, 1);
@@ -1170,7 +1170,7 @@ putitemonhook(var_0, var_1) {
   var_2 = var_1 gettagorigin("tag_attach");
   var_3 = spawn("script_model", var_2);
   var_3 setModel(var_0.model);
-  var_3 linkto(var_1, "tag_attach", var_0.offset, var_0.angles);
+  var_3 linkTo(var_1, "tag_attach", var_0.offset, var_0.angles);
 
   if(var_0.item == "fish") {
     var_3 thread fishwiggle();
@@ -1259,7 +1259,7 @@ getnewammoamount(var_0, var_1) {
 
 launchanddelete(var_0, var_1, var_2) {
   var_0 unlink();
-  var_3 = vectornormalize(var_0.origin - var_2.origin) * var_1.impulse;
+  var_3 = vectorNormalize(var_0.origin - var_2.origin) * var_1.impulse;
   var_0 physicslaunchclient(var_2.origin, var_3);
   wait 2;
   var_0 delete();
@@ -1323,7 +1323,7 @@ getrandomfishingitem() {
 fishing_stage1_init() {}
 
 fishing_stage1_logic() {
-  var_0 = getent("sqPole2", "targetname");
+  var_0 = getEnt("sqPole2", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1423,8 +1423,8 @@ zmplayeraltteleport(var_0, var_1, var_2) {
     level notify("securityFieldTouched");
   }
 
-  var_3 = getent("zomboni_room_volume", "targetname");
-  var_4 = getent("sqCageVolume", "targetname");
+  var_3 = getEnt("zomboni_room_volume", "targetname");
+  var_4 = getEnt("sqCageVolume", "targetname");
   var_5 = 0;
   var_6 = 2;
 
@@ -1459,7 +1459,7 @@ zmplayeraltteleport(var_0, var_1, var_2) {
 
 playerinzomboniroom(var_0) {
   level.zmplayerinzomboniroom = self;
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
   self setplayerangles(var_0.angles);
   level thread announcerzomboniroom(self);
   wait 5;
@@ -1522,7 +1522,7 @@ playerteleporttoastructwait(var_0, var_1) {
 
 playertryteleporttostruct(var_0) {
   if(capsuletracepassed(var_0.origin + (0, 0, 5), 15, 60, self)) {
-    self setorigin(var_0.origin, 1);
+    self setOrigin(var_0.origin, 1);
 
     if(isDefined(var_0.angles)) {
       self setplayerangles(var_0.angles);
@@ -1542,7 +1542,7 @@ stage1_end(var_0) {
 stage2_init() {}
 
 stage2_logic() {
-  var_0 = common_scripts\utility::getstruct("sqEngineRoomDoor", "targetname");
+  var_0 = common_scripts\utility::getStruct("sqEngineRoomDoor", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1661,18 +1661,18 @@ stage2_logic() {
 
 unlockspecialweaponupgrade() {
   level notify("special_weapon_box_unlocked");
-  var_0 = getent("sqUpgradeStationTop", "targetname");
+  var_0 = getEnt("sqUpgradeStationTop", "targetname");
 
   if(isDefined(var_0)) {
     var_1 = var_0.origin + (0, 0, 30);
-    var_0 moveto(var_1, 2, 0.5, 0.5);
+    var_0 moveTo(var_1, 2, 0.5, 0.5);
   }
 
-  var_2 = getent("sqUpgradeStationBottom", "targetname");
+  var_2 = getEnt("sqUpgradeStationBottom", "targetname");
 
   if(isDefined(var_2)) {
     var_1 = var_2.origin + (0, 0, -30);
-    var_2 moveto(var_1, 2, 0.5, 0.5);
+    var_2 moveTo(var_1, 2, 0.5, 0.5);
   }
 }
 
@@ -1757,8 +1757,8 @@ code1_stage1_init() {
 }
 
 code1_stage1_logic() {
-  var_0 = common_scripts\utility::getstruct("sqTeleportMachineUse", "targetname");
-  var_1 = getent("sqTeleporterLights", "targetname");
+  var_0 = common_scripts\utility::getStruct("sqTeleportMachineUse", "targetname");
+  var_1 = getEnt("sqTeleporterLights", "targetname");
   var_2 = getEntArray("sqTeleportLight", "targetname");
 
   if(!isDefined(var_0)) {
@@ -1942,9 +1942,9 @@ runteleportmachine() {
   level.sqtreasurefound = 0;
   level.sqtreasurepickedup = 0;
   var_0 = common_scripts\utility::getStructArray("sqIslandTeleport", "script_noteworthy");
-  var_1 = common_scripts\utility::getstruct("sqTeleportMachineUse", "targetname");
+  var_1 = common_scripts\utility::getStruct("sqTeleportMachineUse", "targetname");
   level.zmbsqteleportbackspots = common_scripts\utility::getStructArray("sqTeleportBack", "targetname");
-  var_2 = getent("sqTeleporterLights", "targetname");
+  var_2 = getEnt("sqTeleporterLights", "targetname");
   var_3 = getEntArray("sqTeleportLight", "targetname");
 
   if(!isDefined(var_1)) {
@@ -1972,14 +1972,14 @@ runteleportmachine() {
   wait 1;
   var_11 = spawn("script_model", var_1.origin);
   var_11 setModel("tag_origin");
-  var_11 setcursorhint("HINT_NOICON");
+  var_11 setCursorHint("HINT_NOICON");
   var_11 makeusable();
   level thread doozislandtaunt();
 
   while(!level.sqtreasurefound || !level.sqtreasurepickedup) {
     level.sqcoststring = var_6[level.sqcostindex];
     level.sqcost = var_7[level.sqcostindex];
-    var_11 sethintstring(&"ZOMBIE_ARK_SQ_TELEPORT");
+    var_11 setHintString(&"ZOMBIE_ARK_SQ_TELEPORT");
     var_11 setsecondaryhintstring(level.sqcoststring);
     var_11.cooldown = 0;
 
@@ -2015,7 +2015,7 @@ runteleportmachine() {
     }
 
     var_11.cooldown = 1;
-    var_11 sethintstring(&"ZOMBIES_CURE_COOLDOWN_HINT");
+    var_11 setHintString(&"ZOMBIES_CURE_COOLDOWN_HINT");
     var_11 setsecondaryhintstring("");
 
     if(level.sqcostindex + 1 < var_6.size) {
@@ -2039,7 +2039,7 @@ runteleportmachine() {
     }
 
     var_20 = level.sqplayersteleporting[0].origin;
-    var_21 = common_scripts\utility::getstruct("sqIslandCenter", "targetname");
+    var_21 = common_scripts\utility::getStruct("sqIslandCenter", "targetname");
 
     if(isDefined(var_21)) {
       var_20 = var_21.origin;
@@ -2092,7 +2092,7 @@ doozislandtaunt2() {
 }
 
 doozislandtaunt() {
-  var_0 = getent("sqTeleportTrigger", "targetname");
+  var_0 = getEnt("sqTeleportTrigger", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -2229,7 +2229,7 @@ runteleporterlight(var_0) {
 }
 
 playerteleporttoisland(var_0) {
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
 
   if(isDefined(var_0.angles)) {
     self setplayerangles(var_0.angles);
@@ -2272,8 +2272,8 @@ playerdig() {
     self.digprompt = spawn("script_model", self.origin);
     self.digprompt hide();
     self.digprompt showtoplayer(self);
-    self.digprompt setcursorhint("HINT_NOICON");
-    self.digprompt sethintstring(&"ZOMBIE_ARK_SQ_DIG");
+    self.digprompt setCursorHint("HINT_NOICON");
+    self.digprompt setHintString(&"ZOMBIE_ARK_SQ_DIG");
   }
 
   for(;;) {
@@ -2320,8 +2320,8 @@ playerdig() {
 findtreasure(var_0) {
   level endon("code1_stage4_over");
   level.sqtreasurefound = 1;
-  var_1 = getent("sqIslandCrate2", "targetname");
-  var_2 = getent("sqCode3", "targetname");
+  var_1 = getEnt("sqIslandCrate2", "targetname");
+  var_2 = getEnt("sqCode3", "targetname");
   var_3 = var_0.origin - level.sqtreasure.origin;
   var_4 = (0, vectortoyaw(var_3), 0);
   var_5 = level.sqtreasure.origin + (0, 0, -10);
@@ -2362,7 +2362,7 @@ findtreasure(var_0) {
   }
 
   waitframe();
-  var_1 moveto(var_7, 0.2, 0.1, 0.1);
+  var_1 moveTo(var_7, 0.2, 0.1, 0.1);
   wait 0.2;
   var_1 physicslaunchserver(var_1.origin, (0, 0, -1));
   var_1 common_scripts\utility::waittill_notify_or_timeout("physics_finished", 0.5);
@@ -2393,7 +2393,7 @@ findtreasure(var_0) {
 
 getplayersteleporting() {
   var_0 = [];
-  var_1 = getent("sqTeleportTrigger", "targetname");
+  var_1 = getEnt("sqTeleportTrigger", "targetname");
 
   if(isDefined(var_1)) {
     foreach(var_3 in level.players) {
@@ -2473,7 +2473,7 @@ sidequest_code2_logic() {
 code2_stage1_init() {}
 
 code2_stage1_logic() {
-  var_0 = getent("sqSecurityButton", "targetname");
+  var_0 = getEnt("sqSecurityButton", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2484,8 +2484,8 @@ code2_stage1_logic() {
 }
 
 runobstaclecourse() {
-  var_0 = getent("sqSecurityButton", "targetname");
-  var_1 = getent("sqCode2", "targetname");
+  var_0 = getEnt("sqSecurityButton", "targetname");
+  var_1 = getEnt("sqCode2", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2575,7 +2575,7 @@ doobstaclecourselavavo() {
   if(maps\mp\zombies\_util::is_true(level.zmbsqplayedlavavo)) {
     return;
   }
-  var_0 = getent("sqTriggerEnterCargo", "targetname");
+  var_0 = getEnt("sqTriggerEnterCargo", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2600,7 +2600,7 @@ doobstaclecoursecrouchvo() {
   if(maps\mp\zombies\_util::is_true(level.zmbsqplayedcrouchvo)) {
     return;
   }
-  var_0 = getent("sqTriggerEnterLift", "targetname");
+  var_0 = getEnt("sqTriggerEnterLift", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2625,7 +2625,7 @@ doobstaclecoursemazevo() {
   if(maps\mp\zombies\_util::is_true(level.zmbsqplayedmazevo)) {
     return;
   }
-  var_0 = getent("sqTriggerEnterPool", "targetname");
+  var_0 = getEnt("sqTriggerEnterPool", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2790,7 +2790,7 @@ sidequest_code3_logic() {
 code3_stage1_init() {}
 
 code3_stage1_logic() {
-  var_0 = getent("sqLocker1", "targetname");
+  var_0 = getEnt("sqLocker1", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2813,7 +2813,7 @@ code3_stage2_init() {
 
 dosharkhint() {
   level endon("code3_stage3_over");
-  var_0 = getent("sqLocker1", "targetname");
+  var_0 = getEnt("sqLocker1", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2870,7 +2870,7 @@ dronewaittilldropswitch() {
   var_0 = spawn("script_model", self.origin);
   var_0 setModel("zark_electricpanel_switch_01_anim");
   var_0 hudoutlineenable(2, 0);
-  var_0 linkto(self, "tag_origin", (0, 0, 20), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 20), (0, 0, 0));
   thread dronesqcleanupswitch(var_0);
   self waittill("disabled", var_1);
 
@@ -2975,7 +2975,7 @@ code3_stage2_end(var_0) {
 code3_stage3_init() {}
 
 code3_stage3_logic() {
-  var_0 = getent("sqCageSwitch", "targetname");
+  var_0 = getEnt("sqCageSwitch", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2988,7 +2988,7 @@ code3_stage3_logic() {
 }
 
 code3_stage3_end(var_0) {
-  var_4 = getent("sqCageSwitch", "targetname");
+  var_4 = getEnt("sqCageSwitch", "targetname");
 
   if(isDefined(var_4)) {
     var_4 show();
@@ -2999,7 +2999,7 @@ code3_stage3_end(var_0) {
 }
 
 chumwaters() {
-  level.sqchumvolume = getent("sqChumWater", "targetname");
+  level.sqchumvolume = getEnt("sqChumWater", "targetname");
 
   if(!isDefined(level.sqchumvolume)) {
     return;
@@ -3073,7 +3073,7 @@ resetchumtime(var_0) {
 }
 
 doshark() {
-  var_0 = common_scripts\utility::getstruct("shark_anim_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("shark_anim_node", "targetname");
 
   if(!isDefined(var_0)) {
     var_0 = spawnStruct();
@@ -3146,19 +3146,19 @@ code3_stage4_end(var_0) {
 }
 
 cageoperation() {
-  var_0 = common_scripts\utility::getstruct("shark_anim_node", "targetname");
-  var_1 = getent("sqCrane", "targetname");
-  var_2 = getent("sqCageModel", "targetname");
-  var_3 = getent("sqCageDoorClip", "targetname");
-  var_4 = getent("sqCageDoorBottomClip", "targetname");
-  var_5 = getent("sqCageSwitch", "targetname");
-  var_6 = getent("sqCageTrigger", "targetname");
-  var_7 = getent("sqCageVolume", "targetname");
-  var_8 = getent("sqPoolDoor1", "targetname");
-  var_9 = getent("sqPoolDoor2", "targetname");
-  var_10 = getent("sqChumWater", "targetname");
-  var_11 = getent("sqPoolTrigger", "targetname");
-  var_12 = getent("sqPoolClip", "targetname");
+  var_0 = common_scripts\utility::getStruct("shark_anim_node", "targetname");
+  var_1 = getEnt("sqCrane", "targetname");
+  var_2 = getEnt("sqCageModel", "targetname");
+  var_3 = getEnt("sqCageDoorClip", "targetname");
+  var_4 = getEnt("sqCageDoorBottomClip", "targetname");
+  var_5 = getEnt("sqCageSwitch", "targetname");
+  var_6 = getEnt("sqCageTrigger", "targetname");
+  var_7 = getEnt("sqCageVolume", "targetname");
+  var_8 = getEnt("sqPoolDoor1", "targetname");
+  var_9 = getEnt("sqPoolDoor2", "targetname");
+  var_10 = getEnt("sqChumWater", "targetname");
+  var_11 = getEnt("sqPoolTrigger", "targetname");
+  var_12 = getEnt("sqPoolClip", "targetname");
   var_13 = var_5;
 
   if(isDefined(var_6)) {
@@ -3168,11 +3168,11 @@ cageoperation() {
   }
 
   var_13 makeusable();
-  var_13 setcursorhint("HINT_NOICON");
+  var_13 setCursorHint("HINT_NOICON");
   level.zmbsqcagemoving = 0;
 
   for(;;) {
-    var_13 sethintstring(&"ZOMBIE_ARK_SQ_CAGE");
+    var_13 setHintString(&"ZOMBIE_ARK_SQ_CAGE");
     var_13 setsecondaryhintstring(&"ZOMBIES_COST_1000");
 
     for(;;) {
@@ -3185,7 +3185,7 @@ cageoperation() {
       wait 0.5;
     }
 
-    var_13 sethintstring(&"ZOMBIES_CURE_COOLDOWN_HINT");
+    var_13 setHintString(&"ZOMBIES_CURE_COOLDOWN_HINT");
     var_13 setsecondaryhintstring("");
     var_5 thread maps\mp\mp_zombie_ark_aud::cage_switch();
     var_5 scriptmodelplayanim("zark_electricpanel_switch_move_down", "switch_notetrack");
@@ -3219,8 +3219,8 @@ docageanimation(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_13 = isDefined(level.zmbshark) && maps\mp\zombies\_util::is_true(level.zmbshark.circling);
   var_2 scriptmodelplayanimdeltamotionfrompos("zark_sharkcage_lower_crane", var_0.origin, var_0.angles, "cageSequence");
   var_1 scriptmodelplayanimdeltamotionfrompos("zark_sharkcage_lower_cage", var_0.origin, var_0.angles, "cageSequence");
-  var_6 moveto(var_10, 3, 1, 1);
-  var_7 moveto(var_12, 3, 1, 1);
+  var_6 moveTo(var_10, 3, 1, 1);
+  var_7 moveTo(var_12, 3, 1, 1);
 
   if(var_13) {
     level thread dosharkcageoztaunt();
@@ -3323,8 +3323,8 @@ waittillsharkready() {
 }
 
 closepooldoors(var_0, var_1, var_2, var_3, var_4) {
-  var_0 moveto(var_2, 2, 1, 1);
-  var_1 moveto(var_3, 2, 1, 1);
+  var_0 moveTo(var_2, 2, 1, 1);
+  var_1 moveTo(var_3, 2, 1, 1);
   var_0.unresolved_collision_func = undefined;
   var_1.unresolved_collision_func = undefined;
   wait 2.1;
@@ -3335,7 +3335,7 @@ closepooldoors(var_0, var_1, var_2, var_3, var_4) {
 poolclipon() {
   self dontinterpolate();
   self.origin = self.origin + (0, 0, 1000);
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 poolclipoff() {
@@ -3479,7 +3479,7 @@ playerhandlewaterdamageark() {
 code3_stage5_init() {}
 
 code3_stage5_logic() {
-  var_0 = getent("sqLocker1", "targetname");
+  var_0 = getEnt("sqLocker1", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -3489,9 +3489,9 @@ code3_stage5_logic() {
   var_2 = var_1 maps\mp\zombies\_zombies_sidequests::fake_use("doorUsed", ::playerhasitem, "eye", "code3_stage1_over", 80);
   var_2 playertakeitem("eye");
   thread maps\mp\mp_zombie_ark_aud::open_locker(var_1);
-  var_0 rotateyaw(-80, 2, 0.5, 1);
+  var_0 rotateYaw(-80, 2, 0.5, 1);
   wait 2;
-  var_3 = getent("sqCode4", "targetname");
+  var_3 = getEnt("sqCode4", "targetname");
 
   if(isDefined(var_3)) {
     var_3 show();
@@ -3581,10 +3581,10 @@ waituntilplinkocomplete() {
   common_scripts\utility::flag_wait("sq_plinko_a");
   common_scripts\utility::flag_wait("sq_plinko_b");
   var_0 = common_scripts\utility::flag_wait("sq_plinko_c");
-  var_1 = getent("sqCode1", "targetname");
+  var_1 = getEnt("sqCode1", "targetname");
 
   if(isDefined(var_1)) {
-    var_1 moveto((-124, 696, 998), 1.5, 0.1, 0.5);
+    var_1 moveTo((-124, 696, 998), 1.5, 0.1, 0.5);
     var_0 = var_1 maps\mp\zombies\_zombies_sidequests::fake_use("got_code", ::playernotholdingcode);
     var_1 delete();
   }
@@ -3604,7 +3604,7 @@ code4_stage1_end(var_0) {
 }
 
 init_song_sidequest() {
-  level.sq_song_ent = getent("sq_song", "targetname");
+  level.sq_song_ent = getEnt("sq_song", "targetname");
 
   if(!isDefined(level.sq_song_ent)) {
     level.sq_song_ent = spawn("script_model", (0, 0, 0));
@@ -3873,7 +3873,7 @@ ozphone() {
 
 ozdoor() {
   var_0 = 62500;
-  var_1 = common_scripts\utility::getstruct("sqEngineRoomDoor", "targetname");
+  var_1 = common_scripts\utility::getStruct("sqEngineRoomDoor", "targetname");
   var_2 = [7, 8, 9, 10, 17, 18, 20];
   var_2 = common_scripts\utility::array_randomize(var_2);
   var_3 = 0;
@@ -3891,7 +3891,7 @@ ozdoor() {
       if(var_7 > var_0) {
         continue;
       }
-      var_8 = vectornormalize((var_6.origin[0], var_6.origin[1], 0) - (var_1.origin[0], var_1.origin[1], 0));
+      var_8 = vectorNormalize((var_6.origin[0], var_6.origin[1], 0) - (var_1.origin[0], var_1.origin[1], 0));
       var_9 = anglesToForward(var_1.angles);
       var_10 = vectordot(var_8, var_9);
 

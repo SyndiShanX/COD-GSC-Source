@@ -108,7 +108,7 @@ function function_e1ca24fe(players) {
 
 function function_c11071a8() {
   wait math::clamp(level.prematchperiod - 2, 0, level.prematchperiod);
-  players = getplayers();
+  players = getPlayers();
 
   if(is_true(getgametypesetting("allowPlayerMovementPrematch"))) {
     level thread function_38b14e59(players, 2, 3, 2, 0);
@@ -123,7 +123,7 @@ function function_c11071a8() {
 
     if(isDefined(player.startspawn)) {
       if(isDefined(player.startspawn.origin)) {
-        player setorigin(player.startspawn.origin);
+        player setOrigin(player.startspawn.origin);
       }
 
       if(isDefined(player.startspawn.angles)) {
@@ -530,7 +530,7 @@ function function_11fa5782(vehicletype, droppoint) {
 
   ground_pos = bulletTrace(droppoint.origin + (0, 0, 128), droppoint.origin - (0, 0, 128), 0, undefined, 1);
   level.var_1059a6b4 = (level.var_1059a6b4 + 1) % level.var_5a6cc4da.size;
-  var_d5552131 = spawnvehicle(vehicletype, ground_pos[#"position"] + (0, 0, 120), droppoint.angles);
+  var_d5552131 = spawnVehicle(vehicletype, ground_pos[#"position"] + (0, 0, 120), droppoint.angles);
 
   if(!isDefined(var_d5552131)) {
     return;
@@ -600,7 +600,7 @@ function function_c3623479(vehicle) {
     return;
   }
 
-  globallogic_audio::function_61e17de0("fireteamVehSpawn", getplayers(undefined, vehicle.origin, 6000));
+  globallogic_audio::function_61e17de0("fireteamVehSpawn", getPlayers(undefined, vehicle.origin, 6000));
 
   switch (vehicle.vehicletype) {
     case #"hash_6595f5efe62a4ec":
@@ -652,7 +652,7 @@ function function_e63bcc08() {
 
 function on_vehicle_spawned() {
   if(self.scriptvehicletype === "helicopter_heavy") {
-    globallogic_audio::function_61e17de0("fireteamVehSpawn", getplayers(undefined, self.origin, 6000));
+    globallogic_audio::function_61e17de0("fireteamVehSpawn", getPlayers(undefined, self.origin, 6000));
   }
 }
 
@@ -666,11 +666,11 @@ function function_1f93e91f(params) {
       droppoint = trace[#"position"];
     }
 
-    globallogic_audio::function_61e17de0("fireteamVehDrop", getplayers(undefined, droppoint, 6000));
+    globallogic_audio::function_61e17de0("fireteamVehDrop", getPlayers(undefined, droppoint, 6000));
     return;
   }
 
-  globallogic_audio::function_61e17de0("fireteamSupplyDrop", getplayers());
+  globallogic_audio::function_61e17de0("fireteamSupplyDrop", getPlayers());
 }
 
 function on_player_killed(params) {

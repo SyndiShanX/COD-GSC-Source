@@ -36,7 +36,7 @@ crane_super_use(var_0) {
   var_2 = 500;
   var_3 = self getplayerangles();
   var_4 = anglesToForward(var_3);
-  var_5 = vectornormalize(var_4) * var_2;
+  var_5 = vectorNormalize(var_4) * var_2;
   var_5 = (var_5[0], var_5[1], 0);
   var_6 = create_move_path(var_5);
   if(var_6) {
@@ -145,8 +145,8 @@ move_in_line() {
   var_2 = getclosestpointonnavmesh(self.origin);
   var_3 = anglesToForward(self getplayerangles());
   var_4 = getclosestpointonnavmesh(var_2 + var_3);
-  var_5 = vectornormalize(var_4 - var_2);
-  var_5 = vectornormalize(var_5 + (0, 0, var_0));
+  var_5 = vectorNormalize(var_4 - var_2);
+  var_5 = vectorNormalize(var_5 + (0, 0, var_0));
   self setvelocity(var_5 * var_1);
   thread kill_near_me();
   wait(2.5);
@@ -161,7 +161,7 @@ create_move_path(var_0) {
   var_3 = self getplayerangles();
   var_4 = anglesToForward(var_3);
   var_4 = (var_4[0], var_4[1], 0);
-  var_4 = vectornormalize(var_4) * 1000 + var_1;
+  var_4 = vectorNormalize(var_4) * 1000 + var_1;
   var_5 = level.players;
   var_6 = drop_points_on_path(var_2, var_4, 10);
   if(var_6.size < 1) {
@@ -170,7 +170,7 @@ create_move_path(var_0) {
 
   var_7 = spawn("script_origin", self.origin + (0, 0, 30));
   var_7.angles = self.angles;
-  self playerlinkto(var_7, undefined, 0, 10, 10, 10, 10, 1);
+  self playerlinkTo(var_7, undefined, 0, 10, 10, 10, 10, 1);
   thread kill_near_me();
   var_7 move_along_point_path(var_6, 0.5);
   self unlink();
@@ -183,7 +183,7 @@ create_move_path(var_0) {
 
 drop_points_on_path(var_0, var_1, var_2) {
   var_3 = distance(var_0, var_1);
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = var_3 / var_2;
   var_6 = level.players;
   var_7 = [];
@@ -304,7 +304,7 @@ final_location_check() {
         if([[level.is_in_crane_box_func]](var_2[0], var_2[1], var_0)) {
           var_3 = find_closest_crane_teleport(var_0);
           self dontinterpolate();
-          self setorigin(var_3);
+          self setOrigin(var_3);
           scripts\engine\utility::waitframe();
         }
       }
@@ -428,7 +428,7 @@ check_invalid_landing_place_and_teleport(var_0) {
 
   if(isDefined(var_1.teleport_spot)) {
     kill_nearby_zombies(var_1.teleport_spot, var_0);
-    var_0 setorigin(var_1.teleport_spot);
+    var_0 setOrigin(var_1.teleport_spot);
   }
 }
 

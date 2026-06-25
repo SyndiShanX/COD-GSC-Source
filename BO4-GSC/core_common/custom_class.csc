@@ -269,7 +269,7 @@ spawn_weapon_model(localclientnum, origin, angles) {
 }
 
 hide_paintshop_bg(localclientnum) {
-  paintshop_bg = getent(localclientnum, "paintshop_black", "targetname");
+  paintshop_bg = getEnt(localclientnum, "paintshop_black", "targetname");
 
   if(isDefined(paintshop_bg)) {
     if(!isDefined(level.paintshophiddenposition[localclientnum])) {
@@ -277,16 +277,16 @@ hide_paintshop_bg(localclientnum) {
     }
 
     paintshop_bg hide();
-    paintshop_bg moveto(level.paintshophiddenposition[localclientnum], 0.01);
+    paintshop_bg moveTo(level.paintshophiddenposition[localclientnum], 0.01);
   }
 }
 
 show_paintshop_bg(localclientnum) {
-  paintshop_bg = getent(localclientnum, "paintshop_black", "targetname");
+  paintshop_bg = getEnt(localclientnum, "paintshop_black", "targetname");
 
   if(isDefined(paintshop_bg)) {
     paintshop_bg show();
-    paintshop_bg moveto(level.paintshophiddenposition[localclientnum] + (0, 0, 227), 0.01);
+    paintshop_bg moveTo(level.paintshophiddenposition[localclientnum] + (0, 0, 227), 0.01);
   }
 }
 

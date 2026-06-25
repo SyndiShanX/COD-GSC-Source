@@ -60,11 +60,11 @@ defend_sparrow_pre_load() {
   precacheitem("ac130_25mm_carrier");
   precacheitem("ac130_40mm_carrier");
   precacheitem("ac130_105mm_carrier");
-  level.defend_sparrow_control = getent("defend_sparrow_control", "targetname");
+  level.defend_sparrow_control = getEnt("defend_sparrow_control", "targetname");
   level.defend_sparrow_control maps\_utility::hide_entity();
-  var_0 = getent("sparrow_launcher", "targetname");
-  var_1 = getent("sparrow_launcher_damage", "targetname");
-  var_1 linkto(var_0);
+  var_0 = getEnt("sparrow_launcher", "targetname");
+  var_1 = getEnt("sparrow_launcher_damage", "targetname");
+  var_1 linkTo(var_0);
   var_1 maps\_utility::hide_entity();
 }
 
@@ -73,7 +73,7 @@ setup_defend_sparrow() {
   maps\carrier_code::setup_common();
   maps\carrier_code::spawn_allies();
   thread maps\carrier_audio::aud_check("defend_sparrow");
-  var_0 = getent("water_wake_intro", "targetname");
+  var_0 = getEnt("water_wake_intro", "targetname");
   var_0 delete();
   thread spawn_ac130();
   thread sparrow_dead_operator();
@@ -89,7 +89,7 @@ begin_defend_sparrow() {
   level.player setviewkickscale(level.original_view_kick);
   level maps\_utility::delaythread(4, ::heli_cleanup);
   wait 3;
-  var_0 = getent("sparrow_launcher_damage", "targetname");
+  var_0 = getEnt("sparrow_launcher_damage", "targetname");
   var_0 maps\_utility::show_entity();
   level.player maps\carrier_code_sparrow::sam_remove_control();
   common_scripts\utility::exploder(5501);
@@ -114,19 +114,19 @@ catchup_defend_sparrow() {}
 
 run_defend_sparrow() {
   level.player endon("death");
-  var_0 = common_scripts\utility::getstruct("sparrow_run_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("sparrow_run_animnode", "targetname");
   var_1 = maps\_utility::spawn_anim_model("player_rig");
   var_1 hide();
   var_1 dontcastshadows();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "sparrow_enter_player");
   level.defend_sparrow_control maps\_utility::glow();
-  var_2 = getent("sparrow_trigger_player", "targetname");
-  var_2 setcursorhint("HINT_NOICON");
+  var_2 = getEnt("sparrow_trigger_player", "targetname");
+  var_2 setCursorHint("HINT_NOICON");
 
   if(level.console || level.player common_scripts\utility::is_player_gamepad_enabled()) {
-    var_2 sethintstring(&"CARRIER_USE_SPARROW_CONSOLE");
+    var_2 setHintString(&"CARRIER_USE_SPARROW_CONSOLE");
   } else {
-    var_2 sethintstring(&"CARRIER_USE_SPARROW");
+    var_2 setHintString(&"CARRIER_USE_SPARROW");
   }
 
   level.ds_vo_timer_left = 0;
@@ -194,7 +194,7 @@ sparrow_dead_operator() {
   var_0 setCanDamage(0);
   var_0.a.nodeath = 1;
   var_1 = maps\_utility::spawn_anim_model("sparrow_laptop");
-  var_2 = common_scripts\utility::getstruct("sparrow_run_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("sparrow_run_animnode", "targetname");
   var_3 = [var_0, var_1];
   common_scripts\utility::waitframe();
   var_2 maps\_anim::anim_first_frame_solo(var_0, "sparrow_enter");
@@ -203,7 +203,7 @@ sparrow_dead_operator() {
   var_5 = var_1 gettagangles("j_prop_1");
   level.defend_sparrow_control.origin = var_4;
   level.defend_sparrow_control.angles = var_5;
-  level.defend_sparrow_control linkto(var_1, "j_prop_1");
+  level.defend_sparrow_control linkTo(var_1, "j_prop_1");
   common_scripts\utility::flag_wait("player_entering_sparrow");
   var_2 thread maps\_anim::anim_single(var_3, "sparrow_enter");
   common_scripts\utility::waitframe();
@@ -306,12 +306,12 @@ destroyer_mg_fire() {
   var_0 = common_scripts\utility::getStructArray("destroyer4_mg_fire", "targetname");
   var_1 = common_scripts\utility::getclosest(self.origin, var_0);
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
-  var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1.target, "targetname");
   var_4 = var_3 common_scripts\utility::spawn_tag_origin();
-  var_5 = common_scripts\utility::getstruct(var_3.target, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_3.target, "targetname");
 
   if(common_scripts\utility::cointoss()) {
-    var_4 moveto(var_5.origin, 2.5);
+    var_4 moveTo(var_5.origin, 2.5);
     var_2 destroyer_volley(var_4);
   } else
     var_2 destroyer_volley(self);
@@ -386,7 +386,7 @@ zodiac_setup() {
 
 zodiac_sparrow_death() {
   self waittill("sparrow_hit_zodiac");
-  var_0 = self.origin + 250 * vectornormalize(level.player.origin - self.origin);
+  var_0 = self.origin + 250 * vectorNormalize(level.player.origin - self.origin);
   thread maps\carrier_code_zodiac::explode_single_zodiac(0.33, var_0);
 }
 
@@ -648,7 +648,7 @@ heli_attack_mg(var_0, var_1) {
     if(isDefined(level.sam_damage_dummy)) {
       var_5 = common_scripts\utility::getclosest(self.origin, var_2);
       var_4.origin = var_5.origin;
-      var_4 moveto(level.sam_damage_dummy.origin, 4.25);
+      var_4 moveTo(level.sam_damage_dummy.origin, 4.25);
     }
 
     common_scripts\utility::array_call(self.mgturret, ::turretfireenable);
@@ -819,7 +819,7 @@ ac130_constant_target() {
 ac130_attack_random() {
   self endon("death");
   level.destroyer_target = common_scripts\utility::spawn_tag_origin();
-  level.destroyer_target linkto(self, "tag_origin");
+  level.destroyer_target linkTo(self, "tag_origin");
   common_scripts\utility::flag_wait("sparrow_hud_black");
   var_0 = undefined;
   var_1 = undefined;
@@ -843,7 +843,7 @@ ac130_attack_random() {
       var_2 = maps\carrier_code::get_gun_tag();
       var_3 = self gettagorigin("tag_flash_40mm_" + var_2);
       var_1.origin = var_3;
-      var_1 linkto(self, "tag_flash_40mm_" + var_2);
+      var_1 linkTo(self, "tag_flash_40mm_" + var_2);
 
       for(var_5 = 0; var_5 < 2; var_5++) {
         thread maps\carrier_code::ac130_magic_bullet("40mm");
@@ -855,7 +855,7 @@ ac130_attack_random() {
       var_2 = maps\carrier_code::get_gun_tag();
       var_3 = self gettagorigin("tag_flash_25mm_" + var_2);
       var_1.origin = var_3;
-      var_1 linkto(self, "tag_flash_25mm_" + var_2);
+      var_1 linkTo(self, "tag_flash_25mm_" + var_2);
 
       for(var_5 = 0; var_5 < 40; var_5++) {
         thread maps\carrier_code::ac130_magic_bullet("25mm");
@@ -899,7 +899,7 @@ ac130_missile_defense_init() {
     }
     var_1 = common_scripts\utility::getclosest(var_0.origin, self.flares);
     var_1.mytarget = var_0;
-    var_0 missile_settargetent(var_1);
+    var_0 missile_settargetEnt(var_1);
 
     while(isvalidmissile(var_0)) {
       if(distancesquared(var_1.origin, var_0.origin) < squared(768)) {
@@ -950,7 +950,7 @@ shootflares() {
     var_5 = common_scripts\utility::spawn_tag_origin();
     var_5.origin = var_0 gettagorigin(var_4);
     var_5.angles = var_0 gettagangles(var_4);
-    var_5 linkto(var_0, var_4);
+    var_5 linkTo(var_0, var_4);
     var_5 thread flare_trackvelocity();
     var_1[var_4] = var_5;
   }
@@ -1014,8 +1014,8 @@ ac130_missile_take_hit() {
   var_0[1] = common_scripts\utility::spawn_tag_origin();
   var_0[0].origin = self gettagorigin("tag_light_l_wing");
   var_0[1].origin = self gettagorigin("tag_light_r_wing");
-  var_0[0] linkto(self);
-  var_0[1] linkto(self);
+  var_0[0] linkTo(self);
+  var_0[1] linkTo(self);
 
   for(;;) {
     self waittill("sam_targeted", var_1);
@@ -1040,7 +1040,7 @@ ac130_missile_take_hit() {
       var_3 = anglestoright(var_2.angles) * 12;
     }
 
-    var_1 missile_settargetent(var_2, var_3);
+    var_1 missile_settargetEnt(var_2, var_3);
     var_4 = missile_createattractorent(var_2, 25000, 10000);
 
     while(isvalidmissile(var_1)) {
@@ -1066,13 +1066,13 @@ ac130_missile_take_hit() {
       level.first_gunship_wing = "left1";
       level.wing_tag.origin = self gettagorigin("tag_fx_engine_le_1");
       level.wing_tag.angles = self gettagangles("tag_fx_engine_le_1");
-      level.wing_tag linkto(self, "tag_fx_engine_le_1");
+      level.wing_tag linkTo(self, "tag_fx_engine_le_1");
       playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), level.wing_tag, "tag_origin");
     } else {
       level.first_gunship_wing = "right1";
       level.wing_tag.origin = self gettagorigin("tag_fx_engine_ri_1");
       level.wing_tag.angles = self gettagangles("tag_fx_engine_ri_1");
-      level.wing_tag linkto(self, "tag_fx_engine_ri_1");
+      level.wing_tag linkTo(self, "tag_fx_engine_ri_1");
       playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), level.wing_tag, "tag_origin");
     }
 
@@ -1137,13 +1137,13 @@ ac130_final_life() {
       level.second_gunship_wing = "right2";
       var_3.origin = self gettagorigin("tag_fx_engine_ri_2");
       var_3.angles = self gettagangles("tag_fx_engine_ri_2");
-      var_3 linkto(self, "tag_fx_engine_ri_2");
+      var_3 linkTo(self, "tag_fx_engine_ri_2");
       playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), var_3, "tag_origin");
     } else {
       level.second_gunship_wing = "left2";
       var_3.origin = self gettagorigin("tag_fx_engine_le_2");
       var_3.angles = self gettagangles("tag_fx_engine_le_2");
-      var_3 linkto(self, "tag_fx_engine_le_2");
+      var_3 linkTo(self, "tag_fx_engine_le_2");
       playFXOnTag(common_scripts\utility::getfx("vfx_ac130_engine_fire"), var_3, "tag_origin");
     }
 

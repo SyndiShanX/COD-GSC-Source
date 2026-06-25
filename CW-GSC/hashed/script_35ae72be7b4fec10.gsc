@@ -761,7 +761,7 @@ function function_8a843e00(uid) {
 function private function_c6d1cf1f(uid) {
   level notify("update_distance_" + uid);
   level endon("update_distance_" + uid, "delete_widget_" + uid, "scripted_widget_data_removed_distance_" + uid, #"hash_64a3b02565bdf75f");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   set_flags(uid, 2);
   offset = self function_8db2364c(uid, "offset");
@@ -988,7 +988,7 @@ function function_d3533603(uid, enable, ignore_ent) {
 function private function_9718880e(uid) {
   level endon("delete_widget_" + uid, #"hash_64a3b02565bdf75f");
   level waittill("scripted_widget_data_set_" + uid);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   offset = function_8db2364c(uid, "offset").offset;
 
   while(isDefined(player)) {
@@ -1028,7 +1028,7 @@ function private function_9718880e(uid) {
 
         if(isDefined(dist_states.var_1f1b932b)) {
           player_dir = anglesToForward(player getplayerangles());
-          var_52be356a = vectornormalize(ent_pos - var_7f3f225e);
+          var_52be356a = vectorNormalize(ent_pos - var_7f3f225e);
 
           if(vectordot(player_dir, var_52be356a) >= dist_states.var_1f1b932b) {
             set_state(uid, dist_states.var_e23f7d1e);

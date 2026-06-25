@@ -47,7 +47,7 @@ function private function_a06dcd8b(v) {
 }
 
 function function_2ff463e2(name) {
-  var_64f87a02 = getent(name, "targetname");
+  var_64f87a02 = getEnt(name, "targetname");
   assert(isDefined(var_64f87a02));
   level.var_a40e1682[name] = var_64f87a02;
   var_64f87a02 hide();

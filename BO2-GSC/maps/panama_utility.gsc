@@ -348,22 +348,22 @@ challenge_nodeath(str_notify) {
 
 house_objectives() {
   flag_wait("house_meet_mason");
-  set_objective(level.obj_meet, getstruct("s_greet_mason_obj"), "breadcrumb");
+  set_objective(level.obj_meet, getStruct("s_greet_mason_obj"), "breadcrumb");
   flag_wait("house_follow_mason");
-  set_objective(level.obj_meet, getstruct("s_front_door"), "breadcrumb");
+  set_objective(level.obj_meet, getStruct("s_front_door"), "breadcrumb");
   flag_wait("house_front_door_obj_done");
   flag_wait("house_front_gate_obj");
-  set_objective(level.obj_meet, getstruct("s_front_gate"), "breadcrumb");
+  set_objective(level.obj_meet, getStruct("s_front_gate"), "breadcrumb");
   flag_wait("player_at_front_gate");
-  set_objective(level.obj_meet, getstruct("s_front_gate"), "done");
+  set_objective(level.obj_meet, getStruct("s_front_gate"), "done");
   flag_wait("start_shed_obj");
-  set_objective(level.obj_shed, getstruct("s_shed_door_obj"), "breadcrumb");
+  set_objective(level.obj_shed, getStruct("s_shed_door_obj"), "breadcrumb");
   flag_wait("player_opened_shed");
   set_objective(level.obj_shed, undefined, "remove");
   set_objective(level.obj_shed, undefined, "done");
   set_objective(level.obj_shed, undefined, "delete");
   flag_wait("player_frontyard_obj");
-  set_objective(level.obj_frontyard, getstruct("s_player_gate_obj"), "breadcrumb");
+  set_objective(level.obj_frontyard, getStruct("s_player_gate_obj"), "breadcrumb");
   flag_wait("house_player_at_exit");
   set_objective(level.obj_frontyard, undefined, "remove");
   set_objective(level.obj_frontyard, undefined, "done");
@@ -375,13 +375,13 @@ airfield_objectives() {
   set_objective(level.obj_capture_noriega);
   flag_wait("zodiac_approach_end");
   wait 1;
-  obj_trigger = getent("trigger_obj_beach_1", "targetname");
+  obj_trigger = getEnt("trigger_obj_beach_1", "targetname");
   set_objective(level.obj_capture_noriega, obj_trigger, "");
   flag_wait("beach_obj_1");
-  obj_trigger = getent("trigger_obj_beach_2", "targetname");
+  obj_trigger = getEnt("trigger_obj_beach_2", "targetname");
   set_objective(level.obj_capture_noriega, obj_trigger, "");
   flag_wait("beach_obj_2");
-  obj_trigger = getent("trigger_obj_beach_3", "targetname");
+  obj_trigger = getEnt("trigger_obj_beach_3", "targetname");
   set_objective(level.obj_capture_noriega, obj_trigger, "");
   flag_wait("beach_obj_3");
   flag_wait("player_climbs_up_ladder");
@@ -393,7 +393,7 @@ airfield_objectives() {
   set_objective(level.obj_assist_seals, undefined, "delete");
   set_objective(level.obj_capture_noriega, level.mason, "follow");
   flag_wait("player_near_motel");
-  set_objective(level.obj_capture_noriega, getstruct("s_hotel_obj_breadcrumb").origin + vectorscale((0, 0, 1), 40.0), "breadcrumb");
+  set_objective(level.obj_capture_noriega, getStruct("s_hotel_obj_breadcrumb").origin + vectorscale((0, 0, 1), 40.0), "breadcrumb");
   flag_wait("motel_breach_started");
   set_objective(level.obj_capture_noriega, undefined, "remove");
   flag_wait("motel_room_cleared");
@@ -405,12 +405,12 @@ slums_objectives() {
   set_objective(level.obj_reach_checkpoint);
   flag_wait("ambulance_complete");
   flag_wait("slums_update_objective");
-  set_objective(level.obj_reach_checkpoint, getent("trig_player_kick_door", "targetname").origin + vectorscale((0, 0, 1), 50.0), "breach");
+  set_objective(level.obj_reach_checkpoint, getEnt("trig_player_kick_door", "targetname").origin + vectorscale((0, 0, 1), 50.0), "breach");
   flag_wait("slums_player_took_point");
   level.player setclientdvar("cg_objectiveIndicatorFarFadeDist", 80000);
-  set_objective(level.obj_reach_checkpoint, getent("building_enter_front_door", "targetname").origin + vectorscale((0, 0, 1), 72.0));
+  set_objective(level.obj_reach_checkpoint, getEnt("building_enter_front_door", "targetname").origin + vectorscale((0, 0, 1), 72.0));
   flag_wait("building_breach_ready");
-  set_objective(level.obj_reach_checkpoint, getent("building_breach_obj", "targetname").origin, "breach");
+  set_objective(level.obj_reach_checkpoint, getEnt("building_breach_obj", "targetname").origin, "breach");
   trigger_wait("trig_building_player_breach");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
 }
@@ -423,42 +423,42 @@ chase_objectives() {
   wait 2;
   set_objective(level.obj_reach_checkpoint, level.mason, "follow");
   trigger_wait("building_side_door_roof_fall");
-  nurse_trigger = getent("nurse_objective", "targetname");
+  nurse_trigger = getEnt("nurse_objective", "targetname");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
   set_objective(level.obj_reach_checkpoint, nurse_trigger.origin, "help");
   trigger_wait("trig_tackle_start");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
   level waittill("end_gauntlet");
-  m_door_clip = getent("clinic_stairs_blocker", "targetname");
+  m_door_clip = getEnt("clinic_stairs_blocker", "targetname");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
   set_objective(level.obj_reach_checkpoint, m_door_clip, "breadcrumb");
   trigger_wait("chase_door_trigger");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
   flag_wait("chase_rescue_noriega");
-  set_objective(level.obj_reach_checkpoint, getstruct("noriega_rescue_marker", "targetname"), "help");
+  set_objective(level.obj_reach_checkpoint, getStruct("noriega_rescue_marker", "targetname"), "help");
   level waittill("noriega_rescued");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
   flag_wait("jump_start");
-  set_objective(level.obj_reach_checkpoint, getstruct("jump_obj_marker", "targetname"), "jump");
+  set_objective(level.obj_reach_checkpoint, getStruct("jump_obj_marker", "targetname"), "jump");
   level waittill("chase_jump_cleared");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
   flag_wait("checkpoint_approach_one");
   set_objective(level.obj_reach_checkpoint, level.mason, "follow");
   flag_wait("checkpoint_approach_two");
-  set_objective(level.obj_reach_checkpoint, getstruct("checkpoint_approach_marker", "targetname"), "breadcrumb");
+  set_objective(level.obj_reach_checkpoint, getStruct("checkpoint_approach_marker", "targetname"), "breadcrumb");
   flag_wait("checkpoint_reached");
   set_objective(level.obj_reach_checkpoint, undefined, "remove");
   flag_wait("checkpoint_cleared");
-  set_objective(level.obj_reach_checkpoint, getstruct("checkpoint_obj_marker_jeep", "targetname"), "enter");
+  set_objective(level.obj_reach_checkpoint, getStruct("checkpoint_obj_marker_jeep", "targetname"), "enter");
   flag_wait("checkpoint_finished");
   set_objective(level.obj_reach_checkpoint, undefined, "done");
 }
 
 docks_objectives() {
   flag_wait("docks_cleared");
-  set_objective(level.obj_docks_sniper, getstruct("docks_obj_marker_elevator", "targetname"), "enter");
+  set_objective(level.obj_docks_sniper, getStruct("docks_obj_marker_elevator", "targetname"), "enter");
   flag_wait("docks_entering_elevator");
-  set_objective(level.obj_docks_sniper, getent("sniper_noriega_kill_guard_trigger", "targetname"), "follow");
+  set_objective(level.obj_docks_sniper, getEnt("sniper_noriega_kill_guard_trigger", "targetname"), "follow");
   trigger_wait("sniper_noriega_kill_guard_trigger");
   set_objective(level.obj_docks_sniper, undefined, "done");
   flag_wait("docks_kill_menendez");
@@ -873,7 +873,7 @@ ac130_shoot(v_end_pos, b_close) {
   for(i = 0; i < 60; i++) {
     v_offset_end = v_end_pos + (randomintrange(-200, 200), randomintrange(-200, 200), 0);
     sound_ent playLoopSound("wpn_ac130_fire_loop_npc", 0.25);
-    playsoundatposition("prj_ac130_impact", v_offset_end);
+    playSoundAtPosition("prj_ac130_impact", v_offset_end);
     magicbullet("ac130_vulcan_minigun", v_start_pos, v_offset_end);
     wait 0.1;
   }
@@ -892,7 +892,7 @@ _ac130_vibration(v_start_pos) {
 
   while(true) {
     if(distance2d(v_start_pos, self.origin) < 1028) {
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
     }
 
     wait 0.05;

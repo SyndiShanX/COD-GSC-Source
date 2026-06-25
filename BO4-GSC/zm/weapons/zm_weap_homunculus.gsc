@@ -141,7 +141,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   e_grenade ghost();
   e_grenade.angles = self.angles;
   e_grenade.mdl_anchor = util::spawn_model(var_9ddf478, e_grenade.origin, e_grenade.angles);
-  e_grenade.mdl_anchor linkto(e_grenade);
+  e_grenade.mdl_anchor linkTo(e_grenade);
   e_grenade.var_53ba8670 = 0;
   level notify(#"homunculus_thrown", {
     #e_homunculus: e_grenade, #e_player: self
@@ -177,7 +177,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
 
     if(var_3fb36683) {
       e_grenade.var_69e642c7 = util::spawn_model("tag_origin", e_grenade.mdl_anchor.origin, e_grenade.mdl_anchor.angles);
-      e_grenade.mdl_anchor linkto(e_grenade.var_69e642c7);
+      e_grenade.mdl_anchor linkTo(e_grenade.var_69e642c7);
       e_grenade thread sndattackvox();
       e_grenade thread function_e383ca2f();
       level.a_homunculus[level.a_homunculus.size] = e_grenade;
@@ -362,10 +362,10 @@ function_cc9535d0(var_c4a5788c, var_bbab4f84, var_2f916462) {
 }
 
 function_bfb923d5(ai_zombie) {
-  v_dir = vectornormalize(ai_zombie.origin - self.origin);
+  v_dir = vectorNormalize(ai_zombie.origin - self.origin);
   v_dir = (v_dir[0], v_dir[1], 0);
   v_angles = vectortoangles(v_dir);
-  self.var_69e642c7 rotateto(v_angles, 0.15);
+  self.var_69e642c7 rotateTo(v_angles, 0.15);
 }
 
 function_c6551b38(var_dd74d130) {
@@ -417,7 +417,7 @@ function_9ef23dc0(ai_zombie, n_time, e_player, e_grenade) {
       v_target = ai_zombie getcentroid() + (0, 0, 16);
     }
 
-    self moveto(v_target, n_time);
+    self moveTo(v_target, n_time);
     self waittill(#"movedone");
 
     if(isalive(ai_zombie)) {
@@ -516,7 +516,7 @@ is_on_navmesh(e_player) {
     var_3fb36683 = zm_utility::check_point_in_enabled_zone(v_valid_point, undefined, undefined);
 
     if(!(isDefined(var_3fb36683) && var_3fb36683)) {
-      v_dir = vectornormalize(e_origin - self.origin);
+      v_dir = vectorNormalize(e_origin - self.origin);
       v_pos = self.origin + v_dir * 24;
       v_valid_point = getclosestpointonnavmesh(v_pos, 150, 12);
 
@@ -566,7 +566,7 @@ grenade_stolen_by_sam(e_grenade) {
   }
 
   if(!(isDefined(e_grenade.sndnosamlaugh) && e_grenade.sndnosamlaugh)) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(isalive(players[i])) {
@@ -628,7 +628,7 @@ function_f33bde5c(b_immediate = 0) {
   }
 
   if(b_immediate) {
-    self.var_69e642c7 moveto(var_a75fe4be, 0.01);
+    self.var_69e642c7 moveTo(var_a75fe4be, 0.01);
     self.var_69e642c7 waittill(#"movedone");
     return;
   }
@@ -636,7 +636,7 @@ function_f33bde5c(b_immediate = 0) {
   if(abs(self.var_69e642c7.origin[2] - var_a75fe4be[2]) > 1) {
     n_time = 0.25;
     self.var_69e642c7 scene::stop();
-    self.var_69e642c7 moveto(var_a75fe4be, 0.25);
+    self.var_69e642c7 moveTo(var_a75fe4be, 0.25);
     self.var_69e642c7 scene::play(#"aib_t8_zm_zod_homunculus_jump_down_01", self.mdl_anchor);
   }
 }

@@ -214,12 +214,12 @@ ce_tire_fx(m_cop_car) {
   v_left_tire_org = m_cop_car gettagorigin("tag_wheel_back_left");
   v_left_tire_angle = (m_cop_car.angles[1] * -1, m_cop_car.angles[2], m_cop_car.angles[0]);
   m_fx_left = spawn_model("tag_origin", v_left_tire_org, v_left_tire_angle);
-  m_fx_left linkto(m_cop_car);
+  m_fx_left linkTo(m_cop_car);
   playFXOnTag(getfx("ce_cop_car_marks_left"), m_fx_left, "tag_origin");
   v_right_tire_org = m_cop_car gettagorigin("tag_wheel_back_right");
   v_right_tire_angle = (m_cop_car.angles[1] * -1, m_cop_car.angles[2], m_cop_car.angles[0]);
   m_fx_right = spawn_model("tag_origin", v_right_tire_org, v_right_tire_angle);
-  m_fx_right linkto(m_cop_car);
+  m_fx_right linkTo(m_cop_car);
   playFXOnTag(getfx("ce_cop_car_marks_right"), m_fx_right, "tag_origin");
   level notify("cop_car_skid_done");
   scene_wait("ce_fxanim_cop_car");
@@ -235,14 +235,14 @@ ce_harper_grenade(ai_harper) {
   ai_bdog = get_model_or_models_from_scene("cougar_exit_claw", "bdog_cougar_exit");
   v_start_pos = ai_harper gettagorigin("J_Wrist_RI");
   v_end_pos = ai_bdog.origin;
-  v_grenade_velocity = vectornormalize(v_end_pos - v_start_pos) * 1000;
+  v_grenade_velocity = vectorNormalize(v_end_pos - v_start_pos) * 1000;
   ai_harper magicgrenademanual(ai_harper gettagorigin("J_Wrist_RI"), v_grenade_velocity, 0.5);
 }
 
 bdog_die_explosion(m_bdog) {
   fxorigin = m_bdog gettagorigin("tag_body_animate");
   playFX(level._effect["ce_bdog_death"], fxorigin);
-  playsoundatposition("wpn_bigdog_explode", fxorigin);
+  playSoundAtPosition("wpn_bigdog_explode", fxorigin);
   m_bdog delete();
   m_turret = get_model_or_models_from_scene("cougar_exit_claw", "ce_bdog_turret");
   m_turret delete();

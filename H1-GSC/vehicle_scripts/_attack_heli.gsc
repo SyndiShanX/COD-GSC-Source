@@ -92,7 +92,7 @@ begin_attack_heli_behavior(var_0, var_1) {
 
   if(level.gameskill == 0 || level.gameskill == 1) {
     var_2 = spawn("script_origin", var_0.origin + (0, 0, -20));
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
     var_0 thread common_scripts\utility::delete_on_death(var_2);
     var_3 = undefined;
 
@@ -213,7 +213,7 @@ heli_default_target_setup() {
   var_2.forward = var_1;
   var_2.up = var_0;
   var_2 maps\_utility::translate_local();
-  self.targetdefault linkto(self);
+  self.targetdefault linkTo(self);
   self.targetdefault thread heli_default_target_cleanup(self);
 }
 
@@ -873,7 +873,7 @@ turret_default_fire(var_0, var_1, var_2) {
   thread fire_missiles(randomfloatrange(0.2, 2));
 
   for(var_3 = 0; var_3 < var_1; var_3++) {
-    self setturrettargetent(var_0, common_scripts\utility::randomvector(50) + (0, 0, 32));
+    self setturrettargetEnt(var_0, common_scripts\utility::randomvector(50) + (0, 0, 32));
 
     if(self.allowshoot && !self.firingmissiles) {
       self fireweapon();
@@ -972,7 +972,7 @@ turret_minigun_target_track(var_0, var_1) {
 
   if(!isPlayer(var_0) && isai(var_0) && level.attackhelikillsai == 0) {
     var_2 = spawn("script_origin", var_0.origin + (0, 0, 100));
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
     thread minigun_ai_target_cleanup(var_2);
     var_0 = var_2;
   }
@@ -1018,7 +1018,7 @@ miss_player(var_0) {
 
   for(var_6 = 0; var_6 < var_4; var_6++) {
     var_3 = var_2 + common_scripts\utility::randomvector(50);
-    self setturrettargetent(var_0, var_3);
+    self setturrettargetEnt(var_0, var_3);
 
     if(self.allowshoot) {
       self fireweapon();
@@ -1261,12 +1261,12 @@ heli_spotlight_create_default_targets(var_0) {
   var_2.entity = self.left_ent;
   var_2.right = 250;
   var_2 maps\_utility::translate_local();
-  self.left_ent linkto(self);
+  self.left_ent linkTo(self);
   var_3 = spawnStruct();
   var_3.entity = self.right_ent;
   var_3.right = -250;
   var_3 maps\_utility::translate_local();
-  self.right_ent linkto(self);
+  self.right_ent linkTo(self);
   var_4 = [];
   var_4[0] = var_1;
   var_4[1] = self.left_ent;
@@ -1309,7 +1309,7 @@ heli_spotlight_aim(var_0) {
     }
 
     if(isDefined(var_1)) {
-      self setturrettargetent(var_1, (0, 0, 0));
+      self setturrettargetEnt(var_1, (0, 0, 0));
     }
   }
 }
@@ -1449,7 +1449,7 @@ heli_spotlight_on(var_0, var_1, var_2) {
   thread heli_spotlight_cleanup(var_0);
 
   if(var_2) {
-    self setturrettargetent(level.player);
+    self setturrettargetEnt(level.player);
   } else if(var_1) {
     self endon("death");
     self endon("heli_players_dead");
@@ -1459,7 +1459,7 @@ heli_spotlight_on(var_0, var_1, var_2) {
       heli_default_target_setup();
     }
 
-    self setturrettargetent(self.targetdefault);
+    self setturrettargetEnt(self.targetdefault);
     thread heli_spotlight_aim();
   }
 }
@@ -1483,7 +1483,7 @@ heli_spotlight_random_targets_on() {
 
   while(isDefined(self)) {
     wait 0.05;
-    self setturrettargetent(self.targetdefault, (0, 0, 0));
+    self setturrettargetEnt(self.targetdefault, (0, 0, 0));
   }
 }
 
@@ -1607,7 +1607,7 @@ boneyard_fire_at_targets(var_0, var_1) {
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
     var_3[var_4] = spawn("script_origin", var_1[var_4].origin);
     var_0 setvehweapon("littlebird_FFAR");
-    var_0 setturrettargetent(var_3[var_4]);
+    var_0 setturrettargetEnt(var_3[var_4]);
     var_5 = var_0 fireweapon(var_2[var_4 % var_2.size], var_3[var_4], (0, 0, 0));
     var_5 common_scripts\utility::delaycall(1, ::missile_cleartarget);
     wait(randomfloatrange(0.2, 0.3));

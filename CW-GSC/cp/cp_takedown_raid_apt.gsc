@@ -39,7 +39,7 @@
 #namespace tkdn_raid_apt;
 
 function starting(str_skipto) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
   woods_spawner = getspawnerarray("raid_woods", "targetname");
@@ -56,13 +56,13 @@ function starting(str_skipto) {
   var_1100faeb = struct::get("raid_roof_woods", "targetname");
   level.adler forceteleport(var_fcbd93e0.origin, var_fcbd93e0.angles);
   level.woods forceteleport(var_1100faeb.origin, var_1100faeb.angles);
-  level.var_efac709f = getent("player_breach_clip", "targetname");
-  level.var_efac709f disconnectpaths();
-  alley_clip = getent("alley_clip", "targetname");
+  level.var_efac709f = getEnt("player_breach_clip", "targetname");
+  level.var_efac709f disconnectPaths();
+  alley_clip = getEnt("alley_clip", "targetname");
   alley_clip delete();
   self util::blend_movespeedscale(0.5, 0.25);
   level util::function_3e65fe0b(1);
-  level.raid_car = getent("raid_car", "targetname");
+  level.raid_car = getEnt("raid_car", "targetname");
   level thread scene::play("scene_tkd_hit2_bar_alley", "Trunk_close", [level.raid_car]);
   level thread scene::play("scene_tkd_hit2_alley_civilians", "window_civilian");
   level thread scene::play("scene_tkd_hit2_alley_civilians", "drug_deal");
@@ -77,13 +77,13 @@ function starting(str_skipto) {
 }
 
 function main(str_skipto, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     player util::function_749362d7(1);
   }
 
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   level battlechatter::function_2ab9360b(0);
   var_d1a2cc43 = getspawnerarray("qasim_runner", "script_noteworthy");
 
@@ -219,7 +219,7 @@ function function_f7ceb1f2(a_ents) {
 }
 
 function function_c71b0701() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("flag_player_lowready_apt");
   player util::function_749362d7(0);
   level util::function_3e65fe0b(0);
@@ -379,7 +379,7 @@ function function_719a1d22() {
 }
 
 function player_told_shoot() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon(#"hash_413da1fbc645aa20");
   level endon(#"hash_2d7f82360e399f87");
   level flag::wait_till("flag_player_told_shoot");

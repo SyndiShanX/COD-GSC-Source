@@ -273,7 +273,7 @@ rumbler() {
 
   while(true) {
     wait 0.1;
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 

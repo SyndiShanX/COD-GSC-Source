@@ -220,7 +220,7 @@ onPlayerConnect() {
 }
 
 warp_players_underworld() {
-  underworld = GetStruct("struct_player_teleport_underworld", "targetname");
+  underworld = getStruct("struct_player_teleport_underworld", "targetname");
   if(!isDefined(underworld)) {
     ASSERTMSG("warp_players_underworld(): can't find the underworld warp spot! aborting.");
     return;
@@ -229,7 +229,7 @@ warp_players_underworld() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    players[i] SetOrigin(underworld.origin);
+    players[i] setOrigin(underworld.origin);
   }
 }
 warp_players(startValue, startKey) {

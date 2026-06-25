@@ -107,9 +107,9 @@ function activateuav() {
     radiusoffset = (isDefined(level.uav_rotation_radius) ? level.uav_rotation_radius : 4000) + randomint((isDefined(level.uav_rotation_random_offset) ? level.uav_rotation_random_offset : 1000));
   xoffset = cos(angle) * radiusoffset;
   yoffset = sin(angle) * radiusoffset;
-  anglevector = vectornormalize((xoffset, yoffset, zoffset));
+  anglevector = vectorNormalize((xoffset, yoffset, zoffset));
   anglevector = anglevector * zoffset;
-  uav linkto(rotator, "tag_origin", anglevector, (0, angle + attach_angle, 0));
+  uav linkTo(rotator, "tag_origin", anglevector, (0, angle + attach_angle, 0));
   self addweaponstat(getweapon("uav"), "used", 1);
   uav thread killstreaks::waitfortimeout("uav", 25000, &ontimeout, "delete", "death", "crashing");
   uav thread killstreaks::waitfortimecheck(25000 / 2, &ontimecheck, "delete", "death", "crashing");

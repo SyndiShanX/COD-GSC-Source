@@ -167,7 +167,7 @@ handle_teargas_volume(var_0) {
       if(isDefined(var_4)) {
         var_3 thread ai_flee_from_teargas(var_4);
       } else {
-        var_5 = getent(self.target, "targetname");
+        var_5 = getEnt(self.target, "targetname");
 
         if(isDefined(var_5)) {
           var_3 thread ai_flee_from_teargas(undefined, var_5);
@@ -455,16 +455,16 @@ ai_flee_from_teargas(var_0, var_1) {
     self waittill("goal");
     wait(randomfloatrange(2, 5));
   } else if(isDefined(var_0)) {
-    maps\_utility::set_goalradius(20);
+    maps\_utility::set_goalRadius(20);
     self setgoalnode(var_0);
     self waittill("goal");
   } else {
-    maps\_utility::set_goalradius(50);
+    maps\_utility::set_goalRadius(50);
     self setgoalentity(level.player);
     self waittill("goal");
   }
 
-  maps\_utility::set_goalradius(var_3);
+  maps\_utility::set_goalRadius(var_3);
   var_5 = level.teargas_recover_anim[randomint(level.teargas_recover_anim.size)];
 
   if(!isDefined(self.animname)) {

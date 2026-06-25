@@ -197,7 +197,7 @@ get_infected_team() {
     team = self.team;
 
     if(team != #"spectator") {
-      players_on_team = getplayers(team);
+      players_on_team = getPlayers(team);
 
       if(players_on_team.size <= 1) {
         return team;

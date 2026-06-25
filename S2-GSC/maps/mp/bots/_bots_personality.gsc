@@ -731,7 +731,7 @@ func_3B64(param_00, param_01) {
   self.var_6708 = var_06;
   self.var_0D39 = gettime() + self.var_0D38;
   self.var_6708.var_1938 = self.var_0D39;
-  var_08 = vectornormalize(self.var_753C - self.var_6708.var_0116);
+  var_08 = vectorNormalize(self.var_753C - self.var_6708.var_0116);
   var_09 = vectortoangles(var_08);
   self.var_0D94 = var_09[1];
   return 1;

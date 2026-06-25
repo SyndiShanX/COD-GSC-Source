@@ -90,7 +90,7 @@ function on_vehicle_spawned() {
         var_6031fb1f.var_369c83bd = 1;
         var_6031fb1f.var_475b9991 = 1;
         var_6031fb1f.var_c0381a15 = 1;
-        var_6031fb1f linkto(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
+        var_6031fb1f linkTo(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
       }
 
       var_c8229258 = "enter_vehicle";
@@ -153,11 +153,11 @@ function on_vehicle_spawned() {
 
               if(isalive(var_6031fb1f)) {
                 var_6031fb1f unlink();
-                var_6031fb1f linkto(var_c11876a8);
-                var_c11876a8 rotateyaw(rotation, fall_time);
+                var_6031fb1f linkTo(var_c11876a8);
+                var_c11876a8 rotateYaw(rotation, fall_time);
 
                 if(isDefined(var_c11876a8)) {
-                  var_c11876a8 moveto(var_6b6fec6c, fall_time);
+                  var_c11876a8 moveTo(var_6b6fec6c, fall_time);
                   var_c11876a8 waittill(#"movedone");
                 }
               }

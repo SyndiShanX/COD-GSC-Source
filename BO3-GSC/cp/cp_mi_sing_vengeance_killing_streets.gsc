@@ -145,13 +145,13 @@ function function_9736d8c9() {
   var_bba8f947 = struct::get("lineup_kill_doors_scripted_node");
   var_bba8f947 thread scene::init("cin_ven_03_15_killingstreets_vign_snipershot");
   level flag::wait_till("start_killing_streets_sniper_shoots_civilian");
-  playsoundatposition("mus_alley_stinger", (0, 0, 0));
+  playSoundAtPosition("mus_alley_stinger", (0, 0, 0));
   util::clientnotify("sndLRstart");
   var_bba8f947 thread scene::play("cin_ven_03_15_killingstreets_vign_snipershot");
   thread cp_mi_sing_vengeance_sound::function_68da61d9();
   wait(0.1);
   while(true) {
-    guy = getent("killing_streets_alley_civ_a_ai", "targetname");
+    guy = getEnt("killing_streets_alley_civ_a_ai", "targetname");
     if(isDefined(guy)) {
       break;
     }
@@ -200,7 +200,7 @@ function setup_killing_streets_lineup_hendricks() {
   level thread killing_streets_robots();
   spawner::add_spawn_function_group("killing_streets_lineup_patroller_spawners", "script_noteworthy", &setup_killing_streets_lineup_patroller_spawners);
   spawner::add_spawn_function_group("killing_streets_lineup_civilian_spawners", "script_noteworthy", &setup_killing_streets_civilian_lineup);
-  storelineup_door1_clip = getent("storelineup_door1_clip", "targetname");
+  storelineup_door1_clip = getEnt("storelineup_door1_clip", "targetname");
   storelineup_door1_clip thread storelineup_door1_clip();
   level thread lineup_kill_scene_manager();
   level thread lineup_kill_scene_stopper();
@@ -223,7 +223,7 @@ function setup_killing_streets_lineup_hendricks() {
     level flag::wait_till("start_hendricks_open_alley_door_02");
   }
   savegame::checkpoint_save();
-  storelineup_door3_clip = getent("storelineup_door3_clip", "targetname");
+  storelineup_door3_clip = getEnt("storelineup_door3_clip", "targetname");
   if(isDefined(storelineup_door3_clip)) {
     storelineup_door3_clip thread storelineup_door3_clip();
   }
@@ -246,7 +246,7 @@ function setup_killing_streets_lineup_hendricks() {
 function setup_killing_streets_lineup_hendricks_stealth_broken() {
   level flag::wait_till("killing_streets_lineup_patrollers_alerted");
   wait(0.05);
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreme = 0;
   self.ignoreall = 0;
   self.holdfire = 0;
@@ -260,7 +260,7 @@ function setup_killing_streets_lineup_hendricks_stealth_broken() {
   self battlechatter::function_d9f49fba(0);
   self ai::set_behavior_attribute("cqb", 1);
   self colors::disable();
-  storelineup_door3_clip = getent("storelineup_door3_clip", "targetname");
+  storelineup_door3_clip = getEnt("storelineup_door3_clip", "targetname");
   if(isDefined(storelineup_door3_clip)) {
     storelineup_door3_clip thread storelineup_door3_clip();
   }
@@ -349,7 +349,7 @@ function lineup_kill_scene_manager() {
 }
 
 function function_fd81381e(var_210e7715, var_a9d6b8b7, var_734ef62a) {
-  var_f644fb29 = getent(var_210e7715, "targetname");
+  var_f644fb29 = getEnt(var_210e7715, "targetname");
   var_f644fb29 clientfield::set("normal_hide", 1);
   var_f644fb29 notsolid();
   level waittill(var_a9d6b8b7);
@@ -362,7 +362,7 @@ function function_fd81381e(var_210e7715, var_a9d6b8b7, var_734ef62a) {
 
 function function_d864c642() {
   level flag::wait_till_any(array("killing_streets_lineup_patrollers_alerted", "lineup_kill_window_broken"));
-  var_f4835685 = getent("storelineup_window_clip", "targetname");
+  var_f4835685 = getEnt("storelineup_window_clip", "targetname");
   if(isDefined(var_f4835685)) {
     var_f4835685 delete();
   }
@@ -419,7 +419,7 @@ function function_a45594e6() {
       self ai::set_ignoreme(0);
     } else {
       level flag::set("cin_ven_03_15_killingstreets_vign_done");
-      var_c3b293c9 = getent("killing_streets_enemy_gv", "targetname");
+      var_c3b293c9 = getEnt("killing_streets_enemy_gv", "targetname");
       if(isDefined(var_c3b293c9)) {
         if(isDefined(self.var_30dac0b5) && self.var_30dac0b5) {
           self waittill("hash_45b11ba2");
@@ -485,7 +485,7 @@ function setup_killing_streets_civilian_lineup() {
   self ai::set_behavior_attribute("panic", 0);
   self thread function_cfede1cf();
   level flag::wait_till("killing_streets_lineup_patrollers_alerted");
-  self stopanimscripted();
+  self stopanimScripted();
   self ai::set_ignoreme(0);
   self ai::set_behavior_attribute("panic", 1);
 }
@@ -507,7 +507,7 @@ function setup_killing_streets_lineup_patroller_spawners() {
   level flag::set("killing_streets_lineup_patrollers_alerted");
   util::clientnotify("sndLRstop");
   level thread namespace_9fd035::function_6c2fa1d0();
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 function killing_streets_robots() {
@@ -573,7 +573,7 @@ function function_ef12791() {
   var_655205bf = struct::get("dogleg_1_intro_goto_obj_org", "targetname");
   objectives::show("cp_level_vengeance_go_to_safehouse");
   objectives::set("cp_waypoint_breadcrumb", var_655205bf);
-  dogleg_1_intro_trigger = getent("dogleg_1_intro_trigger", "script_noteworthy");
+  dogleg_1_intro_trigger = getEnt("dogleg_1_intro_trigger", "script_noteworthy");
   dogleg_1_intro_trigger triggerenable(0);
   level thread util::set_streamer_hint(3);
   msg = level util::waittill_any_return("dogleg_1_intro_goto_trigger_touched", "stealth_discovered");
@@ -662,12 +662,12 @@ function function_9f0122b9() {
 }
 
 function function_28fa297f() {
-  var_8c8bdeb5 = getent("lineup_kill_exit_door", "targetname");
+  var_8c8bdeb5 = getEnt("lineup_kill_exit_door", "targetname");
   if(isDefined(var_8c8bdeb5)) {
     var_8c8bdeb5 hide();
     var_8c8bdeb5 notsolid();
   }
-  var_1e51cc5a = getent("lineup_kill_exit_door_clip", "targetname");
+  var_1e51cc5a = getEnt("lineup_kill_exit_door_clip", "targetname");
   if(isDefined(var_1e51cc5a)) {
     var_1e51cc5a notsolid();
     wait(0.1);
@@ -675,6 +675,6 @@ function function_28fa297f() {
     level flag::wait_till("killing_streets_end");
     var_1e51cc5a solid();
     wait(0.1);
-    var_1e51cc5a disconnectpaths();
+    var_1e51cc5a disconnectPaths();
   }
 }

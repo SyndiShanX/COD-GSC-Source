@@ -753,7 +753,7 @@ activate_mobile_shield_designated_for(var_0, var_1, var_2) {
 
 calculate_mobile_shield_pos(var_0, var_1, var_2) {
   var_3 = var_1.origin + (0, 0, 45);
-  var_4 = vectornormalize(var_0 getEye() - var_3);
+  var_4 = vectorNormalize(var_0 getEye() - var_3);
   var_5 = spawnStruct();
   var_5.mobile_shield_pos = var_3 + var_4 * var_2;
   var_5.mobile_shield_look_at_pos = var_5.mobile_shield_pos + var_4 * 10;
@@ -812,7 +812,7 @@ mobile_shield_visibility_monitor(var_0, var_1) {
 check_is_in_front_of(var_0, var_1) {
   var_2 = var_0.origin - var_1.origin;
   var_2 = (var_2[0], var_2[1], 0);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = anglesToForward(var_1.angles);
   return vectordot(var_2, var_3) > 0.525;
 }

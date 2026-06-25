@@ -509,7 +509,7 @@ _id_3B0B() {
 
     if(abs(var_0 - self._id_7E6C) > 0.01) {
       var_0 = self._id_7E6C;
-      self._id_B029 moveto(var_1, 0.25, 0.05, 0.2);
+      self._id_B029 moveTo(var_1, 0.25, 0.05, 0.2);
     }
 
     waitframe();

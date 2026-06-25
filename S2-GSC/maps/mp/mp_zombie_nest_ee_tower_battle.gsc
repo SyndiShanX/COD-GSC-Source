@@ -225,7 +225,7 @@ func_8A37(param_00, param_01) {
   if(1) {
     var_02 = [];
     for(var_03 = 0; var_03 < param_01.size; var_03++) {
-      var_02[var_03] = getent(param_01[var_03], "targetname");
+      var_02[var_03] = getEnt(param_01[var_03], "targetname");
     }
 
     var_04 = lib_0557::func_782F(undefined, var_02);
@@ -252,7 +252,7 @@ func_A69B(param_00, param_01, param_02) {
       var_06.var_4D91 = lib_0559::func_7BE3(var_06, "lightning_rod");
     }
 
-    var_06 sethintstring(&"ZOMBIE_NEST_LIFT_RODS");
+    var_06 setHintString(&"ZOMBIE_NEST_LIFT_RODS");
     var_07 = common_scripts\utility::func_4461(var_06.var_0116, param_02);
     var_06 thread func_A6C0(var_04, var_07);
   }
@@ -281,7 +281,7 @@ func_A6AE(param_00) {
 
   foreach(var_02 in param_00) {
     var_02 common_scripts\utility::func_9DA3();
-    var_02 sethintstring(&"ZOMBIE_NEST_MACHINE_COOLING");
+    var_02 setHintString(&"ZOMBIE_NEST_MACHINE_COOLING");
     var_02 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
   }
 
@@ -303,7 +303,7 @@ func_46EF(param_00) {
 }
 
 func_8A05() {
-  self.var_1170 = getent(self.var_01A2, "targetname");
+  self.var_1170 = getEnt(self.var_01A2, "targetname");
   self.var_1170.var_834D = getEntArray(self.var_1170.var_01A2, "targetname");
   self.var_1170.var_65F7 = self;
 }
@@ -484,7 +484,7 @@ func_9EC8() {
 }
 
 func_8A4B() {
-  var_00 = getent("nest_ee_fuse_piece_lift", "targetname");
+  var_00 = getEnt("nest_ee_fuse_piece_lift", "targetname");
   level notify("flag_fuse_entered_correct");
   var_00 func_8A05();
   return var_00;
@@ -492,7 +492,7 @@ func_8A4B() {
 
 func_2E7C() {
   wait(3);
-  var_00 = getent("inner_spire", "targetname");
+  var_00 = getEnt("inner_spire", "targetname");
   if(isDefined(var_00)) {
     foreach(var_02 in level.var_744A) {
       if(distance2d(var_02.var_0116, var_00.var_0116) < 750) {
@@ -520,8 +520,8 @@ func_52FA(param_00) {
   var_01 = [];
   var_02 = [];
   for(var_03 = 0; var_03 < param_00.size; var_03++) {
-    var_04 = getent(param_00[var_03], "targetname");
-    var_04.var_65E6 = getent(var_04.var_01A2, "targetname");
+    var_04 = getEnt(param_00[var_03], "targetname");
+    var_04.var_65E6 = getEnt(var_04.var_01A2, "targetname");
     func_5DA3(var_04.var_65E6.var_01A2, var_04);
     var_01 = common_scripts\utility::func_0F6F(var_01, var_04);
   }
@@ -531,25 +531,25 @@ func_52FA(param_00) {
 }
 
 func_5DA3(param_00, param_01) {
-  var_02 = getent(param_00, "targetname");
+  var_02 = getEnt(param_00, "targetname");
   var_02.var_65DA = param_01;
 }
 
 func_52ED() {
-  var_00 = getent("nest_ee_fuse_piece_lift", "targetname");
+  var_00 = getEnt("nest_ee_fuse_piece_lift", "targetname");
   var_00 common_scripts\utility::func_9D9F();
-  var_00 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  var_00 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_00 thread func_2EB2();
-  var_00.var_65E7 = getent("inner_spire_lever", "targetname");
-  var_00.var_65E7.var_65E6 = getent(var_00.var_65E7.var_01A2, "targetname");
+  var_00.var_65E7 = getEnt("inner_spire_lever", "targetname");
+  var_00.var_65E7.var_65E6 = getEnt(var_00.var_65E7.var_01A2, "targetname");
   var_00.var_65E7 func_A180(0);
   var_00.var_65E7 func_A180(4);
   var_01 = getEntArray("nest_ee_fuse_outter_objectives", "targetname");
   foreach(var_03 in var_01) {
-    var_03 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+    var_03 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
     var_03 thread func_2EB2();
-    var_03.var_65E7 = getent(var_03.var_01A2, "targetname");
-    var_03.var_65E7.var_65E6 = getent(var_03.var_65E7.var_01A2, "targetname");
+    var_03.var_65E7 = getEnt(var_03.var_01A2, "targetname");
+    var_03.var_65E7.var_65E6 = getEnt(var_03.var_65E7.var_01A2, "targetname");
     var_03.var_65E7 func_A180(0);
     var_03.var_65E7 func_A180(4);
   }
@@ -582,7 +582,7 @@ func_46ED(param_00, param_01, param_02) {
   var_03["lightning_rods"] = getEntArray(param_00, "targetname");
   var_03["attack_positions"] = [];
   for(var_04 = 0; var_04 < param_02.size; var_04++) {
-    var_03["attack_positions"][var_04] = getent(param_02[var_04], "targetname");
+    var_03["attack_positions"][var_04] = getEnt(param_02[var_04], "targetname");
     var_03["attack_positions"][var_04].var_AC6A = common_scripts\utility::func_46B7(var_03["attack_positions"][var_04].var_01A2, "targetname");
   }
 

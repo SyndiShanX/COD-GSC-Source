@@ -50,7 +50,7 @@ dunes_ambush_beat_2_timeout() {
 
   wait(RandomIntRange(8, 11));
 
-  trig = getent("trig_grass_admin_camo_guys_2", "script_noteworthy");
+  trig = getEnt("trig_grass_admin_camo_guys_2", "script_noteworthy");
   if(isDefined(trig)) {
     quick_text("ambush_beat_2 timed out!", 3, true);
     trig notify("trigger");
@@ -64,7 +64,7 @@ dunes_ambush_beat_3_timeout() {
 
   wait(RandomIntRange(10, 13));
 
-  trig = getent("trig_grass_admin_camo_guys_3", "script_noteworthy");
+  trig = getEnt("trig_grass_admin_camo_guys_3", "script_noteworthy");
   if(isDefined(trig)) {
     quick_text("ambush_beat_3 timed out!", 3, true);
     trig notify("trigger");
@@ -72,19 +72,19 @@ dunes_ambush_beat_3_timeout() {
 }
 
 dunes_flame_tree() {
-  tree_trig = getent("trig_grass_admin_tree_guy", "script_noteworthy");
+  tree_trig = getEnt("trig_grass_admin_tree_guy", "script_noteworthy");
   tree_trig notify("trigger");
   wait(0.05);
   guy = get_ai_group_ai("tree_guy")[0];
   guy thread dune_flame_tree_guy_strat();
   guy thread dune_flame_tree_guy_death();
 
-  tree = getent("dunes_flame_tree", "script_noteworthy");
+  tree = getEnt("dunes_flame_tree", "script_noteworthy");
   tree thread dunes_flame_tree_notify();
   tree thread dunes_flame_tree_achievement();
 
-  fake_orig = getstruct("flame_tree_orig", "targetname");
-  fake_orig_2 = getstruct("flame_tree_orig_2", "targetname");
+  fake_orig = getStruct("flame_tree_orig", "targetname");
+  fake_orig_2 = getStruct("flame_tree_orig_2", "targetname");
 
   model_tag_origin = spawn("script_model", fake_orig.origin);
   model_tag_origin setModel("tag_origin");
@@ -99,7 +99,7 @@ dunes_flame_tree() {
 
   wait(0.05);
 
-  orig = getent("test_orig", "targetname");
+  orig = getEnt("test_orig", "targetname");
   playFX(level._effect["sniper_leaf_canned"], tree.origin);
 }
 
@@ -123,9 +123,9 @@ dunes_flame_tree_notify() {
     if(broken_notify == "hideout_fronds_dmg0") {
       flag_set("flame_tree_flamed");
 
-      tree = getent("dunes_flame_tree", "script_noteworthy");
+      tree = getEnt("dunes_flame_tree", "script_noteworthy");
 
-      playsoundatposition("flame_ignite_tree", tree.origin);
+      playSoundAtPosition("flame_ignite_tree", tree.origin);
 
       if(isDefined(guy) && isalive(guy)) {
         guy thread animscripts\death::flame_death_fx();
@@ -183,7 +183,7 @@ trig_grass_admin_camo_guys() {
 
   array_thread(level.heroes, ::set_pacifist_off);
 
-  playsoundatposition("japanese_yell_ambush", (2686.6, -5004, 135));
+  playSoundAtPosition("japanese_yell_ambush", (2686.6, -5004, 135));
 
   setmusicstate("BOMBER");
 
@@ -192,7 +192,7 @@ trig_grass_admin_camo_guys() {
 
   flag_set("grass_ambush_done");
 
-  trig = getent("trig_forest_end", "script_flag");
+  trig = getEnt("trig_forest_end", "script_flag");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -493,12 +493,12 @@ friend_forest_spawner_strat() {
 }
 
 forest_drones() {
-  trig = getent("trig_forest_drones", "script_noteworthy");
+  trig = getEnt("trig_forest_drones", "script_noteworthy");
   trig notify("trigger");
 
   level waittill("end_forest_drones");
 
-  trig = getent("trig_forest_drones_2", "script_noteworthy");
+  trig = getEnt("trig_forest_drones_2", "script_noteworthy");
   trig notify("trigger");
 
   extra_text("forest_drones_2");
@@ -514,7 +514,7 @@ forest_tanks() {
 }
 
 forest_tank_1_strat() {
-  tank = getent("forest_tank", "targetname");
+  tank = getEnt("forest_tank", "targetname");
 
   tank veh_stop_at_node("forest_tank_1_stop", 6, 6);
 
@@ -526,7 +526,7 @@ forest_tank_1_strat() {
 }
 
 forest_tank_2_strat() {
-  tank = getent("forest_tank_2", "targetname");
+  tank = getEnt("forest_tank_2", "targetname");
 
   tank veh_stop_at_node("forest_tank_2_stop", 6, 6);
 
@@ -841,13 +841,13 @@ wall_explode_damage(trig_name) {
 
   trigger_wait(trig_name, "targetname");
 
-  orig = getstruct("orig_" + trig_name, "targetname");
+  orig = getStruct("orig_" + trig_name, "targetname");
 
   radiusdamage(orig.origin, 120, 130, 80);
 }
 
 mg_sandbags_explode() {
-  trig = getent("trig_admin_sandbag_explode", "targetname");
+  trig = getEnt("trig_admin_sandbag_explode", "targetname");
 
   total_damage = 0;
 
@@ -859,7 +859,7 @@ mg_sandbags_explode() {
 
       exploder(404);
 
-      brush = getent("admin_sandbag_bipod", "targetname");
+      brush = getEnt("admin_sandbag_bipod", "targetname");
       brush delete();
 
       mg_sandbag_cleanup("admin_mg_l", 205);
@@ -874,7 +874,7 @@ mg_sandbags_explode() {
 }
 
 mg_sandbags_explode_2() {
-  trig = getent("trig_admin_sandbag_explode_2", "targetname");
+  trig = getEnt("trig_admin_sandbag_explode_2", "targetname");
 
   total_damage = 0;
 
@@ -886,7 +886,7 @@ mg_sandbags_explode_2() {
 
       exploder(406);
 
-      brush = getent("admin_sandbag_bipod_2", "targetname");
+      brush = getEnt("admin_sandbag_bipod_2", "targetname");
       brush delete();
 
       mg_sandbag_cleanup("admin_mg_r", 206);
@@ -922,10 +922,10 @@ admin_bazooka_strat() {
 
   flag_wait("helmet_shot_vignette");
 
-  orig_1 = getstruct("orig_admin_bazooka_1", "targetname");
+  orig_1 = getStruct("orig_admin_bazooka_1", "targetname");
   orig_ent_1 = spawn("script_origin", orig_1.origin);
   orig_ent_1.health = 1000000;
-  orig_2 = getstruct("orig_admin_bazooka_2", "targetname");
+  orig_2 = getStruct("orig_admin_bazooka_2", "targetname");
   orig_ent_2 = spawn("script_origin", orig_2.origin);
   orig_ent_2.health = 1000000;
 
@@ -949,7 +949,7 @@ admin_bazooka_strat() {
 
       level thread bazooka_lookat_touching();
 
-      trig = getent("trig_bazooka_lookat", "targetname");
+      trig = getEnt("trig_bazooka_lookat", "targetname");
       trig waittill("trigger");
 
       if(flag("top_floor_retreat")) {
@@ -979,7 +979,7 @@ admin_bazooka_strat() {
 bazooka_lookat_touching() {
   level endon("friendly_chain_admin_last");
 
-  trig = getent("trig_bazooka_lookat", "targetname");
+  trig = getEnt("trig_bazooka_lookat", "targetname");
 
   wait(0.05);
 
@@ -995,7 +995,7 @@ bazooka_lookat_touching() {
 }
 
 building_mgs() {
-  turret = getent("admin_mg_r", "targetname");
+  turret = getEnt("admin_mg_r", "targetname");
   turret setturretignoregoals(true);
 
   turret setTurretTeam("axis");
@@ -1005,7 +1005,7 @@ building_mgs() {
   turret thread mg_fire_at_truck();
   level thread building_mg_attack_player_in_open();
 
-  turret = getent("admin_mg_l", "targetname");
+  turret = getEnt("admin_mg_l", "targetname");
   turret setturretignoregoals(true);
 }
 
@@ -1014,13 +1014,13 @@ building_mg_attack_player_in_open() {
 
   flag_wait("admin_mg_done");
 
-  vol = getent("vol_admin_attack_player", "targetname");
+  vol = getEnt("vol_admin_attack_player", "targetname");
   player_being_targeted = false;
 
   while(1) {
     player_touching = get_player_touching(vol);
 
-    turret = getent("admin_mg_r", "targetname");
+    turret = getEnt("admin_mg_r", "targetname");
 
     if(!isDefined(turret)) {
       break;
@@ -1049,7 +1049,7 @@ building_mg_attack_player_in_open() {
 }
 
 mg_fire_at_truck() {
-  orig = getent("admin_truck_target", "targetname");
+  orig = getEnt("admin_truck_target", "targetname");
   level thread flame_move_target(orig, 4);
 
   quick_text("mg on orig", 3, true);
@@ -1072,7 +1072,7 @@ mg_fire_at_truck() {
 }
 
 truck_blocker_explode(turret) {
-  truck = getent("admin_truck", "script_noteworthy");
+  truck = getEnt("admin_truck", "script_noteworthy");
 
   while(!truck.exploded) {
     wait(0.05);
@@ -1116,7 +1116,7 @@ flame_guy_explode() {
   flamer StopShoot();
 
   playFX(level._effect["flamer_explosion"], flamer.origin);
-  playsoundatposition("flame_pre_explosion", flamer.origin);
+  playSoundAtPosition("flame_pre_explosion", flamer.origin);
 
   flamer thread animscripts\death::flame_death_fx();
 
@@ -1129,7 +1129,7 @@ flame_guy_explode() {
   earthquake(0.5, 1.0, flamer.origin, 1700);
   PlayRumbleOnPosition("explosion_generic", flamer.origin);
 
-  playsoundatposition("flame_explosion", flamer.origin);
+  playSoundAtPosition("flame_explosion", flamer.origin);
   flamer stop_magic_bullet_shield();
   flamer setCanDamage(true);
   flamer.allowdeath = 1;
@@ -1140,7 +1140,7 @@ flame_guy_explode() {
 
   BadPlacesEnable(1);
 
-  aim_origin = getent("orig_flamer_target_admin_converted", "targetname");
+  aim_origin = getEnt("orig_flamer_target_admin_converted", "targetname");
   aim_origin delete();
 }
 
@@ -1181,7 +1181,7 @@ building_axis_check() {
 }
 
 axis_in_building() {
-  trig = getent("trig_admin_building_volume", "targetname");
+  trig = getEnt("trig_admin_building_volume", "targetname");
   guys = getaiarray("axis");
 
   axis_count = 0;
@@ -1245,8 +1245,8 @@ admin_ai_pen() {
 
   flag_set("trig_ditch_guys");
 
-  trig_pen = getent("trig_admin_ai_pen", "targetname");
-  pen_brush = getent("blocker_admin_ai", "targetname");
+  trig_pen = getEnt("trig_admin_ai_pen", "targetname");
+  pen_brush = getEnt("blocker_admin_ai", "targetname");
 
   while(1) {
     guys = get_specific_ai("friend_admin_ai");
@@ -1265,7 +1265,7 @@ admin_ai_pen() {
           wait(4.5);
 
           pen_brush solid();
-          pen_brush disconnectpaths();
+          pen_brush disconnectPaths();
           break;
         }
       }
@@ -1418,7 +1418,7 @@ bunker_last_spawners() {
 
   setmusicstate("POST_ADMIN");
 
-  pen_brush = getent("blocker_admin_ai", "targetname");
+  pen_brush = getEnt("blocker_admin_ai", "targetname");
   pen_brush notsolid();
   pen_brush connectpaths();
 
@@ -1530,7 +1530,7 @@ staircase_wait_thread() {
 }
 
 admin_staircase_run_cycle() {
-  trig = getent("trig_admin_stairs", "targetname");
+  trig = getEnt("trig_admin_stairs", "targetname");
   while(1) {
     trig waittill("trigger", triggerer);
     if(!isDefined(triggerer.pel2_on_stairs)) {
@@ -1574,11 +1574,11 @@ berm_ai_climb() {
 
   quick_text("jump over berm", undefined, true);
 
-  blocker = getent("blocker_admin_berm", "targetname");
+  blocker = getEnt("blocker_admin_berm", "targetname");
   blocker notsolid();
   blocker connectpaths();
 
-  helmet_brush = getent("blocker_admin_helmet", "targetname");
+  helmet_brush = getEnt("blocker_admin_helmet", "targetname");
   helmet_brush notsolid();
   helmet_brush connectpaths();
 
@@ -1656,7 +1656,7 @@ top_floor_retreat() {
     guys[i] thread top_floor_retreat_strat(i);
   }
 
-  trig = getent("trig_bazooka_lookat", "targetname");
+  trig = getEnt("trig_bazooka_lookat", "targetname");
   trig notify("trigger");
 
   wait(0.05);
@@ -1733,7 +1733,7 @@ bomber_crash() {
 
   anim_node = getnode("node_bomber_crash", "targetname");
 
-  rig_model = getent("bomber_crash_rig_model", "targetname");
+  rig_model = getEnt("bomber_crash_rig_model", "targetname");
   rig_model UseAnimTree(#animtree);
   rig_model.animname = "forest";
 
@@ -1752,7 +1752,7 @@ bomber_crash() {
 }
 
 bomber_rumble() {
-  trig = getent("trig_bomber_rumble", "targetname");
+  trig = getEnt("trig_bomber_rumble", "targetname");
 
   players = get_players();
 
@@ -1765,17 +1765,17 @@ bomber_rumble() {
 }
 
 bomber_crash_treefx() {
-  tree_top_1 = getent("bomber_crash_treetop_1", "targetname");
+  tree_top_1 = getEnt("bomber_crash_treetop_1", "targetname");
   tree_top_1 delete();
-  tree_top_2 = getent("bomber_crash_treetop_2", "targetname");
+  tree_top_2 = getEnt("bomber_crash_treetop_2", "targetname");
   tree_top_2 delete();
 
-  orig_2 = getstruct("bomber_crash_treetop_fx_2", "targetname");
+  orig_2 = getStruct("bomber_crash_treetop_fx_2", "targetname");
   playFX(level._effect["bomber_crash_treetop"], orig_2.origin, anglesToForward(orig_2.angles));
 }
 
 bomber_quake(time_to_rumble) {
-  trig = getent("trig_bomber_rumble", "targetname");
+  trig = getEnt("trig_bomber_rumble", "targetname");
 
   players = get_players();
 
@@ -1783,7 +1783,7 @@ bomber_quake(time_to_rumble) {
     if(players[i] istouching(trig)) {
       earthquake(0.25, time_to_rumble, players[i].origin, 1500);
 
-      playsoundatposition("plane_rumble", (0, 0, 0));
+      playSoundAtPosition("plane_rumble", (0, 0, 0));
     }
   }
 
@@ -1837,9 +1837,9 @@ ambient_high_bomber_path(start_point) {
   ambient_bomber setModel("vehicle_usa_aircraft_b17_dist");
   ambient_bomber.angles = start_point.angles;
 
-  target_spot = getstruct(start_point.target, "targetname");
+  target_spot = getStruct(start_point.target, "targetname");
 
-  ambient_bomber moveto(target_spot.origin, 49);
+  ambient_bomber moveTo(target_spot.origin, 49);
 
   ambient_bomber waittill("movedone");
 
@@ -1953,7 +1953,7 @@ spawn_admin_pickup_weapons() {
 
 #using_animtree("generic_human");
 collectible_corpse() {
-  orig = getstruct("orig_collectible_loop", "targetname");
+  orig = getStruct("orig_collectible_loop", "targetname");
 
   corpse = spawn("script_model", orig.origin);
   corpse.angles = orig.angles;

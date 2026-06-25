@@ -52,7 +52,7 @@ function vo_play_soliloquy_disconnect_listener() {
 
 function vo_play_four_part_conversation(convo) {
   assert(isDefined(convo), "");
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 4 && !level flag::get("story_vo_playing")) {
     level flag::set("story_vo_playing");
     old_speaking_player = undefined;
@@ -95,7 +95,7 @@ function vo_play_four_part_conversation(convo) {
       }
     }
     for(i = 0; i < convo.size; i++) {
-      players = getplayers();
+      players = getPlayers();
       if(players.size != 4) {
         foreach(player in players) {
           if(isDefined(player)) {

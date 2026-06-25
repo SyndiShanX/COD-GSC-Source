@@ -116,7 +116,7 @@ ceiling_fan_think() {
 delete_collision() {
   self endon("death");
   if(isDefined(self.target)) {
-    dest_clip = GetEnt(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     wait 0.1;
     dest_clip delete();
   }
@@ -142,7 +142,7 @@ destructible_barrel_explosion(attacker, physics_explosion) {
   }
   self notify("barrel_dead");
   if(isDefined(self.target)) {
-    dest_clip = GetEnt(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     dest_clip delete();
   }
   self RadiusDamage(self.origin, 256, 300, 85, attacker, "MOD_EXPLOSIVE", "frag_grenade_sp");

@@ -59,7 +59,7 @@ function activate(type, name, player, opt_param_1, opt_param_2, opt_param_3) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     state set_state_active(players[player_index], 1);
@@ -82,7 +82,7 @@ function deactivate(type, name, player) {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     state set_state_inactive(players[player_index]);
@@ -124,7 +124,7 @@ function set_state_inactive(player) {
 }
 
 function timeout_lerp_thread(timeout, opt_param_2, opt_param_3) {
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     self set_state_active(players[player_index], 1);
@@ -155,7 +155,7 @@ function duration_lerp_thread(duration, max_duration) {
       break;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
@@ -228,7 +228,7 @@ function ramp_in_out_thread(ramp_in, full_period, ramp_out) {
       break;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
@@ -256,7 +256,7 @@ function ramp_in_out_thread(ramp_in, full_period, ramp_out) {
       break;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);

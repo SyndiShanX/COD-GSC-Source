@@ -31,43 +31,43 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("player128x128x256", "targetname");
+  var_0 = getEnt("player128x128x256", "targetname");
   var_1 = spawn("script_model", (-2504, 842, 676));
   var_1.angles = (0, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("player128x128x256", "targetname");
+  var_2 = getEnt("player128x128x256", "targetname");
   var_3 = spawn("script_model", (-2504, 842, 420));
   var_3.angles = (0, 0, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("player256x256x256", "targetname");
+  var_4 = getEnt("player256x256x256", "targetname");
   var_5 = spawn("script_model", (-892, 1380, 464));
   var_5.angles = (0, 0, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
-  var_6 = getent("player64x64x128", "targetname");
+  var_6 = getEnt("player64x64x128", "targetname");
   var_7 = spawn("script_model", (-599, 339, 139.5));
   var_7.angles = (0, 0, -9.5);
   var_7 clonebrushmodeltoscriptmodel(var_6);
-  var_8 = getent("player64x64x256", "targetname");
+  var_8 = getEnt("player64x64x256", "targetname");
   var_9 = spawn("script_model", (-1440, -1424, -92));
   var_9.angles = (0, 0, 0);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("player64x64x256", "targetname");
+  var_10 = getEnt("player64x64x256", "targetname");
   var_11 = spawn("script_model", (-1440, -1424, -348));
   var_11.angles = (0, 0, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("player256x256x8", "targetname");
+  var_12 = getEnt("player256x256x8", "targetname");
   var_13 = spawn("script_model", (-1484, -256, -26));
   var_13.angles = (0, 0, 0);
   var_13 clonebrushmodeltoscriptmodel(var_12);
-  var_14 = getent("player64x64x256", "targetname");
+  var_14 = getEnt("player64x64x256", "targetname");
   var_15 = spawn("script_model", (-1580, -128, -50));
   var_15.angles = (90, 1.7, -88);
   var_15 clonebrushmodeltoscriptmodel(var_14);
-  var_10 = getent("player32x32x128", "targetname");
+  var_10 = getEnt("player32x32x128", "targetname");
   var_11 = spawn("script_model", (-1238, 2298, 37));
   var_11.angles = (0, 0, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("player64x64x256", "targetname");
+  var_12 = getEnt("player64x64x256", "targetname");
   var_13 = spawn("script_model", (1264, 1696, -224));
   var_13.angles = (0, 0, 0);
   var_13 clonebrushmodeltoscriptmodel(var_12);
@@ -164,7 +164,7 @@ handlelightinggeo() {
   var_0 = getEntArray("big_screen", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_parameters)) {
-      var_2 moveto((-2444, 1279.5, 95), 0.1);
+      var_2 moveTo((-2444, 1279.5, 95), 0.1);
     }
   }
 }

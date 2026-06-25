@@ -248,7 +248,7 @@ set_dvar_and_volume(loop_id, set) {
 }
 
 get_view_num(start_origin, start_angles, end_origin) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot;

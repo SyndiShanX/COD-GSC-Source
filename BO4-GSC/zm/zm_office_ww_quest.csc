@@ -21,6 +21,6 @@ init_clientfields() {
 
 drawer_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, #"zm_office_drawer_rumble");
+    self playRumbleOnEntity(localclientnum, #"zm_office_drawer_rumble");
   }
 }

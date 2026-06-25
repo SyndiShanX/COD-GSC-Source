@@ -199,7 +199,7 @@ sunlight_restore(fTime) {
 block_out_the_sky() {
   fogent = spawn("script_model", level.player getEye());
   fogent setModel("fog_blackout");
-  fogent LinkTo(level.player);
+  fogent linkTo(level.player);
   level.fogent = fogent;
   flag_set("sandstorm_fully_masked");
 }
@@ -260,8 +260,8 @@ stop_sandstorm_effect() {
 sandstorm_fog_management() {
   level endon("stop_sandstorm_fog");
 
-  struct = getstruct("heli_fog_struct", "targetname");
-  targ_pos = getstruct(struct.target, "targetname");
+  struct = getStruct("heli_fog_struct", "targetname");
+  targ_pos = getStruct(struct.target, "targetname");
   targ = spawn("script_origin", (0, 0, 0));
   targ.origin = targ_pos.origin;
 

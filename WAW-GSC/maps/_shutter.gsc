@@ -42,7 +42,7 @@ main() {
 
   for(i = 0; i < leftShutters.size; i++) {
     shutter = leftShutters[i];
-    shutter rotateto((shutter.angles[0], shutter.angles[1] + 180, shutter.angles[2]), 0.1);
+    shutter rotateTo((shutter.angles[0], shutter.angles[1] + 180, shutter.angles[2]), 0.1);
   }
   wait(0.2);
 
@@ -95,7 +95,7 @@ shutterWanderLeft(shutter, windDirection) {
   }
 
   newTime = 0.2;
-  shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
+  shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
   shutter thread shutterSound();
@@ -120,7 +120,7 @@ shutterWanderLeft(shutter, windDirection) {
       newTime = 0.3;
     }
 
-    shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
+    shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
     wait(newTime);
   }
 }
@@ -135,7 +135,7 @@ shutterWanderRight(shutter, windDirection) {
   }
 
   newTime = 0.2;
-  shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
+  shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
   shutter thread shutterSound();
 
@@ -159,7 +159,7 @@ shutterWanderRight(shutter, windDirection) {
       newTime = 0.3;
     }
 
-    shutter rotateto((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
+    shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
     wait(newTime);
   }
 }
@@ -182,7 +182,7 @@ wireWander(wire) {
   ent = spawn("script_model", (0, 0, 0));
   ent.origin = vectorScale(org1, 0.5) + vectorScale(org2, 0.5);
   ent.angles = angles;
-  wire linkto(ent);
+  wire linkTo(ent);
   rottimer = 2;
   rotrange = 0.9;
   dist = 4 + randomfloat(2);

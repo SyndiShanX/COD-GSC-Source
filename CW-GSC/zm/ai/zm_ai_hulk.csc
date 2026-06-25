@@ -331,7 +331,7 @@ function function_1b79e37c(localclientnum, start, end) {
   distance2d = distance2d(start, end);
   dir = end - start;
   dir = (dir[0], dir[1], 0);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   time = int(0.75 * 1000);
   var_199c57d2 = distance2d / time;
   var_ef97a46c = (end[2] - start[2] + 0.5 * gravity * sqr(time)) / time;

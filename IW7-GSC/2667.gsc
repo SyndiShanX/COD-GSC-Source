@@ -293,7 +293,7 @@ minesensorbounce() {
   var_1 = self.origin + (0, 0, self.config.launchheight);
   var_2 = self.config.launchtime;
   var_3 = self.config.launchtime + 0.1;
-  var_0 moveto(var_1, var_3, 0, var_2);
+  var_0 moveTo(var_1, var_3, 0, var_2);
   var_0 rotatevelocity((0, 1100, 32), var_3, 0, var_2);
   var_0 thread playspinnerfx();
   wait(var_2);
@@ -325,8 +325,8 @@ minebounce() {
   }
 
   var_0 = self.origin + (0, 0, 64);
-  self moveto(var_0, 0.7, 0, 0.65);
-  self.killcament moveto(var_0 + self.killcamoffset, 0.7, 0, 0.65);
+  self moveTo(var_0, 0.7, 0, 0.65);
+  self.killcament moveTo(var_0 + self.killcamoffset, 0.7, 0, 0.65);
   self rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   thread playspinnerfx();
   wait 0.65;
@@ -501,11 +501,11 @@ run_stun_logic(var_0, var_1, var_2, var_3) {
   self endon("disconnected");
   level endon("game_ended");
   var_4 = anglesToForward(self.angles);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_4 = var_4 * 100;
   var_5 = -1 * var_4;
   var_6 = anglestoleft(self.angles);
-  var_6 = vectornormalize(var_6);
+  var_6 = vectorNormalize(var_6);
   var_6 = var_6 * 100;
   var_7 = -1 * var_6;
 
@@ -617,10 +617,10 @@ thundergun_harpoon_dud_explode(var_0) {
         var_5.customdeath = 1;
         playLoopSound(var_5.origin, "perk_blue_bolts_sparks");
         var_6 = anglesToForward(self.angles);
-        var_7 = vectornormalize(var_6) * -100;
+        var_7 = vectorNormalize(var_6) * -100;
 
         if(isDefined(var_5.agent_type) && (var_5.agent_type != "slasher" && var_5.agent_type != "superslasher")) {
-          var_5 giveflagcapturexp(vectornormalize(var_5.origin - (self.origin + var_7)) * 800 + (200, 0, 200));
+          var_5 giveflagcapturexp(vectorNormalize(var_5.origin - (self.origin + var_7)) * 800 + (200, 0, 200));
         }
 
         wait 0.2;
@@ -649,8 +649,8 @@ fling_zombie_thundergun_harpoon(var_0, var_1, var_2, var_3) {
   var_3.angles = vectortoangles(var_1.origin - var_3.origin) + (0, 0, 180);
   var_4 = var_1.origin - var_3.origin;
   var_5 = anglesToForward(var_2.angles);
-  var_6 = vectornormalize(var_5) * -100;
-  self giveflagcapturexp(vectornormalize(self.origin - (var_2.origin + var_6)) * 800 + (200, 0, 200));
+  var_6 = vectorNormalize(var_5) * -100;
+  self giveflagcapturexp(vectorNormalize(self.origin - (var_2.origin + var_6)) * 800 + (200, 0, 200));
   wait 0.16;
 
   if(isDefined(var_2)) {
@@ -870,8 +870,8 @@ runharpoontraplogic(var_0, var_1) {
   var_0 waittill("missile_stuck", var_2);
   var_3 = var_0.origin;
   var_4 = var_0.angles;
-  var_5 = vectornormalize(anglesToForward(var_4));
-  var_6 = vectornormalize(anglestoright(var_4));
+  var_5 = vectorNormalize(anglesToForward(var_4));
+  var_6 = vectorNormalize(anglestoright(var_4));
   var_7 = vectorcross(var_5, var_6);
   var_0.angles = vectortoangles(var_7);
   var_8 = 3 * anglesToForward(var_0.angles);
@@ -1775,7 +1775,7 @@ mineproximitytrigger(var_0) {
 
   if(isDefined(var_0)) {
     var_2 getrankxp();
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
   }
 
   self.damagearea = var_2;
@@ -2167,7 +2167,7 @@ throwingknifeteleport(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_2 setorigin(var_1.origin, !var_3);
+  var_2 setOrigin(var_1.origin, !var_3);
   var_2 setplayerangles(var_12);
   throwingknifeteleport_fxendburst(var_2, var_1);
 }
@@ -2175,8 +2175,8 @@ throwingknifeteleport(var_0, var_1, var_2, var_3) {
 throwingknifeteleport_fxstartburst(var_0, var_1) {
   var_2 = var_1.origin - var_0.origin;
   var_3 = var_0.origin + (0, 0, 32);
-  var_4 = vectornormalize(var_2);
-  var_5 = vectornormalize(vectorcross(var_2, (0, 0, 1)));
+  var_4 = vectorNormalize(var_2);
+  var_5 = vectorNormalize(vectorcross(var_2, (0, 0, 1)));
   var_6 = vectorcross(var_5, var_4);
   var_7 = _axistoangles(var_4, var_5, var_6);
   var_8 = 0;
@@ -2341,7 +2341,7 @@ minethrown(var_0, var_1, var_2, var_3) {
     var_5["normal"] = var_5["normal"] * -1;
   }
 
-  var_7 = vectornormalize(var_5["normal"]);
+  var_7 = vectorNormalize(var_5["normal"]);
   var_8 = vectortoangles(var_7);
   var_8 = var_8 + (90, 0, 0);
   var_9 = [[var_2]](var_6, var_0, var_1, var_8);
@@ -2489,7 +2489,7 @@ claymoredetonation(var_0) {
 
   if(isDefined(var_0)) {
     var_1 getrankxp();
-    var_1 linkto(var_0);
+    var_1 linkTo(var_0);
   }
 
   thread deleteondeath(var_1);
@@ -2556,7 +2556,7 @@ shouldaffectclaymore(var_0) {
     return 0;
   }
 
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_5 = vectordot(var_2, var_3);
   return var_5 > level.claymoredetectiondot;
 }
@@ -2722,7 +2722,7 @@ watchc4implode() {
   self.owner endon("disconnect");
   var_0 = self.owner;
   var_1 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   thread endondeath();
   self endon("end_explode");
   self waittill("explode", var_2);
@@ -2891,14 +2891,14 @@ clustergrenadeused() {
   }
 
   var_7 = spawn("script_model", self.origin);
-  var_7 linkto(self);
+  var_7 linkTo(self);
   var_7 setModel("tag_origin");
   var_7 setscriptmoverkillcam("explosive");
   var_7 thread deathdelaycleanup(self, var_3 + 5);
   var_7 thread ownerdisconnectcleanup(self.owner);
   var_7.threwback = self.threwback;
   var_8 = var_0 scripts\cp\utility::_launchgrenade("cluster_grenade_indicator_mp", self.origin, (0, 0, 0));
-  var_8 linkto(self);
+  var_8 linkTo(self);
   var_8 thread deathdelaycleanup(self, var_3);
   var_8 thread ownerdisconnectcleanup(self.owner);
   thread scripts\cp\utility::notifyafterframeend("death", "end_explode");
@@ -3280,7 +3280,7 @@ grenade_earthquake(var_0) {
     var_1 = self.origin;
   }
 
-  playrumbleonentity("grenade_rumble", var_1);
+  playRumbleOnEntity("grenade_rumble", var_1);
   earthquake(0.5, 0.75, var_1, 800);
 
   foreach(var_3 in level.players) {
@@ -3302,7 +3302,7 @@ c4_earthquake() {
   thread endondeath();
   self endon("end_explode");
   self waittill("explode", var_0);
-  playrumbleonentity("grenade_rumble", var_0);
+  playRumbleOnEntity("grenade_rumble", var_0);
   earthquake(0.4, 0.75, var_0, 512);
 
   foreach(var_2 in level.players) {
@@ -3334,9 +3334,9 @@ dirteffect(var_0) {
   if(!scripts\cp\utility::isreallyalive(self)) {
     return;
   }
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = ["death", "damage"];
@@ -4259,7 +4259,7 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
     self waittill("damage", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
 
     if(var_5) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
 
     if(isDefined(self.helitype) && self.helitype == "littlebird") {
@@ -4327,49 +4327,49 @@ equipmentwatchuse(var_0, var_1) {
   self endon("spawned_player");
   self endon("disconnect");
   self endon("equipmentWatchUse");
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
 
   switch (self.weapon_name) {
     case "c4_zm":
-      self.trigger sethintstring(&"MP_PICKUP_C4");
+      self.trigger setHintString(&"MP_PICKUP_C4");
       break;
     case "claymore_mp":
-      self.trigger sethintstring(&"MP_PICKUP_CLAYMORE");
+      self.trigger setHintString(&"MP_PICKUP_CLAYMORE");
       break;
     case "bouncingbetty_mp":
-      self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
+      self.trigger setHintString(&"MP_PICKUP_BOUNCING_BETTY");
       break;
     case "proximity_explosive_mp":
-      self.trigger sethintstring(&"MP_PICKUP_PROXIMITY_EXPLOSIVE");
+      self.trigger setHintString(&"MP_PICKUP_PROXIMITY_EXPLOSIVE");
       break;
     case "mobile_radar_mp":
-      self.trigger sethintstring(&"MP_PICKUP_MOBILE_RADAR");
+      self.trigger setHintString(&"MP_PICKUP_MOBILE_RADAR");
       break;
     case "ztransponder_mp":
     case "transponder_mp":
-      self.trigger sethintstring(&"MP_PICKUP_TRANSPONDER");
+      self.trigger setHintString(&"MP_PICKUP_TRANSPONDER");
       break;
     case "sonic_sensor_mp":
-      self.trigger sethintstring(&"MP_PICKUP_SONIC_SENSOR");
+      self.trigger setHintString(&"MP_PICKUP_SONIC_SENSOR");
       break;
     case "sticky_mine_mp":
-      self.trigger sethintstring(&"MP_PICKUP_STICKY_MINE");
+      self.trigger setHintString(&"MP_PICKUP_STICKY_MINE");
       break;
     case "blackhole_grenade_zm":
     case "blackhole_grenade_mp":
-      self.trigger sethintstring(&"MP_PICKUP_BLACKHOLE_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_BLACKHOLE_GRENADE");
       break;
     case "shard_ball_mp":
-      self.trigger sethintstring(&"MP_PICKUP_SHARD_BALL");
+      self.trigger setHintString(&"MP_PICKUP_SHARD_BALL");
       break;
     case "cryo_grenade_mp":
-      self.trigger sethintstring(&"MP_PICKUP_CRYO_MINE");
+      self.trigger setHintString(&"MP_PICKUP_CRYO_MINE");
       break;
     case "trip_mine_mp":
-      self.trigger sethintstring(&"MP_PICKUP_TRIP_MINE");
+      self.trigger setHintString(&"MP_PICKUP_TRIP_MINE");
       break;
     case "arc_grenade_mine_mp":
-      self.trigger sethintstring(&"MP_PICKUP_ARC_MINE");
+      self.trigger setHintString(&"MP_PICKUP_ARC_MINE");
       break;
   }
 
@@ -4950,11 +4950,11 @@ harpoon_impale_additional_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     var_14 = anglestoup(var_1.angles);
     var_15 = vectorcross(var_13, var_14);
     var_16 = scripts\engine\utility::spawn_tag_origin(var_3, _axistoangles(var_13, var_15, var_14));
-    var_16 moveto(var_9, var_12);
+    var_16 moveTo(var_9, var_12);
     var_17 = spawnragdollconstraint(var_2, var_5, var_6, var_7);
     var_17.origin = var_16.origin;
     var_17.angles = var_16.angles;
-    var_17 linkto(var_16);
+    var_17 linkTo(var_16);
     thread play_explosion_post_impale(var_9, var_1);
     thread impale_cleanup(var_2, var_16, var_12 + 0.05, var_17);
   }

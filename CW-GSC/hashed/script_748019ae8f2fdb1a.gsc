@@ -214,7 +214,7 @@ function function_59dbd2b(entity, target_pos) {
   }
 
   entity.var_afbb6d07 = 1;
-  entity animscripted(anim, entity.origin, anim_angles, anim, "normal");
+  entity animScripted(anim, entity.origin, anim_angles, anim, "normal");
 }
 
 function function_ab9b7039() {
@@ -469,7 +469,7 @@ function private function_891899a5(params) {
   if(isDefined(params.vehicle) && isDefined(params.vehicle.health) && params.vehicle.health > 0) {
     var_3f366540 = (0, 0, 0) - params.vehicle.origin;
     var_3f366540 = (var_3f366540[0], var_3f366540[1], 0);
-    params.vehicle launchvehicle(vectornormalize(var_3f366540) * 200, vectornormalize(var_3f366540) * -1 * 100, 0, 0);
+    params.vehicle launchvehicle(vectorNormalize(var_3f366540) * 200, vectorNormalize(var_3f366540) * -1 * 100, 0, 0);
   }
 }
 
@@ -488,7 +488,7 @@ function function_42fbf5d9(var_956ca580, s_dest) {
     return;
   }
 
-  var_956ca580 linkto(teleport_ent);
+  var_956ca580 linkTo(teleport_ent);
 
   if(teleport_ent clientfield::is_registered("" + #"hash_6d05bbcab1912e5a")) {
     teleport_ent clientfield::set("" + #"hash_6d05bbcab1912e5a", 1);
@@ -529,7 +529,7 @@ function function_42fbf5d9(var_956ca580, s_dest) {
         break;
       }
 
-      teleport_ent moveto(v_dest, n_time);
+      teleport_ent moveTo(v_dest, n_time);
     }
 
     waitframe(1);
@@ -538,7 +538,7 @@ function function_42fbf5d9(var_956ca580, s_dest) {
   if(isDefined(teleport_ent)) {
     n_dist = distance(teleport_ent.origin, v_target_pos);
     n_time = n_dist / 1000;
-    teleport_ent moveto(v_target_pos, n_time);
+    teleport_ent moveTo(v_target_pos, n_time);
     teleport_ent waittill(#"movedone");
   }
 

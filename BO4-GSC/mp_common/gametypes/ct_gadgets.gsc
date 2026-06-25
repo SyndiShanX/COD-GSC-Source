@@ -248,7 +248,7 @@ function_144e61da(n_slot, str_endon) {
   level endon(str_endon);
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     gadget = e_player._gadgets_player[n_slot];
 
     if(isalive(e_player) && isDefined(gadget) && function_f2f3407(gadget.name)) {
@@ -269,7 +269,7 @@ function_c3e3d15() {
 }
 
 function_aedf2680() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
   e_player waittill(#"gadget_forced_off");
   e_player.var_c70a4cbc = 1;
@@ -314,7 +314,7 @@ function_350dd8ec(str_weapon) {
   level endon(#"combattraining_logic_finished");
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(isalive(e_player)) {
       wpn = e_player getcurrentweapon();
@@ -343,7 +343,7 @@ get_slot(str_weapon_name) {
 }
 
 function_fb68ca34(n_delay) {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   wait n_delay;
   e_player val::reset(#"spawn_player", "disablegadgets");
 }

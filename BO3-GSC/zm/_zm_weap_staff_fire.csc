@@ -52,7 +52,7 @@ function function_657b61e3(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_a90ff836 = playFXOnTag(localclientnum, level._effect["character_fire_death_torso"], self, "j_spinelower");
     self.var_44f239e3 = playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, "j_head");
     self.sndent = spawn(0, self.origin, "script_origin");
-    self.sndent linkto(self);
+    self.sndent linkTo(self);
     self.sndent playLoopSound("zmb_fire_loop", 0.5);
     self.sndent thread snddeleteent(self);
     if(!(isDefined(self.var_ff3ddd5b) && self.var_ff3ddd5b)) {

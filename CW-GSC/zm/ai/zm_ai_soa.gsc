@@ -107,7 +107,7 @@ function function_3138c2d5() {
 
 function private function_dda06e36(entity) {
   if(getdvarint(#"hash_4ac64c7f46b01880", 0) > 0) {
-    players = getplayers();
+    players = getPlayers();
     entity.var_93a62fe = isDefined(players[1]) ? players[1] : players[0];
   }
 
@@ -396,7 +396,7 @@ function function_4a3e695a(entity, player) {
 }
 
 function function_6c3b6e9d() {
-  closest_player = arraygetclosest(self.origin, getplayers());
+  closest_player = arraygetclosest(self.origin, getPlayers());
   function_4a3e695a(self, closest_player);
 
   if(isDefined(self.var_ea989fd2) || isDefined(self.var_1389a0b3)) {
@@ -413,7 +413,7 @@ function function_6c3b6e9d() {
 }
 
 function function_bd4dbc6d() {
-  closest_player = arraygetclosest(self.origin, getplayers());
+  closest_player = arraygetclosest(self.origin, getPlayers());
   zipline = function_4a3e695a(self, closest_player);
 
   if(isDefined(zipline)) {
@@ -512,7 +512,7 @@ function function_41a4961d(get_all = 0) {
     } else {
       locs = level.zm_loc_types[#"hash_160b6f445abd3a60"];
 
-      if(getplayers().size > 1) {
+      if(getPlayers().size > 1) {
         var_a6c95035 = [];
         var_b0becd1e = namespace_19c99142::function_a64f7068();
 
@@ -593,7 +593,7 @@ function function_ff7527d6() {
 }
 
 function function_d7a21807() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       return 2;
     case 2:

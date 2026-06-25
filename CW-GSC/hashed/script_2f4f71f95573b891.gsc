@@ -63,7 +63,7 @@ function function_8b10d19c(str_objective, b_starting) {
   level thread function_a1514e3c();
   level thread function_e6528249();
   level thread function_71ff3dee();
-  var_92d37871 = getplayers()[0];
+  var_92d37871 = getPlayers()[0];
   level thread function_7a6fed15(var_92d37871);
   var_ce667ea2 = getEntArray("destructible_tombstone", "targetname");
 
@@ -72,13 +72,13 @@ function function_8b10d19c(str_objective, b_starting) {
     var_b337ad77 thread function_2a1cc4d0();
   }
 
-  e_blocker = getent("scene_adler_right_stair_blocker", "targetname");
+  e_blocker = getEnt("scene_adler_right_stair_blocker", "targetname");
   e_blocker notsolid();
   e_blocker connectpaths();
   level flag::wait_till("flg_graveyard_reveal");
   objectives::remove(#"obj_follow_adler", level.adler);
   objectives::complete(#"hash_7956ac3690b300bb");
-  var_c31a6f62 = getent("aa_parapet", "targetname");
+  var_c31a6f62 = getEnt("aa_parapet", "targetname");
   objectives::kill(#"hash_75d3caceed12ab7d", var_c31a6f62, #"hash_5c22b5de1fc16f25");
   objectives_ui::function_49dec5b(#"hash_75d3caceed12ab7d", var_c31a6f62, #"hash_7056653275b7909e");
   level thread function_cb6a2e9b();
@@ -104,7 +104,7 @@ function function_6ea2cd94() {
 }
 
 function function_7e171808() {
-  var_80d256bf = getent("aa_parapet", "targetname");
+  var_80d256bf = getEnt("aa_parapet", "targetname");
   var_80d256bf namespace_534279a::function_2a8ee50f("parapet");
   namespace_95f223d5::music("6.0_danger_close");
   level notify(#"hash_7797b485016eeeed");
@@ -210,7 +210,7 @@ function private function_e4ead38e() {
   level flag::wait_till("flg_graveyard_unignore");
   wait 2;
   var_37bcd55 = getaiarray("graveyard_front_left", "script_noteworthy");
-  var_44265112 = getent("graveyard_initial_backright_fallback_volume", "script_noteworthy");
+  var_44265112 = getEnt("graveyard_initial_backright_fallback_volume", "script_noteworthy");
   array::thread_all(var_37bcd55, &ai::force_goal, var_44265112);
 }
 
@@ -344,7 +344,7 @@ function function_5ef98b38() {
     var_947b4032 = (0, 0, 0);
 
     foreach(v in var_b3294f70) {
-      var_3b1efaa4 = vectordot(vectornormalize(level.player getEye() - self.origin), vectornormalize(v - self.origin));
+      var_3b1efaa4 = vectordot(vectorNormalize(level.player getEye() - self.origin), vectorNormalize(v - self.origin));
 
       if(var_3b1efaa4 > var_efff4c42) {
         var_efff4c42 = var_3b1efaa4;
@@ -405,7 +405,7 @@ function function_91520ec4() {
 function private graveyard_adler_right_stair() {
   level endon(#"game_ended", #"hash_52ec6053fd9503a0");
   level flag::wait_till("graveyard_adler_right_stair");
-  var_c1a94704 = getent("graveyard_adler_right_stair_enemy_volume", "targetname");
+  var_c1a94704 = getEnt("graveyard_adler_right_stair_enemy_volume", "targetname");
   var_67c65aa3 = 1;
 
   while(var_67c65aa3) {
@@ -423,9 +423,9 @@ function private graveyard_adler_right_stair() {
   }
 
   trigger::use("graveyard_adler_right_stair_color_trigger", "targetname", level.player);
-  e_blocker = getent("scene_adler_right_stair_blocker", "targetname");
+  e_blocker = getEnt("scene_adler_right_stair_blocker", "targetname");
   e_blocker solid();
-  e_blocker disconnectpaths();
+  e_blocker disconnectPaths();
   a_ents = [];
   a_ents[#"adler"] = level.adler;
   s_scene = struct::get("scene_adler_right_stair");
@@ -504,9 +504,9 @@ function private function_ea6cda92() {
 
 function private function_c40d0905() {
   a_ents = [];
-  a_ents[#"hash_363ff12eba02d468"] = getent("flip_table", "targetname");
+  a_ents[#"hash_363ff12eba02d468"] = getEnt("flip_table", "targetname");
   a_ents[#"hash_363ff12eba02d468"] hide();
-  var_87b16d96 = getent("flip_table_visible", "targetname");
+  var_87b16d96 = getEnt("flip_table_visible", "targetname");
   var_87b16d96 notsolid();
   level flag::wait_till("flg_graveyard_table_flip");
   s_scene = struct::get("scene_table_flip");
@@ -561,7 +561,7 @@ function private function_bb05a3f7() {
 function function_84e3ebe0() {
   level endon(#"end_game");
   level.player endon(#"death");
-  var_e2990a7b = getent("graveyard_retreat_delete_trigger", "targetname");
+  var_e2990a7b = getEnt("graveyard_retreat_delete_trigger", "targetname");
 
   while(true) {
     s_notify = var_e2990a7b waittill(#"trigger");
@@ -770,10 +770,10 @@ function function_68842b0f() {
 
 function function_a5083d9c() {
   level.var_c88d2182 = [];
-  level.var_c88d2182[0] = getent("e_radar_1_rotation", "targetname");
-  level.var_c88d2182[1] = getent("e_radar_2_rotation", "targetname");
-  level.var_c88d2182[2] = getent("e_radar_3_rotation", "targetname");
-  level.var_c88d2182[3] = getent("e_radar_4_rotation", "targetname");
+  level.var_c88d2182[0] = getEnt("e_radar_1_rotation", "targetname");
+  level.var_c88d2182[1] = getEnt("e_radar_2_rotation", "targetname");
+  level.var_c88d2182[2] = getEnt("e_radar_3_rotation", "targetname");
+  level.var_c88d2182[3] = getEnt("e_radar_4_rotation", "targetname");
   level.var_1d829da4 = [];
   var_9dce209a = struct::get("dish_red_light_fx_1", "targetname");
   var_fb87dc0c = struct::get("dish_red_light_fx_2", "targetname");
@@ -787,10 +787,10 @@ function function_a5083d9c() {
   level.var_1d829da4[1].angles = level.var_c88d2182[1].angles + (0, 90, 0);
   level.var_1d829da4[2].angles = level.var_c88d2182[2].angles + (0, 90, 0);
   level.var_1d829da4[3].angles = level.var_c88d2182[3].angles + (0, 90, 0);
-  level.var_1d829da4[0] linkto(level.var_c88d2182[0]);
-  level.var_1d829da4[1] linkto(level.var_c88d2182[1]);
-  level.var_1d829da4[2] linkto(level.var_c88d2182[2]);
-  level.var_1d829da4[3] linkto(level.var_c88d2182[3]);
+  level.var_1d829da4[0] linkTo(level.var_c88d2182[0]);
+  level.var_1d829da4[1] linkTo(level.var_c88d2182[1]);
+  level.var_1d829da4[2] linkTo(level.var_c88d2182[2]);
+  level.var_1d829da4[3] linkTo(level.var_c88d2182[3]);
 
   foreach(e in level.var_1d829da4) {
     e setModel("tag_origin");
@@ -822,10 +822,10 @@ function function_6d038c35(index, var_5a5a8327) {
 
   for(i = 0; i < var_5c614d61; i++) {
     foreach(ent in s_scene.scene_ents) {
-      ent rotateyaw(var_b1595f6a, 0.05);
+      ent rotateYaw(var_b1595f6a, 0.05);
     }
 
-    self rotateyaw(var_b1595f6a, 0.05);
+    self rotateYaw(var_b1595f6a, 0.05);
     wait 0.05;
   }
 }
@@ -837,8 +837,8 @@ function function_693651a7() {
 }
 
 function function_71ff3dee() {
-  level.var_bf4e61ab = getent("minigun_left", "targetname");
-  level.var_4c6b5059 = getent("minigun_right", "targetname");
+  level.var_bf4e61ab = getEnt("minigun_left", "targetname");
+  level.var_4c6b5059 = getEnt("minigun_right", "targetname");
   level.var_bf4e61ab util::create_cursor_hint(undefined, (0, 0, 10), #"hash_205618f70cd06aa3", undefined, undefined, &give_minigun);
   level.var_4c6b5059 util::create_cursor_hint(undefined, (0, 0, 10), #"hash_205618f70cd06aa3", undefined, undefined, &give_minigun);
 }
@@ -875,7 +875,7 @@ function function_914b4909() {
 
 function function_585936d9() {
   self hide();
-  spawnweapon(level.player.currentweapon, level.player.origin + vectornormalize(anglesToForward(level.player.angles)) * 10 + (0, 0, 20), level.player.angles, 0);
+  spawnweapon(level.player.currentweapon, level.player.origin + vectorNormalize(anglesToForward(level.player.angles)) * 10 + (0, 0, 20), level.player.angles, 0);
   level.player takeweapon(level.player.currentweapon);
   w_minigun = getweapon(#"hash_6fb61bc95fdf307c");
   level.player giveweapon(w_minigun);
@@ -883,7 +883,7 @@ function function_585936d9() {
 }
 
 function function_5e36a991() {
-  var_92d37871 = getplayers()[0];
+  var_92d37871 = getPlayers()[0];
   level thread function_7a6fed15(var_92d37871);
 }
 

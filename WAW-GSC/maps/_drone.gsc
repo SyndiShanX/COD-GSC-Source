@@ -139,7 +139,7 @@ drone_death_thread(drone) {
   }
 
   drone notify("death");
-  drone stopAnimScripted();
+  drone stopanimScripted();
   if(isDefined(drone.skipDeathAnim)) {
     drone startragdoll();
     drone drone_play_anim(level.drone_anims["stand"]["death"]);
@@ -157,7 +157,7 @@ drone_play_anim(droneAnim) {
   if(isDefined(self.need_notetrack)) {
     self thread drone_notetrack("drone_anim");
   }
-  self animscripted("drone_anim", self.origin, self.angles, droneAnim);
+  self animScripted("drone_anim", self.origin, self.angles, droneAnim);
   self waittillmatch("drone_anim", "end");
   self notify("stop_droneNoteTrack");
 }
@@ -177,7 +177,7 @@ drone_notetrack(msg) {
 }
 
 drone_idle() {
-  self stopAnimScripted();
+  self stopanimScripted();
   self thread drone_play_anim(level.drone_anims["stand"]["idle"]);
 }
 
@@ -189,7 +189,7 @@ drone_idle_row_boat(drones, boat) {
   anims[3] = level.drone_anim["paddle_boat"]["guy4"];
 
   for(i = 0; i < drones.size; i++) {
-    drones[i] LinkTo(boat);
+    drones[i] linkTo(boat);
 
     drones[i] thread drone_play_paddle_anim(anims[i], boat);
   }
@@ -204,13 +204,13 @@ drone_play_paddle_anim(_anim, boat) {
     startorg = getstartOrigin(boat GetTagOrigin("origin_animate_jnt"), boat GetTagAngles("origin_animate_jnt"), _anim);
     startang = getstartAngles(boat GetTagOrigin("origin_animate_jnt"), boat GetTagAngles("origin_animate_jnt"), _anim);
 
-    self animscripted("drone_anim", startorg, startang, _anim);
+    self animScripted("drone_anim", startorg, startang, _anim);
     self waittillmatch("drone_anim", "end");
   }
 }
 
 drone_tread_water_idle() {
-  self stopAnimScripted();
+  self stopanimScripted();
   self thread drone_play_anim(level.drone_anims["tread_water"]["idle"]);
 }
 drone_move_to_ent(target_ent) {
@@ -367,7 +367,7 @@ getPathArray(firstTargetName, initialPoint) {
   for(;;) {
     index = nodes.size;
 
-    node = getstruct(nextNodeName, "targetname");
+    node = getStruct(nextNodeName, "targetname");
 
     if(!isDefined(node)) {
       if(index == 0) {
@@ -529,7 +529,7 @@ drone_fire_at_target(target, was_moving) {
       drone notify("stop_to_reload");
       fire_count = RandomIntRange(6, 24);
       temp_count = 0;
-      drone stopAnimScripted();
+      drone stopanimScripted();
       drone drone_play_anim(level.drone_anims["stand"]["reload"]);
       drone thread drone_track_ent(target);
     }
@@ -579,7 +579,7 @@ drone_track_ent(target) {
 
   drone thread drone_track_ent_height(target);
 
-  drone stopAnimScripted();
+  drone stopanimScripted();
   drone drone_play_anim(level.drone_anims["stand"]["aim_straight"]);
   drone.current_aim = "straight";
 
@@ -601,20 +601,20 @@ drone_track_ent_height(target) {
   drone endon("stop_to_reload");
   target endon("death");
 
-  drone stopAnimScripted();
+  drone stopanimScripted();
   drone drone_play_anim(level.drone_anims["stand"]["aim_straight"]);
   drone.current_aim = "straight";
 
   while(1) {
     if(target.origin[2] - drone.origin[2] > 500) {
       if(drone.current_aim != "up") {
-        drone stopAnimScripted();
+        drone stopanimScripted();
         drone drone_play_anim(level.drone_anims["stand"]["aim_up"]);
         drone.current_aim = "up";
       }
     } else if(drone.origin[2] - target.origin[2] > 500) {
       if(drone.current_aim != "down") {
-        drone stopAnimScripted();
+        drone stopanimScripted();
         drone maps\_drone::drone_play_anim(level.drone_anims["stand"]["aim_down"]);
         drone.current_aim = "down";
       }

@@ -309,7 +309,7 @@ player_death_off_turret() {
 
   player_hands.origin = startorg;
   player_hands.angles = startang;
-  player_hands LinkTo(plane, "origin_animate_jnt");
+  player_hands linkTo(plane, "origin_animate_jnt");
 
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
@@ -506,18 +506,18 @@ my_level_init_ocean_debris() {
 my_level_init_ocean_ships() {
   level.boats = [];
   for(i = 0; i < 3; i++) {
-    level.boats[i] = GetEnt("ev2_ship_" + i, "targetname");
+    level.boats[i] = getEnt("ev2_ship_" + i, "targetname");
 
-    level.boats[i].bow = GetEnt(level.boats[i].targetname + "_bow", "targetname");
+    level.boats[i].bow = getEnt(level.boats[i].targetname + "_bow", "targetname");
 
-    level.boats[i].aft = GetEnt(level.boats[i].targetname + "_aft", "targetname");
+    level.boats[i].aft = getEnt(level.boats[i].targetname + "_aft", "targetname");
 
-    level.boats[i].glass1 = GetEnt(level.boats[i].targetname + "_glass1", "targetname");
-    level.boats[i].glass1 LinkTo(level.boats[i], "aft_break_jnt");
-    level.boats[i].glass2 = GetEnt(level.boats[i].targetname + "_glass2", "targetname");
-    level.boats[i].glass2 LinkTo(level.boats[i], "aft_break_jnt");
-    level.boats[i].glass3 = GetEnt(level.boats[i].targetname + "_glass3", "targetname");
-    level.boats[i].glass3 LinkTo(level.boats[i], "aft_break_jnt");
+    level.boats[i].glass1 = getEnt(level.boats[i].targetname + "_glass1", "targetname");
+    level.boats[i].glass1 linkTo(level.boats[i], "aft_break_jnt");
+    level.boats[i].glass2 = getEnt(level.boats[i].targetname + "_glass2", "targetname");
+    level.boats[i].glass2 linkTo(level.boats[i], "aft_break_jnt");
+    level.boats[i].glass3 = getEnt(level.boats[i].targetname + "_glass3", "targetname");
+    level.boats[i].glass3 linkTo(level.boats[i], "aft_break_jnt");
 
     level.boats[i] Hide();
     level.boats[i].bow Hide();
@@ -543,14 +543,14 @@ my_level_init_ocean_ships() {
     }
   }
 
-  flag = GetEnt("boat_0_flag", "targetname");
-  flag LinkTo(level.boats[0], "aft_break_jnt");
-  flag = GetEnt("boat_1_flag", "targetname");
-  flag LinkTo(level.boats[1], "aft_break_jnt");
-  flag = GetEnt("boat_2_flag_bow", "targetname");
-  flag LinkTo(level.boats[2], "bow_break_jnt");
-  flag = GetEnt("boat_2_flag_aft", "targetname");
-  flag LinkTo(level.boats[2], "aft_break_jnt");
+  flag = getEnt("boat_0_flag", "targetname");
+  flag linkTo(level.boats[0], "aft_break_jnt");
+  flag = getEnt("boat_1_flag", "targetname");
+  flag linkTo(level.boats[1], "aft_break_jnt");
+  flag = getEnt("boat_2_flag_bow", "targetname");
+  flag linkTo(level.boats[2], "bow_break_jnt");
+  flag = getEnt("boat_2_flag_aft", "targetname");
+  flag linkTo(level.boats[2], "aft_break_jnt");
 
   level thread show_boats();
 }
@@ -663,13 +663,13 @@ player_controlled_20mm_cannon() {
   right_barrel setModel("tag_origin");
   right_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 20) + (anglesToForward(self GetTagAngles("tag_flash_gunner1")) * 24 + (AnglesToRight(self GetTagAngles("tag_flash_gunner1")) * 24));
   right_barrel.angles = self GetTagAngles("tag_flash_gunner1");
-  right_barrel LinkTo(self, "tag_flash_gunner1");
+  right_barrel linkTo(self, "tag_flash_gunner1");
 
   left_barrel = spawn("script_model", self.origin);
   left_barrel setModel("tag_origin");
   left_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 20) + (anglesToForward(self GetTagAngles("tag_flash_gunner1")) * 24) - (AnglesToRight(self GetTagAngles("tag_flash_gunner1")) * 24);
   left_barrel.angles = self GetTagAngles("tag_flash_gunner1");
-  left_barrel LinkTo(self, "tag_flash_gunner1a");
+  left_barrel linkTo(self, "tag_flash_gunner1a");
 
   while(true && !flag("pby_out_of_ammo")) {
     while(level.player.current_seat != "pby_frontgun" || level.player.in_transition) {
@@ -708,12 +708,12 @@ player_controlled_20mm_cannon() {
         right_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 30) + (anglesToForward((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 60) + (AnglesToRight((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 24);
 
         right_barrel.angles = (pitch_to_use, yaw_to_use, gunner_barrel_angles[2]);
-        right_barrel LinkTo(self, "origin_animate_jnt");
+        right_barrel linkTo(self, "origin_animate_jnt");
 
         left_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 30) + (anglesToForward((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 60) - (AnglesToRight((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 24);
 
         left_barrel.angles = (pitch_to_use, yaw_to_use, gunner_barrel_angles[2]);
-        left_barrel LinkTo(self, "origin_animate_jnt");
+        left_barrel linkTo(self, "origin_animate_jnt");
 
         if(!flag("pby_out_of_ammo")) {
           if(shots_fired == 0) {
@@ -727,8 +727,8 @@ player_controlled_20mm_cannon() {
           }
 
           Earthquake(.5, 0.3, level.player.origin, 100);
-          level.player PlayRumbleOnEntity("damage_heavy");
-          playsoundatposition("amb_metal", (0, 0, 0));
+          level.player playRumbleOnEntity("damage_heavy");
+          playSoundAtPosition("amb_metal", (0, 0, 0));
 
           wait(0.2);
         }
@@ -746,7 +746,7 @@ player_controlled_20mm_cannon() {
     position = self GetTagOrigin("tag_gunner_barrel1");
 
     bullet_sound = spawn("script_origin", position);
-    bullet_sound LinkTo(self, "tag_gunner_barrel1");
+    bullet_sound linkTo(self, "tag_gunner_barrel1");
 
     bullet_sound playSound("dryfire_rifle_plr", "click_done");
     bullet_sound waittill("click_done");
@@ -838,7 +838,7 @@ setup_player_planes() {
 throttling_engine_sounds() {
   self.engine_sound = spawn("script_model", self.origin);
   self.engine_sound setModel("tag_origin");
-  self.engine_sound LinkTo(self, "tag_origin");
+  self.engine_sound linkTo(self, "tag_origin");
   self.engine_sound playLoopSound("pby_engine_high", 3);
 
   self thread sound_watch_for_engine_high();
@@ -911,7 +911,7 @@ sound_watch_for_engine_high() {
 
     self.new_sound = spawn("script_model", self.origin);
     self.new_sound setModel("tag_origin");
-    self.new_sound LinkTo(self, "tag_origin");
+    self.new_sound linkTo(self, "tag_origin");
     self.new_sound playLoopSound("pby_engine_high", 2);
 
     wait(2);
@@ -930,7 +930,7 @@ sound_watch_for_engine_low() {
 
     self.new_sound = spawn("script_model", self.origin);
     self.new_sound setModel("tag_origin");
-    self.new_sound LinkTo(self, "tag_origin");
+    self.new_sound linkTo(self, "tag_origin");
     self.new_sound playLoopSound("pby_engine_low", 2);
 
     wait(2);
@@ -949,7 +949,7 @@ sound_watch_for_engine_taxi() {
 
     self.new_sound = spawn("script_model", self.origin);
     self.new_sound setModel("tag_origin");
-    self.new_sound LinkTo(self, "tag_origin");
+    self.new_sound linkTo(self, "tag_origin");
     self.new_sound playLoopSound("pby_engine_taxi", 2);
 
     wait(2);
@@ -985,7 +985,7 @@ sound_watch_for_engine_evasive() {
 fake_blister_gunners() {
   self thread fake_blister_gunners_cleanup();
 
-  gunner_spawner = GetEnt(self.plane_name + "_gunner_right", "targetname");
+  gunner_spawner = getEnt(self.plane_name + "_gunner_right", "targetname");
   self.gunner_right = gunner_spawner Stalingradspawn();
   self.gunner_right.animname = "engineer";
   self.gunner_right thread magic_bullet_shield();
@@ -994,7 +994,7 @@ fake_blister_gunners() {
   self.gunner_right.name = undefined;
   gunner_spawner Delete();
 
-  gunner_spawner = GetEnt(self.plane_name + "_gunner_left", "targetname");
+  gunner_spawner = getEnt(self.plane_name + "_gunner_left", "targetname");
   self.gunner_left = gunner_spawner Stalingradspawn();
   self.gunner_left.animname = "engineer";
   self.gunner_left thread magic_bullet_shield();
@@ -1003,8 +1003,8 @@ fake_blister_gunners() {
   self.gunner_left.name = undefined;
   gunner_spawner Delete();
 
-  self.gunner_left LinkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
-  self.gunner_right LinkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
+  self.gunner_left linkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
+  self.gunner_right linkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
   self thread anim_loop_solo(self.gunner_left, "firelloop", "tag_engineer", "stop_gunner_idle");
   self thread anim_loop_solo(self.gunner_right, "look_loop", "tag_engineer", "stop_gunner_idle");
 }
@@ -1207,7 +1207,7 @@ play_sound_over_radio(sound_ref) {
 
   radio = spawn("script_origin", radio_pos);
   radio setModel("tag_origin");
-  radio LinkTo(level.plane_a, "tag_engineer", (0, 0, 0), (0, 0, 0));
+  radio linkTo(level.plane_a, "tag_engineer", (0, 0, 0), (0, 0, 0));
 
   radio playSound(sound_ref, "radio_done");
 
@@ -1353,7 +1353,7 @@ event3(jumpto) {
 event3_triggered_lightning(_wait) {
   level endon("other_zero_no_flash");
   self waittill("lightning_flash");
-  the_direction = VectorNormalize((self.origin[0], self.origin[1], 0) - (level.player.origin[0], level.player.origin[1], 0));
+  the_direction = vectorNormalize((self.origin[0], self.origin[1], 0) - (level.player.origin[0], level.player.origin[1], 0));
   level thread maps\pby_fly_fx::scripted_lightning_flash(undefined, undefined, _wait, the_direction);
   level notify("other_zero_no_flash");
 }
@@ -1634,11 +1634,11 @@ event4_dialogue() {
   level waittill("the_other_gunner_died");
   wait(2);
   Earthquake(0.7, 1.0, level.plane_a.radioop.origin, 1000);
-  playsoundatposition("amb_metal", (0, 0, 0));
+  playSoundAtPosition("amb_metal", (0, 0, 0));
   wait(0.7);
   flag_set("disable_random_dialogue");
   level.plane_a DoDamage(50000, level.plane_a.origin, level.player, 9);
-  playsoundatposition("impact_boom", (0, 0, 0));
+  playSoundAtPosition("impact_boom", (0, 0, 0));
 
   anim_single_solo(level.plane_a.pilot, "booth_damn_were_hit");
   anim_single_solo(level.plane_a.pilot, "booth_laughlin_make_sure_were");
@@ -1764,7 +1764,7 @@ event4_rescue_zeros() {
     last_spline = random_int;
     random_path = plane_paths[random_int];
 
-    plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
+    plane = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
     plane.vehicletype = "zero";
     maps\_vehicle::vehicle_init(plane);
 
@@ -1779,7 +1779,7 @@ event4_rescue_zeros() {
 
     plane.audio_node_propzero = spawn("script_model", plane.origin);
     plane.audio_node_propzero setModel("tag_origin");
-    plane.audio_node_propzero LinkTo(plane, "tag_origin", (0, 0, 0), (0, 0, 0));
+    plane.audio_node_propzero linkTo(plane, "tag_origin", (0, 0, 0), (0, 0, 0));
 
     plane playLoopSound("zero_steady");
     plane thread maps\pby_fly_amb::play_plane_passby(plane);
@@ -1801,7 +1801,7 @@ event4_random_zeros() {
 
     for(i = 0; i < my_random_int; i++) {
       rand_spline = RandomIntRange(0, plane_paths.size - 1);
-      plane[i] = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
+      plane[i] = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
       plane[i].vehicletype = "zero";
       maps\_vehicle::vehicle_init(plane[i]);
 
@@ -1813,7 +1813,7 @@ event4_random_zeros() {
 
       plane[i].audio_node_propzero = spawn("script_model", plane[i].origin);
       plane[i].audio_node_propzero setModel("tag_origin");
-      plane[i].audio_node_propzero LinkTo(plane[i], "tag_origin", (0, 0, 0), (0, 0, 0));
+      plane[i].audio_node_propzero linkTo(plane[i], "tag_origin", (0, 0, 0), (0, 0, 0));
 
       plane[i] playLoopSound("zero_steady");
       plane[i] thread maps\pby_fly_amb::play_plane_passby(plane[i]);
@@ -1876,7 +1876,7 @@ notify_from_notify(my_notify, other_notify) {
 }
 
 event4_corsair_rescue_1() {
-  cor_trig = GetEnt("trig_corsair_rescue_1", "targetname");
+  cor_trig = getEnt("trig_corsair_rescue_1", "targetname");
   cor_trig UseBy(level.player);
 }
 
@@ -1916,12 +1916,12 @@ event4_raft_drones() {
     wait(0.05);
   }
 
-  raft = GetEnt("rescue_1_raft", "targetname");
+  raft = getEnt("rescue_1_raft", "targetname");
   level thread maps\_drone::drone_idle_row_boat(raft_drones, raft);
 
-  goal_struct = GetStruct(raft.target, "targetname");
+  goal_struct = getStruct(raft.target, "targetname");
 
-  raft MoveTo(goal_struct.origin, 60, 10, 10);
+  raft moveTo(goal_struct.origin, 60, 10, 10);
 
   raft_drones_spawn = [];
   raft_drones_spawn = getStructArray("rescue_1_raft_drones_b", "targetname");
@@ -1932,12 +1932,12 @@ event4_raft_drones() {
     wait(0.05);
   }
 
-  raft = GetEnt("rescue_1_raft_b", "targetname");
+  raft = getEnt("rescue_1_raft_b", "targetname");
   level thread maps\_drone::drone_idle_row_boat(raft_drones, raft);
 
-  goal_struct = GetStruct(raft.target, "targetname");
+  goal_struct = getStruct(raft.target, "targetname");
 
-  raft MoveTo(goal_struct.origin, 60, 10, 10);
+  raft moveTo(goal_struct.origin, 60, 10, 10);
 
   raft_drones_spawn = [];
   raft_drones_spawn = getStructArray("rescue_1_raft_drones_c", "targetname");
@@ -1948,12 +1948,12 @@ event4_raft_drones() {
     wait(0.05);
   }
 
-  raft = GetEnt("rescue_1_raft_c", "targetname");
+  raft = getEnt("rescue_1_raft_c", "targetname");
   level thread maps\_drone::drone_idle_row_boat(raft_drones, raft);
 
-  goal_struct = GetStruct(raft.target, "targetname");
+  goal_struct = getStruct(raft.target, "targetname");
 
-  raft MoveTo(goal_struct.origin, 60, 10, 10);
+  raft moveTo(goal_struct.origin, 60, 10, 10);
 }
 
 event4_first_ship_drones() {
@@ -1991,7 +1991,7 @@ event4_kamikaze_ship() {
   level.plane_a waittill("kamikaze_1");
 
   for(i = 1; i < 4; i++) {
-    plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
+    plane = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
     plane.vehicletype = "zero";
     maps\_vehicle::vehicle_init(plane);
 
@@ -2022,7 +2022,7 @@ event4_kamikaze_ship() {
 
   level.plane_a waittill("kamikaze_2");
 
-  plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
+  plane = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
 
@@ -2035,7 +2035,7 @@ event4_kamikaze_ship() {
 }
 
 event4_kamikaze_filler() {
-  plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
+  plane = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
   plane.vehicletype = "zero";
   plane.dont_target = true;
   maps\_vehicle::vehicle_init(plane);
@@ -2054,7 +2054,7 @@ event4_kamikaze_filler() {
   crash_paths[1] = GetVehicleNode("zero_attack_filler_1", "targetname");
 
   for(i = 0; i < crash_paths.size; i++) {
-    plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
+    plane = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
     plane.vehicletype = "zero";
     maps\_vehicle::vehicle_init(plane);
 
@@ -2069,14 +2069,14 @@ event4_kamikaze_ship_response() {
   level endon("stop_shooting_at_kamikazes");
 
   ship_gun_1 = [];
-  ship_gun_1[0] = GetStruct("kamikaze_bullet_1_start", "targetname");
-  ship_gun_1[1] = GetStruct("kamikaze_bullet_1_end", "targetname");
+  ship_gun_1[0] = getStruct("kamikaze_bullet_1_start", "targetname");
+  ship_gun_1[1] = getStruct("kamikaze_bullet_1_end", "targetname");
   ship_gun_2 = [];
-  ship_gun_2[0] = GetStruct("kamikaze_bullet_2_start", "targetname");
-  ship_gun_2[1] = GetStruct("kamikaze_bullet_2_end", "targetname");
+  ship_gun_2[0] = getStruct("kamikaze_bullet_2_start", "targetname");
+  ship_gun_2[1] = getStruct("kamikaze_bullet_2_end", "targetname");
   ship_gun_3 = [];
-  ship_gun_3[0] = GetStruct("kamikaze_bullet_3_start", "targetname");
-  ship_gun_3[1] = GetStruct("kamikaze_bullet_3_end", "targetname");
+  ship_gun_3[0] = getStruct("kamikaze_bullet_3_start", "targetname");
+  ship_gun_3[1] = getStruct("kamikaze_bullet_3_end", "targetname");
 }
 
 event4_fire_response_gun(start, end) {
@@ -2095,8 +2095,8 @@ event4_fire_response_gun(start, end) {
 
 event4_fleet_shoot() {
   ships = [];
-  ships[0] = GetEnt("kamikazed_ship", "targetname");
-  ships[1] = GetEnt("ship_number_2", "targetname");
+  ships[0] = getEnt("kamikazed_ship", "targetname");
+  ships[1] = getEnt("ship_number_2", "targetname");
 
   ships[0] thread fletcher_ai_biggun_think(ships[0].turret_1, ships[0].turret_1_barrel);
   ships[0] thread fletcher_ai_biggun_think(ships[0].turret_2, ships[0].turret_2_barrel);
@@ -2112,8 +2112,8 @@ event4_fleet_shoot() {
   ships[0] notify("stop_big_guns");
   ships[1] notify("stop_big_guns");
 
-  ships[2] = GetEnt("rescue_3_fletcher", "targetname");
-  ships[3] = GetEnt("rescue_3_fletcher_b", "targetname");
+  ships[2] = getEnt("rescue_3_fletcher", "targetname");
+  ships[3] = getEnt("rescue_3_fletcher_b", "targetname");
 
   ships[2] thread fletcher_ai_biggun_think(ships[2].turret_1, ships[2].turret_1_barrel);
   ships[2] thread fletcher_ai_biggun_think(ships[2].turret_2, ships[2].turret_2_barrel);
@@ -2148,18 +2148,18 @@ event4_kamikaze_path_explode(water) {
 }
 
 event4_kamikaze_end_fx() {
-  kamikaze_trigger = GetEnt("kamikaze_trigger", "targetname");
+  kamikaze_trigger = getEnt("kamikaze_trigger", "targetname");
   kamikaze_trigger waittill("trigger");
 }
 
 event4_sinking_ship() {
-  the_ship = GetEnt("sinking_ship", "targetname");
-  the_pivot = GetEnt("sinking_ship_pivot", "targetname");
+  the_ship = getEnt("sinking_ship", "targetname");
+  the_pivot = getEnt("sinking_ship_pivot", "targetname");
 
-  the_ship LinkTo(the_pivot);
+  the_ship linkTo(the_pivot);
 
   level notify("the_ship_is_sinking");
-  the_pivot RotateTo(the_pivot.angles + (-60, 0, 0), 90, 1, 1);
+  the_pivot rotateTo(the_pivot.angles + (-60, 0, 0), 90, 1, 1);
 }
 
 event4_part2point5_fake_deaths() {
@@ -2224,9 +2224,9 @@ event4_part3() {
 
   level.plane_a waittill("stall_node");
 
-  fletcher = GetEnt("ship_number_2", "targetname");
+  fletcher = getEnt("ship_number_2", "targetname");
   fletcher notify("stop firing");
-  fletcher = GetEnt("kamikazed_ship", "targetname");
+  fletcher = getEnt("kamikazed_ship", "targetname");
   fletcher notify("stop firing");
 
   new_fletcher = swap_model_for_fletcher("rescue_3_fletcher_c");
@@ -2289,7 +2289,7 @@ event4_pby_crashing() {
   plane_b_fake UseAnimTree(#animtree);
 
   level.plane_b.engine_fire Unlink();
-  level.plane_b.engine_fire LinkTo(plane_b_fake, "prop_right_jnt");
+  level.plane_b.engine_fire linkTo(plane_b_fake, "prop_right_jnt");
   plane_b_fake.engine_fire = level.plane_b.engine_fire;
 
   level.plane_b Hide();
@@ -2310,7 +2310,7 @@ event4_pby_crashing() {
 
   plane_b_fake.wing_sound_ent = spawn("script_model", plane_b_fake GetTagOrigin("pontoon_right_jnt"));
   plane_b_fake.wing_sound_ent setModel("tag_origin");
-  plane_b_fake.wing_sound_ent LinkTo(plane_b_fake, "pontoon_right_jnt");
+  plane_b_fake.wing_sound_ent linkTo(plane_b_fake, "pontoon_right_jnt");
 
   plane_b_fake thread anim_single_solo(plane_b_fake, "crash2");
 
@@ -2356,17 +2356,17 @@ spawn_and_path_a_ptboat(path, end_on_end, fire_on_drones, destructible_def, new_
   if(isDefined(destructible_def)) {
     random_destructdef = "dest_ptboat_rescue" + RandomIntRange(1, 4);
     if(isDefined(new_targetname)) {
-      the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", new_targetname, "jap_ptboat", (0, 0, 0), (0, 0, 0), random_destructdef);
+      the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", new_targetname, "jap_ptboat", (0, 0, 0), (0, 0, 0), random_destructdef);
     } else {
-      the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0), random_destructdef);
+      the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0), random_destructdef);
     }
     the_ptboat thread ptboat_torpedo_watch();
     the_ptboat.cycle_time = 1.5;
   } else {
     if(isDefined(new_targetname)) {
-      the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", new_targetname, "jap_ptboat", (0, 0, 0), (0, 0, 0));
+      the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", new_targetname, "jap_ptboat", (0, 0, 0), (0, 0, 0));
     } else {
-      the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+      the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     }
   }
 
@@ -2395,7 +2395,7 @@ spawn_and_path_a_ptboat(path, end_on_end, fire_on_drones, destructible_def, new_
 }
 
 spawn_and_path_a_shark(path) {
-  the_shark = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+  the_shark = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_shark.vehicletype = "jap_ptboat";
   the_shark.im_a_shark = true;
 
@@ -2439,7 +2439,7 @@ ptboat_torpedo_watch() {
 }
 
 spawn_and_path_a_zero(path, kamikaze_explode, have_sound, damage_at_pathend, no_explode, water) {
-  plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
+  plane = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
 
@@ -2463,7 +2463,7 @@ spawn_and_path_a_zero(path, kamikaze_explode, have_sound, damage_at_pathend, no_
   if(isDefined(have_sound)) {
     plane.audio_node_propzero = spawn("script_model", plane.origin);
     plane.audio_node_propzero setModel("tag_origin");
-    plane.audio_node_propzero LinkTo(plane, "tag_origin", (0, 0, 0), (0, 0, 0));
+    plane.audio_node_propzero linkTo(plane, "tag_origin", (0, 0, 0), (0, 0, 0));
 
     plane playLoopSound("zero_steady");
   }
@@ -2482,7 +2482,7 @@ spawn_and_attach_shark() {
   shark setModel("greatwhite_shark");
   shark.angles = self.angles + (90, 0, 0);
 
-  shark LinkTo(self);
+  shark linkTo(self);
   self Hide();
 }
 
@@ -2494,7 +2494,7 @@ damage_at_end_of_path(dmg_amnt, dmg_notify) {
 }
 
 spawn_and_path_a_corsair(path, shoot_my_turret_delay) {
-  plane = SpawnVehicle("vehicle_usa_aircraft_f4ucorsair", "new_plane", "corsair", (0, 0, 0), (0, 0, 0));
+  plane = spawnVehicle("vehicle_usa_aircraft_f4ucorsair", "new_plane", "corsair", (0, 0, 0), (0, 0, 0));
   plane.vehicletype = "corsair";
   maps\_vehicle::vehicle_init(plane);
 
@@ -2510,7 +2510,7 @@ spawn_and_path_a_corsair(path, shoot_my_turret_delay) {
 
   plane.audio_node_propzero = spawn("script_model", plane.origin);
   plane.audio_node_propzero setModel("tag_origin");
-  plane.audio_node_propzero LinkTo(plane, "tag_prop", (0, 0, 0), (0, 0, 0));
+  plane.audio_node_propzero linkTo(plane, "tag_prop", (0, 0, 0), (0, 0, 0));
 
   plane playLoopSound("zero_steady");
   plane thread maps\pby_fly_amb::play_zero_sounds(level.plane_a, level.plane_b);
@@ -3010,7 +3010,7 @@ rescue_scenario() {
     wait(0.5);
 
     self Show();
-    self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+    self linkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
 
     self.animname = "rescue_a_4";
     self.plane thread anim_loop_solo(self, "my_idle", "tag_engineer");
@@ -3019,7 +3019,7 @@ rescue_scenario() {
     wait(0.5);
 
     self Show();
-    self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+    self linkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
 
     self.animname = "rescue_a_3";
     self.plane thread anim_loop_solo(self, "my_idle", "tag_engineer");
@@ -3028,7 +3028,7 @@ rescue_scenario() {
     wait(0.5);
 
     self Show();
-    self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+    self linkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
 
     level.crash_guy = self;
     self.animname = "rescue_a_1";
@@ -3038,7 +3038,7 @@ rescue_scenario() {
     wait(0.5);
 
     self Show();
-    self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+    self linkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
 
     self.animname = "rescue_a_2";
     self.plane thread anim_loop_solo(self, "my_idle", "tag_engineer");
@@ -3072,7 +3072,7 @@ play_rescue_animation(plane, side) {
 
   player_hands.origin = startorg;
   player_hands.angles = startang;
-  player_hands LinkTo(plane, "origin_animate_jnt");
+  player_hands linkTo(plane, "origin_animate_jnt");
 
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
@@ -3119,19 +3119,19 @@ rescue_scene_init_1() {
   surv_spawners = [];
   level.survivors_group_1 = [];
 
-  surv_spawners[0] = GetEnt("survivor_rescue_1_0_a", "targetname");
-  surv_spawners[1] = GetEnt("survivor_rescue_1_0_b", "targetname");
-  surv_spawners[2] = GetEnt("survivor_rescue_1_0_c", "targetname");
-  surv_spawners[3] = GetEnt("survivor_rescue_1_0_d", "targetname");
-  surv_spawners[4] = GetEnt("survivor_rescue_1_0_e", "targetname");
-  surv_spawners[5] = GetEnt("survivor_rescue_1_0_f", "targetname");
-  surv_spawners[6] = GetEnt("survivor_rescue_1_0_g", "targetname");
-  surv_spawners[7] = GetEnt("survivor_rescue_1_0_h", "targetname");
-  surv_spawners[8] = GetEnt("survivor_rescue_1_0_i", "targetname");
-  surv_spawners[9] = GetEnt("survivor_rescue_1_0_j", "targetname");
-  surv_spawners[10] = GetEnt("survivor_rescue_1_0_k", "targetname");
-  surv_spawners[11] = GetEnt("survivor_rescue_1_0_l", "targetname");
-  surv_spawners[12] = GetEnt("survivor_rescue_1_0_m", "targetname");
+  surv_spawners[0] = getEnt("survivor_rescue_1_0_a", "targetname");
+  surv_spawners[1] = getEnt("survivor_rescue_1_0_b", "targetname");
+  surv_spawners[2] = getEnt("survivor_rescue_1_0_c", "targetname");
+  surv_spawners[3] = getEnt("survivor_rescue_1_0_d", "targetname");
+  surv_spawners[4] = getEnt("survivor_rescue_1_0_e", "targetname");
+  surv_spawners[5] = getEnt("survivor_rescue_1_0_f", "targetname");
+  surv_spawners[6] = getEnt("survivor_rescue_1_0_g", "targetname");
+  surv_spawners[7] = getEnt("survivor_rescue_1_0_h", "targetname");
+  surv_spawners[8] = getEnt("survivor_rescue_1_0_i", "targetname");
+  surv_spawners[9] = getEnt("survivor_rescue_1_0_j", "targetname");
+  surv_spawners[10] = getEnt("survivor_rescue_1_0_k", "targetname");
+  surv_spawners[11] = getEnt("survivor_rescue_1_0_l", "targetname");
+  surv_spawners[12] = getEnt("survivor_rescue_1_0_m", "targetname");
 
   for(i = 0; i < surv_spawners.size; i++) {
     level.survivors_group_1[i] = surv_spawners[i] Stalingradspawn();
@@ -3163,7 +3163,7 @@ event4_rescue_1_ambient_flee_pt() {
 
   for(i = 0; i < level.amb_surv_group_1.size; i++) {
     level.amb_surv_group_1[i] notify("stop treading");
-    level.amb_surv_group_1[i] StopAnimScripted();
+    level.amb_surv_group_1[i] StopanimScripted();
     level.amb_surv_group_1[i].goal_radius = 32;
     level.amb_surv_group_1[i] SetGoalPos(goal_structs[i].origin);
   }
@@ -3173,11 +3173,11 @@ rescue_scene_init_2() {
   surv_spawners = [];
   level.survivors_group_2 = [];
 
-  surv_spawners[0] = GetEnt("survivor_rescue_2_a", "targetname");
-  surv_spawners[1] = GetEnt("survivor_rescue_2_b", "targetname");
-  surv_spawners[2] = GetEnt("survivor_rescue_2_c", "targetname");
-  surv_spawners[3] = GetEnt("survivor_rescue_2_d", "targetname");
-  surv_spawners[4] = GetEnt("survivor_rescue_2_e", "targetname");
+  surv_spawners[0] = getEnt("survivor_rescue_2_a", "targetname");
+  surv_spawners[1] = getEnt("survivor_rescue_2_b", "targetname");
+  surv_spawners[2] = getEnt("survivor_rescue_2_c", "targetname");
+  surv_spawners[3] = getEnt("survivor_rescue_2_d", "targetname");
+  surv_spawners[4] = getEnt("survivor_rescue_2_e", "targetname");
 
   for(i = 0; i < surv_spawners.size; i++) {
     level.survivors_group_2[i] = surv_spawners[i] Stalingradspawn();
@@ -3208,7 +3208,7 @@ shark_init() {
   self.shark = spawn("script_model", self.origin + (0, 0, 200));
   self.shark setModel("greatwhite_shark2");
 
-  self.shark LinkTo(self, "tag_origin", (0, 0, 500), (0, 0, 0));
+  self.shark linkTo(self, "tag_origin", (0, 0, 500), (0, 0, 0));
 
   self.shark UseAnimTree(#animtree);
   self.shark.animname = "shark";
@@ -3277,7 +3277,7 @@ survivor_init(plane, group, id, alternate_goal_pos, needs_to_run) {
   self notify("inited");
   self waittill("swimming_notify");
 
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self.goalradius = 24;
   goal_pos = (0, 0, 0);
@@ -3444,8 +3444,8 @@ survivor_hang_on() {
 
   self.switch_screams = true;
 
-  self StopAnimScripted();
-  self LinkTo(self.plane, self.rescue_tag);
+  self StopanimScripted();
+  self linkTo(self.plane, self.rescue_tag);
   self.plane anim_single_solo(self, self.in_anim, self.rescue_tag);
 
   self thread survivor_fall_timer(10);
@@ -3777,7 +3777,7 @@ event6_seat_control() {
   level.player scripted_turret_switch("pby_rightgun", true);
 }
 player_pby_init(plane_name, crew_id) {
-  plane = GetEnt(plane_name, "targetname");
+  plane = getEnt(plane_name, "targetname");
   plane.plane_name = plane_name;
   plane.crew_id = crew_id;
 
@@ -3846,7 +3846,7 @@ zero_spin_prop() {
 pby_crew_init(plane_name) {
   if(plane_name == "player_plane_a") {
     pby_ok_to_spawn("ai");
-    pilot_spawner = GetEnt(self.plane_name + "_pilot", "targetname");
+    pilot_spawner = getEnt(self.plane_name + "_pilot", "targetname");
     self.pilot = pilot_spawner Stalingradspawn();
 
     self.pilot.animname = "pilot";
@@ -3857,7 +3857,7 @@ pby_crew_init(plane_name) {
     pilot_spawner Delete();
 
     pby_ok_to_spawn("ai");
-    copilot_spawner = GetEnt(self.plane_name + "_copilot", "targetname");
+    copilot_spawner = getEnt(self.plane_name + "_copilot", "targetname");
     self.copilot = copilot_spawner Stalingradspawn();
 
     self.copilot.animname = "copilot";
@@ -3868,7 +3868,7 @@ pby_crew_init(plane_name) {
     copilot_spawner Delete();
 
     pby_ok_to_spawn("ai");
-    radioop_spawner = GetEnt(self.plane_name + "_radioop", "targetname");
+    radioop_spawner = getEnt(self.plane_name + "_radioop", "targetname");
     self.radioop = radioop_spawner Stalingradspawn();
 
     self.radioop.animname = "radio_op";
@@ -3880,9 +3880,9 @@ pby_crew_init(plane_name) {
   }
 
   if(plane_name == "player_plane_a") {
-    engineer_spawner = GetEnt(self.plane_name + "_engineer", "targetname");
+    engineer_spawner = getEnt(self.plane_name + "_engineer", "targetname");
     self.engineer = engineer_spawner Stalingradspawn();
-    self.engineer LinkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
+    self.engineer linkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
     self.engineer.animname = "engineer";
     self.engineer thread magic_bullet_shield();
     self.engineer animscripts\shared::placeWeaponOn(self.engineer.weapon, "none");
@@ -3894,13 +3894,13 @@ pby_crew_init(plane_name) {
 
 pby_crew_idles() {
   self thread anim_loop_solo(self.pilot, "my_idle", "tag_engineer", "stop_pilot_idling");
-  self.pilot LinkTo(self, "tag_engineer");
+  self.pilot linkTo(self, "tag_engineer");
 
   self thread anim_loop_solo(self.copilot, "my_idle", "tag_engineer", "stop_copilot_idling");
-  self.copilot LinkTo(self, "tag_engineer");
+  self.copilot linkTo(self, "tag_engineer");
 
   self thread anim_loop_solo(self.radioop, "my_idle_rad", "tag_engineer", "stop_radioop_idling");
-  self.radioop LinkTo(self, "tag_engineer");
+  self.radioop linkTo(self, "tag_engineer");
   self.radioop.status = "idle_at_rad";
 }
 turret_switch_watch() {
@@ -4124,7 +4124,7 @@ play_transition_animation(plane, anim_str, direction) {
 
   player_hands.origin = startorg;
   player_hands.angles = startang;
-  player_hands LinkTo(plane, "origin_animate_jnt");
+  player_hands linkTo(plane, "origin_animate_jnt");
 
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
@@ -4588,7 +4588,7 @@ pby_damage_nose_glass() {
 
       if(attacker.classname != "worldspawn" && attacker.vehicletype == "zero") {
         self_forward = anglesToForward(level.plane_a.angles);
-        player_dir = VectorNormalize(attacker.origin - level.player.origin);
+        player_dir = vectorNormalize(attacker.origin - level.player.origin);
         angle = VectorDot(self_forward, player_dir);
 
         if(angle < 0.4) {
@@ -4899,7 +4899,7 @@ spawn_bullet_hole_entity(model) {
   bullet_hole_model setModel(model);
   bullet_hole_model.origin = self GetTagOrigin("origin_animate_jnt");
   bullet_hole_model.angles = self GetTagAngles("origin_animate_jnt");
-  bullet_hole_model LinkTo(self, "origin_animate_jnt");
+  bullet_hole_model linkTo(self, "origin_animate_jnt");
 
   return bullet_hole_model;
 }
@@ -4909,7 +4909,7 @@ pby_running_lights() {
   self.running_lights setModel("tag_origin");
   self.running_lights.angles = self GetTagAngles("tag_origin");
 
-  self.running_lights LinkTo(self, "origin_animate_jnt");
+  self.running_lights linkTo(self, "origin_animate_jnt");
 
   playFXOnTag(level._effect["pby_running_lights"], self.running_lights, "tag_origin");
 }
@@ -5501,7 +5501,7 @@ zero_death_thread() {
 
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
-        self.intermediate_damage LinkTo(crashing_plane);
+        self.intermediate_damage linkTo(crashing_plane);
       }
 
       roll_direction = RandomInt(2);
@@ -5529,7 +5529,7 @@ zero_death_thread() {
 
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
-        self.intermediate_damage LinkTo(crashing_plane);
+        self.intermediate_damage linkTo(crashing_plane);
       }
 
       right_wing_position = self GetTagOrigin("tag_attach_wing_RI");
@@ -5561,7 +5561,7 @@ zero_death_thread() {
 
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
-        self.intermediate_damage LinkTo(crashing_plane);
+        self.intermediate_damage linkTo(crashing_plane);
       }
 
       left_wing_position = self GetTagOrigin("tag_attach_wing_LE");
@@ -5593,7 +5593,7 @@ zero_death_thread() {
 
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
-        self.intermediate_damage LinkTo(crashing_plane);
+        self.intermediate_damage linkTo(crashing_plane);
       }
 
       crashing_plane MoveGravity(anglesToForward(self.angles) * self getspeed(), 5);
@@ -5616,7 +5616,7 @@ zero_death_thread() {
 
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
-        self.intermediate_damage LinkTo(crashing_plane);
+        self.intermediate_damage linkTo(crashing_plane);
       }
 
       random_delay = RandomFloatRange(1, 2);
@@ -5640,7 +5640,7 @@ zero_death_thread() {
       playFX(level._effect["zero_final_explode"], crashing_plane.origin);
 
       Earthquake(1, .3, crashing_plane.origin, 1000);
-      playsoundatposition("amb_metal", (0, 0, 0));
+      playSoundAtPosition("amb_metal", (0, 0, 0));
       if(distancesquared(crashing_plane.origin, level.player.origin) < 500 * 500) {
         level notify("suggest close hit");
       }
@@ -5698,11 +5698,11 @@ zero_death_thread_water_hit(crashing_plane) {
     level notify("suggest close hit");
   }
 
-  crashing_plane MoveTo(crashing_plane.origin, 0.05);
-  crashing_plane RotateTo(crashing_plane.angles, 0.05);
+  crashing_plane moveTo(crashing_plane.origin, 0.05);
+  crashing_plane rotateTo(crashing_plane.angles, 0.05);
   random_wait = RandomFloatRange(1, 3);
   wait(random_wait);
-  crashing_plane MoveTo(crashing_plane.origin - (0, 0, 200), 7, 1, 1);
+  crashing_plane moveTo(crashing_plane.origin - (0, 0, 200), 7, 1, 1);
 }
 
 merchant_ship_init() {
@@ -5729,7 +5729,7 @@ ptboat_setup_driver() {
     self.driver.origin = driver_pos - (0, 0, 48);
     self.driver.angles = driver_ang;
 
-    self.driver LinkTo(self);
+    self.driver linkTo(self);
 
     self.driver maps\_drone::drone_play_anim(level.scr_anim["ptboatdriver"]["idle"]);
   }
@@ -5772,7 +5772,7 @@ merchant_boat_sink_me() {
   self.kill_sound = spawn("script_model", self.origin);
   self.kill_sound setModel("tag_origin");
   self.kill_sound.origin = self.origin + (0, 0, 400);
-  self.kill_sound LinkTo(self);
+  self.kill_sound linkTo(self);
   self.kill_sound playSound("merch_death_blow");
 
   self thread boat_groaning_sounds();
@@ -5803,7 +5803,7 @@ boat_groaning_sounds() {
 
   random_wait = 0;
   while(isDefined(self)) {
-    PlaySoundAtPosition("merch_death_groans", self.origin + (0, 0, 750));
+    playSoundAtPosition("merch_death_groans", self.origin + (0, 0, 750));
     random_wait = RandomIntRange(3, 4);
     wait(random_wait);
   }
@@ -5817,7 +5817,7 @@ spawn_secondary_fire_fx() {
 event4_kamikaze_ship_animation() {
   self waittill("reached_end_node");
 
-  ship_ent = GetEnt("kamikazed_ship", "targetname");
+  ship_ent = getEnt("kamikazed_ship", "targetname");
   ship_ent.animname = "fletcher";
   ship_ent UseAnimTree(#animtree);
   ship_ent anim_single_solo(ship_ent, "plane_impact");
@@ -5855,13 +5855,13 @@ pt_boat_init() {
     pby_ok_to_spawn("ptboat");
     self.wake_audio = spawn("script_model", self.origin);
     self.wake_audio setModel("tag_origin");
-    self.wake_audio LinkTo(self, "tag_wake_fx", (0, 0, 0), (0, 0, 0));
+    self.wake_audio linkTo(self, "tag_wake_fx", (0, 0, 0), (0, 0, 0));
     self.wake_audio playLoopSound("pt_wake");
 
     pby_ok_to_spawn("ptboat");
     self.engine_audio = spawn("script_model", self.origin);
     self.engine_audio setModel("tag_origin");
-    self.engine_audio LinkTo(self, "tag_engine_left", (0, 0, 0), (0, 0, 0));
+    self.engine_audio linkTo(self, "tag_engine_left", (0, 0, 0), (0, 0, 0));
     self.engine_audio playLoopSound("pt_engine");
   }
 
@@ -5871,7 +5871,7 @@ pt_boat_init() {
     self.running_lights setModel("tag_origin");
     self.running_lights.origin = self GetTagOrigin("origin_animate_jnt");
     self.running_lights.angles = self GetTagAngles("origin_animate_jnt");
-    self.running_lights LinkTo(self);
+    self.running_lights linkTo(self);
     playFXOnTag(level._effect["pt_running_lights"], self.running_lights, "tag_origin");
   }
 }
@@ -6079,7 +6079,7 @@ ai_ptboat_spotlight_think() {
       spot_light_target = self.specific_target;
     }
 
-    self setgunnertargetent(spot_light_target, (0, 0, 0), 1);
+    self setgunnertargetEnt(spot_light_target, (0, 0, 0), 1);
 
     if(!isDefined(self.specific_target)) {
       wait(2);
@@ -6197,12 +6197,12 @@ ai_ptboat_turret_think(drone_type) {
       gun_actual_target = gun_origin + (gun_forward * 20);
 
       if(target == level.plane_a) {
-        player_dir = VectorNormalize(level.player.origin - gun_origin);
+        player_dir = vectorNormalize(level.player.origin - gun_origin);
       } else {
-        player_dir = VectorNormalize(target.origin - gun_origin);
+        player_dir = vectorNormalize(target.origin - gun_origin);
       }
 
-      gun_aim_dir = VectorNormalize(gun_actual_target - gun_origin);
+      gun_aim_dir = vectorNormalize(gun_actual_target - gun_origin);
 
       if(VectorDot(player_dir, gun_aim_dir) > .6) {
         self firegunnerweapon(0);
@@ -6344,7 +6344,7 @@ pt_boat_death_thread() {
       self.sinking_boat.linked_ent setModel("tag_origin");
       self.sinking_boat.linked_ent.angles = self.sinking_boat.angles;
 
-      self.sinking_boat LinkTo(self.sinking_boat.linked_ent);
+      self.sinking_boat linkTo(self.sinking_boat.linked_ent);
 
       self Hide();
 
@@ -6434,7 +6434,7 @@ shinyo_boat_init() {
   self.spot_light setModel("tag_origin");
   self.spot_light.origin = self.origin + (anglesToForward(self.angles) * 100) + (AnglesToUp(self.angles) * 20);
   self.spot_light.angles = anglesToForward(self.angles);
-  self.spot_light LinkTo(self, "tag_origin");
+  self.spot_light linkTo(self, "tag_origin");
   playFXOnTag(level._effect["pt_light"], self.spot_light, "tag_origin");
 }
 
@@ -6676,14 +6676,14 @@ jumpto_event6() {
 run_special_debug_functions() {}
 
 dbg_training_planes() {
-  my_trig = GetEnt("debug_training_target", "targetname");
+  my_trig = getEnt("debug_training_target", "targetname");
   my_trig waittill("trigger");
 
   wait(1);
 
-  plane0 = GetEnt("training_plane_0", "targetname");
-  plane1 = GetEnt("training_plane_1", "targetname");
-  plane2 = GetEnt("training_plane_2", "targetname");
+  plane0 = getEnt("training_plane_0", "targetname");
+  plane1 = getEnt("training_plane_1", "targetname");
+  plane2 = getEnt("training_plane_2", "targetname");
 
   plane0 thread dbg_plane_taking_damage();
   plane1 thread dbg_plane_taking_damage();
@@ -6708,7 +6708,7 @@ dbg_plane_taking_damage() {
 event2_boat_fx() {
   level.boats = [];
   for(i = 0; i < 3; i++) {
-    level.boats[i] = GetEnt("ev2_ship_" + i, "targetname");
+    level.boats[i] = getEnt("ev2_ship_" + i, "targetname");
   }
 
   for(i = 0; i < level.boats.size; i++) {
@@ -6785,7 +6785,7 @@ debris_float_away() {
     distance_to_move = time_to_move * current_speed;
 
     y = RandomIntRange(-30, 30);
-    self MoveTo(self.origin - (distance_to_move, y, 0), time_to_move, 0.05, 0.5);
+    self moveTo(self.origin - (distance_to_move, y, 0), time_to_move, 0.05, 0.5);
     wait(time_to_move);
 
     total_movement = total_movement + distance_to_move;
@@ -6814,7 +6814,7 @@ drones_float_away() {
     distance_to_move = time_to_move * current_speed;
 
     y = RandomIntRange(-30, 30);
-    self MoveTo(self.origin - (distance_to_move, y, 0), time_to_move, 0.05, 0.5);
+    self moveTo(self.origin - (distance_to_move, y, 0), time_to_move, 0.05, 0.5);
     wait(time_to_move);
 
     total_movement = total_movement + distance_to_move;
@@ -7055,7 +7055,7 @@ event2_strafe_boats_force_player_play() {
 
   wait(1);
   playFX(level._effect["flak_one_shot"], level.player.origin + (anglesToForward(level.plane_a.angles) * 50));
-  get_players()[0] PlayRumbleOnEntity("damage_heavy");
+  get_players()[0] playRumbleOnEntity("damage_heavy");
   wait(0.2);
   get_players()[0] DisableInvulnerability();
   wait(0.05);
@@ -7169,11 +7169,11 @@ attach_boat_destructibles() {
   dest_array_bow = getEntArray(self.scriptname + "_dest_bow", "targetname");
 
   for(i = 0; i < dest_array_aft.size; i++) {
-    dest_array_aft[i] LinkTo(self, "aft_break_jnt");
+    dest_array_aft[i] linkTo(self, "aft_break_jnt");
   }
 
   for(i = 0; i < dest_array_bow.size; i++) {
-    dest_array_bow[i] LinkTo(self, "bow_break_jnt");
+    dest_array_bow[i] linkTo(self, "bow_break_jnt");
   }
 }
 
@@ -7492,7 +7492,7 @@ event2_flak_shake() {
 
   while(true) {
     Earthquake(.3, 1.0, level.plane_a.origin, 1000);
-    playsoundatposition("amb_metal", (0, 0, 0));
+    playSoundAtPosition("amb_metal", (0, 0, 0));
 
     rand = RandomFloatRange(1.0, 2.5);
 
@@ -7514,7 +7514,7 @@ event2_flak_front_of_plane(guy) {
   fx_org = level.plane_a.origin + (anglesToForward(level.plane_a.angles) * 320) + (AnglesToRight(level.plane_a.angles) * 38) + (AnglesToUp(level.plane_a.angles) * 146);
   Earthquake(1, .5, level.plane_a.origin, 1000);
   playFX(level._effect["flak_one_shot"], fx_org);
-  playsoundatposition("amb_metal", (0, 0, 0));
+  playSoundAtPosition("amb_metal", (0, 0, 0));
   level.plane_a DoDamage(4000, level.plane_a.origin, level.player, 16);
   level.plane_a DoDamage(4000, level.plane_a.origin, level.player, 16);
 }
@@ -7531,7 +7531,7 @@ event2_pby_b_1st_pass() {
 
   level.plane_b.zoom_by = spawn("script_model", level.plane_b.origin);
   level.plane_b.zoom_by setModel("tag_origin");
-  level.plane_b.zoom_by LinkTo(level.plane_b, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.plane_b.zoom_by linkTo(level.plane_b, "tag_origin", (0, 0, 0), (0, 0, 0));
   flyby_sound = "pby_3p_by_1";
   level.plane_b.zoom_by playSound(flyby_sound);
 
@@ -7576,7 +7576,7 @@ event2_ptboat_1st_pass() {
   the_ptboats = [];
 
   pby_ok_to_spawn("ptboat");
-  the_ptboats[0] = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+  the_ptboats[0] = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboats[0].vehicletype = "jap_ptboat";
   maps\_vehicle::vehicle_init(the_ptboats[0]);
   the_ptboats[0] AttachPath(ptboat_paths[0]);
@@ -7585,7 +7585,7 @@ event2_ptboat_1st_pass() {
   the_ptboats[0].fake_motion = true;
 
   pby_ok_to_spawn("ptboat");
-  the_ptboats[1] = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+  the_ptboats[1] = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboats[1].vehicletype = "jap_ptboat";
   maps\_vehicle::vehicle_init(the_ptboats[1]);
   the_ptboats[1] AttachPath(ptboat_paths[1]);
@@ -7616,7 +7616,7 @@ event2_ptboat_1st_pass() {
   ptboat_paths[0] = GetVehicleNode("first_pass_pt_boat_1", "targetname");
 
   pby_ok_to_spawn("ptboat");
-  the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+  the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboat.vehicletype = "jap_ptboat";
   maps\_vehicle::vehicle_init(the_ptboat);
   the_ptboat AttachPath(ptboat_paths[0]);
@@ -7641,7 +7641,7 @@ event2_ptboat_2nd_pass() {
 
   the_ptboat = undefined;
 
-  the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+  the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboat.vehicletype = "jap_ptboat";
   maps\_vehicle::vehicle_init(the_ptboat);
   the_ptboat AttachPath(ptboat_paths[0]);
@@ -7662,7 +7662,7 @@ event2_ptboat_2nd_pass() {
   ptboat_paths[7] = GetVehicleNode("second_pass_pt_boat_7", "targetname");
 
   for(i = 0; i < ptboat_paths.size; i++) {
-    the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+    the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
     maps\_vehicle::vehicle_init(the_ptboat);
     the_ptboat AttachPath(ptboat_paths[i]);
@@ -7684,7 +7684,7 @@ event2_ptboat_3rd_pass() {
   the_ptboat = undefined;
 
   for(i = 0; i < ptboat_paths.size; i++) {
-    the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+    the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
     maps\_vehicle::vehicle_init(the_ptboat);
     the_ptboat AttachPath(ptboat_paths[i]);
@@ -7710,7 +7710,7 @@ event2_ptboats_4th_pass() {
   the_ptboat = undefined;
 
   for(i = 0; i < ptboat_paths.size; i++) {
-    the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+    the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
     maps\_vehicle::vehicle_init(the_ptboat);
     the_ptboat AttachPath(ptboat_paths[i]);
@@ -7772,7 +7772,7 @@ event2_falling_animation() {
 
   player_hands.origin = startorg;
   player_hands.angles = startang;
-  player_hands LinkTo(plane, "origin_animate_jnt");
+  player_hands linkTo(plane, "origin_animate_jnt");
 
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
@@ -7784,7 +7784,7 @@ event2_falling_animation() {
 
   self playSound("flak_int_boom");
   self shellshock("pby_flak", 5);
-  level.player PlayRumbleOnEntity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   plane maps\_anim::anim_single_solo(player_hands, "bank_fall");
 
   plane thread maps\_anim::anim_loop_solo(player_hands, "bank_loop", "origin_animate_jnt", "stop_hand_loop");
@@ -7815,7 +7815,7 @@ play_sitdown_animation() {
 
   player_hands.origin = startorg;
   player_hands.angles = startang;
-  player_hands LinkTo(plane, "origin_animate_jnt");
+  player_hands linkTo(plane, "origin_animate_jnt");
 
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
@@ -7884,7 +7884,7 @@ event2_setup_first_ship_drones() {
 event2_setup_first_ship_drones_flee() {
   fleeing_drones_spawn = [];
   for(i = 0; i < 4; i++) {
-    fleeing_drones_spawn[i] = GetStruct("boat_1_firstshot_flee_drone_" + i, "targetname");
+    fleeing_drones_spawn[i] = getStruct("boat_1_firstshot_flee_drone_" + i, "targetname");
   }
 
   fleeing_drones = [];
@@ -7902,10 +7902,10 @@ event2_setup_first_ship_drones_flee() {
   level.plane_b waittill("taking_first_shots");
 
   path = [];
-  path[0] = GetStruct("boat_1_path_flee_first_shot_0", "targetname");
-  path[1] = GetStruct("boat_1_path_flee_first_shot_0", "targetname");
-  path[2] = GetStruct("boat_1_path_flee_first_shot_1", "targetname");
-  path[3] = GetStruct("boat_1_path_flee_first_shot_1", "targetname");
+  path[0] = getStruct("boat_1_path_flee_first_shot_0", "targetname");
+  path[1] = getStruct("boat_1_path_flee_first_shot_0", "targetname");
+  path[2] = getStruct("boat_1_path_flee_first_shot_1", "targetname");
+  path[3] = getStruct("boat_1_path_flee_first_shot_1", "targetname");
 
   fleeing_drones[0] thread maps\_drone::drone_move_to_ent_and_delete(path[0]);
   fleeing_drones[2] thread maps\_drone::drone_move_to_ent_and_delete(path[2]);
@@ -7919,7 +7919,7 @@ event2_setup_first_ship_drones_respond_aft() {
 
   responding_drones_spawn = [];
   for(i = 0; i < 4; i++) {
-    responding_drones_spawn[i] = GetStruct("boat_1_aft_drone_run_" + i, "targetname");
+    responding_drones_spawn[i] = getStruct("boat_1_aft_drone_run_" + i, "targetname");
   }
 
   responding_drones = [];
@@ -7929,10 +7929,10 @@ event2_setup_first_ship_drones_respond_aft() {
   }
 
   path = [];
-  path[0] = GetStruct("boat_1_path_light_0", "targetname");
-  path[1] = GetStruct("boat_1_path_flak_0", "targetname");
-  path[2] = GetStruct("boat_1_path_light_1", "targetname");
-  path[3] = GetStruct("boat_1_path_flak_1", "targetname");
+  path[0] = getStruct("boat_1_path_light_0", "targetname");
+  path[1] = getStruct("boat_1_path_flak_0", "targetname");
+  path[2] = getStruct("boat_1_path_light_1", "targetname");
+  path[3] = getStruct("boat_1_path_flak_1", "targetname");
 
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_delete(path[i]);
@@ -7957,7 +7957,7 @@ event2_setup_first_ship_drones_respond_tower() {
 
   responding_drones_spawn = [];
   for(i = 0; i < 2; i++) {
-    responding_drones_spawn[i] = GetStruct("boat_1_con_drone_run_" + i, "targetname");
+    responding_drones_spawn[i] = getStruct("boat_1_con_drone_run_" + i, "targetname");
   }
 
   responding_drones = [];
@@ -7967,8 +7967,8 @@ event2_setup_first_ship_drones_respond_tower() {
   }
 
   path = [];
-  path[0] = GetStruct("boat_1_path_con_top", "targetname");
-  path[1] = GetStruct("boat_1_path_con_bottom", "targetname");
+  path[0] = getStruct("boat_1_path_con_top", "targetname");
+  path[1] = getStruct("boat_1_path_con_bottom", "targetname");
 
   for(i = 0; i < 2; i++) {
     responding_drones[0] thread maps\_drone::drone_move_to_ent_and_delete(path[0]);
@@ -7981,18 +7981,18 @@ event2_setup_first_ship_drones_respond_tower() {
   }
 
   responding_drones_spawn = [];
-  responding_drones_spawn[0] = GetStruct("boat_1_con_drone_across_0", "targetname");
-  responding_drones_spawn[1] = GetStruct("boat_1_con_drone_across_1", "targetname");
-  responding_drones_spawn[2] = GetStruct("boat_1_con_drone_across_2", "targetname");
+  responding_drones_spawn[0] = getStruct("boat_1_con_drone_across_0", "targetname");
+  responding_drones_spawn[1] = getStruct("boat_1_con_drone_across_1", "targetname");
+  responding_drones_spawn[2] = getStruct("boat_1_con_drone_across_2", "targetname");
 
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
 
-  path[0] = GetStruct("boat_1_path_con_across_0", "targetname");
-  path[1] = GetStruct("boat_1_path_con_across_1", "targetname");
-  path[2] = GetStruct("boat_1_path_con_across_2", "targetname");
+  path[0] = getStruct("boat_1_path_con_across_0", "targetname");
+  path[1] = getStruct("boat_1_path_con_across_1", "targetname");
+  path[2] = getStruct("boat_1_path_con_across_2", "targetname");
 
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_b);
@@ -8050,14 +8050,14 @@ event2_setup_second_ship_drones() {
 }
 
 event2_setup_second_ship_drone_turnon_lights() {
-  light_drone_spawn = GetStruct("boat_2_light_drone_run", "targetname");
+  light_drone_spawn = getStruct("boat_2_light_drone_run", "targetname");
   light_drone = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", light_drone_spawn);
   light_drone setCanDamage(false);
 
   level.plane_a waittill("merchant_drone_light");
   wait(2.0);
 
-  path = GetStruct("boat_2_path_light_aft", "targetname");
+  path = getStruct("boat_2_path_light_aft", "targetname");
 
   light_drone thread maps\_drone::drone_move_to_ent_and_delete(path);
   light_drone waittill("goal");
@@ -8070,18 +8070,18 @@ event2_setup_second_ship_drones_aft() {
   wait(3.0);
 
   responding_drones_spawn = [];
-  responding_drones_spawn[0] = GetStruct("boat_2_drone_aft_across_0", "targetname");
-  responding_drones_spawn[1] = GetStruct("boat_2_drone_aft_across_1", "targetname");
-  responding_drones_spawn[2] = GetStruct("boat_2_drone_aft_across_2", "targetname");
+  responding_drones_spawn[0] = getStruct("boat_2_drone_aft_across_0", "targetname");
+  responding_drones_spawn[1] = getStruct("boat_2_drone_aft_across_1", "targetname");
+  responding_drones_spawn[2] = getStruct("boat_2_drone_aft_across_2", "targetname");
 
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
 
-  path[0] = GetStruct("boat_2_path_aft_across_0", "targetname");
-  path[1] = GetStruct("boat_2_path_aft_across_1", "targetname");
-  path[2] = GetStruct("boat_2_path_aft_across_2", "targetname");
+  path[0] = getStruct("boat_2_path_aft_across_0", "targetname");
+  path[1] = getStruct("boat_2_path_aft_across_1", "targetname");
+  path[2] = getStruct("boat_2_path_aft_across_2", "targetname");
 
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_a);
@@ -8097,20 +8097,20 @@ event2_setup_second_ship_drones_con() {
   wait(6.0);
 
   responding_drones_spawn = [];
-  responding_drones_spawn[0] = GetStruct("boat_2_con_drone_across_0", "targetname");
-  responding_drones_spawn[1] = GetStruct("boat_2_con_drone_across_1", "targetname");
-  responding_drones_spawn[2] = GetStruct("boat_2_con_drone_across_2", "targetname");
-  responding_drones_spawn[3] = GetStruct("boat_2_con_drone_across_3", "targetname");
+  responding_drones_spawn[0] = getStruct("boat_2_con_drone_across_0", "targetname");
+  responding_drones_spawn[1] = getStruct("boat_2_con_drone_across_1", "targetname");
+  responding_drones_spawn[2] = getStruct("boat_2_con_drone_across_2", "targetname");
+  responding_drones_spawn[3] = getStruct("boat_2_con_drone_across_3", "targetname");
 
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
 
-  path[0] = GetStruct("boat_2_path_con_across_0", "targetname");
-  path[1] = GetStruct("boat_2_path_con_across_1", "targetname");
-  path[2] = GetStruct("boat_2_path_con_across_2", "targetname");
-  path[3] = GetStruct("boat_2_path_con_across_3", "targetname");
+  path[0] = getStruct("boat_2_path_con_across_0", "targetname");
+  path[1] = getStruct("boat_2_path_con_across_1", "targetname");
+  path[2] = getStruct("boat_2_path_con_across_2", "targetname");
+  path[3] = getStruct("boat_2_path_con_across_3", "targetname");
 
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_a);
@@ -8124,10 +8124,10 @@ event2_setup_second_ship_drones_bow() {
   wait(11.0);
 
   responding_drones_spawn = [];
-  responding_drones_spawn[0] = GetStruct("boat_2_drone_bow_across_0", "targetname");
-  responding_drones_spawn[1] = GetStruct("boat_2_drone_bow_across_1", "targetname");
-  responding_drones_spawn[2] = GetStruct("boat_2_drone_bow_across_2", "targetname");
-  responding_drones_spawn[3] = GetStruct("boat_2_drone_bow_across_3", "targetname");
+  responding_drones_spawn[0] = getStruct("boat_2_drone_bow_across_0", "targetname");
+  responding_drones_spawn[1] = getStruct("boat_2_drone_bow_across_1", "targetname");
+  responding_drones_spawn[2] = getStruct("boat_2_drone_bow_across_2", "targetname");
+  responding_drones_spawn[3] = getStruct("boat_2_drone_bow_across_3", "targetname");
 
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
@@ -8138,10 +8138,10 @@ event2_setup_second_ship_drones_bow() {
     }
   }
 
-  path[0] = GetStruct("boat_2_path_bow_across_0", "targetname");
-  path[1] = GetStruct("boat_2_path_bow_across_1", "targetname");
-  path[2] = GetStruct("boat_2_path_bow_across_2", "targetname");
-  path[3] = GetStruct("boat_2_path_bow_across_3", "targetname");
+  path[0] = getStruct("boat_2_path_bow_across_0", "targetname");
+  path[1] = getStruct("boat_2_path_bow_across_1", "targetname");
+  path[2] = getStruct("boat_2_path_bow_across_2", "targetname");
+  path[3] = getStruct("boat_2_path_bow_across_3", "targetname");
 
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_a);
@@ -8176,7 +8176,7 @@ event2_setup_third_ship_drones_con() {
 
   standing_drones_spawn = [];
   for(i = 0; i < 5; i++) {
-    standing_drones_spawn[i] = GetStruct("boat_3_drone_standrun_" + i, "targetname");
+    standing_drones_spawn[i] = getStruct("boat_3_drone_standrun_" + i, "targetname");
   }
 
   standing_drones = [];
@@ -8195,7 +8195,7 @@ event2_setup_third_ship_drones_con() {
   wait(3.5);
 
   for(i = 0; i < standing_drones.size; i++) {
-    path = GetStruct("boat_3_path_standrun_" + i, "targetname");
+    path = getStruct("boat_3_path_standrun_" + i, "targetname");
 
     if(i <= 1) {
       standing_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path, level.plane_b);
@@ -8362,7 +8362,7 @@ merchant_boat_spots() {
     self.aft_light = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["merchant_light"], "tag_gunner_barrel3");
     aft_gun_origin = self GetTagOrigin("tag_gunner_barrel3");
     aft_light_target = level.plane_b;
-    self setgunnertargetent(aft_light_target, (0, 0, 0), 2);
+    self setgunnertargetEnt(aft_light_target, (0, 0, 0), 2);
     self thread merchant_boat_spots_track(aft_gun_origin, 2, "stop_aft_track", "aft_light_pitch", 1);
   }
 
@@ -8370,7 +8370,7 @@ merchant_boat_spots() {
     self.bow_light = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["merchant_light"], "tag_gunner_barrel4");
     bow_gun_origin = self GetTagOrigin("tag_gunner_barrel4");
     bow_light_target = level.plane_a;
-    self setgunnertargetent(bow_light_target, (0, 0, 0), 3);
+    self setgunnertargetEnt(bow_light_target, (0, 0, 0), 3);
     self thread merchant_boat_spots_track(bow_gun_origin, 3, "stop_bow_track", "bow_light_pitch", 0);
   }
 }
@@ -8388,7 +8388,7 @@ merchant_boat_spots_track(spot_origin, gun_index, end_notify, break_notify, aft)
     }
 
     if(isDefined(self)) {
-      self setgunnertargetent(light_target, (0, 0, 0), gun_index);
+      self setgunnertargetEnt(light_target, (0, 0, 0), gun_index);
     }
 
     wait(2);
@@ -8447,11 +8447,11 @@ set_objective(my_obj, ent) {
     flag_set("merchant_ship_event_done");
     level notify("too late to sink merchant ships");
 
-    obj_marker = GetEnt("base_obj", "targetname");
+    obj_marker = getEnt("base_obj", "targetname");
     objective_add(4, "active", &"PBY_FLY_OBJ_EV3");
     objective_current(4);
   } else if(my_obj == "respond_to_distress_call") {
-    obj_marker = GetEnt("fleet_obj", "targetname");
+    obj_marker = getEnt("fleet_obj", "targetname");
     objective_string(4, &"PBY_FLY_OBJ_EV3B");
     objective_add(5, "active");
     objective_string(5, &"PBY_FLY_OBJ_EV3B_ZEROES", 0);
@@ -8460,14 +8460,14 @@ set_objective(my_obj, ent) {
   } else if(my_obj == "save_sailors") {
     flag_set("respond_objective_done");
     objective_state(4, "done");
-    obj_marker = GetEnt("fleet_obj", "targetname");
+    obj_marker = getEnt("fleet_obj", "targetname");
     objective_add(6, "active");
     objective_string(6, &"PBY_FLY_OBJ_EV4", 0);
     objective_current(6);
 
     level thread update_objective_states_rescue(6, &"PBY_FLY_OBJ_EV4");
   } else if(my_obj == "escape") {
-    obj_marker = GetEnt("fleet_obj", "targetname");
+    obj_marker = getEnt("fleet_obj", "targetname");
     objective_add(7, "active", &"PBY_FLY_OBJ_EV5");
     objective_current(7);
 
@@ -8578,18 +8578,18 @@ update_objective_states_rescue(obj_num, obj_string) {
 }
 
 zero_strafe_defending_boat() {
-  ship = GetEnt("ship_number_2", "targetname");
+  ship = getEnt("ship_number_2", "targetname");
 
   level endon("stop_zeroes_defending_ship");
 
   plane_splines = [];
-  plane_splines[0][0] = GetEnt("event2_fake_spline_right00", "targetname");
-  plane_splines[1][0] = GetEnt("event2_fake_spline_right01", "targetname");
-  plane_splines[2][0] = GetEnt("event2_fake_spline_right02", "targetname");
+  plane_splines[0][0] = getEnt("event2_fake_spline_right00", "targetname");
+  plane_splines[1][0] = getEnt("event2_fake_spline_right01", "targetname");
+  plane_splines[2][0] = getEnt("event2_fake_spline_right02", "targetname");
 
   for(j = 0; j < plane_splines.size; j++) {
     for(i = 1; isDefined(plane_splines[j][i - 1].target); i++) {
-      plane_splines[j][i] = GetEnt(plane_splines[j][i - 1].target, "targetname");
+      plane_splines[j][i] = getEnt(plane_splines[j][i - 1].target, "targetname");
     }
   }
 
@@ -8790,7 +8790,7 @@ corsairs_arrive() {
   wait(0.2);
   SetTimeScale(0.2);
 
-  playsoundatposition("dew", (0, 0, 0));
+  playSoundAtPosition("dew", (0, 0, 0));
   setmusicstate("LEVEL_END");
 
   wait(1.2);
@@ -8878,12 +8878,12 @@ zero_strafe_getaway_part_1() {
 
   plane_slines = [];
 
-  plane_splines[0][0] = GetEnt("event4_escape_fs_1", "targetname");
-  plane_splines[1][0] = GetEnt("event4_escape_fs_2", "targetname");
+  plane_splines[0][0] = getEnt("event4_escape_fs_1", "targetname");
+  plane_splines[1][0] = getEnt("event4_escape_fs_2", "targetname");
 
   for(j = 0; j < plane_splines.size; j++) {
     for(i = 1; isDefined(plane_splines[j][i - 1].target); i++) {
-      plane_splines[j][i] = GetEnt(plane_splines[j][i - 1].target, "targetname");
+      plane_splines[j][i] = getEnt(plane_splines[j][i - 1].target, "targetname");
     }
   }
 
@@ -8918,7 +8918,7 @@ zero_fly_fake_spline(plane_spline, target, offset_vector) {
     offset_vector = (0, 0, 0);
   }
 
-  plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", plane_spline[0].origin, plane_spline[0].angles);
+  plane = spawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", plane_spline[0].origin, plane_spline[0].angles);
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
 
@@ -8939,7 +8939,7 @@ ptboat_test_run() {
 
   for(i = 0; i < 5; i++) {
     path_id = RandomInt(test_boat_node.size);
-    test_boat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+    test_boat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     test_boat.vehicletype = "jap_ptboat";
     maps\_vehicle::vehicle_init(test_boat);
 
@@ -9111,15 +9111,15 @@ play_landing_shake(plane) {
   playFXOnTag(level._effect["splash_land_wing"], self, "tag_wake_wing_L_fx");
   playFXOnTag(level._effect["splash_land_center"], self, "tag_origin");
   Earthquake(.1, 2.0, plane.origin, 1000);
-  playsoundatposition("amb_metal", (0, 0, 0));
+  playSoundAtPosition("amb_metal", (0, 0, 0));
 
-  level.player PlayRumbleOnEntity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
 }
 
 play_landing_shake_only(plane) {
   Earthquake(.1, 1.0, plane.origin, 1000);
-  playsoundatposition("amb_metal", (0, 0, 0));
-  level.player PlayRumbleOnEntity("damage_heavy");
+  playSoundAtPosition("amb_metal", (0, 0, 0));
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 play_hatch_anim(guy) {
@@ -9240,22 +9240,22 @@ ai_pby_gunners_think() {
     self ai_pby_gunners_acquire_targets();
 
     if(isDefined(self.target_list_front[0])) {
-      self setgunnertargetent(self.target_list_front[0], (0, 0, 0), 0);
+      self setgunnertargetEnt(self.target_list_front[0], (0, 0, 0), 0);
       front_gun_active = true;
     }
 
     if(isDefined(self.target_list_left[0])) {
-      self setgunnertargetent(self.target_list_left[0], (0, 0, 0), 1);
+      self setgunnertargetEnt(self.target_list_left[0], (0, 0, 0), 1);
       left_gun_active = true;
     }
 
     if(isDefined(self.target_list_right[0])) {
-      self setgunnertargetent(self.target_list_right[0], (0, 0, 0), 2);
+      self setgunnertargetEnt(self.target_list_right[0], (0, 0, 0), 2);
       right_gun_active = true;
     }
 
     if(isDefined(self.target_list_rear[0])) {
-      self setgunnertargetent(self.target_list_rear[0], (0, 0, 0), 3);
+      self setgunnertargetEnt(self.target_list_rear[0], (0, 0, 0), 3);
       rear_gun_active = true;
     }
 
@@ -9348,7 +9348,7 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
       if(!isDefined(origin_2)) {
         continue;
       }
-      dot_value = VectorDot(anglesToForward(self.angles), VectorNormalize(origin_2 - origin_1));
+      dot_value = VectorDot(anglesToForward(self.angles), vectorNormalize(origin_2 - origin_1));
 
       if(abs(dot_value) > 0.5) {} else {
         self.target_list_front = array_remove(self.target_list_front, self.target_list_front[i]);
@@ -9357,7 +9357,7 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
         continue;
       }
 
-      dot_value = VectorDot(AnglesToUp(self.angles), VectorNormalize(origin_2 - origin_1));
+      dot_value = VectorDot(AnglesToUp(self.angles), vectorNormalize(origin_2 - origin_1));
 
       if(dot_value > 0.2 || dot_value < -0.2) {
         self.target_list_front = array_remove(self.target_list_front, self.target_list_front[i]);
@@ -9372,7 +9372,7 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
       if(!isDefined(origin_2)) {
         continue;
       }
-      dot_value = VectorDot(AnglesToRight(self.angles) * -1, VectorNormalize(origin_2 - origin_1));
+      dot_value = VectorDot(AnglesToRight(self.angles) * -1, vectorNormalize(origin_2 - origin_1));
 
       if(dot_value > 0) {} else {
         self.target_list_left = array_remove(self.target_list_left, self.target_list_left[i]);
@@ -9388,7 +9388,7 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
       if(!isDefined(origin_2)) {
         continue;
       }
-      dot_value = VectorDot(AnglesToRight(self.angles), VectorNormalize(origin_2 - origin_1));
+      dot_value = VectorDot(AnglesToRight(self.angles), vectorNormalize(origin_2 - origin_1));
 
       if(dot_value > 0) {} else {
         self.target_list_right = array_remove(self.target_list_right, self.target_list_right[i]);
@@ -9404,7 +9404,7 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
       if(!isDefined(origin_2)) {
         continue;
       }
-      dot_value = VectorDot(anglesToForward(self.angles) * -1, VectorNormalize(origin_2 - origin_1));
+      dot_value = VectorDot(anglesToForward(self.angles) * -1, vectorNormalize(origin_2 - origin_1));
 
       if(dot_value > 0) {} else {
         self.target_list_rear = array_remove(self.target_list_rear, self.target_list_rear[i]);
@@ -9608,7 +9608,7 @@ out_of_ammo_sound(bone, end_notify) {
   position = self GetTagOrigin(bone);
 
   bullet_sound = spawn("script_origin", position);
-  bullet_sound LinkTo(self, bone);
+  bullet_sound linkTo(self, bone);
 
   bullet_sound playSound("dryfire_rifle_plr", "click_done");
   bullet_sound waittill("click_done");
@@ -9705,12 +9705,12 @@ player_uses_pistol() {
 
   player_hands.origin = startorg;
   player_hands.angles = startang;
-  player_hands LinkTo(plane, "origin_animate_jnt");
+  player_hands linkTo(plane, "origin_animate_jnt");
 
   level.player.origin = player_hands.origin;
   level.player.angles = player_hands.angles;
 
-  level.player PlayerLinkTo(player_hands, "tag_player", 1, 60, 30, 30, 30, true);
+  level.player PlayerlinkTo(player_hands, "tag_player", 1, 60, 30, 30, 30, true);
 
   plane maps\_anim::anim_single_solo(player_hands, "pby_right_to_pistol");
 
@@ -10449,7 +10449,7 @@ event2_ptboat_2nd_pass_m() {
   ptboat_paths[2] = GetVehicleNode("auto1309", "targetname");
 
   for(i = 0; i < ptboat_paths.size; i++) {
-    the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
+    the_ptboat = spawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
     maps\_vehicle::vehicle_init(the_ptboat);
     the_ptboat AttachPath(ptboat_paths[i]);
@@ -10508,7 +10508,7 @@ fletcher_ai_turret_think(target_vehicle_type, gunner_tag, gun_number) {
       continue;
     }
 
-    self setgunnertargetent(target, (0, 0, 0), gun_number);
+    self setgunnertargetEnt(target, (0, 0, 0), gun_number);
 
     while(isDefined(target)) {
       if(Distance2d(target.origin, self.origin) > 3000) {
@@ -10526,13 +10526,13 @@ fletcher_ai_turret_think(target_vehicle_type, gunner_tag, gun_number) {
 }
 
 swap_model_for_fletcher(_targetname) {
-  _model = GetEnt(_targetname, "targetname");
+  _model = getEnt(_targetname, "targetname");
   hold_origin = _model.origin;
   hold_angles = _model.angles;
 
   _model Delete();
 
-  fletcher = SpawnVehicle("vehicle_usa_ship_fletcher_hull", "new_fletcher", "fletcher_destroyer", hold_origin, hold_angles);
+  fletcher = spawnVehicle("vehicle_usa_ship_fletcher_hull", "new_fletcher", "fletcher_destroyer", hold_origin, hold_angles);
   fletcher.vehicletype = "fletcher_destroyer";
   maps\_vehicle::vehicle_init(fletcher);
 
@@ -10672,7 +10672,7 @@ fletcher_ai_biggun_think(gun, barrel) {
 
   barrel.angles = (300, barrel.angles[1], barrel.angles[2]);
 
-  barrel LinkTo(gun);
+  barrel linkTo(gun);
 
   while(1) {
     random_yaw = RandomIntRange(15, 110);
@@ -10680,9 +10680,9 @@ fletcher_ai_biggun_think(gun, barrel) {
 
     for(i = 0; i < random_yaw; i++) {
       if(pos_or_neg) {
-        gun RotateYaw(1, 0.05);
+        gun rotateYaw(1, 0.05);
       } else {
-        gun RotateYaw(-1, 0.05);
+        gun rotateYaw(-1, 0.05);
       }
 
       wait(0.1);
@@ -10711,7 +10711,7 @@ fletcher_ai_biggun_think(gun, barrel) {
       wait(0.05);
     }
 
-    barrel LinkTo(gun);
+    barrel linkTo(gun);
 
     barrel fletcher_ai_biggun_fire();
   }
@@ -10729,7 +10729,7 @@ fletcher_ai_biggun_fire(barrel) {
 }
 
 front_hit_fletcher_kamikaze_gun_1(guy) {
-  ship = GetEnt("ship_number_2", "targetname");
+  ship = getEnt("ship_number_2", "targetname");
   ship.turret_1 UseAnimTree(#animtree);
   ship.turret_1.animname = "fletcher";
   ship.turret_1_barrel UseAnimTree(#animtree);
@@ -10740,7 +10740,7 @@ front_hit_fletcher_kamikaze_gun_1(guy) {
 }
 
 front_hit_fletcher_kamikaze_gun_2(guy) {
-  ship = GetEnt("ship_number_2", "targetname");
+  ship = getEnt("ship_number_2", "targetname");
   ship.turret_2 UseAnimTree(#animtree);
   ship.turret_2.animname = "fletcher";
   ship.turret_2_barrel UseAnimTree(#animtree);
@@ -10751,7 +10751,7 @@ front_hit_fletcher_kamikaze_gun_2(guy) {
 }
 
 front_hit_fletcher_kamikaze_chunk_1(guy) {
-  ship = GetEnt("ship_number_2", "targetname");
+  ship = getEnt("ship_number_2", "targetname");
   ship.chunk_1 UseAnimTree(#animtree);
   ship.chunk_1.animname = "fletcher";
 
@@ -10759,7 +10759,7 @@ front_hit_fletcher_kamikaze_chunk_1(guy) {
 }
 
 fletcher_animation(_targetname, _case) {
-  fletcher = GetEnt(_targetname, "targetname");
+  fletcher = getEnt(_targetname, "targetname");
 
   self waittill("reached_end_node");
 
@@ -10916,8 +10916,8 @@ random_turbulence() {
         duration = 2;
         radius = 200;
         earthquake(scale, duration, source, radius);
-        playsoundatposition("amb_metal", (0, 0, 0));
-        level.player PlayRumbleOnEntity("damage_light");
+        playSoundAtPosition("amb_metal", (0, 0, 0));
+        level.player playRumbleOnEntity("damage_light");
         break;
 
       case 2:
@@ -10925,8 +10925,8 @@ random_turbulence() {
         duration = 1.5;
         radius = 300;
         earthquake(scale, duration, source, radius);
-        playsoundatposition("amb_metal", (0, 0, 0));
-        level.player PlayRumbleOnEntity("damage_light");
+        playSoundAtPosition("amb_metal", (0, 0, 0));
+        level.player playRumbleOnEntity("damage_light");
         break;
 
       case 3:
@@ -10935,7 +10935,7 @@ random_turbulence() {
         radius = 400;
 
         earthquake(scale, duration, source, radius);
-        level.player PlayRumbleOnEntity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
         break;
 
       case 4:
@@ -10944,7 +10944,7 @@ random_turbulence() {
         radius = 500;
 
         earthquake(scale, duration, source, radius);
-        level.player PlayRumbleOnEntity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
         break;
 
       case 5:
@@ -10953,7 +10953,7 @@ random_turbulence() {
         radius = 600;
 
         earthquake(scale, duration, source, radius);
-        level.player PlayRumbleOnEntity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
         break;
 
       default:
@@ -10996,7 +10996,7 @@ static_turbulence() {
 
       radius = 1000;
       earthquake(scale, duration, source, radius);
-      playsoundatposition("amb_metal", (0, 0, 0));
+      playSoundAtPosition("amb_metal", (0, 0, 0));
       wait duration;
     } else
     if(level.bomber_wind_shake == 3) {
@@ -11007,7 +11007,7 @@ static_turbulence() {
 
       radius = 1000;
       earthquake(scale, duration, source, radius);
-      playsoundatposition("amb_metal_medium", (0, 0, 0));
+      playSoundAtPosition("amb_metal_medium", (0, 0, 0));
       wait duration;
     } else
     if(level.bomber_wind_shake == 2) {
@@ -11015,7 +11015,7 @@ static_turbulence() {
       dur = 0.75;
 
       duration = ((randomfloat(1) * dur) + 0.05);
-      playsoundatposition("amb_metal_heavy", (0, 0, 0));
+      playSoundAtPosition("amb_metal_heavy", (0, 0, 0));
       radius = 1500;
       earthquake(scale, duration, source, radius);
       wait duration;
@@ -11046,12 +11046,12 @@ scripted_flak_and_shake_above_pby() {
     for(i = 0; i < how_many; i++) {
       fx_org = level.plane_a.origin + (anglesToForward(level.plane_a.angles) * (offset_vec[0] + (left_right * RandomIntRange(150, 300)))) + (AnglesToUp(level.plane_a.angles) * (offset_vec[1] + RandomIntRange(250, 400))) + (AnglesToRight(level.plane_a.angles) * (offset_vec[2] + RandomIntRange(1, 200)));
       playFX(level._effect["flak_one_shot"], fx_org);
-      playsoundatposition("flak_burst_close", (0, 0, 0));
+      playSoundAtPosition("flak_burst_close", (0, 0, 0));
 
       if(i == 0) {
         Earthquake(0.7, (0.15 * how_many), fx_org, 1000);
-        playsoundatposition("amb_metal", (0, 0, 0));
-        level.player PlayRumbleOnEntity("damage_light");
+        playSoundAtPosition("amb_metal", (0, 0, 0));
+        level.player playRumbleOnEntity("damage_light");
       }
       wait(0.12);
     }

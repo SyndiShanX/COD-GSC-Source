@@ -40,7 +40,7 @@ function start(str_objective) {
   level hms_util::function_ee1d1df6("lazar", "Lazar", "lazar_escape_struct");
   level thread namespace_a789f8ae::function_ad98871a();
   level notify(#"hash_73e317451c95becb");
-  var_602672df = getent("vip_door_player_clip", "targetname");
+  var_602672df = getEnt("vip_door_player_clip", "targetname");
   var_602672df delete();
 }
 
@@ -94,12 +94,12 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
 
 function function_d85d7174() {
   level flag::wait_till("flg_escape_bullets_start");
-  var_63802c77 = getent("far_left_window", "targetname");
-  var_79f11353 = getent("far_right_window", "targetname");
+  var_63802c77 = getEnt("far_left_window", "targetname");
+  var_79f11353 = getEnt("far_right_window", "targetname");
   var_1f60345c = [];
   var_1f60345c = getEntArray("hallway_shootat", "targetname");
-  var_f6a8c5cd = getent("hallway_shootat_miss_left", "targetname");
-  var_dce2d37a = getent("hallway_shootat_miss_right", "targetname");
+  var_f6a8c5cd = getEnt("hallway_shootat_miss_left", "targetname");
+  var_dce2d37a = getEnt("hallway_shootat_miss_right", "targetname");
   var_1a28305f = getEntArray("bullet_vignette_spawner", "targetname");
   level thread function_152a7d64();
   level thread scene::play("p9_fxanim_gp_hallway_glass_break_scene", "play");
@@ -324,7 +324,7 @@ function private function_ef7a3626() {
 
     if(isDefined(ai)) {
       array::add(a_ai, ai);
-      e_target = getent(ai.script_noteworthy, "targetname");
+      e_target = getEnt(ai.script_noteworthy, "targetname");
       ai thread ai::shoot_at_target("shoot_until_target_dead", e_target, undefined, undefined, 1);
       ai.ignoreme = 1;
     }
@@ -353,7 +353,7 @@ function private function_ef7a3626() {
     }
   }
 
-  var_8bb8735 = getent("escape_bullet_vignette_end_trigger", "targetname");
+  var_8bb8735 = getEnt("escape_bullet_vignette_end_trigger", "targetname");
 
   if(isDefined(var_8bb8735)) {
     waitresult = var_8bb8735 waittill(#"trigger");
@@ -384,7 +384,7 @@ function function_318c053c(ai_targetname, ai_group, vol_fallback, var_368e1d98) 
 function function_7e2956d3() {
   level endon(#"hash_59f6b36f3f2b5c68");
   var_15ec0cc3 = getEntArray("escape_front_right_civ_spawner", "targetname");
-  var_40c2f749 = getent("flg_play_scientist_vo", "targetname");
+  var_40c2f749 = getEnt("flg_play_scientist_vo", "targetname");
   thread function_c78f8bf0();
 
   while(true) {
@@ -412,8 +412,8 @@ function function_c78f8bf0() {
 function function_85f27f87() {
   level endon(#"flg_end_escape");
   a_spawners = getEntArray("escape_front_right_civ_spawner", "targetname");
-  t_spawn = getent("escape_front_right_civ_trigger", "targetname");
-  var_4fb059b8 = getent("trig_park_orange_color", "targetname");
+  t_spawn = getEnt("escape_front_right_civ_trigger", "targetname");
+  var_4fb059b8 = getEnt("trig_park_orange_color", "targetname");
   var_4fb059b8 triggerenable(0);
   t_spawn waittill(#"trigger");
   level flag::wait_till("flg_escape_spawn_triggers");
@@ -490,7 +490,7 @@ function function_4545fa49() {
 
 function escape_near_window_enemies() {
   level endon(#"game_ended");
-  t_spawn = getent("escape_gate_enemies_spawn", "targetname");
+  t_spawn = getEnt("escape_gate_enemies_spawn", "targetname");
   t_spawn waittill(#"trigger");
   level thread function_2b02b5c0();
   var_fcc1cf15 = spawner::simple_spawn("escape_near_gate_enemies");
@@ -537,7 +537,7 @@ function function_2b02b5c0() {
 function function_5c353098() {
   self endon(#"game_ended");
   level endon(#"flg_end_escape");
-  t_spawn = getent("escape_stairway_vehicles_spawn", "targetname");
+  t_spawn = getEnt("escape_stairway_vehicles_spawn", "targetname");
   t_spawn waittill(#"trigger");
   var_4a3daa0b = struct::get("escape_car_driveby_seen", "targetname");
 
@@ -630,7 +630,7 @@ function private function_9aeef376() {
 
   while(true) {
     var_4867bef7 = spawner::get_ai_group_ai("ai_escape_riders");
-    var_6d780ea5 = getent("escape_enemy_retreat", "targetname");
+    var_6d780ea5 = getEnt("escape_enemy_retreat", "targetname");
 
     if(spawner::get_ai_group_count("ai_escape_riders") < 28 || var_43d75163 >= 30) {
       foreach(guy in var_4867bef7) {
@@ -650,7 +650,7 @@ function private function_9aeef376() {
 function function_50aada8c() {
   self endon(#"death");
   self waittill(#"exited_vehicle");
-  e_goal = getent("vol_truck_drive_in", "targetname");
+  e_goal = getEnt("vol_truck_drive_in", "targetname");
   self setgoal(e_goal);
 }
 
@@ -664,7 +664,7 @@ function function_f6c194ca() {
   var_4e1e4d18 = spawner::simple_spawn("parking_lot_ground_enemies");
 
   foreach(ai in var_4e1e4d18) {
-    e_goal = getent("vol_truck_drive_in", "targetname");
+    e_goal = getEnt("vol_truck_drive_in", "targetname");
     ai setgoal(e_goal);
   }
 
@@ -684,7 +684,7 @@ function function_f6c194ca() {
         var_86303f63 = magicbullet(ai.weapon, ai gettagorigin("tag_flash"), var_4bad8e55[randomintrange(0, 4)].origin, ai);
         ai thread namespace_307260b8::function_10223871("escape_enemy_retreat", 1);
         var_86303f63 waittill(#"death");
-        level.player playrumbleonentity("artillery_rumble_near");
+        level.player playRumbleOnEntity("artillery_rumble_near");
       }
     }
   }

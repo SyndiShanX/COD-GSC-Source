@@ -152,7 +152,7 @@ planeturnleft(plane, yaw, halflife) {
     rotatedx = cos(yaw) * oldx - sin(yaw) * oldy;
     rotatedy = sin(yaw) * oldx + cos(yaw) * oldy;
     endpoint = (origx + rotatedx, origy + rotatedy, plane.origin[2]);
-    plane moveto(endpoint, 0.1, 0, 0);
+    plane moveTo(endpoint, 0.1, 0, 0);
     waitrealtime(0.1);
   }
 
@@ -190,7 +190,7 @@ planeturnleft(plane, yaw, halflife) {
     rotatedx = cos(yaw) * oldx - sin(yaw) * oldy;
     rotatedy = sin(yaw) * oldx + cos(yaw) * oldy;
     endpoint = (origx + rotatedx, origy + rotatedy, plane.origin[2]);
-    plane moveto(endpoint, 0.1, 0, 0);
+    plane moveTo(endpoint, 0.1, 0, 0);
     waitrealtime(0.1);
     looptime = looptime + 0.1;
   }
@@ -241,7 +241,7 @@ planeturnright(plane, yaw, halflife) {
     println(rotatedx + " " + rotatedy + "\\n");
 
     endpoint = (origx + rotatedx, origy + rotatedy, plane.origin[2]);
-    plane moveto(endpoint, 0.1, 0, 0);
+    plane moveTo(endpoint, 0.1, 0, 0);
     waitrealtime(0.1);
   }
 
@@ -279,7 +279,7 @@ planeturnright(plane, yaw, halflife) {
     rotatedx = cos(yaw) * oldx - sin(yaw) * oldy;
     rotatedy = sin(yaw) * oldx + cos(yaw) * oldy;
     endpoint = (origx + rotatedx, origy + rotatedy, plane.origin[2]);
-    plane moveto(endpoint, 0.1, 0, 0);
+    plane moveTo(endpoint, 0.1, 0, 0);
     waitrealtime(0.1);
     looptime = looptime + 0.1;
   }
@@ -287,7 +287,7 @@ planeturnright(plane, yaw, halflife) {
 
 doabarrelroll(plane, endpoint, time) {
   plane endon("delete");
-  plane moveto(endpoint, time, 0, 0);
+  plane moveTo(endpoint, time, 0, 0);
   rollz = getdvarfloatdefault("scr_barrelroll", 10);
   degreestoroll = getdvarfloatdefault("scr_degreesToRoll", 720);
   degreesrolled = 0;
@@ -301,7 +301,7 @@ doabarrelroll(plane, endpoint, time) {
 
 planegostraight(plane, endpoint, time) {
   plane endon("delete");
-  plane moveto(endpoint, time, 0, 0);
+  plane moveTo(endpoint, time, 0, 0);
 }
 
 debug_line(from, to, color, time) {

@@ -311,12 +311,12 @@ function spin_fan() {
   }
   while(true) {
     if(!do_wobble) {
-      self rotateyaw(180, self.speed);
+      self rotateYaw(180, self.speed);
       self waittill("rotatedone");
     } else {
-      self rotateyaw(340, self.speed);
+      self rotateYaw(340, self.speed);
       self waittill("rotatedone");
-      self rotateyaw(20, self.wobble_speed);
+      self rotateYaw(20, self.wobble_speed);
       self waittill("rotatedone");
     }
   }
@@ -477,7 +477,7 @@ function spoon_spin_func() {
   }
   while(true) {
     speed = randomfloatrange(model_speed * 0.6, model_speed);
-    self rotateyaw(1200, speed);
+    self rotateYaw(1200, speed);
     self waittill("rotatedone");
   }
 }
@@ -497,9 +497,9 @@ function arrow_spin_func() {
   while(true) {
     direction_change = model_direction_change + (randomintrange(-11, 11));
     speed_change = randomfloatrange(model_speed * 0.3, model_speed);
-    self rotateyaw(direction_change, speed_change);
+    self rotateYaw(direction_change, speed_change);
     self waittill("rotatedone");
-    self rotateyaw(direction_change * -1, speed_change);
+    self rotateYaw(direction_change * -1, speed_change);
     self waittill("rotatedone");
   }
 }

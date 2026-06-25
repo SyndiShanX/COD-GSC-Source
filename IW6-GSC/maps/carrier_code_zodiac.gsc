@@ -194,7 +194,7 @@ setup_fake_riders() {
   var_0 = spawn("script_model", self.origin);
   var_0 setModel("crr_zodiac_full");
   var_0.angles = self.angles;
-  var_0 linkto(self, "tag_body", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_body", (0, 0, 0), (0, 0, 0));
   self waittill("death");
   var_0 delete();
 }
@@ -244,11 +244,11 @@ spawn_zodiac_rappel(var_0, var_1) {
 }
 
 setup_rope_coil() {
-  var_0 = self.origin + vectornormalize(anglesToForward(self.angles)) * 16 + (0, 0, 13);
+  var_0 = self.origin + vectorNormalize(anglesToForward(self.angles)) * 16 + (0, 0, 13);
   var_1 = spawn("script_model", var_0);
   var_1 setModel("cnd_rope_rappel_coil_04");
   var_1.angles = self.angles + (0, 90, -5);
-  var_1 linkto(self, "tag_body");
+  var_1 linkTo(self, "tag_body");
   self waittill("death");
   var_1 delete();
 }
@@ -278,7 +278,7 @@ zodiac_rappel_logic(var_0, var_1) {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.angles = self.angles + (-90, 0, 0);
   var_2.origin = self.origin - (0, 0, 4);
-  var_2 linkto(self, "tag_origin");
+  var_2 linkTo(self, "tag_origin");
   self.fx_idle = var_2;
   playFXOnTag(level._effect["vfx_zodiac_splash_idle"], var_2, "tag_origin");
   thread kill_zodiac_fx_idle();
@@ -293,8 +293,8 @@ zodiac_rappel_logic(var_0, var_1) {
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
-  var_3 = common_scripts\utility::getstruct(var_0 + "_rappel", "targetname");
-  var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0 + "_rappel", "targetname");
+  var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
   self.ref_node = var_4;
 
   if(!isDefined(self.script_noteworthy) || !issubstr(self.script_noteworthy, "zodiac_vista")) {
@@ -397,7 +397,7 @@ spawn_fake_zodiac(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("vehicle_zodiac_boat_fed_iw6");
   var_1.angles = var_0.angles;
-  var_1.dest = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_1.dest = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_1.angles = vectortoangles(var_1.dest.origin - var_1.origin);
   return var_1;
 }
@@ -409,7 +409,7 @@ fake_zodiac_setup() {
   level.fake_targets = common_scripts\utility::array_add(level.fake_targets, self);
   var_1 = distance(self.origin, self.dest.origin);
   var_2 = var_1 / (self.speed * var_0);
-  self moveto(self.dest.origin, var_2);
+  self moveTo(self.dest.origin, var_2);
   self.animname = "zodiac";
   maps\_anim::setanimtree();
   thread fake_zodiac_move_anim();
@@ -566,7 +566,7 @@ drone_shoot() {
     return;
   } else if(randomfloat(100) < var_2) {
     var_5 = level.player getplayerangles();
-    var_6 = vectornormalize(anglestoright(var_5));
+    var_6 = vectorNormalize(anglestoright(var_5));
     var_7 = common_scripts\utility::randomvectorrange(50, 100);
     var_8 = var_6 * var_7;
     var_4 = level.player getshootatpos() + var_8;
@@ -795,7 +795,7 @@ zodiac_dockeddeath() {
   }
   foreach(var_1 in self.corpses) {
     if(isDefined(var_1) && !var_1 isragdoll()) {
-      var_1 linkto(self, "tag_body");
+      var_1 linkTo(self, "tag_body");
     }
   }
 
@@ -866,7 +866,7 @@ explode_single_zodiac(var_0, var_1) {
   var_4 = 400;
   var_5 = var_3 + var_0 * (var_4 - var_3);
   var_6 = var_2.origin;
-  var_7 = 4 * vectornormalize(var_6 - var_1);
+  var_7 = 4 * vectorNormalize(var_6 - var_1);
   var_8 = 1.5 * (1 + var_0);
   var_8 = int(var_8 * 20) / 20;
   var_9 = var_6 + var_7 * var_5 - (0, 0, 200);
@@ -899,7 +899,7 @@ move_arc_zodiac(var_0, var_1, var_2, var_3) {
       continue;
     }
     var_10 = var_5 + var_11 / var_4 * (var_6 - var_5);
-    self moveto(var_9, var_10);
+    self moveTo(var_9, var_10);
     wait(var_10);
   }
 }
@@ -1160,7 +1160,7 @@ rope_prop_anim(var_0) {
   var_1.angles = var_0.angles;
   self.ascender = maps\_utility::spawn_anim_model("ascender");
   self.ascender hide();
-  self.ascender linkto(var_1, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  self.ascender linkTo(var_1, "j_prop_1", (0, 0, 0), (0, 0, 0));
   thread drop_ascender();
   self.ascender common_scripts\utility::delaycall(0.2, ::show);
   var_0 thread maps\_anim::anim_single_solo(var_1, "carrier_rappel_defend_ascend_prop");
@@ -1172,12 +1172,12 @@ rope_prop_anim(var_0) {
   var_1.attach_point = common_scripts\utility::spawn_tag_origin();
   var_1.attach_point.origin = self.origin;
   var_1.attach_point.angles = self.angles;
-  self linkto(var_1.attach_point, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_1.attach_point moveto(var_1 gettagorigin("j_prop_2"), 0.4);
+  self linkTo(var_1.attach_point, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1.attach_point moveTo(var_1 gettagorigin("j_prop_2"), 0.4);
   wait 0.45;
   var_1.attach_point delete();
   maps\_anim::anim_set_rate_single(var_1, "carrier_rappel_defend_ascend_prop", 1);
-  self linkto(var_1, "j_prop_2", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_1, "j_prop_2", (0, 0, 0), (0, 0, 0));
   return var_1;
 }
 
@@ -1212,7 +1212,7 @@ drop_ascender() {
 
   var_0 unlink();
   var_0 rotatevelocity((randomfloatrange(-200, 200), randomfloatrange(-200, 200), randomfloatrange(-200, 200)), 2, 2);
-  var_0 moveto(var_0.origin - (0, 0, 680), 2, 2);
+  var_0 moveTo(var_0.origin - (0, 0, 680), 2, 2);
   wait 2;
   var_0 delete();
 }
@@ -1291,7 +1291,7 @@ rappel_pain() {
 
   for(;;) {
     self waittill("rappel_pain");
-    self stopanimscripted();
+    self stopanimScripted();
     thread maps\_anim::anim_generic(self, var_0[randomint(var_0.size)]);
   }
 }
@@ -1350,7 +1350,7 @@ rappel_exit(var_0, var_1, var_2, var_3) {
       return;
     }
 
-    var_5 setgoalvolumeauto(getent("defend_zodiac_vol", "targetname"));
+    var_5 setgoalvolumeauto(getEnt("defend_zodiac_vol", "targetname"));
   }
 }
 
@@ -1464,7 +1464,7 @@ rappel_enter_death(var_0) {
     var_1 notify("next_rappeller");
   }
 
-  self linkto(self.ridingvehicle, "tag_body");
+  self linkTo(self.ridingvehicle, "tag_body");
   self.ridingvehicle.corpses = common_scripts\utility::array_add(self.ridingvehicle.corpses, self);
   self notify("fully_stop_firing");
   self notify("enter_death");
@@ -1518,7 +1518,7 @@ rappel_death() {
     return;
   }
   var_2 notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("stop_loop");
   self unlink();
   self notify("rappel_death");
@@ -1583,14 +1583,14 @@ land_on_zodiac_death() {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = self.ridingvehicle.origin + anglesToForward(self.ridingvehicle.angles) * 64 + (0, 0, 10);
   var_2.angles = self.ridingvehicle.angles;
-  var_2 linkto(self.ridingvehicle, "tag_body");
+  var_2 linkTo(self.ridingvehicle, "tag_body");
   var_3 = var_2.origin[2] + 32;
 
   while(self.origin[2] > var_3) {
     common_scripts\utility::waitframe();
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
   self.ridingvehicle.corpses = common_scripts\utility::array_add(self.ridingvehicle.corpses, self);
   self setanim(level.scr_anim["generic"]["carrier_rappel_defend_death_zodiac_c"], 1, 1);
   thread link_to_moving_target(var_2);
@@ -1605,21 +1605,21 @@ link_to_moving_target(var_0) {
   var_1 = 15;
   var_2 = distance(self.origin, var_0.origin);
   var_3 = int(var_2 / var_1) * 0.1;
-  self rotateto(var_0.angles, var_3);
+  self rotateTo(var_0.angles, var_3);
 
   while(var_2 > 4 || self.origin[2] < var_0.origin[2]) {
     if(var_2 > var_1) {
-      var_4 = self.origin + vectornormalize(var_0.origin - self.origin) * var_1;
+      var_4 = self.origin + vectorNormalize(var_0.origin - self.origin) * var_1;
     } else {
       var_4 = var_0.origin;
     }
 
-    self moveto(var_4, 0.1);
+    self moveTo(var_4, 0.1);
     wait 0.1;
     var_2 = distance(self.origin, var_0.origin);
   }
 
-  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
 
 splash_on_hit_water() {
@@ -1703,7 +1703,7 @@ cleanup_zodiac_bodies() {
 }
 
 setup_cut_rope_hint() {
-  level.cut_rope_trigger sethintstring(&"CARRIER_CUT_ROPE_HINT");
+  level.cut_rope_trigger setHintString(&"CARRIER_CUT_ROPE_HINT");
   level.cut_rope_trigger.visible = 0;
   thread cut_rope_hint();
 }
@@ -1825,7 +1825,7 @@ cut_the_rope(var_0) {
   var_2 setModel("weapon_parabolic_knife");
   var_2 hide();
   var_2 dontcastshadows();
-  var_2 linkto(var_1, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   var_0.rope = self;
   thread maps\carrier_audio::aud_carr_player_cuts_rope();
   var_3 = level.player.origin;
@@ -1887,7 +1887,7 @@ cut_rope_anim(var_0, var_1) {
   maps\_anim::anim_single_solo(var_0, "carrier_rappel_defend_rope_cut");
 
   if(isDefined(var_0)) {
-    var_0 moveto(var_0.origin - (0, 0, 500), 0.5, 0.5);
+    var_0 moveTo(var_0.origin - (0, 0, 500), 0.5, 0.5);
   }
 
   var_0 thread cleanup_rope();

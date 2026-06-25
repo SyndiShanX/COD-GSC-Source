@@ -59,7 +59,7 @@ function main_end() {
     spawncollision("collision_clip_ramp_128x24", "collider", (4433, -4726.27, 306), (270, 27.6804, -177.681));
   }
   var_bb51a7b = spawncollision("collision_clip_32x32x128", "collider", (1455, -3545, 126), vectorscale((0, 1, 0), 45));
-  var_bb51a7b disconnectpaths();
+  var_bb51a7b disconnectPaths();
   if(!zm_ffotd::optimize_for_splitscreen()) {
     spawncollision("collision_clip_64x64x64", "collider", (2869, -4814, 260), vectorscale((0, 1, 0), 45));
     spawncollision("collision_clip_32x32x128", "collider", (1260, -8342, 440), vectorscale((0, 1, 0), 45));

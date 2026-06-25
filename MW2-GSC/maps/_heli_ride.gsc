@@ -72,9 +72,9 @@ attach_player(player, position, animfudgetime) {
   wait .1;
 
   if(isDefined(level.little_bird)) {
-    player playerlinkto(guy, "tag_player", 0.35, 120, 28, 30, 30, false);
+    player playerlinkTo(guy, "tag_player", 0.35, 120, 28, 30, 30, false);
   } else {
-    player playerlinkto(guy, "tag_player", 0.35, 60, 28, 30, 30, false);
+    player playerlinkTo(guy, "tag_player", 0.35, 60, 28, 30, 30, false);
   }
 
   player freezecontrols(false);

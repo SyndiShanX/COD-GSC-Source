@@ -33,7 +33,7 @@ function function_e26ae7d4(params) {
   }
 
   if(validateorigin(self.origin)) {
-    playsoundatposition(#"hash_5e5cbc0e6e2d1d4e", self.origin);
+    playSoundAtPosition(#"hash_5e5cbc0e6e2d1d4e", self.origin);
   }
 
   self vehicle::toggle_control_bone_group(1, 1);
@@ -54,7 +54,7 @@ function function_f5da89ea(params) {
 
   if(!isDefined(occupants) || occupants.size == 0) {
     if(validateorigin(self.origin)) {
-      playsoundatposition(#"hash_5e5cbc0e6e2d1d4e", self.origin);
+      playSoundAtPosition(#"hash_5e5cbc0e6e2d1d4e", self.origin);
     }
 
     self vehicle::toggle_control_bone_group(1, 0);

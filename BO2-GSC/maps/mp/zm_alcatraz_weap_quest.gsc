@@ -19,8 +19,8 @@ init() {
   level.soul_catchers = [];
   level.soul_catchers_vol = [];
   level.no_gib_in_wolf_area = ::check_for_zombie_in_wolf_area;
-  level.soul_catcher_clip["rune_2"] = getent("wolf_clip_docks", "targetname");
-  level.soul_catcher_clip["rune_3"] = getent("wolf_clip_infirmary", "targetname");
+  level.soul_catcher_clip["rune_2"] = getEnt("wolf_clip_docks", "targetname");
+  level.soul_catcher_clip["rune_3"] = getEnt("wolf_clip_infirmary", "targetname");
 
   foreach(e_clip in level.soul_catcher_clip) {
     e_clip setinvisibletoall();
@@ -36,7 +36,7 @@ init() {
   for(i = 0; i < level.a_wolf_structs.size; i++) {
     registerclientfield("world", level.a_wolf_structs[i].script_parameters, 9000, 3, "int");
     level.soul_catchers[i] = level.a_wolf_structs[i];
-    level.soul_catchers_vol[i] = getent(level.a_wolf_structs[i].target, "targetname");
+    level.soul_catchers_vol[i] = getEnt(level.a_wolf_structs[i].target, "targetname");
   }
 
   for(i = 0; i < level.soul_catchers.size; i++) {
@@ -51,7 +51,7 @@ init() {
     }
 
     level.soul_catchers[i] thread wolf_head_removal("tomahawk_door_sign_" + (i + 1));
-    level.soul_catchers_vol[i] = getent(level.soul_catchers[i].target, "targetname");
+    level.soul_catchers_vol[i] = getEnt(level.soul_catchers[i].target, "targetname");
   }
 
   level.soul_catchers_charged = 0;
@@ -89,10 +89,10 @@ soul_catcher_state_manager() {
   wait 1.0;
 
   if(self.script_noteworthy == "rune_3") {
-    trigger = getent("wolf_hurt_trigger", "targetname");
+    trigger = getEnt("wolf_hurt_trigger", "targetname");
     trigger hide();
   } else if(self.script_noteworthy == "rune_2") {
-    trigger = getent("wolf_hurt_trigger_docks", "targetname");
+    trigger = getEnt("wolf_hurt_trigger_docks", "targetname");
     trigger hide();
   }
 
@@ -100,10 +100,10 @@ soul_catcher_state_manager() {
   self waittill("first_zombie_killed_in_zone");
 
   if(self.script_noteworthy == "rune_3") {
-    trigger = getent("wolf_hurt_trigger", "targetname");
+    trigger = getEnt("wolf_hurt_trigger", "targetname");
     trigger show();
   } else if(self.script_noteworthy == "rune_2") {
-    trigger = getent("wolf_hurt_trigger_docks", "targetname");
+    trigger = getEnt("wolf_hurt_trigger_docks", "targetname");
     trigger show();
   }
 
@@ -129,10 +129,10 @@ soul_catcher_state_manager() {
   }
 
   if(self.script_noteworthy == "rune_3") {
-    trigger = getent("wolf_hurt_trigger", "targetname");
+    trigger = getEnt("wolf_hurt_trigger", "targetname");
     trigger delete();
   } else if(self.script_noteworthy == "rune_2") {
-    trigger = getent("wolf_hurt_trigger_docks", "targetname");
+    trigger = getEnt("wolf_hurt_trigger_docks", "targetname");
     trigger delete();
   }
 
@@ -178,7 +178,7 @@ wolf_spit_out_powerup() {
   if(!(isDefined(level.enable_magic) && level.enable_magic)) {
     return;
   }
-  power_origin_struct = getstruct("wolf_puke_powerup_origin", "targetname");
+  power_origin_struct = getStruct("wolf_puke_powerup_origin", "targetname");
 
   if(randomint(100) < 20) {
     for(i = 0; i < level.zombie_powerup_array.size; i++) {
@@ -329,7 +329,7 @@ notify_wolf_intro_anim_complete() {
 
 which_eating_anim() {
   soul_catcher = self.my_soul_catcher;
-  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
+  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectorNormalize(self.origin - soul_catcher.origin));
 
   if(forward_dot > 0.85) {
     return 3;
@@ -367,7 +367,7 @@ soul_catcher_check() {
 }
 
 wolf_head_removal(wolf_head_model_string) {
-  wolf_head_model = getent(wolf_head_model_string, "targetname");
+  wolf_head_model = getEnt(wolf_head_model_string, "targetname");
   wolf_head_model setModel("p6_zm_al_dream_catcher_off");
   self waittill("fully_charged");
   wolf_head_model setModel("p6_zm_al_dream_catcher");
@@ -390,7 +390,7 @@ first_wolf_encounter_vo() {
     return;
   }
   wait 2.0;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_closest = get_array_of_closest(self.origin, a_players);
 
   for(i = 0; i < a_closest.size; i++) {
@@ -407,7 +407,7 @@ first_wolf_complete_vo() {
     return;
   }
   wait 3.5;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_closest = get_array_of_closest(self.origin, a_players);
 
   for(i = 0; i < a_closest.size; i++) {
@@ -423,7 +423,7 @@ final_wolf_complete_vo() {
     return;
   }
   wait 3.5;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_closest = get_array_of_closest(self.origin, a_players);
 
   for(i = 0; i < a_closest.size; i++) {
@@ -489,7 +489,7 @@ tomahawk_upgrade_quest() {
   if(isDefined(self.retriever_trigger)) {
     self.retriever_trigger setinvisibletoplayer(self);
   } else {
-    trigger = getent("retriever_pickup_trigger", "script_noteworthy");
+    trigger = getEnt("retriever_pickup_trigger", "script_noteworthy");
     self.retriever_trigger = trigger;
     self.retriever_trigger setinvisibletoplayer(self);
   }
@@ -503,7 +503,7 @@ tomahawk_upgrade_quest() {
   e_org waittill("easteregg_scream_complete");
   e_org delete();
   level waittill("end_of_round");
-  tomahawk_pick = getent("spinning_tomahawk_pickup", "targetname");
+  tomahawk_pick = getEnt("spinning_tomahawk_pickup", "targetname");
   tomahawk_pick setclientfield("play_tomahawk_fx", 2);
   self.current_tomahawk_weapon = "upgraded_tomahawk_zm";
 }
@@ -511,9 +511,9 @@ tomahawk_upgrade_quest() {
 toggle_redeemer_trigger() {
   self endon("disconnect");
   flag_wait("tomahawk_pickup_complete");
-  upgraded_tomahawk_trigger = getent("redeemer_pickup_trigger", "script_noteworthy");
+  upgraded_tomahawk_trigger = getEnt("redeemer_pickup_trigger", "script_noteworthy");
   upgraded_tomahawk_trigger setinvisibletoplayer(self);
-  tomahawk_model = getent("spinning_tomahawk_pickup", "targetname");
+  tomahawk_model = getEnt("spinning_tomahawk_pickup", "targetname");
 
   while(true) {
     if(isDefined(self.current_tomahawk_weapon) && self.current_tomahawk_weapon == "upgraded_tomahawk_zm") {
@@ -562,7 +562,7 @@ hellhole_tomahawk_watch() {
 
 hellhole_grenades(grenade) {
   grenade endon("death");
-  trig_hellhole = getent("trig_cellblock_hellhole", "targetname");
+  trig_hellhole = getEnt("trig_cellblock_hellhole", "targetname");
 
   while(!grenade istouching(trig_hellhole)) {
     wait 0.05;
@@ -570,13 +570,13 @@ hellhole_grenades(grenade) {
 
   self maps\mp\zombies\_zm_score::add_to_player_score(20);
   playFX(level._effect["tomahawk_hellhole"], grenade.origin);
-  playsoundatposition("wpn_grenade_poof", grenade.origin);
+  playSoundAtPosition("wpn_grenade_poof", grenade.origin);
   grenade delete();
 }
 
 hellhole_tomahawk(grenade) {
   grenade endon("death");
-  trig_hellhole = getent("trig_cellblock_hellhole", "targetname");
+  trig_hellhole = getEnt("trig_cellblock_hellhole", "targetname");
 
   while(!grenade istouching(trig_hellhole)) {
     wait 0.05;
@@ -585,7 +585,7 @@ hellhole_tomahawk(grenade) {
   self notify("tomahawk_in_hellhole");
   grenade notify("in_hellhole");
   playFX(level._effect["tomahawk_hellhole"], grenade.origin);
-  playsoundatposition("wpn_grenade_poof", grenade.origin);
+  playSoundAtPosition("wpn_grenade_poof", grenade.origin);
   grenade delete();
 }
 

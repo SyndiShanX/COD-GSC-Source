@@ -30,7 +30,7 @@ __main__() {
     return;
   }
 
-  e_clip = getent("ww_case_clip", "targetname");
+  e_clip = getEnt("ww_case_clip", "targetname");
 
   if(isDefined(e_clip)) {
     e_clip delete();
@@ -74,7 +74,7 @@ function_53e45f4e() {
   var_8618ad82 = 1250 * 1250;
 
   while(true) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(distance2dsquared(e_player.origin, self.origin) <= var_8618ad82) {
         b_in_range = 1;
         break;
@@ -176,7 +176,7 @@ function_8b4cc6ae(origin, arc_angle_degrees = 90, do_trace, e_ignore) {
 
 function_2325482e() {
   mdl_weapon = util::spawn_model(level.s_ww_lock.model, level.s_ww_lock.origin, level.s_ww_lock.angles);
-  var_cb31d9aa = getent("trigger_lookat_ww_case", "targetname");
+  var_cb31d9aa = getEnt("trigger_lookat_ww_case", "targetname");
   var_cb31d9aa thread function_7e7626b5();
   level flag::wait_till(#"hash_65224b2f37fb9446");
   level notify(#"ww_case_completed");
@@ -219,7 +219,7 @@ function_9ffdf1be(e_player) {
     return 0;
   }
 
-  self sethintstring(#"hash_660652361297f2ab");
+  self setHintString(#"hash_660652361297f2ab");
   return 1;
 }
 

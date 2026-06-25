@@ -167,9 +167,9 @@ createCarryRemoteUAV(streakName, owner) {
 
   carryRemoteUAV thread carryRemoteUAV_handleExistence();
 
-  carryRemoteUAV.rangeTrigger = GetEnt("remote_uav_range", "targetname");
+  carryRemoteUAV.rangeTrigger = getEnt("remote_uav_range", "targetname");
   if(!isDefined(carryRemoteUAV.rangeTrigger)) {
-    heightEnt = GetEnt("airstrikeheight", "targetname");
+    heightEnt = getEnt("airstrikeheight", "targetname");
     carryRemoteUAV.maxHeight = heightEnt.origin[2];
     carryRemoteUAV.maxDistance = 3600;
   }
@@ -420,7 +420,7 @@ startRemoteUAV(lifeId, streakName, origin, angles) {
 lockPlayerForRemoteUAVLaunch() {
   lockSpot = spawn("script_origin", self.origin);
   lockSpot hide();
-  self playerLinkTo(lockSpot);
+  self playerlinkTo(lockSpot);
 
   self thread clearPlayerLockFromRemoteUAVLaunch(lockSpot);
 }
@@ -499,7 +499,7 @@ remoteUAV_ride(lifeId, remoteUAV, streakName) {
     self setThirdPersonDOF(false);
   }
 
-  self CameraLinkTo(remoteUAV, "tag_origin");
+  self CameralinkTo(remoteUAV, "tag_origin");
   self RemoteControlVehicle(remoteUAV);
 
   self thread remoteUAV_playerExit(remoteUAV);
@@ -937,7 +937,7 @@ remoteUAV_operationRumble(remoteUAV) {
   remoteUAV endon("end_remote");
 
   while(true) {
-    self PlayRumbleOnEntity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait(0.5);
   }
 }
@@ -945,9 +945,9 @@ remoteUAV_operationRumble(remoteUAV) {
 remoteUAV_watch_distance() {
   self endon("death");
 
-  self.rangeTrigger = GetEnt("remote_uav_range", "targetname");
+  self.rangeTrigger = getEnt("remote_uav_range", "targetname");
   if(!isDefined(self.rangeTrigger)) {
-    heightEnt = GetEnt("airstrikeheight", "targetname");
+    heightEnt = getEnt("airstrikeheight", "targetname");
     self.maxHeight = heightEnt.origin[2];
     self.maxDistance = 12800;
   }

@@ -151,8 +151,8 @@ cleanup_market() {
 }
 
 claws_toggle_firing(b_shouldfire) {
-  ai_claw_1 = getent("claw_1_ai", "targetname");
-  ai_claw_2 = getent("claw_2_ai", "targetname");
+  ai_claw_1 = getEnt("claw_1_ai", "targetname");
+  ai_claw_2 = getEnt("claw_2_ai", "targetname");
 
   if(isDefined(ai_claw_1)) {
     ai_claw_1 maps\pakistan_market::claw_toggle_firing(b_shouldfire);
@@ -253,7 +253,7 @@ shoot_at_players_feet() {
     level.player.water_impact_origin = spawn("script_origin", level.player.origin + v_offset);
     level.player.water_impact_origin.targetname = "player_water_impact_origin";
     level.player.water_impact_origin.health = 100;
-    level.player.water_impact_origin linkto(level.player);
+    level.player.water_impact_origin linkTo(level.player);
   }
 
   self thread shoot_at_target(level.player.water_impact_origin, undefined, undefined, -1);
@@ -295,7 +295,7 @@ frogger_harper_movement() {
   level.harper set_cqb_run_anim(%ai_cqb_walk_f_water_light, %ai_cqb_walk_f_water_light, %ai_cqb_walk_f_water_light);
   nd_path = getnode("harper_frogger_start", "targetname");
   level.harper setgoalnode(nd_path);
-  ai_crosby = getent("crosby_ai", "targetname");
+  ai_crosby = getEnt("crosby_ai", "targetname");
 
   if(!isDefined(ai_crosby)) {
     ai_crosby = init_hero("crosby");
@@ -479,10 +479,10 @@ _run_from_bus(m_bus, s_escape, e_ignore) {
 bus_wave_starts() {
   t_wave = get_ent("bus_street_wave_trigger", "targetname", 1);
   e_temp = spawn("script_origin", t_wave.origin);
-  t_wave enablelinkto();
-  t_wave linkto(e_temp);
+  t_wave enablelinkTo();
+  t_wave linkTo(e_temp);
   s_target = get_struct("bus_dam_temp_wave_struct", "targetname", 1);
-  e_temp moveto(s_target.origin, 10);
+  e_temp moveTo(s_target.origin, 10);
   t_wave thread _wave_hits_player();
   t_wave thread _wave_hits_ai();
   t_wave thread _wave_hits_debris();
@@ -514,7 +514,7 @@ _wave_hits_ai() {
     if(b_is_ai && b_is_enemy && b_first_time) {
       b_toggle = !b_toggle;
       e_triggered.hit_by_wave = 1;
-      v_launch = vectornormalize(e_triggered.origin - self.origin) * 55 + v_launch_offset;
+      v_launch = vectorNormalize(e_triggered.origin - self.origin) * 55 + v_launch_offset;
       e_triggered.animname = "generic";
 
       if(b_toggle) {
@@ -577,7 +577,7 @@ _wave_hits_player() {
   level notify("bus_wave_hits_player");
   level thread clientnotify_delay("bus_wave_start", 0.65);
   m_bus = get_ent("bus_dam_bus", "targetname", 1);
-  v_look = vectortoangles(vectornormalize(m_bus.origin - level.player.origin));
+  v_look = vectortoangles(vectorNormalize(m_bus.origin - level.player.origin));
   t_anim_trigger = get_ent("player_escaped_bus_trigger", "targetname", 1);
   b_should_play_anim = 0;
   level notify("bus_dam_wave_at_player");
@@ -660,7 +660,7 @@ street_cleanup() {
   delete_scene_all("bus_dam_wave_push_player", 1);
   maps\pakistan_util::delete_ents_inside_trigger("market_fxanim_cleanup_trig");
   maps\pakistan_util::delete_ents_inside_trigger("frogger_fxanim_cleanup_trig");
-  vol_touching = getent("zone_intro", "targetname");
+  vol_touching = getEnt("zone_intro", "targetname");
   vol_touching delete_fxanims_touching();
   vol_touching delete_ents_touching("script_model");
   vol_touching delete_ents_touching("trigger_box");
@@ -673,8 +673,8 @@ street_cleanup() {
 }
 
 cleanup_claws() {
-  ai_claw_1 = getent("claw_1_ai", "targetname");
-  ai_claw_2 = getent("claw_2_ai", "targetname");
+  ai_claw_1 = getEnt("claw_1_ai", "targetname");
+  ai_claw_2 = getEnt("claw_2_ai", "targetname");
 
   if(isDefined(ai_claw_1)) {
     ai_claw_1 stop_magic_bullet_shield();
@@ -795,7 +795,7 @@ monitor_bus_kill_player() {
 }
 
 make_dam_bus() {
-  s_bus_spot = getstruct("bus_spawn_struct", "targetname");
+  s_bus_spot = getStruct("bus_spawn_struct", "targetname");
   m_bus_model = spawn("script_model", s_bus_spot.origin);
   m_bus_model.angles = s_bus_spot.angles;
   m_bus_model.script_animname = "dam_bus";
@@ -906,7 +906,7 @@ _hack_screen_message() {
 }
 
 get_time_required_to_avoid_bus() {
-  t_success = getent("player_escaped_bus_trigger", "targetname");
+  t_success = getEnt("player_escaped_bus_trigger", "targetname");
   n_distance_to_bus = 0;
 
   if(isDefined(t_success)) {
@@ -1028,7 +1028,7 @@ debris_vehicle() {
   str_model = find_debris_model(nd_start);
   assert(isDefined(str_model), "Debris vehicle path without a model.");
   m_debris = spawn_model(str_model, self.origin, self.angles, 1);
-  m_debris linkto(self, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  m_debris linkTo(self, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
   m_debris thread _frogger_fx_play_on_object();
   m_debris thread debris_collision(self);
 
@@ -1049,11 +1049,11 @@ debris_vehicle() {
 
 disconnect_debris_paths(m_debris) {
   self endon("death");
-  m_debris disconnectpaths();
+  m_debris disconnectPaths();
   self waittill("start_vehiclepath");
   m_debris connectpaths();
   self waittill("reached_end_node");
-  m_debris disconnectpaths();
+  m_debris disconnectPaths();
 }
 
 #using_animtree("animated_props");
@@ -1239,7 +1239,7 @@ frogger_debris_pain_react() {
     self.takedamage = 0;
     anim_pain = self _get_best_frogger_pain_anim();
     e_temp = spawn("script_origin", self.origin);
-    self linkto(e_temp);
+    self linkTo(e_temp);
     self setflaggedanimknoballrestart("pain_anim", anim_pain, %body, 1, 0.2, 1);
     self waittillmatch("pain_anim", "end");
 
@@ -1284,9 +1284,9 @@ car_crash_corner_rumble() {
 frogger_debris_collision_rumble(e_debris) {
   while(self istouching(e_debris)) {
     level.player viewkick(40, self.origin);
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     earthquake(0.3, 1, e_debris.origin, 1024, e_debris);
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     earthquake(0.1, 0.5, e_debris.origin, 1024, e_debris);
     wait 0.5;
   }
@@ -1303,10 +1303,10 @@ bus_dam_rumble() {
   level endon("bus_dam_exit_done");
   flag_wait("bus_dam_start_started");
   m_bus = get_ent("bus_dam_bus", "targetname", 1);
-  self playrumbleonentity("reload_clipout");
+  self playRumbleOnEntity("reload_clipout");
   earthquake(0.05, 1, self.origin, 1000, self);
   wait 1;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   earthquake(0.05, 1, self.origin, 1000, self);
   earthquake(0.07, 11 / 2, self.origin, 1000, self);
   self rumble_loop(11 / 2, 0.5, "damage_light");
@@ -1323,32 +1323,32 @@ bus_dam_rumble() {
   flag_wait("bus_dam_idle_started");
   self bus_dam_idle_rumble(0.5, m_bus);
   wait 1;
-  self playrumbleonentity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
   earthquake(0.28, 1, self.origin, 1024, self);
   wait 1;
-  self playrumbleonentity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
   earthquake(0.24, 1, self.origin, 1024, self);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.27, 1, self.origin, 1024, self);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.15, 1, self.origin, 1024, self);
   wait 1.5;
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.2, 1, self.origin, 1024, self);
   wait 2;
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.1, 1, m_bus.origin, 1024, self);
   wait 5.2;
-  self playrumbleonentity("reload_clipout");
+  self playRumbleOnEntity("reload_clipout");
   earthquake(0.05, 1, m_bus.origin, 1024, self);
   wait 0.25;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   earthquake(0.05, 1, m_bus.origin, 1024, self);
   wait 0.1;
-  self playrumbleonentity("reload_clipout");
+  self playRumbleOnEntity("reload_clipout");
   earthquake(0.05, 1, m_bus.origin, 1024, self);
   wait 1;
-  self playrumbleonentity("reload_clipout");
+  self playRumbleOnEntity("reload_clipout");
   earthquake(0.05, 1, self.origin, 1024, self);
 }
 
@@ -1357,7 +1357,7 @@ bus_dam_idle_rumble(n_waittime, e_origin) {
   level endon("bus_dam_gate_success_started");
 
   while(true) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
 
     if(isDefined(e_origin)) {
       earthquake(0.05, n_waittime / 2, e_origin.origin, 1024, self);

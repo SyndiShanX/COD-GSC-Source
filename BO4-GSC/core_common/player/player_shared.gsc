@@ -92,7 +92,7 @@ on_player_spawned() {
     snappedorigin = self get_snapped_spot_origin(self.origin);
 
     if(!self flagsys::get(#"shared_igc")) {
-      self setorigin(snappedorigin);
+      self setOrigin(snappedorigin);
     }
 
     update_rate = 0.1;

@@ -442,10 +442,10 @@ jet_watch_delete(var_0) {
 sfx_jet_passby_01() {
   wait 0.1;
   level.jet_passby_01 playSound("scn_loki_jet_passby_close_01", "sounddone");
-  level.jet_passby_01 moveto((-9198, -93067, -115384), 3);
+  level.jet_passby_01 moveTo((-9198, -93067, -115384), 3);
   wait 0.9;
   level.jet_passby_01b playSound("scn_loki_jet_passby_close_02", "sounddone");
-  level.jet_passby_01b moveto((-9198, -93067, -115384), 2);
+  level.jet_passby_01b moveTo((-9198, -93067, -115384), 2);
   level.jet_passby_01 waittill("sounddone");
   level.jet_passby_01 delete();
   level.jet_passby_01b waittill("sounddone");
@@ -455,10 +455,10 @@ sfx_jet_passby_01() {
 sfx_jet_passby_02() {
   wait 1.5;
   level.jet_passby_02 playSound("scn_loki_jet_passby_dist_04", "sounddone");
-  level.jet_passby_02 moveto((4311, -46791, -121483), 3);
+  level.jet_passby_02 moveTo((4311, -46791, -121483), 3);
   wait 2.5;
   level.jet_passby_02b playSound("scn_loki_jet_passby_dist_01", "sounddone");
-  level.jet_passby_02b moveto((4311, -46791, -121483), 4);
+  level.jet_passby_02b moveTo((4311, -46791, -121483), 4);
   thread sfx_jet_passby_03();
   level.jet_passby_02 waittill("sounddone");
   level.jet_passby_02 delete();
@@ -469,7 +469,7 @@ sfx_jet_passby_02() {
 sfx_jet_passby_03() {
   wait 1.7;
   level.jet_passby_03 playSound("scn_loki_jet_passby_dist_02", "sounddone");
-  level.jet_passby_03 moveto((-38290, -88235, -115198), 6);
+  level.jet_passby_03 moveTo((-38290, -88235, -115198), 6);
   level.jet_passby_03 waittill("sounddone");
   level.jet_passby_03 delete();
 }
@@ -479,14 +479,14 @@ sfx_jet_passby_04() {
 
   if(level.jet_passby_04.destroyed == 0) {
     level.jet_passby_04 playSound("scn_loki_jet_passby_med_01", "sounddone");
-    level.jet_passby_04 moveto((-28769, -80586, -116586), 4);
+    level.jet_passby_04 moveTo((-28769, -80586, -116586), 4);
   }
 
   wait 1.3;
 
   if(level.jet_passby_04b.destroyed == 0) {
     level.jet_passby_04b playSound("scn_loki_jet_passby_close_05", "sounddone");
-    level.jet_passby_04b moveto((21164, -97900, -119423), 4);
+    level.jet_passby_04b moveTo((21164, -97900, -119423), 4);
   }
 
   level.jet_passby_04 waittill("sounddone");
@@ -500,7 +500,7 @@ sfx_jet_passby_05() {
 
   if(level.jet_passby_05.destroyed == 0) {
     level.jet_passby_05 playSound("scn_loki_jet_passby_med_02", "sounddone");
-    level.jet_passby_05 moveto((-22969, -83249, -116586), 4);
+    level.jet_passby_05 moveTo((-22969, -83249, -116586), 4);
   }
 
   thread sfx_jet_passby_06();
@@ -515,7 +515,7 @@ sfx_jet_passby_06() {
 
   if(level.jet_passby_06.destroyed == 0) {
     level.jet_passby_06 playSound("scn_loki_jet_passby_close_03", "sounddone");
-    level.jet_passby_06 moveto((-4461, -89713, -117839), 3);
+    level.jet_passby_06 moveTo((-4461, -89713, -117839), 3);
   }
 
   level.jet_passby_06 waittill("sounddone");
@@ -527,7 +527,7 @@ sfx_jet_passby_06b() {
 
   if(level.jet_passby_06b.destroyed == 0) {
     level.jet_passby_06b playSound("scn_loki_jet_passby_close_05", "sounddone");
-    level.jet_passby_06b moveto((23119, -81839, -117839), 3);
+    level.jet_passby_06b moveTo((23119, -81839, -117839), 3);
   }
 
   level.jet_passby_06b waittill("sounddone");
@@ -536,7 +536,7 @@ sfx_jet_passby_06b() {
 
 sfx_jet_passby_07() {
   wait 2.7;
-  level.jet_passby_07 moveto((-10405, -82882, -108826), 1.7);
+  level.jet_passby_07 moveTo((-10405, -82882, -108826), 1.7);
 
   if(level.jet_passby_07.destroyed == 0) {
     wait 0.3;
@@ -550,7 +550,7 @@ sfx_jet_passby_07() {
 sfx_jet_passby_08() {
   wait 8;
   level.jet_passby_08 playSound("scn_loki_jet_passby_med_03", "sounddone");
-  level.jet_passby_08 moveto((32431, -49070, -122643), 4);
+  level.jet_passby_08 moveTo((32431, -49070, -122643), 4);
   thread sfx_jet_passby_09();
   level.jet_passby_08 waittill("sounddone");
   level.jet_passby_08 delete();
@@ -558,7 +558,7 @@ sfx_jet_passby_08() {
 
 sfx_jet_passby_09() {
   wait 1.5;
-  level.jet_passby_09 moveto((530, -21242, -124623), 4);
+  level.jet_passby_09 moveTo((530, -21242, -124623), 4);
   wait 1;
   level.jet_passby_09 playSound("scn_loki_jet_passby_med_04", "sounddone");
   level.jet_passby_09 waittill("sounddone");
@@ -582,7 +582,7 @@ sfx_jet_passby_10() {
 
   if(level.jet_passby_10.destroyed == 0) {
     level.jet_passby_10 playSound("scn_loki_jet_passby_dist_02", "sounddone");
-    level.jet_passby_10 moveto((23920, -2304, -122187), 6);
+    level.jet_passby_10 moveTo((23920, -2304, -122187), 6);
   }
 
   level.jet_passby_10 waittill("sounddone");
@@ -599,22 +599,22 @@ sfx_jet_passby_11() {
   }
 
   wait 1;
-  level.jet_passby_11 moveto((31102, 7344, -106177), 2);
+  level.jet_passby_11 moveTo((31102, 7344, -106177), 2);
 
   if(level.jet_passby_13.destroyed == 0) {
-    level.jet_passby_13 moveto((31102, 7344, -106177), 2.4);
+    level.jet_passby_13 moveTo((31102, 7344, -106177), 2.4);
     level.jet_passby_13 playSound("scn_loki_jet_passby_close_05", "sounddone");
   }
 
-  level.jet_passby_12 moveto((27424, 18213, -111537), 2);
+  level.jet_passby_12 moveTo((27424, 18213, -111537), 2);
   wait 0.7;
 
   if(level.jet_passby_14.destroyed == 0) {
-    level.jet_passby_14 moveto((31150, 7400, -106177), 3);
+    level.jet_passby_14 moveTo((31150, 7400, -106177), 3);
     level.jet_passby_14 playSound("scn_loki_jet_passby_close_03", "sounddone");
   }
 
-  level.jet_passby_15 moveto((27424, 18213, -111537), 3);
+  level.jet_passby_15 moveTo((27424, 18213, -111537), 3);
   wait 0.5;
 
   if(level.jet_passby_15.destroyed == 0) {
@@ -642,7 +642,7 @@ sfx_beginning_rog_fire() {
   var_0 = spawn("script_origin", (-28172, -17882, 20077));
   var_0 playSound("scn_loki_rog_fire_space_infil");
   wait 2;
-  var_0 moveto((-49896, -17251, 18536), 5);
+  var_0 moveTo((-49896, -17251, 18536), 5);
 }
 
 sfx_rog_impact(var_0) {
@@ -775,7 +775,7 @@ sfx_moving_cover_3rd_piece(var_0) {
 
 play_sound_on_cover_piece(var_0, var_1) {
   var_2 = spawn("script_origin", self gettagorigin(var_0));
-  var_2 linkto(self, var_0);
+  var_2 linkTo(self, var_0);
   var_2 playSound("scn_loki_moving_cover_obj_01_lr");
   wait 10.0;
   var_2 delete();

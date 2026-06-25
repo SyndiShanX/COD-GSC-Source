@@ -82,28 +82,28 @@ section_precache() {
 
 setup_trailer_platform() {
   thread chase_player_mount_moving_trailer();
-  var_0 = getent("trailer_platform", "targetname");
+  var_0 = getEnt("trailer_platform", "targetname");
   var_0.origin = level.ally_vehicle_trailer.origin + (395, 0, 112);
   var_0.angles = level.ally_vehicle_trailer.angles + (0, 180, 0);
-  var_0 linkto(level.ally_vehicle_trailer);
+  var_0 linkTo(level.ally_vehicle_trailer);
   var_1 = getEntArray("trailer_platform_wheel_death_trigger", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 enablelinkto();
-    var_3 linkto(level.ally_vehicle_trailer);
+    var_3 enablelinkTo();
+    var_3 linkTo(level.ally_vehicle_trailer);
   }
 
   var_5 = getEntArray("trailer_node", "script_noteworthy");
 
   foreach(var_7 in var_5) {
-    var_7 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+    var_7 linkTo(level.ally_vehicle_trailer, "body_anim_jnt");
   }
 
   thread semi_trailer_death_trigger();
   var_9 = getEntArray("trailer_side_rail", "targetname");
 
   foreach(var_11 in var_9) {
-    var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+    var_11 linkTo(level.ally_vehicle_trailer, "body_anim_jnt");
   }
 
   common_scripts\utility::flag_wait("player_mount_vehicle_start");
@@ -117,9 +117,9 @@ setup_trailer_platform() {
 }
 
 chase_player_mount_moving_trailer() {
-  var_0 = getent("get_in_vehicle_trigger", "targetname");
-  var_0 enablelinkto();
-  var_0 linkto(level.ally_vehicle_trailer);
+  var_0 = getEnt("get_in_vehicle_trigger", "targetname");
+  var_0 enablelinkTo();
+  var_0 linkTo(level.ally_vehicle_trailer);
   waittillframeend;
   level waittill("start_mount");
   common_scripts\utility::flag_set("factory_rooftop_wind_gust_moment");
@@ -149,7 +149,7 @@ chase_player_mount_moving_trailer() {
   var_5 = maps\_utility::spawn_anim_model("factory_car_chase_intro_ally_pulls_up_player_b202");
   var_6 = maps\_utility::spawn_anim_model("factory_car_chase_intro_ally_pulls_up_player_b203");
   var_3 hide();
-  var_7 = getent("car_chase_intro", "script_noteworthy");
+  var_7 = getEnt("car_chase_intro", "script_noteworthy");
   var_8 = [];
   var_8["factory_car_chase_intro_ally_pulls_up_player_b201"] = var_4;
   var_8["factory_car_chase_intro_ally_pulls_up_player_b202"] = var_5;
@@ -157,7 +157,7 @@ chase_player_mount_moving_trailer() {
   var_8["factory_car_chase_intro_ally_pulls_up_player_b201"] thread chase_looped_afterburner_faint();
   var_8["factory_car_chase_intro_ally_pulls_up_player_b202"] thread chase_looped_afterburner_faint();
   var_8["factory_car_chase_intro_ally_pulls_up_player_b203"] thread chase_looped_afterburner_faint();
-  var_3 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+  var_3 linkTo(level.ally_vehicle_trailer, "body_anim_jnt");
   level.ally_vehicle_trailer notify("stop_loop");
   var_7 thread maps\_anim::anim_single(var_8, "factory_car_chase_intro_ally_pulls_up_player");
   var_9 = [];
@@ -166,7 +166,7 @@ chase_player_mount_moving_trailer() {
   var_9["ally_charlie"] = level.squad["ALLY_CHARLIE"];
 
   foreach(var_11 in var_9) {
-    var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+    var_11 linkTo(level.ally_vehicle_trailer, "body_anim_jnt");
   }
 
   level.ally_vehicle_trailer thread maps\_anim::anim_single(var_9, "factory_car_chase_intro_ally_pulls_up_player", "body_anim_jnt");
@@ -223,7 +223,7 @@ chase_looped_afterburner_faint() {
 }
 
 chase_airstrike_explosion(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   playFX(common_scripts\utility::getfx(var_1.script_fxid), var_1.origin, var_1.angles);
   level notify(var_0);
 }
@@ -241,7 +241,7 @@ chase_airstrike_kills_player() {
 }
 
 chase_player_falls_off_trailer() {
-  var_0 = getent("chase_kill_trigger", "targetname");
+  var_0 = getEnt("chase_kill_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("player_mount_vehicle_done");
   var_0 common_scripts\utility::trigger_on();
@@ -285,25 +285,25 @@ chase_ally_vehicle_setup() {
   level.ally_vehicle_trailer = maps\_vignette_util::vignette_vehicle_spawn("chase_ally_vehicle_trailer", "het_trailer");
   level.ally_vehicle maps\_vehicle::godon();
   level.ally_vehicle_trailer maps\_vehicle::godon();
-  var_0 = getent("trailer_airstrike_kill_trigger", "targetname");
-  var_0 enablelinkto();
-  var_0 linkto(level.ally_vehicle);
+  var_0 = getEnt("trailer_airstrike_kill_trigger", "targetname");
+  var_0 enablelinkTo();
+  var_0 linkTo(level.ally_vehicle);
   thread setup_trailer_platform();
   waittillframeend;
-  var_1 = getent("car_chase_intro", "script_noteworthy");
+  var_1 = getEnt("car_chase_intro", "script_noteworthy");
   var_1 maps\_anim::anim_first_frame_solo(level.ally_vehicle, "car_chase_intro_car_crash");
   var_1 maps\_anim::anim_first_frame_solo(level.ally_vehicle_trailer, "car_chase_intro_car_crash");
   common_scripts\utility::flag_set("chase_start_done");
   level waittill("semi_trailer_entrance");
   level.ally_vehicle thread maps\_utility::play_sound_on_tag("scn_factory_horn_short", "tag_origin");
   level.ally_vehicle_front = spawn("script_origin", level.ally_vehicle gettagorigin("tag_engine_right"));
-  level.ally_vehicle_front linkto(level.ally_vehicle);
-  var_2 = vectornormalize(anglesToForward(level.ally_vehicle.angles));
+  level.ally_vehicle_front linkTo(level.ally_vehicle);
+  var_2 = vectorNormalize(anglesToForward(level.ally_vehicle.angles));
   var_3 = var_2 * 192;
   var_4 = spawn("script_model", level.ally_vehicle.origin + (0, 0, 56) + var_3);
   var_4.angles = level.ally_vehicle.angles;
   var_4 setModel("tag_origin");
-  var_4 linkto(level.ally_vehicle);
+  var_4 linkTo(level.ally_vehicle);
   playFXOnTag(level._effect["factory_het_cab_headlight_full"], var_4, "tag_origin");
   level.ally_vehicle_trailer thread maps\_vehicle::vehicle_lights_on("running");
   level.ally_vehicle maps\_vehicle::vehicle_lights_on("running");
@@ -373,7 +373,7 @@ chase_blockade_crash() {
 
 ally_reach_curb_hop(var_0) {
   self.goalradius = 8;
-  var_1 = getent("car_chase_intro_proxy", "targetname");
+  var_1 = getEnt("car_chase_intro_proxy", "targetname");
   var_1 maps\_anim::anim_reach_and_approach_solo(self, var_0);
   self setgoalpos(self.origin);
 }
@@ -400,13 +400,13 @@ car_chase_intro_car_crash_setup() {
   var_0["factory_car_chase_intro_broken_light_post"] = level.factory_car_chase_intro_broken_light_post;
   var_0["factory_car_chase_intro_side_car01_crash"] = level.factory_car_chase_intro_side_car01;
   var_0["factory_car_chase_intro_side_car02_crash"] = level.factory_car_chase_intro_side_car02;
-  var_1 = getent("car_chase_intro", "script_noteworthy");
+  var_1 = getEnt("car_chase_intro", "script_noteworthy");
   var_1 maps\_anim::anim_first_frame(var_0, "car_chase_intro_car_crash");
   var_1 maps\_anim::anim_first_frame_solo(level.third_opfor_car, "factory_car_chase");
-  var_2 = getent("parking_lot_trucks_at_rest_blocker", "targetname");
+  var_2 = getEnt("parking_lot_trucks_at_rest_blocker", "targetname");
   var_2 connectpaths();
   var_2 notsolid();
-  var_3 = getent("parking_lot_fence_blocker", "targetname");
+  var_3 = getEnt("parking_lot_fence_blocker", "targetname");
   var_3 connectpaths();
   var_3 notsolid();
 }
@@ -424,7 +424,7 @@ car_chase_intro_car_crash() {
   var_0["second_opfor_car"] = level.blockade_vehicle_2;
   var_0["factory_car_chase_intro_side_car01_crash"] = level.factory_car_chase_intro_side_car01;
   var_0["factory_car_chase_intro_side_car02_crash"] = level.factory_car_chase_intro_side_car02;
-  var_1 = getent("car_chase_intro", "script_noteworthy");
+  var_1 = getEnt("car_chase_intro", "script_noteworthy");
   var_1 thread maps\_anim::anim_single(var_0, "car_chase_intro_car_crash");
   var_2 = [];
   var_2["heavy_weapon_opfor_car"] = level.blockade_vehicle_3;
@@ -438,7 +438,7 @@ car_chase_intro_car_crash() {
   level.ally_vehicle thread maps\factory_audio::sfx_play_crash_scene();
   var_1 thread maps\_anim::anim_single(var_2, "car_chase_intro_car_crash");
   level waittill("player_switch");
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   common_scripts\utility::exploder("building_corner_01_exploder");
   thread maps\factory_anim::factory_car_chase_spawn();
   chase_wait_for_semi_touch("chase_entering_warehouse");
@@ -454,14 +454,14 @@ car_chase_intro_car_crash() {
 car_crash_slowmo() {
   wait 5.3333;
   earthquake(0.5, 1.5, level.player.origin, 2500);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }
 
 semi_trailer_death_trigger() {
   level endon("semi_stopped");
-  var_0 = getent("trailer_intro_kill_trigger", "targetname");
-  var_0 enablelinkto();
-  var_0 linkto(level.ally_vehicle_trailer);
+  var_0 = getEnt("trailer_intro_kill_trigger", "targetname");
+  var_0 enablelinkTo();
+  var_0 linkTo(level.ally_vehicle_trailer);
   var_0 thread semi_trailer_death_trigger_delete();
   common_scripts\utility::flag_wait("flag_trailer_intro_kill");
   level notify("new_quote_string");
@@ -476,7 +476,7 @@ semi_trailer_death_trigger_delete() {
 }
 
 chase_wait_for_semi_touch(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   while(!level.ally_vehicle_front istouching(var_1)) {
     wait 0.05;
@@ -537,7 +537,7 @@ vehicle_catch_fire_when_shot() {
     var_1 = self.origin;
     wait 0.1;
     var_2 = self.origin - var_1;
-    self stopanimscripted();
+    self stopanimScripted();
     self vehicle_teleport(self.origin + (0, 0, 10), self.angles);
     self vehphys_setspeed(60.0);
     var_3 = 4 * var_2 + (0, 0, randomintrange(200, 250));

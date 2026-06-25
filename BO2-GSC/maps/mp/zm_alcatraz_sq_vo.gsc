@@ -18,12 +18,12 @@
 vo_see_map_trigger() {
   level endon("someone_completed_quest_cycle");
   e_triggerer = undefined;
-  t_map_vo_trigger = getent("map_vo_trigger", "targetname");
+  t_map_vo_trigger = getEnt("map_vo_trigger", "targetname");
   b_has_line_played = 0;
 
   while(!b_has_line_played) {
     t_map_vo_trigger waittill("trigger", e_triggerer);
-    players = getplayers();
+    players = getPlayers();
 
     if(!e_triggerer.dontspeak && !flag("story_vo_playing")) {
       flag_set("story_vo_playing");
@@ -47,7 +47,7 @@ opening_vo() {
   load_vo_alias_arrays();
   flag_wait("afterlife_start_over");
   wait 1;
-  players = getplayers();
+  players = getPlayers();
   vo_play_four_part_conversation(level.four_part_convos["start_1_oh_shit_" + randomintrange(1, 3)]);
   wait 1;
 
@@ -364,7 +364,7 @@ vo_play_four_part_conversation(convo) {
   if(!isDefined(convo)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 4 && !flag("story_vo_playing")) {
     flag_set("story_vo_playing");
@@ -408,7 +408,7 @@ vo_play_four_part_conversation(convo) {
     }
 
     for(i = 0; i < convo.size; i++) {
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size != 4) {
         foreach(player in players) {
@@ -468,9 +468,9 @@ vo_play_four_part_conversation(convo) {
 
 electric_chair_vo() {
   if(level.n_quest_iteration_count == 1) {
-    e_nml_zone = getent("zone_golden_gate_bridge", "targetname");
+    e_nml_zone = getEnt("zone_golden_gate_bridge", "targetname");
     n_players_on_bridge_count = get_players_touching("zone_golden_gate_bridge");
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 4 && n_players_on_bridge_count == 4) {
       if(count_zombies_in_zone("zone_golden_gate_bridge") > 0) {
@@ -486,8 +486,8 @@ electric_chair_vo() {
 }
 
 escape_flight_vo() {
-  e_roof_zone = getent("zone_roof", "targetname");
-  players = getplayers();
+  e_roof_zone = getEnt("zone_roof", "targetname");
+  players = getPlayers();
   player = players[randomintrange(0, players.size)];
 
   if(isDefined(player) && player istouching(e_roof_zone)) {
@@ -507,7 +507,7 @@ escape_flight_vo() {
 
   if(level.characters_in_nml.size > 0) {
     character_name = level.characters_in_nml[randomintrange(0, level.characters_in_nml.size)];
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(isDefined(player) && player.character_name == character_name) {
@@ -521,7 +521,7 @@ escape_flight_vo() {
 
   if(level.characters_in_nml.size > 0) {
     character_name = level.characters_in_nml[randomintrange(0, level.characters_in_nml.size)];
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(isDefined(player) && player.character_name == character_name) {
@@ -535,7 +535,7 @@ escape_flight_vo() {
 
   if(level.characters_in_nml.size > 0) {
     character_name = level.characters_in_nml[randomintrange(0, level.characters_in_nml.size)];
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(isDefined(player) && player.character_name == character_name) {
@@ -545,7 +545,7 @@ escape_flight_vo() {
   }
 
   flag_wait("plane_zapped");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player) && isinarray(level.characters_in_nml, player.character_name)) {
@@ -557,7 +557,7 @@ escape_flight_vo() {
 player_scream_thread() {
   self endon("death");
   self endon("disconnect");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player) && isinarray(level.characters_in_nml, player.character_name)) {
@@ -586,7 +586,7 @@ is_player_character_present(character_name) {
     return false;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player.character_name) && player.character_name == character_name) {
@@ -599,9 +599,9 @@ is_player_character_present(character_name) {
 
 get_players_touching(scr_touched_name) {
   n_touching_count = 0;
-  e_touched = getent(scr_touched_name, "targetname");
+  e_touched = getEnt(scr_touched_name, "targetname");
   assert(isDefined(e_touched));
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player) && player istouching(e_touched)) {
@@ -613,7 +613,7 @@ get_players_touching(scr_touched_name) {
 }
 
 count_zombies_in_zone(volume) {
-  e_zone = getent(volume, "targetname");
+  e_zone = getEnt(volume, "targetname");
 
   if(!isDefined(e_zone)) {
     return;

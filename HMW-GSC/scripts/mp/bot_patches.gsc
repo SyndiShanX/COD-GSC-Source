@@ -147,7 +147,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
     random_target = self;
   }
 
-  heightEnt = getent("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
   if(isDefined(heightEnt) || isDefined(level.airstrikeHeightScale)) {
     height = maps\mp\h2_killstreaks\_airdrop::getFlyHeightOffset(random_target.origin);
   } else {

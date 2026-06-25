@@ -48,7 +48,7 @@ function private soul_capture(localclientnum, oldval, newval, bnewent, binitials
   }
 
   time = distance(e_fx.origin, capture_point.origin) / def.speed;
-  e_fx moveto(capture_point.origin, time);
+  e_fx moveTo(capture_point.origin, time);
   e_fx waittill(#"movedone");
   e_fx playSound(fieldname, "zmb_sq_souls_impact");
   util::playFXOnTag(fieldname, def.var_2e845a89, e_fx, "tag_origin");

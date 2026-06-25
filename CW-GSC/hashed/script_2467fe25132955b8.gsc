@@ -64,7 +64,7 @@ function function_6736205c(var_638b775a = 0) {
   self endon(#"death", #"hash_34e7ef4239d22ba9");
   self namespace_1b527536::function_460882e2(1);
   var_189ef5f2 = spawnStruct();
-  v_forward = vecscale(vectornormalize(anglesToForward(self.angles)), 64);
+  v_forward = vecscale(vectorNormalize(anglesToForward(self.angles)), 64);
   var_189ef5f2.origin = self.origin;
   var_189ef5f2.origin += v_forward;
 
@@ -126,7 +126,7 @@ function function_6736205c(var_638b775a = 0) {
   }
 
   self playSound(var_3decbda2);
-  playsoundatposition(var_89ae2770, self.origin);
+  playSoundAtPosition(var_89ae2770, self.origin);
   nearbyzombies = getentitiesinradius(var_189ef5f2.origin, radius, 15);
 
   foreach(zombie in nearbyzombies) {

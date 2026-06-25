@@ -13,7 +13,7 @@ init_elvira() {
   scripts\engine\utility::flag_init("spellbook_page2_placed");
   scripts\engine\utility::flag_init("elvira_summoned");
   wait(10);
-  var_0 = scripts\engine\utility::getstruct("elvira", "targetname");
+  var_0 = scripts\engine\utility::getStruct("elvira", "targetname");
   if(!isDefined(var_0)) {
     var_0 = spawnStruct();
     var_0.origin = (353.5, -2560, 534.5);
@@ -24,16 +24,16 @@ init_elvira() {
   level.elvira.angles = var_0.angles;
   level.elvira setModel("fullbody_zmb_hero_elvira_couch");
   level.elvira_struct = var_0;
-  level.elvira_spellbook = getent("elvira_spellbook", "targetname");
+  level.elvira_spellbook = getEnt("elvira_spellbook", "targetname");
   level.elvira_spellbook hide();
   level thread elvira_idle_loop();
   level thread open_safe();
 }
 
 open_safe() {
-  var_0 = scripts\engine\utility::getstruct("take_spellbook", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("take_spellbook", "script_noteworthy");
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
-  var_1 = getent("elvira_safe", "targetname");
+  var_1 = getEnt("elvira_safe", "targetname");
   var_1 setModel("cp_town_safe");
   level waittill("activate_power");
   var_1 setModel("cp_town_safe_open");
@@ -55,8 +55,8 @@ register_elvira_interactions() {
 }
 
 elvira_interaction_monitor() {
-  var_0 = scripts\engine\utility::getstruct("elvira_beach", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstruct("elvira_talk", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("elvira_beach", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("elvira_talk", "script_noteworthy");
   for(;;) {
     if(scripts\engine\utility::istrue(level.vo_system_busy)) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_1);
@@ -73,20 +73,20 @@ elvira_interaction_monitor() {
 }
 
 init_elvira_beach() {
-  var_0 = scripts\engine\utility::getstruct("elvira_beach", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("elvira_beach", "script_noteworthy");
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   scripts\engine\utility::flag_wait("boss_fight_active");
   level thread delay_elvira_ready_vo();
-  level.elvira_spawn_struct = scripts\engine\utility::getstruct("elvira_spawn_beach", "targetname");
+  level.elvira_spawn_struct = scripts\engine\utility::getStruct("elvira_spawn_beach", "targetname");
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
-  var_1 = getent("elvira_spellbook", "targetname");
-  var_2 = getent("elvira_bookstand", "targetname");
+  var_1 = getEnt("elvira_spellbook", "targetname");
+  var_2 = getEnt("elvira_bookstand", "targetname");
   var_1.og_origin = var_1.origin;
   var_1.og_angles = var_1.angles;
   var_2.og_origin = var_2.origin;
   var_2.og_angles = var_2.angles;
-  var_3 = scripts\engine\utility::getstruct("elvira_beach_bookstand", "targetname");
-  var_4 = scripts\engine\utility::getstruct("elvira_beach_book", "targetname");
+  var_3 = scripts\engine\utility::getStruct("elvira_beach_bookstand", "targetname");
+  var_4 = scripts\engine\utility::getStruct("elvira_beach_book", "targetname");
   var_1.origin = var_4.origin;
   var_1.angles = var_4.angles;
   var_2.origin = var_3.origin;
@@ -408,7 +408,7 @@ elvira_mirror_check(var_0) {
     return;
   }
 
-  var_2 = getent("elvira_mirror", "targetname");
+  var_2 = getEnt("elvira_mirror", "targetname");
   scripts\cp\utility::set_quest_icon(8);
   var_0 playlocalsound("part_pickup");
   playFX(level._effect["generic_pickup"], var_2.origin);
@@ -428,7 +428,7 @@ place_elvira_spellbook(var_0) {
 take_elvira_spellbook(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   scripts\engine\utility::flag_set("spellbook_found");
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_1 playlocalsound("part_pickup");
   playFX(level._effect["generic_pickup"], var_2.origin);
   var_2 delete();
@@ -438,7 +438,7 @@ take_elvira_spellbook(var_0, var_1) {
 take_spellbook_page(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   scripts\engine\utility::flag_set("spellbook_page1_found");
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_1 playlocalsound("part_pickup");
   playFX(level._effect["generic_pickup"], var_2.origin);
   var_2 delete();

@@ -101,7 +101,7 @@ spit_attack(enemy) {
 
     if(isEnemyChopper) {
       aim_ahead_factor = 5;
-      aim_ahead_unit_vec = VectorNormalize(anglesToForward(targetedEnemy.angles));
+      aim_ahead_unit_vec = vectorNormalize(anglesToForward(targetedEnemy.angles));
       aim_ahead_speed_mag = Length(targetedEnemy Vehicle_GetVelocity()) * aim_ahead_factor;
       aim_ahead_vec = aim_ahead_unit_vec * aim_ahead_speed_mag;
 
@@ -125,7 +125,7 @@ spit_attack(enemy) {
     } else if(isDefined(self.enemy) && targetedEnemy == self.enemy) {
       self ScrAgentSetOrientMode("face enemy");
     } else {
-      forward = VectorNormalize(targetedEnemy.origin - self.origin);
+      forward = vectorNormalize(targetedEnemy.origin - self.origin);
       if(isDefined(self.current_spit_node)) {
         up = AnglesToUp(self.current_spit_node.angles);
       } else {
@@ -515,7 +515,7 @@ move_to_spitter_attack_node(attack_node) {
   claim_spit_node(attack_node);
 
   self ScrAgentSetGoalNode(attack_node);
-  self ScrAgentSetGoalRadius(64);
+  self ScrAgentSetgoalRadius(64);
   self thread enemy_proximity_during_move_monitor();
   self waittill("goal_reached");
 }
@@ -546,7 +546,7 @@ enemy_proximity_during_move_monitor() {
   release_spit_node();
   self notify("player_proximity_during_move");
   self ScrAgentSetGoalEntity(closePlayer);
-  self ScrAgentSetGoalRadius(2048.0);
+  self ScrAgentSetgoalRadius(2048.0);
   self waittill("goal_reached");
 }
 

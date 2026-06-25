@@ -262,9 +262,9 @@ function function_cb436f32(object) {
   triggerheight = level.var_c9404b0a.bundle.kstriggerheight;
   var_b1a6d849 = level.var_c9404b0a.bundle.var_2d890f85;
   usetrigger = spawn("trigger_radius_use", object.origin - (0, 0, 50), 0, triggerradius, triggerheight);
-  usetrigger usetriggerrequirelookat();
-  usetrigger sethintstring(#"hash_75acfdc16a0732df");
-  usetrigger triggerignoreteam();
+  usetrigger useTriggerRequireLookAt();
+  usetrigger setHintString(#"hash_75acfdc16a0732df");
+  usetrigger triggerIgnoreTeam();
   usetrigger setvisibletoall();
   usetrigger triggerenable(1);
   medpack.gameobject = gameobjects::create_use_object(player getteam(), usetrigger, [], undefined, level.var_c9404b0a.bundle.var_9333131b, 1);

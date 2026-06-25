@@ -421,7 +421,7 @@ func_3602(var_0) {
   var_4 = func_3587(var_0);
   var_5 = func_3588(var_0);
   var_6 = func_3586(var_0);
-  var_7 = vectornormalize(var_4 - var_6);
+  var_7 = vectorNormalize(var_4 - var_6);
   var_8 = var_4 - var_5;
   var_9 = vectordot(var_7, var_8);
   var_1.var_DCCF["main"]["minigun"]["pitch_offset"] = distance(var_5, var_6);
@@ -1142,7 +1142,7 @@ func_35D6(var_0, var_1, var_2, var_3) {
         var_1E missile_settargetpos(var_13[var_17]);
       } else if(isDefined(var_10[var_17])) {
         var_1E.var_1155F = var_10[var_17];
-        var_1E missile_settargetent(var_10[var_17]);
+        var_1E missile_settargetEnt(var_10[var_17]);
       }
 
       var_16++;
@@ -1205,7 +1205,7 @@ func_35E9(var_0, var_1, var_2, var_3, var_4) {
 
   func_3635(var_5, var_2, 0);
   foreach(var_14 in self.var_E5DB) {
-    var_14 linkto(self, var_5);
+    var_14 linkTo(self, var_5);
   }
 
   wait(var_10);

@@ -152,7 +152,7 @@ activate_zm_fan_trap() {
   self waittill(#"trap_finished");
   self.in_use = undefined;
   self.mdl_fan thread scene::play(#"p8_fxanim_zm_esc_trap_fan_play", self.mdl_fan);
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(e_player in a_players) {
     if(isDefined(e_player.fan_trap_rumble) && e_player.fan_trap_rumble) {
@@ -209,7 +209,7 @@ function_9c2d463d(t_damage) {
       #e_player: t_damage.activated_by_player
     });
     self zombie_utility::gib_random_parts();
-    playsoundatposition("zmb_trap_fan_grind", self.origin);
+    playSoundAtPosition("zmb_trap_fan_grind", self.origin);
     self thread stop_fan_trap_blood_fx();
     self dodamage(self.health + 1000, t_damage.origin, undefined, t_damage);
 
@@ -231,7 +231,7 @@ function_9c2d463d(t_damage) {
   while(isalive(self) && self istouching(t_damage) && isDefined(t_damage.in_use) && t_damage.in_use) {
     self function_1395e596();
     self dodamage(self.maxhealth * 0.3, t_damage.origin, undefined, t_damage);
-    playsoundatposition("zmb_trap_fan_grind", self.origin);
+    playSoundAtPosition("zmb_trap_fan_grind", self.origin);
     wait 0.1;
   }
 
@@ -256,7 +256,7 @@ function_1395e596() {
     return;
   }
 
-  playsoundatposition(#"zmb_death_gibs", self.origin);
+  playSoundAtPosition(#"zmb_death_gibs", self.origin);
 
   if(math::cointoss()) {
     if(!gibserverutils::isgibbed(self, 32)) {
@@ -495,9 +495,9 @@ activate_zm_acid_trap() {
 }
 
 function_6219e5ab(trap) {
-  playsoundatposition(#"hash_4b93c2d674807e60", self.origin);
+  playSoundAtPosition(#"hash_4b93c2d674807e60", self.origin);
   self waittill(#"available");
-  playsoundatposition(#"zmb_acid_trap_available", self.origin);
+  playSoundAtPosition(#"zmb_acid_trap_available", self.origin);
 }
 
 function_efd61793(t_damage) {
@@ -724,7 +724,7 @@ activate_zm_spinning_trap() {
   self waittill(#"trap_finished");
   self.in_use = undefined;
   self.mdl_trap thread scene::play(#"p8_fxanim_zm_esc_trap_spinning_bundle", self.mdl_trap);
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(e_player in a_players) {
     if(isDefined(e_player.b_spinning_trap_rumble) && e_player.b_spinning_trap_rumble) {
@@ -791,9 +791,9 @@ function_1f7e661f(t_damage) {
     self.var_bd4627e1 = 1;
     self clientfield::set("spinning_trap_eye_fx", 1);
     var_e72c9959 = util::spawn_model("tag_origin", t_damage.mdl_trap gettagorigin("tag_weapon_3"), t_damage.mdl_trap gettagangles("tag_weapon_3"));
-    var_e72c9959 linkto(t_damage.mdl_trap, "tag_weapon_3");
+    var_e72c9959 linkTo(t_damage.mdl_trap, "tag_weapon_3");
     self thread function_864365ef(t_damage, var_e72c9959);
-    a_e_players = util::get_array_of_closest(self.origin, getplayers());
+    a_e_players = util::get_array_of_closest(self.origin, getPlayers());
 
     if(isDefined(a_e_players[0]) && distance2dsquared(a_e_players[0].origin, self.origin) < 400 * 400) {
       a_e_players[0] zm_audio::create_and_play_dialog(#"spin_trap", #"hook", undefined, 1);
@@ -817,11 +817,11 @@ function_1f7e661f(t_damage) {
       gibserverutils::annihilate(self);
     } else {
       n_lift_height = randomintrange(8, 64);
-      v_away_from_source = vectornormalize(self.origin - t_damage.origin);
+      v_away_from_source = vectorNormalize(self.origin - t_damage.origin);
       v_away_from_source *= 128;
       v_away_from_source = (v_away_from_source[0], v_away_from_source[1], n_lift_height);
       a_trace = physicstraceex(self.origin + (0, 0, 32), self.origin + v_away_from_source, (-16, -16, -16), (16, 16, 16), self);
-      self setplayercollision(0);
+      self setPlayerCollision(0);
       self startragdoll();
       self launchragdoll(150 * anglestoup(self.angles) + (v_away_from_source[0], v_away_from_source[1], 0));
     }
@@ -952,7 +952,7 @@ function_864365ef(t_damage, var_e72c9959) {
   self setteam(util::get_enemy_team(self.team));
   self zombie_utility::makezombiecrawler(1);
   var_e72c9959 thread scene::init(#"aib_vign_zm_mob_hook_trap_zombie", self);
-  playsoundatposition(#"hash_42c6cc2204b7fbbd", self.origin);
+  playSoundAtPosition(#"hash_42c6cc2204b7fbbd", self.origin);
   t_damage waittill(#"trap_finished");
   var_44342e79 = var_e72c9959 scene::function_8582657c(#"p8_fxanim_zm_esc_trap_fan_play", "Shot 2");
   var_e72c9959 scene::play(#"aib_vign_zm_mob_hook_trap_zombie", self);

@@ -301,7 +301,7 @@ function private function_2138c62(augmented_impact_fx, damage_data, var_b33be77)
     if(damage_data.mod == "MOD_GRENADE_SPLASH" || damage_data.mod == "MOD_PROJECTILE_SPLASH") {
       var_f6bb7260 = self.var_ac2c4043;
       var_e5cdf905 = self getpointinbounds(randomfloatrange(var_f6bb7260[0] * -1, var_f6bb7260[0]), randomfloatrange(var_f6bb7260[1] * -1, var_f6bb7260[1]), randomfloatrange(var_f6bb7260[2] * -1, var_f6bb7260[2]));
-      dir = vectornormalize(var_e5cdf905 - damage_data.position);
+      dir = vectorNormalize(var_e5cdf905 - damage_data.position);
       trace_result = bulletTrace(damage_data.position + dir, var_e5cdf905 + dir * 12, 0, undefined);
 
       if(!isDefined(trace_result[#"entity"]) || trace_result[#"entity"] != self) {
@@ -390,7 +390,7 @@ function private function_2138c62(augmented_impact_fx, damage_data, var_b33be77)
       if((isDefined(var_2cc6e886.var_f9ac1f46) ? var_2cc6e886.var_f9ac1f46 : 0) > 0 && forward == trace_result[#"normal"]) {
         offset = forward + perpendicularvector(forward) * tan(var_2cc6e886.var_f9ac1f46) * randomfloat(1);
         offset = rotatepointaroundaxis(offset, forward, randomfloatrange(0, 360));
-        forward = vectornormalize(offset);
+        forward = vectorNormalize(offset);
 
         if(getdvarint(#"hash_168747d9fbaa6a48", 0)) {
           iprintlnbold(acos(vectordot(trace_result[#"normal"], forward)));
@@ -522,7 +522,7 @@ function private function_f80632da(range, var_2b88ddd3, attacker, position, forw
       mins = var_f39b1a24 getabsmins();
       maxs = var_f39b1a24 getabsmaxs();
       var_4ead9840 = (mins + maxs) / 2;
-      var_80b482af = vectornormalize(var_4ead9840 - position);
+      var_80b482af = vectorNormalize(var_4ead9840 - position);
       dot = vectordot(forward, var_80b482af);
 
       if(dot > var_2b88ddd3) {
@@ -588,7 +588,7 @@ function private function_db7de647(var_917c5c76, settings, position, normal, var
 
     var_917c5c76 thread function_1a4bd745();
   } else if(settings.lerp_time > float(function_60d95f53()) / 1000) {
-    var_917c5c76 moveto(position + normal * settings.forward_offset + (0, 0, settings.z_offset), settings.lerp_time);
+    var_917c5c76 moveTo(position + normal * settings.forward_offset + (0, 0, settings.z_offset), settings.lerp_time);
     start_radius = var_917c5c76.radius;
     time = 0;
 

@@ -111,7 +111,7 @@ function function_e0069640(struct) {
   }
 
   forward = anglesToForward(scriptmodel.angles);
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   offset = forward * 24;
   offset = (offset[0], offset[1], offset[2] + 50);
   trigger = content_manager::spawn_interact(struct, &function_5b75a557, #"hash_2492283b9609c4a", undefined, 64, 128, undefined, offset);
@@ -537,7 +537,7 @@ function function_4609e67c(machine, trigger) {
                     break;
                 }
 
-                self playrumbleonentity(#"zm_interact_rumble");
+                self playRumbleOnEntity(#"zm_interact_rumble");
                 self zm_weapons::function_37e9e0cb(item, weapon, aat_name);
                 self zm_score::minus_to_player_score(var_dfa2c41b);
                 self zm_stats::increment_client_stat(#"hash_1bcba3bbca05dee0");
@@ -572,7 +572,7 @@ function function_4609e67c(machine, trigger) {
 
               self playlocalsound(#"hash_1a8a0ca90d106338" + paplv);
               self item_inventory::function_73ae3380(item, paplv);
-              self playrumbleonentity(#"zm_interact_rumble");
+              self playRumbleOnEntity(#"zm_interact_rumble");
               self zm_score::minus_to_player_score(var_340eb1b);
               self zm_stats::increment_client_stat(#"hash_14f07bc6dbeaab78" + paplv);
               self zm_stats::increment_player_stat(#"hash_14f07bc6dbeaab78" + paplv);

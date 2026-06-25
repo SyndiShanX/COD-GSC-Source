@@ -78,7 +78,7 @@ function function_8db1ed35() {
 function function_e6cfa209() {
   self endon("disconnect");
   level endon("hash_e6cfa209");
-  e_clip = getent("swamp_planter_skull_reveal", "targetname");
+  e_clip = getEnt("swamp_planter_skull_reveal", "targetname");
   while(true) {
     if(self util::ads_button_held()) {
       if(self getcurrentweapon() !== level.var_c003f5b) {
@@ -100,7 +100,7 @@ function function_e6cfa209() {
 
 function function_26f677a6(e_clip) {
   level clientfield::set("reveal_golden_bucket_planting_location", 1);
-  playsoundatposition("zmb_wpn_skullgun_discover", e_clip.origin);
+  playSoundAtPosition("zmb_wpn_skullgun_discover", e_clip.origin);
   exploder::exploder("fxexp_515");
   wait(3);
   e_clip delete();
@@ -119,10 +119,10 @@ function function_26f677a6(e_clip) {
 
 function function_4fd948c5(player) {
   if(player clientfield::get_to_player("bucket_held") && !level flag::get("bucket_planted")) {
-    self sethintstring(&"ZM_ISLAND_PLANT_BUCKET");
+    self setHintString(&"ZM_ISLAND_PLANT_BUCKET");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -163,7 +163,7 @@ function function_4cebde70() {
   foreach(s_planting_spot in var_fc72ce0a) {
     s_planting_spot.model = util::spawn_model("p7_zm_isl_plant_planter", s_planting_spot.origin, s_planting_spot.angles);
     s_planting_spot.model movez(16, 2);
-    playsoundatposition("zmb_planters_appear", s_planting_spot.origin);
+    playSoundAtPosition("zmb_planters_appear", s_planting_spot.origin);
   }
   s_planting_spot.model waittill("movedone");
   level thread function_152720d8(var_fc72ce0a);
@@ -178,7 +178,7 @@ function function_152720d8(var_fc72ce0a) {
 }
 
 function function_c2dab6c5() {
-  e_volume = getent("golden_bucket_ee_volume", "targetname");
+  e_volume = getEnt("golden_bucket_ee_volume", "targetname");
   while(!level flag::get("golden_bucket_ee_completed")) {
     while(true) {
       if(function_9a2f5188(e_volume) && function_e630b27f()) {
@@ -225,7 +225,7 @@ function function_f0d8de1d() {
   level endon("hash_247c3608");
   level endon("hash_62e8dbc1");
   level endon("hash_4d1841e4");
-  e_volume = getent("golden_bucket_ee_volume", "targetname");
+  e_volume = getEnt("golden_bucket_ee_volume", "targetname");
   n_timeout = 120;
   while(true) {
     n_counter = n_timeout;
@@ -250,7 +250,7 @@ function function_72c0a344() {
 }
 
 function function_9a2f5188(e_volume) {
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(player istouching(e_volume)) {
       return true;
@@ -272,7 +272,7 @@ function function_e630b27f() {
 function function_4d1841e4() {
   level flag::init("golden_bucket_cache_plant_opened");
   level flag::init("golden_bucket_planters_empty");
-  playsoundatposition("zmb_golden_bucket_success", (0, 0, 0));
+  playSoundAtPosition("zmb_golden_bucket_success", (0, 0, 0));
   level thread function_6742be8f();
   var_fc72ce0a = struct::get_array("planting_spot_golden_bucket_challenge", "targetname");
   foreach(var_8c46024b in var_fc72ce0a) {
@@ -287,7 +287,7 @@ function function_4d1841e4() {
   s_planting_spot.s_plant.model playSound("evt_island_seed_grow_stage_2");
   wait(2);
   s_planting_spot.s_plant.model solid();
-  s_planting_spot.s_plant.model disconnectpaths();
+  s_planting_spot.s_plant.model disconnectPaths();
   s_planting_spot.s_plant.model clientfield::set("plant_growth_siege_anims", 2);
   s_planting_spot scene::play("p7_fxanim_zm_island_plant_stage2_bundle", s_planting_spot.s_plant.model);
   s_planting_spot.s_plant.model playSound("evt_island_seed_grow_stage_3");
@@ -297,7 +297,7 @@ function function_4d1841e4() {
   s_planting_spot.s_plant.model waittill("hash_116e737b");
   s_planting_spot.s_plant.model setModel("p7_fxanim_zm_island_plant_cache_major_glow_mod");
   s_planting_spot.s_plant.model clientfield::set("cache_plant_interact_fx", 1);
-  s_planting_spot.s_plant.model disconnectpaths();
+  s_planting_spot.s_plant.model disconnectPaths();
   s_planting_spot thread scene::init("p7_fxanim_zm_island_plant_cache_major_bundle", s_planting_spot.s_plant.model);
   s_planting_spot.s_plant.model waittill("hash_aa2731d8");
   s_planting_spot.prompt_and_visibility_func = &function_53296cde;
@@ -308,7 +308,7 @@ function function_4d1841e4() {
   s_planting_spot scene::play("p7_fxanim_zm_island_plant_cache_major_bundle", s_planting_spot.s_plant.model);
   m_reward = util::spawn_model("p7_zm_isl_bucket_115_gold", s_planting_spot.origin + vectorscale((0, 0, 1), 36), s_planting_spot.angles);
   m_reward clientfield::set("golden_bucket_glow_fx", 1);
-  playsoundatposition("zmb_golden_bucket_appear", s_planting_spot.origin + vectorscale((0, 0, 1), 36));
+  playSoundAtPosition("zmb_golden_bucket_appear", s_planting_spot.origin + vectorscale((0, 0, 1), 36));
   wait(1);
   s_planting_spot.prompt_and_visibility_func = &function_53296cde;
   zm_unitrigger::register_static_unitrigger(s_planting_spot, &function_da9c118b);
@@ -350,9 +350,9 @@ function function_41280a71() {
   exploder::exploder("fxexp_801");
   var_fc72ce0a = struct::get_array("planting_spot_golden_bucket_challenge", "targetname");
   foreach(s_planting_spot in var_fc72ce0a) {
-    s_planting_spot.s_plant.model linkto(s_planting_spot.model);
+    s_planting_spot.s_plant.model linkTo(s_planting_spot.model);
     s_planting_spot.model movez(-16, 2);
-    playsoundatposition("zmb_planters_disappear", s_planting_spot.origin);
+    playSoundAtPosition("zmb_planters_disappear", s_planting_spot.origin);
   }
   s_planting_spot.model waittill("movedone");
   foreach(s_planting_spot in var_fc72ce0a) {
@@ -363,14 +363,14 @@ function function_41280a71() {
 
 function function_53296cde(player) {
   if(!level flag::get("golden_bucket_cache_plant_opened")) {
-    self sethintstring(&"ZM_ISLAND_CACHE_PLANT");
+    self setHintString(&"ZM_ISLAND_CACHE_PLANT");
     return true;
   }
   if(!(isDefined(player.var_b6a244f9) && player.var_b6a244f9)) {
-    self sethintstring(&"ZM_ISLAND_PICKUP_GOLDEN_BUCKET");
+    self setHintString(&"ZM_ISLAND_PICKUP_GOLDEN_BUCKET");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -462,7 +462,7 @@ function function_3655d28a(cmd) {
     case "": {
       level flag::set("");
       level flag::set("");
-      e_clip = getent("", "");
+      e_clip = getEnt("", "");
       level thread function_26f677a6(e_clip);
       level notify("hash_e6cfa209");
       return true;

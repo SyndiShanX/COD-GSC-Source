@@ -134,7 +134,7 @@ function use_solo_revive() {
   if(isDefined(level.override_use_solo_revive)) {
     return [[level.override_use_solo_revive]]();
   }
-  players = getplayers();
+  players = getPlayers();
   solo_mode = 0;
   if(players.size == 1 || (isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
     solo_mode = 1;
@@ -170,7 +170,7 @@ function play_loop_on_machine() {
   }
   sound_ent = spawn("script_origin", self.origin);
   sound_ent playLoopSound("zmb_perks_machine_loop");
-  sound_ent linkto(self);
+  sound_ent linkTo(self);
   self waittill("stop_loopsound");
   sound_ent unlink();
   sound_ent delete();
@@ -204,7 +204,7 @@ function electric_perks_dialog() {
   self endon("death");
   wait(0.01);
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     return;
   }
@@ -213,7 +213,7 @@ function electric_perks_dialog() {
   timer = 0;
   while(true) {
     wait(0.5);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i])) {
         continue;
@@ -250,7 +250,7 @@ function reset_vending_hint_string() {
       } else {
         n_cost = level._custom_perks[perk].cost;
       }
-      self sethintstring(level._custom_perks[perk].hint_string, n_cost);
+      self setHintString(level._custom_perks[perk].hint_string, n_cost);
     }
   }
 }
@@ -294,7 +294,7 @@ function vending_trigger_think() {
         if(!(isDefined(level.initial_quick_revive_power_off) && level.initial_quick_revive_power_off)) {
           start_on = 1;
         }
-        players = getplayers();
+        players = getPlayers();
         foreach(player in players) {
           if(!isDefined(player.lives)) {
             player.lives = 0;
@@ -305,9 +305,9 @@ function vending_trigger_think() {
       level.revive_machine_is_solo = 1;
     }
   }
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self setcursorhint("HINT_NOICON");
-  self usetriggerrequirelookat();
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
   cost = level.zombie_vars["zombie_perk_cost"];
   if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].cost)) {
     if(isint(level._custom_perks[perk].cost)) {
@@ -333,7 +333,7 @@ function vending_trigger_think() {
   self thread zm_audio::sndperksjingles_timer();
   self thread check_player_has_perk(perk);
   if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].hint_string)) {
-    self sethintstring(level._custom_perks[perk].hint_string, cost);
+    self setHintString(level._custom_perks[perk].hint_string, cost);
   }
   for(;;) {
     self waittill("trigger", player);
@@ -374,7 +374,7 @@ function vending_trigger_think() {
       continue;
     }
     sound = "evt_bottle_dispense";
-    playsoundatposition(sound, self.origin);
+    playSoundAtPosition(sound, self.origin);
     player zm_score::minus_to_player_score(current_cost);
     bb::logpurchaseevent(player, self, current_cost, perk, 0, "_perk", "_purchased");
     perkhash = -1;
@@ -541,7 +541,7 @@ function check_player_has_perk(perk) {
   }
   dist = 16384;
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) < dist) {
         if(!players[i] hasperk(perk) && self vending_trigger_can_player_use(players[i]) && !players[i] has_perk_paused(perk) && !players[i] zm_utility::in_revive_trigger() && !zm_equipment::is_equipment_that_blocks_purchase(players[i] getcurrentweapon()) && !players[i] zm_equipment::hacker_active()) {
@@ -754,7 +754,7 @@ function quantum_bomb_give_nearest_perk_result(position) {
       nearest = i;
     }
   }
-  players = getplayers();
+  players = getPlayers();
   perk = vending_triggers[nearest].script_noteworthy;
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -775,8 +775,8 @@ function perk_pause(perk) {
   if(isDefined(level.dont_unset_perk_when_machine_paused) && level.dont_unset_perk_when_machine_paused) {
     return;
   }
-  for(j = 0; j < getplayers().size; j++) {
-    player = getplayers()[j];
+  for(j = 0; j < getPlayers().size; j++) {
+    player = getPlayers()[j];
     if(!isDefined(player.disabled_perks)) {
       player.disabled_perks = [];
     }
@@ -799,8 +799,8 @@ function perk_unpause(perk) {
   if(!isDefined(perk)) {
     return;
   }
-  for(j = 0; j < getplayers().size; j++) {
-    player = getplayers()[j];
+  for(j = 0; j < getPlayers().size; j++) {
+    player = getPlayers()[j];
     if(isDefined(player.disabled_perks) && (isDefined(player.disabled_perks[perk]) && player.disabled_perks[perk])) {
       player.disabled_perks[perk] = 0;
       player set_perk_clientfield(perk, 1);
@@ -862,7 +862,7 @@ function perk_machine_removal(machine, replacement_model) {
   if(!isDefined(machine)) {
     return;
   }
-  trig = getent(machine, "script_noteworthy");
+  trig = getEnt(machine, "script_noteworthy");
   machine_model = undefined;
   if(isDefined(trig)) {
     trig notify("warning_dialog");
@@ -957,7 +957,7 @@ function perk_machine_spawn_init() {
       if(isDefined(s_spawn_pos.script_int)) {
         t_use.script_int = s_spawn_pos.script_int;
       }
-      t_use triggerignoreteam();
+      t_use triggerIgnoreTeam();
       perk_machine = spawn("script_model", s_spawn_pos.origin);
       if(!isDefined(s_spawn_pos.angles)) {
         s_spawn_pos.angles = (0, 0, 0);
@@ -979,7 +979,7 @@ function perk_machine_spawn_init() {
         collision.angles = s_spawn_pos.angles;
         collision setModel("zm_collision_perks1");
         collision.script_noteworthy = "clip";
-        collision disconnectpaths();
+        collision disconnectPaths();
       }
       t_use.clip = collision;
       t_use.machine = perk_machine;
@@ -1059,7 +1059,7 @@ function players_are_in_perk_area(perk_machine) {
     }
   }
   in_area = 0;
-  players = getplayers();
+  players = getPlayers();
   dist_check = 9216;
   foreach(player in players) {
     if(distancesquared(player.origin, perk_area_origin) < dist_check) {

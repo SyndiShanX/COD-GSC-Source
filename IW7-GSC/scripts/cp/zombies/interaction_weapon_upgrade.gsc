@@ -17,7 +17,7 @@ init_upgrade_weapon() {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
-  var_0 = getent("pap_machine", "targetname");
+  var_0 = getEnt("pap_machine", "targetname");
   if(!isDefined(var_0)) {
     return;
   }
@@ -79,8 +79,8 @@ weapon_upgrade(var_0, var_1) {
   }
 
   if(var_4 < level.pap_max) {
-    var_10 = scripts\engine\utility::getstruct(var_0.target, "targetname");
-    var_11 = vectornormalize(anglesToForward(var_1.angles)) * 16;
+    var_10 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+    var_11 = vectorNormalize(anglesToForward(var_1.angles)) * 16;
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
     var_12 = var_1 getweaponslistprimaries();
     var_1 scripts\cp\cp_merits::processmerit("mt_upgrade_weapons");
@@ -219,17 +219,17 @@ weapon_upgrade(var_0, var_1) {
 
     var_1A.angles = var_0.angles;
     var_1B = getoffsetfrombaseweaponname(var_19);
-    var_1C = getent("pap_machine", "targetname");
+    var_1C = getEnt("pap_machine", "targetname");
     level thread releasemachineonplayerdisconnect(var_1, var_1A, var_0, var_1C);
     level notify("pap_used", var_1, var_4, var_19);
     var_1A makeunusable();
     var_1 thread playpapgesture(var_1, var_1.pap_gesture, var_5, var_2, var_10);
     var_1.paping_weapon = var_2;
     var_1D = getpos1offset(var_3);
-    var_1A moveto(var_10.origin + var_1D, 0.75);
-    var_1A rotateto(var_10.angles, 0.75);
+    var_1A moveTo(var_10.origin + var_1D, 0.75);
+    var_1A rotateTo(var_10.angles, 0.75);
     var_1A waittill("movedone");
-    var_1A moveto(var_10.origin + var_1B, 0.25);
+    var_1A moveTo(var_10.origin + var_1B, 0.25);
     var_1A waittill("movedone");
     var_1C playSound("zmb_packapunch_machine_on");
     var_1C setscriptablepartstate("door", "close");

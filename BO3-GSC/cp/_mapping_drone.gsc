@@ -165,12 +165,12 @@ function function_517ced56(n_yaw_left = 90, n_yaw_right = 90, n_pitch_down = 10,
   level flag::set("drone_scanning");
   e_base = spawn("script_origin", self.origin);
   e_base.angles = self.angles;
-  self linkto(e_base);
+  self linkTo(e_base);
   v_base_look = self.angles;
   while(level flag::get("drone_scanning")) {
     v_look_offset = (randomfloatrange(n_pitch_down * -1, n_pitch_up), randomfloatrange(n_yaw_left * -1, n_yaw_right), 0);
     v_look_angles = v_base_look + v_look_offset;
-    e_base rotateto(v_look_angles, 0.5, 0.2, 0.2);
+    e_base rotateTo(v_look_angles, 0.5, 0.2, 0.2);
     e_base waittill("rotatedone");
     wait(randomfloatrange(1, 2));
   }

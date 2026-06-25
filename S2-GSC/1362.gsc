@@ -233,9 +233,9 @@ lib_0552::func_4205(param_00, param_01, param_02) {
     var_03 = param_02.var_0116 - param_01 getEye();
   }
 
-  var_04 = vectornormalize((var_03[0], var_03[1], 0));
+  var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = anglesToForward(param_00.var_001D);
-  var_06 = vectornormalize((var_05[0], var_05[1], 0));
+  var_06 = vectorNormalize((var_05[0], var_05[1], 0));
   var_07 = vectordot(var_04, var_06);
   var_08 = acos(clamp(var_07, -1, 1));
   return var_08;
@@ -413,7 +413,7 @@ refreshplayerinteractprompts(param_00, param_01) {
     if(var_05) {
       if(common_scripts\utility::func_562E(var_04.var_6641)) {
         var_04.var_9D65 usetouchtriggerrequirefacingposition(1, var_04.var_5EB5);
-        var_04.var_9D65 usetriggerrequirelookat(0);
+        var_04.var_9D65 useTriggerRequireLookAt(0);
       }
 
       if(!isDefined(param_01.var_2903) || var_04 != param_01.var_2903) {

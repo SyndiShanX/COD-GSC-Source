@@ -34,7 +34,7 @@ function findopenlookdir(from, radius = 256, mindist = 96) {
   foreach(tac in tacpoints) {
     if(distancesquared(from, tac.origin) > mindistsq) {
       dir = tac.origin - from;
-      return vectornormalize((dir[0], dir[1], 0));
+      return vectorNormalize((dir[0], dir[1], 0));
     }
   }
 }

@@ -185,7 +185,7 @@ function level_init() {
   createthreatbiasgroup("warlords");
   createthreatbiasgroup("heroes");
   level.override_robot_damage = 1;
-  getent("back_door_look_trigger", "script_noteworthy") triggerenable(0);
+  getEnt("back_door_look_trigger", "script_noteworthy") triggerenable(0);
   a_hide_ents = getEntArray("start_hidden", "script_noteworthy");
   foreach(ent in a_hide_ents) {
     ent hide();
@@ -440,7 +440,7 @@ function function_c506a743(str_objective, n_squad = 4) {
   a_ai_party_robots = [];
   a_ai_robots = [];
   for(i = 0; i < 4; i++) {
-    a_ai_party_robots[i] = getent("robot0" + (i + 1), "animname");
+    a_ai_party_robots[i] = getEnt("robot0" + (i + 1), "animname");
   }
   if(n_squad > 4) {
     for(i = 0; i < n_squad; i++) {
@@ -488,7 +488,7 @@ function objective_igc_done(str_objective, b_starting, b_direct, player) {
 function shoot_igc_guards() {
   a_source_spots = struct::get_array("igc_extra_bullets");
   for(i = 1; i <= 5; i++) {
-    e_guard = getent("guard0" + i, "animname", 1);
+    e_guard = getEnt("guard0" + i, "animname", 1);
     if(isalive(e_guard)) {
       v_source = array::random(a_source_spots).origin;
       level thread kill_igc_guards(e_guard, v_source);

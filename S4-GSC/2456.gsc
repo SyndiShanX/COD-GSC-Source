@@ -56,7 +56,7 @@ _id_7F5D() {
 }
 
 _id_7F5C(var_0) {
-  var_0 sethintstring(level._id_835D[var_0._id_039B]);
+  var_0 setHintString(level._id_835D[var_0._id_039B]);
   var_1 = [];
 
   foreach(var_3 in level._id_417B) {
@@ -324,7 +324,7 @@ _id_3223(var_0, var_1) {
   }
 
   foreach(var_5 in self._id_BD8B) {
-    var_5 moveto(var_5._id_E630 + (0, 0, 16 / self._id_8D28) * self._id_8D0F, 0.1);
+    var_5 moveTo(var_5._id_E630 + (0, 0, 16 / self._id_8D28) * self._id_8D0F, 0.1);
   }
 
   if(self._id_8D0F >= self._id_8D28) {
@@ -345,7 +345,7 @@ _id_E04F(var_0) {
       var_4 = 0.05;
     }
 
-    var_1 moveto(var_2, var_4);
+    var_1 moveTo(var_2, var_4);
     wait 0.05;
 
     if(!self._id_C488 && distancesquared(var_1.origin, var_2) > 256) {
@@ -433,7 +433,7 @@ _id_3573() {
   if(var_3.size == 0) {
     return;
   }
-  self sethintstring(level._id_835D[self._id_039B]);
+  self setHintString(level._id_835D[self._id_039B]);
   var_7 = _id_69F0(var_3[0]._id_039B);
 
   if(isDefined(level._id_548F)) {

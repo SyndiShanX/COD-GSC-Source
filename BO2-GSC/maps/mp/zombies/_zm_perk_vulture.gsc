@@ -1131,7 +1131,7 @@ _get_zombie_exit_point() {
   assert(a_exit_points.size > 0, "_get_zombie_exit_point() couldn't find any zombie exit points for player at " + player.origin + "! Add more dog_locations!");
 
   for(i = 0; i < a_exit_points.size; i++) {
-    v_to_player = vectornormalize(player.origin - self.origin);
+    v_to_player = vectorNormalize(player.origin - self.origin);
     v_to_goal = a_exit_points[i].origin - self.origin;
     n_dot = vectordot(v_to_player, v_to_goal);
 
@@ -1191,7 +1191,7 @@ vulture_handle_solo_quick_revive() {
 
 vulture_devgui_spawn_stink() {
   player = gethostplayer();
-  forward_dir = vectornormalize(anglesToForward(player.angles));
+  forward_dir = vectorNormalize(anglesToForward(player.angles));
   target_pos = player.origin + forward_dir * 100 + vectorscale((0, 0, 1), 50.0);
   target_pos_down = target_pos + vectorscale((0, 0, -1), 150.0);
   str_bonus = "stink";

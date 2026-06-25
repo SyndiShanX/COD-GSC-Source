@@ -360,8 +360,8 @@ position_vehicles(param_00) {
     var_04 method_8400();
   }
 
-  var_06 = getent("p47_defender_dogfight", "targetname");
-  var_07 = getent("p47_attacker_dogfight", "targetname");
+  var_06 = getEnt("p47_defender_dogfight", "targetname");
+  var_07 = getEnt("p47_attacker_dogfight", "targetname");
   var_06 method_8400();
   var_07 method_8400();
 }
@@ -454,10 +454,10 @@ create_bomber_cluster_origin() {
       var_0E = var_08 * var_0C * sin(2 * var_06) / 2;
       var_0F = level.b17_cluster_ent.var_116;
       var_10 = (var_0D, var_0E, level.b17_cluster_ent.var_116[2]);
-      level.b17_cluster_ent moveto(var_10, 0.1);
-      var_11 = vectornormalize(var_10 - var_0F);
+      level.b17_cluster_ent moveTo(var_10, 0.1);
+      var_11 = vectorNormalize(var_10 - var_0F);
       var_12 = vectortoangles(var_11);
-      level.b17_cluster_ent rotateto(var_12, 0.1);
+      level.b17_cluster_ent rotateTo(var_12, 0.1);
       var_06 = var_06 * 0.01745311;
       wait(0.1);
     }
@@ -582,11 +582,11 @@ remove_target_on_death(param_00) {
 
 spawn_player_p47(param_00) {
   if(!isDefined(level.defender_pp_spawner)) {
-    level.defender_pp_spawner = getent("p47_defender_dogfight", "targetname");
+    level.defender_pp_spawner = getEnt("p47_defender_dogfight", "targetname");
   }
 
   if(!isDefined(level.attacker_pp_spawner)) {
-    level.attacker_pp_spawner = getent("p47_attacker_dogfight", "targetname");
+    level.attacker_pp_spawner = getEnt("p47_attacker_dogfight", "targetname");
   }
 
   var_01 = undefined;
@@ -710,7 +710,7 @@ random_point_on_sphere(param_00, param_01) {
 }
 
 random_point_on_cylinder(param_00, param_01) {
-  var_02 = vectornormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0));
+  var_02 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0));
   var_03 = param_00 + param_01 * var_02;
   var_03 = var_03 + (0, 0, randomfloatrange(-7000, 7000));
   return var_03;
@@ -737,8 +737,8 @@ is_spawn_targeted(param_00) {
       continue;
     }
 
-    var_03 = vectornormalize(var_03);
-    var_04 = vectornormalize(var_04);
+    var_03 = vectorNormalize(var_03);
+    var_04 = vectorNormalize(var_04);
     var_05 = vectordot(var_03, var_04);
     if(var_05 < 0.9961947) {
       continue;
@@ -1349,9 +1349,9 @@ watch_boundary(param_00) {
       }
 
       if(var_03 <= gettime()) {
-        var_06 = vectornormalize(param_00.var_116 - level.var_5FEB);
-        var_07 = vectornormalize(param_00.var_1D);
-        var_08 = vectornormalize(rotatevectorinverted(var_06, param_00.var_1D));
+        var_06 = vectorNormalize(param_00.var_116 - level.var_5FEB);
+        var_07 = vectorNormalize(param_00.var_1D);
+        var_08 = vectorNormalize(rotatevectorinverted(var_06, param_00.var_1D));
         var_09 = function_01E3(var_08[1], var_08[0]);
         var_06 = undefined;
         if(var_09 < -45 && var_09 > -135) {
@@ -1640,7 +1640,7 @@ func_4A1D() {
       if(isDefined(var_05.var_81EF)) {
         var_06 = var_05 common_scripts\utility::func_41EC();
         if(isDefined(var_06)) {
-          var_06 linkto(var_05);
+          var_06 linkTo(var_05);
         }
       }
 
@@ -1673,13 +1673,13 @@ func_4A1D() {
         var_05.var_852 = var_05.var_852 + var_05.var_6484;
         var_05.var_851 = var_05.var_851 + var_05.var_6473;
         if(isDefined(var_05.var_18A7)) {
-          var_05 moveto(level.var_611D[var_05.var_611E] + level.b17_cluster_ent.var_116 + var_05.cluster_offset + (sin(var_05.var_852[0]) * var_05.var_18A7[0], sin(var_05.var_852[1]) * var_05.var_18A7[1], sin(var_05.var_852[2]) * var_05.var_18A7[2]), var_09);
-          var_05 rotateto(level.b17_cluster_ent.var_1D + (0, 0, sin(var_05.var_851[2]) * var_05.var_18A3[2]), var_09);
+          var_05 moveTo(level.var_611D[var_05.var_611E] + level.b17_cluster_ent.var_116 + var_05.cluster_offset + (sin(var_05.var_852[0]) * var_05.var_18A7[0], sin(var_05.var_852[1]) * var_05.var_18A7[1], sin(var_05.var_852[2]) * var_05.var_18A7[2]), var_09);
+          var_05 rotateTo(level.b17_cluster_ent.var_1D + (0, 0, sin(var_05.var_851[2]) * var_05.var_18A3[2]), var_09);
           continue;
         }
 
-        var_05 moveto(level.var_611D[var_05.var_611E] + level.b17_cluster_ent.var_116 + var_05.cluster_offset + (sin(var_05.var_852[0]) * (120, 230, 200)[0], sin(var_05.var_852[1]) * (120, 230, 200)[1], sin(var_05.var_852[2]) * (120, 230, 200)[2]), var_09);
-        var_05 rotateto(level.b17_cluster_ent.var_1D + (0, 0, sin(var_05.var_851[2]) * (0, 0, 2)[2]), var_09);
+        var_05 moveTo(level.var_611D[var_05.var_611E] + level.b17_cluster_ent.var_116 + var_05.cluster_offset + (sin(var_05.var_852[0]) * (120, 230, 200)[0], sin(var_05.var_852[1]) * (120, 230, 200)[1], sin(var_05.var_852[2]) * (120, 230, 200)[2]), var_09);
+        var_05 rotateTo(level.b17_cluster_ent.var_1D + (0, 0, sin(var_05.var_851[2]) * (0, 0, 2)[2]), var_09);
       }
     }
 
@@ -1767,13 +1767,13 @@ func_18A5(param_00) {
     self.var_852 = self.var_852 + self.var_6484;
     self.var_851 = self.var_851 + self.var_6473;
     if(isDefined(self.var_18A7)) {
-      self moveto(level.var_611D[self.var_611E] + level.b17_cluster_ent.var_116 + self.cluster_offset + (sin(self.var_852[0]) * self.var_18A7[0], sin(self.var_852[1]) * self.var_18A7[1], sin(self.var_852[2]) * self.var_18A7[2]), var_01);
-      self rotateto(level.b17_cluster_ent.var_1D + (0, 0, sin(self.var_851[2]) * self.var_18A3[2]), var_01);
+      self moveTo(level.var_611D[self.var_611E] + level.b17_cluster_ent.var_116 + self.cluster_offset + (sin(self.var_852[0]) * self.var_18A7[0], sin(self.var_852[1]) * self.var_18A7[1], sin(self.var_852[2]) * self.var_18A7[2]), var_01);
+      self rotateTo(level.b17_cluster_ent.var_1D + (0, 0, sin(self.var_851[2]) * self.var_18A3[2]), var_01);
       continue;
     }
 
-    self moveto(level.var_611D[self.var_611E] + level.b17_cluster_ent.var_116 + self.cluster_offset + (sin(self.var_852[0]) * (120, 230, 200)[0], sin(self.var_852[1]) * (120, 230, 200)[1], sin(self.var_852[2]) * (120, 230, 200)[2]), var_01);
-    self rotateto(level.b17_cluster_ent.var_1D + (0, 0, sin(self.var_851[2]) * (0, 0, 2)[2]), var_01);
+    self moveTo(level.var_611D[self.var_611E] + level.b17_cluster_ent.var_116 + self.cluster_offset + (sin(self.var_852[0]) * (120, 230, 200)[0], sin(self.var_852[1]) * (120, 230, 200)[1], sin(self.var_852[2]) * (120, 230, 200)[2]), var_01);
+    self rotateTo(level.b17_cluster_ent.var_1D + (0, 0, sin(self.var_851[2]) * (0, 0, 2)[2]), var_01);
     wait(var_01);
   }
 }
@@ -1870,7 +1870,7 @@ func_14DE(param_00, param_01) {
       var_07 = 0;
       var_08 = var_05.var_116 - self.var_116;
       var_08 = (var_08[0], var_08[1], 0);
-      var_08 = vectornormalize(var_08);
+      var_08 = vectorNormalize(var_08);
       var_09 = vectordot(var_08, var_02);
       var_0A = vectordot(var_08, var_03);
       switch (param_01) {
@@ -1916,7 +1916,7 @@ func_14DE(param_00, param_01) {
         foreach(var_11, var_0D in param_00.var_3BB7[param_01]) {
           var_0E = rotatevector(var_0D.var_116, var_0B) + self.var_116;
           var_0F = anglesToForward(var_05.var_1D) * var_05 method_8283() * 7;
-          var_10 = vectornormalize(var_05.var_116 + var_0F - var_0E);
+          var_10 = vectorNormalize(var_05.var_116 + var_0F - var_0E);
           var_10 = common_scripts\utility::func_7A60(var_10, 5);
           playFX(common_scripts\utility::func_44F5(var_0D.var_82EC), var_0E, var_10);
           var_05 notify("b17_attacking", self);
@@ -2583,9 +2583,9 @@ fighter_damage_callback(param_00, param_01, param_02, param_03, param_04, param_
 
   if(isPlayer(param_01)) {
     var_12 = anglesToForward(var_0D.var_1D);
-    var_12 = vectornormalize(var_12);
+    var_12 = vectorNormalize(var_12);
     var_13 = param_01.var_116 - self.var_116;
-    var_13 = vectornormalize(var_13);
+    var_13 = vectorNormalize(var_13);
     var_14 = vectordot(var_12, var_13);
     if(var_14 < 0) {
       if(isDefined(level.var_7919)) {
@@ -2862,7 +2862,7 @@ b17initturrets() {
     foreach(var_07 in var_04) {
       if(isDefined(var_07.var_165) && var_07.var_165 == "b17_turret_use") {
         var_03.usetrigger = var_07;
-        var_03.usetrigger sethintstring("Press and hold to enter turrets");
+        var_03.usetrigger setHintString("Press and hold to enter turrets");
       }
 
       if(isDefined(var_07.var_165) && var_07.var_165 == "b17_turret") {
@@ -2944,7 +2944,7 @@ b17playermountunoccupiedturret() {
     }
   }
 
-  self playerlinkto(var_02, var_02.turretarray[var_01].turret_info[5], 1, var_02.turretarray[var_01].turret_info[1], var_02.turretarray[var_01].turret_info[0], var_02.turretarray[var_01].turret_info[2], var_02.turretarray[var_01].turret_info[3]);
+  self playerlinkTo(var_02, var_02.turretarray[var_01].turret_info[5], 1, var_02.turretarray[var_01].turret_info[1], var_02.turretarray[var_01].turret_info[0], var_02.turretarray[var_01].turret_info[2], var_02.turretarray[var_01].turret_info[3]);
   var_02.numoccupied = var_02.numoccupied + 1;
   set_turret_user_nameplate(var_02.turretarray[var_01].var_378F);
   var_02.turretarray[var_01].var_378F useby(self);
@@ -3043,7 +3043,7 @@ bot_planeshootthink(param_00) {
       continue;
     }
 
-    var_0B = vectornormalize(var_0A.var_116 - param_00.var_116);
+    var_0B = vectorNormalize(var_0A.var_116 - param_00.var_116);
     var_0C = vectortoangles(var_0B);
     var_0D = param_00.var_1D;
     var_0E = angleclamp180(var_0C[1] - var_0D[1]);
@@ -3094,7 +3094,7 @@ bot_planeflythink(param_00) {
       continue;
     }
 
-    var_07 = vectornormalize(var_03 - param_00.var_116);
+    var_07 = vectorNormalize(var_03 - param_00.var_116);
     var_08 = 9437184;
     if(function_01EF(var_01) && isDefined(var_04)) {
       var_08 = 0;
@@ -3177,7 +3177,7 @@ bot_turretswitchthink() {
 
     var_0A = undefined;
     if(0) {
-      var_0C = vectornormalize(var_0B.var_116 - var_06.var_116);
+      var_0C = vectorNormalize(var_0B.var_116 - var_06.var_116);
       var_0D = vectortoangles(var_0C);
       var_0E = get_anglesdiff(var_0D, var_06.var_1D);
       if(abs(var_0E[1]) < var_08) {
@@ -3185,7 +3185,7 @@ bot_turretswitchthink() {
         continue;
       }
 
-      var_0F = vectornormalize(var_0B.var_116 - var_07.var_116);
+      var_0F = vectorNormalize(var_0B.var_116 - var_07.var_116);
       var_10 = vectortoangles(var_0F);
       var_11 = get_anglesdiff(var_10, var_07.var_1D);
       if(abs(var_11[1]) < var_08) {
@@ -3194,7 +3194,7 @@ bot_turretswitchthink() {
       }
     }
 
-    var_12 = vectornormalize(var_0B.var_116 - var_04.var_116);
+    var_12 = vectorNormalize(var_0B.var_116 - var_04.var_116);
     var_13 = vectortoangles(var_12);
     var_14 = get_anglesdiff(var_13, var_04.var_1D);
     if(var_14[0] < var_09) {
@@ -3366,7 +3366,7 @@ switch_to_turret(param_00, param_01) {
   common_scripts\utility::func_615();
   self method_85E9();
   common_scripts\utility::func_601();
-  self playerlinkto(self.b17, param_00[self.currentturretindex].turret_info[5], 1, param_00[self.currentturretindex].turret_info[1], param_00[self.currentturretindex].turret_info[0], param_00[self.currentturretindex].turret_info[2], param_00[self.currentturretindex].turret_info[3]);
+  self playerlinkTo(self.b17, param_00[self.currentturretindex].turret_info[5], 1, param_00[self.currentturretindex].turret_info[1], param_00[self.currentturretindex].turret_info[0], param_00[self.currentturretindex].turret_info[2], param_00[self.currentturretindex].turret_info[3]);
   set_turret_user_nameplate(param_00[self.currentturretindex].var_378F);
   param_00[self.currentturretindex].var_378F useby(self);
   param_00[self.currentturretindex].var_69A5 = 1;

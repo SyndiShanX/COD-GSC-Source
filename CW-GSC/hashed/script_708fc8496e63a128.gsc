@@ -47,7 +47,7 @@ function start(str_objective) {
 }
 
 function main(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   namespace_5ceacc03::music("12.0_company");
 
   if(b_starting) {
@@ -131,9 +131,9 @@ function function_720adc4e() {
 function function_847bd54f() {
   level endon(#"apt_street_done");
   var_22386ba3 = getEntArray("apartment_light1_fill", "targetname");
-  var_13f6cf20 = getent("apartment_light1_spot", "targetname");
+  var_13f6cf20 = getEnt("apartment_light1_spot", "targetname");
   var_f5b792a2 = getEntArray("apartment_light2_fill", "targetname");
-  var_6799f665 = getent("apartment_light2_spot", "targetname");
+  var_6799f665 = getEnt("apartment_light2_spot", "targetname");
 
   foreach(light in var_22386ba3) {
     light.default_intensity = light getlightintensity();
@@ -186,7 +186,7 @@ function function_847bd54f() {
 }
 
 function function_26abb5e9() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(level.stealth.disguised)) {
     player namespace_979752dc::set_disguised(1);
@@ -217,7 +217,7 @@ function function_37acd633() {
     }
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player namespace_979752dc::set_disguised(0);
   closest_guy = arraygetclosest(player.origin, ai_array);
   closest_guy thread dialogue::queue("vox_cp_stkt_07130_gms2_stoppolice_64");
@@ -245,7 +245,7 @@ function function_fadf5523(str_id) {
   self animation::stop();
   self val::reset(str_id, "ignoreall");
   self val::reset(str_id, "ignoreme");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self function_a3fcf9e0("attack", player, player.origin);
 }
 
@@ -305,9 +305,9 @@ function function_6b5a40ef() {
   }
 
   level thread scene::play("aib_vign_stakeout_safehouse_surveillance_wife", "z_stk_surveillance_stove_smoking_edda_transition", level.var_3559e9e);
-  kitchen_window_right_closed = getent("kitchen_window_right_closed", "targetname");
+  kitchen_window_right_closed = getEnt("kitchen_window_right_closed", "targetname");
   kitchen_window_right_closed hide();
-  kitchen_window_left_closed = getent("kitchen_window_left_closed", "targetname");
+  kitchen_window_left_closed = getEnt("kitchen_window_left_closed", "targetname");
   kitchen_window_left_closed hide();
 
   while(!isDefined(level.var_49a292bb)) {
@@ -334,8 +334,8 @@ function function_34770465() {
 
 function function_d5cab286(a_ents) {
   mailbox = a_ents[#"hash_475ee55621b83ca0"];
-  var_e864861d = getent("apt_mailbox_door", "targetname");
-  var_e864861d linkto(mailbox, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  var_e864861d = getEnt("apt_mailbox_door", "targetname");
+  var_e864861d linkTo(mailbox, "j_prop_1", (0, 0, 0), (0, 0, 0));
 }
 
 function lobby_mail_woman() {

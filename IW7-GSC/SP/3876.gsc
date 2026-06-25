@@ -86,7 +86,7 @@ func_10EE3(var_0) {
           var_9 = var_7 getEye();
         }
 
-        var_10 = vectornormalize(var_9 - var_3);
+        var_10 = vectorNormalize(var_9 - var_3);
         var_11 = vectordot(var_4, var_10);
         if(var_11 > 0.99 && var_11 > var_1) {
           if(sighttracepassed(var_9, var_3, 0, undefined)) {

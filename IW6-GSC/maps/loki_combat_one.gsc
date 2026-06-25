@@ -66,7 +66,7 @@ combat_one() {
   level thread instant_explosion();
   setsaveddvar("actor_spaceLightingOffset", -6);
   thread maps\loki_audio::sfx_loki_breathing_logic(1);
-  var_2 = getent("combat_one_traversal1", "targetname");
+  var_2 = getEnt("combat_one_traversal1", "targetname");
   level.combat_one_wave_node = var_2;
   var_3 = getEntArray("sniper_sat_solarpanel", "targetname");
   common_scripts\utility::array_thread(var_3, ::solarpanels_damage_think);
@@ -100,8 +100,8 @@ start_fuel_leak_fx_main(var_0, var_1, var_2, var_3) {
     var_4 = var_2;
     var_5 = var_3;
   } else {
-    var_4 = common_scripts\utility::getstruct(var_0, "targetname").origin;
-    var_5 = common_scripts\utility::getstruct(var_0, "targetname").angles;
+    var_4 = common_scripts\utility::getStruct(var_0, "targetname").origin;
+    var_5 = common_scripts\utility::getStruct(var_0, "targetname").angles;
   }
 
   self.origin = var_4;
@@ -172,10 +172,10 @@ stop_fuel_leak_fx_explosion() {
 }
 
 start_fuel_explosion_fx(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_0, "targetname");
   earthquake(var_3, 0.75, var_5.origin, 1200);
   var_6 = maps\loki_util::create_rumble_ent(var_4, "combat_one_cleanup", 3);
-  var_6 playrumbleonentity("light_1s");
+  var_6 playRumbleOnEntity("light_1s");
 
   if(!isDefined(var_2)) {
     playFX(common_scripts\utility::getfx(var_1), var_5.origin);
@@ -185,7 +185,7 @@ start_fuel_explosion_fx(var_0, var_1, var_2, var_3, var_4) {
 }
 
 test_lights() {
-  var_0 = getent("combat_one", "targetname");
+  var_0 = getEnt("combat_one", "targetname");
   var_1 = maps\_vignette_util::vignette_actor_spawn("deadbody", "deadbody");
   var_1 forceteleport(var_0.origin, var_1.angles + (0, 180, 0));
   var_1 thread maps\_space_ai::space_actor_lights();
@@ -246,7 +246,7 @@ move_explosion_buildup_rumble() {
       var_0.origin = var_0.origin + (0, 0, -17);
     }
 
-    var_0 linkto(level.player);
+    var_0 linkTo(level.player);
     common_scripts\utility::waitframe();
   }
 
@@ -256,7 +256,7 @@ move_explosion_buildup_rumble() {
 instant_explosion() {
   level.player endon("death");
   level endon("explosion_started");
-  var_0 = getent("combat_one_door_instant", "targetname");
+  var_0 = getEnt("combat_one_door_instant", "targetname");
   var_0 waittill("trigger");
   level notify("explosion");
   level.combat_one_wave_node notify("explosion");
@@ -284,7 +284,7 @@ moving_cover_pre_tele(var_0) {
   } else
     maps\loki_moving_cover::firstframe_moving_cover(1);
 
-  var_1 = getent("combat_one_explosion", "targetname");
+  var_1 = getEnt("combat_one_explosion", "targetname");
   var_2 = maps\_utility::spawn_anim_model("moving_cover_obj0");
   var_1 maps\_anim::anim_first_frame_solo(var_2, "explosion_part1");
   var_2 maps\loki_util::spawn_and_link_models_to_tags("combat_one_cleanup", undefined, 1);
@@ -311,7 +311,7 @@ moving_cover_pre_tele(var_0) {
 
   level.player.og_health = level.player.health;
   level.player.demigod = 1;
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_5 = common_scripts\utility::spawn_tag_origin();
@@ -319,10 +319,10 @@ moving_cover_pre_tele(var_0) {
   var_5.origin = level.player.origin;
   var_3.angles = (0, 90, 0);
   var_5.angles = (0, 90, 0);
-  var_5 linkto(var_3);
+  var_5 linkTo(var_3);
   var_3.angles = (330, 90, 0);
   var_4.origin = var_3.origin;
-  var_3 linkto(var_4);
+  var_3 linkTo(var_4);
   level.player playerlinktoblend(var_5, "tag_origin", 0.3, 0, 0);
   level.player hideviewmodel();
   var_4 rotatevelocity((175, 0, 0), 999, 0, 0);
@@ -331,7 +331,7 @@ moving_cover_pre_tele(var_0) {
   maps\loki_util::jkuprint("Distance above we can rotate you: " + var_7);
   var_4 movez(var_7, 0.65, 0, 0);
   level thread maps\loki_moving_cover::hit_panel(level.player, 0.65, 0.5, 2);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
 
   if(!var_0) {
     wait 0.6;
@@ -475,10 +475,10 @@ track_ai() {
   level thread ally0_move_to_end();
   level maps\_utility::delaythread(var_5, ::moving_cover_pre_tele);
   maps\_utility::activate_trigger_with_targetname("combat_one_trig_wave3_color");
-  var_6 = common_scripts\utility::getstruct("ally1_at_door", "targetname");
+  var_6 = common_scripts\utility::getStruct("ally1_at_door", "targetname");
   level.allies[1] maps\_utility::clear_force_color();
   level.allies[1] setgoalpos(var_6.origin);
-  var_7 = common_scripts\utility::getstruct("ally2_at_door", "targetname");
+  var_7 = common_scripts\utility::getStruct("ally2_at_door", "targetname");
   level.allies[2] maps\_utility::clear_force_color();
   level.allies[2] setgoalpos(var_7.origin);
   wait(var_5);
@@ -512,7 +512,7 @@ ally0_move_to_end() {
 
   if(!var_0) {
     maps\loki_util::jkuprint("ally unable to animate last traversal");
-    level.allies[0] stopanimscripted();
+    level.allies[0] stopanimScripted();
     level.combat_one_wave_node maps\_anim::anim_reach_solo(level.allies[0], "hatch_idle");
   }
 
@@ -539,7 +539,7 @@ set_goalvolume_after_node_reached(var_0, var_1) {
   wait 10;
 
   if(!common_scripts\utility::flag(var_1)) {
-    self setgoalvolumeauto(getent(var_0, "targetname"));
+    self setgoalvolumeauto(getEnt(var_0, "targetname"));
   }
 }
 
@@ -563,7 +563,7 @@ spawn_wave1_enemies(var_0) {
 
 trigger_wave2() {
   level endon("explosion");
-  var_0 = getent("combat_one_trig_wave2", "targetname");
+  var_0 = getEnt("combat_one_trig_wave2", "targetname");
   var_0 waittill("trigger");
   maps\loki_util::jkuprint("w2");
   level thread force_traversal("combat_one_traversal1", "cover_one_ally2_node1", "combat_one_traversal1_post", "combat_one_traversal1");
@@ -587,7 +587,7 @@ trigger_wave2() {
 
 trigger_wave3() {
   level endon("explosion");
-  var_0 = getent("combat_one_trig_wave3", "targetname");
+  var_0 = getEnt("combat_one_trig_wave3", "targetname");
   var_0 waittill("trigger");
   maps\loki_util::jkuprint("w3");
   common_scripts\utility::flag_set("combat_one_wave3_spawned");
@@ -662,7 +662,7 @@ cool_spawn(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5 = [];
-  var_6 = getent("combat_one_door_col", "targetname");
+  var_6 = getEnt("combat_one_door_col", "targetname");
   var_6 notsolid();
   var_6 connectpaths();
 
@@ -738,7 +738,7 @@ check_for_death_during_traversal() {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 ignore_and_move_fast(var_0) {
@@ -751,7 +751,7 @@ ignore_and_move_fast(var_0) {
   self.moveplaybackrate = 1.5;
 
   if(isDefined(var_0)) {
-    self setgoalvolumeauto(getent(var_0, "targetname"));
+    self setgoalvolumeauto(getEnt(var_0, "targetname"));
   }
 
   wait 1.5;
@@ -822,7 +822,7 @@ unlink_door_traversal_nodes() {
 force_traversal(var_0, var_1, var_2, var_3) {
   level endon("explosion");
   var_4 = getnode(var_1, "targetname");
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_2)) {
     var_6 = undefined;
@@ -1204,17 +1204,17 @@ combat_one_cleanup() {
 }
 
 firstframe_combat_one_door() {
-  level.combat_one_door_node = getent("combat_one_door_traversal", "targetname");
+  level.combat_one_door_node = getEnt("combat_one_door_traversal", "targetname");
   level.combat_one_door = maps\_utility::spawn_anim_model("combat_one_door");
   level.combat_one_door_node thread maps\_anim::anim_first_frame_solo(level.combat_one_door, "combat_one_door");
-  level.combat_one_door_col = getent("combat_one_door_col", "targetname");
-  level.combat_one_door_col linkto(level.combat_one_door);
-  level.combat_one_door_col disconnectpaths();
+  level.combat_one_door_col = getEnt("combat_one_door_col", "targetname");
+  level.combat_one_door_col linkTo(level.combat_one_door);
+  level.combat_one_door_col disconnectPaths();
 }
 
 track_fuel_leak_hit() {
   level endon("explosion");
-  var_0 = getent("fuel_leak_col", "targetname");
+  var_0 = getEnt("fuel_leak_col", "targetname");
   var_0 setCanDamage(1);
   var_0 setCanRadiusDamage(0);
   level.bullet_caused_fuel_leaks = [];

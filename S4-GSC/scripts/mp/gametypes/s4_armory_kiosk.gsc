@@ -284,7 +284,7 @@ _id_0C1D(var_0, var_1) {
           thread removeexistingvehicle(var_0._id_C189);
         }
 
-        var_13 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle(var_0._id_C189, var_7, undefined);
+        var_13 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle(var_0._id_C189, var_7, undefined);
 
         if(var_0._id_C189 == "motorcycle") {
           self.motoid = var_13;

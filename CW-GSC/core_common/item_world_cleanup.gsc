@@ -115,7 +115,7 @@ function private function_b465b436(current_origin, var_c5a0bed8, previous_origin
 }
 
 function private function_35e11623(current_origin, var_c5a0bed8, previous_origin, var_7c597200) {
-  players = getplayers();
+  players = getPlayers();
   excludelist = [#"eq_acid_bomb": 1, #"eq_cluster_semtex_grenade": 1, #"eq_molotov": 1, #"eq_slow_grenade": 1, #"eq_swat_grenade": 1, #"eq_wraith_fire": 1, #"frag_grenade": 1, #"willy_pete": 1];
 
   foreach(player in players) {
@@ -340,9 +340,9 @@ function private function_ada16428(current_origin, var_c5a0bed8, previous_origin
         }
 
         var_42beec1c = (previous_origin[0] - player.origin[0], previous_origin[1] - player.origin[1], 0);
-        var_42beec1c = vectornormalize(var_42beec1c);
+        var_42beec1c = vectorNormalize(var_42beec1c);
         var_838d27e = (vehicle.origin[0] - player.origin[0], vehicle.origin[1] - player.origin[1], 0);
-        var_838d27e = vectornormalize(var_838d27e);
+        var_838d27e = vectorNormalize(var_838d27e);
 
         if(vectordot(var_42beec1c, var_838d27e) >= 0.9396) {
           var_c64c4a1f = distance2dsquared(vehicle.origin, player.origin);

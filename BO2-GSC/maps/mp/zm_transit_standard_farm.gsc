@@ -13,7 +13,7 @@
 #include maps\mp\zombies\_zm_game_module;
 
 farm_treasure_chest_init() {
-  chest1 = getstruct("farm_chest", "script_noteworthy");
+  chest1 = getStruct("farm_chest", "script_noteworthy");
   level.chests = [];
   level.chests[level.chests.size] = chest1;
   maps\mp\zombies\_zm_magicbox::treasure_chest_init("farm_chest");

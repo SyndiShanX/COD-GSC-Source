@@ -36,7 +36,7 @@ function private on_local_player_spawned(localclientnum) {
 }
 
 function private function_e3e0feb5(localclientnum, localplayer) {
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
 
   foreach(player in players) {
     if(!isDefined(player) || !player isPlayer() || !isalive(player)) {
@@ -663,7 +663,7 @@ function function_12e53b2d() {
         continue;
       }
 
-      players = getplayers(0);
+      players = getPlayers(0);
 
       foreach(player in players) {
         activecamo = player init_activecamo(var_f4eb4a50, 1);

@@ -78,7 +78,7 @@ air_staff_launch(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 
   dir = self.origin - v_source;
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   v_force = length(dir) * 300.0;
   launch = (dir[0], dir[1], n_verticality);
   launch = vectorscale(launch, v_force);

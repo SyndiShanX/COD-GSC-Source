@@ -50,15 +50,15 @@ ark_console_encounter() {
 
   common_scripts\utility::flag_wait("entering_ark_flag");
   level thread initial_outline_for_connecting_player();
-  var_0 = getent("ark_fog_01", "targetname");
+  var_0 = getEnt("ark_fog_01", "targetname");
   var_0 setscriptablepartstate("base", "default");
-  var_1 = getent("ark_glow_01", "targetname");
+  var_1 = getEnt("ark_glow_01", "targetname");
   var_1 setscriptablepartstate("base", "default");
   level.attack_points = [];
   level.gas_ents = [];
 
   for(var_2 = 0; var_2 < level.total_consoles; var_2++) {
-    var_3 = getent("console_" + (var_2 + 1), "targetname");
+    var_3 = getEnt("console_" + (var_2 + 1), "targetname");
     var_3.panels = getscriptablearray("panels_" + (var_2 + 1), "targetname")[0];
     level.attack_points[var_2] = var_3;
     level thread create_on_and_off_states_for_console(level.attack_points[var_2], "console_" + (var_2 + 1));
@@ -214,14 +214,14 @@ turn_on_consoles() {
 
   level thread start_ark_encounter_nag();
   level.cortex_use_trigger makeusable();
-  level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_CORTEX_USE");
+  level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_CORTEX_USE");
   maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 3, 0, "high");
   level.cortex_use_trigger wait_until_player_use_cortex();
   playFX(level._effect["cortex_blast"], level.cortex.origin + (0, 0, 15));
   playsoundatpos(level.cortex.origin, "scn_cortex_activate");
   level thread rumble_players("heavygun_fire", 0.5);
   common_scripts\utility::flag_set("ark_encounter_begun");
-  level.cortex_use_trigger sethintstring("");
+  level.cortex_use_trigger setHintString("");
   maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 1, 0, "high");
 
   foreach(var_1 in level.players) {
@@ -371,7 +371,7 @@ ark_console_point_health_monitor(var_0) {
     thread turn_off_console();
     self.ignoreme = 1;
     thread terminal_down_vo(var_0);
-    self sethintstring(&"MP_ALIEN_DESCENT_TERMINAL_ONLINE");
+    self setHintString(&"MP_ALIEN_DESCENT_TERMINAL_ONLINE");
     maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 1, 0, "high");
     self.outline_color = 0;
     self makeusable();
@@ -380,7 +380,7 @@ ark_console_point_health_monitor(var_0) {
     reset_console_health();
     thread turn_on_console();
     thread make_console_sentient(5);
-    self sethintstring("");
+    self setHintString("");
     self.sound_org stoploopsound("scn_ark_console_off_lp");
     wait 0.1;
   }
@@ -577,8 +577,8 @@ fx_ramp_on_progression(var_0) {
   var_2 = var_0 * 0.5;
   var_3 = var_0 * 0.75;
   var_4 = spawn("script_origin", (3390, 1924, 948));
-  var_5 = getent("ark_fog_01", "targetname");
-  var_6 = getent("ark_glow_01", "targetname");
+  var_5 = getEnt("ark_fog_01", "targetname");
+  var_6 = getEnt("ark_glow_01", "targetname");
   level thread lightning_loop_01();
 
   while(!isDefined(level.elapsed_time)) {
@@ -645,7 +645,7 @@ aud_node_cleanup(var_0) {
 lightning_loop_01() {
   level endon("game_ended");
   level endon("ark_stage_3");
-  var_0 = getent("ark_lightning_01", "targetname");
+  var_0 = getEnt("ark_lightning_01", "targetname");
   var_1 = ["default", "bolt_1", "bolt_2", "bolt_3", "bolt_4"];
 
   for(;;) {
@@ -660,7 +660,7 @@ lightning_loop_01() {
 
 lightning_loop_02() {
   level endon("game_ended");
-  var_0 = getent("ark_lightning_01", "targetname");
+  var_0 = getEnt("ark_lightning_01", "targetname");
   var_1 = ["default", "bolt_5", "bolt_6", "bolt_7"];
 
   for(;;) {
@@ -800,7 +800,7 @@ cortex_pulse_logic() {
 
   while(!common_scripts\utility::flag("ark_console_cycle_over")) {
     wait_until_enough_alien_killed();
-    level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_CORTEX_USE");
+    level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_CORTEX_USE");
     maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 3, 0, "high");
     level thread show_cortex_waypoint();
     var_0 = ["descent_crs_enoughpower", "descent_crs_energylevelsmaxed"];
@@ -808,7 +808,7 @@ cortex_pulse_logic() {
     level thread maps\mp\mp_alien_dlc3::playdescentstoryvo(var_1);
     level.cortex_use_trigger wait_until_player_use_cortex();
     maps\mp\alien\_gamescore::update_team_encounter_performance("cortex", "times_cortex_activated");
-    level.cortex_use_trigger sethintstring("");
+    level.cortex_use_trigger setHintString("");
     maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 1, 0, "high");
     level thread hide_cortex_waypoint();
 
@@ -840,7 +840,7 @@ rumble_players(var_0, var_1) {
   wait(var_1);
 
   foreach(var_3 in level.players) {
-    var_3 playrumbleonentity(var_0);
+    var_3 playRumbleOnEntity(var_0);
   }
 }
 
@@ -939,7 +939,7 @@ spawn_model(var_0, var_1, var_2, var_3) {
   var_4 setModel(var_0);
   var_4.origin = var_1 gettagorigin(var_2);
   var_4.angles = var_1 gettagangles(var_2) + var_3;
-  var_4 linkto(var_1, var_2);
+  var_4 linkTo(var_1, var_2);
   return var_4;
 }
 
@@ -981,7 +981,7 @@ zap_point_to_point(var_0, var_1) {
 
   self.zap_struct.attack_bolt.origin = var_0;
   playFXOnTag(level._effect["ark_beam_attack"], self.zap_struct.attack_bolt, "TAG_ORIGIN");
-  self.zap_struct.attack_bolt moveto(var_1, 0.1);
+  self.zap_struct.attack_bolt moveTo(var_1, 0.1);
   wait 0.1;
   stopFXOnTag(level._effect["ark_beam_attack"], self.zap_struct.attack_bolt, "TAG_ORIGIN");
 }
@@ -1451,30 +1451,30 @@ open_ark_doors_end() {
 }
 
 open_ark_door(var_0, var_1) {
-  var_2 = getent(var_0 + "a", "targetname");
+  var_2 = getEnt(var_0 + "a", "targetname");
 
   if(isDefined(var_2)) {
     var_3 = anglestoup(var_2.angles);
     var_4 = (var_3[0] * -1, var_3[1] * -1, var_3[2] * -1);
     var_5 = var_2.origin + 300 * var_4;
-    var_2 moveto(var_5, var_1);
+    var_2 moveTo(var_5, var_1);
   }
 
-  var_6 = getent(var_0 + "b", "targetname");
+  var_6 = getEnt(var_0 + "b", "targetname");
 
   if(isDefined(var_6)) {
     var_7 = anglestoright(var_6.angles);
     var_8 = var_7;
     var_5 = var_6.origin + 300 * var_8;
-    var_6 moveto(var_5, var_1);
+    var_6 moveTo(var_5, var_1);
   }
 
-  var_9 = getent(var_0 + "c", "targetname");
+  var_9 = getEnt(var_0 + "c", "targetname");
 
   if(isDefined(var_9)) {
     var_7 = anglestoright(var_9.angles);
     var_5 = var_9.origin + 300 * var_7;
-    var_9 moveto(var_5, var_1);
+    var_9 moveTo(var_5, var_1);
   }
 
   switch (var_0) {
@@ -1493,7 +1493,7 @@ open_ark_door(var_0, var_1) {
   }
 
   wait 1.0;
-  var_10 = getent(var_0 + "_clip", "targetname");
+  var_10 = getEnt(var_0 + "_clip", "targetname");
 
   if(isDefined(var_10)) {
     var_10 notsolid();
@@ -1514,30 +1514,30 @@ close_ark_doors() {
 
 close_ark_door(var_0, var_1) {
   var_1 = 5.0;
-  var_2 = getent(var_0 + "a", "targetname");
+  var_2 = getEnt(var_0 + "a", "targetname");
 
   if(isDefined(var_2)) {
     var_3 = anglestoup(var_2.angles);
     var_4 = var_2.origin + 300 * var_3;
-    var_2 moveto(var_4, var_1);
+    var_2 moveTo(var_4, var_1);
   }
 
-  var_5 = getent(var_0 + "b", "targetname");
+  var_5 = getEnt(var_0 + "b", "targetname");
 
   if(isDefined(var_5)) {
     var_6 = anglestoright(var_5.angles);
     var_7 = (var_6[0] * -1, var_6[1] * -1, var_6[2] * -1);
     var_4 = var_5.origin + 300 * var_7;
-    var_5 moveto(var_4, var_1);
+    var_5 moveTo(var_4, var_1);
   }
 
-  var_8 = getent(var_0 + "c", "targetname");
+  var_8 = getEnt(var_0 + "c", "targetname");
 
   if(isDefined(var_8)) {
     var_6 = anglestoright(var_8.angles);
     var_6 = (var_6[0] * -1, var_6[1] * -1, var_6[2] * -1);
     var_4 = var_8.origin + 300 * var_6;
-    var_8 moveto(var_4, var_1);
+    var_8 moveTo(var_4, var_1);
   }
 
   switch (var_0) {
@@ -1555,17 +1555,17 @@ close_ark_door(var_0, var_1) {
       break;
   }
 
-  var_9 = getent(var_0 + "_clip", "targetname");
+  var_9 = getEnt(var_0 + "_clip", "targetname");
 
   if(isDefined(var_9)) {
     var_9 solid();
-    var_9 disconnectpaths();
+    var_9 disconnectPaths();
   }
 }
 
 teleport_players_not_in_ark() {
   wait 1.0;
-  var_0 = getent("ark_interior_volume", "targetname");
+  var_0 = getEnt("ark_interior_volume", "targetname");
   var_1 = 0;
 
   if(isDefined(var_0)) {
@@ -1597,7 +1597,7 @@ teleport_player_to_spot(var_0, var_1) {
   self endon("disconnect");
   self cancelmantle();
   self dontinterpolate();
-  self setorigin(var_0);
+  self setOrigin(var_0);
   self.forceteleportorigin = var_0;
 
   if(isDefined(var_1)) {

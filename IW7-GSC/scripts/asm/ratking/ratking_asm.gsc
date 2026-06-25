@@ -485,7 +485,7 @@ playteleportout(var_0, var_1, var_2, var_3) {
     triggerfx(var_6);
   }
 
-  self setorigin(self.teleportpos, 0);
+  self setOrigin(self.teleportpos, 0);
   if(isDefined(var_5)) {
     self.angles = vectortoangles(var_5.origin - self.origin);
   }
@@ -651,7 +651,7 @@ handlestaffprojectile() {
   thread delayprojectileloopsound(var_7, var_0.staff_projectile_interval);
   while(gettime() < var_6) {
     dostaffprojectiledamage(var_5, var_4, var_0.staff_projectile_z_delta, var_0.staff_projectile_damage);
-    var_7 moveto(var_5, var_0.staff_projectile_interval);
+    var_7 moveTo(var_5, var_0.staff_projectile_interval);
     wait(var_0.staff_projectile_interval);
     var_5 = var_5 + var_1 * var_3;
     var_7.angles = vectortoangles(var_5 - var_7.origin);

@@ -211,7 +211,7 @@ spawn_doll_model(id, index, parent) {
   model_name = "t5_nesting_bomb_world_doll" + model_index + "_" + name;
   self.doll_model setModel(model_name);
   self.doll_model UseAnimTree(#animtree);
-  self.doll_model LinkTo(self);
+  self.doll_model linkTo(self);
   self.doll_model.angles = self.angles;
   playFXOnTag(level.nesting_dolls_data[data_index].trailFx, self.doll_model, "tag_origin");
   self.doll_model thread nesting_dolls_cleanup(self);
@@ -263,7 +263,7 @@ get_player_aim_best_doll_target(range) {
     if(test_range_squared > range_squared) {
       return;
     }
-    normal = VectorNormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = VectorDot(forward_view_angles, normal);
     if(dot < 0) {
       continue;
@@ -343,8 +343,8 @@ nesting_dolls_play_tesla_bolt(origin, target_origin) {
   fxOrg = spawn("script_model", origin);
   fxOrg setModel("tag_origin");
   fx = playFXOnTag(level._effect["tesla_bolt"], fxOrg, "tag_origin");
-  playsoundatposition("wpn_tesla_bounce", fxOrg.origin);
-  fxOrg MoveTo(target_origin, 0.25);
+  playSoundAtPosition("wpn_tesla_bounce", fxOrg.origin);
+  fxOrg moveTo(target_origin, 0.25);
   fxOrg waittill("movedone");
   fxOrg delete();
 }

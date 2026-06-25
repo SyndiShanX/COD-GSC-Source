@@ -92,7 +92,7 @@ civilian_jet_flyby() {
 
 jet_init() {
   self.jet_parts = getEntArray(self.target, "targetname");
-  self.jet_flyto = getent("civilian_jet_flyto", "targetname");
+  self.jet_flyto = getEnt("civilian_jet_flyto", "targetname");
   self.engine_fxs = getEntArray("engine_fx", "targetname");
   self.flash_fxs = getEntArray("flash_fx", "targetname");
 
@@ -108,7 +108,7 @@ jet_init() {
   assertex(isDefined(self.engine_fxs), "Missing cilivian jet engine fxs script_origins: engine_fx");
   assertex(isDefined(self.flash_fxs), "Missing cilivian jet signal light script_origins: flash_fxs");
 
-  negative_vec = Vector_multiply(VectorNormalize(self.origin - self.jet_flyto.origin), CONST_jet_extend);
+  negative_vec = Vector_multiply(vectorNormalize(self.origin - self.jet_flyto.origin), CONST_jet_extend);
 
   self.jet_flyto.origin -= negative_vec;
 
@@ -298,11 +298,11 @@ playsound_loop_on_ent(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -349,21 +349,21 @@ vending_machine() {
   level endon("game_ended");
   self endon("death");
 
-  self SetCursorHint("HINT_ACTIVATE");
+  self setCursorHint("HINT_ACTIVATE");
 
-  self.vm_normal = getent(self.target, "targetname");
+  self.vm_normal = getEnt(self.target, "targetname");
   assertex(isDefined(self.vm_normal), "Vending machine use trigger is missing target to the normal vending machine script_model");
-  vm_soda_start = getent(self.vm_normal.target, "targetname");
+  vm_soda_start = getEnt(self.vm_normal.target, "targetname");
   assertex(isDefined(vm_soda_start), "Vending machine normal script_model is missing target to the start-soda can script_model");
-  vm_soda_stop = getent(vm_soda_start.target, "targetname");
+  vm_soda_stop = getEnt(vm_soda_start.target, "targetname");
   assertex(isDefined(vm_soda_start), "Start-soda can script_model is missing target to the end-soda can script_model");
-  self.vm_launch_from = getent(vm_soda_stop.target, "targetname");
+  self.vm_launch_from = getEnt(vm_soda_stop.target, "targetname");
   assertex(isDefined(self.vm_launch_from), "End-soda can script_model is missing target to the physics launch-from script_origin");
-  self.vm_launch_to = getent(self.vm_launch_from.target, "targetname");
+  self.vm_launch_to = getEnt(self.vm_launch_from.target, "targetname");
   assertex(isDefined(self.vm_launch_to), "launch-from can script_origin is missing target to the physics launch-to script_origin");
 
   if(isDefined(self.vm_launch_to.target)) {
-    self.vm_fx_loc = getent(self.vm_launch_to.target, "targetname");
+    self.vm_fx_loc = getEnt(self.vm_launch_to.target, "targetname");
   }
 
   self.vm_normal setCanDamage(true);
@@ -462,7 +462,7 @@ spawn_soda() {
 }
 
 soda_can_drop(soda) {
-  soda MoveTo(self.vm_soda_stop_pos, CONST_soda_pop_time);
+  soda moveTo(self.vm_soda_stop_pos, CONST_soda_pop_time);
   soda playSound("vending_machine_soda_drop");
   wait CONST_soda_pop_time;
 
@@ -512,16 +512,16 @@ metal_detector() {
   level endon("game_ended");
   assertex(isDefined(self.target), "trigger_multiple_dyn_metal_detector is missing target damage trigger used for detecting entities other than players");
 
-  damage_trig = getent(self.target, "targetname");
+  damage_trig = getEnt(self.target, "targetname");
   damage_trig EnableGrenadeTouchDamage();
 
-  bound_org_1 = getent(damage_trig.target, "targetname");
-  bound_org_2 = getent(bound_org_1.target, "targetname");
+  bound_org_1 = getEnt(damage_trig.target, "targetname");
+  bound_org_2 = getEnt(bound_org_1.target, "targetname");
 
   assertex(isDefined(bound_org_1) && isDefined(bound_org_2), "Metal detector missing bound origins for claymore test");
 
-  detector_1 = getent(bound_org_2.target, "targetname");
-  detector_2 = getent(detector_1.target, "targetname");
+  detector_1 = getEnt(bound_org_2.target, "targetname");
+  detector_2 = getEnt(detector_1.target, "targetname");
 
   assertex(isDefined(detector_1) && isDefined(detector_2), "Recompile the bsp to fix this, metal detector prefab changed.");
 
@@ -958,7 +958,7 @@ doorClose(openTime) {
 }
 
 getDoorSide(player) {
-  return (vectorDot(self.doorAngle, vectornormalize(player.origin - self.doorEnt getOrigin())) > 0);
+  return (vectorDot(self.doorAngle, vectorNormalize(player.origin - self.doorEnt getOrigin())) > 0);
 }
 
 getVectorRightAngle(vDir) {
@@ -1003,10 +1003,10 @@ photo_copier_init(trigger) {
   self.copier = get_photo_copier(trigger);
   assertex(self.copier.classname == "script_model", "Photocopier at " + trigger.origin + " doesn't target a photo copier");
 
-  copy_bar = getent(self.copier.target, "targetname");
+  copy_bar = getEnt(self.copier.target, "targetname");
   assertex(copy_bar.classname == "script_brushmodel", "Photocopier at " + trigger.origin + " doesn't target a photo copier");
 
-  light = getent(copy_bar.target, "targetname");
+  light = getEnt(copy_bar.target, "targetname");
   assertex(light.classname == "light_spot" || light.classname == "light", "Photocopier at " + trigger.origin + " doesn't have a light");
 
   light.intensity = light getlightintensity();
@@ -1033,7 +1033,7 @@ get_photo_copier(trigger) {
     }
     assertex(distance(trigger.origin, copier.origin) < 128, "Photocopier at " + trigger.origin + " doesn't contain a photo copier");
   } else {
-    copier = getent(trigger.target, "targetname");
+    copier = getEnt(trigger.target, "targetname");
     assertex(isDefined(copier), "Photocopier at " + trigger.origin + " doesn't target a photo copier");
     copier setCanDamage(true);
   }
@@ -1083,7 +1083,7 @@ photo_copier_no_light() {
   }
 }
 reset_copier(trigger) {
-  trigger.copy_bar moveto(trigger.start_pos, 0.2);
+  trigger.copy_bar moveTo(trigger.start_pos, 0.2);
   trigger.light setlightintensity(0);
 }
 
@@ -1095,9 +1095,9 @@ photo_copier_copy_bar_goes() {
 
   copy_bar = self.copy_bar;
   wait(2.0);
-  copy_bar moveto(self.end_pos, 1.6);
+  copy_bar moveTo(self.end_pos, 1.6);
   wait(1.8);
-  copy_bar moveto(self.start_pos, 1.6);
+  copy_bar moveTo(self.start_pos, 1.6);
   wait(1.6);
 
   light = self.light;

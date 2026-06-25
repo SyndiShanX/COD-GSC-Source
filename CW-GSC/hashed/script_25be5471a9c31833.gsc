@@ -106,7 +106,7 @@ function function_744f2a2(struct, var_a0f07ebc, modelname, hint_string, var_c024
   }
 
   forward = anglesToForward(scriptmodel.angles);
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   offset = forward * 24;
   offset = (offset[0], offset[1], offset[2] + 50);
   trigger = content_manager::spawn_interact(struct, callbackfunction, hint_string, undefined, 64, 128, undefined, offset);
@@ -152,7 +152,7 @@ function wait_for_power(var_386a4480) {
   if(isDefined(self.modelname) && isDefined(self.scriptmodel) && isDefined(var_386a4480) && isDefined(self.var_3e85f6dd)) {
     self.var_3e85f6dd thread function_dc1b3863(self.scriptmodel, 0);
     self.scriptmodel thread namespace_791d0451::function_c5fb4741(1);
-    self sethintstring(var_386a4480);
+    self setHintString(var_386a4480);
   }
 }
 
@@ -168,7 +168,7 @@ function function_96a51643(mdl_machine) {
 
 function function_8d0d8a65() {
   playFX("sr/fx9_safehouse_mchn_wonderfizz_spawn", self.origin);
-  playsoundatposition(#"hash_20c4f0485930af2a", self.origin);
+  playSoundAtPosition(#"hash_20c4f0485930af2a", self.origin);
   wait 1;
 }
 
@@ -350,7 +350,7 @@ function function_4513f006(machine, trigger) {
 
           if(isDefined(talent) && var_3069fe3 && !self namespace_791d0451::function_56cedda7(talent)) {
             if(namespace_791d0451::function_cc0055e9(talent)) {
-              self playrumbleonentity(#"zm_interact_rumble");
+              self playRumbleOnEntity(#"zm_interact_rumble");
               self zm_score::minus_to_player_score(var_87abc3a0);
               self namespace_791d0451::function_3fecad82(talent, 1, 2);
 

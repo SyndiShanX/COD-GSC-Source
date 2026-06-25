@@ -1273,7 +1273,7 @@ considerThrowGrenade() {
 
   self.a.nextGrenadeTryTime = gettime() + 300;
 
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && isDefined(players[i].throwGrenadeAtPlayerASAP) && isAlive(players[i])) {
       if(tryThrowGrenade(players[i], 200)) {

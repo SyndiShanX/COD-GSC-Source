@@ -34,31 +34,31 @@ init() {
 set_up_initial_interactions() {
   level endon("game_ended");
   level scripts\engine\utility::_id_5C24("interactions_initialized");
-  level.s_tube_01_loc = scripts\engine\utility::getstruct("wwq_workbench_loc", "script_noteworthy");
+  level.s_tube_01_loc = scripts\engine\utility::getStruct("wwq_workbench_loc", "script_noteworthy");
   level.s_tube_01_loc.b_should_pickup = 0;
   _id_0737::_id_C266("wwq_workbench_loc", ::hint_interaction_workbench, ::on_interact_workbench, ::init_interact_tube);
   _id_0737::addinteractionhinttypecallback("wwq_workbench_loc", ::hint_type_workbench);
-  level.s_tube_02_loc = scripts\engine\utility::getstruct("wwq_tube_02_loc", "script_noteworthy");
+  level.s_tube_02_loc = scripts\engine\utility::getStruct("wwq_tube_02_loc", "script_noteworthy");
   level.s_tube_02_loc.b_should_pickup = 1;
   level.s_tube_02_loc.wait_flag = "wwq_win_defend";
   _id_0737::_id_C266("wwq_tube_02_loc", ::hint_interaction_tube_02, ::on_interact_tube_02, ::init_interact_tube);
   level._id_8393["wwq_tube_02_loc"].hint_type_func = ::get_tube_02_hint_type;
-  level.s_tube_03_loc = scripts\engine\utility::getstruct("wwq_tube_03_loc", "script_noteworthy");
+  level.s_tube_03_loc = scripts\engine\utility::getStruct("wwq_tube_03_loc", "script_noteworthy");
   level.s_tube_03_loc.b_should_pickup = 1;
   level.s_tube_03_loc.wait_flag = "wwq_tesla_charged";
   _id_0737::_id_C266("wwq_tube_03_loc", ::hint_interaction_tube_03, ::on_interact_tube_03, ::init_interact_tube);
-  level.s_circuit_breaker_loc = scripts\engine\utility::getstruct("wwq_circuit_breaker_loc", "script_noteworthy");
+  level.s_circuit_breaker_loc = scripts\engine\utility::getStruct("wwq_circuit_breaker_loc", "script_noteworthy");
   level.s_circuit_breaker_loc.b_should_pickup = 1;
   _id_0737::_id_C266("wwq_circuit_breaker_loc", undefined, ::on_interact_circuit_breaker, ::init_interact_circuit_breaker);
   level._id_835D["wwq_circuit_breaker_loc"] = &"CP_SUMPF/WWQ_COLLECT_CIRCUIT_BREAKER";
-  level.s_barrel_loc = scripts\engine\utility::getstruct("wwq_barrel_loc", "script_noteworthy");
+  level.s_barrel_loc = scripts\engine\utility::getStruct("wwq_barrel_loc", "script_noteworthy");
   level.s_barrel_loc.b_should_pickup = 1;
   _id_0737::_id_C266("wwq_barrel_loc", undefined, ::on_interact_barrel, ::init_interact_barrel);
   level._id_835D["wwq_barrel_loc"] = &"CP_SUMPF/WWQ_COLLECT_BARREL";
 }
 
 init_step_one_find_workbench() {
-  level.s_workdbench_loc = scripts\engine\utility::getstruct("wwq_workbench_loc", "script_noteworthy");
+  level.s_workdbench_loc = scripts\engine\utility::getStruct("wwq_workbench_loc", "script_noteworthy");
 }
 
 do_step_one_find_workbench() {
@@ -125,18 +125,18 @@ check_players_get_close_to_workbench() {
 init_step_two_search_for_components() {
   _id_06CB::_id_AA4A(::on_zombie_killed_step_two);
   level.a_e_ww_parts = [];
-  var_0 = getent("wwq_dg2_body_part", "script_noteworthy");
+  var_0 = getEnt("wwq_dg2_body_part", "script_noteworthy");
   level.a_e_ww_parts = scripts\engine\utility::array_add(level.a_e_ww_parts, var_0);
   level.n_electro_trap_kills = 0;
-  level.s_electro_trap_loc = scripts\engine\utility::getstruct("electric_trap_storage", "targetname");
+  level.s_electro_trap_loc = scripts\engine\utility::getStruct("electric_trap_storage", "targetname");
   _id_0737::_id_C266("wwq_elec_trap_loc", ::hint_interact_electro_trap, ::on_interact_electro_trap, ::init_interact_electro_trap);
   _id_0737::addinteractionhinttypecallback("wwq_elec_trap_loc", ::hint_type_electro_trap);
   level.s_electro_trap_loc thread trap_broken_time_watcher();
-  level.mdl_trap_pnl = getent("wwq_trap_pnl_mdl", "script_noteworthy");
+  level.mdl_trap_pnl = getEnt("wwq_trap_pnl_mdl", "script_noteworthy");
   _id_0737::_id_C266("wwq_radio_tower_trig_loc", ::hint_interaction_radio_tower, ::on_interact_radio_tower, ::init_interact_radio_tower);
   _id_0737::addinteractionhinttypecallback("wwq_radio_tower_trig_loc", ::hint_type_radio_tower);
-  level.s_barrel_drop_loc = scripts\engine\utility::getstruct("wwq_barrel_drop_loc", "script_noteworthy");
-  level.s_radio_tower = scripts\engine\utility::getstruct("wwq_radio_tower_center_loc", "script_noteworthy");
+  level.s_barrel_drop_loc = scripts\engine\utility::getStruct("wwq_barrel_drop_loc", "script_noteworthy");
+  level.s_radio_tower = scripts\engine\utility::getStruct("wwq_radio_tower_center_loc", "script_noteworthy");
   level.s_radio_tower.n_health = 100;
   level.a_s_commroom_spawners = scripts\engine\utility::getStructArray("comm_room_outside_zone", "target");
   level.a_s_commroom_screamer_spawners = [];
@@ -157,7 +157,7 @@ init_step_two_search_for_components() {
 
   level.a_ai_zombies_attacking_radio_tower = scripts\cp\utility::_id_459B(level.a_ai_zombies_attacking_radio_tower, []);
   level.a_s_radio_attacker_locs = scripts\engine\utility::getStructArray("wwq_radio_attacker_loc", "script_noteworthy");
-  level.s_tube_03_loc.t_dmg = getent("wwq_tesla_dmg_trig", "targetname");
+  level.s_tube_03_loc.t_dmg = getEnt("wwq_tesla_dmg_trig", "targetname");
   level.s_tube_03_loc thread tesla_device_dmg_watcher();
   level.n_tesla_charge_times = 0;
 }
@@ -284,7 +284,7 @@ step_two_progress_watcher() {
 }
 
 spawn_ww_parts_on_workbench(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstruct(var_0, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStruct(var_0, "script_noteworthy");
   var_4 = scripts\cp\utility::_id_E190(var_1, var_3.origin, var_3.angles);
 
   if(istrue(var_2)) {
@@ -348,7 +348,7 @@ on_interact_electro_trap(var_0, var_1) {
 return_fuse_to_trap_panel(var_0) {
   level endon("game_ended");
   level endon("wwq_step_two_is_done");
-  var_1 = scripts\engine\utility::getstruct("wwq_returned_fuse_loc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("wwq_returned_fuse_loc", "script_noteworthy");
   var_2 = scripts\cp\utility::_id_E190("s4_zm_circuit_breaker", var_1.origin, var_1.angles);
   scripts\cp\utility::_id_B8EF("zmb_ww_fuse_insert", self.origin);
   var_0 _meth_827A("cp_zm_s2_mq_shield_rumble", var_0.origin);
@@ -473,7 +473,7 @@ on_interact_radio_tower(var_0, var_1) {
   if(level scripts\engine\utility::_id_5C00("wwq_barrel_in_hand") && !level scripts\engine\utility::_id_5C00("wwq_win_defend")) {
     scripts\cp\utility::_id_B8EF("zmb_ww_barrel_radio_tower", var_0.origin);
     var_1 _meth_827A("cp_zm_s2_mq_shield_rumble", var_1.origin);
-    var_2 = scripts\engine\utility::getstruct(var_0.target, "script_noteworthy");
+    var_2 = scripts\engine\utility::getStruct(var_0.target, "script_noteworthy");
 
     if(!isDefined(level.mdl_barrel)) {
       level.mdl_barrel = scripts\cp\utility::_id_E190("s4_zm_dg2_components_barrel", var_2.origin, var_2.angles);
@@ -550,7 +550,7 @@ on_interact_tube_02(var_0, var_1) {
 }
 
 init_interact_tube(var_0) {
-  var_1 = scripts\engine\utility::getstruct(var_0[0].target, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct(var_0[0].target, "script_noteworthy");
 
   if(!isDefined(var_0[0].mdl_tube)) {
     if(istrue(var_0[0].b_should_pickup)) {
@@ -1082,7 +1082,7 @@ send_trail_fx_to_raido() {
   var_1 = distance(var_0.origin, level.s_radio_tower.origin) / 50;
   waitframe();
   playFXOnTag(level._effect["wwq_sacrifice_zombie_trail_fx"], var_0, "tag_origin");
-  var_0 moveto(level.s_radio_tower.origin, var_1, 0, 0);
+  var_0 moveTo(level.s_radio_tower.origin, var_1, 0, 0);
   var_0 waittill("movedone");
   _func_0130(var_0);
   var_0 delete();
@@ -1185,7 +1185,7 @@ main_thunder_fx_watcher() {
   level endon("wwq_step_two_is_done");
   level endon("wwq_win_defend");
   level endon("wwq_lose_defend");
-  var_0 = getent("wwq_radio_tower_mdl", "script_noteworthy");
+  var_0 = getEnt("wwq_radio_tower_mdl", "script_noteworthy");
   var_1 = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles + (0, 30, 0));
   var_1 thread play_radio_tower_ambient_fx();
 
@@ -1363,7 +1363,7 @@ tesla_device_dmg_watcher() {
   level endon("game_ended");
   level endon("wwq_step_two_is_done");
   level endon("wwq_tesla_charged_done");
-  var_0 = getent("wwq_tesla_device", "script_noteworthy");
+  var_0 = getEnt("wwq_tesla_device", "script_noteworthy");
   var_1 = scripts\cp\utility::_id_E190("tag_origin", var_0.origin);
 
   for(;;) {
@@ -1460,7 +1460,7 @@ play_tesla_coil_charge_finish_vo() {
 }
 
 init_step_three_assemble() {
-  level.s_dg2_loc = scripts\engine\utility::getstruct("wwq_DG2_loc", "script_noteworthy");
+  level.s_dg2_loc = scripts\engine\utility::getStruct("wwq_DG2_loc", "script_noteworthy");
 }
 
 do_step_three_soul_assemble() {

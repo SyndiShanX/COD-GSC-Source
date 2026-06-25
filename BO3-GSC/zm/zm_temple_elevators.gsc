@@ -35,7 +35,7 @@ function init_temple_geyser() {
     geysertrigger.push_y = float(parms[1]);
     geysertrigger.push_z = float(parms[2]);
     geysertrigger.push_time = float(parms[3]);
-    geysertrigger.lift = getent(geysertrigger.target, "targetname");
+    geysertrigger.lift = getEnt(geysertrigger.target, "targetname");
     geysertrigger.bottom = struct::get(geysertrigger.target, "targetname");
     if(!isDefined(geysertrigger.bottom.angles)) {
       geysertrigger.bottom.angles = (0, 0, 0);
@@ -44,13 +44,13 @@ function init_temple_geyser() {
     if(!isDefined(geysertrigger.top.angles)) {
       geysertrigger.top.angles = (0, 0, 0);
     }
-    geysertrigger.trigger_dust = getent(("trigger_" + geysertrigger.script_noteworthy) + "_dust", "targetname");
+    geysertrigger.trigger_dust = getEnt(("trigger_" + geysertrigger.script_noteworthy) + "_dust", "targetname");
     if(isDefined(geysertrigger.trigger_dust)) {
       geysertrigger.trigger_dust thread geyser_trigger_dust_think();
     }
     if(isDefined(geysertrigger.script_noteworthy)) {
       level flag::init(geysertrigger.script_noteworthy + "_active");
-      blocker = getent(geysertrigger.script_noteworthy + "_blocker", "targetname");
+      blocker = getEnt(geysertrigger.script_noteworthy + "_blocker", "targetname");
       if(isDefined(blocker)) {
         geysertrigger thread geyser_blocker_think(blocker);
       }
@@ -139,7 +139,7 @@ function geyser_watch_for_player() {
     }
     self playSound("evt_geyser_buildup");
     starttime = gettime();
-    players = getplayers();
+    players = getPlayers();
     while(true) {
       playerstouching = [];
       for(i = 0; i < players.size; i++) {
@@ -217,7 +217,7 @@ function player_geyser_move(geyser) {
   scale = (geyser.top.origin[2] - self.origin[2]) / (geyser.top.origin[2] - geyser.bottom.origin[2]);
   scale = math::clamp(scale, 0.4, 1);
   mover = spawn("script_origin", self.origin);
-  self playerlinkto(mover);
+  self playerlinkTo(mover);
   x = geyser.push_x;
   y = geyser.push_y;
   z = geyser.push_z * scale;
@@ -253,7 +253,7 @@ function geyser_erupt_old(playerstouching) {
   moveuptime = 0.5;
   movedowntime = 0.1;
   movedist = 500;
-  lift = getent("geyser_lift", "targetname");
+  lift = getEnt("geyser_lift", "targetname");
   wait(0.1);
   start_origin = self.lift.origin;
   start_angles = self.lift.angles;
@@ -346,7 +346,7 @@ function geyser_sounds(struct_name, sfx_start, sfx_loop, sfx_loop_delay) {
 }
 
 function geyser_blocker_remove() {
-  clip = getent(self.target, "targetname");
+  clip = getEnt(self.target, "targetname");
   clip notsolid();
   clip connectpaths();
   struct = spawnStruct();

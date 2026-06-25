@@ -58,7 +58,7 @@ function function_cdc6589b() {
 
 function function_fadb1cd3(player) {
   if(level flag::get_any([#"hash_7b5643f5ecc16c8f", #"hash_434bc775e67b7233", #"hash_20afa38b1f1c339e"])) {
-    self sethintstring("");
+    self setHintString("");
     return 0;
   }
 
@@ -221,7 +221,7 @@ function function_904d21fd() {
   }
 
   arrayremovevalue(actor_array, -1);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player.sessionstate === "spectator") {
@@ -253,7 +253,7 @@ function function_904d21fd() {
     }
 
     if(isDefined(var_3817a6b3)) {
-      closest_player = arraygetclosest(var_3817a6b3.origin, getplayers());
+      closest_player = arraygetclosest(var_3817a6b3.origin, getPlayers());
     }
 
     if(isDefined(closest_player) && isDefined(var_3817a6b3)) {
@@ -369,7 +369,7 @@ function function_e01b301e(s_loc) {
 
 function function_6a8117ab() {
   self endon(#"death");
-  e_trigger = getent("pap_quest_clear_enemy_trigger", "targetname");
+  e_trigger = getEnt("pap_quest_clear_enemy_trigger", "targetname");
   a_players = array::randomize(function_a1ef346b());
 
   foreach(player in a_players) {
@@ -388,7 +388,7 @@ function function_8ff08856() {
   wait randomintrange(8, 16);
   var_f490e876 = undefined;
   s_spawn_loc = struct::get("s_pap_quest_mechz_spawn");
-  var_8a9b34b3 = getent("spawner_bo5_mechz_sr", "targetname");
+  var_8a9b34b3 = getEnt("spawner_bo5_mechz_sr", "targetname");
   var_8a9b34b3.script_forcespawn = 1;
 
   while(!isDefined(var_f490e876)) {
@@ -408,20 +408,20 @@ function function_f8cbb582() {
   level flag::wait_till(#"hash_434bc775e67b7233");
   level thread zm_audio::function_b36aeaf6("papevent");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 
   level clientfield::set("" + #"pap_portal_fx", 1);
   level.var_7ff7eaf9 = [];
   a_s_loc = array::sort_by_script_int(struct::get_array("s_pap_quest_boss_spawn"), 1);
-  var_5e5e4c63 = getent("spawner_bo5_soa", "targetname");
+  var_5e5e4c63 = getEnt("spawner_bo5_soa", "targetname");
   var_5e5e4c63.script_forcespawn = 1;
   level.var_1ceed659 = undefined;
   wait 0.5;
   var_84a3b2fc = 0;
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
     default:
       n_max_active_ai = 2;
@@ -479,7 +479,7 @@ function function_f8cbb582() {
   level clientfield::set("" + #"pap_portal_fx", 0);
   level thread zm_audio::function_2354b945("papevent");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 3);
   }
 
@@ -500,7 +500,7 @@ function function_4df61aed(b_teleport) {
   self.var_306ee014 = undefined;
   aiutility::removeaioverridedamagecallback(self, &function_5d4aa7f8);
 
-  if(getplayers().size < 3) {
+  if(getPlayers().size < 3) {
     var_98a21198 = #"hash_4cc53090ca79c51a";
   } else {
     var_98a21198 = #"hash_6cd6ef080cea716b";

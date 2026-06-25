@@ -251,7 +251,7 @@ nodegetremotemissleentorg(var_0, var_1) {
     var_2 = var_0.bestmissilespawn;
   }
 
-  var_7 = vectornormalize(var_2.origin - var_0.origin);
+  var_7 = vectorNormalize(var_2.origin - var_0.origin);
   return var_0.origin + var_7 * 24000;
 }
 
@@ -667,7 +667,7 @@ playergetclosestnodeinternal(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 playerwithinfov2d(var_0) {
   var_1 = cos(60);
-  var_2 = vectornormalize((var_0[0], var_0[1], 0) - (self.origin[0], self.origin[1], 0));
+  var_2 = vectorNormalize((var_0[0], var_0[1], 0) - (self.origin[0], self.origin[1], 0));
   var_3 = anglesToForward((0, self.angles[1], 0));
   return vectordot(var_3, var_2) >= var_1;
 }

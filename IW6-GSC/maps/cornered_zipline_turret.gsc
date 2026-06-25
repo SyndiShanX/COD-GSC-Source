@@ -6,18 +6,18 @@
 player_handle_zipline_turret(var_0) {
   wait 1.75;
   level.fake_turret setModel("weapon_zipline_rope_launcher_alt_obj");
-  var_1 = getent("zipline_launcher_trigger_player", "targetname");
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 = getEnt("zipline_launcher_trigger_player", "targetname");
+  var_1 setCursorHint("HINT_NOICON");
 
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-      var_1 sethintstring(&"CORNERED_DEPLOY_ZIPLINE_TURRET_CONSOLE");
+      var_1 setHintString(&"CORNERED_DEPLOY_ZIPLINE_TURRET_CONSOLE");
     } else {
-      var_1 sethintstring(&"CORNERED_DEPLOY_ZIPLINE_TURRET");
+      var_1 setHintString(&"CORNERED_DEPLOY_ZIPLINE_TURRET");
     }
   }
 
-  var_2 = common_scripts\utility::getstruct("zipline_launcher_lookat", "targetname");
+  var_2 = common_scripts\utility::getStruct("zipline_launcher_lookat", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_1, var_2, cos(40), 0, 1);
   common_scripts\utility::flag_set("zipline_launcher_setup");
   level.fake_turret setModel("weapon_zipline_rope_launcher_alt");

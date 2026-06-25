@@ -114,7 +114,7 @@ createLBGuard(heliGuardType) {
   lb.currentNode = closestNode;
 
   mgTurret = SpawnTurret("misc_turret", lb.origin, level.heliGuardSettings[heliGuardType].weaponInfo);
-  mgTurret LinkTo(lb, level.heliGuardSettings[heliGuardType].weaponTagLeft, (0, 0, 0), (0, 0, 0));
+  mgTurret linkTo(lb, level.heliGuardSettings[heliGuardType].weaponTagLeft, (0, 0, 0), (0, 0, 0));
   mgTurret setModel(level.heliGuardSettings[heliGuardType].weaponModelLeft);
   mgTurret.angles = lb.angles;
   mgTurret.owner = lb.owner;
@@ -128,10 +128,10 @@ createLBGuard(heliGuardType) {
   killCamOrigin = (lb.origin + ((anglesToForward(lb.angles) * -100) + (AnglesToRight(lb.angles) * -100))) + (0, 0, 50);
   mgTurret.killCamEnt = spawn("script_model", killCamOrigin);
   mgTurret.killCamEnt SetScriptMoverKillCam("explosive");
-  mgTurret.killCamEnt LinkTo(lb, "tag_origin");
+  mgTurret.killCamEnt linkTo(lb, "tag_origin");
 
   mgTurret = SpawnTurret("misc_turret", lb.origin, level.heliGuardSettings[heliGuardType].weaponInfo);
-  mgTurret LinkTo(lb, level.heliGuardSettings[heliGuardType].weaponTagRight, (0, 0, 0), (0, 0, 0));
+  mgTurret linkTo(lb, level.heliGuardSettings[heliGuardType].weaponTagRight, (0, 0, 0), (0, 0, 0));
   mgTurret setModel(level.heliGuardSettings[heliGuardType].weaponModelRight);
   mgTurret.angles = lb.angles;
   mgTurret.owner = lb.owner;
@@ -144,7 +144,7 @@ createLBGuard(heliGuardType) {
   killCamOrigin = (lb.origin + ((anglesToForward(lb.angles) * -100) + (AnglesToRight(lb.angles) * 100))) + (0, 0, 50);
   mgTurret.killCamEnt = spawn("script_model", killCamOrigin);
   mgTurret.killCamEnt SetScriptMoverKillCam("explosive");
-  mgTurret.killCamEnt LinkTo(lb, "tag_origin");
+  mgTurret.killCamEnt linkTo(lb, "tag_origin");
 
   if(level.teamBased) {
     lb.mgTurretLeft setTurretTeam(self.team);
@@ -620,7 +620,7 @@ lbSupport_getLinkedStructs() {
   if(isDefined(self.script_linkTo)) {
     linknames = get_links();
     for(i = 0; i < linknames.size; i++) {
-      ent = getstruct(linknames[i], "script_linkname");
+      ent = getStruct(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         array[array.size] = ent;
       }

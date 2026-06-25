@@ -173,7 +173,7 @@ function turret_target() {
       }
       self.e_target = a_enemy;
     }
-    self setturrettargetent(self.e_target);
+    self setturrettargetEnt(self.e_target);
     self.var_d211e48d = 0;
     if(!self.is_attacking) {
       self thread function_2c414dda();
@@ -223,7 +223,7 @@ function function_2c414dda() {
     offset = vectorscale((0, 0, -1), 56);
   }
   while(isDefined(self.e_target) && isalive(self.e_target)) {
-    self setturrettargetent(self.e_target, offset);
+    self setturrettargetEnt(self.e_target, offset);
     self function_4deaa5de(2, self.e_target);
     wait(0.2);
   }
@@ -310,7 +310,7 @@ function function_a0d09d25(player) {
   weapon = getweapon("zombietron_sprinkler_launcher");
   top = self.origin + vectorscale((0, 0, 1), 32);
   while(true) {
-    self rotateto(self.angles + vectorscale((0, 1, 0), 8), 0.1);
+    self rotateTo(self.angles + vectorscale((0, 1, 0), 8), 0.1);
     wait(0.1);
     forward = anglesToForward(self.angles + (0, 0, randomfloatrange(100, 500)));
     magicbullet(weapon, top, top + (forward * 1000), (isDefined(player) ? player : self));
@@ -384,7 +384,7 @@ function function_62c5a5a(player, origin) {
   time_left = gettime() + (player doa_utility::function_1ded48e6(level.doa.rules.var_3c441789 * 1000));
   angles = player.angles;
   dropspot = origin + vectorscale((0, 0, 1), 800);
-  spawner = getent("doa_amws", "targetname");
+  spawner = getEnt("doa_amws", "targetname");
   if(!isDefined(spawner)) {
     return;
   }
@@ -400,7 +400,7 @@ function function_62c5a5a(player, origin) {
   fake.angles = angles;
   fake thread namespace_eaa992c::function_285a2999("fire_trail");
   fake thread namespace_1a381543::function_90118d8c("evt_turret_incoming");
-  fake moveto(mark, 0.5);
+  fake moveTo(mark, 0.5);
   fake util::waittill_any_timeout(1, "movedone");
   physicsexplosionsphere(mark, 200, 128, 3);
   fake radiusdamage(mark, 72, 10000, 10000);
@@ -441,7 +441,7 @@ function function_62c5a5a(player, origin) {
     amws delete();
     fake thread namespace_eaa992c::function_285a2999("veh_takeoff");
     fake thread namespace_eaa992c::function_285a2999("crater_dust");
-    fake moveto(dropspot, 0.5);
+    fake moveTo(dropspot, 0.5);
     fake util::waittill_any_timeout(1, "movedone");
     fake delete();
   }

@@ -422,8 +422,8 @@ turret_setActive() {
 
   self.ownerTrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 32, 64);
   assert(isDefined(self.ownerTrigger));
-  self.ownerTrigger EnableLinkTo();
-  self.ownerTrigger LinkTo(self);
+  self.ownerTrigger EnablelinkTo();
+  self.ownerTrigger linkTo(self);
   owner thread turret_handlePickup(self);
 
   self thread watchEnterAndExit();

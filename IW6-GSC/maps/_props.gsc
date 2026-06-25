@@ -53,7 +53,7 @@ add_sit_load_ak_notetracks(var_0) {
 attach_clip(var_0) {
   var_0 notify("new_prop_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
-  var_1 linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
   var_1 setModel(maps\_utility::getmodel("clip"));
   var_0.clip = var_1;
   thread prop_delete(var_1, var_0);
@@ -71,7 +71,7 @@ add_cellphone_notetracks(var_0) {
 attach_phone(var_0) {
   var_0 notify("new_phone_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
-  var_1 linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
   var_1 setModel(maps\_utility::getmodel("cellphone"));
   var_0.phone = var_1;
   thread prop_delete(var_1, var_0);
@@ -86,7 +86,7 @@ detach_phone(var_0) {
 attach_cig(var_0) {
   var_0 notify("new_cigar_rotation");
   var_1 = spawn("script_model", (0, 0, 0));
-  var_1 linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
   var_1 setModel(maps\_utility::getmodel("cigar"));
   playFXOnTag(common_scripts\utility::getfx("cigar_glow"), var_1, "tag_cigarglow");
   var_0.cigar = var_1;

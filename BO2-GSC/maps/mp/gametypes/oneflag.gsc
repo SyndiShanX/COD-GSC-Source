@@ -407,7 +407,7 @@ updategametypedvars() {
 
 createflag(trigger) {
   if(isDefined(trigger.target)) {
-    visuals[0] = getent(trigger.target, "targetname");
+    visuals[0] = getEnt(trigger.target, "targetname");
   } else {
     visuals[0] = spawn("script_model", trigger.origin);
     visuals[0].angles = trigger.angles;
@@ -505,8 +505,8 @@ createflaghint(team, origin) {
   radius = 128;
   height = 64;
   trigger = spawn("trigger_radius", origin, 0, radius, height);
-  trigger sethintstring(&"MP_CTF_CANT_CAPTURE_FLAG");
-  trigger setcursorhint("HINT_NOICON");
+  trigger setHintString(&"MP_CTF_CANT_CAPTURE_FLAG");
+  trigger setCursorHint("HINT_NOICON");
   trigger.original_origin = origin;
   trigger turn_off();
   return trigger;

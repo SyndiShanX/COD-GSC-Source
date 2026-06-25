@@ -50,10 +50,10 @@ setup_common(var_0) {
 
 setup_player() {
   var_0 = level.start_point + "_start";
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
-    level.player setorigin(var_1.origin);
+    level.player setOrigin(var_1.origin);
 
     if(isDefined(var_1.angles)) {
       level.player setplayerangles(var_1.angles);
@@ -150,7 +150,7 @@ nag_until_flag(var_0, var_1, var_2, var_3, var_4) {
 #using_animtree("generic_human");
 
 carrier_life_jet_takeoff_guys(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = common_scripts\utility::getstruct("redshirt_forklift_stopper_ref", "targetname");
+  var_6 = common_scripts\utility::getStruct("redshirt_forklift_stopper_ref", "targetname");
   var_7 = maps\_utility::spawn_targetname(var_0);
   var_7.animname = var_1;
   var_7.runanim = maps\_utility::getgenericanim("unarmed_run");
@@ -176,7 +176,7 @@ carrier_life_jet_takeoff_guys(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 carrier_life_jet_takeoff_jet(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::getstruct("redshirt_forklift_stopper_ref", "targetname");
+  var_5 = common_scripts\utility::getStruct("redshirt_forklift_stopper_ref", "targetname");
   var_6 = maps\_vehicle::spawn_vehicle_from_targetname(var_0);
   var_6.animname = var_1;
 
@@ -227,9 +227,9 @@ setup_jet_and_clip(var_0, var_1, var_2, var_3) {
   var_5.origin = var_4.origin;
   var_6.origin = var_12;
   var_7.origin = var_13;
-  var_5 linkto(var_4, "tag_body");
-  var_6 linkto(var_4, "le_wing_fold_jnt");
-  var_7 linkto(var_4, "ri_wing_fold_jnt");
+  var_5 linkTo(var_4, "tag_body");
+  var_6 linkTo(var_4, "le_wing_fold_jnt");
+  var_7 linkTo(var_4, "ri_wing_fold_jnt");
 
   if(isDefined(var_1)) {
     var_5 thread maps\carrier_deck_tilt::player_hit_detect(var_1, var_2, var_3);
@@ -241,10 +241,10 @@ setup_jet_and_clip(var_0, var_1, var_2, var_3) {
 }
 
 setup_island_flag() {
-  var_0 = getent("island_flag", "targetname");
+  var_0 = getEnt("island_flag", "targetname");
   var_0.animname = "flag";
   var_0 maps\_anim::setanimtree();
-  var_1 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_1 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 thread maps\_anim::anim_loop_solo(var_0, "carrier_flag_idle", "stop_flag");
   common_scripts\utility::flag_wait("start_main_odin_strike");
   var_1 notify("stop_flag");
@@ -256,14 +256,14 @@ clear_deck_props() {
   wait 0.1;
 
   if(level.start_point != "slow_intro" && level.start_point != "medbay" && level.start_point != "deck_combat" && level.start_point != "defend_zodiac") {
-    var_0 = getent("anim_jet_launcher1", "targetname");
+    var_0 = getEnt("anim_jet_launcher1", "targetname");
     var_0 hide();
-    var_1 = getent("anim_jet_launcher2", "targetname");
+    var_1 = getEnt("anim_jet_launcher2", "targetname");
     var_1 hide();
   }
 
   if(level.start_point != "slow_intro" && level.start_point != "medbay" && level.start_point != "deck_combat" && level.start_point != "deck_transition") {
-    var_2 = getent("taxing_osprey_clip", "targetname");
+    var_2 = getEnt("taxing_osprey_clip", "targetname");
     var_2 delete();
   }
 }
@@ -302,15 +302,15 @@ move_deck_props() {
     var_1 movez(-4096, 0.05);
   }
 
-  var_12 = getent("blast_shield1", "targetname");
-  var_12 rotateto((0, 0, -65), 0.5);
+  var_12 = getEnt("blast_shield1", "targetname");
+  var_12 rotateTo((0, 0, -65), 0.5);
   level.deck_clean = getEntArray("deck_clean", "targetname");
-  level.blast_shield = getent("blast_shield2", "targetname");
+  level.blast_shield = getEnt("blast_shield2", "targetname");
   maps\_utility::array_delete(level.deck_clean);
   level.blast_shield delete();
-  var_13 = getent("deck_tilt_tugger_1", "targetname");
-  var_14 = getent("deck_tilt_tugger_1_clip", "targetname");
-  var_15 = getent("deck_tilt_tugger_1_mantle", "targetname");
+  var_13 = getEnt("deck_tilt_tugger_1", "targetname");
+  var_14 = getEnt("deck_tilt_tugger_1_clip", "targetname");
+  var_15 = getEnt("deck_tilt_tugger_1_mantle", "targetname");
   var_13 movez(120, 0.05);
   var_14 movez(120, 0.05);
   var_15 movez(120, 0.05);
@@ -330,14 +330,14 @@ move_deck_props() {
     }
   }
 
-  var_23 = getent("blast_shield4", "targetname");
-  var_24 = getent("blast_shield5", "targetname");
-  var_25 = getent("blast_shield6", "targetname");
+  var_23 = getEnt("blast_shield4", "targetname");
+  var_24 = getEnt("blast_shield5", "targetname");
+  var_25 = getEnt("blast_shield6", "targetname");
   var_23 delete();
   var_24 delete();
   var_25 delete();
-  var_26 = getent("depth_charge_cart", "targetname");
-  var_27 = getent("depth_charge_cart_clip", "targetname");
+  var_26 = getEnt("depth_charge_cart", "targetname");
+  var_27 = getEnt("depth_charge_cart_clip", "targetname");
   var_26 delete();
   var_27 delete();
   var_28 = getEntArray("front_elevator_jet", "targetname");
@@ -410,29 +410,29 @@ move_deck_props() {
 tilt_ocean_fx_setup() {}
 
 setup_front_elevator() {
-  var_0 = getent("carrier_elevator_front_scripted", "targetname");
-  level.front_elevator_vol = getent("elevator_touching_vol", "targetname");
+  var_0 = getEnt("carrier_elevator_front_scripted", "targetname");
+  level.front_elevator_vol = getEnt("elevator_touching_vol", "targetname");
   var_1 = getEntArray("carrier_elevator_front_scripted_attachments", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(var_0);
+    var_3 linkTo(var_0);
   }
 
-  var_5 = common_scripts\utility::getstruct("redshirt_forklift_stopper_ref", "targetname");
+  var_5 = common_scripts\utility::getStruct("redshirt_forklift_stopper_ref", "targetname");
   var_6 = maps\_utility::spawn_anim_model("front_elevator");
   var_5 maps\_anim::anim_first_frame_solo(var_6, "tugger_scene_enter");
   var_7 = var_6 gettagorigin("j_prop_1");
   var_8 = var_6 gettagangles("j_prop_1");
   var_0.origin = var_7;
   var_0.angles = var_8;
-  var_0 linkto(var_6, "j_prop_1");
+  var_0 linkTo(var_6, "j_prop_1");
 
   if(level.start_point == "slow_intro" || level.start_point == "medbay" || level.start_point == "deck_combat") {
     common_scripts\utility::flag_wait("combat_1_kick");
     var_9 = level.front_elevator_vol maps\_utility::get_ai_touching_volume();
 
     foreach(var_11 in var_9) {
-      var_11 linkto(var_0);
+      var_11 linkTo(var_0);
     }
 
     common_scripts\utility::waitframe();
@@ -449,15 +449,15 @@ setup_front_elevator() {
 }
 
 setup_rear_elevator() {
-  level.rear_elevator = getent("carrier_elevator_rear_scripted", "targetname");
+  level.rear_elevator = getEnt("carrier_elevator_rear_scripted", "targetname");
   level.rear_elevator.lowered = 1;
   level.rear_elevator.height = 342;
   level.rear_elevator.time = 25;
-  level.rear_elevator_vol = getent("rear_elevator_touching_vol", "targetname");
+  level.rear_elevator_vol = getEnt("rear_elevator_touching_vol", "targetname");
   level.rear_elevator.attachments = getEntArray("carrier_elevator_rear_scripted_attachments", "targetname");
 
   foreach(var_1 in level.rear_elevator.attachments) {
-    var_1 linkto(level.rear_elevator);
+    var_1 linkTo(level.rear_elevator);
   }
 
   if(level.start_point != "slow_intro" && level.start_point != "medbay" && level.start_point != "deck_combat") {
@@ -468,7 +468,7 @@ setup_rear_elevator() {
         var_1 unlink();
 
         if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "clip") {
-          var_1 disconnectpaths();
+          var_1 disconnectPaths();
         }
       }
     }
@@ -483,12 +483,12 @@ raise_rear_elevator() {
     var_0 = level.rear_elevator_vol maps\_utility::get_ai_touching_volume();
 
     foreach(var_2 in var_0) {
-      var_2 linkto(level.rear_elevator);
+      var_2 linkTo(level.rear_elevator);
     }
 
     var_4 = level.rear_elevator.height;
     var_5 = level.rear_elevator.time;
-    level.rear_elevator moveto(level.rear_elevator.origin + (0, 0, var_4), var_5, 2, 2);
+    level.rear_elevator moveTo(level.rear_elevator.origin + (0, 0, var_4), var_5, 2, 2);
     thread maps\carrier_audio::aud_carr_elevator_rear();
     wait(var_5);
     level.rear_elevator.lowered = 0;
@@ -504,7 +504,7 @@ raise_rear_elevator() {
         var_9 unlink();
 
         if(isDefined(var_9.script_noteworthy) && var_9.script_noteworthy == "clip") {
-          var_9 disconnectpaths();
+          var_9 disconnectPaths();
         }
       }
     }
@@ -516,14 +516,14 @@ raise_rear_elevator() {
 
 reset_rear_elevator() {
   level.rear_elevator.lowered = 1;
-  level.rear_elevator moveto(level.rear_elevator.origin - (0, 0, level.rear_elevator.height), 0.05, 0, 0);
+  level.rear_elevator moveTo(level.rear_elevator.origin - (0, 0, level.rear_elevator.height), 0.05, 0, 0);
 }
 
 raise_rear_elevator_intro() {
   if(level.rear_elevator.lowered) {
     var_0 = level.rear_elevator.height;
     var_1 = 15;
-    level.rear_elevator moveto(level.rear_elevator.origin + (0, 0, var_0), var_1, 2, 2);
+    level.rear_elevator moveTo(level.rear_elevator.origin + (0, 0, var_0), var_1, 2, 2);
   }
 }
 
@@ -540,7 +540,7 @@ water_kill_trigger() {
 }
 
 deck_tilt_water_kill_trigger() {
-  var_0 = getent("water_kill_clip", "targetname");
+  var_0 = getEnt("water_kill_clip", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0) || common_scripts\utility::flag("tilt_water_kill_trigger")) {
@@ -553,30 +553,30 @@ deck_tilt_water_kill_trigger() {
 }
 
 setup_ocean_vista_tilt() {
-  level.ocean_water = getent("ocean_water", "targetname");
+  level.ocean_water = getEnt("ocean_water", "targetname");
   level.vista_rig = maps\_utility::spawn_anim_model("tilt_vista");
   level.vista_rig.origin = level.ocean_water.origin;
   level.vista_rig.angles = (0, 0, 0);
   level.vista_rig maps\_anim::anim_first_frame_solo(level.vista_rig, "carrier_deck_tilt_world");
-  level.ocean_water linkto(level.vista_rig, "j_prop_1");
-  var_0 = getent("tilt_water_death_trigger", "targetname");
-  var_1 = getent("water_kill_clip", "targetname");
-  var_0 enablelinkto();
-  var_0 linkto(level.vista_rig, "j_prop_1");
-  var_1 linkto(level.vista_rig, "j_prop_1");
+  level.ocean_water linkTo(level.vista_rig, "j_prop_1");
+  var_0 = getEnt("tilt_water_death_trigger", "targetname");
+  var_1 = getEnt("water_kill_clip", "targetname");
+  var_0 enablelinkTo();
+  var_0 linkTo(level.vista_rig, "j_prop_1");
+  var_1 linkTo(level.vista_rig, "j_prop_1");
   var_2 = getEntArray("vista_terrain", "targetname");
 
   foreach(var_4 in var_2) {
-    var_4 linkto(level.ocean_water);
+    var_4 linkTo(level.ocean_water);
   }
 
-  var_6 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_6 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   level.exfil_animnode = var_6 common_scripts\utility::spawn_tag_origin();
-  level.tilt_sky = getent("carrier_tilt_sky", "targetname");
-  level.tilt_sky linkto(level.ocean_water);
+  level.tilt_sky = getEnt("carrier_tilt_sky", "targetname");
+  level.tilt_sky linkTo(level.ocean_water);
   level.tilt_sky hide();
-  level.tilt_ground_ref = getent("player_ref_ent", "targetname");
-  level.tilt_ground_ref linkto(level.ocean_water);
+  level.tilt_ground_ref = getEnt("player_ref_ent", "targetname");
+  level.tilt_ground_ref linkTo(level.ocean_water);
 
   if(level.start_point != "deck_tilt" && level.start_point != "deck_victory") {
     common_scripts\utility::flag_wait("sparrow_hud_black");
@@ -593,7 +593,7 @@ vista_tilt() {
   var_1 = 400;
   var_2 = 30;
   level.vista_rig thread maps\_anim::anim_single_solo(level.vista_rig, "carrier_deck_tilt_world");
-  level.exfil_animnode rotateto(var_0, 0.05);
+  level.exfil_animnode rotateTo(var_0, 0.05);
   lerpsunangles(level.sun_angles_deck_tilt, level.sun_angles_deck_tilt_end, var_2);
 }
 
@@ -607,7 +607,7 @@ vista_boats() {
 }
 
 setup_fed_destroyer_osprey() {
-  level.fed_destroyer_clip linkto(level.fed_destroyer_osprey);
+  level.fed_destroyer_clip linkTo(level.fed_destroyer_osprey);
   common_scripts\utility::array_call(level.fed_destroyer_fx_guns, ::linkto, level.fed_destroyer_osprey);
   common_scripts\utility::array_call(level.destroyer_guy_nodes, ::linkto, level.fed_destroyer_osprey);
 }
@@ -627,23 +627,23 @@ vista_boat_animate() {
   }
 
   var_0.angles = self.angles;
-  self linkto(var_0, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "j_prop_1", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::waitframe();
   var_0 thread maps\_anim::anim_loop_solo(var_0, "carrier_destroyer_idle", "stop_loop");
   common_scripts\utility::waitframe();
   var_0 setanimtime(level.scr_anim["boat"]["carrier_destroyer_idle"][0], randomfloat(0.75));
   common_scripts\utility::flag_wait("start_main_odin_strike");
-  var_0 linkto(level.ocean_water);
+  var_0 linkTo(level.ocean_water);
 }
 
 attach_deck_gun() {
   if(isDefined(self.target)) {
-    self.gun = getent(self.target, "targetname");
-    self.gun linkto(self);
+    self.gun = getEnt(self.target, "targetname");
+    self.gun linkTo(self);
 
     if(isDefined(self.gun.target)) {
-      self.gun.fx = getent(self.gun.target, "targetname");
-      self.gun.fx linkto(self.gun);
+      self.gun.fx = getEnt(self.gun.target, "targetname");
+      self.gun.fx linkTo(self.gun);
       level.fed_destroyer_fx_guns = common_scripts\utility::array_add(level.fed_destroyer_fx_guns, self.gun.fx);
     }
   }
@@ -706,7 +706,7 @@ vista_element_link() {
   level waittill("odin_strike_starting");
 
   if(isDefined(self)) {
-    self linkto(level.ocean_water);
+    self linkTo(level.ocean_water);
   }
 }
 
@@ -725,11 +725,11 @@ ocean_death() {
 }
 
 rod_of_god_carrier() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = maps\_utility::spawn_anim_model("tilt_rog");
   var_0 thread maps\_anim::anim_single_solo(var_1, "carrier_deck_tilt_RoG_prop");
-  level.player playrumbleonentity("carrier_rod_of_god");
-  var_2 = common_scripts\utility::getstruct("rog_target_carrier", "targetname");
+  level.player playRumbleOnEntity("carrier_rod_of_god");
+  var_2 = common_scripts\utility::getStruct("rog_target_carrier", "targetname");
   playFXOnTag(level._effect["vfx_rog_trail"], var_1, "tag_origin");
   var_1 waittillmatch("single anim", "tower_impact");
   common_scripts\utility::exploder(90000);
@@ -739,18 +739,18 @@ rod_of_god_carrier() {
   common_scripts\utility::flag_set("rog_impacts_deck");
   screenshake(level.player.origin, 3, 2, 2, 2.5, 0, 2.0, 256, 8, 15, 12, 5.0);
   var_1 waittillmatch("single anim", "water_impact");
-  var_3 = getent("carrier_odin_water_impact", "targetname");
-  var_3 linkto(level.ocean_water);
+  var_3 = getEnt("carrier_odin_water_impact", "targetname");
+  var_3 linkTo(level.ocean_water);
   var_1 waittillmatch("single anim", "end");
   var_1 delete();
 }
 
 rod_of_god_carrier_front() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = maps\_utility::spawn_anim_model("tilt_rog");
   var_0 thread maps\_anim::anim_single_solo(var_1, "carrier_exfil_2nd_RoG_GP");
-  level.player playrumbleonentity("carrier_rod_of_god");
-  var_2 = common_scripts\utility::getstruct("rog_front_impact", "targetname");
+  level.player playRumbleOnEntity("carrier_rod_of_god");
+  var_2 = common_scripts\utility::getStruct("rog_front_impact", "targetname");
   playFXOnTag(level._effect["vfx_rog_trail"], var_1, "tag_origin");
   var_1 waittillmatch("single anim", "impact_deck");
   common_scripts\utility::flag_set("carrier_front_impact");
@@ -823,7 +823,7 @@ player_slide_fall() {
   level.player allowprone(0);
   level.player disableweapons();
   level.player freezecontrols(1);
-  var_0 = getent("touching_ladder", "targetname");
+  var_0 = getEnt("touching_ladder", "targetname");
 
   if(!level.player istouching(var_0) && level.player.origin[2] < 1410 && level.player.origin[2] > 1390) {
     var_1 = maps\_utility::spawn_anim_model("player_rig", (level.player.origin[0], level.player.origin[1], 1400));
@@ -892,9 +892,9 @@ array_spawn_allow_fail(var_0, var_1) {
 }
 
 retreat_from_vol_to_vol(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   var_5 = var_4 maps\_utility::get_ai_touching_volume("axis");
-  var_6 = getent(var_1, "targetname");
+  var_6 = getEnt(var_1, "targetname");
   var_7 = getnode(var_6.target, "targetname");
 
   foreach(var_9 in var_5) {
@@ -917,7 +917,7 @@ ai_array_killcount_flag_set(var_0, var_1, var_2, var_3) {
 }
 
 check_trigger_flagset(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
 
   if(isDefined(var_1.script_flag_set)) {
@@ -929,7 +929,7 @@ run_to_volume_and_delete(var_0) {
   self endon("death");
 
   if(isDefined(self)) {
-    self setgoalvolumeauto(getent(var_0, "targetname"));
+    self setgoalvolumeauto(getEnt(var_0, "targetname"));
     self waittill("goal");
     waittill_player_not_looking();
     self delete();
@@ -987,7 +987,7 @@ stop_anim_fake_loop(var_0, var_1) {
   common_scripts\utility::flag_wait(var_1);
 
   if(isDefined(var_0)) {
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
   }
 }
 
@@ -997,8 +997,8 @@ safe_kill() {
 }
 
 spawn_targetname_at_struct_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2.origin = var_3.origin;
@@ -1086,8 +1086,8 @@ set_black_fade(var_0, var_1) {
 lerp_player_to_position_accurate(var_0, var_1) {
   var_2 = spawn("script_model", level.player getorigin());
   var_2 setModel("tag_origin");
-  level.player playerlinkto(var_2, "tag_origin");
-  var_2 moveto(var_0, var_1);
+  level.player playerlinkTo(var_2, "tag_origin");
+  var_2 moveTo(var_0, var_1);
   wait(var_1 + 0.05);
   var_2 delete();
 }
@@ -1113,8 +1113,8 @@ move_arc(var_0, var_1, var_2, var_3, var_4) {
     if(var_9 < 1) {
       continue;
     }
-    self rotateto(vectortoangles(var_8 - self.origin) + var_4, var_3 / var_5);
-    self moveto(var_8, var_3 / var_5);
+    self rotateTo(vectortoangles(var_8 - self.origin) + var_4, var_3 / var_5);
+    self moveTo(var_8, var_3 / var_5);
     wait(var_3 / var_5);
   }
 }
@@ -1318,7 +1318,7 @@ setup_blackhawk(var_0) {
   var_1 = level.player_blackhawk common_scripts\utility::spawn_tag_origin();
   var_1.origin = level.player_blackhawk gettagorigin("tag_light_cargo01");
   var_1.angles = level.player_blackhawk gettagangles("tag_light_cargo01");
-  var_1 linkto(level.player_blackhawk);
+  var_1 linkTo(level.player_blackhawk);
   playFXOnTag(common_scripts\utility::getfx("aircraft_light_cockpit_white_300"), var_1, "tag_origin");
   common_scripts\utility::waitframe();
   thread maps\_vehicle::gopath(level.player_blackhawk);
@@ -1330,7 +1330,7 @@ init_player_on_blackhawk(var_0, var_1) {
     return;
   }
   var_2 = common_scripts\utility::spawn_tag_origin();
-  var_2 linkto(level.player_blackhawk, "tag_player", (0, -11, -6), (0, -75, 0));
+  var_2 linkTo(level.player_blackhawk, "tag_player", (0, -11, -6), (0, -75, 0));
   level.player playerlinktodelta(var_2, "tag_origin", 1.0, 10, 50, 5, 25, 0);
   level.player setplayerangles((0, level.player_blackhawk.angles[1] - 30, 0));
   var_0 allowjump(0);
@@ -1452,11 +1452,11 @@ generic_prop_raven_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
     }
 
     if(isDefined(var_10)) {
-      var_10 linkto(var_9);
+      var_10 linkTo(var_9);
     }
 
     if(isDefined(var_11)) {
-      var_11 linkto(var_9);
+      var_11 linkTo(var_9);
     }
   }
 
@@ -1478,11 +1478,11 @@ generic_prop_raven_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
     }
 
     if(isDefined(var_14)) {
-      var_14 linkto(var_13);
+      var_14 linkTo(var_13);
     }
 
     if(isDefined(var_15)) {
-      var_15 linkto(var_13);
+      var_15 linkTo(var_13);
     }
   }
 
@@ -1512,11 +1512,11 @@ generic_prop_raven_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) 
   common_scripts\utility::waitframe();
 
   if(isDefined(var_3)) {
-    var_9 linkto(var_16, "J_prop_1");
+    var_9 linkTo(var_16, "J_prop_1");
   }
 
   if(isDefined(var_4)) {
-    var_13 linkto(var_16, "J_prop_2");
+    var_13 linkTo(var_16, "J_prop_2");
   }
 
   common_scripts\utility::flag_wait(var_6);
@@ -1564,7 +1564,7 @@ player_animate(var_0) {
 }
 
 spawn_animate_delete(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 maps\_utility::spawn_ai(1, 0);
   var_3.animname = "generic";
   maps\_anim::anim_single_solo(var_3, var_1);
@@ -1622,7 +1622,7 @@ spawn_gunboat(var_0, var_1) {
 gunboat_treadfx() {
   stopFXOnTag(common_scripts\utility::getfx("gunboat_wake"), self, "j_bodymid");
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(self, "tag_origin", anglesToForward((0, self.angles[1], 0)) * (450, 0, 0) + (0, 0, 15), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", anglesToForward((0, self.angles[1], 0)) * (450, 0, 0) + (0, 0, 15), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("gunboat_wake"), var_0, "tag_origin");
   self waittill("death");
   stopFXOnTag(common_scripts\utility::getfx("gunboat_wake"), var_0, "tag_origin");
@@ -1854,7 +1854,7 @@ fake_vehicles_loop_until_endon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     var_13 setModel(var_2);
     var_13.angles = var_12.angles;
     var_13.target = var_12.target;
-    var_14 = common_scripts\utility::getstruct(var_13.target, "targetname");
+    var_14 = common_scripts\utility::getStruct(var_13.target, "targetname");
 
     if(isDefined(var_14) && isDefined(var_14.target)) {
       var_13.target2 = var_14.target;
@@ -1886,15 +1886,15 @@ fake_vehicles_loop_until_endon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
     foreach(var_13 in var_10) {
       var_13 show();
-      var_21 = common_scripts\utility::getstruct(var_13.target, "targetname");
+      var_21 = common_scripts\utility::getStruct(var_13.target, "targetname");
       var_13.angles = vectortoangles(var_21.origin - var_13.origin);
       var_22 = distance(var_13.origin, var_21.origin);
       var_23 = var_22 / (var_0 * var_8);
       var_24 = var_23;
-      var_13 moveto(var_21.origin, var_23);
+      var_13 moveTo(var_21.origin, var_23);
 
       if(isDefined(var_13.target2)) {
-        var_25 = common_scripts\utility::getstruct(var_13.target2, "targetname");
+        var_25 = common_scripts\utility::getStruct(var_13.target2, "targetname");
         var_26 = distance(var_21.origin, var_25.origin);
         var_19 = var_26 / (var_0 * var_8) / 2;
         var_13 maps\_utility::delaythread(var_23, ::goto_dest2, var_25, var_19);
@@ -1932,7 +1932,7 @@ fake_vehicles_loop_until_endon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 goto_dest2(var_0, var_1) {
   self endon("death");
   self endon("stop_goto_dest2");
-  self moveto(var_0.origin, var_1, 0, var_1 / 2);
+  self moveTo(var_0.origin, var_1, 0, var_1 / 2);
   wait(var_1);
   self hide();
 }
@@ -2103,7 +2103,7 @@ carrier_liferaft_think() {
       var_4 = var_3[0];
 
       if(isDefined(var_4.target)) {
-        var_5 = getent(var_4.target, "targetname");
+        var_5 = getEnt(var_4.target, "targetname");
         var_5 delete();
       }
 
@@ -2113,7 +2113,7 @@ carrier_liferaft_think() {
       var_4 = var_3[1];
 
       if(isDefined(var_4.target)) {
-        var_5 = getent(var_4.target, "targetname");
+        var_5 = getEnt(var_4.target, "targetname");
         var_5 delete();
       }
 
@@ -2179,18 +2179,18 @@ bump_player() {
   var_2 = 10;
   var_3 = -10;
   var_4 = var_1 - var_2;
-  var_5 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_5 = common_scripts\utility::getStruct(self.target, "targetname");
   var_6 = undefined;
 
   if(isDefined(var_5.target)) {
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
   } else {
     return;
   }
 
   var_7 = var_6.origin;
   var_8 = -1 * anglesToForward(var_5.angles);
-  var_9 = vectornormalize((var_8[0], var_8[1], 0));
+  var_9 = vectorNormalize((var_8[0], var_8[1], 0));
   var_10 = -1 * var_9;
   var_11 = vectortoangles(var_10);
   var_12 = 0;
@@ -2203,14 +2203,14 @@ bump_player() {
 
     var_13 = level.player getplayerangles();
     var_14 = anglesToForward(var_13);
-    var_14 = vectornormalize((var_14[0], var_14[1], 0));
+    var_14 = vectorNormalize((var_14[0], var_14[1], 0));
     var_15 = vectordot(var_14, var_10);
     var_16 = acos(var_15);
     var_16 = round_num(var_16, 2);
 
     if(var_16 < var_4) {
       if(var_6.origin != var_7) {
-        var_6 moveto(var_7, 0.1);
+        var_6 moveTo(var_7, 0.1);
         wait 0.1;
       } else
         common_scripts\utility::waitframe();
@@ -2222,13 +2222,13 @@ bump_player() {
     var_18 = var_7 + var_9 * var_0 * var_17;
 
     if(var_17 != var_12) {
-      var_6 moveto(var_18, 0.1);
+      var_6 moveTo(var_18, 0.1);
     }
 
     wait 0.1;
 
     if(!self.player_in && var_6.origin != var_7) {
-      var_6 moveto(var_7, 0.1);
+      var_6 moveTo(var_7, 0.1);
       wait 0.1;
     }
 
@@ -2339,7 +2339,7 @@ get_rain_overlay(var_0) {
 }
 
 phalanx_gun_fire(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -2371,7 +2371,7 @@ phalanx_gun_fire(var_0) {
     var_4 = randomfloatrange(-60, 60);
     var_5 = randomfloatrange(2.0, 3.0);
     var_6 = var_5 * randomfloatrange(0.333, 0.666);
-    var_1.turret_target moveto(var_1.origin + anglesToForward((var_1.angles[0] - var_3, var_1.angles[1] + var_4, 0)) * 2000, var_6);
+    var_1.turret_target moveTo(var_1.origin + anglesToForward((var_1.angles[0] - var_3, var_1.angles[1] + var_4, 0)) * 2000, var_6);
 
     while(var_5 > 0 && !var_1.turret_target.on_target && (!isDefined(level.player.using_depth_charge) || !level.player.using_depth_charge)) {
       if(!var_2 && var_6 < randomfloat(0.5)) {
@@ -2401,7 +2401,7 @@ phalanx_gun_fire(var_0) {
 }
 
 phalanx_gun_fire_target(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = getent(var_0, "targetname");
+  var_6 = getEnt(var_0, "targetname");
   var_6 endon("stop_firing");
 
   if(!isDefined(var_6) || !isDefined(var_6.turret_target) || var_6.turret_target.on_target) {
@@ -2423,10 +2423,10 @@ phalanx_gun_fire_target(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_1 maps\_utility::ent_flag_wait(var_2);
   var_6.turret_target.on_target = 1;
 
-  for(var_7 = vectornormalize(var_1 gettagorigin(var_5) + var_1 vehicle_getvelocity() * 0.25 - var_6.turret_target.origin); vectordot(var_7, anglesToForward(var_1.angles)) < 0 && (!isDefined(level.player.using_depth_charge) || !level.player.using_depth_charge); var_7 = vectornormalize(var_1 gettagorigin(var_5) + var_1 vehicle_getvelocity() * 0.25 - var_6.turret_target.origin)) {
-    var_6.turret_target moveto(var_6.turret_target.origin + var_7 * 8000, 1);
+  for(var_7 = vectorNormalize(var_1 gettagorigin(var_5) + var_1 vehicle_getvelocity() * 0.25 - var_6.turret_target.origin); vectordot(var_7, anglesToForward(var_1.angles)) < 0 && (!isDefined(level.player.using_depth_charge) || !level.player.using_depth_charge); var_7 = vectorNormalize(var_1 gettagorigin(var_5) + var_1 vehicle_getvelocity() * 0.25 - var_6.turret_target.origin)) {
+    var_6.turret_target moveTo(var_6.turret_target.origin + var_7 * 8000, 1);
 
-    if(vectordot(anglesToForward(var_6.turret gettagangles("tag_flash")), vectornormalize(var_1.origin - var_6.origin)) > 0.9) {
+    if(vectordot(anglesToForward(var_6.turret gettagangles("tag_flash")), vectorNormalize(var_1.origin - var_6.origin)) > 0.9) {
       var_6 phalanx_shoot();
     }
 
@@ -2437,7 +2437,7 @@ phalanx_gun_fire_target(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 = -0.05;
 
   while(isDefined(var_1) && !var_1 maps\_utility::ent_flag(var_3) && abs(angleclamp180(var_6.turret gettagangles("tag_flash")[1] - var_6.angles[1])) < 70 && (!isDefined(level.player.using_depth_charge) || !level.player.using_depth_charge)) {
-    var_6.turret_target moveto(var_1 gettagorigin(var_5) + (randomfloatrange(-800, 800), randomfloatrange(-800, 800), randomfloatrange(-800, 800)) + var_1 vehicle_getvelocity() * (var_8 + 0.5), 0.5);
+    var_6.turret_target moveTo(var_1 gettagorigin(var_5) + (randomfloatrange(-800, 800), randomfloatrange(-800, 800), randomfloatrange(-800, 800)) + var_1 vehicle_getvelocity() * (var_8 + 0.5), 0.5);
     var_6 phalanx_shoot();
     var_8 = var_8 + var_9;
 
@@ -2466,7 +2466,7 @@ phalanx_gun_fire_at_missiles() {
 
     foreach(var_3 in level.land_missiles) {
       if(angleclamp180(var_3.angles[0]) < randomfloatrange(45, 60) && abs(angleclamp180(vectortoangles(var_3.origin - self.origin)[1] - self.angles[1])) < 45) {
-        var_4 = vectordot(anglesToForward(self.turret gettagangles("tag_flash")), vectornormalize(var_3.origin - self.origin));
+        var_4 = vectordot(anglesToForward(self.turret gettagangles("tag_flash")), vectorNormalize(var_3.origin - self.origin));
 
         if(var_4 > var_1) {
           var_1 = var_4;
@@ -2486,12 +2486,12 @@ phalanx_gun_fire_at_missiles() {
     var_7 = distance(var_6, var_0.origin) / 0.05;
     self.turret_target.on_target = 1;
     var_8 = var_0.origin - anglesToForward(var_0.angles) * var_7 * 0.5;
-    var_9 = vectornormalize(var_8 - self.turret_target.origin);
+    var_9 = vectorNormalize(var_8 - self.turret_target.origin);
 
-    for(var_10 = var_9; isDefined(var_0) && distancesquared(var_8, self.turret_target.origin) > 160000 && vectordot(var_9, var_10) >= 0.0; var_9 = vectornormalize(var_8 - self.turret_target.origin)) {
-      self.turret_target moveto(self.turret_target.origin + var_9 * 10000, 0.5);
+    for(var_10 = var_9; isDefined(var_0) && distancesquared(var_8, self.turret_target.origin) > 160000 && vectordot(var_9, var_10) >= 0.0; var_9 = vectorNormalize(var_8 - self.turret_target.origin)) {
+      self.turret_target moveTo(self.turret_target.origin + var_9 * 10000, 0.5);
 
-      if(vectordot(anglesToForward(self.turret gettagangles("tag_flash")), vectornormalize(var_0.origin - self.origin)) > 0.996) {
+      if(vectordot(anglesToForward(self.turret gettagangles("tag_flash")), vectorNormalize(var_0.origin - self.origin)) > 0.996) {
         phalanx_shoot();
       }
 
@@ -2508,7 +2508,7 @@ phalanx_gun_fire_at_missiles() {
     var_12 = 0;
 
     while(isDefined(var_0) && var_11 < 2 && abs(angleclamp180(self.turret gettagangles("tag_flash")[1] - self.angles[1])) < 70) {
-      self.turret_target moveto(var_0.origin - anglesToForward(var_0.angles) * var_7 * 0.5 - (0, 0, randomfloatrange(-50, 100)), 0.25);
+      self.turret_target moveTo(var_0.origin - anglesToForward(var_0.angles) * var_7 * 0.5 - (0, 0, randomfloatrange(-50, 100)), 0.25);
       phalanx_shoot();
       var_11 = var_11 + 0.05;
       var_12 = var_12 + 0.05;
@@ -2539,7 +2539,7 @@ phalanx_gun_fire_at_missiles() {
 }
 
 phalanx_gun_fire_stop(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -2553,7 +2553,7 @@ phalanx_gun_fire_stop(var_0) {
 }
 
 phalanx_gun_offline(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -2666,7 +2666,7 @@ get_gun_tag() {
 
 is_player_right() {
   var_0 = 0.707;
-  var_1 = vectornormalize(level.player.origin - self.origin);
+  var_1 = vectorNormalize(level.player.origin - self.origin);
   var_2 = anglestoright(self.angles);
   var_3 = vectordot(var_1, var_2);
 
@@ -2678,8 +2678,8 @@ is_player_right() {
 }
 
 gunship_line_attack(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_2.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_2.target, "targetname");
   var_4 = 3;
 
   if(isDefined(var_1)) {
@@ -2688,13 +2688,13 @@ gunship_line_attack(var_0, var_1) {
 
   var_5 = common_scripts\utility::spawn_tag_origin();
   var_5.origin = var_2.origin;
-  var_5 moveto(var_3.origin, var_4);
+  var_5 moveTo(var_3.origin, var_4);
   var_6 = gettime() + var_4 * 1000;
   var_7 = level.ac_130 common_scripts\utility::spawn_tag_origin();
   var_8 = level.ac_130 get_gun_tag();
   var_9 = level.ac_130 gettagorigin("tag_flash_25mm_" + var_8);
   var_7.origin = var_9;
-  var_7 linkto(level.ac_130, "tag_flash_25mm_" + var_8);
+  var_7 linkTo(level.ac_130, "tag_flash_25mm_" + var_8);
 
   while(gettime() < var_6) {
     level.ac_130 thread ac130_magic_bullet("25mm", var_5.origin);
@@ -2712,13 +2712,13 @@ gunship_line_attack_death() {
   var_2 = 3;
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_0;
-  var_3 moveto(var_1, var_2);
+  var_3 moveTo(var_1, var_2);
   var_4 = gettime() + var_2 * 1000;
   var_5 = level.ac_130 common_scripts\utility::spawn_tag_origin();
   var_6 = level.ac_130 get_gun_tag();
   var_7 = level.ac_130 gettagorigin("tag_flash_25mm_" + var_6);
   var_5.origin = var_7;
-  var_5 linkto(level.ac_130, "tag_flash_25mm_" + var_6);
+  var_5 linkTo(level.ac_130, "tag_flash_25mm_" + var_6);
 
   while(gettime() < var_4) {
     level.ac_130 thread ac130_magic_bullet("25mm", var_3.origin);
@@ -2731,8 +2731,8 @@ gunship_line_attack_death() {
 }
 
 gunship_line_attack_fake(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct(var_0, "targetname");
-  var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
   var_5 = 3;
   var_6 = common_scripts\utility::spawn_tag_origin();
   var_6.origin = var_1;
@@ -2743,7 +2743,7 @@ gunship_line_attack_fake(var_0, var_1, var_2) {
 
   var_7 = common_scripts\utility::spawn_tag_origin();
   var_7.origin = var_3.origin;
-  var_7 moveto(var_4.origin, var_5);
+  var_7 moveTo(var_4.origin, var_5);
   var_8 = gettime() + var_5 * 1000;
 
   while(gettime() < var_8) {

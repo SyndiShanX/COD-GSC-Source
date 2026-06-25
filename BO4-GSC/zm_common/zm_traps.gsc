@@ -191,7 +191,7 @@ trap_main() {
   level flag::wait_till("start_zombie_round_logic");
 
   for(i = 0; i < self._trap_use_trigs.size; i++) {
-    self._trap_use_trigs[i] setcursorhint("HINT_NOICON");
+    self._trap_use_trigs[i] setCursorHint("HINT_NOICON");
   }
 
   if(!isDefined(self.script_string) || "disable_wait_for_power" != self.script_string) {
@@ -330,7 +330,7 @@ trap_activate(trap, who) {
 
   n_cooldown = function_da13db45(trap._trap_cooldown_time, who);
   wait n_cooldown;
-  playsoundatposition(#"zmb_trap_ready", trap.origin);
+  playSoundAtPosition(#"zmb_trap_ready", trap.origin);
 
   if(isDefined(level.sndtrapfunc)) {
     level thread[[level.sndtrapfunc]](trap, 0);
@@ -345,7 +345,7 @@ update_trigger_visibility() {
   self endon(#"death");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distancesquared(player.origin, self.origin) < 16384) {
         if(player zm_utility::is_drinking()) {
           self setinvisibletoplayer(player, 1);
@@ -399,16 +399,16 @@ trap_set_string(string, param1, param2) {
   if(isDefined(self) && isDefined(self._trap_use_trigs)) {
     for(i = 0; i < self._trap_use_trigs.size; i++) {
       if(!isDefined(param1)) {
-        self._trap_use_trigs[i] sethintstring(string);
+        self._trap_use_trigs[i] setHintString(string);
         continue;
       }
 
       if(!isDefined(param2)) {
-        self._trap_use_trigs[i] sethintstring(string, param1);
+        self._trap_use_trigs[i] setHintString(string, param1);
         continue;
       }
 
-      self._trap_use_trigs[i] sethintstring(string, param1, param2);
+      self._trap_use_trigs[i] setHintString(string, param1, param2);
     }
   }
 }
@@ -466,7 +466,7 @@ trap_activate_rotating() {
   old_angles = self._trap_movers[0].angles;
 
   for(i = 0; i < self._trap_movers.size; i++) {
-    self._trap_movers[i] rotateyaw(360, 5, 4.5);
+    self._trap_movers[i] rotateYaw(360, 5, 4.5);
   }
 
   wait 5;
@@ -475,7 +475,7 @@ trap_activate_rotating() {
 
   while(t < self._trap_duration) {
     for(i = 0; i < self._trap_movers.size; i++) {
-      self._trap_movers[i] rotateyaw(360, step);
+      self._trap_movers[i] rotateYaw(360, step);
     }
 
     wait step;
@@ -483,7 +483,7 @@ trap_activate_rotating() {
   }
 
   for(i = 0; i < self._trap_movers.size; i++) {
-    self._trap_movers[i] rotateyaw(360, 5, 0, 4.5);
+    self._trap_movers[i] rotateYaw(360, 5, 0, 4.5);
   }
 
   wait 5;
@@ -507,7 +507,7 @@ trap_audio_fx(trap) {
   trap waittilltimeout(trap._trap_duration, #"trap_done");
 
   if(isDefined(sound_origin)) {
-    playsoundatposition(#"wpn_zmb_electrap_stop", sound_origin.origin);
+    playSoundAtPosition(#"wpn_zmb_electrap_stop", sound_origin.origin);
     sound_origin stoploopsound();
     waitframe(1);
     sound_origin delete();
@@ -616,7 +616,7 @@ player_elec_damage(trigger) {
     }
 
     self shellshock(str_elec_shellshock, shocktime);
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     self playSound(#"hash_5af2a9d11f007b9");
 
     if(zm_utility::is_standard()) {
@@ -679,7 +679,7 @@ zombie_trap_death(e_trap, param) {
           refs[5] = "no_legs";
           refs[6] = "head";
           self.a.gib_ref = refs[randomint(refs.size)];
-          playsoundatposition(#"wpn_zmb_electrap_zap", self.origin);
+          playSoundAtPosition(#"wpn_zmb_electrap_zap", self.origin);
           wait randomfloat(1.25);
           self playSound(#"wpn_zmb_electrap_zap");
         }
@@ -734,9 +734,9 @@ play_elec_vocals() {
   if(isDefined(self)) {
     org = self.origin;
     wait 0.15;
-    playsoundatposition(#"zmb_elec_vocals", org);
-    playsoundatposition(#"wpn_zmb_electrap_zap", org);
-    playsoundatposition(#"zmb_exp_jib_zombie", org);
+    playSoundAtPosition(#"zmb_elec_vocals", org);
+    playSoundAtPosition(#"wpn_zmb_electrap_zap", org);
+    playSoundAtPosition(#"zmb_exp_jib_zombie", org);
   }
 }
 
@@ -810,7 +810,7 @@ trap_dialog() {
 
   while(true) {
     wait 0.5;
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i])) {

@@ -137,7 +137,7 @@ _id_AA5D() {
 }
 
 fixcollision() {
-  var_0 = getent("scriptbrush_mantle_over", "targetname");
+  var_0 = getEnt("scriptbrush_mantle_over", "targetname");
   var_1 = spawn("script_model", (-835, 775, 215));
   var_1.angles = (0, 182.705, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
@@ -158,12 +158,12 @@ stage_start() {
   self switchtoweapon(var_0);
   self allowmountside(0);
   self allowmounttop(0);
-  var_1 = getent("scriptbrush_mantle_over", "targetname");
+  var_1 = getEnt("scriptbrush_mantle_over", "targetname");
   var_1 hide();
   thread fixcollision();
   level thread doors_init();
   level thread popuptargets_init();
-  var_2 = getent("marker_rifle", "targetname");
+  var_2 = getEnt("marker_rifle", "targetname");
   _id_E24D("s4_ar_stango44", var_2.origin, var_2.angles);
   _id_07D1::_id_60C2("prematch_done");
   thread monitor_reload_think();
@@ -191,7 +191,7 @@ stage_start() {
 stage_pickup_rifle() {
   wait_for_dialogue(1.0);
   _id_B218("alrightyouknowthedri");
-  var_0 = getent("marker_rifle", "targetname");
+  var_0 = getEnt("marker_rifle", "targetname");
   var_1 = "stage_pickup_rifle";
   objectivemarker_show(var_1, var_0, &"MP_M_FTUE/PICK_UP_WEAPON", &"MP_M_FTUE/OBJICON_DESC_PICKUP");
   scripts\engine\utility::_id_5C04("flag_player_using_rifle");
@@ -211,12 +211,12 @@ stage_pickup_rifle() {
 }
 
 stage_goto_firing_line() {
-  var_0 = getent("marker_firingline", "targetname");
+  var_0 = getEnt("marker_firingline", "targetname");
   var_1 = "stage_goto_firing_line";
   objectivemarker_show(var_1, var_0, &"MP_M_FTUE/MOVE_NEXT", &"MP_M_FTUE/OBJICON_DESC_ADVANCE");
   show_hud_tutorial_message(&"MP_M_FTUE/MOVE_NEXT");
   _id_B218("getovertothefiringli");
-  var_2 = getent("trigger_firingline", "targetname");
+  var_2 = getEnt("trigger_firingline", "targetname");
   var_2 waittill("trigger", var_3);
   objectivemarker_complete(var_1);
   clear_all_hud_tutorial_messages();
@@ -317,7 +317,7 @@ stage_invert_view() {
 
   prompt_to_invert_controls();
   var_0 = popuptarget_get_targets(["popup_target_1"]);
-  var_2 = getent("target1_highlow_target_data_up", "targetname");
+  var_2 = getEnt("target1_highlow_target_data_up", "targetname");
 
   if(isDefined(var_2)) {
     var_0[0].up_pos = var_2.origin;
@@ -394,7 +394,7 @@ stage_mount_fire() {
   clear_hud_tutorial_message(&"MP_M_FTUE/MOUNT");
   wait 0.5;
   var_3 = popuptarget_get_targets(["popup_target_1", "popup_target_2", "popup_target_3"]);
-  var_4 = getent("target1_mount_target_data_up", "targetname");
+  var_4 = getEnt("target1_mount_target_data_up", "targetname");
 
   if(isDefined(var_4)) {
     var_3[0].up_pos = var_4.origin;
@@ -484,7 +484,7 @@ stage_blind_fire() {
   self allowads(1);
   setDvar("#x3128c3af25cb83383", 1);
   var_0 = getEntArray("marker_blindfire", "targetname");
-  var_1 = getent("trigger_blindfire", "targetname");
+  var_1 = getEnt("trigger_blindfire", "targetname");
   var_2 = 0;
   var_3 = 0;
   var_4 = gettime();
@@ -614,16 +614,16 @@ stage_blind_fire() {
 
 stage_goto_area2() {
   _id_4DFF("openabledoor_1");
-  var_0 = getent("scriptbrush_mantle_over", "targetname");
+  var_0 = getEnt("scriptbrush_mantle_over", "targetname");
   var_0 show();
   var_1 = [];
-  var_1[0] = getent("marker_mount", "targetname");
-  var_1[1] = getent("marker_goto_area2_1", "targetname");
-  var_1[2] = getent("marker_goto_area2_2", "targetname");
+  var_1[0] = getEnt("marker_mount", "targetname");
+  var_1[1] = getEnt("marker_goto_area2_1", "targetname");
+  var_1[2] = getEnt("marker_goto_area2_2", "targetname");
   var_2 = [];
-  var_2[0] = getent("trigger_enteredrange", "targetname");
-  var_2[1] = getent("trigger_goto_area2_1", "targetname");
-  var_2[2] = getent("trigger_goto_area2_2", "targetname");
+  var_2[0] = getEnt("trigger_enteredrange", "targetname");
+  var_2[1] = getEnt("trigger_goto_area2_1", "targetname");
+  var_2[2] = getEnt("trigger_goto_area2_2", "targetname");
   _id_B218("greatnowgetovertothe");
   var_3 = "stage_goto_area2";
   objectivemarker_show(var_3, var_1[0], undefined, &"MP_M_FTUE/OBJICON_DESC_ADVANCE");
@@ -694,11 +694,11 @@ stage_goto_end() {
   _id_B218("greatnowgetovertothe");
   _id_4DFF("openabledoor_2");
   var_0 = [];
-  var_0[0] = getent("marker_goto_end_1", "targetname");
-  var_0[1] = getent("marker_goto_end_2", "targetname");
+  var_0[0] = getEnt("marker_goto_end_1", "targetname");
+  var_0[1] = getEnt("marker_goto_end_2", "targetname");
   var_1 = [];
-  var_1[0] = getent("trigger_goto_end_1", "targetname");
-  var_1[1] = getent("trigger_goto_end_2", "targetname");
+  var_1[0] = getEnt("trigger_goto_end_1", "targetname");
+  var_1[1] = getEnt("trigger_goto_end_2", "targetname");
   level scripts\engine\utility::_id_5C04("flag_player_sprinted");
   level scripts\engine\utility::_id_5C04("flag_player_tactical_sprinted");
   thread monitor_sprint_think();
@@ -787,7 +787,7 @@ doors_init() {
       switch (var_5.classname) {
         case "script_brushmodel":
           var_2._id_39A7 = var_5;
-          var_2._id_39A7 linkto(var_2);
+          var_2._id_39A7 linkTo(var_2);
           break;
         case "script_model":
           var_2.openangles = var_5.angles;
@@ -816,7 +816,7 @@ _id_4DFF(var_0) {
   var_1._id_AC2B = 1;
   wait 0.8;
   thread scripts\engine\utility::_id_B2DA("mp_ftue_door_open_chainlink", var_1.origin + (0, 0, 30));
-  var_1 rotateto(var_1.openangles, 1, 0.2, 0.8);
+  var_1 rotateTo(var_1.openangles, 1, 0.2, 0.8);
 }
 
 _id_4DD1(var_0) {
@@ -826,7 +826,7 @@ _id_4DD1(var_0) {
     return;
   }
   var_1._id_AC2B = undefined;
-  var_1 rotateto(var_1._id_39D6, 0.3, 0.15, 0.15);
+  var_1 rotateTo(var_1._id_39D6, 0.3, 0.15, 0.15);
 }
 
 popuptargets_init() {
@@ -869,7 +869,7 @@ popuptargets_init() {
 
     foreach(var_2 in var_10) {
       if(scripts\engine\utility::is_equal(var_2._id_039B, "paper")) {
-        var_2 linkto(var_9);
+        var_2 linkTo(var_9);
       }
     }
 
@@ -907,7 +907,7 @@ popuptargets_init() {
       }
     }
 
-    var_9._id_B1DB linkto(var_9);
+    var_9._id_B1DB linkTo(var_9);
     var_9._id_E747 = "down";
     var_9.angles = var_9._id_4EAF;
     var_9.origin = var_9.down_pos;
@@ -980,8 +980,8 @@ popuptarget_flip(var_0, var_1, var_2, var_3) {
       self.origin = (self.up_pos[0], self.up_pos[1], self.down_pos[2]);
     }
 
-    self rotateto(self.up_angles, var_3, var_3 * 0.9, var_3 * 0.1);
-    self moveto(self.up_pos, var_3, var_3 * 0.9, var_3 * 0.1);
+    self rotateTo(self.up_angles, var_3, var_3 * 0.9, var_3 * 0.1);
+    self moveTo(self.up_pos, var_3, var_3 * 0.9, var_3 * 0.1);
     self playSound("mp_ftue_target_raise");
     self._id_B1DB setCanDamage(1);
     self._id_3A5F _meth_80D1();
@@ -995,8 +995,8 @@ popuptarget_flip(var_0, var_1, var_2, var_3) {
       self.down_pos = (self.origin[0], self.origin[1], self.down_pos[2]);
     }
 
-    self rotateto(self._id_4EAF, var_3, var_3 * 0.9, var_3 * 0.1);
-    self moveto(self.down_pos, var_3, var_3 * 0.9, var_3 * 0.1);
+    self rotateTo(self._id_4EAF, var_3, var_3 * 0.9, var_3 * 0.1);
+    self moveTo(self.down_pos, var_3, var_3 * 0.9, var_3 * 0.1);
     self playSound("mp_ftue_target_lower");
   }
 
@@ -1108,11 +1108,11 @@ popuptarget_handlemovement() {
 
       switch (self.move_direction) {
         case 0:
-          self moveto(self.right_pos, var_1, 1.0, 1.0);
+          self moveTo(self.right_pos, var_1, 1.0, 1.0);
           self.move_direction = 1;
           break;
         case 1:
-          self moveto(self.left_pos, var_1, 1.0, 1.0);
+          self moveTo(self.left_pos, var_1, 1.0, 1.0);
           self.move_direction = 0;
           break;
         default:
@@ -1535,7 +1535,7 @@ manage_mantle_hint() {
 }
 
 player_inside_end_sprint_trigger_think() {
-  var_0 = getent("trigger_goto_end_0", "targetname");
+  var_0 = getEnt("trigger_goto_end_0", "targetname");
   level scripts\engine\utility::_id_5C04("player_inside_end_sprint_trigger");
   var_1 = self;
 

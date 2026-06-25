@@ -41,12 +41,12 @@ __init__() {
 
 function_8e1552b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"viper_sword_bloodswipe_r_1p"], self, "j_spine4");
-  self playrumbleonentity(localclientnum, "damage_heavy");
+  self playRumbleOnEntity(localclientnum, "damage_heavy");
 }
 
 function_6831ee4b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[#"viper_sword_bloodswipe_l_1p"], self, "j_spine4");
-  self playrumbleonentity(localclientnum, "damage_heavy");
+  self playRumbleOnEntity(localclientnum, "damage_heavy");
 }
 
 dragon_roar_impact(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -109,13 +109,13 @@ swordpistol_rumble(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fi
   if(newvalue) {
     switch (newvalue) {
       case 2:
-        self playrumbleonentity(localclientnum, "zm_weap_swordpistol_melee_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_swordpistol_melee_rumble");
         break;
       case 4:
-        self playrumbleonentity(localclientnum, "zm_weap_swordpistol_shoot_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_swordpistol_shoot_rumble");
         break;
       case 5:
-        self playrumbleonentity(localclientnum, "zm_weap_swordpistol_special_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_swordpistol_special_rumble");
         break;
     }
   }

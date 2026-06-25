@@ -34,7 +34,7 @@ delete_zombie_noone_looking(how_close) {
   }
   self.inview = 0;
   self.player_close = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i].sessionstate == "spectator") {
       continue;
@@ -73,11 +73,11 @@ delete_zombie_noone_looking(how_close) {
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);
-  playerUnitForwardVec = VectorNormalize(playerForwardVec);
+  playerUnitForwardVec = vectorNormalize(playerForwardVec);
   banzaiPos = self.origin;
   playerPos = player GetOrigin();
   playerToBanzaiVec = banzaiPos - playerPos;
-  playerToBanzaiUnitVec = VectorNormalize(playerToBanzaiVec);
+  playerToBanzaiUnitVec = vectorNormalize(playerToBanzaiVec);
   forwardDotBanzai = VectorDot(playerUnitForwardVec, playerToBanzaiUnitVec);
   angleFromCenter = ACos(forwardDotBanzai);
   playerFOV = GetDvarFloat(#"cg_fov");

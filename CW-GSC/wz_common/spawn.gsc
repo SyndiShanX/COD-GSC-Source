@@ -25,9 +25,9 @@ function function_f468d9a5(spawnpoint) {
   dir = anglesToForward(spawnpoint.angles);
   pos = spawnpoint.origin - dir * distance;
   hold_origin = (pos[0], pos[1], spawnpoint.origin[2] + height);
-  hold_angles = vectortoangles(vectornormalize(spawnpoint.origin - pos));
+  hold_angles = vectortoangles(vectorNormalize(spawnpoint.origin - pos));
   vec = anglesToForward(hold_angles);
-  vec = vectornormalize(vec);
+  vec = vectorNormalize(vec);
   vec *= velocity;
   return {
     #origin: hold_origin, #angles: hold_angles, #freefall: vec

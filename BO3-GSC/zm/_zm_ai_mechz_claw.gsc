@@ -166,7 +166,7 @@ function private function_fa513ca0() {
   self endon("death");
   self endon("hash_8225d137");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(!(isDefined(player.is_burning) && player.is_burning)) {
         if(player istouching(self.flametrigger)) {
@@ -197,7 +197,7 @@ function private function_1aacf7d4() {
   self.m_claw = spawn("script_model", org);
   self.m_claw setModel("c_t7_zm_dlchd_origins_mech_claw");
   self.m_claw.angles = ang;
-  self.m_claw linkto(self, "tag_claw");
+  self.m_claw linkTo(self, "tag_claw");
   self.m_claw useanimtree($mechz_claw);
   if(isDefined(self.m_claw_damage_trigger)) {
     self.m_claw_damage_trigger unlink();
@@ -214,8 +214,8 @@ function private function_1aacf7d4() {
   self.m_claw_damage_trigger hide();
   self.m_claw_damage_trigger setCanDamage(1);
   self.m_claw_damage_trigger.health = 10000;
-  self.m_claw_damage_trigger enablelinkto();
-  self.m_claw_damage_trigger linkto(self, "tag_claw");
+  self.m_claw_damage_trigger enablelinkTo();
+  self.m_claw_damage_trigger linkTo(self, "tag_claw");
   self thread function_5dfc412a();
   self hidepart("tag_claw");
 }
@@ -263,7 +263,7 @@ function private function_90832db7() {
         v_claw_angles = self gettagangles("tag_claw");
         n_dist = distance(self.m_claw.origin, v_claw_origin);
         n_time = n_dist / 1000;
-        self.m_claw moveto(v_claw_origin, max(0.05, n_time));
+        self.m_claw moveTo(v_claw_origin, max(0.05, n_time));
         self.m_claw playLoopSound("zmb_ai_mechz_claw_loop_in", 0.1);
         self.m_claw waittill("movedone");
         v_claw_origin = self gettagorigin("tag_claw");
@@ -273,7 +273,7 @@ function private function_90832db7() {
         self.m_claw.origin = v_claw_origin;
         self.m_claw.angles = v_claw_angles;
         self.m_claw clearanim(%mechz_claw::root, 0.2);
-        self.m_claw linkto(self, "tag_claw", (0, 0, 0));
+        self.m_claw linkTo(self, "tag_claw", (0, 0, 0));
       }
       self.m_claw setanim(%mechz_claw::ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
     }
@@ -318,7 +318,7 @@ function private function_9bfd96c8(bopenclaw) {
       trace_end = self.e_grabbed.origin + (vectorscale((0, 0, -1), 500));
       drop_trace = playerphysicstrace(trace_start, trace_end) + vectorscale((0, 0, 1), 24);
       self.e_grabbed unlink();
-      self.e_grabbed setorigin(drop_trace);
+      self.e_grabbed setOrigin(drop_trace);
     }
     self.e_grabbed = undefined;
     if(isDefined(bopenclaw) && bopenclaw) {
@@ -357,7 +357,7 @@ function private play_shoot_arm_hint_vo() {
     if(!isDefined(self.e_grabbed)) {
       return;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       if(player == self.e_grabbed) {
         continue;
@@ -448,19 +448,19 @@ function private function_672f9804() {
   self.m_claw.fx_ent = spawn("script_model", self.m_claw gettagorigin("tag_claw"));
   self.m_claw.fx_ent.angles = self.m_claw gettagangles("tag_claw");
   self.m_claw.fx_ent setModel("tag_origin");
-  self.m_claw.fx_ent linkto(self.m_claw, "tag_claw");
+  self.m_claw.fx_ent linkTo(self.m_claw, "tag_claw");
   self.m_claw.fx_ent clientfield::set("mechz_claw", 1);
   self clientfield::set("mechz_wpn_source", 1);
   v_enemy_origin = self.favoriteenemy.origin + vectorscale((0, 0, 1), 36);
   n_dist = distance(v_claw_origin, v_enemy_origin);
   n_time = n_dist / 1200;
   self playSound("zmb_ai_mechz_claw_fire");
-  self.m_claw moveto(v_enemy_origin, n_time);
+  self.m_claw moveTo(v_enemy_origin, n_time);
   self.m_claw thread function_2998f2a1();
   self.m_claw playLoopSound("zmb_ai_mechz_claw_loop_out", 0.1);
   self.e_grabbed = undefined;
   do {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       if(!zm_utility::is_player_valid(player, 1, 1) || !player player_can_be_grabbed()) {
         continue;
@@ -492,7 +492,7 @@ function private function_672f9804() {
           self.e_grabbed thread function_bed84b4(self);
           self.e_grabbed thread function_38d105a4(self);
           if(!level flag::get("mechz_claw_move_complete")) {
-            self.m_claw moveto(self.m_claw.origin, 0.05);
+            self.m_claw moveTo(self.m_claw.origin, 0.05);
           }
         }
         break;
@@ -510,7 +510,7 @@ function private function_672f9804() {
       n_dist_sq = distancesquared(ai_zombie.origin + vectorscale((0, 0, 1), 36), self.m_claw.origin);
       if(n_dist_sq < 2304) {
         self.e_grabbed = ai_zombie;
-        self.e_grabbed linkto(self.m_claw, "tag_attach_player", (0, 0, 0));
+        self.e_grabbed linkTo(self.m_claw, "tag_attach_player", (0, 0, 0));
         self.e_grabbed.mechz_grabbed_by = self;
         break;
       }
@@ -527,7 +527,7 @@ function private function_672f9804() {
   self function_7c33f4fb();
   v_claw_origin = self gettagorigin("tag_claw");
   v_claw_angles = self gettagangles("tag_claw");
-  self.m_claw moveto(v_claw_origin, max(0.05, n_time));
+  self.m_claw moveTo(v_claw_origin, max(0.05, n_time));
   self.m_claw playLoopSound("zmb_ai_mechz_claw_loop_in", 0.1);
   self.m_claw waittill("movedone");
   v_claw_origin = self gettagorigin("tag_claw");
@@ -540,7 +540,7 @@ function private function_672f9804() {
   self.m_claw.origin = v_claw_origin;
   self.m_claw.angles = v_claw_angles;
   self.m_claw clearanim(%mechz_claw::root, 0.2);
-  self.m_claw linkto(self, "tag_claw", (0, 0, 0));
+  self.m_claw linkTo(self, "tag_claw", (0, 0, 0));
   self.m_claw setanim(%mechz_claw::ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
   self.m_claw.fx_ent delete();
   self.m_claw.fx_ent = undefined;
@@ -555,7 +555,7 @@ function private function_672f9804() {
       self.e_grabbed thread function_860f0461(self);
     }
     self thread function_eb9df173(self.e_grabbed);
-    self animscripted("flamethrower_anim", self.origin, self.angles, "ai_zombie_mech_ft_burn_player");
+    self animScripted("flamethrower_anim", self.origin, self.angles, "ai_zombie_mech_ft_burn_player");
     self zombie_shared::donotetracks("flamethrower_anim");
   }
   level flag::clear("mechz_claw_move_complete");

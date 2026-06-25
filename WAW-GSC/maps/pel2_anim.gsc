@@ -342,7 +342,7 @@ mangrove_corsair_trap(guy) {
 }
 
 mangrove_throw_grenade(guy) {
-  gren_orig = getstruct("orig_bunker_gun_4_blowup", "targetname");
+  gren_orig = getStruct("orig_bunker_gun_4_blowup", "targetname");
   guy MagicGrenade(guy gettagorigin("tag_weapon_left") + (0, 0, 20), gren_orig.origin + (RandomIntRange(-50, 50), 0, 30), 1.75);
 
   flag_set("mangrove_grenades_thrown");
@@ -350,11 +350,11 @@ mangrove_throw_grenade(guy) {
 
 #using_animtree("pel2_truck_crash");
 pacing_attach_radio(guy) {
-  goal_node = getent("node_end_vigenette", "targetname");
+  goal_node = getEnt("node_end_vigenette", "targetname");
 
   radio_model = spawn("script_model", guy.origin);
   radio_model setModel("char_usa_marine_radiohandset");
-  radio_model linkto(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  radio_model linkTo(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
   radio_model UseAnimTree(#animtree);
   radio_model.animname = "airfield";
@@ -388,11 +388,11 @@ pacing_throw_smoke(guy) {
     max_loop = 6;
   }
 
-  target_pos = getstruct("orig_pacing_smoke", "targetname").origin;
+  target_pos = getStruct("orig_pacing_smoke", "targetname").origin;
 
   temp_loop_orig = spawn("script_origin", target_pos);
   temp_loop_orig playLoopSound("flare_loop");
-  playsoundatposition("flare_ignite", temp_loop_orig.origin);
+  playSoundAtPosition("flare_ignite", temp_loop_orig.origin);
 
   while(1) {
     playFXOnTag(level._effect["target_smoke"], level.polonsky, "tag_weapon_left");
@@ -470,7 +470,7 @@ pacing_throw_smoke(guy) {
 }
 
 telepole_spark_fx_1(plane) {
-  orig = getstruct("orig_pole_fx_1", "targetname");
+  orig = getStruct("orig_pole_fx_1", "targetname");
   playFX(level._effect["telepole_spark"], orig.origin);
 }
 

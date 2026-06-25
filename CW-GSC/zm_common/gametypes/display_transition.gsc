@@ -187,7 +187,7 @@ function function_f4c03c3b() {
 }
 
 function function_1caf5c87(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
   player::function_4dcd9a89(players, &function_3f65d5d3);
 
   foreach(player in players) {
@@ -334,7 +334,7 @@ function private function_6b33e951() {
     winning_team = #"allies";
   }
 
-  winners = getplayers(winning_team);
+  winners = getPlayers(winning_team);
   winners = array::merge_sort(winners, &function_7285f7e1, 0);
   var_860af94a = array();
 

@@ -176,7 +176,7 @@ main() {
   common_scripts\utility::array_thread(var_2, maps\sniperescape_code::curtain, "curtain_left");
   var_3 = getEntArray("curtain_right", "targetname");
   common_scripts\utility::array_thread(var_3, maps\sniperescape_code::curtain, "curtain_right");
-  level.price = getent("price", "targetname");
+  level.price = getEnt("price", "targetname");
   level.price thread priceinit();
   level.price pushplayer(1);
   level.price.dontavoidplayer = 1;
@@ -501,7 +501,7 @@ snipe() {
   var_5.animname = "dealer";
   var_4.main_baddie = 1;
   var_5.main_baddie = 1;
-  var_6 = getent("exchange_org", "targetname");
+  var_6 = getEnt("exchange_org", "targetname");
   var_6 thread maps\_anim::anim_loop(var_3, "exchange_idle");
   maps\sniperescape_exchange::exchange_zak_and_guards_jab_it_up(var_6, var_3);
   var_6 notify("stop_loop");
@@ -540,8 +540,8 @@ snipe() {
   common_scripts\utility::flag_set("player_gets_off_turret");
   setomnvar("ui_barret", 0);
   soundscripts\_snd::snd_message("escape_hotel_mix");
-  var_7 = getent("inc_heli_sfx_1", "targetname");
-  var_8 = getent("inc_heli_sfx_2", "targetname");
+  var_7 = getEnt("inc_heli_sfx_1", "targetname");
+  var_8 = getEnt("inc_heli_sfx_2", "targetname");
   var_7 thread common_scripts\utility::play_sound_in_space("scn_se_havoc_inbound1", var_7.origin);
   var_8 thread common_scripts\utility::play_sound_in_space("scn_se_havoc_inbound2", var_8.origin);
   maps\_utility::enable_scuff_footsteps_sound(1);
@@ -557,8 +557,8 @@ exchange_uaz() {
   var_2 = maps\sniperescape_wounding::get_ent_with_key_from_array(var_1, "zaks_ride", "script_noteworthy");
   level.flashback_guys_uaz = maps\sniperescape_wounding::get_ent_with_key_from_array(var_1, "flashback_guys_uaz", "script_noteworthy");
   level.flashback_guys_uaz thread maps\sniperescape_exchange::flashback_uaz_stop_while_driverdead();
-  var_3 = getent("jeep_window", "targetname");
-  var_3 linkto(var_2, "body_animate_jnt", (-20, 0, 54), (0, 180, 0));
+  var_3 = getEnt("jeep_window", "targetname");
+  var_3 linkTo(var_2, "body_animate_jnt", (-20, 0, 54), (0, 180, 0));
   wait 2;
   common_scripts\utility::flag_wait("player_on_barret");
   common_scripts\utility::array_levelthread(var_1, maps\_vehicle::gopath);
@@ -571,9 +571,9 @@ price_watches(var_0) {
   self.animname = "price";
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel(level.scr_model["binocs"]);
-  var_1 linkto(self, "TAG_INHAND", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "TAG_INHAND", (0, 0, 0), (0, 0, 0));
   level.binocs = var_1;
-  var_2 = getent(self.target, "targetname");
+  var_2 = getEnt(self.target, "targetname");
   var_2 maps\_anim::anim_single_solo(self, "intro_spotter");
   var_2 thread maps\_anim::anim_loop_solo(self, "spotter_idle");
 }
@@ -617,17 +617,17 @@ barline() {
 }
 
 setup_rappel() {
-  var_0 = getent("rappel_trigger", "targetname");
+  var_0 = getEnt("rappel_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   var_1 = maps\_utility::spawn_anim_model("rope");
   level.rope = var_1;
   var_2 = getnode("price_rappel_node", "targetname");
   var_2 thread maps\_anim::anim_first_frame_solo(var_1, "rappel_start");
-  var_3 = getent("bullet_block", "targetname");
+  var_3 = getEnt("bullet_block", "targetname");
   var_3 delete();
-  var_4 = getent(level.price.target, "targetname");
+  var_4 = getEnt(level.price.target, "targetname");
   var_4 notify("stop_loop");
-  level.price stopanimscripted();
+  level.price stopanimScripted();
   common_scripts\utility::flag_clear("aa_snipe");
   var_4 maps\_anim::anim_single_solo(level.price, "spotter_exit");
 
@@ -660,9 +660,9 @@ player_rappel() {
   var_3 = maps\_utility::spawn_anim_model("player_rappel");
   var_3 hide();
   var_0 maps\_anim::anim_first_frame_solo(var_3, "rappel");
-  var_4 = getent("rappel_trigger", "targetname");
+  var_4 = getEnt("rappel_trigger", "targetname");
   var_4.origin = (481.4, -10823.2, 1068.9);
-  var_4 sethintstring(&"SNIPERESCAPE_HOLD_1_TO_RAPPEL");
+  var_4 setHintString(&"SNIPERESCAPE_HOLD_1_TO_RAPPEL");
   var_2 show();
   var_4 thread trigger_monitor_player_lean();
 
@@ -820,14 +820,14 @@ start_run() {
   var_0 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_0, maps\sniperescape_code::delete_living);
   var_1 = getnode("tele_node", "targetname");
-  var_2 = getent("tele_org", "targetname");
+  var_2 = getEnt("tele_org", "targetname");
   level.move_in_trigger_used = [];
   common_scripts\utility::run_thread_on_targetname("move_in_trigger", maps\sniperescape_code::move_in);
   level.player setplayerangles((0, 0, 0));
-  level.player setorigin(var_2.origin + (0, 0, -34341));
+  level.player setOrigin(var_2.origin + (0, 0, -34341));
   level.price teleport(var_1.origin);
   maps\sniperescape_wounding::plant_price();
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   thread battle_through_heat_area();
 }
 
@@ -880,13 +880,13 @@ start_apartment() {
   objective_current(maps\sniperescape_wounding::getobj("heat"));
   var_0 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_0, maps\sniperescape_code::delete_living);
-  var_1 = getent("price_apartment_org", "targetname");
-  var_2 = getent("player_apartment_org", "targetname");
+  var_1 = getEnt("price_apartment_org", "targetname");
+  var_2 = getEnt("player_apartment_org", "targetname");
   level.player setplayerangles((0, 0, 0));
-  level.player setorigin(var_2.origin + (0, 0, -34341));
+  level.player setOrigin(var_2.origin + (0, 0, -34341));
   level.price teleport(var_1.origin);
   maps\sniperescape_wounding::plant_price();
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   level.price maps\_utility::set_force_color("y");
   thread the_apartment();
 }
@@ -898,9 +898,9 @@ the_apartment() {
   thread maps\sniperescape_wounding::apartment_price_waits_for_dog_death();
   level notify("stop_adjusting_enemy_accuracy");
   level.price thread maps\_anim::anim_single_queue(level.price, "lose_them_in_apartment");
-  var_0 = getent("price_explore_trigger", "targetname");
+  var_0 = getEnt("price_explore_trigger", "targetname");
   var_0 waittill("trigger");
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   maps\_utility::autosave_by_name("into_the_apartment");
   maps\_utility::arcademode_checkpoint(4, "b");
   common_scripts\utility::flag_set("price_opens_door");
@@ -911,15 +911,15 @@ the_apartment() {
   var_2 = var_2 * 0.87;
   var_1 thread maps\_anim::anim_single_solo(level.price, "spin");
   wait(var_2);
-  level.price stopanimscripted();
+  level.price stopanimScripted();
   level.price clearenemy();
   level.price thread maps\_utility::set_ignoreall(1);
   var_3 = getnode("slow_door_macmillan_node", "targetname");
   var_3 maps\_anim::anim_reach_solo(level.price, "smooth_door_open_init");
   var_3 maps\_anim::anim_single_solo(level.price, "smooth_door_open_init");
-  var_4 = getent("slow_door", "targetname");
-  var_5 = getent("slow_door_model", "targetname");
-  var_5 linkto(var_4);
+  var_4 = getEnt("slow_door", "targetname");
+  var_5 = getEnt("slow_door_model", "targetname");
+  var_5 linkTo(var_4);
   var_4 thread maps\_utility::palm_style_door_open();
   var_3 maps\_anim::anim_single_solo(level.price, "smooth_door_open");
   level.price maps\_utility::set_force_color("y");
@@ -932,7 +932,7 @@ the_apartment() {
 }
 
 window_mantle_transition() {
-  var_0 = getent("mantle_disable_cqb", "targetname");
+  var_0 = getEnt("mantle_disable_cqb", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -943,7 +943,7 @@ window_mantle_transition() {
   }
 
   level.price maps\_utility::disable_cqbwalk();
-  var_0 = getent("mantle_enable_cqb", "targetname");
+  var_0 = getEnt("mantle_enable_cqb", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -965,13 +965,13 @@ start_wounding() {
   thread maps\sniperescape_code::countdown(16);
   var_0 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_0, maps\sniperescape_code::delete_living);
-  var_1 = getent("price_apart_org", "targetname");
-  var_2 = getent("player_apart_org", "targetname");
+  var_1 = getEnt("price_apart_org", "targetname");
+  var_2 = getEnt("player_apart_org", "targetname");
   level.player setplayerangles(var_2.angles);
-  level.player setorigin(var_2.origin + (0, 0, -34341));
+  level.player setOrigin(var_2.origin + (0, 0, -34341));
   level.price teleport(var_1.origin);
   maps\sniperescape_wounding::plant_price();
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   level.price setgoalpos(level.price.origin);
   level.price maps\_utility::enable_cqbwalk();
   level.price maps\_utility::set_force_color("y");
@@ -988,15 +988,15 @@ start_crash() {
   thread maps\sniperescape_code::countdown(16);
   var_0 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_0, maps\sniperescape_code::delete_living);
-  var_1 = getent("price_apart_org", "targetname");
-  var_2 = getent("player_wounding_org", "targetname");
+  var_1 = getEnt("price_apart_org", "targetname");
+  var_2 = getEnt("player_wounding_org", "targetname");
   level.player setplayerangles(var_2.angles);
-  level.player setorigin(var_2.origin + (0, 0, -34341));
+  level.player setOrigin(var_2.origin + (0, 0, -34341));
   level.price teleport(var_1.origin);
   var_3 = getnode("price_wounding_node", "targetname");
   var_3 maps\_anim::anim_teleport_solo(level.price, "crash");
   maps\sniperescape_wounding::plant_price();
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   level.price setgoalpos(level.price.origin);
   level.price maps\_utility::enable_cqbwalk();
   level.price maps\_utility::set_force_color("y");
@@ -1087,7 +1087,7 @@ heli_attacks_price() {
   common_scripts\utility::flag_wait("price_heli_in_position");
   var_0 maps\_anim::anim_reach_solo(level.price, "wounded_begins");
   maps\_utility::delaythread(5.5, common_scripts\utility::flag_set, "price_heli_moves_on");
-  var_2 = getent("wounding_target", "targetname");
+  var_2 = getEnt("wounding_target", "targetname");
   var_1 maps\_utility::delaythread(6.5, maps\sniperescape_code::heli_shoots_rockets_at_ent, var_2);
   maps\_utility::delaythread(7.2, common_scripts\_exploder::exploder, 500);
   var_0 maps\_anim::anim_single_solo(level.price, "wounded_begins");
@@ -1114,19 +1114,19 @@ start_wounded() {
   thread maps\sniperescape_lighting::vision_glow_change();
   objective_add(maps\sniperescape_wounding::getobj("heat"), "active", &"SNIPERESCAPE_FOLLOW_CPT_MACMILLAN", maps\sniperescape_code::extraction_point());
   objective_current(maps\sniperescape_wounding::getobj("heat"));
-  var_0 = getent("wounding_sight_blocker", "targetname");
+  var_0 = getEnt("wounding_sight_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   thread maps\sniperescape_code::countdown(13);
   var_1 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_1, maps\sniperescape_code::delete_living);
   var_2 = getnode("price_apartment_destination_node", "targetname");
-  var_3 = getent("player_post_wound_org", "targetname");
+  var_3 = getEnt("player_post_wound_org", "targetname");
   level.player setplayerangles(var_3.angles);
-  level.player setorigin(var_3.origin + (0, 0, -34341));
+  level.player setOrigin(var_3.origin + (0, 0, -34341));
   level.price teleport(var_2.origin);
   maps\sniperescape_wounding::plant_price();
-  level.player setorigin(var_3.origin);
+  level.player setOrigin(var_3.origin);
   level.price maps\_utility::disable_ai_color();
   thread wounded_combat();
 }
@@ -1176,19 +1176,19 @@ start_burnt() {
   objective_add(maps\sniperescape_wounding::getobj("wounded"), "active", &"SNIPERESCAPE_DRAG_MACMILLAN_BODILY", maps\sniperescape_code::extraction_point());
   objective_current(maps\sniperescape_wounding::getobj("wounded"));
   maps\sniperescape_code::set_objective_pos_to_extraction_point(maps\sniperescape_wounding::getobj("wounded"));
-  var_0 = getent("wounding_sight_blocker", "targetname");
+  var_0 = getEnt("wounding_sight_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   thread maps\sniperescape_code::countdown(6);
   var_1 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_1, maps\sniperescape_code::delete_living);
-  var_2 = getent("player_burnt_org", "targetname");
-  var_3 = getent("price_burnt_org", "targetname");
-  level.player setorigin(var_2.origin + (0, 0, -5150));
+  var_2 = getEnt("player_burnt_org", "targetname");
+  var_3 = getEnt("price_burnt_org", "targetname");
+  level.player setOrigin(var_2.origin + (0, 0, -5150));
   level.price teleport(var_3.origin);
   maps\sniperescape_wounding::plant_price();
   level.player setplayerangles(var_2.angles);
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   wait 0.05;
   thread maps\sniperescape_code::price_wounded_logic();
   thread enter_burnt_apartment();
@@ -1206,7 +1206,7 @@ enter_burnt_apartment() {
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "enter_burnt", maps\_utility::clear_dvar, "player_hasnt_been_spooked");
   thread maps\sniperescape_code::player_navigates_burnt_apartment();
   thread pool();
-  var_0 = getent("level_end", "targetname");
+  var_0 = getEnt("level_end", "targetname");
   var_0.origin = var_0.origin + (0, 150, 0);
   thread fairgrounds_before_battle();
 }
@@ -1219,19 +1219,19 @@ start_pool() {
   objective_add(maps\sniperescape_wounding::getobj("wounded"), "active", &"SNIPERESCAPE_DRAG_MACMILLAN_BODILY", maps\sniperescape_code::extraction_point());
   objective_current(maps\sniperescape_wounding::getobj("wounded"));
   maps\sniperescape_code::set_objective_pos_to_extraction_point(maps\sniperescape_wounding::getobj("wounded"));
-  var_0 = getent("wounding_sight_blocker", "targetname");
+  var_0 = getEnt("wounding_sight_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   thread maps\sniperescape_code::countdown(8);
   var_1 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_1, maps\sniperescape_code::delete_living);
-  var_2 = getent("player_pool_org", "targetname");
-  var_3 = getent("price_pool_org", "targetname");
-  level.player setorigin(var_2.origin + (0, 0, -5150));
+  var_2 = getEnt("player_pool_org", "targetname");
+  var_3 = getEnt("price_pool_org", "targetname");
+  level.player setOrigin(var_2.origin + (0, 0, -5150));
   level.price teleport(var_3.origin);
   maps\sniperescape_wounding::plant_price();
   level.player setplayerangles(var_2.angles);
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   setDvar("player_sees_pool_dogs", "");
   wait 0.05;
   common_scripts\utility::flag_set("to_the_pool");
@@ -1280,19 +1280,19 @@ start_fair() {
   objective_add(maps\sniperescape_wounding::getobj("wounded"), "active", &"SNIPERESCAPE_DRAG_MACMILLAN_BODILY", maps\sniperescape_code::extraction_point());
   objective_current(maps\sniperescape_wounding::getobj("wounded"));
   maps\sniperescape_code::set_objective_pos_to_extraction_point(maps\sniperescape_wounding::getobj("wounded"));
-  var_0 = getent("wounding_sight_blocker", "targetname");
+  var_0 = getEnt("wounding_sight_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   thread maps\sniperescape_code::countdown(20);
   var_1 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_1, maps\sniperescape_code::delete_living);
-  var_2 = getent("player_fair_org", "targetname");
-  var_3 = getent("price_fair_org", "targetname");
-  level.player setorigin(var_2.origin + (0, 0, -5150));
+  var_2 = getEnt("player_fair_org", "targetname");
+  var_3 = getEnt("price_fair_org", "targetname");
+  level.player setOrigin(var_2.origin + (0, 0, -5150));
   level.price teleport(var_3.origin);
   maps\sniperescape_wounding::plant_price();
   level.player setplayerangles(var_2.angles);
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   wait 0.05;
   thread maps\sniperescape_code::price_wounded_logic();
   common_scripts\utility::flag_wait("price_picked_up");
@@ -1310,18 +1310,18 @@ start_fair_battle() {
   objective_add(maps\sniperescape_wounding::getobj("wounded"), "active", &"SNIPERESCAPE_DRAG_MACMILLAN_BODILY", maps\sniperescape_code::extraction_point());
   objective_current(maps\sniperescape_wounding::getobj("wounded"));
   maps\sniperescape_code::set_objective_pos_to_extraction_point(maps\sniperescape_wounding::getobj("wounded"));
-  var_0 = getent("wounding_sight_blocker", "targetname");
+  var_0 = getEnt("wounding_sight_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   var_1 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_1, maps\sniperescape_code::delete_living);
-  var_2 = getent("player_fair_org", "targetname");
-  var_3 = getent("price_gnoll", "targetname");
-  level.player setorigin(var_2.origin + (0, 0, -5150));
+  var_2 = getEnt("player_fair_org", "targetname");
+  var_3 = getEnt("price_gnoll", "targetname");
+  level.player setOrigin(var_2.origin + (0, 0, -5150));
   level.price teleport(var_3.origin, var_3.angles);
   maps\sniperescape_wounding::plant_price();
   level.player setplayerangles(var_2.angles);
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   wait 0.05;
   common_scripts\utility::flag_set("price_can_be_left");
   thread maps\sniperescape_code::price_wounded_logic();
@@ -1359,7 +1359,7 @@ fairgrounds_before_battle() {
   thread maps\sniperescape_wounding::update_objective_position_for_fairground(maps\sniperescape_wounding::getobj("putdown"));
   thread maps\sniperescape_code::price_says_this_is_fine();
   thread maps\sniperescape_wounding::price_says_a_bit_farther();
-  var_0 = getent("price_placement_trigger", "targetname");
+  var_0 = getEnt("price_placement_trigger", "targetname");
 
   for(;;) {
     common_scripts\utility::flag_waitopen("price_picked_up");
@@ -1440,7 +1440,7 @@ fairgrounds_after_prep() {
   wait 2.2;
   thread maps\sniperescape_code::price_line("have_a_fix");
   common_scripts\utility::flag_set("beacon_placed");
-  var_2 = getent("price_putdown_hint_trigger", "targetname");
+  var_2 = getEnt("price_putdown_hint_trigger", "targetname");
   var_2 delete();
   thread maps\sniperescape_code::fairground_battle();
   thread seaknight_flies_in(0);
@@ -1461,19 +1461,19 @@ start_seaknight() {
   objective_add(maps\sniperescape_wounding::getobj("wounded"), "active", &"SNIPERESCAPE_DRAG_MACMILLAN_BODILY", maps\sniperescape_code::extraction_point());
   objective_current(maps\sniperescape_wounding::getobj("wounded"));
   maps\sniperescape_code::set_objective_pos_to_extraction_point(maps\sniperescape_wounding::getobj("wounded"));
-  var_0 = getent("wounding_sight_blocker", "targetname");
+  var_0 = getEnt("wounding_sight_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   thread maps\sniperescape_code::countdown(8);
   var_1 = getaispeciesarray("axis", "all");
   common_scripts\utility::array_thread(var_1, maps\sniperescape_code::delete_living);
-  var_2 = getent("player_fair_org", "targetname");
-  var_3 = getent("price_gnoll", "targetname");
-  level.player setorigin(var_2.origin + (0, 0, -5150));
+  var_2 = getEnt("player_fair_org", "targetname");
+  var_3 = getEnt("price_gnoll", "targetname");
+  level.player setOrigin(var_2.origin + (0, 0, -5150));
   level.price teleport(var_3.origin, var_3.angles);
   maps\sniperescape_wounding::plant_price();
   level.player setplayerangles(var_2.angles);
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   wait 0.05;
   thread maps\sniperescape_code::price_wounded_logic();
   common_scripts\utility::flag_set("player_enters_fairgrounds");
@@ -1500,18 +1500,18 @@ seaknight_flies_in(var_0) {
     var_2 waittill("reached_dynamic_path_end");
   }
 
-  var_3 = getent("seaknight_landing", "targetname");
+  var_3 = getEnt("seaknight_landing", "targetname");
   var_4 = var_2;
   var_2 = var_2 maps\_vehicle::vehicle_to_dummy();
   var_2 setModel("vehicle_ch46e_opened_door_interior_a");
   var_5 = spawn("script_model", var_2 gettagorigin("body_animate_jnt"));
   var_5 setModel("vehicle_ch46e_opened_door_interior_b");
   var_5.angles = var_2.angles;
-  var_5 linkto(var_2, "body_animate_jnt");
+  var_5 linkTo(var_2, "body_animate_jnt");
   var_6 = spawn("script_model", var_2 gettagorigin("body_animate_jnt"));
   var_6 setModel("vehicle_ch46e_wires");
   var_6.angles = var_2.angles;
-  var_6 linkto(var_2, "body_animate_jnt");
+  var_6 linkTo(var_2, "body_animate_jnt");
 
   if(level.start_point == "seaknight") {
     var_2 thread maps\_debug::drawtagforever("tag_detach");
@@ -1525,14 +1525,14 @@ seaknight_flies_in(var_0) {
   level.seaknight = var_2;
   var_2 thread maps\sniperescape_code::seaknight_badplace();
   var_2 maps\_utility::assign_animtree();
-  var_7 = getent("seaknight_collmap", "targetname");
-  var_7 linkto(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_7 = getEnt("seaknight_collmap", "targetname");
+  var_7 linkTo(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
   maps\_wibble::wibble_add_heli_to_track(level.seaknight);
   var_2 thread maps\sniperescape_wounding::seaknight_sound();
-  var_8 = getent("seaknight_trigger", "targetname");
-  var_8 thread maps\_utility::manual_linkto(var_7);
-  var_9 = getent("seaknight_death_trigger", "targetname");
-  var_9 thread maps\_utility::manual_linkto(var_2);
+  var_8 = getEnt("seaknight_trigger", "targetname");
+  var_8 thread maps\_utility::manual_linkTo(var_7);
+  var_9 = getEnt("seaknight_death_trigger", "targetname");
+  var_9 thread maps\_utility::manual_linkTo(var_2);
   var_9 thread maps\_vehicle::heli_squashes_stuff("seaknight_lands");
   var_2 thread spawn_seaknight_crew();
   var_3 maps\_anim::anim_single_solo(var_2, "landing");
@@ -1630,7 +1630,7 @@ spawn_seaknight_crew() {
   thread maps\_anim::anim_first_frame(var_2, "unload", "tag_detach");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    var_2[var_3] linkto(self, "tag_detach");
+    var_2[var_3] linkTo(self, "tag_detach");
     var_2[var_3].attackeraccuracy = 0;
   }
 
@@ -1645,7 +1645,7 @@ spawn_seaknight_crew() {
   common_scripts\utility::flag_wait("player_putting_down_price_seaknight");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    var_2[var_3] linkto(self, "tag_detach");
+    var_2[var_3] linkTo(self, "tag_detach");
     var_2[var_3] maps\_utility::ai_ignore_everything();
   }
 
@@ -1698,7 +1698,7 @@ h1_handle_mac_run_past_chair() {
   var_0 = [];
   var_0[var_0.size] = level.price;
   var_0[var_0.size] = level.rappel_chair;
-  var_1 = getent("rappel_run_chair_clip", "targetname");
+  var_1 = getEnt("rappel_run_chair_clip", "targetname");
   var_1 notsolid();
   level.scripted_node_mac_run_rappel thread maps\_anim::anim_single(var_0, "run_to_rappel");
   level.rappel_chair waittillmatch("single anim", "chair_out");

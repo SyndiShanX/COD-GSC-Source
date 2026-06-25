@@ -76,7 +76,7 @@ function function_c521ddc8(door, bombzone) {
   if(!bombzone.var_49957ef3) {
     bombzone.var_49957ef3 = 1;
     bombzone gameobjects::allow_use(#"group_enemy");
-    bombzone.trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+    bombzone.trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   }
 }
 
@@ -256,7 +256,7 @@ function bombs() {
     }
 
     level.bombzones[level.bombzones.size] = bombzone;
-    defusetrig = getent(visuals[0].target, "targetname");
+    defusetrig = getEnt(visuals[0].target, "targetname");
     bombzone.bombdefusetrig = defusetrig;
     assert(isDefined(bombzone.bombdefusetrig));
     bombzone.bombdefusetrig.origin += (0, 0, -10000);
@@ -494,7 +494,7 @@ function dropbombmodel(player, site) {
   trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), 0, player);
   tempangle = randomfloat(360);
   forward = (cos(tempangle), sin(tempangle), 0);
-  forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
+  forward = vectorNormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
   dropangles = vectortoangles(forward);
 
   if(isDefined(trace[#"surfacetype"]) && trace[#"surfacetype"] == "water") {
@@ -730,7 +730,7 @@ function function_4d528908() {
 
   keys = getarraykeys(level.baseorigin);
   direction = level.baseorigin[keys[0]] - level.baseorigin[keys[1]];
-  angles = vectortoangles(vectornormalize(direction));
+  angles = vectortoangles(vectorNormalize(direction));
   return angles[1] + 0;
 }
 

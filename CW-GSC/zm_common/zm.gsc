@@ -589,7 +589,7 @@ function onallplayersready() {
   player_count_actual = 0;
 
   while(player_count_actual < getnumexpectedplayers(1)) {
-    players = getplayers();
+    players = getPlayers();
     player_count_actual = 0;
 
     for(i = 0; i < players.size; i++) {
@@ -604,7 +604,7 @@ function onallplayersready() {
 
   setinitialplayersconnected();
   println("<dev string:xed>");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(a_e_players.size == 1) {
     level flag::set("solo_game");
@@ -692,7 +692,7 @@ function private function_3dbf3e8e() {
     if(fresh) {
       var_17be922c = 1;
     } else {
-      players = getplayers();
+      players = getPlayers();
       alive_players = function_a1ef346b();
       var_40ccb153 = getgametypesetting(#"hash_6996c421425cbae9");
       var_8a7a698 = getgametypesetting(#"hash_164754ccf007dbb4");
@@ -727,7 +727,7 @@ function function_d797f41f(n_waittime = 1) {
 
 function _outro_slow(func) {
   level endon(#"all_players_connected", #"game_ended");
-  array::thread_all(getplayers(), func);
+  array::thread_all(getPlayers(), func);
 
   while(true) {
     result = level waittill(#"connected");
@@ -803,7 +803,7 @@ function post_all_players_connected() {
   level.var_aaf21bbb = level.players.size;
   level.var_5caadd40 = function_58385b58(#"allies").size;
   setteamspyplane(#"allies", 1);
-  println("<dev string:x11f>", level.script, "<dev string:x135>", getplayers().size);
+  println("<dev string:x11f>", level.script, "<dev string:x135>", getPlayers().size);
   level thread round_end_monitor();
 
   if(!level.zombie_anim_intro) {
@@ -816,7 +816,7 @@ function post_all_players_connected() {
   level.startinvulnerabletime = getdvarint(#"player_deathinvulnerabletime", 0);
   level thread zm_stats::function_b14863c1();
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread function_b0613540();
@@ -1197,10 +1197,10 @@ function zombie_intro_screen(string1, string2, string3, string4, string5) {
 }
 
 function players_playing() {
-  players = getplayers();
+  players = getPlayers();
   level.players_playing = players.size;
   wait 20;
-  players = getplayers();
+  players = getPlayers();
   level.players_playing = players.size;
 }
 
@@ -1768,7 +1768,7 @@ function actor_damage_override_wrapper(inflictor, attacker, damage, flags, means
 
     self finishactordamage(inflictor, attacker, int(final_damage), flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, surfacetype, vsurfacenormal);
 
-    if(isPlayer(attacker) && (damage_override > 0 || var_ebcff177 === 4) && !is_true(self.var_265cb589) && !is_true(level.var_dc60105c) && (!attacker issplitscreen() || getplayers().size < 4)) {
+    if(isPlayer(attacker) && (damage_override > 0 || var_ebcff177 === 4) && !is_true(self.var_265cb589) && !is_true(level.var_dc60105c) && (!attacker issplitscreen() || getPlayers().size < 4)) {
       attacker thread damagefeedback::update(meansofdeath, inflictor, var_e2e301c8, weapon, self, psoffsettime, shitloc, self.health <= 0, flags);
     }
   }
@@ -2086,7 +2086,7 @@ function function_d723e40() {
 }
 
 function restart_prompt() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread function_51133aa1();
@@ -2216,7 +2216,7 @@ function end_game() {
   recordgameresult(level.winningteam);
   globallogic::function_6c8d7c31(level.winningteam);
   globallogic_player::recordactiveplayersendgamematchrecordstats();
-  players = getplayers();
+  players = getPlayers();
   clientnums = [];
 
   foreach(player in players) {
@@ -2333,7 +2333,7 @@ function end_game() {
       var_5c965b78 = 1;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       players[i] setclientuivisibilityflag("hud_visible", 0);
@@ -2343,7 +2343,7 @@ function end_game() {
     }
 
     if(waitresult.reason === #"hash_4e5756202af6ae94" || waitresult.reason === #"last_player_died" || waitresult.reason === #"exfil_fail") {
-      playsoundatposition(#"hash_3f1eca72dab56b29", (0, 0, 0));
+      playSoundAtPosition(#"hash_3f1eca72dab56b29", (0, 0, 0));
     }
   } else if("ztrials" == util::get_game_type()) {
     zm_trial_util::function_2ee2d021();
@@ -2353,7 +2353,7 @@ function end_game() {
     level[[level.custom_end_screen]]();
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player setclientuivisibilityflag("weapon_hud_visible", 0);
@@ -2364,7 +2364,7 @@ function end_game() {
   zm_stats::update_global_counters_on_match_end();
   zm_stats::set_match_stat("gameLength", game_length);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_stats::function_9daadcaa("gameLength", game_length);
     player zm_stats::function_ae547e45("boas_gameLength", game_length);
     player zm_stats::function_ae547e45("boas_numZombieRounds", level.round_number);
@@ -2386,7 +2386,7 @@ function end_game() {
   }
 
   finalizematchrecord();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player.sessionstate) && player.sessionstate == "spectator") {
@@ -2420,7 +2420,7 @@ function end_game() {
     wait zombie_utility::get_zombie_var(#"zombie_intermission_time");
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(level.var_7c7c6c35 zm_game_over::is_open(players[i])) {
@@ -2429,9 +2429,9 @@ function end_game() {
   }
 
   level notify(#"stop_intermission");
-  array::thread_all(getplayers(), &zm_player::player_exit_level);
+  array::thread_all(getPlayers(), &zm_player::player_exit_level);
   wait 1.5;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] cameraactivate(0);
@@ -2477,7 +2477,7 @@ function check_end_game_intermission_delay() {
 }
 
 function upload_leaderboards() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] uploadleaderboards();
@@ -2555,7 +2555,7 @@ function intermission() {
 
   level.intermission = 1;
   level notify(#"intermission");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] setclientthirdperson(0);
@@ -2582,7 +2582,7 @@ function intermission() {
   }
 
   wait 5.25;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] clientfield::set("zmbLastStand", 0);
@@ -2680,7 +2680,7 @@ function default_find_exit_point() {
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = [];
 
@@ -2724,7 +2724,7 @@ function register_sidequest(id, sidequest_stat) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i] zm_stats::get_global_stat(level.zombie_sidequest_stat[id])) {
@@ -2750,7 +2750,7 @@ function set_sidequest_completed(id) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(level.zombie_sidequest_stat[id])) {
@@ -2788,7 +2788,7 @@ function precache_zombie_leaderboards() {
 }
 
 function increment_dog_round_stat(stat) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player zm_stats::increment_client_stat("zdog_rounds_" + stat);
@@ -2802,8 +2802,8 @@ function player_too_many_players_check() {
     max_players = 8;
   }
 
-  if(getplayers().size > max_players) {
-    foreach(player in getplayers()) {
+  if(getPlayers().size > max_players) {
+    foreach(player in getPlayers()) {
       player val::set(#"too_many_players", "freezecontrols");
     }
 
@@ -2882,7 +2882,7 @@ function function_be95f56d(event) {
 
   if(!self function_8190887e(event)) {
     var_20eefff5 = var_900d44db.var_9efd3539;
-    n_players = getplayers().size;
+    n_players = getPlayers().size;
     var_b0620785 = var_900d44db.var_b5ce9d6d[n_players - 1];
   }
 
@@ -2900,7 +2900,7 @@ function function_be95f56d(event) {
 
 function function_2c96cf0e(event) {
   var_900d44db = function_d3113f01();
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
   var_b0620785 = var_900d44db.var_a2a0937f[n_players - 1];
   var_b33e35e2 = function_be95f56d(event);
 

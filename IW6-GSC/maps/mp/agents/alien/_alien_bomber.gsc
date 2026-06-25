@@ -23,7 +23,7 @@ blank_script() {}
 bomber_init() {
   maps\mp\alien\_utility::enable_alien_scripted();
   self scragentsetscripted(1);
-  self scragentsetgoalradius(20000.0);
+  self scragentsetgoalRadius(20000.0);
   var_0 = (0, 0, -100);
   var_1 = (0, 0, -3000);
   var_2 = bulletTrace(self.origin + var_0, self.origin + var_1, 0);
@@ -153,7 +153,7 @@ bomber_attack(var_0, var_1) {
   self notify(var_0);
   self scragentbeginmelee(var_1);
   self scragentsetgoalentity(var_1);
-  self scragentsetgoalradius(20000.0);
+  self scragentsetgoalRadius(20000.0);
   self waittill("melee_complete");
 }
 
@@ -246,7 +246,7 @@ track_enemy(var_0) {
       return;
     }
 
-    var_5 = vectornormalize(var_3 - var_2);
+    var_5 = vectorNormalize(var_3 - var_2);
     var_6 = vectortoangles(var_5);
     var_7 = bulletTrace(var_2, var_2 + var_1 * var_5, 1, self);
 

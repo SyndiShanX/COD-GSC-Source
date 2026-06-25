@@ -196,13 +196,13 @@ function function_3c8f18a8(a_ents) {
     level.var_58f37cc3.origin = var_100583a4 gettagorigin(str_tag);
     level.var_58f37cc3.angles = var_100583a4 gettagangles(str_tag);
     level.var_58f37cc3 show();
-    level.var_58f37cc3 linkto(var_100583a4, str_tag);
+    level.var_58f37cc3 linkTo(var_100583a4, str_tag);
   }
   var_c3f519a9 = a_ents["airdrop_plane"];
   v_fx_pos = var_c3f519a9 gettagorigin("tag_engine_inner_left");
   var_4bde0ff5 = var_c3f519a9 gettagangles("tag_engine_inner_left");
   var_503f61aa = util::spawn_model("tag_origin", v_fx_pos, var_4bde0ff5);
-  var_503f61aa linkto(var_c3f519a9);
+  var_503f61aa linkTo(var_c3f519a9);
   var_503f61aa thread vehicle_rumble(0, 2);
   wait(20);
   var_503f61aa notify("rumble_stop");
@@ -213,7 +213,7 @@ function function_89159ff6(a_ents) {
   if(isDefined(a_ents["airdrop_plane"])) {
     a_ents["airdrop_plane"] delete();
   }
-  var_c3f519a9 = getent("airdrop_plane", "targetname");
+  var_c3f519a9 = getEnt("airdrop_plane", "targetname");
   if(isDefined(var_c3f519a9)) {
     var_c3f519a9 delete();
   }
@@ -283,7 +283,7 @@ function vehicle_rumble(b_wait_for_flag = 1, b_delay = 0) {
     wait(b_delay);
   }
   while(isDefined(self) && var_8e09e52a < 1) {
-    self playrumbleonentity("zm_island_plane_rumble");
+    self playRumbleOnEntity("zm_island_plane_rumble");
     wait(20);
     var_8e09e52a++;
   }
@@ -301,7 +301,7 @@ function function_f9d235ed() {
     var_284427db = "destructible_webbing" + i;
     var_7716d15a = "t_webbing_extra_damage" + i;
     level.var_fed21619[i] = struct::get(str_struct_name, "targetname");
-    level.var_fed21619[i].e_destructible = getent(var_284427db, "targetname");
+    level.var_fed21619[i].e_destructible = getEnt(var_284427db, "targetname");
     level.var_fed21619[i].e_destructible.var_7117876c = level.var_fed21619[i].e_destructible.origin;
     level.var_fed21619[i].e_destructible.var_380861c6 = level.var_fed21619[i].e_destructible.angles;
     level.var_fed21619[i].e_destructible.v_off_pos = level.var_fed21619[i].e_destructible.var_7117876c - vectorscale((0, 0, 1), 256);
@@ -309,7 +309,7 @@ function function_f9d235ed() {
     level.var_fed21619[i].e_destructible setCanDamage(1);
     level.var_fed21619[i].e_destructible clientfield::set("web_fade_material", 0.5);
     level.var_fed21619[i].var_ae94a833 = &function_4680ee05;
-    level.var_fed21619[i].t_webbing_extra_damage = getent(var_7716d15a, "targetname");
+    level.var_fed21619[i].t_webbing_extra_damage = getEnt(var_7716d15a, "targetname");
     if(isDefined(level.var_fed21619[i].t_webbing_extra_damage)) {
       var_7872c6f9 = level.var_fed21619[i].t_webbing_extra_damage;
       var_7872c6f9.e_destructible = level.var_fed21619[i].e_destructible;
@@ -415,14 +415,14 @@ function function_e8e25ea9() {
 function function_9b238648(player) {
   var_77f9de0d = arraygetclosest(player.origin, level.var_fed21619);
   if(!player zm_utility::is_player_looking_at(var_77f9de0d.e_destructible.origin, 0.4, 0)) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(!isDefined(var_77f9de0d.b_occupied) || (!(isDefined(var_77f9de0d.b_occupied) && var_77f9de0d.b_occupied))) {
-    self sethintstring(&"ZM_ISLAND_TEAR_WEB");
+    self setHintString(&"ZM_ISLAND_TEAR_WEB");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -810,7 +810,7 @@ function function_5c8137e6(var_6a2f816c, b_on = 1) {
     if(!isDefined(self.var_3966775a)) {
       self.var_3966775a = util::spawn_model("tag_origin", self.origin);
       str_fx = "islandfx_" + var_6a2f816c;
-      self.var_3966775a linkto(self);
+      self.var_3966775a linkTo(self);
       playFXOnTag(level._effect[str_fx], self.var_3966775a, "tag_origin");
     }
   } else if(isDefined(self.var_3966775a)) {

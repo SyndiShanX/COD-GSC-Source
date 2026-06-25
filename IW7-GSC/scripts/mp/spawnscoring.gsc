@@ -144,7 +144,7 @@ findbuddypathnode(var_0, var_1, var_2) {
   if(isDefined(var_3) && var_3.size > 0) {
     var_5 = anglesToForward(var_0.angles);
     foreach(var_7 in var_3) {
-      var_8 = vectornormalize(var_7.origin - var_0.origin);
+      var_8 = vectorNormalize(var_7.origin - var_0.origin);
       var_9 = vectordot(var_5, var_8);
       if(var_9 <= var_2 && !positionwouldtelefrag(var_7.origin)) {
         var_4 = var_7;

@@ -35,11 +35,11 @@ function init_pack_a_punch() {
 
 function _setup_pap_blocker() {
   level thread _setup_simultaneous_pap_triggers();
-  var_45648617 = getent("pap_stairs_mesh", "targetname");
+  var_45648617 = getEnt("pap_stairs_mesh", "targetname");
   var_45648617 delete();
   level.pap_stairs = [];
   for(i = 0; i < 4; i++) {
-    stair = getent("pap_stairs" + (i + 1), "targetname");
+    stair = getEnt("pap_stairs" + (i + 1), "targetname");
     if(!isDefined(stair.script_vector)) {
       stair.script_vector = vectorscale((0, 0, 1), 72);
     }
@@ -56,7 +56,7 @@ function _setup_pap_blocker() {
     stair.state = "down";
     level.pap_stairs[i] = stair;
   }
-  level.pap_stairs_clip = getent("pap_stairs_clip", "targetname");
+  level.pap_stairs_clip = getEnt("pap_stairs_clip", "targetname");
   if(isDefined(level.pap_stairs_clip)) {
     level.pap_stairs_clip.zmove = 72;
   }
@@ -64,29 +64,29 @@ function _setup_pap_blocker() {
   for(i = 0; i < level.pap_playerclip.size; i++) {
     level.pap_playerclip[i].saved_origin = level.pap_playerclip[i].origin;
   }
-  level.pap_ramp = getent("pap_ramp", "targetname");
-  level.brush_pap_traversal = getent("brush_pap_traversal", "targetname");
+  level.pap_ramp = getEnt("pap_ramp", "targetname");
+  level.brush_pap_traversal = getEnt("brush_pap_traversal", "targetname");
   if(isDefined(level.brush_pap_traversal)) {
     level.brush_pap_traversal solid();
-    level.brush_pap_traversal disconnectpaths();
+    level.brush_pap_traversal disconnectPaths();
     a_nodes = getnodearray("node_pap_jump_bottom", "targetname");
     foreach(node in a_nodes) {
       linktraversal(node);
     }
   }
-  level.brush_pap_side_l = getent("brush_pap_side_l", "targetname");
+  level.brush_pap_side_l = getEnt("brush_pap_side_l", "targetname");
   if(isDefined(level.brush_pap_side_l)) {
     level.brush_pap_side_l _pap_brush_disconnect_paths();
   }
-  level.brush_pap_side_r = getent("brush_pap_side_r", "targetname");
+  level.brush_pap_side_r = getEnt("brush_pap_side_r", "targetname");
   if(isDefined(level.brush_pap_side_r)) {
     level.brush_pap_side_r _pap_brush_disconnect_paths();
   }
-  brush_pap_pathing_ramp_r = getent("brush_pap_pathing_ramp_r", "targetname");
+  brush_pap_pathing_ramp_r = getEnt("brush_pap_pathing_ramp_r", "targetname");
   if(isDefined(brush_pap_pathing_ramp_r)) {
     brush_pap_pathing_ramp_r delete();
   }
-  brush_pap_pathing_ramp_l = getent("brush_pap_pathing_ramp_l", "targetname");
+  brush_pap_pathing_ramp_l = getEnt("brush_pap_pathing_ramp_l", "targetname");
   if(isDefined(brush_pap_pathing_ramp_l)) {
     brush_pap_pathing_ramp_l delete();
   }
@@ -99,7 +99,7 @@ function _watch_for_fall() {
   self.base setCanDamage(1);
   self.base.health = 1;
   self.base waittill("damage");
-  mover = getent(self.base.target, "targetname");
+  mover = getEnt(self.base.target, "targetname");
   geyserfx = isDefined(self.base.script_string) && self.base.script_string == "geyser";
   self.base delete();
   self.base = undefined;
@@ -138,7 +138,7 @@ function _setup_simultaneous_pap_triggers() {
   level flag::wait_till("power_on");
   triggers = [];
   for(i = 0; i < 4; i++) {
-    triggers[i] = getent("pap_blocker_trigger" + (i + 1), "targetname");
+    triggers[i] = getEnt("pap_blocker_trigger" + (i + 1), "targetname");
   }
   _randomize_pressure_plates(triggers);
   array::thread_all(triggers, &_pap_pressure_plate_move);
@@ -146,7 +146,7 @@ function _setup_simultaneous_pap_triggers() {
   last_num_plates_active = -1;
   last_plate_state = -1;
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     num_plates_needed = players.size;
     if(getdvarint("") == 2) {
       num_plates_needed = 1;
@@ -206,7 +206,7 @@ function _update_stairs(triggers) {
 }
 
 function _pap_pressure_plate_move_enabled() {
-  numplayers = getplayers().size;
+  numplayers = getPlayers().size;
   if(numplayers >= self.requiredplayers) {
     return true;
   }
@@ -215,7 +215,7 @@ function _pap_pressure_plate_move_enabled() {
 
 function _pap_pressure_plate_move() {
   self endon("pap_active");
-  plate = getent(self.target, "targetname");
+  plate = getEnt(self.target, "targetname");
   self.plate = plate;
   plate.movetime = 2;
   plate.movedist = vectorscale((0, 0, 1), 10);
@@ -236,7 +236,7 @@ function _pap_pressure_plate_move() {
     plate _plate_move_up();
     plate waittill("state_set");
     while(self _pap_pressure_plate_move_enabled()) {
-      players = getplayers();
+      players = getPlayers();
       touching = 0;
       if(!self _pap_pressure_plate_move_enabled()) {
         break;
@@ -305,7 +305,7 @@ function _move_pap_mover_wait(state, onmovefunc, onstopfunc) {
     if(isDefined(onmovefunc)) {
       self thread[[onmovefunc]]();
     }
-    self moveto(goalorigin, movetime);
+    self moveTo(goalorigin, movetime);
     self waittill("movedone");
     if(isDefined(onstopfunc)) {
       self thread[[onstopfunc]]();
@@ -423,7 +423,7 @@ function _wait_for_all_stairs_down() {
       linktraversal(node);
     }
     level.brush_pap_traversal solid();
-    level.brush_pap_traversal disconnectpaths();
+    level.brush_pap_traversal disconnectPaths();
   }
   if(isDefined(level.brush_pap_side_l)) {
     level.brush_pap_side_l _pap_brush_disconnect_paths();
@@ -434,7 +434,7 @@ function _wait_for_all_stairs_down() {
 }
 
 function _pap_think() {
-  player_blocker = getent("pap_stairs_player_clip", "targetname");
+  player_blocker = getEnt("pap_stairs_player_clip", "targetname");
   level flag::set("pap_active");
   level thread _pap_clean_up_corpses();
   if(isDefined(level.pap_stairs_clip)) {
@@ -458,8 +458,8 @@ function _pap_think() {
 }
 
 function _pap_clean_up_corpses() {
-  corpse_trig = getent("pap_target_finder", "targetname");
-  stairs_trig = getent("pap_target_finder2", "targetname");
+  corpse_trig = getEnt("pap_target_finder", "targetname");
+  stairs_trig = getEnt("pap_target_finder2", "targetname");
   corpses = getcorpsearray();
   if(isDefined(corpses)) {
     for(i = 0; i < corpses.size; i++) {
@@ -484,9 +484,9 @@ function _pap_ramp() {
     level.pap_ramp rotateroll(45, 0.5);
     wait(1);
     level.pap_ramp rotateroll(45, 0.5);
-    level.pap_ramp moveto(struct::get("pap_ramp_push1", "targetname").origin, 1);
+    level.pap_ramp moveTo(struct::get("pap_ramp_push1", "targetname").origin, 1);
     level.pap_ramp waittill("movedone");
-    level.pap_ramp moveto(struct::get("pap_ramp_push2", "targetname").origin, 2);
+    level.pap_ramp moveTo(struct::get("pap_ramp_push2", "targetname").origin, 2);
     level.pap_ramp waittill("movedone");
     level.pap_ramp.origin = level.pap_ramp.original_origin;
     level.pap_ramp rotateroll(-90, 0.5);
@@ -494,10 +494,10 @@ function _pap_ramp() {
 }
 
 function playerclip_restore() {
-  volume = getent("pap_target_finder", "targetname");
+  volume = getEnt("pap_target_finder", "targetname");
   while(true) {
     touching = 0;
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(players[i] istouching(volume) || players[i] istouching(level.pap_player_flush_temp_trig)) {
         touching = 1;
@@ -508,7 +508,7 @@ function playerclip_restore() {
     }
     wait(0.05);
   }
-  player_clip = getent("pap_stairs_player_clip", "targetname");
+  player_clip = getEnt("pap_stairs_player_clip", "targetname");
   if(isDefined(player_clip)) {
     player_clip solid();
   }
@@ -558,9 +558,9 @@ function _find_ents_to_flush() {
   level.flushspeed = 400;
   level.ents_being_flushed = 0;
   level.flushscale = 1;
-  volume = getent("pap_target_finder", "targetname");
+  volume = getEnt("pap_target_finder", "targetname");
   level.pap_player_flush_temp_trig = spawn("trigger_radius", (-8, 560, 288), 0, 768, 256);
-  players = getplayers();
+  players = getPlayers();
   touching_players = [];
   for(i = 0; i < players.size; i++) {
     touching = players[i] istouching(volume) || players[i] istouching(level.pap_player_flush_temp_trig);
@@ -569,7 +569,7 @@ function _find_ents_to_flush() {
       players[i] thread _player_flushed_out(volume);
     }
   }
-  bottom_stairs_vol = getent("pap_target_finder2", "targetname");
+  bottom_stairs_vol = getEnt("pap_target_finder2", "targetname");
   zombies_to_flush = [];
   zombies = getaispeciesarray("axis", "all");
   for(i = 0; i < zombies.size; i++) {
@@ -626,10 +626,10 @@ function _player_flush(index) {
   self playrumblelooponentity("tank_rumble");
   self thread pap_flush_screen_shake(3);
   mover = spawn("script_origin", self.origin);
-  self playerlinkto(mover);
+  self playerlinkTo(mover);
   pc = level.pap_playerclip[index];
   pc.origin = self.origin;
-  pc linkto(self);
+  pc linkTo(self);
   level.ents_being_flushed++;
   self.flushed = 1;
   useaccel = 1;
@@ -658,7 +658,7 @@ function _player_flush(index) {
       decel = time;
       time = time + 0.5;
     }
-    mover moveto(movetarget, time, accel, decel);
+    mover moveTo(movetarget, time, accel, decel);
     waittime = max(time, 0);
     wait(waittime);
     nexttarget = nexttarget.next;
@@ -704,7 +704,7 @@ function _zombie_flush() {
   nexttarget = self _ent_getnextflushtarget();
   launchdir = nexttarget.origin - self.origin;
   launchdir = (0, launchdir[1], launchdir[2]);
-  launchdir = vectornormalize(launchdir);
+  launchdir = vectorNormalize(launchdir);
   self launchragdoll(launchdir * 50);
   util::wait_network_frame();
   self.no_gib = 1;
@@ -779,7 +779,7 @@ function _travel_path(speed, reversespin) {
     } else if(i == (self.path.size - 1)) {
       deceltime = 0.2;
     }
-    self moveto(self.path[i].origin, time, acceltime, deceltime);
+    self moveTo(self.path[i].origin, time, acceltime, deceltime);
     rotatespeed = speed * -4;
     if(reversespin) {
       rotatespeed = rotatespeed * -1;
@@ -800,7 +800,7 @@ function _travel_path_reverse(speed, reversespin) {
     } else if(i == 0) {
       deceltime = 0.5;
     }
-    self moveto(self.path[i].origin, time, acceltime, deceltime);
+    self moveTo(self.path[i].origin, time, acceltime, deceltime);
     rotatespeed = speed * 4;
     if(reversespin) {
       rotatespeed = rotatespeed * -1;
@@ -837,7 +837,7 @@ function stop_pap_fx() {
 
 function _pap_brush_disconnect_paths() {
   self solid();
-  self disconnectpaths();
+  self disconnectPaths();
   self notsolid();
 }
 

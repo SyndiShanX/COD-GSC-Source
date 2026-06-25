@@ -10,7 +10,7 @@ script_print_fx() {
   }
 
   if(isDefined(self.target)) {
-    var_0 = getent(self.target).origin;
+    var_0 = getEnt(self.target).origin;
   } else {
     var_0 = "undefined";
   }

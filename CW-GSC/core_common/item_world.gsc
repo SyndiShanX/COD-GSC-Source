@@ -99,11 +99,11 @@ function private function_f3b6e182(player) {
   assert(isPlayer(player));
   usetrigger = spawn("trigger_radius_use", (0, 0, -10000), 0, 128, 72);
   usetrigger.targetname = "item_world";
-  usetrigger triggerignoreteam();
+  usetrigger triggerIgnoreTeam();
   usetrigger setinvisibletoall();
   usetrigger setvisibletoplayer(self);
   usetrigger setteamfortrigger(#"none");
-  usetrigger setcursorhint("HINT_NOICON");
+  usetrigger setCursorHint("HINT_NOICON");
   usetrigger triggerenable(0);
   usetrigger function_89fca53b(0);
   usetrigger function_49462027(1, 1 | 16 | 2097152 | 65536 | 1048576);
@@ -121,19 +121,19 @@ function private function_b516210b(var_889058cc, origin, activator) {
 
   if(isDefined(level.var_9cddbf4e[var_889058cc])) {
     mapping = level.var_9cddbf4e[var_889058cc];
-    open_sound = playsoundatposition(mapping.open_sound, origin + (0, 0, 50));
+    open_sound = playSoundAtPosition(mapping.open_sound, origin + (0, 0, 50));
 
     if(isDefined(open_sound)) {
       open_sound hide();
     }
 
-    var_b9492c6 = playsoundatposition(mapping.var_b9492c6, origin + (0, 0, 50));
+    var_b9492c6 = playSoundAtPosition(mapping.var_b9492c6, origin + (0, 0, 50));
 
     if(isDefined(var_b9492c6)) {
       var_b9492c6 hide();
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(var_cde95668 && !player hasperk(#"specialty_loudenemies")) {
         if(isDefined(var_b9492c6)) {
           var_b9492c6 showtoplayer(player);
@@ -153,7 +153,7 @@ function private function_e1965ae1() {
   level endon(#"game_ended");
   function_1b11e73c();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isPlayer(player)) {
       player weaponobjects::function_ac7c2bf9();
     }
@@ -169,14 +169,14 @@ function private function_e1965ae1() {
 
   if(isDefined(getgametypesetting(#"hash_7d8c969e384dd1c9")) ? getgametypesetting(#"hash_7d8c969e384dd1c9") : 0) {
     if(isDefined(level.var_5c14d2e6)) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread[[level.var_5c14d2e6]]();
       }
     }
   }
 
   if(!item_inventory::function_7d5553ac()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread item_inventory::function_44f1ab43();
     }
   }
@@ -415,7 +415,7 @@ function private function_9aefb438(params) {
       networkid = self.var_bf3cabc9 getentitynumber();
     }
 
-    members = getplayers(self.team);
+    members = getPlayers(self.team);
 
     foreach(member in members) {
       member function_b00db06(msgtype, networkid, self getentitynumber());
@@ -451,7 +451,7 @@ function private function_df1098a() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     for(index = 0; index < players.size; index++) {
       player = players[index];
@@ -475,7 +475,7 @@ function private function_185f50c5() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     for(index = 0; index < players.size; index++) {
       player = players[index];
@@ -550,7 +550,7 @@ function private function_ad7ad6ce(trigger_struct) {
   }
 
   if(var_91d3170d == 1 || var_91d3170d == 0 && item_world_util::function_83c20f83(usetrigger.itemstruct)) {
-    usetrigger sethintstring(#"");
+    usetrigger setHintString(#"");
     stashes = level.var_93d08989[usetrigger.itemstruct.targetname];
 
     if(!isDefined(stashes) && isDefined(usetrigger.itemstruct.targetnamehash)) {
@@ -577,7 +577,7 @@ function private function_ad7ad6ce(trigger_struct) {
 
     function_a54d07e6(usetrigger.itemstruct, activator);
   } else if(var_91d3170d == 2) {
-    usetrigger sethintstring(#"");
+    usetrigger setHintString(#"");
   } else {
     item = usetrigger.itemstruct;
 
@@ -841,7 +841,7 @@ function function_a54d07e6(item, activator) {
         stash callback::callback(#"on_stash_open", params);
 
         if(is_true(stash.var_a76e4941)) {
-          stash animscripted("death_stash_open", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_used_anim", "normal", "root", 1, 0);
+          stash animScripted("death_stash_open", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_used_anim", "normal", "root", 1, 0);
         } else if(is_true(stash.var_a64ed253)) {}
 
         stash.var_bad13452 = 1;
@@ -866,9 +866,9 @@ function function_a54d07e6(item, activator) {
         }
 
         if(is_true(stash.var_a76e4941)) {
-          stash animscripted("death_stash_empty", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_empty_anim", "normal", "root", 1, 0);
+          stash animScripted("death_stash_empty", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_empty_anim", "normal", "root", 1, 0);
         } else if(is_true(stash.var_a64ed253)) {
-          stash animscripted("supply_drop_empty", stash.origin, stash.angles, "p9_fxanim_mp_care_package_open_anim", "normal", "root", 1, 0);
+          stash animScripted("supply_drop_empty", stash.origin, stash.angles, "p9_fxanim_mp_care_package_open_anim", "normal", "root", 1, 0);
           stash thread function_ee32337(stash);
         }
 
@@ -888,7 +888,7 @@ function loop_sound(alias, interval) {
   }
 
   while(true) {
-    playsoundatposition(alias, self.origin);
+    playSoundAtPosition(alias, self.origin);
 
     if(is_true(var_75b1f55f)) {
       playFXOnTag(#"hash_73dda66347b73ddd", self, "tag_fx_01");
@@ -915,7 +915,7 @@ function function_ee32337(stash) {
   util::wait_network_frame(1);
   wait 4;
   playFX(#"hash_131031222bb89ea", stash.origin);
-  playsoundatposition(#"wpn_frag_explode", stash.origin);
+  playSoundAtPosition(#"wpn_frag_explode", stash.origin);
   stash radiusdamage(stash.origin, 128, 50, 10, undefined, "MOD_EXPLOSIVE", getweapon(#"supplydrop"));
   stash delete();
 }
@@ -1059,7 +1059,7 @@ function private function_b30c15ae(origin, angles, forward, var_f4b807cb, var_51
         continue;
       }
 
-      var_1777205e = vectordot(var_75f6d739, vectornormalize((toitem[0], toitem[1], 0)));
+      var_1777205e = vectordot(var_75f6d739, vectorNormalize((toitem[0], toitem[1], 0)));
 
       if(var_1777205e >= 0.5 && distancesquared(itemdef.origin, self.var_d7abc784) <= sqr(12)) {
         if(item_world_util::function_2eb2c17c(origin, itemdef)) {
@@ -1091,7 +1091,7 @@ function private function_f59b16bb(origin, angles) {
     return;
   }
 
-  forward = vectornormalize(anglesToForward(angles));
+  forward = vectorNormalize(anglesToForward(angles));
   maxdist = util::function_16fb0a3b();
   var_f4b807cb = function_2e3efdda(origin, forward, 128, maxdist, 0);
   function_b0443f69(var_f4b807cb);
@@ -1114,7 +1114,7 @@ function private function_7c84312d(origin, angles) {
     return;
   }
 
-  forward = vectornormalize(anglesToForward(angles));
+  forward = vectorNormalize(anglesToForward(angles));
   var_512ddf16 = self clientfield::get_player_uimodel("hudItems.multiItemPickup.status") == 2;
   maxdist = util::function_16fb0a3b();
 
@@ -1162,8 +1162,8 @@ function private function_7c84312d(origin, angles) {
     }
 
     if(stashitem) {
-      usetrigger setcursorhint("HINT_NOICON");
-      usetrigger sethintstring(#"");
+      usetrigger setCursorHint("HINT_NOICON");
+      usetrigger setHintString(#"");
       usetrigger function_89fca53b(1);
       usetrigger function_49462027(0);
       stash = item_world_util::function_31f5aa51(var_9b882d22);
@@ -1197,7 +1197,7 @@ function private function_7c84312d(origin, angles) {
 
       if(isDefined(itementry.weapon) && itementry.weapon != level.weaponnone) {
         if(itementry.itemtype != #"ammo") {
-          usetrigger setcursorhint("HINT_WEAPON_3D", item_inventory_util::function_2b83d3ff(var_9b882d22));
+          usetrigger setCursorHint("HINT_WEAPON_3D", item_inventory_util::function_2b83d3ff(var_9b882d22));
           var_caafaa25 = #"";
 
           if(isDefined(itementry.hintstring)) {
@@ -1208,16 +1208,16 @@ function private function_7c84312d(origin, angles) {
             var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"weapon/pickupnewweapon";
           }
 
-          usetrigger sethintstring(var_caafaa25);
+          usetrigger setHintString(var_caafaa25);
         } else {
-          usetrigger setcursorhint("HINT_3D");
+          usetrigger setCursorHint("HINT_3D");
           var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
-          usetrigger sethintstring(var_caafaa25);
+          usetrigger setHintString(var_caafaa25);
         }
       } else {
-        usetrigger setcursorhint("HINT_3D");
+        usetrigger setCursorHint("HINT_3D");
         var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
-        usetrigger sethintstring(var_caafaa25);
+        usetrigger setHintString(var_caafaa25);
       }
     }
 

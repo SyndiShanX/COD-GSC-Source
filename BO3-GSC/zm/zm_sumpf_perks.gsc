@@ -15,17 +15,17 @@ function randomize_vending_machines() {
   vending_machines = [];
   vending_machines = function_1b58b796("zombie_vending");
   start_locations = [];
-  start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
-  start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
-  start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
-  start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+  start_locations[0] = getEnt("random_vending_start_location_0", "script_noteworthy");
+  start_locations[1] = getEnt("random_vending_start_location_1", "script_noteworthy");
+  start_locations[2] = getEnt("random_vending_start_location_2", "script_noteworthy");
+  start_locations[3] = getEnt("random_vending_start_location_3", "script_noteworthy");
   level.start_locations = [];
   level.start_locations[level.start_locations.size] = start_locations[0].origin;
   level.start_locations[level.start_locations.size] = start_locations[1].origin;
   level.start_locations[level.start_locations.size] = start_locations[2].origin;
   level.start_locations[level.start_locations.size] = start_locations[3].origin;
   start_locations = array::randomize(start_locations);
-  start_locations[4] = getent("random_vending_start_location_4", "script_noteworthy");
+  start_locations[4] = getEnt("random_vending_start_location_4", "script_noteworthy");
   level.start_locations[level.start_locations.size] = start_locations[4].origin;
   for(i = 0; i < vending_machines.size; i++) {
     if(vending_machines[i].script_noteworthy == "specialty_quickrevive") {
@@ -96,7 +96,7 @@ function function_17db950e() {
 function function_25413096() {
   perksacola = self.script_sound;
   if(!self.var_6ecf729b) {
-    playsoundatposition("evt_electrical_surge", self.origin);
+    playSoundAtPosition("evt_electrical_surge", self.origin);
     if(!isDefined(self.jingle_is_playing)) {
       self.jingle_is_playing = 0;
     }
@@ -140,12 +140,12 @@ function get_vending_machine(start_location) {
     return;
   }
   if(isDefined(machine_clip)) {
-    machine_clip linkto(machine);
+    machine_clip linkTo(machine);
   }
   start_location.origin = machine.origin;
   start_location.angles = machine.angles;
-  self enablelinkto();
-  self linkto(start_location);
+  self enablelinkTo();
+  self linkTo(start_location);
   return machine;
 }
 
@@ -180,7 +180,7 @@ function activate_vending_machine(machine, origin, entity) {
     }
   }
   if(isDefined(var_da5a8677)) {
-    e_trigger = getent(var_da5a8677, "script_label");
+    e_trigger = getEnt(var_da5a8677, "script_label");
     e_trigger triggerenable(1);
   }
   level notify("revive_on");
@@ -188,7 +188,7 @@ function activate_vending_machine(machine, origin, entity) {
 }
 
 function play_vending_vo(machine, origin) {
-  players = getplayers();
+  players = getPlayers();
   players = array::get_all_closest(origin, players, undefined, undefined, 512);
   player = undefined;
   for(i = 0; i < players.size; i++) {
@@ -246,11 +246,11 @@ function vending_randomization_effect(index) {
           }
         }
         start_locations = [];
-        start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
-        start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
-        start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
-        start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
-        start_locations[4] = getent("random_vending_start_location_4", "script_noteworthy");
+        start_locations[0] = getEnt("random_vending_start_location_0", "script_noteworthy");
+        start_locations[1] = getEnt("random_vending_start_location_1", "script_noteworthy");
+        start_locations[2] = getEnt("random_vending_start_location_2", "script_noteworthy");
+        start_locations[3] = getEnt("random_vending_start_location_3", "script_noteworthy");
+        start_locations[4] = getEnt("random_vending_start_location_4", "script_noteworthy");
         target_index = undefined;
         switch_index = undefined;
         for(x = 0; x < start_locations.size; x++) {
@@ -276,25 +276,25 @@ function vending_randomization_effect(index) {
       level.first_time_opening_perk_hut = 0;
     }
   }
-  playsoundatposition("zmb_rando_start", machines[j].origin);
+  playSoundAtPosition("zmb_rando_start", machines[j].origin);
   origin = machines[j].origin;
   if(level.vending_model_info.size > 1) {
     playFXOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
-    playsoundatposition("zmb_rando_perk", machines[j].origin);
+    playSoundAtPosition("zmb_rando_perk", machines[j].origin);
   } else {
     playFXOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
-    playsoundatposition("zmb_rando_perk", machines[j].origin);
+    playSoundAtPosition("zmb_rando_perk", machines[j].origin);
   }
   true_model = machines[j].model;
   machines[j] setModel(true_model);
   machines[j] show();
   floatheight = 40;
   level thread zm_utility::play_sound_2d("zmb_perk_lottery");
-  machines[j] moveto(origin + (0, 0, floatheight), 5, 3, 0.5);
+  machines[j] moveTo(origin + (0, 0, floatheight), 5, 3, 0.5);
   tag_fx = spawn("script_model", machines[j].origin);
   tag_fx setModel("tag_origin");
   tag_fx.angles = machines[j].angles;
-  tag_fx linkto(machines[j]);
+  tag_fx linkTo(machines[j]);
   playFXOnTag(level._effect["zombie_perk_smoke_anim"], tag_fx, "tag_origin");
   modelindex = 0;
   machines[j] vibrate(machines[j].angles, 2, 1, 4);
@@ -317,10 +317,10 @@ function vending_randomization_effect(index) {
   }
   modelname = true_model;
   machines[j] setModel(modelname);
-  machines[j] moveto(origin, 0.3, 0.3, 0);
+  machines[j] moveTo(origin, 0.3, 0.3, 0);
   wait(0.2);
   playFXOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
-  playsoundatposition("zmb_drop_perk_machine", machines[j].origin);
+  playSoundAtPosition("zmb_drop_perk_machine", machines[j].origin);
   wait(0.05);
   playFXOnTag(level._effect["zombie_perk_flash"], machines[j], "tag_origin");
   activate_vending_machine(true_model, origin, machines[j]);

@@ -209,7 +209,7 @@ function_af59b4aa(var_9345432e, s_waitresult) {
 }
 
 function_2ce99526(e_enemy) {
-  if(e_enemy isonground() && !e_enemy isplayinganimscripted()) {
+  if(e_enemy isonground() && !e_enemy isplayinganimScripted()) {
     var_c74d5934 = e_enemy.origin;
   } else {
     a_trace = groundtrace(e_enemy.origin, e_enemy.origin - (0, 0, 800), 0, undefined);
@@ -901,7 +901,7 @@ function_f724358c(e_attacker) {
 function_ad3de341(e_attacker) {
   self endoncallback(&function_e313ef46, #"hash_2250ef170a9d4a6", #"death", #"scriptedanim", #"new_scripted_anim");
 
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     self notify(#"hash_2250ef170a9d4a6");
   }
 
@@ -1335,7 +1335,7 @@ function_886f2b8d(...) {
 function_e8ab7e4d(v_trigger_origin, var_446e486f, n_move_time) {
   var_2d9e33ca = util::spawn_model(#"tag_origin", var_446e486f);
   var_2d9e33ca clientfield::set("" + #"hash_69b312bcaae6308b", 1);
-  var_2d9e33ca moveto(v_trigger_origin, n_move_time);
+  var_2d9e33ca moveTo(v_trigger_origin, n_move_time);
   wait n_move_time;
   var_2d9e33ca delete();
 }
@@ -1353,7 +1353,7 @@ function_52569c7e() {
     return;
   }
 
-  playsoundatposition(#"zmb_death_gibss", self.origin);
+  playSoundAtPosition(#"zmb_death_gibss", self.origin);
   self zombie_utility::zombie_head_gib();
   gibserverutils::gibrightleg(self);
   gibserverutils::gibleftleg(self);

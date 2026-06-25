@@ -38,7 +38,7 @@ compass_triggers_think() {
 }
 
 level_think() {
-  eDerrick_thing = getent("derrick_thing", "targetname");
+  eDerrick_thing = getEnt("derrick_thing", "targetname");
   eDerrick_thing.origin = eDerrick_thing.origin + (0, 0, -2816);
   assert(isDefined(eDerrick_thing));
   time = 2;

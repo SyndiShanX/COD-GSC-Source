@@ -465,7 +465,7 @@ frontal_cone_knock_player_back() {
     self_to_player = vectorNormalize(player.origin - self.origin);
 
     if(VectorDot(self_to_player, self_forward) > FRONT_CONE_LIMIT && distanceSquared(player.origin, self.origin) <= KNOCK_BACK_ACTIVATION_DIST_SQ) {
-      player SetVelocity(VectorNormalize(player.origin - self.origin) * KNOCK_BACK_FORCE_MAGNITUDE);
+      player SetVelocity(vectorNormalize(player.origin - self.origin) * KNOCK_BACK_FORCE_MAGNITUDE);
       player DoDamage((player.health / 10), self.origin);
     }
   }

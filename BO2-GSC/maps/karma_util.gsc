@@ -36,7 +36,7 @@ setup_objectives() {
 
 init_hero_startstruct(str_hero_name, str_struct_targetname) {
   ai_hero = init_hero(str_hero_name);
-  s_start_pos = getstruct(str_struct_targetname, "targetname");
+  s_start_pos = getStruct(str_struct_targetname, "targetname");
   assert(isDefined(s_start_pos), "Bad Hero setup struct: " + str_struct_targetname);
 
   if(isDefined(s_start_pos.angles)) {
@@ -119,21 +119,21 @@ delete_structs(str_value, str_key) {
 }
 
 setup_elevator(str_brushmodelname, str_modelname, str_cleanup) {
-  bm_lift = getent(str_brushmodelname, "targetname");
+  bm_lift = getEnt(str_brushmodelname, "targetname");
   a_bm_door_clips = getEntArray(bm_lift.target, "targetname");
 
   foreach(bm_door_clip in a_bm_door_clips) {
-    bm_door_clip linkto(bm_lift);
+    bm_door_clip linkTo(bm_lift);
   }
 
-  m_lift = getent(str_modelname, "targetname");
+  m_lift = getEnt(str_modelname, "targetname");
   m_lift thread play_fx("elevator_light", undefined, undefined, "elevator_flashlight_off", 1, "tag_flashlight");
   m_lift thread play_fx("elevator_lights", m_lift gettagorigin("tag_origin") + (27.5, 37.5, 141), (0, 0, 0), "elevator_flashlight_off", 1);
   m_lift thread play_fx("elevator_lights", m_lift gettagorigin("tag_origin") + (-27.5, 37.5, 141), (0, 0, 0), "elevator_flashlight_off", 1);
   m_lift thread play_fx("elevator_lights", m_lift gettagorigin("tag_origin") + (27.5, -37.5, 141), (0, 0, 0), "elevator_flashlight_off", 1);
   m_lift thread play_fx("elevator_lights", m_lift gettagorigin("tag_origin") + (-27.5, -37.5, 141), (0, 0, 0), "elevator_flashlight_off", 1);
   bm_lift.origin = m_lift.origin;
-  m_lift linkto(bm_lift);
+  m_lift linkTo(bm_lift);
   return bm_lift;
 }
 
@@ -164,7 +164,7 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
         n_rotate = n_rotate * -1;
       }
 
-      m_door rotateyaw(n_rotate, n_time, n_accel, n_decel);
+      m_door rotateYaw(n_rotate, n_time, n_accel, n_decel);
       continue;
     }
 
@@ -175,7 +175,7 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
         v_move = v_move * -1;
       }
 
-      m_door moveto(m_door.origin + v_move, n_time, n_accel, n_decel);
+      m_door moveTo(m_door.origin + v_move, n_time, n_accel, n_decel);
     }
   }
 
@@ -183,7 +183,7 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
 
   if(!b_open) {
     foreach(m_door in a_doors) {
-      m_door linkto(self);
+      m_door linkTo(self);
     }
   }
 
@@ -194,7 +194,7 @@ elevator_move_doors(b_open, n_time, n_accel, n_decel, b_connect_paths) {
         continue;
       }
 
-      m_door disconnectpaths();
+      m_door disconnectPaths();
     }
   }
 }
@@ -268,14 +268,14 @@ run_to_jumper_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_me
 }
 
 spawn_ai_battle(str_friendly_sp, str_enemy_sp, friendly_health, enemy_health, friendly_grenades, enemy_grenades, friendly_accuracy, enemy_accuracy) {
-  sp_friendly = getent(str_friendly_sp, "targetname");
+  sp_friendly = getEnt(str_friendly_sp, "targetname");
   ai_friendly = simple_spawn_single(sp_friendly, ::spawn_fn_ai_run_to_holding_node);
 
   if(isDefined(friendly_health)) {
     ai_friendly.health = friendly_health;
   }
 
-  sp_enemy = getent(str_enemy_sp, "targetname");
+  sp_enemy = getEnt(str_enemy_sp, "targetname");
   ai_enemy = simple_spawn_single(sp_enemy, ::spawn_fn_ai_run_to_holding_node);
 
   if(isDefined(enemy_health)) {
@@ -411,7 +411,7 @@ helicopter_fly_down_attack_path(teleport_to_start_node, use_start_node_angles, i
   }
 
   speed = 30;
-  s_node = getstruct(str_start_struct, "targetname");
+  s_node = getStruct(str_start_struct, "targetname");
 
   if(teleport_to_start_node) {
     self.origin = s_node.origin;
@@ -426,7 +426,7 @@ helicopter_fly_down_attack_path(teleport_to_start_node, use_start_node_angles, i
 
   while(true) {
     s_prev_node = s_node;
-    s_node = getstruct(s_prev_node.target, "targetname");
+    s_node = getStruct(s_prev_node.target, "targetname");
 
     if(isDefined(s_node.speed)) {
       speed = s_node.speed;
@@ -510,7 +510,7 @@ camera_think() {
   v_camera_eyes = self getEye();
   level.e_extra_cam.origin = v_camera_eyes;
   level.e_extra_cam.angles = self.angles;
-  level.e_extra_cam linkto(self);
+  level.e_extra_cam linkTo(self);
   self hide();
 }
 
@@ -569,9 +569,9 @@ special_vision_kill_think(e_player, str_notify) {
 }
 
 retrieve_bot_challenge(str_notify) {
-  m_spiderbot_temp = getent("destroyed_spider_bot", "targetname");
+  m_spiderbot_temp = getEnt("destroyed_spider_bot", "targetname");
   trigger_wait("destroyed_spider_bot_trigger");
-  e_trigger = getent("destroyed_spider_bot_trigger", "targetname");
+  e_trigger = getEnt("destroyed_spider_bot_trigger", "targetname");
   e_trigger delete();
   m_spiderbot_temp delete();
   self notify(str_notify);
@@ -770,7 +770,7 @@ follow_path(nd_path, b_teleport) {
         nd_path = getvehiclenode(nd_path.target, "targetname");
       }
 
-      e_trig = getent(nd_path.targetname, "target");
+      e_trig = getEnt(nd_path.targetname, "target");
 
       if(isDefined(e_trig)) {
         nd_path thread follow_path_node_trigger_wait(e_trig);
@@ -1003,7 +1003,7 @@ spawn_func_helicopter() {
 can_see_position(v_pos, req_dot) {
   v_forward = anglesToForward(level.player.angles);
   v_dir = v_pos - level.player.origin;
-  v_dir = vectornormalize(v_dir);
+  v_dir = vectorNormalize(v_dir);
   dp = vectordot(v_forward, v_dir);
 
   if(dp > req_dot) {
@@ -1022,10 +1022,10 @@ set_level_goal(level_goal, str_key) {
   e_goal = undefined;
 
   if(isstring(level_goal)) {
-    e_goal = getent(level_goal, str_key);
+    e_goal = getEnt(level_goal, str_key);
 
     if(!isDefined(e_goal)) {
-      e_goal = getstruct(level_goal, str_key);
+      e_goal = getStruct(level_goal, str_key);
     }
   } else
     e_goal = level_goal;
@@ -1067,7 +1067,7 @@ dont_auto_delete_scene(str_scene) {
 }
 
 add_effect_to_ent_when_stops_falling(delay, str_ent_targetname, effect, min_wait) {
-  e_ai = getent(str_ent_targetname, "targetname");
+  e_ai = getEnt(str_ent_targetname, "targetname");
   e_ai endon("death");
 
   if(isDefined(delay) && delay > 0) {
@@ -1187,7 +1187,7 @@ wipe_volume(str_volume) {
   a_other_ents = [];
   a_other_ents = arraycombine(a_other_ents, getEntArray("script_brushmodel", "classname"), 0, 0);
   a_other_ents = arraycombine(a_other_ents, get_triggers(), 0, 0);
-  e_cleanup_volume = getent(str_volume, "targetname");
+  e_cleanup_volume = getEnt(str_volume, "targetname");
   n_count = 0;
 
   foreach(ent in a_touching_ents) {
@@ -1224,13 +1224,13 @@ wipe_volume(str_volume) {
 }
 
 defalco_marker_think() {
-  s_start_position = getstruct("defalco_marker_start", "targetname");
+  s_start_position = getStruct("defalco_marker_start", "targetname");
 
   if(level.skipto_point == "Sundeck") {
-    s_start_position = getstruct("defalco_marker_start2", "script_noteworthy");
+    s_start_position = getStruct("defalco_marker_start2", "script_noteworthy");
   }
 
-  s_target_position = getstruct(s_start_position.target, "targetname");
+  s_target_position = getStruct(s_start_position.target, "targetname");
   level.fake_defalco = spawn_model("tag_origin", s_start_position.origin);
   level.fake_defalco.script_convert = 0;
   s_start_position = undefined;
@@ -1240,13 +1240,13 @@ defalco_marker_think() {
     n_speed_scale = distance2dsquared(level.player.origin, level.fake_defalco.origin) / (4096 * 4096);
     n_speed_scale = min(max(n_speed_scale, 0), 1.0);
     n_speed_current = 288 - n_speed_scale * 224;
-    v_vec_to_target = vectornormalize(s_target_position.origin - level.fake_defalco.origin) * (n_speed_current / 20);
+    v_vec_to_target = vectorNormalize(s_target_position.origin - level.fake_defalco.origin) * (n_speed_current / 20);
     v_target_position = level.fake_defalco.origin + v_vec_to_target;
-    level.fake_defalco moveto(v_target_position, 0.05, 0, 0);
+    level.fake_defalco moveTo(v_target_position, 0.05, 0, 0);
 
     if(distancesquared(level.fake_defalco.origin, s_target_position.origin) <= 64) {
       if(isDefined(s_target_position.target)) {
-        s_target_position = getstruct(s_target_position.target, "targetname");
+        s_target_position = getStruct(s_target_position.target, "targetname");
       } else {
         s_target_position = undefined;
       }

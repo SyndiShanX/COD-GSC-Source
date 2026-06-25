@@ -85,7 +85,7 @@ _process_structs(a_structs) {
       }
 
       a_spawners = strtok(struct.spawner_id, ", ");
-      struct.e_spawner = getent(random(a_spawners), "targetname");
+      struct.e_spawner = getEnt(random(a_spawners), "targetname");
       struct.spawner_id = undefined;
       a_wounded_structs[a_wounded_structs.size] = struct;
     }
@@ -203,7 +203,7 @@ _wounded_auto_delete_thread() {
         e_wounded = level.a_wounded[i];
 
         if(isDefined(e_wounded)) {
-          v_to_wounded = vectornormalize(e_wounded.origin - v_eye);
+          v_to_wounded = vectorNormalize(e_wounded.origin - v_eye);
           n_dot = vectordot(v_to_wounded, v_player_forward);
           n_seconds_alive = (n_now - e_wounded.birthtime) / 1000;
 

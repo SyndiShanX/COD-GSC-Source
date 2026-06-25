@@ -225,9 +225,9 @@ function main() {
   level thread no_mans_land_power();
   level thread cliff_fall_death();
   level thread setup_fields();
-  level.tunnel_6_destroyed = getent("tunnel_6_destroyed", "targetname");
+  level.tunnel_6_destroyed = getEnt("tunnel_6_destroyed", "targetname");
   level.tunnel_6_destroyed hide();
-  level.tunnel_11_destroyed = getent("tunnel_11_destroyed", "targetname");
+  level.tunnel_11_destroyed = getEnt("tunnel_11_destroyed", "targetname");
   level.tunnel_11_destroyed hide();
   level.perk_lost_func = &moon_perk_lost;
   level._black_hole_bomb_poi_override = &moon_black_hole_bomb_poi;
@@ -451,9 +451,9 @@ function pack_gate_poi_init() {
 }
 
 function pack_gate_poi_activate(time) {
-  pack_enclosure = getent("pack_enclosure", "targetname");
+  pack_enclosure = getEnt("pack_enclosure", "targetname");
   pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
-  players = getplayers();
+  players = getPlayers();
   num_players_inside = 0;
   for(i = 0; i < players.size; i++) {
     if(players[i] istouching(pack_enclosure)) {
@@ -556,8 +556,8 @@ function watch_for_exit(poi_array) {
 }
 
 function players_in_zombieland() {
-  pack_enclosure = getent("pack_enclosure", "targetname");
-  players = getplayers();
+  pack_enclosure = getEnt("pack_enclosure", "targetname");
+  players = getPlayers();
   num_players_inside = 0;
   for(i = 0; i < players.size; i++) {
     if(players[i] istouching(pack_enclosure)) {
@@ -582,7 +582,7 @@ function pack_gate_activate() {
   self notsolid();
   if(isDefined(self.script_vector)) {
     self playSound("amb_teleporter_gate_start");
-    self moveto(self.startpos + self.script_vector, time);
+    self moveTo(self.startpos + self.script_vector, time);
     self thread pack_gate_closed();
     level flag::wait_till("packapunch_hacked");
     self notsolid();
@@ -590,7 +590,7 @@ function pack_gate_activate() {
       self connectpaths();
     }
     self playSound("amb_teleporter_gate_start");
-    self moveto(self.startpos, time);
+    self moveTo(self.startpos, time);
     self thread zm_blockers::door_solid_thread();
   }
 }
@@ -599,7 +599,7 @@ function pack_gate_closed() {
   self waittill("movedone");
   self.door_moving = undefined;
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     player_touching = 0;
     for(i = 0; i < players.size; i++) {
       if(players[i] istouching(self)) {
@@ -609,7 +609,7 @@ function pack_gate_closed() {
     }
     if(!player_touching) {
       self solid();
-      self disconnectpaths();
+      self disconnectPaths();
       return;
     }
     wait(1);
@@ -620,7 +620,7 @@ function moon_nml_bhb_present() {
   self endon("death");
   nml_bhb = undefined;
   pack_zombieland_poi = getEntArray("zombieland_poi", "targetname");
-  pack_enclosure = getent("pack_enclosure", "targetname");
+  pack_enclosure = getEnt("pack_enclosure", "targetname");
   while(!level flag::get("packapunch_hacked")) {
     zombie_pois = getEntArray("zombie_poi", "script_noteworthy");
     for(i = 0; i < zombie_pois.size; i++) {
@@ -656,7 +656,7 @@ function moon_zmb_and_bhb_touching_trig(ent_bhb) {
   if(!isDefined(ent_bhb)) {
     return false;
   }
-  pack_trig = getent("pack_enclosure", "targetname");
+  pack_trig = getEnt("pack_enclosure", "targetname");
   if(self istouching(pack_trig) && isDefined(ent_bhb) && ent_bhb istouching(pack_trig)) {
     return true;
   }
@@ -748,7 +748,7 @@ function moon_round_think_func(restart = 0) {
       [[level.initial_round_wait_func]]();
     }
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
-      players = getplayers();
+      players = getPlayers();
       foreach(player in players) {
         if(!(isDefined(player.hostmigrationcontrolsfrozen) && player.hostmigrationcontrolsfrozen)) {
           player freezecontrols(0);
@@ -783,7 +783,7 @@ function moon_round_think_func(restart = 0) {
       }
     }
     zm::round_one_up();
-    players = getplayers();
+    players = getPlayers();
     array::thread_all(players, &zm_blockers::rebuild_barrier_reward_reset);
     if(!(isDefined(level.headshots_only) && level.headshots_only) && (!(isDefined(restart) && restart))) {
       if(!level flag::get("teleporter_used") || level.first_round == 1) {
@@ -804,7 +804,7 @@ function moon_round_think_func(restart = 0) {
     level notify("start_of_round");
     recordzombieroundstart();
     bb::logroundevent("start_of_round");
-    players = getplayers();
+    players = getPlayers();
     for(index = 0; index < players.size; index++) {
       players[index] zm::recordroundstartstats();
     }
@@ -826,7 +826,7 @@ function moon_round_think_func(restart = 0) {
     level flag::set("between_rounds");
     bb::logroundevent("end_of_round");
     uploadstats();
-    players = getplayers();
+    players = getPlayers();
     if(!level flag::get("teleporter_used")) {
       if(isDefined(level.on_the_moon) && level.on_the_moon) {
         level thread zm_audio::sndmusicsystem_playstate("round_end");
@@ -846,7 +846,7 @@ function moon_round_think_func(restart = 0) {
         zm::set_round_number(level.nml_last_round);
       }
     }
-    players = getplayers();
+    players = getPlayers();
     array::thread_all(players, &zm_pers_upgrades_system::round_end);
     if(((int(level.round_number / 5)) * 5) == level.round_number) {
       level clientfield::set("round_complete_time", int(((level.time - level.n_gameplay_start_time) + 500) / 1000));
@@ -869,7 +869,7 @@ function moon_round_think_func(restart = 0) {
       level.zombie_vars["zombie_spawn_delay"] = 0.08;
     }
     matchutctime = getutc();
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(level.curr_gametype_affects_rank && zm::get_round_number() > (3 + level.start_round)) {
         player zm_stats::add_client_stat("weighted_rounds_played", zm::get_round_number());
@@ -1006,7 +1006,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     return charindexarray[2];
   }
@@ -1128,9 +1128,9 @@ function init_sounds() {
 }
 
 function electric_switch() {
-  var_aa84840c = getent("use_elec_switch", "targetname");
-  var_aa84840c sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  var_aa84840c setcursorhint("HINT_NOICON");
+  var_aa84840c = getEnt("use_elec_switch", "targetname");
+  var_aa84840c setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  var_aa84840c setCursorHint("HINT_NOICON");
   level thread wait_for_power();
   var_aa84840c waittill("trigger", user);
   user thread delayed_poweron_vox();
@@ -1148,7 +1148,7 @@ function delayed_poweron_vox() {
 function wait_for_power() {
   var_cf413835 = struct::get("power_switch", "targetname");
   level flag::wait_till("power_on");
-  playsoundatposition("zmb_switch_flip", var_cf413835.origin);
+  playSoundAtPosition("zmb_switch_flip", var_cf413835.origin);
   level notify("electric_door");
   level scene::play("power_switch", "targetname");
   playFX(level._effect["switch_sparks"], struct::get("elec_switch_fx", "targetname").origin);
@@ -1158,7 +1158,7 @@ function moon_devgui(cmd) {
   cmd_strings = strtok(cmd, "");
   switch (cmd_strings[0]) {
     case "": {
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         entnum = players[i].characterindex;
         if(isDefined(players[i].zm_random_char)) {
@@ -1172,7 +1172,7 @@ function moon_devgui(cmd) {
       break;
     }
     case "": {
-      players = getplayers();
+      players = getPlayers();
       foreach(player in players) {
         if(player hasweapon(level.w_quantum_bomb)) {
           player takeweapon(level.w_quantum_bomb);
@@ -1180,11 +1180,11 @@ function moon_devgui(cmd) {
           player notify("starting_quantum_bomb");
         }
       }
-      array::thread_all(getplayers(), &zm_weap_black_hole_bomb::player_give_black_hole_bomb);
+      array::thread_all(getPlayers(), &zm_weap_black_hole_bomb::player_give_black_hole_bomb);
       break;
     }
     case "": {
-      players = getplayers();
+      players = getPlayers();
       foreach(player in players) {
         if(player hasweapon(level.w_black_hole_bomb)) {
           player takeweapon(level.w_black_hole_bomb);
@@ -1192,23 +1192,23 @@ function moon_devgui(cmd) {
           player notify("starting_black_hole_bomb");
         }
       }
-      array::thread_all(getplayers(), &zm_weap_quantum_bomb::player_give_quantum_bomb);
+      array::thread_all(getPlayers(), &zm_weap_quantum_bomb::player_give_quantum_bomb);
       break;
     }
     case "": {
-      trigger = getent("", "");
+      trigger = getEnt("", "");
       if(!isDefined(trigger)) {
         return;
       }
       iprintln("");
-      trigger notify("trigger", getplayers()[0]);
+      trigger notify("trigger", getPlayers()[0]);
       break;
     }
     case "": {
-      players = getplayers();
-      teleporter = getent("", "");
+      players = getPlayers();
+      teleporter = getEnt("", "");
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(teleporter.origin);
+        players[i] setOrigin(teleporter.origin);
       }
       break;
     }
@@ -1230,7 +1230,7 @@ function moon_devgui(cmd) {
       break;
     }
     case "": {
-      player = getplayers()[0];
+      player = getPlayers()[0];
       spawnername = undefined;
       spawnername = "";
       direction = player getplayerangles();
@@ -1299,7 +1299,7 @@ function setup_water_physics() {
 }
 
 function cliff_fall_death() {
-  trig = getent("cliff_fall_death", "targetname");
+  trig = getEnt("cliff_fall_death", "targetname");
   if(isDefined(trig)) {
     while(true) {
       trig waittill("trigger", who);
@@ -1340,7 +1340,7 @@ function insta_kill_player() {
         }
         self dodamage(self.health + 1000, (0, 0, 0));
         wait(1.5);
-        self setorigin(point.origin + vectorscale((0, 0, 1), 20));
+        self setOrigin(point.origin + vectorscale((0, 0, 1), 20));
         self setplayerangles(point.angles);
         if(in_last_stand) {
           level flag::set("instant_revive");
@@ -1449,7 +1449,7 @@ function blackhole_bomb_area_check() {
       all_players_trapped = 0;
       final_structs = black_hole_teleport_structs;
       discarded_zones = [];
-      all_players = getplayers();
+      all_players = getPlayers();
       all_zones = getEntArray("player_volume", "script_noteworthy");
       players_touching = 0;
       for(x = 0; x < all_zones.size; x++) {
@@ -1536,7 +1536,7 @@ function get_blackholebomb_destination_point(black_hole_teleport_structs, ent_pl
 }
 
 function blackhole_bomb_in_invalid_area(grenade, model, player) {
-  invalid_area = getent("bhb_invalid_area", "targetname");
+  invalid_area = getEnt("bhb_invalid_area", "targetname");
   if(model istouching(invalid_area)) {
     level thread zm_weap_black_hole_bomb::black_hole_bomb_stolen_by_sam(player, model);
     return true;
@@ -1556,7 +1556,7 @@ function moon_perk_lost(perk) {
 }
 
 function moon_black_hole_bomb_poi() {
-  astro = getent("astronaut_zombie_ai", "targetname");
+  astro = getEnt("astronaut_zombie_ai", "targetname");
   if(isDefined(astro)) {
     astro zm_utility::add_poi_to_ignore_list(self);
   }
@@ -1565,7 +1565,7 @@ function moon_black_hole_bomb_poi() {
 function moon_bhb_poi_control() {
   self endon("death");
   moon_pois = getEntArray("zombie_poi", "script_noteworthy");
-  pack_enclosure = getent("pack_enclosure", "targetname");
+  pack_enclosure = getEnt("pack_enclosure", "targetname");
   if(!isDefined(moon_pois) || moon_pois.size == 0) {
     return undefined;
   }

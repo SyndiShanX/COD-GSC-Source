@@ -244,7 +244,7 @@ main() {
   tarp_pull_orgs = getEntArray("tarp_pull_org", "targetname");
   array_thread(tarp_pull_orgs, ::tarp_pull_org_think);
 
-  player_start = getstruct("start_approach", "script_noteworthy");
+  player_start = getStruct("start_approach", "script_noteworthy");
   friendly_starts = getStructArray("start_approach_friendly", "script_noteworthy");
   friendly_starts["p"] = player_start;
 
@@ -255,10 +255,10 @@ main() {
   SetIgnoreMeGroup("team3", "axis");
   SetIgnoreMeGroup("axis", "team3");
 
-  spawner = GetEnt("endlog_soap_spawner", "targetname");
+  spawner = getEnt("endlog_soap_spawner", "targetname");
   spawner thread add_spawn_function(::gulag_become_soap);
 
-  spawner = GetEnt("ghost", "script_noteworthy");
+  spawner = getEnt("ghost", "script_noteworthy");
   spawner thread add_spawn_function(::gulag_become_ghost);
 
   array_spawn_function_noteworthy("overlook_spawner", ::overlook_spawner_think);
@@ -310,7 +310,7 @@ main() {
   thread gulag_music();
   thread gulag_startpoint_catchup_thread();
 
-  ai_field_blocker = GetEnt("ai_field_blocker", "targetname");
+  ai_field_blocker = getEnt("ai_field_blocker", "targetname");
   ai_field_blocker ConnectPaths();
   ai_field_blocker NotSolid();
 
@@ -319,7 +319,7 @@ main() {
 }
 so_remove_weapon_tarp() {
   if(!is_specialop()) {
-    ent = GetEnt("so_weapon_tarp", "targetname");
+    ent = getEnt("so_weapon_tarp", "targetname");
     ent Delete();
   }
 }
@@ -388,7 +388,7 @@ gulag_flyin() {
 
   timer = GetTime();
   level.good_tone_timer = GetTime();
-  going_in_hot = GetEnt("going_in_hot", "script_noteworthy");
+  going_in_hot = getEnt("going_in_hot", "script_noteworthy");
   going_in_hot add_spawn_function(::going_in_hot);
 
   thread spawn_player_heli();
@@ -434,8 +434,8 @@ gulag_approach() {
   level.player DisableWeapons();
 
   if(level.start_point == "approach") {
-    heli_intro_player = GetEnt("heli_intro_player", "targetname");
-    player_start = getstruct("start_approach", "script_noteworthy");
+    heli_intro_player = getEnt("heli_intro_player", "targetname");
+    player_start = getStruct("start_approach", "script_noteworthy");
     heli_intro_player.origin = player_start.origin;
     remap_targets(heli_intro_player.target, player_start.targetname);
     heli_intro_player.target = player_start.targetname;
@@ -448,7 +448,7 @@ gulag_approach() {
       spawner.target = friendly_starts[index].targetname;
     }
 
-    going_in_hot = GetEnt("going_in_hot", "script_noteworthy");
+    going_in_hot = getEnt("going_in_hot", "script_noteworthy");
     going_in_hot add_spawn_function(::going_in_hot);
     thread spawn_player_heli();
 
@@ -459,14 +459,14 @@ gulag_approach() {
     level.player_heli Vehicle_SetSpeedImmediate(84, 84 / 4, 84 / 4);
   } else
   if(level.start_point == "landing_test") {
-    heli_intro_player = GetEnt("heli_intro_player", "targetname");
-    player_start = getstruct("start_approach", "script_noteworthy");
+    heli_intro_player = getEnt("heli_intro_player", "targetname");
+    player_start = getStruct("start_approach", "script_noteworthy");
     heli_intro_player.origin = player_start.origin;
     remap_targets(heli_intro_player.target, player_start.targetname);
     heli_intro_player.target = player_start.targetname;
 
     friendly_starts = getStructArray("start_approach_friendly", "script_noteworthy");
-    new_start = getstruct("test_unload_node", "script_noteworthy");
+    new_start = getStruct("test_unload_node", "script_noteworthy");
     friendly_starts[2] = new_start;
     friendly_heli_spawners = getEntArray("intro_heli_1", "targetname");
     foreach(index, spawner in friendly_heli_spawners) {
@@ -475,7 +475,7 @@ gulag_approach() {
       spawner.target = friendly_starts[index].targetname;
     }
 
-    going_in_hot = GetEnt("going_in_hot", "script_noteworthy");
+    going_in_hot = getEnt("going_in_hot", "script_noteworthy");
     going_in_hot add_spawn_function(::going_in_hot);
     thread spawn_player_heli();
 
@@ -486,8 +486,8 @@ gulag_approach() {
     level.player_heli Vehicle_SetSpeedImmediate(84, 84 / 4, 84 / 4);
 
     level.player Unlink();
-    gulag_center = GetEnt("gulag_center", "targetname");
-    level.player SetOrigin(gulag_center.origin);
+    gulag_center = getEnt("gulag_center", "targetname");
+    level.player setOrigin(gulag_center.origin);
   }
 
   flag_wait("display_introscreen_text");
@@ -595,7 +595,7 @@ gulag_approach() {
 
   wait(4);
 
-  car_blows_up = GetEnt("car_blows_up", "script_noteworthy");
+  car_blows_up = getEnt("car_blows_up", "script_noteworthy");
   RadiusDamage(car_blows_up.origin, 1200, 5000, 5000);
 
   tarp_puller_spawners = getEntArray("tarp_puller_spawner", "targetname");
@@ -625,8 +625,8 @@ start_perimeter() {
   array_spawn_function_noteworthy("goal_delete_spawner", ::delete_on_player_land);
   thread gulag_top_drones();
 
-  heli_intro_player = GetEnt("heli_intro_player", "targetname");
-  player_start = getstruct("start_player_perimeter", "script_noteworthy");
+  heli_intro_player = getEnt("heli_intro_player", "targetname");
+  player_start = getStruct("start_player_perimeter", "script_noteworthy");
   heli_intro_player.origin = player_start.origin;
   heli_intro_player.angles = player_start.angles;
   remap_targets(heli_intro_player.target, player_start.targetname);
@@ -646,8 +646,8 @@ start_perimeter() {
 start_f15() {
   array_spawn_function_noteworthy("goal_delete_spawner", ::delete_on_player_land);
 
-  heli_intro_player = GetEnt("heli_intro_player", "targetname");
-  player_start = getstruct("f15_attack_start", "script_noteworthy");
+  heli_intro_player = getEnt("heli_intro_player", "targetname");
+  player_start = getStruct("f15_attack_start", "script_noteworthy");
   heli_intro_player.origin = player_start.origin;
   heli_intro_player.angles = player_start.angles;
   remap_targets(heli_intro_player.target, player_start.targetname);
@@ -771,9 +771,9 @@ gulag_perimeter() {
   ent.origin = level.player_view_controller.origin;
   ent.angles = level.player_view_controller.angles;
 
-  level.player_view_controller LinkTo(ent);
+  level.player_view_controller linkTo(ent);
   movetime = 0.2;
-  ent MoveTo(ent.origin + forward + (0, 0, 4), movetime, 0.1, 0.1);
+  ent moveTo(ent.origin + forward + (0, 0, 4), movetime, 0.1, 0.1);
   wait(movetime);
   level.player_view_controller Delete();
   ent Delete();
@@ -790,8 +790,8 @@ gulag_perimeter() {
 }
 
 start_control_room() {
-  struct = getstruct("ghost_spawner_struct", "targetname");
-  ghost_spawner = GetEnt("ghost", "script_noteworthy");
+  struct = getStruct("ghost_spawner_struct", "targetname");
+  ghost_spawner = getEnt("ghost", "script_noteworthy");
   ghost_spawner.script_drone = undefined;
   ghost_spawner.origin = struct.origin;
   ghost_spawner.angles = struct.angles;
@@ -801,8 +801,8 @@ start_control_room() {
   spawners[spawners.size] = ghost_spawner;
   array_thread(spawners, ::spawn_ai);
 
-  player_org = GetEnt("start_controlroom_player", "targetname");
-  level.player SetOrigin(player_org.origin);
+  player_org = getEnt("start_controlroom_player", "targetname");
+  level.player setOrigin(player_org.origin);
   level.player SetPlayerAngles(player_org.angles);
 }
 
@@ -857,10 +857,10 @@ gulag_cellblocks() {
 
   flag_wait("player_moves_into_gulag");
 
-  friendly_respawn_trigger = GetEnt("friendly_reinforcement_trigger", "targetname");
+  friendly_respawn_trigger = getEnt("friendly_reinforcement_trigger", "targetname");
   friendly_respawn_trigger thread reinforcement_friendlies();
 
-  volume = GetEnt("purple_friendlies_priority_volume", "targetname");
+  volume = getEnt("purple_friendlies_priority_volume", "targetname");
   ai = GetAIArray("allies");
   ai = remove_heroes_from_array(ai);
 
@@ -893,7 +893,7 @@ gulag_cellblocks() {
 
   flag_wait("soap_finishes_talking_about_going_in");
 
-  volume = GetEnt("control_room_hallway_volume", "targetname");
+  volume = getEnt("control_room_hallway_volume", "targetname");
   volume waittill_volume_dead_or_dying();
 
   if(!flag("player_nears_cell_door1")) {
@@ -1054,8 +1054,8 @@ start_armory() {
   spawners = update_soap_spawner(spawners);
   array_thread(spawners, ::spawn_ai);
 
-  player_org = GetEnt("start_armory_player", "targetname");
-  level.player SetOrigin(player_org.origin);
+  player_org = getEnt("start_armory_player", "targetname");
+  level.player setOrigin(player_org.origin);
   level.player SetPlayerAngles(player_org.angles);
 
   wait(0.05);
@@ -1075,7 +1075,7 @@ gulag_armory() {
 
   flag_wait("player_in_armory");
 
-  cellblock_spawning_door = getent("cellblock_spawning_door", "targetname");
+  cellblock_spawning_door = getEnt("cellblock_spawning_door", "targetname");
   cellblock_spawning_door connectpaths();
   cellblock_spawning_door notsolid();
   cellblock_spawning_door hide();
@@ -1195,7 +1195,7 @@ gulag_armory() {
   activate_trigger_with_targetname("post_armory");
 
   flag_wait("run_from_armory");
-  kill_volume = GetEnt("run_from_armory_kill_volume", "targetname");
+  kill_volume = getEnt("run_from_armory_kill_volume", "targetname");
   ai = kill_volume get_ai_touching_volume("axis");
   foreach(guy in ai) {
     guy thread die_soon();
@@ -1231,7 +1231,7 @@ gulag_armory() {
   battlechatter_on("axis");
   flag_wait("use_your_riotshield");
 
-  cellblock_spawning_door disconnectpaths();
+  cellblock_spawning_door disconnectPaths();
   cellblock_spawning_door solid();
   cellblock_spawning_door show();
 
@@ -1281,8 +1281,8 @@ start_rappel() {
 
   array_thread(spawners, ::spawn_ai);
 
-  player_org = GetEnt("start_rappel_player", "targetname");
-  level.player SetOrigin(player_org.origin);
+  player_org = getEnt("start_rappel_player", "targetname");
+  level.player setOrigin(player_org.origin);
   level.player SetPlayerAngles(player_org.angles);
   cellblock_rappel_player();
 }
@@ -1313,7 +1313,7 @@ gulag_rappel() {
 
   fog_set_changes("gulag_hallways");
 
-  volume = GetEnt("gulag_hallway_destructibles", "script_noteworthy");
+  volume = getEnt("gulag_hallway_destructibles", "script_noteworthy");
   volume activate_destructibles_in_volume();
   volume activate_interactives_in_volume();
 
@@ -1409,8 +1409,8 @@ start_tunnel() {
 
   array_thread(spawners, ::spawn_ai);
 
-  player_org = Getstruct("start_tunnel_player", "targetname");
-  level.player SetOrigin(player_org.origin);
+  player_org = getStruct("start_tunnel_player", "targetname");
+  level.player setOrigin(player_org.origin);
   level.player SetPlayerAngles(player_org.angles);
 }
 
@@ -1422,7 +1422,7 @@ gulag_tunnel() {
 
   wait(0.5);
 
-  volume = GetEnt("tunnel_pre_hallway_volume", "targetname");
+  volume = getEnt("tunnel_pre_hallway_volume", "targetname");
   volume add_wait(::waittill_volume_dead_or_dying);
   add_wait(::_wait, 15);
   level add_wait(::waittill_msg, "flashed_room");
@@ -1475,15 +1475,15 @@ start_bathroom() {
 
   array_thread(spawners, ::spawn_ai);
 
-  start_point = GetEnt("start_bathroom_player", "targetname");
-  level.player SetOrigin(start_point.origin);
+  start_point = getEnt("start_bathroom_player", "targetname");
+  level.player setOrigin(start_point.origin);
   level.player SetPlayerAngles(start_point.angles);
 
   activate_trigger_with_targetname("breach_bathroom_postup");
 }
 
 enable_bathroom_complete_trigger() {
-  trigger_ent = GetEnt("player_rappels_from_bathroom", "script_noteworthy");
+  trigger_ent = getEnt("player_rappels_from_bathroom", "script_noteworthy");
   trigger_ent waittill("trigger");
   flag_set("player_exited_bathroom");
 }
@@ -1507,7 +1507,7 @@ gulag_bathroom() {
     }
   }
 
-  volume = GetEnt("gulag_shower_destructibles", "script_noteworthy");
+  volume = getEnt("gulag_shower_destructibles", "script_noteworthy");
   volume activate_destructibles_in_volume();
   volume activate_interactives_in_volume();
 
@@ -1541,7 +1541,7 @@ gulag_bathroom() {
   level.soap add_func(::dialogue_queue, "gulag_cmt_uselockers");
   thread do_wait();
 
-  riot_shield_detector = GetEnt("riot_shield_detector", "targetname");
+  riot_shield_detector = getEnt("riot_shield_detector", "targetname");
   riot_shield_detector thread riot_shield_detector_think();
 
   add_wait(::flag_wait, "bathroom_room2_enemies_dead");
@@ -1620,8 +1620,8 @@ start_rescue() {
 
   array_thread(spawners, ::spawn_ai);
 
-  player_org = GetEnt("start_rescue_player", "targetname");
-  level.player SetOrigin(player_org.origin);
+  player_org = getEnt("start_rescue_player", "targetname");
+  level.player setOrigin(player_org.origin);
   level.player SetPlayerAngles(player_org.angles);
   activate_trigger_with_targetname("breach_rescue_trigger");
 }
@@ -1680,8 +1680,8 @@ gulag_rescue() {
   level.player DontInterpolate();
   arm_ent.origin = level.player.origin;
   arm_ent.angles = level.player.angles;
-  arm_ent LinkTo(ent);
-  level.player PlayerLinkTo(arm_ent, "tag_origin", 1, 0, 0, 0, 0, 0);
+  arm_ent linkTo(ent);
+  level.player PlayerlinkTo(arm_ent, "tag_origin", 1, 0, 0, 0, 0, 0);
 
   ent.origin = level.breach_groups[4].left_post.origin;
   ent.angles = level.breach_groups[4].left_post.angles;
@@ -1698,7 +1698,7 @@ gulag_rescue() {
 
   delayThread(0.05, ::exploder, "rock_glass");
 
-  trash_sound = GetEnt("trash_sound", "script_noteworthy");
+  trash_sound = getEnt("trash_sound", "script_noteworthy");
   trash_sound thread maps\gulag_ending_code::trash_sound_think();
 
   run_thread_on_targetname("hallway_flicker_light", maps\gulag_ending_code::hallway_flicker_light);
@@ -1721,10 +1721,10 @@ gulag_rescue() {
   level.player.IgnoreRandomBulletDamage = true;
   level.player delayThread(15, maps\_gameskill::update_player_attacker_accuracy);
 
-  spawner = GetEnt("price_spawner", "targetname");
+  spawner = getEnt("price_spawner", "targetname");
   spawner spawn_ai();
 
-  spawner = GetEnt("price_choke_spawner", "targetname");
+  spawner = getEnt("price_choke_spawner", "targetname");
   chokey = spawner spawn_ai();
   chokey.animname = "chokey";
   chokey gun_remove();
@@ -1732,7 +1732,7 @@ gulag_rescue() {
 
   chokey add_damage_function(::bloody_pain);
 
-  struct = getstruct("ending_breach_org", "targetname");
+  struct = getStruct("ending_breach_org", "targetname");
   level.price_breach_struct = struct;
 
   ent = spawn_tag_origin();
@@ -1758,7 +1758,7 @@ gulag_rescue() {
   guys[guys.size] = strangle_chain;
 
   foreach(guy in guys) {
-    guy LinkTo(ent);
+    guy linkTo(ent);
   }
   level.price_breach_ent = ent;
 
@@ -1774,8 +1774,8 @@ gulag_rescue() {
   delayThread(3.95, ::play_sound_in_space, "scn_gulag_price_rescue_punch", level.player getEye());
   delayThread(4.35, ::play_sound_in_space, "scn_gulag_price_rescue_bodyfall", level.player getEye());
 
-  chair = GetEnt("price_chair", "targetname");
-  targ = getstruct(chair.target, "targetname");
+  chair = getEnt("price_chair", "targetname");
+  targ = getStruct(chair.target, "targetname");
   angles = VectorToAngles(targ.origin - chair.origin);
   forward = anglesToForward(angles);
 
@@ -1789,7 +1789,7 @@ gulag_rescue() {
     guy Delete();
   }
 
-  spawner = GetEnt("endlog_soap_spawner", "targetname");
+  spawner = getEnt("endlog_soap_spawner", "targetname");
   spawner.count = 1;
   spawner spawn_ai();
 
@@ -1953,7 +1953,7 @@ gulag_objectives() {
     case "bathroom":
 
       flag_wait("advance_through_pipearea");
-      struct = getstruct("hallway_obj_struct", "targetname");
+      struct = getStruct("hallway_obj_struct", "targetname");
       Objective_Position(1, struct.origin);
 
       flag_wait("nearing_bathroom_breach");
@@ -2043,7 +2043,7 @@ gulag_startpoint_catchup_thread() {
   wait(0.05);
   vision_set_fog_changes("gulag_circle", 1);
 
-  car_blows_up = GetEnt("car_blows_up", "script_noteworthy");
+  car_blows_up = getEnt("car_blows_up", "script_noteworthy");
   RadiusDamage(car_blows_up.origin, 1200, 5000, 5000);
 
   flag_set("approach_dialogue");

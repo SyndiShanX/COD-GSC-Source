@@ -589,7 +589,7 @@ _id_19CD() {
   var_0 = getEntArray("camera", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_2 = getent(var_0[var_1].target, "targetname");
+    var_2 = getEnt(var_0[var_1].target, "targetname");
     var_0[var_1]._id_19CE = var_2.origin;
     var_0[var_1].angles = vectortoangles(var_2.origin - var_0[var_1].origin);
   }
@@ -630,7 +630,7 @@ _id_19CD() {
       var_10 = vectortoangles((var_9[0], var_9[1], var_9[2]) - (var_8[0], var_8[1], var_8[2]));
       var_11 = (0, var_10[1], 0);
       var_12 = anglesToForward(var_11);
-      var_10 = vectornormalize(var_9 - level.player.origin);
+      var_10 = vectorNormalize(var_9 - level.player.origin);
       var_13 = vectordot(var_12, var_10);
 
       if(var_13 < 0.85) {
@@ -727,9 +727,9 @@ _id_19D6() {
       }
       var_0 = spawn("script_origin", (0, 0, 0));
       var_0.origin = level._id_19D4;
-      level.player setorigin(var_0.origin);
-      level.player linkto(var_0);
-      var_0 moveto(level._id_19D5, level._id_19D3);
+      level.player setOrigin(var_0.origin);
+      level.player linkTo(var_0);
+      var_0 moveTo(level._id_19D5, level._id_19D3);
       wait(level._id_19D3);
       var_0 delete();
     }
@@ -902,7 +902,7 @@ _id_19E2() {
       break;
     }
 
-    var_1 = getent(var_1.target, "targetname");
+    var_1 = getEnt(var_1.target, "targetname");
 
     if(isDefined(var_1) && var_1 == var_0[0]) {
       var_0[var_0.size] = var_1;
@@ -928,10 +928,10 @@ _id_19E4(var_0, var_1, var_2) {
   var_3 = var_0[2] - var_2[2];
   var_4 = length(var_1 - var_2);
   var_5 = var_1 - var_0;
-  var_5 = vectornormalize((var_5[0], var_5[1], 0));
+  var_5 = vectorNormalize((var_5[0], var_5[1], 0));
   var_1 = var_1 + vecscale(var_5, var_4 * 1 / 800 * 0);
   var_6 = var_2 - var_0;
-  var_6 = vectornormalize((var_6[0], var_6[1], 0));
+  var_6 = vectorNormalize((var_6[0], var_6[1], 0));
   var_2 = var_2 + vecscale(var_6, var_4 * 1 / 800 * 0);
   var_7 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   var_8 = var_2 - var_1;
@@ -952,8 +952,8 @@ _id_19E4(var_0, var_1, var_2) {
 }
 
 _id_19E5(var_0) {
-  var_1 = vectornormalize(var_0 - self getshootatpos());
-  var_2 = vectornormalize(var_0 - (0, 0, 24) - self getshootatpos());
+  var_1 = vectorNormalize(var_0 - self getshootatpos());
+  var_2 = vectorNormalize(var_0 - (0, 0, 24) - self getshootatpos());
   var_3 = vectordot(var_1, var_2);
   var_4 = anglesToForward(self getplayerangles());
   var_5 = vectordot(var_4, var_1);
@@ -1567,7 +1567,7 @@ _id_1A1F(var_0) {
     var_2 = level.player getplayerangles();
     var_3 = anglesToForward(var_2);
     var_3 = var_3 * -200;
-    level._id_1A1E moveto(var_1 + var_3, 0.2);
+    level._id_1A1E moveTo(var_1 + var_3, 0.2);
   }
 }
 

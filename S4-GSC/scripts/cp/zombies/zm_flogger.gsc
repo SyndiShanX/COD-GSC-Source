@@ -35,11 +35,11 @@ flogger_init() {
   var_7 = spawn("trigger_rotatable_radius", var_0.logs.origin, 0, 25, 160);
   var_8 = anglestoup((0, 0, 90)) * 160 / 2;
   var_6 _meth_80DB();
-  var_6 linkto(var_0.logs, "tag_origin", (100, 0, 0) - var_8, (0, 0, 90));
+  var_6 linkTo(var_0.logs, "tag_origin", (100, 0, 0) - var_8, (0, 0, 90));
   var_6.center_offset = var_8;
   var_6.score_event_string = "cp_sumpf_trap";
   var_7 _meth_80DB();
-  var_7 linkto(var_0.logs, "tag_origin", (-100, 0, 0) - var_8, (0, 0, 90));
+  var_7 linkTo(var_0.logs, "tag_origin", (-100, 0, 0) - var_8, (0, 0, 90));
   var_7.center_offset = var_8;
   var_7.score_event_string = "cp_sumpf_trap";
   var_0.trigger_left = var_6;
@@ -99,9 +99,9 @@ flogger_handle_init(var_0) {
     return;
   }
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "script_noteworthy");
+    var_3 = getEnt(var_2.target, "script_noteworthy");
     var_3 thread floggle_handle_set_state("off");
-    var_4 = getent(var_2.target, "targetname");
+    var_4 = getEnt(var_2.target, "targetname");
     var_2._id_73E3 = var_3;
     var_2._id_0278 = var_4;
     var_2._id_ACA3 = 1;

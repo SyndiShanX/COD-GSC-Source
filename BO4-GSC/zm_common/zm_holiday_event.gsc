@@ -156,7 +156,7 @@ function_23287dd() {
           break;
         }
 
-        level.var_23d44713 moveto(ai_zombie.origin + (0, 0, 60), n_move_time);
+        level.var_23d44713 moveTo(ai_zombie.origin + (0, 0, 60), n_move_time);
         wait 0.1;
 
         if(n_move_time > 0.1) {
@@ -258,7 +258,7 @@ function_efe5c28() {
   self.var_61c96978 = &function_55f8e11e;
   self.var_ccd959e1 = 1;
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(!(isDefined(e_player.var_ccd959e1) && e_player.var_ccd959e1)) {
       return;
     }
@@ -271,7 +271,7 @@ function_55f8e11e(e_box) {
   self endon(#"death");
   e_box waittill(#"randomization_done");
   a_str_lines = array(#"hash_2f00ed381261784b", #"hash_2f00ec3812617698", #"hash_2f00ef3812617bb1");
-  playsoundatposition(array::random(a_str_lines), e_box.origin);
+  playSoundAtPosition(array::random(a_str_lines), e_box.origin);
   self.var_c21099c0 = 0;
   self.var_16fc6934 = undefined;
   self.var_61c96978 = undefined;
@@ -315,7 +315,7 @@ devgui() {
 
 function_705afbf2() {
   a_ai_zombies = getaiteamarray(level.zombie_team);
-  e_host = getplayers()[0];
+  e_host = getPlayers()[0];
 
   if(!isalive(e_host)) {
     return;

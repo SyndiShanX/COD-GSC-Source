@@ -268,7 +268,7 @@ domflags() {
 
   foreach(dom_flag in primaryflags) {
     if(isDefined(dom_flag.target)) {
-      trigger = getent(dom_flag.target, "targetname");
+      trigger = getEnt(dom_flag.target, "targetname");
       trigger trigger::function_1792c799(16);
 
       if(isDefined(trigger)) {
@@ -472,7 +472,7 @@ onuseupdate(team, progress, change) {
 
   if(change > 0 && self.currentlyunoccupied) {
     self.currentlyunoccupied = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player.team == team) {

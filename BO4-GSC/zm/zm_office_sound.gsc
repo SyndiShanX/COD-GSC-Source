@@ -39,7 +39,7 @@ function_f71796ca() {
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");
-    playsoundatposition(str_alias, self.origin);
+    playSoundAtPosition(str_alias, self.origin);
     level notify(#"morse_code_activated", {
       #var_6831e121: self.script_int
     });
@@ -52,7 +52,7 @@ function_e856acd2() {
 
   while(true) {
     wait randomintrange(20, 60);
-    playsoundatposition(#"hash_2c5321deab41da10", self.origin);
+    playSoundAtPosition(#"hash_2c5321deab41da10", self.origin);
   }
 }
 
@@ -110,7 +110,7 @@ function_43e2a503() {
     level.var_ec4c747a = 0;
   }
 
-  playsoundatposition(#"hash_58a7d90061e86ced", self.origin);
+  playSoundAtPosition(#"hash_58a7d90061e86ced", self.origin);
   var_26d86758 delete();
   level.var_ec4c747a++;
 

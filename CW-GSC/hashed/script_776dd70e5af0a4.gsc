@@ -98,7 +98,7 @@ function function_ab2e5181() {
   level.woods ai::set_behavior_attribute("disablepeek", 0);
   level.woods ai::set_behavior_attribute("disablelean", 0);
   level flag::wait_till("flg_main_street_start");
-  var_bb96f34c = getent("t_b71", "targetname");
+  var_bb96f34c = getEnt("t_b71", "targetname");
   var_bb96f34c triggerenable(0);
   level hms_util::function_53531f27("t_b85");
 }
@@ -127,7 +127,7 @@ function function_58d0b9b2() {
   level flag::wait_till("flg_video_store_start_2");
   var_eec4445f = spawner::simple_spawn("sp_enemy_video_store_wave2");
   level flag::wait_till("flg_main_street_start");
-  vol_amerika_outside_video_store = getent("vol_amerika_outside_video_store", "targetname");
+  vol_amerika_outside_video_store = getEnt("vol_amerika_outside_video_store", "targetname");
 
   foreach(ai in level.var_d6840b) {
     if(isalive(ai)) {
@@ -372,11 +372,11 @@ function function_bc754782(str_objective) {
 
 function function_c6c88d08() {
   namespace_fc3e8cb::function_2987fd4c("s_teleport_woods_main_street", 0, 0);
-  var_bb96f34c = getent("t_b72", "targetname");
+  var_bb96f34c = getEnt("t_b72", "targetname");
   var_bb96f34c triggerenable(0);
-  var_f2e43740 = getent("t_b85", "targetname");
+  var_f2e43740 = getEnt("t_b85", "targetname");
   var_f2e43740 triggerenable(0);
-  var_196f0459 = getent("t_b71", "targetname");
+  var_196f0459 = getEnt("t_b71", "targetname");
   var_196f0459 triggerenable(0);
   level hms_util::function_53531f27("t_b86");
 }
@@ -514,7 +514,7 @@ function function_11a7fafb() {
   level flag::wait_till("flg_main_street_3_start");
   function_1eaaceab(level.var_bcd79d81);
   array::thread_all(level.var_bcd79d81, &function_e5b395e2);
-  var_bb9595e = getent("vol_amerika_streets_end", "targetname");
+  var_bb9595e = getEnt("vol_amerika_streets_end", "targetname");
   level.var_b665de74 = spawner::simple_spawn("sp_enemy_street_wave3");
   array::thread_all(level.var_b665de74, &function_7c0c35ef);
   level thread function_19527a34();
@@ -527,7 +527,7 @@ function function_11a7fafb() {
 }
 
 function function_19527a34() {
-  var_c11a868a = getent("main_street_bridge_animated_shotgunner", "script_noteworthy");
+  var_c11a868a = getEnt("main_street_bridge_animated_shotgunner", "script_noteworthy");
   level scene::play("scene_amk_4090_mst_bridge", "enter", var_c11a868a);
 }
 
@@ -550,7 +550,7 @@ function function_2f0a158() {
   var_44589d99 = spawner::simple_spawn("sp_enemy_street_theater_sniper");
   level flag::wait_till_any(["flg_main_street_theater_move_sniper_inside", "flg_main_street_side_spawns_disable"]);
   function_1eaaceab(var_44589d99);
-  vol_amerika_streets_theater_catwalks = getent("vol_amerika_streets_theater_catwalks", "targetname");
+  vol_amerika_streets_theater_catwalks = getEnt("vol_amerika_streets_theater_catwalks", "targetname");
 
   foreach(ai in var_44589d99) {
     ai thread ai::force_goal(vol_amerika_streets_theater_catwalks);
@@ -668,7 +668,7 @@ function function_7972340e() {
 
 function function_19b7c1a4() {
   level waittill(#"hash_6af63ea12bc00914");
-  var_ed84f686 = getent("sm_main_street_mannequin_hit", "targetname");
+  var_ed84f686 = getEnt("sm_main_street_mannequin_hit", "targetname");
   physicsexplosionsphere(var_ed84f686.origin, 100, 100, 1);
   radiusdamage(var_ed84f686.origin, 100, 10, 10);
 }
@@ -706,7 +706,7 @@ function function_58c0a827() {
   self.var_e7ea517e = 0;
   self val::set("guy_truck", "ignoreall", 1);
 
-  while(self isplayinganimscripted()) {
+  while(self isplayinganimScripted()) {
     waitframe(1);
   }
 
@@ -722,7 +722,7 @@ function function_58c0a827() {
   to = getnode(self.target, "targetname");
 
   if(!isDefined(to)) {
-    to = getent(self.target, "targetname");
+    to = getEnt(self.target, "targetname");
   }
 
   self thread function_dac000c0();
@@ -732,7 +732,7 @@ function function_58c0a827() {
     self waittill(#"goal");
   }
 
-  goalvolume = getent("vol_amerika_main_street_vehicle_drop_off", "targetname");
+  goalvolume = getEnt("vol_amerika_main_street_vehicle_drop_off", "targetname");
   self setgoal(goalvolume);
 }
 
@@ -842,8 +842,8 @@ function function_168221f7() {
 function function_96f5e83c() {
   self endon(#"death");
   level endon(#"hash_446c3e9ed3b224a5", #"flg_main_street_3_start");
-  var_ca5a68ed = getent("t_b310", "targetname");
-  var_bd50edd6 = getent("t_b331", "targetname");
+  var_ca5a68ed = getEnt("t_b310", "targetname");
+  var_bd50edd6 = getEnt("t_b331", "targetname");
   s_scene = struct::get("scene_ai_sdr_com_intro_run_slide01_to_exposed_crouch_long_6 ", "targetname");
 
   while(isalive(self)) {
@@ -871,7 +871,7 @@ function function_c67de6da() {
   level thread function_168221f7();
   var_16cec532 = spawner::simple_spawn("sp_enemy_street_burger_town");
   level flag::wait_till("flg_burgertown_enemies_fallback_to_final_fight");
-  var_bb9595e = getent("vol_amerika_streets_wave_3_left", "targetname");
+  var_bb9595e = getEnt("vol_amerika_streets_wave_3_left", "targetname");
   function_1eaaceab(var_16cec532);
 
   foreach(ai in var_16cec532) {
@@ -907,7 +907,7 @@ function function_d81575af() {
 }
 
 function function_55b55bb4(var_f41f62c0) {
-  var_c9ec79c6 = getent(var_f41f62c0, "targetname");
+  var_c9ec79c6 = getEnt(var_f41f62c0, "targetname");
   e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), var_c9ec79c6.origin, (0, 0, 0));
   e_grenade.var_3791d005 = 0;
 }
@@ -998,7 +998,7 @@ function function_c5a2a18f() {
   var_d5535d9a = getvehiclearray("control_tower_elevator", "targetname")[0];
 
   foreach(ai in var_d1700a09) {
-    ai linkto(var_d5535d9a);
+    ai linkTo(var_d5535d9a);
   }
 
   level thread namespace_fc3e8cb::function_18e5080e("flg_terminal_player_interact", var_d1700a09);
@@ -1009,7 +1009,7 @@ function function_c5a2a18f() {
   level thread namespace_4bd68414::function_41f45773();
   level thread namespace_fc3e8cb::elevator_descend();
   level flag::wait_till("flg_main_street_elevator_reached_ground");
-  vol_elevator_bottom = getent("vol_elevator_bottom", "targetname");
+  vol_elevator_bottom = getEnt("vol_elevator_bottom", "targetname");
 
   foreach(ai in var_d1700a09) {
     ai unlink();
@@ -1127,7 +1127,7 @@ function function_538bceed() {
   v_right = anglestoright(level.player getplayerangles());
   var_a6be6a4f = level.player getplayercamerapos() + (0, 0, -32) + v_fwd * 20 + v_right * 20;
   var_a75f2965 = getweapon(#"hash_58a74d179a004add");
-  var_38ffd5df = vectornormalize(var_a6be6a4f - s_mb_start.origin) * var_7a1c52df;
+  var_38ffd5df = vectorNormalize(var_a6be6a4f - s_mb_start.origin) * var_7a1c52df;
   e_grenade = self magicgrenadetype(var_a75f2965, s_mb_start.origin, var_38ffd5df, var_6c76f1a4);
 
   while(true) {
@@ -1209,11 +1209,11 @@ function function_4b1daaaa() {
   if(s_notify._notify == "anim_pose = crouch") {
     self allowedstances("crouch");
     e_anchor = spawn("script_origin", self.origin);
-    self linkto(e_anchor);
+    self linkTo(e_anchor);
     wait 4;
     e_anchor delete();
     self allowedstances("crouch", "stand", "prone");
-    vol = getent("vol_elevator_bottom", "targetname");
+    vol = getEnt("vol_elevator_bottom", "targetname");
     self setgoal(vol, 1);
     return;
   }
@@ -1239,10 +1239,10 @@ function function_97fe34c() {
   level.woods clearforcedgoal();
   level.woods colors::set_force_color("blue");
   level flag::wait_till_any(["flg_elevator_fight_advance", "flg_elevator_juggernauts_dead"]);
-  trig = getent("t_elevator_fight_advance1", "targetname");
+  trig = getEnt("t_elevator_fight_advance1", "targetname");
   trig notify(#"trigger");
   level flag::wait_till("flg_elevator_most_enemies_dead");
-  trig = getent("t_elevator_fight_advance2", "targetname");
+  trig = getEnt("t_elevator_fight_advance2", "targetname");
   trig notify(#"trigger");
 }
 
@@ -1250,7 +1250,7 @@ function function_a13a87f2() {
   level flag::wait_till("flg_amk_player_spawned");
   level.player endon(#"death");
   level flag::wait_till("flg_elevator_fight_start");
-  e_elevator_fight_mantle_wood = getent("e_elevator_fight_mantle_wood", "targetname");
+  e_elevator_fight_mantle_wood = getEnt("e_elevator_fight_mantle_wood", "targetname");
   e_elevator_fight_mantle_wood delete();
 
   while(true) {
@@ -1264,7 +1264,7 @@ function function_a13a87f2() {
 
 function function_d6440d09() {
   level flag::wait_till("flg_elevator_fight_start");
-  e_elevator_fight_catwalk_clip = getent("e_elevator_fight_catwalk_clip", "targetname");
+  e_elevator_fight_catwalk_clip = getEnt("e_elevator_fight_catwalk_clip", "targetname");
   e_elevator_fight_catwalk_clip movez(512, 0.2, 0.05, 0.05);
   level flag::wait_till("flg_elevator_player_interact");
   e_elevator_fight_catwalk_clip deletedelay();
@@ -1321,7 +1321,7 @@ function function_8a32e8b0() {
     level.player val::set(#"bubby_button_interact", "ignoreme", 1);
     wait 0.5;
     s_scene = struct::get("s_scene_main_street_bubby_button_press", "targetname");
-    level.player playrumbleonentity("anim_light");
+    level.player playRumbleOnEntity("anim_light");
     s_scene scene::play("scene_amk_6090_stg_garage");
     level.player val::reset_all(#"bubby_button_interact");
     s_obj_bubby_button_interact util::delay(0.2, undefined, &util::remove_cursor_hint);
@@ -1329,7 +1329,7 @@ function function_8a32e8b0() {
     if(n_counter > 2 && level flag::get("flg_main_street_bubby_gave_prize") == 0) {
       s_bubby = struct::get("s_bubby_prize", "targetname");
       playFX(level._effect[#"hash_3dc2bb118ce21336"], s_bubby.origin, anglesToForward(s_bubby.angles));
-      level.player playrumbleonentity("anim_med");
+      level.player playRumbleOnEntity("anim_med");
       snd::play("exp_facade_debris_mannequin", s_bubby.origin);
       var_b0a915d9 = spawnweapon(getweapon(#"special_grenadelauncher_t9"), s_bubby.origin, s_bubby.angles, 0);
       var_b0a915d9 thread function_c0160b76();

@@ -166,7 +166,7 @@ function fullscreen_fx(localclientnum, indicator) {
   parent = self getparententity();
 
   if(isDefined(parent) && parent function_21c0fa55()) {
-    parent playrumbleonentity(localclientnum, "buzz_high");
+    parent playRumbleOnEntity(localclientnum, "buzz_high");
     self playSound(localclientnum, #"wpn_semtex_alert");
 
     if(getdvarint(#"ui_hud_hardcore", 0) == 0) {

@@ -102,7 +102,7 @@ function function_73cc64f1(localclientnum) {
   level.var_98cd8f08[3] = "c_t7_zm_dlchd_moon_pressuresuit_richtofen_mpc";
   level.var_98cd8f08[4] = "c_t7_zm_dlchd_moon_pressuresuit_takeo_mpc";
   lock_model("c_t7_zm_dlchd_moon_pressuresuit_body_mpc");
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     player thread function_c06d0a4e(localclientnum);
   }
   callback::on_spawned(&function_c06d0a4e);
@@ -228,7 +228,7 @@ function radar_dish_init() {
 function radar_dish_rotate() {
   wait(0.1);
   while(true) {
-    self rotateyaw(360, randomfloatrange(60, 120));
+    self rotateYaw(360, randomfloatrange(60, 120));
     self waittill("rotatedone");
   }
 }
@@ -249,7 +249,7 @@ function receiving_bay_doors(localclientnum) {
     if(isDefined(doors[i].script_vector)) {
       doors[i] playSound(0, "evt_loading_door_start");
       doors[i] playLoopSound("evt_loading_door_loop", 0.5);
-      doors[i] moveto(doors[i].origin + doors[i].script_vector, 3);
+      doors[i] moveTo(doors[i].origin + doors[i].script_vector, 3);
       doors[i] thread stop_loop_play_end();
     }
   }
@@ -291,7 +291,7 @@ function function_c00b8efb(clientnum) {
     if(isDefined(var_f5f4e9cc.script_noteworthy)) {
       var_f5f4e9cc util::waittill_dobj(clientnum);
       var_f5f4e9cc useanimtree($generic);
-      var_f5f4e9cc animscripted("jump_pad", var_f5f4e9cc.origin, var_f5f4e9cc.angles, "p7_fxanim_zmhd_moon_jump_pad_lrg_anim");
+      var_f5f4e9cc animScripted("jump_pad", var_f5f4e9cc.origin, var_f5f4e9cc.angles, "p7_fxanim_zmhd_moon_jump_pad_lrg_anim");
     }
   }
 }
@@ -401,9 +401,9 @@ function player_gasp_rumble(localclientnum, oldval, newval, bnewent, binitialsna
   }
   if(newval) {
     if(randomint(100) > 70) {
-      self playrumbleonentity(localclientnum, "damage_light");
+      self playRumbleOnEntity(localclientnum, "damage_light");
     } else {
-      self playrumbleonentity(localclientnum, "damage_heavy");
+      self playRumbleOnEntity(localclientnum, "damage_heavy");
     }
   }
 }

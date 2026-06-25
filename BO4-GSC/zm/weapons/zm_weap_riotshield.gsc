@@ -176,7 +176,7 @@ function_d987f765() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     foreach(e_player in players) {
       if(isDefined(e_player) && isDefined(e_player.hasriotshield) && e_player.hasriotshield && isDefined(e_player.player_shield_reset_health)) {
@@ -194,10 +194,10 @@ player_shield_facing_attacker(vdir, limit, attacker) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = attacker.origin - self.origin;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > limit;
 }
@@ -383,8 +383,8 @@ riotshield_fling_zombie(player, fling_vec, index) {
 
 riotshield_knockdown_zombie(player, gib, weapon) {
   self endon(#"death");
-  playsoundatposition(#"vox_riotshield_forcehit", self.origin);
-  playsoundatposition(#"wpn_riotshield_proj_impact", self.origin);
+  playSoundAtPosition(#"vox_riotshield_forcehit", self.origin);
+  playSoundAtPosition(#"wpn_riotshield_proj_impact", self.origin);
 
   if(!isDefined(self) || !isalive(self)) {
     return;
@@ -476,7 +476,7 @@ riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_gib_range
       return;
     }
 
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
 
     if(0 > dot) {
@@ -503,10 +503,10 @@ riotshield_get_enemies_in_range(riotshield_knockdown_range, riotshield_gib_range
 
           level.riotshield_fling_enemies[level.riotshield_fling_enemies.size] = e_target;
           dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-          fling_vec = vectornormalize(test_origin - view_pos);
+          fling_vec = vectorNormalize(test_origin - view_pos);
 
           if(5000 < test_range_squared) {
-            fling_vec += vectornormalize(test_origin - radial_origin);
+            fling_vec += vectorNormalize(test_origin - radial_origin);
           }
 
           fling_vec = (fling_vec[0], fling_vec[1], fling_force_v * abs(fling_vec[2]));

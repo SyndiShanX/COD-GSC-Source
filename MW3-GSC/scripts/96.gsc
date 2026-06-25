@@ -61,7 +61,7 @@ _id_0A4E(var_0) {
   while(self cansee(var_1)) {
     var_2 = vectortoangles(var_1 getEye() - var_0.origin);
     var_2 = anglesToForward(var_2);
-    var_0 moveto(var_0.origin + var_2 * 12, 0.1);
+    var_0 moveTo(var_0.origin + var_2 * 12, 0.1);
     wait 0.1;
   }
 
@@ -74,7 +74,7 @@ _id_0A4E(var_0) {
     var_5 = distance(var_0.origin, self._id_0A4B) / var_4;
 
     if(var_5 > 0) {
-      var_0 moveto(self._id_0A4B, var_5);
+      var_0 moveTo(self._id_0A4B, var_5);
       wait(var_5);
     }
 
@@ -84,9 +84,9 @@ _id_0A4E(var_0) {
     if(!isDefined(var_7)) {
       var_7 = var_0.origin;
     }
-    var_0 moveto(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
+    var_0 moveTo(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
-    var_0 moveto(var_7 + var_2 * -20, 3, 1, 1);
+    var_0 moveTo(var_7 + var_2 * -20, 3, 1, 1);
   }
 
   wait(randomfloatrange(2.5, 4));
@@ -216,7 +216,7 @@ _id_0A5A(var_0, var_1) {
   while(self cansee(var_1)) {
     var_2 = vectortoangles(var_1 getEye() - var_0.origin);
     var_2 = anglesToForward(var_2);
-    var_0 moveto(var_0.origin + var_2 * 10, 0.2);
+    var_0 moveTo(var_0.origin + var_2 * 10, 0.2);
     wait 0.2;
   }
 
@@ -224,12 +224,12 @@ _id_0A5A(var_0, var_1) {
   var_2 = anglesToForward(var_2);
   var_3 = 150;
   var_4 = distance(var_0.origin, self._id_0A4B) / var_3;
-  var_0 moveto(self._id_0A4B, var_4);
+  var_0 moveTo(self._id_0A4B, var_4);
   wait(var_4);
   var_5 = var_0.origin;
-  var_0 moveto(var_0.origin + var_2 * 80 + (0, 0, -25), 3, 1, 1);
+  var_0 moveTo(var_0.origin + var_2 * 80 + (0, 0, -25), 3, 1, 1);
   wait 3.5;
-  var_0 moveto(var_5 + var_2 * -20, 3, 1, 1);
+  var_0 moveTo(var_5 + var_2 * -20, 3, 1, 1);
   wait 1;
   _id_0A51();
 }

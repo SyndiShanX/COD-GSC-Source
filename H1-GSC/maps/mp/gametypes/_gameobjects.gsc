@@ -647,7 +647,7 @@ setdropped() {
 
     if(var_1["fraction"] < 1 && distance(var_1["position"], var_0) < 10.0) {
       var_5 = (cos(var_3), sin(var_3), 0);
-      var_5 = vectornormalize(var_5 - var_1["normal"] * vectordot(var_5, var_1["normal"]));
+      var_5 = vectorNormalize(var_5 - var_1["normal"] * vectordot(var_5, var_1["normal"]));
       var_6 = vectortoangles(var_5);
     } else
       var_6 = (0, var_3, 0);
@@ -1375,7 +1375,7 @@ proxtriggerlos(var_0, var_1) {
 
   var_4 = var_0.origin - self.trigger.origin;
   var_4 = (var_4[0], var_4[1], 0);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_4 = var_4 * 5;
 
   foreach(var_6 in var_2) {
@@ -1718,9 +1718,9 @@ useholdthink(var_0) {
   var_0 notify("use_hold");
 
   if(isPlayer(var_0)) {
-    var_0 playerlinkto(self.trigger);
+    var_0 playerlinkTo(self.trigger);
   } else {
-    var_0 linkto(self.trigger);
+    var_0 linkTo(self.trigger);
   }
 
   var_0 playerlinkedoffsetenable();
@@ -2043,18 +2043,18 @@ updateworldicon(var_0, var_1) {
 
       if(self.type == "carryObject") {
         if(isDefined(self.carrier) && !shouldpingobject(var_0)) {
-          var_5 settargetent(self.carrier);
+          var_5 settargetEnt(self.carrier);
         } else if(!isDefined(self.carrier) && isDefined(self.objectiveonvisuals) && self.objectiveonvisuals) {
-          var_5 settargetent(self.visuals[0]);
+          var_5 settargetEnt(self.visuals[0]);
         } else {
-          var_5 cleartargetent();
+          var_5 cleartargetEnt();
         }
       }
     } else {
       var_5 fadeovertime(0.05);
       var_5.alpha = 0;
       var_5.isshown = 0;
-      var_5 cleartargetent();
+      var_5 cleartargetEnt();
     }
 
     var_5 thread hideworldiconongameend();
@@ -2228,7 +2228,7 @@ setteamusetext(var_0, var_1) {
 }
 
 setusehinttext(var_0) {
-  self.trigger sethintstring(var_0);
+  self.trigger setHintString(var_0);
 }
 
 allowcarry(var_0) {

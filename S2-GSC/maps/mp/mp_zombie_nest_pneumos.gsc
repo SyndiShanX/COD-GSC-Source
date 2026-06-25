@@ -17,7 +17,7 @@ func_00F9() {
 
   level.var_7532[1] = common_scripts\utility::func_46B5("pneumo_start_2", "targetname");
   level.var_7532[2] = common_scripts\utility::func_46B5("pneumo_start_3", "targetname");
-  var_00 = getent("pneumo_box_origin", "targetname");
+  var_00 = getEnt("pneumo_box_origin", "targetname");
   var_01 = getEntArray("pneumo_tubes_geo", "targetname");
   if(level.var_7532.size > 0) {
     foreach(var_03 in level.var_7532) {
@@ -73,9 +73,9 @@ func_00F9() {
         case "cage_button_trig":
           var_0E.var_1E2C = var_06;
           if(lib_0547::func_5565(var_0E.var_0165, "first_button")) {
-            var_0E.var_1E2C sethintstring(&"ZOMBIE_NEST_PNEUMO_TUBE_ACTIVATE");
+            var_0E.var_1E2C setHintString(&"ZOMBIE_NEST_PNEUMO_TUBE_ACTIVATE");
           } else {
-            var_0E.var_1E2C sethintstring(&"ZOMBIES_SWITCH_HINT_GENERIC_BUTTON");
+            var_0E.var_1E2C setHintString(&"ZOMBIES_SWITCH_HINT_GENERIC_BUTTON");
           }
           break;
 
@@ -173,7 +173,7 @@ func_63B8(param_00) {
 
 func_8A3B(param_00) {
   wait(1);
-  self.var_A1F7 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  self.var_A1F7 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_01 = function_021F("scriptable_pnuemo_tube", "targetname");
   var_02 = undefined;
   if(isDefined(var_01) && var_01.size > 0) {
@@ -205,7 +205,7 @@ func_8A3B(param_00) {
     var_03.var_6642 = 1;
   }
 
-  self.var_A1F7 sethintstring(&"ZOMBIES_EMPTY_STRING");
+  self.var_A1F7 setHintString(&"ZOMBIES_EMPTY_STRING");
   lib_0559::func_7BE3(self.var_A1F7, "pneumo");
   for(;;) {
     if(isDefined(self.var_A1F7)) {
@@ -302,7 +302,7 @@ func_A072(param_00, param_01) {
   var_02 = param_01.var_6EB7;
   self unlink();
   self setangles(var_02[var_02.size - 1].var_001D);
-  self setorigin(var_02[var_02.size - 1].var_0116);
+  self setOrigin(var_02[var_02.size - 1].var_0116);
   self method_8004();
   maps\mp\mp_zombie_nest_ee_util::func_1F3D();
   var_03 = 150 * lib_055F::func_A01F(var_02[var_02.size - 1].var_001D);
@@ -344,7 +344,7 @@ func_1DE0() {
 
   self.var_1E2B lib_0378::func_8D74("zmb_pap_button");
   self.var_1E2B scriptmodelplayanim("zmb_undg_cage_switch_activate");
-  self.var_1E2C sethintstring(&"ZOMBIES_EMPTY_STRING");
+  self.var_1E2C setHintString(&"ZOMBIES_EMPTY_STRING");
   self.var_1E2C common_scripts\utility::func_9D9F();
   if(!common_scripts\utility::func_3C77("flag_pap_available")) {
     var_01 = 0;
@@ -366,7 +366,7 @@ func_1DE0() {
 }
 
 func_203D() {
-  var_00 = getent("cage_dialogue", "targetname");
+  var_00 = getEnt("cage_dialogue", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!isDefined(var_01.var_6E34) && isPlayer(var_01)) {
@@ -469,7 +469,7 @@ func_8A0B() {
   var_00 = spawnStruct();
   var_01 = function_021F("cage", "targetname");
   var_00.var_1E31 = var_01[0];
-  var_00.var_1E2D = getent("cage_clip", "targetname");
+  var_00.var_1E2D = getEnt("cage_clip", "targetname");
   return var_00;
 }
 
@@ -727,7 +727,7 @@ func_3B66(param_00, param_01) {
     }
 
     if(isDefined(var_05.var_01A2)) {
-      var_05.var_1CB1 = getent(var_05.var_01A2, "targetname");
+      var_05.var_1CB1 = getEnt(var_05.var_01A2, "targetname");
     }
 
     var_03[var_03.size] = var_05;

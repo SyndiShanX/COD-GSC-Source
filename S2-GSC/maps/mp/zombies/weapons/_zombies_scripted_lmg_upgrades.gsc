@@ -38,7 +38,7 @@ lewis_run_bullet_rewind() {
     }
 
     var_03 = var_00 getEye();
-    var_04 = var_03 + 10000 * vectornormalize(anglesToForward(var_00 geteyeangles()));
+    var_04 = var_03 + 10000 * vectorNormalize(anglesToForward(var_00 geteyeangles()));
     var_05 = bulletTrace(var_03, var_04, 0);
     if(!isDefined(var_05["position"])) {
       continue;
@@ -123,7 +123,7 @@ mg42_laser_rounds() {
     var_08 = anglestoright(var_05);
     var_09 = var_00 getEye() + var_06 * 45 + var_07 * -6.5 + var_08 * 4;
     var_0A = anglesToForward(var_05);
-    magicbullet(var_01, var_09, var_09 + 1000 * vectornormalize(anglesToForward(var_00 geteyeangles())), var_00);
+    magicbullet(var_01, var_09, var_09 + 1000 * vectorNormalize(anglesToForward(var_00 geteyeangles())), var_00);
   }
 }
 

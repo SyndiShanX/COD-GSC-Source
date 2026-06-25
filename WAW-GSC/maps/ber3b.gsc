@@ -182,7 +182,7 @@ setup_strings() {
 
 set_objective(num) {
   if(num == 1) {
-    marker = GetStruct("struct_objective8_marker", "targetname");
+    marker = getStruct("struct_objective8_marker", "targetname");
 
     objective_add(1, "active", level.obj1_string, marker.origin);
     objective_current(1);
@@ -196,7 +196,7 @@ set_objective(num) {
 
     level.nonFlagObjective = 2;
   } else if(num == 3) {
-    marker = GetStruct("struct_objective9_marker", "targetname");
+    marker = getStruct("struct_objective9_marker", "targetname");
 
     objective_state(2, "done");
     objective_state(10, "invisible");
@@ -214,13 +214,13 @@ set_objective(num) {
 
     level.nonFlagObjective = 4;
   } else if(num == 5) {
-    marker = GetStruct("struct_objective11_marker", "targetname");
+    marker = getStruct("struct_objective11_marker", "targetname");
 
     objective_state(4, "done");
     objective_add(5, "active", level.obj5_string, marker.origin);
     objective_current(5);
   } else if(num == 6) {
-    marker = GetStruct("struct_objective12_marker", "targetname");
+    marker = getStruct("struct_objective12_marker", "targetname");
 
     objective_state(5, "done");
     objective_add(6, "active", level.obj6_string, marker.origin);
@@ -236,7 +236,7 @@ objectives_skip(numToSkipPast) {
 }
 
 warp_players_underworld() {
-  underworld = GetStruct("struct_player_teleport_underworld", "targetname");
+  underworld = getStruct("struct_player_teleport_underworld", "targetname");
   if(!isDefined(underworld)) {
     ASSERTMSG("warp_players_underworld(): can't find the underworld warp spot! aborting.");
     return;
@@ -245,7 +245,7 @@ warp_players_underworld() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    players[i] SetOrigin(underworld.origin);
+    players[i] setOrigin(underworld.origin);
   }
 }
 warp_players(startValue, startKey) {
@@ -370,13 +370,13 @@ arty_strike_rumble(duration) {
   self endon("death");
   self endon("disconnect");
 
-  self PlayRumbleOnEntity("explosion_generic");
+  self playRumbleOnEntity("explosion_generic");
   wait(0.2);
 
   stopTime = GetTime() + (duration * 1000);
 
   while(GetTime() <= stopTime) {
-    self PlayRumbleOnEntity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait(0.05);
   }
 }
@@ -445,7 +445,7 @@ chandelier_rotate_random() {
   rotateMin = 0;
   rotateMax = 180;
 
-  self RotateYaw(RandomIntRange(rotateMin, rotateMax), 0.05);
+  self rotateYaw(RandomIntRange(rotateMin, rotateMax), 0.05);
 }
 eagle_setup() {
   eagle = getent_safe("smodel_parliament_eagle", "targetname");
@@ -630,8 +630,8 @@ russian_flag_think() {
     }
 
     flagtrig = spawn("trigger_radius", self get_offset_origin(), 0, 64, 200);
-    flagtrig EnableLinkTo();
-    flagtrig LinkTo(self);
+    flagtrig EnablelinkTo();
+    flagtrig linkTo(self);
 
     while(flag("russian_flag_dropped")) {
       players = get_players();

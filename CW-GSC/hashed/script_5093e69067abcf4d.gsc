@@ -34,7 +34,7 @@ function function_56b84660() {}
 function function_a2c4f153(str_skipto, b_starting) {
   setDvar(#"setsunshadowsplitdistance", "1500");
   level.var_3741fc24 = 1;
-  level.ally_spawner = getent("bamboo_ally_adler", "targetname");
+  level.ally_spawner = getEnt("bamboo_ally_adler", "targetname");
   namespace_b7cfe907::function_882e6973(0, level.ally_spawner);
   level.vip.ignoreall = 1;
   level.vip.goalradius = 8;
@@ -135,7 +135,7 @@ function function_61ae79dd() {
 function function_25b14af6() {}
 
 function function_8461e1fe() {
-  var_1abcec75 = getent("obj_bamboo_adler", "targetname");
+  var_1abcec75 = getEnt("obj_bamboo_adler", "targetname");
   var_a3d82ec9 = getEntArray("bamboo_tripwire", "targetname");
   var_700c90fe = struct::get("obj_bamboo_search");
   var_bddc99bf = struct::get("obj_bamboo_defend");
@@ -175,7 +175,7 @@ function function_8461e1fe() {
 }
 
 function function_aebe91ed() {
-  level.var_30e75fdd = getent("obj_bamboo_place_adler", "targetname");
+  level.var_30e75fdd = getEnt("obj_bamboo_place_adler", "targetname");
   level flag::wait_till("flag_bamboo_can_place_sims");
   objectives::complete("armada_obj_bamboo_landingzone", level.var_88a1eb21);
   level.var_30e75fdd util::create_cursor_hint(undefined, (0, 0, 0), #"hash_3e7cef75b9a01994", 100);
@@ -199,9 +199,9 @@ function function_ff41dacf() {
 }
 
 function function_6847b56f() {
-  level.var_420dfb63 = getent("bamboo_tripwire_trigger_1", "targetname");
-  level.var_2853c7ef = getent("bamboo_tripwire_trigger_2", "targetname");
-  level.var_1a99ac7b = getent("bamboo_tripwire_trigger_3", "targetname");
+  level.var_420dfb63 = getEnt("bamboo_tripwire_trigger_1", "targetname");
+  level.var_2853c7ef = getEnt("bamboo_tripwire_trigger_2", "targetname");
+  level.var_1a99ac7b = getEnt("bamboo_tripwire_trigger_3", "targetname");
 
   if(level.var_3741fc24) {
     level.var_420dfb63 thread function_7eff82e5();
@@ -249,8 +249,8 @@ function function_16d1451f() {
   var_5022064 = distance(level.player.origin, end.origin) / 300;
   accel_time = 2;
   org = util::spawn_model("tag_origin", level.player.origin, level.player.angles);
-  level.player playerlinkto(org, "tag_origin", 180, 180, 180, 180, 180, 0);
-  org moveto(end.origin, var_5022064, 0, 0);
+  level.player playerlinkTo(org, "tag_origin", 180, 180, 180, 180, 180, 0);
+  org moveTo(end.origin, var_5022064, 0, 0);
   pitch = 0.15;
   yaw = 0.15;
   roll = 0.15;
@@ -262,10 +262,10 @@ function function_16d1451f() {
 }
 
 function function_4f94f6b3() {
-  slide_trig = getent("bamboo_buddy_slide_trig", "targetname");
+  slide_trig = getEnt("bamboo_buddy_slide_trig", "targetname");
   slide_trig waittill(#"trigger");
-  start_pos = getent("bamboo_start_pos", "targetname");
-  end_pos = getent("bamboo_end_pos", "targetname");
+  start_pos = getEnt("bamboo_start_pos", "targetname");
+  end_pos = getEnt("bamboo_end_pos", "targetname");
 
   if(!isDefined(start_pos) || !isDefined(end_pos)) {
     iprintlnbold("One of the start points aren't defined.");
@@ -276,10 +276,10 @@ function function_4f94f6b3() {
 }
 
 function function_7adc18d4() {
-  landing_trig = getent("landing_trig", "targetname");
+  landing_trig = getEnt("landing_trig", "targetname");
   landing_trig waittill(#"trigger");
-  var_bdfdd61e = getent("bamboo_tele_pos", "targetname");
-  end_pos = getent(var_bdfdd61e.target, "targetname");
+  var_bdfdd61e = getEnt("bamboo_tele_pos", "targetname");
+  end_pos = getEnt(var_bdfdd61e.target, "targetname");
   wait 1;
   level.player val::set(#"script_godmode", "takedamage", 1);
 }
@@ -317,14 +317,14 @@ function function_7d2b8848() {
 }
 
 function bamboo_dead_body_found() {
-  trigger = getent("bamboo_dead_body_found", "targetname");
+  trigger = getEnt("bamboo_dead_body_found", "targetname");
   trigger waittill(#"trigger");
   level flag::wait_till("flag_bamboo_dead_body_found");
   level flag::set("flag_vo_bamboo_dead_body_found");
 }
 
 function bamboo_dead_body_cleared() {
-  trigger = getent("bamboo_dead_body_cleared", "targetname");
+  trigger = getEnt("bamboo_dead_body_cleared", "targetname");
   trigger waittill(#"trigger");
   level flag::clear("flag_bamboo_dead_body_found");
 }
@@ -337,19 +337,19 @@ function function_42782299() {
   }
 
   start_node = getnode("bamboo_sims_start_node", "targetname");
-  trigger = getent("bamboo_start_trig", "targetname");
+  trigger = getEnt("bamboo_start_trig", "targetname");
   setDvar(#"setsunshadowsplitdistance", "1500");
   trigger thread function_df7badb7();
   level flag::set("flag_bamboo_begin_search");
   level.var_37ebce9f = 1;
 
   if(!isDefined(level.ally_spawner)) {
-    var_c7994e66 = getent("bamboo_ally_adler", "targetname");
+    var_c7994e66 = getEnt("bamboo_ally_adler", "targetname");
     namespace_b7cfe907::function_882e6973(0, var_c7994e66);
     level.vip.goalradius = 8;
   }
 
-  level.var_e76e155b = getent("bamboo_ally_sims", "targetname");
+  level.var_e76e155b = getEnt("bamboo_ally_sims", "targetname");
   namespace_b7cfe907::function_3af72756(level.var_7466d419, level.buddy, "crew");
   namespace_b7cfe907::function_ed68628c(0, level.var_e76e155b);
   level.buddy namespace_b7cfe907::swap_hat_model();
@@ -370,8 +370,8 @@ function function_42782299() {
 }
 
 function function_d0320edf() {
-  var_392915d9 = getent("bamboo_adler_callout_trig", "targetname");
-  var_4aa08ad4 = getent("bamboo_adler_located", "targetname");
+  var_392915d9 = getEnt("bamboo_adler_callout_trig", "targetname");
+  var_4aa08ad4 = getEnt("bamboo_adler_located", "targetname");
   var_392915d9 waittill(#"trigger");
   level.buddy namespace_979752dc::set_movement_speed(125);
   var_4aa08ad4 waittill(#"trigger");
@@ -380,7 +380,7 @@ function function_d0320edf() {
 }
 
 function function_5818c90e() {
-  var_e76e155b = getent("bamboo_teleport_buddy", "targetname");
+  var_e76e155b = getEnt("bamboo_teleport_buddy", "targetname");
   level.buddy forceteleport(var_e76e155b.origin);
   level.vip.goalradius = 8;
   level.vip.ignoreall = 1;
@@ -422,10 +422,10 @@ function function_df7badb7() {
 }
 
 function function_5a800c65() {
-  var_f2db850c = getent("bamboo_adler_ambush", "targetname");
-  var_87b6eb69 = getent("bamboo_enemy_smoke_retreat_vol", "targetname");
-  var_c95d32b8 = getent("bamboo_enemy_smoke_retreat_vol_1", "targetname");
-  var_d9f3194 = getent("bamboo_enemy_smoke_attack_vol", "targetname");
+  var_f2db850c = getEnt("bamboo_adler_ambush", "targetname");
+  var_87b6eb69 = getEnt("bamboo_enemy_smoke_retreat_vol", "targetname");
+  var_c95d32b8 = getEnt("bamboo_enemy_smoke_retreat_vol_1", "targetname");
+  var_d9f3194 = getEnt("bamboo_enemy_smoke_attack_vol", "targetname");
   var_25fcd2e1 = spawner::simple_spawn("bamboo_ally_bait");
 
   foreach(ally in var_25fcd2e1) {
@@ -508,12 +508,12 @@ function function_4f0b177() {
 }
 
 function function_58f90134() {
-  var_8f189bb7 = getent("bamboo_spook_trig_1", "targetname");
-  var_44642ed0 = getent("bamboo_enemy_spook_1", "targetname");
-  var_9952b02b = getent("bamboo_spook_trig_2", "targetname");
-  var_3633126e = getent("bamboo_enemy_spook_2", "targetname");
-  var_423181de = getent("bamboo_spook_trig_3", "targetname");
-  var_a8f777f5 = getent("bamboo_enemy_spook_3", "targetname");
+  var_8f189bb7 = getEnt("bamboo_spook_trig_1", "targetname");
+  var_44642ed0 = getEnt("bamboo_enemy_spook_1", "targetname");
+  var_9952b02b = getEnt("bamboo_spook_trig_2", "targetname");
+  var_3633126e = getEnt("bamboo_enemy_spook_2", "targetname");
+  var_423181de = getEnt("bamboo_spook_trig_3", "targetname");
+  var_a8f777f5 = getEnt("bamboo_enemy_spook_3", "targetname");
   var_8f189bb7 waittill(#"trigger");
   savegame::function_7790f03();
 
@@ -560,15 +560,15 @@ function function_58f90134() {
 }
 
 function function_5220591a() {
-  var_8f189bb7 = getent("bamboo_ambush_trig_1", "targetname");
-  var_9952b02b = getent("bamboo_ambush_trig_2", "targetname");
-  var_405b960b = getent("bamboo_enemy_ambush_4", "targetname");
-  var_b37c106 = getent("bamboo_enemy_vol_1", "targetname");
-  var_bcf5a483 = getent("bamboo_enemy_vol_2", "targetname");
-  var_95177ffd = getent("bamboo_enemy_start_vol_fallback", "targetname");
-  var_74e6288e = getent("bamboo_enemy_start_vol_retreat", "targetname");
-  var_285e25c7 = getent("bamboo_enemy_start_vol_retreat_frontline", "targetname");
-  var_8793cde9 = getent("bamboo_enemy_vol_1_retreat", "targetname");
+  var_8f189bb7 = getEnt("bamboo_ambush_trig_1", "targetname");
+  var_9952b02b = getEnt("bamboo_ambush_trig_2", "targetname");
+  var_405b960b = getEnt("bamboo_enemy_ambush_4", "targetname");
+  var_b37c106 = getEnt("bamboo_enemy_vol_1", "targetname");
+  var_bcf5a483 = getEnt("bamboo_enemy_vol_2", "targetname");
+  var_95177ffd = getEnt("bamboo_enemy_start_vol_fallback", "targetname");
+  var_74e6288e = getEnt("bamboo_enemy_start_vol_retreat", "targetname");
+  var_285e25c7 = getEnt("bamboo_enemy_start_vol_retreat_frontline", "targetname");
+  var_8793cde9 = getEnt("bamboo_enemy_vol_1_retreat", "targetname");
   var_8bb7c0ff = getEntArray("bamboo_negotiation_node_1", "targetname");
   level flag::wait_till("flag_bamboo_adler_escort");
   var_8f189bb7 waittill(#"trigger");
@@ -651,10 +651,10 @@ function function_5220591a() {
 function function_beb9b824() {
   clips = getEntArray("bamboo_blockade_clip", "targetname");
   logs = getEntArray("bamboo_blockade_log", "targetname");
-  var_6d98bf7 = getent("bamboo_exfil_blockade_position_1", "targetname");
-  var_fb2c8c87 = getent("bamboo_log_exfil_1", "targetname");
-  var_a23fc2c5 = getent("bamboo_exfil_blockade_position_2", "targetname");
-  var_7ba40d7c = getent("bamboo_log_exfil_2", "targetname");
+  var_6d98bf7 = getEnt("bamboo_exfil_blockade_position_1", "targetname");
+  var_fb2c8c87 = getEnt("bamboo_log_exfil_1", "targetname");
+  var_a23fc2c5 = getEnt("bamboo_exfil_blockade_position_2", "targetname");
+  var_7ba40d7c = getEnt("bamboo_log_exfil_2", "targetname");
 
   foreach(clip in level.bamboo_exfil_blockade_clip) {
     clip solid();
@@ -709,21 +709,21 @@ function function_f4b3ddba(turret, gunner) {
 }
 
 function function_d7dd315e() {
-  var_423181de = getent("bamboo_ambush_trig_minigun", "targetname");
-  var_57ecad54 = getent("bamboo_ambush_trig_3", "targetname");
-  var_255ac831 = getent("bamboo_ambush_trig_4", "targetname");
-  var_b1a93b1 = getent("bamboo_second_minigun_spawner_trig", "targetname");
-  var_8b071388 = getent("bamboo_ambush_trig_4_backup", "targetname");
-  var_910adda9 = getent("bamboo_enemy_minigun_retreat_vol_1", "targetname");
-  var_f7059ee = getent("bamboo_enemy_minigun_retreat_vol_2", "targetname");
-  var_f826723e = getent("bamboo_enemy_minigun_1", "targetname");
-  var_21484481 = getent("bamboo_enemy_minigun_2", "targetname");
-  level.var_640a075d = getent(var_f826723e.target, "targetname");
-  level.var_a4b2ba72 = getent(var_21484481.target, "targetname");
-  var_1cd2abf0 = getent("bamboo_turret_exposed_pos", "targetname");
-  var_1af664c8 = getent("bamboo_turret_exposed_pos_2", "targetname");
-  var_99356002 = getent("bamboo_turret_hidden_pos", "targetname");
-  var_86cd1176 = getent("bamboo_turret_hidden_pos_2", "targetname");
+  var_423181de = getEnt("bamboo_ambush_trig_minigun", "targetname");
+  var_57ecad54 = getEnt("bamboo_ambush_trig_3", "targetname");
+  var_255ac831 = getEnt("bamboo_ambush_trig_4", "targetname");
+  var_b1a93b1 = getEnt("bamboo_second_minigun_spawner_trig", "targetname");
+  var_8b071388 = getEnt("bamboo_ambush_trig_4_backup", "targetname");
+  var_910adda9 = getEnt("bamboo_enemy_minigun_retreat_vol_1", "targetname");
+  var_f7059ee = getEnt("bamboo_enemy_minigun_retreat_vol_2", "targetname");
+  var_f826723e = getEnt("bamboo_enemy_minigun_1", "targetname");
+  var_21484481 = getEnt("bamboo_enemy_minigun_2", "targetname");
+  level.var_640a075d = getEnt(var_f826723e.target, "targetname");
+  level.var_a4b2ba72 = getEnt(var_21484481.target, "targetname");
+  var_1cd2abf0 = getEnt("bamboo_turret_exposed_pos", "targetname");
+  var_1af664c8 = getEnt("bamboo_turret_exposed_pos_2", "targetname");
+  var_99356002 = getEnt("bamboo_turret_hidden_pos", "targetname");
+  var_86cd1176 = getEnt("bamboo_turret_hidden_pos_2", "targetname");
   level flag::wait_till("flag_bamboo_sims_rescue");
   level flag::wait_till("flag_bamboo_adler_escort");
   level.var_640a075d.origin = var_1cd2abf0.origin;
@@ -806,7 +806,7 @@ function function_d7dd315e() {
 }
 
 function function_48f64d06() {
-  var_b1a93b1 = getent("bamboo_ambush_trig_5", "targetname");
+  var_b1a93b1 = getEnt("bamboo_ambush_trig_5", "targetname");
   level flag::wait_till("flag_bamboo_sims_rescue");
   var_b1a93b1 waittill(#"trigger");
   iprintlnbold("These guys just don't let up!");
@@ -818,7 +818,7 @@ function function_48f64d06() {
 }
 
 function function_cee1a3e8() {
-  var_b9864a0f = getent("bamboo_enemy_vol_liftoff", "targetname");
+  var_b9864a0f = getEnt("bamboo_enemy_vol_liftoff", "targetname");
   level flag::wait_till("flag_bamboo_liftoff");
   level.player val::set(#"script_godmode", "takedamage", 0);
   vehicle::get_in(level.buddy, level.var_7466d419, "crew");
@@ -856,7 +856,7 @@ function function_97582a1d() {
 }
 
 function function_cf6ab51b() {
-  var_27f35498 = getent("bamboo_downed_chopper", "targetname");
+  var_27f35498 = getEnt("bamboo_downed_chopper", "targetname");
   a_ents = [];
   a_ents[#"adler"] = level.vip;
   a_ents[#"hash_3962ecd59dbbfa07"] = var_27f35498;
@@ -895,13 +895,13 @@ function function_444403c() {
 
 function function_19f372aa() {
   level flag::wait_till("flag_bamboo_sims_rescue");
-  trigger = getent("bamboo_end_trig", "targetname");
+  trigger = getEnt("bamboo_end_trig", "targetname");
   trigger waittill(#"trigger");
   level flag::set("flag_bamboo_main_end");
 }
 
 function function_7a970706() {
-  var_efb94641 = getent("bamboo_adler_pickup_teleport", "targetname");
+  var_efb94641 = getEnt("bamboo_adler_pickup_teleport", "targetname");
   self waittill(#"trigger");
   self util::remove_cursor_hint();
   level flag::set("flag_bamboo_adler_pickup");
@@ -915,7 +915,7 @@ function function_7a970706() {
   level.vip colors::set_force_color("b");
   level.buddy colors::set_force_color("b");
   level.buddy util::magic_bullet_shield();
-  var_1ea5d70e = getent("bamboo_teleport_buddy", "targetname");
+  var_1ea5d70e = getEnt("bamboo_teleport_buddy", "targetname");
 }
 
 function function_28657862() {
@@ -991,8 +991,8 @@ function function_43c14dd6() {
 
 function function_85ddf842() {
   player = level.player;
-  var_591da512 = getent("bamboo_buddy_end_spawn", "targetname");
-  var_2ad99779 = getent("bamboo_vip_end_spawn", "targetname");
+  var_591da512 = getEnt("bamboo_buddy_end_spawn", "targetname");
+  var_2ad99779 = getEnt("bamboo_vip_end_spawn", "targetname");
   function_c6968b8f("bamboo_vc_attack_nodes", "script_noteworthy", 0);
   level.var_622b1622 = spawner::simple_spawn("bamboo_enemy_prone_ambush_final");
 
@@ -1079,7 +1079,7 @@ function function_85ddf842() {
 }
 
 function function_7810ad29() {
-  var_72394006 = getent("bamboo_enemy_vol_final", "targetname");
+  var_72394006 = getEnt("bamboo_enemy_vol_final", "targetname");
   level.var_f9d42668 = [];
   wait 7;
 

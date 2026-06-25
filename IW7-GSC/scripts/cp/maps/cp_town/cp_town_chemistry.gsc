@@ -155,7 +155,7 @@ setup_chemistry_lab_models_in_world() {
 
 setup_heat_pressure_buttons() {
   var_0 = scripts\engine\utility::getStructArray("h_p_button", "script_noteworthy");
-  var_1 = getent("chem_computer", "targetname");
+  var_1 = getEnt("chem_computer", "targetname");
   foreach(var_6, var_3 in var_0) {
     var_4 = undefined;
     switch (var_3.name) {
@@ -486,7 +486,7 @@ register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
   if(var_1 == "animalfat") {
     level.animalfat = [];
     var_18 = strtok(var_16.model_coordinates, ",");
-    var_19 = scripts\engine\utility::getstruct("cp_town_animal_fat", "script_noteworthy");
+    var_19 = scripts\engine\utility::getStruct("cp_town_animal_fat", "script_noteworthy");
     var_1A = spawn("script_model", var_19.origin);
     var_1A setModel("tag_origin_chemical");
     var_1A.angles = (0, 0, 0);
@@ -817,23 +817,23 @@ setup_diamond_constant_player_omnvars(var_0) {
 }
 
 setup_pi_constant() {
-  level.pi_const = getent("chem_const_2", "script_noteworthy");
+  level.pi_const = getEnt("chem_const_2", "script_noteworthy");
 }
 
 setup_eye_equation_constant() {
-  level.eye_equation = getent("chem_const_3", "script_noteworthy");
+  level.eye_equation = getEnt("chem_const_3", "script_noteworthy");
 }
 
 setup_color_key_chart() {
-  level.color_eye = getent("chem_const_tv_screen", "script_noteworthy");
+  level.color_eye = getEnt("chem_const_tv_screen", "script_noteworthy");
 }
 
 setup_heat_pressure_equation_constant() {
-  level.heat_pressure_eq = getent("chem_const_equation", "script_noteworthy");
+  level.heat_pressure_eq = getEnt("chem_const_equation", "script_noteworthy");
 }
 
 setup_lab_screen() {
-  level.lab_screen = getent("chem_const_lab_screen", "script_noteworthy");
+  level.lab_screen = getEnt("chem_const_lab_screen", "script_noteworthy");
 }
 
 init_chem_reaction_interactions() {
@@ -844,7 +844,7 @@ init_chem_reaction_interactions() {
 }
 
 init_reaction_start_interactable_model() {
-  var_0 = scripts\engine\utility::getstruct("reaction_start_model", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("reaction_start_model", "script_noteworthy");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
   var_0.model = var_1;

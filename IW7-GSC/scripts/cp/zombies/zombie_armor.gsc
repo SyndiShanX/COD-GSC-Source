@@ -40,7 +40,7 @@ func_668C(var_0, var_1) {
   var_4 setModel(var_2.model);
   var_4.angles = var_0.angles;
   var_4.fake_health = var_2.health;
-  var_4 linkto(var_0, var_2.physics_setgravitydynentscalar, var_2.var_AEBA, var_2.var_1E79);
+  var_4 linkTo(var_0, var_2.physics_setgravitydynentscalar, var_2.var_AEBA, var_2.var_1E79);
   var_4 thread func_217F(var_4, var_0);
   var_0.var_6691[var_2.hitloc] = var_4;
 }
@@ -132,9 +132,9 @@ modify_apache_lifetime(var_0) {
     return undefined;
   }
 
-  var_0 = vectornormalize((var_0[0], var_0[1], 0));
+  var_0 = vectorNormalize((var_0[0], var_0[1], 0));
   var_0 = var_0 + (0, 0, 1);
-  return vectornormalize(var_0) * 1250;
+  return vectorNormalize(var_0) * 1250;
 }
 
 func_50AF(var_0) {

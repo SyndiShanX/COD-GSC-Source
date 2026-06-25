@@ -248,7 +248,7 @@ idletargetmover(var_0) {
     if(maps\mp\_utility::isreallyalive(self) && !maps\mp\_utility::isusingremote() && anglesToForward(self.angles) != var_1) {
       var_1 = anglesToForward(self.angles);
       var_2 = self.origin + var_1 * -100 + (0, 0, 40);
-      var_0 moveto(var_2, 0.5);
+      var_0 moveTo(var_2, 0.5);
     }
 
     wait 0.5;

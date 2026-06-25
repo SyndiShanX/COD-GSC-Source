@@ -234,7 +234,7 @@ func_7971() {
 
 func_796B(param_00) {
   var_01 = playerphysicstrace(param_00.var_116 + (0, 0, 60), param_00.var_116, param_00);
-  param_00 setorigin(var_01);
+  param_00 setOrigin(var_01);
 }
 
 func_796C(param_00) {
@@ -373,7 +373,7 @@ func_7968(param_00, param_01) {
   }
 
   if(common_scripts\utility::func_562E(var_02)) {
-    param_00 sethintstring("");
+    param_00 setHintString("");
     param_00 makeunusable();
     self waittillmatch("repaired", "trigger");
   }
@@ -411,19 +411,19 @@ func_7968(param_00, param_01) {
 
     if(var_06 == "explode") {
       self notify("stopRaidExplosiveTriggerUsedWait");
-      param_00 sethintstring("");
+      param_00 setHintString("");
       param_00 makeunusable();
       self waittillmatch("repaired", "trigger");
       continue;
     }
 
     thread func_7967(param_00, var_07);
-    param_00 sethintstring("");
+    param_00 setHintString("");
     for(;;) {
       self waittill("trigger", var_06, var_07, var_08);
       if(var_06 == "explode") {
         self notify("stopRaidExplosiveTriggerUsedWait");
-        param_00 sethintstring("");
+        param_00 setHintString("");
         param_00 makeunusable();
         self waittillmatch("repaired", "trigger");
         break;
@@ -490,7 +490,7 @@ func_7967(param_00, param_01) {
 func_7963(param_00, param_01, param_02, param_03) {
   var_04 = param_00.var_982D["explosive_model"][0];
   if(!common_scripts\utility::func_562E(param_03)) {
-    var_05 = var_04.var_116 + vectornormalize(anglestoright(var_04.var_1D)) * 15;
+    var_05 = var_04.var_116 + vectorNormalize(anglestoright(var_04.var_1D)) * 15;
     if(isDefined(param_02)) {
       param_00 entityradiusdamage(var_05, 150, 180, 80, param_02, "MOD_EXPLOSIVE", "bomb_site_mp");
     } else {
@@ -680,7 +680,7 @@ func_79BF(param_00, param_01) {
     if(!common_scripts\utility::func_562E(var_02)) {
       lib_0502::func_1D3B(self.var_2599);
       param_00 makeunusable();
-      param_00 sethintstring("");
+      param_00 setHintString("");
       for(;;) {
         self waittill("trigger", var_08, var_09, var_0A);
         if(var_08 == "explode") {
@@ -1233,7 +1233,7 @@ func_79FC(param_00, param_01) {
         foreach(var_0A in var_04) {
           var_0A notsolid();
           var_0A.var_A046 = 0;
-          var_0A moveto(var_0A.var_116 - (0, 320, 0), 0.1);
+          var_0A moveTo(var_0A.var_116 - (0, 320, 0), 0.1);
         }
       }
 
@@ -1253,7 +1253,7 @@ func_79FC(param_00, param_01) {
         foreach(var_0A in var_04) {
           var_0A notsolid();
           var_0A.var_A046 = 0;
-          var_0A moveto(var_0A.var_116 - (0, 320, 0), 0.1);
+          var_0A moveTo(var_0A.var_116 - (0, 320, 0), 0.1);
         }
       }
 
@@ -1271,7 +1271,7 @@ func_79FC(param_00, param_01) {
       foreach(var_0A in var_04) {
         var_0A solid();
         var_0A.var_A046 = 1;
-        var_0A moveto(var_0A.var_116 + (0, 320, 0), 0.1);
+        var_0A moveTo(var_0A.var_116 + (0, 320, 0), 0.1);
       }
     }
 
@@ -1853,7 +1853,7 @@ raidwireanimatedtrigger(param_00) {
     raidwireanimatedtriggerinit(param_00, "war_wrench_assemble_mp");
     lib_0502::func_1D3B(self.var_2599);
     param_00 waittill("used", var_02);
-    param_00 sethintstring("");
+    param_00 setHintString("");
     self.var_2599 = 1;
     lib_0502::func_1D3B(self.var_2599);
     self notify("trigger", "constructed", var_02);
@@ -1875,13 +1875,13 @@ raidwireanimatedtrigger(param_00) {
         }
       }
 
-      param_00 sethintstring("");
+      param_00 setHintString("");
       if(var_03 == "destroyed") {
         break;
       }
 
       thread raidwireaimatedexplosivetimer(param_00, var_04);
-      param_00 sethintstring("");
+      param_00 setHintString("");
       for(;;) {
         self waittill("trigger", var_03, var_04);
         if(var_03 == "bomb_exploded" || var_03 == "destroyed") {
@@ -1889,7 +1889,7 @@ raidwireanimatedtrigger(param_00) {
         }
       }
 
-      param_00 sethintstring("");
+      param_00 setHintString("");
       self notify("stop_timer");
       if(var_03 == "bomb_exploded" || var_03 == "destroyed") {
         break;
@@ -2256,14 +2256,14 @@ func_7A1A(param_00) {
       wait(1.5);
       var_01 makeusable();
       var_01 waittill("beginUse");
-      param_00 moveto(var_06, 2, 0.67, 0.67);
+      param_00 moveTo(var_06, 2, 0.67, 0.67);
       var_01 waittill("endUse", var_08, var_09);
       var_01 makeunusable();
       wait 0.05;
       if(var_09) {
         break;
       } else {
-        param_00 moveto(var_07, 1, 0.3, 0.3);
+        param_00 moveTo(var_07, 1, 0.3, 0.3);
       }
     }
 
@@ -2275,14 +2275,14 @@ func_7A1A(param_00) {
       wait(1.5);
       var_02 makeusable();
       var_02 waittill("beginUse");
-      param_00 moveto(var_07, 2, 0.67, 0.67);
+      param_00 moveTo(var_07, 2, 0.67, 0.67);
       var_02 waittill("endUse", var_08, var_09);
       var_02 makeunusable();
       wait 0.05;
       if(var_09) {
         break;
       } else {
-        param_00 moveto(var_06, 1, 0.3, 0.3);
+        param_00 moveTo(var_06, 1, 0.3, 0.3);
       }
     }
   }
@@ -2347,19 +2347,19 @@ func_7A1B(param_00) {
 
 func_79C8(param_00) {
   param_00 endon("death");
-  param_00 enablelinkto();
+  param_00 enablelinkTo();
   lib_0502::func_2084(param_00);
   self.var_9D65 = param_00;
   for(;;) {
     lib_0502::func_79E1(param_00, &"RAIDS_USE_CLOSE", 0.5, 17);
     param_00 waittill("used", var_01);
     self notify("trigger", "close", var_01);
-    param_00 sethintstring("");
+    param_00 setHintString("");
     wait(0.4);
     lib_0502::func_79E1(param_00, &"RAIDS_USE_OPEN", 0.5, 20);
     param_00 waittill("used", var_01);
     self notify("trigger", "open", var_01);
-    param_00 sethintstring("");
+    param_00 setHintString("");
     wait(0.4);
   }
 }

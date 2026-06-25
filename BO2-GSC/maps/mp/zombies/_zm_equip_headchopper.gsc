@@ -454,8 +454,8 @@ headchopperthink(weapon, electricradius, armed) {
   trigger = spawn("trigger_box", trigger_origin, 1, 8, 128, 64);
   trigger.origin = trigger.origin + anglestoup(weapon.angles) * 32.0;
   trigger.angles = weapon.angles;
-  trigger enablelinkto();
-  trigger linkto(weapon);
+  trigger enablelinkTo();
+  trigger linkTo(weapon);
   weapon.trigger = trigger;
 
   trigger.extent = (4.0, 64.0, 32.0);

@@ -47,7 +47,7 @@ init() {
   level._effect["sentry_rocket_muzzleflash_wv"] = loadfx("vfx/muzzleflash/rpg_flash_wv");
   level._effect["sentry_rocket_muzzleflash_view"] = loadfx("vfx/muzzleflash/rpg_flash_view");
   game["dialog"]["ks_sentrygun_destroyed"] = "ks_sentrygun_destroyed";
-  level.sentry_ai_clip = getent("sentry_ai_clip", "targetname");
+  level.sentry_ai_clip = getEnt("sentry_ai_clip", "targetname");
 }
 
 tryuseremotemgsentryturret(var_0, var_1) {
@@ -706,7 +706,7 @@ turret_modifydamage(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(self.owner) && self.owner.using_remote_turret && var_4 > 0) {
-    self.owner playrumbleonentity("damage_heavy");
+    self.owner playRumbleOnEntity("damage_heavy");
     self.owner thread maps\mp\killstreaks\_aerial_utility::playershowstreakstaticfordamage();
   }
 
@@ -775,7 +775,7 @@ startusingremoteturret(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self.owner;
 
   if(!var_4) {
-    var_5 playerlinkto(self.remoteent);
+    var_5 playerlinkTo(self.remoteent);
     var_5 playerlinkedoffsetenable();
     var_5 maps\mp\_utility::_giveweapon(level.turretsettings[self.turrettype].laptopinfo);
     var_5 switchtoweapon(level.turretsettings[self.turrettype].laptopinfo);
@@ -1546,8 +1546,8 @@ turret_setpickuphints() {
   self notify("turretClearPickupHints");
   self endon("turretClearPickupHints");
   self.pickupent makeusable();
-  self.pickupent sethintstring(level.turretsettings[self.turrettype].hintpickup);
-  self.pickupent setcursorhint("HINT_NOICON");
+  self.pickupent setHintString(level.turretsettings[self.turrettype].hintpickup);
+  self.pickupent setCursorHint("HINT_NOICON");
   self.pickupent sethintstringvisibleonlytoowner(1);
 
   if(self.rippable) {
@@ -1574,7 +1574,7 @@ turret_clearpickuphints() {
     return;
   }
   self.pickupent makeunusable();
-  self.pickupent sethintstring("");
+  self.pickupent setHintString("");
   self.pickupent setsecondaryhintstring("");
   self.pickupent sethintstringvisibleonlytoowner(0);
 }
@@ -1746,7 +1746,7 @@ turret_firerocket(var_0) {
   if(!var_6 && var_0) {
     return;
   }
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_7 = magicbullet("killstreakmahem_mp", var_1, var_3, self.owner, 1);
   self playsoundonmovingent("wpn_mahem_npc");
 
@@ -2080,7 +2080,7 @@ turretdisruptorcanhurtzombie(var_0, var_1, var_2) {
     return 0;
   }
 
-  var_5 = vectornormalize(var_0.origin - self.origin);
+  var_5 = vectorNormalize(var_0.origin - self.origin);
   var_6 = vectordot(var_2, var_5);
 
   if(var_6 < level.turretdisruptordetectdot) {

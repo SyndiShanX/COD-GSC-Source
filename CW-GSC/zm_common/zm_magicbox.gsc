@@ -439,7 +439,7 @@ function function_3238e2f9(s_chest) {
     return 0;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!self trigger_visible_to_player(player)) {
       if(is_true(player.var_c90ad01c)) {
         player.var_c90ad01c = undefined;
@@ -464,10 +464,10 @@ function function_3238e2f9(s_chest) {
 
       if(isDefined(cursor_hint_weapon)) {
         if(isDefined(level.magic_box_check_equipment) && [[level.magic_box_check_equipment]](cursor_hint_weapon)) {
-          self setcursorhint("HINT_WEAPON", cursor_hint_weapon);
+          self setCursorHint("HINT_WEAPON", cursor_hint_weapon);
           self.hint_string = #"hash_53005c8d5b45bca3";
         } else {
-          self setcursorhint("HINT_NOICON");
+          self setCursorHint("HINT_NOICON");
           self.hint_parm1 = s_chest.grab_weapon.displayname;
 
           if(zm_weapons::is_wonder_weapon(cursor_hint_weapon) || killstreaks::is_killstreak_weapon(cursor_hint_weapon)) {
@@ -480,10 +480,10 @@ function function_3238e2f9(s_chest) {
 
       player clientfield::set_to_player("stream_magicbox_guns", 0);
     } else if(zm_trial_disable_buys::is_active()) {
-      self sethintstring(#"hash_55d25caf8f7bbb2f");
+      self setHintString(#"hash_55d25caf8f7bbb2f");
       player clientfield::set_to_player("stream_magicbox_guns", 0);
     } else {
-      self setcursorhint("HINT_NOICON");
+      self setCursorHint("HINT_NOICON");
       self.hint_parm1 = s_chest.zombie_cost;
       self.hint_string = zm_utility::get_hint_string(self, "default_treasure_chest");
 
@@ -510,11 +510,11 @@ function function_3238e2f9(s_chest) {
     }
 
     if(isDefined(self.hint_parm1)) {
-      self sethintstring(self.hint_string, self.hint_parm1);
+      self setHintString(self.hint_string, self.hint_parm1);
       continue;
     }
 
-    self sethintstring(self.hint_string);
+    self setHintString(self.hint_string);
   }
 }
 
@@ -1285,7 +1285,7 @@ function treasure_chest_move(player_vox) {
   }
 
   level waittill(#"weapon_fly_away_start");
-  players = getplayers();
+  players = getPlayers();
   array::thread_all(players, &play_crazi_sound);
   level thread function_f81251c9();
 
@@ -1892,7 +1892,7 @@ function decide_hide_show_hint(endon_notify, second_endon_notify, onlyplayer, ca
         self setinvisibletoplayer(onlyplayer, 1);
       }
     } else {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(distancesquared(players[i].origin, self.origin) <= sqr(var_e6473bf1) && players[i] can_buy_weapon(var_5429ee1f) && (!isDefined(can_buy_weapon_extra_check_func) || players[i][[can_buy_weapon_extra_check_func]](self.weapon)) && !players[i] bgb::is_enabled(#"zm_bgb_disorderly_combat")) {
@@ -1961,7 +1961,7 @@ function treasure_chest_should_move(chest, player) {
       }
     }
 
-    a_players = getplayers();
+    a_players = getPlayers();
     level.chest_min_move_usage = 3 + a_players.size;
 
     if(level.chest_moves) {
@@ -2291,7 +2291,7 @@ function treasure_chest_weapon_spawn(chest, player, respin) {
   if(move_the_box && !(zombie_utility::get_zombie_var(#"zombie_powerup_fire_sale_on") && self[[level._zombiemode_check_firesale_loc_valid_func]]())) {
     self.weapon_model setModel(level.chest_joker_model);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clientfield::set_to_player("stream_magicbox_guns", 0);
     }
 
@@ -2343,12 +2343,12 @@ function treasure_chest_weapon_spawn(chest, player, respin) {
 
       if(isDefined(self.weapon_model)) {
         v_fly_away = self.origin + anglestoup(self.angles) * 500;
-        self.weapon_model moveto(v_fly_away, 4, 3);
+        self.weapon_model moveTo(v_fly_away, 4, 3);
       }
 
       if(isDefined(self.weapon_model_dw)) {
         v_fly_away = self.origin + anglestoup(self.angles) * 500;
-        self.weapon_model_dw moveto(v_fly_away, 4, 3);
+        self.weapon_model_dw moveTo(v_fly_away, 4, 3);
       }
 
       if(isDefined(self.weapon_model)) {
@@ -2456,7 +2456,7 @@ function timer_til_despawn(v_float) {
   }
 
   var_3be81b3b = isDefined(level.var_ad2674fe) ? level.var_ad2674fe : 12;
-  self moveto(self.origin - v_float * 0.85, var_3be81b3b, var_3be81b3b * 0.5);
+  self moveTo(self.origin - v_float * 0.85, var_3be81b3b, var_3be81b3b * 0.5);
   wait var_3be81b3b;
 
   if(isDefined(self)) {
@@ -2499,14 +2499,14 @@ function treasure_chest_give_weapon(item, var_75c86f89, e_chest) {
   }
 
   if(weapon.name == #"ww_ray_rifle_t9" || weapon.name == #"ray_gun" || weapon.name == #"ray_gun_mk2") {
-    playsoundatposition(#"mus_raygun_stinger", (0, 0, 0));
+    playSoundAtPosition(#"mus_raygun_stinger", (0, 0, 0));
   }
 
   if(zm_loadout::is_offhand_weapon(weapon)) {
     self give_offhand_weapon(weapon, e_chest.owner.var_9e7e27d7);
   } else {
     self.var_966bfd1b = 1;
-    self playrumbleonentity(#"zm_interact_rumble");
+    self playRumbleOnEntity(#"zm_interact_rumble");
 
     if(var_75c86f89.itementry.itemtype === #"scorestreak" || var_75c86f89.itementry.itemtype === #"equipment" || var_75c86f89.itementry.itemtype === #"tactical") {
       var_fa3df96 = self item_inventory::function_e66dcff5(var_75c86f89);

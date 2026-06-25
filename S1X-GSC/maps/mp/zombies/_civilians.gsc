@@ -97,7 +97,7 @@ spawncivilian(var_0, var_1) {
   iprintlnbold(&"ZOMBIE_CIVILIANS_RESCUE_START");
 
   if(isDefined(level.civ_extract.spawnpoint.target)) {
-    var_7 = common_scripts\utility::getstruct(level.civ_extract.spawnpoint.target, "targetname");
+    var_7 = common_scripts\utility::getStruct(level.civ_extract.spawnpoint.target, "targetname");
   } else {
     var_7 = level.civ_extract.spawnpoint;
   }
@@ -360,7 +360,7 @@ movetoextractpoint() {
 
   self notify("begin_extraction_escort");
   [[level.extractionescortfuncs[var_0]]]();
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   var_1 = self.targetextractpoint;
   self.badpathresults = 0;
 
@@ -455,7 +455,7 @@ stopmoving() {
   self notify("civilian_stop");
   waitframe();
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(4096);
+  self scragentsetgoalRadius(4096);
   thread movetocowerlocation();
 }
 
@@ -502,7 +502,7 @@ movetocowerlocation() {
   }
   for(;;) {
     self scragentsetgoalpos(var_7.origin);
-    self scragentsetgoalradius(64);
+    self scragentsetgoalRadius(64);
     var_10 = common_scripts\utility::waittill_any_return("goal", "goal_reached", "bad_path", "civilian_stop");
 
     if(var_10 == "goal" || var_10 == "goal_reached") {

@@ -214,7 +214,7 @@ function private function_9a819607(host, botarg) {
 }
 
 function get_bots() {
-  players = getplayers();
+  players = getPlayers();
   bots = [];
 
   foreach(player in players) {
@@ -227,7 +227,7 @@ function get_bots() {
 }
 
 function get_friendly_bots() {
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
   bots = [];
 
   foreach(player in players) {
@@ -242,7 +242,7 @@ function get_friendly_bots() {
 }
 
 function get_enemy_bots() {
-  players = getplayers();
+  players = getPlayers();
   bots = [];
 
   foreach(player in players) {
@@ -259,7 +259,7 @@ function get_enemy_bots() {
 }
 
 function function_a0f5b7f5(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
   bots = [];
 
   foreach(player in players) {
@@ -411,7 +411,7 @@ function private devgui_add_bots(host, botarg, count) {
     return;
   }
 
-  players = getplayers(team);
+  players = getPlayers(team);
   max_players = player::function_d36b6597();
 
   if(players.size < max_players || max_players == 0) {
@@ -445,7 +445,7 @@ function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
 
   var_c6e7a9ca = max(int(countarg), 1);
   count = var_c6e7a9ca;
-  players = getplayers(team);
+  players = getPlayers(team);
   max_players = player::function_d36b6597();
 
   if(max_players > 0) {
@@ -495,7 +495,7 @@ function private function_57d0759d(botarg, var_b27e53da, countarg, origin, angle
   }
 
   count = max(int(countarg), 1);
-  players = getplayers(team);
+  players = getPlayers(team);
   max_players = player::function_d36b6597();
 
   if(max_players > 0) {
@@ -577,7 +577,7 @@ function private function_8dbb49c0(ignoreteam) {
       continue;
     }
 
-    players = getplayers(team);
+    players = getPlayers(team);
 
     if(maxteamplayers > 0 && players.size < maxteamplayers) {
       return team;
@@ -898,7 +898,7 @@ function private function_fbdf36c1(botarg) {
   foreach(bot in bots) {
     bot dontinterpolate();
     bot setplayerangles(angle);
-    bot setorigin(pos);
+    bot setOrigin(pos);
 
     if(bot function_4794d6a3().goalforced) {
       bot setgoal(pos, 1);

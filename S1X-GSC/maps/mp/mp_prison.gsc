@@ -232,22 +232,22 @@ setupGates() {
     gate.originalPos = gate.origin;
     gate_struct.gate = gate;
 
-    moveToOrg = getstruct(gate.target, "targetname");
+    moveToOrg = getStruct(gate.target, "targetname");
     gate_struct.dest = moveToOrg;
 
-    col = getent(moveToOrg.target, "targetname");
+    col = getEnt(moveToOrg.target, "targetname");
     col.originalPos = col.origin;
     gate_struct.collision = col;
 
-    spark_org = getstruct(col.target, "targetname");
+    spark_org = getStruct(col.target, "targetname");
     spark1 = spark_org spawn_tag_origin();
     spark1 show();
-    spark1 LinkTo(gate);
+    spark1 linkTo(gate);
 
-    spark_org2 = getstruct(spark_org.target, "targetname");
+    spark_org2 = getStruct(spark_org.target, "targetname");
     spark2 = spark_org2 spawn_tag_origin();
     spark2 show();
-    spark2 LinkTo(gate);
+    spark2 linkTo(gate);
 
     gate_struct.sparks = [spark1, spark2];
 
@@ -262,29 +262,29 @@ setupGates() {
     gate.originalRot = gate.angles;
     gate_struct.gate = gate;
 
-    moveToOrg = getstruct(gate.target, "targetname");
+    moveToOrg = getStruct(gate.target, "targetname");
     gate_struct.dest = moveToOrg;
 
-    col = getent(moveToOrg.target, "targetname");
+    col = getEnt(moveToOrg.target, "targetname");
     col.originalPos = col.origin;
     col.angles = gate.angles + (0, -90, 0);
     col.originalRot = col.angles;
     gate_struct.collision = col;
 
-    spark_org = getstruct(col.target, "targetname");
+    spark_org = getStruct(col.target, "targetname");
     spark1 = spark_org spawn_tag_origin();
     spark1 show();
-    spark1 LinkTo(gate);
+    spark1 linkTo(gate);
 
-    spark_org2 = getstruct(spark_org.target, "targetname");
+    spark_org2 = getStruct(spark_org.target, "targetname");
     spark2 = spark_org2 spawn_tag_origin();
     spark2 show();
-    spark2 LinkTo(gate);
+    spark2 linkTo(gate);
 
     gate_struct.sparks = [spark1, spark2];
 
     if(isDefined(spark_org2.target)) {
-      kill_vol = GetEnt(spark_org2.target, "targetname");
+      kill_vol = getEnt(spark_org2.target, "targetname");
       gate_struct.kill_vol = kill_vol;
       gate_struct.kill_vol trigger_off_proc();
     }
@@ -300,19 +300,19 @@ setupGates() {
     gate.originalRot = gate.angles;
     gate_struct.gate = gate;
 
-    moveToOrg = getstruct(gate.target, "targetname");
+    moveToOrg = getStruct(gate.target, "targetname");
     gate_struct.dest = moveToOrg;
 
-    spark_org = getstruct(moveToOrg.target, "targetname");
+    spark_org = getStruct(moveToOrg.target, "targetname");
     if(!isDefined(spark_org)) {
       print("Unable to find spark_org " + moveToOrg.target);
       continue;
     }
     spark1 = spark_org spawn_tag_origin();
     spark1 show();
-    spark1 LinkTo(gate);
+    spark1 linkTo(gate);
 
-    spark_org2 = getstruct(spark_org.target, "targetname");
+    spark_org2 = getStruct(spark_org.target, "targetname");
     if(!isDefined(spark_org2)) {
       print("Unable to find spark_org2 " + spark_org.target);
       spark1 delete();
@@ -320,7 +320,7 @@ setupGates() {
     }
     spark2 = spark_org2 spawn_tag_origin();
     spark2 show();
-    spark2 LinkTo(gate);
+    spark2 linkTo(gate);
 
     gate_struct.sparks = [spark1, spark2];
 
@@ -332,8 +332,8 @@ moveGates() {
   moveTime = .5;
 
   foreach(gate in level.mp_prison_killstreak.gates) {
-    gate.gate moveto(gate.dest.origin, moveTime, .1, .2);
-    gate.collision moveto(gate.dest.origin, moveTime, .1, .2);
+    gate.gate moveTo(gate.dest.origin, moveTime, .1, .2);
+    gate.collision moveTo(gate.dest.origin, moveTime, .1, .2);
     gate thread bounceGate(moveTime);
   }
 }
@@ -343,10 +343,10 @@ rotateGates() {
 
   foreach(gate in level.mp_prison_killstreak.rotating_gates) {
     gate thread gateFxOn();
-    gate.gate MoveTo(gate.dest.origin, moveTime, .1, .2);
-    gate.gate RotateTo(gate.dest.angles, moveTime, .1, .2);
-    gate.collision RotateTo(gate.dest.angles - (0, 90, 0), moveTime, .1, .2);
-    gate.collision MoveTo(gate.dest.origin, moveTime, .1, .2);
+    gate.gate moveTo(gate.dest.origin, moveTime, .1, .2);
+    gate.gate rotateTo(gate.dest.angles, moveTime, .1, .2);
+    gate.collision rotateTo(gate.dest.angles - (0, 90, 0), moveTime, .1, .2);
+    gate.collision moveTo(gate.dest.origin, moveTime, .1, .2);
   }
 
   wait movetime;
@@ -367,12 +367,12 @@ rotateGateBounce() {
   while(1) {
     movetime = RandomFloatRange(.1, .5);
     self thread gateFxOn();
-    self.gate MoveTo(self.dest.origin, moveTime, .05, .05);
-    self.gate RotateTo(self.dest.angles, moveTime, .05, .05);
+    self.gate moveTo(self.dest.origin, moveTime, .05, .05);
+    self.gate rotateTo(self.dest.angles, moveTime, .05, .05);
 
     wait movetime;
-    self.gate MoveTo(self.gate.originalPos, moveTime, .05, .05);
-    self.gate RotateTo(self.gate.originalRot, moveTime, .05, .05);
+    self.gate moveTo(self.gate.originalPos, moveTime, .05, .05);
+    self.gate rotateTo(self.gate.originalRot, moveTime, .05, .05);
 
     self thread gateFxOff();
     wait RandomFloatRange(.1, 1);
@@ -390,8 +390,8 @@ resetRotateGateConstant() {
 
   foreach(gate in level.mp_prison_killstreak.rotating_gate_constant) {
     gate thread gateFxOn();
-    gate.gate MoveTo(gate.gate.originalPos, moveTime, .05, .05);
-    gate.gate RotateTo(gate.gate.originalRot, moveTime, .05, .05);
+    gate.gate moveTo(gate.gate.originalPos, moveTime, .05, .05);
+    gate.gate rotateTo(gate.gate.originalRot, moveTime, .05, .05);
   }
 
   wait moveTime;
@@ -409,10 +409,10 @@ resetRotateGates() {
     if(isDefined(gate.kill_vol)) {
       gate.kill_vol trigger_on_proc();
     }
-    gate.gate MoveTo(gate.gate.originalPos, moveTime, .1, .2);
-    gate.gate RotateTo(gate.gate.originalRot, moveTime, .1, .2);
-    gate.collision RotateTo(gate.collision.originalRot, moveTime, .1, .2);
-    gate.collision MoveTo(gate.collision.originalPos, moveTime, .1, .2);
+    gate.gate moveTo(gate.gate.originalPos, moveTime, .1, .2);
+    gate.gate rotateTo(gate.gate.originalRot, moveTime, .1, .2);
+    gate.collision rotateTo(gate.collision.originalRot, moveTime, .1, .2);
+    gate.collision moveTo(gate.collision.originalPos, moveTime, .1, .2);
   }
 
   wait movetime;
@@ -435,8 +435,8 @@ resetGates() {
 
   foreach(gate in level.mp_prison_killstreak.gates) {
     gate thread gateFxOn();
-    gate.gate moveto(gate.gate.originalPos, gateCloseTime, .1, .2);
-    gate.collision moveto(gate.collision.originalPos, gateCloseTime, .1, .2);
+    gate.gate moveTo(gate.gate.originalPos, gateCloseTime, .1, .2);
+    gate.collision moveTo(gate.collision.originalPos, gateCloseTime, .1, .2);
   }
 
   wait gateCloseTime;
@@ -462,11 +462,11 @@ bounceGate(delaytime) {
     bounceBackTime = RandomfloatRange(.1, .5);
 
     thread gateFxOn();
-    self.gate moveto(self.gate.origin + bounceDistForward, bounceForwardTime, .05, .05);
+    self.gate moveTo(self.gate.origin + bounceDistForward, bounceForwardTime, .05, .05);
 
     wait bounceForwardTime;
 
-    self.gate moveto(self.dest.origin, bounceBackTime, .05, .05);
+    self.gate moveTo(self.dest.origin, bounceBackTime, .05, .05);
 
     wait bounceBackTime;
 

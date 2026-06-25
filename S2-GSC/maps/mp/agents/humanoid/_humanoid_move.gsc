@@ -366,7 +366,7 @@ func_A69C() {
 
     var_02 = var_01.var_0116 - self.var_0116;
     var_03 = anglesToForward(self.var_001D);
-    if(vectordot(vectornormalize(var_02), var_03) < 0.7) {
+    if(vectordot(vectorNormalize(var_02), var_03) < 0.7) {
       continue;
     }
 
@@ -392,7 +392,7 @@ func_A69C() {
 
       func_1F39("dodge");
       self.var_5F48 = gettime();
-      var_05 = vectornormalize((var_02[0], var_02[1], 0));
+      var_05 = vectorNormalize((var_02[0], var_02[1], 0));
       var_06 = vectortoangles(var_05);
       var_07 = self.var_3139;
       var_08 = maps\mp\agents\_scripted_agent_anim_util::func_7A35(var_07);
@@ -591,7 +591,7 @@ func_92E9() {
   }
 
   if(var_05 > 4) {
-    var_04 = vectornormalize(var_04);
+    var_04 = vectorNormalize(var_04);
     if(vectordot(var_04, var_02) > 0.707) {
       return;
     }

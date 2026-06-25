@@ -99,7 +99,7 @@ _id_A746(var_0, var_1) {
   var_2 = 10 - level.players.size;
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    var_4 = vectornormalize(var_0 getEye() - var_1.origin);
+    var_4 = vectorNormalize(var_0 getEye() - var_1.origin);
     var_5 = var_1.origin + (randomfloat(1024), randomfloat(1024), 0);
     playFX(level._effect["vfx/iw8/level/highway/vfx_suicidetruck_explosion.vfx"], var_5, var_4);
     earthquake(0.245, 2.2, var_5, 50000);
@@ -111,7 +111,7 @@ _id_A746(var_0, var_1) {
     if(var_7.team == var_0.team) {
       continue;
     }
-    var_4 = vectornormalize(var_7 getEye() - var_0.origin);
+    var_4 = vectorNormalize(var_7 getEye() - var_0.origin);
     playFX(level._effect["vfx/iw8/level/highway/vfx_suicidetruck_explosion.vfx"], var_7.origin, var_4);
     earthquake(0.245, 2.2, var_7.origin, 50000);
     playrumbleonposition("damage_heavy", var_7.origin);
@@ -133,7 +133,7 @@ _id_406C(var_0, var_1, var_2, var_3, var_4) {
   var_5 setModel(var_2);
   var_5.angles = var_1;
   var_5._id_FE90 = _id_07D6::_id_3FF0(var_5.origin + anglestoup(var_5.angles) * 7, "HINT_BUTTON", undefined, var_3, -300, undefined, "show", 250, 160, 200, 160);
-  var_5._id_FE90 linkto(var_5);
+  var_5._id_FE90 linkTo(var_5);
   var_5._id_FE90._id_10851 = var_4;
 
   foreach(var_7 in level.players) {
@@ -237,7 +237,7 @@ _id_406D() {
   var_0._id_FEB1 = 3000;
   var_0._id_84EF = 0;
   var_0._id_7C8C = self._id_7C8C;
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 thread _id_479C(self);
   return var_0;
 }

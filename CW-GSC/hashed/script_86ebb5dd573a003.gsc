@@ -37,7 +37,7 @@
 #namespace namespace_11998b8f;
 
 function function_cdb7cc7e(starting = 1) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"disconnect");
   player takeallweapons();
   var_481fae25 = undefined;
@@ -92,7 +92,7 @@ function function_cdb7cc7e(starting = 1) {
 function function_81fce913() {
   self notify("715aeb8e2d51f1a0");
   self endon("715aeb8e2d51f1a0");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   if(level flag::get("stop_supressed_hint")) {
@@ -212,11 +212,11 @@ function function_85682927(a_ents, str_endon) {
 }
 
 function stakeout_stow_weapon() {
-  getplayers()[0] val::set("stakeout_stow_weapon", "disable_weapons", 1);
+  getPlayers()[0] val::set("stakeout_stow_weapon", "disable_weapons", 1);
 }
 
 function function_a73e6a64() {
-  getplayers()[0] val::reset("stakeout_stow_weapon", "disable_weapons");
+  getPlayers()[0] val::reset("stakeout_stow_weapon", "disable_weapons");
 }
 
 function function_b9a028e4(endon_flag, var_335a8dcc, var_721023c5 = 0) {
@@ -237,10 +237,10 @@ function function_b9a028e4(endon_flag, var_335a8dcc, var_721023c5 = 0) {
 
 function function_2cba9c65() {
   level endon(#"hash_2b9e9acd890ef61f");
-  e_vol = getent("vol_touching_tracks", "targetname");
-  var_69a21fc0 = getent("vol_player_left_platform", "targetname");
-  var_e9bf9ff9 = getent("vol_player_right_platform", "targetname");
-  player = getplayers()[0];
+  e_vol = getEnt("vol_touching_tracks", "targetname");
+  var_69a21fc0 = getEnt("vol_player_left_platform", "targetname");
+  var_e9bf9ff9 = getEnt("vol_player_right_platform", "targetname");
+  player = getPlayers()[0];
   hidden = [];
   hidden[#"prone"] = 100;
   hidden[#"crouch"] = 250;
@@ -377,11 +377,11 @@ function function_86e07b36(a_ents) {
 
     if(isDefined(self.anim_door)) {
       self.anim_door.original_angles = self.anim_door.angles;
-      self.anim_door linkto(a_ents[#"door"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+      self.anim_door linkTo(a_ents[#"door"], "j_prop_1", (0, 0, 0), (0, 0, 0));
       self thread function_e4fcb32e();
 
       if(isDefined(self.anim_door.target)) {
-        self.var_17014c84 = getent(self.anim_door.target, "targetname");
+        self.var_17014c84 = getEnt(self.anim_door.target, "targetname");
       }
     }
   }
@@ -403,9 +403,9 @@ function function_e4fcb32e() {
       delta_angles = angleclamp180(delta_angles);
       time = abs(delta_angles[1]) / 60;
       self.anim_door function_ce492516(time);
-      self.anim_door rotateyaw(delta_angles[1], time);
+      self.anim_door rotateYaw(delta_angles[1], time);
       wait time;
-      playsoundatposition("fly_stk_alley2_door_harass_stasi_v2_door_close", self.anim_door.origin);
+      playSoundAtPosition("fly_stk_alley2_door_harass_stasi_v2_door_close", self.anim_door.origin);
       self flag::set("closet_door_closed");
     }
   }
@@ -451,9 +451,9 @@ function function_ce492516(time) {
 }
 
 function function_4ae9de96(door) {
-  playsoundatposition("vox_ger3_stealth_ally_killed", door.origin + (0, 0, 48));
+  playSoundAtPosition("vox_ger3_stealth_ally_killed", door.origin + (0, 0, 48));
   wait 1.75;
-  function_aebf36c("attack", getplayers()[0], getplayers()[0].origin, 1000, "axis");
+  function_aebf36c("attack", getPlayers()[0], getPlayers()[0].origin, 1000, "axis");
 }
 
 function function_a6affb6a() {
@@ -897,7 +897,7 @@ function function_262b28d4(is_civ, scenedef) {
   }
 
   self stealth_enemy::set_blind(0);
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(waitresult) && waitresult._notify != "stop_vignette_scene" && waitresult._notify != "set_alert_level" && waitresult._notify != "stealth_investigate" || !isDefined(waitresult)) {
     self function_a3fcf9e0("attack", player, player.origin);
@@ -925,7 +925,7 @@ function function_958168b9(is_civ, var_3d23fb80) {
   if(waitresult._notify == "stop_vignette_scene") {
     if(self flag::get("in_closet") && self.archetype != #"civilian") {
       if(isDefined(self.target)) {
-        vol = getent(self.target, "targetname");
+        vol = getEnt(self.target, "targetname");
         self setgoal(vol);
       } else if(isDefined(self.scene_struct) && isDefined(self.scene_struct.var_17014c84)) {
         self setgoal(self.scene_struct.var_17014c84);
@@ -1002,7 +1002,7 @@ function function_958168b9(is_civ, var_3d23fb80) {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(waitresult._notify != "stop_vignette_scene" && waitresult._notify != "set_alert_level" && waitresult._notify != "stealth_investigate" || isDefined(var_3d23fb80)) {
     self function_a3fcf9e0("attack", player, player.origin);
@@ -1576,7 +1576,7 @@ function function_875978f7(var_7921c061, var_cea8c6e1) {
     self.umbrella = util::spawn_model("par_umbrella_open_01", self.origin);
     self.umbrella.origin = self gettagorigin(attach_tag);
     self.umbrella.angles = self gettagangles(attach_tag);
-    self.umbrella linkto(self, attach_tag, (0, 0, 0), (0, 0, 0));
+    self.umbrella linkTo(self, attach_tag, (0, 0, 0), (0, 0, 0));
 
     if(is_true(var_cea8c6e1)) {
       self thread util::delete_on_death(self.umbrella);
@@ -1642,7 +1642,7 @@ function function_bfab0117(var_7921c061, var_cea8c6e1, var_e9145a5e) {
     self.briefcase = util::spawn_model("briefcase_prop", self.origin);
     self.briefcase.origin = self gettagorigin(attach_tag);
     self.briefcase.angles = self gettagangles(attach_tag);
-    self.briefcase linkto(self, attach_tag, (0, 0, 0), (0, 0, 0));
+    self.briefcase linkTo(self, attach_tag, (0, 0, 0), (0, 0, 0));
 
     if(is_true(var_cea8c6e1)) {
       self thread util::delete_on_death(self.briefcase);
@@ -1740,7 +1740,7 @@ function function_ede3f327(waitflag) {
 
   while(true) {
     if(self function_4dab0d59()) {
-      self lookatentity(getplayers()[0]);
+      self lookatentity(getPlayers()[0]);
     } else {
       self lookatentity();
     }
@@ -1751,7 +1751,7 @@ function function_ede3f327(waitflag) {
 
 function function_4dab0d59() {
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   withindistance = undefined;
   var_aaeeba00 = undefined;
   var_6d08b2c5 = undefined;
@@ -1764,7 +1764,7 @@ function function_4dab0d59() {
   }
 
   var_23d4571c = anglesToForward(self.angles);
-  normalizedvec = vectornormalize(player.origin - self.origin);
+  normalizedvec = vectorNormalize(player.origin - self.origin);
   var_aa74cdcb = vectordot(var_23d4571c, normalizedvec);
 
   if(var_aa74cdcb >= cos(70)) {
@@ -1784,8 +1784,8 @@ function function_4dab0d59() {
 
 function function_a09d85a9() {
   var_3bfdd11b = spawn("trigger_radius", self.origin, 0, 64, 72);
-  var_3bfdd11b enablelinkto();
-  var_3bfdd11b linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_3bfdd11b enablelinkTo();
+  var_3bfdd11b linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   self waittill(#"death");
   var_3bfdd11b delete();
 }
@@ -1805,7 +1805,7 @@ function function_ec76072d(initialwait, var_38d138fb, var_25941f2e, ender, var_4
 
   wait initialwait;
   nags = arraycopy(var_38d138fb);
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(true) {
     nag = array::random(nags);
@@ -1837,9 +1837,9 @@ function function_a44394f7(animation) {
 }
 
 function function_d0551a1b(from_vol, retreat_vol, delay_min, delay_max) {
-  checkvol = getent(from_vol, "targetname");
+  checkvol = getEnt(from_vol, "targetname");
   var_3e1bc9cc = checkvol ai::function_18c4ff86("axis", "human");
-  goalvolume = getent(retreat_vol, "targetname");
+  goalvolume = getEnt(retreat_vol, "targetname");
 
   foreach(retreater in var_3e1bc9cc) {
     retreater thread function_3817d3c4(delay_min, delay_max, goalvolume);
@@ -1921,7 +1921,7 @@ function private function_7280b1fe() {
 
   while(true) {
     level waittill(#"save_restore");
-    player = getplayers()[0];
+    player = getPlayers()[0];
     player clientfield::set_to_player("player_blacklight", 0);
   }
 }
@@ -1933,7 +1933,7 @@ function private function_1f24a0cc(on) {
     }
 
     time = self getgestureanimlength(#"ges_drophand");
-    self playrumbleonentity(#"anim_light");
+    self playRumbleOnEntity(#"anim_light");
     snd::play("evt_stk_blacklight_on");
     wait time - 0.15;
     self notify(#"hide_blacklight_hint");
@@ -1982,7 +1982,7 @@ function private function_1f24a0cc(on) {
     self gestures::function_b6cc48ed(#"ges_drophand", undefined, 1, undefined, undefined, undefined, 1);
   }
 
-  self playrumbleonentity(#"anim_light");
+  self playRumbleOnEntity(#"anim_light");
   time = self getgestureanimlength(#"ges_drophand");
   snd::play("evt_stk_blacklight_off");
   wait time - 0.15;
@@ -2066,7 +2066,7 @@ function function_638d18a(var_8964d1a4, var_55440d21) {
   wait randomfloat(0.3);
 
   while(true) {
-    self rotateyaw(360, var_55440d21);
+    self rotateYaw(360, var_55440d21);
     self waittill(#"rotatedone");
   }
 }
@@ -2367,7 +2367,7 @@ function function_127e0d08() {
 function function_d81925f5(vol, ender) {
   level endon(ender, #"save_restore");
   level.player endon(#"death");
-  e_vol = getent(vol, "targetname");
+  e_vol = getEnt(vol, "targetname");
 
   while(true) {
     while(!level.player istouching(e_vol)) {

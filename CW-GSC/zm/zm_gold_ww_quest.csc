@@ -19,7 +19,7 @@ function init() {
 }
 
 function play_charge_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  var_7f49111b = getent(fieldname, "power_cell_charge_base", "targetname");
+  var_7f49111b = getEnt(fieldname, "power_cell_charge_base", "targetname");
 
   if(isDefined(var_7f49111b.var_d3c6a366)) {
     stopfx(fieldname, var_7f49111b.var_d3c6a366);
@@ -55,12 +55,12 @@ function function_770151a9(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_e9ae3d81(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  var_14db7cdb = getent(bwasdemojump, "ww_quest_computer_screen", "targetname");
+  var_14db7cdb = getEnt(bwasdemojump, "ww_quest_computer_screen", "targetname");
   var_14db7cdb setModel(#"p9_zm_gold_screen_board_01");
 }
 
 function function_9b54b294(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  var_14db7cdb = getent(fieldname, "ww_quest_computer_screen", "targetname");
+  var_14db7cdb = getEnt(fieldname, "ww_quest_computer_screen", "targetname");
   var_14db7cdb setModel(#"p9_zm_gold_screen_board_01");
   waitframe(1);
 
@@ -153,9 +153,9 @@ function function_aa1d2bf6(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwasdemojump) {
     var_79bb44c5 = util::spawn_model(fieldname, #"p9_zm_gold_dart_board_02", self.origin, self.angles);
-    board_rotate_origin = getent(fieldname, "board_rotate_origin", "targetname");
-    var_79bb44c5 linkto(board_rotate_origin);
-    board_rotate_origin rotateto(board_rotate_origin.angles + (0, 90, 0), 3);
+    board_rotate_origin = getEnt(fieldname, "board_rotate_origin", "targetname");
+    var_79bb44c5 linkTo(board_rotate_origin);
+    board_rotate_origin rotateTo(board_rotate_origin.angles + (0, 90, 0), 3);
     var_79bb44c5 playSound(fieldname, #"hash_1500984cecfd6a57");
   }
 }

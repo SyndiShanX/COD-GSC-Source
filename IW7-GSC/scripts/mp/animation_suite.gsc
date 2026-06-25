@@ -34,7 +34,7 @@ setupvfxobjs(var_0) {
     if(isDefined(var_2.script_noteworthy) && scripts\engine\utility::string_starts_with(var_2.script_noteworthy, "vfx_")) {
       var_3 = var_2 scripts\engine\utility::spawn_tag_origin();
       var_3 show();
-      var_3 linkto(var_2);
+      var_3 linkTo(var_2);
       scripts\engine\utility::waitframe();
       thread delayfxcall(scripts\engine\utility::getfx(var_2.script_noteworthy), var_3, "tag_origin");
     }
@@ -103,7 +103,7 @@ animsuite_linkchildrentoparentobject(var_0, var_1) {
         continue;
       }
 
-      var_3 linkto(var_0);
+      var_3 linkTo(var_0);
     }
   }
 }
@@ -150,7 +150,7 @@ animsuite_translation_pingpong() {
 
   for(;;) {
     var_6 = self.origin;
-    self moveto(self.origin + var_0, var_1[0], var_1[1], var_1[2]);
+    self moveTo(self.origin + var_0, var_1[0], var_1[1], var_1[2]);
     if(isDefined(var_4)) {
       thread animsuite_playthreadedsound(var_1[0], var_4);
     }
@@ -160,7 +160,7 @@ animsuite_translation_pingpong() {
       playsoundatpos(self.origin, var_3);
     }
 
-    self moveto(var_6, var_1[0], var_1[1], var_1[2]);
+    self moveTo(var_6, var_1[0], var_1[1], var_1[2]);
     if(isDefined(var_4)) {
       thread animsuite_playthreadedsound(var_1[0], var_4);
     }

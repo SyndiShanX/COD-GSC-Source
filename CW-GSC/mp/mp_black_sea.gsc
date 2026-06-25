@@ -68,7 +68,7 @@ function on_game_playing() {
 }
 
 function function_c0e7257() {
-  var_286f8241 = getent("fire_trigger_hurt", "targetname");
+  var_286f8241 = getEnt("fire_trigger_hurt", "targetname");
 
   if(isDefined(var_286f8241)) {
     var_286f8241 callback::on_trigger(&function_6691af0e);

@@ -4,7 +4,7 @@
 ********************************************************/
 
 init_waterfall_trap() {
-  var_0 = scripts\engine\utility::getstruct("trap_waterfall", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("trap_waterfall", "script_noteworthy");
   var_1 = getEntArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     if(var_3.classname == "script_model") {

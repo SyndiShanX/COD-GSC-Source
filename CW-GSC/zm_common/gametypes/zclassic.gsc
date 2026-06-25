@@ -209,7 +209,7 @@ function private intro_cinematic() {
   level flag::wait_till("initial_blackscreen_passed");
 
   if(isDefined(level.var_dfee7fc2) && !getdvarint(#"hash_39af51993585a73e", 0)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player.var_f4e33249 = 1;
     }
 
@@ -221,9 +221,9 @@ function private intro_cinematic() {
     namespace_66d6aa44::function_db62d086();
     level.var_dfee7fc2 = undefined;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player dontinterpolate();
-      player setorigin(player.spectator_respawn.origin);
+      player setOrigin(player.spectator_respawn.origin);
       player setplayerangles(player.spectator_respawn.angles);
       player.var_f4e33249 = undefined;
     }
@@ -246,7 +246,7 @@ function on_round_end() {
   level endon(#"hash_3e765c26047c9f54", #"end_game");
   var_370ac26d = zm::function_d3113f01().var_bd588afd;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_8d41c907)) {
       player.var_8d41c907 = 0;
     }
@@ -267,7 +267,7 @@ function on_round_end() {
   }
 
   if(level.round_number % 5 == 0 && level.round_number > 5) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player namespace_d4ecbbf0::function_73cddc69();
     }
 
@@ -314,7 +314,7 @@ function on_round_end() {
 }
 
 function function_809241a9() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     var_22ba849f = getdvarint(#"hash_3f0689f4ecc2fbab", 0);
@@ -391,7 +391,7 @@ function function_1c2ce6a() {
   }
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 0) {
       waitframe(1);
@@ -456,7 +456,7 @@ function function_1c2ce6a() {
 
           if(isDefined(closest_point) && zm_utility::check_point_in_playable_area(closest_point)) {
             player dontinterpolate();
-            player setorigin(closest_point);
+            player setOrigin(closest_point);
 
             if(isDefined(level.zmb_laugh_alias)) {
               player playlocalsound(level.zmb_laugh_alias);
@@ -469,7 +469,7 @@ function function_1c2ce6a() {
 
           if(isDefined(spawn_point.origin)) {
             player dontinterpolate();
-            player setorigin(spawn_point.origin);
+            player setOrigin(spawn_point.origin);
 
             if(isDefined(level.zmb_laugh_alias)) {
               player playlocalsound(level.zmb_laugh_alias);

@@ -175,9 +175,9 @@ _id_4409(var_0, var_1, var_2, var_3) {
     level._id_16F5._id_15D8._id_17CC = 1;
     var_7 = level._id_16F5._id_15D8;
     var_8 = level._id_16F5._id_15D8._id_17CC;
-    var_4 linkto(self);
-    var_6 linkto(self);
-    var_5 linkto(self);
+    var_4 linkTo(self);
+    var_6 linkTo(self);
+    var_5 linkTo(self);
 
     if(isDefined(var_4) || isDefined(var_1)) {
       var_4 playLoopSound(var_1);

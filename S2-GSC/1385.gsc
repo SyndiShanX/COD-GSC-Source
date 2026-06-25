@@ -47,7 +47,7 @@ lib_0569::func_6E40(param_00) {
 
   foreach(var_08 in var_04) {
     if(isDefined(var_08)) {
-      var_08 usetriggerrequirelookat();
+      var_08 useTriggerRequireLookAt();
       if(0) {
         var_08.var_1DE6 = &"ZOMBIES_WEAPON_LEVEL_BOX";
         var_08.var_1DE4 = &"ZOMBIES_WALL_BUY_AMMO";
@@ -61,7 +61,7 @@ lib_0569::func_6E40(param_00) {
       if(lib_0547::func_5819(var_08)) {
         lib_0547::func_8A4F(var_08, ::lib_0569::func_10E1, ::lib_0569::func_4D14);
       } else if(0) {
-        var_08 sethintstring(var_08.var_1DE6);
+        var_08 setHintString(var_08.var_1DE6);
         var_08 setsecondaryhintstring(var_08.var_1DE5);
       }
 
@@ -84,7 +84,7 @@ lib_0569::func_6E41() {
   var_00 = self;
   level endon("game_over");
   self.var_738D = undefined;
-  var_01 = getent("pack_a_punch_weapon_display", "targetname");
+  var_01 = getEnt("pack_a_punch_weapon_display", "targetname");
   var_01 method_8511();
   for(;;) {
     var_02 = lib_0547::func_A795();
@@ -297,7 +297,7 @@ lib_0569::func_854A(param_00, param_01) {
   lib_0378::func_8D14(var_03);
   var_04 = self gettagorigin("lathe_01");
   level notify("PAP_display_reset");
-  var_05 = getent("pack_a_punch_weapon_display", "targetname");
+  var_05 = getEnt("pack_a_punch_weapon_display", "targetname");
   var_05.var_0116 = (var_05.var_0116[0], var_05.var_0116[1], var_04[2]);
   if(!isDefined(level.var_6DDD)) {
     level.var_6DDD = var_05 common_scripts\utility::func_8FFC();
@@ -374,7 +374,7 @@ lib_0569::func_801B(param_00, param_01) {
     }
 
     param_00.var_586E = spawn("weapon_" + param_01, param_00.var_6DDD.var_0116);
-    param_00.var_586E linkto(param_00.var_6DDD, "tag_origin", var_02, var_03);
+    param_00.var_586E linkTo(param_00.var_6DDD, "tag_origin", var_02, var_03);
     param_00.var_A6EA = 1;
   }
 
@@ -392,7 +392,7 @@ lib_0569::func_3C72(param_00) {
   wait(0.5);
   param_00 movez(5, 0.5, 0.1, 0.1);
   wait(1);
-  param_00 rotateyaw(20, 0.5, 0.1, 0.1);
+  param_00 rotateYaw(20, 0.5, 0.1, 0.1);
   wait(1);
   param_00 movez(-10, 0.5, 0.1, 0.1);
 }
@@ -439,7 +439,7 @@ lib_0569::func_6E44(param_00, param_01) {
   }
 
   if(0) {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 
   if(1) {
@@ -454,7 +454,7 @@ lib_0569::func_6E44(param_00, param_01) {
   } else if(common_scripts\utility::func_3C77("pap_in_use")) {
     self.var_3006 = undefined;
     if(0) {
-      self sethintstring("Unavailable");
+      self setHintString("Unavailable");
       self setsecondaryhintstring("");
     }
 
@@ -466,7 +466,7 @@ lib_0569::func_6E44(param_00, param_01) {
   } else if(lib_0547::func_57AF(var_04) || lib_0547::func_5862(var_04) || lib_0547::iszombieconsumableweapon(var_04) || lib_0547::func_585B(var_04) || (lib_0547::func_5864(var_04) && !ispappablemeleeweapon(var_04)) || (issubstr(var_04, "tesla") && !common_scripts\utility::func_3C83("teslagun_punch_active") || common_scripts\utility::func_3C83("teslagun_punch_active") && !common_scripts\utility::func_3C77("teslagun_punch_active")) || issubstr(var_04, "razergun_melee_zm")) {
     self.var_3006 = undefined;
     if(0) {
-      self sethintstring("");
+      self setHintString("");
       self setsecondaryhintstring("");
     }
 
@@ -478,7 +478,7 @@ lib_0569::func_6E44(param_00, param_01) {
   } else if(var_02) {
     self.var_3006 = self.var_6DE0;
     if(0) {
-      self sethintstring(self.var_1DE4);
+      self setHintString(self.var_1DE4);
       self setsecondaryhintstring(self.var_1DE3);
     }
 
@@ -489,7 +489,7 @@ lib_0569::func_6E44(param_00, param_01) {
   } else {
     self.var_3006 = self.var_6DE1;
     if(0) {
-      self sethintstring(self.var_1DE6);
+      self setHintString(self.var_1DE6);
       self setsecondaryhintstring(self.var_1DE5);
     }
 

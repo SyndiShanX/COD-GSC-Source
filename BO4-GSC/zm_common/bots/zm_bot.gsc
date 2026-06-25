@@ -118,7 +118,7 @@ event_handler[button_bit_actionslot_2_pressed] function_9b83de0f() {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
   players = arraysort(players, self.origin);
 
   foreach(player in players) {
@@ -276,7 +276,7 @@ function_1f9de69d(var_40b86c4b) {
     return false;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isbot(player)) {
@@ -310,7 +310,7 @@ handleplayerfasttravel(player, var_12230d08) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isbot(player)) {
@@ -336,7 +336,7 @@ handleplayerfasttravel(player, var_12230d08) {
       continue;
     }
 
-    player setorigin(currentorigin);
+    player setOrigin(currentorigin);
     player dontinterpolate();
   }
 }

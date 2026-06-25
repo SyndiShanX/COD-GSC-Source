@@ -351,7 +351,7 @@ function function_90ce903e() {
   if(self.slopelocked && (isDefined(self.lock) && self.lock)) {
     self.propent set_pitch_roll_for_ground_normal(self.prop);
   }
-  self.propent linkto(self.propanchor);
+  self.propent linkTo(self.propanchor);
 }
 
 function registerpreviousprop(var_bc9de76b) {
@@ -458,11 +458,11 @@ function propchangeto(info) {
     self.prop.angles = var_345eaa38;
     self.angles = var_9b6a4a66;
   }
-  self.prop linkto(self.propent);
+  self.prop linkTo(self.propent);
   if(self.slopelocked && (isDefined(self.lock) && self.lock)) {
     self.propent set_pitch_roll_for_ground_normal(self.prop);
   }
-  self.propent linkto(self.propanchor);
+  self.propent linkTo(self.propanchor);
   self.thirdpersonrange = info.proprange;
   self.thirdpersonheightoffset = info.propheight;
   self setclientthirdperson(1, self.thirdpersonrange, self.thirdpersonheightoffset);
@@ -474,7 +474,7 @@ function propmatchslope() {
     if(isDefined(self.lock) && self.lock) {
       self.propent unlink();
       self.propent set_pitch_roll_for_ground_normal(self.prop);
-      self.propent linkto(self.propanchor);
+      self.propent linkTo(self.propanchor);
     }
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
@@ -489,7 +489,7 @@ function propmatchslope() {
       self.propent unlink();
       self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
       self.propent.origin = self.propanchor.origin;
-      self.propent linkto(self.propanchor);
+      self.propent linkTo(self.propanchor);
     }
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
@@ -707,9 +707,9 @@ function unlockprop() {
     self.propent unlink();
     self.propent.angles = (self.angles[0], self.propent.angles[1], self.angles[2]);
     self.propent.origin = self.propanchor.origin;
-    self.propent linkto(self.propanchor);
+    self.propent linkTo(self.propanchor);
   }
-  self.propanchor linkto(self);
+  self.propanchor linkTo(self);
   self.lock = 0;
   if(prop::useprophudserver()) {
     self.lockpropkey.label = &"MP_PH_LOCK";
@@ -723,12 +723,12 @@ function lockprop() {
   }
   self.propanchor unlink();
   self.propanchor.origin = self.origin;
-  self playerlinkto(self.propanchor);
+  self playerlinkTo(self.propanchor);
   if(self.slopelocked) {
     self.propent unlink();
     self.propent set_pitch_roll_for_ground_normal(self.prop);
     self.propent.origin = self.origin;
-    self.propent linkto(self.propanchor);
+    self.propent linkTo(self.propanchor);
   }
   self.lock = 1;
   self notify("locked");
@@ -935,7 +935,7 @@ function flashtheprops(var_e967d644) {
 
 function flashenemies(var_e967d644 = self, position = self.origin) {
   playFX(fx::get("propFlash"), position + vectorscale((0, 0, 1), 4));
-  playsoundatposition("mpl_emp_equip_stun", position);
+  playSoundAtPosition("mpl_emp_equip_stun", position);
   foreach(otherplayer in level.players) {
     if(otherplayer == var_e967d644) {
       continue;
@@ -956,7 +956,7 @@ function flashenemies(var_e967d644 = self, position = self.origin) {
       } else {
         var_bdf6b2ee = 1 - (dist - var_88ef1466) / (var_6df9e8b8 - var_88ef1466);
       }
-      dir = vectornormalize(vec);
+      dir = vectorNormalize(vec);
       fwd = anglesToForward(otherplayer getplayerangles());
       var_b02fb38d = vectordot(fwd, dir);
       otherplayer notify("flashbang", var_bdf6b2ee, var_b02fb38d, var_e967d644);
@@ -1018,7 +1018,7 @@ function cloneprop() {
   var_a20cbf64.maxhealth = 99999;
   var_a20cbf64.playerowner = self;
   var_a20cbf64 thread prop::function_500dc7d9(&damageclonewatch);
-  var_a20cbf64 setplayercollision(0);
+  var_a20cbf64 setPlayerCollision(0);
   var_a20cbf64 makesentient();
   var_a20cbf64 notsolidcapsule();
   var_a20cbf64 setteam(self.team);
@@ -1107,7 +1107,7 @@ function function_a40d8853() {
   if(!isDefined(self.isdying)) {
     self.isdying = 1;
   }
-  playsoundatposition("wpn_flash_grenade_explode", self.origin + vectorscale((0, 0, 1), 4));
+  playSoundAtPosition("wpn_flash_grenade_explode", self.origin + vectorscale((0, 0, 1), 4));
   playFX(fx::get("propDeathFX"), self.origin + vectorscale((0, 0, 1), 4));
   if(isDefined(self)) {
     self delete();

@@ -9,7 +9,7 @@ move_player_to_start(var_0) {
     var_0 = level.start_point + "_playerstart";
   }
 
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
     maps\_utility::teleport_player(var_1);
@@ -32,7 +32,7 @@ spawn_friendlies(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_11 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_11 = common_scripts\utility::getStruct(var_0, "targetname");
   var_12 = 0;
 
   foreach(var_14 in var_5) {
@@ -438,7 +438,7 @@ gettargettriggerhit(var_0) {
     }
     if(var_3 <= var_2.radius && var_4 <= var_2.height && var_4 >= 0) {
       level.laser_triggers = common_scripts\utility::array_remove(level.laser_triggers, var_2);
-      return getent(var_2.target, "script_noteworthy");
+      return getEnt(var_2.target, "script_noteworthy");
     }
   }
 
@@ -645,10 +645,10 @@ handle_portal_group(var_0, var_1, var_2) {
   if(!isDefined(var_1) || !isstring(var_1) || !common_scripts\utility::flag_exist(var_0)) {
     return;
   }
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_3)) {
-    var_3 = getent(var_1, "script_noteworthy");
+    var_3 = getEnt(var_1, "script_noteworthy");
   }
 
   if(!isDefined(var_3)) {
@@ -675,10 +675,10 @@ portal_group_on(var_0, var_1) {
   if(!isDefined(var_1) || !isstring(var_1) || !common_scripts\utility::flag_exist(var_0)) {
     return;
   }
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
-    var_2 = getent(var_1, "script_noteworthy");
+    var_2 = getEnt(var_1, "script_noteworthy");
   }
 
   if(!isDefined(var_2)) {
@@ -699,10 +699,10 @@ portal_group_off(var_0, var_1) {
   if(!isDefined(var_1) || !isstring(var_1) || !common_scripts\utility::flag_exist(var_0)) {
     return;
   }
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
-    var_2 = getent(var_1, "script_noteworthy");
+    var_2 = getEnt(var_1, "script_noteworthy");
   }
 
   if(!isDefined(var_2)) {
@@ -730,7 +730,7 @@ play_fx_with_handle(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3) && var_3) {
     var_4.tag_origin = common_scripts\utility::spawn_tag_origin();
-    var_4.tag_origin linkto(var_1, var_4.tag, (0, 0, 0), (0, 0, 0));
+    var_4.tag_origin linkTo(var_1, var_4.tag, (0, 0, 0), (0, 0, 0));
     playFXOnTag(var_4.fx_id, var_4.tag_origin, "tag_origin");
     kill_fx_with_handle_on_death(var_4);
   } else
@@ -797,9 +797,9 @@ hint_button_create(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(self)) {
     if(isDefined(var_1)) {
-      var_7 settargetent(self, var_1);
+      var_7 settargetEnt(self, var_1);
     } else {
-      var_7 settargetent(self);
+      var_7 settargetEnt(self);
     }
   }
 
@@ -1003,7 +1003,7 @@ hint_button_create_flashing(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = common_scripts\utility::spawn_tag_origin();
   var_7.origin = self gettagorigin(var_0);
   var_7.origin = var_7.origin + var_3;
-  var_7 linkto(self, var_0);
+  var_7 linkTo(self, var_0);
   var_1 = var_7 hint_button_create(var_1, "TAG_ORIGIN", var_4, var_5, 1, 1);
 
   if(isDefined(var_6)) {
@@ -1136,7 +1136,7 @@ point_in_angle_of_crosshairs(var_0, var_1, var_2) {
     var_2 = level.player;
   }
 
-  return vectordot(vectornormalize(var_0 - var_2 getEye()), anglesToForward(var_2 getplayerangles())) > cos(var_1);
+  return vectordot(vectorNormalize(var_0 - var_2 getEye()), anglesToForward(var_2 getplayerangles())) > cos(var_1);
 }
 
 entity_is_in_circle(var_0, var_1, var_2, var_3) {

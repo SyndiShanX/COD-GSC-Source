@@ -33,7 +33,7 @@ function private preinit() {
 function private postinit() {}
 
 function grab_bonfire_sale(player) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     if(isDefined(e_player) && isPlayer(e_player) && isDefined(self.hint)) {
@@ -65,7 +65,7 @@ function start_bonfire_sale(item) {
 
   zombie_utility::set_zombie_var(#"zombie_powerup_bonfire_sale_on", 0);
   level notify(#"bonfire_sale_off");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] playSound(#"zmb_points_loop_off");

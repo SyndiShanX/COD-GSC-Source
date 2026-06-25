@@ -362,9 +362,9 @@ intro_setup_dead_bodies() {
     array["upperdeck_dead_body" + key] = model;
   }
 
-  array["stairs_dead_body"] = GetEnt("stairs_dead_body", "targetname");
-  array["stairs_dead_body2"] = GetEnt("stairs_dead_body2", "targetname");
-  array["stairs_dead_body3"] = GetEnt("stairs_dead_body3", "targetname");
+  array["stairs_dead_body"] = getEnt("stairs_dead_body", "targetname");
+  array["stairs_dead_body2"] = getEnt("stairs_dead_body2", "targetname");
+  array["stairs_dead_body3"] = getEnt("stairs_dead_body3", "targetname");
 
   foreach(model in array) {
     model UseAnimTree(#animtree);
@@ -379,13 +379,13 @@ intro_civilians() {
   wait 21.5 + 2;
 
   data = maps\airport_anim::lobby_people_data();
-  blood = GetEnt("lobby_blood", "targetname");
-  rope = GetEnt("intro_rope", "targetname");
+  blood = getEnt("lobby_blood", "targetname");
+  rope = getEnt("intro_rope", "targetname");
   rope Delete();
   blood Hide();
 
   for(i = 1; i <= 14; i++) {
-    node = getstruct("intro_lobby_anim_group_" + i, "targetname");
+    node = getStruct("intro_lobby_anim_group_" + i, "targetname");
     if(isDefined(node)) {
       node thread lobby_people_create(data);
     }
@@ -412,7 +412,7 @@ intro_civilians() {
   wait 3.25;
 
   flag_wait("lobby_open_fire");
-  trig = GetEnt("intro_line_of_fire_trig", "targetname");
+  trig = getEnt("intro_line_of_fire_trig", "targetname");
   trig thread player_line_of_fire("lobby_to_stairs_go", level.team);
 
   add_wait(::trigger_wait_targetname, "intro_line_of_fire_trig_final");
@@ -430,13 +430,13 @@ elevator_scene() {
 
   thread elevator_floor_indicator();
 
-  node = getstruct("intro_elevator_anim_node", "targetname");
+  node = getStruct("intro_elevator_anim_node", "targetname");
   team = [];
   foreach(member in level.team) {
     member thread elevator_scene_guy(node);
   }
 
-  origin = GetEnt("snd_origin_intro_crowd", "targetname");
+  origin = getEnt("snd_origin_intro_crowd", "targetname");
   origin delayCall(7.5 + 5 + 5.5, ::playsound, "scn_airport_crowd_opening");
 }
 
@@ -464,10 +464,10 @@ lobby_scene() {
     actor.ignoreall = false;
   }
 
-  origin = GetEnt("snd_origin_intro_crowd", "targetname");
+  origin = getEnt("snd_origin_intro_crowd", "targetname");
   origin playSound("scn_airport_crowd_opening_terror");
 
-  node = getstruct("lobby_scream_track", "targetname");
+  node = getStruct("lobby_scream_track", "targetname");
   thread scream_track(node, "scn_airport_crowd_opening_running", 150);
 
   delayThread(5, ::lobby_sign);
@@ -501,17 +501,17 @@ stairs_main() {
   array_thread(getEntArray("upperdeck_fakesound", "targetname"), ::upperdeck_fakesound);
   array_thread(getStructArray("upperdeck_turn_on_arrival", "script_noteworthy"), ::upperdeck_turn_on_arrival);
 
-  GetEnt("stairs_cop", "targetname") add_spawn_function(::stairs_cop);
+  getEnt("stairs_cop", "targetname") add_spawn_function(::stairs_cop);
 
   thread massacre_team_dialogue();
   thread airport_vision_stairs();
 
-  trigL = GetEnt("stairs_line_of_fire_trig_l", "targetname");
+  trigL = getEnt("stairs_line_of_fire_trig_l", "targetname");
   teamL = [];
   teamL[teamL.size] = level.team["makarov"];
   teamL[teamL.size] = level.team["m4"];
 
-  trigR = GetEnt("stairs_line_of_fire_trig_r", "targetname");
+  trigR = getEnt("stairs_line_of_fire_trig_r", "targetname");
   teamR = [];
   teamR[teamR.size] = level.team["saw"];
   teamR[teamR.size] = level.team["shotgun"];
@@ -526,10 +526,10 @@ stairs_main() {
   trigR add_func(::player_line_of_fire, "stairs_upperdeck_civs_dead", teamR);
   thread do_wait_any();
 
-  node1 = getstruct("upperdeck_scream_track", "targetname");
-  node2 = getstruct("upperdeck_scream_track2", "targetname");
-  node1b = getstruct("upperdeck_scream_track1b", "targetname");
-  node1c = getstruct("upperdeck_scream_track1c", "targetname");
+  node1 = getStruct("upperdeck_scream_track", "targetname");
+  node2 = getStruct("upperdeck_scream_track2", "targetname");
+  node1b = getStruct("upperdeck_scream_track1b", "targetname");
+  node1c = getStruct("upperdeck_scream_track1c", "targetname");
 
   add_wait(::flag_wait, "upperdeck_flow1");
   add_func(::scream_track, node1, "scn_airport_running_screams1", 150);
@@ -604,11 +604,11 @@ massacre_main() {
     level.team[node.script_noteworthy] thread massacre_killers(node);
   }
 
-  trigger = GetEnt("massacre_rentacop_rush_guy", "target");
+  trigger = getEnt("massacre_rentacop_rush_guy", "target");
   trigger.origin += (0, 0, -10000);
 
   array_thread(getEntArray("massacre_dummy", "targetname"), ::massacre_civ_setup);
-  GetEnt("massacre_snd", "targetname") thread massacre_play_sounds();
+  getEnt("massacre_snd", "targetname") thread massacre_play_sounds();
   array_thread(getEntArray("massacre_rentacop_stop", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_stop);
   array_thread(getEntArray("massacre_rentacop_rush_guy", "targetname"), ::add_spawn_function, ::massacre_rentacop_rush_guy);
   array_thread(getEntArray("massacre_rentacop_runaway_guy", "script_noteworthy"), ::add_spawn_function, ::massacre_rentacop_runaway_guy);
@@ -770,11 +770,11 @@ gate_main() {
 
   array_thread(getEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
   array_thread(getEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
-  GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
-  GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
-  GetEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
-  GetEnt("tarmac_swat_van", "targetname") thread tarmac_van_fake("tarmac_swat_van");
-  GetEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
+  getEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
+  getEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
+  getEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
+  getEnt("tarmac_swat_van", "targetname") thread tarmac_van_fake("tarmac_swat_van");
+  getEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
 
   array_thread(getEntArray("gate_convoy_delete", "script_noteworthy"), ::add_spawn_function, ::gate_convoy_delete);
 
@@ -798,7 +798,7 @@ gate_events() {
 
   activate_trigger("gate_runners1", "target");
 
-  gate1 = GetEnt("gate_gate_closing", "targetname");
+  gate1 = getEnt("gate_gate_closing", "targetname");
   gate1 delayCall(5.75, ::playsound, "scn_airport_sec_gate_buzzer");
   wait 7.75;
 
@@ -806,7 +806,7 @@ gate_events() {
 }
 
 basement_main() {
-  light = GetEnt("basement_door_light", "targetname");
+  light = getEnt("basement_door_light", "targetname");
   lightintensity = light GetLightIntensity();
   light SetLightIntensity(0);
 
@@ -825,7 +825,7 @@ basement_main() {
   wait 1;
   level.player AllowSprint(true);
 
-  struct = getstruct("scn_airport_emergency_arriving", "targetname");
+  struct = getStruct("scn_airport_emergency_arriving", "targetname");
   thread play_sound_in_space("scn_airport_emergency_arriving", struct.origin);
 
   flag_wait("basement_moveout");
@@ -969,8 +969,8 @@ tarmac_2ndfloor_group_think() {
 handle_flags_to_advance() {
   for(i = 1; i <= 10; i++) {
     name = "tarmac_advance" + i + "_flag";
-    trigger = GetEnt(name, "targetname");
-    trigger = GetEnt(trigger.target, "targetname");
+    trigger = getEnt(name, "targetname");
+    trigger = getEnt(trigger.target, "targetname");
 
     flag_wait(name);
 
@@ -990,7 +990,7 @@ handle_chatter() {
   level endon("friendly_fire_warning");
 
   flag_wait("tarmac_hear_fsb");
-  node = getstruct("tarmac_riot_node_retreat1_group1", "targetname");
+  node = getStruct("tarmac_riot_node_retreat1_group1", "targetname");
 
   level thread function_stack(::play_sound_in_space, "airport_fsb1_moveingo", node.origin);
   level thread function_stack(::play_sound_in_space, "airport_fsbr_servicetunnels", node.origin);
@@ -1199,7 +1199,7 @@ handle_kill_advance() {
   level endon("friendly_fire_warning");
 
   flag_init("tarmac_enemies_wave2");
-  trigger = GetEnt("tarmac_enemies_wave2", "target");
+  trigger = getEnt("tarmac_enemies_wave2", "target");
   thread set_flag_on_trigger(trigger, "tarmac_enemies_wave2");
 
   wait .5;
@@ -1285,7 +1285,7 @@ handle_advance_retreat() {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
-  trigger = GetEnt("tarmac_advance6", "targetname");
+  trigger = getEnt("tarmac_advance6", "targetname");
   thread set_flag_on_trigger(trigger, "tarmac_advance6");
 
   trigger_wait("tarmac_retreat1", "targetname");
@@ -1352,9 +1352,9 @@ escape_main() {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
-  GetEnt("escape_van_dummy", "targetname") add_spawn_function(::escape_van_setup, "escape_van");
-  GetEnt("escape_van_driver", "script_noteworthy") add_spawn_function(::escape_van_driver);
-  GetEnt("escape_van_mate", "script_noteworthy") add_spawn_function(::escape_van_mate);
+  getEnt("escape_van_dummy", "targetname") add_spawn_function(::escape_van_setup, "escape_van");
+  getEnt("escape_van_driver", "script_noteworthy") add_spawn_function(::escape_van_driver);
+  getEnt("escape_van_mate", "script_noteworthy") add_spawn_function(::escape_van_mate);
 
   array_thread(getEntArray("escape_final_guys", "targetname"), ::add_spawn_function, ::escape_final_guys);
   array_thread(getEntArray("escape_final_guys2", "targetname"), ::add_spawn_function, ::escape_final_guys2);
@@ -1426,10 +1426,10 @@ escape_main() {
     break;
   }
 
-  door = GetEnt("escape_door", "targetname");
+  door = getEnt("escape_door", "targetname");
   door thread escape_palm_style_door_open("door_wood_slow_creaky_open");
 
-  node = getstruct("escape_slow_open_node", "targetname");
+  node = getStruct("escape_slow_open_node", "targetname");
   level.makarov enable_cqbwalk();
   level.makarov disable_exits();
   node anim_generic_run(level.makarov, "hunted_open_barndoor_flathand");
@@ -1472,10 +1472,10 @@ escape_palm_style_door_open(soundalias) {
     self playSound("door_wood_slow_open");
   }
 
-  self RotateTo(self.angles + (0, 70, 0), 2, .5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self ConnectPaths();
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, 40, 0), 1.5, 0, 1.5);
+  self rotateTo(self.angles + (0, 40, 0), 1.5, 0, 1.5);
 }
 
 escape_end_sequence() {
@@ -1503,7 +1503,7 @@ escape_end_sequence() {
   level.makarov.moveplaybackrate = 1.0;
   level.comrad.moveplaybackrate = 1.0;
 
-  node = getstruct("escape_ending_node", "targetname");
+  node = getStruct("escape_ending_node", "targetname");
   node anim_reach_and_approach(team, "end_get_in");
 
   level.makarov.moveplaybackrate = 1.0;
@@ -1511,14 +1511,14 @@ escape_end_sequence() {
 
   escape_end_wait_until_player_is_in_position();
 
-  backdoor = GetEnt("escape_door_behind", "targetname");
-  backdoor RotateYaw(90, 3, 0, 3);
+  backdoor = getEnt("escape_door_behind", "targetname");
+  backdoor rotateYaw(90, 3, 0, 3);
 
   setsaveddvar("r_lightGridEnableTweaks", 1);
   thread lerp_savedDvar("r_lightGridIntensity", .75, 2.0);
 
   flag_set("escape_sequence_go");
-  trigger = GetEnt("escape_nojump", "targetname");
+  trigger = getEnt("escape_nojump", "targetname");
   trigger thread escape_player_disable_jump_n_weapon();
 
   van = level.escape_van_dummy;
@@ -1534,7 +1534,7 @@ escape_end_sequence() {
   level.vanmate thread end_vanmate_dialogue();
 
   foreach(member in team) {
-    member LinkTo(van, "tag_body");
+    member linkTo(van, "tag_body");
   }
   team[team.size] = level.vanmate;
 
@@ -1811,11 +1811,11 @@ start_basement() {
 
   array_thread(getEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
   array_thread(getEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
-  GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
-  GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
-  GetEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
-  GetEnt("tarmac_swat_van", "targetname") thread tarmac_van_fake("tarmac_swat_van");
-  GetEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
+  getEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
+  getEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
+  getEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
+  getEnt("tarmac_swat_van", "targetname") thread tarmac_van_fake("tarmac_swat_van");
+  getEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
 
   ap_teleport_player();
   ap_teleport_team(getStructArray("basement_start_nodes", "targetname"));
@@ -1871,11 +1871,11 @@ start_tarmac() {
 
   array_thread(getEntArray("tarmac_van_guys", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys_spawn");
   array_thread(getEntArray("tarmac_van_guys2", "targetname"), ::add_spawn_function, ::tarmac_van_guys, "tarmac_van_guys2_spawn");
-  GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
-  GetEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
-  GetEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
-  GetEnt("tarmac_swat_van", "targetname") thread tarmac_van_fake("tarmac_swat_van");
-  GetEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
+  getEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_logic);
+  getEnt("tarmac_swat_van", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive1", "tarmac_swat_van");
+  getEnt("tarmac_swat_van2", "targetname") add_spawn_function(::tarmac_van_stuff, "scn_airport_police_van_arrive2", "tarmac_swat_van2");
+  getEnt("tarmac_swat_van", "targetname") thread tarmac_van_fake("tarmac_swat_van");
+  getEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
 
   ap_teleport_player();
   ap_teleport_team(getStructArray("tarmac_start_nodes", "targetname"));
@@ -1957,7 +1957,7 @@ grigs_test() {
   list[list.size] = "g36c_reflex";
   list[list.size] = "striker";
 
-  node = getstruct("escape_ending_node", "targetname");
+  node = getStruct("escape_ending_node", "targetname");
   level.escape_van_dummy = spawn("script_model", node.origin);
   level.escape_van_dummy.angles = node.angles;
   level.escape_van_dummy setModel("vehicle_ambulance_swat");
@@ -2011,7 +2011,7 @@ start_common_airport() {
   foreach(obj in array) {
     obj Hide();
     if(isDefined(obj.target)) {
-      temp = GetEnt(obj.target, "targetname");
+      temp = getEnt(obj.target, "targetname");
       temp Hide();
     }
   }
@@ -2114,7 +2114,7 @@ airport_music() {
       thread music_stop(2);
 
       snd = spawn("script_origin", level.player.origin);
-      snd linkto(level.player);
+      snd linkTo(level.player);
       snd playSound("airport_doublecross_sfx");
 
       println(" *** MUSIC: airport_doublecross *** ");

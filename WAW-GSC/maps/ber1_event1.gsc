@@ -127,13 +127,13 @@ event1_unlink_at_animation_end(anime, boxcar) {
 link_players_to_train(boxcar, players) {
   level.train_attach_points = [];
   for(i = 0; i < 4; i++) {
-    level.train_attach_points[i] = getent("player_train_start" + i, "targetname");
+    level.train_attach_points[i] = getEnt("player_train_start" + i, "targetname");
     level.train_attach_points[i] linkTo(boxcar);
   }
 
   for(i = 0; i < players.size; i++) {
     players[i] setOrigin(level.train_attach_points[i].origin);
-    players[i] playerLinkTo(level.train_attach_points[i]);
+    players[i] playerlinkTo(level.train_attach_points[i]);
   }
 
   level.players_linked_to_train = true;
@@ -157,7 +157,7 @@ unlink_players_from_train(players) {
 }
 
 populate_katyusha_crews() {
-  left_truck = getent("katyusha_left_truck", "targetname");
+  left_truck = getEnt("katyusha_left_truck", "targetname");
 
   guy_1 = spawn("script_model", left_truck.origin);
   guy_1 character\char_rus_r_rifle::main();
@@ -168,7 +168,7 @@ populate_katyusha_crews() {
 
   left_truck thread anim_loop_solo(guy_1, "driver_sit_idle", "tag_driver", "stop_temp_loop");
 
-  center_truck = getent("katyusha_center_truck", "targetname");
+  center_truck = getEnt("katyusha_center_truck", "targetname");
 
   guy_3 = spawn("script_model", center_truck.origin);
   guy_3 character\char_rus_r_rifle::main();
@@ -179,7 +179,7 @@ populate_katyusha_crews() {
 
   center_truck thread anim_loop_solo(guy_3, "driver_sit_idle", "tag_driver", "stop_temp_loop");
 
-  right_truck = getent("katyusha_right_truck", "targetname");
+  right_truck = getEnt("katyusha_right_truck", "targetname");
 
   guy_4 = spawn("script_model", right_truck.origin);
   guy_4 character\char_rus_r_rifle::main();
@@ -216,7 +216,7 @@ put_reznov_in_spot_8(ai_array) {
 exit_train_pathing() {
   allies = getaiarray("allies");
 
-  trig = getent("exit_boxcar_trigger", "targetname");
+  trig = getEnt("exit_boxcar_trigger", "targetname");
 
   for(i = 0; i < allies.size; i++) {
     allies[i].disablearrivals = true;
@@ -561,7 +561,7 @@ intro_barrage() {
 
   level thread berm_vo();
 
-  blocker = getent("brush_barrage_blocker", "targetname");
+  blocker = getEnt("brush_barrage_blocker", "targetname");
   blocker connectpaths();
   blocker delete();
 
@@ -694,7 +694,7 @@ trig_clocktower_vo() {
 }
 
 ruins_retreat_reaction() {
-  trig = getent("trig_killspawner_100", "targetname");
+  trig = getEnt("trig_killspawner_100", "targetname");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -715,15 +715,15 @@ ruins_retreat_reaction() {
     wait(0.75);
   }
 
-  trig = getent("trig_fallback_100", "targetname");
+  trig = getEnt("trig_fallback_100", "targetname");
   trig notify("trigger");
 
-  trig = getent("trig_fallback_101", "targetname");
+  trig = getEnt("trig_fallback_101", "targetname");
   trig notify("trigger");
 
   wait(RandomFloatRange(0.75, 1.5));
 
-  trig = getent("colortrig_r3", "targetname");
+  trig = getEnt("colortrig_r3", "targetname");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -737,7 +737,7 @@ clock_tower_battle() {
   level thread tank_shreck_ricochet();
   level thread office_mgs_threatbias();
 
-  blocker = getent("blocker_clock_tank_2", "targetname");
+  blocker = getEnt("blocker_clock_tank_2", "targetname");
   blocker notsolid();
   blocker connectpaths();
 
@@ -782,17 +782,17 @@ clock_tower_exploders() {
 }
 
 setup_clock_mgs() {
-  mg = getent("office_mg_door", "script_noteworthy");
+  mg = getEnt("office_mg_door", "script_noteworthy");
   mg setturretignoregoals(true);
 
-  mg = getent("ruins_mg", "script_noteworthy");
+  mg = getEnt("ruins_mg", "script_noteworthy");
   mg setturretignoregoals(true);
 }
 
 clock_tower_exploder_110() {
   level endon("tank_go_through_wall");
 
-  dmg_trigger = getent("exploder_110", "targetname");
+  dmg_trigger = getEnt("exploder_110", "targetname");
   dmg_trigger waittill("trigger");
 
   mg_sandbag_cleanup("auto1955", 103);
@@ -803,7 +803,7 @@ clock_tower_exploder_110() {
 clock_tower_exploder_111() {
   level endon("tank_go_through_wall");
 
-  dmg_trigger = getent("exploder_111", "targetname");
+  dmg_trigger = getEnt("exploder_111", "targetname");
   dmg_trigger waittill("trigger");
 
   radiusdamage((991.2, -755.2, -51.5), 120, 130, 80);
@@ -814,7 +814,7 @@ clock_tower_exploder_111() {
 clock_tower_exploder_112() {
   level endon("tank_go_through_wall");
 
-  dmg_trigger = getent("exploder_112", "targetname");
+  dmg_trigger = getEnt("exploder_112", "targetname");
   dmg_trigger waittill("trigger");
 
   radiusdamage((987.2, -757.2, 67.5), 120, 130, 80);
@@ -825,7 +825,7 @@ clock_tower_exploder_112() {
 clock_tower_exploder_113() {
   level endon("tank_go_through_wall");
 
-  dmg_trigger = getent("exploder_113", "targetname");
+  dmg_trigger = getEnt("exploder_113", "targetname");
   dmg_trigger waittill("trigger");
 
   mg_sandbag_cleanup("office_shelf_mg", 104);
@@ -836,15 +836,15 @@ clock_tower_exploder_113() {
 office_panzers_target_tanks() {
   wait(randomintrange(3, 5));
 
-  shrek_target = getent("orig_office_panzers_targets_1", "targetname");
+  shrek_target = getEnt("orig_office_panzers_targets_1", "targetname");
   shrek_target.health = 1000000;
   level thread flame_move_target(shrek_target, 6);
 
-  shrek_target = getent("orig_office_panzers_targets_2", "targetname");
+  shrek_target = getEnt("orig_office_panzers_targets_2", "targetname");
   shrek_target.health = 1000000;
   level thread flame_move_target(shrek_target, 6);
 
-  shrek_target = getent("orig_office_panzers_targets_3", "targetname");
+  shrek_target = getEnt("orig_office_panzers_targets_3", "targetname");
   shrek_target.health = 1000000;
   level thread flame_move_target(shrek_target, 6);
 
@@ -876,7 +876,7 @@ tank_suppressor_spawner_strat() {
 
   self.a.rockets = 100;
 
-  target = getent(self.script_noteworthy, "targetname");
+  target = getEnt(self.script_noteworthy, "targetname");
 
   while(1) {
     wait(RandomFloatRange(1, 2.5));
@@ -926,7 +926,7 @@ office_guys_retreat_inside() {
     guys_in_volume[i] setgoalnode(retreat_nodes[i]);
   }
 
-  getent("vol_office_outside", "targetname") delete();
+  getEnt("vol_office_outside", "targetname") delete();
 
   panzer_killer = get_specific_single_ai("office_panzer_killer_ai");
   if(isDefined(panzer_killer)) {
@@ -950,7 +950,7 @@ ruins_retreat_trig_early() {
     wait(0.75);
   }
 
-  trig = getent("ruins_retreat_trig", "script_noteworthy");
+  trig = getEnt("ruins_retreat_trig", "script_noteworthy");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -991,14 +991,14 @@ ruins_split_color_squads() {
 
 shutter_open_init() {
   shutter_pair_1 = [];
-  shutter_pair_1[0] = getent("l_shutter3", "script_noteworthy");
-  shutter_pair_1[1] = getent("r_shutter3", "script_noteworthy");
+  shutter_pair_1[0] = getEnt("l_shutter3", "script_noteworthy");
+  shutter_pair_1[1] = getEnt("r_shutter3", "script_noteworthy");
 
   level thread shutterpair_open_watch(shutter_pair_1);
 
   shutter_pair_3 = [];
-  shutter_pair_3[0] = getent("l_shutter1", "script_noteworthy");
-  shutter_pair_3[1] = getent("r_shutter1", "script_noteworthy");
+  shutter_pair_3[0] = getEnt("l_shutter1", "script_noteworthy");
+  shutter_pair_3[1] = getEnt("r_shutter1", "script_noteworthy");
 
   level thread shutterpair_open_watch(shutter_pair_3);
 }
@@ -1021,11 +1021,11 @@ shutterpair_open_watch(shutterpair) {
   }
 }
 shutterpair_open(shutterpair) {
-  shutterpair[0].linker = getent(shutterpair[0].targetname, "target");
-  shutterpair[1].linker = getent(shutterpair[1].targetname, "target");
+  shutterpair[0].linker = getEnt(shutterpair[0].targetname, "target");
+  shutterpair[1].linker = getEnt(shutterpair[1].targetname, "target");
 
-  shutterpair[0] linkto(shutterpair[0].linker);
-  shutterpair[1] linkto(shutterpair[1].linker);
+  shutterpair[0] linkTo(shutterpair[0].linker);
+  shutterpair[1] linkTo(shutterpair[1].linker);
 
   wait(randomfloatrange(0.1, 1.25));
 
@@ -1047,13 +1047,13 @@ shutterpair_move(shutterpair) {
   }
 }
 shutterpair_move_bounce(obj, yaw, time) {
-  obj rotateyaw(yaw, time);
+  obj rotateYaw(yaw, time);
   obj waittill("rotatedone");
 
   if(yaw > 0) {
-    obj rotateyaw(randomfloatrange(3, 10) * (-1), time * 10);
+    obj rotateYaw(randomfloatrange(3, 10) * (-1), time * 10);
   } else {
-    obj rotateyaw(randomfloatrange(3, 10), time * 10);
+    obj rotateYaw(randomfloatrange(3, 10), time * 10);
   }
 }
 link_train_cars() {
@@ -1087,7 +1087,7 @@ move_train(boxcar) {
 
   dest = getStruct("train_stop", "targetname");
 
-  self moveto(dest.origin, 11.5, 0, 5);
+  self moveTo(dest.origin, 11.5, 0, 5);
 
   while(self.origin != dest.origin) {
     wait(0.1);
@@ -1340,7 +1340,7 @@ office_building() {
 
   set_color_allies("r");
 
-  old_color_trig = getent("chain_ruins_end", "targetname");
+  old_color_trig = getEnt("chain_ruins_end", "targetname");
   if(isDefined(old_color_trig)) {
     old_color_trig delete();
   }
@@ -1777,12 +1777,12 @@ tank_rolling_death() {
 }
 
 tank_3_shoot_strat() {
-  chimney_targ = getstruct("orig_ruins_tank_target_chimney", "targetname");
+  chimney_targ = getStruct("orig_ruins_tank_target_chimney", "targetname");
 
   random_targs = [];
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_1", "targetname");
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_2", "targetname");
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_3", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_1", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_2", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_3", "targetname");
 
   flag_wait("move_tank_3_2");
   wait(2);
@@ -1813,8 +1813,8 @@ tank_3_shoot_strat() {
   level thread tank_3_gets_shot();
 
   random_targs = [];
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_4", "targetname");
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_5", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_4", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_5", "targetname");
 
   fire_count = 0;
   while(fire_count < 2) {
@@ -1837,7 +1837,7 @@ tank_3_gets_shot() {
   guy.pacifist = true;
   guy.pacifistwait = 0.05;
 
-  tank = getent("tank_3", "targetname");
+  tank = getEnt("tank_3", "targetname");
 
   flag_wait("tank_3_ready_to_die");
 
@@ -1848,7 +1848,7 @@ tank_3_gets_shot() {
 
   wait(0.5);
 
-  orig = getent("orig_tank_3_death", "targetname");
+  orig = getEnt("orig_tank_3_death", "targetname");
   orig.health = 100000;
   guy SetEntityTarget(orig);
 
@@ -1887,7 +1887,7 @@ tank_3_gets_shot_failsafe(tank) {
 
   flag_set("tank_3_shot_failsafe");
 
-  rocket_origin = getstruct("orig_panzer_killer_failsafe", "targetname");
+  rocket_origin = getStruct("orig_panzer_killer_failsafe", "targetname");
 
   level thread fire_shrecks(rocket_origin, tank, undefined, "rpg_impact_boom", 0.9);
 
@@ -1916,7 +1916,7 @@ tank1_part2(tank) {
 
   println("tank firing at wall!");
 
-  crumble = getstruct("make_office_wall_crumble", "targetname");
+  crumble = getStruct("make_office_wall_crumble", "targetname");
   tank setTurretTargetVec(crumble.origin);
   tank waittill_notify_or_timeout("turret_on_target", 3);
   wait(0.4);
@@ -1927,7 +1927,7 @@ tank1_part2(tank) {
   wait(1.25);
   tank resumespeed(2);
 
-  final_target = getstruct("tank1_final_target", "targetname");
+  final_target = getStruct("tank1_final_target", "targetname");
   tank setTurretTargetVec(final_target.origin);
 
   wait(randomfloatrange(1, 1.2));
@@ -1951,11 +1951,11 @@ tanks_fire_at_office() {
   level endon("move_tanks_3");
 
   random_targs = [];
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_4", "targetname");
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_5", "targetname");
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_6", "targetname");
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_7", "targetname");
-  random_targs[random_targs.size] = getstruct("orig_ruins_tank_target_8", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_4", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_5", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_6", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_7", "targetname");
+  random_targs[random_targs.size] = getStruct("orig_ruins_tank_target_8", "targetname");
 
   while(1) {
     self tank_fire_at_struct(random_targs[randomint(random_targs.size)]);
@@ -1975,7 +1975,7 @@ tank2_part2(tank) {
 
   tank veh_stop_at_node("tank2_stop4");
 
-  wall_hole = getstruct("office_wall_hole", "targetname");
+  wall_hole = getStruct("office_wall_hole", "targetname");
   tank setTurretTargetVec(wall_hole.origin);
   tank waittill_notify_or_timeout("turret_on_target", 3);
   wait(0.4);
@@ -1986,7 +1986,7 @@ tank2_part2(tank) {
 
   wait(randomfloatrange(4, 5.5));
 
-  ground = getstruct("tank2_target", "targetname");
+  ground = getStruct("tank2_target", "targetname");
   tank setTurretTargetVec(ground.origin);
   tank waittill_notify_or_timeout("turret_on_target", 3);
   wait(0.4);
@@ -2005,7 +2005,7 @@ tank2_part2(tank) {
 
   flag_wait("tank1_destroyed");
 
-  window = getstruct("office_lower_window", "targetname");
+  window = getStruct("office_lower_window", "targetname");
   tank setTurretTargetVec(window.origin);
   tank waittill("turret_on_target");
   wait(0.4);
@@ -2038,9 +2038,9 @@ tank2_part2(tank) {
 clock_tank_blocker_delay() {
   wait(4.5);
 
-  blocker = getent("blocker_clock_tank_2", "targetname");
+  blocker = getEnt("blocker_clock_tank_2", "targetname");
   blocker solid();
-  blocker disconnectpaths();
+  blocker disconnectPaths();
 
   wait(2);
 
@@ -2060,7 +2060,7 @@ tank2_surrender(tank) {
   flag_wait("surrender_start");
 
   tank resumespeed(5);
-  turn_turret_struct = getstruct("turn_turret", "targetname");
+  turn_turret_struct = getStruct("turn_turret", "targetname");
   tank SetTurretTargetVec(turn_turret_struct.origin);
 
   tank veh_stop_at_node("node_wait_pre_crumble_1");
@@ -2083,7 +2083,7 @@ tank2_surrender(tank) {
 
   flag_wait("tank_ambush");
 
-  panzershrek_1_spawn = getstruct("ps1_spawn", "targetname");
+  panzershrek_1_spawn = getStruct("ps1_spawn", "targetname");
 
   level thread fire_shrecks(panzershrek_1_spawn, tank, (0, 0, 50), "iron_gate_explo", 1.1);
 
@@ -2351,7 +2351,7 @@ shrek_bounce_spawner_strat() {
   self setgoalnode(goal);
   self waittill("goal");
 
-  tank = getent("ev1_tank1", "targetname");
+  tank = getEnt("ev1_tank1", "targetname");
 
   self SetEntityTarget(tank);
 

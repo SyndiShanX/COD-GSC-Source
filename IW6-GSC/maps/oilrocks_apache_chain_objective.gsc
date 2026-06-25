@@ -11,7 +11,7 @@ objectives(var_0, var_1, var_2, var_3) {
   var_4 = maps\_utility::obj(var_0);
   objective_add(var_4, "current", var_3);
   objective_current(var_4);
-  var_5 = getent(var_1, "targetname");
+  var_5 = getEnt(var_1, "targetname");
   var_6 = 3;
   var_7 = spawnStruct();
   var_7.activecount = 0;
@@ -27,7 +27,7 @@ objectives(var_0, var_1, var_2, var_3) {
       break;
     }
 
-    var_5 = getent(var_5.target, "targetname");
+    var_5 = getEnt(var_5.target, "targetname");
   }
 
   while(var_7.activecount) {

@@ -135,7 +135,7 @@ StickExplosiveGel(grenade) {
   ExplosiveGel.IsUp = IsUp;
   ExplosiveGel.IsForward = IsForward;
 
-  normal = vectornormalize(trace["normal"]);
+  normal = vectorNormalize(trace["normal"]);
   angles = vectortoangles(normal);
 
   angles += (90, 0, 0);

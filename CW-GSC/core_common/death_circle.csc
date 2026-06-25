@@ -91,7 +91,7 @@ function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap,
       self.var_2c8e49d2 = spawn(fieldname, self.origin, "script_model");
       self.var_2c8e49d2 setModel("p8_big_cylinder");
       self.var_2c8e49d2 playrenderoverridebundle(level.var_74017fd2);
-      self.var_2c8e49d2 linkto(self);
+      self.var_2c8e49d2 linkTo(self);
       self.var_29b256b0 = spawn(0, self.origin, "script_origin");
       self.var_29b256b0.handle = self.var_29b256b0 playLoopSound(level.var_cb450873);
 
@@ -266,7 +266,7 @@ function private function_32f7227c(deathcircle, currentradius, localclientnum) {
 
   if(isDefined(localplayer)) {
     endpos = (localplayer.origin[0], localplayer.origin[1], 0);
-    toplayervec = vectornormalize(endpos - startpos) * currentradius;
+    toplayervec = vectorNormalize(endpos - startpos) * currentradius;
     eyepos = localplayer geteyeapprox();
   }
 

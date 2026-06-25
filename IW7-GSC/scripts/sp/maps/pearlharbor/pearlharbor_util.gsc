@@ -16,13 +16,13 @@ func_36FF(var_0, var_1) {
 }
 
 func_BC53(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {} else {
-    var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   }
 
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
 
   if(!isDefined(var_1.angles)) {
     var_1.angles = (0, 0, 0);
@@ -31,7 +31,7 @@ func_BC53(var_0) {
   var_2 = undefined;
 
   if(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
   }
 
   if(isDefined(var_2)) {
@@ -118,7 +118,7 @@ func_3C44(var_0, var_1) {
     var_3 = var_3 + var_12;
     var_4 = var_4 + var_13;
     var_5 = var_5 + var_14;
-    var_2 = _axistoangles(vectornormalize(var_3), vectornormalize(var_4), vectornormalize(var_5));
+    var_2 = _axistoangles(vectorNormalize(var_3), vectorNormalize(var_4), vectorNormalize(var_5));
     func_3C45(var_2);
     wait 0.05;
   }
@@ -154,7 +154,7 @@ func_3C47(var_0, var_1) {
     var_3 = var_3 + var_12;
     var_4 = var_4 + var_13;
     var_5 = var_5 + var_14;
-    var_2 = _axistoangles(vectornormalize(var_3), vectornormalize(var_4), vectornormalize(var_5));
+    var_2 = _axistoangles(vectorNormalize(var_3), vectorNormalize(var_4), vectorNormalize(var_5));
     level.var_111D0.var_75AC = var_2;
     wait 0.05;
   }
@@ -245,11 +245,11 @@ func_1683(var_0, var_1, var_2) {
   if(!isDefined(var_0)) {
     return;
   }
-  var_3 = scripts\engine\utility::getstruct(var_1, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
 
   if(!isDefined(var_3)) {
     var_1 = tolower(var_1);
-    var_3 = scripts\engine\utility::getstruct(var_1, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
   }
 
   if(!isDefined(var_3)) {
@@ -265,7 +265,7 @@ func_1683(var_0, var_1, var_2) {
 
   if(isPlayer(var_0)) {
     var_0 setplayerangles(var_3.angles);
-    var_0 setorigin(var_3.origin);
+    var_0 setOrigin(var_3.origin);
   } else if(isai(var_0)) {
     var_0 func_80F1(var_3.origin, var_3.angles);
     var_4 = var_0.var_164D[var_0.asmname].var_4BC0;
@@ -494,7 +494,7 @@ func_EF25() {
 
 func_D20D() {
   self endon("entitydeleted");
-  var_0 = getent("ocean_clip", "targetname");
+  var_0 = getEnt("ocean_clip", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
@@ -577,7 +577,7 @@ func_39BC(var_0, var_1) {
       switch (var_6) {
         case "start_entry":
           var_2 = scripts\engine\utility::spawn_tag_origin();
-          var_2 linkto(self, "fx_entryburn_1", (0, 0, 0), (0, 0, 0));
+          var_2 linkTo(self, "fx_entryburn_1", (0, 0, 0), (0, 0, 0));
           playFXOnTag(scripts\engine\utility::getfx("enemy_entry_fireball_base_a"), var_2, "tag_origin");
           break;
         case "stop_entry":
@@ -635,8 +635,8 @@ func_1CC5() {
     level.var_A881 = undefined;
   }
 
-  var_0 = getent(self.target, "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1 endon("trigger");
   var_1 endon("entitydeleted");
   self waittill("trigger");
@@ -874,8 +874,8 @@ func_323A() {
     self endon(self.script_ender);
   }
 
-  var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_2 = 1;
   var_3 = 5;
   var_4 = 0.5;
@@ -1285,7 +1285,7 @@ func_19C3(var_0) {
 }
 
 func_7E98(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;
@@ -1297,7 +1297,7 @@ func_7E98(var_0, var_1) {
     return var_3;
   }
 
-  return scripts\engine\utility::getstruct(var_0, var_1);
+  return scripts\engine\utility::getStruct(var_0, var_1);
 }
 
 func_754C(var_0, var_1) {
@@ -1487,7 +1487,7 @@ func_150C(var_0) {
   self playSound("weap_aatis_fire");
 
   if(distance2dsquared(level.player.origin, self.origin) <= squared(20000)) {
-    level.player playrumbleonentity("artillery_rumble");
+    level.player playRumbleOnEntity("artillery_rumble");
     earthquake(0.2, 0.75, level.player.origin, 200);
   }
 
@@ -1539,7 +1539,7 @@ func_035A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           playFXOnTag(scripts\engine\utility::getfx("hill_mg_turret_muzflash"), self, "tag_flash");
         } else {
           var_13 = self.origin;
-          var_14 = vectornormalize(var_12 - var_13);
+          var_14 = vectorNormalize(var_12 - var_13);
           playFX(scripts\engine\utility::getfx("hill_mg_turret_muzflash"), var_13, var_14);
         }
 
@@ -1554,7 +1554,7 @@ func_035A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 func_6B06(var_0) {
-  var_1 = scripts\engine\utility::getstruct(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(self.target, "targetname");
 
   if(isDefined(self.script_ender)) {
     var_0 = self.script_ender;
@@ -1604,7 +1604,7 @@ func_6B06(var_0) {
 
 func_F293(var_0, var_1) {
   var_2 = scripts\sp\utility::func_77DA(var_0);
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
 
   foreach(var_5 in var_2) {
     var_5 func_82F1(var_3);
@@ -1613,7 +1613,7 @@ func_F293(var_0, var_1) {
 
 func_F2D4(var_0) {
   var_1 = _getaiarray("axis");
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   foreach(var_4 in var_1) {
     var_4 func_82F1(var_2);
@@ -1808,7 +1808,7 @@ func_EA02(var_0) {
 }
 
 func_15F6(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     scripts\sp\utility::func_15F5(var_0);
@@ -1816,7 +1816,7 @@ func_15F6(var_0) {
 }
 
 func_15F4(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
 
   if(isDefined(var_1)) {
     scripts\sp\utility::func_15F3(var_0);
@@ -1885,7 +1885,7 @@ func_39DB(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 func_39A7() {
-  var_0 = getent("capitalship_heli", "targetname");
+  var_0 = getEnt("capitalship_heli", "targetname");
 
   while(isDefined(var_0.var_108DA)) {
     wait 0.05;
@@ -1897,7 +1897,7 @@ func_39A7() {
   scripts\engine\utility::waitframe();
   var_1 = var_0 scripts\sp\utility::func_10808();
   self.var_90DF = var_1;
-  self linkto(var_1);
+  self linkTo(var_1);
   var_1 sethoverparams(2000, 50, 50);
   var_1 setmaxpitchroll(0, 5);
   var_1 giveloadout("slow");
@@ -2086,8 +2086,8 @@ func_D290() {
 
 func_1028F() {
   if(!isDefined(level.var_1028D)) {
-    level.var_1028D = getent("skybox_blend_default_to_blue", "targetname");
-    level.var_1028B = getent("skybox_blend_blue_to_space", "targetname");
+    level.var_1028D = getEnt("skybox_blend_default_to_blue", "targetname");
+    level.var_1028B = getEnt("skybox_blend_blue_to_space", "targetname");
   }
 }
 
@@ -2386,7 +2386,7 @@ func_37A9() {
 func_CCBE() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("fx_org_view");
-  var_0 linkto(level.player, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(level.player, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.var_C04F = 1;
   var_1 = scripts\engine\utility::getStructArray("fxchain_start", "script_noteworthy");
   level.var_AD40 = [];
@@ -2416,8 +2416,8 @@ func_CCBE() {
     var_4 = sortbydistance(var_3, level.player.origin)[0];
 
     if(distance2dsquared(level.player.origin, var_4.origin) <= squared(var_4.radius)) {
-      var_5 = scripts\engine\utility::getstruct(var_4.script_noteworthy, "targetname");
-      var_6 = scripts\engine\utility::getstruct(var_4.script_parameters, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_4.script_noteworthy, "targetname");
+      var_6 = scripts\engine\utility::getStruct(var_4.script_parameters, "targetname");
       var_7 = vectordot(anglesToForward(var_4.angles), level.player.origin - var_4.origin);
       var_8 = undefined;
 
@@ -2501,7 +2501,7 @@ func_68A8(var_0) {
   stopFXOnTag(scripts\engine\utility::getfx(level.var_37CF.script_parameters), var_0, "tag_origin");
   level.var_37CE = 1;
   scripts\engine\utility::flag_wait("c6_reveal_started");
-  level.var_37CF = scripts\engine\utility::getstruct("droppod_camfx_start", "targetname");
+  level.var_37CF = scripts\engine\utility::getStruct("droppod_camfx_start", "targetname");
   playFXOnTag(scripts\engine\utility::getfx(level.var_37CF.script_parameters), var_0, "tag_origin");
   level.var_37CE = 0;
 
@@ -2513,7 +2513,7 @@ func_68A8(var_0) {
   }
 
   scripts\engine\utility::flag_wait("breach_started");
-  func_12660(scripts\engine\utility::getstruct("slowmo_camfx_start", "targetname"), var_0);
+  func_12660(scripts\engine\utility::getStruct("slowmo_camfx_start", "targetname"), var_0);
 }
 
 func_12660(var_0, var_1) {
@@ -2553,7 +2553,7 @@ func_311B(var_0) {
   if(getdvarint("bruteforce_removal") == 0) {
     return;
   }
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   wait 2;
   func_311C(var_1, "script_model");
   func_311C(var_1, "script_brushmodel");
@@ -2565,7 +2565,7 @@ func_311C(var_0, var_1) {
   var_3 = anglesToForward(var_0.angles);
 
   foreach(var_5 in var_2) {
-    if(vectordot(var_3, vectornormalize(var_0.origin - var_5.origin)) > 0) {
+    if(vectordot(var_3, vectorNormalize(var_0.origin - var_5.origin)) > 0) {
       var_5 thread func_D8F6();
     }
   }

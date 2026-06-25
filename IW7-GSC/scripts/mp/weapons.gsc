@@ -311,7 +311,7 @@ createbombsquadmodel(var_0, var_1, var_2) {
   self.bombsquadmodel = var_3;
   var_3 thread bombsquadvisibilityupdater(var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   var_3 setcontents(0);
   scripts\engine\utility::waittill_any("death", "trap_death");
   if(isDefined(self.trigger)) {
@@ -436,9 +436,9 @@ recordtogglescopestates() {
 }
 
 func_DDF6() {
-  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetent(self.primaryweapon) != "" && self isalternatemode(self.primaryweapon)) {
+  if(isDefined(self.primaryweapon) && self.primaryweapon != "none" && self hasweapon(self.primaryweapon) && missile_settargetEnt(self.primaryweapon) != "" && self isalternatemode(self.primaryweapon)) {
     var_0 = getweaponbasename(self.primaryweapon);
-    var_1 = missile_settargetent(self.primaryweapon);
+    var_1 = missile_settargetEnt(self.primaryweapon);
     var_2 = var_0 + "+" + var_1;
     var_3 = func_7DB8(self.primaryweapon);
     var_4 = var_0 + "+" + var_3;
@@ -446,9 +446,9 @@ func_DDF6() {
     self.pers["altScopeStates"][var_4] = 1;
   }
 
-  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetent(self.secondaryweapon) != "" && self isalternatemode(self.secondaryweapon)) {
+  if(isDefined(self.secondaryweapon) && self.secondaryweapon != "none" && self hasweapon(self.secondaryweapon) && missile_settargetEnt(self.secondaryweapon) != "" && self isalternatemode(self.secondaryweapon)) {
     var_0 = getweaponbasename(self.secondaryweapon);
-    var_1 = missile_settargetent(self.secondaryweapon);
+    var_1 = missile_settargetEnt(self.secondaryweapon);
     var_2 = var_0 + "+" + var_1;
     var_3 = func_7DB8(self.secondaryweapon);
     var_4 = var_0 + "+" + var_3;
@@ -480,7 +480,7 @@ updatetogglescopestate(var_0) {
 }
 
 updatesavedaltstate(var_0) {
-  var_1 = missile_settargetent(var_0);
+  var_1 = missile_settargetEnt(var_0);
   var_2 = func_7DB8(var_0);
   var_3 = getweaponbasename(var_0);
   var_4 = var_3 + "+" + var_1;
@@ -507,7 +507,7 @@ func_7DB8(var_0) {
   return "";
 }
 
-missile_settargetent(var_0) {
+missile_settargetEnt(var_0) {
   var_1 = getweaponattachments(var_0);
   foreach(var_3 in var_1) {
     if(func_9FF3(var_3)) {
@@ -713,7 +713,7 @@ func_13BAB(var_0, var_1, var_2, var_3, var_4) {
     return;
   } else {
     var_13 = var_2 - 2 * vectordot(var_2, var_11) * var_11;
-    var_13 = vectornormalize(var_13);
+    var_13 = vectorNormalize(var_13);
     var_14 = var_12 + var_13 * 2;
     var_1 = scripts\mp\utility::_magicbullet(var_0, var_14, var_14 + var_13, self);
     var_1.owner = self;
@@ -2142,8 +2142,8 @@ throwingknifeused(var_0, var_1, var_2) {
   var_1 endon("death");
   var_1 makeunusable();
   var_7 = spawn("trigger_radius", var_1.origin, 0, 64, 64);
-  var_7 enablelinkto();
-  var_7 linkto(var_1);
+  var_7 enablelinkTo();
+  var_7 linkTo(var_1);
   var_7.var_336 = "dropped_knife";
   var_1.knife_trigger = var_7;
   var_1 thread watchgrenadedeath();
@@ -2221,13 +2221,13 @@ throwingknife_detachknivesfromcorpse(var_0) {
         var_3 setentityowner(var_3.owner);
       }
 
-      thread throwingknife_triggerlinkto(var_3);
+      thread throwingknife_triggerlinkTo(var_3);
       var_3 missiledonttrackkillcam();
     }
   }
 }
 
-throwingknife_triggerlinkto(var_0) {
+throwingknife_triggerlinkTo(var_0) {
   var_0 endon("death");
   while(!isDefined(var_0.knife_trigger)) {
     scripts\engine\utility::waitframe();
@@ -2240,7 +2240,7 @@ throwingknife_triggerlinkto(var_0) {
   var_1 dontinterpolate();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
 }
 
 throwingknife_triggerlinktointernal(var_0, var_1) {
@@ -2514,7 +2514,7 @@ ongasgrenadeimpact(var_0, var_1) {
   wait(1);
   var_5 = 3;
   var_6 = spawn("script_model", var_1 + (0, 0, 60));
-  var_6 linkto(var_2);
+  var_6 linkTo(var_2);
   var_2.killcament = var_6;
   while(var_5 > 0) {
     foreach(var_8 in level.characters) {
@@ -2903,7 +2903,7 @@ func_5925(var_0, var_1, var_2) {
 
       var_11 = anglesToForward(var_7 getplayerangles());
       var_12 = var_0 - var_8;
-      var_12 = vectornormalize(var_12);
+      var_12 = vectorNormalize(var_12);
       var_13 = 0.5 * 1 + vectordot(var_11, var_12);
       var_14 = 1;
       var_7 notify("flashbang", var_0, var_10, var_13, var_1, var_14);
@@ -2967,7 +2967,7 @@ func_56E4(var_0, var_1, var_2, var_3) {
   var_4 = self.origin;
   var_5 = anglesToForward(var_0 getplayerangles());
   var_6 = var_4 - var_3;
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   playFX(var_2.var_D828, var_4, rotatevector(var_6, (0, 180, 0)) * (1, 1, -1));
   wait(0.75);
   if(var_0 adsButtonPressed() && var_0 worldpointinreticle_circle(var_4, 65, 300)) {
@@ -3017,7 +3017,7 @@ watchc4implode() {
   self.owner endon("disconnect");
   var_0 = self.owner;
   var_1 = scripts\engine\utility::spawn_tag_origin();
-  var_1 linkto(self);
+  var_1 linkTo(self);
   thread func_334D(var_1);
   thread scripts\mp\utility::notifyafterframeend("death", "end_explode");
   self endon("end_explode");
@@ -3092,7 +3092,7 @@ func_DACD(var_0) {
   var_3 = level.weaponconfigs[var_0.weapon_name];
   var_4 = spawn("script_model", var_0.origin + var_3.killcamoffset * var_2);
   var_4 setscriptmoverkillcam("explosive");
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   var_0.killcament = var_4;
   var_0 explosivehandlemovers(var_1);
   var_0 makeexplosiveusable();
@@ -3120,8 +3120,8 @@ func_DACC(var_0) {
   var_5 = spawn("trigger_radius", var_2, 0, var_1.detectionradius, var_1.detectionheight);
   var_5.owner = self;
   if(isDefined(var_0)) {
-    var_5 enablelinkto();
-    var_5 linkto(self);
+    var_5 enablelinkTo();
+    var_5 linkTo(self);
   }
 
   self.damagearea = var_5;
@@ -3271,8 +3271,8 @@ claymoredetonation(var_0) {
   self endon("death");
   var_1 = spawn("trigger_radius", self.origin + (0, 0, 0 - level.claymoredetonateradius), 0, level.claymoredetonateradius, level.claymoredetonateradius * 2);
   if(isDefined(var_0)) {
-    var_1 enablelinkto();
-    var_1 linkto(var_0);
+    var_1 enablelinkTo();
+    var_1 linkTo(var_0);
   }
 
   thread deleteondeath(var_1);
@@ -3334,7 +3334,7 @@ shouldaffectclaymore(var_0) {
     return 0;
   }
 
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_5 = vectordot(var_2, var_3);
   return var_5 > level.claymoredetectiondot;
 }
@@ -3798,7 +3798,7 @@ makeexplosiveusable(var_0) {
   }
 
   var_1 = spawn("script_origin", self.origin + var_0 * anglestoup(self.angles));
-  var_1 linkto(self);
+  var_1 linkTo(self);
   self.trigger = var_1;
   var_1.owner = self;
   thread makeexplosiveusableinternal();
@@ -3835,24 +3835,24 @@ watchexplosiveusable() {
   var_1 endon("death");
   var_0 endon("disconnect");
   level endon("game_ended");
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 setCursorHint("HINT_NOICON");
   var_1 scripts\mp\utility::setselfusable(var_0);
   var_1 childthread scripts\mp\utility::notusableforjoiningplayers(var_0);
   switch (self.weapon_name) {
     case "c4_mp":
-      var_1 sethintstring(&"MP_PICKUP_C4");
+      var_1 setHintString(&"MP_PICKUP_C4");
       break;
 
     case "cryo_mine_mp":
-      var_1 sethintstring(&"MP_PICKUP_CRYO_MINE");
+      var_1 setHintString(&"MP_PICKUP_CRYO_MINE");
       break;
 
     case "trip_mine_mp":
-      var_1 sethintstring(&"MP_PICKUP_TRIP_MINE");
+      var_1 setHintString(&"MP_PICKUP_TRIP_MINE");
       break;
 
     case "trophy_mp":
-      var_1 sethintstring(&"MP_PICKUP_TROPHY");
+      var_1 setHintString(&"MP_PICKUP_TROPHY");
       break;
   }
 
@@ -3886,25 +3886,25 @@ makeexplosiveusabletag(var_0, var_1) {
   if(var_1) {
     self grenade_earthquake(1);
   } else {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 
   self func_84A7(var_0);
   switch (var_3) {
     case "c4_mp":
-      self sethintstring(&"MP_PICKUP_C4");
+      self setHintString(&"MP_PICKUP_C4");
       break;
 
     case "cryo_mine_mp":
-      self sethintstring(&"MP_PICKUP_CRYO_MINE");
+      self setHintString(&"MP_PICKUP_CRYO_MINE");
       break;
 
     case "trip_mine_mp":
-      self sethintstring(&"MP_PICKUP_TRIP_MINE");
+      self setHintString(&"MP_PICKUP_TRIP_MINE");
       break;
 
     case "trophy_mp":
-      self sethintstring(&"MP_PICKUP_TROPHY");
+      self setHintString(&"MP_PICKUP_TROPHY");
       break;
   }
 
@@ -4240,7 +4240,7 @@ func_13C7E(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  var_6 = vectornormalize(var_5);
+  var_6 = vectorNormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
   var_7 = bulletTrace(var_4, var_1, 0, var_3);
   if(getdvarint("scr_damage_debug") != 0 || getdvarint("scr_debugMines") != 0) {
@@ -5313,8 +5313,8 @@ mineproximitytrigger(var_0, var_1) {
   var_5.owner = self;
   thread minedeletetrigger(var_5);
   if(isDefined(var_0)) {
-    var_5 enablelinkto();
-    var_5 linkto(var_0);
+    var_5 enablelinkTo();
+    var_5 linkTo(var_0);
   }
 
   self.damagearea = var_5;
@@ -5415,8 +5415,8 @@ minebounce() {
   }
 
   var_0 = self.origin + (0, 0, 64);
-  self moveto(var_0, 0.7, 0, 0.65);
-  self.killcament moveto(var_0 + self.killcamoffset, 0.7, 0, 0.65);
+  self moveTo(var_0, 0.7, 0, 0.65);
+  self.killcament moveTo(var_0 + self.killcamoffset, 0.7, 0, 0.65);
   self rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   thread playspinnerfx();
   wait(0.65);
@@ -5496,7 +5496,7 @@ minesensorbounce() {
   var_1 = self.origin + (0, 0, self.config.launchheight);
   var_2 = self.config.launchtime;
   var_3 = self.config.launchtime + 0.1;
-  var_0 moveto(var_1, var_3, 0, var_2);
+  var_0 moveTo(var_1, var_3, 0, var_2);
   var_0 rotatevelocity((0, 1100, 32), var_3, 0, var_2);
   var_0 thread playspinnerfx();
   wait(var_2);
@@ -5621,7 +5621,7 @@ func_B8F5() {
   var_0 = self.origin + (0, 0, self.config.launchheight);
   var_1 = self.config.launchtime;
   var_2 = self.config.launchtime + 0.1;
-  self moveto(var_0, var_2, 0, var_1);
+  self moveTo(var_0, var_2, 0, var_1);
   self rotatevelocity((0, 1100, 32), var_2, 0, var_1);
   thread playspinnerfx();
   wait(var_1);
@@ -5670,7 +5670,7 @@ func_10DC5(var_0) {
   var_2.var_AC75 = var_0.var_AC75;
   var_2.owner = var_0.owner;
   var_2.config = var_0.config;
-  var_2 linkto(self, "tag_shield_back", (0, 0, 0), (0, 90, 90));
+  var_2 linkTo(self, "tag_shield_back", (0, 0, 0), (0, 90, 90));
   var_2 thread func_D501(self);
   var_2 thread createbombsquadmodel(var_0.config.bombsquadmodel, "tag_origin", var_0.owner);
   var_2 thread minedamagemonitor();
@@ -5684,7 +5684,7 @@ func_D501(var_0) {
   var_1 = self gettagorigin("tag_fx");
   var_2 = spawn("script_model", var_1);
   var_2 setModel("tag_origin");
-  var_2 linkto(self, "tag_fx", (0, 0, 0), (90, 0, -90));
+  var_2 linkTo(self, "tag_fx", (0, 0, 0), (90, 0, -90));
   var_2 thread func_13A0F(self);
   for(;;) {
     wait(2);
@@ -5847,7 +5847,7 @@ minethrown(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(var_1 != "sonic_sensor_mp") {
-    var_8 = vectornormalize(var_6["normal"]);
+    var_8 = vectorNormalize(var_6["normal"]);
     var_9 = vectortoangles(var_8);
     var_9 = var_9 + (90, 0, 0);
   } else {
@@ -6533,11 +6533,11 @@ impale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_10 = anglestoup(var_0.angles);
     var_11 = vectorcross(var_15, var_10);
     var_12 = scripts\engine\utility::spawn_tag_origin(var_4, axistoangles(var_15, var_11, var_10));
-    var_12 moveto(var_10, var_13);
+    var_12 moveTo(var_10, var_13);
     var_13 = spawnragdollconstraint(var_1.body, var_6, var_7, var_8);
     var_13.origin = var_12.origin;
     var_13.angles = var_12.angles;
-    var_13 linkto(var_12);
+    var_13 linkTo(var_12);
     if(var_13 > scripts\engine\utility::ter_op(var_9, 0.075, 1)) {
       thread impale_detachaftertime(var_13, scripts\engine\utility::ter_op(var_9, 0.075, 1));
     }
@@ -6837,8 +6837,8 @@ watchaxeautopickup(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
   var_2 = spawn("trigger_radius", self.origin - (0, 0, 40), 0, 64, 64);
-  var_2 enablelinkto();
-  var_2 linkto(self);
+  var_2 enablelinkTo();
+  var_2 linkTo(self);
   self.knife_trigger = var_2;
   var_2 endon("death");
   for(;;) {
@@ -6859,12 +6859,12 @@ watchaxeuse(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
   var_2 = spawn("script_model", self.origin);
-  var_2 linkto(self);
+  var_2 linkTo(self);
   self.useobj_trigger = var_2;
   var_2 makeusable();
-  var_2 setcursorhint("HINT_NOICON");
+  var_2 setCursorHint("HINT_NOICON");
   var_2 func_84A9("show");
-  var_2 sethintstring(&"WEAPON_PICKUP_AXE");
+  var_2 setHintString(&"WEAPON_PICKUP_AXE");
   var_2 func_84A6(360);
   var_2 setusefov(360);
   var_2 func_84A4(64);

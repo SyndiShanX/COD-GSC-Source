@@ -80,7 +80,7 @@ function function_952f1795(localclientnum) {
   self endon(#"death");
 
   while(true) {
-    foreach(player in getplayers(localclientnum)) {
+    foreach(player in getPlayers(localclientnum)) {
       if(distance2d(self.origin, player.origin) < 64) {
         beamname = "beam9_zm_fld_healing_aura_pulse";
         pos = self.origin;

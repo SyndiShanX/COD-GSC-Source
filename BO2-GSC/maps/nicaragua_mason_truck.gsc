@@ -76,7 +76,7 @@ challenge_mason_flip_truck(str_notify) {
 }
 
 mason_truck_setup() {
-  e_wagon_clip = getent("wagon_clip", "targetname");
+  e_wagon_clip = getEnt("wagon_clip", "targetname");
   e_wagon_clip trigger_off();
   a_nd_nodes = getnodearray("mason_truck_exposed_nodes", "script_noteworthy");
 
@@ -117,7 +117,7 @@ mason_truck_combat() {
   flag_waitopen("player_using_truck_turret");
   flag_set("mason_truck_wave2_retreat");
   a_ai_cartel = get_ai_group_ai("mason_truck_cartel_wave2");
-  e_goalvolume = getent("donkeykong_goalvolume", "targetname");
+  e_goalvolume = getEnt("donkeykong_goalvolume", "targetname");
 
   foreach(guy in a_ai_cartel) {
     guy thread maps\nicaragua_mason_donkeykong::sprint_to_retreat(e_goalvolume);
@@ -178,7 +178,7 @@ mason_truck_begin() {
   level thread mason_truck_colorgroups();
 
   while(true) {
-    vh_truck = getent("mason_truck", "targetname");
+    vh_truck = getEnt("mason_truck", "targetname");
 
     if(isDefined(vh_truck)) {
       break;
@@ -196,7 +196,7 @@ mason_truck_begin() {
   vh_truck thread mason_truck_shoots();
   level.player thread mason_truck_player_uses_turret(vh_truck);
   vh_truck waittill("mason_truck_decision_point");
-  s_goal = getstruct("truck_crash", "targetname");
+  s_goal = getStruct("truck_crash", "targetname");
   vh_truck.goalradius = 32;
   vh_truck setvehgoalpos(s_goal.origin);
   vh_truck.drivepath = 0;
@@ -217,7 +217,7 @@ mason_truck_begin() {
     vh_truck mason_truck_passengers_getout();
   } else {
     horn_ent = spawn("script_origin", vh_truck.origin);
-    horn_ent linkto(vh_truck);
+    horn_ent linkTo(vh_truck);
     level thread truck_horn_sound(horn_ent);
     vh_truck clearvehgoalpos();
     vh_truck cancelaimove();
@@ -260,7 +260,7 @@ trough_2_break(e_truck) {
   level notify("fxanim_trough_break_2_start");
   earthquake(0.25, 0.5, level.player.origin, 1024);
   level.player thread rumble_loop(4, 0.05, "damage_light");
-  e_trough_clip = getent("truck_trough", "targetname");
+  e_trough_clip = getEnt("truck_trough", "targetname");
   e_trough_clip trigger_off();
   a_nd_nodes = getnodearray("mason_truck_trough2_nodes", "script_noteworthy");
 
@@ -367,11 +367,11 @@ mason_truck_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
           flag_set("mason_truck_crashed");
           self hidepart("tag_glass_front");
           self attach("veh_iw_pickup_bloody_glass", "tag_glass_front");
-          level.mason_truck_driver stopanimscripted();
+          level.mason_truck_driver stopanimScripted();
           add_generic_ai_to_scene(level.mason_truck_driver, "mason_truck_driver_death");
           level thread run_scene("mason_truck_driver_death");
           self thread re_link_driver_to_truck();
-          level.mason_truck_passenger stopanimscripted();
+          level.mason_truck_passenger stopanimScripted();
           add_generic_ai_to_scene(level.mason_truck_passenger, "mason_truck_passenger_crash_idle");
           level thread run_scene("mason_truck_passenger_crash_idle");
         }
@@ -384,18 +384,18 @@ mason_truck_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
 
 re_link_driver_to_truck() {
   scene_wait("mason_truck_driver_death");
-  level.mason_truck_driver linkto(self, "tag_driver");
+  level.mason_truck_driver linkTo(self, "tag_driver");
 }
 
 re_link_passenger_to_truck() {
   scene_wait("mason_truck_passenger_crash_death");
-  level.mason_truck_passenger linkto(self, "tag_passenger");
+  level.mason_truck_passenger linkTo(self, "tag_passenger");
 }
 
 mason_truck_passengers_getout() {
   self vehicle_unload(0.1);
   a_ai_passengers = getEntArray("mason_truck_occupant_ai", "targetname");
-  e_goalvolume = getent("mason_truck_riders_goalvolume", "targetname");
+  e_goalvolume = getEnt("mason_truck_riders_goalvolume", "targetname");
 
   foreach(guy in a_ai_passengers) {
     if(!isDefined(guy.script_noteworthy)) {

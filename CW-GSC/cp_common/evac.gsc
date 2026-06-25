@@ -137,13 +137,13 @@ function private helicopter(var_eb954041, var_edfdb06f, var_d12d84db) {
     ips = 528;
     var_4e6f66f4 = var_7933bf99 * ips;
     var_4a70cbd6 = getEntArray("vehicle_evac_heli", "targetname")[0];
-    dir = vectornormalize((var_4a70cbd6.origin[0] - var_eb954041[0], var_4a70cbd6.origin[1] - var_eb954041[1], 0));
+    dir = vectorNormalize((var_4a70cbd6.origin[0] - var_eb954041[0], var_4a70cbd6.origin[1] - var_eb954041[1], 0));
     start_loc = var_4a70cbd6.origin + dir * var_4e6f66f4;
     var_45832177 = vectortoangles(dir * -1);
     level.var_7d23cf81 = util::spawn_model(var_4a70cbd6.model, start_loc, var_45832177);
     var_4a70cbd6.angles = var_45832177;
     level notify(#"hash_56c65465d6639b92");
-    level.var_7d23cf81 moveto(var_4a70cbd6.origin, var_7933bf99, 0, 0);
+    level.var_7d23cf81 moveTo(var_4a70cbd6.origin, var_7933bf99, 0, 0);
     objectives::follow("evac_heli", level.var_7d23cf81, undefined, undefined, undefined, #"hash_3451f8476f4b14bf");
     objectives::function_67f87f80("evac_heli", [level.var_7d23cf81], level.var_f7ac00e1);
   }
@@ -171,7 +171,7 @@ function private helicopter(var_eb954041, var_edfdb06f, var_d12d84db) {
   var_b4a49886 endon(#"death");
 
   if(isDefined(level.var_7d23cf81)) {
-    level.var_7d23cf81 linkto(var_b4a49886, "tag_origin", (0, 0, 0), (0, 0, 0));
+    level.var_7d23cf81 linkTo(var_b4a49886, "tag_origin", (0, 0, 0), (0, 0, 0));
     level.var_7d23cf81 setModel("tag_origin");
   } else if(isDefined(level.var_f7ac00e1)) {
     objectives::follow("evac_heli", level.vehicle_evac_heli, undefined, undefined, undefined, #"hash_3451f8476f4b14bf");
@@ -383,7 +383,7 @@ function function_7f59e31f(var_b4a49886, side) {
 function function_172759f0(var_b4a49886, str_tag, offset = (0, 0, 0)) {
   e_origin = function_787dbb94(var_b4a49886 gettagorigin(str_tag), var_b4a49886 gettagangles(str_tag), undefined, "tag_origin");
   e_origin util::create_cursor_hint("tag_origin", (0, 0, 0), #"hash_62df17fd9f467834");
-  e_origin linkto(var_b4a49886, str_tag, offset, (0, 0, 0));
+  e_origin linkTo(var_b4a49886, str_tag, offset, (0, 0, 0));
   e_origin util::waittill_any_ents(e_origin, "trigger", level, "evac_helicopter_board_trigger");
   level notify(#"evac_helicopter_board_trigger");
   e_origin util::remove_cursor_hint();
@@ -451,13 +451,13 @@ function private function_5986f4a1(var_834e775, var_3f0bbf52, var_71dc0c70, var_
 function function_2795b4f9(var_834e775, var_5859bbb4, var_3e8a01bb) {
   level endon(#"hash_659b6dc260129701");
   level.var_dc8cac2a = [];
-  e_vol = getent("volume_evac_loc", "targetname");
+  e_vol = getEnt("volume_evac_loc", "targetname");
 
   if(isDefined(e_vol)) {
     e_vol.origin = var_834e775;
   }
 
-  level.var_dc8cac2a[level.var_dc8cac2a.size] = getplayers()[0];
+  level.var_dc8cac2a[level.var_dc8cac2a.size] = getPlayers()[0];
 
   if(isDefined(level.heroes)) {
     foreach(guy in level.heroes) {
@@ -514,7 +514,7 @@ function private function_b5b9e9e8(e_vol) {
     return;
   }
 
-  self setgoal(getplayers()[0], 0, level.var_5e56e2a8, 512);
+  self setgoal(getPlayers()[0], 0, level.var_5e56e2a8, 512);
   self.var_c5b45b0 = 1;
 }
 

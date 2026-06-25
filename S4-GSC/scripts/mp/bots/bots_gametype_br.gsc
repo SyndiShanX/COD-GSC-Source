@@ -46,7 +46,7 @@ _id_270D() {
 
       if((scripts\mp\gametypes\br_public::_id_898B() || var_0) && istrue(level._id_2E36)) {
         var_1 = level._id_29F4.origin;
-        var_2 = vectornormalize(level._id_7E79._id_2E3A._id_5340 - var_1);
+        var_2 = vectorNormalize(level._id_7E79._id_2E3A._id_5340 - var_1);
         var_3 = (level._id_2A73._id_2A78[0][0] - var_1[0]) / var_2[0];
         var_4 = (level._id_2A73._id_2A78[0][1] - var_1[0]) / var_2[0];
         var_5 = (level._id_2A73._id_2A78[0][1] - var_1[1]) / var_2[1];
@@ -222,7 +222,7 @@ _id_6538() {
 }
 
 _id_27B7(var_0, var_1) {
-  var_2 = vectornormalize(var_1 - var_0.origin);
+  var_2 = vectorNormalize(var_1 - var_0.origin);
   return vectortoangles(var_2);
 }
 

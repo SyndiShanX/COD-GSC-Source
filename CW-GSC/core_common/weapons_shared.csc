@@ -160,7 +160,7 @@ function function_ec73770b(local_client_num) {
     mountable_point = origin;
     cam_angles = getcamanglesbylocalclientnum(local_client_num);
     forward = anglesToForward(cam_angles);
-    forward = vectornormalize((forward[0], forward[1], 0));
+    forward = vectorNormalize((forward[0], forward[1], 0));
     height_offset = 24;
     trace_distance = getdvarint(#"hash_25637aefbe36f6f5", 300);
     forward_vector = vectorscale(forward, trace_distance);

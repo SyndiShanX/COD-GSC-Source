@@ -230,27 +230,27 @@ move_gate_array(gates, direction, time, dynamic_path) {
 }
 
 move_gate(gate, direction, time, dynamic_path) {
-  model = GetEnt(gate.target, "targetname");
+  model = getEnt(gate.target, "targetname");
 
   if(isDefined(dynamic_path)) {
     if(direction == "close") {
       if(isDefined(model)) {
         if(time >= 1) {
-          model MoveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
+          model moveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
         } else {
           model.origin = model.origin + (0, 0, 104);
         }
       }
-      gate MoveTo(gate.origin + (0, 0, 96), .1);
+      gate moveTo(gate.origin + (0, 0, 96), .1);
       wait .1;
       gate Solid();
-      gate DisConnectPaths();
+      gate disconnectPaths();
       gate Show();
       gate SetAISightLineVisible(false);
     } else {
       if(isDefined(model)) {
         if(time >= 1) {
-          model MoveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
+          model moveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
         } else {
           model.origin = model.origin - (0, 0, 104);
         }
@@ -259,14 +259,14 @@ move_gate(gate, direction, time, dynamic_path) {
       gate NotSolid();
       gate Hide();
       gate SetAISightLineVisible(true);
-      gate MoveTo(gate.origin - (0, 0, 96), .1);
+      gate moveTo(gate.origin - (0, 0, 96), .1);
       wait .1;
     }
   } else {
     if(direction == "close") {
       if(isDefined(model)) {
         if(time >= 1) {
-          model MoveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
+          model moveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
         } else {
           model.origin = model.origin + (0, 0, 104);
         }
@@ -274,7 +274,7 @@ move_gate(gate, direction, time, dynamic_path) {
     } else {
       if(isDefined(model)) {
         if(time >= 1) {
-          model MoveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
+          model moveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
         } else {
           model.origin = model.origin - (0, 0, 104);
         }
@@ -293,9 +293,9 @@ move_shutter_array(shutters, direction, time) {
 
 move_shutter(shutter, direction, time) {
   if(direction == "close") {
-    shutter MoveTo(shutter.origin + (0, 0, 96), time, time / 8, time / 4);
+    shutter moveTo(shutter.origin + (0, 0, 96), time, time / 8, time / 4);
   } else {
-    shutter MoveTo(shutter.origin - (0, 0, 96), time, time / 8, time / 4);
+    shutter moveTo(shutter.origin - (0, 0, 96), time, time / 8, time / 4);
   }
 }
 
@@ -401,15 +401,15 @@ display_team_scores() {
   if(!level.teamBased) {
     return;
   }
-  ghosts_ones_digit = GetEnt("ghosts_1_0", "targetname");
-  ghosts_tens_digit = GetEnt("ghosts_2_0", "targetname");
-  ghosts_hundreds_digit = GetEnt("ghosts_3_0", "targetname");
-  ghosts_thousands_digit = GetEnt("ghosts_4_0", "targetname");
+  ghosts_ones_digit = getEnt("ghosts_1_0", "targetname");
+  ghosts_tens_digit = getEnt("ghosts_2_0", "targetname");
+  ghosts_hundreds_digit = getEnt("ghosts_3_0", "targetname");
+  ghosts_thousands_digit = getEnt("ghosts_4_0", "targetname");
 
-  federation_ones_digit = GetEnt("federation_1_0", "targetname");
-  federation_tens_digit = GetEnt("federation_2_0", "targetname");
-  federation_hundreds_digit = GetEnt("federation_3_0", "targetname");
-  federation_thousands_digit = GetEnt("federation_4_0", "targetname");
+  federation_ones_digit = getEnt("federation_1_0", "targetname");
+  federation_tens_digit = getEnt("federation_2_0", "targetname");
+  federation_hundreds_digit = getEnt("federation_3_0", "targetname");
+  federation_thousands_digit = getEnt("federation_4_0", "targetname");
 
   while(1) {
     if(level.gameType == "sd" || level.gameType == "sr" || level.gameType == "siege") {
@@ -997,10 +997,8 @@ determine_score_big_lead_noteam() {
 
       players_sorted_by_score = array_sort_with_func(level.players, ::is_score_a_greater_than_b);
 
-      if(players_sorted_by_score.size >= 2) {
-      }
-      if(players_sorted_by_score[0].score - players_sorted_by_score[1].score > scorelimit / 2) {
-      } {
+      if(players_sorted_by_score.size >= 2) {}
+      if(players_sorted_by_score[0].score - players_sorted_by_score[1].score > scorelimit / 2) {} {
         level notify("announcement", "big_spread_noteam");
         return;
       }
@@ -1033,15 +1031,15 @@ randomizer_get_no_repeat() {
 }
 
 rotate_turntable() {
-  turntable = GetEnt("showcase_turntable", "targetname");
+  turntable = getEnt("showcase_turntable", "targetname");
   prizes = getEntArray("showcase_prize", "targetname");
 
   foreach(prize in prizes) {
-    prize LinkTo(turntable);
+    prize linkTo(turntable);
   }
 
   while(1) {
-    turntable RotateYaw(360, 20);
+    turntable rotateYaw(360, 20);
     wait 20;
   }
 }
@@ -1305,8 +1303,8 @@ play_slot_machine_sfx(jackpot) {
 
 trap_init() {
   level.trap_1 = spawnStruct();
-  level.trap_1.inflictor = GetEnt("trap_1_origin", "targetname");
-  level.trap_1.volume = GetEnt("trap_1_volume", "targetname");
+  level.trap_1.inflictor = getEnt("trap_1_origin", "targetname");
+  level.trap_1.volume = getEnt("trap_1_volume", "targetname");
   level.trap_1.destructibles = [(481, -74, -100)];
   level.trap_1.player = undefined;
   level.trap_1.team = undefined;
@@ -1553,7 +1551,7 @@ generate_turret(duration, location) {
   sentryGun.angles = location.angles;
 
   sentryGun.killCamEnt = spawn("script_model", sentryGun.origin + (0, 0, 64));
-  sentryGun.killCamEnt LinkTo(sentryGun);
+  sentryGun.killCamEnt linkTo(sentryGun);
 
   sentryGun thread multi_turret_timeout(duration);
 }
@@ -1574,13 +1572,13 @@ multi_turret_timeout(duration) {
 }
 
 carestrike_setup() {
-  spawn_location_1 = GetEnt("carestrike_spawn_1", "targetname");
-  spawn_location_2 = GetEnt("carestrike_spawn_2", "targetname");
-  spawn_location_3 = GetEnt("carestrike_spawn_3", "targetname");
+  spawn_location_1 = getEnt("carestrike_spawn_1", "targetname");
+  spawn_location_2 = getEnt("carestrike_spawn_2", "targetname");
+  spawn_location_3 = getEnt("carestrike_spawn_3", "targetname");
 
-  dropsite_1 = GetEnt("carestrike_location_1", "targetname");
-  dropsite_2 = GetEnt("carestrike_location_2", "targetname");
-  dropsite_3 = GetEnt("carestrike_location_3", "targetname");
+  dropsite_1 = getEnt("carestrike_location_1", "targetname");
+  dropsite_2 = getEnt("carestrike_location_2", "targetname");
+  dropsite_3 = getEnt("carestrike_location_3", "targetname");
 
   thread play_sound_in_space("mus_carestrike", (33, 92, 741));
   dropsite_1 playSound("scn_shp_carestrike_jets");
@@ -1717,14 +1715,14 @@ dropTheCrate(dropPoint, dropType, lbHeight, dropImmediately, crateOverride, star
     case "airdrop_juggernaut":
     case "airdrop_juggernaut_recon":
     case "airdrop_juggernaut_maniac":
-      dropCrate LinkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
+      dropCrate linkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
       break;
     case "airdrop_escort":
     case "airdrop_osprey_gunner":
-      dropCrate LinkTo(self, tagName, (0, 0, 0), (0, 0, 0));
+      dropCrate linkTo(self, tagName, (0, 0, 0), (0, 0, 0));
       break;
     default:
-      dropCrate LinkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
+      dropCrate linkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
       break;
   }
 
@@ -1845,7 +1843,7 @@ watch_cinematic_use(cinematic, preload, start, end) {
 
   thread jumbotron_loop_bink("mp_shipment_ns_long_loop", 33);
 
-  static_logo = GetEnt("jumbotron_static_logo", "targetname");
+  static_logo = getEnt("jumbotron_static_logo", "targetname");
   static_logo Hide();
 }
 
@@ -1861,7 +1859,7 @@ play_random_clip() {
 
   flag_set("jumbotron_available");
 
-  static_logo = GetEnt("jumbotron_static_logo", "targetname");
+  static_logo = getEnt("jumbotron_static_logo", "targetname");
   static_logo Hide();
 
   while(1) {
@@ -1890,9 +1888,9 @@ jumbotron_play_slot_machine_bink(bink, length) {
 box_kill_counter() {
   level endon("game_ended");
 
-  volume = GetEnt("box_kill_volume", "targetname");
-  sign_on = GetEnt("puzzle_box_sign_on", "targetname");
-  sign_off = GetEnt("puzzle_box_sign_off", "targetname");
+  volume = getEnt("box_kill_volume", "targetname");
+  sign_on = getEnt("puzzle_box_sign_on", "targetname");
+  sign_off = getEnt("puzzle_box_sign_off", "targetname");
 
   sign_on Hide();
 
@@ -2090,14 +2088,14 @@ is_score_a_greater_than_b(a, b) {
 }
 
 set_up_winners_podium(top_scorers) {
-  camera = GetEnt("mp_global_intermission", "classname");
+  camera = getEnt("mp_global_intermission", "classname");
   camera_loc = spawn("script_model", camera.origin);
   camera_loc setModel("tag_origin");
   camera_loc.angles = camera.angles;
 
-  podium_clip = GetEnt("podium_clip", "targetname");
-  podium_clip MoveTo(podium_clip.origin + (0, 0, 300), 0.05);
-  podium_clip DisconnectPaths();
+  podium_clip = getEnt("podium_clip", "targetname");
+  podium_clip moveTo(podium_clip.origin + (0, 0, 300), 0.05);
+  podium_clip disconnectPaths();
 
   for(i = 0; i < 3; i++) {
     player = top_scorers[i];
@@ -2105,7 +2103,7 @@ set_up_winners_podium(top_scorers) {
       return;
     }
     place = i + 1;
-    location = GetEnt("podium_place_" + place, "targetname");
+    location = getEnt("podium_place_" + place, "targetname");
 
     player spawn(location.origin, location.angles);
     player updateSessionState("playing");
@@ -2117,7 +2115,7 @@ set_up_winners_podium(top_scorers) {
       player.riotshieldmodel = undefined;
     }
 
-    player CameraLinkTo(camera_loc, "tag_origin");
+    player CameralinkTo(camera_loc, "tag_origin");
 
     player.custom_spawn_loc = location;
 
@@ -2128,7 +2126,7 @@ set_up_winners_podium(top_scorers) {
 }
 
 set_up_podium_spectator(spectators) {
-  camera = GetEnt("mp_global_intermission", "classname");
+  camera = getEnt("mp_global_intermission", "classname");
   camera_loc = spawn("script_model", camera.origin);
   camera_loc setModel("tag_origin");
   camera_loc.angles = camera.angles;
@@ -2163,7 +2161,7 @@ podium_scoreboard_sequence(spawn_location, camera, sessionstate) {
     camera_loc setModel("tag_origin");
     camera_loc.angles = camera.angles;
 
-    self CameraLinkTo(camera_loc, "tag_origin");
+    self CameralinkTo(camera_loc, "tag_origin");
 
     self.primaryWeapon = undefined;
   } else {
@@ -2185,13 +2183,13 @@ spawn_custom_spectator(camera_loc) {
   self freezeControlsWrapper(true);
   self PlayerHide();
 
-  self CameraLinkTo(camera_loc, "tag_origin");
+  self CameralinkTo(camera_loc, "tag_origin");
   self setDepthOfField(0, 0, 512, 512, 4, 0);
   self restoreBaseVisionSet(0);
 }
 
 clean_up_podium_scene() {
-  volume = GetEnt("trap_1_volume", "targetname");
+  volume = getEnt("trap_1_volume", "targetname");
 
   touching_ents = getEntArray("script_vehicle", "classname");
 
@@ -2213,7 +2211,7 @@ get_prize_room_curtains_n_fx() {
 PRIZE_ROOM_TIME = 40;
 PRIZE_ROOM_TIME_OPEN = 15;
 prize_room_curtains() {
-  clip = GetEnt("prize_display_clip", "targetname");
+  clip = getEnt("prize_display_clip", "targetname");
 
   while(1) {
     self SetScriptablePartState(0, "curtain_closed");
@@ -2334,7 +2332,7 @@ get_neon_sign(name) {
   count = 1;
 
   while(1) {
-    letter = GetEnt(name + count, "targetname");
+    letter = getEnt(name + count, "targetname");
 
     if(isDefined(letter)) {
       sign[count - 1] = letter;
@@ -2368,7 +2366,7 @@ move_elevators() {
 }
 
 move_podium_camera() {
-  self MoveTo((122, 1006, 300), 15, 1, 12);
+  self moveTo((122, 1006, 300), 15, 1, 12);
   self RotateBy((90, 90, 90), 3.0, 0.5, 0.5);
 }
 

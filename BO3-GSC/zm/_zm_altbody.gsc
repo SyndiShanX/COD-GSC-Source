@@ -72,7 +72,7 @@ function init(name, kiosk_name, trigger_hint, visionset_name, visionset_priority
 
 function function_a2c7acf5() {
   level waittill("end_game");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] notify("altbody_end");
   }
@@ -277,7 +277,7 @@ function function_72c3fae0(washuman) {
     playFX(level._effect["human_disappears"], self.origin);
   } else {
     playFX(level._effect["zombie_disappears"], self.origin);
-    playsoundatposition("zmb_player_disapparate", self.origin);
+    playSoundAtPosition("zmb_player_disapparate", self.origin);
     self playlocalsound("zmb_player_disapparate_2d");
   }
 }
@@ -320,7 +320,7 @@ function kiosk_trigger_visibility(player) {
   } else {
     self.stub.hint_string = self.stub.notrigger_hint;
   }
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
   self setinvisibletoplayer(player, !visible);
   return visible;
 }
@@ -350,13 +350,13 @@ function private watch_kiosk_triggers(name, trigger_name, trigger_hint, whenvisi
 
 function private trigger_watch_kiosk(name, trigger_name, trigger_hint, whenvisible) {
   self endon("death");
-  self sethintstring(trigger_hint);
-  self setcursorhint("HINT_NOICON");
+  self setHintString(trigger_hint);
+  self setCursorHint("HINT_NOICON");
   self setvisibletoall();
   self thread trigger_monitor_visibility(name, whenvisible);
   if(whenvisible) {
     if(isDefined(self.target)) {
-      target = getent(self.target, "targetname");
+      target = getEnt(self.target, "targetname");
       self.kiosk = target;
     }
     while(isDefined(self)) {

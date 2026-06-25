@@ -284,7 +284,7 @@ lgt_init() {
   thread lgt_sat_sequence();
   resetsunlight();
   resetsundirection();
-  var_4 = getent("intro_airlock_door", "targetname");
+  var_4 = getEnt("intro_airlock_door", "targetname");
   var_5 = spawn("script_model", (0, 0, 0));
   var_5 setModel("tag_origin");
   var_5.origin = var_4.origin - (168, 0, 0);
@@ -294,7 +294,7 @@ lgt_init() {
 lgt_intro_sequence() {
   common_scripts\utility::flag_wait("do_transition_to_odin");
   maps\_art::sunflare_changes("odin_default", 0);
-  var_0 = vectornormalize((-1232, -2641, -155));
+  var_0 = vectorNormalize((-1232, -2641, -155));
 
   if(!isDefined(level.sunflare)) {
     level.sunflare = spawn("script_model", (0, 0, 0));
@@ -321,7 +321,7 @@ lgt_escape_sequence() {
   setsaveddvar("sm_sunSampleSizeNear", 0.1);
   maps\_art::sunflare_changes("odin_escape", 0);
   thread lgt_odin_firing();
-  var_0 = vectornormalize((296, -835, -20));
+  var_0 = vectorNormalize((296, -835, -20));
 
   if(!isDefined(level.sunflare)) {
     level.sunflare = spawn("script_model", (0, 0, 0));
@@ -351,7 +351,7 @@ lgt_spin_sequence() {
   var_0 = maps\odin_util::earth_get_script_mover();
   var_1 = (48583, 18170, -45500);
   level.sunflare.origin = var_0.origin - var_1;
-  level.sunflare linkto(var_0);
+  level.sunflare linkTo(var_0);
   wait 2;
   thread place_sun_with_moving_source(level.sunflare, undefined, undefined, "lgt_flag_end_sun_move");
   common_scripts\utility::flag_wait_any("lgt_flag_spin_over", "trigger_spacejump");
@@ -363,7 +363,7 @@ lgt_sat_sequence() {
   level endon("start_transition_to_youngblood");
   common_scripts\utility::flag_wait("trigger_spacejump");
   wait 0.25;
-  var_0 = vectornormalize((-3, -5, 6));
+  var_0 = vectorNormalize((-3, -5, 6));
   var_1 = level.player.origin + var_0 * 100000;
 
   if(!isDefined(level.sunflare)) {
@@ -373,7 +373,7 @@ lgt_sat_sequence() {
   }
 
   thread maps\_art::sunflare_changes("odin_satellite", level.spinsuntranstime);
-  level.sunflare moveto(var_1, level.spinsuntranstime);
+  level.sunflare moveTo(var_1, level.spinsuntranstime);
   common_scripts\utility::flag_set("lgt_trg_odin_destruction");
   enableforcedsunshadows();
   thread maps\_utility::lerp_saveddvar("sm_sunSampleSizeNear", 0.6, 1.5);
@@ -413,7 +413,7 @@ lgt_odin_firing() {
 
 rotatelights(var_0, var_1, var_2) {
   var_3 = getEntArray(var_1, "script_noteworthy");
-  var_4 = getent(var_0, "script_noteworthy");
+  var_4 = getEnt(var_0, "script_noteworthy");
 
   if(!isDefined(var_3) || !isDefined(var_4) || !isDefined(var_2)) {
     return;
@@ -421,7 +421,7 @@ rotatelights(var_0, var_1, var_2) {
   var_4 thread rotateme(-360, var_2, 1.0);
 
   foreach(var_6 in var_3) {
-    var_6 thread maps\_utility::manual_linkto(var_4, var_6.origin - var_4.origin);
+    var_6 thread maps\_utility::manual_linkTo(var_4, var_6.origin - var_4.origin);
   }
 }
 
@@ -432,7 +432,7 @@ rotateme(var_0, var_1, var_2) {
   for(;;) {
     switch (var_1) {
       case "yaw":
-        self rotateyaw(var_0, var_2);
+        self rotateYaw(var_0, var_2);
         wait(var_2);
         break;
       case "pitch":
@@ -560,12 +560,12 @@ fx_infil_red_shirt_die(var_0) {
 
 fx_escape_fire_rods() {
   level endon("player_exited_escape_hallway");
-  var_0 = getent("sat_barrel_top", "script_noteworthy");
-  var_1 = getent("sat_barrel_target", "script_noteworthy");
-  var_2 = getent("sat_barrel_bottom", "script_noteworthy");
+  var_0 = getEnt("sat_barrel_top", "script_noteworthy");
+  var_1 = getEnt("sat_barrel_target", "script_noteworthy");
+  var_2 = getEnt("sat_barrel_bottom", "script_noteworthy");
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.angles = var_0.angles;
-  var_4 = getent("fake_earth", "targetname");
+  var_4 = getEnt("fake_earth", "targetname");
   var_5 = 1;
   var_6 = maps\odin_util::satellite_get_script_mover();
 
@@ -580,7 +580,7 @@ fx_escape_fire_rods() {
     var_11 = common_scripts\utility::spawn_tag_origin();
     var_11.origin = var_6.origin;
     var_11.angles = vectortoangles(var_9);
-    var_6 linkto(var_11);
+    var_6 linkTo(var_11);
 
     if(var_7 == "tag_fx_impact_1") {
       var_12 = vectortoangles(var_10) + (0, 0, -40);
@@ -588,7 +588,7 @@ fx_escape_fire_rods() {
       var_12 = vectortoangles(var_10) + (0, 0, randomfloatrange(-4, 4));
     }
 
-    var_11 rotateto(var_12, 4, 2, 2);
+    var_11 rotateTo(var_12, 4, 2, 2);
     thread fire_sat_rcs_thrusters(var_11.angles, vectortoangles(var_10), 4);
     wait 4;
     var_6 unlink();
@@ -618,14 +618,14 @@ fx_escape_fire_rods() {
 fx_spin_fire_rods() {
   level endon("start_transition_to_youngblood");
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_1 = getent("sat_barrel_top", "script_noteworthy");
-  var_2 = getent("sat_barrel_target", "script_noteworthy");
-  var_3 = getent("sat_barrel_bottom", "script_noteworthy");
+  var_1 = getEnt("sat_barrel_top", "script_noteworthy");
+  var_2 = getEnt("sat_barrel_target", "script_noteworthy");
+  var_3 = getEnt("sat_barrel_bottom", "script_noteworthy");
   var_0.angles = var_1.angles;
   var_4 = maps\odin_util::earth_get_script_mover().earth_model;
   var_5 = 4;
   var_6 = maps\odin_util::satellite_get_script_mover();
-  var_7 = getent("final_sat_orientation", "targetname");
+  var_7 = getEnt("final_sat_orientation", "targetname");
 
   while(!common_scripts\utility::flag("satellite_end_anim_started")) {
     var_8 = "tag_fx_impact_" + var_5;
@@ -657,7 +657,7 @@ fx_spin_fire_rods() {
     }
 
     if(common_scripts\utility::flag("lgt_flag_spin_over")) {
-      var_6 rotateto(var_17, 6, 3, 3);
+      var_6 rotateTo(var_17, 6, 3, 3);
       wait 6;
     } else
       wait 6;
@@ -693,8 +693,8 @@ sat_pretend_to_keep_moving_and_firing() {}
 
 rog_fire_at_off_axis_target(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = self;
-  var_7 = getent("sat_barrel_bottom", "script_noteworthy");
-  var_8 = getent("sat_barrel_target", "script_noteworthy");
+  var_7 = getEnt("sat_barrel_bottom", "script_noteworthy");
+  var_8 = getEnt("sat_barrel_target", "script_noteworthy");
   var_9 = common_scripts\utility::spawn_tag_origin();
   var_9.origin = var_8.origin;
   var_10 = var_7.origin - var_6.origin;
@@ -704,7 +704,7 @@ rog_fire_at_off_axis_target(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_6 thread god_rays_from_rog(8, var_4, var_5);
   }
 
-  var_6 moveto(var_7.origin, var_0 * 0.1, var_0 * 0.1, 0);
+  var_6 moveTo(var_7.origin, var_0 * 0.1, var_0 * 0.1, 0);
   var_6 waittill("movedone");
   var_11 = 0;
 
@@ -716,8 +716,8 @@ rog_fire_at_off_axis_target(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_12 = var_2 gettagorigin(var_1);
     var_10 = var_6.origin - var_9.origin;
     var_6.angles = vectortoangles(var_10);
-    var_9 moveto(var_12, 1.5);
-    var_6 moveto(var_9.origin, var_0);
+    var_9 moveTo(var_12, 1.5);
+    var_6 moveTo(var_9.origin, var_0);
     var_11 = var_11 + 1;
     wait 0.05;
   }
@@ -1010,7 +1010,7 @@ sfx_and_visual_shake() {
 }
 
 bright_light_flash_into_console() {
-  var_0 = getent("bright_light_flash_into_console", "script_noteworthy");
+  var_0 = getEnt("bright_light_flash_into_console", "script_noteworthy");
 
   for(var_1 = 0; var_1 <= 1.8; var_1 = var_1 + 0.05) {
     var_0 setlightintensity(var_1);
@@ -1026,46 +1026,46 @@ bright_light_flash_into_console() {
 
 satellite_rcs_thrusters() {
   level.satellite_small_thrusts = 0;
-  level.thruster_01 = getent("sat_thruster_01", "script_noteworthy");
-  level.thruster_02 = getent("sat_thruster_02", "script_noteworthy");
-  level.thruster_03 = getent("sat_thruster_03", "script_noteworthy");
-  level.thruster_04 = getent("sat_thruster_04", "script_noteworthy");
-  level.thruster_01_lat = getent("sat_thruster_01_lat", "script_noteworthy");
-  level.thruster_02_lat = getent("sat_thruster_02_lat", "script_noteworthy");
-  level.thruster_03_lat = getent("sat_thruster_03_lat", "script_noteworthy");
-  level.thruster_04_lat = getent("sat_thruster_04_lat", "script_noteworthy");
+  level.thruster_01 = getEnt("sat_thruster_01", "script_noteworthy");
+  level.thruster_02 = getEnt("sat_thruster_02", "script_noteworthy");
+  level.thruster_03 = getEnt("sat_thruster_03", "script_noteworthy");
+  level.thruster_04 = getEnt("sat_thruster_04", "script_noteworthy");
+  level.thruster_01_lat = getEnt("sat_thruster_01_lat", "script_noteworthy");
+  level.thruster_02_lat = getEnt("sat_thruster_02_lat", "script_noteworthy");
+  level.thruster_03_lat = getEnt("sat_thruster_03_lat", "script_noteworthy");
+  level.thruster_04_lat = getEnt("sat_thruster_04_lat", "script_noteworthy");
   level.thruster_01_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_01_fx.origin = level.thruster_01.origin;
   level.thruster_01_fx.angles = level.thruster_01.angles;
-  level.thruster_01_fx linkto(level.thruster_01);
+  level.thruster_01_fx linkTo(level.thruster_01);
   level.thruster_02_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_02_fx.origin = level.thruster_02.origin;
   level.thruster_02_fx.angles = level.thruster_02.angles;
-  level.thruster_02_fx linkto(level.thruster_02);
+  level.thruster_02_fx linkTo(level.thruster_02);
   level.thruster_03_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_03_fx.origin = level.thruster_03.origin;
   level.thruster_03_fx.angles = level.thruster_03.angles;
-  level.thruster_03_fx linkto(level.thruster_03);
+  level.thruster_03_fx linkTo(level.thruster_03);
   level.thruster_04_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_04_fx.origin = level.thruster_04.origin;
   level.thruster_04_fx.angles = level.thruster_04.angles;
-  level.thruster_04_fx linkto(level.thruster_04);
+  level.thruster_04_fx linkTo(level.thruster_04);
   level.thruster_01_lat_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_01_lat_fx.origin = level.thruster_01_lat.origin;
   level.thruster_01_lat_fx.angles = level.thruster_01_lat.angles;
-  level.thruster_01_lat_fx linkto(level.thruster_01_lat);
+  level.thruster_01_lat_fx linkTo(level.thruster_01_lat);
   level.thruster_02_lat_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_02_lat_fx.origin = level.thruster_02_lat.origin;
   level.thruster_02_lat_fx.angles = level.thruster_02_lat.angles;
-  level.thruster_02_lat_fx linkto(level.thruster_02_lat);
+  level.thruster_02_lat_fx linkTo(level.thruster_02_lat);
   level.thruster_03_lat_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_03_lat_fx.origin = level.thruster_03_lat.origin;
   level.thruster_03_lat_fx.angles = level.thruster_03_lat.angles;
-  level.thruster_03_lat_fx linkto(level.thruster_03_lat);
+  level.thruster_03_lat_fx linkTo(level.thruster_03_lat);
   level.thruster_04_lat_fx = common_scripts\utility::spawn_tag_origin();
   level.thruster_04_lat_fx.origin = level.thruster_04_lat.origin;
   level.thruster_04_lat_fx.angles = level.thruster_04_lat.angles;
-  level.thruster_04_lat_fx linkto(level.thruster_04_lat);
+  level.thruster_04_lat_fx linkTo(level.thruster_04_lat);
   common_scripts\utility::flag_wait("satellite_end_anim_started");
   level.thruster_01 delete();
   level.thruster_02 delete();
@@ -1129,14 +1129,14 @@ fx_burnup_player() {
 
 fx_burnup_sat() {
   var_0 = [];
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorL_01", "script_noteworthy");
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorL_02", "script_noteworthy");
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorL_03", "script_noteworthy");
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorL_04", "script_noteworthy");
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorR_01", "script_noteworthy");
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorR_02", "script_noteworthy");
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorR_03", "script_noteworthy");
-  var_0[var_0.size] = getent("odin_sat_section_04_pod_doorR_04", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorL_01", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorL_02", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorL_03", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorL_04", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorR_01", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorR_02", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorR_03", "script_noteworthy");
+  var_0[var_0.size] = getEnt("odin_sat_section_04_pod_doorR_04", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     if(maps\_utility::hastag(var_2.model, "tag_fx_tip")) {
@@ -1151,7 +1151,7 @@ fx_burnup_sat() {
 
   foreach(var_2 in var_4) {
     var_7 = var_2 common_scripts\utility::spawn_tag_origin();
-    var_7 linkto(var_2);
+    var_7 linkTo(var_2);
     playFXOnTag(level._effect["odin_burnup_sat_trail_runner"], var_7, "tag_origin");
     var_5[var_5.size] = var_7;
     wait(randomfloatrange(0.1, 0.5));
@@ -1175,26 +1175,26 @@ fx_burnup_sat() {
 
 fx_sat_thrusters_damage() {
   if(!isDefined(level.thruster_01_fx)) {
-    level.thruster_01 = getent("sat_thruster_01", "script_noteworthy");
-    level.thruster_02 = getent("sat_thruster_02", "script_noteworthy");
-    level.thruster_03 = getent("sat_thruster_03", "script_noteworthy");
-    level.thruster_04 = getent("sat_thruster_04", "script_noteworthy");
+    level.thruster_01 = getEnt("sat_thruster_01", "script_noteworthy");
+    level.thruster_02 = getEnt("sat_thruster_02", "script_noteworthy");
+    level.thruster_03 = getEnt("sat_thruster_03", "script_noteworthy");
+    level.thruster_04 = getEnt("sat_thruster_04", "script_noteworthy");
     level.thruster_01_fx = common_scripts\utility::spawn_tag_origin();
     level.thruster_01_fx.origin = level.thruster_01.origin;
     level.thruster_01_fx.angles = level.thruster_01.angles;
-    level.thruster_01_fx linkto(level.thruster_01);
+    level.thruster_01_fx linkTo(level.thruster_01);
     level.thruster_02_fx = common_scripts\utility::spawn_tag_origin();
     level.thruster_02_fx.origin = level.thruster_02.origin;
     level.thruster_02_fx.angles = level.thruster_02.angles;
-    level.thruster_02_fx linkto(level.thruster_02);
+    level.thruster_02_fx linkTo(level.thruster_02);
     level.thruster_03_fx = common_scripts\utility::spawn_tag_origin();
     level.thruster_03_fx.origin = level.thruster_03.origin;
     level.thruster_03_fx.angles = level.thruster_03.angles;
-    level.thruster_03_fx linkto(level.thruster_03);
+    level.thruster_03_fx linkTo(level.thruster_03);
     level.thruster_04_fx = common_scripts\utility::spawn_tag_origin();
     level.thruster_04_fx.origin = level.thruster_04.origin;
     level.thruster_04_fx.angles = level.thruster_04.angles;
-    level.thruster_04_fx linkto(level.thruster_04);
+    level.thruster_04_fx linkTo(level.thruster_04);
   }
 
   common_scripts\utility::flag_wait("first_finale_stage_done");
@@ -1248,7 +1248,7 @@ fx_spin_player_debris() {
 fx_sat_rcs_damage(var_0) {
   switch (var_0) {
     case 1:
-      var_1 = getent("fx_sat_rcs_damage_1", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_1", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
@@ -1258,7 +1258,7 @@ fx_sat_rcs_damage(var_0) {
       thread maps\odin_audio::sfx_set_ending_flag();
       break;
     case 2:
-      var_1 = getent("fx_sat_rcs_damage_2", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_2", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
@@ -1268,7 +1268,7 @@ fx_sat_rcs_damage(var_0) {
       break;
     case 3:
       fx_sat_rcs_damage_kill();
-      var_1 = getent("fx_sat_rcs_damage_1", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_1", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
@@ -1276,20 +1276,20 @@ fx_sat_rcs_damage(var_0) {
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
       thread maps\odin_audio::sfx_rcs_destr(var_1, 3, 0);
       thread maps\odin_audio::sfx_rcs_destr(var_1, 5, 5);
-      var_1 = getent("fx_sat_rcs_damage_2", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_2", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
       level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size] = spawnfx(level._effect["fuel_fire_zerog_small"], var_2, var_3, var_4);
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
-      var_1 = getent("fx_sat_rcs_damage_3", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_3", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
       level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size] = spawnfx(level._effect["fuel_fire_zerog_small"], var_2, var_3, var_4);
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
       thread maps\odin_audio::sfx_rcs_destr(var_1, 4, 0.1);
-      var_1 = getent("ally_shooting_target", "script_noteworthy");
+      var_1 = getEnt("ally_shooting_target", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
@@ -1297,20 +1297,20 @@ fx_sat_rcs_damage(var_0) {
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
       break;
     case 4:
-      var_1 = getent("fx_sat_rcs_damage_4", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_4", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
       level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size] = spawnfx(level._effect["fuel_fire_zerog_small"], var_2, var_3, var_4);
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
-      var_1 = getent("fx_sat_rcs_damage_5", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_5", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
       level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size] = spawnfx(level._effect["fuel_fire_zerog_small"], var_2, var_3, var_4);
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
       thread maps\odin_audio::sfx_rcs_destr(var_1, 4, 0.1);
-      var_1 = getent("ally_shooting_target", "script_noteworthy");
+      var_1 = getEnt("ally_shooting_target", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
@@ -1318,14 +1318,14 @@ fx_sat_rcs_damage(var_0) {
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
       break;
     case 5:
-      var_1 = getent("fx_sat_rcs_damage_6", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_6", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
       level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size] = spawnfx(level._effect["odin_sat_rcs_fire_puff"], var_2, var_3, var_4);
       triggerfx(level.fx_sat_rcs_damage[level.fx_sat_rcs_damage.size - 1]);
       thread maps\odin_audio::sfx_rcs_destr(var_1, 5, 0);
-      var_1 = getent("fx_sat_rcs_damage_7", "script_noteworthy");
+      var_1 = getEnt("fx_sat_rcs_damage_7", "script_noteworthy");
       var_2 = var_1.origin;
       var_3 = anglesToForward(var_1.angles);
       var_4 = anglestoup(var_1.angles);
@@ -1374,11 +1374,11 @@ fx_shuttle_dock() {
 }
 
 fx_sat_explosion(var_0) {
-  var_1 = getent("fx_sat_rcs_explosion", "script_noteworthy");
+  var_1 = getEnt("fx_sat_rcs_explosion", "script_noteworthy");
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_1.origin;
   var_2.angles = var_1.angles;
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   playFXOnTag(level._effect["odin_sat_exp_rcs_fire_runner"], var_2, "tag_origin");
   common_scripts\utility::flag_wait("start_transition_to_youngblood");
   wait 1.9;
@@ -1398,7 +1398,7 @@ fx_rotate_lights(var_0, var_1) {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = self.origin + 2.5 * anglestoup(self.angles);
   var_2.angles = self.angles;
-  var_2 linkto(self);
+  var_2 linkTo(self);
 
   switch (var_0) {
     case "amber":
@@ -1440,7 +1440,7 @@ fx_setup_sat_lights() {
 
   foreach(var_2 in var_0) {
     var_3 = var_2 common_scripts\utility::spawn_tag_origin();
-    var_3 linkto(var_2);
+    var_3 linkTo(var_2);
     playFXOnTag(level._effect["odin_sat_red_light"], var_3, "tag_origin");
   }
 }

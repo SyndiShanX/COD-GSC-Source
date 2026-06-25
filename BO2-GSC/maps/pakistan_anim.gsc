@@ -91,7 +91,7 @@ intro() {
 }
 
 claw_rumble(claw) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 hide_player_body_in_intro(e_body) {
@@ -101,7 +101,7 @@ hide_player_body_in_intro(e_body) {
 _plant_flamethrower_dongle(e_player_body) {
   e_dongle = get_ent("claw_flamethrower_dongle", "targetname", 1);
   ai_claw = get_ent("claw_1_ai", "targetname", 1);
-  e_dongle linkto(ai_claw);
+  e_dongle linkTo(ai_claw);
 }
 
 #using_animtree("bigdog");
@@ -287,8 +287,8 @@ frogger_debris() {
 frogger_ai_entries() {
   bm_door_1 = get_ent("frogger_door_kick_1_door", "targetname", 1);
   bm_door_2 = get_ent("frogger_door_kick_2_door", "targetname", 1);
-  bm_door_1 rotateyaw(-90, 1);
-  bm_door_2 rotateyaw(90, 1);
+  bm_door_1 rotateYaw(-90, 1);
+  bm_door_2 rotateYaw(90, 1);
   add_scene("frogger_door_kick_1", "frogger_door_kick_1", 0, 0, 0, 0);
   add_actor_anim("frogger_door_kick_1_guy", %ai_doorbreach_kick, 0, 1, 0, 0, undefined);
   add_notetrack_custom_function("frogger_door_kick_1_guy", "door_open", ::frogger_door_kick_1_func, 0);
@@ -299,13 +299,13 @@ frogger_ai_entries() {
 
 frogger_door_kick_1_func(ai_guy) {
   bm_door = get_ent("frogger_door_kick_1_door", "targetname", 1);
-  bm_door rotateyaw(90, 0.15, 0.05);
+  bm_door rotateYaw(90, 0.15, 0.05);
   maps\_scene::run_scene("frogger_door_kick_2");
 }
 
 frogger_door_kick_2_func(ai_guy) {
   bm_door = get_ent("frogger_door_kick_2_door", "targetname", 1);
-  bm_door rotateyaw(-120, 0.25, 0.1);
+  bm_door rotateYaw(-120, 0.25, 0.1);
 }
 
 #using_animtree("animated_props");
@@ -736,15 +736,15 @@ wait_for_player_kill() {
 }
 
 vo_fake_guards() {
-  e_fake_guard = getent("fake_guard_vo", "targetname");
+  e_fake_guard = getEnt("fake_guard_vo", "targetname");
   e_fake_guard say_dialog("isi1_you_going_to_be_much_0", 0, 1);
   e_fake_guard say_dialog("isi2_nearly_done_what_s_0", 1, 1);
   e_fake_guard delete();
 }
 
 vo_sewer_perk_dialog_exchange() {
-  ai_guard_1 = getent("intruder_guy1_ai", "targetname");
-  ai_guard_2 = getent("intruder_guy2_ai", "targetname");
+  ai_guard_1 = getEnt("intruder_guy1_ai", "targetname");
+  ai_guard_2 = getEnt("intruder_guy2_ai", "targetname");
   ai_guard_1 thread say_dialog("isi1_we_just_got_the_word_0", 0);
   ai_guard_1 setgoalnode(getnode("node_guy_1", "targetname"));
   wait 0.2;

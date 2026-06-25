@@ -167,8 +167,8 @@ ending_ally_anims() {
     common_scripts\utility::waitframe();
   }
 
-  level.allies[0] stopanimscripted();
-  level.allies[1] stopanimscripted();
+  level.allies[0] stopanimScripted();
+  level.allies[1] stopanimScripted();
   level.breach_anim_node notify("stop_loop");
   common_scripts\utility::waitframe();
   var_0 = [];
@@ -257,7 +257,7 @@ ending_dialogue_new() {
   var_1 = ["loki_us3_thompsonfireforeffect", "loki_us3_thompsonthesatsare", "loki_us3_firenow"];
   level.allies[0] thread maps\loki_space_breach::play_nag_after_delay(4.0, var_1, "player_flipped_switch", 1);
   maps\loki_util::waittill_fire_trigger_activate("press_to_fire", 1, "failed_to_fire");
-  var_2 = getent("rog_terminal", "targetname");
+  var_2 = getEnt("rog_terminal", "targetname");
   common_scripts\utility::flag_set("player_flipped_switch");
   level.allies[0] notify("stop nags");
 }

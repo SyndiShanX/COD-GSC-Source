@@ -136,7 +136,7 @@ function footsteps() {
 }
 
 function init_traverse() {
-  point = getent(self.target, "targetname");
+  point = getEnt(self.target, "targetname");
   if(isDefined(point)) {
     self.traverse_height = point.origin[2];
     point delete();

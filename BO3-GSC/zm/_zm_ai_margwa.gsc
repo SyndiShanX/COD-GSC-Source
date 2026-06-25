@@ -161,9 +161,9 @@ function private function_fa29651d(entity) {
     if(distsq < 2304) {
       zombie.pushed = 1;
       var_16ce8ab3 = self.origin - zombie.origin;
-      var_e1fcfc7c = vectornormalize((var_16ce8ab3[0], var_16ce8ab3[1], 0));
+      var_e1fcfc7c = vectorNormalize((var_16ce8ab3[0], var_16ce8ab3[1], 0));
       zombie_right = anglestoright(zombie.angles);
-      zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+      zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
       dot = vectordot(var_e1fcfc7c, zombie_right_2d);
       if(dot > 0) {
         zombie.push_direction = "left";
@@ -419,7 +419,7 @@ function private margwa_bodyfall() {
 }
 
 function private margwa_head_explosion() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     distsq = distancesquared(self.origin, player.origin);
     if(distsq < 16384) {
@@ -439,7 +439,7 @@ function function_8a0708c2(s_location) {
     ai.holdfire = 1;
     e_player = zm_utility::get_closest_player(s_location.origin);
     v_dir = e_player.origin - s_location.origin;
-    v_dir = vectornormalize(v_dir);
+    v_dir = vectorNormalize(v_dir);
     v_angles = vectortoangles(v_dir);
     ai forceteleport(s_location.origin, v_angles);
     ai function_551e32b4();
@@ -525,7 +525,7 @@ function private function_89e37c9b(entity, inflictor, weapon) {
     foreach(head in var_ddc770da) {
       head_pos = entity gettagorigin(head.tag);
       var_b01d89e6 = distancesquared(head_pos, view_pos);
-      var_ca049230 = vectornormalize(head_pos - view_pos);
+      var_ca049230 = vectorNormalize(head_pos - view_pos);
       if(!isDefined(var_d8748e76)) {
         var_d8748e76 = head;
         var_e4facdff = vectordot(forward_view_angles, var_ca049230);
@@ -597,11 +597,11 @@ function private function_941cbfc5() {
 
 function private function_f1358c65(zombie) {
   var_16ce8ab3 = self.origin - zombie.origin;
-  var_e1fcfc7c = vectornormalize((var_16ce8ab3[0], var_16ce8ab3[1], 0));
+  var_e1fcfc7c = vectorNormalize((var_16ce8ab3[0], var_16ce8ab3[1], 0));
   zombie_forward = anglesToForward(zombie.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(zombie.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(var_e1fcfc7c, zombie_forward_2d);
   if(dot >= 0.5) {
     zombie.knockdown_direction = "front";
@@ -633,9 +633,9 @@ function private function_cdd8baf7() {
 }
 
 function private function_a2da506b(cmd) {
-  players = getplayers();
+  players = getPlayers();
   var_2c8bf5cd = getEntArray("", "");
-  margwa = arraygetclosest(getplayers()[0].origin, var_2c8bf5cd);
+  margwa = arraygetclosest(getPlayers()[0].origin, var_2c8bf5cd);
   switch (cmd) {
     case "": {
       margwa_location = arraygetclosest(players[0].origin, level.margwa_locations);

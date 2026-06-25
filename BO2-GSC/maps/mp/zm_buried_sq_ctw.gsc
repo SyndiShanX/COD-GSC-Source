@@ -64,7 +64,7 @@ stage_vo_ric() {
 
 wisp_move_from_sign_to_start(s_start) {
   self.origin = level.m_sq_start_sign.origin - vectorscale((0, 0, 1), 20.0);
-  self moveto(s_start.origin, 2, 0.5, 0.5);
+  self moveTo(s_start.origin, 2, 0.5, 0.5);
   self waittill("movedone");
   wait 1;
 }
@@ -73,8 +73,8 @@ ctw_ric_start_wisp() {
   if(!isDefined(level.m_sq_start_sign)) {
     return;
   }
-  s_start = getstruct(level.m_sq_start_sign.target, "targetname");
-  m_wisp = getent("sq_wisp", "targetname");
+  s_start = getStruct(level.m_sq_start_sign.target, "targetname");
+  m_wisp = getEnt("sq_wisp", "targetname");
   m_wisp setclientfield("vulture_wisp", 1);
   m_wisp wisp_move_from_sign_to_start(s_start);
   m_wisp thread ctw_ric_move_wisp(s_start);
@@ -121,7 +121,7 @@ ctw_ric_watch_wisp_dist(s_current) {
   is_near_wisp = 0;
 
   while(!is_near_wisp) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!player hasperk("specialty_nomotionsensor")) {
@@ -139,7 +139,7 @@ ctw_ric_watch_wisp_dist(s_current) {
 }
 
 ctw_ric_power_towers() {
-  m_tower = getent("sq_guillotine", "targetname");
+  m_tower = getEnt("sq_guillotine", "targetname");
   level setclientfield("vulture_wisp_orb_count", 1);
   wait_network_frame();
   level setclientfield("vulture_wisp_orb_count", 0);
@@ -182,7 +182,7 @@ ctw_ric_guillotine_glow(v_spot) {
 ctw_power_up_ric_zombie(m_wisp) {
   do {
     wait_network_frame();
-    v_to_zombie = vectornormalize(self gettagorigin("J_SpineLower") - m_wisp.origin);
+    v_to_zombie = vectorNormalize(self gettagorigin("J_SpineLower") - m_wisp.origin);
     v_move_spot = m_wisp.origin + v_to_zombie * 32;
     m_wisp.origin = v_move_spot;
   }
@@ -197,7 +197,7 @@ ctw_return_wisp_to_guillotine(v_spot, v_start) {
 
   do {
     wait_network_frame();
-    v_to_tower = vectornormalize(v_spot - self.m_glow.origin);
+    v_to_tower = vectorNormalize(v_spot - self.m_glow.origin);
     v_move_spot = self.m_glow.origin + v_to_tower * 32;
     self.m_glow.origin = v_move_spot;
   }
@@ -208,7 +208,7 @@ ctw_return_wisp_to_guillotine(v_spot, v_start) {
 
 ctw_max_start_wisp() {
   nd_start = getvehiclenode(level.m_sq_start_sign.target, "targetname");
-  vh_wisp = spawnvehicle("tag_origin", "wisp_ai", "heli_quadrotor2_zm", nd_start.origin, nd_start.angles);
+  vh_wisp = spawnVehicle("tag_origin", "wisp_ai", "heli_quadrotor2_zm", nd_start.origin, nd_start.angles);
   vh_wisp makevehicleunusable();
   level.vh_wisp = vh_wisp;
   vh_wisp.n_sq_max_energy = 30;
@@ -216,7 +216,7 @@ ctw_max_start_wisp() {
   vh_wisp thread ctw_max_wisp_play_fx();
   vh_wisp_mover = spawn("script_model", vh_wisp.origin);
   vh_wisp_mover setModel("tag_origin");
-  vh_wisp linkto(vh_wisp_mover);
+  vh_wisp linkTo(vh_wisp_mover);
   vh_wisp_mover wisp_move_from_sign_to_start(nd_start);
   vh_wisp unlink();
   vh_wisp_mover delete();
@@ -271,7 +271,7 @@ ctw_max_fail_watch() {
   do {
     wait 1;
     n_starter_dist = distancesquared(self.origin, level.e_sq_sign_attacker.origin);
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(distancesquared(self.origin, player.origin) < 16384) {

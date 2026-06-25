@@ -29,7 +29,7 @@ function init_stage() {
 function stage_logic() {
   iprintln(level._cur_stage_name + "");
   level notify("tomb_sidequest_complete");
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player zm_tomb_chamber::is_player_in_chamber()) {
       player thread hud::fade_to_black_for_x_sec(0, 1, 0.5, 0.5, "white");
     }

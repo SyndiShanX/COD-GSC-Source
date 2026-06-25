@@ -38,7 +38,7 @@ function skipto_flood_init(str_objective, b_starting) {
   if(b_starting) {
     sgen::init_hendricks(str_objective);
     cp_mi_sing_sgen_pallas::elevator_setup();
-    getent("pallas_lift_front", "targetname") util::self_delete();
+    getEnt("pallas_lift_front", "targetname") util::self_delete();
     objectives::complete("cp_level_sgen_enter_sgen_no_pointer");
     objectives::complete("cp_level_sgen_investigate_sgen");
     objectives::complete("cp_level_sgen_locate_emf");
@@ -49,7 +49,7 @@ function skipto_flood_init(str_objective, b_starting) {
     array::run_all(getaiteamarray("axis"), &delete);
     load::function_a2995f22();
     if(level.skipto_point === "dev_flood_combat") {
-      level.players[0] setorigin((1152, -3864, -4876));
+      level.players[0] setOrigin((1152, -3864, -4876));
       level.players[0] setplayerangles((0, 0, 0));
     }
   } else {
@@ -84,12 +84,12 @@ function skipto_flood_defend_init(str_objective, b_starting) {
     array::run_all(getEntArray("floor_door_hint_trigger", "targetname"), &triggerenable, 0);
     sgen::init_hendricks(str_objective);
     cp_mi_sing_sgen_pallas::elevator_setup();
-    getent("pallas_lift_front", "targetname") util::self_delete();
+    getEnt("pallas_lift_front", "targetname") util::self_delete();
     level flag::set("pallas_lift_front_open");
     level flag::wait_till("all_players_spawned");
     array::run_all(getaiteamarray("axis"), &delete);
     if(level.skipto_point === "dev_flood_combat") {
-      level.players[0] setorigin((1152, -3864, -4876));
+      level.players[0] setOrigin((1152, -3864, -4876));
       level.players[0] setplayerangles((0, 0, 0));
     }
     level clientfield::set("w_underwater_state", 1);
@@ -111,7 +111,7 @@ function skipto_flood_defend_init(str_objective, b_starting) {
     objectives::set("cp_level_sgen_get_to_surface");
     level thread objectives::breadcrumb("flood_combat_breadcrumb_end_trig");
     level thread hendricks_defend_movement();
-    t_boundary = getent("flood_defend_out_of_boundary_trig", "targetname");
+    t_boundary = getEnt("flood_defend_out_of_boundary_trig", "targetname");
     t_boundary setvisibletoall();
     load::function_a2995f22();
   }
@@ -160,7 +160,7 @@ function function_4234be51(a_ents) {
 
 function main() {
   level flag::wait_till("all_players_spawned");
-  objective_trigger = getent("surgical_room_entrance_close", "targetname");
+  objective_trigger = getEnt("surgical_room_entrance_close", "targetname");
   level thread alarm_sounds();
   level thread combat_vo();
   level thread handle_breadcrumbs();
@@ -194,8 +194,8 @@ function clean_up_charging_zone() {
   } else {
     level flag::wait_till("flood_combat_charging_zone_cleared");
   }
-  t_charging_zone = getent("flood_combat_charging_zone_trig", "targetname");
-  t_boundary = getent("flood_defend_out_of_boundary_trig", "targetname");
+  t_charging_zone = getEnt("flood_combat_charging_zone_trig", "targetname");
+  t_boundary = getEnt("flood_defend_out_of_boundary_trig", "targetname");
   t_boundary setvisibletoall();
   sgen_util::set_door_state("flood_robot_room_door_open", "close");
   spawn_manager::kill("flood_combat_charging_room_spawnmanager", 1);
@@ -242,7 +242,7 @@ function hendricks_movement() {
 
 function weaken_catwalk_close_enemies() {
   a_ai_catwalk_close = getaiteamarray("axis");
-  t_zone = getent("flood_combat_catwalk_front_zone_trig", "targetname");
+  t_zone = getEnt("flood_combat_catwalk_front_zone_trig", "targetname");
   foreach(ai_catwalk in a_ai_catwalk_close) {
     if(isalive(ai_catwalk) && ai_catwalk istouching(t_zone)) {
       ai_catwalk.health = 1;
@@ -252,7 +252,7 @@ function weaken_catwalk_close_enemies() {
 
 function zone_wait_till_player(str_key, str_val = "targetname", n_delay = 0) {
   level endon("flood_defend");
-  t_zone = getent(str_key, str_val);
+  t_zone = getEnt(str_key, str_val);
   t_zone endon("death");
   do {
     t_zone waittill("trigger", e_triggerer);
@@ -270,7 +270,7 @@ function zone_wait_till_safe(str_key, str_val = "targetname", str_species = "rob
   if(isDefined(str_ender)) {
     level endon(str_ender);
   }
-  t_safe = getent(str_key, str_val);
+  t_safe = getEnt(str_key, str_val);
   t_safe endon("death");
   do {
     t_safe waittill("trigger");
@@ -333,7 +333,7 @@ function handle_earthquakes() {
 
 function handle_fallback_runners_cleanup() {
   level endon("flood_combat_completed");
-  t_exit = getent("flood_combat_flood_hall_cleanup_trig", "targetname");
+  t_exit = getEnt("flood_combat_flood_hall_cleanup_trig", "targetname");
   while(true) {
     t_exit waittill("trigger", ai_runner);
     level flag::set("flood_runner_escaped");
@@ -385,8 +385,8 @@ function go_to_nearest_node(v_origin = self.origin, n_min = 256, n_max = 512, b_
 
 function issue_last_stand() {
   level endon("flood_defend_complete");
-  t_combat_zone = getent("flood_combat_prelab_zone_aitrig", "targetname");
-  t_last_stand_zone = getent("flood_combat_defend_upper_goaltrig", "targetname");
+  t_combat_zone = getEnt("flood_combat_prelab_zone_aitrig", "targetname");
+  t_last_stand_zone = getEnt("flood_combat_defend_upper_goaltrig", "targetname");
   t_combat_zone endon("death");
   t_last_stand_zone endon("death");
   t_combat_zone setinvisibletoall();
@@ -408,8 +408,8 @@ function stop_fallback_and_scatter() {
 
 function issue_scatter() {
   a_ai_54i = getaiteamarray("axis");
-  t_last_stand_zone = getent("flood_combat_defend_upper_goaltrig", "targetname");
-  t_combat_zone = getent("flood_combat_prelab_zone_aitrig", "targetname");
+  t_last_stand_zone = getEnt("flood_combat_defend_upper_goaltrig", "targetname");
+  t_combat_zone = getEnt("flood_combat_prelab_zone_aitrig", "targetname");
   s_center = struct::get("flood_defend_flee_center");
   foreach(ai_54i in a_ai_54i) {
     n_wait = randomfloatrange(0.15, 0.45);
@@ -502,15 +502,15 @@ function defend_room_set_state_flooded() {
 
 function flooding_sound_start() {
   wait(1);
-  flood_start_1 = getent("flooding_start_1", "targetname");
-  flood_start_2 = getent("flooding_start_2", "targetname");
-  torrent_gush_left = getent("evt_torrent_gush_left", "targetname");
-  torrent_gush_right = getent("evt_torrent_gush_right", "targetname");
-  torrent_surface_left = getent("evt_torrent_gush_surface_l", "targetname");
-  torrent_surface_right = getent("evt_torrent_gush_surface_r", "targetname");
+  flood_start_1 = getEnt("flooding_start_1", "targetname");
+  flood_start_2 = getEnt("flooding_start_2", "targetname");
+  torrent_gush_left = getEnt("evt_torrent_gush_left", "targetname");
+  torrent_gush_right = getEnt("evt_torrent_gush_right", "targetname");
+  torrent_surface_left = getEnt("evt_torrent_gush_surface_l", "targetname");
+  torrent_surface_right = getEnt("evt_torrent_gush_surface_r", "targetname");
   if(isDefined(flood_start_1) && isDefined(flood_start_2)) {
-    playsoundatposition("evt_flood_start_1", flood_start_1.origin);
-    playsoundatposition("evt_flood_start_2", flood_start_2.origin);
+    playSoundAtPosition("evt_flood_start_1", flood_start_1.origin);
+    playSoundAtPosition("evt_flood_start_2", flood_start_2.origin);
   }
   if(isDefined(torrent_gush_left) && isDefined(torrent_gush_right) && isDefined(torrent_surface_left) && isDefined(torrent_surface_right)) {
     torrent_gush_left playLoopSound("evt_torrent_gush");
@@ -533,7 +533,7 @@ function flooding_sound_start() {
 
 function flooding_water_sheeting() {
   level endon("flood_defend_completed");
-  e_volume = getent("flood_combat_water_sheeting", "targetname");
+  e_volume = getEnt("flood_combat_water_sheeting", "targetname");
   e_volume endon("death");
   while(true) {
     foreach(player in level.players) {
@@ -641,7 +641,7 @@ function defend_logic(b_starting) {
   level notify("defend_time_near");
   wait(7);
   level flag::set("defend_time_expired");
-  t_flood_hint_trigger = getent("floor_door_hint_trigger", "targetname");
+  t_flood_hint_trigger = getEnt("floor_door_hint_trigger", "targetname");
   objectives::set("cp_level_sgen_use_door", t_flood_hint_trigger.origin);
   var_8ad7c437 = util::init_interactive_gameobject(t_flood_hint_trigger, &"cp_prompt_enter_sgen_door", &"CP_MI_SING_SGEN_FLOOD_USE_DOOR", &function_d0378b1a);
   level waittill("hash_37c452a9");
@@ -720,7 +720,7 @@ function play_hendricks_defend_scene() {
   nd_goto = getnode("hendricks_flood_combat_wait", "targetname");
   level.ai_hendricks setgoal(nd_goto.origin);
   level flag::wait_till("defend_ready");
-  var_421ccb2d = getent("flood_defend_defend_room_zone_trig", "targetname");
+  var_421ccb2d = getEnt("flood_defend_defend_room_zone_trig", "targetname");
   var_a3eb613f = 1;
   while(var_a3eb613f) {
     var_a3eb613f = 0;
@@ -757,8 +757,8 @@ function reinforcement_robot_setup() {
 }
 
 function catwalk_zone_anti_camper_measures() {
-  t_zone = getent("flood_defend_catwalk_spawn_zone_trig", "targetname");
-  e_spawnmanager = getent(t_zone.target, "targetname");
+  t_zone = getEnt("flood_defend_catwalk_spawn_zone_trig", "targetname");
+  e_spawnmanager = getEnt(t_zone.target, "targetname");
   t_zone endon("death");
   t_zone waittill("trigger");
   level thread sgen_util::set_door_state("flood_robot_room_door_close", "open");

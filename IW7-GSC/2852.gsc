@@ -63,7 +63,7 @@ func_5C3A() {
   }
   level.var_5C63[self.target] = 1;
   var_0 = self.target;
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -111,7 +111,7 @@ func_5C3A() {
   }
 
   var_0 = self.target;
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_11 = var_1;
   var_3 = [];
 

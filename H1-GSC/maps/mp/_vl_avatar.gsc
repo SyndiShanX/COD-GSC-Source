@@ -79,8 +79,8 @@ teleport_avatar(var_0, var_1, var_2) {
   var_0 unlink();
   var_0 setplayerangles(var_1.angles);
   var_3 = getgroundposition(var_1.origin, 20, 512, 120);
-  var_0 setorigin(var_3, 1);
-  var_2 setorigin(var_3, 1);
+  var_0 setOrigin(var_3, 1);
+  var_2 setOrigin(var_3, 1);
   var_4 = get_ownerid_for_avatar(var_0);
   var_2 maps\mp\_vl_base::playerrefreshavatar(var_4);
 }
@@ -104,7 +104,7 @@ teleport_avatar_stick(var_0, var_1, var_2) {
   }
 
   var_0 linktosynchronizedparent(var_0.teleportlinker, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_2 setorigin(var_1.origin, 1);
+  var_2 setOrigin(var_1.origin, 1);
   var_3 = get_ownerid_for_avatar(var_0);
   var_2 maps\mp\_vl_base::playerrefreshavatar(var_3);
 }
@@ -145,7 +145,7 @@ spawn_an_avatar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
   var_13.angles = var_13.spawn_angles;
   var_13 show();
   var_13 setplayerangles(var_13.spawn_angles);
-  var_13 setorigin(var_14, 1);
+  var_13 setOrigin(var_14, 1);
   var_13.angles = var_13.spawn_angles;
   var_13.startangles = var_13.spawn_angles;
   maps\mp\_vl_base::resetrotationdata(var_13);
@@ -564,7 +564,7 @@ playerteleportavatartoweaponroom(var_0, var_1, var_2) {
   var_3 = maps\mp\_vl_base::getweaponroomstring(var_0.primaryweapon);
   maps\mp\_vl_base::vlprintln("playerTeleportAvatarToWeaponRoom - weap = " + var_0.primaryweapon + ", loc = " + var_3);
   var_4 = "character" + var_3;
-  var_5 = common_scripts\utility::getstruct(var_4, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_4, "targetname");
   var_1.scenenode = var_5.scenenode;
   var_0 unlink();
   var_0 agentplaylobbyanim(var_1.scenenode, var_0.primaryweapon, var_2);
@@ -651,7 +651,7 @@ animateallweaponrooms() {
 
   foreach(var_2 in var_0) {
     var_3 = "character" + var_2;
-    var_4 = common_scripts\utility::getstruct(var_3, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_3, "targetname");
     var_4.scenenode = spawn("script_model", var_4.origin);
     var_4.scenenode setModel("genericprop_x5");
     var_4.scenenode.location = var_2;
@@ -671,7 +671,7 @@ cameralinktoscenenode(var_0, var_1, var_2) {
 }
 
 startweaponroompropanimations(var_0, var_1, var_2) {
-  var_3 = getent("mk19", "targetname");
+  var_3 = getEnt("mk19", "targetname");
 
   if(var_2 == "LMG") {
     if(isDefined(var_3)) {

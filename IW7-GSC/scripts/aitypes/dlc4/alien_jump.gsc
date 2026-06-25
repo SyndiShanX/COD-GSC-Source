@@ -48,7 +48,7 @@ jumpattack_end(var_0) {
 func_7A7A(var_0, var_1, var_2, var_3) {
   var_4 = self.origin - var_2.origin;
   var_4 = var_4 * (1, 1, 0);
-  var_4 = vectornormalize(var_4) * var_1;
+  var_4 = vectorNormalize(var_4) * var_1;
 
   if(!isDefined(var_3)) {
     var_3 = 1.0;
@@ -59,7 +59,7 @@ func_7A7A(var_0, var_1, var_2, var_3) {
     var_6 = 200.0;
 
     if(lengthsquared(var_5) > var_6 * var_6) {
-      var_5 = vectornormalize(var_5);
+      var_5 = vectorNormalize(var_5);
       var_5 = var_5 * var_6;
     }
 
@@ -88,7 +88,7 @@ tryjumpattack(var_0, var_1) {
     return 0;
   }
 
-  var_3 = vectornormalize((var_1.origin - self.origin) * (1, 1, 0));
+  var_3 = vectorNormalize((var_1.origin - self.origin) * (1, 1, 0));
   var_4 = anglesToForward(self.angles);
   var_5 = vectordot(var_3, var_4);
 

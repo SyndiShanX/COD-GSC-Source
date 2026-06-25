@@ -64,7 +64,7 @@ fire_turret_for_time(turret_index, time) {
     if(isDefined(self.turret_audio_override)) {
       if(!isDefined(self.sound_ent)) {
         self.sound_ent = spawn("script_origin", self.origin);
-        self.sound_ent LinkTo(self);
+        self.sound_ent linkTo(self);
         self thread kill_audio_ent(self.sound_ent);
       }
       if(isDefined(self.turret_audio_override_alias)) {

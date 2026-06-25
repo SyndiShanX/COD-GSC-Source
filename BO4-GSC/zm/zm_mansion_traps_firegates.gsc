@@ -165,14 +165,14 @@ function_aa539d7b() {
 
     foreach(mdl_console in self.var_3d6b88c4) {
       var_fe316a03 = util::spawn_model(#"p8_zm_man_fire_trap_power_core_on", mdl_console gettagorigin("energy_core_tag"), mdl_console gettagangles("energy_core_tag"));
-      var_fe316a03 linkto(mdl_console, "energy_core_tag");
+      var_fe316a03 linkTo(mdl_console, "energy_core_tag");
     }
 
     return;
   }
 
   self flag::wait_till(#"enabled");
-  playsoundatposition(#"hash_277a6124c088ba6d", self.origin);
+  playSoundAtPosition(#"hash_277a6124c088ba6d", self.origin);
   sound_ent = spawn("script_origin", self.origin);
   sound_ent playLoopSound(#"hash_39e79a32dcbea912");
   level flag::set(self.script_flag_wait);
@@ -180,7 +180,7 @@ function_aa539d7b() {
 
   foreach(mdl_console in self.var_3d6b88c4) {
     var_fe316a03 = util::spawn_model(#"p8_zm_man_fire_trap_power_core_on", mdl_console gettagorigin("energy_core_tag"), mdl_console gettagangles("energy_core_tag"));
-    var_fe316a03 linkto(mdl_console, "energy_core_tag");
+    var_fe316a03 linkTo(mdl_console, "energy_core_tag");
   }
 }
 
@@ -250,32 +250,32 @@ function_9026cbcd(player) {
   }
 
   if(isDefined(self.stub.e_trap.is_cooling) && self.stub.e_trap.is_cooling) {
-    self sethintstring(#"zombie/trap_cooldown");
+    self setHintString(#"zombie/trap_cooldown");
     return true;
   }
 
   if(isDefined(self.stub.e_trap.var_23aecef0) && self.stub.e_trap.var_23aecef0 && !zm_utility::is_standard()) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_6e8ef1b690e98e51", self.stub.e_trap.zombie_cost);
+      self setHintString(#"hash_6e8ef1b690e98e51", self.stub.e_trap.zombie_cost);
       return true;
     } else {
-      self sethintstring(#"zombie/button_buy_trap", self.stub.e_trap.zombie_cost);
+      self setHintString(#"zombie/button_buy_trap", self.stub.e_trap.zombie_cost);
       return true;
     }
   } else if(zm_utility::is_standard()) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_61d85c966dd9e83f");
+      self setHintString(#"hash_61d85c966dd9e83f");
       return true;
     } else {
-      self sethintstring(#"hash_24a438482954901");
+      self setHintString(#"hash_24a438482954901");
       return true;
     }
   } else if(level.var_940ee624 > 0) {
     str_prompt = zm_utility::function_d6046228(#"hash_888d5fd1e90d685", #"hash_f1db4a15f0e12bb");
-    self sethintstring(str_prompt);
+    self setHintString(str_prompt);
     return true;
   } else {
-    self sethintstring(#"hash_5f05371ea87b812e");
+    self setHintString(#"hash_5f05371ea87b812e");
     return true;
   }
 
@@ -342,7 +342,7 @@ function_b1bd4115() {
       level thread function_7b170638(level.var_adc872f3, 1);
       e_player thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
       arrayremovevalue(level.var_4f17d729, self, 0);
-      playsoundatposition(#"hash_7512ff4121bb5604", e_player.origin);
+      playSoundAtPosition(#"hash_7512ff4121bb5604", e_player.origin);
 
       if(isDefined(self.stub.mdl)) {
         self.stub.mdl delete();
@@ -381,7 +381,7 @@ pickup_spin() {
   self playLoopSound(#"hash_3b9597774dea00d6");
 
   while(true) {
-    self rotateyaw(180, 1);
+    self rotateYaw(180, 1);
     wait 1;
   }
 }

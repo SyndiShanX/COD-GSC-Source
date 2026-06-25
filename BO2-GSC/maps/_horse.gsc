@@ -1122,7 +1122,7 @@ horse_fx(fx_name) {
   if(isDefined(fx_name)) {
     self.current_fx = spawn("script_model", self.origin);
     self.current_fx.angles = self.angles;
-    self.current_fx linkto(self);
+    self.current_fx linkTo(self);
     self.current_fx setModel("tag_origin");
     playFXOnTag(level._effect[fx_name], self.current_fx, "tag_origin");
   }
@@ -1265,7 +1265,7 @@ horse_turn180() {
     driver thread[[driver.update_turn180_anim]](self);
   }
 
-  self animscripted("horse_180turn", self.origin, self.angles, level.horse_anims[level.turn_180]);
+  self animScripted("horse_180turn", self.origin, self.angles, level.horse_anims[level.turn_180]);
   len = getanimlength(level.horse_anims[level.turn_180]);
   wait(len);
   self.idle_end_time = gettime();
@@ -1523,7 +1523,7 @@ watch_mounting() {
       delta = getcycleoriginoffset(angles, mount_anim);
       self.driver.body.origin = org + delta;
       self.driver.body.angles = angles;
-      self.driver.body linkto(self, "tag_origin");
+      self.driver.body linkTo(self, "tag_origin");
       self thread horse_update_reigns(1);
     } else {
       self.driver.is_on_horse = 0;
@@ -1608,7 +1608,7 @@ watch_mounting() {
       self.driver.body hide();
       self.driver.body.origin = self.driver.origin;
       self.driver.body.anlges = self.driver.angles;
-      self.driver.body linkto(self.driver);
+      self.driver.body linkTo(self.driver);
       wait_network_frame();
 
       if(!self.disable_weapon_changes) {
@@ -1632,10 +1632,10 @@ watch_mounting() {
 }
 
 set_mount_direction(horse, mount_org) {
-  horse_facing = vectornormalize(anglestoright(horse.angles));
+  horse_facing = vectorNormalize(anglestoright(horse.angles));
   horse_player = mount_org - horse.origin;
   horse_player = (horse_player[0], horse_player[1], 0);
-  horse_player = vectornormalize(horse_player);
+  horse_player = vectorNormalize(horse_player);
   side = 0;
   dot = vectordot(horse_facing, horse_player);
 
@@ -1720,17 +1720,17 @@ mount(horse) {
 
   horse setflaggedanimknoballrestart("mount_horse", horse_mount_anim, %root, 1, 0, 1);
   horse thread horse_wait_for_reigns("mount_horse", 1);
-  self.body animscripted("mount", horse.origin, horse.angles, mount_anim, "normal", %root, 1, 0, 0.65);
+  self.body animScripted("mount", horse.origin, horse.angles, mount_anim, "normal", %root, 1, 0, 0.65);
   self.body show();
   self.body waittillmatch("mount", "end");
-  self.body stopanimscripted();
+  self.body stopanimScripted();
   self unlink();
 
   if(!horse.disable_weapon_changes) {
     self enableweapons();
   }
 
-  self.body linkto(horse, "tag_origin");
+  self.body linkTo(horse, "tag_origin");
   self freezecontrols(0);
   self.is_on_horse = 1;
 
@@ -1787,11 +1787,11 @@ dismount(horse) {
   }
 
   level.dismount_time = gettime();
-  self.body animscripted("dismount", horse.origin, horse.angles, player_dismount_anim, "normal", %root, 1, 0.2);
+  self.body animScripted("dismount", horse.origin, horse.angles, player_dismount_anim, "normal", %root, 1, 0.2);
   self.body waittillmatch("dismount", "unlink");
   self.body unlink();
   self.body waittillmatch("dismount", "end");
-  self.body stopanimscripted();
+  self.body stopanimScripted();
   horse notsolid();
   self unlink();
   self showviewmodel();
@@ -1800,7 +1800,7 @@ dismount(horse) {
   self.body hide();
   self.body.origin = self.origin;
   self.body.angles = self.angles;
-  self.body linkto(self);
+  self.body linkTo(self);
   self.body clearanim(%root, 0);
   horse solid();
   horse makevehicleusable();
@@ -1937,8 +1937,8 @@ horse_actor_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweap
       velocity = velocity * speed;
       self startragdoll();
       self launchragdoll(velocity, bones[0]);
-      player = getplayers()[0];
-      player playrumbleonentity("damage_heavy");
+      player = getPlayers()[0];
+      player playRumbleOnEntity("damage_heavy");
 
       if(isPlayer(eattacker)) {
         eattacker playSound("evt_horse_trample_ai");

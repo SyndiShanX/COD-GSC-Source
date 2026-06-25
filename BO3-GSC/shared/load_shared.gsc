@@ -209,7 +209,7 @@ function playerdamagerumble() {
     if(isDefined(self.specialdamage)) {
       continue;
     }
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -519,7 +519,7 @@ function special_death_death_indicator_hudelement_cleanup(overlay) {
 
 function water_think() {
   assert(isDefined(self.target));
-  targeted = getent(self.target, "targetname");
+  targeted = getEnt(self.target, "targetname");
   assert(isDefined(targeted));
   waterheight = targeted.origin[2];
   targeted = undefined;
@@ -528,7 +528,7 @@ function water_think() {
   level.depth_allow_stand = 50;
   while(true) {
     wait(0.05);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(players[i].inwater) {
         players[i] allowprone(1);
@@ -541,7 +541,7 @@ function water_think() {
       continue;
     }
     while(true) {
-      players = getplayers();
+      players = getPlayers();
       players_in_water_count = 0;
       for(i = 0; i < players.size; i++) {
         if(players[i] istouching(self)) {
@@ -672,7 +672,7 @@ function all_players_spawned() {
       wait(0.05);
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     count = 0;
     for(i = 0; i < players.size; i++) {
       if(players[i].sessionstate == "playing") {
@@ -772,10 +772,10 @@ function on_spawned() {
 function link_ents() {
   foreach(ent in getEntArray()) {
     if(isDefined(ent.linkto)) {
-      e_link = getent(ent.linkto, "linkname");
+      e_link = getEnt(ent.linkto, "linkname");
       if(isDefined(e_link)) {
-        ent enablelinkto();
-        ent linkto(e_link);
+        ent enablelinkTo();
+        ent linkTo(e_link);
       }
     }
   }

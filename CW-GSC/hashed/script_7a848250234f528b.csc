@@ -28,7 +28,7 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   var_897fdde = undefined;
 
   while(!isDefined(var_897fdde)) {
-    var_897fdde = getent(0, "audio_stop_battle_amb", "targetname");
+    var_897fdde = getEnt(0, "audio_stop_battle_amb", "targetname");
     waitframe(1);
   }
 

@@ -247,7 +247,7 @@ get_candy_box_struct_loc(var_0, var_1) {
 
 create_perk_purchase_board() {
   var_0 = "p7_cafe_wall_menu_01";
-  var_1 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_2 = anglesToForward(var_1.angles);
   var_3 = anglestoright(var_1.angles) * -1;
   var_4 = spawn("script_model", var_1.origin + var_2 * get_board_forward_dist() + var_3 * get_board_left_dist());
@@ -666,7 +666,7 @@ push_weapon_forward(var_0) {
 
   var_0.num_times_being_looked_at++;
   if(var_0.num_times_being_looked_at == 1) {
-    var_2 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+    var_2 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
     var_3 = anglestoright(var_2.angles);
     var_0.origin = var_0.origin + var_3 * var_1;
   }
@@ -682,7 +682,7 @@ push_weapon_back(var_0) {
 get_weapon_purchase_range_edge_x_value() {
   var_0 = 249;
   var_1 = 186;
-  var_2 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_3 = anglestoright(var_2.angles) * -1;
   if(level.script == "cp_zmb") {
     var_4 = var_2.origin + var_3 * var_0;
@@ -701,7 +701,7 @@ create_weapon_purchase_boards() {
   var_0 = "ch_corkboard_metaltrim_4x8";
   var_1 = 96;
   var_2 = 48;
-  var_3 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_4 = anglesToForward(var_3.angles);
   var_5 = anglestoup(var_3.angles);
   level.weapon_purchase_boards = [];
@@ -717,7 +717,7 @@ create_weapon_purchase_boards() {
 }
 
 get_weapon_purchase_board_start_pos() {
-  var_0 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_1 = anglesToForward(var_0.angles) * -1;
   var_2 = anglestoright(var_0.angles) * -1;
   var_3 = anglestoup(var_0.angles);
@@ -774,7 +774,7 @@ create_weapon_board_lights() {
   var_1 = 35;
   var_2 = 96;
   var_3 = 48;
-  var_4 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_5 = anglesToForward(var_4.angles);
   var_6 = anglestoright(var_4.angles);
   var_7 = anglestoup(var_4.angles);
@@ -801,7 +801,7 @@ create_weapon_purchase_models() {
   level.weapon_purchase_models = [];
   var_0 = get_weapon_list();
   var_1 = get_weapon_model_start_pos();
-  var_2 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_3 = anglesToForward(var_2.angles);
   var_4 = anglestoup(var_2.angles);
   var_5 = 0;
@@ -857,7 +857,7 @@ get_vertical_space() {
 get_weapon_model_start_pos() {
   var_0 = 3;
   var_1 = 32;
-  var_2 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_3 = anglesToForward(var_2.angles);
   var_4 = anglestoright(var_2.angles);
   var_5 = anglestoup(var_2.angles) * -1;
@@ -958,7 +958,7 @@ create_weapon_purchase_model(var_0, var_1, var_2) {
     if(var_5 == "katana") {
       var_0 = "iw7_katana_zm_pap1";
       var_7 = "camo222";
-      var_11 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+      var_11 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
       var_12 = anglesToForward(var_11.angles);
       var_13 = var_12 * -1;
       var_1 = var_1 + var_13 * 10;
@@ -1145,7 +1145,7 @@ create_weapon_purchase_interaction() {
   wait(5);
   level.weapon_purchase_interactions = [];
   var_3 = get_weapon_purchase_board_start_pos();
-  var_4 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_5 = anglesToForward(var_4.angles);
   var_6 = anglestoright(var_4.angles);
   var_7 = var_3 + var_5 * var_0 + var_6 * var_1;
@@ -1442,7 +1442,7 @@ create_activation_interaction() {
   var_1 = 125;
   var_2 = 165;
   var_3 = 228;
-  var_4 = scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy");
   var_5 = anglesToForward(var_4.angles);
   var_6 = anglestoright(var_4.angles);
   if(level.script == "cp_zmb") {
@@ -1969,8 +1969,8 @@ move_through_tube(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   var_0 endon("move_through_tube");
   var_0 earthquakeforplayer(0.3, 0.2, var_0.origin, 200);
-  var_3 = getent(var_1, "targetname");
-  var_4 = getent(var_2, "targetname");
+  var_3 = getEnt(var_1, "targetname");
+  var_4 = getEnt(var_2, "targetname");
   var_0 cancelmantle();
   var_0.no_outline = 1;
   var_0.no_team_outlines = 1;
@@ -1980,15 +1980,15 @@ move_through_tube(var_0, var_1, var_2) {
   var_0 scripts\cp\utility::adddamagemodifier("fast_travel", 0, 0);
   var_0 scripts\cp\utility::allow_player_ignore_me(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_5);
+  var_0 setOrigin(var_5);
   var_0 setplayerangles(var_3.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_7 = spawn("script_origin", var_5);
-  var_0 playerlinkto(var_7);
+  var_0 playerlinkTo(var_7);
   var_0 getweaponrankxpmultiplier();
   wait(0.1);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
-  var_7 moveto(var_6, 1);
+  var_7 moveTo(var_6, 1);
   wait(1);
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
@@ -2048,7 +2048,7 @@ teleport_to_portal_safe_spot(var_0, var_1) {
   }
 
   var_0 dontinterpolate();
-  var_0 setorigin(var_3.origin);
+  var_0 setOrigin(var_3.origin);
   var_0 setplayerangles(var_3.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();

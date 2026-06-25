@@ -210,7 +210,7 @@ chopper_crash_savepoint(delay) {
 chopper_crashes_into_pipes_anim(str_scene) {
   level thread run_scene(str_scene);
   wait 0.1;
-  e_chopper = getent("heli_factory_exit_boss_anim_crash_spawner", "targetname");
+  e_chopper = getEnt("heli_factory_exit_boss_anim_crash_spawner", "targetname");
 
   if(isDefined(e_chopper)) {
     playFXOnTag(level._effect["ending_helicopter_explosion"], e_chopper, "tag_origin");
@@ -220,7 +220,7 @@ chopper_crashes_into_pipes_anim(str_scene) {
 get_collision_chopper_in_position(str_target_struct) {
   self endon("death");
   self.drivepath = 1;
-  s_struct = getstruct(str_target_struct, "targetname");
+  s_struct = getStruct(str_target_struct, "targetname");
   level.heli_collision_point = s_struct.origin;
 
   if(is_player_in_drone()) {
@@ -249,7 +249,7 @@ chopper_crash_scene_starts_chain_reaction(str_chopper_crash_scene, wait_time) {
     wait(wait_time);
   }
 
-  e_heli = getent("heli_factory_exit_boss_anim_crash_spawner", "targetname");
+  e_heli = getEnt("heli_factory_exit_boss_anim_crash_spawner", "targetname");
 
   if(isDefined(e_heli)) {
     playFX(level._effect["blockade_explosion"], e_heli.origin);
@@ -285,11 +285,11 @@ warehouse_effects_triggers() {
 }
 
 fx_exp_factory_window_7_volume(str_targetname) {
-  info_volume = getent("fx_exp_factory_window_7_volume", "targetname");
-  s_struct = getstruct(info_volume.target, "targetname");
+  info_volume = getEnt("fx_exp_factory_window_7_volume", "targetname");
+  s_struct = getStruct(info_volume.target, "targetname");
 
   while(true) {
-    e_ent = getent(str_targetname, "targetname");
+    e_ent = getEnt(str_targetname, "targetname");
 
     if(isDefined(e_ent)) {
       if(e_ent istouching(info_volume)) {
@@ -313,7 +313,7 @@ warehouse_vo() {
 
 warehouse_enter_right_path_soct_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("warehouse_enter_right_path_soct_trigger", "targetname");
+  e_trigger = getEnt("warehouse_enter_right_path_soct_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("warehouse_enter_right_path_soct");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -324,7 +324,7 @@ warehouse_enter_right_path_soct_trigger(str_endon_notify) {
 
 warehouse_enter_left_path_soct_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("warehouse_enter_left_path_soct_trigger", "targetname");
+  e_trigger = getEnt("warehouse_enter_left_path_soct_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("warehouse_enter_left_path_soct");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -346,7 +346,7 @@ warehouse_apache_logic() {
   self.drivepath = 1;
   self sethoverparams(64);
   level.warehouse_apache = self;
-  e_target = getent("apache_fake_drone_target", "targetname");
+  e_target = getEnt("apache_fake_drone_target", "targetname");
   self set_turret_target(e_target, undefined, 1);
   self set_turret_target(e_target, undefined, 2);
   trigger_wait("apache_final_appearance");
@@ -433,19 +433,19 @@ enemy_soct_stop_firing_at_end() {
 }
 
 pak3_new_ending() {
-  e_trigger = getent("placeholder_ending_blocker_trigger", "targetname");
+  e_trigger = getEnt("placeholder_ending_blocker_trigger", "targetname");
   e_trigger waittill("trigger");
   wait 1;
   level notify("fxanim_water_tower_block_end_start");
   flag_set("ending_player_blocker_moving");
   a_ents = [];
-  a_ents[a_ents.size] = getent("placeholder_ending_blocker_clip", "targetname");
+  a_ents[a_ents.size] = getEnt("placeholder_ending_blocker_clip", "targetname");
 
   for(i = 0; i < a_ents.size; i++) {
     e_ent = a_ents[i];
     v_dir = anglesToForward(e_ent.angles);
     v_new_pos = e_ent.origin - v_dir * 500;
     time = 1;
-    e_ent moveto(v_new_pos, time);
+    e_ent moveTo(v_new_pos, time);
   }
 }

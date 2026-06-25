@@ -113,7 +113,7 @@ function function_c4fe1ef2() {
   player = self;
 
   if(!isPlayer(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player.var_ca6b6423 = undefined;
@@ -141,7 +141,7 @@ function function_c4fe1ef2() {
 }
 
 function function_ffb1d92f() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(player)) {
     return false;
@@ -277,7 +277,7 @@ function function_8f7ba6c3(a_ents) {
 }
 
 function function_ebce8b6(a_ents) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(is_true(player.takedown.body.var_41c4e6d6)) {
     player val::reset_all(#"hash_61125ef3dde6089f");
@@ -297,7 +297,7 @@ function function_ebce8b6(a_ents) {
   player action_utility::function_464d0412(undefined, undefined, undefined, 2);
   player action_utility::function_2795d678(1, 1, 0, 0, ["cinematicmotion_body_carry", "cinematicmotion_body_carry_ads"]);
   player thread function_9abb3f03(player.takedown.body);
-  player playrumbleonentity(#"reload_medium");
+  player playRumbleOnEntity(#"reload_medium");
   player util::delay(0.55, undefined, &playrumbleonentity, #"reload_large");
 
   if(!is_true(player.takedown.body.var_41c4e6d6)) {
@@ -404,7 +404,7 @@ function body_drop(victim) {
     self.var_9ebbaa46.var_d4f8dcdf action_utility::scene_play(self.var_9ebbaa46.var_ea195798, self, victim);
     self val::reset_all(#"hash_61125ef3dde6089f");
   } else {
-    self playrumbleonentity(#"reload_small");
+    self playRumbleOnEntity(#"reload_small");
     self util::delay(0.55, undefined, &playrumbleonentity, #"reload_medium");
     playerpitch = self getplayerangles()[0];
 
@@ -436,12 +436,12 @@ function private function_305446bc(forward = 20) {
   offset = (0, 0, 8);
   new_origin = playerphysicstrace(self.origin + offset, self.origin + anglesToForward(self.angles) * forward + offset);
   new_origin = playerphysicstrace(new_origin, new_origin - offset);
-  self setorigin(new_origin);
+  self setOrigin(new_origin);
 }
 
 function function_ff5c9214(a_ents) {
   self actions::function_942d9213();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   victim = a_ents[#"victim"];
   player action_utility::function_2795d678(0);
 
@@ -458,7 +458,7 @@ function function_ff5c9214(a_ents) {
 }
 
 function start_bodyshield_gesture(a_ents) {
-  getplayers()[0] thread namespace_6cecf2d8::function_756e29bb(level.player_actions.actions[#"body_carry"], "body_carry", undefined, undefined, undefined, 0);
+  getPlayers()[0] thread namespace_6cecf2d8::function_756e29bb(level.player_actions.actions[#"body_carry"], "body_carry", undefined, undefined, undefined, 0);
 }
 
 function function_39f2df3d(notifyhash) {

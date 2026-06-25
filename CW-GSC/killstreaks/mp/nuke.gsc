@@ -72,13 +72,13 @@ function private function_65cd04d7(killstreak_id) {
   var_b39c9060.team = self.team;
   var_b39c9060.killstreak_id = killstreak_id;
   var_b39c9060.owner = self;
-  playsoundatposition(#"hash_7d507d7d8807c64d", (0, 0, 0));
+  playSoundAtPosition(#"hash_7d507d7d8807c64d", (0, 0, 0));
   level thread function_5649bd08();
   level.var_e4c3d310++;
   function_221192e6();
   wait isDefined(bundle.var_e78db223) ? bundle.var_e78db223 : 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     attacker = player.team === self.team ? undefined : self;
     player dodamage(player.health + 1000, player.origin, attacker, attacker, undefined, "MOD_EXPLOSIVE", 0, getweapon(#"nuke"));
   }
@@ -91,7 +91,7 @@ function private function_65cd04d7(killstreak_id) {
   wait 5;
   function_70159dea();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player)) {
       continue;
     }
@@ -122,7 +122,7 @@ function function_5649bd08() {
 
 function private function_36f60a32(delay) {
   wait isDefined(delay) ? delay : 0;
-  playsoundatposition(#"hash_36412d3d8dabf70e", (0, 0, 0));
+  playSoundAtPosition(#"hash_36412d3d8dabf70e", (0, 0, 0));
   var_1c3c21f1 = function_ec196fb0();
   var_5ac13eb1 = struct::get_array(#"hash_4b493e0124411b31", "targetname");
 
@@ -158,7 +158,7 @@ function private function_20ad31c5(var_cf0e251a = 0, var_1c09d5b2, var_ddd9f485,
   wait var_cf0e251a;
 
   if(isDefined(var_1c09d5b2)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player function_66337ef1(var_1c09d5b2);
     }
   }
@@ -171,7 +171,7 @@ function private function_20ad31c5(var_cf0e251a = 0, var_1c09d5b2, var_ddd9f485,
   wait var_f8555e;
 
   if(isDefined(var_4bfe0994)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player stoprumble(var_1c09d5b2);
       player function_66337ef1(var_4bfe0994);
     }
@@ -181,7 +181,7 @@ function private function_20ad31c5(var_cf0e251a = 0, var_1c09d5b2, var_ddd9f485,
 function private function_cb5a1440(delay) {
   wait isDefined(delay) ? delay : 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::set(#"hash_681dc6934afec109", "show_hud", 0);
   }
 }
@@ -194,7 +194,7 @@ function private function_e57eeb2e(delay, gesture) {
   gestures::function_ba4529d4(gesture);
   wait isDefined(delay) ? delay : 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player gestures::play_gesture(gesture, undefined, 1);
   }
 }
@@ -230,7 +230,7 @@ function function_a109b3d3() {
   var_4bfe0994 = bundle.var_b41208d8;
   gesture = bundle.var_6e56ae76;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::reset(#"hash_681dc6934afec109", "show_hud");
 
     if(isDefined(var_1c09d5b2)) {

@@ -43,7 +43,7 @@ electric_trap_dialog() {
 }
 
 electric_trap_think() {
-  self sethintstring(&"ZOMBIE_BUTTON_NORTH_FLAMES");
+  self setHintString(&"ZOMBIE_BUTTON_NORTH_FLAMES");
   self setCursorHint("HINT_NOICON");
   self.is_available = true;
   self.zombie_cost = 1000;
@@ -75,7 +75,7 @@ electric_trap_think() {
           self trigger_off();
           level thread maps\nazi_zombie_sumpf::turnLightRed(self.script_string);
 
-          self.zombie_dmg_trig = getent(self.target, "targetname");
+          self.zombie_dmg_trig = getEnt(self.target, "targetname");
           self.zombie_dmg_trig trigger_on();
 
           self thread activate_electric_trap(who);
@@ -100,8 +100,8 @@ electric_trap_think() {
           self trigger_on();
           level thread maps\nazi_zombie_sumpf::turnLightGreen(self.script_string);
 
-          pa_system = getent("speaker_by_log", "targetname");
-          playsoundatposition("warning", pa_system.origin);
+          pa_system = getEnt("speaker_by_log", "targetname");
+          playSoundAtPosition("warning", pa_system.origin);
           self notify("available");
 
           self.in_use = 0;
@@ -134,7 +134,7 @@ add_trap_dialog() {
   }
 }
 electric_trap_move_switch(parent) {
-  tswitch = getent(parent.script_linkto, "script_linkname");
+  tswitch = getEnt(parent.script_linkto, "script_linkname");
   if(tswitch.script_linkname == "110") {
     tswitch rotatepitch(180, .5);
     tswitch playSound("amb_sparks_l_b");
@@ -199,7 +199,7 @@ play_electrical_sound() {
   level endon("arc_done");
   while(1) {
     wait(randomfloatrange(0.1, 0.5));
-    playsoundatposition("elec_arc", self.origin);
+    playSoundAtPosition("elec_arc", self.origin);
   }
 }
 elec_barrier_damage(who) {
@@ -225,9 +225,9 @@ play_elec_vocals() {
   if(isDefined(self)) {
     org = self.origin;
     wait(0.15);
-    playsoundatposition("elec_vocals", org);
-    playsoundatposition("zombie_arc", org);
-    playsoundatposition("exp_jib_zombie", org);
+    playSoundAtPosition("elec_vocals", org);
+    playSoundAtPosition("zombie_arc", org);
+    playSoundAtPosition("exp_jib_zombie", org);
   }
 }
 player_elec_damage() {
@@ -282,7 +282,7 @@ zombie_elec_death(flame_chance) {
     refs[6] = "head";
     self.a.gib_ref = refs[randomint(refs.size)];
 
-    playsoundatposition("zombie_arc", self.origin);
+    playSoundAtPosition("zombie_arc", self.origin);
     if(randomint(100) > 50) {
       if(!flag("dog_round")) {
         self thread electroctute_death_fx();

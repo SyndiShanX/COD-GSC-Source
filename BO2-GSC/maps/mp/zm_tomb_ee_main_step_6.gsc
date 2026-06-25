@@ -54,7 +54,7 @@ ruins_fist_glow_monitor() {
       if(self.has_soul && inflictor.n_ee_punch_souls < 20 && isDefined(weaponname) && weaponname == "one_inch_punch_zm" && is_true(self.completed_emerging_into_playable_area)) {
         self setclientfield("ee_zombie_fist_fx", 0);
         self.has_soul = 0;
-        playsoundatposition("zmb_squest_punchtime_punched", self.origin);
+        playSoundAtPosition("zmb_squest_punchtime_punched", self.origin);
         inflictor.n_ee_punch_souls++;
 
         if(inflictor.n_ee_punch_souls == 20) {
@@ -72,7 +72,7 @@ spawn_punch_upgrade_tablet(v_origin, e_player) {
   m_fx setModel("tag_origin");
   m_fx setinvisibletoall();
   m_fx setvisibletoplayer(e_player);
-  m_tablet linkto(m_fx);
+  m_tablet linkTo(m_fx);
   playFXOnTag(level._effect["special_glow"], m_fx, "tag_origin");
   m_fx thread rotate_punch_upgrade_tablet();
   m_tablet playLoopSound("zmb_squest_punchtime_tablet_loop", 0.5);
@@ -114,7 +114,7 @@ spawn_punch_upgrade_tablet(v_origin, e_player) {
     }
 
     e_player thread maps\mp\zombies\_zm_weap_one_inch_punch::one_inch_punch_melee_attack();
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(!isDefined(player.b_punch_upgraded) || !player.b_punch_upgraded) {
@@ -130,7 +130,7 @@ rotate_punch_upgrade_tablet() {
   self endon("death");
 
   while(true) {
-    self rotateyaw(360, 5);
+    self rotateYaw(360, 5);
     self waittill("rotatedone");
   }
 }

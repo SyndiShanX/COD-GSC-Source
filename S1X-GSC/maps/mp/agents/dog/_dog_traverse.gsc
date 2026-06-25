@@ -176,7 +176,7 @@ gettargetentpos() {
     return self.targetentpos;
   }
 
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0)) {
     return undefined;

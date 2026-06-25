@@ -67,7 +67,7 @@ drone_init_path() {
   }
   level.drone_paths[self.target] = 1;
   var_0 = self.target;
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -118,7 +118,7 @@ drone_init_path() {
   }
 
   var_0 = self.target;
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_11 = var_1;
   var_3 = [];
 

@@ -4,12 +4,12 @@
 **************************************/
 
 func_BC86() {
-  var_0 = getent("weapon_loc_screenshot_1", "targetname");
+  var_0 = getEnt("weapon_loc_screenshot_1", "targetname");
   var_1 = var_0.origin + (0, 0, 0);
   var_2 = var_0.angles + (0, 0, 0);
   level.var_CB4F.origin = var_1;
   level.var_CB4F.angles = var_2;
-  var_3 = getent("camera_weapon_screenshot_1", "targetname");
+  var_3 = getEnt("camera_weapon_screenshot_1", "targetname");
   var_4 = var_3.origin + (100, 0, 0);
   var_5 = var_3.angles + (0, 0, 0);
   level.camera_anchor dontinterpolate();
@@ -18,12 +18,12 @@ func_BC86() {
 }
 
 move_to_blue_background_side_on() {
-  var_0 = getent("weapon_loc_screenshot_1", "targetname");
+  var_0 = getEnt("weapon_loc_screenshot_1", "targetname");
   var_1 = var_0.origin + (0, 0, 0);
   var_2 = var_0.angles + (0, -25, 0);
   level.var_CB4F.origin = var_1;
   level.var_CB4F.angles = var_2;
-  var_3 = getent("camera_weapon_screenshot_1", "targetname");
+  var_3 = getEnt("camera_weapon_screenshot_1", "targetname");
   var_4 = var_3.origin + (100, 0, 0);
   var_5 = var_3.angles + (0, 0, 0);
   level.camera_anchor dontinterpolate();
@@ -32,12 +32,12 @@ move_to_blue_background_side_on() {
 }
 
 func_BC8C() {
-  var_0 = getent("weapon_loc_screenshot_2", "targetname");
+  var_0 = getEnt("weapon_loc_screenshot_2", "targetname");
   var_1 = var_0.origin + (0, 0, 0);
   var_2 = var_0.angles + (0, 0, 0);
   level.var_CB4F.origin = var_1;
   level.var_CB4F.angles = var_2;
-  var_3 = getent("camera_weapon_screenshot_2", "targetname");
+  var_3 = getEnt("camera_weapon_screenshot_2", "targetname");
   var_4 = var_3.origin + (100, 0, 0);
   var_5 = var_3.angles + (0, 0, 0);
   level.camera_anchor dontinterpolate();
@@ -46,12 +46,12 @@ func_BC8C() {
 }
 
 move_to_grey_background_side_on() {
-  var_0 = getent("weapon_loc_screenshot_2", "targetname");
+  var_0 = getEnt("weapon_loc_screenshot_2", "targetname");
   var_1 = var_0.origin + (0, 0, 0);
   var_2 = var_0.angles + (0, -25, 0);
   level.var_CB4F.origin = var_1;
   level.var_CB4F.angles = var_2;
-  var_3 = getent("camera_weapon_screenshot_2", "targetname");
+  var_3 = getEnt("camera_weapon_screenshot_2", "targetname");
   var_4 = var_3.origin + (100, 0, 0);
   var_5 = var_3.angles + (0, 0, 0);
   level.camera_anchor dontinterpolate();
@@ -77,7 +77,7 @@ func_11452(var_0) {
 
 func_ECE1() {
   self endon("disconnect");
-  var_0 = getent("weapon_loc_hq1", "targetname");
+  var_0 = getEnt("weapon_loc_hq1", "targetname");
   var_1 = var_0.origin + (0, 0, 0);
   var_2 = var_0.angles + (0, 0, 0);
   level.var_CB4F = spawn("script_weapon", var_1, 0, 0, 5);

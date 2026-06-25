@@ -56,7 +56,7 @@ cw_snowmobile_headlight() {
 
 cw_snowmobile_headlight_cg() {
   if(!maps\_utility::is_gen4()) {
-    var_0 = getent("cw_light_card", "targetname");
+    var_0 = getEnt("cw_light_card", "targetname");
     common_scripts\utility::flag_wait("FLAG_intro_light_off");
     var_0 delete();
   }
@@ -228,7 +228,7 @@ set_flag_moon_off() {
 }
 
 check_trigger_moon_on(var_0) {
-  var_1 = getent("moon_on", "targetname");
+  var_1 = getEnt("moon_on", "targetname");
   var_1 waittill("trigger");
   setsaveddvar("r_sunsprite_size_override", "24");
 }

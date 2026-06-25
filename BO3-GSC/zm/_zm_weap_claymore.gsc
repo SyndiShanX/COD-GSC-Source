@@ -43,8 +43,8 @@ function claymore_detonation(e_planter) {
   detonateradius = 96;
   damagearea = spawn("trigger_radius", self.origin, 9, detonateradius, detonateradius * 2);
   damagearea setexcludeteamfortrigger(self.owner.team);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   if(isDefined(self.isonbus) && self.isonbus) {
     damagearea setmovingplatformenabled(1);
   }
@@ -92,7 +92,7 @@ function private should_trigger_claymore(e_mine) {
   if(dist < 20) {
     return 0;
   }
-  dirtopos = vectornormalize(dirtopos);
+  dirtopos = vectorNormalize(dirtopos);
   dot = vectordot(dirtopos, objectforward);
   return dot > n_detonation_dot;
 }

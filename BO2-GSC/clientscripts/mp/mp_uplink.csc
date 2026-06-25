@@ -72,7 +72,7 @@ uplinkonplayerconnect(localclientnum) {
     }
   }
 
-  lightpost = getent(localclientnum, "sway_lightpost", "targetname");
+  lightpost = getEnt(localclientnum, "sway_lightpost", "targetname");
 
   if(isDefined(lightpost) && !isdemoplaying()) {
     lightpost thread lightpostsway();
@@ -118,9 +118,9 @@ lightpostsway() {
   while(true) {
     randomswingangle = randomfloatrange(0.25, 0.5);
     randomswingtime = randomfloatrange(2.0, 4.0);
-    self rotateto((randomswingangle * 0.5, randomswingangle * 0.6, randomswingangle * 0.8), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
+    self rotateTo((randomswingangle * 0.5, randomswingangle * 0.6, randomswingangle * 0.8), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
     self waittill("rotatedone");
-    self rotateto((randomswingangle * 0.5 * -1, randomswingangle * -1 * 0.6, randomswingangle * 0.8 * -1), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
+    self rotateTo((randomswingangle * 0.5 * -1, randomswingangle * -1 * 0.6, randomswingangle * 0.8 * -1), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
     self waittill("rotatedone");
   }
 }
@@ -210,13 +210,13 @@ windvanejitter(originalangles, yaw) {
   self notify("windVaneJitter_singleton");
   self endon("windVaneJitter_singleton");
   wait 0.5;
-  self rotateto((originalangles[0], yaw, originalangles[2]), 1.0);
+  self rotateTo((originalangles[0], yaw, originalangles[2]), 1.0);
   self waittill("rotatedone");
 
   for(;;) {
     time = randomfloatrange(0.1, 0.5);
     currentyaw = randomfloatrange(yaw - 30, yaw + 30);
-    self rotateto((originalangles[0], currentyaw, originalangles[2]), time);
+    self rotateTo((originalangles[0], currentyaw, originalangles[2]), time);
     self waittill("rotatedone");
   }
 }

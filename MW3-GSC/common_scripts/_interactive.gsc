@@ -11,7 +11,7 @@ industrial_curtain() {
   level endon("game_ended");
   industrial_curtain_precache();
   industrial_curtain_setupanimarray();
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 hide();
   var_0 thread industrial_curtain_hitbox_ondamage(self);
   thread industrial_curtain_ondamage();

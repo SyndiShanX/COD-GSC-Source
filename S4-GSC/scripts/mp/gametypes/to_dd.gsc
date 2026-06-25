@@ -184,7 +184,7 @@ _id_ABAD(var_0) {
 }
 
 _id_3F9D() {
-  var_0 = getent("to_dd_bridge_flag", "targetname");
+  var_0 = getEnt("to_dd_bridge_flag", "targetname");
 
   if(!isDefined(level._id_A8E8)) {
     level._id_A8E8 = [];
@@ -654,7 +654,7 @@ _id_265E(var_0, var_1, var_2) {
 }
 
 _id_C493(var_0) {
-  var_1 = getent("dd_bombzone_clip" + var_0, "targetname");
+  var_1 = getEnt("dd_bombzone_clip" + var_0, "targetname");
   var_1 delete();
 }
 
@@ -687,7 +687,7 @@ _id_D5AD() {
 _id_D886() {
   var_0 = spawn("script_origin", self.origin);
   var_0.angles = self.angles;
-  var_0 rotateyaw(-45, 0.05);
+  var_0 rotateYaw(-45, 0.05);
   waitframe();
   var_1 = self.origin + (0, 0, 5);
   var_2 = self.origin + anglesToForward(var_0.angles) * 100 + (0, 0, 128);

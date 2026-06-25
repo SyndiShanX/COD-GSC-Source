@@ -64,7 +64,7 @@ _id_10174(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_2._id_9509)) {
-    var_2._id_9509 linkto(var_2, "tag_shield_back", (5, 10, 0), (0, 0, 90));
+    var_2._id_9509 linkTo(var_2, "tag_shield_back", (5, 10, 0), (0, 0, 90));
     var_2._id_9509 show();
   }
 

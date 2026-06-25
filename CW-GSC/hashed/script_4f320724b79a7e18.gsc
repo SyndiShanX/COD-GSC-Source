@@ -231,7 +231,7 @@ function state_combat_update(params) {
       self setspeed(self.settings.defaultmovespeed, 5, 5);
       onnavvolume = ispointinnavvolume(self.origin, "navvolume_big");
 
-      if(!onnavvolume && !self isplayinganimscripted()) {
+      if(!onnavvolume && !self isplayinganimScripted()) {
         getbackpoint = self function_ec878580();
         self.vehaircraftcollisionenabled = 0;
 
@@ -308,7 +308,7 @@ function delay_target_toenemy_thread(point, enemy, timetohit) {
 
   self.faketargetent.origin = enemy.origin + offset;
   waitframe(1);
-  self.faketargetent linkto(enemy);
+  self.faketargetent linkTo(enemy);
 }
 
 function attack_thread_mainturret() {
@@ -321,7 +321,7 @@ function attack_thread_mainturret() {
       self vehlookat(enemy);
 
       if(self cansee(enemy)) {
-        vectorfromenemy = vectornormalize(((self.origin - enemy.origin)[0], (self.origin - enemy.origin)[1], 0));
+        vectorfromenemy = vectorNormalize(((self.origin - enemy.origin)[0], (self.origin - enemy.origin)[1], 0));
         self thread delay_target_toenemy_thread(enemy.origin + vectorfromenemy * 300, enemy, 1.5);
         self waittill(#"turret_on_target");
         self vehicle_ai::fire_for_time(2 + randomfloat(0.8), 1, enemy);
@@ -471,7 +471,7 @@ function function_b9e0d497(turret_index, target, offset, enemy) {
 
   if(isDefined(spawntag) && isDefined(target)) {
     weapon = getweapon("gunship_missile_armada");
-    v_dir = vectornormalize(enemy.origin - origin);
+    v_dir = vectorNormalize(enemy.origin - origin);
     var_a64609fe = v_dir * 3500;
     missile = self magicmissile(weapon, origin, var_a64609fe, enemy);
   }
@@ -487,7 +487,7 @@ function getenemyarray(include_ai, include_player) {
   }
 
   if(is_true(include_player)) {
-    playerarray = getplayers(enemy_team);
+    playerarray = getPlayers(enemy_team);
     enemyarray = arraycombine(enemyarray, playerarray, 0, 0);
   }
 
@@ -663,7 +663,7 @@ function function_e9e5bd0() {
 
     if(isDefined(driver) && lengthsquared(velocity) > 4900) {
       earthquake(0.25, 0.25, driver.origin, 50);
-      driver playrumbleonentity("damage_heavy");
+      driver playRumbleOnEntity("damage_heavy");
     }
   }
 }
@@ -719,7 +719,7 @@ function function_7afa9936(eattacker, damagetype, hitpoint, hitdirection, hitloc
     return;
   }
 
-  self setvehvelocity(self.velocity + vectornormalize(partname) * 20);
+  self setvehvelocity(self.velocity + vectorNormalize(partname) * 20);
 
   if(!is_true(self.inpain)) {
     vecright = anglestoright(self.angles);

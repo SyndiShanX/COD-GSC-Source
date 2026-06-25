@@ -94,7 +94,7 @@ generic_double_strobe() {
       }
       if(linked_things[i].classname == "script_model") {
         lit_model = linked_things[i];
-        unlit_model = getent(lit_model.target, "targetname");
+        unlit_model = getEnt(lit_model.target, "targetname");
         linked_models = true;
       }
     }
@@ -195,7 +195,7 @@ generic_flickering() {
     }
     if(self.linked_things[i].classname == "script_model") {
       self.lit_model = self.linked_things[i];
-      self.unlit_model = getent(self.lit_model.target, "targetname");
+      self.unlit_model = getEnt(self.lit_model.target, "targetname");
       self.linked_models = true;
     }
   }

@@ -40,7 +40,7 @@ _id_4534() {
   for(;;) {
     var_2 = 0.5 * (level.player getEye() + level.player.origin);
     var_3 = var_2 - self.origin;
-    var_3 = vectornormalize(var_3);
+    var_3 = vectorNormalize(var_3);
     var_4 = maps\_shg_common::_id_1684(var_3, (0, 0, 1));
     var_5 = cos(var_1);
     var_6 = sin(var_1);
@@ -192,7 +192,7 @@ _id_453C() {
       var_6 = self.origin + var_5 * var_0;
       var_7 = var_6 - var_1;
       var_5 = distance(var_6, var_1);
-      var_7 = vectornormalize(var_7);
+      var_7 = vectorNormalize(var_7);
 
       if(var_5 > self._id_4535["aimspeed"]) {
         var_5 = self._id_4535["aimspeed"];
@@ -218,7 +218,7 @@ _id_453C() {
       }
       var_7 = var_6 - var_1;
       var_5 = distance(var_6, var_1);
-      var_7 = vectornormalize(var_7);
+      var_7 = vectorNormalize(var_7);
 
       if(var_5 > self._id_4535["aimspeed"]) {
         var_5 = self._id_4535["aimspeed"];

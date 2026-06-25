@@ -197,7 +197,7 @@ event_handler[level_init] main(eventstruct) {
   level.chest_joker_model = "p8_fxanim_zm_zod_magic_box_skull_mod";
   level.chest_joker_custom_movement = &zm_magicbox::function_f5503c41;
 
-  t_kill_ai = getent("<dev string:x38>", "<dev string:x44>");
+  t_kill_ai = getEnt("<dev string:x38>", "<dev string:x44>");
 
   if(isDefined(t_kill_ai)) {
     t_kill_ai callback::on_trigger(&function_d4ff1dd6);
@@ -254,7 +254,7 @@ function_95db9900(weapon) {
 
 function_269f27a9() {
   level.var_ab5b85bf = "bonus_points_team";
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
   var_b67b53e8 = zombie_utility::get_zombie_var(#"zombie_powerup_drop_min_" + n_players);
   var_ee327079 = zombie_utility::get_zombie_var(#"zombie_powerup_drop_max_" + n_players);
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_" + n_players, n_players * 5);
@@ -265,7 +265,7 @@ function_269f27a9() {
     waitframe(1);
   }
 
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     level.var_ab5b85bf = "bonus_points_team";
   } else {
     level.var_ab5b85bf = array::random(array("bonus_points_team", "double_points"));
@@ -286,7 +286,7 @@ function_28073e18(b_game_ended) {
   }
 
   if(isDefined(level.var_8aa0830e) && level.var_8aa0830e) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread function_6f63ad34();
     }
   }
@@ -301,7 +301,7 @@ function_a47f80af() {
   self endon("4ae9dc40193a4f80");
   level endon(#"egg_free");
   level flag::wait_till_clear("round_reset");
-  mdl_blocker = getent("pap_arena_blocker", "targetname");
+  mdl_blocker = getEnt("pap_arena_blocker", "targetname");
 
   if(isDefined(mdl_blocker)) {
     mdl_blocker setinvisibletoall();
@@ -349,8 +349,8 @@ function_a7641284() {
     wait 1;
     var_c91c19bb = 0;
 
-    foreach(player in getplayers()) {
-      t_pap = getent("trigger_pap_defend", "targetname");
+    foreach(player in getPlayers()) {
+      t_pap = getEnt("trigger_pap_defend", "targetname");
 
       if(isDefined(t_pap) && isalive(player) && player istouching(t_pap)) {
         var_c91c19bb = 1;
@@ -380,7 +380,7 @@ function_dba42129(n_max, n_round) {
 
 function_cba532f6() {
   level.check_for_valid_spawn_near_team_callback = &function_f8822ae1;
-  array::wait_any(getplayers(), "round_reset_done");
+  array::wait_any(getPlayers(), "round_reset_done");
   level.zombie_round_start_delay = 0;
   level.var_c54ec9bb = 1;
   level.noroundnumber = 1;
@@ -447,7 +447,7 @@ function_c000f08b() {
   level flag::set("hold_round_end");
   level thread function_d7831b0f();
   level flag::wait_till("all_players_spawned");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_players = a_e_players.size;
   n_spawn_limit = zm_round_logic::get_zombie_count_for_round(1, n_players);
 
@@ -490,7 +490,7 @@ function_c000f08b() {
         v_player_forward = anglesToForward(e_player getplayerangles());
 
         foreach(s_spawn in a_s_spawns) {
-          var_75d386a3 = vectornormalize(s_spawn.origin - e_player.origin);
+          var_75d386a3 = vectorNormalize(s_spawn.origin - e_player.origin);
           n_dot = vectordot(v_player_forward, var_75d386a3);
 
           if(n_dot >= 0.86) {
@@ -538,7 +538,7 @@ function_c000f08b() {
 
   foreach(s_spawn in a_s_remaining) {
     if(isDefined(s_spawn.target)) {
-      mdl_clip = getent(s_spawn.target, "targetname");
+      mdl_clip = getEnt(s_spawn.target, "targetname");
       mdl_clip notsolid();
     }
   }
@@ -613,7 +613,7 @@ function_12b9b9a9() {
 
   foreach(s_spawn in a_s_spawns) {
     if(isDefined(s_spawn.target)) {
-      mdl_clip = getent(s_spawn.target, "targetname");
+      mdl_clip = getEnt(s_spawn.target, "targetname");
       mdl_clip delete();
     }
   }
@@ -654,7 +654,7 @@ function_9f8c0587() {
   ai_zombie dontinterpolate();
 
   if(isDefined(self.target)) {
-    mdl_clip = getent(self.target, "targetname");
+    mdl_clip = getEnt(self.target, "targetname");
     mdl_clip delete();
   }
 
@@ -684,7 +684,7 @@ function_eba3496(var_cd13b40e = 1, var_4e4cc9a9 = 1) {
   mdl_zombie = util::spawn_model(str_model, self.origin, self.angles);
   mdl_zombie.target = self.target;
   mdl_zombie.var_e259ad71 = self.var_e259ad71;
-  mdl_zombie.sp_model = getent(str_model, "targetname");
+  mdl_zombie.sp_model = getEnt(str_model, "targetname");
   mdl_zombie thread scene::play(#"aib_zm_red_ampthtr_zombie_trnsfxd", "Shot 1", mdl_zombie);
 
   if(var_cd13b40e) {
@@ -723,7 +723,7 @@ function_a4e2970b(var_4e4cc9a9 = 1, s_damage) {
   ai_zombie dontinterpolate();
 
   if(isDefined(self.target)) {
-    mdl_clip = getent(self.target, "targetname");
+    mdl_clip = getEnt(self.target, "targetname");
     mdl_clip delete();
   }
 
@@ -838,7 +838,7 @@ function_fb3ab798(var_4e4cc9a9 = 1) {
         break;
       }
 
-      var_168ccd6b = getent("vol_power_quest_kill_zone", "targetname");
+      var_168ccd6b = getEnt("vol_power_quest_kill_zone", "targetname");
 
       if(e_attacker istouching(var_168ccd6b)) {
         break;
@@ -878,7 +878,7 @@ function_a14d96ed() {
 }
 
 function_4e4950d1(poi) {
-  vol_amphitheater = getent("vol_power_quest_kill_zone", "targetname");
+  vol_amphitheater = getEnt("vol_power_quest_kill_zone", "targetname");
 
   if(isDefined(vol_amphitheater) && poi[1] istouching(vol_amphitheater)) {
     poi[1].var_fd141207 = 1;
@@ -902,8 +902,8 @@ function_6f6cc58(e_player) {
     }
   }
 
-  vol_light_side = getent("vol_light_side", "targetname");
-  vol_dark_side = getent("vol_dark_side", "targetname");
+  vol_light_side = getEnt("vol_light_side", "targetname");
+  vol_dark_side = getEnt("vol_dark_side", "targetname");
   var_9b9fe2ad = self istouching(vol_light_side);
   var_ecad7bb = e_player istouching(vol_light_side);
   var_59248979 = self istouching(vol_dark_side);
@@ -917,7 +917,7 @@ function_6f6cc58(e_player) {
     return false;
   }
 
-  vol_gaia_combat = getent("vol_gaia_combat", "script_noteworthy");
+  vol_gaia_combat = getEnt("vol_gaia_combat", "script_noteworthy");
   var_6b56dfbd = self istouching(vol_gaia_combat);
   var_c944a910 = e_player istouching(vol_gaia_combat);
 
@@ -925,7 +925,7 @@ function_6f6cc58(e_player) {
     return false;
   }
 
-  vol_charon_combat = getent("vol_charon_combat", "script_noteworthy");
+  vol_charon_combat = getEnt("vol_charon_combat", "script_noteworthy");
   var_397d0352 = self istouching(vol_charon_combat);
   var_cb8ad8e2 = e_player istouching(vol_charon_combat);
 
@@ -933,7 +933,7 @@ function_6f6cc58(e_player) {
     return false;
   }
 
-  vol_hemera_combat = getent("vol_hemera_combat", "script_noteworthy");
+  vol_hemera_combat = getEnt("vol_hemera_combat", "script_noteworthy");
   var_670f0524 = self istouching(vol_hemera_combat);
   var_4a314340 = e_player istouching(vol_hemera_combat);
 
@@ -941,7 +941,7 @@ function_6f6cc58(e_player) {
     return false;
   }
 
-  vol_ouranos_combat = getent("vol_ouranos_combat", "script_noteworthy");
+  vol_ouranos_combat = getEnt("vol_ouranos_combat", "script_noteworthy");
   var_ee73da02 = self istouching(vol_ouranos_combat);
   var_863a1e1f = e_player istouching(vol_ouranos_combat);
 
@@ -1047,7 +1047,7 @@ setup_personality_character_exerts() {
 }
 
 play_outro() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player)) {
       player disableweaponfire();
     }
@@ -1084,7 +1084,7 @@ play_outro() {
   scene::play(#"cin_zm_red_outro_temple_part4");
   level scene::function_f81475ae(#"cin_zm_red_outro_temple_part4");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player)) {
       player enableweaponfire();
     }
@@ -1096,7 +1096,7 @@ play_outro() {
 function_eeb6a1e7() {
   s_wallbuy = struct::get("tr_leveraction_t8", "zombie_weapon_upgrade");
   var_8651c21a = struct::get(s_wallbuy.target);
-  mdl_wallbuy = getent(var_8651c21a.target, "targetname");
+  mdl_wallbuy = getEnt(var_8651c21a.target, "targetname");
   mdl_wallbuy hide();
   level clientfield::set(s_wallbuy.trigger_stub.clientfieldname, 0);
   mdl_wallbuy clientfield::set("wallbuy_ambient_fx", 0);
@@ -1120,7 +1120,7 @@ function_b5670bb7(a_ents) {
 }
 
 function_924ba3d(a_ents) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"eye_vignette", 1);
   }
 
@@ -1243,7 +1243,7 @@ function_46159bb7(a_s_valid_respawn_points) {
 }
 
 function_598a6222() {
-  vol_amphitheater = getent("vol_power_quest_kill_zone", "targetname");
+  vol_amphitheater = getEnt("vol_power_quest_kill_zone", "targetname");
 
   if(isDefined(vol_amphitheater) && self istouching(vol_amphitheater) && !level flag::get(#"hash_3dba794053dea40e")) {
     return false;
@@ -1271,7 +1271,7 @@ function function_c02e63(var_2753f06a) {
 
   str_host = level.host zm_vo::function_82f9bc9f();
 
-  if(getplayers().size === 1) {
+  if(getPlayers().size === 1) {
     switch (var_2753f06a) {
       case 0:
         if(str_host == "brun") {
@@ -1822,17 +1822,17 @@ function_76dc48b8(cmd) {
       level thread zm_red_challenges::start_challenge();
       break;
     case #"hash_2eba8518b711ac1":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player function_7c8b5f27();
       }
 
       break;
     case #"hash_73599762d232fa70":
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       e_player function_7c8b5f27();
       break;
     case #"hash_46d64f2b7aa21161":
-      a_players = getplayers();
+      a_players = getPlayers();
 
       if(a_players.size >= 2) {
         a_players[1] function_7c8b5f27();
@@ -1840,7 +1840,7 @@ function_76dc48b8(cmd) {
 
       break;
     case #"hash_4ae61e7d270a0f16":
-      a_players = getplayers();
+      a_players = getPlayers();
 
       if(a_players.size >= 3) {
         a_players[2] function_7c8b5f27();
@@ -1848,7 +1848,7 @@ function_76dc48b8(cmd) {
 
       break;
     case #"hash_580b4b8b0d03657f":
-      a_players = getplayers();
+      a_players = getPlayers();
 
       if(a_players.size >= 4) {
         a_players[3] function_7c8b5f27();
@@ -1886,7 +1886,7 @@ function_76dc48b8(cmd) {
       level thread zm_red_main_quest::function_25bb4829(1);
       break;
     case #"oracle_boon_reset_all":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[0].b_available = 1;
         player.s_boons[1].b_available = 1;
@@ -1899,49 +1899,49 @@ function_76dc48b8(cmd) {
 
       break;
     case #"oracle_boon_reset_door":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[0].b_available = 1;
       }
 
       break;
     case #"oracle_boon_reset_ammo":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[1].b_available = 1;
       }
 
       break;
     case #"hash_5151955e310b4ba3":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[2].b_available = 1;
       }
 
       break;
     case #"hash_382a97b59a98fb71":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[3].b_available = 1;
       }
 
       break;
     case #"hash_5e97858955d10c64":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[4].b_available = 1;
       }
 
       break;
     case #"hash_5176fcfc9d31845d":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[5].b_available = 1;
       }
 
       break;
     case #"hash_6b98535cc00fb057":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_6a885e6e = 0;
         player.s_boons[6].b_available = 1;
       }
@@ -1990,10 +1990,10 @@ ride_pegasus() {
   zm_devgui::zombie_devgui_open_sesame();
   level zm_utility::function_9ad5aeb1(1);
   s_ride = struct::get("<dev string:x25e6>");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
-    player setorigin(s_ride.origin + (randomintrange(-16, 16), randomintrange(-16, 16), 0));
+    player setOrigin(s_ride.origin + (randomintrange(-16, 16), randomintrange(-16, 16), 0));
   }
 
   wait 1;
@@ -2014,7 +2014,7 @@ free_eagles() {
   var_a10268d3 = level.players;
 
   for(i = 0; i < var_a10268d3.size; i++) {
-    var_a10268d3[i] setorigin(var_ff91be3a[i].origin);
+    var_a10268d3[i] setOrigin(var_ff91be3a[i].origin);
     var_a10268d3[i] setplayerangles(var_ff91be3a[i].angles);
   }
 
@@ -2054,7 +2054,7 @@ complete_pap() {
   level thread scene::play(#"p8_fxanim_zm_red_omphalos_crystal_left_bundle", "<dev string:x2622>");
   level thread scene::play(#"p8_fxanim_zm_red_omphalos_crystal_front_bundle", "<dev string:x2622>");
   level scene::play(#"p8_fxanim_zm_red_omphalos_crystal_right_bundle", "<dev string:x2622>");
-  var_6800d950 = getent("<dev string:x262c>", "<dev string:x44>");
+  var_6800d950 = getEnt("<dev string:x262c>", "<dev string:x44>");
 
   if(isDefined(var_6800d950)) {
     var_6800d950 delete();
@@ -2120,7 +2120,7 @@ function_bb5a8b5e(b_charged) {
 
   a_w_ww = array::randomize(a_w_ww);
 
-  foreach(i, e_player in getplayers()) {
+  foreach(i, e_player in getPlayers()) {
     a_w_primaries = e_player getweaponslistprimaries();
 
     if(a_w_primaries.size > 1) {

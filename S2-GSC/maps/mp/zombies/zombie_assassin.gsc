@@ -805,8 +805,8 @@ ghost_through_passives() {
         continue;
       }
 
-      var_03 = 8 * vectornormalize(anglestoright(self.var_1D));
-      var_04 = -8 * vectornormalize(anglestoright(self.var_1D));
+      var_03 = 8 * vectorNormalize(anglestoright(self.var_1D));
+      var_04 = -8 * vectorNormalize(anglestoright(self.var_1D));
       if(distance(var_02.var_116, self.var_116 + var_03) < distance(var_02.var_116, self.var_116 + var_04)) {
         var_05 = getclosestpointonnavmesh(var_02.var_116 + var_03);
       } else {
@@ -814,7 +814,7 @@ ghost_through_passives() {
       }
 
       var_06 = 0;
-      var_02 setorigin(var_05, var_06);
+      var_02 setOrigin(var_05, var_06);
       if(isDefined(var_02.bufffx)) {
         var_02 maps\mp\zombies\zombie_assassin_frontline::spawn_assassin_frontline_fx();
       }
@@ -1166,10 +1166,10 @@ assassin_strike_near_players(param_00, param_01) {
     return param_01;
   }
 
-  var_02 = self.attackpointoffset * vectornormalize(anglesToForward(param_00 geteyeangles()));
-  var_03 = var_02 + self.attackpointoffset * vectornormalize(anglestoright(param_00 geteyeangles()));
+  var_02 = self.attackpointoffset * vectorNormalize(anglesToForward(param_00 geteyeangles()));
+  var_03 = var_02 + self.attackpointoffset * vectorNormalize(anglestoright(param_00 geteyeangles()));
   var_04 = getclosestpointonnavmesh(param_00.var_116 + var_03, self);
-  var_05 = var_02 + self.attackpointoffset * vectornormalize(anglestoright(param_00 geteyeangles() + (0, 180, 0)));
+  var_05 = var_02 + self.attackpointoffset * vectorNormalize(anglestoright(param_00 geteyeangles() + (0, 180, 0)));
   var_06 = getclosestpointonnavmesh(param_00.var_116 + var_05, self);
   if(self.assassin_melee_side > 0) {
     return var_06;
@@ -1641,7 +1641,7 @@ dodamageonjoints(param_00, param_01, param_02) {
 }
 
 get_final_joint_origin(param_00) {
-  return self gettagorigin(param_00) + 42 * vectornormalize(anglesToForward(self gettagangles(param_00)));
+  return self gettagorigin(param_00) + 42 * vectorNormalize(anglesToForward(self gettagangles(param_00)));
 }
 
 zombie_assassin_charge_cleanup() {

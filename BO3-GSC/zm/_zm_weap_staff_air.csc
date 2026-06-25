@@ -72,7 +72,7 @@ function air_staff_launch(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
   }
   dir = self.origin - v_source;
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   v_force = length(dir) * 300;
   launch = (dir[0], dir[1], var_8178243a);
   launch = vectorscale(launch, v_force);

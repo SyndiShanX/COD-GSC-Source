@@ -33,11 +33,11 @@ audio_settings() {
 }
 
 play_fx_onconnect() {
-  var_0 = getent("com_wall_fan_blade_rotate_sb", "targetname");
+  var_0 = getEnt("com_wall_fan_blade_rotate_sb", "targetname");
   var_0 thread spin_objects();
   var_1 = var_0 common_scripts\utility::spawn_tag_origin();
   var_1 show();
-  var_1 moveto(var_1.origin + (0, 0, 70), 0.05);
+  var_1 moveTo(var_1.origin + (0, 0, 70), 0.05);
   common_scripts\utility::waitframe();
   var_1 thread spin_objects();
 
@@ -71,7 +71,7 @@ spin_objects() {
   var_0 = var_0 * var_1;
   var_2 = self.angles;
   var_3 = anglestoright(self.angles) * 100;
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = 20000;
 
   for(;;) {

@@ -21,7 +21,7 @@ function initmoviescreen() {
 
 function setupcurtains() {
   level flag::wait_till("power_on");
-  curtains_clip = getent("theater_curtains_clip", "targetname");
+  curtains_clip = getEnt("theater_curtains_clip", "targetname");
   curtains_clip notsolid();
   curtains_clip connectpaths();
   level zm_theater::function_ce6ee03b();
@@ -32,13 +32,13 @@ function setupcurtains() {
 }
 
 function monitorcurtain(curtorg) {
-  clip = getent(self.target, "targetname");
+  clip = getEnt(self.target, "targetname");
   while(isDefined(clip)) {
     if((abs(curtorg[0] - self.origin[0])) >= 38) {
       clip connectpaths();
       clip notsolid();
       if(isDefined(clip.target)) {
-        clip = getent(clip.target, "targetname");
+        clip = getEnt(clip.target, "targetname");
       } else {
         clip = undefined;
       }
@@ -49,7 +49,7 @@ function monitorcurtain(curtorg) {
 
 function open_left_curtain() {
   level flag::wait_till("power_on");
-  curtain = getent("left_curtain", "targetname");
+  curtain = getEnt("left_curtain", "targetname");
   if(isDefined(curtain)) {
     wait(2);
     curtain_clip = getEntArray("left_curtain_clip", "targetname");
@@ -64,7 +64,7 @@ function open_left_curtain() {
 
 function open_right_curtain() {
   level flag::wait_till("power_on");
-  curtain = getent("right_curtain", "targetname");
+  curtain = getEnt("right_curtain", "targetname");
   if(isDefined(curtain)) {
     wait(2);
     curtain_clip = getEntArray("right_curtain_clip", "targetname");
@@ -130,20 +130,20 @@ function movie_reels() {
     assert(isDefined(self.target), "");
     return;
   }
-  self.reel_model = getent(self.target, "targetname");
+  self.reel_model = getEnt(self.target, "targetname");
   if(!isDefined(self.reel_active)) {
     self.reel_active = 0;
   }
   if(self.reel_active === 0) {
     self.reel_model hide();
-    self setcursorhint("HINT_NOICON");
-    self sethintstring("");
+    self setCursorHint("HINT_NOICON");
+    self setHintString("");
     self triggerenable(0);
     return;
   }
   if(isDefined(self.reel_active) && self.reel_active == 1) {
     self.reel_model setModel("p7_zm_kin_movie_reel_case_vintage_logo");
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
   level flag::wait_till("power_on");
   self waittill("trigger", who);
@@ -166,8 +166,8 @@ function function_63d5f7f2(e_player) {
 
 function movie_projector_reel_change() {
   screen_struct = struct::get("struct_theater_screen", "targetname");
-  projector_trigger = getent("trigger_change_projector_reels", "targetname");
-  projector_trigger setcursorhint("HINT_NOICON");
+  projector_trigger = getEnt("trigger_change_projector_reels", "targetname");
+  projector_trigger setCursorHint("HINT_NOICON");
   if(!isDefined(screen_struct.script_string)) {
     screen_struct.script_string = "ps0";
   }

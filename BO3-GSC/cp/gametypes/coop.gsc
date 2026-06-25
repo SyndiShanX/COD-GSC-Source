@@ -281,7 +281,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       }
       level thread function_5ed5738a(undefined, undefined);
     } else if(level.gameskill >= 2) {
-      playsoundatposition("evt_death_down", (0, 0, 0));
+      playSoundAtPosition("evt_death_down", (0, 0, 0));
       level thread function_5ed5738a(&"GAME_YOU_DIED");
     }
   }

@@ -49,11 +49,11 @@ main() {
 }
 
 scene_test_with_reachs() {
-  getent("mama_bear", "targetname") hide();
-  getent("papa_bear", "targetname") hide();
-  e_stone = getent("electro", "targetname");
+  getEnt("mama_bear", "targetname") hide();
+  getEnt("papa_bear", "targetname") hide();
+  e_stone = getEnt("electro", "targetname");
   e_stone hide();
-  var_28f1732d = getent(e_stone.target, "targetname");
+  var_28f1732d = getEnt(e_stone.target, "targetname");
   var_28f1732d hide();
   level.var_6b37a126 = struct::get(e_stone.script_noteworthy, "targetname");
   level.var_6b37a126.e_stone = e_stone;
@@ -62,7 +62,7 @@ scene_test_with_reachs() {
 
   foreach(e_stone in getEntArray("disco", "targetname")) {
     e_stone hide();
-    var_28f1732d = getent(e_stone.target, "targetname");
+    var_28f1732d = getEnt(e_stone.target, "targetname");
     var_28f1732d hide();
     var_1ca0c514 = struct::get(e_stone.script_noteworthy, "targetname");
     var_1ca0c514.e_stone = e_stone;
@@ -96,17 +96,17 @@ function_d878e1ee(var_a276c861) {
     zm_orange_pablo::function_d83490c5(7);
     level flag::wait_till(#"soapstones_collected");
     level thread function_1c744b3f();
-    e_stone = getent("papa_bear", "targetname");
+    e_stone = getEnt("papa_bear", "targetname");
     e_stone.s_unitrigger = e_stone zm_unitrigger::create("", 96);
     e_stone.is_placed = 0;
     e_stone thread function_9961d00();
     level thread function_557d25c1();
-    e_stone = getent("mama_bear", "targetname");
+    e_stone = getEnt("mama_bear", "targetname");
     e_stone.s_unitrigger = e_stone zm_unitrigger::create("", 96);
     e_stone.is_placed = 0;
     e_stone thread function_9961d00();
     level flag::wait_till(#"soapstone_step_complete");
-    e_fuse = getent("porridge", "targetname");
+    e_fuse = getEnt("porridge", "targetname");
     e_fuse.s_unitrigger = e_fuse zm_unitrigger::create("", 96);
     e_fuse function_afa2f621();
   }
@@ -124,13 +124,13 @@ function_afa2f621() {
 }
 
 function_88a86ef8(n_position) {
-  e_dial = getent("bear_claw", "targetname");
+  e_dial = getEnt("bear_claw", "targetname");
 
   switch (n_position) {
     case 0:
       if(level.s_soapstone.var_d143df71 != 0) {
         s_position = struct::get("bear_digit_0", "targetname");
-        e_dial rotateto(s_position.angles, 1.5, 0.25, 0.25);
+        e_dial rotateTo(s_position.angles, 1.5, 0.25, 0.25);
         level.s_soapstone.var_d143df71 = 0;
       }
 
@@ -138,7 +138,7 @@ function_88a86ef8(n_position) {
     case 1:
       if(level.s_soapstone.var_d143df71 != 1) {
         s_position = struct::get("bear_digit_1", "targetname");
-        e_dial rotateto(s_position.angles, 1.5, 0.25, 0.25);
+        e_dial rotateTo(s_position.angles, 1.5, 0.25, 0.25);
         level.s_soapstone.var_d143df71 = 1;
       }
 
@@ -146,7 +146,7 @@ function_88a86ef8(n_position) {
     case 2:
       if(level.s_soapstone.var_d143df71 != 2) {
         s_position = struct::get("bear_digit_2", "targetname");
-        e_dial rotateto(s_position.angles, 1.5, 0.25, 0.25);
+        e_dial rotateTo(s_position.angles, 1.5, 0.25, 0.25);
         level.s_soapstone.var_d143df71 = 2;
       }
 
@@ -154,7 +154,7 @@ function_88a86ef8(n_position) {
     case 3:
       if(level.s_soapstone.var_d143df71 != 3) {
         s_position = struct::get("bear_digit_3", "targetname");
-        e_dial rotateto(s_position.angles, 1.5, 0.25, 0.25);
+        e_dial rotateTo(s_position.angles, 1.5, 0.25, 0.25);
         level.s_soapstone.var_d143df71 = 3;
       }
 
@@ -162,7 +162,7 @@ function_88a86ef8(n_position) {
     case 4:
       if(level.s_soapstone.var_d143df71 != 4) {
         s_position = struct::get("bear_digit_4", "targetname");
-        e_dial rotateto(s_position.angles, 1.5, 0.25, 0.25);
+        e_dial rotateTo(s_position.angles, 1.5, 0.25, 0.25);
         level.s_soapstone.var_d143df71 = 4;
       }
 
@@ -387,16 +387,16 @@ function_9961d00() {
 function_9ee4c8c3(var_a276c861, var_19e802fa) {
   if(var_a276c861 || var_19e802fa) {
     level flag::set(#"soapstone_step_complete");
-    getent("mama_bear", "targetname") show();
-    getent("papa_bear", "targetname") show();
-    e_stone = getent("electro", "targetname");
+    getEnt("mama_bear", "targetname") show();
+    getEnt("papa_bear", "targetname") show();
+    e_stone = getEnt("electro", "targetname");
     e_stone hide();
-    var_28f1732d = getent(e_stone.target, "targetname");
+    var_28f1732d = getEnt(e_stone.target, "targetname");
     var_28f1732d hide();
 
     foreach(e_stone in getEntArray("disco", "targetname")) {
       e_stone hide();
-      var_28f1732d = getent(e_stone.target, "targetname");
+      var_28f1732d = getEnt(e_stone.target, "targetname");
       var_28f1732d hide();
     }
 

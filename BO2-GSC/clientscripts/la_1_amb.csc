@@ -358,7 +358,7 @@ cougar_rattle_scaling() {
   volumerate = 2;
   player = getlocalplayers()[0];
   rattle_ent = spawn(0, player.origin, "script_origin");
-  rattle_ent linkto(player, "tag_origin");
+  rattle_ent linkTo(player, "tag_origin");
   rattle_id = rattle_ent playLoopSound("veh_cougar_int_rattle");
   setsoundvolume(rattle_id, 0);
 

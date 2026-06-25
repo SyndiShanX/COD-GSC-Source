@@ -23,7 +23,7 @@ vignette_precache() {
 
 cross_lab_scene() {
   delay_vo_until_all_clear(20);
-  var_0 = getent("crossarcher_lab_doors", "targetname");
+  var_0 = getEnt("crossarcher_lab_doors", "targetname");
   thread lab_scene_marker();
   var_1 = spawn("script_model", (-600, -1561, 720));
   var_1 setModel("body_cross_a");
@@ -33,7 +33,7 @@ cross_lab_scene() {
   var_3 = spawn("script_model", var_1 gettagorigin("tag_weapon_right"));
   var_3.angles = var_1 gettagangles("tag_weapon_right");
   var_3 setModel("weapon_mp443");
-  var_3 linkto(var_1, "tag_weapon_right");
+  var_3 linkTo(var_1, "tag_weapon_right");
   thread lab_doors_open();
   var_0 scriptmodelplayanim("alien_armory_doors_roomvignette_init");
   thread handle_vo_foley(var_1, "scn_female_glass_hit", 0.46);
@@ -53,7 +53,7 @@ cross_lab_scene() {
   var_2 scriptmodelplayanim("alien_armory_cross_roomvignette_init");
   thread maps\mp\mp_alien_armory_fx::fx_cross_lab_light_on();
   thread maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
-  var_4 = getent("stop_cross_idle", "targetname");
+  var_4 = getEnt("stop_cross_idle", "targetname");
   var_4 thread cross_nags(var_1);
   wait 12.33;
   thread maps\mp\mp_alien_armory_fx::fx_cross_lab_light_flicker();
@@ -64,7 +64,7 @@ cross_lab_scene() {
   var_7 = spawn("script_model", var_5 gettagorigin("tag_weapon_right"));
   var_7.angles = var_5 gettagangles("tag_weapon_right");
   var_7 setModel("weapon_mp443");
-  var_7 linkto(var_5, "tag_weapon_right");
+  var_7 linkTo(var_5, "tag_weapon_right");
   var_7 thread lab_gunfire();
   thread lab_scene_vo(var_1, var_5);
   thread aliens_lab_scene();
@@ -159,7 +159,7 @@ animate_alien(var_0) {
 
 cross_armory_exit() {
   var_0 = [];
-  var_1 = getent("archer_escape", "targetname");
+  var_1 = getEnt("archer_escape", "targetname");
   var_1 waittill("trigger");
   var_2 = maps\mp\agents\alien\_alien_human::alienhumanspawn((-2903.6, 1437, 663.2), (0, 107.554, 0), "body_cross_a", "head_cross_a");
   var_2 scragentsetscripted(1);
@@ -188,11 +188,11 @@ archer_exfil_sfx_spawn() {
 
 gate_close() {
   wait 12;
-  var_0 = getent("rolling_gate", "targetname");
+  var_0 = getEnt("rolling_gate", "targetname");
 
   if(isDefined(var_0)) {
     var_0 thread archer_exfil_gate_close_sfx_spawn();
-    var_0 moveto((-648, 1956, 592), 2, 0, 1);
+    var_0 moveTo((-648, 1956, 592), 2, 0, 1);
   }
 }
 
@@ -225,12 +225,12 @@ boss_introduction() {
   var_3 = spawn("script_model", var_2 gettagorigin("J_spine4"));
   var_3.angles = var_2 gettagangles("J_spine4");
   var_3 setModel("head_mp_head_a");
-  var_3 linkto(var_2, "J_spine4");
+  var_3 linkTo(var_2, "J_spine4");
   var_4 = spawn("script_model", var_2 gettagorigin("tag_weapon_right"));
   var_4.angles = var_2 gettagangles("tag_weapon_right");
   var_4 setModel("weapon_rm_22");
   var_4 hidepart("tag_barrel_sniper", "weapon_rm_22");
-  var_4 linkto(var_2, "tag_weapon_right");
+  var_4 linkTo(var_2, "tag_weapon_right");
   thread redshirt_vo();
   thread spider_tunnel();
   var_4 thread gunswap();
@@ -329,7 +329,7 @@ first_spider_fence() {
 knockback_players(var_0) {
   foreach(var_2 in level.players) {
     if(distance(var_2.origin, var_0.origin) <= 128) {
-      var_2 setvelocity(vectornormalize(var_2.origin - var_0.origin) * 800);
+      var_2 setvelocity(vectorNormalize(var_2.origin - var_0.origin) * 800);
       var_2 dodamage(var_2.maxhealth / 3, var_0.origin);
     }
   }
@@ -499,7 +499,7 @@ pre_second_boss_vo() {
 }
 
 cross_office_vo() {
-  var_0 = getent("cross_office_VO", "targetname");
+  var_0 = getEnt("cross_office_VO", "targetname");
   var_0 waittill("trigger");
   thread maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
   play_sound_on_player("armory_cross_6_2");
@@ -652,7 +652,7 @@ cross_nags(var_0) {
 }
 
 security_room_vo() {
-  var_0 = getent("security_room_vo_trigger", "targetname");
+  var_0 = getEnt("security_room_vo_trigger", "targetname");
   var_0 waittill("trigger");
   thread maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
   var_1 = spawn("script_origin", (-3354, -6616, 808));
@@ -731,7 +731,7 @@ spawn_model(var_0, var_1, var_2, var_3) {
   var_4 setModel(var_0);
   var_4.origin = var_1 gettagorigin(var_2);
   var_4.angles = var_1 gettagangles(var_2) + var_3;
-  var_4 linkto(var_1, var_2);
+  var_4 linkTo(var_1, var_2);
   return var_4;
 }
 

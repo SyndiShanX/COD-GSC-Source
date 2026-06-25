@@ -308,8 +308,8 @@ function tesla_play_arc_fx(target, waittime) {
   fxorg = spawn("script_model", origin);
   fxorg setModel("tag_origin");
   fx = playFXOnTag(level._effect["prox_grenade_chain_bolt"], fxorg, "tag_origin");
-  playsoundatposition("wpn_tesla_bounce", fxorg.origin);
-  fxorg moveto(target_origin, waittime);
+  playSoundAtPosition("wpn_tesla_bounce", fxorg.origin);
+  fxorg moveTo(target_origin, waittime);
   fxorg waittill("movedone");
   fxorg delete();
 }
@@ -335,9 +335,9 @@ function watchproximitygrenadehitplayer(owner) {
 }
 
 function performhudeffects(position, distancetogrenade) {
-  forwardvec = vectornormalize(anglesToForward(self.angles));
-  rightvec = vectornormalize(anglestoright(self.angles));
-  explosionvec = vectornormalize(position - self.origin);
+  forwardvec = vectorNormalize(anglesToForward(self.angles));
+  rightvec = vectorNormalize(anglestoright(self.angles));
+  explosionvec = vectorNormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
   rdot = vectordot(explosionvec, rightvec);
   fangle = acos(fdot);
@@ -360,7 +360,7 @@ function damageplayerinradius(position, eattacker, killcament) {
     }
     self clientfield::set_to_player("tazered", 1);
   }
-  self playrumbleonentity("proximity_grenade");
+  self playRumbleOnEntity("proximity_grenade");
   self playSound("wpn_taser_mine_zap");
   if(!self hasperk("specialty_proximityprotection")) {
     self thread watch_death();

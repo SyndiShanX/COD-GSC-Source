@@ -100,7 +100,7 @@ function function_fc7d3519() {
       }
 
       e_player function_bc82f900(#"zm_interact_rumble");
-      playsoundatposition(#"zmb_powerup_perk_large_spawn", self.origin);
+      playSoundAtPosition(#"zmb_powerup_perk_large_spawn", self.origin);
       e_player function_123bcbcf();
       e_player function_53a333a8();
       continue;
@@ -108,7 +108,7 @@ function function_fc7d3519() {
 
     if(is_true(e_player.var_4373c66b)) {
       e_player function_bc82f900(#"zm_interact_rumble");
-      playsoundatposition(#"hash_5e201856c21548ae", self.origin);
+      playSoundAtPosition(#"hash_5e201856c21548ae", self.origin);
       e_player.var_4373c66b = undefined;
       e_player notify(#"hash_3cd13a6cb08bba96");
     }
@@ -128,7 +128,7 @@ function function_123bcbcf() {
       }
 
       a_str_rewards = array(#"carpenter", #"double_points", #"extra_life", #"weapon", #"equipment", #"scrap", #"essence");
-      a_players = getplayers();
+      a_players = getPlayers();
 
       if(a_players.size > 1 || is_true(self.var_82464dfe) || self.var_3703202a >= 1 || self zm_laststand::function_618fd37e() >= 1) {
         arrayremovevalue(a_str_rewards, #"extra_life");
@@ -255,7 +255,7 @@ function function_123bcbcf() {
         arrayremovevalue(a_str_rewards, #"free_perk");
       }
 
-      a_players = getplayers();
+      a_players = getPlayers();
 
       if(a_players.size > 1 || is_true(self.var_17d719b9) || self.var_3703202a >= 2 || self zm_laststand::function_618fd37e() >= 1) {
         arrayremovevalue(a_str_rewards, #"extra_life");
@@ -1632,7 +1632,7 @@ function function_c45635c7(mdl_reward, b_rotate, var_b9b24, var_d1bb6924 = 1) {
   wait 2;
 
   while(!is_true(mdl_reward.b_timeout)) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       n_dist_sq = distance2dsquared(player.origin, mdl_reward.origin);
@@ -1742,7 +1742,7 @@ function function_2ae77bb7(var_ff48959, b_enable = 1) {
       function_56ad6a7a(self.var_914576ba);
       objective_setvisibletoplayer(self.var_914576ba, self);
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player != self) {
           zm_utility::function_e8f4d47b(player, self.var_914576ba, 1);
         }
@@ -1807,7 +1807,7 @@ function function_51fd2597(var_b9b24 = 1) {
   self endon(#"death");
   v_center = self getcentroid();
   var_4e7cc086 = util::spawn_model(#"tag_origin", v_center, self.angles);
-  self linkto(var_4e7cc086);
+  self linkTo(var_4e7cc086);
   var_4e7cc086 thread function_57b8a4e9(self);
 
   while(isDefined(self)) {
@@ -1823,13 +1823,13 @@ function function_51fd2597(var_b9b24 = 1) {
 
       yaw = self.angles[1] + yaw;
       new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-      var_4e7cc086 rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+      var_4e7cc086 rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
       wait randomfloat(waittime - 0.1);
       continue;
     }
 
     new_angles = (self.angles[0], self.angles[1] + 45, self.angles[2]);
-    var_4e7cc086 rotateto(new_angles, 2, 2 * 0.05, 2 * 0.05);
+    var_4e7cc086 rotateTo(new_angles, 2, 2 * 0.05, 2 * 0.05);
     wait 2;
   }
 }

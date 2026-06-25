@@ -105,7 +105,7 @@ attach_bombs() {
     self.bomb[i] setModel(level.plane_bomb_model[self.vehicletype]);
     self.bomb[i].dropped = false;
     if(isDefined(bomb_tag[i])) {
-      self.bomb[i] LinkTo(self, bomb_tag[i], (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, bomb_tag[i], (0, 0, -4), (-10, 0, 0));
     }
   }
 }
@@ -174,10 +174,10 @@ bomb_wiggle() {
     time = 0.25 + RandomFloat(0.25);
     time_in_half = time / 3;
     self bomb_pitch(time);
-    self RotateTo((self.pitch, (original_angles[1] + (yaw * -2)), (roll * -2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
+    self rotateTo((self.pitch, (original_angles[1] + (yaw * -2)), (roll * -2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
     self waittill("rotatedone");
     self bomb_pitch(time);
-    self RotateTo((self.pitch, (original_angles[1] + (yaw * 2)), (roll * 2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
+    self rotateTo((self.pitch, (original_angles[1] + (yaw * 2)), (roll * 2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
     self waittill("rotatedone");
   }
 }

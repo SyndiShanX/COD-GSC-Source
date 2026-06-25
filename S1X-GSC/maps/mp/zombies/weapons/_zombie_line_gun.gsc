@@ -95,7 +95,7 @@ firelinegun() {
   var_20 = distance(var_8, var_10);
   var_21 = linegungetprojectileent(var_9, self.angles);
   var_22 = var_20 / level.linegun.movespeed;
-  var_21 moveto(var_10, var_22);
+  var_21 moveTo(var_10, var_22);
   var_23 = -1 * var_4 * level.linegun.hipfireangles[2];
 
   if(var_23 != 0) {

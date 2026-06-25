@@ -263,7 +263,7 @@ anim_first_frame_on_guy(guy, anime, org, angles, animname_override) {
     guy._animname = animname;
     guy AnimCustom(animscripts\first_frame::main);
   } else {
-    guy StopAnimScripted();
+    guy StopanimScripted();
     guy SetAnimKnob(level.scr_anim[animname][anime], 1, 0, 0);
   }
 }
@@ -423,7 +423,7 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
 
       if(doAnimation) {
         guy last_anim_time_check();
-        guy AnimScripted(anim_string, org, angles, level.scr_anim[animname][anime][idleanim]);
+        guy animScripted(anim_string, org, angles, level.scr_anim[animname][anime][idleanim]);
 
         animtime = GetAnimLength(level.scr_anim[animname][anime][idleanim]);
         if(animtime < scriptedAnimationTime) {
@@ -592,7 +592,7 @@ anim_single_internal(guys, anime, tag, anim_end_time, animname_override) {
         animation = level.scr_anim[animname][anime];
         guy SetFlaggedAnim(anim_string, animation, 1, 0.2);
       } else {
-        guy AnimScripted(anim_string, org, angles, level.scr_anim[animname][anime]);
+        guy animScripted(anim_string, org, angles, level.scr_anim[animname][anime]);
       }
 
       animtime = GetAnimLength(level.scr_anim[animname][anime]);
@@ -711,7 +711,7 @@ anim_animationEndNotify(guy, anime, scriptedAnimationTime, anim_end_time) {
   scriptedAnimationTime -= anim_end_time;
   if(anim_end_time > 0 && scriptedAnimationTime > 0) {
     guy waittill_match_or_timeout("single anim", "end", scriptedAnimationTime);
-    guy StopAnimScripted();
+    guy StopanimScripted();
   } else {
     guy waittillmatch("single anim", "end");
   }
@@ -1054,7 +1054,7 @@ gun_leave_behind(guy, scr_notetrack) {
   gun.angles = self GetTagAngles(scr_notetrack["tag"]);
 
   if(link) {
-    gun LinkTo(self, scr_notetrack["tag"], (0, 0, 0), (0, 0, 0));
+    gun linkTo(self, scr_notetrack["tag"], (0, 0, 0), (0, 0, 0));
   } else {
     org = spawn("script_origin", (0, 0, 0));
     org.origin = gun.origin;
@@ -1346,7 +1346,7 @@ anim_link_tag_model(model, tag) {
   org = self GetTagOrigin(tag);
   spawned = spawn("script_model", org);
   spawned setModel(model);
-  spawned LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
+  spawned linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   return spawned;
 }
 

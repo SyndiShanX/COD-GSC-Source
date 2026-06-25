@@ -78,7 +78,7 @@ _id_5A5E() {
   level._id_58D2 maps\_utility::_id_123B();
   level._id_58CB maps\_utility::_id_123B();
   level._id_58BA maps\_utility::_id_123B();
-  level._id_59A0 = common_scripts\utility::getstruct("pres_room_struct", "targetname");
+  level._id_59A0 = common_scripts\utility::getStruct("pres_room_struct", "targetname");
   waittillframeend;
   level._id_58D2 maps\_utility::_id_24F5();
   maps\_audio::aud_send_msg("start_airplane");
@@ -99,8 +99,8 @@ _id_5A5F() {
   thread maps\hijack_code::_id_595F();
   level._id_5A65 common_scripts\utility::trigger_on();
   level._id_5A66 common_scripts\utility::trigger_on();
-  var_0 = common_scripts\utility::getstruct("player_start_debate", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = common_scripts\utility::getStruct("player_start_debate", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   level._id_5A94 = getDvar("bg_viewBobAmplitudeBase");
   level._id_5A95 = getDvar("bg_viewBobAmplitudeStanding");
@@ -145,7 +145,7 @@ _id_5A5F() {
   level._id_58D2 maps\_utility::_id_123B();
   level._id_58CB maps\_utility::_id_123B();
   level._id_58BA maps\_utility::_id_123B();
-  level._id_59A0 = common_scripts\utility::getstruct("pres_room_struct", "targetname");
+  level._id_59A0 = common_scripts\utility::getStruct("pres_room_struct", "targetname");
   maps\_audio::aud_send_msg("debate");
   waittillframeend;
   level._id_58D2 maps\_utility::_id_24F5();
@@ -166,20 +166,20 @@ _id_5A5F() {
 }
 
 _id_5A60() {
-  var_0 = common_scripts\utility::getstruct("player_start_pre_zero_g", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = common_scripts\utility::getStruct("player_start_pre_zero_g", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   maps\_compass::setupminimap("compass_map_hijack_airplane", "airplane_upper_minimap_corner");
   setsaveddvar("compassmaxrange", 1500);
   level._id_58D2 = maps\hijack_code::_id_594A("commander");
   level._id_58BA = maps\hijack_code::_id_594A("president");
   level._id_58C6 = maps\hijack_code::_id_594A("advisor");
-  level._id_59A0 = common_scripts\utility::getstruct("pres_room_struct", "targetname");
+  level._id_59A0 = common_scripts\utility::getStruct("pres_room_struct", "targetname");
   level._id_59A0 thread maps\_anim::_id_124E(level._id_58C6, "debate_cine_advisor_end_loop", "stop_debate_advisor_loop");
   level._id_58CB = maps\hijack_code::_id_594A("hero_agent_01");
   level._id_58CB._id_1032 = "hero_agent";
   waittillframeend;
-  level._id_58C4 = getent("intro_door3", "targetname");
+  level._id_58C4 = getEnt("intro_door3", "targetname");
   level._id_58C4 movey(50, 0.1);
   common_scripts\utility::flag_set("pre_zerog_checkpoint");
   common_scripts\utility::flag_set("player_ahead");
@@ -203,15 +203,15 @@ _id_5A60() {
 }
 
 _id_5A61() {
-  var_0 = common_scripts\utility::getstruct("player_start_lower_level_combat", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = common_scripts\utility::getStruct("player_start_lower_level_combat", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   maps\_compass::setupminimap("compass_map_hijack_airplane", "airplane_upper_minimap_corner");
   setsaveddvar("compassmaxrange", 1500);
   level._id_58D2 = maps\hijack_code::_id_594A("commander");
   level._id_58BA = maps\hijack_code::_id_594A("president");
   level._id_58C6 = maps\hijack_code::_id_594A("advisor");
-  level._id_59A0 = common_scripts\utility::getstruct("pres_room_struct", "targetname");
+  level._id_59A0 = common_scripts\utility::getStruct("pres_room_struct", "targetname");
   level._id_59A0 thread maps\_anim::_id_124E(level._id_58C6, "debate_cine_advisor_end_loop", "stop_debate_advisor_loop");
   level._id_58CB = maps\hijack_code::_id_594A("hero_agent_01");
   level._id_5A87 = maps\hijack_code::_id_594A("zerog_agent_01");
@@ -222,7 +222,7 @@ _id_5A61() {
   level._id_58CB.ignoreme = 0;
   level._id_58CB.ignoreall = 0;
   level.player enableweapons();
-  level._id_58C4 = getent("intro_door3", "targetname");
+  level._id_58C4 = getEnt("intro_door3", "targetname");
   level._id_58C4 movey(50, 0.1);
   level._id_5A87.ignoreme = 1;
   level._id_5A87.ignoreall = 1;
@@ -246,7 +246,7 @@ _id_5A61() {
 _id_5A9B() {
   maps\_audio::aud_send_msg("rumble");
   earthquake(0.12, 4.5, level.player.origin, 80000);
-  level.player playrumbleonentity("hijack_plane_low");
+  level.player playRumbleOnEntity("hijack_plane_low");
 }
 
 _id_5A9C() {
@@ -258,13 +258,13 @@ _id_5A9C() {
   wait 3;
   setsaveddvar("objectiveFadeTooFar", var_0);
   common_scripts\utility::flag_wait("take_position");
-  var_1 = common_scripts\utility::getstruct("take_pos", "targetname");
+  var_1 = common_scripts\utility::getStruct("take_pos", "targetname");
   maps\_utility::_id_2727(maps\_utility::_id_2816("follow_president"));
   objective_add(maps\_utility::_id_2816("take_position"), "current", &"HIJACK_TAKE_POS", var_1.origin);
   common_scripts\utility::flag_wait("in_guard_position");
   maps\_utility::_id_2727(maps\_utility::_id_2816("take_position"));
   common_scripts\utility::flag_wait("move_pres");
-  var_2 = common_scripts\utility::getstruct("obj_pres_move", "targetname");
+  var_2 = common_scripts\utility::getStruct("obj_pres_move", "targetname");
   objective_add(maps\_utility::_id_2816("move_president"), "current", &"HIJACK_MOVE_PRES", var_2.origin);
 }
 
@@ -307,9 +307,9 @@ _id_5119() {
   thread _id_5AA6();
   thread _id_0116();
   thread _id_0117();
-  var_0 = getent("intro_door1", "targetname");
+  var_0 = getEnt("intro_door1", "targetname");
   var_0 movey(50, 0.05);
-  var_1 = getent("block_player_from_daughter", "targetname");
+  var_1 = getEnt("block_player_from_daughter", "targetname");
   var_1 hide();
   var_1 notsolid();
   level._id_58B5 = maps\_vehicle::_id_2881("mig_1a");
@@ -360,8 +360,8 @@ _id_5119() {
   var_0 movey(-50, 1, 0.25, 0.5);
   maps\_audio::aud_send_msg("intro_door1_open");
   common_scripts\utility::flag_set("start_amb_guys");
-  var_4 = getent("block_player_from_daughter_volume", "targetname");
-  var_5 = getent("block_player_from_daughter_2", "targetname");
+  var_4 = getEnt("block_player_from_daughter_volume", "targetname");
+  var_5 = getEnt("block_player_from_daughter_2", "targetname");
 
   if(!level.player istouching(var_4)) {
     var_1 show();
@@ -451,12 +451,12 @@ _id_5AA5() {
 }
 
 _id_5AA6() {
-  var_0 = getent("intro_door0", "targetname");
+  var_0 = getEnt("intro_door0", "targetname");
   var_0 movey(-52, 0.05);
   wait 0.2;
   var_1 = maps\_utility::_id_1287("door");
   level._id_59A0 thread maps\_anim::_id_11CF(var_1, "intro_cine_presdoor_open");
-  var_0 linkto(var_1, "J_prop_1");
+  var_0 linkTo(var_1, "J_prop_1");
   level._id_58CB waittillmatch("single anim", "start_intro");
   level._id_59A0 thread maps\_anim::_id_1246(var_1, "intro_cine_presdoor_open");
   level._id_5AA0 waittillmatch("single anim", "close_door");
@@ -470,8 +470,8 @@ _id_5AA7() {
   var_3 = maps\_utility::_id_2640("ambient_worker3", "script_noteworthy");
   var_4 = maps\_utility::_id_2640("ambient_worker4", "script_noteworthy");
   thread _id_5AA8();
-  var_5 = getent("ambient_worker_clipboard1", "targetname");
-  var_6 = getent("ambient_worker_pencil", "targetname");
+  var_5 = getEnt("ambient_worker_clipboard1", "targetname");
+  var_6 = getEnt("ambient_worker_pencil", "targetname");
   var_7 = maps\_utility::_id_1287("clipboard");
   level._id_59A0 thread maps\_anim::_id_11CF(var_7, "intro_worker_clipboard");
   var_8 = var_7 gettagorigin("J_prop_1");
@@ -482,22 +482,22 @@ _id_5AA7() {
   var_5.angles = var_9;
   var_6.origin = var_10;
   var_6.angles = var_11;
-  var_5 linkto(var_7, "J_prop_1");
-  var_6 linkto(var_7, "J_prop_2");
-  var_12 = getent("ambient_cart", "targetname");
+  var_5 linkTo(var_7, "J_prop_1");
+  var_6 linkTo(var_7, "J_prop_2");
+  var_12 = getEnt("ambient_cart", "targetname");
   var_13 = maps\_utility::_id_1287("food_cart");
   level._id_59A0 thread maps\_anim::_id_11CF(var_13, "intro_storage_cart");
-  var_12 linkto(var_13, "J_prop_1");
+  var_12 linkTo(var_13, "J_prop_1");
   level._id_59A0 thread maps\_anim::_id_11CF(var_1, "intro_worker_checklist");
   level._id_59A0 thread maps\_anim::_id_11CF(var_2, "intro_storage_guy");
   level._id_59A0 thread maps\_anim::_id_11CF(var_3, "intro_kitchenette_guy1");
   level._id_59A0 thread maps\_anim::_id_11CF(var_4, "intro_kitchenette_guy2");
-  var_14 = getent("coffee_stir_stick", "targetname");
+  var_14 = getEnt("coffee_stir_stick", "targetname");
   var_15 = var_3 gettagorigin("tag_weapon_right");
   var_16 = var_3 gettagangles("tag_weapon_right");
   var_14.origin = var_15;
   var_14.angles = var_16;
-  var_14 linkto(var_3, "tag_weapon_right");
+  var_14 linkTo(var_3, "tag_weapon_right");
   common_scripts\utility::flag_wait("start_amb_guys");
   thread _id_5AB1(var_1, "intro_worker_checklist", "intro_worker_checklist_loop", "stop_ambguy_loop");
   thread _id_5AB1(var_7, "intro_worker_clipboard", "intro_worker_clipboard_loop", "stop_ambguy_loop");
@@ -539,9 +539,9 @@ _id_5AA7() {
 }
 
 _id_5AA8() {
-  var_0 = getent("peanuts", "targetname");
-  var_1 = getent("candy1", "targetname");
-  var_2 = getent("candy2", "targetname");
+  var_0 = getEnt("peanuts", "targetname");
+  var_1 = getEnt("candy1", "targetname");
+  var_2 = getEnt("candy2", "targetname");
   var_3 = maps\_utility::_id_1287("food_cart");
   level._id_59A0 thread maps\_anim::_id_11CF(var_3, "intro_storage_peanuts");
   var_4 = maps\_utility::_id_1287("food_cart");
@@ -556,8 +556,8 @@ _id_5AA8() {
   var_0.angles = var_6;
   var_1.origin = var_7;
   var_1.angles = var_8;
-  var_0 linkto(var_3, "J_prop_1");
-  var_1 linkto(var_4, "J_prop_1");
+  var_0 linkTo(var_3, "J_prop_1");
+  var_1 linkTo(var_4, "J_prop_1");
   common_scripts\utility::flag_wait("start_cart_props");
   level._id_59A0 thread maps\_anim::_id_124E(var_3, "intro_storage_peanuts_loop", "stop_ambguy_loop");
   level._id_59A0 thread maps\_anim::_id_124E(var_4, "intro_storage_candy_loop", "stop_ambguy_loop");
@@ -572,12 +572,12 @@ _id_5AA8() {
 
 _id_5AA9(var_0, var_1, var_2, var_3) {
   level._id_59A0 maps\_anim::_id_11CF(var_0, var_1);
-  var_4 = getent("candy2", "targetname");
+  var_4 = getEnt("candy2", "targetname");
   var_5 = var_0 gettagorigin("TAG_WEAPON_CHEST");
   var_6 = var_0 gettagangles("TAG_WEAPON_CHEST");
   var_4.origin = var_5;
   var_4.angles = var_6;
-  var_4 linkto(var_0, "TAG_WEAPON_CHEST");
+  var_4 linkTo(var_0, "TAG_WEAPON_CHEST");
   level._id_59A0 maps\_anim::_id_1246(var_0, var_1);
   common_scripts\utility::flag_set("start_cart_props");
 
@@ -612,8 +612,8 @@ _id_0117() {
 }
 
 _id_5AAB() {
-  var_0 = getent("pres_book", "targetname");
-  var_1 = getent("pres_paper", "targetname");
+  var_0 = getEnt("pres_book", "targetname");
+  var_1 = getEnt("pres_paper", "targetname");
   var_2 = maps\_utility::_id_1287("binder");
   level._id_59A0 thread maps\_anim::_id_11CF(var_2, "intro_cine_pres_binder");
   var_3 = var_2 gettagorigin("J_prop_1");
@@ -624,8 +624,8 @@ _id_5AAB() {
   var_0.angles = var_4;
   var_1.origin = var_5;
   var_1.angles = var_6;
-  var_0 linkto(var_2, "J_prop_1");
-  var_1 linkto(var_2, "J_prop_2");
+  var_0 linkTo(var_2, "J_prop_1");
+  var_1 linkTo(var_2, "J_prop_2");
   level._id_59A0 thread maps\_anim::_id_1246(var_2, "intro_cine_pres_binder");
   maps\_audio::aud_send_msg("pres_drops_paper");
   level._id_58BA waittillmatch("single anim", "drop_folder");
@@ -657,7 +657,7 @@ _id_5AAE(var_0) {
   level._id_58C9.ignoreme = 1;
   level._id_58C9.ignoreall = 1;
   level._id_58C9 maps\_utility::_id_24F5();
-  level._id_5AAF = getent("conf_phone", "targetname");
+  level._id_5AAF = getEnt("conf_phone", "targetname");
   level._id_5AAF._id_1032 = "phone";
   level._id_5AAF maps\_anim::_id_1244();
   thread _id_5ADE();
@@ -670,7 +670,7 @@ _id_5AAE(var_0) {
   level._id_5AB0 = spawn("script_model", var_1);
   level._id_5AB0 setModel("electronics_pda");
   level._id_5AB0.angles = var_2;
-  level._id_5AB0 linkto(level._id_5A96, "tag_inhand");
+  level._id_5AB0 linkTo(level._id_5A96, "tag_inhand");
   thread _id_5AB1(level._id_5A98, "intro_cine_agent", "intro_cine_agent_loop", "stop_intro_loop");
   thread _id_5AB1(level._id_58C9, "intro_cine_agent2", "intro_cine_agent2_loop", "stop_intro_loop");
   thread _id_5AB1(level._id_58C7, "intro_cine_politician1", "intro_cine_politician1_loop", "stop_intro_loop");
@@ -683,7 +683,7 @@ _id_5AAE(var_0) {
   level._id_5A96 thread _id_5ABC("chair4", "intro_chair4");
   level._id_58C7 thread _id_5ABC("chair5", "intro_chair5");
   level._id_5A97 thread _id_5ABC("chair6", "intro_chair6");
-  var_3 = getent("chair8", "targetname");
+  var_3 = getEnt("chair8", "targetname");
   var_3._id_1032 = "conf_chair";
   var_3 maps\_anim::_id_1244();
   level._id_59A0 maps\_anim::_id_11CF(var_3, "debate_chair8");
@@ -706,41 +706,41 @@ _id_5AB2() {
 }
 
 _id_5AB3() {
-  level._id_5AB4 = getent("intro_door1", "targetname");
-  level._id_5AB5 = getent("intro_door1_rig", "targetname");
+  level._id_5AB4 = getEnt("intro_door1", "targetname");
+  level._id_5AB5 = getEnt("intro_door1_rig", "targetname");
   level._id_5AB5._id_1032 = "door";
   level._id_5AB5 maps\_anim::_id_1244();
-  level._id_5AB6 = getent("intro_door2", "targetname");
-  level._id_5AAD = getent("intro_door2_rig", "targetname");
+  level._id_5AB6 = getEnt("intro_door2", "targetname");
+  level._id_5AAD = getEnt("intro_door2_rig", "targetname");
   level._id_5AAD._id_1032 = "door";
   level._id_5AAD maps\_anim::_id_1244();
-  level._id_58C4 = getent("intro_door3", "targetname");
+  level._id_58C4 = getEnt("intro_door3", "targetname");
   level._id_58C4 movey(50, 0.1);
-  level._id_5AB7 = getent("intro_door3_rig", "targetname");
+  level._id_5AB7 = getEnt("intro_door3_rig", "targetname");
   level._id_5AB7._id_1032 = "door";
   level._id_5AB7 maps\_anim::_id_1244();
-  level._id_5AB8 = getent("intro_door4", "targetname");
+  level._id_5AB8 = getEnt("intro_door4", "targetname");
   level._id_5AB8 movey(52, 0.1);
-  level._id_5AB9 = getent("intro_door4_rig", "targetname");
+  level._id_5AB9 = getEnt("intro_door4_rig", "targetname");
   level._id_5AB9._id_1032 = "door";
   level._id_5AB9 maps\_anim::_id_1244();
   wait 0.2;
   level._id_59A0 thread maps\_anim::_id_11CF(level._id_5AAD, "intro_door2_worker_open");
-  level._id_5AB6 linkto(level._id_5AAD, "J_prop_1");
+  level._id_5AB6 linkTo(level._id_5AAD, "J_prop_1");
   level._id_59A0 thread maps\_anim::_id_11CF(level._id_5AB7, "intro_door3_agent_open");
-  level._id_58C4 linkto(level._id_5AB7, "J_prop_1");
+  level._id_58C4 linkTo(level._id_5AB7, "J_prop_1");
   level._id_59A0 thread maps\_anim::_id_11CF(level._id_5AB9, "debate_cine_door4_blown_off");
-  level._id_5AB8 linkto(level._id_5AB9, "J_prop_1");
+  level._id_5AB8 linkTo(level._id_5AB9, "J_prop_1");
 }
 
 _id_5ABA() {
-  var_0 = getent("polit1_pitcher", "script_noteworthy");
-  var_1 = getent("polit1_glass", "script_noteworthy");
+  var_0 = getEnt("polit1_pitcher", "script_noteworthy");
+  var_1 = getEnt("polit1_glass", "script_noteworthy");
   var_2 = maps\_utility::_id_1287("pitcher");
   waittillframeend;
   level._id_59A0 maps\_anim::_id_11CF(var_2, "intro_cine_pitcher");
-  var_0 linkto(var_2, "J_prop_1");
-  var_1 linkto(var_2, "J_prop_2");
+  var_0 linkTo(var_2, "J_prop_1");
+  var_1 linkTo(var_2, "J_prop_2");
   level._id_59A0 maps\_anim::_id_1246(var_2, "intro_cine_pitcher");
 
   if(!common_scripts\utility::flag("in_guard_position")) {
@@ -767,7 +767,7 @@ _id_5ABB() {
 }
 
 _id_5ABC(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2._id_1032 = "conf_chair";
   var_2 maps\_anim::_id_1244();
   level._id_59A0 maps\_anim::_id_11CF(var_2, var_1);
@@ -776,13 +776,13 @@ _id_5ABC(var_0, var_1) {
 }
 
 _id_5ABD() {
-  var_0 = getent("chair_destroy_top", "targetname");
-  var_1 = getent("chair_destroy_base", "targetname");
+  var_0 = getEnt("chair_destroy_top", "targetname");
+  var_1 = getEnt("chair_destroy_base", "targetname");
   var_2 = maps\_utility::_id_1287("destroy_chair");
   waittillframeend;
   level._id_59A0 maps\_anim::_id_11CF(var_2, "debate_cine_end_chair");
-  var_0 linkto(var_2, "J_prop_1");
-  var_1 linkto(var_2, "J_prop_2");
+  var_0 linkTo(var_2, "J_prop_1");
+  var_1 linkTo(var_2, "J_prop_2");
   common_scripts\utility::flag_wait("debate_starting");
   level._id_59A0 maps\_anim::_id_1246(var_2, "debate_cine_end_chair");
   var_0 unlink();
@@ -864,7 +864,7 @@ _id_5AC1() {
 }
 
 _id_5AC3() {
-  var_0 = getent("hijack_screams", "targetname");
+  var_0 = getEnt("hijack_screams", "targetname");
   wait 0.75;
   var_0 playSound("hijack_fem1_scream", "done1");
   var_0 waittill("done1");
@@ -906,7 +906,7 @@ _id_5AC7() {
 }
 
 _id_5AC8() {
-  var_0 = getent("door_breach", "targetname");
+  var_0 = getEnt("door_breach", "targetname");
   var_0 playSound("hijack_hj1_placecharge", "done1");
   var_0 waittill("done1");
   wait 0.2;
@@ -917,7 +917,7 @@ _id_5AC8() {
 _id_5AC9() {
   maps\_audio::aud_send_msg("rumble");
   earthquake(0.22, 4.5, level.player.origin, 80000);
-  level.player playrumbleonentity("hijack_plane_medium");
+  level.player playRumbleOnEntity("hijack_plane_medium");
   thread _id_5AD0();
   maps\_audio::aud_send_msg("seatbeltsign");
   maps\_audio::aud_send_msg("rumble_foley");
@@ -968,7 +968,7 @@ _id_5ACA() {
   var_1.angles = (0, 0, 0);
   level.player playersetgroundreferenceent(var_1);
   var_0 maps\_anim::_id_11CF(var_0, "debate_cine_lurchcam");
-  var_1 linkto(var_0, "J_prop_1");
+  var_1 linkTo(var_0, "J_prop_1");
   var_0 maps\_anim::_id_1246(var_0, "debate_cine_lurchcam");
   level.player playersetgroundreferenceent(level._id_5960);
   thread maps\hijack_code::_id_595F();
@@ -977,20 +977,20 @@ _id_5ACA() {
 }
 
 _id_5ACB() {
-  var_0 = getent("debate_laptop", "targetname");
+  var_0 = getEnt("debate_laptop", "targetname");
   var_0 delete();
   level._id_5A67 show();
   level._id_5A67._id_1032 = "debate_laptop";
   level._id_5A67 maps\_anim::_id_1244();
   level._id_59A0 thread maps\_anim::_id_1246(level._id_5A67, "debate_laptop_lurch");
   level._id_59A0 thread maps\_anim::_id_1246(level._id_5AAF, "debate_phone1_lurch");
-  var_1 = getent("conf_phone2", "targetname");
+  var_1 = getEnt("conf_phone2", "targetname");
   var_1._id_1032 = "phone";
   var_1 maps\_anim::_id_1244();
   level._id_59A0 thread maps\_anim::_id_1246(var_1, "debate_phone2_lurch");
-  var_2 = getent("conf_room_tablet1", "targetname");
-  var_3 = getent("conf_room_tablet2", "targetname");
-  var_4 = getent("conf_room_closed_laptop", "targetname");
+  var_2 = getEnt("conf_room_tablet1", "targetname");
+  var_3 = getEnt("conf_room_tablet2", "targetname");
+  var_4 = getEnt("conf_room_closed_laptop", "targetname");
   var_5 = maps\_utility::_id_1287("debate_prop");
   level._id_59A0 thread maps\_anim::_id_11CF(var_5, "debate_props_frnt_lurch");
   var_6 = maps\_utility::_id_1287("debate_prop");
@@ -1007,9 +1007,9 @@ _id_5ACB() {
   var_2.angles = var_10;
   var_3.origin = var_11;
   var_3.angles = var_12;
-  var_4 linkto(var_5, "J_prop_1");
-  var_2 linkto(var_5, "J_prop_2");
-  var_3 linkto(var_6, "J_prop_1");
+  var_4 linkTo(var_5, "J_prop_1");
+  var_2 linkTo(var_5, "J_prop_2");
+  var_3 linkTo(var_6, "J_prop_1");
   level._id_59A0 thread maps\_anim::_id_1246(var_5, "debate_props_frnt_lurch");
   level._id_59A0 thread maps\_anim::_id_1246(var_6, "debate_props_bck_lurch");
 }
@@ -1018,7 +1018,7 @@ _id_5ACC() {
   level endon("conf_explosion");
   wait 7.5;
   level._id_5AC2 = spawn("script_origin", level.player.origin);
-  level._id_5AC2 linkto(level.player);
+  level._id_5AC2 linkTo(level.player);
   level._id_5AC2._id_1046 = 1;
   maps\hijack_code::_id_5956("hijack_fso1_needbackup", level._id_5AC2);
   wait 0.7;
@@ -1033,7 +1033,7 @@ _id_5ACD() {
   var_0 = maps\_utility::_id_1287("conf_roller", self.origin);
   var_0.angles = (0, 0, 0);
   var_0 maps\_anim::_id_11CF(var_0, "debate_cine_lurchcam");
-  self linkto(var_0, "J_prop_1");
+  self linkTo(var_0, "J_prop_1");
   var_0 maps\_anim::_id_1246(var_0, "debate_cine_lurchcam");
   self unlink();
   var_0 delete();
@@ -1073,7 +1073,7 @@ _id_5ACE() {
 }
 
 _id_5ACF() {
-  var_0 = getent("conf_picture", "targetname");
+  var_0 = getEnt("conf_picture", "targetname");
   var_0 maps\_utility::_id_27ED();
   var_1 = var_0._id_1DC9;
   var_2 = 110;
@@ -1093,10 +1093,10 @@ _id_5ACF() {
 }
 
 _id_5AD0() {
-  var_0 = getent("conf_room_spot1", "targetname");
-  var_1 = getent("conf_room_spot2", "targetname");
-  var_2 = getent("conf_light1_on", "script_noteworthy");
-  var_3 = getent("conf_light1_off", "script_noteworthy");
+  var_0 = getEnt("conf_room_spot1", "targetname");
+  var_1 = getEnt("conf_room_spot2", "targetname");
+  var_2 = getEnt("conf_light1_on", "script_noteworthy");
+  var_3 = getEnt("conf_light1_off", "script_noteworthy");
 
   for(var_4 = 0; var_4 < 10; var_4++) {
     var_0 setlightintensity(0);
@@ -1119,11 +1119,11 @@ _id_5AD0() {
 _id_5AD1() {
   thread _id_5AD6();
   common_scripts\utility::flag_set("door_breach");
-  var_0 = getent("tv_destructor", "targetname");
-  var_1 = getent("tv_destructor2", "targetname");
+  var_0 = getEnt("tv_destructor", "targetname");
+  var_1 = getEnt("tv_destructor2", "targetname");
   magicbullet("ak74u", var_0.origin, var_1.origin);
   earthquake(0.3, 5.0, level.player.origin, 6000);
-  var_2 = getent("door_breach", "targetname");
+  var_2 = getEnt("door_breach", "targetname");
   level.player playFX(common_scripts\utility::getfx("conference_room_breach"), var_2.origin, anglesToForward((0, 0, 0)));
   level._id_5AB8 delete();
   var_3 = common_scripts\utility::getStructArray("breach_physics", "targetname");
@@ -1177,8 +1177,8 @@ _id_5AD1() {
   var_9 maps\_utility::_id_104A("fnfiveseven", "primary");
   var_9 maps\_shg_common::_id_16B4(var_9.primaryweapon);
   common_scripts\utility::flag_wait("kill_hijacker3");
-  var_12 = getent("door_breach", "targetname");
-  var_13 = common_scripts\utility::getstruct("bullet_behind", "targetname");
+  var_12 = getEnt("door_breach", "targetname");
+  var_13 = common_scripts\utility::getStruct("bullet_behind", "targetname");
 
   if(isalive(var_11)) {
     if(maps\_utility::_id_1FBD(var_12.origin)) {
@@ -1248,7 +1248,7 @@ _id_5AD5() {
 _id_5AD6() {
   common_scripts\utility::flag_clear("player_away_from_door");
   wait 0.05;
-  var_0 = common_scripts\utility::getstruct("player_slide_location", "targetname");
+  var_0 = common_scripts\utility::getStruct("player_slide_location", "targetname");
   var_0.origin = (var_0.origin[0], var_0.origin[1], level.player.origin[2]);
   level.player setstance("stand");
   level.player allowcrouch(0);
@@ -1258,7 +1258,7 @@ _id_5AD6() {
   level.player freezecontrols(1);
   var_1 = maps\_utility::_id_1287("player_rig", level.player.origin);
   var_1.angles = level.player.angles;
-  level.player playerlinkto(var_1, "tag_player", 1, 0, 0, 0, 0, 1);
+  level.player playerlinkTo(var_1, "tag_player", 1, 0, 0, 0, 0, 1);
   var_1 thread maps\_anim::_id_1246(var_1, "debate_react_player");
   wait 0.05;
 
@@ -1266,8 +1266,8 @@ _id_5AD6() {
     var_2 = common_scripts\utility::spawn_tag_origin();
     var_2.origin = var_1.origin;
     var_2.angles = var_1.angles;
-    var_1 linkto(var_2);
-    var_2 moveto((-28436, 12728, level.player.origin[2]), 0.25, 0, 0.1);
+    var_1 linkTo(var_2);
+    var_2 moveTo((-28436, 12728, level.player.origin[2]), 0.25, 0, 0.1);
   }
 
   var_1 waittillmatch("single anim", "end");
@@ -1451,7 +1451,7 @@ _id_5AE3() {
   level._id_58D2._id_48BC = 1;
 
   if(!common_scripts\utility::flag("hero_agent_stumble")) {
-    var_2 = common_scripts\utility::getstruct("all_plane_origin", "targetname");
+    var_2 = common_scripts\utility::getStruct("all_plane_origin", "targetname");
     var_2 maps\_anim::_id_124A(level._id_58D2, "hero_stumble");
   }
 
@@ -1462,7 +1462,7 @@ _id_5AE3() {
   level._id_58D2.turnrate = 0.3;
   level._id_59A0 notify("stop_corner_loop");
   waittillframeend;
-  var_2 = common_scripts\utility::getstruct("all_plane_origin", "targetname");
+  var_2 = common_scripts\utility::getStruct("all_plane_origin", "targetname");
   var_2 maps\_anim::_id_124A(level._id_58D2, "hero_stumble");
   level._id_58D2.goalradius = 16;
   var_3 = getnode("commander_zerog", "targetname");
@@ -1510,11 +1510,11 @@ _id_5AE7() {
   level.player playersetgroundreferenceent(var_0);
   thread maps\hijack_code::_id_4B52(var_0);
   level._id_5A99 maps\_anim::_id_11CF(level._id_5A99, "hallway_lurchcam");
-  var_0 linkto(level._id_5A99, "J_prop_1");
+  var_0 linkTo(level._id_5A99, "J_prop_1");
 
   if(!common_scripts\utility::flag("pre_zerog_checkpoint")) {
     maps\_audio::aud_send_msg("hallway_lurch", 1);
-    level.player playrumbleonentity("hijack_plane_medium");
+    level.player playRumbleOnEntity("hijack_plane_medium");
     level._id_5A99 thread maps\_anim::_id_1246(level._id_5A99, "hallway_lurchcam");
     level._id_5A99 waittillmatch("single anim", "corpse_slump");
     thread _id_5AE9();
@@ -1538,7 +1538,7 @@ _id_5AE8() {
   var_0 = maps\_utility::_id_1287("upperhall_roller", self.origin);
   var_0.angles = (0, 0, 0);
   var_0 maps\_anim::_id_11CF(var_0, "hallway_godraycam");
-  self linkto(var_0, "J_prop_1");
+  self linkTo(var_0, "J_prop_1");
   var_0 thread maps\_anim::_id_1246(var_0, "hallway_godraycam");
   var_0 waittillmatch("single anim", "roll_right");
   common_scripts\utility::flag_set("hallsun_right");
@@ -1580,8 +1580,8 @@ _id_5AEA() {
 }
 
 _id_5AEB() {
-  var_0 = common_scripts\utility::getstruct("all_plane_origin", "targetname");
-  var_1 = getent("hallway_floor_painting", "targetname");
+  var_0 = common_scripts\utility::getStruct("all_plane_origin", "targetname");
+  var_1 = getEnt("hallway_floor_painting", "targetname");
   var_2 = maps\_utility::_id_1287("upperhall_cabinet");
   waittillframeend;
   var_0 thread maps\_anim::_id_11CF(var_2, "hallway_picture_fall");
@@ -1592,7 +1592,7 @@ _id_5AEB() {
   var_4 = (var_5, var_6, var_4[2]);
   var_1.origin = var_3;
   var_1.angles = var_4;
-  var_1 linkto(var_2, "J_prop_2");
+  var_1 linkTo(var_2, "J_prop_2");
   common_scripts\utility::flag_wait_any("player_ahead", "cmdr_stumbling");
 
   if(!common_scripts\utility::flag("pre_zerog_checkpoint")) {
@@ -1605,13 +1605,13 @@ _id_5AEB() {
 }
 
 _id_5AEC() {
-  var_0 = common_scripts\utility::getstruct("all_plane_origin", "targetname");
-  var_1 = getent("hallway_cabinet_door", "targetname");
+  var_0 = common_scripts\utility::getStruct("all_plane_origin", "targetname");
+  var_1 = getEnt("hallway_cabinet_door", "targetname");
   var_2 = maps\_utility::_id_1287("upperhall_cabinet", var_1.origin);
   var_2.angles = (0, 0, 0);
   waittillframeend;
   var_0 thread maps\_anim::_id_11CF(var_2, "hallway_cabinet_open");
-  var_1 linkto(var_2, "J_prop_1");
+  var_1 linkTo(var_2, "J_prop_1");
 
   if(!common_scripts\utility::flag("pre_zerog_checkpoint")) {
     var_0 maps\_anim::_id_1246(var_2, "hallway_cabinet_open");
@@ -1665,7 +1665,7 @@ _id_5AEE() {
 }
 
 _id_5AEF(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("all_plane_origin", "targetname");
+  var_2 = common_scripts\utility::getStruct("all_plane_origin", "targetname");
   self.allowdeath = 1;
   self._id_1032 = "generic";
   self.health = 1;
@@ -1710,7 +1710,7 @@ _id_5AF0() {
   level._id_5A9A.ignoresuppression = 1;
   var_5 = getnode("agent3_prezero_cover", "targetname");
   level._id_5A9A setgoalnode(var_5);
-  var_6 = getent("pre_zerog_spawn", "targetname");
+  var_6 = getEnt("pre_zerog_spawn", "targetname");
   var_6 useby(level.player);
   common_scripts\utility::flag_wait("cansee_zerog_room");
   thread maps\_utility::_id_2738();
@@ -1733,7 +1733,7 @@ _id_5AF2() {
 }
 
 _id_5AF3() {
-  level._id_5AF4 = common_scripts\utility::getstruct("all_plane_origin", "targetname");
+  level._id_5AF4 = common_scripts\utility::getStruct("all_plane_origin", "targetname");
   common_scripts\utility::flag_wait("zero_g_trig");
   var_0 = randomfloatrange(0.25, 0.75);
   wait(var_0);
@@ -2016,7 +2016,7 @@ _id_5AFB(var_0, var_1, var_2, var_3) {
   } else {
     self forceteleport(var_4.origin, var_4.angles + (0, -90, 0));
   }
-  self linkto(var_4, "J_prop_1");
+  self linkTo(var_4, "J_prop_1");
   level._id_5AF4 thread maps\_anim::_id_1246(var_4, var_1);
   self animcustom(::_id_5B00);
   self._id_0D45 = ::_id_5B01;
@@ -2128,23 +2128,23 @@ _id_5B02(var_0) {
 
 _id_5B03() {
   thread _id_5B04();
-  var_0 = getent("luggage01", "script_noteworthy");
-  var_1 = getent("luggage02", "script_noteworthy");
-  var_2 = getent("luggage03", "script_noteworthy");
-  var_3 = getent("luggage04", "script_noteworthy");
-  var_4 = getent("luggage05", "script_noteworthy");
-  var_5 = getent("luggage06", "script_noteworthy");
-  var_6 = getent("luggage07", "script_noteworthy");
-  var_7 = getent("luggage08", "script_noteworthy");
-  var_8 = getent("zerog_box01", "script_noteworthy");
-  var_9 = getent("zerog_box02", "script_noteworthy");
-  var_10 = getent("overhead_door_r", "targetname");
-  var_11 = getent("overhead_door_l_1", "targetname");
-  var_12 = getent("overhead_door_l_2", "targetname");
-  var_13 = getent("foodcart", "targetname");
-  var_14 = getent("zerog_laptop", "targetname");
-  var_15 = getent("air_mask_module_r", "targetname");
-  var_16 = getent("air_mask_module_l", "targetname");
+  var_0 = getEnt("luggage01", "script_noteworthy");
+  var_1 = getEnt("luggage02", "script_noteworthy");
+  var_2 = getEnt("luggage03", "script_noteworthy");
+  var_3 = getEnt("luggage04", "script_noteworthy");
+  var_4 = getEnt("luggage05", "script_noteworthy");
+  var_5 = getEnt("luggage06", "script_noteworthy");
+  var_6 = getEnt("luggage07", "script_noteworthy");
+  var_7 = getEnt("luggage08", "script_noteworthy");
+  var_8 = getEnt("zerog_box01", "script_noteworthy");
+  var_9 = getEnt("zerog_box02", "script_noteworthy");
+  var_10 = getEnt("overhead_door_r", "targetname");
+  var_11 = getEnt("overhead_door_l_1", "targetname");
+  var_12 = getEnt("overhead_door_l_2", "targetname");
+  var_13 = getEnt("foodcart", "targetname");
+  var_14 = getEnt("zerog_laptop", "targetname");
+  var_15 = getEnt("air_mask_module_r", "targetname");
+  var_16 = getEnt("air_mask_module_l", "targetname");
   var_0 thread _id_5B08("zerog_suitcase1");
   var_1 thread _id_5B08("zerog_suitcase2");
   var_2 thread _id_5B08("zerog_suitcase3");
@@ -2165,8 +2165,8 @@ _id_5B03() {
   var_17 maps\_anim::_id_1244();
   waittillframeend;
   level._id_5AF4 thread maps\_anim::_id_11CF(var_17, "zerog_overhead_door_l");
-  var_11 linkto(var_17, "J_prop_1");
-  var_12 linkto(var_17, "J_prop_2");
+  var_11 linkTo(var_17, "J_prop_1");
+  var_12 linkTo(var_17, "J_prop_2");
   common_scripts\utility::flag_wait("zero_g_trig");
   level._id_5AF4 thread maps\_anim::_id_1246(var_17, "zerog_overhead_door_l");
   common_scripts\utility::flag_wait("plane_third_hit");
@@ -2179,11 +2179,11 @@ _id_5B03() {
 #using_animtree("animated_props");
 
 _id_5B04() {
-  level._id_5B05 = common_scripts\utility::getstruct("extra_door_left", "targetname");
-  level._id_5B06 = common_scripts\utility::getstruct("extra_door_right", "targetname");
-  var_0 = getent("overhead_door_r_2", "targetname");
-  var_1 = getent("overhead_door_l_3", "targetname");
-  var_2 = getent("zerog_box03", "script_noteworthy");
+  level._id_5B05 = common_scripts\utility::getStruct("extra_door_left", "targetname");
+  level._id_5B06 = common_scripts\utility::getStruct("extra_door_right", "targetname");
+  var_0 = getEnt("overhead_door_r_2", "targetname");
+  var_1 = getEnt("overhead_door_l_3", "targetname");
+  var_2 = getEnt("zerog_box03", "script_noteworthy");
   var_2 setCanDamage(1);
   var_3 = maps\_utility::_id_1287("zerog_prop");
   var_3 setModel("generic_prop_raven");
@@ -2197,11 +2197,11 @@ _id_5B04() {
   var_5 maps\_anim::_id_1244();
   waittillframeend;
   level._id_5B05 thread maps\_anim::_id_11CF(var_4, "zerog_overhead_door_l");
-  var_1 linkto(var_4, "J_prop_2");
+  var_1 linkTo(var_4, "J_prop_2");
   level._id_5B05 thread maps\_anim::_id_11CF(var_3, "zerog_rectanglebox");
-  var_2 linkto(var_3, "J_prop_1");
+  var_2 linkTo(var_3, "J_prop_1");
   level._id_5B06 thread maps\_anim::_id_11CF(var_5, "zerog_overhead_door_r");
-  var_0 linkto(var_5, "J_prop_1");
+  var_0 linkTo(var_5, "J_prop_1");
   common_scripts\utility::flag_wait("zero_g_trig");
   wait 1.75;
   level._id_5B05 thread maps\_anim::_id_1246(var_4, "zerog_overhead_door_l");
@@ -2251,7 +2251,7 @@ _id_5B08(var_0) {
   var_1 maps\_anim::_id_1244();
   waittillframeend;
   level._id_5AF4 thread maps\_anim::_id_11CF(var_1, var_0);
-  self linkto(var_1, "J_prop_1");
+  self linkTo(var_1, "J_prop_1");
   common_scripts\utility::flag_wait("zero_g_trig");
   level._id_5AF4 maps\_anim::_id_1246(var_1, var_0);
   waittillframeend;
@@ -2266,11 +2266,11 @@ _id_5B09(var_0) {
   var_1 maps\_anim::_id_1244();
   waittillframeend;
   level._id_5AF4 thread maps\_anim::_id_11CF(var_1, var_0);
-  self linkto(var_1, "J_prop_1");
+  self linkTo(var_1, "J_prop_1");
   common_scripts\utility::flag_wait("zero_g_trig");
   level._id_5AF4 thread maps\_anim::_id_1246(var_1, var_0);
   self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8);
-  var_1 stopanimscripted();
+  var_1 stopanimScripted();
   self unlink();
   self physicslaunchclient(var_5, var_4);
   var_1 delete();
@@ -2290,7 +2290,7 @@ _id_5B0B(var_0) {
   var_1 maps\_anim::_id_1244();
   waittillframeend;
   level._id_5AF4 thread maps\_anim::_id_11CF(var_1, var_0);
-  self linkto(var_1, "J_prop_1");
+  self linkTo(var_1, "J_prop_1");
   common_scripts\utility::flag_wait("zero_g_trig");
   level._id_5AF4 maps\_anim::_id_1246(var_1, var_0);
 }
@@ -2314,7 +2314,7 @@ _id_5B0D() {
 }
 
 _id_5B0E(var_0) {
-  level.player playrumbleonentity("hijack_plane_large");
+  level.player playRumbleOnEntity("hijack_plane_large");
   level.player disableweapons();
   earthquake(0.15, 0.6, level.player.origin, 6000);
   level.player shellshock("hijack_minor", 1.5);
@@ -2466,14 +2466,14 @@ _id_5B18() {
     level._id_5A9A setgoalnode(var_0);
   }
 
-  var_3 = common_scripts\utility::getstruct("all_plane_origin", "targetname");
-  level._id_5B19 = getent("fire_extinguisher", "targetname");
+  var_3 = common_scripts\utility::getStruct("all_plane_origin", "targetname");
+  level._id_5B19 = getEnt("fire_extinguisher", "targetname");
   var_4 = maps\_utility::_id_1287("zerog_prop");
   var_4 setModel("generic_prop_raven");
   var_4 maps\_anim::_id_1244();
   waittillframeend;
   var_3 thread maps\_anim::_id_11CF(var_4, "fire_extinguisher_enter");
-  level._id_5B19 linkto(var_4, "J_prop_1");
+  level._id_5B19 linkTo(var_4, "J_prop_1");
   var_3 thread maps\_anim::_id_1246(var_4, "fire_extinguisher_enter");
   var_3 maps\_anim::_id_1246(level._id_5A87, "cockpit_door_bash_enter");
 
@@ -2600,7 +2600,7 @@ _id_5B20() {
   thread maps\_anim::_id_124E(self, "phone_swaying", "stop_phones");
   common_scripts\utility::flag_wait("stop_phones");
   self notify("stop_phones");
-  self stopanimscripted();
+  self stopanimScripted();
   self delete();
 }
 
@@ -2712,7 +2712,7 @@ _id_5B26() {
 }
 
 _id_5B27() {
-  var_0 = getent("dining_room_covering_trig", "targetname");
+  var_0 = getEnt("dining_room_covering_trig", "targetname");
   var_1 = getEntArray("terrorist", "script_noteworthy");
   var_2 = -1;
 
@@ -2779,7 +2779,7 @@ _id_5B2A() {
 _id_5B2B() {
   level endon("exited_dining_room");
   level._id_5AC2 = spawn("script_origin", level.player.origin);
-  level._id_5AC2 linkto(level.player);
+  level._id_5AC2 linkTo(level.player);
   level._id_5AC2._id_1046 = 1;
   maps\hijack_code::_id_5956("hijack_fso1_sitrep", level._id_5AC2);
   wait 0.3;
@@ -2824,10 +2824,10 @@ _id_5B2E() {
 }
 
 _id_5B2F() {
-  var_0 = common_scripts\utility::getstruct("bottom_of_stairs", "targetname");
+  var_0 = common_scripts\utility::getStruct("bottom_of_stairs", "targetname");
   objective_add(maps\_utility::_id_2816("secure_daughter"), "current", &"HIJACK_OBJ_DAUGHTER", var_0.origin);
   common_scripts\utility::flag_wait("player_reached_bottom_of_stairs");
-  var_1 = common_scripts\utility::getstruct("daughter_lower_level", "targetname");
+  var_1 = common_scripts\utility::getStruct("daughter_lower_level", "targetname");
   objective_position(maps\_utility::_id_2816("secure_daughter"), var_1.origin);
   common_scripts\utility::flag_wait("agent_reached_comm_room");
   maps\_utility::_id_2727(maps\_utility::_id_2816("secure_daughter"));
@@ -2908,7 +2908,7 @@ _id_5B35() {
   level._id_5B36.health = 50;
   level._id_5B36._id_5B32 = 1;
   level._id_5B36 visiblesolid();
-  var_1 = common_scripts\utility::getstruct("dining_room_anim_start", "targetname");
+  var_1 = common_scripts\utility::getStruct("dining_room_anim_start", "targetname");
   var_1.angles = (0, 0, 0);
   var_1 thread maps\_anim::_id_1246(var_0, "hijack_diningroom_bar_terrorist");
   var_1 thread maps\_anim::_id_1246(level._id_5B36, "hijack_diningroom_door_terrorist");
@@ -2918,7 +2918,7 @@ _id_5B35() {
   maps\_audio::aud_send_msg("jet_roll_v01");
   maps\_audio::aud_send_msg("turbine_wind_a");
   earthquake(0.3, 5.5, level.player.origin, 80000);
-  level.player playrumbleonentity("hijack_plane_large");
+  level.player playRumbleOnEntity("hijack_plane_large");
   thread _id_5B39();
   level._id_27A4 = 1;
   var_2 = (7, 90, 0);
@@ -2949,7 +2949,7 @@ _id_5B35() {
   common_scripts\utility::flag_set("stop_constant_shake");
   maps\_audio::aud_send_msg("rumble_boom");
   earthquake(0.33, 2.0, level.player.origin, 80000);
-  level.player playrumbleonentity("hijack_plane_medium");
+  level.player playRumbleOnEntity("hijack_plane_medium");
   wait 2.0;
   common_scripts\utility::flag_clear("stop_constant_shake");
   thread _id_5AED();
@@ -2957,7 +2957,7 @@ _id_5B35() {
   common_scripts\utility::flag_set("stop_constant_shake");
   maps\_audio::aud_send_msg("rumble_boom");
   earthquake(0.3, 4.5, level.player.origin, 80000);
-  level.player playrumbleonentity("hijack_plane_large");
+  level.player playRumbleOnEntity("hijack_plane_large");
   maps\_audio::aud_send_msg("jet_roll_v02");
   maps\_audio::aud_send_msg("turbine_wind_b");
   thread _id_5B3A();
@@ -3015,7 +3015,7 @@ _id_5B39() {
   var_1.angles = (0, 0, 0);
   level.player playersetgroundreferenceent(var_1);
   var_0 maps\_anim::_id_11CF(var_0, "hallway_lurchcam");
-  var_1 linkto(var_0, "J_prop_1");
+  var_1 linkTo(var_0, "J_prop_1");
   var_0 thread maps\_anim::_id_1246(var_0, "hallway_lurchcam");
   var_0 waittillmatch("single anim", "corpse_slump");
   thread _id_5AE9();
@@ -3034,7 +3034,7 @@ _id_5B3A() {
   var_1.angles = (0, 0, 0);
   level.player playersetgroundreferenceent(var_1);
   var_0 maps\_anim::_id_11CF(var_0, "hallway_lurchcam");
-  var_1 linkto(var_0, "J_prop_1");
+  var_1 linkTo(var_0, "J_prop_1");
   var_0 maps\_anim::_id_1246(var_0, "hallway_lurchcam");
   var_0 maps\_anim::_id_124E(var_0, "hallway_lurchcam_loop", "stop_hallway_shake");
 
@@ -3042,7 +3042,7 @@ _id_5B3A() {
     maps\_audio::aud_send_msg("rumble_boom");
 
     if(var_2) {
-      level.player playrumbleonentity("hijack_plane_medium");
+      level.player playRumbleOnEntity("hijack_plane_medium");
     }
   }
 
@@ -3051,41 +3051,41 @@ _id_5B3A() {
 }
 
 _id_5B3B() {
-  var_0 = getent("cargo_door01", "targetname");
-  var_0 rotateyaw(75, 0.05);
-  var_1 = getent("cargo_door02", "targetname");
-  var_1 rotateyaw(-60, 0.05);
-  var_2 = getent("cargo_door03", "targetname");
-  var_2 rotateyaw(60, 0.05);
-  var_3 = getent("cargo_door04", "targetname");
-  var_3 rotateyaw(15, 0.05);
-  var_4 = getent("cargo_door05", "targetname");
-  var_4 rotateyaw(-45, 0.05);
-  var_5 = getent("cargo_door06", "targetname");
-  var_5 rotateyaw(-52, 0.05);
+  var_0 = getEnt("cargo_door01", "targetname");
+  var_0 rotateYaw(75, 0.05);
+  var_1 = getEnt("cargo_door02", "targetname");
+  var_1 rotateYaw(-60, 0.05);
+  var_2 = getEnt("cargo_door03", "targetname");
+  var_2 rotateYaw(60, 0.05);
+  var_3 = getEnt("cargo_door04", "targetname");
+  var_3 rotateYaw(15, 0.05);
+  var_4 = getEnt("cargo_door05", "targetname");
+  var_4 rotateYaw(-45, 0.05);
+  var_5 = getEnt("cargo_door06", "targetname");
+  var_5 rotateYaw(-52, 0.05);
 }
 
 _id_5B3C() {
-  level._id_5A16 = common_scripts\utility::getstruct("cargo_room_anim_struct", "targetname");
-  var_0 = getent("cargo_strap1", "targetname");
-  var_1 = getent("cargo_strap2", "targetname");
-  var_2 = getent("cargo_door01", "targetname");
-  var_3 = getent("cargo_door02", "targetname");
-  var_4 = getent("cargo_door03", "targetname");
-  var_5 = getent("cargo_door04", "targetname");
-  var_6 = getent("cargo_door05", "targetname");
-  var_7 = getent("cargo_door06", "targetname");
-  var_8 = getent("cargo_lg_box_01", "targetname");
-  var_9 = getent("cargo_lg_box_02", "targetname");
-  var_10 = getent("cargo_lg_box_03", "targetname");
-  var_11 = getent("cargo_lg_box_04", "targetname");
-  var_12 = getent("cargo_lg_box_05", "targetname");
-  var_13 = getent("cargo_lg_box_06", "targetname");
-  var_14 = getent("cargo_sm_box_03", "targetname");
-  var_15 = getent("cargo_ladder", "targetname");
-  var_16 = getent("cargo_toolbox", "targetname");
-  var_17 = getent("cargo_propane01", "targetname");
-  var_18 = getent("cargo_propane04", "targetname");
+  level._id_5A16 = common_scripts\utility::getStruct("cargo_room_anim_struct", "targetname");
+  var_0 = getEnt("cargo_strap1", "targetname");
+  var_1 = getEnt("cargo_strap2", "targetname");
+  var_2 = getEnt("cargo_door01", "targetname");
+  var_3 = getEnt("cargo_door02", "targetname");
+  var_4 = getEnt("cargo_door03", "targetname");
+  var_5 = getEnt("cargo_door04", "targetname");
+  var_6 = getEnt("cargo_door05", "targetname");
+  var_7 = getEnt("cargo_door06", "targetname");
+  var_8 = getEnt("cargo_lg_box_01", "targetname");
+  var_9 = getEnt("cargo_lg_box_02", "targetname");
+  var_10 = getEnt("cargo_lg_box_03", "targetname");
+  var_11 = getEnt("cargo_lg_box_04", "targetname");
+  var_12 = getEnt("cargo_lg_box_05", "targetname");
+  var_13 = getEnt("cargo_lg_box_06", "targetname");
+  var_14 = getEnt("cargo_sm_box_03", "targetname");
+  var_15 = getEnt("cargo_ladder", "targetname");
+  var_16 = getEnt("cargo_toolbox", "targetname");
+  var_17 = getEnt("cargo_propane01", "targetname");
+  var_18 = getEnt("cargo_propane04", "targetname");
   var_0 delete();
   var_1 delete();
   var_2 thread _id_5B3D("J_prop_2", "prop_ladder_shift", "prop_ladder_loop", level._id_5A16);
@@ -3111,7 +3111,7 @@ _id_5B3D(var_0, var_1, var_2, var_3) {
   var_4 = maps\_utility::_id_1287("cargo");
   waittillframeend;
   var_3 maps\_anim::_id_11CF(var_4, var_1);
-  self linkto(var_4, var_0);
+  self linkTo(var_4, var_0);
   var_3 maps\_anim::_id_1246(var_4, var_1);
 
   if(isDefined(var_2)) {
@@ -3171,9 +3171,9 @@ _id_5B3F(var_0) {
 
 _id_5B40() {
   common_scripts\utility::flag_wait_any("allow_glass_to_break", "move_president_to_comm_room");
-  var_0 = getent("glass_blocking_clip", "targetname");
-  var_1 = common_scripts\utility::getstruct("center_of_glass_origin_right", "targetname");
-  var_2 = common_scripts\utility::getstruct("center_of_glass_origin_left", "targetname");
+  var_0 = getEnt("glass_blocking_clip", "targetname");
+  var_1 = common_scripts\utility::getStruct("center_of_glass_origin_right", "targetname");
+  var_2 = common_scripts\utility::getStruct("center_of_glass_origin_left", "targetname");
 
   for(var_3 = 0; !var_3 && !common_scripts\utility::flag("move_president_to_comm_room"); var_3 = var_4 || var_5) {
     wait 0.5;
@@ -3229,7 +3229,7 @@ _id_5B41() {
 }
 
 _id_5B42() {
-  var_0 = common_scripts\utility::getstruct("cargo_room_anim_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("cargo_room_anim_struct", "targetname");
   level._id_58D2 maps\_utility::_id_123B();
   level._id_58D2 maps\_utility::_id_104A("ak74u", "primary");
   level._id_58D2._id_1005 = level._id_58D2.weapon;
@@ -3239,7 +3239,7 @@ _id_5B42() {
 }
 
 _id_5B43() {
-  var_0 = common_scripts\utility::getstruct("cargo_room_anim_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("cargo_room_anim_struct", "targetname");
   level._id_58CB maps\_utility::_id_123B();
   level._id_58D2 waittillmatch("single anim", "plane_shifts");
   level._id_58CB maps\_anim::_id_1246(level._id_58CB, "hijack_generic_stumble_stand1");
@@ -3297,7 +3297,7 @@ _id_5B45() {
 }
 
 _id_5B46() {
-  level._id_5A16 = common_scripts\utility::getstruct("cargo_room_anim_struct", "targetname");
+  level._id_5A16 = common_scripts\utility::getStruct("cargo_room_anim_struct", "targetname");
   common_scripts\utility::flag_wait("cargo_room_commander_move");
   level._id_58D2._id_20AF = 1.0;
   level._id_5A16 maps\_anim::_id_124A(level._id_58D2, "find_daughter_enter");

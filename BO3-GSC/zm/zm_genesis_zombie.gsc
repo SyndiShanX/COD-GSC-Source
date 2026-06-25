@@ -50,7 +50,7 @@ function private function_68528574() {
   level.var_a397a77[level.var_a397a77.size] = "prison_island";
   level.var_15ba7eb8 = [];
   foreach(island in level.var_a397a77) {
-    level.var_15ba7eb8[level.var_15ba7eb8.size] = getent(island, "targetname");
+    level.var_15ba7eb8[level.var_15ba7eb8.size] = getEnt(island, "targetname");
   }
 }
 
@@ -259,7 +259,7 @@ function genesis_custom_rise_func(s_spot) {
     str_anim = array::random(var_a1df9af9);
     self show();
   }
-  self animscripted("rise_anim", self.origin, s_spot.angles, str_anim);
+  self animScripted("rise_anim", self.origin, s_spot.angles, str_anim);
 }
 
 function private genesis_closest_player(origin, players) {

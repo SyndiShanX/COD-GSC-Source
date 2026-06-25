@@ -70,17 +70,17 @@ initializeOribtalMode() {
 
       setDvar("missileRemoteSteerPitchRange", "37 88");
 
-      level.left_loop_start = getent("orbital_plane_left_loop_start", "targetname");
-      level.left_big_loop_start = getent("orbital_plane_left_big_loop_start", "targetname");
-      level.right_loop_start = getent("orbital_plane_right_loop_start", "targetname");
-      level.right_big_loop_start = getent("orbital_plane_right_big_loop_start", "targetname");
+      level.left_loop_start = getEnt("orbital_plane_left_loop_start", "targetname");
+      level.left_big_loop_start = getEnt("orbital_plane_left_big_loop_start", "targetname");
+      level.right_loop_start = getEnt("orbital_plane_right_loop_start", "targetname");
+      level.right_big_loop_start = getEnt("orbital_plane_right_big_loop_start", "targetname");
 
-      level.left_pivot = getent("orbital_left_loop_pivot", "targetname");
-      level.left_big_pivot = getent("orbital_left_big_loop_pivot", "targetname");
-      level.right_pivot = getent("orbital_right_loop_pivot", "targetname");
-      level.right_big_pivot = getent("orbital_right_big_loop_pivot", "targetname");
+      level.left_pivot = getEnt("orbital_left_loop_pivot", "targetname");
+      level.left_big_pivot = getEnt("orbital_left_big_loop_pivot", "targetname");
+      level.right_pivot = getEnt("orbital_right_loop_pivot", "targetname");
+      level.right_big_pivot = getEnt("orbital_right_big_loop_pivot", "targetname");
 
-      level.orbital_ships.missileSpawn["target"] = getent("orbitalMissileTarget", "targetname");
+      level.orbital_ships.missileSpawn["target"] = getEnt("orbitalMissileTarget", "targetname");
 
       level.orbital_ships.cameraView["allies"] = spawn("script_model", level.left_loop_start.origin);
       level.orbital_ships.cameraView["allies"] setModel("tag_player");
@@ -119,7 +119,7 @@ initializeOribtalMode() {
 
       setDvar("missileRemoteSteerPitchRange", "47 88");
 
-      height_ent = getent("airstrikeheight", "targetname");
+      height_ent = getEnt("airstrikeheight", "targetname");
       minimap_origins = getEntArray("minimap_corner", "targetname");
 
       if(minimap_origins.size == 2) {
@@ -268,7 +268,7 @@ rotateOrbitalShips() {
   level endon("game_ended");
 
   while(true) {
-    self RotateYaw(3600, 1200);
+    self rotateYaw(3600, 1200);
     wait 1199;
   }
 }
@@ -277,10 +277,10 @@ rotateOrbitalShipPivots() {
   level endon("game_ended");
 
   while(true) {
-    level.left_pivot RotateYaw(-5400, 1200);
-    level.left_big_pivot RotateYaw(-700, 1200);
-    level.right_pivot RotateYaw(5400, 1200);
-    level.right_big_pivot RotateYaw(700, 1200);
+    level.left_pivot rotateYaw(-5400, 1200);
+    level.left_big_pivot rotateYaw(-700, 1200);
+    level.right_pivot rotateYaw(5400, 1200);
+    level.right_big_pivot rotateYaw(700, 1200);
 
     wait 1199;
   }
@@ -516,7 +516,7 @@ playerInOrbital() {
           self thread setOrbitalView("off", 0);
 
           self SetPlayerAngles(player_viewangles);
-          self SetOrigin(self.drop_pod.origin);
+          self setOrigin(self.drop_pod.origin);
           self EnableWeapons();
           self playerShow();
           self ShowViewModel();
@@ -560,7 +560,7 @@ linkPlayerPod() {
   self thread setOrbitalView("pod", 0);
 
   self DontInterpolate();
-  self PlayerLinkTo(self.drop_pod.camera, "tag_player", 0);
+  self PlayerlinkTo(self.drop_pod.camera, "tag_player", 0);
 
   self.drop_pod.spawn_fx = SpawnFx(level.drop_pod_effect["player_spawn_from_pod"], self.drop_pod.origin, self.drop_pod.forward);
   TriggerFX(self.drop_pod.spawn_fx);
@@ -600,10 +600,10 @@ linkPlayerOrbitalShip() {
   self DontInterpolate();
   switch (current_level) {
     case "mp_refraction":
-      self PlayerLinkTo(level.orbital_ships.cameraView[self.pers["team"]], "tag_player", 0, 180, 180, -40, 80, false);
+      self PlayerlinkTo(level.orbital_ships.cameraView[self.pers["team"]], "tag_player", 0, 180, 180, -40, 80, false);
       break;
     default:
-      self PlayerLinkTo(level.orbital_ships.cameraView[self.pers["team"]], "tag_player", 1, 90, 90, -50, 80, false);
+      self PlayerlinkTo(level.orbital_ships.cameraView[self.pers["team"]], "tag_player", 1, 90, 90, -50, 80, false);
       break;
   }
 
@@ -765,7 +765,7 @@ _fire(lifeId, player)
   if(player IsLinked()) {
     player Unlink();
     player DontInterpolate();
-    player PlayerLinkTo(rocket);
+    player PlayerlinkTo(rocket);
   }
 
   rocket.owner = player;
@@ -816,8 +816,8 @@ MissileEyes(player, rocket)
   direction = (0, 0, 0);
 
   if(isDefined(rocket)) {
-    player CameraLinkTo(rocket, "tag_origin");
-    player ControlsLinkTo(rocket);
+    player CameralinkTo(rocket, "tag_origin");
+    player ControlslinkTo(rocket);
 
     rocket thread trackRocket(player);
     rocket thread dropPodTrophySystem();
@@ -864,7 +864,7 @@ MissileEyes(player, rocket)
     player.drop_pod thread drop_pod_handleDeath();
     player.drop_pod thread aud_drop_pod_land_success(player);
   } else {
-    player SetOrigin(player.impact_info["rocket_position"]);
+    player setOrigin(player.impact_info["rocket_position"]);
     player thread dropPodBadSpawnDeathFX();
     player maps\mp\gametypes\_damage::addAttacker(player, player, player.rocket.killCamEnt, "orbital_drop_pod_mp", 999999, (0, 0, 0), player.origin, "none", 0, "MOD_EXPLOSIVE");
     player thread unfreezeControlsDelay(freeze_delay);
@@ -1272,7 +1272,7 @@ createKillCamEntity() {
 
   self.killCamEnt = spawn("script_model", self.origin);
   self.killCamEnt SetScriptMoverKillCam("explosive");
-  self.killCamEnt LinkTo(self, "tag_origin", killCamOffset, (0, 0, 0));
+  self.killCamEnt linkTo(self, "tag_origin", killCamOffset, (0, 0, 0));
   self.killCamEnt SetContents(0);
   self.killCamEnt.startTime = getTime();
   self.killCamEnt.isOrbitalCam = true;

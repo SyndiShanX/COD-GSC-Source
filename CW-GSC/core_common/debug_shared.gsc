@@ -115,7 +115,7 @@ function debug_draw_tuning_sphere() {
     n_sphere_radius = getdvarfloat(#"debug_measure_sphere_radius", 0);
 
     while(n_sphere_radius >= 1) {
-      players = getplayers();
+      players = getPlayers();
 
       if(isDefined(players[0])) {
         n_sphere_radius = getdvarfloat(#"debug_measure_sphere_radius", 0);

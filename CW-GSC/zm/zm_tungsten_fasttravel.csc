@@ -18,21 +18,21 @@ function init() {
 
 function function_7d467651(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    function_833e4b72(fieldname, getent(fieldname, "portal_fx_main_street_to_helipads", "targetname"), #"hash_1ba53d51579f933d");
-    function_833e4b72(fieldname, getent(fieldname, "portal_fx_main_street_to_anytown_usa", "targetname"));
-    function_833e4b72(fieldname, getent(fieldname, "portal_fx_anytown_usa_to_main_street", "targetname"));
-    function_833e4b72(fieldname, getent(fieldname, "portal_fx_bunker_to_anytown_usa", "targetname"));
-    function_833e4b72(fieldname, getent(fieldname, "portal_fx_observation_to_bunker", "targetname"));
-    function_833e4b72(fieldname, getent(fieldname, "portal_fx_helipads_to_observation", "targetname"));
+    function_833e4b72(fieldname, getEnt(fieldname, "portal_fx_main_street_to_helipads", "targetname"), #"hash_1ba53d51579f933d");
+    function_833e4b72(fieldname, getEnt(fieldname, "portal_fx_main_street_to_anytown_usa", "targetname"));
+    function_833e4b72(fieldname, getEnt(fieldname, "portal_fx_anytown_usa_to_main_street", "targetname"));
+    function_833e4b72(fieldname, getEnt(fieldname, "portal_fx_bunker_to_anytown_usa", "targetname"));
+    function_833e4b72(fieldname, getEnt(fieldname, "portal_fx_observation_to_bunker", "targetname"));
+    function_833e4b72(fieldname, getEnt(fieldname, "portal_fx_helipads_to_observation", "targetname"));
     return;
   }
 
-  function_60381056(fieldname, getent(fieldname, "portal_fx_main_street_to_helipads", "targetname"));
-  function_60381056(fieldname, getent(fieldname, "portal_fx_main_street_to_anytown_usa", "targetname"));
-  function_60381056(fieldname, getent(fieldname, "portal_fx_anytown_usa_to_main_street", "targetname"));
-  function_60381056(fieldname, getent(fieldname, "portal_fx_bunker_to_anytown_usa", "targetname"));
-  function_60381056(fieldname, getent(fieldname, "portal_fx_observation_to_bunker", "targetname"));
-  function_60381056(fieldname, getent(fieldname, "portal_fx_helipads_to_observation", "targetname"));
+  function_60381056(fieldname, getEnt(fieldname, "portal_fx_main_street_to_helipads", "targetname"));
+  function_60381056(fieldname, getEnt(fieldname, "portal_fx_main_street_to_anytown_usa", "targetname"));
+  function_60381056(fieldname, getEnt(fieldname, "portal_fx_anytown_usa_to_main_street", "targetname"));
+  function_60381056(fieldname, getEnt(fieldname, "portal_fx_bunker_to_anytown_usa", "targetname"));
+  function_60381056(fieldname, getEnt(fieldname, "portal_fx_observation_to_bunker", "targetname"));
+  function_60381056(fieldname, getEnt(fieldname, "portal_fx_helipads_to_observation", "targetname"));
 }
 
 function function_833e4b72(localclientnum, e_portal, str_fx = #"hash_46483584aaecbb44") {
@@ -69,16 +69,16 @@ function function_60381056(localclientnum, e_portal) {
 
 function function_e746b148(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_helipads_to_main_street", "targetname"), #"hash_76dd4f827daef371", 1);
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_main_street_to_helipads", "targetname"), #"hash_5c35207bb157a661");
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_main_street_to_anytown_usa", "targetname"), #"hash_2f9ea46c29003241");
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_anytown_usa_to_main_street", "targetname"), #"hash_5d6f46eb355ec1cb");
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_anytown_usa_to_bunker", "targetname"), #"hash_62e92c3479ce24e2", 1);
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_bunker_to_anytown_usa", "targetname"), #"hash_7689d161576092c2");
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_bunker_to_observation", "targetname"), #"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_under", 0, 1);
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_observation_to_bunker", "targetname"), #"hash_1d67a5d0f60e1ea");
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_observation_to_helipads", "targetname"), #"hash_697445b9607e9d53", 1);
-    function_98acc92b(localclientnum, getent(localclientnum, "portal_fx_helipads_to_observation", "targetname"), #"hash_72d2ae42e9973cad");
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_helipads_to_main_street", "targetname"), #"hash_76dd4f827daef371", 1);
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_main_street_to_helipads", "targetname"), #"hash_5c35207bb157a661");
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_main_street_to_anytown_usa", "targetname"), #"hash_2f9ea46c29003241");
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_anytown_usa_to_main_street", "targetname"), #"hash_5d6f46eb355ec1cb");
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_anytown_usa_to_bunker", "targetname"), #"hash_62e92c3479ce24e2", 1);
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_bunker_to_anytown_usa", "targetname"), #"hash_7689d161576092c2");
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_bunker_to_observation", "targetname"), #"p9_fxp_zm_portal_aether_modular_dest_amerika_to_observation_from_under", 0, 1);
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_observation_to_bunker", "targetname"), #"hash_1d67a5d0f60e1ea");
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_observation_to_helipads", "targetname"), #"hash_697445b9607e9d53", 1);
+    function_98acc92b(localclientnum, getEnt(localclientnum, "portal_fx_helipads_to_observation", "targetname"), #"hash_72d2ae42e9973cad");
     a_portals = getEntArray(localclientnum, "tungsten_teleporter", "targetname");
 
     foreach(portal in a_portals) {
@@ -86,10 +86,10 @@ function function_e746b148(localclientnum, oldval, newval, bnewent, binitialsnap
       portal zm_utility::set_compass_icon(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump);
     }
 
-    portal = getent(localclientnum, "anytown_usa_teleporter", "targetname");
+    portal = getEnt(localclientnum, "anytown_usa_teleporter", "targetname");
     portal function_619a5c20();
     portal thread zm_utility::function_a1290dca(localclientnum, #"hash_48c296f58e75bbc7");
-    portal = getent(localclientnum, "portal_fx_bunker_to_observation", "targetname");
+    portal = getEnt(localclientnum, "portal_fx_bunker_to_observation", "targetname");
     portal.var_cc1c5020 = util::spawn_model(localclientnum, #"p9_zm_gold_teleporter_b", portal.origin - (-29, 0, 65.078), portal.angles);
     portal.var_cc1c5020 hide();
     portal.var_cc1c5020 function_619a5c20();

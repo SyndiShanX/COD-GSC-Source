@@ -42,9 +42,9 @@ function starting(str_skipto) {
   level thread scene::init("scene_kgb_walkup_adler");
   level thread scene::init("scene_kgb_poison_tea");
   level battlechatter::function_2ab9360b(0);
-  level.checkpoint_clip = getent("checkpoint_clip", "targetname");
+  level.checkpoint_clip = getEnt("checkpoint_clip", "targetname");
   level.checkpoint_clip notsolid();
-  level.checkpoint_clip_right = getent("checkpoint_clip_right", "targetname");
+  level.checkpoint_clip_right = getEnt("checkpoint_clip_right", "targetname");
   level.checkpoint_clip_right notsolid();
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
@@ -83,7 +83,7 @@ function function_e526d368() {
   location = struct::get("briefing_entrance", "targetname");
   objectives::function_4eb5c04a("obj_briefing", location.origin, #"hash_396fd012409151c7");
   level.player endon(#"death");
-  briefing_clip = getent("briefing_clip", "targetname");
+  briefing_clip = getEnt("briefing_clip", "targetname");
   briefing_clip notsolid();
   spot = struct::get("briefing_use_prompt", "targetname");
   level scene::init("scene_kgb_briefing");

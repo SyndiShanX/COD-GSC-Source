@@ -240,7 +240,7 @@ function function_7ef5e890() {
       wait(waittime);
       continue;
     }
-    if(self isplayinganimscripted() || (isDefined(self.ignoreme) && self.ignoreme)) {
+    if(self isplayinganimScripted() || (isDefined(self.ignoreme) && self.ignoreme)) {
       function_3d7ae135();
       wait(waittime);
       continue;
@@ -347,7 +347,7 @@ function function_11600557(zombie, player) {
       level.var_8dfe3cfa = 1;
       wait(randomintrange(3, 6));
       level.var_8dfe3cfa = 0;
-      var_d99a3773 = spawnvehicle("spawner_zombietron_parasite_purple_cpzm", teleportorigin, closestplayer.angles, "unreachable_parasite");
+      var_d99a3773 = spawnVehicle("spawner_zombietron_parasite_purple_cpzm", teleportorigin, closestplayer.angles, "unreachable_parasite");
       var_d99a3773.var_2585e9c3 = 1;
       var_d99a3773.health = var_d99a3773.health * 2;
       if(isDefined(var_d99a3773)) {
@@ -977,7 +977,7 @@ function function_8421a595(origin, players) {
     if(level.var_a9e78bf7["maxreachabilitylevel"] && isDefined(player.var_5206d4b9) && player.var_5206d4b9 >= level.var_a9e78bf7["maxreachabilitylevel"]) {
       continue;
     }
-    if(!(isDefined(player.ignoreme) && player.ignoreme) && !player isplayinganimscripted() && !player laststand::player_is_in_laststand() && !player isnotarget()) {
+    if(!(isDefined(player.ignoreme) && player.ignoreme) && !player isplayinganimScripted() && !player laststand::player_is_in_laststand() && !player isnotarget()) {
       validplayers[validplayers.size] = player;
     }
   }
@@ -1066,7 +1066,7 @@ function function_29e1570d() {
 
 function function_5e4284a5() {
   self endon("death");
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     return;
   }
   self.var_506b9d18 = 1;
@@ -1222,7 +1222,7 @@ function zombie_death_event(zombie) {
   if(isactor(zombie)) {
     if(isDefined(zombie.damagemod) && zombie.damagemod == "MOD_CRUSH") {
       if(isDefined(attacker) && isDefined(attacker.archetype) && attacker.archetype == "raps") {
-        launchdir = vectornormalize(zombie.origin - attacker.origin);
+        launchdir = vectorNormalize(zombie.origin - attacker.origin);
         zombie startragdoll();
         zombie launchragdoll((launchdir[0] * 70, launchdir[1] * 70, 70));
       }
@@ -1369,7 +1369,7 @@ function function_254de6e5(startorigin) {
     target = var_36a2aeee;
     target_origin = target.origin + vectorscale((0, 0, 1), 40);
     fxorg clientfield::set("sparky_trail_fx", 1);
-    fxorg moveto(target_origin, 0.1);
+    fxorg moveTo(target_origin, 0.1);
     fxorg util::waittill_any_timeout(3, "movedone");
     if(isDefined(target) && isalive(target)) {
       fxorg clientfield::increment("sparky_attack_fx");

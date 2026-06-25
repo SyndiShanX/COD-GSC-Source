@@ -53,8 +53,8 @@ func_85BE() {
   level.var_320F = loadfx("vfx/unique/vfx_marker_dom_white");
   level.var_3CDF = 0;
   level.var_7043 = [];
-  level.var_702F = getent("plane_care_package_start", "targetname");
-  level.var_702E = getent("plane_care_package_end", "targetname");
+  level.var_702F = getEnt("plane_care_package_start", "targetname");
+  level.var_702E = getEnt("plane_care_package_end", "targetname");
   level.var_5FEB = (0, 0, 0);
   level.var_80B4 = [];
   level.var_80B5 = [];
@@ -431,11 +431,11 @@ func_3EB7(param_00) {
 func_649F(param_00) {
   level endon("game_ended");
   var_01 = 10;
-  self moveto(level.var_702E.var_0116 + (0, 0, 1500), var_01);
+  self moveTo(level.var_702E.var_0116 + (0, 0, 1500), var_01);
   wait(6.75);
-  self moveto(level.var_702E.var_0116 + (0, 0, 1500), var_01);
+  self moveTo(level.var_702E.var_0116 + (0, 0, 1500), var_01);
   func_7032();
-  self moveto(level.var_702E.var_0116 + (0, 0, 1500), 2);
+  self moveTo(level.var_702E.var_0116 + (0, 0, 1500), 2);
   wait(1);
   func_39CB(param_00, 1);
   wait(1);
@@ -566,9 +566,9 @@ func_64B8() {
   thread func_1FF9();
   for(;;) {
     if(!isDefined(self.var_2D6A) || !self.var_2D6A) {
-      self moveto(self.var_0116 - (0, 0, 35), 0.05);
+      self moveTo(self.var_0116 - (0, 0, 35), 0.05);
     } else {
-      self moveto(self.var_0116 - (0, 0, self.var_3A1C), 0.05);
+      self moveTo(self.var_0116 - (0, 0, self.var_3A1C), 0.05);
     }
 
     wait 0.05;
@@ -760,10 +760,10 @@ func_64B9() {
   self scriptmodelplayanim("mp_hub_airplane");
   for(;;) {
     if(self.var_A995 % 2 == 0) {
-      self moveto(level.var_705E[self.var_A995].var_0116 + self.var_6A15, 7);
+      self moveTo(level.var_705E[self.var_A995].var_0116 + self.var_6A15, 7);
       wait(7);
     } else {
-      self moveto(level.var_705E[self.var_A995].var_0116 + self.var_6A15, 14);
+      self moveTo(level.var_705E[self.var_A995].var_0116 + self.var_6A15, 14);
       wait(14);
     }
 
@@ -810,7 +810,7 @@ func_9BC4(param_00) {
           self.var_4F7D destroy();
         }
 
-        self moveto(self.var_2952.var_0116, 5);
+        self moveTo(self.var_2952.var_0116, 5);
         wait(5);
         func_2F96();
         func_2D47();

@@ -294,7 +294,7 @@ projectile_cam(player) {
   forward = anglesToForward(self.angles);
   cam = spawn("script_model", self.origin + vectorscale((0, 0, 1), 300.0) + forward * -200);
   cam setModel("tag_origin");
-  cam linkto(self);
+  cam linkTo(self);
   player camerasetposition(cam);
   player camerasetlookat(self);
   player cameraactivate(1);

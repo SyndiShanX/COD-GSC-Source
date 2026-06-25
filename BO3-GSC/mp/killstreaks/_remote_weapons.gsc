@@ -43,7 +43,7 @@ function assignremotecontroltrigger(force_new_assignment = 0) {
   }
   if(isDefined(self.remotecontroltrigger)) {
     self.remotecontroltrigger.origin = self.origin;
-    self.remotecontroltrigger linkto(self);
+    self.remotecontroltrigger linkTo(self);
   }
 }
 
@@ -99,11 +99,11 @@ function createremoteweapontrigger() {
     weapon.usetrigger delete();
   }
   weapon.usetrigger = spawn("trigger_radius_use", player.origin, 32, 32);
-  weapon.usetrigger enablelinkto();
-  weapon.usetrigger linkto(player);
+  weapon.usetrigger enablelinkTo();
+  weapon.usetrigger linkTo(player);
   weapon.usetrigger sethintlowpriority(1);
-  weapon.usetrigger setcursorhint("HINT_NOICON");
-  weapon.usetrigger sethintstring(level.remoteweapons[weapon.remotename].hintstring);
+  weapon.usetrigger setCursorHint("HINT_NOICON");
+  weapon.usetrigger setHintString(level.remoteweapons[weapon.remotename].hintstring);
   weapon.usetrigger setteamfortrigger(player.team);
   weapon.usetrigger.team = player.team;
   player clientclaimtrigger(weapon.usetrigger);

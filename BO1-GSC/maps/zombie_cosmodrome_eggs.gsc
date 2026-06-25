@@ -25,18 +25,18 @@ init() {
   flag_init("passkey_confirmed");
   flag_init("weapons_combined");
   level.casimir_lights = [];
-  level.lander_letters["a"] = GetEnt("letter_a", "targetname");
-  level.lander_letters["e"] = GetEnt("letter_e", "targetname");
-  level.lander_letters["h"] = GetEnt("letter_h", "targetname");
-  level.lander_letters["i"] = GetEnt("letter_i", "targetname");
-  level.lander_letters["l"] = GetEnt("letter_l", "targetname");
-  level.lander_letters["m"] = GetEnt("letter_m", "targetname");
-  level.lander_letters["n"] = GetEnt("letter_n", "targetname");
-  level.lander_letters["r"] = GetEnt("letter_r", "targetname");
-  level.lander_letters["s"] = GetEnt("letter_s", "targetname");
-  level.lander_letters["t"] = GetEnt("letter_t", "targetname");
-  level.lander_letters["u"] = GetEnt("letter_u", "targetname");
-  level.lander_letters["y"] = GetEnt("letter_y", "targetname");
+  level.lander_letters["a"] = getEnt("letter_a", "targetname");
+  level.lander_letters["e"] = getEnt("letter_e", "targetname");
+  level.lander_letters["h"] = getEnt("letter_h", "targetname");
+  level.lander_letters["i"] = getEnt("letter_i", "targetname");
+  level.lander_letters["l"] = getEnt("letter_l", "targetname");
+  level.lander_letters["m"] = getEnt("letter_m", "targetname");
+  level.lander_letters["n"] = getEnt("letter_n", "targetname");
+  level.lander_letters["r"] = getEnt("letter_r", "targetname");
+  level.lander_letters["s"] = getEnt("letter_s", "targetname");
+  level.lander_letters["t"] = getEnt("letter_t", "targetname");
+  level.lander_letters["u"] = getEnt("letter_u", "targetname");
+  level.lander_letters["y"] = getEnt("letter_y", "targetname");
   keys = GetArrayKeys(level.lander_letters);
   for(i = 0; i < keys.size; i++) {
     level.lander_letters[keys[i]] Hide();
@@ -48,7 +48,7 @@ init() {
   lander_passkey_event();
   weapon_combo_event();
   level notify("help_found");
-  monitor = GetEnt("casimir_monitor", "targetname");
+  monitor = getEnt("casimir_monitor", "targetname");
   monitor setModel("p_zom_monitor_csm_screen_off");
 }
 play_easter_egg_audio(alias, sound_ent, text) {
@@ -59,7 +59,7 @@ play_easter_egg_audio(alias, sound_ent, text) {
   sound_ent waittill("sounddone");
 }
 activate_casimir_light(num) {
-  spot = GetStruct("casimir_light_" + num, "targetname");
+  spot = getStruct("casimir_light_" + num, "targetname");
   if(isDefined(spot)) {
     light = spawn("script_model", spot.origin);
     light setModel("tag_origin");
@@ -69,8 +69,8 @@ activate_casimir_light(num) {
   }
 }
 teleport_target_event() {
-  teleport_target_start = getstruct("teleport_target_start", "targetname");
-  teleport_target_spark = getstruct("teleport_target_spark", "targetname");
+  teleport_target_start = getStruct("teleport_target_start", "targetname");
+  teleport_target_spark = getStruct("teleport_target_spark", "targetname");
   level.teleport_target = spawn("script_model", teleport_target_start.origin);
   level.teleport_target setModel("p_glo_electrical_transformer");
   level.teleport_target.angles = teleport_target_start.angles;
@@ -99,14 +99,14 @@ teleport_target(grenade, model) {
   level.teleport_target_trigger = undefined;
   wait(1.0);
   time = 3.0;
-  level.teleport_target MoveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
+  level.teleport_target moveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
   wait(time);
-  teleport_target_end = getstruct("teleport_target_end", "targetname");
+  teleport_target_end = getStruct("teleport_target_end", "targetname");
   level.teleport_target Hide();
-  playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
+  playSoundAtPosition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
   wait(0.5);
   level.teleport_target.angles = teleport_target_end.angles;
-  level.teleport_target MoveTo(teleport_target_end.origin, 0.05);
+  level.teleport_target moveTo(teleport_target_end.origin, 0.05);
   level.teleport_target StopLoopSound(1);
   wait(0.5);
   level.teleport_target Show();
@@ -117,8 +117,8 @@ teleport_target(grenade, model) {
   flag_set("target_teleported");
 }
 reroute_power_event() {
-  monitor = GetEnt("casimir_monitor", "targetname");
-  location = GetStruct("casimir_monitor_struct", "targetname");
+  monitor = getEnt("casimir_monitor", "targetname");
+  location = getStruct("casimir_monitor_struct", "targetname");
   monitor playLoopSound("zmb_egg_notifier", 1);
   monitor setModel("p_zom_monitor_csm_screen_on");
   trig = spawn("trigger_radius", location.origin, 0, 32, 60);
@@ -162,7 +162,7 @@ reveal_switch() {
   button playLoopSound("zmb_egg_notifier", 1);
   offset = anglesToForward(self.angles) * 8;
   time = 1;
-  button MoveTo(button.origin + offset, 1);
+  button moveTo(button.origin + offset, 1);
   wait(1);
   if(flag("monkey_round")) {
     trig = spawn("trigger_radius", button.origin, 0, 32, 72);
@@ -171,7 +171,7 @@ reveal_switch() {
     trig delete();
   }
   button StopLoopSound(1);
-  button MoveTo(self.origin, time);
+  button moveTo(self.origin, time);
   wait(time);
   button delete();
 }
@@ -184,7 +184,7 @@ wait_for_sync_use(ss) {
     while(isPlayer(who) && who IsTouching(self)) {
       if(who useButtonPressed()) {
         level notify("sync_button_pressed");
-        playsoundatposition("zmb_push_button", ss.origin);
+        playSoundAtPosition("zmb_push_button", ss.origin);
         ss.pressed = 1;
       }
       wait(.05);
@@ -208,7 +208,7 @@ switch_watcher() {
       if(pressed == 4) {
         flag_set("switches_synced");
         for(i = 0; i < switches.size; i++) {
-          playsoundatposition("zmb_misc_activate", switches[i].origin);
+          playSoundAtPosition("zmb_misc_activate", switches[i].origin);
         }
         return;
       }
@@ -219,7 +219,7 @@ switch_watcher() {
       case 2:
       case 3:
         for(i = 0; i < switches.size; i++) {
-          playsoundatposition("zmb_deny", switches[i].origin);
+          playSoundAtPosition("zmb_deny", switches[i].origin);
         }
         break;
     }
@@ -229,7 +229,7 @@ switch_watcher() {
   }
 }
 pressure_plate_event() {
-  area = GetStruct("pressure_pad", "targetname");
+  area = getStruct("pressure_pad", "targetname");
   trig = spawn("trigger_radius", area.origin, 0, 300, 100);
   trig area_timer(120);
   trig Delete();
@@ -237,7 +237,7 @@ pressure_plate_event() {
   level thread activate_casimir_light(3);
 }
 area_timer(time) {
-  clock_loc = GetStruct("pressure_timer", "targetname");
+  clock_loc = getStruct("pressure_timer", "targetname");
   clock = spawn("script_model", clock_loc.origin);
   clock setModel("p_rus_clock_lrg");
   clock.angles = clock_loc.angles;
@@ -270,7 +270,7 @@ area_timer(time) {
           wait(step);
           time_remaining = time;
           stop_timer = true;
-          timer_hand RotateTo(timer_hand_angles_init, 0.5);
+          timer_hand rotateTo(timer_hand_angles_init, 0.5);
           timer_hand playSound("zmb_deny");
           wait(0.5);
           break;
@@ -336,9 +336,9 @@ lander_passkey_event() {
   level.lander_audio_ent Delete();
 }
 lander_monitor() {
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   level.lander_audio_ent = spawn("script_origin", lander.origin);
-  level.lander_audio_ent LinkTo(lander);
+  level.lander_audio_ent linkTo(lander);
   level.lander_audio_ent playLoopSound("zmb_egg_notifier", 1);
   while(!flag("passkey_confirmed")) {
     level waittill("lander_launched");
@@ -375,7 +375,7 @@ spin_letter() {
   level endon("lander_grounded");
   level endon("letter_acquired");
   while(1) {
-    self RotateYaw(90, 5);
+    self rotateYaw(90, 5);
     wait(5);
   }
 }
@@ -383,7 +383,7 @@ letter_grab(letter, model) {
   level endon("lander_grounded");
   self waittill("trigger");
   flag_set("letter_acquired");
-  playsoundatposition("zmb_powerup_grabbed", model.origin);
+  playSoundAtPosition("zmb_powerup_grabbed", model.origin);
   model Hide();
   if(letter == level.passkey[level.passkey_progress]) {
     level.passkey_progress++;
@@ -408,7 +408,7 @@ letter_grab(letter, model) {
 }
 weapon_combo_event() {
   flag_init("thundergun_hit");
-  weapon_combo_spot = GetStruct("weapon_combo_spot", "targetname");
+  weapon_combo_spot = getStruct("weapon_combo_spot", "targetname");
   focal_point = spawn("script_model", weapon_combo_spot.origin);
   focal_point setModel("tag_origin");
   focal_point playLoopSound("zmb_egg_notifier", 1);
@@ -434,7 +434,7 @@ bhb_combo_loc_check(grenade, model, info) {
 wait_for_combo(trig) {
   self endon("death");
   self thread kill_trig_on_death(trig);
-  weapon_combo_spot = GetStruct("weapon_combo_spot", "targetname");
+  weapon_combo_spot = getStruct("weapon_combo_spot", "targetname");
   ray_gun_hit = false;
   doll_hit = false;
   crossbow_hit = false;
@@ -466,7 +466,7 @@ thundergun_check(model, trig, weapon_combo_spot) {
     self waittill("weapon_fired");
     if(self GetCurrentWeapon() == "thundergun_upgraded_zm") {
       if(DistanceSquared(self.origin, weapon_combo_spot.origin) < 90000) {
-        vector_to_spot = VectorNormalize(weapon_combo_spot.origin - self GetWeaponMuzzlePoint());
+        vector_to_spot = vectorNormalize(weapon_combo_spot.origin - self GetWeaponMuzzlePoint());
         vector_player_facing = self GetWeaponForwardDir();
         angle_diff = acos(VectorDot(vector_to_spot, vector_player_facing));
         if(angle_diff <= 10) {
@@ -504,7 +504,7 @@ soul_release(model, origin) {
 }
 wait_for_gersh_vox() {
   wait(12.5);
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread reward_wait();
   }
@@ -529,9 +529,9 @@ play_egg_vox(ann_alias, gersh_alias, plr_num) {
   }
 }
 samantha_is_angry() {
-  playsoundatposition("zmb_samantha_earthquake", (0, 0, 0));
-  playsoundatposition("zmb_samantha_whispers", (0, 0, 0));
+  playSoundAtPosition("zmb_samantha_earthquake", (0, 0, 0));
+  playSoundAtPosition("zmb_samantha_whispers", (0, 0, 0));
   wait(6);
   level clientnotify("sia");
-  playsoundatposition("zmb_samantha_scream", (0, 0, 0));
+  playSoundAtPosition("zmb_samantha_scream", (0, 0, 0));
 }

@@ -25,7 +25,7 @@ __init__() {
 on_begin() {
   level.var_b31000be = 600;
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player thread function_8bb2443b();
   }
 }

@@ -64,7 +64,7 @@ init_local() {
 
   for(i = 0; i < triple25_gunner_spawner.size; i++) {
     self.triple25_gunner[self.triple25_gunner.size] = triple25_gunner_spawner[i] spawn_gunner();
-    self.triple25_gunner[i] linkto(self, "tag_driver" + (i + 1), (0, 0, 0), (0, 0, 0));
+    self.triple25_gunner[i] linkTo(self, "tag_driver" + (i + 1), (0, 0, 0), (0, 0, 0));
     self.triple25_gunner[i].position = i;
 
     self.triple25_gunner[i] thread monitor_gunner(self, triple25_dismount_trig);
@@ -287,7 +287,7 @@ triple25_shoot(targetent) {
   self thread death_monitor("death");
   self thread death_monitor("crew dead");
 
-  self setturrettargetent(targetent);
+  self setturrettargetEnt(targetent);
 
   wait 2;
 

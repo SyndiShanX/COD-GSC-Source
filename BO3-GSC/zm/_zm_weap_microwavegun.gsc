@@ -183,7 +183,7 @@ function microwavegun_get_enemies_in_range(upgraded, microwaveable_objects) {
       zombies[i] microwavegun_debug_print("range", (1, 0, 0));
       return;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(0 > dot) {
       zombies[i] microwavegun_debug_print("dot", (1, 0, 0));
@@ -201,9 +201,9 @@ function microwavegun_get_enemies_in_range(upgraded, microwaveable_objects) {
     if(isai(zombies[i])) {
       level.microwavegun_sizzle_enemies[level.microwavegun_sizzle_enemies.size] = zombies[i];
       dist_mult = (sizzle_range_squared - test_range_squared) / sizzle_range_squared;
-      sizzle_vec = vectornormalize(test_origin - view_pos);
+      sizzle_vec = vectorNormalize(test_origin - view_pos);
       if(5000 < test_range_squared) {
-        sizzle_vec = sizzle_vec + (vectornormalize(test_origin - radial_origin));
+        sizzle_vec = sizzle_vec + (vectorNormalize(test_origin - radial_origin));
       }
       sizzle_vec = (sizzle_vec[0], sizzle_vec[1], abs(sizzle_vec[2]));
       sizzle_vec = vectorscale(sizzle_vec, 100 + (100 * dist_mult));

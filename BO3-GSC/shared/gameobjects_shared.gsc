@@ -675,7 +675,7 @@ function set_dropped() {
     droporigin = trace["position"] + (0, 0, self.dropoffset);
     if(trace["fraction"] < 1) {
       forward = (cos(tempangle), sin(tempangle), 0);
-      forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
+      forward = vectorNormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
       if(sessionmodeismultiplayergame()) {
         if(isDefined(trace["walkable"])) {
           if(trace["walkable"] == 0) {
@@ -920,7 +920,7 @@ function create_use_object(ownerteam, trigger, visuals, offset, objectivename, a
     useobject.triggertype = "proximity";
   }
   useobject.trigger = trigger;
-  useobject linkto(trigger);
+  useobject linkTo(trigger);
   for(index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
     visuals[index].baseangles = visuals[index].angles;
@@ -1582,9 +1582,9 @@ function use_hold_think(player, disableweaponcyclingduringhold) {
   if(!(isDefined(self.dontlinkplayertotrigger) && self.dontlinkplayertotrigger)) {
     if(!sessionmodeismultiplayergame()) {
       gameobject_link = util::spawn_model("tag_origin", player.origin, player.angles);
-      player playerlinkto(gameobject_link);
+      player playerlinkTo(gameobject_link);
     } else {
-      player playerlinkto(self.trigger);
+      player playerlinkTo(self.trigger);
       player playerlinkedoffsetenable();
     }
   }
@@ -1924,9 +1924,9 @@ function update_world_icon(relativeteam, showicon) {
       }
       if(self.type == "carryObject" || self.type == "packObject") {
         if(isDefined(self.carrier) && !should_ping_object(relativeteam)) {
-          objpoint settargetent(self.carrier);
+          objpoint settargetEnt(self.carrier);
         } else {
-          objpoint cleartargetent();
+          objpoint cleartargetEnt();
         }
       }
       continue;
@@ -1934,7 +1934,7 @@ function update_world_icon(relativeteam, showicon) {
     objpoint fadeovertime(0.05);
     objpoint.alpha = 0;
     objpoint.isshown = 0;
-    objpoint cleartargetent();
+    objpoint cleartargetEnt();
   }
 }
 
@@ -2116,7 +2116,7 @@ function set_team_use_text(relativeteam, text) {
 }
 
 function set_use_hint_text(text) {
-  self.trigger sethintstring(text);
+  self.trigger setHintString(text);
 }
 
 function allow_carry(relativeteam) {

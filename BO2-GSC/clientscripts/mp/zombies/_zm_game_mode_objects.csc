@@ -270,7 +270,7 @@ door_wobble(localclientnumber) {
   og_origin = self.origin;
 
   while(isDefined(self)) {
-    self rotateto(og_angles + (randomfloatrange(-5, 5), randomfloatrange(-5, 5), randomfloatrange(-5, 5)), 5, 1);
+    self rotateTo(og_angles + (randomfloatrange(-5, 5), randomfloatrange(-5, 5), randomfloatrange(-5, 5)), 5, 1);
     wait 5;
   }
 }
@@ -349,15 +349,15 @@ zombie_soul_runner(localclientnum, fx_name, dest) {
   self playLoopSound("zmb_souls_loop", 0.75);
   dist = distance(dest.origin, self.origin);
   time = dist / 700;
-  self moveto(dest.origin, time);
+  self moveTo(dest.origin, time);
   self waittill("movedone");
 
   while(isDefined(dest) && isDefined(dest.target)) {
-    new_dest = getstruct(dest.target, "targetname");
+    new_dest = getStruct(dest.target, "targetname");
     dest = new_dest;
     dist = distance(new_dest.origin, self.origin);
     time = dist / 700;
-    self moveto(new_dest.origin, time);
+    self moveTo(new_dest.origin, time);
     self waittill("movedone");
   }
 
@@ -565,7 +565,7 @@ wobble_game_mode_objects(objects) {
         object.og_ang = object.angles;
       }
 
-      object rotateto(object.og_ang + (randomfloatrange(-5, 5), randomfloatrange(-5, 5), randomfloatrange(-5, 5)), 3);
+      object rotateTo(object.og_ang + (randomfloatrange(-5, 5), randomfloatrange(-5, 5), randomfloatrange(-5, 5)), 3);
     }
 
     wait 3;

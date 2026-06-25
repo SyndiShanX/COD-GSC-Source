@@ -39,7 +39,7 @@ func_1068F() {
 
   scripts\sp\anim::func_1EC3(var_0, self.animation);
   if(self.script_noteworthy == "base_exterior") {
-    var_0 linkto(level.var_CC5B);
+    var_0 linkTo(level.var_CC5B);
     return;
   } else if(self.script_noteworthy == "office_fight") {
     return;
@@ -558,7 +558,7 @@ func_9B77() {
   }
 
   var_0 = anglesToForward(self.angles);
-  var_1 = vectornormalize(level.player.origin - self.origin);
+  var_1 = vectorNormalize(level.player.origin - self.origin);
   var_2 = vectordot(var_0, var_1);
   if(var_2 < 0) {
     return 0;
@@ -573,7 +573,7 @@ func_10FE5(var_0) {
 }
 
 func_10FC2() {
-  scripts\sp\utility::anim_stopanimscripted();
+  scripts\sp\utility::anim_stopanimScripted();
   self notify("new_anim_reach");
   self.objective_playermask_showto = 32;
 }
@@ -736,7 +736,7 @@ func_F5B1(var_0) {
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":
-        level.player setorigin(var_3.origin);
+        level.player setOrigin(var_3.origin);
         level.player setplayerangles(var_3.angles);
         break;
 
@@ -796,10 +796,10 @@ func_5168() {
 }
 
 func_67C4(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = [level.var_B4F1, level.var_EA2C];
   while(isDefined(var_1.target)) {
-    var_3 = getent(var_1.target, "targetname");
+    var_3 = getEnt(var_1.target, "targetname");
     func_13865(var_1, var_3, var_2);
     var_1 scripts\engine\utility::trigger_off();
     var_1 = var_3;
@@ -815,7 +815,7 @@ func_13865(var_0, var_1, var_2) {
   for(;;) {
     foreach(var_4 in var_2) {
       var_5 = anglesToForward(var_4.angles);
-      var_6 = vectornormalize(var_4.origin - level.player.origin);
+      var_6 = vectorNormalize(var_4.origin - level.player.origin);
       var_7 = vectordot(var_5, var_6);
       if(var_7 > 0) {
         var_4.demeanoroverride = "casual_gun";
@@ -848,7 +848,7 @@ func_1F15(var_0, var_1, var_2, var_3, var_4) {
 
 func_9E47(var_0) {
   var_1 = anglesToForward(var_0.angles);
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
   var_3 = vectordot(var_1, var_2);
   if(var_3 <= 0) {
     return 1;
@@ -859,7 +859,7 @@ func_9E47(var_0) {
 
 func_9D64(var_0) {
   var_1 = anglesToForward(var_0.angles);
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
   var_3 = vectordot(var_1, var_2);
   if(var_3 > 0) {
     return 1;
@@ -879,12 +879,12 @@ func_5505() {
 }
 
 func_13815(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
 }
 
 func_13814(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 waittill("trigger");
 }
 
@@ -925,7 +925,7 @@ turretfireenable() {
 }
 
 func_519D(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 delete();
 }
 
@@ -957,7 +957,7 @@ func_67C2() {
 }
 
 func_79CE(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = anglesToForward(var_1);
   var_5 = vectordot(var_4, var_3);
   return var_5;
@@ -1071,19 +1071,19 @@ func_BC50(var_0) {
     }
   }
 
-  var_1 moveto(var_0.origin + var_2, 0.05);
+  var_1 moveTo(var_0.origin + var_2, 0.05);
   if(isDefined(var_0.angles)) {
     var_1.angles = var_0.angles;
   }
 }
 
 func_7988(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   if(isDefined(var_1)) {
     return var_1;
   }
 
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   if(isDefined(var_1)) {
     return var_1;
   }
@@ -1116,7 +1116,7 @@ func_AFF1() {
       break;
     }
 
-    var_0 = scripts\engine\utility::getstruct(self.var_4BF7.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.var_4BF7.target, "targetname");
     self.var_B00A.origin = var_0.origin;
     self waittill("reached_current_node");
   }
@@ -1302,12 +1302,12 @@ func_65D8(var_0, var_1, var_2, var_3, var_4) {
 }
 
 func_16DD(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2 thread[[var_1]]();
 }
 
 func_1368F(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 scripts\sp\utility::func_77E3("axis");
   var_4 = var_3.size;
   while(var_4 > var_1) {
@@ -1468,7 +1468,7 @@ func_E59C(var_0) {
       var_9 = var_9 * -1;
     }
 
-    var_8 rotateyaw(var_9, var_5, var_5 / 2, var_5 / 2);
+    var_8 rotateYaw(var_9, var_5, var_5 / 2, var_5 / 2);
     if(isDefined(var_6) && !var_6) {
       wait(randomfloatrange(0.1, 0.3));
     }
@@ -1482,9 +1482,9 @@ func_E59C(var_0) {
   scripts\sp\anim::func_1F2C(var_2, "robot_locker_on");
   var_3 = anglesToForward(self.angles);
   var_11 = scripts\engine\utility::spawn_tag_origin(var_1.origin);
-  var_1 linkto(var_11);
+  var_1 linkTo(var_11);
   var_12 = var_11.origin + var_3 * 40;
-  var_11 moveto(var_12, 0.2);
+  var_11 moveTo(var_12, 0.2);
   wait(0.2);
   var_1 unlink();
   var_11 delete();
@@ -1545,7 +1545,7 @@ func_E59A() {
         var_11 = var_11 * -1;
       }
 
-      var_10 rotateyaw(var_11, 0.05);
+      var_10 rotateYaw(var_11, 0.05);
     }
   }
 }
@@ -1643,7 +1643,7 @@ func_6473() {
   foreach(var_6, var_4 in var_0) {
     var_5 = spawn("script_model", (0, 0, 0));
     var_5 setModel("tag_origin");
-    var_5 linkto(var_4, "j_Head", (0, 0, 0), anglesToForward(var_4.angles) + (-180, 90, 0), 1);
+    var_5 linkTo(var_4, "j_Head", (0, 0, 0), anglesToForward(var_4.angles) + (-180, 90, 0), 1);
     var_1 = scripts\engine\utility::array_add(var_1, var_5);
     playFXOnTag(level._effect["friendly_flashlight"], var_5, "tag_origin");
     wait(var_2[var_6]);
@@ -1657,7 +1657,7 @@ func_A796() {
   foreach(var_6, var_4 in var_0) {
     var_5 = spawn("script_model", (0, 0, 0));
     var_5 setModel("tag_origin");
-    var_5 linkto(var_4, "j_Head", (0, 0, 0), anglesToForward(var_4.angles) + (-180, 90, 0), 1);
+    var_5 linkTo(var_4, "j_Head", (0, 0, 0), anglesToForward(var_4.angles) + (-180, 90, 0), 1);
     var_1 = scripts\engine\utility::array_add(var_1, var_5);
     playFXOnTag(level._effect["friendly_flashlight"], var_5, "tag_origin");
     wait(var_2[var_6]);
@@ -2314,7 +2314,7 @@ func_6F2E() {
   var_1 = [];
   for(var_2 = self; isDefined(var_2.target); var_2 = var_3) {
     var_1[var_1.size] = var_2;
-    var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_2.getclosestpointonnavmesh3d = 300;
   }
 

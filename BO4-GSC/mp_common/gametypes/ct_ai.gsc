@@ -17,7 +17,7 @@ function_4c8f915a(origin) {
   team = #"axis";
   waittillframeend();
   tankarchetype = #"archetype_mini_quadtank_ct";
-  drone = spawnvehicle(tankarchetype, origin, (0, 0, 0), "talon", undefined, 1);
+  drone = spawnVehicle(tankarchetype, origin, (0, 0, 0), "talon", undefined, 1);
   drone.team = team;
   drone.settings = struct::get_script_bundle("vehiclecustomsettings", drone.scriptbundlesettings);
   drone.isstunned = 0;
@@ -149,7 +149,7 @@ function_1495c8c(v_origin, v_angles, anim_name) {
 
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   if(!isDefined(v_angles)) {
     v_angles = (0, 0, 0);
@@ -159,7 +159,7 @@ function_1495c8c(v_origin, v_angles, anim_name) {
   anim_ang = v_angles;
   anim_org += (0, 0, 0);
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill(#"movedone");
   self unlink();
 
@@ -169,7 +169,7 @@ function_1495c8c(v_origin, v_angles, anim_name) {
 
   self thread hide_pop();
   self orientmode("face default");
-  self animscripted("rise_anim", self.origin, v_angles, anim_name, "normal");
+  self animScripted("rise_anim", self.origin, v_angles, anim_name, "normal");
   self notify(#"rise_anim_finished");
   self.in_the_ground = 0;
 }
@@ -259,7 +259,7 @@ function_9313dd47(s_loc, n_radius) {
     n_dist = distance(s_loc.origin, self.origin);
 
     if(n_dist < n_radius) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       self.var_2925fedc = e_player.origin;
       break;
     }

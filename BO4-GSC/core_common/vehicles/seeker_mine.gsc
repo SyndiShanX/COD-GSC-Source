@@ -65,7 +65,7 @@ function_b23e4b45() {
   self.var_1dab821a = 0;
   self.var_e962dfaf = 0;
   self.delete_on_death = 1;
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self setavoidancemask("avoid none");
   self useanimtree("generic");
   self.ignore_death_jolt = 1;

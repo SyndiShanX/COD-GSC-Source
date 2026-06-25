@@ -172,13 +172,13 @@ func_18FD() {
   level.iconbomb = "waypoint_caster_bomb";
   level.icontarget = "waypoint_caster_target";
   level.icondefuse = "waypoint_caster_defuse";
-  var_00 = getent("sd_bomb_pickup_trig", "targetname");
+  var_00 = getEnt("sd_bomb_pickup_trig", "targetname");
   if(!isDefined(var_00)) {
     common_scripts\utility::func_3809("No sd_bomb_pickup_trig trigger found in map.");
     return;
   }
 
-  var_01[0] = getent("sd_bomb", "targetname");
+  var_01[0] = getEnt("sd_bomb", "targetname");
   if(!isDefined(var_01[0])) {
     common_scripts\utility::func_3809("No sd_bomb script_model found in map.");
     return;
@@ -249,7 +249,7 @@ func_18FD() {
     }
 
     level.var_1913[level.var_1913.size] = var_04;
-    var_04.var_18D5 = getent(var_01[0].var_01A2, "targetname");
+    var_04.var_18D5 = getEnt(var_01[0].var_01A2, "targetname");
     var_04.var_18D5.var_0116 = var_04.var_18D5.var_0116 + (0, 0, -10000);
     var_04.var_18D5.var_00E5 = var_05;
     var_04.var_18D5 usetriggertouchcheckstance(1);
@@ -331,7 +331,7 @@ func_93D6(param_00) {
 func_8A29(param_00) {
   var_01 = spawn("script_origin", self.var_0116);
   var_01.var_001D = self.var_001D;
-  var_01 rotateyaw(-45, 0.05);
+  var_01 rotateYaw(-45, 0.05);
   wait 0.05;
   var_02 = self.var_0116 + (0, 0, 5);
   var_03 = self.var_0116 + anglesToForward(var_01.var_001D) * 100 + (0, 0, 160);
@@ -415,7 +415,7 @@ func_6AFA(param_00, param_01, param_02) {
 func_18FA(param_00) {
   param_00 endon("death");
   param_00 endon("disconnect");
-  param_00 playerlinkto(level.var_8330);
+  param_00 playerlinkTo(level.var_8330);
   while(param_00 getcurrentweapon() == self.var_A248) {
     wait 0.05;
   }

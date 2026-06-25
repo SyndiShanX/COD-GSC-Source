@@ -26,7 +26,7 @@ scale_over_time(start_scale, end_scale, time_s) {
   holo = self;
 
   if(isDefined(self.animname)) {
-    holo = getent(self.animname + "_scalable", "targetname");
+    holo = getEnt(self.animname + "_scalable", "targetname");
   }
 
   if(!isDefined(holo)) {
@@ -96,7 +96,7 @@ get_hologram_scalable_models(scene_name) {
     key = array_keys[i];
     anim_info = anim_info_array[key];
     model_name = anim_info.str_model;
-    scalable_model = getent(key + "_scalable", "targetname");
+    scalable_model = getEnt(key + "_scalable", "targetname");
     scalable_model hide();
     scalable_models[key] = scalable_model;
   }
@@ -181,30 +181,30 @@ scene_pre_models() {
   level thread holo_table_feature_prop("p6_hologram_zhao_bust", "zhao_down", 0.5, undefined, vectorscale((0, 0, -1), 26.0), "zhao");
   level thread holo_table_feature_prop("p6_hologram_zhao_text_01", "zhao_down", 0.5, undefined, vectorscale((0, 0, -1), 30.0), "text1", 0);
   level thread holo_table_feature_prop("p6_hologram_zhao_text_02", "zhao_down", 0.5, undefined, vectorscale((0, 0, -1), 30.0), "text2", 0);
-  zhao = getent("zhao", "targetname");
+  zhao = getEnt("zhao", "targetname");
   zhao clearclientflag(14);
-  text1 = getent("text1", "targetname");
+  text1 = getEnt("text1", "targetname");
   text1 clearclientflag(14);
-  text2 = getent("text2", "targetname");
+  text2 = getEnt("text2", "targetname");
   text2 clearclientflag(14);
   level waittill("globe_up");
   holo_table_exploder_switch(112);
   show_globe(1, 1, 0);
   wait 2.0;
-  sdc = getent("sdc", "script_noteworthy");
-  russia = getent("russia", "script_noteworthy");
+  sdc = getEnt("sdc", "script_noteworthy");
+  russia = getEnt("russia", "script_noteworthy");
   russia show();
   sdc show();
   sdc setclientflag(14);
-  globe = getent("world_globe", "targetname");
-  globe rotateto((0, 210, 30), 1.0, 0.2, 0.2);
+  globe = getEnt("world_globe", "targetname");
+  globe rotateTo((0, 210, 30), 1.0, 0.2, 0.2);
   wait 2.0;
   russia thread holo_table_prop_blink_on();
   level waittill("india_up");
   wait 3.0;
   russia clearclientflag(14);
-  india = getent("india", "script_noteworthy");
-  iran = getent("iran", "script_noteworthy");
+  india = getEnt("india", "script_noteworthy");
+  iran = getEnt("iran", "script_noteworthy");
   india thread holo_table_prop_blink_on();
   iran thread holo_table_prop_blink_on();
   level waittill("globe_down");
@@ -239,14 +239,14 @@ raise_model(done_level_notify, position_ent_name, scale, parent_model, parent_mo
   end_pos = self.origin + vectorscale((0, 0, 1), 32.0);
 
   if(isDefined(position_ent_name)) {
-    position_ent = getent(position_ent_name, "targetname");
+    position_ent = getEnt(position_ent_name, "targetname");
     end_pos = position_ent.origin;
   }
 
   start_pos = self.origin;
   start_orient = self.angles;
   self setclientflag(14);
-  self moveto(end_pos, 1.0, 0.2, 0.2);
+  self moveTo(end_pos, 1.0, 0.2, 0.2);
   self thread rotate_indefinitely();
 
   for(f = 0.0; f <= 1.0; f = f + 0.05) {
@@ -267,8 +267,8 @@ raise_model(done_level_notify, position_ent_name, scale, parent_model, parent_mo
     start_orient = parent_model gettagangles(parent_model_tag);
   }
 
-  self moveto(start_pos, 1.0, 0.2, 0.2);
-  self rotateto(start_orient, 1.0, 0.2, 0.2);
+  self moveTo(start_pos, 1.0, 0.2, 0.2);
+  self rotateTo(start_orient, 1.0, 0.2, 0.2);
 
   for(f = 0.0; f <= 1.0; f = f + 0.05) {
     self setscale(lerpfloat(scale, 1.0, f));
@@ -276,7 +276,7 @@ raise_model(done_level_notify, position_ent_name, scale, parent_model, parent_mo
   }
 
   if(isDefined(parent_model)) {
-    self linkto(parent_model);
+    self linkTo(parent_model);
   }
 
   self clearclientflag(14);
@@ -284,7 +284,7 @@ raise_model(done_level_notify, position_ent_name, scale, parent_model, parent_mo
 
 scene_drone_models() {
   show_holotable_fuzz(1);
-  e_surface = getent("holo_table_surface", "targetname");
+  e_surface = getEnt("holo_table_surface", "targetname");
 
   if(isDefined(level.e_surface_default_origin)) {
     e_surface.origin = level.e_surface_default_origin;
@@ -322,7 +322,7 @@ scene_drone_models() {
     model_list[i] clearclientflag(14);
 
     if(model_list[i] != base) {
-      model_list[i] linkto(base);
+      model_list[i] linkTo(base);
     }
   }
 
@@ -332,7 +332,7 @@ scene_drone_models() {
   holo_table_screen ignorecheapentityflag(1);
   holo_table_screen setclientflag(15);
   level waittill("map_up");
-  base rotateto(base_end_angles, 45.0, 0.0, 0.0);
+  base rotateTo(base_end_angles, 45.0, 0.0, 0.0);
   base play_fx("fx_dockside_base", base.origin, base.angles, "stop_geo_fx", 1, "tag_origin");
   holo_table_exploder_switch(115);
   holo_table_screen clearclientflag(15);
@@ -376,10 +376,10 @@ hologram_start() {
 
 scene_dockside_models() {
   show_holotable_fuzz(0);
-  dockside_base = getent("dockside_base", "targetname");
+  dockside_base = getEnt("dockside_base", "targetname");
   dockside_props = getEntArray("dockside_prop", "script_noteworthy");
-  e_surface = getent("holo_table_surface", "targetname");
-  e_angled = getent("holo_table_surface", "targetname");
+  e_surface = getEnt("holo_table_surface", "targetname");
+  e_angled = getEnt("holo_table_surface", "targetname");
 
   if(isDefined(level.e_surface_default_origin)) {
     e_surface.origin = level.e_surface_default_origin;
@@ -394,7 +394,7 @@ scene_dockside_models() {
 
     if(prop != dockside_base) {
       prop setclientflag(14);
-      prop linkto(dockside_base);
+      prop linkTo(dockside_base);
     }
   }
 
@@ -415,20 +415,20 @@ scene_dockside_models() {
     prop show();
   }
 
-  dockside_base moveto(e_angled.origin, 2.0, 0.5, 0.5);
+  dockside_base moveTo(e_angled.origin, 2.0, 0.5, 0.5);
   wait 1.0;
-  dockside_base rotateto(e_angled.angles, 2.0, 0.5, 0.5);
+  dockside_base rotateTo(e_angled.angles, 2.0, 0.5, 0.5);
   wait 1.0;
   dockside_ship thread holo_table_prop_blink_on(7.0);
   level waittill("missile_up");
-  missile = getent("dockside_missile", "targetname");
+  missile = getEnt("dockside_missile", "targetname");
   level thread holo_table_feature_prop("p6_hologram_missile", "missile_down", 1.0, undefined, vectorscale((0, 0, -1), 10.0));
   level waittill("dfmissile_up");
-  missile = getent("dockside_missile", "targetname");
+  missile = getEnt("dockside_missile", "targetname");
   missile thread raise_model("dfmissile_down", undefined, 4.0);
   level waittill("beams_up");
-  beam1 = getent("dockside_beam1", "targetname");
-  beam2 = getent("dockside_beam2", "targetname");
+  beam1 = getEnt("dockside_beam1", "targetname");
+  beam2 = getEnt("dockside_beam2", "targetname");
   beam1 thread raise_model("beams_down", undefined, 4.0);
   beam2 thread raise_model("beams_down", undefined, 4.0);
   level waittill("beams_down");

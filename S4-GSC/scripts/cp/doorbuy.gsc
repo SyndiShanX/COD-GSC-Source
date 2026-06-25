@@ -85,7 +85,7 @@ doorbuy_init(var_0) {
       if(var_2 _meth_86EE()) {
         var_2 setscriptablepartstate("base", "closed");
       } else if(isDefined(self.target2)) {
-        var_3 = scripts\engine\utility::getstruct(self.target2, "targetname");
+        var_3 = scripts\engine\utility::getStruct(self.target2, "targetname");
         var_2.v_open_pos = var_3.origin;
         var_2.v_open_ang = var_3.angles;
       }
@@ -121,11 +121,11 @@ doorbuy_init(var_0) {
         if(var_2 _meth_86EE()) {
           var_2 setscriptablepartstate("base", "closed");
         } else if(isDefined(var_2.target)) {
-          var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+          var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
           var_2.v_open_pos = var_3.origin;
           var_2.v_open_ang = var_3.angles;
         } else if(isDefined(var_2.target2)) {
-          var_3 = scripts\engine\utility::getstruct(var_2.target2, "targetname");
+          var_3 = scripts\engine\utility::getStruct(var_2.target2, "targetname");
           var_2.v_open_pos = var_3.origin;
           var_2.v_open_ang = var_3.angles;
         }
@@ -270,10 +270,10 @@ open_doorbuy() {
     }
 
     if(isDefined(self.v_open_pos)) {
-      self moveto(self.v_open_pos, var_0);
+      self moveTo(self.v_open_pos, var_0);
 
       if(isDefined(self.v_open_ang)) {
-        self rotateto(self.v_open_ang, var_0);
+        self rotateTo(self.v_open_ang, var_0);
       }
 
       self waittill("movedone");

@@ -258,7 +258,7 @@ thunder() {
 
   var_0 = spawn("script_origin", (0, 0, 0));
   var_0.origin = level.player.origin + (0, 0, 60);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
 
   if(level.rainlevel <= 8) {
     var_0 playSound("elm_thunder_distant", "sounddone");

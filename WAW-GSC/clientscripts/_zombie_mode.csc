@@ -16,7 +16,7 @@ createZombieEyes(localClientNum) {
       fx_eye_glow = spawn(localClientNum, self GetTagOrigin(linkTag), "script_model");
       fx_eye_glow.angles = self GetTagAngles(linkTag);
       fx_eye_glow setModel(fxModel);
-      fx_eye_glow LinkTo(self, linkTag);
+      fx_eye_glow linkTo(self, linkTag);
 
       playFXOnTag(localClientNum, level._effect["eye_glow"], fx_eye_glow, fxTag);
 

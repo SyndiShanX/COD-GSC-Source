@@ -124,7 +124,7 @@ function autocraft_staffs() {
   }
   level flag::wait_till("start_zombie_round_logic");
   keys = getarraykeys(level.cheat_craftables);
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(key in keys) {
     if(issubstr(key, "staff") || issubstr(key, "record")) {
       s_piece = level.cheat_craftables[key];
@@ -155,7 +155,7 @@ function run_craftables_devgui() {
     if(craftable_id != "") {
       piece_spawn = level.cheat_craftables[craftable_id].piecespawn;
       if(isDefined(piece_spawn)) {
-        players = getplayers();
+        players = getPlayers();
         players[0] zm_craftables::player_take_piece(piece_spawn);
       }
       setDvar("", "");
@@ -464,7 +464,7 @@ function tankcraftableupdateprompt(player, sethintstringnow, buildabletrigger) {
     if(isDefined(self)) {
       self.hint_string = "";
       if(isDefined(sethintstringnow) && sethintstringnow && isDefined(buildabletrigger)) {
-        buildabletrigger sethintstring(self.hint_string);
+        buildabletrigger setHintString(self.hint_string);
       }
     }
     return false;
@@ -701,7 +701,7 @@ function function_52fbdde1(player) {
     self.hint_string = &"ZOMBIE_BUILD_PIECE_HAVE_ONE";
     return false;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] hasweapon(var_703e6a13)) {
       self.hint_string = &"DLC5_QUADROTOR_UNAVAILABLE";
@@ -722,7 +722,7 @@ function function_52fbdde1(player) {
 
 function staff_fullycrafted(modelname, elementenum) {
   player = zm_utility::get_closest_player(self.origin);
-  staff_model = getent(modelname, "targetname");
+  staff_model = getEnt(modelname, "targetname");
   staff_info = get_staff_info_from_element_index(elementenum);
   staff_model useweaponmodel(staff_info.w_weapon);
   staff_model showallparts();
@@ -838,7 +838,7 @@ function quadrotor_control_thread() {
       if(level flag::get("ee_maxis_drone_retrieved")) {
         str_vehicle = "heli_quadrotor_upgraded_zm";
       }
-      qr = spawnvehicle(str_vehicle, self.origin + vectorscale((0, 0, 1), 96), self.angles, "quadrotor_ai");
+      qr = spawnVehicle(str_vehicle, self.origin + vectorscale((0, 0, 1), 96), self.angles, "quadrotor_ai");
       level thread quadrotor_death_watcher(qr);
       qr thread quadrotor_instance_watcher(self);
       qr thread zm_tomb_vo::function_a808bc8e();
@@ -1017,7 +1017,7 @@ function setup_quadrotor_purchase(player) {
 }
 
 function players_has_weapon(weaponname) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] hasweapon(weaponname)) {
       return true;
@@ -1078,17 +1078,17 @@ function tomb_check_crafted_weapon_persistence(player) {
       } else {
         self.stub.hint_string = "";
       }
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       player zm_craftables::track_craftables_pickedup(self.stub.craftablespawn);
       str_name = ("craftable_" + self.stub.weaponname.name) + "_zm";
-      model = getent(str_name, "targetname");
+      model = getEnt(str_name, "targetname");
       model ghost();
       self.stub thread track_crafted_staff_trigger();
       self.stub thread track_staff_weapon_respawn(player);
       set_player_staff(self.stub.weaponname, player);
     } else {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
     return true;
   }
@@ -1107,7 +1107,7 @@ function is_unclaimed_staff_weapon(var_382bb75) {
   }
   s_elemental_staff = get_staff_info_from_weapon_name(var_382bb75, 0);
   str_weapon_check = s_elemental_staff.weapname;
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(isDefined(player) && player.sessionstate == "playing" && player zm_weapons::has_weapon_or_upgrade(var_382bb75)) {
       return false;
@@ -1204,7 +1204,7 @@ function track_staff_weapon_respawn(player) {
     has_weapon = 0;
   }
   b_staff_in_use = 0;
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(check_player in a_players) {
     if(check_player.sessionstate == "playing") {
       weapons = check_player getweaponslistprimaries();
@@ -1217,7 +1217,7 @@ function track_staff_weapon_respawn(player) {
   }
   if(!b_staff_in_use) {
     str_name = ("craftable_" + self.base_weaponname) + "_zm";
-    model = getent(str_name, "targetname");
+    model = getEnt(str_name, "targetname");
     model show();
     level flag::set(self.base_weaponname + "_zm_enabled");
   }

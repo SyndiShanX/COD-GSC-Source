@@ -529,7 +529,7 @@ function _gibpiece(localclientnum, entity, gibmodel, gibtag, gibfx, gibdir, gibd
       scale = gibdirscale;
     }
 
-    forwardvector = vectornormalize(endposition - startposition);
+    forwardvector = vectorNormalize(endposition - startposition);
     forwardvector *= scale;
     forwardvector += dir;
   }

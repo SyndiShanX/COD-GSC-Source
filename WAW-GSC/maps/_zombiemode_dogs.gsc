@@ -65,7 +65,7 @@ dog_spawner_init() {
 dog_round_spawning() {
   level endon("intermission");
 
-  level.dog_targets = getplayers();
+  level.dog_targets = getPlayers();
   for(i = 0; i < level.dog_targets.size; i++) {
     level.dog_targets[i].hunted_by = 0;
   }
@@ -181,17 +181,17 @@ dog_round_aftermath() {
 }
 
 dog_spawn_fx(ai) {
-  ent = GetStruct(self.target, "targetname");
+  ent = getStruct(self.target, "targetname");
 
   if(isDefined(ent)) {
     playFX(level._effect["lightning_dog_spawn"], ent.origin);
-    playsoundatposition("pre_spawn", ent.origin);
+    playSoundAtPosition("pre_spawn", ent.origin);
     wait(1.5);
-    playsoundatposition("bolt", ent.origin);
+    playSoundAtPosition("bolt", ent.origin);
 
     Earthquake(0.5, 0.75, ent.origin, 1000);
     PlayRumbleOnPosition("explosion_generic", ent.origin);
-    playsoundatposition("spawn", ent.origin);
+    playSoundAtPosition("spawn", ent.origin);
   }
 
   assertex(isDefined(ai), "Ent isn't defined.");
@@ -239,7 +239,7 @@ dog_spawn_sumpf_logic(dog_array, favorite_enemy) {
   return dog_array[0];
 }
 get_favorite_enemy() {
-  dog_targets = getplayers();
+  dog_targets = getPlayers();
   least_hunted = dog_targets[0];
   for(i = 0; i < dog_targets.size; i++) {
     if(!is_player_valid(dog_targets[i])) {
@@ -261,7 +261,7 @@ get_favorite_enemy() {
 }
 
 dog_health_increase() {
-  players = getplayers();
+  players = getPlayers();
 
   if(level.dog_round_count == 1) {
     level.dog_health = 350;
@@ -336,11 +336,11 @@ play_dog_round() {
 
   wait(1);
 
-  players = getplayers();
+  players = getPlayers();
   variation_count = 5;
 
-  playsoundatposition("ann_vox_dog_left", (8330, 592, -160));
-  playsoundatposition("ann_vox_dog_right", (11793, 1632, -160));
+  playSoundAtPosition("ann_vox_dog_left", (8330, 592, -160));
+  playSoundAtPosition("ann_vox_dog_right", (11793, 1632, -160));
 
   wait(2);
 
@@ -424,7 +424,7 @@ dog_fx_eye_glow() {
 
   self.fx_dog_eye.angles = self GetTagAngles("J_EyeBall_LE");
   self.fx_dog_eye setModel("tag_origin");
-  self.fx_dog_eye LinkTo(self, "J_EyeBall_LE");
+  self.fx_dog_eye linkTo(self, "J_EyeBall_LE");
 }
 
 dog_fx_trail() {
@@ -443,7 +443,7 @@ dog_fx_trail() {
 
   self.fx_dog_trail.angles = self GetTagAngles("tag_origin");
   self.fx_dog_trail setModel("tag_origin");
-  self.fx_dog_trail LinkTo(self, "tag_origin");
+  self.fx_dog_trail linkTo(self, "tag_origin");
 }
 
 dog_death() {

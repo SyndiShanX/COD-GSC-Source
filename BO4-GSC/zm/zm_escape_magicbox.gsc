@@ -45,11 +45,11 @@ custom_joker_movement() {
   mdl_lock setCanDamage(1);
   level.var_c7626f2a[#"box_lock"] = &pebble::function_bdd1bac8;
   level notify(#"hash_219aba01ff2d6de4");
-  playsoundatposition(#"zmb_hellbox_leave_lock", mdl_lock.origin);
+  playSoundAtPosition(#"zmb_hellbox_leave_lock", mdl_lock.origin);
   wait 0.5;
   level notify(#"weapon_fly_away_start");
   wait 1;
-  mdl_lock rotateyaw(3000, 4, 4);
+  mdl_lock rotateYaw(3000, 4, 4);
   wait 3;
   mdl_lock movez(20, 0.5, 0.5);
   mdl_lock waittill(#"movedone");

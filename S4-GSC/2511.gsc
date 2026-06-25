@@ -109,7 +109,7 @@ _id_2C05(var_0, var_1) {
   var_0._id_0481 = "bronco_sfps_mp";
   var_0._id_04DE = "bronco_mp";
   var_0._id_31A0 = 1;
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;

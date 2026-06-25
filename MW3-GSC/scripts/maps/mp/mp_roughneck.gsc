@@ -24,7 +24,7 @@ main() {
   game["attackers"] = "axis";
   game["defenders"] = "allies";
   audio_settings();
-  var_0 = getent("trigger_underwater", "targetname");
+  var_0 = getEnt("trigger_underwater", "targetname");
   var_0 thread watchplayerenterwater();
   level thread clearwatervarsonspawn(var_0);
 }

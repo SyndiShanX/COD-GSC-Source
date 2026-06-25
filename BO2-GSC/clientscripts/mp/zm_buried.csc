@@ -184,7 +184,7 @@ flashlight_toggle(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     if(self isPlayer() && self islocalplayer() && !isdemoplaying() && isDefined(self getlocalclientnumber()) && localclientnum == self getlocalclientnumber()) {
       if(!isDefined(self.sndlightent)) {
         self.sndlightent = spawn(0, self.origin, "script_origin");
-        self.sndlightent linkto(self, "tag_origin");
+        self.sndlightent linkTo(self, "tag_origin");
         self thread snddeletelightent(self.sndlightent);
       }
 

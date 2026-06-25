@@ -69,33 +69,33 @@ main() {
 }
 
 initExtraCollision() {
-  collision1 = GetEnt("player32x32x8", "targetname");
+  collision1 = getEnt("player32x32x8", "targetname");
   collision1Ent = spawn("script_model", (-1646.94, 881.505, -2.82839));
   collision1Ent.angles = (270, 211.182, 123.817);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
 
-  collision4 = GetEnt("clip64x64x128", "targetname");
+  collision4 = getEnt("clip64x64x128", "targetname");
   collision4Ent = spawn("script_model", (245, 2512, -64));
   collision4Ent.angles = (0, 0, 0);
   collision4Ent CloneBrushmodelToScriptmodel(collision4);
 
-  collision5 = GetEnt("clip256x256x128", "targetname");
+  collision5 = getEnt("clip256x256x128", "targetname");
   collision5Ent = spawn("script_model", (-1536, -1312, -136));
   collision5Ent.angles = (0, 0, 0);
   collision5Ent CloneBrushmodelToScriptmodel(collision5);
 
-  collision6 = GetEnt("clip256x256x128", "targetname");
+  collision6 = getEnt("clip256x256x128", "targetname");
   collision6Ent = spawn("script_model", (-1484, -1440, -136));
   collision6Ent.angles = (0, 45, 0);
   collision6Ent CloneBrushmodelToScriptmodel(collision6);
 
   if(is_gen4()) {
-    collision2 = GetEnt("player64x64x128", "targetname");
+    collision2 = getEnt("player64x64x128", "targetname");
     collision2Ent = spawn("script_model", (-1474, 966, -136));
     collision2Ent.angles = (0, 352, 0);
     collision2Ent CloneBrushmodelToScriptmodel(collision2);
 
-    collision3 = GetEnt("clip128x128x8", "targetname");
+    collision3 = getEnt("clip128x128x8", "targetname");
     collision3Ent = spawn("script_model", (1700, 872, -48));
     collision3Ent.angles = (0, 335, 0);
     collision3Ent CloneBrushmodelToScriptmodel(collision3);
@@ -108,12 +108,12 @@ fishing_boat() {
     anim_ref = spawn("script_model", boat.origin);
     anim_ref.angles = (0, 0, 0);
     anim_ref setModel("generic_prop_raven");
-    boat LinkTo(anim_ref, "tag_origin");
+    boat linkTo(anim_ref, "tag_origin");
     anim_ref ScriptModelPlayAnimDeltaMotion("mp_snow_fishingboat_sway_prop");
 
-    boat_misc_models = GetEnt(boat.target, "targetname");
+    boat_misc_models = getEnt(boat.target, "targetname");
     if(isDefined(boat_misc_models)) {
-      boat_misc_models LinkTo(anim_ref, "tag_origin");
+      boat_misc_models linkTo(anim_ref, "tag_origin");
       boat_misc_models ScriptModelPlayAnimDeltaMotion("mp_snow_fishingboat_sway");
     }
 
@@ -122,20 +122,20 @@ fishing_boat() {
 }
 
 lighthouse() {
-  lighthouse = GetEnt("lighthouse", "targetname");
+  lighthouse = getEnt("lighthouse", "targetname");
 
   prop = spawn("script_model", lighthouse.origin);
   prop.angles = lighthouse.angles;
   prop setModel("generic_prop_raven");
 
-  lighthouse LinkTo(prop, "j_prop_1");
+  lighthouse linkTo(prop, "j_prop_1");
 
   prop ScriptModelPlayAnimDeltaMotion("mp_snow_lighthouse_scan");
 
   fx_ent = spawn("script_model", lighthouse.origin + (0, 0, 70));
   fx_ent.angles = lighthouse.angles;
   fx_ent setModel("tag_origin");
-  fx_ent LinkTo(prop, "j_prop_1");
+  fx_ent linkTo(prop, "j_prop_1");
   lighthouse.fx_ent = fx_ent;
 
   level thread lighthouse_play_fx_onConnect(lighthouse);
@@ -187,15 +187,15 @@ satellite_fall() {
 
   waitframe();
 
-  tree_broken_stump = GetEnt("tree_broken_stump", "targetname");
-  tree_broken_top = GetEnt("tree_broken_top", "targetname");
+  tree_broken_stump = getEnt("tree_broken_stump", "targetname");
+  tree_broken_top = getEnt("tree_broken_top", "targetname");
 
   anim_ref = spawn("script_model", tree_broken_stump.origin);
   anim_ref.angles = (0, 0, 0);
   anim_ref setModel("generic_prop_raven");
   anim_ref ScriptModelPlayAnimDeltaMotion("mp_snow_tree_prefall_loop");
-  tree_broken_stump LinkTo(anim_ref, "j_prop_1", (0, 0, 0), (0, 0, 0));
-  tree_broken_top LinkTo(anim_ref, "j_prop_2", (0, 0, 0), (0, 0, 0));
+  tree_broken_stump linkTo(anim_ref, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  tree_broken_top linkTo(anim_ref, "j_prop_2", (0, 0, 0), (0, 0, 0));
 
   pre_crash_group = satellite_group("satellite_pre_crash");
   post_crash_group = satellite_group("satellite_post_crash");
@@ -210,15 +210,15 @@ satellite_fall() {
     return;
   }
 
-  flash_trigger = GetEnt("satellite_flash_trigger", "targetname");
-  kill_trigger = GetEnt("satellite_kill_trigger", "targetname");
+  flash_trigger = getEnt("satellite_flash_trigger", "targetname");
+  kill_trigger = getEnt("satellite_kill_trigger", "targetname");
 
-  satellite_start = getstruct("sat_start", "targetname");
-  satellite_start_kill_trigger = GetEnt("sat_start_kill_trigger", "targetname");
+  satellite_start = getStruct("sat_start", "targetname");
+  satellite_start_kill_trigger = getEnt("sat_start_kill_trigger", "targetname");
   if(isDefined(satellite_start_kill_trigger)) {
     satellite_start_kill_trigger.start_origin = satellite_start_kill_trigger.origin;
     satellite_start_kill_trigger.start_angles = satellite_start_kill_trigger.angles;
-    satellite_start_kill_trigger EnableLinkTo();
+    satellite_start_kill_trigger EnablelinkTo();
   }
 
   if(level.createFX_enabled) {
@@ -248,7 +248,7 @@ satellite_fall() {
     move_speed = 2000;
 
     if(isDefined(satellite_start_kill_trigger)) {
-      satellite_start_kill_trigger LinkTo(sat_model);
+      satellite_start_kill_trigger linkTo(sat_model);
       satellite_start_kill_trigger thread monitor_touching();
     }
 
@@ -260,11 +260,11 @@ satellite_fall() {
     move_count = 0;
     while(isDefined(current.target)) {
       move_count++;
-      goal = getstruct(current.target, "targetname");
+      goal = getStruct(current.target, "targetname");
 
       dist = Distance(current.origin, goal.origin);
       move_time = dist / move_speed;
-      sat_model MoveTo(goal.origin, move_time);
+      sat_model moveTo(goal.origin, move_time);
       level.satellite = sat_model;
 
       if(move_count == 1) {
@@ -281,7 +281,7 @@ satellite_fall() {
         exploder("2");
 
         foreach(player in level.players) {
-          player PlayRumbleOnEntity("artillery_rumble");
+          player playRumbleOnEntity("artillery_rumble");
         }
 
         sat_model playSound("scn_satellite_skip");
@@ -332,7 +332,7 @@ satellite_fall() {
       if(!level.teamBased && !isDefined(killstreak_player)) {
         continue;
       }
-      satellite_use_loc = getstruct("satellite_use_loc", "targetname");
+      satellite_use_loc = getStruct("satellite_use_loc", "targetname");
 
       killstreak_upLinkEnt = spawn("script_origin", satellite_use_loc.origin);
       killstreak_upLinkEnt.angles = (0, 0, 0);
@@ -414,7 +414,7 @@ satellite_flash(test_origin, test_radius, test_dot, test_volume) {
     if(dist_to_sat > test_radius) {
       continue;
     }
-    dir_to_sat = VectorNormalize(dir_to_sat);
+    dir_to_sat = vectorNormalize(dir_to_sat);
 
     look_dir = anglesToForward(player GetPlayerAngles());
 
@@ -482,7 +482,7 @@ satellite_clip_show() {
   self Show();
 
   if(self is_dynamic_path()) {
-    self DisconnectPaths();
+    self disconnectPaths();
   }
 
   if(self is_ai_sight_line()) {
@@ -491,7 +491,7 @@ satellite_clip_show() {
 }
 
 satellite_group(targetname) {
-  struct = getstruct(targetname, "targetname");
+  struct = getStruct(targetname, "targetname");
   if(!isDefined(struct)) {
     return undefined;
   }
@@ -508,7 +508,7 @@ satellite_group(targetname) {
       parent.clip[parent.clip.size] = ent;
     } else {
       parent.linked[parent.linked.size] = ent;
-      ent LinkTo(parent);
+      ent linkTo(parent);
     }
   }
 
@@ -573,9 +573,9 @@ move_satellite(end) {
   accel_time = 3.0;
 
   while(1) {
-    self MoveTo(end, fall_time, accel_time, 0);
+    self moveTo(end, fall_time, accel_time, 0);
     wait(fall_time + 3.0);
-    self MoveTo(start, 0.1);
+    self moveTo(start, 0.1);
     wait(0.1);
   }
 }
@@ -639,13 +639,13 @@ group_anim(targetname, animname, min_wait, max_wait) {
     anim_ref = spawn("script_model", object.origin);
     anim_ref.angles = (0, 0, 0);
     anim_ref setModel("generic_prop_raven");
-    object LinkTo(anim_ref, "tag_origin");
+    object linkTo(anim_ref, "tag_origin");
     anim_ref ScriptModelPlayAnimDeltaMotion(animname);
 
     if(isDefined(object.target)) {
       subobjects = getEntArray(object.target, "targetname");
       foreach(subobject in subobjects) {
-        subobject LinkTo(anim_ref, "j_prop_1");
+        subobject linkTo(anim_ref, "j_prop_1");
       }
     }
   }
@@ -700,7 +700,7 @@ rotating_windows_run() {
   window_node = spawn("script_model", self.origin);
   window_node.angles = self.open_angles;
   window_node setModel("tag_origin");
-  self LinkTo(window_node, "tag_origin");
+  self linkTo(window_node, "tag_origin");
 
   start_closed = false;
   if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "start_closed")) {
@@ -746,7 +746,7 @@ rotating_windows_run() {
 }
 
 satellite_scrambler() {
-  scrambler_loc_struct = getstruct("satellite_use_loc", "targetname");
+  scrambler_loc_struct = getStruct("satellite_use_loc", "targetname");
   scrambler = spawn("script_model", scrambler_loc_struct.origin);
   scrambler.angles = scrambler_loc_struct.angles;
 
@@ -754,10 +754,10 @@ satellite_scrambler() {
 }
 
 rotate_helicopter_rotor() {
-  rotor = GetEnt("heli_rotor_top", "targetname");
+  rotor = getEnt("heli_rotor_top", "targetname");
   rotor RotateVelocity((0, -300, 0), 36000, 0, 0);
 
-  rotor_back = GetEnt("heli_rotor_back", "targetname");
+  rotor_back = getEnt("heli_rotor_back", "targetname");
   if(isDefined(rotor_back)) {
     rotor_back RotateVelocity((-300, 0, 0), 36000, 0, 0);
   }
@@ -766,7 +766,7 @@ rotate_helicopter_rotor() {
 satellite_static() {
   self endon("disconnect");
 
-  static_center = getstruct("satellite_use_loc", "targetname");
+  static_center = getStruct("satellite_use_loc", "targetname");
   self maps\mp\killstreaks\_emp_common::staticFieldInit();
   static_dist = 512;
   static_dist_squared = static_dist * static_dist;
@@ -806,8 +806,8 @@ ice_init() {
         break;
       case "trigger_sink":
         self.trigger = target;
-        self.trigger EnableLinkTo();
-        self.trigger LinkTo(self);
+        self.trigger EnablelinkTo();
+        self.trigger linkTo(self);
         break;
       default:
         break;
@@ -846,14 +846,14 @@ ice_float() {
   while(1) {
     moveTime = RandomFloatRange(3, 5);
     new_angles = (RandomFloatRange(-1, 1), RandomFloatRange(-1, 1), RandomFloatRange(-1, 1));
-    new_angles = VectorNormalize(new_angles);
+    new_angles = vectorNormalize(new_angles);
     new_angles *= 3;
     if(loop_count <= 2) {
       new_angles *= 3 - loop_count;
       moveTime /= 3 - loop_count;
     }
 
-    self RotateTo(new_angles, moveTime);
+    self rotateTo(new_angles, moveTime);
     self waittill("rotatedone");
     loop_count++;
   }
@@ -881,7 +881,7 @@ ice_sink() {
 
     dist = Distance(self.origin, sink_origin);
     move_time = dist / sink_speed;
-    self.anim_ref MoveTo(sink_origin, move_time);
+    self.anim_ref moveTo(sink_origin, move_time);
 
     while(self.sink_time >= GetTime()) {
       waitframe();
@@ -889,7 +889,7 @@ ice_sink() {
 
     dist = Distance(self.origin, raise_origin);
     move_time = dist / raise_speed;
-    self.anim_ref MoveTo(raise_origin, move_time, 0, move_time);
+    self.anim_ref moveTo(raise_origin, move_time, 0, move_time);
   }
 }
 

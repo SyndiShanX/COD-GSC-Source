@@ -57,7 +57,7 @@ awardscore() {
   radius = level.weaponvisionpulse.gadget_pulse_max_range;
 
   for(i = 0; i < 3; i++) {
-    enemyteam = getplayers("all", self.origin, radius);
+    enemyteam = getPlayers("all", self.origin, radius);
 
     if(isarray(enemyteam)) {
       foreach(enemy in enemyteam) {

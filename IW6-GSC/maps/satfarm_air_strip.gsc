@@ -271,13 +271,13 @@ fennce_smash_setup() {
 }
 
 fence_smash_wait() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = undefined;
   var_2 = undefined;
   self waittill("trigger", var_3);
 
   if(!isDefined(level.gate_being_used)) {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
     level.gate_being_used = 1;
   }
 
@@ -286,7 +286,7 @@ fence_smash_wait() {
       thread common_scripts\utility::play_sound_in_space("satf_fence_crush_plr", level.player.origin);
       level.player thread maps\_gameskill::display_screen_effect("dirt", "bottom", "fullscreen_dirt_bottom", "fullscreen_dirt_bottom_b", randomfloatrange(0.55, 0.66));
       level.player screenshakeonentity(4.0, 1.0, 1.0, 0.5, 0, 0.25, 0, 2.0, 0.5, 0.5);
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
     } else
       var_0 thread maps\_utility::play_sound_on_entity("satf_fence_crush");
   }
@@ -320,15 +320,15 @@ fence_smash_wait() {
 }
 
 hangar_wall_smash_setup() {
-  var_0 = getent("hangar_door_breakable", "targetname");
+  var_0 = getEnt("hangar_door_breakable", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
   }
 
-  var_1 = getent("hangar_wall_unbroken", "targetname");
+  var_1 = getEnt("hangar_wall_unbroken", "targetname");
   var_1 thread hangar_wall_unbroken_wait();
-  var_2 = getent("hangar_wall_broken", "targetname");
+  var_2 = getEnt("hangar_wall_broken", "targetname");
   var_2 hide();
   var_3 = getEntArray("hangar_wall_section", "script_noteworthy");
 
@@ -354,7 +354,7 @@ hangar_wall_smash_setup() {
 }
 
 hangar_wall_smash_wait() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 maps\_utility::ent_flag_init("destroyed");
   var_0 thread destroy_all_hangar_walls_wait();
   thread hangar_wall_trigger_wait(var_0);
@@ -362,7 +362,7 @@ hangar_wall_smash_wait() {
   var_0 maps\_utility::ent_flag_wait("destroyed");
 
   if(isDefined(var_0.target)) {
-    var_1 = getent(var_0.target, "targetname");
+    var_1 = getEnt(var_0.target, "targetname");
 
     if(isDefined(var_1)) {
       var_1 delete();
@@ -443,7 +443,7 @@ hangar_wall_trigger_wait(var_0) {
       thread common_scripts\utility::play_sound_in_space("satf_concrete_barrier_crush_plr", level.player.origin);
       level.player thread maps\_gameskill::display_screen_effect("dirt", "bottom", "fullscreen_dirt_bottom", "fullscreen_dirt_bottom_b", randomfloatrange(0.55, 0.66));
       level.player screenshakeonentity(8.0, 3.0, 3.0, 1.0, 0, 1.0, 500, 6.0, 2.0, 2.0, 1.8);
-      level.player playrumbleonentity("ac130_artillery_rumble");
+      level.player playRumbleOnEntity("ac130_artillery_rumble");
     } else
       var_1 thread maps\_utility::play_sound_on_entity("satf_concrete_barrier_crush");
 
@@ -703,7 +703,7 @@ turret_waittill_damage(var_0) {
   thread common_scripts\utility::play_sound_in_space("grenade_explode_default", self.origin);
 
   if(isDefined(self.script_linkto)) {
-    var_2 = getent(self.script_linkto, "sript_linkname");
+    var_2 = getEnt(self.script_linkto, "sript_linkname");
 
     if(isDefined(var_2)) {
       var_2 delete();
@@ -780,12 +780,12 @@ hangar_runner_anims() {
   self.a.disablelongdeath = 1;
   self.health = 1;
   self.animname = "generic";
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   var_0 maps\_anim::anim_generic_reach(self, var_0.animation);
   var_0 anim_generic_gravity_run(self, var_0.animation);
 
   while(isDefined(var_0.target)) {
-    var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
 
     if(isDefined(var_0.animation)) {
       var_0 maps\_anim::anim_generic_reach(self, var_0.animation);
@@ -830,7 +830,7 @@ anim_generic_gravity_run(var_0, var_1, var_2, var_3) {
 
 setup_falling_sat_dish(var_0, var_1, var_2) {
   var_3 = undefined;
-  var_4 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_0, "targetname");
   var_5 = [];
   var_6 = maps\_utility::spawn_anim_model("saf_satellite_destroyed_anim_dish");
   var_5 = common_scripts\utility::array_add(var_5, var_6);

@@ -139,13 +139,13 @@ function function_ef2758f9() {
 
   if(isDefined(barrel)) {
     barrel notsolid();
-    barrel enablelinkto();
-    self enablelinkto();
+    barrel enablelinkTo();
+    self enablelinkTo();
     barrel disableaimassist();
     barrel.carried = 1;
     barrel.takedamage = 1;
     barrel.health = 99999;
-    barrel linkto(self, "j_head", (0, 0, 15), (90, 0, 0));
+    barrel linkTo(self, "j_head", (0, 0, 15), (90, 0, 0));
     barrel thread function_bd3de922(self);
     barrel thread namespace_ec06fe4a::function_52afe5df(120);
   }
@@ -205,7 +205,7 @@ function function_711927a1(origin) {
   }
 
   level.doa.var_8d14dcbf[level.doa.var_8d14dcbf.size] = pole;
-  pole moveto(origin, 2);
+  pole moveTo(origin, 2);
 
   while(isDefined(org)) {
     org namespace_83eb6304::function_3ecfde67("pole_blast");
@@ -311,9 +311,9 @@ function shadowteleportmenow(initial = 0, origin = self.origin) {
     wait 0.3;
     self namespace_ec06fe4a::function_8c808737();
     self notsolid();
-    self setplayercollision(0);
-    self linkto(self.org);
-    self.org moveto(spot + (0, 0, 40), 2);
+    self setPlayerCollision(0);
+    self linkTo(self.org);
+    self.org moveTo(spot + (0, 0, 40), 2);
     self.org waittilltimeout(2.1, #"movedone");
     self.org namespace_83eb6304::function_3ecfde67("shadow_appear");
     self.org namespace_e32bb68::function_3a59ec34("zmb_doa_ai_smokeman_teleport_in_pre");
@@ -323,7 +323,7 @@ function shadowteleportmenow(initial = 0, origin = self.origin) {
     self forceteleport(spot);
     self namespace_ec06fe4a::function_4f72130c();
     self solid();
-    self setplayercollision(1);
+    self setPlayerCollision(1);
     self.org namespace_83eb6304::turnofffx("shadow_move");
     self.org namespace_83eb6304::turnofffx("shadow_glow");
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_smokeman_lp");

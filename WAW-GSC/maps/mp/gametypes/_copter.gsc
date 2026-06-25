@@ -55,7 +55,7 @@ vectorTowardsOtherVector(v1, v2, angle) {
   if(dot <= -1) {
     return v1;
   }
-  v3 = vectornormalize(v2 - vecscale(v1, dot));
+  v3 = vectorNormalize(v2 - vecscale(v1, dot));
 
   return vecscale(v1, cos(angle)) + vecscale(v3, sin(angle));
 }
@@ -72,13 +72,13 @@ createCopter(location, team, damagetrig) {
   copter = spawn("script_model", location);
   copter.angles = vectorToAngles((0, 1, 0));
 
-  copter linkto(scriptorigin);
+  copter linkTo(scriptorigin);
   scriptorigin.copter = copter;
   copter setModel(level.coptermodel);
   copter playLoopSound("mp_copter_ambience");
 
   damagetrig.origin = scriptorigin.origin;
-  damagetrig thread mylinkto(scriptorigin);
+  damagetrig thread mylinkTo(scriptorigin);
   scriptorigin.damagetrig = damagetrig;
 
   scriptorigin.finalDest = location;
@@ -113,14 +113,14 @@ makeCopterPassive() {
 }
 makeCopterActive(damagetrig) {
   damagetrig.origin = self.origin;
-  damagetrig thread mylinkto(self);
+  damagetrig thread mylinkTo(self);
   self.damagetrig = damagetrig;
 
   self thread copterAI();
   self thread copterDamage(damagetrig);
 }
 
-mylinkto(obj) {
+mylinkTo(obj) {
   self endon("unlink");
   while(1) {
     self.angles = obj.angles;
@@ -136,7 +136,7 @@ setCopterDefenseArea(areaEnt) {
     self.areaDescentPoints = getEntArray(areaEnt.target, "targetname");
   }
   for(i = 0; i < self.areaDescentPoints.size; i++) {
-    self.areaDescentPoints[i].targetEnt = getent(self.areaDescentPoints[i].target, "targetname");
+    self.areaDescentPoints[i].targetEnt = getEnt(self.areaDescentPoints[i].target, "targetname");
   }
 }
 
@@ -291,7 +291,7 @@ copterAI() {
 
         self setCopterDest(goToPos, false);
 
-        self.desiredDir = vectornormalize(attackpos - goToPos);
+        self.desiredDir = vectorNormalize(attackpos - goToPos);
         self.desiredDirEntity = best;
         self.desiredDirEntityOffset = level.copterTargetOffset;
 
@@ -313,7 +313,7 @@ copterAI() {
       goDirectly = (isDefined(oldDescendingEnt) && oldDescendingEnt == descendingEnt);
       goDirectly = goDirectly && reachedDescendingEnt;
 
-      self.desiredDir = vectornormalize(descendingEnt.targetEnt.origin - (goToPos - level.copterCenterOffset));
+      self.desiredDir = vectorNormalize(descendingEnt.targetEnt.origin - (goToPos - level.copterCenterOffset));
       self.desiredDirEntity = descendingEnt.targetEnt;
       self.desiredDirEntityOffset = (0, 0, 0);
 
@@ -338,7 +338,7 @@ determineBestPos(targets, descendEnt, startorigin) {
     if(passed) {
       dir = targetpos - enemypos;
       dir = (dir[0], dir[1], 0);
-      isect = vecscale(vectornormalize(dir), circleradius) + targetpos;
+      isect = vecscale(vectorNormalize(dir), circleradius) + targetpos;
       isect = (isect[0], isect[1], descendEnt.origin[2]);
 
       dist = distance(isect, descendEnt.origin);
@@ -384,7 +384,7 @@ determineBestEnt(targets, descendEnts, startorigin) {
 determineBestAttackPos(targetpos, curpos, desireddist) {
   targetposcopterheight = (targetpos[0], targetpos[1], curpos[2]);
   attackdirx = curpos - targetposcopterheight;
-  attackdirx = vectornormalize(attackdirx);
+  attackdirx = vectorNormalize(attackdirx);
   attackdiry = (0 - attackdirx[1], attackdirx[0], 0);
 
   bestpos = undefined;
@@ -410,7 +410,7 @@ determineBestAttackPos(targetpos, curpos, desireddist) {
   } else {
     dist = distance(targetposcopterheight, curpos);
     if(dist > desireddist) {
-      goToPos = self.origin + vecscale(vectornormalize(attackdirx), 0 - (dist - desireddist));
+      goToPos = self.origin + vecscale(vectorNormalize(attackdirx), 0 - (dist - desireddist));
     } else {
       goToPos = self.origin;
     }
@@ -438,7 +438,7 @@ copterShoot() {
       enemypos = self.desiredDirEntity.origin + self.desiredDirEntityOffset;
       curdir = anglesToForward(self.angles);
       enemydirraw = enemypos - mypos;
-      enemydir = vectornormalize(enemydirraw);
+      enemydir = vectorNormalize(enemydirraw);
 
       if(vectordot(curdir, enemydir) > cosThreshold) {
         canseetarget = bullettracepassed(mypos, enemypos, false, undefined);
@@ -454,7 +454,7 @@ copterShoot() {
             dir = anglesToForward(self.angles);
 
             dir = dir + ((randomfloat(2) - 1) * .015, (randomfloat(2) - 1) * .015, (randomfloat(2) - 1) * .015);
-            dir = vectornormalize(dir);
+            dir = vectorNormalize(dir);
             self myMagicBullet(mypos, dir);
             wait(.075);
           }
@@ -576,33 +576,33 @@ copterMove() {
 
       thisDest = self.origin + vecscale(self.vel, interval);
 
-      self moveto(thisDest, interval * .999);
+      self moveTo(thisDest, interval * .999);
 
       speed = veclength(self.vel);
 
       if(isDefined(self.desiredDirEntity) && isDefined(self.desiredDirEntity.origin)) {
-        self.destDir = vectornormalize((self.desiredDirEntity.origin + self.desiredDirEntityOffset) - (self.origin + level.copterCenterOffset));
+        self.destDir = vectorNormalize((self.desiredDirEntity.origin + self.desiredDirEntityOffset) - (self.origin + level.copterCenterOffset));
       } else if(isDefined(self.desiredDir)) {
         self.destDir = self.desiredDir;
       } else if(movingVertically) {
         self.destDir = anglesToForward(self.angles);
-        self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0));
+        self.destDir = vectorNormalize((self.destDir[0], self.destDir[1], 0));
       } else {
         tiltamnt = speed / level.copter_maxvel;
         tiltamnt = (tiltamnt - .1) / .9;
         if(tiltamnt < 0) tiltamnt = 0;
 
         self.destDir = movevec;
-        self.destDir = vectornormalize((self.destDir[0], self.destDir[1], 0));
+        self.destDir = vectorNormalize((self.destDir[0], self.destDir[1], 0));
         tiltamnt = tiltamnt * (1 - (vectorAngle(anglesToForward(self.angles), self.destDir) / 180));
-        self.destDir = vectornormalize((self.destDir[0], self.destDir[1], tiltamnt * -.4));
+        self.destDir = vectorNormalize((self.destDir[0], self.destDir[1], tiltamnt * -.4));
       }
     }
 
     newdir = self.destDir;
 
     if(newdir[2] < -.4) {
-      newdir = vectornormalize((newdir[0], newdir[1], -.4));
+      newdir = vectorNormalize((newdir[0], newdir[1], -.4));
     }
 
     copterangles = self.angles;
@@ -611,8 +611,8 @@ copterMove() {
 
     thisRotSpeed = level.copter_rotspeed;
 
-    olddir2d = vectornormalize((olddir[0], olddir[1], 0));
-    newdir2d = vectornormalize((newdir[0], newdir[1], 0));
+    olddir2d = vectorNormalize((olddir[0], olddir[1], 0));
+    newdir2d = vectorNormalize((newdir[0], newdir[1], 0));
 
     angle = vectorAngle(olddir2d, newdir2d);
     angle3d = vectorAngle(olddir, newdir);
@@ -627,11 +627,11 @@ copterMove() {
       oldz = olddir[2] / veclength((olddir[0], olddir[1], 0));
       newz = newdir[2] / veclength((newdir[0], newdir[1], 0));
       interpz = oldz + (newz - oldz) * (thisangle / angle);
-      newdir = vectornormalize((newdir2d[0], newdir2d[1], interpz));
+      newdir = vectorNormalize((newdir2d[0], newdir2d[1], interpz));
 
       copterangles = vectorToAngles(newdir);
       copterangles = combineangles(copterangles, (0, -90, 0));
-      self rotateto(copterangles, interval * .999);
+      self rotateTo(copterangles, interval * .999);
     } else if(angle3d > .001 && thisRotSpeed > .001) {
       thisangle = thisRotSpeed * interval;
       if(thisangle > angle3d) {
@@ -639,11 +639,11 @@ copterMove() {
       }
 
       newdir = vectorTowardsOtherVector(olddir, newdir, thisangle);
-      newdir = vectornormalize(newdir);
+      newdir = vectorNormalize(newdir);
 
       copterangles = vectorToAngles(newdir);
       copterangles = combineangles(copterangles, (0, -90, 0));
-      self rotateto(copterangles, interval * .999);
+      self rotateTo(copterangles, interval * .999);
     }
 
     wait interval;
@@ -678,7 +678,7 @@ copterDie() {
 
   interval = .2;
   rottime = 15;
-  self rotateyaw(360 + randomfloat(360), rottime);
+  self rotateYaw(360 + randomfloat(360), rottime);
   self rotatepitch(360 + randomfloat(360), rottime);
   self rotateroll(360 + randomfloat(360), rottime);
   while(1) {
@@ -690,7 +690,7 @@ copterDie() {
       break;
     }
 
-    self moveto(newpos, interval * .999);
+    self moveTo(newpos, interval * .999);
 
     wait(interval);
   }

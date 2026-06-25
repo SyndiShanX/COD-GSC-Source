@@ -569,7 +569,7 @@ func_37A5() {
   wait(0.05);
   var_0 = getEntArray("camera", "targetname");
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_2 = getent(var_0[var_1].target, "targetname");
+    var_2 = getEnt(var_0[var_1].target, "targetname");
     var_0[var_1].var_C712 = var_2.origin;
     var_0[var_1].angles = vectortoangles(var_2.origin - var_0[var_1].origin);
   }
@@ -608,7 +608,7 @@ func_37A5() {
       var_10 = vectortoangles((var_9[0], var_9[1], var_9[2]) - (var_8[0], var_8[1], var_8[2]));
       var_11 = (0, var_10[1], 0);
       var_12 = anglesToForward(var_11);
-      var_10 = vectornormalize(var_9 - level.player.origin);
+      var_10 = vectorNormalize(var_9 - level.player.origin);
       var_13 = vectordot(var_12, var_10);
       if(var_13 < 0.85) {
         continue;
@@ -810,7 +810,7 @@ func_7E1E() {
       break;
     }
 
-    var_1 = getent(var_1.target, "targetname");
+    var_1 = getEnt(var_1.target, "targetname");
     if(isDefined(var_1) && var_1 == var_0[0]) {
       var_0[var_0.size] = var_1;
       break;
@@ -835,10 +835,10 @@ func_5B7E(var_0, var_1, var_2) {
   var_3 = var_0[2] - var_2[2];
   var_4 = length(var_1 - var_2);
   var_5 = var_1 - var_0;
-  var_5 = vectornormalize((var_5[0], var_5[1], 0));
+  var_5 = vectorNormalize((var_5[0], var_5[1], 0));
   var_1 = var_1 + vecscale(var_5, var_4 * 1 / 800 * 0);
   var_6 = var_2 - var_0;
-  var_6 = vectornormalize((var_6[0], var_6[1], 0));
+  var_6 = vectorNormalize((var_6[0], var_6[1], 0));
   var_2 = var_2 + vecscale(var_6, var_4 * 1 / 800 * 0);
   var_7 = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   var_8 = var_2 - var_1;
@@ -1142,7 +1142,7 @@ func_3D45(var_0) {
     var_2 = level.player getplayerangles();
     var_3 = anglesToForward(var_2);
     var_3 = var_3 * -200;
-    level.var_3D2F moveto(var_1 + var_3, 0.2);
+    level.var_3D2F moveTo(var_1 + var_3, 0.2);
   }
 }
 
@@ -1235,7 +1235,7 @@ func_B514() {
       func_5B38(var_2);
       if(var_7 > 0) {
         var_4 = distance(var_2, var_0[var_7 - 1]);
-        var_5 = vectornormalize(var_0[var_7 - 1] - var_2);
+        var_5 = vectorNormalize(var_0[var_7 - 1] - var_2);
         var_6 = var_2 + var_5 * var_4 * 0.5;
       }
     }
@@ -1252,7 +1252,7 @@ func_B514() {
       var_10 = var_9[0];
       var_11 = (var_10[0], var_10[1], var_9[1][2]);
       var_4 = distance(var_10, var_11);
-      var_5 = vectornormalize(var_11 - var_10);
+      var_5 = vectorNormalize(var_11 - var_10);
       var_12 = var_10 + var_5 * var_4 * 0.6;
     }
 

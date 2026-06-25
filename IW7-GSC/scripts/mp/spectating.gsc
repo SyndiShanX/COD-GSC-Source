@@ -167,12 +167,12 @@ linkcameratoball(var_0) {
       continue;
     }
 
-    self cameralinkto(self.codcasterballcamfollow, "tag_origin", 1);
+    self cameralinkTo(self.codcasterballcamfollow, "tag_origin", 1);
     var_1 = level.codcasterball.origin;
     var_2 = (0, 0, 30);
     var_2 = var_2 + -80 * var_0;
     var_3 = var_1 + var_2;
-    self.codcasterballcamfollow moveto(var_3, 10.5, 5.2, 5.2);
+    self.codcasterballcamfollow moveTo(var_3, 10.5, 5.2, 5.2);
     self.codcasterballcamfollow.angles = vectortoangles(var_0);
     break;
   }
@@ -240,7 +240,7 @@ updatemlgspectator() {
         if(isDefined(var_1) && isDefined(level.codcasterballowner) && var_1 == level.codcasterballowner) {
           self.iswatchingcodcasterball = 1;
           self.spectatingplayerbeforeballcam = var_1;
-          var_2 = vectornormalize(level.codcasterballinitialforcevector);
+          var_2 = vectorNormalize(level.codcasterballinitialforcevector);
           var_3 = var_1 getvieworigin();
           self.codcasterballcamfollow = spawn("script_model", var_3);
           self.codcasterballcamfollow.angles = vectortoangles(var_2);
@@ -256,7 +256,7 @@ updatemlgspectator() {
       var_6 = distance2d(var_4, var_5);
       var_7 = var_4 - var_5;
       var_8 = (var_7[0], var_7[1], 0);
-      var_8 = vectornormalize(var_8);
+      var_8 = vectorNormalize(var_8);
       var_9 = var_4;
       var_10 = (0, 0, 30);
       var_10 = var_10 + -80 * var_8;
@@ -264,10 +264,10 @@ updatemlgspectator() {
       if(var_6 > 600) {
         self.codcasterballcamfollow.origin = var_11;
       } else {
-        self.codcasterballcamfollow moveto(var_11, 0.5, 0, 0.2);
+        self.codcasterballcamfollow moveTo(var_11, 0.5, 0, 0.2);
       }
 
-      self.codcasterballcamfollow rotateto(vectortoangles(var_7), 0.15, 0.05, 0.05);
+      self.codcasterballcamfollow rotateTo(vectortoangles(var_7), 0.15, 0.05, 0.05);
     }
 
     wait(0.05);

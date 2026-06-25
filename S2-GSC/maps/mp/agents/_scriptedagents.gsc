@@ -84,7 +84,7 @@ func_441C(param_00, param_01, param_02) {
   var_08 = 1;
   if(isDefined(param_02) && param_02) {
     var_09 = (param_01[0], param_01[1], 0);
-    var_0A = vectornormalize(var_09);
+    var_0A = vectorNormalize(var_09);
     if(vectordot(var_0A, param_00) < 0) {
       var_07 = 0;
     } else if(var_05 > 0) {

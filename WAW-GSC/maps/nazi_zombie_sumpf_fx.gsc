@@ -115,19 +115,19 @@ precacheFX() {
 }
 
 electric_light() {
-  lantern = getent("swamp_lamp", "script_noteworthy");
-  lght = getent("phys_lamp_light", "targetname");
+  lantern = getEnt("swamp_lamp", "script_noteworthy");
+  lght = getEnt("phys_lamp_light", "targetname");
 
   if(!isDefined(lght)) {
     return;
   }
-  lght linkto(lantern);
+  lght linkTo(lantern);
   lght setlightintensity(2.5);
 
   mdl = spawn("script_model", lantern.origin);
   mdl.angles = (90, 0, 0);
   mdl setModel("tag_origin");
-  mdl linkto(lantern);
+  mdl linkTo(lantern);
   playFXOnTag(level._effect["hanging_light_fx"], mdl, "tag_origin");
 
   while(1) {
@@ -147,14 +147,14 @@ swing_lanterns() {
   org_pos = self.origin;
 
   while(1) {
-    self rotateto(self.angles + (randomintrange(-5, 5), randomintrange(-5, 5), 0), randomfloatrange(.5, 1));
+    self rotateTo(self.angles + (randomintrange(-5, 5), randomintrange(-5, 5), 0), randomfloatrange(.5, 1));
     self waittill("rotatedone");
-    self rotateto(org_angles, randomfloatrange(.5, 1));
+    self rotateTo(org_angles, randomfloatrange(.5, 1));
     self waittill("rotatedone");
   }
 }
 hanging_dead_guy() {
-  dead_guy = getent("hanging_dead_guy", "targetname");
+  dead_guy = getEnt("hanging_dead_guy", "targetname");
 
   if(!isDefined(dead_guy)) {
     return;

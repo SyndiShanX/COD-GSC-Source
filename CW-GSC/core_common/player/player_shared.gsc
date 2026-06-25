@@ -116,7 +116,7 @@ function on_player_spawned() {
     snappedorigin = self get_snapped_spot_origin(self.origin);
 
     if(!self flag::get(#"shared_igc")) {
-      self setorigin(snappedorigin);
+      self setOrigin(snappedorigin);
     }
   }
 }
@@ -136,7 +136,7 @@ function function_135acc2d(var_e2bc3a9f, update_rate) {
       var_42016ec7 = 0;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 0) {
       waitframe(1);
@@ -769,7 +769,7 @@ function function_6f6c29e(var_b66879ad) {
 }
 
 function function_2f80d95b(player_func, ...) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     util::single_func_argarray(player, player_func, vararg);
@@ -783,7 +783,7 @@ function function_4dcd9a89(players, player_func, ...) {
 }
 
 function function_7629df88(team, player_func, ...) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player.team == team) {
@@ -793,7 +793,7 @@ function function_7629df88(team, player_func, ...) {
 }
 
 function function_e7f18b20(player_func, ...) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(player.pers[#"team"])) {
@@ -805,7 +805,7 @@ function function_e7f18b20(player_func, ...) {
 }
 
 function function_38de2d5a(notification) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player notify(notification);

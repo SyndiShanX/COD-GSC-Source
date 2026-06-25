@@ -1508,7 +1508,7 @@ do_gib() {
       }
 
       for(i = 0; i < pos1.size; i++) {
-        forward = VectorNormalize(pos2[i] - pos1[i]);
+        forward = vectorNormalize(pos2[i] - pos1[i]);
         velocities[i] = forward * RandomIntRange(600, 1000);
         velocities[i] = velocities[i] + (0, 0, RandomIntRange(400, 700));
       }
@@ -1525,7 +1525,7 @@ do_gib() {
     }
   }
 
-  PlaySoundAtPosition("death_gibs", self.origin);
+  playSoundAtPosition("death_gibs", self.origin);
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
 
   self setModel(limb_data["body_model"]);

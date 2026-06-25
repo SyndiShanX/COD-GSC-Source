@@ -204,7 +204,7 @@ impact_breach_init() {
     if(!isDefined(p.target)) {
       continue;
     }
-    breach = getstruct(p.target, "targetname");
+    breach = getStruct(p.target, "targetname");
     if(!isDefined(breach)) {
       continue;
     }

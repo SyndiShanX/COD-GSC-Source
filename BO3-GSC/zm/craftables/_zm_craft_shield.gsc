@@ -135,7 +135,7 @@ function function_f3127c4f() {
 }
 
 function function_b6937313(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
   switch (cmd) {
     case "": {

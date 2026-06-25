@@ -758,7 +758,7 @@ set_origin(v_origin) {
     adddebugcommand("<dev string:x431>");
   }
 
-  self setorigin(v_origin);
+  self setOrigin(v_origin);
 }
 
 toggle_postfx_igc_loop() {

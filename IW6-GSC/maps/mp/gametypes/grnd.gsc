@@ -174,7 +174,7 @@ initFirstZone() {
   ringVfx = spawn("script_model", level.grnd_zone.origin);
   ringVfx setModel("tag_origin");
   ringVfx.angles = VectorToAngles((0, 0, 1));
-  ringVfx LinkTo(level.grnd_zone);
+  ringVfx linkTo(level.grnd_zone);
   level.grnd_zone.ringVfx = ringVfx;
 
   level.grnd_dangerCenter = spawnStruct();
@@ -398,7 +398,7 @@ cycleZones() {
     }
 
     if(isDefined(hitEntity)) {
-      level.grnd_zone LinkTo(hitEntity);
+      level.grnd_zone linkTo(hitEntity);
     } else if(level.grnd_zone IsLinked()) {
       level.grnd_zone Unlink();
     }

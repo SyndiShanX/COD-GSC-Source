@@ -152,7 +152,7 @@ delete_collision() {
   self endon("death");
 
   if(isDefined(self.target)) {
-    dest_clip = getent(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     wait 0.1;
     dest_clip delete();
   }
@@ -181,7 +181,7 @@ destructible_barrel_explosion(attacker, physics_explosion) {
     return;
   }
   if(isDefined(self.target)) {
-    dest_clip = getent(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     dest_clip delete();
   }
 

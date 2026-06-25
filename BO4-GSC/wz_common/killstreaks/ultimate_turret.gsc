@@ -43,7 +43,7 @@ on_item_use(params) {
 function_6c288c45(spawnorigin, spawnangles) {
   self endon(#"death", #"disconnect");
   self stats::function_e24eec31(level.ultimateturretweapon, #"used", 1);
-  turretvehicle = spawnvehicle("veh_ultimate_turret_wz", spawnorigin, spawnangles);
+  turretvehicle = spawnVehicle("veh_ultimate_turret_wz", spawnorigin, spawnangles);
 
   if(!isDefined(turretvehicle)) {
     return;
@@ -271,7 +271,7 @@ function_fefefcc4() {
     if(!isDefined(turretvehicle.enemy) && !(isDefined(turretvehicle.isstunned) && turretvehicle.isstunned) && !(isDefined(turretvehicle.isjammed) && turretvehicle.isjammed)) {
       var_beeadda8 = isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 300;
 
-      nearby_enemies = getplayers(util::getotherteam(turretvehicle.team), turretvehicle.origin, var_beeadda8);
+      nearby_enemies = getPlayers(util::getotherteam(turretvehicle.team), turretvehicle.origin, var_beeadda8);
 
       if(nearby_enemies.size > 0) {
         if(turretvehicle.var_3413afc5 != #"hash_2d94a5f22d36fc73") {

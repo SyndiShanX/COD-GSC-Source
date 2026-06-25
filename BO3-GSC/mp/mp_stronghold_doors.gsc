@@ -38,8 +38,8 @@ function setup_doors(door, upper, trigger) {
   door.upper = upper;
   door.kill_trigger = trigger;
   assert(isDefined(door.kill_trigger));
-  door.kill_trigger enablelinkto();
-  door.kill_trigger linkto(door);
+  door.kill_trigger enablelinkTo();
+  door.kill_trigger linkTo(door);
   door.opened = 1;
   door.origin_opened = door.origin;
   door.force_open_time = 0;
@@ -81,7 +81,7 @@ function watchtriggerenabledisable() {
         break;
       }
     }
-    self sethintstring(hintstring);
+    self setHintString(hintstring);
   }
 }
 
@@ -120,10 +120,10 @@ function door_open() {
   dist = distance(self.origin_closed, self.origin);
   frac = dist / 180;
   halftime = 4.5;
-  self moveto(self.origin_closed_half, halftime);
-  self.upper moveto(self.origin_opened, halftime);
+  self moveTo(self.origin_closed_half, halftime);
+  self.upper moveTo(self.origin_opened, halftime);
   self waittill("movedone");
-  self moveto(self.origin_opened, halftime);
+  self moveTo(self.origin_opened, halftime);
   self.opened = 1;
 }
 
@@ -134,10 +134,10 @@ function door_close() {
   dist = distance(self.origin_closed, self.origin);
   frac = dist / 180;
   halftime = 4.5;
-  self moveto(self.origin_closed_half, halftime);
+  self moveTo(self.origin_closed_half, halftime);
   self waittill("movedone");
-  self moveto(self.origin_closed, halftime);
-  self.upper moveto(self.origin_closed_half, halftime);
+  self moveTo(self.origin_closed, halftime);
+  self.upper moveTo(self.origin_closed_half, halftime);
   self.opened = 0;
 }
 
@@ -232,7 +232,7 @@ function destroy_supply_crates() {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
         playFX(level._supply_drop_explosion_fx, crate.origin);
-        playsoundatposition("wpn_grenade_explode", crate.origin);
+        playSoundAtPosition("wpn_grenade_explode", crate.origin);
         wait(0.1);
         crate supplydrop::cratedelete();
       }

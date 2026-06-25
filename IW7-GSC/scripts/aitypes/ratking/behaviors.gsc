@@ -300,7 +300,7 @@ debughandler_tick(var_0) {
     return anim.failure;
   }
 
-  self scragentsetgoalradius(16);
+  self scragentsetgoalRadius(16);
   self scragentsetgoalpos(level.ratkingdebugdestination);
   return anim.running;
 }
@@ -699,7 +699,7 @@ tryshieldattackatpos(var_0) {
     var_7 = var_5.origin - self.origin;
     var_6 = (var_6[0], var_6[1], 0);
     var_7 = (var_7[0], var_7[1], 0);
-    var_7 = vectornormalize(var_7);
+    var_7 = vectorNormalize(var_7);
     var_8 = vectordot(var_6, var_7);
 
     if(var_8 < -0.259) {
@@ -758,7 +758,7 @@ tryshieldattack(var_0) {
   var_5 = var_1.origin - self.origin;
   var_4 = (var_4[0], var_4[1], 0);
   var_5 = (var_5[0], var_5[1], 0);
-  var_5 = vectornormalize(var_5);
+  var_5 = vectorNormalize(var_5);
   var_6 = vectordot(var_4, var_5);
 
   if(var_6 < -0.259) {
@@ -877,7 +877,7 @@ trymeleeattacks(var_0) {
   var_7 = var_1.origin - self.origin;
   var_7 = (var_7[0], var_7[1], 0);
   var_8 = anglesToForward(self.angles);
-  var_9 = vectornormalize(var_7);
+  var_9 = vectorNormalize(var_7);
   var_10 = vectordot(var_8, var_9);
 
   if(var_10 < self.meleedot) {
@@ -1202,7 +1202,7 @@ findteleportpos(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_11 = vectornormalize(var_10);
+  var_11 = vectorNormalize(var_10);
   var_12 = getclosestpointonnavmesh(var_0.origin);
   var_13 = [];
   var_14 = [];
@@ -1255,7 +1255,7 @@ findteleportpos(var_0, var_1, var_2, var_3, var_4) {
         continue;
       }
 
-      var_23 = vectornormalize(var_22[1] - var_12);
+      var_23 = vectorNormalize(var_22[1] - var_12);
       var_24 = vectordot(var_23, var_11);
 
       if(var_24 < 0.707) {
@@ -1378,7 +1378,7 @@ findteleportposinfrontofenemy() {
     var_6 = anglesToForward(var_0.angles);
     var_7 = var_1.min_teleport_dist_to_player;
   } else {
-    var_6 = vectornormalize(var_4);
+    var_6 = vectorNormalize(var_4);
     var_5 = var_5 * 1.1;
     var_7 = var_5 * 1.75;
   }
@@ -1401,7 +1401,7 @@ findteleportposinfrontofenemy() {
     if(var_14 > var_3) {
       continue;
     }
-    var_15 = vectornormalize(var_13);
+    var_15 = vectorNormalize(var_13);
     var_16 = vectordot(var_6, var_15);
 
     if(var_16 < 0.707) {

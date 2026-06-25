@@ -132,7 +132,7 @@ istargetvalid(target) {
 }
 
 gettarget() {
-  targets = getplayers();
+  targets = getPlayers();
   leasthunted = targets[0];
 
   for(i = 0; i < targets.size; i++) {
@@ -188,7 +188,7 @@ function_776e45e5() {
   self waittilltimeout(10, #"reached_end_node");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     var_3ada9d08 = 0;
 
     foreach(player in players) {
@@ -340,7 +340,7 @@ function_c48c2d66() {
     return false;
   }
 
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     return false;
   }
 
@@ -381,17 +381,17 @@ function_47c795bc(params) {
   offset = var_4edd9b4 - tagorigin;
   timescale = 0.4;
   movetime = getanimlength(self animmappingsearch(#"par_transform")) * timescale;
-  mover enablelinkto();
-  self linkto(mover, "tag_origin", offset, (0, 0, 0));
+  mover enablelinkTo();
+  self linkTo(mover, "tag_origin", offset, (0, 0, 0));
   self asmrequestsubstate(#"hash_4bea3500eb31dd8b");
   self thread function_88d81715();
   acceleration = 0.3;
-  mover moveto(self.origin + (0, 0, 30), 0.6, acceleration);
+  mover moveTo(self.origin + (0, 0, 30), 0.6, acceleration);
   mover waittill(#"movedone");
   waittime = 0.1;
   wait waittime;
   acceleration = 0.6;
-  mover moveto(movepos, movetime, acceleration);
+  mover moveTo(movepos, movetime, acceleration);
   mover waittill(#"movedone");
   self clientfield::set("bat_transform_fx", 1);
   self.overridevehicledamage = undefined;

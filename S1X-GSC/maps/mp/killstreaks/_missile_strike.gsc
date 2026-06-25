@@ -323,8 +323,8 @@ MissileEyes(player, rocket, MissileWeapon) {
   player.ClusterDeployed = false;
   player.MissileBoostUsed = false;
 
-  player CameraLinkTo(rocket, "tag_origin");
-  player ControlsLinkTo(rocket);
+  player CameralinkTo(rocket, "tag_origin");
+  player ControlslinkTo(rocket);
 
   if(getDvarInt("camera_thirdPerson")) {
     player setThirdPersonDOF(false);
@@ -488,7 +488,7 @@ FireBabyMissile(MasterRocket, MissileWeapon) {
   rocket.team = self.team;
   rocket SetMissileMinimapVisible(true);
 
-  self PlayRumbleOnEntity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
   Earthquake(0.2, 0.2, MasterRocket.origin, 200);
 
   rocket thread maps\mp\gametypes\_damage::setEntityDamageCallback(CONST_MISSILE_HEALTH, undefined, ::missileStrikeOnDeath, undefined, true);
@@ -545,7 +545,7 @@ split_rocket_hellfire(rocket, MissileWeapon) {
     waitFrames++;
   }
 
-  self PlayRumbleOnEntity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
   Earthquake(0.2, 0.2, rocket.origin, 200);
 
   rocket SetMissileCoasting(true);
@@ -733,14 +733,14 @@ SpawnClusterChildren(RocketStoredForwardPosition, ClusterStartPoint, RotationSta
   rocket thread bomblet_explosion_waiter(self, MissileWeapon);
 
   view_offset = RandomTargetPosition - RandomPosition;
-  view_offset = VectorNormalize((view_offset[0], view_offset[1], 0));
+  view_offset = vectorNormalize((view_offset[0], view_offset[1], 0));
   view_offset *= -30;
   view_offset += (0, 0, 200);
 
   killcam = MissileWeapon.preSpawnedKillcamEnt;
   killcam.origin = RandomPosition + view_offset;
   killcam.killCamStartTime = GetTime();
-  killcam LinkTo(rocket);
+  killcam linkTo(rocket);
   killcam thread killCamRocketDeath(rocket);
 
   rocket.killCamEnt = killcam;
@@ -1364,7 +1364,7 @@ hud_watch_for_boost_active(rocket, MissileWeapon) {
 
   self waittill("FireButtonPressed");
 
-  self PlayRumbleOnEntity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
 
   self.MissileBoostUsed = true;
 

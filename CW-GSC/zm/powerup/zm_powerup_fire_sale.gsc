@@ -75,7 +75,7 @@ function start_fire_sale(item) {
   zombie_utility::set_zombie_var(#"zombie_powerup_fire_sale_on", 1);
   level.disable_firesale_drop = 1;
   level thread toggle_fire_sale_on();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     if(isDefined(e_player) && isPlayer(e_player) && isDefined(item.hint)) {

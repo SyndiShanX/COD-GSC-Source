@@ -140,7 +140,7 @@ function private mechznotetrackshootgrenade(entity) {
   }
   entity clientfield::set("mechz_115_gun_firing", val);
   entity magicgrenadetype(getweapon("electroball_grenade"), launch_pos, velocity);
-  playsoundatposition("wpn_grenade_fire_mechz", entity.origin);
+  playSoundAtPosition("wpn_grenade_fire_mechz", entity.origin);
 }
 
 function mechztargetservice(entity) {
@@ -225,11 +225,11 @@ function private mechzberserkknockdownservice(entity) {
         zombie.knockdown = 1;
         zombie.knockdown_type = "knockdown_shoved";
         zombie_to_mechz = entity.origin - zombie.origin;
-        zombie_to_mechz_2d = vectornormalize((zombie_to_mechz[0], zombie_to_mechz[1], 0));
+        zombie_to_mechz_2d = vectorNormalize((zombie_to_mechz[0], zombie_to_mechz[1], 0));
         zombie_forward = anglesToForward(zombie.angles);
-        zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+        zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
-        zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+        zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
         dot = vectordot(zombie_to_mechz_2d, zombie_forward_2d);
         if(dot >= 0.5) {
           zombie.knockdown_direction = "front";
@@ -275,8 +275,8 @@ function private mechzzombieeligibleforberserkknockdown(zombie, mechz, predicted
   enemy_vec = zombie.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0) {
     return false;
@@ -381,7 +381,7 @@ function private mechzshouldshootflamesweep(entity) {
     return false;
   }
   near_players = 0;
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(distance2dsquared(entity.origin, player.origin) < 10000) {
       near_players++;
@@ -520,7 +520,7 @@ function private mechzupdateflame(entity) {
   if(isDefined(level.mechz_flamethrower_player_callback)) {
     [[level.mechz_flamethrower_player_callback]](entity);
   } else {
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(!(isDefined(player.is_burning) && player.is_burning)) {
         if(player istouching(entity.flametrigger)) {
@@ -629,10 +629,10 @@ function private mechzspawnsetup() {
   self.stumble_stun_cooldown_time = gettime();
   self.debug_traversal_ast = "";
   self.flametrigger = spawn("trigger_box", self.origin, 0, 200, 50, 25);
-  self.flametrigger enablelinkto();
+  self.flametrigger enablelinkTo();
   self.flametrigger.origin = self gettagorigin("tag_flamethrower_fx");
   self.flametrigger.angles = self gettagangles("tag_flamethrower_fx");
-  self.flametrigger linkto(self, "tag_flamethrower_fx");
+  self.flametrigger linkTo(self, "tag_flamethrower_fx");
   self thread weaponobjects::watchweaponobjectusage();
   self.pers = [];
   self.pers["team"] = self.team;
@@ -1087,8 +1087,8 @@ function mechzcheckinarc(right_offset, aim_tag) {
   enemy_vec = self.favoriteenemy.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0.5) {
     return false;
@@ -1110,8 +1110,8 @@ function private mechzgrenadecheckinarc(right_offset) {
   enemy_vec = self.favoriteenemy.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0.5) {
     return false;

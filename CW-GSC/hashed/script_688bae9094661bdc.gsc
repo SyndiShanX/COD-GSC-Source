@@ -61,14 +61,14 @@ function private on_ai_spawned() {
 
 function set_stealth_mode_sp(enabled, musichidden, musicspotted) {
   if(musicspotted) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread stealth_player::ambient_player_thread();
     }
 
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread stealth_player::ambient_player_stop();
   }
 }
@@ -156,7 +156,7 @@ function threat_sight_player_sight_audio(anycansee, maxthreat, var_2107b994) {
         self thread util::delete_on_death(snd_ent);
       }
 
-      snd_ent linkto(self);
+      snd_ent linkTo(self);
       snd_ent.isplaying = 0;
       self.stealth.threat_sight_snd_ent[alias] = snd_ent;
     }

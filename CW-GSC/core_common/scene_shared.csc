@@ -624,7 +624,7 @@ class csceneplayer: cscriptbundleobjectbase, csceneobject {
     var_473877de = getservertime(clientnum) - var_57949b2d;
 
     if(isDefined(var_55b4f21e.var_ffc10b65)) {
-      rotation_target = getent(clientnum, var_55b4f21e.var_ffc10b65, "targetname");
+      rotation_target = getEnt(clientnum, var_55b4f21e.var_ffc10b65, "targetname");
     }
 
     playmaincamxcam(clientnum, animation, var_8395d6f1, var_380af598, "", v_pos, v_ang, rotation_target, undefined, undefined, int(var_473877de));
@@ -1656,7 +1656,7 @@ function player_scene_skip_completed(localclientnum, oldval, newval, bnewent, bi
 }
 
 function get_existing_ent(clientnum, str_name) {
-  e = getent(clientnum, str_name, "targetname");
+  e = getEnt(clientnum, str_name, "targetname");
 
   if(!isDefined(e)) {
     e = struct::get(str_name, "targetname");
@@ -1774,7 +1774,7 @@ function in_igc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
   if(isarray(level.var_25e5c959)) {
     foreach(var_ed8205c6 in level.var_25e5c959) {
-      a_players = getplayers(fieldname);
+      a_players = getPlayers(fieldname);
 
       foreach(player in a_players) {
         if(isDefined(player)) {

@@ -180,6 +180,6 @@ function orda_dissolve(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
 function function_5dab9c6d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self playrumbleonentity(fieldname, #"hash_3346eab49e855d23");
+    self playRumbleOnEntity(fieldname, #"hash_3346eab49e855d23");
   }
 }

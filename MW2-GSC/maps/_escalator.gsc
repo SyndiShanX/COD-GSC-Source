@@ -20,7 +20,7 @@ escalator_startup() {
   while(isDefined(step.target)) {
     step StartUsingLessFrequentLighting();
     step.true_origin = step.origin;
-    step.next_step = getent(step.target, "targetname");
+    step.next_step = getEnt(step.target, "targetname");
     step = step.next_step;
   }
 
@@ -42,7 +42,7 @@ escalator_move(first_step) {
     step show();
 
     if(next_step != first_step) {
-      step moveto(next_step.true_origin, movespeed);
+      step moveTo(next_step.true_origin, movespeed);
     } else {
       step.origin = first_origin;
     }
@@ -83,7 +83,7 @@ escalator_move(first_step) {
 }
 
 final_move(movespeed, next_step) {
-  self moveto(next_step.true_origin, movespeed, 0, movespeed);
+  self moveTo(next_step.true_origin, movespeed, 0, movespeed);
   wait movespeed;
-  self moveto(self.origin, .05);
+  self moveTo(self.origin, .05);
 }

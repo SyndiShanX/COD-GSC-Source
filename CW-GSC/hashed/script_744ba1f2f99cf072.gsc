@@ -38,11 +38,11 @@
 
 function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
-  level.checkpoint_clip = getent("checkpoint_clip", "targetname");
+  level.checkpoint_clip = getEnt("checkpoint_clip", "targetname");
   level.checkpoint_clip notsolid();
-  level.checkpoint_clip_right = getent("checkpoint_clip_right", "targetname");
+  level.checkpoint_clip_right = getEnt("checkpoint_clip_right", "targetname");
   level.checkpoint_clip_right notsolid();
-  level thread scene::init_streamer(#"scene_kgb_activation", getplayers());
+  level thread scene::init_streamer(#"scene_kgb_activation", getPlayers());
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
 

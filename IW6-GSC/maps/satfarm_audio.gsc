@@ -139,7 +139,7 @@ bullet_holes1() {
   var_0 = spawn("script_origin", (-47294, 1750, 1228));
   var_1 = (-47084, 1516, 1158);
   var_0 playSound("satf_bullet_holes_1", "sounddone");
-  var_0 moveto(var_1, 1.5);
+  var_0 moveTo(var_1, 1.5);
   thread aud_intro_alarms();
   var_0 waittill("sounddone");
   var_0 delete();
@@ -156,7 +156,7 @@ bullet_holes3() {
   var_0 = spawn("script_origin", (-44945, 1334, 1230));
   var_1 = (-44866, 1095, 1230);
   var_0 playSound("satf_bullet_holes_3", "sounddone");
-  var_0 moveto(var_1, 1.5);
+  var_0 moveTo(var_1, 1.5);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -229,7 +229,7 @@ tank_drop_jet_left() {
   var_0 = spawn("script_origin", (-29525, -23227, 1189));
   var_1 = (-29502, -6641, 2025);
   var_0 playSound("satf_tank_drop_jet_left", "sounddone");
-  var_0 moveto(var_1, 9.25);
+  var_0 moveTo(var_1, 9.25);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -239,7 +239,7 @@ tank_drop_jet_right() {
   var_0 = spawn("script_origin", (-26803, -20129, 1138));
   var_1 = (-24412, -2417, 3214);
   var_0 playSound("satf_tank_drop_jet_right", "sounddone");
-  var_0 moveto(var_1, 8);
+  var_0 moveTo(var_1, 8);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -264,7 +264,7 @@ tank_drop_fighter_1() {
   var_0 = spawn("script_origin", (-30074, -24011, 1806));
   var_1 = (-25836, -110, 1767);
   var_0 playSound("satf_tank_drop_fighter_1", "sounddone");
-  var_0 moveto(var_1, 3);
+  var_0 moveTo(var_1, 3);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -274,7 +274,7 @@ tank_drop_fighter_2() {
   var_0 = spawn("script_origin", (-29537, -24954, 2181));
   var_1 = (-25414, -4713, 2962);
   var_0 playSound("satf_tank_drop_fighter_2", "sounddone");
-  var_0 moveto(var_1, 3);
+  var_0 moveTo(var_1, 3);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -316,7 +316,7 @@ a10_crash_approach() {
   var_0 = spawn("script_origin", (-20490, 48120, 3125));
   var_1 = (-6317, 37717, 698);
   var_0 playSound("satf_hangar_a10_incoming", "sounddone");
-  var_0 moveto(var_1, 2.75);
+  var_0 moveTo(var_1, 2.75);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -469,7 +469,7 @@ tower_a10_flyby() {
   var_0 = spawn("script_origin", (14496, 66235, 1380));
   var_1 = (-22083, 56416, 1380);
   var_0 playSound("satf_tower_jets_by", "sounddone");
-  var_0 moveto(var_1, 6);
+  var_0 moveTo(var_1, 6);
   wait 3;
   var_0 waittill("sounddone");
   var_0 delete();
@@ -480,7 +480,7 @@ tower_a10_strafe_1() {
   wait 9;
   var_0 = spawn("script_origin", (14496, 66235, 1380));
   var_1 = (-22083, 56416, 1380);
-  var_0 moveto(var_1, 6);
+  var_0 moveTo(var_1, 6);
   wait 1.5;
   var_0 playSound("satf_a10_tower_strafe_1", "sounddone");
   var_0 waittill("sounddone");
@@ -492,7 +492,7 @@ tower_a10_strafe_2() {
   wait 9;
   var_0 = spawn("script_origin", (14496, 66235, 1380));
   var_1 = (-22083, 56416, 1380);
-  var_0 moveto(var_1, 6);
+  var_0 moveTo(var_1, 6);
   wait 2;
   var_0 playSound("satf_a10_tower_strafe_2", "sounddone");
   var_0 waittill("sounddone");
@@ -551,8 +551,8 @@ train_leaving() {
   var_3 = (-4634, 57776, -620);
   var_0 playSound("satf_warehouse_train_start_front");
   var_1 playSound("satf_warehouse_train_start_rear");
-  var_0 moveto(var_2, 23, 5);
-  var_1 moveto(var_3, 23, 5);
+  var_0 moveTo(var_2, 23, 5);
+  var_1 moveTo(var_3, 23, 5);
 }
 
 overlord_trans2() {

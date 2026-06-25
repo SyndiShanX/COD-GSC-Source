@@ -67,7 +67,7 @@ class class_727456f3 {
       if(isDefined(m_s_bundle.var_b22fe167)) {
         if(!isDefined(var_80896a28)) {
           var_80896a28 = spawn("script_origin", var_2af3d553.origin);
-          var_80896a28 linkto(var_2af3d553);
+          var_80896a28 linkTo(var_2af3d553);
         }
 
         var_80896a28 stoploopsound();
@@ -145,7 +145,7 @@ class class_727456f3 {
       if(isDefined(m_s_bundle.var_b22fe167)) {
         if(!isDefined(var_80896a28)) {
           var_80896a28 = spawn("script_origin", var_2af3d553.origin);
-          var_80896a28 linkto(var_2af3d553);
+          var_80896a28 linkTo(var_2af3d553);
         }
 
         var_80896a28 stoploopsound();
@@ -561,8 +561,8 @@ class class_727456f3 {
   function function_8986542b(s_gameobject, b_call, b_inside) {
     if(b_inside) {
       var_10b20309 = s_gameobject;
-      s_gameobject.mdl_gameobject.trigger enablelinkto();
-      s_gameobject.mdl_gameobject.trigger linkto(var_2af3d553);
+      s_gameobject.mdl_gameobject.trigger enablelinkTo();
+      s_gameobject.mdl_gameobject.trigger linkTo(var_2af3d553);
     }
 
     thread function_64d6a132(s_gameobject, b_call, b_inside);
@@ -619,8 +619,8 @@ class class_727456f3 {
     }
 
     m_e_trigger = spawn("trigger_radius", v_pos, 16384 | 4096, var_a2f96f78.var_517fb95d, var_a2f96f78.var_394cdd7c);
-    m_e_trigger enablelinkto();
-    m_e_trigger linkto(var_2af3d553);
+    m_e_trigger enablelinkTo();
+    m_e_trigger linkTo(var_2af3d553);
   }
 
   function function_d842399a() {

@@ -620,7 +620,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           var_49 = level.player getEye();
         }
 
-        var_48 = vectornormalize(var_3 - var_49);
+        var_48 = vectorNormalize(var_3 - var_49);
         var_48 = maps\_utility::vector_multiply(var_48, 200);
       }
 
@@ -919,7 +919,7 @@ createentity(var_0, var_1, var_2) {
   var_6 = spawn("script_model", self gettagorigin(var_5));
   var_6.angles = self gettagangles(var_5);
   var_6 setModel(var_4);
-  var_6 linkto(self);
+  var_6 linkTo(self);
 
   if(!isDefined(self.partsspawnedents)) {
     self.partsspawnedents = [];
@@ -1062,7 +1062,7 @@ get_last_model_from_part(var_0) {
 apply_physics_explosion_to_part(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = level.destructible_type[self.destuctableinfo].parts[var_0][0].v["physicsOnExplosion"];
   var_7 = self gettagorigin(var_2);
-  var_8 = vectornormalize(var_7 - var_3);
+  var_8 = vectorNormalize(var_7 - var_3);
   var_8 = maps\_utility::vector_multiply(var_8, randomfloatrange(var_4, var_5) * var_6);
   thread physics_launch(var_0, var_1, var_7, var_8);
 }
@@ -1174,7 +1174,7 @@ get_traverse_disconnect_brush() {
     return undefined;
   }
 
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0)) {
     return undefined;
@@ -1204,7 +1204,7 @@ disconnecttraverses() {
     return;
   }
   var_0.origin = var_0.origin + (0, 0, 10000);
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_0.origin = var_0.origin - (0, 0, 10000);
 }
 

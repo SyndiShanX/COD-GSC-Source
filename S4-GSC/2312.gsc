@@ -257,7 +257,7 @@ _id_5BA1(var_0) {
   }
   var_6 = getdvarfloat("#x33c01342f08fa6256");
   var_7 = (0.5 * var_6 * _func_0219(var_5) + var_4[2]) / var_5;
-  var_4 = vectornormalize((var_4[0], var_4[1], 0));
+  var_4 = vectorNormalize((var_4[0], var_4[1], 0));
   var_8 = (var_4[0] * var_1, var_4[1] * var_1, var_7);
   var_9 = magicgrenademanual("zombie_ranged_attack_mp", var_3, var_8, var_2, self);
   var_9.angles = self gettagangles(self._id_BD9C);
@@ -728,7 +728,7 @@ _id_FCA8(var_0, var_1, var_2, var_3) {
     var_9 = var_7 - var_4;
 
     if(_func_0135(var_9) > var_8 * var_8) {
-      var_7 = var_4 + vectornormalize(var_9) * var_8;
+      var_7 = var_4 + vectorNormalize(var_9) * var_8;
     }
 
     self _meth_82C1("face enemy");
@@ -789,8 +789,8 @@ _id_1DF9(var_0) {
 
         if(isDefined(var_5) && isai(var_5)) {
           if(isDefined(var_5.team) && var_5.team == self.team) {
-            var_6 = vectornormalize((var_3 - var_2) * (1, 1, 0));
-            var_7 = vectornormalize((var_5.origin - self.origin) * (1, 1, 0));
+            var_6 = vectorNormalize((var_3 - var_2) * (1, 1, 0));
+            var_7 = vectorNormalize((var_5.origin - self.origin) * (1, 1, 0));
             var_8 = vectordot(var_7, var_6);
 
             if(var_8 > 0.866 && distance(self.origin, var_5.origin) > 12) {
@@ -814,7 +814,7 @@ _id_1DF9(var_0) {
 }
 
 _id_881E(var_0, var_1) {
-  var_2 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
+  var_2 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
   return var_4 > var_1;

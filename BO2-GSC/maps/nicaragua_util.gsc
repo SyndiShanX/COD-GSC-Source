@@ -1082,7 +1082,7 @@ threat_bias_set(str_bias_group, str_target_group, n_amount) {
 
 func_spawn_villager_run_to_volume(e_goal) {
   self endon("death");
-  self set_goalradius(128);
+  self set_goalRadius(128);
   self setgoalvolumeauto(e_goal);
   self set_ignoreme(0);
   self.enemyaccuracy = 0.6;
@@ -1105,7 +1105,7 @@ setup_scope_view() {
   level clientnotify("scope_on");
   level thread maps\createart\nicaragua_art::blend_exposure_over_time(3, 0.05);
   level.str_default_vision = self getvisionsetnaked();
-  o_dichotomy = getent("mason_intro_scope_view", "targetname");
+  o_dichotomy = getEnt("mason_intro_scope_view", "targetname");
   self playerlinktodelta(o_dichotomy, undefined, 1, 10, 10, 10, 10);
   wait 0.05;
   e_room = get_struct("josephina_window_view", "targetname");
@@ -1174,7 +1174,7 @@ turn_off_scope_vision() {
 
 start_charging_horse(str_horse_name, str_start_node, delay, n_speed, b_has_spawned) {
   if(isDefined(b_has_spawned) && b_has_spawned) {
-    e_horse = getent(str_horse_name, "targetname");
+    e_horse = getEnt(str_horse_name, "targetname");
 
     if(!is_alive(e_horse)) {
       break;
@@ -1474,7 +1474,7 @@ brutality_pdf_final_goal_pos(str_scene, b_ignore_pdf) {
 
 brutality_done_by_pdf_death(str_trig_react) {
   self waittill("death");
-  t_react = getent(str_trig_react, "targetname");
+  t_react = getEnt(str_trig_react, "targetname");
 
   if(isDefined(t_react)) {
     trigger_use(str_trig_react);
@@ -1485,7 +1485,7 @@ civ_escape(str_vol) {
   self endon("death");
   level.n_civilians_saved++;
   self.overrideactordamage = ::brutality_civ_ai_damage_override;
-  self set_goalradius(128);
+  self set_goalRadius(128);
   self set_ignoreme(0);
   self.enemyaccuracy = 0.6;
   v_civ_goal = get_ent(str_vol, "targetname", 1);
@@ -1571,7 +1571,7 @@ nicaragua_interstial_movie(str_movie) {
 }
 
 destructibles_in_area(str_area) {
-  e_area = getent(str_area, "script_noteworthy");
+  e_area = getEnt(str_area, "script_noteworthy");
   a_script_models = getEntArray("script_model", "classname");
 
   foreach(m_script in a_script_models) {
@@ -1679,7 +1679,7 @@ func_spawn_truck_gunner() {
 func_spawn_truck_driver() {
   self endon("death");
   self magic_bullet_shield();
-  vh_truck = getent("cartel_courtyard_truck", "targetname");
+  vh_truck = getEnt("cartel_courtyard_truck", "targetname");
   vh_truck waittill("reached_end_node");
   self stop_magic_bullet_shield();
 }

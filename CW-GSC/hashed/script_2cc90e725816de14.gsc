@@ -78,7 +78,7 @@ function function_3f369eaa() {
   if(is_true(self.var_1a5b6b7e)) {
     self endon(#"death");
     awareness::pause(self);
-    self animscripted("rise_anim", self.origin, (0, self.angles[1], 0), #"ai_t9_zm_mechz_arrive", "normal", undefined, 1, 0.2);
+    self animScripted("rise_anim", self.origin, (0, self.angles[1], 0), #"ai_t9_zm_mechz_arrive", "normal", undefined, 1, 0.2);
     self waittillmatch({
       #notetrack: "end"}, #"rise_anim");
     awareness::resume(self);
@@ -92,7 +92,7 @@ function function_3076443(params) {
     namespace_85745671::function_2b925fa5(self);
   }
 
-  self animscripted("despawn_anim", self.origin, self.angles, #"ai_t9_zm_mechz_exit", "normal", undefined, 1, 0.2);
+  self animScripted("despawn_anim", self.origin, self.angles, #"ai_t9_zm_mechz_exit", "normal", undefined, 1, 0.2);
   self waittillmatch({
     #notetrack: "end"}, #"despawn_anim");
   self ghost();

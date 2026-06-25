@@ -147,11 +147,11 @@ adjust_endgame_camera() {
 }
 
 disable_broken_nodes() {
-  var_0 = getent("clip256x256x8", "targetname");
-  var_0 moveto((-1759, 2166, 790), 0.05);
+  var_0 = getEnt("clip256x256x8", "targetname");
+  var_0 moveTo((-1759, 2166, 790), 0.05);
   var_0.angles = (0, 0, -46);
   var_0 waittill("movedone");
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_1 = spawn("script_model", (-1750, 2162, 771.5));
   var_1 setModel("dct_alien_plant01_top");
   var_1.angles = (0, 0, -42);
@@ -724,19 +724,19 @@ init_attachment_and_crafting_locations() {
   level thread maps\mp\alien\_crafting_traps::init();
   wait 10;
   var_0 = [];
-  var_0[0] = getent("ark_area_1_section_1", "targetname");
-  var_0[1] = getent("ark_area_1_section_2", "targetname");
-  var_0[2] = getent("ark_area_1_section_3", "targetname");
+  var_0[0] = getEnt("ark_area_1_section_1", "targetname");
+  var_0[1] = getEnt("ark_area_1_section_2", "targetname");
+  var_0[2] = getEnt("ark_area_1_section_3", "targetname");
   var_1 = common_scripts\utility::random(var_0);
   var_2 = [];
-  var_2[0] = getent("ark_area_2_section_1", "targetname");
-  var_2[1] = getent("ark_area_2_section_2", "targetname");
-  var_2[2] = getent("ark_area_2_section_3", "targetname");
+  var_2[0] = getEnt("ark_area_2_section_1", "targetname");
+  var_2[1] = getEnt("ark_area_2_section_2", "targetname");
+  var_2[2] = getEnt("ark_area_2_section_3", "targetname");
   var_3 = common_scripts\utility::random(var_2);
   var_4 = spawn("script_model", (0, 0, 0));
   var_5 = [];
-  var_5[0] = getent("ark_area_3_section_1", "targetname");
-  var_5[1] = getent("ark_area_3_section_2", "targetname");
+  var_5[0] = getEnt("ark_area_3_section_1", "targetname");
+  var_5[1] = getEnt("ark_area_3_section_2", "targetname");
   var_5[2] = var_4;
   var_6 = [var_5[0], var_5[1]];
   setup_attachment_crafting_area(var_0, var_1, 1);
@@ -780,7 +780,7 @@ setup_attachment_crafting_area(var_0, var_1, var_2) {
       var_4 = var_1;
 
     if(var_0[var_3] == var_4) {
-      var_8 = common_scripts\utility::getstruct("gun_area_" + var_2 + "_section_" + (var_3 + 1), "targetname");
+      var_8 = common_scripts\utility::getStruct("gun_area_" + var_2 + "_section_" + (var_3 + 1), "targetname");
       var_9 = spawn("script_model", var_8.origin);
       var_9.angles = var_8.angles;
       var_9 setModel("weapon_ameli_green");
@@ -808,7 +808,7 @@ setup_attachment_pickup_spot() {
   var_0.pillage_trigger = self;
   var_0.pillage_trigger.angles = self.angles;
   var_1 = &"MP_ALIEN_DESCENT_ATTACHMENT_PICKUP";
-  var_0.pillage_trigger sethintstring(var_1);
+  var_0.pillage_trigger setHintString(var_1);
   var_0.pillage_trigger makeusable();
 
   if(maps\mp\alien\_utility::alien_mode_has("outline")) {
@@ -871,10 +871,10 @@ encounter_init() {
   maps\mp\_obelisk::obelisk_init();
   thread maps\mp\alien\_alien_vanguard::init();
   thread gate_blocker_glyphs(1);
-  var_0 = getent("blocker_01_forcefield", "targetname");
-  var_0 disconnectpaths();
-  var_0 = getent("blocker_02_forcefield", "targetname");
-  var_0 disconnectpaths();
+  var_0 = getEnt("blocker_01_forcefield", "targetname");
+  var_0 disconnectPaths();
+  var_0 = getEnt("blocker_02_forcefield", "targetname");
+  var_0 disconnectPaths();
   level thread wait_spawn_intro_drill();
   level thread maps\mp\mp_alien_dlc3_vignettes::main();
   maps\mp\alien\_gamescore_dlc3::init_descent_eog_score_components(["hive", "gryphon", "ark", "escape", "relics"]);
@@ -1183,7 +1183,7 @@ gate_blocker_glyphs(var_0) {
   level endon("game_ended");
   level endon("alien_vanguard_access_0" + var_0);
   var_1 = -1;
-  var_2 = getent("blocker_0" + var_0 + "_door", "targetname");
+  var_2 = getEnt("blocker_0" + var_0 + "_door", "targetname");
 
   for(;;) {
     level waittill("obelisk_destroyed");
@@ -1203,7 +1203,7 @@ gate_blocker(var_0) {
   level notify("alien_vanguard_access_0" + var_0);
   level.vanguard_active = 1;
   maps\mp\alien\_gamescore::reset_encounter_performance();
-  var_2 = getent("blocker_0" + var_0 + "_door", "targetname");
+  var_2 = getEnt("blocker_0" + var_0 + "_door", "targetname");
   var_2 setscriptablepartstate(0, "open");
   var_2 playSound("scn_gate_open");
   level thread deploy_vanguard_nag(20);
@@ -1231,7 +1231,7 @@ gate_blocker(var_0) {
   level.drill_use_trig makeusable();
   maps\mp\alien\_outline_proto::add_to_drill_preplant_watch_list(level.drill);
   level.drill maps\mp\alien\_drill::set_drill_icon();
-  var_6 = getent("blocker_0" + var_0 + "_forcefield", "targetname");
+  var_6 = getEnt("blocker_0" + var_0 + "_forcefield", "targetname");
   var_6 thread sfx_forcefield_down();
   var_6 connectpaths();
   common_scripts\utility::waitframe();
@@ -1371,16 +1371,16 @@ open_obelisk(var_0, var_1) {
     }
     switch (var_4.script_noteworthy) {
       case "shell_a":
-        var_4 moveto(transform_pos_ang(var_4, (4, 4, -32), 1), 5, 0.5, 0.5);
+        var_4 moveTo(transform_pos_ang(var_4, (4, 4, -32), 1), 5, 0.5, 0.5);
         break;
       case "shell_b":
-        var_4 moveto(transform_pos_ang(var_4, (4, -4, -32), 0), 5, 0.5, 0.5);
+        var_4 moveTo(transform_pos_ang(var_4, (4, -4, -32), 0), 5, 0.5, 0.5);
         break;
       case "shell_c":
-        var_4 moveto(transform_pos_ang(var_4, (-4, -4, -32), 0), 5, 0.5, 0.5);
+        var_4 moveTo(transform_pos_ang(var_4, (-4, -4, -32), 0), 5, 0.5, 0.5);
         break;
       case "shell_d":
-        var_4 moveto(transform_pos_ang(var_4, (-4, 4, -32), 1), 5, 0.5, 0.5);
+        var_4 moveTo(transform_pos_ang(var_4, (-4, 4, -32), 1), 5, 0.5, 0.5);
         break;
       default:
         break;
@@ -1433,10 +1433,10 @@ jumpto_escape_blocker_01() {}
 jumpto_escape() {}
 
 debug_open_blocker_doors() {
-  var_0 = getent("blocker_01_door", "targetname");
-  var_1 = getent("blocker_02_door", "targetname");
-  var_2 = getent("blocker_01_forcefield", "targetname");
-  var_3 = getent("blocker_02_forcefield", "targetname");
+  var_0 = getEnt("blocker_01_door", "targetname");
+  var_1 = getEnt("blocker_02_door", "targetname");
+  var_2 = getEnt("blocker_01_forcefield", "targetname");
+  var_3 = getEnt("blocker_02_forcefield", "targetname");
   var_0 setscriptablepartstate(0, "ff_down");
   var_1 setscriptablepartstate(0, "ff_down");
   var_2 delete();
@@ -1600,7 +1600,7 @@ extend_bridge() {
     var_2 show();
   }
 
-  var_4 = getent("ark_bridge_path_clip", "targetname");
+  var_4 = getEnt("ark_bridge_path_clip", "targetname");
   var_4 connectpaths();
   var_4 notsolid();
   thread extend_bridge_fx();
@@ -1610,7 +1610,7 @@ extend_bridge() {
 
 extend_bridge_fx() {
   wait 0.1;
-  var_0 = getent("bridge_section_2_model", "targetname");
+  var_0 = getEnt("bridge_section_2_model", "targetname");
   playFXOnTag(level._effect["bridge_tip"], var_0, "tag_bridge_tip");
 }
 
@@ -1723,11 +1723,11 @@ hide_bridge_parts() {
 }
 
 slide_bridge(var_0) {
-  var_1 = getent("bridge_section_2_model", "targetname");
+  var_1 = getEnt("bridge_section_2_model", "targetname");
 
   if(isDefined(var_1)) {
     playsoundatpos((59, 1891, 995), "scn_ark_bridge");
-    var_1 moveto(var_1.origin + (var_0, 0, 0), 2.0, 0.1, 0.1);
+    var_1 moveTo(var_1.origin + (var_0, 0, 0), 2.0, 0.1, 0.1);
   }
 
   wait 2.0;
@@ -1850,27 +1850,27 @@ dlc3_chaos_nondeterministic_entity_handler() {
 }
 
 move_clip_to_bridge_chaos() {
-  var_0 = getent("player512x512x8", "targetname");
+  var_0 = getEnt("player512x512x8", "targetname");
   var_1 = spawn("script_model", (-512, 1728, 1136));
   var_1.angles = (270, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("player512x512x8", "targetname");
+  var_2 = getEnt("player512x512x8", "targetname");
   var_3 = spawn("script_model", (-385, 2201.5, 2160));
   var_3.angles = (270, 330, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("player512x512x8", "targetname");
+  var_4 = getEnt("player512x512x8", "targetname");
   var_5 = spawn("script_model", (-385, 2201.5, 1648));
   var_5.angles = (270, 330, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
-  var_6 = getent("player512x512x8", "targetname");
+  var_6 = getEnt("player512x512x8", "targetname");
   var_7 = spawn("script_model", (-512, 1728, 1648));
   var_7.angles = (270, 0, 0);
   var_7 clonebrushmodeltoscriptmodel(var_6);
-  var_8 = getent("player512x512x8", "targetname");
+  var_8 = getEnt("player512x512x8", "targetname");
   var_9 = spawn("script_model", (-385, 2201.5, 1136));
   var_9.angles = (270, 330, 0);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("player512x512x8", "targetname");
+  var_10 = getEnt("player512x512x8", "targetname");
   var_11 = spawn("script_model", (-512, 1728, 2160));
   var_11.angles = (270, 0, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);

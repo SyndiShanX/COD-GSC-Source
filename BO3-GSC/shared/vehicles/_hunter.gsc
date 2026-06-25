@@ -104,7 +104,7 @@ function hunter_spawndrones() {
     foreach(dronetag in self.droneattachtags) {
       origin = self gettagorigin(dronetag);
       angles = self gettagangles(dronetag);
-      drone = spawnvehicle("spawner_bo3_attack_drone_enemy", origin, angles);
+      drone = spawnVehicle("spawner_bo3_attack_drone_enemy", origin, angles);
       drone.owner = self;
       drone.attachtag = dronetag;
       drone.team = self.team;
@@ -625,7 +625,7 @@ function delay_target_toenemy_thread(point, enemy, timetohit) {
   }
   self.faketargetent unlink();
   self.faketargetent.origin = point;
-  self setturrettargetent(self.faketargetent);
+  self setturrettargetEnt(self.faketargetent);
   self waittill("turret_on_target");
   timestart = gettime();
   offset = (0, 0, 0);
@@ -638,7 +638,7 @@ function delay_target_toenemy_thread(point, enemy, timetohit) {
   }
   self.faketargetent.origin = enemy.origin + offset;
   wait(0.05);
-  self.faketargetent linkto(enemy);
+  self.faketargetent linkTo(enemy);
 }
 
 function attack_thread_mainturret() {
@@ -650,7 +650,7 @@ function attack_thread_mainturret() {
     if(isDefined(enemy)) {
       self setlookatent(enemy);
       if(self vehcansee(enemy)) {
-        vectorfromenemy = vectornormalize((self.origin - enemy.origin[0], self.origin - enemy.origin[1], 0));
+        vectorfromenemy = vectorNormalize((self.origin - enemy.origin[0], self.origin - enemy.origin[1], 0));
         self thread delay_target_toenemy_thread(enemy.origin + (vectorfromenemy * 300), enemy, 1.5);
         self waittill("turret_on_target");
         self vehicle_ai::fire_for_time(2 + randomfloat(0.8));
@@ -801,7 +801,7 @@ function getenemyarray(include_ai, include_player) {
     enemyarray = arraycombine(enemyarray, aiarray, 0, 0);
   }
   if(isDefined(include_player) && include_player) {
-    playerarray = getplayers(enemy_team);
+    playerarray = getPlayers(enemy_team);
     enemyarray = arraycombine(enemyarray, playerarray, 0, 0);
   }
   return enemyarray;
@@ -857,11 +857,11 @@ function hunter_scanner_init() {
   self.frontscanner = spawn("script_model", self gettagorigin("tag_gunner_flash3"));
   self.frontscanner setModel("tag_origin");
   self.frontscanner.angles = self gettagangles("tag_gunner_flash3");
-  self.frontscanner linkto(self, "tag_gunner_flash3");
+  self.frontscanner linkTo(self, "tag_gunner_flash3");
   self.frontscanner.owner = self;
   self.frontscanner.hastargetent = 0;
   self.frontscanner.sndscanningent = spawn("script_origin", self.frontscanner.origin + (anglesToForward(self.angles) * 1000));
-  self.frontscanner.sndscanningent linkto(self.frontscanner);
+  self.frontscanner.sndscanningent linkTo(self.frontscanner);
   wait(0.25);
   if(0) {
     playFXOnTag(self.settings.spotlightfx, self.frontscanner, "tag_origin");
@@ -872,7 +872,7 @@ function hunter_scanner_settargetentity(targetent, offset = (0, 0, 0)) {
   if(isDefined(targetent)) {
     self.frontscanner.targetent = targetent;
     self.frontscanner.hastargetent = 1;
-    self setgunnertargetent(self.frontscanner.targetent, offset, 2);
+    self setgunnertargetEnt(self.frontscanner.targetent, offset, 2);
   }
 }
 
@@ -927,7 +927,7 @@ function hunter_frontscanning() {
         } else {
           self notify("hunter_lockontargetoutsight");
         }
-        scannerdirection = vectornormalize(self.enemy.origin - scannerorigin);
+        scannerdirection = vectorNormalize(self.enemy.origin - scannerorigin);
         if(0) {
           self.frontscanner.sndscanningent stoploopsound(1);
         }
@@ -1036,7 +1036,7 @@ function hunter_collision_player() {
     driver = self getseatoccupant(0);
     if(isDefined(driver) && lengthsquared(velocity) > 4900) {
       earthquake(0.25, 0.25, driver.origin, 50);
-      driver playrumbleonentity("damage_heavy");
+      driver playRumbleOnEntity("damage_heavy");
     }
   }
 }
@@ -1047,12 +1047,12 @@ function hunter_update_rumble() {
   while(true) {
     vr = abs(self getspeed() / self getmaxspeed());
     if(vr < 0.1) {
-      level.player playrumbleonentity("hunter_fly");
+      level.player playRumbleOnEntity("hunter_fly");
       wait(0.35);
     } else {
       time = randomfloatrange(0.1, 0.2);
       earthquake(randomfloatrange(0.1, 0.15), time, self.origin, 200);
-      level.player playrumbleonentity("hunter_fly");
+      level.player playRumbleOnEntity("hunter_fly");
       wait(time);
     }
   }
@@ -1126,7 +1126,7 @@ function hunter_pain_for_time(time, velocitystablizeparam, rotationstablizeparam
       restorelookent setModel("tag_origin");
       self clearlookatent();
       self setlookatent(restorelookent);
-      self setturrettargetent(restorelookent);
+      self setturrettargetEnt(restorelookent);
       wait(1.5);
       self clearlookatent();
       self clearturrettarget();
@@ -1140,7 +1140,7 @@ function hunter_pain_small(eattacker, damagetype, hitpoint, hitdirection, hitloc
   if(!isDefined(hitpoint) || !isDefined(hitdirection)) {
     return;
   }
-  self setvehvelocity(self.velocity + (vectornormalize(hitdirection) * 20));
+  self setvehvelocity(self.velocity + (vectorNormalize(hitdirection) * 20));
   if(!(isDefined(self.inpain) && self.inpain)) {
     vecright = anglestoright(self.angles);
     sign = math::sign(vectordot(vecright, hitdirection));
@@ -1158,7 +1158,7 @@ function huntercallback_vehicledamage(einflictor, eattacker, idamage, idflags, s
   if(isDefined(eattacker) && eattacker.team == self.team) {
     return 0;
   }
-  num_players = getplayers().size;
+  num_players = getPlayers().size;
   maxdamage = self.healthdefault * (0.35 - (0.025 * num_players));
   if(smeansofdeath !== "MOD_UNKNOWN" && idamage > maxdamage) {
     idamage = maxdamage;

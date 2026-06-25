@@ -112,7 +112,7 @@ function function_7b63bf24(player) {
   var_ef36a2fe = 0;
   if(self.archetype == "mechz") {
     if(self zm_zonemgr::entity_in_zone("zone_undercroft")) {
-      a_players = getplayers();
+      a_players = getPlayers();
       var_2ace9ca5 = 0;
       var_949334ad = 0;
       foreach(target in a_players) {
@@ -133,7 +133,7 @@ function function_7b63bf24(player) {
     if(self.zone_name == "zone_v10_pad" || self.zone_name == "zone_v10_pad_door" || self.zone_name == "zone_v10_pad_exterior") {
       var_b9ec9b33 = 1;
       if(!(isDefined(level.zones["zone_v10_pad_door"].is_spawning_allowed) && level.zones["zone_v10_pad_door"].is_spawning_allowed)) {
-        var_2d8a543 = getent("zone_v10_pad", "targetname");
+        var_2d8a543 = getEnt("zone_v10_pad", "targetname");
         if(!self istouching(var_2d8a543)) {
           return false;
         }

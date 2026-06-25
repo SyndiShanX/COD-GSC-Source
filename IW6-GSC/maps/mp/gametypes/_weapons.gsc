@@ -1501,8 +1501,8 @@ throwingKnifeUsed(owner, grenade, weapon_name) {
   grenade MakeUnusable();
 
   knifeTrigger = spawn("trigger_radius", grenade.origin, 0, 64, 64);
-  knifeTrigger EnableLinkTo();
-  knifeTrigger LinkTo(grenade);
+  knifeTrigger EnablelinkTo();
+  knifeTrigger linkTo(grenade);
   knifeTrigger.targetname = "dropped_knife";
   grenade.knife_trigger = knifeTrigger;
 
@@ -1765,7 +1765,7 @@ watchHitByMissile() {
 
     self.killCamEnt = spawn("script_model", missile.origin);
     self.killCamEnt.angles = missile.angles;
-    self.killCamEnt LinkTo(missile);
+    self.killCamEnt linkTo(missile);
     self.killCamEnt SetScriptMoverKillCam("rocket_corpse");
     self.killCamEnt SetContents(0);
 
@@ -1776,8 +1776,8 @@ watchHitByMissile() {
     self.body.angles = missile.angles;
     self.body.targetname = "player_corpse";
     self.body SetCorpseFalling(false);
-    self.body EnableLinkTo();
-    self.body LinkTo(missile);
+    self.body EnablelinkTo();
+    self.body linkTo(missile);
     self.body SetContents(0);
 
     if(!isDefined(self.switching_teams)) {
@@ -1786,18 +1786,18 @@ watchHitByMissile() {
 
     self PlayerHide();
 
-    missile_up = VectorNormalize(AnglesToUp(missile.angles));
-    missile_forward = VectorNormalize(anglesToForward(missile.angles));
+    missile_up = vectorNormalize(AnglesToUp(missile.angles));
+    missile_forward = vectorNormalize(anglesToForward(missile.angles));
     eye_offset = (missile_forward * camera_offset_up) + (missile_up * camera_offset_forward);
     eye_origin = missile.origin + eye_offset;
 
     eye_pos = spawn("script_model", eye_origin);
     eye_pos setModel("tag_origin");
     eye_pos.angles = VectorToAngles(missile.origin - eye_pos.origin);
-    eye_pos LinkTo(missile);
+    eye_pos linkTo(missile);
     eye_pos SetContents(0);
 
-    self CameraLinkTo(eye_pos, "tag_origin");
+    self CameralinkTo(eye_pos, "tag_origin");
 
     if(drag_player_time_seconds > durationSec) {
       drag_player_time_seconds = durationSec;
@@ -1815,7 +1815,7 @@ watchHitByMissile() {
     self.body SetCorpseFalling(true);
     self.body StartRagdoll();
 
-    eye_pos LinkTo(self.body);
+    eye_pos linkTo(self.body);
 
     self.isRocketCorpse = undefined;
 
@@ -1910,7 +1910,7 @@ doNineBang(pos, attacker, ticks) {
       forward = anglesToForward(player GetPlayerAngles());
 
       toBlast = pos - viewOrigin;
-      toBlast = VectorNormalize(toBlast);
+      toBlast = vectorNormalize(toBlast);
 
       percent_angle = 0.5 * (1.0 + VectorDot(forward, toBlast));
 
@@ -2055,7 +2055,7 @@ proximityExplosiveUsed(grenade) {
   config = level.weaponConfigs[grenade.weapon_name];
   killCamEnt = spawn("script_model", grenade.origin + config.killCamOffset * upVec);
   killCamEnt SetScriptMoverKillCam("explosive");
-  killCamEnt LinkTo(grenade);
+  killCamEnt linkTo(grenade);
   grenade.killCamEnt = killCamEnt;
 
   grenade explosiveHandleMovers(stuckTo);
@@ -2096,8 +2096,8 @@ proximityExplosiveTrigger(parent) {
   damagearea.owner = self;
 
   if(isDefined(parent)) {
-    damagearea EnableLinkTo();
-    damagearea LinkTo(self);
+    damagearea EnablelinkTo();
+    damagearea linkTo(self);
   }
 
   self.damagearea = damagearea;
@@ -2289,19 +2289,19 @@ equipmentWatchUse(owner, updatePosition) {
 
     switch (self.weapon_name) {
       case "c4_mp":
-        self.trigger SetHintString(&"MP_PICKUP_C4");
+        self.trigger setHintString(&"MP_PICKUP_C4");
         break;
       case "claymore_mp":
-        self.trigger SetHintString(&"MP_PICKUP_CLAYMORE");
+        self.trigger setHintString(&"MP_PICKUP_CLAYMORE");
         break;
       case "bouncingbetty_mp":
-        self.trigger SetHintString(&"MP_PICKUP_BOUNCING_BETTY");
+        self.trigger setHintString(&"MP_PICKUP_BOUNCING_BETTY");
         break;
       case "motion_sensor_mp":
-        self.trigger SetHintString(&"MP_PICKUP_MOTION_SENSOR");
+        self.trigger setHintString(&"MP_PICKUP_MOTION_SENSOR");
         break;
       case "proximity_explosive_mp":
-        self.trigger SetHintString(&"MP_PICKUP_PROXIMITY_EXPLOSIVE");
+        self.trigger setHintString(&"MP_PICKUP_PROXIMITY_EXPLOSIVE");
         break;
     }
 
@@ -2386,8 +2386,8 @@ claymoreDetonation(parent) {
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - level.claymoreDetonateRadius), 0, level.claymoreDetonateRadius, level.claymoreDetonateRadius * 2);
 
   if(isDefined(parent)) {
-    damagearea enablelinkto();
-    damagearea linkto(parent);
+    damagearea enablelinkTo();
+    damagearea linkTo(parent);
   }
 
   self thread deleteOnDeath(damagearea);
@@ -2450,7 +2450,7 @@ shouldAffectClaymore(claymore) {
     return false;
   }
 
-  dirToPos = vectornormalize(dirToPos);
+  dirToPos = vectorNormalize(dirToPos);
 
   dot = vectorDot(dirToPos, claymoreForward);
   return (dot > level.claymoreDetectionDot);
@@ -3116,7 +3116,7 @@ weaponDamageTracePassed(from, to, startRadius, ent) {
     return true;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
 
   trace = bulletTrace(midpos, to, false, ent);
@@ -3947,8 +3947,8 @@ mineProximityTrigger(movingPlatformParent) {
   self thread mineDeleteTrigger(trigger);
 
   if(isDefined(movingPlatformParent)) {
-    trigger enablelinkto();
-    trigger linkto(movingPlatformParent);
+    trigger enablelinkTo();
+    trigger linkTo(movingPlatformParent);
   }
   self.damagearea = trigger;
 
@@ -4047,8 +4047,8 @@ mineBounce() {
   }
 
   explodePos = self.origin + (0, 0, 64);
-  self MoveTo(explodePos, 0.7, 0, .65);
-  self.killCamEnt MoveTo(explodePos + self.killCamOffset, 0.7, 0, .65);
+  self moveTo(explodePos, 0.7, 0, .65);
+  self.killCamEnt moveTo(explodePos + self.killCamOffset, 0.7, 0, .65);
 
   self RotateVelocity((0, 750, 32), 0.7, 0, .65);
   self thread playSpinnerFX();
@@ -4119,7 +4119,7 @@ mineSensorBounce() {
   timeToDetonation = self.config.launchTime;
   flightTime = self.config.launchTime + 0.1;
 
-  sensor MoveTo(explodePos, flightTime, 0, timeToDetonation);
+  sensor moveTo(explodePos, flightTime, 0, timeToDetonation);
 
   sensor RotateVelocity((0, 1100, 32), flightTime, 0, timeToDetonation);
   sensor thread playSpinnerFX();
@@ -4345,7 +4345,7 @@ mineThrown(owner, weaponName, spawnFunc) {
     trace["normal"] *= -1;
   }
 
-  normal = vectornormalize(trace["normal"]);
+  normal = vectorNormalize(trace["normal"]);
   plantAngles = vectortoangles(normal);
   plantAngles += (90, 0, 0);
 

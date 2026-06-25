@@ -450,7 +450,7 @@ _id_68D6(var_0) {
   }
   playFXOnTag(level._id_68B6, var_0, "tag_flash");
   playFXOnTag(level._id_68B7, var_0, "tag_brass");
-  level.player playrumbleonentity("smg_fire");
+  level.player playRumbleOnEntity("smg_fire");
 
   if(!isDefined(var_2._id_2816)) {
     return;

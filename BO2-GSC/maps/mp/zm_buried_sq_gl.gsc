@@ -26,7 +26,7 @@ sq_gl_setup_buildable_trig() {
 }
 
 init_stage() {
-  s_start = getstruct("sq_ghost_lamp_start", "script_noteworthy");
+  s_start = getStruct("sq_ghost_lamp_start", "script_noteworthy");
   gl_lantern_spawn(s_start);
 
   if(flag("sq_is_max_tower_built")) {
@@ -42,7 +42,7 @@ init_stage() {
 stage_logic() {
   iprintlnbold("GL Started");
 
-  s_start = getstruct("sq_ghost_lamp_start", "script_noteworthy");
+  s_start = getStruct("sq_ghost_lamp_start", "script_noteworthy");
   gl_lantern_move(s_start);
   flag_wait("sq_gl_lantern_aquired");
   wait_network_frame();
@@ -63,12 +63,12 @@ stage_vo_ric() {
 }
 
 gl_lantern_spawn(s_start) {
-  level.vh_lantern = spawnvehicle("tag_origin", "ghost_lantern_ai", "heli_quadrotor2_zm", s_start.origin, (0, 0, 0));
+  level.vh_lantern = spawnVehicle("tag_origin", "ghost_lantern_ai", "heli_quadrotor2_zm", s_start.origin, (0, 0, 0));
   level.vh_lantern makevehicleunusable();
   level.vh_lantern setneargoalnotifydist(128);
   level.vh_lantern.m_lantern = spawn("script_model", level.vh_lantern.origin);
   level.vh_lantern.m_lantern setModel("p6_zm_bu_lantern_silver_on");
-  level.vh_lantern.m_lantern linkto(level.vh_lantern, "tag_origin");
+  level.vh_lantern.m_lantern linkTo(level.vh_lantern, "tag_origin");
   playFXOnTag(level._effect["sq_glow"], level.vh_lantern.m_lantern, "tag_origin");
   level.vh_lantern.m_lantern playSound("zmb_sq_glantern_impact");
   level.vh_lantern.m_lantern playLoopSound("zmb_sq_glantern_full_loop_3d");
@@ -140,7 +140,7 @@ gl_lantern_move_to_struct(s_goto) {
 gl_lantern_teleport() {
   self notify("lantern_teleporting");
   playFX(level._effect["fx_wisp_lg_m"], self.origin);
-  playsoundatposition("zmb_sq_glantern_impact", self.origin);
+  playSoundAtPosition("zmb_sq_glantern_impact", self.origin);
   gl_lantern_delete();
   a_path_spots = getStructArray("sq_ghost_lamp_path", "script_noteworthy");
   s_teleport_spot = array_randomize(a_path_spots)[0];
@@ -183,7 +183,7 @@ gl_lantern_stop_spin_on_land() {
   if(isDefined(self)) {
     self.m_link = spawn("script_model", self.origin);
     self.m_link setModel("tag_origin");
-    self linkto(self.m_link);
+    self linkTo(self.m_link);
   }
 }
 
@@ -195,11 +195,11 @@ gl_lantern_respawn_wait() {
 gl_lantern_pickup_watch() {
   self endon("lantern_teleporting");
   self.t_pickup = spawn("trigger_radius_use", self.origin, 0, 48, 32);
-  self.t_pickup setcursorhint("HINT_NOICON");
-  self.t_pickup sethintstring(&"ZM_BURIED_SQ_LANTERN_G");
-  self.t_pickup triggerignoreteam();
-  self.t_pickup enablelinkto();
-  self.t_pickup linkto(self);
+  self.t_pickup setCursorHint("HINT_NOICON");
+  self.t_pickup setHintString(&"ZM_BURIED_SQ_LANTERN_G");
+  self.t_pickup triggerIgnoreTeam();
+  self.t_pickup enablelinkTo();
+  self.t_pickup linkTo(self);
   self.t_pickup waittill("trigger", player);
   player player_take_piece(level.zombie_buildables["buried_sq_oillamp"].buildablepieces[0]);
   piece = player player_get_buildable_piece(2);
@@ -226,7 +226,7 @@ gl_lantern_crash_movement() {
   side_dir_mag = randomfloatrange(-100, 100);
   side_dir_mag = side_dir_mag + sign(side_dir_mag) * 80;
   side_dir = side_dir * side_dir_mag;
-  self setvehvelocity(self.velocity + vectorscale((0, 0, 1), 100.0) + vectornormalize(side_dir));
+  self setvehvelocity(self.velocity + vectorscale((0, 0, 1), 100.0) + vectorNormalize(side_dir));
   ang_vel = self getangularvelocity();
   ang_vel = (ang_vel[0] * 0.3, ang_vel[1], ang_vel[2] * 0.3);
   yaw_vel = randomfloatrange(0, 210) * sign(ang_vel[1]);

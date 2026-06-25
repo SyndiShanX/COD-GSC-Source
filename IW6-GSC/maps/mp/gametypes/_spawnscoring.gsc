@@ -261,7 +261,7 @@ findBuddyPathNode(buddy, playerHeight, cosAngle) {
     buddyDir = anglesToForward(buddy.angles);
 
     foreach(buddyNode in nodeArray) {
-      directionToNode = VectorNormalize(buddyNode.origin - buddy.origin);
+      directionToNode = vectorNormalize(buddyNode.origin - buddy.origin);
       dot = VectorDot(buddyDir, directionToNode);
 
       if(getMapName() == "mp_fahrenheit") {

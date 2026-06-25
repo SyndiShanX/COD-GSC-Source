@@ -65,7 +65,7 @@ door_init() {
       self.type = "slide_apart";
 
       for(i = 0; i < targets.size; i++) {
-        targets[i] disconnectpaths();
+        targets[i] disconnectPaths();
       }
 
       self.doors = targets;
@@ -79,8 +79,8 @@ door_init() {
   }
 
   self set_hint_string(self, "default_buy_door_" + cost);
-  self SetCursorHint("HINT_NOICON");
-  self UseTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
   self thread door_think();
 }
 
@@ -118,7 +118,7 @@ door_think() {
 
           play_sound_at_pos("door_rotate_open", self.door.origin);
 
-          self.door RotateTo(self.door.script_angles, time, 0, 0);
+          self.door rotateTo(self.door.script_angles, time, 0, 0);
           self.door thread door_solid_thread();
         } else if(self.type == "move") {
           self.door NotSolid();
@@ -130,7 +130,7 @@ door_think() {
 
           play_sound_at_pos("door_slide_open", self.door.origin);
 
-          self.door MoveTo(self.door.origin + self.door.script_vector, time, time * 0.25, time * 0.25);
+          self.door moveTo(self.door.origin + self.door.script_vector, time, time * 0.25, time * 0.25);
           self.door thread door_solid_thread();
         } else if(self.type == "slide_apart") {
           for(i = 0; i < self.doors.size; i++) {
@@ -152,7 +152,7 @@ door_think() {
             }
 
             if(isDefined(self.doors[i].script_vector)) {
-              self.doors[i] MoveTo(self.doors[i].origin + self.doors[i].script_vector, time, time * 0.25, time * 0.25);
+              self.doors[i] moveTo(self.doors[i].origin + self.doors[i].script_vector, time, time * 0.25, time * 0.25);
               self.doors[i] thread door_solid_thread();
             }
             wait(randomfloat(.15));
@@ -209,13 +209,13 @@ debris_init() {
   }
 
   self set_hint_string(self, "default_buy_debris_" + cost);
-  self SetCursorHint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   if(isDefined(self.script_flag) && !isDefined(level.flag[self.script_flag])) {
     flag_init(self.script_flag);
   }
 
-  self UseTriggerRequireLookAt();
+  self useTriggerRequireLookAt();
   self thread debris_think();
 }
 
@@ -269,7 +269,7 @@ debris_think() {
 
           struct = undefined;
           if(isDefined(junk[i].script_linkTo)) {
-            struct = getstruct(junk[i].script_linkTo, "script_linkname");
+            struct = getStruct(junk[i].script_linkTo, "script_linkname");
             if(isDefined(struct)) {
               move_ent = junk[i];
               junk[i] thread debris_move(struct);
@@ -308,7 +308,7 @@ debris_move(struct) {
   self notsolid();
 
   self play_sound_on_ent("debris_move");
-  playsoundatposition("lightning_l", self.origin);
+  playSoundAtPosition("lightning_l", self.origin);
   if(isDefined(self.script_firefx)) {
     playFX(level._effect[self.script_firefx], self.origin);
   }
@@ -320,7 +320,7 @@ debris_move(struct) {
       for(i = 0; i < num; i++) {
         angles = og_angles + (-5 + RandomFloat(10), -5 + RandomFloat(10), -5 + RandomFloat(10));
         time = RandomFloatRange(0.1, 0.4);
-        self Rotateto(angles, time);
+        self rotateTo(angles, time);
         wait(time - 0.05);
       }
     }
@@ -331,15 +331,15 @@ debris_move(struct) {
     time = self.script_transition_time;
   }
 
-  self MoveTo(struct.origin, time, time * 0.5);
-  self RotateTo(struct.angles, time * 0.75);
+  self moveTo(struct.origin, time, time * 0.5);
+  self rotateTo(struct.angles, time * 0.75);
 
   self waittill("movedone");
 
   self play_sound_on_entity("couch_slam");
   if(isDefined(self.script_fxid)) {
     playFX(level._effect[self.script_fxid], self.origin);
-    playsoundatposition("zombie_spawn", self.origin);
+    playSoundAtPosition("zombie_spawn", self.origin);
   }
   self Delete();
 }
@@ -366,7 +366,7 @@ blocker_init() {
     self blocker_attack_spots();
   }
 
-  self.trigger_location = getstruct(self.target, "targetname");
+  self.trigger_location = getStruct(self.target, "targetname");
 
   self thread blocker_think();
 }
@@ -443,7 +443,7 @@ blocker_trigger_think() {
     cost = original_cost * 2;
   }
 
-  trigger SetCursorHint("HINT_NOICON");
+  trigger setCursorHint("HINT_NOICON");
 
   while(1) {
     trigger waittill("trigger", player);
@@ -490,7 +490,7 @@ blocker_trigger_think() {
 
       if(isDefined(self.clip)) {
         self.clip enable_trigger();
-        self.clip DisconnectPaths();
+        self.clip disconnectPaths();
       }
 
       if(!self script_delay()) {
@@ -577,7 +577,7 @@ remove_chunk(chunk, node, destroy_immediately) {
       dest = trace["position"];
     }
 
-    chunk LinkTo(ent);
+    chunk linkTo(ent);
 
     time = ent fake_physicslaunch(dest, 200 + RandomInt(100));
 
@@ -635,15 +635,15 @@ replace_chunk(chunk) {
     play_sound_at_pos(sound, chunk.origin);
 
     only_z = (chunk.origin[0], chunk.origin[1], chunk.og_origin[2]);
-    chunk MoveTo(only_z, time, 0, time * 0.25);
-    chunk RotateTo((0, 0, 0), time + 0.25);
+    chunk moveTo(only_z, time, 0, time * 0.25);
+    chunk rotateTo((0, 0, 0), time + 0.25);
     chunk waittill("rotatedone");
 
     if(level.sleightperk == true) {} else {
       wait(0.2);
     }
 
-    chunk MoveTo(chunk.og_origin, 0.15, 0.1);
+    chunk moveTo(chunk.og_origin, 0.15, 0.1);
     chunk waittill("movedone");
   }
   chunk.target_by_zombie = undefined;
@@ -669,7 +669,7 @@ replace_chunk(chunk) {
   playFX(level._effect[fx], chunk.origin + (randomint(40), randomint(40), randomint(20)));
 
   if(!isDefined(self.clip)) {
-    chunk Disconnectpaths();
+    chunk disconnectPaths();
   }
 }
 
@@ -721,7 +721,7 @@ flag_blocker() {
   }
 
   if(type == "disconnectpaths") {
-    self DisconnectPaths();
+    self disconnectPaths();
     self disable_trigger();
     return;
   }

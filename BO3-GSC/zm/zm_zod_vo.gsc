@@ -938,7 +938,7 @@ function function_93f0e7bd() {
 function function_f9003879(var_d3be01d9) {
   self endon("_zombie_game_over");
   self endon(var_d3be01d9 + "_done");
-  e_trig = getent(var_d3be01d9, "targetname");
+  e_trig = getEnt(var_d3be01d9, "targetname");
   var_6afd6b = undefined;
   while(!zombie_utility::is_player_valid(var_6afd6b)) {
     e_trig waittill("trigger", var_6afd6b);
@@ -998,14 +998,14 @@ function function_658d89a3(var_6a363796) {
     level.var_6a0fa91e = 1;
     var_71d49619 = "vox_shad_ritual_start_0";
     var_e5924747 = "altar_pos_" + var_6a363796;
-    var_9c058564 = getent(var_e5924747, "targetname");
+    var_9c058564 = getEnt(var_e5924747, "targetname");
     assert(isDefined(var_e5924747), ("" + var_e5924747) + "");
     var_5d92c9b8 = arraygetclosest(var_9c058564.origin, level.activeplayers);
     var_5605fb9 = ("vox_plr_" + var_5d92c9b8.characterindex) + "_ritual_start_response_0";
   } else {
     var_71d49619 = "vox_shad_ritual_start_response_0";
     var_e5924747 = "altar_pos_" + var_6a363796;
-    var_9c058564 = getent(var_e5924747, "targetname");
+    var_9c058564 = getEnt(var_e5924747, "targetname");
     assert(isDefined(var_e5924747), ("" + var_e5924747) + "");
     var_5d92c9b8 = arraygetclosest(var_9c058564.origin, level.activeplayers);
     var_5605fb9 = (("vox_plr_" + var_5d92c9b8.characterindex) + "_keepers_ritual_response_") + randomint(3);
@@ -1032,7 +1032,7 @@ function function_e8972612() {
 function function_335f3a81(var_13a31044 = 0, var_8df092ed = 0) {
   if(isDefined(level.var_9bc9c61f) && var_13a31044 < level.var_fdb003be[level.var_9bc9c61f].size) {
     var_c404914c = "altar_pos_" + level.var_9bc9c61f;
-    level.var_d344b932 = getent(var_c404914c, "targetname");
+    level.var_d344b932 = getEnt(var_c404914c, "targetname");
     switch (var_13a31044) {
       case 0: {
         str_vo_line = level.var_fdb003be[level.var_9bc9c61f][0];
@@ -1123,7 +1123,7 @@ function function_edca6dc9() {
   array::add(var_daf99a63, var_49617378);
   array::add(var_daf99a63, var_6f63ede1);
   function_7aa5324a(var_daf99a63, undefined, 0);
-  mdl_key = getent("quest_key_pickup", "targetname");
+  mdl_key = getEnt("quest_key_pickup", "targetname");
   mdl_key hide();
   mdl_key clientfield::set("shadowman_fx", 2);
   level notify("vo_ritual_pap_succeed_done");
@@ -1208,7 +1208,7 @@ function function_43b03c7f(var_f30428a8) {
   while(!var_d8dc8b3c) {
     var_60852196 = getaiarchetypearray("margwa");
     var_9f338373 = [];
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
     i = 0;
     foreach(var_4ef2ab6 in var_60852196) {
       var_9f338373[i] = arraysortclosest(a_e_players, var_4ef2ab6.origin, a_e_players.size, 0, var_f30428a8);

@@ -454,7 +454,7 @@ class csceneobject {
       var_f4b34dc1 = undefined;
     }
 
-    if(!isDefined(_e) || !_e isplayinganimscripted()) {
+    if(!isDefined(_e) || !_e isplayinganimScripted()) {
       current_playing_anim[_n_ent_num] = undefined;
     }
 
@@ -705,7 +705,7 @@ class csceneobject {
       _e.scene_orig_origin = _e.origin;
       _e connectpaths();
     } else if(is_true(var_55b4f21e.var_6d2f3193)) {
-      _e disconnectpaths(2, 1);
+      _e disconnectPaths(2, 1);
     }
 
     if(is_true(var_55b4f21e.preparehide)) {
@@ -795,12 +795,12 @@ class csceneobject {
     while(isDefined(s_current_struct)) {
       if(!isDefined(_e.var_645ab05a)) {
         _e.var_acbd43ee = util::spawn_model("tag_origin", _e.origin, _e.angles);
-        _e linkto(_e.var_acbd43ee);
+        _e linkTo(_e.var_acbd43ee);
         _e thread function_98561e95();
       }
 
-      _e.var_acbd43ee moveto(s_current_struct.origin, n_move_time);
-      _e.var_acbd43ee rotateto(s_current_struct.angles, n_move_time);
+      _e.var_acbd43ee moveTo(s_current_struct.origin, n_move_time);
+      _e.var_acbd43ee rotateTo(s_current_struct.angles, n_move_time);
       _e.var_acbd43ee waittill(#"movedone");
 
       if(isDefined(s_current_struct.script_float)) {
@@ -1220,7 +1220,7 @@ class csceneobject {
     set_objective();
 
     if(is_true(_s.dynamicpaths)) {
-      _e disconnectpaths(2);
+      _e disconnectPaths(2);
     }
   }
 
@@ -1334,7 +1334,7 @@ class csceneobject {
   function _dynamic_paths() {
     if(isDefined(_e) && is_true(_s.dynamicpaths)) {
       if(distance2dsquared(_e.origin, _e.scene_orig_origin) > 4) {
-        _e disconnectpaths(2, 0);
+        _e disconnectPaths(2, 0);
       }
     }
   }
@@ -1456,7 +1456,7 @@ class csceneobject {
       s_start_spot = function_3e22944e();
 
       if(isPlayer(_e)) {
-        _e setorigin(s_start_spot.origin);
+        _e setOrigin(s_start_spot.origin);
         _e setplayerangles(s_start_spot.angles);
       } else if(isactor(_e)) {
         _e forceteleport(s_start_spot.origin, s_start_spot.angles);
@@ -1555,7 +1555,7 @@ class csceneobject {
       return;
     }
 
-    if(!entity isplayinganimscripted() || _str_current_anim !== anim_name) {
+    if(!entity isplayinganimScripted() || _str_current_anim !== anim_name) {
       return;
     }
 
@@ -2101,7 +2101,7 @@ class csceneobject {
       return;
     }
 
-    if(!entity isplayinganimscripted()) {
+    if(!entity isplayinganimScripted()) {
       return;
     }
 
@@ -2151,7 +2151,7 @@ class csceneobject {
     if(is_true(var_55b4f21e.var_3ea5d95f) && _str_shot != "init") {
       _e connectpaths();
     } else if(is_true(var_55b4f21e.var_8645db22)) {
-      _e disconnectpaths(2, 1);
+      _e disconnectPaths(2, 1);
     }
 
     if(is_true(var_55b4f21e.cleanuphide)) {
@@ -2666,7 +2666,7 @@ class cscene {
           b_skip_fading = 1;
         }
 
-        foreach(player in getplayers(_str_team)) {
+        foreach(player in getPlayers(_str_team)) {
           player val::set(#"scene_skip", "freezecontrols", 1);
           player val::set(#"scene_skip", "takedamage", 0);
           player val::set(#"scene_skip", "ignoreme", 1);
@@ -2737,7 +2737,7 @@ class cscene {
 
     if(is_skipping_player_scene()) {
       if(_s scene::is_igc()) {
-        foreach(player in getplayers(_str_team)) {
+        foreach(player in getPlayers(_str_team)) {
           player stopsounds();
         }
       }
@@ -2987,7 +2987,7 @@ class cscene {
       function_f4b4e39f(0);
       level util::streamer_wait(undefined, undefined, 10);
 
-      foreach(player in getplayers(_str_team)) {
+      foreach(player in getPlayers(_str_team)) {
         player clientfield::increment_to_player("player_scene_skip_completed");
         player val::reset(#"scene_skip", "freezecontrols");
         player val::reset(#"scene_skip", "takedamage");
@@ -2998,7 +2998,7 @@ class cscene {
 
       if(!is_true(b_skip_fading)) {
         if(!is_true(level.level_ending) && is_skipping_player_scene()) {
-          foreach(player in getplayers(_str_team)) {
+          foreach(player in getPlayers(_str_team)) {
             player thread lui::screen_fade_in(1, "black", "scene_system");
           }
         }

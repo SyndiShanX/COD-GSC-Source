@@ -138,7 +138,7 @@ on_soid_interact(var_0, var_1) {
   if(!istrue(var_1.b_got_shovel)) {
     return;
   }
-  var_1 playrumbleonentity("damage_heavy");
+  var_1 playRumbleOnEntity("damage_heavy");
 
   if(isDefined(var_0) && isDefined(var_0.mdl_dust) && isDefined(var_0.mdl_dust.fx_proxy)) {
     stopFXOnTag(level._effect["dig_site_dust_fx"], var_0.mdl_dust.fx_proxy, "tag_origin");
@@ -211,7 +211,7 @@ play_script_mover(var_0) {
   level endon("game_ended");
 
   if(isDefined(var_0.mdl_dust)) {
-    var_0.mdl_dust moveto(var_0.mdl_dust.origin - (0, 0, 30), 1);
+    var_0.mdl_dust moveTo(var_0.mdl_dust.origin - (0, 0, 30), 1);
   }
 
   var_0.mdl_dust waittill("movedone");
@@ -230,7 +230,7 @@ start_subquest(var_0, var_1) {
 
 init_radios() {
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstruct("th_radio_start", "targetname");
+  var_0 = scripts\engine\utility::getStruct("th_radio_start", "targetname");
   var_0.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_0.origin, var_0.angles);
   var_0.spawn_locations = [];
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
@@ -268,7 +268,7 @@ init_radios() {
     }
   }
 
-  var_10 = scripts\engine\utility::getstruct("th_radio_end", "targetname");
+  var_10 = scripts\engine\utility::getStruct("th_radio_end", "targetname");
   var_10.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_10.origin, var_10.angles);
   var_10.spawn_locations = [];
   var_11 = scripts\engine\utility::getStructArray(var_10.target, "targetname");
@@ -524,7 +524,7 @@ on_sub_radio_interact(var_0, var_1) {
 
   if(isDefined(var_0.mdl_antenna)) {
     var_2 = randomintrange(45, 135);
-    var_0.mdl_antenna rotateto(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
+    var_0.mdl_antenna rotateTo(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_antennae_rotate");
     var_0.mdl_antenna waittill("rotatedone");
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_tuning_success");
@@ -544,7 +544,7 @@ on_end_radio_interact(var_0, var_1) {
 
   if(isDefined(var_0.mdl_antenna)) {
     var_2 = randomintrange(45, 135);
-    var_0.mdl_antenna rotateto(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
+    var_0.mdl_antenna rotateTo(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_antennae_rotate");
     var_0.mdl_antenna waittill("rotatedone");
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_tuning_success");
@@ -625,7 +625,7 @@ capture_golden_ball_start(var_0, var_1) {
   var_0.golden_ball = scripts\cp\utility::_id_E190("s4_zm_golden_ball", var_0.origin, var_0.angles);
   var_0.golden_ball._id_039B = "golden_ball_inactive";
   var_0.golden_ball.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.origin + (0, 0, 5), var_0.angles);
-  var_0.golden_ball.fx_proxy linkto(var_0.golden_ball);
+  var_0.golden_ball.fx_proxy linkTo(var_0.golden_ball);
   playFXOnTag(level._effect["golden_ball_fx"], var_0.golden_ball.fx_proxy, "tag_origin");
   var_0.golden_ball playLoopSound("zmb_orb_lp_close");
   var_2 = pickup_free_damage_proxy();
@@ -748,7 +748,7 @@ get_health_scale() {
 start_moving() {
   level endon("game_ended");
   level endon("golden_ball_stun_down");
-  self moveto(self.origin + (0, 0, 30), 3);
+  self moveTo(self.origin + (0, 0, 30), 3);
 
   if(isDefined(self.target_area)) {
     self.target_area.b_used = 0;
@@ -778,7 +778,7 @@ start_moving() {
       var_6 = 1;
     }
 
-    self moveto(var_5.origin, var_6);
+    self moveTo(var_5.origin, var_6);
     self waittill("movedone");
     self.b_finish_moving = 1;
     start_point_stop();
@@ -799,7 +799,7 @@ start_point_stop() {
     var_3 = gettime() / 1000 - var_1;
     var_4 = scripts\engine\utility::_id_C019(1);
     var_5 = var_4 * 100;
-    self moveto(var_2 + var_5, 3);
+    self moveTo(var_2 + var_5, 3);
     self waittill("movedone");
   }
 }
@@ -819,7 +819,7 @@ start_stun_down() {
     var_4 = var_1;
   }
 
-  self moveto(var_4 + (0, 0, 30), 3);
+  self moveTo(var_4 + (0, 0, 30), 3);
   self waittill("movedone");
   _id_C266("golden_ball_inactive", ::get_golden_ball_hint_func, ::on_golden_ball_interact, undefined, undefined, undefined, undefined, undefined, 64);
   _id_0737::addinteractionhinttypecallback("golden_ball_inactive", ::golden_ball_type);
@@ -966,7 +966,7 @@ big_bomb_start(var_0, var_1) {
   var_7._id_A15E.angles = var_7.angles;
   var_7._id_A15E setModel("wpn_s4_zm_monkey_bomb_main_world");
   var_7._id_A15E._id_0203 = var_7;
-  var_7._id_A15E linkto(var_7);
+  var_7._id_A15E linkTo(var_7);
   var_7._id_A15E.originating_player = var_1;
   var_7._id_10D0B = spawnStruct();
   var_7._id_10D0B._id_014B = 400;
@@ -997,10 +997,10 @@ bury_back_start(var_0, var_1) {
   level endon("game_ended");
   var_0.mdl_heart = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles);
   var_0.fx_float = playFXOnTag(level._effect["evil_curse"], var_0.mdl_heart, "tag_origin");
-  var_0.mdl_heart moveto(var_0.mdl_heart.origin + (0, 0, 30), 3);
+  var_0.mdl_heart moveTo(var_0.mdl_heart.origin + (0, 0, 30), 3);
   var_0.mdl_heart playSound("zmb_debuff_spawn");
   var_0.mdl_heart waittill("movedone");
-  var_0.mdl_heart moveto(var_1.origin, 1);
+  var_0.mdl_heart moveTo(var_1.origin, 1);
   var_0.mdl_heart waittill("movedone");
   var_0.mdl_heart delete();
 
@@ -1142,14 +1142,14 @@ play_bury_heart_back_anim(var_0) {
   if(!isDefined(var_0.mdl_heart)) {
     var_0.mdl_heart = scripts\cp\utility::_id_E190("tag_origin", var_0.origin + (0, 0, 20), var_0.angles);
     playFXOnTag(level._effect["evil_curse"], var_0.mdl_heart, "tag_origin");
-    var_0.mdl_heart moveto(var_0.origin + (0, 0, -15), 3);
+    var_0.mdl_heart moveTo(var_0.origin + (0, 0, -15), 3);
     var_0.mdl_heart waittill("movedone");
     var_0.mdl_heart delete();
   }
 
   if(!isDefined(var_0.mdl_dust)) {
     var_0.parent.mdl_dust = scripts\cp\utility::_id_E190("s4_zm_dust_pile", var_0.parent.origin - (0, 0, 20), var_0.parent.angles);
-    var_0.parent.mdl_dust moveto(var_0.origin + (0, 0, -5), 3);
+    var_0.parent.mdl_dust moveTo(var_0.origin + (0, 0, -5), 3);
     var_0.parent.mdl_dust waittill("movedone");
     var_0.parent.mdl_dust.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.parent.mdl_dust.origin, var_0.parent.mdl_dust.angles);
     playFXOnTag(level._effect["dig_site_dust_fx"], var_0.parent.mdl_dust.fx_proxy, "tag_origin");
@@ -1219,7 +1219,7 @@ init_ray_gun_pos() {
     if(isDefined(var_1.b_has_quest)) {
       if(!var_1.b_has_quest) {
         var_1.mdl_dust = scripts\cp\utility::_id_E190("s4_zm_dust_pile", var_1.origin - (0, 0, 20), var_1.angles);
-        var_1.mdl_dust moveto(var_1.origin + (0, 0, -5), 3);
+        var_1.mdl_dust moveTo(var_1.origin + (0, 0, -5), 3);
         var_1.mdl_dust waittill("movedone");
         var_1.mdl_dust.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_1.mdl_dust.origin, var_1.mdl_dust.angles);
         playFXOnTag(level._effect["dig_site_dust_fx"], var_1.mdl_dust.fx_proxy, "tag_origin");
@@ -1276,8 +1276,8 @@ find_ray_gun_start(var_0, var_1) {
   var_3 = scripts\cp\utility::_id_E190(var_2, var_0.origin, var_0.angles);
   var_3.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles);
   var_3 play_laugh_sound("zmb_bunny_float_lp");
-  var_3.fx_proxy linkto(var_3);
-  var_3 moveto(var_0.origin + (0, 0, 20), 3);
+  var_3.fx_proxy linkTo(var_3);
+  var_3 moveTo(var_0.origin + (0, 0, 20), 3);
   var_3 waittill("movedone");
   var_3._id_039B = "bunny_interact";
   _id_C266("bunny_interact", ::bunny_interact_hint_func, ::on_bunny_interact, undefined, undefined, undefined, undefined, undefined, 100);
@@ -1304,7 +1304,7 @@ set_up_next_bunny_part(var_0) {
     if(isDefined(var_1.b_has_quest)) {
       if(!var_1.b_has_quest) {
         var_1.mdl_dust = scripts\cp\utility::_id_E190("s4_zm_dust_pile", var_1.origin - (0, 0, 20), var_1.angles);
-        var_1.mdl_dust moveto(var_1.origin + (0, 0, -5), 3);
+        var_1.mdl_dust moveTo(var_1.origin + (0, 0, -5), 3);
         var_1.mdl_dust waittill("movedone");
         var_1.mdl_dust.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_1.mdl_dust.origin, var_1.mdl_dust.angles);
         playFXOnTag(level._effect["dig_site_dust_fx"], var_1.mdl_dust.fx_proxy, "tag_origin");

@@ -14,10 +14,10 @@ pack_a_punch_main() {
   flag_init("launch_activated");
   flag_init("launch_complete");
   level.pack_debug = 0;
-  level.pack_a_punch_door = GetEnt("rocket_room_bottom_door", "targetname");
-  level.pack_a_punch_door.clip = GetEnt(level.pack_a_punch_door.target, "targetname");
-  level.pack_a_punch_door.clip LinkTo(level.pack_a_punch_door);
-  launch_trig = getent("trig_launch_rocket", "targetname");
+  level.pack_a_punch_door = getEnt("rocket_room_bottom_door", "targetname");
+  level.pack_a_punch_door.clip = getEnt(level.pack_a_punch_door.target, "targetname");
+  level.pack_a_punch_door.clip linkTo(level.pack_a_punch_door);
+  launch_trig = getEnt("trig_launch_rocket", "targetname");
   launch_trig thread launch_rocket();
   level thread pack_a_punch_activate();
   level thread rocket_launch_preparation();
@@ -55,15 +55,15 @@ pack_a_punch_close_door() {
   move_dist = -228;
   level.pack_a_punch_door MoveZ(move_dist, 1.5);
   level.pack_a_punch_door waittill("movedone");
-  level.pack_a_punch_door DisconnectPaths();
+  level.pack_a_punch_door disconnectPaths();
 }
 pack_a_punch_open_door() {
   flag_set("rocket_group");
-  upper_door_model = GetEnt("rocket_room_top_door", "targetname");
-  upper_door_model.clip = GetEnt(upper_door_model.target, "targetname");
-  upper_door_model.clip LinkTo(upper_door_model);
-  upper_door_model MoveTo(upper_door_model.origin + upper_door_model.script_vector, 1.5);
-  level.pack_a_punch_door MoveTo(level.pack_a_punch_door.origin + level.pack_a_punch_door.script_vector, 1.5);
+  upper_door_model = getEnt("rocket_room_top_door", "targetname");
+  upper_door_model.clip = getEnt(upper_door_model.target, "targetname");
+  upper_door_model.clip linkTo(upper_door_model);
+  upper_door_model moveTo(upper_door_model.origin + upper_door_model.script_vector, 1.5);
+  level.pack_a_punch_door moveTo(level.pack_a_punch_door.origin + level.pack_a_punch_door.script_vector, 1.5);
   level.pack_a_punch_door.clip NotSolid();
   upper_door_model playSound("zmb_heavy_door_open");
   level.pack_a_punch_door.clip playSound("zmb_heavy_door_open");
@@ -72,10 +72,10 @@ pack_a_punch_open_door() {
 }
 pack_print(str) {}
 launch_rocket() {
-  panel = getent("rocket_launch_panel", "targetname");
-  self UseTriggerRequireLookAt();
-  self SetHintString(&"ZOMBIE_NEED_POWER");
-  self SetCursorHint("HINT_NOICON");
+  panel = getEnt("rocket_launch_panel", "targetname");
+  self useTriggerRequireLookAt();
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
   level waittill("Pack_A_Punch_on");
   self setHintString(&"ZOMBIE_COSMODROME_WAITING_AUTHORIZAION");
   flag_wait("launch_activated");
@@ -89,7 +89,7 @@ launch_rocket() {
 }
 play_launch_loopers() {
   level endon("rocket_dmg");
-  level.rocket_base_looper = getent("rocket_base_engine", "script_noteworthy");
+  level.rocket_base_looper = getEnt("rocket_base_engine", "script_noteworthy");
   level.rocket_base_looper playLoopSound("zmb_rocket_launch", .1);
   wait(2);
   level.rocket_sound_ent_1 = spawn("script_origin", (0, 0, 0));
@@ -109,12 +109,12 @@ delete_rocket_sound_ents() {
   level.rocket_sound_ent_2 Delete();
 }
 do_launch_countdown() {
-  level.gantry_r rotateyaw(60, 6);
-  level.gantry_l rotateyaw(-60, 6);
+  level.gantry_r rotateYaw(60, 6);
+  level.gantry_l rotateYaw(-60, 6);
   level.gantry_l playSound("zmb_rocket_disengage");
   level.gantry_l playSound("zmb_rocket_start");
   wait(3);
-  rocket_base = getent("rocket_base_engine", "script_noteworthy");
+  rocket_base = getEnt("rocket_base_engine", "script_noteworthy");
   level thread play_launch_loopers();
   maps\zombie_cosmodrome_traps::claw_attach(level.claw_arm_l, "claw_l");
   maps\zombie_cosmodrome_traps::claw_attach(level.claw_arm_r, "claw_r");
@@ -123,8 +123,8 @@ do_launch_countdown() {
     level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_launch_countdown_" + i, true, true);
     wait(1);
     if(i == 4) {
-      level.claw_arm_r MoveTo(level.claw_retract_r_pos, 4.0);
-      level.claw_arm_l MoveTo(level.claw_retract_l_pos, 4.0);
+      level.claw_arm_r moveTo(level.claw_retract_r_pos, 4.0);
+      level.claw_arm_l moveTo(level.claw_retract_l_pos, 4.0);
     }
   }
   rocket_liftoff();
@@ -132,10 +132,10 @@ do_launch_countdown() {
 rocket_liftoff() {
   rocket_pieces = getEntArray(level.rocket.target, "targetname");
   for(i = 0; i < rocket_pieces.size; i++) {
-    rocket_pieces[i] linkto(level.rocket);
+    rocket_pieces[i] linkTo(level.rocket);
   }
   level endon("rocket_dmg");
-  rocket_base = getent("rocket_base_engine", "script_noteworthy");
+  rocket_base = getEnt("rocket_base_engine", "script_noteworthy");
   stop_exploder(5601);
   exploder(5701);
   rocket_base setclientflag(0);
@@ -143,7 +143,7 @@ rocket_liftoff() {
   wait(1);
   level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_engines_firing", true);
   level.rocket setforcenocull();
-  level.rocket moveto(level.rocket.origin + (0, 0, 50000), 50, 45);
+  level.rocket moveTo(level.rocket.origin + (0, 0, 50000), 50, 45);
   wait(5);
   maps\zombie_cosmodrome_traps::claw_detach(level.claw_arm_l, "claw_l");
   maps\zombie_cosmodrome_traps::claw_detach(level.claw_arm_r, "claw_r");
@@ -178,7 +178,7 @@ launch_rumble_and_quake() {
     Earthquake(RandomFloatRange(0.15, 0.35), RandomFloatRange(.25, .5), level.rocket.origin, 5500);
     rumble = "slide_rumble";
     for(i = 0; i < players_in_range.size; i++) {
-      players_in_range[i] PlayRumbleOnEntity(rumble);
+      players_in_range[i] playRumbleOnEntity(rumble);
     }
     wait(.1);
   }
@@ -189,7 +189,7 @@ rocket_monitor_for_damage() {
   array_thread(rocket_pieces, ::rocket_piece_monitor_for_damage);
   level.rocket thread rocket_piece_monitor_for_damage();
   level waittill("rocket_dmg");
-  playsoundatposition("zmb_rocket_destroyed", (0, 0, 0));
+  playSoundAtPosition("zmb_rocket_destroyed", (0, 0, 0));
   level.rocket thread rocket_explode();
   level.rocket thread piece_crash_down();
   for(i = 0; i < rocket_pieces.size; i++) {
@@ -206,8 +206,8 @@ rocket_monitor_for_damage() {
 piece_crash_down(num) {
   trace = bulletTrace(self.origin, self.origin + (randomintrange(-100, 100), randomintrange(-100, 100), -20000), false, self);
   ground_pos = trace["position"] + (0, 0, 1.5);
-  self moveto(ground_pos, 3);
-  self rotateto((randomintrange(-360, 360), randomintrange(-360, 360), randomintrange(-360, 360)), 3.9);
+  self moveTo(ground_pos, 3);
+  self rotateTo((randomintrange(-360, 360), randomintrange(-360, 360), randomintrange(-360, 360)), 3.9);
   wait(3.9);
   Earthquake(RandomFloatRange(0.25, 0.45), RandomFloatRange(.65, .75), self.origin, 5500);
   if(isDefined(num)) {

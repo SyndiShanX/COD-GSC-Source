@@ -74,25 +74,25 @@ devgui() {
         iprintlnbold("<dev string:x368>" + level.var_276bd207[0] + level.var_276bd207[1] + level.var_276bd207[2] + level.var_276bd207[3]);
         break;
       case #"hash_67d502f654392103":
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         zm_ui_inventory::function_7df6bb60("<dev string:x376>", 0, e_player);
         zm_ui_inventory::function_7df6bb60("<dev string:x38e>", 2, e_player);
         e_player.var_f7694097 = 0;
         break;
       case #"hash_67d510f6543938cd":
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         zm_ui_inventory::function_7df6bb60("<dev string:x376>", 1, e_player);
         zm_ui_inventory::function_7df6bb60("<dev string:x3a6>", 2, e_player);
         e_player.var_f7694097 = 1;
         break;
       case #"hash_67d50ff65439371a":
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         zm_ui_inventory::function_7df6bb60("<dev string:x376>", 2, e_player);
         zm_ui_inventory::function_7df6bb60("<dev string:x3be>", 2, e_player);
         e_player.var_f7694097 = 2;
         break;
       case #"hash_67d50ef654393567":
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         zm_ui_inventory::function_7df6bb60("<dev string:x376>", 3, e_player);
         zm_ui_inventory::function_7df6bb60("<dev string:x3d6>", 2, e_player);
         e_player.var_f7694097 = 3;

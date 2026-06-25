@@ -45,9 +45,9 @@ function init_flags() {
 
 function start(str_objective) {
   level.var_c0c469ea = 1.75;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player clientfield::set_to_player("force_stream_train", 1);
-  level thread scene::init_streamer(#"cin_stakeout_train_intro", getplayers());
+  level thread scene::init_streamer(#"cin_stakeout_train_intro", getPlayers());
   level thread namespace_5ceacc03::function_d7739931();
   util::function_268bdf4f("adler", &namespace_11998b8f::function_2f0f0a84);
   util::function_268bdf4f("lazar");
@@ -88,7 +88,7 @@ function main(str_objective, b_starting) {
   level.park.var_5b22d53 = 0;
   level.lazar.var_5b22d53 = 0;
   level scene::init("cin_stakeout_train_intro");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player clientfield::set_to_player("force_stream_train", 0);
   player val::set("stakeout_intro", "disable_oob", 1);
   level thread function_c18c1869();
@@ -107,20 +107,20 @@ function main(str_objective, b_starting) {
   }
 
   level thread namespace_5ceacc03::train_fade_up_from_black();
-  train_car_01_player_clip = getent("train_car_01_player_clip", "targetname");
+  train_car_01_player_clip = getEnt("train_car_01_player_clip", "targetname");
 
   if(isDefined(train_car_01_player_clip)) {
     train_car_01_player_clip notsolid();
   }
 
-  train_car_02_player_clip = getent("train_car_02_player_clip", "targetname");
+  train_car_02_player_clip = getEnt("train_car_02_player_clip", "targetname");
 
   if(isDefined(train_car_02_player_clip)) {
     train_car_02_player_clip notsolid();
   }
 
-  getplayers()[0] thread function_6d1d0dc8();
-  getplayers()[0] districts::function_a7d79fcb("tunnels");
+  getPlayers()[0] thread function_6d1d0dc8();
+  getPlayers()[0] districts::function_a7d79fcb("tunnels");
   wait 6;
   level flag::set("start_train");
   level thread flag::delay_set(16.2, "flag_player_train_intro_done");
@@ -157,7 +157,7 @@ function main(str_objective, b_starting) {
   namespace_5ceacc03::music("deactivate_1.0_train");
   level scene::play("cin_stakeout_train_jumpout", "jump_out_pre_teleport");
   level flag::set("flag_prep_teleport_train_player");
-  getplayers()[0] playersetgroundreferenceent(undefined);
+  getPlayers()[0] playersetgroundreferenceent(undefined);
   level.var_77e3cd5f delete();
   level scene::stop("cin_stakeout_train_cam_shake", 1);
   level scene::stop("cin_stakeout_train_car_2");
@@ -187,19 +187,19 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
     level flag::set("train_done");
   }
 
-  e_vol = getent("vol_sims_look", "targetname");
+  e_vol = getEnt("vol_sims_look", "targetname");
 
   if(isDefined(e_vol)) {
     e_vol delete();
   }
 
-  var_5278dbd0 = getent("train_tunnel_moving_model_01", "targetname");
+  var_5278dbd0 = getEnt("train_tunnel_moving_model_01", "targetname");
 
   if(isDefined(var_5278dbd0)) {
     var_5278dbd0 delete();
   }
 
-  var_3ebbb456 = getent("train_tunnel_moving_model_02", "targetname");
+  var_3ebbb456 = getEnt("train_tunnel_moving_model_02", "targetname");
 
   if(isDefined(var_3ebbb456)) {
     var_3ebbb456 delete();
@@ -207,7 +207,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
 }
 
 function function_c4ede77b() {
-  train_car_01_player_clip = getent("train_car_01_player_clip", "targetname");
+  train_car_01_player_clip = getEnt("train_car_01_player_clip", "targetname");
 
   if(isDefined(train_car_01_player_clip)) {
     train_car_01_player_clip solid();
@@ -221,7 +221,7 @@ function function_e9812a44(a_ents, str_shot) {
   if(str_shot == "init") {
     var_3064b024 = a_ents[#"hash_475ee55621b83ca0"];
     cig = util::spawn_model(#"ndy_cigarette_01", var_3064b024.origin);
-    cig linkto(var_3064b024, "j_prop_1", (0, 0, 0), (0, 0, 0));
+    cig linkTo(var_3064b024, "j_prop_1", (0, 0, 0), (0, 0, 0));
     return;
   }
 
@@ -231,8 +231,8 @@ function function_e9812a44(a_ents, str_shot) {
 
 function function_6c744934(a_ents) {
   level.var_77e3cd5f = util::spawn_model("tag_origin");
-  player = getplayers()[0];
-  level.var_77e3cd5f linkto(a_ents[#"hash_475ee55621b83ca0"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  player = getPlayers()[0];
+  level.var_77e3cd5f linkTo(a_ents[#"hash_475ee55621b83ca0"], "j_prop_1", (0, 0, 0), (0, 0, 0));
   player playersetgroundreferenceent(level.var_77e3cd5f);
 }
 
@@ -310,58 +310,58 @@ function function_48b8f4be() {
 function function_e884d0eb(var_71550d76) {}
 
 function function_4c1ae753(var_71550d76) {
-  var_71550d76.var_62b1eb0a = getent("post_teleport_train_a", "targetname");
-  var_71550d76.var_fba19ceb = getent("post_teleport_train_b", "targetname");
-  var_71550d76.var_55fb067 = getent("post_teleport_train_c", "targetname");
+  var_71550d76.var_62b1eb0a = getEnt("post_teleport_train_a", "targetname");
+  var_71550d76.var_fba19ceb = getEnt("post_teleport_train_b", "targetname");
+  var_71550d76.var_55fb067 = getEnt("post_teleport_train_c", "targetname");
   var_71550d76.a_e_lights = getEntArray("light_train_jump_off", "targetname");
   array::run_all(var_71550d76.a_e_lights, &linkto, var_71550d76.var_62b1eb0a);
-  var_71550d76.var_fba19ceb linkto(var_71550d76.var_62b1eb0a);
-  var_71550d76.var_55fb067 linkto(var_71550d76.var_62b1eb0a);
+  var_71550d76.var_fba19ceb linkTo(var_71550d76.var_62b1eb0a);
+  var_71550d76.var_55fb067 linkTo(var_71550d76.var_62b1eb0a);
   var_71550d76.var_49b85ad8 = getEntArray(var_71550d76.var_55fb067.script_linkto, "script_linkname");
 
   foreach(prop in var_71550d76.var_49b85ad8) {
-    prop linkto(var_71550d76.var_55fb067);
+    prop linkTo(var_71550d76.var_55fb067);
   }
 
-  var_71550d76.var_62b1eb0a linkto(var_71550d76, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  var_71550d76.var_62b1eb0a linkTo(var_71550d76, "j_prop_1", (0, 0, 0), (0, 0, 0));
   return var_71550d76;
 }
 
 function function_e1e726bd(rig, var_81b1bc71, var_391b674) {
-  door_01 = getent(var_81b1bc71, "targetname");
+  door_01 = getEnt(var_81b1bc71, "targetname");
   var_ff2ba721 = door_01 getlinkedent();
 
   if(var_ff2ba721 !== rig) {
     door_01 unlink();
   }
 
-  door_01 linkto(rig, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  door_01 linkTo(rig, "j_prop_1", (0, 0, 0), (0, 0, 0));
   var_e970e951 = undefined;
 
   if(isDefined(door_01.target)) {
-    var_e970e951 = getent(door_01.target, "targetname");
+    var_e970e951 = getEnt(door_01.target, "targetname");
   }
 
   if(isDefined(var_e970e951)) {
-    var_e970e951 linkto(door_01);
+    var_e970e951 linkTo(door_01);
   }
 
-  door_02 = getent(var_391b674, "targetname");
+  door_02 = getEnt(var_391b674, "targetname");
   var_ff2ba721 = door_02 getlinkedent();
 
   if(var_ff2ba721 !== rig) {
     door_02 unlink();
   }
 
-  door_02 linkto(rig, "j_prop_2", (0, 0, 0), (0, 0, 0));
+  door_02 linkTo(rig, "j_prop_2", (0, 0, 0), (0, 0, 0));
   var_d21634ee = undefined;
 
   if(isDefined(door_02.target)) {
-    var_d21634ee = getent(door_02.target, "targetname");
+    var_d21634ee = getEnt(door_02.target, "targetname");
   }
 
   if(isDefined(var_d21634ee)) {
-    var_d21634ee linkto(door_02);
+    var_d21634ee linkTo(door_02);
   }
 
   return rig;
@@ -405,10 +405,10 @@ function function_c18c1869() {
   var_7ea097e = struct::get("train_tunnel_spot_2", "targetname");
   var_7e1af5de = struct::get("train_tunnel_spot_3", "targetname");
   var_6b455033 = struct::get("train_tunnel_spot_4", "targetname");
-  train_tunnel_01.org moveto(var_1a34ae13.origin, 0.05, 0, 0);
-  train_tunnel_02.org moveto(var_7ea097e.origin, 0.05, 0, 0);
-  train_tunnel_03.org moveto(var_7e1af5de.origin, 0.05, 0, 0);
-  train_tunnel_04.org moveto(var_6b455033.origin, 0.05, 0, 0);
+  train_tunnel_01.org moveTo(var_1a34ae13.origin, 0.05, 0, 0);
+  train_tunnel_02.org moveTo(var_7ea097e.origin, 0.05, 0, 0);
+  train_tunnel_03.org moveTo(var_7e1af5de.origin, 0.05, 0, 0);
+  train_tunnel_04.org moveTo(var_6b455033.origin, 0.05, 0, 0);
   waitframe(1);
   wait 1;
   level thread namespace_5ceacc03::function_9c504c29();
@@ -424,10 +424,10 @@ function function_c18c1869() {
   train_tunnel_03 thread function_b63268b6();
   train_tunnel_04 thread function_b63268b6();
   wait 6;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   screenshake(player.origin, 0.2, 0, 0, 2, 0, 1);
-  player playrumbleonentity(#"hash_400ddb5ce7b2ea08");
+  player playRumbleOnEntity(#"hash_400ddb5ce7b2ea08");
   wait 1;
   player stoprumble(#"hash_400ddb5ce7b2ea08");
   wait 5;
@@ -435,17 +435,17 @@ function function_c18c1869() {
 
 function function_6935ca68() {
   level endon(#"flag_prep_teleport_train_player");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   while(!level flag::get("teleport_train_player")) {
     random_time = randomfloatrange(2, 4.5);
     player stoprumble(#"hash_400ddb5ce7b2ea08");
-    player playrumbleonentity(#"hash_4028f15ce7c9d722");
+    player playRumbleOnEntity(#"hash_4028f15ce7c9d722");
     wait randomfloatrange(1, 5);
     random_time = randomfloatrange(0.25, 1);
     player stoprumble(#"hash_4028f15ce7c9d722");
-    player playrumbleonentity(#"hash_400ddb5ce7b2ea08");
+    player playRumbleOnEntity(#"hash_400ddb5ce7b2ea08");
 
     if(level flag::get("flag_player_train_intro_done")) {
       screenshake(player.origin, 0.2, 0, 0, random_time, 0, random_time * 0.5, 0, 15);
@@ -484,7 +484,7 @@ function function_913571bd(var_7906643a, var_90d9967c) {
   while(isDefined(level.var_52cc4fe1)) {
     delta = end_origin - self.org.origin;
     travel_time = delta[0] / speed;
-    self.org moveto(end_origin, travel_time, 0, 0);
+    self.org moveTo(end_origin, travel_time, 0, 0);
     wait travel_time;
 
     if(level flag::get("teleport_train_player")) {
@@ -534,12 +534,12 @@ function function_dd407ea1(ents) {
   }
 
   foreach(link in train_tunnel.link) {
-    link linkto(train_tunnel.train_tunnel);
+    link linkTo(train_tunnel.train_tunnel);
   }
 
   var_f9cb1189 = struct::get(train_tunnel.train_tunnel.target);
   train_tunnel.org = util::spawn_model("tag_origin", var_f9cb1189.origin, var_f9cb1189.angles);
-  train_tunnel.train_tunnel linkto(train_tunnel.org);
+  train_tunnel.train_tunnel linkTo(train_tunnel.org);
   return train_tunnel;
 }
 
@@ -562,17 +562,17 @@ function function_b63268b6() {
 function function_adb5d442(a_ents) {
   if(isDefined(a_ents[#"cigarette"])) {
     level.var_efd78e86 = util::spawn_model("ndy_cigarette_01");
-    level.var_efd78e86 linkto(a_ents[#"cigarette"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    level.var_efd78e86 linkTo(a_ents[#"cigarette"], "j_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
   if(isDefined(a_ents[#"hash_7cae62e63be0e49a"])) {
     level.var_82bdfa96 = util::spawn_model("par_umbrella_closed_01_85");
-    level.var_82bdfa96 linkto(a_ents[#"hash_7cae62e63be0e49a"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    level.var_82bdfa96 linkTo(a_ents[#"hash_7cae62e63be0e49a"], "j_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
   if(isDefined(a_ents[#"briefcase"])) {
     level.var_a07e24ea = util::spawn_model("briefcase_prop");
-    level.var_a07e24ea linkto(a_ents[#"briefcase"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    level.var_a07e24ea linkTo(a_ents[#"briefcase"], "j_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
   if(isDefined(a_ents[#"newspaper"])) {
@@ -660,8 +660,8 @@ function function_d7dc07ee() {
 
 function function_2c1ab89d() {
   level endon(#"hash_68487efcb1c63f9", #"train_done");
-  e_vol = getent("vol_sims_look", "targetname");
-  player = getplayers()[0];
+  e_vol = getEnt("vol_sims_look", "targetname");
+  player = getPlayers()[0];
 
   while(true) {
     while(!player istouching(e_vol)) {

@@ -25,7 +25,7 @@ player_fire_tracking() {
     }
 
     var_04 = var_00 getEye();
-    var_05 = var_04 + 10000 * vectornormalize(anglesToForward(var_00 geteyeangles()));
+    var_05 = var_04 + 10000 * vectorNormalize(anglesToForward(var_00 geteyeangles()));
     var_06 = bulletTrace(var_04, var_05, 1, var_00);
     var_07 = bulletTrace(var_04, var_05, 0, var_00, 0, 0, 0, 0, 1, 0, 0);
     var_08 = distance(var_06["position"], var_07["position"]);

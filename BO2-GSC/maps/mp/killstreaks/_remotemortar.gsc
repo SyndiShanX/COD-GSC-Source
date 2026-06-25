@@ -72,7 +72,7 @@ init() {
   level.remotemortarrig thread rotaterig(1);
   level.remote_zoffset = 8000;
   level.remote_radiusoffset = 9000;
-  remote_mortar_height = getstruct("remote_mortar_height", "targetname");
+  remote_mortar_height = getStruct("remote_mortar_height", "targetname");
 
   if(isDefined(remote_mortar_height)) {
     level.remote_radiusoffset = remote_mortar_height.origin[2] / level.remote_zoffset * level.remote_radiusoffset;
@@ -245,9 +245,9 @@ remote_mortar_spawn() {
   angle = randomint(360);
   xoffset = cos(angle) * level.remote_radiusoffset;
   yoffset = sin(angle) * level.remote_radiusoffset;
-  anglevector = vectornormalize((xoffset, yoffset, level.remote_zoffset));
+  anglevector = vectorNormalize((xoffset, yoffset, level.remote_zoffset));
   anglevector = anglevector * 6100;
-  remote linkto(level.remotemortarrig, "tag_origin", anglevector, (0, angle - 90, 0));
+  remote linkTo(level.remotemortarrig, "tag_origin", anglevector, (0, angle - 90, 0));
   remoteobjidfriendly = maps\mp\gametypes\_gameobjects::getnextobjid();
   objective_add(remoteobjidfriendly, "invisible", remote.origin, &"remotemortar", self);
   objective_state(remoteobjidfriendly, "active");
@@ -271,12 +271,12 @@ rotaterig(clockwise) {
 
   for(;;) {
     if(!clockwise) {
-      self rotateyaw(turn, 30);
+      self rotateYaw(turn, 30);
       wait 30;
       continue;
     }
 
-    self rotateyaw(turn, 45);
+    self rotateYaw(turn, 45);
     wait 45;
   }
 }
@@ -300,7 +300,7 @@ play_lockon_sounds(player) {
   self endon("remote_end");
   self.locksounds = spawn("script_model", self.origin);
   wait 0.1;
-  self.locksounds linkto(self, "tag_player");
+  self.locksounds linkTo(self, "tag_player");
 
   while(true) {
     self waittill("locking on");
@@ -549,7 +549,7 @@ player_fire_think(remote) {
     }
 
     self playlocalsound("mpl_ks_reaper_fire");
-    self playrumbleonentity("sniper_fire");
+    self playRumbleOnEntity("sniper_fire");
 
     if(shot % 3 == 1) {
       if(isDefined(remote.owner) && isDefined(remote.owner.pilottalking) && remote.owner.pilottalking) {
@@ -678,7 +678,7 @@ remote_leave() {
   }
 
   self thread maps\mp\killstreaks\_spyplane::flattenyaw(self.angles[1] + yaw);
-  self moveto(exitpoint, 8, 4);
+  self moveTo(exitpoint, 8, 4);
 
   if(self.lowhealth) {
     playFXOnTag(level.chopper_fx["damage"]["heavy_smoke"], self, "tag_origin");
@@ -692,7 +692,7 @@ remote_leave() {
 play_remote_fx() {
   self.exhaustfx = spawn("script_model", self.origin);
   self.exhaustfx setModel("tag_origin");
-  self.exhaustfx linkto(self, "tag_turret", vectorscale((0, 0, 1), 25.0));
+  self.exhaustfx linkTo(self, "tag_turret", vectorscale((0, 0, 1), 25.0));
   wait 0.1;
   playFXOnTag(level.fx_cuav_burner, self.exhaustfx, "tag_origin");
 }
@@ -701,7 +701,7 @@ play_afterburner_fx() {
   if(!isDefined(self.exhaustfx)) {
     self.exhaustfx = spawn("script_model", self.origin);
     self.exhaustfx setModel("tag_origin");
-    self.exhaustfx linkto(self, "tag_turret", vectorscale((0, 0, 1), 25.0));
+    self.exhaustfx linkTo(self, "tag_turret", vectorscale((0, 0, 1), 25.0));
   }
 
   self endon("death");

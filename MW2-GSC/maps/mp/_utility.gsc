@@ -109,7 +109,7 @@ orientToNormal(normal) {
     return (0, 0, 0);
   }
 
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);

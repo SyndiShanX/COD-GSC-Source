@@ -176,7 +176,7 @@ _id_197B(var_0, var_1) {
 
   var_0._id_0481 = "apc_russian";
   var_0._id_04DE = "vindia_physics_mp";
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;
@@ -204,7 +204,7 @@ _id_197B(var_0, var_1) {
 _id_197C(var_0, var_1) {
   var_2 = spawnturret("misc_turret", var_0 gettagorigin("tag_turret"), "tur_apc_rus_mp", 0);
   var_2.angles = var_0 gettagangles("tag_turret");
-  var_2 linkto(var_0, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_0, "tag_turret", (0, 0, 0), (0, 0, 0));
 
   if(istrue(var_1._id_FE22)) {
     var_2 setModel("veh8_mil_lnd_vindia_a1_turret_west_mp");
@@ -271,7 +271,7 @@ _id_199D(var_0) {
   var_2 = anglestoup(self.angles);
   var_3 = vectordot(var_1, var_2);
   var_4 = var_0.point + var_2 * var_3;
-  var_5 = vectornormalize(var_4 - self.origin);
+  var_5 = vectorNormalize(var_4 - self.origin);
   var_6 = anglesToForward(self.angles);
   var_7 = anglestoright(self.angles);
   var_8 = getdvarfloat("#x3d51985d011d9401b", -0.892);

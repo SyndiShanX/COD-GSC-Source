@@ -390,7 +390,7 @@ debughandler_tick(var_0) {
     return anim.failure;
   }
 
-  self scragentsetgoalradius(16);
+  self scragentsetgoalRadius(16);
   self scragentsetgoalpos(level.slasherdebugdestination);
   return anim.running;
 }
@@ -575,7 +575,7 @@ trysawbladeattack(var_0) {
   var_5 = var_3.origin - self.origin;
   var_4 = (var_4[0], var_4[1], 0);
   var_5 = (var_5[0], var_5[1], 0);
-  var_5 = vectornormalize(var_5);
+  var_5 = vectorNormalize(var_5);
   var_6 = vectordot(var_4, var_5);
 
   if(var_6 < -0.259) {
@@ -620,7 +620,7 @@ tryramattack(var_0) {
   var_4 = var_2.origin;
   var_5 = var_4 - self.origin;
   var_3 = (var_3[0], var_3[1], 0);
-  var_5 = vectornormalize((var_5[0], var_5[1], 0));
+  var_5 = vectorNormalize((var_5[0], var_5[1], 0));
   var_6 = vectordot(var_3, var_5);
 
   if(var_6 < 0.707) {
@@ -725,7 +725,7 @@ findteleportdest() {
     if(var_6 < 57600) {
       continue;
     }
-    var_7 = vectornormalize(var_5);
+    var_7 = vectorNormalize(var_5);
     var_8 = vectordot(var_1, var_7);
 
     if(var_8 < 0.707) {
@@ -907,7 +907,7 @@ trymeleeattacks(var_0) {
   var_4 = var_1.origin - self.origin;
   var_4 = (var_4[0], var_4[1], 0);
   var_5 = anglesToForward(self.angles);
-  var_6 = vectornormalize(var_4);
+  var_6 = vectorNormalize(var_4);
   var_7 = vectordot(var_5, var_6);
 
   if(var_7 < self.meleedot) {
@@ -1187,7 +1187,7 @@ findjumpscareteleportpos(var_0, var_1, var_2) {
     return;
   }
 
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_8 = getclosestpointonnavmesh(var_0.origin);
   var_9 = [];
 
@@ -1217,7 +1217,7 @@ findjumpscareteleportpos(var_0, var_1, var_2) {
       continue;
     }
 
-    var_17 = vectornormalize(var_16[1] - var_8);
+    var_17 = vectorNormalize(var_16[1] - var_8);
     var_18 = vectordot(var_17, var_7);
 
     if(var_18 < 0.707) {

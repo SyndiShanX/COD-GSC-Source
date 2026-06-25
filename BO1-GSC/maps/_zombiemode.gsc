@@ -104,11 +104,11 @@ main() {
   }
   initZombieLeaderboardData();
   initializeStatTracking();
-  if(GetPlayers().size <= 1) {
+  if(getPlayers().size <= 1) {
     incrementCounter("global_solo_games", 1);
   } else if(level.systemLink) {
     incrementCounter("global_systemlink_games", 1);
-  } else if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  } else if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     incrementCounter("global_splitscreen_games", 1);
   } else {
     incrementCounter("global_coop_games", 1);
@@ -276,7 +276,7 @@ ammoout_dialog_timer() {
 }
 spawn_vo() {
   wait(1);
-  players = getplayers();
+  players = getPlayers();
   if(players.size > 1) {
     player = random(players);
     index = maps\_zombiemode_weapons::get_player_index(player);
@@ -292,7 +292,7 @@ testing_spawner_bug() {
   wait(0.1);
   level.round_number = 7;
   spawners = [];
-  spawners[0] = GetEnt("testy", "targetname");
+  spawners[0] = getEnt("testy", "targetname");
   while(1) {
     wait(1);
     level.enemy_spawns = spawners;
@@ -1100,7 +1100,7 @@ player_out_of_playable_area_monitor() {
           self playlocalsound("zmb_laugh_child");
         }
         wait(0.5);
-        if(getplayers().size == 1 && flag("solo_game") && is_true(self.waiting_to_revive)) {
+        if(getPlayers().size == 1 && flag("solo_game") && is_true(self.waiting_to_revive)) {
           level notify("end_game");
         } else {
           self.lives = 0;
@@ -1402,7 +1402,7 @@ set_third_person(value) {
 }
 last_stand_revive() {
   level endon("between_round_over");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] maps\_laststand::player_is_in_laststand() && players[i].revivetrigger.beingRevived == 0) {
       players[i] maps\_laststand::auto_revive();
@@ -1987,7 +1987,7 @@ round_pause(delay) {
     delay--;
     level.countdown_hud SetValue(delay);
   }
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] playlocalsound("zmb_perks_packa_ready");
   }
@@ -2133,7 +2133,7 @@ chalk_one_up() {
     intro = false;
   }
   if(level.round_number == 5 || level.round_number == 10 || level.round_number == 20 || level.round_number == 35 || level.round_number == 50) {
-    players = getplayers();
+    players = getPlayers();
     rand = RandomIntRange(0, players.size);
     players[rand] thread maps\_zombiemode_audio::create_and_play_dialog("general", "round_" + level.round_number);
   }
@@ -3014,7 +3014,7 @@ end_game() {
 }
 update_leaderboards() {
   uploadGlobalStatCounters();
-  if(GetPlayers().size <= 1) {
+  if(getPlayers().size <= 1) {
     cheater_found = maps\_zombiemode_ffotd::nazizombies_checking_for_cheats();
     if(cheater_found == false) {
       nazizombies_upload_solo_highscore();
@@ -3024,7 +3024,7 @@ update_leaderboards() {
   if(level.systemLink) {
     return;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return;
   }
   cheater_found = maps\_zombiemode_ffotd::nazizombies_checking_for_cheats();
@@ -3111,11 +3111,11 @@ limp() {
 }
 stumble(stumble_angles, stumble_time, recover_time, no_notify) {
   stumble_angles = self adjust_angles_to_player(stumble_angles);
-  self.ground_ref_ent RotateTo(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
+  self.ground_ref_ent rotateTo(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
   self.ground_ref_ent waittill("rotatedone");
   base_angles = (RandomFloat(4) - 4, RandomFloat(5), 0);
   base_angles = self adjust_angles_to_player(base_angles);
-  self.ground_ref_ent RotateTo(base_angles, recover_time, 0, (recover_time / 2));
+  self.ground_ref_ent rotateTo(base_angles, recover_time, 0, (recover_time / 2));
   self.ground_ref_ent waittill("rotatedone");
   if(!isDefined(no_notify)) {
     level notify("recovered");
@@ -3144,7 +3144,7 @@ coop_player_spawn_placement() {
   flag_wait("all_players_connected");
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(structs[i].origin);
+    players[i] setOrigin(structs[i].origin);
     players[i] setplayerangles(structs[i].angles);
     players[i].spectator_respawn = structs[i];
   }
@@ -3412,7 +3412,7 @@ zombieStatGet(dataName) {
   if(level.systemLink) {
     return;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return;
   }
   return (self getdstat("PlayerStatsList", dataName));
@@ -3421,7 +3421,7 @@ zombieStatSet(dataName, value) {
   if(level.systemLink) {
     return;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return;
   }
   self setdstat("PlayerStatsList", dataName, value);
@@ -3519,7 +3519,7 @@ player_intermission() {
         if(isDefined(points[i].speed)) {
           speed = points[i].speed;
         }
-        target_point = getstruct(points[i].target, "targetname");
+        target_point = getStruct(points[i].target, "targetname");
         dist = Distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
@@ -3528,8 +3528,8 @@ player_intermission() {
         }
         self.game_over_bg FadeOverTime(q_time);
         self.game_over_bg.alpha = 0;
-        org MoveTo(target_point.origin, time, q_time, q_time);
-        org RotateTo(target_point.angles, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait(time - q_time);
         self.game_over_bg FadeOverTime(q_time);
         self.game_over_bg.alpha = 1;
@@ -3661,11 +3661,11 @@ default_delayed_exit() {
 }
 default_find_exit_point() {
   self endon("death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = VectorNormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {
@@ -3689,7 +3689,7 @@ default_find_exit_point() {
 }
 play_level_start_vox_delayed() {
   wait(5);
-  players = getplayers();
+  players = getPlayers();
   num = RandomIntRange(0, players.size);
   players[num] maps\_zombiemode_audio::create_and_play_dialog("general", "intro");
 }
@@ -3787,7 +3787,7 @@ register_sidequest(id, solo_stat, solo_collectible, coop_stat, coop_collectible)
       level.zombie_sidequest_previously_completed[id] = HasCollectible(level.zombie_sidequest_solo_collectible[id]);
     }
   } else {
-    if(level.systemLink || GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+    if(level.systemLink || GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
       if(isDefined(level.zombie_sidequest_coop_collectible[id])) {
         level.zombie_sidequest_previously_completed[id] = HasCollectible(level.zombie_sidequest_coop_collectible[id]);
       }
@@ -3823,7 +3823,7 @@ set_sidequest_completed(id) {
   if(level.systemLink) {
     return;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return;
   }
   players = get_players();

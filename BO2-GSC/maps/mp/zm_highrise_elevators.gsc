@@ -44,9 +44,9 @@ quick_revive_solo_watch() {
     level waittill("revive_on");
     wait 1;
     machine_trigger.origin = self.body.origin + triggeroffset;
-    machine_trigger linkto(self.body);
+    machine_trigger linkTo(self.body);
     level.quick_revive_machine.origin = self.body.origin + machineoffset;
-    level.quick_revive_machine linkto(self.body);
+    level.quick_revive_machine linkTo(self.body);
     level.quick_revive_machine show();
     self.body.lock_doors = 0;
     self.body perkelevatordoor(1);
@@ -104,7 +104,7 @@ get_link_entity_for_host_migration() {
     }
   }
 
-  escape_pod = getent("elevator_bldg1a_body", "targetname");
+  escape_pod = getEnt("elevator_bldg1a_body", "targetname");
 
   if(self istouching(escape_pod)) {
     return escape_pod;
@@ -136,13 +136,13 @@ escape_pod_host_migration_respawn_check(escape_pod) {
 
 is_self_on_elevator() {
   elevator_volumes = [];
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1b", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1c", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1d", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3a", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3b", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3c", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3d", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1b", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1c", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1d", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3a", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3b", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3c", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3d", "targetname");
 
   foreach(zone in elevator_volumes) {
     if(self istouching(zone)) {
@@ -158,7 +158,7 @@ is_self_on_elevator() {
     }
   }
 
-  escape_pod = getent("elevator_bldg1a_body", "targetname");
+  escape_pod = getEnt("elevator_bldg1a_body", "targetname");
 
   if(self istouching(escape_pod)) {
     return true;
@@ -272,7 +272,7 @@ init_elevator(elevatorname, force_starting_floor, force_starting_origin) {
   elevator.name = elevatorname;
   elevator.body = undefined;
   level.elevators["bldg" + elevatorname] = elevator;
-  piece = getent("elevator_bldg" + elevatorname + "_body", "targetname");
+  piece = getEnt("elevator_bldg" + elevatorname + "_body", "targetname");
   piece setmovingplatformenabled(1);
   piece.is_moving = 0;
 
@@ -282,11 +282,11 @@ init_elevator(elevatorname, force_starting_floor, force_starting_origin) {
     return;
   }
 
-  trig = getent("elevator_bldg" + elevatorname + "_trigger", "targetname");
+  trig = getEnt("elevator_bldg" + elevatorname + "_trigger", "targetname");
 
   if(isDefined(trig)) {
-    trig enablelinkto();
-    trig linkto(piece);
+    trig enablelinkTo();
+    trig linkTo(piece);
     trig setmovingplatformenabled(1);
     piece.trig = trig;
     piece thread elevator_roof_watcher();
@@ -305,7 +305,7 @@ init_elevator(elevatorname, force_starting_floor, force_starting_origin) {
   elevator.floors[piece.script_location].paths = elevator_path_nodes("bldg" + elevatorname, "floor" + piece.script_location);
 
   while(isDefined(piece.target)) {
-    piece = getstruct(piece.target, "targetname");
+    piece = getStruct(piece.target, "targetname");
     piece.is_elevator = 1;
 
     if(!isDefined(elevator.floors[piece.script_location])) {
@@ -396,14 +396,14 @@ zombie_climb_elevator(elev) {
   self.dont_throw_gib = 1;
   self.forcemovementscriptstate = 1;
   self.attachent = elev;
-  self linkto(self.attachent, "tag_origin");
+  self linkTo(self.attachent, "tag_origin");
   self.jumpingtoelev = 1;
   animstate = "zm_traverse_elevator";
   anim_name = "zm_zombie_climb_elevator";
   tag_origin = self.attachent gettagorigin("tag_origin");
   tag_angles = self.attachent gettagangles("tag_origin");
   self animmode("noclip");
-  self animscripted(tag_origin, tag_angles, animstate, anim_name);
+  self animScripted(tag_origin, tag_angles, animstate, anim_name);
   self maps\mp\animscripts\zm_shared::donotetracks("traverse_anim");
   self animmode("gravity");
   self.dont_throw_gib = 0;
@@ -632,7 +632,7 @@ elevator_think(elevator) {
     elevator elevator_set_moving(1);
 
     if(dist > 0) {
-      elevator.body moveto(floor_goal, time, time * 0.25, time * 0.25);
+      elevator.body moveTo(floor_goal, time, time * 0.25, time * 0.25);
 
       if(isDefined(elevator.body.trig)) {
         elevator.body thread elev_clean_up_corpses();
@@ -737,14 +737,14 @@ init_elevator_perks() {
   level.elevator_perks_building["blue"] = array_randomize(level.elevator_perks_building["blue"]);
   level.elevator_perks = arraycombine(level.elevator_perks_building["green"], level.elevator_perks_building["blue"], 0, 0);
   random_perk_structs = [];
-  revive_perk_struct = getstruct("force_quick_revive", "targetname");
-  revive_perk_struct = getstruct(revive_perk_struct.target, "targetname");
+  revive_perk_struct = getStruct("force_quick_revive", "targetname");
+  revive_perk_struct = getStruct(revive_perk_struct.target, "targetname");
   perk_structs = getStructArray("zm_random_machine", "script_noteworthy");
 
   for(i = 0; i < perk_structs.size; i++) {
-    random_perk_structs[i] = getstruct(perk_structs[i].target, "targetname");
+    random_perk_structs[i] = getStruct(perk_structs[i].target, "targetname");
     random_perk_structs[i].script_parameters = perk_structs[i].script_parameters;
-    random_perk_structs[i].script_linkent = getent("elevator_" + perk_structs[i].script_parameters + "_body", "targetname");
+    random_perk_structs[i].script_linkent = getEnt("elevator_" + perk_structs[i].script_parameters + "_body", "targetname");
   }
 
   green_structs = [];
@@ -789,23 +789,23 @@ random_elevator_perks() {
   perks = array("vending_additionalprimaryweapon", "vending_revive", "vending_chugabud", "vending_jugg", "vending_doubletap", "vending_sleight");
 
   foreach(perk in perks) {
-    machine = getent(perk, "targetname");
-    trigger = getent(perk, "target");
+    machine = getEnt(perk, "targetname");
+    trigger = getEnt(perk, "target");
 
     if(!isDefined(machine) || !isDefined(trigger)) {
       continue;
     }
     elevator = machine get_perk_elevator();
-    trigger enablelinkto();
-    trigger linkto(machine);
+    trigger enablelinkTo();
+    trigger linkTo(machine);
 
     if(isDefined(trigger.clip)) {
       trigger.clip delete();
     }
 
     if(isDefined(trigger.bump)) {
-      trigger.bump enablelinkto();
-      trigger.bump linkto(machine);
+      trigger.bump enablelinkTo();
+      trigger.bump linkTo(machine);
     }
 
     if(isDefined(elevator)) {
@@ -816,7 +816,7 @@ random_elevator_perks() {
       }
 
       elevator elevator_perk_offset(machine, perk);
-      machine linkto(elevator);
+      machine linkTo(elevator);
       machine._linked_ent = elevator;
       machine._linked_ent_moves = 1;
       machine._linked_ent_offset = machine.origin - elevator.origin;
@@ -831,16 +831,16 @@ random_elevator_perks() {
     }
   }
 
-  trigger = getent("specialty_weapupgrade", "script_noteworthy");
+  trigger = getEnt("specialty_weapupgrade", "script_noteworthy");
 
   if(isDefined(trigger)) {
-    machine = getent(trigger.target, "targetname");
+    machine = getEnt(trigger.target, "targetname");
     elevator = machine get_perk_elevator();
     fwdvec = anglestoright(machine.angles);
-    fwdvec = vectornormalize(fwdvec) * 20;
+    fwdvec = vectorNormalize(fwdvec) * 20;
     trigger.origin = trigger.origin + (fwdvec[0], fwdvec[1], 8);
-    trigger enablelinkto();
-    trigger linkto(machine);
+    trigger enablelinkTo();
+    trigger linkTo(machine);
 
     if(isDefined(trigger.clip)) {
       trigger.clip delete();
@@ -848,7 +848,7 @@ random_elevator_perks() {
 
     if(isDefined(elevator)) {
       elevator.perk_type = "specialty_weapupgrade";
-      machine linkto(elevator);
+      machine linkTo(elevator);
       level thread debugline(machine, elevator);
     }
   }
@@ -990,17 +990,17 @@ faller_location_logic() {
   elevators = [];
 
   for(i = 0; i < elevator_names.size; i++) {
-    elevators[i] = getent("elevator_" + elevator_names[i] + "_body", "targetname");
+    elevators[i] = getEnt("elevator_" + elevator_names[i] + "_body", "targetname");
   }
 
   elevator_volumes = [];
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1b", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1c", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1d", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3a", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3b", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3c", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3d", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1b", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1c", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1d", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3a", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3b", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3c", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3d", "targetname");
   level.elevator_volumes = elevator_volumes;
 
   while(true) {
@@ -1065,13 +1065,13 @@ disable_elevator_spawners(volume, spawn_points) {
 
 shouldsuppressgibs() {
   elevator_volumes = [];
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1b", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1c", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_1d", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3a", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3b", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3c", "targetname");
-  elevator_volumes[elevator_volumes.size] = getent("elevator_3d", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1b", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1c", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_1d", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3a", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3b", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3c", "targetname");
+  elevator_volumes[elevator_volumes.size] = getEnt("elevator_3d", "targetname");
 
   while(true) {
     zombies = get_round_enemy_array();

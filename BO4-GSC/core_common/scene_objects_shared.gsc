@@ -169,7 +169,7 @@ class csceneobject {
       return;
     }
 
-    if(!entity isplayinganimscripted() || _str_current_anim !== anim_name) {
+    if(!entity isplayinganimScripted() || _str_current_anim !== anim_name) {
       return;
     }
 
@@ -191,7 +191,7 @@ class csceneobject {
       return;
     }
 
-    if(!entity isplayinganimscripted()) {
+    if(!entity isplayinganimScripted()) {
       return;
     }
 
@@ -459,12 +459,12 @@ class csceneobject {
     while(isDefined(s_current_struct)) {
       if(!isDefined(_e.var_645ab05a)) {
         _e.var_acbd43ee = util::spawn_model("tag_origin", _e.origin, _e.angles);
-        _e linkto(_e.var_acbd43ee);
+        _e linkTo(_e.var_acbd43ee);
         _e thread function_98561e95();
       }
 
-      _e.var_acbd43ee moveto(s_current_struct.origin, n_move_time);
-      _e.var_acbd43ee rotateto(s_current_struct.angles, n_move_time);
+      _e.var_acbd43ee moveTo(s_current_struct.origin, n_move_time);
+      _e.var_acbd43ee rotateTo(s_current_struct.angles, n_move_time);
       _e.var_acbd43ee waittill(#"movedone");
 
       if(isDefined(s_current_struct.script_float)) {
@@ -503,7 +503,7 @@ class csceneobject {
     n_lerp = isDefined(var_7d32b2c6) ? var_7d32b2c6 : get_lerp_time();
 
     if(is_player() && !function_6c1c67c1()) {
-      endcamanimscripted(_e);
+      endcamanimScripted(_e);
       n_camera_tween = get_camera_tween();
 
       if(n_camera_tween > 0) {
@@ -572,7 +572,7 @@ class csceneobject {
       log(toupper(_s.type) + "<dev string:x208>" + hashtostring(animation) + "<dev string:x217>");
     }
 
-    if(!isDefined(_e) || !_e isplayinganimscripted()) {
+    if(!isDefined(_e) || !_e isplayinganimScripted()) {
       current_playing_anim[_n_ent_num] = undefined;
     }
 
@@ -1238,7 +1238,7 @@ class csceneobject {
     if(isDefined(var_55b4f21e.var_3ea5d95f) && var_55b4f21e.var_3ea5d95f && _str_shot != "init") {
       _e connectpaths();
     } else if(isDefined(var_55b4f21e.var_8645db22) && var_55b4f21e.var_8645db22) {
-      _e disconnectpaths(2, 1);
+      _e disconnectPaths(2, 1);
     }
 
     if(isDefined(var_55b4f21e.cleanuphide) && var_55b4f21e.cleanuphide) {
@@ -1371,7 +1371,7 @@ class csceneobject {
   function _dynamic_paths() {
     if(isDefined(_e) && isDefined(_s.dynamicpaths) && _s.dynamicpaths) {
       if(distance2dsquared(_e.origin, _e.scene_orig_origin) > 4) {
-        _e disconnectpaths(2, 0);
+        _e disconnectPaths(2, 0);
       }
     }
   }
@@ -1613,7 +1613,7 @@ class csceneobject {
       if(isDefined(_o_scene._a_objects)) {
         foreach(obj in _o_scene._a_objects) {
           if(isDefined(obj._e) && obj._s.type === "prop") {
-            obj._e stopanimscripted();
+            obj._e stopanimScripted();
             obj._e physicslaunch();
           }
         }
@@ -1734,7 +1734,7 @@ class csceneobject {
     set_objective();
 
     if(isDefined(_s.dynamicpaths) && _s.dynamicpaths) {
-      _e disconnectpaths(2);
+      _e disconnectPaths(2);
     }
   }
 
@@ -1765,7 +1765,7 @@ class csceneobject {
       _e.scene_orig_origin = _e.origin;
       _e connectpaths();
     } else if(isDefined(var_55b4f21e.var_6d2f3193) && var_55b4f21e.var_6d2f3193) {
-      _e disconnectpaths(2, 1);
+      _e disconnectPaths(2, 1);
     }
 
     if(isDefined(var_55b4f21e.preparehide) && var_55b4f21e.preparehide) {
@@ -1861,7 +1861,7 @@ class csceneobject {
       s_start_spot = function_3e22944e();
 
       if(isPlayer(_e)) {
-        _e setorigin(s_start_spot.origin);
+        _e setOrigin(s_start_spot.origin);
         _e setplayerangles(s_start_spot.angles);
       } else if(isactor(_e)) {
         _e forceteleport(s_start_spot.origin, s_start_spot.angles);
@@ -2634,7 +2634,7 @@ class cscene {
     if(isstring(_s.cameraswitcher) || ishash(_s.cameraswitcher)) {
       player endon(#"new_camera_switcher");
       player dontinterpolate();
-      endcamanimscripted(player);
+      endcamanimScripted(player);
       player thread scene::scene_enable_player_stuff(_s, undefined, _e_root);
       callback::remove_on_loadout(&_play_camera_anim_on_player_callback, self);
     }
@@ -2647,7 +2647,7 @@ class cscene {
 
     level notify(#"stop_camera_anims");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       self thread _stop_camera_anim_on_player(player);
     }
   }
@@ -2669,11 +2669,11 @@ class cscene {
     n_start_time = camera_start_time;
 
     if(!isDefined(_s.cameraswitchergraphiccontents) || ismature(player)) {
-      camanimscripted(player, _s.cameraswitcher, n_start_time, v_origin, v_angles);
+      camanimScripted(player, _s.cameraswitcher, n_start_time, v_origin, v_angles);
       return;
     }
 
-    camanimscripted(player, _s.cameraswitchergraphiccontents, n_start_time, v_origin, v_angles);
+    camanimScripted(player, _s.cameraswitchergraphiccontents, n_start_time, v_origin, v_angles);
   }
 
   function _play_camera_anim_on_player_callback(player) {

@@ -45,7 +45,7 @@ function_4458377c() {
         continue;
       }
 
-      e_player = arraygetclosest(ai.origin, getplayers());
+      e_player = arraygetclosest(ai.origin, getPlayers());
 
       if(isPlayer(e_player) && distance(ai.origin, e_player.origin) > 100) {
         ai thread function_fe65f5a6(randomfloatrange(1.25, 1.5), e_player);

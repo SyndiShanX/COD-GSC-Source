@@ -189,11 +189,11 @@ check_player_can_see_me(player) {
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);
-  playerUnitForwardVec = VectorNormalize(playerForwardVec);
+  playerUnitForwardVec = vectorNormalize(playerForwardVec);
   banzaiPos = self GetOrigin();
   playerPos = player GetOrigin();
   playerToBanzaiVec = banzaiPos - playerPos;
-  playerToBanzaiUnitVec = VectorNormalize(playerToBanzaiVec);
+  playerToBanzaiUnitVec = vectorNormalize(playerToBanzaiVec);
   forwardDotBanzai = VectorDot(playerUnitForwardVec, playerToBanzaiUnitVec);
   angleFromCenter = ACos(forwardDotBanzai);
   playerFOV = GetDvarFloat(#"cg_fov");
@@ -345,7 +345,7 @@ draw_forward_line_until_notify(ent, r, g, b, notifyEnt, notifyString) {
   notifyEnt endon("death");
   notifyEnt endon(notifyString);
   while(1) {
-    forwardVec = VectorNormalize(anglesToForward(ent.angles));
+    forwardVec = vectorNormalize(anglesToForward(ent.angles));
     pointForward = ent.origin + forwardVec * 64;
     line(ent.origin, pointForward, (r, g, b), 0.05);
     wait .05;

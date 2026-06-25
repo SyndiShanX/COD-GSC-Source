@@ -93,7 +93,7 @@ raven_gun_pap_check_for_crit_kill(param_00, param_01, param_02, param_03, param_
   var_0A = randomfloatrange(var_09.var_116[0] - 32, var_09.var_116[0] + 32);
   var_0B = randomfloatrange(var_09.var_116[1] - 32, var_09.var_116[1] + 32);
   var_0C = randomfloatrange(var_09.var_116[2] + 32, var_09.var_116[2] + 64);
-  var_09 moveto((var_0A, var_0B, var_0C), 2, 0.5, 1.5);
+  var_09 moveTo((var_0A, var_0B, var_0C), 2, 0.5, 1.5);
   wait(2);
   var_09 raven_seek_targets(param_01, param_04, param_03);
   level.ravengunisactive = 0;
@@ -104,7 +104,7 @@ raven_seek_targets(param_00, param_01, param_02) {
     var_04 = undefined;
     var_04 = common_scripts\utility::func_4461(self.var_116, lib_0547::func_408F(), 200);
     if(isDefined(var_04)) {
-      self moveto(var_04.var_116 + (0, 0, 48), 0.15);
+      self moveTo(var_04.var_116 + (0, 0, 48), 0.15);
       wait(0.15);
       var_05 = maps\mp\gametypes\zombies::func_1E59(lib_0547::func_A51("zombie_generic"), level.var_A980);
       var_04 dodamage(var_05, self.var_116, param_00, param_00, param_02, param_01);

@@ -196,7 +196,7 @@ setupwarbirdkillstreak(var_0, var_1) {
 
   if(var_4.hasai) {
     var_4.usableent = spawn("script_origin", (0, 0, 0));
-    var_4.usableent linkto(var_4);
+    var_4.usableent linkTo(var_4);
     var_4.usableent maps\mp\_utility::makegloballyusablebytype("killstreakRemote", &"MP_WARBIRD_PLAYER_PROMPT", self);
   }
 
@@ -403,7 +403,7 @@ spawn_warbird_turret(var_0, var_1, var_2, var_3) {
   var_4.angles = self gettagangles(var_2);
   var_4 setModel(var_1);
   var_4 setdefaultdroppitch(45.0);
-  var_4 linkto(self, var_2, (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(self, var_2, (0, 0, 0), (0, 0, 0));
   var_4.owner = self.owner;
   var_4.health = 99999;
   var_4.maxhealth = 1000;
@@ -709,12 +709,12 @@ fireai(var_0) {
 
 fireairocket(var_0) {
   var_1 = var_0 gettagorigin("tag_missile_right");
-  var_2 = vectornormalize(anglesToForward(var_0.angles));
+  var_2 = vectorNormalize(anglesToForward(var_0.angles));
   var_3 = var_0 vehicle_getvelocity();
   var_4 = magicbullet("warbird_missile_mp", var_1 + var_3 / 10, self getEye() + var_3 + var_2 * 1000, self);
   var_4.killcament = var_0;
   playFXOnTag(level.chopper_fx["rocketlaunch"]["warbird"], var_0, "tag_missile_right");
-  var_4 missile_settargetent(var_0.enemy_target);
+  var_4 missile_settargetEnt(var_0.enemy_target);
   var_4 missile_setflightmodedirect();
   var_0.remainingrocketshots--;
 
@@ -746,7 +746,7 @@ checkwarbirdtargetlos(var_0) {
   for(;;) {
     var_1 = var_0 gettagorigin("TAG_FLASH1");
     var_2 = var_0.enemy_target getEye();
-    var_3 = vectornormalize(var_2 - var_1);
+    var_3 = vectorNormalize(var_2 - var_1);
     var_4 = var_1 + var_3 * 20;
     var_5 = bulletTrace(var_4, var_2, 0, var_0, 0, 0, 0, 0, 0);
 
@@ -816,7 +816,7 @@ playercontrolwarbirdsetup(var_0) {
   var_2 = var_2 + (0, 0, -10);
   var_0.playerattachpoint.origin = var_2;
   var_0.playerattachpoint.angles = var_3;
-  var_0.playerattachpoint linkto(var_0, "tag_player_mp");
+  var_0.playerattachpoint linkTo(var_0, "tag_player_mp");
   self unlink();
   var_0 cancelaimove(var_0);
   thread warbirdrocketdamageindicator(var_0);
@@ -1229,13 +1229,13 @@ firewarbirdrockets(var_0) {
 
     if(self.current_warbird_weapon == "missiles" || (self.guid == "bot0" || self.guid == "bot1" || self.guid == "bot2" || self.guid == "bot3")) {
       earthquake(0.4, 1, var_0.origin, 1000);
-      self playrumbleonentity("ac130_105mm_fire");
+      self playRumbleOnEntity("ac130_105mm_fire");
       var_1 = var_0 gettagorigin("tag_missile_right");
-      var_2 = vectornormalize(anglesToForward(self getplayerangles()));
+      var_2 = vectorNormalize(anglesToForward(self getplayerangles()));
       var_3 = var_0 getentityvelocity();
       var_4 = magicbullet("warbird_missile_mp", var_1 + var_3 / 10, self getEye() + var_3 + var_2 * 1000, self);
       playFXOnTag(level.chopper_fx["rocketlaunch"]["warbird"], var_0, "tag_missile_right");
-      var_4 missile_settargetent(var_0.targetent);
+      var_4 missile_settargetEnt(var_0.targetent);
       var_4 missile_setflightmodedirect();
       var_0.remainingrocketshots--;
       self notify("ForceUncloak");

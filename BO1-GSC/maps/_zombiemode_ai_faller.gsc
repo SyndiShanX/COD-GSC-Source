@@ -63,7 +63,7 @@ round_spawning_fall_test() {
         spawn_points[spawn_points.size] = spawner;
       }
     }
-    player = GetPlayers()[0];
+    player = getPlayers()[0];
     bestPoint = undefined;
     bestDist = 0.0;
     for(i = 0; i < spawn_points.size; i++) {
@@ -125,7 +125,7 @@ do_zombie_fall() {
   self.in_the_ceiling = true;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   if(!isDefined(self.zone_name)) {
     self.zone_name = self get_current_zone();
   }
@@ -137,7 +137,7 @@ do_zombie_fall() {
     self delayThread(0.1, ::zombie_faller_delete);
     return;
   } else if(GetDvarInt(#"zombie_fall_test")) {
-    player = GetPlayers()[0];
+    player = getPlayers()[0];
     spot = undefined;
     bestDist = 0.0;
     for(i = 0; i < spots.size; i++) {
@@ -159,12 +159,12 @@ do_zombie_fall() {
   anim_org = spot.origin;
   anim_ang = spot.angles;
   self Hide();
-  self.anchor moveto(anim_org, .05);
+  self.anchor moveTo(anim_org, .05);
   self.anchor waittill("movedone");
   target_org = maps\_zombiemode_spawner::get_desired_origin();
   if(isDefined(target_org)) {
     anim_ang = VectorToAngles(target_org - self.origin);
-    self.anchor RotateTo((0, anim_ang[1], 0), .05);
+    self.anchor rotateTo((0, anim_ang[1], 0), .05);
     self.anchor waittill("rotatedone");
   }
   self unlink();
@@ -178,7 +178,7 @@ do_zombie_fall() {
 zombie_faller_do_fall() {
   self endon("death");
   emerge_anim = self get_fall_emerge_anim();
-  self AnimScripted("fall_emerge", self.origin, self.zombie_faller_location.angles, emerge_anim);
+  self animScripted("fall_emerge", self.origin, self.zombie_faller_location.angles, emerge_anim);
   self animscripts\zombie_shared::DoNoteTracks("fall_emerge", ::handle_fall_notetracks, undefined, self.zombie_faller_location);
   self.zombie_faller_wait_start = GetTime();
   self.zombie_faller_should_drop = false;
@@ -187,7 +187,7 @@ zombie_faller_do_fall() {
   while(!self.zombie_faller_should_drop) {
     if(self zombie_fall_should_attack(self.zombie_faller_location)) {
       attack_anim = self get_attack_anim(self.zombie_faller_location);
-      self AnimScripted("attack", self.origin, self.zombie_faller_location.angles, attack_anim);
+      self animScripted("attack", self.origin, self.zombie_faller_location.angles, attack_anim);
       self animscripts\zombie_shared::DoNoteTracks("attack", ::handle_fall_notetracks, undefined, self.zombie_faller_location);
       if(!(self zombie_faller_always_drop()) && randomfloat(1) > 0.5) {
         self.zombie_faller_should_drop = true;
@@ -204,7 +204,7 @@ zombie_faller_do_fall() {
         break;
       } else {
         attack_anim = self get_attack_anim(self.zombie_faller_location);
-        self AnimScripted("attack", self.origin, self.zombie_faller_location.angles, attack_anim);
+        self animScripted("attack", self.origin, self.zombie_faller_location.angles, attack_anim);
         self animscripts\zombie_shared::DoNoteTracks("attack", ::handle_fall_notetracks, undefined, self.zombie_faller_location);
       }
     }
@@ -213,12 +213,12 @@ zombie_faller_do_fall() {
   spot = self.zombie_faller_location;
   self zombie_faller_enable_location();
   fall_anim = self get_fall_anim(spot);
-  self AnimScripted("fall", self.origin, spot.angles, fall_anim);
+  self animScripted("fall", self.origin, spot.angles, fall_anim);
   self animscripts\zombie_shared::DoNoteTracks("fall", ::handle_fall_notetracks, undefined, spot);
   self.deathFunction = maps\_zombiemode_spawner::zombie_death_animscript;
   self notify("fall_anim_finished");
   spot notify("stop_zombie_fall_fx");
-  self StopAnimScripted();
+  self StopanimScripted();
   landAnim = random(level._zombie_fall_anims["zombie"]["land"]);
   landAnimDelta = 15;
   ground_pos = groundpos_ignore_water_new(self.origin);
@@ -310,14 +310,14 @@ zombie_faller_watch_player(player) {
       if(!inCloseRange) {
         dirToPlayerEnter = player.origin - self.origin;
         dirToPlayerEnter = (dirToPlayerEnter[0], dirToPlayerEnter[1], 0.0);
-        dirToPlayerEnter = vectornormalize(dirToPlayerEnter);
+        dirToPlayerEnter = vectorNormalize(dirToPlayerEnter);
       }
       inCloseRange = true;
     } else {
       if(inCloseRange) {
         dirToPlayerExit = player.origin - self.origin;
         dirToPlayerExit = (dirToPlayerExit[0], dirToPlayerExit[1], 0.0);
-        dirToPlayerExit = vectornormalize(dirToPlayerExit);
+        dirToPlayerExit = vectorNormalize(dirToPlayerExit);
         if(vectordot(dirToPlayerEnter, dirToPlayerExit) < 0) {
           self.zombie_faller_should_drop = true;
           break;
@@ -357,7 +357,7 @@ zombie_fall_should_attack(spot) {
 }
 zombie_fall_get_vicitims(spot) {
   ret = [];
-  players = GetPlayers();
+  players = getPlayers();
   checkDist2 = 40.0;
   checkDist2 *= checkDist2;
   for(i = 0; i < players.size; i++) {
@@ -410,7 +410,7 @@ zombie_fall_death(zombie, spot) {
   while(zombie.health > 1) {
     zombie waittill("damage", amount, attacker, dir, p, type);
   }
-  zombie StopAnimScripted();
+  zombie StopanimScripted();
   spot notify("stop_zombie_fall_fx");
 }
 _damage_mod_to_damage_type(type) {
@@ -428,7 +428,7 @@ _damage_mod_to_damage_type(type) {
 zombie_fall_fx(zombie) {
   self thread zombie_fall_dust_fx(zombie);
   self thread zombie_fall_burst_fx();
-  playsoundatposition("zmb_zombie_spawn", self.origin);
+  playSoundAtPosition("zmb_zombie_spawn", self.origin);
   zombie endon("death");
   self endon("stop_zombie_fall_fx");
   wait 1;
@@ -484,11 +484,11 @@ hide_pop() {
 in_player_fov(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);
-  playerUnitForwardVec = VectorNormalize(playerForwardVec);
+  playerUnitForwardVec = vectorNormalize(playerForwardVec);
   banzaiPos = self.origin;
   playerPos = player GetOrigin();
   playerToBanzaiVec = banzaiPos - playerPos;
-  playerToBanzaiUnitVec = VectorNormalize(playerToBanzaiVec);
+  playerToBanzaiUnitVec = vectorNormalize(playerToBanzaiVec);
   forwardDotBanzai = VectorDot(playerUnitForwardVec, playerToBanzaiUnitVec);
   angleFromCenter = ACos(forwardDotBanzai);
   playerFOV = GetDvarFloat(#"cg_fov");
@@ -504,7 +504,7 @@ potentially_visible(how_close) {
     how_close = 1000;
   }
   potentiallyVisible = false;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     dist = Distance(self.origin, players[i].origin);
     if(dist < how_close) {

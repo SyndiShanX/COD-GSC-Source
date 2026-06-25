@@ -115,7 +115,7 @@ raid_flakrundamage() {
       }
 
       if(1) {
-        var_01.occupied_player playrumbleonentity("artillery_rumble");
+        var_01.occupied_player playRumbleOnEntity("artillery_rumble");
         earthquake(0.7, 0.5, var_01.var_116, 800, var_01.occupied_player);
       }
     }

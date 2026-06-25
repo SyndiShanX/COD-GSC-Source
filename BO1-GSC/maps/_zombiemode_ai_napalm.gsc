@@ -191,7 +191,7 @@ napalm_zombie_spawn(animname_set) {
   self.animname = "napalm_zombie";
   self thread napalm_zombie_client_flag();
   self.napalm_zombie_glowing = false;
-  self.maxhealth *= (GetPlayers().size * level.napalmHealthMultiplier);
+  self.maxhealth *= (getPlayers().size * level.napalmHealthMultiplier);
   self.health = self.maxhealth;
   self.no_gib = true;
   self.rising = true;
@@ -214,18 +214,18 @@ napalm_zombie_spawn(animname_set) {
   self thread napalm_watch_for_sliding();
   self thread napalm_zombie_count_watch();
   old_origin = self.origin;
-  closest = GetClosest(self.origin, GetPlayers());
+  closest = GetClosest(self.origin, getPlayers());
   angles = VectorToAngles(closest.origin - self.origin);
   anchor = spawn("script_origin", self.origin);
   anchor.angles = angles;
-  self linkto(anchor);
+  self linkTo(anchor);
   self Hide();
   self.a.disablepain = true;
   self magic_bullet_shield();
   anim_org = self.origin + (0, 0, -45);
-  anchor MoveTo(anim_org, 0.05);
+  anchor moveTo(anim_org, 0.05);
   anchor waittill("movedone");
-  anchor RotateTo(angles, 0.05);
+  anchor rotateTo(angles, 0.05);
   anchor waittill("rotatedone");
   self Unlink();
   anchor Delete();
@@ -240,7 +240,7 @@ napalm_zombie_spawn(animname_set) {
   speed = "run";
   spawn_anim = random(level._zombie_rise_anims["zombie"][1][speed]);
   time = getanimlength(spawn_anim);
-  self animscripted("napalm_spawn", self.origin, self.angles, spawn_anim, "normal");
+  self animScripted("napalm_spawn", self.origin, self.angles, spawn_anim, "normal");
   wait(time);
   self.rising = false;
   self stop_magic_bullet_shield();
@@ -348,7 +348,7 @@ _zombie_ExplodeNearPlayers() {
       explode_wind_up = % ai_zombie_napalm_attack_01;
       time = getanimlength(explode_wind_up);
       animScale = 2.0;
-      self animscripted("napalm_explode", self.origin, self.angles, explode_wind_up, "normal", undefined, animScale);
+      self animScripted("napalm_explode", self.origin, self.angles, explode_wind_up, "normal", undefined, animScale);
       wait time / animScale;
       napalm_clear_radius_fx_all_players();
       self.killed_self = true;
@@ -389,7 +389,7 @@ napalm_zombie_death() {
 }
 napalm_delay_delete() {
   self endon("death");
-  self SetPlayerCollision(0);
+  self setPlayerCollision(0);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
   wait_network_frame();
   self Hide();
@@ -438,7 +438,7 @@ _napalm_damage_players() {
   footOrigin = self.origin + (0, 0, 8);
   midOrigin = (footOrigin[0], footOrigin[1], (footOrigin[2] + eyeOrigin[2]) / 2);
   players_damaged_by_explosion = false;
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!is_player_valid(players[i])) {
       continue;
@@ -593,7 +593,7 @@ _zombie_SetupFXOnJoint(jointName, fxName, offset) {
   if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
-  effectEnt LinkTo(self, jointName, offset);
+  effectEnt linkTo(self, jointName, offset);
   playFXOnTag(level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }

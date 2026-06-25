@@ -160,7 +160,7 @@ _id_3E98(var_0) {
   thread _id_03BA();
   thread _id_3E95(self);
   self._id_3E99 = common_scripts\utility::spawn_tag_origin();
-  self._id_3E99 linkto(self);
+  self._id_3E99 linkTo(self);
   wait 0.1;
 
   if(isDefined(var_0) && var_0) {
@@ -246,10 +246,10 @@ _id_3E9C() {
 _id_3E9D(var_0) {
   self endon("death");
   self unlink();
-  self rotateto((0, 0, 90), 0.05);
+  self rotateTo((0, 0, 90), 0.05);
 
   while(isDefined(var_0) && isDefined(var_0.origin)) {
-    self moveto(var_0.origin, 0.05);
+    self moveTo(var_0.origin, 0.05);
     common_scripts\utility::waitframe();
   }
 }
@@ -394,8 +394,8 @@ _id_3EAD(var_0, var_1) {
 
 _id_3EAF(var_0, var_1, var_2) {
   var_3 = 512;
-  var_4 = self.origin + vectornormalize(self.origin - level.player.origin) * var_3;
-  var_5 = self.origin + vectornormalize(level.player.origin - self.origin) * var_3;
+  var_4 = self.origin + vectorNormalize(self.origin - level.player.origin) * var_3;
+  var_5 = self.origin + vectorNormalize(level.player.origin - self.origin) * var_3;
   var_6 = vectorlerp(var_4, var_5, var_1 / var_2);
   var_7 = 9999999;
   var_8 = undefined;

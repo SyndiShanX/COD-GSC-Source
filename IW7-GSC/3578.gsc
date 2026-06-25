@@ -93,16 +93,16 @@ func_BCD5(var_0, var_1, var_2) {
       var_11 = vectortoangles(var_10);
       var_12 = anglesToForward(var_11);
       var_13 = var_5 + var_12 * randomintrange(64, 128);
-      var_1 moveto(var_13, 0.1);
+      var_1 moveTo(var_13, 0.1);
       wait(0.1);
       continue;
     }
 
     var_1.var_115F6 = 1;
     if(scripts\engine\utility::mod(var_1.var_BCEC, 2) == 0) {
-      var_1 moveto(var_5, 0.25);
+      var_1 moveTo(var_5, 0.25);
     } else {
-      var_1 moveto(var_6, 0.25);
+      var_1 moveTo(var_6, 0.25);
     }
 
     var_1.var_BCEC++;

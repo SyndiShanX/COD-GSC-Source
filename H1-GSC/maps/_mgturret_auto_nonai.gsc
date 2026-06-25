@@ -36,7 +36,7 @@ set_up_auto_non_ai_turret(var_0, var_1, var_2) {
   var_1 endon("death");
   var_0 endon("death");
   var_0 setmode("auto_nonai");
-  var_1 linkto(var_0, var_2.sittag, (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, var_2.sittag, (0, 0, 0), (0, 0, 0));
   thread stop_turret_on_gunner_death(var_0, var_1, var_2);
   thread keep_gunner_oriented_with_turret(var_0, var_1);
   var_3 = var_0 gettagorigin(var_2.sittag);

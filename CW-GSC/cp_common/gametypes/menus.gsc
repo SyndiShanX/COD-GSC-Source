@@ -257,10 +257,10 @@ function private function_c35a1bfc() {
   self notify("6dfd273785998fbf");
   self endon("6dfd273785998fbf");
   level flag::set("restart_mission");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"disconnect");
   globallogic_ui::function_cdbb5c49(1, 1);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::set(#"hash_1828a61368b4014c", "show_crosshair", 0);
   player val::set(#"hash_1828a61368b4014c", "freezecontrols", 1);
   player val::set(#"hash_1828a61368b4014c", "takedamage", 0);
@@ -306,7 +306,7 @@ function private function_d7c2965() {
   self notify("7d026682bb29f30d");
   self endon("7d026682bb29f30d");
   level flag::set("restart_checkpoint");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   globallogic_ui::function_cdbb5c49(1, 1);
   level.var_5be43b2d = 1;
@@ -322,8 +322,8 @@ function private function_d7c2965() {
 
   globallogic_ui::function_760546ce();
 
-  if(isDefined(player) && player isplayinganimscripted()) {
-    player stopanimscripted(undefined, 1);
+  if(isDefined(player) && player isplayinganimScripted()) {
+    player stopanimScripted(undefined, 1);
     waitframe(1);
   }
 

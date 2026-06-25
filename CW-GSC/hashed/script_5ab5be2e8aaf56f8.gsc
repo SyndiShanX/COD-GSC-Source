@@ -158,7 +158,7 @@ function function_39f990f4() {
   var_812457c = 0;
 
   while(!var_812457c) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(player.origin, self.origin) <= 36000000) {
         level clientfield::set("" + #"hash_71f053fa597abb52", 1);
         var_812457c = 1;
@@ -174,7 +174,7 @@ function function_738f5215() {
   var_35dfb407 = 0;
 
   while(!var_35dfb407) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(distance2dsquared(player.origin, self.mdl_console.origin) <= 2250000) {
@@ -296,7 +296,7 @@ function function_c93067d3(instance) {
   wait 1;
 
   if(instance.var_f63c851c < 2) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(player.origin, self.origin) <= 810000) {
         player thread zm_vo::function_7622cb70("objectiveSecureEssenceConversionEndResponse", 0, 1);
       }
@@ -321,7 +321,7 @@ function function_dc79011b(instance) {
         zombie.e_marker = util::spawn_model("tag_origin", zombie gettagorigin("J_Spine4"));
 
         if(isDefined(zombie.e_marker)) {
-          zombie.e_marker linkto(zombie, "J_Spine4");
+          zombie.e_marker linkTo(zombie, "J_Spine4");
           zombie.e_marker clientfield::set("" + #"zombie_marked", 1);
           zombie.is_marked = 1;
           zombie thread function_60b78908(instance);
@@ -354,7 +354,7 @@ function function_a55dd0a0(instance) {
   instance endon(#"objective_ended", #"players_dead");
   self endon(#"death", #"landed");
   self waittill(#"arriving");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   while(true) {
     foreach(player in a_players) {
@@ -421,10 +421,10 @@ function function_338034b3() {
   self endon(#"objective_ended", #"players_dead");
   self.var_4272a188 triggerenable(0);
   var_1490cdb5 = spawn("trigger_radius_use", self.mdl_console.origin + (0, 0, 24), 0, 96, 96, 1);
-  var_1490cdb5 triggerignoreteam();
-  var_1490cdb5 setcursorhint("HINT_NOICON");
-  var_1490cdb5 sethintstring(#"hash_263f26fcd49be105");
-  var_1490cdb5 usetriggerrequirelookat(1);
+  var_1490cdb5 triggerIgnoreTeam();
+  var_1490cdb5 setCursorHint("HINT_NOICON");
+  var_1490cdb5 setHintString(#"hash_263f26fcd49be105");
+  var_1490cdb5 useTriggerRequireLookAt(1);
   s_result = var_1490cdb5 waittill(#"trigger");
   var_1490cdb5 delete();
   objective_setvisibletoall(self.var_e55c8b4e);
@@ -444,7 +444,7 @@ function function_f919d221(instance) {
   wait 0.1;
 
   if(isDefined(self.mdl_fx)) {
-    self.mdl_fx linkto(self.var_cef46557);
+    self.mdl_fx linkTo(self.var_cef46557);
   }
 
   instance waittill(#"summon");
@@ -574,7 +574,7 @@ function function_a39f5f0(instance) {
   while(true) {
     self.var_210e22a1 = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(self.origin, player.origin) <= sqr(2000)) {
         self.var_210e22a1 = 1;
       }
@@ -592,7 +592,7 @@ function function_b076be86(instance) {
   while(true) {
     self.var_210e22a1 = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(self.origin, player.origin) <= sqr(1000)) {
         self.var_210e22a1 = 1;
       }
@@ -606,7 +606,7 @@ function function_b076be86(instance) {
         instance.var_5b071610 = 1;
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(distance2dsquared(self.origin, player.origin) <= sqr(1000) && isalive(player)) {
           player thread zm_vo::function_c4303dda(#"hash_733d9e62eeb7efdb");
         }
@@ -615,7 +615,7 @@ function function_b076be86(instance) {
       wait 4;
       self notify(#"perimeter");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(distance2dsquared(self.origin, player.origin) <= sqr(1000) && isalive(player)) {
           player thread zm_vo::function_c4303dda(#"hash_21a2a9746be5c204");
         }
@@ -623,7 +623,7 @@ function function_b076be86(instance) {
 
       wait 3;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(distance2dsquared(self.origin, player.origin) <= sqr(1000) && isalive(player)) {
           player thread zm_vo::function_7622cb70("objectiveSecureActivatePerimeter3", 0, 1);
         }
@@ -631,7 +631,7 @@ function function_b076be86(instance) {
 
       wait 3.5;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(distance2dsquared(self.origin, player.origin) <= sqr(1000) && isalive(player)) {
           player thread zm_vo::function_7622cb70("objectiveSecureActivatePerimeter4", 0, 1);
         }
@@ -965,7 +965,7 @@ function function_c9277739(a_s_pts) {
   for(i = 0; i < a_s_pts.size; i++) {
     a_s_pts[i].b_cansee = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player util::is_player_looking_at(a_s_pts[i].origin, 0.8, 1, player)) {
         a_s_pts[i].b_cansee = 1;
       }
@@ -981,7 +981,7 @@ function function_c9277739(a_s_pts) {
 }
 
 function function_1172db0d() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_kills = 16;
       break;
@@ -1003,7 +1003,7 @@ function function_1172db0d() {
 }
 
 function function_53e21154() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_spawns = 6;
       break;
@@ -1025,7 +1025,7 @@ function function_53e21154() {
 }
 
 function function_4fbba5c() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_spawns = 8;
       break;
@@ -1049,7 +1049,7 @@ function function_4fbba5c() {
 function function_37a785fb() {
   self endon(#"death");
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_spawns = 48;
       break;
@@ -1071,7 +1071,7 @@ function function_37a785fb() {
 }
 
 function function_36585ff1() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_timeout = 75;
       break;
@@ -1117,7 +1117,7 @@ function function_5efbdd83(instance) {
   }
 
   self thread function_b5770dda(instance, 4);
-  self disconnectpaths();
+  self disconnectPaths();
   self.is_active = 1;
   self.var_8ccbea19 = 0;
   self notify(#"ready");
@@ -1140,7 +1140,7 @@ function function_5efbdd83(instance) {
   wait 2;
   self stoprumble("sr_payload_portal_rumble");
   wait 0.5;
-  self playrumbleonentity("sr_transmitter_clear");
+  self playRumbleOnEntity("sr_transmitter_clear");
   waitframe(1);
   self function_c6f443c5();
   wait 0.5;
@@ -1154,7 +1154,7 @@ function function_5efbdd83(instance) {
     });
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!level.sr_objective_secure_hud sr_objective_secure_hud::is_open(player)) {
       level.sr_objective_secure_hud sr_objective_secure_hud::open(player);
     }
@@ -1280,7 +1280,7 @@ function function_5ebfd8cc() {
       self.angles += (0, 90, 0);
       break;
     case #"p9_m114_155mm_artillery_gun_01_pickup":
-      self.origin -= vectornormalize(anglesToForward(self.angles)) * 10;
+      self.origin -= vectorNormalize(anglesToForward(self.angles)) * 10;
       break;
     case #"p9_zm_ndu_pegboard_tools_wrench_01":
       self.origin += (0, 0, -4);
@@ -1295,13 +1295,13 @@ function function_be75ebf0() {
 }
 
 function function_71e7b72b() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread namespace_77bd50da::function_cc8342e0(#"hash_763038398b0e6b59", 4);
   }
 
   wait 4.5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread namespace_77bd50da::function_cc8342e0(#"hash_113ad5247404dc08", 3);
   }
 }
@@ -1327,9 +1327,9 @@ function function_b5a08eb6(instance) {
   if(isDefined(self.var_cef46557)) {
     self.var_cef46557 function_619a5c20();
     self.var_2edbcbd0 = util::spawn_model("tag_origin", self.origin + (0, 0, 40));
-    self.var_2edbcbd0 linkto(self.var_cef46557);
+    self.var_2edbcbd0 linkTo(self.var_cef46557);
     self.var_e23c5c1d = util::spawn_model("tag_origin", self.origin + (0, 0, 40));
-    self.var_e23c5c1d linkto(self.var_cef46557);
+    self.var_e23c5c1d linkTo(self.var_cef46557);
   }
 
   self function_841b1bf7();
@@ -1417,7 +1417,7 @@ function function_7cfc417a(instance) {
 function function_f5087df2() {
   self waittill(#"objective_ended");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::function_817e4d10(player, 0);
 
     if(level.sr_objective_secure_hud sr_objective_secure_hud::is_open(player)) {
@@ -1427,7 +1427,7 @@ function function_f5087df2() {
 }
 
 function function_84ccd16c() {
-  self playrumbleonentity("sr_prototype_generator_explosion");
+  self playRumbleOnEntity("sr_prototype_generator_explosion");
   self playSound(#"hash_438a231b8ad66b41");
   wait 0.1;
 
@@ -1437,7 +1437,7 @@ function function_84ccd16c() {
 }
 
 function function_18caf292(n_id, var_c3a3ae13) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!level.sr_objective_secure_hud sr_objective_secure_hud::is_open(player)) {
       level.sr_objective_secure_hud sr_objective_secure_hud::open(player);
     }
@@ -1539,13 +1539,13 @@ function function_fb9dff2f(instance, activator) {
     instance thread function_ddb668e6();
     instance thread namespace_7589cf5c::function_f10301b0();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       level.var_31028c5d prototype_hud::function_7491d6c5(player, #"hash_691ec119979cba95");
     }
 
     instance waittill(#"summon");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_691ec119979cba95");
       level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
 
@@ -1567,7 +1567,7 @@ function function_fb9dff2f(instance, activator) {
       wait 1;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_1201ff20897597a2");
     }
   }
@@ -1637,11 +1637,11 @@ function function_b769e108(instance) {
       zombie.knockdown = 1;
       zombie.knockdown_type = "knockdown_shoved";
       var_7d6a995e = self.origin - zombie.origin;
-      var_1040735c = vectornormalize((var_7d6a995e[0], var_7d6a995e[1], 0));
+      var_1040735c = vectorNormalize((var_7d6a995e[0], var_7d6a995e[1], 0));
       zombie_forward = anglesToForward(zombie.angles);
-      zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+      zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
       zombie_right = anglestoright(zombie.angles);
-      zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+      zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
       dot = vectordot(var_1040735c, zombie_forward_2d);
 
       if(dot >= 0.5) {
@@ -1691,7 +1691,7 @@ function function_912eedf3(zombie) {
   zombie endon(#"death");
 
   if(isDefined(zombie) && zombie.zm_ai_category === #"normal") {
-    v_dir = vectornormalize(zombie.origin - self.origin);
+    v_dir = vectorNormalize(zombie.origin - self.origin);
     v_launch = v_dir * randomintrange(100, 150) + (0, 0, 150);
     zombie.allowdeath = 1;
 
@@ -1718,7 +1718,7 @@ function function_912eedf3(zombie) {
 function function_d210b81a(instance) {
   instance endon(#"objective_ended");
   self endon(#"death");
-  a_players = getplayers(undefined, self.origin, 100);
+  a_players = getPlayers(undefined, self.origin, 100);
   a_s_pts = namespace_85745671::function_e4791424(self.origin, 20, 100, 250, 200);
 
   foreach(player in a_players) {
@@ -1727,7 +1727,7 @@ function function_d210b81a(instance) {
         s_pt = array::random(a_s_pts);
 
         if(!positionwouldtelefrag(s_pt.origin)) {
-          player setorigin(s_pt.origin);
+          player setOrigin(s_pt.origin);
           break;
         }
 
@@ -1740,7 +1740,7 @@ function function_d210b81a(instance) {
     v_pos = self.origin + (randomintrangeinclusive(50, 100), randomintrangeinclusive(50, 100), 100);
 
     if(isDefined(v_pos)) {
-      player setorigin(v_pos);
+      player setOrigin(v_pos);
     }
   }
 }
@@ -1775,7 +1775,7 @@ function clear_vehicles(instance) {
 
 function teleport_vehicle(mdl_console) {
   self endon(#"death");
-  self playrumbleonentity("sr_transmitter_clear");
+  self playRumbleOnEntity("sr_transmitter_clear");
   self makevehicleunusable();
   a_occupants = self getvehoccupants();
 

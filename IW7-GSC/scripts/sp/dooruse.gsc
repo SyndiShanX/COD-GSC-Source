@@ -158,7 +158,7 @@ func_1AB0() {
   }
 
   self.var_C969 connectpaths();
-  self.var_C969 disconnectpaths();
+  self.var_C969 disconnectPaths();
   scripts\sp\utility::func_65E1("door_sequence_complete");
 }
 
@@ -359,7 +359,7 @@ func_1AB5(var_0) {
       var_1 = [15, -7];
       foreach(var_3 in var_1) {
         var_4 = scripts\engine\utility::spawn_tag_origin();
-        var_4 linkto(self, "door_jnt", (38.5, var_3, 16), (0, 0, 0));
+        var_4 linkTo(self, "door_jnt", (38.5, var_3, 16), (0, 0, 0));
         self.var_ACD5[self.var_ACD5.size] = var_4;
       }
     }
@@ -385,7 +385,7 @@ func_1AB2(var_0) {
 
 func_1AA9(var_0, var_1, var_2, var_3, var_4) {
   scripts\engine\utility::flag_wait("airlocks_setup");
-  var_5 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_5 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_5 scripts\sp\utility::func_65DD("cycling_complete");
   var_5 scripts\sp\utility::func_65E1("cycling");
   var_6 = [];
@@ -403,7 +403,7 @@ func_1AA9(var_0, var_1, var_2, var_3, var_4) {
       var_9 = [15, -7];
       foreach(var_11 in var_9) {
         var_12 = var_8 scripts\engine\utility::spawn_tag_origin();
-        var_12 linkto(var_8, "door_jnt", (38.5, var_11, 16), (0, 0, 0));
+        var_12 linkTo(var_8, "door_jnt", (38.5, var_11, 16), (0, 0, 0));
         var_8.var_ACD5[var_8.var_ACD5.size] = var_12;
       }
     }
@@ -916,7 +916,7 @@ buddy_down_two_enemy_dead_thread(var_0) {
     }
 
     wait(var_12);
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     self notify("stop_pry_anim");
     scripts\sp\utility::func_65DD("player_prying_open_door");
     level.player.var_2704 = 0;
@@ -998,7 +998,7 @@ buddy_down_skip_move() {
   self endon("buddydoor_pull_complete");
   self endon("buddydoor_pull_failed");
   for(;;) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     earthquake(0.15, 0.1, level.player.origin, 5000);
     wait(0.05);
   }
@@ -1016,7 +1016,7 @@ buddy_down_remove_playerclip() {
   }
 
   var_0.origin = self gettagorigin(var_1);
-  var_0 linkto(self, var_1);
+  var_0 linkTo(self, var_1);
   var_0 lib_0E46::func_48C4(undefined, undefined, "", undefined, 1000, 1000, 1, 1);
   self waittill("buddydoor_pull_complete");
   var_0 lib_0E46::func_DFE3();
@@ -1152,9 +1152,9 @@ func_21E5() {
   var_0 = self;
   var_0.var_1FBB = "loot_door";
   if(isDefined(self.var_4386)) {
-    self.collision linkto(self, self.var_4386);
+    self.collision linkTo(self, self.var_4386);
   } else {
-    self.collision linkto(self, "j_handle");
+    self.collision linkTo(self, "j_handle");
   }
 
   if(scripts\engine\utility::istrue(self.var_72D1)) {
@@ -1337,7 +1337,7 @@ func_D0A6(var_0) {
   var_7 = level.player scripts\engine\utility::spawn_tag_origin();
   var_7.origin = level.player.origin;
   var_7.angles = level.player getplayerangles();
-  level.player playerlinkto(var_7, "tag_origin", 1, 0, 0, 0, 0, 0);
+  level.player playerlinkTo(var_7, "tag_origin", 1, 0, 0, 0, 0, 0);
   var_8 = 0.45;
   if(isDefined(self.func_8483)) {
     var_8 = self.func_8483;

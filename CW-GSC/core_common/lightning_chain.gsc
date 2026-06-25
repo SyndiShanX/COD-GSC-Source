@@ -395,10 +395,10 @@ function lc_play_arc_fx(target, params) {
   fx = playFXOnTag(level._effect[#"tesla_bolt"], fxorg, "tag_origin");
 
   if(isDefined(params.arc_fx_sound)) {
-    playsoundatposition(params.arc_fx_sound, fxorg.origin);
+    playSoundAtPosition(params.arc_fx_sound, fxorg.origin);
   }
 
-  fxorg moveto(target_origin, params.arc_travel_time);
+  fxorg moveTo(target_origin, params.arc_travel_time);
   fxorg waittill(#"movedone");
   fxorg delete();
 }

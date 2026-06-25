@@ -42,7 +42,7 @@ explosivedronelink() {
     self.explosivedrone.targetname = "explosive_drone_head_model";
     self.explosivedrone setModel(level.explosivedronesettings.modelbase);
     self.explosivedrone.oldcontents = self.explosivedrone setcontents(0);
-    self.explosivedrone linkto(self, "tag_spike", (0, 0, 0), (0, 0, 0));
+    self.explosivedrone linkTo(self, "tag_spike", (0, 0, 0), (0, 0, 0));
     self.explosivedrone.owner = self.owner;
     var_0 = self.explosivedrone;
     var_0 thread cleanup_on_grenade_death(self);
@@ -266,7 +266,7 @@ idletargetmoverexplosive(var_0) {
     if(maps\mp\_utility::isreallyalive(self) && !maps\mp\_utility::isusingremote() && anglesToForward(self.angles) != var_1) {
       var_1 = anglesToForward(self.angles);
       var_2 = self.origin + var_1 * -100 + (0, 0, 40);
-      var_0 moveto(var_2, 0.5);
+      var_0 moveTo(var_2, 0.5);
     }
 
     wait 0.5;
@@ -1286,7 +1286,7 @@ createkillcamentity() {
   var_0 = (0, 0, 0);
   self.killcament = spawn("script_model", self.origin);
   self.killcament setscriptmoverkillcam("explosive");
-  self.killcament linkto(self, "TAG_THRUSTER_BTM", var_0, (0, 0, 0));
+  self.killcament linkTo(self, "TAG_THRUSTER_BTM", var_0, (0, 0, 0));
   self.killcament setcontents(0);
   self.killcament.starttime = gettime();
 }
@@ -1304,7 +1304,7 @@ watchforpickup(var_0) {
   self endon("death");
   self.owner endon("death");
   self.explosivedrone makeusable();
-  self.explosivedrone sethintstring(&"MP_PICKUP_EXPLOSIVE_DRONE");
+  self.explosivedrone setHintString(&"MP_PICKUP_EXPLOSIVE_DRONE");
   self.explosivedrone sethintstringvisibleonlytoowner(1);
   var_1 = getdvarfloat("player_useRadius", 128);
   var_1 = var_1 * var_1;

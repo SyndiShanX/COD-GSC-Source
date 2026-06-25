@@ -149,7 +149,7 @@ leak_calc_ballistic(var_0, var_1) {
 }
 
 leak_calc_splash(var_0, var_1) {
-  var_2 = vectornormalize(vectorfromlinetopoint(self.a, self.b, var_0));
+  var_2 = vectorNormalize(vectorfromlinetopoint(self.a, self.b, var_0));
   var_0 = pointonsegmentnearesttopoint(self.a, self.b, var_0);
   return var_0 + var_2 * 4;
 }

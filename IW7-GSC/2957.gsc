@@ -56,9 +56,9 @@ stringemissilefired() {
       if(func_9F7A(var_2)) {
         if(isDefined(var_2.unittype) && !scripts\engine\utility::is_true(var_2.space)) {
           if(var_2.unittype == "soldier" || var_2.unittype == "c6") {
-            var_0 missile_settargetent(self.var_10F9D.var_10FAA, (0, 0, 38));
+            var_0 missile_settargetEnt(self.var_10F9D.var_10FAA, (0, 0, 38));
           } else if(var_2.unittype == "c8") {
-            var_0 missile_settargetent(self.var_10F9D.var_10FAA, (0, 0, 60));
+            var_0 missile_settargetEnt(self.var_10F9D.var_10FAA, (0, 0, 60));
           }
         }
       }

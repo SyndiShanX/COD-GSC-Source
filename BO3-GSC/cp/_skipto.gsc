@@ -662,7 +662,7 @@ function devgui() {
     complete = getdvarstring("skipto_complete");
     if(isDefined(complete) && complete.size) {
       setDvar("skipto_complete", "");
-      level objective_completed(complete, getplayers()[0]);
+      level objective_completed(complete, getPlayers()[0]);
     }
     wait(0.05);
   }
@@ -670,7 +670,7 @@ function devgui() {
 
 function menu() {
   level flag::wait_till("");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   while(isDefined(player) && player buttonPressed("")) {
     wait(0.05);
   }
@@ -678,16 +678,16 @@ function menu() {
   for(;;) {
     if(isDefined(getdvarint("")) && getdvarint("")) {
       setDvar("", 0);
-      getplayers()[0] allowjump(0);
+      getPlayers()[0] allowjump(0);
       display();
-      getplayers()[0] allowjump(1);
+      getPlayers()[0] allowjump(1);
     }
     wait(0.05);
   }
 }
 
 function key_combo_pressed() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   if(isDefined(player) && player buttonPressed("BUTTON_X") && player buttonPressed("DPAD_RIGHT") && player buttonPressed("BUTTON_LSHLDR") && player buttonPressed("BUTTON_RSHLDR")) {
     return true;
   }
@@ -766,19 +766,19 @@ function display() {
       old_selected = selected;
     }
     if(!up_pressed) {
-      if(getplayers()[0] buttonPressed("UPARROW") || getplayers()[0] buttonPressed("DPAD_UP") || getplayers()[0] buttonPressed("APAD_UP")) {
+      if(getPlayers()[0] buttonPressed("UPARROW") || getPlayers()[0] buttonPressed("DPAD_UP") || getPlayers()[0] buttonPressed("APAD_UP")) {
         up_pressed = 1;
         selected--;
       }
-    } else if(!getplayers()[0] buttonPressed("UPARROW") && !getplayers()[0] buttonPressed("DPAD_UP") && !getplayers()[0] buttonPressed("APAD_UP")) {
+    } else if(!getPlayers()[0] buttonPressed("UPARROW") && !getPlayers()[0] buttonPressed("DPAD_UP") && !getPlayers()[0] buttonPressed("APAD_UP")) {
       up_pressed = 0;
     }
     if(!down_pressed) {
-      if(getplayers()[0] buttonPressed("DOWNARROW") || getplayers()[0] buttonPressed("DPAD_DOWN") || getplayers()[0] buttonPressed("APAD_DOWN")) {
+      if(getPlayers()[0] buttonPressed("DOWNARROW") || getPlayers()[0] buttonPressed("DPAD_DOWN") || getPlayers()[0] buttonPressed("APAD_DOWN")) {
         down_pressed = 1;
         selected++;
       }
-    } else if(!getplayers()[0] buttonPressed("DOWNARROW") && !getplayers()[0] buttonPressed("DPAD_DOWN") && !getplayers()[0] buttonPressed("APAD_DOWN")) {
+    } else if(!getPlayers()[0] buttonPressed("DOWNARROW") && !getPlayers()[0] buttonPressed("DPAD_DOWN") && !getPlayers()[0] buttonPressed("APAD_DOWN")) {
       down_pressed = 0;
     }
     if(selected < 0) {
@@ -787,11 +787,11 @@ function display() {
     if(selected >= names.size) {
       selected = 0;
     }
-    if(getplayers()[0] buttonPressed("BUTTON_B")) {
+    if(getPlayers()[0] buttonPressed("BUTTON_B")) {
       display_cleanup(elems, title);
       break;
     }
-    if(getplayers()[0] buttonPressed("kp_enter") || getplayers()[0] buttonPressed("BUTTON_A") || getplayers()[0] buttonPressed("enter")) {
+    if(getPlayers()[0] buttonPressed("kp_enter") || getPlayers()[0] buttonPressed("BUTTON_A") || getPlayers()[0] buttonPressed("enter")) {
       if(names[selected] == "cancel") {
         display_cleanup(elems, title);
         break;
@@ -967,7 +967,7 @@ function teleport_players(skipto_name, coop_sort) {
   for(i = 0; i < level.players.size; i++) {
     var_ac126ac5 = skipto_spots[i].origin;
     var_ac126ac5 = level.players[i] player::get_snapped_spot_origin(var_ac126ac5);
-    level.players[i] setorigin(var_ac126ac5);
+    level.players[i] setOrigin(var_ac126ac5);
     if(isDefined(skipto_spots[i].angles)) {
       level.players[i] util::delay_network_frames(2, "disconnect", &setplayerangles, skipto_spots[i].angles);
     }
@@ -1319,8 +1319,8 @@ function private function_61843b91(var_717810f, n_player_dist) {
   } else if(self laststand::player_is_in_laststand()) {
     self notify("auto_revive");
   }
-  if(self isplayinganimscripted()) {
-    self stopanimscripted();
+  if(self isplayinganimScripted()) {
+    self stopanimScripted();
   }
   if(isDefined(self getlinkedent())) {
     self unlink();
@@ -1338,7 +1338,7 @@ function private function_61843b91(var_717810f, n_player_dist) {
         clientfield::increment_to_player("postfx_igc", 1);
       }
       wait(0.5);
-      self setorigin(loc.origin);
+      self setOrigin(loc.origin);
       if(isDefined(loc.angles)) {
         util::delay_network_frames(2, "disconnect", &setplayerangles, loc.angles);
       }
@@ -1611,7 +1611,7 @@ function function_f380969b() {
   while(response != "closed") {
     self waittill("menuresponse", menu, response);
   }
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player == self) {
       continue;
     }
@@ -1769,7 +1769,7 @@ function level_completed(skipto, starting) {
   }
   util::wait_network_frame();
   set_current_skipto("");
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player player::take_weapons();
     player savegame::set_player_data("saved_weapon", player._current_weapon.name);
     player savegame::set_player_data("saved_weapondata", player._weapons);
@@ -1897,7 +1897,7 @@ function level_completed(skipto, starting) {
   }
   level flag::init("all_players_set_aar_scoreboard");
   level.var_a7c3eb6f = 0;
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_61688376();
   }
   level flag::wait_till_timeout(3, "all_players_set_aar_scoreboard");
@@ -1929,7 +1929,7 @@ function level_completed(skipto, starting) {
       level flag::wait_till("all_players_closed_aar");
     } else if(!sessionmodeiscampaignzombiesgame()) {
       if(function_cb7247d8(str_next_map)) {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           player savegame::set_player_data("show_aar", 1);
         }
       } else {
@@ -1985,7 +1985,7 @@ function function_4aa085d7() {
     self closeluimenu(self.var_40ac72fa);
     self freezecontrols(0);
     self.var_40ac72fa = undefined;
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player == self) {
         continue;
       }
@@ -2101,7 +2101,7 @@ function function_178f7e85(var_deb20b04, difficulty) {
 }
 
 function function_a5a105e8() {
-  playerlist = getplayers();
+  playerlist = getPlayers();
   for(i = 0; i < playerlist.size; i++) {
     e_player = playerlist[i];
     entnum = e_player getentitynumber();
@@ -2200,7 +2200,7 @@ function watch_completion(name) {
 }
 
 function all_players_touching(trigger) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!player istouching(trigger)) {
       return false;
     }
@@ -2311,11 +2311,11 @@ function apply_mover(mover) {
     script_mover = spawn("script_origin", start_mover.origin);
     script_mover.angles = start_mover.angles;
     foreach(target in targets) {
-      target linkto(script_mover, "", script_mover worldtolocalcoords(target.origin), target.angles - script_mover.angles);
+      target linkTo(script_mover, "", script_mover worldtolocalcoords(target.origin), target.angles - script_mover.angles);
     }
     util::wait_network_frame();
-    script_mover moveto(mover.origin, speed);
-    script_mover rotateto(mover.angles, speed);
+    script_mover moveTo(mover.origin, speed);
+    script_mover rotateTo(mover.angles, speed);
     script_mover waittill("movedone");
     foreach(target in targets) {
       target.last_mover = mover;

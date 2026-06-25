@@ -330,7 +330,7 @@ function spawn(parent, ondeathcallback) {
   }
 
   spawnpoint = parent.origin + (0, 0, -50);
-  drone = spawnvehicle("veh_flak_drone_mp", spawnpoint, parent.angles, "dynamic_spawn_ai");
+  drone = spawnVehicle("veh_flak_drone_mp", spawnpoint, parent.angles, "dynamic_spawn_ai");
   drone.death_callback = ondeathcallback;
   drone configureteam(parent, 0);
   drone thread watchgameevents();

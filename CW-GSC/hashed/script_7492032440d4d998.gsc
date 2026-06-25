@@ -34,7 +34,7 @@ function private function_613baf1b() {
 function private function_26d68622(v_center, var_50721d66) {
   var_4fb7e8bb = struct::get("satellite_computer_screen", "targetname");
   var_91b180f0 = {};
-  var_91b180f0.entity = getent("mq_sat_scr", "targetname");
+  var_91b180f0.entity = getEnt("mq_sat_scr", "targetname");
   var_91b180f0.model = #"hash_3bc4ed2f30d82d31" + var_50721d66;
   var_91b180f0.info = util::spawn_model("tag_origin", var_91b180f0.entity.origin, var_91b180f0.entity.angles);
   var_91b180f0.info hide();

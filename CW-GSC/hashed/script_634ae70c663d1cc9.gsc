@@ -177,7 +177,7 @@ function function_3111b4b2(var_d748f8af, triggertype = "trigger_box", var_bacb72
   trigger = namespace_ec06fe4a::spawntrigger(triggertype, (0, 0, 0), 1 | 2 | 4 | 4096 | 512 | var_7946c1f6, var_bacb72c4, height, width);
 
   if(isDefined(trigger)) {
-    trigger enablelinkto();
+    trigger enablelinkTo();
     trigger.type = var_d748f8af;
     trigger.width = width;
     trigger.height = height;
@@ -334,7 +334,7 @@ function function_5418a00f() {
 function play_anim(animation, rate, mode) {
   self endon(#"death");
   self notify(#"stop_idle");
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(!isDefined(rate)) {
     rate = 1;

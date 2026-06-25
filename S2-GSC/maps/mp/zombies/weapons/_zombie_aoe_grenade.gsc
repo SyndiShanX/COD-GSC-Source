@@ -216,7 +216,7 @@ track_player_aoe_grenade() {
           }
 
           var_04 lib_0378::func_8D74("zmb_pomel_grenade_float", self);
-          var_04 moveto(var_07, var_08);
+          var_04 moveTo(var_07, var_08);
           wait(0.15);
         }
 

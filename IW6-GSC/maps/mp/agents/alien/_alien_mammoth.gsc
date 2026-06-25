@@ -110,7 +110,7 @@ burrow(var_0) {
   self scragentsetorientmode("face angle abs", var_6);
   var_3 = rotatevector(var_3, var_6);
   var_7 = var_4 - var_3;
-  self setorigin(var_7, 0);
+  self setOrigin(var_7, 0);
   wait 0.1;
   level notify("dlc_vo_notify", "warn_emerge", self);
   self show();

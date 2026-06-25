@@ -68,7 +68,7 @@ ending1() {
   thread maps\las_vegas_code::ending_fadein(var_0, "vegas_ending1");
   level.player freezecontrols(0);
   var_1 = getanimlength(level.hesh maps\_utility::getanim("ending1"));
-  var_2 = common_scripts\utility::getstruct("ending1_anim_spot", "targetname");
+  var_2 = common_scripts\utility::getStruct("ending1_anim_spot", "targetname");
   var_2 thread maps\_anim::anim_custom_animmode(level.heroes, "gravity", "ending1");
   var_3 = 3;
   common_scripts\utility::flag_wait_or_timeout("ending1_done", var_1 - var_3);
@@ -87,7 +87,7 @@ ending2() {
   level.player freezecontrols(0);
   level.player maps\_utility::player_speed_set(20);
   var_1 = getanimlength(level.hesh maps\_utility::getanim("ending2"));
-  var_2 = common_scripts\utility::getstruct("ending2_anim_spot", "targetname");
+  var_2 = common_scripts\utility::getStruct("ending2_anim_spot", "targetname");
   var_2 thread maps\_anim::anim_single(level.heroes, "ending2");
   var_3 = 3;
   common_scripts\utility::flag_wait_or_timeout("ending2_done", var_1 - var_3);
@@ -107,7 +107,7 @@ ending3() {
   level.player freezecontrols(0);
   level.player maps\_utility::player_speed_set(20);
   var_1 = getanimlength(level.hesh maps\_utility::getanim("ending3"));
-  var_2 = common_scripts\utility::getstruct("ending3_anim_spot", "targetname");
+  var_2 = common_scripts\utility::getStruct("ending3_anim_spot", "targetname");
   var_2 thread maps\_anim::anim_single(level.heroes, "ending3");
   var_3 = 3;
   common_scripts\utility::flag_wait_or_timeout("ending3_done", var_1 - var_3);
@@ -129,7 +129,7 @@ ending4() {
   level.player maps\_utility::player_speed_set(20);
   var_1 = [level.hesh, level.merrick];
   var_2 = getanimlength(level.hesh maps\_utility::getanim("ending4"));
-  var_3 = common_scripts\utility::getstruct("ending4_anim_spot", "targetname");
+  var_3 = common_scripts\utility::getStruct("ending4_anim_spot", "targetname");
   var_3 thread maps\_anim::anim_single(var_1, "ending4");
   var_4 = 3;
   common_scripts\utility::flag_wait_or_timeout("ending4_done", var_2 - var_4);
@@ -138,7 +138,7 @@ ending4() {
 }
 
 dune_tumble() {
-  var_0 = common_scripts\utility::getstruct("ending_tumble_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("ending_tumble_spot", "targetname");
   var_1 = spawn("script_origin", (0, 0, 0));
   level.ground_ref_ent = var_1;
   level.player playersetgroundreferenceent(var_1);
@@ -153,9 +153,9 @@ dream() {
   ending_init();
   level.player freezecontrols(1);
   level.player enableslowaim(0.1, 0.1);
-  var_0 = common_scripts\utility::getstruct("ending_dream_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("ending_dream_spot", "targetname");
   var_0.origin = common_scripts\utility::drop_to_ground(var_0.origin, 10, -100);
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread dream_warriors();
   maps\las_vegas_code::spawn_hero("elias");
@@ -178,7 +178,7 @@ dream() {
 
 dream_warriors() {
   var_0 = common_scripts\utility::getStructArray("warrior_spot", "targetname");
-  var_1 = getent("warrior_spawner", "targetname");
+  var_1 = getEnt("warrior_spawner", "targetname");
   var_2 = [];
 
   foreach(var_4 in var_0) {
@@ -217,10 +217,10 @@ save() {
   level.player enableslowaim(0.1, 0.1);
   maps\_utility::delaythread(2, ::hesh_wave);
   maps\_utility::delaythread(4, ::save_radio);
-  var_0 = common_scripts\utility::getstruct("ending_save_start_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("ending_save_start_spot", "targetname");
   var_1 = spawn("script_origin", level.player.origin + (0, 0, 60));
   var_2 = spawn("script_origin", level.player.origin);
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   level.player playerlinktodelta(var_2, "", 1, 0, 0, 0, 0);
   wait 0.1;
   level.player lerpviewangleclamp(1, 0, 0, 20, 20, 20, 20);
@@ -243,7 +243,7 @@ save_radio() {
 }
 
 hesh_wave() {
-  var_0 = common_scripts\utility::getstruct("save_hesh_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("save_hesh_spot", "targetname");
   var_0 maps\_anim::anim_single_solo(level.hesh, "save");
 }
 

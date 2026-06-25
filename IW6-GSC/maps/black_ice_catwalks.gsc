@@ -46,7 +46,7 @@ section_flag_inits() {
 }
 
 section_post_inits() {
-  getent("cw_gold_common_room_breach", "targetname") hide();
+  getEnt("cw_gold_common_room_breach", "targetname") hide();
 }
 
 section_
@@ -54,12 +54,12 @@ section_
 start_catwalks() {
   iprintln("Catwalks");
   maps\black_ice_util::player_start("player_start_catwalks");
-  var_0 = common_scripts\utility::getstruct("cw_start_ally1", "targetname");
+  var_0 = common_scripts\utility::getStruct("cw_start_ally1", "targetname");
   level._allies[0] forceteleport(var_0.origin, var_0.angles);
-  var_0 = common_scripts\utility::getstruct("cw_start_ally2", "targetname");
+  var_0 = common_scripts\utility::getStruct("cw_start_ally2", "targetname");
   level._allies[1] forceteleport(var_0.origin, var_0.angles);
   common_scripts\utility::flag_set("bc_flag_spots_off");
-  var_1 = getent("cw_trig_start_spawn", "script_noteworthy");
+  var_1 = getEnt("cw_trig_start_spawn", "script_noteworthy");
   var_1 maps\_utility::notify_delay("trigger", 0.1);
   common_scripts\utility::exploder("catwalks_snow");
   common_scripts\utility::exploder("catwalks_lights");
@@ -72,9 +72,9 @@ start_catwalks() {
 start_catwalks_end() {
   iprintln("Catwalks End");
   maps\black_ice_util::player_start("player_start_catwalks_end");
-  var_0 = common_scripts\utility::getstruct("cwe_start_ally1", "targetname");
+  var_0 = common_scripts\utility::getStruct("cwe_start_ally1", "targetname");
   level._allies[0] forceteleport(var_0.origin, var_0.angles);
-  var_0 = common_scripts\utility::getstruct("cwe_start_ally2", "targetname");
+  var_0 = common_scripts\utility::getStruct("cwe_start_ally2", "targetname");
   level._allies[1] forceteleport(var_0.origin, var_0.angles);
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_grenadeammo, 0);
   setup_spawners();
@@ -82,11 +82,11 @@ start_catwalks_end() {
   common_scripts\utility::array_thread(var_1, ::trig_enable_cqb);
   var_1 = getEntArray("cw_trig_disable_cqb", "script_noteworthy");
   common_scripts\utility::array_thread(var_1, ::trig_disable_cqb);
-  var_0 = getent("cw_vig_tape_breach", "targetname");
+  var_0 = getEnt("cw_vig_tape_breach", "targetname");
   level.tape_breach_door = maps\_utility::spawn_anim_model("tape_breach_door");
   var_0 maps\_anim::anim_first_frame_solo(level.tape_breach_door, "cw_tape_breach");
   thread maps\black_ice_ascend::hanging_cargo_motion();
-  var_2 = getent("cw_color_exit_door", "targetname");
+  var_2 = getEnt("cw_color_exit_door", "targetname");
   var_2 notify("trigger");
   common_scripts\utility::flag_set("flag_vig_catwalk_kill");
   level.tele_catwalks_end = 1;
@@ -95,9 +95,9 @@ start_catwalks_end() {
 start_barracks() {
   iprintln("Barracks");
   maps\black_ice_util::player_start("player_start_barracks");
-  var_0 = common_scripts\utility::getstruct("cwb_start_ally1", "targetname");
+  var_0 = common_scripts\utility::getStruct("cwb_start_ally1", "targetname");
   level._allies[0] forceteleport(var_0.origin, var_0.angles);
-  var_0 = common_scripts\utility::getstruct("cwb_start_ally2", "targetname");
+  var_0 = common_scripts\utility::getStruct("cwb_start_ally2", "targetname");
   level._allies[1] forceteleport(var_0.origin, var_0.angles);
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_grenadeammo, 0);
   setup_spawners();
@@ -120,9 +120,9 @@ start_barracks() {
 start_common() {
   iprintln("Common Room");
   maps\black_ice_util::player_start("player_start_common");
-  var_0 = common_scripts\utility::getstruct("cwc_start_ally1", "targetname");
+  var_0 = common_scripts\utility::getStruct("cwc_start_ally1", "targetname");
   level._allies[0] forceteleport(var_0.origin, var_0.angles);
-  var_0 = common_scripts\utility::getstruct("cwc_start_ally2", "targetname");
+  var_0 = common_scripts\utility::getStruct("cwc_start_ally2", "targetname");
   level._allies[1] forceteleport(var_0.origin, var_0.angles);
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_grenadeammo, 0);
 
@@ -169,7 +169,7 @@ main_catwalks() {
 }
 
 catwalks_setup() {
-  var_0 = getent("cw_vig_tape_breach", "targetname");
+  var_0 = getEnt("cw_vig_tape_breach", "targetname");
   level.tape_breach_door = maps\_utility::spawn_anim_model("tape_breach_door");
   var_0 maps\_anim::anim_first_frame_solo(level.tape_breach_door, "cw_tape_breach");
   var_1 = getEntArray("cw_trig_enable_cqb", "script_noteworthy");
@@ -180,9 +180,9 @@ catwalks_setup() {
 
   if(level._bravo.size < 2) {
     level maps\black_ice_util::spawn_bravo();
-    var_0 = common_scripts\utility::getstruct("cw_start_bravo1", "targetname");
+    var_0 = common_scripts\utility::getStruct("cw_start_bravo1", "targetname");
     level._bravo[0] forceteleport(var_0.origin, var_0.angles);
-    var_0 = common_scripts\utility::getstruct("cw_start_bravo2", "targetname");
+    var_0 = common_scripts\utility::getStruct("cw_start_bravo2", "targetname");
     level._bravo[1] forceteleport(var_0.origin, var_0.angles);
   }
 
@@ -320,15 +320,15 @@ catwalks_end_cleanup_fic() {
 cw_barracks() {
   thread cw_stairs_fic();
   thread tv_watcher();
-  var_0 = getent("cw_vig_hallway_sweep", "targetname");
+  var_0 = getEnt("cw_vig_hallway_sweep", "targetname");
   var_1 = maps\_utility::spawn_anim_model("hallway_door");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "cw_hallsweep");
-  var_2 = getent("cw_door_hallway_sweep", "targetname");
-  var_2 linkto(var_1, "j_hinge");
+  var_2 = getEnt("cw_door_hallway_sweep", "targetname");
+  var_2 linkTo(var_1, "j_hinge");
   common_scripts\utility::flag_wait("flag_barracks_sweep_start");
   level._allies[0] thread breach_wait_move("cw_gps_hall_sweep", "cwb_node_start_ally1", "cwb_node_start_ally1_detour", ["blackice_bkr_muchtime"], "flag_barracks_go_fast");
   common_scripts\utility::array_call(level._allies, ::pushplayer, 0);
-  var_3 = getent("cw_trig_common_ambush", "targetname");
+  var_3 = getEnt("cw_trig_common_ambush", "targetname");
 
   if(isDefined(var_3)) {
     thread cw_barracks_fast_trig_proc(var_3);
@@ -403,7 +403,7 @@ cw_barracks_fast(var_0) {
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_baseaccuracy, 0.25);
   level._allies[0] thread maps\_utility::set_force_color("r");
   level._allies[1] thread maps\_utility::set_force_color("y");
-  var_2 = getent("cw_color_barracks_fast", "targetname");
+  var_2 = getEnt("cw_color_barracks_fast", "targetname");
   var_2 notify("trigger");
   var_2 common_scripts\utility::trigger_off();
   thread cw_barracks_fast_fic();
@@ -452,7 +452,7 @@ cw_common() {
     var_1.newenemyreactiondistsq = var_1.old_react_dist;
   }
 
-  var_3 = getent("cw_vig_common_room_breach", "targetname");
+  var_3 = getEnt("cw_vig_common_room_breach", "targetname");
   var_3 thread maps\_anim::anim_single_solo(level._allies[0], "rec_breach_check");
   wait 0.05;
   common_scripts\utility::array_thread(level._allies, maps\_utility::enable_cqbwalk);
@@ -464,7 +464,7 @@ cw_common() {
   level._allies[0] maps\_utility::delaythread(2.5, maps\_utility::set_ignoresuppression, 0);
   level._allies[0] thread maps\_utility::set_force_color("r");
   level._allies[1] maps\_utility::delaythread(1.5, maps\_utility::set_force_color, "y");
-  var_4 = getent("cw_color_common_start", "targetname");
+  var_4 = getEnt("cw_color_common_start", "targetname");
   var_4 notify("trigger");
   var_4 common_scripts\utility::trigger_off();
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_force_cover, 0);
@@ -483,7 +483,7 @@ cw_common() {
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_grenadeammo, 3);
   var_5 = getEntArray("cw_color_common", "script_noteworthy");
   common_scripts\utility::array_thread(var_5, common_scripts\utility::trigger_off);
-  var_4 = getent("cwc_color_leave", "targetname");
+  var_4 = getEnt("cwc_color_leave", "targetname");
   var_4 notify("trigger");
 }
 
@@ -568,7 +568,7 @@ goto_door_breach_catchup(var_0, var_1) {
   level endon("cw_tape_breach_start");
 
   if(isstring(var_0)) {
-    var_0 = common_scripts\utility::getstruct(var_0, "targetname");
+    var_0 = common_scripts\utility::getStruct(var_0, "targetname");
   }
 
   if(isDefined(var_1) && isstring(var_1)) {
@@ -592,7 +592,7 @@ goto_door_breach_catchup(var_0, var_1) {
 
 high_catwalk_kill() {
   common_scripts\utility::flag_wait("flag_vig_catwalk_kill");
-  var_0 = getent("cw_vignette_catwalk_kill", "targetname");
+  var_0 = getEnt("cw_vignette_catwalk_kill", "targetname");
   var_1 = maps\_utility::spawn_targetname("cw_opfor_catwalk_kill");
   var_2 = common_scripts\utility::getclosest(var_0.origin, level._allies, 256);
 
@@ -619,7 +619,7 @@ high_catwalk_kill() {
 }
 
 cw_tape_breach() {
-  var_0 = getent("cw_vig_tape_breach", "targetname");
+  var_0 = getEnt("cw_vig_tape_breach", "targetname");
   var_1 = maps\_utility::spawn_anim_model("tape_breach_tape");
   var_2 = maps\_utility::spawn_anim_model("tape_breach_door_dam");
   var_0 maps\_anim::anim_first_frame_solo(var_2, "cw_tape_breach");
@@ -635,8 +635,8 @@ cw_tape_breach() {
   level._allies[0] thread breach_wait_move("cw_gps_tape_breach", "cw_node_tape_breach_ally1", "cw_node_tape_breach_ally1_detour");
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_force_cover, 1);
   common_scripts\utility::flag_wait_all("flag_cw_breach_vo_ready", "flag_tape_breach_ally2");
-  var_5 = getent("cw_gps_tape_breach", "targetname");
-  var_6 = getent("cw_clip_tape_breach", "targetname");
+  var_5 = getEnt("cw_gps_tape_breach", "targetname");
+  var_6 = getEnt("cw_clip_tape_breach", "targetname");
 
   if(level.player istouching(var_5)) {
     while(level.player istouching(var_5)) {
@@ -677,7 +677,7 @@ breach_wait_move(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isstring(var_0)) {
-    var_0 = getent(var_0, "targetname");
+    var_0 = getEnt(var_0, "targetname");
   }
 
   if(isstring(var_1)) {
@@ -741,10 +741,10 @@ cw_tape_explode_player_effect() {
   var_1 = distancesquared(level.player.origin, level.tape_breach_door.origin);
 
   if(var_1 > var_0) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     earthquake(0.38, 0.6, level.player.origin, 3000);
   } else {
-    level.player playrumbleonentity("grenade_rumble");
+    level.player playRumbleOnEntity("grenade_rumble");
     earthquake(0.48, 1.2, level.player.origin, 3000);
     level.player shellshock("default_nosound", 2);
     level.player viewkick(10, level.tape_breach_door.origin);
@@ -752,17 +752,17 @@ cw_tape_explode_player_effect() {
     var_3 = 5;
     var_4 = maps\black_ice_util::normalize_value(0, var_0, var_1);
     var_5 = maps\black_ice_util::factor_value_min_max(var_2, var_3, var_4);
-    var_6 = vectornormalize(level.player.origin - level.tape_breach_door.origin);
+    var_6 = vectorNormalize(level.player.origin - level.tape_breach_door.origin);
     thread maps\black_ice_util::push_player_impulse(var_6, var_5, 0.5);
   }
 }
 
 cw_common_breach() {
   level endon("cw_common_flashed");
-  var_0 = getent("cw_common_door", "targetname");
-  var_1 = getent(var_0.target, "targetname");
-  var_2 = getent("cw_use_common_room_breach", "targetname");
-  var_2 sethintstring(&"BLACK_ICE_COMMON_BREACH");
+  var_0 = getEnt("cw_common_door", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_2 = getEnt("cw_use_common_room_breach", "targetname");
+  var_2 setHintString(&"BLACK_ICE_COMMON_BREACH");
   var_2 thread cw_common_breach_trig_proc();
   level._allies[1] thread cw_common_breach_nag(var_2);
 
@@ -778,7 +778,7 @@ cw_common_breach() {
     wait 0.05;
   }
 
-  getent("cw_gold_common_room_breach", "targetname") delete();
+  getEnt("cw_gold_common_room_breach", "targetname") delete();
   thread maps\black_ice_audio::sfx_barracks_breach(var_0);
   thread maps\black_ice_anim::cw_common_breach_player(var_0);
   level waittill("notify_start_red_light");
@@ -789,7 +789,7 @@ cw_common_breach() {
   common_scripts\utility::flag_wait("flag_common_breach_ally_start");
   thread cw_breach_bullets();
   wait 0.1;
-  var_3 = getent("cw_vig_common_room_breach", "targetname");
+  var_3 = getEnt("cw_vig_common_room_breach", "targetname");
   thread maps\black_ice_anim::cw_common_breach_allies();
   level waittill("notify_damage_breacher");
   playFXOnTag(level._effect["common_breach_damaged_breacher"], level.breach_charge, "tag_damage_fx");
@@ -812,7 +812,7 @@ cw_common_breach() {
 
 cw_common_breach_trig_proc() {
   self endon("breach_triggered");
-  var_0 = getent("cw_common_breach_blast_source", "targetname");
+  var_0 = getEnt("cw_common_breach_blast_source", "targetname");
 
   for(;;) {
     if(!isDefined(self.trigger_off) && (level.player isthrowinggrenade() || !level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1))) {
@@ -828,7 +828,7 @@ cw_common_breach_trig_proc() {
 cw_common_breach_nag(var_0) {
   var_0 endon("breach_triggered");
   wait 3;
-  getent("cw_gold_common_room_breach", "targetname") show();
+  getEnt("cw_gold_common_room_breach", "targetname") show();
   var_1 = ["blackice_bkr_illflash", "black_ice_hsh_adamwegottamove"];
   var_2 = 5;
 
@@ -840,12 +840,12 @@ cw_common_breach_nag(var_0) {
 }
 
 cw_breach_player_effects() {
-  var_0 = getent("cw_common_breach_blast_source", "targetname");
+  var_0 = getEnt("cw_common_breach_blast_source", "targetname");
   var_1 = level.player.origin - var_0.origin;
   thread maps\black_ice_util::push_player_impulse(var_1, 0.12, 0.7);
   earthquake(0.5, 0.75, level.player.origin, 2000);
   level.player shellshock("blackice_nosound", 1.0);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player viewkick(20, var_0.origin);
 }
 
@@ -881,7 +881,7 @@ cw_breach_flash_protect() {
   var_0 = undefined;
   level.player waittill("grenade_fire", var_0);
   wait 0.5;
-  var_1 = getent("cw_vol_common", "targetname");
+  var_1 = getEnt("cw_vol_common", "targetname");
 
   if(isDefined(var_0) && var_0 istouching(var_1)) {
     common_scripts\utility::array_thread(level._allies, maps\_utility::setflashbangimmunity, 1);
@@ -903,9 +903,9 @@ cw_common_perfect_breach_proc() {
 common_gps_autokill() {
   level endon("flag_common_end");
   var_0 = 0;
-  var_1 = getent("cw_vol_common", "targetname");
-  var_2 = getent("cw_vol_common_near", "targetname");
-  var_3 = getent("cw_gps_tape_breach", "targetname");
+  var_1 = getEnt("cw_vol_common", "targetname");
+  var_2 = getEnt("cw_vol_common_near", "targetname");
+  var_3 = getEnt("cw_gps_tape_breach", "targetname");
   common_scripts\utility::flag_wait("flag_common_breach_done");
 
   for(;;) {
@@ -1100,7 +1100,7 @@ random_flash() {
 }
 
 catwalk_godrays() {
-  var_0 = getent("origin_flarestack_fx", "targetname");
+  var_0 = getEnt("origin_flarestack_fx", "targetname");
 
   if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_cw_bravo_breach_1", "flag_catwalks_end", undefined, undefined);
@@ -1111,7 +1111,7 @@ cw_barracks_fast_trig_proc(var_0) {
   level endon("cw_hallsweep_ally2_attack");
   level endon("flag_barracks_go_fast");
   var_0 endon("trigger");
-  var_1 = getent("cw_barracks_dist_org", "targetname");
+  var_1 = getEnt("cw_barracks_dist_org", "targetname");
   var_1 = var_1.origin;
   var_2 = [level.player, level._allies[0], level._allies[1]];
 
@@ -1153,7 +1153,7 @@ anim_reach_play(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_3 = 0.1;
   }
 
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 
   if(!isDefined(var_6) || !var_6) {
     maps\_anim::anim_reach(var_0, var_1, var_2, var_4);
@@ -1186,7 +1186,7 @@ trig_disable_cqb() {
 
 tv_watcher() {
   var_0 = getEntArray("blackice_tv", "script_noteworthy");
-  var_1 = getent("light_barracks_tv", "script_noteworthy");
+  var_1 = getEnt("light_barracks_tv", "script_noteworthy");
 
   foreach(var_3 in var_0) {
     if(var_3.origin == (-1605, 5480, 1885.5)) {

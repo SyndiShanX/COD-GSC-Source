@@ -84,7 +84,7 @@ function function_2c2814a4() {
   self val::set(#"hash_400bf78914eebf1e", "low_ready", 1);
   var_da2f0187 = struct::get("s_ride_start_pos", "targetname");
   e_tag = util::spawn_model("tag_origin", var_da2f0187.origin, var_da2f0187.angles);
-  self playerlinkto(e_tag, "tag_origin", 0, 55, 30, 25, 25);
+  self playerlinkTo(e_tag, "tag_origin", 0, 55, 30, 25, 25);
   level flag::wait_till("flag_intro_scene_ended");
   self unlink();
   self val::reset(#"hash_400bf78914eebf1e", "allow_stand");

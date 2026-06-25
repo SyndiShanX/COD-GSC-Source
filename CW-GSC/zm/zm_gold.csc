@@ -160,8 +160,8 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_84e68eed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_30b095e = getent(fieldname, "phase_wall_01", "targetname");
-  var_de143f71 = getent(fieldname, "phase_wall_02", "targetname");
+  var_30b095e = getEnt(fieldname, "phase_wall_01", "targetname");
+  var_de143f71 = getEnt(fieldname, "phase_wall_02", "targetname");
 
   if(bwastimejump) {
     var_30b095e playrenderoverridebundle(#"hash_4f98e06b5af6e109");

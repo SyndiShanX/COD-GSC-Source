@@ -1107,15 +1107,15 @@ func_122D6(var_0, var_1, var_2, var_3) {
 }
 
 func_11B72(var_0, var_1, var_2, var_3) {
-  return !scripts\asm\asm_bb::bb_isincombat() && !scripts\asm\asm_bb::bb_isanimscripted();
+  return !scripts\asm\asm_bb::bb_isincombat() && !scripts\asm\asm_bb::bb_isanimScripted();
 }
 
 func_11B78(var_0, var_1, var_2, var_3) {
-  return scripts\asm\asm::func_BCE7(var_0, var_1, var_3) && !scripts\asm\asm_bb::bb_isanimscripted();
+  return scripts\asm\asm::func_BCE7(var_0, var_1, var_3) && !scripts\asm\asm_bb::bb_isanimScripted();
 }
 
 func_11B6F(var_0, var_1, var_2, var_3) {
-  return !scripts\asm\asm_bb::bb_isanimscripted();
+  return !scripts\asm\asm_bb::bb_isanimScripted();
 }
 
 func_125D4(var_0, var_1, var_2, var_3) {

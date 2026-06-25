@@ -56,7 +56,7 @@ _id_E697(var_0) {
   self._id_441E = spawn("script_model", self gettagorigin("j_helmet"));
   self._id_441E setModel("ks_death_switch_mp");
   self._id_441E.angles = self.angles;
-  self._id_441E linkto(self, "j_helmet", (0, 0, 0), (0, 0, 0));
+  self._id_441E linkTo(self, "j_helmet", (0, 0, 0), (0, 0, 0));
   thread _id_4416();
 }
 
@@ -95,7 +95,7 @@ _id_4417(var_0) {
   level endon("game_ended");
   var_1 = 1;
   var_2 = scripts\mp\utility\weapon::_id_0C48("death_switch_blast_mp", self gettagorigin("j_mainroot"), (0, 0, 0), var_0, 1);
-  var_2 linkto(self);
+  var_2 linkTo(self);
   thread _id_4418(var_1, var_2);
   var_3 = 1;
 

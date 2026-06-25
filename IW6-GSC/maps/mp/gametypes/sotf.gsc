@@ -354,7 +354,7 @@ playFxAtPoint(pos) {
     fxEntity setModel("tag_origin");
     fxEntity.angles = (90, RandomIntRange(-180, 179), 0);
 
-    fxEntity LinkTo(hitEntity);
+    fxEntity linkTo(hitEntity);
 
     thread playLinkedSmokeEffect(getfx("signal_chest_drop_mover"), fxEntity);
   } else {
@@ -498,8 +498,7 @@ sotfCrateThink(dropType) {
 
   if(isDefined(game["strings"][self.crateType + "_hint"])) {
     crateHint = game["strings"][self.crateType + "_hint"];
-  } else {
-  }
+  } else {}
   crateHint = &"PLATFORM_GET_KILLSTREAK";
 
   weaponOverheadIcon = "icon_hunted";

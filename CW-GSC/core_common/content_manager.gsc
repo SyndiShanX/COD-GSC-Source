@@ -254,16 +254,16 @@ function spawn_interact(struct, usecallback, hintstring, var_e0355bdc, radius = 
   }
 
   usetrigger = spawn("trigger_radius_use", struct.origin + offset, 0, radius, height, centered);
-  usetrigger triggerignoreteam();
-  usetrigger setcursorhint("HINT_NOICON");
-  usetrigger usetriggerrequirelookat();
+  usetrigger triggerIgnoreTeam();
+  usetrigger setCursorHint("HINT_NOICON");
+  usetrigger useTriggerRequireLookAt();
 
   if(isDefined(var_e0355bdc) && isDefined(var_499de507)) {
-    usetrigger sethintstring(hintstring, var_e0355bdc, var_499de507);
+    usetrigger setHintString(hintstring, var_e0355bdc, var_499de507);
   } else if(isDefined(var_e0355bdc)) {
-    usetrigger sethintstring(hintstring, var_e0355bdc);
+    usetrigger setHintString(hintstring, var_e0355bdc);
   } else {
-    usetrigger sethintstring(hintstring);
+    usetrigger setHintString(hintstring);
   }
 
   usetrigger callback::on_trigger(usecallback);
@@ -276,16 +276,16 @@ function function_22e120bc(struct, usecallback, hintstring, var_e0355bdc, n_widt
   assert(isfunctionptr(usecallback));
   assert(ishash(hintstring));
   usetrigger = spawn("trigger_box_use", struct.origin + offset, 0, n_width, n_length, n_height);
-  usetrigger triggerignoreteam();
-  usetrigger setcursorhint("HINT_NOICON");
-  usetrigger usetriggerrequirelookat();
+  usetrigger triggerIgnoreTeam();
+  usetrigger setCursorHint("HINT_NOICON");
+  usetrigger useTriggerRequireLookAt();
 
   if(isDefined(var_e0355bdc) && isDefined(var_499de507)) {
-    usetrigger sethintstring(hintstring, var_e0355bdc, var_499de507);
+    usetrigger setHintString(hintstring, var_e0355bdc, var_499de507);
   } else if(isDefined(var_e0355bdc)) {
-    usetrigger sethintstring(hintstring, var_e0355bdc);
+    usetrigger setHintString(hintstring, var_e0355bdc);
   } else {
-    usetrigger sethintstring(hintstring);
+    usetrigger setHintString(hintstring);
   }
 
   usetrigger callback::on_trigger(usecallback);
@@ -316,7 +316,7 @@ function spawn_script_model(struct, modelname, var_bfbc537c = 0, var_619a5c20 = 
   }
 
   if(var_bfbc537c) {
-    model disconnectpaths();
+    model disconnectPaths();
   }
 
   if(var_619a5c20) {
@@ -355,7 +355,7 @@ function spawn_zbarrier(struct, zbarrier_classname, var_e546275c = 0) {
   zbarrier.angles = struct.angles;
 
   if(var_e546275c) {
-    zbarrier disconnectpaths();
+    zbarrier disconnectPaths();
   }
 
   parent = struct;
@@ -563,7 +563,7 @@ function private function_b3843ca7() {
       teleport = instance;
     }
 
-    getplayers()[0] setorigin(teleport.origin);
+    getPlayers()[0] setOrigin(teleport.origin);
     spawn_instance(instance);
   }
 }

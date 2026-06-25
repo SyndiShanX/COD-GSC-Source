@@ -64,7 +64,7 @@ loopstingerlockingfeedback() {
     }
 
     self playlocalsound("stinger_locking");
-    self playrumbleonentity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
     wait 0.6;
   }
 }
@@ -83,7 +83,7 @@ loopstingerlockedfeedback() {
     }
 
     self playlocalsound("stinger_locked");
-    self playrumbleonentity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
     wait 0.25;
   }
 }

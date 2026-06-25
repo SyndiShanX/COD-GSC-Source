@@ -289,7 +289,7 @@ func_5C25() {
   createthreatbiasgroup("op_for");
   setignoremegroup("hacked_drone", "op_for");
   level.player.var_9BFA = 0;
-  level.var_6AFC = getent("fake_player_spawn", "targetname");
+  level.var_6AFC = getEnt("fake_player_spawn", "targetname");
   if(isDefined(level.var_6AFC)) {
     level.var_6AFC.dontdeletemehacking = 1;
   }
@@ -1492,9 +1492,9 @@ func_2A46(var_0) {
 
       level.player.var_883C.angles = level.var_880A.angles;
       var_5 = level.var_880A getlinkedparent();
-      level.player.var_883C linkto(var_5);
+      level.player.var_883C linkTo(var_5);
     } else {
-      level.player setorigin(level.var_880A.origin);
+      level.player setOrigin(level.var_880A.origin);
       level.player setplayerangles(level.var_880A.angles);
     }
 
@@ -1761,7 +1761,7 @@ func_880B(var_0) {
   }
 
   level.player.var_10466 = spawn("script_origin", level.player.origin);
-  level.player.var_10466 linkto(level.player);
+  level.player.var_10466 linkTo(level.player);
   for(;;) {
     level.player playSound("hacked_drone_hacking");
     wait(randomintrange(1, 3));
@@ -2373,7 +2373,7 @@ func_5C77(var_0) {
 func_E0E3() {
   level.player.var_8815 = spawn("script_model", level.var_880A.origin);
   level.var_880A hide();
-  level.var_880A linkto(level.player.var_8815);
+  level.var_880A linkTo(level.player.var_8815);
   level.player.var_8815.origin = level.player.var_8815.origin - (0, 0, 10000);
 }
 
@@ -2442,7 +2442,7 @@ func_2A47(var_0) {
       level.player lerpviewangleclamp(0, 0, 0, 0, 0, 0, 0);
       scripts\engine\utility::delaythread(0.1, ::func_62D5, level.player.var_C396);
     } else {
-      level.player setorigin(level.player.var_C391);
+      level.player setOrigin(level.player.var_C391);
       if(isDefined(level.var_880A) && isalive(level.var_880A)) {
         var_6 = vectortoangles(level.var_880A.origin - level.player.origin);
         level.player setplayerangles(var_6);
@@ -2609,7 +2609,7 @@ func_6AFD() {
   var_0 = level.var_6AFC giveplayeraccessory();
   var_1 = level.player getmovingplatformparent();
   if(isDefined(var_1)) {
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
   }
 
   level.player.var_6AF9 = var_0;
@@ -2660,7 +2660,7 @@ func_E5B8(var_0) {
 }
 
 func_79CE(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = anglesToForward(var_1);
   var_5 = vectordot(var_4, var_3);
   return var_5;

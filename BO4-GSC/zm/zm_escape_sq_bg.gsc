@@ -73,13 +73,13 @@ wait_for_initial_conditions() {
   t_reward_pickup = spawn("trigger_radius_use", var_dd7441ab.origin, 0, 96, 64);
 
   if(function_8b1a219a()) {
-    t_reward_pickup sethintstring(#"hash_13148440ddb20104");
+    t_reward_pickup setHintString(#"hash_13148440ddb20104");
   } else {
-    t_reward_pickup sethintstring(#"hash_3d510922bc950f08");
+    t_reward_pickup setHintString(#"hash_3d510922bc950f08");
   }
 
-  t_reward_pickup setcursorhint("HINT_NOICON");
-  t_reward_pickup triggerignoreteam();
+  t_reward_pickup setCursorHint("HINT_NOICON");
+  t_reward_pickup triggerIgnoreTeam();
   t_reward_pickup setvisibletoall();
   t_reward_pickup thread give_sq_bg_reward(var_dd7441ab);
 }
@@ -131,7 +131,7 @@ tomahawk_the_macguffin(e_grenade, n_grenade_charge_power) {
       mdl_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
       mdl_skull notify(#"caught_by_tomahawk");
       mdl_skull.origin = e_grenade.origin;
-      mdl_skull linkto(mdl_tomahawk);
+      mdl_skull linkTo(mdl_tomahawk);
       mdl_skull clientfield::set("" + #"afterlife_entity_visibility", 2);
       self thread zm_weap_tomahawk::tomahawk_return_player(mdl_tomahawk, undefined, 800);
       self thread give_player_macguffin_upon_receipt(mdl_tomahawk, mdl_skull);

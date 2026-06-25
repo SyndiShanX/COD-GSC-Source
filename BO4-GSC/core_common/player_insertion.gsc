@@ -141,7 +141,7 @@ function_d53a8c5b(insertion, fly_over_point, var_59526dd5, offset) {
   insertion.var_59526dd5 = var_59526dd5;
   var_872f085f = (0, var_59526dd5, 0);
   direction = anglesToForward(var_872f085f);
-  direction = vectornormalize(direction);
+  direction = vectorNormalize(direction);
   var_7c712437 = fly_over_point + anglestoright(var_872f085f) * offset;
   var_1d83d08d = {
     #start: var_7c712437 + direction * -150000, #end: var_7c712437 + direction * 150000
@@ -162,7 +162,7 @@ function_9ddb4115(var_1d83d08d) {
   if(isDefined(level.deathcircles) && level.deathcircles.size > 0) {
     initcircle = level.deathcircles[0];
     newstart = var_1d83d08d.start;
-    toend = vectornormalize(var_1d83d08d.end - var_1d83d08d.start);
+    toend = vectorNormalize(var_1d83d08d.end - var_1d83d08d.start);
 
     for(var_164fe5c9 = distance2dsquared(newstart, initcircle.origin); var_164fe5c9 > initcircle.radius * initcircle.radius; var_164fe5c9 = var_c820832) {
       newstart += toend * 1000;
@@ -194,7 +194,7 @@ fly_path(insertion, var_1d83d08d, fly_over_point, var_59526dd5) {
   assert(isstruct(insertion));
   var_872f085f = (0, var_59526dd5, 0);
   direction = anglesToForward(var_872f085f);
-  direction = vectornormalize(direction);
+  direction = vectorNormalize(direction);
 
   if(isDefined(getgametypesetting(#"hash_82c01ef004ff0a3")) && getgametypesetting(#"hash_82c01ef004ff0a3")) {
     function_9ddb4115(var_1d83d08d);
@@ -299,7 +299,7 @@ function_20cba65e(player) {
 function_ea1ad421(insertion, start, end) {
   assert(isstruct(insertion));
   direction = end - start;
-  direction = vectornormalize(direction);
+  direction = vectorNormalize(direction);
 
   if(oob::chr_party(end)) {
     point = function_bb2c2f4d(end, direction, 5000, 0);
@@ -558,7 +558,7 @@ function_35742117(insertion) {
       continue;
     }
 
-    player setorigin(player.resurrect_origin);
+    player setOrigin(player.resurrect_origin);
     player setplayerangles(player.resurrect_angles);
     level callback::callback(#"player_insertion_drop", {
       #player: player
@@ -716,7 +716,7 @@ function_57d4a011(insertion) {
         portal_vehicle.angle_step = angle;
         angle += step_size;
         target = var_8a2c40d0.origin - portal_vehicle.origin;
-        target = vectornormalize(target);
+        target = vectorNormalize(target);
         angles = vectortoangles(target);
         portal_vehicle.angles = angles;
       }
@@ -726,7 +726,7 @@ function_57d4a011(insertion) {
 
     foreach(team in level.teams) {
       if(isDefined(level.everexisted[team]) && level.everexisted[team]) {
-        players = getplayers(team);
+        players = getPlayers(team);
 
         foreach(player in players) {
           if(isalive(player)) {
@@ -810,11 +810,11 @@ function_7bf9c38f(reinserting) {
   assert(isDefined(portal), "<dev string:xa1>");
 
   if(isDefined(portal)) {
-    self setorigin(portal.origin);
+    self setOrigin(portal.origin);
   } else {
     center = getmapcenter();
     center = (center[0], center[1], 20000);
-    self setorigin(center);
+    self setOrigin(center);
   }
 
   velocity = anglesToForward(self getplayerangles()) * speed;
@@ -839,7 +839,7 @@ function_a25e421c() {
     self thread status_effect::function_6519f95f();
     self death_circle::function_b57e3cde(1);
     self val::set(#"player_insertion", "disable_oob", 1);
-    self stopanimscripted();
+    self stopanimScripted();
     self unlink();
     self setstance("stand");
     var_180a7b48 = self function_ec7cfdb();
@@ -852,7 +852,7 @@ function_a25e421c() {
       portal = level.warp_portal_vehicles[var_180a7b48];
 
       if(isDefined(portal)) {
-        self setorigin(level.warp_portal_vehicles[var_180a7b48].origin);
+        self setOrigin(level.warp_portal_vehicles[var_180a7b48].origin);
         self function_648c1f6(level.warp_portal_vehicles[var_180a7b48], undefined, 0, 180, 180, 180, 180, 0);
 
         if(isDefined(level.deathcircle) && isDefined(level.deathcircleindex) && isDefined(level.deathcircles)) {
@@ -865,13 +865,13 @@ function_a25e421c() {
           }
 
           target = level.deathcircles[currentindex].origin - self.origin;
-          target = vectornormalize(target);
+          target = vectorNormalize(target);
           angles = vectortoangles(target);
           self setplayerangles(angles);
         } else {
           var_8a2c40d0 = struct::get("warp_zone_look_at", "targetname");
           target = var_8a2c40d0.origin - self.origin;
-          target = vectornormalize(target);
+          target = vectorNormalize(target);
           angles = vectortoangles(target);
           self setplayerangles(angles);
         }
@@ -991,28 +991,28 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
   offset = (50000, 0, 0);
 
   for(index = 0; index <= insertion.var_41091905.size; index++) {
-    insertion.cameraent[index] moveto(insertion.cameraent[index].origin + rotatepoint(offset, var_872f085f), 50, 0, 0);
+    insertion.cameraent[index] moveTo(insertion.cameraent[index].origin + rotatepoint(offset, var_872f085f), 50, 0, 0);
   }
 
   wait 3.75;
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
-    player playrumbleonentity(#"infiltration_rumble");
+    player playRumbleOnEntity(#"infiltration_rumble");
   }
 
   wait 1;
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
-    player playrumbleonentity(#"infiltration_camera_rumble");
+    player playRumbleOnEntity(#"infiltration_camera_rumble");
   }
 
   wait 0.2;
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
-    player playrumbleonentity(#"infiltration_rumble");
+    player playRumbleOnEntity(#"infiltration_rumble");
   }
 
   wait 2;
@@ -1023,7 +1023,7 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
       continue;
     }
 
-    player playrumbleonentity(#"infiltration_rumble_lg");
+    player playRumbleOnEntity(#"infiltration_rumble_lg");
   }
 
   wait 2;
@@ -1071,8 +1071,8 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
     var_f945990b = plane.origin + (0, 0, 250);
     flightdirection = anglesToForward(var_872f085f);
     targetpos = var_f945990b + flightdirection * 150 * 17.6 * 4;
-    insertion.cameraent[index] moveto(targetpos, 4, 1, 0);
-    insertion.cameraent[index] rotateto((var_872f085f[0] + 15, var_872f085f[1], var_872f085f[2]), 4, 1, 1);
+    insertion.cameraent[index] moveTo(targetpos, 4, 1, 0);
+    insertion.cameraent[index] rotateTo((var_872f085f[0] + 15, var_872f085f[1], var_872f085f[2]), 4, 1, 1);
   }
 
   wait 4;
@@ -1084,7 +1084,7 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
 
     finaltargetpos = endorigin + rotatepoint((0, 0, 250), var_872f085f);
     timetotarget = distance(finaltargetpos, targetpos) / 2640;
-    insertion.cameraent[index] moveto(finaltargetpos, timetotarget);
+    insertion.cameraent[index] moveTo(finaltargetpos, timetotarget);
   }
 
   insertion flagsys::wait_till_timeout(0.05, #"insertion_presentation_completed");
@@ -1125,7 +1125,7 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
 
     finaltargetpos = endorigin + rotatepoint((0, 0, 250), var_872f085f);
     timetotarget = distance(finaltargetpos, targetpos) / 2992;
-    insertion.cameraent[index] moveto(finaltargetpos, timetotarget);
+    insertion.cameraent[index] moveTo(finaltargetpos, timetotarget);
   }
 
   function_a5fd9aa8(insertion);
@@ -1152,7 +1152,7 @@ function_77132caf() {
   }
 
   spawn_point = rotatepoint((radius, 0, 0), (0, randomint(360), 0));
-  self setorigin(center + spawn_point + (0, 0, 30000));
+  self setOrigin(center + spawn_point + (0, 0, 30000));
   self start_freefall((0, 0, 0), 0);
 }
 
@@ -1197,7 +1197,7 @@ function_f795bf83(insertion, vehicle, yaw) {
   }
 
   insertion.passengercount++;
-  self stopanimscripted();
+  self stopanimScripted();
   self unlink();
   self setstance("stand");
   self function_648c1f6(vehicle, undefined, 0, 180, 180, 85, 85);
@@ -1235,7 +1235,7 @@ function_7d880672(original_origin, original_yaw, refly) {
   self endon(#"disconnect");
   origin = self.origin;
   origin = (original_origin[0], original_origin[1], function_e3f18577());
-  self setorigin(origin);
+  self setOrigin(origin);
   var_cc56f8da = 0;
   var_cc56f8da = getdvarint(#"hash_380d8ae5bfc8f45b", 1);
 
@@ -1255,7 +1255,7 @@ function_7d880672(original_origin, original_yaw, refly) {
   var_872f085f = (0, var_59526dd5, 0);
   self setplayerangles(var_872f085f);
   direction = anglesToForward(var_872f085f);
-  vectornormalize(direction);
+  vectorNormalize(direction);
 
   if(refly > 2) {
     speed = 1000;
@@ -1325,7 +1325,7 @@ function_e59d879f(insertion, s_formation, var_cf46aa72) {
 
   if(refly) {
     while(true) {
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         player thread function_7d880672(player.origin, player.angles[1], refly);
@@ -1338,10 +1338,10 @@ function_e59d879f(insertion, s_formation, var_cf46aa72) {
   function_948ac812(insertion);
   bot_insertion::function_24ca8ecf(insertion);
   vehiclespawners = [];
-  vehiclespawners[#"c130_spawner"] = getent("c130_spawner", "targetname");
-  vehiclespawners[#"chinook_spawner"] = getent("chinook_spawner", "targetname");
-  vehiclespawners[#"gunship_spawner"] = getent("gunship_spawner", "targetname");
-  vehiclespawners[#"heli_infil_spawner"] = getent("heli_infil_spawner", "targetname");
+  vehiclespawners[#"c130_spawner"] = getEnt("c130_spawner", "targetname");
+  vehiclespawners[#"chinook_spawner"] = getEnt("chinook_spawner", "targetname");
+  vehiclespawners[#"gunship_spawner"] = getEnt("gunship_spawner", "targetname");
+  vehiclespawners[#"heli_infil_spawner"] = getEnt("heli_infil_spawner", "targetname");
 
   if(vehiclespawners.size == 0) {
     return 0;
@@ -1766,7 +1766,7 @@ function_45644b08() {
 
       if(circleindex > 0) {
         firstcenter = level.deathcircles[0].origin;
-        tocenter = vectornormalize(center - firstcenter);
+        tocenter = vectorNormalize(center - firstcenter);
         var_6e3e0ad7 = vectortoangles(tocenter);
 
         if(math::cointoss()) {
@@ -1980,7 +1980,7 @@ function_1c06c249(plane) {
 
 function_25facefd(count, ignore_player) {
   if(isDefined(level.insertionpassenger) && isDefined(level.var_a3c0d635) && isDefined(level.var_ce84dde9)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(level.insertionpassenger[[level.var_a3c0d635]](player)) {
         level.insertionpassenger[[level.var_ce84dde9]](player, count);
       }
@@ -2004,7 +2004,7 @@ function_2e54d73e(insertion, passenger, vehicle) {
 }
 
 function_ced05c63(note, payload) {
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(player in teammates) {
     if(player == self) {
@@ -2062,7 +2062,7 @@ player_freefall(aircraft) {
   origin = self.origin + forward * 512 - (0, 0, 542);
   origin = (origin[0] + randomfloatrange(-300, 300), origin[1] + randomfloatrange(-300, 300), origin[2] + randomfloatrange(-300, 300));
   self unlink();
-  self setorigin(origin);
+  self setOrigin(origin);
   velocity = function_ba904ee2(aircraft getvelocity());
   self start_freefall(velocity, 1);
   self thread function_712f9f52();
@@ -2180,7 +2180,7 @@ function_c71552d0(insertion, fadeouttime, blacktime, fadeintime, rumble) {
 
   foreach(player in insertion.players) {
     if(rumble) {
-      player playrumbleonentity(#"infiltration_rumble");
+      player playRumbleOnEntity(#"infiltration_rumble");
     }
 
     [[lui_menu]] - > open(player);
@@ -2378,6 +2378,6 @@ function_4910c182(insertion) {
   }
 
   wait var_990e3011;
-  players = getplayers();
+  players = getPlayers();
   players[0] function_adc8cff4();
 }

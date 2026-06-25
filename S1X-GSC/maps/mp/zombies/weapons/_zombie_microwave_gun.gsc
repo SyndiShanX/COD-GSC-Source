@@ -121,7 +121,7 @@ updatecookzombieburger(var_0) {
   level endon("game_ended");
   self endon("disconnect");
   level waittill("main_stage5_over");
-  var_1 = getent("zombie_patty_raw", "targetname");
+  var_1 = getEnt("zombie_patty_raw", "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -240,7 +240,7 @@ audio_flesh_bubble(var_0) {
     self.fleshbubblesound = spawn("script_origin", self.origin);
   }
 
-  self.fleshbubblesound linkto(self);
+  self.fleshbubblesound linkTo(self);
   thread common_scripts\utility::delete_on_death(self.fleshbubblesound);
   self.fleshbubblesound playLoopSound("npc_mwave_flesh_bubble");
   self.fleshbubblesound scalevolume(clamp(var_0, 0, 1), 0);

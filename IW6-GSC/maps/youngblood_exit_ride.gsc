@@ -20,14 +20,14 @@ exit_ride_setup() {
   level.truck thread maps\_vehicle::vehicle_paths(var_3);
   level.truck startpath(var_3);
   thread city_collapse();
-  level.hesh linkto(level.truck, "tag_body");
-  level.elias linkto(level.truck, "tag_body");
+  level.hesh linkTo(level.truck, "tag_body");
+  level.elias linkTo(level.truck, "tag_body");
   thread hesh_getin_truck();
   level.truck thread maps\_anim::anim_loop_solo(var_0, "youngblood_truck_exit_idle_player");
   level.truck thread maps\_anim::anim_generic_loop(level.elias, "youngblood_truck_exit_idle_elias");
   level.player playerlinktodelta(var_0, "tag_player", 0.5, 0, 45, 25, 25);
   var_0 show();
-  var_0 linkto(level.truck, "tag_body");
+  var_0 linkTo(level.truck, "tag_body");
   level.player shellshock("ygb_end_lite", 999);
   level notify("stop_vfx_on_player");
   level.player_outside = 1;
@@ -119,9 +119,9 @@ spawn_and_setup_elias() {
   level.truck vehicle_teleport(var_0.origin, var_0.angles);
   level.truck maps\_vehicle::vehicle_lights_on("headlights");
   maps\youngblood_util::spawn_elias();
-  var_1 = common_scripts\utility::getstruct("elias_pickup_exit_spawn", "targetname");
+  var_1 = common_scripts\utility::getStruct("elias_pickup_exit_spawn", "targetname");
   level.elias forceteleport(var_1.origin, var_1.angles);
-  level.elias linkto(level.truck, "tag_origin");
+  level.elias linkTo(level.truck, "tag_origin");
   level.truck thread maps\_anim::anim_generic_loop(level.elias, "youngblood_truck_exit_idle_elias", "elias_car_stop");
   level.truck attachpath(var_0);
   level.truck thread maps\_vehicle::vehicle_paths(var_0);
@@ -152,7 +152,7 @@ spawn_and_setup_elias() {
   level.truck attachpath(var_0);
   level.truck thread maps\_vehicle::vehicle_paths(var_0);
   level.truck startpath(var_0);
-  level.hesh linkto(level.truck, "tag_origin");
+  level.hesh linkTo(level.truck, "tag_origin");
   level.truck thread maps\_anim::anim_loop_solo(level.hesh, "youngblood_truck_exit_idle_hesh");
   var_2 = maps\_utility::spawn_anim_model("player_rig", level.player.origin);
   maps\youngblood_util::viewmodel_anim_on();
@@ -161,7 +161,7 @@ spawn_and_setup_elias() {
   var_2 show();
   level.truck maps\_anim::anim_single_solo(var_2, "youngblood_truck_exit_getin_player");
   level.truck thread maps\_anim::anim_loop_solo(var_2, "youngblood_truck_exit_idle_player");
-  var_2 linkto(level.truck, "tag_origin");
+  var_2 linkTo(level.truck, "tag_origin");
   level.player lerpfov(65, 0.1);
   level thread maps\_hud_util::fade_in(3.0);
   level.player setblurforplayer(0, 6.0);

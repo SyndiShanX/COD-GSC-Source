@@ -545,7 +545,7 @@ _id_69C4(var_0) {
 _id_89CF(var_0) {
   if(isDefined(var_0._id_75A5) && var_0._id_75A5) {
     var_1 = self.origin - var_0.origin;
-    var_2 = vectornormalize((var_1[0], var_1[1], 0));
+    var_2 = vectorNormalize((var_1[0], var_1[1], 0));
     var_3 = anglesToForward(var_0.angles);
     var_4 = vectordot(var_3, var_1);
 
@@ -568,7 +568,7 @@ _id_89CE(var_0) {
   var_5 = 0;
   var_6 = 0;
   var_7 = anglesToForward(self.angles);
-  var_8 = vectornormalize(var_0.origin - self.origin);
+  var_8 = vectorNormalize(var_0.origin - self.origin);
   var_9 = vectordot(var_8, var_7);
 
   if(var_9 > 0.5) {

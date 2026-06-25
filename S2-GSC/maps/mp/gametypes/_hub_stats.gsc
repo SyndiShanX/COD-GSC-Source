@@ -528,7 +528,7 @@ func_6371() {
 
   var_00 = getEntArray("transient_load_guard", "targetname");
   foreach(var_02 in var_00) {
-    var_02 setplayercollision(self, 1);
+    var_02 setPlayerCollision(self, 1);
   }
 
   var_04 = getEntArray("transient_load_hint", "targetname");
@@ -539,7 +539,7 @@ func_6371() {
   func_A777();
   self.var_16F0 = 1;
   foreach(var_02 in var_00) {
-    var_02 setplayercollision(self, 0);
+    var_02 setPlayerCollision(self, 0);
   }
 }
 
@@ -598,7 +598,7 @@ func_64BC() {
 
   var_00 = common_scripts\utility::func_46B5("player_spawn_intermission", "targetname");
   if(isDefined(var_00)) {
-    self setorigin(var_00.var_0116, 1);
+    self setOrigin(var_00.var_0116, 1);
     self.var_64A4 = 1;
   }
 }
@@ -739,7 +739,7 @@ func_63B7() {
   var_00 = getEntArray("officer_tower_collision", "targetname");
   for(var_01 = 0; var_01 < var_00.size; var_01++) {
     if(isDefined(var_00[var_01])) {
-      var_00[var_01] setplayercollision(self, 1);
+      var_00[var_01] setPlayerCollision(self, 1);
     }
   }
 
@@ -762,7 +762,7 @@ func_63B7() {
       if(var_05) {
         for(var_01 = 0; var_01 < var_00.size; var_01++) {
           if(isDefined(var_00[var_01])) {
-            var_00[var_01] setplayercollision(self, 0);
+            var_00[var_01] setPlayerCollision(self, 0);
           }
         }
 
@@ -773,7 +773,7 @@ func_63B7() {
     } else if(var_05) {
       for(var_01 = 0; var_01 < var_00.size; var_01++) {
         if(isDefined(var_00[var_01])) {
-          var_00[var_01] setplayercollision(self, 0);
+          var_00[var_01] setPlayerCollision(self, 0);
         }
       }
 
@@ -798,7 +798,7 @@ func_21BE() {
 func_4ADC() {
   level endon("game_ended");
   if(!isDefined(level.var_6CB4)) {
-    level.var_6CB4 = getent("officer_tower_trigger", "targetname");
+    level.var_6CB4 = getEnt("officer_tower_trigger", "targetname");
   }
 
   if(!isDefined(level.var_6CB4)) {
@@ -1159,7 +1159,7 @@ func_63F9() {
 
         if(isDefined(self.var_64A4) && self.var_64A4 == 1) {
           if(!isDefined(self.warpingtosupplydrop)) {
-            self setorigin(self.var_9092);
+            self setOrigin(self.var_9092);
           }
         }
 
@@ -1382,7 +1382,7 @@ func_8C6D(param_00) {
     return;
   }
 
-  self setorigin(param_00.var_0116 + (0, 5, 0));
+  self setOrigin(param_00.var_0116 + (0, 5, 0));
   self setangles(param_00.var_001D + (0, 90, 0));
   wait(0.15);
   self method_85C9(1);

@@ -242,10 +242,10 @@ function_d2845186() {
 
 function_1aeaebae() {
   level.allowspecialistdialog = 0;
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
 
   while(!isDefined(e_player)) {
-    e_player = getplayers(#"allies")[0];
+    e_player = getPlayers(#"allies")[0];
     waitframe(1);
   }
 
@@ -289,7 +289,7 @@ function_1e84c767() {
 
   ct_utils::function_1edf99df();
   function_9a022fbc("open");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_60786cb4 = 0;
 
   if(util::function_8570168d()) {
@@ -371,18 +371,18 @@ function_a217c7b4(b_success) {
 
   if(b_success && true && isDefined(level.var_38c87b5) && level.var_38c87b5) {
     wait 2;
-    e_player = getplayers(#"allies")[0];
+    e_player = getPlayers(#"allies")[0];
     e_player val::set(#"potm", "freezecontrols", 1);
     println("<dev string:x38>");
     println("<dev string:x57>");
     level potm::function_b6a5e7fa();
     println("<dev string:x83>");
-    e_player = getplayers(#"allies")[0];
+    e_player = getPlayers(#"allies")[0];
     e_player val::reset(#"potm", "freezecontrols");
     wait 0.3;
   }
 
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player ct_ui::function_fa910e34(b_success, var_cd803a6b);
   level notify(#"hash_6731a3e5cccf7357");
   level notify(#"destroysites_reset");
@@ -429,7 +429,7 @@ function_e9b83be8() {
   fields = getcharacterfields(level.select_character, currentsessionmode());
 
   if(isDefined(fields) && isDefined(fields.intromovie) && function_a1fb023a(fields.var_5331abe0)) {
-    e_player = getplayers(#"allies")[0];
+    e_player = getPlayers(#"allies")[0];
 
     if(isDefined(e_player) && isPlayer(e_player)) {
       e_player function_95e72b33(fields.intromovie);
@@ -442,7 +442,7 @@ function_588a84ce() {
   fields = getcharacterfields(level.select_character, currentsessionmode());
 
   if(isDefined(fields) && isDefined(fields.var_55f31ab6) && function_a1fb023a(fields.var_148d6d91)) {
-    e_player = getplayers(#"allies")[0];
+    e_player = getPlayers(#"allies")[0];
 
     if(isDefined(e_player) && isPlayer(e_player)) {
       e_player function_95e72b33(fields.var_55f31ab6);
@@ -451,7 +451,7 @@ function_588a84ce() {
 }
 
 function_9a022fbc(str_state) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   lui_menu = lui::get_luimenu("FullScreenBlack");
 
   if(str_state == "open") {

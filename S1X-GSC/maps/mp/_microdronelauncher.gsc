@@ -71,7 +71,7 @@ determine_sticky_position(firing_player) {
         trace["entity"] thread show_stuck_fanfare();
       }
 
-      sticky_grenade LinkTo(trace["entity"]);
+      sticky_grenade linkTo(trace["entity"]);
     }
 
     sticky_grenade thread sticky_timer(firing_player);
@@ -197,7 +197,7 @@ microdrone_think(firing_player) {
 
     set_target = false;
     if(elapsed_time >= CONST_begin_homing_time) {
-      best_target = microdrone_get_best_target(start_origin, VectorNormalize(init_vel), cur_vel, firing_player);
+      best_target = microdrone_get_best_target(start_origin, vectorNormalize(init_vel), cur_vel, firing_player);
       if(isDefined(best_target)) {
         self Missile_SetTargetEnt(best_target, microdrone_get_target_offset(best_target));
         set_target = true;
@@ -207,7 +207,7 @@ microdrone_think(firing_player) {
     } else {}
 
     if(!set_target) {
-      desired_dir = VectorNormalize(init_vel + (0, 0, -.5 * CONST_drop_accel * Squared(elapsed_time)));
+      desired_dir = vectorNormalize(init_vel + (0, 0, -.5 * CONST_drop_accel * Squared(elapsed_time)));
       self Missile_SetTargetPos(self.origin + desired_dir * 10000);
     }
 
@@ -231,7 +231,7 @@ microdrone_get_best_target(start_origin, dir, cur_vel, firing_player) {
     }
 
     target_pos = microdrone_get_target_pos(target);
-    dot = VectorDot(VectorNormalize(cur_vel), VectorNormalize(target_pos - self.origin));
+    dot = VectorDot(vectorNormalize(cur_vel), vectorNormalize(target_pos - self.origin));
     if(dot > best_target_dot) {
       if(BulletTracePassed(self.origin, target_pos, false, target)) {
         best_target = target;

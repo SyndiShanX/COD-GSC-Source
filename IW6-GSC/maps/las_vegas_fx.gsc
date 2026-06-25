@@ -130,7 +130,7 @@ wildlife() {
 mask_gamb_room_birds() {
   var_0 = getEntArray("gamb_room_birds_volume", "script_noteworthy");
   maps\_utility::mask_interactives_in_volumes(var_0);
-  var_1 = getent("trigger_birds_gamblingroom", "targetname");
+  var_1 = getEnt("trigger_birds_gamblingroom", "targetname");
   var_1 waittill("trigger");
 
   foreach(var_3 in var_0) {

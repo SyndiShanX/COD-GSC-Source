@@ -4,12 +4,12 @@
 *****************************************************/
 
 move_player_to_start(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
+  level.player setOrigin(var_1.origin);
   var_2 = undefined;
 
   if(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
   }
 
   if(isDefined(var_2)) {
@@ -26,7 +26,7 @@ tank_fire_at_enemies(var_0) {
 
   for(;;) {
     if(isDefined(var_1) && var_1.health > 0) {
-      self setturrettargetent(var_1, (randomintrange(-64, 64), randomintrange(-64, 64), randomintrange(-16, 100)));
+      self setturrettargetEnt(var_1, (randomintrange(-64, 64), randomintrange(-64, 64), randomintrange(-16, 100)));
 
       if(sighttracepassed(self.origin + (0, 0, 100), var_1.origin + (0, 0, 40), 0, self)) {
         self.tank_think_fire_count++;
@@ -90,7 +90,7 @@ spawn_friendlies(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_11 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_11 = common_scripts\utility::getStruct(var_0, "targetname");
   var_12 = 0;
 
   foreach(var_14 in var_5) {
@@ -574,7 +574,7 @@ gettargettriggerhit(var_0) {
     }
     if(var_3 <= var_2.radius && var_4 <= var_2.height && var_4 >= 0) {
       level.laser_triggers = common_scripts\utility::array_remove(level.laser_triggers, var_2);
-      return getent(var_2.target, "script_noteworthy");
+      return getEnt(var_2.target, "script_noteworthy");
     }
   }
 
@@ -654,7 +654,7 @@ vision_change_multiple_internal() {
   var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = vectornormalize(self.origin - var_2.origin);
+    var_3 = vectorNormalize(self.origin - var_2.origin);
     var_2.forward_for_vision_change = var_3;
   }
 
@@ -789,7 +789,7 @@ anim_single_end_early(var_0, var_1, var_2) {
         var_26 = level.scr_anim[var_24][var_1];
         var_9 setflaggedanim(var_14, var_26, 1, 0.2);
       } else
-        var_9 animscripted(var_14, var_12, var_13, level.scr_anim[var_24][var_1]);
+        var_9 animScripted(var_14, var_12, var_13, level.scr_anim[var_24][var_1]);
 
       thread maps\_anim::start_notetrack_wait(var_9, var_14, var_1, var_24);
       thread maps\_anim::animscriptdonotetracksthread(var_9, var_14, var_1);
@@ -888,7 +888,7 @@ anim_end_early_animationendnotify(var_0, var_1, var_2, var_3) {
 
   if(var_3 > 0 && var_2 > 0) {
     var_0 maps\_utility::waittill_match_or_timeout("single anim", "end", var_2);
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
   } else
     var_0 waittillmatch("single anim", "end");
 

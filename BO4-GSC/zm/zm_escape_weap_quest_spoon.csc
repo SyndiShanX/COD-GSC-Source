@@ -203,7 +203,7 @@ function_43c140b4(localclientnum) {
 }
 
 play_elevator_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, #"hash_64b33287bc9d79f5");
+  self playRumbleOnEntity(localclientnum, #"hash_64b33287bc9d79f5");
 }
 
 function_69a31ba8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

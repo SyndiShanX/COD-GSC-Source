@@ -305,7 +305,7 @@ af_chase_anims_and_vo() {
 shepherd_death_fx(guy) {
   tag = "J_EyeBall_LE";
   tag_origin = spawn_tag_origin();
-  tag_origin LinkTo(level.shepherd, tag, (0, 0, 0), (0, 90, 0));
+  tag_origin linkTo(level.shepherd, tag, (0, 0, 0), (0, 90, 0));
 
   playFXOnTag(getfx("blood_sheperd_eye_geotrail"), tag_origin, "tag_origin");
 
@@ -338,7 +338,7 @@ blend_to_ending_dof_fov(blend_out_time) {
   }
 
   maps\af_chase_knife_fight_code::blend_to_ending_dof(blend_out_time);
-  level.fov_ent moveto((65, 0, 0), blend_out_time, blend_out_time * 0.5, blend_out_time * 0.5);
+  level.fov_ent moveTo((65, 0, 0), blend_out_time, blend_out_time * 0.5, blend_out_time * 0.5);
 }
 
 delete_glock(guy) {
@@ -371,7 +371,7 @@ delete_glock(guy) {
 
       for(;;) {
         right = AnglesToRight(self.angles);
-        othervec = VectorNormalize(level.player.origin - self.origin);
+        othervec = vectorNormalize(level.player.origin - self.origin);
 
         forward = anglesToForward(self.angles);
         right = AnglesToRight(self.angles);
@@ -420,7 +420,7 @@ delete_glock(guy) {
 
       for(;;) {
         right = AnglesToRight(self.angles);
-        othervec = VectorNormalize(level.player.origin - self.origin);
+        othervec = vectorNormalize(level.player.origin - self.origin);
 
         forward = anglesToForward(self.angles);
         right = AnglesToRight(self.angles);
@@ -545,7 +545,7 @@ delete_glock(guy) {
     }
 
     player_pulls_knife_from_chest(time) {
-      level.player PlayRumbleOnEntity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
       level notify("stop_random_breathing_sounds");
       flag_set("stop_heart");
       flag_clear("player_heartbeat_sound");
@@ -556,7 +556,7 @@ delete_glock(guy) {
     }
 
     face_slam(guy) {
-      level.player PlayRumbleOnEntity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
 
       overlay = maps\af_chase_knife_fight_code::get_white_overlay();
       overlay.alpha = 1;
@@ -565,15 +565,15 @@ delete_glock(guy) {
       level.player stopshellshock();
       SetBlur(0, 2);
       level.player set_vision_set("af_chase_ending_noshock");
-      level.player PlayRumbleOnEntity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
     }
 
     face_stomp(guy) {
-      level.player PlayRumbleOnEntity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
       level.player DoDamage(50 / level.player.damageMultiplier, level.player.origin);
       level.player thread play_sound_on_entity("face_stomp");
       maps\af_chase_knife_fight_code::shellshock_very_long("af_chase_turn_buckle_slam");
-      level.player PlayRumbleOnEntity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
       wait 0.05;
       level.player setnormalhealth(1);
     }
@@ -623,7 +623,7 @@ delete_glock(guy) {
     }
 
     rumble_bash(guy) {
-      level.player PlayRumbleOnEntity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
     }
 
     fade_out(guy) {
@@ -696,7 +696,7 @@ delete_glock(guy) {
       maps\af_chase_knife_fight_code::fire_gun();
 
       time = 0.5;
-      level.fov_ent MoveTo((40, 0, 0), time, 0, time);
+      level.fov_ent moveTo((40, 0, 0), time, 0, time);
     }
 
     add_fighte_animsounds() {

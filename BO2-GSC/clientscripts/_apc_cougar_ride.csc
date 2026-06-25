@@ -42,7 +42,7 @@ rumble_loop(player) {
     }
 
     origin = self.origin;
-    player playrumbleonentity(0, "reload_clipin");
+    player playRumbleOnEntity(0, "reload_clipin");
     wait 0.1;
 
     while(distancesquared(origin, self.origin) < distance_between_wheels * distance_between_wheels) {
@@ -50,7 +50,7 @@ rumble_loop(player) {
     }
 
     origin = self.origin;
-    player playrumbleonentity(0, "reload_clipin");
+    player playRumbleOnEntity(0, "reload_clipin");
     wait 0.1;
   }
 }
@@ -68,7 +68,7 @@ steering_loop(viewarms) {
   wait 0.05;
   viewarms useanimtree(#animtree);
   viewarms setanim(viewarms_anim, 1, 0, 0);
-  viewarms linkto(self, "tag_arms");
+  viewarms linkTo(self, "tag_arms");
   time = 0.5;
   max_delta_t = 0.03;
 

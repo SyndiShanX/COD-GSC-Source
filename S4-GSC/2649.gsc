@@ -86,7 +86,7 @@ _id_B195(var_0, var_1, var_2, var_3, var_4) {
 
 _id_B18F(var_0, var_1, var_2, var_3) {
   var_4 = level._id_B189[var_3];
-  self moveto(var_0, var_1, 0, 0);
+  self moveTo(var_0, var_1, 0, 0);
 
   if(isDefined(var_4._id_AA73)) {
     self thread[[var_4._id_AA73]](var_0, var_1, var_2, self.owner, var_3);
@@ -315,7 +315,7 @@ _id_4005(var_0) {
     var_3 = spawn("script_model", self.origin + (0, 0, 100) - var_2 * 200);
     var_3._id_E72D = gettime();
     var_3 _meth_8375("airstrike");
-    var_3 linkto(self, "tag_origin", var_1._id_8D6B, (0, 0, 0));
+    var_3 linkTo(self, "tag_origin", var_1._id_8D6B, (0, 0, 0));
     self.killcament = var_3;
   }
 }

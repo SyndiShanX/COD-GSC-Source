@@ -33,7 +33,7 @@ func_D41C() {
   self playsoundtoteam("trophy_turret_plant_npc", "allies", self);
   self playsoundtoteam("trophy_turret_plant_npc", "axis", self);
   var_0 = spawnturret("misc_turret", self gettagorigin("j_shoulder_ri"), "ball_drone_gun_mp");
-  var_0 linkto(self, "j_shoulder_ri", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "j_shoulder_ri", (0, 0, 0), (0, 0, 0));
   var_0 setModel("vehicle_drone_backup_buddy_gun");
   var_0.angles = self.angles;
   var_0.owner = self;
@@ -218,7 +218,7 @@ balldrone_burstfirestart(var_0) {
         self shootturret();
         var_0.var_38D8 = spawnfxforclient(var_2, var_0 getEye(), var_0);
         triggerfx(var_0.var_38D8);
-        self.owner playrumbleonentity("shoulder_turret_fire");
+        self.owner playRumbleOnEntity("shoulder_turret_fire");
         wait(var_4);
         self.var_1E2D--;
         if(self.var_1E2D < 0) {

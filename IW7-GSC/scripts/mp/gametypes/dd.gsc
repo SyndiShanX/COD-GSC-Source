@@ -443,7 +443,7 @@ onuseplantobject(var_0) {
 setupkillcament() {
   var_0 = spawn("script_origin", self.origin);
   var_0.angles = self.angles;
-  var_0 rotateyaw(-45, 0.05);
+  var_0 rotateYaw(-45, 0.05);
   wait(0.05);
   var_1 = self.origin + (0, 0, 5);
   var_2 = self.origin + anglesToForward(var_0.angles) * 100 + (0, 0, 128);
@@ -595,7 +595,7 @@ func_5D23(var_0, var_1) {
   var_2 = bulletTrace(var_0.origin + (0, 0, 20), var_0.origin - (0, 0, 2000), 0, var_0);
   var_3 = randomfloat(360);
   var_4 = (cos(var_3), sin(var_3), 0);
-  var_4 = vectornormalize(var_4 - var_2["normal"] * vectordot(var_4, var_2["normal"]));
+  var_4 = vectorNormalize(var_4 - var_2["normal"] * vectordot(var_4, var_2["normal"]));
   var_5 = vectortoangles(var_4);
   level.ddbombmodel[var_1] = spawn("script_model", var_2["position"]);
   level.ddbombmodel[var_1].angles = var_5;

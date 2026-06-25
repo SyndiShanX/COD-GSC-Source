@@ -112,25 +112,25 @@ busaddopening(tag_name, script_noteworthy) {
       continue;
     } else if(target.script_noteworthy == "rebuild") {
       opening.rebuildtrigger = target;
-      opening.rebuildtrigger enablelinkto();
-      opening.rebuildtrigger linkto(self);
-      opening.rebuildtrigger setcursorhint("HINT_NOICON");
+      opening.rebuildtrigger enablelinkTo();
+      opening.rebuildtrigger linkTo(self);
+      opening.rebuildtrigger setCursorHint("HINT_NOICON");
       opening.rebuildtrigger set_hint_string(self, "default_reward_barrier_piece");
-      opening.rebuildtrigger triggerignoreteam();
+      opening.rebuildtrigger triggerIgnoreTeam();
       opening.rebuildtrigger setinvisibletoall();
       opening.rebuildtrigger setmovingplatformenabled(1);
       self thread busopeningrebuildthink(opening);
       continue;
     } else if(target.script_noteworthy == "zombie") {
       opening.zombietrigger = target;
-      opening.zombietrigger enablelinkto();
-      opening.zombietrigger linkto(self);
+      opening.zombietrigger enablelinkTo();
+      opening.zombietrigger linkTo(self);
       opening.zombietrigger setmovingplatformenabled(1);
       opening.zombietrigger setteamfortrigger(level.zombie_team);
       self thread busopeningzombiethink(opening);
     }
 
-    target linkto(self, "", self worldtolocalcoords(target.origin), target.angles - self.angles);
+    target linkTo(self, "", self worldtolocalcoords(target.origin), target.angles - self.angles);
   }
 
   if(isDefined(opening.zbarrier)) {
@@ -162,7 +162,7 @@ busattachjumpent(ent, opening) {
   jump_angles = self gettagangles(opening.jumptag);
   ent.origin = jump_origin;
   ent.angles = jump_angles;
-  ent linkto(self, "", self worldtolocalcoords(ent.origin), ent.angles - self.angles);
+  ent linkTo(self, "", self worldtolocalcoords(ent.origin), ent.angles - self.angles);
 }
 
 busopeningbyname(name) {
@@ -575,7 +575,7 @@ zombieplayattachedanim(animname) {
   tag_angles = self.attachent gettagangles(self.attachtag);
   start_origin = getstartorigin(tag_origin, tag_angles, animationid);
   start_angles = getstartangles(tag_origin, tag_angles, animationid);
-  self animscripted(start_origin, start_angles, "zm_bus_attached", anim_index);
+  self animScripted(start_origin, start_angles, "zm_bus_attached", anim_index);
   self zombieanimnotetrackthink("bus_attached_anim");
 }
 
@@ -643,7 +643,7 @@ zombieexitwindow(bus, trigger, going_to_roof) {
   self.ai_state = "zombieExitWindow";
   self.inert_delay = ::zombieexitwindowdelay;
   self.exiting_window = 1;
-  self linkto(bus, trigger.tag);
+  self linkTo(bus, trigger.tag);
   tag_origin = bus gettagorigin(trigger.tag);
   tag_angles = bus gettagangles(trigger.tag);
   exit_anim = "zm_window_exit";
@@ -653,7 +653,7 @@ zombieexitwindow(bus, trigger, going_to_roof) {
   }
 
   animstate = maps\mp\animscripts\zm_utility::append_missing_legs_suffix(exit_anim);
-  self animscripted(tag_origin, tag_angles, animstate, trigger.substate);
+  self animScripted(tag_origin, tag_angles, animstate, trigger.substate);
   maps\mp\animscripts\zm_shared::donotetracks("window_exit_anim");
   self.exiting_window = undefined;
   self.walk_to_exit = undefined;
@@ -754,13 +754,13 @@ zombieattachtobus(thebus, opening, removeafterdone) {
   self.left_or_right = self zombieattachleftorright(thebus);
   self.attachent = level.the_bus;
   self.attachtag = self.opening.bindtag;
-  self linkto(self.attachent, self.attachtag);
+  self linkTo(self.attachent, self.attachtag);
   from_front = 0;
   from_rear = 0;
   self.inert_delay = ::zombieopeningdelay;
 
   if(_isopeningdoor(opening.bindtag)) {
-    self animscripted(self.origin, self.angles, "zm_jump_on_bus", 0);
+    self animScripted(self.origin, self.angles, "zm_jump_on_bus", 0);
 
     if(opening.bindtag == "door_front_jnt") {
       from_front = 1;
@@ -780,7 +780,7 @@ zombieattachtobus(thebus, opening, removeafterdone) {
     tag_origin = self.attachent gettagorigin(self.attachtag);
     tag_angles = self.attachent gettagangles(self.attachtag);
     self animmode("noclip");
-    self animscripted(tag_origin, tag_angles, animstate, "jump_window" + self.left_or_right);
+    self animScripted(tag_origin, tag_angles, animstate, "jump_window" + self.left_or_right);
   }
 
   self zombieanimnotetrackthink("jump_on_bus_anim");
@@ -797,7 +797,7 @@ zombieattachtobus(thebus, opening, removeafterdone) {
   if(1) {
     hitpos = self.attachent gettagorigin(self.attachtag);
     hitposinbus = pointonsegmentnearesttopoint(thebus.frontworld, thebus.backworld, hitpos);
-    hitdir = vectornormalize(hitposinbus - hitpos);
+    hitdir = vectorNormalize(hitposinbus - hitpos);
     hitforce = vectorscale(hitdir, 100.0);
     hitpos = hitpos + vectorscale((0, 0, 1), 50.0);
     earthquake(randomfloatrange(0.3, 0.4), randomfloatrange(0.2, 0.4), hitpos, 150);
@@ -844,20 +844,20 @@ zombieattachtobus(thebus, opening, removeafterdone) {
         anim_sub_index = self getanimsubstatefromasd(animstatebase + "_in", animsubstate);
         tag_origin = self.attachent gettagorigin(self.attachtag);
         tag_angles = self.attachent gettagangles(self.attachtag);
-        self animscripted(tag_origin, tag_angles, maps\mp\animscripts\zm_utility::append_missing_legs_suffix(animstatebase + "_in"), anim_sub_index);
+        self animScripted(tag_origin, tag_angles, maps\mp\animscripts\zm_utility::append_missing_legs_suffix(animstatebase + "_in"), anim_sub_index);
         self zombieanimnotetrackthink("board_tear_bus_anim", chunk, opening);
 
         while(0 < opening.zbarrier.chunk_health[chunk]) {
           tag_origin = self.attachent gettagorigin(self.attachtag);
           tag_angles = self.attachent gettagangles(self.attachtag);
-          self animscripted(tag_origin, tag_angles, maps\mp\animscripts\zm_utility::append_missing_legs_suffix(animstatebase + "_loop"), anim_sub_index);
+          self animScripted(tag_origin, tag_angles, maps\mp\animscripts\zm_utility::append_missing_legs_suffix(animstatebase + "_loop"), anim_sub_index);
           self zombieanimnotetrackthink("board_tear_bus_anim", chunk, opening);
           opening.zbarrier.chunk_health[chunk]--;
         }
 
         tag_origin = self.attachent gettagorigin(self.attachtag);
         tag_angles = self.attachent gettagangles(self.attachtag);
-        self animscripted(tag_origin, tag_angles, maps\mp\animscripts\zm_utility::append_missing_legs_suffix(animstatebase + "_out"), anim_sub_index);
+        self animScripted(tag_origin, tag_angles, maps\mp\animscripts\zm_utility::append_missing_legs_suffix(animstatebase + "_out"), anim_sub_index);
         self zombieanimnotetrackthink("board_tear_bus_anim", chunk, opening);
       }
 
@@ -909,7 +909,7 @@ zombieattachtobus(thebus, opening, removeafterdone) {
       self.climbing_into_bus = 1;
       self.entering_bus = 1;
       self animmode("noclip");
-      self animscripted(tag_origin, tag_angles, "zm_zbarrier_climbin_bus", anim_index);
+      self animScripted(tag_origin, tag_angles, "zm_zbarrier_climbin_bus", anim_index);
       self zombieanimnotetrackthink("climbin_bus_anim");
       self animmode("gravity");
       self maps\mp\animscripts\zm_run::needsupdate();
@@ -1067,7 +1067,7 @@ zombiedetachfrombus(postfix) {
   }
 
   animstate = maps\mp\animscripts\zm_utility::append_missing_legs_suffix(asd_name);
-  self animscripted(tag_origin, tag_angles, animstate, is_right);
+  self animScripted(tag_origin, tag_angles, animstate, is_right);
   self.dismount_start = 1;
   self thread dismount_timer();
   maps\mp\animscripts\zm_shared::donotetracks("window_dismount_anim");
@@ -1182,7 +1182,7 @@ zombiejumponroof(thebus, opening, removeafterdone, postfix) {
   level.bus_zombie_on_roof = self;
   self.climbing_onto_bus = 1;
   self.entering_bus = 1;
-  self animscripted(self.opening.zbarrier.origin, self.opening.zbarrier.angles, "zm_zbarrier_window_climbup", "window_climbup" + postfix);
+  self animScripted(self.opening.zbarrier.origin, self.opening.zbarrier.angles, "zm_zbarrier_window_climbup", "window_climbup" + postfix);
   self zombieanimnotetrackthink("bus_window_climbup");
   play_sound_at_pos("grab_metal_bar", self.origin);
   opening.zombie = undefined;
@@ -1197,13 +1197,13 @@ zombiejumponroof(thebus, opening, removeafterdone, postfix) {
 }
 
 bussetupladder() {
-  trigger = getent("bus_ladder_trigger", "targetname");
+  trigger = getEnt("bus_ladder_trigger", "targetname");
 
   if(!isDefined(trigger)) {
     return;
   }
-  trigger enablelinkto();
-  trigger linkto(level.the_bus);
+  trigger enablelinkTo();
+  trigger linkTo(level.the_bus);
   trigger setmovingplatformenabled(1);
   trigger setinvisibletoall();
   mantlebrush = getEntArray("ladder_mantle", "targetname");
@@ -1219,7 +1219,7 @@ bussetupladder() {
 
 busdeferredinitladdermantle(mantle) {
   origin = self worldtolocalcoords(mantle.origin);
-  mantle linkto(self, "", origin, (0, 0, 0));
+  mantle linkTo(self, "", origin, (0, 0, 0));
   mantle setmovingplatformenabled(1);
   wait_for_buildable("busladder");
   mantle delete();
@@ -1234,7 +1234,7 @@ busladderthink() {
   level.the_bus.ladder.angles = angles;
   level.the_bus.ladder setModel("com_stepladder_large_closed");
   level.the_bus.ladder notsolid();
-  level.the_bus.ladder linkto(level.the_bus, "tag_ladder_attach");
+  level.the_bus.ladder linkTo(level.the_bus, "tag_ladder_attach");
   level.the_bus.ladder setmovingplatformenabled(1);
   level.the_bus.ladder hide();
   player = wait_for_buildable("busladder");
@@ -1249,13 +1249,13 @@ bussetuproofopening() {
   level.bus_roof_next_time = 0;
   level.bus_roof_min_interval_time = 10000;
   level.bus_roof_max_interval_time = 20000;
-  trigger = getent("bus_hatch_bottom_trigger", "targetname");
+  trigger = getEnt("bus_hatch_bottom_trigger", "targetname");
 
   if(!isDefined(trigger)) {
     return;
   }
-  trigger enablelinkto();
-  trigger linkto(level.the_bus);
+  trigger enablelinkTo();
+  trigger linkTo(level.the_bus);
   trigger setmovingplatformenabled(1);
   self thread bus_hatch_wait();
   self thread bus_hatch_tearin_wait();
@@ -1276,8 +1276,8 @@ bussetuproofopening() {
   }
 
   hatch_location = spawn("script_origin", level.the_bus localtoworldcoords((227, -1.7, 48)));
-  hatch_location enablelinkto();
-  hatch_location linkto(level.the_bus);
+  hatch_location enablelinkTo();
+  hatch_location linkTo(level.the_bus);
   hatch_location setmovingplatformenabled(1);
   level.the_bus.hatch_location = hatch_location;
 
@@ -1325,7 +1325,7 @@ bus_hatch_tearin_wait() {
 
 businithatchclip(clip) {
   origin = self worldtolocalcoords(clip.origin);
-  clip linkto(self, "", origin, (0, 0, 0));
+  clip linkTo(self, "", origin, (0, 0, 0));
   clip setmovingplatformenabled(1);
   self waittill_any("hatch_mantle_allowed", "hatch_drop_allowed");
   clip delete();
@@ -1335,7 +1335,7 @@ busdeferredinithatchmantle(mantle) {
   origin = self worldtolocalcoords(mantle.origin);
   mantle.origin = vectorscale((0, 0, -1), 100.0);
   self waittill("hatch_mantle_allowed");
-  mantle linkto(self, "", origin, (0, 0, 0));
+  mantle linkTo(self, "", origin, (0, 0, 0));
   mantle setmovingplatformenabled(1);
 }
 
@@ -1704,7 +1704,7 @@ zombiedamageplayercling(player) {
 _playergetorigin() {
   if(isDefined(self.onbusturret) && isDefined(self.busturret) && self.onbusturret) {
     turret = self.busturret;
-    turret_exit = getent(turret.target, "targetname");
+    turret_exit = getEnt(turret.target, "targetname");
     return turret_exit.origin;
   }
 
@@ -1813,7 +1813,7 @@ zombiejumpoffroof() {
     if(distance2dsquared(self.origin, goal_pos) <= 1024) {
       self.attachent = level.the_bus;
       self.attachtag = closest_jump_tag;
-      self linkto(self.attachent, self.attachtag, (0, 0, 0), (0, 0, 0));
+      self linkTo(self.attachent, self.attachtag, (0, 0, 0), (0, 0, 0));
       wait 0.1;
       self zombieplayattachedanim("jump_down_127");
       self setgoalpos(self.origin);
@@ -1956,7 +1956,7 @@ zombiejumpdownhatch() {
     self.inert_delay = ::zombieroofteardelay;
     level.bus_roof_open = 1;
     level.bus_roof_tearing = 1;
-    self linkto(level.the_bus, roof_tag);
+    self linkTo(level.the_bus, roof_tag);
     tag_origin = level.the_bus gettagorigin(roof_tag);
     tag_angles = level.the_bus gettagangles(roof_tag);
     substate = 1;
@@ -1966,7 +1966,7 @@ zombiejumpdownhatch() {
     }
 
     animstate = "zm_bus_attached";
-    self animscripted(tag_origin, tag_angles, animstate, substate);
+    self animScripted(tag_origin, tag_angles, animstate, substate);
     maps\mp\animscripts\zm_shared::donotetracks("bus_attached_anim");
     self.inert_delay = undefined;
     level.bus_roof_tearing = 0;
@@ -1976,7 +1976,7 @@ zombiejumpdownhatch() {
   self.hatch_jump = 1;
   self.inert_delay = ::zombiehatchjumpdelay;
   hatch_tag = "tag_hatch_attach_ladder";
-  self linkto(level.the_bus, hatch_tag);
+  self linkTo(level.the_bus, hatch_tag);
   tag_origin = level.the_bus gettagorigin(hatch_tag);
   tag_angles = level.the_bus gettagangles(hatch_tag);
   substate = 0;
@@ -1986,7 +1986,7 @@ zombiejumpdownhatch() {
   }
 
   animstate = maps\mp\animscripts\zm_utility::append_missing_legs_suffix("zm_bus_hatch_jump_down");
-  self animscripted(tag_origin, tag_angles, animstate, substate);
+  self animScripted(tag_origin, tag_angles, animstate, substate);
   maps\mp\animscripts\zm_shared::donotetracks("bus_hatch_jump_anim");
   self unlink();
   self.hatch_jump = 0;
@@ -2032,12 +2032,12 @@ zombiejumpdownhatchkilled() {
 zombieclimbtoroof() {
   self endon("death");
   hatch_tag = "tag_hatch_attach_ladder";
-  self linkto(level.the_bus, hatch_tag);
+  self linkTo(level.the_bus, hatch_tag);
   tag_origin = level.the_bus gettagorigin(hatch_tag);
   tag_angles = level.the_bus gettagangles(hatch_tag);
-  hatch_vec = vectornormalize(anglesToForward(tag_angles));
+  hatch_vec = vectorNormalize(anglesToForward(tag_angles));
   player = self.favoriteenemy;
-  player_vec = vectornormalize(player.origin - tag_origin);
+  player_vec = vectorNormalize(player.origin - tag_origin);
   substate = 0;
   dot = vectordot(hatch_vec, player_vec);
 
@@ -2046,7 +2046,7 @@ zombieclimbtoroof() {
   }
 
   animstate = maps\mp\animscripts\zm_utility::append_missing_legs_suffix("zm_bus_hatch_jump_up");
-  self animscripted(tag_origin, tag_angles, animstate, substate);
+  self animScripted(tag_origin, tag_angles, animstate, substate);
   maps\mp\animscripts\zm_shared::donotetracks("bus_hatch_jump_anim");
   self unlink();
   self setgoalpos(self.origin);
@@ -2111,7 +2111,7 @@ zombiekeepattackingthroughwindow(left_or_right) {
       asd_name = "zm_zbarrier_front_window_idle";
     }
 
-    self animscripted(tag_origin, tag_angles, asd_name, "window_idle" + left_or_right);
+    self animScripted(tag_origin, tag_angles, asd_name, "window_idle" + left_or_right);
     self zombieanimnotetrackthink("bus_window_idle");
   }
 }
@@ -2141,7 +2141,7 @@ zombietryattackthroughwindow(is_random, postfix) {
       asd_name = "zm_zbarrier_front_window_attack";
     }
 
-    self animscripted(tag_origin, tag_angles, asd_name, "window_attack" + postfix);
+    self animScripted(tag_origin, tag_angles, asd_name, "window_attack" + postfix);
     self zombieanimnotetrackthink("bus_window_attack");
     return true;
   }

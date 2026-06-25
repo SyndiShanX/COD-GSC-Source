@@ -230,13 +230,13 @@ chakram_rumble(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldn
   if(newvalue) {
     switch (newvalue) {
       case 2:
-        self playrumbleonentity(localclientnum, "zm_weap_chakram_catch_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_chakram_catch_rumble");
         break;
       case 4:
-        self playrumbleonentity(localclientnum, "zm_weap_chakram_melee_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_chakram_melee_rumble");
         break;
       case 5:
-        self playrumbleonentity(localclientnum, "zm_weap_chakram_throw_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_chakram_throw_rumble");
         break;
     }
   }

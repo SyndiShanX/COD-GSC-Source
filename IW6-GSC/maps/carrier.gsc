@@ -19,7 +19,7 @@ main() {
   maps\carrier_anim::main();
 
   if(getDvar("r_reflectionProbeGenerate") == "1") {
-    level.tilt_sky = getent("carrier_tilt_sky", "targetname");
+    level.tilt_sky = getEnt("carrier_tilt_sky", "targetname");
     level.tilt_sky hide();
   }
 
@@ -121,7 +121,7 @@ obj_regroup_with_hesh() {
   setsaveddvar("objectiveFadeTooFar", var_1);
   common_scripts\utility::flag_wait("control_pad_objective");
   objective_position(var_0, (0, 0, 0));
-  var_2 = getent("osrpey_control_pad", "targetname");
+  var_2 = getEnt("osrpey_control_pad", "targetname");
   objective_onentity(var_0, var_2, (0, 0, 8));
   objective_setpointertextoverride(var_0);
   common_scripts\utility::flag_wait("picked_up_control_pad");
@@ -136,7 +136,7 @@ obj_defend_carrier() {
   objective_state(var_0, "current");
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
   wait 1;
-  var_1 = common_scripts\utility::getstruct("defend_dot", "targetname");
+  var_1 = common_scripts\utility::getStruct("defend_dot", "targetname");
   objective_position(var_0, var_1.origin);
   objective_setpointertextoverride(var_0, &"CARRIER_OBJ_DEFEND");
   common_scripts\utility::flag_wait_any("defend_zodiac_arrived_catwalk", "gunship_attack");
@@ -165,7 +165,7 @@ obj_sparrow() {
     common_scripts\utility::flag_wait("start_knockdown_moment");
   }
 
-  var_2 = getent("defend_sparrow_control", "targetname");
+  var_2 = getEnt("defend_sparrow_control", "targetname");
   objective_position(var_0, var_2.origin);
   common_scripts\utility::flag_wait("obj_sparrow_complete");
   objective_state(var_0, "done");
@@ -176,7 +176,7 @@ obj_gunship() {
   objective_add(var_0, "active", &"CARRIER_OBJ_GUNSHIP");
   objective_state(var_0, "current");
   var_1 = level.ac_130 common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(level.ac_130);
+  var_1 linkTo(level.ac_130);
   objective_onentity(var_0, var_1, (0, 0, 840));
   common_scripts\utility::flag_wait("ac_130_hit");
   objective_position(var_0, (0, 0, 0));
@@ -196,7 +196,7 @@ obj_gunship() {
 
 obj_exfil() {
   var_0 = 7;
-  var_1 = getent("exfil_obj_origin", "targetname");
+  var_1 = getEnt("exfil_obj_origin", "targetname");
   objective_add(var_0, "active", &"CARRIER_OBJ_EXFIL");
   objective_state(var_0, "current");
   objective_position(var_0, var_1.origin);
@@ -217,10 +217,10 @@ create_fx_ent_setup() {
     var_2 delete();
   }
 
-  var_4 = getent("island_antenna", "targetname");
+  var_4 = getEnt("island_antenna", "targetname");
   var_4.animname = "tilt_tower";
   var_4 maps\_anim::setanimtree();
-  var_5 = getent("tower_corner", "targetname");
+  var_5 = getEnt("tower_corner", "targetname");
   var_6 = maps\_utility::spawn_anim_model("tilt_tower_corner");
   var_5 delete();
   var_7 = getEntArray("deck_damaged", "targetname");
@@ -233,10 +233,10 @@ create_fx_ent_setup() {
   maps\_utility::array_delete(var_10);
   var_11 = getEntArray("stern_corner_clean", "targetname");
   maps\_utility::array_delete(var_11);
-  var_12 = getent("carrier_elevator_rear_scripted", "targetname");
+  var_12 = getEnt("carrier_elevator_rear_scripted", "targetname");
   var_12 delete();
   common_scripts\utility::waitframe();
-  var_13 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_13 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_13 thread maps\_anim::anim_last_frame_solo(var_4, "carrier_deck_tilt_tower_b");
   var_13 thread maps\_anim::anim_last_frame_solo(var_6, "carrier_deck_tilt_island_corner");
   wait 0.25;
@@ -253,15 +253,15 @@ create_fx_ent_setup() {
   common_scripts\utility::array_thread(level.sliding_jet11, maps\_utility::hide_entity);
   common_scripts\utility::array_thread(level.sliding_jet12, maps\_utility::hide_entity);
   common_scripts\utility::array_thread(level.sliding_jet20, maps\_utility::hide_entity);
-  var_14 = getent("anim_jet_launcher1", "targetname");
+  var_14 = getEnt("anim_jet_launcher1", "targetname");
   var_14 hide();
-  var_14 = getent("anim_jet_launcher2", "targetname");
+  var_14 = getEnt("anim_jet_launcher2", "targetname");
   var_14 hide();
   var_15 = getEntArray("intro_static_jets", "targetname");
   common_scripts\utility::array_thread(var_15, maps\_utility::hide_entity);
-  var_16 = getent("blast_shield4", "targetname");
-  var_17 = getent("blast_shield5", "targetname");
-  var_18 = getent("blast_shield6", "targetname");
+  var_16 = getEnt("blast_shield4", "targetname");
+  var_17 = getEnt("blast_shield5", "targetname");
+  var_18 = getEnt("blast_shield6", "targetname");
   var_16 hide();
   var_17 hide();
   var_18 hide();

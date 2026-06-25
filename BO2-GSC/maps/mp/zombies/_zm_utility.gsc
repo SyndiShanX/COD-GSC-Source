@@ -51,9 +51,9 @@ is_player() {
 lerp(chunk) {
   link = spawn("script_origin", self getorigin());
   link.angles = self.first_node.angles;
-  self linkto(link);
-  link rotateto(self.first_node.angles, level._contextual_grab_lerp_time);
-  link moveto(self.attacking_spot, level._contextual_grab_lerp_time);
+  self linkTo(link);
+  link rotateTo(self.first_node.angles, level._contextual_grab_lerp_time);
+  link moveTo(self.attacking_spot, level._contextual_grab_lerp_time);
   link waittill_multiple("rotatedone", "movedone");
   self unlink();
   link delete();
@@ -2095,14 +2095,14 @@ set_hint_string(ent, default_ref, cost) {
 
   if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
     ref = ref + "_" + cost;
-    self sethintstring(get_zombie_hint(ref));
+    self setHintString(get_zombie_hint(ref));
   } else {
     hint = get_zombie_hint(ref);
 
     if(isDefined(cost)) {
-      self sethintstring(hint, cost);
+      self setHintString(hint, cost);
     } else {
-      self sethintstring(hint);
+      self setHintString(hint);
     }
   }
 }
@@ -2139,18 +2139,18 @@ unitrigger_set_hint_string(ent, default_ref, cost) {
 
     if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
       ref = ref + "_" + cost;
-      trigger sethintstring(get_zombie_hint(ref));
+      trigger setHintString(get_zombie_hint(ref));
       continue;
     }
 
     hint = get_zombie_hint(ref);
 
     if(isDefined(cost)) {
-      trigger sethintstring(hint, cost);
+      trigger setHintString(hint, cost);
       continue;
     }
 
-    trigger sethintstring(hint);
+    trigger setHintString(hint);
   }
 }
 
@@ -2165,7 +2165,7 @@ add_sound(ref, alias) {
 play_sound_at_pos(ref, pos, ent) {
   if(isDefined(ent)) {
     if(isDefined(ent.script_soundalias)) {
-      playsoundatposition(ent.script_soundalias, pos);
+      playSoundAtPosition(ent.script_soundalias, pos);
       return;
     }
 
@@ -2183,7 +2183,7 @@ play_sound_at_pos(ref, pos, ent) {
     return;
   }
 
-  playsoundatposition(level.zombie_sounds[ref], pos);
+  playSoundAtPosition(level.zombie_sounds[ref], pos);
 }
 
 play_sound_on_ent(ref) {
@@ -4239,9 +4239,9 @@ place_navcard(str_model, str_stat, org, angles) {
   navcard.angles = angles;
   wait 1;
   navcard_pickup_trig = spawn("trigger_radius_use", org, 0, 84, 72);
-  navcard_pickup_trig setcursorhint("HINT_NOICON");
-  navcard_pickup_trig sethintstring(&"ZOMBIE_NAVCARD_PICKUP");
-  navcard_pickup_trig triggerignoreteam();
+  navcard_pickup_trig setCursorHint("HINT_NOICON");
+  navcard_pickup_trig setHintString(&"ZOMBIE_NAVCARD_PICKUP");
+  navcard_pickup_trig triggerIgnoreTeam();
   a_navcard_stats = array("navcard_held_zm_transit", "navcard_held_zm_highrise", "navcard_held_zm_buried");
   is_holding_card = 0;
   str_placing_stat = undefined;

@@ -44,13 +44,13 @@ function private on_begin(var_c4da4541, var_93a137cd) {
 
   zm_trial_util::function_c2cd0cba(level.var_6f6736a8);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_a14072bf();
   }
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_14361e0c = undefined;
     player zm_trial_util::function_f3aacffb();
   }
@@ -69,7 +69,7 @@ function private on_end(round_reset) {
   } else {
     var_ef7fbb73 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.sensoriums < level.var_6f6736a8) {
         if(!isDefined(var_ef7fbb73)) {
           var_ef7fbb73 = [];

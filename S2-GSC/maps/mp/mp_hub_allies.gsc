@@ -38,9 +38,9 @@ func_00F9() {
   level.var_ACBD = undefined;
   level.var_ACBB = undefined;
   level.var_ACBF = undefined;
-  level.devicesbegintrigger = getent("resistance_discoverable_begin", "targetname");
+  level.devicesbegintrigger = getEnt("resistance_discoverable_begin", "targetname");
   level.devicestructs = [];
-  level.deviceinteract = getent("device_interact", "targetname");
+  level.deviceinteract = getEnt("device_interact", "targetname");
   thread func_529F();
   thread func_8A3A();
   setDvar("4712", "2");
@@ -170,7 +170,7 @@ func_530F() {
         var_03 = spawn("script_model", (0, 0, 0));
         var_03 setModel("npc_usa_m1garand_base");
         var_03 hidepart("tag_clip_extmag");
-        var_03 linkto(var_02, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+        var_03 linkTo(var_02, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       }
 
       var_02 thread func_71FE();
@@ -191,13 +191,13 @@ func_92B9() {
   var_02 maps\mp\gametypes\_hub_unk1::func_8627();
   var_03 = spawn("script_model", var_00.var_0116);
   var_03 setModel("mp_hub_baseball_glove_01");
-  var_03 linkto(var_01, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  var_03 linkTo(var_01, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   var_04 = spawn("script_model", var_00.var_0116);
   var_04 setModel("mp_hub_baseball_glove_01");
-  var_04 linkto(var_02, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  var_04 linkTo(var_02, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   var_05 = spawn("script_model", (0, 0, 0));
   var_05 setModel("mp_hub_baseball_01");
-  var_05 linkto(var_01, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_05 linkTo(var_01, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   var_03 scriptmodelplayanim("mp_hub_baseball_guy1_glove");
   var_04 scriptmodelplayanim("mp_hub_baseball_guy2_glove");
   var_05 scriptmodelplayanim("mp_hub_baseball");
@@ -213,7 +213,7 @@ func_92E3() {
   var_01 maps\mp\gametypes\_hub_unk1::func_8627();
   var_02 = spawn("script_model", var_00.var_0116);
   var_02 setModel("npc_usa_combat_knife");
-  var_02 linkto(var_01, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_02 linkTo(var_01, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   var_01 method_8495("mp_hub_knife_throw_idle", var_00.var_0116, var_00.var_001D);
   var_02 scriptmodelplayanim("mp_hub_knife");
 }
@@ -254,8 +254,8 @@ func_92FE() {
 }
 
 func_64A6() {
-  var_00 = getent("firing_range_wall", "targetname");
-  var_01 = getent("firing_range_wall_clip", "targetname");
+  var_00 = getEnt("firing_range_wall", "targetname");
+  var_01 = getEnt("firing_range_wall_clip", "targetname");
   var_02 = common_scripts\utility::func_46B5("firing_range_wall_position", "targetname");
   var_03 = common_scripts\utility::func_46B5("firing_range_wall_door_position", "targetname");
   var_04 = spawn("script_model", var_02.var_0116);
@@ -494,8 +494,8 @@ inithubholidayspawns() {
 initresistancedevices() {
   level endon("game_ended");
   if(getdvarint("spv_hub_resistance_event_enabled") == 1 && isDefined(level.devicesbegintrigger) && isDefined(level.deviceinteract)) {
-    level.devicesbegintrigger sethintstring(&"HUB_DEVICES_01");
-    level.deviceinteract sethintstring(&"HUB_DEVICES_02");
+    level.devicesbegintrigger setHintString(&"HUB_DEVICES_01");
+    level.deviceinteract setHintString(&"HUB_DEVICES_02");
     for(;;) {
       level.devicesbegintrigger waittill("trigger", var_00);
       if(isPlayer(var_00)) {
@@ -713,7 +713,7 @@ devicetimeout() {
 }
 
 spawnresistancebomber() {
-  var_00 = getent("resistance_plane_spawn", "targetname");
+  var_00 = getEnt("resistance_plane_spawn", "targetname");
   var_01 = spawn("script_model", var_00.var_0116);
   var_01.var_001D = (0, 90, 0);
   var_01 setModel("usa_bomber_commando_vista");
@@ -776,7 +776,7 @@ theaterscreenswap() {
       break;
   }
 
-  var_02 = getent("theater_screen_foreground", "targetname");
+  var_02 = getEnt("theater_screen_foreground", "targetname");
   var_02 delete();
   var_03 = spawn("script_model", (-1516.1, 2098.48, -21));
   var_03 setModel(var_01);
@@ -794,37 +794,37 @@ func_5376() {
 }
 
 func_52C5() {
-  var_00 = getent("hq_zone_trigger", "targetname");
+  var_00 = getEnt("hq_zone_trigger", "targetname");
   level.var_ACBC = var_00;
   level.var_ACBC thread maps\mp\_dynamic_world::func_9DC3(::func_4F46, ::func_4F47);
 }
 
 func_5298() {
-  var_00 = getent("beach_zone_trigger", "targetname");
+  var_00 = getEnt("beach_zone_trigger", "targetname");
   level.var_ACBA = var_00;
   level.var_ACBA thread maps\mp\_dynamic_world::func_9DC3(::func_4F46, ::func_4F47);
 }
 
 func_5355() {
-  var_00 = getent("spawn_zone_trigger", "targetname");
+  var_00 = getEnt("spawn_zone_trigger", "targetname");
   level.var_ACBF = var_00;
   level.var_ACBF thread maps\mp\_dynamic_world::func_9DC3(::func_4F46, ::func_4F47);
 }
 
 func_5324() {
-  var_00 = getent("offTower_zone_trigger", "targetname");
+  var_00 = getEnt("offTower_zone_trigger", "targetname");
   level.var_ACBE = var_00;
   level.var_ACBE thread maps\mp\_dynamic_world::func_9DC3(::func_4F46, ::func_4F47);
 }
 
 func_535F() {
-  var_00 = getent("theatre_zone_trigger", "targetname");
+  var_00 = getEnt("theatre_zone_trigger", "targetname");
   level.var_ACC0 = var_00;
   level.var_ACC0 thread maps\mp\_dynamic_world::func_9DC3(::func_4F46, ::func_4F47);
 }
 
 func_52BA() {
-  var_00 = getent("firingrange_zone_trigger", "targetname");
+  var_00 = getEnt("firingrange_zone_trigger", "targetname");
   level.var_ACBB = var_00;
   level.var_ACBB thread maps\mp\_dynamic_world::func_9DC3(::func_4F46, ::func_4F47);
 }

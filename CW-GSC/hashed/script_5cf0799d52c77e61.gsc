@@ -95,10 +95,10 @@ function function_27b409b9() {
   self thread function_f5114543();
 
   while(true) {
-    self moveto(self.destination, self.duration);
+    self moveTo(self.destination, self.duration);
     self waittill(#"movedone");
     wait 1;
-    self moveto(self.original_origin, self.duration);
+    self moveTo(self.original_origin, self.duration);
     self waittill(#"movedone");
     wait 1;
   }

@@ -46,7 +46,7 @@ function starting(str_skipto) {
 }
 
 function main(str_skipto, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   setDvar(#"hash_3d9a09e7ecea2271", 0);
   level clientfield::set("crash_models", 1);
   vehs = getvehiclearray();
@@ -107,7 +107,7 @@ function function_c5eaa394() {
 function function_243c9d46(player) {
   player_veh = getvehiclearray("af_chase_veh", "targetname")[0];
   level.chase_truck = player_veh;
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   thread function_c0f9442c();
   thread function_e99dbb58(player);
   player_veh vehicle::get_off_path();
@@ -117,7 +117,7 @@ function function_243c9d46(player) {
     woods[0] unlink();
   }
 
-  plane = getent("cargo_plane", "targetname");
+  plane = getEnt("cargo_plane", "targetname");
   plane unlink();
   level.adler unlink();
   util::nvidiaansel_scriptdisable(1);
@@ -194,7 +194,7 @@ function function_e99dbb58(player) {
   level waittill(#"hash_61855c3885c438e6");
   player shellshock(#"frag_grenade_mp", 4);
   level lui::screen_fade_out(0.2);
-  player playrumbleonentity("damage_heavy");
+  player playRumbleOnEntity("damage_heavy");
   level notify(#"hash_351eb749d2c8fa9c");
   flag::clear("af_wing_smash");
 }

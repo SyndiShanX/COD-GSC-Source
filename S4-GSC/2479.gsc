@@ -108,7 +108,7 @@ _id_CA2C(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_7) && var_6.size > 0) {
-    var_8 = vectornormalize(var_7 / var_6.size);
+    var_8 = vectorNormalize(var_7 / var_6.size);
     var_8 = var_8 * (1, 1, 0);
   } else {
     var_13 = randomint(360);
@@ -313,7 +313,7 @@ _id_40D3(var_0, var_1, var_2, var_3, var_4) {
   var_5._id_0481 = "rcplane";
   var_5._id_31A0 = 1;
   var_6 = spawnStruct();
-  var_7 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_5, var_6);
+  var_7 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_5, var_6);
 
   if(!isDefined(var_7)) {
     return;
@@ -341,7 +341,7 @@ _id_40D3(var_0, var_1, var_2, var_3, var_4) {
 
   var_7.killcament = spawn("script_model", var_7 gettagorigin("tag_player"));
   var_7.killcament setModel("tag_origin");
-  var_7.killcament linkto(var_7, "tag_player");
+  var_7.killcament linkTo(var_7, "tag_player");
   var_7 endon("death");
   var_7 _id_078D::_id_D15E(::_id_40C7);
   var_8 = spawn("script_model", var_7 gettagorigin("tag_fx"));
@@ -350,7 +350,7 @@ _id_40D3(var_0, var_1, var_2, var_3, var_4) {
   var_8.team = var_7.team;
   var_8.owner = var_7.owner;
   var_8.streakinfo = var_7.streakinfo;
-  var_8 linkto(var_7, "tag_fx");
+  var_8 linkTo(var_7, "tag_fx");
   var_8 setscriptablepartstate("fake_trail", "on", 0);
   var_8 setotherent(self);
   var_8 thread _id_40D7(var_1);
@@ -369,7 +369,7 @@ _id_40D3(var_0, var_1, var_2, var_3, var_4) {
   if(!istrue(var_2)) {
     self _meth_865E();
     self unlink();
-    self cameralinkto(var_7, "tag_player", 1);
+    self cameralinkTo(var_7, "tag_player", 1);
     self _meth_8094(var_7);
     self visionsetkillstreakforplayer("cruise_color");
     self._id_E061 = spawn("script_origin", var_7.origin);
@@ -547,14 +547,14 @@ _id_40DC(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_26 = var_24 + var_25;
       var_20.angles = vectortoangles(var_7 + (0, 0, 150) - var_26);
       var_6 unlink();
-      var_6 linkto(var_20, "tag_player", (0, 0, 0), (0, 0, 0));
+      var_6 linkTo(var_20, "tag_player", (0, 0, 0), (0, 0, 0));
 
       if(scripts\cp_mp\utility\game_utility::isnightmap()) {
         var_1 scripts\cp_mp\utility\player_utility::_id_D720(0);
       }
 
       var_20.origin = var_26;
-      var_1 cameralinkto(var_20, "tag_origin");
+      var_1 cameralinkTo(var_20, "tag_origin");
       var_27 = "cruise_predator_static";
 
       if(var_19 == 2) {
@@ -593,9 +593,9 @@ _id_40DC(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_40BF(var_0, var_1) {
-  self moveto(var_0, 0.2, 0, 0.05);
+  self moveTo(var_0, 0.2, 0, 0.05);
   wait 0.15;
-  self moveto(var_0 + vectornormalize(var_1 - var_0) * 24, 2);
+  self moveTo(var_0 + vectorNormalize(var_1 - var_0) * 24, 2);
 }
 
 _id_40CF(var_0, var_1) {

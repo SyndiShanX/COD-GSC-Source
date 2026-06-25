@@ -137,7 +137,7 @@ function startmicrowavefx(localclientnum) {
   microwavefxent = spawn(localclientnum, origin, "script_model");
   microwavefxent setModel("tag_microwavefx");
   microwavefxent.angles = angles;
-  microwavefxent linkto(turret, "tag_flash");
+  microwavefxent linkTo(turret, "tag_flash");
   microwavefxent.fxhandles = [];
   microwavefxent.fxnames = [];
   microwavefxent.fxhashs = [];

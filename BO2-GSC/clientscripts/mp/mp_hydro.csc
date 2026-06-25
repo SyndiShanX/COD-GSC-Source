@@ -280,7 +280,7 @@ cameratrackplayer(localclientnum) {
       direction = localplayer.origin - self.origin;
       angles = vectortoangles(direction);
       flattenedangles = (pitch, angles[1] + 90, roll);
-      self rotateto(flattenedangles, 0.5);
+      self rotateTo(flattenedangles, 0.5);
     }
 
     wait 0.5;

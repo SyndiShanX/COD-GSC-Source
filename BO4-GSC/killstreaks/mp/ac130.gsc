@@ -99,7 +99,7 @@ rotaterig(bundle) {
   var_d57617dd = isDefined(bundle.var_dff95af) ? bundle.var_dff95af : 300;
 
   while(true) {
-    self rotateyaw(360, var_d57617dd);
+    self rotateYaw(360, var_d57617dd);
     wait var_d57617dd;
   }
 }
@@ -196,7 +196,7 @@ spawnac130() {
 
   bundle = struct::get_script_bundle("killstreak", "killstreak_ac130");
   spawnpos = airsupport::getmapcenter() + (5000, 5000, 8000);
-  level.ac130 = spawnvehicle(bundle.ksvehicle, spawnpos, (0, 0, 0), "ac130");
+  level.ac130 = spawnVehicle(bundle.ksvehicle, spawnpos, (0, 0, 0), "ac130");
   level.ac130.identifier_weapon = getweapon("ac130");
   level.ac130 killstreaks::configure_team("ac130", killstreak_id, player, "helicopter");
   level.ac130 killstreak_hacking::enable_hacking("ac130", &hackedprefunction, &hackedpostfunction);
@@ -272,7 +272,7 @@ function_7c61ce31(bundle) {
   zoffset = (isDefined(bundle.var_218dc866) ? bundle.var_218dc866 : 8000) - 8000;
   anglevector = (xoffset, yoffset, zoffset);
   var_e47f3d4a = getdvarfloat(#"hash_29a9f2bae7599f46", -27);
-  veh linkto(rotator, "tag_origin", anglevector, (0, angle + attach_angle, var_e47f3d4a));
+  veh linkTo(rotator, "tag_origin", anglevector, (0, angle + attach_angle, var_e47f3d4a));
 }
 
 function_7cdff810() {
@@ -429,7 +429,7 @@ function_849819e9(missile, bundle, var_61bbac7a) {
   while(isDefined(ac130.owner) && ac130.owner util::function_63d27d4e("ac130")) {
     dist = distance(missile.origin, ac130.origin);
     velocity = missile getvelocity();
-    missile_dir = vectornormalize(velocity);
+    missile_dir = vectorNormalize(velocity);
     missile_speed = vectordot(missile_dir, velocity);
 
     if(missile_speed > 0) {
@@ -865,7 +865,7 @@ playlockonsoundsthread(player, heli) {
   heli endon(#"death", #"crashing", #"leaving");
   heli.locksounds = spawn("script_model", heli.origin);
   wait 0.1;
-  heli.locksounds linkto(heli, "tag_origin");
+  heli.locksounds linkTo(heli, "tag_origin");
 
   while(true) {
     heli waittill(#"locking on");
@@ -901,7 +901,7 @@ function_cd679760(startnode, destnodes) {
   self notify(#"flying");
   self endon(#"flying", #"crashing", #"leaving", #"death");
   bundle = getscriptbundle("killstreak_ac130");
-  nextnode = getent(startnode.target, "targetname");
+  nextnode = getEnt(startnode.target, "targetname");
   assert(isDefined(nextnode), "<dev string:x38>");
   self setspeed(150, 80);
   self setneargoalnotifydist(100);
@@ -912,7 +912,7 @@ function_cd679760(startnode, destnodes) {
   if(!self.playermovedrecently) {
     node = self updateareanodes(destnodes, 0);
     level.ac130.currentnode = node;
-    targetnode = getent(node.target, "targetname");
+    targetnode = getEnt(node.target, "targetname");
     traveltonode(targetnode);
 
     if(isDefined(targetnode.script_airspeed) && isDefined(targetnode.script_accel)) {
@@ -981,7 +981,7 @@ watchlocationchangethread(destnodes) {
     player.moves++;
     node = self updateareanodes(destnodes, 1);
     ac130.currentnode = node;
-    targetnode = getent(node.target, "targetname");
+    targetnode = getEnt(node.target, "targetname");
     player playlocalsound(#"mpl_cgunner_nav");
     ac130 traveltonode(targetnode);
 
@@ -1046,7 +1046,7 @@ updateareanodes(areanodes, forcemove) {
       continue;
     }
 
-    helinode = getent(node.target, "targetname");
+    helinode = getEnt(node.target, "targetname");
 
     foreach(player in node.validplayers) {
       node.nodescore += 1;
@@ -1148,7 +1148,7 @@ function_3939b657(vehicle) {
     }
 
     if(isDefined(enemy)) {
-      vectorfromenemy = vectornormalize(((vehicle.origin - enemy.origin)[0], (vehicle.origin - enemy.origin)[1], 0));
+      vectorfromenemy = vectorNormalize(((vehicle.origin - enemy.origin)[0], (vehicle.origin - enemy.origin)[1], 0));
       vehicle turretsettarget(0, enemy);
       vehicle waittilltimeout(1, #"turret_on_target");
       vehicle vehicle_ai::fire_for_time(2 + randomfloat(0.8), 0, enemy);

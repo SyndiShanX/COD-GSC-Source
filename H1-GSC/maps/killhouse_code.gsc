@@ -11,15 +11,15 @@ precachelevelstuff() {
 }
 
 new_look_training_setup() {
-  var_0 = getent("aim_down_target", "targetname");
-  var_1 = getent("aim_up_target", "targetname");
-  var_0 rotateto(var_0.angles + (0, 0, -90), 0.25, 0, 0);
-  var_1 rotateto(var_1.angles + (0, 0, -90), 0.25, 0, 0);
+  var_0 = getEnt("aim_down_target", "targetname");
+  var_1 = getEnt("aim_up_target", "targetname");
+  var_0 rotateTo(var_0.angles + (0, 0, -90), 0.25, 0, 0);
+  var_1 rotateTo(var_1.angles + (0, 0, -90), 0.25, 0, 0);
 }
 
 new_look_wait_for_target(var_0, var_1) {
   self setCanDamage(1);
-  self rotateto(self.angles + (0, 0, var_0), 0.25, 0, 0);
+  self rotateTo(self.angles + (0, 0, var_0), 0.25, 0, 0);
   self playSound("killhouse_target_up");
 
   for(;;) {
@@ -39,7 +39,7 @@ new_look_wait_for_target(var_0, var_1) {
 
   self playSound("killhouse_buzzer");
   self playSound("killhouse_target_up");
-  self rotateto(self.angles + (0, 0, var_1), 0.25, 0, 0);
+  self rotateTo(self.angles + (0, 0, var_1), 0.25, 0, 0);
 }
 
 rope_obj(var_0) {
@@ -48,7 +48,7 @@ rope_obj(var_0) {
   if(var_0) {
     setobjectivestring("obj_price", &"KILLHOUSE_SLIDE_DOWN_THE_ROPE");
     setobjectivestate("obj_price", "current");
-    var_1 = getent("top_of_rope", "targetname");
+    var_1 = getEnt("top_of_rope", "targetname");
     setobjectivelocation("obj_price", var_1);
   }
 }
@@ -65,7 +65,7 @@ level_scripted_unloadnode() {
 }
 
 ambient_trucks() {
-  var_0 = getent("se_truck_trigger", "targetname");
+  var_0 = getEnt("se_truck_trigger", "targetname");
 
   for(;;) {
     var_1 = randomint(8);
@@ -85,13 +85,13 @@ ambient_trucks() {
 }
 
 delay_objective_after_intro() {
-  registerobjective("obj_rifle", &"KILLHOUSE_PICK_UP_A_RIFLE_FROM", getent("obj_rifle_ammo", "targetname"));
+  registerobjective("obj_rifle", &"KILLHOUSE_PICK_UP_A_RIFLE_FROM", getEnt("obj_rifle_ammo", "targetname"));
   wait 3;
   setobjectivestate("obj_rifle", "current");
 }
 
 waters_think() {
-  level.waters = getent("waters", "script_noteworthy");
+  level.waters = getEnt("waters", "script_noteworthy");
   level.waters.animname = "gaz";
   level.waters.disablearrivals = 1;
   level.waters.disableexits = 1;
@@ -103,7 +103,7 @@ waters_think() {
 
 newcastle_think() {
   common_scripts\utility::flag_wait("spawn_frags");
-  var_0 = getent("nwc", "script_noteworthy");
+  var_0 = getEnt("nwc", "script_noteworthy");
   level.newcastle = var_0 maps\_utility::spawn_ai();
   level.newcastle.animname = "nwc";
   level.newcastle.disablearrivals = 1;
@@ -123,7 +123,7 @@ newcastle_think() {
 }
 
 mac_think() {
-  level.mac = getent("mac", "script_noteworthy");
+  level.mac = getEnt("mac", "script_noteworthy");
   level.mac.animname = "mac";
   level.mac.disablearrivals = 1;
   level.mac.disableexits = 1;
@@ -134,7 +134,7 @@ mac_think() {
 }
 
 price_think() {
-  level.price = getent("price", "script_noteworthy");
+  level.price = getEnt("price", "script_noteworthy");
   level.price.animname = "price";
   level.price.disablearrivals = 1;
   level.price.disableexits = 1;
@@ -400,8 +400,8 @@ ads_shoot_dialog() {
 }
 
 deck_start() {
-  var_0 = getent("deck_start", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("deck_start", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   level.player giveweapon("g36c");
   level.player giveweapon("mp5");
@@ -413,13 +413,13 @@ deck_training() {
   var_0 = getEntArray("deck_target", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, ::cargoship_targets);
   common_scripts\utility::flag_wait("start_deck");
-  var_1 = getent("area_two_one", "targetname");
-  var_2 = getent("area_two_two", "targetname");
-  var_3 = getent("area_two_three", "targetname");
-  var_4 = getent("area_two_four", "targetname");
-  var_5 = getent("area_two_five", "targetname");
-  var_6 = getent("area_two_finish", "targetname");
-  var_7 = getent("area_two_quit", "targetname");
+  var_1 = getEnt("area_two_one", "targetname");
+  var_2 = getEnt("area_two_two", "targetname");
+  var_3 = getEnt("area_two_three", "targetname");
+  var_4 = getEnt("area_two_four", "targetname");
+  var_5 = getEnt("area_two_five", "targetname");
+  var_6 = getEnt("area_two_finish", "targetname");
+  var_7 = getEnt("area_two_quit", "targetname");
   var_8 = 1;
 
   for(;;) {
@@ -428,7 +428,7 @@ deck_training() {
     thread maps\_utility::autosave_by_name("starting_deck_attack");
 
     if(var_8) {
-      registerobjective("obj_deck", &"KILLHOUSE_COMPLETE_THE_DECK_MOCKUP", getent("area_two_one", "targetname"));
+      registerobjective("obj_deck", &"KILLHOUSE_COMPLETE_THE_DECK_MOCKUP", getEnt("area_two_one", "targetname"));
       var_8 = 0;
     }
 
@@ -481,7 +481,7 @@ get_randomized_targets() {
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
-    var_4 = getent(var_3, "script_linkname");
+    var_4 = getEnt(var_3, "script_linkname");
 
     if(isDefined(var_4)) {
       var_1 = common_scripts\utility::add_to_array(var_1, var_4);
@@ -528,7 +528,7 @@ pop_up_and_wait() {
 jumpoff_monitor() {
   level endon("starting_rope");
   self waittill("trigger");
-  var_0 = getent("top_of_rope_trigger", "targetname");
+  var_0 = getEnt("top_of_rope_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   level.jumpoff = 1;
   level notify("mission failed");
@@ -696,7 +696,7 @@ wait_till_pos_cleared(var_0) {
 
 rope_triggercheck_playerisinvalidstate() {
   level endon("starting_rope");
-  var_0 = getent("top_of_rope_trigger", "targetname");
+  var_0 = getEnt("top_of_rope_trigger", "targetname");
 
   for(;;) {
     if(level.player isonground() && !level.player isleaning()) {
@@ -710,17 +710,17 @@ rope_triggercheck_playerisinvalidstate() {
 }
 
 rope() {
-  var_0 = getent("top_of_rope_trigger", "targetname");
+  var_0 = getEnt("top_of_rope_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
-  var_0 usetriggerrequirelookat();
-  var_1 = getent("top_of_rope", "targetname");
-  var_2 = getent("bottom_of_rope", "targetname");
+  var_0 useTriggerRequireLookAt();
+  var_1 = getEnt("top_of_rope", "targetname");
+  var_2 = getEnt("bottom_of_rope", "targetname");
   level.jumpoff = 0;
 
   for(;;) {
     common_scripts\utility::flag_wait("activate_rope");
     thread rope_triggercheck_playerisinvalidstate();
-    var_0 sethintstring(&"KILLHOUSE_USE_ROPE");
+    var_0 setHintString(&"KILLHOUSE_USE_ROPE");
 
     for(;;) {
       var_0 waittill("trigger");
@@ -743,7 +743,7 @@ rope() {
     level.player thread maps\_utility::play_sound_on_entity("scn_killhouse_rope_slide");
     var_3 = maps\_utility::spawn_anim_model("view_body");
     var_3 hide();
-    var_4 = getent("training_rope_node", "targetname");
+    var_4 = getEnt("training_rope_node", "targetname");
     var_4 thread maps\_anim::anim_first_frame_solo(var_3, "training_rope");
     var_4 thread maps\_anim::anim_single_solo(var_3, "training_rope");
     var_5 = getanimlength(level.scr_anim[var_3.animname]["training_rope"]);
@@ -809,7 +809,7 @@ cqb_timer_get_planes(var_0) {
   var_1 = [];
 
   for(var_2 = 0; var_2 <= 9; var_2++) {
-    var_1[var_2] = getent(var_0 + "_" + common_scripts\utility::tostring(var_2), "targetname");
+    var_1[var_2] = getEnt(var_0 + "_" + common_scripts\utility::tostring(var_2), "targetname");
   }
 
   return var_1;
@@ -1436,18 +1436,18 @@ training_targetdummies(var_0) {
 }
 
 targetdummythink() {
-  self.orgent = getent(self.target, "targetname");
-  self linkto(self.orgent);
+  self.orgent = getEnt(self.target, "targetname");
+  self linkTo(self.orgent);
   self.dummyid = int(self.script_label);
   self.laneid = int(self.targetname[4]);
-  self.aim_assist_target = getent(self.orgent.target, "targetname");
+  self.aim_assist_target = getEnt(self.orgent.target, "targetname");
   self.aim_assist_target.health = 10;
   self.aim_assist_target hide();
   self.aim_assist_target notsolid();
   self.orgent rotatepitch(-90, 0.25);
   self.raised = 0;
   self.moving = 0;
-  var_0 = getent("rifleTraining_stall", "targetname");
+  var_0 = getEnt("rifleTraining_stall", "targetname");
   level.waters_speaking = 0;
   level.waters_last_line = 0;
 
@@ -1525,7 +1525,7 @@ target_down() {
 }
 
 cargoship_targets() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = var_0 common_scripts\utility::spawn_tag_origin();
   var_2 = anglesToForward(var_1.angles);
 
@@ -1541,8 +1541,8 @@ cargoship_targets() {
     var_1.origin = var_1.origin - anglesToForward(var_1.angles) * 65;
   }
 
-  self linkto(var_0);
-  var_3 = getent(var_0.target, "targetname");
+  self linkTo(var_0);
+  var_3 = getEnt(var_0.target, "targetname");
   var_3.health = 10;
   var_3 hide();
   var_3 notsolid();
@@ -1643,7 +1643,7 @@ ammorespawnthink(var_0, var_1, var_2) {
   var_7 = undefined;
 
   if(isDefined(var_3.target)) {
-    var_7 = getent(var_3.target, "targetname");
+    var_7 = getEnt(var_3.target, "targetname");
     var_7.origin = var_3.origin;
     var_7.angles = var_3.angles;
   }
@@ -1829,7 +1829,7 @@ killhouse_guy_exitconditionoverride(var_0) {
 
 firearmdepot_guy_think() {
   level endon("DespawnGuysHangar1");
-  var_0 = getent("firearmDepotGuy", "targetname");
+  var_0 = getEnt("firearmDepotGuy", "targetname");
   var_0 maps\_utility::set_ignoresuppression(1);
   var_1 = [];
   var_1[0] = getnode("firearmDepotNode_0", "targetname");
@@ -1900,7 +1900,7 @@ firearmdepot_guy_think() {
 
 inventory_guy_setup() {
   level endon("DespawnGuysHangar1");
-  var_0 = getent("inventory_guy", "targetname");
+  var_0 = getEnt("inventory_guy", "targetname");
   var_0.animname = "generic";
   var_0 maps\_utility::gun_remove();
   var_0 attach("com_clipboard_mocap", "tag_inhand");
@@ -1911,7 +1911,7 @@ inventory_guy_setup() {
   var_3 thread maps\_anim::anim_loop_solo(var_0, "guy_inventory_idle01", undefined, "1stPosDone");
   common_scripts\utility::flag_wait("inventoryNewPos");
   var_3 notify("1stPosDone");
-  var_3 maps\_utility::anim_stopanimscripted();
+  var_3 maps\_utility::anim_stopanimScripted();
 
   for(var_4 = var_2; var_2 == var_4; var_2 = randomintrange(0, var_1.size)) {}
 
@@ -1920,8 +1920,8 @@ inventory_guy_setup() {
 }
 
 chair_guy_setup() {
-  var_0 = getent("chair_guy", "script_noteworthy");
-  var_1 = getent("chair_guy_origin", "script_noteworthy");
+  var_0 = getEnt("chair_guy", "script_noteworthy");
+  var_1 = getEnt("chair_guy_origin", "script_noteworthy");
   var_0.animname = "generic";
   var_0 maps\_utility::gun_remove();
   var_0 teleport(var_1.origin);
@@ -1931,10 +1931,10 @@ chair_guy_setup() {
 
 chair_guy_think(var_0) {
   var_1 = self;
-  var_2 = getent("in_front_of_armory", "targetname");
+  var_2 = getEnt("in_front_of_armory", "targetname");
   var_2 thread check_in_front_of_armory();
   var_3 = 0;
-  var_4 = getent("chair_guy_origin", "script_noteworthy");
+  var_4 = getEnt("chair_guy_origin", "script_noteworthy");
   var_5 = maps\_utility::spawn_anim_model("chair", var_4.origin);
   var_4 thread maps\_anim::anim_single_solo(var_5, "chair_counting");
 
@@ -1997,7 +1997,7 @@ check_in_front_of_armory() {
 }
 
 glowing_rope() {
-  var_0 = getent("glowing_rope", "targetname");
+  var_0 = getEnt("glowing_rope", "targetname");
   var_0 hide();
 
   for(;;) {
@@ -2445,8 +2445,8 @@ blink_primary_lights() {
 }
 
 melon_think() {
-  var_0 = getent("scr_watermelon", "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt("scr_watermelon", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1 hide();
   var_1 notsolid();
   level waittill("show_melon");
@@ -2585,7 +2585,7 @@ frag_trigger_think(var_0, var_1, var_2) {
   var_1 enablegrenadetouchdamage();
 
   if(isDefined(var_1.target)) {
-    var_1.light = getent(var_1.target, "targetname");
+    var_1.light = getEnt(var_1.target, "targetname");
   }
 
   if(isDefined(var_1.light)) {
@@ -2648,7 +2648,7 @@ flicker_on() {
 }
 
 in_pit() {
-  var_0 = getent("safety_pit", "targetname");
+  var_0 = getEnt("safety_pit", "targetname");
 
   if(!level.player istouching(var_0)) {
     return 0;
@@ -2698,7 +2698,7 @@ walk_to_debrief(var_0) {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_1[var_2] maps\_utility::set_generic_run_anim("jog", 1);
     var_1[var_2] maps\_utility::ai_ignore_everything();
-    var_1[var_2] maps\_utility::anim_stopanimscripted();
+    var_1[var_2] maps\_utility::anim_stopanimScripted();
     var_0 thread maps\_anim::anim_reach_and_idle_solo(var_1[var_2], "debrief_idle_s" + (var_2 + 1) + "_b", "debrief_idle_s" + (var_2 + 1) + "_b", "stop_loop");
     wait 1;
   }
@@ -2789,7 +2789,7 @@ gaz_animation(var_0, var_1, var_2, var_3) {
   level.waters notify("gaz_animation");
   level.waters endon("gaz_animation");
   level.waters.ref_node notify("stop_loop");
-  level.waters stopanimscripted();
+  level.waters stopanimScripted();
   level.waters.ref_node maps\_anim::anim_single_solo(level.waters, var_0);
 
   if(isDefined(var_2)) {

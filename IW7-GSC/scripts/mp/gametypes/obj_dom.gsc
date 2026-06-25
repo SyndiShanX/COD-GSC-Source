@@ -6,7 +6,7 @@
 func_591D(var_0) {
   var_1 = level.objectives[var_0];
   if(isDefined(var_1.target)) {
-    var_2[0] = getent(var_1.target, "targetname");
+    var_2[0] = getEnt(var_1.target, "targetname");
   } else {
     var_0[0] = spawn("script_model", var_2.origin);
     var_2[0].angles = var_1.angles;

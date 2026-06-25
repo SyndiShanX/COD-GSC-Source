@@ -10,7 +10,7 @@ retreat_spawn_functions() {
   maps\_utility::array_spawn_function_targetname("tower_nh90_guys", ::tower_nh90_guys);
   maps\_utility::array_spawn_function_noteworthy("elias_street_dead_runners", ::elias_street_dead_runners);
   maps\_utility::array_spawn_function_targetname("tower_courtyard_advancing_mid_flooders", ::tower_courtyard_advancing_mid_flooders);
-  getent("elias_street_artemis", "targetname") maps\_utility::add_spawn_function(::elias_street_artemis);
+  getEnt("elias_street_artemis", "targetname") maps\_utility::add_spawn_function(::elias_street_artemis);
   maps\_utility::array_spawn_function_targetname("tower_retreat_hind", ::tower_retreat_hind);
   maps\_utility::array_spawn_function_noteworthy("retreat_hovercraft", ::retreat_hovercraft);
 }
@@ -79,7 +79,7 @@ tower_retreat_sequence() {
     common_scripts\utility::flag_set("FLAG_start_retreat_paths");
   }
 
-  maps\homecoming_util::notify_trigger(getent("player_leaving_tower_trig_3", "targetname"));
+  maps\homecoming_util::notify_trigger(getEnt("player_leaving_tower_trig_3", "targetname"));
   thread maps\homecoming_util::kill_over_time(maps\homecoming_util::get_ai_array("tower_courtyard_enemies"), 0.5, 2);
   level.hesh maps\homecoming_util::ignore_everything();
   thread tower_mortar_allow_target_ai();
@@ -129,7 +129,7 @@ tower_dialogue() {
 }
 
 tower_sprinker_screeneffect() {
-  var_0 = getent("tower_sprinkler_trigger", "targetname");
+  var_0 = getEnt("tower_sprinkler_trigger", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -150,9 +150,9 @@ tower_sprinker_screeneffect() {
 
 tower_entrance_door() {
   thread maps\homecoming_util::function_trigger_switch("tower_mid_trigger", "tower_entrance_trigger", ::tower_entrance_door_close_true, ::tower_entrance_door_close_false, "tower_garage_door_closed");
-  var_0 = getent("trench_tower_garage_entrance", "targetname");
+  var_0 = getEnt("trench_tower_garage_entrance", "targetname");
   var_1 = var_0.origin;
-  var_0 moveto(var_0.origin + (0, 0, 75), 1, 0.5, 0);
+  var_0 moveTo(var_0.origin + (0, 0, 75), 1, 0.5, 0);
   var_0 connectpaths();
   common_scripts\utility::exploder("tower_entrance_smoke");
   common_scripts\utility::flag_wait_any("FLAG_tower_entrance_enemies_dead", "TRIGFLAG_player_entering_tower");
@@ -160,7 +160,7 @@ tower_entrance_door() {
   common_scripts\utility::exploder("tower_entrance_smoke_light");
   common_scripts\utility::flag_wait("FLAG_allow_garage_door_close");
   var_2 = cos(65);
-  var_3 = getent("player_in_tower_check", "targetname");
+  var_3 = getEnt("player_in_tower_check", "targetname");
 
   for(;;) {
     if(common_scripts\utility::flag("FLAG_allow_garage_door_close")) {
@@ -179,8 +179,8 @@ tower_entrance_door() {
 
   maps\_utility::stop_exploder("tower_entrance_smoke_light");
   var_0.origin = var_1;
-  var_0 disconnectpaths();
-  var_4 = common_scripts\utility::getstruct("hesh_inside_tower_struct", "targetname");
+  var_0 disconnectPaths();
+  var_4 = common_scripts\utility::getStruct("hesh_inside_tower_struct", "targetname");
 
   if(!common_scripts\utility::flag("FLAG_hesh_inside_tower")) {
     level.hesh forceteleport(var_4.origin, var_4.angles);
@@ -210,7 +210,7 @@ tower_entrance_attackers() {
   }
 
   level.tower_entrance_respawners = var_0;
-  var_4 = getent("tower_attackers_target", "targetname");
+  var_4 = getEnt("tower_attackers_target", "targetname");
   var_5 = maps\_utility::array_spawn(getEntArray("tower_entrance_attackers", "targetname"));
 
   foreach(var_7 in var_5) {
@@ -218,7 +218,7 @@ tower_entrance_attackers() {
   }
 
   common_scripts\utility::flag_wait("TRIGFLAG_kill_tower_attackers");
-  var_9 = getent("tower_entrance_goalvolume", "targetname");
+  var_9 = getEnt("tower_entrance_goalvolume", "targetname");
   var_5 = maps\_utility::array_removedead_or_dying(var_5);
 
   foreach(var_7 in var_5) {
@@ -288,13 +288,13 @@ tower_hesh_wave() {
   level.hesh maps\homecoming_util::disable_arrivals_and_exits(0);
   level.hesh maps\homecoming_util::ignore_everything();
   common_scripts\utility::flag_wait("FLAG_start_retreat_friendly_movement");
-  var_1 = common_scripts\utility::getstruct("tower_hesh_wavespot", "targetname");
+  var_1 = common_scripts\utility::getStruct("tower_hesh_wavespot", "targetname");
   var_1 maps\_anim::anim_reach_solo(level.hesh, "tower_hesh_wave");
   common_scripts\utility::flag_set("FLAG_hesh_retreat_wave_dialog");
   var_1 maps\_anim::anim_single_solo(level.hesh, "tower_hesh_wave");
   level.hesh maps\_utility::enable_ai_color();
   level.hesh maps\homecoming_util::clear_ignore_everything();
-  maps\homecoming_util::notify_trigger(getent("post_explosion_movetrig_start", "script_noteworthy"));
+  maps\homecoming_util::notify_trigger(getEnt("post_explosion_movetrig_start", "script_noteworthy"));
 }
 
 tower_retreaters() {
@@ -333,10 +333,10 @@ tower_retreaters() {
 
 tower_hesh_help_wounded() {
   common_scripts\utility::flag_wait_any("FLAG_tower_entrance_enemies_dead", "TRIGFLAG_tower_entrance");
-  var_0 = getent("tower_inside_wounded_hesh", "targetname");
+  var_0 = getEnt("tower_inside_wounded_hesh", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
   var_1.animname = "wounded";
-  var_2 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 thread maps\_anim::anim_generic_loop(var_1, "tower_pickup_wounded_idle");
   var_3 = getnode("hesh_retreat_path", "targetname");
   level.hesh thread maps\_utility::follow_path_and_animate(var_3, 0);
@@ -352,9 +352,9 @@ tower_hesh_help_wounded() {
   }
 
   var_2 notify("stop_loop");
-  var_1 maps\_utility::anim_stopanimscripted();
+  var_1 maps\_utility::anim_stopanimScripted();
   var_2 maps\_anim::anim_generic_run(var_1, "tower_pickup_wounded");
-  var_5 = common_scripts\utility::getstruct(var_0.script_linkto, "script_linkname");
+  var_5 = common_scripts\utility::getStruct(var_0.script_linkto, "script_linkname");
   var_1 thread maps\_utility::follow_path_and_animate(var_5, 0);
   var_1 maps\homecoming_util::ignore_everything();
 }
@@ -374,7 +374,7 @@ tower_pickup_b() {
 
     if(var_5 maps\homecoming_util::parameters_check("wounded")) {
       var_2 = var_6;
-      var_1 = common_scripts\utility::getstruct(var_5.target, "targetname");
+      var_1 = common_scripts\utility::getStruct(var_5.target, "targetname");
       level.tower_retreaters = common_scripts\utility::array_add(level.tower_retreaters, var_6);
       continue;
     }
@@ -406,7 +406,7 @@ tower_pickup_b() {
 
 tower_dying_guy() {
   common_scripts\utility::flag_wait("TRIGFLAG_tower_entrance");
-  var_0 = getent("tower_dying_guy", "targetname");
+  var_0 = getEnt("tower_dying_guy", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
   var_1.animname = "cougher";
   var_1 maps\_utility::magic_bullet_shield();
@@ -429,17 +429,17 @@ tower_dying_guy() {
 
 tower_firefighter() {
   common_scripts\utility::flag_wait("TRIGFLAG_tower_entrance");
-  var_0 = getent("tower_firefighter", "targetname");
+  var_0 = getEnt("tower_firefighter", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
   var_1 maps\_utility::magic_bullet_shield();
   var_1.animname = "firefighter";
   var_2 = maps\_utility::spawn_anim_model("extinguisher");
   var_3 = [var_2, var_1];
-  var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_4 thread maps\_anim::anim_loop(var_3, "extinguisher_loop");
   var_2 thread maps\homecoming_util::playloopingfx("extinguisher_spray", 0.1, undefined, "tag_fx", 1);
   var_5 = spawn("script_origin", var_2.origin);
-  var_5 linkto(var_2);
+  var_5 linkTo(var_2);
   var_5 thread common_scripts\utility::play_loop_sound_on_entity("scn_home_fire_extinguisher");
   common_scripts\utility::flag_wait("FLAG_start_retreat_paths");
   var_2 notify("stop_looping_fx");
@@ -456,10 +456,10 @@ tower_firefighter() {
 tower_explosion_guy() {
   maps\_utility::add_wait(maps\homecoming_util::waittill_trigger, "tower_explosion_guy_trigger");
   maps\_utility::do_wait_any();
-  var_0 = getent("tower_explosion_guy", "script_noteworthy");
+  var_0 = getEnt("tower_explosion_guy", "script_noteworthy");
   var_1 = var_0 maps\homecoming_util::get_linked_struct();
   var_2 = var_0 maps\_utility::spawn_ai();
-  var_3 = common_scripts\utility::getstruct("tower_door_explosion_spot", "targetname");
+  var_3 = common_scripts\utility::getStruct("tower_door_explosion_spot", "targetname");
   var_4 = anglesToForward(var_3.angles);
   playFX(common_scripts\utility::getfx("vfx_hallway_explosion"), var_3.origin, var_4);
   var_5 = getEntArray("tower_interior_doors", "targetname");
@@ -468,11 +468,11 @@ tower_explosion_guy() {
     var_7.originalangles = var_7.angles;
 
     if(var_7 maps\homecoming_util::parameters_check("left")) {
-      var_7 rotateto(var_7.angles + (0, -95, 0), 0.15);
+      var_7 rotateTo(var_7.angles + (0, -95, 0), 0.15);
       continue;
     }
 
-    var_7 rotateto(var_7.angles + (0, 90, 0), 0.15);
+    var_7 rotateTo(var_7.angles + (0, 90, 0), 0.15);
   }
 
   thread common_scripts\utility::play_sound_in_space("artillery_explosion", var_1.origin);
@@ -488,7 +488,7 @@ tower_explosion_guy() {
       var_10 = var_7.originalangles + (0, randomintrange(0, 10), 0);
     }
 
-    var_7 rotateto(var_10, randomfloatrange(0.75, 1), 0, 0.5);
+    var_7 rotateTo(var_10, randomfloatrange(0.75, 1), 0, 0.5);
   }
 
   wait 0.85;
@@ -498,13 +498,13 @@ tower_explosion_guy() {
 }
 
 tower_broken_support() {
-  var_0 = getent("tower_broken_support", "targetname");
+  var_0 = getEnt("tower_broken_support", "targetname");
   common_scripts\utility::flag_wait("TRIGFLAG_player_entering_tower");
   earthquake(0.3, 0.8, var_0.origin, 800);
   wait 0.15;
-  var_0 rotateto(var_0.angles + (0, 0, 17), 0.65, 0.6);
+  var_0 rotateTo(var_0.angles + (0, 0, 17), 0.65, 0.6);
   var_0 waittill("movedone");
-  var_0 rotateto(var_0.angles + (0, 0, -5), 0.65, 0.6);
+  var_0 rotateTo(var_0.angles + (0, 0, -5), 0.65, 0.6);
 }
 
 tower_inside_hurt_guys() {
@@ -574,14 +574,14 @@ tower_retreat_hind() {
 tower_nh90_guys() {
   self endon("death");
   self waittill("jumpedout");
-  var_0 = getent("tower_front_center_goalvolume", "targetname");
+  var_0 = getEnt("tower_front_center_goalvolume", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
 tower_retreat_mortars() {
   level endon("stop_tower_retreat_mortars");
   var_0 = level.tower_courtyard_mortars;
-  var_1 = getent("tower_courtyard_mortar_volume", "targetname");
+  var_1 = getEnt("tower_courtyard_mortar_volume", "targetname");
   var_2 = cos(50);
   var_3 = cos(35);
   var_4 = squared(200);
@@ -706,7 +706,7 @@ tower_retreat_mortars_hit(var_0) {
 }
 
 tower_retreat_mortar_kill_player() {
-  var_0 = getent("tower_courtyard_mortar_volume", "targetname");
+  var_0 = getEnt("tower_courtyard_mortar_volume", "targetname");
   common_scripts\utility::flag_wait("TRIGFLAG_player_leaving_tower_parking_area");
   maps\_utility::add_wait(maps\homecoming_util::waittill_trigger, "elias_street_trig_1");
   maps\_utility::add_wait(maps\_utility::timeout, 10);
@@ -757,7 +757,7 @@ tower_vista_retreat_tank() {
   self.firetime = [];
   self.firetime[0] = 0.5;
   self.firetime[1] = 1;
-  var_0 = common_scripts\utility::getstruct(self.script_linkto, "script_linkname");
+  var_0 = common_scripts\utility::getStruct(self.script_linkto, "script_linkname");
   self setturrettargetvec(var_0.origin);
   common_scripts\utility::flag_wait("FLAG_player_leaving_tower");
   maps\_vehicle::gopath(self);
@@ -769,16 +769,16 @@ tower_ally_retreaters_wave1() {
 
   foreach(var_2 in var_0) {
     var_3 = var_2 maps\_utility::spawn_ai();
-    var_4 = common_scripts\utility::getstruct(var_2.target, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_2.target, "targetname");
     var_3 thread maps\homecoming_util::move_on_path(var_4, 1);
     common_scripts\utility::waitframe();
   }
 }
 
 tower_courtyard_advancing_enemies() {
-  var_0 = getent("tower_exit_enemy_goalvolume_mid", "targetname");
-  var_1 = getent("tower_front_center_goalvolume", "targetname");
-  var_2 = getent("tower_courtyard_front_goalvolume", "targetname");
+  var_0 = getEnt("tower_exit_enemy_goalvolume_mid", "targetname");
+  var_1 = getEnt("tower_front_center_goalvolume", "targetname");
+  var_2 = getEnt("tower_courtyard_front_goalvolume", "targetname");
   level.tower_enemies_volume = var_0;
   common_scripts\utility::flag_wait("TRIGFLAG_start_tower_advancing_enemies");
   maps\_spawner::flood_spawner_scripted(getEntArray("tower_courtyard_advancing_mid_flooders", "targetname"));
@@ -913,15 +913,15 @@ elias_house_window_explosion() {
 
 green_house_ladder() {
   maps\homecoming_util::waittill_trigger("green_house_ladder_guy_trig");
-  var_0 = getent("green_house_ladder_spawner", "targetname");
+  var_0 = getEnt("green_house_ladder_spawner", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
-  var_2 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 maps\_anim::anim_generic_reach(var_1, "ladder_climbon");
   var_2 thread maps\_anim::anim_generic(var_1, "ladder_climbon");
   var_3 = var_0 maps\_utility::spawn_ai();
   var_3.animname = "generic";
   var_3 hide();
-  var_4 = common_scripts\utility::getstruct(var_2.target, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_2.target, "targetname");
   var_4 thread maps\_anim::anim_generic(var_3, "ladder_slide");
   common_scripts\utility::waitframe();
   var_3 setanimtime(maps\_utility::getanim_generic("ladder_slide"), 0.17);
@@ -939,9 +939,9 @@ green_house_ladder() {
   wait 1;
   thread maps\_anim::anim_set_rate_single(var_3, "ladder_slide", 1);
   wait 1.15;
-  var_3 stopanimscripted();
+  var_3 stopanimScripted();
   var_3 endon("death");
-  var_5 = common_scripts\utility::getstruct(var_3.script_linkto, "script_linkname");
+  var_5 = common_scripts\utility::getStruct(var_3.script_linkto, "script_linkname");
   var_3 thread maps\_utility::follow_path_and_animate(var_5, 0);
 }
 
@@ -988,18 +988,18 @@ elias_street_dead_runners() {
 dog_reunite() {
   common_scripts\utility::flag_init("dog_at_animspot");
   common_scripts\utility::flag_init("hesh_at_animspot");
-  var_0 = getent("dog_reunite_marine", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
-  var_2 = common_scripts\utility::getstruct("dog_reunite_spot", "targetname");
+  var_0 = getEnt("dog_reunite_marine", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStruct("dog_reunite_spot", "targetname");
   common_scripts\utility::flag_wait("TRIGFLAG_player_leaving_tower_parking_area");
   var_3 = var_0 maps\_utility::spawn_ai();
   level.dog = maps\homecoming_util::dog_spawn();
   var_2 thread maps\_anim::anim_loop_solo(level.dog, "attackidle_bark");
   level.dog thread dog_bark(1);
   maps\homecoming_util::waittill_trigger("elias_street_start_dog_reunite");
-  var_4 = common_scripts\utility::getstruct("dog_reunite_spot_2", "targetname");
+  var_4 = common_scripts\utility::getStruct("dog_reunite_spot_2", "targetname");
   thread dog_reunite_hesh(var_4);
-  var_5 = getent("dog_reunite_trigger", "targetname");
+  var_5 = getEnt("dog_reunite_trigger", "targetname");
 
   for(;;) {
     var_5 waittill("trigger", var_6);
@@ -1011,12 +1011,12 @@ dog_reunite() {
 
   level.dog notify("stop_barking");
   var_2 notify("stop_loop");
-  level.dog stopanimscripted();
+  level.dog stopanimScripted();
 }
 
 dog_reunite_hesh(var_0) {
   level.hesh notify("stop_path");
-  var_1 = common_scripts\utility::getstruct("hesh_dog_reunite_goal_1", "targetname");
+  var_1 = common_scripts\utility::getStruct("hesh_dog_reunite_goal_1", "targetname");
   level.hesh setgoalpos(var_1.origin);
   level.hesh.goalradius = 56;
   level.hesh maps\_utility::enable_sprint();
@@ -1025,7 +1025,7 @@ dog_reunite_hesh(var_0) {
   level.hesh maps\_utility::walkdist_zero();
   level.hesh waittill("goal");
   common_scripts\utility::flag_set("FLAG_dog_reunite_started");
-  var_2 = common_scripts\utility::getstruct("dog_reunite_hesh_corner", "targetname");
+  var_2 = common_scripts\utility::getStruct("dog_reunite_hesh_corner", "targetname");
   var_2 maps\_anim::anim_reach_solo(level.hesh, "hesh_dog_reunite_corner");
   common_scripts\utility::flag_set("FLAG_hesh_at_riley");
   var_2 thread maps\_anim::anim_generic_gravity(level.hesh, "hesh_dog_reunite_corner");
@@ -1093,7 +1093,7 @@ elias_street_helicopter_flyover() {
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("elias_street_unload_chopper");
   var_0 setanim(%nh90_left_door_open);
   var_0 setanim(%nh90_right_door_open);
-  var_1 = getent("helicopter_check_volume", "targetname");
+  var_1 = getEnt("helicopter_check_volume", "targetname");
   var_2 = getEntArray("elias_street_flyover_choppers", "targetname");
 
   for(;;) {
@@ -1156,7 +1156,7 @@ elias_street_flee_guys() {
   var_1.ignoreme = 1;
   var_1 maps\_utility::magic_bullet_shield();
   var_1 maps\_utility::pathrandompercent_zero();
-  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
 
   if(var_0 maps\homecoming_util::noteworthy_check("shoot_behind")) {
     var_1 maps\_utility::set_generic_deathanim("run_death_roll");
@@ -1164,7 +1164,7 @@ elias_street_flee_guys() {
     var_2 thread maps\_anim::anim_generic(var_1, "flee_run_shoot_behind");
     wait 1.3;
     playFXOnTag(common_scripts\utility::getfx("headshot_blood"), var_1, "j_head");
-    var_1 stopanimscripted();
+    var_1 stopanimScripted();
     var_1 maps\_utility::stop_magic_bullet_shield();
     var_1 maps\_utility::die();
   } else {
@@ -1201,7 +1201,7 @@ elias_street_flee_guys_enemies() {
 
 elias_street_flee_guys_enemies_fakeshots(var_0) {
   level endon("stop_fake_street_shots");
-  var_1 = common_scripts\utility::getstruct("elias_street_shoot_spot", "targetname");
+  var_1 = common_scripts\utility::getStruct("elias_street_shoot_spot", "targetname");
   var_2 = ["sc2010", "honeybadger"];
 
   for(;;) {
@@ -1222,8 +1222,8 @@ elias_street_flee_guys_enemies_fakeshots(var_0) {
 #using_animtree("generic_human");
 
 elias_street_dragging_wounded() {
-  var_0 = getent("elias_street_dragger_spawner", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.script_linkto, "script_linkname");
+  var_0 = getEnt("elias_street_dragger_spawner", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.script_linkto, "script_linkname");
   var_2 = var_0 maps\_utility::spawn_ai();
   var_2.animname = "dragger";
   var_2.deathanim = % stand_death_tumbleback;
@@ -1262,17 +1262,17 @@ elias_house_sequence() {
   thread maps\homecoming_util::create_dead_guys("house_dead_bodies", undefined, "FLAG_elias_house_attack_began");
   thread elias_house_dialogue();
   thread elias_house_dog_logic();
-  var_0 = getent("elias_house_garage_ai_blocker", "targetname");
+  var_0 = getEnt("elias_house_garage_ai_blocker", "targetname");
   var_0 connectpaths();
   var_0 maps\_utility::hide_entity();
-  var_1 = common_scripts\utility::getstruct("elias_garage_hesh_spot", "targetname");
+  var_1 = common_scripts\utility::getStruct("elias_garage_hesh_spot", "targetname");
   var_1 maps\_anim::anim_reach_solo(level.hesh, "elias_garage_lift");
   common_scripts\utility::flag_set("FLAG_allow_dog_scratch");
   thread elias_street_advancing_enemies();
-  var_2 = getent("elias_house_garage_door", "targetname");
+  var_2 = getEnt("elias_house_garage_door", "targetname");
   level.garagedoor = var_2;
   var_1 thread maps\_anim::anim_single_solo(level.hesh, "elias_garage_lift");
-  getent("house_downstairs_effects_on", "script_noteworthy") notify("trigger");
+  getEnt("house_downstairs_effects_on", "script_noteworthy") notify("trigger");
   thread maps\homecoming_util::function_trigger_switch("house_fx_firstfloor_on", "house_fx_secondfloor_on", ::house_firstfloor_exploder, ::house_firstfloor_exploder_off, "elias_house_exploder_switch_off", 1);
   thread maps\homecoming_util::function_trigger_switch("house_fx_secondfloor_on", "house_fx_firstfloor_on", ::house_secondfloor_exploder, ::house_secondfloor_exploder_off, "elias_house_exploder_switch_off");
   maps\_utility::delaythread(1.1, common_scripts\utility::flag_set, "FLAG_dont_allow_dog_scratch");
@@ -1288,30 +1288,30 @@ elias_house_sequence() {
   common_scripts\utility::flag_set("FLAG_garage_door_open");
   maps\homecoming_util::waittill_trigger("elias_house_garage_trig");
   level notify("player_in_elias_garage");
-  var_4 = getent("elias_house_bottomfloor_check", "targetname");
+  var_4 = getEnt("elias_house_bottomfloor_check", "targetname");
 
   while(!level.dog istouching(var_4)) {
     wait 0.05;
   }
 
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_0 maps\_utility::show_entity();
 
   while(!level.player istouching(var_4)) {
     wait 0.05;
   }
 
-  getent("elias_house_garage_player_blocker", "targetname") maps\_utility::show_entity();
+  getEnt("elias_house_garage_player_blocker", "targetname") maps\_utility::show_entity();
   var_1 notify("stop_loop");
-  level.hesh maps\_utility::anim_stopanimscripted();
+  level.hesh maps\_utility::anim_stopanimScripted();
   var_1 thread maps\_anim::anim_single_solo_run(level.hesh, "elias_garage_thru");
   level.hesh.garagetag = "j_wrist_ri";
   var_2 thread maps\_utility::play_sound_on_entity("scn_home_garage_close");
   wait 1.6;
   level notify("stop_elias_garage_door_logic");
   var_5 = (var_3[0], var_3[1], 16);
-  var_2 moveto(var_5, 0.2);
-  var_2 disconnectpaths();
+  var_2 moveTo(var_5, 0.2);
+  var_2 disconnectPaths();
   maps\_utility::stop_exploder("elias_entrance_smoke");
   level.hesh thread maps\homecoming_util::move_to_goal("movespot_elias_house_2");
   thread maps\_utility::autosave_by_name("elias_house");
@@ -1387,7 +1387,7 @@ elias_house_dog_logic() {
   common_scripts\utility::flag_wait("FLAG_allow_dog_scratch");
 
   if(!common_scripts\utility::flag("FLAG_dont_allow_dog_scratch")) {
-    var_0 = common_scripts\utility::getstruct("garage_dog_scratch_spot", "targetname");
+    var_0 = common_scripts\utility::getStruct("garage_dog_scratch_spot", "targetname");
     level maps\_utility::add_wait(common_scripts\utility::flag_wait, "FLAG_garage_door_open");
     var_0 maps\_utility::add_wait(maps\_anim::anim_reach_solo, level.dog, "dog_scratch_door");
     maps\_utility::do_wait_any();
@@ -1403,7 +1403,7 @@ elias_house_dog_logic() {
 
   level.dog thread dog_bark();
   level.dog thread maps\_utility::notify_delay("stop_barking", 2);
-  var_1 = common_scripts\utility::getstruct("garage_dog_path", "targetname");
+  var_1 = common_scripts\utility::getStruct("garage_dog_path", "targetname");
   level.dog thread maps\_utility::follow_path_and_animate(var_1, 0);
   var_2 = getnode("house_bottom_stairs_dog_node", "targetname");
   common_scripts\utility::flag_wait("FLAG_dog_allow_teleport");
@@ -1440,7 +1440,7 @@ elias_house_dog_logic() {
   common_scripts\utility::flag_wait("TRIGFLAG_player_leaving_elias_garage");
   level.dog thread dog_bark();
   level.dog thread maps\_utility::notify_delay("stop_barking", 2);
-  var_5 = common_scripts\utility::getstruct("house_dog_hop1", "targetname");
+  var_5 = common_scripts\utility::getStruct("house_dog_hop1", "targetname");
   var_5 maps\_anim::anim_reach_solo(level.dog, "dog_hop_1");
   level.dog thread dog_whine();
   var_5 thread maps\_anim::anim_loop_solo(level.dog, "casualidle");
@@ -1463,7 +1463,7 @@ elias_house_dog_logic() {
   wait 2;
   level.dog thread dog_bark();
   var_5 notify("stop_loop");
-  level.dog maps\_utility::anim_stopanimscripted();
+  level.dog maps\_utility::anim_stopanimScripted();
   level.dog thread elias_house_heroes_delete();
 }
 
@@ -1472,9 +1472,9 @@ elias_house_dog_logic() {
 elias_street_advancing_enemies() {
   common_scripts\utility::flag_wait("TRIGFLAG_player_end_elias_street");
   maps\_spawner::flood_spawner_scripted(getEntArray("elias_street_advancing_enemy_spawner", "targetname"));
-  var_0 = getent("advancing_enemies_accuracy_high", "targetname");
+  var_0 = getEnt("advancing_enemies_accuracy_high", "targetname");
   var_0 common_scripts\utility::trigger_on();
-  var_1 = getent("advancing_enemies_accuracy_low", "targetname");
+  var_1 = getEnt("advancing_enemies_accuracy_low", "targetname");
   var_1 common_scripts\utility::trigger_on();
   thread maps\homecoming_util::function_trigger_switch(var_0, var_1, ::elias_street_advancing_accuracy_high, ::elias_street_advancing_accuracy_low, "FLAG_stop_elias_street_ambient_retreaters");
   var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("elias_street_enemy_heli_2");
@@ -1518,11 +1518,11 @@ elias_street_advancing_drones() {
 }
 
 elias_house_lift_rubble_scene() {
-  var_0 = common_scripts\utility::getstruct("elias_house_rubble_lift", "targetname");
-  var_1 = getent("beam_player_blocker", "targetname");
-  var_2 = getent("falling_beam", "targetname");
+  var_0 = common_scripts\utility::getStruct("elias_house_rubble_lift", "targetname");
+  var_1 = getEnt("beam_player_blocker", "targetname");
+  var_2 = getEnt("falling_beam", "targetname");
   var_3 = maps\_utility::spawn_anim_model("blocker");
-  var_2 linkto(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_4 = common_scripts\utility::getStructArray("beam_fx_spot", "script_noteworthy");
   var_5 = [];
 
@@ -1530,7 +1530,7 @@ elias_house_lift_rubble_scene() {
     var_8 = common_scripts\utility::spawn_tag_origin();
     var_8.origin = var_7.origin;
     var_8.angles = var_7.angles;
-    var_8 linkto(var_2);
+    var_8 linkTo(var_2);
     var_8 thread maps\homecoming_util::playloopingfx("beam_fire", 0.05, undefined, "tag_origin", 1);
     var_5 = common_scripts\utility::array_add(var_5, var_8);
   }
@@ -1574,8 +1574,8 @@ elias_house_lift_rubble_scene() {
   thread elias_house_lift_rubble_collapse();
   common_scripts\utility::flag_set("FLAG_hesh_dropped_beam");
   common_scripts\utility::trigger_on("beam_hurt_trigger", "targetname");
-  getent("house_downstairs_effects_off", "script_noteworthy") notify("trigger");
-  getent("house_topfloor_effects_on", "script_noteworthy") notify("trigger");
+  getEnt("house_downstairs_effects_off", "script_noteworthy") notify("trigger");
+  getEnt("house_topfloor_effects_on", "script_noteworthy") notify("trigger");
   level.hesh thread elias_house_heroes_delete();
   common_scripts\utility::flag_wait("FLAG_elias_house_attack_began");
   maps\_utility::stop_exploder("beam_drop_fire");
@@ -1591,7 +1591,7 @@ elias_house_lift_rubble_collapse() {
   wait 0.2;
   level.player notify("stop_earthquake_loop");
   earthquake(0.6, 2.5, var_0, 50000);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   common_scripts\utility::exploder("elias_house_beam_collapse");
   common_scripts\utility::exploder("beam_drop_fire");
   level.player shellshock("homecoming_attack", 3);
@@ -1615,7 +1615,7 @@ elias_house_lift_prone_hint(var_0) {
 }
 
 elias_house_heroes_delete() {
-  var_0 = common_scripts\utility::getstruct("elias_house_blocker_delete_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("elias_house_blocker_delete_spot", "targetname");
   maps\_utility::follow_path_and_animate(var_0, 0);
   maps\homecoming_util::delete_safe();
 }
@@ -1627,9 +1627,9 @@ elias_house_attack() {
   attack_sound_setup();
   common_scripts\utility::flag_wait("FLAG_start_elias_house_attack");
   thread maps\homecoming_recruits::recruits_dog_spawn();
-  var_0 = common_scripts\utility::getstruct("elias_house_attack_sequence", "targetname");
-  var_1 = getent("house_attack_enemy", "targetname");
-  var_2 = getent("start_house_attack_trig", "targetname");
+  var_0 = common_scripts\utility::getStruct("elias_house_attack_sequence", "targetname");
+  var_1 = getEnt("house_attack_enemy", "targetname");
+  var_2 = getEnt("start_house_attack_trig", "targetname");
 
   for(;;) {
     wait 0.05;
@@ -1671,7 +1671,7 @@ elias_house_attack() {
   level.attacker = var_4;
   level.knife = spawn("script_model", var_4.origin);
   level.knife setModel("weapon_parabolic_knife");
-  level.knife linkto(var_4, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  level.knife linkTo(var_4, "tag_inhand", (0, 0, 0), (0, 0, 0));
   var_4 thread maps\_utility::play_sound_on_entity("homcom_fs4_grabthrow");
   var_5 = maps\homecoming_util::dog_spawn();
   var_5 maps\_utility::delaythread(6.0, ::dog_bark, 0, 0.1, 0.2);
@@ -1685,7 +1685,7 @@ elias_house_attack() {
   var_9 = common_scripts\utility::spawn_tag_origin();
   var_9.origin = var_7.origin;
   var_9.angles = var_7.angles;
-  var_9 linkto(var_7, "tag_player", (0, 0, 0), (0, 0, 0));
+  var_9 linkTo(var_7, "tag_player", (0, 0, 0), (0, 0, 0));
   maps\homecoming_util::cinematicmode_on(1);
 
   if(level.player ismeleeing() || level.player isthrowinggrenade()) {
@@ -1719,7 +1719,7 @@ elias_house_attack() {
   var_8 = common_scripts\utility::array_remove(var_8, var_5);
   elias_house_attack_knife_think(var_0, var_8);
   maps\_utility::delaythread(0.2, maps\_art::dof_disable_script, 1);
-  var_14 = getent("house_attack_hesh", "targetname");
+  var_14 = getEnt("house_attack_hesh", "targetname");
   var_15 = var_14 maps\_utility::spawn_ai();
   level.hesh = var_15;
   var_15.animname = "hesh";
@@ -1810,10 +1810,10 @@ elias_house_attack_hit_ground() {
   var_0 = maps\_hud_util::create_client_overlay("black", 0, level.player);
   var_0 thread maps\_hud_util::fade_over_time(0.4, 0.15);
   wait 0.3;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   var_0 thread maps\_hud_util::fade_over_time(0, 0.15);
   wait 0.4;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 1.2;
   wait 0.65;
   setslowmotion(0.2, 1, 0.4);
@@ -1897,7 +1897,7 @@ elias_house_attack_knife_fail_killplayer(var_0, var_1) {
   var_3 = anglesToForward(level.knife gettagangles("TAG_FX"));
   playFXOnTag(common_scripts\utility::getfx("player_stabbed"), level.knife, "tag_fx");
   wait 0.05;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player dodamage(999999, level.player.origin);
   wait 0.5;
   missionfailed();
@@ -2086,13 +2086,13 @@ elias_house_attack_door() {
   }
 
   foreach(var_4 in var_2) {
-    var_4 linkto(var_1);
+    var_4 linkTo(var_1);
   }
 
   wait 0.7;
   var_8 = var_1.angles + (0, -50, 0);
   var_9 = 1.5;
-  var_1 rotateto(var_8, 1.5, 0, var_9 / 2);
+  var_1 rotateTo(var_8, 1.5, 0, var_9 / 2);
 }
 
 elias_house_attacker_breath(var_0) {
@@ -2123,7 +2123,7 @@ elias_house_attack_pangles_check() {
 elias_house_attack_wall() {
   common_scripts\utility::flag_wait("FLAG_house_attack_through_wall");
   common_scripts\utility::exploder("house_wall_breach");
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }
 
 elias_house_attack_roof_explosion() {
@@ -2144,8 +2144,8 @@ elias_house_attack_roof_explosion() {
   level.player thread maps\_gameskill::grenade_dirt_on_screen("right");
   earthquake(0.45, 1, var_0, 500);
   maps\_utility::stop_exploder("house_ceiling_breach");
-  getent("elias_house_roof_dmg", "targetname") show();
-  getent("elias_house_roof_intact", "targetname") delete();
+  getEnt("elias_house_roof_dmg", "targetname") show();
+  getEnt("elias_house_roof_intact", "targetname") delete();
 }
 
 attack_sound_setup() {

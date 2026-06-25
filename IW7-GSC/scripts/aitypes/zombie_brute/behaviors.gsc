@@ -151,7 +151,7 @@ candorangeattack(var_0) {
   var_1 = anglesToForward(self.angles);
   var_2 = self.enemy.origin - self.origin;
   var_2 = (var_2[0], var_2[1], 0);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
 
   if(vectordot(var_1, var_2) < 0) {
     return anim.failure;
@@ -237,7 +237,7 @@ process_rangeattack(var_0) {
   var_1 = anglesToForward(self.angles);
   var_2 = self.enemy.origin - self.origin;
   var_2 = (var_2[0], var_2[1], 0);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
 
   if(vectordot(var_1, var_2) < 0) {
     return anim.failure;

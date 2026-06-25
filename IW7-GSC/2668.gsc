@@ -365,8 +365,8 @@ func_3834(var_0) {
 
 sentry_setactive() {
   self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.sentrysettings[self.sentrytype].hintstring);
   self makeusable();
   self setusefov(120);
   self setuserange(96);

@@ -206,9 +206,9 @@ init_upgrade() {
   for(i = 0; i < equipment_spawns.size; i++) {
     equipment_spawns[i].equipment = getweapon(equipment_spawns[i].zombie_equipment_upgrade);
     hint_string = get_hint(equipment_spawns[i].equipment);
-    equipment_spawns[i] sethintstring(hint_string);
-    equipment_spawns[i] setcursorhint("HINT_NOICON");
-    equipment_spawns[i] usetriggerrequirelookat();
+    equipment_spawns[i] setHintString(hint_string);
+    equipment_spawns[i] setCursorHint("HINT_NOICON");
+    equipment_spawns[i] useTriggerRequireLookAt();
     equipment_spawns[i] add_to_trigger_list(equipment_spawns[i].equipment);
     equipment_spawns[i] thread equipment_spawn_think();
   }
@@ -237,7 +237,7 @@ get_notify_strings(equipment) {
 add_to_trigger_list(equipment) {
   assert(isDefined(level.zombie_equipment[equipment]), equipment.name + "<dev string:xd5>");
   level.zombie_equipment[equipment].triggers[level.zombie_equipment[equipment].triggers.size] = self;
-  level.zombie_equipment[equipment].models[level.zombie_equipment[equipment].models.size] = getent(self.target, "targetname");
+  level.zombie_equipment[equipment].models[level.zombie_equipment[equipment].models.size] = getEnt(self.target, "targetname");
 }
 
 equipment_spawn_think() {
@@ -257,7 +257,7 @@ equipment_spawn_think() {
         if(isDefined(level.hacker_tool_positions)) {
           new_pos = array::random(level.hacker_tool_positions);
           self.origin = new_pos.trigger_org;
-          model = getent(self.target, "targetname");
+          model = getEnt(self.target, "targetname");
           model.origin = new_pos.model_org;
           model.angles = new_pos.model_ang;
         }
@@ -444,7 +444,7 @@ is_limited(equipment) {
 }
 
 limited_in_use(equipment) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     current_equipment = players[i] get_player_equipment();
@@ -462,7 +462,7 @@ limited_in_use(equipment) {
 }
 
 setup_limited(equipment) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] set_equipment_invisibility_to_player(equipment, 1);
@@ -476,7 +476,7 @@ release_limited_on_taken(equipment) {
   self endon(#"disconnect");
   notify_strings = get_notify_strings(equipment);
   self util::waittill_either(notify_strings.taken, "spawned_spectator");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] set_equipment_invisibility_to_player(equipment, 0);
@@ -487,7 +487,7 @@ release_limited_on_disconnect(equipment) {
   notify_strings = get_notify_strings(equipment);
   self endon(notify_strings.taken);
   self waittill(#"disconnect");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isalive(players[i])) {
@@ -755,7 +755,7 @@ run_equipment_devgui() {
     equipment_id = getdvarstring(#"give_equipment");
 
     if(equipment_id != "<dev string:x165>") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == "<dev string:x1bf>") {
           player take();
           continue;

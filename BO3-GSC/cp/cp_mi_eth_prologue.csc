@@ -136,7 +136,7 @@ function function_9e6eac31(localclientnum, oldval, newval, bnewent, binitialsnap
 function player_turn_on_extra_cam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     setDvar("r_extracam_custom_aspectratio", 2.85);
-    e_camera = getent(localclientnum, "s_security_cam_hallway", "targetname");
+    e_camera = getEnt(localclientnum, "s_security_cam_hallway", "targetname");
     e_camera setextracam(0);
     e_camera setextracamfocallength(0, e_camera.var_81a24d4e);
     level thread function_5f6dad34(localclientnum, 1);
@@ -150,7 +150,7 @@ function player_turn_on_extra_cam(localclientnum, oldval, newval, bnewent, binit
 
 function function_5f6dad34(localclientnum, b_on) {
   if(!isDefined(level.var_4073afd6)) {
-    level.var_4073afd6 = getent(localclientnum, "security_pstfx_screen", "targetname");
+    level.var_4073afd6 = getEnt(localclientnum, "security_pstfx_screen", "targetname");
   }
   level.var_4073afd6 notify("hash_5f6dad34");
   level.var_4073afd6 endon("hash_5f6dad34");
@@ -275,7 +275,7 @@ function function_c9395227(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_b0867fa6(localclientnum, var_fd7c1054, var_81a24d4e = 14.64, var_6516b558 = 0) {
-  e_camera = getent(localclientnum, var_fd7c1054, "targetname");
+  e_camera = getEnt(localclientnum, var_fd7c1054, "targetname");
   e_camera.var_81a24d4e = var_81a24d4e;
   e_camera.var_6516b558 = var_6516b558;
   return e_camera;
@@ -287,14 +287,14 @@ function function_cd98eb8d() {
   v_angles = vectorscale((0, -1, 0), 20);
   n_move_time = 4;
   n_wait_time = 5;
-  self rotateto(self.angles + v_angles, n_move_time / 2);
+  self rotateTo(self.angles + v_angles, n_move_time / 2);
   wait(n_wait_time / 2);
   while(true) {
     v_angles = vectorscale((0, 1, 0), 40);
-    self rotateto(self.angles + v_angles, n_move_time);
+    self rotateTo(self.angles + v_angles, n_move_time);
     wait(n_wait_time);
     v_angles = vectorscale((0, -1, 0), 40);
-    self rotateto(self.angles + v_angles, n_move_time);
+    self rotateTo(self.angles + v_angles, n_move_time);
     wait(n_wait_time);
   }
 }

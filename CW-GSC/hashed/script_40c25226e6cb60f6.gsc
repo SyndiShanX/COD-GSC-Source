@@ -212,7 +212,7 @@ function function_d74e40c3() {
       continue;
     }
 
-    self.script_model moveto(upposition, 0.1);
+    self.script_model moveTo(upposition, 0.1);
     guy = result.activator;
 
     switch (self.type) {
@@ -220,7 +220,7 @@ function function_d74e40c3() {
         if(isPlayer(guy)) {
           self.script_model namespace_e32bb68::function_3a59ec34("zmb_physicsBoxVelocity");
           localvelocity = guy getvelocity() + self.velocityvector;
-          guy setorigin(guy.origin + (0, 0, 30));
+          guy setOrigin(guy.origin + (0, 0, 30));
           waitframe(1);
 
           if(isDefined(guy)) {
@@ -261,7 +261,7 @@ function function_d74e40c3() {
     }
 
     wait 5;
-    self.script_model moveto(var_d71f280f, 2);
+    self.script_model moveTo(var_d71f280f, 2);
     wait 2;
   }
 }

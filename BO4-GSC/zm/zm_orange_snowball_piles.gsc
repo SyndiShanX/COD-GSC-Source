@@ -42,11 +42,11 @@ function_dd028fcb(e_player) {
   }
 
   if(level flag::get(#"yellow_snowballs_granted")) {
-    self sethintstring(#"hash_7a1ce549121dd33f");
+    self setHintString(#"hash_7a1ce549121dd33f");
     return 1;
   }
 
-  self sethintstring(#"hash_16b4b2b59405ab16");
+  self setHintString(#"hash_16b4b2b59405ab16");
   return 1;
 }
 

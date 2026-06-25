@@ -51,19 +51,19 @@ radio9_override(struct) {
   self Show();
   target = struct.target;
   while(isDefined(target)) {
-    struct = getstruct(target, "targetname");
+    struct = getStruct(target, "targetname");
     time = struct.script_float;
     if(!isDefined(time)) {
       time = 1.0;
     }
-    self moveto(struct.origin, time, time / 10);
+    self moveTo(struct.origin, time, time / 10);
     self waittill("movedone");
     target = struct.target;
   }
   self.trigger = spawn("trigger_radius_use", self.origin + (0, 0, 12), 0, 64, 72);
   self.trigger.radius = 64;
   self.trigger.height = 72;
-  self.trigger SetCursorHint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
   self.trigger.owner_ent = self;
   self.trigger thread trig_thread();
   self waittill("triggered");
@@ -146,7 +146,7 @@ create_radio(radio_num, thread_func) {
   radio.trigger = spawn("trigger_radius_use", radio.origin + (0, 0, 12), 0, 64, 72);
   radio.trigger.radius = 64;
   radio.trigger.height = 72;
-  radio.trigger SetCursorHint("HINT_NOICON");
+  radio.trigger setCursorHint("HINT_NOICON");
   radio.trigger.owner_ent = radio;
   radio.trigger thread trig_thread();
   radio thread radio_thread();

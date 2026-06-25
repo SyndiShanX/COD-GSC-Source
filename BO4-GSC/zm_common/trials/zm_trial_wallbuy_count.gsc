@@ -27,7 +27,7 @@ on_begin(var_b3d469ae) {
   level.var_21c2f32a = zm_trial::function_5769f26a(var_b3d469ae);
   level.var_943b6e2b = array();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_c2cd0cba(level.var_21c2f32a);
     player zm_trial_util::function_2190356a(0);
     level.var_943b6e2b[player.clientid] = array();
@@ -40,7 +40,7 @@ on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = array();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(level.var_943b6e2b[player.clientid].size < level.var_21c2f32a) {
         if(!isDefined(var_696c3b4)) {
           var_696c3b4 = [];
@@ -63,7 +63,7 @@ on_end(round_reset) {
   level.var_943b6e2b = undefined;
   level notify(#"stop_wallbuy_watcher");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 }

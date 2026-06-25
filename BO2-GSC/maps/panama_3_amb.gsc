@@ -12,7 +12,7 @@ docks_glass_smash() {
 
   while(true) {
     level waittill("glass_smash", pos);
-    playsoundatposition("dst_docks_window_shatter", pos);
+    playSoundAtPosition("dst_docks_window_shatter", pos);
   }
 }
 

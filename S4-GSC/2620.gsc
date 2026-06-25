@@ -154,9 +154,9 @@ _id_3F9C(var_0, var_1, var_2) {
 }
 
 _id_297D(var_0, var_1, var_2) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   var_3 = level._id_298E[self._id_2991];
-  self sethintstring(var_3._id_0224);
+  self setHintString(var_3._id_0224);
   self _meth_84D1(1);
   self._id_84EF = 0;
   var_4 = _id_07F9::_id_C57D(1);
@@ -578,7 +578,7 @@ _id_2978() {
 
 _id_477B(var_0) {
   wait 0.25;
-  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 waittill("death");
   _id_2978();
 }

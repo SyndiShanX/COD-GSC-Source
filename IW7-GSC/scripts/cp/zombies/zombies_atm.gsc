@@ -18,7 +18,7 @@ init_atm() {
 func_3C5A(var_0) {
   switch (var_0.script_noteworthy) {
     case "atm_deposit":
-      var_1 = scripts\engine\utility::getstruct("atm_deposit_machine", "targetname");
+      var_1 = scripts\engine\utility::getStruct("atm_deposit_machine", "targetname");
       var_1 thread func_1131B(var_0, var_1, "zmb_atm_machine");
       var_2 = scripts\engine\utility::getStructArray("atm_deposit_screen", "targetname");
       var_2 = sortbydistance(var_2, var_0.origin);
@@ -30,7 +30,7 @@ func_3C5A(var_0) {
       break;
 
     case "atm_withdrawal":
-      var_5 = scripts\engine\utility::getstruct("atm_withdrawal_machine", "targetname");
+      var_5 = scripts\engine\utility::getStruct("atm_withdrawal_machine", "targetname");
       var_5 thread func_1131B(var_0, var_5, "zmb_atm_withdraw");
       var_2 = scripts\engine\utility::getStructArray("atm_withdrawal_screen", "targetname");
       var_2 = sortbydistance(var_2, var_0.origin);

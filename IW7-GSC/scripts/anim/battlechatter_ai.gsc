@@ -719,7 +719,7 @@ func_29A2(var_0) {
 
   if(func_1A1B() || scripts\engine\utility::player_is_in_jackal() && self == level.var_D127) {
     if(var_0 func_1A1B()) {
-      var_1 = vectornormalize(var_0.origin - self.origin);
+      var_1 = vectorNormalize(var_0.origin - self.origin);
       var_2 = anglesToForward(self.angles);
       var_3 = vectordot(var_2, var_1);
       if(var_3 > 0.6) {

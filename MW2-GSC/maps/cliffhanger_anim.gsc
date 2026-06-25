@@ -280,7 +280,7 @@ locker_slam(price) {
 
 destroyed_fallen_tree_cliffhanger01() {
   fallingtree = spawn_anim_model("fallingtree");
-  node = getent("animated_destroyed_fallen_tree01", "targetname");
+  node = getEnt("animated_destroyed_fallen_tree01", "targetname");
   node anim_first_frame_solo(fallingtree, "destroyed_fallen_tree_cliffhanger01");
 
   flag_wait("destroyed_fallen_tree_cliffhanger01");

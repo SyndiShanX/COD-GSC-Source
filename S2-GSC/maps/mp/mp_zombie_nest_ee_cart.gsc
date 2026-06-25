@@ -55,7 +55,7 @@ func_7865() {
   }
 
   var_01.var_92A1 common_scripts\utility::func_9DA3();
-  var_01.var_92A1 sethintstring(&"ZOMBIE_NEST_MOVE_SHROUD");
+  var_01.var_92A1 setHintString(&"ZOMBIE_NEST_MOVE_SHROUD");
   var_01.var_1DD3 showpart("TAG_LIGHT_GREEN");
   var_01.var_1DD3 hidepart("TAG_LIGHT_RED");
   foreach(var_04 in var_01.var_5D20) {
@@ -86,7 +86,7 @@ func_7859() {
 
 func_7863() {
   if(1) {
-    var_00 = getent("ww_part_01_model", "targetname");
+    var_00 = getEnt("ww_part_01_model", "targetname");
     var_01 = lib_0557::func_782F(undefined, var_00);
     lib_0557::func_781D("4 cart", var_01);
   }
@@ -112,7 +112,7 @@ func_7858() {
 
 func_7864() {
   if(1) {
-    var_00 = getent("ww_part_02_model", "targetname");
+    var_00 = getEnt("ww_part_02_model", "targetname");
     var_01 = lib_0557::func_782F(undefined, var_00);
     lib_0557::func_781D("4 cart", var_01);
   }
@@ -171,7 +171,7 @@ func_52DE() {
   maps\mp\mp_zombie_nest_ee_util::func_8A53();
   maps\mp\mp_zombie_nest_ee_workbench::func_536B();
   thread func_2EAD();
-  level.var_3571 = getent("ee_shard", "targetname");
+  level.var_3571 = getEnt("ee_shard", "targetname");
   level.var_3571.var_9B8C = [];
   level.var_3571.var_9B8C["rnd_1"] = % s2_zom_shroud_rd_track_1;
   level.var_3571.var_9B8C["rnd_2"] = % s2_zom_shroud_rd_track_2;
@@ -200,10 +200,10 @@ func_52DE() {
   }
 
   var_05 = spawnStruct();
-  var_05.var_1DD3 = getent("move_cart_button_model", "targetname");
-  var_05.var_2590 = getent("move_cart_button_console", "targetname");
-  var_05.var_92A1 = getent("move_shroud_trig", "targetname");
-  var_05.var_92A1 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  var_05.var_1DD3 = getEnt("move_cart_button_model", "targetname");
+  var_05.var_2590 = getEnt("move_cart_button_console", "targetname");
+  var_05.var_92A1 = getEnt("move_shroud_trig", "targetname");
+  var_05.var_92A1 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   var_05.var_1DD3 showpart("TAG_LIGHT_RED");
   var_05.var_1DD3 hidepart("TAG_LIGHT_GREEN");
   var_05.var_5D20 = function_021F("move_cart_button_light", "targetname");
@@ -397,7 +397,7 @@ func_2EBE(param_00) {
 
 func_2EAD() {
   level endon("flag_ww_forged");
-  var_00 = getent("ww_creation_station_dialogue", "targetname");
+  var_00 = getEnt("ww_creation_station_dialogue", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!isPlayer(var_01)) {
@@ -418,7 +418,7 @@ func_2EAD() {
 func_2E7B() {
   level endon("flag_ww_part_01_picked_up");
   var_00 = lib_0557::func_7838("4 cart", "head to rnd");
-  var_01 = getent("cart_dialog_trig", "targetname");
+  var_01 = getEnt("cart_dialog_trig", "targetname");
   var_01.var_0CA5 = 0;
   var_02 = level.var_3571;
   if(isDefined(var_02)) {
@@ -495,9 +495,9 @@ func_9033() {
 
 func_2025(param_00) {
   var_01 = self.var_5ED1 - param_00 getEye();
-  var_02 = vectornormalize((var_01[0], var_01[1], 0));
+  var_02 = vectorNormalize((var_01[0], var_01[1], 0));
   var_03 = anglesToForward(param_00.var_001D);
-  var_04 = vectornormalize((var_03[0], var_03[1], 0));
+  var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = vectordot(var_02, var_04);
   var_05 = clamp(var_05, -1, 1);
   var_06 = acos(var_05);

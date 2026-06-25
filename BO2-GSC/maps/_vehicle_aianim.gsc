@@ -88,7 +88,7 @@ vehicle_enter(vehicle, tag) {
   }
   org = vehicle gettagorigin(animpos.sittag);
   angles = vehicle gettagangles(animpos.sittag);
-  self linkto(vehicle, animpos.sittag, (0, 0, 0), (0, 0, 0));
+  self linkTo(vehicle, animpos.sittag, (0, 0, 0), (0, 0, 0));
   n_turret_index = _get_turret_index_for_tag(animpos.sittag);
 
   if(isDefined(n_turret_index)) {
@@ -232,7 +232,7 @@ guy_deathimate_me(guy, animpos) {
   guy = convert_guy_to_drone(guy);
   [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", origin);
   detach_models_with_substr(guy, "weapon_");
-  guy linkto(self, animpos.sittag, (0, 0, 0), (0, 0, 0));
+  guy linkTo(self, animpos.sittag, (0, 0, 0), (0, 0, 0));
   guy notsolid();
   thread animontag(guy, animpos.sittag, animpos.death);
 
@@ -472,7 +472,7 @@ run_to_vehicle(vehicle, bgoddriver, seat_tag) {
       self setgoalpos(chosenorg.origin);
       self waittill("goal");
       self unset_forcegoal();
-      self animscripted("anim_wait_done", self.origin, self.angles, vehicleanim[chosenorg.pos].waiting);
+      self animScripted("anim_wait_done", self.origin, self.angles, vehicleanim[chosenorg.pos].waiting);
       vehicle waittill(vehicleanim[chosenorg.pos].wait_for_notify);
     }
   } else if(isDefined(vehicleanim[chosenorg.pos].wait_for_player)) {
@@ -482,7 +482,7 @@ run_to_vehicle(vehicle, bgoddriver, seat_tag) {
       self setgoalpos(chosenorg.origin);
       self waittill("goal");
       self unset_forcegoal();
-      self animscripted("anim_wait_done", self.origin, self.angles, vehicleanim[chosenorg.pos].waiting);
+      self animScripted("anim_wait_done", self.origin, self.angles, vehicleanim[chosenorg.pos].waiting);
 
       while(true) {
         on_vehicle = 0;
@@ -1168,7 +1168,7 @@ getout_rigspawn(animatemodel, pos, bidletillunload) {
   self.getoutrig[animpos.getoutrig] = getoutrig_model;
   getoutrig_model useanimtree(#animtree);
   getoutrig_model setforcenocull();
-  getoutrig_model linkto(animatemodel, level.vehicle_attachedmodels[type][animpos.getoutrig].tag, (0, 0, 0), (0, 0, 0));
+  getoutrig_model linkTo(animatemodel, level.vehicle_attachedmodels[type][animpos.getoutrig].tag, (0, 0, 0), (0, 0, 0));
   thread getoutrig_model(animpos, getoutrig_model, level.vehicle_attachedmodels[type][animpos.getoutrig].tag, level.vehicle_attachedmodels[type][animpos.getoutrig].dropanim, bidletillunload);
   return getoutrig_model;
 }
@@ -1524,7 +1524,7 @@ animontag(guy, tag, animation, notetracks, sthreads, flag) {
     level thread animontag_ragdoll_death(guy, self);
   }
 
-  guy animscripted(flag, org, angles, animation);
+  guy animScripted(flag, org, angles, animation);
 
   if(isai(guy)) {
     thread donotetracks(guy, animatemodel, flag);
@@ -1619,7 +1619,7 @@ animontag_ragdoll_death(guy, vehicle) {
 
     if(abs(movedelta[2] + 16) <= abs(distancefromground)) {
       guy thread play_sound_on_entity("generic_death_falling");
-      guy animscripted("fastrope_fall", guy.origin, guy.angles, guy.ragdoll_fall_anim);
+      guy animScripted("fastrope_fall", guy.origin, guy.angles, guy.ragdoll_fall_anim);
       guy waittillmatch("fastrope_fall", "start_ragdoll");
     }
   }
@@ -1633,7 +1633,7 @@ animontag_ragdoll_death(guy, vehicle) {
   guy dodamage(guy.health + 100, attacker.origin, attacker);
 
   if(explosivedamage) {
-    guy stopanimscripted();
+    guy stopanimScripted();
     guy.delayeddeath = 0;
     guy.allowdeath = 1;
     guy.nogibdeathanim = 1;
@@ -1663,7 +1663,7 @@ donotetracks(guy, vehicle, flag) {
 }
 
 animatemoveintoplace(guy, org, angles, movetospotanim) {
-  guy animscripted("movetospot", org, angles, movetospotanim);
+  guy animScripted("movetospot", org, angles, movetospotanim);
   guy waittillmatch("movetospot", "end");
 }
 
@@ -1788,7 +1788,7 @@ guy_move_to_driver(guy, pos) {
   if(isDefined(animpos.move_to_driver)) {
     animontag(guy, animpos.sittag, animpos.move_to_driver);
     guy unlink();
-    guy linkto(self, animpos.sittag);
+    guy linkTo(self, animpos.sittag);
   }
 
   wait 0.05;
@@ -1967,8 +1967,8 @@ guy_blowup(guy) {
   guy notsolid();
   guy.origin = origin;
   guy.angles = angles;
-  guy stopanimscripted();
-  guy animscripted("deathanim", origin, angles, deathanim);
+  guy stopanimScripted();
+  guy animScripted("deathanim", origin, angles, deathanim);
   fraction = 0.3;
 
   if(isDefined(anim_pos.explosion_death_ragdollfraction)) {

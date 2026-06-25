@@ -622,7 +622,7 @@ function_8487fabe(localclientnum) {
       stance_offset = level.var_eba5e1cc[#"crouch"];
     }
 
-    toplayer = vectornormalize(player.origin + stance_offset - self.origin);
+    toplayer = vectorNormalize(player.origin + stance_offset - self.origin);
     in_sight = 0;
     var_131803ce = vectordot(toplayer, forward) >= bundle.tag_fov;
 

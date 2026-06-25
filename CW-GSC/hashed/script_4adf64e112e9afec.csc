@@ -990,7 +990,7 @@ function setplayerowner(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
 
   entnum = bwastimejump - 1;
-  players = getplayers(fieldname);
+  players = getPlayers(fieldname);
 
   foreach(player in players) {
     if(player getentitynumber() == entnum) {

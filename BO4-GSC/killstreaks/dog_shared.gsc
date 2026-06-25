@@ -55,7 +55,7 @@ deployed_off(slot, weapon) {
 
 spawned(type) {
   assert(isPlayer(self));
-  playsoundatposition(#"hash_7245f25f5953631c", self.origin);
+  playSoundAtPosition(#"hash_7245f25f5953631c", self.origin);
   player = self;
   bundle = level.killstreaks[type].script_bundle;
 
@@ -98,7 +98,7 @@ spawned(type) {
 }
 
 function_a38d2d73(tacpoint) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(distancesquared(tacpoint.origin, player.origin) <= 150 * 150) {
@@ -110,7 +110,7 @@ function_a38d2d73(tacpoint) {
 }
 
 function_4670789f(tacpoint) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(function_96c81b85(tacpoint, player.origin)) {

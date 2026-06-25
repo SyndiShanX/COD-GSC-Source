@@ -32,7 +32,7 @@ on_begin(str_zone1, str_zone2, var_588808b1, var_91e2fb66, var_84245fe9, var_a7a
     arrayremovevalue(level.var_da1e5199, undefined);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_c465c67f();
   }
 }
@@ -41,7 +41,7 @@ on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!player.b_in_zone) {
         if(!isDefined(var_696c3b4)) {
           var_696c3b4 = [];
@@ -58,7 +58,7 @@ on_end(round_reset) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.b_in_zone = undefined;
     player zm_trial_util::function_f3aacffb();
   }

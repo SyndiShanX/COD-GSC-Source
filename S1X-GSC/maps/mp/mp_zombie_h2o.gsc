@@ -660,17 +660,17 @@ exo_reveal_run() {
     var_0 = getEntArray(self.target, "targetname");
 
     foreach(var_2 in var_0) {
-      var_2 linkto(self);
+      var_2 linkTo(self);
     }
   }
 
   level waittill("power_atrium");
   self connectpaths();
-  self moveto(self.origin + (0, 0, 216), 2);
+  self moveTo(self.origin + (0, 0, 216), 2);
 }
 
 tidalgeneratorblade() {
-  var_0 = getent("tidal_generator_blade", "targetname");
+  var_0 = getEnt("tidal_generator_blade", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -704,7 +704,7 @@ ambientmantarays() {
   if(level.currentgen) {
     return;
   }
-  var_0 = common_scripts\utility::getstruct("floater_anim_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("floater_anim_node", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -780,7 +780,7 @@ zmbteleportgrenadefindzonecustom(var_0, var_1, var_2) {
   var_4 = 0;
   var_5 = var_2 - var_0;
   var_6 = length(var_5);
-  var_7 = vectornormalize(var_5);
+  var_7 = vectorNormalize(var_5);
   var_8 = maps\mp\zombies\_zombies_zone_manager::getplayerzone();
 
   if(isDefined(var_8) && var_8 == "bus") {
@@ -824,7 +824,7 @@ flyoverbink() {
 }
 
 setupflyoveranimation(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("floater_anim_node", "targetname");
+  var_4 = common_scripts\utility::getStruct("floater_anim_node", "targetname");
 
   if(!isDefined(var_4)) {
     return;
@@ -900,7 +900,7 @@ donotetrack(var_0, var_1, var_2, var_3) {
 }
 
 setupscriptmodelanimation(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::getstruct("env_bink_anim_node", "targetname");
+  var_5 = common_scripts\utility::getStruct("env_bink_anim_node", "targetname");
 
   if(!isDefined(var_5)) {
     var_5 = spawnStruct();
@@ -955,7 +955,7 @@ outsiderailshove() {
           var_2 = var_1 playergetnearestnode();
 
           if(isDefined(var_2)) {
-            var_3 = vectornormalize((var_2.origin - var_1.origin) * (1, 1, 0));
+            var_3 = vectorNormalize((var_2.origin - var_1.origin) * (1, 1, 0));
             var_1 setvelocity(var_3 * 200);
           }
         } else {

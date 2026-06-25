@@ -25,7 +25,7 @@ dog_pip_init(var_0, var_1) {
     return;
   }
   var_2 = var_0 common_scripts\utility::spawn_tag_origin();
-  var_2 linkto(var_0, "tag_camera", (12, 0, 3), (0, 0, 0));
+  var_2 linkTo(var_0, "tag_camera", (12, 0, 3), (0, 0, 0));
   level.pip.enable = 1;
   level.pip.freecamera = 1;
   level.pip.entity = var_2;
@@ -70,7 +70,7 @@ pip_toggle_ai_cam(var_0) {
       var_3 = spawn("script_model", var_2.origin);
       var_3 setModel("tag_origin");
       var_3.angles = var_2.angles;
-      var_3 linkto(var_2, "j_head", (-13, -12, 64), (0, 0, 0));
+      var_3 linkTo(var_2, "j_head", (-13, -12, 64), (0, 0, 0));
       level.pip.entity = var_3;
       level.pip_ai_cam = var_2;
       wait 0.2;

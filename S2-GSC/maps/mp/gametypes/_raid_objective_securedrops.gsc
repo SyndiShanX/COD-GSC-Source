@@ -5,7 +5,7 @@
 
 securedropsobjectiveinit(param_00) {
   lib_04FF::func_6934(param_00);
-  level.raidairdropcollision = getent("raid_securedrop_collision", "targetname");
+  level.raidairdropcollision = getEnt("raid_securedrop_collision", "targetname");
   level.var_611["airdrop_smoke"] = loadfx("vfx/smoke/beacon_smoke_green_long");
   lib_04FF::func_6983(param_00.var_1A5);
   var_01 = lib_04FF::func_27DE("A", game["attackers"], self.var_116);
@@ -180,7 +180,7 @@ func_64B8() {
   self endon("detach");
   lib_0378::func_8D74("ks_carepackage_parachute");
   for(;;) {
-    self moveto(self.var_116 + (0, 0, -20), 0.05);
+    self moveTo(self.var_116 + (0, 0, -20), 0.05);
     wait 0.05;
   }
 }
@@ -338,7 +338,7 @@ func_275D() {
     if(var_02 istouching(self)) {
       foreach(var_04 in var_00) {
         if(distancesquared(var_04.var_116, self.var_116) > 10000) {
-          var_02 setorigin(var_04.var_116, 1);
+          var_02 setOrigin(var_04.var_116, 1);
           var_00 = common_scripts\utility::func_F93(var_00, var_04);
           break;
         }
@@ -404,8 +404,8 @@ func_275A(param_00) {
 
   self makeusable();
   lib_04FF::func_8613(121);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"RAIDS_USE_SECURE_AIRDROP");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"RAIDS_USE_SECURE_AIRDROP");
   var_05 = self.var_1A7;
   foreach(var_07 in level.var_744A) {
     if(var_07.var_1A7 != var_05 || var_07.var_1A7 == "spectator") {
@@ -605,9 +605,9 @@ func_A276(param_00) {
 
 func_A213(param_00, param_01, param_02) {
   if(isPlayer(param_00)) {
-    param_00 playerlinkto(self);
+    param_00 playerlinkTo(self);
   } else {
-    param_00 linkto(self);
+    param_00 linkTo(self);
   }
 
   param_00 common_scripts\utility::func_602();
@@ -875,7 +875,7 @@ func_0F30(param_00, param_01) {
   var_02 = 300;
   var_03 = 100;
   var_04 = 1250;
-  var_05 = vectornormalize(param_01 - param_00.var_116);
+  var_05 = vectorNormalize(param_01 - param_00.var_116);
   var_06 = var_05[0] * var_02;
   var_07 = var_05[1] * var_02;
   var_08 = -1 * var_05[1] * var_04;

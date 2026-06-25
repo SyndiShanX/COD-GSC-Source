@@ -168,12 +168,12 @@ digger_think_move() {
     arm = targets[0];
     tracks = targets[1];
   }
-  blade_center = GetEnt(arm.target, "targetname");
-  blade = GetEnt(blade_center.target, "targetname");
-  blade LinkTo(blade_center);
-  blade_center LinkTo(arm);
-  arm LinkTo(self);
-  self linkto(tracks);
+  blade_center = getEnt(arm.target, "targetname");
+  blade = getEnt(blade_center.target, "targetname");
+  blade linkTo(blade_center);
+  blade_center linkTo(arm);
+  arm linkTo(self);
+  self linkTo(tracks);
   tracks clearclientflag(level._CLIENTFLAG_SCRIPTMOVER_DIGGER_MOVING_EARTHQUAKE_RUMBLE);
   arm clearclientflag(level._CLIENTFLAG_SCRIPTMOVER_DIGGER_ARM_FX);
   switch (tracks.target) {
@@ -219,9 +219,9 @@ digger_think_move() {
 wait_for_digger_hack_digging(arm, blade_center, tracks) {
   self endon("stop_monitor");
   self waittill("digger_arm_raised");
-  blade_center LinkTo(arm);
-  arm LinkTo(self);
-  self linkto(tracks);
+  blade_center linkTo(arm);
+  arm linkTo(self);
+  self linkTo(tracks);
   tracks digger_follow_path(self, true, arm);
   flag_clear(self.hacked_flag);
   flag_clear(self.start_flag);
@@ -330,7 +330,7 @@ digger_arm_logic(arm, blade_center, tracks) {
     self.arm_lowered = false;
     blade_center stoploopsound(2);
     blade_center clearclientflag(level._CLIENTFLAG_SCRIPTMOVER_DIGGER_DIGGING_EARTHQUAKE_RUMBLE);
-    blade_center LinkTo(arm);
+    blade_center linkTo(arm);
     arm playSound("evt_dig_arm_move");
     arm RotatePitch(self.up_angle, level.arm_move_speed, level.arm_move_speed / 4, level.arm_move_speed / 4);
     wait(2);
@@ -356,7 +356,7 @@ digger_arm_logic(arm, blade_center, tracks) {
         break;
     }
     arm waittill("rotatedone");
-    arm LinkTo(self);
+    arm linkTo(self);
     arm playSound("evt_dig_arm_stop");
     self.arm_moving = undefined;
   }
@@ -364,14 +364,14 @@ digger_arm_logic(arm, blade_center, tracks) {
 }
 digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, blocker_func, digger_name) {
   if(isDefined(blocker_name)) {
-    dmg_trig = getent("digger_" + digger_name + "_dmg", "targetname");
-    blocker = getent(blocker_name, "targetname");
+    dmg_trig = getEnt("digger_" + digger_name + "_dmg", "targetname");
+    blocker = getEnt(blocker_name, "targetname");
     level thread[[blocker_func]](blocker, digger_name, dmg_trig);
   }
   if(!isDefined(blocker_name) && isDefined(blocker_func)) {
     level thread[[blocker_func]](digger_name);
   }
-  trig = getent(trig_name, "targetname");
+  trig = getEnt(trig_name, "targetname");
   struct = spawnStruct();
   struct.origin = trig.origin - (0, 0, 12);
   struct.script_int = -1000;
@@ -385,24 +385,24 @@ digger_think_panel(blocker_name, trig_name, start_flag, hacked_flag, blocker_fun
   struct.custom_string = &"ZOMBIE_MOON_DISABLE_DIGGER";
   struct.no_bullet_trace = true;
   struct.no_sight_check = true;
-  trig UseTriggerRequireLookAt();
-  trig setcursorhint("HINT_NOICON");
+  trig useTriggerRequireLookAt();
+  trig setCursorHint("HINT_NOICON");
   trig thread maps\_zombiemode_equip_hacker::hide_hint_when_hackers_active();
-  trig SetHintString(&"ZOMBIE_MOON_NO_HACK");
+  trig setHintString(&"ZOMBIE_MOON_NO_HACK");
   trig thread set_hint_on_digger_trig(start_flag, hacked_flag, struct);
 }
 set_hint_on_digger_trig(start_flag, hacked_flag, struct) {
   while(1) {
     if(!flag(start_flag)) {
       maps\_zombiemode_equip_hacker::deregister_hackable_struct(struct);
-      self sethintstring(&"ZOMBIE_MOON_NO_HACK");
+      self setHintString(&"ZOMBIE_MOON_NO_HACK");
     }
     while(!flag(start_flag)) {
       wait .05;
     }
     if(flag(start_flag) && !flag(hacked_flag)) {
       maps\_zombiemode_equip_hacker::register_pooled_hackable_struct(struct, ::digger_hack_func, ::digger_hack_qualifer);
-      self sethintstring(&"ZOMBIE_MOON_SYSTEM_ONLINE");
+      self setHintString(&"ZOMBIE_MOON_SYSTEM_ONLINE");
       switch (struct.digger_name) {
         case "hangar":
           level clientnotify("HCA");
@@ -420,7 +420,7 @@ set_hint_on_digger_trig(start_flag, hacked_flag, struct) {
     }
     if(flag(hacked_flag)) {
       maps\_zombiemode_equip_hacker::deregister_hackable_struct(struct);
-      self sethintstring(&"ZOMBIE_MOON_NO_HACK");
+      self setHintString(&"ZOMBIE_MOON_NO_HACK");
       switch (struct.digger_name) {
         case "hangar":
           level clientnotify("HCO");
@@ -492,7 +492,7 @@ digger_think_blocker(blocker, digger_name, dmg_trig) {
     if(name == digger_name) {
       blocker movez(-512, .05, .05);
       blocker waittill("movedone");
-      blocker disconnectpaths();
+      blocker disconnectPaths();
       blocker thread kill_anyone_touching_blocker();
       dmg_trig trigger_on();
       for(i = 0; i < zones.size; i++) {
@@ -535,10 +535,10 @@ digger_push_player(trig, player) {
   }
   pulse = randomintrange(20, 45);
   dir = (player.origin[0] - trig.origin[0], player.origin[1] - trig.origin[1], 0);
-  dir = VectorNormalize(dir);
+  dir = vectorNormalize(dir);
   dir += (0, 0, 1);
   dir *= pulse;
-  player SetOrigin(player.origin + (0, 0, .1));
+  player setOrigin(player.origin + (0, 0, .1));
   player_velocity = dir;
   player SetVelocity(player_velocity);
   wait(2);
@@ -611,8 +611,8 @@ diggers_visible(visible) {
     arm = targets[0];
     tracks = targets[1];
   }
-  blade_center = GetEnt(arm.target, "targetname");
-  blade = GetEnt(blade_center.target, "targetname");
+  blade_center = getEnt(arm.target, "targetname");
+  blade = getEnt(blade_center.target, "targetname");
   if(!visible) {
     level clientnotify("DH");
     blade hide();
@@ -702,17 +702,17 @@ play_delayed_breach_vox(digger) {
   if(!level.on_the_moon) {
     return;
   }
-  playsoundatposition("evt_breach_alarm", (0, 0, 0));
+  playSoundAtPosition("evt_breach_alarm", (0, 0, 0));
   wait(1.5);
   if(!level.on_the_moon) {
     return;
   }
-  playsoundatposition("evt_breach_alarm", (0, 0, 0));
+  playSoundAtPosition("evt_breach_alarm", (0, 0, 0));
   wait(1.5);
   if(!level.on_the_moon) {
     return;
   }
-  playsoundatposition("evt_breach_alarm", (0, 0, 0));
+  playSoundAtPosition("evt_breach_alarm", (0, 0, 0));
   wait(2);
   level thread maps\zombie_moon_amb::play_mooncomp_vox("vox_mcomp_digger_breach_", digger);
 }
@@ -841,12 +841,12 @@ digger_follow_path(body, reverse, arm) {
     last_node_dir = (1, 0, 0);
     if(isDefined(last_node)) {
       last_node_dir = current_node.origin - last_node.origin;
-      last_node_dir = VectorNormalize(last_node_dir);
+      last_node_dir = vectorNormalize(last_node_dir);
     } else {
       last_node_dir = anglesToForward(self.angles);
     }
     curr_node_dir = next_node.origin - current_node.origin;
-    curr_node_dir = VectorNormalize(curr_node_dir);
+    curr_node_dir = vectorNormalize(curr_node_dir);
     if(direction == "fwd") {
       if(isDefined(current_node.next_node) && isDefined(current_node.next_node.next_node)) {
         next_node_dir = current_node.next_node.next_node.origin - next_node.origin;
@@ -864,11 +864,11 @@ digger_follow_path(body, reverse, arm) {
         reached_end = true;
       }
     }
-    next_node_dir = VectorNormalize(next_node_dir);
+    next_node_dir = vectorNormalize(next_node_dir);
     next_node_plane = curr_node_dir + next_node_dir;
-    next_node_plane = VectorNormalize(next_node_plane);
+    next_node_plane = vectorNormalize(next_node_plane);
     curr_node_plane = last_node_dir + curr_node_dir;
-    curr_node_plane = VectorNormalize(curr_node_plane);
+    curr_node_plane = vectorNormalize(curr_node_plane);
     origin = self.origin;
     curr_node_to_origin = origin - current_node.origin;
     origin_to_next_node = next_node.origin - origin;
@@ -924,7 +924,7 @@ digger_follow_path(body, reverse, arm) {
     } else {
       look_pos = self.origin + curr_node_dir * dist;
     }
-    look_dir = VectorNormalize(look_pos - self.origin);
+    look_dir = vectorNormalize(look_pos - self.origin);
     if(direction == "fwd") {
       velocity = look_dir * self.digger_speed * level.digger_speed_multiplier;
     } else {
@@ -951,11 +951,11 @@ quantum_bomb_remove_digger_validation(position) {
     return false;
   }
   range_squared = 600 * 600;
-  hangar_blocker = getent("digger_hangar_blocker", "targetname");
+  hangar_blocker = getEnt("digger_hangar_blocker", "targetname");
   if(DistanceSquared(hangar_blocker.origin, position) < range_squared) {
     return true;
   }
-  teleporter_blocker = getent("digger_teleporter_blocker", "targetname");
+  teleporter_blocker = getEnt("digger_teleporter_blocker", "targetname");
   if(DistanceSquared(teleporter_blocker.origin, position) < range_squared) {
     return true;
   }
@@ -963,12 +963,12 @@ quantum_bomb_remove_digger_validation(position) {
 }
 quantum_bomb_remove_digger_result(position) {
   range_squared = 600 * 600;
-  hangar_blocker = getent("digger_hangar_blocker", "targetname");
+  hangar_blocker = getEnt("digger_hangar_blocker", "targetname");
   if(DistanceSquared(hangar_blocker.origin, position) < range_squared) {
     flag_set("hangar_digger_hacked");
     [[level.quantum_bomb_play_area_effect_func]](position);
   }
-  teleporter_blocker = getent("digger_teleporter_blocker", "targetname");
+  teleporter_blocker = getEnt("digger_teleporter_blocker", "targetname");
   if(DistanceSquared(teleporter_blocker.origin, position) < range_squared) {
     flag_set("teleporter_digger_hacked");
     [[level.quantum_bomb_play_area_effect_func]](position);

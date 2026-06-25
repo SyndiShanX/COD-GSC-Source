@@ -161,7 +161,7 @@ startheliguardsupport(littlebird, lifeid) {
   maxmeshheight = getmeshheight(littlebird, self);
   height = getnoflyzoneheight((self.origin[0], self.origin[1], maxmeshheight));
   playermeshorigin = (self.origin[0], self.origin[1], height);
-  vectostart = vectornormalize(littlebird.origin - littlebird.targetpos);
+  vectostart = vectorNormalize(littlebird.origin - littlebird.targetpos);
   dist = 1500;
   target = littlebird.targetpos + vectostart * dist;
 
@@ -244,7 +244,7 @@ heliguardsupport_movetoplayer() {
     zoneorgtochopper2d = self.origin - level.noflyzones[zoneindex].origin;
     zoneorgtochopper2d = zoneorgtochopper2d * (1, 1, 0);
     zoneorgatmeshheight = (level.noflyzones[zoneindex].origin[0], level.noflyzones[zoneindex].origin[1], maxmeshheight);
-    zoneorgtoadjpos = vectorscale(vectornormalize(zoneorgtoplayer2d), level.noflyzones[zoneindex].radius + 150.0);
+    zoneorgtoadjpos = vectorscale(vectorNormalize(zoneorgtoplayer2d), level.noflyzones[zoneindex].radius + 150.0);
     adjacentgoalpos = zoneorgtoadjpos + level.noflyzones[zoneindex].origin;
     adjacentgoalpos = (adjacentgoalpos[0], adjacentgoalpos[1], maxmeshheight);
     zoneorgtoperpendicular = (zoneorgtoadjpos[1], zoneorgtoadjpos[0] * -1, 0);
@@ -350,8 +350,8 @@ heliguardsupport_watchownerdamage() {
     if(isPlayer(attacker)) {
       if(attacker != self.owner && distance2d(attacker.origin, self.origin) <= self.targettingradius && attacker cantargetplayerwithspecialty()) {
         self setlookatent(attacker);
-        self setgunnertargetent(attacker, vectorscale((0, 0, 1), 50.0), 0);
-        self setturrettargetent(attacker, vectorscale((0, 0, 1), 50.0));
+        self setgunnertargetEnt(attacker, vectorscale((0, 0, 1), 50.0), 0);
+        self setturrettargetEnt(attacker, vectorscale((0, 0, 1), 50.0));
       }
     }
   }
@@ -530,7 +530,7 @@ heli_path_debug() {
       prev = loc;
 
       for(target = loc.target; isDefined(target); target = prev.target) {
-        target = getent(target, "targetname");
+        target = getEnt(target, "targetname");
         line(prev.origin, target.origin, (1, 0, 0), 1, 0, 50000);
         debugstar(prev.origin, 50000, (0, 1, 0));
         prev = target;
@@ -544,7 +544,7 @@ heli_path_debug() {
     first = loc;
 
     while(isDefined(target)) {
-      target = getent(target, "targetname");
+      target = getEnt(target, "targetname");
       line(prev.origin, target.origin, (0, 1, 0), 1, 0, 50000);
       debugstar(prev.origin, 50000, (1, 0, 0));
       prev = target;
@@ -563,7 +563,7 @@ heliguardsupport_getclosestlinkednode(pos) {
   closestdistance = totaldistance;
 
   for(target = self.currentnode.target; isDefined(target); target = nextnode.target) {
-    nextnode = getent(target, "targetname");
+    nextnode = getEnt(target, "targetname");
 
     if(nextnode == self.currentnode) {
       break;
@@ -651,8 +651,8 @@ heliguardsupport_firestart() {
       targetent = self.primarytarget;
       self thread heliguardsupport_firestop(targetent);
       self setlookatent(targetent);
-      self setgunnertargetent(targetent, vectorscale((0, 0, 1), 50.0), 0);
-      self setturrettargetent(targetent, vectorscale((0, 0, 1), 50.0));
+      self setgunnertargetEnt(targetent, vectorscale((0, 0, 1), 50.0), 0);
+      self setturrettargetEnt(targetent, vectorscale((0, 0, 1), 50.0));
       self waittill("turret_on_target");
       wait 0.2;
       self setclientfield("vehicle_is_firing", 1);

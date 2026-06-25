@@ -187,9 +187,9 @@ function player_rain_thread(localclientnum) {
 
 function junction_crane_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   wait(0.016);
-  e_phrase = getent(localclientnum, "junction_crane_crate_phrase", "targetname");
-  e_crane = getent(localclientnum, "quest_personal_item_junction_crane", "targetname");
-  e_crate = getent(localclientnum, "junction_crane_crate", "targetname");
+  e_phrase = getEnt(localclientnum, "junction_crane_crate_phrase", "targetname");
+  e_crane = getEnt(localclientnum, "quest_personal_item_junction_crane", "targetname");
+  e_crate = getEnt(localclientnum, "junction_crane_crate", "targetname");
   var_385d73c3 = findstaticmodelindexarray("fxanim_crate_junction_break_static");
   hidestaticmodel(var_385d73c3[0]);
   var_3153c901 = findstaticmodelindexarray("fxanim_junction_crane_static");

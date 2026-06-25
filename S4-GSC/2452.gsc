@@ -20,7 +20,7 @@ _id_548C(var_0) {
 
   var_0._id_F20F = gettime();
   var_0.health = var_0.maxhealth;
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
   var_0 _meth_8206();
   var_0 setstance("stand");
   var_0 takeallweapons();
@@ -519,8 +519,8 @@ _id_FBB0(var_0) {
 }
 
 _id_A209(var_0, var_1, var_2) {
-  var_3 = getent(var_1, "targetname");
-  var_4 = getent(var_2, "targetname");
+  var_3 = getEnt(var_1, "targetname");
+  var_4 = getEnt(var_2, "targetname");
 
   if(!isDefined(var_3) || !isDefined(var_4)) {
     return;
@@ -534,13 +534,13 @@ _id_A209(var_0, var_1, var_2) {
   var_0._id_85CC = 1;
   var_0 scripts\cp\utility::_id_1566(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_5);
+  var_0 setOrigin(var_5);
   var_0 setplayerangles(var_3.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_7 = spawn("script_origin", var_5);
-  var_0 playerlinkto(var_7);
+  var_0 playerlinkTo(var_7);
   wait 0.1;
-  var_7 moveto(var_6, 1);
+  var_7 moveTo(var_6, 1);
   var_0 thread _id_C461(0.1);
   wait 1;
   var_0._id_85CC = undefined;
@@ -640,8 +640,8 @@ _id_6F53(var_0) {
 
 _id_ABF1(var_0, var_1) {
   if(!isDefined(level._id_1408)) {
-    level._id_1409 = getent("ala_revive_door", "targetname");
-    var_2 = scripts\engine\utility::getstruct("selfrevive_portal", "targetname");
+    level._id_1409 = getEnt("ala_revive_door", "targetname");
+    var_2 = scripts\engine\utility::getStruct("selfrevive_portal", "targetname");
     level._id_1408 = spawn("script_model", var_2.origin);
     level._id_1408 setModel("tag_origin");
     level._id_1408.angles = var_2.angles;
@@ -665,7 +665,7 @@ _id_ABF1(var_0, var_1) {
     level._id_1409 hidefromplayer(var_0);
   }
 
-  var_0._id_C7BE rotateyaw(var_1, 0.2);
+  var_0._id_C7BE rotateYaw(var_1, 0.2);
   var_6 = level._effect["vfx_zmb_portal_centhub"];
 
   if(isDefined(level._id_3395)) {

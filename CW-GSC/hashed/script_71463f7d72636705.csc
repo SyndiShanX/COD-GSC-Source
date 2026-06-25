@@ -71,7 +71,7 @@ function event_handler[event_b19fdc1e] event_watcher(eventstruct) {
     }
 
     viewangles = local_player getplayerangles();
-    dirtotarget = vectornormalize(eventstruct.position - local_player.origin);
+    dirtotarget = vectorNormalize(eventstruct.position - local_player.origin);
     playerforward = anglesToForward(viewangles);
     playerright = anglestoright(viewangles);
     var_1978c7fc = vectordot(dirtotarget, playerforward);

@@ -28,7 +28,7 @@ function function_80d28d77(localclientnum, impactfx, var_4b30f907, var_9cb23c3, 
   if(!isDefined(tracenormal)) {
     tracenormal = (0, 0, -1);
   } else {
-    tracenormal = vectornormalize(tracenormal);
+    tracenormal = vectorNormalize(tracenormal);
   }
 
   var_1daf2286 = tracenormal * tracedist;
@@ -155,7 +155,7 @@ function private function_7355defa(localclientnum, impactfx, var_9cb23c3, hitpos
     return;
   }
 
-  impact linkto(self);
+  impact linkTo(self);
   waitframe(1);
   util::playFXOnTag(localclientnum, impactfx, impact, "tag_origin");
   wait var_9cb23c3;

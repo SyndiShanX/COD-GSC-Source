@@ -384,7 +384,7 @@ function stop_zombie() {
   e_linker = spawn("script_origin", (0, 0, 0));
   e_linker.origin = self.origin;
   e_linker.angles = self.angles;
-  self linkto(e_linker);
+  self linkTo(e_linker);
   self waittill("death");
   e_linker delete();
 }

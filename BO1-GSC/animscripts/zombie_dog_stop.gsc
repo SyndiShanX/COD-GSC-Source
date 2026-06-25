@@ -33,7 +33,7 @@ dogIdleNotetracks(note) {
       self.breath_fx = spawn("script_model", self GetTagOrigin("TAG_MOUTH_FX"));
       self.breath_fx.angles = self GetTagAngles("TAG_MOUTH_FX");
       self.breath_fx setModel("tag_origin");
-      self.breath_fx LinkTo(self, "TAG_MOUTH_FX");
+      self.breath_fx linkTo(self, "TAG_MOUTH_FX");
       playFXOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
     }
   }
@@ -119,7 +119,7 @@ lookAtTarget(lookPoseSet) {
   self trackLoop(anim.dogAnims[self.animSet].lookKnob[2], anim.dogAnims[self.animSet].lookKnob[4], anim.dogAnims[self.animSet].lookKnob[6], anim.dogAnims[self.animSet].lookKnob[8]);
 }
 trackLoop(look2, look4, look6, look8) {
-  players = GetPlayers();
+  players = getPlayers();
   deltaChangePerFrame = 5;
   lookBlendTime = .05;
   prevYawDelta = 0;

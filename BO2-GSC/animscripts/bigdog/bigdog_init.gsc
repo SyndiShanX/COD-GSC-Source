@@ -262,7 +262,7 @@ setup_bigdog_turret() {
 
   recordent(self.turret);
 
-  self.turret linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
+  self.turret linkTo(self, "tag_turret", (0, 0, 0), (0, 0, 0));
   self thread update_turret_target();
   self thread fire_when_on_target();
   self thread stopturretondeath();
@@ -494,7 +494,7 @@ bigdog_add_fx(bonename, effect, sound, useangles, playonself) {
     }
 
     tempent setModel("tag_origin");
-    tempent linkto(self, bonename);
+    tempent linkTo(self, bonename);
     playFXOnTag(effect, tempent, "tag_origin");
     self.fx_ents[self.fx_ents.size] = tempent;
     return tempent;
@@ -838,7 +838,7 @@ bigdog_launcher_fire() {
 firelauncher() {
   toenemy = self.enemy.origin - self.origin;
   toenemy = (toenemy[0], toenemy[1], 0);
-  toenemy = vectornormalize(toenemy);
+  toenemy = vectorNormalize(toenemy);
 
   if(!self seerecently(self.enemy, 3)) {
     lastknownpos = self lastknownpos(self.enemy);
@@ -949,7 +949,7 @@ trytobreakoffleg(leg) {
     bonename = anim.bigdog_globals.leghierarchy[leg][1];
     bigdog_add_fx(bonename, anim._effect["bigdog_spark_big"], "wpn_bigdog_damaged");
     playFXOnTag(anim._effect["bigdog_leg_explosion"], self, bonename);
-    playsoundatposition("wpn_bigdog_explode", self.origin);
+    playSoundAtPosition("wpn_bigdog_explode", self.origin);
     self.missinglegs[leg] = "bottom";
     return true;
   }
@@ -1040,7 +1040,7 @@ playneardeathbodydamagefx() {
     }
     boneindex = randomint(anim.bigdog_globals.bodydamagetags.size);
     tag = anim.bigdog_globals.bodydamagetags[boneindex];
-    playsoundatposition("wpn_bigdog_damaged", self.origin);
+    playSoundAtPosition("wpn_bigdog_damaged", self.origin);
     playFXOnTag(anim._effect["bigdog_panel_explosion_large"], self, tag);
 
     if(smokestacks < 1) {
@@ -1056,7 +1056,7 @@ playbodydamagefx() {
   self endon("death");
   boneindex = randomint(anim.bigdog_globals.bodydamagetags.size);
   tag = anim.bigdog_globals.bodydamagetags[boneindex];
-  playsoundatposition("wpn_bigdog_damaged", self.origin);
+  playSoundAtPosition("wpn_bigdog_damaged", self.origin);
   playFXOnTag(anim._effect["bigdog_panel_explosion_small"], self, tag);
 }
 

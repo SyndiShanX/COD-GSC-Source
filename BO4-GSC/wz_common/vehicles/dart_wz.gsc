@@ -118,7 +118,7 @@ take_remote() {
 throw_dart(spawnorigin, spawnangles, itemid) {
   self endon(#"death", #"disconnect");
   playereyepos = self getplayercamerapos();
-  vehicle = spawnvehicle(#"veh_dart_wz", spawnorigin, spawnangles);
+  vehicle = spawnVehicle(#"veh_dart_wz", spawnorigin, spawnangles);
 
   if(isDefined(vehicle)) {
     level.item_vehicles[level.item_vehicles.size] = vehicle;
@@ -488,7 +488,7 @@ function_ea9fe221(dart, collision) {
       trace = physicstrace(dart.origin, dart.origin + moveamount, (4 * -1, 4 * -1, 4 * -1), (4, 4, 4), undefined, 1);
       cam = spawn("script_model", trace[#"position"]);
       cam setModel(#"tag_origin");
-      cam linkto(dart);
+      cam linkTo(dart);
       cam util::deleteaftertime(5);
     }
 

@@ -219,7 +219,7 @@ function hackedprefunction(hacker) {
 
 function spawncounteruav(owner, killstreak_id) {
   minflyheight = airsupport::getminimumflyheight();
-  cuav = spawnvehicle("veh_counteruav_mp", airsupport::getmapcenter() + (0, 0, minflyheight + (isDefined(level.counter_uav_position_z_offset) ? level.counter_uav_position_z_offset : 1000)), (0, 0, 0), "counteruav");
+  cuav = spawnVehicle("veh_counteruav_mp", airsupport::getmapcenter() + (0, 0, minflyheight + (isDefined(level.counter_uav_position_z_offset) ? level.counter_uav_position_z_offset : 1000)), (0, 0, 0), "counteruav");
   cuav assignfirstavailableoffsetindex();
   cuav killstreaks::configure_team("counteruav", killstreak_id, owner, undefined, undefined, &configureteampost);
   cuav killstreak_hacking::enable_hacking("counteruav", &hackedprefunction, undefined);

@@ -25,7 +25,7 @@ killenemiesinfov() {
   var_1 = 2000;
   var_2 = 300;
   var_3 = var_2 / 2;
-  var_4 = vectornormalize(anglesToForward(self.angles));
+  var_4 = vectorNormalize(anglesToForward(self.angles));
   var_5 = var_4 * var_3;
   var_6 = self.origin + var_5;
   physicsexplosionsphere(var_6, var_3, 1, 2.5);
@@ -49,8 +49,8 @@ killenemiesinfov() {
     if(var_11) {
       var_1 = var_10.maxhealth;
       var_4 = anglesToForward(self.angles);
-      var_15 = vectornormalize(var_4) * -100;
-      var_10 setvelocity(vectornormalize(var_10.origin - self.origin + var_15) * 800 + (0, 0, 300));
+      var_15 = vectorNormalize(var_4) * -100;
+      var_10 setvelocity(vectorNormalize(var_10.origin - self.origin + var_15) * 800 + (0, 0, 300));
       var_10 killrepulsorvictim(self, var_1, var_12, self.origin);
     }
   }

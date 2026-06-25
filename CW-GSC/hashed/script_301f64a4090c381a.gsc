@@ -212,13 +212,13 @@ function devgui() {
       case #"helmets1":
       case #"tn1":
       case #"db1":
-        foreach(e_player in getplayers()) {
+        foreach(e_player in getPlayers()) {
           e_player function_9af806be(level.var_8e9d88b6[str_command]);
         }
 
         break;
       case #"clear":
-        foreach(e_player in getplayers()) {
+        foreach(e_player in getPlayers()) {
           e_player function_2a94cd59();
         }
 
@@ -273,7 +273,7 @@ function on_player_connect() {
 }
 
 function function_c1ccd7f3(var_fc09f1a3, n_player, ...) {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(a_e_players.size >= n_player) {
     util::single_func_argarray(a_e_players[n_player - 1], var_fc09f1a3, vararg);

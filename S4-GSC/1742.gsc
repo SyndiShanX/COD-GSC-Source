@@ -413,7 +413,7 @@ _id_3FE5() {
 
     for(var_18 = 0; var_18 < level._id_3FE3.size; var_18++) {
       var_3 = level._id_3FE3[var_18];
-      var_19 = vectornormalize(var_3.v["origin"] - (level.player.origin + (0, 0, 55)));
+      var_19 = vectorNormalize(var_3.v["origin"] - (level.player.origin + (0, 0, 55)));
       var_20 = vectordot(var_8, var_19);
 
       if(var_20 < var_10) {
@@ -1197,7 +1197,7 @@ _id_70FC() {
   }
   var_1 = vectortoangles(level.player.origin - var_0);
   var_2 = var_0 + anglesToForward(var_1) * 200;
-  level.player setorigin(var_2 + (0, 0, -60));
+  level.player setOrigin(var_2 + (0, 0, -60));
   level.player setplayerangles(vectortoangles(var_0 - var_2));
 }
 
@@ -1636,7 +1636,7 @@ _id_BD4F() {
     for(var_3 = 0; var_3 < level._id_0BA7._id_D057.size; var_3++) {
       var_2[var_3] = spawn("script_origin", level._id_0BA7._id_D057[var_3].v["origin"]);
       var_2[var_3].angles = level._id_0BA7._id_D057[var_3].v["angles"];
-      var_2[var_3] linkto(var_1);
+      var_2[var_3] linkTo(var_1);
     }
 
     _id_C91D(var_1, var_2);

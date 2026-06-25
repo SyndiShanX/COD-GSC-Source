@@ -132,11 +132,11 @@ game_objects_allowed(mode, location) {
       }
 
       if(isDefined(entity.script_vector)) {
-        entity moveto(entity.origin + entity.script_vector, 0.05);
+        entity moveTo(entity.origin + entity.script_vector, 0.05);
         entity waittill("movedone");
 
         if(isDefined(entity.spawnflags) && entity.spawnflags == 1) {
-          entity disconnectpaths();
+          entity disconnectPaths();
         }
 
         continue;

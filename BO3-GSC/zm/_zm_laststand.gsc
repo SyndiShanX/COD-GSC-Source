@@ -151,7 +151,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
     self laststand_disable_player_weapons();
     self laststand_give_pistol();
   }
-  if(isDefined(level.playersuicideallowed) && level.playersuicideallowed && getplayers().size > 1) {
+  if(isDefined(level.playersuicideallowed) && level.playersuicideallowed && getPlayers().size > 1) {
     if(!isDefined(level.canplayersuicide) || self[[level.canplayersuicide]]()) {
       self thread suicide_trigger_spawn();
     }
@@ -563,12 +563,12 @@ function revive_trigger_spawn() {
   } else {
     radius = getdvarint("revive_trigger_radius");
     self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-    self.revivetrigger sethintstring("");
-    self.revivetrigger setcursorhint("HINT_NOICON");
+    self.revivetrigger setHintString("");
+    self.revivetrigger setCursorHint("HINT_NOICON");
     self.revivetrigger setmovingplatformenabled(1);
-    self.revivetrigger enablelinkto();
+    self.revivetrigger enablelinkTo();
     self.revivetrigger.origin = self.origin;
-    self.revivetrigger linkto(self);
+    self.revivetrigger linkTo(self);
     self.revivetrigger setinvisibletoplayer(self);
     self.revivetrigger.beingrevived = 0;
     self.revivetrigger.createtime = gettime();
@@ -589,7 +589,7 @@ function revive_trigger_think(t_secondary) {
     } else {
       t_revive = self.revivetrigger;
     }
-    t_revive sethintstring("");
+    t_revive setHintString("");
     for(i = 0; i < level.players.size; i++) {
       n_depth = 0;
       n_depth = self depthinwater();
@@ -771,7 +771,7 @@ function revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
   name = level.player_name_directive[self getentitynumber()];
   e_revivee.revive_hud settext(&"ZOMBIE_PLAYER_IS_REVIVING_YOU", name);
   e_revivee laststand::revive_hud_show_n_fade(3);
-  e_revivee.revivetrigger sethintstring("");
+  e_revivee.revivetrigger setHintString("");
   if(isPlayer(e_revivee)) {
     e_revivee startrevive(self);
   }
@@ -834,7 +834,7 @@ function revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
       e_revivee stoprevive(self);
     }
   }
-  e_revivee.revivetrigger sethintstring(&"ZOMBIE_BUTTON_TO_REVIVE_PLAYER");
+  e_revivee.revivetrigger setHintString(&"ZOMBIE_BUTTON_TO_REVIVE_PLAYER");
   e_revivee.revivetrigger.beingrevived = 0;
   self notify("do_revive_ended_normally");
   self.is_reviving_any--;

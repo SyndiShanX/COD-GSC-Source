@@ -394,10 +394,10 @@ func_774C() {
   var_1[0] = 40;
   var_1[1] = 25;
   self.var_11838 = spawn("script_origin", self.origin);
-  self.var_11838 linkto(self);
+  self.var_11838 linkTo(self);
   self.var_11838 ghostattack(0);
   self.var_90D5 = spawn("script_origin", self.origin);
-  self.var_90D5 linkto(self);
+  self.var_90D5 linkTo(self);
   self.var_90D5 ghostattack(0);
   self func_83E8();
   wait(0.1);

@@ -494,7 +494,7 @@ function function_64609aab(entity, enemy) {
 
   var_31e097c5 = entity.origin + (0, 0, 30);
   v_to_enemy = enemy.origin - entity.origin;
-  v_to_enemy = vectornormalize(v_to_enemy);
+  v_to_enemy = vectorNormalize(v_to_enemy);
   var_aae53953 = vectorscale(v_to_enemy, 350);
   var_5d132997 = (0, 0, 30);
   var_3a2b9b1a = var_31e097c5 + var_aae53953;

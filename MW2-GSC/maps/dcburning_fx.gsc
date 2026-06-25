@@ -167,7 +167,7 @@ littlebird_monument_rider_death(heli) {
 
   self.animname = "generic";
   self setcontents(0);
-  self stopanimscripted();
+  self stopanimScripted();
   self.skipdeathanim = 1;
   self delaythread(randomfloatrange(.3, 1), ::play_sound_in_space, "generic_death_falling");
   pos = heli gettagorigin(tag);
@@ -181,7 +181,7 @@ littlebird_monument_rider_death(heli) {
     dummy thread updatePos(heli, tag);
     dummy thread ent_cleanup(heli);
     self unlink();
-    self linkto(dummy);
+    self linkTo(dummy);
 
     dummy anim_generic(self, sAnim);
     self unlink();
@@ -224,7 +224,7 @@ littlebird_spinout() {
 }
 
 monument_heli_destroyed(monument_heli_owned) {
-  monument_heli_owned_destroyed = getent("monument_heli_owned_destroyed", "targetname");
+  monument_heli_owned_destroyed = getEnt("monument_heli_owned_destroyed", "targetname");
   monument_heli_owned delete();
   monument_heli_owned_destroyed show();
   playFX(getfx("large_vehicle_explosion"), monument_heli_owned_destroyed.origin);

@@ -36,7 +36,7 @@ pipesetup() {
   self.pipe_fx_array = [];
   var_0 = undefined;
   if(isDefined(self.target)) {
-    var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
     self.a = var_0.origin;
     var_1 = anglesToForward(var_0.angles);
     var_1 = var_1 * 128;
@@ -187,7 +187,7 @@ pipe_damage(var_0, var_1, var_2, var_3) {
   }
 
   var_3 endon("death");
-  var_4 = var_3.origin + vectornormalize(var_1) * 40;
+  var_4 = var_3.origin + vectorNormalize(var_1) * 40;
   var_5 = level._pipes._dmg[self.script_noteworthy];
   for(;;) {
     if(!isDefined(self.damageowner)) {
@@ -231,7 +231,7 @@ pipe_calc_ballistic(var_0, var_1) {
 }
 
 pipe_calc_splash(var_0, var_1) {
-  var_2 = vectornormalize(vectorfromlinetopoint(self.a, self.b, var_0));
+  var_2 = vectorNormalize(vectorfromlinetopoint(self.a, self.b, var_0));
   var_0 = pointonsegmentnearesttopoint(self.a, self.b, var_0);
   return var_0 + var_2 * 4;
 }

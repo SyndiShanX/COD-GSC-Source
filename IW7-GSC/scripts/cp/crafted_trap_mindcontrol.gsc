@@ -314,8 +314,8 @@ func_9371(var_0) {
 
 mindcontrol_trap_setactive() {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.mindcontrol_trap_settings[self.mindcontrol_trap_type].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.mindcontrol_trap_settings[self.mindcontrol_trap_type].hintstring);
   scripts\cp\utility::addtotraplist();
   var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();

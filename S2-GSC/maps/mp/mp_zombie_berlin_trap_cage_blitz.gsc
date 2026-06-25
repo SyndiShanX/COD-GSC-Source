@@ -8,7 +8,7 @@ trap_cage_blitz(param_00) {
   var_02 = common_scripts\utility::func_46B5("struct_trap_cage_blitz", "script_noteworthy");
   var_03 = common_scripts\utility::func_46B5("cage_spark_fx_trap", "script_noteworthy");
   var_03 thread trap_cage_idle_spark();
-  var_04 = getent("cage_damage", "script_noteworthy");
+  var_04 = getEnt("cage_damage", "script_noteworthy");
   var_04.var_9C92 = param_00;
   var_04.var_9CBB = "trap_cage_blitz";
   wait(0.3);

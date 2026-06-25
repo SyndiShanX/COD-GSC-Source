@@ -908,7 +908,7 @@ script_model_anims() {
 }
 
 collapsed_derrick_wire_anims() {
-  var_0 = getent("derrick_wires", "targetname");
+  var_0 = getEnt("derrick_wires", "targetname");
   var_0.animname = "derrick_wires";
   var_0 maps\_anim::setanimtree();
   var_0 setanim(%blackice_derrick_collapse_wires_1, 1, 0, 1);
@@ -1065,7 +1065,7 @@ notetrack_ascend_end_player_control(var_0) {
   level.player_rig setanimlimited(level.scr_anim["player_rig"]["rigascend_noise_parent"], 0.0, 0.2);
   level notify("notify_end_ascend_pendulum");
   wait(level.timestep);
-  level.player_ascend_anim_node rotateto((0, level.player_ascend_anim_node.angles[1], 0), level.timestep);
+  level.player_ascend_anim_node rotateTo((0, level.player_ascend_anim_node.angles[1], 0), level.timestep);
   level notify("notify_ascend_objective_complete");
   wait 5;
   maps\_utility::autosave_by_name("catwalk_start");
@@ -1102,7 +1102,7 @@ notetrack_player_teleport(var_0) {
 
 notetrack_heli_swing(var_0) {
   common_scripts\utility::flag_set("flag_helo_swing");
-  level.player playrumbleonentity("helo_ladder_swing");
+  level.player playRumbleOnEntity("helo_ladder_swing");
 }
 
 notetrack_start_slomo(var_0) {
@@ -1145,7 +1145,7 @@ notetrack_derrick_debris_hit_2(var_0) {
 
 notetrack_derrick_chunk_hit_barrels(var_0) {
   earthquake(0.33, 0.65, level.player.origin, 128);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 notetrack_oiltank_catwalk_swap(var_0) {
@@ -1297,7 +1297,7 @@ swim_enemy_death_anim_override() {
 
   if(isDefined(self.deathanim)) {
     self animmode("nogravity");
-    self stopanimscripted();
+    self stopanimScripted();
     self setflaggedanimknoblimitedrestart("deathanim", self.deathanim, 1, 0.4);
     playFXOnTag(common_scripts\utility::getfx("swim_ai_death_blood"), self, "j_spineupper");
     wait(getanimlength(self.deathanim));
@@ -1331,7 +1331,7 @@ swim_ally_surface_anim() {
 }
 
 swim_truck_surface_anim() {
-  var_0 = common_scripts\utility::getstruct("vignette_truck_fall", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_truck_fall", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("blackice_ice_chunks_truck");
   var_2 = maps\_utility::spawn_anim_model("bm21_1");
   level.surface_truck = var_2;
@@ -1375,9 +1375,9 @@ swim_player_surface_anim() {
 
   var_0 delete();
   level.player_rig show();
-  level.player_rig stopanimscripted();
-  var_2 stopanimscripted();
-  level._bravo[0] stopanimscripted();
+  level.player_rig stopanimScripted();
+  var_2 stopanimScripted();
+  level._bravo[0] stopanimScripted();
   level.allies_breach_anim_node thread maps\_anim::anim_single_solo(level.player_rig, "player_surface_root_pt2");
   level.allies_breach_anim_node thread maps\_anim::anim_single_solo(var_2, "mask_surface_pt2");
   level.allies_breach_anim_node thread maps\_anim::anim_single_solo(level._bravo[0], "surface_ally3_up_pt2");
@@ -1397,7 +1397,7 @@ intro_player_goggles_watersheeting_fx() {
 }
 
 cw_common_breach_player(var_0) {
-  var_1 = getent("cw_vig_common_room_breach", "targetname");
+  var_1 = getEnt("cw_vig_common_room_breach", "targetname");
   level.breach_charge = maps\_utility::spawn_anim_model("breach_door_charge");
   var_2 = maps\_utility::spawn_anim_model("player_rig");
   var_2 hide();
@@ -1433,7 +1433,7 @@ cw_common_breach_draw_weapon(var_0) {
 }
 
 cw_common_breach_allies() {
-  var_0 = getent("cw_vig_common_room_breach", "targetname");
+  var_0 = getEnt("cw_vig_common_room_breach", "targetname");
   var_0 maps\_anim::anim_single(level._allies, "rec_breach");
   var_0 thread maps\_anim::anim_loop(level._allies, "rec_breach_idle", "stop_looping_anim");
   common_scripts\utility::flag_wait("flag_common_breach_done");
@@ -1476,7 +1476,7 @@ spawn_dead_bodies_mudpumps() {
   level.scr_animtree["body_mud6"] = #animtree;
   level.scr_anim["body_mud6"]["bodies"][0] = % blackice_mudpump_bodies_06;
   level.scr_model["body_mud6"] = "body_oil_worker_bc";
-  var_0 = common_scripts\utility::getstruct("bodies", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("bodies", "script_noteworthy");
   var_1 = [];
 
   for(var_2 = 1; var_2 <= 6; var_2++) {
@@ -1525,7 +1525,7 @@ spawn_dead_bodies_pipe_deck() {
   level.scr_animtree["body10"] = #animtree;
   level.scr_anim["body10"]["bodies"][0] = % blackice_pipedeck_bodies_10;
   level.scr_model["body10"] = "body_oil_worker_b";
-  var_0 = common_scripts\utility::getstruct("bodies", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("bodies", "script_noteworthy");
   var_1 = [];
 
   for(var_2 = 1; var_2 <= 10; var_2++) {
@@ -1544,8 +1544,8 @@ spawn_dead_bodies_pipe_deck() {
 }
 
 vig_pipdeck_wires() {
-  var_0 = common_scripts\utility::getstruct("vig_pipdeck_wires", "script_noteworthy");
-  var_1 = getent("blackice_wires_pipedeck_anim", "targetname");
+  var_0 = common_scripts\utility::getStruct("vig_pipdeck_wires", "script_noteworthy");
+  var_1 = getEnt("blackice_wires_pipedeck_anim", "targetname");
   var_1 maps\_utility::assign_animtree("wires");
   var_2 = [];
   var_2["wires"] = var_1;
@@ -1553,7 +1553,7 @@ vig_pipdeck_wires() {
 }
 
 runout_group1() {
-  var_0 = common_scripts\utility::getstruct("vignette_exfil_runout", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_exfil_runout", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("debris01");
   var_2 = [];
   var_2["debris01"] = var_1;
@@ -1563,7 +1563,7 @@ runout_group1() {
 }
 
 runout_group2() {
-  var_0 = common_scripts\utility::getstruct("vignette_exfil_runout", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_exfil_runout", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("debris02");
   var_2 = [];
   var_2["debris02"] = var_1;
@@ -1573,7 +1573,7 @@ runout_group2() {
 }
 
 runout_group3() {
-  var_0 = common_scripts\utility::getstruct("vignette_exfil_runout", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_exfil_runout", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("debris03");
   var_2 = [];
   var_2["debris03"] = var_1;

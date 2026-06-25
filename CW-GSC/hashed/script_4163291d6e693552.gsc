@@ -75,7 +75,7 @@ function function_b9e4c169() {
 }
 
 function function_1b53cdc7() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (level.var_b48509f9) {
     case 1:
@@ -114,7 +114,7 @@ function function_1b53cdc7() {
 }
 
 function function_56fa33d9() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (level.var_b48509f9) {
     case 1:
@@ -164,7 +164,7 @@ function function_64719f04(instance) {
   var_d951c76b = 0;
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isalive(player)) {
         if(zm_vo::is_player_speaking(player) || zm_vo::function_c10c4064(player)) {
           var_d951c76b = 1;
@@ -213,7 +213,7 @@ function function_98da2ed1(str_alias) {
   level flag::wait_till("all_players_spawned");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distancesquared(player.origin, self.origin) < sqr(1700)) {
         level thread zm_vo::function_7622cb70(str_alias);
         return;
@@ -247,7 +247,7 @@ function function_df51a2e8(var_5314bd63, nd_path_start, var_384528, str_notify, 
     level thread zm_fasttravel::function_78e3c2ba(var_8f1ba730);
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player clientfield::set_player_uimodel("WorldSpaceIndicators.bleedOutModel" + self getentitynumber() + ".hide", 1);
   }
 
@@ -314,7 +314,7 @@ function function_df51a2e8(var_5314bd63, nd_path_start, var_384528, str_notify, 
     #var_9fa6220c: var_5817f611
   });
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player clientfield::set_player_uimodel("WorldSpaceIndicators.bleedOutModel" + self getentitynumber() + ".hide", 0);
   }
 
@@ -465,7 +465,7 @@ function function_1e45b156(s_instance) {
 
     foreach(s_path in var_2bcc2765) {
       if(isDefined(s_path.targetname)) {
-        var_4941074d = getent(s_path.targetname, "target");
+        var_4941074d = getEnt(s_path.targetname, "target");
 
         if(isDefined(var_4941074d.targetname)) {
           if(!isDefined(level.var_b3e433ae)) {

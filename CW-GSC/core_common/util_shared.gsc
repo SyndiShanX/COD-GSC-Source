@@ -164,7 +164,7 @@ function clear_streamer_hint(var_9e124d58) {
 
 function function_f6847a11() {
   if(self == level) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clear_streamer_hint();
     }
   }
@@ -305,9 +305,9 @@ function streamer_wait(n_stream_request_id, n_wait_frames = 3, n_timeout = 15, s
       n_num_streamers_ready = 0;
 
       if(isDefined(str_team)) {
-        a_players = getplayers(str_team);
+        a_players = getPlayers(str_team);
       } else {
-        a_players = getplayers();
+        a_players = getPlayers();
       }
 
       foreach(player in a_players) {
@@ -417,7 +417,7 @@ function function_21678f2c(players, timeout = getdvarint(#"hash_6974ec4bbf3b9e97
         }
 
         if(var_552f6263 && isDefined(player.predicted_spawn_point)) {
-          player setorigin(player.predicted_spawn_point.origin);
+          player setOrigin(player.predicted_spawn_point.origin);
           player setplayerangles(player.predicted_spawn_point.angles);
         }
 
@@ -1320,7 +1320,7 @@ function orient_to_normal(normal) {
     return (0, 0, 0);
   }
 
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
@@ -1389,7 +1389,7 @@ function _delay_notify(time_or_notify, str_notify, str_endon, arg1) {
 
 function get_closest_player(org, team) {
   team = get_team_mapping(team);
-  players = getplayers(team);
+  players = getPlayers(team);
   return arraysort(players, org, 1, 1)[0];
 }
 
@@ -1582,7 +1582,7 @@ function is_player_looking_at(v_origin, n_dot = 0.7, b_do_trace = 1, e_ignore, v
     v_view = anglesToForward(self getplayerangles());
   }
 
-  v_delta = vectornormalize(v_origin - v_eye);
+  v_delta = vectorNormalize(v_origin - v_eye);
   n_new_dot = vectordot(v_delta, v_view);
 
   if(n_new_dot >= n_dot) {
@@ -1723,7 +1723,7 @@ function wait_till_not_touching(e_to_check, e_to_touch) {
 function any_player_is_touching(ent, team) {
   team = get_team_mapping(team);
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     if(isalive(player) && player istouching(ent)) {
       return true;
     }
@@ -1965,7 +1965,7 @@ function get_rounds_won(team) {
 }
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -2011,7 +2011,7 @@ function function_aae7d83d(from_origin, var_5e321cee, origin, fov) {
   }
 
   forward = anglesToForward(var_5e321cee);
-  normalvec = vectornormalize(origin - from_origin);
+  normalvec = vectorNormalize(origin - from_origin);
   dot = vectordot(forward, normalvec);
   return dot > fov;
 }
@@ -2623,7 +2623,7 @@ function spawn_array_struct() {
 }
 
 function gethostplayer() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player ishost()) {
@@ -2633,7 +2633,7 @@ function gethostplayer() {
 }
 
 function gethostplayerforbots() {
-  players = getplayers();
+  players = getPlayers();
 
   for(index = 0; index < players.size; index++) {
     if(players[index] ishostforbots()) {
@@ -2721,7 +2721,7 @@ function set_lighting_state(n_state, var_2f177f67 = 1) {
 
   if(isDefined(self.lighting_state)) {
     if(self == level) {
-      players = var_2f177f67 ? function_a1ef346b() : getplayers();
+      players = var_2f177f67 ? function_a1ef346b() : getPlayers();
 
       foreach(player in players) {
         player set_lighting_state(level.lighting_state);
@@ -2836,7 +2836,7 @@ function auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_
     while(isDefined(self.birthtime) && float(gettime() - self.birthtime) / 1000 < n_min_time_alive);
 
     n_tests_passed = 0;
-    playerlist = getplayers();
+    playerlist = getPlayers();
 
     foreach(player in playerlist) {
       if(isbot(player)) {
@@ -2857,7 +2857,7 @@ function auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_
 
       if(n_mode & 2) {
         v_facing = anglesToForward(player getplayerangles());
-        v_to_ent = vectornormalize(self.origin - v_eye);
+        v_to_ent = vectorNormalize(self.origin - v_eye);
         n_dot = vectordot(v_facing, v_to_ent);
 
         if(n_dot < n_dot_check) {
@@ -3572,7 +3572,7 @@ function is_game_coop(team) {
 }
 
 function function_cfa8b8df(team) {
-  return getplayers(team).size > 0;
+  return getPlayers(team).size > 0;
 }
 
 function function_cda17472(team) {
@@ -4129,7 +4129,7 @@ function function_88c74107() {
   var_bf8813f9 = 0;
 
   if(self == level) {
-    a_players = getplayers();
+    a_players = getPlayers();
     var_bf8813f9 = 0;
 
     foreach(player in a_players) {
@@ -4348,7 +4348,7 @@ function function_63320ea1(vector, deadzone, var_edfc4672) {
     return (function_b5338ccb(vector[0], deadzone), function_b5338ccb(vector[1], deadzone), 0);
   }
 
-  return vectornormalize(vector) * function_b5338ccb(length(vector), deadzone);
+  return vectorNormalize(vector) * function_b5338ccb(length(vector), deadzone);
 }
 
 function function_stack(func, param1, param2, param3, param4, param5) {
@@ -4621,7 +4621,7 @@ function teleport(pos, v_ang) {
   }
 
   if(isPlayer(self)) {
-    self setorigin(v_pos);
+    self setOrigin(v_pos);
     self setplayerangles(v_ang);
     return;
   }

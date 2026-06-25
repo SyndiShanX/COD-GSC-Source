@@ -774,7 +774,7 @@ rage_high_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str
 rage_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(!flag("rage_off")) {
     if(level.player getcurrentweapon() == "machete_held_sp") {
-      level.player playrumbleonentity("reload_clipout");
+      level.player playRumbleOnEntity("reload_clipout");
     }
 
     self thread rage_blood_enemy_death(v_dir, v_point);

@@ -24,7 +24,7 @@ func_BAB2() {
   level.var_EA99.ignoreme = 1;
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_F5A4();
   var_0 = scripts\sp\vehicle::func_1080C("player_jackal");
-  var_1 = scripts\engine\utility::getstruct("mons_intro_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("mons_intro_start", "targetname");
   func_0BDC::func_10CD1(var_0, var_1);
   wait 0.05;
   thread scripts\sp\maps\phspace\phspace_battle::func_D868();
@@ -56,7 +56,7 @@ func_BAAC() {
   scripts\sp\utility::func_266A("mons_intro");
   func_96EC();
   level.var_12B67 func_0BB6::func_39E1();
-  var_0 = getent("ca_olympus", "targetname");
+  var_0 = getEnt("ca_olympus", "targetname");
   var_0.var_EEF9 = "none";
   level.var_3670 = scripts\sp\vehicle::func_1080C("ca_olympus");
   level.var_3670 thread func_F051();
@@ -151,7 +151,7 @@ func_CF48() {
 
 func_AB88() {
   var_0 = 999999;
-  level.var_FD6E.var_E35D linkto(level.var_12B67.var_BCDA);
+  level.var_FD6E.var_E35D linkTo(level.var_12B67.var_BCDA);
   var_1 = 5;
   var_2 = 0.12;
 
@@ -167,12 +167,12 @@ func_AB88() {
     var_6 = scripts\sp\math::func_AB6F(var_6, anglestoright(var_4), var_2);
     var_7 = scripts\sp\math::func_AB6F(var_7, anglestoup(var_4), var_2);
     level.var_FD6E.var_E35D.angles = _axistoangles(var_5, var_6, var_7);
-    level.var_FD6E.var_E35D linkto(level.var_12B67.var_BCDA, "j_mainroot");
+    level.var_FD6E.var_E35D linkTo(level.var_12B67.var_BCDA, "j_mainroot");
     var_1 = var_1 - 0.05;
     wait 0.05;
   }
 
-  level.var_FD6E.var_E35D linkto(level.var_12B67.var_BCDA, "j_mainroot", (0, 0, 0), (0, 0, 0));
+  level.var_FD6E.var_E35D linkTo(level.var_12B67.var_BCDA, "j_mainroot", (0, 0, 0), (0, 0, 0));
 }
 
 func_A828() {
@@ -192,14 +192,14 @@ func_A829() {
   level.var_FD6E.var_E35D.var_EBA9 = undefined;
   level.var_FD6E.var_E35D.var_B455 = undefined;
   level.var_FD6E.var_E35D.var_B74F = undefined;
-  level.var_12B67 linkto(level.var_FD6E.var_E35D);
+  level.var_12B67 linkTo(level.var_FD6E.var_E35D);
   level.var_FD6E.var_E35D scripts\engine\utility::delaythread(0.2, func_0B51::func_E3C6, 1, 0);
 }
 
 func_CF82() {
   wait 0.2;
   func_A828();
-  level.var_12B67 linkto(level.var_FD6E.var_E35D);
+  level.var_12B67 linkTo(level.var_FD6E.var_E35D);
 
   for(;;) {
     var_0 = level.var_FD6E.var_E35D.var_E8AD;
@@ -233,7 +233,7 @@ func_1F90() {
   level.var_3672 setModel("veh_mil_air_ca_olympus_mons_bridge_piece");
   level.var_3672 notsolid();
   level.var_3672 hide();
-  var_0 = scripts\engine\utility::getstruct("trenchrun_anim_node", "targetname");
+  var_0 = scripts\engine\utility::getStruct("trenchrun_anim_node", "targetname");
   level.var_1F8E = var_0 scripts\engine\utility::spawn_tag_origin();
   level.var_1F8E.angles = var_0.angles;
   level.var_EAA5 = func_10712("trenchrun_salter");
@@ -252,12 +252,12 @@ func_1F90() {
   level.var_12B55.var_BCDA = func_10712("trenchrun_convoy_04");
   level.var_12B56.var_BCDA = func_10712("trenchrun_convoy_05");
   level.var_D16B.var_11512 = scripts\engine\utility::spawn_tag_origin();
-  level.var_D16B.var_11512 linkto(level.var_D16B, "j_mainroot", (0, 0, 0), (0, 0, 0));
+  level.var_D16B.var_11512 linkTo(level.var_D16B, "j_mainroot", (0, 0, 0), (0, 0, 0));
   level.var_12704 = [level.var_EAA5, level.var_D16B, level.var_3671, level.var_EA46, level.var_EAC0, level.var_DC56, level.var_12B67.var_BCDA, level.var_12B7D.var_BCDA, level.var_12B50.var_BCDA, level.var_12B51.var_BCDA, level.var_12B53.var_BCDA, level.var_12B54.var_BCDA, level.var_12B55.var_BCDA, level.var_12B56.var_BCDA, level.var_3672.var_BCDA];
   var_1 = [level.var_12B67, level.var_12B7D, level.var_12B50, level.var_12B51, level.var_12B53, level.var_12B54, level.var_12B55, level.var_12B56, level.var_3672];
 
   foreach(var_3 in level.var_12704) {
-    var_3 linkto(level.var_1F8E);
+    var_3 linkTo(level.var_1F8E);
     level.var_1F8E func_1EC5(var_3);
   }
 
@@ -279,7 +279,7 @@ func_1F8F() {
   thread func_126FD();
   thread func_12702();
   level.var_D299 thread func_0BDC::func_D29B(1, 3);
-  level.var_3670 linkto(level.var_3671, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.var_3670 linkTo(level.var_3671, "tag_origin", (0, 0, 0), (0, 0, 0));
   func_F587();
   var_0 = level.var_D16B islegacyagent(level.var_EC85["generic_mover"][level.var_D16B.var_1FAF]);
   level.var_3670.cannon func_F5D4(var_0);
@@ -368,8 +368,8 @@ func_1F92() {
     var_1 = 25;
   }
 
-  level.var_1F8E rotateto(level.var_1F8E.angles + (0, 25, 0), var_1, var_1 * 0.5, var_1 * 0.5);
-  level.var_1F8E moveto(level.var_1F8E.origin + (-10000, -35000, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+  level.var_1F8E rotateTo(level.var_1F8E.angles + (0, 25, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+  level.var_1F8E moveTo(level.var_1F8E.origin + (-10000, -35000, 0), var_1, var_1 * 0.5, var_1 * 0.5);
   func_137E2("kill_convoy05");
   level.var_12B54 scripts\engine\utility::delaythread(11, func_0BB6::func_3983, level.var_3670);
   level.var_12B54 scripts\engine\utility::delaythread(17, func_0BB6::func_3983, level.var_3670);
@@ -437,7 +437,7 @@ func_1F92() {
   level.var_12B67 func_0BB6::func_3967();
   level notify("mons_ftl_out");
   thread func_CF48();
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 1.3, level.var_D127.origin, 20000);
   _setmusicstate("");
   _killfxontag(scripts\engine\utility::getfx("mons_damage_linger"), level.var_3670.var_4CF6, "tag_origin");
@@ -471,7 +471,7 @@ func_DC50() {
   playFXOnTag(scripts\engine\utility::getfx("ret_ram_initial_impact"), level.var_DC56, "tag_vfx_000");
   level.var_DC56 playSound("phspace_mons_collide_pt1");
   earthquake(0.39, 2.9, level.var_D127.origin, 20000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   func_137E2("vfx_ram_drag_start");
   playFXOnTag(scripts\engine\utility::getfx("ret_ram_drag_churn_debris"), level.var_DC56, "tag_vfx_001");
   func_137E2("tower_break");
@@ -492,7 +492,7 @@ func_BACA() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
   var_0.origin = level.var_DC56.origin;
   var_0.angles = level.var_3670.angles;
-  var_0 linkto(level.var_3670);
+  var_0 linkTo(level.var_3670);
   playFXOnTag(scripts\engine\utility::getfx("ret_ram_mons_impact"), var_0, "tag_origin");
   wait 5;
   var_0 delete();
@@ -500,7 +500,7 @@ func_BACA() {
 
 func_E313() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  var_0 linkto(level.var_DC56, "tag_vfx_002", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(level.var_DC56, "tag_vfx_002", (0, 0, 0), (0, 0, 0));
   var_0 playSound("phspace_mons_collide_pt2", "sound_done");
   var_0 waittill("sound_done");
   var_0 delete();
@@ -609,7 +609,7 @@ func_1F91() {
 
     if(!isDefined(level.var_D127.var_58B6)) {
       level.var_D127.var_58B6 = spawn("script_origin", level.var_D127.origin);
-      level.var_D127.var_58B6 linkto(level.var_D127);
+      level.var_D127.var_58B6 linkTo(level.var_D127);
       level.var_D127.var_58B6 ghostattack(0);
     }
 
@@ -795,7 +795,7 @@ func_126FB(var_0) {
       if(!isDefined(var_4)) {
         continue;
       }
-      var_5 = vectornormalize(var_4.origin - level.var_D127.origin);
+      var_5 = vectorNormalize(var_4.origin - level.var_D127.origin);
       var_6 = vectordot(var_5, anglesToForward(level.var_D127.angles));
 
       if(var_6 < 0.3) {
@@ -940,15 +940,15 @@ func_BAA0(var_0) {
     var_1 = scripts\engine\utility::spawn_tag_origin();
     var_1.angles = self.angles;
     wait 0.05;
-    self linkto(var_1, "tag_origin", (0, 0, 0), (0, 0, 0));
-    var_1 moveto(self.var_BCDA.origin, var_0, var_0 * 0.5, var_0 * 0.5);
-    var_1 rotateto(self.var_BCDA.angles, var_0, var_0 * 0.5, var_0 * 0.5);
+    self linkTo(var_1, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_1 moveTo(self.var_BCDA.origin, var_0, var_0 * 0.5, var_0 * 0.5);
+    var_1 rotateTo(self.var_BCDA.angles, var_0, var_0 * 0.5, var_0 * 0.5);
     wait(var_0);
     self unlink();
     var_1 delete();
   }
 
-  self linkto(self.var_BCDA, "j_mainroot", (0, 0, 0), (0, 0, 0));
+  self linkTo(self.var_BCDA, "j_mainroot", (0, 0, 0), (0, 0, 0));
 }
 
 func_1EC5(var_0) {
@@ -968,10 +968,10 @@ func_10712(var_0) {
 func_D1DE() {
   level notify("player_looks_at_ethan");
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  var_0 linkto(level.var_D299.var_BCDA, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(level.var_D299.var_BCDA, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_1 = scripts\sp\utility::func_107EA("eth3n_space", 1);
   var_1.var_1FBB = "eth3n";
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 givegrabscore(1);
   playFXOnTag(scripts\engine\utility::getfx("vfx_ethan_cockpit_light"), var_1, "tag_origin");
   thread func_0BDC::func_A2B0(%jackal_pilot_heist_mons_intro_lookback, %jackal_vehicle_heist_mons_intro_lookback, 0.2, 1);
@@ -1089,7 +1089,7 @@ func_BA9C() {
   level.var_1CB9 func_0BDC::func_19A2();
   level.var_1CB9 func_0BDC::func_19AB(500);
   level.var_1CB9 func_0BDC::func_6B4C("boost_mode");
-  var_4 = scripts\engine\utility::getstruct("ally1_flyto_mons", "targetname");
+  var_4 = scripts\engine\utility::getStruct("ally1_flyto_mons", "targetname");
   level.var_1CB9 thread func_0BDC::func_A1EC(var_4.origin, 0);
   wait 3.2;
   level.var_1CB9.var_9930 = 1;
@@ -1129,7 +1129,7 @@ func_BA82() {
   thread func_DAEE();
   thread func_D083();
   earthquake(0.53, 2.8, level.var_D127.origin, 40000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   func_0BDC::func_A38E(35, 5, 5, 0.5);
   level.player func_8497();
   thread func_A1E2();
@@ -1177,7 +1177,7 @@ func_BA80() {
 
   foreach(var_2 in var_0) {
     var_3 = var_2 scripts\engine\utility::spawn_tag_origin();
-    var_2 linkto(var_3);
+    var_2 linkTo(var_3);
     var_3 func_BA83();
     var_2 func_0BDC::func_19A0(1);
     var_2 func_0BDC::func_A167();
@@ -1194,11 +1194,11 @@ func_BA83(var_0) {
   var_6 = scripts\sp\math::func_C097(5000, 80000, var_5);
   var_7 = scripts\sp\math::func_6A8E(var_1, 0, var_6);
   var_8 = scripts\sp\math::func_6A8E(0.1, 0.6, var_6);
-  var_9 = vectornormalize(var_4);
+  var_9 = vectorNormalize(var_4);
   self.var_528E = self.origin + var_9 * var_7;
   wait(var_8);
   self unlink();
-  self moveto(self.var_528E, 5, 0.5, 4.5);
+  self moveTo(self.var_528E, 5, 0.5, 4.5);
 
   if(isDefined(var_0)) {
     self.var_5289 = var_0;
@@ -1207,7 +1207,7 @@ func_BA83(var_0) {
     self.var_5289 = self.angles + var_2;
   }
 
-  self rotateto(self.var_5289, 13.0, 1.3, 11.7);
+  self rotateTo(self.var_5289, 13.0, 1.3, 11.7);
 }
 
 func_BAA3() {
@@ -1240,7 +1240,7 @@ func_BAA3() {
 }
 
 func_137FD() {
-  var_0 = getent("trigger_safe_to_return", "targetname");
+  var_0 = getEnt("trigger_safe_to_return", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
 }
 
@@ -1314,8 +1314,8 @@ func_12705() {
   level.var_EA99 func_0BDC::func_6B4C("space", 0);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_F5A4();
   var_0 = scripts\sp\vehicle::func_1080C("player_jackal");
-  var_1 = scripts\engine\utility::getstruct("trench_run_start", "targetname");
-  var_2 = scripts\engine\utility::getstruct("salter_trench_run_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("trench_run_start", "targetname");
+  var_2 = scripts\engine\utility::getStruct("salter_trench_run_start", "targetname");
   level.var_EA99 func_0BDC::func_19A2();
   level.var_EA99 vehicle_teleport(var_2.origin, var_2.angles);
   level.var_EA99 func_0BDC::func_A1EC(var_2.origin, 1, 50, var_2.angles);
@@ -1328,7 +1328,7 @@ func_12705() {
 
   if(!isDefined(level.var_D127.var_58B6)) {
     level.var_D127.var_58B6 = spawn("script_origin", level.var_D127.origin);
-    level.var_D127.var_58B6 linkto(level.var_D127);
+    level.var_D127.var_58B6 linkTo(level.var_D127);
     level.var_D127.var_58B6 ghostattack(0);
   }
 
@@ -1361,7 +1361,7 @@ func_126F9() {
 func_12702() {
   wait 2;
   level.var_EA99 func_0BDC::func_6B4C("hover");
-  level.var_EA99 linkto(level.var_EAA5, "j_mainroot", (0, 0, 0), (0, 0, 0));
+  level.var_EA99 linkTo(level.var_EAA5, "j_mainroot", (0, 0, 0), (0, 0, 0));
 }
 
 func_4968(var_0) {
@@ -1416,8 +1416,8 @@ func_DC53() {
   level.var_EA99 func_0BDC::func_6B4C("space", 0);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_F5A4();
   var_0 = scripts\sp\vehicle::func_1080C("player_jackal");
-  var_1 = scripts\engine\utility::getstruct("ram_start", "targetname");
-  var_2 = scripts\engine\utility::getstruct("salter_ram_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("ram_start", "targetname");
+  var_2 = scripts\engine\utility::getStruct("salter_ram_start", "targetname");
   level.var_EA99 func_0BDC::func_19A2();
   level.var_EA99 vehicle_teleport(var_2.origin, var_2.angles);
   level.var_EA99 func_0BDC::func_A1EC(var_2.origin, 1, 50, var_2.angles);
@@ -1430,7 +1430,7 @@ func_DC53() {
 
   if(!isDefined(level.var_D127.var_58B6)) {
     level.var_D127.var_58B6 = spawn("script_origin", level.var_D127.origin);
-    level.var_D127.var_58B6 linkto(level.var_D127);
+    level.var_D127.var_58B6 linkTo(level.var_D127);
     level.var_D127.var_58B6 ghostattack(0);
   }
 
@@ -1494,8 +1494,8 @@ func_A82E() {
   level.var_EA99 func_0BDC::func_6B4C("space", 0);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_F5A4();
   var_0 = scripts\sp\vehicle::func_1080C("player_jackal");
-  var_1 = scripts\engine\utility::getstruct("landing_start", "targetname");
-  var_2 = scripts\engine\utility::getstruct("salter_landing_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("landing_start", "targetname");
+  var_2 = scripts\engine\utility::getStruct("salter_landing_start", "targetname");
   level.var_EA99 func_0BDC::func_19A2();
   level.var_EA99 vehicle_teleport(var_2.origin, var_2.angles);
   level.var_EA99 func_0BDC::func_A1EC(var_2.origin, 1, 50, var_2.angles);
@@ -1574,7 +1574,7 @@ func_A830() {
   }
   level.var_FD6E.var_E35D.origin = level.var_12B67.origin;
   level.var_FD6E.var_E35D.angles = level.var_12B67.angles;
-  level.var_FD6E.var_E35D linkto(level.var_12B67);
+  level.var_FD6E.var_E35D linkTo(level.var_12B67);
   level.var_FD6E.var_E35D func_0B51::func_FDCB("show");
   level.var_FD6E.var_E35D func_0B51::func_FDCB("solid");
   level.var_12B67 func_8184();
@@ -1589,13 +1589,13 @@ func_11311() {
     level.var_3670 detach("veh_mil_air_ca_olympus_mons", "TAG_ORIGIN");
     level.var_3670 attach("veh_mil_air_ca_olympus_mons_dmg", "TAG_ORIGIN");
     level.var_3670.var_4CF6 = scripts\engine\utility::spawn_tag_origin();
-    level.var_3670.var_4CF6 linkto(level.var_3670, "tag_origin", (550, 5100, 4100), (0, 0, 0));
+    level.var_3670.var_4CF6 linkTo(level.var_3670, "tag_origin", (550, 5100, 4100), (0, 0, 0));
     playFXOnTag(scripts\engine\utility::getfx("mons_damage_linger"), level.var_3670.var_4CF6, "tag_origin");
   }
 
   level.var_FD6E.var_E35D setModel("veh_mil_air_un_retribution_dmg");
   level.var_FD6E.var_E35D.var_4CF6 = scripts\engine\utility::spawn_tag_origin();
-  level.var_FD6E.var_E35D.var_4CF6 linkto(level.var_FD6E.var_E35D, "tag_origin", (14000, -1800, 800), (0, 0, 0));
+  level.var_FD6E.var_E35D.var_4CF6 linkTo(level.var_FD6E.var_E35D, "tag_origin", (14000, -1800, 800), (0, 0, 0));
   playFXOnTag(scripts\engine\utility::getfx("ret_damage_linger"), level.var_FD6E.var_E35D.var_4CF6, "tag_origin");
 }
 
@@ -1770,7 +1770,7 @@ func_BAF5() {
   var_2 = spawn("script_origin", level.var_D127.origin + var_0 * 750 + var_1 * 350);
   var_2.angles = level.var_D127.angles;
   level.var_D127.var_BAEF = var_2;
-  level.var_D127.var_BAEF linkto(level.var_D127);
+  level.var_D127.var_BAEF linkTo(level.var_D127);
 
   foreach(var_8, var_4 in self.turrets) {
     if(var_8 == "cap_turret_phalanx") {
@@ -1909,7 +1909,7 @@ func_1076F() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("veh_mil_air_ca_olympus_mons_gun_rig");
   var_0 glinton(#animtree);
-  var_0 linkto(self, "tag_main_cannon", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_main_cannon", (0, 0, 0), (0, 0, 0));
   self.cannon = var_0;
   self.cannon hide();
 }
@@ -1924,9 +1924,9 @@ func_BA7E(var_0) {
 
   if(isDefined(var_0)) {
     self.cannon.var_11512.origin = var_0.origin;
-    self.cannon.var_11512 linkto(var_0);
+    self.cannon.var_11512 linkTo(var_0);
   } else {
-    self.cannon.var_11512 linkto(self.cannon, "tag_flash", (20000, 0, 0), (0, 0, 0));
+    self.cannon.var_11512 linkTo(self.cannon, "tag_flash", (20000, 0, 0), (0, 0, 0));
   }
 
   self.cannon playSound("mons_megacannon_fire");
@@ -1953,8 +1953,8 @@ func_9347() {
   scripts\engine\utility::flag_init("ret_mover_init");
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_F5A4();
   var_0 = scripts\sp\vehicle::func_1080C("player_jackal");
-  var_1 = scripts\engine\utility::getstruct("landing_start", "targetname");
-  var_2 = scripts\engine\utility::getstruct("salter_landing_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("landing_start", "targetname");
+  var_2 = scripts\engine\utility::getStruct("salter_landing_start", "targetname");
   func_0BDC::func_10CD1(var_0, var_1);
   thread scripts\sp\maps\phspace\phspace_battle::func_D868();
   var_3 = getvehiclenode("retribution_landing_pos", "targetname");

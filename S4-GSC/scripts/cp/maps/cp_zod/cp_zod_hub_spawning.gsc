@@ -10,31 +10,31 @@ main() {
   level.hub_max_active_zombies = 10;
   level.zombies_spawned_before_screamer = 0;
   level.zombies_to_spawn_before_screamer = randomintrange(4, 8);
-  var_0 = scripts\engine\utility::getstruct("hub_fob_spawn_zones", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hub_fob_spawn_zones", "targetname");
 
   if(isDefined(var_0)) {
     level.a_hub_fob_spawn_zones = var_0 scripts\engine\utility::_id_67A9();
   }
 
-  var_1 = scripts\engine\utility::getstruct("hub_theater_spawn_zones", "targetname");
+  var_1 = scripts\engine\utility::getStruct("hub_theater_spawn_zones", "targetname");
 
   if(isDefined(var_1)) {
     level.a_hub_theater_spawn_zones = var_1 scripts\engine\utility::_id_67A9();
   }
 
-  var_2 = scripts\engine\utility::getstruct("hub_basement_spawn_zones", "targetname");
+  var_2 = scripts\engine\utility::getStruct("hub_basement_spawn_zones", "targetname");
 
   if(isDefined(var_2)) {
     level.a_hub_basement_spawn_zones = var_2 scripts\engine\utility::_id_67A9();
   }
 
-  var_3 = scripts\engine\utility::getstruct("aprtment_first_floor_spawn_zones", "targetname");
+  var_3 = scripts\engine\utility::getStruct("aprtment_first_floor_spawn_zones", "targetname");
 
   if(isDefined(var_3)) {
     level.a_apartment_first_floor_spawners_spawners = var_3 scripts\engine\utility::_id_67A9();
   }
 
-  var_4 = scripts\engine\utility::getstruct("aprtment_second_floor_spawn_zones", "targetname");
+  var_4 = scripts\engine\utility::getStruct("aprtment_second_floor_spawn_zones", "targetname");
 
   if(isDefined(var_4)) {
     level.a_apartment_second_floor_spawners_spawners = var_4 scripts\engine\utility::_id_67A9();
@@ -79,7 +79,7 @@ start_hub_zombie_spawning(var_0) {
         }
 
         var_7 = var_5[var_6];
-        var_2 = getent(var_7._id_0481, "target");
+        var_2 = getEnt(var_7._id_0481, "target");
         var_8 = "enemy_base_zombie_cp";
         var_9 = spawn_zombie(var_8, var_7.origin, var_7.angles, var_7, var_2);
         var_9 scripts\aitypes\zombie_common\awareness::set_unaware();
@@ -163,12 +163,12 @@ spawn_active_zombies(var_0) {
   for(var_2 = 1; var_2 <= var_0; var_2++) {
     if(var_2 <= var_1.size) {
       var_3 = var_1[var_2 - 1];
-      var_4 = scripts\engine\utility::getstruct(var_3._id_0481, "target");
+      var_4 = scripts\engine\utility::getStruct(var_3._id_0481, "target");
       var_5 = var_3 scripts\cp\utility::_id_63E3();
       var_6 = undefined;
 
       if(isDefined(var_5)) {
-        var_7 = vectornormalize(var_5.origin - var_3.origin);
+        var_7 = vectorNormalize(var_5.origin - var_3.origin);
         var_6 = vectortoangles(var_7);
       }
 

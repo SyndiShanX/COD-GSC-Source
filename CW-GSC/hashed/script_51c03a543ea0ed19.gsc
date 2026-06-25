@@ -112,7 +112,7 @@ function function_f9d1756b() {
   level flag::wait_till("bustout_pre_player_start");
   level.var_9a3944f4.forward_scalar = 1;
   level.var_9a3944f4 util::delay(0.4, undefined, &tkdn_heli_intro::function_cbe25a41, level.var_664fd741, "tag_glass_front_left_lower_d0");
-  level.var_9a3944f4 util::delay(2.4, "move_light_to_garage", &tkdn_heli_intro::function_cbe25a41, getent("truck_bustout_heli_target", "targetname"), "tag_glass_front_left_lower_d0");
+  level.var_9a3944f4 util::delay(2.4, "move_light_to_garage", &tkdn_heli_intro::function_cbe25a41, getEnt("truck_bustout_heli_target", "targetname"), "tag_glass_front_left_lower_d0");
   wait 0.5;
   level.var_9a3944f4.forward_scalar = 1;
 }
@@ -140,7 +140,7 @@ function function_a76cb757(woods) {
 
 function function_e78650d8() {
   wait 3;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   for(slowed = 0; !level flag::get("bustout_player_start"); slowed = 1) {
@@ -170,7 +170,7 @@ function bustout_house_guys() {
 
 function function_27c66141() {
   flag::set("intro_waittill_bustout_heli");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(level.var_664fd741)) {
     wait 3;
@@ -181,7 +181,7 @@ function function_27c66141() {
     objectives::follow("woods_hit1", level.var_664fd741);
     level.var_95a74232 = 1;
   } else {
-    thread function_b4a74554(getent("hit1_truck_house", "script_noteworthy", 1));
+    thread function_b4a74554(getEnt("hit1_truck_house", "script_noteworthy", 1));
   }
 
   thread function_aed2b350(level.var_664fd741);
@@ -191,7 +191,7 @@ function function_27c66141() {
 }
 
 function function_c000638d() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("bustout_pre_player_start");
   level.var_664fd741 notify(#"hash_26d0e9e370348b6a");
   waitframe(1);
@@ -201,12 +201,12 @@ function function_c000638d() {
   level.var_664fd741.target = "woods_bustout_backyard";
   level.var_664fd741 thread spawner::go_to_node();
   level flag::wait_till("bustout_player_start");
-  door = getent("bustout_garage_door", "script_noteworthy");
+  door = getEnt("bustout_garage_door", "script_noteworthy");
   door hide();
   door notsolid();
   level.var_97dd00f8 = vehicle::simple_spawn_and_drive("intro_garage_bustout");
 
-  for(bustout_driver = undefined; !isDefined(bustout_driver); bustout_driver = getent("bustout_driver", "targetname", 1)) {
+  for(bustout_driver = undefined; !isDefined(bustout_driver); bustout_driver = getEnt("bustout_driver", "targetname", 1)) {
     waitframe(1);
   }
 
@@ -276,7 +276,7 @@ function function_69da7d8e(heli) {
   level flag::wait_till("bustout_start_shooting_house");
   aim = struct::get("bustout_shoot_house_aim");
   var_ade9681a = struct::get("bustout_shoot_house_spotlight");
-  move_start = getent("bustout_shoot_house_mover", "targetname");
+  move_start = getEnt("bustout_shoot_house_mover", "targetname");
   mover = util::spawn_model("tag_origin", move_start.origin, move_start.angles);
   level.var_9a3944f4.forward_scalar = 1;
   heli thread tkdn_heli_intro::function_cbe25a41(var_ade9681a, "tag_glass_front_left_lower_d0");
@@ -298,7 +298,7 @@ function function_69da7d8e(heli) {
   heli turretcleartarget(var_8132076f);
   waitframe(2);
   heli stopfireweapon();
-  door = getent("bustout_house_door", "script_noteworthy");
+  door = getEnt("bustout_house_door", "script_noteworthy");
   door hide();
   door notsolid();
   level.var_9a3944f4 thread tkdn_heli_intro::function_cbe25a41(struct::get("heli_spotlight_house_aim"), "tag_glass_front_left_lower_d0");
@@ -336,14 +336,14 @@ function function_17162917() {
   level.var_9a3944f4.forward_scalar = 180;
   level.var_9a3944f4.var_113b6995 = 1;
   self.var_19a7fb91 = 32;
-  level.var_9a3944f4 thread tkdn_heli_intro::function_cbe25a41(getplayers()[0], "tag_glass_front_left_lower_d0");
+  level.var_9a3944f4 thread tkdn_heli_intro::function_cbe25a41(getPlayers()[0], "tag_glass_front_left_lower_d0");
 }
 
 function mover_target(mover, next_target) {
   level endon(#"bustout_house_shotup");
 
   while(true) {
-    mover moveto(next_target.origin, 1.5, 1.5 * 0.33, 1.5 * 0.33);
+    mover moveTo(next_target.origin, 1.5, 1.5 * 0.33, 1.5 * 0.33);
     wait 1.5;
     next_target = struct::get(next_target.target, "targetname");
   }

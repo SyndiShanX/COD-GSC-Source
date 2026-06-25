@@ -199,7 +199,7 @@ s4_tank_create(var_0, var_1) {
   var_0._id_04DE = "tank_mike4_physics_mp";
   var_0._id_31A0 = 1;
   var_0._id_E728 = 0;
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;
@@ -246,7 +246,7 @@ s4_tank_createdriverturret(var_0, var_1) {
   var_2 = s4_tank_getleveldata();
   var_3 = "s4_tur_main_tank_mike4_mp";
   var_4 = spawnturret("misc_turret", var_0 gettagorigin("tag_turret"), var_3, 0);
-  var_4 linkto(var_0, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0, "tag_turret", (0, 0, 0), (0, 0, 0));
 
   if(istrue(var_1._id_FE22)) {
     var_4 setModel("tank_mike4_tur_main_01");
@@ -269,7 +269,7 @@ s4_tank_creategunnerturret(var_0, var_1) {
   var_3 = scripts\cp_mp\vehicles\vehicle::_id_100CC(var_0, "s4_tur_main_tank_mike4_mp");
   var_4 = "s4_tur_mg_gun_tank_mp";
   var_5 = spawnturret("misc_turret", var_3 gettagorigin("TAG_TURRET_ATTACH"), var_4, 0);
-  var_5 linkto(var_3, "TAG_TURRET_ATTACH", (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_3, "TAG_TURRET_ATTACH", (0, 0, 0), (0, 0, 0));
   var_5 setModel("tur_mgolf42_spindle_00");
   var_5 setmode("sentry_offline");
   var_5 setsentryowner(undefined);
@@ -895,7 +895,7 @@ s4_tank_premoddamagecallback(var_0) {
   var_2 = anglestoup(self.angles);
   var_3 = vectordot(var_1, var_2);
   var_4 = var_0.point + var_2 * var_3;
-  var_5 = vectornormalize(var_4 - self.origin);
+  var_5 = vectorNormalize(var_4 - self.origin);
   var_6 = anglesToForward(self.angles);
   var_7 = anglestoright(self.angles);
 

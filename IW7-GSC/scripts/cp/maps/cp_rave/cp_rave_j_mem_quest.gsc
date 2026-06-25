@@ -49,11 +49,11 @@ init_arm() {
   self.turned_angles = self.angles;
   self.high_point = self.origin + (0, 0, 6);
   self.low_point = self.origin + (0, 0, -20);
-  self moveto(self.origin + (0, 0, -15), 1);
+  self moveTo(self.origin + (0, 0, -15), 1);
   self waittill("movedone");
   self.angles = (270, 180, 180);
   var_0 = randomintrange(-270, 270);
-  self rotateyaw(var_0, 0.1);
+  self rotateYaw(var_0, 0.1);
   wait(0.1);
 }
 
@@ -119,15 +119,15 @@ do_give_thing_to_kev_3() {
 }
 
 find_thing(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel(var_1);
   if(var_0 == "j_mem_3") {
-    var_2 moveto(var_2.origin + (0, 0, 15), 1);
+    var_2 moveTo(var_2.origin + (0, 0, 15), 1);
   }
 
   var_2 makeusable();
-  var_2 sethintstring(&"CP_RAVE_PICKUP_ITEM");
+  var_2 setHintString(&"CP_RAVE_PICKUP_ITEM");
   var_2 waittill("trigger", var_4);
   var_2 makeunusable();
   level.player_picked_up_thing = var_4;
@@ -223,7 +223,7 @@ circle_fight_loop_check(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_6 = 1000000;
-  var_7 = scripts\engine\utility::getstruct(var_1, "targetname");
+  var_7 = scripts\engine\utility::getStruct(var_1, "targetname");
   if(!isDefined(level.photo)) {
     level.photo = spawn("script_model", var_7.origin);
     level.photo setModel("tag_origin");
@@ -306,7 +306,7 @@ circle_fight_loop_check(var_0, var_1, var_2, var_3, var_4, var_5) {
           wait(0.1);
           level.slasher suicide();
           level.slasher_visible_in_normal_mode = 0;
-          var_7 = scripts\engine\utility::getstruct(var_1, "targetname");
+          var_7 = scripts\engine\utility::getStruct(var_1, "targetname");
           nuke_fx_kill_everyone();
           level drop_photo_from_slasher(level.slasher_drop, var_5, var_1);
         }
@@ -395,7 +395,7 @@ slash_a_perk(var_0) {
 wait_for_start_trigger(var_0, var_1) {
   var_2 = 1000000;
   level.photo makeusable();
-  level.photo sethintstring(&"CP_RAVE_PLACE_ITEM");
+  level.photo setHintString(&"CP_RAVE_PLACE_ITEM");
   for(;;) {
     level.photo waittill("trigger", var_3);
     var_4 = 0;
@@ -490,9 +490,9 @@ add_to_and_play_arm_fx_array(var_0) {
 raise_arm(var_0) {
   self setModel(var_0);
   if(isDefined(self.high_point)) {
-    self moveto(self.high_point, 0.2);
+    self moveTo(self.high_point, 0.2);
   } else {
-    self moveto(self.origin + (0, 0, 10), 0.2);
+    self moveTo(self.origin + (0, 0, 10), 0.2);
   }
 
   self waittill("movedone");
@@ -500,9 +500,9 @@ raise_arm(var_0) {
 
 lower_arm(var_0) {
   if(isDefined(self.low_point)) {
-    self moveto(self.low_point, 0.2);
+    self moveTo(self.low_point, 0.2);
   } else {
-    self moveto(self.origin - (0, 0, 10), 0.2);
+    self moveTo(self.origin - (0, 0, 10), 0.2);
   }
 
   self waittill("movedone");
@@ -753,7 +753,7 @@ zombie_limb_soul_fly_to_arm(var_0, var_1) {
     var_6 = 0.05;
   }
 
-  var_2 moveto(var_3, var_6);
+  var_2 moveTo(var_3, var_6);
   var_2 waittill("movedone");
   var_3 = var_1.origin;
   var_4 = var_2.origin;
@@ -763,7 +763,7 @@ zombie_limb_soul_fly_to_arm(var_0, var_1) {
     var_6 = 0.05;
   }
 
-  var_2 moveto(var_3, var_6);
+  var_2 moveTo(var_3, var_6);
   var_2 waittill("movedone");
   var_2 delete();
 }
@@ -779,7 +779,7 @@ zombie_limb_soul_fly_to_photo(var_0, var_1, var_2) {
     var_7 = 0.05;
   }
 
-  var_3 moveto(var_4, var_7);
+  var_3 moveTo(var_4, var_7);
   var_3 waittill("movedone");
   var_8 = "unused";
   var_1 thread lower_arm(var_8);
@@ -795,7 +795,7 @@ pick_up_charged_photo(var_0, var_1) {
   var_2 = level.photo;
   var_2 setModel(var_1);
   var_2 makeusable();
-  var_2 sethintstring(&"CP_RAVE_INSPECT_ITEM");
+  var_2 setHintString(&"CP_RAVE_INSPECT_ITEM");
   var_2 waittill("trigger", var_3);
   var_2 makeunusable();
   if(isDefined(level.photo_soul)) {
@@ -813,7 +813,7 @@ time_out_charged_photo(var_0) {
 
 slasher_fight(var_0, var_1, var_2) {
   var_3 = 1000000;
-  var_4 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_5 = spawnfx(level._effect["memory_trap_loop"], var_4.origin + (0, 0, -22));
   playFX(level._effect["slasher_appear"], var_4.origin);
   if(isDefined(level.photo_soul)) {
@@ -864,7 +864,7 @@ drop_photo_from_slasher(var_0, var_1, var_2) {
   var_3 = spawn("script_model", level.photo.origin);
   var_3 setModel("tag_origin_soultrail");
   level.photo makeusable();
-  level.photo sethintstring(&"CP_RAVE_INSPECT_ITEM");
+  level.photo setHintString(&"CP_RAVE_INSPECT_ITEM");
   level.photo waittill("trigger", var_4);
   level.photo hide();
   var_3 delete();

@@ -1085,7 +1085,7 @@ brush_show() {
     if(!isDefined(self.model.disconnect_paths)) {
       self.model connectpaths();
     } else {
-      self.model disconnectpaths();
+      self.model disconnectPaths();
     }
   }
 }
@@ -1098,11 +1098,11 @@ brush_throw() {
   ent = undefined;
 
   if(isDefined(self.v["target"])) {
-    ent = getent(self.v["target"], "targetname");
+    ent = getEnt(self.v["target"], "targetname");
   }
 
   if(!isDefined(ent)) {
-    ent = getstruct(self.v["target"], "targetname");
+    ent = getStruct(self.v["target"], "targetname");
 
     if(!isDefined(ent)) {
       self.model delete();
@@ -1124,7 +1124,7 @@ brush_throw() {
     target = undefined;
 
     if(isDefined(ent.target)) {
-      target = getent(ent.target, "targetname");
+      target = getEnt(ent.target, "targetname");
     }
 
     if(!isDefined(target)) {
@@ -1278,11 +1278,11 @@ play_sound_on_tag(alias, tag, ends_on_death) {
   thread delete_on_death_wait_sound(org, "sounddone");
 
   if(isDefined(tag)) {
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playSound(alias, "sounddone");
@@ -1323,11 +1323,11 @@ play_loop_sound_on_tag(alias, tag, bstopsoundondeath) {
   }
 
   if(isDefined(tag)) {
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -1348,11 +1348,11 @@ play_loop_sound_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -1476,7 +1476,7 @@ init_anim_model(animname, is_simple_prop, animtree_override) {
     self unlink();
     self.anim_link.angles = self.angles;
     self.anim_link.origin = self.origin;
-    self linkto(self.anim_link, "origin_animate_jnt");
+    self linkTo(self.anim_link, "origin_animate_jnt");
   } else
     self assign_animtree(self.animname, animtree_override);
 }
@@ -1528,7 +1528,7 @@ set_flag_on_targetname_trigger(msg) {
   if(flag(msg)) {
     return;
   }
-  trigger = getent(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger waittill("trigger");
   flag_set(msg);
 }
@@ -1962,7 +1962,7 @@ get_linked_ents() {
     linknames = get_links();
 
     for(i = 0; i < linknames.size; i++) {
-      ent = getent(linknames[i], "script_linkname");
+      ent = getEnt(linknames[i], "script_linkname");
 
       if(isDefined(ent)) {
         array[array.size] = ent;
@@ -1980,7 +1980,7 @@ get_linked_structs() {
     linknames = get_links();
 
     for(i = 0; i < linknames.size; i++) {
-      ent = getstruct(linknames[i], "script_linkname");
+      ent = getStruct(linknames[i], "script_linkname");
 
       if(isDefined(ent)) {
         array[array.size] = ent;
@@ -2006,7 +2006,7 @@ get_last_ent_in_chain(sentitytype) {
           epathpoint = getnode(epathpoint.target, "targetname");
           break;
         case "ent":
-          epathpoint = getent(epathpoint.target, "targetname");
+          epathpoint = getEnt(epathpoint.target, "targetname");
           break;
         default:
           assertmsg("sEntityType needs to be 'vehiclenode', 'pathnode' or 'ent'");
@@ -2549,7 +2549,7 @@ skipto_teleport_players(skipto_name, coop_sort) {
   assert(skipto_spots.size >= players.size, "Need more skipto positions for players!");
 
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(skipto_spots[i].origin);
+    players[i] setOrigin(skipto_spots[i].origin);
 
     if(isDefined(skipto_spots[i].angles)) {
       players[i] setplayerangles(skipto_spots[i].angles);
@@ -2579,7 +2579,7 @@ get_sorted_skipto_spots(skipto_name) {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -3172,9 +3172,9 @@ play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, st
 
     if(isDefined(b_link_to_self) && b_link_to_self) {
       if(isDefined(str_tag)) {
-        m_fx linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
+        m_fx linkTo(self, str_tag, (0, 0, 0), (0, 0, 0));
       } else {
-        m_fx linkto(self);
+        m_fx linkTo(self);
       }
     }
 
@@ -3352,7 +3352,7 @@ set_ignoresuppression(val) {
   self.ignoresuppression = val;
 }
 
-set_goalradius(radius) {
+set_goalRadius(radius) {
   self.goalradius = radius;
 }
 
@@ -3611,17 +3611,17 @@ lerp_player_view_to_position(origin, angles, lerptime, fraction, right_arc, left
   linker.angles = self getplayerangles();
 
   if(isDefined(hit_geo)) {
-    self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
+    self playerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
   } else if(isDefined(right_arc)) {
-    self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
+    self playerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
   } else if(isDefined(fraction)) {
-    self playerlinkto(linker, "", fraction);
+    self playerlinkTo(linker, "", fraction);
   } else {
-    self playerlinkto(linker);
+    self playerlinkTo(linker);
   }
 
-  linker moveto(origin, lerptime, lerptime * 0.25);
-  linker rotateto(angles, lerptime, lerptime * 0.25);
+  linker moveTo(origin, lerptime, lerptime * 0.25);
+  linker rotateTo(angles, lerptime, lerptime * 0.25);
   linker waittill("movedone");
   linker delete();
 }
@@ -3649,8 +3649,8 @@ lerp_player_view_to_position_oldstyle(origin, angles, lerptime, fraction, right_
     self playerlinktodelta(linker);
   }
 
-  linker moveto(origin, lerptime, lerptime * 0.25);
-  linker rotateto(angles, lerptime, lerptime * 0.25);
+  linker moveTo(origin, lerptime, lerptime * 0.25);
+  linker rotateTo(angles, lerptime, lerptime * 0.25);
   linker waittill("movedone");
   linker delete();
 }
@@ -3679,8 +3679,8 @@ lerp_player_view_to_moving_position_oldstyle(ent, tag, lerptime, fraction, right
   for(count = 0; count < max_count; count++) {
     origin = ent gettagorigin(tag);
     angles = ent gettagangles(tag);
-    linker moveto(origin, 0.0167 * (max_count - count));
-    linker rotateto(angles, 0.0167 * (max_count - count));
+    linker moveTo(origin, 0.0167 * (max_count - count));
+    linker rotateTo(angles, 0.0167 * (max_count - count));
     wait 0.0167;
   }
 
@@ -3810,7 +3810,7 @@ spawn_drone(b_make_fake_ai, str_targetname, b_spawn_collision, do_ragdoll_death,
 
   if(b_spawn_collision) {
     m_drone.drone_collision = spawn_model("drone_collision", m_drone.origin);
-    m_drone.drone_collision linkto(m_drone);
+    m_drone.drone_collision linkTo(m_drone);
   }
 
   if(isDefined(self.script_health)) {
@@ -3933,11 +3933,11 @@ auto_delete(e_ref) {
 
         if(n_seconds_alive > 10) {
           v_eye = level.player getEye();
-          v_to_self = vectornormalize(self.origin - v_eye);
+          v_to_self = vectorNormalize(self.origin - v_eye);
           n_dot_ref = -1;
 
           if(isDefined(e_ref)) {
-            v_player_to_ref = vectornormalize(e_ref.origin - v_eye);
+            v_player_to_ref = vectorNormalize(e_ref.origin - v_eye);
             n_dot_ref = vectordot(v_to_self, v_player_to_ref);
           }
 
@@ -4122,9 +4122,9 @@ lerp_fov_overtime(time, destfov, use_camera_tween) {
   }
 }
 
-anim_stopanimscripted(n_blend_time) {
+anim_stopanimScripted(n_blend_time) {
   anim_ent = get_anim_ent();
-  anim_ent stopanimscripted(n_blend_time);
+  anim_ent stopanimScripted(n_blend_time);
   anim_ent notify("single anim", "end");
   anim_ent notify("looping anim", "end");
   anim_ent maps\_anim::_stop_anim_threads();
@@ -4133,7 +4133,7 @@ anim_stopanimscripted(n_blend_time) {
 
 anim_stopscene(n_blend_time) {
   anim_ent = get_anim_ent();
-  anim_ent stopanimscripted(n_blend_time);
+  anim_ent stopanimScripted(n_blend_time);
   anim_ent notify("single anim", "end");
   anim_ent notify("looping anim", "end");
   anim_ent maps\_anim::_stop_anim_threads();
@@ -4710,7 +4710,7 @@ expandmaxs(maxs, point) {
 
 get_ai_touching_volume(team, volume_name, volume) {
   if(!isDefined(volume)) {
-    volume = getent(volume_name, "targetname");
+    volume = getEnt(volume_name, "targetname");
     assert(isDefined(volume), volume_name + " does not exist");
   }
 
@@ -4970,7 +4970,7 @@ simple_spawn(name_or_spawners, spawn_func, param1, param2, param3, param4, param
 
 simple_spawn_single(name_or_spawner, spawn_func, param1, param2, param3, param4, param5, bforce) {
   if(isstring(name_or_spawner)) {
-    spawner = getent(name_or_spawner, "targetname");
+    spawner = getEnt(name_or_spawner, "targetname");
     assert(isDefined(spawner), "no spawner with targetname " + name_or_spawner + " found!");
   } else if(isarray(name_or_spawner))
     assertmsg("simple_spawn_single cannot be used on an array of spawners.use simple_spawn instead.");
@@ -5087,7 +5087,7 @@ spawn(classname, origin, flags, radius, height, destructibledef) {
   }
 }
 
-spawnvehicle(modelname, targetname, vehicletype, origin, angles, destructibledef) {
+spawnVehicle(modelname, targetname, vehicletype, origin, angles, destructibledef) {
   if(spawnthrottleenable()) {
     while(!canspawn()) {
       wait_network_frame();
@@ -5104,9 +5104,9 @@ spawnvehicle(modelname, targetname, vehicletype, origin, angles, destructibledef
   assert(isDefined(angles));
 
   if(isDefined(destructibledef)) {
-    return codespawnvehicle(modelname, targetname, vehicletype, origin, angles, destructibledef);
+    return codespawnVehicle(modelname, targetname, vehicletype, origin, angles, destructibledef);
   } else {
-    return codespawnvehicle(modelname, targetname, vehicletype, origin, angles);
+    return codespawnVehicle(modelname, targetname, vehicletype, origin, angles);
   }
 }
 
@@ -5258,7 +5258,7 @@ sm_use_trig_when_complete(spawn_manager_targetname, trig_name, trig_key, once_on
 
 sm_use_trig_when_complete_internal(spawn_manager_targetname, trig_name, trig_key, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, trig_key);
+    trigger = getEnt(trig_name, trig_key);
     assert(isDefined(trigger), "The trigger " + trig_key + " / " + trig_name + " does not exist.");
     trigger endon("trigger");
   }
@@ -5276,7 +5276,7 @@ sm_use_trig_when_cleared(spawn_manager_targetname, trig_name, trig_key, once_onl
 
 sm_use_trig_when_cleared_internal(spawn_manager_targetname, trig_name, trig_key, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, trig_key);
+    trigger = getEnt(trig_name, trig_key);
     assert(isDefined(trigger), "The trigger " + trig_key + " / " + trig_name + " does not exist.");
     trigger endon("trigger");
   }
@@ -5294,7 +5294,7 @@ sm_use_trig_when_enabled(spawn_manager_targetname, trig_name, trig_key, once_onl
 
 sm_use_trig_when_enabled_internal(spawn_manager_targetname, trig_name, trig_key, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, trig_key);
+    trigger = getEnt(trig_name, trig_key);
     assert(isDefined(trigger), "The trigger " + trig_key + " / " + trig_name + " does not exist.");
     trigger endon("trigger");
   }
@@ -5492,7 +5492,7 @@ get_ai_from_spawn_manager(spawn_manager_targetname, no_assert) {
     no_assert = 0;
   }
 
-  sm = getent(spawn_manager_targetname, "targetname");
+  sm = getEnt(spawn_manager_targetname, "targetname");
 
   if(!isDefined(sm)) {
     for(i = 0; i < level.spawn_managers.size; i++) {
@@ -6483,7 +6483,7 @@ play_movie_on_surface_thread(cin_id, movie_name, start_on_notify, notify_when_do
     wait 0.05;
   }
 
-  playsoundatposition("evt_" + movie_name + "_movie", (0, 0, 0));
+  playSoundAtPosition("evt_" + movie_name + "_movie", (0, 0, 0));
 
   println("pausing " + movie_name + ": on surface");
 
@@ -6677,7 +6677,7 @@ play_movie(movie_name, is_looping, is_in_memory, start_on_notify, use_fullscreen
 }
 
 handle_movie_dvars(cin_id) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i]._hud_dvars = [];
@@ -6698,7 +6698,7 @@ handle_movie_dvars(cin_id) {
 
   println("play_movie: resetting play movie dvars.");
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     keys = getarraykeys(players[i]._hud_dvars);
@@ -6737,7 +6737,7 @@ start_movie(cin_id, movie_name, fullscreen_trans, foreground, check_for_webm, le
     level.fullscreen_cin_hud = create_movie_hud(cin_id, fullscreen_trans, foreground, check_for_webm, letterbox);
   }
 
-  playsoundatposition(movie_name + "_movie", (0, 0, 0));
+  playSoundAtPosition(movie_name + "_movie", (0, 0, 0));
   pause3dcinematic(cin_id, 0);
   return level.fullscreen_cin_hud;
 }
@@ -6817,7 +6817,7 @@ movie_fade_in(movie_name, fullscreen_trans) {
 
   if(fullscreen_trans != "none") {
     fade_hud = newhudelem();
-    playsoundatposition(movie_name + "_fade_in", (0, 0, 0));
+    playSoundAtPosition(movie_name + "_fade_in", (0, 0, 0));
     fade_in = 0.5;
 
     if(isDefined(level.movie_fade_in_time)) {
@@ -6864,7 +6864,7 @@ movie_fade_in(movie_name, fullscreen_trans) {
 movie_fade_out(movie_name, vision_set, fullscreen_trans) {
   if(fullscreen_trans != "none") {
     fade_hud = newhudelem();
-    playsoundatposition(movie_name + "_fade_out", (0, 0, 0));
+    playSoundAtPosition(movie_name + "_fade_out", (0, 0, 0));
     fade_out = 0.5;
 
     if(isDefined(level.movie_fade_out_time)) {
@@ -7095,7 +7095,7 @@ fake_physics_launch(v_target_pos, n_force, n_rotate_angle, str_rotate_type) {
         self rotatepitch(n_rotate_angle, n_time);
         break;
       case "yaw":
-        self rotateyaw(n_rotate_angle, n_time);
+        self rotateYaw(n_rotate_angle, n_time);
         break;
       default:
         assertmsg(str_rotate_type + " is not a valid rotation type for fake_physics_launch");
@@ -7153,13 +7153,13 @@ explosion_launch(v_point, n_radius, n_force_min, n_force_max, n_launch_angle_min
 
     if(n_dist_squared < n_radius_squared) {
       v_launch_direction = a_guys[i].origin - v_point;
-      v_launch_direction = vectornormalize(v_launch_direction);
+      v_launch_direction = vectorNormalize(v_launch_direction);
       v_normalized = (v_launch_direction[0], v_launch_direction[1], 0);
       n_scale = linear_map(n_dist_squared, 0, n_radius_squared, n_force_min, n_force_max);
       n_angle = linear_map(n_dist_squared, 0, n_radius_squared, n_launch_angle_min, n_launch_angle_max);
       v_normalized = v_normalized * n_scale;
       v_final = (v_normalized[0], v_normalized[1], n_angle);
-      a_guys[i] anim_stopanimscripted();
+      a_guys[i] anim_stopanimScripted();
       a_guys[i].force_gib = 1;
 
       if(isai(a_guys[i])) {
@@ -7208,7 +7208,7 @@ rumble_loop(n_count, n_delay, str_rumble_type) {
   n_times_played = 0;
 
   while(n_times_played < n_count || b_loop_forever) {
-    self playrumbleonentity(str_rumble_type);
+    self playRumbleOnEntity(str_rumble_type);
     n_times_played++;
     wait(n_delay);
   }
@@ -7513,7 +7513,7 @@ get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_use_eye) {
   v_to_point = v_point - v_origin;
 
   if(b_normalize) {
-    v_to_point = vectornormalize(v_to_point);
+    v_to_point = vectorNormalize(v_to_point);
   }
 
   n_dot = vectordot(v_direction, v_to_point);
@@ -7574,14 +7574,14 @@ player_wakes_up(b_remove_weapons, str_return_weapons_notify) {
   self shellshock("death", 12);
   self screen_fade_out(0);
   wait 0.2;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 0.4;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 0.4;
   self screen_fade_to_alpha_with_blur(0.35, 2, 3);
   wait 3.5;
   self screen_fade_to_alpha_with_blur(1, 2.5, 6);
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 0.5;
   self screen_fade_to_alpha_with_blur(0.2, 2.5, 1.5);
   wait 2;
@@ -7903,10 +7903,10 @@ init_hero(name, func_init, arg1, arg2, arg3, arg4, arg5) {
   }
 
   name = tolower(name);
-  ai_hero = getent(name + "_ai", "targetname");
+  ai_hero = getEnt(name + "_ai", "targetname");
 
   if(!isalive(ai_hero)) {
-    spawner = getent(name, "targetname");
+    spawner = getEnt(name, "targetname");
 
     if(!(isDefined(spawner.spawning) && spawner.spawning)) {
       spawner.count++;
@@ -7975,7 +7975,7 @@ weapondamagetrace(from, to, startradius, ignore) {
     midpos = to;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
 
@@ -8420,8 +8420,8 @@ waittill_dialog_finished_array(a_ents, str_line) {
 }
 
 ammo_refill_trigger() {
-  self sethintstring(&"SCRIPT_AMMO_REFILL");
-  self setcursorhint("HINT_NOICON");
+  self setHintString(&"SCRIPT_AMMO_REFILL");
+  self setCursorHint("HINT_NOICON");
 
   while(true) {
     self waittill("trigger", e_player);
@@ -8502,11 +8502,11 @@ _player_walk_speed_reset(str_endon) {
 
 set_lighting_pair(str_targetname_target, str_targetname_source, e_actor, e_source) {
   if(!isDefined(e_actor)) {
-    e_actor = getent(str_targetname_target, "targetname");
+    e_actor = getEnt(str_targetname_target, "targetname");
   }
 
   if(!isDefined(e_source)) {
-    e_source = getent(str_targetname_source, "targetname");
+    e_source = getEnt(str_targetname_source, "targetname");
   }
 
   assert(isDefined(e_actor), "Undefined entity for creating lighting pair");
@@ -8518,7 +8518,7 @@ set_lighting_pair(str_targetname_target, str_targetname_source, e_actor, e_sourc
 
 clear_lighting_pair(str_targetname, e_actor) {
   if(!isDefined(e_actor)) {
-    e_actor = getent(str_targetname, "targetname");
+    e_actor = getEnt(str_targetname, "targetname");
   }
 
   e_actor clearclientflag(7);
@@ -8661,7 +8661,7 @@ model_convert_areas() {
 
 model_convert_area(area) {
   if(isstring(area)) {
-    e_area = getent(area, "script_noteworthy");
+    e_area = getEnt(area, "script_noteworthy");
     str_area = area;
   } else {
     e_area = area;
@@ -8830,7 +8830,7 @@ model_convert_copy_kvps(target) {
 
 model_delete_area(area) {
   if(isstring(area)) {
-    e_area = getent(area, "script_noteworthy");
+    e_area = getEnt(area, "script_noteworthy");
   }
 
   i = 0;
@@ -8843,7 +8843,7 @@ model_delete_area(area) {
     if(isDefined(m_convert.destructibledef)) {
       if(issubstr(m_convert.destructibledef, "barrel")) {
         if(isDefined(m_convert.target)) {
-          m_clip = getent(m_convert.target, "targetname");
+          m_clip = getEnt(m_convert.target, "targetname");
 
           if(isDefined(m_clip)) {
             m_clip delete();

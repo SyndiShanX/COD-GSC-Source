@@ -10,7 +10,7 @@ error(message) {
   wait 0.05;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   if(!isDefined(level.struct_class_names)) {
     return undefined;
   }
@@ -129,7 +129,7 @@ waitforclient(client) {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = VectorNormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = VectorDot(forward, normal);
 

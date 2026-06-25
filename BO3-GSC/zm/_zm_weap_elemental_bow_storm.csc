@@ -82,7 +82,7 @@ function function_4d18057(localclientnum) {
   self endon("hash_171d986a");
   self endon("death");
   while(isDefined(self)) {
-    self playrumbleonentity(localclientnum, "zod_idgun_vortex_interior");
+    self playRumbleOnEntity(localclientnum, "zod_idgun_vortex_interior");
     wait(0.075);
   }
 }

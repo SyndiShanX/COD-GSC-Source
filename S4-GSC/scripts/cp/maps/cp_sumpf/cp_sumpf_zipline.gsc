@@ -15,13 +15,13 @@ init() {
 }
 
 zipline_init() {
-  level.zipline = getent("sumpf_zipline_wire", "targetname");
-  var_0 = getent("zipline_col", "targetname");
-  var_0 linkto(level.zipline);
-  var_1 = getent("zipline_nav_col", "targetname");
-  var_1 linkto(level.zipline);
+  level.zipline = getEnt("sumpf_zipline_wire", "targetname");
+  var_0 = getEnt("zipline_col", "targetname");
+  var_0 linkTo(level.zipline);
+  var_1 = getEnt("zipline_nav_col", "targetname");
+  var_1 linkTo(level.zipline);
   level.zipline.nav_clip = var_1;
-  var_2 = getent("zipline_ai_block", "targetname");
+  var_2 = getEnt("zipline_ai_block", "targetname");
   var_2 _meth_8093();
   level.zipline.nav_blocker = var_2;
   level.zipline.is_docked = 1;
@@ -31,7 +31,7 @@ zipline_init() {
   var_4.angles = var_3.angles;
   var_4 setModel("tag_origin");
   var_5 = level.zipline.origin - var_4.origin;
-  level.zipline linkto(var_4, "tag_origin", var_5, (0, 0, 0));
+  level.zipline linkTo(var_4, "tag_origin", var_5, (0, 0, 0));
   level.zipline._id_94E8 = var_4;
   var_6 = [];
   var_7 = scripts\engine\utility::getStructArray("zipline_motor_loc", "script_noteworthy");
@@ -110,14 +110,14 @@ set_zipline_disabled(var_0) {
 zipline_path_init() {
   var_0 = spawnStruct();
   var_0.tracks = [];
-  var_1 = scripts\engine\utility::getstruct("zipline_start_node", "targetname");
+  var_1 = scripts\engine\utility::getStruct("zipline_start_node", "targetname");
   var_0.first_node = var_1;
 
   while(isDefined(var_1)) {
     if(isDefined(var_1.target)) {
       var_2 = spawnStruct();
       var_3 = var_1;
-      var_1 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       var_2._id_A578 = [var_3, var_1];
       var_2._id_4B85 = distance(var_3.origin, var_1.origin);
       var_2._id_F1E8 = var_2._id_4B85 / 100;
@@ -140,20 +140,20 @@ zipline_power_init(var_0) {
     var_1._id_5284 = [];
     level.zipline_switch = var_1;
     var_2 = spawnStruct();
-    var_2.model = getent("zipline_blocker", "targetname");
-    var_2._id_39A7 = getent("zipline_blocker_col", "targetname");
+    var_2.model = getEnt("zipline_blocker", "targetname");
+    var_2._id_39A7 = getEnt("zipline_blocker_col", "targetname");
     var_2.trigger = spawn("script_model", var_2.model.origin + (50, 50, 50));
     var_2.trigger setModel("tag_origin");
     var_2.trigger makeuseable();
     var_2.trigger setusefov(120);
-    var_2.trigger sethintstring(&"CP_SUMPF/ZIPLINE_BLOCKED");
-    var_2.trigger setcursorhint("HINT_NOBUTTON");
+    var_2.trigger setHintString(&"CP_SUMPF/ZIPLINE_BLOCKED");
+    var_2.trigger setCursorHint("HINT_NOBUTTON");
     level.zipline_blocker = var_2;
 
     foreach(var_4 in var_0) {
-      var_5 = getent(var_4.target, "script_noteworthy");
+      var_5 = getEnt(var_4.target, "script_noteworthy");
       var_5 thread zipline_power_handle_set_state("off");
-      var_6 = getent(var_4.target, "targetname");
+      var_6 = getEnt(var_4.target, "targetname");
       var_4._id_73E3 = var_5;
       var_4._id_0278 = var_6;
       var_4.marker_label = "zipline_power";
@@ -261,8 +261,8 @@ zipline_cooldown(var_0) {
 
 zipline_switch_init(var_0) {
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "script_noteworthy");
-    var_3 linkto(level.zipline, "tag_handle");
+    var_3 = getEnt(var_2.target, "script_noteworthy");
+    var_3 linkTo(level.zipline, "tag_handle");
     var_3 thread zipline_power_handle_set_state("off");
     var_2._id_73E3 = var_3;
     var_2._id_4A88 = 1;
@@ -434,19 +434,19 @@ zipline_move(var_0, var_1) {
   childthread zipline_sway_motion_start(var_0);
   var_17 = var_13[0];
   var_18 = var_17._id_F1E8;
-  self moveto(var_17._id_A578[var_16].origin, var_18, 1.0, 0);
+  self moveTo(var_17._id_A578[var_16].origin, var_18, 1.0, 0);
   scripts\engine\utility::_id_108A7(var_18, "movedone");
 
   for(var_19 = 1; var_19 < var_13.size - 1; var_19++) {
     var_17 = var_13[var_19];
     var_18 = var_17._id_F1E8;
-    self moveto(var_17._id_A578[var_16].origin, var_18);
+    self moveTo(var_17._id_A578[var_16].origin, var_18);
     scripts\engine\utility::_id_108A7(var_18, "movedone");
   }
 
   var_17 = var_13[var_13.size - 1];
   var_18 = var_17._id_F1E8;
-  self moveto(var_17._id_A578[var_16].origin, var_18, 0, 1.0);
+  self moveTo(var_17._id_A578[var_16].origin, var_18, 0, 1.0);
   scripts\engine\utility::_id_108A7(var_18, "movedone");
 
   if(istrue(var_1)) {
@@ -565,7 +565,7 @@ zipline_power_handle_set_state(var_0) {
         self.pre_angles = undefined;
       }
 
-      self linkto(var_1, "tag_handle");
+      self linkTo(var_1, "tag_handle");
     }
 
     self._id_E747 = var_0;

@@ -305,7 +305,7 @@ function private margwatraveltellupdate(localclientnum) {
     if(isDefined(player)) {
       dist_sq = distancesquared(player.origin, self.origin);
       if(dist_sq < 1000000) {
-        player playrumbleonentity(localclientnum, "tank_rumble");
+        player playRumbleOnEntity(localclientnum, "tank_rumble");
       }
     }
     wait(0.05);
@@ -351,12 +351,12 @@ function margwaprocessfootstep(localclientnum, pos, surface, notetrack, bone) {
   }
   e_player earthquake(n_scale, 0.1, pos, n_dist);
   if(n_scale <= 0.25 && n_scale > 0.2) {
-    e_player playrumbleonentity(localclientnum, "shotgun_fire");
+    e_player playRumbleOnEntity(localclientnum, "shotgun_fire");
   } else {
     if(n_scale <= 0.2 && n_scale > 0.1) {
-      e_player playrumbleonentity(localclientnum, "damage_heavy");
+      e_player playRumbleOnEntity(localclientnum, "damage_heavy");
     } else {
-      e_player playrumbleonentity(localclientnum, "reload_small");
+      e_player playRumbleOnEntity(localclientnum, "reload_small");
     }
   }
 }
@@ -368,10 +368,10 @@ function private margwasmashcallback(localclientnum, oldvalue, newvalue, bnewent
     distsq = distancesquared(smashpos, e_player.origin);
     if(distsq < 20736) {
       e_player earthquake(0.7, 0.25, e_player.origin, 3000);
-      e_player playrumbleonentity(localclientnum, "shotgun_fire");
+      e_player playRumbleOnEntity(localclientnum, "shotgun_fire");
     } else if(distsq < 36864) {
       e_player earthquake(0.7, 0.25, e_player.origin, 1500);
-      e_player playrumbleonentity(localclientnum, "damage_heavy");
+      e_player playRumbleOnEntity(localclientnum, "damage_heavy");
     }
   }
 }

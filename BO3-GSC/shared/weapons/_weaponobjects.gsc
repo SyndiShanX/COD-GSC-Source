@@ -964,7 +964,7 @@ function proximityalarmloop(watcher, owner) {
     } else if(alarmstatus != alarmstatusold || (alarmstatus == "on" && !isDefined(self.owner.proximityamlarment))) {
       if(alarmstatus == "on") {
         if(alarmstatusold == "off" && isDefined(watcher) && isDefined(watcher.proximityalarmactivatesound)) {
-          playsoundatposition(watcher.proximityalarmactivatesound, self.origin + vectorscale((0, 0, 1), 32));
+          playSoundAtPosition(watcher.proximityalarmactivatesound, self.origin + vectorscale((0, 0, 1), 32));
         }
         self proximityalarmactivate(1, watcher);
       } else {
@@ -974,7 +974,7 @@ function proximityalarmloop(watcher, owner) {
     }
     alarmstatus = "off";
     actors = getactorarray();
-    players = getplayers();
+    players = getPlayers();
     detectentities = arraycombine(players, actors, 0, 0);
     foreach(entity in detectentities) {
       wait(0.05);
@@ -1246,14 +1246,14 @@ function hackerinit(watcher) {
   }
   self.hackertrigger = spawn("trigger_radius_use", triggerorigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
   self.hackertrigger sethintlowpriority(1);
-  self.hackertrigger setcursorhint("HINT_NOICON", self);
+  self.hackertrigger setCursorHint("HINT_NOICON", self);
   self.hackertrigger setignoreentfortrigger(self);
-  self.hackertrigger enablelinkto();
-  self.hackertrigger linkto(self);
+  self.hackertrigger enablelinkTo();
+  self.hackertrigger linkTo(self);
   if(isDefined(level.hackerhints[self.weapon.name])) {
-    self.hackertrigger sethintstring(level.hackerhints[self.weapon.name].hint);
+    self.hackertrigger setHintString(level.hackerhints[self.weapon.name].hint);
   } else {
-    self.hackertrigger sethintstring(&"MP_GENERIC_HACKING");
+    self.hackertrigger setHintString(&"MP_GENERIC_HACKING");
   }
   self.hackertrigger setperkfortrigger("specialty_disarmexplosive");
   self.hackertrigger thread hackertriggersetvisibility(self.owner);
@@ -1459,8 +1459,8 @@ function hackerremoveweapon(weapon_instance) {
 
 function proximityweaponobject_createdamagearea(watcher) {
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - watcher.detonateradius), level.aitriggerspawnflags | level.vehicletriggerspawnflags, watcher.detonateradius, watcher.detonateradius * 2);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self thread deleteondeath(damagearea);
   return damagearea;
 }
@@ -1628,7 +1628,7 @@ function shouldaffectweaponobject(object, watcher) {
   if(dist < watcher.detectionmindist) {
     return 0;
   }
-  dirtopos = vectornormalize(dirtopos);
+  dirtopos = vectorNormalize(dirtopos);
   dot = vectordot(dirtopos, objectforward);
   return dot > watcher.detectiondot;
 }
@@ -1957,10 +1957,10 @@ function onspawnspecialcrossbowtrigger(watcher, player) {
     self clientfield::set("retrievable", 1);
   }
   self.hatchetpickuptrigger = spawn("trigger_radius", triggerorigin, 0, 50, 50);
-  self.hatchetpickuptrigger enablelinkto();
-  self.hatchetpickuptrigger linkto(self);
+  self.hatchetpickuptrigger enablelinkTo();
+  self.hatchetpickuptrigger linkTo(self);
   if(isDefined(triggerparentent)) {
-    self.hatchetpickuptrigger linkto(triggerparentent);
+    self.hatchetpickuptrigger linkTo(triggerparentent);
   }
   self thread watchspecialcrossbowtrigger(self.hatchetpickuptrigger, watcher.pickup, watcher.pickupsoundplayer, watcher.pickupsound);
   thread switch_team(self, watcher, player);
@@ -2032,10 +2032,10 @@ function onspawnhatchettrigger(watcher, player) {
     self clientfield::set("retrievable", 1);
   }
   self.hatchetpickuptrigger = spawn("trigger_radius", triggerorigin, 0, 50, 50);
-  self.hatchetpickuptrigger enablelinkto();
-  self.hatchetpickuptrigger linkto(self);
+  self.hatchetpickuptrigger enablelinkTo();
+  self.hatchetpickuptrigger linkTo(self);
   if(isDefined(triggerparentent)) {
-    self.hatchetpickuptrigger linkto(triggerparentent);
+    self.hatchetpickuptrigger linkTo(triggerparentent);
   }
   self thread watchhatchettrigger(self.hatchetpickuptrigger, watcher.pickup, watcher.pickupsoundplayer, watcher.pickupsound);
   thread switch_team(self, watcher, player);
@@ -2146,19 +2146,19 @@ function onspawnretrievableweaponobject(watcher, player) {
     }
     self.pickuptrigger = spawn("trigger_radius_use", triggerorigin);
     self.pickuptrigger sethintlowpriority(1);
-    self.pickuptrigger setcursorhint("HINT_NOICON", self);
-    self.pickuptrigger enablelinkto();
-    self.pickuptrigger linkto(self);
+    self.pickuptrigger setCursorHint("HINT_NOICON", self);
+    self.pickuptrigger enablelinkTo();
+    self.pickuptrigger linkTo(self);
     self.pickuptrigger setinvisibletoall();
     self.pickuptrigger setvisibletoplayer(player);
     if(isDefined(level.retrievehints[watcher.name])) {
-      self.pickuptrigger sethintstring(level.retrievehints[watcher.name].hint);
+      self.pickuptrigger setHintString(level.retrievehints[watcher.name].hint);
     } else {
-      self.pickuptrigger sethintstring(&"MP_GENERIC_PICKUP");
+      self.pickuptrigger setHintString(&"MP_GENERIC_PICKUP");
     }
     self.pickuptrigger setteamfortrigger(player.pers["team"]);
     if(isDefined(triggerparentent)) {
-      self.pickuptrigger linkto(triggerparentent);
+      self.pickuptrigger linkTo(triggerparentent);
     }
     self thread watchusetrigger(self.pickuptrigger, watcher.pickup, watcher.pickupsoundplayer, watcher.pickupsound);
     if(isDefined(watcher.pickup_trigger_listener)) {
@@ -2167,18 +2167,18 @@ function onspawnretrievableweaponobject(watcher, player) {
   }
   if(watcher.enemydestroy) {
     self.enemytrigger = spawn("trigger_radius_use", triggerorigin);
-    self.enemytrigger setcursorhint("HINT_NOICON", self);
-    self.enemytrigger enablelinkto();
-    self.enemytrigger linkto(self);
+    self.enemytrigger setCursorHint("HINT_NOICON", self);
+    self.enemytrigger enablelinkTo();
+    self.enemytrigger linkTo(self);
     self.enemytrigger setinvisibletoplayer(player);
     if(level.teambased) {
       self.enemytrigger setexcludeteamfortrigger(player.team);
       self.enemytrigger.triggerteamignore = self.team;
     }
     if(isDefined(level.destroyhints[watcher.name])) {
-      self.enemytrigger sethintstring(level.destroyhints[watcher.name].hint);
+      self.enemytrigger setHintString(level.destroyhints[watcher.name].hint);
     } else {
-      self.enemytrigger sethintstring(&"MP_GENERIC_DESTROY");
+      self.enemytrigger setHintString(&"MP_GENERIC_DESTROY");
     }
     self thread watchusetrigger(self.enemytrigger, watcher.ondestroyed);
   }

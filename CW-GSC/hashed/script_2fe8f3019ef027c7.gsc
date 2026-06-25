@@ -235,7 +235,7 @@ function function_592c1713(entity) {
 }
 
 function function_a7eadb40(entity, target) {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   if(!isDefined(target) || n_players <= 1) {
     return;
@@ -325,7 +325,7 @@ function function_eabb6f2f(entity) {
       entity.var_bd1d170c = 1;
       var_16969010 = 0;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player.ignoreme || player isnotarget()) {
           var_16969010 = 1;
         }
@@ -412,11 +412,11 @@ function private function_c8417113(entity) {
   entity.var_14dfe7c6 = var_d673b0d0;
 
   if(var_2375c133 && var_d673b0d0) {
-    var_f3e6a062 = vectornormalize(anglesToForward(entity.angles));
+    var_f3e6a062 = vectorNormalize(anglesToForward(entity.angles));
     var_259c498c = undefined;
 
     foreach(node in potential_targets) {
-      dot = vectordot(vectornormalize(node.origin - entity.origin), var_f3e6a062);
+      dot = vectordot(vectorNormalize(node.origin - entity.origin), var_f3e6a062);
 
       if(node === entity.var_6265733) {
         dot = -1;
@@ -433,7 +433,7 @@ function private function_c8417113(entity) {
 
     if(best_node.delay <= 0) {
       foreach(node in best_node.connected_nodes) {
-        dot = vectordot(vectornormalize(node.origin - entity.origin), var_f3e6a062);
+        dot = vectordot(vectorNormalize(node.origin - entity.origin), var_f3e6a062);
 
         if(!isDefined(var_259c498c) || dot > var_259c498c) {
           var_259c498c = dot;
@@ -471,11 +471,11 @@ function private function_c8417113(entity) {
     }
 
     if(!is_true(var_dfa0d2db) && !is_true(entity.var_f0ee16db) && var_2375c133) {
-      var_cb5eaea3 = vectornormalize(entity.favoriteenemy.origin - entity.origin);
+      var_cb5eaea3 = vectorNormalize(entity.favoriteenemy.origin - entity.origin);
       var_259c498c = undefined;
 
       foreach(node in potential_targets) {
-        dot = vectordot(vectornormalize(node.origin - entity.origin), var_cb5eaea3);
+        dot = vectordot(vectorNormalize(node.origin - entity.origin), var_cb5eaea3);
 
         if(!isDefined(var_259c498c) || dot > var_259c498c) {
           var_259c498c = dot;
@@ -494,7 +494,7 @@ function private function_c8417113(entity) {
         var_c302bfc5 = undefined;
 
         foreach(node in best_node.connected_nodes) {
-          dot = vectordot(vectornormalize(node.origin - best_node.origin), var_cb5eaea3);
+          dot = vectordot(vectorNormalize(node.origin - best_node.origin), var_cb5eaea3);
 
           if(!isDefined(var_259c498c) || dot > var_259c498c) {
             var_259c498c = dot;
@@ -519,7 +519,7 @@ function private function_c8417113(entity) {
 
         foreach(node in entity.var_7f73c6e1) {
           var_1a4cb070 = max(node.radius - var_9da026c8, 0);
-          pos = vectornormalize(entity.favoriteenemy.origin - node.origin) * var_1a4cb070 + node.origin;
+          pos = vectorNormalize(entity.favoriteenemy.origin - node.origin) * var_1a4cb070 + node.origin;
           var_160cb6cf[var_160cb6cf.size] = pos;
         }
 
@@ -555,7 +555,7 @@ function private function_c8417113(entity) {
     var_c5eb6510 = min(getdvarfloat(#"hash_72328e4462f91c62", 300), distance(var_c302bfc5.origin, best_node.origin));
     dist = distance(entity.origin, best_node.origin);
     var_e9347624 = max(var_c5eb6510 - dist, 0);
-    var_7b5ed862 += vectornormalize(var_c302bfc5.origin - best_node.origin) * var_e9347624;
+    var_7b5ed862 += vectorNormalize(var_c302bfc5.origin - best_node.origin) * var_e9347624;
   }
 
   if(isDefined(var_7b5ed862)) {

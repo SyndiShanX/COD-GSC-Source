@@ -337,9 +337,9 @@ function on_player_spawned() {
 
 function function_46d74bb7(var_70150641) {
   if(isDefined(var_70150641) ? var_70150641 : 0) {
-    players = getplayers(self.team);
+    players = getPlayers(self.team);
   } else {
-    players = getplayers();
+    players = getPlayers();
   }
 
   foreach(player in players) {
@@ -689,10 +689,10 @@ function function_9abdee8c(watcher, object) {
   triggerradius = level.var_934fb97.bundle.kstriggerradius;
   triggerheight = level.var_934fb97.bundle.kstriggerheight;
   var_b1a6d849 = level.var_934fb97.bundle.var_2d890f85;
-  upangle = vectorscale(vectornormalize(anglestoup(supplypod.angles)), 5);
+  upangle = vectorscale(vectorNormalize(anglestoup(supplypod.angles)), 5);
   var_40989bda = supplypod.origin + upangle;
   usetrigger = spawn("trigger_radius_use", var_40989bda, 0, triggerradius, triggerheight);
-  usetrigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  usetrigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   usetrigger function_49462027(1, 1 | 4096 | 2 | 2097152 | 2048);
   usetrigger function_cb5cf7cb();
   usetrigger usetriggerignoreuseholdtime();

@@ -409,7 +409,7 @@ _id_ECB4(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 _meth_8851(3, self.team);
 
   if(isDefined(var_2)) {
-    var_7 linkto(var_2);
+    var_7 linkTo(var_2);
     var_7 thread _id_ECA1();
   }
 
@@ -483,7 +483,7 @@ _id_ECB5(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 dontinterpolate();
   var_1.angles = var_0.angles;
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 setentityowner(self);
   var_1 thread tac_cover_delayed_collision_setup();
   return var_1;

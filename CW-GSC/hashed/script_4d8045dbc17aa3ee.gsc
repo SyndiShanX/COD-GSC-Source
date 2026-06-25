@@ -44,11 +44,11 @@ function init() {
 }
 
 function on_bot_spawned() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(self istestclient()) {
     origin = player.origin + (randomintrange(-100, 100), randomintrange(-100, 100), 30);
-    self setorigin(origin);
+    self setOrigin(origin);
   }
 }
 
@@ -203,8 +203,8 @@ function function_d379ba37() {
           }
         }
 
-        foreach(player in getplayers()) {
-          player setorigin(level.doa.var_8823e378);
+        foreach(player in getPlayers()) {
+          player setOrigin(level.doa.var_8823e378);
         }
 
         break;
@@ -232,10 +232,10 @@ function function_d379ba37() {
           #note: "enter_the_wild"});
         level waittilltimeout(3, #"hash_58caf0ade03043bb");
         level doa_banner::function_7a0e5387();
-        var_6fdeb679 = getent("room_of_fate_shaft_trigger", "targetname").origin;
+        var_6fdeb679 = getEnt("room_of_fate_shaft_trigger", "targetname").origin;
 
-        foreach(player in getplayers()) {
-          player setorigin(var_6fdeb679);
+        foreach(player in getPlayers()) {
+          player setOrigin(var_6fdeb679);
         }
 
         break;
@@ -243,7 +243,7 @@ function function_d379ba37() {
         var_28979c91 = array::randomize(level.doa.var_fe92efd8);
         i = 0;
 
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           fate = var_28979c91[i];
           i++;
           player thread namespace_1c2a96f9::function_15a789ab(fate.var_c8386627);
@@ -575,7 +575,7 @@ function function_d379ba37() {
         }
 
         foreach(bot in bots) {
-          bot setorigin(var_c8dd979c);
+          bot setOrigin(var_c8dd979c);
         }
 
         break;
@@ -677,7 +677,7 @@ function function_d379ba37() {
         var_94f3b914 = getDvar(#"hash_58c5fb7998861ea3");
         break;
       case #"hash_609ef494db2ab837":
-        player = getplayers()[0];
+        player = getPlayers()[0];
         level namespace_dfc652ee::itemspawn(namespace_dfc652ee::function_6265bde4(getDvar(#"hash_4e8b5bae739da5a", "zombietron_lmg")), player.origin, undefined, undefined, 1, undefined, undefined, undefined, player);
         break;
     }
@@ -701,7 +701,7 @@ function function_c019882() {
   }
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player.doa.var_640df11b = 1;
     }
 
@@ -1398,8 +1398,8 @@ function function_c93506fb() {
     wait 2;
     namespace_1e25ad94::function_4e3cfad("\tDungeon Evolution: " + level.doa.var_f33bb10 + " completed at:" + gettime(), undefined, undefined, undefined, 60);
 
-    foreach(player in getplayers()) {
-      player setorigin(level.doa.var_8823e378);
+    foreach(player in getPlayers()) {
+      player setOrigin(level.doa.var_8823e378);
     }
 
     level.doa.var_f33bb10++;
@@ -1546,7 +1546,7 @@ function function_1552e594() {
     }
 
     if(isDefined(level.doa.var_9ae7e5e6)) {
-      guys[0] setorigin(level.doa.var_9ae7e5e6.origin + (0, 0, 32));
+      guys[0] setOrigin(level.doa.var_9ae7e5e6.origin + (0, 0, 32));
       result = level waittill(#"hash_5c97c4241ba01be4");
       name = [[level.doa.var_a77e6349]] - > getname();
       section = [[level.doa.var_a77e6349]] - > function_7c246362();
@@ -1572,9 +1572,9 @@ function function_1552e594() {
 
           if(isDefined(level.doa.var_a77e6349)) {
             if(name === "jungle_1" && section.id === 2) {
-              loc = getent("room_of_fate_shaft_trigger", "targetname").origin;
+              loc = getEnt("room_of_fate_shaft_trigger", "targetname").origin;
               guys = namespace_7f5aeb59::function_23e1f90f();
-              guys[0] setorigin(loc + (0, 0, 32));
+              guys[0] setOrigin(loc + (0, 0, 32));
             } else {
               [[level.doa.var_a77e6349]] - > function_411b63ca();
             }
@@ -1584,7 +1584,7 @@ function function_1552e594() {
         }
       }
     } else if(isDefined(level.doa.teleporter) && randomint(5) == 0) {
-      guys[0] setorigin(level.doa.teleporter.origin + (0, 0, 32));
+      guys[0] setOrigin(level.doa.teleporter.origin + (0, 0, 32));
     }
 
     if(level flag::get("doa_round_spawning")) {
@@ -1604,7 +1604,7 @@ function function_1552e594() {
       }
 
       if(isDefined(level.doa.teleporter) && randomint(100) > 97) {
-        guy setorigin(level.doa.teleporter.origin + (0, 0, 24));
+        guy setOrigin(level.doa.teleporter.origin + (0, 0, 24));
       }
 
       guy thread function_be602f7c();
@@ -1635,13 +1635,13 @@ function function_1552e594() {
       continue;
     }
 
-    if(getdvarint(#"hash_d874e4e73e9f18", 0) != 5 && getdvarint(#"hash_4a0c2338e71a658e", 1) && getplayers().size < 4 && randomint(100) < 30) {
+    if(getdvarint(#"hash_d874e4e73e9f18", 0) != 5 && getdvarint(#"hash_4a0c2338e71a658e", 1) && getPlayers().size < 4 && randomint(100) < 30) {
       bot = bot::add_bot(#"allies", function_a161addf(), "DOA");
 
       if(isDefined(bot) && level.doa.world_state == 0 && isDefined(level.doa.var_39e3fa99)) {
         bot.var_bbc4df09 = 1;
         spot = [[level.doa.var_39e3fa99]] - > function_fc81ec00(bot getentitynumber());
-        bot setorigin(spot.origin);
+        bot setOrigin(spot.origin);
         bot setplayerangles(spot.angles);
         level.botcount++;
         namespace_1e25ad94::debugmsg("Bot is being added.Count=" + level.botcount);
@@ -1700,7 +1700,7 @@ function function_b4d99705() {
     guys = namespace_7f5aeb59::function_23e1f90f();
 
     foreach(guy in guys) {
-      guy setorigin(guy.doa.var_11abc438);
+      guy setOrigin(guy.doa.var_11abc438);
       guy.doa.var_4f3aee7b = 0;
       namespace_1e25ad94::debugmsg("Sending " + guy.name + " back to home:" + guy.doa.var_11abc438);
     }
@@ -1831,9 +1831,9 @@ function function_3a2701da() {
     wait 10;
 
     if(namespace_dfc652ee::function_69cafbe0() < 5) {
-      namespace_dfc652ee::function_ad7ac41b(getplayers()[0].origin, 12, 1024);
-      namespace_dfc652ee::function_ad7ac41b(getplayers()[0].origin, 8, 1024, 6);
-      namespace_dfc652ee::function_ad7ac41b(getplayers()[0].origin, 8, 1024, 1);
+      namespace_dfc652ee::function_ad7ac41b(getPlayers()[0].origin, 12, 1024);
+      namespace_dfc652ee::function_ad7ac41b(getPlayers()[0].origin, 8, 1024, 6);
+      namespace_dfc652ee::function_ad7ac41b(getPlayers()[0].origin, 8, 1024, 1);
     }
   }
 }
@@ -1928,7 +1928,7 @@ function function_43548cd2() {
   }
 
   level.doa.var_23ae0778 = 1;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_bead1873 = 13500;
   topy = 30000;
   var_d7e22d96 = 20000;
@@ -2050,7 +2050,7 @@ function function_598305fe() {
   [[level.doa.var_39e3fa99]] - > setpaused(1);
   level util::set_lighting_state(3, 0);
   level clientfield::set("<dev string:xf3>", 3);
-  player1 = getplayers()[0];
+  player1 = getPlayers()[0];
 
   if(!isDefined(level.doa.dev)) {
     level.doa.dev = spawnStruct();
@@ -2058,7 +2058,7 @@ function function_598305fe() {
     var_e2fdda78 = struct::get("<dev string:x113>");
     level.doa.dev.playerorg = namespace_ec06fe4a::spawnmodel(playerspot.origin, "<dev string:x129>", playerspot.angles, "<dev string:xfd>");
     level.doa.dev.var_85d6cfdf = namespace_ec06fe4a::spawnmodel(var_e2fdda78.origin, "<dev string:x129>", var_e2fdda78.angles, "<dev string:x113>");
-    player1 linkto(level.doa.dev.playerorg);
+    player1 linkTo(level.doa.dev.playerorg);
     player1.doa.var_57eaec6e = 1;
   }
 
@@ -2066,8 +2066,8 @@ function function_598305fe() {
   victimnum = 0;
   var_94f3b914 = "<dev string:x137>";
   var_b18e4c25 = [];
-  right = vectornormalize(anglestoright(level.doa.dev.var_85d6cfdf.angles));
-  forward = vectornormalize(anglestoright(level.doa.dev.var_85d6cfdf.angles));
+  right = vectorNormalize(anglestoright(level.doa.dev.var_85d6cfdf.angles));
+  forward = vectorNormalize(anglestoright(level.doa.dev.var_85d6cfdf.angles));
 
   while(is_true(level.doa.var_598305fe)) {
     if(!isDefined(victim)) {
@@ -2082,7 +2082,7 @@ function function_598305fe() {
       victim forceteleport(level.doa.dev.var_85d6cfdf.origin, level.doa.dev.var_85d6cfdf.angles);
       victim.ignoreall = 1;
       victim.var_227e7c79 = 1;
-      victim linkto(level.doa.dev.var_85d6cfdf);
+      victim linkTo(level.doa.dev.var_85d6cfdf);
       victim thread function_f451bc26(1);
       victim thread function_a2a93037(1);
       victim thread function_6790d816();

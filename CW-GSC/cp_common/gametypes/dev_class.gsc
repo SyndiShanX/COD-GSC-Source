@@ -275,7 +275,7 @@ function dev_cac_player_valid() {
 }
 
 function dev_cac_cycle_player(forward) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(forward) {
@@ -430,7 +430,7 @@ function dev_cac_gdt_update_think() {
 
     value = float(keyvalue[1]);
     level.cac_attributes[key][asset] = value;
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {}
   }

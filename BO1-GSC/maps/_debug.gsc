@@ -426,7 +426,7 @@ camera() {
   wait(0.05);
   cameras = getEntArray("camera", "targetname");
   for(i = 0; i < cameras.size; i++) {
-    ent = getent(cameras[i].target, "targetname");
+    ent = getEnt(cameras[i].target, "targetname");
     cameras[i].origin2 = ent.origin;
     cameras[i].angles = vectortoangles(ent.origin - cameras[i].origin);
   }
@@ -461,7 +461,7 @@ camera() {
       angles = (0, difference[1], 0);
       forward = anglesToForward(angles);
       players = get_players();
-      difference = vectornormalize(end - players[0].origin);
+      difference = vectorNormalize(end - players[0].origin);
       dot = vectordot(forward, difference);
       if(dot < 0.85) {
         continue;
@@ -635,7 +635,7 @@ getchain() {
     if(!isDefined(ent) || !isDefined(ent.target)) {
       break;
     }
-    ent = getent(ent.target, "targetname");
+    ent = getEnt(ent.target, "targetname");
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
       break;
@@ -656,10 +656,10 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   viewheight = (viewpos[2] - maxcorner[2]);
   diaglen = length(mincorner - maxcorner);
   mincorneroffset = (mincorner - viewpos);
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800 * 0);
   maxcorneroffset = (maxcorner - viewpos);
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800 * 0);
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   diagonal = maxcorner - mincorner;
@@ -1674,7 +1674,7 @@ spawn_anywhere(spawner) {
   spawner.count = 50;
 }
 display_module_text() {}
-debug_goalradius() {}
+debug_goalRadius() {}
 ai_puppeteer() {
   ai_puppeteer_create_hud();
   level.ai_puppet_highlighting = false;
@@ -1777,7 +1777,7 @@ ai_puppet_manager() {
 ai_puppet_set(puppet) {
   level.ai_puppet = level.playerCursorAi;
   level.ai_puppet.old_goalradius = level.ai_puppet.goalradius;
-  level.ai_puppet StopAnimScripted();
+  level.ai_puppet StopanimScripted();
 }
 ai_puppet_release(restore) {
   if(isDefined(level.ai_puppet)) {
@@ -1864,11 +1864,11 @@ ai_puppeteer_destroy_hud() {
 }
 ai_puppeteer_render_point(point, normal, forward, color) {
   surface_vector = VectorCross(forward, normal);
-  surface_vector = VectorNormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vector_scale(surface_vector, 5), color, 1, true);
   line(point, point + vector_scale(surface_vector, -5), color, 1, true);
   surface_vector = VectorCross(normal, surface_vector);
-  surface_vector = VectorNormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vector_scale(surface_vector, 5), color, 1, true);
   line(point, point + vector_scale(surface_vector, -5), color, 1, true);
 }

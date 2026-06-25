@@ -194,7 +194,7 @@ func_4198(param_00) {
 }
 
 func_711E(param_00, param_01, param_02) {
-  var_03 = getent(param_01, "targetname");
+  var_03 = getEnt(param_01, "targetname");
   if(!isDefined(var_03)) {
     return;
   }
@@ -220,7 +220,7 @@ func_711E(param_00, param_01, param_02) {
 }
 
 func_93CB(param_00, param_01, param_02) {
-  var_03 = getent(param_01, "targetname");
+  var_03 = getEnt(param_01, "targetname");
   if(!isDefined(var_03)) {
     return;
   }
@@ -241,7 +241,7 @@ func_93CB(param_00, param_01, param_02) {
 }
 
 func_6F19(param_00, param_01) {
-  var_02 = getent(param_01, "targetname");
+  var_02 = getEnt(param_01, "targetname");
   if(!isDefined(var_02)) {
     return;
   }
@@ -254,7 +254,7 @@ func_6F19(param_00, param_01) {
 }
 
 func_A03E(param_00, param_01) {
-  var_02 = getent(param_01, "targetname");
+  var_02 = getEnt(param_01, "targetname");
   if(!isDefined(var_02)) {
     return;
   }

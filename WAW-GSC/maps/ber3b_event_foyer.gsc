@@ -143,7 +143,7 @@ event_foyer_introscene() {
   level waittill_any("intro_interrupt", "intro_sarge_anim_done");
 
   if(flag("intro_interrupt")) {
-    sarge anim_stopanimscripted();
+    sarge anim_stopanimScripted();
   }
 
   level notify("intro_finished");
@@ -409,7 +409,7 @@ event_foyer_action() {
 }
 
 foyer_force_ai_fire() {
-  trigger = getent("foyer_colors_stair_base", "targetname");
+  trigger = getEnt("foyer_colors_stair_base", "targetname");
   trigger waittill("trigger");
 
   autosave_by_name("Ber1 reached stair");
@@ -682,7 +682,7 @@ pacing1_friendly_doorbreach_enemies() {
   wait(1.5);
 
   for(i = 0; i < guys.size; i++) {
-    guys[i] anim_stopanimscripted();
+    guys[i] anim_stopanimScripted();
     guys[i] thread bloody_death(true, 1);
   }
 }

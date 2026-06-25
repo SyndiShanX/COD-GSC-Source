@@ -55,13 +55,13 @@ function spawn_allies(var_1ace1e2) {
 
   var_f0935a68 = getweapon(#"ar_accurate_t9");
   level.woods hms_util::function_65d14a19(var_f0935a68);
-  level.sims = getent("e_sims_proxy", "targetname");
+  level.sims = getEnt("e_sims_proxy", "targetname");
   level.sims.name = "Sims";
   level.sims.team = "allies";
-  level.park = getent("e_park_proxy", "targetname");
+  level.park = getEnt("e_park_proxy", "targetname");
   level.park.name = "Park";
   level.park.team = "allies";
-  level.pilot = getent("e_park_proxy", "targetname");
+  level.pilot = getEnt("e_park_proxy", "targetname");
   level.pilot.name = "Pilot";
   level.pilot.team = "allies";
 }
@@ -135,7 +135,7 @@ function function_7149a8() {
 function function_b5e4f3bc(var_8be63fee, var_30fe31f7, var_b2d7eb20 = "targetname", b_shoot = 1, b_should_sprint = 0) {
   assert(isDefined(var_8be63fee), "<dev string:x54>");
   assert(isDefined(var_30fe31f7), "<dev string:x74>");
-  var_cf2dc0e8 = getent(var_30fe31f7, var_b2d7eb20);
+  var_cf2dc0e8 = getEnt(var_30fe31f7, var_b2d7eb20);
   assert(isDefined(var_cf2dc0e8), var_30fe31f7 + "<dev string:x97>");
   var_63bea14 = spawner::get_ai_group_ai(var_8be63fee);
 
@@ -191,8 +191,8 @@ function function_ce0f72f4() {
     return;
   }
 
-  var_fd4c649f = getent("aa_courtyard", "targetname");
-  var_80d256bf = getent("aa_parapet", "targetname");
+  var_fd4c649f = getEnt("aa_courtyard", "targetname");
+  var_80d256bf = getEnt("aa_parapet", "targetname");
   wait 3;
   var_fd4c649f thread function_c5063901("aa_courtyard");
   wait 1;
@@ -251,7 +251,7 @@ function function_2a8ee50f(s_location) {
     var_6dc21951 thread function_bc3f8f44();
   }
 
-  var_353319da = getent("c4_light", "targetname");
+  var_353319da = getEnt("c4_light", "targetname");
   var_e9e1284f = struct::get("c4_light_pos", "targetname");
   var_353319da.origin = var_e9e1284f.origin;
   var_353319da.angles = var_e9e1284f.angles;
@@ -275,9 +275,9 @@ function function_2a8ee50f(s_location) {
   array::run_all(var_3e88828c, &trigger::use);
   level.player playgestureviewmodel(#"ges_drophand");
   wait 2;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level.player freezecontrols(0);
   badplace_cylinder("c4", 1000, self.origin - (0, 0, 100), 200, 200, "allies", "axis");
   var_353319da thread function_9f9e880e();
@@ -332,7 +332,7 @@ function function_2a8ee50f(s_location) {
 }
 
 function function_c0a3515() {
-  e_c4_hint_validation = getent("e_c4_hint_validation", "targetname");
+  e_c4_hint_validation = getEnt("e_c4_hint_validation", "targetname");
 
   if(istouching(level.player.origin, e_c4_hint_validation)) {
     return true;
@@ -342,7 +342,7 @@ function function_c0a3515() {
 }
 
 function function_f5b3ba02() {
-  e_c4_hint_validation = getent("e_c4_hint_validation", "targetname");
+  e_c4_hint_validation = getEnt("e_c4_hint_validation", "targetname");
 
   if(istouching(level.player.origin, e_c4_hint_validation)) {
     return false;
@@ -397,7 +397,7 @@ function play_concussion_sound() {
   wait 0.25;
   var_7864ab8 = spawn("script_origin", (0, 0, 1));
   var_7864ab8.origin = self.origin;
-  var_7864ab8 linkto(self);
+  var_7864ab8 linkTo(self);
   var_7864ab8 thread delete_ent_on_owner_death();
   var_7864ab8 playSound(#"hash_7e7a829722bc317f");
   var_7864ab8 playLoopSound(#"hash_27fc5cc3a6159138");
@@ -446,15 +446,15 @@ function function_7bd54d9c(v_center, v_angle) {
   var_a838a7c1.angles = leader.angles;
   var_a838a7c1 setModel("veh_t8_mil_air_jet_fighter_mp_light");
   var_a838a7c1 clientfield::set("planemortar_contrail", 1);
-  leader moveto(leader.origin + forward * 70000, 10, 0, 0);
-  var_391cdbb7 moveto(var_391cdbb7.origin + anglesToForward(var_391cdbb7.angles) * 70000, 10, 0, 0);
-  var_94e09305 moveto(var_94e09305.origin + anglesToForward(var_94e09305.angles) * 70000, 10, 0, 0);
-  var_283227ae moveto(var_283227ae.origin + anglesToForward(var_283227ae.angles) * 70000, 10, 0, 0);
-  var_a838a7c1 moveto(var_a838a7c1.origin + anglesToForward(var_a838a7c1.angles) * 70000, 10, 0, 0);
+  leader moveTo(leader.origin + forward * 70000, 10, 0, 0);
+  var_391cdbb7 moveTo(var_391cdbb7.origin + anglesToForward(var_391cdbb7.angles) * 70000, 10, 0, 0);
+  var_94e09305 moveTo(var_94e09305.origin + anglesToForward(var_94e09305.angles) * 70000, 10, 0, 0);
+  var_283227ae moveTo(var_283227ae.origin + anglesToForward(var_283227ae.angles) * 70000, 10, 0, 0);
+  var_a838a7c1 moveTo(var_a838a7c1.origin + anglesToForward(var_a838a7c1.angles) * 70000, 10, 0, 0);
 }
 
 function function_d8bbc9ee(str_targetname, var_1f74a2ae) {
-  var_79ad0302 = getent(str_targetname, "targetname");
+  var_79ad0302 = getEnt(str_targetname, "targetname");
   var_79ad0302 hide();
 
   if(isDefined(var_1f74a2ae)) {

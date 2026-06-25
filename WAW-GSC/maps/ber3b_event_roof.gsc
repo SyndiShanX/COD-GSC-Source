@@ -128,7 +128,7 @@ dome_friendly_combat_dialogue() {
 }
 
 dome_mg_adjust() {
-  mg = getent("auto935", "targetname");
+  mg = getEnt("auto935", "targetname");
   mg.yawconvergencetime = 3.25;
   mg.convergencetime = 3.25;
   mg.suppressionTime = 1.5;
@@ -155,7 +155,7 @@ roof_statue_fall() {
   keys = GetArrayKeys(pieces);
 
   for(i = 0; i < pieces.size; i++) {
-    pieces[keys[i]] LinkTo(statue, keys[i]);
+    pieces[keys[i]] linkTo(statue, keys[i]);
   }
 
   thread roof_statue_dialogue();
@@ -369,8 +369,8 @@ player_linkto_flagbearer(fadeTime) {
 
   linker = spawn("script_origin", level.lastFlagBearer.origin);
   linker.angles = level.lastFlagBearer.angles;
-  linker LinkTo(level.lastFlagBearer);
-  self PlayerLinkTo(linker, undefined, 1, 20, 20, 10, 10);
+  linker linkTo(level.lastFlagBearer);
+  self PlayerlinkTo(linker, undefined, 1, 20, 20, 10, 10);
 
   wait(1);
 
@@ -385,8 +385,8 @@ player_linkto_flagbearer(fadeTime) {
   self SetClientDvar("miniscoreboardhide", "1");
 }
 roof_katyushas() {
-  chainTrig1 = GetEnt("trig_script_color_allies_32", "targetname");
-  chainTrig2 = GetEnt("trig_script_color_allies_33", "targetname");
+  chainTrig1 = getEnt("trig_script_color_allies_32", "targetname");
+  chainTrig2 = getEnt("trig_script_color_allies_33", "targetname");
 
   if(isDefined(chainTrig1)) {
     chainTrig1 trigger_off();
@@ -481,7 +481,7 @@ roof_katyusha_fire() {
   wait(time * 0.5);
 
   target_angles = VectorToAngles((target_pos + (0, 0, -1000)) - rocket.origin);
-  rocket RotateTo(target_angles, time * 0.5);
+  rocket rotateTo(target_angles, time * 0.5);
 
   wait(time * 0.5);
 
@@ -510,7 +510,7 @@ rocket_wave_rocket(expOrg) {
   playFXOnTag(level._effect["katyusha_rocket_trail"], rocket, "tag_origin");
   thread play_sound_in_space("katyusha_launch", rocket.origin);
 
-  rocket MoveTo(expOrg, RandomFloatRange(1, 2));
+  rocket moveTo(expOrg, RandomFloatRange(1, 2));
   rocket waittill("movedone");
   rocket Delete();
 
@@ -521,7 +521,7 @@ rocket_wave_rocket(expOrg) {
 }
 
 kill_roof_ais() {
-  killtrig = GetEnt("trig_killspawner_1001", "script_noteworthy");
+  killtrig = getEnt("trig_killspawner_1001", "script_noteworthy");
   if(isDefined(killtrig)) {
     killtrig notify("trigger");
   }
@@ -658,7 +658,7 @@ event_roof_ai_flagbearer() {
   level.russianFlag Show();
   level.russianFlag.origin = guy GetTagOrigin("tag_weapon_right");
   level.russianFlag.angles = guy GetTagAngles("tag_weapon_right");
-  level.russianFlag LinkTo(guy, "tag_weapon_right");
+  level.russianFlag linkTo(guy, "tag_weapon_right");
 
   guy thread flagbearer_waitNode_anim(crouchAnim);
   guy SetGoalNode(waitNode);
@@ -810,12 +810,12 @@ roof_mantle_think() {
 
   level.lastFlagBearer lerp_player_view_to_tag(lerper, "tag_origin", 0.43, 1, 10, 10, 5, 5);
 
-  level.lastFlagBearer LinkTo(lerper);
+  level.lastFlagBearer linkTo(lerper);
 
   mantletrig playSound("mantle_up");
 
   for(i = 1; i < orgs.size; i++) {
-    lerper MoveTo(orgs[i], times[i]);
+    lerper moveTo(orgs[i], times[i]);
     wait(times[i] - (times[i] * 0.1));
   }
 
@@ -894,7 +894,7 @@ roof_flagbearer_shot(animSpot) {
 
   setmusicstate("ANTHEM");
 
-  hands AnimScripted(animNotify, animSpot.origin, animSpot.angles, interactAnim);
+  hands animScripted(animNotify, animSpot.origin, animSpot.angles, interactAnim);
   wait(GetAnimLength(interactAnim));
 
   self Unlink();
@@ -994,8 +994,8 @@ roof_outro_aianims(animSpot) {
 
   level.sarge playsound_generic_facial("Ber3B_IGD_059A_REZN");
 
-  walla_loop = getent("charge_walla", "targetname");
-  cheer_sound = getent("charge_on", "targetname");
+  walla_loop = getEnt("charge_walla", "targetname");
+  cheer_sound = getEnt("charge_on", "targetname");
   walla_loop playLoopSound("ura_loop", 5);
 
   level waittill("flagbearer_plant_start");
@@ -1161,14 +1161,14 @@ roof_flagbearer_plant(animSpot) {
   level notify("flagbearer_plant_start");
 
   hands thread flag_detach(linkTag, flagModel);
-  hands AnimScripted(animNotify, animSpot.origin, animSpot.angles, interactAnim);
+  hands animScripted(animNotify, animSpot.origin, animSpot.angles, interactAnim);
   wait(GetAnimLength(interactAnim));
 
   self Unlink();
 
   lockOrigin = spawn("script_origin", self.origin);
   lockOrigin.angles = self GetPlayerAngles();
-  self PlayerLinkTo(lockOrigin, undefined, 1.0, 20, 20, 20, 0);
+  self PlayerlinkTo(lockOrigin, undefined, 1.0, 20, 20, 20, 0);
 
   hands Delete();
 
@@ -1254,7 +1254,7 @@ player_heartbeat() {
     if(!flag("fall")) {
       self thread play_sound_on_entity("breathing_heartbeat");
       wait 0.05;
-      self PlayRumbleOnEntity("damage_light");
+      self playRumbleOnEntity("damage_light");
       wait .8;
     }
 
@@ -1304,7 +1304,7 @@ fall() {
 
   wait .2;
 
-  self PlayRumbleOnEntity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
 
   self AllowStand(false);
   self ViewKick(127, self.origin);
@@ -1330,18 +1330,18 @@ fall() {
 
 recover() {
   angles = self adjust_angles_to_player((-5, -5, 0));
-  level.ground_ref_ent RotateTo(angles, .6, 0.6, 0);
+  level.ground_ref_ent rotateTo(angles, .6, 0.6, 0);
   level.ground_ref_ent waittill("rotatedone");
 
   angles = self adjust_angles_to_player((-15, -20, 0));
-  level.ground_ref_ent RotateTo(angles, 2.5, 0, 2.5);
+  level.ground_ref_ent rotateTo(angles, 2.5, 0, 2.5);
   level.ground_ref_ent waittill("rotatedone");
 
   angles = self adjust_angles_to_player((5, 5, 0));
-  level.ground_ref_ent RotateTo(angles, 2.5, 2, 0.5);
+  level.ground_ref_ent rotateTo(angles, 2.5, 2, 0.5);
   level.ground_ref_ent waittill("rotatedone");
 
-  level.ground_ref_ent RotateTo((0, 0, 0), 1, 0.2, 0.8);
+  level.ground_ref_ent rotateTo((0, 0, 0), 1, 0.2, 0.8);
 }
 
 limp() {
@@ -1391,13 +1391,13 @@ stumble(stumble_angles, stumble_time, recover_time, no_notify) {
 
   stumble_angles = self adjust_angles_to_player(stumble_angles);
 
-  level.ground_ref_ent RotateTo(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
+  level.ground_ref_ent rotateTo(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
   level.ground_ref_ent waittill("rotatedone");
 
   base_angles = (RandomFloat(4) - 4, RandomFloat(5), 0);
   base_angles = self adjust_angles_to_player(base_angles);
 
-  level.ground_ref_ent RotateTo(base_angles, recover_time, 0, (recover_time / 2));
+  level.ground_ref_ent rotateTo(base_angles, recover_time, 0, (recover_time / 2));
   level.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(no_notify)) {
@@ -1422,8 +1422,8 @@ roof_planes_fire_guns_watcher() {
   level waittill("spawnvehiclegroup0");
   wait 0.1;
 
-  il2_1 = getent("il2_1", "targetname");
-  il2_2 = getent("il2_2", "targetname");
+  il2_1 = getEnt("il2_1", "targetname");
+  il2_2 = getEnt("il2_2", "targetname");
 
   il2_1 thread burst1_think();
   il2_2 thread burst2_think();
@@ -1435,7 +1435,7 @@ burst1_think() {
   self endon("death");
 
   wait 2;
-  plane_gun1 = getent("il2_1", "targetname");
+  plane_gun1 = getEnt("il2_1", "targetname");
   plane_gun1 transmittargetname();
   SetClientSysState("levelNotify", "start_firing_il2_1_gun");
 
@@ -1456,7 +1456,7 @@ burst2_think() {
   self endon("death");
 
   wait 2;
-  plane_gun2 = getent("il2_2", "targetname");
+  plane_gun2 = getEnt("il2_2", "targetname");
   plane_gun2 transmittargetname();
   SetClientSysState("levelNotify", "start_firing_il2_2_gun");
 

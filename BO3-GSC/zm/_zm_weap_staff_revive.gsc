@@ -46,8 +46,8 @@ function staff_revive_impact(v_explode_point) {
   self endon("disconnect");
   e_closest_player = undefined;
   n_closest_dist_sq = 1024;
-  playsoundatposition("wpn_revivestaff_proj_impact", v_explode_point);
-  a_e_players = getplayers();
+  playSoundAtPosition("wpn_revivestaff_proj_impact", v_explode_point);
+  a_e_players = getPlayers();
   foreach(e_player in a_e_players) {
     if(e_player == self || !e_player laststand::player_is_in_laststand()) {
       continue;

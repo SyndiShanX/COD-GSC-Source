@@ -11,7 +11,7 @@ create_client_character_camera(var_0, var_1, var_2) {
   if(istrue(var_2)) {
     var_4 = spawn("script_model", var_3.origin);
     var_4 setModel("tag_player");
-    var_4 linkto(var_3, "tag_player", (0, 0, 0), (0, 90, 0));
+    var_4 linkTo(var_3, "tag_player", (0, 0, 0), (0, 90, 0));
     var_3._id_1792 = var_4;
   }
 
@@ -26,7 +26,7 @@ attach_player_to_camera_view(var_0) {
   }
 
   var_1 _meth_8060();
-  var_1 cameralinkto(var_0, "tag_player", 1, 1);
+  var_1 cameralinkTo(var_0, "tag_player", 1, 1);
 }
 
 run_delta_motion_on_client_character(var_0, var_1, var_2) {
@@ -35,7 +35,7 @@ run_delta_motion_on_client_character(var_0, var_1, var_2) {
   var_3.angles = var_2;
   var_3 _meth_82CC(var_0, "clientCharacterAnim", undefined, undefined, 1);
   self unlink();
-  self linkto(var_3, "tag_origin");
+  self linkTo(var_3, "tag_origin");
   return var_3;
 }
 

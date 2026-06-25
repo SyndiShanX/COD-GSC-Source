@@ -315,7 +315,7 @@ func_68D7() {
   self playlocalsound("ghost_wall_attach");
   var_0 = scripts\engine\utility::spawn_tag_origin();
   self setscriptablepartstate("perch", "active", 0);
-  self playerlinkto(var_0);
+  self playerlinkTo(var_0);
   thread func_49EE(var_0.origin, scripts\mp\utility::getotherteam(self.team));
   thread managetimeout(var_0);
 }
@@ -333,7 +333,7 @@ managetimeout(var_0) {
     var_1 = var_2["position"];
   }
 
-  var_0 moveto(var_1, 4, 3.5);
+  var_0 moveTo(var_1, 4, 3.5);
   wait(4);
   self notify("walllock_ended");
 }
@@ -397,7 +397,7 @@ func_13A2A() {
   } else {
     self.var_5FF1.origin = self gettagorigin("tag_shield_back");
     self.var_5FF1.angles = self gettagangles("tag_shield_back");
-    self.var_5FF1 linkto(self, "tag_shield_back");
+    self.var_5FF1 linkTo(self, "tag_shield_back");
     self.var_AD33.origin = self.origin;
   }
 
@@ -448,7 +448,7 @@ func_1608() {
   self.var_6F43 = 1;
   self.var_1D42 = 1;
   self.var_AD33.origin = self.origin;
-  self playerlinkto(self.var_AD33);
+  self playerlinkTo(self.var_AD33);
   self setstance("stand");
   thread playflyoveraudioline(self.var_5FF1);
   thread func_13A43();
@@ -483,7 +483,7 @@ playflyoveraudioline(var_0) {
   if(!var_0 islinked(self)) {
     var_0.origin = self gettagorigin("tag_shield_back");
     var_0.angles = self gettagangles("tag_shield_back");
-    var_0 linkto(self, "tag_shield_back");
+    var_0 linkTo(self, "tag_shield_back");
     wait(0.05);
   }
 
@@ -555,7 +555,7 @@ func_B31F(var_0, var_1) {
   var_5 = var_5 * (1, 1, 0);
   var_5 = var_5 + (0, 0, var_6);
   var_5 = func_EA27(var_5);
-  var_0 moveto(var_5, 0.5);
+  var_0 moveTo(var_5, 0.5);
 }
 
 func_DCBD(var_0, var_1) {
@@ -569,7 +569,7 @@ func_DCBD(var_0, var_1) {
   var_3 = var_3 * (1, 1, 0);
   var_3 = var_3 + (0, 0, var_2);
   var_3 = func_EA27(var_3);
-  var_0 moveto(var_3, 0.5);
+  var_0 moveTo(var_3, 0.5);
 }
 
 func_EA27(var_0) {
@@ -666,8 +666,8 @@ marktarget_execute(var_0) {
   var_1 = var_0 scripts\engine\utility::spawn_tag_origin();
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
-  var_2 linkto(var_1, "tag_origin", (0, 0, 45), (0, 0, 0));
-  var_1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_origin", (0, 0, 45), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.ismarkedtarget = 1;
   var_0.healthregendisabled = 1;
   wait(0.1);

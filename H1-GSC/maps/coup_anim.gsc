@@ -494,7 +494,7 @@ driver_turnspecial(var_0) {
 playerdeath(var_0) {
   playFXOnTag(common_scripts\utility::getfx("execution_muzzleflash"), var_0, "tag_flash");
   playFXOnTag(common_scripts\utility::getfx("execution_shell_eject"), var_0, "tag_brass");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player thread maps\_utility::play_sound_on_entity("assassination_shot");
   wait 0.1;
   var_1 = newhudelem();
@@ -518,7 +518,7 @@ playerthrownincar(var_0) {
   wait 0.3;
   soundscripts\_snd::snd_message("aud_coup_car_open");
   wait 0.25;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1.8;
   level.leftguard maps\_utility::play_sound_on_entity("coup_ab0_move_generic_custom");
 }
@@ -526,7 +526,7 @@ playerthrownincar(var_0) {
 playerhit(var_0) {
   wait 0.15;
   soundscripts\_snd::snd_message("aud_add_stunned_car_event");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   setblur(40, 0.1);
   maps\_utility::set_vision_set("coup_hit", 0);
   setsaveddvar("r_glow_allowed_script_forced", "0");
@@ -542,12 +542,12 @@ playerpulledfromcar(var_0) {
   wait 2.15;
   soundscripts\_snd::snd_message("aud_coup_car_thrown_out");
   wait 2.0;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 playerkicked(var_0) {
   wait 0.65;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 playerhitdamage(var_0) {

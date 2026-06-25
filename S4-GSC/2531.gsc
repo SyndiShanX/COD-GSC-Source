@@ -1805,7 +1805,7 @@ _id_1015E(var_0, var_1, var_2, var_3) {
   }
   var_5 = spawn("script_model", var_0 gettagorigin(var_4._id_18F2));
   var_5.angles = var_0 gettagangles(var_4._id_18F2);
-  var_5 linkto(var_0, var_4._id_18F2, (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_0, var_4._id_18F2, (0, 0, 0), (0, 0, 0));
   var_5 setModel("viewhands_base_iw8");
   var_5 hide();
   self._id_18BD = var_5;
@@ -2278,7 +2278,7 @@ _id_10198(var_0, var_1, var_2, var_3) {
     var_9 = var_6 + (0, 0, 60);
   }
 
-  var_10 = vectornormalize(var_7 - var_9);
+  var_10 = vectorNormalize(var_7 - var_9);
 
   if(!var_8) {
     var_11 = physics_createcontents(["physicscontents_vehicle", "physicscontents_item"]);
@@ -2384,7 +2384,7 @@ _id_101D2(var_0, var_1, var_2) {
   if(isDefined(var_2._id_578A)) {
     var_0 unlink();
     var_0 dontinterpolate();
-    var_0 setorigin(var_2._id_578A, 1, 1);
+    var_0 setOrigin(var_2._id_578A, 1, 1);
     var_0 setstance("stand");
 
     if(isDefined(var_2._id_5774)) {
@@ -2866,10 +2866,10 @@ _id_101C7(var_0, var_1, var_2) {
 
   if(isDefined(var_3._id_18F2)) {
     var_0 _meth_80DB();
-    var_0 linkto(var_1, var_3._id_18F2);
+    var_0 linkTo(var_1, var_3._id_18F2);
   } else {
     var_0 _meth_80DB();
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
   }
 }
 

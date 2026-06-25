@@ -22,9 +22,9 @@ _id_CA27(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5._id_2FF7.angles = var_1;
-  var_5 cameralinkto(var_5._id_2FF7, "tag_origin", 1, 1);
-  var_5._id_2FF7 moveto(var_2, 1);
-  var_5._id_2FF7 rotateto(var_3, 1);
+  var_5 cameralinkTo(var_5._id_2FF7, "tag_origin", 1, 1);
+  var_5._id_2FF7 moveTo(var_2, 1);
+  var_5._id_2FF7 rotateTo(var_3, 1);
 
   if(istrue(var_4)) {
     wait 1;
@@ -491,7 +491,7 @@ motorcycle_monitor_summon() {
           var_0 = var_0 + 20;
           continue;
         } else {
-          var_3 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("motorcycle", var_1, undefined);
+          var_3 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("motorcycle", var_1, undefined);
           thread scripts\mp\gametypes\arms_race_audio::play_motorcycle_summon(var_3);
           break;
         }

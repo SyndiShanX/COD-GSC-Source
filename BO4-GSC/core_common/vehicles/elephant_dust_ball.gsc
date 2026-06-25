@@ -52,7 +52,7 @@ defaultrole() {
   self vehicle_ai::call_custom_add_state_callbacks();
   self.fxent = spawn("script_model", self.origin);
   self.fxent setModel("tag_origin");
-  self.fxent linkto(self);
+  self.fxent linkTo(self);
   self.fxent clientfield::set("towers_boss_dust_ball_fx", 1);
   vehicle_ai::startinitialstate("seek");
 }
@@ -87,7 +87,7 @@ function_f2fd92d1() {
 
 function_3f83eb6(params) {
   self.fxent unlink();
-  self.fxent linkto(self, "tag_origin", (0, 0, 50));
+  self.fxent linkTo(self, "tag_origin", (0, 0, 50));
   self.fxent clientfield::set("towers_boss_dust_ball_fx", 3);
 }
 

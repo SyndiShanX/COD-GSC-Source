@@ -28,7 +28,7 @@ function_29bff3c6() {
   waitframe(1);
   level.var_705db276 = 1;
   level.var_d5ba7324 clientfield::set("" + #"apollo_bowl_fx", level.var_705db276);
-  a_players = getplayers();
+  a_players = getPlayers();
   level.var_6a1bdc96 = 16 * a_players.size;
   level.var_ba3adfd9 = [];
   level.var_ba3adfd9[0] = 0;
@@ -65,7 +65,7 @@ function_9c8540b4(e_player, n_amount) {
     if(level.var_705db276 == 5) {
       level flag::set("fl_oracle_unlocked");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player zm_vo::vo_say(#"hash_4c29e41ef47ad9b2", 0, 1, 9999, 1, 1, 1);
       }
     }
@@ -117,6 +117,6 @@ function_407b2b88() {
   level endon(#"game_ended");
   level flag::wait_till("all_players_connected");
   level flag::wait_till("power_on");
-  level.var_483180c5 = getent("coal_brazier_apollo", "targetname");
+  level.var_483180c5 = getEnt("coal_brazier_apollo", "targetname");
   level.var_483180c5 clientfield::set("" + #"rob_coals", 1);
 }

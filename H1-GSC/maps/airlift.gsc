@@ -17,8 +17,8 @@ dead_script() {
 }
 
 position_player() {
-  var_0 = getent("player_start_cobraflight", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("player_start_cobraflight", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
 }
 
@@ -62,7 +62,7 @@ main() {
   level.excludedai[1] = level.crewchief;
   level.excludedai[2] = level.smokeleader;
   level.donttankcrush = 0;
-  level.crush_car = getent("crunch_sedan", "targetname");
+  level.crush_car = getEnt("crunch_sedan", "targetname");
   level.grenadetoggle = 0;
   level.turretoverheat = 0;
   level.turret_heat_status = 1;
@@ -260,7 +260,7 @@ main() {
 
 debug() {
   wait 5;
-  var_0 = getent("seaknight_plaza_alt_landing", "targetname");
+  var_0 = getEnt("seaknight_plaza_alt_landing", "targetname");
   var_1 = maps\_utility::array_spawn(getEntArray("allies_seaknight_wingman", "targetname"), 1);
   common_scripts\utility::array_thread(var_1, ::friendlies_plaza_seaknights);
   maps\_utility::delaythread(0, ::vehicle_animated_seaknight_land, var_0, undefined, var_1);
@@ -308,7 +308,7 @@ start_cobraflight() {
   thread seaknight_player_think("cobraflight");
   common_scripts\utility::flag_wait("seaknight_set_up");
   level.seaknight thread maps\airlift_anim::seaknight_open_doors();
-  var_0 = getent("seaknight_land_smoketown2", "script_noteworthy");
+  var_0 = getEnt("seaknight_land_smoketown2", "script_noteworthy");
   level.seaknight maps\_utility::vehicle_detachfrompath();
   level.seaknight setgoalyaw(var_0.angles[1]);
   level.seaknight maps\_utility::vehicle_land();
@@ -326,10 +326,10 @@ start_nuke() {
   thread seaknight_player_think("nuke");
   common_scripts\utility::flag_wait("seaknight_set_up");
   level.seaknight thread maps\airlift_anim::seaknight_open_doors();
-  level.crewchief = maps\jake_tools::spawndude(getent("seaknight_crewchief_cobrastreets", "targetname"), 1);
+  level.crewchief = maps\jake_tools::spawndude(getEnt("seaknight_crewchief_cobrastreets", "targetname"), 1);
   level.crewchief thread maps\_anim::anim_loop_solo(level.crewchief, "crewchief_idle", "tag_detach", "stop_idle_crewchief", level.seaknight);
   level.crewchief maps\_utility::gun_remove();
-  level.crewchief linkto(level.seaknight);
+  level.crewchief linkTo(level.seaknight);
   thread cobrastreets_crewchief_think();
   common_scripts\utility::flag_set("pilot_taken_from_cockpit");
   common_scripts\utility::flag_set("obj_rescue_pilot_complete");
@@ -339,7 +339,7 @@ start_nuke() {
   level.eplayerview = maps\_utility::spawn_anim_model("player_carry");
   level.eplayerview hide();
   level.player disableweapons();
-  var_0 = getent("seaknight_land_cobrastreets", "script_noteworthy");
+  var_0 = getEnt("seaknight_land_cobrastreets", "script_noteworthy");
   var_0 waittill("trigger", var_1);
   level.seaknight maps\_utility::vehicle_detachfrompath();
   level.seaknight setgoalyaw(var_0.angles[1]);
@@ -544,7 +544,7 @@ h1_airlift_rumblelogic(var_0, var_1) {
     earthquake(var_2, var_3, level.player.origin, 10000);
 
     if(var_1) {
-      level.player playrumbleonentity(var_4);
+      level.player playRumbleOnEntity(var_4);
     }
   }
 }
@@ -720,7 +720,7 @@ car_crush_arcademode() {
 
 tank_crush_destructible() {
   level endon("start_tank_crush");
-  var_0 = getent("crunch_sedan", "targetname");
+  var_0 = getEnt("crunch_sedan", "targetname");
   var_0 thread car_crush_arcademode();
   level waittill("exploder_1000_detonated");
 
@@ -775,8 +775,8 @@ plaza_flyover() {
   thread maps\_utility::ai_delete_when_out_of_sight(var_0, level.aideletedistance);
   wait 11;
   maps\jake_tools::triggeractivate("trig_spawn_drones_plaza_street_retreat");
-  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getent("auto807", "targetname"), "scn_seaknight_land_plaza");
-  level.seaknight thread vehicle_heli_land(getent("seaknight_land_plaza", "script_noteworthy"));
+  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getEnt("auto807", "targetname"), "scn_seaknight_land_plaza");
+  level.seaknight thread vehicle_heli_land(getEnt("seaknight_land_plaza", "script_noteworthy"));
   common_scripts\utility::flag_wait("seaknightInPlaza");
   var_0 = getEntArray("hostiles_plaza_fodder", "script_noteworthy");
   thread maps\_utility::ai_delete_when_out_of_sight(var_0, 1024);
@@ -788,11 +788,11 @@ plaza_flyover() {
     maps\_utility::delaythread(12, ::vehicle_cobra_spawn_and_kill, "cobra_plaza_end", var_1, 1);
   }
 
-  var_2 = getent("seaknight_plaza_alt_landing", "targetname");
+  var_2 = getEnt("seaknight_plaza_alt_landing", "targetname");
   var_3 = maps\_utility::array_spawn(getEntArray("allies_seaknight_wingman", "targetname"), 1);
   common_scripts\utility::array_thread(var_3, ::friendlies_plaza_seaknights);
   maps\_utility::delaythread(0, ::vehicle_animated_seaknight_land, var_2, undefined, var_3);
-  var_2 = getent("seaknight_plaza_alt_landing2", "targetname");
+  var_2 = getEnt("seaknight_plaza_alt_landing2", "targetname");
   var_4 = maps\_utility::array_spawn(getEntArray("allies_seaknight_plaza_ch46_2", "targetname"), 1);
   common_scripts\utility::array_thread(var_4, ::friendlies_plaza_seaknights);
   maps\_utility::delaythread(1, ::vehicle_animated_seaknight_land, var_2, "right_side_seaknight_lift_off", var_4);
@@ -811,7 +811,7 @@ plaza_flyover() {
 
   common_scripts\utility::flag_set("start_tank_crush");
   wait 10;
-  var_5 = getent("colornodes_plaza", "script_noteworthy");
+  var_5 = getEnt("colornodes_plaza", "script_noteworthy");
   var_5 notify("trigger", level.player);
   maps\jake_tools::triggeractivate("trig_spawn_hostiles_palace_assault");
   level.seaknight thread maps\_utility::play_sound_on_entity("scn_seaknight_liftoff_plaza");
@@ -915,8 +915,8 @@ plaza_building_assault() {
 }
 
 plaza_at4_sequence() {
-  var_0 = getent("org_rpg_plaza_01", "targetname");
-  var_1 = maps\jake_tools::spawndude(getent("plaza_at4_dude", "script_noteworthy"), 1);
+  var_0 = getEnt("org_rpg_plaza_01", "targetname");
+  var_1 = maps\jake_tools::spawndude(getEnt("plaza_at4_dude", "script_noteworthy"), 1);
   var_1 attach("weapon_AT4", "TAG_STOWED_BACK");
   var_2 = getnode("node_at4_guy", "targetname");
   var_1 maps\jake_tools::set_threatbiasgroup("ignored");
@@ -961,7 +961,7 @@ plaza_at4_sequence() {
 
 plaza_at4_impact() {
   wait 2;
-  var_0 = getent("org_rpg_plaza_01", "targetname");
+  var_0 = getEnt("org_rpg_plaza_01", "targetname");
   thread common_scripts\utility::play_sound_in_space("building_explosion3", var_0.origin);
   common_scripts\_exploder::exploder(1);
 }
@@ -971,7 +971,7 @@ double_rooftop_tank_destructible() {
   self setCanDamage(1);
   self waittill("damage", var_0, var_1);
   self setModel("h1_me_rooftop_tank_destroyed");
-  var_2 = getent(self.target, "targetname");
+  var_2 = getEnt(self.target, "targetname");
   var_2 setModel("h1_me_rooftop_tank_destroyed");
   var_3 = (self.origin + var_2.origin) / 2;
   playFX(level._effect["dual_propane_tank_explosion_airlift"], var_3);
@@ -1147,7 +1147,7 @@ smoketown_ambient_think() {
 }
 
 smoketown_lz_door() {
-  var_0 = getent("door_smoketown_lz", "targetname");
+  var_0 = getEnt("door_smoketown_lz", "targetname");
   common_scripts\utility::flag_wait("player_smoketown_junkyard");
   var_0 hide();
   var_0 notsolid();
@@ -1155,14 +1155,14 @@ smoketown_lz_door() {
 }
 
 smoketown_construction_door() {
-  var_0 = getent("door_construction", "targetname");
+  var_0 = getEnt("door_construction", "targetname");
   var_0 hide();
   var_0 notsolid();
   var_0 connectpaths();
   common_scripts\utility::flag_wait("player_in_upper_construction_stairs");
   var_0 show();
   var_0 solid();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 green_smoke() {
@@ -1191,18 +1191,18 @@ smoketown_flyover() {
 }
 
 smoketown_land() {
-  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getent("flightPathstart_smoketown", "targetname"), "scn_seaknight_land_smoketown");
+  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getEnt("flightPathstart_smoketown", "targetname"), "scn_seaknight_land_smoketown");
   common_scripts\utility::flag_wait("seaknightLandingInSmoketown");
   level.seaknight_engine_sound_node thread maps\airlift_aud::aud_seaknight_event_handler(0.89, 0.9, 3.2, "heli_speed_away_city_mix", "heli_landing_field_mix");
   thread animate_smoketown_crane();
   level.scr_sound["mortar"]["incomming"] = "mortar_incoming";
-  level.seaknight thread vehicle_heli_land(getent("seaknight_land_smoketown", "script_noteworthy"));
+  level.seaknight thread vehicle_heli_land(getEnt("seaknight_land_smoketown", "script_noteworthy"));
   maps\_utility::delaythread(8, ::disablech46turretfire);
   var_0 = getEntArray("pilots_smoketown", "targetname");
   spawn_pilots(var_0);
   var_1 = maps\_utility::array_spawn(getEntArray("seaknight_unloaders_smoketown", "targetname"), 1);
   level.vasquez = maps\jake_tools::getdudefromarray(var_1, "vasquez");
-  level.crewchief = maps\jake_tools::spawndude(getent("seaknight_crewchief_smoketown", "targetname"), 1);
+  level.crewchief = maps\jake_tools::spawndude(getEnt("seaknight_crewchief_smoketown", "targetname"), 1);
   level.seaknight thread vehicle_seaknight_unload(var_1, level.crewchief, "smoketown");
   level.seaknight waittill("landed");
   setexpfog(0, 7339.38, 0.564865, 0.460619, 0.322549, 1, 0, 3);
@@ -1289,10 +1289,10 @@ smoketown_land() {
     level.friendliesnames_smoketown = common_scripts\utility::array_add(level.friendliesnames_smoketown, var_3.name);
   }
 
-  var_18 = getent("smoketown_at4_hostile", "script_noteworthy");
+  var_18 = getEnt("smoketown_at4_hostile", "script_noteworthy");
   var_19 = maps\jake_tools::spawndude(var_18, "stalingrad");
   var_19 maps\jake_tools::invulnerable(1);
-  var_20 = getent("smoketown_rpg_target", "targetname");
+  var_20 = getEnt("smoketown_rpg_target", "targetname");
   level.smokeat4dude maps\jake_tools::set_threatbiasgroup("ignored");
   setignoremegroup("ignored", "axis");
   setignoremegroup("axis", "ignored");
@@ -1349,7 +1349,7 @@ at4_detach() {
 }
 
 lz_spawners() {
-  var_0 = getent("spawn_trig_lz", "targetname");
+  var_0 = getEnt("spawn_trig_lz", "targetname");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("player_smoketown_junkyard_hardpoint");
   var_0 common_scripts\utility::trigger_on();
@@ -1362,15 +1362,15 @@ junkyard_assault() {
   common_scripts\utility::flag_set("aa_construction_to_lz_section");
   maps\jake_tools::triggersenable("colornodes_smoketown_end_initial", "script_noteworthy", 1);
   maps\jake_tools::triggersenable("colornodes_smoketown_end", "script_noteworthy", 1);
-  var_0 = getent("colornodes_smoketown_end_initial", "script_noteworthy");
+  var_0 = getEnt("colornodes_smoketown_end_initial", "script_noteworthy");
   var_0 notify("trigger", level.player);
   common_scripts\utility::flag_wait("player_smoketown_junkyard_hardpoint");
-  var_1 = getent("killspawner_smoketown_house", "targetname");
+  var_1 = getEnt("killspawner_smoketown_house", "targetname");
   var_1 notify("trigger", level.player);
   var_2 = getaiarray("axis");
-  var_3 = getent("volume_construction_yard_rear", "targetname");
-  var_4 = getent("volume_construction_house_top_floor", "targetname");
-  var_5 = getent("volume_construction_house_bottom_floor", "targetname");
+  var_3 = getEnt("volume_construction_yard_rear", "targetname");
+  var_4 = getEnt("volume_construction_house_top_floor", "targetname");
+  var_5 = getEnt("volume_construction_house_bottom_floor", "targetname");
 
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
     if(var_2[var_6] istouching(var_4)) {
@@ -1408,7 +1408,7 @@ smoketown_lz_advance() {
   maps\_utility::playerwatch_register_crusher(level.seaknight);
   disable_color_trigs();
   maps\jake_tools::triggersenable("colornodes_smoketown_lz_initial", "script_noteworthy", 1);
-  var_0 = getent("colornodes_smoketown_lz_initial", "script_noteworthy");
+  var_0 = getEnt("colornodes_smoketown_lz_initial", "script_noteworthy");
   var_0 notify("trigger", level.player);
   maps\jake_tools::triggersenable("colornodes_smoketown_lz", "script_noteworthy", 1);
   common_scripts\utility::flag_wait("player_smoketown_lz_alley");
@@ -1462,11 +1462,11 @@ smoketown_mortars() {
 smoketown_enemy_heli() {
   common_scripts\utility::flag_wait("player_in_upper_construction_stairs");
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname("smoketown_heli_2");
-  var_1 = getent("heli_crash_smoketown_2", "script_noteworthy");
+  var_1 = getEnt("heli_crash_smoketown_2", "script_noteworthy");
   var_0.perferred_crash_location = var_1;
   thread maps\_vehicle::gopath(var_0);
   level.smoketownmi17 = maps\_vehicle::spawn_vehicle_from_targetname("smoketown_heli_1");
-  var_2 = getent("heli_crash_smoketown_1", "script_noteworthy");
+  var_2 = getEnt("heli_crash_smoketown_1", "script_noteworthy");
   level.smoketownmi17.perferred_crash_location = var_2;
   thread maps\_vehicle::gopath(level.smoketownmi17);
   level.smoketownmi17 waittill("deathspin");
@@ -1495,7 +1495,7 @@ smoketown_cobra_think() {
   wait 2.6;
   common_scripts\utility::flag_set("smoketown_cobra_returns");
   common_scripts\utility::flag_wait("player_smoketown_junkyard_hardpoint");
-  var_1 = getent("cobra_smoketown_delete_path", "targetname");
+  var_1 = getEnt("cobra_smoketown_delete_path", "targetname");
   var_0 vehicle_heli_deletepath(var_1);
 }
 
@@ -1538,13 +1538,13 @@ seaknight_smoketown_think() {
   level.seaknight maps\_utility::vehicle_liftoff();
   level.seaknight maps\_utility::vehicle_resumepath();
   common_scripts\utility::flag_wait("player_smoketown_junkyard_hardpoint");
-  var_0 = getent("smoketown_seaknight_return", "script_noteworthy");
+  var_0 = getEnt("smoketown_seaknight_return", "script_noteworthy");
   level.seaknight maps\_utility::vehicle_detachfrompath();
   level.seaknight thread maps\_utility::vehicle_dynamicpath(var_0, 0);
   level.seaknight thread maps\airlift_anim::seaknight_open_doors();
-  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getent("auto978", "targetname"), "scn_seaknight_land_smoketown2");
-  level.seaknight thread vehicle_heli_land(getent("seaknight_land_smoketown2", "script_noteworthy"));
-  var_1 = getent("volume_smoketown_lz_badplace", "targetname");
+  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getEnt("auto978", "targetname"), "scn_seaknight_land_smoketown2");
+  level.seaknight thread vehicle_heli_land(getEnt("seaknight_land_smoketown2", "script_noteworthy"));
+  var_1 = getEnt("volume_smoketown_lz_badplace", "targetname");
   badplace_brush("volume_smoketown_lz_badplace", 0, var_1, "allies", "axis");
   level.seaknight waittill("landed");
   thread seaknight_player_triggers();
@@ -1559,7 +1559,7 @@ smoketown_at4_impact(var_0, var_1) {
   var_0.skipdeathanim = 1;
   var_0 dodamage(var_0.health + 1000, var_0.origin);
   missile_deleteattractor(var_1);
-  var_2 = getent("smoketown_physics_explosion", "targetname");
+  var_2 = getEnt("smoketown_physics_explosion", "targetname");
   thread common_scripts\utility::play_sound_in_space("building_explosion3", var_2.origin);
   common_scripts\_exploder::exploder(2);
   wait 0.1;
@@ -1672,7 +1672,7 @@ cobra_flyover() {
   maps\_utility::delaythread(3, maps\_mortar::bog_style_mortar_on, 2);
   level.wingman = maps\_vehicle::spawn_vehicle_from_targetname("wingmanCobraflight");
   thread maps\_vehicle::gopath(level.wingman);
-  var_0 = getent("seaknight_land_smoketown2", "script_noteworthy");
+  var_0 = getEnt("seaknight_land_smoketown2", "script_noteworthy");
   var_1 = var_0.speed;
   var_2 = var_0.script_decel;
   var_3 = var_0.script_accel;
@@ -1708,13 +1708,13 @@ cobra_missile() {
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname("missile_source");
   var_0 hide();
   var_0 setvehweapon("crash_missile_airlift");
-  var_0 setturrettargetent(level.wingman);
+  var_0 setturrettargetEnt(level.wingman);
   wait 1;
-  var_1 = getent("dummy_target", "targetname");
+  var_1 = getEnt("dummy_target", "targetname");
   var_2 = var_0 fireweapon("tag_missile_right", var_1, (0, 0, 0));
   var_3 = spawn("script_origin", level.wingman gettagorigin("tail_rotor_jnt"));
-  var_3 linkto(level.wingman, "tag_origin", (20, 0, -40), (0, 0, 0));
-  var_2 missile_settargetent(var_3);
+  var_3 linkTo(level.wingman, "tag_origin", (20, 0, -40), (0, 0, 0));
+  var_2 missile_settargetEnt(var_3);
   var_4 = distancesquared(var_2.origin, level.wingman gettagorigin("tail_rotor_jnt"));
   wait 0.05;
   var_2 thread maps\_utility::play_sound_on_entity("scn_airlift_cobracrash_incoming_rocket");
@@ -1746,26 +1746,26 @@ cobra_crash() {
   level.wingman thread cobra_crash_fx();
   level.wingman thread cobra_crash_attached_fx();
   wait 4.7;
-  var_0 = getent("cobra_crash_tree_01", "targetname");
+  var_0 = getEnt("cobra_crash_tree_01", "targetname");
   var_0 playSound("tree_collapse");
   var_1 = 2;
   var_2 = var_0.angles;
   var_2 = var_2 + (-80, 10, 0);
-  var_0 rotateto(var_2, var_1, var_1 / 2, var_1 / 2);
+  var_0 rotateTo(var_2, var_1, var_1 / 2, var_1 / 2);
   common_scripts\utility::flag_wait("cobraCrash01");
-  var_3 = getent("cobra_crash_roof_01", "targetname");
+  var_3 = getEnt("cobra_crash_roof_01", "targetname");
   physicsexplosionsphere(var_3.origin, level.physicssphereradius, level.physicssphereradius / 2, level.physicssphereforce);
-  var_4 = getent("cobra_crash_antenna_01", "targetname");
+  var_4 = getEnt("cobra_crash_antenna_01", "targetname");
   var_1 = 1;
   var_2 = var_4.angles;
   var_2 = var_2 + (0, 0, 80);
-  var_4 rotateto(var_2, var_1, var_1 / 2, var_1 / 2);
+  var_4 rotateTo(var_2, var_1, var_1 / 2, var_1 / 2);
   wait 0.25;
-  var_5 = getent("cobra_crash_antenna_02", "targetname");
+  var_5 = getEnt("cobra_crash_antenna_02", "targetname");
   var_1 = 1;
   var_2 = var_5.angles;
   var_2 = var_2 + (0, 0, -80);
-  var_5 rotateto(var_2, var_1, var_1 / 2, var_1 / 2);
+  var_5 rotateTo(var_2, var_1, var_1 / 2, var_1 / 2);
 }
 
 cobra_crash_rotate() {
@@ -1781,11 +1781,11 @@ cobra_crash_rotate() {
 }
 
 cobra_crash_fx() {
-  var_0 = getent("cobraCrash01", "targetname");
-  var_1 = getent("cobraCrash02", "targetname");
-  var_2 = getent("cobraCrash03", "targetname");
-  var_3 = getent("cobra_smoke", "targetname");
-  var_4 = getent("cobra_crash_end", "targetname");
+  var_0 = getEnt("cobraCrash01", "targetname");
+  var_1 = getEnt("cobraCrash02", "targetname");
+  var_2 = getEnt("cobraCrash03", "targetname");
+  var_3 = getEnt("cobra_smoke", "targetname");
+  var_4 = getEnt("cobra_crash_end", "targetname");
   common_scripts\utility::flag_wait("cobra_hit");
   playFXOnTag(common_scripts\utility::getfx("cobra_crash_rocket_impact"), self, "tail_rotor_jnt");
   earthquake(0.5, 1.2, level.player.origin, 8000);
@@ -1822,7 +1822,7 @@ cobra_crash_fx() {
 }
 
 show_cobra_crash() {
-  var_0 = getent("cobra_crash", "targetname");
+  var_0 = getEnt("cobra_crash", "targetname");
   var_0 show();
 }
 
@@ -1884,9 +1884,9 @@ aa_cobrastreets_init() {
 cobrastreets_kill() {
   level endon("obj_rescue_pilot_complete");
   level.player endon("death");
-  var_0 = getent("trig_cobrastreets_kill", "targetname");
+  var_0 = getEnt("trig_cobrastreets_kill", "targetname");
   var_0 thread cobrastreets_instakill();
-  var_1 = getent("cobrastreets_kill", "targetname");
+  var_1 = getEnt("cobrastreets_kill", "targetname");
   var_2 = 50;
 
   for(;;) {
@@ -2030,21 +2030,21 @@ dialogue_cobrastreets() {
 }
 
 cobrapilot_spawn() {
-  level.crashnode = getent("node_pilot_crash", "targetname");
-  var_0 = getent("friendly_cobrapilot", "script_noteworthy");
+  level.crashnode = getEnt("node_pilot_crash", "targetname");
+  var_0 = getEnt("friendly_cobrapilot", "script_noteworthy");
   level.cobrapilot = maps\jake_tools::spawndude(var_0, "stalingrad");
   level.cobrapilot.animname = "frnd";
   level.cobrapilot thread cobrapilot_think();
 }
 
 cobra_streetfight() {
-  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getent("flightPathstart_cobrastreets", "targetname"), "scn_seaknight_land_cobrastreets");
+  level.seaknight thread maps\airlift_aud::play_player_heli_land_sfx(getEnt("flightPathstart_cobrastreets", "targetname"), "scn_seaknight_land_cobrastreets");
   common_scripts\utility::flag_wait("seaknightLandingCobratown");
   level.seaknight_engine_sound_node thread maps\airlift_aud::aud_seaknight_event_handler(1.0, 1.0, 3.7, "cobra_crash_mix", "landing_crash_mix");
   maps\_friendlyfire::turnoff();
   var_0 = getEntArray("trigger_cobra_retreat", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, common_scripts\utility::trigger_off);
-  level.seaknight thread vehicle_heli_land(getent("seaknight_land_cobrastreets", "script_noteworthy"));
+  level.seaknight thread vehicle_heli_land(getEnt("seaknight_land_cobrastreets", "script_noteworthy"));
   maps\_utility::delaythread(5, ::disablech46turretfire);
   level.afriendliesseaknight = maps\_utility::array_spawn(getEntArray("seaknight_unloaders_cobrastreets", "targetname"), 1);
 
@@ -2065,7 +2065,7 @@ cobra_streetfight() {
   }
 
   level.vasquez = maps\jake_tools::getdudefromarray(level.afriendliesseaknight, "vasquez");
-  level.crewchief = maps\jake_tools::spawndude(getent("seaknight_crewchief_cobrastreets", "targetname"), 1);
+  level.crewchief = maps\jake_tools::spawndude(getEnt("seaknight_crewchief_cobrastreets", "targetname"), 1);
   level.seaknight thread vehicle_seaknight_unload(level.afriendliesseaknight, level.crewchief, "cobrastreets");
   level.seaknight waittill("landed");
   soundscripts\_snd::snd_message("start_pilot_rescue_mix");
@@ -2079,7 +2079,7 @@ cobra_streetfight() {
     cobrapilot_spawn();
   }
 
-  var_7 = getent("friendly_deadpilot", "script_noteworthy");
+  var_7 = getEnt("friendly_deadpilot", "script_noteworthy");
   level.deadpilot = maps\jake_tools::spawndude(var_7, "stalingrad");
   level.deadpilot.animname = "frnd";
   level.deadpilot maps\_utility::gun_remove();
@@ -2087,7 +2087,7 @@ cobra_streetfight() {
   level.deadpilot.allowdeath = 0;
   level.deadpilot.ignoreme = 1;
   level.deadpilot.grenadeawareness = 0;
-  var_8 = getent("node_gunner_crash", "targetname");
+  var_8 = getEnt("node_gunner_crash", "targetname");
   var_8 thread maps\_anim::anim_loop_solo(level.deadpilot, "deadpilot_idle", undefined, "stop_idle_deadpilot");
   level.afriendlieslz = maps\_utility::array_spawn(getEntArray("friendlies_cobrastreets_lz", "targetname"), 1);
 
@@ -2165,7 +2165,7 @@ cobra_streetfight() {
   var_13 = spawn("script_origin", level.seaknight.origin);
   var_13.origin = level.seaknight gettagorigin("tag_door_rear");
   var_14 = missile_createrepulsorent(var_13, 7000, 500);
-  var_13 linkto(level.seaknight, "tag_door_rear", (0, 0, 100), (0, 0, 0));
+  var_13 linkTo(level.seaknight, "tag_door_rear", (0, 0, 100), (0, 0, 0));
   maps\jake_tools::triggeractivate("killspawner_cobra_retreat_01");
   spawn_trigger_dummy("dummy_spawner_cobra_end");
   wait 0.1;
@@ -2378,7 +2378,7 @@ h1_blur_overlay(var_0, var_1, var_2, var_3, var_4) {
 }
 
 cobra_crashsite_think() {
-  var_0 = getent("obj_rescue_pilot", "targetname");
+  var_0 = getEnt("obj_rescue_pilot", "targetname");
   var_1 = missile_createrepulsorent(var_0, 8500, 275);
   common_scripts\utility::flag_wait("pilot_taken_from_cockpit");
   wait 3;
@@ -2449,8 +2449,8 @@ cobrapilot_think() {
   thread cobrapilot_wave();
 
   if(!getdvarint("limited_mode")) {
-    self setcursorhint("HINT_NOICON");
-    self sethintstring(&"SCRIPT_PLATFORM_AIRLIFT_HINT_PICKUP_PILOT");
+    self setCursorHint("HINT_NOICON");
+    self setHintString(&"SCRIPT_PLATFORM_AIRLIFT_HINT_PICKUP_PILOT");
   }
 
   thread trigger_monitor_player_lean();
@@ -2498,7 +2498,7 @@ cobrapilot_think() {
 
 cobrapilot_shoots_enemies() {
   level endon("pilot_taken_from_cockpit");
-  var_0 = getent("hostile_velindakill", "targetname");
+  var_0 = getEnt("hostile_velindakill", "targetname");
   var_1 = undefined;
   level thread cobrapilot_shoots_enemies_cleanup(var_1);
 
@@ -2586,7 +2586,7 @@ nuke_flight() {
   level.player unlink();
   level.carryignoreentityfunction = ::carryignoreentity;
   maps\_move_with_animation::carrystart(level.cobrapilot, ::carryloopcondition);
-  var_0 = getent("trig_pilot_putdown", "targetname");
+  var_0 = getEnt("trig_pilot_putdown", "targetname");
   var_0 waittill("trigger");
   soundscripts\_snd::snd_message("aud_add_escape_crash_mix");
   level.is_carry_done = 1;
@@ -2596,7 +2596,7 @@ nuke_flight() {
   var_2 = var_1 gettagorigin("tag_player");
   var_3 = var_1 gettagangles("tag_player");
   var_1 hide();
-  var_4 = getent("friendly_cobrapilot_2", "script_noteworthy");
+  var_4 = getEnt("friendly_cobrapilot_2", "script_noteworthy");
   var_4.animname = "frnd";
   var_5 = [];
   var_5[0] = var_4;
@@ -2638,7 +2638,7 @@ nuke_flight() {
   maps\_art::sunflare_changes("nuke", 0);
   level.eplayerview hide();
   level.player enableweapons();
-  level.eplayerview linkto(level.seaknight);
+  level.eplayerview linkTo(level.seaknight);
   level.player playerlinktodelta(level.eplayerview, "tag_player", 1, 20, 45, 5, 25);
   thread pelayo_in_seaknight_shooting();
   wait 1;
@@ -2737,7 +2737,7 @@ nuke() {
   common_scripts\utility::flag_set("shockwave_hit_player");
   playFXOnTag(common_scripts\utility::getfx("airlift_nuke_dirt_helico"), level.seaknight, "tag_origin");
   wait 7;
-  var_1 = getent("nuke_crash", "targetname");
+  var_1 = getEnt("nuke_crash", "targetname");
   level.seaknight maps\_utility::vehicle_detachfrompath();
   level.seaknight setvehgoalpos(var_1.origin, 0);
   wait 6.5;
@@ -2885,7 +2885,7 @@ seaknight_speed_up() {
 obj_plaza_clear() {
   common_scripts\utility::flag_wait("obj_plaza_clear_given");
   var_0 = 2;
-  var_1 = getent("obj_rescue_pilot", "targetname");
+  var_1 = getEnt("obj_rescue_pilot", "targetname");
   objective_add(var_0, "active", &"AIRLIFT_OBJ_PLAZA_CLEAR", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_plaza_clear_complete");
@@ -2895,7 +2895,7 @@ obj_plaza_clear() {
 obj_extract_team() {
   common_scripts\utility::flag_wait("obj_extract_team_given");
   var_0 = 4;
-  var_1 = getent("obj_extract_team", "targetname");
+  var_1 = getEnt("obj_extract_team", "targetname");
   objective_add(var_0, "active", &"AIRLIFT_OBJ_EXTRACT_TEAM", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_extract_team_complete");
@@ -2905,10 +2905,10 @@ obj_extract_team() {
 obj_extract_to_lz() {
   common_scripts\utility::flag_wait("obj_extract_to_lz_given");
   var_0 = 6;
-  var_1 = getent("obj_lz_handhold", "targetname");
+  var_1 = getEnt("obj_lz_handhold", "targetname");
   objective_add(var_0, "active", &"AIRLIFT_OBJ_EXTRACT_TO_LZ", var_1.origin);
   objective_current(var_0);
-  var_1 = getent("obj_extract_to_lz", "targetname");
+  var_1 = getEnt("obj_extract_to_lz", "targetname");
   common_scripts\utility::flag_wait_either("obj_extract_to_lz_complete", "seaknight_back_at_smoketown_lz");
   objective_position(var_0, var_1.origin);
   common_scripts\utility::flag_wait("obj_extract_to_lz_complete");
@@ -2920,7 +2920,7 @@ obj_get_on_mark_19() {
   common_scripts\utility::flag_wait("obj_get_on_mark_19_given");
   var_0 = 7;
   wait 0.05;
-  var_1 = getent("trigger_seaknight_gun", "targetname");
+  var_1 = getEnt("trigger_seaknight_gun", "targetname");
   objective_add(var_0, "active", &"AIRLIFT_OBJ_GET_ON_MARK_19", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_get_on_mark_19_complete");
@@ -2930,7 +2930,7 @@ obj_get_on_mark_19() {
 obj_rescue_pilot() {
   common_scripts\utility::flag_wait("obj_rescue_pilot_given");
   var_0 = 8;
-  var_1 = getent("obj_rescue_pilot", "targetname");
+  var_1 = getEnt("obj_rescue_pilot", "targetname");
   objective_add(var_0, "active", &"AIRLIFT_OBJ_RESCUE_PILOT", var_1.origin);
   objective_current(var_0);
   common_scripts\_exploder::exploder(989);
@@ -2941,7 +2941,7 @@ obj_rescue_pilot() {
 obj_return_pilot() {
   common_scripts\utility::flag_wait("obj_return_pilot_given");
   var_0 = 9;
-  var_1 = getent("obj_rescue_pilot_putdown", "targetname");
+  var_1 = getEnt("obj_rescue_pilot_putdown", "targetname");
   objective_add(var_0, "active", &"AIRLIFT_OBJ_RETURN_PILOT", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_return_pilot_complete");
@@ -2951,7 +2951,7 @@ obj_return_pilot() {
 obj_safe_distance() {
   common_scripts\utility::flag_wait("obj_safe_distance_given");
   var_0 = 10;
-  var_1 = getent("obj_rescue_pilot", "targetname");
+  var_1 = getEnt("obj_rescue_pilot", "targetname");
   objective_add(var_0, "active", &"AIRLIFT_OBJ_SAFE_DISTANCE", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_safe_distance_complete");
@@ -3110,11 +3110,11 @@ vehicle_cobra_think() {
     var_3 = undefined;
 
     if(isDefined(self.currentnode) && isDefined(self.currentnode.target)) {
-      var_3 = getent(self.currentnode.target, "targetname");
+      var_3 = getEnt(self.currentnode.target, "targetname");
     }
 
     if(isDefined(var_3) && isDefined(var_3.script_linkto)) {
-      self.preferredtarget = getent(var_3.script_linkto, "script_linkname");
+      self.preferredtarget = getEnt(var_3.script_linkto, "script_linkname");
     }
 
     if(var_1 == 0 && isDefined(var_3)) {
@@ -3157,7 +3157,7 @@ vehicle_cobra_default_weapons_think() {
         case "script_origin":
           var_1 = level.cosine["15"];
           var_2 = anglesToForward(self.angles);
-          var_3 = vectornormalize(var_0.origin - self.origin);
+          var_3 = vectorNormalize(var_0.origin - self.origin);
           var_4 = vectordot(var_2, var_3);
 
           if(var_4 <= var_1) {
@@ -3181,7 +3181,7 @@ vehicle_cobra_default_weapons_think() {
           wait(randomfloatrange(1, 4.0));
           break;
         default:
-          self setturrettargetent(var_0, (0, 0, 48));
+          self setturrettargetEnt(var_0, (0, 0, 48));
 
           if(!self.turretfiring) {
             thread firemg();
@@ -3247,8 +3247,8 @@ vehicle_aim_turret_at_angle(var_0) {
   var_1 = anglesToForward(self.angles + (0, var_0, 0));
   var_1 = common_scripts\utility::vectorscale(var_1, 10000);
   var_2 = spawn("script_origin", self.origin + var_1 + (0, 0, 70));
-  var_2 linkto(self);
-  self setturrettargetent(var_2);
+  var_2 linkTo(self);
+  self setturrettargetEnt(var_2);
   common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 10);
   var_2 delete();
 }
@@ -3301,7 +3301,7 @@ vehicle_turret_think() {
         var_3 = var_0.origin + (0, 0, 32);
         self setturrettargetvec(var_3);
       } else
-        self setturrettargetent(var_0, (0, 0, 32));
+        self setturrettargetEnt(var_0, (0, 0, 32));
 
       var_4 = randomfloatrange(2, 3);
       common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", var_4);
@@ -3481,7 +3481,7 @@ vehicle_cobra_attack_pattern_think(var_0) {
   self endon("death");
   self notify("starting_new_attack_pattern");
   self endon("starting_new_attack_pattern");
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   maps\_utility::vehicle_detachfrompath();
   thread maps\_utility::vehicle_dynamicpath(var_1, 0);
   var_1 waittill("trigger", var_2);
@@ -3558,7 +3558,7 @@ vehicle_seaknight_fake_load_think(var_0) {
   maps\_utility::disable_ai_color();
   self pushplayer(1);
   self setgoalnode(var_0);
-  maps\jake_tools::setgoalradius(var_0.radius);
+  maps\jake_tools::setgoalRadius(var_0.radius);
   self waittill("goal");
 
   if(isDefined(self.magic_bullet_shield)) {
@@ -3614,7 +3614,7 @@ seaknight_crewchief_think(var_0) {
   self endon("death");
   self endon("stop_default_behavior");
   maps\_utility::gun_remove();
-  self linkto(level.seaknight);
+  self linkTo(level.seaknight);
   thread maps\_anim::anim_loop_solo(self, "crewchief_idle", "tag_detach", "stop_idle_crewchief", level.seaknight);
   level.seaknight waittill("unload_ai");
   self notify("stop_idle_crewchief");
@@ -3713,7 +3713,7 @@ vehicle_seaknight_unload_ai_think(var_0, var_1) {
 
   self forceteleport(var_1 gettagorigin(var_2), var_1 gettagangles(var_2));
   var_1 maps\_anim::anim_generic_first_frame(self, var_0, "tag_detach");
-  self linkto(var_1, var_2);
+  self linkTo(var_1, var_2);
   var_1 waittill("unload_ai");
   thread maps\_utility::play_sound_on_entity("scn_airlift_foley_soliders_getout");
   self show();
@@ -3810,7 +3810,7 @@ kill_timer() {
 nuke_trees() {
   var_0 = 2.5;
   var_1 = getEntArray("nuke_trees", "targetname");
-  var_2 = getent("nuke_origin", "targetname");
+  var_2 = getEnt("nuke_origin", "targetname");
   var_3 = [];
   var_3 = var_1;
   var_4 = common_scripts\utility::getfarthest(var_2.origin, var_3);
@@ -3821,11 +3821,11 @@ nuke_trees() {
     var_8 = var_1[var_7];
     var_9 = distancesquared(var_8.origin, var_2.origin);
     var_8.fdelay = var_9 * var_6;
-    var_10 = vectornormalize(var_8.origin - var_2.origin);
+    var_10 = vectorNormalize(var_8.origin - var_2.origin);
     var_11 = vectortoangles(var_10);
     var_8.dummy = spawn("script_origin", var_8.origin);
     var_8.dummy.angles = var_11;
-    var_8 linkto(var_8.dummy);
+    var_8 linkTo(var_8.dummy);
   }
 
   common_scripts\utility::flag_wait("nuke_flattens_trees");
@@ -3837,7 +3837,7 @@ nuke_tree_fall() {
   var_0 = 2;
   var_1 = self.dummy.angles;
   var_1 = var_1 + (80, 0, 0);
-  self.dummy rotateto(var_1, var_0, var_0 / 2, var_0 / 2);
+  self.dummy rotateTo(var_1, var_0, var_0 / 2, var_0 / 2);
 }
 
 nuke_exploders_think() {
@@ -3894,10 +3894,10 @@ fx_management() {
   level.fxsmoketown = [];
   level.fxcobrastreets = [];
   level.fxtowerexploders = maps\_utility::getfxarraybyid("building_collapse_nuke");
-  var_0 = getent("fx_volume_intro", "targetname");
-  var_1 = getent("fx_volume_plazatown", "targetname");
-  var_2 = getent("fx_volume_smoketown", "targetname");
-  var_3 = getent("fx_volume_cobrastreets", "targetname");
+  var_0 = getEnt("fx_volume_intro", "targetname");
+  var_1 = getEnt("fx_volume_plazatown", "targetname");
+  var_2 = getEnt("fx_volume_smoketown", "targetname");
+  var_3 = getEnt("fx_volume_cobrastreets", "targetname");
   var_4 = spawn("script_origin", (0, 0, 0));
 
   for(var_5 = 0; var_5 < level.createfxent.size; var_5++) {
@@ -3960,7 +3960,7 @@ rpg_fake(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_3 = getent(var_1[var_2].target, "targetname");
+    var_3 = getEnt(var_1[var_2].target, "targetname");
     magicbullet("rpg", var_1[var_2].origin, var_3.origin);
     wait(randomfloatrange(1, 2.5));
   }
@@ -3972,19 +3972,19 @@ disable_color_trigs() {
 
 waittill_trigger_seaknight() {
   level endon("stop_seaknight_player_monitor");
-  var_0 = getent("trigger_seaknight", "targetname");
+  var_0 = getEnt("trigger_seaknight", "targetname");
   var_0 waittill("trigger");
 }
 
 waittill_trigger_inside_seaknight() {
   level endon("stop_seaknight_player_monitor");
-  var_0 = getent("trigger_inside_seaknight", "targetname");
+  var_0 = getEnt("trigger_inside_seaknight", "targetname");
   var_0 waittill("trigger");
 }
 
 waittill_trigger_seaknight_gun() {
   thread seaknight_disable_lean_when_mounting();
-  var_0 = getent("trigger_seaknight_gun", "targetname");
+  var_0 = getEnt("trigger_seaknight_gun", "targetname");
   var_0 waittill("trigger");
   level.player playSound("scn_airlift_mounting_gun_plr_foley");
 }
@@ -4018,8 +4018,8 @@ player_invulnerable_time_tweak() {
 }
 
 spawn_trigger_dummy(var_0) {
-  var_1 = getent(var_0, "targetname");
-  var_2 = getent(var_1.script_linkto, "script_linkname");
+  var_1 = getEnt(var_0, "targetname");
+  var_2 = getEnt(var_1.script_linkto, "script_linkname");
   var_2 notify("trigger", level.player);
 }
 
@@ -4155,24 +4155,24 @@ seaknight_player_think(var_0) {
     case "default":
       break;
     case "plazafly":
-      var_1 = getent("flightPathstart_plazafly", "targetname");
+      var_1 = getEnt("flightPathstart_plazafly", "targetname");
       break;
     case "plaza":
-      var_1 = getent("flightPathstart_plaza", "targetname");
+      var_1 = getEnt("flightPathstart_plaza", "targetname");
       break;
     case "smoketown":
-      var_1 = getent("flightPathstart_smoketown", "targetname");
+      var_1 = getEnt("flightPathstart_smoketown", "targetname");
       break;
     case "cobraflight":
-      var_2 = getent("player_start_cobraflight", "targetname");
-      var_1 = getent("flightPathstart_cobraflight", "targetname");
+      var_2 = getEnt("player_start_cobraflight", "targetname");
+      var_1 = getEnt("flightPathstart_cobraflight", "targetname");
       break;
     case "cobrastreets":
-      var_1 = getent("flightPathstart_cobrastreets", "targetname");
+      var_1 = getEnt("flightPathstart_cobrastreets", "targetname");
       break;
     case "nuke":
       var_2 = getnode("player_start_nuke", "targetname");
-      var_1 = getent("flightPathstart_cobrastreets", "targetname");
+      var_1 = getEnt("flightPathstart_cobrastreets", "targetname");
       break;
   }
 
@@ -4203,7 +4203,7 @@ seaknight_player_think(var_0) {
     thread seaknight_player_dismount_gun();
     level waittill("player_dismounted_from_gun");
     level.player enableinvulnerability();
-    level.player setorigin(var_2.origin);
+    level.player setOrigin(var_2.origin);
     level.player setplayerangles(var_2.angles);
     level.player disableinvulnerability();
     level notify("stop_seaknight_player_monitor");
@@ -4260,7 +4260,7 @@ gas_station_trigger_think() {
 }
 
 tanker_gas_station_think() {
-  var_0 = getent("exploder_gas_startion", "targetname");
+  var_0 = getEnt("exploder_gas_startion", "targetname");
 
   if(distance(self.origin, var_0.origin) < 1000) {
     level waittill("destroy_gas_station_tanker");
@@ -4271,26 +4271,26 @@ tanker_gas_station_think() {
 }
 
 exploder_statue() {
-  var_0 = getent("statue", "targetname");
+  var_0 = getEnt("statue", "targetname");
   level waittill("exploder_100_detonated");
   var_0 maps\_utility::hide_entity();
   thread common_scripts\utility::play_sound_in_space("airlift_statue_collapse", var_0.origin);
 }
 
 exploder_statue_old() {
-  var_0 = getent("statue", "targetname");
-  var_1 = getent("statue_fallen", "targetname");
+  var_0 = getEnt("statue", "targetname");
+  var_1 = getEnt("statue_fallen", "targetname");
   var_2 = var_1.origin;
   var_3 = var_1.angles;
-  var_4 = getent("statue_fall_fx", "targetname");
+  var_4 = getEnt("statue_fall_fx", "targetname");
   var_1 delete();
   level waittill("exploder_100_detonated");
   playFX(common_scripts\utility::getfx("statue_smoke"), var_0.origin);
   thread common_scripts\utility::play_sound_in_space("airlift_statue_collapse", var_2);
   var_5 = 2;
   var_6 = 2;
-  var_0 moveto(var_2, var_6, var_6);
-  var_0 rotateto(var_3, var_5, var_5);
+  var_0 moveTo(var_2, var_6, var_6);
+  var_0 rotateTo(var_3, var_5, var_5);
 }
 
 #using_animtree("vehicles");
@@ -4325,7 +4325,7 @@ seaknight_turret_think(var_0) {
   var_3 = (0, 0, 0);
   level.tempturretorg = spawn("script_origin", (0, 0, 0));
   level.tempturretorg.angles = self.angles;
-  level.tempturretorg linkto(self, var_1, var_2, var_3);
+  level.tempturretorg linkTo(self, var_1, var_2, var_3);
   thread seaknight_player_mount_gun(undefined, var_0 == "default");
 }
 
@@ -4337,7 +4337,7 @@ seaknight_fire_turret() {
   }
 
   level.playerview = maps\_utility::spawn_anim_model("player_viewhands", self.origin);
-  level.playerview linkto(self, "tag_barrel");
+  level.playerview linkTo(self, "tag_barrel");
   thread maps\_anim::anim_loop_solo(level.playerview, "turret_idle_anim", "tag_barrel");
   var_0 = weaponfiretime("seaknight_mark19");
 
@@ -4672,13 +4672,13 @@ seaknight_player_lerp_to_gun(var_0) {
   if(isDefined(var_0) && !var_0) {
     level.player dontinterpolate();
     var_7 = var_5 / 16.9;
-    var_6 = vectornormalize(var_4) * var_7;
+    var_6 = vectorNormalize(var_4) * var_7;
   }
 
   var_8 = spawn("script_origin", var_3);
   var_8.angles = level.player getplayerangles();
   var_8.origin = var_8.origin + var_6;
-  level.player playerlinkto(var_8, "", 1, 0, 0, 0, 0);
+  level.player playerlinkTo(var_8, "", 1, 0, 0, 0, 0);
   var_9 = gettime();
   var_10 = 80;
   var_11 = 250;
@@ -4696,7 +4696,7 @@ seaknight_player_lerp_to_gun(var_0) {
     if(var_14 != 0) {
       var_15 = distance(var_8.origin, var_1);
       var_16 = var_15 / var_14;
-      var_8 moveto(var_1, var_16, 0, 0);
+      var_8 moveTo(var_1, var_16, 0, 0);
     }
 
     waitframe();
@@ -4704,8 +4704,8 @@ seaknight_player_lerp_to_gun(var_0) {
 
   var_15 = distance(var_8.origin, var_1);
   var_16 = var_15 / var_10;
-  var_8 moveto(var_1, var_16, 0, 0);
-  var_8 rotateto(var_2, var_16, var_16 * 0.25, var_16 * 0.75);
+  var_8 moveTo(var_1, var_16, 0, 0);
+  var_8 rotateTo(var_2, var_16, var_16 * 0.25, var_16 * 0.75);
   wait(var_16 + 0.1);
 
   if(isDefined(var_0) && !var_0) {
@@ -4753,7 +4753,7 @@ seaknight_player_intro_mount_gun() {
   wait 3;
   level.playerview = maps\_utility::spawn_anim_model("player_viewhands", level.seaknight.origin);
   level.playerview hide();
-  level.playerview linkto(level.seaknight, "tag_detach");
+  level.playerview linkTo(level.seaknight, "tag_detach");
   level.seaknight maps\_anim::anim_first_frame_solo(level.playerview, "turret_intro_anim", "tag_detach");
   level.player playerlinktodelta(level.playerview, "tag_player", 1, 20, 20, 30, 50, 1);
   level.player dontinterpolate();
@@ -4875,13 +4875,13 @@ turret_reset() {
 }
 
 seaknight_player_triggers() {
-  var_0 = getent("trigger_seaknight", "targetname");
+  var_0 = getEnt("trigger_seaknight", "targetname");
   var_0.origin = level.seaknight gettagorigin("tag_door_rear");
-  var_1 = getent("trigger_inside_seaknight", "targetname");
+  var_1 = getEnt("trigger_inside_seaknight", "targetname");
   var_2 = anglesToForward(level.seaknight.angles);
   var_3 = var_1.radius + var_0.radius + 35;
   var_1.origin = level.seaknight gettagorigin("tag_door_rear") + var_2 * var_3;
-  level.trigger_seaknight_gun = getent("trigger_seaknight_gun", "targetname");
+  level.trigger_seaknight_gun = getEnt("trigger_seaknight_gun", "targetname");
   level.trigger_seaknight_gun.origin = level.seaknight gettagorigin("tag_turret_exit");
   level.trigger_seaknight_gun common_scripts\utility::trigger_off();
 }
@@ -5062,7 +5062,7 @@ ai_pilots_think(var_0) {
   }
 
   level.seaknight thread maps\_anim::anim_loop_solo(self, var_0, var_1);
-  self linkto(level.seaknight);
+  self linkTo(level.seaknight);
   level waittill("delete_pilots");
 
   if(isDefined(self.magic_bullet_shield)) {
@@ -5092,14 +5092,14 @@ remove_enemiesgrenades_cobrastreets() {
 }
 
 animate_smoketown_crane() {
-  var_0 = getent("crane_smoketown", "targetname");
+  var_0 = getEnt("crane_smoketown", "targetname");
   var_0.animname = "crane";
   var_0 maps\_utility::assign_animtree();
   var_0 thread maps\_anim::anim_loop_solo(var_0, "crane_idle");
 }
 
 despawn_smoketown_crane() {
-  var_0 = getent("crane_smoketown", "targetname");
+  var_0 = getEnt("crane_smoketown", "targetname");
   var_0 delete();
   var_1 = getEntArray("crane_part_smoketown", "targetname");
   maps\_utility::array_delete(var_1);
@@ -5107,7 +5107,7 @@ despawn_smoketown_crane() {
 
 player_viewbody_animations_nukecrash() {
   level.playerbodyview = maps\_utility::spawn_anim_model("player_viewbody", level.seaknight.origin);
-  level.playerbodyview linkto(level.seaknight, "tag_detach");
+  level.playerbodyview linkTo(level.seaknight, "tag_detach");
   level.seaknight thread maps\_anim::anim_first_frame_solo(level.playerbodyview, "player_nuke_crash", "tag_detach");
   level.playerbodyview hide();
   common_scripts\utility::flag_wait("nuke_explodes");
@@ -5132,16 +5132,16 @@ enablech46turretfire() {
 }
 
 cobrastreets_ch46entrance_collision() {
-  var_0 = getent("ch46_entrance_monsterclip", "targetname");
+  var_0 = getEnt("ch46_entrance_monsterclip", "targetname");
   var_0 notsolid();
   var_0 connectpaths();
   common_scripts\utility::flag_wait("player_putting_down_pilot");
   var_0 solid();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 smoketown_ch46entrance_collision() {
-  var_0 = getent("ch46_entrance_playerclip", "targetname");
+  var_0 = getEnt("ch46_entrance_playerclip", "targetname");
   var_0 notsolid();
   common_scripts\utility::flag_wait("smoketown_seaknight_leaves");
   var_0 solid();
@@ -5151,7 +5151,7 @@ smoketown_ch46entrance_collision() {
 
 falling_crane() {
   self endon("cranedestroyed");
-  var_0 = getent("falling_crane", "targetname");
+  var_0 = getEnt("falling_crane", "targetname");
   var_0 setCanDamage(1);
 
   for(;;) {

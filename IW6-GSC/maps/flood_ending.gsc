@@ -80,7 +80,7 @@ ending() {
 }
 
 move_to_breach() {
-  var_0 = getent("garage_ally_move480", "targetname");
+  var_0 = getEnt("garage_ally_move480", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
@@ -105,7 +105,7 @@ door_open(var_0, var_1) {
   var_4 = 0.3;
 
   foreach(var_6 in var_2) {
-    var_6 rotateyaw(130, var_4, 0, 0.2);
+    var_6 rotateYaw(130, var_4, 0, 0.2);
 
     if(var_6.classname == "script_brushmodel") {
       var_6 connectpaths();
@@ -113,7 +113,7 @@ door_open(var_0, var_1) {
   }
 
   foreach(var_6 in var_3) {
-    var_6 rotateyaw(-130, var_4, 0, 0.2);
+    var_6 rotateYaw(-130, var_4, 0, 0.2);
 
     if(var_6.classname == "script_brushmodel") {
       var_6 connectpaths();
@@ -126,7 +126,7 @@ door_open(var_0, var_1) {
 door_close_behind() {
   common_scripts\utility::flag_wait("ending_transient_trigger");
   var_0 = level.allies;
-  var_1 = getent("ally_door_check", "targetname");
+  var_1 = getEnt("ally_door_check", "targetname");
   var_2 = var_1 maps\_utility::get_ai_touching_volume("allies");
   var_0 = common_scripts\utility::array_remove_array(var_0, var_2);
   var_3 = "";
@@ -144,7 +144,7 @@ door_close_behind() {
       var_3 = "ending_door_teleport_2";
     }
 
-    var_6 = common_scripts\utility::getstruct(var_3, "targetname");
+    var_6 = common_scripts\utility::getStruct(var_3, "targetname");
     var_5 forceteleport(var_6.origin, var_6.angles);
   }
 
@@ -157,18 +157,18 @@ door_close_behind() {
     var_10 = 0.3;
 
     foreach(var_12 in var_8) {
-      var_12 rotateyaw(-130, var_10, 0, 0.2);
+      var_12 rotateYaw(-130, var_10, 0, 0.2);
 
       if(var_12.classname == "script_brushmodel") {
-        var_12 disconnectpaths();
+        var_12 disconnectPaths();
       }
     }
 
     foreach(var_12 in var_9) {
-      var_12 rotateyaw(130, var_10, 0, 0.2);
+      var_12 rotateYaw(130, var_10, 0, 0.2);
 
       if(var_12.classname == "script_brushmodel") {
-        var_12 disconnectpaths();
+        var_12 disconnectPaths();
       }
     }
   }
@@ -299,13 +299,13 @@ ending_player_enemy_broken_nose(var_0) {
 }
 
 ending_player_take_damage(var_0) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 ending_player_failed_qte_0(var_0) {
   playFXOnTag(level._effect["fx_usp_muzzle_flash"], level.ending_gun, "tag_flash");
   magicbullet("p226", level.ending_gun gettagorigin("tag_flash"), level.player getEye());
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   setDvar("ui_deadquote", "");
   level thread maps\_utility::missionfailedwrapper();
 }
@@ -324,7 +324,7 @@ ending_player_qte_0_logic() {
     wait 0.05;
   }
 
-  self playrumbleonentity("heavygun_fire");
+  self playRumbleOnEntity("heavygun_fire");
   playFXOnTag(level._effect["vfx_muz_pis_w"], level.ending_gun, "tag_flash");
   self playSound("weap_p226_fire_plr");
   common_scripts\utility::flag_set("vignette_ending_qte_success");
@@ -398,7 +398,7 @@ ending_hvt_shot_blood_fx(var_0) {
     var_9 = common_scripts\utility::spawn_tag_origin();
     var_9.origin = var_4;
     var_9.angles = var_3;
-    var_9 linkto(self, var_8, (0, 0, 0), (0, 0, 0));
+    var_9 linkTo(self, var_8, (0, 0, 0), (0, 0, 0));
     playFXOnTag(level._effect["vfx_blood_impact_almagro"], var_9, "tag_origin");
     wait 0.05;
   }
@@ -533,17 +533,17 @@ ending_let_go_scene_player_experience() {
   wait 4.0;
   stopallrumbles();
   level.player thread maps\flood_util::earthquake_w_fade(0.2, 2, 1, 1);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level.player playrumblelooponentity("subtle_tank_rumble");
   wait 2.0;
   stopallrumbles();
   level.player thread maps\flood_util::earthquake_w_fade(0.25, 3, 1, 1);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player playrumblelooponentity("steady_rumble");
   wait 2.0;
   stopallrumbles();
   level.player thread maps\flood_util::earthquake_w_fade(0.3, 64, 1);
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   level.player playrumblelooponentity("steady_rumble");
 }
 
@@ -804,10 +804,10 @@ ending_qte_reach() {
 
 ending_lower_raise_weapon_logic() {
   level endon("vignette_ending_player_jumped_flag");
-  var_0 = getent("ending_lower_weapon", "targetname");
+  var_0 = getEnt("ending_lower_weapon", "targetname");
   var_0 waittill("trigger");
   self disableweapons();
-  var_0 = getent("ending_raise_weapon", "targetname");
+  var_0 = getEnt("ending_raise_weapon", "targetname");
   var_0 waittill("trigger");
   self enableweapons();
 }
@@ -920,7 +920,7 @@ flood_ending_fadeout() {
 
 ending_heli_callout_vo() {
   maps\_utility::wait_for_targetname_trigger("ending_heli_path");
-  var_0 = getent("ending_heli_path_veh", "targetname");
+  var_0 = getEnt("ending_heli_path_veh", "targetname");
   level.ending_heli_path = maps\_vehicle::vehicle_spawn(var_0);
   level.ending_heli_path maps\_vehicle::godon();
   level.ending_heli_path thread maps\_vehicle::gopath();
@@ -968,7 +968,7 @@ ending_temp_ignore() {
   self endon("death");
   self.ignoreall = 1;
   common_scripts\utility::flag_wait("ending_gate_open");
-  self setgoalvolumeauto(getent("ending_golvolume", "targetname"));
+  self setgoalvolumeauto(getEnt("ending_golvolume", "targetname"));
   wait 1.2;
   self.ignoreall = 0;
 }

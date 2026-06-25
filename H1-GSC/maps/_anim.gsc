@@ -632,7 +632,7 @@ anim_first_frame_on_guy(var_0, var_1, var_2, var_3, var_4) {
     var_0._animname = var_5;
     var_0 animcustom(animscripts\first_frame::main);
   } else {
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
 
     if(isarray(level.scr_anim[var_5][var_1])) {
       var_0 setanimknob(level.scr_anim[var_5][var_1][0], 1, 0, 0);
@@ -811,7 +811,7 @@ anim_loop_packet(var_0, var_1, var_2, var_3) {
         }
 
         var_6 last_anim_time_check(var_1, var_31);
-        var_6 animscripted(var_9, var_19, var_20, level.scr_anim[var_31][var_1][var_11], undefined, undefined, var_32);
+        var_6 animScripted(var_9, var_19, var_20, level.scr_anim[var_31][var_1][var_11], undefined, undefined, var_32);
         var_33 = getanimlength(level.scr_anim[var_31][var_1][var_11]);
 
         if(var_33 < var_14) {
@@ -990,7 +990,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           var_8 setanimrate(var_29, 1.0);
         }
 
-        var_8 animscripted(var_18, var_11, var_12, var_29, undefined, undefined, var_27);
+        var_8 animScripted(var_18, var_11, var_12, var_29, undefined, undefined, var_27);
       }
 
       var_30 = getanimlength(level.scr_anim[var_26][var_1]);
@@ -1107,7 +1107,7 @@ anim_animationendnotify(var_0, var_1, var_2, var_3) {
 
   if(var_3 > 0 && var_2 > 0) {
     var_0 maps\_utility::waittill_match_or_timeout("single anim", "end", var_2);
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
   } else
     var_0 waittillmatch("single anim", "end");
 
@@ -2046,7 +2046,7 @@ anim_teleport(var_0, var_1, var_2) {
   }
 }
 
-anim_moveto(var_0, var_1, var_2, var_3, var_4, var_5) {
+anim_moveTo(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = get_anim_position(var_2);
   var_7 = var_6["origin"];
   var_8 = var_6["angles"];
@@ -2058,8 +2058,8 @@ anim_moveto(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isai(var_10)) {
       continue;
     }
-    var_10 moveto(var_11, var_3, var_4, var_5);
-    var_10 rotateto(var_12, var_3, var_4, var_5);
+    var_10 moveTo(var_11, var_3, var_4, var_5);
+    var_10 rotateTo(var_12, var_3, var_4, var_5);
   }
 }
 
@@ -2102,7 +2102,7 @@ anim_link_tag_model(var_0, var_1) {
   var_2 = self gettagorigin(var_1);
   var_3 = spawn("script_model", var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   return var_3;
 }
 
@@ -2426,7 +2426,7 @@ calculate_approach_number(var_0, var_1, var_2, var_3) {
     var_3 = "exposed";
   }
 
-  var_4 = vectornormalize(var_1 - var_0.origin);
+  var_4 = vectorNormalize(var_1 - var_0.origin);
   var_5 = spawnStruct();
   animscripts\exit_node::calculatenodetransitionangles(var_5, var_3, 1, var_2, var_4, 9, -1);
   var_6 = 1;

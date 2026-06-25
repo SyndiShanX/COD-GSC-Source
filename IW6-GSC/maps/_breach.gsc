@@ -35,11 +35,11 @@ breach_think(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = getEntArray(self.targetname, "targetname");
   var_7 = self.targetname;
   self.sbadplacename = "badplace_" + var_7;
-  self.badplace = getent("badplace_" + var_7, "targetname");
+  self.badplace = getEnt("badplace_" + var_7, "targetname");
 
   if(isDefined(self.badplace)) {}
 
-  self.breachtrigger = getent("trigger_" + var_7, "targetname");
+  self.breachtrigger = getEnt("trigger_" + var_7, "targetname");
 
   if(!isDefined(var_4)) {
     var_4 = 1;
@@ -76,25 +76,25 @@ breach_think(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(self.hasdoor == 1) {
-    self.edoor = getent(self.script_linkto, "script_linkname");
+    self.edoor = getEnt(self.script_linkto, "script_linkname");
 
     if(self.edoor.classname == "script_model") {
       self.animent = spawn("script_origin", self.edoor.origin);
       self.animent.angles = self.edoor.angles;
     } else if(self.edoor.classname == "script_brushmodel") {
-      self.animent = getent(self.edoor.target, "targetname");
+      self.animent = getEnt(self.edoor.target, "targetname");
       self.edoor.vector = anglesToForward(self.animent.angles);
     }
 
     self.animent.type = "Cover Right";
-    self.eexploderorigin = getent(self.edoor.script_linkto, "script_linkname");
+    self.eexploderorigin = getEnt(self.edoor.script_linkto, "script_linkname");
     self.iexplodernum = self.eexploderorigin.script_exploder;
   } else if(self.hasdoor == 0)
-    self.animent = getent(self.script_linkto, "script_linkname");
+    self.animent = getEnt(self.script_linkto, "script_linkname");
 
   if(self.hasflashbangs == 1) {
-    self.grenadeorigin = getent("flashthrow_" + var_7, "targetname");
-    self.grenadedest = getent(self.grenadeorigin.target, "targetname");
+    self.grenadeorigin = getEnt("flashthrow_" + var_7, "targetname");
+    self.grenadedest = getEnt(self.grenadeorigin.target, "targetname");
   }
 
   thread breach_abort(var_0);
@@ -540,7 +540,7 @@ door_connectpaths() {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
   } else {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
     var_0 hide();
     var_0 notsolid();
     var_0 connectpaths();
@@ -557,11 +557,11 @@ door_fall_over(var_0) {
   } else {}
 
   var_2 = (var_1[0] * 20, var_1[1] * 20, var_1[2] * 20);
-  self moveto(self.origin + var_2, 0.5, 0, 0.5);
+  self moveTo(self.origin + var_2, 0.5, 0, 0.5);
   var_3 = spawn("script_origin", (0, 0, 0));
   var_3.angles = var_0.angles;
   var_3.origin = (self.origin[0], self.origin[1], var_0.origin[2]);
-  self linkto(var_3);
+  self linkTo(var_3);
   var_3 rotatepitch(90, 0.45, 0.4);
   wait 0.45;
   var_3 rotatepitch(-4, 0.2, 0, 0.2);

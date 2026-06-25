@@ -78,7 +78,7 @@ function state_emped_update(params) {
   self endon(#"death", #"change_state");
 
   if(self.servershortout === 1) {
-    forward = vectornormalize((self getvelocity()[0], self getvelocity()[1], 0));
+    forward = vectorNormalize((self getvelocity()[0], self getvelocity()[1], 0));
     side = vectorcross(forward, (0, 0, 1)) * math::randomsign();
     self function_a57c34b7(self.origin + side * 500 + forward * randomfloat(400), 0, 0);
     wait 0.6;
@@ -162,7 +162,7 @@ function state_combat_update(params) {
         point.score += randomfloatrange(0, 50);
 
         if(isDefined(self.prevmovedir)) {
-          movedir = vectornormalize(point.origin - self.origin);
+          movedir = vectorNormalize(point.origin - self.origin);
 
           if(vectordot(movedir, self.prevmovedir) > 0.64) {
             if(!isDefined(point._scoredebug)) {
@@ -196,7 +196,7 @@ function state_combat_update(params) {
       }
 
       if(foundpath) {
-        self.prevmovedir = vectornormalize(best_point.origin - self.origin);
+        self.prevmovedir = vectorNormalize(best_point.origin - self.origin);
         self.current_pathto_pos = undefined;
         self thread path_update_interrupt();
         pathfailcount = 0;
@@ -448,7 +448,7 @@ function function_ded83def(lastenemy) {
     if(!isDefined(self.looping_targeting_sound)) {
       if(isDefined(self.sndalias[#"vehalarm"])) {
         self.looping_targeting_sound = spawn("script_origin", self.origin);
-        self.looping_targeting_sound linkto(self);
+        self.looping_targeting_sound linkTo(self);
         self.looping_targeting_sound setinvisibletoall();
         self.looping_targeting_sound setvisibletoplayer(self.enemy);
         self.looping_targeting_sound playLoopSound(self.sndalias[#"vehalarm"]);
@@ -706,7 +706,7 @@ function detonate_sides(einflictor) {
   up_direction = anglestoup(self.angles);
   origin = self.origin + vectorscale(up_direction, 15);
   right_direction = vectorcross(forward_direction, up_direction);
-  right_direction = vectornormalize(right_direction);
+  right_direction = vectorNormalize(right_direction);
   left_direction = vectorscale(right_direction, -1);
   einflictor cylinderdamage(vectorscale(right_direction, 140), origin, 15, 50, self.radiusdamagemax, self.radiusdamagemax / 5, self, "MOD_EXPLOSIVE", self.turretweapon);
   einflictor cylinderdamage(vectorscale(left_direction, 140), origin, 15, 50, self.radiusdamagemax, self.radiusdamagemax / 5, self, "MOD_EXPLOSIVE", self.turretweapon);
@@ -719,7 +719,7 @@ function function_ec8d8bbc(einflictor, eattacker, idamage, idflags, smeansofdeat
 
   if(isDefined(psoffsettime) && isDefined(psoffsettime.archetype) && psoffsettime.archetype != #"bot" && isDefined(modelindex) && modelindex == "MOD_EXPLOSIVE") {
     if(psoffsettime != self && isDefined(vsurfacenormal) && lengthsquared(vsurfacenormal) > 0.1 && (!isDefined(psoffsettime) || psoffsettime.team === self.team) && (!isDefined(vdamageorigin) || vdamageorigin.team === self.team)) {
-      self setvehvelocity(self.velocity + vectornormalize(vsurfacenormal) * 300);
+      self setvehvelocity(self.velocity + vectorNormalize(vsurfacenormal) * 300);
       return 1;
     }
   }

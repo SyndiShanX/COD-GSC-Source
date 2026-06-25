@@ -81,7 +81,7 @@ spawn_line_sound(sound) {
   }
 
   self.soundmover = [];
-  endoflineentity = getstruct(startofline.target, "targetname");
+  endoflineentity = getStruct(startofline.target, "targetname");
 
   if(isDefined(endoflineentity)) {
     start = startofline.origin;
@@ -203,7 +203,7 @@ get_number_variants(aliasprefix) {
 }
 
 create_2d_sound_list(sound_alias) {
-  player = getplayers();
+  player = getPlayers();
 
   if(!isDefined(sound_alias)) {
     iprintlnbold("No Dialog Category Defined For This Action");
@@ -259,10 +259,10 @@ death_sounds() {
 
 play_music_stinger_manual(alias, time) {
   wait(time);
-  playsoundatposition(alias, (0, 0, 0));
+  playSoundAtPosition(alias, (0, 0, 0));
 }
 
 playsoundatposition_wait(alias, position, time) {
   wait(time);
-  playsoundatposition(alias, position);
+  playSoundAtPosition(alias, position);
 }

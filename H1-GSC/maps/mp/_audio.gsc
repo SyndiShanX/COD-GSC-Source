@@ -360,7 +360,7 @@ sndx_play_in_space_delayed_internal(var_0, var_1, var_2, var_3) {
 
 snd_play_linked(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_origin", var_1.origin);
-  var_4 linkto(var_1);
+  var_4 linkTo(var_1);
   var_4 thread sndx_play_linked_internal(var_0, var_1, var_2, var_3);
   return var_4;
 }
@@ -390,7 +390,7 @@ sndx_play_linked_internal(var_0, var_1, var_2, var_3) {
 
 snd_play_linked_loop(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", var_1.origin);
-  var_3 linkto(var_1);
+  var_3 linkTo(var_1);
   var_3 thread sndx_play_linked_loop_internal(var_0, var_1, var_2);
   return var_3;
 }

@@ -24,13 +24,13 @@ function private preinit() {
 }
 
 function private on_begin() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::set("trials_disable_regen", "health_regen", 0);
   }
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::reset("trials_disable_regen", "health_regen");
   }
 }

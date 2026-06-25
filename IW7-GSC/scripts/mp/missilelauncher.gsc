@@ -50,7 +50,7 @@ func_B06A() {
     }
 
     self playlocalsound("maaws_reticle_tracking");
-    self playrumbleonentity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
     wait(0.6);
   }
 }
@@ -67,7 +67,7 @@ func_B069() {
     }
 
     self playlocalsound("maaws_reticle_locked");
-    self playrumbleonentity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
     wait(0.25);
   }
 }

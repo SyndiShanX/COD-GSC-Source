@@ -1681,7 +1681,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
           impactDir = (0, 0, 0);
           if(isDefined(attacker)) {
             impactDir = attacker.origin;
-            initial_velocity = VectorNormalize(point - impactDir);
+            initial_velocity = vectorNormalize(point - impactDir);
             initial_velocity *= 200;
           }
         }
@@ -2237,7 +2237,7 @@ explode(partIndex, force_min, force_max, range, mindamage, maxdamage, continueDa
           velocityScaler = level.destructible_type[self.destructibleInfo].parts[i][0].v["physicsOnExplosion"];
 
           point = self GetTagOrigin(tagName);
-          initial_velocity = VectorNormalize(point - explosionOrigin);
+          initial_velocity = vectorNormalize(point - explosionOrigin);
           initial_velocity *= RandomFloatRange(force_min, force_max) * velocityScaler;
 
           self thread physics_launch(i, stateIndex, point, initial_velocity);
@@ -2509,13 +2509,13 @@ play_sound(alias, tag) {
   if(isDefined(tag)) {
     org = spawn("script_origin", self GetTagOrigin(tag));
     org Hide();
-    org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org = spawn("script_origin", (0, 0, 0));
     org Hide();
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
 
   org playSound(alias);
@@ -2610,13 +2610,13 @@ do_random_dynamic_attachment(tagName, attach_model_1, attach_model_2, clipToRemo
     spawnedModels[0] = spawn("script_model", self GetTagOrigin(tagName));
     spawnedModels[0].angles = self GetTagAngles(tagName);
     spawnedModels[0] setModel(attach_model_1);
-    spawnedModels[0] LinkTo(self, tagName);
+    spawnedModels[0] linkTo(self, tagName);
 
     if(isDefined(attach_model_2) && attach_model_2 != "") {
       spawnedModels[1] = spawn("script_model", self GetTagOrigin(tagName));
       spawnedModels[1].angles = self GetTagAngles(tagName);
       spawnedModels[1] setModel(attach_model_2);
-      spawnedModels[1] LinkTo(self, tagName);
+      spawnedModels[1] linkTo(self, tagName);
     }
   }
 
@@ -2920,7 +2920,7 @@ destructible_spotlight_think(action_v, eModel, damageType, partIndex) {
   level.destructible_spotlight Unlink();
 
   tag_origin = spawn_tag_origin();
-  tag_origin LinkTo(self, action_v["spotlight_tag"], (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(self, action_v["spotlight_tag"], (0, 0, 0), (0, 0, 0));
 
   level.destructible_spotlight.origin = self.breakable_light.origin;
   level.destructible_spotlight.angles = self.breakable_light.angles;
@@ -2928,7 +2928,7 @@ destructible_spotlight_think(action_v, eModel, damageType, partIndex) {
 
   wait(0.05);
   if(isDefined(tag_origin)) {
-    level.destructible_spotlight LinkTo(tag_origin);
+    level.destructible_spotlight linkTo(tag_origin);
   }
 }
 
@@ -3529,7 +3529,7 @@ startDOT_group(dots) {
     }
 
     if(isDefined(dot.parent)) {
-      trigger LinkTo(dot.parent);
+      trigger linkTo(dot.parent);
       dot.parent.dot = trigger;
     }
 

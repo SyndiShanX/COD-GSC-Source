@@ -472,7 +472,7 @@ function private raznotetrackshootgroundtorpedo(entity) {
 
 function private raztorpedolaunchdirection(forward_dir, torpedo_pos, torpedo_target_pos, max_angle) {
   vec_to_enemy = torpedo_target_pos - torpedo_pos;
-  vec_to_enemy_normal = vectornormalize(vec_to_enemy);
+  vec_to_enemy_normal = vectorNormalize(vec_to_enemy);
   angle_to_enemy = vectordot(forward_dir, vec_to_enemy_normal);
   if(angle_to_enemy >= max_angle) {
     return vec_to_enemy_normal;
@@ -494,7 +494,7 @@ function private razshootgroundtorpedo(torpedo_target, torpedo_target_offset) {
   vec_to_enemy = raztorpedolaunchdirection(anglesToForward(self.angles), torpedo_pos, torpedo_target_pos, 0.7);
   angles_to_enemy = vectortoangles(vec_to_enemy);
   torpedo.angles = angles_to_enemy;
-  normal_vector = vectornormalize(vec_to_enemy);
+  normal_vector = vectorNormalize(vec_to_enemy);
   torpedo.torpedo_old_normal_vector = normal_vector;
   torpedo.knockdown_iterations = 0;
   iteration_move_distance = 50;
@@ -538,9 +538,9 @@ function private raztorpedomovetotarget(torpedo_target) {
       torpedo_target_point = torpedo_target getplayercamerapos();
     }
     vector_to_target = torpedo_target_point - self.origin;
-    normal_vector = vectornormalize(vector_to_target);
-    flat_mapped_normal_vector = vectornormalize((normal_vector[0], normal_vector[1], 0));
-    flat_mapped_old_normal_vector = vectornormalize((self.torpedo_old_normal_vector[0], self.torpedo_old_normal_vector[1], 0));
+    normal_vector = vectorNormalize(vector_to_target);
+    flat_mapped_normal_vector = vectorNormalize((normal_vector[0], normal_vector[1], 0));
+    flat_mapped_old_normal_vector = vectorNormalize((self.torpedo_old_normal_vector[0], self.torpedo_old_normal_vector[1], 0));
     dot = vectordot(flat_mapped_normal_vector, flat_mapped_old_normal_vector);
     if(dot >= 1) {
       dot = 1;
@@ -563,7 +563,7 @@ function private raztorpedomovetotarget(torpedo_target) {
       }
       new_vector = new_vector * ratio;
       new_vector = new_vector + self.torpedo_old_normal_vector;
-      normal_vector = vectornormalize(new_vector);
+      normal_vector = vectorNormalize(new_vector);
     } else {
       normal_vector = self.torpedo_old_normal_vector;
     }
@@ -581,7 +581,7 @@ function private raztorpedomovetotarget(torpedo_target) {
     self thread raztorpedodetonate(delay);
   }
   self.torpedo_old_normal_vector = normal_vector;
-  self moveto(move_to_point, 0.1);
+  self moveTo(move_to_point, 0.1);
 }
 
 function private raztorpedoplaytraileffect() {
@@ -619,7 +619,7 @@ function private razknockdownzombies(target) {
       }
       self.knockdown_iterations = self.knockdown_iterations + 1;
       vector_to_target = torpedo_target_position - self.origin;
-      normal_vector = vectornormalize(vector_to_target);
+      normal_vector = vectorNormalize(vector_to_target);
       move_distance = 500 * prediction_time;
       move_vector = move_distance * normal_vector;
       self.angles = vectortoangles(move_vector);
@@ -645,11 +645,11 @@ function private razknockdownzombies(target) {
         zombie.knockdown = 1;
         zombie.knockdown_type = "knockdown_shoved";
         zombie_to_target = self.origin - zombie.origin;
-        zombie_to_target_2d = vectornormalize((zombie_to_target[0], zombie_to_target[1], 0));
+        zombie_to_target_2d = vectorNormalize((zombie_to_target[0], zombie_to_target[1], 0));
         zombie_forward = anglesToForward(zombie.angles);
-        zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+        zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
-        zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+        zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
         dot = vectordot(zombie_to_target_2d, zombie_forward_2d);
         if(dot >= 0.5) {
           zombie.knockdown_direction = "front";
@@ -718,7 +718,7 @@ function private raztorpedodetonate(delay) {
 }
 
 function private razapplytorpedodetonationpushtoplayers(torpedo_origin) {
-  players = getplayers();
+  players = getPlayers();
   v_length = 100 * 100;
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -747,7 +747,7 @@ function private razapplytorpedodetonationpushtoplayers(torpedo_origin) {
     if(n_distance < v_length) {
       v_dir = player.origin - torpedo_origin;
       v_dir = (v_dir[0], v_dir[1], 0.1);
-      v_dir = vectornormalize(v_dir);
+      v_dir = vectorNormalize(v_dir);
       n_push_strength = getdvarint("raz_n_push_strength", 500);
       n_push_strength = 200 + (randomint(n_push_strength - 200));
       v_player_velocity = player getvelocity();
@@ -763,7 +763,7 @@ function private razapplyplayerdetonationeffects() {
     if(distancesq > 4096) {
       continue;
     }
-    level.activeplayers[i] playrumbleonentity("damage_heavy");
+    level.activeplayers[i] playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -790,8 +790,8 @@ function private razzombieeligibleforknockdown(zombie, target, predicted_pos) {
   enemy_vec = zombie.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0) {
     return false;

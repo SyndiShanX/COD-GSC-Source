@@ -29,7 +29,7 @@ function function_9199e921(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   self thread postfx::exitpostfxbundle("pstfx_jump_pad_launch");
-  self playrumbleonentity(fieldname, #"hash_17a7c0691c65e722");
+  self playRumbleOnEntity(fieldname, #"hash_17a7c0691c65e722");
 }
 
 function function_4a0e5efb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

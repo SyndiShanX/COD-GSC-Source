@@ -195,7 +195,7 @@ afcaves_civ1_think() {
     p3 = guys[num].origin;
     p3 = (p3[0], p3[1], 0);
 
-    dot = vectordot(vectornormalize(p3 - p1), vectornormalize(p2 - p1));
+    dot = vectordot(vectorNormalize(p3 - p1), vectorNormalize(p2 - p1));
 
     if(dot < .999) {
       continue;
@@ -723,7 +723,7 @@ favela_ai_think() {
   switch (node.animation) {
     case "gulag_end_evac_soap":
       link = spawn("script_origin", self.origin);
-      self linkto(link);
+      self linkTo(link);
       self ai_wait_current_anim(.20);
       foreach(ent in level.anim_ai["favela"]) {
         ent ent_flag_clear("do_anim");
@@ -918,7 +918,7 @@ estate_setup() {
   level.anim_ai["estate"] = [];
   array_thread(getEntArray("ai_estate", "script_noteworthy"), ::add_spawn_function, ::estate_ai_setup);
   array_thread(getEntArray("ai_estate", "script_noteworthy"), ::add_spawn_function, ::estate_ai_think);
-  getent("bh_node", "target") estate_struct_setup();
+  getEnt("bh_node", "target") estate_struct_setup();
 }
 
 estate_main() {
@@ -1011,7 +1011,7 @@ estate_ai_think() {
 }
 
 estate_struct_setup() {
-  helo = getent(self.target, "targetname");
+  helo = getEnt(self.target, "targetname");
 
   node = spawnStruct();
   if(level.level_mode == "free") {
@@ -1420,7 +1420,7 @@ museum_main() {
 
   flag_wait("museum_ready");
 
-  room1trig = GetEnt("room1", "script_noteworthy");
+  room1trig = getEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
 
   thread maps\_introscreen::char_museum_intro();
@@ -1533,7 +1533,7 @@ start_common() {
   add_global_spawn_function("neutral", ::museum_ai_think);
 
   level.camera = spawn_vehicle_from_targetname_and_drive("credits_camera");
-  level.player playerlinkto(level.camera, undefined, 1, 0, 0, 0, 0, 0);
+  level.player playerlinkTo(level.camera, undefined, 1, 0, 0, 0, 0, 0);
 
   level.player delaycall(.1, ::freezecontrols, true);
   noself_delaycall(1, ::SetSavedDvar, "cg_fov", 45);
@@ -1597,7 +1597,7 @@ start_afcaves() {
 
   flag_wait("museum_ready");
   wait .05;
-  room1trig = GetEnt("room1", "script_noteworthy");
+  room1trig = getEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
 }
 
@@ -1606,7 +1606,7 @@ start_dcburning() {
 
   flag_wait("museum_ready");
   wait .05;
-  room1trig = GetEnt("room1", "script_noteworthy");
+  room1trig = getEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
 }
 
@@ -1615,7 +1615,7 @@ start_airport() {
 
   flag_wait("museum_ready");
   wait .05;
-  room1trig = GetEnt("room1", "script_noteworthy");
+  room1trig = getEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
   array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
@@ -1625,7 +1625,7 @@ start_cliffhanger() {
 
   flag_wait("museum_ready");
   wait .05;
-  room1trig = GetEnt("room1", "script_noteworthy");
+  room1trig = getEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
   array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
@@ -1635,7 +1635,7 @@ start_favela() {
 
   flag_wait("museum_ready");
   wait .05;
-  room1trig = GetEnt("room1", "script_noteworthy");
+  room1trig = getEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
   array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
@@ -1645,7 +1645,7 @@ start_hallway1() {
 
   flag_wait("museum_ready");
   wait .05;
-  room1trig = GetEnt("room1", "script_noteworthy");
+  room1trig = getEnt("room1", "script_noteworthy");
   room1trig spawn_museum_dudes();
   array_thread(getEntArray("room1_civ_talkers", "targetname"), ::spawn_ai, true);
 }
@@ -1670,7 +1670,7 @@ start_oilrig() {
 
   flag_wait("museum_ready");
   wait .05;
-  room2trig = GetEnt("room2", "script_noteworthy");
+  room2trig = getEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
   array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }
@@ -1680,7 +1680,7 @@ start_estate() {
 
   flag_wait("museum_ready");
   wait .05;
-  room2trig = GetEnt("room2", "script_noteworthy");
+  room2trig = getEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
   array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }
@@ -1690,7 +1690,7 @@ start_hostage() {
 
   flag_wait("museum_ready");
   wait .05;
-  room2trig = GetEnt("room2", "script_noteworthy");
+  room2trig = getEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
   array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 
@@ -1706,7 +1706,7 @@ start_trainer() {
 
   flag_wait("museum_ready");
   wait .05;
-  room2trig = GetEnt("room2", "script_noteworthy");
+  room2trig = getEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
   array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }
@@ -1716,7 +1716,7 @@ start_arcadia() {
 
   flag_wait("museum_ready");
   wait .05;
-  room2trig = GetEnt("room2", "script_noteworthy");
+  room2trig = getEnt("room2", "script_noteworthy");
   room2trig spawn_museum_dudes();
   array_thread(getEntArray("room2_civ_talkers", "targetname"), ::spawn_ai, true);
 }

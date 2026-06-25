@@ -105,7 +105,7 @@ function gunfireloopfxvecthread(fxid, fxpos, fxpos2, shotsmin, shotsmax, shotdel
 
   shotsbase = shotsmin;
   shotsrange = shotsmax - shotsmin;
-  fxpos2 = vectornormalize(fxpos2 - fxpos);
+  fxpos2 = vectorNormalize(fxpos2 - fxpos);
   fxent = spawnfx(level._effect[fxid], fxpos, fxpos2);
 
   for(;;) {

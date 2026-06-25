@@ -219,7 +219,7 @@ setAirDropCrateCollision(carePackageName) {
     return;
   }
 
-  level.airDropCrateCollision = GetEnt(airDropCrates[0].target, "targetname");
+  level.airDropCrateCollision = getEnt(airDropCrates[0].target, "targetname");
 
   foreach(crate in airDropCrates) {
     crate deleteCrate();
@@ -554,7 +554,7 @@ createAirDropCrate(owner, dropType, crateType, startPos, startAngles, alreadyTra
   dropCrate.killCamEnt = spawn("script_model", dropCrate.origin + CRATE_KILLCAM_OFFSET);
   dropCrate.killCamEnt SetScriptMoverKillCam("explosive");
   dropCrate.killCamEnt SetContents(0);
-  dropCrate.killCamEnt LinkTo(dropCrate);
+  dropCrate.killCamEnt linkTo(dropCrate);
 
   level.numDropCrates++;
 
@@ -783,7 +783,7 @@ physicsWaiter(dropType, crateType) {
   }
 
   if(isDefined(level.isZombieGame) && level.isZombieGame) {
-    self DisconnectPaths();
+    self disconnectPaths();
   }
 
   data = spawnStruct();
@@ -1178,9 +1178,9 @@ deleteCrate(playDestroyVFX, playDeathSound) {
 
 useHoldThink(player, useTime, useText) {
   if(isPlayer(player)) {
-    player playerLinkTo(self);
+    player playerlinkTo(self);
   } else {
-    player LinkTo(self);
+    player linkTo(self);
   }
   player playerLinkedOffsetEnable();
 

@@ -25,7 +25,7 @@
 freezecontrolonconnect() {
   flag_wait("all_players_connected");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player freezecontrols(1);
   }
 }
@@ -150,7 +150,7 @@ main() {
   maps\_so_rts_support::setupmapboundary();
   level thread maps\sp_killstreaks\_killstreaks::init();
   level.killstreakscountsdisabled = 1;
-  level.rts.player = getplayers()[0];
+  level.rts.player = getPlayers()[0];
   level.rts.player.force_minigame = 1;
   level.rts.lastfpspoint = level.rts.player.origin;
   level.rts.player thread player_deathshieldwatch();
@@ -172,7 +172,7 @@ main() {
   if(isDefined(level.rts.allied_base) && isDefined(level.rts.allied_base.entity)) {
     level.rts.player_startpos = level.rts.allied_base.entity.origin;
   } else {
-    level.rts.player_startpos = getplayers()[0].origin;
+    level.rts.player_startpos = getPlayers()[0].origin;
   }
 
   node_disconnects();
@@ -285,7 +285,7 @@ player_eyeinthesky(fastlink, showui, altshader) {
     level.rts.playerlinkobj.angles = (0, level.rts.player.angles[1], 0);
 
     if(isDefined(fastlink) && fastlink) {
-      level.rts.player playerlinkto(level.rts.playerlinkobj, undefined, 1, 0, 0, 0, 0);
+      level.rts.player playerlinkTo(level.rts.playerlinkobj, undefined, 1, 0, 0, 0, 0);
     }
   }
 
@@ -324,7 +324,7 @@ player_eyeinthesky(fastlink, showui, altshader) {
   level.rts.ground = undefined;
   maps\_so_rts_support::playerlinkobj_defaultpos();
   level.rts.player unlink();
-  level.rts.player playerlinkto(level.rts.playerlinkobj, undefined, 1, 0, 0, 0, 0);
+  level.rts.player playerlinkTo(level.rts.playerlinkobj, undefined, 1, 0, 0, 0, 0);
 
   if(!(isDefined(fastlink) && fastlink)) {
     wait 0.4;
@@ -857,7 +857,7 @@ callback_preventplayerdamage(einflictor, eattacker, idamage, idflags, smeansofde
   }
 
   if(isDefined(self.blockalldamage) && gettime() < self.blockalldamage) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
 
     println("@$@ Player took no damage due to blockAllDamage being set(" + gettime() + ")");
 
@@ -938,7 +938,7 @@ rts_menu() {
   setsaveddvar("ammoCounterHide", "1");
   setsaveddvar("cg_drawCrosshair", 0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player cleardamageindicator();
     player setclientdvars("cg_drawfriendlynames", 0);
     player setclientuivisibilityflag("hud_visible", 1);

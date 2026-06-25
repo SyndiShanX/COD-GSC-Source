@@ -22,15 +22,15 @@ plate_thread() {
   level waittill("stage_1");
   target = self.target;
   while(isDefined(target)) {
-    struct = getstruct(target, "targetname");
+    struct = getStruct(target, "targetname");
     time = struct.script_float;
     if(!isDefined(time)) {
       time = 1.0;
     }
-    self moveto(struct.origin, time, time / 10);
-    self RotateTo(struct.angles, time, time / 10);
+    self moveTo(struct.origin, time, time / 10);
+    self rotateTo(struct.angles, time, time / 10);
     self waittill("movedone");
-    playsoundatposition("evt_clank", self.origin);
+    playSoundAtPosition("evt_clank", self.origin);
     target = struct.target;
   }
   level notify("stage_1_done");
@@ -103,7 +103,7 @@ wire() {
   wire Delete();
   who add_sidequest_icon("sq", "wire");
   flag_wait("c_built");
-  wire_struct = getstruct("sq_wire_final", "targetname");
+  wire_struct = getStruct("sq_wire_final", "targetname");
   wire_struct thread fake_use("placed_wire", ::wire_qualifier);
   wire_struct waittill("placed_wire", who);
   who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, 8, true);
@@ -125,7 +125,7 @@ vg_qualifier() {
 vg() {
   flag_wait("w_placed");
   flag_wait("power_on");
-  vg_struct = getstruct("sq_charge_vg_pos", "targetname");
+  vg_struct = getStruct("sq_charge_vg_pos", "targetname");
   vg_struct thread fake_use("vg_placed", ::vg_qualifier);
   vg_struct waittill("vg_placed", who);
   who thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, 9, true);
@@ -174,14 +174,14 @@ teleport_target(grenade, models) {
   wait(1.0);
   time = 3.0;
   for(i = 0; i < models.size; i++) {
-    models[i] MoveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
+    models[i] moveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
   }
   wait(time);
   teleport_targets = getStructArray("sq_ctvg_tp", "targetname");
   for(i = 0; i < models.size; i++) {
     models[i] Hide();
   }
-  playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
+  playSoundAtPosition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
   wait(0.5);
   for(i = 0; i < models.size; i++) {
     models[i] DontInterpolate();
@@ -253,9 +253,9 @@ speak_charge_lines(lines) {
 }
 charge_init() {
   level._charge_stages = array(build_charge_stage(1, array("rictofen", "vox_plr_3_quest_step5_12")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_13", "rictofen", "vox_plr_3_quest_step5_14")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_15", "maxis", "vox_xcomp_quest_step5_16", "rictofen", "vox_plr_3_quest_step5_17")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_18", "rictofen", "vox_plr_3_quest_step5_19")), build_charge_stage(15, array("maxis", "vox_xcomp_quest_step5_20", "rictofen", "vox_plr_3_quest_step5_21", "maxis", "vox_xcomp_quest_step5_22", "rictofen", "vox_plr_3_quest_step5_23")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_24", "rictofen", "vox_plr_3_quest_step5_25", "computer", "vox_mcomp_quest_step5_26")));
-  sound_struct = getstruct("sq_charge_terminal", "targetname");
+  sound_struct = getStruct("sq_charge_terminal", "targetname");
   level._charge_sound_ent = spawn("script_origin", sound_struct.origin);
-  level._charge_terminal = GetEnt("sq_ctvg_terminal", "targetname");
+  level._charge_terminal = getEnt("sq_ctvg_terminal", "targetname");
   level._charge_terminal setModel("p_zom_moon_magic_box_com_red");
 }
 bucket_qualifier() {
@@ -359,7 +359,7 @@ charge_stage_logic() {
   level.vg_struct_sound playSound("evt_extra_charge");
   level.vg_struct_sound playLoopSound("evt_vril_loop_lvl2", 1);
   level thread start_player_vox_again();
-  vg = getstruct("sq_charge_vg_pos", "targetname");
+  vg = getStruct("sq_charge_vg_pos", "targetname");
   level notify("kill_press_monitor");
   vg thread wrong_collector();
   vg thread maps\_zombiemode_sidequests::fake_use("collect", ::bucket_qualifier);

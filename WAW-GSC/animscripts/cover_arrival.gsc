@@ -546,7 +546,7 @@ doLastMinuteExposedApproach() {
     self thread alignToNodeAngles();
   }
 
-  approachDir = VectorNormalize(self.pathGoalPos - self.origin);
+  approachDir = vectorNormalize(self.pathGoalPos - self.origin);
 
   desiredFacingYaw = vectorToAngles(approachDir)[1];
   if(isValidEnemy(self.enemy) && sightTracePassed(self.enemy getShootAtPos(), self.pathGoalPos + (0, 0, 60), false, undefined)) {
@@ -1155,7 +1155,7 @@ calculateNodeTransitionAngles(angleDataObj, approachtype, isarrival, arrivalYaw,
 
     angles = (0, arrivalYaw + sign * anglearray[i] + offset, 0);
 
-    dir = vectornormalize(anglesToForward(angles));
+    dir = vectorNormalize(anglesToForward(angles));
     angleDataObj.transitions[i] = vectordot(approach_dir, dir);
   }
 }

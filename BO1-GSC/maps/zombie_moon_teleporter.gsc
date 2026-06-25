@@ -10,12 +10,12 @@
 #include maps\zombie_moon_wasteland;
 
 teleporter_function(name) {
-  teleporter = getent(name, "targetname");
+  teleporter = getEnt(name, "targetname");
   teleport_time = 0;
   str = name + "_bottom_name";
-  fx_bottom = getstruct(str, "targetname");
+  fx_bottom = getStruct(str, "targetname");
   str = name + "_top_name";
-  fx_top = getstruct(str, "targetname");
+  fx_top = getStruct(str, "targetname");
   teleport_state = "Waiting for Players";
   while(1) {
     players = get_players();
@@ -117,7 +117,7 @@ get_teleporter_target_positions(teleporter_ent, name) {
     dest_name = "nml_to_bridge_teleporter";
     for(i = 0; i < 4; i++) {
       str = dest_name + "_player" + (i + 1) + "_position";
-      ent = getstruct(str, "targetname");
+      ent = getStruct(str, "targetname");
       target_positions[i] = ent;
     }
   }
@@ -142,7 +142,7 @@ teleport_player_to_target(player, target_positions) {
   if(player getstance() == "prone") {
     player SetStance("crouch");
   }
-  player setorigin(target_ent.origin + (RandomFloat(24), RandomFloat(24), 0));
+  player setOrigin(target_ent.origin + (RandomFloat(24), RandomFloat(24), 0));
   if(isDefined(target_ent.angles)) {
     player setplayerangles(target_ent.angles);
   }
@@ -290,16 +290,16 @@ teleporter_ending(teleporter_ent, was_aborted) {
 }
 teleporter_to_nml_init() {
   level.teleporter_to_nml_gate_height = 140;
-  level.teleporter_to_nml_gate_ent = getent("teleporter_gate", "targetname");
+  level.teleporter_to_nml_gate_ent = getEnt("teleporter_gate", "targetname");
   level.teleporter_to_nml_gate_open = 0;
   level.teleporter_to_nml_powerdown_time = 120;
-  level.teleporter_to_nml_gate2_ent = getent("teleporter_gate_top", "targetname");
+  level.teleporter_to_nml_gate2_ent = getEnt("teleporter_gate_top", "targetname");
   level.teleporter_to_nml_gate2_height = 256;
-  level.teleporter_exit_nml_gate_ent = getent("bunker_gate", "targetname");
+  level.teleporter_exit_nml_gate_ent = getEnt("bunker_gate", "targetname");
   level.teleporter_exit_nml_gate_height = -195;
   level.teleporter_exit_nml_gate_open = 1;
   level.teleporter_exit_nml_powerdown_time = 75;
-  level.teleporter_exit_nml_gate2_ent = getent("bunker_gate_2", "targetname");
+  level.teleporter_exit_nml_gate2_ent = getEnt("bunker_gate_2", "targetname");
   level.teleporter_exit_nml_gate2_height = -96;
   level.teleporter_gate_move_time = 3;
   init_teleporter_lights();
@@ -327,14 +327,14 @@ teleporter_to_nml_gate_move(open_it) {
   ent playSound("amb_teleporter_gate_start");
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   ent thread play_stopmoving_sounds();
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] + gate_height);
-  ent2 moveto(pos2, time, accel, accel);
+  ent2 moveTo(pos2, time, accel, accel);
   if(open_it) {
     ent connectpaths();
   } else {
-    ent disconnectpaths();
+    ent disconnectPaths();
   }
   if(open_it) {
     teleporter_lights_green();
@@ -447,15 +447,15 @@ teleporter_exit_nml_gate_move(open_it) {
   ent playLoopSound("amb_teleporter_gate_loop", .5);
   ent2 = level.teleporter_exit_nml_gate2_ent;
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] - gate2_height);
-  ent2 moveto(pos2, time, accel, accel);
+  ent2 moveTo(pos2, time, accel, accel);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   ent thread play_stopmoving_sounds();
   if(open_it) {
     ent connectpaths();
   } else {
     wait(level.teleporter_gate_move_time);
-    ent disconnectpaths();
+    ent disconnectPaths();
   }
 }
 play_stopmoving_sounds() {

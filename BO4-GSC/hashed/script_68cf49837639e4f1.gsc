@@ -27,7 +27,7 @@ __init__() {
 on_begin(n_kill_count) {
   level.var_f7e95a13 = zm_trial::function_5769f26a(n_kill_count);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_76bb4a3e = 0;
     player zm_trial_util::function_c2cd0cba(level.var_f7e95a13);
     player zm_trial_util::function_2190356a(player.var_76bb4a3e);
@@ -41,7 +41,7 @@ on_end(round_reset) {
   var_7df0eb27 = level.var_f7e95a13;
   level.var_f7e95a13 = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
     player callback::remove_on_death(&on_death);
   }
@@ -51,7 +51,7 @@ on_end(round_reset) {
   if(!round_reset) {
     var_acba5af0 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player.var_76bb4a3e) && player.var_76bb4a3e < var_7df0eb27) {
         if(!isDefined(var_acba5af0)) {
           var_acba5af0 = [];
@@ -76,7 +76,7 @@ on_end(round_reset) {
     function_d99b4aa5();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_76bb4a3e = undefined;
   }
 }
@@ -99,7 +99,7 @@ on_ai_killed(params) {
 }
 
 function_d99b4aa5() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player gadgetpowerset(level.var_a53a05b5, 100);
   }
 }

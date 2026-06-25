@@ -52,23 +52,23 @@ fix_hax() {
   while(1) {
     wait(.5);
     if(distance2d(self.origin, (101, -100, 40)) < check) {
-      self setorigin((101, -90, self.origin[2]));
+      self setOrigin((101, -90, self.origin[2]));
     } else if(distance2d(self.origin, (816, 645, 12)) < check) {
-      self setorigin((816, 666, self.origin[2]));
+      self setOrigin((816, 666, self.origin[2]));
     } else if(distance2d(self.origin, (376, 643, 184)) < check) {
-      self setorigin((376, 665, self.origin[2]));
+      self setOrigin((376, 665, self.origin[2]));
     } else if(distance2d(self.origin, (519, 765, 155)) < check1) {
-      self setorigin((516, 793, self.origin[2]));
+      self setOrigin((516, 793, self.origin[2]));
     } else if(distance2d(self.origin, (315, 346, 79)) < check1) {
-      self setorigin((317, 360, self.origin[2]));
+      self setOrigin((317, 360, self.origin[2]));
     } else if(distance2d(self.origin, (199, 133, 18)) < check) {
-      self setorigin((172, 123, self.origin[2]));
+      self setOrigin((172, 123, self.origin[2]));
     } else if(distance2d(self.origin, (142, -100, 91)) < check1) {
-      self setorigin((139, -87, self.origin[2]));
+      self setOrigin((139, -87, self.origin[2]));
     } else if(distance2d(self.origin, (192, 369, 185)) < check1) {
-      self setorigin((195, 400, self.origin[2]));
+      self setOrigin((195, 400, self.origin[2]));
     } else if(distance2d(self.origin, (-210, 641, 247)) < check) {
-      self setorigin((-173, 677, self.origin[2]));
+      self setOrigin((-173, 677, self.origin[2]));
     }
   }
 
@@ -83,7 +83,7 @@ fix_couch_stuckspot() {
     wait(.5);
 
     if(distance2d(self.origin, (181, 161, 206)) < 10) {
-      self setorigin((175, 175, self.origin[2]));
+      self setOrigin((175, 175, self.origin[2]));
     }
   }
 

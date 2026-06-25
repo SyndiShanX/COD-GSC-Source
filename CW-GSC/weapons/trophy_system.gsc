@@ -253,7 +253,7 @@ function trophyactive(owner) {
         continue;
       }
 
-      fwd = vectornormalize(grenade.origin - self.origin);
+      fwd = vectorNormalize(grenade.origin - self.origin);
 
       if(fwd == (0, 0, 0)) {
         fwd = (1, 0, 0);
@@ -475,13 +475,13 @@ function trophysystemdetonate(attacker, weapon, target) {
     self.owner thread globallogic_audio::function_6daffa93(self.weapon, var_f3ab6571);
   }
 
-  playsoundatposition(#"exp_trophy_system", self.origin);
+  playSoundAtPosition(#"exp_trophy_system", self.origin);
   self delete();
 }
 
 function function_3044fc5() {
   weaponobjects::function_f2a06099(self, self.weapon);
-  playsoundatposition(#"exp_trophy_system", self.origin);
+  playSoundAtPosition(#"exp_trophy_system", self.origin);
   self deletedelay();
 }
 

@@ -38,7 +38,7 @@ init_spawns() {
     return;
   }
 
-  dog_spawner = getent("dog_spawner", "targetname");
+  dog_spawner = getEnt("dog_spawner", "targetname");
 
   if(!isDefined(dog_spawner)) {
     println("No dog_spawner entity found in map");
@@ -122,7 +122,7 @@ ownerhadactivedogs() {
 }
 
 dog_killstreak_init() {
-  dog_spawner = getent("dog_spawner", "targetname");
+  dog_spawner = getEnt("dog_spawner", "targetname");
 
   if(!isDefined(dog_spawner)) {
     println("No dog spawners found in map");
@@ -221,7 +221,7 @@ dog_create_spawn_influencer() {
 }
 
 dog_manager_spawn_dog(owner, team, spawn_node, requireddeathcount) {
-  dog_spawner = getent("dog_spawner", "targetname");
+  dog_spawner = getEnt("dog_spawner", "targetname");
   dog = dog_spawner spawnactor();
   dog forceteleport(spawn_node.origin, spawn_node.angles);
   dog init_dog();
@@ -666,7 +666,7 @@ devgui_dog_think() {
 
 devgui_dog_spawn(team) {
   player = gethostplayer();
-  dog_spawner = getent("dog_spawner", "targetname");
+  dog_spawner = getEnt("dog_spawner", "targetname");
   level.dog_abort = 0;
 
   if(!isDefined(dog_spawner)) {
@@ -726,7 +726,7 @@ devgui_dog_camera() {
       forward = anglesToForward(dog.angles);
       dog.cam = spawn("script_model", dog.origin + vectorscale((0, 0, 1), 50.0) + forward * -100);
       dog.cam setModel("tag_origin");
-      dog.cam linkto(dog);
+      dog.cam linkTo(dog);
     }
 
     if(dog getentitynumber() <= level.devgui_dog_camera) {

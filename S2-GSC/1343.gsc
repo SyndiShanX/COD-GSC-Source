@@ -133,12 +133,12 @@ lib_053F::func_51C1() {
     if(lib_0547::func_5565(var_05, "animated_zmb_door_bunker_entrance_2")) {
       foreach(var_07 in self.var_64C5) {
         if(var_07.var_8260 == "door_r") {
-          var_07 linkto(self.var_8301[0], "door_R");
+          var_07 linkTo(self.var_8301[0], "door_R");
           continue;
         }
 
         if(var_07.var_8260 == "door_l") {
-          var_07 linkto(self.var_8301[0], "door_L");
+          var_07 linkTo(self.var_8301[0], "door_L");
         }
       }
     }
@@ -192,11 +192,11 @@ lib_053F::func_51C0(param_00) {
       case "link_blood":
         param_00.var_17F0[param_00.var_17F0.size] = var_03;
         var_03 method_8511();
-        var_03 linkto(param_00);
+        var_03 linkTo(param_00);
         break;
 
       case "link":
-        var_03 linkto(param_00);
+        var_03 linkTo(param_00);
         param_00.var_5DBD[param_00.var_5DBD.size] = var_03;
         break;
 
@@ -574,7 +574,7 @@ lib_053F::func_7F60() {
     }
 
     foreach(var_08 in self.var_64C5) {
-      var_08 moveto(var_08.var_2444, var_00, var_00);
+      var_08 moveTo(var_08.var_2444, var_00, var_00);
       var_08 method_8617("trap_security_door_slam");
     }
 
@@ -583,7 +583,7 @@ lib_053F::func_7F60() {
     wait(0.1);
     var_0A = 1;
     foreach(var_08 in self.var_64C5) {
-      var_08 moveto(var_08.var_6BF0, var_0A);
+      var_08 moveTo(var_08.var_6BF0, var_0A);
       var_08 method_8617("trap_security_door_reset");
     }
 
@@ -640,7 +640,7 @@ lib_053F::func_7F5D(param_00) {
       for(;;) {
         if(!lib_053F::func_3262()) {
           if(0) {
-            param_00 sethintstring(lib_053F::func_4565(param_00));
+            param_00 setHintString(lib_053F::func_4565(param_00));
             param_00 setsecondaryhintstring("");
             param_00 lib_0547::func_9A85(0);
           }
@@ -656,7 +656,7 @@ lib_053F::func_7F5D(param_00) {
         }
 
         if(0) {
-          param_00 sethintstring(lib_053F::func_450D(param_00));
+          param_00 setHintString(lib_053F::func_450D(param_00));
           param_00 setsecondaryhintstring(lib_053F::func_415D(self.var_267B));
           param_00 lib_0547::func_9A85(1);
         }
@@ -672,7 +672,7 @@ lib_053F::func_7F5D(param_00) {
       }
     } else {
       if(0) {
-        param_00 sethintstring(lib_053F::func_450D(param_00));
+        param_00 setHintString(lib_053F::func_450D(param_00));
         param_00 setsecondaryhintstring(lib_053F::func_415D(self.var_267B));
         param_00 lib_0547::func_9A85(1);
       }
@@ -708,7 +708,7 @@ lib_053F::func_3262() {
 
 lib_053F::func_3677(param_00) {
   if(0) {
-    param_00 sethintstring("");
+    param_00 setHintString("");
     param_00 setsecondaryhintstring("");
     param_00 lib_0547::func_9A85(0);
   }
@@ -728,9 +728,9 @@ lib_053F::func_7F5E(param_00) {
   param_00.var_5B37 = param_00.var_0116;
   param_00.var_5B12 = param_00.var_001D;
   var_01 = common_scripts\utility::func_7A33(param_00.var_64A9);
-  param_00 moveto(var_01.var_0116, 1);
+  param_00 moveTo(var_01.var_0116, 1);
   if(param_00.var_003A == "script_model") {
-    param_00 rotateto(var_01.var_001D, 1);
+    param_00 rotateTo(var_01.var_001D, 1);
   }
 
   param_00.var_6BF0 = var_01.var_0116;
@@ -757,9 +757,9 @@ lib_053F::func_7F5E(param_00) {
 }
 
 lib_053F::func_2435(param_00) {
-  param_00 moveto(param_00.var_5B37, 1);
+  param_00 moveTo(param_00.var_5B37, 1);
   if(param_00.var_003A == "script_model") {
-    param_00 rotateto(param_00.var_5B12, 1);
+    param_00 rotateTo(param_00.var_5B12, 1);
   }
 
   var_01 = "interact_door";

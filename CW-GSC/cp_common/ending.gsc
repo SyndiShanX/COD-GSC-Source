@@ -46,7 +46,7 @@ function function_103cd64c() {
   level flag::init("flag_video_finished");
 
   if(!isDefined(level.player)) {
-    level.player = getplayers()[0];
+    level.player = getPlayers()[0];
   }
 
   level.var_ae3bb477 = 1;

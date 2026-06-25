@@ -144,7 +144,7 @@ check_ang_and_dist_to_node(node) {
 
     if(ang_diff <= 75) {
       vec = self.origin - node.origin;
-      dot = vectordot(vectornormalize(vec), anglesToForward(node.angles));
+      dot = vectordot(vectorNormalize(vec), anglesToForward(node.angles));
 
       debug_balcony_line(node.origin, self.origin, (1, 1, 0));
 

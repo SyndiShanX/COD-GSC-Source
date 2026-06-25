@@ -81,7 +81,7 @@ function function_feb491ef(player, origin, hint) {
     level thread zm_powerups::show_on_hud(team, "naughty_or_nice");
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     if(isDefined(e_player) && isPlayer(e_player) && isDefined(hint)) {
@@ -138,7 +138,7 @@ function private function_5928d77d() {
     level.var_a5ab9bfb = [];
   }
 
-  players = getplayers();
+  players = getPlayers();
   var_ef5ad4eb = players.size + 1;
 
   while(level.var_d51e0708 > gettime() - 30000) {
@@ -187,7 +187,7 @@ function function_b1c6ca30(var_d13d4980) {
   scriptmodel = var_7580ce3e.scriptmodel;
   reward_origin = var_7580ce3e.origin;
   n_count = 1;
-  players = getplayers();
+  players = getPlayers();
 
   switch (players.size) {
     case 2:

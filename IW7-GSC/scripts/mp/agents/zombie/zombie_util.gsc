@@ -200,7 +200,7 @@ func_7FB1(var_0, var_1) {
 
         var_15 = 0;
         if(isDefined(var_8.var_3FF6) && var_8.var_3FF6 != self) {
-          var_16 = vectornormalize(var_3 - var_8.var_3FF6.origin) * self.fgetarg * 2;
+          var_16 = vectorNormalize(var_3 - var_8.var_3FF6.origin) * self.fgetarg * 2;
           var_15 = distancesquared(var_8.var_3FF6.origin + var_16, var_3);
         }
 
@@ -486,7 +486,7 @@ func_4D52(var_0, var_1) {
   if(isDefined(var_0)) {
     var_3 = var_0 - self gettagorigin("J_SpineLower");
     var_3 = (var_3[0], var_3[1], 0);
-    var_4 = vectortoangles(vectornormalize(var_3));
+    var_4 = vectortoangles(vectorNormalize(var_3));
     var_2 = var_4[1];
   } else if(isDefined(var_1)) {
     var_4 = vectortoangles(var_1);

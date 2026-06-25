@@ -227,7 +227,7 @@ function_adceefd(local_client_num, hacker) {
   var_94e70cdd[0] = [];
   var_94e70cdd[1] = [];
   var_94e70cdd[2] = [];
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(player.team == hacker.team) {

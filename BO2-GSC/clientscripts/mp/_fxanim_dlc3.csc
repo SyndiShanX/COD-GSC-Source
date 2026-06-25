@@ -11,7 +11,7 @@ fxanim_init_dlc(localclientnum) {
 
   for(i = 0; i < a_fxanims.size; i++) {
     if(isDefined(a_fxanims[i].fxanim_parent)) {
-      parent = getent(localclientnum, a_fxanims[i].fxanim_parent, "targetname");
+      parent = getEnt(localclientnum, a_fxanims[i].fxanim_parent, "targetname");
       a_fxanims[a_fxanims.size] = parent;
       a_fxanims[i] thread _fxanim_model_link(localclientnum);
       continue;
@@ -126,7 +126,7 @@ _fxanim_animate(str_scene) {
     return;
   }
 
-  self animscripted(level.scr_anim["fxanim_props_dlc3"][str_scene], 1.0, 0.0, 1.0);
+  self animScripted(level.scr_anim["fxanim_props_dlc3"][str_scene], 1.0, 0.0, 1.0);
 }
 
 _fxanim_play_fx(localclientnum) {
@@ -192,12 +192,12 @@ _fxanim_get_scene_name(n_anim_id) {
 _fxanim_model_link(localclientnum) {
   self waittill_dobj(localclientnum);
   assert(isDefined(self.fxanim_tag), "Model at origin " + self.origin + " needs an fxanim_tag defined, to show which tag the model will link to");
-  m_parent = getent(localclientnum, self.fxanim_parent, "targetname");
+  m_parent = getEnt(localclientnum, self.fxanim_parent, "targetname");
   assert(isDefined(m_parent), "Model at origin " + self.origin + " does not have a proper parent.Make sure the fxanim_parent matches the targetname of the fxanim");
   m_parent waittill_dobj(localclientnum);
   self.origin = m_parent gettagorigin(self.fxanim_tag);
   self.angles = m_parent gettagangles(self.fxanim_tag);
-  self linkto(m_parent, self.fxanim_tag);
+  self linkTo(m_parent, self.fxanim_tag);
 
   if(isDefined(self.fxanim_hide)) {
     self hide();

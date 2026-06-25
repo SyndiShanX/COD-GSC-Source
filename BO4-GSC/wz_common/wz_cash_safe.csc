@@ -142,7 +142,7 @@ function_93b89303(localclientnum) {
       if(isDefined(var_165435de) && isDefined(var_165435de.var_6754976b) && var_165435de.var_6754976b) {
         var_ea44983e = [];
         var_81279b22 = [];
-        all_players = getplayers(localclientnum);
+        all_players = getPlayers(localclientnum);
 
         foreach(enemy_player in all_players) {
           if(enemy_player.team === player.team) {

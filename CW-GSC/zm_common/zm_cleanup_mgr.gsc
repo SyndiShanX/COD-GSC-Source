@@ -154,7 +154,7 @@ function do_cleanup_check(n_override_cleanup_dist) {
 
   if(!b_in_active_zone) {
     n_dist_sq_min = 10000000;
-    players = getplayers();
+    players = getPlayers();
     e_closest_player = players[0];
 
     foreach(player in players) {

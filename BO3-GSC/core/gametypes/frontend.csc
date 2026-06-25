@@ -230,7 +230,7 @@ class cmegachewfactory {
     self notify((("swap_spinning_carousel_gumball_on_notify_" + n_vat_index) + "_") + n_ball_index);
     self endon((("swap_spinning_carousel_gumball_on_notify_" + n_vat_index) + "_") + n_ball_index);
     self endon("megachew_factory_doors_closed");
-    mdl_carousel = getent(localclientnum, "gumball_carousel_0" + (n_vat_index + 1), "targetname");
+    mdl_carousel = getEnt(localclientnum, "gumball_carousel_0" + (n_vat_index + 1), "targetname");
     while(true) {
       if(level flag::get("megachew_carousel_show_result") && n_ball_index == 0) {
         str_model = get_result_model_name_for_vat_contents(n_vat_index, 1);
@@ -773,7 +773,7 @@ class cmegachewfactory {
     foreach(mdl_gear in m_a_mdl_gear) {
       mdl_gear useanimtree($generic);
     }
-    m_mdl_tube_front = getent(localclientnum, "tube_front", "targetname");
+    m_mdl_tube_front = getEnt(localclientnum, "tube_front", "targetname");
     m_mdl_tube_front useanimtree($generic);
     level._effect["megachew_gumball_poof_out"] = "ui/fx_megachew_ball_poof_01";
     level._effect["megachew_gumball_poof_blue"] = "ui/fx_megachew_ball_poof_blue";
@@ -847,7 +847,7 @@ class cmegachewfactory {
       }
       m_a_str_megachew_factory_door_flags[m_a_str_megachew_factory_door_flags.size] = str_megachew_factory_door_flag;
       level flag::init(str_megachew_factory_door_flag);
-      mdl_dome = getent(localclientnum, ("bgb_0" + i) + "_dome", "targetname");
+      mdl_dome = getEnt(localclientnum, ("bgb_0" + i) + "_dome", "targetname");
       if(!mdl_dome hasanimtree()) {
         mdl_dome useanimtree($generic);
       }
@@ -857,7 +857,7 @@ class cmegachewfactory {
         m_a_mdl_domes = array(m_a_mdl_domes);
       }
       m_a_mdl_domes[m_a_mdl_domes.size] = mdl_dome;
-      mdl_body = getent(localclientnum, ("bgb_0" + i) + "_body", "targetname");
+      mdl_body = getEnt(localclientnum, ("bgb_0" + i) + "_body", "targetname");
       if(!mdl_body hasanimtree()) {
         mdl_body useanimtree($generic);
       }
@@ -867,7 +867,7 @@ class cmegachewfactory {
         m_a_mdl_bodies = array(m_a_mdl_bodies);
       }
       m_a_mdl_bodies[m_a_mdl_bodies.size] = mdl_body;
-      mdl_door = getent(localclientnum, "main_doors_0" + i, "targetname");
+      mdl_door = getEnt(localclientnum, "main_doors_0" + i, "targetname");
       if(!mdl_door hasanimtree()) {
         mdl_door useanimtree($generic);
       }
@@ -880,7 +880,7 @@ class cmegachewfactory {
     }
     for(i = 0; i < 6; i++) {
       str_ball_targetname = "tube_ball_" + i;
-      mdl_ball = getent(localclientnum, str_ball_targetname, "targetname");
+      mdl_ball = getEnt(localclientnum, str_ball_targetname, "targetname");
       mdl_ball hidepart(localclientnum, "tag_ball_" + i);
       if(!mdl_ball hasanimtree()) {
         mdl_ball useanimtree($generic);
@@ -971,7 +971,7 @@ class cmegachewcounter {
   }
 
   function init(localclientnum, start_count) {
-    m_mdl_device = getent(localclientnum, "vial_counter", "targetname");
+    m_mdl_device = getEnt(localclientnum, "vial_counter", "targetname");
     m_a_mdl_numbers = [];
     m_n_count = start_count;
     for(i = 0; i < 3; i++) {
@@ -1178,7 +1178,7 @@ class cmegachewvat {
     m_a_fx_id_light = [];
     m_a_fx_id_steam = [];
     m_n_vat_index = n_vat_index;
-    m_mdl_dome = getent(localclientnum, ("bgb_0" + n_vat_index) + "_dome", "targetname");
+    m_mdl_dome = getEnt(localclientnum, ("bgb_0" + n_vat_index) + "_dome", "targetname");
     m_b_vat_is_spinning = 0;
     m_b_vat_is_powered = 0;
   }
@@ -1263,7 +1263,7 @@ class cmegachewcarousel {
 
   function init(localclientnum, n_carousel_index) {
     if(!isDefined(m_mdl_carousel)) {
-      m_mdl_carousel = getent(localclientnum, "gumball_carousel_0" + n_carousel_index, "targetname");
+      m_mdl_carousel = getEnt(localclientnum, "gumball_carousel_0" + n_carousel_index, "targetname");
     }
     if(!m_mdl_carousel hasanimtree()) {
       m_mdl_carousel useanimtree($generic);
@@ -1321,8 +1321,8 @@ class cmegachewvatdialset {
     m_a_dials_large = [];
     m_a_dials_small = [];
     m_a_dials_small_that_turn = [];
-    mdl_dome = getent(localclientnum, ("bgb_0" + n_vat_index) + "_dome", "targetname");
-    mdl_body = getent(localclientnum, ("bgb_0" + n_vat_index) + "_body", "targetname");
+    mdl_dome = getEnt(localclientnum, ("bgb_0" + n_vat_index) + "_dome", "targetname");
+    mdl_body = getEnt(localclientnum, ("bgb_0" + n_vat_index) + "_body", "targetname");
     for(i = 1; i <= 2; i++) {
       str_tagname = ("tag_body_dial_0" + i) + "_link";
       v_origin = mdl_body gettagorigin(str_tagname);
@@ -1487,7 +1487,7 @@ class cmegachewbuttons {
     m_a_fx_id_light = [];
     m_a_fx_id_sidebulbs = [];
     for(i = 1; i <= 3; i++) {
-      mdl_button = getent(localclientnum, "bgb_button_0" + i, "targetname");
+      mdl_button = getEnt(localclientnum, "bgb_button_0" + i, "targetname");
       if(!mdl_button hasanimtree()) {
         mdl_button useanimtree($generic);
       }
@@ -1807,7 +1807,7 @@ function localclientconnect(localclientnum) {
   if(isDefined(level.weaponcustomizationiconsetup)) {
     [[level.weaponcustomizationiconsetup]](localclientnum);
   }
-  level.mp_lobby_data_struct = character_customization::create_character_data_struct(getent(localclientnum, "customization", "targetname"), localclientnum);
+  level.mp_lobby_data_struct = character_customization::create_character_data_struct(getEnt(localclientnum, "customization", "targetname"), localclientnum);
   lobbymodel = util::spawn_model(localclientnum, "tag_origin", (0, 0, 0));
   lobbymodel.targetname = "cp_lobby_player_model";
   level.cp_lobby_data_struct = character_customization::create_character_data_struct(lobbymodel, localclientnum);
@@ -1934,7 +1934,7 @@ function wait_for_black_market_notifies(localclientnum) {
   level endon("disconnect");
   level endon("blackmarket_closed");
   camera_ent = struct::get("mp_frontend_blackmarket");
-  crate = getent(localclientnum, "mp_frontend_blackmarket_crate", "targetname");
+  crate = getEnt(localclientnum, "mp_frontend_blackmarket_crate", "targetname");
   crate useanimtree($generic);
   crate clearanim("o_loot_crate_idle", 0);
   crate mapshaderconstant(localclientnum, 0, "scriptVector2", 0, 0, 0, 0);
@@ -1993,7 +1993,7 @@ function close_blackmarket(localclientnum, menu_data) {
     setDvar("r_volumetric_lighting_max_spot_samples", level.r_volumetric_lighting_max_spot_samples);
   }
   if(isDefined(level.cyclehandle)) {
-    crate = getent(localclientnum, "mp_frontend_blackmarket_crate", "targetname");
+    crate = getEnt(localclientnum, "mp_frontend_blackmarket_crate", "targetname");
     crate stoploopsound(level.cyclehandle);
     level.cyclehandle = undefined;
   }
@@ -2085,14 +2085,14 @@ function wait_for_mega_chew_notifies(localclientnum, menu_data) {
 }
 
 function open_character_menu(localclientnum, menu_data) {
-  character_ent = getent(localclientnum, menu_data.target_name, "targetname");
+  character_ent = getEnt(localclientnum, menu_data.target_name, "targetname");
   if(isDefined(character_ent)) {
     character_ent show();
   }
 }
 
 function close_character_menu(localclientnum, menu_data) {
-  character_ent = getent(localclientnum, menu_data.target_name, "targetname");
+  character_ent = getEnt(localclientnum, menu_data.target_name, "targetname");
   if(isDefined(character_ent)) {
     character_ent hide();
   }

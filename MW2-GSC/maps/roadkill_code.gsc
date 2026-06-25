@@ -20,7 +20,7 @@ turret_guy_in_near_humvee() {
 
   ent = spawn_tag_origin();
   ent.origin = vehicle.origin + forward * 250 + (0, 0, 120);
-  ent LinkTo(vehicle);
+  ent linkTo(vehicle);
   self.ignoreall = true;
 
   turret = self GetTurret();
@@ -71,7 +71,7 @@ aim_ahead_until_you_get_enemy() {
 
   ent = spawn_tag_origin();
   ent.origin = vehicle.origin + forward * 250 + (0, 0, 120);
-  ent LinkTo(vehicle);
+  ent linkTo(vehicle);
 
   turret = undefined;
   for(;;) {
@@ -236,7 +236,7 @@ roadkill_foley_shepherd_intro() {
   waittillframeend;
   level.shepherd thread shepherd_roams_battlefield("shepherd_path");
   thread player_is_protected_near_commanders();
-  struct = getstruct("roadkill_shepherd_scene", "targetname");
+  struct = getStruct("roadkill_shepherd_scene", "targetname");
 
   guys = [];
   guys["foley"] = level.foley;
@@ -267,7 +267,7 @@ roadkill_foley_shepherd_intro() {
     wait(0.05);
   }
 
-  level.foley anim_stopanimscripted();
+  level.foley anim_stopanimScripted();
 }
 
 ent_flag_set_trigger() {
@@ -438,14 +438,14 @@ intro_convoy() {
 }
 
 roadkill_bridge_layer(bridge_model) {
-  spawner = GetEnt("bridge_layer_spawner", "targetname");
+  spawner = getEnt("bridge_layer_spawner", "targetname");
   spawner.animname = "bridge_layer";
 
   if(before_bridge_start()) {
-    org = getstruct("bridge_layer_org", "targetname");
+    org = getStruct("bridge_layer_org", "targetname");
     org anim_teleport_solo(spawner, "bridge_driveup");
   } else {
-    org = getstruct("bridge_layer_org", "targetname");
+    org = getStruct("bridge_layer_org", "targetname");
     org anim_teleport_solo(spawner, "bridge_cross");
     node = GetVehicleNode("bridge_layer_path_1", "targetname");
     spawner.origin = node.origin;
@@ -473,16 +473,16 @@ bridge_layer_think() {
 
   level.bridge_start_time = GetTime();
 
-  org = getstruct("bridge_layer_org", "targetname");
+  org = getStruct("bridge_layer_org", "targetname");
 
   self assign_animtree();
   bridge_model = self.bridge_model;
   bridge_model.animname = "bridge_layer_bridge";
   bridge_model assign_animtree();
 
-  bridge_clip = GetEnt("bridge_clip", "targetname");
+  bridge_clip = getEnt("bridge_clip", "targetname");
   bridge_clip add_target_pivot();
-  bridge_clip.pivot LinkTo(bridge_model, "origin_animate_jnt", (0, 0, 0), (0, 0, 180));
+  bridge_clip.pivot linkTo(bridge_model, "origin_animate_jnt", (0, 0, 0), (0, 0, 180));
   bridge_clip Hide();
 
   thread bridge_layer_is_threatened_by_baddies(bridge_model);
@@ -577,7 +577,7 @@ bridge_layer_think() {
     wait(1);
   }
 
-  player_bridge_clip = GetEnt("player_bridge_clip", "targetname");
+  player_bridge_clip = getEnt("player_bridge_clip", "targetname");
   player_bridge_clip Delete();
 
   flag_set("bridgelayer_complete");
@@ -587,7 +587,7 @@ bridge_layer_think() {
 
   animation = getanim("bridge_lower");
 
-  self StopAnimScripted();
+  self StopanimScripted();
 
   node = GetVehicleNode("bridge_layer_path_1", "targetname");
   self StartPath(node);
@@ -960,7 +960,7 @@ tank_fires_often(orgs) {
 }
 
 roadkill_officers_walk_up() {
-  struct = getstruct("intro_orders", "targetname");
+  struct = getStruct("intro_orders", "targetname");
   guys = get_guys_with_targetname_from_spawner("intro_friendly_spawner");
   level.roadkill_officers = guys;
 
@@ -977,7 +977,7 @@ roadkill_officers_walk_up() {
     wait(8);
 
     foreach(guy in guys) {
-      target = getstruct(guy.target, "targetname");
+      target = getStruct(guy.target, "targetname");
       guy thread maps\_spawner::go_to_node(target, "struct");
     }
 
@@ -998,10 +998,10 @@ detach_binocs() {
 }
 
 binoc_scene() {
-  struct = getstruct("binoc_scene", "targetname");
+  struct = getStruct("binoc_scene", "targetname");
   struct thread do_binoc_scene();
 
-  struct = getstruct("binoc_scene_spotter", "targetname");
+  struct = getStruct("binoc_scene_spotter", "targetname");
   struct thread do_binoc_scene();
 }
 
@@ -1115,13 +1115,13 @@ player_line() {
 
 radio_scene() {
   structs = [];
-  structs["1"] = getstruct("radio_scene1", "targetname");
-  structs["2"] = getstruct("radio_scene2", "targetname");
-  structs["3"] = getstruct("radio_scene3", "targetname");
+  structs["1"] = getStruct("radio_scene1", "targetname");
+  structs["2"] = getStruct("radio_scene2", "targetname");
+  structs["3"] = getStruct("radio_scene3", "targetname");
 
   guys = [];
   foreach(index, struct in structs) {
-    spawner = GetEnt(struct.target, "targetname");
+    spawner = getEnt(struct.target, "targetname");
     guys[index] = spawner spawn_ai();
   }
 
@@ -1174,7 +1174,7 @@ set_dontshootwhilemoving(val) {
 }
 
 guys_film_explosion() {
-  spawner = GetEnt(self.target, "targetname");
+  spawner = getEnt(self.target, "targetname");
   guy = spawner spawn_ai();
   guy endon("death");
 
@@ -1226,7 +1226,7 @@ guys_film_explosion() {
 
   wait_for_buffer_time_to_pass(start_time, cheer_time);
 
-  guy StopAnimScripted();
+  guy StopanimScripted();
   guy notify("killanimscript");
 
   if(isDefined(guy.magic_bullet_shield)) {
@@ -1400,7 +1400,7 @@ jeep_rider_spawner_think() {
 }
 
 humvee_rider_spawner() {
-  spawner = GetEnt("humvee_rider_spawner", "script_noteworthy");
+  spawner = getEnt("humvee_rider_spawner", "script_noteworthy");
 
   spawner waittill("drone_spawned", guy);
   spawner Delete();
@@ -1438,7 +1438,7 @@ player_ride_vehicle() {
   chair = spawn("script_model", (0, 0, 0));
   level.chair = chair;
   chair setModel(chairModel);
-  chair LinkTo(self, "tag_seat_rb_attach", (0, 0, 0), (0, 0, 0));
+  chair linkTo(self, "tag_seat_rb_attach", (0, 0, 0), (0, 0, 0));
   chair MakeUsable();
 
   flag_wait("convoy_moment");
@@ -1452,7 +1452,7 @@ player_ride_vehicle() {
   level thread maps\_anim::start_notetrack_wait(self, "other_anim_flag");
 
   player_rig = spawn_anim_model("player_rig");
-  player_rig LinkTo(self, "tag_body", (0, 0, 0), (0, 0, 0));
+  player_rig linkTo(self, "tag_body", (0, 0, 0), (0, 0, 0));
   player_rig Hide();
 
   self anim_first_frame_solo(player_rig, "player_getin", "tag_body");
@@ -1554,7 +1554,7 @@ get_vehicle_from_spawner() {
   }
 
   node = GetNode(self.target, "targetname");
-  spawner = GetEnt(node.script_linkto, "script_linkname");
+  spawner = getEnt(node.script_linkto, "script_linkname");
   spawner waittill("spawned", vehicle);
 
   node.vehicle = vehicle;
@@ -1648,7 +1648,7 @@ allied_riverbank_spawner() {
 run_to_convoy() {
   level.runnings_to_convoy_count++;
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   if(isDefined(self.doing_looping_anim)) {
     self.remove_from_animloop = true;
   }
@@ -1847,14 +1847,14 @@ break_awhile(brake_time, brake_amount) {
 }
 
 spark_preset() {
-  target = getstruct(self.target, "targetname");
+  target = getStruct(self.target, "targetname");
   angles = VectorToAngles(target.origin - self.origin);
   level.spark_presets[self.script_parameters] = angles;
 }
 
 vehicle_spark_trigger() {
-  targ = GetEnt(self.target, "targetname");
-  targ_targ = GetEnt(targ.target, "targetname");
+  targ = getEnt(self.target, "targetname");
+  targ_targ = getEnt(targ.target, "targetname");
 
   org1 = targ.origin;
   org2 = targ_targ.origin;
@@ -2008,7 +2008,7 @@ detour_vehicle_driver_animates() {
   thread turret_gunner_cycles_custom_anims(owner, turret);
   flag_wait("shot_rings_out");
 
-  struct = getstruct("frantic_look_target_struct", "targetname");
+  struct = getStruct("frantic_look_target_struct", "targetname");
   ent = spawn("script_origin", struct.origin);
   turret SetTargetEntity(ent);
 
@@ -2021,13 +2021,13 @@ detour_vehicle_driver_animates() {
   for(;;) {
     owner notify("special_anim", "end");
 
-    struct = getstruct(struct.target, "targetname");
+    struct = getStruct(struct.target, "targetname");
 
     dist = Distance(ent.origin, struct.origin);
     time = dist / 5000;
 
     movetime = GetTime();
-    ent MoveTo(struct.origin, time, time * 0.2, time * 0.2);
+    ent moveTo(struct.origin, time, time * 0.2, time * 0.2);
 
     if(!isDefined(struct.target)) {
       break;
@@ -2294,7 +2294,7 @@ ride_killer() {
   self.ignoreme = true;
   self magic_bullet_shield();
 
-  missile_target = GetEnt("missile_target", "targetname");
+  missile_target = getEnt("missile_target", "targetname");
   self SetEntityTarget(missile_target);
 
   flag_wait("player_knocked_down");
@@ -2370,7 +2370,7 @@ friendly_crash_think() {
 
 move_flashed_spawner_and_spawn() {
   if(isDefined(self.script_linkTo)) {
-    struct = getstruct(self.script_linkto, "script_linkname");
+    struct = getStruct(self.script_linkto, "script_linkname");
     self.origin = struct.origin;
     self.angles = struct.angles;
   }
@@ -2417,9 +2417,9 @@ resumeslowly() {
 }
 
 crash_physics_explosion() {
-  struct = getstruct("crash_physics_struct", "targetname");
-  physics_spawner = getstruct("physics_spawner", "targetname");
-  targ = getstruct(physics_spawner.target, "targetname");
+  struct = getStruct("crash_physics_struct", "targetname");
+  physics_spawner = getStruct("physics_spawner", "targetname");
+  targ = getStruct(physics_spawner.target, "targetname");
 
   index = 0;
   models = [];
@@ -2472,7 +2472,7 @@ run_away_die() {
   self waittill("goal");
   wait(3);
 
-  struct = getstruct(self.script_linkto, "script_linkname");
+  struct = getStruct(self.script_linkto, "script_linkname");
   self SetGoalPos(struct.origin);
   self.goalradius = 4;
   self waittill("goal");
@@ -2565,7 +2565,7 @@ ambush_house_spawner_think() {
 
 friendlies_traverse_school() {
   for(i = 1; i <= 20; i++) {
-    trigger = GetEnt(msg, "targetname");
+    trigger = getEnt(msg, "targetname");
     if(flag_exist(msg)) {
       flag_wait(msg);
 
@@ -2586,7 +2586,7 @@ friendlies_traverse_school() {
 dunn_says_clear_on_room_clear() {
   flag_wait("hidden_guy_opens_fire");
   wait 1.3;
-  volume = getent("dunn_clear_volume", "targetname");
+  volume = getEnt("dunn_clear_volume", "targetname");
   volume waittill_volume_dead();
 
   dunn_line("roadkill_cpd_clear");
@@ -2658,7 +2658,7 @@ ambush_house_slowbie() {
 
 player_impact_earthquake() {
   Earthquake(0.25, 0.8, level.player.origin, 5000);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 
   level.player PlayRumbleLoopOnEntity("damage_light");
   flag_wait("player_goes_in_reverse");
@@ -2666,10 +2666,10 @@ player_impact_earthquake() {
 }
 
 traffic_truck_pushed() {
-  struct = getstruct("truck_contact_point", "targetname");
-  targ = getstruct(struct.target, "targetname");
+  struct = getStruct("truck_contact_point", "targetname");
+  targ = getStruct(struct.target, "targetname");
 
-  vec = VectorNormalize(targ.origin - struct.origin);
+  vec = vectorNormalize(targ.origin - struct.origin);
   vec *= 2;
 
   level.traffic_jam_truck VehPhys_Launch(vec, (0, 0, 0), targ.origin);
@@ -2752,7 +2752,7 @@ player_pushes_truck_down_alley() {
 
   flag_set("resume_the_path");
 
-  tech_target_org = getstruct("tech_target_org", "targetname");
+  tech_target_org = getStruct("tech_target_org", "targetname");
 
   level.traffic_jam_truck vehicleDriveTo(tech_target_org.origin, 25);
   level.traffic_jam_truck.veh_brake = 0;
@@ -3253,7 +3253,7 @@ stryker_think() {
 }
 
 fence_rattle() {
-  pivot = GetEnt("animated_bridge_fence_pivot", "targetname");
+  pivot = getEnt("animated_bridge_fence_pivot", "targetname");
 
   wait(3.25);
   animated_bridge_fences = getEntArray("animated_bridge_fence", "targetname");
@@ -3261,7 +3261,7 @@ fence_rattle() {
   foreach(piece in animated_bridge_fences) {
     piece NotSolid();
     piece SetContents(0);
-    piece LinkTo(pivot);
+    piece linkTo(pivot);
   }
 
   start_angles = pivot.angles;
@@ -3272,28 +3272,28 @@ fence_rattle() {
     if(time < 0.75) {
       time = 0.75;
     }
-    pivot RotateTo((0, 90, amount), time, time * 0.5, time * 0.5);
+    pivot rotateTo((0, 90, amount), time, time * 0.5, time * 0.5);
     amount *= -0.65;
     wait(time);
     if(abs(amount) <= 2) {
       break;
     }
   }
-  pivot RotateTo(start_angles, 0.2);
+  pivot rotateTo(start_angles, 0.2);
   wait(0.5);
   pivot Delete();
 }
 
 collapse_earthquake() {
   wait(1.1);
-  level.player PlayRumbleOnEntity("collapsing_building");
+  level.player playRumbleOnEntity("collapsing_building");
   Earthquake(0.3, 2, (-2556.2, -702.2, 1446), 15000);
   wait(2.4);
   Earthquake(0.15, 0.6, (-2556.2, -702.2, 1446), 15000);
 }
 
 collapsing_building() {
-  building = GetEnt("collapsing_building", "targetname");
+  building = getEnt("collapsing_building", "targetname");
   wait(7.5);
   time = 10;
 
@@ -3303,8 +3303,8 @@ collapsing_building() {
   ent AddYaw(60);
   ent.origin += (0, 0, -2000);
 
-  building MoveTo(ent.origin, time, 6, 0);
-  building RotateTo(ent.angles, time, 6, 0);
+  building moveTo(ent.origin, time, 6, 0);
+  building rotateTo(ent.angles, time, 6, 0);
 
   building thread play_sound_on_entity("scn_roadkill_building_collapse");
   exploder("building_collapse");
@@ -3312,10 +3312,10 @@ collapsing_building() {
 
 roadkill_bomb_physics_explosion() {
   wait(1.3);
-  start = GetEnt("physics_explosion_line", "targetname");
-  end = getstruct(start.target, "targetname");
+  start = getEnt("physics_explosion_line", "targetname");
+  end = getStruct(start.target, "targetname");
 
-  dest = getstruct(end.target, "targetname");
+  dest = getStruct(end.target, "targetname");
 
   radius = start.radius;
 
@@ -3323,7 +3323,7 @@ roadkill_bomb_physics_explosion() {
   segments = dist / radius;
 
   time = 3;
-  start MoveTo(dest.origin, time, 2, 0);
+  start moveTo(dest.origin, time, 2, 0);
   end_time = GetTime() + time * 1000;
 
   segment_vec = end.origin - start.origin;
@@ -3372,7 +3372,7 @@ street_walk_guy() {
   self SetGoalPos(self.origin);
   self.moveplaybackrate = 1;
   self.pathrandompercent = 0;
-  struct = getstruct(self.script_linkto, "script_linkname");
+  struct = getStruct(self.script_linkto, "script_linkname");
 
   delays = [];
   delays["street_walk_scene1"] = 1.7;
@@ -3427,13 +3427,13 @@ ps3_hide() {
 broken_wall() {
   models = getEntArray(self.target, "targetname");
   foreach(model in models) {
-    model LinkTo(self);
+    model linkTo(self);
   }
 
-  pivot = GetEnt(self.script_linkto, "script_linkname");
+  pivot = getEnt(self.script_linkto, "script_linkname");
   self add_target_pivot(pivot);
 
-  start_ent = GetEnt("broken_wall_start_org", "targetname");
+  start_ent = getEnt("broken_wall_start_org", "targetname");
 
   end_origin = pivot.origin;
   end_angles = pivot.angles;
@@ -3446,8 +3446,8 @@ broken_wall() {
   pivot thread play_sound_on_entity("scn_roadkill_building_crumble");
 
   moveTime = 4;
-  pivot RotateTo(end_angles, moveTime, 3, 1);
-  pivot MoveTo(end_origin, moveTime, 3, 1);
+  pivot rotateTo(end_angles, moveTime, 3, 1);
+  pivot moveTo(end_origin, moveTime, 3, 1);
 
   exploder("building_crumble");
 }
@@ -3561,7 +3561,7 @@ roadkill_exfil_objective() {
 
   flag_wait("final_objective");
 
-  struct = getstruct("roadkill_shepherd_ending_scene", "targetname");
+  struct = getStruct("roadkill_shepherd_ending_scene", "targetname");
 
   Objective_Add(obj("exfil"), "current", &"ROADKILL_OBJECTIVE_REPORT", struct.origin);
   Objective_Current(obj("exfil"));
@@ -3577,7 +3577,7 @@ roadkill_mortars() {
     if(!isDefined(mortar.target)) {
       break;
     }
-    mortar = getstruct(mortar.target, "targetname");
+    mortar = getStruct(mortar.target, "targetname");
     mortars[mortars.size] = mortar;
   }
 
@@ -3709,7 +3709,7 @@ bmp_gets_killed() {
 }
 
 riverbank_bmp() {
-  bmp_destroyed = GetEnt("bmp_destroyed", "targetname");
+  bmp_destroyed = getEnt("bmp_destroyed", "targetname");
   bmp_destroyed thread bmp_destroyed();
 
   array_spawn_function_targetname("riverbank_bmp", ::bmp_gets_killed);
@@ -3752,7 +3752,7 @@ riverbank_bmp_is_shot_at() {
 
 bmp_destroyed() {
   self Hide();
-  targ = GetEnt(self.target, "targetname");
+  targ = getEnt(self.target, "targetname");
   angles = targ.angles;
   origin = targ.origin;
   targ Delete();
@@ -3761,8 +3761,8 @@ bmp_destroyed() {
   self Show();
   wait(5);
   movetime = 8;
-  self MoveTo(origin, movetime, 0, 2);
-  self RotateTo(angles, movetime, 0, 2);
+  self moveTo(origin, movetime, 0, 2);
+  self rotateTo(angles, movetime, 0, 2);
 }
 
 intro_orders() {
@@ -3795,7 +3795,7 @@ intro_orders() {
   }
 
   foreach(guy in guys) {
-    guy anim_stopanimscripted();
+    guy anim_stopanimScripted();
   }
 }
 
@@ -3832,7 +3832,7 @@ player_fights_bmps() {
     guy thread run_to_convoy();
   }
 
-  player_stair_blocker = GetEnt("player_stair_blocker", "targetname");
+  player_stair_blocker = getEnt("player_stair_blocker", "targetname");
   player_stair_blocker Delete();
   flag_clear("player_climbs_stairs");
 }
@@ -3912,7 +3912,7 @@ play_line_at_offset_on_player_vehicle(alias, offset) {
   angles = (0, player_vehicle_angles[1], 0);
 
   ent = spawn("script_origin", (0, 0, 0));
-  ent LinkTo(level.crazy_ride_convoy["player"], "tag_body", offset, (0, 0, 0));
+  ent linkTo(level.crazy_ride_convoy["player"], "tag_body", offset, (0, 0, 0));
 
   ent play_sound_on_entity(alias);
   ent Delete();
@@ -4036,7 +4036,7 @@ roadkill_pistol_guy() {
   self add_damage_function(::bloody_pain_reverse);
   thread shoot_randomly();
 
-  struct = getstruct("backwards_struct", "targetname");
+  struct = getStruct("backwards_struct", "targetname");
   struct thread anim_generic_custom_animmode(self, "gravity", "pistol_walk_back");
   self set_generic_deathanim("pistol_death");
   waittill_notify_or_timeout("damage", 1.5);
@@ -4078,8 +4078,8 @@ bloody_pain_reverse(damage, attacker, direction_vec, point, type, modelName, tag
 }
 
 fire_bullets_at_guy() {
-  struct = getstruct("pistol_bullet_spawner", "targetname");
-  targ = getstruct(struct.target, "targetname");
+  struct = getStruct("pistol_bullet_spawner", "targetname");
+  targ = getStruct(struct.target, "targetname");
 
   vector = struct.origin - targ.origin;
 
@@ -4148,7 +4148,7 @@ retreat_spawner() {
 
   self delayCall(3, ::SetLookAtEntity);
 
-  school_flee_struct = getstruct("school_flee_struct", "targetname");
+  school_flee_struct = getStruct("school_flee_struct", "targetname");
 
   self maps\_spawner::go_to_node(school_flee_struct, "struct");
 }
@@ -4231,7 +4231,7 @@ damage_targ_trigger_think() {
     if(Distance(attacker.origin, self.origin) > 940) {
       continue;
     }
-    targ = getstruct(self.target, "targetname");
+    targ = getStruct(self.target, "targetname");
     RadiusDamage(targ.origin, 30, 5000, 5000);
   }
 
@@ -4274,7 +4274,7 @@ wave_right_trigger() {
     }
   }
 
-  targ = getstruct(self.target, "targetname");
+  targ = getStruct(self.target, "targetname");
   targ anim_generic_reach(other, "cqb_wave");
   if(IsAlive(other)) {
     targ thread anim_generic(other, "cqb_wave");
@@ -4288,8 +4288,8 @@ staircase_grenade() {
   flag_wait("staircase_grenade");
 
   trigger = getEntWithFlag("staircase_grenade");
-  start = getstruct(trigger.target, "targetname");
-  end = getstruct(start.target, "targetname");
+  start = getStruct(trigger.target, "targetname");
+  end = getStruct(start.target, "targetname");
 
   vector = end.origin - start.origin;
   angles = VectorToAngles(vector);
@@ -4308,7 +4308,7 @@ stair_block_guy() {
   self add_riverbank_flags();
 
   self endon("death");
-  struct = getstruct(self.script_linkto, "script_linkname");
+  struct = getStruct(self.script_linkto, "script_linkname");
   self.animname = struct.targetname;
   self gun_remove();
   self.doing_looping_anim = true;
@@ -4325,15 +4325,15 @@ stair_block_guy() {
 }
 
 rooftop_drone() {
-  struct = getstruct(self.script_linkto, "script_linkname");
+  struct = getStruct(self.script_linkto, "script_linkname");
   self.animname = "generic";
   offset = (0, 0, 100);
   struct.origin -= offset;
   ent = spawn_tag_origin();
   ent.origin = struct.origin;
   ent.angles = struct.angles;
-  self LinkTo(ent, "tag_origin", (0, 0, 0), (0, 0, 0));
-  ent MoveTo(ent.origin + offset, 1, 0.5, 0.5);
+  self linkTo(ent, "tag_origin", (0, 0, 0), (0, 0, 0));
+  ent moveTo(ent.origin + offset, 1, 0.5, 0.5);
   struct anim_generic(self, "rooftop_turn");
   ent Delete();
   self Delete();
@@ -4432,7 +4432,7 @@ shepherd_ending_spawner() {
 
   thread shepherd_line("roadkill_shp_shocktrauma");
 
-  struct = getstruct("roadkill_shepherd_ending_scene", "targetname");
+  struct = getStruct("roadkill_shepherd_ending_scene", "targetname");
   struct anim_first_frame_solo(self, "ending");
 
   Objective_OnEntity(obj("exfil"), self);
@@ -4561,11 +4561,11 @@ get_gunner_from_vehicle() {
 
 structorama() {
   for(;;) {
-    struct = getstruct("mortar_school_chain", "targetname");
+    struct = getStruct("mortar_school_chain", "targetname");
     struct delayThread(1, ::struct_mortar);
-    struct = getstruct(struct.target, "targetname");
+    struct = getStruct(struct.target, "targetname");
     struct delayThread(1.3, ::struct_mortar);
-    struct = getstruct(struct.target, "targetname");
+    struct = getStruct(struct.target, "targetname");
     struct delayThread(1.6, ::struct_mortar);
     wait(5);
   }
@@ -4629,7 +4629,7 @@ vehicle_resumespeed_trigger() {
 }
 
 player_convoy_encounters_baddies() {
-  trigger = GetEnt("vehicle_resumespeed_trigger", "targetname");
+  trigger = getEnt("vehicle_resumespeed_trigger", "targetname");
   trigger thread vehicle_resumespeed_trigger();
 
   player_vehicle = level.crazy_ride_convoy["player"];
@@ -4694,8 +4694,8 @@ player_convoy_encounters_baddies() {
   }
 
   trigger = getEntWithFlag("rpg_ambush");
-  start = GetEnt(trigger.target, "targetname");
-  end = GetEnt(start.target, "targetname");
+  start = getEnt(trigger.target, "targetname");
+  end = getEnt(start.target, "targetname");
 
   timer = GetTime();
 
@@ -4706,8 +4706,8 @@ player_convoy_encounters_baddies() {
   forward = anglesToForward(angles);
   right = AnglesToRight(angles);
 
-  struct = getstruct("ambush_impact_vector", "targetname");
-  target = getstruct(struct.target, "targetname");
+  struct = getStruct("ambush_impact_vector", "targetname");
+  target = getStruct(struct.target, "targetname");
 
   velocity_angles = VectorToAngles(target.origin - struct.origin);
   velocity_forward = anglesToForward(velocity_angles);
@@ -4725,7 +4725,7 @@ player_convoy_encounters_baddies() {
   RadiusDamage(detour_vehicle.origin, 64, 50000, 50000);
 
   Earthquake(0.7, 1.2, level.player.origin, 5000);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 
   level.player ShellShock("default", 5);
 
@@ -4793,12 +4793,12 @@ rpg_flies_by_view() {
   vehicle = spawn_vehicle_from_targetname_and_drive("window_rpg_vehicle");
   vehicle waittill("death");
 
-  struct = getstruct("dyn_explosion_struct", "targetname");
+  struct = getStruct("dyn_explosion_struct", "targetname");
 
   level.player delayThread(3, maps\_gameskill::grenade_dirt_on_screen, "left");
 
-  struct = getstruct("dyn_spawner_struct", "targetname");
-  targ = getstruct(struct.target, "targetname");
+  struct = getStruct("dyn_spawner_struct", "targetname");
+  targ = getStruct(struct.target, "targetname");
 
   models = [];
   models[0] = "me_woodcrateclosed";
@@ -4839,15 +4839,15 @@ rpg_flies_by_view() {
 }
 
 vehicle_physics_explosion() {
-  rpg_physics = GetEnt("rpg_physics", "targetname");
-  targ = GetEnt(rpg_physics.target, "targetname");
+  rpg_physics = getEnt("rpg_physics", "targetname");
+  targ = getEnt(rpg_physics.target, "targetname");
 
-  rpg_physics_dest = GetEnt("rpg_physics_dest", "targetname");
-  targ_dest = GetEnt(rpg_physics_dest.target, "targetname");
+  rpg_physics_dest = getEnt("rpg_physics_dest", "targetname");
+  targ_dest = getEnt(rpg_physics_dest.target, "targetname");
 
   time = 0.3;
-  rpg_physics MoveTo(rpg_physics_dest.origin, time);
-  targ MoveTo(targ_dest.origin, time);
+  rpg_physics moveTo(rpg_physics_dest.origin, time);
+  targ moveTo(targ_dest.origin, time);
 
   start_time = GetTime();
 
@@ -4864,8 +4864,8 @@ vehicle_physics_explosion() {
 }
 
 reverse_force() {
-  reverse_force = GetEnt("reverse_force", "targetname");
-  targ = GetEnt(reverse_force.target, "targetname");
+  reverse_force = getEnt("reverse_force", "targetname");
+  targ = getEnt(reverse_force.target, "targetname");
   vec = targ.origin - reverse_force.origin;
   angles = VectorToAngles(vec);
   forward = anglesToForward(angles);
@@ -4973,7 +4973,7 @@ corner_hider_spawner() {
     owner.ignoreall = true;
   }
 
-  trigger = GetEnt("detour_shoots_alley_guy_trigger", "targetname");
+  trigger = getEnt("detour_shoots_alley_guy_trigger", "targetname");
   for(;;) {
     trigger waittill("trigger", other);
     if(other == level.crazy_ride_convoy["detour"]) {
@@ -4987,7 +4987,7 @@ corner_hider_spawner() {
   turret.dontshoot = undefined;
   wait(0.5);
 
-  struct = getstruct("run_death_facedown", "targetname");
+  struct = getStruct("run_death_facedown", "targetname");
 
   struct thread anim_generic_gravity(self, "facedown_death");
   wait(1);
@@ -4999,7 +4999,7 @@ corner_hider_spawner() {
 jumper_shoots_car_fx() {
   self endon("death");
 
-  struct = getstruct("jumper_fx", "targetname");
+  struct = getStruct("jumper_fx", "targetname");
   dirt_fx = getfx("car_dirt");
   spark_fx = getfx("car_spark");
 
@@ -5009,7 +5009,7 @@ jumper_shoots_car_fx() {
     self waittillmatch("custom_animmode", "fire_spray");
     count++;
 
-    link = getstruct(struct.script_linkto, "script_linkname");
+    link = getStruct(struct.script_linkto, "script_linkname");
     angles = VectorToAngles(link.origin - struct.origin);
     forward = anglesToForward(angles);
 
@@ -5025,7 +5025,7 @@ jumper_shoots_car_fx() {
     if(!isDefined(struct.target)) {
       break;
     }
-    struct = getstruct(struct.target, "targetname");
+    struct = getStruct(struct.target, "targetname");
 
     if(count > 9) {
       level.player DoDamage(20 / level.player.damageMultiplier, self.origin, self, self);
@@ -5048,7 +5048,7 @@ alley_runner_spawner_first() {
   self.ignoreme = true;
   self.ignoreall = true;
 
-  struct = getstruct(self.target, "targetname");
+  struct = getStruct(self.target, "targetname");
   scene = struct.animation;
 
   struct anim_generic(self, scene);
@@ -5081,7 +5081,7 @@ alley_runner_spawner() {
   pauses["unarmed_climb_wall"] = 1.2;
   pauses["unarmed_climb_wall_v2"] = 0;
 
-  struct = getstruct(self.target, "targetname");
+  struct = getStruct(self.target, "targetname");
   scene = struct.animation;
   pause = pauses[scene];
   wait(pause);
@@ -5106,7 +5106,7 @@ favela_flee_alley() {
 favela_hide_spawner() {
   self endon("death");
   self.animname = "flee_alley";
-  struct = getstruct(self.target, "targetname");
+  struct = getStruct(self.target, "targetname");
   struct thread anim_loop_solo(self, "idle");
   wait(5);
   struct notify("stop_loop");
@@ -5122,7 +5122,7 @@ favela_hide_spawner() {
   }
 
   self SetLookAtEntity(level.player);
-  struct = getstruct("hide_house_scene", "targetname");
+  struct = getStruct("hide_house_scene", "targetname");
   struct anim_first_frame_solo(self, "hands_up");
   wait(1.7);
   struct anim_single_solo(self, "hands_up");
@@ -5133,7 +5133,7 @@ window_waver() {
   flag_wait("garage_door_scene");
   wait(10);
 
-  spawner = GetEnt("window_wave_loop_spawner", "targetname");
+  spawner = getEnt("window_wave_loop_spawner", "targetname");
   spawner.script_drone_override = true;
 }
 
@@ -5142,11 +5142,11 @@ window_wave_loop() {
   self SetLookAtEntity(level.player);
   start = self.origin;
   scene = self.script_noteworthy;
-  struct = getstruct(self.target, "targetname");
+  struct = getStruct(self.target, "targetname");
   struct thread anim_generic_loop(self, scene);
   wait(13.4);
   struct notify("stop_loop");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self SetGoalPos(start);
   self.goalradius = 5;
   wait(5);
@@ -5158,10 +5158,10 @@ garage_scene() {
   run_thread_on_targetname("garage_pull_struct", ::garage_pull_struct);
   array_spawn_function_targetname("garage_spawner", ::garage_spawner);
 
-  garage_spawner_right = GetEnt("garage_spawner_right", "script_noteworthy");
-  garage_spawner_left = GetEnt("garage_spawner_left", "script_noteworthy");
+  garage_spawner_right = getEnt("garage_spawner_right", "script_noteworthy");
+  garage_spawner_left = getEnt("garage_spawner_left", "script_noteworthy");
 
-  garage_spawner = GetEnt("garage_spawner", "script_noteworthy");
+  garage_spawner = getEnt("garage_spawner", "script_noteworthy");
 
   garage_spawner_right delayThread(0, ::spawn_ai);
 
@@ -5195,7 +5195,7 @@ garage_spawner() {
 
   struct_name = structs[scene];
 
-  struct = getstruct(struct_name, "targetname");
+  struct = getStruct(struct_name, "targetname");
   struct anim_generic_reach(self, scene);
 
   if(scene == "garage_spawner") {
@@ -5228,15 +5228,15 @@ garage_spawner() {
 
 garage_pull_struct() {
   lower_struct = self;
-  mid_struct = getstruct(lower_struct.target, "targetname");
-  top_struct = getstruct(mid_struct.target, "targetname");
+  mid_struct = getStruct(lower_struct.target, "targetname");
+  top_struct = getStruct(mid_struct.target, "targetname");
 
   top_struct.origin += (0, 0, 10);
 
   brushes = [];
   brush = top_struct;
   for(;;) {
-    newbrush = GetEnt(brush.target, "targetname");
+    newbrush = getEnt(brush.target, "targetname");
     brushes[brushes.size] = newbrush;
     if(!isDefined(newbrush.target)) {
       break;
@@ -5306,7 +5306,7 @@ garage_brushes_move(brushes, lower_struct, origins) {
 
     difference = hand_org[2] - lower_struct.origin[2];
     foreach(brush in brushes) {
-      brush MoveTo(brush.start_origin + (0, 0, difference), 0.1, 0, 0);
+      brush moveTo(brush.start_origin + (0, 0, difference), 0.1, 0, 0);
     }
 
     if(index >= origins.size) {
@@ -5316,15 +5316,15 @@ garage_brushes_move(brushes, lower_struct, origins) {
   }
 
   foreach(brush in brushes) {
-    brush MoveTo(brush.start_origin, 0.2, 0.1, 0.1);
+    brush moveTo(brush.start_origin, 0.2, 0.1, 0.1);
   }
 }
 
 street_runner_scene() {
   flag_wait("start_runner");
 
-  struct = getstruct("street_runner_scene", "targetname");
-  spawner = GetEnt(struct.target, "targetname");
+  struct = getStruct("street_runner_scene", "targetname");
+  spawner = getEnt(struct.target, "targetname");
   guy = spawner spawn_ai();
   if(spawn_failed(guy)) {
     return;
@@ -5360,8 +5360,8 @@ roof_backup_scene() {
   flag_wait("start_runner");
   wait(4);
 
-  struct = getstruct("roof_backup_scene", "targetname");
-  spawner = GetEnt(struct.target, "targetname");
+  struct = getStruct("roof_backup_scene", "targetname");
+  spawner = getEnt(struct.target, "targetname");
   guy = spawner spawn_ai();
   if(spawn_failed(guy)) {
     return;
@@ -5390,14 +5390,14 @@ roof_backup_scene() {
 civ_balcony() {
   flag_wait("start_balcony");
 
-  door = GetEnt("civ_run_door", "targetname");
-  trigger = GetEnt("civ_door_trigger", "targetname");
-  spawner = GetEnt("civ_balcony_spawner", "targetname");
-  struct = getstruct("civ_balcony_physics", "targetname");
+  door = getEnt("civ_run_door", "targetname");
+  trigger = getEnt("civ_door_trigger", "targetname");
+  spawner = getEnt("civ_balcony_spawner", "targetname");
+  struct = getStruct("civ_balcony_physics", "targetname");
 
   door ConnectPaths();
 
-  door RotateYaw(-90, 1, 0.5, 0.5);
+  door rotateYaw(-90, 1, 0.5, 0.5);
   guy = spawner spawn_ai();
   if(spawn_failed(guy)) {
     return;
@@ -5419,7 +5419,7 @@ civ_balcony() {
 
   trigger waittill("trigger");
 
-  door RotateYaw(90, 1, 0.5, 0.5);
+  door rotateYaw(90, 1, 0.5, 0.5);
   wait(0.4);
   play_sound_in_space("scn_doorpeek_door_slam", door.origin);
 }
@@ -5471,7 +5471,7 @@ dismount_enemy_spawner() {
 }
 
 throw_grenade() {
-  target = getstruct(self.target, "targetname");
+  target = getStruct(self.target, "targetname");
   time = RandomFloatRange(3, 5);
   MagicGrenade("fraggrenade", self.origin, target.origin, time);
 }
@@ -5560,7 +5560,7 @@ player_gets_max_health_for_dismount() {
 }
 
 intro_shepherd() {
-  shepherd_roamer_spawner = GetEnt("shepherd_roamer_spawner", "targetname");
+  shepherd_roamer_spawner = getEnt("shepherd_roamer_spawner", "targetname");
   shepherd_roamer_spawner add_spawn_function(::intro_shepherd_think);
   shepherd_roamer_spawner spawn_ai();
 }
@@ -5609,7 +5609,7 @@ shepherd_roams_battlefield(target) {
   self set_run_anim("angry_walk");
   self gun_remove();
 
-  lookent = getent("shepherd_lookat_target", "targetname");
+  lookent = getEnt("shepherd_lookat_target", "targetname");
 
   gun = spawn_anim_model("gun_model");
 
@@ -5624,7 +5624,7 @@ shepherd_roams_battlefield(target) {
 
   animation = player_rig getanim(scene);
   time = getanimlength(animation);
-  mortar_org = getstruct("mortar_org", "targetname");
+  mortar_org = getStruct("mortar_org", "targetname");
 
   delayThread(time - 1.6, ::roadkill_mortar_goes_off, mortar_org);
   level.player delayThread(time - 0.2, maps\_gameskill::grenade_dirt_on_screen, "right");
@@ -5634,7 +5634,7 @@ shepherd_roams_battlefield(target) {
   level.player PlayerLinkToDelta(player_rig, "tag_player", 1, arc, arc, arc, arc, 1);
   thread player_shepherd_fov();
 
-  struct = getstruct("shepherd_get_in_fight", "targetname");
+  struct = getStruct("shepherd_get_in_fight", "targetname");
   struct thread anim_single(guys, scene);
 
   struct waittill(scene);
@@ -5698,7 +5698,7 @@ shepherd_bridge_scene(shepherd) {
 
   shepherd Attach("com_hand_radio", "tag_inhand");
 
-  struct = getstruct("shepherd_new_wander_struct", "targetname");
+  struct = getStruct("shepherd_new_wander_struct", "targetname");
   ent = spawn_tag_origin();
   start_org = struct.origin + (-200, 0, 0);
   ent.origin = start_org;
@@ -5706,7 +5706,7 @@ shepherd_bridge_scene(shepherd) {
 
   ent anim_first_frame_solo(shepherd, "angry_wander");
   wait 0.05;
-  shepherd linkto(ent);
+  shepherd linkTo(ent);
 
   wait 4;
   shepherd show();
@@ -5714,14 +5714,14 @@ shepherd_bridge_scene(shepherd) {
   ent thread anim_single_solo(shepherd, "angry_wander");
 
   time = 8;
-  ent moveto(struct.origin, time, 0, time);
+  ent moveTo(struct.origin, time, 0, time);
   wait time;
 
   shepherd wait_until_time_to_shepout();
 
   time = 5;
 
-  ent moveto(start_org, time, time, 0);
+  ent moveTo(start_org, time, time, 0);
 
   wait time;
   shepherd delete();
@@ -5747,7 +5747,7 @@ stair_wave_spawner() {
   self hide();
   self gun_remove();
 
-  struct = getstruct("shepherd_wander_struct", "targetname");
+  struct = getStruct("shepherd_wander_struct", "targetname");
   struct anim_first_frame_solo(self, "stair_wave");
   wait 0.05;
 
@@ -5792,13 +5792,13 @@ wander_battlefield_until_time_to_stop(target) {
       target = first_target;
     }
 
-    struct = getstruct(target, "targetname");
+    struct = getStruct(target, "targetname");
     if(isDefined(struct.script_delay)) {
       struct anim_reach_solo(self, "idle_reach");
       struct thread anim_loop_solo(self, "idle");
       wait(struct.script_delay);
       struct notify("stop_loop");
-      self anim_stopanimscripted();
+      self anim_stopanimScripted();
     } else {
       self SetGoalPos(struct.origin);
       self.goalradius = struct.radius;
@@ -5809,8 +5809,8 @@ wander_battlefield_until_time_to_stop(target) {
 }
 
 intro_runner_path_breaker() {
-  brush = GetEnt("intro_runner_path_breaker", "targetname");
-  brush DisconnectPaths();
+  brush = getEnt("intro_runner_path_breaker", "targetname");
+  brush disconnectPaths();
   brush NotSolid();
 
   wait(5);
@@ -5835,7 +5835,7 @@ ambusher_spawner() {
     self.threatbias = 50000;
     self.ignoreall = false;
 
-    link = GetEnt(self.script_linkto, "script_linkname");
+    link = getEnt(self.script_linkto, "script_linkname");
     self SetEntityTarget(link);
     wait(3);
     self ClearEntityTarget();
@@ -5866,7 +5866,7 @@ trapper_spawner() {
 }
 
 trapper_killer_trigger() {
-  trigger = GetEnt("trapper_killer_trigger", "targetname");
+  trigger = getEnt("trapper_killer_trigger", "targetname");
   for(;;) {
     trigger waittill("trigger", other);
     other Delete();
@@ -5882,7 +5882,7 @@ gaz_balcony_guys() {
 }
 
 gaz_balcony() {
-  spawner = GetEnt(self.target, "targetname");
+  spawner = getEnt(self.target, "targetname");
   spawner.script_drone_override = true;
   spawner add_spawn_function(::gaz_balcony_think, self);
   spawner spawn_ai();
@@ -5917,7 +5917,7 @@ gaz_balcony_think(struct) {
   timer = RandomFloat(0.65);
   wait(timer);
   struct notify("stop_loop");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self waittill("goal");
   wait(90);
   self Delete();
@@ -5978,8 +5978,8 @@ way_ahead_line(alias) {
 
 shot_fired_trigger() {
   self waittill("trigger");
-  struct_end = getstruct(self.target, "targetname");
-  struct_start = getstruct(struct_end.target, "targetname");
+  struct_end = getStruct(self.target, "targetname");
+  struct_start = getStruct(struct_end.target, "targetname");
 
   end = struct_end.origin;
   original_end = end;
@@ -6062,7 +6062,7 @@ rpg_ambush_spawner() {
 }
 
 hydrant_hit() {
-  hydrant_struct = getstruct("hydrant_struct", "targetname");
+  hydrant_struct = getStruct("hydrant_struct", "targetname");
   RadiusDamage(hydrant_struct.origin, hydrant_struct.radius, 5000, 5000, level.player);
 }
 
@@ -6154,7 +6154,7 @@ roadkill_gameskill_ride_settings() {
 trigger_delete_axis_not_in_volume() {
   self waittill("trigger");
 
-  volume = GetEnt(self.target, "targetname");
+  volume = getEnt(self.target, "targetname");
   ai = GetAIArray("axis");
   count = 0;
   total = ai.size;
@@ -6230,7 +6230,7 @@ enemy_playground_spawner() {
 enemy_playground_guy_retreats() {
   self endon("death");
   flag_wait("playground_baddies_retreat");
-  volume = GetEnt("lower_school_flee_volume", "targetname");
+  volume = getEnt("lower_school_flee_volume", "targetname");
   timer = RandomFloat(2);
   wait(timer);
   self SetGoalVolumeAuto(volume);
@@ -6254,7 +6254,7 @@ recover_random_bullet_damage() {
 }
 
 wait_for_chance_to_charge_school() {
-  volume = GetEnt("safe_to_charge_school_volume", "targetname");
+  volume = getEnt("safe_to_charge_school_volume", "targetname");
 
   num = 1;
 
@@ -6282,7 +6282,7 @@ wait_for_chance_to_charge_school() {
 }
 
 ending_takeoff_heli_spawner() {
-  struct = getstruct("heli_linkup_struct", "script_noteworthy");
+  struct = getStruct("heli_linkup_struct", "script_noteworthy");
 
   self set_stage(struct, level.heli_guy_left, "left");
   self set_stage(struct, level.heli_guy_right, "right");
@@ -6292,7 +6292,7 @@ ending_takeoff_heli_spawner() {
   wait(8);
 
   flag_wait("heli_takes_off");
-  heli_fly_node = getstruct("heli_fly_node", "targetname");
+  heli_fly_node = getStruct("heli_fly_node", "targetname");
   self vehicle_paths(heli_fly_node);
 }
 
@@ -6307,8 +6307,8 @@ heli_spawner_right() {
 }
 
 link_heli_to_landing() {
-  linker = getstruct("heli_linkup_struct", "script_noteworthy");
-  targ = getstruct("gag_stage_littlebird_unload", "script_noteworthy");
+  linker = getStruct("heli_linkup_struct", "script_noteworthy");
+  targ = getStruct("gag_stage_littlebird_unload", "script_noteworthy");
 
   linker.target = targ.targetname;
 }
@@ -6443,7 +6443,7 @@ player_learned_flash() {
 }
 
 detect_room_was_flashed() {
-  volume = GetEnt("dismount_flash_volume", "targetname");
+  volume = getEnt("dismount_flash_volume", "targetname");
   flash = volume get_flash_touching();
   for(;;) {
     if(!isDefined(flash)) {

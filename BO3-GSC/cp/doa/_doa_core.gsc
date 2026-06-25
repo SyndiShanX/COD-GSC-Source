@@ -48,7 +48,7 @@ function main() {
     wait(0.05);
   }
   level.var_de693c3 = 1;
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.hotjoin = undefined;
   }
   while(true) {
@@ -235,7 +235,7 @@ function function_437a340d(var_73419762) {
   if(isDefined(self.bot)) {
     return;
   }
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       continue;
     }
@@ -686,7 +686,7 @@ function function_64a5cd5e() {
     }
     level.doa.teleporter delete();
   }
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     self.doa.respawning = 0;
     self.var_9ea856f6 = 0;
   }
@@ -697,7 +697,7 @@ function function_64a5cd5e() {
   doa_utility::clearallcorpses();
   namespace_d88e3a06::function_116bb43();
   doa_utility::function_1ced251e(1);
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.doa.var_af875fb7 = [];
     player namespace_831a4a7c::function_7f33210a();
   }
@@ -709,7 +709,7 @@ function function_64a5cd5e() {
   level thread doa_utility::function_c5f3ece8(&"DOA_GAMEOVER", undefined, 6);
   level clientfield::set("scoreMenu", 1);
   level clientfield::set("gameover", 1);
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!(isDefined(player.doa.var_80ffe475) && player.doa.var_80ffe475)) {
       player function_9ac615ee(1);
       continue;
@@ -735,7 +735,7 @@ function function_64a5cd5e() {
 }
 
 function upload_leaderboards() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!isDefined(player.doa)) {
       continue;

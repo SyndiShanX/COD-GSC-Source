@@ -124,7 +124,7 @@ main() {
     wait_for_first_player();
     get_players()[0] FreezeControls(true);
 
-    level.hero = getent("sniper_hero", "script_noteworthy");
+    level.hero = getEnt("sniper_hero", "script_noteworthy");
     level.hero thread hero_setup();
     level.default_goalradius = 32;
     level.explodernum = 0;
@@ -145,7 +145,7 @@ main() {
     /
 
     tp_to_start(eventname) {
-      level.hero = getent("sniper_hero", "script_noteworthy");
+      level.hero = getEnt("sniper_hero", "script_noteworthy");
       level.hero allowedstances("stand", "crouch", "prone");
       players = get_players();
       event3_players_start = getStructArray(eventname + "_playerstart", "targetname");
@@ -154,7 +154,7 @@ main() {
         players[i] setplayerangles(event3_players_start[i].angles);
       }
       wait 0.1;
-      hero_start_spot = getstruct(eventname + "_herostart", "targetname");
+      hero_start_spot = getStruct(eventname + "_herostart", "targetname");
       level.hero teleport(hero_start_spot.origin, hero_start_spot.angles);
       wait 0.1;
       for(i = 0; i < players.size; i++) {
@@ -331,7 +331,7 @@ main() {
       level.e1_timing_feedback = "could_b_quicker";
       flag_set("found_infountain_reznov_hide");
 
-      spot = getstruct("fountain_reznov_align_spot", "targetname");
+      spot = getStruct("fountain_reznov_align_spot", "targetname");
       spot notify("stop_loop");
       spot thread anim_loop_solo(level.hero, "resnov_gun_loop", undefined, "stop_loop");
 
@@ -360,7 +360,7 @@ main() {
 
       flag_set("found_infountain");
       spot notify("stop_loop");
-      level.hero stopanimscripted();
+      level.hero stopanimScripted();
       level.hero.health = 1;
       level.hero solo_set_pacifist(false);
       if(!isDefined(level.hero.saidfoundus)) {
@@ -460,7 +460,7 @@ main() {
     }
 
     getstructent(key, value) {
-      spot1 = getstruct(key, value);
+      spot1 = getStruct(key, value);
       spot2 = spawn("script_origin", spot1.origin);
       if(isDefined(spot1.angles)) {
         spot2.angles = spot1.angles;
@@ -477,7 +477,7 @@ main() {
         brushes = getEntArray("script_brushmodel", "classname");
         dest = getEntArray("destructible", "targetname");
         angles = level.player getplayerangles();
-        gun = getent("e3_cover_mg", "script_noteworthy");
+        gun = getEnt("e3_cover_mg", "script_noteworthy");
         nades = level.player getweaponammostock("stick_grenade");
         weap = level.player getcurrentweapon();
         wait 2;
@@ -501,7 +501,7 @@ main() {
 
       self UseAnimTree(#animtree);
       self.animname = "curtain";
-      spot = getstruct("dog_bark_node", "targetname");
+      spot = getStruct("dog_bark_node", "targetname");
       if((!isDefined(self.animating) || (isDefined(self.animating) && self.animating == 0)) && self.animated < 5) {
         wait 0.2;
         myanim = get_curtain_anim("flaming_intro");
@@ -572,11 +572,11 @@ main() {
           yawvar = yawvar * -1;
         }
         time = randomintrange(2, 6);
-        self rotateto(self.angles + (pitchvar, yawvar, 0), time);
-        self moveto(self.origin + (xval, 0, zval), time);
+        self rotateTo(self.angles + (pitchvar, yawvar, 0), time);
+        self moveTo(self.origin + (xval, 0, zval), time);
         wait time;
-        self rotateto(self.angles + (pitchvar * -1, yawvar * -1, 0), time);
-        self moveto(self.origin + (xval * -1, 0, zval * -1), time);
+        self rotateTo(self.angles + (pitchvar * -1, yawvar * -1, 0), time);
+        self moveTo(self.origin + (xval * -1, 0, zval * -1), time);
         wait time;
       }
     }

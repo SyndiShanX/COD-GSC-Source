@@ -38,7 +38,7 @@ function endgame_vox() {
   level waittill("end_game");
   wait(2);
   winner = undefined;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]._has_anti115) && players[i]._has_anti115 == 1) {
       winner = players[i];
@@ -51,9 +51,9 @@ function endgame_vox() {
       num = winner.zm_random_char;
     }
     if(num == 3) {
-      playsoundatposition("vox_plr_3_gameover_1", (0, 0, 0));
+      playSoundAtPosition("vox_plr_3_gameover_1", (0, 0, 0));
     } else {
-      playsoundatposition("vox_plr_3_gameover_0", (0, 0, 0));
+      playSoundAtPosition("vox_plr_3_gameover_0", (0, 0, 0));
     }
   }
 }
@@ -73,9 +73,9 @@ function setup_music_egg() {
 }
 
 function intro_vox_or_skit() {
-  playsoundatposition("evt_warp_in", (0, 0, 0));
+  playSoundAtPosition("evt_warp_in", (0, 0, 0));
   wait(3);
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 4 && randomintrange(0, 101) <= 10) {
     if(randomintrange(0, 101) <= 10) {
       players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "rod");
@@ -148,6 +148,6 @@ function function_19277046() {
       continue;
     }
     level notify("hash_ab740a84", self.script_int);
-    playsoundatposition("zmb_zhd_plate_hit", self.origin);
+    playSoundAtPosition("zmb_zhd_plate_hit", self.origin);
   }
 }

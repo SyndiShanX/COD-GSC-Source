@@ -286,5 +286,5 @@ lib_055D::func_1766() {
 }
 
 lib_055D::func_72E5(param_00, param_01) {
-  return vectordot(vectornormalize(param_00 - self getEye()), anglesToForward(self getangles())) > param_01;
+  return vectordot(vectorNormalize(param_00 - self getEye()), anglesToForward(self getangles())) > param_01;
 }

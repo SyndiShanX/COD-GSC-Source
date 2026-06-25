@@ -54,10 +54,10 @@ lib_0527::func_7031(param_00, param_01, param_02, param_03, param_04) {
   var_07 = param_01.var_34AC + -1 * anglesToForward(param_01.var_001D) * 2000;
   param_01.var_18C9 = spawn("script_model", (0, 0, 0));
   param_01.var_18C9 setModel("tag_origin");
-  param_01.var_18C9 linkto(param_01, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
+  param_01.var_18C9 linkTo(param_01, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
   param_01.var_18CA = spawn("script_model", (0, 0, 0));
   param_01.var_18CA setModel("tag_origin");
-  param_01.var_18CA linkto(param_01, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
+  param_01.var_18CA linkTo(param_01, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
   var_08 = 1;
   if(maps\mp\_utility::func_579B() && isDefined(param_04) && !level.var_79A1) {
     var_08 = 0;
@@ -738,7 +738,7 @@ lib_0527::func_4ACE() {
 }
 
 lib_0527::func_9147(param_00, param_01) {
-  var_02 = vectornormalize(param_00.var_0116 - param_01.var_0116);
+  var_02 = vectorNormalize(param_00.var_0116 - param_01.var_0116);
   var_03 = 15;
   var_04 = anglesToForward(param_01 getangles());
   if(vectordot(var_02, var_04) >= cos(var_03)) {
@@ -1018,7 +1018,7 @@ lib_0527::func_0EA1(param_00, param_01, param_02, param_03) {
 
   if(isDefined(param_03) && param_03) {
     var_0A = param_01 + anglesToForward(param_02) * var_08;
-    self moveto(var_0A, var_09);
+    self moveTo(var_0A, var_09);
   }
 
   var_0B = 4;
@@ -1086,7 +1086,7 @@ lib_0527::func_281E(param_00, param_01) {
   var_03 = 4 + lib_0527::func_44E6(param_01) + 8;
   var_02 thread lib_0527::func_2D3B(var_03);
   var_04 = anglestoaxis((35, -45, 0))["forward"];
-  var_02 linkto(param_00, "tag_origin", var_04 * -1 * 1000, (35, -45, 0));
+  var_02 linkTo(param_00, "tag_origin", var_04 * -1 * 1000, (35, -45, 0));
   param_00.var_5A2C = var_02;
 }
 
@@ -1255,7 +1255,7 @@ lib_0527::func_34AE(param_00, param_01, param_02) {
 
 lib_0527::func_34AF(param_00, param_01) {
   var_02 = anglesToForward(common_scripts\utility::func_3D5C(param_00.var_001D));
-  var_03 = vectornormalize(common_scripts\utility::func_3D5D(param_01) - param_00.var_0116);
+  var_03 = vectorNormalize(common_scripts\utility::func_3D5D(param_01) - param_00.var_0116);
   var_04 = vectordot(var_02, var_03);
   if(var_04 > 0) {
     return 1;

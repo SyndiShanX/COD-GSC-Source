@@ -61,7 +61,7 @@ function init_box_footprints() {
 
 function box_footprint_think() {
   self.n_souls_absorbed = 0;
-  self disconnectpaths();
+  self disconnectPaths();
   n_souls_required = 30;
   if(getdvarint("") > 0) {
     n_souls_required = 10;
@@ -99,24 +99,24 @@ function box_footprint_think() {
   self notify("box_finished");
   level.n_soul_boxes_completed++;
   self scene::stop("p7_fxanim_zm_ori_challenge_box_close_bundle", self);
-  e_volume = getent(self.target, "targetname");
+  e_volume = getEnt(self.target, "targetname");
   e_volume delete();
   self util::delay(0.5, undefined, &clientfield::set, "foot_print_box_glow", 0);
   wait(2);
-  self stopanimscripted();
+  self stopanimScripted();
   v_start_angles = self.angles;
   self movez(30, 1, 1);
   self.angles = v_start_angles;
-  playsoundatposition("zmb_footprintbox_disappear", self.origin);
+  playSoundAtPosition("zmb_footprintbox_disappear", self.origin);
   wait(0.5);
   n_rotations = randomintrange(5, 7);
   for(i = 0; i < n_rotations; i++) {
     v_rotate_angles = v_start_angles + (randomfloatrange(-10, 10), randomfloatrange(-10, 10), randomfloatrange(-10, 10));
     n_rotate_time = randomfloatrange(0.2, 0.4);
-    self rotateto(v_rotate_angles, n_rotate_time);
+    self rotateTo(v_rotate_angles, n_rotate_time);
     self waittill("rotatedone");
   }
-  self rotateto(v_start_angles, 0.3);
+  self rotateTo(v_start_angles, 0.3);
   self movez(-60, 0.5, 0.5);
   self waittill("rotatedone");
   trace_start = self.origin + vectorscale((0, 0, 1), 200);
@@ -153,7 +153,7 @@ function footprint_zombie_killed(attacker) {
   foreach(e_volume in a_volumes) {
     if(self istouching(e_volume) && isDefined(attacker) && isPlayer(attacker)) {
       self clientfield::set("foot_print_box_fx", 1);
-      m_box = getent(e_volume.target, "targetname");
+      m_box = getEnt(e_volume.target, "targetname");
       m_box notify("soul_absorbed", attacker);
       return true;
     }

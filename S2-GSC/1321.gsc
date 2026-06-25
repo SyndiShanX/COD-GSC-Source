@@ -123,7 +123,7 @@ lib_0529::func_8A0E() {
     return;
   }
 
-  level.var_1FFC = getent(var_00[0].var_01A2, "targetname");
+  level.var_1FFC = getEnt(var_00[0].var_01A2, "targetname");
   foreach(var_02 in var_00) {
     var_02 lib_0529::func_2D30(0, 0, 0);
   }
@@ -353,7 +353,7 @@ lib_0529::func_8A0F(param_00, param_01, param_02, param_03, param_04) {
   var_05.var_6E4A = var_06;
   var_05.var_6E4C = var_07;
   if(isDefined(var_05.var_5A2C)) {
-    var_05.var_5A2C linkto(var_06, "tag_origin", (0, 0, 250), (90, 0, 0));
+    var_05.var_5A2C linkTo(var_06, "tag_origin", (0, 0, 250), (90, 0, 0));
     var_05.var_5A2C.var_5A32 = gettime();
   }
 
@@ -399,9 +399,9 @@ lib_0529::func_64B8() {
   lib_0378::func_8D74("ks_carepackage_parachute");
   for(;;) {
     if(!isDefined(self.var_2D6A) || !self.var_2D6A) {
-      self moveto(self.var_0116 + (0, 0, -45), 0.05);
+      self moveTo(self.var_0116 + (0, 0, -45), 0.05);
     } else {
-      self moveto(self.var_0116 + (0, 0, -20), 0.05);
+      self moveTo(self.var_0116 + (0, 0, -20), 0.05);
     }
 
     wait 0.05;
@@ -557,7 +557,7 @@ lib_0529::func_0F30(param_00, param_01) {
   var_02 = 300;
   var_03 = 100;
   var_04 = 1250;
-  var_05 = vectornormalize(param_01 - param_00.var_0116);
+  var_05 = vectorNormalize(param_01 - param_00.var_0116);
   var_06 = var_05[0] * var_02;
   var_07 = var_05[1] * var_02;
   var_08 = -1 * var_05[1] * var_04;
@@ -655,7 +655,7 @@ lib_0529::func_275D() {
     if(var_02 istouching(self)) {
       foreach(var_04 in var_00) {
         if(distancesquared(var_04.var_0116, self.var_0116) > 10000) {
-          var_02 setorigin(var_04.var_0116, 1);
+          var_02 setOrigin(var_04.var_0116, 1);
           var_00 = common_scripts\utility::func_0F93(var_00, var_04);
           break;
         }
@@ -722,7 +722,7 @@ lib_0529::func_27D3(param_00, param_01, param_02, param_03, param_04, param_05, 
     }
   }
 
-  var_08.var_3009 linkto(var_08, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_08.var_3009 linkTo(var_08, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_08.var_3009 notsolid();
   var_08.var_54F5 = 0;
   if(param_05) {
@@ -747,7 +747,7 @@ lib_0529::func_5A2E(param_00) {
   for(;;) {
     var_04 = param_00.var_0116 - var_02;
     if(length(var_04) > 0.01) {
-      var_05 = vectornormalize(var_04);
+      var_05 = vectorNormalize(var_04);
       var_06 = var_05 * -250;
       if(var_03 < 1) {
         var_07 = vectorlerp(var_01, var_06, var_03);
@@ -1059,8 +1059,8 @@ lib_0529::func_5A5F(param_00) {
       thread lib_0529::func_2750();
     }
 
-    self setcursorhint("HINT_NOICON");
-    self sethintstring(var_02);
+    self setCursorHint("HINT_NOICON");
+    self setHintString(var_02);
     self setsecondaryhintstring(&"MP_CARE_PACKAGE_PICKUP");
     self sethintstring2toenemyteam(1);
     if(level.var_3FDC == "infect") {
@@ -1158,7 +1158,7 @@ lib_0529::func_2750() {
               var_03 = &"PLATFORM_GET_KILLSTREAK";
             }
 
-            self sethintstring(var_03);
+            self setHintString(var_03);
             self settertiaryhintstring("");
             self.var_5022 = maps\mp\killstreaks\_killstreaks::func_4533(self.var_944E);
             lib_0529::func_8A21(self.var_5022);
@@ -1188,9 +1188,9 @@ lib_0529::func_97F9() {
 
 lib_0529::func_A213(param_00, param_01, param_02) {
   if(isPlayer(param_00)) {
-    param_00 playerlinkto(self);
+    param_00 playerlinkTo(self);
   } else {
-    param_00 linkto(self);
+    param_00 linkTo(self);
   }
 
   param_00 common_scripts\utility::func_0602();

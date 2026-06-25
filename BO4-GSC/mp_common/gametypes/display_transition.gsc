@@ -189,7 +189,7 @@ function_f4c03c3b() {
 }
 
 function_1caf5c87(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
   player::function_4dcd9a89(players, &function_3f65d5d3);
 
   foreach(player in players) {

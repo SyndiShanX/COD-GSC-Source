@@ -69,15 +69,15 @@ function radio9_override(struct) {
     if(!isDefined(time)) {
       time = 1;
     }
-    self moveto(struct.origin, time, time / 10);
+    self moveTo(struct.origin, time, time / 10);
     self waittill("movedone");
     target = struct.target;
   }
   self.trigger = spawn("trigger_radius_use", self.origin + vectorscale((0, 0, 1), 12), 0, 64, 72);
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger.radius = 64;
   self.trigger.height = 72;
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
   self.trigger.owner_ent = self;
   self.trigger thread trig_thread();
   self waittill("triggered");
@@ -167,10 +167,10 @@ function create_radio(radio_num, thread_func) {
   radio.script_noteworthy = radio_struct.script_noteworthy;
   radio set_manual_wait_time(radio_num);
   radio.trigger = spawn("trigger_radius_use", radio.origin + vectorscale((0, 0, 1), 12), 0, 64, 72);
-  radio.trigger triggerignoreteam();
+  radio.trigger triggerIgnoreTeam();
   radio.trigger.radius = 64;
   radio.trigger.height = 72;
-  radio.trigger setcursorhint("HINT_NOICON");
+  radio.trigger setCursorHint("HINT_NOICON");
   radio.trigger.owner_ent = radio;
   radio.trigger thread trig_thread();
   radio thread radio_thread();

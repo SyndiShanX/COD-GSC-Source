@@ -15,13 +15,13 @@ bridge_deploy_main() {
   level.player notify("remove_tow");
 
   if(level.start_point == "bridge_deploy") {
-    var_0 = common_scripts\utility::getstruct("bridge_deploy_player_in", "targetname");
+    var_0 = common_scripts\utility::getStruct("bridge_deploy_player_in", "targetname");
   } else {
     level.player unlink();
     var_0 = level.player;
   }
 
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread bridge_deploy_begin();
   common_scripts\utility::flag_wait("bridge_deploy_end");
@@ -87,10 +87,10 @@ tower_to_bridge_deploy() {
   var_4.origin = self.origin;
   var_4.angles = (0, 108, 0);
   var_4.angles = (var_4.angles[0], var_4.angles[1] + 180, var_4.angles[2]);
-  self playerlinkto(var_4, undefined, 1, 0, 0, 0, 0);
+  self playerlinkTo(var_4, undefined, 1, 0, 0, 0, 0);
   var_4.angles = (var_4.angles[0] + 89, var_4.angles[1], 0);
   thread maps\_hud_util::fade_in(1);
-  var_4 moveto(var_3 + (0, 0, var_1), var_0, 0, 0.25);
+  var_4 moveTo(var_3 + (0, 0, var_1), var_0, 0, 0.25);
   wait 0.05;
   thread maps\satfarm_audio::overlord_trans2();
   wait(var_0 - 0.25);
@@ -103,20 +103,20 @@ tower_to_bridge_deploy() {
     level.player maps\satfarm_satellite_view::satellite_view_init_hud(0);
 
   visionsetnaked("satfarm_b", 0.0);
-  var_5 = common_scripts\utility::getstruct("a10_player_start", "targetname");
+  var_5 = common_scripts\utility::getStruct("a10_player_start", "targetname");
   var_6 = common_scripts\utility::spawn_tag_origin();
   var_6.origin = (var_5.origin[0], var_5.origin[1], var_5.origin[2]);
   var_6.angles = var_4.angles;
-  var_4 rotateto(var_4.angles + (0, 0, 16), 32);
-  var_6 rotateto(var_4.angles + (0, 0, 16), 32);
+  var_4 rotateTo(var_4.angles + (0, 0, 16), 32);
+  var_6 rotateTo(var_4.angles + (0, 0, 16), 32);
   var_7 = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("bridge_deploy_amb");
-  var_8 = common_scripts\utility::getstruct("bridge_deploy_ghost_start", "targetname");
-  var_9 = common_scripts\utility::getstruct("bridge_deploy_ghost_end", "targetname");
+  var_8 = common_scripts\utility::getStruct("bridge_deploy_ghost_start", "targetname");
+  var_9 = common_scripts\utility::getStruct("bridge_deploy_ghost_end", "targetname");
   var_10 = 10;
   var_11 = common_scripts\utility::spawn_tag_origin();
   var_11 setModel("generic_prop_raven");
   var_11.origin = var_8.origin;
-  var_11 moveto(var_9.origin, var_10);
+  var_11 moveTo(var_9.origin, var_10);
 
   if(getDvar("debug_sat_view_pip", "1") != "2") {
     thread maps\satfarm_satellite_view::target_enable_sat_view(var_11, "ac130_hud_friendly_vehicle_diamond_s_w", (0, 1, 0));
@@ -137,7 +137,7 @@ tower_to_bridge_deploy() {
   wait 0.75;
   var_13 = var_11.origin + (var_9.origin - var_8.origin) * 0.9 / var_10 - anglestoright(vectortoangles(var_9.origin - var_8.origin)) * 50;
   var_14 = var_13 - anglesToForward(var_4.angles) * (var_4.origin[2] - var_13[2]);
-  var_4 moveto(var_14, 0.5);
+  var_4 moveTo(var_14, 0.5);
 
   if(getDvar("debug_sat_view_pip", "1") != "2") {
     thread maps\satfarm_satellite_view::satellite_view_type_anchored_text(&"SATFARM_TRACKING", (1, 1, 1), "right", "top", 1);
@@ -145,7 +145,7 @@ tower_to_bridge_deploy() {
 
   maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, undefined, undefined, 0.5);
   wait 0.5;
-  var_4 linkto(var_11);
+  var_4 linkTo(var_11);
 
   if(getDvar("debug_sat_view_pip", "1") != "2") {
     level.player lerpfov(30, 0.25);
@@ -197,7 +197,7 @@ tower_to_bridge_deploy() {
   var_4 unlink();
   var_4.origin = var_6.origin;
   var_4.angles = var_6.angles;
-  var_4 rotateto(var_4.angles + (0, 0, 16), 24);
+  var_4 rotateTo(var_4.angles + (0, 0, 16), 24);
   setsaveddvar("cg_fov", 65);
   wait 0.05;
   thread remove_bridge_deploy_tanks(var_7);
@@ -231,12 +231,12 @@ tower_to_bridge_deploy() {
   level.allyhelis = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("bridge_deploy_apache_ally");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_bgr_overlordweneedair");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_hqr_rogera10sareen");
-  var_16 = common_scripts\utility::getstruct("bridge_loc", "targetname");
+  var_16 = common_scripts\utility::getStruct("bridge_loc", "targetname");
   var_17 = spawn("script_model", (var_16.origin[0], var_16.origin[1], var_4.origin[2]));
   var_17 setModel("tag_origin");
   var_17.angles = (90, 0, 0);
-  var_17 linkto(level.playertank);
-  var_4 moveto((var_16.origin[0], var_16.origin[1], self.origin[2]), 1);
+  var_17 linkTo(level.playertank);
+  var_4 moveTo((var_16.origin[0], var_16.origin[1], self.origin[2]), 1);
   thread maps\satfarm_satellite_view::satellite_view_move_to_point(0, 0, 32, 32, 1);
   wait 1.5;
 
@@ -310,7 +310,7 @@ tower_to_bridge_deploy() {
   var_26 = spawn("script_model", level.allyheli[1] gettagorigin("tag_passenger") + anglesToForward(level.allyheli[1].angles) * level.allyheli[1].veh_speed * 0.75 * var_2);
   var_26 setModel("tag_origin");
   var_26.angles = (90, 0, 0);
-  var_26 linkto(level.playertank);
+  var_26 linkTo(level.playertank);
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_com_keepmovingbadgerone");
   thread maps\satfarm_code::radio_dialog_add_and_go("satfarm_com_weonlyhaveone");
 
@@ -320,21 +320,21 @@ tower_to_bridge_deploy() {
 
   wait 0.25;
   wait 0.5;
-  var_16 = common_scripts\utility::getstruct("bridge_deploy_tank_loc", "targetname");
+  var_16 = common_scripts\utility::getStruct("bridge_deploy_tank_loc", "targetname");
   var_17 = spawn("script_model", (var_16.origin[0], var_16.origin[1], var_4.origin[2]));
   var_17 setModel("tag_origin");
   var_17.angles = (90, 0, 0);
-  var_17 linkto(level.playertank);
+  var_17 linkTo(level.playertank);
   level.satellite_view.height = 32;
   level.satellite_view.width = 32;
-  var_4 moveto((var_16.origin[0], var_16.origin[1], self.origin[2]), 3);
+  var_4 moveTo((var_16.origin[0], var_16.origin[1], self.origin[2]), 3);
   maps\satfarm_satellite_view::satellite_view_move_to_point(var_16.origin[0], var_16.origin[1], undefined, undefined, 0.5);
   wait 4;
   var_27 = spawn("script_model", level.playertank gettagorigin("tag_player") + (0, 0, 60));
   var_27 setModel("tag_origin");
   var_27.angles = level.playertank.angles;
-  var_27 linkto(level.playertank);
-  var_4 moveto(var_27.origin, 0.45, 0.1);
+  var_27 linkTo(level.playertank);
+  var_4 moveTo(var_27.origin, 0.45, 0.1);
   level.ent = var_4;
   thread maps\satfarm_satellite_view::satellite_view_chopper_fade_hud(0.5);
   self lerpfov(90, 0.1);
@@ -353,8 +353,8 @@ tower_to_bridge_deploy() {
   var_4 setModel("tag_origin");
   var_4.origin = (31713.5, -9095.38, -2.49035);
   var_4.angles = level.playertank gettagangles("tag_barrel");
-  self playerlinkto(var_4, undefined, 1, 0, 0, 0, 0);
-  var_4 moveto(level.playertank gettagorigin("tag_turret") - (0, 0, 64), 0.15);
+  self playerlinkTo(var_4, undefined, 1, 0, 0, 0, 0);
+  var_4 moveTo(level.playertank gettagorigin("tag_turret") - (0, 0, 64), 0.15);
   wait 0.16;
   self unlink();
   self.origin = level.playertank gettagorigin("tag_player");
@@ -452,8 +452,8 @@ mark_mantis_turrets(var_0) {
   var_7 = common_scripts\utility::spawn_tag_origin();
   var_7.origin = var_6.origin + anglesToForward(var_5.angles) * 750 + (0, 0, 250);
   var_7.angles = vectortoangles(var_6.origin - var_7.origin);
-  var_7 linkto(var_6);
-  var_6 rotateyaw(15, 5);
+  var_7 linkTo(var_6);
+  var_6 rotateYaw(15, 5);
 
   if(getDvar("debug_sat_view_pip", "1") == "1") {
     thread maps\satfarm_satellite_view::satellite_view_corner_pip(var_7, "tag_origin", 220, -145, 100, 100);

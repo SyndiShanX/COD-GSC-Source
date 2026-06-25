@@ -79,7 +79,7 @@ space_breach() {
   maps\loki_fx::light_combat2_threads();
   maps\_utility::battlechatter_off("allies");
   maps\_utility::battlechatter_off("axis");
-  var_0 = getent("space_breach_start_trigger", "targetname");
+  var_0 = getEnt("space_breach_start_trigger", "targetname");
   var_0 notify("trigger");
   thread maps\loki_util::player_boundaries_on(1, 1);
   thread spawn_enemies();
@@ -106,8 +106,8 @@ set_num_allies(var_0) {
 }
 
 add_terminal_to_second_controlroom() {
-  var_0 = getent("rog_terminal_obj", "targetname");
-  var_1 = getent("rog_terminal_obj_2", "targetname");
+  var_0 = getEnt("rog_terminal_obj", "targetname");
+  var_1 = getEnt("rog_terminal_obj_2", "targetname");
   wait 1.0;
 
   if(!isDefined(level.center1)) {
@@ -124,7 +124,7 @@ add_terminal_to_second_controlroom() {
 }
 
 ragdoll_shield() {
-  var_0 = getent("ragdoll_shield", "targetname");
+  var_0 = getEnt("ragdoll_shield", "targetname");
   var_0 hide();
 }
 
@@ -140,7 +140,7 @@ test_quick_breach() {
     get_center(2);
   }
 
-  var_0 = getent("space_breach_anim_node", "targetname");
+  var_0 = getEnt("space_breach_anim_node", "targetname");
   level thread anim_enemies_before_breach(var_0, level.before_breach_guys);
 
   while(level._ai_group["combat_two_enemies"].aicount) {
@@ -158,7 +158,7 @@ test_quick_breach() {
   }
 
   common_scripts\utility::flag_set("combat_two_enemies_dead");
-  var_4 = getent("quick_breach_door_target", "targetname");
+  var_4 = getEnt("quick_breach_door_target", "targetname");
   var_5 = [];
   var_6 = var_5.size;
   var_4 makeusable();
@@ -185,13 +185,13 @@ test_quick_breach() {
   common_scripts\utility::flag_set("combat_two_music_end");
   wait 0.1;
   var_0 = var_4;
-  var_13 = getent("breach_start_controlroom_fake", "script_noteworthy");
+  var_13 = getEnt("breach_start_controlroom_fake", "script_noteworthy");
   var_0 = spawn("script_origin", level.center2.origin);
   var_14 = spawn("script_origin", level.center1.origin);
   common_scripts\utility::waitframe();
   var_0.angles = level.center2.angles;
   var_14.angles = level.center1.angles;
-  var_15 = getent("space_breach_anim_node", "targetname");
+  var_15 = getEnt("space_breach_anim_node", "targetname");
   var_0 = var_15;
   var_16 = level.breach_anim_node;
   level thread anim_break_entrance(var_16, level.controlroom_top_1, "space_breach_enemy_die_2");
@@ -286,7 +286,7 @@ turn_off_combat_two_triggers() {
   var_0 = ["combat_two_third_wave_extra", "combat_two_third_wave_push_0", "combat_two_third_wave_push_1", "combat_two_third_wave_push_1_5", "combat_two_third_wave_push_2", "combat_two_second_wave_retreat", "combat_two_second_wave_push", "ignore_volume", "wave_3_underside", "no_cover", "combat_two_third_wave"];
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2, "targetname");
+    var_3 = getEnt(var_2, "targetname");
 
     if(isDefined(var_3)) {
       var_3 delete();
@@ -335,7 +335,7 @@ anim_enemy_spawn_func() {
 }
 
 teleport_allies_to_comm_center_interior() {
-  var_0 = getent("combat_one_traversal1", "targetname");
+  var_0 = getEnt("combat_one_traversal1", "targetname");
 
   if(isDefined(var_0)) {
     var_0 notify("explosion");
@@ -343,9 +343,9 @@ teleport_allies_to_comm_center_interior() {
 
   common_scripts\utility::waitframe();
   var_1 = [];
-  var_1[0] = getent("z_trans_ally_location_0", "targetname");
+  var_1[0] = getEnt("z_trans_ally_location_0", "targetname");
   level.allies[0] unlink();
-  level.allies[0] stopanimscripted();
+  level.allies[0] stopanimScripted();
   var_2 = [];
   var_2["ally_0"] = level.allies[0];
   level.breach_anim_node thread maps\_anim::anim_loop(var_2, "rog_intro", "stop_loop");
@@ -353,10 +353,10 @@ teleport_allies_to_comm_center_interior() {
 
 teleport_ally_1_to_comm_center_interior(var_0) {
   var_1 = [];
-  var_1[1] = getent("z_trans_ally_location_1", "targetname");
+  var_1[1] = getEnt("z_trans_ally_location_1", "targetname");
   var_2 = getnode("z_trans_ally_location_1_node", "targetname");
   level.allies[1] unlink();
-  level.allies[1] stopanimscripted();
+  level.allies[1] stopanimScripted();
   common_scripts\utility::waitframe();
   level.allies[1] setgoalnode(var_2);
 }
@@ -562,7 +562,7 @@ anim_enemies_non_combat_rate(var_0, var_1, var_2) {
   var_3 = "single anim";
   var_4 = level.scr_anim[var_1]["breach"];
   self setanim(var_4, 1.0, 0.2, var_2);
-  self animscripted(var_3, var_0.origin, var_0.angles, var_4);
+  self animScripted(var_3, var_0.origin, var_0.angles, var_4);
 }
 
 chair_guy_headshot(var_0) {
@@ -606,11 +606,11 @@ kill_anim_guy(var_0, var_1) {
 
   if(var_0 == "enemy_2") {
     if(isDefined(self) && isalive(self)) {
-      self stopanimscripted();
+      self stopanimScripted();
       wait 0.1;
       var_2 = spawn("script_origin", self.origin);
-      self linkto(var_2);
-      var_2 moveto(self.origin + (-5, 0, 0), 0.2);
+      self linkTo(var_2);
+      var_2 moveTo(self.origin + (-5, 0, 0), 0.2);
       wait 0.1;
       self kill();
       var_2 delete();
@@ -623,23 +623,23 @@ rotate_control_room_top(var_0, var_1) {
   var_2 = 20000;
   var_3 = 2000;
   var_4 = (-1, 1, -1);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_5 = var_4 * var_2 + var_0.origin;
-  var_0 moveto(var_5, var_3);
+  var_0 moveTo(var_5, var_3);
   var_0 rotatevelocity((5, 5, 0), var_3);
 }
 
 anim_head_faceplate(var_0) {
   var_1 = var_0 gettagorigin("J_Spine4");
   var_2 = var_0 gettagangles("J_Spine4");
-  var_3 = getent("enemy_head", "targetname");
-  var_4 = getent("enemy_inner_head", "targetname");
+  var_3 = getEnt("enemy_head", "targetname");
+  var_4 = getEnt("enemy_inner_head", "targetname");
   var_3.origin = var_1;
   var_3.angles = var_2;
   var_4.origin = var_1;
   var_4.angles = var_2;
-  var_3 linkto(var_0, "J_Spine4");
-  var_4 linkto(var_0, "J_Spine4");
+  var_3 linkTo(var_0, "J_Spine4");
+  var_4 linkTo(var_0, "J_Spine4");
 }
 
 anim_enemies(var_0, var_1) {
@@ -723,7 +723,7 @@ play_anim_kill_player_at_end(var_0, var_1) {
   var_5 = "single anim";
   var_6 = getstartorigin(var_1.origin, var_1.angles, var_3);
   var_7 = getstartangles(var_1.origin, var_1.angles, var_3);
-  self animscripted(var_5, var_1.origin, var_1.angles, var_3);
+  self animScripted(var_5, var_1.origin, var_1.angles, var_3);
   wait 0.1;
   self setanimtime(var_3, 0.04);
   var_4 = var_4 * 0.96;
@@ -765,7 +765,7 @@ enemy_death_anim(var_0, var_1) {
 
   if(var_0 == "enemy_5") {
     var_2.origin = var_2.origin + (30, 30, 7);
-    var_10 = getent("enemy_5_anim_loop_origin", "targetname");
+    var_10 = getEnt("enemy_5_anim_loop_origin", "targetname");
     var_8 = var_10.origin;
     var_9 = 10;
   }
@@ -774,10 +774,10 @@ enemy_death_anim(var_0, var_1) {
   var_12 = self gettagorigin("tag_origin");
   var_12 = self.origin;
   var_13 = spawn("script_origin", var_12);
-  self linkto(var_13);
+  self linkTo(var_13);
   var_11 = level.scr_anim[var_0]["breach_death"];
   var_14 = getanimlength(var_11);
-  var_13 moveto(var_8, var_14 - var_9, 0.5, 1.0);
+  var_13 moveTo(var_8, var_14 - var_9, 0.5, 1.0);
   maps\_anim::anim_single(var_7, "breach_death");
   self notify("stop_headshots");
   maps\_anim::anim_loop(var_7, "breach_death_loop");
@@ -830,7 +830,7 @@ delay_enemy_light_flicker(var_0) {
 }
 
 enemy_link_node_move(var_0, var_1) {
-  self moveto(var_0, var_1);
+  self moveTo(var_0, var_1);
 }
 
 enemy_shoot_at_player(var_0, var_1) {
@@ -953,7 +953,7 @@ anim_player_and_allies(var_0, var_1) {
   var_13["player_legs"] = var_12;
   thread play_anim_and_end_slowmo_logic(var_0, var_10, var_1, var_13);
   wait 0.1;
-  level.player setorigin(var_11.origin);
+  level.player setOrigin(var_11.origin);
   level.player setplayerangles(var_11.angles);
   level.player playerlinktodelta(var_11, "tag_player", 1, var_19, var_19, var_19, var_19, 1);
   level.player playersetgroundreferenceent(var_11);
@@ -973,7 +973,7 @@ anim_player_and_allies(var_0, var_1) {
   var_2 delete();
   var_3 delete();
   wait 0.1;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.1;
   wait 3.0;
   var_19 = 25;
@@ -1156,7 +1156,7 @@ set_flag_when_enemies_dead(var_0) {
 }
 
 create_anim_node() {
-  var_0 = getent("space_breach_anim_node", "targetname");
+  var_0 = getEnt("space_breach_anim_node", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
   common_scripts\utility::waitframe();
   var_1.angles = var_0.angles;

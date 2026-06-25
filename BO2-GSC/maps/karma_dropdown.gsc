@@ -37,7 +37,7 @@ skipto_dropdown2() {
   maps\karma_arrival::deconstruct_fxanims();
   level.ai_salazar = init_hero("salazar_pistol");
   bm_lift_left = setup_elevator("tower_lift_left", "tower_elevator_1", "cleanup_dropdown");
-  s_dest = getstruct("tower_lift_left_bottom", "targetname");
+  s_dest = getStruct("tower_lift_left_bottom", "targetname");
   flag_set("elevator_reached_construction");
   wait 0.05;
   bm_lift_left.origin = s_dest.origin;
@@ -51,7 +51,7 @@ main() {
   trigger_off("construction_battle_color_triggers", "script_noteworthy");
   level.ai_salazar thread ally_dropdown_think(getnode("salazar_dropdown_goal", "targetname"));
   flag_wait("dropdown_elevator_open");
-  bm_lift_left = getent("tower_lift_left", "targetname");
+  bm_lift_left = getEnt("tower_lift_left", "targetname");
   bm_lift_left thread elevator_move_doors(1, 1.0, 0.2, 0.5);
   ambush_guy_head_init();
   level thread run_scene_and_delete("elevator_encounter1");
@@ -89,11 +89,11 @@ main() {
   level.ai_salazar thread salazar_vent_wait();
   flag_wait("salazar_go_inside_spiderbot_started");
   trigger_wait("t_setup_spiderbot");
-  getent("clip_tower_lift_top", "targetname") solid();
-  getent("tower_elevator_1", "targetname") notify("elevator_flashlight_off");
+  getEnt("clip_tower_lift_top", "targetname") solid();
+  getEnt("tower_elevator_1", "targetname") notify("elevator_flashlight_off");
   bm_lift_left thread elevator_move_doors(0, 1.0, 0.2, 0.5);
   level thread run_scene_and_delete("tower_elevator_close");
-  getent("duffle_bag", "targetname") delete();
+  getEnt("duffle_bag", "targetname") delete();
   flag_set("setup_spiderbot");
   level.player playSound("evt_spiderbot_intro");
   level thread run_scene_and_delete("set_spiderbot_player");
@@ -138,7 +138,7 @@ ally_dropdown_think(nd_dest) {
 dropdown_objectives() {
   waittill_ai_group_ai_count("dropdown_patrol", 0);
   flag_wait("salazar_go_inside_spiderbot_started");
-  set_objective(level.obj_find_crc, getstruct("s_setup_spiderbot", "targetname"));
+  set_objective(level.obj_find_crc, getStruct("s_setup_spiderbot", "targetname"));
   flag_wait("setup_spiderbot");
   set_objective(level.obj_find_crc, undefined, "delete");
   flag_set("dropdown_end");
@@ -146,7 +146,7 @@ dropdown_objectives() {
 
 pry_open_doors(ai_callback) {
   thread run_scene_and_delete("tower_elevator_open");
-  e_fake_elevator = getent("construction_elevator", "targetname");
+  e_fake_elevator = getEnt("construction_elevator", "targetname");
   e_fake_elevator thread elevator_move_doors(1, 1.0, 0.5, 0.0, 1);
   level clientnotify("audio_line_on");
   level notify("occlude_off");
@@ -178,8 +178,8 @@ ambush_guy_head_init() {
 #using_animtree("generic_human");
 
 salazar_vent_wait() {
-  s_align = getstruct("align_spiderbot_gear", "targetname");
-  self set_goalradius(8);
+  s_align = getStruct("align_spiderbot_gear", "targetname");
+  self set_goalRadius(8);
   self setgoalpos(getstartorigin(s_align.origin, s_align.angles, %ch_karma_4_1_hotel_room_enter_harper), getstartangles(s_align.origin, s_align.angles, %ch_karma_4_1_hotel_room_enter_harper));
   self waittill("goal");
   flag_wait("salazar_goto_vent");
@@ -204,7 +204,7 @@ salazar_shoot(ent) {
   }
 
   level.dropdown_guy = undefined;
-  getent("clip_tower_lift_top", "targetname") notsolid();
+  getEnt("clip_tower_lift_top", "targetname") notsolid();
 }
 
 we_have_id(ent) {

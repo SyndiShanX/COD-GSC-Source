@@ -75,7 +75,7 @@ function function_29b682f8(localclientnum, oldval, newval, bnewent, binitialsnap
     self.time_to_wait = gettime() + 1000;
   }
 
-  self playrumbleonentity(bwasdemojump, "zm_plague_hound_bite_rumble");
+  self playRumbleOnEntity(bwasdemojump, "zm_plague_hound_bite_rumble");
   self playSound(bwasdemojump, #"hash_34a8404fc3e64767");
 }
 

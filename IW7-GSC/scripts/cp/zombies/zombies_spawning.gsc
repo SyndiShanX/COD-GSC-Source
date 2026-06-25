@@ -379,7 +379,7 @@ func_1071C(var_0) {
   if(var_0 > 0) {
     func_93E6(var_0);
     var_3 = [];
-    var_4 = scripts\engine\utility::getstruct("brute_hide_org", "targetname");
+    var_4 = scripts\engine\utility::getStruct("brute_hide_org", "targetname");
     var_5 = 0;
     while(var_5 < var_0) {
       var_6 = func_10719(var_4);
@@ -421,7 +421,7 @@ func_1071C(var_0) {
 move_to_spot(var_0) {
   var_1 = getclosestpointonnavmesh(var_0.origin);
   self dontinterpolate();
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
   self ghostskulls_complete_status(var_0.origin);
   self.precacheleaderboards = 0;
 }
@@ -1353,7 +1353,7 @@ func_2CFC() {
   var_0 = undefined;
   var_1 = get_scored_goon_spawn_location();
   if(isDefined(var_1)) {
-    var_2 = scripts\engine\utility::getstruct("brute_hide_org", "targetname");
+    var_2 = scripts\engine\utility::getStruct("brute_hide_org", "targetname");
     var_0 = var_2 spawn_wave_enemy("zombie_brute", 1);
     if(!isDefined(var_0)) {
       return 0;
@@ -1576,7 +1576,7 @@ func_172A(var_0) {
   var_4 = spawn("script_model", var_3);
   var_4 setModel("zombies_backpack");
   var_4.angles = var_0.angles;
-  var_4 linkto(var_0, var_3, var_1, var_2);
+  var_4 linkTo(var_0, var_3, var_1, var_2);
   var_0.var_8B9B = 1;
 }
 
@@ -1871,7 +1871,7 @@ func_53A9() {
     }
 
     if(var_0 > 3) {
-      self setorigin(self.origin + (0, 0, 5), 1);
+      self setOrigin(self.origin + (0, 0, 5), 1);
       var_0 = 0;
     }
   }
@@ -1910,7 +1910,7 @@ func_8637() {
   }
 
   var_1 = anglestoup(self.spawner.angles);
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_2 = -1 * var_1;
   var_2 = var_2 * var_0;
   var_3 = 0;
@@ -1935,24 +1935,24 @@ func_13F1D(var_0, var_1, var_2) {
   self endon("death");
   var_3 = spawn("script_origin", var_0);
   var_3.angles = self.spawner.angles;
-  self setorigin(var_0, 0);
+  self setOrigin(var_0, 0);
   self setplayerangles(self.spawner.angles);
-  self linkto(var_3);
+  self linkTo(var_3);
   self.var_AD1D = var_3;
   thread func_5173(var_3);
   var_4 = 2;
   if(!var_2) {
-    var_3 moveto(var_1, var_4, 0.1, 0.1);
+    var_3 moveTo(var_1, var_4, 0.1, 0.1);
     playFX(level._effect["drone_ground_spawn"], var_1, (0, 0, 1));
     wait(var_4);
   } else {
-    var_3 moveto(var_1, var_4, 0.1, 0.1);
+    var_3 moveTo(var_1, var_4, 0.1, 0.1);
     playFX(level._effect["drone_ground_spawn"], var_1, (0, 0, -1));
     wait(var_4);
     var_5 = scripts\common\trace::ray_trace(var_1 - (0, 0, 10), var_1 - (0, 0, 1000), self);
-    var_3 moveto(var_5["position"] + (0, 0, 10), 0.25, 0.1, 0.1);
+    var_3 moveTo(var_5["position"] + (0, 0, 10), 0.25, 0.1, 0.1);
     var_6 = (var_3.angles[0], var_3.angles[1], 0);
-    var_3 rotateto(var_6, 0.25, 0.1, 0.1);
+    var_3 rotateTo(var_6, 0.25, 0.1, 0.1);
     wait(0.25);
   }
 
@@ -2632,7 +2632,7 @@ func_A5B4() {
       }
 
       if(var_2 == 4) {
-        self setorigin(self.origin + (0, 0, 10), 0);
+        self setOrigin(self.origin + (0, 0, 10), 0);
       }
 
       if(var_2 > 5) {
@@ -3424,7 +3424,7 @@ func_CFB2(var_0) {
   var_1 = var_0 getplayerangles();
   var_2 = anglesToForward(var_1);
   var_3 = self.origin - var_0 getorigin();
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = vectordot(var_2, var_3);
   if(var_4 < 0.766) {
     return 0;

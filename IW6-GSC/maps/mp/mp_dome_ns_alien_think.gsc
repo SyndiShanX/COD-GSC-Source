@@ -48,7 +48,7 @@ setupAlienState() {
   self.Alien_GoalPos = get_closest(self.origin, self.PathNodeArray);
   self.allowCrouch = true;
 
-  self ScrAgentSetGoalRadius(24);
+  self ScrAgentSetgoalRadius(24);
 }
 
 init() {
@@ -323,7 +323,7 @@ UpdateMoveState() {
 }
 
 PickNewLocation() {
-  self.Alien_GoalPos = GetStruct(self.Alien_GoalPos.target, "targetname");
+  self.Alien_GoalPos = getStruct(self.Alien_GoalPos.target, "targetname");
 }
 
 GetMoveState(prevState) {
@@ -473,7 +473,7 @@ wantsToGrowlAtTarget() {
 
 getAttackPoint(enemy) {
   meToTarget = enemy.origin - self.origin;
-  meToTarget = VectorNormalize(meToTarget);
+  meToTarget = vectorNormalize(meToTarget);
 
   pathGoalPos = self GetPathGoalPos();
   closeEnough = self.attackOffset + 4;
@@ -730,7 +730,7 @@ watchFavoriteEnemyDeath() {
 OnDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   self.timeOfLastDamage = GetTime();
   if(isDefined(self.owner)) {
-    self.damagedOwnerToMe = VectorNormalize(self.origin - self.owner.origin);
+    self.damagedOwnerToMe = vectorNormalize(self.origin - self.owner.origin);
   }
 
   if(self ShouldPlayHitReaction(iDamage, sWeapon, sMeansOfDeath)) {

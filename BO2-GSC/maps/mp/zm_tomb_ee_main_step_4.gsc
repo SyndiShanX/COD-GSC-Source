@@ -60,19 +60,19 @@ exit_stage(success) {
 }
 
 mech_zombie_hole_search() {
-  s_goal = getstruct("ee_mech_hole_goal_0", "targetname");
+  s_goal = getStruct("ee_mech_hole_goal_0", "targetname");
 
   if(distance2dsquared(self.origin, s_goal.origin) < 250000) {
     self setvehgoalpos(s_goal.origin, 1, 2, 1);
     self waittill_any("near_goal", "force_goal", "reached_end_node");
-    s_goal = getstruct("ee_mech_hole_goal_1", "targetname");
+    s_goal = getStruct("ee_mech_hole_goal_1", "targetname");
     self setvehgoalpos(s_goal.origin, 1, 0, 1);
     self waittill_any("near_goal", "force_goal", "reached_end_node");
     wait 2;
-    s_goal = getstruct("ee_mech_hole_goal_2", "targetname");
+    s_goal = getStruct("ee_mech_hole_goal_2", "targetname");
     self setvehgoalpos(s_goal.origin, 1, 0, 1);
     self waittill_any("near_goal", "force_goal", "reached_end_node");
-    playsoundatposition("zmb_squest_maxis_folly", s_goal.origin);
+    playSoundAtPosition("zmb_squest_maxis_folly", s_goal.origin);
     maxissay("vox_maxi_drone_upgraded_3", self);
     flag_set("ee_quadrotor_disabled");
     self dodamage(200, self.origin);
@@ -168,7 +168,7 @@ ee_mechz_do_jump(s_spawn_pos) {
 
   self.not_interruptable = 1;
   self setfreecameralockonallowed(0);
-  self animscripted(self.origin, self.angles, "zm_fly_out");
+  self animScripted(self.origin, self.angles, "zm_fly_out");
   self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
   self ghost();
 
@@ -179,15 +179,15 @@ ee_mechz_do_jump(s_spawn_pos) {
   old_fx = self.fx_field;
   self thread maps\mp\zombies\_zm_spawner::zombie_eye_glow_stop();
   self fx_cleanup();
-  self animscripted(self.origin, self.angles, "zm_fly_hover");
+  self animScripted(self.origin, self.angles, "zm_fly_hover");
   wait(level.mechz_jump_delay);
-  s_landing_point = getstruct(s_spawn_pos.target, "targetname");
+  s_landing_point = getStruct(s_spawn_pos.target, "targetname");
 
   if(!isDefined(s_landing_point.angles)) {
     s_landing_point.angles = (0, 0, 0);
   }
 
-  self animscripted(s_landing_point.origin, s_landing_point.angles, "zm_fly_in");
+  self animScripted(s_landing_point.origin, s_landing_point.angles, "zm_fly_in");
   self show();
   self.fx_field = old_fx;
   self setclientfield("mechz_fx", self.fx_field);

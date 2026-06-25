@@ -806,7 +806,7 @@ _id_6BCF(var_0) {
       if(scripts\common\utility::iscp()) {
         var_1 = _id_664A();
       } else {
-        var_1 = scripts\engine\utility::getstruct(self.target, "targetname");
+        var_1 = scripts\engine\utility::getStruct(self.target, "targetname");
       }
     }
   }

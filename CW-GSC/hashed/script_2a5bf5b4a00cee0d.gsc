@@ -373,12 +373,12 @@ function function_4adce635(dir, var_594fccd3 = 100) {
     return;
   }
 
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self startragdoll(1);
   self.var_4a257c70 = 1;
 
   if(isDefined(dir) && function_a8975c67()) {
-    dir = vectornormalize(dir);
+    dir = vectorNormalize(dir);
     var_594fccd3 = math::clamp(var_594fccd3, 0, 200);
     self launchragdoll(dir * var_594fccd3);
     self namespace_e32bb68::function_3a59ec34("zmb_ragdoll_launched");
@@ -593,7 +593,7 @@ function function_2d920b3c(var_bf710acd = 0.6, clockwise = 1) {
 
   while(isDefined(self)) {
     self.var_c9f66f0d = self.angles + angle;
-    self rotateto(self.var_c9f66f0d, var_bf710acd);
+    self rotateTo(self.var_c9f66f0d, var_bf710acd);
     wait var_bf710acd;
   }
 }
@@ -613,9 +613,9 @@ function function_8b1ae345(time = 2, dist = 24, killnote) {
   bottom = self.origin - (0, 0, var_c421a5fd);
 
   while(true) {
-    self moveto(top, var_e9fa66c6, 0.2, 0.2);
+    self moveTo(top, var_e9fa66c6, 0.2, 0.2);
     wait var_e9fa66c6;
-    self moveto(bottom, var_e9fa66c6, 0.2, 0.2);
+    self moveTo(bottom, var_e9fa66c6, 0.2, 0.2);
     wait var_e9fa66c6;
   }
 }
@@ -821,7 +821,7 @@ function function_4f72130c() {
 }
 
 function function_6eacecf5(origin, dist = 1024) {
-  players = getplayers();
+  players = getPlayers();
   closest = arraysortclosest(players, origin, 1, 0, dist);
   return closest[0];
 }
@@ -833,7 +833,7 @@ function function_bd3709ce(origin, dist = 1024) {
 }
 
 function function_f3eab80e(origin, dist = 1024) {
-  ents = arraycombine(getplayers(), getactorarray());
+  ents = arraycombine(getPlayers(), getactorarray());
   closest = arraysortclosest(ents, origin, 1, 0, dist);
 
   if(!closest.size) {
@@ -941,10 +941,10 @@ function is_facing(facee, requireddot = 0.9) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > requireddot;
 }
@@ -1018,10 +1018,10 @@ function function_a8975c67(var_635abe53 = 0) {
 }
 
 function function_ef369bae() {
-  playercount = getplayers().size;
+  playercount = getPlayers().size;
 
   if(!isDefined(level.doa.var_39459d49) || level.doa.var_39459d49 == 0) {
-    level.doa.var_39459d49 = getplayers().size;
+    level.doa.var_39459d49 = getPlayers().size;
   }
 
   var_737826ee = math::clamp(level.doa.roundnumber, 1, level.doa.roundnumber);

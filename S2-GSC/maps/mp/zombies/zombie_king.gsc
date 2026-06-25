@@ -138,7 +138,7 @@ king_think_setup() {
   self.vo_drain_punished_int = 0;
   self.vo_taunt_int = 0;
   self.vo_lines_played = [];
-  self.stunnedclip = getent("clip_boss_torso", "targetname");
+  self.stunnedclip = getEnt("clip_boss_torso", "targetname");
   if(isDefined(self.stunnedclip)) {
     self.stunnedclip.original_org = self.stunnedclip.var_116;
     self.stunnedclip.original_ang = self.stunnedclip.var_1D;
@@ -2047,7 +2047,7 @@ geist_pull_attack_victim(param_00, param_01) {
     if(var_03 && !lib_0547::func_577E(param_00)) {
       param_00 shellshock("zm_heavy_hit", var_0D, var_0C);
       param_00 method_8308(0);
-      param_00 playrumbleonentity("damage_heavy");
+      param_00 playRumbleOnEntity("damage_heavy");
     }
 
     if(!var_03 && param_00 lib_0547::func_4B2C() && isDefined(var_02.pull_attractor.var_F6D)) {
@@ -2079,7 +2079,7 @@ pulse_drag_in_victim(param_00) {
   var_01 = 800;
   var_02 = self.var_116 - param_00.var_116;
   var_02 = (var_02[0], var_02[1], 0);
-  var_02 = var_01 * vectornormalize(var_02);
+  var_02 = var_01 * vectorNormalize(var_02);
   var_02 = (var_02[0], var_02[1], 125);
   param_00 setvelocity(var_02);
 }
@@ -2365,7 +2365,7 @@ geist_kneel_run(param_00) {
   var_01 setstance("crouch");
   var_01 setdemigod(1);
   var_01 shellshock("zm_heavy_hit", 1.4, 1);
-  var_01 playrumbleonentity("damage_heavy");
+  var_01 playRumbleOnEntity("damage_heavy");
   var_01 thread bow_head();
   var_01 waittill("drain_fake_start");
   var_01 thread geist_kneel_break_you(param_00);
@@ -2393,13 +2393,13 @@ bow_head() {
   var_01.var_1D = var_02;
   var_00.lerpposent = var_01;
   var_00 playerlinktoblend(var_00.lerpposent, "tag_origin", 0.25);
-  var_01 moveto(var_00.lerpposent.var_116, 0.05);
+  var_01 moveTo(var_00.lerpposent.var_116, 0.05);
   wait 0.05;
-  var_01 rotateto(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_00.lerpposent.var_116), 0.1);
+  var_01 rotateTo(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_00.lerpposent.var_116), 0.1);
   wait(0.1);
-  var_01 rotateto(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_00.lerpposent.var_116) + (60, 0, 0), 0.25);
+  var_01 rotateTo(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_00.lerpposent.var_116) + (60, 0, 0), 0.25);
   wait(1.2);
-  var_01 rotateto(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_00.lerpposent.var_116), 2.8, 1, 1.5);
+  var_01 rotateTo(vectortoangles(level.zombie_king gettagorigin("J_Spine4") - var_00.lerpposent.var_116), 2.8, 1, 1.5);
 }
 
 geist_kneel_break_you(param_00) {
@@ -2544,7 +2544,7 @@ enable_body_clip() {
   for(;;) {
     var_02 = self gettagorigin(var_00);
     var_03 = self gettagangles(var_00);
-    self.stunnedclip moveto(var_02, var_01);
+    self.stunnedclip moveTo(var_02, var_01);
     wait(var_01);
   }
 }
@@ -2559,7 +2559,7 @@ disable_body_clip() {
 body_clip_unresolved_collision(param_00) {
   var_01 = [];
   var_02 = param_00.var_116 - self.var_116;
-  var_02 = vectornormalize((var_02[0], var_02[1], 0));
+  var_02 = vectorNormalize((var_02[0], var_02[1], 0));
   var_03 = getclosestpointonnavmesh(param_00.var_116 + var_02 * 48);
   var_03 = getgroundposition(var_03, 40, 100, 50);
   var_04 = spawnStruct();
@@ -3080,7 +3080,7 @@ flame_wave_sound_runner_run(param_00, param_01) {
     var_0A = param_00.var_116 + var_08 * param_00.last_kill_radius + var_03;
     var_0A = (var_0A[0], var_0A[1], var_02.var_116[2]);
     param_01.var_116 = var_09;
-    param_01 moveto(var_0A, 0.2);
+    param_01 moveTo(var_0A, 0.2);
     wait(0.2);
   }
 }
@@ -4023,7 +4023,7 @@ melee_strike_notetrack() {
       continue;
     }
 
-    var_15 = vectornormalize(var_10.var_116 - var_02 * (1, 1, 0));
+    var_15 = vectorNormalize(var_10.var_116 - var_02 * (1, 1, 0));
     if(vectordot(var_15, var_05) <= var_06) {
       continue;
     }
@@ -4054,10 +4054,10 @@ run_melee_shellshock(param_00) {
   self endon("death");
   self shellshock("zm_heavy_hit", var_02, var_01);
   self method_8308(0);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_04 = self.var_116 - param_00;
   var_04 = (var_04[0], var_04[1], 0);
-  var_04 = var_03 * vectornormalize(var_04);
+  var_04 = var_03 * vectorNormalize(var_04);
   var_04 = (var_04[0], var_04[1], 125);
   wait(var_02);
   self setvelocity(var_04);
@@ -4504,7 +4504,7 @@ king_create_destination_path(param_00) {
   var_05 = getclosestpointonnavmesh(var_02, var_01);
   var_06 = getclosestpointonnavmesh(var_03, var_01);
   var_07 = var_01 method_857B(var_05, var_06);
-  var_08 = vectornormalize(var_03 - var_02);
+  var_08 = vectorNormalize(var_03 - var_02);
   for(var_09 = 1; var_09 < var_07.size - 1; var_09++) {
     var_0A = var_07[var_09];
     var_0B = var_0A - var_02;
@@ -4671,7 +4671,7 @@ reflect_bullet(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(maps\mp\_utility::func_5695(param_03)) {
-    var_05 = param_04 + vectornormalize(vectornormalize(param_01 getEye() - param_04) + func_7A43(0.9)) * 3000;
+    var_05 = param_04 + vectorNormalize(vectorNormalize(param_01 getEye() - param_04) + func_7A43(0.9)) * 3000;
     magicbullet(param_02, param_04, var_05, param_00);
   }
 }
@@ -4838,7 +4838,7 @@ king_control_for_rotation_animation(param_00, param_01) {
 
   var_08 = var_04 * var_06 - var_07;
   var_09 = (0, param_01, 0);
-  var_02.puck rotateto(var_09, var_08);
+  var_02.puck rotateTo(var_09, var_08);
   if(var_02.rotation_target.var_1B9 == "ent") {
     var_02 start_manual_rotation();
   }
@@ -5042,7 +5042,7 @@ manual_move_motion(param_00) {
     param_00.var_9255 = var_01.puck.var_116;
     param_00.var_9297 = gettime() / 1000;
     param_00.var_36AD = param_00.var_9297 + var_03;
-    var_01.puck moveto(param_00.var_116, var_03);
+    var_01.puck moveTo(param_00.var_116, var_03);
     wait(var_03);
     wait 0.05;
   }
@@ -5096,7 +5096,7 @@ pause_manual_move() {
     return;
   }
 
-  var_00.puck moveto(var_00.puck.var_116, 0.1);
+  var_00.puck moveTo(var_00.puck.var_116, 0.1);
   if(isDefined(var_00.current_move_target)) {
     var_00 notify("manual_move_end", "result_paused");
   }
@@ -5163,7 +5163,7 @@ handle_manual_rotation() {
     var_05 = (0, var_01, 0);
     if(var_04 > 0) {
       var_04 = max(0.2, var_04);
-      var_00.puck rotateto(var_05, var_04);
+      var_00.puck rotateTo(var_05, var_04);
       var_00.rotation_target.last_yaw_target = var_01;
       var_00.rotation_target.last_end_time = gettime() / 1000 + var_04;
       wait(0.2);
@@ -5201,7 +5201,7 @@ pause_manual_rotation() {
   }
 
   var_00 common_scripts\utility::func_3796("manual_rotate_enabled");
-  var_00.puck rotateto(var_00.puck.var_1D, 0.05);
+  var_00.puck rotateTo(var_00.puck.var_1D, 0.05);
 }
 
 get_desired_rotation_yaw() {

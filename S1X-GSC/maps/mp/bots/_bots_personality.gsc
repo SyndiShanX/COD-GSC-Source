@@ -211,7 +211,7 @@ update_personality_default() {
 
     if(var_1) {
       var_2 = distancesquared(self.origin, var_0);
-      var_3 = self botgetscriptgoalradius();
+      var_3 = self botgetscriptgoalRadius();
       var_4 = var_3 * 2;
 
       if(isDefined(self.bot_memory_goal) && var_2 < var_4 * var_4) {
@@ -730,7 +730,7 @@ find_ambush_node(var_0, var_1) {
   self.node_ambushing_from = var_6;
   self.ambush_end = gettime() + self.ambush_duration;
   self.node_ambushing_from.bot_ambush_end = self.ambush_end;
-  var_8 = vectornormalize(self.point_to_ambush - self.node_ambushing_from.origin);
+  var_8 = vectorNormalize(self.point_to_ambush - self.node_ambushing_from.origin);
   var_9 = vectortoangles(var_8);
   self.ambush_yaw = var_9[1];
   return 1;

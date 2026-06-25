@@ -122,10 +122,10 @@ function watchforexplosion(localclientnum) {
       if(!isDefined(cameraangles)) {
         continue;
       }
-      forwardvec = vectornormalize(anglesToForward(cameraangles));
-      upvec = vectornormalize(anglestoup(cameraangles));
-      rightvec = vectornormalize(anglestoright(cameraangles));
-      explosionvec = vectornormalize(position - self getcampos());
+      forwardvec = vectorNormalize(anglesToForward(cameraangles));
+      upvec = vectorNormalize(anglestoup(cameraangles));
+      rightvec = vectorNormalize(anglestoright(cameraangles));
+      explosionvec = vectorNormalize(position - self getcampos());
       if(vectordot(forwardvec, explosionvec) > 0) {
         trace = bulletTrace(getlocalclienteyepos(localclientnum), position, 0, self);
         if(trace["fraction"] >= 0.9) {

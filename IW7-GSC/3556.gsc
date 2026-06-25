@@ -70,11 +70,11 @@ func_4D8D(var_0, var_1, var_2) {
     var_0 setstance("crouch");
   }
 
-  var_0 playerlinkto(var_2, "tag_origin");
+  var_0 playerlinkTo(var_2, "tag_origin");
   func_4D8F("dash_dust");
   self playlocalsound("synaptic_dash");
   self playSound("synaptic_dash_npc");
-  var_2 moveto(var_1, 0.35, 0.01, 0);
+  var_2 moveTo(var_1, 0.35, 0.01, 0);
   wait(0.35);
   if(0) {
     var_0 func_4D87();

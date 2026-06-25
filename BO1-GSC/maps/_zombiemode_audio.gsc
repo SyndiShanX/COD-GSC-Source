@@ -501,7 +501,7 @@ oh_shit_vox() {
   self endon("death");
   while(1) {
     wait(1);
-    players = getplayers();
+    players = getPlayers();
     zombs = GetAISpeciesArray("axis");
     if(players.size > 1) {
       close_zombs = 0;
@@ -569,7 +569,7 @@ create_and_play_dialog(category, type, response, force_variant, override) {
   }
 }
 do_player_playvox(prefix, index, sound_to_play, waittime, category, type, override) {
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
@@ -613,7 +613,7 @@ setup_response_line(player, index, category, type) {
   return;
 }
 setup_hero_rival(player, hero, rival, category, type) {
-  players = getplayers();
+  players = getPlayers();
   playHero = false;
   playRival = false;
   hero_player = undefined;
@@ -885,7 +885,7 @@ perks_a_cola_jingle_timer() {
   }
 }
 play_jingle_or_stinger(perksacola) {
-  playsoundatposition("evt_electrical_surge", self.origin);
+  playSoundAtPosition("evt_electrical_surge", self.origin);
   if(!isDefined(self.jingle_is_playing)) {
     self.jingle_is_playing = 0;
   }
@@ -907,13 +907,13 @@ play_random_broken_sounds() {
   if(self.script_sound == "mus_perks_revive_jingle") {
     while(1) {
       wait(randomfloatrange(7, 18));
-      playsoundatposition("zmb_perks_broken_jingle", self.origin);
-      playsoundatposition("evt_electrical_surge", self.origin);
+      playSoundAtPosition("zmb_perks_broken_jingle", self.origin);
+      playSoundAtPosition("evt_electrical_surge", self.origin);
     }
   } else {
     while(1) {
       wait(randomfloatrange(7, 18));
-      playsoundatposition("evt_electrical_surge", self.origin);
+      playSoundAtPosition("evt_electrical_surge", self.origin);
     }
   }
 }

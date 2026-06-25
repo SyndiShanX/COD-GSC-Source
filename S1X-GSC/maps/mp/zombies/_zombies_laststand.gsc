@@ -487,8 +487,8 @@ laststandrevivezombie(var_0, var_1, var_2, var_3, var_4) {
   thread laststandmonitorabandonment();
   var_5 = spawn("script_model", self.origin);
   var_5 setModel("tag_origin");
-  var_5 setcursorhint("HINT_NOICON");
-  var_5 sethintstring(&"PLATFORM_REVIVE");
+  var_5 setCursorHint("HINT_NOICON");
+  var_5 setHintString(&"PLATFORM_REVIVE");
   var_5 makeusable();
   var_5.inuse = 0;
   var_5.curprogress = 0;
@@ -497,7 +497,7 @@ laststandrevivezombie(var_0, var_1, var_2, var_3, var_4) {
   var_5.id = "last_stand";
   var_5.targetname = "revive_trigger";
   var_5.owner = self;
-  var_5 linkto(self, "tag_origin", (0, 0, 20), (0, 0, 0));
+  var_5 linkTo(self, "tag_origin", (0, 0, 20), (0, 0, 0));
   var_5 thread deleteonreviveordeathordisconnect();
   self.reviveicon = createreviveicon("hint_health_zm", 8, 8, (0.5, 1, 0.99));
   thread laststandupdatereviveiconcolorzombies(var_5, 30);
@@ -546,7 +546,7 @@ createreviveicon(var_0, var_1, var_2, var_3) {
   var_4 = newteamhudelem(self.team);
   var_4 setshader(var_0, var_1, var_2);
   var_4 setwaypoint(1, 1);
-  var_4 settargetent(self);
+  var_4 settargetEnt(self);
   var_4.color = var_3;
   return var_4;
 }
@@ -1301,7 +1301,7 @@ hostzombieheartbeat(var_0) {
   var_2 = 0;
 
   while(isDefined(var_2) && var_2 < var_1.size) {
-    var_3 = hostzobieheartbeatgetent();
+    var_3 = hostzobieheartbeatgetEnt();
     var_3 playsoundonmovingent(var_1[var_2]);
     var_3 scalevolume(1);
     var_3.inuse = 1;
@@ -1316,7 +1316,7 @@ hostzombieheartbeat(var_0) {
   }
 }
 
-hostzobieheartbeatgetent() {
+hostzobieheartbeatgetEnt() {
   var_0 = undefined;
   var_1 = getEntArray("infected_heart_beat", "targetname");
 

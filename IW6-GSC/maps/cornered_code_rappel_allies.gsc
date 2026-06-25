@@ -922,7 +922,7 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
         var_13 = self.center_volume;
 
         if(var_0 == "combat") {
-          var_14 = common_scripts\utility::getstruct(self.center_volume.targetname + "_struct_" + var_1, "targetname");
+          var_14 = common_scripts\utility::getStruct(self.center_volume.targetname + "_struct_" + var_1, "targetname");
           var_15 = distance2dsquared(level.player.origin, var_14.origin);
           var_11 = var_15 > self.distance_from_next_volume_sq;
         } else {
@@ -938,7 +938,7 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
         var_13 = self.in_volume;
 
         if(var_0 == "combat") {
-          var_14 = common_scripts\utility::getstruct(self.in_volume.targetname + "_struct_" + var_1, "targetname");
+          var_14 = common_scripts\utility::getStruct(self.in_volume.targetname + "_struct_" + var_1, "targetname");
           var_15 = distance2dsquared(level.player.origin, var_14.origin);
           var_11 = var_15 > self.distance_from_next_volume_sq;
         } else {
@@ -1027,15 +1027,15 @@ _ally_set_last_volume() {
 
 ally_rappel_movement_setup(var_0, var_1) {
   if(var_0 == "stealth") {
-    self.center_volume = getent(self.animname + "_stealth_in", "targetname");
-    self.out_volume = getent(self.animname + "_stealth_out", "targetname");
-    self.in_volume = getent(self.animname + "_stealth_center", "targetname");
+    self.center_volume = getEnt(self.animname + "_stealth_in", "targetname");
+    self.out_volume = getEnt(self.animname + "_stealth_out", "targetname");
+    self.in_volume = getEnt(self.animname + "_stealth_center", "targetname");
     _ally_set_last_volume();
   } else {
-    self.center_volume = getent(self.animname + "_center_combat", "targetname");
-    self.in_volume = getent(self.animname + "_in_combat", "targetname");
-    self.out_volume = getent(self.animname + "_out_combat", "targetname");
-    self.last_volume = getent(self.animname + "_in_combat", "targetname");
+    self.center_volume = getEnt(self.animname + "_center_combat", "targetname");
+    self.in_volume = getEnt(self.animname + "_in_combat", "targetname");
+    self.out_volume = getEnt(self.animname + "_out_combat", "targetname");
+    self.last_volume = getEnt(self.animname + "_in_combat", "targetname");
   }
 
   if(self.animname == "rorke") {
@@ -1229,26 +1229,26 @@ animate_after_movement(var_0, var_1) {
 ally_rappel_get_rope_start(var_0) {
   if(var_0 == "stealth") {
     if(self.animname == "rorke") {
-      var_1 = common_scripts\utility::getstruct("rorke_rope_ref_stealth", "targetname");
+      var_1 = common_scripts\utility::getStruct("rorke_rope_ref_stealth", "targetname");
       return var_1;
     } else {
-      var_1 = common_scripts\utility::getstruct("baker_rope_ref_stealth", "targetname");
+      var_1 = common_scripts\utility::getStruct("baker_rope_ref_stealth", "targetname");
       return var_1;
     }
   } else if(var_0 == "inverted") {
     if(self.animname == "rorke") {
-      var_1 = common_scripts\utility::getstruct("rorke_rope_ref_inverted", "targetname");
+      var_1 = common_scripts\utility::getStruct("rorke_rope_ref_inverted", "targetname");
       return var_1;
     } else {
-      var_1 = common_scripts\utility::getstruct("baker_rope_ref_inverted", "targetname");
+      var_1 = common_scripts\utility::getStruct("baker_rope_ref_inverted", "targetname");
       return var_1;
     }
   } else if(var_0 == "combat") {
     if(self.animname == "rorke") {
-      var_1 = common_scripts\utility::getstruct("rorke_rope_ref_combat", "targetname");
+      var_1 = common_scripts\utility::getStruct("rorke_rope_ref_combat", "targetname");
       return var_1;
     } else {
-      var_1 = common_scripts\utility::getstruct("baker_rope_ref_combat", "targetname");
+      var_1 = common_scripts\utility::getStruct("baker_rope_ref_combat", "targetname");
       return var_1;
     }
   }
@@ -1262,7 +1262,7 @@ ally_rappel_setup_rope(var_0, var_1) {
   var_3.angles = var_1.angles + (0, -90, 0);
   var_3 setModel("generic_prop_raven");
   var_3 useanimtree(#animtree);
-  var_3 linkto(var_2, "tag_origin");
+  var_3 linkTo(var_2, "tag_origin");
   self.rappel_physical_rope_animation_origin = var_3;
   self.rappel_physical_rope_origin = var_2;
   self.rope_unwind_anim = % cnd_rappel_inv_top_rope_unwind;
@@ -1276,7 +1276,7 @@ ally_rappel_setup_rope(var_0, var_1) {
   self.cnd_rappel_tele_rope = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
   self.cnd_rappel_tele_rope.origin = self.rappel_physical_rope_animation_origin.origin;
   self.cnd_rappel_tele_rope.angles = (0, 0, 0);
-  self.cnd_rappel_tele_rope linkto(self.rappel_physical_rope_animation_origin, "J_prop_1", (0, 0, 0), var_4);
+  self.cnd_rappel_tele_rope linkTo(self.rappel_physical_rope_animation_origin, "J_prop_1", (0, 0, 0), var_4);
   self.cnd_rappel_tele_rope setanim(self.rope_unwind_anim, 1, 0, 0);
 }
 

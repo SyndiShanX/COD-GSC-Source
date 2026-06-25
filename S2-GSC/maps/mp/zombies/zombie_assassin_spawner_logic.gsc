@@ -326,14 +326,14 @@ set_new_assassin_origin(param_00) {
 
   var_02 = spawn("script_model", self.var_116);
   var_02 setModel("tag_origin");
-  self linkto(var_02);
+  self linkTo(var_02);
   var_02 thread lib_0547::func_2D19(self);
   while(!lib_053C::humanoid_has_valid_targets(1)) {
     wait 0.05;
   }
 
   self unlink();
-  self setorigin(var_01.var_116);
+  self setOrigin(var_01.var_116);
   if(isDefined(var_02)) {
     var_02 delete();
   }

@@ -35,7 +35,7 @@ init_local() {
   maps\_utility::ent_flag_init("moving");
   maps\_utility::ent_flag_init("lights");
   self.light_tag = common_scripts\utility::spawn_tag_origin();
-  self.light_tag linkto(self, "TAG_BIG_LIGHT1", (0, 0, 0), (0, 0, 0));
+  self.light_tag linkTo(self, "TAG_BIG_LIGHT1", (0, 0, 0), (0, 0, 0));
 
   if(self.model == "vehicle_mini_sub_iw6") {
     self.moving_unload = 1;

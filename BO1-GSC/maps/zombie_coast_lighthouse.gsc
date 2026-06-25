@@ -24,10 +24,10 @@ lighthouse_wait_for_power() {
     wait(randomintrange(100, 120));
     clientnotify("lhfo");
     exploder(310);
-    playsoundatposition("zmb_pap_lightning_1", (0, 0, 0));
+    playSoundAtPosition("zmb_pap_lightning_1", (0, 0, 0));
     wait(15);
     exploder(310);
-    playsoundatposition("zmb_pap_lightning_2", (0, 0, 0));
+    playSoundAtPosition("zmb_pap_lightning_2", (0, 0, 0));
     clientnotify("lhfd");
     pack_a_punch_move_to_spot();
     wait(120);
@@ -37,47 +37,47 @@ lighthouse_wait_for_power() {
   }
 }
 pack_a_punch_init() {
-  pap_machine_trig = getent("zombie_vending_upgrade", "targetname");
-  pap_bump_trig = getent("pack_bump_trig", "script_noteworthy");
-  pap_bump_trig enablelinkto();
-  pap_machine_trig enablelinkto();
+  pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
+  pap_bump_trig = getEnt("pack_bump_trig", "script_noteworthy");
+  pap_bump_trig enablelinkTo();
+  pap_machine_trig enablelinkTo();
 }
 pack_a_punch_move_to_spot() {
   level.pap_moving = true;
-  pap_clip = getent("zombie_vending_upgrade_clip", "targetname");
+  pap_clip = getEnt("zombie_vending_upgrade_clip", "targetname");
   pap_clip notsolid();
-  pap_machine_trig = getent("zombie_vending_upgrade", "targetname");
+  pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
   pap_pieces = getEntArray(pap_machine_trig.target, "targetname");
-  pap_bump_trig = getent("pack_bump_trig", "script_noteworthy");
-  pap_jingle_struct = getstruct("pack_jingle_struct", "script_noteworthy");
+  pap_bump_trig = getEnt("pack_bump_trig", "script_noteworthy");
+  pap_jingle_struct = getStruct("pack_jingle_struct", "script_noteworthy");
   link_ent = spawn("script_origin", pap_clip.origin);
   link_ent.angles = pap_jingle_struct.angles;
-  pap_machine_trig linkto(link_ent);
-  pap_bump_trig linkto(link_ent);
-  pap_clip linkto(link_ent);
+  pap_machine_trig linkTo(link_ent);
+  pap_bump_trig linkTo(link_ent);
+  pap_clip linkTo(link_ent);
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getent(pap_pieces[i].target, "targetname") linkto(link_ent);
-      getent(pap_pieces[i].target, "targetname") hide();
+      getEnt(pap_pieces[i].target, "targetname") linkTo(link_ent);
+      getEnt(pap_pieces[i].target, "targetname") hide();
     }
-    pap_pieces[i] linkto(link_ent);
+    pap_pieces[i] linkTo(link_ent);
     pap_pieces[i] hide();
   }
-  link_ent moveto(link_ent.origin + (0, 0, -1500), .5);
+  link_ent moveTo(link_ent.origin + (0, 0, -1500), .5);
   new_spot = get_new_pack_spot();
   assertex(isDefined(new_spot.script_string), "structs placed for the packapunch machine neeed to have a script_string value to contain client notification string");
   level.current_pap_spot = new_spot;
   clientnotify(new_spot.script_string);
-  link_ent moveto(new_spot.origin + (0, 0, -350), .05);
-  link_ent rotateto(new_spot.angles, .1);
+  link_ent moveTo(new_spot.origin + (0, 0, -350), .05);
+  link_ent rotateTo(new_spot.angles, .1);
   link_ent waittill("rotatedone");
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getent(pap_pieces[i].target, "targetname") show();
+      getEnt(pap_pieces[i].target, "targetname") show();
     }
     pap_pieces[i] show();
   }
-  link_ent moveto(new_spot.origin, 5);
+  link_ent moveTo(new_spot.origin, 5);
   link_ent playSound("zmb_pap_rise");
   link_ent thread pap_rise_fx();
   link_ent thread pap_wobble();
@@ -86,13 +86,13 @@ pack_a_punch_move_to_spot() {
   do_packapunch_fx();
   link_ent waittill("movedone");
   wait(.3);
-  link_ent rotateto(new_spot.angles, .2);
+  link_ent rotateTo(new_spot.angles, .2);
   link_ent waittill("rotatedone");
   pap_machine_trig unlink();
   pap_bump_trig unlink();
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getent(pap_pieces[i].target, "targetname") unlink();
+      getEnt(pap_pieces[i].target, "targetname") unlink();
     }
     pap_pieces[i] unlink();
   }
@@ -106,7 +106,7 @@ pap_wobble() {
   self endon("movedone");
   self.og_angles = self.angles;
   while(1) {
-    self rotateto(self.og_angles + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(-10, 10)), .2);
+    self rotateTo(self.og_angles + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(-10, 10)), .2);
     wait(.2);
   }
 }
@@ -162,34 +162,34 @@ stop_packapunch_fx() {
 pack_a_punch_hide() {
   level.pap_moving = true;
   stop_packapunch_fx();
-  pap_clip = getent("zombie_vending_upgrade_clip", "targetname");
+  pap_clip = getEnt("zombie_vending_upgrade_clip", "targetname");
   pap_clip notsolid();
-  pap_machine_trig = getent("zombie_vending_upgrade", "targetname");
+  pap_machine_trig = getEnt("zombie_vending_upgrade", "targetname");
   pap_pieces = getEntArray(pap_machine_trig.target, "targetname");
-  pap_bump_trig = getent("pack_bump_trig", "script_noteworthy");
-  pap_jingle_struct = getstruct("pack_jingle_struct", "script_noteworthy");
+  pap_bump_trig = getEnt("pack_bump_trig", "script_noteworthy");
+  pap_jingle_struct = getStruct("pack_jingle_struct", "script_noteworthy");
   link_ent = spawn("script_origin", pap_machine_trig.origin);
   link_ent.angles = pap_jingle_struct.angles;
-  pap_machine_trig linkto(link_ent);
-  pap_bump_trig linkto(link_ent);
-  pap_clip linkto(link_ent);
+  pap_machine_trig linkTo(link_ent);
+  pap_bump_trig linkTo(link_ent);
+  pap_clip linkTo(link_ent);
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getent(pap_pieces[i].target, "targetname") linkto(link_ent);
+      getEnt(pap_pieces[i].target, "targetname") linkTo(link_ent);
     }
-    pap_pieces[i] linkto(link_ent);
+    pap_pieces[i] linkTo(link_ent);
   }
-  link_ent moveto(link_ent.origin + (0, 0, -350), 5);
+  link_ent moveTo(link_ent.origin + (0, 0, -350), 5);
   link_ent playSound("zmb_pap_lower");
   link_ent thread pap_rise_fx();
   wait(1);
   level thread replace_pap_debris();
   link_ent waittill("movedone");
-  link_ent moveto(link_ent.origin + (0, 0, -1500), .05);
+  link_ent moveTo(link_ent.origin + (0, 0, -1500), .05);
   link_ent waittill("movedone");
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getent(pap_pieces[i].target, "targetname") hide();
+      getEnt(pap_pieces[i].target, "targetname") hide();
     }
     pap_pieces[i] hide();
   }
@@ -197,7 +197,7 @@ pack_a_punch_hide() {
   pap_bump_trig unlink();
   for(i = 0; i < pap_pieces.size; i++) {
     if(isDefined(pap_pieces[i].target)) {
-      getent(pap_pieces[i].target, "targetname") unlink();
+      getEnt(pap_pieces[i].target, "targetname") unlink();
     }
     pap_pieces[i] unlink();
   }
@@ -213,11 +213,11 @@ replace_pap_debris() {
     return undefined;
   }
   playFX(level._effect["rise_burst_water"], level.current_pap_spot.origin);
-  debris = getent(level.current_pap_spot.target, "targetname");
+  debris = getEnt(level.current_pap_spot.target, "targetname");
   if(isDefined(debris)) {
     debris show();
     if(isDefined(debris._hidden)) {
-      debris moveto(debris.origin + (0, 0, 200), 3);
+      debris moveTo(debris.origin + (0, 0, 200), 3);
       debris._hidden = undefined;
     }
   }
@@ -227,10 +227,10 @@ hide_pap_debris() {
     return undefined;
   }
   playFX(level._effect["rise_burst_water"], level.current_pap_spot.origin);
-  debris = getent(level.current_pap_spot.target, "targetname");
+  debris = getEnt(level.current_pap_spot.target, "targetname");
   if(isDefined(debris)) {
     debris._hidden = true;
-    debris moveto(debris.origin + (0, 0, -200), 3);
+    debris moveTo(debris.origin + (0, 0, -200), 3);
     wait(3);
     debris hide();
   }

@@ -28,11 +28,11 @@ initializepower() {
 precache_models() {}
 
 elecswitchbuildable() {
-  lever = getent("powerswitch_p6_zm_buildable_pswitch_lever", "targetname");
-  hand = getent("powerswitch_p6_zm_buildable_pswitch_hand", "targetname");
-  hand linkto(lever);
+  lever = getEnt("powerswitch_p6_zm_buildable_pswitch_lever", "targetname");
+  hand = getEnt("powerswitch_p6_zm_buildable_pswitch_hand", "targetname");
+  hand linkTo(lever);
   hand hide();
-  getent("powerswitch_p6_zm_buildable_pswitch_body", "targetname") hide();
+  getEnt("powerswitch_p6_zm_buildable_pswitch_body", "targetname") hide();
   lever hide();
   wait_for_buildable("powerswitch");
 }
@@ -40,20 +40,20 @@ elecswitchbuildable() {
 electricswitch() {
   flag_init("switches_on");
   level thread wait_for_power();
-  trig = getent("powerswitch_buildable_trigger_power", "targetname");
+  trig = getEnt("powerswitch_buildable_trigger_power", "targetname");
   trig setinvisibletoall();
   elecswitchbuildable();
-  master_switch = getent("powerswitch_p6_zm_buildable_pswitch_lever", "targetname");
+  master_switch = getEnt("powerswitch_p6_zm_buildable_pswitch_lever", "targetname");
 
   while(true) {
-    trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
+    trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
     trig setvisibletoall();
     trig waittill("trigger", user);
     trig setinvisibletoall();
     master_switch rotateroll(-90, 0.3);
     master_switch playSound("zmb_switch_flip");
     master_switch waittill("rotatedone");
-    playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+    playFX(level._effect["switch_sparks"], getStruct("elec_switch_fx", "targetname").origin);
     master_switch playSound("zmb_turn_on");
     level.power_event_in_progress = 1;
     level thread power_event_rumble_and_quake();
@@ -71,7 +71,7 @@ electricswitch() {
       user maps\mp\zombies\_zm_stats::increment_player_stat("power_turnedon");
     }
 
-    trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH_OFF");
+    trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH_OFF");
     trig setvisibletoall();
     trig waittill("trigger", user);
     trig setinvisibletoall();
@@ -349,7 +349,7 @@ raisegate(degrees) {
 }
 
 powerevent() {
-  reactor_core_mover = getent("core_mover", "targetname");
+  reactor_core_mover = getEnt("core_mover", "targetname");
   reactor_core_audio = spawn("script_origin", reactor_core_mover.origin);
 
   if(!isDefined(reactor_core_mover)) {
@@ -379,7 +379,7 @@ powerevent() {
     flag_waitopen("switches_on");
     thread dropreactordoors();
     thread raisereactordoors();
-    playsoundatposition("zmb_power_off_quad", (0, 0, 0));
+    playSoundAtPosition("zmb_power_off_quad", (0, 0, 0));
     reactor_core_mover playSound("zmb_power_rise_start");
     reactor_core_mover playLoopSound("zmb_power_rise_loop", 0.75);
     reactor_core_mover thread coremove(power_event_time, 1);
@@ -392,7 +392,7 @@ powerevent() {
 }
 
 corerotate(time) {
-  self rotateyaw(180, time);
+  self rotateYaw(180, time);
 }
 
 coremove(time, down) {
@@ -404,7 +404,7 @@ coremove(time, down) {
 }
 
 blockstairs() {
-  stairs_blocker = getent("reactor_core_stairs_blocker", "targetname");
+  stairs_blocker = getEnt("reactor_core_stairs_blocker", "targetname");
 
   if(!isDefined(stairs_blocker)) {
     return;
@@ -419,10 +419,10 @@ linkentitiestocoremover(reactor_core_mover) {
     next_ent = core_entities[i];
 
     if(next_ent.classname == "trigger_use_touch") {
-      next_ent enablelinkto();
+      next_ent enablelinkTo();
     }
 
-    next_ent linkto(reactor_core_mover, "tag_origin");
+    next_ent linkTo(reactor_core_mover, "tag_origin");
   }
 }
 
@@ -435,7 +435,7 @@ dropreactordoors() {
   for(i = 0; i < doors.size; i++) {
     next_door = doors[i];
     next_door movez(-128, 1.0);
-    next_door disconnectpaths();
+    next_door disconnectPaths();
   }
 }
 
@@ -490,7 +490,7 @@ bus_station_pa_vox() {
     level.station_pa_vox = array_randomize(level.station_pa_vox);
 
     foreach(line in level.station_pa_vox) {
-      playsoundatposition(line, (-6848, 5056, 56));
+      playSoundAtPosition(line, (-6848, 5056, 56));
       wait(randomintrange(12, 15));
     }
 

@@ -348,7 +348,7 @@ blocker_hive_burn(attacker) {
   interval_wait = burn_time / samples;
   interval_damage = total_damage / samples;
 
-  pos = self.origin + (VectorNormalize(anglesToForward(self.angles)) * 60) - (0, 0, 20);
+  pos = self.origin + (vectorNormalize(anglesToForward(self.angles)) * 60) - (0, 0, 20);
 
   self.gasFire = SpawnFx(level._effect["Fire_Cloud_Blocker_Hive"], pos);
   triggerFx(self.gasFire);
@@ -490,7 +490,7 @@ disable_other_strongholds() {
       }
 
       stronghold_loc MakeUnusable();
-      stronghold_loc SetHintString("");
+      stronghold_loc setHintString("");
       stronghold_loc notify("stop_listening");
     }
   }
@@ -722,7 +722,7 @@ select_hives(select_blocker_hive) {
 
 remove_unused_hives(removed_hives) {
   foreach(hive in removed_hives) {
-    location_ent = getent(hive, "target");
+    location_ent = getEnt(hive, "target");
     assertEx(isDefined(location_ent), "Invalid hive chosen to remove: " + hive);
     location_ent notify("stop_listening");
     location_ent thread play_hive_scriptable_animations("remove", undefined, undefined, false);
@@ -786,7 +786,7 @@ warn_all_players(warn_delay, earthquake_intensity) {
 warn_player(earthquake_intensity) {
   Earthquake(earthquake_intensity, 3, self.origin, 300);
   self PlayLocalSound("pre_quake_mtl_groan");
-  self PlayRumbleOnEntity("heavygun_fire");
+  self playRumbleOnEntity("heavygun_fire");
 }
 
 init_hive_locs() {
@@ -858,7 +858,7 @@ init_hive_locs() {
         location_ent thread init_blocker_hive_animation_state();
 
         location_ent MakeUnusable();
-        location_ent SetHintString("");
+        location_ent setHintString("");
       }
     }
 

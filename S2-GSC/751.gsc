@@ -1076,7 +1076,7 @@ lib_02EF::func_0709(param_00, param_01, param_02, param_03, param_04) {
 
         lib_02EF::func_070D(param_00, param_01, param_02) {
           var_03 = spawn("script_origin", self.var_0116);
-          var_03 linkto(self, param_00.var_95A6, param_00.var_6A15, (0, 0, 0));
+          var_03 linkTo(self, param_00.var_95A6, param_00.var_6A15, (0, 0, 0));
           var_03 method_808C();
           return var_03;
         }
@@ -1321,7 +1321,7 @@ lib_02EF::func_0709(param_00, param_01, param_02, param_03, param_04) {
             self.var_05D1.var_36ED = var_08 + param_00;
             self.var_05D1.var_8F4D = 0;
             self.var_05D1.var_8F40 = spawn("script_origin", self.var_0116);
-            self.var_05D1.var_8F40 linkto(self);
+            self.var_05D1.var_8F40 linkTo(self);
           }
 
           thread lib_02EF::func_0719(param_00, param_01, param_02, param_04, param_05, param_06, param_07);

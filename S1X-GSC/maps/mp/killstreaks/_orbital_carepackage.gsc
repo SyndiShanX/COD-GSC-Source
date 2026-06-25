@@ -147,7 +147,7 @@ capsule_damage(damage, origin1, origin2, radius, killTeam, attacker) {
   assert(radius > 0);
 
   delta = origin2 - origin1;
-  deltaNml = VectorNormalize(delta);
+  deltaNml = vectorNormalize(delta);
   dist = Length(delta);
   radiusSq = radius * radius;
 
@@ -299,7 +299,7 @@ monitorDropInternal(player, podrocket, DropPod, droptype, crateType, weaponType)
     player thread playerMonitorForDroneDelivery(podrocket, DropPod, marker, dropCrate);
   }
 
-  dropCrate LinkTo(podrocket, "tag_origin", (0, 0, 0), (-90, 0, 0));
+  dropCrate linkTo(podrocket, "tag_origin", (0, 0, 0), (-90, 0, 0));
 
   podrocket waittill("death", attacker_ent, means_of_death, weapon_name);
 
@@ -365,7 +365,7 @@ crateImpactCleanup(player) {
       if(character IsTouching(self)) {
         foreach(node in nearestNodes) {
           if(DistanceSquared(node.origin, self.origin) > 100 * 100) {
-            character SetOrigin(node.origin, true);
+            character setOrigin(node.origin, true);
             nearestNodes = array_remove(nearestNodes, node);
             break;
           }
@@ -673,7 +673,7 @@ playerMonitorForDroneDelivery(podRocket, dropPod, marker, dropCrate) {
   drone endon("death");
 
   drone Vehicle_Teleport(dropCrate.origin, dropCrate.angles, false, false);
-  dropCrate LinkTo(drone, "tag_origin", (0, 0, 0), (0, 0, 0));
+  dropCrate linkTo(drone, "tag_origin", (0, 0, 0), (0, 0, 0));
   dropCrate.friendlyModel ScriptModelPlayAnim("orbital_care_package_fan_spin", "nothing");
   dropCrate.enemyModel ScriptModelPlayAnim("orbital_care_package_fan_spin", "nothing");
   maps\mp\killstreaks\_drone_carepackage::setupCarepackageDrone(drone, true);
@@ -703,7 +703,7 @@ playerMonitorForDroneDelivery(podRocket, dropPod, marker, dropCrate) {
   }
 
   if(dropCrate.health > 0) {
-    marker LinkTo(drone, "tag_origin");
+    marker linkTo(drone, "tag_origin");
     marker notify("linkedToDrone");
 
     drone thread maps\mp\killstreaks\_drone_carepackage::carepackageDrone_deleteOnActivate();

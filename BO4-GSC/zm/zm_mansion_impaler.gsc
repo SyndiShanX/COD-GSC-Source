@@ -170,11 +170,11 @@ init_step_3(var_a276c861) {
       n_time = function_c5a4ae6(level.monolith_ghost.origin, s_cemetery.origin);
       level.monolith_ghost.var_dafa2b89 = util::spawn_model("tag_origin", level.monolith_ghost.origin, level.monolith_ghost.angles);
       util::wait_network_frame();
-      level.monolith_ghost linkto(level.monolith_ghost.var_dafa2b89);
+      level.monolith_ghost linkTo(level.monolith_ghost.var_dafa2b89);
 
       if(n_time > 1 && n_time < 10) {
-        level.monolith_ghost.var_dafa2b89 moveto(s_cemetery.origin, n_time);
-        level.monolith_ghost.var_dafa2b89 rotateto(s_cemetery.angles, n_time);
+        level.monolith_ghost.var_dafa2b89 moveTo(s_cemetery.origin, n_time);
+        level.monolith_ghost.var_dafa2b89 rotateTo(s_cemetery.angles, n_time);
         level.monolith_ghost setvisibletoall();
         level.monolith_ghost.mdl_head setvisibletoall();
         level.monolith_ghost.var_dafa2b89 thread scene::play(#"aib_vign_zm_mnsn_ghost_walk_01", level.monolith_ghost);
@@ -198,8 +198,8 @@ init_step_3(var_a276c861) {
       level.monolith_ghost setModel(#"c_t8_zmb_dlc1_catherine_ghost_body");
       level.monolith_ghost.mdl_head = util::spawn_model(#"c_t8_zmb_dlc1_catherine_ghost_head", level.monolith_ghost.origin, level.monolith_ghost.angles);
       util::wait_network_frame();
-      level.monolith_ghost linkto(level.monolith_ghost.var_dafa2b89);
-      level.monolith_ghost.mdl_head linkto(level.monolith_ghost);
+      level.monolith_ghost linkTo(level.monolith_ghost.var_dafa2b89);
+      level.monolith_ghost.mdl_head linkTo(level.monolith_ghost);
       level.monolith_ghost thread mansion_pap::function_c9c7a593();
       level.monolith_ghost clientfield::set("" + #"ghost_trail", 1);
       util::wait_network_frame();
@@ -389,16 +389,16 @@ function_a6978e42(nd_start) {
   level endon(#"monolith_ghost_cleanup");
   self setModel(#"c_t8_zmb_dlc1_catherine_ghost_body");
   self.mdl_head = util::spawn_model(#"c_t8_zmb_dlc1_catherine_ghost_head", self.origin, self.angles);
-  self.mdl_head linkto(self);
+  self.mdl_head linkTo(self);
   util::wait_network_frame();
   self clientfield::set("" + #"ghost_trail", 1);
-  array::thread_all(getplayers(), &function_92e77dc6);
-  self.var_c176969a = spawner::simple_spawn_single(getent("veh_power_on_projectile", "targetname"));
+  array::thread_all(getPlayers(), &function_92e77dc6);
+  self.var_c176969a = spawner::simple_spawn_single(getEnt("veh_power_on_projectile", "targetname"));
   self.var_c176969a.team = #"allies";
   self.var_c176969a.var_6353e3f1 = 1;
   self.var_c176969a.origin = nd_start.origin;
   self.var_c176969a.angles = nd_start.angles;
-  self linkto(self.var_c176969a);
+  self linkTo(self.var_c176969a);
   var_878f0f0a = getallvehiclenodes();
   self thread function_4802a272();
   self thread mansion_pap::function_900b7dca(var_878f0f0a, 1);
@@ -556,7 +556,7 @@ function_79556c43(var_80296afc, var_5e246f88) {
 function_8846933a() {
   arrayconcubitant = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.b_is_designated_target) && player.b_is_designated_target) {
       arrayconcubitant[arrayconcubitant.size] = player;
     }
@@ -593,7 +593,7 @@ function_9ee098d5() {
   level endon(#"hash_aa10db1b6143db9");
   var_ac3fdee1 = 0;
   v_drop = undefined;
-  e_trigger = getent("e_possess_trigger", "targetname");
+  e_trigger = getEnt("e_possess_trigger", "targetname");
 
   while(var_ac3fdee1 < 4) {
     while(isDefined(level.e_guide)) {
@@ -621,7 +621,7 @@ function_9ee098d5() {
     if(isDefined(e_possessed)) {
       fx_org clientfield::increment("" + #"soul_possess_orb");
       n_time = function_c5a4ae6(fx_org.origin, e_possessed.origin);
-      fx_org moveto(e_possessed gettagorigin("j_spine4"), n_time);
+      fx_org moveTo(e_possessed gettagorigin("j_spine4"), n_time);
       level.monolith_ghost notify(#"hash_6edff0409a51550e");
       level.monolith_ghost hide();
       level.monolith_ghost.mdl_head hide();
@@ -690,8 +690,8 @@ function_9ee098d5() {
 
     if(!level.monolith_ghost istouching(e_trigger)) {
       n_time = function_c5a4ae6(level.monolith_ghost.origin, self.origin);
-      level.monolith_ghost.var_dafa2b89 moveto(self.origin, n_time);
-      level.monolith_ghost.var_dafa2b89 rotateto(self.angles, n_time);
+      level.monolith_ghost.var_dafa2b89 moveTo(self.origin, n_time);
+      level.monolith_ghost.var_dafa2b89 rotateTo(self.angles, n_time);
       level.monolith_ghost.var_dafa2b89 thread scene::stop();
       level.monolith_ghost thread scene::stop();
       level.monolith_ghost.var_dafa2b89 thread scene::play(#"aib_vign_zm_mnsn_ghost_walk_01", level.monolith_ghost);
@@ -797,7 +797,7 @@ function_3c1f242b() {
       }
 
       if(isDefined(mdl_drop)) {
-        playsoundatposition(#"hash_6b3b011b2d22c586", mdl_drop.origin);
+        playSoundAtPosition(#"hash_6b3b011b2d22c586", mdl_drop.origin);
       }
 
       e_player thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
@@ -814,7 +814,7 @@ function_3c1f242b() {
 
 function_e7423237() {
   level endon(#"hash_38fe2a57d5f9d6ba");
-  mdl_symbol = getent(self.target, "targetname");
+  mdl_symbol = getEnt(self.target, "targetname");
   mdl_symbol clientfield::set("" + #"hash_3d5a64bed5e39d24", 1);
   var_ffba68db = self zm_unitrigger::create(undefined, 80, &function_9f0de8b3, 1, 1);
   var_ffba68db.script_int = self.script_int;
@@ -887,7 +887,7 @@ function_9f0de8b3() {
 
 function_9768c04b() {
   level endon(#"end_crypt_unlock");
-  var_7853cc7c = getent("imp_symbol_base", "targetname");
+  var_7853cc7c = getEnt("imp_symbol_base", "targetname");
   level.var_6a17ff24 = 0;
   callback::on_ai_killed(&on_nosferatu_killed);
   var_7853cc7c clientfield::set("" + #"hash_3d5a64bed5e39d24", 1);
@@ -909,7 +909,7 @@ function_cc11b6fd() {
 
 on_nosferatu_killed(s_params) {
   if(self.archetype === #"nosferatu" && !level flag::get(#"hash_2e0f59cef233a264")) {
-    t_radius = getent("t_imp_kill", "targetname");
+    t_radius = getEnt("t_imp_kill", "targetname");
 
     if(self istouching(t_radius) && isPlayer(s_params.eattacker)) {
       level.var_6a17ff24++;
@@ -946,15 +946,15 @@ function_886c88e() {
   var_ffba68db = var_a8534fa4 zm_unitrigger::create(undefined, 64, &function_d23a6d02, 1, 1);
   level flag::wait_till(#"hash_61263135b6fb6340");
   exploder::kill_exploder("fxexp_pickup");
-  playsoundatposition(#"hash_64edabe355229d32", (0, 0, 0));
+  playSoundAtPosition(#"hash_64edabe355229d32", (0, 0, 0));
   zm_unitrigger::unregister_unitrigger(var_ffba68db);
 }
 
 open_crypt() {
   level endon(#"hash_69c33933b1ab3e2b");
   clientfield::set("" + #"hash_73123721764d7374", 1);
-  e_floor = getent("imp_open2", "targetname");
-  e_clip = getent("imp_blocker", "targetname");
+  e_floor = getEnt("imp_open2", "targetname");
+  e_clip = getEnt("imp_blocker", "targetname");
 
   if(isDefined(e_floor)) {
     e_floor delete();
@@ -978,7 +978,7 @@ open_crypt() {
 
 function_520a8a02() {
   level endon(#"hash_69c33933b1ab3e2b");
-  var_77663e28 = getent("t_imp_in", "targetname");
+  var_77663e28 = getEnt("t_imp_in", "targetname");
   mdl_gates = getEntArray("mdl_crp_gates", "targetname");
 
   while(!level flag::get(#"hash_61263135b6fb6340")) {
@@ -1026,7 +1026,7 @@ function_d23a6d02() {
 
 function_a9bfed2d() {
   level endon(#"hash_69c33933b1ab3e2b");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   switch (a_players.size) {
     case 1:
@@ -1098,7 +1098,7 @@ function_a9bfed2d() {
   }
 
   level flag::set(#"hash_38fe2a57d5f9d6ba");
-  playsoundatposition(#"hash_7bd7306de23aa3bd", (0, 0, 0));
+  playSoundAtPosition(#"hash_7bd7306de23aa3bd", (0, 0, 0));
 }
 
 function_615d8c38(params) {

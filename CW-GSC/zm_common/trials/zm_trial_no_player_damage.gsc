@@ -22,13 +22,13 @@ function private preinit() {
 }
 
 function private on_begin() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player callback::on_player_damage(&on_player_damage);
   }
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player callback::remove_on_player_damage(&on_player_damage);
   }
 }

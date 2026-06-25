@@ -26,7 +26,7 @@ function main() {
   level thread zm_tomb_vo::watch_one_shot_line("puzzle", "try_puzzle", "vo_try_puzzle_air2");
   level thread air_puzzle_1_run();
   level flag::wait_till("air_puzzle_1_complete");
-  playsoundatposition("zmb_squest_step1_finished", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_step1_finished", (0, 0, 0));
   level thread air_puzzle_1_cleanup();
   level thread zm_tomb_utility::rumble_players_in_chamber(5, 3);
   level thread air_puzzle_2_run();
@@ -42,8 +42,8 @@ function air_puzzle_1_init() {
 function air_puzzle_1_cleanup() {
   for(i = 1; i <= 3; i++) {
     n_move = (4 - i) * 20;
-    e_ring = getent("ceiling_ring_0" + i, "targetname");
-    e_ring rotateyaw(360, 1.5, 0.5, 0);
+    e_ring = getEnt("ceiling_ring_0" + i, "targetname");
+    e_ring rotateYaw(360, 1.5, 0.5, 0);
     e_ring movez(n_move, 1.5, 0.5, 0);
     e_ring playSound("zmb_squest_wind_ring_turn");
     e_ring waittill("movedone");
@@ -76,7 +76,7 @@ function ceiling_ring_randomize() {
 
 function ceiling_ring_update_position() {
   new_angles = (self.angles[0], self.position * 90, self.angles[2]);
-  self rotateto(new_angles, 0.5, 0.2, 0.2);
+  self rotateTo(new_angles, 0.5, 0.2, 0.2);
   exploder::exploder("fxexp_600");
   self playSound("zmb_squest_wind_ring_turn");
   self waittill("rotatedone");
@@ -146,7 +146,7 @@ function ceiling_ring_run() {
 function air_puzzle_2_init() {
   a_smoke_pos = struct::get_array("puzzle_smoke_origin", "targetname");
   foreach(s_smoke_pos in a_smoke_pos) {
-    s_smoke_pos.detector_brush = getent(s_smoke_pos.target, "targetname");
+    s_smoke_pos.detector_brush = getEnt(s_smoke_pos.target, "targetname");
     s_smoke_pos.detector_brush ghost();
   }
 }
@@ -166,7 +166,7 @@ function air_puzzle_2_run() {
       }
     }
     if(all_smoke_solved) {
-      a_players = getplayers();
+      a_players = getPlayers();
       foreach(e_player in a_players) {
         if(e_player hasweapon(w_staff_air)) {
           e_player thread zm_tomb_vo::say_puzzle_completion_line(2);
@@ -200,7 +200,7 @@ function air_puzzle_run_smoke_direction() {
   level endon("air_puzzle_2_complete");
   self endon("death");
   s_dest = struct::get("puzzle_smoke_dest", "targetname");
-  v_to_dest = vectornormalize(s_dest.origin - self.origin);
+  v_to_dest = vectorNormalize(s_dest.origin - self.origin);
   f_min_dot = cos(self.script_int);
   self.solved = 0;
   self.detector_brush setCanDamage(1);
@@ -211,7 +211,7 @@ function air_puzzle_run_smoke_direction() {
       level notify("vo_try_puzzle_air2", attacker);
       new_yaw = math::vec_to_angles(direction_vec);
       new_orient = (0, new_yaw, 0);
-      self.e_fx rotateto(new_orient, 1, 0.3, 0.3);
+      self.e_fx rotateTo(new_orient, 1, 0.3, 0.3);
       self.e_fx waittill("rotatedone");
       f_dot = vectordot(v_to_dest, direction_vec);
       self.solved = f_dot > f_min_dot;

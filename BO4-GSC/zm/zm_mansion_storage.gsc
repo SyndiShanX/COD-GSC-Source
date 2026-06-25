@@ -123,23 +123,23 @@ function_ff726bbb(var_2afee46 = 1) {
   var_61243b5c = scene::get_active_scenes(#"p8_fxanim_zm_man_bookcase_01_bundle");
   var_b0db8553 = var_61243b5c[0];
   var_1d305e7f = var_b0db8553.scene_ents[#"prop 1"];
-  var_19d968b8 = getent("e_secret_clip_left", "targetname");
-  var_19d968b8 linkto(var_1d305e7f, "tag_origin");
+  var_19d968b8 = getEnt("e_secret_clip_left", "targetname");
+  var_19d968b8 linkTo(var_1d305e7f, "tag_origin");
   var_bad218e = var_b0db8553.scene_ents[#"prop 2"];
-  var_d16a9f7c = getent("e_secret_clip_right", "targetname");
-  var_d16a9f7c linkto(var_bad218e, "tag_origin");
-  var_19d968b8 disconnectpaths();
-  var_d16a9f7c disconnectpaths();
+  var_d16a9f7c = getEnt("e_secret_clip_right", "targetname");
+  var_d16a9f7c linkTo(var_bad218e, "tag_origin");
+  var_19d968b8 disconnectPaths();
+  var_d16a9f7c disconnectPaths();
   var_befaf308 = scene::get_active_scenes(#"p8_fxanim_zm_man_bookcase_02_bundle");
   var_f6281a0 = var_befaf308[0];
   var_d3f97071 = var_f6281a0.scene_ents[#"prop 1"];
-  var_84d63a77 = getent("w_secret_clip_left", "targetname");
-  var_84d63a77 linkto(var_d3f97071, "tag_origin");
+  var_84d63a77 = getEnt("w_secret_clip_left", "targetname");
+  var_84d63a77 linkTo(var_d3f97071, "tag_origin");
   var_db4a4ab3 = var_f6281a0.scene_ents[#"prop 2"];
-  var_7b9ecc98 = getent("w_secret_clip_right", "targetname");
-  var_7b9ecc98 linkto(var_db4a4ab3, "tag_origin");
-  var_84d63a77 disconnectpaths();
-  var_7b9ecc98 disconnectpaths();
+  var_7b9ecc98 = getEnt("w_secret_clip_right", "targetname");
+  var_7b9ecc98 linkTo(var_db4a4ab3, "tag_origin");
+  var_84d63a77 disconnectPaths();
+  var_7b9ecc98 disconnectPaths();
   level.var_d1e98ce7 = util::spawn_model("tag_origin", (var_84d63a77.origin + var_7b9ecc98.origin) / 2);
   level.var_44c19f1a = util::spawn_model("tag_origin", (var_19d968b8.origin + var_d16a9f7c.origin) / 2);
   var_d6a83f7c = array(#"p8_zm_man_book_symbol_02", #"p8_zm_man_book_symbol_03", #"p8_zm_man_book_symbol_01", #"p8_zm_man_book_symbol_04");
@@ -173,19 +173,19 @@ function_ff726bbb(var_2afee46 = 1) {
 
     switch (i) {
       case 0:
-        e_book linkto(var_d3f97071, "tag_origin");
+        e_book linkTo(var_d3f97071, "tag_origin");
         e_book.script_noteworthy = "west";
         break;
       case 1:
-        e_book linkto(var_1d305e7f, "tag_origin");
+        e_book linkTo(var_1d305e7f, "tag_origin");
         e_book.script_noteworthy = "east";
         break;
       case 2:
-        e_book linkto(var_db4a4ab3, "tag_origin");
+        e_book linkTo(var_db4a4ab3, "tag_origin");
         e_book.script_noteworthy = "west";
         break;
       case 3:
-        e_book linkto(var_bad218e, "tag_origin");
+        e_book linkTo(var_bad218e, "tag_origin");
         e_book.script_noteworthy = "east";
         break;
     }
@@ -313,7 +313,7 @@ function_94a403a4(var_1c855a0d) {
   var_a76c9d75 = level.var_969e8ac2.e_activator;
 
   if(!isDefined(var_a76c9d75)) {
-    var_a76c9d75 = getplayers()[0];
+    var_a76c9d75 = getPlayers()[0];
   }
 
   mdl_weapon = zm_utility::spawn_buildkit_weapon_model(var_a76c9d75, wpn_reward, undefined, self.var_872e2994.origin + (0, 0, 16), self.var_872e2994.angles);
@@ -338,13 +338,13 @@ function_6c1be65c(var_a276c861) {
 
   if(!var_a276c861) {
     level flag::wait_till(#"connect_ground_floor_to_cellar");
-    mdl_clip = getent("secret_rack_clip", "targetname");
-    mdl_clip disconnectpaths();
+    mdl_clip = getEnt("secret_rack_clip", "targetname");
+    mdl_clip disconnectPaths();
     var_9890436b = scene::get_active_scenes(#"p8_fxanim_zm_man_wine_rack_bundle");
     var_7195997b = var_9890436b[0];
     var_c65c37fc = var_7195997b.scene_ents[#"prop 1"];
-    mdl_clip enablelinkto();
-    mdl_clip linkto(var_c65c37fc, "tag_animate");
+    mdl_clip enablelinkTo();
+    mdl_clip linkTo(var_c65c37fc, "tag_animate");
     level.var_4918f183 = util::spawn_model("tag_origin", mdl_clip.origin);
     level thread function_c63076b4();
     level flag::wait_till(#"hash_521d6bb11da55099");
@@ -379,7 +379,7 @@ function_c63076b4(var_2afee46 = 1) {
 
     if(isDefined(level.a_s_barrels[i].e_drip)) {
       level.a_s_barrels[i].n_rate = var_38376e1d + var_38376e1d * i;
-      level.a_s_barrels[i].t_trig = getent(level.a_s_barrels[i].target, "targetname");
+      level.a_s_barrels[i].t_trig = getEnt(level.a_s_barrels[i].target, "targetname");
       level.a_s_barrels[i] thread function_3e37bb63();
 
       if(var_2afee46) {
@@ -489,7 +489,7 @@ function_f2ca3ec8(s_pos) {
   var_a76c9d75 = level.a_s_barrels[level.a_s_barrels.size - 1].e_attacker;
 
   if(!isDefined(var_a76c9d75)) {
-    var_a76c9d75 = getplayers()[0];
+    var_a76c9d75 = getPlayers()[0];
   }
 
   mdl_weapon = zm_utility::spawn_buildkit_weapon_model(var_a76c9d75, w_reward, undefined, s_pos.origin + (0, 0, 8), s_pos.angles);
@@ -528,8 +528,8 @@ function_ffc4a06a(var_a276c861) {
   level flag::init(#"hash_4207012c64662b4d");
   level thread function_68e49445();
   level flagsys::wait_till("start_zombie_round_logic");
-  mdl_clip = getent("secret_furniture_clip", "targetname");
-  mdl_clip disconnectpaths();
+  mdl_clip = getEnt("secret_furniture_clip", "targetname");
+  mdl_clip disconnectPaths();
 
   if(!var_a276c861) {
     level flagsys::wait_till(#"load_main_complete");
@@ -664,7 +664,7 @@ function function_f21f0537(var_a276c861) {
       zm_powerups::specific_powerup_drop("bonus_points_player", s_pocket.origin + (0, 0, -8), undefined, undefined, undefined, 1);
       break;
     case 3:
-      a_players = array::get_all_closest(s_pocket.origin, getplayers());
+      a_players = array::get_all_closest(s_pocket.origin, getPlayers());
       a_players[0] magicgrenadetype(getweapon(#"eq_frag_grenade"), s_pocket.origin + (0, 0, 12), (0, 0, 200));
       a_players[0] zm_audio::create_and_play_dialog(#"grenade", #"react", undefined, 1);
       break;
@@ -679,12 +679,12 @@ function_2ff803fa(var_a276c861, ended_early) {
 
 function_fd9b3e16(n_reward) {
   var_8997b0bc = struct::get("billiard_table_center", "targetname");
-  mdl_clip = getent("secret_furniture_clip", "targetname");
+  mdl_clip = getEnt("secret_furniture_clip", "targetname");
   var_cef195d9 = scene::get_active_scenes(#"p8_fxanim_zm_man_bookcase_03_bundle");
   var_edd21e7e = var_cef195d9[0];
   var_89bf536b = var_edd21e7e.scene_ents[#"prop 1"];
-  mdl_clip enablelinkto();
-  mdl_clip linkto(var_89bf536b, "tag_animate");
+  mdl_clip enablelinkTo();
+  mdl_clip linkTo(var_89bf536b, "tag_animate");
   level.var_c218e707 = util::spawn_model("tag_origin", mdl_clip.origin);
   level thread function_63c873d9(level.var_c218e707);
   level thread util::delay(2, undefined, &scene::play, #"p8_fxanim_zm_man_bookcase_03_bundle");
@@ -696,7 +696,7 @@ function_a7983bee() {
   s_shelf = struct::get("storage_shelf");
   wpn_reward = getweapon(#"shotgun_semiauto_t8");
   var_8997b0bc = struct::get("billiard_table_center", "targetname");
-  a_players = array::get_all_closest(var_8997b0bc.origin, getplayers());
+  a_players = array::get_all_closest(var_8997b0bc.origin, getPlayers());
   mdl_weapon = zm_utility::spawn_buildkit_weapon_model(a_players[0], wpn_reward, undefined, s_shelf.origin + (0, 0, 10), s_shelf.angles);
 
   if(isDefined(mdl_weapon)) {
@@ -812,7 +812,7 @@ function_2b75135a(player) {
   }
 
   cursor_hint = "HINT_WEAPON";
-  self setcursorhint(cursor_hint, self.stub.w_reward);
+  self setCursorHint(cursor_hint, self.stub.w_reward);
   self.hint_string = #"hash_53005c8d5b45bca3";
   return 1;
 }

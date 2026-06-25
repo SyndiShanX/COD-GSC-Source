@@ -121,7 +121,7 @@ function dark_battle_main() {
       player thread function_4933d21a();
     }
   }
-  playsoundatposition("evt_doorhack_dooropen", (13437, 2216, 252));
+  playSoundAtPosition("evt_doorhack_dooropen", (13437, 2216, 252));
   function_62e89023(1, 0);
   level thread function_b3666179();
   level.ai_hyperion clearforcedgoal();
@@ -165,7 +165,7 @@ function function_dabc0173() {
   self ai::set_ignoreme(1);
   self.firing_at_something = 0;
   level flag::wait_till("flag_player_fired_early");
-  self stopanimscripted();
+  self stopanimScripted();
   self ai::set_ignoreme(0);
   self thread dark_battle_spawner_init();
 }
@@ -175,7 +175,7 @@ function function_4d2734fa() {
   function_62e89023();
   spawn_manager::enable("sm_darkroom_spawner");
   spawn_manager::wait_till_complete("sm_darkroom_spawner");
-  var_5ca9a217 = getent("outside_dark_battle_room", "targetname");
+  var_5ca9a217 = getEnt("outside_dark_battle_room", "targetname");
   b_clear = 0;
   while(!b_clear) {
     b_clear = 1;
@@ -192,14 +192,14 @@ function function_4d2734fa() {
 }
 
 function function_4e24163f() {
-  door_l = getent("intelstation_bottom_door_l", "targetname");
-  door_r = getent("intelstation_bottom_door_r", "targetname");
+  door_l = getEnt("intelstation_bottom_door_l", "targetname");
+  door_r = getEnt("intelstation_bottom_door_r", "targetname");
   v_move = vectorscale((1, 0, 0), 54);
   move_time = 0.5;
   v_door_destination = door_l.origin + v_move;
-  door_l moveto(v_door_destination, move_time);
+  door_l moveTo(v_door_destination, move_time);
   v_door_destination = door_r.origin - v_move;
-  door_r moveto(v_door_destination, move_time);
+  door_r moveTo(v_door_destination, move_time);
   door_l waittill("movedone");
   level.ai_khalil setgoal(getnode("khalil_dark_battle_final", "targetname"), 1);
   wait(1);
@@ -207,7 +207,7 @@ function function_4e24163f() {
 }
 
 function function_b3666179() {
-  t_door = getent("t_vtol_tackle_doors", "targetname");
+  t_door = getEnt("t_vtol_tackle_doors", "targetname");
   a_friendly_ai = array(level.ai_minister, level.ai_hendricks, level.ai_khalil, level.ai_hyperion);
   level thread cp_prologue_util::function_21f52196("vtol_tackle_doors", t_door);
   level thread cp_prologue_util::function_2e61b3e8("vtol_tackle_doors", t_door, a_friendly_ai);
@@ -218,8 +218,8 @@ function function_b3666179() {
 }
 
 function function_62e89023(b_open = 1, var_abf03d83 = 1) {
-  var_280d5f68 = getent("dark_battle_door_l", "targetname");
-  var_3c301126 = getent("dark_battle_door_r", "targetname");
+  var_280d5f68 = getEnt("dark_battle_door_l", "targetname");
+  var_3c301126 = getEnt("dark_battle_door_r", "targetname");
   n_open_time = 1;
   if(!b_open) {
     n_open_time = 0.4;
@@ -230,14 +230,14 @@ function function_62e89023(b_open = 1, var_abf03d83 = 1) {
   v_side = anglestoright(var_280d5f68.angles);
   if(b_open) {
     v_pos_left = var_280d5f68.origin + (v_side * (52 * -1));
-    var_280d5f68 moveto(v_pos_left, n_open_time);
+    var_280d5f68 moveTo(v_pos_left, n_open_time);
     v_pos_right = var_3c301126.origin + (v_side * 52);
-    var_3c301126 moveto(v_pos_right, n_open_time);
+    var_3c301126 moveTo(v_pos_right, n_open_time);
   } else {
     v_pos_left = var_280d5f68.origin + (v_side * 52);
-    var_280d5f68 moveto(v_pos_left, n_open_time);
+    var_280d5f68 moveTo(v_pos_left, n_open_time);
     v_pos_right = var_3c301126.origin + (v_side * (52 * -1));
-    var_3c301126 moveto(v_pos_right, n_open_time);
+    var_3c301126 moveTo(v_pos_right, n_open_time);
   }
   var_3c301126 waittill("movedone");
 }
@@ -344,15 +344,15 @@ function function_c2326e34() {
 
 function function_edbf19b4() {
   level waittill("hash_7a9811b7");
-  var_280d5f68 = getent("intelstation_balcony_door_l", "targetname");
-  var_3c301126 = getent("intelstation_balcony_door_r", "targetname");
-  playsoundatposition("evt_doorhack_dooropen", var_3c301126.origin);
+  var_280d5f68 = getEnt("intelstation_balcony_door_l", "targetname");
+  var_3c301126 = getEnt("intelstation_balcony_door_r", "targetname");
+  playSoundAtPosition("evt_doorhack_dooropen", var_3c301126.origin);
   v_move = vectorscale((1, 0, 0), 54);
   n_move_time = 0.5;
   v_door_destination = var_280d5f68.origin + v_move;
-  var_280d5f68 moveto(v_door_destination, n_move_time);
+  var_280d5f68 moveTo(v_door_destination, n_move_time);
   v_door_destination = var_3c301126.origin - v_move;
-  var_3c301126 moveto(v_door_destination, n_move_time);
+  var_3c301126 moveTo(v_door_destination, n_move_time);
   var_3c301126 waittill("movedone");
   var_3c301126 connectpaths();
   var_280d5f68 connectpaths();
@@ -531,13 +531,13 @@ function move_target(e_target, e_shooter) {
   var_67766dec = e_target.origin;
   var_20b9665f = e_target.origin + vectorscale((0, 0, 1), 50);
   while(isDefined(e_shooter) && e_shooter.firing_at_something == 1) {
-    self moveto(var_58670eab, 0.5);
+    self moveTo(var_58670eab, 0.5);
     self waittill("movedone");
-    self moveto(var_67766dec, 0.5);
+    self moveTo(var_67766dec, 0.5);
     self waittill("movedone");
-    self moveto(var_a0d5e21e, 0.5);
+    self moveTo(var_a0d5e21e, 0.5);
     self waittill("movedone");
-    self moveto(var_20b9665f, 0.5);
+    self moveTo(var_20b9665f, 0.5);
     self waittill("movedone");
   }
 }
@@ -719,13 +719,13 @@ function function_b007992c(a_ents) {
 
 function function_1e5dba01() {
   level waittill("hash_ec873a98");
-  var_280d5f68 = getent("intelstation_exit_door_l", "targetname");
-  var_3c301126 = getent("intelstation_exit_door_r", "targetname");
+  var_280d5f68 = getEnt("intelstation_exit_door_l", "targetname");
+  var_3c301126 = getEnt("intelstation_exit_door_r", "targetname");
   v_move = (54, 0, 0);
   v_door_destination = var_280d5f68.origin + v_move;
-  var_280d5f68 moveto(v_door_destination, 0.5);
+  var_280d5f68 moveTo(v_door_destination, 0.5);
   v_door_destination = var_3c301126.origin - v_move;
-  var_3c301126 moveto(v_door_destination, 0.5);
+  var_3c301126 moveTo(v_door_destination, 0.5);
   var_3c301126 waittill("movedone");
   var_3c301126 connectpaths();
   var_280d5f68 connectpaths();
@@ -788,7 +788,7 @@ function function_236046c4() {
 
 function function_ecf2e565() {
   level endon("hash_51bc43cb");
-  veh_vtol = getent("vtol", "animname");
+  veh_vtol = getEnt("vtol", "animname");
   while(true) {
     if(!isDefined(veh_vtol)) {
       wait(0.5);

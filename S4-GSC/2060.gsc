@@ -64,7 +64,7 @@ _id_DEF2(var_0, var_1, var_2, var_3) {}
 _id_D6BF(var_0, var_1, var_2) {}
 
 _id_9519(var_0, var_1, var_2, var_3) {
-  self linkto(var_0, var_1, var_2, var_3);
+  self linkTo(var_0, var_1, var_2, var_3);
 }
 
 _id_D5AC(var_0, var_1, var_2, var_3, var_4, var_5) {}

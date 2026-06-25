@@ -66,19 +66,19 @@ function function_61fc8e84(var_e24a3c09 = 0) {
 
 function function_433aff96(targetname) {
   train = vehicle::simple_spawn_single(targetname);
-  train.hurt_trigger = getent(train.linkto, "linkname");
-  train.hurt_trigger enablelinkto();
-  train.hurt_trigger linkto(train);
+  train.hurt_trigger = getEnt(train.linkto, "linkname");
+  train.hurt_trigger enablelinkTo();
+  train.hurt_trigger linkTo(train);
   train.animnode = spawn("script_model", train.origin + (0, 0, 70));
   train.animnode setModel("tag_origin");
   train.animnode.angles = train.angles;
-  train.animnode linkto(train);
+  train.animnode linkTo(train);
   train thread function_4df0bafb(train.animnode, randomintrange(2, 6));
   return train;
 }
 
 function function_a6404b66(var_6bb2ecd7) {
-  self linkto(var_6bb2ecd7, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_6bb2ecd7, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
 
 function function_4df0bafb(var_6bb2ecd7, num) {
@@ -147,11 +147,11 @@ function function_44e94ea4(a_ents) {
 function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, passengers, force_end) {
   var_49360986 = util::spawn_model(var_403c008b.model, var_12e2a31c.origin);
   var_49360986.bottom = util::spawn_model("stk_train_exterior_bottom_01", var_12e2a31c.origin);
-  var_49360986.bottom linkto(var_49360986);
+  var_49360986.bottom linkTo(var_49360986);
   var_49360986.targetname = var_403c008b.targetname;
   var_49360986.angles = var_12e2a31c.angles;
   var_37d06fc9 = util::spawn_model("tag_origin", var_49360986.origin, var_49360986.angles);
-  var_49360986 linkto(var_37d06fc9);
+  var_49360986 linkTo(var_37d06fc9);
 
   if(isDefined(var_403c008b.linkto)) {
     linkedents = getEntArray(var_403c008b.linkto, "linkname");
@@ -171,8 +171,8 @@ function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, pass
 
               var_403c008b.damage_trigger = ent;
               var_49360986.damage_trigger = ent;
-              ent enablelinkto();
-              ent linkto(var_49360986);
+              ent enablelinkTo();
+              ent linkTo(var_49360986);
               ent thread function_33cbff44();
             } else {
               ent delete();
@@ -191,7 +191,7 @@ function function_26c67eeb(var_8387d95e, var_403c008b, var_12e2a31c, speed, pass
 
               var_403c008b.clip = ent;
               var_49360986.clip = ent;
-              ent linkto(var_49360986);
+              ent linkTo(var_49360986);
             } else {
               ent delete();
             }
@@ -289,8 +289,8 @@ function function_d0b79cca(var_49360986, var_403c008b, var_12e2a31c, speed = 600
 
   while(true) {
     prev_point = point;
-    self moveto(point.origin, time);
-    self rotateto(point.angles, time);
+    self moveTo(point.origin, time);
+    self rotateTo(point.angles, time);
 
     if(var_403c008b.targetname !== "train_car_03" && isDefined(point.script_noteworthy)) {
       if(issubstr(point.script_noteworthy, "vfx")) {} else {

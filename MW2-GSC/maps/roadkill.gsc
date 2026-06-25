@@ -88,7 +88,7 @@ main() {
   level.convoy_dialogue_guy = [];
   level.school_baddies = [];
 
-  trapper_clip = GetEnt("trapper_clip", "targetname");
+  trapper_clip = getEnt("trapper_clip", "targetname");
   trapper_clip ConnectPaths();
   trapper_clip Delete();
 
@@ -269,8 +269,8 @@ roadkill_intro_common() {
 
   thread intro_runner_path_breaker();
 
-  bridge_layer_clipbrush = GetEnt("bridge_layer_clipbrush", "targetname");
-  bridge_layer_clipbrush DisconnectPaths();
+  bridge_layer_clipbrush = getEnt("bridge_layer_clipbrush", "targetname");
+  bridge_layer_clipbrush disconnectPaths();
 
   destroyed_humvee_models = getEntArray("destroyed_humvee_model", "targetname");
   array_thread(destroyed_humvee_models, ::hide_notsolid);
@@ -374,13 +374,13 @@ roadkill_riverbank() {
 start_convoy() {
   roadkill_intro_common();
 
-  start_ride_player = getstruct("start_ride_player", "targetname");
-  level.player SetOrigin(start_ride_player.origin);
+  start_ride_player = getStruct("start_ride_player", "targetname");
+  level.player setOrigin(start_ride_player.origin);
   level.player SetPlayerAngles(start_ride_player.angles);
 }
 
 roadkill_convoy() {
-  blocker = GetEnt("friendly_video_blocker", "targetname");
+  blocker = getEnt("friendly_video_blocker", "targetname");
   blocker Solid();
   blocker ConnectPaths();
   blocker NotSolid();
@@ -401,14 +401,14 @@ roadkill_convoy() {
 
   level.npc_ride_vehicles = [];
   level.guy_gets_in_vehicle_targets = [];
-  guy_gets_in_vehicle = GetEnt("guy_gets_in_vehicle", "targetname");
+  guy_gets_in_vehicle = getEnt("guy_gets_in_vehicle", "targetname");
   guy_gets_in_vehicle thread trigger_guy_gets_in_vehicle();
 
-  stairs_blocker = GetEnt("stairs_blocker", "targetname");
+  stairs_blocker = getEnt("stairs_blocker", "targetname");
   stairs_blocker ConnectPaths();
   stairs_blocker Delete();
 
-  friendly_midroad_blocker = GetEnt("friendly_midroad_blocker", "targetname");
+  friendly_midroad_blocker = getEnt("friendly_midroad_blocker", "targetname");
   friendly_midroad_blocker ConnectPaths();
   friendly_midroad_blocker Delete();
 
@@ -450,7 +450,7 @@ roadkill_convoy() {
 
   flag_wait("bridgelayer_crosses");
 
-  bridge_layer_clipbrush = GetEnt("bridge_layer_clipbrush", "targetname");
+  bridge_layer_clipbrush = getEnt("bridge_layer_clipbrush", "targetname");
   bridge_layer_clipbrush ConnectPaths();
   bridge_layer_clipbrush Delete();
 
@@ -461,11 +461,11 @@ roadkill_convoy() {
   add_func(::autosave_by_name, "leaving_riverbank");
   do_wait();
 
-  stair_wave_spawner = getent("stair_wave_spawner", "targetname");
+  stair_wave_spawner = getEnt("stair_wave_spawner", "targetname");
   stair_wave_spawner add_spawn_function(::stair_wave_spawner);
   stair_wave_spawner stalingradspawn();
 
-  spawner = GetEnt("player_humvee_passenger_spawner", "targetname");
+  spawner = getEnt("player_humvee_passenger_spawner", "targetname");
   spawner add_spawn_function(::guy_gets_in_player_humvee);
   spawner spawn_ai();
 
@@ -514,9 +514,9 @@ roadkill_convoy() {
 
   wait(3.5);
 
-  blocker = GetEnt("friendly_video_blocker", "targetname");
+  blocker = getEnt("friendly_video_blocker", "targetname");
   blocker Solid();
-  blocker DisconnectPaths();
+  blocker disconnectPaths();
 
   jeep_rider_spawners = getEntArray("jeep_rider_spawner", "targetname");
   array_spawn_function(jeep_rider_spawners, ::jeep_rider_spawner_think);
@@ -803,7 +803,7 @@ start_crazy_ride_later() {
 roadkill_crazy_ride_later() {
   thread ride_later_dialogue();
 
-  player_brake_trigger = GetEnt("player_brake_trigger", "targetname");
+  player_brake_trigger = getEnt("player_brake_trigger", "targetname");
   player_brake_trigger thread player_pushes_truck_down_alley();
 
   lead_vehicle = level.crazy_ride_convoy[0];
@@ -882,8 +882,8 @@ roadkill_crazy_ride_later() {
   array_spawn(last_building_spawners);
 
   Missile_DeleteAttractor(level.player_repulsor);
-  missile_target = GetEnt("missile_target", "targetname");
-  attract_ent = GetEnt(missile_target.target, "targetname");
+  missile_target = getEnt("missile_target", "targetname");
+  attract_ent = getEnt(missile_target.target, "targetname");
   attractor = Missile_CreateAttractorEnt(attract_ent, 50000, 50000, level.ride_killer);
 
   set_player_attacker_accuracy(0.0);
@@ -956,7 +956,7 @@ roadkill_crazy_ride_later() {
   level.player Unlink();
 
   level.player_turret Delete();
-  level.player SetOrigin(org);
+  level.player setOrigin(org);
   level notify("ride_ends");
   level.player maps\_gameskill::update_player_attacker_accuracy();
 
@@ -1003,8 +1003,8 @@ ride_end_dialogue() {
 
 start_dismount() {
   level.player DisableWeapons();
-  slide_org = getstruct("slide_org", "targetname");
-  level.player SetOrigin(slide_org.origin);
+  slide_org = getStruct("slide_org", "targetname");
+  level.player setOrigin(slide_org.origin);
 }
 
 roadkill_convoy_dismounts() {
@@ -1048,19 +1048,19 @@ roadkill_convoy_dismounts() {
     model Show();
   }
 
-  player_slide_crash = getstruct("player_slide_crash", "targetname");
+  player_slide_crash = getStruct("player_slide_crash", "targetname");
 
   slideModel = spawn_tag_origin();
   slideModel.origin = level.player.origin;
   slideModel.angles = level.player.angles;
-  level.player PlayerLinkTo(slideModel, "tag_origin", 1, 0, 0, 0, 0, 0);
+  level.player PlayerlinkTo(slideModel, "tag_origin", 1, 0, 0, 0, 0, 0);
 
   movetime = 0.3;
-  slideModel MoveTo(player_slide_crash.origin, movetime, movetime * 0.6, movetime * 0.4);
-  slideModel RotateTo(player_slide_crash.angles, movetime, movetime * 0.6, movetime * 0.4);
+  slideModel moveTo(player_slide_crash.origin, movetime, movetime * 0.6, movetime * 0.4);
+  slideModel rotateTo(player_slide_crash.angles, movetime, movetime * 0.6, movetime * 0.4);
   wait(movetime);
   slideModel Delete();
-  level.player SetOrigin(player_slide_crash.origin);
+  level.player setOrigin(player_slide_crash.origin);
 
   level.player SetStance("prone");
   level.player AllowCrouch(true);
@@ -1151,7 +1151,7 @@ roadkill_convoy_dismounts() {
 
   spawn_vehicles_from_targetname("ambushed_hummer");
 
-  remove_car = GetEnt("remove_car", "script_noteworthy");
+  remove_car = getEnt("remove_car", "script_noteworthy");
   remove_car Delete();
 
   add_wait(::flag_wait, "foley_flashbang");
@@ -1173,7 +1173,7 @@ roadkill_convoy_dismounts() {
   }
 
   start_time = GetTime();
-  volume = GetEnt("ambush_house_upstairs_first_room", "targetname");
+  volume = getEnt("ambush_house_upstairs_first_room", "targetname");
   volume add_wait(::waittill_volume_dead_or_dying);
   add_wait(::flag_wait, "player_leaves_ambush_house");
   do_wait_any();
@@ -1220,7 +1220,7 @@ dismount_dialogue_and_friendly_progression_logic() {
   flag_wait("eyes_on_school");
   if(!flag("lets_go_trigger")) {
     add_endon("lets_go_trigger");
-    volume = GetEnt("ambush_house_last_room", "targetname");
+    volume = getEnt("ambush_house_last_room", "targetname");
     volume add_wait(::waittill_volume_dead);
     add_wait(::_wait, 4);
     do_wait_any();
@@ -1258,7 +1258,7 @@ dismount_dialogue_and_friendly_progression_logic() {
 }
 
 start_roadkill_school_fight() {
-  struct = getstruct("school_start_player", "targetname");
+  struct = getStruct("school_start_player", "targetname");
   level.player teleport_ent(struct);
 
   array_spawn_noteworthy("dismount_macey");
@@ -1266,11 +1266,11 @@ start_roadkill_school_fight() {
 
   waittillframeend;
 
-  struct = getstruct("school_start_foley", "targetname");
+  struct = getStruct("school_start_foley", "targetname");
   level.foley teleport_ent(struct);
   level.foley magic_bullet_shield();
 
-  struct = getstruct("school_start_dunn", "targetname");
+  struct = getStruct("school_start_dunn", "targetname");
   level.dunn teleport_ent(struct);
   level.dunn magic_bullet_shield();
 
@@ -1316,7 +1316,7 @@ roadkill_school_fight() {
   flag_wait("roadkill_school_6");
   respawn_dead_school_window_guys();
 
-  trigger = GetEnt("player_shoot_detection_trigger", "targetname");
+  trigger = getEnt("player_shoot_detection_trigger", "targetname");
   trigger thread player_shoot_detection_trigger();
 
   array_spawn_function_noteworthy("fleeing_baddie_spawner", ::fleeing_baddie_spawner);
@@ -1346,7 +1346,7 @@ roadkill_ending_run_dialogue() {
   }
   level endon("player_rounds_end_corner");
 
-  roadkill_school_14 = GetEnt("roadkill_school_14", "targetname");
+  roadkill_school_14 = getEnt("roadkill_school_14", "targetname");
   volume = roadkill_school_14 get_color_volume_from_trigger();
   volume waittill_volume_dead_or_dying();
   wait(1);
@@ -1366,22 +1366,22 @@ roadkill_ending_run_dialogue() {
 }
 
 start_roadkill_end() {
-  slide_org = getstruct("start_player_end", "targetname");
-  level.player SetOrigin(slide_org.origin);
+  slide_org = getStruct("start_player_end", "targetname");
+  level.player setOrigin(slide_org.origin);
   level.player SetPlayerAngles(slide_org.angles);
 }
 
 start_roadkill_endfight() {
-  start = getstruct("start_player_endfight", "targetname");
-  level.player SetOrigin(start.origin);
+  start = getStruct("start_player_endfight", "targetname");
+  level.player setOrigin(start.origin);
   level.player SetPlayerAngles(start.angles);
 
   ally_starts = getStructArray("start_ally_endfight", "targetname");
 
-  foley_spawner = GetEnt("dismount_macey", "script_noteworthy");
+  foley_spawner = getEnt("dismount_macey", "script_noteworthy");
   foley_spawner.origin = ally_starts[0].origin;
 
-  dunn_spawner = GetEnt("dismount_dunn", "script_noteworthy");
+  dunn_spawner = getEnt("dismount_dunn", "script_noteworthy");
   dunn_spawner.origin = ally_starts[1].origin;
 
   foley_spawner Stalingradspawn();
@@ -1436,14 +1436,14 @@ roadkill_the_end() {
 
   flag_wait("player_rounds_end_corner");
 
-  spawner = GetEnt("shepherd_ending_spawner", "targetname");
+  spawner = getEnt("shepherd_ending_spawner", "targetname");
   spawner spawn_ai();
 
   array_spawn_targetname("ending_hangout_spawner");
 
   flag_wait("approaching_end");
 
-  spawner = GetEnt("stryker_blocker_spawner", "targetname");
+  spawner = getEnt("stryker_blocker_spawner", "targetname");
   spawner spawn_vehicle();
 
   thread ending_fadeout_nextmission();

@@ -309,7 +309,7 @@ func_470C(param_00, param_01) {
       continue;
     }
 
-    var_0F = vectornormalize(var_0E.var_0116 - self.var_0116);
+    var_0F = vectorNormalize(var_0E.var_0116 - self.var_0116);
     var_10 = vectordot(var_07, var_0F);
     for(var_11 = 0; var_11 < var_0C.size; var_11++) {
       if(var_10 > var_0C[var_11]) {

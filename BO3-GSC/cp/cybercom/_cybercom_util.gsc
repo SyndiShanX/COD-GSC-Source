@@ -776,7 +776,7 @@ function weapon_lock_getslot(target, force = 0) {
       return i;
     }
     newitem = spawnStruct();
-    newitem.dot = vectordot(playerforward, vectornormalize(locktarget.origin - self.origin));
+    newitem.dot = vectordot(playerforward, vectorNormalize(locktarget.origin - self.origin));
     var_f72b478f = (isDefined(self.cybercom.var_f72b478f) ? self.cybercom.var_f72b478f : 0.83);
     if(newitem.dot > var_f72b478f) {
       newitem.target = locktarget;
@@ -784,7 +784,7 @@ function weapon_lock_getslot(target, force = 0) {
     }
   }
   newitem = spawnStruct();
-  newitem.dot = vectordot(playerforward, vectornormalize(target.origin - self.origin));
+  newitem.dot = vectordot(playerforward, vectorNormalize(target.origin - self.origin));
   newitem.target = target;
   array::insertion_sort(dots, &targetinsertionsortcompare, newitem);
   worsttarget = dots[dots.size - 1].target;
@@ -939,7 +939,7 @@ function function_17fea3ed(slot, weapon, maxtargets) {
     var_6f14dd02 = self gettagorigin("tag_aim");
     foreach(enemy in enemies) {
       center = enemy getcentroid();
-      dirtotarget = vectornormalize(center - var_6f14dd02);
+      dirtotarget = vectorNormalize(center - var_6f14dd02);
       enemy.var_4ddba9ea = vectordot(dirtotarget, playerforward);
       if(isDefined(enemy.var_fb7ce72a)) {
         result = enemy[[enemy.var_fb7ce72a]](self, weapon);
@@ -1011,7 +1011,7 @@ function function_17fea3ed(slot, weapon, maxtargets) {
           self weapon_lock_settargettoslot(slot, item.target, maxrange, weapon);
         }
       }
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
   }
   self notify("ccom_stop_lock_on");
@@ -1165,7 +1165,7 @@ function stopanimscriptedonnotify(note, animname, kill = 0, attacker, weapon) {
   }
   self util::waittill_any_return(note, "death");
   if(isDefined(self) && self isinscriptedstate()) {
-    self stopanimscripted(0.3);
+    self stopanimScripted(0.3);
   }
   if(isalive(self) && (isDefined(kill) && kill)) {
     self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);

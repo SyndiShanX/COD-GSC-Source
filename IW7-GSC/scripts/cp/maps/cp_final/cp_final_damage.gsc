@@ -170,12 +170,12 @@ cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
       var_37 = 7000;
       self.ragdollhitloc = var_8;
       if(!isDefined(var_7)) {
-        var_7 = vectornormalize(self.origin - var_1.origin);
+        var_7 = vectorNormalize(self.origin - var_1.origin);
       }
 
       if(lengthsquared(var_7) < 1) {
         var_38 = self.origin - var_1.origin;
-        var_38 = vectornormalize((var_38[0], var_38[1], var_38[2]));
+        var_38 = vectorNormalize((var_38[0], var_38[1], var_38[2]));
         self.ragdollimpactvector = var_38 * var_37;
       } else {
         self.ragdollimpactvector = var_7 * var_37;
@@ -275,12 +275,12 @@ cp_final_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
         self.kung_fu_punched = 1;
         self.ragdollhitloc = var_8;
         if(!isDefined(var_7)) {
-          var_7 = vectornormalize(self.origin - var_1.origin);
+          var_7 = vectorNormalize(self.origin - var_1.origin);
         }
 
         if(lengthsquared(var_7) < 1) {
           var_38 = self.origin - var_1.origin;
-          var_38 = vectornormalize((var_38[0], var_38[1], var_38[2]));
+          var_38 = vectorNormalize((var_38[0], var_38[1], var_38[2]));
           self.ragdollimpactvector = var_38 * var_37;
         } else {
           self.ragdollimpactvector = var_7 * var_37;
@@ -714,7 +714,7 @@ moveghosttowardsplayer(var_0, var_1) {
     } else if(var_22 <= 64) {
       var_6.origin = var_1B;
     } else {
-      var_6 moveto(var_1B, var_3);
+      var_6 moveTo(var_1B, var_3);
       var_1 scripts\engine\utility::waittill_any_timeout(var_3, "update_ghost_pos");
     }
 
@@ -745,7 +745,7 @@ monitorplayerviewangles(var_0, var_1) {
   var_0 endon("end_Ghost_Idle_Loop");
   for(;;) {
     var_2 = var_0 gettagorigin("tag_flash") - (0, 0, 16);
-    var_3 = vectornormalize(anglesToForward(var_0.angles)) * 56;
+    var_3 = vectorNormalize(anglesToForward(var_0.angles)) * 56;
     var_4 = var_2 + var_3;
     if(distance(var_1.origin, var_4) >= 5) {
       var_0 notify("update_ghost_pos");
@@ -781,7 +781,7 @@ launchfakeghost(var_0, var_1, var_2, var_3, var_4) {
   var_12 = scripts\common\trace::capsule_trace(var_5, var_6 + var_10, 16, 32, undefined, [var_3, var_4], var_11, 24);
   var_13 = var_12["shape_position"];
   var_14 = magicbullet("ghost_grenade_launcher", var_4.origin, var_13, var_3);
-  var_4 linkto(var_14, "tag_origin");
+  var_4 linkTo(var_14, "tag_origin");
   var_14.owner = var_3;
   var_14.team = var_3.team;
   var_14 setscriptablepartstate("animation", "on");
@@ -940,7 +940,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       var_15 = 3;
       var_10 = self.origin + (0, 0, 20);
       var_11 = (randomint(350), randomint(350), randomint(350));
-      var_11 = vectornormalize(var_11) * var_14;
+      var_11 = vectorNormalize(var_11) * var_14;
       var_12 = self launchgrenade("frag_grenade_zm", var_10, var_11, var_15);
     }
   }

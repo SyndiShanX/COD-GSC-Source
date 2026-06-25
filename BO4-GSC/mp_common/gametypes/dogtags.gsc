@@ -246,15 +246,15 @@ bounce() {
   toppos = self.curorigin + (0, 0, 12);
 
   while(true) {
-    self.visuals[0] moveto(toppos, 0.5, 0.15, 0.15);
-    self.visuals[0] rotateyaw(180, 0.5);
-    self.visuals[1] moveto(toppos, 0.5, 0.15, 0.15);
-    self.visuals[1] rotateyaw(180, 0.5);
+    self.visuals[0] moveTo(toppos, 0.5, 0.15, 0.15);
+    self.visuals[0] rotateYaw(180, 0.5);
+    self.visuals[1] moveTo(toppos, 0.5, 0.15, 0.15);
+    self.visuals[1] rotateYaw(180, 0.5);
     wait 0.5;
-    self.visuals[0] moveto(bottompos, 0.5, 0.15, 0.15);
-    self.visuals[0] rotateyaw(180, 0.5);
-    self.visuals[1] moveto(bottompos, 0.5, 0.15, 0.15);
-    self.visuals[1] rotateyaw(180, 0.5);
+    self.visuals[0] moveTo(bottompos, 0.5, 0.15, 0.15);
+    self.visuals[0] rotateYaw(180, 0.5);
+    self.visuals[1] moveTo(bottompos, 0.5, 0.15, 0.15);
+    self.visuals[1] rotateYaw(180, 0.5);
     wait 0.5;
   }
 }

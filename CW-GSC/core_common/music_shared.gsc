@@ -95,5 +95,5 @@ function function_2b18b6d6(str_alias, n_delay) {
     wait n_delay;
   }
 
-  playsoundatposition(str_alias, (0, 0, 0));
+  playSoundAtPosition(str_alias, (0, 0, 0));
 }

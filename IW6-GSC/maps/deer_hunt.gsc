@@ -638,8 +638,8 @@ lariver_defend_start() {
   thread maps\deer_hunt_intro::chopper_sounds_for_defend();
   level.matv = maps\_vehicle::spawn_vehicle_from_targetname("gate_matv");
   level.matv hidepart("ramp_jnt");
-  level.matv.obj_ent = getent("obj_ramp", "targetname");
-  level.matv.obj_ent linkto(level.matv);
+  level.matv.obj_ent = getEnt("obj_ramp", "targetname");
+  level.matv.obj_ent linkTo(level.matv);
   var_4 = getvehiclenode("matv_start", "targetname");
   level.matv attachpath(var_4);
   var_5 = common_scripts\utility::getStructArray("la_river_defend_team2", "targetname");
@@ -664,8 +664,8 @@ lariver_nogame_start() {
   thread maps\deer_hunt_intro::move_player_to_start("la_river_defend_player");
   level.matv = maps\_vehicle::spawn_vehicle_from_targetname("gate_matv");
   level.matv hidepart("ramp_jnt");
-  level.matv.obj_ent = getent("obj_ramp", "targetname");
-  level.matv.obj_ent linkto(level.matv);
+  level.matv.obj_ent = getEnt("obj_ramp", "targetname");
+  level.matv.obj_ent linkTo(level.matv);
   var_0 = getvehiclenode("matv_start", "targetname");
   level.matv attachpath(var_0);
   level.player thread maps\deer_hunt_intro::lariver_defend_guided_missile_setup();
@@ -695,8 +695,8 @@ lariver_exit() {
   level.matv = maps\_vehicle::spawn_vehicle_from_targetname("gate_matv");
   var_0 = getvehiclenode("matv_start", "targetname");
   level.matv hidepart("ramp_jnt");
-  level.matv.obj_ent = getent("obj_ramp", "targetname");
-  level.matv.obj_ent linkto(level.matv);
+  level.matv.obj_ent = getEnt("obj_ramp", "targetname");
+  level.matv.obj_ent linkTo(level.matv);
   level.matv attachpath(var_0);
   thread maps\deer_hunt_intro::wall_ride_cilivians();
   maps\deer_hunt_intro::player_gets_in_matv();
@@ -706,13 +706,13 @@ lariver_exit() {
 
 house_start() {
   common_scripts\utility::flag_set("introscreen_complete");
-  getent("dog", "targetname") maps\_utility::add_spawn_function(maps\deer_hunt_intro::dog_logic);
+  getEnt("dog", "targetname") maps\_utility::add_spawn_function(maps\deer_hunt_intro::dog_logic);
   level.hesh = maps\_utility::spawn_targetname("hesh", 1);
   level.dog = maps\_utility::spawn_targetname("dog", 1);
   level.squad = [level.hesh, level.dog];
   thread maps\deer_hunt_intro::move_player_to_start("house_player");
   thread maps\deer_hunt_ride::setup_house();
-  var_0 = common_scripts\utility::getstruct("house_ai", "targetname");
+  var_0 = common_scripts\utility::getStruct("house_ai", "targetname");
   var_1 = (26432.5, 8072.2, -145);
   level.hesh forceteleport(var_0.origin, var_0.angles);
   level.dog forceteleport(var_1, var_0.angles);
@@ -739,7 +739,7 @@ elias_start() {
 
   foreach(var_4, var_3 in level.squad) {
     var_3 forceteleport(var_0[var_4].origin, var_0[var_4].angles);
-    var_1 = common_scripts\utility::getstruct(var_0[var_4].target, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_0[var_4].target, "targetname");
   }
 
   level.hesh maps\_utility::set_force_color("r");

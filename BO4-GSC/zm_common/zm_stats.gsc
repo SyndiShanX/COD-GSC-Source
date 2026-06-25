@@ -1269,7 +1269,7 @@ update_global_counters_on_match_end() {
   cheat_out_of_playable_area = 0;
   cheat_too_friendly = 0;
   cheat_total = 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     deaths += player.pers[#"deaths"];
@@ -1493,7 +1493,7 @@ function_ea5b4947(b_end_game = 0) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(player)) {

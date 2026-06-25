@@ -398,7 +398,7 @@ function private function_b9938441(str_notify) {
 }
 
 function function_8806cc63(params) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   var_bd597cf5 = function_c83dffcf();
   player thread function_8b02e139("vox_cp_sh0_02200_sims_thatledgerfromk_a1", #"hash_395b10dd29b892b1", 1);
@@ -406,7 +406,7 @@ function function_8806cc63(params) {
 }
 
 function function_be9f0a9e(params) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   var_bd597cf5 = function_c83dffcf();
   player thread function_78c0b36a(var_bd597cf5);
@@ -443,7 +443,7 @@ function private function_78c0b36a(var_bd597cf5) {
 }
 
 function function_a084acb9(params) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   var_bd597cf5 = function_c83dffcf();
   player thread function_8b02e139("vox_cp_sh0_02400_sims_theleadagentsha_e9", #"hash_26a660868b8c9f2a", 1);

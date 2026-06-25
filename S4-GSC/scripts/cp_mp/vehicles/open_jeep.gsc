@@ -145,7 +145,7 @@ open_jeep_create(var_0, var_1) {
   var_0.modelname = "veh_s4_mil_lnd_m151";
   var_0._id_0481 = "open_jeep";
   var_0._id_04DE = "open_jeep_physics_mp";
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;

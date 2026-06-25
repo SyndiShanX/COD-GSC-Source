@@ -92,7 +92,7 @@ func_F1AC(var_0, var_1, var_2) {
 func_6CD4(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   level endon("game_ended");
-  var_4 = getent("airstrikeheight", "targetname");
+  var_4 = getEnt("airstrikeheight", "targetname");
   var_5 = var_4.origin[2] + 10000;
 
   if(!isDefined(var_5)) {
@@ -248,12 +248,12 @@ func_5114(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     while(var_7 < var_6) {
-      self moveto(var_8[var_7], 0.05);
+      self moveTo(var_8[var_7], 0.05);
       var_7++;
       scripts\engine\utility::waitframe();
     }
   } else {
-    self moveto(var_1, var_2, var_3, var_4);
+    self moveTo(var_1, var_2, var_3, var_4);
   }
 }
 

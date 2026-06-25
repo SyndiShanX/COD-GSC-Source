@@ -30,11 +30,11 @@ init_find_pap() {
   level.a_mdl_paps = [];
   level.set_pap_mdl_override_func = ::set_pap_machine_model;
   level thread set_pap_unlock();
-  level.s_pap_center = scripts\engine\utility::getstruct("papq_pap_center", "script_noteworthy");
+  level.s_pap_center = scripts\engine\utility::getStruct("papq_pap_center", "script_noteworthy");
   level.s_pap_center.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", level.s_pap_center.origin, level.s_pap_center.angles);
   level.a_mdl_echo_zombies = [];
   level.a_mdl_echo_juggs = [];
-  level.s_altar_loc = scripts\engine\utility::getstruct("mq_altar_end_loc", "script_noteworthy");
+  level.s_altar_loc = scripts\engine\utility::getStruct("mq_altar_end_loc", "script_noteworthy");
   level.s_altar_loc _id_0FFD("obj_search_temple", "");
   level thread spawn_echo_zombies();
   level thread pap_distance_watch();
@@ -460,7 +460,7 @@ play_completed_charge_pap_vo() {
 
 init_interact_pap_part(var_0) {
   foreach(var_2 in var_0) {
-    var_2.mdl_loc = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_2.mdl_loc = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_2.mdl_part = scripts\cp\utility::_id_E190(var_2.mdl_loc._id_CE18, var_2.mdl_loc.origin, var_2.mdl_loc.angles);
     var_2.mdl_part notsolid();
     var_2.mdl_part thread do_bob();
@@ -481,7 +481,7 @@ hint_interact_pap_part(var_0, var_1) {
 play_part_ambient_fx() {
   level endon("game_ended");
   self.mdl_part.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", self.mdl_part.origin + (0, 0, int(self._id_CE18)), self.mdl_part.angles);
-  self.mdl_part.mdl_fx linkto(self.mdl_part);
+  self.mdl_part.mdl_fx linkTo(self.mdl_part);
   waitframe();
   playFXOnTag(level._effect[self._id_CD99], self.mdl_part.mdl_fx, "tag_origin");
 }
@@ -518,9 +518,9 @@ do_bob(var_0) {
   var_2 = self.origin + (0, 0, -4);
 
   for(;;) {
-    self moveto(var_1, 1.5, 0, 0);
+    self moveTo(var_1, 1.5, 0, 0);
     self waittill("movedone");
-    self moveto(var_2, 1.5, 0, 0);
+    self moveTo(var_2, 1.5, 0, 0);
     self waittill("movedone");
   }
 }
@@ -585,12 +585,12 @@ show_collect_parts_hint() {
 }
 
 init_final_fight() {
-  level.s_pap_interact = scripts\engine\utility::getstruct("papq_pap_interact", "script_noteworthy");
+  level.s_pap_interact = scripts\engine\utility::getStruct("papq_pap_interact", "script_noteworthy");
   level.s_pap_interact.search_2d_dist = 72;
   _id_0737::_id_C266("papq_pap_interact", ::hint_interact_pap_center, ::on_interact_pap_center, ::init_interact_pap_center);
   level.s_pap_center _id_0FFD("assemble_pap", "");
   level thread show_assemble_pap_hint();
-  level.jugg_hold_pos = scripts\engine\utility::getstruct("papq_ff_jugg_hold_pos", "script_noteworthy");
+  level.jugg_hold_pos = scripts\engine\utility::getStruct("papq_ff_jugg_hold_pos", "script_noteworthy");
   _id_0737::_id_C4AB("weapon_upgrade");
 }
 
@@ -691,7 +691,7 @@ send_fx_trail(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_7)) {
     playFXOnTag(level._effect[var_2], var_7, "tag_origin");
     wait 0.2;
-    var_7 moveto(var_1, var_6);
+    var_7 moveTo(var_1, var_6);
     var_7 waittill("movedone");
 
     if(isDefined(var_5)) {
@@ -767,7 +767,7 @@ remove_pap_machine_marker(var_0) {
     level scripts\engine\utility::_id_5C24("introscreen_over");
   }
 
-  var_1 = scripts\engine\utility::getstruct("dark_aether_location_center", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("dark_aether_location_center", "script_noteworthy");
 
   foreach(var_3 in level._id_417B) {
     if(scripts\engine\utility::is_equal(var_3._id_039B, "weapon_upgrade")) {
@@ -783,7 +783,7 @@ remove_pap_machine_marker(var_0) {
 players_area_monitor() {
   level endon("game_ended");
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstruct("dark_aether_location_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("dark_aether_location_center", "script_noteworthy");
 
   if(!isDefined(level._id_146C) || !isDefined(var_0)) {
     return;

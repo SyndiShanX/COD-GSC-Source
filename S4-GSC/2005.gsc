@@ -3729,36 +3729,36 @@ _id_10872() {
 
 _id_3842() {
   var_0 = [];
-  var_0[0] = getent("clip32x32x8", "targetname");
-  var_0[1] = getent("clip32x32x128", "targetname");
-  var_0[2] = getent("clip64x64x256", "targetname");
-  var_0[3] = getent("clip32x32x32", "targetname");
-  var_0[4] = getent("clip64x64x128", "targetname");
-  var_0[5] = getent("clip64x64x64", "targetname");
-  var_0[6] = getent("clip64x64x8", "targetname");
-  var_0[7] = getent("clip128x128x256", "targetname");
-  var_0[8] = getent("clip128x128x128", "targetname");
-  var_0[9] = getent("clip128x128x8", "targetname");
-  var_0[10] = getent("clip256x256x256", "targetname");
-  var_0[11] = getent("clip256x256x128", "targetname");
-  var_0[12] = getent("clip256x256x8", "targetname");
-  var_0[13] = getent("clip512x512x8", "targetname");
-  var_0[14] = getent("clip32x32x256", "targetname");
-  var_0[15] = getent("player32x32x8", "targetname");
-  var_0[16] = getent("player32x32x32", "targetname");
-  var_0[17] = getent("player32x32x128", "targetname");
-  var_0[18] = getent("player32x32x256", "targetname");
-  var_0[19] = getent("player64x64x256", "targetname");
-  var_0[20] = getent("player64x64x128", "targetname");
-  var_0[21] = getent("player64x64x64", "targetname");
-  var_0[22] = getent("player64x64x8", "targetname");
-  var_0[23] = getent("player128x128x256", "targetname");
-  var_0[24] = getent("player128x128x128", "targetname");
-  var_0[25] = getent("player128x128x8", "targetname");
-  var_0[26] = getent("player256x256x256", "targetname");
-  var_0[27] = getent("player256x256x128", "targetname");
-  var_0[28] = getent("player256x256x8", "targetname");
-  var_0[29] = getent("player512x512x8", "targetname");
+  var_0[0] = getEnt("clip32x32x8", "targetname");
+  var_0[1] = getEnt("clip32x32x128", "targetname");
+  var_0[2] = getEnt("clip64x64x256", "targetname");
+  var_0[3] = getEnt("clip32x32x32", "targetname");
+  var_0[4] = getEnt("clip64x64x128", "targetname");
+  var_0[5] = getEnt("clip64x64x64", "targetname");
+  var_0[6] = getEnt("clip64x64x8", "targetname");
+  var_0[7] = getEnt("clip128x128x256", "targetname");
+  var_0[8] = getEnt("clip128x128x128", "targetname");
+  var_0[9] = getEnt("clip128x128x8", "targetname");
+  var_0[10] = getEnt("clip256x256x256", "targetname");
+  var_0[11] = getEnt("clip256x256x128", "targetname");
+  var_0[12] = getEnt("clip256x256x8", "targetname");
+  var_0[13] = getEnt("clip512x512x8", "targetname");
+  var_0[14] = getEnt("clip32x32x256", "targetname");
+  var_0[15] = getEnt("player32x32x8", "targetname");
+  var_0[16] = getEnt("player32x32x32", "targetname");
+  var_0[17] = getEnt("player32x32x128", "targetname");
+  var_0[18] = getEnt("player32x32x256", "targetname");
+  var_0[19] = getEnt("player64x64x256", "targetname");
+  var_0[20] = getEnt("player64x64x128", "targetname");
+  var_0[21] = getEnt("player64x64x64", "targetname");
+  var_0[22] = getEnt("player64x64x8", "targetname");
+  var_0[23] = getEnt("player128x128x256", "targetname");
+  var_0[24] = getEnt("player128x128x128", "targetname");
+  var_0[25] = getEnt("player128x128x8", "targetname");
+  var_0[26] = getEnt("player256x256x256", "targetname");
+  var_0[27] = getEnt("player256x256x128", "targetname");
+  var_0[28] = getEnt("player256x256x8", "targetname");
+  var_0[29] = getEnt("player512x512x8", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2)) {
@@ -5113,9 +5113,9 @@ _id_553B(var_0) {
     var_6 = var_2.angles;
     var_7 = var_3 + (0, 0, 5000);
     var_7 = var_7 + anglesToForward(var_6) * -100;
-    var_2 cameralinkto(var_2._id_E277, "tag_origin", 1, 1);
-    var_2._id_E277 moveto(var_7, 5.0, 4.0, 0.1);
-    var_8 = vectornormalize(var_5 - var_4.origin);
+    var_2 cameralinkTo(var_2._id_E277, "tag_origin", 1, 1);
+    var_2._id_E277 moveTo(var_7, 5.0, 4.0, 0.1);
+    var_8 = vectorNormalize(var_5 - var_4.origin);
     var_9 = scripts\mp\utility\script::_id_FFE3(var_8, (0, 0, 1));
     var_2._id_E277.angles = var_9;
     var_2 thread _id_97EF(var_6);
@@ -5129,9 +5129,9 @@ _id_97EF(var_0) {
 
   for(;;) {
     var_1 = self getEye();
-    var_2 = vectornormalize(var_1 - self._id_E277.origin);
+    var_2 = vectorNormalize(var_1 - self._id_E277.origin);
     var_3 = scripts\mp\utility\script::_id_FFE3(var_2, (0, 0, 1));
-    self._id_E277 rotateto(var_3, 0.75);
+    self._id_E277 rotateTo(var_3, 0.75);
     waitframe();
   }
 }
@@ -6025,7 +6025,7 @@ _id_10ACA() {
   } else {
     foreach(var_2 in var_0) {
       if(isDefined(var_2.target)) {
-        var_3[0] = getent(var_2.target, "targetname");
+        var_3[0] = getEnt(var_2.target, "targetname");
       } else {
         var_3[0] = spawn("script_model", var_2.origin);
         var_3[0].angles = var_2.angles;
@@ -6071,9 +6071,9 @@ _id_1080B() {
   level._id_E689[0]._id_56E1 = 1;
   level._id_E689[0]._id_DDC9 = 1;
   level._id_E689[0]._id_DDB5 = 1;
-  level._id_E689[0].trigger setcursorhint("HINT_NOICON");
+  level._id_E689[0].trigger setCursorHint("HINT_NOICON");
   level._id_E689[0].trigger _meth_84D1(1);
-  level._id_E689[0].trigger sethintstring(&"MP_INGAME_ONLY/HOLD_TO_START_GAME");
+  level._id_E689[0].trigger setHintString(&"MP_INGAME_ONLY/HOLD_TO_START_GAME");
   level._id_E689[0].trigger _meth_83A2();
   level._id_E689[0]._id_ABCB = ::_id_E688;
   level._id_E689[0]._id_5C3F = spawn("script_model", var_5);

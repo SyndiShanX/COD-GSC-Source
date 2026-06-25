@@ -115,10 +115,10 @@ _id_DFB4() {
       var_0 = _id_6AF5();
       self._id_DF7E.origin = var_0;
       var_1 = self._id_3C72._id_133C;
-      var_2 = vectornormalize(var_1 - var_0);
+      var_2 = vectorNormalize(var_1 - var_0);
       var_3 = _id_6AF4();
-      var_2 = vectornormalize((var_2[0], var_2[1], 0));
-      var_3 = vectornormalize((var_3[0], var_3[1], 0));
+      var_2 = vectorNormalize((var_2[0], var_2[1], 0));
+      var_3 = vectorNormalize((var_3[0], var_3[1], 0));
       var_4 = vectordot(var_2, var_3);
 
       if(var_4 < 0.996) {
@@ -212,7 +212,7 @@ _id_C60D(var_0, var_1, var_2) {
 
       var_8 = var_7 - self.origin;
       var_8 = (var_8[0], var_8[1], 0);
-      var_9 = vectornormalize(var_8);
+      var_9 = vectorNormalize(var_8);
 
       if(istrue(var_2)) {
         var_5 = var_7;
@@ -242,7 +242,7 @@ _id_C60D(var_0, var_1, var_2) {
       }
     }
 
-    self._id_3C72._id_3C6F = vectornormalize(var_5 - self._id_0B67._id_03C8);
+    self._id_3C72._id_3C6F = vectorNormalize(var_5 - self._id_0B67._id_03C8);
     self._id_3C72._id_3C6E = distance(var_5, self._id_0B67._id_03C8);
   }
 }
@@ -260,7 +260,7 @@ _id_2EB4() {
     return self._id_0B67._id_03C8 - (0, 0, 1.3);
   }
 
-  var_1 = vectornormalize(self._id_0B67._id_03C8 - self.origin);
+  var_1 = vectorNormalize(self._id_0B67._id_03C8 - self.origin);
   var_2 = vectortoangles(var_1);
 
   if(self._id_0114 < 0) {
@@ -346,7 +346,7 @@ _id_3C73() {
   var_2 = 1;
   var_3 = _id_6AF5();
   var_4 = _id_2EB4();
-  var_5 = vectornormalize(var_4 - var_3);
+  var_5 = vectorNormalize(var_4 - var_3);
   var_6 = self _meth_8561();
 
   if(self._id_0114 < 0) {
@@ -361,8 +361,8 @@ _id_3C73() {
       return 0;
     }
 
-    var_5 = vectornormalize((var_5[0], var_5[1], 0));
-    var_6 = vectornormalize((var_6[0], var_6[1], 0));
+    var_5 = vectorNormalize((var_5[0], var_5[1], 0));
+    var_6 = vectorNormalize((var_6[0], var_6[1], 0));
     var_8 = vectordot(var_5, var_6);
 
     if(var_8 < 0.996) {
@@ -378,8 +378,8 @@ _id_3C73() {
       var_2 = 0;
     }
 
-    var_5 = vectornormalize((var_5[0], var_5[1], 0));
-    var_6 = vectornormalize((var_6[0], var_6[1], 0));
+    var_5 = vectorNormalize((var_5[0], var_5[1], 0));
+    var_6 = vectorNormalize((var_6[0], var_6[1], 0));
     var_8 = vectordot(var_5, var_6);
 
     if(var_8 < 0.996) {
@@ -604,7 +604,7 @@ _id_F41B(var_0) {
       if(isDefined(var_8) && isDefined(var_8._id_DA32)) {
         if(istrue(self._id_017D)) {
           var_34 = self _meth_8561();
-          var_35 = vectornormalize(var_8._id_DA32 - var_9);
+          var_35 = vectorNormalize(var_8._id_DA32 - var_9);
           var_36 = vectordot(var_34, var_35);
 
           if(var_36 >= 0.966) {
@@ -770,7 +770,7 @@ _id_F422(var_0, var_1) {
   var_13 = [80, 91.787, 45, 91.787, 80, 91.787, 45, 91.787, 80];
   var_14 = (var_1, var_0, 0);
   var_15 = _func_0133(var_14);
-  var_16 = vectornormalize(var_14);
+  var_16 = vectorNormalize(var_14);
   var_17 = _func_0261(var_16);
   var_17 = _func_000B(var_17);
 

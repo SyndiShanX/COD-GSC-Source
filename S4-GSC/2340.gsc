@@ -418,9 +418,9 @@ _id_80EF(var_0) {
 _id_3F09(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_model", var_0);
   var_4 setModel("tag_origin");
-  var_4 linkto(self);
-  var_4 sethintstring(var_1);
-  var_4 setcursorhint("HINT_BUTTON");
+  var_4 linkTo(self);
+  var_4 setHintString(var_1);
+  var_4 setCursorHint("HINT_BUTTON");
   var_4 _meth_84D4(200);
   var_4 sethintdisplayfov(90);
   var_4 setuserange(72);
@@ -533,9 +533,9 @@ _id_4AD7(var_0, var_1, var_2) {
 _id_5252(var_0, var_1, var_2) {
   var_3 = spawn("script_model", self.origin);
   var_3 setModel("tag_origin");
-  var_3 linkto(self);
-  var_3 sethintstring(&"MP/HOLD_TO_GET_OFF_CHOPPER");
-  var_3 setcursorhint("HINT_NOICON");
+  var_3 linkTo(self);
+  var_3 setHintString(&"MP/HOLD_TO_GET_OFF_CHOPPER");
+  var_3 setCursorHint("HINT_NOICON");
   var_3 _meth_84D4(200);
   var_3 sethintdisplayfov(90);
   var_3 setuserange(200);
@@ -597,7 +597,7 @@ _id_B70F(var_0, var_1, var_2) {
   }
 
   var_0 allowmovement(0);
-  var_0 playerlinkto(var_1, "tag_passenger" + var_2, 1.0, 180, -180, 180, 180, 0);
+  var_0 playerlinkTo(var_1, "tag_passenger" + var_2, 1.0, 180, -180, 180, 180, 0);
 }
 
 _id_B659(var_0, var_1) {
@@ -618,7 +618,7 @@ _id_B659(var_0, var_1) {
   }
 
   thread _id_582C("slot_" + var_1, "viewhands_base_iw8");
-  self._id_B5A4 linkto(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  self._id_B5A4 linkTo(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
 
   switch (var_1) {
     case 0:

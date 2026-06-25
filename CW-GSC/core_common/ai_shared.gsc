@@ -388,7 +388,7 @@ function set_goal(value, key = "targetname", b_force = 0) {
   if(isDefined(goal)) {
     self setgoal(goal, b_force);
   } else {
-    goal = getent(value, key);
+    goal = getEnt(value, key);
 
     if(isDefined(goal)) {
       self setgoal(goal, b_force);
@@ -579,7 +579,7 @@ function set_group_protect_ent(e_ent_to_protect, defend_volume_name_or_ent) {
   }
 
   if(isstring(defend_volume_name_or_ent)) {
-    vol_defend = getent(defend_volume_name_or_ent, "targetname");
+    vol_defend = getEnt(defend_volume_name_or_ent, "targetname");
   } else if(isentity(defend_volume_name_or_ent)) {
     vol_defend = defend_volume_name_or_ent;
   }
@@ -655,7 +655,7 @@ function function_31a31a25(var_9a21f98d = 1) {
 }
 
 function function_41b04632() {
-  return isDefined(self.targetname) && self.targetname == "destructible" && !isDefined(getent(self.target, "targetname"));
+  return isDefined(self.targetname) && self.targetname == "destructible" && !isDefined(getEnt(self.target, "targetname"));
 }
 
 function function_63734291(enemy) {
@@ -1007,7 +1007,7 @@ function function_fd90d41c(target, tag) {
   }
 
   assert(isDefined(self.var_875e35a2));
-  self.var_875e35a2 linkto(target, tag, (0, 0, 0), (0, 0, 0));
+  self.var_875e35a2 linkTo(target, tag, (0, 0, 0), (0, 0, 0));
   self lookatentity(self.var_875e35a2);
 }
 
@@ -1027,7 +1027,7 @@ function function_71915b43(target, tag) {
   }
 
   assert(isDefined(self.var_875e35a2));
-  self.var_875e35a2 linkto(target, tag, (0, 0, 0), (0, 0, 0));
+  self.var_875e35a2 linkTo(target, tag, (0, 0, 0), (0, 0, 0));
   self aimatentityik(self.var_875e35a2);
 }
 

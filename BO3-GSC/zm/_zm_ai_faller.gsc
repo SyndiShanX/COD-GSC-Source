@@ -148,19 +148,19 @@ function do_zombie_fall(spot) {
   self.in_the_ceiling = 1;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
   anim_org = spot.origin;
   anim_ang = spot.angles;
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill("movedone");
   target_org = zombie_utility::get_desired_origin();
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
   self unlink();
@@ -178,7 +178,7 @@ function do_zombie_fall(spot) {
 
 function zombie_faller_do_fall() {
   self endon("death");
-  self animscripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_emerge_01");
+  self animScripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_emerge_01");
   wait(level.faller_emerge_time);
   self.zombie_faller_wait_start = gettime();
   self.zombie_faller_should_drop = 0;
@@ -187,10 +187,10 @@ function zombie_faller_do_fall() {
   while(!self.zombie_faller_should_drop) {
     if(self zombie_fall_should_attack(self.zombie_faller_location)) {
       if(math::cointoss()) {
-        self animscripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_01");
+        self animScripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_01");
         wait(level.faller_attack_01_time);
       } else {
-        self animscripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_02");
+        self animScripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_02");
         wait(level.faller_attack_02_time);
       }
       if(!self zombie_faller_always_drop() && randomfloat(1) > 0.5) {
@@ -210,10 +210,10 @@ function zombie_faller_do_fall() {
             break;
           } else {
             if(math::cointoss()) {
-              self animscripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_01");
+              self animScripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_01");
               wait(level.faller_attack_01_time);
             } else {
-              self animscripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_02");
+              self animScripted("fall_anim", self.origin, self.zombie_faller_location.angles, "ai_zm_dlc5_zombie_ceiling_attack_02");
               wait(level.faller_attack_02_time);
             }
           }
@@ -224,13 +224,13 @@ function zombie_faller_do_fall() {
   self notify("falling");
   spot = self.zombie_faller_location;
   self zombie_faller_enable_location();
-  self animscripted("fall_anim", self.origin, spot.angles, "ai_zm_dlc5_zombie_ceiling_dropdown_01");
+  self animScripted("fall_anim", self.origin, spot.angles, "ai_zm_dlc5_zombie_ceiling_dropdown_01");
   wait(level.faller_fall_time);
   self.deathfunction = &zm_spawner::zombie_death_animscript;
   self.normal_death = 1;
   self notify("fall_anim_finished");
   spot notify("stop_zombie_fall_fx");
-  self stopanimscripted();
+  self stopanimScripted();
   landanimdelta = 15;
   ground_pos = zm_utility::groundpos_ignore_water_new(self.origin);
   physdist = (self.origin[2] - ground_pos[2]) + landanimdelta;
@@ -279,7 +279,7 @@ function zombie_faller_drop_not_occupied() {
 }
 
 function zombie_faller_watch_all_players() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     self thread zombie_faller_watch_player(players[i]);
   }
@@ -317,14 +317,14 @@ function zombie_faller_watch_player(player) {
       if(!incloserange) {
         dirtoplayerenter = player.origin - self.origin;
         dirtoplayerenter = (dirtoplayerenter[0], dirtoplayerenter[1], 0);
-        dirtoplayerenter = vectornormalize(dirtoplayerenter);
+        dirtoplayerenter = vectorNormalize(dirtoplayerenter);
       }
       incloserange = 1;
     } else {
       if(incloserange) {
         dirtoplayerexit = player.origin - self.origin;
         dirtoplayerexit = (dirtoplayerexit[0], dirtoplayerexit[1], 0);
-        dirtoplayerexit = vectornormalize(dirtoplayerexit);
+        dirtoplayerexit = vectorNormalize(dirtoplayerexit);
         if(vectordot(dirtoplayerenter, dirtoplayerexit) < 0) {
           self.zombie_faller_should_drop = 1;
           break;
@@ -367,7 +367,7 @@ function zombie_fall_should_attack(spot) {
 
 function zombie_fall_get_vicitims(spot) {
   ret = [];
-  players = getplayers();
+  players = getPlayers();
   checkdist2 = 40;
   checkdist2 = checkdist2 * checkdist2;
   for(i = 0; i < players.size; i++) {
@@ -422,7 +422,7 @@ function zombie_fall_death(spot) {
   while(self.health > 1) {
     self waittill("damage", amount, attacker, dir, p, type);
   }
-  self stopanimscripted();
+  self stopanimScripted();
   spot notify("stop_zombie_fall_fx");
 }
 
@@ -442,7 +442,7 @@ function _damage_mod_to_damage_type(type) {
 function zombie_fall_fx(spot) {
   spot thread zombie_fall_dust_fx(self);
   spot thread zombie_fall_burst_fx();
-  playsoundatposition("zmb_zombie_spawn", spot.origin);
+  playSoundAtPosition("zmb_zombie_spawn", spot.origin);
   self endon("death");
   spot endon("stop_zombie_fall_fx");
   wait(1);
@@ -499,11 +499,11 @@ function faller_death_ragdoll(einflictor, attacker, idamage, smeansofdeath, weap
 function in_player_fov(player) {
   playerangles = player getplayerangles();
   playerforwardvec = anglesToForward(playerangles);
-  playerunitforwardvec = vectornormalize(playerforwardvec);
+  playerunitforwardvec = vectorNormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();
   playertobanzaivec = banzaipos - playerpos;
-  playertobanzaiunitvec = vectornormalize(playertobanzaivec);
+  playertobanzaiunitvec = vectorNormalize(playertobanzaivec);
   forwarddotbanzai = vectordot(playerunitforwardvec, playertobanzaiunitvec);
   anglefromcenter = acos(forwarddotbanzai);
   playerfov = getdvarfloat("cg_fov");
@@ -517,7 +517,7 @@ function in_player_fov(player) {
 
 function potentially_visible(how_close = 1000000) {
   potentiallyvisible = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     dist = distancesquared(self.origin, players[i].origin);
     if(dist < how_close) {
@@ -553,9 +553,9 @@ function do_zombie_emerge(spot) {
 function zombie_faller_emerge(spot) {
   self endon("death");
   if(isDefined(self.zombie_faller_location.emerge_bottom) && self.zombie_faller_location.emerge_bottom) {
-    self animscripted("fall_anim", self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_floor");
+    self animScripted("fall_anim", self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_floor");
   } else {
-    self animscripted("fall_anim", self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_ceiling");
+    self animScripted("fall_anim", self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_ceiling");
   }
   self zombie_shared::donotetracks("rise_anim");
   self.deathfunction = &zm_spawner::zombie_death_animscript;
@@ -565,7 +565,7 @@ function zombie_faller_emerge(spot) {
 
 function zombie_emerge_fx(spot) {
   spot thread zombie_emerge_dust_fx(self);
-  playsoundatposition("zmb_zombie_spawn", spot.origin);
+  playSoundAtPosition("zmb_zombie_spawn", spot.origin);
   self endon("death");
   spot endon("stop_zombie_fall_fx");
   wait(1);

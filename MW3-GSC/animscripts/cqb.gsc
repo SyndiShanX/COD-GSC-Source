@@ -112,7 +112,7 @@ _id_107C() {
               if(distancesquared(var_12, var_5) < 4096) {
                 continue;
               }
-              var_14 = vectordot(vectornormalize(var_12 - var_5), var_7);
+              var_14 = vectordot(vectorNormalize(var_12 - var_5), var_7);
 
               if(var_14 < 0.643 || var_14 > 0.966) {
                 continue;

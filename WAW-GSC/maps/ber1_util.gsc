@@ -147,7 +147,7 @@ drawline(pos1, vtag, vmodel, time, color) {
 }
 
 warp_players_underworld() {
-  underworld = GetStruct("underworld_start", "targetname");
+  underworld = getStruct("underworld_start", "targetname");
 
   if(!isDefined(underworld)) {
     ASSERTMSG("warp_players_underworld(): can't find the underworld warp spot! aborting.");
@@ -157,7 +157,7 @@ warp_players_underworld() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    players[i] SetOrigin(underworld.origin);
+    players[i] setOrigin(underworld.origin);
   }
 }
 warp_players(startValue, startKey) {

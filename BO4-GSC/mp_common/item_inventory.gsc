@@ -705,7 +705,7 @@ function_d2f05352() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     time = gettime();
 
     for(playerindex = 0; playerindex < players.size; playerindex++) {
@@ -3802,7 +3802,7 @@ use_killstreak(networkid, item) {
       spawnorigin = traceresults.hitent.origin + rotatepoint(relativeorigin, anglesdelta);
     }
 
-    vehicle = spawnvehicle(vehicletype, spawnorigin, traceresults.angles);
+    vehicle = spawnVehicle(vehicletype, spawnorigin, traceresults.angles);
 
     if(isDefined(vehicle)) {
       if(isDefined(vehicle.vehicleclass) && vehicle.vehicleclass == #"helicopter") {
@@ -3845,11 +3845,11 @@ use_killstreak(networkid, item) {
     return;
   }
 
-  self sethintstring(#"weapon/cant_plant_equipment");
+  self setHintString(#"weapon/cant_plant_equipment");
   wait 1.5;
 
   if(isDefined(self)) {
-    self sethintstring(#"");
+    self setHintString(#"");
   }
 }
 

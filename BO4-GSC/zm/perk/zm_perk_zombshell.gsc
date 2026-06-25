@@ -344,7 +344,7 @@ reset_cooldown() {
 }
 
 on_round_begin() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player.var_c0832831 = 15;

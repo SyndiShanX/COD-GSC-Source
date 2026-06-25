@@ -155,7 +155,7 @@ freezegun_get_enemies_in_range(upgraded) {
       zombies[i] freezegun_debug_print("range", (1, 0, 0));
       return;
     }
-    normal = VectorNormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = VectorDot(forward_view_angles, normal);
     if(0 > dot) {
       zombies[i] freezegun_debug_print("dot", (1, 0, 0));
@@ -302,12 +302,12 @@ freezegun_death(hit_location, hit_origin, player) {
   self thread freezegun_set_extremity_damage_fx();
   self thread freezegun_set_torso_damage_fx();
   shatter_trigger = spawn("trigger_damage", self.origin, 0, 15, 72);
-  shatter_trigger enablelinkto();
-  shatter_trigger linkto(self);
+  shatter_trigger enablelinkTo();
+  shatter_trigger linkTo(self);
   spawnflags = 1 + 2 + 4 + 16 + 64;
   crumple_trigger = spawn("trigger_radius", self.origin, spawnflags, 15, 72);
-  crumple_trigger enablelinkto();
-  crumple_trigger linkto(self);
+  crumple_trigger enablelinkTo();
+  crumple_trigger linkTo(self);
   weap = self.damageweapon;
   self thread freezegun_wait_for_shatter(player, weap, shatter_trigger, crumple_trigger);
   self thread freezegun_wait_for_crumple(weap, shatter_trigger, crumple_trigger);

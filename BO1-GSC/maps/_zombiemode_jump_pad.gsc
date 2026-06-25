@@ -19,7 +19,7 @@ jump_pad_init() {
     return;
   }
   for(i = 0; i < jump_pad_triggers.size; i++) {
-    jump_pad_triggers[i].start = getstruct(jump_pad_triggers[i].target, "targetname");
+    jump_pad_triggers[i].start = getStruct(jump_pad_triggers[i].target, "targetname");
     jump_pad_triggers[i].destination = getStructArray(jump_pad_triggers[i].start.target, "targetname");
     if(isDefined(jump_pad_triggers[i].script_string)) {
       jump_pad_triggers[i].overrides = StrTok(jump_pad_triggers[i].script_string, ",");
@@ -30,7 +30,7 @@ jump_pad_init() {
 }
 jump_pad_player_variables() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   for(j = 0; j < players.size; j++) {
     players[j]._padded = false;
     players[j].lander = false;
@@ -146,7 +146,7 @@ jump_pad_start(ent_player, endon_condition) {
     fling_this_way = (x, y, z);
   }
   if(isDefined(end_point.target)) {
-    poi_spot = getstruct(end_point.target, "targetname");
+    poi_spot = getStruct(end_point.target, "targetname");
   } else {
     poi_spot = end_point;
   }
@@ -223,7 +223,7 @@ jump_pad_move(vec_direction, flt_time, struct_poi) {
     }
     self.poi_spot create_zombie_point_of_interest(attract_dist, num_attractors, added_poi_value, start_turned_on, poi_start_func);
   }
-  self SetOrigin(self.origin + (0, 0, 1));
+  self setOrigin(self.origin + (0, 0, 1));
   if(20 >= randomintrange(0, 101)) {
     self thread maps\_zombiemode_audio::create_and_play_dialog("general", "jumppad");
   }
@@ -265,7 +265,7 @@ jump_pad_enemy_follow_or_ignore(ent_poi) {
   self endon("disconnect");
   zombies = GetAIArray("axis");
   for(i = 0; i < zombies.size; i++) {
-    players = GetPlayers();
+    players = getPlayers();
     if(isDefined(zombies[i]) && isDefined(zombies[i].enemy) && zombies[i].enemy != self && players.size > 1) {
       zombies[i] thread add_poi_to_ignore_list(ent_poi);
     } else {

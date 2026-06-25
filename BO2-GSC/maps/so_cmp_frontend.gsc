@@ -37,12 +37,12 @@ frontend_so_run() {
   wait_for_first_player();
   on_player_connect();
   warp_to_random_player_start();
-  holo_city = getent("P6_hologram_city_buildings", "targetname");
+  holo_city = getEnt("P6_hologram_city_buildings", "targetname");
   holo_city hide();
   level thread maps\frontend_sf_a::run_briefing_forceplay("so_rts_mp_dockside");
   scene_drop_arm();
   wait_network_frame();
-  t_war_room = getent("war_room_trigger", "targetname");
+  t_war_room = getEnt("war_room_trigger", "targetname");
   set_objective(level.obj_war_room, t_war_room, "breadcrumb");
   t_war_room waittill("trigger");
   set_objective(level.obj_war_room, undefined, "done");

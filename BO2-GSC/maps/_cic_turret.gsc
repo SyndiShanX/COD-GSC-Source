@@ -163,7 +163,7 @@ cic_turret_fireupdate() {
 
       for(i = 0; i < 3; i++) {
         if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
-          self setturrettargetent(self.enemy);
+          self setturrettargetEnt(self.enemy);
           wait 0.1;
           self cic_turret_fire_for_time(randomfloatrange(0.4, 1.5));
         } else
@@ -265,7 +265,7 @@ cic_turret_play_single_fx_on_tag(effect, tag) {
   ent.angles = self gettagangles(tag);
   ent notsolid();
   ent hide();
-  ent linkto(self, tag);
+  ent linkTo(self, tag);
   ent.effect = effect;
   playFXOnTag(effect, ent, "tag_origin");
   ent playSound("veh_cic_turret_sparks");
@@ -428,14 +428,14 @@ cic_turret_emped() {
   self notify("emped");
   self endon("emped");
   self.emped = 1;
-  playsoundatposition("veh_cic_turret_emp_down", self.origin);
+  playSoundAtPosition("veh_cic_turret_emp_down", self.origin);
   self.turretrotscale = 0.2;
   self cic_turret_off();
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
     self.stun_fx setModel("tag_origin");
-    self.stun_fx linkto(self, "tag_fx", (0, 0, 0), (0, 0, 0));
+    self.stun_fx linkTo(self, "tag_fx", (0, 0, 0), (0, 0, 0));
 
     if(issubstr(self.vehicletype, "turret_sentry")) {
       playFXOnTag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");

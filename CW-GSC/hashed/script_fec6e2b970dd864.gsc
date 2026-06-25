@@ -30,7 +30,7 @@ function private preinit() {
 
 function scoreeventsr(params) {
   if(is_true(params.allplayers)) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       level doscoreeventcallback("scoreEventZM", {
@@ -53,7 +53,7 @@ function scoreeventsr(params) {
       params.var_b0a57f8c = 512;
     }
 
-    players = getplayers(undefined, params.location, params.var_b0a57f8c);
+    players = getPlayers(undefined, params.location, params.var_b0a57f8c);
 
     foreach(player in players) {
       if(params.scoreevent === "event_complete") {

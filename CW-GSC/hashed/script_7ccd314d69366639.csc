@@ -110,7 +110,7 @@ function canister_shockwave(localclientnum, oldval, newval, bnewent, binitialsna
 
   playFX(bwastimejump, str_fx, self.origin, (180, 0, 0));
   self playSound(bwastimejump, #"hash_5db462e1df5084e7");
-  self playrumbleonentity(bwastimejump, "damage_heavy");
+  self playRumbleOnEntity(bwastimejump, "damage_heavy");
 }
 
 function function_d3af9ddb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

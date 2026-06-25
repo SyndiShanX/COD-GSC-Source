@@ -33,33 +33,33 @@ function __init__() {
 }
 
 function __main__() {
-  level.var_ffcc580a = getent("pavlov_turret", "targetname");
+  level.var_ffcc580a = getEnt("pavlov_turret", "targetname");
   level.var_ffcc580a.turret_index = 0;
   level.var_ffcc580a turret::set_burst_parameters(0.75, 1.5, 0.25, 0.75, level.var_ffcc580a.turret_index);
 }
 
 function function_f734357f(e_player) {
   if(e_player zm_hero_weapon::is_hero_weapon_in_use()) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(e_player.is_drinking > 0) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(level flag::get("lockdown_active") && level.var_1dfcc9b2.var_22bf30b7 !== 1) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(self.stub.b_enabled == 1 && self.stub.b_in_use == 0) {
-    self sethintstring(&"ZM_STALINGRAD_MOUNTED_MG_ACTIVATE", self.stub.hint_parm1);
+    self setHintString(&"ZM_STALINGRAD_MOUNTED_MG_ACTIVATE", self.stub.hint_parm1);
     return true;
   }
   if(self.stub.b_enabled == 0 && self.stub.b_in_use == 0) {
-    self sethintstring(&"ZM_STALINGRAD_MOUNTED_MG_COOLDOWN");
+    self setHintString(&"ZM_STALINGRAD_MOUNTED_MG_COOLDOWN");
     return false;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 

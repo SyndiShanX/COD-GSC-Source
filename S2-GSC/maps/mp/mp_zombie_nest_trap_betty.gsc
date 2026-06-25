@@ -77,7 +77,7 @@ func_2832(param_00) {
   var_01.var_01D7 = param_00.var_0116[1];
   var_01.var_01D9 = param_00.var_0116[2];
   var_01 setwaypoint(0);
-  var_01 settargetent(param_00);
+  var_01 settargetEnt(param_00);
   return var_01;
 }
 

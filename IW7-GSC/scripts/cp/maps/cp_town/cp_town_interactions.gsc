@@ -239,17 +239,17 @@ sliding_power_door() {
 
     var_3 = undefined;
     if(isDefined(var_2.target)) {
-      var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     }
 
     if(isDefined(var_3)) {
       var_4 = var_3.origin - var_2.origin;
-      var_2 moveto(var_2.origin + (var_4[0], var_4[1], 0), 0.5, 0.1, 0.1);
+      var_2 moveTo(var_2.origin + (var_4[0], var_4[1], 0), 0.5, 0.1, 0.1);
       continue;
     }
 
     if(isDefined(var_2.script_angles)) {
-      var_2 rotateto(var_2.script_angles, 0.75);
+      var_2 rotateTo(var_2.script_angles, 0.75);
       continue;
     }
 
@@ -823,12 +823,12 @@ meleeweaponuse(var_0, var_1) {
   var_1 playlocalsound("zmb_item_pickup");
   var_0.model hidefromplayer(var_1);
   if(var_0.script_noteworthy == "iw7_knife_zm_cleaver") {
-    var_3 = scripts\engine\utility::getstruct("iw7_knife_zm_crowbar", "script_noteworthy");
+    var_3 = scripts\engine\utility::getStruct("iw7_knife_zm_crowbar", "script_noteworthy");
     var_3.model showtoplayer(var_1);
     return;
   }
 
-  var_4 = scripts\engine\utility::getstruct("iw7_knife_zm_cleaver", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStruct("iw7_knife_zm_cleaver", "script_noteworthy");
   var_4.model showtoplayer(var_1);
 }
 
@@ -840,7 +840,7 @@ init_papfusebox() {
   scripts\engine\utility::flag_wait("interactions_initialized");
   var_0 = getEntArray("pap_upgrade_door", "targetname");
   var_1 = scripts\engine\utility::getStructArray("pap_fusebox", "script_noteworthy");
-  var_2 = getent("pap_upgrade_door_handle", "targetname");
+  var_2 = getEnt("pap_upgrade_door_handle", "targetname");
   var_2 notsolid();
   foreach(var_4 in var_1) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_4);
@@ -866,7 +866,7 @@ turn_on_room_exit_portal() {
 pap_exit_teleporter() {
   var_0 = spawn("script_origin", (-10353.5, 582.5, -1573));
   var_0 makeusable();
-  var_0 sethintstring(&"CP_TOWN_INTERACTIONS_HIDDEN_LEAVE");
+  var_0 setHintString(&"CP_TOWN_INTERACTIONS_HIDDEN_LEAVE");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(!isDefined(var_1.kicked_out)) {
@@ -909,12 +909,12 @@ watchforcrowbardamage(var_0, var_1, var_2, var_3) {
 
   var_0 setCanDamage(0);
   if(isDefined(var_3)) {
-    var_0 rotateto(var_0.angles + var_3, 0.2);
+    var_0 rotateTo(var_0.angles + var_3, 0.2);
     return;
   }
 
   var_0 hide();
-  var_8 = getent("pap_upgrade_door_handle", "targetname");
+  var_8 = getEnt("pap_upgrade_door_handle", "targetname");
   var_8 hide();
 }
 
@@ -995,7 +995,7 @@ generator_field_hint(var_0, var_1) {
 }
 
 generator_field_vibrate() {
-  var_0 = scripts\engine\utility::getstruct("generator_field_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("generator_field_center", "script_noteworthy");
   for(;;) {
     if(!scripts\engine\utility::flag("vial_filled")) {
       wait(0.05);
@@ -1005,7 +1005,7 @@ generator_field_vibrate() {
     var_1 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.players, undefined, 4, 96);
     foreach(var_3 in var_1) {
       var_3 setclientomnvar("ui_hud_shake", 1);
-      var_3 playrumbleonentity("artillery_rumble");
+      var_3 playRumbleOnEntity("artillery_rumble");
     }
 
     wait(randomfloatrange(0.5, 2));
@@ -1126,7 +1126,7 @@ papfuseswitchhint(var_0, var_1) {
 
 usepapfuseswitch(var_0, var_1) {
   level endon("fuses_pickedup");
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2 setModel("mp_frag_button_on_green");
   playsoundatpos(var_2.origin, "town_pap_room_button_press");
   level.pap_upgrade_fuses_available = 1;
@@ -1331,7 +1331,7 @@ completeteleporttopos(var_0, var_1, var_2) {
   var_0 scripts\cp\cp_interaction::refresh_interaction();
   var_0 scripts\cp\powers\coop_powers::power_enablepower();
   var_0 getrigindexfromarchetyperef();
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
   if(isDefined(var_1.angles)) {
     var_0 setplayerangles(var_1.angles);
   } else {
@@ -1379,7 +1379,7 @@ tcspieceinit() {
   var_0 = scripts\engine\utility::getStructArray("tcs_piece", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.target)) {
-      var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     } else {
       var_3 = var_2;
     }
@@ -1534,7 +1534,7 @@ useplungerammo(var_0, var_1) {
 }
 
 init_tcs() {
-  var_0 = scripts\engine\utility::getstruct("technicolor_machine", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("technicolor_machine", "script_noteworthy");
   level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
   var_0.powered_on = 1;
 }
@@ -1727,7 +1727,7 @@ missinghandleinit() {
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   var_1 = var_0[0];
   if(isDefined(var_1.target)) {
-    var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   } else {
     var_2 = var_2;
   }
@@ -1763,7 +1763,7 @@ usebrokengenerator(var_0, var_1) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
     var_0.fixed = 1;
     var_1 playlocalsound("part_pickup");
-    var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_3 = spawn("script_model", var_2.origin);
     if(isDefined(var_2.angles)) {
       var_3.angles = var_2.angles;
@@ -1787,7 +1787,7 @@ usebrokengenerator(var_0, var_1) {
     level thread scripts\cp\maps\cp_town\cp_town::enablepas();
     earthquake(0.3, 1, var_0.origin, 250);
     wait(1);
-    var_5 = getent("box", "script_noteworthy");
+    var_5 = getEnt("box", "script_noteworthy");
     var_5 setModel("icbm_electricpanel9_on");
     scripts\cp\maps\cp_town\cp_town_traps::taketrapparticon("lever");
     setomnvar("zm_ui_color_eye_ent", level.color_eye);
@@ -1838,7 +1838,7 @@ initmeleeweapons() {
   var_2 = scripts\engine\utility::array_combine(var_0, var_1);
   foreach(var_4 in var_2) {
     if(isDefined(var_4.target)) {
-      var_5 = scripts\engine\utility::getstruct(var_4.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
     } else {
       var_5 = var_4;
     }
@@ -1880,7 +1880,7 @@ initwwpieces() {
     var_10 = scripts\engine\utility::getclosest(var_9.origin, var_7);
     thread watchforcrowbardamage(var_10, var_9, 1, (0, -140, 0));
     if(isDefined(var_9.target)) {
-      var_11 = scripts\engine\utility::getstruct(var_9.target, "targetname");
+      var_11 = scripts\engine\utility::getStruct(var_9.target, "targetname");
     } else {
       var_11 = var_9;
     }
@@ -2356,7 +2356,7 @@ record_use_logic(var_0, var_1) {
     level.records_found = 0;
   }
 
-  var_3 = getent(var_0.target, "targetname");
+  var_3 = getEnt(var_0.target, "targetname");
   var_1 thread scripts\cp\utility::usegrenadegesture(var_1, "iw7_pickup_zm");
   playFX(level._effect["generic_pickup"], var_3.origin);
   var_1 playlocalsound("zmb_item_pickup");

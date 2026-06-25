@@ -384,7 +384,7 @@ function function_56a7980() {
 
 function private function_d7cf81e(targetplayer, &points) {
   valid_points = [];
-  players = getplayers();
+  players = getPlayers();
 
   for(index = 0; index < points.size; index++) {
     point = points[index];
@@ -478,7 +478,7 @@ function function_57292af3() {
     s_destination = level.var_7767cea8[0];
 
     if(isDefined(s_destination.target2) && !getdvarint(#"hash_2682124b2df6958e", 0)) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_f4e33249 = 1;
       }
 
@@ -504,9 +504,9 @@ function function_57292af3() {
         adddebugcommand("<dev string:x11e>");
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player dontinterpolate();
-        player setorigin(player.resurrect_origin);
+        player setOrigin(player.resurrect_origin);
         player setplayerangles(player.resurrect_angles);
         player.var_f4e33249 = undefined;
       }
@@ -518,7 +518,7 @@ function function_57292af3() {
   music::setmusicstate("");
   level flag::clear(#"hash_4930756571725d11");
   callback::remove_on_connect(&function_ee7f9c09);
-  array::thread_all(getplayers(), &val::reset, "intro_scene", "b_ignore_fow_damage");
+  array::thread_all(getPlayers(), &val::reset, "intro_scene", "b_ignore_fow_damage");
   gamestate::set_state(#"playing");
   level flag::set(#"intro_scene_done");
 }
@@ -612,7 +612,7 @@ function function_182a24df() {
   targetangles = self.angles;
   players = [];
 
-  foreach(player in getplayers(self.team)) {
+  foreach(player in getPlayers(self.team)) {
     if(player != self && isalive(player)) {
       players[players.size] = player;
     }
@@ -675,7 +675,7 @@ function on_player_spawn() {
 
   if(isDefined(spawn.origin) && isDefined(spawn.angles)) {
     self dontinterpolate();
-    self setorigin(spawn.origin);
+    self setOrigin(spawn.origin);
     self setplayerangles(spawn.angles);
   }
 
@@ -855,12 +855,12 @@ function function_45e86af0() {
   level endon(#"game_ended");
 
   while(true) {
-    while(!getplayers().size) {
+    while(!getPlayers().size) {
       waitframe(1);
     }
 
-    for(i = 0; i < getplayers().size; i++) {
-      player = getplayers()[i];
+    for(i = 0; i < getPlayers().size; i++) {
+      player = getPlayers()[i];
 
       if(!isDefined(player) || player.sessionstate === "spectator") {
         waitframe(1);
@@ -879,7 +879,7 @@ function private function_b0492e83() {
   item_world::function_1b11e73c();
   level.var_c6dc0337 = 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(namespace_cf6efd05::function_99df13e0(player)) {
       thread namespace_cf6efd05::function_642cc595(player);
     }
@@ -971,7 +971,7 @@ function private function_33cac8e7() {
     foreach(destination in destinations) {
       if(isDefined(destination.contentgroups[#"hash_3460aae6bb799a99"])) {
         foreach(struct in destination.contentgroups[#"hash_3460aae6bb799a99"]) {
-          triggers[triggers.size] = getent(struct.targetname, "target");
+          triggers[triggers.size] = getEnt(struct.targetname, "target");
         }
       }
     }
@@ -1081,14 +1081,14 @@ function function_798c4aa9() {
 }
 
 function give_match_bonus() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     var_22ba849f = getdvarint(#"hash_3f0689f4ecc2fbab", 0);
     var_19a80e4c = level.var_b48509f9;
     var_900d44db = zm::function_d3113f01(level.var_b48509f9);
     var_191f8e5e = var_900d44db.var_c6f2635d;
-    var_7c032359 = var_900d44db.var_b93abbed[getplayers().size - 1];
+    var_7c032359 = var_900d44db.var_b93abbed[getPlayers().size - 1];
     var_f65fd621 = function_7a2da789()[#"hash_31b5b9e273560fa9"];
 
     if(!isDefined(player.var_3b4f6b37)) {
@@ -1129,7 +1129,7 @@ function private function_fa60a76c(var_b48509f9 = level.var_b48509f9) {
   level.var_64606faa = 1;
   var_370ac26d = zm::function_d3113f01(var_b48509f9).var_bd588afd;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!zm_utility::function_1a01f2f7(player)) {
       player luinotifyevent(#"hash_3e6dd0ad7b864154", 1, var_370ac26d);
       player addrankxpvalue("capsule_end_xp", var_370ac26d, 4);
@@ -1148,7 +1148,7 @@ function private function_f09350a0() {
 
   level.var_9b98246a = 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_3b4f6b37)) {
       player.var_3b4f6b37 = 0;
     }
@@ -1175,7 +1175,7 @@ function function_37c1c391(params) {
     var_5fc990bf = objective_manager::function_ae039b4(scriptname);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, completed, 0, var_5fc990bf);
 
     if(is_true(completed)) {
@@ -1239,7 +1239,7 @@ function function_5d7d3382() {
 function function_58d07657() {
   var_697d7ff9 = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(is_true(player.var_16735873)) {
       var_697d7ff9 = 1;
       break;
@@ -1249,7 +1249,7 @@ function function_58d07657() {
   while(var_697d7ff9) {
     var_697d7ff9 = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(is_true(player.var_16735873)) {
         var_697d7ff9 = 1;
         break;
@@ -1544,7 +1544,7 @@ function function_447a93ab(params) {
       break;
     default:
       if(issubstr(params.value, "<dev string:x533>")) {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           player.var_5d80a93b = player getcurrentweapon();
         }
 

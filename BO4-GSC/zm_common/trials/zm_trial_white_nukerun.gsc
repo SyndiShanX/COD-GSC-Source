@@ -40,7 +40,7 @@ on_begin() {
   level zm_trial::function_25ee130(1);
   level thread nuke_loop();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_bf710271();
   }
 }
@@ -52,7 +52,7 @@ nuke_loop() {
   while(true) {
     wait 10;
     a_locations = struct::get_array("dog_location", "script_noteworthy");
-    players = getplayers();
+    players = getPlayers();
     valid_players = [];
 
     foreach(player in players) {
@@ -120,15 +120,15 @@ nuke_loop() {
 }
 
 function_fe74909(drop_point) {
-  playsoundatposition(#"hash_1fc67d7ad7445bbf", (-521, -1972, -82));
-  playsoundatposition(#"hash_1fc67c7ad7445a0c", (-1146, -1956, -92));
+  playSoundAtPosition(#"hash_1fc67d7ad7445bbf", (-521, -1972, -82));
+  playSoundAtPosition(#"hash_1fc67c7ad7445a0c", (-1146, -1956, -92));
   wait 3;
-  level.var_dcd1e798 = getent("perk_machine_mover", "targetname");
+  level.var_dcd1e798 = getEnt("perk_machine_mover", "targetname");
   level.var_dcd1e798 useanimtree("generic");
   var_2379bb0e = util::spawn_model("p7_zm_power_up_nuke", drop_point);
   var_2379bb0e hide();
   level.var_dcd1e798.origin = drop_point;
-  var_2379bb0e linkto(level.var_dcd1e798, "tag_animate_origin");
+  var_2379bb0e linkTo(level.var_dcd1e798, "tag_animate_origin");
   level.var_dcd1e798 thread animation::play("p8_fxanim_zm_white_perk_machine_dummy_fly_in");
   waitframe(2);
   var_2379bb0e show();
@@ -172,7 +172,7 @@ on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_dc0859e();
   }
 }

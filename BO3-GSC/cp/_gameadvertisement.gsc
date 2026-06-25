@@ -124,7 +124,7 @@ function dm_rules() {
   updatedebughud(2, "", ruletimeleft / 60000);
   if(level.scorelimit) {
     highestscore = 0;
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(players[i].pointstowin > highestscore) {
         highestscore = players[i].pointstowin;

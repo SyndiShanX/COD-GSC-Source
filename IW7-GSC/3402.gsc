@@ -660,7 +660,7 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5) {
     self waittill("damage", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16);
 
     if(var_5) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
 
     if(isDefined(self.helitype) && self.helitype == "littlebird") {
@@ -746,7 +746,7 @@ damageshellshockandrumble(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread onweapondamage(var_0, var_1, var_2, var_3, var_5);
 
   if(!isai(self)) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 

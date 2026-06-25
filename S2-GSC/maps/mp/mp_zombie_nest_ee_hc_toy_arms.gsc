@@ -27,12 +27,12 @@ func_47A4() {
 func_7E3C(param_00, param_01) {
   param_00 method_805C();
   level waittill("hc_nest_toy_obj_complete");
-  var_02 = getent("nest_hc_record_drawer", "targetname");
+  var_02 = getEnt("nest_hc_record_drawer", "targetname");
   var_03 = common_scripts\utility::func_46B5(var_02.var_01A2, "targetname");
   param_00 method_805B();
   param_00 method_8449(var_02);
   var_02 lib_0378::func_8D74("aud_spinning_top_drawer_open");
-  var_02 moveto(var_03.var_0116, 1.5, 0, 0.5);
+  var_02 moveTo(var_03.var_0116, 1.5, 0, 0.5);
   wait(1.5);
   param_00 unlink();
   param_00 func_A665(param_01);
@@ -158,8 +158,8 @@ func_171D(param_00) {
     var_15 thread func_7EEC(var_11);
   }
 
-  var_17 = getent("firewell_grab_test", "targetname");
-  var_18 = getent(var_17.var_01A2, "targetname");
+  var_17 = getEnt("firewell_grab_test", "targetname");
+  var_18 = getEnt(var_17.var_01A2, "targetname");
   level thread func_4833(var_17, var_04);
 }
 
@@ -378,13 +378,13 @@ func_4421() {
 func_52EE() {
   var_00 = common_scripts\utility::func_46B5("nest_ee_hc_arm_models_struct", "targetname");
   var_01 = common_scripts\utility::func_46B7(var_00.var_01A2, "targetname");
-  var_02 = getent("nest_ee_hc_arm_trig", "targetname");
+  var_02 = getEnt("nest_ee_hc_arm_trig", "targetname");
   var_03 = maps\mp\mp_zombie_nest_ee_util::func_44C8("nest_ee_hc_arm_model_window", 1);
   var_02.var_65DD = var_03;
   var_04 = [];
   var_04["trigger"] = var_02;
   var_04["shootable_arms"] = var_01;
-  var_04["reward_pickup"] = getent("nest_hc_record_spawn", "targetname");
+  var_04["reward_pickup"] = getEnt("nest_hc_record_spawn", "targetname");
   return var_04;
 }
 

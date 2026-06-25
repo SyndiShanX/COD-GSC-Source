@@ -117,9 +117,9 @@ function watchproximitygrenadehitplayer(owner) {
 }
 
 function performhudeffects(position, distancetogrenade) {
-  forwardvec = vectornormalize(anglesToForward(self.angles));
-  rightvec = vectornormalize(anglestoright(self.angles));
-  explosionvec = vectornormalize(position - self.origin);
+  forwardvec = vectorNormalize(anglesToForward(self.angles));
+  rightvec = vectorNormalize(anglestoright(self.angles));
+  explosionvec = vectorNormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
   rdot = vectordot(explosionvec, rightvec);
   fangle = acos(fdot);
@@ -152,7 +152,7 @@ function damageplayerinradius(eattacker) {
     self shellshock("electrocution", 0.1);
     self clientfield::set_to_player("tazered", 1);
   }
-  self playrumbleonentity("proximity_grenade");
+  self playRumbleOnEntity("proximity_grenade");
   self playSound("wpn_taser_mine_zap");
   if(!self hasperk("specialty_proximityprotection")) {
     self thread watch_death();

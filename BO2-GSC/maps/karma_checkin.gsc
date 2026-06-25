@@ -66,8 +66,8 @@ skipto_checkin() {
   level maps\karma_arrival::setup_vtol("player_vtol");
   level thread run_scene_and_delete("final_approach_plane_idle");
   level thread maps\karma_arrival::setup_vtol("takeoff_vtol", "start_vtol_takeoff");
-  playsoundatposition("veh_vtol_1", (6062, -11630, 1175));
-  playsoundatposition("veh_vtol_2", (6542, -11186, 1191));
+  playSoundAtPosition("veh_vtol_1", (6062, -11630, 1175));
+  playSoundAtPosition("veh_vtol_2", (6542, -11186, 1191));
   level.m_duffle_bag = spawn_model("p6_anim_duffle_bag_karma");
   level.m_duffle_bag set_blend_in_out_times(0.5);
   level.m_harper_briefcase = spawn_model("p6_anim_metal_briefcase");
@@ -80,7 +80,7 @@ skipto_checkin() {
   thread scanner_scenes();
   thread scanner_backdrop();
   wait 0.2;
-  t_obj = getent("clip_scanner_blocker_2", "targetname");
+  t_obj = getEnt("clip_scanner_blocker_2", "targetname");
   set_objective(level.obj_security, t_obj);
   level thread maps\karma_arrival::pa_announcement_dialog();
 }
@@ -124,7 +124,7 @@ checkin() {
   level thread maps\_audio::switch_music_wait("KARMA_1_POST_ALARM", 1);
   level clientnotify("clr_sec");
   set_objective(level.obj_security, undefined, "delete");
-  t_obj = getent("trig_tower_lift", "targetname");
+  t_obj = getEnt("trig_tower_lift", "targetname");
   set_objective(level.obj_find_crc, t_obj);
   flag_wait("hotel_back_civs");
   run_thread_on_targetname("dynamic_ad", ::dynamic_ad_swap);
@@ -149,8 +149,8 @@ checkin_armraise(ent) {
 }
 
 checkin_reception_scanner_fx() {
-  getent("checkin_scanner2", "targetname") thread play_fx("checkin_scanner_red", undefined, undefined, "stop_checkin_scanner_fx2", 1, "tag_fx", 1);
-  e_scanner = getent("checkin_scanner1", "targetname");
+  getEnt("checkin_scanner2", "targetname") thread play_fx("checkin_scanner_red", undefined, undefined, "stop_checkin_scanner_fx2", 1, "tag_fx", 1);
+  e_scanner = getEnt("checkin_scanner1", "targetname");
 
   while(!flag("reset_player_speed")) {
     e_scanner thread play_fx("checkin_scanner_red", undefined, undefined, "stop_checkin_scanner_fx", 1, "tag_fx", 1);
@@ -159,7 +159,7 @@ checkin_reception_scanner_fx() {
     e_scanner notify("stop_checkin_scanner_fx");
     wait 0.1;
     e_scanner thread play_fx("checkin_scanner_green", undefined, undefined, "stop_checkin_scanner_fx", 1, "tag_fx", 1);
-    playsoundatposition("evt_checkin_tone", (4555, -8163, 956));
+    playSoundAtPosition("evt_checkin_tone", (4555, -8163, 956));
     wait 0.5;
     e_scanner notify("stop_checkin_scanner_fx");
     wait 0.1;
@@ -168,11 +168,11 @@ checkin_reception_scanner_fx() {
 
 sliding_door_init() {
   level endon("kill_sliding_doors");
-  e_door = getent("sliding_door_left", "targetname");
-  getent(e_door.target, "targetname") linkto(e_door);
-  e_door = getent("sliding_door_right", "targetname");
-  getent(e_door.target, "targetname") linkto(e_door);
-  getent("sliding_door_proximity_trigger", "targetname") thread sliding_door_think();
+  e_door = getEnt("sliding_door_left", "targetname");
+  getEnt(e_door.target, "targetname") linkTo(e_door);
+  e_door = getEnt("sliding_door_right", "targetname");
+  getEnt(e_door.target, "targetname") linkTo(e_door);
+  getEnt("sliding_door_proximity_trigger", "targetname") thread sliding_door_think();
 }
 
 sliding_door_think() {
@@ -185,19 +185,19 @@ sliding_door_think() {
 sliding_door_close(ent, endon_string) {
   level endon("kill_sliding_doors");
   level endon("sliding_door_stop_close");
-  e_trigger = getent("sliding_door_proximity_trigger", "targetname");
-  e_left_door = getent("sliding_door_left", "targetname");
-  e_right_door = getent("sliding_door_right", "targetname");
-  s_left_door_closed = getstruct("sliding_door_left_closed", "targetname");
-  s_right_door_closed = getstruct("sliding_door_right_closed", "targetname");
+  e_trigger = getEnt("sliding_door_proximity_trigger", "targetname");
+  e_left_door = getEnt("sliding_door_left", "targetname");
+  e_right_door = getEnt("sliding_door_right", "targetname");
+  s_left_door_closed = getStruct("sliding_door_left_closed", "targetname");
+  s_right_door_closed = getStruct("sliding_door_right_closed", "targetname");
   flag_wait("sliding_door_open");
 
   while(true) {
     if(!level.ai_harper istouching(e_trigger) && !level.ai_salazar istouching(e_trigger) && !level.player istouching(e_trigger)) {
       level notify("cls_dr");
       wait 0.5;
-      e_left_door moveto(s_left_door_closed.origin, 1.0);
-      e_right_door moveto(s_right_door_closed.origin, 1.0);
+      e_left_door moveTo(s_left_door_closed.origin, 1.0);
+      e_right_door moveTo(s_right_door_closed.origin, 1.0);
       flag_clear("sliding_door_open");
       break;
     }
@@ -206,7 +206,7 @@ sliding_door_close(ent, endon_string) {
   }
 
   level notify("sliding_door_reset");
-  getent("sliding_door_proximity_trigger", "targetname") thread sliding_door_think();
+  getEnt("sliding_door_proximity_trigger", "targetname") thread sliding_door_think();
 }
 
 sliding_door_close_sound() {
@@ -215,7 +215,7 @@ sliding_door_close_sound() {
   while(true) {
     level waittill("cls_dr");
     wait 0.5;
-    playsoundatposition("amb_sliding_door_close", (4665, -9823, 991));
+    playSoundAtPosition("amb_sliding_door_close", (4665, -9823, 991));
     wait 2;
   }
 }
@@ -225,18 +225,18 @@ sliding_door_open(ent) {
   level notify("sliding_door_stop_close");
 
   if(!flag("sliding_door_open")) {
-    playsoundatposition("amb_sliding_door_open", (4665, -9823, 991));
-    e_left_door = getent("sliding_door_left", "targetname");
-    e_right_door = getent("sliding_door_right", "targetname");
-    s_left_door_open = getstruct("sliding_door_left_open", "targetname");
-    s_right_door_open = getstruct("sliding_door_right_open", "targetname");
-    n_max_distance = distance2dsquared(s_left_door_open.origin, getstruct("sliding_door_left_closed", "targetname").origin);
+    playSoundAtPosition("amb_sliding_door_open", (4665, -9823, 991));
+    e_left_door = getEnt("sliding_door_left", "targetname");
+    e_right_door = getEnt("sliding_door_right", "targetname");
+    s_left_door_open = getStruct("sliding_door_left_open", "targetname");
+    s_right_door_open = getStruct("sliding_door_right_open", "targetname");
+    n_max_distance = distance2dsquared(s_left_door_open.origin, getStruct("sliding_door_left_closed", "targetname").origin);
     n_current_distance = distance2dsquared(e_left_door.origin, s_left_door_open.origin);
     n_max_time = 1.0;
     n_current_time = n_max_time * (n_current_distance / n_max_distance);
     n_current_time = max(n_current_time, 0.05);
-    e_left_door moveto(s_left_door_open.origin, n_current_time);
-    e_right_door moveto(s_right_door_open.origin, n_current_time);
+    e_left_door moveTo(s_left_door_open.origin, n_current_time);
+    e_right_door moveTo(s_right_door_open.origin, n_current_time);
     waittill_multiple_ents(e_left_door, "movedone", e_right_door, "movedone");
     flag_set("sliding_door_open");
   }
@@ -292,7 +292,7 @@ civ_girl_goto_railing() {
   m_phone.angles = ai_girl gettagangles("tag_weapon_right");
   m_phone.script_noteworthy = "cleanup_tower";
   m_phone setModel("p6_anim_cell_phone");
-  m_phone linkto(ai_girl, "tag_weapon_right");
+  m_phone linkTo(ai_girl, "tag_weapon_right");
   flag_wait("t_proceed_tower");
   wait 3;
   run_scene_and_delete("hotel_goto_girl_walk");
@@ -321,7 +321,7 @@ receptionist_left() {
 }
 
 glasses_scene() {
-  glasses = getent("glasses", "targetname");
+  glasses = getEnt("glasses", "targetname");
   glasses setviewmodelrenderflag(1);
   run_scene_and_delete("player_put_on_glasses");
 }
@@ -398,8 +398,8 @@ inside_scanner(guy) {
 scanner_backdrop() {
   level endon("inside_tower_lift");
   flag_wait("start_tarmac");
-  bm_backdrop = getent("scanner_backdrop", "targetname");
-  e_vol_backdrop = getent("vol_scanner", "targetname");
+  bm_backdrop = getEnt("scanner_backdrop", "targetname");
+  e_vol_backdrop = getEnt("vol_scanner", "targetname");
 
   while(true) {
     bm_backdrop trigger_off();
@@ -422,14 +422,14 @@ scanner_backdrop() {
 
 scanner_scenes(a_ai_explosives_workers, a_ai_security) {
   flag_wait("start_tarmac");
-  bm_clip = getent("clip_scanner_blocker", "targetname");
+  bm_clip = getEnt("clip_scanner_blocker", "targetname");
   bm_clip trigger_off();
   a_ai_security = simple_spawn("checkin_security", ::scanner_prep);
   a_ai_explosives_workers = simple_spawn("explosives_workers", ::scanner_prep);
   level thread security_left_gate();
   level thread security_middle_alert();
   level thread securityr_and_workers_alert();
-  getent("scanner_gun_trigger", "targetname") thread security_scanner_gun_think();
+  getEnt("scanner_gun_trigger", "targetname") thread security_scanner_gun_think();
   trigger_wait("trig_workers_alert");
   level notify("stop_scanner_gun_show");
   level notify("stop_scanner_gun_hide");
@@ -471,14 +471,14 @@ show_scanner_gun() {
     if(isDefined(ai_security.script_string) && ai_security.script_string == "scanner") {
       m_gun_tag_origin = spawn("script_model", ai_security.origin);
       m_gun_tag_origin setModel("t6_wpn_pistol_fiveseven_world_detect");
-      m_gun_tag_origin linkto(ai_security, "TAG_WEAPON_RIGHT", (0, 0, 0));
+      m_gun_tag_origin linkTo(ai_security, "TAG_WEAPON_RIGHT", (0, 0, 0));
       m_gun_tag_origin.targetname = "scanner_gun";
       fxorg = spawn("script_model", (0, 0, 0));
       fxorg setModel("tag_origin");
       fxorg.targetname = "scanner_gun_ping";
       fxorg.origin = ai_security gettagorigin("tag_weapon_right");
       fxorg.angles = ai_security gettagangles("tag_weapon_right");
-      fxorg linkto(ai_security, "tag_weapon_right", vectorscale((-1, 0, 0), 10.0));
+      fxorg linkTo(ai_security, "tag_weapon_right", vectorscale((-1, 0, 0), 10.0));
       playFXOnTag(level._effect["scanner_ping"], fxorg, "tag_origin");
     }
   }
@@ -499,7 +499,7 @@ hide_scanner_gun() {
       ping delete();
     }
 
-    getent("scanner_gun_trigger", "targetname") thread security_scanner_gun_think();
+    getEnt("scanner_gun_trigger", "targetname") thread security_scanner_gun_think();
   }
 }
 
@@ -508,7 +508,7 @@ scanner_ping_fx(e_tag, e_fx_offset) {
   fxorg setModel("tag_origin");
   fxorg.origin = self gettagorigin(e_tag);
   fxorg.angles = self gettagangles(e_tag);
-  fxorg linkto(self, e_tag, e_fx_offset);
+  fxorg linkTo(self, e_tag, e_fx_offset);
   fxorg thread ping_fx_sounds();
   playFXOnTag(level._effect["scanner_ping"], fxorg, "tag_origin");
   flag_wait("trig_player_blocker_2");
@@ -526,49 +526,49 @@ ping_fx_sounds() {
 }
 
 security_left_gate() {
-  sec_gate_left_player = getent("sec_gate_left_player", "targetname");
-  sec_gate_right_player = getent("sec_gate_right_player", "targetname");
-  bm_clip_2 = getent("clip_scanner_blocker_2", "targetname");
+  sec_gate_left_player = getEnt("sec_gate_left_player", "targetname");
+  sec_gate_right_player = getEnt("sec_gate_right_player", "targetname");
+  bm_clip_2 = getEnt("clip_scanner_blocker_2", "targetname");
   flag_wait("gate_alert");
-  sec_gate_left_player rotateyaw(-90, 0.7, 0.5, 0.2);
+  sec_gate_left_player rotateYaw(-90, 0.7, 0.5, 0.2);
   sec_gate_left_player playSound("evt_scanner_gate_close");
-  sec_gate_right_player rotateyaw(90, 0.7, 0.5, 0.2);
+  sec_gate_right_player rotateYaw(90, 0.7, 0.5, 0.2);
   bm_clip_2 trigger_on();
   flag_wait("gate_open");
-  sec_gate_left_player rotateyaw(90, 0.7, 0.5, 0.2);
+  sec_gate_left_player rotateYaw(90, 0.7, 0.5, 0.2);
   sec_gate_left_player playSound("evt_scanner_gate_open");
-  sec_gate_right_player rotateyaw(-90, 0.7, 0.5, 0.2);
+  sec_gate_right_player rotateYaw(-90, 0.7, 0.5, 0.2);
   bm_clip_2 trigger_off();
   flag_wait("trig_player_blocker_2");
   level notify("kill_scanner_gun_logic");
   level notify("kill_sliding_doors");
-  sec_gate_left_player rotateyaw(-90, 0.7, 0.5, 0.2);
+  sec_gate_left_player rotateYaw(-90, 0.7, 0.5, 0.2);
   sec_gate_left_player playSound("evt_scanner_gate_close");
-  sec_gate_right_player rotateyaw(90, 0.7, 0.5, 0.2);
+  sec_gate_right_player rotateYaw(90, 0.7, 0.5, 0.2);
   bm_clip_2 trigger_on();
 }
 
 security_gate() {
-  sec_gate_left = getent("sec_gate_left", "targetname");
+  sec_gate_left = getEnt("sec_gate_left", "targetname");
   sec_gate_left playSound("evt_scanner_gate_close");
-  sec_gate_left rotateyaw(-90, 0.7, 0.5, 0.2);
-  sec_gate_right = getent("sec_gate_right", "targetname");
-  sec_gate_right rotateyaw(90, 0.7, 0.5, 0.2);
-  sec_gate_left_anim = getent("sec_gate_left_anim", "targetname");
-  sec_gate_left_anim rotateyaw(-90, 0.7, 0.5, 0.2);
-  sec_gate_right_anim = getent("sec_gate_right_anim", "targetname");
-  sec_gate_right_anim rotateyaw(90, 0.7, 0.5, 0.2);
-  sec_gate_left_player_anim = getent("sec_gate_left_player_anim", "targetname");
-  sec_gate_left_player_anim rotateyaw(-90, 0.7, 0.5, 0.2);
-  sec_gate_right_player_anim = getent("sec_gate_right_player_anim", "targetname");
-  sec_gate_right_player_anim rotateyaw(90, 0.7, 0.5, 0.2);
+  sec_gate_left rotateYaw(-90, 0.7, 0.5, 0.2);
+  sec_gate_right = getEnt("sec_gate_right", "targetname");
+  sec_gate_right rotateYaw(90, 0.7, 0.5, 0.2);
+  sec_gate_left_anim = getEnt("sec_gate_left_anim", "targetname");
+  sec_gate_left_anim rotateYaw(-90, 0.7, 0.5, 0.2);
+  sec_gate_right_anim = getEnt("sec_gate_right_anim", "targetname");
+  sec_gate_right_anim rotateYaw(90, 0.7, 0.5, 0.2);
+  sec_gate_left_player_anim = getEnt("sec_gate_left_player_anim", "targetname");
+  sec_gate_left_player_anim rotateYaw(-90, 0.7, 0.5, 0.2);
+  sec_gate_right_player_anim = getEnt("sec_gate_right_player_anim", "targetname");
+  sec_gate_right_player_anim rotateYaw(90, 0.7, 0.5, 0.2);
 }
 
 security_left() {
   flag_wait("start_tarmac");
   run_scene_and_delete("security_left");
   level thread run_scene_and_delete("security_left_idle");
-  ai_guard = getent("security1_ai", "targetname");
+  ai_guard = getEnt("security1_ai", "targetname");
   ai_guard set_blend_in_out_times(0.2);
   flag_wait("alert");
   level clientnotify("start");
@@ -598,7 +598,7 @@ securityr_and_workers_alert() {
 }
 
 alert_trigger_check() {
-  trig = getent("trig_workers_alert", "targetname");
+  trig = getEnt("trig_workers_alert", "targetname");
 
   while(!level.player istouching(trig)) {
     wait 0.05;
@@ -694,25 +694,25 @@ player_group_think() {
   delete_exploder(99);
   wait 0.25;
   bm_lift_left = setup_elevator("tower_lift_left", "tower_elevator_1", "cleanup_dropdown");
-  playsoundatposition("amb_elevator_open_fast", (4505, -7218, 962));
-  e_align = getent("align_player", "targetname");
-  e_align linkto(bm_lift_left);
+  playSoundAtPosition("amb_elevator_open_fast", (4505, -7218, 962));
+  e_align = getEnt("align_player", "targetname");
+  e_align linkTo(bm_lift_left);
   m_tag_origin = spawn("script_model", e_align.origin);
   m_tag_origin setModel("tag_origin");
   m_tag_origin.angles = e_align.angles;
-  m_tag_origin linkto(e_align);
+  m_tag_origin linkTo(e_align);
   level.ai_harper set_blend_in_out_times(0);
   level.m_harper_briefcase set_blend_in_out_times(0);
   level.ai_salazar set_blend_in_out_times(0);
   level.m_duffle_bag set_blend_in_out_times(0);
   flag_wait("near_tower_lift");
   level thread autosave_by_name("karma_checkin_end");
-  bm_player_clip = getent("clip_tower_lift_top", "targetname");
+  bm_player_clip = getEnt("clip_tower_lift_top", "targetname");
   bm_player_clip trigger_off();
   bm_lift_left thread elevator_move_doors(1, 1.0, 0.2, 0.5);
   thread run_scene("tower_elevator_open");
-  m_outer_left = getent("door_outer_elevator_1left", "targetname");
-  m_outer_right = getent("door_outer_elevator_1right", "targetname");
+  m_outer_left = getEnt("door_outer_elevator_1left", "targetname");
+  m_outer_right = getEnt("door_outer_elevator_1right", "targetname");
   m_outer_left movex(-58, 1.0, 0.2, 0.5);
   m_outer_right movex(58, 1.0, 0.2, 0.5);
   wait 1.0;
@@ -720,18 +720,18 @@ player_group_think() {
   flag_wait("elevator_wait_end");
   run_scene_and_delete("tower_lift_enter");
   level thread run_scene_and_delete("tower_lift_enter_wait");
-  level.ai_salazar linkto(m_tag_origin);
-  level.ai_harper linkto(m_tag_origin);
-  level.m_duffle_bag linkto(m_tag_origin);
-  level.m_harper_briefcase linkto(m_tag_origin);
+  level.ai_salazar linkTo(m_tag_origin);
+  level.ai_harper linkTo(m_tag_origin);
+  level.m_duffle_bag linkTo(m_tag_origin);
+  level.m_harper_briefcase linkTo(m_tag_origin);
   trigger_wait("trig_tower_lift");
   set_objective(level.obj_find_crc, undefined, "remove");
   bm_player_clip trigger_on();
-  bm_player_clip linkto(bm_lift_left);
+  bm_player_clip linkTo(bm_lift_left);
   bm_player_clip setmovingplatformenabled(1);
   level thread run_scene_and_delete("tower_lift_workers_run");
   wait 3.0;
-  playsoundatposition("amb_elevator_close", (4504, -7112, 962));
+  playSoundAtPosition("amb_elevator_close", (4504, -7112, 962));
   start_atrium_walkers();
   bm_lift_left thread elevator_move_doors(0, 1.0, 0.2, 0.5);
   m_outer_left movex(58, 1.0, 0.2, 0.5);
@@ -748,13 +748,13 @@ player_group_think() {
   level.player playSound("amb_elevator_start");
   level.sound_elevator_ent_1 playLoopSound("amb_elevator_loop", 1);
   level thread elevator_stop_delay_1();
-  s_destination = getstruct("tower_lift_left_middle", "targetname");
+  s_destination = getStruct("tower_lift_left_middle", "targetname");
   bm_lift_left setmovingplatformenabled(1);
-  bm_lift_left moveto(s_destination.origin, 24, 3.0, 2.0);
+  bm_lift_left moveTo(s_destination.origin, 24, 3.0, 2.0);
   bm_lift_left waittill("movedone");
   wait 2.0;
   level thread run_scene("tower_elevator_open");
-  playsoundatposition("amb_elevator_open", (4506, -6091, -2844));
+  playSoundAtPosition("amb_elevator_open", (4506, -6091, -2844));
   level clientnotify("edo");
   scene_wait("tower_lift_workers_run");
   level.ai_harper unlink();
@@ -763,7 +763,7 @@ player_group_think() {
   level thread run_scene_and_delete("tower_lift_karma_exit");
   level thread run_scene_and_delete("tower_lift_salazar_exit");
   flag_wait("harper_exit_close");
-  playsoundatposition("amb_elevator_close_2", (4506, -6091, -2844));
+  playSoundAtPosition("amb_elevator_close_2", (4506, -6091, -2844));
   run_scene("tower_elevator_close");
   delete_atrium_walkers();
   level clientnotify("edc");
@@ -773,9 +773,9 @@ player_group_think() {
   level.sound_elevator_ent_1 playLoopSound("amb_elevator_loop", 1);
   level thread elevator_stop_delay_2();
   wait 1.0;
-  s_destination = getstruct("tower_lift_left_bottom", "targetname");
+  s_destination = getStruct("tower_lift_left_bottom", "targetname");
   bm_lift_left setmovingplatformenabled(1);
-  bm_lift_left moveto(s_destination.origin, 5, 1.0, 1.0);
+  bm_lift_left moveTo(s_destination.origin, 5, 1.0, 1.0);
   bm_lift_left waittill("movedone");
   level.ai_salazar unlink();
   level.m_duffle_bag unlink();
@@ -801,7 +801,7 @@ elevator_stop_delay_2() {
   level.sound_elevator_ent_1 stoploopsound(1);
   level.player playSound("amb_elevator_stop");
   wait 2.8;
-  playsoundatposition("amb_elevator_open_final", (4480, -5945, -3508));
+  playSoundAtPosition("amb_elevator_open_final", (4480, -5945, -3508));
 
   if(isDefined(level.sound_elevator_ent_1)) {
     level.sound_elevator_ent_1 delete();
@@ -936,17 +936,17 @@ intro_worker_pa_dialog() {
   flag_wait("guar_peters_can_you_come_0");
   ai_guard say_dialog("guar_peters_can_you_come_0");
   flag_wait("pa_why_not_show_us_your_0");
-  s_pos = getstruct("pa_node_club", "targetname");
+  s_pos = getStruct("pa_node_club", "targetname");
   e_pa_pos = spawn("script_origin", s_pos.origin);
   e_pa_pos say_dialog("pa_why_not_show_us_your_0", undefined, 1);
   flag_wait("pa_visit_our_exclusive_0");
   e_pa_pos delete();
-  s_pos = getstruct("pa_node_shops", "targetname");
+  s_pos = getStruct("pa_node_shops", "targetname");
   e_pa_pos = spawn("script_origin", s_pos.origin);
   e_pa_pos say_dialog("pa_visit_our_exclusive_0", undefined, 1);
   flag_wait("pa_or_maybe_just_take_t_0 ");
   e_pa_pos delete();
-  s_pos = getstruct("pa_node_pool", "targetname");
+  s_pos = getStruct("pa_node_pool", "targetname");
   e_pa_pos = spawn("script_origin", s_pos.origin);
   e_pa_pos say_dialog("pa_or_maybe_just_take_t_0", undefined, 1);
   wait 5.0;

@@ -242,7 +242,7 @@ registerstart_killstreak_collision_rounds(s_veh) {
 }
 
 spawn_attack_helicopter(str_targetname, str_team, b_guns = 1, b_missiles = 1, a_parms) {
-  chopper = spawnvehicle(#"veh_t8_helicopter_gunship_mp", self.origin, self.angles, str_targetname);
+  chopper = spawnVehicle(#"veh_t8_helicopter_gunship_mp", self.origin, self.angles, str_targetname);
 
   if(!isDefined(a_parms)) {
     a_parms = [];
@@ -297,7 +297,7 @@ spawn_attack_helicopter(str_targetname, str_team, b_guns = 1, b_missiles = 1, a_
   chopper.target_offset = target_offset;
   target_set(chopper, target_offset);
   minigun_snd_ent = spawn("script_origin", chopper gettagorigin("tag_flash"));
-  minigun_snd_ent linkto(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
+  minigun_snd_ent linkTo(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
   chopper.minigun_snd_ent = minigun_snd_ent;
   minigun_snd_ent thread helicopter::autostopsound();
   self.damagetaken = 0;
@@ -881,7 +881,7 @@ j_fore_le_01() {
   level endon(#"combattraining_logic_finished");
   ct_utils::function_6d7f4ec6(30);
   level.var_105dad71 = 1;
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player thread function_377cd9ae();
   e_player thread function_78aff698();
   e_player thread ct_utils::function_329f9ba6(#"hash_3e63055cff392ca5", 10, "grey", 1);

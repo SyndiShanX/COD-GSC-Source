@@ -181,9 +181,9 @@ function_6880852f(b_up) {
   forward_view_angles = anglesToForward(self getplayerangles());
 
   if(forward_view_angles[2] < -0.7) {
-    var_ccb70dad = vectornormalize((forward_view_angles[0], forward_view_angles[1], -0.25));
+    var_ccb70dad = vectorNormalize((forward_view_angles[0], forward_view_angles[1], -0.25));
   } else {
-    var_ccb70dad = vectornormalize(forward_view_angles);
+    var_ccb70dad = vectorNormalize(forward_view_angles);
   }
 
   a_e_targets = function_3874b38f();
@@ -320,7 +320,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
   }
 
   if(!isDefined(ai_zombie) || isDefined(ai_zombie.var_3df1a748) && ai_zombie.var_3df1a748) {
-    e_projectile moveto(v_end, n_time);
+    e_projectile moveTo(v_end, n_time);
     e_projectile waittill(#"movedone");
     e_projectile clientfield::increment("" + #"hemera_impact");
     waitframe(1);
@@ -339,7 +339,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
       }
 
       if(isDefined(ai_zombie)) {
-        e_projectile moveto(ai_zombie getcentroid(), n_time);
+        e_projectile moveTo(ai_zombie getcentroid(), n_time);
         wait n_time - 0.05;
       }
     } else if(isDefined(ai_zombie)) {
@@ -361,11 +361,11 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
       }
 
       if(e_projectile.n_index === 1) {
-        e_projectile moveto(v_right_end, n_time);
+        e_projectile moveTo(v_right_end, n_time);
       } else if(e_projectile.n_index === 2) {
-        e_projectile moveto(v_left_end, n_time);
+        e_projectile moveTo(v_left_end, n_time);
       } else {
-        e_projectile moveto(v_end, n_time);
+        e_projectile moveTo(v_end, n_time);
       }
 
       wait n_time - 0.05;
@@ -423,7 +423,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
             v_end = ai_zombie getcentroid();
           }
 
-          e_projectile moveto(v_end, n_time);
+          e_projectile moveTo(v_end, n_time);
         }
 
         waitframe(1);
@@ -441,7 +441,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
   }
 
   if(isDefined(v_end)) {
-    e_projectile moveto(v_end, 0.05);
+    e_projectile moveTo(v_end, 0.05);
     e_projectile waittill(#"movedone");
   }
 
@@ -618,7 +618,7 @@ player_charged_shot(weapon) {
     }
 
     if(isDefined(v_ground) && isDefined(self.mdl_beam)) {
-      self.mdl_beam moveto(v_ground, 0.3);
+      self.mdl_beam moveTo(v_ground, 0.3);
     }
   }
 

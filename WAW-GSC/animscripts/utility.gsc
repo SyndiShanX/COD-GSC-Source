@@ -1013,7 +1013,7 @@ getEnemySightPos() {
 }
 
 tryTurret(targetname) {
-  turret = getent(targetname, "targetname");
+  turret = getEnt(targetname, "targetname");
   if(!isDefined(turret)) {
     return false;
   }
@@ -1235,7 +1235,7 @@ throwGun() {
   weaponClass = "weapon_" + self.weapon;
   weapon = spawn(weaponClass, org.origin);
   weapon.angles = self getTagAngles("tag_weapon_right");
-  weapon linkto(org);
+  weapon linkTo(org);
 
   lastOrigin = org.origin;
   while((isDefined(weapon)) && (isDefined(weapon.origin))) {

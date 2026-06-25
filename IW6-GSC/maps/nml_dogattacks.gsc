@@ -87,7 +87,7 @@ domeleevsdog(var_0, var_1, var_2) {
   self setflaggedanimrestart("aianim", var_0[1], 1, 0.1, 1);
   thread animscripts\shared::donotetracks("aianim");
   wait 0.15;
-  self.syncedmeleetarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedmeleetarget linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   thread meleestrugglevsdog_collision();
   self waittillmatch("aianim", "end");
 
@@ -400,7 +400,7 @@ meleestrugglevsdog_short() {
   self setflaggedanimrestart("aianim", var_1[1], 1, 0.1, 1);
   thread animscripts\shared::donotetracks("aianim");
   wait 0.15;
-  self.syncedmeleetarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedmeleetarget linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   thread meleestrugglevsdog_collision();
   self waittillmatch("aianim", "end");
 

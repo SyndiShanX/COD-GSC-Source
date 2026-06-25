@@ -28,7 +28,7 @@ function function_87b9c1ef(var_27169374 = 25, var_25c457e2 = 60) {
     return;
   }
 
-  level.player = isDefined(level.player) ? level.player : getplayers()[0];
+  level.player = isDefined(level.player) ? level.player : getPlayers()[0];
 
   if(!namespace_61e6d095::exists(#"hash_71351bf35e6d6353")) {
     namespace_61e6d095::create(#"hash_71351bf35e6d6353", #"surveycam");

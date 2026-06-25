@@ -52,9 +52,9 @@ zombies_make_usable(var_0, var_1) {
     self.trigger.origin = self.trigger.origin + var_1;
   }
 
-  self.trigger linkto(self);
+  self.trigger linkTo(self);
   self.trigger makeusable();
-  self.trigger sethintstring(var_0);
+  self.trigger setHintString(var_0);
   self.trigger thread zombies_trigger_use_think();
 }
 
@@ -431,7 +431,7 @@ onscriptagentkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     var_9 = self.deathanimstateoverride;
   } else if(self.species == "dog") {
     if(var_3 == "MOD_MELEE" && isDefined(var_1) && isPlayer(var_1) && var_1 ishighjumpallowed()) {
-      var_10 = vectornormalize(var_1.origin - self.origin);
+      var_10 = vectorNormalize(var_1.origin - self.origin);
       var_11 = anglesToForward(self.angles);
       var_12 = anglestoright(self.angles);
       var_13 = vectordot(var_10, var_11);
@@ -453,7 +453,7 @@ onscriptagentkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
     }
   } else if(var_3 == "MOD_MELEE") {
     if(isDefined(var_1) && isPlayer(var_1) && var_1 ishighjumpallowed()) {
-      var_10 = vectornormalize(var_1.origin - self.origin);
+      var_10 = vectorNormalize(var_1.origin - self.origin);
       var_11 = anglesToForward(self.angles);
       var_12 = anglestoright(self.angles);
       var_13 = vectordot(var_10, var_11);
@@ -576,7 +576,7 @@ moveawayfromtraversalsurface() {
   var_1 = vectortoangles(self.traversalvector);
   var_2 = anglestoup(var_1);
   var_3 = self.origin + var_2 * var_0;
-  self setorigin(var_3);
+  self setOrigin(var_3);
 }
 
 getdeathanimduration(var_0) {

@@ -606,7 +606,7 @@ _id_B768() {
   scripts\mp\gametypes\br_pickups::_id_825B();
 
   if(scripts\mp\gametypes\br_public::_id_8805() && isDefined(level._id_B59F)) {
-    var_5 = scripts\engine\utility::getstruct(level._id_B59F, "targetname");
+    var_5 = scripts\engine\utility::getStruct(level._id_B59F, "targetname");
   }
 
   scripts\mp\gametypes\br_gulag::_id_728C(1, undefined, var_5, 1, var_6, 1);
@@ -631,7 +631,7 @@ _id_FD08() {
       if(distance2dsquared(self._id_83CD, var_0.origin) > 25000000) {
         self._id_83CD = var_0.origin;
         self._id_83CE = var_1;
-        self setorigin(var_0.origin);
+        self setOrigin(var_0.origin);
         scripts\mp\gametypes\br_public::_id_B67D();
       }
 
@@ -696,7 +696,7 @@ _id_6A28() {
   var_4 = level._id_2A73._id_2A25[0] * 2;
   var_5 = var_1 + var_3 * var_4;
   var_5 = scripts\mp\gametypes\br_c130::_id_DEAF(var_1, var_5);
-  var_6 = getent("airstrikeheight", "targetname");
+  var_6 = getEnt("airstrikeheight", "targetname");
   var_7 = (var_5[0], var_5[1], var_6.origin[2]);
   var_8 = _id_F3CB(var_7);
   var_5 = var_8 + (0, 0, var_0);
@@ -1671,7 +1671,7 @@ _id_5030(var_0) {
 
   if(var_7 > 0) {
     var_8 = _func_0218(2 * var_7 / 800);
-    var_1 moveto(var_6, var_8, var_8, 0);
+    var_1 moveTo(var_6, var_8, var_8, 0);
     wait(var_8);
   }
 
@@ -1826,10 +1826,10 @@ _id_E2FA(var_0, var_1, var_2, var_3) {
 _id_E361(var_0) {
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("br_plunder_extraction_delivery_rope");
-  var_1 linkto(var_0, "side_door_l_jnt", (11, 20, 42), (0, 180, 0));
+  var_1 linkTo(var_0, "side_door_l_jnt", (11, 20, 42), (0, 180, 0));
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("br_plunder_extraction_delivery_bag");
-  var_2 linkto(var_1, "dyn_rope_end", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_1, "dyn_rope_end", (0, 0, 0), (0, 0, 0));
   var_0._id_C918 = var_1;
   var_0._id_3E6D = var_2;
 }
@@ -3167,11 +3167,11 @@ _id_77C4() {
   self._id_FDB2 = self._id_3E6D;
   var_0 = self._id_FDB2;
   var_0 makeuseable();
-  var_0 setcursorhint("HINT_NOICON");
+  var_0 setCursorHint("HINT_NOICON");
   var_0 setuseholdduration("duration_medium");
   var_0 sethintrequiresholding(1);
   var_0 setuserange(230);
-  var_0 sethintstring(&"MP/BR_USE_EXFIL_CHOPPER");
+  var_0 setHintString(&"MP/BR_USE_EXFIL_CHOPPER");
   var_1 = level._id_2A35.size;
   level._id_2A35[var_1] = var_0;
 
@@ -3655,9 +3655,9 @@ _id_B887(var_0, var_1) {
   var_6 = spawn("script_model", var_2);
   var_6 setModel("tag_origin");
   var_6.angles = var_3;
-  var_0 cameralinkto(var_6, "tag_origin");
-  var_6 moveto(var_4, 60);
-  var_6 rotateto(var_5, 60);
+  var_0 cameralinkTo(var_6, "tag_origin");
+  var_6 moveTo(var_4, 60);
+  var_6 rotateTo(var_5, 60);
 
   if(0) {
     wait 5;

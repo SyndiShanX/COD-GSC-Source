@@ -398,12 +398,12 @@ keegan_fire_r(var_0) {
 
 gun_r_on(var_0) {
   level.keegan_gun_r show();
-  level.keegan_gun_r linkto(var_0, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  level.keegan_gun_r linkTo(var_0, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
 }
 
 gun_l_on(var_0) {
   level.keegan_gun_l show();
-  level.keegan_gun_l linkto(var_0, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  level.keegan_gun_l linkTo(var_0, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 }
 
 gun_r_off(var_0) {
@@ -466,9 +466,9 @@ hide_gasmask(var_0) {
 }
 
 show_knife(var_0) {
-  level.flare_knife linkto(var_0, "tag_stowed_back", (0, 0, 0), (0, 0, 0));
+  level.flare_knife linkTo(var_0, "tag_stowed_back", (0, 0, 0), (0, 0, 0));
   level.flare_knife show();
-  var_1 = common_scripts\utility::getstruct("fake_light_pos", "targetname");
+  var_1 = common_scripts\utility::getStruct("fake_light_pos", "targetname");
   playFX(level._effect["vfx_light_fade"], var_1.origin);
 }
 
@@ -478,7 +478,7 @@ hide_knife(var_0) {
 }
 
 show_gun(var_0) {
-  level.flare_gun linkto(var_0, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  level.flare_gun linkTo(var_0, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   level.flare_gun show();
 }
 
@@ -517,7 +517,7 @@ normal_speed(var_0) {
 
 drop_flare(var_0) {
   maps\_anim::anim_set_rate_single(var_0, "ct_walk2", 1.0);
-  var_1 = getent("clubhouse_breach_light", "targetname");
+  var_1 = getEnt("clubhouse_breach_light", "targetname");
   var_1.unlit_models = [];
   var_1.lit_models = [];
   var_1.script_threshold = 0;

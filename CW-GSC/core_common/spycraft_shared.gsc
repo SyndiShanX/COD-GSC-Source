@@ -194,8 +194,8 @@ function function_3e9e9071(player, var_f4452fa1) {
     player.var_c1e0dff3.targetentity = var_dd56041e;
     player.var_c1e0dff3 setinvisibletoall();
     player.var_c1e0dff3 setvisibletoplayer(player);
-    player.var_c1e0dff3 setcursorhint("HINT_NOICON");
-    player.var_c1e0dff3 sethintstring(#"hash_60e73c729474ea50");
+    player.var_c1e0dff3 setCursorHint("HINT_NOICON");
+    player.var_c1e0dff3 setHintString(#"hash_60e73c729474ea50");
     player.var_c1e0dff3 setteamfortrigger(player.team);
     player.var_c1e0dff3 function_49462027(1, 1);
   }

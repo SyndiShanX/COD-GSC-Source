@@ -100,7 +100,7 @@ function function_1abfde35(e_attacker) {
     if(!(isDefined(zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod)) && zm_utility::is_headshot(self.damageweapon, self.damagelocation, self.damagemod))) {
       return;
     }
-    var_52df56de = getent("area_courtyard", "targetname");
+    var_52df56de = getEnt("area_courtyard", "targetname");
     if(!(isDefined(self istouching(var_52df56de)) && self istouching(var_52df56de))) {
       return;
     }

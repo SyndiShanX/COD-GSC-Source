@@ -109,7 +109,7 @@ function private function_2b6f50fd() {
   while(true) {
     waitresult = self waittill(#"bad_path");
 
-    if(self isplayinganimscripted()) {
+    if(self isplayinganimScripted()) {
       continue;
     }
 

@@ -43,7 +43,7 @@ event2_main_function() {
   level thread dialogue_setup();
 }
 change_heros_colors() {
-  trigger = getent("ev2_pacing_starts", "targetname");
+  trigger = getEnt("ev2_pacing_starts", "targetname");
   trigger waittill("trigger");
 
   level.sarge disable_ai_color();
@@ -53,26 +53,26 @@ change_heros_colors() {
   level.walker set_force_color("g");
 
   if(!NumRemoteClients()) {
-    trig1 = getent("ev2_allies_reinforcements_trig", "targetname");
+    trig1 = getEnt("ev2_allies_reinforcements_trig", "targetname");
     trig1 notify("trigger");
 
-    trig2 = getent("ev2_allies_reinforcementsb_trig", "targetname");
+    trig2 = getEnt("ev2_allies_reinforcementsb_trig", "targetname");
     trig2 notify("trigger");
   } else if(NumRemoteClients() == 1) {
-    trig2 = getent("ev2_allies_reinforcementsb_trig", "targetname");
+    trig2 = getEnt("ev2_allies_reinforcementsb_trig", "targetname");
     trig2 notify("trigger");
   }
 }
 initial_plane_napalm_drop() {
-  trigger = getent("ev2_initial_plane_spawn", "targetname");
+  trigger = getEnt("ev2_initial_plane_spawn", "targetname");
   trigger waittill("trigger");
 
   level notify("event2_bombing_starts");
 
   wait(0.5);
 
-  plane1 = getent("event2_bombing_plane_01", "targetname");
-  plane2 = getent("event2_bombing_plane_02", "targetname");
+  plane1 = getEnt("event2_bombing_plane_01", "targetname");
+  plane2 = getEnt("event2_bombing_plane_02", "targetname");
 
   plane1 thread bomber_sound_flyby("auto4986", 0.1);
   plane2 thread bomber_sound_flyby("auto4984", 0.1);
@@ -110,7 +110,7 @@ initial_plane_napalm_drop() {
   wait(4);
   playFX(level._effect["fireball_explosion"], (44012, 4927, 214.4));
 
-  trigger = getent("ev2_plane_strafe_trigger", "targetname");
+  trigger = getEnt("ev2_plane_strafe_trigger", "targetname");
   trigger notify("trigger");
 }
 
@@ -131,16 +131,16 @@ initial_napalm_drones2() {
 }
 
 second_plane_napalm_drop() {
-  trigger = getent("ev2_plane_strafe_trigger", "targetname");
+  trigger = getEnt("ev2_plane_strafe_trigger", "targetname");
   trigger waittill("trigger");
 
   level notify("plane_strafe_start");
 
   wait(0.1);
 
-  plane1 = getent("event2_bombing_plane_1", "targetname");
-  plane2 = getent("event2_bombing_plane_2", "targetname");
-  plane3 = getent("event2_bombing_plane_3", "targetname");
+  plane1 = getEnt("event2_bombing_plane_1", "targetname");
+  plane2 = getEnt("event2_bombing_plane_2", "targetname");
+  plane3 = getEnt("event2_bombing_plane_3", "targetname");
 
   plane1 thread bomber_sound_flyby("auto2598", 0.1);
   plane2 thread bomber_sound_flyby("auto3941", 0.1);
@@ -230,13 +230,13 @@ flametank_carnage_event() {
 }
 
 flametank_tree_sniper() {
-  tree = getent("test_tree", "script_noteworthy");
+  tree = getEnt("test_tree", "script_noteworthy");
 
   tree thread flame_notify();
 
   model_tag_origin = spawn("script_model", tree.origin);
   model_tag_origin setModel("tag_origin");
-  model_tag_origin linkto(tree, "tag_origin", (0, 0, 0), (0, 0, 0));
+  model_tag_origin linkTo(tree, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   node = getvehiclenode("auto5390", "targetname");
   node waittill("trigger");
@@ -245,14 +245,14 @@ flametank_tree_sniper() {
 
   level.flametank setspeed(0, 10, 10);
 
-  sniper_spawner = getent("ev2_tree_sniper", "targetname");
+  sniper_spawner = getEnt("ev2_tree_sniper", "targetname");
   sniper = force_spawn_guy(sniper_spawner);
 
   wait(0.05);
   if(isDefined(sniper) && isalive(sniper)) {
     level.flametank clearturrettarget();
 
-    level.flametank setturrettargetent(sniper);
+    level.flametank setturrettargetEnt(sniper);
 
     level.flametank fireweapon();
   }
@@ -278,7 +278,7 @@ flame_notify() {
     self waittill("broken", broken_notify, attacker);
     guy animscripts\death::flame_death_fx();
 
-    node = getent("auto17", "targetname");
+    node = getEnt("auto17", "targetname");
     createrope(node.origin, (0, 0, 0), 100, guy, "j_ankle_ri");
 
     wait(0.05);
@@ -329,7 +329,7 @@ flame_battle_left2() {
 
   level waittill("flaming_right1_done");
 
-  trigger = getent("event2_japs_flow_left_2", "script_noteworthy");
+  trigger = getEnt("event2_japs_flow_left_2", "script_noteworthy");
   trigger notify("trigger");
 
   self setspeed(4, 5, 8);
@@ -351,7 +351,7 @@ flame_battle_right2() {
 
   level waittill("flaming_left2_done");
 
-  trigger = getent("event2_japs_flow_right_2", "script_noteworthy");
+  trigger = getEnt("event2_japs_flow_right_2", "script_noteworthy");
   trigger notify("trigger");
 
   self setspeed(4, 5, 8);
@@ -373,12 +373,12 @@ flame_battle_left3() {
 
   level waittill("flaming_right2_done");
 
-  trigger = getent("event2_japs_flow_left_3a", "script_noteworthy");
+  trigger = getEnt("event2_japs_flow_left_3a", "script_noteworthy");
   trigger notify("trigger");
 
   wait(0.05);
 
-  trigger = getent("event2_japs_flow_left_3b", "script_noteworthy");
+  trigger = getEnt("event2_japs_flow_left_3b", "script_noteworthy");
   trigger notify("trigger");
 
   self setspeed(4, 5, 8);
@@ -396,7 +396,7 @@ flame_battle_left3() {
   self setspeed(0, 10, 10);
 }
 fire_guys_in_area(event_flag, trigger_targetname, goal_volume) {
-  area_trigger = getent(trigger_targetname, "targetname");
+  area_trigger = getEnt(trigger_targetname, "targetname");
 
   self thread check_ai_existance(event_flag, area_trigger, goal_volume);
 
@@ -415,7 +415,7 @@ fire_guys_in_area(event_flag, trigger_targetname, goal_volume) {
 
     if(axis_guys.size >= 1) {
       if(!flag(event_flag) && isalive(axis_guys[i]) && axis_guys[i] istouching(area_trigger)) {
-        self setturrettargetent(axis_guys[i], (0, 0, randomintrange(30, 60)));
+        self setturrettargetEnt(axis_guys[i], (0, 0, randomintrange(30, 60)));
         self waittill_notify_or_timeout("turret_on_target", randomintrange(3, 5));
       }
     } else if(!flag(event_flag)) {
@@ -484,7 +484,7 @@ pel1b_outro() {
   guys[1].ignoreall = true;
   guys[2].ignoreall = true;
 
-  anim_struct = getstruct("outro_anim", "targetname");
+  anim_struct = getStruct("outro_anim", "targetname");
 
   goal_node_roebuck = getnode("roebuck_outro", "targetname");
   goal_node_polonsky = getnode("polonsky_outro", "targetname");
@@ -549,7 +549,7 @@ pacing_vignette_in_place_think(goal_node, flag_name, anim_in, anim_looping) {
 outro_animate_radio_model(goal_node) {
   radio_model = spawn("script_model", self.origin);
   radio_model setModel("char_usa_marine_radiohandset");
-  radio_model linkto(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  radio_model linkTo(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
   radio_model UseAnimTree(#animtree);
   radio_model.animname = "radio";
@@ -564,7 +564,7 @@ outro_animate_radio_model(goal_node) {
 setup_objectives() {
   objective_add(3, "current", &"PEL1B_OBJECTIVE_EV2_FLANK", (43393.7, 4060.1, 168.2));
 
-  trigger = getent("ev2_initial_plane_spawn", "targetname");
+  trigger = getEnt("ev2_initial_plane_spawn", "targetname");
   trigger waittill("trigger");
 
   objective_state(3, "done");
@@ -582,20 +582,20 @@ setup_objectives() {
   autosave_by_name("flametank dead");
 
   objective_add(5, "current", &"PEL1B_OBJECTIVE_EV2_ASSAULT_CAVE");
-  cave_entrance_trigger = getent("cave_entrance", "targetname");
+  cave_entrance_trigger = getEnt("cave_entrance", "targetname");
   cave_entrance_trigger waittill("trigger");
   objective_state(5, "done");
 
   autosave_by_name("cave entrance");
 
   objective_add(6, "current", &"PEL1B_OBJECTIVE_EV2_CAVE_CLEAR", (40871.2, -218.9, 885.508));
-  final_trigger = getent("last_cave_room_reached", "targetname");
+  final_trigger = getEnt("last_cave_room_reached", "targetname");
   final_trigger waittill("trigger");
 
   autosave_by_name("artillery room");
 
   objective_string(6, &"PEL1B_OBJECTIVE_EV2_ART_CLEAR");
-  final_room = getent("final_room_trigger", "targetname");
+  final_room = getEnt("final_room_trigger", "targetname");
   wait(5);
   while(1) {
     cleared = true;
@@ -645,14 +645,14 @@ objective_follow_me(num, endon_str) {
   self thread objective_monitor_death(num);
 }
 cave_effects() {
-  trigger1 = getent("ev2_start_art_dust", "targetname");
+  trigger1 = getEnt("ev2_start_art_dust", "targetname");
   trigger1 waittill("trigger");
   flag_set("cave_artillery_active");
   level notify("cave_artillery_active");
 
   level thread cave_dust_fx_loop();
 
-  trigger1 = getent("ev2_stop_art_dust", "targetname");
+  trigger1 = getEnt("ev2_stop_art_dust", "targetname");
   trigger1 waittill("trigger");
 
   flag_clear("cave_artillery_active");
@@ -665,7 +665,7 @@ cave_dust_fx_loop() {
 
   while(flag("cave_artillery_active")) {
     wait(randomfloat(3) + 3);
-    playsoundatposition("mortar_dirt", (41063.2, -538.3, 857.6));
+    playSoundAtPosition("mortar_dirt", (41063.2, -538.3, 857.6));
 
     level thread play_dust_fx_near_players();
   }
@@ -704,7 +704,7 @@ ev2_bombing_dialog() {
 }
 
 ev2_wait_for_tank_dialog() {
-  trigger = getent("ev2_plane_strafe_trigger", "targetname");
+  trigger = getEnt("ev2_plane_strafe_trigger", "targetname");
   trigger waittill("trigger");
   wait(1);
 
@@ -723,7 +723,7 @@ ev2_tank_move_up_dialog() {
 }
 
 ev2_stay_behind_tank_dialog() {
-  trigger = getent("flametank_middle", "targetname");
+  trigger = getEnt("flametank_middle", "targetname");
   trigger waittill("trigger");
 
   if(isDefined(level.flametank) && isalive(level.flametank)) {
@@ -732,7 +732,7 @@ ev2_stay_behind_tank_dialog() {
 }
 
 ev2_enter_tunnel_dialog() {
-  trigger = getent("cave_entrance", "targetname");
+  trigger = getEnt("cave_entrance", "targetname");
   trigger waittill("trigger");
 
   level.sarge say_dialogue("take_left");

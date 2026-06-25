@@ -11,7 +11,7 @@
 bunker_wait_for_flame(bnkr, fire_fx, flame_guys, flame_guys_func, exploderID) {
   level endon(bnkr + "_destroyed");
 
-  trig = getent("bunker" + bnkr + "_dmg_trig", "targetname");
+  trig = getEnt("bunker" + bnkr + "_dmg_trig", "targetname");
   dmg = 0;
 
   level thread bunker_wait_for_explosives(bnkr, trig, exploderID);
@@ -61,12 +61,12 @@ bunker_wait_for_explosives(bnkr, trig, exploderID) {
     level.gun1 notify("trigger");
 
     if(!level.gun2_destroyed) {
-      alliestrig = getent("e2_linefight_a_allies", "targetname");
+      alliestrig = getEnt("e2_linefight_a_allies", "targetname");
       if(isDefined(alliestrig)) {
         alliestrig notify("trigger");
       }
 
-      enemytrig = getent("e2_linefight_a_start", "targetname");
+      enemytrig = getEnt("e2_linefight_a_start", "targetname");
       if(isDefined(enemytrig)) {
         enemytrig notify("trigger");
       }
@@ -75,12 +75,12 @@ bunker_wait_for_explosives(bnkr, trig, exploderID) {
   if(bnkr == 2) {
     level.gun2 notify("trigger");
 
-    alliestrig = getent("goto_bunker4", "targetname");
+    alliestrig = getEnt("goto_bunker4", "targetname");
     if(isDefined(alliestrig)) {
       alliestrig notify("trigger");
     }
 
-    enemytrig = getent("e2_bunker4_firstspawn", "targetname");
+    enemytrig = getEnt("e2_bunker4_firstspawn", "targetname");
     if(isDefined(enemytrig)) {
       enemytrig notify("trigger");
     }
@@ -91,7 +91,7 @@ bunker_wait_for_explosives(bnkr, trig, exploderID) {
 
   thread kill_guys_in_bunker(bnkr);
 
-  xtra = getent("bunker_" + bnkr + "_extra", "targetname");
+  xtra = getEnt("bunker_" + bnkr + "_extra", "targetname");
   if(isDefined(xtra)) {
     xtra trigger_off();
   }
@@ -128,7 +128,7 @@ add_support_spawn_functions() {
 }
 
 kill_guys_in_bunker(bnkr) {
-  trig = getent("bunker_" + bnkr + "_radius", "targetname");
+  trig = getEnt("bunker_" + bnkr + "_radius", "targetname");
   bunker_guys = getaiarray("axis");
   for(i = 0; i < bunker_guys.size; i++) {
     if(bunker_guys[i] istouching(trig)) {
@@ -201,7 +201,7 @@ bunker_dialogue() {
 }
 
 bunker1_dialogue_begin() {
-  trig1 = getent("bunker1_dialogue", "script_noteworthy");
+  trig1 = getEnt("bunker1_dialogue", "script_noteworthy");
   trig1 waittill("trigger");
 
   level notify("stop_cave_mg");
@@ -226,7 +226,7 @@ bunker1_dialogue_begin() {
 bunker_dialogue_clearbunker(bnkr) {
   level endon(bnkr + "_destroyed");
 
-  trig1 = getent("bunker_" + bnkr + "_dialogue_clearbunker", "script_noteworthy");
+  trig1 = getEnt("bunker_" + bnkr + "_dialogue_clearbunker", "script_noteworthy");
   trig1 waittill("trigger");
 
   level.sarge thread nag_clear_bunker(bnkr);
@@ -282,17 +282,17 @@ nag_throw_satchel(bnkr) {
 
 goto_next_bunker() {
   if(level.gun1_destroyed && !level.gun2_destroyed) {
-    trig = getent("goto_bunker2", "targetname");
+    trig = getEnt("goto_bunker2", "targetname");
     trig notify("trigger");
   }
 
   if(level.gun1_destroyed && level.gun2_destroyed) {
-    trig = getent("goto_bunker4", "targetname");
+    trig = getEnt("goto_bunker4", "targetname");
     trig notify("trigger");
   }
 
   if((!level.gun1_destroyed) && (level.gun2_destroyed) && (level.gun4_destroyed)) {
-    trig = getent("goto_bunker1", "targetname");
+    trig = getEnt("goto_bunker1", "targetname");
     trig notify("trigger");
   }
 }
@@ -379,7 +379,7 @@ monitor_gun(num) {
 }
 
 destroy_gun(gun_num) {
-  gun = getent("gun_" + gun_num, "targetname");
+  gun = getEnt("gun_" + gun_num, "targetname");
   gun notify("death");
 
   update_gun_objectives();
@@ -455,7 +455,7 @@ guns_remaining() {
   return guns;
 }
 bunker_waitfor_cleared(bnkr) {
-  trig = getent("bunker_" + bnkr + "_radius", "targetname");
+  trig = getEnt("bunker_" + bnkr + "_radius", "targetname");
 
   bunker_cleared = false;
 

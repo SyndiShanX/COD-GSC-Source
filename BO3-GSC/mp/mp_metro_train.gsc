@@ -34,10 +34,10 @@ function init() {
   var_5159825b = getEntArray("metro_doors_outside_right", "targetname");
   var_e1604af1 = getEntArray("metro_doors_end_right", "targetname");
   var_f66166da = struct::get_array("metro_train_track_vox_right");
-  var_d1439c1d = getent("train_killtrigger_left", "targetname");
-  var_7d375500 = getent("train_killtrigger_right", "targetname");
-  var_fe600fa3 = getent("train_killtrigger_left_end", "targetname");
-  var_fe18c116 = getent("train_killtrigger_right_end", "targetname");
+  var_d1439c1d = getEnt("train_killtrigger_left", "targetname");
+  var_7d375500 = getEnt("train_killtrigger_right", "targetname");
+  var_fe600fa3 = getEnt("train_killtrigger_left_end", "targetname");
+  var_fe18c116 = getEnt("train_killtrigger_right_end", "targetname");
   var_e91b1c22 = getEntArray("mp_metro_platform_edge_left", "targetname");
   var_c318a1b9 = getEntArray("mp_metro_platform_edge_right", "targetname");
   level._effect["fx_light_red_train_track_warning"] = "light/fx_light_red_train_track_warning";
@@ -67,12 +67,12 @@ function init() {
 function setup_gate(gate, gate_kill) {
   gate setmovingplatformenabled(1);
   gate.gate_kill = gate_kill;
-  gate.gate_kill enablelinkto();
-  gate.gate_kill linkto(gate);
+  gate.gate_kill enablelinkTo();
+  gate.gate_kill linkTo(gate);
 }
 
 function spawn_start_train(&cars, &dividers, start, name) {
-  cars[0] = spawnvehicle("train_test_mp", (0, -2000, -200), (0, 0, 0), name);
+  cars[0] = spawnVehicle("train_test_mp", (0, -2000, -200), (0, 0, 0), name);
   cars[0] setteam("neutral");
   cars[0] ghost();
   cars[0].ismagicbullet = 1;
@@ -102,14 +102,14 @@ function function_1b3e50b5(var_50a9e5d9, waittime, rotatetime, rotateangles, var
   skip = var_8efac8e4;
   foreach(var_4a3ded66 in var_50a9e5d9) {
     if(!skip) {
-      var_4a3ded66 rotateto(var_4a3ded66.originalangles + rotateangles, rotatetime);
+      var_4a3ded66 rotateTo(var_4a3ded66.originalangles + rotateangles, rotatetime);
       wait(waittime);
     }
     skip = !skip;
   }
   foreach(var_4a3ded66 in var_50a9e5d9) {
     if(!skip) {
-      var_4a3ded66 rotateto(var_4a3ded66.originalangles + rotateangles, rotatetime);
+      var_4a3ded66 rotateTo(var_4a3ded66.originalangles + rotateangles, rotatetime);
       wait(waittime);
     }
     skip = !skip;
@@ -137,7 +137,7 @@ function train_think(cars, dividers, notifier, start, gate_a, gate_b, var_907164
   for(;;) {
     level waittill(notifier);
     foreach(speaker in var_c4ecec2) {
-      playsoundatposition("vox_metr_metro_approaching", speaker.origin);
+      playSoundAtPosition("vox_metr_metro_approaching", speaker.origin);
     }
     var_b2aeb942 = getdvarfloat("metro_vox_wait_time", 4);
     wait(var_b2aeb942);
@@ -149,7 +149,7 @@ function train_think(cars, dividers, notifier, start, gate_a, gate_b, var_907164
     var_ab9b4fda = getdvarfloat("barrier_move_time", 2);
     var_bfc17530 = getdvarfloat("barrier_move_height", 30);
     foreach(barrier in var_fbb2796a) {
-      barrier moveto(barrier.origin + (0, 0, var_bfc17530), var_ab9b4fda);
+      barrier moveTo(barrier.origin + (0, 0, var_bfc17530), var_ab9b4fda);
       barrier playSound("evt_wall_up");
     }
     gate_wait_train_time = getdvarfloat("gate_wait_train_time", 5);
@@ -170,7 +170,7 @@ function train_think(cars, dividers, notifier, start, gate_a, gate_b, var_907164
       cars[i] playLoopSound("amb_train_by");
     }
     foreach(speaker in var_c4ecec2) {
-      playsoundatposition("vox_metr_metro_gap", speaker.origin);
+      playSoundAtPosition("vox_metr_metro_gap", speaker.origin);
     }
     level thread function_1b3e50b5(var_9071646e, 1, var_7de518c6, var_ddb7f7d7 * -1, 0);
     var_9071646e[0] playSound("evt_gate_open");
@@ -192,7 +192,7 @@ function train_think(cars, dividers, notifier, start, gate_a, gate_b, var_907164
     var_4eb99366 function_a202446a(0, 0, gate_move_time);
     var_4eb99366 function_a202446a(1, gate_move_time, 0.25);
     foreach(barrier in var_fbb2796a) {
-      barrier moveto(barrier.originalorigin, var_ab9b4fda);
+      barrier moveTo(barrier.originalorigin, var_ab9b4fda);
       barrier playSound("evt_wall_down");
     }
     gate_a[0] stoploopsound(2);
@@ -294,8 +294,8 @@ function watch_player_touch() {
 }
 
 function train_setup_clock() {
-  metro_clock_1 = getent("MP_Metro_clock_1", "targetname");
-  metro_clock_2 = getent("MP_Metro_clock_2", "targetname");
+  metro_clock_1 = getEnt("MP_Metro_clock_1", "targetname");
+  metro_clock_2 = getEnt("MP_Metro_clock_2", "targetname");
   if(!isDefined(metro_clock_1) || !isDefined(metro_clock_2)) {
     return false;
   }
@@ -401,7 +401,7 @@ function destroy_supply_crates() {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
         playFX(level._supply_drop_explosion_fx, crate.origin);
-        playsoundatposition("wpn_grenade_explode", crate.origin);
+        playSoundAtPosition("wpn_grenade_explode", crate.origin);
         wait(0.1);
         crate supplydrop::cratedelete();
       }

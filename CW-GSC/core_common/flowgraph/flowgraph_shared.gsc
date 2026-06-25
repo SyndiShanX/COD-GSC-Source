@@ -336,7 +336,7 @@ function randomfloatinrangefunc(f_min, f_max) {
 }
 
 function randomunitvector() {
-  return vectornormalize((randomfloat(1), randomfloat(1), randomfloat(1)));
+  return vectorNormalize((randomfloat(1), randomfloat(1), randomfloat(1)));
 }
 
 #namespace flowgraph_math;

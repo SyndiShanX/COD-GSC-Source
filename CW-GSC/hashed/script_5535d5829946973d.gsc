@@ -186,7 +186,7 @@ function function_b5b112b() {
 
 function function_e587b21b() {
   wait 2;
-  e_forest_under_tree_clip = getent("e_forest_under_tree_clip", "targetname");
+  e_forest_under_tree_clip = getEnt("e_forest_under_tree_clip", "targetname");
   e_forest_under_tree_clip delete();
 }
 
@@ -349,7 +349,7 @@ function function_14ea178a() {
 }
 
 function function_fe0df1bd() {
-  e_perimeter_guard_house_map = getent("e_perimeter_guard_house_map", "script_noteworthy");
+  e_perimeter_guard_house_map = getEnt("e_perimeter_guard_house_map", "script_noteworthy");
   e_perimeter_guard_house_map waittill(#"photo_taken");
   level flag::set("flg_perimeter_obj_take_guard_house_photo_complete");
 }
@@ -396,7 +396,7 @@ function function_ed4f7807(b_starting) {
   level thread namespace_2977687d::function_54afad46();
   level flag::wait_till_any(["flg_perimeter_obj_take_vista_photo_complete", "flg_perimeter_tower_enemies_alerted"]);
   level.woods allowedstances("stand");
-  vol_perimeter_ridge_shadow = getent("vol_perimeter_ridge_shadow", "script_noteworthy");
+  vol_perimeter_ridge_shadow = getEnt("vol_perimeter_ridge_shadow", "script_noteworthy");
   vol_perimeter_ridge_shadow deletedelay();
 
   if(level flag::get("flg_perimeter_obj_take_vista_photo_complete") == 1) {
@@ -534,7 +534,7 @@ function function_34818618() {
   level flag::wait_till("flg_amk_player_spawned");
   level.player endon(#"death");
   level endon(#"flg_perimeter_tower_enemies_alerted");
-  t_perimeter_damage = getent("t_perimeter_damage", "targetname");
+  t_perimeter_damage = getEnt("t_perimeter_damage", "targetname");
   t_perimeter_damage waittill(#"trigger");
   level flag::set("flg_perimeter_tower_enemies_alerted");
 }
@@ -767,7 +767,7 @@ function function_cc29bec9() {
   self.var_21c17c08 thread namespace_4bd68414::side_door_apc_shoot_player_dialogue();
   self util::delay(5, undefined, &function_b49d9d8a, 0);
   m_fx = util::spawn_model("tag_origin", light_origin, light_angles);
-  m_fx linkto(self, var_7f025395);
+  m_fx linkTo(self, var_7f025395);
   playFXOnTag(fx::get(#"hash_465b323348def919"), m_fx, "tag_origin");
 
   while(true) {
@@ -916,8 +916,8 @@ function function_aa2788ec() {
 }
 
 function function_38e6d741() {
-  e_forest_branch_reveal_clip = getent("e_forest_branch_reveal_clip", "targetname");
-  e_perimeter_blocking_bush = getent("e_perimeter_blocking_bush", "targetname");
+  e_forest_branch_reveal_clip = getEnt("e_forest_branch_reveal_clip", "targetname");
+  e_perimeter_blocking_bush = getEnt("e_perimeter_blocking_bush", "targetname");
   e_perimeter_blocking_bush movez(128, 0.2, 0.05, 0.05);
   level flag::wait_till("flg_perimeter_end");
   e_perimeter_blocking_bush deletedelay();
@@ -1001,7 +1001,7 @@ function function_c594d332() {
     n_dist = distance2d(level.player.origin, var_28bf3706.origin);
 
     if(n_dist < 400) {
-      level.player playrumbleonentity("cp_rus_amerika_heli_flyby");
+      level.player playRumbleOnEntity("cp_rus_amerika_heli_flyby");
     }
 
     if(n_dist > 400) {
@@ -1746,7 +1746,7 @@ function function_987dac0() {
   light_origin = var_127d9a14 gettagorigin(var_7f025395);
   light_angles = var_127d9a14 gettagangles(var_7f025395);
   m_fx = util::spawn_model("tag_origin", light_origin, light_angles);
-  m_fx linkto(var_127d9a14, var_7f025395);
+  m_fx linkTo(var_127d9a14, var_7f025395);
   var_127d9a14 thread function_9dc767d7(m_fx);
   level flag::wait_till_any(["flg_side_door_start", "flg_side_door_apc_los"]);
   var_127d9a14 thread vehicle::go_path();
@@ -1842,9 +1842,9 @@ function private function_9dcef71a(var_127d9a14) {
 
   while(isDefined(var_f483287b) && isDefined(var_127d9a14)) {
     if(var_f483287b !== var_e068cb3e) {
-      var_9fe8257a = vectornormalize(var_f483287b.origin - self.origin);
+      var_9fe8257a = vectorNormalize(var_f483287b.origin - self.origin);
       var_29d5113a = vectortoangles(var_9fe8257a);
-      self rotateto(var_29d5113a, 1);
+      self rotateTo(var_29d5113a, 1);
       var_6b87488d = gettime();
       var_e068cb3e = var_f483287b;
 
@@ -1855,7 +1855,7 @@ function private function_9dcef71a(var_127d9a14) {
     }
 
     v_player_pos = level.player getplayercamerapos();
-    var_b7f6eb31 = vectornormalize(v_player_pos - self.origin);
+    var_b7f6eb31 = vectorNormalize(v_player_pos - self.origin);
     var_f38bb4f3 = vectordot(var_9fe8257a, var_b7f6eb31);
     var_aa19e187 = distance2dsquared(v_player_pos, self.origin);
 
@@ -1913,14 +1913,14 @@ function private function_a28f9816(var_127d9a14, var_af1ba7ee) {
   var_127d9a14 endon(#"death");
 
   while(gettime() - var_5334d4d1 <= var_f6b3aab7) {
-    var_b7f6eb31 = vectornormalize(level.player getplayercamerapos() - self.origin);
+    var_b7f6eb31 = vectorNormalize(level.player getplayercamerapos() - self.origin);
     var_29d5113a = vectortoangles(var_b7f6eb31);
     self function_3b6fe102(var_7bed3696);
     wait var_7bed3696;
   }
 
   v_player_pos = level.player getplayercamerapos();
-  var_8ebb97d4 = vectornormalize(v_player_pos - self.origin);
+  var_8ebb97d4 = vectorNormalize(v_player_pos - self.origin);
   var_f38bb4f3 = vectordot(var_b7f6eb31, var_8ebb97d4);
 
   if(var_f38bb4f3 > 0.9 && var_127d9a14 function_18b8dcc4(v_player_pos)) {
@@ -1936,9 +1936,9 @@ function private function_a28f9816(var_127d9a14, var_af1ba7ee) {
 }
 
 function private function_3b6fe102(var_20995ecd) {
-  var_b7f6eb31 = vectornormalize(level.player getplayercamerapos() - self.origin);
+  var_b7f6eb31 = vectorNormalize(level.player getplayercamerapos() - self.origin);
   var_29d5113a = vectortoangles(var_b7f6eb31);
-  self rotateto(var_29d5113a, var_20995ecd);
+  self rotateTo(var_29d5113a, var_20995ecd);
 }
 
 function private function_36d7f7d7(var_127d9a14) {

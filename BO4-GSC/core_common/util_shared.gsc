@@ -104,7 +104,7 @@ wait_clear_streamer_hint(lifetime) {
 
 create_streamer_hint(origin, angles, value, lifetime) {
   if(self == level) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clear_streamer_hint();
     }
   }
@@ -150,7 +150,7 @@ streamer_wait(n_stream_request_id, n_wait_frames = 0, n_timeout = 15, str_team, 
       if(isDefined(str_team)) {
         a_players = get_players(str_team);
       } else {
-        a_players = getplayers();
+        a_players = getPlayers();
       }
 
       foreach(player in a_players) {
@@ -1073,7 +1073,7 @@ orient_to_normal(normal) {
     return (0, 0, 0);
   }
 
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
@@ -1137,7 +1137,7 @@ _delay_notify(time_or_notify, str_notify, str_endon, arg1) {
 
 get_closest_player(org, team) {
   team = get_team_mapping(team);
-  players = getplayers(team);
+  players = getPlayers(team);
   return arraysort(players, org, 1, 1)[0];
 }
 
@@ -1319,7 +1319,7 @@ is_player_looking_at(v_origin, n_dot = 0.7, b_do_trace = 1, e_ignore) {
     v_view = anglesToForward(self getplayerangles());
   }
 
-  v_delta = vectornormalize(v_origin - v_eye);
+  v_delta = vectorNormalize(v_origin - v_eye);
   n_new_dot = vectordot(v_delta, v_view);
 
   if(n_new_dot >= n_dot) {
@@ -1460,7 +1460,7 @@ wait_till_not_touching(e_to_check, e_to_touch) {
 any_player_is_touching(ent, team) {
   team = get_team_mapping(team);
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     if(isalive(player) && player istouching(ent)) {
       return true;
     }
@@ -1636,7 +1636,7 @@ get_rounds_won(team) {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -2194,7 +2194,7 @@ spawn_array_struct() {
 }
 
 gethostplayer() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player ishost()) {
@@ -2204,7 +2204,7 @@ gethostplayer() {
 }
 
 gethostplayerforbots() {
-  players = getplayers();
+  players = getPlayers();
 
   for(index = 0; index < players.size; index++) {
     if(players[index] ishostforbots()) {
@@ -2429,7 +2429,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
 
       if(n_mode & 2) {
         v_facing = anglesToForward(player getplayerangles());
-        v_to_ent = vectornormalize(self.origin - v_eye);
+        v_to_ent = vectorNormalize(self.origin - v_eye);
         n_dot = vectordot(v_facing, v_to_ent);
 
         if(n_dot < n_dot_check) {
@@ -3265,7 +3265,7 @@ function_81ccf6d3(team = #"any") {
 }
 
 get_human_players(team = #"any") {
-  players = getplayers(team);
+  players = getPlayers(team);
   humanplayers = [];
 
   foreach(player in players) {
@@ -3865,7 +3865,7 @@ function_88c74107(var_2cd16289 = "ufo", var_e7245730 = "noclip") {
   var_bf8813f9 = 0;
 
   if(self == level) {
-    a_players = getplayers();
+    a_players = getPlayers();
     var_bf8813f9 = 0;
 
     foreach(player in a_players) {

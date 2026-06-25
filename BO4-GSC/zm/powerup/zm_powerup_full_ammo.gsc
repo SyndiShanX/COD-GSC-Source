@@ -93,7 +93,7 @@ function_dae1df4d(e_powerup, player) {
 }
 
 full_ammo_powerup(drop_item, player) {
-  players = getplayers(player.team);
+  players = getPlayers(player.team);
 
   if(isDefined(level._get_game_module_players)) {
     players = [[level._get_game_module_players]](player);
@@ -166,7 +166,7 @@ function_3ecbd9d(w_weapon) {
 }
 
 full_ammo_on_hud(drop_item, player_team) {
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
   players[0] playsoundtoteam("zmb_full_ammo", player_team);
 
   if(isDefined(drop_item) && isDefined(drop_item.hint)) {

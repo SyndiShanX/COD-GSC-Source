@@ -114,10 +114,10 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
   var_5e7d1e09 = struct::get_array("satellite_pos", "script_noteworthy");
   satellite_pos = arraygetclosest(self.origin, var_5e7d1e09);
   util::playFXOnTag(bwasdemojump, #"zombie/fx9_onslaught_orb_soul", e_fx, "tag_origin");
-  e_fx moveto(e_fx.origin + (0, 0, 40), 0.8);
+  e_fx moveTo(e_fx.origin + (0, 0, 40), 0.8);
   wait 0.75;
   n_time = distance(e_fx.origin, satellite_pos.origin) / 400;
-  e_fx moveto(satellite_pos.origin + (0, 0, 50), n_time);
+  e_fx moveTo(satellite_pos.origin + (0, 0, 50), n_time);
   e_fx waittill(#"movedone");
   util::playFXOnTag(bwasdemojump, #"maps/zm_red/fx8_soul_charge_purple", e_fx, "tag_origin");
   playSound(bwasdemojump, #"hash_77a638eb74142796", e_fx.origin);

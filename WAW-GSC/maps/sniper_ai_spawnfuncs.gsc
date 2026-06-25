@@ -61,56 +61,56 @@ setup_spawn_functions() {
   array_thread(getEntArray("e3_allied_squad_animate", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
   array_thread(getEntArray("e3_allied_squad_leader", "script_noteworthy"), ::add_spawn_function, ::make_russian_squad);
 
-  getent("flamer_quickdeath", "script_noteworthy") add_spawn_function(::flamer_setup, randomintrange(10, 25));
+  getEnt("flamer_quickdeath", "script_noteworthy") add_spawn_function(::flamer_setup, randomintrange(10, 25));
 
-  getent("floor2_mgguy", "script_noteworthy") add_spawn_function(::floor2_mgguy_setup);
-  getent("e2_flamer2", "targetname") add_spawn_function(::e2_flamer_setup);
-  getent("e2_flamer4", "targetname") add_spawn_function(::e2_flamer_setup);
-  getent("e2_flamer5", "targetname") add_spawn_function(::e2_flamer1_setup);
-  getent("e2_flamer6", "targetname") add_spawn_function(::e2_flamer1_setup);
+  getEnt("floor2_mgguy", "script_noteworthy") add_spawn_function(::floor2_mgguy_setup);
+  getEnt("e2_flamer2", "targetname") add_spawn_function(::e2_flamer_setup);
+  getEnt("e2_flamer4", "targetname") add_spawn_function(::e2_flamer_setup);
+  getEnt("e2_flamer5", "targetname") add_spawn_function(::e2_flamer1_setup);
+  getEnt("e2_flamer6", "targetname") add_spawn_function(::e2_flamer1_setup);
 
-  getent("officer2", "script_noteworthy") add_spawn_function(::e4_officer_setup);
-  getent("sniper1", "script_noteworthy") add_spawn_function(::first_sniper_setup);
-  getent("sniper2", "script_noteworthy") add_spawn_function(::first_sniper_setup);
-  getent("anim_dude", "script_noteworthy") add_spawn_function(::fountain_shooter);
-  getent("mydog", "script_noteworthy") add_spawn_function(::dog_setup);
-  getent("dog_handler", "script_noteworthy") add_spawn_function(::dog_handler_setup);
-  getent("sentry_1", "script_noteworthy") add_spawn_function(::sentry_1_setup);
-  getent("mydog2", "script_noteworthy") add_spawn_function(::mydog2_setup);
-  getent("e1_flameguy", "script_noteworthy") add_spawn_function(::e1_flameguy_setup);
-  getent("e3_dudes_chatter1", "script_noteworthy") add_spawn_function(::e3_dudes_chatter1_setup);
-  getent("e3_dudes_chatter2", "script_noteworthy") add_spawn_function(::e3_dudes_chatter2_setup);
-  getent("e3_patrolguy1", "script_noteworthy") add_spawn_function(::e3_patrolguy1_setup);
-  getent("e3_patrolguy2", "script_noteworthy") add_spawn_function(::e3_patrolguy2_setup);
-  getent("e3_bb_finder1", "script_noteworthy") add_spawn_function(::e3_bb_finder1_setup);
-  getent("e3_bb_finder2", "script_noteworthy") add_spawn_function(::e3_bb_finder2_setup);
-  getent("e3_bb_finder3", "script_noteworthy") add_spawn_function(::e3_bb_finder3_setup);
-  getent("e3_halftrack_mgguy", "script_noteworthy") add_spawn_function(::e3_halftrack_mg_guy);
-  getent("e5_halftrack_mgguy", "script_noteworthy") add_spawn_function(::e5_halftrack_mg_guy);
+  getEnt("officer2", "script_noteworthy") add_spawn_function(::e4_officer_setup);
+  getEnt("sniper1", "script_noteworthy") add_spawn_function(::first_sniper_setup);
+  getEnt("sniper2", "script_noteworthy") add_spawn_function(::first_sniper_setup);
+  getEnt("anim_dude", "script_noteworthy") add_spawn_function(::fountain_shooter);
+  getEnt("mydog", "script_noteworthy") add_spawn_function(::dog_setup);
+  getEnt("dog_handler", "script_noteworthy") add_spawn_function(::dog_handler_setup);
+  getEnt("sentry_1", "script_noteworthy") add_spawn_function(::sentry_1_setup);
+  getEnt("mydog2", "script_noteworthy") add_spawn_function(::mydog2_setup);
+  getEnt("e1_flameguy", "script_noteworthy") add_spawn_function(::e1_flameguy_setup);
+  getEnt("e3_dudes_chatter1", "script_noteworthy") add_spawn_function(::e3_dudes_chatter1_setup);
+  getEnt("e3_dudes_chatter2", "script_noteworthy") add_spawn_function(::e3_dudes_chatter2_setup);
+  getEnt("e3_patrolguy1", "script_noteworthy") add_spawn_function(::e3_patrolguy1_setup);
+  getEnt("e3_patrolguy2", "script_noteworthy") add_spawn_function(::e3_patrolguy2_setup);
+  getEnt("e3_bb_finder1", "script_noteworthy") add_spawn_function(::e3_bb_finder1_setup);
+  getEnt("e3_bb_finder2", "script_noteworthy") add_spawn_function(::e3_bb_finder2_setup);
+  getEnt("e3_bb_finder3", "script_noteworthy") add_spawn_function(::e3_bb_finder3_setup);
+  getEnt("e3_halftrack_mgguy", "script_noteworthy") add_spawn_function(::e3_halftrack_mg_guy);
+  getEnt("e5_halftrack_mgguy", "script_noteworthy") add_spawn_function(::e5_halftrack_mg_guy);
 
-  getent("officer", "script_noteworthy") add_spawn_function(::officer_setup);
-  getent("officer_assistant", "script_noteworthy") add_spawn_function(::officer_assistant_setup);
-  getent("ftn_walker1", "script_noteworthy") add_spawn_function(::ftn_walker1_setup);
-  getent("ftn_walker2", "script_noteworthy") add_spawn_function(::ftn_walker2_setup);
-  getent("ftn_walker3", "script_noteworthy") add_spawn_function(::ftn_walker3_setup);
-  getent("ftn_walker4", "script_noteworthy") add_spawn_function(::ftn_walker4_setup);
-  getent("bb_street_officer", "script_noteworthy") add_spawn_function(::bb_street_setup, 1);
-  getent("bb_street_dude1", "script_noteworthy") add_spawn_function(::bb_street_setup, 2);
-  getent("bb_street_dude2", "script_noteworthy") add_spawn_function(::bb_street_setup, 3);
-  getent("bb_street_dude1_2", "script_noteworthy") add_spawn_function(::bb_street_setup, 2);
-  getent("bb_street_dude2_2", "script_noteworthy") add_spawn_function(::bb_street_setup, 3);
-  getent("dog_handler2", "script_noteworthy") add_spawn_function(::dog_handler2_setup);
-  getent("by_tank_dude1", "script_noteworthy") add_spawn_function(::by_tank_dude1_setup);
-  getent("by_tank_dude2", "script_noteworthy") add_spawn_function(::by_tank_dude2_setup);
-  getent("by_tank_dude3", "script_noteworthy") add_spawn_function(::by_tank_dude3_setup);
-  getent("by_tank_dude4", "script_noteworthy") add_spawn_function(::by_tank_dude4_setup);
-  getent("horchguy1", "script_noteworthy") add_spawn_function(::horchguy1_setup);
-  getent("horchguy2", "script_noteworthy") add_spawn_function(::horchguy2_setup);
-  getent("ftn_walker_early", "targetname") add_spawn_function(::ftn_walker_early_setup);
-  getent("officer_driver", "script_noteworthy") add_spawn_function(::driver_setup);
-  getent("officers_sniper", "script_noteworthy") add_spawn_function(::officers_sniper_setup);
-  getent("newbhater", "targetname") add_spawn_function(::newbhater_setup);
-  getent("e3_allied_squad_leader", "script_noteworthy") add_spawn_function(::my_name_is_daletski);
+  getEnt("officer", "script_noteworthy") add_spawn_function(::officer_setup);
+  getEnt("officer_assistant", "script_noteworthy") add_spawn_function(::officer_assistant_setup);
+  getEnt("ftn_walker1", "script_noteworthy") add_spawn_function(::ftn_walker1_setup);
+  getEnt("ftn_walker2", "script_noteworthy") add_spawn_function(::ftn_walker2_setup);
+  getEnt("ftn_walker3", "script_noteworthy") add_spawn_function(::ftn_walker3_setup);
+  getEnt("ftn_walker4", "script_noteworthy") add_spawn_function(::ftn_walker4_setup);
+  getEnt("bb_street_officer", "script_noteworthy") add_spawn_function(::bb_street_setup, 1);
+  getEnt("bb_street_dude1", "script_noteworthy") add_spawn_function(::bb_street_setup, 2);
+  getEnt("bb_street_dude2", "script_noteworthy") add_spawn_function(::bb_street_setup, 3);
+  getEnt("bb_street_dude1_2", "script_noteworthy") add_spawn_function(::bb_street_setup, 2);
+  getEnt("bb_street_dude2_2", "script_noteworthy") add_spawn_function(::bb_street_setup, 3);
+  getEnt("dog_handler2", "script_noteworthy") add_spawn_function(::dog_handler2_setup);
+  getEnt("by_tank_dude1", "script_noteworthy") add_spawn_function(::by_tank_dude1_setup);
+  getEnt("by_tank_dude2", "script_noteworthy") add_spawn_function(::by_tank_dude2_setup);
+  getEnt("by_tank_dude3", "script_noteworthy") add_spawn_function(::by_tank_dude3_setup);
+  getEnt("by_tank_dude4", "script_noteworthy") add_spawn_function(::by_tank_dude4_setup);
+  getEnt("horchguy1", "script_noteworthy") add_spawn_function(::horchguy1_setup);
+  getEnt("horchguy2", "script_noteworthy") add_spawn_function(::horchguy2_setup);
+  getEnt("ftn_walker_early", "targetname") add_spawn_function(::ftn_walker_early_setup);
+  getEnt("officer_driver", "script_noteworthy") add_spawn_function(::driver_setup);
+  getEnt("officers_sniper", "script_noteworthy") add_spawn_function(::officers_sniper_setup);
+  getEnt("newbhater", "targetname") add_spawn_function(::newbhater_setup);
+  getEnt("e3_allied_squad_leader", "script_noteworthy") add_spawn_function(::my_name_is_daletski);
 
   guys = getEntArray("e3_arguing_dude", "script_noteworthy");
   for(i = 0; i < guys.size; i++) {
@@ -215,10 +215,10 @@ bodyguard_setup() {
   flag_wait("player_fired_in_e4");
   wait randomfloat(1);
   node notify("stoploop");
-  self stopanimscripted();
+  self stopanimScripted();
   if(!isDefined(level.thisdudepointed)) {
     level.thisdudepointed = 1;
-    spot = getstruct(node.script_noteworthy + "_point", "script_noteworthy");
+    spot = getStruct(node.script_noteworthy + "_point", "script_noteworthy");
     animspot = spawn("script_origin", self.origin);
     animspot.angles = spot.angles;
     animspot anim_single_solo(self, "point");
@@ -236,7 +236,7 @@ lead_bodyguard_setup() {
   level thread officer_runto_cover(self);
   node = getnode(self.target, "targetname");
   self.animname = "officers_sniper";
-  animnode = getstruct("bodyguard_run_spot", "targetname");
+  animnode = getStruct("bodyguard_run_spot", "targetname");
   animnode anim_single_solo(self, "bodyguard_exit");
   flag_set("officer_to_tank");
   self.animname = "generic";
@@ -326,7 +326,7 @@ e2_flamer1_setup() {
   spot1 = spawn("script_origin", node.origin + (0, 0, 8));
   spot1.angles = node.angles;
   spot1 thread anim_loop_solo(self, "stand_aim", undefined, "death");
-  ospot = getstruct(node.targetname + "_target", "targetname");
+  ospot = getStruct(node.targetname + "_target", "targetname");
   spot = ospot swap_struct_with_origin();
 
   self.goalradius = 32;
@@ -337,7 +337,7 @@ e2_flamer1_setup() {
   self.health = 100;
   wait 0.1;
 
-  ang = (getstruct("flame_angles", "targetname")).angles;
+  ang = (getStruct("flame_angles", "targetname")).angles;
   org = self gettagorigin("tag_flash");
 
   spot2 = spawn("script_model", org);
@@ -369,7 +369,7 @@ e2_flamer_setup() {
   spot1.angles = node.angles;
   spot1 thread anim_loop_solo(self, "stand_aim", undefined, "death");
 
-  ospot = getstruct(node.targetname + "_target", "targetname");
+  ospot = getStruct(node.targetname + "_target", "targetname");
   spot = ospot swap_struct_with_origin();
 
   self aimatpos(spot.origin);
@@ -383,7 +383,7 @@ e2_flamer_setup() {
   exploder(ospot.script_noteworthy);
   self.health = 100;
   wait 0.1;
-  ang = (getstruct("flame_angles", "targetname")).angles;
+  ang = (getStruct("flame_angles", "targetname")).angles;
   org = self gettagorigin("tag_flash");
 
   spot2 = spawn("script_model", org);
@@ -446,7 +446,7 @@ by_tank_dude1_setup() {
   self solo_set_pacifist(true);
   self.animname = "streetdude1";
 
-  spot = getstruct("streetnode_fortankguys", "targetname");
+  spot = getStruct("streetnode_fortankguys", "targetname");
 
   self.animspot = spot;
   orient = spawn("script_origin", self.origin);
@@ -485,7 +485,7 @@ by_tank_dude2_setup() {
   self endon("death");
   self solo_set_pacifist(true);
   self.animname = "streetdude2";
-  spot = getstruct("streetnode_fortankguys", "targetname");
+  spot = getStruct("streetnode_fortankguys", "targetname");
   self.animspot = spot;
   orient = spawn("script_origin", self.origin);
   orient.angles = spot.angles;
@@ -519,7 +519,7 @@ by_tank_dude3_setup() {
   self solo_set_pacifist(true);
   self.animname = "streetdude3";
 
-  spot = getstruct("streetnode", "targetname");
+  spot = getStruct("streetnode", "targetname");
 
   self.animspot = spot;
   orient = spawn("script_origin", self.origin);
@@ -556,7 +556,7 @@ by_tank_dude4_setup() {
   self solo_set_pacifist(true);
   self.animname = "streetdude4";
 
-  spot = getstruct("streetnode", "targetname");
+  spot = getStruct("streetnode", "targetname");
 
   self.animspot = spot;
   orient = spawn("script_origin", self.origin);
@@ -589,7 +589,7 @@ horchguy1_setup() {
   self solo_set_pacifist(true);
   level thread corpse_adder(self);
   self.animname = "horchguy1";
-  spot = getstruct("anim_chair_spot", "targetname");
+  spot = getStruct("anim_chair_spot", "targetname");
   self.animspot = spot;
   orient = spawn("script_origin", self.origin);
   orient.angles = spot.angles;
@@ -623,7 +623,7 @@ horchguy2_setup() {
   self solo_set_pacifist(true);
   level thread corpse_adder(self);
   self.animname = "horchguy2";
-  spot = getstruct("anim_chair_spot", "targetname");
+  spot = getStruct("anim_chair_spot", "targetname");
   self.animspot = spot;
   orient = spawn("script_origin", self.origin);
   orient.angles = spot.angles;
@@ -684,7 +684,7 @@ dog_handler2_setup() {
 dog_handler2_wakeup() {
   self endon("death");
   level waittill("stealthbreak");
-  self stopanimscripted();
+  self stopanimScripted();
   self solo_set_pacifist(false);
 }
 
@@ -718,7 +718,7 @@ bb_street_setup(num) {
   animnode thread anim_single_solo(self, "run" + num);
   self set_run_anim("_stealth_combat_jog");
   wait animtime - 0.08;
-  self stopanimscripted();
+  self stopanimScripted();
   self set_run_anim("_stealth_combat_jog");
   self setgoalnode(node);
   self waittill("goal");
@@ -759,7 +759,7 @@ tankriders_setup(num) {
   self solo_set_pacifist(true);
   wait 0.5;
   tag = "blah";
-  tank = getent("riding_tank", "targetname");
+  tank = getEnt("riding_tank", "targetname");
   self.animname = "tankriders";
   if(num == 1) {
     tag = "tag_passenger10";
@@ -769,7 +769,7 @@ tankriders_setup(num) {
     tag = "tag_passenger4";
   }
 
-  self linkto(tank, tag, (0, 0, 0), (0, 0, 0));
+  self linkTo(tank, tag, (0, 0, 0), (0, 0, 0));
 
   tank thread anim_loop_solo(self, "rider" + num, tag, "stoploop", tank);
 
@@ -791,7 +791,7 @@ ftn_walker3_setup() {
   self solo_set_pacifist(true);
   self endon("death");
   wait 2;
-  spot = getstruct("ftn_walker4_spot", "targetname");
+  spot = getStruct("ftn_walker4_spot", "targetname");
   self.animname = "ftn_walker";
   spot anim_single_solo(self, "dude4");
   self.animname = "ftn_walker_last";
@@ -805,7 +805,7 @@ ftn_walker1_setup() {
   self endon("death");
   self.animname = "ftn_walker_cross";
   wait 10;
-  spot = getstruct("ftn_walker1_spot", "targetname");
+  spot = getStruct("ftn_walker1_spot", "targetname");
   spot anim_single_solo(self, "walk");
   self.animname = "ftn_walker_last";
   self anim_single_solo(self, "walk");
@@ -817,7 +817,7 @@ ftn_walker_early_setup() {
   self solo_set_pacifist(true);
   self endon("death");
   self.animname = "ftn_walker_side";
-  spot = getstruct("ftn_walker2_spot", "targetname");
+  spot = getStruct("ftn_walker2_spot", "targetname");
   spot anim_single_solo(self, "walk");
   self.animname = "ftn_walker_last";
   self anim_single_solo(self, "walk");
@@ -830,7 +830,7 @@ ftn_walker2_setup() {
   self endon("death");
   self.animname = "ftn_walker_side";
   wait 11.5;
-  spot = getstruct("ftn_walker2_spot", "targetname");
+  spot = getStruct("ftn_walker2_spot", "targetname");
   spot anim_single_solo(self, "walk");
   self.animname = "ftn_walker_last";
   self anim_single_solo(self, "walk");
@@ -843,7 +843,7 @@ ftn_walker4_setup() {
   self endon("death");
   self.animname = "ftn_walker_last";
   wait 12;
-  spot = getstruct("ftn_walker3_spot", "targetname");
+  spot = getStruct("ftn_walker3_spot", "targetname");
   self set_run_anim("patrolwalk");
   spot anim_single_solo(self, "walk");
 
@@ -902,7 +902,7 @@ e3_arguing_setup(num) {
   self.goalradius = 24;
   self solo_set_pacifist(true);
   self.animname = "officer_guard" + num;
-  node = getstruct("e3_argue_spot", "targetname");
+  node = getStruct("e3_argue_spot", "targetname");
   node anim_loop_solo(self, "talking_loop", undefined, "death");
 }
 
@@ -911,7 +911,7 @@ e3_arguing_setup2(num) {
   self.goalradius = 24;
   self solo_set_pacifist(true);
   self.animname = "officer_guard" + num;
-  node = getstruct("truckanim_ref_point", "targetname");
+  node = getStruct("truckanim_ref_point", "targetname");
   node anim_loop_solo(self, "talking_loop", undefined, "death");
 }
 
@@ -931,11 +931,11 @@ e4_officer_setup() {
   self.ignoreme = true;
   self.animname = "officer";
   level notify("setup_line_protection");
-  node = getstruct("bodyguard_run_spot", "targetname");
+  node = getStruct("bodyguard_run_spot", "targetname");
 
   node thread anim_single_solo(self, "bodyguard_exit");
   flag_wait("officer_to_tank");
-  level.officer stopanimscripted();
+  level.officer stopanimScripted();
   level notify("officer_2tank_safely");
   if(level.difficulty > 2) {
     flag_set("player_fired_in_e4");
@@ -977,12 +977,12 @@ driver_setup() {
   self animscripts\shared::placeweaponOn(self.weapon, "none");
 
   wait 0.5;
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   self.health = 999999999;
   tag = "tag_driver";
   level.driver = self;
   level.driver.deathanim = level.scr_anim["driver"]["driver_death_loop"];
-  level.driver linkto(horch, tag, (0, 0, 0), (0, 0, 0));
+  level.driver linkTo(horch, tag, (0, 0, 0), (0, 0, 0));
   level.driver.animname = "driver";
   horch thread anim_loop_solo(level.driver, "driver_under_fire", tag, "stoploop_driver", horch);
   node = getvehiclenode("stop_to_pickup_officer_node", "script_noteworthy");
@@ -995,17 +995,17 @@ driver_setup() {
 
 #using_animtree("vehicles");
 horch_anim() {
-  node = getstruct("guards_talk_spot_original", "targetname");
-  horch = getent("officer_horch", "targetname");
+  node = getStruct("guards_talk_spot_original", "targetname");
+  horch = getEnt("officer_horch", "targetname");
   horch.animname = "horch";
-  horch stopanimscripted();
+  horch stopanimScripted();
   node anim_single_solo(horch, "horch_drive");
 }
 
 officer_assistant_setup() {
   self solo_set_pacifist(true);
   wait 0.5;
-  horch = getent("officer_horch", "targetname");
+  horch = getEnt("officer_horch", "targetname");
   horch playSound("drive_up");
   tag = "tag_driver";
   org = horch gettagorigin(tag);
@@ -1013,8 +1013,8 @@ officer_assistant_setup() {
   spot = spawn("script_model", org);
   spot.angles = ang;
 
-  spot linkto(horch, tag);
-  self linkto(horch, tag);
+  spot linkTo(horch, tag);
+  self linkTo(horch, tag);
 
   magic_org = (488.808, 1732.27, 39.8829);
 
@@ -1030,7 +1030,7 @@ officer_assistant_setup() {
 }
 
 horch_movetag(spot, tag, magic_org) {
-  horch = getent("officer_horch", "targetname");
+  horch = getEnt("officer_horch", "targetname");
   node = getvehiclenode("car_inplace", "script_noteworthy");
   node waittill("trigger");
   spot setModel("tag_origin");
@@ -1043,16 +1043,16 @@ horch_movetag(spot, tag, magic_org) {
 
   spot unlink();
   self unlink();
-  self linkto(spot, "tag_origin");
+  self linkTo(spot, "tag_origin");
   spot.origin = (org[0], org[1], magic_org[2]);
   spot.angles = magic_ang;
 }
 
 officer_setup() {
-  spot = getstruct("guards_talk_spot_original", "targetname");
+  spot = getStruct("guards_talk_spot_original", "targetname");
   self solo_set_pacifist(true);
   wait 0.5;
-  horch = getent("officer_horch", "targetname");
+  horch = getEnt("officer_horch", "targetname");
   horch.animname = "horch";
   spot thread anim_single_solo(horch, "horch_drive");
 
@@ -1061,8 +1061,8 @@ officer_setup() {
   ang = horch gettagangles(tag);
   spot = spawn("script_model", org);
 
-  spot linkto(horch, tag);
-  self linkto(horch, tag);
+  spot linkTo(horch, tag);
+  self linkTo(horch, tag);
 
   magic_org = (514.5, 1741.42, 39.7239);
 
@@ -1083,7 +1083,7 @@ alley_dudes2_setup() {
 
 e4_halftrack_guy_setup() {
   self endon("death");
-  spot = getent("douchespot", "targetname");
+  spot = getEnt("douchespot", "targetname");
   self setentitytarget(spot);
   if(level.difficulty < 2) {
     self thread wait_and_kill(120);
@@ -1191,18 +1191,18 @@ e1_flameguy_setup() {
   wait 0.1;
   self waittill("goal");
 
-  ospot = getstruct(self.script_noteworthy + "_target", "targetname");
+  ospot = getStruct(self.script_noteworthy + "_target", "targetname");
   spot = ospot swap_struct_with_origin();
 
   self.goalradius = 32;
   self setentitytarget(spot);
-  spot moveto(spot.origin + (0, 300, 0), 5);
+  spot moveTo(spot.origin + (0, 300, 0), 5);
   wait 5;
-  spot moveto(spot.origin + (0, -500, 0), 5);
+  spot moveTo(spot.origin + (0, -500, 0), 5);
   wait 5;
-  spot moveto(spot.origin + (0, 300, 0), 5);
+  spot moveTo(spot.origin + (0, 300, 0), 5);
   wait 5;
-  spot moveto(spot.origin + (0, -500, 0), 5);
+  spot moveTo(spot.origin + (0, -500, 0), 5);
   BadPlacesEnable(0);
   wait 5;
 
@@ -1246,7 +1246,7 @@ findbody_guy_setup() {
   self set_run_anim("patrol_walk");
   self findbody_guy_foundbody(node);
 
-  self stopanimscripted();
+  self stopanimScripted();
   self reset_run_anim();
   node = getnode("found_bodies_node", "script_noteworthy");
   node anim_reach_solo(self, "_stealth_find_jog");
@@ -1270,7 +1270,7 @@ wounded_fountain_guys_setup() {
   self.ignoreme = true;
   self.ignoreall = true;
   self solo_set_pacifist(true);
-  node = getstruct("fountain_reznov_align_spot", "targetname");
+  node = getStruct("fountain_reznov_align_spot", "targetname");
   self animscripts\shared::placeweaponOn(self.weapon, "none");
   mynum = 0;
   for(i = 1; i < 4; i++) {
@@ -1293,15 +1293,15 @@ wounded_fountain_guys_setup() {
       if(i == 3) {
         node thread anim_single_solo(self, "wounded");
         wait 12;
-        self stopanimscripted();
+        self stopanimScripted();
         node thread anim_single_solo(self, "wounded");
         level waittill("shooter_coming");
         self.name = undefined;
-        self stopanimscripted();
+        self stopanimScripted();
         animtime = getanimlength(level.scr_anim[self.animname]["wounded"]);
         node thread anim_single_solo(self, "wounded");
         level waittill("shooting_time");
-        self stopanimscripted();
+        self stopanimScripted();
       } else if(i == 2) {
         node thread anim_loop_solo(self, "wounded_loop", undefined, "stop_loop" + i);
         self.name = undefined;
@@ -1313,7 +1313,7 @@ wounded_fountain_guys_setup() {
         node notify("stop_loop" + i);
       }
 
-      self stopanimscripted();
+      self stopanimScripted();
       node anim_single_solo(self, "wounded");
     }
   }
@@ -1387,7 +1387,7 @@ dog_handler_setup() {
 
   self solo_set_pacifist(true);
   wait 1;
-  node = getstruct("streetnode", "targetname");
+  node = getStruct("streetnode", "targetname");
   self.animname = "dog_handler";
 
   animtime = getanimlength(level.scr_anim[self.animname]["find_body"]);
@@ -1412,7 +1412,7 @@ fountain_shooter() {
   flag_set("gunner_ready_toshoot");
   flag_wait("gunner_shoot_now_k");
   level notify("shooting_time");
-  spot = getstruct("fountain_reznov_align_spot", "targetname");
+  spot = getStruct("fountain_reznov_align_spot", "targetname");
   self.animname = "gunner";
 
   mylength = getanimlength(level.scr_anim[self.animname]["gun_dudes"]);
@@ -1427,8 +1427,8 @@ fountain_shooter() {
 }
 
 spawn_walker() {
-  getent("ftn_walker2", "script_noteworthy") stalingradspawn();
-  getent("ftn_walker4", "script_noteworthy") stalingradspawn();
+  getEnt("ftn_walker2", "script_noteworthy") stalingradspawn();
+  getEnt("ftn_walker4", "script_noteworthy") stalingradspawn();
 }
 
 E2_blockofficerb_guys_setup() {
@@ -1484,7 +1484,7 @@ first_sniper_setup() {
         if(hittimes > hitmax) {
           deathspot = spawn("script_origin", self.origin + (0, 0, -10));
           level thread wait_and_delete(deathspot, 10);
-          self stopanimscripted();
+          self stopanimScripted();
           deathspot.angles = (0, 270, 0);
           self.animname = "sniper1";
 
@@ -1537,7 +1537,7 @@ sentry_1_setup() {
   self solo_set_pacifist(true);
   self.goalradius = 24;
   self.health = 1;
-  onode = getstruct(self.script_noteworthy + "_anim", "targetname");
+  onode = getStruct(self.script_noteworthy + "_anim", "targetname");
   node = onode swap_struct_with_origin();
 
   self.animname = "ftn_walker_last";

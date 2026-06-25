@@ -365,7 +365,7 @@ function private function_15677aa0(cmd) {
     case #"hash_3710ddeafb2df7df":
     case #"hash_7791897f03cdc3bf":
     case #"steiner_spawn":
-      player = getplayers()[0];
+      player = getPlayers()[0];
       v_direction = player getplayerangles();
       v_direction = anglesToForward(v_direction) * 8000;
       eye = player getEye();
@@ -573,7 +573,7 @@ function function_99c14949() {
   function_ee21651d("<dev string:x10c>");
 
   while(true) {
-    var_31f7011a = arraysortclosest(getplayers(), self.origin);
+    var_31f7011a = arraysortclosest(getPlayers(), self.origin);
 
     foreach(player in var_31f7011a) {
       if(zm_utility::is_player_valid(player)) {
@@ -667,7 +667,7 @@ function function_f4788553(var_dbce0c44) {
     return 0;
   }
 
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   if(n_player_count == 1) {
     switch (level.var_b15745d6) {
@@ -716,7 +716,7 @@ function function_3ced6468(n_round_number) {
 
     if(zm_round_spawning::function_d0db51fc(#"hash_7c0d83ac1e845ac2")) {
       level.var_b15745d6++;
-      n_player_count = zm_utility::function_a2541519(getplayers().size);
+      n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
       if(n_player_count == 1) {
         level.var_ad49daf9 = level.round_number + randomintrangeinclusive(3, 5);
@@ -750,7 +750,7 @@ function function_fbb9b8fb() {
 }
 
 function function_1f8ac25d() {
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   switch (n_player_count) {
     case 1:
@@ -1911,7 +1911,7 @@ function split_intro_run() {
   self orientmode("face angle", self.angles[1]);
   self animmode("noclip");
   self pathmode("dont move", 1);
-  self animscripted(self.var_3a51c5dc, self.origin, self.angles, self.var_3a51c5dc, "custom");
+  self animScripted(self.var_3a51c5dc, self.origin, self.angles, self.var_3a51c5dc, "custom");
   self thread function_51fb171c();
   var_74ee8be8 = getnotetracktimes(self.var_3a51c5dc, "noclip_end")[0];
 
@@ -2186,7 +2186,7 @@ function private function_44c1658c(entity) {
 function private function_5a481a84(player) {
   dist = distance(self.origin, player.origin);
   targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
-  var_a6470558 = vectornormalize(targetorigin - self.origin);
+  var_a6470558 = vectorNormalize(targetorigin - self.origin);
   aimeleerange = self.meleeweapon.aimeleerange;
   var_32708f81 = 100 + aimeleerange;
   var_8cf8f805 = mapfloat(0, aimeleerange, 100, var_32708f81, dist);
@@ -2677,7 +2677,7 @@ function private function_aed09e18(var_2fa3c4c9, location) {
       steiner function_bf898e7e(0);
       steiner function_af554aaf(0);
       steiner function_16a8babd(0);
-      steiner.ignore_player = getplayers();
+      steiner.ignore_player = getPlayers();
     }
   }
 
@@ -2704,7 +2704,7 @@ function function_f045e7c(location, var_c406df14) {
     steiner function_bf898e7e(0);
     steiner function_af554aaf(0);
     steiner function_16a8babd(0);
-    steiner.ignore_player = getplayers();
+    steiner.ignore_player = getPlayers();
     return steiner;
   }
 }
@@ -2791,7 +2791,7 @@ function function_bbb547de(dist) {
   var_ddb534a3 = function_46d99f6b();
 
   foreach(steiner in var_ddb534a3) {
-    fwd = vectorscale(vectornormalize(anglesToForward(steiner.angles)), dist);
+    fwd = vectorscale(vectorNormalize(anglesToForward(steiner.angles)), dist);
     eye = steiner.origin + (0, 0, 80);
     trace = bulletTrace(eye, eye + fwd, 0, undefined);
     var_380c580a = positionquery_source_navigation(trace[#"position"], 128, 256, 128, 20);

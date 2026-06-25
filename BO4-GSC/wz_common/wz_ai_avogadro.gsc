@@ -105,7 +105,7 @@ function_905d3c1a(entity) {
   delta = getmovedelta("ai_t8_zm_avogadro_arrival", 0, 1, entity);
   timeout = getanimlength("ai_t8_zm_avogadro_arrival");
   new_origin = (entity.origin[0], entity.origin[1], entity.origin[2] - delta[2]);
-  entity animscripted("avogadro_arrival_finished", new_origin, (0, entity.angles[1], 0), "ai_t8_zm_avogadro_arrival", "normal", "root", 1, 0);
+  entity animScripted("avogadro_arrival_finished", new_origin, (0, entity.angles[1], 0), "ai_t8_zm_avogadro_arrival", "normal", "root", 1, 0);
   entity waittilltimeout(timeout, #"avogadro_arrival_finished");
 }
 
@@ -119,7 +119,7 @@ onallcracks(entity) {
   entity.is_digging = 1;
   entity pathmode("dont move", 1);
   timeout = getanimlength("ai_t8_zm_avogadro_exit");
-  entity animscripted("avogadro_exit_finished", self.origin, self.angles, "ai_t8_zm_avogadro_exit", "normal", "root", 1, 0);
+  entity animScripted("avogadro_exit_finished", self.origin, self.angles, "ai_t8_zm_avogadro_exit", "normal", "root", 1, 0);
   waitresult = entity waittilltimeout(timeout, #"avogadro_exit_finished");
   entity ghost();
   entity notsolid();

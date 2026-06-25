@@ -11,7 +11,7 @@ _id_AAD8(var_0, var_1, var_2, var_3) {
   level._id_6A1C = var_1;
   level._id_AAD5 = var_2;
   level._id_AAD7 = var_3;
-  level._id_5722 = getent(var_0 + "_exfil_trigger", "targetname");
+  level._id_5722 = getEnt(var_0 + "_exfil_trigger", "targetname");
   level._id_572B = 1;
 
   if(isDefined(level._id_AAD9)) {
@@ -126,7 +126,7 @@ _id_E2E2(var_0) {
     }
 
     var_14 = (cos(var_12), sin(var_12), 0);
-    var_14 = vectornormalize(var_14 - var_11["normal"] * vectordot(var_14, var_11["normal"]));
+    var_14 = vectorNormalize(var_14 - var_11["normal"] * vectordot(var_14, var_11["normal"]));
     var_15 = vectortoangles(var_14);
     level._id_5721.origin = var_13;
     level._id_5721 setModel("cop_marker_scriptable");
@@ -276,8 +276,8 @@ _id_AADA(var_0) {
   var_0 allowmovement(0);
   var_1 = spawn("script_origin", var_0.origin);
   var_1 setModel("tag_origin");
-  var_0 playerlinkto(var_1);
-  var_1 moveto(var_1.origin + (0, 0, 10000), 5, 2, 2);
+  var_0 playerlinkTo(var_1);
+  var_1 moveTo(var_1.origin + (0, 0, 10000), 5, 2, 2);
 }
 
 _id_E947(var_0) {
@@ -289,14 +289,14 @@ _id_1D1C(var_0, var_1, var_2) {
   wait(var_1 + randomint(10));
   var_3 = level.players[0] scripts\mp\gametypes\br_extract_chopper::_id_E2E3(self, self.origin, var_0, 10 + var_1);
   var_3 playLoopSound("br_exfil_lbravo_engine_temp");
-  var_4 = getent("clip64x64x256", "targetname");
+  var_4 = getEnt("clip64x64x256", "targetname");
   var_5 = spawn("script_model", var_3 gettagorigin("tag_origin"));
   var_5 dontinterpolate();
   var_5.angles = (-90, 0, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
   var_6 = anglesToForward(var_3.angles * (1, 0, 0));
-  var_7 = vectornormalize(var_6) * 85;
-  var_5 linkto(var_3, "tag_origin", var_7 + (0, 0, -60), var_5.angles);
+  var_7 = vectorNormalize(var_6) * 85;
+  var_5 linkTo(var_3, "tag_origin", var_7 + (0, 0, -60), var_5.angles);
   var_3._id_3A68 = var_5;
   var_3 sethoverparams(5, 10, 5);
   self._id_36B0[self._id_36B0.size] = var_3;
@@ -391,7 +391,7 @@ _id_5714(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_3)) {
     var_6 = spawn("script_model", (0, 0, 0));
     var_6 setModel(var_3);
-    var_6 linkto(var_5, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_6 linkTo(var_5, "j_spine4", (0, 0, 0), (0, 0, 0));
     var_5._id_75DA = var_6;
     var_5 thread scripts\engine\utility::_id_472E(var_6);
   }
@@ -399,7 +399,7 @@ _id_5714(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     var_7 = spawn("script_model", (0, 0, 0));
     var_7 setModel(var_4);
-    var_7 linkto(var_5, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_7 linkTo(var_5, "j_gun", (0, 0, 0), (0, 0, 0));
     var_5 thread scripts\engine\utility::_id_472E(var_7);
     var_5._id_04F6 = var_7;
   }
@@ -409,7 +409,7 @@ _id_5714(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_1)) {
     thread scripts\engine\utility::_id_472E(var_5);
-    var_5 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_5 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
   return var_5;
@@ -485,9 +485,9 @@ _id_4AD7(var_0, var_1, var_2) {
 _id_5252(var_0, var_1, var_2) {
   var_3 = spawn("script_model", self.origin);
   var_3 setModel("tag_origin");
-  var_3 linkto(self);
-  var_3 sethintstring(&"MP/HOLD_TO_GET_OFF_CHOPPER");
-  var_3 setcursorhint("HINT_NOICON");
+  var_3 linkTo(self);
+  var_3 setHintString(&"MP/HOLD_TO_GET_OFF_CHOPPER");
+  var_3 setCursorHint("HINT_NOICON");
   var_3 _meth_84D4(200);
   var_3 sethintdisplayfov(90);
   var_3 setuserange(200);
@@ -531,7 +531,7 @@ _id_B70F(var_0, var_1, var_2) {
   }
 
   var_0 allowmovement(0);
-  var_0 playerlinkto(var_1, "tag_passenger" + var_2, 1.0, 180, -180, 180, 180, 0);
+  var_0 playerlinkTo(var_1, "tag_passenger" + var_2, 1.0, 180, -180, 180, 180, 0);
 }
 
 _id_B659(var_0, var_1) {
@@ -552,7 +552,7 @@ _id_B659(var_0, var_1) {
   }
 
   thread _id_0A21::_id_7E51("slot_" + var_1, "viewhands_base_iw8");
-  self._id_B5A4 linkto(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  self._id_B5A4 linkTo(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
 
   switch (var_1) {
     case 0:
@@ -645,9 +645,9 @@ _id_80EF(var_0) {
 _id_3F09(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_model", var_0);
   var_4 setModel("tag_origin");
-  var_4 linkto(self);
-  var_4 sethintstring(var_1);
-  var_4 setcursorhint("HINT_BUTTON");
+  var_4 linkTo(self);
+  var_4 setHintString(var_1);
+  var_4 setCursorHint("HINT_BUTTON");
   var_4 _meth_84D4(200);
   var_4 sethintdisplayfov(90);
   var_4 setuserange(72);

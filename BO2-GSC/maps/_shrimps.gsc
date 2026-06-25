@@ -59,13 +59,13 @@ shrimp_move_down_spline(shrimp_effect, s_path_start, move_speed, start_delay, st
   e_move setModel("tag_origin");
   playFXOnTag(shrimp_effect, e_move, "tag_origin");
 
-  for(s_dest_struct = getstruct(s_path_start.target, "targetname"); isDefined(s_dest_struct); s_dest_struct = getstruct(s_dest_struct.target, "targetname")) {
-    v_dir = vectornormalize(s_dest_struct.origin - e_move.origin);
+  for(s_dest_struct = getStruct(s_path_start.target, "targetname"); isDefined(s_dest_struct); s_dest_struct = getStruct(s_dest_struct.target, "targetname")) {
+    v_dir = vectorNormalize(s_dest_struct.origin - e_move.origin);
     dist = distance(s_dest_struct.origin, e_move.origin);
     last_dist = dist;
 
     while(dist > move_speed && dist <= last_dist) {
-      v_fwd = vectornormalize(level.player.origin - e_move.origin);
+      v_fwd = vectorNormalize(level.player.origin - e_move.origin);
       v_fwd = anglesToForward(v_fwd);
       e_move.angles = v_fwd;
       e_move.origin = e_move.origin + v_dir * move_speed;

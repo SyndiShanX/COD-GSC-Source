@@ -168,8 +168,8 @@ seaknight_rescue_submix() {
 }
 
 play_mi17_unload_ennemies(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
-  var_4 = getent(var_1, "targetname");
+  var_3 = getEnt(var_0, "targetname");
+  var_4 = getEnt(var_1, "targetname");
   var_3 waittill("trigger", var_5);
   var_5 endon("death");
   var_5 vehicle_turnengineoff();

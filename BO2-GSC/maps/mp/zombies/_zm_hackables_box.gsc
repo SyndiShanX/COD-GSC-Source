@@ -169,12 +169,12 @@ respin_respin_box(hacker) {
   if(isDefined(self.chest.zbarrier.weapon_model)) {
     self.chest.zbarrier.weapon_model notify("kill_respin_respin_think_thread");
     self.chest.zbarrier.weapon_model notify("kill_weapon_movement");
-    self.chest.zbarrier.weapon_model moveto(org + vectorscale((0, 0, 1), 40.0), 0.5);
+    self.chest.zbarrier.weapon_model moveTo(org + vectorscale((0, 0, 1), 40.0), 0.5);
   }
 
   if(isDefined(self.chest.zbarrier.weapon_model_dw)) {
     self.chest.zbarrier.weapon_model_dw notify("kill_weapon_movement");
-    self.chest.zbarrier.weapon_model_dw moveto(org + vectorscale((0, 0, 1), 40.0) - vectorscale((1, 1, 1), 3.0), 0.5);
+    self.chest.zbarrier.weapon_model_dw moveTo(org + vectorscale((0, 0, 1), 40.0) - vectorscale((1, 1, 1), 3.0), 0.5);
   }
 
   self.chest.zbarrier notify("box_hacked_rerespin");
@@ -185,7 +185,7 @@ respin_respin_box(hacker) {
 fake_weapon_powerup_thread(weapon1, weapon2) {
   weapon1 endon("death");
   playFXOnTag(level._effect["powerup_on_solo"], weapon1, "tag_origin");
-  playsoundatposition("zmb_spawn_powerup", weapon1.origin);
+  playSoundAtPosition("zmb_spawn_powerup", weapon1.origin);
   weapon1 playLoopSound("zmb_spawn_powerup_loop");
   self thread fake_weapon_powerup_timeout(weapon1, weapon2);
 
@@ -200,10 +200,10 @@ fake_weapon_powerup_thread(weapon1, weapon2) {
     }
 
     yaw = weapon1.angles[1] + yaw;
-    weapon1 rotateto((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
+    weapon1 rotateTo((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
 
     if(isDefined(weapon2)) {
-      weapon2 rotateto((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
+      weapon2 rotateTo((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
     }
 
     wait(randomfloat(waittime - 0.1));

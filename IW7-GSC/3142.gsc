@@ -251,7 +251,7 @@ func_F1FD() {
   var_0 = self.origin + (0, 0, 60);
   radiusdamage(var_0 + (0, 0, 32), 512, 150, 20, self);
   physicsexplosionsphere(var_0, 1000, 50, 1);
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   earthquake(2.25, 0.3, var_0, 1200);
   level thread func_F20A(var_0);
   lib_0C60::func_4E36();

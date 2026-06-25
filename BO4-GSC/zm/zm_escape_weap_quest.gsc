@@ -61,7 +61,7 @@ function_bad944b5() {
 
   for(i = 0; i < level.var_49662f50.size; i++) {
     level.a_s_soul_catchers[i] = level.var_49662f50[i];
-    level.var_b5ca4338[i] = getent(level.var_49662f50[i].target, "targetname");
+    level.var_b5ca4338[i] = getEnt(level.var_49662f50[i].target, "targetname");
     level.var_6aa46602[i] = struct::get(level.var_49662f50[i].var_799fb8e9);
   }
 
@@ -72,7 +72,7 @@ function_bad944b5() {
     level.a_s_soul_catchers[i] thread soul_catcher_check();
     level.a_s_soul_catchers[i] thread soul_catcher_state_manager();
     level.a_s_soul_catchers[i] thread wolf_head_removal("tomahawk_door_sign_" + i + 1);
-    level.var_b5ca4338[i] = getent(level.a_s_soul_catchers[i].target, "targetname");
+    level.var_b5ca4338[i] = getEnt(level.a_s_soul_catchers[i].target, "targetname");
   }
 
   level thread soul_catchers_charged();
@@ -178,7 +178,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
 
   ai_zombie thread function_37937b33();
   var_678e573f = util::spawn_model(#"tag_origin", ai_zombie.origin, ai_zombie.angles);
-  ai_zombie linkto(var_678e573f);
+  ai_zombie linkTo(var_678e573f);
 
   if(n_eating_anim == 3) {
     var_f2c6c759 = "Look Front";
@@ -205,7 +205,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
   vec_dir = self.s_scene.origin - var_678e573f.origin;
   vec_dir_scaled = vectorscale(vec_dir, 0.2);
   v_angles_forward = vectortoangles(vec_dir);
-  var_678e573f moveto(var_678e573f.origin + vec_dir_scaled, var_66a8d5fc, var_66a8d5fc);
+  var_678e573f moveTo(var_678e573f.origin + vec_dir_scaled, var_66a8d5fc, var_66a8d5fc);
 
   if(self.var_43bd3b5 == 0) {
     self flag::wait_till(#"wolf_intro_anim_complete");
@@ -249,8 +249,8 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
     v_pos = self.s_scene.origin;
   }
 
-  var_678e573f moveto(v_pos, var_391fd0d5, var_391fd0d5);
-  var_678e573f rotateto(v_angles_forward + var_5dedf8ea, var_66a8d5fc);
+  var_678e573f moveTo(v_pos, var_391fd0d5, var_391fd0d5);
+  var_678e573f rotateTo(v_angles_forward + var_5dedf8ea, var_66a8d5fc);
   wait var_391fd0d5;
 
   if(isDefined(ai_zombie)) {
@@ -282,7 +282,7 @@ function_37937b33() {
 
 which_eating_anim() {
   soul_catcher = self.var_cfd3756;
-  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
+  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectorNormalize(self.origin - soul_catcher.origin));
 
   if(forward_dot > 0.85) {
     return 3;
@@ -303,11 +303,11 @@ soul_catcher_state_manager() {
   self flag::init(#"wolf_intro_anim_complete");
 
   if(self.script_noteworthy == "rune_3") {
-    self.mdl_rune = getent("rune_3", "targetname");
+    self.mdl_rune = getEnt("rune_3", "targetname");
   } else if(self.script_noteworthy == "rune_2") {
-    self.mdl_rune = getent("rune_2", "targetname");
+    self.mdl_rune = getEnt("rune_2", "targetname");
   } else if(self.script_noteworthy == "rune_1") {
-    self.mdl_rune = getent("rune_1", "targetname");
+    self.mdl_rune = getEnt("rune_1", "targetname");
   }
 
   self waittill(#"first_zombie_killed_in_zone");
@@ -345,7 +345,7 @@ function_ee929ece() {
 }
 
 wolf_head_removal(wolf_head_model_string) {
-  wolf_head_model = getent(wolf_head_model_string, "targetname");
+  wolf_head_model = getEnt(wolf_head_model_string, "targetname");
   wolf_head_model setModel(#"p8_zm_esc_dream_catcher_off");
   self waittill(#"fully_charged");
   wolf_head_model setModel(#"p8_zm_esc_dream_catcher");
@@ -407,7 +407,7 @@ function_41b1af8c() {
   }
 
   wait 3.5;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_closest = util::get_array_of_closest(self.origin, a_players);
 
   for(i = 0; i < a_closest.size; i++) {
@@ -478,21 +478,21 @@ tomahawk_pickup() {
   if(isDefined(s_pos_trigger)) {
     trigger = spawn("trigger_radius_use", s_pos_trigger.origin, 0, 275, 100);
     trigger.script_noteworthy = "rt_pickup_trigger";
-    trigger triggerignoreteam();
+    trigger triggerIgnoreTeam();
 
     if(function_8b1a219a()) {
-      trigger sethintstring(#"hash_456f80deeaa8ebee");
+      trigger setHintString(#"hash_456f80deeaa8ebee");
     } else {
-      trigger sethintstring(#"zm_escape/tomahawk_pickup");
+      trigger setHintString(#"zm_escape/tomahawk_pickup");
     }
 
-    trigger setcursorhint("HINT_NOICON");
+    trigger setCursorHint("HINT_NOICON");
   }
 
   if(isDefined(trigger)) {
     trigger thread tomahawk_pickup_trigger();
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       e_player thread function_6300f001();
     }
 
@@ -594,7 +594,7 @@ function_6300f001() {
   }
 
   self endon(#"disconnect");
-  var_6668e57a = getent("rt_pickup_trigger", "script_noteworthy");
+  var_6668e57a = getEnt("rt_pickup_trigger", "script_noteworthy");
   s_tomahawk_scene = struct::get("tom_pil");
   mdl_tomahawk = s_tomahawk_scene.scene_ents[#"prop 2"];
 

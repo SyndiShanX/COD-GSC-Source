@@ -39,7 +39,7 @@ set_start_positions(var_0) {
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":
-        level.player setorigin(var_3.origin);
+        level.player setOrigin(var_3.origin);
         level.player setplayerangles(var_3.angles);
         break;
       case "baker":
@@ -214,9 +214,9 @@ tree_sway() {
   for(;;) {
     var_1 = randomfloatrange(4, 8);
     var_2 = randomfloatrange(4, 7);
-    self rotateyaw(var_2 * var_0, var_1, var_1 * 0.45, var_1 * 0.45);
+    self rotateYaw(var_2 * var_0, var_1, var_1 * 0.45, var_1 * 0.45);
     wait(var_1);
-    self rotateyaw(-1 * var_2 * var_0, var_1, var_1 * 0.45, var_1 * 0.45);
+    self rotateYaw(-1 * var_2 * var_0, var_1, var_1 * 0.45, var_1 * 0.45);
     wait(var_1);
   }
 }
@@ -478,7 +478,7 @@ link_linked_ents() {
 }
 
 parent_to_me(var_0) {
-  self linkto(var_0);
+  self linkTo(var_0);
   self show();
   var_0 waittill("death");
   self delete();
@@ -517,9 +517,9 @@ volume_is_empty(var_0, var_1) {
   return 1;
 }
 
-moveto_rotateto(var_0, var_1, var_2, var_3) {
-  self moveto(var_0.origin, var_1, var_2, var_3);
-  self rotateto(var_0.angles, var_1, var_2, var_3);
+moveto_rotateTo(var_0, var_1, var_2, var_3) {
+  self moveTo(var_0.origin, var_1, var_2, var_3);
+  self rotateTo(var_0.angles, var_1, var_2, var_3);
   self waittill("movedone");
 }
 
@@ -540,8 +540,8 @@ moveto_rotateto_speed(var_0, var_1, var_2, var_3) {
   if(var_7 <= 0) {
     return;
   }
-  self rotateto(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
-  self moveto(var_4, var_7, var_7 * var_2, var_7 * var_3);
+  self rotateTo(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
+  self moveTo(var_4, var_7, var_7 * var_2, var_7 * var_3);
   self waittill("movedone");
 }
 
@@ -611,8 +611,8 @@ vehicle_rumble_even_if_not_moving() {
   var_2 = var_1.radius * 2;
   var_3 = -1 * var_1.radius;
   var_4 = spawn("trigger_radius", self.origin + (0, 0, var_3), 0, var_1.radius, var_2);
-  var_4 enablelinkto();
-  var_4 linkto(self);
+  var_4 enablelinkTo();
+  var_4 linkTo(self);
   self.rumbletrigger = var_4;
   self endon("death");
 
@@ -707,11 +707,11 @@ btr_target_player() {
   self endon("death");
   self endon("stop_shooting");
   self vehicle_setspeedimmediate(0.0, 5.0, 15.0);
-  self setturrettargetent(level.player);
+  self setturrettargetEnt(level.player);
   wait 1.5;
 
   while(isalive(level.player)) {
-    self setturrettargetent(level.player);
+    self setturrettargetEnt(level.player);
 
     if(self.model == "vehicle_btr80") {
       if(can_see_player()) {
@@ -813,7 +813,7 @@ make_enemy_squad_burst(var_0, var_1) {
 
   foreach(var_4 in var_0) {
     var_4.radio_emitter = common_scripts\utility::spawn_tag_origin();
-    var_4.radio_emitter linkto(var_4, "J_SpineUpper", (0, 0, 0), (0, 0, 0));
+    var_4.radio_emitter linkTo(var_4, "J_SpineUpper", (0, 0, 0), (0, 0, 0));
     var_2 = common_scripts\utility::array_add(var_2, var_4.radio_emitter);
   }
 
@@ -969,7 +969,7 @@ hazmat_think(var_0) {
   self attach("nml_geiger_counter", "tag_inhand", 1);
   thread drop_geiger_on_dogattack();
   self.geiger_sound_source = common_scripts\utility::spawn_tag_origin();
-  self.geiger_sound_source linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  self.geiger_sound_source linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
   self.geiger_sound_source playLoopSound("scn_nml_geiger_counter");
   thread yell_and_scream_kill();
   thread hazmat_gets_scared();
@@ -1105,7 +1105,7 @@ hazmat_react(var_0) {
   }
   var_1 = var_0.origin;
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(var_2);
+  var_3 = vectorNormalize(var_2);
   var_4 = vectortoangles(var_3);
   var_5 = vectortoangles(var_1 - self.origin);
   var_6 = var_4[1] - var_5[1];
@@ -1137,7 +1137,7 @@ yell_and_scream() {
   self endon("dog_attacks_ai");
   maps\_utility::play_sound_on_entity("hazmat_dogstartle_enemy_1");
   self.scream_node = common_scripts\utility::spawn_tag_origin();
-  self.scream_node linkto(self, "j_head", (0, 0, 0), (0, 0, 0));
+  self.scream_node linkTo(self, "j_head", (0, 0, 0), (0, 0, 0));
   thread yell_and_scream_stop();
 
   for(;;) {

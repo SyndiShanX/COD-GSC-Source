@@ -176,7 +176,7 @@ function ongameplaying() {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set("gunfight_pregame_rob", 0);
   }
 
@@ -708,7 +708,7 @@ function overtime() {
   thread globallogic::timelimitclock();
   level.usingextratime = 1;
   level thread globallogic::updategametypedvars();
-  playsoundatposition(#"hash_6a5f99378f4a93c1", (0, 0, 0));
+  playSoundAtPosition(#"hash_6a5f99378f4a93c1", (0, 0, 0));
   music::setmusicstate("gunfight_time_extended");
 
   if(!isDefined(zone)) {
@@ -759,7 +759,7 @@ function onzonecapture(sentient) {
 
   self notify(#"zone_captured");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player playlocalsound(#"hash_6234f3332aa1bfe4");
   }
 
@@ -809,11 +809,11 @@ function function_c4915ac() {
   var_3a22d07b = 0;
   var_f6718d9a = 0;
 
-  foreach(player in getplayers(#"allies")) {
+  foreach(player in getPlayers(#"allies")) {
     var_3a22d07b += player.health;
   }
 
-  foreach(player in getplayers(#"axis")) {
+  foreach(player in getPlayers(#"axis")) {
     var_f6718d9a += player.health;
   }
 
@@ -910,7 +910,7 @@ function private function_3e53e79d(team, deadteam) {
     }
   }
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     if(isDefined(player.var_9b890e79) && player.var_9b890e79 >= var_fbd29ffa) {
       scoreevents::processscoreevent(#"hash_3519e5bb7cacb1a7", player);
       player stats::function_cc215323(#"hash_75477f88c5551f60", 1);
@@ -941,11 +941,11 @@ function function_a481300e() {
     var_3a22d07b = 0;
     var_f6718d9a = 0;
 
-    foreach(player in getplayers(#"allies")) {
+    foreach(player in getPlayers(#"allies")) {
       var_3a22d07b += player.health;
     }
 
-    foreach(player in getplayers(#"axis")) {
+    foreach(player in getPlayers(#"axis")) {
       var_f6718d9a += player.health;
     }
 

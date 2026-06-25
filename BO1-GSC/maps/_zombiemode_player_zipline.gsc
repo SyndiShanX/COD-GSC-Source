@@ -36,8 +36,8 @@ monitor_player_zipline(zipline_vehicles) {
     if(targets[i].classname == "script_brushmodel" || targets[i].classname == "script_model") {
       assertex(isDefined(targets[i].script_string), "The zipline gate needs to have a script_string reference with one or more flag names seperated by spaces");
       zip_hint_trig = spawn("trigger_radius_use", targets[i].origin);
-      zip_hint_trig SetCursorHint("HINT_NOICON");
-      zip_hint_trig sethintstring(&"ZOMBIE_COAST_ZIPLINE_NO_ACCESS");
+      zip_hint_trig setCursorHint("HINT_NOICON");
+      zip_hint_trig setHintString(&"ZOMBIE_COAST_ZIPLINE_NO_ACCESS");
       zipline_flags = strTok(targets[i].script_string, " ");
       if(targets[i].targetname == "zipline_test1") {
         flag_wait("start_beach_group");
@@ -204,7 +204,7 @@ do_player_zipline(vehicle, zip_path, zip_trig) {
   }
   self player_enter_zipline(vehicle, zip_path);
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent linkto(self);
+  sound_ent linkTo(self);
   sound_ent playLoopSound("evt_zipline_slide");
   sound_ent thread force_deletion_of_soundent(self, vehicle);
   vehicle startpath();
@@ -420,20 +420,20 @@ move_delete_zipline_gate() {
   self notsolid();
   org = self.origin + (0, 0, 250);
   self play_sound_on_ent("debris_move");
-  playsoundatposition("zmb_lightning_l", self.origin);
+  playSoundAtPosition("zmb_lightning_l", self.origin);
   num = RandomIntRange(3, 5);
   og_angles = self.angles;
   for(i = 0; i < num; i++) {
     angles = og_angles + (-5 + RandomFloat(10), -5 + RandomFloat(10), -5 + RandomFloat(10));
     time = RandomFloatRange(0.1, 0.4);
-    self Rotateto(angles, time);
+    self rotateTo(angles, time);
     wait(time - 0.05);
   }
   time = 1;
-  self MoveTo(org, time, time * 0.5);
-  self RotateTo(self.angles + (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)), time * 0.75);
+  self moveTo(org, time, time * 0.5);
+  self rotateTo(self.angles + (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)), time * 0.75);
   self waittill("movedone");
-  playsoundatposition("zmb_zombie_spawn", self.origin);
+  playSoundAtPosition("zmb_zombie_spawn", self.origin);
   playFX(level._effect["large_ceiling_dust"], self.origin);
   self Delete();
 }

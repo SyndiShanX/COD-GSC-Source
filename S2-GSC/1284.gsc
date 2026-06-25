@@ -114,7 +114,7 @@ func_7947() {
       var_07 = 0;
       if(var_06 < var_00) {
         var_08 = anglesToForward(var_05 getangles());
-        var_09 = vectornormalize(self.var_116 - var_05 getvieworigin());
+        var_09 = vectorNormalize(self.var_116 - var_05 getvieworigin());
         var_0A = vectordot(var_08, var_09);
         if(var_0A >= var_01) {
           var_07 = 1;
@@ -432,7 +432,7 @@ func_9F82(param_00) {
     var_03 = var_03 + distance2d(var_05, var_06);
     if(var_03 > param_00) {
       var_07 = param_00 - var_04;
-      var_08 = vectornormalize(var_06 - var_05);
+      var_08 = vectorNormalize(var_06 - var_05);
       var_09 = var_05 + var_08 * var_07;
       var_09 = (var_09[0], var_09[1], self.var_116[2] + 100);
       return var_09;
@@ -448,15 +448,15 @@ func_9F82(param_00) {
 func_794C(param_00) {
   waittillframeend;
   var_01 = self.var_A2C8;
-  param_00 linkto(var_01);
+  param_00 linkTo(var_01);
 }
 
 func_795D(param_00) {
   waittillframeend;
   var_01 = self.var_A2C8;
   param_00 method_83EF();
-  param_00 enablelinkto();
-  param_00 linkto(var_01);
+  param_00 enablelinkTo();
+  param_00 linkTo(var_01);
   for(;;) {
     if(0) {
       param_00 waittill("trigger");
@@ -625,7 +625,7 @@ func_7946(param_00) {
   for(;;) {
     lib_0502::func_79E1(param_00, "OPEN ME");
     param_00 waittill("used", var_01);
-    param_00 sethintstring("");
+    param_00 setHintString("");
     self notify("trigger", "open", var_01);
     self waittill("moveToPosDone");
     self notify("trigger", "opened", var_01);
@@ -637,7 +637,7 @@ func_7946(param_00) {
       }
     }
 
-    param_00 sethintstring("");
+    param_00 setHintString("");
     self notify("trigger", "close", var_01);
     self waittill("moveToPosDone");
     self notify("trigger", "closed", var_01);
@@ -818,8 +818,8 @@ func_7950(param_00, param_01) {
 func_79F8(param_00) {
   waittillframeend;
   var_01 = self.var_A2C8;
-  param_00 enablelinkto();
-  param_00 linkto(var_01);
+  param_00 enablelinkTo();
+  param_00 linkTo(var_01);
   self.var_6EA0 = param_00.var_982D["part_pick_up_trigger"].size;
   for(;;) {
     var_02 = undefined;
@@ -833,7 +833,7 @@ func_79F8(param_00) {
       var_04.var_6BBF = ::func_6B8D;
       var_04.var_6AC9 = ::func_6B8E;
       thread func_7956();
-      param_00 sethintstring(&"RAIDS_PART_INSTALL");
+      param_00 setHintString(&"RAIDS_PART_INSTALL");
       while(self.var_6EA0 > 0) {
         self waittill("part_installed");
       }
@@ -860,7 +860,7 @@ func_79F8(param_00) {
     }
 
     var_01.var_664C = 0;
-    param_00 sethintstring("");
+    param_00 setHintString("");
     var_01 waittill("break_down");
   }
 }
@@ -871,8 +871,8 @@ func_79EF(param_00) {
 
 func_794A(param_00) {
   waittillframeend;
-  param_00 enablelinkto();
-  param_00 linkto(self.var_A2C8);
+  param_00 enablelinkTo();
+  param_00 linkTo(self.var_A2C8);
   for(;;) {
     var_01 = self.var_A2C8 method_8289();
     var_02 = length(var_01);
@@ -1128,7 +1128,7 @@ func_792C(param_00) {
   self.var_1C6E notify("built");
   level notify("raidBridgeFinishedBuilding");
   foreach(var_02 in self.var_21F7) {
-    var_02.var_9D65 sethintstring("");
+    var_02.var_9D65 setHintString("");
   }
 }
 
@@ -1415,7 +1415,7 @@ func_7990(param_00) {
     lib_0502::func_1D3B(self.var_2599);
     thread func_7996(param_00);
     param_00 waittill("used", var_01);
-    param_00 sethintstring("");
+    param_00 setHintString("");
     self.var_2599 = 1;
     lib_0502::func_1D3B(self.var_2599);
     self notify("trigger", "constructed", var_01);
@@ -1436,13 +1436,13 @@ func_7990(param_00) {
         }
       }
 
-      param_00 sethintstring("");
+      param_00 setHintString("");
       if(var_02 == "destroyed") {
         break;
       }
 
       thread func_7989(param_00, var_03);
-      param_00 sethintstring("");
+      param_00 setHintString("");
       for(;;) {
         self waittill("trigger", var_02, var_03);
         if(var_02 == "bomb_exploded" || var_02 == "destroyed") {
@@ -1450,7 +1450,7 @@ func_7990(param_00) {
         }
       }
 
-      param_00 sethintstring("");
+      param_00 setHintString("");
       self notify("stop_timer");
       if(var_02 == "bomb_exploded" || var_02 == "destroyed") {
         break;
@@ -1800,7 +1800,7 @@ func_79D5() {
 }
 
 func_79DD() {
-  var_00 = getent("raid_escort_vehicle", "script_noteworthy");
+  var_00 = getEnt("raid_escort_vehicle", "script_noteworthy");
   var_01 = 120;
   for(;;) {
     var_02 = var_00.var_116;
@@ -1842,7 +1842,7 @@ func_79DA(param_00) {
     lib_0502::func_79E1(param_00, &"RAIDS_PLACE_MINE", 3, &"RAIDS_PLACING_MINE");
     param_00 setteamfortrigger(game["defenders"]);
     param_00 waittill("used", var_03);
-    param_00 sethintstring("");
+    param_00 setHintString("");
     self notify("trigger", "placed", var_03);
     self.var_565F = 1;
     self.var_7433 = var_03;
@@ -1857,7 +1857,7 @@ func_79DA(param_00) {
       }
     }
 
-    param_00 sethintstring("");
+    param_00 setHintString("");
     self.var_565F = 0;
     self.var_7433 = undefined;
   }

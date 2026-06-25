@@ -151,7 +151,7 @@ lib_050D::func_10E5(param_00, param_01) {
         continue;
       }
 
-      var_09 = vectornormalize(var_08.var_0116 - var_05.var_0116);
+      var_09 = vectorNormalize(var_08.var_0116 - var_05.var_0116);
       var_0A = vectordot(var_06, var_09);
       if(var_0A > 0.86) {
         var_05.var_7702 = 0;

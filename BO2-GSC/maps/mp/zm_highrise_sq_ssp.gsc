@@ -71,7 +71,7 @@ ssp1_watch_ball(str_complete_flag) {
 
 ssp1_rotate_ball() {
   while(isDefined(self)) {
-    self rotateyaw(360, 1);
+    self rotateYaw(360, 1);
     wait 0.9;
   }
 }
@@ -90,7 +90,7 @@ stage_logic_2() {
 }
 
 corpse_room_watcher() {
-  t_corpse_room = getent("corpse_room_trigger", "targetname");
+  t_corpse_room = getEnt("corpse_room_trigger", "targetname");
   n_count = 0;
 
   while(!flag("ssp2_resurrection_done")) {
@@ -122,7 +122,7 @@ ssp_2_zombie_death_check() {
   if(!isDefined(self)) {
     return;
   }
-  t_corpse_room = getent("corpse_room_trigger", "targetname");
+  t_corpse_room = getEnt("corpse_room_trigger", "targetname");
 
   if(self istouching(t_corpse_room)) {
     level notify("ssp2_corpse_made", 1);
@@ -133,7 +133,7 @@ ssp_2_zombie_death_check() {
 
 corpse_room_cleanup_watcher() {
   level endon("ssp2_resurrection_done");
-  t_corpse_room = getent("corpse_room_trigger", "targetname");
+  t_corpse_room = getEnt("corpse_room_trigger", "targetname");
 
   while(true) {
     wait 1;
@@ -165,7 +165,7 @@ corpse_room_revive_watcher() {
   level endon("end_revive_watcher");
   weaponname = "none";
   str_type = "none";
-  t_corpse_room_dmg = getent("corpse_room_trigger", "targetname");
+  t_corpse_room_dmg = getEnt("corpse_room_trigger", "targetname");
 
   while(weaponname != "knife_ballistic_upgraded_zm" || str_type != "MOD_IMPACT") {
     t_corpse_room_dmg waittill("damage", amount, inflictor, direction, point, type);

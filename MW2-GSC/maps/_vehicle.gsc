@@ -181,7 +181,7 @@ vehicle_linked_entities_think() {
 
   foreach(ent in aLinkedEnts) {
     if(ent != eOrg) {
-      ent LinkTo(eOrg);
+      ent linkTo(eOrg);
     }
   }
 
@@ -190,7 +190,7 @@ vehicle_linked_entities_think() {
   foreach(ent in aLinkedEnts) {
     ent Show();
     if(ent != eOrg) {
-      ent LinkTo(vehicle);
+      ent linkTo(vehicle);
     }
   }
   vehicle waittill("death");
@@ -616,8 +616,8 @@ runtovehicle(guy) {
   guy unset_forcegoal();
 
   if(self Vehicle_GetSpeed() < 1) {
-    guy LinkTo(self);
-    guy AnimScripted("hopinend", climborg, climbang, climbinanim[thenode]);
+    guy linkTo(self);
+    guy animScripted("hopinend", climborg, climbang, climbinanim[thenode]);
     guy waittillmatch("hopinend", "end");
     self guy_enter_vehicle(guy);
   }
@@ -1162,9 +1162,9 @@ heli_wait_node(nextpoint, lastpoint) {
 }
 
 heli_firelink(nextpoint) {
-  target = GetEnt(nextpoint.script_linkto, "script_linkname");
+  target = getEnt(nextpoint.script_linkto, "script_linkname");
   if(!isDefined(target)) {
-    target = getstruct(nextpoint.script_linkto, "script_linkname");
+    target = getStruct(nextpoint.script_linkto, "script_linkname");
 
     AssertEx(isDefined(target), "No target for script_firelink");
   }
@@ -1198,7 +1198,7 @@ heli_firelink(nextpoint) {
 helipath(msg, maxspeed, accel) {
   self SetAirResistance(30);
   self Vehicle_SetSpeed(maxspeed, accel, level.heli_default_decel);
-  vehicle_paths(getstruct(msg, "targetname"));
+  vehicle_paths(getStruct(msg, "targetname"));
 }
 
 set_heli_goal(node) {
@@ -1300,7 +1300,7 @@ getonpath(skip_attach) {
     }
 
     if(!isDefined(path_start)) {
-      path_start = getstruct(self.target, "targetname");
+      path_start = getStruct(self.target, "targetname");
     }
   }
 
@@ -1341,7 +1341,7 @@ getonpath(skip_attach) {
   }
 
   if(!isDefined(self.dontDisconnectPaths)) {
-    self DisconnectPaths();
+    self disconnectPaths();
   }
   self thread vehicle_paths(undefined, isHelicopter());
 }
@@ -1424,7 +1424,7 @@ vehicle_spawn(vspawner) {
   return vehicle;
 }
 get_vehicle_spawned_from_spawner_with_targetname(targetname) {
-  spawner = GetEnt(targetname, "targetname");
+  spawner = getEnt(targetname, "targetname");
   Assert(isDefined(spawner));
   if(isDefined(spawner.last_spawned_vehicle)) {
     return spawner.last_spawned_vehicle;
@@ -1438,7 +1438,7 @@ remove_vehicle_spawned_thisframe() {
 }
 
 waittill_vehiclespawn(targetname) {
-  spawner = GetEnt(targetname, "targetname");
+  spawner = getEnt(targetname, "targetname");
   Assert(isSpawner(spawner));
 
   if(isDefined(spawner.vehicle_spawned_thisframe)) {
@@ -1465,7 +1465,7 @@ waittill_vehiclespawn_noteworthy(noteworthy) {
     return spawner.vehicle_spawned_thisframe;
   }
 
-  spawner = GetEnt(noteworthy, "script_noteworthy");
+  spawner = getEnt(noteworthy, "script_noteworthy");
   spawner waittill("spawned", vehicle);
   return vehicle;
 }
@@ -1756,7 +1756,7 @@ vehicle_kill() {
     if(isDefined(self.delete_on_death)) {
       wait 0.05;
       if(!isDefined(self.dontDisconnectPaths) && !self Vehicle_IsPhysVeh()) {
-        self DisconnectPaths();
+        self disconnectPaths();
       }
 
       self FreeVehicle();
@@ -1769,7 +1769,7 @@ vehicle_kill() {
     if(isDefined(self.free_on_death)) {
       self notify("newpath");
       if(!isDefined(self.dontDisconnectPaths)) {
-        self DisconnectPaths();
+        self disconnectPaths();
       }
 
       Vehicle_kill_badplace_forever();
@@ -1802,7 +1802,7 @@ vehicle_kill() {
         while(self.veh_speed != 0) {
           wait 1;
         }
-        self DisconnectPaths();
+        self disconnectPaths();
         self notify("kill_badplace_forever");
         self kill();
 
@@ -1879,7 +1879,7 @@ vehicle_do_crash(model, attacker, cause) {
 
       self notify("deadstop");
       if(!isDefined(self.dontDisconnectPaths)) {
-        self DisconnectPaths();
+        self disconnectPaths();
       }
       if((isDefined(self.tankgetout)) && (self.tankgetout > 0)) {
         self waittill("animsdone");
@@ -1892,7 +1892,7 @@ vehicle_do_crash(model, attacker, cause) {
 
       self notify("deadstop");
       if(!isDefined(self.dontDisconnectPaths)) {
-        self DisconnectPaths();
+        self disconnectPaths();
       }
       if((isDefined(self.tankgetout)) && (self.tankgetout > 0)) {
         self waittill("animsdone");
@@ -2409,7 +2409,7 @@ disconnect_paths_whenstopped() {
   while(isDefined(self)) {
     if(self Vehicle_GetSpeed() < 1) {
       if(!isDefined(self.dontDisconnectPaths)) {
-        self DisconnectPaths();
+        self disconnectPaths();
       }
       self notify("speed_zero_path_disconnect");
       while(self Vehicle_GetSpeed() < 1) {
@@ -2794,7 +2794,7 @@ is_node_script_struct(node) {
   if(!isDefined(node.targetname)) {
     return false;
   }
-  return isDefined(getstruct(node.targetname, "targetname"));
+  return isDefined(getStruct(node.targetname, "targetname"));
 }
 
 setup_vehicles(vehicles) {
@@ -2888,7 +2888,7 @@ mginit() {
 
   foreach(index, turret_template in turret_templates) {
     turret = SpawnTurret("misc_turret", (0, 0, 0), turret_template.info);
-    turret LinkTo(self, turret_template.tag, (0, 0, 0), (0, -1 * mgangle, 0));
+    turret linkTo(self, turret_template.tag, (0, 0, 0), (0, -1 * mgangle, 0));
     turret setModel(turret_template.model);
     turret.angles = self.angles;
     turret.isvehicleattached = true;
@@ -3457,7 +3457,7 @@ hit_bullet_armor(type) {
 
 regen_front_armor(attacker, amount) {
   forwardvec = anglesToForward(self.angles);
-  othervec = VectorNormalize(attacker.origin - self.origin);
+  othervec = vectorNormalize(attacker.origin - self.origin);
   if(VectorDot(forwardvec, othervec) > .86) {
     self.health += Int(amount * level.vehicle_frontarmor[self.vehicletype]);
   }
@@ -3477,8 +3477,8 @@ vehicle_rumble() {
   height = rumblestruct.radius * 2;
   zoffset = -1 * rumblestruct.radius;
   areatrigger = spawn("trigger_radius", self.origin + (0, 0, zoffset), 0, rumblestruct.radius, height);
-  areatrigger EnableLinkTo();
-  areatrigger LinkTo(self);
+  areatrigger EnablelinkTo();
+  areatrigger linkTo(self);
   self.rumbletrigger = areatrigger;
   self endon("death");
 
@@ -3829,14 +3829,14 @@ get_vehiclenode_any_dynamic(target) {
   path_start = GetVehicleNode(target, "targetname");
 
   if(!isDefined(path_start)) {
-    path_start = GetEnt(target, "targetname");
+    path_start = getEnt(target, "targetname");
   } else if(ishelicopter()) {
     PrintLn("helicopter node targetname: " + path_start.targetname);
     PrintLn("vehicletype: " + self.vehicletype);
     AssertMsg("helicopter on vehicle path( see console for info )");
   }
   if(!isDefined(path_start)) {
-    path_start = getstruct(target, "targetname");
+    path_start = getStruct(target, "targetname");
   }
   return path_start;
 }
@@ -3986,7 +3986,7 @@ move_turrets_here(model) {
 
   foreach(i, turret in self.mgturret) {
     turret Unlink();
-    turret LinkTo(model, level.vehicle_mgturret[typemodel][i].tag, (0, 0, 0), (0, 0, 0));
+    turret linkTo(model, level.vehicle_mgturret[typemodel][i].tag, (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -4029,7 +4029,7 @@ vehicle_to_dummy() {
 move_effects_ent_here(model) {
   ent = deathfx_ent();
   ent Unlink();
-  ent LinkTo(model);
+  ent linkTo(model);
 }
 
 model_dummy_death() {
@@ -4048,7 +4048,7 @@ move_ghettotags_here(model) {
   }
   foreach(ghettotag in self.ghettotags) {
     ghettotag Unlink();
-    ghettotag LinkTo(model);
+    ghettotag linkTo(model);
   }
 }
 
@@ -4093,7 +4093,7 @@ move_riders_here(base) {
     }
     guy Unlink();
     animpos = maps\_vehicle_aianim::anim_pos(self, guy.vehicle_position);
-    guy LinkTo(base, animpos.sittag, (0, 0, 0), (0, 0, 0));
+    guy linkTo(base, animpos.sittag, (0, 0, 0), (0, 0, 0));
     if(IsAI(guy)) {
       guy Teleport(base GetTagOrigin(animpos.sittag));
     } else {
@@ -4295,7 +4295,7 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
 }
 level thread play_sound_in_space(soundAlias, node_origin);
 
-animatedTank LinkTo(dummy);
+animatedTank linkTo(dummy);
 crushedVehicle UseAnimTree(animTree);
 animatedTank UseAnimTree(animTree);
 
@@ -4307,11 +4307,11 @@ crushedVehicle thread tank_crush_fx_on_tag("tag_window_right_glass_fx", level._v
 crushedVehicle thread tank_crush_fx_on_tag("tag_windshield_back_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 0.7);
 crushedVehicle thread tank_crush_fx_on_tag("tag_windshield_front_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 1.5);
 
-crushedVehicle AnimScripted("tank_crush_anim", node_origin, node_angles, truckAnim);
-animatedTank AnimScripted("tank_crush_anim", dummy.origin, dummy.angles, tankAnim);
+crushedVehicle animScripted("tank_crush_anim", node_origin, node_angles, truckAnim);
+animatedTank animScripted("tank_crush_anim", dummy.origin, dummy.angles, tankAnim);
 
-dummy MoveTo(node_origin, move_to_time, (move_to_time / 2), (move_to_time / 2));
-dummy RotateTo(node_angles, move_to_time, (move_to_time / 2), (move_to_time / 2));
+dummy moveTo(node_origin, move_to_time, (move_to_time / 2), (move_to_time / 2));
+dummy rotateTo(node_angles, move_to_time, (move_to_time / 2), (move_to_time / 2));
 wait move_to_time;
 
 animLength -= move_to_time;
@@ -4348,7 +4348,7 @@ thread draw_line_from_ent_for_time(level.player, self.origin, 1, 0, 0, animLengt
 thread draw_line_from_ent_for_time(level.player, anim_end_org, 0, 1, 0, animLength / 2);
 thread draw_line_from_ent_to_ent_for_time(level.player, dummy, 0, 0, 1, animLength / 2);
 }
-dummy RotateTo(dummy.final_angles, move_from_time, (move_from_time / 2), (move_from_time / 2));
+dummy rotateTo(dummy.final_angles, move_from_time, (move_from_time / 2), (move_from_time / 2));
 wait move_from_time;
 self AttachPath(endNode);
 dummy_to_vehicle();
@@ -4619,7 +4619,7 @@ deathfx_ent() {
     ent.angles = emodel.angles;
     ent NotSolid();
     ent Hide();
-    ent LinkTo(emodel);
+    ent linkTo(emodel);
     self.deathfx_ent = ent;
   } else
     self.deathfx_ent setModel(self.model);
@@ -4846,7 +4846,7 @@ build_localinit(init_thread) {
 }
 
 get_from_spawnStruct(target) {
-  return getstruct(target, "targetname");
+  return getStruct(target, "targetname");
 }
 
 get_from_entity(target) {
@@ -4858,11 +4858,11 @@ get_from_entity(target) {
 }
 
 get_from_spawnstruct_target(target) {
-  return getstruct(target, "target");
+  return getStruct(target, "target");
 }
 
 get_from_entity_target(target) {
-  return GetEnt(target, "target");
+  return getEnt(target, "target");
 }
 
 get_from_vehicle_node(target) {
@@ -4870,7 +4870,7 @@ get_from_vehicle_node(target) {
 }
 
 set_lookat_from_dest(dest) {
-  viewTarget = GetEnt(dest.script_linkto, "script_linkname");
+  viewTarget = getEnt(dest.script_linkto, "script_linkname");
 
   if(!isDefined(viewTarget) || level.script == "hunted") {
     return;
@@ -5006,14 +5006,14 @@ apply_truckjunk(eVehicle, truckjunk) {
   foreach(truckjunk in junkarray) {
     model = spawn("script_model", self.origin);
     model setModel(truckjunk.model);
-    model LinkTo(self, "tag_body", truckjunk.origin, truckjunk.angles);
+    model linkTo(self, "tag_body", truckjunk.origin, truckjunk.angles);
     self.truckjunk[self.truckjunk.size] = truckjunk;
   }
 }
 
 truckjunk() {
   Assert(isDefined(self.target));
-  spawner = GetEnt(self.target, "targetname");
+  spawner = getEnt(self.target, "targetname");
   Assert(isDefined(spawner));
   Assert(isSpawner(spawner));
 
@@ -5391,7 +5391,7 @@ attach_vehicle_triggers() {
 
   foreach(trigger in vehicle_triggers) {
     trigger.targetname = undefined;
-    trigger thread manual_tag_linkto(self, "tag_origin");
+    trigger thread manual_tag_linkTo(self, "tag_origin");
     if(!isDefined(self.vehicle_triggers[trigger.code_classname])) {
       self.vehicle_triggers[trigger.code_classname] = [];
     }
@@ -5433,7 +5433,7 @@ humvee_antenna_animates_until_death(anims) {
   }
 }
 
-manual_tag_linkto(entity, tag) {
+manual_tag_linkTo(entity, tag) {
   for(;;) {
     if(!isDefined(self)) {
       break;
@@ -5669,7 +5669,7 @@ set_stage(pickup_node_before_stage, guys, side) {
 
   nodes = get_stage_nodes(pickup_node_before_stage, side);
   Assert(nodes.size);
-  heli_node = getstruct(pickup_node_before_stage.target, "targetname");
+  heli_node = getStruct(pickup_node_before_stage.target, "targetname");
   stage_heli = spawn("script_model", (0, 0, 0));
   stage_heli setModel(self.model);
   stage_heli.origin = drop_to_ground(heli_node.origin) + (0, 0, self.originheightoffset);

@@ -193,14 +193,14 @@ init_zombie_sumpf() {
 
   level thread maps\nazi_zombie_sumpf_trap_perk_electric::init_elec_trap_trigs();
 
-  zipHintDeactivated = getent("zipline_deactivated_hint_trigger", "targetname");
-  zipHintDeactivated sethintstring(&"ZOMBIE_ZIPLINE_DEACTIVATED");
-  zipHintDeactivated SetCursorHint("HINT_NOICON");
+  zipHintDeactivated = getEnt("zipline_deactivated_hint_trigger", "targetname");
+  zipHintDeactivated setHintString(&"ZOMBIE_ZIPLINE_DEACTIVATED");
+  zipHintDeactivated setCursorHint("HINT_NOICON");
 
   penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
 
   for(i = 0; i < penBuyTrigger.size; i++) {
-    penBuyTrigger[i] sethintstring(&"ZOMBIE_CLEAR_DEBRIS");
+    penBuyTrigger[i] setHintString(&"ZOMBIE_CLEAR_DEBRIS");
     penBuyTrigger[i] setCursorHint("HINT_NOICON");
   }
 
@@ -211,7 +211,7 @@ turnLightGreen(name) {
   for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("zombie_zapper_cagelight_green");
     if(isDefined(zapper_lights[i].target)) {
-      old_light_effect = getent(zapper_lights[i].target, "targetname");
+      old_light_effect = getEnt(zapper_lights[i].target, "targetname");
       light_effect = spawn("script_model", old_light_effect.origin);
 
       light_effect setModel("tag_origin");
@@ -229,7 +229,7 @@ turnLightRed(name) {
   for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("zombie_zapper_cagelight_red");
     if(isDefined(zapper_lights[i].target)) {
-      old_light_effect = getent(zapper_lights[i].target, "targetname");
+      old_light_effect = getEnt(zapper_lights[i].target, "targetname");
       light_effect = spawn("script_model", old_light_effect.origin);
 
       light_effect setModel("tag_origin");
@@ -243,13 +243,13 @@ turnLightRed(name) {
 }
 book_useage() {
   book_counter = 0;
-  book_trig = getent("book_trig", "targetname");
-  book_trig SetCursorHint("HINT_NOICON");
-  book_trig UseTriggerRequireLookAt();
+  book_trig = getEnt("book_trig", "targetname");
+  book_trig setCursorHint("HINT_NOICON");
+  book_trig useTriggerRequireLookAt();
 
   if(isDefined(book_trig)) {
-    maniac_l = getent("maniac_l", "targetname");
-    maniac_r = getent("maniac_r", "targetname");
+    maniac_l = getEnt("maniac_l", "targetname");
+    maniac_r = getEnt("maniac_r", "targetname");
 
     book_trig waittill("trigger", player);
 
@@ -264,9 +264,9 @@ book_useage() {
 
 toilet_useage() {
   toilet_counter = 0;
-  toilet_trig = getent("toilet", "targetname");
-  toilet_trig SetCursorHint("HINT_NOICON");
-  toilet_trig UseTriggerRequireLookAt();
+  toilet_trig = getEnt("toilet", "targetname");
+  toilet_trig setCursorHint("HINT_NOICON");
+  toilet_trig useTriggerRequireLookAt();
 
   toilet_trig playLoopSound("phone_hook");
 
@@ -298,7 +298,7 @@ toilet_useage() {
   wait(1);
   toilet_trig playSound("toilet_flush", "sound_done");
   toilet_trig waittill("sound_done");
-  playsoundatposition("cha_ching", toilet_trig.origin);
+  playSoundAtPosition("cha_ching", toilet_trig.origin);
   level.eggs = 1;
   setmusicstate("eggs");
 
@@ -326,11 +326,11 @@ toilet_useage() {
   level.eggs = 0;
 }
 play_radio_sounds() {
-  radio_one = getent("radio_one_origin", "targetname");
-  radio_two = getent("radio_two_origin", "targetname");
-  radio_three = getent("radio_three_origin", "targetname");
+  radio_one = getEnt("radio_one_origin", "targetname");
+  radio_two = getEnt("radio_two_origin", "targetname");
+  radio_three = getEnt("radio_three_origin", "targetname");
 
-  pa_system = getent("speaker_in_attic", "targetname");
+  pa_system = getEnt("speaker_in_attic", "targetname");
 
   radio_one stoploopsound(2);
   radio_two stoploopsound(2);
@@ -358,10 +358,10 @@ battle_radio() {
     level.radio_counter = 0;
   }
 
-  battle_radio_trig = getent("battle_radio_trigger", "targetname");
-  battle_radio_trig UseTriggerRequireLookAt();
-  battle_radio_trig SetCursorHint("HINT_NOICON");
-  battle_radio_origin = getent("battle_radio_origin", "targetname");
+  battle_radio_trig = getEnt("battle_radio_trigger", "targetname");
+  battle_radio_trig useTriggerRequireLookAt();
+  battle_radio_trig setCursorHint("HINT_NOICON");
+  battle_radio_origin = getEnt("battle_radio_origin", "targetname");
 
   battle_radio_trig waittill("trigger", player);
   battle_radio_origin playSound("battle_message");
@@ -371,10 +371,10 @@ whisper_radio() {
     level.radio_counter = 0;
   }
 
-  whisper_radio_trig = getent("whisper_radio_trigger", "targetname");
-  whisper_radio_trig UseTriggerRequireLookAt();
-  whisper_radio_trig SetCursorHint("HINT_NOICON");
-  whisper_radio_origin = getent("whisper_radio_origin", "targetname");
+  whisper_radio_trig = getEnt("whisper_radio_trigger", "targetname");
+  whisper_radio_trig useTriggerRequireLookAt();
+  whisper_radio_trig setCursorHint("HINT_NOICON");
+  whisper_radio_origin = getEnt("whisper_radio_origin", "targetname");
 
   whisper_radio_trig waittill("trigger");
   whisper_radio_origin playSound("whisper_message");
@@ -383,12 +383,12 @@ radio_one() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  players = getplayers();
+  players = getPlayers();
 
-  radio_one_trig = getent("radio_one", "targetname");
-  radio_one_trig UseTriggerRequireLookAt();
-  radio_one_trig SetCursorHint("HINT_NOICON");
-  radio_one = getent("radio_one_origin", "targetname");
+  radio_one_trig = getEnt("radio_one", "targetname");
+  radio_one_trig useTriggerRequireLookAt();
+  radio_one_trig setCursorHint("HINT_NOICON");
+  radio_one = getEnt("radio_one_origin", "targetname");
 
   for(i = 0; i < players.size; i++) {
     radio_one_trig waittill("trigger", players);
@@ -401,11 +401,11 @@ radio_two() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  players = getplayers();
-  radio_two_trig = getent("radio_two", "targetname");
-  radio_two_trig UseTriggerRequireLookAt();
-  radio_two_trig SetCursorHint("HINT_NOICON");
-  radio_two = getent("radio_two_origin", "targetname");
+  players = getPlayers();
+  radio_two_trig = getEnt("radio_two", "targetname");
+  radio_two_trig useTriggerRequireLookAt();
+  radio_two_trig setCursorHint("HINT_NOICON");
+  radio_two = getEnt("radio_two_origin", "targetname");
 
   for(i = 0; i < players.size; i++) {
     radio_two_trig waittill("trigger", players);
@@ -417,11 +417,11 @@ radio_three() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  players = getplayers();
-  radio_three_trig = getent("radio_three_trigger", "targetname");
-  radio_three_trig UseTriggerRequireLookAt();
-  radio_three_trig SetCursorHint("HINT_NOICON");
-  radio_three = getent("radio_three_origin", "targetname");
+  players = getPlayers();
+  radio_three_trig = getEnt("radio_three_trigger", "targetname");
+  radio_three_trig useTriggerRequireLookAt();
+  radio_three_trig setCursorHint("HINT_NOICON");
+  radio_three = getEnt("radio_three_origin", "targetname");
   for(i = 0; i < players.size; i++) {
     radio_three_trig waittill("trigger", players);
     level.radio_counter = level.radio_counter + 1;
@@ -431,8 +431,8 @@ radio_three() {
 
 meteor_trigger() {
   level endon("meteor_triggered");
-  dmgtrig = GetEnt("meteor", "targetname");
-  player = getplayers();
+  dmgtrig = getEnt("meteor", "targetname");
+  player = getPlayers();
   for(i = 0; i < player.size; i++) {
     while(1) {
       dmgtrig waittill("trigger", player);
@@ -454,7 +454,7 @@ meteor_dialog() {
 player_zombie_awareness() {
   self endon("disconnect");
   self endon("death");
-  players = getplayers();
+  players = getPlayers();
   while(1) {
     wait(1);
 

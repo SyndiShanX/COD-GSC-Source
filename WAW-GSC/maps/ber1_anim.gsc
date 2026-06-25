@@ -305,7 +305,7 @@ holster_sidearm_switch_to_weapon(guy) {
 }
 
 bookcase_push_attach(guy) {
-  bookcase = getent("pub_bookcase", "targetname");
+  bookcase = getEnt("pub_bookcase", "targetname");
   bookcase delete();
 }
 
@@ -407,7 +407,7 @@ ruins_chimney() {
 
   for(i = 0; i < pieces.size; i++) {
     pieces[i].animname = "chimney";
-    pieces[i] LinkTo(parent, pieces[i].script_linkto);
+    pieces[i] linkTo(parent, pieces[i].script_linkto);
   }
 
   level thread chimey_rumble();

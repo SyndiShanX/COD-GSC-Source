@@ -103,17 +103,17 @@ shouldthrowgrenadeatcovercondition(entity, throwifpossible = 0) {
   }
 
   toenemy = entity.enemy.origin - entity.origin;
-  toenemy = vectornormalize((toenemy[0], toenemy[1], 0));
+  toenemy = vectorNormalize((toenemy[0], toenemy[1], 0));
   entityforward = anglesToForward(entityangles);
-  entityforward = vectornormalize((entityforward[0], entityforward[1], 0));
+  entityforward = vectorNormalize((entityforward[0], entityforward[1], 0));
 
   if(vectordot(toenemy, entityforward) < 0.5) {
     return false;
   }
 
   if(!throwifpossible) {
-    friendlyplayers = getplayers(entity.team);
-    allplayers = getplayers();
+    friendlyplayers = getPlayers(entity.team);
+    allplayers = getPlayers();
 
     if(isDefined(friendlyplayers) && friendlyplayers.size) {
       foreach(player in friendlyplayers) {
@@ -175,7 +175,7 @@ shouldthrowgrenadeatcovercondition(entity, throwifpossible = 0) {
 }
 
 sensenearbyplayers(entity) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     distancesq = distancesquared(player.origin, entity.origin);

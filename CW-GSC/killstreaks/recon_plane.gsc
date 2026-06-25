@@ -227,7 +227,7 @@ function function_732dcb56(killstreaktype) {
   recon_plane.numflares = 1;
   recon_plane helicopter::create_flare_ent((0, 0, -25));
   recon_plane.rocketdamage = recon_plane.maxhealth / 3 + 1;
-  recon_plane moveto(endposition, 40000 * 0.002);
+  recon_plane moveTo(endposition, 40000 * 0.002);
   recon_plane.angles = angles;
   target_set(recon_plane);
   recon_plane clientfield::set("enemyvehicle", 1);

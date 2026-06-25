@@ -25,7 +25,7 @@ setupbehaviorstates() {
 
 updateeveryframe(var_0) {
   self clearpath();
-  self scragentsetgoalradius(9999999);
+  self scragentsetgoalRadius(9999999);
   return anim.failure;
 }
 
@@ -180,7 +180,7 @@ move_end(var_0) {
   scripts\asm\crab_boss\crab_boss_asm::clearaction();
 }
 
-bossmoveto(var_0, var_1) {
+bossmoveTo(var_0, var_1) {
   self.desiredbossmovepos = var_1;
   facepoint(var_0, var_1);
   return 1;
@@ -483,7 +483,7 @@ getdeathrayspawnpos(var_0) {
   var_5 = scripts\cp\maps\cp_town\cp_town_crab_boss_fight::get_num_alive_agent_of_type("crab_mini");
   var_6 = max(0, var_2 - var_5);
   var_6 = min(var_6, var_3);
-  var_7 = vectornormalize(var_0.origin - level.crab_boss.origin);
+  var_7 = vectorNormalize(var_0.origin - level.crab_boss.origin);
 
   for(var_8 = 0; var_8 < var_6; var_8++) {
     var_9 = randomfloatrange(var_1 * -1, var_1);
@@ -524,12 +524,12 @@ gettoxicspawnpos(var_0) {
     var_10 = (2826, 1244, -91);
     var_11 = spawnStruct();
     var_11.origin = var_10;
-    var_11.angles = vectortoangles(vectornormalize(var_10 - var_0.origin));
+    var_11.angles = vectortoangles(vectorNormalize(var_10 - var_0.origin));
     var_5[var_5.size] = var_11;
   } else {
     for(var_12 = 1; var_12 <= var_4; var_12++) {
       var_8 = scripts\engine\utility::random(var_6);
-      var_13 = vectornormalize(var_8.origin - var_0.origin);
+      var_13 = vectorNormalize(var_8.origin - var_0.origin);
       var_14 = scripts\engine\utility::drop_to_ground(var_8.origin + var_13 * -1 * var_1, 50, -2000);
       var_15 = randomfloatrange(var_3 * -1, var_3);
       var_16 = randomfloatrange(var_3 * -1, var_3);

@@ -159,7 +159,7 @@ path_hudshow() {
   flag_clear("path_Notviewing");
   level.pathmod setshader("psourcemodify", level.pathmodsize * 2, level.pathmodsize);
   level.player freezecontrols(true);
-  level.player setorigin(self.origin + (level.player.origin - level.player getEye()) - vector_multiply(anglesToForward(self.angles), 3));
+  level.player setOrigin(self.origin + (level.player.origin - level.player getEye()) - vector_multiply(anglesToForward(self.angles), 3));
   level.player setplayerangles(self.angles);
   flag_set("path_refresh");
   while(level.player islookingorg(self) && level.player useButtonPressed()) {

@@ -220,7 +220,7 @@ function spawn_doll_model(id, index, parent) {
   model_name = ((("wpn_t7_zmb_hd_nesting_dolls_" + name) + "_doll") + model_index) + "_world";
   self.doll_model setModel(model_name);
   self.doll_model useanimtree($zombie_cymbal_monkey);
-  self.doll_model linkto(self);
+  self.doll_model linkTo(self);
   self.doll_model.angles = self.angles;
   self.doll_model thread nesting_dolls_cleanup(self);
   wait(0.1);
@@ -276,7 +276,7 @@ function get_player_aim_best_doll_target(range) {
     if(test_range_squared > range_squared) {
       return;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(dot < 0) {
       continue;

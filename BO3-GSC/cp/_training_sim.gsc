@@ -132,7 +132,7 @@ function function_b8d52e94() {
   }
   var_5ca6504d[var_5ca6504d.size] = util::spawn_model("collision_clip_512x512x512", (-28481.6, -3221.79, 1130.5), (0, 0, 0));
   foreach(mdl in var_5ca6504d) {
-    mdl disconnectpaths(2, 0);
+    mdl disconnectPaths(2, 0);
     mdl hide();
     mdl notsolid();
   }
@@ -167,7 +167,7 @@ function function_a91b6cca() {
   if(!(isDefined(level.var_a91b6cca) && level.var_a91b6cca)) {
     level.var_a91b6cca = 1;
     foreach(beacon in struct::get_array("round_beacon", "script_noteworthy")) {
-      e_trig = getent(beacon.targetname, "target");
+      e_trig = getEnt(beacon.targetname, "target");
       beacon.prompt = safehouse::init_interactive_prompt(e_trig, &"cp_safehouse_training_nextround", &"CP_SH_CAIRO_TRAINING_START_ROUND", &function_daea15a5, 0);
       beacon.prompt safehouse::function_e04cba0f();
       beacon.prompt.beacon = beacon;
@@ -202,7 +202,7 @@ function function_89e36314() {
       var_ad74c1fa = (self.var_3c66c303 == 0 ? 2.2 : 2.5);
       n_accel = (self.var_3c66c303 == 0 ? 0.5 : 0.7);
       while(self.var_3c66c303 != 2) {
-        self moveto(self.var_792a209 + (0, 0, var_53a79e45), var_ad74c1fa, n_accel, n_accel);
+        self moveTo(self.var_792a209 + (0, 0, var_53a79e45), var_ad74c1fa, n_accel, n_accel);
         self waittill("movedone");
         wait(0.15);
         var_53a79e45 = var_53a79e45 * -1;
@@ -217,7 +217,7 @@ function function_cf1101c0() {
   self.var_77104b83.e_fx = self.var_77104b83 fx::play("round_beacon_moving", self.var_77104b83.origin, self.var_77104b83.angles, "movedone", 1);
   self.var_77104b83.var_3c66c303 = 2;
   self.var_77104b83.var_792a209 = self.s_beacon.origin + vectorscale((0, 0, 1), 180);
-  self.var_77104b83 moveto(self.var_77104b83.var_792a209, 2, 1.25, 0.25);
+  self.var_77104b83 moveTo(self.var_77104b83.var_792a209, 2, 1.25, 0.25);
   self.var_77104b83 playSound("veh_mapper_drone_ping");
   self.var_77104b83 playSound("veh_beacon_ball_move_start");
   self.var_77104b83 playLoopSound("veh_mapper_drone_move");
@@ -230,7 +230,7 @@ function function_fcd1719a() {
   self.var_77104b83.e_fx = self.var_77104b83 fx::play("round_beacon_moving", self.var_77104b83.origin, self.var_77104b83.angles, "movedone", 1);
   self.var_77104b83.var_3c66c303 = 2;
   self.var_77104b83.var_792a209 = self.s_beacon.origin + vectorscale((0, 0, 1), 50);
-  self.var_77104b83 moveto(self.var_77104b83.var_792a209, 1.5, 0.3, 1.1);
+  self.var_77104b83 moveTo(self.var_77104b83.var_792a209, 1.5, 0.3, 1.1);
   self.var_77104b83 waittill("movedone");
   self.var_77104b83.var_3c66c303 = 0;
   self.var_77104b83.e_fx = self.var_77104b83 fx::play("round_beacon_enabled", self.var_77104b83.origin, self.var_77104b83.angles, "round_beacon_moving", 1);
@@ -244,7 +244,7 @@ function teleport_player(var_cc1de81f) {
   self unlink();
   a_spawn_points = get_struct_array("training_sim_spawn_point", "script_noteworthy");
   s_spawn_point = array::random(a_spawn_points);
-  self setorigin(s_spawn_point.origin);
+  self setOrigin(s_spawn_point.origin);
   util::wait_network_frame();
   self setplayerangles(s_spawn_point.angles);
 }
@@ -381,7 +381,7 @@ function function_86a2dc30() {
 
 function function_b5b532e8() {
   var_762314d8 = function_d2614e32();
-  e_trig = getent(var_762314d8.targetname, "target");
+  e_trig = getEnt(var_762314d8.targetname, "target");
   var_762314d8.prompt = safehouse::init_interactive_prompt(e_trig, &"cp_safehouse_training_start", &"CP_SH_CAIRO_TRAINING_START_ROUND", &function_daea15a5, 0);
   var_762314d8.prompt safehouse::function_e04cba0f();
   var_762314d8.prompt.beacon = var_762314d8;
@@ -691,7 +691,7 @@ function function_27b9fdd3(e_spawned, v_pos, var_8e7d3ece) {
       var_819d27f5 = e_spawned.spawner.radius;
       var_226a15c3 = (self.s_beacon.origin[0], self.s_beacon.origin[1], e_spawned.spawner.origin[2]);
       var_c4a9fefc = (self.var_1e13e77e.origin[0], self.var_1e13e77e.origin[1], var_226a15c3[2]);
-      v_pos = var_226a15c3 + ((vectornormalize(var_c4a9fefc - var_226a15c3)) * var_bbcaca07);
+      v_pos = var_226a15c3 + ((vectorNormalize(var_c4a9fefc - var_226a15c3)) * var_bbcaca07);
     } else {
       if(isDefined(v_pos)) {
         var_ac2f333b = 0;
@@ -917,7 +917,7 @@ function function_93405f3(e_enemy, player) {
   v_pos = e_enemy.origin;
   v_eye = player getEye();
   v_facing = anglesToForward(player getplayerangles());
-  v_to_ent = vectornormalize(v_pos - v_eye);
+  v_to_ent = vectorNormalize(v_pos - v_eye);
   n_dot = vectordot(v_facing, v_to_ent);
   if(n_dot > n_dot_check) {
     if(e_enemy sightconetrace(v_eye, player) != 0) {

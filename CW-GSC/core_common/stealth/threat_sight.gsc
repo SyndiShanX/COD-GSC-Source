@@ -52,7 +52,7 @@ function threat_sight_set_enabled(enabled) {
   if(!enabled && wasenabled) {
     level notify(#"hash_34d443ce908d0498");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player.stealth.threat_thread = undefined;
     }
   } else if(enabled && !wasenabled) {
@@ -149,7 +149,7 @@ function threat_sight_set_state(statename) {
       break;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player)) {
       player threat_sight_player_entity_state_set(self, statename);
     }
@@ -199,8 +199,8 @@ function private function_3a739b35() {
       continue;
     }
 
-    if(getplayers().size > 0) {
-      player = getplayers()[0];
+    if(getPlayers().size > 0) {
+      player = getPlayers()[0];
       threat_sight = self getthreatsight(player);
       var_97c4563c = 0;
 
@@ -247,7 +247,7 @@ function threat_sight_immediate_thread() {
     level flag::wait_till_clear("stealth_spotted");
     wait randomfloatrange(0.4, 0.6);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player.ignore_stealth_sight)) {
         continue;
       }

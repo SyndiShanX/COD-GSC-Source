@@ -40,8 +40,8 @@
 function start(str_objective) {
   level hms_util::function_ee1d1df6("park", "Park", "park_floor_two_struct");
   level hms_util::function_ee1d1df6("lazar", "Lazar", "lazar_floor_two_struct");
-  door_blocker = getent("second_floor_stairway_door", "targetname");
-  var_cee57de3 = getent("second_floor_stairway_door_clip", "targetname");
+  door_blocker = getEnt("second_floor_stairway_door", "targetname");
+  var_cee57de3 = getEnt("second_floor_stairway_door_clip", "targetname");
   door_blocker delete();
   var_cee57de3 delete();
   level thread namespace_a789f8ae::function_223dbff(1);
@@ -78,7 +78,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
 function function_b0ba87a4() {
   self endon(#"death");
   self waittill(#"trigger");
-  e_blocker = getent("nuke_door_blocker", "targetname");
+  e_blocker = getEnt("nuke_door_blocker", "targetname");
   e_blocker show();
   level flag::wait_till("obj_photo_done");
   e_blocker hide();
@@ -212,7 +212,7 @@ function function_400f93ba() {
 
 function function_cda1622() {
   wait 3;
-  var_a08ef2a1 = getent("parkour_physics_impulse", "targetname");
+  var_a08ef2a1 = getEnt("parkour_physics_impulse", "targetname");
   physicsexplosionsphere(var_a08ef2a1.origin, 210, 0, 0.56);
 }
 
@@ -233,7 +233,7 @@ function function_18580559() {
 }
 
 function function_7a1d5f84() {
-  var_8a693ebe = getent("t_gate_guys_color", "targetname");
+  var_8a693ebe = getEnt("t_gate_guys_color", "targetname");
 
   if(isalive(self)) {
     self thread namespace_f7efe8a3::function_302b4058("gate_enemy_retreat", 0, 0.5, 1);
@@ -245,7 +245,7 @@ function function_7a1d5f84() {
 }
 
 function function_e6757b30(ai_sniper, var_f8e5e80) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   if(isDefined(ai_sniper)) {
@@ -267,7 +267,7 @@ function function_e2d61fd0() {
   level.player endon(#"death");
   var_d8320f70 = struct::get("rooftop_sniper_intro", "targetname");
   var_4a3daa0b = struct::get("scientist_lookat", "targetname");
-  t_spawner = getent("trig_spawn_scientist", "targetname");
+  t_spawner = getEnt("trig_spawn_scientist", "targetname");
   level.var_cf87018c = spawner::simple_spawn_single("scientist_guy_killed_02", &function_687b1b14);
   level thread scene::init("scene_rev_3080_sec_scientist_flee", array(undefined, level.var_cf87018c));
   level thread function_146a9996();
@@ -474,9 +474,9 @@ function function_cd60a984() {
 
 function function_c7c21ff9() {
   level.player endon(#"death");
-  var_5b23cbdd = getent("vip_last_stand_trigger", "targetname");
+  var_5b23cbdd = getEnt("vip_last_stand_trigger", "targetname");
   var_2c3b91fc = struct::get_array("turret_points");
-  e_turret = getent("mg_nest_2nd_floor", "targetname");
+  e_turret = getEnt("mg_nest_2nd_floor", "targetname");
   level.var_5deea171 = namespace_307260b8::function_516b7ec("2nd_floor_turret_gunner", "2nd_floor_support_turret");
   var_5b23cbdd waittill(#"trigger");
   n_shots = 5;
@@ -488,7 +488,7 @@ function function_c7c21ff9() {
 }
 
 function function_8604d848() {
-  var_1623c030 = getent("vip_guards_flank_encounter_trigger", "targetname");
+  var_1623c030 = getEnt("vip_guards_flank_encounter_trigger", "targetname");
 
   if(isDefined(var_1623c030)) {
     var_1623c030 delete();
@@ -500,7 +500,7 @@ function function_8604d848() {
 function function_d1cabeee() {
   level.player endon(#"death");
   level endoncallback(&function_8604d848, #"hash_4c719d73886d1dee");
-  var_1623c030 = getent("vip_guards_flank_encounter_trigger", "targetname");
+  var_1623c030 = getEnt("vip_guards_flank_encounter_trigger", "targetname");
 
   if(isDefined(var_1623c030) && isalive(level.var_5deea171)) {
     var_1623c030 waittill(#"trigger");
@@ -525,8 +525,8 @@ function function_803c0cb(var_5d361b57, var_6d6e8577, var_f5d1b9c4, var_5207b7a8
 
 function function_f4e023d2(a_ai_enemies) {
   level.player endon(#"death");
-  var_1eea432a = getent("player_hangback_trig", "targetname");
-  var_b4725f7b = getent("vip_room_volume", "targetname");
+  var_1eea432a = getEnt("player_hangback_trig", "targetname");
+  var_b4725f7b = getEnt("vip_room_volume", "targetname");
 
   while(a_ai_enemies.size > 0 && isDefined(var_1eea432a)) {
     if(level.player istouching(var_1eea432a)) {

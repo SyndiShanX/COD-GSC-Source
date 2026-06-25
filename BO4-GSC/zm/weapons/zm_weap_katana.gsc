@@ -189,7 +189,7 @@ function_af221ee1(s_params) {
 
         if(isDefined(self) && (math::cointoss() || isDefined(self.missinglegs) && self.missinglegs)) {
           if(isDefined(s_params.vdir) && self.health <= 0 && !(isDefined(var_bec5660f) && var_bec5660f)) {
-            var_eb0d0f20 = 75 * vectornormalize(s_params.vdir);
+            var_eb0d0f20 = 75 * vectorNormalize(s_params.vdir);
             var_eb0d0f20 = (var_eb0d0f20[0], var_eb0d0f20[1], 20);
             self startragdoll();
             self launchragdoll(var_eb0d0f20);

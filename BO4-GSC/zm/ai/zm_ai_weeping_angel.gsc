@@ -94,7 +94,7 @@ function private function_78910888(player) {
 }
 
 function_ad034041(entity) {
-  players = getplayers();
+  players = getPlayers();
   var_de85d14d = [];
 
   foreach(player in players) {

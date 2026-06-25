@@ -1545,7 +1545,7 @@ function function_21ef174b(s_params) {
         level.doa.var_be3ad33f++;
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isbot(player)) {
           continue;
         }
@@ -2147,7 +2147,7 @@ function function_e2da0652(entity) {
 }
 
 function setup_zombie_knockdown(var_5f02306b, var_43b3242) {
-  if(!isactor(self) || is_true(self.missinglegs) || is_true(self.var_5dd07a80) || is_true(self.isinmantleaction) || self isplayinganimscripted() || self function_dd070839() && !is_true(var_43b3242)) {
+  if(!isactor(self) || is_true(self.missinglegs) || is_true(self.var_5dd07a80) || is_true(self.isinmantleaction) || self isplayinganimScripted() || self function_dd070839() && !is_true(var_43b3242)) {
     return;
   }
 
@@ -2163,11 +2163,11 @@ function setup_zombie_knockdown(var_5f02306b, var_43b3242) {
     zombie_to_entity = var_5f02306b.origin - self.origin;
   }
 
-  zombie_to_entity_2d = vectornormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
+  zombie_to_entity_2d = vectorNormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
   zombie_forward = anglesToForward(self.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(self.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_entity_2d, zombie_forward_2d);
 
   if(dot >= 0.5) {
@@ -2220,8 +2220,8 @@ function function_3d752709(enemy, var_bd97c6ae) {
   enemyvec = enemy.origin - var_bd97c6ae.origin;
   var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
   var_c2ee8451 = (facingvec[0], facingvec[1], 0);
-  var_3e3c8075 = vectornormalize(var_3e3c8075);
-  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  var_3e3c8075 = vectorNormalize(var_3e3c8075);
+  var_c2ee8451 = vectorNormalize(var_c2ee8451);
   enemydot = vectordot(var_c2ee8451, var_3e3c8075);
 
   if(enemydot < 0) {
@@ -2234,7 +2234,7 @@ function function_3d752709(enemy, var_bd97c6ae) {
 function function_5a481a84(player, dist = 100) {
   dist = distance(self.origin, player.origin);
   targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
-  var_a6470558 = vectornormalize(targetorigin - self.origin);
+  var_a6470558 = vectorNormalize(targetorigin - self.origin);
   aimeleerange = self.meleeweapon.aimeleerange;
   var_32708f81 = dist + aimeleerange;
   var_8cf8f805 = mapfloat(0, aimeleerange, dist, var_32708f81, dist);
@@ -2340,8 +2340,8 @@ function function_e10af211(var_a349a77f, trailfx, impactfx = "turret_impact", va
     if(isDefined(var_9159be43)) {
       var_9159be43 thread namespace_ec06fe4a::function_d55f042c(self, "death");
       var_9159be43 thread namespace_ec06fe4a::function_52afe5df(2.5);
-      self linkto(var_9159be43);
-      var_9159be43 moveto(groundpos, 2);
+      self linkTo(var_9159be43);
+      var_9159be43 moveTo(groundpos, 2);
       var_9159be43 waittill(#"movedone");
       self notify(#"dropped");
       self unlink();

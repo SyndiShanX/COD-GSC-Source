@@ -28,7 +28,7 @@ function function_b26dad22(level_notify) {
   middle_distance = 1000;
   top_distance = 100;
   var_168492dd = undefined;
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   function_5ac4dc99("bottom_distance", -1);
   function_5ac4dc99("middle_distance", -1);
   function_5ac4dc99("top_distance", -1);
@@ -82,7 +82,7 @@ function function_b26dad22(level_notify) {
             thread function_36cc1830();
             var_9ddd4d57 = spawn("script_model", level.var_7466d419.origin);
             var_9ddd4d57 setModel(#"tag_origin");
-            var_9ddd4d57 linkto(level.var_7466d419, "tag_attach", (0, 0, 0), (0, 0, 0));
+            var_9ddd4d57 linkTo(level.var_7466d419, "tag_attach", (0, 0, 0), (0, 0, 0));
             playFXOnTag(level.var_7466d419.var_2939dba, var_9ddd4d57, "tag_origin");
             var_270e748f = 1;
           }
@@ -255,13 +255,13 @@ function function_f4567c7c(distance, level_notify) {
   freqroll = 4;
 
   if(distance < 1000) {
-    level.players[0] playrumbleonentity("damage_heavy");
+    level.players[0] playRumbleOnEntity("damage_heavy");
     screenshake(source, pitch[1], yaw[1], roll[1], duration[1], 0, 0, 0, freqpitch, freqyaw);
     return;
   }
 
   if(distance < 1500) {
-    level.players[0] playrumbleonentity("damage_light");
+    level.players[0] playRumbleOnEntity("damage_light");
     screenshake(source, pitch[0], yaw[0], roll[0], duration[0], 0, 0, 0, freqpitch, freqyaw);
   }
 }

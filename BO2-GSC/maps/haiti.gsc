@@ -49,10 +49,10 @@ main() {
   onsaverestored_callback(::on_save_restored);
   level thread maps\createart\haiti_art::main();
   maps\_truck_gaztigr::init();
-  level.a_sp_actors["seal"] = getent("seal_assault", "targetname");
-  level.a_sp_actors["seal_drone"] = getent("seal_drone", "targetname");
-  level.a_sp_actors["sco"] = getent("sco_assault", "targetname");
-  level.a_sp_actors["pmc"] = getent("pmc_assault", "targetname");
+  level.a_sp_actors["seal"] = getEnt("seal_assault", "targetname");
+  level.a_sp_actors["seal_drone"] = getEnt("seal_drone", "targetname");
+  level.a_sp_actors["sco"] = getEnt("sco_assault", "targetname");
+  level.a_sp_actors["pmc"] = getEnt("pmc_assault", "targetname");
   level.overrideactorkilled = ::global_actor_killed_callback;
   a_m_clips = getEntArray("compile_paths_clips", "targetname");
 
@@ -194,7 +194,7 @@ skipto_cleanup() {
     return;
   }
   flag_set("wall_smash");
-  t_obj_main_entrance = getent("obj_main_entrance", "targetname");
+  t_obj_main_entrance = getEnt("obj_main_entrance", "targetname");
   set_objective(level.obj_assault_builidng, t_obj_main_entrance);
   level thread intruder_perk();
   level thread bruteforce_perk();
@@ -215,7 +215,7 @@ skipto_cleanup() {
   flag_set("at_foyer_entrance");
   flag_set("close_outer_doors");
   flag_set("player_left_docks");
-  t_obj_transmission = getent("obj_transmission", "targetname");
+  t_obj_transmission = getEnt("obj_transmission", "targetname");
   set_objective(level.obj_goto_control_room, t_obj_transmission);
 
   if(skipto == "e4-1_theater") {

@@ -86,7 +86,7 @@ function_8fe2d903() {
   foreach(t_trap in level.var_5f47f17d) {
     if(t_trap.script_string === self.script_string) {
       var_deed061f = getEntArray(t_trap.target, "targetname");
-      mdl_trap = getent(var_deed061f[0].target, "targetname");
+      mdl_trap = getEnt(var_deed061f[0].target, "targetname");
       mdl_trap scene::play("p8_fxanim_zm_towers_trap_blade_01_bundle", "Shot 1", mdl_trap);
       mdl_trap thread scene::play("p8_fxanim_zm_towers_trap_blade_01_bundle", "Shot 2", mdl_trap);
       t_trap thread zm_traps::trap_damage();
@@ -98,7 +98,7 @@ function_8fe2d903() {
   foreach(t_trap in level.var_5f47f17d) {
     if(t_trap.script_string === self.script_string) {
       var_deed061f = getEntArray(t_trap.target, "targetname");
-      mdl_trap = getent(var_deed061f[0].target, "targetname");
+      mdl_trap = getEnt(var_deed061f[0].target, "targetname");
       mdl_trap thread scene::play("p8_fxanim_zm_towers_trap_blade_01_bundle", "Shot 3", mdl_trap);
       t_trap notify(#"trap_done");
     }
@@ -111,7 +111,7 @@ function_45a2294f(str_id) {
   foreach(e_pillar in level.var_6024289d) {
     if(e_pillar.script_string === str_id) {
       e_pillar thread activate_trap(self);
-      level.var_a6b89158 = getent(e_pillar.target, "targetname");
+      level.var_a6b89158 = getEnt(e_pillar.target, "targetname");
       level.var_a6b89158 thread function_6f34f900();
     }
   }
@@ -193,7 +193,7 @@ damage(e_trap) {
   }
 
   v_away = self.origin - e_trap.origin;
-  v_away = vectornormalize((v_away[0], v_away[1], 0)) * 64;
+  v_away = vectorNormalize((v_away[0], v_away[1], 0)) * 64;
   v_dest = self.origin + v_away;
   level notify(#"trap_kill", {
     #e_victim: self, #e_trap: e_trap
@@ -228,14 +228,14 @@ player_damage(t_damage) {
 function_373d49f(v_dest, n_time = 1, n_accel = 0, n_decel = 0) {
   if(isPlayer(self)) {
     var_3fba37cd = util::spawn_model("tag_origin", self.origin, self.angles);
-    self linkto(var_3fba37cd);
-    var_3fba37cd moveto(v_dest, n_time, n_accel, n_decel);
+    self linkTo(var_3fba37cd);
+    var_3fba37cd moveTo(v_dest, n_time, n_accel, n_decel);
     var_3fba37cd waittill(#"movedone");
     var_3fba37cd delete();
     return;
   }
 
-  v_direction = vectornormalize(v_dest);
+  v_direction = vectorNormalize(v_dest);
   v_force = v_direction * 64;
   self startragdoll();
   self launchragdoll(v_force);

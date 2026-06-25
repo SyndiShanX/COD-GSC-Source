@@ -358,7 +358,7 @@ ball_create_team_goal(var_0) {
     var_1 = scripts\mp\utility::getotherteam(var_1);
   }
 
-  var_2 = scripts\engine\utility::getstruct("ball_goal_" + var_1, "targetname");
+  var_2 = scripts\engine\utility::getStruct("ball_goal_" + var_1, "targetname");
   if(isDefined(var_2)) {
     var_2 = checkpostshipgoalplacement(var_2, var_0);
     var_2 ball_find_ground();
@@ -556,7 +556,7 @@ should_record_final_score_cam(var_0, var_1) {
 }
 
 line_interect_sphere(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = vectordot(var_4, var_0 - var_2);
   var_5 = var_5 * var_5;
   var_6 = var_0 - var_2;
@@ -655,7 +655,7 @@ ball_score_event(var_0) {
   var_7 = 1;
   var_8 = var_5 + var_7;
   var_9 = var_8 + var_6;
-  var_4 moveto(var_0.origin, var_5, 0, var_5);
+  var_4 moveTo(var_0.origin, var_5, 0, var_5);
   var_4 rotatevelocity((1080, 1080, 0), var_9, var_9, 0);
   wait(var_8);
   var_4 movez(4000, var_6, var_6 * 0.1, 0);

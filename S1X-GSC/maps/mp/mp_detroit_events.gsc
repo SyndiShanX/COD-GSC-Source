@@ -48,7 +48,7 @@ tram_init() {
   if(isDefined(self.target)) {
     clips = getEntArray(self.target, "targetname");
     foreach(clip in clips) {
-      clip LinkTo(self);
+      clip linkTo(self);
     }
   }
 
@@ -86,7 +86,7 @@ tram_spline_debug() {
 }
 
 tram_spline_vehicle_spawn() {
-  spline_vehicle = SpawnVehicle("tag_origin", "detroit_tram", "detroit_tram_mp", self.origin, self.angles);
+  spline_vehicle = spawnVehicle("tag_origin", "detroit_tram", "detroit_tram_mp", self.origin, self.angles);
   spline_vehicle.owner = self.owner;
 
   startNode = getVehicleNode(self.target, "targetname");
@@ -122,7 +122,7 @@ tram_spline_vehicle_spawn() {
   spline_vehicle.spline_decel = 20;
   spline_vehicle.spline_fast_decel = spline_vehicle.spline_decel * 2;
 
-  self LinkTo(spline_vehicle);
+  self linkTo(spline_vehicle);
 
   return spline_vehicle;
 }
@@ -290,7 +290,7 @@ tram_update_player_spline_control() {
 }
 
 tram_animate(anim_name) {
-  tram_node = GetStruct("tram_node", "targetname");
+  tram_node = getStruct("tram_node", "targetname");
   if(!isDefined(tram_node)) {
     return;
   }
@@ -317,7 +317,7 @@ tram_move(tram_speed, tram_speed_fast) {
   current = self;
 
   while(isDefined(current.target)) {
-    next = getstruct(current.target, "targetname");
+    next = getStruct(current.target, "targetname");
 
     speed = tram_speed;
     rotate_yaw = undefined;
@@ -356,7 +356,7 @@ tram_move(tram_speed, tram_speed_fast) {
       dist = cir * (abs(rotate_yaw) / 360);
       time = dist / speed;
 
-      rotation_ent RotateYaw(rotate_yaw, time);
+      rotation_ent rotateYaw(rotate_yaw, time);
       rotation_ent waittill("rotatedone");
       self Unlink();
       rotation_ent Delete();
@@ -364,7 +364,7 @@ tram_move(tram_speed, tram_speed_fast) {
       dist = Distance(self.origin, next.origin);
       time = dist / speed;
 
-      self MoveTo(next.origin, time);
+      self moveTo(next.origin, time);
       self waittill("movedone");
     }
 

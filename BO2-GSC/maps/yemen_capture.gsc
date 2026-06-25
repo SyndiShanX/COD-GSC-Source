@@ -132,7 +132,7 @@ handle_quadrotor_flyaway(goal_pos) {
   self endon("delete");
   self clearturrettarget();
   self clearvehgoalpos();
-  self set_goalradius(64);
+  self set_goalRadius(64);
   self qr_drones_move(goal_pos);
   self thread maps\yemen_hijacked::quadrotor_go_on_path("ally_qrs_flyaway");
 }
@@ -141,12 +141,12 @@ waittill_goal_set_radius(radius) {
   self endon("death");
   self endon("delete");
   self waittill("goal");
-  self set_goalradius(radius);
+  self set_goalRadius(radius);
 }
 
 spawn_qdrotor_end_wave() {
   trigger_wait("end_battle_qdrotor_spawn");
-  qdrotor_struct = getstruct("qdrotor_end_wave_radius", "targetname");
+  qdrotor_struct = getStruct("qdrotor_end_wave_radius", "targetname");
 
   for(i = 0; i < 2; i++) {
     qdrotor = spawn_vehicle_from_targetname("capture_battle_enemy_drone");
@@ -188,7 +188,7 @@ capture_start_animation_loops(char_group, n_start, n_count, b_has_gun) {
 
 vtol_turret_attacks_target(e_target, n_delay, n_shoottime, v_target) {
   level endon("stop_vtol_turret");
-  vh_vtol = getent("yemen_morals_rail_vtol_spawner", "targetname");
+  vh_vtol = getEnt("yemen_morals_rail_vtol_spawner", "targetname");
 
   if(isDefined(n_delay)) {
     wait(n_delay);
@@ -203,7 +203,7 @@ _set_vtol_turret_target(e_target, v_target) {
   self cleargunnertarget(0);
 
   if(isDefined(e_target)) {
-    self setgunnertargetent(e_target, (0, 0, 0), 0);
+    self setgunnertargetEnt(e_target, (0, 0, 0), 0);
   } else {
     self setgunnertargetvec(v_target, 0);
   }
@@ -338,7 +338,7 @@ capture_fadeout(n_fade) {
 
 capture_heartbeat_rumble() {
   level endon("menendez_surrenders");
-  s_sniper_spot = getstruct("s_mendendez_spot", "targetname");
+  s_sniper_spot = getStruct("s_mendendez_spot", "targetname");
 
   while(true) {
     n_dot = capture_get_vector_dot(s_sniper_spot.origin);
@@ -366,8 +366,8 @@ capture_spawn_fake_qrotors_at_structs_and_move(str_drone_pos, n_move_time) {
   foreach(s_drone_pos in a_drone_pos) {
     m_drone = spawn("script_model", s_drone_pos.origin);
     m_drone setModel("veh_t6_drone_quad_rotor_sp");
-    s_drone_target = getstruct(s_drone_pos.target, "targetname");
-    m_drone moveto(s_drone_target.origin, n_move_time);
+    s_drone_target = getStruct(s_drone_pos.target, "targetname");
+    m_drone moveTo(s_drone_target.origin, n_move_time);
     m_drone waittill("movedone");
     m_drone delete();
   }
@@ -376,7 +376,7 @@ capture_spawn_fake_qrotors_at_structs_and_move(str_drone_pos, n_move_time) {
 vtol_firing_minigun() {
   trigger_wait("end_battle");
   wait 1;
-  vtol = getent("yemen_morals_rail_vtol_spawner", "targetname");
+  vtol = getEnt("yemen_morals_rail_vtol_spawner", "targetname");
 
   while(true) {
     vtol _set_vtol_turret_target(level.player);

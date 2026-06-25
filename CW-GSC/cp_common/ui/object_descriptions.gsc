@@ -35,7 +35,7 @@ function on_player_spawned() {
     link_ent = undefined;
 
     if(isDefined(rect.target)) {
-      link_ent = getent(rect.target, "targetname");
+      link_ent = getEnt(rect.target, "targetname");
     }
 
     function_23e7a30a("rect" + index, rect.origin, rect.angles, rect.script_width, rect.script_height, hash(rect.script_string), rect.script_maxdist, link_ent);
@@ -45,7 +45,7 @@ function on_player_spawned() {
     link_ent = undefined;
 
     if(isDefined(circle.target)) {
-      link_ent = getent(circle.target, "targetname");
+      link_ent = getEnt(circle.target, "targetname");
     }
 
     register_circle("circle" + index, circle.origin, circle.angles, circle.script_radius, hash(circle.script_string), circle.script_maxdist, link_ent);
@@ -164,7 +164,7 @@ function private _register(uid, data) {
   function_e8419844();
 
   if(!level flag::get("object_descriptions_active")) {
-    getplayers()[0] thread _think();
+    getPlayers()[0] thread _think();
   }
 }
 

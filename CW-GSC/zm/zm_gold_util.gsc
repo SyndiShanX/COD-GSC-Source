@@ -48,7 +48,7 @@ function function_b488623(b_show) {
 }
 
 function function_13ebb331(v_origin_or_ent, str_targetname) {
-  volume = getent(str_targetname, "targetname");
+  volume = getEnt(str_targetname, "targetname");
 
   if(isDefined(volume) && self istouching(volume)) {
     return true;

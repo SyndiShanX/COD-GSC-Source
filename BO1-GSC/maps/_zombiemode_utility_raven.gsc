@@ -30,14 +30,14 @@ SetInvisibleToAll() {
 }
 SpawnAndLinkFXToTag(effect, ent, tag) {
   fxEnt = spawn("script_model", ent GetTagOrigin(tag));
-  fxEnt LinkTo(ent, tag);
+  fxEnt linkTo(ent, tag);
   fxEnt setModel("tag_origin_animate");
   playFXOnTag(effect, fxEnt, "tag_origin");
   return fxEnt;
 }
 SpawnAndLinkFXToOffset(effect, ent, offsetOrigin, offsetAngles) {
   fxEnt = spawn("script_model", (0, 0, 0));
-  fxEnt LinkTo(ent, "", offsetOrigin, offsetAngles);
+  fxEnt linkTo(ent, "", offsetOrigin, offsetAngles);
   fxEnt setModel("tag_origin_animate");
   playFXOnTag(effect, fxEnt, "tag_origin");
   return fxEnt;
@@ -56,7 +56,7 @@ custom_weapon_wall_prices() {
       cost = weapon_spawns[i].script_int;
       level.zombie_weapons[weapon_spawns[i].zombie_weapon_upgrade].cost = cost;
       hint_string = maps\_zombiemode_weapons::get_weapon_hint(weapon_spawns[i].zombie_weapon_upgrade);
-      weapon_spawns[i] SetHintString(hint_string, cost);
+      weapon_spawns[i] setHintString(hint_string, cost);
     }
   }
 }
@@ -99,7 +99,7 @@ triggerWeaponsLockerWatch(wallModel) {
       storedAmmoClip = undefined;
       storedAmmoStock = undefined;
       wallModel setModel(emptyWallModel);
-      self SetHintString("Hold [{+activate}] To Store Current Weapon");
+      self setHintString("Hold [{+activate}] To Store Current Weapon");
     } else {
       storedWeapon = who GetCurrentWeapon();
       storedAmmoClip = who GetWeaponAmmoClip(storedWeapon);
@@ -112,7 +112,7 @@ triggerWeaponsLockerWatch(wallModel) {
         primaries = who GetWeaponsListPrimaries();
         who SwitchToWeapon(primaries[0]);
       }
-      self SetHintString("Hold [{+activate}] To Get Stored Weapon (" + storedWeapon + ").");
+      self setHintString("Hold [{+activate}] To Get Stored Weapon (" + storedWeapon + ").");
     }
     if(isDefined(weaponToGive)) {
       if(hasWallWeapon) {

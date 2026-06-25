@@ -95,7 +95,7 @@ function main(str_objective, b_starting) {
   level thread function_c08c908f();
   level thread function_9f7b1c2();
   level thread namespace_604e2e22::function_4a3de7f5("infil");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player districts::function_930f8c81("interior_cathedral_01");
   level.var_7b278a4f thread vehicle::lights_on();
   level.var_5d798cf2 thread vehicle::lights_on();
@@ -175,7 +175,7 @@ function function_91d00da9() {
 function function_c08c908f() {
   level waittill(#"hash_4857742ef12d250c");
   earthquake(0.6, 2.5, level.player.origin, 1000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   var_2354baae = (-148, 5446, 123);
   snd::client_msg("evt_emp_blast_screenshake");
 }
@@ -190,19 +190,19 @@ function function_ee43d0f7() {
   var_d558e027 = struct::get_array("watch_tower_destruction", "targetname");
 
   foreach(var_7f05924f in var_d558e027) {
-    bottom_right = getent(var_7f05924f.target, "targetname");
-    bottom_left = getent(bottom_right.target, "targetname");
-    top_right = getent(bottom_left.target, "targetname");
-    top_middle = getent(top_right.target, "targetname");
-    top_left = getent(top_middle.target, "targetname");
-    var_6848a619 = getent(top_left.target, "targetname");
-    var_b683c71b = getent(var_6848a619.target, "targetname");
-    var_6be00677 = getent(var_b683c71b.target, "targetname");
-    var_cdc34ef0 = getent(var_6be00677.target, "targetname");
-    var_4b1bea26 = getent(var_cdc34ef0.target, "targetname");
-    var_129bc7c3 = getent(var_4b1bea26.target, "targetname");
-    var_404e7179 = getent(var_129bc7c3.target, "targetname");
-    var_53b5b6c5 = getent(var_404e7179.target, "targetname");
+    bottom_right = getEnt(var_7f05924f.target, "targetname");
+    bottom_left = getEnt(bottom_right.target, "targetname");
+    top_right = getEnt(bottom_left.target, "targetname");
+    top_middle = getEnt(top_right.target, "targetname");
+    top_left = getEnt(top_middle.target, "targetname");
+    var_6848a619 = getEnt(top_left.target, "targetname");
+    var_b683c71b = getEnt(var_6848a619.target, "targetname");
+    var_6be00677 = getEnt(var_b683c71b.target, "targetname");
+    var_cdc34ef0 = getEnt(var_6be00677.target, "targetname");
+    var_4b1bea26 = getEnt(var_cdc34ef0.target, "targetname");
+    var_129bc7c3 = getEnt(var_4b1bea26.target, "targetname");
+    var_404e7179 = getEnt(var_129bc7c3.target, "targetname");
+    var_53b5b6c5 = getEnt(var_404e7179.target, "targetname");
     bottom_right.scene = var_7f05924f;
     bottom_right.trigger1 = bottom_left;
     bottom_right.trigger2 = top_right;
@@ -284,7 +284,7 @@ function function_ee43d0f7() {
 function function_2e153a87() {
   self endon(#"death");
   s_rpg_origin = struct::get("s_rpg_origin", "targetname");
-  e_vignette_tower_volume = getent("e_vignette_tower_volume", "targetname");
+  e_vignette_tower_volume = getEnt("e_vignette_tower_volume", "targetname");
 
   while(true) {
     s_results = self waittill(#"damage");
@@ -359,7 +359,7 @@ function function_6943404() {
 }
 
 function function_53c16fe1() {
-  var_d10853ff = getent("wood_gate_trigger", "targetname");
+  var_d10853ff = getEnt("wood_gate_trigger", "targetname");
   var_d10853ff trigger::wait_till();
   scene::play_from_time("p9_fxanim_cp_siege_wood_gate_bundle", "play");
 }

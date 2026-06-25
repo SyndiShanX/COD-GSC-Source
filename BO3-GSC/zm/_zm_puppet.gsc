@@ -22,7 +22,7 @@ function wait_for_puppet_pickup() {
       self zm_spawner::zombie_complete_emerging_into_playable_area();
       self.barricade_enter = 0;
     }
-    player = getplayers()[0];
+    player = getPlayers()[0];
     if(isDefined(player) && player buttonPressed("")) {
       if(self.iscurrentlypuppet) {
         if(zm_utility::check_point_in_playable_area(self.goalpos) && !zm_utility::check_point_in_playable_area(self.origin)) {

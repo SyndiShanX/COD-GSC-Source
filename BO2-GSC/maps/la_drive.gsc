@@ -78,7 +78,7 @@ fail_gate_watcher() {
   if(!flag("player_driving")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_1", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_1", "targetname"));
   }
 
   flag_wait_or_timeout("drive_under_first_overpass", 8);
@@ -86,7 +86,7 @@ fail_gate_watcher() {
   if(!flag("drive_under_first_overpass")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_2", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_2", "targetname"));
   }
 
   flag_wait_or_timeout("freeway_drive_1", 8);
@@ -94,7 +94,7 @@ fail_gate_watcher() {
   if(!flag("freeway_drive_1")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_3", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_3", "targetname"));
   }
 
   flag_wait_or_timeout("first_curve", 10);
@@ -102,7 +102,7 @@ fail_gate_watcher() {
   if(!flag("first_curve")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_4", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_4", "targetname"));
   }
 
   flag_wait_or_timeout("freeway_collapse", 12);
@@ -110,7 +110,7 @@ fail_gate_watcher() {
   if(!flag("freeway_collapse")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_5", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_5", "targetname"));
   }
 
   flag_wait_or_timeout("drive_under_big_overpass", 20);
@@ -118,7 +118,7 @@ fail_gate_watcher() {
   if(!flag("drive_under_big_overpass")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_6", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_6", "targetname"));
   }
 
   flag_wait_or_timeout("f38_trigger", 12);
@@ -126,7 +126,7 @@ fail_gate_watcher() {
   if(!flag("f38_trigger")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_7", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_7", "targetname"));
   }
 
   flag_wait_or_timeout("la_1_vista_swap", 24);
@@ -134,7 +134,7 @@ fail_gate_watcher() {
   if(!flag("la_1_vista_swap")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_8", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_8", "targetname"));
   }
 
   flag_wait_or_timeout("skyline", 16);
@@ -142,7 +142,7 @@ fail_gate_watcher() {
   if(!flag("skyline")) {
     level thread kill_player_driver();
   } else {
-    level thread monitor_backtrack_fail(getent("backtrack_fail_9", "targetname"));
+    level thread monitor_backtrack_fail(getEnt("backtrack_fail_9", "targetname"));
   }
 }
 
@@ -154,7 +154,7 @@ monitor_backtrack_fail(t_trigger) {
 kill_player_driver() {
   wait 1;
   earthquake(0.5, 1.0, level.player.origin, 100);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   level.veh_player_cougar showpart("tag_windshield_d2");
   level.veh_player_cougar showpart("tag_windshield_d1");
   wait 0.5;
@@ -219,7 +219,7 @@ drive_vo() {
 fa38_missle_fire(veh_fa38) {
   wait 0.1;
   struct = get_struct("freeway_fa38_missile_struct");
-  veh_drone = getent("hero_drone", "targetname");
+  veh_drone = getEnt("hero_drone", "targetname");
   e_missile = magicbullet("fa38_missile_turret_hero", struct.origin, veh_drone.origin, veh_fa38, veh_drone);
   e_missile endon("death");
   wait 1;
@@ -309,7 +309,7 @@ hide_freeway_collapse() {
 }
 
 create_freeway_collapse_struct(m_parent, str_child, str_tag) {
-  m_child = getent(str_child, "targetname");
+  m_child = getEnt(str_child, "targetname");
   s_freeway = spawnStruct();
   s_freeway.m_parent = m_parent;
   s_freeway.str_model = m_child.model;
@@ -323,7 +323,7 @@ create_freeway_collapse() {
 
   foreach(struct in level.a_freeway_collapse) {
     model = spawn_model(struct.str_model, struct.m_parent gettagorigin(struct.str_tag), struct.m_parent gettagangles(struct.str_tag));
-    model linkto(struct.m_parent, struct.str_tag);
+    model linkTo(struct.m_parent, struct.str_tag);
   }
 
   level.a_freeway_collapse = undefined;
@@ -402,7 +402,7 @@ cougar_damage_states() {
 
 mini_hero_drone() {
   self endon("death");
-  e_target = getent("first_overpass_target", "targetname");
+  e_target = getEnt("first_overpass_target", "targetname");
   self thread maps\_turret::shoot_turret_at_target_once(e_target, undefined, 1);
   clientnotify("fssn1");
   level.player playSound("evt_flyby1_flyby_front");
@@ -415,7 +415,7 @@ mini_hero_drone() {
 tanker_drone() {
   self thread maps\_turret::fire_turret_for_time(-1, 0);
   level.player playSound("evt_flyby2_flyby_front");
-  e_target = getent("tanker_drone_target", "targetname");
+  e_target = getEnt("tanker_drone_target", "targetname");
 
   if(isDefined(e_target)) {
     self maps\_turret::shoot_turret_at_target_once(e_target, vectorscale((-1, 0, 0), 100.0), 1);
@@ -443,7 +443,7 @@ hero_drone() {
   delay_thread(3, ::run_scene_and_delete, "freeway_f35");
   run_scene_and_delete("freeway_drone");
   level trigger_wait("f38_goto_trigger");
-  veh_f38 = getent("f35_vtol", "targetname");
+  veh_f38 = getEnt("f35_vtol", "targetname");
 
   for(i = 1; i < 3; i++) {
     f38_goto_struct = get_struct("f38_drive_" + i + "_goto", "targetname");
@@ -453,14 +453,14 @@ hero_drone() {
 }
 
 freeway_set_turret_targets() {
-  e_target1 = getent("overpass_target_1", "targetname");
-  e_target2 = getent("overpass_target_2", "targetname");
+  e_target1 = getEnt("overpass_target_1", "targetname");
+  e_target2 = getEnt("overpass_target_2", "targetname");
   flag_wait("freeway_drone_started");
-  veh_drone = getent("hero_drone", "targetname");
+  veh_drone = getEnt("hero_drone", "targetname");
   veh_drone set_turret_target(e_target1, (0, 0, 0), 1);
   veh_drone set_turret_target(e_target2, (0, 0, 0), 2);
   flag_wait("freeway_f35_started");
-  veh_f35 = getent("f35_vtol", "targetname");
+  veh_f35 = getEnt("f35_vtol", "targetname");
   veh_f35 notsolid();
   veh_f35 set_turret_target(veh_drone, (0, 0, 0), 0);
 }
@@ -487,7 +487,7 @@ offramp_lapd() {
 
   for(i = 0; i < a_veh_lapd_offramp.size; i++) {
     sound_ent[i] = spawn("script_origin", a_veh_lapd_offramp[i].origin);
-    sound_ent[i] linkto(a_veh_lapd_offramp[i], "tag_origin");
+    sound_ent[i] linkTo(a_veh_lapd_offramp[i], "tag_origin");
     sound_ent[i] thread differing_starts();
   }
 
@@ -579,7 +579,7 @@ skyline_crash_start(ent) {
 }
 
 crash(ent) {
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   playFXOnTag(getfx("cougar_crash"), level.veh_player_cougar, "tag_origin");
   screen_fade_out(0);
   maps\_objectives::set_objective(level.obj_drive, undefined, "done");
@@ -635,7 +635,7 @@ missile_fail() {
   level.player thread missile_fail_blackout();
   v_player_forward = level.player get_forward(1);
   v_spawn_org = level.player.origin + vectorscale((0, 0, 1), 2000.0) + v_player_forward * -500;
-  veh_drone = spawnvehicle("veh_t6_drone_avenger", "death_drone", "drone_avenger", v_spawn_org, level.player.angles);
+  veh_drone = spawnVehicle("veh_t6_drone_avenger", "death_drone", "drone_avenger", v_spawn_org, level.player.angles);
   veh_drone.health = 10000;
   veh_drone setvehgoalpos(v_spawn_org + v_player_forward * 100000);
   veh_drone setspeed(400, 300, 300);

@@ -306,7 +306,7 @@ player_rusher(str_category, delay, breakoff_distance, npc_damage_scale, npc_dama
 
   while(true) {
     self setgoalpos(player.origin);
-    self set_goalradius(24);
+    self set_goalRadius(24);
     wait 0.2;
     dist = distance(player.origin, self.origin);
 
@@ -316,7 +316,7 @@ player_rusher(str_category, delay, breakoff_distance, npc_damage_scale, npc_dama
       self.ignoresuppression = 0;
       self.ignoreall = 0;
       self enable_pain();
-      self set_goalradius(2048);
+      self set_goalRadius(2048);
       self setgoalpos(self.origin);
       return;
     }
@@ -428,13 +428,13 @@ wait_time_and_enemies(min_time, max_time, min_enemies, str_notify) {
 }
 
 trigger_wait_or_time(trigger_targetname, time) {
-  trigger = getent(trigger_targetname, "targetname");
+  trigger = getEnt(trigger_targetname, "targetname");
   trigger endon("trigger");
   wait(time);
 }
 
 simple_spawn_rusher_single(str_rusher_spawner_targetname, str_category, rusher_distance) {
-  sp_rusher = getent(str_rusher_spawner_targetname, "targetname");
+  sp_rusher = getEnt(str_rusher_spawner_targetname, "targetname");
 
   if(isDefined(sp_rusher)) {
     process_rusher_spawner(sp_rusher, str_category, rusher_distance);
@@ -465,7 +465,7 @@ process_rusher_spawner(sp_rusher, str_category, rusher_distance) {
 
 ai_run_along_node_array(str_ai_targetname, a_str_nodes, ignore_all, teleport_to_start_node, str_walk_mode) {
   level endon("stealth_broken");
-  s_spawner = getent(str_ai_targetname, "targetname");
+  s_spawner = getEnt(str_ai_targetname, "targetname");
 
   if(isDefined(s_spawner.script_delay)) {
     delay = s_spawner.script_delay;
@@ -561,7 +561,7 @@ mission_fail_if_not_inside_info_volumes(str_info_targetname, str_end_notify, fai
 
 kill_player_if_standing_inside_volume(str_volume, str_endon, fail_mission_delay, str_fail_enemy_spawners) {
   level endon(str_endon);
-  e_volume = getent(str_volume, "targetname");
+  e_volume = getEnt(str_volume, "targetname");
 
   while(true) {
     if(level.player istouching(e_volume)) {
@@ -817,7 +817,7 @@ hudson_throw_smoke_grenade(org_targetname, throw_at_pos) {
   maps\_anim::addnotetrack_customfunction(self.animname, "grenade_throw", ::hudson_notify_grenade_throw, "ch_ang_10_01_smoke_throw_hudson");
 
   if(isDefined(org_targetname)) {
-    org = getstruct(org_targetname, "targetname");
+    org = getStruct(org_targetname, "targetname");
   }
 
   if(!isDefined(org)) {
@@ -840,7 +840,7 @@ hudson_throw_smoke_grenade(org_targetname, throw_at_pos) {
 
 spawn_prop_grenade(guy) {
   grenade = spawn_model("t6_wpn_grenade_smoke_world", guy gettagorigin("tag_inhand"), guy gettagangles("tag_inhand"));
-  grenade linkto(guy, "tag_inhand");
+  grenade linkTo(guy, "tag_inhand");
   guy.grenade_ref = grenade;
 }
 
@@ -954,7 +954,7 @@ angola_mortor_move(target_position, speed, height) {
   dist_travelled = 0;
   total_dist = (self.origin[0] - target_position[0]) * (self.origin[0] - target_position[0]) + (self.origin[1] - target_position[1]) * (self.origin[1] - target_position[1]) + (self.origin[2] - target_position[2]) * (self.origin[2] - target_position[2]);
   total_dist = sqrt(total_dist);
-  dir = vectornormalize(target_position - self.origin);
+  dir = vectorNormalize(target_position - self.origin);
   last_time = start_time;
   last_pos = self.origin;
   frac = 0.0;
@@ -1126,7 +1126,7 @@ linkto_trigger_off() {
 }
 
 lookat_trigger_while_not_in_trigger(triggername) {
-  lookat_trigger = getent(triggername, "targetname");
+  lookat_trigger = getEnt(triggername, "targetname");
 
   while(true) {
     lookat_trigger waittill("trigger");
@@ -1295,7 +1295,7 @@ manage_fxanim_grass_animating(msg, a_grass) {
 
     foreach(grass in a_grass) {
       grass notify("stop_grass_idle");
-      grass anim_stopanimscripted();
+      grass anim_stopanimScripted();
       grass notify("fxanim_grass_stop_animating");
     }
   }
@@ -1312,7 +1312,7 @@ fxanim_grass_logic() {
     self thread anim_generic_loop(self, "fxanim_grass_idle", "stop_grass_idle");
     self waittill_someone_touches_grass();
     self notify("stop_grass_idle");
-    self anim_stopanimscripted();
+    self anim_stopanimScripted();
     anim_single(self, "fxanim_grass");
   }
 }
@@ -1467,20 +1467,20 @@ jungle_stealth_skipto_clean_up() {
   delete_scene("hudson_mantle_climb_loop", 1);
   delete_scene("hudson_mantle_help", 1);
   delete_scene("mason_woods_mantle_help", 1);
-  sp_enemy = getent("chopper_dead_body1", "targetname");
+  sp_enemy = getEnt("chopper_dead_body1", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("chopper_dead_body2", "targetname");
+  sp_enemy = getEnt("chopper_dead_body2", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("chopper_dead_body3", "targetname");
+  sp_enemy = getEnt("chopper_dead_body3", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("crashed_hind_pilot", "targetname");
+  sp_enemy = getEnt("crashed_hind_pilot", "targetname");
   sp_enemy delete();
 }
 
 jungle_stealth_ent_clean_up() {
-  e_to_be_deleted = getent("trig_color_approach_from_beach_1", "targetname");
+  e_to_be_deleted = getEnt("trig_color_approach_from_beach_1", "targetname");
   e_to_be_deleted delete();
-  e_to_be_deleted = getent("trig_color_approach_from_beach_2", "targetname");
+  e_to_be_deleted = getEnt("trig_color_approach_from_beach_2", "targetname");
   e_to_be_deleted delete();
 }
 
@@ -1497,42 +1497,42 @@ jungle_stealth_log_skipto_clean_up() {
   delete_scene("child_guards_a", 1);
   delete_scene("child_guards_b", 1);
   delete_scene("child_guards_c", 1);
-  t_to_be_deleted = getent("sm_fail_beach", "targetname");
+  t_to_be_deleted = getEnt("sm_fail_beach", "targetname");
   t_to_be_deleted delete();
-  t_to_be_deleted = getent("trig_fail_before_log", "targetname");
+  t_to_be_deleted = getEnt("trig_fail_before_log", "targetname");
   t_to_be_deleted delete();
-  t_to_be_deleted = getent("trig_child_guards_a", "targetname");
+  t_to_be_deleted = getEnt("trig_child_guards_a", "targetname");
   t_to_be_deleted delete();
-  t_to_be_deleted = getent("trig_child_guards_b", "targetname");
+  t_to_be_deleted = getEnt("trig_child_guards_b", "targetname");
   t_to_be_deleted delete();
-  t_to_be_deleted = getent("trig_child_guards_c", "targetname");
+  t_to_be_deleted = getEnt("trig_child_guards_c", "targetname");
   t_to_be_deleted delete();
-  e_to_be_deleted = getent("clip_house_for_hudson", "targetname");
+  e_to_be_deleted = getEnt("clip_house_for_hudson", "targetname");
   e_to_be_deleted connectpaths();
   e_to_be_deleted delete();
-  sp_enemy = getent("stair_enemy", "targetname");
+  sp_enemy = getEnt("stair_enemy", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("child_soldier_1", "targetname");
+  sp_enemy = getEnt("child_soldier_1", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("child_soldier_2", "targetname");
+  sp_enemy = getEnt("child_soldier_2", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("child_soldier_3", "targetname");
+  sp_enemy = getEnt("child_soldier_3", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("child_soldier_4", "targetname");
+  sp_enemy = getEnt("child_soldier_4", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("patrol_director", "targetname");
+  sp_enemy = getEnt("patrol_director", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("go_house_ambient_child1_spawner", "targetname");
+  sp_enemy = getEnt("go_house_ambient_child1_spawner", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("go_house_ambient_child2_spawner", "targetname");
+  sp_enemy = getEnt("go_house_ambient_child2_spawner", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("go_house_ambient_child3_spawner", "targetname");
+  sp_enemy = getEnt("go_house_ambient_child3_spawner", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("go_house_ambient_child4_spawner", "targetname");
+  sp_enemy = getEnt("go_house_ambient_child4_spawner", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("child_guard_c_2", "targetname");
+  sp_enemy = getEnt("child_guard_c_2", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("house_follow_path_and_die_spawner", "targetname");
+  sp_enemy = getEnt("house_follow_path_and_die_spawner", "targetname");
   sp_enemy delete();
   a_spawners = getEntArray("enemy_fail_beach", "targetname");
 
@@ -1548,17 +1548,17 @@ jungle_stealth_log_skipto_clean_up() {
 }
 
 jungle_stealth_log_ent_clean_up() {
-  e_to_be_deleted = getent("objective_mason_hide_under_log_cover_trigger", "targetname");
+  e_to_be_deleted = getEnt("objective_mason_hide_under_log_cover_trigger", "targetname");
   e_to_be_deleted delete();
-  e_to_be_deleted = getent("color_hudson_waiting_for_house_move_trigger", "targetname");
+  e_to_be_deleted = getEnt("color_hudson_waiting_for_house_move_trigger", "targetname");
   e_to_be_deleted delete();
-  e_to_be_deleted = getent("stealth_volume_by_log", "targetname");
+  e_to_be_deleted = getEnt("stealth_volume_by_log", "targetname");
   e_to_be_deleted delete();
-  e_to_be_deleted = getent("trig_color_enter_house", "targetname");
+  e_to_be_deleted = getEnt("trig_color_enter_house", "targetname");
   e_to_be_deleted delete();
-  e_to_be_deleted = getent("trig_color_house_wait", "targetname");
+  e_to_be_deleted = getEnt("trig_color_house_wait", "targetname");
   e_to_be_deleted delete();
-  e_to_be_deleted = getent("trig_hudson_in_house", "targetname");
+  e_to_be_deleted = getEnt("trig_hudson_in_house", "targetname");
   e_to_be_deleted delete();
   a_ledge_clips = getEntArray("ledge_clip", "targetname");
 
@@ -1566,7 +1566,7 @@ jungle_stealth_log_ent_clean_up() {
     m_ledge_clip delete();
   }
 
-  e_to_be_deleted = getent("trig_log_started", "targetname");
+  e_to_be_deleted = getEnt("trig_log_started", "targetname");
   e_to_be_deleted delete();
 }
 

@@ -80,7 +80,7 @@ dev_skipto_ending() {
   iprintln("DEV ENDING");
 
   level.harper = init_hero("harper");
-  s_start = getstruct("street_claw_end_goal_pos", "targetname");
+  s_start = getStruct("street_claw_end_goal_pos", "targetname");
   skipto_teleport("street_claw_end_goal_pos", array(level.harper));
   level.harper forceteleport(s_start.origin, s_start.angles);
 }
@@ -101,27 +101,27 @@ main() {
 setup_garage_doors() {
   trigger_off("soct_mount_trigger", "targetname");
   run_scene_first_frame("claw_garage_defend_door_start");
-  m_garage_back_door = getent("garage_back_door", "targetname");
+  m_garage_back_door = getEnt("garage_back_door", "targetname");
   m_garage_back_door ignorecheapentityflag(1);
   m_garage_back_door connectpaths();
   m_garage_back_door hide();
   m_garage_back_door notsolid();
-  m_garage_back_door_2 = getent("garage_back_door_2", "targetname");
+  m_garage_back_door_2 = getEnt("garage_back_door_2", "targetname");
   m_garage_back_door_2 ignorecheapentityflag(1);
   m_garage_back_door_2 connectpaths();
   m_garage_back_door_2 hide();
   m_garage_back_door_2 notsolid();
-  m_garage_back_door_player_clip = getent("garage_back_door_player_clip", "targetname");
+  m_garage_back_door_player_clip = getEnt("garage_back_door_player_clip", "targetname");
   m_garage_back_door_player_clip connectpaths();
   m_garage_back_door_player_clip hide();
   m_garage_back_door_player_clip notsolid();
-  e_garage_entrance = getent("garage_entrance", "targetname");
+  e_garage_entrance = getEnt("garage_entrance", "targetname");
   e_garage_entrance ignorecheapentityflag(1);
-  m_soct_01 = getent("soct_01", "targetname");
+  m_soct_01 = getEnt("soct_01", "targetname");
   m_soct_01 hidepart("tag_seat_rb");
   m_soct_01 hidepart("tag_gunner_barrel1");
   m_soct_01 hidepart("tag_flash_gunner1");
-  m_soct_02 = getent("soct_02", "targetname");
+  m_soct_02 = getEnt("soct_02", "targetname");
   m_soct_02 hidepart("tag_gunner_barrel1");
   m_soct_02 hidepart("tag_flash_gunner1");
   m_soct_02 hidepart("tag_steeringwheel");
@@ -131,10 +131,10 @@ setup_garage_doors() {
     destroyed_piece hide();
   }
 
-  m_right_path_train_car = getent("right_path_train_car", "targetname");
+  m_right_path_train_car = getEnt("right_path_train_car", "targetname");
   m_right_path_train_car useanimtree(#animtree);
   m_right_path_train_car setanim(%veh_anim_pak_train_boxcar_doors_open, 1, 0, 1);
-  m_train_door = getent("train_door", "targetname");
+  m_train_door = getEnt("train_door", "targetname");
   m_train_door useanimtree(#animtree);
   m_train_door setanim(%veh_anim_pak_train_boxcar_doors_open, 1, 0, 1);
 }
@@ -156,7 +156,7 @@ setup_soct_riders() {
   self endon("death");
   self magic_bullet_shield();
   self gun_remove();
-  self set_goalradius(16);
+  self set_goalRadius(16);
 }
 
 setup_courtyard_vtols() {
@@ -321,7 +321,7 @@ intro_courtyard_defend() {
   screen_message_delete();
   save_player_first_position();
   setsaveddvar("flame_system_enabled", 1);
-  s_intro_align = getstruct("claw_intro_align", "targetname");
+  s_intro_align = getStruct("claw_intro_align", "targetname");
   spawn_vehicle_ground_claw();
   level.claw[0].origin = s_intro_align.origin;
   level.claw[0].angles = s_intro_align.angles;
@@ -334,16 +334,16 @@ intro_courtyard_defend() {
 }
 
 intro_courtyard_gate_control() {
-  m_inner_exit_gate = getent("pak2_outro_gate", "targetname");
+  m_inner_exit_gate = getEnt("pak2_outro_gate", "targetname");
   v_move_z = vectorscale((0, 0, 1), 768.0);
-  m_inner_exit_gate moveto(m_inner_exit_gate.origin - v_move_z, 0.05);
+  m_inner_exit_gate moveTo(m_inner_exit_gate.origin - v_move_z, 0.05);
   level waittill("intro_courtyard_convoy_done");
   waittill_safe_place_to_raise_gate(m_inner_exit_gate);
-  m_inner_exit_gate moveto(m_inner_exit_gate.origin + v_move_z, 0.05);
+  m_inner_exit_gate moveTo(m_inner_exit_gate.origin + v_move_z, 0.05);
 }
 
 waittill_safe_place_to_raise_gate(m_inner_exit_gate) {
-  t_garage_trig = getent("garage_player_touching_trig", "targetname");
+  t_garage_trig = getEnt("garage_player_touching_trig", "targetname");
 
   while(true) {
     if(level.player istouching(t_garage_trig)) {
@@ -362,7 +362,7 @@ save_player_first_position() {
 }
 
 save_player_position() {
-  t_garage_trig = getent("garage_player_touching_trig", "targetname");
+  t_garage_trig = getEnt("garage_player_touching_trig", "targetname");
 
   if(level.player istouching(t_garage_trig)) {
     level.v_player_last_position = level.player.origin;
@@ -371,8 +371,8 @@ save_player_position() {
 }
 
 save_player_safe_position() {
-  t_garage_trig = getent("garage_player_touching_trig", "targetname");
-  s_garage_spot = getstruct("player_garage_struct", "targetname");
+  t_garage_trig = getEnt("garage_player_touching_trig", "targetname");
+  s_garage_spot = getStruct("player_garage_struct", "targetname");
 
   if(!level.player istouching(t_garage_trig)) {
     level.v_player_last_position = s_garage_spot.origin;
@@ -381,7 +381,7 @@ save_player_safe_position() {
 }
 
 teleport_player_to_last_position() {
-  self setorigin(level.v_player_last_position);
+  self setOrigin(level.v_player_last_position);
   self setplayerangles(level.v_player_last_angles);
   rpc("clientscripts/_vehicle", "damage_filter_disable");
 }
@@ -411,7 +411,7 @@ courtyard_heli_waves() {
   vh_courtyard_heli_1 veh_magic_bullet_shield(1);
   level.vh_intro_courtyard_drone thread courtyard_drone_behaviour();
   flag_wait("start_switch_ability");
-  ai_rooftop_claw = getent("rooftop_claw", "script_noteworthy");
+  ai_rooftop_claw = getEnt("rooftop_claw", "script_noteworthy");
   a_rooftop_rpg_squad = simple_spawn("rooftop_rpg_squad");
 
   foreach(guy in a_rooftop_rpg_squad) {
@@ -428,11 +428,11 @@ courtyard_heli_waves() {
 courtyard_drone_behaviour() {
   self endon("death");
   self thread drone_window_target();
-  s_intro_drone_spotlight_pos = getstruct("intro_drone_spotlight_pos", "targetname");
+  s_intro_drone_spotlight_pos = getStruct("intro_drone_spotlight_pos", "targetname");
   self setvehgoalpos(s_intro_drone_spotlight_pos.origin, 1);
   self waittill_any("goal", "near_goal");
   flag_wait("intro_drone_shooting_done");
-  e_courtyard_drone_light_target = getent("courtyard_drone_light_target", "targetname");
+  e_courtyard_drone_light_target = getEnt("courtyard_drone_light_target", "targetname");
   self setlookatent(e_courtyard_drone_light_target);
   self set_turret_target(e_courtyard_drone_light_target, (0, 0, 0), 0);
   wait 3;
@@ -465,10 +465,10 @@ courtyard_drone_behaviour() {
     self set_turret_target(level.claw[0], (0, 0, 0), 0);
   }
 
-  s_drone_archway_pos = getstruct("drone_archway_pos", "targetname");
+  s_drone_archway_pos = getStruct("drone_archway_pos", "targetname");
   self setvehgoalpos(s_drone_archway_pos.origin, 1);
   self waittill_any("near_goar", "goal");
-  e_archway_drone_target = getent("archway_drone_target", "targetname");
+  e_archway_drone_target = getEnt("archway_drone_target", "targetname");
 
   if(isDefined(level.claw[0])) {
     self shoot_turret_at_target(level.claw[0], 3, (0, 0, 0), 0);
@@ -489,7 +489,7 @@ courtyard_drone_behaviour() {
     self set_turret_target(level.claw[1], (0, 0, 0), 0);
   }
 
-  s_drone_rooftop_pos = getstruct("drone_rooftop_pos", "targetname");
+  s_drone_rooftop_pos = getStruct("drone_rooftop_pos", "targetname");
   self setvehgoalpos(s_drone_rooftop_pos.origin, 1);
 
   if(!flag("rooftop_claw_dead") || !flag("street_claw_dead")) {
@@ -565,7 +565,7 @@ drone_ai_shoot(t_garage_trig) {
 threaten_roof_claw_for_time(n_time) {
   level endon("stop_threatening_roof_claw");
   self endon("death");
-  ai_rooftop_claw = getent("rooftop_claw", "script_noteworthy");
+  ai_rooftop_claw = getEnt("rooftop_claw", "script_noteworthy");
   self setlookatent(ai_rooftop_claw);
   self set_turret_target(ai_rooftop_claw, (0, 0, 0), 0);
   level thread timeout_then_notify(n_time, "stop_threatening_roof_claw");
@@ -578,7 +578,7 @@ threaten_roof_claw_for_time(n_time) {
 
 return_when_defined(e_defined, str_value, str_key) {
   while(!isDefined(e_defined)) {
-    e_defined = getent(str_value, str_key);
+    e_defined = getEnt(str_value, str_key);
 
     if(isDefined(e_defined)) {
       break;
@@ -598,8 +598,8 @@ timeout_then_notify(n_time, str_notify) {
 street_claw_exposed_watcher(e_target) {
   self endon("death");
   e_target endon("death");
-  t_courtryard_trig = getent("claw_courtyard_explosed_trig", "targetname");
-  t_arch_trig = getent("claw_courtyard_arch_trig", "targetname");
+  t_courtryard_trig = getEnt("claw_courtyard_explosed_trig", "targetname");
+  t_arch_trig = getEnt("claw_courtyard_arch_trig", "targetname");
   b_do_switch_nag = 1;
 
   while(!flag("street_claw_dead")) {
@@ -648,8 +648,8 @@ watch_window_damage() {
 
 drone_window_target() {
   self endon("death");
-  e_courtyard_drone_light_target = getent("courtyard_drone_light_target", "targetname");
-  e_garage_window_target = getent("garage_window_target", "targetname");
+  e_courtyard_drone_light_target = getEnt("courtyard_drone_light_target", "targetname");
+  e_garage_window_target = getEnt("garage_window_target", "targetname");
 
   if(isDefined(e_courtyard_drone_light_target)) {
     self setlookatent(e_courtyard_drone_light_target);
@@ -662,8 +662,8 @@ drone_window_target() {
     self thread shoot_turret_at_target(e_garage_window_target, 4, (0, 0, 0), 0);
   }
 
-  s_garage_window_target_end = getstruct("garage_window_target_end", "targetname");
-  e_garage_window_target moveto(s_garage_window_target_end.origin, 3);
+  s_garage_window_target_end = getStruct("garage_window_target_end", "targetname");
+  e_garage_window_target moveTo(s_garage_window_target_end.origin, 3);
   e_garage_window_target waittill("movedone");
   wait 1;
 
@@ -671,8 +671,8 @@ drone_window_target() {
     self thread shoot_turret_at_target(e_garage_window_target, 4, (0, 0, 0), 0);
   }
 
-  s_garage_window_target_end_2 = getstruct("garage_window_target_end_2", "targetname");
-  e_garage_window_target moveto(s_garage_window_target_end_2.origin, 3);
+  s_garage_window_target_end_2 = getStruct("garage_window_target_end_2", "targetname");
+  e_garage_window_target moveTo(s_garage_window_target_end_2.origin, 3);
   e_garage_window_target waittill("movedone");
   flag_set("intro_drone_shooting_done");
 }
@@ -681,7 +681,7 @@ claw_turn_on_extracam() {
   e_extra_cam = maps\_glasses::get_extracam();
   e_extra_cam.origin = self gettagorigin("tag_turret");
   e_extra_cam.angles = self gettagangles("tag_turret");
-  e_extra_cam linkto(self, "tag_eye", (2, 0, 3));
+  e_extra_cam linkTo(self, "tag_eye", (2, 0, 3));
   maps\_glasses::turn_on_extra_cam();
 }
 
@@ -719,7 +719,7 @@ claw_fail_condition() {
   a_tunnel_claw_rpgs = getStructArray("tunnel_claw_rpgs", "targetname");
 
   foreach(s_rpg_start_pos in a_tunnel_claw_rpgs) {
-    s_rpg_end_pos = getstruct(s_rpg_start_pos.target, "targetname");
+    s_rpg_end_pos = getStruct(s_rpg_start_pos.target, "targetname");
     wait(randomfloat(0.5));
     magicbullet("usrpg_magic_bullet_sp", s_rpg_start_pos.origin, s_rpg_end_pos.origin);
   }
@@ -788,10 +788,10 @@ claw_enemies_intro() {
   level thread run_scene("dormant_claw_3");
   level thread run_scene("dormant_claw_4");
   wait 0.1;
-  ai_claw_enemy_1 = getent("claw_enemy_1_ai", "targetname");
-  ai_claw_enemy_2 = getent("claw_enemy_2_ai", "targetname");
-  ai_claw_enemy_3 = getent("claw_enemy_3_ai", "targetname");
-  ai_claw_enemy_4 = getent("claw_enemy_4_ai", "targetname");
+  ai_claw_enemy_1 = getEnt("claw_enemy_1_ai", "targetname");
+  ai_claw_enemy_2 = getEnt("claw_enemy_2_ai", "targetname");
+  ai_claw_enemy_3 = getEnt("claw_enemy_3_ai", "targetname");
+  ai_claw_enemy_4 = getEnt("claw_enemy_4_ai", "targetname");
   ai_claw_enemy_1 thread scene_wait_and_run("dormant_claw_1", 0);
   ai_claw_enemy_2 thread scene_wait_and_run("dormant_claw_2", 0);
   ai_claw_enemy_3 thread scene_wait_and_run("dormant_claw_3", 0);
@@ -837,10 +837,10 @@ claw_pip_off() {
 
 claw_startup() {
   flag_init("street_claw_exposed");
-  playsoundatposition("sce_transition", (0, 0, 0));
+  playSoundAtPosition("sce_transition", (0, 0, 0));
   screen_fade_out(0.25, "compass_static");
   level notify("claw1_startup_screen_faded");
-  s_rooftop_claw_goal = getstruct("rooftop_claw_start_spot", "targetname");
+  s_rooftop_claw_goal = getStruct("rooftop_claw_start_spot", "targetname");
   claw_ai_origin = s_rooftop_claw_goal.origin;
   claw_ai_angles = s_rooftop_claw_goal.angles;
   level.claw[1] = simple_spawn_single("claw_ai");
@@ -879,7 +879,7 @@ claw_startup() {
   flag_wait("trig_fallback_archway");
   flag_set("start_switch_ability");
   level thread ending_timeout();
-  level.claw[1] set_goalradius(64);
+  level.claw[1] set_goalRadius(64);
   level.claw[1] set_ignoreall(0);
   level.player thread claw_switch_think();
   level thread harper_switch_claw_nag();
@@ -939,7 +939,7 @@ ending_timeout() {
   wait 30;
 
   if(!flag("drone_is_dead")) {
-    e_courtyard_drone_light_target = getent("courtyard_drone_light_target", "targetname");
+    e_courtyard_drone_light_target = getEnt("courtyard_drone_light_target", "targetname");
     level.vh_intro_courtyard_drone disable_turret(0);
     level.vh_intro_courtyard_drone setlookatent(e_courtyard_drone_light_target);
     level.vh_intro_courtyard_drone set_turret_target(e_courtyard_drone_light_target, (0, 0, 0), 0);
@@ -952,7 +952,7 @@ ending_timeout() {
 
   if(!flag("drone_is_dead")) {
     level.vh_intro_courtyard_drone enable_turret(0);
-    s_drone_fallback_pos = getstruct("drone_fallback_pos", "targetname");
+    s_drone_fallback_pos = getStruct("drone_fallback_pos", "targetname");
     level.vh_intro_courtyard_drone setvehgoalpos(s_drone_fallback_pos.origin, 1);
   }
 }
@@ -970,14 +970,14 @@ make_claw_ai() {
     level.claw[0].script_noteworthy = "street_claw";
     ai_claw = level.claw[0];
     level.claw[0].b_player_controlled = 0;
-    s_street_claw_archway_goal = getstruct("street_claw_archway_goal", "targetname");
+    s_street_claw_archway_goal = getStruct("street_claw_archway_goal", "targetname");
     vec_self_goal_pos = s_street_claw_archway_goal.origin;
   } else if(self == level.claw[1]) {
     level.claw[1] = simple_spawn_single("claw_ai");
     level.claw[1].script_noteworthy = "rooftop_claw";
     ai_claw = level.claw[1];
     level.claw[1].b_player_controlled = 0;
-    s_rooftop_claw_goal = getstruct("rooftop_claw_start_spot", "targetname");
+    s_rooftop_claw_goal = getStruct("rooftop_claw_start_spot", "targetname");
     vec_self_goal_pos = s_rooftop_claw_goal.origin;
   }
 
@@ -985,7 +985,7 @@ make_claw_ai() {
   self delete();
   ai_claw.overrideactordamage = ::claw_ai_damage_override;
   ai_claw forceteleport(new_claw_ai_origin, new_claw_ai_angles);
-  ai_claw set_goalradius(64);
+  ai_claw set_goalRadius(64);
   ai_claw setgoalpos(vec_self_goal_pos);
 }
 
@@ -993,7 +993,7 @@ switch_to_player() {
   level.player freezecontrols(1);
   level.player enableinvulnerability();
   level notify("exit_vehicle");
-  playsoundatposition("sce_transition_short", (0, 0, 0));
+  playSoundAtPosition("sce_transition_short", (0, 0, 0));
   screen_message_delete();
   screen_fade_out(0.1, "compass_static");
   clientnotify("end_damage_filter");
@@ -1047,7 +1047,7 @@ kill_ai_roof_claw() {
 }
 
 kill_ai_claw(str_flag, str_noteworthy) {
-  ai_claw = getent(str_noteworthy, "script_noteworthy");
+  ai_claw = getEnt(str_noteworthy, "script_noteworthy");
 
   if(isDefined(ai_claw)) {
     ai_claw notify("death");
@@ -1066,7 +1066,7 @@ make_player_controlled_claw() {
   new_claw_vehicle_angles = self.angles;
   new_claw_ai_origin = self.origin;
   new_claw_ai_angles = self.angles;
-  playsoundatposition("sce_transition_short", (0, 0, 0));
+  playSoundAtPosition("sce_transition_short", (0, 0, 0));
   screen_message_delete();
   screen_fade_out(0.1, "compass_static");
 
@@ -1104,7 +1104,7 @@ spawn_vehicle_claw(v_origin, v_angles) {
     level.claw[1] = spawn_vehicle_from_targetname("starting_claw_no_flamethrower");
     vh_player_claw = level.claw[1];
     level.claw[1].b_player_controlled = 1;
-    s_rooftop_claw_goal = getstruct("rooftop_claw_start_spot", "targetname");
+    s_rooftop_claw_goal = getStruct("rooftop_claw_start_spot", "targetname");
     vh_player_claw.origin = s_rooftop_claw_goal.origin;
     vh_player_claw.angles = s_rooftop_claw_goal.angles;
 
@@ -1274,7 +1274,7 @@ claw_fire_grenade(delay_time) {
     v_end_pos = v_start_pos + anglesToForward(self gettagangles("tag_barrel")) * n_grenade_max_range;
   }
 
-  v_grenade_velocity = vectornormalize(v_end_pos - v_start_pos) * n_grenade_speed_scale;
+  v_grenade_velocity = vectorNormalize(v_end_pos - v_start_pos) * n_grenade_speed_scale;
   driver = self getseatoccupant(0);
 
   if(!isDefined(driver)) {
@@ -1288,10 +1288,10 @@ claw_fire_grenade(delay_time) {
 }
 
 grenade_launch_rumble() {
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 0.1;
   earthquake(0.07, 1, level.player.origin, 1000, level.player);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 claw_ai_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -1416,7 +1416,7 @@ rpg_magnet() {
 magic_rpg_shoot() {
   self endon("delete");
   self endon("death");
-  t_archway = getent("claw_courtyard_arch_trig", "targetname");
+  t_archway = getEnt("claw_courtyard_arch_trig", "targetname");
 
   for(i = 0; i <= 3; i++) {
     if(distance2d(t_archway.origin, self.origin) > 256 || level.player get_dot_from_eye(t_archway.origin, 0) < 0.5) {
@@ -1442,7 +1442,7 @@ player_rooftop_claw_death_think() {
   level.player.current_claw = 0;
   level.player freezecontrols(1);
   level.player enableinvulnerability();
-  playsoundatposition("sce_transition_short", (0, 0, 0));
+  playSoundAtPosition("sce_transition_short", (0, 0, 0));
   screen_message_delete();
   luinotifyevent(&"hud_pak_highlight_claw", 1, 3);
 
@@ -1491,7 +1491,7 @@ player_street_claw_death_think() {
   level.player.current_claw = 0;
   level.player freezecontrols(1);
   level.player enableinvulnerability();
-  playsoundatposition("sce_transition_short", (0, 0, 0));
+  playSoundAtPosition("sce_transition_short", (0, 0, 0));
   screen_message_delete();
   luinotifyevent(&"hud_pak_highlight_claw", 1, 3);
 
@@ -1589,7 +1589,7 @@ ending_switch_to_player() {
 remove_player_from_claw() {
   level notify("claw_event_over");
   level.player notify("stop_claw_grenade_turret");
-  playsoundatposition("sce_transition", (0, 0, 0));
+  playSoundAtPosition("sce_transition", (0, 0, 0));
   screen_fade_out(0.25, "compass_static");
   level.player freezecontrols(1);
   level.player enableinvulnerability();
@@ -1692,39 +1692,39 @@ try_to_start_ending_claw(str_flag, str_start_struct, str_noteworthy, str_goal_st
 
 garage_doors_control() {
   level endon("mount_soct_harper_started");
-  t_trig = getent("trigger_garage_jiffylube", "targetname");
+  t_trig = getEnt("trigger_garage_jiffylube", "targetname");
 
   while(!level.player istouching(t_trig)) {
     wait 0.05;
   }
 
-  m_garage_door_back = getent("garage_door_back", "targetname");
+  m_garage_door_back = getEnt("garage_door_back", "targetname");
   m_garage_door_back delete();
-  m_garage_door_back_2 = getent("garage_door_back_2", "targetname");
+  m_garage_door_back_2 = getEnt("garage_door_back_2", "targetname");
   m_garage_door_back_2 delete();
-  m_garage_back_door = getent("garage_back_door", "targetname");
+  m_garage_back_door = getEnt("garage_back_door", "targetname");
   m_garage_back_door show();
   m_garage_back_door solid();
-  m_garage_back_door_2 = getent("garage_back_door_2", "targetname");
+  m_garage_back_door_2 = getEnt("garage_back_door_2", "targetname");
   m_garage_back_door_2 show();
   m_garage_back_door_2 solid();
-  m_garage_back_door_2 disconnectpaths();
-  m_garage_back_door_player_clip = getent("garage_back_door_player_clip", "targetname");
+  m_garage_back_door_2 disconnectPaths();
+  m_garage_back_door_player_clip = getEnt("garage_back_door_player_clip", "targetname");
   m_garage_back_door_player_clip show();
   m_garage_back_door_player_clip solid();
-  m_garage_back_door_player_clip disconnectpaths();
+  m_garage_back_door_player_clip disconnectPaths();
   level waittill("claws_destroyed");
   waittill_player_in_good_spot_to_breach();
   level thread garage_breachers();
   m_garage_back_door_player_clip connectpaths();
   m_garage_back_door_player_clip delete();
-  m_garage_back_door rotateyaw(-145, 1);
-  m_garage_back_door_2 rotateyaw(145, 1);
-  s_garage_back_door_fx = getstruct("garage_back_door_fx", "targetname");
+  m_garage_back_door rotateYaw(-145, 1);
+  m_garage_back_door_2 rotateYaw(145, 1);
+  s_garage_back_door_fx = getStruct("garage_back_door_fx", "targetname");
   playFX(getfx("door_breach"), s_garage_back_door_fx.origin);
   m_garage_door_back waittill("movedone");
-  m_garage_door_back rotateyaw(15, 0.5);
-  m_garage_back_door_2 rotateyaw(-20, 0.5);
+  m_garage_door_back rotateYaw(15, 0.5);
+  m_garage_back_door_2 rotateYaw(-20, 0.5);
   wait 5;
   level notify("exit_garage");
   waittill_ai_group_ai_count("garage_breachers", 1);
@@ -1732,7 +1732,7 @@ garage_doors_control() {
 }
 
 waittill_player_in_good_spot_to_breach() {
-  t_breach_trig = getent("garage_breach_zone_trig", "targetname");
+  t_breach_trig = getEnt("garage_breach_zone_trig", "targetname");
   level.player waittill_player_clear_of_breach_zone(t_breach_trig);
   level.player waittill_player_looking_at(t_breach_trig.origin);
   t_breach_trig thread delay_delete();
@@ -1794,7 +1794,7 @@ friendly_convoy() {
   level_notify_claws_survival_status();
   trigger_on("soct_mount_trigger", "targetname");
   trigger_wait("soct_mount_trigger");
-  set_objective(level.obj_escape, getstruct("soct_mount_objective_marker", "targetname"), "remove");
+  set_objective(level.obj_escape, getStruct("soct_mount_objective_marker", "targetname"), "remove");
   vh_claw_player_soct thread crosby_unload_from_soct();
   run_scene("mount_soct_player");
   set_objective(level.obj_escape, undefined, "done");
@@ -1803,7 +1803,7 @@ friendly_convoy() {
 crosby_unload_from_soct() {
   flag_wait("mount_soct_player_started");
   self notify("unload");
-  ai_driver = getent("crosby_ai", "targetname");
+  ai_driver = getEnt("crosby_ai", "targetname");
   ai_driver thread crosby_enter_salazar_soct(self);
 }
 
@@ -1832,7 +1832,7 @@ spawn_drone_at_struct(str_start_struct, b_invulnerable, str_noteworthy, b_expens
   vh_drone = spawn_vehicle_from_targetname("intro_courtyard_drone");
 
   if(isDefined(str_start_struct)) {
-    s_start_spot = getstruct(str_start_struct, "targetname");
+    s_start_spot = getStruct(str_start_struct, "targetname");
     vh_drone.origin = s_start_spot.origin;
     vh_drone.angles = s_start_spot.angles;
   }
@@ -1848,13 +1848,13 @@ spawn_drone_at_struct(str_start_struct, b_invulnerable, str_noteworthy, b_expens
 }
 
 allied_drone_behaviour(e_final_look_target) {
-  s_street_spot = getstruct("ending_drone_street_goal", "targetname");
-  s_courtyard_goal = getstruct("ending_drone_courtyard_goal", "targetname");
-  e_courtyard_drone_light_target = getent("courtyard_drone_light_target", "targetname");
+  s_street_spot = getStruct("ending_drone_street_goal", "targetname");
+  s_courtyard_goal = getStruct("ending_drone_courtyard_goal", "targetname");
+  e_courtyard_drone_light_target = getEnt("courtyard_drone_light_target", "targetname");
   self setlookatent(e_courtyard_drone_light_target);
   self setspeed(40);
   self setvehgoalpos(s_street_spot.origin + vectorscale((0, 0, 1), 64.0), 1);
-  s_street2_spot = getstruct("ending_drone_street2_goal", "targetname");
+  s_street2_spot = getStruct("ending_drone_street2_goal", "targetname");
   self setlookatent(e_courtyard_drone_light_target);
   self setspeed(22);
   self setvehgoalpos(s_street2_spot.origin, 1);
@@ -1868,7 +1868,7 @@ allied_drone_behaviour(e_final_look_target) {
     self thread drone_set_turret_target_idle_cycle(e_final_look_target);
   }
 
-  s_end_goal = getstruct("ending_drone_ending_goal", "targetname");
+  s_end_goal = getStruct("ending_drone_ending_goal", "targetname");
   e_lookat = spawn("script_origin", s_end_goal.origin);
   self setlookatent(e_lookat);
   self setvehgoalpos(s_courtyard_goal.origin, 1);
@@ -1885,7 +1885,7 @@ drone_set_turret_target_idle_cycle(e_target_ent) {
 
 ending_hostile_drone_behaviour() {
   self endon("death");
-  s_drone_archway_pos = getstruct("drone_archway_pos", "targetname");
+  s_drone_archway_pos = getStruct("drone_archway_pos", "targetname");
   self setvehgoalpos(s_drone_archway_pos.origin, 1);
   self waittill("goal");
   self drone_random_targets();
@@ -1893,7 +1893,7 @@ ending_hostile_drone_behaviour() {
 
 ending_hostile_drone_2_behaviour() {
   self endon("death");
-  s_spotlight_pos = getstruct("intro_drone_spotlight_pos", "targetname");
+  s_spotlight_pos = getStruct("intro_drone_spotlight_pos", "targetname");
   self setvehgoalpos(s_spotlight_pos.origin, 1);
   self waittill("goal");
   self drone_random_targets();
@@ -1901,14 +1901,14 @@ ending_hostile_drone_2_behaviour() {
 
 window_target_move_loop() {
   level endon("ending_hostile_drones_dead");
-  s_garage_window_target_end = getstruct("garage_window_target_end", "targetname");
-  s_garage_window_target_end_2 = getstruct("garage_window_target_end_2", "targetname");
-  e_garage_window_target = getent("garage_window_target", "targetname");
+  s_garage_window_target_end = getStruct("garage_window_target_end", "targetname");
+  s_garage_window_target_end_2 = getStruct("garage_window_target_end_2", "targetname");
+  e_garage_window_target = getEnt("garage_window_target", "targetname");
 
   while(true) {
-    e_garage_window_target moveto(s_garage_window_target_end.origin, 3);
+    e_garage_window_target moveTo(s_garage_window_target_end.origin, 3);
     e_garage_window_target waittill("movedone");
-    e_garage_window_target moveto(s_garage_window_target_end_2.origin, 3);
+    e_garage_window_target moveTo(s_garage_window_target_end_2.origin, 3);
     e_garage_window_target waittill("movedone");
   }
 }
@@ -1916,8 +1916,8 @@ window_target_move_loop() {
 drone_random_targets() {
   self endon("death");
   self endon("delete");
-  e_courtyard_drone_light_target = getent("courtyard_drone_light_target", "targetname");
-  e_garage_window_target = getent("garage_window_target", "targetname");
+  e_courtyard_drone_light_target = getEnt("courtyard_drone_light_target", "targetname");
+  e_garage_window_target = getEnt("garage_window_target", "targetname");
   a_e_targets = array(e_courtyard_drone_light_target, e_garage_window_target);
 
   while(true) {
@@ -1929,12 +1929,12 @@ drone_random_targets() {
 
 gunner_exit_soct() {
   nd_gunner_exit_node = getnode("gunner_exit_node", "targetname");
-  ai_gunner = getent("salazar_soct_redshirt_ai", "targetname");
+  ai_gunner = getEnt("salazar_soct_redshirt_ai", "targetname");
   scene_wait("exit_soct_gunner");
   self gun_recall();
   self set_ignoreall(0);
   self change_movemode("cqb_walk");
-  self set_goalradius(8);
+  self set_goalRadius(8);
   self setgoalnode(nd_gunner_exit_node);
 }
 
@@ -1943,7 +1943,7 @@ crosby_enter_salazar_soct(vh_claw_salazar_soct) {
   wait 1;
   self gun_recall();
   self change_movemode("cqb_walk");
-  self set_goalradius(8);
+  self set_goalRadius(8);
   self setgoalnode(nd_driver_exit_node);
   self waittill("goal");
   level thread run_scene("mount_soct_redshirt");
@@ -2030,13 +2030,13 @@ spawn_ending_claw_at_struct(str_end_pos) {
   v_start_spot = get_closest_point(ai_claw.origin, a_v_start_spots);
   ai_claw magic_bullet_shield();
   ai_claw.turret setturretspinning(0);
-  ai_claw set_goalradius(8);
+  ai_claw set_goalRadius(8);
   ai_claw forceteleport(v_start_spot, ai_claw.angles);
   return ai_claw;
 }
 
 ending_claw_behaviour(str_goal_struct) {
-  s_goal = getstruct(str_goal_struct, "targetname");
+  s_goal = getStruct(str_goal_struct, "targetname");
   self setgoalpos(s_goal.origin);
 }
 
@@ -2055,9 +2055,9 @@ ending_dialog() {
 }
 
 harper_ending() {
-  m_garage_front_door_clip = getent("garage_front_door_clip", "targetname");
+  m_garage_front_door_clip = getEnt("garage_front_door_clip", "targetname");
   m_garage_front_door_clip delete();
-  e_garage_entrance = getent("garage_entrance", "targetname");
+  e_garage_entrance = getEnt("garage_entrance", "targetname");
   e_garage_entrance notsolid();
   run_scene("garage_exit_harper");
   level.harper.goalradius = 32;
@@ -2167,7 +2167,7 @@ screen_message_delete_timeout() {
 }
 
 courtyard_rain() {
-  trig_player_rain_drops = getent("player_rain_drops", "targetname");
+  trig_player_rain_drops = getEnt("player_rain_drops", "targetname");
 
   while(true) {
     if(!level.player istouching(trig_player_rain_drops)) {
@@ -2199,7 +2199,7 @@ dev_ending() {
   level thread ending_dialog();
   level thread friendly_convoy();
   wait 2;
-  vh_claw_player_soct = getent("claw_player_soct", "targetname");
+  vh_claw_player_soct = getEnt("claw_player_soct", "targetname");
   vh_claw_player_soct waittill("reached_end_node");
   wait 4;
   run_scene("mount_soct_harper");
@@ -2208,25 +2208,25 @@ dev_ending() {
 
 garage_breach_rumble() {
   wait 0.1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.07, 1, level.player.origin, 1000, level.player);
 }
 
 mount_soct_player_rumble(m_player_body) {
   wait 1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.05, 1, level.player.origin, 1000, level.player);
   wait 1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.1, 1, level.player.origin, 1000, level.player);
   wait 1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.1, 1, level.player.origin, 1000, level.player);
   wait 1;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.15, 1, level.player.origin, 1000, level.player);
   wait 0.25;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.07, 1, level.player.origin, 1000, level.player);
 }
 
@@ -2284,14 +2284,14 @@ vo_claw_defend_enemy() {
 }
 
 close_door_to_water() {
-  m_exit_door = getent("exit_door", "targetname");
+  m_exit_door = getEnt("exit_door", "targetname");
   m_exit_door show();
   m_exit_door trigger_on();
-  m_exit_clip = getent("door_closed_clip", "targetname");
+  m_exit_clip = getEnt("door_closed_clip", "targetname");
   m_exit_clip trigger_on();
-  m_clip = getent("underground_exit_door_clip", "targetname");
+  m_clip = getEnt("underground_exit_door_clip", "targetname");
   m_clip delete();
-  m_door = getent("underground_exit_door", "targetname");
+  m_door = getEnt("underground_exit_door", "targetname");
   m_door delete();
   setsaveddvar("phys_buoyancy", 0);
 }

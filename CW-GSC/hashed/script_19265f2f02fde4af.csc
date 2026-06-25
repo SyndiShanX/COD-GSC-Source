@@ -323,7 +323,7 @@ function private function_2138c62(local_client_num, augmented_impact_fx, damage_
       if((isDefined(var_2cc6e886.var_f9ac1f46) ? var_2cc6e886.var_f9ac1f46 : 0) > 0) {
         offset = forward + perpendicularvector(forward) * tan(var_2cc6e886.var_f9ac1f46) * randomfloat(1);
         offset = rotatepointaroundaxis(offset, forward, randomfloatrange(0, 360));
-        forward = vectornormalize(offset);
+        forward = vectorNormalize(offset);
 
         if(getdvarint(#"hash_168747d9fbaa6a48", 0)) {
           iprintlnbold(acos(vectordot(damage_data.direction, forward)));

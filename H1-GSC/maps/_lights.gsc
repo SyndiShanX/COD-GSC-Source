@@ -140,7 +140,7 @@ generic_double_strobe() {
 
       if(var_7[var_8].classname == "script_model") {
         var_3 = var_7[var_8];
-        var_4 = getent(var_3.target, "targetname");
+        var_4 = getEnt(var_3.target, "targetname");
         var_2 = 1;
       }
     }
@@ -268,9 +268,9 @@ generic_flickering() {
       }
 
       if(!isDefined(self.unlit_models)) {
-        self.unlit_models[0] = getent(var_4.target, "targetname");
+        self.unlit_models[0] = getEnt(var_4.target, "targetname");
       } else {
-        self.unlit_models[self.unlit_models.size] = getent(var_4.target, "targetname");
+        self.unlit_models[self.unlit_models.size] = getEnt(var_4.target, "targetname");
       }
 
       self.linked_models = 1;
@@ -817,7 +817,7 @@ init_lit_model(var_0) {
     var_2 = var_0.origin;
     var_3 = var_0.angles;
   } else if(isDefined(var_0.target)) {
-    var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
 
     if(isDefined(var_4) && isDefined(var_4.script_fxid)) {
       var_1 = var_4.script_fxid;

@@ -746,7 +746,7 @@ function private function_1ce48d0f(target, dist, var_3c67b910, elevation, rotati
     randgreen = randomfloat(1);
     randblue = randomfloat(1);
     randomcolor = (randred, randgreen, randblue);
-    randomcolor = vectornormalize(randomcolor);
+    randomcolor = vectorNormalize(randomcolor);
     snd_drawpath(self, randomcolor);
   }
 
@@ -757,7 +757,7 @@ function private function_1ce48d0f(target, dist, var_3c67b910, elevation, rotati
   while(isentity(self) && isDefined(target) && isDefined(target.origin)) {
     centerorigin = function_5eb4c6d(target);
     position = function_160366e9(centerorigin, dist, var_3c67b910, elevation);
-    self moveto(position, movetime, 0, 0);
+    self moveTo(position, movetime, 0, 0);
     var_3c67b910 += rotationstep;
     wait movetime;
   }

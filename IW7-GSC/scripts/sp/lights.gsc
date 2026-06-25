@@ -901,7 +901,7 @@ func_774A() {
 
       if(var_7[var_8].classname == "script_model") {
         var_3 = var_7[var_8];
-        var_4 = getent(var_3.target, "targetname");
+        var_4 = getEnt(var_3.target, "targetname");
         var_2 = 1;
       }
     }

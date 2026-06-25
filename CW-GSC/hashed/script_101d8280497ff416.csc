@@ -1478,7 +1478,7 @@ function function_5eada592(scriptbundlename, linkto = 1) {
     item.origin = self.origin;
 
     if(linkto) {
-      item linkto(self);
+      item linkTo(self);
     }
 
     item.spawning = 0;

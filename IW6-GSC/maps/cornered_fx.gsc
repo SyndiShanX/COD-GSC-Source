@@ -486,7 +486,7 @@ fx_screen_water_sheeting(var_0, var_1) {
     level endon(var_1);
   }
 
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   for(;;) {
     var_2 waittill("trigger");

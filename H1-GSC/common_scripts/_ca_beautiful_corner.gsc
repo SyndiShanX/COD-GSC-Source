@@ -104,9 +104,9 @@ beautiful_view_origin_offsets() {
   var_0 = [0.0, 0.0, -60.0];
 
   foreach(var_2 in level.beautiful_views) {
-    var_3 = getent(var_2, "targetname");
+    var_3 = getEnt(var_2, "targetname");
     beautiful_offset_view_origin(var_3, var_0);
-    var_4 = getent(var_2 + "_static", "targetname");
+    var_4 = getEnt(var_2 + "_static", "targetname");
     beautiful_offset_view_origin(var_4, var_0);
   }
 }
@@ -169,7 +169,7 @@ beautiful_view_move_request() {
 }
 
 beautiful_view_get_next_position() {
-  for(var_0 = undefined; !isDefined(var_0); var_0 = getent(var_1, "targetname")) {
+  for(var_0 = undefined; !isDefined(var_0); var_0 = getEnt(var_1, "targetname")) {
     level.beautiful_view_index++;
 
     if(level.beautiful_view_index >= level.beautiful_views.size) {
@@ -269,18 +269,18 @@ beautiful_view_position(var_0) {
 
 beautiful_view_position_dynamic(var_0) {
   level.player unlink();
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
   }
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
 }
 
 beautiful_view_position_static(var_0) {
   level.player unlink();
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -291,7 +291,7 @@ beautiful_view_position_static(var_0) {
 
   level.beautiful_view_ent.origin = var_1.origin;
   level.beautiful_view_ent.angles = var_1.angles;
-  level.player setorigin(level.beautiful_view_ent.origin);
+  level.player setOrigin(level.beautiful_view_ent.origin);
   level.player setplayerangles(level.beautiful_view_ent.angles);
   level.player playerlinktoabsolute(level.beautiful_view_ent, "tag_origin");
 }

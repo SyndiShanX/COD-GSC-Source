@@ -31,7 +31,7 @@ on_begin(n_timer) {
   callback::on_spawned(&on_player_spawned);
   callback::add_callback(#"on_host_migration_end", &function_ff66b979);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_7650d9fb(n_timer);
   }
 }
@@ -41,7 +41,7 @@ on_end(round_reset) {
   callback::remove_on_spawned(&on_player_spawned);
   callback::remove_callback(#"on_host_migration_end", &function_ff66b979);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player stop_timer();
   }
 }
@@ -125,7 +125,7 @@ stop_timer() {
 function_ff66b979() {
   level endon(#"end_round", #"host_migration_begin");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::close(player);
       player zm_trial_util::stop_timer();
@@ -134,7 +134,7 @@ function_ff66b979() {
 
   wait 5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_7650d9fb(isDefined(player.n_time_remaining) ? player.n_time_remaining : level.var_f7236c66, 1);
   }
 }

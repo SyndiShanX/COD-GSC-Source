@@ -89,7 +89,7 @@ setup_moving_elevators() {
   a_time[a_time.size] = 9;
 
   for(i = 1; i <= 3; i++) {
-    m_eleveator = getent("elevator0" + i, "targetname");
+    m_eleveator = getEnt("elevator0" + i, "targetname");
     n_move_time = a_time[i - 1];
     m_eleveator thread elevator_logic(i, n_move_time);
   }
@@ -106,8 +106,8 @@ hotel_super_soct_condition() {
   } else {
     trigger_wait("spawn_hotel_block_socts");
     wait 0.05;
-    ai_shooter_742 = getent("shooter_742_drone", "targetname");
-    ai_shooter_743 = getent("shooter_743_drone", "targetname");
+    ai_shooter_742 = getEnt("shooter_742_drone", "targetname");
+    ai_shooter_743 = getEnt("shooter_743_drone", "targetname");
     ai_shooter_742.overrideactordamage = ::hotel_soct_shooter_damage_override;
     ai_shooter_743.overrideactordamage = ::hotel_soct_shooter_damage_override;
     trigger_wait("non_super_soct_crash");
@@ -123,7 +123,7 @@ player_hotel_collision_effects() {
   earthquake(power, time, level.player.origin, 1500);
 
   for(i = 0; i < 3; i++) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     wait 0.1;
   }
 }
@@ -152,7 +152,7 @@ hotel_soct_shooter_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, 
 
 escape_bosses_objectives() {
   trigger_wait("see_evac_point");
-  set_objective(level.obj_evac_face_burn_point, getstruct("evac_face_burn_point", "targetname"), "breadcrumb");
+  set_objective(level.obj_evac_face_burn_point, getStruct("evac_face_burn_point", "targetname"), "breadcrumb");
   purple_smoke();
   level notify("see_purple_smoke");
 }
@@ -228,7 +228,7 @@ vehicle_detach_from_path_at_end() {
 }
 
 hotel_left_garage_trigger() {
-  e_trigger = getent("hotel_left_garage_trigger", "targetname");
+  e_trigger = getEnt("hotel_left_garage_trigger", "targetname");
   e_trigger waittill("trigger");
   wait 0.01;
   a_ai = getEntArray("hotel_left_garage_spawner", "targetname");
@@ -343,10 +343,10 @@ elevator_logic(n_elevator_number, n_move_time) {
   ai_elevator = undefined;
 
   for(i = 1; i <= 1; i++) {
-    s_position = getstruct("elevator_spot_" + n_elevator_number + "_" + i, "targetname");
+    s_position = getStruct("elevator_spot_" + n_elevator_number + "_" + i, "targetname");
     ai_elevator = simple_spawn_single("elevator_" + i);
     ai_elevator forceteleport(s_position.origin, s_position.angles);
-    ai_elevator linkto(self);
+    ai_elevator linkTo(self);
     ai_elevator thread eleveator_ai_logic(self, n_elevator_number);
   }
 
@@ -364,7 +364,7 @@ elevator_logic(n_elevator_number, n_move_time) {
     time_scale = 0.5;
   }
 
-  self moveto(self.origin - (0, 0, n_dest_height), n_move_time * time_scale);
+  self moveTo(self.origin - (0, 0, n_dest_height), n_move_time * time_scale);
   self waittill("movedone");
   self.move_done = 1;
 
@@ -385,7 +385,7 @@ ai_in_elevator_damage_check(e_ai_passenger, n_dest_height) {
 
 elevator_fall_and_explode(v_dest_position) {
   self endon("death");
-  self moveto(v_dest_position, 2);
+  self moveTo(v_dest_position, 2);
 
   while(self.origin[2] > 150) {
     wait 0.05;
@@ -459,14 +459,14 @@ super_soct_think() {
   level.vh_super_soct = self;
   self veh_magic_bullet_shield(1);
   self.n_time_between_shots = 0.05;
-  self.e_target_current = getent("pipe_0", "targetname");
+  self.e_target_current = getEnt("pipe_0", "targetname");
   self thread super_soct_shoot_logic();
   self thread super_soct_speed_control(1);
   self thread set_lock_on_target(vectorscale((0, 0, 1), 32.0));
   flag_wait("pipe_fall_0");
-  self.e_target_current = getent("pipe_1", "targetname");
+  self.e_target_current = getEnt("pipe_1", "targetname");
   flag_wait("pipe_fall_1");
-  self.e_target_current = getent("water_tower_end", "targetname");
+  self.e_target_current = getEnt("water_tower_end", "targetname");
   flag_wait("pipe_fall_2");
   self.n_time_between_shots = 3;
   self.e_target_current = level.player;
@@ -592,7 +592,7 @@ drone_attack_silo() {
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone endon("death");
   vh_drone thread enemy_drone_setup();
-  e_target = getent("catwalk_final", "targetname");
+  e_target = getEnt("catwalk_final", "targetname");
   vh_drone setlookatent(e_target);
   vh_drone set_turret_target(e_target, undefined, 0);
   vh_drone fire_turret(0);
@@ -645,7 +645,7 @@ pipe0_boss_damage_volume() {
   last_hurt_time = 0;
   last_speed_penalty_time = 0;
   speed_penalty_time = 2.0;
-  e_info_volume = getent("pipes0_boss_info_volume", "targetname");
+  e_info_volume = getEnt("pipes0_boss_info_volume", "targetname");
 
   while(true) {
     if(level.player.vehicle_state == 1) {
@@ -656,7 +656,7 @@ pipe0_boss_damage_volume() {
 
         if(dt > 0.1) {
           earthquake(0.5, 0.5, level.vh_player_soct.origin, 512);
-          level.player playrumbleonentity("damage_heavy");
+          level.player playRumbleOnEntity("damage_heavy");
           last_hurt_time = time;
         }
 
@@ -678,7 +678,7 @@ pipe0_boss_damage_volume() {
 pipe1_boss_damage_volume() {
   damage_per_frame = 100;
   last_hurt_time = 0;
-  e_info_volume = getent("pipes1_boss_info_volume", "targetname");
+  e_info_volume = getEnt("pipes1_boss_info_volume", "targetname");
 
   while(true) {
     if(level.player.vehicle_state == 1) {
@@ -689,7 +689,7 @@ pipe1_boss_damage_volume() {
 
         if(dt > 0.1) {
           earthquake(0.5, 0.5, level.vh_player_soct.origin, 512);
-          level.player playrumbleonentity("damage_heavy");
+          level.player playRumbleOnEntity("damage_heavy");
           last_hurt_time = time;
         }
       }
@@ -713,13 +713,13 @@ play_delayed_impact_sound(num) {
 
 water_tower() {
   trigger_wait("shoot_water_tower");
-  v_pos_start = getstruct("water_tower_start", "targetname");
-  v_pos_end = getent("water_tower_end", "targetname");
+  v_pos_start = getStruct("water_tower_start", "targetname");
+  v_pos_end = getEnt("water_tower_end", "targetname");
   magicbullet("usrpg_sp", v_pos_start.origin, v_pos_end.origin);
   wait 1;
   magicbullet("usrpg_sp", v_pos_start.origin, v_pos_end.origin);
   level.vh_apache waittill("fire_rocket");
-  e_target = getent("apache_target_1", "targetname");
+  e_target = getEnt("apache_target_1", "targetname");
   level.vh_apache set_turret_target(e_target, undefined, 1);
   level.vh_apache set_turret_target(e_target, undefined, 2);
   level.vh_apache fire_turret(1);
@@ -736,11 +736,11 @@ pakistan_escape_end_triggers() {
 
 fx_exp_glass_hotel_entrance_volume(str_targetname) {
   level endon("hotel_clean_up");
-  info_volume = getent("fx_exp_glass_hotel_entrance_volume", "targetname");
-  s_struct = getstruct(info_volume.target, "targetname");
+  info_volume = getEnt("fx_exp_glass_hotel_entrance_volume", "targetname");
+  s_struct = getStruct(info_volume.target, "targetname");
 
   while(true) {
-    e_ent = getent(str_targetname, "targetname");
+    e_ent = getEnt(str_targetname, "targetname");
 
     if(isDefined(e_ent)) {
       if(e_ent istouching(info_volume)) {
@@ -757,11 +757,11 @@ fx_exp_glass_hotel_entrance_volume(str_targetname) {
 
 fx_exp_glass_hotel_garage_entrance_volume(str_targetname) {
   level endon("hotel_clean_up");
-  info_volume = getent("fx_exp_glass_hotel_garage_entrance_volume", "targetname");
-  s_struct = getstruct(info_volume.target, "targetname");
+  info_volume = getEnt("fx_exp_glass_hotel_garage_entrance_volume", "targetname");
+  s_struct = getStruct(info_volume.target, "targetname");
 
   while(true) {
-    e_ent = getent(str_targetname, "targetname");
+    e_ent = getEnt(str_targetname, "targetname");
 
     if(isDefined(e_ent)) {
       if(e_ent istouching(info_volume)) {
@@ -778,11 +778,11 @@ fx_exp_glass_hotel_garage_entrance_volume(str_targetname) {
 
 fx_exp_glass_hotel_garage_exit_volume(str_targetname) {
   level endon("hotel_clean_up");
-  info_volume = getent("fx_exp_glass_hotel_garage_exit_volume", "targetname");
-  s_struct = getstruct(info_volume.target, "targetname");
+  info_volume = getEnt("fx_exp_glass_hotel_garage_exit_volume", "targetname");
+  s_struct = getStruct(info_volume.target, "targetname");
 
   while(true) {
-    e_ent = getent(str_targetname, "targetname");
+    e_ent = getEnt(str_targetname, "targetname");
 
     if(isDefined(e_ent)) {
       if(e_ent istouching(info_volume)) {
@@ -799,7 +799,7 @@ fx_exp_glass_hotel_garage_exit_volume(str_targetname) {
 
 hotel_approach_wall_hole_damage_trigger() {
   level endon("hotel_clean_up");
-  e_damage_trigger = getent("hotel_approach_wall_hole_damage_trigger", "targetname");
+  e_damage_trigger = getEnt("hotel_approach_wall_hole_damage_trigger", "targetname");
 
   while(true) {
     e_damage_trigger waittill("damage", n_damage, e_attacker, direction_vec, point, damagetype);
@@ -825,14 +825,14 @@ hotel_approach_wall_hole_damage_trigger() {
 }
 
 post_bosses_trigger() {
-  e_trigger = getent("post_bosses_trigger", "targetname");
+  e_trigger = getEnt("post_bosses_trigger", "targetname");
   e_trigger waittill("trigger");
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone thread drone_follow_linked_structs("post_bosses_chopper_path", 110, 1, 1, level.player, 1);
 }
 
 warehouse_approach_catwalk_trigger() {
-  e_trigger = getent("warehouse_approach_catwalk_trigger", "targetname");
+  e_trigger = getEnt("warehouse_approach_catwalk_trigger", "targetname");
   e_trigger waittill("trigger");
   a_ai = getEntArray("warehouse_approach_catwalk_spawner", "targetname");
 
@@ -843,7 +843,7 @@ warehouse_approach_catwalk_trigger() {
 }
 
 warehouse_approach_chopper_trigger() {
-  e_trigger = getent("warehouse_approach_chopper_trigger", "targetname");
+  e_trigger = getEnt("warehouse_approach_chopper_trigger", "targetname");
   e_trigger waittill("trigger");
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone thread drone_follow_linked_structs("warehouse_approach_chopper_path", 20, 1, 1, undefined, 0);
@@ -860,10 +860,10 @@ warehouse_approach_chopper_trigger() {
 ai_run_to_goal_wait_kill_flag(str_killoff_flag) {
   self endon("death");
   self thread run_over();
-  self set_goalradius(48);
+  self set_goalRadius(48);
   self set_ignoreme(1);
   self waittill("goal");
-  self set_goalradius(2048);
+  self set_goalRadius(2048);
   self set_ignoreme(0);
 
   while(true) {
@@ -878,21 +878,21 @@ ai_run_to_goal_wait_kill_flag(str_killoff_flag) {
 }
 
 warehouse_approach_chopper2_trigger() {
-  e_trigger = getent("warehouse_approach_chopper2_trigger", "targetname");
+  e_trigger = getEnt("warehouse_approach_chopper2_trigger", "targetname");
   e_trigger waittill("trigger");
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone thread drone_follow_linked_structs("warehouse_approach_chopper2_path", 24, 1, 1, level.player, 1);
 }
 
 warehouse_approach_chopper3_trigger() {
-  e_trigger = getent("warehouse_approach_chopper3_trigger", "targetname");
+  e_trigger = getEnt("warehouse_approach_chopper3_trigger", "targetname");
   e_trigger waittill("trigger");
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone thread drone_follow_linked_structs("warehouse_approach_chopper3_path", 35, 1, 1, level.player, 1);
 }
 
 warehouse_approach_chopper4_trigger() {
-  e_trigger = getent("warehouse_approach_chopper4_trigger", "targetname");
+  e_trigger = getEnt("warehouse_approach_chopper4_trigger", "targetname");
   e_trigger waittill("trigger");
   level thread enemy_runner_in_warehouse_spawner(2);
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
@@ -900,7 +900,7 @@ warehouse_approach_chopper4_trigger() {
 }
 
 pipes_bosses_chopper1_trigger() {
-  e_trigger = getent("pipes_bosses_chopper1_trigger", "targetname");
+  e_trigger = getEnt("pipes_bosses_chopper1_trigger", "targetname");
   e_trigger waittill("trigger");
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone thread drone_follow_linked_structs("pipes_bosses_chopper1_path", 50, 1, 1, level.player, 1);
@@ -931,7 +931,7 @@ get_the_player_up_drone_vo() {
 
 right_approach_warehouse_soct_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("right_approach_warehouse_soct_trigger", "targetname");
+  e_trigger = getEnt("right_approach_warehouse_soct_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("right_approach_warehouse_soct");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -943,7 +943,7 @@ right_approach_warehouse_soct_trigger(str_endon_notify) {
 
 left_approach_warehouse_soct_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("left_approach_warehouse_soct_trigger", "targetname");
+  e_trigger = getEnt("left_approach_warehouse_soct_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("left_approach_warehouse_soct");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -955,7 +955,7 @@ left_approach_warehouse_soct_trigger(str_endon_notify) {
 
 post_pipes_soct_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("post_pipes_scot_trigger", "targetname");
+  e_trigger = getEnt("post_pipes_scot_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("post_pipes_soct");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -967,7 +967,7 @@ post_pipes_soct_trigger(str_endon_notify) {
 
 post_pipes_elevated_soct_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("post_pipes_scot_trigger", "targetname");
+  e_trigger = getEnt("post_pipes_scot_trigger", "targetname");
   e_trigger waittill("trigger");
   wait 1.0;
   e_soct = spawn_vehicle_from_targetname("post_pipes_elevated_soct");
@@ -980,7 +980,7 @@ post_pipes_elevated_soct_trigger(str_endon_notify) {
 
 big_jump4_water_sheeting_trigger(str_level_endon) {
   level endon(str_level_endon);
-  e_trigger = getent("water_jump4_trigger", "targetname");
+  e_trigger = getEnt("water_jump4_trigger", "targetname");
   e_trigger waittill("trigger");
   level thread pak3_water_sheeting(undefined, 0, 6, 1);
 }

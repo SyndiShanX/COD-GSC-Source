@@ -60,7 +60,7 @@ function function_912776e6(var_f03e723e) {
 }
 
 function private function_7825ee37(var_31d7501a) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   snd::play("fly_combo_lock_safehouse_enter", player);
 
@@ -166,7 +166,7 @@ function private function_ab53f639() {
   }
 
   function_2c85ed08(3);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   snd::play("evt_lockpick_wrench_tighten", player);
   snd::play("evt_kgb_combo_lock_success_whoosh");
   wait 1;

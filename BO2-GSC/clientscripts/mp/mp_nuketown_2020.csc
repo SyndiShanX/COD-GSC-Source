@@ -37,9 +37,9 @@ setupclientsideobjects(localclientnum) {
 
 nuked_car_flip(localclientnum) {
   level thread nuked_dome_explosion_think(localclientnum);
-  car01 = getent(localclientnum, "nuke_animated_car01", "targetname");
-  car02 = getent(localclientnum, "nuke_animated_car02", "targetname");
-  displayglass = getent(localclientnum, "nuke_display_glass_client", "targetname");
+  car01 = getEnt(localclientnum, "nuke_animated_car01", "targetname");
+  car02 = getEnt(localclientnum, "nuke_animated_car02", "targetname");
+  displayglass = getEnt(localclientnum, "nuke_display_glass_client", "targetname");
   assert(isDefined(car01));
   assert(isDefined(car02));
   assert(isDefined(displayglass));
@@ -79,11 +79,11 @@ flag_think(localclientnum) {
 
 rotate_flags() {
   level waittill("bomb_drop");
-  self rotateto((0, randomintrange(75, 105), 0), randomfloatrange(0.5, 0.65));
+  self rotateTo((0, randomintrange(75, 105), 0), randomfloatrange(0.5, 0.65));
 }
 
 nuked_energy_sign_think(localclientnum) {
-  spin_a_model = getent(localclientnum, "nuketown_sign_topper", "targetname");
+  spin_a_model = getEnt(localclientnum, "nuketown_sign_topper", "targetname");
   spin_a_model thread spinner_rotate(15);
 }
 
@@ -99,7 +99,7 @@ spinner_rotate_match(step) {
   resetangles = self.angles;
 
   for(;;) {
-    self rotateyaw(step, 60);
+    self rotateYaw(step, 60);
     self waittill("rotatedone");
     self.angles = resetangles;
   }

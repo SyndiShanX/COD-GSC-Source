@@ -51,7 +51,7 @@ function pers_upgrades_monitor() {
   level thread wait_for_game_end();
   while(true) {
     waittillframeend();
-    players = getplayers();
+    players = getPlayers();
     for(player_index = 0; player_index < players.size; player_index++) {
       player = players[player_index];
       if(zm_utility::is_player_valid(player) && isDefined(player.stats_this_frame)) {
@@ -118,7 +118,7 @@ function wait_for_game_end() {
     return;
   }
   level waittill("end_game");
-  players = getplayers();
+  players = getPlayers();
   for(player_index = 0; player_index < players.size; player_index++) {
     player = players[player_index];
     for(index = 0; index < level.pers_upgrades_keys.size; index++) {

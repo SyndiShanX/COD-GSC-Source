@@ -394,7 +394,7 @@ function private function_5276dd35(entity, asmstatename) {
 }
 
 function private function_744a18d6(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
-  entity orientmode("face direction", vectornormalize(level.vh_tank.origin - entity.origin));
+  entity orientmode("face direction", vectorNormalize(level.vh_tank.origin - entity.origin));
 }
 
 function private function_6024ae49(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
@@ -459,7 +459,7 @@ function function_eeec66f5(mechz) {
 
 function function_8166f050(entity) {
   do_tank_sweep_auto_damage = isDefined(self.doing_tank_sweep) && self.doing_tank_sweep && !level.vh_tank flag::get("tank_moving");
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!(isDefined(player.is_burning) && player.is_burning)) {
       if(do_tank_sweep_auto_damage && player zm_tomb_tank::entity_on_tank() || player istouching(entity.flametrigger)) {
@@ -650,7 +650,7 @@ function jump_pos_used_cooldown() {
 
 function mechz_health_increases() {
   if(!isDefined(level.mechz_last_spawn_round) || level.round_number > level.mechz_last_spawn_round) {
-    a_players = getplayers();
+    a_players = getPlayers();
     n_player_modifier = 1;
     if(a_players.size > 1) {
       n_player_modifier = a_players.size * 0.75;
@@ -783,7 +783,7 @@ function mechz_robot_stomp_callback() {
 
 function response_to_air_raid_siren_vo() {
   wait(3);
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size == 0) {
     return;
   }
@@ -821,7 +821,7 @@ function start_see_mech_zombie_vo() {
       ai_mechz = zombie;
     }
   }
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size == 0) {
     return;
   }
@@ -868,7 +868,7 @@ function play_shoot_arm_hint_vo() {
     if(!isDefined(self.e_grabbed)) {
       return;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       if(player == self.e_grabbed) {
         continue;
@@ -892,7 +892,7 @@ function mechz_hint_vo() {
 
 function shoot_mechz_head_vo() {
   self endon("death");
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(isDefined(self.e_grabbed) && self.e_grabbed == player) {
       continue;
@@ -909,7 +909,7 @@ function shoot_mechz_head_vo() {
 }
 
 function mechz_jump_vo() {
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(distancesquared(self.origin, player.origin) < 1000000) {
       if(player zm_utility::is_player_looking_at(self.origin + vectorscale((0, 0, 1), 60), 0.5)) {
@@ -925,7 +925,7 @@ function mechz_jump_vo() {
 function mechz_stomped_by_giant_robot_vo() {
   self endon("death");
   wait(5);
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(distancesquared(self.origin, player.origin) < 1000000) {
       if(player zm_utility::is_player_looking_at(self.origin + vectorscale((0, 0, 1), 60), 0.75)) {

@@ -500,7 +500,7 @@ _id_2978() {
 
 _id_477B(var_0) {
   wait 0.25;
-  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 waittill("death");
   _id_2978();
 }
@@ -644,7 +644,7 @@ _id_EB79(var_0) {
   self.origin = self.origin + anglestoup(self.angles) * 3;
 
   if(isDefined(var_1)) {
-    self linkto(var_1);
+    self linkTo(var_1);
   }
 
   thread _id_EB7A(var_0);

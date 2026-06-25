@@ -246,7 +246,7 @@ start_inert(in_place) {
   }
 
   if(isDefined(self.doing_equipment_attack) && self.doing_equipment_attack) {
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   if(isDefined(self.inert_delay)) {

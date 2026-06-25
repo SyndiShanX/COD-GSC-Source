@@ -129,27 +129,27 @@ setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3) {
   self.heli[bone_location] = spawnStruct();
   self.heli[bone_location].sound_type = type;
   self.heli[bone_location].run = spawn(0, self.origin, "script_origin");
-  self.heli[bone_location].run linkto(self, tag);
+  self.heli[bone_location].run linkTo(self, tag);
   self.heli[bone_location].run.alias = run;
   self.sound_ents[self.sound_ents.size] = self.heli[bone_location].run;
   self thread delete_loop_sound_save_restore(self.heli[bone_location].run);
   if(isDefined(dmg1)) {
     self.heli[bone_location].dmg1 = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].dmg1 linkto(self, tag);
+    self.heli[bone_location].dmg1 linkTo(self, tag);
     self.heli[bone_location].dmg1.alias = dmg1;
     self.sound_ents[self.sound_ents.size] = self.heli[bone_location].dmg1;
     self thread delete_loop_sound_save_restore(self.heli[bone_location].dmg1);
   }
   if(isDefined(dmg2)) {
     self.heli[bone_location].idle = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].idle linkto(self, tag);
+    self.heli[bone_location].idle linkTo(self, tag);
     self.heli[bone_location].idle.alias = dmg2;
     self.sound_ents[self.sound_ents.size] = self.heli[bone_location].dmg2;
     self thread delete_loop_sound_save_restore(self.heli[bone_location].dmg2);
   }
   if(isDefined(dmg3)) {
     self.heli[bone_location].idle = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].idle linkto(self, tag);
+    self.heli[bone_location].idle linkTo(self, tag);
     self.heli[bone_location].idle.alias = dmg3;
     self.sound_ents[self.sound_ents.size] = self.heli[bone_location].dmg3;
     self thread delete_loop_sound_save_restore(self.heli[bone_location].dmg3);

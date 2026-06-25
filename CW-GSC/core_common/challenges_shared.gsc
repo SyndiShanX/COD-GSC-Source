@@ -863,7 +863,7 @@ function function_57d8515c() {
   for(;;) {
     wait level.controllerparticipationcheckinterval;
     playerschecked = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player) || !isPlayer(player) || isbot(player)) {
@@ -1283,7 +1283,7 @@ function earnedempassistscore(score) {
 }
 
 function teamcompletedchallenge(team, challenge) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].team) && players[i].team == team) {

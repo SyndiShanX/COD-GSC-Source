@@ -669,7 +669,7 @@ update_selected_object_position() {
       vector = trace["position"] + (0, 0, level.selected_object_z_offset);
 
       if(vector != object.origin) {
-        object moveto(vector, 0.1);
+        object moveTo(vector, 0.1);
         object waittill("movedone");
       }
     }
@@ -707,7 +707,7 @@ move_selected_object(with_trace) {
       vector = level.debug_player getEye() + vectorscale(forward, level.selected_object_dist);
 
     if(vector != self.origin) {
-      self moveto(vector, 0.1);
+      self moveTo(vector, 0.1);
       self waittill("movedone");
     } else
       wait 0.1;
@@ -1031,7 +1031,7 @@ object_highlight(objects) {
     }
 
     ent = objects[i];
-    difference = vectornormalize(ent.origin - (level.debug_player.origin + vectorscale((0, 0, 1), 55.0)));
+    difference = vectorNormalize(ent.origin - (level.debug_player.origin + vectorscale((0, 0, 1), 55.0)));
     newdot = vectordot(forward, difference);
 
     if(newdot < dot) {

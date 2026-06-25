@@ -15,8 +15,8 @@ teleporter_init() {
   thread enable_zone_portals_init();
   thread open_portal_rooms();
   thread pack_hideaway_init();
-  poi1 = GetEnt("pack_room_poi1", "targetname");
-  poi2 = GetEnt("pack_room_poi2", "targetname");
+  poi1 = getEnt("pack_room_poi1", "targetname");
+  poi2 = getEnt("pack_room_poi2", "targetname");
   poi1 create_zombie_point_of_interest(undefined, 30, 0, false);
   poi1 thread create_zombie_point_of_interest_attractor_positions(4, 45);
   poi2 create_zombie_point_of_interest(undefined, 30, 0, false);
@@ -31,31 +31,31 @@ teleport_pad_init() {
   }
 }
 pack_hideaway_init() {
-  hideaway = GetEnt("pack_hideaway", "targetname");
+  hideaway = getEnt("pack_hideaway", "targetname");
   parts = getEntArray(hideaway.target, "targetname");
-  level.punch_trigger = GetEnt("zombie_vending_upgrade", "targetname");
-  level.punch_machine = GetEnt(level.punch_trigger.target, "targetname");
-  level.punch_sign = GetEnt(level.punch_machine.target, "targetname");
-  level.punch_sign LinkTo(level.punch_machine);
+  level.punch_trigger = getEnt("zombie_vending_upgrade", "targetname");
+  level.punch_machine = getEnt(level.punch_trigger.target, "targetname");
+  level.punch_sign = getEnt(level.punch_machine.target, "targetname");
+  level.punch_sign linkTo(level.punch_machine);
   if(isDefined(level.punch_trigger)) {
-    level.punch_trigger EnableLinkTo();
-    level.punch_trigger LinkTo(hideaway);
+    level.punch_trigger EnablelinkTo();
+    level.punch_trigger linkTo(hideaway);
   }
   if(isDefined(level.punch_machine)) {
-    level.punch_machine LinkTo(hideaway);
+    level.punch_machine linkTo(hideaway);
   }
-  pack_audio_trig = GetEnt("pack_audio_trig", "script_noteworthy");
-  pack_audio_trig EnableLinkTo();
-  pack_audio_trig LinkTo(hideaway);
+  pack_audio_trig = getEnt("pack_audio_trig", "script_noteworthy");
+  pack_audio_trig EnablelinkTo();
+  pack_audio_trig linkTo(hideaway);
   if(isDefined(parts)) {
     for(i = 0; i < parts.size; i++) {
-      parts[i] LinkTo(hideaway);
+      parts[i] linkTo(hideaway);
     }
   }
   while(true) {
     flag_wait("open_pack_hideaway");
     hideaway NotSolid();
-    hideaway RotateYaw(180, 2.5);
+    hideaway rotateYaw(180, 2.5);
     hideaway playSound("evt_packapunch_revolve_start");
     hideaway playLoopSound("evt_packapunch_revolve_loop");
     hideaway waittill("rotatedone");
@@ -70,13 +70,13 @@ pack_hideaway_init() {
         wait(0.1);
       }
     }
-    level.punch_sign LinkTo(level.punch_machine);
+    level.punch_sign linkTo(level.punch_machine);
     level.punch_trigger trigger_off();
     players = get_players();
     for(i = 0; i < players.size; i++) {
       level.punch_trigger SetInvisibleToPlayer(players[i]);
     }
-    hideaway RotateYaw(180, 2.5);
+    hideaway rotateYaw(180, 2.5);
     hideaway playSound("evt_packapunch_revolve_start");
     hideaway playLoopSound("evt_packapunch_revolve_loop");
     flag_clear("open_pack_hideaway");
@@ -87,23 +87,23 @@ pack_hideaway_init() {
   }
 }
 pack_door_init() {
-  trigger = GetEnt("pack_room_door", "targetname");
+  trigger = getEnt("pack_room_door", "targetname");
   doors = getEntArray(trigger.target, "targetname");
-  pack_door_slam = GetEnt("slam_pack_door", "targetname");
+  pack_door_slam = getEnt("slam_pack_door", "targetname");
   pack_door_open = false;
   while(true) {
-    trigger sethintstring(&"ZOMBIE_PENTAGON_PACK_ROOM_DOOR");
-    trigger setcursorhint("HINT_NOICON");
+    trigger setHintString(&"ZOMBIE_PENTAGON_PACK_ROOM_DOOR");
+    trigger setCursorHint("HINT_NOICON");
     level waittill("defcon_reset");
     players = get_players();
     if(level.zones["conference_level2"].is_occupied) {
       if(level.zones["war_room_zone_south"].is_enabled && !flag("bonfire_reset")) {
-        trigger sethintstring("");
+        trigger setHintString("");
         for(i = 0; i < doors.size; i++) {
           doors[i].start_angles = doors[i].angles;
           if(isDefined(doors[i].script_angles)) {
             doors[i] NotSolid();
-            doors[i] RotateTo(doors[i].script_angles, 1.0);
+            doors[i] rotateTo(doors[i].script_angles, 1.0);
             play_sound_at_pos("door_rotate_open", doors[i].origin);
             doors[i] thread pack_door_solid_thread();
           }
@@ -120,7 +120,7 @@ pack_door_init() {
         for(i = 0; i < doors.size; i++) {
           if(isDefined(doors[i].script_angles)) {
             doors[i] NotSolid();
-            doors[i] RotateTo(doors[i].start_angles, 0.25);
+            doors[i] rotateTo(doors[i].start_angles, 0.25);
             play_sound_at_pos("door_rotate_open", doors[i].origin);
             doors[i] thread pack_door_solid_thread();
           }
@@ -136,8 +136,8 @@ pack_door_init() {
   }
 }
 is_packroom_clear() {
-  pack_door_slam = GetEnt("slam_pack_door", "targetname");
-  pack_room_trig = GetEnt("pack_room_trigger", "targetname");
+  pack_door_slam = getEnt("slam_pack_door", "targetname");
+  pack_room_trig = getEnt("pack_room_trigger", "targetname");
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(players[i] IsTouching(pack_door_slam)) {
@@ -178,7 +178,7 @@ pack_door_solid_thread() {
       if(self.angles != self.start_angles) {
         self ConnectPaths();
       } else {
-        self DisconnectPaths();
+        self disconnectPaths();
       }
       return;
     }
@@ -186,7 +186,7 @@ pack_door_solid_thread() {
   }
 }
 clear_zombies_in_packroom() {
-  pack_room_trig = GetEnt("pack_room_trigger", "targetname");
+  pack_room_trig = getEnt("pack_room_trigger", "targetname");
   if(flag("thief_round")) {
     return;
   }
@@ -292,11 +292,11 @@ teleport_player(user) {
   }
   wait_network_frame();
   playFX(level._effect["transporter_start"], user.origin);
-  playsoundatposition("evt_teleporter_out", user.origin);
-  user SetOrigin(desired_origin);
+  playSoundAtPosition("evt_teleporter_out", user.origin);
+  user setOrigin(desired_origin);
   user SetPlayerAngles(destination.angles);
   playFX(level._effect["transporter_beam"], user.origin);
-  playsoundatposition("evt_teleporter_go", user.origin);
+  playSoundAtPosition("evt_teleporter_go", user.origin);
   wait(0.5);
   user enableweapons();
   user enableoffhandweapons();
@@ -359,7 +359,7 @@ delete_zombie_noone_looking(how_close, verticle_only, need_to_see) {
   }
   self.inview = 0;
   self.player_close = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     can_be_seen = self player_can_see_me(players[i]);
     if(can_be_seen) {
@@ -406,11 +406,11 @@ delete_zombie_noone_looking(how_close, verticle_only, need_to_see) {
 player_can_see_me(player) {
   playerAngles = player getplayerangles();
   playerForwardVec = anglesToForward(playerAngles);
-  playerUnitForwardVec = VectorNormalize(playerForwardVec);
+  playerUnitForwardVec = vectorNormalize(playerForwardVec);
   banzaiPos = self.origin;
   playerPos = player GetOrigin();
   playerToBanzaiVec = banzaiPos - playerPos;
-  playerToBanzaiUnitVec = VectorNormalize(playerToBanzaiVec);
+  playerToBanzaiUnitVec = vectorNormalize(playerToBanzaiVec);
   forwardDotBanzai = VectorDot(playerUnitForwardVec, playerToBanzaiUnitVec);
   angleFromCenter = ACos(forwardDotBanzai);
   playerFOV = GetDvarFloat(#"cg_fov");
@@ -422,11 +422,11 @@ player_can_see_me(player) {
   return playerCanSeeMe;
 }
 open_portal_rooms() {
-  yellow_conf_screen = GetEnt("yellow_conf_screen", "targetname");
-  power_room_screen = GetEnt("power_room_screen", "targetname");
-  jfk_room_screen = GetEnt("jfk_room_screen", "targetname");
-  war_room_screen_north = GetEnt("war_room_screen_north", "targetname");
-  war_room_screen_ramp = GetEnt("war_room_screen_ramp", "targetname");
+  yellow_conf_screen = getEnt("yellow_conf_screen", "targetname");
+  power_room_screen = getEnt("power_room_screen", "targetname");
+  jfk_room_screen = getEnt("jfk_room_screen", "targetname");
+  war_room_screen_north = getEnt("war_room_screen_north", "targetname");
+  war_room_screen_ramp = getEnt("war_room_screen_ramp", "targetname");
   flag_wait("power_on");
   yellow_conf_screen playSound("evt_teleporter_door_short");
   yellow_conf_screen MoveZ(116, 1.5);
@@ -445,7 +445,7 @@ open_portal_rooms() {
   war_room_screen_north ConnectPaths();
 }
 war_room_portal_door() {
-  war_room_screen_south = GetEnt("war_room_screen_south", "targetname");
+  war_room_screen_south = getEnt("war_room_screen_south", "targetname");
   war_room_screen_south playSound("evt_teleporter_door_short");
   war_room_screen_south MoveZ(-120, 1.5);
   war_room_screen_south waittill("movedone");
@@ -518,7 +518,7 @@ zombie_through_portal(portal_enter, portal_exit, targeted_player) {
     self[[self.pre_teleport_func]]();
   }
   playFX(level._effect["transporter_start"], self.origin);
-  playsoundatposition("evt_teleporter_out", portal_enter.origin);
+  playSoundAtPosition("evt_teleporter_out", portal_enter.origin);
   final_destination = getStructArray(portal_exit.target, "targetname");
   for(i = 0; i < final_destination.size; i++) {
     if(isDefined(final_destination[i].script_noteworthy) && final_destination[i].script_noteworthy == "zombie_pos") {
@@ -527,7 +527,7 @@ zombie_through_portal(portal_enter, portal_exit, targeted_player) {
   }
   self forceteleport(portal_exit.origin + (anglesToForward(portal_exit.angles) * RandomFloatRange(0, 64)), portal_exit.angles);
   playFX(level._effect["transporter_beam"], portal_exit.origin);
-  playsoundatposition("evt_teleporter_go", portal_exit.origin);
+  playSoundAtPosition("evt_teleporter_go", portal_exit.origin);
   self.teleporting = false;
   self.ignoreall = false;
   self thread maps\_zombiemode_spawner::find_flesh();
@@ -551,8 +551,8 @@ pentagon_packapunch_init() {
   }
 }
 defcon_sign_setup() {
-  self SetHintString(&"ZOMBIE_NEED_POWER");
-  self setcursorhint("HINT_NOICON");
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
   flag_wait("power_on");
   self.lights = getEntArray(self.target, "targetname");
   if(isDefined(self.lights)) {
@@ -563,9 +563,9 @@ defcon_sign_setup() {
     }
   }
   while(true) {
-    self SetHintString(&"ZOMBIE_PENTAGON_DEFCON_SWITCH");
+    self setHintString(&"ZOMBIE_PENTAGON_DEFCON_SWITCH");
     self waittill("trigger", user);
-    self SetHintString("");
+    self setHintString("");
     if(isDefined(self.lights)) {
       for(j = 0; j < self.lights.size; j++) {
         if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "defcon_bulb") {
@@ -694,8 +694,8 @@ special_pack_cleanup() {
 defcon_pack_poi() {
   zone_name = "conference_level2";
   players = get_players();
-  poi1 = GetEnt("pack_room_poi1", "targetname");
-  poi2 = GetEnt("pack_room_poi2", "targetname");
+  poi1 = getEnt("pack_room_poi1", "targetname");
+  poi2 = getEnt("pack_room_poi2", "targetname");
   wait(0.5);
   num_players = maps\_zombiemode_zone_manager::get_players_in_zone(zone_name);
   if(num_players == players.size) {
@@ -721,7 +721,7 @@ check_if_empty_floors() {
   num_floor1_laststand = 0;
   num_floor2_laststand = 0;
   num_floor3_laststand = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i].floor = maps\_zombiemode_ai_thief::thief_check_floor(players[i]);
     if(players[i].floor == 1) {
@@ -819,11 +819,11 @@ send_zombies_out(portal) {
     wait(0.1);
   }
   playFX(level._effect["transporter_start"], self.origin);
-  playsoundatposition("evt_teleporter_out", self.origin);
+  playSoundAtPosition("evt_teleporter_out", self.origin);
   if(portal == level.portal_pack) {
     self forceteleport(level.portal_mid.origin + (anglesToForward(level.portal_mid.angles) * RandomFloatRange(0, 32)), level.portal_mid.angles);
     playFX(level._effect["transporter_beam"], level.portal_top.origin);
-    playsoundatposition("evt_teleporter_go", level.portal_top.origin);
+    playSoundAtPosition("evt_teleporter_go", level.portal_top.origin);
     self thread cleanup_unoccupied_floor(move_speed);
   } else {
     self thread cleanup_unoccupied_floor(move_speed);
@@ -880,15 +880,15 @@ cleanup_unoccupied_floor(move_speed, current_floor, next_floor) {
       num = RandomIntRange(0, level.portal_bottom.size);
       self forceteleport(level.portal_bottom[num].origin + (anglesToForward(level.portal_bottom[num].angles) * RandomFloatRange(0, 32)), level.portal_bottom[num].angles);
       playFX(level._effect["transporter_beam"], level.portal_bottom[num].origin);
-      playsoundatposition("evt_teleporter_go", level.portal_bottom[num].origin);
+      playSoundAtPosition("evt_teleporter_go", level.portal_bottom[num].origin);
     } else if(num_floor2 > 0 && num_floor2 != num_floor2_laststand && self.floor != 2) {
       self forceteleport(level.portal_mid.origin + (anglesToForward(level.portal_mid.angles) * RandomFloatRange(0, 32)), level.portal_mid.angles);
       playFX(level._effect["transporter_beam"], level.portal_mid.origin);
-      playsoundatposition("evt_teleporter_go", level.portal_mid.origin);
+      playSoundAtPosition("evt_teleporter_go", level.portal_mid.origin);
     } else if(num_floor1 > 0 && num_floor1 != num_floor1_laststand && self.floor != 1) {
       self forceteleport(level.portal_top.origin + (anglesToForward(level.portal_top.angles) * RandomFloatRange(0, 32)), level.portal_top.angles);
       playFX(level._effect["transporter_beam"], level.portal_top.origin);
-      playsoundatposition("evt_teleporter_go", level.portal_top.origin);
+      playSoundAtPosition("evt_teleporter_go", level.portal_top.origin);
     }
     self.teleporting = false;
     self.ignoreall = false;
@@ -959,8 +959,8 @@ cleanup_unoccupied_floor(move_speed, current_floor, next_floor) {
   }
 }
 teleporter_power_cable() {
-  cable_on = GetEnt("teleporter_link_cable_on", "targetname");
-  cable_off = GetEnt("teleporter_link_cable_off", "targetname");
+  cable_on = getEnt("teleporter_link_cable_on", "targetname");
+  cable_off = getEnt("teleporter_link_cable_off", "targetname");
   cable_on Hide();
   flag_wait("power_on");
   cable_off Hide();

@@ -216,7 +216,7 @@ _id_62C3() {
       continue;
     }
     var_4 = var_3.origin - self.origin;
-    var_4 = vectornormalize(var_4);
+    var_4 = vectorNormalize(var_4);
     var_5 = vectordot(var_4, var_0);
 
     if(var_5 < 0.707107) {
@@ -351,7 +351,7 @@ _id_BD64() {
   }
 
   foreach(var_8 in var_6) {
-    var_15 = vectordot(var_2, vectornormalize(var_8.origin - var_0));
+    var_15 = vectordot(var_2, vectorNormalize(var_8.origin - var_0));
 
     if(!isDefined(var_4) || var_4 < var_15) {
       var_4 = var_15;

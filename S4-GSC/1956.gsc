@@ -2005,7 +2005,7 @@ _id_80E1() {
   level._id_F5B5[0] = ::_id_F5E0;
 }
 
-getstruct(var_0, var_1) {
+getStruct(var_0, var_1) {
   var_2 = level._id_EA70[var_1][var_0];
 
   if(!isDefined(var_2)) {
@@ -2279,7 +2279,7 @@ _id_4796(var_0, var_1) {
 }
 
 _id_6D99(var_0, var_1) {
-  var_2 = getstruct(var_0, var_1);
+  var_2 = getStruct(var_0, var_1);
   _id_4794(var_2);
   return var_2;
 }
@@ -2291,13 +2291,13 @@ _id_6D9B(var_0, var_1, var_2) {
 }
 
 _id_6A02(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;
   }
 
-  return getstruct(var_0, var_1);
+  return getStruct(var_0, var_1);
 }
 
 _id_5A3A(var_0) {}
@@ -3356,7 +3356,7 @@ _id_5CDB(var_0, var_1) {
     var_1 = (0, 0, 1);
   }
 
-  var_2 = vectornormalize(var_0 - vectordot(var_1, var_0) * var_1);
+  var_2 = vectorNormalize(var_0 - vectordot(var_1, var_0) * var_1);
   return var_2;
 }
 
@@ -3670,13 +3670,13 @@ _id_4EFF(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 = 1;
   var_7 = 0;
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
 
   if(var_1 == (0, 0, 1)) {
     var_8 = (1, 0, 0);
   }
 
-  var_8 = vectornormalize(_func_025B(var_1, (0, 0, 1)));
+  var_8 = vectorNormalize(_func_025B(var_1, (0, 0, 1)));
   var_9 = _func_025B(var_1, var_8);
   var_10 = var_1 * var_3 * cos(var_2);
   var_11 = var_3 * sin(var_2);
@@ -3909,7 +3909,7 @@ _id_67AA(var_0) {
     var_0 = self.target;
   }
 
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -3929,7 +3929,7 @@ _id_67AA(var_0) {
     }
   }
 
-  var_1 = getstruct(var_0, "targetname");
+  var_1 = getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -4024,7 +4024,7 @@ _id_B2DC(var_0, var_1, var_2, var_3, var_4) {
   var_5.angles = var_2;
 
   if(isDefined(var_4)) {
-    var_5 linkto(var_4);
+    var_5 linkTo(var_4);
   }
 
   if(scripts\common\utility::issp()) {
@@ -4152,11 +4152,11 @@ _id_B278(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2.origin = self.origin + var_1;
     var_2.angles = self.angles;
-    var_2 linkto(self);
+    var_2 linkTo(self);
   } else {
     var_2.origin = self.origin;
     var_2.angles = self.angles;
-    var_2 linkto(self);
+    var_2 linkTo(self);
   }
 
   var_2 playLoopSound(var_0);
@@ -4416,7 +4416,7 @@ _id_B433(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_10E76(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_2 - var_0);
+  var_4 = vectorNormalize(var_2 - var_0);
   var_5 = anglesToForward(var_1);
   var_6 = vectordot(var_5, var_4);
   return var_6 >= var_3;
@@ -4444,7 +4444,7 @@ _id_6969(var_0, var_1, var_2) {
 
 _id_9F67(var_0, var_1, var_2) {
   var_2 = ter_op(isDefined(var_2), var_2, (0, 0, 0));
-  self missile_settargetent(var_0, var_2);
+  self missile_settargetEnt(var_0, var_2);
 
   switch (var_1) {
     case "direct":

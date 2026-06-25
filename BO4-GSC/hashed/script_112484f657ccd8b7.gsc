@@ -28,7 +28,7 @@ __init__() {
 on_begin(var_c8a36f90) {
   level.var_2bd4c60 = isDefined(var_c8a36f90) ? var_c8a36f90 : "movement";
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_1633056a();
   }
 }
@@ -36,7 +36,7 @@ on_begin(var_c8a36f90) {
 on_end(round_reset) {
   level.var_2bd4c60 = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::reset(#"hash_10a425ccc9bbccad", "health_regen");
   }
 }

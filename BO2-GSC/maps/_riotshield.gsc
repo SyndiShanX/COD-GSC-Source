@@ -132,7 +132,7 @@ watchriotshielddeploy() {
       self switchtoweapon(primaries[0]);
       self.riotshieldretrievetrigger = item_ent;
       self.riotshieldentity = shield_ent;
-      self.riotshieldentity disconnectpaths();
+      self.riotshieldentity disconnectPaths();
       self thread watchdeployedriotshieldents();
       self thread deleteshieldondamage(self.riotshieldentity);
       self thread deleteshieldmodelonweaponpickup(self.riotshieldretrievetrigger);

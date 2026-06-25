@@ -969,7 +969,7 @@ spawnendofgame() {
   var_1 = maps\mp\gametypes\_spawnlogic::getspawnpoint_random(var_0);
   self spawn(var_1.origin, var_1.angles);
   var_1 setModel("tag_origin");
-  self playerlinkto(var_1);
+  self playerlinkTo(var_1);
   self playerhide();
   maps\mp\_utility::freezecontrolswrapper(1);
   self disableammogeneration();

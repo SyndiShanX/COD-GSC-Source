@@ -210,7 +210,7 @@ func_9363() {
   var_0 hide();
   var_0 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
   var_0 setModel(level.var_9385[self.var_9386].modelbombsquad);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 setcontents(0);
   self.bombsquadmodel = var_0;
   self waittill("death");
@@ -528,8 +528,8 @@ func_9371(var_0) {
 }
 
 func_9375() {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_9385[self.var_9386].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.var_9385[self.var_9386].hintstring);
   var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
 
@@ -603,7 +603,7 @@ func_9375() {
   var_16 = spawn("trigger_radius", self.origin, 0, 256, 100);
   self.var_2536 = var_16;
   self.var_2536 getrankxp();
-  self.var_2536 linkto(self);
+  self.var_2536 linkTo(self);
   self.var_2528 = length(self.var_2514) / 200;
   func_937F();
   func_937B();
@@ -791,8 +791,8 @@ func_6D2C(var_0, var_1) {
   var_4 = self.config.weaponinfo;
   var_5 = self.owner;
   var_2 unlink();
-  var_2 rotateyaw(3600, self.var_2528);
-  var_2 moveto(self.var_2514 + self.origin, self.var_2528, self.var_2528 * 0.25, self.var_2528 * 0.25);
+  var_2 rotateYaw(3600, self.var_2528);
+  var_2 moveTo(self.var_2514 + self.origin, self.var_2528, self.var_2528 * 0.25, self.var_2528 * 0.25);
 
   if(isDefined(var_2.killcament)) {
     var_6 = var_2.killcament;
@@ -802,7 +802,7 @@ func_6D2C(var_0, var_1) {
       self.owner.var_9381 = var_6;
     }
 
-    var_6 moveto(self.var_2514 + self.origin + self.config.killcamoffset, self.var_2528, self.var_2528 * 0.25, self.var_2528 * 0.25);
+    var_6 moveTo(self.var_2514 + self.origin + self.config.killcamoffset, self.var_2528, self.var_2528 * 0.25, self.var_2528 * 0.25);
 
     if(!func_C229()) {
       var_6 thread deleteaftertime(5.0);
@@ -880,7 +880,7 @@ func_937E(var_0) {
   var_1 setModel(self.config.var_6A03);
   var_1.angles = self.angles;
   var_1.killcament = self.var_A637[var_0 - 1];
-  var_1.killcament linkto(self);
+  var_1.killcament linkTo(self);
   return var_1;
 }
 
@@ -893,7 +893,7 @@ func_937F() {
     }
 
     var_1 = func_937E(var_0);
-    var_1 linkto(self);
+    var_1 linkTo(self);
     self.var_69F6 = var_1;
   }
 }

@@ -17,9 +17,9 @@ func_10730(var_0, var_1, var_2) {
 
   var_3 glinton(#animtree);
   if(isDefined(var_1)) {
-    var_3 linkto(var_1, var_2, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_1, var_2, (0, 0, 0), (0, 0, 0));
   } else if(self != level && self != level.player && isDefined(self.model)) {
-    var_3 linkto(self, "tag_playerhelmet", (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(self, "tag_playerhelmet", (0, 0, 0), (0, 0, 0));
   }
 
   if(!isDefined(level.player.helmet)) {
@@ -283,7 +283,7 @@ func_8E02(var_0) {
   if(self != level && self != level.player && isDefined(self.model)) {
     level.player.helmet = func_10730();
     if(isDefined(level.player.helmet)) {
-      level.player.helmet linkto(self, "tag_playerhelmet", (0, 0, 0), (0, 0, 0));
+      level.player.helmet linkTo(self, "tag_playerhelmet", (0, 0, 0), (0, 0, 0));
     }
   }
 

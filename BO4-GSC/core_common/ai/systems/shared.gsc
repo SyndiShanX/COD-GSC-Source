@@ -39,7 +39,7 @@ stowweapon(weapon, positionoffset, orientationoffset) {
 
   weaponmodel = spawn("script_model", (0, 0, 0));
   weaponmodel setModel(weapon.worldmodel);
-  weaponmodel linkto(entity, "tag_stowed_back", positionoffset, orientationoffset);
+  weaponmodel linkTo(entity, "tag_stowed_back", positionoffset, orientationoffset);
   entity thread _throwstowedweapon(entity, weapon, weaponmodel);
 }
 
@@ -177,7 +177,7 @@ throwweapon(weapon, positiontag, scavenger, deleteweaponafterdropping) {
     endposition = self gettagorigin(positiontag);
     endangles = self gettagangles(positiontag);
     linearvelocity = (endposition - startposition) * 1 / waittime * linearscalar;
-    angularvelocity = vectornormalize(endangles - startangles) * angularscalar;
+    angularvelocity = vectorNormalize(endangles - startangles) * angularscalar;
     throwweapon = self dropweapon(weapon, positiontag, linearvelocity, angularvelocity, scavenger);
 
     if(isDefined(throwweapon)) {

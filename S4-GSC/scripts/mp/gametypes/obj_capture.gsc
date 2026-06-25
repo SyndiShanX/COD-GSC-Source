@@ -28,7 +28,7 @@ _id_3FA5(var_0, var_1, var_2) {
 }
 
 _id_3FA8(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_3)) {
     scripts\engine\utility::_id_5598("No model named " + var_0 + " found!");
@@ -60,7 +60,7 @@ _id_3FA8(var_0, var_1, var_2) {
 }
 
 _id_3FE8(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_4)) {
     scripts\engine\utility::_id_5598("No goal trigger named " + var_4 + " found!");

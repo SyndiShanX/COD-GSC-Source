@@ -56,7 +56,7 @@ birds_createents() {
   for(var_1 = 1; var_1 <= self.interactive_number; var_1++) {
     self.birds[var_1] = spawn("script_model", self gettagorigin("tag_bird" + var_1));
     self.birds[var_1] setModel(var_0.bird_model["idle"]);
-    self.birds[var_1] linkto(self, "tag_bird" + var_1);
+    self.birds[var_1] linkTo(self, "tag_bird" + var_1);
 
     if(common_scripts\utility::issp()) {
       self.birds[var_1] call[[level.func["useanimtree"]]](var_0.bird_animtree);
@@ -84,7 +84,7 @@ birds_createents() {
 
 birds_setupconnectedperches(var_0, var_1) {
   if(!isDefined(var_0)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
   }
 
   var_2 = spawnStruct();
@@ -168,7 +168,7 @@ birds_setupconnectedperches(var_0, var_1) {
           var_20 = getnode(var_19, "targetname");
 
           if(!isDefined(var_20)) {
-            var_20 = getent(var_19, "targetname");
+            var_20 = getEnt(var_19, "targetname");
 
             if(isDefined(var_20)) {
               var_20 = birds_setupconnectedperches(var_20);
@@ -433,7 +433,7 @@ birds_set_flying_angles(var_0, var_1, var_2, var_3) {
         var_8 = vectortoangles(var_7);
         var_9 = var_8 - var_5;
         var_9 = (angleclamp180(var_9[0]) / 3, angleclamp180(var_9[1]), 0);
-        var_3[var_4] linkto(var_0, "tag_bird" + var_4, (0, 0, 0), var_9);
+        var_3[var_4] linkTo(var_0, "tag_bird" + var_4, (0, 0, 0), var_9);
       }
     }
   }

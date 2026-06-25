@@ -149,7 +149,7 @@ createBallDrone(ballDroneType) {
 
   attempts = 3;
   while(trace["surfacetype"] != "none" && attempts > 0) {
-    startPos = self.origin + (VectorNormalize(playerStartPos - trace["position"]) * 5);
+    startPos = self.origin + (vectorNormalize(playerStartPos - trace["position"]) * 5);
     trace = bulletTrace(playerStartPos, startPos, false);
     attempts--;
     wait(0.05);
@@ -163,7 +163,7 @@ createBallDrone(ballDroneType) {
 
   attempts = 3;
   while(trace["surfacetype"] != "none" && attempts > 0) {
-    targetPos = startPos + (VectorNormalize(startPos - trace["position"]) * 5);
+    targetPos = startPos + (vectorNormalize(startPos - trace["position"]) * 5);
     trace = bulletTrace(startPos, targetPos, false);
     attempts--;
     wait(0.05);
@@ -234,7 +234,7 @@ createBallDrone(ballDroneType) {
     case "alien_ball_drone_3":
     case "alien_ball_drone_4":
       turret = SpawnTurret("misc_turret", drone GetTagOrigin(level.ballDroneSettings[ballDroneType].weaponTag), level.ballDroneSettings[ballDroneType].weaponInfo);
-      turret LinkTo(drone, level.ballDroneSettings[ballDroneType].weaponTag);
+      turret linkTo(drone, level.ballDroneSettings[ballDroneType].weaponTag);
       turret setModel(level.ballDroneSettings[ballDroneType].weaponModel);
       turret.angles = drone.angles;
       turret.owner = drone.owner;
@@ -266,7 +266,7 @@ createBallDrone(ballDroneType) {
       killCamOrigin = (drone.origin + ((anglesToForward(drone.angles) * -10) + (AnglesToRight(drone.angles) * -10))) + (0, 0, 10);
       turret.killCamEnt = spawn("script_model", killCamOrigin);
       turret.killCamEnt SetScriptMoverKillCam("explosive");
-      turret.killCamEnt LinkTo(drone);
+      turret.killCamEnt linkTo(drone);
 
       drone.turret = turret;
       turret.parent = drone;
@@ -329,7 +329,7 @@ idleTargetMover(ent) {
     if(isReallyAlive(self) && !self isUsingRemote() && anglesToForward(self.angles) != forward) {
       forward = anglesToForward(self.angles);
       pos = self.origin + (forward * -100) + (0, 0, 40);
-      ent MoveTo(pos, 0.5);
+      ent moveTo(pos, 0.5);
     }
     wait(0.5);
   }
@@ -618,7 +618,7 @@ radarMover() {
     }
 
     if(isDefined(self.radar)) {
-      self.radar MoveTo(self.origin, 0.5);
+      self.radar moveTo(self.origin, 0.5);
     }
 
     wait(0.5);

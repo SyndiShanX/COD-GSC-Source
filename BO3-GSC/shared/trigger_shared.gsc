@@ -667,9 +667,9 @@ function _trigger_wait_think(s_tracker, e_entity) {
   s_tracker notify("trigger", e_other, self);
 }
 
-function use(str_name, str_key = "targetname", ent = getplayers()[0], b_assert = 1) {
+function use(str_name, str_key = "targetname", ent = getPlayers()[0], b_assert = 1) {
   if(isDefined(str_name)) {
-    e_trig = getent(str_name, str_key);
+    e_trig = getEnt(str_name, str_key);
     if(!isDefined(e_trig)) {
       if(b_assert) {
         assertmsg((("" + str_name) + "") + str_key);
@@ -767,7 +767,7 @@ function wait_or_timeout(n_time, str_name, str_key) {
 function trigger_on_timeout(n_time, b_cancel_on_triggered = 1, str_name, str_key = "targetname") {
   trig = self;
   if(isDefined(str_name)) {
-    trig = getent(str_name, str_key);
+    trig = getEnt(str_name, str_key);
   }
   if(b_cancel_on_triggered) {
     if(is_look_trigger(trig)) {
@@ -835,7 +835,7 @@ function get_script_linkto_targets() {
   tokens = strtok(self.script_linkto, " ");
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
-    target = getent(token, "script_linkname");
+    target = getEnt(token, "script_linkname");
     if(isDefined(target)) {
       targets[targets.size] = target;
     }

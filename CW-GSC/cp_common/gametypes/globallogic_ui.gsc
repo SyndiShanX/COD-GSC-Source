@@ -87,7 +87,7 @@ function private function_1cb458b4() {
     level.var_6ca9b5fe = gettime();
     function_3e57e536(1);
     function_3f278444();
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     foreach(alias, luimenu in level.luimenus) {
       if(alias != "InitialBlack") {
@@ -117,7 +117,7 @@ function function_760546ce() {
   level flag::set("restoring_ui_models");
   level flag::set("level_restarting");
   level.var_815395f5 = 1;
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(player)) {
     player flag::set("level_restarting");
@@ -650,7 +650,7 @@ function function_251fa54a() {
   }
 
   var_efeeee7e = 1;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(!player flag::get(#"class_choice_completed")) {
@@ -665,7 +665,7 @@ function function_251fa54a() {
 }
 
 function function_cdbb5c49(show, persistent) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(is_true(show)) {
     util::function_1690fd42(player, persistent);
@@ -896,7 +896,7 @@ function function_7bc0e4b9(var_4146002e = 1, var_d76d90ac = 0) {
   level.chyron_text_active = 1;
   level flag::set(#"chyron_active");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isbot(player)) {
       player thread function_36e939c(var_4146002e, var_d76d90ac);
     }
@@ -955,7 +955,7 @@ function function_75788ef4(var_22323d67) {
   }
 
   if(isDefined(descriptions)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     foreach(description in descriptions) {
       if(player gamepadusedlast()) {

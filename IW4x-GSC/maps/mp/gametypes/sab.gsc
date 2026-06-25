@@ -51,12 +51,12 @@ main() {
   game["dialog"]["offense_obj"] = "capture_obj";
   game["dialog"]["defense_obj"] = "capture_obj";
 
-  badtrig = getent("sab_bomb_defuse_allies", "targetname");
+  badtrig = getEnt("sab_bomb_defuse_allies", "targetname");
   if(isDefined(badtrig)) {
     badtrig delete();
   }
 
-  badtrig = getent("sab_bomb_defuse_axis", "targetname");
+  badtrig = getEnt("sab_bomb_defuse_axis", "targetname");
   if(isDefined(badtrig)) {
     badtrig delete();
   }

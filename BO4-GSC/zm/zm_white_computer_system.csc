@@ -16,6 +16,6 @@ init_clientfields() {
 
 key_press_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, #"hash_38a12b73c9342fd9");
+    self playRumbleOnEntity(localclientnum, #"hash_38a12b73c9342fd9");
   }
 }

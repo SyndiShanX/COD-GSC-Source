@@ -143,7 +143,7 @@ soundLineThink() {
   if(!isDefined(self.target)) {
     return;
   }
-  target = getstruct(self.target, "targetname");
+  target = getStruct(self.target, "targetname");
   if(!isDefined(target)) {
     return;
   }

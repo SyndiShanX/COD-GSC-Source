@@ -532,7 +532,7 @@ _id_C530() {
 base_nuketutorialcrate() {
   level endon("game_ended");
   level waittill("prematch_started");
-  var_0 = scripts\engine\utility::getstruct("base_intro_nukecrate", "targetname");
+  var_0 = scripts\engine\utility::getStruct("base_intro_nukecrate", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 setModel(level.leveldata._id_508A);
@@ -1537,7 +1537,7 @@ buildablewallrepairclipmove() {
   wait 0.8;
   self.repairclip movez(170, 0.5);
   scripts\engine\utility::_id_108A8(5, "repair_complete", "buildable_reset");
-  self.repairclip moveto(self.repairclip._id_AC91, 0.1);
+  self.repairclip moveTo(self.repairclip._id_AC91, 0.1);
 }
 
 _id_2CF2(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -2403,8 +2403,8 @@ _id_7361() {
     var_0 = scripts\cp_mp\utility\game_utility::_id_6B17(level._id_1513);
     var_1 = scripts\cp_mp\utility\game_utility::_id_6B17(level._id_1FE8);
     level._id_E377 = [];
-    level._id_E377["allies"] = vectornormalize(var_1.origin - var_0.origin);
-    level._id_E377["axis"] = vectornormalize(var_0.origin - var_1.origin);
+    level._id_E377["allies"] = vectorNormalize(var_1.origin - var_0.origin);
+    level._id_E377["axis"] = vectorNormalize(var_0.origin - var_1.origin);
   }
 
   var_2 = "allies";
@@ -2422,7 +2422,7 @@ _id_7361() {
 
     var_7 = level._id_E371[var_6][var_2]._id_1782.origin;
     var_8 = var_7 + var_3 * -8500 + (0, 0, 7000);
-    var_9 = vectornormalize(var_7 - var_8);
+    var_9 = vectorNormalize(var_7 - var_8);
     var_10 = scripts\mp\utility\script::_id_FFE3(var_9, (0, 0, 1));
 
     if(istrue(level._id_FEF0)) {
@@ -2454,7 +2454,7 @@ _id_7361() {
 
     var_7 = level._id_E371[var_6][var_2]._id_1782.origin;
     var_8 = var_7 + var_3 * -8500 + (0, 0, 7000);
-    var_9 = vectornormalize(var_7 - var_8);
+    var_9 = vectorNormalize(var_7 - var_8);
     var_10 = scripts\mp\utility\script::_id_FFE3(var_9, (0, 0, 1));
 
     if(istrue(level._id_FEF0)) {
@@ -2628,8 +2628,8 @@ _id_D5A9() {
   level._id_7346._id_1512._id_541F = var_4;
   level._id_F935[level._id_F935.size] = var_4;
   level._id_E377 = [];
-  level._id_E377["allies"] = vectornormalize(level._id_7346._id_1FE7.trigger.origin - level._id_7346._id_1512.trigger.origin);
-  level._id_E377["axis"] = vectornormalize(level._id_7346._id_1512.trigger.origin - level._id_7346._id_1FE7.trigger.origin);
+  level._id_E377["allies"] = vectorNormalize(level._id_7346._id_1FE7.trigger.origin - level._id_7346._id_1512.trigger.origin);
+  level._id_E377["axis"] = vectorNormalize(level._id_7346._id_1512.trigger.origin - level._id_7346._id_1FE7.trigger.origin);
 }
 
 _id_E36C() {
@@ -3049,7 +3049,7 @@ _id_E32E() {
   level thread delayremovenukecratetracking(var_1);
   level.nuke_crate_neutral_count--;
   var_11 _meth_83A2();
-  var_11 sethintstring(&"MP/ARMSRACE_CRATE_PICKUP");
+  var_11 setHintString(&"MP/ARMSRACE_CRATE_PICKUP");
   var_1._id_413F = undefined;
   _id_07F9::_id_C799(var_4);
   waitframe();
@@ -4069,7 +4069,7 @@ base_teleportplayeronnukecapture(var_0) {
   }
 
   if(scripts\mp\utility\player::isreallyalive(var_0)) {
-    var_0 setorigin(var_23.origin);
+    var_0 setOrigin(var_23.origin);
   } else {
     var_0 scripts\mp\playerlogic::_id_E337();
   }
@@ -4456,7 +4456,7 @@ _id_D895(var_0, var_1) {
     var_2 = var_0._id_C90E.origin;
   }
 
-  var_0._id_A728 = getent("nukeZone" + var_1, "targetname");
+  var_0._id_A728 = getEnt("nukeZone" + var_1, "targetname");
 
   if(isDefined(var_0._id_A728)) {
     var_3 = var_0._id_A728.origin;
@@ -5199,7 +5199,7 @@ monitornearestnuketoplayer() {
         self.nearest_nuke_fx.angles = var_3.angles;
 
         if(!isDefined(var_3._id_0481) || var_3._id_0481 != "nuke_spawn_node") {
-          self.nearest_nuke_fx linkto(var_3, "tag_origin");
+          self.nearest_nuke_fx linkTo(var_3, "tag_origin");
         }
 
         _func_019D(scripts\engine\utility::getfx("vfx_ar_crate_locator"), self.nearest_nuke_fx, "tag_origin", self);
@@ -5388,8 +5388,8 @@ _id_D884() {
   var_20 = spawnStruct();
   var_20.origin = (var_19[0], var_19[1], var_6);
   var_20.angles = (0, var_8[1], 0);
-  var_21 = var_5 * vectornormalize(anglesToForward(var_20.angles));
-  var_22 = var_7 * vectornormalize(anglestoright(var_20.angles));
+  var_21 = var_5 * vectorNormalize(anglesToForward(var_20.angles));
+  var_22 = var_7 * vectorNormalize(anglestoright(var_20.angles));
   var_9.origin = var_20.origin + var_21 - var_22;
   var_10.origin = var_20.origin - var_21 - var_22;
   var_11.origin = var_20.origin - 2 * var_21 - var_22;
@@ -5543,17 +5543,17 @@ spawnintrovehicle_vfx(var_0, var_1) {
       var_3 = spawn("script_model", var_0 gettagorigin("tag_turbine_l_fx"));
       var_3.angles = var_0 gettagangles("tag_turbine_l_fx");
       var_3 setModel("tag_origin");
-      var_3 linkto(var_0, "tag_turbine_l_fx");
+      var_3 linkTo(var_0, "tag_turbine_l_fx");
       var_0.propellorfx[0] = var_3;
       var_4 = spawn("script_model", var_0 gettagorigin("tag_turbine_r_fx"));
       var_4.angles = var_0 gettagangles("tag_turbine_r_fx");
       var_4 setModel("tag_origin");
-      var_4 linkto(var_0, "tag_turbine_r_fx");
+      var_4 linkTo(var_0, "tag_turbine_r_fx");
       var_0.propellorfx[1] = var_4;
       var_5 = spawn("script_model", var_0 gettagorigin("tag_origin"));
       var_5.angles = var_0 gettagangles("tag_origin");
       var_5 setModel("tag_origin");
-      var_5 linkto(var_0, "tag_origin");
+      var_5 linkTo(var_0, "tag_origin");
       var_0.cloudfx[2] = var_5;
       playFXOnTag(level._id_0BCE["plane_propellor"], var_0.propellorfx[0], "tag_origin");
       playFXOnTag(level._id_0BCE["plane_propellor"], var_0.propellorfx[1], "tag_origin");
@@ -5611,9 +5611,9 @@ _id_5D47(var_0) {
   var_1 = getdvarfloat("scr_base_plane_flighttime", 33);
   var_2 = getdvarfloat("scr_base_plane_bailtime", 27);
   thread forceplayerjumpfromintrovehicle(var_0, var_2);
-  self moveto(level._id_84D6[var_0][1].origin, var_1);
+  self moveTo(level._id_84D6[var_0][1].origin, var_1);
   wait(var_1);
-  self moveto(level.exitpathnodes[var_0].origin, var_1);
+  self moveTo(level.exitpathnodes[var_0].origin, var_1);
   wait(var_1);
 
   foreach(var_4 in level._id_84D6[var_0]) {
@@ -5646,8 +5646,8 @@ _id_AC5E(var_0) {
   self endon("death");
   self endon("disconnect");
   self setplayerangles(var_0.angles);
-  self setorigin(var_0.origin);
-  self playerlinkto(var_0, "tag_origin");
+  self setOrigin(var_0.origin);
+  self playerlinkTo(var_0, "tag_origin");
   self playerhide();
   self allowcrouch(0);
   self allowprone(0);
@@ -5658,7 +5658,7 @@ _id_AC5E(var_0) {
 
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_player");
-  var_1 linkto(var_0, "tag_origin", (0, 0, 50), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_origin", (0, 0, 50), (0, 0, 0));
   self._id_AC5E = var_1;
   self._id_AC5E thread scripts\mp\utility\entity::_id_477D(self);
   var_2 = "cam_orbit_br_ac130";
@@ -5684,7 +5684,7 @@ _id_A11E(var_0) {
   var_0._id_B711 = scripts\engine\utility::array_remove(var_0._id_B711, self);
   self cameradefault();
   self unlink();
-  self setorigin(var_0.origin - (0, var_2, 100 + var_2));
+  self setOrigin(var_0.origin - (0, var_2, 100 + var_2));
   self playershow();
   self allowcrouch(1);
   self allowprone(1);
@@ -5744,7 +5744,7 @@ _id_8294() {
   var_7 = [];
 
   foreach(var_9 in var_0) {
-    var_10 = scripts\engine\utility::getstruct(var_9.target, "targetname");
+    var_10 = scripts\engine\utility::getStruct(var_9.target, "targetname");
 
     switch (var_10._id_CD99) {
       case "gw_fob_alliesHQ_extra":
@@ -6530,7 +6530,7 @@ _id_E727() {
   var_6.angles = var_5;
   self._id_E3E9 = var_6;
   self._id_8AD7 = 1;
-  self cameralinkto(var_6, "tag_origin", 1);
+  self cameralinkTo(var_6, "tag_origin", 1);
   thread _id_4CF1();
   var_6 _id_A227(self, var_4, var_5);
 }
@@ -6553,15 +6553,15 @@ _id_A227(var_0, var_1, var_2) {
   var_0 endon("spawned_player");
   var_3 = 1.0;
   var_4 = 1.0;
-  self moveto(var_1, 2.0, 1.0, 1.0);
+  self moveTo(var_1, 2.0, 1.0, 1.0);
   var_0 _meth_82FD("spawn_cam", 0.5, "mix");
-  self rotateto(var_2, 2.0, 1.0, 1.0);
+  self rotateTo(var_2, 2.0, 1.0, 1.0);
   wait 1.1;
   var_5 = anglesToForward(var_2) * 300;
   var_5 = var_5 * (1, 1, 0);
 
   if(isDefined(var_0) && isDefined(var_0._id_E3E9)) {
-    self moveto(var_1 + var_5, 15.0, 1.0, 1.0);
+    self moveTo(var_1 + var_5, 15.0, 1.0, 1.0);
     var_0 earthquakeforplayer(0.03, 15.0, var_1 + var_5, 1000);
   }
 }
@@ -6571,11 +6571,11 @@ _id_CA72() {
   var_0 = self getEye();
   var_1 = self.angles;
   scripts\mp\utility\player::_id_FD26("spectator");
-  self cameralinkto(self._id_E3E9, "tag_origin", 1);
+  self cameralinkTo(self._id_E3E9, "tag_origin", 1);
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.2);
-  self._id_E3E9 moveto(var_0, 0.5);
+  self._id_E3E9 moveTo(var_0, 0.5);
   self _meth_8078(0.5);
-  self._id_E3E9 rotateto(var_1, 0.5, 0.5);
+  self._id_E3E9 rotateTo(var_1, 0.5, 0.5);
   wait 0.5;
 
   if(!isDefined(self)) {
@@ -6760,7 +6760,7 @@ _id_3FA0(var_0, var_1) {
 }
 
 _id_7426(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = distance(var_1, var_0);
   var_6 = var_0 + var_4 * var_5 * 0.425;
   var_7 = var_0 + var_4 * var_5 * 0.55;
@@ -6769,11 +6769,11 @@ _id_7426(var_0, var_1, var_2, var_3) {
   var_10 = var_2 * 0.1;
   self._id_318D = 1;
   self._id_31A7 = 0;
-  var_11 = vectornormalize(var_1 - var_0);
+  var_11 = vectorNormalize(var_1 - var_0);
   self.angles = vectortoangles(var_11);
   self.origin = var_0;
   _id_620F();
-  self moveto(var_1, var_8 + var_9 + var_10, var_8 * 0.25);
+  self moveTo(var_1, var_8 + var_9 + var_10, var_8 * 0.25);
   wait(var_8);
   self._id_31A7 = 1;
 
@@ -6935,12 +6935,12 @@ _id_AE18(var_0, var_1) {
     var_2 = level._id_2E3B._id_9E8E;
   }
 
-  var_3 = vectornormalize(var_2 - var_0.origin);
+  var_3 = vectorNormalize(var_2 - var_0.origin);
   var_0.players = scripts\engine\utility::array_remove(var_0.players, self);
 
   if(isDefined(var_0._id_B72B) && isDefined(var_0._id_41E2)) {
     var_4 = var_0._id_B72B[var_0._id_41E2];
-    self setorigin(var_0.origin + var_4, 1, 1);
+    self setOrigin(var_0.origin + var_4, 1, 1);
     var_0._id_41E2++;
 
     if(var_0._id_41E2 == var_0._id_B72B.size) {
@@ -6948,7 +6948,7 @@ _id_AE18(var_0, var_1) {
     }
   } else {
     var_5 = anglesToForward(var_0.angles) * var_0._id_2ACC;
-    self setorigin(var_0.origin + var_5, 1, 1);
+    self setOrigin(var_0.origin + var_5, 1, 1);
   }
 
   waitframe();
@@ -7005,7 +7005,7 @@ _id_2E19() {
   level._id_2358 = _func_025E(level._id_2E3B._id_9E8E, level._id_2E3C._id_9E8E, 0.5);
   level._id_2E37 = _func_025E(level._id_2E3B._id_E715, level._id_2E3C._id_5340, var_6);
   level._id_2E37 = level._id_2E37 - level._id_2E3B._id_E715;
-  level._id_2E37 = vectornormalize(level._id_2E37) * level._id_2E30 / 10;
+  level._id_2E37 = vectorNormalize(level._id_2E37) * level._id_2E30 / 10;
   level._id_2E37 = (level._id_2E37[0], level._id_2E37[1], 0);
 }
 
@@ -7083,7 +7083,7 @@ _id_2E11() {
     level._id_2E37 = _func_025E(level._id_2358, var_9, 0.5);
     level._id_2E37 = level._id_2E37 - level._id_2358;
     var_10 = distance2d(level._id_2358, var_9);
-    level._id_2E37 = vectornormalize(level._id_2E37) * var_10 / 4;
+    level._id_2E37 = vectorNormalize(level._id_2E37) * var_10 / 4;
     level._id_2E37 = (level._id_2E37[0], level._id_2E37[1], 0);
 
     if(_id_1B08(level._id_2E37)) {
@@ -7152,7 +7152,7 @@ _id_10341(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("cargo_truck_susp", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("cargo_truck_susp", var_2, var_1);
 }
 
 vehiclespawn_motorcycle(var_0, var_1) {
@@ -7161,7 +7161,7 @@ vehiclespawn_motorcycle(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("motorcycle", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("motorcycle", var_2, var_1);
 }
 
 _id_1034D(var_0, var_1) {
@@ -7171,7 +7171,7 @@ _id_1034D(var_0, var_1) {
 
   var_2 = _id_10343(var_0);
   var_2._id_E325 = "place_at_position";
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("s4_tank", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("s4_tank", var_2, var_1);
 }
 
 vehiclespawn_open_jeep(var_0, var_1) {
@@ -7181,7 +7181,7 @@ vehiclespawn_open_jeep(var_0, var_1) {
 
   var_2 = _id_10343(var_0);
   var_2._id_E325 = "place_at_position";
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("open_jeep", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("open_jeep", var_2, var_1);
 }
 
 _id_1002A(var_0, var_1) {
@@ -7410,9 +7410,9 @@ _id_3FF0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_1)) {
-    var_12 setcursorhint(var_1);
+    var_12 setCursorHint(var_1);
   } else {
-    var_12 setcursorhint("HINT_NOICON");
+    var_12 setCursorHint("HINT_NOICON");
   }
 
   if(isDefined(var_2)) {
@@ -7420,7 +7420,7 @@ _id_3FF0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_3)) {
-    var_12 sethintstring(var_3);
+    var_12 setHintString(var_3);
   }
 
   if(isDefined(var_4)) {
@@ -8824,8 +8824,8 @@ getbasespawnoffsetvalues(var_0, var_1) {
 
 getbasehqtrigger(var_0) {
   if(var_0 == "axis") {
-    return getent("gw_fob_axisHQ", "targetname");
+    return getEnt("gw_fob_axisHQ", "targetname");
   } else {
-    return getent("gw_fob_alliesHQ", "targetname");
+    return getEnt("gw_fob_alliesHQ", "targetname");
   }
 }

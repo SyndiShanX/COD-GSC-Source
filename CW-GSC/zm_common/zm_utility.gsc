@@ -339,7 +339,7 @@ function move_zombie_spawn_location(spot) {
 
       self.anchor = spawn("script_origin", self.origin);
       self.anchor.angles = self.angles;
-      self linkto(self.anchor);
+      self linkTo(self.anchor);
       self.anchor thread anchor_delete_failsafe(self);
 
       if(!isDefined(spot.angles)) {
@@ -347,13 +347,13 @@ function move_zombie_spawn_location(spot) {
       }
 
       self ghost();
-      self.anchor moveto(spot.origin, 0.05);
+      self.anchor moveTo(spot.origin, 0.05);
       self.anchor waittill(#"movedone");
       target_org = zombie_utility::get_desired_origin();
 
       if(isDefined(target_org)) {
         anim_ang = vectortoangles(target_org - self.origin);
-        self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+        self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
         self.anchor waittill(#"rotatedone");
       }
 
@@ -1716,7 +1716,7 @@ function function_d89330e6(player, var_21b12302 = 0) {
 
 function get_closest_valid_player(origin, ignore_player = array(), var_b106b254 = 0) {
   aiprofile_beginentry("get_closest_valid_player");
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(level.zombie_targets) && level.zombie_targets.size > 0) {
     function_1eaaceab(level.zombie_targets);
@@ -1949,7 +1949,7 @@ function function_1a01f2f7(e_player) {
 }
 
 function get_number_of_valid_players() {
-  players = getplayers();
+  players = getPlayers();
   num_player_valid = 0;
 
   for(i = 0; i < players.size; i++) {
@@ -2522,11 +2522,11 @@ function set_hint_string(ent, default_ref, cost) {
   hint = get_zombie_hint(ref);
 
   if(isDefined(cost)) {
-    self sethintstring(hint, cost);
+    self setHintString(hint, cost);
     return;
   }
 
-  self sethintstring(hint);
+  self setHintString(hint);
 }
 
 function get_hint_string(ent, default_ref, cost) {
@@ -2550,7 +2550,7 @@ function add_sound(ref, alias) {
 function play_sound_at_pos(ref, pos, ent) {
   if(isDefined(ent)) {
     if(isDefined(ent.script_soundalias)) {
-      playsoundatposition(ent.script_soundalias, pos);
+      playSoundAtPosition(ent.script_soundalias, pos);
       return;
     }
 
@@ -2568,7 +2568,7 @@ function play_sound_at_pos(ref, pos, ent) {
     return;
   }
 
-  playsoundatposition(level.zombie_sounds[ref], pos);
+  playSoundAtPosition(level.zombie_sounds[ref], pos);
 }
 
 function play_sound_on_ent(ref) {
@@ -3178,7 +3178,7 @@ function give_achievement(achievement, all_players = 0) {
   assert(ishash(achievement), "<dev string:x33f>");
 
   if(all_players) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player giveachievement(achievement);
     }
 
@@ -3304,7 +3304,7 @@ function waittill_not_moving() {
 
 function get_closest_player(org) {
   players = [];
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size) {
     if(players.size > 1 && isDefined(org)) {
@@ -3361,7 +3361,7 @@ function track_players_intersection_tracker() {
 
   while(true) {
     var_1a1f860b = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player.var_ab8c5e97)) {
@@ -4166,7 +4166,7 @@ function wait_clear_streamer_hint(lifetime, str_id) {
 
 function create_streamer_hint(origin, angles, value, lifetime, var_49d474b2) {
   if(self == level) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clear_streamer_hint(var_49d474b2);
     }
   }
@@ -4260,8 +4260,8 @@ function is_facing(facee, requireddot = 0.5, b_2d = 1) {
     v_to_facee_computed = v_to_facee;
   }
 
-  v_unit_forward_computed = vectornormalize(v_forward_computed);
-  v_unit_to_facee_computed = vectornormalize(v_to_facee_computed);
+  v_unit_forward_computed = vectorNormalize(v_forward_computed);
+  v_unit_to_facee_computed = vectorNormalize(v_to_facee_computed);
   dotproduct = vectordot(v_unit_forward_computed, v_unit_to_facee_computed);
   return dotproduct > requireddot;
 }
@@ -4378,7 +4378,7 @@ function function_64259898(position, search_radius = 128) {
 }
 
 function function_372a1e12() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   e_least_hunted = undefined;
 
   foreach(e_player in a_e_players) {
@@ -4458,7 +4458,7 @@ function function_f5a222a8(var_6cc77d4e, v_origin_or_ent, var_c87f9ad7, params) 
 function private function_f23721f4(n_obj_id, v_origin_or_ent, var_c87f9ad7, params) {
   level flag::wait_till("start_zombie_round_logic");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_71071944(n_obj_id, v_origin_or_ent, var_c87f9ad7, params);
   }
 }
@@ -5241,7 +5241,7 @@ function private function_e1a11b1(var_8861fa85, n_radius, trigger, var_ab426dbb 
         break;
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         var_13dc7b2a = 1;
         n_ent_num = player getentitynumber();
 
@@ -5322,7 +5322,7 @@ function function_4f593819(player, ignore_ent) {
 function private function_e5dcd07a(str_notify) {
   if(isarray(self.var_45f78aa4)) {
     foreach(n_obj_id in self.var_45f78aa4) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         objective_clearplayerusing(n_obj_id, player);
       }
     }
@@ -5348,12 +5348,12 @@ function function_5d356609(aat_name, n_tier) {
 }
 
 function function_60daf5f7(str_name, str_key = "targetname", b_hide = 1) {
-  e_machine = getent(str_name, str_key);
+  e_machine = getEnt(str_name, str_key);
 
   if(isDefined(e_machine)) {
     if(b_hide) {
       if(isDefined(e_machine.objectiveid)) {
-        function_e8f4d47b(getplayers(), e_machine.objectiveid, 1);
+        function_e8f4d47b(getPlayers(), e_machine.objectiveid, 1);
         objective_setinvisibletoall(e_machine.objectiveid);
       }
 
@@ -5369,7 +5369,7 @@ function function_60daf5f7(str_name, str_key = "targetname", b_hide = 1) {
 
     if(isDefined(e_machine.objectiveid)) {
       objective_setvisibletoall(e_machine.objectiveid);
-      function_e8f4d47b(getplayers(), e_machine.objectiveid, 0);
+      function_e8f4d47b(getPlayers(), e_machine.objectiveid, 0);
     }
   }
 }
@@ -5417,7 +5417,7 @@ function function_725e99fb() {
         continue;
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         var_30300360 = 0;
 
         if(is_player_valid(player, undefined, 1) && isDefined(machine) && function_7757350c(player, machine)) {
@@ -5499,7 +5499,7 @@ function function_14bad487(trap_prop, total_time, iteration_time, angle) {
   current_delta = angle;
 
   if(isDefined(self.rattle_sound)) {
-    playsoundatposition(self.rattle_sound, self.origin);
+    playSoundAtPosition(self.rattle_sound, self.origin);
   }
 
   for(i = 0; i < iterations; i++) {
@@ -5601,7 +5601,7 @@ function function_d729de6a(b_enable = 1, a_str_zones) {
   }
 
   if(b_enable) {
-    array::thread_all(getplayers(), &function_42ff30dc, a_str_zones);
+    array::thread_all(getPlayers(), &function_42ff30dc, a_str_zones);
     callback::on_ai_damage(&function_9452d2ee);
     function_cf7a0b3d(0, a_str_zones);
     function_c2da57a7(0, a_str_zones);
@@ -5612,7 +5612,7 @@ function function_d729de6a(b_enable = 1, a_str_zones) {
   function_cf7a0b3d(1, a_str_zones);
   function_c2da57a7(1, a_str_zones);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player flag::clear(#"hash_35db0208f90f5145");
     player val::reset(#"hash_31f206367fcff836", "ignoreme");
     player.var_8dbfa2f5 = undefined;
@@ -5658,7 +5658,7 @@ function function_42ff30dc(a_str_zones) {
   self flag::clear(#"hash_35db0208f90f5145");
   self val::reset(#"hash_31f206367fcff836", "ignoreme");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player flag::get(#"hash_35db0208f90f5145")) {
       return;
     }
@@ -5735,7 +5735,7 @@ function function_2256923f(n_cost) {
 }
 
 function clear_vehicles(mdl_machine) {
-  mdl_machine playrumbleonentity(#"sr_transmitter_clear");
+  mdl_machine playRumbleOnEntity(#"sr_transmitter_clear");
   a_vehicles = [];
   var_a8b5d9cc = arraycombine(getentitiesinradius(mdl_machine.origin, 300, 12), getentitiesinradius(mdl_machine.origin, 300, 14));
 

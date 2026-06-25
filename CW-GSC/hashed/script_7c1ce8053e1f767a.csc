@@ -118,7 +118,7 @@ function function_6b3f6fa7(localclientnum) {
   self endon(#"death", #"hash_78558ed9d8282358", #"hash_7387c0ba13aefdd7");
 
   while(true) {
-    self playrumbleonentity(localclientnum, #"anim_light");
+    self playRumbleOnEntity(localclientnum, #"anim_light");
     wait 0.1;
   }
 }

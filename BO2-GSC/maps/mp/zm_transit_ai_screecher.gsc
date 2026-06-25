@@ -45,7 +45,7 @@ screecher_should_burrow() {
     self waittill("goal");
     self.state = "burrow_started";
     self setfreecameralockonallowed(0);
-    self animscripted(ground_pos, self.angles, "zm_burrow");
+    self animScripted(ground_pos, self.angles, "zm_burrow");
     self playSound("zmb_screecher_dig");
 
     if(!(isDefined(green_light.burrow_active) && green_light.burrow_active) && (isDefined(green_light.power_on) && green_light.power_on)) {
@@ -81,7 +81,7 @@ create_portal() {
 
   wait 0.1;
   playFXOnTag(level._effect["screecher_hole"], self.hole_fx, "tag_origin");
-  self.hole moveto(self.hole.origin + vectorscale((0, 0, 1), 20.0), 1.0);
+  self.hole moveTo(self.hole.origin + vectorscale((0, 0, 1), 20.0), 1.0);
   self waittill("burrow_done");
   self thread portal_think();
 }
@@ -135,7 +135,7 @@ player_wait_land() {
 portal_use(player) {
   player playsoundtoplayer("zmb_screecher_portal_warp_2d", player);
   self thread teleport_player(player);
-  playsoundatposition("zmb_screecher_portal_end", self.hole.origin);
+  playSoundAtPosition("zmb_screecher_portal_end", self.hole.origin);
   self.hole delete();
   self.burrow_active = 0;
 }
@@ -157,9 +157,9 @@ teleport_player(player) {
   }
 
   if(isDefined(dest_light)) {
-    playsoundatposition("zmb_screecher_portal_arrive", dest_light.origin);
+    playSoundAtPosition("zmb_screecher_portal_arrive", dest_light.origin);
     player maps\mp\zombies\_zm_gump::player_teleport_blackscreen_on();
-    player setorigin(dest_light.origin);
+    player setOrigin(dest_light.origin);
     player notify("used_screecher_hole");
     player maps\mp\zombies\_zm_stats::increment_client_stat("screecher_teleporters_used", 0);
     player maps\mp\zombies\_zm_stats::increment_player_stat("screecher_teleporters_used");
@@ -233,7 +233,7 @@ transit_screecher_cleanup() {
       screecher_print("clean up portal");
 
       green_light notify("portal_stopped");
-      green_light.hole moveto(green_light.hole.start_origin, 1.0);
+      green_light.hole moveTo(green_light.hole.start_origin, 1.0);
       green_light.burrow_active = 0;
 
       if(isDefined(green_light.hole_fx)) {

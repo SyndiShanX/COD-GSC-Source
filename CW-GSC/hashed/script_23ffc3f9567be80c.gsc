@@ -80,8 +80,8 @@ function function_18aca533(eventstruct) {
 
     if(isDefined(scriptmodel)) {
       scriptmodel thread scene::play("p9_fxanim_zm_gp_dac_bundle", scriptmodel);
-      playsoundatposition(#"hash_2306bc49a7e85ea2", scriptmodel.origin);
-      playsoundatposition(level.var_291ed71[0], scriptmodel.origin);
+      playSoundAtPosition(#"hash_2306bc49a7e85ea2", scriptmodel.origin);
+      playSoundAtPosition(level.var_291ed71[0], scriptmodel.origin);
       arrayremoveindex(level.var_291ed71, 0);
 
       if(isDefined(scriptmodel.objectiveid)) {

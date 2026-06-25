@@ -427,7 +427,7 @@ function_698ddbd9(weapon) {
         continue;
       }
 
-      normal = vectornormalize(v_target_location - v_view_pos);
+      normal = vectorNormalize(v_target_location - v_view_pos);
       dot = vectordot(var_16d329c7, normal);
 
       if(0 > dot) {
@@ -668,7 +668,7 @@ function_e47a52e0(weapon) {
   var_6ff1bf88 = distance(v_pos, v_end);
   n_time_travel = var_6ff1bf88 / n_move_speed;
   var_f0ccd955 = n_time_travel < 0.1 ? 0.1 : n_time_travel;
-  self.var_7c78b80e moveto(v_end, var_f0ccd955);
+  self.var_7c78b80e moveTo(v_end, var_f0ccd955);
   self.var_7c78b80e clientfield::set("" + #"viper_bite_projectile", 1);
   self thread swordpistol_rumble(5);
   n_time_started = gettime() / 1000;
@@ -774,7 +774,7 @@ function_5c924730() {
     }
 
     v_zombie_location = a_ai_zombies[i] getcentroid();
-    normal = vectornormalize(v_zombie_location - v_view_pos);
+    normal = vectorNormalize(v_zombie_location - v_view_pos);
     dot = vectordot(var_16d329c7, normal);
 
     if(0 > dot) {
@@ -978,13 +978,13 @@ swordpistol_rumble(var_b2e05bae) {
 
     switch (var_b2e05bae) {
       case 1:
-        self playrumbleonentity("zm_weap_special_activate_rumble");
+        self playRumbleOnEntity("zm_weap_special_activate_rumble");
         break;
       case 2:
         self clientfield::increment_to_player("" + #"swordpistol_rumble", 2);
         break;
       case 3:
-        self playrumbleonentity("zm_weap_swordpistol_melee_hit_rumble");
+        self playRumbleOnEntity("zm_weap_swordpistol_melee_hit_rumble");
         break;
       case 4:
         self clientfield::increment_to_player("" + #"swordpistol_rumble", 4);

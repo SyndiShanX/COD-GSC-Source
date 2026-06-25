@@ -72,6 +72,6 @@ function_9e94a567() {
 function_8431fef6() {
   level endon(#"game_ended");
   level waittill(#"hash_7d7ad8f95ddcdcbd");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player clientfield::set_to_player("RGB_keyboard_manager", 4);
 }

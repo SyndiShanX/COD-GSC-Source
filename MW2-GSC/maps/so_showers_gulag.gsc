@@ -198,7 +198,7 @@ thread landing_blocker_think();
 level.ending_flee_guys = 0;
 level.ending_flee_max = 0;
 level.slamraam_missile = "slamraam_missile_guided";
-ai_field_blocker = GetEnt("ai_field_blocker", "targetname");
+ai_field_blocker = getEnt("ai_field_blocker", "targetname");
 ai_field_blocker ConnectPaths();
 ai_field_blocker NotSolid();
 }
@@ -244,12 +244,12 @@ switch (level.gameSkill) {
 thread enable_escape_warning();
 thread enable_escape_failure();
 
-breach_marker = GetEnt("pipe_breach_org", "targetname");
+breach_marker = getEnt("pipe_breach_org", "targetname");
 Objective_Add(1, "current", level.challenge_objective, breach_marker.origin);
 maps\_slowmo_breach::objective_breach(1, 2);
 thread so_showers_update_objective();
 
-volume = GetEnt("gulag_shower_destructibles", "script_noteworthy");
+volume = getEnt("gulag_shower_destructibles", "script_noteworthy");
 volume activate_destructibles_in_volume();
 volume activate_interactives_in_volume();
 
@@ -281,7 +281,7 @@ activate_trigger_with_targetname("bathroom_second_wave_trigger");
 }
 
 breach_hint_model() {
-  model = getent("breach_hint_model", "targetname");
+  model = getEnt("breach_hint_model", "targetname");
   level waittill("breaching");
   model delete();
 }
@@ -289,7 +289,7 @@ breach_hint_model() {
 so_showers_update_objective() {
   level waittill("player_enters_bathroom");
 
-  objective_marker = getent("player_rappels_from_bathroom", "script_noteworthy");
+  objective_marker = getEnt("player_rappels_from_bathroom", "script_noteworthy");
   objective_position(1, objective_marker.origin);
   Objective_SetPointerTextOverride(1, "");
 }
@@ -366,13 +366,13 @@ gulag_no_game_start_setupFunc() {
 }
 
 enable_bathroom_complete_trigger() {
-  trigger_ent = getent("player_rappels_from_bathroom", "script_noteworthy");
+  trigger_ent = getEnt("player_rappels_from_bathroom", "script_noteworthy");
   trigger_ent waittill("trigger");
   flag_set("player_exited_bathroom");
 }
 
 so_handle_exterior_fx() {
-  volume = getent("gulag_exterior_fx_vol", "targetname");
+  volume = getEnt("gulag_exterior_fx_vol", "targetname");
 
   dummy = spawn("script_origin", (0, 0, 0));
 

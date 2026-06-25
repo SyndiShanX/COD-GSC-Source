@@ -113,7 +113,7 @@ shoutcaster_monitor_xray_change(local_client_num) {
 
 function_4c4946d4(local_client_num, localplayerteam, var_52fe6881, var_faa7a3fb) {
   var_f2a410c9 = [];
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -283,7 +283,7 @@ shoutcaster_monitor_player_pucks(localclientnum) {
 
     var_436f361e = function_ea9917ce(localclientnum);
 
-    foreach(player in getplayers(localclientnum)) {
+    foreach(player in getPlayers(localclientnum)) {
       if(isDefined(player) && !isremovedentity(player)) {
         if(isalive(player)) {
           if(var_436f361e) {

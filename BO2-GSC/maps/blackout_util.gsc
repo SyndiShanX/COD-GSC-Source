@@ -323,14 +323,14 @@ elevator_models_link() {
   e_elevator_mason = get_ent("mason_elevator", "targetname", 1);
 
   foreach(model in a_models_mason) {
-    model linkto(e_elevator_mason);
+    model linkTo(e_elevator_mason);
   }
 
   a_models_vtol = get_ent_array("vtol_elevator_detail", "targetname", 1);
   e_elevator_vtol = get_ent("vtol_elevator", "targetname", 1);
 
   foreach(model in a_models_vtol) {
-    model linkto(e_elevator_vtol);
+    model linkTo(e_elevator_vtol);
   }
 }
 
@@ -602,7 +602,7 @@ pull_player_off_turret_when_destroyed(turret, original_origin, original_angles) 
 
   level.player setclientdvar("cg_objectiveIndicatorPerkFarFadeDist", 1024);
   level.player.health = level.player.maxhealth;
-  level.player setorigin(original_origin);
+  level.player setOrigin(original_origin);
   level.player setplayerangles(original_angles);
   level.player allowcrouch(1);
   level.player stop_magic_bullet_shield();
@@ -617,8 +617,8 @@ run_hackable_turret(trig) {
   self endon("death");
   self.hacked = 0;
   level flag_wait("level.player");
-  trig sethintstring(&"SCRIPT_HINT_INTRUDER");
-  trig setcursorhint("HINT_NOICON");
+  trig setHintString(&"SCRIPT_HINT_INTRUDER");
+  trig setCursorHint("HINT_NOICON");
   trig trigger_off();
   level.player waittill_player_has_lock_breaker_perk();
   trig trigger_on();
@@ -659,7 +659,7 @@ run_hackable_turret(trig) {
       level thread enemies_ignore_player_hacking_turret(self.targetname + "_box_player");
       wait_network_frame();
       scene_wait(self.targetname + "_box_player");
-      trig sethintstring(&"SCRIPT_HOLD_TO_USE");
+      trig setHintString(&"SCRIPT_HOLD_TO_USE");
       level.player freezecontrols(1);
       wait 0.2;
       level.player freezecontrols(0);
@@ -694,7 +694,7 @@ run_hackable_turret(trig) {
     level.player allowcrouch(1);
     level.player stop_magic_bullet_shield();
     self makevehicleunusable();
-    level.player setorigin(player_pos);
+    level.player setOrigin(player_pos);
     level.player setplayerangles(player_angles);
     self notify("turret_exited");
     self maps\_cic_turret::cic_turret_start_ai();
@@ -714,13 +714,13 @@ turret_hack_rumble() {
   wait 0.5;
 
   for(i = 0; i < 10; i++) {
-    self playrumbleonentity("tank_rumble");
+    self playRumbleOnEntity("tank_rumble");
     earthquake(0.1, 0.1, self.origin, 1000, self);
     wait 0.1;
   }
 
   wait 0.5;
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.1, 1, self.origin, 1000, self);
 }
 
@@ -736,11 +736,11 @@ init_hackable_turrets() {
   trigs = getEntArray("turret_trigger", "targetname");
 
   for(i = 0; i < trigs.size; i++) {
-    turret = getent(trigs[i].target, "targetname");
+    turret = getEnt(trigs[i].target, "targetname");
     add_spawn_function_veh(trigs[i].target, ::hackable_turret_think);
 
     if(isDefined(trigs[i].script_noteworthy)) {
-      hack_box = getent(trigs[i].script_noteworthy, "targetname");
+      hack_box = getEnt(trigs[i].script_noteworthy, "targetname");
       add_scene(hack_box.targetname, hack_box.targetname);
       add_prop_anim(hack_box.targetname + "_panel", %o_specialty_blackout_intruder_panel, "p6_intruder_perk_box_panel");
       add_scene(hack_box.targetname + "_player", hack_box.targetname);
@@ -754,7 +754,7 @@ init_hackable_turrets() {
 }
 
 hackable_turret_think() {
-  t_hack = getent(self.targetname + "_box", "script_noteworthy");
+  t_hack = getEnt(self.targetname + "_box", "script_noteworthy");
   self thread run_hackable_turret(t_hack);
   self thread remove_dead_turret_trigger(t_hack);
 }
@@ -777,7 +777,7 @@ breadcrumb_and_flag(breadcrumb, objective, flag_name, show_message) {
   }
 
   level endon("clear_old_breadcrumb");
-  first_trig = getent(breadcrumb, "targetname");
+  first_trig = getEnt(breadcrumb, "targetname");
   set_objective(objective, first_trig, "breadcrumb", undefined, show_message);
 
   if(isDefined(first_trig.target)) {
@@ -791,7 +791,7 @@ breadcrumb_and_flag(breadcrumb, objective, flag_name, show_message) {
 
 init_hero_startstruct(str_hero_name, str_struct_targetname) {
   ai_hero = init_hero(str_hero_name);
-  s_start_pos = getstruct(str_struct_targetname, "targetname");
+  s_start_pos = getStruct(str_struct_targetname, "targetname");
   assert(isDefined(s_start_pos), "Bad Hero setup struct: " + str_struct_targetname);
 
   if(isDefined(s_start_pos.angles)) {
@@ -817,7 +817,7 @@ get_furthest_offscreen(array) {
   fvec = anglesToForward(level.player.angles);
 
   foreach(obj in array) {
-    to_obj = vectornormalize(obj.origin - level.player.origin);
+    to_obj = vectorNormalize(obj.origin - level.player.origin);
     dot = vectordot(to_obj, fvec);
 
     if(dot < best_choice_dot) {
@@ -1010,7 +1010,7 @@ waittill_player_nearby(distance, override_notify, distance_2d, do_trace) {
 
 kill_behind_player(forward_struct) {
   self endon("death");
-  room_dir_struct = getstruct(forward_struct, "targetname");
+  room_dir_struct = getStruct(forward_struct, "targetname");
   forward = anglesToForward(room_dir_struct.angles);
 
   do {
@@ -1089,13 +1089,13 @@ assign_scripted_team(scripted_team) {
 
 extra_cam_init(position_struct_name, link_to_obj_name, aspect_ratio) {
   cam = get_extracam();
-  cam_pos = getstruct(position_struct_name, "targetname");
+  cam_pos = getStruct(position_struct_name, "targetname");
   cam.origin = cam_pos.origin;
   cam.angles = cam_pos.angles;
 
   if(isDefined(link_to_obj_name)) {
-    link_obj = getent(link_to_obj_name, "targetname");
-    cam linkto(link_obj);
+    link_obj = getEnt(link_to_obj_name, "targetname");
+    cam linkTo(link_obj);
   }
 
   turn_on_extra_cam();
@@ -1110,7 +1110,7 @@ extra_cam_init(position_struct_name, link_to_obj_name, aspect_ratio) {
 
 extra_cam_move(position_struct_name) {
   cam = get_extracam();
-  cam_pos = getstruct(position_struct_name, "targetname");
+  cam_pos = getStruct(position_struct_name, "targetname");
   cam.origin = cam_pos.origin;
   cam.angles = cam_pos.angles;
 }
@@ -1125,7 +1125,7 @@ spawn_defalco_or_standin(str_start_node) {
     level.defalco.name = "Defalco";
   } else {
     level.defalco = simple_spawn_single("defalco_standin", ::pmc_give_headmodel_without_mask);
-    s_spawn = getstruct(str_start_node, "targetname");
+    s_spawn = getStruct(str_start_node, "targetname");
     level.defalco forceteleport(s_spawn.origin, s_spawn.angles);
   }
 
@@ -1154,7 +1154,7 @@ init_spawner_teams() {
 
 trigger_wait_facing(str_trigger_name, max_facing_angle_degrees) {
   max_dot = cos(max_facing_angle_degrees);
-  t_trigger = getent(str_trigger_name, "targetname");
+  t_trigger = getEnt(str_trigger_name, "targetname");
 
   do {
     t_trigger waittill("trigger");
@@ -1202,7 +1202,7 @@ welding_fx(str_wait_scene) {
   wait 0.1;
   fxorg.origin = self gettagorigin("tag_fx");
   fxorg.angles = self gettagangles("tag_fx");
-  fxorg linkto(self, "tag_fx");
+  fxorg linkTo(self, "tag_fx");
   self play_fx("laser_cutter_sparking", undefined, undefined, "stop_fx", 1, "tag_fx");
   self play_fx("fx_laser_cutter_on", undefined, undefined, "stop_fx", 1, "tag_fx");
   fxorg playSound("evt_vent_cutter_start");
@@ -1485,7 +1485,7 @@ trigger_wait_timeout(failsafe_time_s, str_trigger_name, str_key) {
       str_key = "targetname";
     }
 
-    t_trig = getent(str_trigger_name, str_key);
+    t_trig = getEnt(str_trigger_name, str_key);
   } else
     t_trig = self;
 
@@ -1500,7 +1500,7 @@ waittill_trigger_or_notify(str_trigger, str_notify) {
 
 waittill_trigger_timeout_or_notify(trigger_name, timeout_time, notify_name) {
   self endon(notify_name);
-  trigger = getent(trigger_name, "targetname");
+  trigger = getEnt(trigger_name, "targetname");
 
   if(isDefined(trigger)) {
     trigger endon("trigger");
@@ -1633,14 +1633,14 @@ _aircraft_launcher_logic() {
             if(e_drone.origin[2] < -1028) {
               continue;
             }
-            n_dot_to_drones = vectordot(v_launcher_forward, vectornormalize(e_drone.origin - self.origin));
+            n_dot_to_drones = vectordot(v_launcher_forward, vectorNormalize(e_drone.origin - self.origin));
 
             if(n_dot_to_drones > 0.4) {
               self set_turret_target(e_drone, vectorscale((0, 0, 1), 64.0), 0);
               self fire_turret(0);
 
               if(distance(level.player.origin, self.origin) < 768) {
-                level.player playrumbleonentity("damage_heavy");
+                level.player playRumbleOnEntity("damage_heavy");
               }
 
               earthquake(0.3, 1, self.origin, 768);
@@ -1661,7 +1661,7 @@ _aircraft_launcher_logic() {
 
     if(a_boat_vehicles.size > 0) {
       e_boat = random(a_boat_vehicles);
-      n_dot_to_boat = vectordot(v_launcher_forward, vectornormalize(e_boat.origin - self.origin));
+      n_dot_to_boat = vectordot(v_launcher_forward, vectorNormalize(e_boat.origin - self.origin));
 
       if(n_dot_to_boat > 0.4) {
         target_origin = spawn("script_origin", e_boat.origin);
@@ -1669,7 +1669,7 @@ _aircraft_launcher_logic() {
         self fire_turret(0);
 
         if(distance(level.player.origin, self.origin) < 768) {
-          level.player playrumbleonentity("damage_heavy");
+          level.player playRumbleOnEntity("damage_heavy");
         }
 
         earthquake(0.3, 1, self.origin, 768);
@@ -1732,7 +1732,7 @@ _phalanx_cannon_think(str_target) {
       e_target = random(a_e_targets);
 
       if(isDefined(e_target)) {
-        if(vectordot(anglesToForward(self.angles), vectornormalize(e_target.origin - self.origin)) > 0.4) {
+        if(vectordot(anglesToForward(self.angles), vectorNormalize(e_target.origin - self.origin)) > 0.4) {
           self set_turret_target(e_target, v_offset, 0);
           wait(randomfloatrange(2, 5));
           self fire_turret_for_time(randomfloatrange(0.1, 1), 0);
@@ -1781,7 +1781,7 @@ _bridge_launcher_logic(n_index) {
   while(true) {
     self set_turret_burst_parameters(burst_time_min, burst_time_max, time_between_bursts_min, time_between_bursts_max, 0);
     s_battleship_end = random(a_battleship_structs);
-    n_dot_to_struct = vectordot(v_launcher_forward, vectornormalize(s_battleship_end.origin - self.origin));
+    n_dot_to_struct = vectordot(v_launcher_forward, vectorNormalize(s_battleship_end.origin - self.origin));
 
     if(n_dot_to_struct > 0.4) {
       v_battleship_forward = anglesToForward(s_battleship_end.angles);
@@ -1907,19 +1907,19 @@ scene_is_playing(scene_name) {
 
 setup_extra_cams() {
   level.extra_cam_surfaces = [];
-  level.extra_cam_surfaces["cctv_left"] = getent("khan_screen", "targetname");
-  level.extra_cam_surfaces["cctv_right"] = getent("khan_screen_2", "targetname");
-  level.extra_cam_surfaces["server"] = getent("server_screen", "targetname");
-  level.extra_cam_surfaces["observation"] = getent("intro_screen", "targetname");
-  level.extra_cam_surfaces["cctv_salazar"] = getent("salazar_shoots_screen", "targetname");
+  level.extra_cam_surfaces["cctv_left"] = getEnt("khan_screen", "targetname");
+  level.extra_cam_surfaces["cctv_right"] = getEnt("khan_screen_2", "targetname");
+  level.extra_cam_surfaces["server"] = getEnt("server_screen", "targetname");
+  level.extra_cam_surfaces["observation"] = getEnt("intro_screen", "targetname");
+  level.extra_cam_surfaces["cctv_salazar"] = getEnt("salazar_shoots_screen", "targetname");
   array_func(level.extra_cam_surfaces, ::hide_surface);
   cams = [];
   cams[0] = "pip_glasses_pos";
   cams[1] = "menendez_start_extracam";
 
   foreach(cam_name in cams) {
-    cam_pos = getstruct(cam_name, "targetname");
-    cam_pos_target = getstruct(cam_pos.target, "targetname");
+    cam_pos = getStruct(cam_name, "targetname");
+    cam_pos_target = getStruct(cam_pos.target, "targetname");
     to_target = cam_pos_target.origin - cam_pos.origin;
     cam_pos.angles = vectortoangles(to_target);
   }
@@ -2024,7 +2024,7 @@ server_room_exit_door_open() {
 
   if(!isDefined(server_room_exit.m_clip)) {
     server_room_exit.m_clip = get_ent("server_room_exit_clip", "targetname");
-    server_room_exit.m_clip linkto(server_room_exit);
+    server_room_exit.m_clip linkTo(server_room_exit);
   }
 
   if(!server_room_exit.is_open) {
@@ -2039,7 +2039,7 @@ server_room_exit_door_open() {
 }
 
 server_room_exit_door_close() {
-  server_room_exit = getent("server_room_exit", "targetname", 1);
+  server_room_exit = getEnt("server_room_exit", "targetname", 1);
 
   if(!isDefined(server_room_exit.is_open)) {
     server_room_exit.is_open = 0;
@@ -2047,16 +2047,16 @@ server_room_exit_door_close() {
 
   if(!isDefined(server_room_exit.m_clip)) {
     server_room_exit.m_clip = get_ent("server_room_exit_clip", "targetname");
-    server_room_exit.m_clip linkto(server_room_exit);
+    server_room_exit.m_clip linkTo(server_room_exit);
   }
 
   if(server_room_exit.is_open) {
-    server_room_exit disconnectpaths();
+    server_room_exit disconnectPaths();
     server_room_exit movez(1000, 0.1);
     server_room_exit.is_open = 0;
 
     if(isDefined(server_room_exit.m_clip)) {
-      server_room_exit.m_clip disconnectpaths();
+      server_room_exit.m_clip disconnectPaths();
     }
   }
 }
@@ -2075,7 +2075,7 @@ toggle_messiah_mode(mode_on) {
 }
 
 use_trigger_on_group_clear(str_group_name, str_trigger_name) {
-  t_color = getent(str_trigger_name, "targetname");
+  t_color = getEnt(str_trigger_name, "targetname");
 
   if(isDefined(t_color)) {
     t_color thread _use_trigger_on_group_clear_think(str_group_name);
@@ -2094,7 +2094,7 @@ use_trigger_on_group_count(str_group_name, str_trigger_name, n_count, b_weaken) 
     b_weaken = 0;
   }
 
-  t_color = getent(str_trigger_name, "targetname");
+  t_color = getEnt(str_trigger_name, "targetname");
 
   if(isDefined(t_color)) {
     t_color thread _use_trigger_on_group_count_think(str_group_name, n_count, b_weaken);
@@ -2126,9 +2126,9 @@ player_boat_sim() {
   while(true) {
     n_time = 8;
     n_angle = randomfloatrange(1, 1.5);
-    e_ref rotateto((n_angle, 0, 0), n_time, n_time / 2, n_time / 2);
+    e_ref rotateTo((n_angle, 0, 0), n_time, n_time / 2, n_time / 2);
     e_ref waittill("rotatedone");
-    e_ref rotateto((n_angle * -1, 0, 0), n_time, n_time / 2, n_time / 2);
+    e_ref rotateTo((n_angle * -1, 0, 0), n_time, n_time / 2, n_time / 2);
     e_ref waittill("rotatedone");
   }
 }
@@ -2154,7 +2154,7 @@ delete_if_defined(str_value, str_key) {
     str_key = "targetname";
   }
 
-  e_temp = getent(str_value, str_key);
+  e_temp = getEnt(str_value, str_key);
 
   if(isDefined(e_temp)) {
     e_temp delete();
@@ -2199,8 +2199,8 @@ run_scene_then_loop(str_scene, str_scene_loop, str_ender) {
 }
 
 shoot_rpg_from_struct(str_struct) {
-  s_rpg = getstruct(str_struct, "targetname");
-  s_rpg_target = getstruct(s_rpg.target, "targetname");
+  s_rpg = getStruct(str_struct, "targetname");
+  s_rpg_target = getStruct(s_rpg.target, "targetname");
   magicbullet("usrpg_magic_bullet_nodrop_sp", s_rpg.origin, s_rpg_target.origin);
 }
 
@@ -2308,7 +2308,7 @@ set_presist_damaged_tanker_state_4() {
   self rotate_script_model_to_angles("tanker_fourth_state_start_spot", 1, 0, 1);
   stop_exploder(1001);
   exploder(10101);
-  s_tanker_spot = getstruct("tanker_second_state_low_spot", "targetname");
+  s_tanker_spot = getStruct("tanker_second_state_low_spot", "targetname");
   level.player waittill_player_looking_at(s_tanker_spot.origin, 120, 1);
   self thread move_script_model_to_position("tanker_fourth_state_last_spot", 15, 15 / 2, 15 / 2);
   self rotate_script_model_to_angles("tanker_fourth_state_last_spot", 15, 15 / 2, 15 / 2);
@@ -2323,7 +2323,7 @@ set_presist_damaged_tanker_state_4() {
 set_persist_deck_destruction_state_1() {
   level endon("bridge_entered");
   flag_wait("tanker_hit_done");
-  s_vtol = getstruct("pyro_vtol_03", "targetname");
+  s_vtol = getStruct("pyro_vtol_03", "targetname");
   level.player waittill_player_looking_at(s_vtol.origin);
   level notify("fxanim_deck_vtol_3_start");
   s_vtol structdelete();
@@ -2331,7 +2331,7 @@ set_persist_deck_destruction_state_1() {
 
 set_persist_deck_destruction_state_2() {
   level endon("entered_lower_decks");
-  s_vtol = getstruct("pyro_vtol_02", "targetname");
+  s_vtol = getStruct("pyro_vtol_02", "targetname");
   level.player waittill_player_looking_at(s_vtol.origin);
   level notify("fxanim_deck_vtol_2_start");
   s_vtol structdelete();
@@ -2341,7 +2341,7 @@ set_persist_deck_destruction_state_2() {
 }
 
 set_persist_deck_destruction_state_3() {
-  s_vtol = getstruct("pyro_vtol_01", "targetname");
+  s_vtol = getStruct("pyro_vtol_01", "targetname");
   level.player waittill_player_looking_at(s_vtol.origin);
   level notify("fxanim_deck_vtol_1_start");
   s_vtol structdelete();
@@ -2350,8 +2350,8 @@ set_persist_deck_destruction_state_3() {
 }
 
 set_persist_deck_destruction_state_4() {
-  if(isDefined(getstruct("pyro_vtol_04", "targetname"))) {
-    s_vtol = getstruct("pyro_vtol_04", "targetname");
+  if(isDefined(getStruct("pyro_vtol_04", "targetname"))) {
+    s_vtol = getStruct("pyro_vtol_04", "targetname");
     level.player waittill_player_looking_at(s_vtol.origin);
     level notify("fxanim_deck_vtol_4_start");
     s_vtol structdelete();
@@ -2360,7 +2360,7 @@ set_persist_deck_destruction_state_4() {
 
 kill_persist_damaged_tanker(str_model) {
   level notify("stop_damaged_tanker");
-  m_ship = getent(str_model, "targetname");
+  m_ship = getEnt(str_model, "targetname");
   m_ship delete();
 }
 
@@ -2434,7 +2434,7 @@ _create_fake_vehicle_and_go_path() {
   }
 
   m_temp rotateroll(randomfloatrange(-20, 20), 1);
-  m_temp moveto(self.target_struct.origin, self.time_to_move);
+  m_temp moveTo(self.target_struct.origin, self.time_to_move);
   m_temp waittill("movedone");
   m_temp delete();
   self notify("fake_vehicle_deleted");
@@ -2621,7 +2621,7 @@ ambient_model_move_loop(n_movetime) {
 }
 
 ambient_model_move(s_spot, n_movetime) {
-  self rotateto(vectorscale((0, 1, 0), 270.0), n_movetime, 0, 0);
+  self rotateTo(vectorscale((0, 1, 0), 270.0), n_movetime, 0, 0);
   self move_script_model_to_position(s_spot.target, n_movetime, 0, 1);
 }
 
@@ -2645,7 +2645,7 @@ set_ambient_idle_yaw() {
 
 spawn_script_model_at_struct(str_start_struct, s_start_spot) {
   if(isDefined(str_start_struct)) {
-    s_start_spot = getstruct(str_start_struct, "targetname");
+    s_start_spot = getStruct(str_start_struct, "targetname");
   }
 
   m_script_model = spawn("script_model", s_start_spot.origin);
@@ -2658,24 +2658,24 @@ spawn_script_model_at_struct(str_start_struct, s_start_spot) {
 }
 
 move_script_model_to_position(str_target_spot, n_movetime, n_acceltime, n_deceltime, v_offset) {
-  s_target_spot = getstruct(str_target_spot, "targetname");
+  s_target_spot = getStruct(str_target_spot, "targetname");
   v_position = s_target_spot.origin;
 
   if(isDefined(v_offset)) {
     v_position = v_position + v_offset;
   }
 
-  self moveto(s_target_spot.origin, n_movetime, n_acceltime, n_deceltime);
+  self moveTo(s_target_spot.origin, n_movetime, n_acceltime, n_deceltime);
   self waittill("movedone");
 }
 
 rotate_script_model_to_angles(str_target_spot, n_movetime, n_acceltime, n_deceltime, v_angles) {
   if(isDefined(str_target_spot)) {
-    s_target_spot = getstruct(str_target_spot, "targetname");
+    s_target_spot = getStruct(str_target_spot, "targetname");
     v_angles = s_target_spot.angles;
   }
 
-  self rotateto(v_angles, n_movetime, n_acceltime, n_deceltime);
+  self rotateTo(v_angles, n_movetime, n_acceltime, n_deceltime);
   self waittill("rotatedone");
 }
 
@@ -2746,7 +2746,7 @@ spawn_ambient_drones(trig_name, kill_trig_name, str_targetname, str_targetname_a
 play_fake_flyby() {
   wait 0.1;
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent linkto(self, "tag_body");
+  sound_ent linkTo(self, "tag_body");
   wait(randomfloatrange(1, 3));
   sound_ent playSound("evt_fake_flyby");
   self waittill("reached_end_node");
@@ -2777,7 +2777,7 @@ ambient_drone_die() {
   }
   if(!isDefined(self.delete_on_death) && isDefined(level._effect["fireball_trail_lg"])) {
     playFXOnTag(level._effect["fireball_trail_lg"], self, "tag_origin");
-    playsoundatposition("evt_pegasus_explo", self.origin);
+    playSoundAtPosition("evt_pegasus_explo", self.origin);
     wait 5;
 
     if(isDefined(self)) {
@@ -3149,7 +3149,7 @@ _setup_corpse_pose_from_struct(str_flag) {
 
   if(isDefined(self.script_parameters) && self.script_parameters == "aligned") {
     m_corpse.animname = self.script_string;
-    m_corpse animscripted("corpse_pose", self.origin, self.angles, level.scr_anim[self.script_string]["corpse_pose"]);
+    m_corpse animScripted("corpse_pose", self.origin, self.angles, level.scr_anim[self.script_string]["corpse_pose"]);
   } else
     m_corpse setanim(level.scr_anim[self.script_string]["corpse_pose"]);
 
@@ -3502,7 +3502,7 @@ move_player_to_safe_checkpoint_spot() {
   s_temp = level.checkpoint_restart_safe_spot;
 
   if(isDefined(s_temp)) {
-    level.player setorigin(s_temp.origin);
+    level.player setOrigin(s_temp.origin);
     level.player setplayerangles(s_temp.angles);
   }
 }

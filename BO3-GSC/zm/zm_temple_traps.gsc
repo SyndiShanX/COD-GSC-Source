@@ -24,8 +24,8 @@ function init_temple_traps() {
 }
 
 function trigger_wait_for_power() {
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self setcursorhint("HINT_NOICON");
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
   self.in_use = 0;
   level flag::wait_till("power_on");
 }
@@ -34,7 +34,7 @@ function spear_trap_init() {
   speartraps = getEntArray("spear_trap", "targetname");
   for(i = 0; i < speartraps.size; i++) {
     speartrap = speartraps[i];
-    speartrap.clip = getent(speartrap.target, "targetname");
+    speartrap.clip = getEnt(speartrap.target, "targetname");
     speartrap.clip notsolid();
     speartrap.clip connectpaths();
     speartrap.enable_flag = speartrap.script_noteworthy;
@@ -66,7 +66,7 @@ function sprear_trap_activate_spears(audio_counter, player) {
 
 function spear_trap_damage_all_characters(audio_counter, player) {
   wait(0.1);
-  characters = arraycombine(getplayers(), getaispeciesarray("axis"), 1, 1);
+  characters = arraycombine(getPlayers(), getaispeciesarray("axis"), 1, 1);
   for(i = 0; i < characters.size; i++) {
     char = characters[i];
     if(self spear_trap_is_character_touching(char)) {
@@ -106,8 +106,8 @@ function spear_trap_slow() {
       self thread zm_audio::create_and_play_dialog("general", "spikes_damage");
       self thread _fake_red();
       self dodamage(5, self.origin);
-      playsoundatposition("evt_spear_butt", self.origin);
-      self playrumbleonentity("pistol_fire");
+      playSoundAtPosition("evt_spear_butt", self.origin);
+      self playRumbleOnEntity("pistol_fire");
     }
     self setvelocity((0, 0, 0));
     self setmovespeedscale(0.2);
@@ -145,7 +145,7 @@ function _zombie_spear_trap_damage_wait() {
     println("");
     wait(0.05);
   }
-  self stopanimscripted(0.5);
+  self stopanimScripted(0.5);
   level._num_ai_released++;
 }
 
@@ -224,8 +224,8 @@ function waterfall_trap_init() {
   for(i = 0; i < usetriggers.size; i++) {
     trapstruct = spawnStruct();
     trapstruct.usetrigger = usetriggers[i];
-    trapstruct.usetrigger sethintstring(&"ZOMBIE_NEED_POWER");
-    trapstruct.usetrigger setcursorhint("HINT_NOICON");
+    trapstruct.usetrigger setHintString(&"ZOMBIE_NEED_POWER");
+    trapstruct.usetrigger setCursorHint("HINT_NOICON");
     trapstruct.trap_switches = [];
     trapstruct.trap_damage = [];
     trapstruct.trap_shake = [];
@@ -271,13 +271,13 @@ function waterfall_trap_init() {
 function waterfall_trap_think() {
   while(true) {
     self notify("trap_ready");
-    self.usetrigger sethintstring(&"ZM_TEMPLE_USE_WATER_TRAP");
+    self.usetrigger setHintString(&"ZM_TEMPLE_USE_WATER_TRAP");
     self.usetrigger waittill("trigger", who);
     if(zombie_utility::is_player_valid(who) && !who zm_utility::in_revive_trigger()) {
       who.used_waterfall = 1;
       self thread temple_trap_move_switch();
       self waittill("switch_activated");
-      self.usetrigger sethintstring("");
+      self.usetrigger setHintString("");
       waterfall_trap_on();
       wait(0.5);
       who.used_waterfall = 0;
@@ -287,7 +287,7 @@ function waterfall_trap_think() {
       self thread waterfall_screen_shake(activetime);
       wait(activetime);
       self notify("trap_off");
-      self.usetrigger sethintstring(&"ZM_TEMPLE_WATER_TRAP_COOL");
+      self.usetrigger setHintString(&"ZM_TEMPLE_WATER_TRAP_COOL");
       array::thread_all(self.var_41f396e4, &function_a6e2b85f);
       waterfall_trap_off();
       array::notify_all(self.trap_damage, "trap_off");
@@ -352,7 +352,7 @@ function waterfall_screen_shake_single(activetime, origin) {
 function waterfall_trap_on() {
   soundstruct = struct::get("waterfall_trap_origin", "targetname");
   if(isDefined(soundstruct)) {
-    playsoundatposition("evt_waterfall_trap", soundstruct.origin);
+    playSoundAtPosition("evt_waterfall_trap", soundstruct.origin);
   }
   level notify("waterfall");
   level clientfield::set("waterfall_trap", 1);
@@ -393,7 +393,7 @@ function waterfall_trap_player(fwd, time) {
   wait(1);
   vel = self getvelocity();
   self setvelocity(vel + (fwd * 60));
-  self playrumbleonentity("slide_rumble");
+  self playRumbleOnEntity("slide_rumble");
 }
 
 function waterfall_trap_monkey(magnitude, dir) {
@@ -421,7 +421,7 @@ function init_maze_trap() {
   level.startcells = [];
   level.pathplayers = [];
   level.pathactive = 0;
-  mazeclip = getent("maze_path_clip", "targetname");
+  mazeclip = getEnt("maze_path_clip", "targetname");
   if(isDefined(mazeclip)) {
     mazeclip delete();
   }
@@ -593,7 +593,7 @@ function maze_mover_active(active) {
   if(self.cliponly) {
     if(active) {
       self solid();
-      self disconnectpaths();
+      self disconnectPaths();
       self clientfield::set("mazewall", 1);
     } else {
       self notsolid();
@@ -611,7 +611,7 @@ function _maze_mover_move(goal, time) {
   if(time == 0) {
     time = 0.01;
   }
-  self moveto(goal, time);
+  self moveTo(goal, time);
   self waittill("movedone");
   self.ismoving = 0;
   if(self.isactive) {
@@ -621,7 +621,7 @@ function _maze_mover_move(goal, time) {
   }
   if(self.pathblocker) {
     if(self.isactive) {
-      self disconnectpaths();
+      self disconnectPaths();
     } else {
       self connectpaths();
     }
@@ -1000,7 +1000,7 @@ function maze_vibrate_active_floors(time) {
       cell = level.mazecells[i];
       if(cell.floor.isactive) {
         cell thread maze_vibrate_floor((endtime - gettime()) / 1000);
-        players = getplayers();
+        players = getPlayers();
         for(w = 0; w < players.size; w++) {
           if(players[w] istouching(cell.trigger)) {
             cell.trigger thread trigger::function_d1278be0(players[w], &temple_maze_player_vibrate_on, &temple_maze_player_vibrate_off);
@@ -1063,7 +1063,7 @@ function maze_vibrate_floor_stop() {
     cell = level.mazecells[i];
     if(isDefined(cell.isvibrating) && cell.isvibrating) {
       cell.floor vibrate((0, 0, 1), 1, 1, 0.05);
-      cell.floor rotateto(cell.floor.startangles, 0.1);
+      cell.floor rotateTo(cell.floor.startangles, 0.1);
       cell.floor stopsounds();
     }
   }

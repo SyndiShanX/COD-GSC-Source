@@ -58,7 +58,7 @@ freeze_quest_cleanup(var_a276c861, var_19e802fa) {
     return;
   }
 
-  var_e08890fb = getent("freeze_mode_button", "targetname");
+  var_e08890fb = getEnt("freeze_mode_button", "targetname");
   var_e08890fb movez(var_e08890fb.script_int, 2, 0.2, 0.2);
   wait 1.5;
   var_57e06cb = struct::get("freeze_mode_struct", "targetname");
@@ -87,13 +87,13 @@ freeze_quest_cleanup(var_a276c861, var_19e802fa) {
 
   foreach(barrier in level.var_c422a9ae) {
     barrier solid();
-    barrier disconnectpaths();
+    barrier disconnectPaths();
   }
 
   zm_audio::sndannouncerplayvox(#"freeze_mode");
   level zm_utility::function_e64ac3b6(18, #"hash_552f81c78340aeb3");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_1aab918f();
   }
 
@@ -214,8 +214,8 @@ function_9364acc1() {
   self clientfield::set("" + #"water_player_freeze_fx", 1);
   self clientfield::set_to_player("" + #"water_player_freeze_sfx", 1);
   t_ice = spawn("trigger_damage", self.origin, 0, 15, 72);
-  t_ice enablelinkto();
-  t_ice linkto(self);
+  t_ice enablelinkTo();
+  t_ice linkTo(self);
   self.t_ice = t_ice;
   self thread zm_orange_water::function_872ec0b2(t_ice);
   self thread zm_orange_water::function_6cadbaff();

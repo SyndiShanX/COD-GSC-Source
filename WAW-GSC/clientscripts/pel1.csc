@@ -36,8 +36,8 @@ evet1_side_smoke_begin() {
   level waittill("pol");
 
   println("*** Client : SMOKE!");
-  struct1 = getstruct("side_smoke1", "targetname");
-  struct2 = getstruct("side_smoke2", "targetname");
+  struct1 = getStruct("side_smoke1", "targetname");
+  struct2 = getStruct("side_smoke2", "targetname");
 
   playFX(0, level._effect["side_smoke"], struct1.origin, anglesToForward(struct1.angles));
   playFX(0, level._effect["side_smoke"], struct2.origin, anglesToForward(struct2.angles));
@@ -64,7 +64,7 @@ event1_fake_dist_lvts() {
 
   println("set everything");
   for(i = 0; i < lvts_structs.size; i++) {
-    point = getstruct(lvts_structs[i].target, "targetname");
+    point = getStruct(lvts_structs[i].target, "targetname");
     println("starting movetos");
   }
 
@@ -78,12 +78,12 @@ event1_fake_dist_lvts() {
 event1_aaa_client() {
   level waittill("ab");
 
-  point1 = getent(0, "event1_aaa_fx_point1", "targetname");
-  point2 = getent(0, "event1_aaa_fx_point2", "targetname");
-  point3 = getent(0, "event1_aaa_fx_point3", "targetname");
-  point4 = getent(0, "event1_aaa_fx_point4", "targetname");
-  point5 = getent(0, "event1_aaa_fx_point5", "targetname");
-  point6 = getent(0, "event1_aaa_fx_point6", "targetname");
+  point1 = getEnt(0, "event1_aaa_fx_point1", "targetname");
+  point2 = getEnt(0, "event1_aaa_fx_point2", "targetname");
+  point3 = getEnt(0, "event1_aaa_fx_point3", "targetname");
+  point4 = getEnt(0, "event1_aaa_fx_point4", "targetname");
+  point5 = getEnt(0, "event1_aaa_fx_point5", "targetname");
+  point6 = getEnt(0, "event1_aaa_fx_point6", "targetname");
 
   point1 thread event1_ambient_aaa_fx_think("mof");
   point1 thread event1_ambient_aaa_fx_rotate();
@@ -131,9 +131,9 @@ event1_ambient_aaa_fx_rotate() {
   going_forward = true;
 
   while(1) {
-    self rotateto((312.6, 180, -90), randomfloatrange(3.5, 6));
+    self rotateTo((312.6, 180, -90), randomfloatrange(3.5, 6));
     self waittill("rotatedone");
-    self rotateto((307.4, 1.7, 90), randomfloatrange(3.5, 6));
+    self rotateTo((307.4, 1.7, 90), randomfloatrange(3.5, 6));
     self waittill("rotatedone");
   }
 }
@@ -203,12 +203,12 @@ ambient_fakefire(endonString, delayStart) {
 
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]), (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]), (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
 
-    target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
+    target_org moveTo(targ_point, randomfloatrange(0.5, 6.0));
 
     for(i = 0; i < burst; i++) {
       target = target_org.origin;
 
-      fx_angles = VectorNormalize(target - self.origin);
+      fx_angles = vectorNormalize(target - self.origin);
       playFX(0, muzzleFlash, self.origin, fx_angles);
 
       if(self.origin[0] > 1850 && self.origin[0] < 2300) {
@@ -248,7 +248,7 @@ beach_fakefire_starter() {
 whiz_by_sound(start, end) {
   org = spawn(0, start, "script_origin");
 
-  org moveto(end, 4);
+  org moveTo(end, 4);
 
   fake_ent = spawnfakeent(0);
   setfakeentorg(0, fake_ent, start);
@@ -308,8 +308,8 @@ kill_ambient_trees_left() {
 move_tree_and_delete(tree) {
   wait randomfloatrange(3, 4);
 
-  tree rotateto((180, 270, 0), 1.5, 0.6, 0.1);
-  tree moveto(tree.origin - (0, 0, 1000), 1);
+  tree rotateTo((180, 270, 0), 1.5, 0.6, 0.1);
+  tree moveTo(tree.origin - (0, 0, 1000), 1);
   wait randomfloatrange(1.3, 2.3);
 
   tree delete();

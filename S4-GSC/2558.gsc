@@ -169,8 +169,8 @@ _id_16FB() {
   self._id_B7E9 = [];
   scripts\mp\utility\usability::_id_9A0F(self.team);
   self enablemissilehint(1);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"EQUIPMENT_HINTS/AMMO_BOX_USE");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"EQUIPMENT_HINTS/AMMO_BOX_USE");
   self setuserange(128);
   self setuseholdduration("duration_none");
   self _meth_84D7("tag_hint");

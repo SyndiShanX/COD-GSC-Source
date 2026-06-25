@@ -744,7 +744,7 @@ exploder_rumble() {
     return;
   }
   exploder_delay();
-  level.player playrumbleonentity(self.v["rumble"]);
+  level.player playRumbleOnEntity(self.v["rumble"]);
 }
 
 exploder_delay() {

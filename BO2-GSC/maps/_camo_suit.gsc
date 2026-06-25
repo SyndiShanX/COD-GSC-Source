@@ -21,9 +21,9 @@ autoexec _camo_suit_perk_init() {
   setup_anim();
   flag_init("lock_breaker_perk_used");
   level.obj_lockbreaker = register_objective("");
-  t_use = getent("use_lockbreaker", "targetname");
-  t_use sethintstring(&"SCRIPT_HINT_HACK");
-  t_use setcursorhint("HINT_NOICON");
+  t_use = getEnt("use_lockbreaker", "targetname");
+  t_use setHintString(&"SCRIPT_HINT_HACK");
+  t_use setCursorHint("HINT_NOICON");
   t_use trigger_off();
   flag_wait("level.player");
   level.player waittill_player_has_lock_breaker_perk();

@@ -127,7 +127,7 @@ _id_CEDF(var_0, var_1) {
 _id_233C(var_0) {
   if(isDefined(var_0) && isPlayer(var_0)) {
     if(!isai(var_0)) {
-      var_0 playrumbleonentity("grenade_rumble");
+      var_0 playRumbleOnEntity("grenade_rumble");
       var_0 earthquakeforplayer(0.35, 0.5, var_0.origin, 200);
     }
   }
@@ -144,11 +144,11 @@ _id_DB06(var_0) {
 
   if(scripts\engine\utility::_id_10E76(var_0.origin + var_1 * -45.0, var_0.angles, var_2, cos(43))) {
     var_3 = anglestoright(self.angles);
-    var_4 = vectornormalize(var_2 - var_0 getEye());
+    var_4 = vectorNormalize(var_2 - var_0 getEye());
     var_5 = vectordot(var_1, var_4);
     var_6 = vectordot(var_1, var_3);
     var_7 = var_0 getvelocity();
-    var_8 = vectordot(vectornormalize(var_7), (0, 0, 1));
+    var_8 = vectordot(vectorNormalize(var_7), (0, 0, 1));
 
     if(length(var_7) >= 200 && abs(var_8) < 0.5 && abs(var_6) > 0.75 && var_5 > 0.75) {
       return 1;

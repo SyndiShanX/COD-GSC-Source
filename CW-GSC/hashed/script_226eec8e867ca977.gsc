@@ -66,7 +66,7 @@ function function_ecfc6c75(trap, var_7c56394 = 0) {
     hazard.targetname = "hazard";
     hazard.var_fd5301f9 = "flogger";
     hazard.angles = trap.angles;
-    hazard enablelinkto();
+    hazard enablelinkTo();
   }
 
   trap.script_model = hazard;
@@ -234,8 +234,8 @@ function function_80eed528() {
 
   self.trigger[0] unlink();
   self.trigger[1] unlink();
-  self.trigger[0] linkto(self.script_model, "flogger_trap_rod_jnt", (-100, 0, 0));
-  self.trigger[1] linkto(self.script_model, "flogger_trap_rod_jnt", (100, 0, 0));
+  self.trigger[0] linkTo(self.script_model, "flogger_trap_rod_jnt", (-100, 0, 0));
+  self.trigger[1] linkTo(self.script_model, "flogger_trap_rod_jnt", (100, 0, 0));
   self.trigger[0] triggerenable(0);
   self.trigger[1] triggerenable(0);
 
@@ -256,9 +256,9 @@ function function_80eed528() {
   self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_flogger_eng_start");
   self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_flogger_eng_loop");
   self.script_model thread function_b98fe7eb();
-  self.script_model animscripted("spin_end", self.origin, self.angles, #"p8_fxanim_mp_museum_flogger_trap_anim", "server script", undefined, animationrate);
+  self.script_model animScripted("spin_end", self.origin, self.angles, #"p8_fxanim_mp_museum_flogger_trap_anim", "server script", undefined, animationrate);
   wait length;
-  self.script_model stopanimscripted(0, 1);
+  self.script_model stopanimScripted(0, 1);
   self.script_model namespace_e32bb68::function_ae271c0b("evt_doa_hazard_flogger_eng_loop");
   self.script_model namespace_e32bb68::function_3a59ec34("evt_doa_hazard_flogger_eng_stop");
   triggers = arraycopy(self.trigger);
@@ -310,7 +310,7 @@ function function_ab141bd8(model, trap) {
 
       if(isPlayer(guy)) {
         guy dodamage(isDefined(trap.damage) ? trap.damage : guy.health + 100, guy.origin);
-        guy playrumbleonentity("damage_heavy");
+        guy playRumbleOnEntity("damage_heavy");
 
         if(isDefined(trap.var_2e485cc) && guy.birthtime != gettime()) {
           guy thread status_effect::status_effect_apply(trap.var_2e485cc, guy.currentweapon, self, 1);
@@ -321,7 +321,7 @@ function function_ab141bd8(model, trap) {
 
       if(!is_true(guy.var_e66cd6fb)) {
         v_centroid = guy getcentroid();
-        v_away_from_source = vectornormalize(self.origin - v_centroid);
+        v_away_from_source = vectorNormalize(self.origin - v_centroid);
         v_away_from_source *= 128;
         v_away_from_source = (v_away_from_source[0], v_away_from_source[1], randomintrange(128, 200));
         guy thread namespace_ec06fe4a::function_b4ff2191(v_away_from_source, fling_force);

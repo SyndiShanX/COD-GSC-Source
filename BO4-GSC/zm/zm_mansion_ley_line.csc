@@ -49,7 +49,7 @@ coil_hit_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 
 mansion_mq_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "zm_mansion_mq_rumble");
+    self playRumbleOnEntity(localclientnum, "zm_mansion_mq_rumble");
   }
 }
 
@@ -203,8 +203,8 @@ ley_lines(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
 
     level.var_8709ee5a[level.var_8709ee5a.size] = util::playFXOnTag(localclientnum, #"hash_580bb2a71ac88814", self, "tag_origin");
   } else if(newval == 2) {
-    var_79b95a68 = getent(localclientnum, "beam_man_2", "targetname");
-    var_f1b20bef = getent(localclientnum, "beam_man_3", "targetname");
+    var_79b95a68 = getEnt(localclientnum, "beam_man_2", "targetname");
+    var_f1b20bef = getEnt(localclientnum, "beam_man_3", "targetname");
     level beam::kill(var_79b95a68, "tag_origin", var_f1b20bef, "tag_origin", "beam8_zm_mansion_cemetery_observatory_sm");
     var_db37a1f6 = "beam_obs_";
   } else if(newval == 3) {
@@ -237,10 +237,10 @@ function_81f056fe(localclientnum, newval, var_db37a1f6) {
 
   for(i = 0; i < 3; i++) {
     if(!isDefined(var_79b95a68)) {
-      var_79b95a68 = getent(localclientnum, var_db37a1f6 + i, "targetname");
+      var_79b95a68 = getEnt(localclientnum, var_db37a1f6 + i, "targetname");
     }
 
-    var_f1b20bef = getent(localclientnum, var_db37a1f6 + i + 1, "targetname");
+    var_f1b20bef = getEnt(localclientnum, var_db37a1f6 + i + 1, "targetname");
 
     if(isDefined(var_79b95a68) && isDefined(var_f1b20bef)) {
       if(i == 2 && var_db37a1f6 == "beam_man_" || i == 0 && var_db37a1f6 == "beam_obs_") {
@@ -315,7 +315,7 @@ function_bca55d4e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 power_beam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.e_target = getent(localclientnum, "obs_target", "targetname");
+    self.e_target = getEnt(localclientnum, "obs_target", "targetname");
     v_angles = self gettagangles("tag_fx_beam");
     v_end = self.origin + anglesToForward(v_angles) * 9999;
     self.e_target.origin = v_end;

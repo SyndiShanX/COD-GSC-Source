@@ -211,7 +211,7 @@ _id_2505(var_0, var_1) {
   var_0 = _id_25C1(var_0);
   [[level._id_09B8]]("MOD_RIFLE_BULLET", "torso_upper", var_4);
   _id_25C8(var_0, "weapon_");
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 notsolid();
   var_0 setanim(var_1._id_1048);
 
@@ -1127,7 +1127,7 @@ _id_2574(var_0, var_1, var_2) {
   var_8 setModel(level._id_256B[var_3][var_4._id_256A].model);
   self._id_256A[var_4._id_256A] = var_8;
   var_8 useanimtree(#animtree);
-  var_8 linkto(var_0, level._id_256B[var_3][var_4._id_256A].tag, (0, 0, 0), (0, 0, 0));
+  var_8 linkTo(var_0, level._id_256B[var_3][var_4._id_256A].tag, (0, 0, 0), (0, 0, 0));
   thread _id_2569(var_4, var_8, level._id_256B[var_3][var_4._id_256A].tag, level._id_256B[var_3][var_4._id_256A]._id_2577, var_2);
   return var_8;
 }
@@ -1481,7 +1481,7 @@ _id_259E(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_0._id_2571) && !isDefined(var_0._id_259F)) {
     level thread _id_25A1(var_0, self);
   }
-  var_0 animscripted(var_5, var_7, var_8, var_2);
+  var_0 animScripted(var_5, var_7, var_8, var_2);
 
   if(isai(var_0)) {
     thread _id_0C51(var_0, var_6, var_5);
@@ -1493,7 +1493,7 @@ _id_259E(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(var_9 > 0) {
       wait(var_9);
     }
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
     var_0.interval = 0;
     var_0 thread _id_25A0();
   } else {
@@ -1576,7 +1576,7 @@ _id_25A2(var_0, var_1, var_2) {
 
     if(abs(var_3[2] + 16) <= abs(var_5)) {
       var_0 thread maps\_utility::play_sound_on_entity("generic_death_falling");
-      var_0 animscripted("fastrope_fall", var_0.origin, var_0.angles, var_0._id_2592);
+      var_0 animScripted("fastrope_fall", var_0.origin, var_0.angles, var_0._id_2592);
       var_0 waittillmatch("fastrope_fall", "start_ragdoll");
     }
   }
@@ -1602,7 +1602,7 @@ _id_0C51(var_0, var_1, var_2) {
 }
 
 _id_25A4(var_0, var_1, var_2, var_3) {
-  var_0 animscripted("movetospot", var_1, var_2, var_3);
+  var_0 animScripted("movetospot", var_1, var_2, var_3);
   var_0 waittillmatch("movetospot", "end");
 }
 
@@ -1795,7 +1795,7 @@ _id_25BE(var_0) {
   var_0 notsolid();
   var_0.origin = var_4;
   var_0.angles = var_3;
-  var_0 animscripted("deathanim", var_4, var_3, var_2._id_25A8);
+  var_0 animScripted("deathanim", var_4, var_3, var_2._id_25A8);
   var_5 = 0.3;
 
   if(isDefined(var_2._id_25C0)) {

@@ -36,7 +36,7 @@ func_78A8(param_00) {
   self endon("personal_uav_remove");
   self endon("personal_uav_removed");
   for(;;) {
-    param_00 moveto(self.var_0116, 0.05);
+    param_00 moveTo(self.var_0116, 0.05);
     wait 0.05;
   }
 }
@@ -645,8 +645,8 @@ func_47ED(param_00) {
   self endon("death");
   level endon("game_ended");
   param_00 endon("disconnect");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_PICKUP_TI");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_PICKUP_TI");
   thread func_A10D(param_00);
   for(;;) {
     self waittill("trigger", var_01);
@@ -702,8 +702,8 @@ func_47EA(param_00) {
   self endon("death");
   level endon("game_ended");
   param_00 endon("disconnect");
-  self.var_3773 setcursorhint("HINT_NOICON");
-  self.var_3773 sethintstring(&"MP_DESTROY_TI");
+  self.var_3773 setCursorHint("HINT_NOICON");
+  self.var_3773 setHintString(&"MP_DESTROY_TI");
   self.var_3773 maps\mp\_utility::func_5FB6(param_00);
   for(;;) {
     self.var_3773 waittill("trigger", var_01);
@@ -730,10 +730,10 @@ func_A950() {
 
   var_00 = self.var_0116;
   self method_808C();
-  self setorigin(var_00 + (0, 0, 2000));
+  self setOrigin(var_00 + (0, 0, 2000));
   self allowads(0);
   var_01 = magicbullet("tactical_insertion_parachute_mp", self.var_0116, var_00);
-  self playerlinkto(var_01, undefined, 0, 180, 180, 180, 180, 1);
+  self playerlinkTo(var_01, undefined, 0, 180, 180, 180, 180, 1);
   var_02 = spawn("script_model", var_01.var_0116);
   var_02 setModel("tag_origin");
   var_02 method_8449(var_01);
@@ -1183,8 +1183,8 @@ func_6F4E() {
         continue;
       }
 
-      var_09 = vectornormalize(var_06);
-      var_0A = vectornormalize(var_07);
+      var_09 = vectorNormalize(var_06);
+      var_0A = vectorNormalize(var_07);
       var_08 = vectordot(var_09, var_0A);
       if(var_08 < 0.9659258) {
         continue;
@@ -1283,10 +1283,10 @@ func_A147(param_00, param_01) {
 func_4601(param_00) {
   var_01 = anglesToForward(self getangles());
   var_02 = (var_01[0], var_01[1], var_01[2]);
-  var_02 = vectornormalize(var_02);
+  var_02 = vectorNormalize(var_02);
   var_03 = param_00.var_0116 - self.var_0116;
   var_04 = (var_03[0], var_03[1], var_03[2]);
-  var_04 = vectornormalize(var_04);
+  var_04 = vectorNormalize(var_04);
   var_05 = vectordot(var_02, var_04);
   if(var_05 >= 0.9238795) {
     return 2;

@@ -221,8 +221,8 @@ func_AF05(var_0) {
   }
 
   var_1 glinton(#animtree);
-  var_2 linkto(var_1, "j_door_r");
-  var_3 linkto(var_1, "j_door_l");
+  var_2 linkTo(var_1, "j_door_r");
+  var_3 linkTo(var_1, "j_door_l");
   var_1.var_1FBB = "loot_locker";
   var_1 scripts\sp\anim::func_1F35(var_1, "open_locker_doors");
   if(isDefined(var_4)) {
@@ -677,7 +677,7 @@ func_116DD(var_0, var_1, var_2) {
   var_3 thread lib_0E46::func_48C4("tag_origin", undefined, undefined, undefined, undefined, 35, 0);
   var_3 lib_0E46::func_9016();
   var_4 = undefined;
-  var_5 = getent(self.target, "targetname");
+  var_5 = getEnt(self.target, "targetname");
   var_4 = var_5 scripts\engine\utility::spawn_tag_origin();
   level.player playSound("armory_terminal_start_use");
   var_6 = var_4 scripts\sp\dooruse::func_FA17("hack_terminal");
@@ -818,7 +818,7 @@ func_8835() {
   self.var_87EB = [];
   var_0 = undefined;
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
   }
 
   if(isDefined(var_0)) {

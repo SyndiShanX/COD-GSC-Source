@@ -17,10 +17,10 @@ init() {
 
 vanguard_activate_wait_for_access_notify(var_0) {
   level waittill("alien_vanguard_access_0" + var_0);
-  var_1 = getent("alien_vanguard_blocker_0" + var_0, "targetname");
+  var_1 = getEnt("alien_vanguard_blocker_0" + var_0, "targetname");
   var_1 makeusable();
-  var_1 setcursorhint("HINT_ACTIVATE");
-  var_1 sethintstring(&"MP_ALIEN_DESCENT_VANGUARD_ACTIVATE");
+  var_1 setCursorHint("HINT_ACTIVATE");
+  var_1 setHintString(&"MP_ALIEN_DESCENT_VANGUARD_ACTIVATE");
   var_2 = newhudelem();
   var_2 setshader("waypoint_alien_vanguard", 20, 20);
   var_2.color = (1, 1, 1);
@@ -46,7 +46,7 @@ setup_heli_range() {
   level.vanguardmaxheight = 1800;
   level.vanguardmaxdistancesq = 163840000;
   level.vanguardrangetriggers = getEntArray("remote_heli_range", "targetname");
-  level.vanguardmaxheightent = getent("airstrikeheight", "targetname");
+  level.vanguardmaxheightent = getEnt("airstrikeheight", "targetname");
 
   if(isDefined(level.vanguardmaxheightent)) {
     level.vanguardmaxheight = level.vanguardmaxheightent.origin[2];
@@ -65,7 +65,7 @@ vanguard_activate_think(var_0, var_1, var_2) {
   for(;;) {
     maps\mp\alien\_outline_proto::enable_outline_for_players(var_0, level.players, 2, 0, "high");
     var_2.alpha = 0.5;
-    var_0 sethintstring(&"MP_ALIEN_DESCENT_VANGUARD_ACTIVATE");
+    var_0 setHintString(&"MP_ALIEN_DESCENT_VANGUARD_ACTIVATE");
 
     foreach(var_4 in level.players) {
       if(isDefined(var_4.lowermessage)) {
@@ -101,7 +101,7 @@ vanguard_activate_think(var_0, var_1, var_2) {
 
     maps\mp\alien\_outline_proto::disable_outline_for_players(var_0, level.players);
     var_2.alpha = 0;
-    var_0 sethintstring("");
+    var_0 setHintString("");
     level notify("alien_vanguard_0" + var_1 + "_triggered");
     var_6 = (0, 0, 0);
 
@@ -256,7 +256,7 @@ start_vanguard(var_0) {
 
   var_0 enableaimassist();
   var_0.playerlinked = 1;
-  self cameralinkto(var_0, "tag_origin");
+  self cameralinkTo(var_0, "tag_origin");
   self remotecontrolvehicle(var_0);
   var_0.ammocount = 100;
   self.remoteuav = var_0;
@@ -385,7 +385,7 @@ create_vanguard(var_0, var_1) {
   var_2.attackarrow.angles = (-90, 0, 0);
   var_2.attackarrow.offset = 4;
   var_3 = spawnturret("misc_turret", var_2.origin, "ball_drone_gun_mp", 0);
-  var_3 linkto(var_2, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_2, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
   var_3 setModel("vehicle_drone_vanguard_gun_dlc3");
   var_3 maketurretinoperable();
   var_2.turret = var_3;
@@ -486,7 +486,7 @@ vanguard_turrettarget(var_0) {
   }
 
   var_0 setotherent(var_0.attackarrow);
-  var_0 setturrettargetent(var_0.attackarrow);
+  var_0 setturrettargetEnt(var_0.attackarrow);
 }
 
 vanguard_think(var_0) {
@@ -598,7 +598,7 @@ vanguard_rumble(var_0, var_1, var_2) {
   var_0 endon("end_rumble");
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    self playrumbleonentity(var_1);
+    self playRumbleOnEntity(var_1);
     common_scripts\utility::waitframe();
   }
 }
@@ -669,7 +669,7 @@ updateweaponui(var_0, var_1) {
 
 getstartposition(var_0, var_1) {
   var_2 = (3000, 3000, 3000);
-  var_3 = vectornormalize(var_0.origin - (var_1 + (0, 0, -400)));
+  var_3 = vectorNormalize(var_0.origin - (var_1 + (0, 0, -400)));
   var_4 = rotatevector(var_3, (0, 25, 0));
   var_5 = var_1 + var_4 * var_2;
 
@@ -872,10 +872,10 @@ vanguard_removeplayer(var_0, var_1) {
   var_0 thermalvisionfofoverlayoff();
 
   if(maps\mp\alien\_utility::is_true(var_1.sequence_complete)) {
-    var_2 = getent("blocker_0" + var_0.vanguard_num + "_door", "targetname");
+    var_2 = getEnt("blocker_0" + var_0.vanguard_num + "_door", "targetname");
     var_0 setplayerangles(vectortoangles(var_2.origin + (0, 0, 150) - var_0 getEye()));
   } else {
-    var_3 = getent("alien_vanguard_blocker_0" + var_0.vanguard_num, "targetname");
+    var_3 = getEnt("alien_vanguard_blocker_0" + var_0.vanguard_num, "targetname");
     var_0 setplayerangles(vectortoangles(var_3.origin - var_0 getEye()));
   }
 

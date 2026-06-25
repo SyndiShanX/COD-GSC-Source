@@ -112,15 +112,15 @@ vo_rocket_hall() {
 collapse_door_and_load_area() {
   trigger_wait("trigger_market_unload");
   level thread load_gump("yemen_gump_morals");
-  door = getent("market_unload_door", "targetname");
-  door rotateyaw(90, 0.1);
+  door = getEnt("market_unload_door", "targetname");
+  door rotateYaw(90, 0.1);
   queue_dialog_ally("cd0_drones_overhead_br_0");
 }
 
 terrorist_hunt_setup() {
   add_spawn_function_group("rocket_hall_actors", "script_noteworthy", ::rocket_hall_terrorist_spawnfunc);
   simple_spawn("terrorist_hunt_court_terrorist", maps\yemen_utility::terrorist_teamswitch_spawnfunc);
-  sp_spawner = getent("terrorist_hunt_terrorist", "targetname");
+  sp_spawner = getEnt("terrorist_hunt_terrorist", "targetname");
   sp_spawner terrorist_spawn_full_count(1);
   spawn_quadrotors_at_structs("terrorist_hunt_court_drones", "terrorist_hunt_court_drones");
 }
@@ -176,15 +176,15 @@ rocket_hall_setup() {
   vh_quadrotor.goalradius = 300;
   vh_quadrotor.targetname = "rocket_hall_quadrotor";
   simple_spawn("rocket_hall_extra_guys");
-  e_yemeni_spawner = getent("rocket_hall_yemeni", "targetname");
+  e_yemeni_spawner = getEnt("rocket_hall_yemeni", "targetname");
   e_yemeni_spawner add_spawn_function(::rocket_hall_yemeni_run_in);
   spawn_manager_enable("sm_rocket_hall_yemeni");
   flag_set("terrorist_hunt_rockethall_start");
 }
 
 rocket_hall_american_destruction() {
-  s_grenade_1 = getstruct("rocket_hall_grenade_1", "targetname");
-  s_grenade_2 = getstruct("rocket_hall_grenade_2", "targetname");
+  s_grenade_1 = getStruct("rocket_hall_grenade_1", "targetname");
+  s_grenade_2 = getStruct("rocket_hall_grenade_2", "targetname");
   a_zone_ai = get_ai_array("rocket_hall_actors", "script_noteworthy");
 
   if(isDefined(a_zone_ai[0]) && isalive(a_zone_ai[0])) {
@@ -199,8 +199,8 @@ rocket_hall_american_destruction() {
 rocket_hall_rpgs() {}
 
 rocket_hall_rpg_fire(str_start_struct) {
-  s_rpg_start = getstruct(str_start_struct, "targetname");
-  s_rpg_end = getstruct(s_rpg_start.target, "targetname");
+  s_rpg_start = getStruct(str_start_struct, "targetname");
+  s_rpg_end = getStruct(s_rpg_start.target, "targetname");
   magicbullet("usrpg_magic_bullet_sp", s_rpg_start.origin, s_rpg_end.origin);
 }
 
@@ -213,7 +213,7 @@ rocket_hall_yemeni_run_in() {
   self endon("death");
   self.team = "axis";
   self enableaimassist();
-  s_runto_point = getstruct("rocket_hall_yemeni_goto_spot", "targetname");
+  s_runto_point = getStruct("rocket_hall_yemeni_goto_spot", "targetname");
   level waittill("rocket_hall_bypassed");
   wait(randomfloatrange(0.05, 3));
   self set_ignoreme(1);
@@ -256,7 +256,7 @@ rocket_hall_switch_team() {
   level endon("rocket_hall_zone_hit");
   level endon("rocket_hall_bypassed");
   level waittill("rocket_hall_switch_team");
-  getent("rocket_hall_nosight", "targetname") delete();
+  getEnt("rocket_hall_nosight", "targetname") delete();
 }
 
 rocket_hall_vo() {
@@ -267,7 +267,7 @@ rocket_hall_vo() {
 
 rocket_hall_cleanup() {
   level waittill("rocket_hall_bypassed");
-  vh_quadrotor = getent("rocket_hall_quadrotor", "targetname");
+  vh_quadrotor = getEnt("rocket_hall_quadrotor", "targetname");
 
   if(isDefined(vh_quadrotor)) {
     vh_quadrotor delete();

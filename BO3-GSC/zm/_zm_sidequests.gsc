@@ -394,8 +394,8 @@ function build_assets() {
       switch (asset.script_noteworthy) {
         case "trigger_radius_use": {
           use_trigger = spawn("trigger_radius_use", asset.origin + trigger_offset, trigger_spawnflags, trigger_radius, trigger_height);
-          use_trigger setcursorhint("HINT_NOICON");
-          use_trigger triggerignoreteam();
+          use_trigger setCursorHint("HINT_NOICON");
+          use_trigger triggerIgnoreTeam();
           if(isDefined(asset.radius)) {
             use_trigger.radius = asset.radius;
           }
@@ -761,10 +761,10 @@ function is_facing(facee) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > 0.9;
 }
@@ -776,7 +776,7 @@ function fake_use(notify_string, qualifier_func) {
       return;
     }
     print3d(self.origin, "", vectorscale((0, 1, 0), 255), 1);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       qualifier_passed = 1;
       if(isDefined(qualifier_func)) {

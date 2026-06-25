@@ -403,7 +403,7 @@ has_suffix(var_0, var_1) {
 
 initweaponavatar() {
   level.weaponavatarparent = common_scripts\utility::spawn_tag_origin();
-  level.weaponavatarparent.cameralocation = common_scripts\utility::getstruct("weaponCamera", "targetname");
+  level.weaponavatarparent.cameralocation = common_scripts\utility::getStruct("weaponCamera", "targetname");
   spawnloadingweaponavatar("h1_ak47loading_mp");
   maps\mp\_vl_base::resetweaponavatar();
 }
@@ -591,7 +591,7 @@ getperkbounds(var_0) {
 }
 
 spawnloadingweaponavatar(var_0) {
-  var_1 = common_scripts\utility::getstruct("cameraWeapon", "targetname").origin;
+  var_1 = common_scripts\utility::getStruct("cameraWeapon", "targetname").origin;
   var_2 = spawn("weapon_" + var_0, var_1, 1);
   var_2.isloadingweapon = 1;
   var_2 cloakingenable();
@@ -628,7 +628,7 @@ showloadingweaponavatar(var_0, var_1) {
 
   if(var_6) {
     if(!isDefined(var_2.akimboavatar)) {
-      var_7 = common_scripts\utility::getstruct("cameraWeapon", "targetname").origin;
+      var_7 = common_scripts\utility::getStruct("cameraWeapon", "targetname").origin;
       var_2.akimboavatar = spawn("weapon_" + var_0, var_7, 1);
       var_2.akimboavatar cloakingenable();
       var_2.akimboavatar linktosynchronizedparent(var_2.linker, "j_prop_2", (0, 0, 0), (0, 0, 0));

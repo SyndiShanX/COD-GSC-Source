@@ -94,7 +94,7 @@ func_1AD0(param_00, param_01, param_02, param_03, param_04) {
       }
 
       if(distancesquared(var_09.var_0116, param_02.var_0116) > 90000) {
-        if(vectordot(var_07, vectornormalize(var_09.var_0116 - param_02.var_0116)) < 0.4) {
+        if(vectordot(var_07, vectorNormalize(var_09.var_0116 - param_02.var_0116)) < 0.4) {
           var_06[var_06.size] = var_09;
         }
       }
@@ -381,7 +381,7 @@ func_19A4(param_00, param_01, param_02, param_03) {
       var_08 = maps\mp\bots\_bots_util::func_2C6C();
       var_09 = getnodesinradiussorted(var_08, 256, 0);
       for(var_0A = 0; var_0A < var_09.size; var_0A++) {
-        var_0B = vectornormalize(var_09[var_0A].var_0116 - var_08);
+        var_0B = vectorNormalize(var_09[var_0A].var_0116 - var_08);
         var_0C = var_08 + var_0B * 15;
         if(sighttracepassed(var_0C, var_09[var_0A].var_0116, 0, undefined)) {
           var_07 = var_09[var_0A];
@@ -1031,11 +1031,11 @@ func_1A83() {
 
   for(;;) {
     var_00 = anglesToForward(self.var_19A1 getangles()) * (1, 1, 0);
-    var_00 = vectornormalize(var_00);
+    var_00 = vectorNormalize(var_00);
     foreach(var_02 in self.var_A8C9) {
       var_02.var_A8C7[self.var_37CD] = var_02.var_A8C6[self.var_37CD];
       var_03 = var_02.var_0116 - self.var_19A1.var_0116;
-      var_03 = vectornormalize(var_03);
+      var_03 = vectorNormalize(var_03);
       var_04 = vectordot(var_00, var_03);
       if(var_04 > 0.6) {
         var_02.var_A8C7[self.var_37CD] = var_02.var_A8C7[self.var_37CD] * 0.33;
@@ -1054,13 +1054,13 @@ func_1A83() {
 
 func_37DE(param_00) {
   var_01 = getnodezone(param_00);
-  var_02 = vectornormalize(param_00.var_0116 - self.var_0116);
+  var_02 = vectorNormalize(param_00.var_0116 - self.var_0116);
   for(var_03 = 0; var_03 < level.var_AC9C; var_03++) {
     if(botzonegetcount(var_03, self.var_01A7, "enemy_predict") > 0) {
       if(isDefined(var_01) && var_03 == var_01) {
         return 1;
       } else {
-        var_04 = vectornormalize(getzoneorigin(var_03) - self.var_0116);
+        var_04 = vectorNormalize(getzoneorigin(var_03) - self.var_0116);
         var_05 = vectordot(var_02, var_04);
         if(var_05 > 0.2) {
           return 1;
@@ -1087,14 +1087,14 @@ func_7733(param_00) {
       break;
     }
 
-    var_03 = vectornormalize(getzoneorigin(var_02) - self.var_0116);
+    var_03 = vectorNormalize(getzoneorigin(var_02) - self.var_0116);
     for(var_04 = 0; var_04 < var_01.size; var_04++) {
       var_05 = getnodezone(var_01[var_04]);
       var_06 = 0;
       if(isDefined(var_05) && var_02 == var_05) {
         var_06 = 1;
       } else {
-        var_07 = vectornormalize(var_01[var_04].var_0116 - self.var_0116);
+        var_07 = vectorNormalize(var_01[var_04].var_0116 - self.var_0116);
         var_08 = vectordot(var_07, var_03);
         if(var_08 > 0.2) {
           var_06 = 1;
@@ -1129,7 +1129,7 @@ func_37E0(param_00) {
 
 func_37E1(param_00, param_01) {
   var_02 = anglesToForward(param_00 getangles());
-  var_03 = vectornormalize(param_01.var_0116 - param_00.var_0116);
+  var_03 = vectorNormalize(param_01.var_0116 - param_00.var_0116);
   var_04 = vectordot(var_02, var_03);
   if(var_04 > 0.6) {
     return 1;
@@ -1265,8 +1265,8 @@ func_62FD() {
         if(distancesquared(var_02, self.var_19A1.var_0116) > var_01 * var_01) {
           var_02 = self.var_19A1.var_0116;
           var_04 = 1;
-          var_08 = vectornormalize(var_05 - self.var_19A1.var_0116);
-          var_09 = vectornormalize(var_06);
+          var_08 = vectorNormalize(var_05 - self.var_19A1.var_0116);
+          var_09 = vectorNormalize(var_06);
           if(vectordot(var_08, var_09) < 0.1) {
             self notify("defend_force_node_recalculation");
             wait(0.25);
@@ -1304,10 +1304,10 @@ func_3B6F() {
   var_01 = maps\mp\bots\_bots_util::func_19CC(maps\mp\bots\_bots_util::func_2C6C(), self.var_19AA, var_00);
   if(isDefined(var_01)) {
     if(isDefined(var_00)) {
-      var_02 = vectornormalize(var_00 - var_01.var_0116);
+      var_02 = vectorNormalize(var_00 - var_01.var_0116);
       self.var_28C5 = vectortoangles(var_02);
     } else {
-      var_03 = vectornormalize(var_01.var_0116 - maps\mp\bots\_bots_util::func_2C6C());
+      var_03 = vectorNormalize(var_01.var_0116 - maps\mp\bots\_bots_util::func_2C6C());
       self.var_28C5 = vectortoangles(var_03);
     }
 
@@ -1328,10 +1328,10 @@ func_3B70() {
   var_01 = maps\mp\bots\_bots_util::func_19CD(self.var_19A8, var_00);
   if(isDefined(var_01)) {
     if(isDefined(var_00)) {
-      var_02 = vectornormalize(var_00 - var_01.var_0116);
+      var_02 = vectorNormalize(var_00 - var_01.var_0116);
       self.var_28C5 = vectortoangles(var_02);
     } else {
-      var_03 = vectornormalize(var_01.var_0116 - maps\mp\bots\_bots_util::func_2C6C());
+      var_03 = vectorNormalize(var_01.var_0116 - maps\mp\bots\_bots_util::func_2C6C());
       self.var_28C5 = vectortoangles(var_03);
     }
 
@@ -1350,7 +1350,7 @@ func_3B70() {
 func_3B72() {
   var_00 = maps\mp\bots\_bots_util::func_19CB(maps\mp\bots\_bots_util::func_2C6C(), self.var_19AA);
   if(isDefined(var_00)) {
-    var_01 = vectornormalize(maps\mp\bots\_bots_util::func_2C6C() - var_00.var_0116);
+    var_01 = vectorNormalize(maps\mp\bots\_bots_util::func_2C6C() - var_00.var_0116);
     self.var_28C5 = vectortoangles(var_01);
     self.var_28C6 = var_00;
     return;
@@ -1413,13 +1413,13 @@ func_1A0F(param_00, param_01) {
   }
 
   if(isDefined(param_00)) {
-    var_02 = vectornormalize(param_00 - self.var_28C7);
+    var_02 = vectorNormalize(param_00 - self.var_28C7);
     self.var_28C5 = vectortoangles(var_02);
     return;
   }
 
   if(isDefined(param_01)) {
-    var_02 = vectornormalize(self.var_28C7 - param_01);
+    var_02 = vectorNormalize(self.var_28C7 - param_01);
     self.var_28C5 = vectortoangles(var_02);
   }
 }

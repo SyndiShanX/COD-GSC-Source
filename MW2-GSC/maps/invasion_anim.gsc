@@ -177,7 +177,7 @@ tangled_parachute_guy() {
   self.ignoreme = true;
   self thread magic_bullet_shield();
   self.deathanim = % invasion_parachute_ground_detach_death;
-  node = getent("tangled_parachute_guy_node", "targetname");
+  node = getEnt("tangled_parachute_guy_node", "targetname");
 
   chute = spawn_anim_model("tangled_chute_parachute");
 
@@ -233,14 +233,14 @@ spawn_pizza_rushers() {
 
 animate_burning_tree() {
   wait 3;
-  burning_tree = getent("burning_tree", "script_noteworthy");
+  burning_tree = getEnt("burning_tree", "script_noteworthy");
   burning_tree.animname = "burning_tree";
   burning_tree assign_animtree();
   burning_tree anim_loop_solo(burning_tree, "tree_oak_fire", "stop_burning_tree");
 }
 
 setup_shotgun_guy() {
-  self linkto(level.humvee_front, "tag_guy1");
+  self linkTo(level.humvee_front, "tag_guy1");
   level.humvee_front thread anim_generic_loop(self, "invasion_humvee_exit_v1_guy1_idle", "stop_front_humvee_anims", "tag_guy1");
 
   level waittill("humvee_blows_up");
@@ -254,7 +254,7 @@ setup_shotgun_guy() {
 }
 
 setup_backseat_right_guy() {
-  self linkto(level.humvee_front, "tag_passenger");
+  self linkTo(level.humvee_front, "tag_passenger");
   level.humvee_front thread anim_generic_loop(self, "invasion_humvee_exit_v1_passenger_idle", "stop_front_humvee_anims", "tag_passenger");
 
   level waittill("humvee_blows_up");

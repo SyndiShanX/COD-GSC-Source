@@ -243,7 +243,7 @@ setupExploders() {
     }
     exploder_id_set = false;
     if(isDefined(exploder.target)) {
-      temp_ent = GetEnt(ent.v["target"], "targetname");
+      temp_ent = getEnt(ent.v["target"], "targetname");
       if(isDefined(temp_ent)) {
         exploder_id_set = true;
         temp_ent setexploderid(exploderId);
@@ -251,7 +251,7 @@ setupExploders() {
         org = temp_ent.origin;
         temp_ent transmittargetname();
       } else {
-        temp_ent = GetStruct(ent.v["target"], "targetname");
+        temp_ent = getStruct(ent.v["target"], "targetname");
         org = temp_ent.origin;
         exploderId++;
       }
@@ -288,7 +288,7 @@ playerDamageRumble() {
     if(isDefined(self.specialDamage)) {
       continue;
     }
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 map_is_early_in_the_game() {
@@ -560,7 +560,7 @@ bcTrigger(trigger) {
 }
 waterThink() {
   assert(isDefined(self.target));
-  targeted = GetEnt(self.target, "targetname");
+  targeted = getEnt(self.target, "targetname");
   assert(isDefined(targeted));
   waterHeight = targeted.origin[2];
   targeted = undefined;
@@ -743,7 +743,7 @@ trigger_lookat_think(trigger, endOnFlag) {
         wait(0.5);
         continue;
       }
-      normal = VectorNormalize(target_origin - other.origin);
+      normal = vectorNormalize(target_origin - other.origin);
       player_angles = other GetPlayerAngles();
       player_forward = anglesToForward(player_angles);
       dot = VectorDot(player_forward, normal);
@@ -844,7 +844,7 @@ trigger_notify(trigger, msg) {
   trigger endon("death");
   trigger waittill("trigger", other);
   if(isDefined(trigger.target)) {
-    notify_ent = GetEnt(trigger.target, "targetname");
+    notify_ent = getEnt(trigger.target, "targetname");
     if(isDefined(notify_ent)) {
       notify_ent notify(msg, other);
     }
@@ -1194,7 +1194,7 @@ get_script_linkto_targets() {
   tokens = Strtok(self.script_linkto, " ");
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
-    target = GetEnt(token, "script_linkname");
+    target = getEnt(token, "script_linkname");
     if(isDefined(target)) {
       targets[targets.size] = target;
     }
@@ -1434,7 +1434,7 @@ adjust_placed_weapons() {
 }
 explodable_volume() {
   self thread explodable_volume_think();
-  exploder = GetEnt(self.target, "targetname");
+  exploder = getEnt(self.target, "targetname");
   if(isDefined(exploder) && isDefined(exploder.script_exploder)) {
     level waittill("exploder" + exploder.script_exploder);
   } else {
@@ -1444,7 +1444,7 @@ explodable_volume() {
 }
 explodable_volume_think() {
   assertex(isDefined(self.target), "Explodable Volume must be targeting an exploder or an explodable object.");
-  target = GetEnt(self.target, "targetname");
+  target = getEnt(self.target, "targetname");
   assertex(isDefined(target), "Explodable Volume has an invalid target.");
   if(isDefined(target.remove)) {
     target = target.remove;

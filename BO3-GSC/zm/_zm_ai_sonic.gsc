@@ -119,13 +119,13 @@ function function_56fe13df() {
     self.script_parameters = spot.script_parameters;
   }
   self thread zm_spawner::do_zombie_rise(spot);
-  playsoundatposition("evt_sonic_spawn", self.origin);
+  playSoundAtPosition("evt_sonic_spawn", self.origin);
   thread function_332b9adf();
 }
 
 function function_332b9adf() {
   wait(3);
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("general", "sonic_spawn");
 }
 
@@ -268,12 +268,12 @@ function private sonicattackterminate(entity, asmstatename) {
 function _zombie_screamattack() {
   self playSound("zmb_vocals_sonic_scream");
   self thread _zombie_playscreamfx();
-  players = getplayers();
+  players = getPlayers();
   array::thread_all(players, &_player_screamattackwatch, self);
 }
 
 function _zombie_scream_attack_done() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] notify("scream_watch_done");
   }
@@ -289,7 +289,7 @@ function _zombie_playscreamfx() {
   self.screamfx = spawn("script_model", origin);
   self.screamfx setModel("tag_origin");
   self.screamfx.angles = self gettagangles(tag);
-  self.screamfx linkto(self, tag);
+  self.screamfx linkTo(self, tag);
   playFXOnTag(level._effect["sonic_attack"], self.screamfx, "tag_origin");
   self util::waittill_any("death", "scream_attack_done", "shrink");
   self.screamfx delete();
@@ -319,7 +319,7 @@ function _player_in_blur_area(sonic_zombie) {
     return false;
   }
   dirtoplayer = self.origin - sonic_zombie.origin;
-  dirtoplayer = vectornormalize(dirtoplayer);
+  dirtoplayer = vectorNormalize(dirtoplayer);
   sonicdir = anglesToForward(sonic_zombie.angles);
   dot = vectordot(dirtoplayer, sonicdir);
   if(dot < 0.4) {
@@ -361,7 +361,7 @@ function _player_screamattackdamage(time, blurscale, earthquakescale, rumble, at
   self thread _player_blurfailsafe();
   earthquake(earthquakescale, 3, attacker.origin, level.sonicscreamdamageradius, self);
   visionset_mgr::activate("overlay", "zm_ai_screecher_blur", self);
-  self playrumbleonentity(rumble);
+  self playRumbleOnEntity(rumble);
   self _player_screamattack_wait(time);
   visionset_mgr::deactivate("overlay", "zm_ai_screecher_blur", self);
   self notify("blur_cleared");
@@ -390,7 +390,7 @@ function _zombie_setupfxonjoint(jointname, fxname) {
   effectent = spawn("script_model", origin);
   effectent setModel("tag_origin");
   effectent.angles = self gettagangles(jointname);
-  effectent linkto(self, jointname);
+  effectent linkTo(self, jointname);
   playFXOnTag(level._effect[fxname], effectent, "tag_origin");
   return effectent;
 }
@@ -529,7 +529,7 @@ function _sonic_zombie_get_enemies_in_range() {
     if(test_range_squared < fling_range_squared) {
       level.soniczombie_fling_enemies[level.soniczombie_fling_enemies.size] = zombies[i];
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-      fling_vec = vectornormalize(test_origin - center);
+      fling_vec = vectorNormalize(test_origin - center);
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 100 + (100 * dist_mult));
       level.soniczombie_fling_vecs[level.soniczombie_fling_vecs.size] = fling_vec;
@@ -612,7 +612,7 @@ function _sonic_damage_callback(str_mod, str_hit_location, v_hit_origin, e_playe
     if(!isDefined(self.damagecount)) {
       self.damagecount = 0;
     }
-    if((self.damagecount % (int(getplayers().size * level.sonichealthmultiplier))) == 0) {
+    if((self.damagecount % (int(getPlayers().size * level.sonichealthmultiplier))) == 0) {
       e_player zm_score::player_add_points("thundergun_fling", 10, str_hit_location, self.isdog);
     }
     self.damagecount++;

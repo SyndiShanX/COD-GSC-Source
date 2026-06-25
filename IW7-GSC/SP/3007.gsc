@@ -44,7 +44,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_7 = var_5.var_10871;
     var_5.var_10871 = var_0;
     if(var_7 != var_0) {
-      var_8 = getent(var_7, "targetname");
+      var_8 = getEnt(var_7, "targetname");
       if(isDefined(var_8)) {
         var_8 delete();
       }
@@ -182,7 +182,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(issubstr(var_13.classname, "trigger")) {
       if(!isDefined(var_13.var_AD47) || var_13.var_AD47 == 0) {
-        var_13 enablelinkto();
+        var_13 enablelinkTo();
         var_13 func_8314();
         var_13.var_AD47 = 1;
       }
@@ -221,19 +221,19 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
         switch (var_13.var_336) {
           case "col_door_left":
             var_9.var_4D94.var_5A13.var_4348 = var_13;
-            var_9.var_4D94.var_5A13.var_4348 linkto(var_9, var_9.var_4D94.var_5A13.physics_setgravitydynentscalar);
+            var_9.var_4D94.var_5A13.var_4348 linkTo(var_9, var_9.var_4D94.var_5A13.physics_setgravitydynentscalar);
             var_9.var_4D94.var_5A13.var_4284 = 1;
             break;
 
           case "col_door_right":
             var_9.var_4D94.var_5A27.var_4348 = var_13;
-            var_9.var_4D94.var_5A27.var_4348 linkto(var_9, var_9.var_4D94.var_5A27.physics_setgravitydynentscalar);
+            var_9.var_4D94.var_5A27.var_4348 linkTo(var_9, var_9.var_4D94.var_5A27.physics_setgravitydynentscalar);
             var_9.var_4D94.var_5A27.var_4284 = 1;
             break;
 
           case "col_door_back":
             var_9.var_4D94.var_5A01.var_4348 = var_13;
-            var_9.var_4D94.var_5A01.var_4348 linkto(var_9, var_9.var_4D94.var_5A01.physics_setgravitydynentscalar);
+            var_9.var_4D94.var_5A01.var_4348 linkTo(var_9, var_9.var_4D94.var_5A01.physics_setgravitydynentscalar);
             var_9.var_4D94.var_5A01.var_4284 = 1;
             break;
 
@@ -248,7 +248,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
           var_13 = var_12[2] + "_" + var_12[3];
           var_14 = scripts\engine\utility::spawn_tag_origin(var_9 gettagorigin("tag_seat_" + var_13), var_9 gettagangles("tag_seat_" + var_13));
           var_14.var_4348 = var_13;
-          var_13 linkto(var_14);
+          var_13 linkTo(var_14);
           var_9.var_4D94.var_F08C[var_13] = var_14;
           var_13 connectpaths();
           var_13 notsolid();
@@ -284,8 +284,8 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
 
         var_15.var_32D9 = var_15.var_D69B;
         var_15.var_BCDA = var_15.var_D69D scripts\engine\utility::spawn_tag_origin();
-        var_15.var_BCDA linkto(var_15.var_D69D, "tag_origin", (0, 0, 0), (0, 0, 0));
-        var_15 linkto(var_15.var_BCDA);
+        var_15.var_BCDA linkTo(var_15.var_D69D, "tag_origin", (0, 0, 0), (0, 0, 0));
+        var_15 linkTo(var_15.var_BCDA);
         if(!var_15 scripts\sp\utility::func_65DF("ent_flag_turret_detach")) {
           var_15 scripts\sp\utility::func_65E0("ent_flag_turret_detach");
         }
@@ -330,21 +330,21 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9.var_981A = var_9.var_4D94.linkpoint.angles;
   foreach(var_13 in var_9.var_4D94.partnerheli) {
     if(isDefined(var_9.var_4D94.var_AD3E) && issubstr(var_13.classname, "light")) {
-      var_13 linkto(var_9.var_4D94.var_AD3E);
+      var_13 linkTo(var_9.var_4D94.var_AD3E);
       continue;
     }
 
     if(isDefined(var_9.var_4D94.var_AD3F) && issubstr(var_13.classname, "reflection")) {
-      var_13 linkto(var_9.var_4D94.var_AD3F);
+      var_13 linkTo(var_9.var_4D94.var_AD3F);
       continue;
     }
 
     if(isDefined(var_9.var_4D94.var_AD3D) && issubstr(var_13.classname, "script_brushmodel") && isDefined(var_13.var_336) && var_13.var_336 == var_5.var_1325C) {
-      var_13 linkto(var_9.var_4D94.var_AD3D);
+      var_13 linkTo(var_9.var_4D94.var_AD3D);
       continue;
     }
 
-    var_13 linkto(var_9.var_4D94.linkpoint);
+    var_13 linkTo(var_9.var_4D94.linkpoint);
   }
 
   var_1B = undefined;
@@ -355,18 +355,18 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(isDefined(var_9.var_4D94.var_AD3E)) {
-    var_9.var_4D94.var_AD3E linkto(var_9, var_1B, (0, 0, 0), (0, 0, 0));
+    var_9.var_4D94.var_AD3E linkTo(var_9, var_1B, (0, 0, 0), (0, 0, 0));
   }
 
   if(isDefined(var_9.var_4D94.var_AD3F)) {
-    var_9.var_4D94.var_AD3F linkto(var_9, var_1B, (0, 0, 0), (0, 0, 0));
+    var_9.var_4D94.var_AD3F linkTo(var_9, var_1B, (0, 0, 0), (0, 0, 0));
   }
 
   if(isDefined(var_9.var_4D94.var_AD3D)) {
-    var_9.var_4D94.var_AD3D linkto(var_9, var_1B, (0, 0, 0), (0, 0, 0));
+    var_9.var_4D94.var_AD3D linkTo(var_9, var_1B, (0, 0, 0), (0, 0, 0));
   }
 
-  var_9.var_4D94.linkpoint linkto(var_9, var_1B, (0, 0, 0), (0, 0, 0));
+  var_9.var_4D94.linkpoint linkTo(var_9, var_1B, (0, 0, 0), (0, 0, 0));
   var_9 func_10CB0();
   if(isDefined(var_9.var_4D94.var_4D6C.var_4348)) {
     var_9 func_10C25();
@@ -481,7 +481,7 @@ func_106B9(var_0, var_1) {
 
   var_2 = "tag_seat_" + var_0;
   self.var_4D94.var_F08B[var_0] = ::scripts\sp\utility::func_10639("dropship_seat");
-  self.var_4D94.var_F08B[var_0] linkto(self, var_2, (0, 0, 0), (0, 0, 0));
+  self.var_4D94.var_F08B[var_0] linkTo(self, var_2, (0, 0, 0), (0, 0, 0));
   self.var_4D94.var_F08B[var_0].var_1FBB = "dropship_seat_" + var_0;
   self.var_4D94.var_F08B[var_0] glinton(#animtree);
   if(isDefined(var_1) && var_1) {
@@ -490,9 +490,9 @@ func_106B9(var_0, var_1) {
   }
 
   if(isDefined(self.var_4D94.var_F08C[var_0])) {
-    self.var_4D94.var_F08C[var_0].var_4348 disconnectpaths();
+    self.var_4D94.var_F08C[var_0].var_4348 disconnectPaths();
     self.var_4D94.var_F08C[var_0].var_4348 solid();
-    self.var_4D94.var_F08C[var_0] linkto(self.var_4D94.var_F08B[var_0], "tag_origin", (0, 0, 0), (0, 0, 0));
+    self.var_4D94.var_F08C[var_0] linkTo(self.var_4D94.var_F08B[var_0], "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -589,7 +589,7 @@ func_78DC() {
 
 func_5D92(var_0, var_1) {
   scripts\engine\utility::flag_wait("scriptables_ready");
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   if(isDefined(var_2)) {
     var_2 delete();
   }
@@ -1200,7 +1200,7 @@ func_4CBE() {
 
 func_138FB(var_0) {
   func_3D6B(var_0);
-  level.player setorigin(self.var_4D94.var_10DED[var_0].origin);
+  level.player setOrigin(self.var_4D94.var_10DED[var_0].origin);
   level.player setplayerangles(self.var_4D94.var_10DED[var_0].angles);
   self.var_4D94.var_13060[var_0] = 1;
 }
@@ -1306,13 +1306,13 @@ func_122E(var_0) {
 }
 
 func_129F(var_0) {
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   if(!isDefined(var_1)) {
     var_1 = getvehiclenode(var_0, "targetname");
   }
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   }
 
   return var_1;
@@ -1529,7 +1529,7 @@ func_1179(var_0, var_1) {
     if(var_0.var_92DD) {
       var_0.var_92DD = 0;
       var_7 = 0;
-      var_0 animscripted(var_1 + var_4, self.origin, self.angles, var_6);
+      var_0 animScripted(var_1 + var_4, self.origin, self.angles, var_6);
     } else {
       var_0 setanimknob(var_6, 1, var_7, var_8);
     }
@@ -1605,7 +1605,7 @@ func_1239(var_0) {
     self notify("off_turret");
     level.player unlink();
     thread func_B98D();
-    level.player setorigin(var_0.var_D69B.origin);
+    level.player setOrigin(var_0.var_D69B.origin);
     level.player takeallweapons();
     level.player allowcrouch(1);
     level.player allowprone(1);
@@ -1641,7 +1641,7 @@ func_123E(var_0) {
     var_0 scripts\sp\utility::func_65E1("ent_flag_turret_mounted");
     var_0 waittill("turret_deactivate");
     self notify("off_turret");
-    level.player setorigin(var_0.var_D69B.origin);
+    level.player setOrigin(var_0.var_D69B.origin);
   }
 }
 
@@ -1685,7 +1685,7 @@ func_123F(var_0) {
     level.player unlink();
     thread func_B98D();
     var_0 show();
-    level.player setorigin(var_0.var_D69B.origin);
+    level.player setOrigin(var_0.var_D69B.origin);
     level.player takeallweapons();
     level.player allowcrouch(1);
     level.player allowprone(1);
@@ -1811,7 +1811,7 @@ func_123D(var_0) {
     var_6 = (func_1E7A(0, var_0, var_4), func_1E7A(1, var_0, var_4), func_1E7A(2, var_0, var_4));
     self.var_BCDA.origin = self.var_4B9F.origin + var_5;
     self.var_BCDA.angles = var_6;
-    self.var_BCDA linkto(self.var_D69D);
+    self.var_BCDA linkTo(self.var_D69D);
     scripts\engine\utility::waitframe();
     var_2 = var_2 + 0.05;
   }
@@ -1942,7 +1942,7 @@ func_1223() {
     var_0 = spawnStruct();
     var_0.name = "vfx_dropship_smoke_cabin_01";
     var_0.var_C264 = scripts\engine\utility::spawn_tag_origin();
-    var_0.var_C264 linkto(self, "tag_origin", (0, 0, 64), (0, 0, 0));
+    var_0.var_C264 linkTo(self, "tag_origin", (0, 0, 64), (0, 0, 0));
     var_0.physics_setgravitydynentscalar = "tag_origin";
     self.var_4D94.fx["damage"]["cabin_smoke"] = var_0;
   }

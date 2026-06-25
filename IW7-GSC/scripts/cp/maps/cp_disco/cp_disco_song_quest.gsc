@@ -548,7 +548,7 @@ setup_working_clocks() {
   var_0 = getEntArray("working_clock_minute_hand", "targetname");
   var_1 = [];
   foreach(var_3 in var_0) {
-    var_4 = getent(var_3.target, "targetname");
+    var_4 = getEnt(var_3.target, "targetname");
     var_1[var_1.size] = var_4;
   }
 
@@ -603,7 +603,7 @@ clock_hand_logic(var_0) {
 }
 
 setup_treasure_step() {
-  self.loc_struct = scripts\engine\utility::getstruct(self.stepname, "script_noteworthy");
+  self.loc_struct = scripts\engine\utility::getStruct(self.stepname, "script_noteworthy");
   switch (self.stepname) {
     case "clock_s_treasure":
       self.words = "mynameisdavidsavageyouseekmytreasuregoodluckfindingitamongstallthegarbageinthiscity";
@@ -953,7 +953,7 @@ cp_disco_factor_value(var_0, var_1, var_2) {
 }
 
 get_disco_dot(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = anglesToForward(var_1);
   var_5 = vectordot(var_4, var_3);
   return var_5;

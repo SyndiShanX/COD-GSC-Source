@@ -66,11 +66,11 @@ function main() {
     util::registernumlives(1, 1);
     util::registertimelimit(0, 0);
   }
-  badtrig = getent("sab_bomb_defuse_allies", "targetname");
+  badtrig = getEnt("sab_bomb_defuse_allies", "targetname");
   if(isDefined(badtrig)) {
     badtrig delete();
   }
-  badtrig = getent("sab_bomb_defuse_axis", "targetname");
+  badtrig = getEnt("sab_bomb_defuse_axis", "targetname");
   if(isDefined(badtrig)) {
     badtrig delete();
   }
@@ -239,12 +239,12 @@ function sabotage() {
   level.bombplanted = 0;
   level.bombexploded = 0;
   level._effect["bombexplosion"] = "_t6/maps/mp_maps/fx_mp_exp_bomb";
-  trigger = getent("sab_bomb_pickup_trig", "targetname");
+  trigger = getEnt("sab_bomb_pickup_trig", "targetname");
   if(!isDefined(trigger)) {
     util::error("No sab_bomb_pickup_trig trigger found in map.");
     return;
   }
-  visuals[0] = getent("sab_bomb", "targetname");
+  visuals[0] = getEnt("sab_bomb", "targetname");
   if(!isDefined(visuals[0])) {
     util::error("No sab_bomb script_model found in map.");
     return;
@@ -264,20 +264,20 @@ function sabotage() {
   level.sabbomb.objpoints["allies"].archived = 1;
   level.sabbomb.objpoints["axis"].archived = 1;
   level.sabbomb.autoresettime = 60;
-  if(!isDefined(getent("sab_bomb_axis", "targetname"))) {
+  if(!isDefined(getEnt("sab_bomb_axis", "targetname"))) {
     util::error("");
     return;
   }
-  if(!isDefined(getent("sab_bomb_allies", "targetname"))) {
+  if(!isDefined(getEnt("sab_bomb_allies", "targetname"))) {
     util::error("");
     return;
   }
   if(game["switchedsides"]) {
-    level.bombzones["allies"] = createbombzone("allies", getent("sab_bomb_axis", "targetname"));
-    level.bombzones["axis"] = createbombzone("axis", getent("sab_bomb_allies", "targetname"));
+    level.bombzones["allies"] = createbombzone("allies", getEnt("sab_bomb_axis", "targetname"));
+    level.bombzones["axis"] = createbombzone("axis", getEnt("sab_bomb_allies", "targetname"));
   } else {
-    level.bombzones["allies"] = createbombzone("allies", getent("sab_bomb_allies", "targetname"));
-    level.bombzones["axis"] = createbombzone("axis", getent("sab_bomb_axis", "targetname"));
+    level.bombzones["allies"] = createbombzone("allies", getEnt("sab_bomb_allies", "targetname"));
+    level.bombzones["axis"] = createbombzone("axis", getEnt("sab_bomb_axis", "targetname"));
   }
 }
 

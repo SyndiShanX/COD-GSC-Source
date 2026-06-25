@@ -52,7 +52,7 @@ function_32acf82a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 vent_interact_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "damage_light");
+    self playRumbleOnEntity(localclientnum, "damage_light");
   }
 }
 
@@ -197,7 +197,7 @@ function_f05553f1(localclientnum, tag) {
 
 function_88991669(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isDefined(level.var_41858f75)) {
-    level.var_41858f75 = getent(localclientnum, "pap_control_panel", "targetname");
+    level.var_41858f75 = getEnt(localclientnum, "pap_control_panel", "targetname");
     level.var_41858f75 util::waittill_dobj(localclientnum);
 
     if(isDefined(level.var_41858f75)) {

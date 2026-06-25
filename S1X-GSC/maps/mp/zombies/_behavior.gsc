@@ -106,12 +106,12 @@ humanoid_seek_enemy_melee(var_0) {
         var_10 = 1;
       }
 
-      self scragentsetgoalradius(self.defaultgoalradius);
+      self scragentsetgoalRadius(self.defaultgoalradius);
     } else if(!maps\mp\agents\humanoid\_humanoid_util::hasvalidmeleesectorsfortype(var_1, self.meleesectortype)) {
-      self scragentsetgoalradius(self.defaultgoalradius);
+      self scragentsetgoalRadius(self.defaultgoalradius);
       var_10 = 1;
     } else {
-      self scragentsetgoalradius(var_2);
+      self scragentsetgoalRadius(var_2);
 
       if(var_9 <= var_3) {
         var_6.origin = self.origin;

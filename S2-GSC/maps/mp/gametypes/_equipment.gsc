@@ -118,8 +118,8 @@ func_9DDB(param_00) {
   level endon("game_ended");
   param_00 endon("disconnect");
   param_00 endon("death");
-  self.var_9D65 setcursorhint("HINT_NOICON");
-  self.var_9D65 sethintstring(&"MP_PICKUP_TROPHY");
+  self.var_9D65 setCursorHint("HINT_NOICON");
+  self.var_9D65 setHintString(&"MP_PICKUP_TROPHY");
   self.var_9D65 maps\mp\_utility::func_871E(param_00);
   self.var_9D65 thread maps\mp\_utility::func_6819(param_00);
   for(;;) {
@@ -277,7 +277,7 @@ func_9DDC(param_00) {
   }
 
   var_01 = anglesToForward(self.var_001D + self.var_9DCE);
-  var_02 = vectornormalize(param_00.var_0116 - self.var_0116);
+  var_02 = vectorNormalize(param_00.var_0116 - self.var_0116);
   var_03 = vectordot(var_01, var_02);
   return var_03 > self.var_61C0;
 }

@@ -725,7 +725,7 @@ placeturret(turret) {
     turret playLoopSound(level.auto_turret_settings[turret.turrettype].loopsoundfx);
   }
 
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   turret notify("turret_placed");
 }
 
@@ -1276,12 +1276,12 @@ deleteturretusetrigger() {
 spawnturretpickuptrigger(player) {
   pos = self.origin + vectorscale((0, 0, 1), 15.0);
   self.pickuptrigger = spawn("trigger_radius_use", pos);
-  self.pickuptrigger setcursorhint("HINT_NOICON", self);
+  self.pickuptrigger setCursorHint("HINT_NOICON", self);
 
   if(isDefined(level.auto_turret_settings[self.turrettype].hintstring)) {
-    self.pickuptrigger sethintstring(level.auto_turret_settings[self.turrettype].hintstring);
+    self.pickuptrigger setHintString(level.auto_turret_settings[self.turrettype].hintstring);
   } else {
-    self.pickuptrigger sethintstring(&"MP_GENERIC_PICKUP");
+    self.pickuptrigger setHintString(&"MP_GENERIC_PICKUP");
   }
 
   if(level.teambased) {
@@ -1326,7 +1326,7 @@ watchturretuse(trigger) {
         self.spawninfluencercloseid = undefined;
       }
 
-      player playrumbleonentity("damage_heavy");
+      player playRumbleOnEntity("damage_heavy");
       self playSound("mpl_turret_down");
       self deleteturretusetrigger();
 
@@ -1443,7 +1443,7 @@ doesmicrowaveturretaffectentity(entity) {
     return false;
   }
 
-  entdirection = vectornormalize(entity.origin - self.origin);
+  entdirection = vectorNormalize(entity.origin - self.origin);
   forward = anglesToForward(self.angles);
   dot = vectordot(entdirection, forward);
 
@@ -1531,8 +1531,8 @@ turret_microwave_think(player) {
   self endon("destroy_turret");
   wait(level.auto_turret_settings[self.turrettype].turretinitdelay);
   trigger = spawn("trigger_radius", self.origin + (0, 0, level.microwave_radius * -1), level.aitriggerspawnflags | level.vehicletriggerspawnflags, level.microwave_radius, level.microwave_radius * 2);
-  trigger enablelinkto();
-  trigger linkto(self);
+  trigger enablelinkTo();
+  trigger linkTo(self);
   self thread deletetriggeronparentdeath(trigger);
   self thread microwave_fx();
   self thread turret_microwave_watchfordogs(trigger, player);
@@ -1600,7 +1600,7 @@ doesmicrowaveturretaffectdog(entity) {
     return false;
   }
 
-  entdirection = vectornormalize(entity.origin - self.origin);
+  entdirection = vectorNormalize(entity.origin - self.origin);
   forward = anglesToForward(self.angles);
   dot = vectordot(entdirection, forward);
 
@@ -1830,9 +1830,9 @@ spawnturrethackertrigger(player) {
   triggerorigin = self.origin + vectorscale((0, 0, 1), 10.0);
   self.hackertrigger = spawn("trigger_radius_use", triggerorigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
 
-  self.hackertrigger setcursorhint("HINT_NOICON", self);
+  self.hackertrigger setCursorHint("HINT_NOICON", self);
   self.hackertrigger setignoreentfortrigger(self);
-  self.hackertrigger sethintstring(level.auto_turret_settings[self.turrettype].hackerhintstring);
+  self.hackertrigger setHintString(level.auto_turret_settings[self.turrettype].hackerhintstring);
   self.hackertrigger setperkfortrigger("specialty_disarmexplosive");
   self.hackertrigger thread maps\mp\gametypes\_weaponobjects::hackertriggersetvisibility(player);
   self thread hackerthink(self.hackertrigger, player);
@@ -1920,9 +1920,9 @@ hackerthink(trigger, owner) {
 spawnturretdisabletrigger(player) {
   triggerorigin = self.origin + vectorscale((0, 0, 1), 10.0);
   self.disabletrigger = spawn("trigger_radius_use", triggerorigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
-  self.disabletrigger setcursorhint("HINT_NOICON", self);
+  self.disabletrigger setCursorHint("HINT_NOICON", self);
   self.disabletrigger setignoreentfortrigger(self);
-  self.disabletrigger sethintstring(level.auto_turret_settings[self.turrettype].disablehintstring);
+  self.disabletrigger setHintString(level.auto_turret_settings[self.turrettype].disablehintstring);
   self.disabletrigger thread maps\mp\gametypes\_weaponobjects::hackertriggersetvisibility(player);
   self thread disabletriggerthink(self.disabletrigger, player);
 }
@@ -2124,7 +2124,7 @@ turretscanstartwaiter() {
   self endon("turret_carried");
   level endon("game_ended");
   turret_scan_start_sound_ent = spawn("script_origin", self.origin);
-  turret_scan_start_sound_ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  turret_scan_start_sound_ent linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   self thread turretscanstopwaiter(turret_scan_start_sound_ent);
   self thread turretscanstopwaitercleanup(turret_scan_start_sound_ent);
 

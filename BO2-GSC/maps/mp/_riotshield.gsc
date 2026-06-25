@@ -208,7 +208,7 @@ attachreconmodel(modelname, owner) {
   reconmodel.angles = self.angles;
   reconmodel setModel(modelname);
   reconmodel.model_name = modelname;
-  reconmodel linkto(self);
+  reconmodel linkTo(self);
   reconmodel setcontents(0);
   reconmodel resetreconmodelvisibility(owner);
   reconmodel thread resetreconmodelonevent("joined_team", owner);
@@ -228,7 +228,7 @@ spawnriotshieldcover(origin, angles) {
   shield_ent attachreconmodel(level.detectshieldmodel, self);
   shield_ent useanimtree(#animtree);
   shield_ent setscriptmoverflag(0);
-  shield_ent disconnectpaths();
+  shield_ent disconnectPaths();
   return shield_ent;
 }
 

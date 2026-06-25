@@ -184,7 +184,7 @@ battleship_artillery_fire() {
         thread fire_arty_gun(fire_point.origin);
 
         if(isDefined(fire_point.target)) {
-          fire_point = getstruct(fire_point.target, "targetname");
+          fire_point = getStruct(fire_point.target, "targetname");
         } else {
           break;
         }
@@ -272,7 +272,7 @@ cliff_fire(fx_firepoint, gun) {
 }
 
 model3_tracerfire(fx_firepoint, gun) {
-  ent = getstruct(fx_firepoint, "targetname");
+  ent = getStruct(fx_firepoint, "targetname");
 
   playFX(level._effect["gunflash"], ent.origin, anglesToForward(ent.angles));
   snd = spawn("script_model", ent.origin);

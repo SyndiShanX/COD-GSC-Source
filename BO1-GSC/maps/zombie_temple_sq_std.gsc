@@ -36,7 +36,7 @@ delayed_start_skit() {
 }
 play_waterthrash_loop() {
   level endon("sq_StD_over");
-  struct = getstruct("sq_location_std", "targetname");
+  struct = getStruct("sq_location_std", "targetname");
   if(!isDefined(struct)) {
     return;
   }
@@ -162,7 +162,7 @@ exit_stage(success) {
 }
 std_story_vox(player) {
   level endon("sq_StD_over");
-  struct = getstruct("sq_location_std", "targetname");
+  struct = getStruct("sq_location_std", "targetname");
   if(!isDefined(struct)) {
     return;
   }

@@ -778,7 +778,7 @@ setposition(var_0, var_1) {
   self.trigger.origin = var_0;
 
   if(level.gametype == "ball" || level.gametype == "tdef") {
-    self.trigger linkto(self.visuals[0]);
+    self.trigger linkTo(self.visuals[0]);
   }
 
   self.curorigin = self.trigger.origin;
@@ -883,7 +883,7 @@ setdropped(var_0) {
     }
 
     var_20 = (cos(var_18), sin(var_18), 0);
-    var_20 = vectornormalize(var_20 - var_13["normal"] * vectordot(var_20, var_13["normal"]));
+    var_20 = vectorNormalize(var_20 - var_13["normal"] * vectordot(var_20, var_13["normal"]));
     var_21 = 0;
 
     if(level.gametype == "ctf" || isbombmode()) {
@@ -935,10 +935,10 @@ setdropped(var_0) {
         self.var_E25D = 1;
       } else {
         for(var_23 = 0; var_23 < self.visuals.size; var_23++) {
-          self.visuals[var_23] linkto(var_24);
+          self.visuals[var_23] linkTo(var_24);
         }
 
-        self.trigger linkto(var_24);
+        self.trigger linkTo(var_24);
         var_26 = spawnStruct();
         var_26.carryobject = self;
         var_26.deathoverridecallback = ::carryobject_overridemovingplatformdeath;
@@ -2065,7 +2065,7 @@ useholdthink(var_0) {
   if(isPlayer(var_0)) {
     var_0 getweaponvariantattachments(self.trigger);
   } else {
-    var_0 linkto(self.trigger);
+    var_0 linkTo(self.trigger);
   }
 
   var_0 getweaponrootname();
@@ -2410,14 +2410,14 @@ func_12F67(var_0, var_1) {
         var_7 = var_2[var_4] == "mlg_allies" || var_2[var_4] == "mlg_axis";
 
         if(isDefined(self.carrier) && (!shouldpingobject(var_0) || var_7)) {
-          var_6 settargetent(self.carrier);
+          var_6 settargetEnt(self.carrier);
         } else if(!isDefined(self.carrier) && isDefined(self.objectiveonvisuals) && self.objectiveonvisuals) {
-          var_6 settargetent(self.visuals[0]);
+          var_6 settargetEnt(self.visuals[0]);
         } else {
           var_6 getplayersinradiusview();
         }
       } else if(isDefined(self.var_C2B4)) {
-        var_6 settargetent(self.var_C2B4);
+        var_6 settargetEnt(self.var_C2B4);
       }
     } else {
       var_6 fadeovertime(0.05);
@@ -2613,7 +2613,7 @@ setteamusetext(var_0, var_1) {
 }
 
 setusehinttext(var_0) {
-  self.trigger sethintstring(var_0);
+  self.trigger setHintString(var_0);
 }
 
 allowcarry(var_0) {

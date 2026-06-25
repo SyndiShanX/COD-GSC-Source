@@ -36,14 +36,14 @@ function function_7715178d() {
 
 function function_2d729696(a_ents) {
   wait(1);
-  t_left = getent("finger_damage_trig_left", "targetname");
-  t_right = getent("finger_damage_trig_right", "targetname");
+  t_left = getEnt("finger_damage_trig_left", "targetname");
+  t_right = getEnt("finger_damage_trig_right", "targetname");
   level.var_79dbe0dd[0] = t_right;
   level.var_79dbe0dd[1] = t_left;
-  t_left enablelinkto();
-  t_right enablelinkto();
-  t_left linkto(a_ents["trap_finger_left"], "tag_mid_animate");
-  t_right linkto(a_ents["trap_finger_right"], "tag_mid_animate");
+  t_left enablelinkTo();
+  t_right enablelinkTo();
+  t_left linkTo(a_ents["trap_finger_left"], "tag_mid_animate");
+  t_right linkTo(a_ents["trap_finger_right"], "tag_mid_animate");
 }
 
 function function_eeb24547() {
@@ -55,22 +55,22 @@ function function_eeb24547() {
 
 function function_512d92f4(e_player) {
   if(e_player.is_drinking > 0) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     return false;
   }
   if(level flag::get("finger_trap_on")) {
-    self sethintstring(&"ZOMBIE_TRAP_ACTIVE");
+    self setHintString(&"ZOMBIE_TRAP_ACTIVE");
     return false;
   }
   if(level flag::get("finger_trap_cooldown")) {
-    self sethintstring(&"ZM_STALINGRAD_TRAP_COOLDOWN");
+    self setHintString(&"ZM_STALINGRAD_TRAP_COOLDOWN");
     return false;
   }
-  self sethintstring(&"ZM_STALINGRAD_FINGER_TRAP", self.stub.hint_parm1);
+  self setHintString(&"ZM_STALINGRAD_FINGER_TRAP", self.stub.hint_parm1);
   return true;
 }
 

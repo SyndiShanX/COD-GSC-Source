@@ -279,7 +279,7 @@ basic_collect_run(param_00) {
     var_02.sg_obj_collect_holding_parts = 0;
   }
 
-  var_04 = getent("collect_objective_destination_object", "targetname");
+  var_04 = getEnt("collect_objective_destination_object", "targetname");
   var_05 = ["zom_infantrya_bodywhole"];
   level.sg_obj_collection_parts = getEntArray("collect_objective_part_object", "targetname");
   var_06 = 600 / level.var_744A.size;
@@ -366,7 +366,7 @@ basic_collect_part_think(param_00, param_01, param_02, param_03, param_04) {
     thread basic_collect_part_stencil_think(var_0D);
   }
 
-  var_0F = getent(param_02.var_1A2, "targetname");
+  var_0F = getEnt(param_02.var_1A2, "targetname");
   while(!common_scripts\utility::func_3794("obj_collected")) {
     self waittill("player_used", var_0D);
     var_0D.sg_obj_collect_holding_parts++;
@@ -816,7 +816,7 @@ prespawn_a_floating_award(param_00, param_01, param_02) {
   var_04.var_116 = var_05.var_116;
   var_04 method_8449(var_05, "tag_origin");
   var_04.linkent = var_05;
-  var_05 rotateyaw(-29536, 850);
+  var_05 rotateYaw(-29536, 850);
   var_06 = spawnStruct();
   var_06.var_116 = var_04.var_116;
   if(issubstr(param_00, "_pap_")) {
@@ -874,7 +874,7 @@ initialize_weapon_pickup_trigger(param_00, param_01, param_02) {
   }
 
   var_04 = self;
-  var_04 usetriggerrequirelookat(1);
+  var_04 useTriggerRequireLookAt(1);
   var_04.var_A9E0 = lib_0547::func_AAF9(param_01, 1);
   var_04.var_6C5C = var_04.var_A9E0;
   foreach(var_06 in var_03) {
@@ -1183,11 +1183,11 @@ run_ingame_cinematic(param_00) {
       var_01 setangles((0, 0, 0), 1);
     }
 
-    var_01 setorigin(var_12, 1);
-    var_01 playerlinkto(var_11, "tag_player", 1, 0, 0, 0, 0, 1);
+    var_01 setOrigin(var_12, 1);
+    var_01 playerlinkTo(var_11, "tag_player", 1, 0, 0, 0, 0, 1);
   }
 
-  var_11 moveto(var_10.var_116, var_04, 0, var_0B);
+  var_11 moveTo(var_10.var_116, var_04, 0, var_0B);
   var_01 childthread do_fade_in_and_out(var_04, var_09, var_0A);
   if(!common_scripts\utility::func_562E(var_01.incinematicmode)) {
     var_01 childthread lib_0547::set_player_cinematic_mode(!common_scripts\utility::func_562E(var_07));

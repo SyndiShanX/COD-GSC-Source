@@ -22,7 +22,7 @@ jump_pad_init() {
     return;
   }
   for(i = 0; i < jump_pad_triggers.size; i++) {
-    jump_pad_triggers[i].start = getstruct(jump_pad_triggers[i].target, "targetname");
+    jump_pad_triggers[i].start = getStruct(jump_pad_triggers[i].target, "targetname");
     jump_pad_triggers[i].destination = getStructArray(jump_pad_triggers[i].start.target, "targetname");
 
     if(isDefined(jump_pad_triggers[i].script_string)) {
@@ -202,7 +202,7 @@ jump_pad_start(ent_player, endon_condition) {
   }
 
   if(isDefined(end_point.target)) {
-    poi_spot = getstruct(end_point.target, "targetname");
+    poi_spot = getStruct(end_point.target, "targetname");
   } else {
     poi_spot = end_point;
   }
@@ -319,7 +319,7 @@ jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
     self thread disconnect_failsafe_pad_poi_clean();
   }
 
-  self setorigin(self.origin + (0, 0, 1));
+  self setOrigin(self.origin + (0, 0, 1));
 
   if(20 >= randomintrange(0, 101)) {
     self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "jumppad");
@@ -382,7 +382,7 @@ jump_pad_enemy_follow_or_ignore(ent_poi) {
   self endon("death");
   self endon("disconnect");
   zombies = getaiarray(level.zombie_team);
-  players = getplayers();
+  players = getPlayers();
   valid_players = 0;
 
   for(p = 0; p < players.size; p++) {
@@ -442,7 +442,7 @@ stop_chasing_the_sky(ent_poi) {
 
   while(is_true(self._pad_follow)) {
     if(isDefined(self.favoriteenemy)) {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(is_player_valid(players[i]) && players[i] != self.favoriteenemy) {

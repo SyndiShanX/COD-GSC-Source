@@ -156,7 +156,7 @@ attack_back_turret() {
 
 crab_boss_move_to(var_0) {
   level.crab_boss crab_boss_face_point(var_0);
-  level.crab_boss scripts\aitypes\crab_boss\behaviors::bossmoveto(0, var_0);
+  level.crab_boss scripts\aitypes\crab_boss\behaviors::bossmoveTo(0, var_0);
   level.crab_boss waittill("move_complete");
 }
 
@@ -204,7 +204,7 @@ set_up_death_ray_cannons() {
     var_3 makeunusable();
     var_3 setdefaultdroppitch(30);
     var_3 getvalidlocation();
-    var_3 sethintstring(&"CP_TOWN_USE_DEATH_RAY_CANNON");
+    var_3 setHintString(&"CP_TOWN_USE_DEATH_RAY_CANNON");
     var_3.angles = var_2.angles;
     var_3 set_arc_value(var_3);
     var_3.not_ready_hint = set_up_not_ready_hint(var_3);
@@ -415,7 +415,7 @@ kill_nearby_mini_crab(var_0, var_1) {
   var_3 = 10000;
   foreach(var_5 in level.spawned_enemies) {
     if(distancesquared(var_5.origin, var_0) <= var_2) {
-      var_5.ragdollimpactvector = vectornormalize(var_5.origin - var_0) * var_3;
+      var_5.ragdollimpactvector = vectorNormalize(var_5.origin - var_0) * var_3;
       var_5.ragdollhitloc = "torso_lower";
       var_5 dodamage(var_5.health, var_0, var_1);
       var_1 scripts\cp\cp_damage::updatedamagefeedback("hitaliensoft");
@@ -516,12 +516,12 @@ set_up_weak_spot() {
   var_0 = level.crab_boss gettagorigin("j_spineupper");
   var_1 = spawn("script_model", var_0);
   var_1 setModel("zmb_crabboss_weak_spot");
-  var_1 linkto(level.crab_boss, "j_spineupper", (0, -125, 0), (90, -55, 0));
+  var_1 linkTo(level.crab_boss, "j_spineupper", (0, -125, 0), (90, -55, 0));
   var_1 hide();
   var_1.is_crab_boss_weak_spot = 1;
   var_2 = spawn("script_model", var_0);
   var_2 setModel("crab_boss_origin");
-  var_2 linkto(var_1, "tag_origin");
+  var_2 linkTo(var_1, "tag_origin");
   level.crab_boss.crab_boss_weak_spot = var_1;
   level.crab_boss.crab_boss_weak_vfx = var_2;
 }

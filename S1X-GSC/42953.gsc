@@ -242,7 +242,7 @@ orbitalstrikebeginchargeup(var_0, var_1) {
   var_2 = gettime() + var_1 * 1000;
   self setclientomnvar("ui_orbital_laser_charge", var_2);
   self setclientomnvar("ui_orbital_laser_mode", 1);
-  self playrumbleonentity("orbital_laser_charge");
+  self playRumbleOnEntity("orbital_laser_charge");
   playwarmupsounds(var_0, 0);
   wait 0.1;
   playwarmupeffects(var_0);
@@ -252,7 +252,7 @@ orbitalstrikchargeupspeedup(var_0, var_1) {
   var_2 = gettime() + var_1 * 1000;
   self setclientomnvar("ui_orbital_laser_charge", var_2);
   self stoprumble("orbital_laser_charge");
-  self playrumbleonentity("orbital_laser_charge_quick");
+  self playRumbleOnEntity("orbital_laser_charge_quick");
   playwarmupsounds(var_0, 1);
 }
 
@@ -351,7 +351,7 @@ playercontrolorbitalstrike(var_0) {
   self setplayerangles((0, 0, 0));
   self remotecontrolvehicle(var_0);
   wait 0.05;
-  self cameralinkto(var_0, "tag_origin");
+  self cameralinkTo(var_0, "tag_origin");
   wait 0.55;
   maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
   var_0.killcamstarttime = gettime();

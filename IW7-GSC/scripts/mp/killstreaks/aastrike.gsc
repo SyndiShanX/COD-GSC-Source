@@ -138,10 +138,10 @@ fireattarget(var_0, var_1, var_2) {
   var_10 = var_0.origin + var_4 + var_9 * var_5 * -1;
   var_11 = var_0.origin + var_4 + var_9 * var_6;
   var_12 = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_10 + (0, 0, -75), var_0.origin, self);
-  var_12 missile_settargetent(var_0);
+  var_12 missile_settargetEnt(var_0);
   var_12 missile_setflightmodedirect();
   var_13 = scripts\mp\utility::_magicbullet("aamissile_projectile_mp", var_10 + (randomint(500), randomint(500), -75), var_0.origin, self);
-  var_13 missile_settargetent(var_0);
+  var_13 missile_settargetEnt(var_0);
   var_13 missile_setflightmodedirect();
   if(var_2) {
     var_14 = spawnplane(self, "script_model", var_10, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
@@ -160,7 +160,7 @@ fireattarget(var_0, var_1, var_2) {
   var_14 thread aasoundmanager(var_15);
   var_14 thread playplanefx();
   var_15 = distance(var_10, var_11);
-  var_14 moveto(var_11 * 2, var_15 / 2000, 0, 0);
+  var_14 moveTo(var_11 * 2, var_15 / 2000, 0, 0);
   wait(var_15 / 3000);
   var_14 delete();
 }
@@ -178,7 +178,7 @@ doflyby(var_0) {
   var_2 = level.spawnpoints[var_1].origin * (1, 1, 0);
   var_3 = 20000;
   var_4 = 20000;
-  var_5 = getent("airstrikeheight", "targetname");
+  var_5 = getEnt("airstrikeheight", "targetname");
   var_6 = (0, 0, var_5.origin[2] + randomintrange(-100, 600));
   var_7 = anglesToForward((0, randomint(45), 0));
   var_8 = var_2 + var_6 + var_7 * var_3 * -1;
@@ -206,9 +206,9 @@ doflyby(var_0) {
   var_13.angles = vectortoangles(var_9 - var_10);
   var_13 thread playplanefx();
   var_14 = distance(var_8, var_9);
-  var_12 moveto(var_9 * 2, var_14 / 1800, 0, 0);
+  var_12 moveTo(var_9 * 2, var_14 / 1800, 0, 0);
   wait(randomfloatrange(0.25, 0.5));
-  var_13 moveto(var_11 * 2, var_14 / 1800, 0, 0);
+  var_13 moveTo(var_11 * 2, var_14 / 1800, 0, 0);
   wait(var_14 / 1600);
   var_12 delete();
   var_13 delete();

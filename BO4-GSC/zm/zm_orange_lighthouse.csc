@@ -110,7 +110,7 @@ function_c7fb0e97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval > 0) {
-    var_ab11c23d = getent(localclientnum, "lighthouse_light", "targetname");
+    var_ab11c23d = getEnt(localclientnum, "lighthouse_light", "targetname");
     self.var_85adeb8c = level beam::function_cfb2f62a(localclientnum, var_ab11c23d, "tag_origin", self, "tag_origin", "beam8_zm_orange_lighthouse_trap_strike");
     self.var_9c7e4ef8 = util::playFXOnTag(localclientnum, level._effect[#"hash_48d5d5ee69c7e417"], self, "tag_origin");
   }

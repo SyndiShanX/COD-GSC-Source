@@ -377,7 +377,7 @@ function radar_dish_init() {
 function radar_dish_rotate() {
   wait(0.1);
   while(true) {
-    self rotateyaw(360, 10);
+    self rotateYaw(360, 10);
     self waittill("rotatedone");
   }
 }
@@ -395,7 +395,7 @@ function perk_wire_fx_client(client_num, done_notify) {
     if(isDefined(targ.target)) {
       println((("" + client_num) + "") + targ.target);
       target = struct::get(targ.target, "targetname");
-      mover moveto(target.origin, 0.5);
+      mover moveTo(target.origin, 0.5);
       wait(0.5);
       targ = target;
     } else {
@@ -426,7 +426,7 @@ function soul_pull(client_num) {
   mover setModel("tag_origin");
   fx = playFXOnTag(client_num, level._effect["soul_spark"], mover, "tag_origin");
   wait(1);
-  mover moveto(level.nml_spark_pull.origin, 3);
+  mover moveTo(level.nml_spark_pull.origin, 3);
   wait(3);
   mover delete();
 }
@@ -546,7 +546,7 @@ function function_18769931(localclientnum, n_state, door_name) {
     v_move_pos = doors[i] function_b27e98c0(var_1f9cab23);
     b_move = doors[i] function_53c16d30(v_move_pos);
     if(b_move) {
-      doors[i] moveto(v_move_pos, 1);
+      doors[i] moveTo(v_move_pos, 1);
       if(sound_count == 0) {
         playSound(0, "zmb_lander_door", doors[i].origin);
         sound_count++;
@@ -707,9 +707,9 @@ function get_random_spot_in_player_view(fwd_min, fwd_max, side_min, side_max) {
 
 function debris_crash_and_burn(spot, client, player) {
   playFXOnTag(client, level._effect["debris_trail"], self, "tag_origin");
-  self moveto(spot, 3.1);
+  self moveTo(spot, 3.1);
   for(i = 0; i < 10; i++) {
-    self rotateto((randomint(360), randomint(360), randomint(360)), 0.3);
+    self rotateTo((randomint(360), randomint(360), randomint(360)), 0.3);
     wait(0.3);
   }
   wait(3.1);
@@ -812,7 +812,7 @@ function lander_station_move_lander_marker(localclientnum) {
         break;
       }
     }
-    screen.lander_fx_ent moveto(dest, 10);
+    screen.lander_fx_ent moveTo(dest, 10);
   }
 }
 
@@ -936,7 +936,7 @@ function lander_rumble_and_quake(localclientnum, oldval, newval, bnewent, biniti
   }
   if(newval) {
     player earthquake(randomfloatrange(0.2, 0.3), randomfloatrange(2, 2.5), player.origin, 150);
-    player playrumbleonentity(localclientnum, "artillery_rumble");
+    player playRumbleOnEntity(localclientnum, "artillery_rumble");
     self thread do_lander_rumble_quake(localclientnum);
   } else {
     self thread end_ground_sounds();
@@ -971,7 +971,7 @@ function do_lander_rumble_quake(localclientnum) {
       player earthquake(randomfloatrange(0.15, 0.2), randomfloatrange(0.15, 0.16), self.origin, 750);
       rumble = "damage_light";
     }
-    player playrumbleonentity(localclientnum, rumble);
+    player playRumbleOnEntity(localclientnum, rumble);
     wait(0.1);
   }
 }
@@ -1001,7 +1001,7 @@ function centrifuge_rumble_when_close(ent_centrifuge, int_client_num) {
     distance_to_centrifuge = distancesquared(self.origin, ent_centrifuge.origin);
     if(distance_to_centrifuge < rumble_range && isDefined(self)) {
       if(isDefined(int_client_num)) {
-        self playrumbleonentity(int_client_num, centrifuge_rumble);
+        self playRumbleOnEntity(int_client_num, centrifuge_rumble);
       }
     }
     if(distance_to_centrifuge > rumble_range) {
@@ -1119,7 +1119,7 @@ function centrifuge_warning_lights_on(client_num) {
       temp_mdl.angles = temp_mdl.angles + vectorscale((1, 0, 0), 180);
     }
     temp_mdl setModel("tag_origin");
-    temp_mdl linkto(self, self._centrifuge_lights_[client_num][i]);
+    temp_mdl linkTo(self, self._centrifuge_lights_[client_num][i]);
     playFXOnTag(client_num, level._effect["centrifuge_warning_light"], temp_mdl, "tag_origin");
     self._centrifuge_light_mdls_[client_num] = array::add(self._centrifuge_light_mdls_[client_num], temp_mdl, 0);
   }
@@ -1127,7 +1127,7 @@ function centrifuge_warning_lights_on(client_num) {
     temp_mdl = spawn(client_num, self gettagorigin(self._centrifuge_sparks_[client_num][i]), "script_model");
     temp_mdl.angles = self gettagangles(self._centrifuge_sparks_[client_num][i]);
     temp_mdl setModel("tag_origin");
-    temp_mdl linkto(self, self._centrifuge_sparks_[client_num][i]);
+    temp_mdl linkTo(self, self._centrifuge_sparks_[client_num][i]);
     playFXOnTag(client_num, level._effect["centrifuge_light_spark"], temp_mdl, "tag_origin");
     self._centrifuge_light_mdls_[client_num] = array::add(self._centrifuge_light_mdls_[client_num], temp_mdl, 0);
   }

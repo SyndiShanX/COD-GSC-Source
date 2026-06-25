@@ -95,7 +95,7 @@ function function_5677f0fa(localclientnum) {
   self function_97cc38a5();
   n_index = self getentitynumber();
   level.player_snow_fx[n_index] = util::spawn_model(localclientnum, "tag_origin", self.origin);
-  level.player_snow_fx[n_index] linkto(self);
+  level.player_snow_fx[n_index] linkTo(self);
   level.player_snow_fx[n_index] thread function_7683b584(self);
   playFXOnTag(localclientnum, "weather/fx_snow_player_os_nworld", level.player_snow_fx[n_index], "tag_origin");
 }
@@ -145,7 +145,7 @@ function function_ff1b6796(localclientnum) {
     }
   }
   e_origin = util::spawn_model(localclientnum, "tag_origin", self.origin + v_offset, self.angles);
-  e_origin linkto(self);
+  e_origin linkTo(self);
   self.var_f3f44e9 = e_origin;
   e_origin fx_play_on_tag(localclientnum, "brake_flap_snow", str_fx, "tag_origin");
 }
@@ -276,7 +276,7 @@ function function_aad321ae(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_73c10276(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self.mdl_tag = util::spawn_model(localclientnum, "tag_origin", self.origin, self.angles);
-    self.mdl_tag linkto(self);
+    self.mdl_tag linkTo(self);
     self.var_c604c399 = addboltedfxexclusionvolume(localclientnum, self.mdl_tag, "tag_origin", (1300 / 2, 450 / 2, 500 / 2));
   } else if(isDefined(self.var_c604c399)) {
     removefxexclusionvolume(localclientnum, self.var_c604c399);
@@ -399,7 +399,7 @@ function function_bfff202d(localclientnum, n_duration) {
     __s util::delay_notify(n_duration, "timeout");
   }
   while(true) {
-    self playrumbleonentity(localclientnum, "cp_newworld_rumble_train_roof_loop");
+    self playRumbleOnEntity(localclientnum, "cp_newworld_rumble_train_roof_loop");
     wait(0.185);
   }
 }
@@ -468,10 +468,10 @@ function postfx_futz(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 }
 
 function function_1e2a542f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_17287685 = getent(localclientnum, "wt_fan_01", "targetname");
-  var_3d2af0ee = getent(localclientnum, "wt_fan_02", "targetname");
-  var_632d6b57 = getent(localclientnum, "wt_fan_03", "targetname");
-  var_591c1278 = getent(localclientnum, "wt_fan_04", "targetname");
+  var_17287685 = getEnt(localclientnum, "wt_fan_01", "targetname");
+  var_3d2af0ee = getEnt(localclientnum, "wt_fan_02", "targetname");
+  var_632d6b57 = getEnt(localclientnum, "wt_fan_03", "targetname");
+  var_591c1278 = getEnt(localclientnum, "wt_fan_04", "targetname");
   if(newval != oldval && newval == 1) {
     var_17287685 thread function_65012f08();
     wait(0.1);
@@ -494,7 +494,7 @@ function function_65012f08() {
   self endon("hash_c78324b7");
   rotate_time = 3;
   while(true) {
-    self rotateyaw(180, rotate_time);
+    self rotateYaw(180, rotate_time);
     self waittill("rotatedone");
   }
 }

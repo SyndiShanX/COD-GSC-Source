@@ -38,7 +38,7 @@ function function_922745a1(player) {
   top = self.origin + (0, 0, 32);
 
   while(true) {
-    self rotateto(self.angles + (0, 15, 0), 0.2);
+    self rotateTo(self.angles + (0, 15, 0), 0.2);
     wait 0.2;
     forward = anglesToForward(self.angles + (0, 0, 500));
     velocity = forward * (getdvarint(#"hash_6e23b1c0ac2fdd38", 150) + randomintrange(-50, 50));
@@ -71,7 +71,7 @@ function function_d275f769(player, origin) {
   }
 
   mark = target + (0, 0, 12);
-  sprinkler moveto(mark, 0.5);
+  sprinkler moveTo(mark, 0.5);
   sprinkler waittilltimeout(1, #"movedone");
   sprinkler namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sprinkler_land");
   sprinkler namespace_83eb6304::function_3ecfde67("sprinkler_land");
@@ -91,7 +91,7 @@ function function_d275f769(player, origin) {
   wait 2;
   sprinkler namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sprinkler_takeoff");
   sprinkler namespace_83eb6304::function_3ecfde67("sprinkler_takeoff");
-  sprinkler moveto(var_497e327b, 0.5);
+  sprinkler moveTo(var_497e327b, 0.5);
   sprinkler waittilltimeout(1, #"movedone");
   sprinkler delete();
 }

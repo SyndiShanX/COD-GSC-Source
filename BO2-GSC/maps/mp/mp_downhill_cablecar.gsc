@@ -62,8 +62,8 @@ main() {
     cablecar thread waitthenplayFX(0.1, level.cablecarlightsfx, "tag_origin");
     cablecar.killtrigger = getclosest(cablecar.origin, cablecarkilltrigger);
     assert(isDefined(cablecar.killtrigger));
-    cablecar.killtrigger enablelinkto();
-    cablecar.killtrigger linkto(cablecar);
+    cablecar.killtrigger enablelinkTo();
+    cablecar.killtrigger linkTo(cablecar);
     cablecar setpointontrack(currentdistanceforcar, tracklength);
     currentdistanceforcar = currentdistanceforcar + distancebetweencars;
 
@@ -93,7 +93,7 @@ main() {
     }
 
     cablecar.origin = cablecar.origin + (0, cos(cablecar.angles[1]) * -15, -66.6);
-    cablecar disconnectpaths();
+    cablecar disconnectPaths();
   }
 }
 
@@ -179,7 +179,7 @@ setpointontrack(distancealongtrack, tracklength) {
 }
 
 createcablecarpath(cablecar) {
-  currentnode = getent("cable_down_start", "targetname");
+  currentnode = getEnt("cable_down_start", "targetname");
   startorigin = currentnode.origin;
   velocity = getdvarfloatdefault("scr_cable_car_velocity", 100);
   tracklength = 0;
@@ -192,7 +192,7 @@ createcablecarpath(cablecar) {
     level.cablecartrack[level.cablecartrack.size] = cablecarnodestruct;
 
     if(isDefined(currentnode.target)) {
-      nextnode = getent(currentnode.target, "targetname");
+      nextnode = getEnt(currentnode.target, "targetname");
     }
 
     if(!isDefined(nextnode)) {
@@ -339,7 +339,7 @@ cablecarrun(cablecar) {
           grip.forceangles = 0;
           grip.angles = grip.nextangles;
         } else
-          grip rotateto(grip.nextangles, 0.9);
+          grip rotateTo(grip.nextangles, 0.9);
       }
 
       if(firstmove == 1) {
@@ -348,8 +348,8 @@ cablecarrun(cablecar) {
         timetomove = firstmovedistance / velocity;
 
         if(timetomove > 0) {
-          cablecar moveto(nextnode.origin + (0, cos(cablecar.angles[1]) * -15, -66.6), timetomove);
-          grip moveto(nextnode.origin - (0, cos(cablecar.angles[1]) * -12, 8), timetomove);
+          cablecar moveTo(nextnode.origin + (0, cos(cablecar.angles[1]) * -15, -66.6), timetomove);
+          grip moveTo(nextnode.origin - (0, cos(cablecar.angles[1]) * -12, 8), timetomove);
           wait(timetomove);
         }
       } else {
@@ -363,8 +363,8 @@ cablecarrun(cablecar) {
           cablecar thread prettyslowdown(currentmovetime - deceltime);
         }
 
-        grip thread hostmigrationawaremoveto(nextnode.origin - (0, cos(cablecar.angles[1]) * -12, 8), currentmovetime, acceltime, deceltime, currentmovetime - 0.05);
-        cablecar hostmigrationawaremoveto(nextnode.origin + (0, cos(cablecar.angles[1]) * -15, heightoffset), currentmovetime, acceltime, deceltime, currentmovetime - 0.05);
+        grip thread hostmigrationawaremoveTo(nextnode.origin - (0, cos(cablecar.angles[1]) * -12, 8), currentmovetime, acceltime, deceltime, currentmovetime - 0.05);
+        cablecar hostmigrationawaremoveTo(nextnode.origin + (0, cos(cablecar.angles[1]) * -15, heightoffset), currentmovetime, acceltime, deceltime, currentmovetime - 0.05);
       }
 
       if(cablecar.hidden == 1) {
@@ -383,8 +383,8 @@ cablecarrun(cablecar) {
 
       if(isDefined(nextnode.pause)) {
         cablecar.ismoving = 0;
-        grip thread hostmigrationawaremoveto(nextnode.origin - (0, cos(cablecar.angles[1]) * -12, 8), 300, 0, 0, 3);
-        cablecar hostmigrationawaremoveto(nextnode.origin + (0, cos(cablecar.angles[1]) * -15, -66.6), 300, 0, 0, 3);
+        grip thread hostmigrationawaremoveTo(nextnode.origin - (0, cos(cablecar.angles[1]) * -12, 8), 300, 0, 0, 3);
+        cablecar hostmigrationawaremoveTo(nextnode.origin + (0, cos(cablecar.angles[1]) * -15, -66.6), 300, 0, 0, 3);
         cablecar notify("started_moving");
         cablecar thread prettyspeedup();
         cablecar.ismoving = 1;
@@ -400,9 +400,9 @@ cablecarrun(cablecar) {
   }
 }
 
-hostmigrationawaremoveto(origin, movetime, acceltime, deceltime, waittime) {
+hostmigrationawaremoveTo(origin, movetime, acceltime, deceltime, waittime) {
   starttime = gettime();
-  self moveto(origin, movetime, acceltime, deceltime);
+  self moveTo(origin, movetime, acceltime, deceltime);
   waitcompleted = self waitendonmigration(waittime);
 
   if(!isDefined(waitcompleted)) {
@@ -433,9 +433,9 @@ prettyslowdown(waittime) {
   swingtime = getdvarfloatdefault("scr_cable_swing_time", 1.5);
   swingbacktime = getdvarfloatdefault("scr_cable_swing_back_time", 1.5);
   swingangle = getdvarfloatdefault("scr_cable_swing_angle", 2.0);
-  self rotateto((originalangle[0] + swingangle, originalangle[1], originalangle[2]), swingtime, swingtime / 2, swingtime / 2);
+  self rotateTo((originalangle[0] + swingangle, originalangle[1], originalangle[2]), swingtime, swingtime / 2, swingtime / 2);
   self waittill("rotatedone");
-  self rotateto((originalangle[0], originalangle[1], originalangle[2]), swingbacktime, swingbacktime / 2, swingbacktime / 2);
+  self rotateTo((originalangle[0], originalangle[1], originalangle[2]), swingbacktime, swingbacktime / 2, swingbacktime / 2);
   self waittill("rotatedone");
 }
 
@@ -447,9 +447,9 @@ prettyspeedup() {
   swingtime = getdvarfloatdefault("scr_cable_swing_time_up", 1.0);
   swingbacktime = getdvarfloatdefault("scr_cable_swing_back_time_up", 1.5);
   swingangle = getdvarfloatdefault("scr_cable_swing_angle_up", 2.0);
-  self rotateto((originalangle[0] - swingangle, originalangle[1], originalangle[2]), swingtime, swingtime / 2, swingtime / 2);
+  self rotateTo((originalangle[0] - swingangle, originalangle[1], originalangle[2]), swingtime, swingtime / 2, swingtime / 2);
   self waittill("rotatedone");
-  self rotateto((originalangle[0], originalangle[1], originalangle[2]), swingbacktime, swingbacktime / 2, swingbacktime / 2);
+  self rotateTo((originalangle[0], originalangle[1], originalangle[2]), swingbacktime, swingbacktime / 2, swingbacktime / 2);
   self waittill("rotatedone");
 }
 
@@ -470,7 +470,7 @@ cablecar_ai_watch() {
       }
     }
 
-    dir = vectornormalize(anglesToForward(self.angles));
+    dir = vectorNormalize(anglesToForward(self.angles));
     dangerorigin = self.origin - dir * 196;
     nodes = getnodesinradius(dangerorigin, 256, 0, 196);
 
@@ -646,7 +646,7 @@ destroy_supply_crates() {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
         playFX(level._supply_drop_explosion_fx, crate.origin);
-        playsoundatposition("wpn_grenade_explode", crate.origin);
+        playSoundAtPosition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();
       }

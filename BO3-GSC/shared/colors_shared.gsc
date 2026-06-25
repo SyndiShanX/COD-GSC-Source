@@ -499,7 +499,7 @@ function private is_target_visible(target) {
   foreach(player in level.players) {
     v_eye = player getEye();
     v_facing = anglesToForward(player getplayerangles());
-    v_to_ent = vectornormalize(v_pos - v_eye);
+    v_to_ent = vectorNormalize(v_pos - v_eye);
     n_dot = vectordot(v_facing, v_to_ent);
     if(n_dot > n_dot_check) {
       return true;
@@ -1256,7 +1256,7 @@ function colornode_replace_on_death() {
       wait(2);
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     correct_colored_guy = arraysort(correct_colored_friendlies, players[0].origin, 1)[0];
     assert(correct_colored_guy.script_forcecolor != color, ("" + color) + "");
     waittillframeend();
@@ -1294,7 +1294,7 @@ function friendly_spawner_vision_checker() {
       continue;
     }
     spawner = level.respawn_spawner;
-    players = getplayers();
+    players = getPlayers();
     player_sees_spawner = 0;
     for(q = 0; q < players.size; q++) {
       difference_vec = players[q].origin - spawner.origin;
@@ -1304,7 +1304,7 @@ function friendly_spawner_vision_checker() {
         break;
       }
       forward = anglesToForward((0, players[q] getplayerangles()[1], 0));
-      difference = vectornormalize(difference_vec);
+      difference = vectorNormalize(difference_vec);
       dot = vectordot(forward, difference);
       if(dot < 0.2) {
         player_sees_spawner();

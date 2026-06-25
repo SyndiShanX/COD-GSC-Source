@@ -133,13 +133,13 @@ ghost_town_open_the_gate() {
   thread ghost_town_sneak_dialogue();
   var_0 maps\_anim::anim_generic(level.keegan, "signal_enemy_coverR");
   var_0 = common_scripts\utility::get_target_ent("ghosttown_doorkick");
-  var_2 linkto(var_4);
-  var_3 linkto(var_4);
+  var_2 linkTo(var_4);
+  var_3 linkTo(var_4);
   level.baker.animname = "hesh";
   var_0 maps\_anim::anim_reach_solo(level.baker, var_1);
   var_3 connectpaths();
   var_0 maps\_anim::anim_single([level.baker, var_4], var_1);
-  var_3 disconnectpaths();
+  var_3 disconnectPaths();
   var_0 = common_scripts\utility::get_target_ent("ghosttown_doorkick_after");
   level.baker setgoalnode(var_0);
   wait 1;
@@ -643,7 +643,7 @@ wolf_event() {
   level.main_wolf thread maps\_utility::play_sound_on_entity("anml_dog_attack_npc_jump");
   var_1 thread maps\_anim::anim_single([var_2, level.main_wolf], "wolf_takedown");
   level.player playerlinktoblend(var_2, "tag_player", 0.1);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.35;
   var_3 = getEntArray("grenade", "classname");
   common_scripts\utility::array_call(var_3, ::delete);
@@ -682,7 +682,7 @@ wolf_event() {
 
   maps\_art::dof_enable_script(0, 0, 10, 6, 9.5, 10, 1);
   level.player thread maps\_utility::play_sound_on_entity("scn_nml_wolf_in_face");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player maps\_utility::delaythread(0.3, maps\_gameskill::grenade_dirt_on_screen, "right");
   var_0 maps\_anim::anim_single([var_2, level.main_wolf], "wolf_struggle_start");
   thread wolf_event_vfx();
@@ -802,7 +802,7 @@ merrick_scene(var_0) {
   var_2 thread maps\_utility::play_sound_on_entity("scn_nml_wolf_second_approach");
   var_2.animname = "wolf";
   var_3 = common_scripts\utility::get_target_ent("blocker_wolf_protector");
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_0 waittill("wolf_end");
   maps\_utility::delaythread(0.8, maps\_utility::music_crossfade, "mus_nml_wolf_merrick", 3.0);
   var_2 wolf_face_clear();
@@ -953,7 +953,7 @@ take_pistol(var_0) {
 
 wolf_runaway() {
   wait(randomfloatrange(0, 2));
-  var_0 = common_scripts\utility::getstruct(self.script_noteworthy, "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct(self.script_noteworthy, "script_noteworthy");
   self.goalradius = 32;
   maps\_utility::clear_generic_run_anim();
   self.moveplaybackrate = 1;
@@ -1010,7 +1010,7 @@ clear_bark_cairo() {}
 
 bark_trigger(var_0) {
   self waittill("trigger");
-  var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.target, "targetname");
   thread common_scripts\utility::play_sound_in_space("anml_dog_bark", var_1.origin);
 
   if(randomint(100) > 50) {
@@ -1046,7 +1046,7 @@ faster_baker() {
       continue;
     }
 
-    var_0 = vectornormalize(level.player.origin - level.baker.origin);
+    var_0 = vectorNormalize(level.player.origin - level.baker.origin);
     var_1 = anglesToForward(level.baker.angles);
     var_2 = vectordot(var_1, var_0);
 
@@ -1103,7 +1103,7 @@ ghost_patroller_flee() {
 
   foreach(var_3 in var_0) {
     if(isDefined(var_3) && isalive(var_3)) {
-      var_3 maps\_utility::anim_stopanimscripted();
+      var_3 maps\_utility::anim_stopanimScripted();
       var_3 notify("end_patrol");
       var_3 thread temp_ghost_flee(var_1);
     }
@@ -1121,7 +1121,7 @@ temp_ghost_flee(var_0) {
 }
 
 wait_until_enemies_in_volume(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 maps\_utility::get_ai_touching_volume("axis");
   var_4 = var_3.size;
 
@@ -1252,7 +1252,7 @@ disable_team_color() {
 }
 
 trigger_activate_targetname_safe(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 notify("trigger");
@@ -1392,7 +1392,7 @@ wait_for_x_input() {
   var_0 = min(var_0 + 7, level.drown_max_alpha);
   thread fade_in_to_alpha(0.1, var_0);
   earthquake(0.35, 0.2, level.player.origin, 512);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level.occumulator = level.occumulator + 1;
 }
 

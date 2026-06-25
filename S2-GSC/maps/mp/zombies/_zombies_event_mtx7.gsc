@@ -149,7 +149,7 @@ spawn_pickupable_fish(param_00, param_01) {
 
 fall_onto_ground(param_00, param_01) {
   var_02 = 0.4;
-  self.var_0116 = param_00 + (0, 0, 40) + 18 * vectornormalize(anglesToForward(param_01));
+  self.var_0116 = param_00 + (0, 0, 40) + 18 * vectorNormalize(anglesToForward(param_01));
   self.var_001D = (0, randomint(360), 0);
   self gravitymove((0, 0, 175), 2);
   self.var_6C48 = self.var_001D;
@@ -260,9 +260,9 @@ run_fish_quest() {
   wait(1);
   var_00 notify("leaving");
   var_00 movez(-12, 2, 1);
-  var_00 rotateyaw(170, 3);
+  var_00 rotateYaw(170, 3);
   wait(3);
-  var_01 moveto(var_01.var_0116 + (0, 0, 32), 6, 0, 1);
+  var_01 moveTo(var_01.var_0116 + (0, 0, 32), 6, 0, 1);
   var_01 thread vibrate_box();
   var_01 lib_0547::func_AC41(&"ZOMBIES_EMPTY_STRING", (0, 0, 16));
   level thread maps\mp\_utility::func_6F74(::collect_teslaguns, var_01);
@@ -315,12 +315,12 @@ force_take_tesla() {
 
 move_current() {
   self endon("leaving");
-  var_00 = self.var_0116 + 7 * vectornormalize(anglestoright(self.var_001D));
+  var_00 = self.var_0116 + 7 * vectorNormalize(anglestoright(self.var_001D));
   self.var_6C4E = self.var_0116;
   for(;;) {
-    self moveto(var_00, 2, 1, 1);
+    self moveTo(var_00, 2, 1, 1);
     wait(2);
-    self moveto(self.var_6C4E, 2, 1, 1);
+    self moveTo(self.var_6C4E, 2, 1, 1);
     wait(4);
   }
 }

@@ -38,10 +38,10 @@ onPlayerSpawned() {
   self waittill("spawned_player");
 
   if(isDefined(level.alliesInsertChopper) && !level.alliesInsertChopper.droppedOff && level.prematchPeriod > 0 && self.team == "allies") {
-    self PlayerLinkTo(level.alliesInsertChopper);
+    self PlayerlinkTo(level.alliesInsertChopper);
     level.alliesInsertChopper.linkedPlayers[level.alliesInsertChopper.linkedPlayers.size] = self;
   } else if(isDefined(level.alliesInsertChopper) && !level.alliesInsertChopper.droppedOff && level.prematchPeriod > 0 && self.team == "axis") {
-    self PlayerLinkTo(level.axisInsertChopper);
+    self PlayerlinkTo(level.axisInsertChopper);
     level.axisInsertChopper.linkedPlayers[level.axisInsertChopper.linkedPlayers.size] = self;
   }
 }
@@ -263,7 +263,7 @@ doAirstrikeFlyBy(strikeTarget) {
 
   backDist = 8000;
   forwardDist = 8000;
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   upVector = (0, 0, heightEnt.origin[2] + randomIntRange(-100, 600));
 

@@ -49,7 +49,7 @@ function skipto_discover_data_init(str_objective, b_starting) {
     level scene::init("p7_fxanim_cp_sgen_overhang_building_glass_bundle");
     level scene::init("cin_sgen_05_01_discoverdata_vign_lookaround_hendricks");
     level scene::init("pb_sgen_data_discovery_hack");
-    trig_post_discover_data = getent("trig_post_discover_data", "targetname");
+    trig_post_discover_data = getEnt("trig_post_discover_data", "targetname");
     trig_post_discover_data triggerenable(0);
     exploder::exploder("sgen_flying_IGC");
     load::function_a2995f22();
@@ -80,16 +80,16 @@ function skipto_discover_data_init(str_objective, b_starting) {
 }
 
 function function_370bcbcc() {
-  var_f3ad9584 = getent("emf_device", "targetname");
+  var_f3ad9584 = getEnt("emf_device", "targetname");
   level waittill("hash_dd334053");
   snd_emf = spawn("script_origin", var_f3ad9584.origin);
   snd_emf playLoopSound("evt_emf_signal");
   level flag::wait_till("kane_data_callout");
   t_use = spawn("trigger_radius_use", var_f3ad9584.origin, 0, 32, 32);
-  t_use triggerignoreteam();
+  t_use triggerIgnoreTeam();
   t_use setvisibletoall();
   t_use setteamfortrigger("none");
-  t_use usetriggerrequirelookat();
+  t_use useTriggerRequireLookAt();
   var_d67faff5 = util::init_interactive_gameobject(t_use, &"cp_prompt_dni_sgen_hack_emf_source", &"CP_MI_SING_SGEN_HACK", &function_41ebcee5, array(var_f3ad9584));
   level flag::wait_till("data_discovered");
   snd_emf stoploopsound();
@@ -134,7 +134,7 @@ function building_glass_debris() {
 
 function player_lookat_building() {
   level endon("play_building_glass_debris");
-  trig_lookat_glass_debris = getent("trig_lookat_glass_debris", "targetname");
+  trig_lookat_glass_debris = getEnt("trig_lookat_glass_debris", "targetname");
   level.players[0] util::waittill_player_looking_at(trig_lookat_glass_debris.origin, 0.8, 0);
   level flag::set("play_building_glass_debris");
 }
@@ -176,9 +176,9 @@ function skipto_aquarium_shimmy_init(str_objective, b_starting) {
     mapping_drone::spawn_drone("nd_post_discover_data");
     level.ai_hendricks ai::set_behavior_attribute("cqb", 1);
     level.ai_hendricks ai::set_behavior_attribute("sprint", 0);
-    bm_discover_data_player_clip = getent("bm_discover_data_player_clip", "targetname");
+    bm_discover_data_player_clip = getEnt("bm_discover_data_player_clip", "targetname");
     bm_discover_data_player_clip delete();
-    trig_discover_data_kill = getent("trig_discover_data_kill", "targetname");
+    trig_discover_data_kill = getEnt("trig_discover_data_kill", "targetname");
     trig_discover_data_kill delete();
     objectives::complete("cp_level_sgen_enter_sgen_no_pointer");
     objectives::complete("cp_level_sgen_investigate_sgen");
@@ -226,7 +226,7 @@ function post_discover_data_breadcrumb() {
   level flag::wait_till("glass_railing_kicked");
   objectives::breadcrumb("post_data_breadcrumb");
   level flag::wait_till("post_discover_data");
-  trig_discover_data_kill = getent("trig_discover_data_kill", "targetname");
+  trig_discover_data_kill = getEnt("trig_discover_data_kill", "targetname");
   if(isDefined(trig_discover_data_kill)) {
     trig_discover_data_kill delete();
   }
@@ -241,14 +241,14 @@ function function_8e9806c5(a_ents) {
   level.ai_hendricks.animname = "hendricks";
   util::clear_streamer_hint();
   level flag::wait_till("highlight_railing_glass");
-  var_eb043fdb = getent("railing_kick", "animname");
+  var_eb043fdb = getEnt("railing_kick", "animname");
   var_eb043fdb thread oed::enable_keyline(0, "glass_railing_kicked");
   level flag::wait_till("glass_railing_kicked");
   level thread scene::play("p7_fxanim_cp_sgen_hendricks_railing_kick_bundle");
   level waittill("hash_359ae459");
-  bm_discover_data_player_clip = getent("bm_discover_data_player_clip", "targetname");
+  bm_discover_data_player_clip = getEnt("bm_discover_data_player_clip", "targetname");
   bm_discover_data_player_clip delete();
-  trig_post_discover_data = getent("trig_post_discover_data", "targetname");
+  trig_post_discover_data = getEnt("trig_post_discover_data", "targetname");
   trig_post_discover_data triggerenable(1);
 }
 
@@ -288,7 +288,7 @@ function follow_1_vo(b_starting) {
 }
 
 function dust_fx_follow() {
-  t_dust = getent("dust_fx", "targetname");
+  t_dust = getEnt("dust_fx", "targetname");
   t_dust endon("death");
   while(true) {
     t_dust waittill("trigger", who);
@@ -300,15 +300,15 @@ function dust_fx_follow() {
 }
 
 function fish_swim_by() {
-  mdl_fish = getent("oarfish", "targetname");
+  mdl_fish = getEnt("oarfish", "targetname");
   level flag::wait_till("hendricks_follow1_wait2");
   mdl_fish.angles = mdl_fish.angles + (vectorscale((-1, 0, 0), 15));
   n_time = 10;
   s_target = mdl_fish;
   while(isDefined(s_target.target)) {
     s_target = struct::get(s_target.target, "targetname");
-    mdl_fish moveto(s_target.origin, n_time);
-    mdl_fish rotateto(s_target.angles, n_time, n_time / 2, n_time / 2);
+    mdl_fish moveTo(s_target.origin, n_time);
+    mdl_fish rotateTo(s_target.angles, n_time, n_time / 2, n_time / 2);
     wait(n_time);
   }
 }
@@ -333,7 +333,7 @@ function skipto_gen_lab_init(str_objective, b_starting) {
   level thread function_bed09c90();
   level clientfield::set("sndLabWalla", 1);
   level.vh_mapper thread drone_lead_player_gen_lab();
-  trig_gen_lab_door_player_check = getent("trig_gen_lab_door_player_check", "targetname");
+  trig_gen_lab_door_player_check = getEnt("trig_gen_lab_door_player_check", "targetname");
   trig_gen_lab_door_player_check triggerenable(0);
   level thread gen_lab_spawning();
   level thread scene::init("p7_fxanim_cp_sgen_lab_ceiling_light_01_bundle");
@@ -351,12 +351,12 @@ function gen_lab_objective_breadcrumbs() {
 function function_bed09c90() {
   level flag::wait_till("trig_spawn_gen_lab");
   a_m_doors = getEntArray("lobby_entrance_doors", "script_noteworthy");
-  var_280d5f68 = getent("silo_door_left", "targetname");
-  var_3c301126 = getent("silo_door_right", "targetname");
-  var_280d5f68 rotateyaw(91, 1, 0.25, 0.4);
-  playsoundatposition("evt_silo_door_open", var_280d5f68.origin);
-  var_3c301126 rotateyaw(-91, 1, 0.25, 0.4);
-  playsoundatposition("evt_silo_door_open", var_3c301126.origin);
+  var_280d5f68 = getEnt("silo_door_left", "targetname");
+  var_3c301126 = getEnt("silo_door_right", "targetname");
+  var_280d5f68 rotateYaw(91, 1, 0.25, 0.4);
+  playSoundAtPosition("evt_silo_door_open", var_280d5f68.origin);
+  var_3c301126 rotateYaw(-91, 1, 0.25, 0.4);
+  playSoundAtPosition("evt_silo_door_open", var_3c301126.origin);
 }
 
 function gen_lab_spawning() {
@@ -376,7 +376,7 @@ function gen_lab_spawning() {
 function setup_wave_2_gen_lab_guy() {
   self.goalradius = 1024;
   self ai::set_behavior_attribute("cqb", 1);
-  e_vol_gen_lab_fallback = getent("vol_gen_lab_fallback", "targetname");
+  e_vol_gen_lab_fallback = getEnt("vol_gen_lab_fallback", "targetname");
   self setgoal(e_vol_gen_lab_fallback);
 }
 
@@ -455,13 +455,13 @@ function setup_gen_lab_guy() {
   self ai::set_ignoreall(0);
   self.goalradius = 1024;
   if(self.script_string === "cover_office") {
-    var_36b24c48 = getent("gen_lab_office_goalvolume", "targetname");
+    var_36b24c48 = getEnt("gen_lab_office_goalvolume", "targetname");
   } else {
-    var_36b24c48 = getent("gen_lab_soldier_goal", "targetname");
+    var_36b24c48 = getEnt("gen_lab_soldier_goal", "targetname");
   }
   self setgoal(var_36b24c48);
   level flag::wait_till("player_mid_gen_lab");
-  e_vol_gen_lab_fallback = getent("vol_gen_lab_fallback", "targetname");
+  e_vol_gen_lab_fallback = getEnt("vol_gen_lab_fallback", "targetname");
   self setgoal(e_vol_gen_lab_fallback);
 }
 
@@ -584,7 +584,7 @@ function skipto_post_gen_lab_init(str_objective, b_starting) {
     objectives::complete("cp_level_sgen_locate_emf");
     objectives::set("cp_level_sgen_descend_into_core");
     level thread objectives::breadcrumb("sgen_labs_exit_breadcrumb");
-    e_gen_lab_end_door = getent("gen_lab_end_door", "targetname");
+    e_gen_lab_end_door = getEnt("gen_lab_end_door", "targetname");
     e_gen_lab_end_door delete();
     level flag::set("gen_lab_door_opened");
     load::function_a2995f22();
@@ -599,9 +599,9 @@ function skipto_post_gen_lab_init(str_objective, b_starting) {
   level thread function_a6226aba();
   level.ai_hendricks thread post_gen_lab_hendricks();
   level.vh_mapper thread drone_lead_player_post_gen_lab();
-  var_58d37bcd = getent("trig_bridge_kill_trigger", "targetname");
+  var_58d37bcd = getEnt("trig_bridge_kill_trigger", "targetname");
   var_58d37bcd triggerenable(0);
-  var_dee3d10a = getent("1", "scriptgroup_playerspawns_regroup");
+  var_dee3d10a = getEnt("1", "scriptgroup_playerspawns_regroup");
   var_dee3d10a.var_3367c99d = 500;
   level flag::wait_till("follow_chem_lab");
   skipto::objective_completed(str_objective);
@@ -683,7 +683,7 @@ function skipto_chem_lab_init(str_objective, b_starting) {
   level thread chem_lab_breadcrumbs();
   level thread setup_silo_robot_risers();
   level thread chem_lab_robots();
-  trig_player_at_silo_floor = getent("trig_player_at_silo_floor", "targetname");
+  trig_player_at_silo_floor = getEnt("trig_player_at_silo_floor", "targetname");
   trig_player_at_silo_floor triggerenable(0);
   level flag::wait_till("follow3_1");
   skipto::objective_completed(str_objective);
@@ -719,7 +719,7 @@ function chem_lab_hendricks() {
   level flag::wait_till("chem_lab_hendricks_movein_done");
   level thread scene::play("cin_sgen_09_02_chem_lab_vign_opendoor_hendricks");
   level waittill("hash_99a916d7");
-  e_chem_lab_door_player_clip = getent("chem_lab_door_player_clip", "targetname");
+  e_chem_lab_door_player_clip = getEnt("chem_lab_door_player_clip", "targetname");
   e_chem_lab_door_player_clip notsolid();
   level waittill("hendricks_chem_door_loop");
   level thread chem_door_nag_lines();
@@ -792,7 +792,7 @@ function skipto_post_chem_lab_init(str_objective, b_starting) {
     level thread setup_silo_robot_risers();
     level thread namespace_d40478f6::function_98762d53();
     level flag::set("follow3_1");
-    trig_player_at_silo_floor = getent("trig_player_at_silo_floor", "targetname");
+    trig_player_at_silo_floor = getEnt("trig_player_at_silo_floor", "targetname");
     trig_player_at_silo_floor triggerenable(0);
     level flag::set("chem_door_open");
     load::function_a2995f22();
@@ -882,9 +882,9 @@ function silo_floor_battle_vo() {
   level flag::set("send_drone_over_grate");
   level.ai_hendricks dialog::say("hend_recon_drone_says_the_0");
   level.ai_hendricks dialog::say("hend_anyone_wanna_bet_a_h_0", 0.5);
-  playsoundatposition(" evt_metal_bang", (-624, 995, -2569));
+  playSoundAtPosition(" evt_metal_bang", (-624, 995, -2569));
   wait(1);
-  playsoundatposition("mus_coalescence_theme_silo", (-624, 995, -2569));
+  playSoundAtPosition("mus_coalescence_theme_silo", (-624, 995, -2569));
   wait(1);
   level notify("ambush");
   level thread namespace_d40478f6::play_robot_ambush_music();
@@ -898,7 +898,7 @@ function silo_floor_battle_vo() {
 
 function silo_floor_hendricks() {
   level flag::set("hendricks_at_silo_floor");
-  trig_player_at_silo_floor = getent("trig_player_at_silo_floor", "targetname");
+  trig_player_at_silo_floor = getEnt("trig_player_at_silo_floor", "targetname");
   trig_player_at_silo_floor triggerenable(1);
   level flag::wait_till("player_at_silo_floor");
   nd_hendricks_silo_front = getnode("nd_hendricks_silo_front", "targetname");
@@ -1002,7 +1002,7 @@ function function_cc37bee6(str_align, n_delay) {
     nd_goal = getnode(s_align.target, "targetname");
     var_a269823c setgoal(nd_goal, 1);
   } else {
-    e_silo_floor_volume = getent("silo_floor_volume", "targetname");
+    e_silo_floor_volume = getEnt("silo_floor_volume", "targetname");
     var_a269823c setgoal(e_silo_floor_volume);
   }
 }
@@ -1014,7 +1014,7 @@ function init_silo_robots() {
     nd_goal = getnode(self.target, "targetname");
     self ai::force_goal(nd_goal, 32);
   } else {
-    e_silo_floor_volume = getent("silo_floor_volume", "targetname");
+    e_silo_floor_volume = getEnt("silo_floor_volume", "targetname");
     self setgoal(e_silo_floor_volume, 1);
   }
 }
@@ -1230,10 +1230,10 @@ function drone_lead_player_gen_lab() {
   self waittill("hash_f6e9e60f");
   self mapping_drone::function_6a8adcf6(5);
   level flag::wait_till("hendricks_at_gen_lab_door");
-  trig_gen_lab_door_player_check = getent("trig_gen_lab_door_player_check", "targetname");
+  trig_gen_lab_door_player_check = getEnt("trig_gen_lab_door_player_check", "targetname");
   trig_gen_lab_door_player_check triggerenable(1);
   level flag::wait_till("player_at_gen_lab_door");
-  e_gen_lab_end_door = getent("gen_lab_end_door", "targetname");
+  e_gen_lab_end_door = getEnt("gen_lab_end_door", "targetname");
   e_gen_lab_end_door movez(100, 2, 1);
   e_gen_lab_end_door playSound("evt_genlab_door_open");
   e_gen_lab_end_door waittill("movedone");

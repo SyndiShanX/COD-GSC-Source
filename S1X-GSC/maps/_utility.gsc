@@ -924,7 +924,7 @@ can_see_origin(origin, test_characters) {
 
 point_in_fov(origin) {
   forward = anglesToForward(self.angles);
-  normalVec = VectorNormalize(origin - self.origin);
+  normalVec = vectorNormalize(origin - self.origin);
 
   dot = VectorDot(forward, normalVec);
   return dot > 0.766;
@@ -1379,7 +1379,7 @@ default_unresolved_collision_handler() {
   if(nodes.size) {
     self CancelMantle();
     self DontInterpolate();
-    self SetOrigin(nodes[0].origin);
+    self setOrigin(nodes[0].origin);
     self reset_unresolved_collision_handler();
   } else {
     PrintLn("^3Warning! killing player for unresolved_collision, could not find pathnode.");
@@ -1421,11 +1421,11 @@ play_sound_on_tag(alias, tag, ends_on_death, op_notify_string, radio_dialog) {
 
   thread delete_on_death_wait_sound(org, "sounddone");
   if(isDefined(tag)) {
-    org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
 
   if(isDefined(level.player_radio_emitter) && (self == level.player_radio_emitter)) {
@@ -1477,11 +1477,11 @@ play_loop_sound_on_tag(alias, tag, bStopSoundOnDeath, bStopSoundOnRemoved) {
   }
 
   if(isDefined(tag)) {
-    org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -1594,7 +1594,7 @@ spawn_anim_model(animname, origin, angles) {
 }
 
 trigger_wait(strName, strKey) {
-  eTrigger = GetEnt(strName, strKey);
+  eTrigger = getEnt(strName, strKey);
   if(!isDefined(eTrigger)) {
     AssertMsg("trigger not found: " + strName + " key: " + strKey);
     return;
@@ -1669,7 +1669,7 @@ set_flag_on_targetname_trigger(msg) {
     return;
   }
 
-  trigger = GetEnt(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger waittill("trigger");
   flag_set(msg);
 }
@@ -2552,7 +2552,7 @@ get_linked_structs() {
   if(isDefined(self.script_linkTo)) {
     linknames = get_links();
     for(i = 0; i < linknames.size; i++) {
-      ent = getstruct(linknames[i], "script_linkname");
+      ent = getStruct(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         array[array.size] = ent;
       }
@@ -2575,10 +2575,10 @@ get_last_ent_in_chain(sEntityType) {
           ePathpoint = GetNode(ePathpoint.target, "targetname");
           break;
         case "ent":
-          ePathpoint = GetEnt(ePathpoint.target, "targetname");
+          ePathpoint = getEnt(ePathpoint.target, "targetname");
           break;
         case "struct":
-          ePathpoint = getstruct(ePathpoint.target, "targetname");
+          ePathpoint = getStruct(ePathpoint.target, "targetname");
           break;
         default:
           AssertMsg("sEntityType needs to be 'vehiclenode', 'pathnode', 'ent' or 'struct'");
@@ -2593,7 +2593,7 @@ get_last_ent_in_chain(sEntityType) {
 
 player_seek(timeout) {
   goalent = spawn("script_origin", level.player.origin);
-  goalent LinkTo(level.player);
+  goalent linkTo(level.player);
   if(isDefined(timeout)) {
     self thread timeout(timeout);
   }
@@ -3158,7 +3158,7 @@ flashRumbleLoop(duration) {
   goalTime = GetTime() + duration * 1000;
 
   while(GetTime() < goalTime) {
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }
@@ -3637,13 +3637,13 @@ linetime(start, end, color, timer) {
 }
 
 within_fov_2d(start_origin, start_angles, end_origin, fov) {
-  normal = VectorNormalize((end_origin[0], end_origin[1], 0) - (start_origin[0], start_origin[1], 0));
+  normal = vectorNormalize((end_origin[0], end_origin[1], 0) - (start_origin[0], start_origin[1], 0));
   forward = anglesToForward((0, start_angles[1], 0));
   return VectorDot(forward, normal) >= fov;
 }
 
 get_dot(start_origin, start_angles, end_origin) {
-  normal = VectorNormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = VectorDot(forward, normal);
 
@@ -3695,7 +3695,7 @@ generic_dialogue_queue(msg, timeout) {
 radio_dialogue(msg, timeout, squelch_type) {
   if(!isDefined(level.player_radio_emitter)) {
     ent = spawn("script_origin", (0, 0, 0));
-    ent LinkTo(level.player, "", (0, 0, 0), (0, 0, 0));
+    ent linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level.player_radio_emitter = ent;
   }
 
@@ -3746,7 +3746,7 @@ radio_dialogue_overlap(msg) {
   thread delete_on_death_wait_sound(org, "sounddone");
   org.origin = level.player_radio_emitter.origin;
   org.angles = level.player_radio_emitter.angles;
-  org LinkTo(level.player_radio_emitter);
+  org linkTo(level.player_radio_emitter);
 
   PrintLn("**dialog alias playing radio: " + level.scr_radio[msg]);
   org playSound(level.scr_radio[msg], "sounddone");
@@ -3828,7 +3828,7 @@ radio_dialogue_interupt(msg) {
 
   if(!isDefined(level.player_radio_emitter)) {
     ent = spawn("script_origin", (0, 0, 0));
-    ent LinkTo(level.player, "", (0, 0, 0), (0, 0, 0));
+    ent linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level.player_radio_emitter = ent;
   }
 
@@ -4068,32 +4068,32 @@ ignore_triggers(timer) {
 }
 
 activate_trigger_with_targetname(msg) {
-  trigger = GetEnt(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger activate_trigger();
 }
 
 activate_trigger_with_noteworthy(msg) {
-  trigger = GetEnt(msg, "script_noteworthy");
+  trigger = getEnt(msg, "script_noteworthy");
   trigger activate_trigger();
 }
 
 disable_trigger_with_targetname(msg) {
-  trigger = GetEnt(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger trigger_off();
 }
 
 disable_trigger_with_noteworthy(msg) {
-  trigger = GetEnt(msg, "script_noteworthy");
+  trigger = getEnt(msg, "script_noteworthy");
   trigger trigger_off();
 }
 
 enable_trigger_with_targetname(msg) {
-  trigger = GetEnt(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger trigger_on();
 }
 
 enable_trigger_with_noteworthy(msg) {
-  trigger = GetEnt(msg, "script_noteworthy");
+  trigger = getEnt(msg, "script_noteworthy");
   trigger trigger_on();
 }
 
@@ -4627,7 +4627,7 @@ set_ignoreSuppression(val) {
   self.ignoreSuppression = val;
 }
 
-set_goalradius(radius) {
+set_goalRadius(radius) {
   self.goalradius = radius;
 }
 
@@ -5081,19 +5081,19 @@ lerp_player_view_to_position(origin, angles, lerptime, fraction, right_arc, left
   linker.angles = player GetPlayerAngles();
 
   if(isDefined(hit_geo) && hit_geo) {
-    player PlayerLinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
+    player PlayerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
   } else {
     if(isDefined(right_arc)) {}
-    player PlayerLinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
+    player PlayerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
   } else {
     if(isDefined(fraction)) {}
-    player PlayerLinkTo(linker, "", fraction);
+    player PlayerlinkTo(linker, "", fraction);
   } else {
-    player PlayerLinkTo(linker);
+    player PlayerlinkTo(linker);
   }
 
-  linker MoveTo(origin, lerptime, lerptime * 0.25);
-  linker RotateTo(angles, lerptime, lerptime * 0.25);
+  linker moveTo(origin, lerptime, lerptime * 0.25);
+  linker rotateTo(angles, lerptime, lerptime * 0.25);
   wait(lerptime);
   linker Delete();
 }
@@ -5121,8 +5121,8 @@ lerp_player_view_to_position_oldstyle(origin, angles, lerptime, fraction, right_
     player PlayerLinkToDelta(linker);
   }
 
-  linker MoveTo(origin, lerptime, lerptime * 0.25);
-  linker RotateTo(angles, lerptime, lerptime * 0.25);
+  linker moveTo(origin, lerptime, lerptime * 0.25);
+  linker rotateTo(angles, lerptime, lerptime * 0.25);
   wait(lerptime);
   linker Delete();
 }
@@ -5226,9 +5226,9 @@ HandleTriggerHintInputTypeText() {
     if(isDefined(level.hint_triggers) && isDefined(level.player)) {
       foreach(trigger in level.hint_triggers) {
         if(level.player is_player_gamepad_enabled()) {
-          trigger SetHintString(trigger.gp_hint_text);
+          trigger setHintString(trigger.gp_hint_text);
         } else {
-          trigger SetHintString(trigger.pc_hint_text);
+          trigger setHintString(trigger.pc_hint_text);
         }
       }
     }
@@ -5472,7 +5472,7 @@ geo_off() {
   }
 
   self.realorigin = self GetOrigin();
-  self MoveTo(self.realorigin + (0, 0, -10000), .2);
+  self moveTo(self.realorigin + (0, 0, -10000), .2);
 
   self.geo_off = true;
 }
@@ -5482,7 +5482,7 @@ geo_on() {
     return;
   }
 
-  self MoveTo(self.realorigin, .2);
+  self moveTo(self.realorigin, .2);
   self waittill("movedone");
   self.geo_off = undefined;
 }
@@ -5713,7 +5713,7 @@ array_spawn_noteworthy(noteworthy, forcespawn, skipIncorrectNumberAssert, delete
 }
 
 spawn_script_noteworthy(script_noteworthy, bForceSpawn) {
-  spawner = GetEnt(script_noteworthy, "script_noteworthy");
+  spawner = getEnt(script_noteworthy, "script_noteworthy");
   AssertEx(isDefined(spawner), "Spawner with script_noteworthy " + script_noteworthy + " does not exist.");
 
   guy = spawner spawn_ai(bForceSpawn);
@@ -5721,7 +5721,7 @@ spawn_script_noteworthy(script_noteworthy, bForceSpawn) {
 }
 
 spawn_targetname(targetname, bForceSpawn) {
-  spawner = GetEnt(targetname, "targetname");
+  spawner = getEnt(targetname, "targetname");
   AssertEx(isDefined(spawner), "Spawner with targetname " + targetname + " does not exist.");
 
   guy = spawner spawn_ai(bForceSpawn);
@@ -5943,10 +5943,10 @@ hunted_style_door_open(soundalias) {
     self playSound("door_wood_slow_open");
   }
 
-  self RotateTo(self.angles + (0, 70, 0), 2, .5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self ConnectPaths();
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 palm_style_door_open(soundalias) {
@@ -5958,10 +5958,10 @@ palm_style_door_open(soundalias) {
     self playSound("door_wood_slow_open");
   }
 
-  self RotateTo(self.angles + (0, 70, 0), 2, .5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self ConnectPaths();
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 lerp_fov_overtime(time, destfov) {
@@ -5999,8 +5999,8 @@ apply_end_fog() {
   maps\_art::set_fog_progress(1);
 }
 
-anim_stopanimscripted() {
-  self StopAnimScripted();
+anim_stopanimScripted() {
+  self StopanimScripted();
   self notify("stop_loop");
   self notify("single anim", "end");
   self notify("looping anim", "end");
@@ -6067,20 +6067,20 @@ _setLightIntensity(val) {
   self SetLightIntensity(val);
 }
 
-_linkto(targ, tag, org, angles) {
+_linkTo(targ, tag, org, angles) {
   if(isDefined(angles)) {
-    self LinkTo(targ, tag, org, angles);
+    self linkTo(targ, tag, org, angles);
     return;
   }
   if(isDefined(org)) {
-    self LinkTo(targ, tag, org);
+    self linkTo(targ, tag, org);
     return;
   }
   if(isDefined(tag)) {
-    self LinkTo(targ, tag);
+    self linkTo(targ, tag);
     return;
   }
-  self LinkTo(targ);
+  self linkTo(targ);
 }
 
 array_wait(array, msg, timeout) {
@@ -6644,7 +6644,7 @@ mix_down(sound) {
   }
 }
 
-manual_linkto(entity, offset) {
+manual_linkTo(entity, offset) {
   entity endon("death");
   self endon("death");
 
@@ -7130,13 +7130,13 @@ teleport_players(aNodes) {
     } else if(player == level.player2) {
       eNode = player2node;
     }
-    player SetOrigin(eNode.origin);
+    player setOrigin(eNode.origin);
     player SetPlayerAngles(eNode.angles);
   }
 }
 
 teleport_player(object) {
-  level.player SetOrigin(object.origin);
+  level.player setOrigin(object.origin);
   if(isDefined(object.angles)) {
     level.player SetPlayerAngles(object.angles);
   }
@@ -7543,7 +7543,7 @@ blend_movespeedscale_default(time) {
 
 teleport_ent(ent) {
   if(isPlayer(self)) {
-    self SetOrigin(ent.origin);
+    self setOrigin(ent.origin);
     self SetPlayerAngles(ent.angles);
   } else {
     self ForceTeleport(ent.origin, ent.angles);
@@ -7556,7 +7556,7 @@ teleport_to_ent_tag(ent, tag) {
   self DontInterpolate();
 
   if(isPlayer(self)) {
-    self SetOrigin(position);
+    self setOrigin(position);
     self SetPlayerAngles(angles);
   } else if(IsAI(self)) {
     self ForceTeleport(position, angles);
@@ -7620,7 +7620,7 @@ BeginSliding(velocity, allowedAcceleration, dampening) {
   if(override_link_method) {
     player PlayerLinkToBlend(slideModel, undefined, 1);
   } else {
-    player PlayerLinkTo(slideModel);
+    player PlayerlinkTo(slideModel);
   }
 
   player DisableWeapons();
@@ -7967,7 +7967,7 @@ traceFx(fx_name, origin, angles, trace_depth) {
 
   if(isDefined(fx_info["rumble"])) {
     player = get_player_from_self();
-    player PlayRumbleOnEntity(fx_info["rumble"]);
+    player playRumbleOnEntity(fx_info["rumble"]);
   }
 }
 
@@ -8089,7 +8089,7 @@ get_player_view_controller(model, tag, originoffset, turret) {
   player_view_controller = SpawnTurret("misc_turret", origin, turret);
   player_view_controller.angles = model GetTagAngles(tag);
   player_view_controller setModel("tag_turret");
-  player_view_controller LinkTo(model, tag, originoffset, (0, 0, 0));
+  player_view_controller linkTo(model, tag, originoffset, (0, 0, 0));
   player_view_controller MakeUnusable();
   player_view_controller Hide();
   player_view_controller SetMode("manual");
@@ -8295,7 +8295,7 @@ show_entity() {
       self Show();
       self Solid();
       if(self.spawnflags & 1) {
-        self DisconnectPaths();
+        self disconnectPaths();
       }
       break;
     case "trigger_radius":
@@ -8313,15 +8313,15 @@ show_entity() {
   }
 }
 
-_rotateyaw(yaw_angle, time, acc_time, dec_time) {
+_rotateYaw(yaw_angle, time, acc_time, dec_time) {
   if(isDefined(dec_time)) {
-    self RotateYaw(yaw_angle, time, acc_time, dec_time);
+    self rotateYaw(yaw_angle, time, acc_time, dec_time);
   } else {
     if(isDefined(acc_time)) {}
   }
-  self RotateYaw(yaw_angle, time, acc_time);
+  self rotateYaw(yaw_angle, time, acc_time);
   else {
-    self RotateYaw(yaw_angle, time);
+    self rotateYaw(yaw_angle, time);
   }
 }
 
@@ -9073,7 +9073,7 @@ waittill_volume_dead_then_set_flag(sFlag) {
 }
 
 waittill_targetname_volume_dead_then_set_flag(targetname, msg) {
-  volume = GetEnt(targetname, "targetname");
+  volume = getEnt(targetname, "targetname");
   AssertEx(isDefined(volume), "No volume for targetname " + targetname);
   volume waittill_volume_dead_then_set_flag(msg);
 }
@@ -9131,11 +9131,11 @@ add_target_pivot(ent) {
     self.pivot = ent;
   } else {
     AssertEx(isDefined(self.target), "Tried to add pivot to an entity but it has no target.");
-    self.pivot = GetEnt(self.target, "targetname");
+    self.pivot = getEnt(self.target, "targetname");
     AssertEx(isDefined(self.pivot), "Tried to add pivot but there was no pivot entity. Must be a script mover, like a script_origin not script_struct.");
   }
 
-  self LinkTo(self.pivot);
+  self linkTo(self.pivot);
 }
 
 flashBangStop() {
@@ -9144,11 +9144,11 @@ flashBangStop() {
 }
 
 getent_or_struct(param1, param2) {
-  ent = GetEnt(param1, param2);
+  ent = getEnt(param1, param2);
   if(isDefined(ent)) {
     return ent;
   }
-  return getstruct(param1, param2);
+  return getStruct(param1, param2);
 }
 
 grenade_earthQuake() {
@@ -9196,9 +9196,9 @@ player_rides_in_humvee(seat, rider, right, left, up, down) {
   rider DisableWeapons();
 
   org = spawn_tag_origin();
-  org LinkTo(self, "tag_passenger", player_rides_in_humvee_offset(seat), (0, 0, 0));
+  org linkTo(self, "tag_passenger", player_rides_in_humvee_offset(seat), (0, 0, 0));
   org.player_dismount = spawn_tag_origin();
-  org.player_dismount LinkTo(self, "tag_body", player_rides_humvee_offset_dismount(seat), (0, 0, 0));
+  org.player_dismount linkTo(self, "tag_body", player_rides_humvee_offset_dismount(seat), (0, 0, 0));
 
   if(!isDefined(right)) {
     right = 90;
@@ -9214,7 +9214,7 @@ player_rides_in_humvee(seat, rider, right, left, up, down) {
   }
 
   rider DisableWeapons();
-  rider PlayerLinkTo(org, "tag_origin", 0.8, right, left, up, down);
+  rider PlayerlinkTo(org, "tag_origin", 0.8, right, left, up, down);
   rider.humvee_org = org;
 
   return org;
@@ -9261,7 +9261,7 @@ player_leaves_humvee(skip_offset) {
   org Unlink();
   if(!skip_offset) {
     move_time = 0.6;
-    org MoveTo(org.player_dismount.origin, move_time, move_time * 0.5, move_time * 0.5);
+    org moveTo(org.player_dismount.origin, move_time, move_time * 0.5, move_time * 0.5);
     wait(move_time);
   }
 
@@ -9296,9 +9296,9 @@ bloodsplateffect(position) {
 }
 
 screen_effect_sides(position) {
-  forwardVec = VectorNormalize(anglesToForward(self.angles));
-  rightVec = VectorNormalize(AnglesToRight(self.angles));
-  entVec = VectorNormalize(position - self.origin);
+  forwardVec = vectorNormalize(anglesToForward(self.angles));
+  rightVec = vectorNormalize(AnglesToRight(self.angles));
+  entVec = vectorNormalize(position - self.origin);
 
   fDot = VectorDot(entVec, forwardVec);
   rDot = VectorDot(entVec, rightVec);
@@ -9683,7 +9683,7 @@ fx_volume_pause_noteworthy(noteworthy, dodelayed) {
 }
 
 fx_volume_pause_noteworthy_thread(noteworthy, dodelayed) {
-  volume = GetEnt(noteworthy, "script_noteworthy");
+  volume = getEnt(noteworthy, "script_noteworthy");
   volume notify("new_volume_command");
   volume endon("new_volume_command");
   wait 0.05;
@@ -9728,7 +9728,7 @@ fx_volume_restart_noteworthy(noteworthy) {
 }
 
 fx_volume_restart_noteworthy_thread(noteworthy) {
-  volume = GetEnt(noteworthy, "script_noteworthy");
+  volume = getEnt(noteworthy, "script_noteworthy");
   volume notify("new_volume_command");
   volume endon("new_volume_command");
 
@@ -9876,10 +9876,10 @@ move_with_rate(origin, angles, moverate) {
 
   dist = Distance(self.origin, origin);
   movetime = dist / moverate;
-  movevec = VectorNormalize(origin - self.origin);
+  movevec = vectorNormalize(origin - self.origin);
 
-  self MoveTo(origin, movetime, 0, 0);
-  self RotateTo(angles, movetime, 0, 0);
+  self moveTo(origin, movetime, 0, 0);
+  self rotateTo(angles, movetime, 0, 0);
   wait movetime;
 
   if(!isDefined(self)) {
@@ -10034,7 +10034,7 @@ deletestructarray_ref(structs, delay) {
 }
 
 getstruct_delete(value, key) {
-  struct = getstruct(value, key);
+  struct = getStruct(value, key);
   deletestruct_ref(struct);
   return struct;
 }
@@ -10330,7 +10330,7 @@ shot_endangers_player(start, end) {
   to_player = player_center - start;
   range_to_player = Length(to_player);
   min_angle = ASin(Clamp(TRACE_ENDANGERS_PLAYER_RADIUS / range_to_player, 0, 1));
-  if(VectorDot(VectorNormalize(to_player), VectorNormalize(end - start)) > Cos(min_angle)) {
+  if(VectorDot(vectorNormalize(to_player), vectorNormalize(end - start)) > Cos(min_angle)) {
     return true;
   }
 
@@ -10693,11 +10693,11 @@ follow_path_wait_for_player(node, dist) {
   vec = undefined;
 
   vec = anglesToForward(self.angles);
-  vec2 = VectorNormalize((level.player.origin - self.origin));
+  vec2 = vectorNormalize((level.player.origin - self.origin));
 
   if(isDefined(node.target)) {
     temp = get_target_ent(node.target);
-    vec = VectorNormalize(temp.origin - node.origin);
+    vec = vectorNormalize(temp.origin - node.origin);
   } else if(isDefined(node.angles)) {
     vec = anglesToForward(node.angles);
   } else {

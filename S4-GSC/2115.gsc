@@ -217,7 +217,7 @@ _id_6917(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_12 = var_1 - var_0;
   var_13 = length(var_12);
   var_14 = var_12 / var_13;
-  var_15 = vectornormalize((var_14[1], -1 * var_14[0], 0));
+  var_15 = vectorNormalize((var_14[1], -1 * var_14[0], 0));
   var_16 = 0;
   var_17 = undefined;
   var_18 = 60;
@@ -405,7 +405,7 @@ _id_320B(var_0) {
 
 _id_320A(var_0) {
   var_1 = anglesToForward(self.angles);
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
 
   if(vectordot(var_1, var_2) >= cos(60)) {
     var_3 = 64;

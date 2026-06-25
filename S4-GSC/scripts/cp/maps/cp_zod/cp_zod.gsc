@@ -67,7 +67,7 @@ play_page_vfx() {
   if(!getdvarint("#x3553d15a56298db4", 0)) {
     return;
   }
-  var_0 = scripts\engine\utility::getstruct("page_fx_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("page_fx_pos", "targetname");
   var_1 = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles);
   var_1 endon("death");
   waitframe();

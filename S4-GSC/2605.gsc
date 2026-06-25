@@ -50,10 +50,10 @@ _id_B18A(var_0, var_1, var_2, var_3, var_4) {
   var_7 = var_1._id_505D + -1 * anglesToForward(var_1.angles) * 2000;
   var_1._id_2626 = spawn("script_model", (0, 0, 0));
   var_1._id_2626 setModel("tag_origin");
-  var_1._id_2626 linkto(var_1, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
+  var_1._id_2626 linkTo(var_1, "TAG_BOMB_L", (0, 0, 0), (0, 0, 0));
   var_1._id_2627 = spawn("script_model", (0, 0, 0));
   var_1._id_2627 setModel("tag_origin");
-  var_1._id_2627 linkto(var_1, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
+  var_1._id_2627 linkTo(var_1, "TAG_BOMB_R", (0, 0, 0), (0, 0, 0));
   var_8 = 1;
 
   if(_id_080C::_id_89D7() && isDefined(var_4) && !level._id_BF5A) {
@@ -719,7 +719,7 @@ _id_745A() {
 }
 
 _id_E4EC(var_0, var_1) {
-  var_2 = vectornormalize(var_0.origin - var_1.origin);
+  var_2 = vectorNormalize(var_0.origin - var_1.origin);
   var_3 = 15;
   var_4 = anglesToForward(var_1 getplayerangles());
 
@@ -984,7 +984,7 @@ _id_1881(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3) && var_3) {
     var_10 = var_1 + anglesToForward(var_2) * var_8;
-    self moveto(var_10, var_9);
+    self moveTo(var_10, var_9);
   }
 
   var_11 = 4;
@@ -1058,7 +1058,7 @@ _id_402F(var_0, var_1) {
   var_3 = 4 + _id_6A4D(var_1) + 8;
   var_2 thread _id_4772(var_3);
   var_4 = anglestoaxis((35, -45, 0))["forward"];
-  var_2 linkto(var_0, "tag_origin", var_4 * -1 * 1000, (35, -45, 0));
+  var_2 linkTo(var_0, "tag_origin", var_4 * -1 * 1000, (35, -45, 0));
   var_0.killcament = var_2;
 }
 
@@ -1231,7 +1231,7 @@ _id_505F(var_0, var_1, var_2) {
 
 _id_5060(var_0, var_1) {
   var_2 = anglesToForward(scripts\engine\utility::_id_5CD9(var_0.angles));
-  var_3 = vectornormalize(scripts\engine\utility::_id_5CDA(var_1) - var_0.origin);
+  var_3 = vectorNormalize(scripts\engine\utility::_id_5CDA(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {

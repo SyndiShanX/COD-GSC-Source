@@ -99,7 +99,7 @@ main() {
     }
 
     if(level.var_c3a029eb === 1) {
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         e_player.var_36a93d1 = 0;
       }
 
@@ -112,7 +112,7 @@ main() {
       level thread lui::screen_flash(0.2, 3, 0.5, 1, "black");
       wait 0.2;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_to_player("" + #"hell_burn_fx", 0);
       }
 
@@ -135,7 +135,7 @@ main() {
     level flag::clear(#"hash_16c15e4538336bb5");
     level flag::clear(#"hash_17b882aed4431728");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_7dc2d507 === 1) {
         waitframe(2);
         player notify(#"water_player_freeze_broken");
@@ -165,7 +165,7 @@ main() {
 function_ff59ba7a(is_game_over) {
   level.var_c3a029eb = 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.var_3b55baa1) && isDefined(player.var_e01bb56) && player zm_orange_snowball_piles::function_75a76099()) {
       player zm_loadout::set_player_lethal_grenade(player.var_3b55baa1);
       player zm_weapons::weapon_give(player.var_3b55baa1, 1, 0);
@@ -290,7 +290,7 @@ function_b4bd25ef() {
 
 function_ff0b7907() {
   level clientfield::set("" + #"hash_72b5b0359ca48427", 1);
-  playsoundatposition(#"hash_431cadb65b1777ce", (0, 0, 0));
+  playSoundAtPosition(#"hash_431cadb65b1777ce", (0, 0, 0));
   level thread lui::screen_flash(0.2, 0.5, 1, 0.8, "white");
   wait 0.2;
   setlightingstate(1);
@@ -316,7 +316,7 @@ function_ff0b7907() {
     level flag::set(#"hash_69a9d00e65ee6c40");
   }
 
-  array::run_all(getplayers(), &function_7206d28);
+  array::run_all(getPlayers(), &function_7206d28);
 }
 
 function_7206d28() {
@@ -405,7 +405,7 @@ function_8532d13f() {
   wait 3;
   origin = self gettagorigin("j_spine4");
   level.var_4adebdfc.origin = origin;
-  level.var_4adebdfc linkto(self, "j_spine4");
+  level.var_4adebdfc linkTo(self, "j_spine4");
   level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
 }
 

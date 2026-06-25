@@ -27,7 +27,7 @@ main() {
   level thread ice_puzzle_2_init();
   level thread ice_puzzle_1_run();
   flag_wait("ice_puzzle_1_complete");
-  playsoundatposition("zmb_squest_step1_finished", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_step1_finished", (0, 0, 0));
   level thread rumble_players_in_chamber(5, 3.0);
   ice_puzzle_1_cleanup();
   level thread ice_puzzle_2_run();
@@ -95,7 +95,7 @@ ice_tiles_randomize() {
   foreach(v_pos in a_original_positions) {
     e_tile = random(a_unused_tiles);
     arrayremovevalue(a_unused_tiles, e_tile, 0);
-    e_tile moveto(v_pos, 0.5, 0.1, 0.1);
+    e_tile moveTo(v_pos, 0.5, 0.1, 0.1);
     e_tile waittill("movedone");
   }
 
@@ -135,7 +135,7 @@ update_ternary_display() {
 }
 
 change_ice_gem_value() {
-  ice_gem = getent("ice_chamber_gem", "targetname");
+  ice_gem = getEnt("ice_chamber_gem", "targetname");
 
   if(level.unsolved_tiles.size != 0) {
     correct_tile = random(level.unsolved_tiles);
@@ -147,7 +147,7 @@ change_ice_gem_value() {
 
 process_gem_shooting() {
   level endon("ice_puzzle_1_complete");
-  ice_gem = getent("ice_chamber_gem", "targetname");
+  ice_gem = getEnt("ice_chamber_gem", "targetname");
   ice_gem.value = -1;
   ice_gem setCanDamage(1);
 
@@ -193,7 +193,7 @@ ceiling_tile_flip(b_flip_to_tile_side) {
 
 ceiling_tile_process_damage() {
   level endon("ice_puzzle_1_complete");
-  ice_gem = getent("ice_chamber_gem", "targetname");
+  ice_gem = getEnt("ice_chamber_gem", "targetname");
   self setCanDamage(1);
   ice_gem setCanDamage(1);
 
@@ -241,7 +241,7 @@ ice_stone_run() {
   self.e_model = spawn("script_model", v_spawn_pos);
   self.e_model.angles = self.angles;
   self.e_model setModel("p6_zm_tm_note_rock_01_anim");
-  self.e_model moveto(self.origin, 1.0, 0.5, 0.5);
+  self.e_model moveTo(self.origin, 1.0, 0.5, 0.5);
   playFX(level._effect["digging"], self.origin);
   self.e_model setCanDamage(1);
 
@@ -257,7 +257,7 @@ ice_stone_run() {
   }
 
   self.e_model setclientfield("stone_frozen", 1);
-  playsoundatposition("zmb_squest_ice_stone_freeze", self.origin);
+  playSoundAtPosition("zmb_squest_ice_stone_freeze", self.origin);
 
   while(!flag("ice_puzzle_2_complete")) {
     self.e_model waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weaponname, idflags);
@@ -271,7 +271,7 @@ ice_stone_run() {
 
   self.e_model delete();
   playFX(level._effect["ice_explode"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  playsoundatposition("zmb_squest_ice_stone_shatter", self.origin);
+  playSoundAtPosition("zmb_squest_ice_stone_shatter", self.origin);
   level.ice_stones_remaining--;
 
   if(level.ice_stones_remaining <= 0 && !flag("ice_puzzle_2_complete")) {
@@ -282,7 +282,7 @@ ice_stone_run() {
     level.weather_snow = 5;
     level.weather_rain = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player set_weather_to_player();
     }
 
@@ -290,7 +290,7 @@ ice_stone_run() {
     level.weather_snow = 0;
     level.weather_rain = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player set_weather_to_player();
     }
   }

@@ -154,7 +154,7 @@ _id_E316(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_20._id_F81F.angles = var_20.angles;
     var_20._id_F81F.type = "Machine_Gun";
     var_20._id_F81F.streakinfo = var_4;
-    var_20._id_F81F linkto(var_20, "tag_origin", (200, 0, 55), (0, 0, 0));
+    var_20._id_F81F linkTo(var_20, "tag_origin", (200, 0, 55), (0, 0, 0));
     var_20._id_F81F _meth_839D(0);
     var_20._id_F81F setmode("manual_target");
     var_20._id_F81F setsentryowner(var_1);
@@ -165,14 +165,14 @@ _id_E316(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_20._id_319B.angles = var_20.angles;
     var_20._id_319B.type = "Cannon";
     var_20._id_319B.streakinfo = var_4;
-    var_20._id_319B linkto(var_20, "tag_origin", (-100, 0, 55), (0, 0, 0));
+    var_20._id_319B linkTo(var_20, "tag_origin", (-100, 0, 55), (0, 0, 0));
     var_20._id_319B _meth_839D(0);
     var_20._id_319B setmode("manual_target");
     var_20._id_319B setsentryowner(var_1);
   }
 
   var_20._id_FE90 = spawn("script_model", var_20 gettagorigin("tag_origin"));
-  var_20._id_FE90 linkto(var_20, "tag_origin");
+  var_20._id_FE90 linkTo(var_20, "tag_origin");
   level._id_8B53[level._id_8B53.size] = var_20;
   level._id_8B53 = scripts\engine\utility::_id_1BD1(level._id_8B53);
   level._id_8B46 = undefined;
@@ -189,7 +189,7 @@ _id_E316(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_20._id_F81F._id_100A9 = var_20;
     var_20._id_319B._id_100A9 = var_20;
     var_20._id_F81F._id_100A9.killcament = spawn("script_model", var_20 gettagorigin("tag_origin"));
-    var_20._id_F81F._id_100A9.killcament linkto(var_20, "tag_origin");
+    var_20._id_F81F._id_100A9.killcament linkTo(var_20, "tag_origin");
     var_20._id_319B._id_100A9.killcament = var_20._id_F81F._id_100A9.killcament;
   }
 
@@ -909,8 +909,8 @@ _id_89EA(var_0) {
   var_2 = self._id_F899.origin - self.origin;
   var_1 = var_1 * (1, 1, 0);
   var_2 = var_2 * (1, 1, 0);
-  var_2 = vectornormalize(var_2);
-  var_1 = vectornormalize(var_1);
+  var_2 = vectorNormalize(var_2);
+  var_1 = vectorNormalize(var_1);
   var_3 = vectordot(var_2, var_1);
   var_4 = cos(var_0);
 

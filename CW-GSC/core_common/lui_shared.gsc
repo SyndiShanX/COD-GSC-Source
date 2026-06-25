@@ -419,7 +419,7 @@ function play_outro_movie(outro_movie = getmapoutromovie()) {
   if(isarray(self)) {
     a_players = self;
   } else if(self == level) {
-    a_players = getplayers();
+    a_players = getPlayers();
   }
 
   level flag::set("playing_outro_movie");

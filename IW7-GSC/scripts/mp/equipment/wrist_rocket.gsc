@@ -25,7 +25,7 @@ wristrocketused(var_0) {
   var_1.objective_position = var_0;
   var_0 = scripts\mp\utility::_launchgrenade("wristrocket_mp", self.origin, (0, 0, 0), 100, 1, var_0);
   var_0 forcehidegrenadehudwarning(1);
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   var_0 thread wristrocket_cleanuponparentdeath(var_1);
   var_1 setscriptablepartstate("launch", "active", 0);
   var_1 thread wristrocket_watchfuse(2);

@@ -8,12 +8,12 @@ start() {
   var_0 = maps\oilrocks_code::spawn_apache_player("apache_factory");
   var_1 = maps\oilrocks_apache_code::spawn_blackhawk_ally("struct_blackhawk_ally_factory");
   maps\oilrocks_apache_code::spawn_apache_allies("struct_apache_ally_attack_0");
-  var_1 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct("path_blackhawk_ally_factory", "script_noteworthy"));
+  var_1 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct("path_blackhawk_ally_factory", "script_noteworthy"));
   var_2 = [1, 2];
 
   foreach(var_4 in var_2) {
     var_5 = maps\oilrocks_apache_code::get_apache_ally(var_4);
-    var_5 thread maps\oilrocks_code::chopper_boss_path_override(common_scripts\utility::getstruct("path_apache_ally_attack_0" + var_4, "script_noteworthy"));
+    var_5 thread maps\oilrocks_code::chopper_boss_path_override(common_scripts\utility::getStruct("path_apache_ally_attack_0" + var_4, "script_noteworthy"));
   }
 }
 
@@ -195,5 +195,5 @@ apache_factory_allies_apache_think() {
 apache_factory_ally_blackhawk_think() {
   common_scripts\utility::flag_wait("FLAG_apache_factory_destroyed");
   var_0 = maps\oilrocks_apache_code::get_blackhawk_ally();
-  var_0 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct("path_blackhawk_factory_drop_off", "script_noteworthy"));
+  var_0 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct("path_blackhawk_factory_drop_off", "script_noteworthy"));
 }

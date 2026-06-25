@@ -69,7 +69,7 @@ function bot_combat() {
       angles = self getplayerangles();
       fwd = anglesToForward(angles);
       threatdir = meleethreat.origin - self.origin;
-      threatdir = vectornormalize(threatdir);
+      threatdir = vectorNormalize(threatdir);
       dot = vectordot(fwd, threatdir);
       if(dot > level.botsettings.meleedot) {
         self bot::tap_melee_button();

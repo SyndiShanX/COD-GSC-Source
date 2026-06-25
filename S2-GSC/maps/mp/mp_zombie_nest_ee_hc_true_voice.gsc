@@ -33,7 +33,7 @@ func_6A7B() {
     }
   }
 
-  self["god_gem"] moveto(self["god_gem"].var_5AFC.var_0116, 5, 1, 1);
+  self["god_gem"] moveTo(self["god_gem"].var_5AFC.var_0116, 5, 1, 1);
   playFXOnTag(level.var_0611["nest_ee_hc_gem_fx"], self["god_gem"], "tag_origin");
   lib_0557::func_4BC8("barbarossa gem reveal");
   common_scripts\utility::func_3C8F("flag_nest_hc_ee_true_voice_entered");
@@ -66,7 +66,7 @@ func_A6DB() {
   common_scripts\utility::func_3C7B(var_00);
   wait(3);
   maps\mp\mp_zombie_nest_ee_paintings::func_3664(1);
-  level.var_357F sethintstring(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
+  level.var_357F setHintString(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
   common_scripts\utility::func_3C9F(var_00);
 }
 
@@ -152,7 +152,7 @@ func_52EF() {
   var_00 = [];
   var_01 = common_scripts\utility::func_46B5("nest_hc_mural_challenge", "targetname");
   var_02 = getEntArray(var_01.var_01A2, "targetname");
-  var_00["chandelier_trig"] = getent("nest_hc_mural_chandelier", "script_noteworthy");
+  var_00["chandelier_trig"] = getEnt("nest_hc_mural_chandelier", "script_noteworthy");
   var_00["god_gem"] = undefined;
   var_03 = common_scripts\utility::func_46B5("klauses_stone", "script_noteworthy");
   var_00["god_gem"] = spawn("script_model", var_03.var_0116);

@@ -163,8 +163,8 @@ directed_pickup_award_to(player, type, model) {
   pickup setModel(model);
   trigger = spawn("trigger_radius", origin, 0, 30, 128);
   pickup.type = type;
-  trigger EnableLinkTo();
-  trigger LinkTo(pickup);
+  trigger EnablelinkTo();
+  trigger linkTo(pickup);
   pickup thread wait_for_pickup(type, trigger);
   pickup thread pickup_bomb_on_player(player);
   pickup.trigger = trigger;
@@ -337,8 +337,8 @@ spawn_uber_prizes(increments, spawn_point, popUp, popVec) {
     }
     if(isDefined(pickup)) {
       if(isDefined(popUp)) {
-        pickup.trigger EnableLinkTo();
-        pickup.trigger LinkTo(pickup);
+        pickup.trigger EnablelinkTo();
+        pickup.trigger linkTo(pickup);
         pickup thread powerup_popup(pickup.trigger, popVec);
       } else {
         pickup thread powerup_wobble(pickup.trigger);
@@ -624,7 +624,7 @@ move_pickup_to_score(type, player) {
   }
   end_pt += (x, y, z);
   self notify("picked_up");
-  self moveto(end_pt, 1.4, 0, 0);
+  self moveTo(end_pt, 1.4, 0, 0);
   self waittill("movedone");
 }
 wait_for_pickup(type, trigger) {
@@ -764,7 +764,7 @@ spinning_blockers_damage_trigger(player) {
       guy playSound("zmb_pwup_barrel_impact");
       guy DoDamage(guy.health + 1, player.origin, player, undefined, "MOD_CRUSH");
       guy StartRagdoll(1);
-      player PlayRumbleOnEntity("slide_rumble");
+      player playRumbleOnEntity("slide_rumble");
     }
   }
 }
@@ -812,22 +812,22 @@ spinning_blockers_update() {
   org setModel("tag_origin");
   barrel = spawn("script_model", self.origin);
   barrel setModel(level.spinning_blocker_model);
-  barrel SetPlayerCollision(0);
-  barrel LinkTo(org, "tag_origin", (0, 80, 0));
+  barrel setPlayerCollision(0);
+  barrel linkTo(org, "tag_origin", (0, 80, 0));
   trigger = spawn("trigger_radius", barrel.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 40, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(barrel);
+  trigger EnablelinkTo();
+  trigger linkTo(barrel);
   trigger thread spinning_blockers_damage_trigger(self);
   org.barrel1 = barrel;
   org.trigger1 = trigger;
-  org LinkTo(self);
+  org linkTo(self);
   barrel = spawn("script_model", self.origin);
   barrel setModel(level.spinning_blocker_model);
-  barrel SetPlayerCollision(0);
-  barrel LinkTo(org, "tag_origin", (0, -80, 0));
+  barrel setPlayerCollision(0);
+  barrel linkTo(org, "tag_origin", (0, -80, 0));
   trigger = spawn("trigger_radius", barrel.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 40, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(barrel);
+  trigger EnablelinkTo();
+  trigger linkTo(barrel);
   trigger thread spinning_blockers_damage_trigger(self);
   org.barrel2 = barrel;
   org.trigger2 = trigger;
@@ -928,40 +928,40 @@ tesla_blockers_update() {
   org = spawn("script_model", self.origin);
   org.origin += (0, 0, 0);
   org setModel("tag_origin");
-  org LinkTo(self);
+  org linkTo(self);
   tesla = spawn("script_model", self.origin);
   tesla setModel(level.tesla_blocker_model);
-  tesla LinkTo(org, "tag_origin", (0, 80, 50));
+  tesla linkTo(org, "tag_origin", (0, 80, 50));
   trigger = spawn("trigger_radius", tesla.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS | level.SPAWNFLAG_TRIGGER_NOT_PLAYER, 18, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(tesla);
+  trigger EnablelinkTo();
+  trigger linkTo(tesla);
   trigger thread tesla_blockers_damage_trigger(self);
   org.objects[0] = tesla;
   org.triggers[0] = trigger;
   tesla = spawn("script_model", self.origin);
   tesla setModel(level.tesla_blocker_model);
-  tesla LinkTo(org, "tag_origin", (0, -80, 50));
+  tesla linkTo(org, "tag_origin", (0, -80, 50));
   trigger = spawn("trigger_radius", tesla.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS | level.SPAWNFLAG_TRIGGER_NOT_PLAYER, 18, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(tesla);
+  trigger EnablelinkTo();
+  trigger linkTo(tesla);
   trigger thread tesla_blockers_damage_trigger(self);
   org.objects[1] = tesla;
   org.triggers[1] = trigger;
   tesla = spawn("script_model", self.origin);
   tesla setModel(level.tesla_blocker_model);
-  tesla LinkTo(org, "tag_origin", (80, 0, 50));
+  tesla linkTo(org, "tag_origin", (80, 0, 50));
   trigger = spawn("trigger_radius", tesla.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS | level.SPAWNFLAG_TRIGGER_NOT_PLAYER, 18, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(tesla);
+  trigger EnablelinkTo();
+  trigger linkTo(tesla);
   trigger thread tesla_blockers_damage_trigger(self);
   org.objects[2] = tesla;
   org.triggers[2] = trigger;
   tesla = spawn("script_model", self.origin);
   tesla setModel(level.tesla_blocker_model);
-  tesla LinkTo(org, "tag_origin", (-80, 0, 50));
+  tesla linkTo(org, "tag_origin", (-80, 0, 50));
   trigger = spawn("trigger_radius", tesla.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS | level.SPAWNFLAG_TRIGGER_NOT_PLAYER, 18, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(tesla);
+  trigger EnablelinkTo();
+  trigger linkTo(tesla);
   trigger thread tesla_blockers_damage_trigger(self);
   org.objects[3] = tesla;
   org.triggers[3] = trigger;
@@ -983,7 +983,7 @@ stun_blockers_damage_trigger(player) {
     if(!isDefined(guy.stunned) && !isDefined(guy.boss)) {
       guy playSound("zmb_pwup_bear_stun");
       playFXOnTag(level._effect["stun_bear_explode"], guy, "j_hip_le");
-      player PlayRumbleOnEntity("slide_rumble");
+      player playRumbleOnEntity("slide_rumble");
       guy thread stunned_guy_think();
     }
   }
@@ -1019,10 +1019,10 @@ stun_blockers_update() {
   org = spawn("script_model", self.origin);
   org.origin += (0, 0, 0);
   org setModel("tag_origin");
-  org LinkTo(self);
+  org linkTo(self);
   trigger = spawn("trigger_radius", org.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS + level.SPAWNFLAG_TRIGGER_NOT_PLAYER, 130, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(org);
+  trigger EnablelinkTo();
+  trigger linkTo(org);
   trigger thread stun_blockers_damage_trigger(self);
   org.trigger = trigger;
   playFXOnTag(level._effect["stun_bear"], org, "tag_origin");
@@ -1270,7 +1270,7 @@ heli_trigger_think(player) {
         if(isDefined(guy.is_dog)) {
           continue;
         }
-        guy SetPlayerCollision(0);
+        guy setPlayerCollision(0);
         if(ok_to_gib() && !isDefined(guy.is_quad) && !isDefined(guy.is_dog)) {
           guy pop_off_head();
         }
@@ -1281,7 +1281,7 @@ heli_trigger_think(player) {
   }
 }
 heli_zombie_poi(player) {
-  players = GetPlayers();
+  players = getPlayers();
   index = 0;
   for(i = 0; i < players.size; i++) {
     if(players[i] == player) {
@@ -1332,7 +1332,7 @@ push_origin_out(origin, radius) {
 heli_pickup_update(pickup) {
   self EnableInvulnerability();
   origin = push_origin_out(self.origin, 30);
-  heli = SpawnVehicle("t5_veh_helo_hind_mini", "player_heli", "heli_mini_zt", origin + (0, 0, level.heli_height), self.angles);
+  heli = spawnVehicle("t5_veh_helo_hind_mini", "player_heli", "heli_mini_zt", origin + (0, 0, level.heli_height), self.angles);
   heli.health = 100000;
   heli.lockheliheight = true;
   heli MakeVehicleUsable();
@@ -1344,8 +1344,8 @@ heli_pickup_update(pickup) {
   heli maps\_vehicle::turret_attack_think();
   heli thread heli_rocket_loop(heli);
   trigger = spawn("trigger_radius", origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 55, 60);
-  trigger EnableLinkTo();
-  trigger LinkTo(heli, "tag_origin", (0, 0, -60));
+  trigger EnablelinkTo();
+  trigger linkTo(heli, "tag_origin", (0, 0, -60));
   trigger thread heli_trigger_think(self);
   self notify("veh_activated");
   self setclientflag(level._ZT_PLAYER_CF_HELI_PILOT);
@@ -1395,7 +1395,7 @@ tank_outofworld_watcher() {
 tank_pickup_update(pickup) {
   self EnableInvulnerability();
   origin = push_origin_out(pickup.origin, 30);
-  tank = SpawnVehicle("t5_veh_tank_t55_mini", "player_tank", "tank_t55_mini", origin, self.angles);
+  tank = spawnVehicle("t5_veh_tank_t55_mini", "player_tank", "tank_t55_mini", origin, self.angles);
   tank.health = 100000;
   tank MakeVehicleUsable();
   tank UseBy(self);
@@ -1426,7 +1426,7 @@ tank_pickup_update(pickup) {
     above = origin + (0, 0, 100);
     below = origin + (0, 0, -100);
     hitp = PlayerPhysicsTrace(above, below);
-    self SetOrigin(hitp);
+    self setOrigin(hitp);
   }
   playFX(level._effect["respawn"], self.origin, anglesToForward(self.angles));
   self RadiusDamage(self.origin, 200, 10000, 10000, self);
@@ -1468,7 +1468,7 @@ powerup_wobble(trigger) {
       yaw = 60;
     }
     yaw = self.angles[1] + yaw;
-    self rotateto((-20 + randomint(40), yaw, -90 + randomint(180)), waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo((-20 + randomint(40), yaw, -90 + randomint(180)), waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }
@@ -1580,7 +1580,7 @@ AdjustMineOrigin(origin) {
         dist_squared = DistanceSquared(origin, mine.origin);
         if(dist_squared < min_dist_squared) {
           dir = origin - mine.origin;
-          dir = VectorNormalize(dir);
+          dir = vectorNormalize(dir);
           origin = origin + dir * min_dist;
           pushed = true;
         }
@@ -1658,13 +1658,13 @@ shield_trigger_think(player) {
     if(isDefined(player.rhino_deaths)) {
       player.rhino_deaths++;
     }
-    guy SetPlayerCollision(0);
+    guy setPlayerCollision(0);
     guy DoDamage(guy.health + 1, player.origin, player, undefined, "explosive");
     guy StartRagdoll(1);
     guy LaunchRagdoll((0, 0, 220));
     guy.launched = true;
     guy playSound("zmb_ragdoll_launched");
-    player PlayRumbleOnEntity("slide_rumble");
+    player playRumbleOnEntity("slide_rumble");
   }
 }
 shield_flag_on(onOff) {
@@ -1679,8 +1679,8 @@ turn_shield_on(short_shield) {
   self EnableInvulnerability();
   wait 0.05;
   trigger = spawn("trigger_radius", self.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 65, 50);
-  trigger EnableLinkTo();
-  trigger LinkTo(self);
+  trigger EnablelinkTo();
+  trigger linkTo(self);
   trigger thread shield_trigger_think(self);
   if(!isDefined(short_shield) || !short_shield) {
     if(!isDefined(self.tank) && !isDefined(self.heli)) {
@@ -1719,12 +1719,12 @@ update_drop_booster() {
         self EnableInvulnerability();
         curdir = anglesToForward((0, 0, 0));
         trigger = spawn("trigger_radius", self.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 85, 50);
-        trigger EnableLinkTo();
-        trigger LinkTo(self, "tag_origin", curdir * 200, self.angles);
+        trigger EnablelinkTo();
+        trigger linkTo(self, "tag_origin", curdir * 200, self.angles);
         trigger thread shield_trigger_think(self);
         trigger2 = spawn("trigger_radius", self.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 85, 50);
-        trigger2 EnableLinkTo();
-        trigger2 LinkTo(self, "tag_origin", curdir * 50, self.angles);
+        trigger2 EnablelinkTo();
+        trigger2 linkTo(self, "tag_origin", curdir * 50, self.angles);
         trigger2 thread shield_trigger_think(self);
         curdir = anglesToForward(self.angles);
         endTime = GetTime() + 600;
@@ -1734,7 +1734,7 @@ update_drop_booster() {
         boost_vector -= (0, 0, 200);
         while(GetTime() < endTime) {
           self SetVelocity(boost_vector);
-          self PlayRumbleOnEntity("slide_rumble");
+          self playRumbleOnEntity("slide_rumble");
           wait 0.05;
         }
         if(self.rhino_deaths >= 20) {
@@ -1812,7 +1812,7 @@ turret_init() {
     level.mini_turrets[i] MakeTurretUnusable();
     level.mini_turret_orgs[i] = spawn("script_model", level.mini_turrets[i].origin);
     level.mini_turret_orgs[i] setModel("tag_origin");
-    level.mini_turrets[i] LinkTo(level.mini_turret_orgs[i]);
+    level.mini_turrets[i] linkTo(level.mini_turret_orgs[i]);
     level.mini_turrets[i].org = level.mini_turret_orgs[i];
     level.mini_turrets[i].deployed = false;
     level.mini_turrets[i].script_delay_min = 0.25;
@@ -1876,8 +1876,8 @@ turret_pickup_update(player) {
   playFXOnTag(level._effect["betty_explode"], mini_turret, "tag_origin");
   mini_turret playSound("evt_turret_land");
   physicsExplosionSphere(mini_turret.org.origin, 512, 128, 2);
-  player PlayRumbleOnEntity("artillery_rumble");
-  if(GetPlayers().size > 1) {
+  player playRumbleOnEntity("artillery_rumble");
+  if(getPlayers().size > 1) {
     mini_turret.fx = SpawnFx(level._effect[player.light_playFX], mini_turret.origin, (1, 0, 0), (0, 0, 1));
     if(isDefined(mini_turret.fx)) {
       triggerFx(mini_turret.fx);
@@ -1914,7 +1914,7 @@ monkey_update(player, origin) {
   playFXOnTag(level._effect["monkey_glow"], monkey, "origin_animate_jnt");
   level.active_monkeys[level.active_monkeys.size] = monkey;
   fx = undefined;
-  if(GetPlayers().size > 1) {
+  if(getPlayers().size > 1) {
     fx = SpawnFx(level._effect[player.light_playFX], monkey.origin + (0, 0, -12), (1, 0, 0), (0, 0, 1));
   }
   if(isDefined(fx)) {
@@ -2046,7 +2046,7 @@ spawn_bonus_room() {
   level thread spawn_treasure(level.zombie_vars["zombie_treasure_boss"]);
 }
 spawn_armory() {
-  numplayers = GetPlayers().size;
+  numplayers = getPlayers().size;
   for(i = 0; i < 4; i++) {
     spawn_random_weapon_pickup();
     wait 0.2;

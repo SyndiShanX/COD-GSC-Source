@@ -218,7 +218,7 @@ function choosebetterpositionservice(entity) {
         return 0;
       }
       if(bpointsingoal == 0) {
-        searchoriginongoalradius = entity.goalpos + ((vectornormalize(searchorigin - entity.goalpos)) * entity.goalradius);
+        searchoriginongoalradius = entity.goalpos + ((vectorNormalize(searchorigin - entity.goalpos)) * entity.goalradius);
         queryresult = positionquery_source_navigation(searchoriginongoalradius, 0, entity.engagemaxdist, 45, 72, entity, 108);
         positionquery_filter_inclaimedlocation(queryresult, entity);
         positionquery_filter_distancetogoal(queryresult, entity);
@@ -291,7 +291,7 @@ function choosebetterpositionservice(entity) {
     engagemaxdistsqrd = entity.engagemaxdist * entity.engagemaxdist;
     engagemaxfalloffdistsqrd = entity.engagemaxfalloffdist * entity.engagemaxfalloffdist;
     if(isDefined(entity.enemy) && issentient(entity.enemy)) {
-      enemyforward = vectornormalize(anglesToForward(entity.enemy.angles));
+      enemyforward = vectorNormalize(anglesToForward(entity.enemy.angles));
     }
     for(index = 0; index < randompoints.size; index++) {
       distancesqrdtoenemy = distance2dsquared(randompoints[index], searchorigin);
@@ -314,7 +314,7 @@ function choosebetterpositionservice(entity) {
         }
       }
       if(isDefined(enemyforward)) {
-        anglefromforward = acos(math::clamp(vectordot(vectornormalize(pointweight - entity.enemy.origin), enemyforward), -1, 1));
+        anglefromforward = acos(math::clamp(vectordot(vectorNormalize(pointweight - entity.enemy.origin), enemyforward), -1, 1));
         if(anglefromforward > 80) {
           pointweight = pointweight + -0.5;
         }

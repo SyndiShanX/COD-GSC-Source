@@ -61,10 +61,10 @@ setup_basketball_game() {
     }
   }
 
-  self.hoop_trig enablelinkto();
-  self.hoop_trig linkto(self.hoop);
-  self.hoop_clip linkto(self.hoop);
-  self.rim linkto(self.hoop);
+  self.hoop_trig enablelinkTo();
+  self.hoop_trig linkTo(self.hoop);
+  self.hoop_clip linkTo(self.hoop);
+  self.rim linkTo(self.hoop);
   self.bball_game_hiscore = 0;
   self.hoop thread move_hoop(self, var_0);
   for(;;) {
@@ -106,13 +106,13 @@ move_hoop(var_0, var_1) {
   var_3 = scripts\engine\utility::getStructArray(self.target, "targetname");
   for(;;) {
     if(scripts\engine\utility::istrue(var_1) && var_0.powered_on == 0) {
-      self moveto(var_2, 2);
+      self moveTo(var_2, 2);
       level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
     }
 
-    self moveto(var_3[0].origin, 4);
+    self moveTo(var_3[0].origin, 4);
     self waittill("movedone");
-    self moveto(var_3[1].origin, 4);
+    self moveTo(var_3[1].origin, 4);
     self waittill("movedone");
   }
 }

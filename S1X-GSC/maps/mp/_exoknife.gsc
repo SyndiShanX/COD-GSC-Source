@@ -105,8 +105,8 @@ exo_knife_touch_watch() {
   self.owner endon("disconnect");
 
   trigger = spawn("trigger_radius", self.origin, 0, 15, 5);
-  trigger EnableLinkTo();
-  trigger LinkTo(self);
+  trigger EnablelinkTo();
+  trigger linkTo(self);
   trigger.knife = self;
   self thread delete_on_death(trigger);
 
@@ -218,7 +218,7 @@ exo_knife_recall_watch() {
   end = end + player_vel * time;
 
   dir = end - start;
-  dir = VectorNormalize(dir);
+  dir = vectorNormalize(dir);
 
   return_knife_offset = 0;
   if(return_knife_offset != 0) {

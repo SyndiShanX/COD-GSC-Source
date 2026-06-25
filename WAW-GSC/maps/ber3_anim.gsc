@@ -181,10 +181,10 @@ audio_loader() {
 }
 
 preview_anim_single(triggerTN, animname, anime, isAxis) {
-  trig = GetEnt(triggerTN, "targetname");
+  trig = getEnt(triggerTN, "targetname");
   ASSERTEX(isDefined(trig), "trigger can't be found.");
 
-  animSpot = GetStruct(trig.target, "targetname");
+  animSpot = getStruct(trig.target, "targetname");
   ASSERTEX(isDefined(animSpot), "anim spot (targetname " + trig.target + ") can't be found.");
 
   trig waittill("trigger");

@@ -59,7 +59,7 @@ calcspawnorigin(origin, angles) {
 
   if(isDefined(var_f868a6d2) && var_f868a6d2.size) {
     var_109e505c = arraysortclosest(var_f868a6d2, origin);
-    dir = vectornormalize(origin - var_109e505c[0].origin);
+    dir = vectorNormalize(origin - var_109e505c[0].origin);
     angles = vectortoangles(dir);
     return {
       #origin: var_109e505c[0].origin, #angles: angles
@@ -146,7 +146,7 @@ calcspawnorigin(origin, angles) {
   } else {
     assert(isDefined(startnode));
     var_56e2a4e0 = randomintrange(800, 1200);
-    dir = vectornormalize(startnode.origin - origin);
+    dir = vectorNormalize(startnode.origin - origin);
     pos = origin + dir * var_56e2a4e0;
     pos = (pos[0], pos[1], heightoffset);
     spawnloc = getclosestpointonnavvolume(pos, "navvolume_small", 2000);
@@ -198,7 +198,7 @@ function_d52c51c6(killstreaktype) {
   }
 
   player stats::function_e24eec31(getweapon(#"drone_squadron"), #"used", 1);
-  drone_squadron = spawnvehicle("veh_drone_squadron_mp", spawnpos.origin, spawnpos.angles, "dynamic_spawn_ai");
+  drone_squadron = spawnVehicle("veh_drone_squadron_mp", spawnpos.origin, spawnpos.angles, "dynamic_spawn_ai");
   drone_squadron killstreaks::configure_team("drone_squadron", killstreak_id, player, "small_vehicle", undefined, &configureteampost);
   drone_squadron killstreak_hacking::enable_hacking("drone_squadron", &hackedcallbackpre, &hackedcallbackpost);
   drone_squadron.killstreak_id = killstreak_id;
@@ -243,7 +243,7 @@ function_d52c51c6(killstreaktype) {
   waitframe(1);
   var_91edb2b7 = drone_squadron.origin + drone_right * 128 + var_1b4e1739 * 128;
   var_91edb2b7 = getclosestpointonnavvolume(var_91edb2b7, "navvolume_small", 2000);
-  wing_drone = spawnvehicle("spawner_boct_mp_wing_drone", var_91edb2b7, drone_squadron.angles, "wing_drone_ai");
+  wing_drone = spawnVehicle("spawner_boct_mp_wing_drone", var_91edb2b7, drone_squadron.angles, "wing_drone_ai");
 
   if(isDefined(level.var_14151f16)) {
     [[level.var_14151f16]](wing_drone, 0);
@@ -266,7 +266,7 @@ function_d52c51c6(killstreaktype) {
   waitframe(1);
   var_91edb2b7 = drone_squadron.origin + var_3daa0416 * 128 + var_1b4e1739 * 128;
   var_91edb2b7 = getclosestpointonnavvolume(var_91edb2b7, "navvolume_small", 2000);
-  wing_drone = spawnvehicle("spawner_boct_mp_wing_drone", var_91edb2b7, drone_squadron.angles, "wing_drone_ai");
+  wing_drone = spawnVehicle("spawner_boct_mp_wing_drone", var_91edb2b7, drone_squadron.angles, "wing_drone_ai");
   wing_drone.leader = drone_squadron;
   wing_drone setteam(drone_squadron.team);
   wing_drone.team = drone_squadron.team;
@@ -441,7 +441,7 @@ ontimeout() {
     radiusdamage(drone_squadron.origin, params.ksexplosionouterradius, params.ksexplosioninnerdamage, params.ksexplosionouterdamage, drone_squadron.owner, "MOD_EXPLOSIVE", getweapon("drone_squadron"));
 
     if(isDefined(params.ksexplosionrumble)) {
-      drone_squadron.owner playrumbleonentity(params.ksexplosionrumble);
+      drone_squadron.owner playRumbleOnEntity(params.ksexplosionrumble);
     }
   }
 
@@ -532,7 +532,7 @@ function_89609eb8(origin, angles) {
 
   if(isDefined(var_f868a6d2) && var_f868a6d2.size) {
     var_109e505c = arraysortclosest(var_f868a6d2, origin);
-    dir = vectornormalize(origin - var_109e505c[0].origin);
+    dir = vectorNormalize(origin - var_109e505c[0].origin);
     angles = vectortoangles(dir);
     return {
       #origin: var_109e505c[0].origin, #angles: angles
@@ -667,7 +667,7 @@ function_da3b4d35() {
       direction_vec = (direction_vec[0] * 5000, direction_vec[1] * 5000, direction_vec[2] * 5000);
       trace = bulletTrace(eye_pos, eye_pos + direction_vec, 1, self.owner, 1, 1, self);
       var_31491620 = trace[#"position"];
-      var_468f300e = vectornormalize(anglesToForward(direction));
+      var_468f300e = vectorNormalize(anglesToForward(direction));
       var_b7e30855 = 5000 * 5000;
 
       if(distancesquared(eye_pos, player.origin) < var_b7e30855) {

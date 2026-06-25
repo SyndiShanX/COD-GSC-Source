@@ -538,7 +538,7 @@ function_3d9f4eef() {
 }
 
 function_2b6fe83b() {
-  e_jar = getent("animosity", "targetname");
+  e_jar = getEnt("animosity", "targetname");
   e_jar setCanDamage(1);
   e_jar thread function_82947e72();
 }

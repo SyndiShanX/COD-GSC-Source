@@ -122,7 +122,7 @@ function function_1d9bbc33(localclientnum, player) {
 
     if(dist <= 160000) {
       var_327ac8 = anglesToForward(function_1957ce2a(localclientnum, "tag_flashlight"));
-      var_7ec97bb = vectornormalize(self.origin - light_pos);
+      var_7ec97bb = vectorNormalize(self.origin - light_pos);
       dot = vectordot(var_7ec97bb, var_327ac8);
       lerp = (dist - 10000) / 150000;
 

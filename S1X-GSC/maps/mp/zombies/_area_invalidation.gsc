@@ -92,9 +92,9 @@ initsaboteurdata() {
 }
 
 initdefuseobject() {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"AREA_INVALIDATION_BOMB_DEFUSE");
-  var_0 = getent(self.target, "targetname");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"AREA_INVALIDATION_BOMB_DEFUSE");
+  var_0 = getEnt(self.target, "targetname");
   var_0 makeunusable();
   self.trigger = var_0;
   var_1 = maps\mp\gametypes\_gameobjects::createuseobject("allies", var_0, [self], (0, 0, 32), 1);
@@ -347,7 +347,7 @@ try_continue_breach(var_0, var_1) {
       var_4 = var_0[var_3];
       thread playteleportspawnfx(var_4.origin, 1.0);
       var_4 hide_soldier_and_make_invulnerable(1);
-      var_4 setorigin(var_2[var_3].origin, 1);
+      var_4 setOrigin(var_2[var_3].origin, 1);
     }
 
     wait 5.0;
@@ -490,7 +490,7 @@ movesoldierstonewzone(var_0, var_1) {
   var_0.soldiers = var_1;
 
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
-    var_1[var_3] setorigin(var_2[var_3].origin);
+    var_1[var_3] setOrigin(var_2[var_3].origin);
     var_1[var_3] setplayerangles(vectortoangles(var_0.curorigin - var_2[var_3].origin));
     var_1[var_3].bomb_guarding = var_0;
     var_1[var_3] hide_soldier_and_make_invulnerable(0);

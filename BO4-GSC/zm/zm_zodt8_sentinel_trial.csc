@@ -214,7 +214,7 @@ function_2d798d9a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       n_x_move = randomintrange(-64, 64);
       var_4cf7f9d1 = randomintrange(-64, 64);
       var_c53a4cdc = randomintrange(-64, 64);
-      self moveto(self.origin + (n_x_move, var_4cf7f9d1, var_c53a4cdc), randomintrange(10, 20));
+      self moveTo(self.origin + (n_x_move, var_4cf7f9d1, var_c53a4cdc), randomintrange(10, 20));
       s_result = self waittill(#"movedone", #"death");
 
       if(s_result._notify == "death") {
@@ -481,11 +481,11 @@ function_94822f89(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_ac4395b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, #"hash_67ca45018833af1d");
+    self playRumbleOnEntity(localclientnum, #"hash_67ca45018833af1d");
     return;
   }
 
-  self playrumbleonentity(localclientnum, #"hash_55b8ea7312be930e");
+  self playRumbleOnEntity(localclientnum, #"hash_55b8ea7312be930e");
 }
 
 planet_glyph_activate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

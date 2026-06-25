@@ -1842,7 +1842,7 @@ func_62AF(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       if(isDefined(param_02.onagentdamage)) {
         param_00[[param_02.onagentdamage]](param_01);
       } else {
-        var_10 = 5000 * vectornormalize(param_00.var_0116 - param_01.var_0116);
+        var_10 = 5000 * vectorNormalize(param_00.var_0116 - param_01.var_0116);
         var_10 = (var_10[0], var_10[1], 5000);
         param_00.var_78D5 = var_10;
         param_00.var_78D2 = 1;
@@ -3479,11 +3479,11 @@ func_6FC6() {
   }
 
   for(;;) {
-    var_00 moveto(var_02, var_03, 0.15, 0.15);
-    var_00 rotateyaw(180, var_03);
+    var_00 moveTo(var_02, var_03, 0.15, 0.15);
+    var_00 rotateYaw(180, var_03);
     wait(var_03);
-    var_00 moveto(var_01, var_03, 0.15, 0.15);
-    var_00 rotateyaw(180, var_03);
+    var_00 moveTo(var_01, var_03, 0.15, 0.15);
+    var_00 rotateYaw(180, var_03);
     wait(var_03);
   }
 }
@@ -4488,7 +4488,7 @@ func_73CD(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     if(isDefined(param_01)) {
       var_0B = param_01.var_0A4B;
       var_0C = param_01.var_0116;
-      var_0D = acos(clamp(vectordot(anglesToForward(param_02.var_001D), vectornormalize(common_scripts\utility::func_3D5D(param_01.var_0116 - param_02.var_0116))), -1, 1));
+      var_0D = acos(clamp(vectordot(anglesToForward(param_02.var_001D), vectorNormalize(common_scripts\utility::func_3D5D(param_01.var_0116 - param_02.var_0116))), -1, 1));
     }
 
     var_0F = param_02 getvelocity();

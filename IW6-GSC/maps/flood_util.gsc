@@ -4,15 +4,15 @@
 *****************************************************/
 
 player_move_to_checkpoint_start(var_0) {
-  var_1 = getent(var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = getEnt(var_0, "targetname");
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
 }
 
 allies_move_to_checkpoint_start(var_0, var_1) {
   for(var_2 = 0; var_2 < 3; var_2++) {
     var_3 = var_0 + "_ally_" + var_2;
-    var_4 = common_scripts\utility::getstruct(var_3, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_3, "targetname");
     level.allies[var_2] forceteleport(var_4.origin, var_4.angles);
 
     if(isDefined(var_1)) {
@@ -55,8 +55,8 @@ spawn_ally(var_0, var_1) {
 }
 
 spawn_targetname_at_struct_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2.origin = var_3.origin;
@@ -94,7 +94,7 @@ reassign_goal_volume(var_0, var_1) {
   }
 
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   foreach(var_4 in var_0) {
     var_4 setgoalvolumeauto(var_2);
@@ -174,7 +174,7 @@ friendly_should_speed_up() {
 }
 
 waittill_aigroupcount_or_trigger_targetname(var_0, var_1, var_2) {
-  var_3 = getent(var_2, "targetname");
+  var_3 = getEnt(var_2, "targetname");
   var_3 endon("trigger");
   level endon("aigroup_count_triggered");
   maps\_utility::waittill_aigroupcount(var_0, var_1);
@@ -182,7 +182,7 @@ waittill_aigroupcount_or_trigger_targetname(var_0, var_1, var_2) {
 }
 
 hide_scriptmodel_by_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 hide();
   var_1 notsolid();
 
@@ -228,7 +228,7 @@ show_models_by_targetname(var_0, var_1) {
 
     if(isDefined(var_1) && var_1) {
       if(var_4.classname == "script_brushmodel") {
-        var_4 disconnectpaths();
+        var_4 disconnectPaths();
       }
     }
   }
@@ -256,10 +256,10 @@ setup_default_weapons(var_0) {
 update_goal_vol_from_trigger(var_0, var_1) {
   self endon("death");
   self endon("stop_goal_volume_updates");
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_2)) {
-    var_2 = getent(var_0, "script_noteworthy");
+    var_2 = getEnt(var_0, "script_noteworthy");
 
     if(!isDefined(var_2)) {}
   }
@@ -323,10 +323,10 @@ waittill_aigroup_count_or_timeout(var_0, var_1, var_2) {
 }
 
 waittill_aigroup_count_or_trigger(var_0, var_1, var_2) {
-  var_3 = getent(var_2, "targetname");
+  var_3 = getEnt(var_2, "targetname");
 
   if(!isDefined(var_3)) {
-    var_3 = getent(var_2, "script_noteworthy");
+    var_3 = getEnt(var_2, "script_noteworthy");
 
     if(!isDefined(var_3)) {}
   }
@@ -336,10 +336,10 @@ waittill_aigroup_count_or_trigger(var_0, var_1, var_2) {
 }
 
 waittill_enemy_count_or_trigger(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
-    var_2 = getent(var_1, "script_noteworthy");
+    var_2 = getEnt(var_1, "script_noteworthy");
 
     if(!isDefined(var_2)) {}
   }
@@ -423,10 +423,10 @@ kill_all_enemies() {
 }
 
 get_enemies_touching_volume(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "script_noteworthy");
+    var_1 = getEnt(var_0, "script_noteworthy");
 
     if(!isDefined(var_1)) {}
   }
@@ -464,22 +464,22 @@ notify_on_enemy_count_touching_volume(var_0, var_1, var_2) {
 
 stop_enemy_dialogue() {
   self waittill("death");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 stop_enemy_dialogue_on_death_or_trigger(var_0) {
   self endon("death");
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "script_noteworthy");
+    var_1 = getEnt(var_0, "script_noteworthy");
 
     if(!isDefined(var_1)) {}
   }
 
   thread stop_enemy_dialogue();
   var_1 waittill("trigger");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 smart_get_nag_line(var_0, var_1, var_2) {
@@ -574,8 +574,8 @@ setup_bokehdot_volume(var_0) {
 
 do_bokehdot_volume() {
   level endon("swept_away");
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 = distance2d(var_1.origin, var_0.origin);
   maps\flood_fx::fx_create_bokehdots_source();
 
@@ -778,7 +778,7 @@ block_until_at_struct(var_0, var_1) {
   self setgoalpos(var_0.origin);
   self.flood_current_goalnode = var_0.targetname;
   self waittill("goal");
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   return var_0;
 }
 
@@ -835,7 +835,7 @@ spawn_and_link_models_to_tags(var_0, var_1) {
       }
 
       var_6.angles = self gettagangles(var_4);
-      var_6 linkto(self, var_4);
+      var_6 linkTo(self, var_4);
 
       if(isDefined(var_0)) {
         var_6.targetname = var_0;
@@ -884,7 +884,7 @@ fell_in_water_fail(var_0) {
   setsaveddvar("actionSlotsHide", 1);
   setsaveddvar("hud_showStance", 0);
   level.player shellshock("dog_bite", 0.75);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player stunplayer(1.0);
   level.player playSound("scn_flood_swept_away_splash_ss");
   var_1 = level.player common_scripts\utility::spawn_tag_origin();
@@ -893,7 +893,7 @@ fell_in_water_fail(var_0) {
   if(!isDefined(var_0)) {
     var_2 = maps\_utility::spawn_anim_model("player_rig", level.player.origin + (0, 0, -128));
     var_2.angles = level.player.angles;
-    var_2 linkto(var_1);
+    var_2 linkTo(var_1);
     var_3["player_rig"] = var_2;
     var_4 = 15;
     level.player playerlinktodelta(var_2, "tag_player", 0, var_4, var_4, var_4, var_4);
@@ -918,7 +918,7 @@ fell_in_water_fail(var_0) {
       break;
   }
 
-  var_1 rotateto((0, 270, 0), 3);
+  var_1 rotateTo((0, 270, 0), 3);
 
   if(!common_scripts\utility::flag("missionfailed")) {
     setDvar("ui_deadquote", "");
@@ -1248,7 +1248,7 @@ create_rumble_ent(var_0, var_1, var_2) {
 
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = self.origin + (0, 0, var_0);
-  var_3 linkto(self);
+  var_3 linkTo(self);
 
   if(isDefined(var_1)) {
     var_3.script_noteworthy = var_1;
@@ -1263,17 +1263,17 @@ create_rumble_ent(var_0, var_1, var_2) {
 
 play_rumble_light(var_0) {
   jkuprint("playing play_rumble_light");
-  var_0 playrumbleonentity("light_1s");
+  var_0 playRumbleOnEntity("light_1s");
 }
 
 play_rumble_light_3s(var_0) {
   jkuprint("playing play_rumble_light 3s");
-  var_0 playrumbleonentity("light_3s");
+  var_0 playRumbleOnEntity("light_3s");
 }
 
 play_rumble_heavy(var_0) {
   jkuprint("playing play_rumble_heavy");
-  var_0 playrumbleonentity("heavy_1s");
+  var_0 playRumbleOnEntity("heavy_1s");
 }
 
 registeractionbinding(var_0, var_1, var_2) {

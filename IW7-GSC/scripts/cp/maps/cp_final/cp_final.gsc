@@ -194,7 +194,7 @@ run_pap_machine_logic(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   wait(3);
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   if(scripts\engine\utility::istrue(level.placed_alien_fuses)) {
@@ -1125,7 +1125,7 @@ interactiontriggerproperties(var_0, var_1, var_2) {
       case "iw7_mag_zm":
       case "iw7_longshot_zm":
       case "iw7_kbs_zm":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
 
@@ -1134,13 +1134,13 @@ interactiontriggerproperties(var_0, var_1, var_2) {
       case "entangler_button":
       case "pap_fusebox":
       case "puzzle_pieces":
-        self.interaction_trigger usetriggerrequirelookat(0);
+        self.interaction_trigger useTriggerRequireLookAt(0);
         self.interaction_trigger setusefov(360);
         break;
 
       case "dash_interaction":
       case "dot_interaction":
-        self.interaction_trigger usetriggerrequirelookat(0);
+        self.interaction_trigger useTriggerRequireLookAt(0);
         self.interaction_trigger setusefov(70);
         break;
 
@@ -1149,7 +1149,7 @@ interactiontriggerproperties(var_0, var_1, var_2) {
       case "rhino_sentry":
       case "pap_bridge":
       case "neil_head_final_pos":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(360);
         break;
 
@@ -1465,7 +1465,7 @@ movepentstostructs(var_0) {
       foreach(var_6 in var_4) {
         var_7 = undefined;
         if(isDefined(var_6.target)) {
-          var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+          var_7 = scripts\engine\utility::getStruct(var_6.target, "targetname");
         }
 
         var_8 = 0;
@@ -1504,7 +1504,7 @@ movepentstostructs(var_0) {
           var_9.used = 1;
           var_9 dontinterpolate();
           if(isDefined(var_6.target)) {
-            var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+            var_7 = scripts\engine\utility::getStruct(var_6.target, "targetname");
             var_9.origin = var_7.origin;
             if(isDefined(var_7.angles)) {
               var_9.angles = var_7.angles;
@@ -1577,7 +1577,7 @@ resetents(var_0, var_1) {
       }
 
       if(isDefined(var_7.target)) {
-        var_8 = scripts\engine\utility::getstruct(var_7.target, "targetname");
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
         if(var_4.origin == var_8.origin) {
           var_5 = 1;
           break;
@@ -1662,7 +1662,7 @@ hasplayerentattached(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       if(var_3.origin == var_4.origin) {
         var_3.used = 1;
         return 1;
@@ -1726,7 +1726,7 @@ getattachedpersonalent(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_5 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       if(var_4.origin == var_5.origin) {
         return var_4;
       }
@@ -1753,7 +1753,7 @@ getunclaimedpersonalent(var_0, var_1) {
       }
 
       if(isDefined(var_7.target)) {
-        var_8 = scripts\engine\utility::getstruct(var_7.target, "targetname");
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
         if(var_4.origin == var_8.origin) {
           var_5 = 1;
           break;
@@ -1778,7 +1778,7 @@ watchforplayerzonechange(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   scripts\engine\utility::flag_wait("init_interaction_done");
-  var_1 = getent("zone_change", "targetname");
+  var_1 = getEnt("zone_change", "targetname");
   if(isDefined(var_1)) {
     for(;;) {
       if(var_0 istouching(var_1)) {
@@ -2158,7 +2158,7 @@ init_wall_buys_array() {
 }
 
 pit_kill_trigger() {
-  var_0 = getent("player_kill_trig", "targetname");
+  var_0 = getEnt("player_kill_trig", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(!isPlayer(var_1)) {

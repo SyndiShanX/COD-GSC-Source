@@ -108,7 +108,7 @@ fxanim_init(localclientnum) {
   crabs = [];
 
   for(i = 0; i < 3; i++) {
-    crabs[i] = getent(localclientnum, "fxanim_dlc3_crab_0" + (i + 1), "targetname");
+    crabs[i] = getEnt(localclientnum, "fxanim_dlc3_crab_0" + (i + 1), "targetname");
 
     if(isDefined(crabs[i])) {
       crabs[i] thread fxanim_crab_think(localclientnum, i);
@@ -139,7 +139,7 @@ fxanim_crab_think(localclientnum, crab_index) {
       anim_wait = crab_end_anim_length;
     }
 
-    self animscripted(anim_name, 1.0, 0.0, 1.0);
+    self animScripted(anim_name, 1.0, 0.0, 1.0);
     wait(anim_wait);
     wait(crab_think_wait);
     self clearanim(anim_name, 0);

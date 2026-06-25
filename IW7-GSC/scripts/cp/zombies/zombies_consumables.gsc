@@ -1567,7 +1567,7 @@ setandremoveinvulnerability() {
 
 killnearbyzombies(var_0) {
   var_1 = 128;
-  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglesToForward(self.angles));
   var_3 = var_2 * var_1;
   var_4 = self.origin + var_3;
   physicsexplosionsphere(var_4, var_1, 1, 2.5);
@@ -1588,8 +1588,8 @@ killnearbyzombies(var_0) {
     var_10 = var_8.origin;
     var_11 = var_8.maxhealth;
     var_2 = anglesToForward(self.angles);
-    var_12 = vectornormalize(var_2) * -100;
-    var_8 setvelocity(vectornormalize(var_8.origin - self.origin + var_12) * 800 + (0, 0, 300));
+    var_12 = vectorNormalize(var_2) * -100;
+    var_8 setvelocity(vectorNormalize(var_8.origin - self.origin + var_12) * 800 + (0, 0, 300));
     var_8 killrepulsorvictim(self, var_11, var_10, self.origin);
   }
 }
@@ -2312,7 +2312,7 @@ activate_twister_homing(var_0, var_1) {
   self.trigger_move_ent = spawn("script_model", var_0, 0, 512, 128);
   self.trigger_move_ent setModel("tag_origin");
   level.trigger_move_ent_sfx = spawn("script_model", var_0, 0, 512, 128);
-  level.trigger_move_ent_sfx linkto(self.trigger_move_ent);
+  level.trigger_move_ent_sfx linkTo(self.trigger_move_ent);
   wait(0.5);
   level.trigger_move_ent_sfx thread twister_sfx();
   playFXOnTag(level._effect["twister"], self.trigger_move_ent, "tag_origin");
@@ -2429,7 +2429,7 @@ fling_zombie_thundergun_harpoon(var_0, var_1, var_2, var_3) {
 
   var_4 = var_1.origin - var_3.origin;
   var_5 = anglestoup(self.angles);
-  self setvelocity(vectornormalize(var_3.origin - self.origin * 400) + (0, 0, 800));
+  self setvelocity(vectorNormalize(var_3.origin - self.origin * 400) + (0, 0, 800));
   wait(0.16);
   if(isDefined(var_2)) {
     var_1.do_immediate_ragdoll = 1;
@@ -2458,10 +2458,10 @@ move_ent_function(var_0, var_1) {
       if(self.twister_array_zombie.size > 0) {
         if(isDefined(self.twister_array_zombie[0])) {
           if([[level.active_volume_check]](self.twister_array_zombie[0])) {
-            var_0 moveto(self.twister_array_zombie[0], 0.5, 0.25, 0);
+            var_0 moveTo(self.twister_array_zombie[0], 0.5, 0.25, 0);
           } else {
             var_3 = getclosestpointonnavmesh(self.twister_array_zombie[0]) + (0, 10, 0);
-            var_0 moveto(var_3, 0.5);
+            var_0 moveTo(var_3, 0.5);
           }
 
           var_2--;
@@ -2473,7 +2473,7 @@ move_ent_function(var_0, var_1) {
       scripts\engine\utility::waitframe();
       continue;
     } else {
-      var_0 moveto(self.twister_array_zombie[var_2], 0.5, 0, 0);
+      var_0 moveTo(self.twister_array_zombie[var_2], 0.5, 0, 0);
     }
 
     var_2 = var_2 + 1;
@@ -2966,7 +2966,7 @@ wait_for_player_activation(var_0) {
   var_2 = undefined;
   if(level.script == "cp_zmb") {
     var_2 = disable_arcade_cabinet_next_to_ghost_n_skull();
-    var_3 = getent("ghost_arcade_activation_area", "targetname");
+    var_3 = getEnt("ghost_arcade_activation_area", "targetname");
   }
 
   level.gns_game_console_vfx = spawnfx(level._effect["GnS_activation"], var_1);
@@ -3770,7 +3770,7 @@ use_anywhere_but_here(var_0) {
   scripts\cp\cp_interaction::refresh_interaction();
   scripts\cp\powers\coop_powers::power_enablepower();
   self getrigindexfromarchetyperef();
-  self setorigin(var_9.origin);
+  self setOrigin(var_9.origin);
   self setplayerangles(var_9.angles);
   self notify("left_hidden_room_early");
   scripts\cp\utility::notify_used_consumable("anywhere_but_here");
@@ -3787,7 +3787,7 @@ jumptoanywherebutherespawns(var_0) {
     level.players[0] scripts\cp\cp_interaction::refresh_interaction();
     level.players[0] scripts\cp\powers\coop_powers::power_enablepower();
     level.players[0] getrigindexfromarchetyperef();
-    level.players[0] setorigin(var_2.origin);
+    level.players[0] setOrigin(var_2.origin);
     level.players[0] setplayerangles(var_2.angles);
     wait(2);
   }

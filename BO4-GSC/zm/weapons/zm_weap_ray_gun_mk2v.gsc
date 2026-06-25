@@ -199,7 +199,7 @@ function_5c035588(e_target, v_target_pos, w_curr, b_launched = 0, var_9a119ceb =
   if(b_launched && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"enhanced")) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
-    v_fling = 200 * vectornormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));
+    v_fling = 200 * vectorNormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));
     e_target zm_utility::function_ffc279(v_fling, self, undefined, w_curr);
   }
 }
@@ -295,7 +295,7 @@ function_6f9fb9d7(e_source, e_target) {
   if(distancesquared(v_source, v_target) >= 4096) {
     e_fx = util::spawn_model("tag_origin", v_source);
     e_fx clientfield::set("" + #"ray_gun_mk2v_stun_arc", 1);
-    e_fx moveto(v_target, 0.11);
+    e_fx moveTo(v_target, 0.11);
     e_fx waittill(#"movedone");
     e_fx delete();
   }

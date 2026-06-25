@@ -375,7 +375,7 @@ func_E844() {
     self waittill("dodgeBegin");
     var_0 = spawn("script_origin", self.origin);
     var_0 setModel("tag_origin");
-    var_0 linkto(self, "tag_origin", (0, 0, 64), (0, 0, 0));
+    var_0 linkTo(self, "tag_origin", (0, 0, 64), (0, 0, 0));
     var_0 thread scripts\mp\weapons::func_56E5(self, 1);
   }
 }

@@ -71,15 +71,15 @@ ready_to_activate(unitrigger_stub) {
 }
 
 watch_for_triple_attack() {
-  t_hole = getent("fire_link_damage", "targetname");
+  t_hole = getEnt("fire_link_damage", "targetname");
 
   while(!flag("ee_mech_zombie_hole_opened")) {
     t_hole waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname);
 
     if(isDefined(weaponname) && weaponname == "beacon_zm" && flag("fire_link_enabled")) {
-      playsoundatposition("zmb_squest_robot_floor_collapse", t_hole.origin);
+      playSoundAtPosition("zmb_squest_robot_floor_collapse", t_hole.origin);
       wait 3;
-      m_floor = getent("easter_mechzombie_spawn", "targetname");
+      m_floor = getEnt("easter_mechzombie_spawn", "targetname");
       m_floor delete();
       flag_set("ee_mech_zombie_hole_opened");
       t_hole delete();
@@ -89,7 +89,7 @@ watch_for_triple_attack() {
 }
 
 mech_zombie_hole_valid(valid) {
-  t_hole = getent("fire_link_damage", "targetname");
+  t_hole = getEnt("fire_link_damage", "targetname");
 
   if(self istouching(t_hole)) {
     return 1;

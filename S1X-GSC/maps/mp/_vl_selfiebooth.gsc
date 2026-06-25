@@ -13,13 +13,13 @@
 #using_animtree("multiplayer_vlobby");
 
 init_selfieBooth() {
-  player_pos = GetEnt("selfie_player_pos", "targetname");
+  player_pos = getEnt("selfie_player_pos", "targetname");
   if(!isDefined(player_pos)) {
     return;
   }
 
-  camera_target = GetEnt(player_pos.target, "targetname");
-  camera_pos = GetEnt(camera_target.target, "targetname");
+  camera_target = getEnt(player_pos.target, "targetname");
+  camera_pos = getEnt(camera_target.target, "targetname");
 
   level.selfieBooth = spawnStruct();
   level.selfieBooth.player_pos = player_pos;
@@ -86,7 +86,7 @@ SpawnSelfieAvatar() {
 
   clone SetCostumeModels(level.player.spawned_avatar.costume);
 
-  clone LinkTo(level.selfieBooth.player_pos);
+  clone linkTo(level.selfieBooth.player_pos);
 
   level.selfieBooth.clone = clone;
   self.selfie_clone = clone;

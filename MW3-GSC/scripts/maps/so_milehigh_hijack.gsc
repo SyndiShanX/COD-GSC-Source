@@ -263,7 +263,7 @@ _id_5B4D() {
     }
   }
 
-  var_4 = getent("hijack_crash_model_exterior", "script_noteworthy");
+  var_4 = getEnt("hijack_crash_model_exterior", "script_noteworthy");
   var_4 delete();
   var_5 = getEntArray("hijack_crash_plane_model", "targetname");
 
@@ -311,7 +311,7 @@ _id_5B4E() {
   maps\_utility::_id_265A("axis");
   maps\_utility::_id_265A("allies");
   thread maps\_utility::set_vision_set("hijack_airplane", 1);
-  level._id_5A65 = getent("player_debate_trigger", "script_noteworthy");
+  level._id_5A65 = getEnt("player_debate_trigger", "script_noteworthy");
   level._id_5A65 common_scripts\utility::trigger_off();
 
   if(getDvar("airmasks") == "") {
@@ -323,7 +323,7 @@ _id_5B4E() {
   level._id_5A6A = getDvar("phys_gravityChangeWakeupRadius");
   level._id_5A6B = getDvar("ragdoll_max_life");
   level._id_5A6C = (-14, 114, 0);
-  level._id_5960 = getent("org_view_roll", "targetname");
+  level._id_5960 = getEnt("org_view_roll", "targetname");
   level.player playersetgroundreferenceent(level._id_5960);
   level._id_5961 = [];
   level._id_5961 = maps\_utility::_id_0BC3(level._id_5961, level._id_5960);
@@ -360,7 +360,7 @@ _id_5B4F() {
 
 _id_5B50() {
   level endon("special_op_terminated");
-  var_0 = getent("glass_blocking_clip", "targetname");
+  var_0 = getEnt("glass_blocking_clip", "targetname");
   level waittill("slowmo_breach_ending");
   wait 2;
   var_0 delete();
@@ -368,8 +368,8 @@ _id_5B50() {
 
 _id_5B51() {
   level endon("special_op_terminated");
-  var_0 = getent("so_first_breach_trigger", "targetname");
-  var_0 sethintstring("");
+  var_0 = getEnt("so_first_breach_trigger", "targetname");
+  var_0 setHintString("");
   _id_5B5C();
   var_0 notify("trigger", level.players[0]);
   level notify("so_players_ready");
@@ -524,10 +524,10 @@ _id_5B60() {
     var_1 useanimtree(#animtree);
   }
 
-  var_3 = getent("hijack_crash_model_front_interior", "script_noteworthy");
+  var_3 = getEnt("hijack_crash_model_front_interior", "script_noteworthy");
   maps\_audio::aud_send_msg("pre_crash_door");
   var_3 thread maps\_anim::_id_1246(var_3, "hijack_pre_plane_crash_door");
-  var_4 = getent("crash_door_blocker", "targetname");
+  var_4 = getEnt("crash_door_blocker", "targetname");
   var_4 delete();
   common_scripts\utility::waitframe();
   var_3 thread maps\_anim::_id_1280("hijack_pre_plane_crash_door", 0.99);
@@ -581,8 +581,8 @@ _id_5B64(var_0) {
   }
 
   self allowjump(0);
-  var_1 = vectornormalize(var_0);
-  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_1 = vectorNormalize(var_0);
+  var_2 = vectorNormalize(anglesToForward(self.angles));
   var_3 = vectordot(var_1, var_2);
   var_4 = acos(var_3);
   var_5 = undefined;
@@ -655,8 +655,8 @@ _id_5B69() {
 
 _id_5B6A() {
   level endon("special_op_terminated");
-  var_0 = common_scripts\utility::getstruct("so_upstairs", "targetname");
-  var_1 = common_scripts\utility::getstruct("so_obj_find_president", "targetname");
+  var_0 = common_scripts\utility::getStruct("so_upstairs", "targetname");
+  var_1 = common_scripts\utility::getStruct("so_obj_find_president", "targetname");
   objective_add(1, "current", &"SO_MILEHIGH_HIJACK_OBJECTIVE_FIND");
   objective_setpointertextoverride(1, "");
   objective_position(1, var_0.origin);
@@ -674,7 +674,7 @@ _id_5B6A() {
   level._id_5B6B thread _id_5B6C();
   common_scripts\utility::flag_wait("so_president_captured");
   level._id_5B6B._id_1901 = 1;
-  level._id_5B6B sethintstring("");
+  level._id_5B6B setHintString("");
   common_scripts\utility::flag_set("so_milehigh_hijack_complete");
   maps\_utility::_id_2727(2);
 }
@@ -955,7 +955,7 @@ _id_5B78(var_0) {
   var_1 = anglesToForward(var_0);
 
   foreach(var_3 in level.players) {
-    var_3 playrumbleonentity("hijack_plane_large");
+    var_3 playRumbleOnEntity("hijack_plane_large");
     var_3 viewkick(127, var_3.origin + (0, 0, -220));
     var_3 setvelocity(var_1 * 110);
     var_3 _id_5B64(var_1);
@@ -982,7 +982,7 @@ _id_5B7A() {
     var_1[var_2] = spawn("script_origin", var_4.origin);
     var_1[var_2].angles = (0, 0, 0);
     var_4 playersetgroundreferenceent(var_1[var_2]);
-    var_1[var_2] linkto(var_0, "J_prop_1");
+    var_1[var_2] linkTo(var_0, "J_prop_1");
     var_2++;
   }
 
@@ -1041,11 +1041,11 @@ _id_5B7D() {
 
 _id_5B7E() {
   level endon("special_op_terminated");
-  level._id_59A0 = common_scripts\utility::getstruct("pres_room_struct", "targetname");
+  level._id_59A0 = common_scripts\utility::getStruct("pres_room_struct", "targetname");
   level thread maps\hijack_airplane::_id_5AB3();
-  var_0 = getent("intro_door0", "targetname");
+  var_0 = getEnt("intro_door0", "targetname");
   var_0 movey(-51, 0.05);
-  var_1 = getent("storage_door1", "targetname");
+  var_1 = getEnt("storage_door1", "targetname");
   var_1 movey(49, 1, 0, 0.25);
   level._id_5AB6 unlink();
   level._id_5AB6 movey(50, 1, 0, 0.25);
@@ -1095,7 +1095,7 @@ _id_5B7F() {
   maps\_utility::_id_27CB("so_advisor", ::_id_5B84);
   maps\_utility::_id_27CB("so_commander", ::_id_5B85);
   maps\_utility::_id_27CA("breach_enemy_spawner", ::_id_0127);
-  level._id_59A0 = common_scripts\utility::getstruct("pres_room_struct", "targetname");
+  level._id_59A0 = common_scripts\utility::getStruct("pres_room_struct", "targetname");
   _id_5B81("chair1", "debate_chair1");
   _id_5B81("chair2", "debate_chair2");
   _id_5B81("chair3", "debate_chair3");
@@ -1122,13 +1122,13 @@ _id_5B80() {
   thread maps\hijack_airplane::_id_5ACE();
   thread maps\hijack_airplane::_id_5ACF();
   common_scripts\utility::flag_wait("door_breach");
-  var_7 = getent("tv_destructor", "targetname");
-  var_8 = getent("tv_destructor2", "targetname");
+  var_7 = getEnt("tv_destructor", "targetname");
+  var_8 = getEnt("tv_destructor2", "targetname");
   magicbullet("ak74u", var_7.origin, var_8.origin);
 }
 
 _id_5B81(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2._id_1032 = "conf_chair";
   var_2 maps\_anim::_id_1244();
   level._id_59A0 maps\_anim::_id_11CF(var_2, var_1);
@@ -1139,13 +1139,13 @@ _id_5B81(var_0, var_1) {
 }
 
 _id_5B82() {
-  var_0 = getent("chair_destroy_top", "targetname");
-  var_1 = getent("chair_destroy_base", "targetname");
+  var_0 = getEnt("chair_destroy_top", "targetname");
+  var_1 = getEnt("chair_destroy_base", "targetname");
   var_2 = maps\_utility::_id_1287("destroy_chair");
   waittillframeend;
   level._id_59A0 maps\_anim::_id_11CF(var_2, "debate_cine_end_chair");
-  var_0 linkto(var_2, "J_prop_1");
-  var_1 linkto(var_2, "J_prop_2");
+  var_0 linkTo(var_2, "J_prop_1");
+  var_1 linkTo(var_2, "J_prop_2");
   level._id_59A0 thread maps\_anim::_id_1246(var_2, "debate_cine_end_chair");
   common_scripts\utility::waitframe();
   var_2 maps\_anim::_id_1280("debate_cine_end_chair", 1);
@@ -1250,8 +1250,8 @@ _id_5B8C() {
   while(!_id_5B8D()) {
     wait 0.1;
   }
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"SO_MILEHIGH_HIJACK_USE_PRESIDENT");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"SO_MILEHIGH_HIJACK_USE_PRESIDENT");
   self makeusable();
   self waittill("trigger");
   common_scripts\utility::flag_set("so_president_captured");
@@ -1259,7 +1259,7 @@ _id_5B8C() {
 
 _id_5B8D() {
   if(isDefined(level._id_5B89)) {
-    var_0 = getent("near_president_vol", "targetname");
+    var_0 = getEnt("near_president_vol", "targetname");
 
     foreach(var_2 in level._id_5B89) {
       if(isalive(var_2) && !var_2 maps\_utility::_id_0D69() && var_2 istouching(var_0)) {
@@ -1283,8 +1283,8 @@ _id_5B8E() {
 _id_5B8F() {
   level endon("special_op_terminated");
   level endon("flashbang_guy_killed");
-  var_0 = common_scripts\utility::getstruct("so_flash_grenade_start", "targetname");
-  var_1 = common_scripts\utility::getstruct("so_flash_grenade_end", "targetname");
+  var_0 = common_scripts\utility::getStruct("so_flash_grenade_start", "targetname");
+  var_1 = common_scripts\utility::getStruct("so_flash_grenade_end", "targetname");
   common_scripts\utility::flag_wait("so_counter_breach");
   level thread _id_5B90();
   common_scripts\utility::flag_set("so_conference_room_hall");
@@ -1302,11 +1302,11 @@ _id_5B8F() {
 
 _id_5B90() {
   level endon("flashbang_out");
-  var_0 = getent("so_conference_room_hall_flash_bang", "targetname");
+  var_0 = getEnt("so_conference_room_hall_flash_bang", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1, 0);
   var_1._id_1032 = "so_flashbang_enemy";
   level._id_59A0 maps\_anim::_id_1246(var_1, "so_milehigh_breach_flashbang_toss");
-  var_2 = common_scripts\utility::getstruct("so_flashbang_guy_goal", "targetname");
+  var_2 = common_scripts\utility::getStruct("so_flashbang_guy_goal", "targetname");
   var_1 setgoalpos(var_2.origin);
   var_1 waittill("death");
   level notify("flashbang_guy_killed");
@@ -1320,14 +1320,14 @@ _id_5B91() {
 _id_5B93() {
   level endon("special_op_terminated");
   level thread _id_5B94();
-  var_0 = getent("so_ambient_vo_hijackers_speaker", "targetname");
+  var_0 = getEnt("so_ambient_vo_hijackers_speaker", "targetname");
   common_scripts\utility::flag_wait("so_ambient_vo_hijackers");
   var_0 playSound("hijack_fso3_hijackerstaking");
 }
 
 _id_5B94() {
   level endon("special_op_terminated");
-  var_0 = getent("so_lines_behind_door", "targetname");
+  var_0 = getEnt("so_lines_behind_door", "targetname");
   level waittill("breaching_number_2");
   var_0 playSound("hijack_cmd_everyonedown", "conference_line_complete");
   var_0 waittill("conference_line_complete");

@@ -90,7 +90,7 @@ function_6bf7d04f(var_c766fbe6) {
       level.var_102b1301 = "run";
       n_bots = 0;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isbot(player)) {
           n_bots++;
         }
@@ -100,7 +100,7 @@ function_6bf7d04f(var_c766fbe6) {
         level.zombie_total = int(level.zombie_total / n_bots);
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player gadgetpowerset(level.var_a53a05b5, 100);
       }
 

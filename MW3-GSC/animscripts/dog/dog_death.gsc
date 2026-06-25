@@ -16,8 +16,8 @@ main() {
       var_1 = common_scripts\utility::spawn_tag_origin();
       var_1.origin = self.origin;
       var_1.angles = self.angles;
-      self linkto(var_1);
-      var_1 moveto(var_0, 0.5);
+      self linkTo(var_1);
+      var_1 moveTo(var_0, 0.5);
       wait 0.5;
       self unlink();
       var_1 delete();

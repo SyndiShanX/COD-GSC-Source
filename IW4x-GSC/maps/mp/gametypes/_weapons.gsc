@@ -1311,7 +1311,7 @@ shouldAffectClaymore(claymore) {
     return false;
   }
 
-  dirToPos = vectornormalize(dirToPos);
+  dirToPos = vectorNormalize(dirToPos);
 
   dot = vectorDot(dirToPos, claymoreForward);
   return (dot > level.claymoreDetectionDot);
@@ -1769,7 +1769,7 @@ weaponDamageTracePassed(from, to, startRadius, ent) {
     return true;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
 
   trace = bulletTrace(midpos, to, false, ent);

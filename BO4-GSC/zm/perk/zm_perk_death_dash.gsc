@@ -184,7 +184,7 @@ perform_death_dash() {
   self clientfield::set("death_dash_trail", 1);
   self clientfield::set_to_player("death_dash_dash_postfx", 1);
   self.var_d675d730.n_kill_count = 0;
-  var_8e317f6c = vectornormalize(anglesToForward(self.angles) + (0, 0, -0.66));
+  var_8e317f6c = vectorNormalize(anglesToForward(self.angles) + (0, 0, -0.66));
   var_8e317f6c *= 1500;
   self thread function_aeda9580(var_8e317f6c);
   self thread function_749be7c5();
@@ -219,8 +219,8 @@ function_aeda9580(var_8e317f6c) {
     v_player_velocity = self getvelocity();
 
     if(gettime() - self.var_d675d730.var_e09a4919 > 200) {
-      var_982948b3 = vectornormalize(var_8e317f6c * (1, 1, 0));
-      var_cd10168d = vectornormalize(v_player_velocity * (1, 1, 0));
+      var_982948b3 = vectorNormalize(var_8e317f6c * (1, 1, 0));
+      var_cd10168d = vectorNormalize(v_player_velocity * (1, 1, 0));
       n_dot = vectordot(var_982948b3, var_cd10168d);
 
       if(n_dot < var_fa1d6773) {

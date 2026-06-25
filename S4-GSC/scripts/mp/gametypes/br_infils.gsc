@@ -4,7 +4,7 @@
 *************************************************/
 
 main() {
-  var_0 = getent("infil_plane", "script_noteworthy");
+  var_0 = getEnt("infil_plane", "script_noteworthy");
   level._id_2BDB = ::_id_90D3;
 
   if(isDefined(var_0)) {
@@ -134,7 +134,7 @@ _id_AF98() {
   }
 
   var_2 = (0, randomintrange(0, 360), 0);
-  self setorigin(var_0, 1);
+  self setOrigin(var_0, 1);
   self setplayerangles(var_2);
   wait 0.2;
   thread _id_0797::_id_E6AD(0, 1);
@@ -285,7 +285,7 @@ _id_2CFB(var_0, var_1) {
     var_2._id_A289 = var_0;
   }
 
-  var_2._id_E76A = getent("infil_plane", "script_noteworthy");
+  var_2._id_E76A = getEnt("infil_plane", "script_noteworthy");
 
   if(isDefined(var_2._id_E76A)) {
     var_2._id_E76A show();
@@ -301,7 +301,7 @@ _id_2CFB(var_0, var_1) {
   if(isDefined(var_0)) {
     var_2._id_3087 = spawn("script_model", var_2._id_A289.origin);
     var_2._id_3087 setModel("generic_prop_x5");
-    var_2._id_3087 linkto(var_2._id_A289, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_2._id_3087 linkTo(var_2._id_A289, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
   _id_E33C(var_2, var_2._id_E76A);
@@ -315,10 +315,10 @@ _id_2CFB(var_0, var_1) {
     var_2._id_B7C4 setModel("fullbody_usmc_ar_br_infil");
     var_2._id_B7C5 = spawn("script_model", var_2._id_E76A.origin);
     var_2._id_B7C5 setModel("fullbody_usmc_ar_br_infil");
-    var_2._id_B7C2 linkto(var_2._id_B758["parent"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-    var_2._id_B7C3 linkto(var_2._id_B758["parent"], "j_prop_2", (0, 0, 0), (0, 0, 0));
-    var_2._id_B7C4 linkto(var_2._id_B758["parent"], "j_prop_3", (0, 0, 0), (0, 0, 0));
-    var_2._id_B7C5 linkto(var_2._id_B758["parent"], "j_prop_4", (0, 0, 0), (0, 0, 0));
+    var_2._id_B7C2 linkTo(var_2._id_B758["parent"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    var_2._id_B7C3 linkTo(var_2._id_B758["parent"], "j_prop_2", (0, 0, 0), (0, 0, 0));
+    var_2._id_B7C4 linkTo(var_2._id_B758["parent"], "j_prop_3", (0, 0, 0), (0, 0, 0));
+    var_2._id_B7C5 linkTo(var_2._id_B758["parent"], "j_prop_4", (0, 0, 0), (0, 0, 0));
     var_2._id_7E26 = "script_model";
   } else {
     var_3 = ["j_prop_1", "j_prop_2", "j_prop_3", "j_prop_4"];
@@ -334,11 +334,11 @@ _id_2CFB(var_0, var_1) {
   var_2._id_1314 setModel("fullbody_usmc_ar_br_infil");
 
   if(isDefined(var_0)) {
-    var_2._id_A289._id_82CD linkto(var_2._id_A289, "", (0, 0, 0), (0, 0, 0));
+    var_2._id_A289._id_82CD linkTo(var_2._id_A289, "", (0, 0, 0), (0, 0, 0));
   }
 
-  var_2._id_1314 linkto(var_2._id_B758["parent"], "j_prop_5", (0, 0, 0), (0, 0, 0));
-  var_2._id_3085 linkto(var_2._id_E76A, "", (0, 0, 0), (0, 0, 0));
+  var_2._id_1314 linkTo(var_2._id_B758["parent"], "j_prop_5", (0, 0, 0), (0, 0, 0));
+  var_2._id_3085 linkTo(var_2._id_E76A, "", (0, 0, 0), (0, 0, 0));
   var_2._id_39FE = spawnfx(level._effect["vfx_br_infil_cloud_anim"], var_2._id_E76A.origin);
   return var_2;
 }
@@ -346,13 +346,13 @@ _id_2CFB(var_0, var_1) {
 _id_E33C(var_0, var_1) {
   var_0._id_B758["parent"] = spawn("script_model", var_1.origin);
   var_0._id_B758["parent"] setModel("generic_prop_x5");
-  var_0._id_B758["parent"] linkto(var_1, "", (0, 0, 0), (0, 0, 0));
+  var_0._id_B758["parent"] linkTo(var_1, "", (0, 0, 0), (0, 0, 0));
 }
 
 _id_E33B(var_0, var_1) {
   var_0._id_B758[var_1] = spawn("script_model", var_0._id_B758["parent"] gettagorigin(var_1));
   var_0._id_B758[var_1] setModel("tag_player");
-  var_0._id_B758[var_1] linkto(var_0._id_B758["parent"], var_1, (0, 0, 0), (0, 0, 0));
+  var_0._id_B758[var_1] linkTo(var_0._id_B758["parent"], var_1, (0, 0, 0), (0, 0, 0));
 }
 
 _id_68C9(var_0) {}
@@ -407,15 +407,15 @@ _id_10B88(var_0) {
       var_13["parent"] = spawn("script_model", var_0._id_A289.origin);
       level._id_7E70++;
       var_13["parent"] setModel("generic_prop_x10");
-      var_13["parent"] linkto(var_0._id_A289, "tag_body", (0, 0, 0), (0, 0, 0));
+      var_13["parent"] linkTo(var_0._id_A289, "tag_body", (0, 0, 0), (0, 0, 0));
 
       foreach(var_4 in var_2) {
         var_15 = "j_prop_" + (var_4._id_7E64 + 2);
         var_13[var_15] = spawn("script_model", var_13["parent"] gettagorigin(var_15));
         level._id_7E70++;
         var_13[var_15] setModel("tag_player");
-        var_13[var_15] linkto(var_13["parent"], var_15, (0, 0, 0), (0, 0, 0));
-        var_4 playerlinkto(var_13[var_15], "tag_player");
+        var_13[var_15] linkTo(var_13["parent"], var_15, (0, 0, 0), (0, 0, 0));
+        var_4 playerlinkTo(var_13[var_15], "tag_player");
         var_4 playershow(1);
         var_4 _meth_84FF("scripted_scene", var_12);
         var_4._id_7E64 = undefined;
@@ -458,7 +458,7 @@ _id_10B88(var_0) {
         if(isDefined(var_0._id_A289._id_B72B) && isDefined(var_0._id_A289._id_41E2)) {
           foreach(var_4 in var_2) {
             var_27 = var_0._id_A289._id_B72B[var_0._id_A289._id_41E2];
-            var_4 setorigin(var_0._id_A289.origin + var_27, 1, 1);
+            var_4 setOrigin(var_0._id_A289.origin + var_27, 1, 1);
             var_0._id_A289._id_41E2++;
 
             if(var_0._id_A289._id_41E2 == var_0._id_A289._id_B72B.size) {
@@ -482,7 +482,7 @@ _id_B710(var_0) {
   }
 
   var_1 = "j_prop_" + self._id_7E64;
-  self playerlinkto(var_0._id_B758[var_1], "tag_player");
+  self playerlinkTo(var_0._id_B758[var_1], "tag_player");
 }
 
 _id_B742(var_0) {}
@@ -685,7 +685,7 @@ _id_F490(var_0) {
 
       var_0._id_3086 = "j_prop_" + var_7._id_7E64;
       var_7 _meth_8060();
-      var_7 cameralinkto(var_0._id_3087, var_0._id_3086, 1, 1);
+      var_7 cameralinkTo(var_0._id_3087, var_0._id_3086, 1, 1);
       var_7 setclientdvar("#x356e0c9e15809767a", var_1);
       var_7 _meth_8660(var_2, var_3, var_4, var_5);
     }
@@ -708,8 +708,8 @@ _id_F490(var_0) {
   var_0._id_B758["parent"] unlink();
 
   if(isDefined(var_0._id_A289)) {
-    var_0._id_B758["parent"] linkto(var_0._id_A289, "", (0, 0, 0), (0, 0, 0));
-    var_0._id_3085 linkto(var_0._id_A289, "", (0, 0, 0), (0, 0, 0));
+    var_0._id_B758["parent"] linkTo(var_0._id_A289, "", (0, 0, 0), (0, 0, 0));
+    var_0._id_3085 linkTo(var_0._id_A289, "", (0, 0, 0), (0, 0, 0));
     var_0._id_A289 notify("start_moving");
   }
 
@@ -984,7 +984,7 @@ _id_F49A(var_0, var_1, var_2) {
     if(!isDefined(var_4.sessionstate) || var_4.sessionstate == "spectator") {
       continue;
     }
-    var_4 setorigin(var_2.origin);
+    var_4 setOrigin(var_2.origin);
   }
 
   _id_107DB(1.5);
@@ -1409,7 +1409,7 @@ _id_F03C() {
       var_0._id_1643 = 1;
       var_0 scripts\mp\playerlogic::_id_E337(0, 0);
     } else {
-      var_0 setorigin(var_2, 1);
+      var_0 setOrigin(var_2, 1);
       var_0 setplayerangles(var_5);
     }
   }
@@ -1768,11 +1768,11 @@ _id_107DB(var_0) {
 }
 
 _id_A279(var_0, var_1, var_2, var_3) {
-  self moveto(var_0, var_1, var_2, var_3);
+  self moveTo(var_0, var_1, var_2, var_3);
 }
 
 _id_C928(var_0, var_1, var_2, var_3) {
-  self rotateto(var_0, var_1, var_2, var_3);
+  self rotateTo(var_0, var_1, var_2, var_3);
 }
 
 _id_75FF() {

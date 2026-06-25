@@ -33,18 +33,18 @@ init_stage() {}
 wall_move() {
   level thread wall_move_rumble();
   exploder(410);
-  self moveto(self.origin - (0, 0, 4), 0.1, 0.01);
+  self moveTo(self.origin - (0, 0, 4), 0.1, 0.01);
   self waittill("movedone");
   Earthquake(1, 1.3, self.origin, 2000);
   exploder(420);
-  self RotateTo(self.script_angles, 3.5, 0.3, 0.5);
+  self rotateTo(self.script_angles, 3.5, 0.3, 0.5);
   self waittill("rotatedone");
   clientnotify("sm");
   wait(0.1);
-  struct = getstruct("pyramid_walls_retract", "targetname");
-  vec = VectorNormalize((struct.origin + (0, 0, 48)) - self.origin);
+  struct = getStruct("pyramid_walls_retract", "targetname");
+  vec = vectorNormalize((struct.origin + (0, 0, 48)) - self.origin);
   pos = self.origin + (vec * 200);
-  self moveto(pos, 2, 0.1, 0.1);
+  self moveTo(pos, 2, 0.1, 0.1);
   level notify("walls_down");
 }
 wall_move_rumble() {
@@ -118,7 +118,7 @@ sq_sc_switch() {
   self rotateroll(-90, .3);
   self playSound("zmb_switch_flip");
   self waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], getstruct("sq_knife_switch_fx", "targetname").origin);
+  playFX(level._effect["switch_sparks"], getStruct("sq_knife_switch_fx", "targetname").origin);
   wait(1);
   flag_set("sam_switch_thrown");
 }
@@ -164,8 +164,8 @@ richtofen_sam_vo() {
   }
   richtofen playSound("vox_plr_3_quest_step6_7", "line_spoken");
   richtofen waittill("line_spoken");
-  targ = getstruct("sq_sam", "targetname");
-  targ = getstruct(targ.target, "targetname");
+  targ = getStruct("sq_sam", "targetname");
+  targ = getStruct(targ.target, "targetname");
   play_sound_in_space("vox_plr_4_quest_step6_10", targ.origin);
   if(isDefined(richtofen)) {
     richtofen playSound("vox_plr_3_quest_step6_8", "line_spoken");
@@ -176,7 +176,7 @@ richtofen_sam_vo() {
 place_cvg() {
   flag_wait("second_tanks_charged");
   level thread richtofen_sam_vo();
-  s = getstruct("sq_vg_final", "targetname");
+  s = getStruct("sq_vg_final", "targetname");
   s thread fake_use("placed_cvg", ::place_qualifier);
   s waittill("placed_cvg", who);
   flag_set("cvg_placed");

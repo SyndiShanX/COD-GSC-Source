@@ -79,7 +79,7 @@ function_15d944aa() {
 }
 
 function_1f269f0f() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       return 1;
     case 2:
@@ -92,7 +92,7 @@ function_1f269f0f() {
 }
 
 function_cd674a85() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_default_wait = 2.25;
       break;
@@ -131,7 +131,7 @@ function_a7a6a96c(spawner, s_spot, n_round_number) {
 }
 
 get_favorite_enemy() {
-  a_targets = getplayers();
+  a_targets = getPlayers();
   least_hunted = a_targets[0];
 
   for(i = 0; i < a_targets.size; i++) {
@@ -179,7 +179,7 @@ function_47a88a0c(n_to_spawn = 1, func_on_spawned, b_force_spawn = 0, var_eb3a87
       return n_spawned;
     }
 
-    players = getplayers();
+    players = getPlayers();
     e_favorite_enemy = get_favorite_enemy();
 
     if(isDefined(var_eb3a8721)) {

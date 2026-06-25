@@ -50,27 +50,27 @@ main() {
 }
 
 initExtraCollision() {
-  collision1 = GetEnt("clip128x128x128", "targetname");
+  collision1 = getEnt("clip128x128x128", "targetname");
   collision1Ent = spawn("script_model", (-714, -2022, 102));
   collision1Ent.angles = (0, 0, 0);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
 
-  collision2 = GetEnt("clip128x128x128", "targetname");
+  collision2 = getEnt("clip128x128x128", "targetname");
   collision2Ent = spawn("script_model", (-828, -2160, 80));
   collision2Ent.angles = (0, 0, 0);
   collision2Ent CloneBrushmodelToScriptmodel(collision2);
 
-  collision3 = GetEnt("clip256x256x256", "targetname");
+  collision3 = getEnt("clip256x256x256", "targetname");
   collision3Ent = spawn("script_model", (-2048, -336, 112));
   collision3Ent.angles = (0, 0, 0);
   collision3Ent CloneBrushmodelToScriptmodel(collision3);
 
-  collision4 = GetEnt("player32x32x256", "targetname");
+  collision4 = getEnt("player32x32x256", "targetname");
   collision4Ent = spawn("script_model", (-572, -822, 276));
   collision4Ent.angles = (0, 0, 0);
   collision4Ent CloneBrushmodelToScriptmodel(collision4);
 
-  collision5 = GetEnt("clip64x64x128", "targetname");
+  collision5 = getEnt("clip64x64x128", "targetname");
   collision5Ent = spawn("script_model", (-990, -209.5, 323));
   collision5Ent.angles = (90, 0, 0);
   collision5Ent CloneBrushmodelToScriptmodel(collision5);
@@ -170,7 +170,7 @@ quakes() {
   start_time = GetTime();
   quake_events = quake_events();
 
-  quake = getstruct("quake", "targetname");
+  quake = getStruct("quake", "targetname");
 
   num_quakes = 3;
 
@@ -422,8 +422,8 @@ quake_event_init() {
           break;
         case "gas_leak":
           if(isDefined(self.target)) {
-            ent.fx_location = getstruct(ent.target, "targetname");
-            ent.hurt_trigger = GetEnt(ent.target, "targetname");
+            ent.fx_location = getStruct(ent.target, "targetname");
+            ent.hurt_trigger = getEnt(ent.target, "targetname");
 
             self thread quake_event_trigger_wait(::quake_event_gas_leak, ent);
           }
@@ -535,7 +535,7 @@ quake_event_init_ent(ent) {
     }
     switch (target.script_noteworthy) {
       case "link":
-        target LinkTo(ent);
+        target linkTo(ent);
         break;
       case "origin":
         ent.move_ent = spawn("script_model", target.origin);
@@ -544,7 +544,7 @@ quake_event_init_ent(ent) {
           ent.move_ent.angles = target.angles;
         }
         ent.move_ent setModel("tag_origin");
-        ent LinkTo(ent.move_ent);
+        ent linkTo(ent.move_ent);
         break;
       case "end":
         ent.end_location = target;
@@ -583,17 +583,17 @@ quake_event_move_to(quakeTime, ent, time, delay, accel, decel, delete_at_end) {
   }
 
   if(ent.end_location.origin != ent.origin) {
-    ent.move_ent MoveTo(ent.end_location.origin, time, accel, decel);
+    ent.move_ent moveTo(ent.end_location.origin, time, accel, decel);
   }
 
   if(isDefined(ent.end_location.angles) && ent.end_location.angles != ent.angles) {
-    ent.move_ent RotateTo(ent.end_location.angles, time, accel, decel);
+    ent.move_ent rotateTo(ent.end_location.angles, time, accel, decel);
   }
 
   wait time;
 
   if(ent is_dynamic_path()) {
-    ent DisconnectPaths();
+    ent disconnectPaths();
   }
 
   if(delete_at_end) {
@@ -615,7 +615,7 @@ quake_event_bats(quakeTime, start_node) {
 
   bat_sound_ent = spawn("script_model", bat_origin);
   bat_sound_ent setModel("tag_origin");
-  bat_sound_ent LinkTo(bat_model, "j_prop_2");
+  bat_sound_ent linkTo(bat_model, "j_prop_2");
 
   waitframe();
 
@@ -756,19 +756,19 @@ quake_event_pole_link_nodes() {
 }
 
 quake_event_pole_fall_on_car_init(ent) {
-  broken_base = GetEnt("pole_that_falls_on_cop_car_base", "targetname");
+  broken_base = getEnt("pole_that_falls_on_cop_car_base", "targetname");
   if(isDefined(broken_base)) {
     broken_base hide();
   }
 
-  pole = GetEnt("pole_that_falls_on_cop_car", "targetname");
+  pole = getEnt("pole_that_falls_on_cop_car", "targetname");
   if(!isDefined(pole)) {
     return;
   }
   clips = getEntArray(pole.target, "targetname");
   foreach(clip in clips) {
     if(clip.script_noteworthy == "clip_up") {
-      clip LinkTo(pole);
+      clip linkTo(pole);
       pole.clip_up = clip;
     } else if(clip.script_noteworthy == "clip_down") {
       clip ConnectPaths();
@@ -781,12 +781,12 @@ quake_event_pole_fall_on_car_init(ent) {
 }
 
 quake_event_pole_fall_on_car(quakeTime, ent) {
-  broken_base = GetEnt("pole_that_falls_on_cop_car_base", "targetname");
+  broken_base = getEnt("pole_that_falls_on_cop_car_base", "targetname");
   if(isDefined(broken_base)) {
     broken_base Show();
   }
 
-  pole = GetEnt("pole_that_falls_on_cop_car", "targetname");
+  pole = getEnt("pole_that_falls_on_cop_car", "targetname");
   if(!isDefined(pole)) {
     return;
   }
@@ -798,7 +798,7 @@ quake_event_pole_fall_on_car(quakeTime, ent) {
   animated_prop setModel("generic_prop_raven");
   animated_prop.angles = pole.angles;
 
-  pole LinkTo(animated_prop, "j_prop_1");
+  pole linkTo(animated_prop, "j_prop_1");
 
   animated_prop ScriptModelPlayAnimDeltaMotion("mp_lonestar_police_car_crush_pole");
 
@@ -812,7 +812,7 @@ quake_event_pole_fall_on_car(quakeTime, ent) {
   exploder(7);
 
   pole.clip_down trigger_on();
-  pole.clip_down DisconnectPaths();
+  pole.clip_down disconnectPaths();
   quake_event_pole_link_nodes();
   pole.clip_up Delete();
   ent setModel("ls_police_sedan_smashed");

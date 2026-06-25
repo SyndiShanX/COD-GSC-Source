@@ -44,28 +44,28 @@ setup_recipes() {
 
         switch (var_4[var_8]) {
           case "tesla":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_TESLA");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_TESLA");
             break;
           case "weapon":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_VENOM");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_VENOM");
             break;
           case "grenade":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_GRENADE");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_GRENADE");
             break;
           case "trap":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_HYPNO");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_HYPNO");
             break;
           case "sticky":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_STICKY");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_STICKY");
             break;
           case "cortexgrenade":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_CORTEXGRENADE");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_CORTEXGRENADE");
             break;
           case "cortexweapon":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_CORTEXWEAPON");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_CORTEXWEAPON");
             break;
           case "vgrenade":
-            var_7 sethintstring(&"ALIEN_CRAFTING_RECIPE_VGRENADE");
+            var_7 setHintString(&"ALIEN_CRAFTING_RECIPE_VGRENADE");
             break;
         }
 
@@ -86,22 +86,22 @@ setup_recipes() {
 
     switch (var_9) {
       case "tesla":
-        var_3 sethintstring(&"ALIEN_CRAFTING_RECIPE_TESLA");
+        var_3 setHintString(&"ALIEN_CRAFTING_RECIPE_TESLA");
         break;
       case "weapon":
-        var_3 sethintstring(&"ALIEN_CRAFTING_RECIPE_VENOM");
+        var_3 setHintString(&"ALIEN_CRAFTING_RECIPE_VENOM");
         break;
       case "grenade":
-        var_3 sethintstring(&"ALIEN_CRAFTING_RECIPE_GRENADE");
+        var_3 setHintString(&"ALIEN_CRAFTING_RECIPE_GRENADE");
         break;
       case "trap":
-        var_3 sethintstring(&"ALIEN_CRAFTING_RECIPE_HYPNO");
+        var_3 setHintString(&"ALIEN_CRAFTING_RECIPE_HYPNO");
         break;
       case "sticky":
-        var_3 sethintstring(&"ALIEN_CRAFTING_RECIPE_STICKY");
+        var_3 setHintString(&"ALIEN_CRAFTING_RECIPE_STICKY");
         break;
       case "vgrenade":
-        var_3 sethintstring(&"ALIEN_CRAFTING_RECIPE_VGRENADE");
+        var_3 setHintString(&"ALIEN_CRAFTING_RECIPE_VGRENADE");
         break;
     }
 
@@ -526,8 +526,8 @@ onplaced(var_0) {
   }
 
   if(var_0 != "placeable_generator") {
-    self setcursorhint("HINT_NOICON");
-    self sethintstring(var_1.hintstring);
+    self setCursorHint("HINT_NOICON");
+    self setHintString(var_1.hintstring);
   }
 
   if(isDefined(self.firstplacement) && var_0 != "placeable_generator") {

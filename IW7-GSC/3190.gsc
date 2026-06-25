@@ -47,7 +47,7 @@ func_8485(var_0, var_1, var_2, var_3) {
       var_4 = self gettagorigin("J_Wrist_ri");
       var_5 = spawn("script_model", var_4);
       var_5 setModel("tag_origin");
-      var_5 linkto(self, "J_Wrist_ri", (0, 0, 0), (0, 0, 0));
+      var_5 linkTo(self, "J_Wrist_ri", (0, 0, 0), (0, 0, 0));
       self.zombiepiece = var_5;
     }
   }
@@ -82,7 +82,7 @@ func_D48D(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   self.zombietograb = self.zombiepiecetarget;
   var_4 = self.zombietograb.origin - self.origin;
-  var_5 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_4);
   var_6 = vectortoangles(var_5);
   self orientmode("face angle abs", var_6);
   scripts\asm\asm_mp::func_2364(var_0, var_1, var_2, var_3);
@@ -120,7 +120,7 @@ func_100AC(var_0, var_1, var_2, var_3) {
   var_4 = anglesToForward(self.angles);
   var_5 = self.enemy.origin - self.origin;
   var_5 = (var_5[0], var_5[1], 0);
-  var_5 = vectornormalize(var_5);
+  var_5 = vectorNormalize(var_5);
   if(vectordot(var_4, var_5) < 0) {
     return 0;
   }
@@ -318,7 +318,7 @@ func_8979(var_0) {
       if(var_7 < 10) {
         self.setplayerignoreradiusdamage = var_5;
       } else {
-        var_8 = vectornormalize(var_6);
+        var_8 = vectorNormalize(var_6);
         var_9 = var_8 * 200 * 0.05;
         self.setplayerignoreradiusdamage = self.setplayerignoreradiusdamage + var_9;
       }
@@ -379,7 +379,7 @@ func_A869(var_0) {
     self.do_immediate_ragdoll = 1;
     self.customdeath = 1;
     self.disable_armor = 1;
-    self setvelocity(vectornormalize(self.origin - var_1) * 200 + (0, 0, 100));
+    self setvelocity(vectorNormalize(self.origin - var_1) * 200 + (0, 0, 100));
     wait(0.1);
     self.died_poorly = 1;
     self dodamage(1000000, var_1, undefined, undefined, "MOD_UNKNOWN");

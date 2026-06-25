@@ -54,8 +54,8 @@ function debug_player() {
   tab = "<dev string:x17f>";
 
   while(true) {
-    if(debug_enabled() && getplayers().size > 0) {
-      player = getplayers()[0];
+    if(debug_enabled() && getPlayers().size > 0) {
+      player = getPlayers()[0];
 
       if(!isDefined(player.stealth) || !player flag::get("<dev string:x12a>")) {
         hudelem.alpha = 0;
@@ -84,19 +84,19 @@ function debug_player() {
 
       function_84811192("<dev string:x185>", "<dev string:x1cb>" + player.maxvisibledist);
 
-      if(getplayers()[0] flag::get("<dev string:x1df>")) {
+      if(getPlayers()[0] flag::get("<dev string:x1df>")) {
         function_84811192("<dev string:x185>", "<dev string:x1f4>");
       }
 
-      if(getplayers()[0] isnotarget()) {
+      if(getPlayers()[0] isnotarget()) {
         function_84811192("<dev string:x185>", "<dev string:x201>");
       }
 
-      if(is_true(getplayers()[0].ignoreme)) {
+      if(is_true(getPlayers()[0].ignoreme)) {
         function_84811192("<dev string:x185>", "<dev string:x211>");
       }
 
-      if(isDefined(getplayers()[0].stealth.var_f6c2537d) && getplayers()[0].stealth.var_f6c2537d.size > 0) {
+      if(isDefined(getPlayers()[0].stealth.var_f6c2537d) && getPlayers()[0].stealth.var_f6c2537d.size > 0) {
         function_84811192("<dev string:x185>", "<dev string:x221>");
       }
     } else {
@@ -406,7 +406,7 @@ function draw_enemies(team, offset) {
   enemies = getactorteamarray(offset);
 
   if(offset == "<dev string:x25c>") {
-    enemies[enemies.size] = getplayers()[0];
+    enemies[enemies.size] = getPlayers()[0];
   }
 
   yellow = (1, 1, 0);
@@ -532,7 +532,7 @@ function function_d0c3b413() {
     count++;
   }
 
-  if(getplayers().size > 0 && self cansee(getplayers()[0])) {
+  if(getPlayers().size > 0 && self cansee(getPlayers()[0])) {
     print3d(self.origin - (0, 0, count * space), "<dev string:x3fa>", red, 1, size);
     count++;
   }
@@ -593,7 +593,7 @@ function draw_fov() {
     eye_yaw = self gettagangles("<dev string:x418>")[1];
   }
 
-  viewdist = getplayers()[0].maxvisibledist;
+  viewdist = getPlayers()[0].maxvisibledist;
 
   if(isai(self)) {
     start = self gettagorigin("<dev string:x40d>");
@@ -650,7 +650,7 @@ function function_48f1fd1c() {
   enemies = getactorteamarray(team);
 
   if(team == "<dev string:x25c>") {
-    enemies[enemies.size] = getplayers()[0];
+    enemies[enemies.size] = getPlayers()[0];
   }
 
   foreach(enemy in enemies) {

@@ -66,8 +66,8 @@ init_electric_trap() {
     scripts\engine\utility::_id_5C28(var_0);
   }
 
-  var_1 = getent(self.target, "script_noteworthy");
-  var_2 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "script_noteworthy");
+  var_2 = getEnt(self.target, "targetname");
 
   if(isDefined(var_1)) {
     var_1.light_fx = var_2;
@@ -130,7 +130,7 @@ active_electric_trap_volume(var_0) {
   var_4.angles = self.angles;
 
   if(isDefined(self._id_0481)) {
-    var_5 = scripts\engine\utility::getstruct(self._id_0481, "target");
+    var_5 = scripts\engine\utility::getStruct(self._id_0481, "target");
     var_4.origin = var_5.origin;
     var_4.angles = var_5.angles;
   }

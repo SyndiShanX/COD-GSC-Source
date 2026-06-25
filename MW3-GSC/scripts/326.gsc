@@ -30,11 +30,11 @@ _id_1285() {
     }
   }
 
-  var_9 = getent(var_3.target, "targetname");
+  var_9 = getEnt(var_3.target, "targetname");
   var_10 = undefined;
 
   if(isDefined(var_9.target)) {
-    var_10 = getent(var_9.target, "targetname");
+    var_10 = getEnt(var_9.target, "targetname");
   }
   if(isDefined(var_10)) {
     var_1 thread _id_1294(var_10);
@@ -50,19 +50,19 @@ _id_1285() {
   var_1 thread maps\_anim::_id_11CF(var_11, "fire_3");
 
   if(isDefined(var_4)) {
-    var_4 linkto(var_11, "door_hinge_jnt");
+    var_4 linkTo(var_11, "door_hinge_jnt");
     var_11 hide();
   }
 
   if(isDefined(var_9)) {
-    var_9 linkto(var_11, "door_hinge_jnt");
-    var_9 disconnectpaths();
+    var_9 linkTo(var_11, "door_hinge_jnt");
+    var_9 disconnectPaths();
   }
 
   var_12 = undefined;
 
   if(isDefined(self.target)) {
-    var_12 = getent(self.target, "targetname");
+    var_12 = getEnt(self.target, "targetname");
 
     if(!issubstr(var_12.classname, "trigger")) {
       var_12 = undefined;
@@ -206,7 +206,7 @@ _id_128D(var_0, var_1) {
   self.goalradius = 512;
   self setgoalpos(self.origin);
   self notify("quit_door_behavior");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("killanimscript");
   return 1;
 }
@@ -266,7 +266,7 @@ _id_1290(var_0, var_1) {
 
 _id_1291(var_0, var_1, var_2) {
   var_3 = anglesToForward(var_0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - var_1);
   var_7 = var_5[1] - var_6[1];
@@ -301,7 +301,7 @@ _id_1292(var_0, var_1, var_2, var_3, var_4) {
 
 _id_1294(var_0) {
   self waittill("push_player");
-  var_0 moveto(self.origin, 1.5);
+  var_0 moveTo(self.origin, 1.5);
   wait 1.5;
   var_0 delete();
 }
@@ -316,7 +316,7 @@ _id_1295(var_0) {
   if(var_2 > 1000) {
     var_2 = 1000;
   }
-  var_3 = vectornormalize(level.player.origin - var_0.origin);
+  var_3 = vectorNormalize(level.player.origin - var_0.origin);
   var_4 = var_3 * var_2;
   var_0 magicgrenademanual(var_1, var_4, randomfloatrange(3.0, 5.0));
 }
@@ -353,7 +353,7 @@ _id_1297(var_0, var_1) {
   wait 2;
 
   if(isDefined(var_0)) {
-    var_0 disconnectpaths();
+    var_0 disconnectPaths();
   }
   if(isDefined(var_1)) {
     badplace_delete(var_1 getentitynumber());

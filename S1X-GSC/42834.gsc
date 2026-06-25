@@ -134,7 +134,7 @@ stinger_fire(var_0, var_1, var_2) {
         var_10 = var_0.stingerm7_info.locked_targets[randomint(var_0.stingerm7_info.locked_targets.size)];
       }
 
-      var_9 missile_settargetent(var_10, stingerm7_get_target_offset(var_10));
+      var_9 missile_settargetEnt(var_10, stingerm7_get_target_offset(var_10));
       var_9.lockedstingertarget = var_10;
     }
 
@@ -223,7 +223,7 @@ get_best_locking_target() {
   foreach(var_22 in var_16) {
     if(!common_scripts\utility::array_contains(self.stingerm7_info.locked_targets, var_22)) {
       var_23 = stingerm7_get_target_pos(var_22);
-      var_24 = vectordot(vectornormalize(var_23 - var_17), var_18);
+      var_24 = vectordot(vectorNormalize(var_23 - var_17), var_18);
 
       if(var_24 > var_20) {
         var_25 = undefined;
@@ -257,7 +257,7 @@ locking_target_still_valid(var_0) {
     return 0;
   }
 
-  if(vectordot(vectornormalize(var_3 - var_1), var_2) > cos(5)) {
+  if(vectordot(vectorNormalize(var_3 - var_1), var_2) > cos(5)) {
     if(!1 || bullettracepassed(var_1, var_3, 0, var_0)) {
       return 1;
     }
@@ -332,7 +332,7 @@ locking_feedback() {
     }
 
     self playlocalsound("wpn_stingerm7_locking");
-    self playrumbleonentity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
     wait 0.6;
   }
 }
@@ -358,7 +358,7 @@ locked_feedback() {
     }
 
     self playlocalsound("wpn_stingerm7_locked");
-    self playrumbleonentity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
     wait 0.25;
   }
 }

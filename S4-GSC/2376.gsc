@@ -776,7 +776,7 @@ _id_2389(var_0, var_1, var_2) {
 _id_238B(var_0, var_1) {
   if(isDefined(var_0._id_75A5) && var_0._id_75A5) {
     var_2 = var_1 - var_0.origin;
-    var_3 = vectornormalize((var_2[0], var_2[1], 0));
+    var_3 = vectorNormalize((var_2[0], var_2[1], 0));
     var_4 = anglesToForward(var_0.angles);
     var_5 = vectordot(var_4, var_2);
 
@@ -805,8 +805,8 @@ _id_2388(var_0) {
 }
 
 _id_2386(var_0) {
-  self playrumbleonentity("artillery_rumble");
-  var_0 playrumbleonentity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
+  var_0 playRumbleOnEntity("artillery_rumble");
   playrumbleonposition("slide_collision", self.origin);
   earthquake(0.5, 0.5, self.origin, 96);
   playsoundatpos(self.origin, "slide_impact");
@@ -828,7 +828,7 @@ _id_2391() {
     thread _id_2392(var_2, 0.1);
     triggerfx(var_2);
     earthquake(0.2, 0.25, self.origin, 96);
-    self playrumbleonentity("slide_loop");
+    self playRumbleOnEntity("slide_loop");
     var_0++;
     waitframe();
   }

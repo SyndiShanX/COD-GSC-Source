@@ -17,8 +17,8 @@ init() {
   level.mp_recovery_killstreak.exo_super_vfx = LoadFX("vfx/lights/air_light_exosuper_yellow");
   level.mp_recovery_killstreak.amplify_vfx = LoadFX("vfx/lights/air_light_amplifymachine_yellow");
 
-  amplify_ring_side_01 = getent("damage_ring_01", "targetname");
-  amplify_ring_side_02 = getent("damage_ring_02", "targetname");
+  amplify_ring_side_01 = getEnt("damage_ring_01", "targetname");
+  amplify_ring_side_02 = getEnt("damage_ring_02", "targetname");
   level.mp_recovery_killstreak.DamageRingsArray = [amplify_ring_side_01, amplify_ring_side_02];
 
   foreach(damage_ring in level.mp_recovery_killstreak.DamageRingsArray) {

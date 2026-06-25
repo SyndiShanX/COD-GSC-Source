@@ -145,7 +145,7 @@ function_f2f4ced8() {
     return;
   }
 
-  playsoundatposition(#"zmb_ai_brutus_spawn", self.origin);
+  playSoundAtPosition(#"zmb_ai_brutus_spawn", self.origin);
 
   if(!isDefined(level.var_b491030) || level flag::get(#"main_quest_completed")) {
     self playSound(#"zmb_ai_brutus_spawn_laugh");
@@ -168,7 +168,7 @@ function_c7ea6c73() {
 }
 
 function_24c1b38f() {
-  a_players = getplayers();
+  a_players = getPlayers();
   n_player_modifier = 1;
 
   if(a_players.size > 1) {
@@ -202,7 +202,7 @@ on_brutus_killed(params) {
   }
 
   self clientfield::set("brutus_spawn_clientfield", 0);
-  playsoundatposition(#"zmb_ai_brutus_death", self.origin);
+  playSoundAtPosition(#"zmb_ai_brutus_death", self.origin);
   self destructserverutils::togglespawngibs(self, 1);
   self destructserverutils::function_629a8d54(self, "tag_weapon_right");
 }
@@ -236,7 +236,7 @@ registerbehaviorscriptfunctions() {
 function_943e4c08(entity, minplayerdist) {
   playerpositions = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(playerpositions)) {
       playerpositions = [];
     } else if(!isarray(playerpositions)) {
@@ -537,7 +537,7 @@ function_f4a61e6a(entity) {
 }
 
 function_85e8940a(entity) {
-  players = getplayers();
+  players = getPlayers();
   zombies = getaiteamarray(level.zombie_team);
   ents = arraycombine(players, zombies, 0, 0);
   ents = arraysortclosest(ents, entity.origin, undefined, 0, entity ai::function_9139c839().var_1709a39);
@@ -588,14 +588,14 @@ function_fbb311db(entity) {
 function_c1844128(player) {
   if(zm_utility::is_standard()) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_43bfefdaa25b6b9c");
+      self setHintString(#"hash_43bfefdaa25b6b9c");
     } else {
-      self sethintstring(#"hash_41048087f44fc9b0");
+      self setHintString(#"hash_41048087f44fc9b0");
     }
   } else if(function_8b1a219a()) {
-    self sethintstring(#"hash_451dc9a0469e39ff", self.stub.var_534571f);
+    self setHintString(#"hash_451dc9a0469e39ff", self.stub.var_534571f);
   } else {
-    self sethintstring(#"hash_5bdb56428055a4c1", self.stub.var_534571f);
+    self setHintString(#"hash_5bdb56428055a4c1", self.stub.var_534571f);
   }
 
   return zm_lockdown_util::function_b5dd9241(self.stub);

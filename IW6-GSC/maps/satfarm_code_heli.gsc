@@ -53,7 +53,7 @@ spawn_hind_enemies(var_0, var_1) {
 }
 
 spawn_hind_enemy(var_0) {
-  var_1 = getent("hind_enemy", "targetname");
+  var_1 = getEnt("hind_enemy", "targetname");
 
   while(isDefined(var_1.vehicle_spawned_thisframe)) {
     wait 0.05;
@@ -235,7 +235,7 @@ _get_player_tank_target() {
 
   var_1 = level.playertank vehicle_getvelocity();
   var_2 = var_0 * 2;
-  var_3 = level.playertank.origin + -1 * vectornormalize(var_1) * var_2;
+  var_3 = level.playertank.origin + -1 * vectorNormalize(var_1) * var_2;
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_4.is_fake = 1;
   var_4.origin = var_3;
@@ -510,7 +510,7 @@ heli_ai_collision_cylinder_add() {
     var_0.in_use = 1;
     var_0.origin = self.origin;
     var_0.angles = self.angles;
-    var_0 linkto(self, "tag_origin");
+    var_0 linkTo(self, "tag_origin");
     thread heli_ai_collision_cylinder_on_death_remove(var_0);
   }
 }

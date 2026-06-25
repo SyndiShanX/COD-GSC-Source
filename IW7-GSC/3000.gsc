@@ -315,7 +315,7 @@ func_398E(var_0, var_1, var_2, var_3, var_4) {
     var_4 = 0;
   }
 
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
   var_6 = var_5 func_3990(var_1, var_2, var_3, var_4);
   return var_6;
 }
@@ -352,7 +352,7 @@ func_3991(var_0) {
 
   self notify("ftl_out");
   var_1 = scripts\sp\utility::func_10639("ftl_model", self.origin, self.angles);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_2 = self.var_7482 + "_out";
   playFXOnTag(level._effect[var_2], self, "tag_origin");
   wait 3.0;
@@ -456,7 +456,7 @@ func_398D(var_0) {
 
   if(!var_0) {
     self.var_74A8 = scripts\engine\utility::spawn_script_origin();
-    self linkto(self.var_74A8);
+    self linkTo(self.var_74A8);
     self.var_74A8.origin = self.origin + var_3 * var_1 * -1;
   }
 
@@ -486,7 +486,7 @@ func_398D(var_0) {
 
   if(!var_0) {
     var_5 = self.origin + var_3 * var_1;
-    self.var_74A8 moveto(var_5, var_2, 0.0, var_2);
+    self.var_74A8 moveTo(var_5, var_2, 0.0, var_2);
     var_4 delete();
     wait(var_2);
     self.var_74A8 delete();

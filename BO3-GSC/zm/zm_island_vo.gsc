@@ -487,7 +487,7 @@ function function_b83e53a5() {
       level thread function_897246e4("vox_plr_2_outro_igc_32");
     } else {
       s_org = struct::get("ending_igc_exit_" + 2);
-      playsoundatposition("vox_plr_2_outro_igc_32", s_org.origin);
+      playSoundAtPosition("vox_plr_2_outro_igc_32", s_org.origin);
     }
   }
 }
@@ -686,7 +686,7 @@ function function_35fd7118(a_str_zones, var_7a4c869a, var_87fad49a, var_142db61a
   self endon("death");
   self endon("hash_56cd6f57");
   level flag::wait_till_any(var_7a4c869a);
-  t_pap_lookat = getent("t_pap_lookat", "targetname");
+  t_pap_lookat = getEnt("t_pap_lookat", "targetname");
   var_b24c0d65 = undefined;
   while(!zm_utility::is_player_valid(var_b24c0d65)) {
     t_pap_lookat waittill("trigger", var_b24c0d65);
@@ -1154,11 +1154,11 @@ function function_3bf2d62a(event_string, var_c57fa913 = 0, bunker = 0, var_82860
     }
     foreach(location in level.var_b7d1a34e) {
       if(location.script_string == "interior") {
-        playsoundatposition(var_f6dffc36, location.origin);
+        playSoundAtPosition(var_f6dffc36, location.origin);
         wait(0.05);
         continue;
       }
-      playsoundatposition(soundalias, location.origin);
+      playSoundAtPosition(soundalias, location.origin);
       wait(0.05);
     }
   }
@@ -1169,11 +1169,11 @@ function function_3bf2d62a(event_string, var_c57fa913 = 0, bunker = 0, var_82860
     }
     foreach(location in level.var_e2b8ee4d) {
       if(location.script_string == "interior") {
-        playsoundatposition(var_f6dffc36, location.origin);
+        playSoundAtPosition(var_f6dffc36, location.origin);
         wait(0.05);
         continue;
       }
-      playsoundatposition(soundalias, location.origin);
+      playSoundAtPosition(soundalias, location.origin);
       wait(0.05);
     }
   }
@@ -1184,11 +1184,11 @@ function function_3bf2d62a(event_string, var_c57fa913 = 0, bunker = 0, var_82860
     }
     foreach(location in level.var_eef090b3) {
       if(location.script_string == "interior") {
-        playsoundatposition(var_f6dffc36, location.origin);
+        playSoundAtPosition(var_f6dffc36, location.origin);
         wait(0.05);
         continue;
       }
-      playsoundatposition(soundalias, location.origin);
+      playSoundAtPosition(soundalias, location.origin);
       wait(0.05);
     }
   }

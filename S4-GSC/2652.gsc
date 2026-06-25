@@ -403,7 +403,7 @@ _id_B829(var_0, var_1, var_2) {
   }
 
   var_7 = (0, 0, 40);
-  var_8 = vectornormalize(var_3) * -75;
+  var_8 = vectorNormalize(var_3) * -75;
   var_9 = scripts\engine\trace::ray_trace(var_0, var_0 + var_7 + var_8);
 
   if(var_9["hittype"] != "hittype_none") {
@@ -414,7 +414,7 @@ _id_B829(var_0, var_1, var_2) {
   var_10 = spawn("script_model", var_0 + var_7 + var_8);
   var_10 setModel("tag_origin");
   var_10.angles = (var_5 + 25, var_1[1], 0);
-  var_11 = vectornormalize(var_3) * -145;
+  var_11 = vectorNormalize(var_3) * -145;
   var_12 = var_10.origin + var_4 + var_11;
   var_9 = scripts\engine\trace::ray_trace(var_0, var_12);
 
@@ -422,8 +422,8 @@ _id_B829(var_0, var_1, var_2) {
     var_12 = var_10.origin + (var_11 + var_4) * var_9["fraction"] * 0.5;
   }
 
-  var_2 cameralinkto(var_10, "tag_origin", 1);
-  var_10 moveto(var_12, 0.2);
+  var_2 cameralinkTo(var_10, "tag_origin", 1);
+  var_10 moveTo(var_12, 0.2);
 }
 
 _id_B82A(var_0, var_1, var_2, var_3) {
@@ -473,12 +473,12 @@ _id_3FBF(var_0, var_1, var_2) {
   var_5._id_298C = spawn("script_model", var_5.origin - (0, 0, 100));
   var_5._id_298C setModel("veh8_mil_lnd_whotel_crate");
   var_5._id_298C.angles = var_5.angles;
-  var_5._id_298C linkto(var_5);
+  var_5._id_298C linkTo(var_5);
   var_5._id_84D4 = spawn("script_model", var_5._id_298C.origin);
   var_5._id_84D4 setModel("tank_goscar");
   var_5._id_84D4.angles = var_5._id_298C.angles;
   var_5._id_84D4.owner = var_5.owner;
-  var_5._id_84D4 linkto(var_5._id_298C);
+  var_5._id_84D4 linkTo(var_5._id_298C);
   var_5._id_84D4 _meth_82CB("mp_wheelson_drop_intro");
   var_5.owner setclientomnvar("ui_pac_sentry_controls", 1);
   var_5.owner setclientomnvar("ui_pac_sentry_speed", 0);
@@ -512,7 +512,7 @@ _id_405D(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8.owner = var_1;
   var_8._id_31A0 = 1;
   var_10 = spawnStruct();
-  var_11 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_8, var_10);
+  var_11 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_8, var_10);
 
   if(!isDefined(var_11)) {
     return undefined;
@@ -542,7 +542,7 @@ _id_405D(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\cp_mp\utility\weapon_utility::_id_D5E7(var_11, ::_id_EE10);
   scripts\cp_mp\utility\weapon_utility::_id_D5E8(var_11, ::_id_EE11);
   var_11._id_FE90 = spawn("script_model", var_11 gettagorigin("tag_body"));
-  var_11._id_FE90 linkto(var_11, "tag_body");
+  var_11._id_FE90 linkTo(var_11, "tag_body");
 
   if(var_1 scripts\mp\utility\perk::_hasperk("specialty_reaper") && scripts\cp_mp\utility\killstreak_utility::_id_C0B7("pac_sentry")) {
     var_11.maxhealth = var_11.maxhealth * 1.5;
@@ -604,7 +604,7 @@ _id_EE03(var_0, var_1, var_2, var_3, var_4, var_5) {
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
   self notify("drop_crate");
   self._id_298C unlink();
-  self._id_298C moveto(var_1, 1.5, 1);
+  self._id_298C moveTo(var_1, 1.5, 1);
   self._id_84D4 _meth_82CB("mp_wheelson_drop_release");
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.5);
   self._id_84D4 _meth_82CB("mp_wheelson_drop_land");
@@ -653,8 +653,8 @@ _id_EE1E(var_0, var_1, var_2, var_3) {
   self.owner visionsetkillstreakforplayer("tac_ops_slamzoom", 0.2);
   var_2 = var_2 + (0, 0, 20);
   var_3 = vectortoangles(var_0 - var_2);
-  var_4 moveto(var_2, 0.5);
-  var_4 rotateto(var_3, 0.5);
+  var_4 moveTo(var_2, 0.5);
+  var_4 rotateTo(var_3, 0.5);
   self.owner thread _id_EE27();
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
   self.owner visionsetkillstreakforplayer("", 0.2);
@@ -676,7 +676,7 @@ _id_EE2B(var_0) {
   for(;;) {
     var_0 waittill("trigger", var_1);
     var_1 setplayerangles(var_0.angles);
-    var_1 playerlinkto(self, "tag_playerride");
+    var_1 playerlinkTo(self, "tag_playerride");
     var_1 thread _id_EE3C(var_0, self);
   }
 }
@@ -760,7 +760,7 @@ _id_E739(var_0, var_1) {
   }
 
   self _meth_8094(var_0);
-  self cameralinkto(var_0, "tag_player", 0, 1);
+  self cameralinkTo(var_0, "tag_player", 0, 1);
   self painvisionoff();
   scripts\cp_mp\utility\killstreak_utility::_id_8DBE();
   self setclientomnvar("ui_killstreak_countdown", gettime() + int(var_0.lifetime * 1000));
@@ -1250,7 +1250,7 @@ _id_EE3A() {
       continue;
     }
     self._id_C830 = var_0;
-    var_0 playerlinkto(self, "tag_playerride", 0.8);
+    var_0 playerlinkTo(self, "tag_playerride", 0.8);
     thread _id_EE3B(var_0, 20);
     thread _id_EE38(var_0);
     thread _id_EE39(var_0);

@@ -31,7 +31,7 @@ init_crab_boss_quest() {
 }
 
 hide_lost_n_found_sign() {
-  var_0 = getent("crab_boss_lnf_sign", "targetname");
+  var_0 = getEnt("crab_boss_lnf_sign", "targetname");
   if(isDefined(var_0)) {
     var_0 hide();
   }
@@ -61,7 +61,7 @@ advance_pre_combat_stage() {
 }
 
 set_tanker_anim(var_0) {
-  var_1 = getent("town_tanker", "targetname");
+  var_1 = getEnt("town_tanker", "targetname");
   var_1 setscriptablepartstate("boat", var_0);
 }
 
@@ -159,9 +159,9 @@ gets_to_combat_pos() {
   var_2 = spawn("script_model", level.crab_boss.origin);
   var_2.angles = level.crab_boss.angles;
   var_2 setModel("tag_origin");
-  level.crab_boss linkto(var_2, "tag_origin");
+  level.crab_boss linkTo(var_2, "tag_origin");
   var_3 = scripts\engine\utility::drop_to_ground((3621, 4536, -231), 200, -1000);
-  var_2 moveto(var_3, var_0, 2, 5);
+  var_2 moveTo(var_3, var_0, 2, 5);
   level.crab_boss thread do_water_vfx(level.crab_boss, var_0, var_3);
   var_2 waittill("movedone");
   level.crab_boss unlink();
@@ -174,11 +174,11 @@ do_water_vfx(var_0, var_1, var_2) {
   var_3 = 0.5;
   var_4 = 600;
   var_5 = (var_2[0] - 300, var_2[1], var_0.origin[2]);
-  var_6 = vectornormalize(var_5 - var_0.origin);
+  var_6 = vectorNormalize(var_5 - var_0.origin);
   var_7 = var_0.origin + var_6 * var_4;
   var_8 = spawn("script_model", var_7);
   var_8 setModel("tag_origin");
-  var_8 linkto(var_0);
+  var_8 linkTo(var_0);
   for(var_9 = 0; var_9 < var_1 / var_3 - 2; var_9++) {
     playFXOnTag(level._effect["crog_submerge_idle"], var_8, "tag_origin");
     playFXOnTag(level._effect["crog_submerge_idle"], var_0, "tag_origin");
@@ -266,19 +266,19 @@ move_lost_and_found(var_0) {
   var_1 = (2956, 772, 11.8);
   var_2 = "com_cardboardbox02";
   if(!isDefined(level.lnf_struct)) {
-    level.lnf_struct = scripts\engine\utility::getstruct("lost_and_found", "script_noteworthy");
+    level.lnf_struct = scripts\engine\utility::getStruct("lost_and_found", "script_noteworthy");
     level.lnf_struct.og_origin = level.lnf_struct.origin;
   }
 
   if(var_0 == "beach") {
     level.lnf_struct.origin = var_1;
-    var_3 = getent("crab_boss_lnf_sign", "targetname");
+    var_3 = getEnt("crab_boss_lnf_sign", "targetname");
     if(isDefined(var_3)) {
       var_3 show();
     }
   } else {
     level.lnf_struct.origin = level.lnf_struct.og_origin;
-    var_3 = getent("crab_boss_lnf_sign", "targetname");
+    var_3 = getEnt("crab_boss_lnf_sign", "targetname");
     if(isDefined(var_3)) {
       var_3 hide();
     }
@@ -671,7 +671,7 @@ activate_crab_boss_fight_blocker() {
     level.crab_boss_fight_blocker_models[level.crab_boss_fight_blocker_models.size] = var_3;
   }
 
-  var_5 = getent("crab_boss_fight_door_clip", "targetname");
+  var_5 = getEnt("crab_boss_fight_door_clip", "targetname");
   var_5 dontinterpolate();
   var_5.origin = var_5.origin + (0, 0, 1024);
 }
@@ -685,7 +685,7 @@ deactivate_crab_boss_fight_blocker() {
     }
   }
 
-  var_3 = getent("crab_boss_fight_door_clip", "targetname");
+  var_3 = getEnt("crab_boss_fight_door_clip", "targetname");
   if(isDefined(var_3)) {
     var_3 delete();
   }
@@ -696,7 +696,7 @@ show_icon_on_escort_vehicle() {
     var_2 = newclienthudelem(var_1);
     var_2 setshader("apache_target_lock", 36, 36);
     var_2 setwaypoint(1, 1);
-    var_2 settargetent(level.escort_vehicle);
+    var_2 settargetEnt(level.escort_vehicle);
     var_2.alpha = 1;
     var_2.color = (1, 0, 0);
     var_1.escort_vehicle_icon = var_2;
@@ -824,7 +824,7 @@ teleportplayertobeach() {
   var_1 = (3426, 3850, -348);
   foreach(var_5, var_3 in level.players) {
     var_4 = scripts\engine\utility::drop_to_ground(var_0[var_5], 200, -500);
-    var_3 setorigin(var_4, 1);
+    var_3 setOrigin(var_4, 1);
     var_3 setplayerangles(vectortoangles(var_1 - var_0[var_5]));
   }
 }

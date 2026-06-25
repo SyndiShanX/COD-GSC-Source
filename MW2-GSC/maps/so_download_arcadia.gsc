@@ -155,7 +155,7 @@ so_fake_choppers() {
   array_call(choppers, ::Hide);
 
   foreach(chopper in choppers) {
-    chopper.destination = getstruct(chopper.target, "targetname");
+    chopper.destination = getStruct(chopper.target, "targetname");
     chopper.origin = chopper.origin + (0, 0, -2000);
 
     if(chopper.origin[0] < 20000) {
@@ -219,7 +219,7 @@ so_fake_chopper_create_and_move(moveTime, destination) {
   chopper useAnimTree(#animtree);
   chopper setanim(%bh_rotors, 1, .2, 1);
 
-  chopper moveto(destination, moveTime, 0, 0);
+  chopper moveTo(destination, moveTime, 0, 0);
   wait moveTime;
   chopper delete();
 
@@ -236,7 +236,7 @@ so_fake_chopper_tilt() {
     yaw = start_angle[1] + RandomFloatRange(-7, 7);
     roll = start_angle[2] + RandomFloatRange(-10, 10);
 
-    self RotateTo((pitch, yaw, roll), time, time * 0.5, time * 0.5);
+    self rotateTo((pitch, yaw, roll), time, time * 0.5, time * 0.5);
     wait(time);
   }
 }
@@ -256,7 +256,7 @@ so_mansion_pool() {
     player thread waterfx();
   }
 
-  trigger = getent("pool", "targetname");
+  trigger = getEnt("pool", "targetname");
 
   while(1) {
     trigger waittill("trigger");

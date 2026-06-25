@@ -11,7 +11,7 @@
 
 onplayerconnect_sq_wth() {
   if(!isDefined(level.wth_lookat_point)) {
-    level.wth_lookat_point = getstruct("struct_gg_look", "targetname");
+    level.wth_lookat_point = getStruct("struct_gg_look", "targetname");
   }
 
   self thread track_player_eyes();

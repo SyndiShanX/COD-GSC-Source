@@ -124,7 +124,7 @@ morals_rail_terrorist_spawnfunc() {
   self.script_grenades = 0;
   self.script_radius = 64;
   self.deathfunction = ::morals_rail_count_terrorist_deaths;
-  self shoot_at_target_untill_dead(getent("morals_rail_vtol", "script_noteworthy"));
+  self shoot_at_target_untill_dead(getEnt("morals_rail_vtol", "script_noteworthy"));
 }
 
 morals_rail_count_terrorist_deaths() {
@@ -174,7 +174,7 @@ player_vtol_go_on_rail() {
   nd_vtol_start = getvehiclenode("morals_rail_player_vtol_path1_start_node", "targetname");
   nd_exit_path = getvehiclenode("morals_rail_player_vtol_exit_path_start", "targetname");
   level thread do_vtol_sounds(veh_vtol);
-  s_look_spot = getstruct("player_vtol_look_spot", "targetname");
+  s_look_spot = getStruct("player_vtol_look_spot", "targetname");
   m_vtol_look_at = spawn("script_origin", s_look_spot.origin);
   veh_vtol veh_magic_bullet_shield(1);
   veh_vtol setvehgoalpos(nd_vtol_start.origin, 1);
@@ -199,9 +199,9 @@ player_vtol_go_on_rail() {
   run_scene_first_frame("mason_intro_harper_lives");
   veh_vtol makevehicleunusable();
   flag_set("morals_rail_done");
-  old_vtol = getent("morals_vtol_1", "targetname");
+  old_vtol = getEnt("morals_vtol_1", "targetname");
   old_vtol vehicle_toggle_sounds(0);
-  m_lamp = getent("fxanim_vtol2_crash_lamp", "targetname");
+  m_lamp = getEnt("fxanim_vtol2_crash_lamp", "targetname");
 
   if(isDefined(m_lamp)) {
     m_lamp delete();
@@ -214,7 +214,7 @@ player_vtol_go_on_rail() {
   run_scene_and_delete("mason_intro_harper_lives");
   level.player enableweaponfire();
   level thread run_scene_and_delete("harper_medic_loop");
-  ai_sal = getent("sp_salazar_ai", "targetname");
+  ai_sal = getEnt("sp_salazar_ai", "targetname");
   ai_sal thread make_hero();
   veh_vtol thread player_vtol_exit_scene(nd_exit_path);
   trigger_use("trig_drone_control_color_alley_start", "targetname");
@@ -253,7 +253,7 @@ setup_menedez_escape_extracam() {
   level.salazar delete();
   level.player.ignoreme = 1;
   extracam = get_extracam();
-  camera_lookat = getent("menedenez_escape_cam", "targetname");
+  camera_lookat = getEnt("menedenez_escape_cam", "targetname");
   extracam.origin = camera_lookat.origin;
   extracam.angles = camera_lookat.angles;
   guard1 = simple_spawn_single("fleeing_cover_terrorist");
@@ -311,7 +311,7 @@ morals_rail_ground_spawner() {
 }
 
 do_rail_drones() {
-  sp_drone = getent("morals_rail_first_ground_drone", "targetname");
+  sp_drone = getEnt("morals_rail_first_ground_drone", "targetname");
   drones_start("s_mr_sp_second_ground_drones");
   drones_start("s_mr_sp_first_ground_drones");
   drones_start("s_mr_sp_vtol_ground_drones");
@@ -359,7 +359,7 @@ mr_get_magic_target_position(e_shooter, n_dist) {
     n_dist = 5000;
   }
 
-  v_aim_spot = e_shooter.origin + vectornormalize(anglesToForward(e_shooter.angles)) * n_dist;
+  v_aim_spot = e_shooter.origin + vectorNormalize(anglesToForward(e_shooter.angles)) * n_dist;
   a_trace = bulletTrace(e_shooter.origin, v_aim_spot, 1, e_shooter);
   return a_trace["position"];
 }
@@ -374,7 +374,7 @@ fire_rpgs_from_structs(str_struct, v_target, n_min, n_max) {
     } else if(s_rpg.script_noteworthy == "player") {
       v_target = _get_target_position();
     } else {
-      e_target_ent = getstruct(s_rpg.script_notewothy, "targetname");
+      e_target_ent = getStruct(s_rpg.script_notewothy, "targetname");
       v_target = e_target_ent.origin;
     }
 
@@ -423,7 +423,7 @@ _get_aim_model() {
 _get_target_position() {
   v_eye_pos = level.player getEye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
+  v_player_eye = vectorNormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 512;
   a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
   return a_trace["position"];
@@ -465,7 +465,7 @@ do_vtol_sounds(plr_vtol) {
   level waittill("morals_rail_done");
   level clientnotify("osprey_done");
   vtol_snd = spawn("script_origin", plr_vtol.origin);
-  vtol_snd linkto(plr_vtol);
+  vtol_snd linkTo(plr_vtol);
   wait 3.5;
   vtol_snd playLoopSound("veh_osp_steady", 1);
   wait 30;
@@ -474,5 +474,5 @@ do_vtol_sounds(plr_vtol) {
 }
 
 taking_fire_sfx() {
-  playsoundatposition("evt_takin_dat_fire", (0, 0, 0));
+  playSoundAtPosition("evt_takin_dat_fire", (0, 0, 0));
 }

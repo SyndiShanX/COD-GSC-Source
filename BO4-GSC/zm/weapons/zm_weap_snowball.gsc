@@ -47,7 +47,7 @@ on_grenade_fired(s_params) {
   }
 
   s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   a_e_players = arraysortclosest(a_e_players, s_waitresult.position, 4, 0, 64);
 
   foreach(e_player in a_e_players) {

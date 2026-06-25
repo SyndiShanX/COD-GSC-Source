@@ -263,7 +263,7 @@ reviver_revive(revive_anim, revive_point) {
   self.ignoreme = true;
   resetReviveSequenceTimer();
   bleeder SetFlaggedAnimKnob("being_revived", getBleederReviveAnim(), 1, 0.1, 1);
-  self AnimScripted("revive", bleeder.origin, bleeder.angles, revive_anim, "normal", %body, 1);
+  self animScripted("revive", bleeder.origin, bleeder.angles, revive_anim, "normal", %body, 1);
   self animscripts\shared::DoNoteTracks("revive", ::handleReviverNotetracks);
   self notify("revive_complete");
   self revive_getup_process();
@@ -455,7 +455,7 @@ shouldReviveSequenceHappen() {
   return true;
 }
 resetReviveSequenceTimer() {
-  players = GetPlayers();
+  players = getPlayers();
   anybody_nearby = 0;
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && DistanceSquared(self.origin, players[i].origin) < anim.reviveSequencePlayerVisibleDistSq) {

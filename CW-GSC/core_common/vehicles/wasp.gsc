@@ -895,8 +895,8 @@ function should_fly_forward(distancetogoalsq) {
   }
 
   if(isDefined(self.enemy)) {
-    to_goal = vectornormalize(self.current_pathto_pos - self.origin);
-    to_enemy = vectornormalize(self.enemy.origin - self.origin);
+    to_goal = vectorNormalize(self.current_pathto_pos - self.origin);
+    to_enemy = vectorNormalize(self.enemy.origin - self.origin);
     dot = vectordot(to_goal, to_enemy);
 
     if(abs(dot) > 0.7) {
@@ -965,7 +965,7 @@ function state_combat_update(params) {
         self getperfectinfo(ai);
       }
 
-      players = getplayers("all");
+      players = getPlayers("all");
 
       foreach(player in players) {
         self getperfectinfo(player);

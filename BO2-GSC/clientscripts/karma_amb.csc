@@ -421,7 +421,7 @@ spiderbot_amb_convo_triggers() {
 
 waitfor_convo_trigger() {
   self waittill("trigger");
-  struct = getstruct(self.target, "targetname");
+  struct = getStruct(self.target, "targetname");
 
   if(isDefined(struct.script_sound)) {
     playSound(0, struct.script_sound, struct.origin);
@@ -541,7 +541,7 @@ play_main_area_pa_muzak() {
 
 wait_to_start_club_music() {
   wait 2;
-  struct = getstruct("blk_mus_club", "targetname");
+  struct = getStruct("blk_mus_club", "targetname");
   ent1 = spawn(0, struct.origin, "script_origin");
   ent2 = spawn(0, struct.origin, "script_origin");
   level thread play_club_lowend_until_door(struct);

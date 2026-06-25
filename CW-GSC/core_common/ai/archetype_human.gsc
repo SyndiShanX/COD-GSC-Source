@@ -562,7 +562,7 @@ function function_88dcd11f() {
     if(isDefined(pathpoints) && pathpoints.size > 1) {
       nextpoint = pathpoints[1];
       dir = nextpoint - self.origin;
-      dir = vectornormalize(dir);
+      dir = vectorNormalize(dir);
       dot = vectordot(var_d3d7b85f, dir);
       var_ca796dd1 = dot < 0.5;
       self.var_ca796dd1 = var_ca796dd1;

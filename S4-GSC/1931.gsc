@@ -76,7 +76,7 @@ _id_7D50(var_0, var_1, var_2, var_3, var_4) {
 
   var_0._id_0203 = magicgrenademanual("semtex_bolt_mp", var_0.origin, (0, 0, 0), var_5);
   var_0._id_0203.angles = var_0.angles;
-  var_0._id_0203 linkto(var_0, "tag_origin");
+  var_0._id_0203 linkTo(var_0, "tag_origin");
   thread _id_57AE(var_0, var_5);
 }
 
@@ -272,7 +272,7 @@ _id_9A00(var_0) {
   var_3.angles = var_2;
   var_3._id_0481 = "bolt_pickup";
   var_3 _meth_80DB();
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   var_0._id_B0B5 = var_3;
   var_0 thread _id_25EE();
   return var_0;
@@ -547,9 +547,9 @@ _id_9515(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_2)) {
-    var_0 linkto(var_1, var_2);
+    var_0 linkTo(var_1, var_2);
   } else {
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
   }
 
   if(isPlayer(var_1) || isagent(var_1) || var_1 scripts\cp_mp\vehicles\vehicle::_id_8AF5() || isDefined(var_1.classname) && var_1.classname == "misc_turret") {

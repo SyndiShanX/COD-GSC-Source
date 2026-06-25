@@ -53,12 +53,12 @@ watchforstick() {
   self waittill("missile_stuck", var_0);
 
   if(isDefined(var_0)) {
-    self linkto(var_0);
+    self linkTo(var_0);
   }
 
   self.explosive = spawn("script_model", self.origin);
   self.explosive setModel("npc_drone_explosive_main");
-  self.explosive linkto(self, "tag_spike", (0, 0, 0), (0, 0, 0));
+  self.explosive linkTo(self, "tag_spike", (0, 0, 0), (0, 0, 0));
   level.zed_active = common_scripts\utility::array_removeundefined(level.zed_active);
 
   if(level.zed_active.size > 8) {
@@ -84,8 +84,8 @@ triggerthink() {
   var_0 = 80;
   var_1 = spawn("trigger_radius", self.origin - (0, 0, var_0), 0, var_0, 2 * var_0);
   var_1 thread maps\mp\zombies\_util::delete_on_death_of(self);
-  var_1 enablelinkto();
-  var_1 linkto(self);
+  var_1 enablelinkTo();
+  var_1 linkTo(self);
 
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -127,7 +127,7 @@ droneanimate() {
   var_0 = 0.7;
   var_1 = anglestoup(self.angles);
   self.explosive unlink();
-  self.explosive moveto(self.origin + var_1 * 30, var_0, 0, var_0);
+  self.explosive moveTo(self.origin + var_1 * 30, var_0, 0, var_0);
   wait(var_0);
 }
 
@@ -136,7 +136,7 @@ pickupthink() {
   var_0 = spawn("script_model", self.origin);
   var_0.owner = self.owner;
   var_0 makeusable();
-  var_0 sethintstring(&"ZOMBIES_PICKUP_EXPLOSIVE_DRONE");
+  var_0 setHintString(&"ZOMBIES_PICKUP_EXPLOSIVE_DRONE");
   var_0 sethintstringvisibleonlytoowner(1);
   var_0 thread maps\mp\zombies\_util::delete_on_death_of(self);
 

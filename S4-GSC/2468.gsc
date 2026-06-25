@@ -202,7 +202,7 @@ _id_110AD(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
           if(isDefined(var_8.spawn_crawl_fx)) {
             playFX(var_8.spawn_crawl_fx, var_8.origin);
           } else {
-            var_10 = scripts\engine\utility::getstruct(var_3.target2, "targetname");
+            var_10 = scripts\engine\utility::getStruct(var_3.target2, "targetname");
 
             if(isDefined(var_10)) {
               playFX(scripts\engine\utility::getfx("zmb_ai_spawn_" + scripts\cp\utility::_id_459B(var_3._id_CD99, "rise")), var_10.origin);

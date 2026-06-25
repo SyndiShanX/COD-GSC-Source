@@ -458,7 +458,7 @@ lib_0564::func_A136(param_00, param_01, param_02, param_03) {
       var_08 = param_03;
       var_09 = var_07 - var_04;
       if(lengthsquared(var_09) > var_08 * var_08) {
-        var_07 = var_04 + vectornormalize(var_09) * var_08;
+        var_07 = var_04 + vectorNormalize(var_09) * var_08;
       }
     }
 
@@ -542,7 +542,7 @@ prolonged_damage(param_00, param_01) {
 lib_0564::func_3D29() {
   var_00 = spawn("script_model", self gettagorigin("tag_flamethrower_fx") + (600, 0, 0));
   var_00 setModel("tag_origin");
-  var_00 linkto(self, "tag_flamethrower_fx");
+  var_00 linkTo(self, "tag_flamethrower_fx");
   var_01 = launchbeam("zmb_brenner_flamethrower_beam", self, "tag_flamethrower_fx", var_00, "tag_origin");
   self waittill("cancel_updatelerppos");
   var_01 delete();
@@ -1023,7 +1023,7 @@ lib_0564::func_3C0D(param_00) {
 
     var_0D = var_0C * 0.15;
     earthquake(var_0D, 0.1, param_00, 1500);
-    var_0B playrumbleonentity("damage_heavy");
+    var_0B playRumbleOnEntity("damage_heavy");
   }
 }
 

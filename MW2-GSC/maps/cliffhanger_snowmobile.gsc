@@ -29,14 +29,14 @@ start_tarmac() {
   array_thread(spawners, ::add_spawn_function, ::enemy_snowmobile_chase_spawner_think);
   array_thread(spawners, ::spawn_ai);
 
-  node = getent("price_snowmobile_start", "targetname");
+  node = getEnt("price_snowmobile_start", "targetname");
   level.price forceTeleport(node.origin, node.angles);
   level.price setgoalpos(node.origin);
   level.price.ignoreall = true;
   level.price.ignoreRandomBulletDamage = true;
 
-  node = getent("player_snowmobile_start", "targetname");
-  level.player setorigin(node.origin);
+  node = getEnt("player_snowmobile_start", "targetname");
+  level.player setOrigin(node.origin);
   level.player setplayerangles(node.angles);
   flag_set("hanger_reinforcements");
 }
@@ -47,7 +47,7 @@ price_reaches_slide_start() {
     level.price teleport_ent(price_slide_catchup);
   }
 
-  node = getent("cliffhanger_slide", "targetname");
+  node = getEnt("cliffhanger_slide", "targetname");
   node thread anim_reach_solo(level.price, "hill_slide");
   level.price endon("goal");
 
@@ -60,7 +60,7 @@ price_reaches_slide_start() {
 }
 
 price_makes_for_his_mobile() {
-  node = getent("cliffhanger_slide", "targetname");
+  node = getEnt("cliffhanger_slide", "targetname");
 
   price_reaches_slide_start();
 
@@ -110,7 +110,7 @@ cover_price() {
 }
 
 go_to_mig() {
-  mig_obj_struct = getstruct("mig_obj_struct", "targetname");
+  mig_obj_struct = getStruct("mig_obj_struct", "targetname");
   org = mig_obj_struct.origin;
 
   objective = "obj_exfiltrate";
@@ -121,7 +121,7 @@ go_to_mig() {
 }
 
 go_to_slide() {
-  final_obj_struct = getstruct("final_obj_struct", "targetname");
+  final_obj_struct = getStruct("final_obj_struct", "targetname");
   org = final_obj_struct.origin;
 
   objective = "obj_exfiltrate";
@@ -274,7 +274,7 @@ price_progress_trigger_think() {
 price_navigates_tarmac_and_calls_to_player() {
   assertex(!flag("player_slides_down_hill"), "How did this flag get set so early?");
   level endon("player_slides_down_hill");
-  tarmac_destination = getent("tarmac_destination", "targetname");
+  tarmac_destination = getEnt("tarmac_destination", "targetname");
 
   level.player.position = "hanger";
   player_position_triggers = getEntArray("player_position_trigger", "targetname");
@@ -419,7 +419,7 @@ detect_enemies_recede(node) {
   if(!isDefined(node.target)) {
     return;
   }
-  volume = getent(node.target, "targetname");
+  volume = getEnt(node.target, "targetname");
   if(!isDefined(volume)) {
     return;
   }
@@ -477,7 +477,7 @@ waittill_player_not_position(positions) {
 price_icepicks_a_snowmobile() {
   level.price.baseAccuracy = 1;
 
-  org = getent("price_icepick_snowmobile_org", "targetname");
+  org = getEnt("price_icepick_snowmobile_org", "targetname");
   spawners = getEntArray("snowmobile_icepick_spawner", "targetname");
   snowmobile = spawn_anim_model("snowmobile");
   snowmobile hide();
@@ -500,7 +500,7 @@ price_icepicks_a_snowmobile() {
 
   passenger.animname = "passenger";
 
-  player_snowmobile_spawner = getent("player_snowmobile_spawner", "targetname");
+  player_snowmobile_spawner = getEnt("player_snowmobile_spawner", "targetname");
   player_snowmobile_spawner.origin = snowmobile.origin;
   player_snowmobile_spawner.angles = snowmobile.angles;
 
@@ -535,7 +535,7 @@ price_icepicks_a_snowmobile() {
 
   assert(otherEnt == level.player);
 
-  player_snowmobile_block = getent("player_snowmobile_block", "targetname");
+  player_snowmobile_block = getEnt("player_snowmobile_block", "targetname");
   player_snowmobile_block delete();
 
   waittillframeend;
@@ -694,12 +694,12 @@ start_icepick() {
   level notify("stop_price_shield");
   level.price.baseAccuracy = 1;
 
-  player_snowmobile_spawner = getent("player_snowmobile_spawner", "targetname");
+  player_snowmobile_spawner = getEnt("player_snowmobile_spawner", "targetname");
   level.player teleport_ent(player_snowmobile_spawner);
 
   wait(1.5);
 
-  org = getent("price_icepick_snowmobile_org", "targetname");
+  org = getEnt("price_icepick_snowmobile_org", "targetname");
   level.price teleport_ent(org);
   thread hill_attackers_spawn();
   thread maps\cliffhanger_snowmobile_code::recover_vehicle_path_trigger();
@@ -738,7 +738,7 @@ start_snowmobile(e3) {
   magic_bullet_spawner = getEntArray("magic_bullet_spawner", "script_noteworthy");
   array_thread(magic_bullet_spawner, ::_delete);
 
-  npc_snowmobile_spawner = getent("god_vehicle_spawner", "script_noteworthy");
+  npc_snowmobile_spawner = getEnt("god_vehicle_spawner", "script_noteworthy");
   npc_snowmobile_spawner.script_vehicleride = undefined;
   npc_snowmobile_spawner.target = "price_snowmobile_path";
   price_snowspawn = undefined;
@@ -768,21 +768,21 @@ start_snowmobile(e3) {
   level notify("stop_price_shield");
   level.price.baseAccuracy = 0;
 
-  player_snowmobile_spawner = getent("player_snowmobile_spawner", "targetname");
+  player_snowmobile_spawner = getEnt("player_snowmobile_spawner", "targetname");
   level.player_snowmobile = player_snowmobile_spawner spawn_vehicle();
   level.price_snowmobile = npc_snowmobile;
 
   if(level.start_point == "snowspawn") {
-    playermobile_spawner = getent("playermobile_spawner", "targetname");
-    player_snowspawn_start = getent("player_snowspawn_start", "targetname");
+    playermobile_spawner = getEnt("playermobile_spawner", "targetname");
+    player_snowspawn_start = getEnt("player_snowspawn_start", "targetname");
     playermobile_spawner.origin = player_snowspawn_start.origin;
     playermobile_spawner.angles = player_snowspawn_start.angles;
 
     level.player_snowmobile = playermobile_spawner spawn_vehicle();
   }
   if(level.start_point == "lake") {
-    playermobile_spawner = getent("playermobile_spawner", "targetname");
-    player_snowspawn_start = getent("player_lake_start", "targetname");
+    playermobile_spawner = getEnt("playermobile_spawner", "targetname");
+    player_snowspawn_start = getEnt("player_lake_start", "targetname");
     playermobile_spawner.origin = player_snowspawn_start.origin;
     playermobile_spawner.angles = player_snowspawn_start.angles;
 
@@ -795,7 +795,7 @@ start_snowmobile(e3) {
   waittillframeend;
   flag_set("player_rides_snowmobile");
   flag_set("player_slides_down_hill");
-  player_snowmobile_block = getent("player_snowmobile_block", "targetname");
+  player_snowmobile_block = getEnt("player_snowmobile_block", "targetname");
   player_snowmobile_block delete();
 
   thread blizzard_level_transition_snowmobile(1);
@@ -944,14 +944,14 @@ track_landing_time() {
 
 player_makes_snowmobile_jump() {
   flag_wait("snowmobile_jump");
-  ending_fuel_explosion = getstruct("ending_fuel_explosion", "targetname");
+  ending_fuel_explosion = getStruct("ending_fuel_explosion", "targetname");
   wait(1.5);
   for(;;) {
     RadiusDamage(ending_fuel_explosion.origin, ending_fuel_explosion.radius, 50000, 50000, level.price);
     if(!isDefined(ending_fuel_explosion.target)) {
       return;
     }
-    ending_fuel_explosion = getstruct(ending_fuel_explosion.target, "targetname");
+    ending_fuel_explosion = getStruct(ending_fuel_explosion.target, "targetname");
     wait(0.15);
   }
 }
@@ -970,9 +970,9 @@ player_jump_slowmo() {
 player_falls_into_revine() {
   flag_wait("player_falls_to_avalanche_section");
   ent = getentwithflag("player_falls_to_avalanche_section");
-  brushmodel = getent(ent.target, "targetname");
-  org = getent(brushmodel.target, "targetname");
-  brushmodel linkto(org);
+  brushmodel = getEnt(ent.target, "targetname");
+  org = getEnt(brushmodel.target, "targetname");
+  brushmodel linkTo(org);
   org.origin = level.player.origin;
   angles = level.player.vehicle.angles;
   angles = (0, angles[1], 0);
@@ -1015,8 +1015,8 @@ avalanche_main() {
 
   player_ride = spawn_vehicle_from_targetname("player_end_ride");
   level.player_ride = player_ride;
-  avalanche_progress_org = getent("avalanche_progress_org", "targetname");
-  targ = getent(avalanche_progress_org.target, "targetname");
+  avalanche_progress_org = getEnt("avalanche_progress_org", "targetname");
+  targ = getEnt(avalanche_progress_org.target, "targetname");
 
   level.player.baseIgnoreRandomBulletDamage = true;
   level.ignoreRandomBulletDamage = true;
@@ -1037,7 +1037,7 @@ avalanche_main() {
   view_arms = spawn_anim_model("player_rig");
   view_arms hide();
   tag_origin = spawn_tag_origin();
-  tag_origin linkto(view_arms, "tag_player", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(view_arms, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player PlayerSetGroundReferenceEnt(tag_origin);
   level.player PlayerLinkToDelta(view_arms, "tag_player", 1, 0, 0, 0, 0);
   delaythread(2.5, ::open_up_player_fov, view_arms, "tag_player");
@@ -1051,7 +1051,7 @@ avalanche_main() {
     level.price stop_magic_bullet_shield();
   }
 
-  crash_recovery = getent("crash_recovery", "targetname");
+  crash_recovery = getEnt("crash_recovery", "targetname");
   scene_org = spawn("script_origin", crash_recovery.origin);
   scene_org.angles = crash_recovery.angles;
 
@@ -1075,7 +1075,7 @@ avalanche_main() {
   ent.yaw = 180;
   ent translate_local();
 
-  tag_origin linkto(player_ride);
+  tag_origin linkTo(player_ride);
 
   level.player PlayerSetGroundReferenceEnt(undefined);
 
@@ -1114,7 +1114,7 @@ avalanche_main() {
 avalanche_heli_attacks() {
   flag_wait("avalanche_heli_attacks");
 
-  avalanche_heli_spawner = getent("avalanche_heli", "targetname");
+  avalanche_heli_spawner = getEnt("avalanche_heli", "targetname");
   avalanche_heli = avalanche_heli_spawner spawn_vehicle();
 
   avalanche_heli goPath();
@@ -1129,7 +1129,7 @@ avalanche_heli_attacks() {
   avalanche_heli SetGoalYaw(90);
 
   avalanche_heli waittill("reached_dynamic_path_end");
-  avalanche_heli_crash = getent("avalanche_heli_crash", "targetname");
+  avalanche_heli_crash = getEnt("avalanche_heli_crash", "targetname");
 
   avalanche_heli = avalanche_heli vehicle_to_dummy();
   avalanche_heli assign_animtree("heli");

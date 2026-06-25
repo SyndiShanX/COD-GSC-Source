@@ -87,10 +87,10 @@ function function_f6b20985(var_8fca9f8c, var_f48b681c, str_tag, var_f3776824) {
 
 function function_24061b58(e_player) {
   if(isDefined(e_player.var_bc5f242a) && e_player.var_bc5f242a.str_model === self.stub.var_f4b4f2f2) {
-    self sethintstring(&"ZM_GENESIS_WEARABLE_EQUIPPED");
+    self setHintString(&"ZM_GENESIS_WEARABLE_EQUIPPED");
     return false;
   }
-  self sethintstring(&"ZM_GENESIS_WEARABLE_PICKUP");
+  self setHintString(&"ZM_GENESIS_WEARABLE_PICKUP");
   return true;
 }
 
@@ -265,14 +265,14 @@ function function_b4575902() {
   foreach(var_8d2dd868 in var_5a533244) {
     var_8d2dd868 clientfield::set("battery_fx", 0);
   }
-  playsoundatposition("zmb_wearable_siegfried_horn_1", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_siegfried_horn_1", (0, 0, 0));
   iprintlnbold("");
   function_f6b20985("s_helm_of_siegfried", "c_zom_dlc4_player_siegfried_helmet", "j_head", 0);
 }
 
 function function_9157236c() {
   var_7bd91d87 = struct::get_array("s_ee_clock", "targetname");
-  var_687cab15 = getent("ee_grand_tour_undercroft", "targetname");
+  var_687cab15 = getEnt("ee_grand_tour_undercroft", "targetname");
   var_687cab15 setCanDamage(1);
   n_stage = 9;
   var_c52419ba = 1;
@@ -403,7 +403,7 @@ function function_8454afd5() {
   level thread function_1a3ef9c4("mechz_mask_flag");
   level thread function_a4ae62cc("mechz_trap_flag");
   level flag::wait_till_all(array("mechz_gun_flag", "mechz_mask_flag", "mechz_trap_flag"));
-  playsoundatposition("zmb_wearable_mechz_complete", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_mechz_complete", (0, 0, 0));
   function_f6b20985("s_helm_of_the_king", "c_zom_dlc4_player_king_helmet", "j_head", 0);
 }
 
@@ -429,7 +429,7 @@ function function_a4ae62cc(str_flag) {
 
 function function_c81a7efa() {
   iprintlnbold("");
-  playsoundatposition("zmb_wearable_mechz_step", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_mechz_step", (0, 0, 0));
 }
 
 function function_796904fd() {
@@ -439,7 +439,7 @@ function function_796904fd() {
   level thread function_f4caac35("keeper_skull_turret_flag");
   level flag::wait_till_all(array("keeper_skull_dg4_flag", "keeper_skull_turret_flag"));
   iprintlnbold("");
-  playsoundatposition("zmb_wearable_wolf_howl_finish", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_wolf_howl_finish", (0, 0, 0));
   function_f6b20985("s_dire_wolf_head", "c_zom_dlc4_player_direwolf_helmet", "j_head", 0);
 }
 
@@ -468,7 +468,7 @@ function function_f4caac35(str_flag) {
   s_path = struct::get("s_dire_wolf_path_start", "targetname");
   while(true) {
     n_time = 0.4;
-    var_affd5bec moveto(s_path.origin, n_time);
+    var_affd5bec moveTo(s_path.origin, n_time);
     if(!isDefined(s_path.target)) {
       var_affd5bec waittill("movedone");
       var_affd5bec playSound("zmb_wearable_wolf_skull_land");
@@ -499,20 +499,20 @@ function function_579caadc() {
     if(level flag::get("low_grav_on") && var_504ff975) {
       self playSound("zmb_wearable_wolf_skull_rise");
       self playLoopSound("zmb_wearable_wolf_skull_lp", 2);
-      self moveto(v_ground_pos + vectorscale((0, 0, 1), 65), n_move_time, n_move_time / 8, n_move_time / 8);
+      self moveTo(v_ground_pos + vectorscale((0, 0, 1), 65), n_move_time, n_move_time / 8, n_move_time / 8);
       self waittill("movedone");
       var_504ff975 = 0;
     } else {
       if(level flag::get("low_grav_on") == 0 && !var_504ff975) {
         self playSound("zmb_wearable_wolf_skull_lower");
         self stoploopsound(2);
-        self moveto(v_ground_pos, n_move_time, n_move_time / 8, n_move_time / 8);
+        self moveTo(v_ground_pos, n_move_time, n_move_time / 8, n_move_time / 8);
         self waittill("movedone");
         self playSound("zmb_wearable_wolf_skull_land");
         var_504ff975 = 1;
       } else {
         if(level flag::get("low_grav_on") && !var_504ff975) {
-          self rotateto(self.angles + vectorscale((0, 1, 0), 180), 0.5);
+          self rotateTo(self.angles + vectorscale((0, 1, 0), 180), 0.5);
           wait(0.45);
         } else {
           wait(0.5);
@@ -532,7 +532,7 @@ function function_3167c564() {
   level flag::wait_till_all(array("keeper_skull_turret_flag", "keeper_skull_zombie_flag"));
   level.var_1c301ed2 = 0;
   iprintlnbold("");
-  playsoundatposition("zmb_wearable_keeper_complete", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_keeper_complete", (0, 0, 0));
   function_f6b20985("s_keeper_skull_head", "c_zom_dlc4_player_keeper_helmet", "j_head", 0);
 }
 
@@ -540,7 +540,7 @@ function function_5aca8a04(str_flag) {
   for(var_fce7f186 = 0; var_fce7f186 < 10; var_fce7f186++) {
     level waittill("hash_353fc85a");
   }
-  playsoundatposition("zmb_wearable_keeper_step", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_keeper_step", (0, 0, 0));
   level flag::set(str_flag);
 }
 
@@ -548,7 +548,7 @@ function function_cceea36c(str_flag) {
   for(var_fce7f186 = 0; var_fce7f186 < 30; var_fce7f186++) {
     level waittill("hash_dcb6576d");
   }
-  playsoundatposition("zmb_wearable_keeper_step", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_keeper_step", (0, 0, 0));
   level flag::set(str_flag);
 }
 
@@ -565,7 +565,7 @@ function function_4fddc919() {
   level.var_16f4dfa5 = 0;
   level.margwa_head_kill_weapon_check = undefined;
   iprintlnbold("");
-  playsoundatposition("zmb_wearable_margwa_complete", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_margwa_complete", (0, 0, 0));
   function_f6b20985("s_margwa_head", "c_zom_dlc4_player_margwa_helmet", "j_head", 0);
 }
 
@@ -605,7 +605,7 @@ function function_bf2067a4(str_flag, var_c5b75477) {
 }
 
 function function_838522a5() {
-  playsoundatposition("zmb_wearable_margwa_step", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_margwa_step", (0, 0, 0));
 }
 
 function function_37ba4813() {
@@ -625,7 +625,7 @@ function function_37ba4813() {
   level flag::wait_till_all(array("apothicon_mask_all_zombies_killed", "apothicon_mask_all_wasps_killed", "apothicon_mask_all_spiders_killed", "apothicon_mask_all_margwas_killed", "apothicon_mask_all_fury_killed", "apothicon_mask_all_keepers_killed"));
   level.var_26af7b39 = 0;
   iprintlnbold("");
-  playsoundatposition("zmb_wearable_apothigod_complete", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_apothigod_complete", (0, 0, 0));
   function_f6b20985("s_apothicon_mask", "c_zom_dlc4_player_apothican_helmet", "j_head", -30);
 }
 
@@ -679,7 +679,7 @@ function function_a94b36fd(var_776628b2) {
 
 function function_70b329b3() {
   iprintlnbold("");
-  playsoundatposition("zmb_wearable_apothigod_step", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_apothigod_step", (0, 0, 0));
   level thread zm_genesis_util::function_2a0bc326(level.var_b1471d99, 0.65, 2, 800, 4);
 }
 
@@ -690,7 +690,7 @@ function function_6d72c0dc() {
   level flag::wait_till("fury_head_sniper_kill");
   level.var_2bb34f66 = 0;
   iprintlnbold("");
-  playsoundatposition("zmb_wearable_fury_complete", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_fury_complete", (0, 0, 0));
   function_f6b20985("s_fury_head", "c_zom_dlc4_player_fury_helmet", "j_head", -30);
 }
 
@@ -704,7 +704,7 @@ function function_f1691f03(var_776628b2) {
 }
 
 function function_716f6548() {
-  playsoundatposition("zmb_wearable_fury_step", (0, 0, 0));
+  playSoundAtPosition("zmb_wearable_fury_step", (0, 0, 0));
 }
 
 function function_9d85b9ce(e_attacker) {
@@ -718,7 +718,7 @@ function function_9d85b9ce(e_attacker) {
     e_attacker notify("hash_ab106e77");
   }
   if(isPlayer(e_attacker) && (isDefined(level.var_26af7b39) && level.var_26af7b39) && (isDefined(level.var_a5d2ba4) && level.var_a5d2ba4)) {
-    var_46927a7e = getent("apothicon_belly_center", "targetname");
+    var_46927a7e = getEnt("apothicon_belly_center", "targetname");
     if(e_attacker istouching(var_46927a7e) && self istouching(var_46927a7e)) {
       if(isDefined(self.archetype)) {
         switch (self.archetype) {
@@ -825,7 +825,7 @@ function function_b03acf4e(var_b3ecaf28) {
   if(!isDefined(var_9f8b01da)) {
     var_9f8b01da = s_loc.origin;
   }
-  self setorigin(var_9f8b01da);
+  self setOrigin(var_9f8b01da);
 }
 
 function function_82e9c58d(cmd) {

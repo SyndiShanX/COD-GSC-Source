@@ -245,8 +245,8 @@ _id_E722(var_0, var_1, var_2) {
   thread _id_B8DB(var_0, var_1, var_2);
   scripts\engine\utility::_id_108AE(0.1, "force_spawn");
   thread _id_C481(self._id_E277);
-  self cameralinkto(self._id_E277, "tag_origin", 1, 1);
-  scripts\mp\utility\player::_id_BD21("spawnCamera::startSpawnCamera() CameraLinkTo()");
+  self cameralinkTo(self._id_E277, "tag_origin", 1, 1);
+  scripts\mp\utility\player::_id_BD21("spawnCamera::startSpawnCamera() CameralinkTo()");
   self _meth_86A4();
   thread _id_DEC6();
 }
@@ -300,7 +300,7 @@ _id_6D40() {
       if(isDefined(var_6)) {
         var_7 = level._id_E377[self.team];
         var_2 = var_6.origin + var_7 * -8500 + (0, 0, 7000);
-        var_8 = vectornormalize(var_6.origin - var_2);
+        var_8 = vectorNormalize(var_6.origin - var_2);
         var_3 = scripts\mp\utility\script::_id_FFE3(var_8, (0, 0, 1));
 
         if(istrue(level._id_FEF0)) {
@@ -341,7 +341,7 @@ _id_6D40() {
 
           var_1 = level._id_E371[var_4][self.team]._id_1782.origin;
           var_12 = var_1 + var_7 * -8500 + (0, 0, 7000);
-          var_13 = vectornormalize(var_1 - var_12);
+          var_13 = vectorNormalize(var_1 - var_12);
           var_3 = scripts\mp\utility\script::_id_FFE3(var_13, (0, 0, 1));
           var_2 = var_2 + scripts\mp\gametypes\arm::_id_2EE0(self.team, var_1);
         }
@@ -421,7 +421,7 @@ _id_A275() {
   var_1 = var_0.origin;
   var_2 = var_0.angles;
   var_3 = self._id_E277.origin;
-  var_4 = vectornormalize(var_3 - var_0.origin);
+  var_4 = vectorNormalize(var_3 - var_0.origin);
   var_5 = scripts\mp\utility\script::_id_FFE3(var_4, (0, 0, 1));
   self._id_E277.angles = var_5;
   var_6 = distance(var_3, var_1);
@@ -433,8 +433,8 @@ _id_A275() {
   self._id_E276 = gettime() + var_7 * 1000;
 
   if(!istrue(var_0._id_FF0E)) {
-    self._id_E277 moveto(var_1, var_7, var_7 * 0.3, var_7 * 0.4);
-    self._id_E277 rotateto(var_2, var_7, var_7 * 0.3, var_7 * 0.4);
+    self._id_E277 moveTo(var_1, var_7, var_7 * 0.3, var_7 * 0.4);
+    self._id_E277 rotateTo(var_2, var_7, var_7 * 0.3, var_7 * 0.4);
     wait 1.0;
   } else {
     self._id_E277.origin = var_1;
@@ -469,17 +469,17 @@ _id_A274(var_0) {
     return;
   }
   var_4 = self._id_E277.origin;
-  var_5 = vectornormalize(var_4 - var_1.origin);
+  var_5 = vectorNormalize(var_4 - var_1.origin);
   self._id_E281 = var_2;
   self._id_E280 = var_3;
-  self._id_E277 moveto(var_2, 1.0, 0.25, 0.75);
-  self._id_E277 rotateto(var_3, 1.0, 0.25, 0.75);
+  self._id_E277 moveTo(var_2, 1.0, 0.25, 0.75);
+  self._id_E277 rotateTo(var_3, 1.0, 0.25, 0.75);
   wait 1.0;
 
   if(isDefined(self) && isDefined(self._id_E277) && !istrue(self._id_82F2)) {
     var_6 = anglesToForward(var_3) * 300;
     var_6 = var_6 * (1, 1, 0);
-    self._id_E277 moveto(var_2 + var_6, 15.0, 1.0, 1.0);
+    self._id_E277 moveTo(var_2 + var_6, 15.0, 1.0, 1.0);
     self earthquakeforplayer(0.03, 15.0, var_2, 1000);
   }
 
@@ -509,7 +509,7 @@ _id_DEC6() {
   if(isDefined(self) && isDefined(self._id_E277) && !istrue(self._id_82F2)) {
     var_1 = anglesToForward(self._id_E277.angles) * 300;
     var_1 = var_1 * (1, 1, 0);
-    self._id_E277 moveto(self._id_E277.origin + var_1, 15.0, 1.0, 1.0);
+    self._id_E277 moveTo(self._id_E277.origin + var_1, 15.0, 1.0, 1.0);
     self earthquakeforplayer(0.03, 15.0, self._id_E277.origin, 1000);
   }
 
@@ -582,8 +582,8 @@ _id_CA72(var_0) {
   scripts\common\utility::_id_158B(0);
   _id_081A::_id_D512();
   scripts\mp\utility\player::_id_FD26("spectator");
-  self cameralinkto(self._id_E277, "tag_origin", 1);
-  scripts\mp\utility\player::_id_BD21("spawnCamera::runSlamZoomOnspawn() CameraLinkTo()");
+  self cameralinkTo(self._id_E277, "tag_origin", 1);
+  scripts\mp\utility\player::_id_BD21("spawnCamera::runSlamZoomOnspawn() CameralinkTo()");
   _id_746F();
   _id_4790();
 
@@ -606,7 +606,7 @@ _id_CA72(var_0) {
 
   if(istrue(self._id_DB64)) {
     self._id_E293 = scripts\mp\playerlogic::_id_6D4A();
-    self setorigin(self._id_E293._id_E332);
+    self setOrigin(self._id_E293._id_E332);
     self setplayerangles(self._id_E293._id_E267);
     _id_0817::_id_5AA0(self._id_E293._id_E342);
     self._id_DB64 = undefined;
@@ -640,18 +640,18 @@ _id_746E(var_0) {
   var_2 = self.angles;
   var_3 = (var_1[0], var_1[1], self._id_E277.origin[2]);
   var_3 = var_3 + anglesToForward(var_2) * -480;
-  self._id_E277 moveto(var_3, 0.75, 0.25, 0.25);
-  var_4 = vectornormalize(var_1 - var_3);
+  self._id_E277 moveTo(var_3, 0.75, 0.25, 0.25);
+  var_4 = vectorNormalize(var_1 - var_3);
   var_5 = scripts\mp\utility\script::_id_FFE3(var_4, (0, 0, 1));
-  self._id_E277 rotateto(var_5, 0.75, 0.25, 0.25);
+  self._id_E277 rotateTo(var_5, 0.75, 0.25, 0.25);
   wait 0.75;
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.2);
   var_6 = var_1 + anglesToForward(var_2) * -60;
-  self._id_E277 moveto(var_6, 0.5, 0.1, 0.4);
-  self._id_E277 rotateto(var_2, 0.7, 0.45, 0.05);
+  self._id_E277 moveTo(var_6, 0.5, 0.1, 0.4);
+  self._id_E277 rotateTo(var_2, 0.7, 0.45, 0.05);
   wait 0.5;
   thread _id_B8DB();
-  self._id_E277 moveto(var_1, 0.6, 0.1, 0.1);
+  self._id_E277 moveTo(var_1, 0.6, 0.1, 0.1);
   wait 0.2;
   self visionsetnakedforplayer("", 0);
 }
@@ -659,7 +659,7 @@ _id_746E(var_0) {
 _id_746F(var_0, var_1) {
   self endon("disconnect");
   self endon("kill_handle_move_to_blended");
-  scripts\mp\utility\player::_id_BD21("spawnCamera::handleMoveTo() START");
+  scripts\mp\utility\player::_id_BD21("spawnCamera::handlemoveTo() START");
 
   if(!isDefined(var_0)) {
     var_0 = self._id_E293._id_E332 + (0, 0, 60);
@@ -689,9 +689,9 @@ _id_746F(var_0, var_1) {
     }
 
     wait 0.05;
-    self._id_E277 moveto(var_0, 1.0, 0.1, 0.9);
-    self._id_E277 rotateto(var_1, 1.0, 0.9, 0.1);
-    scripts\mp\utility\player::_id_BD21("spawnCamera::handleMoveTo() FULL Blend Set");
+    self._id_E277 moveTo(var_0, 1.0, 0.1, 0.9);
+    self._id_E277 rotateTo(var_1, 1.0, 0.9, 0.1);
+    scripts\mp\utility\player::_id_BD21("spawnCamera::handlemoveTo() FULL Blend Set");
 
     if(!istrue(level._id_A731)) {
       if(!scripts\cp_mp\utility\game_utility::isnightmap()) {
@@ -707,10 +707,10 @@ _id_746F(var_0, var_1) {
 
     wait 0.2;
   } else {
-    var_4 = vectornormalize(var_0 - self._id_E277.origin);
+    var_4 = vectorNormalize(var_0 - self._id_E277.origin);
     var_5 = scripts\mp\utility\script::_id_FFE3(var_4, (0, 0, 1));
-    self._id_E277 rotateto(var_5, 0.7, 0.2, 0.2);
-    scripts\mp\utility\player::_id_BD21("spawnCamera::handleMoveTo() FIRST HALF Blend Set");
+    self._id_E277 rotateTo(var_5, 0.7, 0.2, 0.2);
+    scripts\mp\utility\player::_id_BD21("spawnCamera::handlemoveTo() FIRST HALF Blend Set");
 
     if(!istrue(level._id_A731)) {
       if(!scripts\cp_mp\utility\game_utility::isnightmap()) {
@@ -720,7 +720,7 @@ _id_746F(var_0, var_1) {
     }
 
     wait 0.05;
-    self._id_E277 moveto(var_0, 1.0, 0.1, 0.9);
+    self._id_E277 moveTo(var_0, 1.0, 0.1, 0.9);
 
     if(!istrue(level._id_A731)) {
       if(!scripts\cp_mp\utility\game_utility::isnightmap()) {
@@ -729,8 +729,8 @@ _id_746F(var_0, var_1) {
     }
 
     wait 0.5;
-    self._id_E277 rotateto(var_1, 0.5, 0.2, 0.1);
-    scripts\mp\utility\player::_id_BD21("spawnCamera::handleMoveTo() SECOND HALF Blend Set");
+    self._id_E277 rotateTo(var_1, 0.5, 0.2, 0.1);
+    scripts\mp\utility\player::_id_BD21("spawnCamera::handlemoveTo() SECOND HALF Blend Set");
     wait 0.3;
 
     if(!istrue(level._id_A731)) {
@@ -744,7 +744,7 @@ _id_746F(var_0, var_1) {
     self visionsetnakedforplayer("", 0);
   }
 
-  scripts\mp\utility\player::_id_BD21("spawnCamera::handleMoveTo() COMPLETE");
+  scripts\mp\utility\player::_id_BD21("spawnCamera::handlemoveTo() COMPLETE");
   self notify("spawn_camera_complete");
 }
 
@@ -858,8 +858,8 @@ _id_B8DB(var_0, var_1, var_2) {
 }
 
 _id_A227(var_0, var_1, var_2) {
-  self moveto(var_1, 1.0, 0.5, 0.5);
-  self rotateto(var_2, 1.0, 0.5, 0.5);
+  self moveTo(var_1, 1.0, 0.5, 0.5);
+  self rotateTo(var_2, 1.0, 0.5, 0.5);
   var_0 thread _id_E705();
   wait 1.1;
 }
@@ -928,7 +928,7 @@ _id_D6D5(var_0, var_1) {
 _id_AC6E() {
   if(!istrue(level._id_E278["default"]["allies"]._id_BF1C)) {
     var_0 = level._id_9AB0 + level._id_E27C * level._id_E275 * -0.85 + (0, 0, 1) * level._id_E275 * 0.45;
-    var_1 = vectornormalize(level._id_9AB0 - var_0);
+    var_1 = vectorNormalize(level._id_9AB0 - var_0);
     var_2 = scripts\mp\utility\script::_id_FFE3(var_1, (0, 0, 1));
     level._id_E278["default"]["allies"].origin = var_0;
     level._id_E278["default"]["allies"].angles = var_2;
@@ -936,7 +936,7 @@ _id_AC6E() {
 
   if(!istrue(level._id_E278["default"]["axis"]._id_BF1C)) {
     var_3 = level._id_9AB0 + level._id_E27F * level._id_E275 * -0.85 + (0, 0, 1) * level._id_E275 * 0.45;
-    var_1 = vectornormalize(level._id_9AB0 - var_3);
+    var_1 = vectorNormalize(level._id_9AB0 - var_3);
     var_4 = scripts\mp\utility\script::_id_FFE3(var_1, (0, 0, 1));
     level._id_E278["default"]["axis"].origin = var_3;
     level._id_E278["default"]["axis"].angles = var_4;
@@ -971,19 +971,19 @@ _id_AC6D() {
   }
 
   var_9 = var_6 - var_1;
-  var_10 = vectornormalize(var_9);
+  var_10 = vectorNormalize(var_9);
   var_11 = vectordot(var_9, var_9);
 
   if(var_11 < 1048576) {
     return;
   }
   var_12 = level._id_9AB0 + var_10 * level._id_E275 * -0.5 + (0, 0, 1) * level._id_E275 * 0.2;
-  var_13 = vectornormalize(level._id_9AB0 - var_12);
+  var_13 = vectorNormalize(level._id_9AB0 - var_12);
   var_14 = scripts\mp\utility\script::_id_FFE3(var_13, (0, 0, 1));
   level._id_E278["default"]["allies"].origin = var_12;
   level._id_E278["default"]["allies"].angles = var_14;
   var_15 = level._id_9AB0 + var_10 * level._id_E275 * 0.5 + (0, 0, 1) * level._id_E275 * 0.2;
-  var_13 = vectornormalize(level._id_9AB0 - var_15);
+  var_13 = vectorNormalize(level._id_9AB0 - var_15);
   var_16 = scripts\mp\utility\script::_id_FFE3(var_13, (0, 0, 1));
   level._id_E278["default"]["axis"].origin = var_15;
   level._id_E278["default"]["axis"].angles = var_16;
@@ -1019,7 +1019,7 @@ _id_2FDE() {
   }
 
   var_9 = var_6 - var_1;
-  var_10 = vectornormalize(var_9);
+  var_10 = vectorNormalize(var_9);
   var_11 = spawnStruct();
   var_11.origin = (var_1 + var_6) * 0.5;
   var_11.angles = _func_025B(var_10, (0, 0, 1));

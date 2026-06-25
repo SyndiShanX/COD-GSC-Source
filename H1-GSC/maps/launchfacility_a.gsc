@@ -38,7 +38,7 @@ main() {
   level.team02 = [];
   level.team03 = [];
   level.cosine["45"] = cos(45);
-  level.balconyflag = getent("balcony_flag", "script_noteworthy");
+  level.balconyflag = getEnt("balcony_flag", "script_noteworthy");
   level.bmpexcluders = [];
   level.hindattacker = undefined;
   level.peoplespeaking = 0;
@@ -273,7 +273,7 @@ container_rpg_moment() {
   level endon("exit_container_area");
   common_scripts\utility::flag_wait("reach_container_area");
   common_scripts\utility::flag_wait("heli_attractor_deleted");
-  var_0 = getent("volume_containers", "targetname");
+  var_0 = getEnt("volume_containers", "targetname");
   var_1 = getEntArray("rpg_source", "targetname");
   var_2 = getEntArray("rpg_target", "targetname");
   wait 2;
@@ -372,7 +372,7 @@ dialogue_smoke_hints() {
   }
   common_scripts\utility::flag_wait_either("reach_container_halfwaypoint", "enter_container_area");
   var_0 = 0;
-  var_1 = getent("volume_smoke", "targetname");
+  var_1 = getEnt("volume_smoke", "targetname");
   var_1.smokethrown = 0;
   var_1 thread maps\jake_tools::smoke_detect();
   thread dialogue_smoke_hints_cleanup(var_1);
@@ -433,7 +433,7 @@ dialogue_c4_hints() {
   if(common_scripts\utility::flag("player_reached_kill_max")) {
     return;
   }
-  var_0 = getent("volume_smoke", "targetname");
+  var_0 = getEnt("volume_smoke", "targetname");
   var_0 waittill("smoke_has_been_thrown");
   wait 2;
   thread bmp_nags("bmp_02_destroyed", 1);
@@ -451,12 +451,12 @@ flanking_wall_breached() {
     return;
   }
   common_scripts\utility::flag_set("exit_container_area");
-  var_0 = getent("killspawner_exit_container", "targetname");
+  var_0 = getEnt("killspawner_exit_container", "targetname");
   var_0 notify("trigger", level.player);
 }
 
 alarm_sound_thread() {
-  var_0 = getent("origin_sound_alarm", "targetname");
+  var_0 = getEnt("origin_sound_alarm", "targetname");
   var_0 playLoopSound("emt_alarm_base_alert");
   common_scripts\utility::flag_wait("stop_alarm");
   var_0 stoploopsound("emt_alarm_base_alert");
@@ -479,7 +479,7 @@ firemg(var_0, var_1, var_2) {
     var_1 = 0;
   }
 
-  self setturrettargetent(var_2, (0, 0, var_1));
+  self setturrettargetEnt(var_2, (0, 0, var_1));
   var_3 = 0.1;
 
   if(!isDefined(var_0)) {
@@ -591,7 +591,7 @@ hind_intro_think() {
   level thread maps\_vehicle::gopath(level.ehindintro);
   var_0 = "tag_origin";
   var_1 = spawn("script_origin", level.ehindintro gettagorigin(var_0));
-  var_1 linkto(level.ehindintro, var_0);
+  var_1 linkTo(level.ehindintro, var_0);
 
   if(getDvar("debug_launch") == "1") {
     var_1 thread maps\jake_tools::print3dthread("TARGET");
@@ -602,7 +602,7 @@ hind_intro_think() {
   wait 2;
   level.player playSound("h1r_hind_pass_by");
   wait 2;
-  var_2 = getent("hind_intro_target2", "targetname");
+  var_2 = getEnt("hind_intro_target2", "targetname");
   level.ehindintro thread firemg(randomintrange(20, 24), 80, var_2);
   wait 1;
   common_scripts\utility::flag_set("hind_intro_dialogue");
@@ -623,7 +623,7 @@ hind_intro_think() {
   common_scripts\utility::flag_set("hind_crash");
   common_scripts\utility::flag_set("stop_alarm");
   wait 0.5;
-  var_4 = getent("hind_crash", "targetname");
+  var_4 = getEnt("hind_crash", "targetname");
 }
 
 hind_earthquake() {
@@ -632,7 +632,7 @@ hind_earthquake() {
 }
 
 hind_intro_think2() {
-  var_0 = getent("hind_crash", "script_noteworthy");
+  var_0 = getEnt("hind_crash", "script_noteworthy");
   level.ehindintro = maps\_vehicle::waittill_vehiclespawn("hind_intro");
   level.ehindintro setmaxpitchroll(50, 30);
   level.ehindintro vehicle_setspeed(120, 15, 15);
@@ -654,7 +654,7 @@ hind_intro_think2() {
 heli_guy_death() {
   common_scripts\utility::flag_wait("friendly_shoots_down_heli");
   wait 19;
-  var_0 = getent("heli_dude", "targetname");
+  var_0 = getEnt("heli_dude", "targetname");
   var_1 = var_0 stalingradspawn();
   maps\_utility::spawn_failed(var_1);
   var_2 = var_1.origin + (100, -50, -100);
@@ -679,7 +679,7 @@ hind_crash_fx() {
 exit_container_area() {
   common_scripts\utility::flag_wait("exit_container_area");
   thread ignore_friendlies_till_past_killzone();
-  var_0 = getent("volume_containers", "targetname");
+  var_0 = getEnt("volume_containers", "targetname");
   var_0 thread ai_in_volume_chase_player();
   thread truck_blows_up();
   thread left_gate_nag();
@@ -688,7 +688,7 @@ exit_container_area() {
 left_gate_nag() {
   level endon("obj_gain_access_complete");
   common_scripts\utility::flag_wait("bmp_02_destroyed");
-  var_0 = getent("volume_leftgate", "script_noteworthy");
+  var_0 = getEnt("volume_leftgate", "script_noteworthy");
 
   for(;;) {
     wait(randomfloatrange(15, 30));
@@ -712,7 +712,7 @@ truck_blows_up() {
   common_scripts\utility::flag_wait("truck_approach");
   common_scripts\utility::flag_set("enemy_can_blow_up_truck");
   var_0 = level.player getEye();
-  var_1 = getent("truck_troops_perimeter", "script_noteworthy");
+  var_1 = getEnt("truck_troops_perimeter", "script_noteworthy");
 
   while(common_scripts\utility::flag("enemy_can_blow_up_truck")) {
     if(!isDefined(var_1)) {
@@ -736,8 +736,8 @@ truck_blows_up() {
     var_3 thread maps\_utility::play_sound_on_entity("US_grg_threat_rpg");
   }
 
-  var_4 = getent("rpg_source_right_1", "script_noteworthy");
-  var_5 = getent("truck_rpg_target", "targetname");
+  var_4 = getEnt("rpg_source_right_1", "script_noteworthy");
+  var_5 = getEnt("truck_rpg_target", "targetname");
   var_6 = missile_createattractorent(var_5, 10000, 6000);
   magicbullet("rpg", var_4.origin, var_5.origin);
   wait 3;
@@ -745,7 +745,7 @@ truck_blows_up() {
 }
 
 ignore_friendlies_till_past_killzone() {
-  var_0 = getent("trig_ignoreme", "targetname");
+  var_0 = getEnt("trig_ignoreme", "targetname");
 
   for(var_1 = 0; var_1 < level.squad.size; var_1++) {
     level.squad[var_1] thread ignoreme_when_in_trigger(var_0);
@@ -784,17 +784,17 @@ aa_gate_init() {
   thread gate_right_reach();
   thread gate_player_participation();
   thread gate_sequence();
-  var_0 = getent("missile_model03", "targetname");
-  var_1 = getent("missile_03_shadow_origin", "targetname");
+  var_0 = getEnt("missile_model03", "targetname");
+  var_1 = getEnt("missile_03_shadow_origin", "targetname");
   var_0 overridelightingorigin(var_1.origin);
-  var_2 = getent("missile_model04", "targetname");
-  var_3 = getent("missile_04_shadow_origin", "targetname");
+  var_2 = getEnt("missile_model04", "targetname");
+  var_3 = getEnt("missile_04_shadow_origin", "targetname");
   var_2 overridelightingorigin(var_3.origin);
-  var_4 = getent("missile_model05", "targetname");
-  var_5 = getent("missile_05_shadow_origin", "targetname");
+  var_4 = getEnt("missile_model05", "targetname");
+  var_5 = getEnt("missile_05_shadow_origin", "targetname");
   var_4 overridelightingorigin(var_5.origin);
-  var_6 = getent("missile_model06", "targetname");
-  var_7 = getent("missile_06_shadow_origin", "targetname");
+  var_6 = getEnt("missile_model06", "targetname");
+  var_7 = getEnt("missile_06_shadow_origin", "targetname");
   var_6 overridelightingorigin(var_7.origin);
 }
 
@@ -802,7 +802,7 @@ balcony_think() {
   level endon("gate_sequence_starting");
   common_scripts\utility::flag_wait("reached_balcony");
   level thread gate_blowup();
-  var_0 = getent("obj_gain_access", "targetname");
+  var_0 = getEnt("obj_gain_access", "targetname");
   var_1 = maps\jake_tools::get_closest_ally(var_0);
   var_1 maps\jake_tools::dialogue_execute("launchfacility_a_marine1_gate_blow");
   wait 1;
@@ -815,9 +815,9 @@ gate_squad_advance_no_bmp() {
   common_scripts\utility::flag_set("aa_container_to_gate_section");
   disable_color_trigs();
   maps\jake_tools::triggersenable("colornodes_gate_no_bmp", "script_noteworthy", 1);
-  var_0 = getent("killspawner_exit_container", "targetname");
+  var_0 = getEnt("killspawner_exit_container", "targetname");
   var_0 notify("trigger", level.player);
-  var_1 = getent("volume_containers", "targetname");
+  var_1 = getEnt("volume_containers", "targetname");
   var_2 = maps\jake_tools::getaiarraytouchingvolume("axis", undefined, var_1);
 
   if(var_2.size > 0) {
@@ -864,7 +864,7 @@ gate_right_push_forward() {
   level endon("blow_the_gate");
   common_scripts\utility::flag_wait("migs_flyby1");
   wait 8;
-  var_0 = getent("retreat_gate", "targetname");
+  var_0 = getEnt("retreat_gate", "targetname");
 
   while(!level.player istouching(var_0)) {
     wait 3;
@@ -928,7 +928,7 @@ gate_sequence() {
 }
 
 c4_detonation_beep() {
-  var_0 = getent("gate_explosives", "targetname");
+  var_0 = getEnt("gate_explosives", "targetname");
   thread common_scripts\utility::play_sound_in_space("h1_launch_a_c4_plant", var_0.origin);
   wait 1;
 
@@ -950,7 +950,7 @@ gate_blowup() {
   common_scripts\utility::flag_clear("aa_container_to_gate_section");
   common_scripts\utility::flag_set("aa_tarmac_bmp01_section");
   common_scripts\_exploder::exploder(500);
-  var_2 = getent("gate_explosives", "targetname");
+  var_2 = getEnt("gate_explosives", "targetname");
   thread common_scripts\utility::play_sound_in_space("h1_launch_a_c4_gate", var_2.origin);
   radiusdamage(var_2.origin, 256, 200, 50);
   earthquake(0.6, 1, var_2.origin, 2000);
@@ -958,7 +958,7 @@ gate_blowup() {
   maps\jake_tools::triggersenable("colornodes_tarmac_front", "script_noteworthy", 1);
   maps\jake_tools::triggersenable("colornodes_tarmac_rear", "script_noteworthy", 1);
   maps\jake_tools::triggersenable("colornodes_tarmac_always_on", "script_noteworthy", 1);
-  var_3 = getent("colornodes_tarmac_front_start", "targetname");
+  var_3 = getEnt("colornodes_tarmac_front_start", "targetname");
   var_3 notify("trigger", level.player);
   var_4 = getEntArray("triggers_bmp_tarmac", "script_noteworthy");
 
@@ -1001,10 +1001,10 @@ friendly_blows_gate() {
   level.peoplespeaking = 1;
   thread maps\jake_tools::dialogue_execute("launchfacility_a_marine1_gate_blow");
   soundscripts\_snd::snd_message("start_blow_the_gate_mix");
-  var_0 = getent("node_gate_destroy", "targetname");
+  var_0 = getEnt("node_gate_destroy", "targetname");
   var_1 = getnode(var_0.target, "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "C4_gate_plant_start");
-  var_2 = getent("gate_explosives", "targetname");
+  var_2 = getEnt("gate_explosives", "targetname");
   var_0 thread maps\_anim::anim_single_solo(self, "C4_gate_plant");
   self waittillmatch("single anim", "c4plant");
   self attach("weapon_c4", "TAG_INHAND");
@@ -1017,11 +1017,11 @@ friendly_blows_gate() {
   var_5.angles = var_4;
   thread maps\jake_tools::dialogue_execute("launchfacility_a_marine2_gate_getback");
   thread c4_detonation_beep();
-  maps\jake_tools::setgoalradius(var_1.radius);
+  maps\jake_tools::setgoalRadius(var_1.radius);
   self setgoalnode(var_1);
   self waittill("goal");
   wait 0.5;
-  maps\jake_tools::resetgoalradius();
+  maps\jake_tools::resetgoalRadius();
   maps\jake_tools::dialogue_execute("launchfacility_a_marine2_fireinhole");
   level.peoplespeaking = 0;
   common_scripts\utility::flag_set("blow_the_gate");
@@ -1036,7 +1036,7 @@ friendly_blows_gate() {
 gate_right_reach_trig_wait() {
   self endon("cancel");
   level endon("player_in_balcony");
-  var_0 = getent(self.script_linkto, "script_linkname");
+  var_0 = getEnt(self.script_linkto, "script_linkname");
   self waittill("trigger");
   level.ent = var_0;
   level notify("level_ent_updated");
@@ -1182,7 +1182,7 @@ vents_objectives() {
 blackhawk_arrive() {
   thread blackhawk_think();
   wait 1;
-  var_0 = getent("trigger_blackhawk", "script_noteworthy");
+  var_0 = getEnt("trigger_blackhawk", "script_noteworthy");
   var_0 notify("trigger", level.player);
   wait 7;
   level.peoplespeaking = 1;
@@ -1207,7 +1207,7 @@ blackhawk_think() {
   var_0 waittill("unloading");
   common_scripts\utility::flag_set("blackhawk_dudes_unloaded");
   wait 11;
-  var_2 = common_scripts\utility::getstruct("blackhawk_depart_path", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("blackhawk_depart_path", "script_noteworthy");
   var_0 maps\_utility::vehicle_detachfrompath();
   var_0 thread maps\_utility::vehicle_dynamicpath(var_2, 0);
 }
@@ -1229,7 +1229,7 @@ ai_friendly_reinforcements_think(var_0) {
 vents_friendly_movement() {
   disable_color_trigs();
   maps\jake_tools::triggersenable("colornodes_vents", "script_noteworthy", 1);
-  var_0 = getent("colornodes_vents", "script_noteworthy");
+  var_0 = getEnt("colornodes_vents", "script_noteworthy");
   var_0 notify("trigger", level.player);
   thread team02_rappel();
   thread team03_rappel();
@@ -1242,7 +1242,7 @@ vents_friendly_movement() {
 }
 
 vent_explode(var_0) {
-  var_1 = getent("exploder_sound_" + var_0, "targetname");
+  var_1 = getEnt("exploder_sound_" + var_0, "targetname");
   thread common_scripts\utility::play_sound_in_space("detpack_explo_metal", var_1.origin);
   common_scripts\_exploder::exploder(var_0);
 }
@@ -1256,7 +1256,7 @@ vent_sequence() {
   level.team01_sawguysfinished = 0;
   level.team01_sawguysinposition = 0;
   level.team01_ventopen = 0;
-  var_0 = getent("vent_team_01", "targetname");
+  var_0 = getEnt("vent_team_01", "targetname");
   var_1 = getEntArray("node_rappel_team_1", "targetname");
   var_2 = getEntArray("node_saw_team_1", "targetname");
   level.team01 = [];
@@ -1282,19 +1282,19 @@ vent_sequence() {
   level.team01[0].rappelnode = var_2[0];
   level.team01[1].rappelnode = var_2[1];
   level.team01[2].rappelnode = var_1[0];
-  var_6 = getent("vent_02", "targetname");
+  var_6 = getEnt("vent_02", "targetname");
   var_6 thread vent_drop();
   common_scripts\utility::array_thread(level.team01, ::friendly_vent_think, level.team01, "01", var_6, "01");
   level.team02_sawguysfinished = 0;
   level.team02_sawguysinposition = 0;
   level.team02_ventopen = 0;
-  var_7 = getent("vent_team_02", "targetname");
+  var_7 = getEnt("vent_team_02", "targetname");
   var_8 = getEntArray("node_rappel_team_2", "targetname");
   var_9 = getEntArray("node_saw_team_2", "targetname");
   level.team03_sawguysfinished = 0;
   level.team03_sawguysinposition = 0;
   level.team03_ventopen = 0;
-  var_10 = getent("vent_team_03", "targetname");
+  var_10 = getEnt("vent_team_03", "targetname");
   var_11 = getEntArray("node_rappel_team_3", "targetname");
   var_12 = getEntArray("node_saw_team_3", "targetname");
   level.team02 = maps\_utility::array_removedead(level.team02);
@@ -1305,13 +1305,13 @@ vent_sequence() {
   level.team03[2].rappelnode = var_9[0];
   level.team03[3].rappelnode = var_9[1];
   level.team02[2].rappelnode = var_8[0];
-  var_13 = getent("vent_03", "targetname");
+  var_13 = getEnt("vent_03", "targetname");
   var_13 thread vent_drop();
   level.team03[0].rappelnode = var_12[0];
   level.team03[1].rappelnode = var_12[1];
   level.team02[0].rappelnode = var_11[0];
   level.team02[1].rappelnode = var_11[1];
-  var_14 = getent("vent_01", "targetname");
+  var_14 = getEnt("vent_01", "targetname");
   var_14 thread vent_drop();
   level.team03[0] thread friendly_vent_think(level.team03, "03", var_14, "03");
   level.team03[1] thread friendly_vent_think(level.team03, "03", var_14, "03");
@@ -1326,7 +1326,7 @@ vent_sequence_preh1() {
   level.team01_sawguysfinished = 0;
   level.team01_sawguysinposition = 0;
   level.team01_ventopen = 0;
-  var_0 = getent("vent_team_01", "targetname");
+  var_0 = getEnt("vent_team_01", "targetname");
   var_1 = getEntArray("node_rappel_team_1", "targetname");
   var_2 = getEntArray("node_saw_team_1", "targetname");
   level.team01 = [];
@@ -1353,13 +1353,13 @@ vent_sequence_preh1() {
   level.team01[0].rappelnode = var_2[0];
   level.team01[1].rappelnode = var_2[1];
   level.team01[2].rappelnode = var_1[0];
-  var_6 = getent("vent_02", "targetname");
+  var_6 = getEnt("vent_02", "targetname");
   var_6 thread vent_drop();
   common_scripts\utility::array_thread(level.team01, ::friendly_vent_think_preh1, level.team01, "01", var_6);
   level.team02_sawguysfinished = 0;
   level.team02_sawguysinposition = 0;
   level.team02_ventopen = 0;
-  var_0 = getent("vent_team_02", "targetname");
+  var_0 = getEnt("vent_team_02", "targetname");
   var_7 = getEntArray("node_rappel_team_2", "targetname");
   var_8 = getEntArray("node_saw_team_2", "targetname");
   level.team02 = maps\_utility::array_removedead(level.team02);
@@ -1367,13 +1367,13 @@ vent_sequence_preh1() {
   level.team02[0].rappelnode = var_8[0];
   level.team02[1].rappelnode = var_8[1];
   level.team02[2].rappelnode = var_7[0];
-  var_6 = getent("vent_03", "targetname");
+  var_6 = getEnt("vent_03", "targetname");
   var_6 thread vent_drop();
   common_scripts\utility::array_thread(level.team02, ::friendly_vent_think_preh1, level.team02, "02", var_6);
   level.team03_sawguysfinished = 0;
   level.team03_sawguysinposition = 0;
   level.team03_ventopen = 0;
-  var_0 = getent("vent_team_03", "targetname");
+  var_0 = getEnt("vent_team_03", "targetname");
   var_9 = getEntArray("node_rappel_team_3", "targetname");
   var_10 = getEntArray("node_saw_team_3", "targetname");
   common_scripts\utility::flag_wait("blackhawk_dudes_unloaded");
@@ -1383,7 +1383,7 @@ vent_sequence_preh1() {
   level.team03[1].rappelnode = var_10[1];
   level.team03[2].rappelnode = var_9[0];
   level.team03[3].rappelnode = var_9[1];
-  var_6 = getent("vent_01", "targetname");
+  var_6 = getEnt("vent_01", "targetname");
   var_6 thread vent_drop();
   common_scripts\utility::array_thread(level.team03, ::friendly_vent_think_preh1, level.team03, "03", var_6);
 }
@@ -1449,7 +1449,7 @@ vent_drop() {
   var_1 = 2.5;
   var_2 = self.angles + (0, 0, 25);
   self movez(-1000, var_1, var_1 / 3);
-  self rotateto(var_2, 1, 0.2);
+  self rotateTo(var_2, 1, 0.2);
   wait(var_1);
   self hide();
 }
@@ -1927,15 +1927,15 @@ player_rappel() {
   var_1 = maps\_utility::spawn_anim_model("player_rope");
   var_1 hide();
   common_scripts\utility::flag_wait("obj_rappel_given");
-  var_2 = getent("obj_rappel", "targetname");
+  var_2 = getEnt("obj_rappel", "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("rope_coil");
   var_3.angles = var_2.angles;
   var_4 = spawn("script_model", var_2.origin);
   var_4 setModel("rope_coil_obj");
   var_4.angles = var_2.angles;
-  var_5 = getent("trig_rappel", "targetname");
-  var_5 sethintstring(&"SCRIPT_PLATFORM_HINTSTR_RAPPEL");
+  var_5 = getEnt("trig_rappel", "targetname");
+  var_5 setHintString(&"SCRIPT_PLATFORM_HINTSTR_RAPPEL");
   var_5 thread trigger_monitor_player_lean();
 
   for(;;) {
@@ -2024,8 +2024,8 @@ hind_sequence() {
 hind_rocket_sequence() {
   level endon("obj_rappel_complete");
   common_scripts\utility::flag_wait("hind_rocket_sequence");
-  var_0 = getent("rocket_target", "targetname");
-  var_1 = getent("rocket_damage", "targetname");
+  var_0 = getEnt("rocket_target", "targetname");
+  var_1 = getEnt("rocket_damage", "targetname");
   var_1 thread hind_tree_explosion();
   var_1 thread hind_tree_fx(var_0);
   level.hindattacker setlookatent(var_0);
@@ -2045,7 +2045,7 @@ hind_rocket_sequence() {
 
 hind_tree_explosion() {
   level endon("hind_missiles_fired");
-  var_0 = getent("rocket_target", "targetname");
+  var_0 = getEnt("rocket_target", "targetname");
 
   for(;;) {
     self waittill("damage", var_1, var_2);
@@ -2091,7 +2091,7 @@ hind_trees_fall() {
 }
 
 hind_tree_rotate(var_0, var_1) {
-  self rotateto(var_0, var_1, var_1 / 2, var_1 / 2);
+  self rotateTo(var_0, var_1, var_1 / 2, var_1 / 2);
 }
 
 hind_go_to_vent() {
@@ -2099,7 +2099,7 @@ hind_go_to_vent() {
     return;
   }
   common_scripts\utility::flag_wait("obj_rappel_complete");
-  var_0 = getent("hind_above_vent", "targetname");
+  var_0 = getEnt("hind_above_vent", "targetname");
   self clearlookatent();
   self vehicle_setspeed(200, 15, 15);
   self setvehgoalpos(var_0.origin, 1);
@@ -2110,7 +2110,7 @@ hind_attack_think(var_0, var_1) {
   var_2 = maps\_vehicle::spawn_vehicle_from_targetname(var_1);
   var_2 vehicle_turnengineoff();
   var_3 = spawn("script_origin", var_2.origin);
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_3 playLoopSound("launch_a_vent_hind_low_engine");
 
   if(isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "hind_rocket_attacker") {
@@ -2123,15 +2123,15 @@ hind_attack_think(var_0, var_1) {
     var_2 thread hind_go_to_vent();
   }
 
-  var_4 = getent(var_2.target, "targetname");
+  var_4 = getEnt(var_2.target, "targetname");
   var_2 vehicle_setspeed(120, 15, 15);
   var_2 setneargoalnotifydist(500);
-  var_5 = getent(var_4.target, "targetname");
+  var_5 = getEnt(var_4.target, "targetname");
   var_2 setvehgoalpos(var_5.origin, 0);
   var_2 waittill("near_goal");
   var_2 maps\_utility::vehicle_detachfrompath();
   var_2 thread hind_guns_think();
-  var_6 = getent(var_5.script_linkto, "script_linkname");
+  var_6 = getEnt(var_5.script_linkto, "script_linkname");
   var_2 setvehgoalpos(var_6.origin, 1);
   var_2 waittill("near_goal");
   var_3 stoploopsound("launch_a_vent_hind_low_engine");
@@ -2145,10 +2145,10 @@ hind_attack_think(var_0, var_1) {
 
     if(isDefined(var_5.script_linkto)) {
       var_8 = getsubstr(var_5.targetname, 7);
-      var_9 = getent("strafe_volume_" + var_8, "targetname");
+      var_9 = getEnt("strafe_volume_" + var_8, "targetname");
 
       if(level.player istouching(var_9)) {
-        var_5 = getent(var_5.script_linkto, "script_linkname");
+        var_5 = getEnt(var_5.script_linkto, "script_linkname");
         var_2 clearlookatent();
         var_2 vehicle_setspeed(200, 15, 15);
         var_7 = 1;
@@ -2156,7 +2156,7 @@ hind_attack_think(var_0, var_1) {
     }
 
     if(var_7 == 0) {
-      var_5 = getent(var_5.target, "targetname");
+      var_5 = getEnt(var_5.target, "targetname");
       var_2 setlookatent(level.player);
       var_2 vehicle_setspeed(30, 15, 15);
     }
@@ -2214,7 +2214,7 @@ vent_nag_cleanup() {
 friendly_breach_vent(var_0, var_1) {
   self endon("death");
   maps\_utility::disable_ai_color();
-  var_2 = getent("node_scripted_vent_" + var_0, "script_noteworthy");
+  var_2 = getEnt("node_scripted_vent_" + var_0, "script_noteworthy");
   var_2 maps\_anim::anim_reach_solo(self, "C4_plant_start");
   var_2 maps\_anim::anim_single_solo(self, "C4_plant");
   maps\_utility::enable_ai_color();
@@ -2316,13 +2316,13 @@ deleteweapons() {
 
 migs_flyby1() {
   common_scripts\utility::flag_wait("migs_flyby1");
-  var_0 = getent("trigger_migs_intro", "script_noteworthy");
+  var_0 = getEnt("trigger_migs_intro", "script_noteworthy");
   var_0 notify("trigger", level.player);
 }
 
 migs_flyby2() {
   common_scripts\utility::flag_wait("migs_flyby2");
-  var_0 = getent("trigger_migs_end", "script_noteworthy");
+  var_0 = getEnt("trigger_migs_end", "script_noteworthy");
   var_0 notify("trigger", level.player);
 }
 
@@ -2348,7 +2348,7 @@ rpg_ambient(var_0, var_1, var_2) {
 
 c4_plant_think() {
   var_0 = self.script_noteworthy;
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
   var_1 waittill("trigger");
   maps\_c4::c4_location(undefined, (0, 0, 0), (0, 0, 0), self.origin);
   self waittill("c4_detonation");
@@ -2397,38 +2397,38 @@ launch_flag_management(var_0) {
 launch_lid_think(var_0) {
   thread launch_flag_management(var_0);
   var_1 = "player_near_launchtube_" + var_0;
-  var_2 = getent("lid_arm_" + var_0, "targetname");
-  var_3 = getent("lid_" + var_0, "targetname");
-  var_4 = getent("lid_model_" + var_0, "targetname");
-  var_4 linkto(var_3);
-  var_5 = getent("lid_arm_model_" + var_0, "targetname");
-  var_5 linkto(var_2);
-  var_3.trigger = getent("trigger_hurt_player_lid_" + var_0, "targetname");
-  var_3.trigger enablelinkto();
-  var_6 = getent("lid_fx_" + var_0, "targetname");
+  var_2 = getEnt("lid_arm_" + var_0, "targetname");
+  var_3 = getEnt("lid_" + var_0, "targetname");
+  var_4 = getEnt("lid_model_" + var_0, "targetname");
+  var_4 linkTo(var_3);
+  var_5 = getEnt("lid_arm_model_" + var_0, "targetname");
+  var_5 linkTo(var_2);
+  var_3.trigger = getEnt("trigger_hurt_player_lid_" + var_0, "targetname");
+  var_3.trigger enablelinkTo();
+  var_6 = getEnt("lid_fx_" + var_0, "targetname");
   var_6.opening = 0;
-  var_7 = getent("lid_origin_" + var_0, "targetname");
+  var_7 = getEnt("lid_origin_" + var_0, "targetname");
   var_3.rotationdummy = spawn("script_origin", (0, 0, 0));
   var_3.rotationdummy.angles = var_7.angles;
   var_3.rotationdummy.origin = var_7.origin;
   var_2.rotationdummy = spawn("script_origin", (0, 0, 0));
   var_2.rotationdummy.angles = var_7.angles;
   var_2.rotationdummy.origin = var_7.origin;
-  var_3 linkto(var_3.rotationdummy);
-  var_2 linkto(var_2.rotationdummy);
-  var_3.trigger linkto(var_3.rotationdummy);
-  var_8 = getent("missile" + var_0, "targetname");
-  var_9 = getent("missile_model" + var_0, "targetname");
-  var_9 linkto(var_8);
-  var_10 = getent(var_8.target, "targetname");
+  var_3 linkTo(var_3.rotationdummy);
+  var_2 linkTo(var_2.rotationdummy);
+  var_3.trigger linkTo(var_3.rotationdummy);
+  var_8 = getEnt("missile" + var_0, "targetname");
+  var_9 = getEnt("missile_model" + var_0, "targetname");
+  var_9 linkTo(var_8);
+  var_10 = getEnt(var_8.target, "targetname");
   var_2.rotationdummy rotatepitch(125, 0.5);
-  var_2.rotationdummy moveto(var_2.rotationdummy.origin + (0, 0, -50), 0.5);
+  var_2.rotationdummy moveTo(var_2.rotationdummy.origin + (0, 0, -50), 0.5);
   common_scripts\utility::flag_wait(var_1);
   var_6 thread launch_lid_alarm();
   var_6 playSound(level.scr_sound["launch_tube_prepare"], "sounddone");
   playFX(level._effect["launchtube_steam"], var_6.origin);
   var_6 waittill("sounddone");
-  var_11 = getent("badplace_lid_" + var_0, "targetname");
+  var_11 = getEnt("badplace_lid_" + var_0, "targetname");
   badplace_brush("badplace_lid_volume" + var_0, 0, var_11, "allies", "axis");
   var_12 = 20;
   var_6.opening = 1;
@@ -2437,7 +2437,7 @@ launch_lid_think(var_0) {
   var_8 thread missile_move();
   var_3.rotationdummy rotatepitch(-125, var_12, 2, 2);
   var_2.rotationdummy rotatepitch(-125, var_12 / 1.5, 1, 1);
-  var_2.rotationdummy moveto(var_2.rotationdummy.origin + (0, 0, 50), var_12 / 2.5, 0, 2);
+  var_2.rotationdummy moveTo(var_2.rotationdummy.origin + (0, 0, 50), var_12 / 2.5, 0, 2);
   wait(var_12 - 1);
   var_6.opening = 0;
   var_6 notify("stopped_opening");
@@ -2460,7 +2460,7 @@ lid_kill(var_0, var_1) {
 }
 
 missile_move() {
-  self moveto(self.origin + (0, 0, 175), 18, 4, 4);
+  self moveTo(self.origin + (0, 0, 175), 18, 4, 4);
 }
 
 launch_lid_sound() {
@@ -2534,7 +2534,7 @@ c4_callback_thread_launchfacility() {
 obj_gain_access() {
   common_scripts\utility::flag_wait("obj_gain_access_given");
   var_0 = 1;
-  var_1 = getent("obj_gain_access", "targetname");
+  var_1 = getEnt("obj_gain_access", "targetname");
   objective_add(var_0, "active", &"LAUNCHFACILITY_A_OBJ_GAIN_ACCESS", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_gain_access_complete");
@@ -2589,7 +2589,7 @@ obj_enemy_armor_vehicle_position(var_0) {
 obj_north_tarmac() {
   common_scripts\utility::flag_wait("obj_north_tarmac_given");
   var_0 = 11;
-  var_1 = getent("obj_north_tarmac", "targetname");
+  var_1 = getEnt("obj_north_tarmac", "targetname");
   objective_add(var_0, "active", &"LAUNCHFACILITY_A_OBJ_NORTH_TARMAC", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_north_tarmac_complete");
@@ -2599,7 +2599,7 @@ obj_north_tarmac() {
 obj_rappel() {
   common_scripts\utility::flag_wait("obj_rappel_given");
   var_0 = 12;
-  var_1 = getent("obj_rappel", "targetname");
+  var_1 = getEnt("obj_rappel", "targetname");
   objective_add(var_0, "active", &"LAUNCHFACILITY_A_OBJ_RAPPEL", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_rappel_complete");
@@ -2691,7 +2691,7 @@ vehicle_bmp_think(var_0) {
     var_1 thread friendlies_blow_bmp02();
   }
 
-  var_2 = getent("badplace_" + var_0, "targetname");
+  var_2 = getEnt("badplace_" + var_0, "targetname");
 
   if(isDefined(var_2)) {
     badplace_brush(var_0, 0, var_2, "allies");
@@ -2819,7 +2819,7 @@ vehicle_smoke() {
 
   var_1 = spawn("script_origin", (0, 0, 0));
   var_1.origin = self gettagorigin("tag_origin");
-  var_1 linkto(self);
+  var_1 linkTo(self);
 
   while(isalive(self)) {
     playFX(common_scripts\utility::getfx("smoke_trail_bmp"), var_1.origin);
@@ -2976,8 +2976,8 @@ vehicle_c4_think() {
   maps\_c4::c4_location("tag_origin", var_3, var_4);
   self.rearc4location = spawn("script_origin", self.origin);
   self.frontc4location = spawn("script_origin", self.origin);
-  self.rearc4location linkto(self, "rear_hatch_open_jnt_left", var_1, var_2);
-  self.frontc4location linkto(self, "tag_origin", var_3, var_4);
+  self.rearc4location linkTo(self, "rear_hatch_open_jnt_left", var_1, var_2);
+  self.frontc4location linkTo(self, "tag_origin", var_3, var_4);
 
   if(getDvar("debug_launch") == "1") {
     self.frontc4location thread maps\jake_tools::print3dthread("Front");
@@ -3002,7 +3002,7 @@ vehicle_death(var_0) {
   setplayerignoreradiusdamage(1);
 
   if(distancesquared(self.origin, level.player.origin) <= level.bmpmgrangesquared) {
-    level.player playrumbleonentity("generic_attack_heavy_750");
+    level.player playRumbleOnEntity("generic_attack_heavy_750");
   }
 
   earthquake(0.6, 2, self.origin, 2000);
@@ -3031,7 +3031,7 @@ vehicle_enemies_setup() {
   if(!isDefined(self.script_linkto)) {
     return;
   }
-  var_0 = getent(self.script_linkto, "script_linkname");
+  var_0 = getEnt(self.script_linkto, "script_linkname");
   var_0 notify("trigger", level.player);
   var_1 = getEntArray(var_0.script_linkto, "script_linkname");
   common_scripts\utility::array_thread(var_1, ::vehicle_ai_killspawner_triggers_think, self);
@@ -3046,7 +3046,7 @@ vehicle_ai_killspawner_triggers_think(var_0) {
 
 vehicle_ai_movement_triggers_think(var_0) {
   var_0 endon("death");
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
 
   for(;;) {
     self waittill("trigger", var_2);
@@ -3063,7 +3063,7 @@ vehicle_ai_movement_triggers_think(var_0) {
 
 ai_vehicle_support() {
   self endon("death");
-  var_0 = getent(self.script_linkto, "script_linkname");
+  var_0 = getEnt(self.script_linkto, "script_linkname");
   var_1 = getsubstr(var_0.script_noteworthy, 7);
   var_2 = maps\_vehicle::get_vehicle_from_targetname(var_1);
   thread ai_vehicle_support_vehicle_dead(var_2);
@@ -3105,13 +3105,13 @@ vehicle_patrol_think() {
 
   switch (self.vehicle_spawner.targetname) {
     case "bmp_02":
-      self.balconypositionorg = getent("bmp_02_balcony_org", "targetname");
+      self.balconypositionorg = getEnt("bmp_02_balcony_org", "targetname");
       break;
     case "bmp_03":
-      self.balconypositionorg = getent("bmp_03_balcony_org", "targetname");
+      self.balconypositionorg = getEnt("bmp_03_balcony_org", "targetname");
       break;
     case "bmp_04":
-      self.balconypositionorg = getent("bmp_04_balcony_org", "targetname");
+      self.balconypositionorg = getEnt("bmp_04_balcony_org", "targetname");
       break;
     default:
   }
@@ -3563,7 +3563,7 @@ initfriendlies(var_0) {
     }
   }
 
-  level.player setorigin(var_5.origin);
+  level.player setOrigin(var_5.origin);
   level.player setplayerangles(var_5.angles);
   level.excludedai[0] = level.price;
   level.excludedai[1] = level.grigsby;
@@ -3580,7 +3580,7 @@ attach_saw(var_0) {
     if(self gettagindex("TAG_STOWED_BACK") >= 0) {
       var_1 = spawn("script_model", self.origin);
       var_1 setModel("weapon_saw_rescue");
-      var_1 linkto(self, "TAG_STOWED_BACK", (0, 3, 0), (180, 191, 0));
+      var_1 linkTo(self, "TAG_STOWED_BACK", (0, 3, 0), (180, 191, 0));
       self waittill("delete_saw");
       var_1 unlink();
       var_1 delete();
@@ -3626,7 +3626,7 @@ initprecache() {
 }
 
 vehicle_path_disconnector() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 notsolid();
   var_0.origin = var_0.origin - (0, 0, 1024);
 
@@ -3635,7 +3635,7 @@ vehicle_path_disconnector() {
 
     if(!isDefined(var_0.pathsdisconnected)) {
       var_0 solid();
-      var_0 disconnectpaths();
+      var_0 disconnectPaths();
       var_0 notsolid();
       var_0.pathsdisconnected = 1;
     }

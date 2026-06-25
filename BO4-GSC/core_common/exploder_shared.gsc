@@ -151,7 +151,7 @@ __main__() {
     }
 
     if(isDefined(exploder.target)) {
-      e_target = getent(ent.v[#"target"], "targetname");
+      e_target = getEnt(ent.v[#"target"], "targetname");
 
       if(!isDefined(e_target)) {
         e_target = struct::get(ent.v[#"target"], "targetname");
@@ -319,7 +319,7 @@ trail_effect() {
     temp_ent = spawn("script_model", self.model.origin);
     temp_ent.targetname = "exploder_fx";
     temp_ent setModel(#"tag_origin");
-    temp_ent linkto(self.model, self.v[#"trailfxtag"]);
+    temp_ent linkTo(self.model, self.v[#"trailfxtag"]);
     playFXOnTag(level._effect[self.v[#"trailfx"]], temp_ent, "tag_origin");
   }
 
@@ -422,7 +422,7 @@ brush_throw() {
   ent = undefined;
 
   if(isDefined(self.v[#"target"])) {
-    ent = getent(self.v[#"target"], "targetname");
+    ent = getEnt(self.v[#"target"], "targetname");
   }
 
   if(!isDefined(ent)) {
@@ -666,7 +666,7 @@ earthquake() {
 
 rumble() {
   self exploder_delay();
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(isDefined(self.v[#"damage_radius"])) {
     n_rumble_threshold_squared = self.v[#"damage_radius"] * self.v[#"damage_radius"];
@@ -679,7 +679,7 @@ rumble() {
     n_player_dist_squared = distancesquared(a_players[i].origin, self.v[#"origin"]);
 
     if(n_player_dist_squared < n_rumble_threshold_squared) {
-      a_players[i] playrumbleonentity(self.v[#"rumble"]);
+      a_players[i] playRumbleOnEntity(self.v[#"rumble"]);
     }
   }
 }

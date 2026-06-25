@@ -84,7 +84,7 @@ main() {
   thread glasstest();
   array_thread(getEntArray("traffic_light_blinky", "targetname"), ::traffic_light_blinky);
 
-  light = GetEnt("tree_fire_light", "targetname");
+  light = getEnt("tree_fire_light", "targetname");
   if(isDefined(light)) {
     light SetLightIntensity(0);
   }
@@ -175,7 +175,7 @@ super_nates_exploder() {
 }
 
 delete_glass() {
-  GetEnt(self.target, "targetname") Delete();
+  getEnt(self.target, "targetname") Delete();
   self Delete();
 }
 
@@ -191,7 +191,7 @@ traffic_light_blinky() {
 }
 
 tree_fire_light() {
-  light = GetEnt("tree_fire_light", "targetname");
+  light = getEnt("tree_fire_light", "targetname");
   if(!isDefined(light)) {
     return;
   }
@@ -223,7 +223,7 @@ tree_fire_light() {
     z = (random_z * (randomfloatrange(.3, .7)));
 
     new_position = original_origin + (x, y, z);
-    light moveto(new_position, delay);
+    light moveTo(new_position, delay);
     wait delay;
   }
   light SetLightIntensity(0);

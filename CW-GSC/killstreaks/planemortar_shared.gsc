@@ -271,7 +271,7 @@ function private function_ac3ad2f8(ents) {
   killcament util::deleteaftertime(scenelength * 2);
   killcament.starttime = gettime();
   killcament.angles = angles;
-  killcament linkto(var_5496c504, "tag_killcam");
+  killcament linkTo(var_5496c504, "tag_killcam");
   killcament setweapon(weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
   killcament thread function_6ffdbd95(var_5496c504);
@@ -304,7 +304,7 @@ function function_77ed0e9b(var_5496c504, fxanim) {
     println("<dev string:x6f>" + self.origin);
     offset = var_5496c504.origin - self.origin;
     println("<dev string:x84>" + offset);
-    var_2c942dba = vectornormalize(offset);
+    var_2c942dba = vectorNormalize(offset);
     println("<dev string:x99>" + var_2c942dba);
     println("<dev string:xb5>" + vectortoangles(var_2c942dba));
     println("<dev string:xd1>" + self.angles);
@@ -360,11 +360,11 @@ function function_4ef32baf(position, yaw, team) {
   plane.killcament util::deleteaftertime(2 * 3);
   plane.killcament.angles = (15, yaw, 0);
   plane.killcament.starttime = gettime();
-  plane.killcament linkto(plane);
+  plane.killcament linkTo(plane);
   start = (position[0], position[1], plane.origin[2]);
-  playsoundatposition(#"hash_5a17b7541482a04f", plane.origin);
+  playSoundAtPosition(#"hash_5a17b7541482a04f", plane.origin);
   impact = bulletTrace(start, start + (0, 0, -100000), 1, plane);
-  plane moveto(endpoint, 2 * 5 / 4, 0, 0);
+  plane moveTo(endpoint, 2 * 5 / 4, 0, 0);
   plane.killcament thread followbomb(plane, position, direction, impact, player);
   wait 2 / 2;
 
@@ -380,12 +380,12 @@ function followbomb(plane, position, direction, impact, player) {
   player endon(#"emp_jammed");
   wait 2 * 5 / 12;
   position.killcament unlink();
-  position.killcament moveto(impact[#"position"] + (0, 0, 1000) + vectorscale(direction, -600), 0.8, 0, 0.2);
+  position.killcament moveTo(impact[#"position"] + (0, 0, 1000) + vectorscale(direction, -600), 0.8, 0, 0.2);
 }
 
 function lookatexplosion(bomb) {
   while(isDefined(self) && isDefined(bomb)) {
-    angles = vectortoangles(vectornormalize(bomb.origin - self.origin));
+    angles = vectortoangles(vectorNormalize(bomb.origin - self.origin));
     self.angles = (max(angles[0], 15), angles[1], angles[2]);
     waitframe(1);
   }
@@ -412,7 +412,7 @@ function dropbomb(plane, bombposition) {
   }
 
   z = bombposition[2];
-  targets = getplayers();
+  targets = getPlayers();
 
   foreach(target in targets) {
     if(plane.owner util::isenemyplayer(target) && distance2dsquared(target.origin, bombposition) < 250000) {

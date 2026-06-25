@@ -16,7 +16,7 @@ init_ghost_n_skull_4_quest() {
 }
 
 init_cipher_clue_texture() {
-  var_0 = getent("cipher_word_hint", "script_noteworthy");
+  var_0 = getEnt("cipher_word_hint", "script_noteworthy");
   level.cipher_hint = var_0;
   setomnvar("zm_ui_skull_top_ent", level.cipher_hint);
 }
@@ -661,7 +661,7 @@ complete_weeping_angels_start() {
 debug_weeping_angels_start() {}
 
 shoot_the_machine() {
-  level.skulltop_machine = getent("skullhop_machine", "targetname");
+  level.skulltop_machine = getEnt("skullhop_machine", "targetname");
   level.skulltop_machine setCanDamage(1);
   level.skulltop_machine.health = 5;
   level.skulltop_machine.maxhealth = 5;
@@ -825,8 +825,8 @@ cp_town_gns_4_setup() {
   level.grab_same_ghost_string = &"CP_TOWN_GNS_TRACK_SAME_CUBE";
   level.all_perk_list = ["perk_machine_boom", "perk_machine_flash", "perk_machine_fwoosh", "perk_machine_more", "perk_machine_rat_a_tat", "perk_machine_revive", "perk_machine_run", "perk_machine_deadeye", "perk_machine_tough", "perk_machine_change", "perk_machine_zap", "perk_machine_smack"];
   level.placed_crafted_traps = [];
-  level.pool_placement_volume = getent("pool_extraction_volume", "targetname");
-  level.radiation_collection_volume = getent("radiation_extraction_volume", "targetname");
+  level.pool_placement_volume = getEnt("pool_extraction_volume", "targetname");
+  level.radiation_collection_volume = getEnt("radiation_extraction_volume", "targetname");
   init_skulls_to_shoot();
   register_ghost_form();
   register_waves_movement();
@@ -930,19 +930,19 @@ entangled_cube_color_manager(var_0) {
 set_up_platform_and_trigger() {
   var_0 = ["blue", "green", "yellow", "red"];
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2 + "_platform", "targetname");
-    var_4 = getent(var_2 + "_platform_trigger", "targetname");
+    var_3 = getEnt(var_2 + "_platform", "targetname");
+    var_4 = getEnt(var_2 + "_platform_trigger", "targetname");
     var_3.var_C725 = var_3.origin;
     var_4.var_C725 = var_4.origin;
-    var_4 enablelinkto();
-    var_4 linkto(var_3);
+    var_4 enablelinkTo();
+    var_4 linkTo(var_3);
   }
 }
 
 get_platform_trigger_color(var_0) {
   var_1 = ["blue", "green", "yellow", "red"];
   foreach(var_3 in var_1) {
-    var_4 = getent(var_3 + "_platform_trigger", "targetname");
+    var_4 = getEnt(var_3 + "_platform_trigger", "targetname");
     if(var_0 istouching(var_4)) {
       return var_3;
     }
@@ -1546,10 +1546,10 @@ move_model_after_tick(var_0) {
     var_1 = level.radiation_extraction_interaction.origin;
     self.angles = level.radiation_extraction_interaction.angles;
     self setModel("cp_town_radiation_extractor_top");
-    self moveto(var_1, 1);
+    self moveTo(var_1, 1);
   } else {
     var_1 = self.origin + (0, 0, var_1 * 0.666);
-    self moveto(var_1, 0.5);
+    self moveTo(var_1, 0.5);
   }
 
   scripts\engine\utility::play_sound_in_space("town_radiation_extractor_tick_up", self.origin + (0, 0, 5));
@@ -1668,7 +1668,7 @@ init_paintings_interaction() {
   }
 
   foreach(var_4, var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
+    var_3 = getEnt(var_2.target, "targetname");
     var_2.model = var_3;
     level.paintings_struct[var_4] = var_2;
   }
@@ -1735,7 +1735,7 @@ init_skulls_to_shoot() {
 
     var_5 = scripts\engine\utility::random(var_1);
     var_1 = scripts\engine\utility::array_remove(var_1, var_5);
-    var_6 = scripts\engine\utility::getstruct(var_5, "targetname");
+    var_6 = scripts\engine\utility::getStruct(var_5, "targetname");
     var_2++;
     var_7 = undefined;
     switch (var_5) {
@@ -1970,12 +1970,12 @@ restore_vision_set() {
 }
 
 activate_death_floor() {
-  var_0 = getent("skull_hop_death_floor", "targetname");
+  var_0 = getEnt("skull_hop_death_floor", "targetname");
   var_0 thread death_floor_player_monitor(var_0);
 }
 
 deactivate_death_floor() {
-  var_0 = getent("skull_hop_death_floor", "targetname");
+  var_0 = getEnt("skull_hop_death_floor", "targetname");
   var_0 notify("stop_death_floor");
 }
 
@@ -2021,8 +2021,8 @@ deactivate_platforms() {
   level notify("stop_GnS_platforms");
   var_0 = ["blue", "red", "green", "yellow"];
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2 + "_platform", "targetname");
-    var_4 = getent(var_2 + "_platform_trigger", "targetname");
+    var_3 = getEnt(var_2 + "_platform", "targetname");
+    var_4 = getEnt(var_2 + "_platform_trigger", "targetname");
     var_3.origin = var_3.var_C725;
     var_4.origin = var_4.var_C725;
   }
@@ -2034,32 +2034,32 @@ activate_platform_color(var_0, var_1) {
   var_2 = 48;
   var_3 = 32;
   var_4 = 64;
-  var_5 = getent(var_0 + "_platform", "targetname");
-  var_6 = getent(var_0 + "_platform_trigger", "targetname");
+  var_5 = getEnt(var_0 + "_platform", "targetname");
+  var_6 = getEnt(var_0 + "_platform_trigger", "targetname");
   var_5.origin = var_5.var_C725;
   var_6.origin = var_6.var_C725;
   var_7 = var_4 * scripts\engine\utility::ter_op(randomintrange(0, 100) > 5, 1, -1);
   var_8 = randomfloatrange(var_3, var_2);
   var_9 = var_4 / var_8;
   if(var_1 == "up_down") {
-    var_5 moveto(var_5.origin + (0, 0, var_7), var_9);
+    var_5 moveTo(var_5.origin + (0, 0, var_7), var_9);
     var_5 waittill("movedone");
     for(;;) {
-      var_5 moveto(var_5.origin + (0, 0, var_7 * -2), var_9);
+      var_5 moveTo(var_5.origin + (0, 0, var_7 * -2), var_9);
       var_5 waittill("movedone");
-      var_5 moveto(var_5.origin + (0, 0, var_7 * 2), var_9);
+      var_5 moveTo(var_5.origin + (0, 0, var_7 * 2), var_9);
       var_5 waittill("movedone");
     }
 
     return;
   }
 
-  var_5 moveto(var_5.origin + (0, var_7, 0), var_9);
+  var_5 moveTo(var_5.origin + (0, var_7, 0), var_9);
   var_5 waittill("movedone");
   for(;;) {
-    var_5 moveto(var_5.origin + (0, var_7 * -2, 0), var_9);
+    var_5 moveTo(var_5.origin + (0, var_7 * -2, 0), var_9);
     var_5 waittill("movedone");
-    var_5 moveto(var_5.origin + (0, var_7 * 2, 0), var_9);
+    var_5 moveTo(var_5.origin + (0, var_7 * 2, 0), var_9);
     var_5 waittill("movedone");
   }
 }
@@ -2500,8 +2500,8 @@ func_B543(var_0, var_1) {
 }
 
 func_B541(var_0, var_1) {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.rad_extractor_settings["crafted_rad_extractor"].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.rad_extractor_settings["crafted_rad_extractor"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);

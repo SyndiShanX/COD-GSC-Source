@@ -447,7 +447,7 @@ function zombie_goto_entrance(node, endon_bad_path) {
   barrier_pos[2] = "l";
   self.barricade_enter = 1;
   animstate = zombie_utility::append_missing_legs_suffix("zm_barricade_enter");
-  self animscripted("barricade_enter_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_barricade_enter_m_v1");
+  self animScripted("barricade_enter_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_barricade_enter_m_v1");
   zombie_shared::donotetracks("barricade_enter_anim");
   self zombie_setup_attack_properties();
   self zombie_complete_emerging_into_playable_area();
@@ -595,14 +595,14 @@ function tear_into_building() {
       self.first_node thread check_zbarrier_piece_for_zombie_inert(self.chunk, self.first_node.zbarrier, self);
       self.first_node thread check_zbarrier_piece_for_zombie_death(self.chunk, self.first_node.zbarrier, self);
       self notify("bhtn_action_notify", "teardown");
-      self animscripted("tear_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_boardtear_aligned_m_1_grab");
+      self animScripted("tear_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_boardtear_aligned_m_1_grab");
       self zombie_tear_notetracks("tear_anim", self.chunk, self.first_node);
       while(0 < self.first_node.zbarrier.chunk_health[self.chunk]) {
-        self animscripted("tear_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_boardtear_aligned_m_1_hold");
+        self animScripted("tear_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_boardtear_aligned_m_1_hold");
         self zombie_tear_notetracks("tear_anim", self.chunk, self.first_node);
         self.first_node.zbarrier.chunk_health[self.chunk]--;
       }
-      self animscripted("tear_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_boardtear_aligned_m_1_pull");
+      self animScripted("tear_anim", self.first_node.zbarrier.origin, self.first_node.zbarrier.angles, "ai_zombie_boardtear_aligned_m_1_pull");
       self waittill("hash_cc2ddc9");
       self.lastchunk_destroy_time = gettime();
       attack = self should_attack_player_thru_boards();
@@ -640,7 +640,7 @@ function do_a_taunt() {
     if(isDefined(self.first_node.zbarrier) && self.first_node.zbarrier getzbarriertauntanimstate() != "") {
       tauntstate = self.first_node.zbarrier getzbarriertauntanimstate();
     }
-    self animscripted("taunt_anim", self.origin, self.angles, "ai_zombie_taunts_4");
+    self animScripted("taunt_anim", self.origin, self.angles, "ai_zombie_taunts_4");
     self taunt_notetracks("taunt_anim");
   }
 }
@@ -669,7 +669,7 @@ function should_attack_player_thru_boards() {
     setDvar("zombie_reachin_freq", "50");
   }
   freq = getdvarint("zombie_reachin_freq");
-  players = getplayers();
+  players = getPlayers();
   attack = 0;
   self.player_targets = [];
   for(i = 0; i < players.size; i++) {
@@ -687,7 +687,7 @@ function should_attack_player_thru_boards() {
     attackanimstate = self.first_node.zbarrier getzbarrierreachthroughattackanimstate();
   }
   self notify("bhtn_action_notify", "attack");
-  self animscripted("window_melee_anim", self.origin, self.angles, "ai_zombie_window_attack_arm_l_out");
+  self animScripted("window_melee_anim", self.origin, self.angles, "ai_zombie_window_attack_arm_l_out");
   self window_notetracks("window_melee_anim");
   return true;
 }
@@ -1139,7 +1139,7 @@ function zombie_ragdoll_then_explode(launchvector, attacker) {
   self.a.nodeath = 1;
   self.dont_throw_gib = 1;
   self startragdoll();
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self zombie_utility::reset_attack_spot();
   if(isDefined(launchvector)) {
     self launchragdoll(launchvector);
@@ -1654,7 +1654,7 @@ function zombie_pathing() {
     return;
   }
   self.favoriteenemy endon("disconnect");
-  players = getplayers();
+  players = getPlayers();
   valid_player_num = 0;
   for(i = 0; i < players.size; i++) {
     if(zm_utility::is_player_valid(players[i], 1)) {
@@ -1872,14 +1872,14 @@ function do_zombie_spawn() {
     spots = level.zm_loc_types["zombie_location"];
   }
   if(getdvarint("scr_zombie_spawn_in_view")) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     spots = [];
     max_dot = 0;
     look_loc = undefined;
     foreach(loc in level.zm_loc_types["zombie_location"]) {
-      player_vec = vectornormalize(anglesToForward(player getplayerangles()));
+      player_vec = vectorNormalize(anglesToForward(player getplayerangles()));
       player_vec_2d = (player_vec[0], player_vec[1], 0);
-      player_spawn = vectornormalize(loc.origin - player.origin);
+      player_spawn = vectorNormalize(loc.origin - player.origin);
       player_spawn_2d = (player_spawn[0], player_spawn[1], 0);
       dot = vectordot(player_vec_2d, player_spawn_2d);
       dist = distance(loc.origin, player.origin);
@@ -1938,7 +1938,7 @@ function do_zombie_rise(spot) {
   }
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
@@ -1946,12 +1946,12 @@ function do_zombie_rise(spot) {
   anim_ang = spot.angles;
   anim_org = anim_org + (0, 0, 0);
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill("movedone");
   target_org = zombie_utility::get_desired_origin();
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
   self unlink();
@@ -1973,12 +1973,12 @@ function do_zombie_rise(spot) {
   }
   self orientmode("face default");
   if(isDefined(level.custom_riseanim)) {
-    self animscripted("rise_anim", self.origin, spot.angles, level.custom_riseanim);
+    self animScripted("rise_anim", self.origin, spot.angles, level.custom_riseanim);
   } else {
     if(isDefined(level.custom_rise_func)) {
       self[[level.custom_rise_func]](spot);
     } else {
-      self animscripted("rise_anim", self.origin, spot.angles, "ai_zombie_traverse_ground_climbout_fast");
+      self animScripted("rise_anim", self.origin, spot.angles, "ai_zombie_traverse_ground_climbout_fast");
     }
   }
   self zombie_shared::donotetracks("rise_anim", &zombie_utility::handle_rise_notetracks, spot);

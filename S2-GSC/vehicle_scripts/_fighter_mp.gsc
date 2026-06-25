@@ -56,9 +56,9 @@ fighterinitmg(param_00) {
     var_08.var_001D = var_06;
     var_08 method_808C();
     if(isDefined(var_03.var_6A1B)) {
-      var_08 linkto(self, var_03.var_95A6, var_03.var_6A1B, (0, -1 * var_01, 0));
+      var_08 linkTo(self, var_03.var_95A6, var_03.var_6A1B, (0, -1 * var_01, 0));
     } else {
-      var_08 linkto(self, var_03.var_95A6, (0, 0, 0), (0, -1 * var_01, 0));
+      var_08 linkTo(self, var_03.var_95A6, (0, 0, 0), (0, -1 * var_01, 0));
     }
 
     var_08 setModel(var_03.var_0106);
@@ -202,7 +202,7 @@ func_6DB8() {
       var_0B.var_3F2F = var_02;
       var_0B.var_0116 = var_08;
       var_0B.var_001D = self gettagangles(self.var_9BDD);
-      var_0B linkto(self, self.var_9BDD);
+      var_0B linkTo(self, self.var_9BDD);
       self.var_29B1[self.var_29B1.size] = var_0B;
       playFXOnTag(var_0B.var_3F2F, var_0B, "tag_origin");
       if(var_03 > 0) {

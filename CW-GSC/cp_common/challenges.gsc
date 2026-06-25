@@ -57,7 +57,7 @@ function function_b7b0cce0(data, time) {
 function function_f5b31539(data, time) {}
 
 function function_6219dcd5(data, time) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(is_true(time.var_2a0adc57)) {
     player thread function_fc664fc6(#"hash_36bacb4a6c637824", 2);
@@ -305,7 +305,7 @@ function private function_65b0a754() {
     namespace_61e6d095::function_9ade1d9b(#"hash_166066a38ca1f36d", "text", hash(var_21e736f9));
     namespace_61e6d095::function_9ade1d9b(#"hash_166066a38ca1f36d", "desc", hash(challengedesc));
     namespace_61e6d095::function_9ade1d9b(#"hash_166066a38ca1f36d", "count", challengexp);
-    player = getplayers()[0];
+    player = getPlayers()[0];
     player playSound(#"hash_9422601830d30a9");
     wait 6;
     namespace_61e6d095::remove(#"hash_166066a38ca1f36d");

@@ -145,7 +145,7 @@ func_FCAA(var_0) {
   var_0 scripts\mp\powers::func_D729();
   func_FCB8(var_0);
   var_1 = var_0 scripts\engine\utility::spawn_tag_origin();
-  var_0 playerlinkto(var_1, "tag_origin", 0, 32, 32);
+  var_0 playerlinkTo(var_1, "tag_origin", 0, 32, 32);
   thread func_FCAB(var_0, var_1);
   wait(0.5);
   var_0.var_FCBA = undefined;

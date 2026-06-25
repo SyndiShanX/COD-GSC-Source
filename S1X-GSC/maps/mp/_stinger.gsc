@@ -74,7 +74,7 @@ LoopStingerLockingFeedback() {
     }
 
     self playLocalSound("stinger_locking");
-    self PlayRumbleOnEntity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
 
     wait 0.6;
   }
@@ -94,7 +94,7 @@ LoopStingerLockedFeedback() {
     }
 
     self playLocalSound("stinger_locked");
-    self PlayRumbleOnEntity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
 
     wait 0.25;
   }

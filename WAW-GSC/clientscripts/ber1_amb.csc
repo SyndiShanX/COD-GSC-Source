@@ -106,11 +106,11 @@ main() {
 
 train_ride() {
   level waittill("train_ride");
-  rleft = getstruct("train_rear_left", "targetname");
-  rright = getstruct("train_rear_right", "targetname");
-  fleft = getstruct("train_front_left", "targetname");
-  fright = getstruct("train_front_right", "targetname");
-  fcenter = getstruct("train_front_center", "targetname");
+  rleft = getStruct("train_rear_left", "targetname");
+  rright = getStruct("train_rear_right", "targetname");
+  fleft = getStruct("train_front_left", "targetname");
+  fright = getStruct("train_front_right", "targetname");
+  fcenter = getStruct("train_front_center", "targetname");
 
   playSound(0, "train_rear_left", rleft.origin);
   playSound(0, "train_rear_right", rright.origin);
@@ -124,21 +124,21 @@ train_quake() {
 }
 elec_loop() {
   level waittill("elec_loop");
-  loop1 = getstruct("elec_loop1", "targetname");
-  loop2 = getstruct("elec_loop2", "targetname");
+  loop1 = getStruct("elec_loop1", "targetname");
+  loop2 = getStruct("elec_loop2", "targetname");
   clientscripts\_audio::playloopat(0, "elec_loop", loop1.origin, 0);
   clientscripts\_audio::playloopat(0, "elec_loop2", loop2.origin, 0);
 }
 house_collapse() {
   level waittill("house1_collapse");
-  roof = getstruct("introhouse_fx", "targetname");
+  roof = getStruct("introhouse_fx", "targetname");
 
   playSound(0, "building_collapse2", roof.origin);
 }
 fake_battle() {
   level waittill("train_ride");
-  ber1_fake_battle1 = getstruct("fake_battle1", "targetname");
-  ber1_fake_battle2 = getstruct("fake_battle2", "targetname");
+  ber1_fake_battle1 = getStruct("fake_battle1", "targetname");
+  ber1_fake_battle2 = getStruct("fake_battle2", "targetname");
   e1 = clientscripts\_audio::playloopat(0, "fake_battle1", ber1_fake_battle1.origin);
   e2 = clientscripts\_audio::playloopat(0, "fake_battle2", ber1_fake_battle2.origin);
   level waittill("fake_battle_done");
@@ -147,7 +147,7 @@ fake_battle() {
 }
 tank_wall_sound() {
   level waittill("tank_wall_sound");
-  wall = getstruct("tank_wall_sound", "targetname");
+  wall = getStruct("tank_wall_sound", "targetname");
 
   playSound(0, "grenade_explode", wall.origin);
   playSound(0, "grenade_explode_brick", wall.origin);

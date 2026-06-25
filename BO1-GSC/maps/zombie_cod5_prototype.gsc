@@ -97,9 +97,9 @@ register_offhand_weapons_for_level_defaults_override() {
 setup_weapon_cabinet() {
   weapon_cabs = getEntArray("weapon_cabinet_use", "targetname");
   for(i = 0; i < weapon_cabs.size; i++) {
-    weapon_cabs[i] SetHintString(&"ZOMBIE_CABINET_OPEN_1500");
+    weapon_cabs[i] setHintString(&"ZOMBIE_CABINET_OPEN_1500");
     weapon_cabs[i] setCursorHint("HINT_NOICON");
-    weapon_cabs[i] UseTriggerRequireLookAt();
+    weapon_cabs[i] useTriggerRequireLookAt();
   }
   array_thread(weapon_cabs, ::weapon_cabinet_think);
 }
@@ -155,7 +155,7 @@ weapon_cabinet_think() {
     } else if(player.score >= cost) {
       self.has_been_used_once = true;
       self play_sound_on_ent("purchase");
-      self SetHintString(&"WAW_ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
+      self setHintString(&"WAW_ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
       self setCursorHint("HINT_NOICON");
       player maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
       doors = getEntArray(self.target, "targetname");
@@ -185,9 +185,9 @@ weapon_cabinet_think() {
 }
 weapon_cabinet_door_open(left_or_right) {
   if(left_or_right == "left") {
-    self rotateyaw(120, 0.3, 0.2, 0.1);
+    self rotateYaw(120, 0.3, 0.2, 0.1);
   } else if(left_or_right == "right") {
-    self rotateyaw(-120, 0.3, 0.2, 0.1);
+    self rotateYaw(-120, 0.3, 0.2, 0.1);
   }
 }
 bad_area_fixes() {
@@ -209,23 +209,23 @@ fix_hax() {
   while(1) {
     wait(.5);
     if(distance2d(self.origin, (101, -100, 40)) < check) {
-      self setorigin((101, -90, self.origin[2]));
+      self setOrigin((101, -90, self.origin[2]));
     } else if(distance2d(self.origin, (816, 645, 12)) < check) {
-      self setorigin((816, 666, self.origin[2]));
+      self setOrigin((816, 666, self.origin[2]));
     } else if(distance2d(self.origin, (376, 643, 184)) < check) {
-      self setorigin((376, 665, self.origin[2]));
+      self setOrigin((376, 665, self.origin[2]));
     } else if(distance2d(self.origin, (519, 765, 155)) < check1) {
-      self setorigin((516, 793, self.origin[2]));
+      self setOrigin((516, 793, self.origin[2]));
     } else if(distance2d(self.origin, (315, 346, 79)) < check1) {
-      self setorigin((317, 360, self.origin[2]));
+      self setOrigin((317, 360, self.origin[2]));
     } else if(distance2d(self.origin, (199, 133, 18)) < check) {
-      self setorigin((172, 123, self.origin[2]));
+      self setOrigin((172, 123, self.origin[2]));
     } else if(distance2d(self.origin, (142, -100, 91)) < check1) {
-      self setorigin((139, -87, self.origin[2]));
+      self setOrigin((139, -87, self.origin[2]));
     } else if(distance2d(self.origin, (192, 369, 185)) < check1) {
-      self setorigin((195, 400, self.origin[2]));
+      self setOrigin((195, 400, self.origin[2]));
     } else if(distance2d(self.origin, (-210, 641, 247)) < check) {
-      self setorigin((-173, 677, self.origin[2]));
+      self setOrigin((-173, 677, self.origin[2]));
     }
   }
 }
@@ -236,7 +236,7 @@ fix_couch_stuckspot() {
   while(1) {
     wait(.5);
     if(distance2d(self.origin, (181, 161, 206)) < 10) {
-      self setorigin((175, 175, self.origin[2]));
+      self setOrigin((175, 175, self.origin[2]));
     }
   }
 }
@@ -426,7 +426,7 @@ out_of_bounds_watcher() {
 }
 check_solo_game() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 1) {
     flag_set("solo_game");
     level.solo_lives_given = 0;
@@ -470,7 +470,7 @@ time_to_play() {
 pistol_rank_setup() {
   flag_init("_start_zm_pistol_rank");
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 1) {
     solo = true;
     flag_set("solo_game");

@@ -48,10 +48,10 @@ play_level_ending() {
 plane_crash_move_shockwave() {
   wait(6.5);
 
-  origin_left = getent("plane_explosion_left", "targetname");
-  origin_right = getent("plane_explosion_right", "targetname");
-  target_left = getent(origin_left.target, "targetname");
-  target_right = getent(origin_right.target, "targetname");
+  origin_left = getEnt("plane_explosion_left", "targetname");
+  origin_right = getEnt("plane_explosion_right", "targetname");
+  target_left = getEnt(origin_left.target, "targetname");
+  target_right = getEnt(origin_right.target, "targetname");
 
   ent1 = spawn("script_origin", origin_left.origin);
   ent2 = spawn("script_origin", origin_right.origin);
@@ -59,8 +59,8 @@ plane_crash_move_shockwave() {
   ent1 playSound("bomber_shockwave_l");
   ent2 playSound("bomber_shockwave_r");
 
-  ent1 moveto(target_left.origin, 7.5);
-  ent2 moveto(target_right.origin, 7.5);
+  ent1 moveTo(target_left.origin, 7.5);
+  ent2 moveTo(target_right.origin, 7.5);
 }
 line_to_me(guy) {
   self endon("movedone");
@@ -73,5 +73,5 @@ play_flame_tree_loop(tree) {
   tree playLoopSound("flame_tree_loop");
   wait(10);
   tree stoploopsound();
-  playsoundatposition("flame_tree_stop_loop", tree.origin);
+  playSoundAtPosition("flame_tree_stop_loop", tree.origin);
 }

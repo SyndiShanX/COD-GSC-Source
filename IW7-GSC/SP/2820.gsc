@@ -568,9 +568,9 @@ func_484A() {
   var_12 = 0;
   var_13 = 0;
   var_14 = (0, 0, 0);
-  var_15 = vectornormalize(anglesToForward(self.angles));
-  var_10 = vectornormalize(anglestoright(self.angles));
-  var_11 = vectornormalize(anglestoup(self.angles));
+  var_15 = vectorNormalize(anglesToForward(self.angles));
+  var_10 = vectorNormalize(anglestoright(self.angles));
+  var_11 = vectorNormalize(anglestoup(self.angles));
   if(isDefined(self.var_6698)) {
     for(var_12 = 0; var_12 < self.var_6698.size; var_12++) {
       if(isDefined(self.var_6698[var_12])) {

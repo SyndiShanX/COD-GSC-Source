@@ -123,14 +123,14 @@ player_wakes_up_la_2(b_remove_weapons, str_return_weapons_notify) {
   self shellshock("death", 12);
   self screen_fade_out(0);
   wait 0.2;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 0.4;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 0.4;
   self screen_fade_to_alpha_with_blur(0.35, 2, 3);
   wait 1.5;
   self screen_fade_to_alpha_with_blur(1, 1.5, 6);
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 0.5;
   self screen_fade_to_alpha_with_blur(0.2, 2, 1.5);
   wait 2;
@@ -175,7 +175,7 @@ intro_move_player_origin() {
     v_start_ang = v_saved_ang;
   }
 
-  level.player setorigin(bulletTrace(v_start_pos + vectorscale((0, 0, 1), 1000.0), v_start_pos + vectorscale((0, 0, 1), 1000.0) + vectorscale((0, 0, -1), 100000.0), 0, level.player)["position"]);
+  level.player setOrigin(bulletTrace(v_start_pos + vectorscale((0, 0, 1), 1000.0), v_start_pos + vectorscale((0, 0, 1), 1000.0) + vectorscale((0, 0, -1), 100000.0), 0, level.player)["position"]);
   level.player setplayerangles(v_start_ang);
 
   println("intro_move_player_origin done!");
@@ -236,7 +236,7 @@ harper_drags_pilot_to_van() {
   flag_wait("player_in_f35");
 
   if(isDefined(ai_harper)) {
-    ai_harper anim_stopanimscripted();
+    ai_harper anim_stopanimScripted();
   }
 
   wait(n_wait_time);
@@ -277,7 +277,7 @@ late_cops_driveup() {
     car.overridevehicledamage = ::cops_damage_override;
   }
 
-  playsoundatposition("amb_distant_police_oneshot", (6744, -33418, 316));
+  playSoundAtPosition("amb_distant_police_oneshot", (6744, -33418, 316));
   level waittill("harper_woke_up");
 
   for(i = 0; i < squad_cars.size; i++) {
@@ -296,9 +296,9 @@ late_cops_driveup() {
 
 fake_building_collapse() {
   level waittill("harper_woke_up");
-  playsoundatposition("exp_mortar_dist", (6747, -33485, 241));
+  playSoundAtPosition("exp_mortar_dist", (6747, -33485, 241));
   wait 1;
-  playsoundatposition("evt_dist_building_fall", (6747, -33485, 241));
+  playSoundAtPosition("evt_dist_building_fall", (6747, -33485, 241));
 }
 
 cops_damage_override(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
@@ -346,10 +346,10 @@ harper_wakes_up() {
   assert(a_nodes.size > 0, "harper_intro_cover_node array is missing!");
   nd_best = a_nodes[0];
   n_dot_best = -1;
-  v_to_plane = vectornormalize(level.f35.origin - ai_harper.origin);
+  v_to_plane = vectorNormalize(level.f35.origin - ai_harper.origin);
 
   for(i = 0; i < a_nodes.size; i++) {
-    v_to_node = vectornormalize(a_nodes[i].origin - ai_harper.origin);
+    v_to_node = vectorNormalize(a_nodes[i].origin - ai_harper.origin);
     n_dot = vectordot(v_to_plane, v_to_node);
 
     if(n_dot > n_dot_best) {
@@ -441,7 +441,7 @@ setup_destructibles() {
   level thread damage_trigger_monitor("radio_tower_damage_trigger", 500, "fxanim_signal_tower_start", undefined, ::radio_tower_death);
   bm_clip_pristine = get_ent("crane_clip_pristine", "targetname", 1);
   bm_clip_collapsed = get_ent("crane_clip_collapsed", "targetname", 1);
-  bm_clip_collapsed moveto(bm_clip_collapsed.origin - vectorscale((0, 0, 1), 10000.0), 0.1);
+  bm_clip_collapsed moveTo(bm_clip_collapsed.origin - vectorscale((0, 0, 1), 10000.0), 0.1);
   level thread damage_trigger_monitor("rooftop_crane_trigger", 1000, "fxanim_crane_collapse_start", level.player, ::crane_death);
   level thread billboard_kill_screen("billboard_death_1", "billboard_physics_struct_1");
   level thread billboard_kill_screen("billboard_death_2", "billboard_physics_struct_2");
@@ -505,7 +505,7 @@ parking_structure_destroy_roof() {
   t_physics = get_ent("garage_roof_physics_struct", "targetname", 1);
   assert(a_roof_nodes.size > 0, "roof nodes are missing for set_parking_garage");
   level waittill("parking_structure_roof_collapse");
-  bm_roof_clip_destroyed moveto(bm_roof_clip_destroyed.origin + vectorscale((0, 0, 1), 10000.0), 0.1);
+  bm_roof_clip_destroyed moveTo(bm_roof_clip_destroyed.origin + vectorscale((0, 0, 1), 10000.0), 0.1);
   a_vehicles = get_ent_array("garage_car", "script_noteworthy");
   a_vehicles_on_roof = [];
 
@@ -550,7 +550,7 @@ destroy_roof_on_helicopter_crash() {
 push_garage_roof_vehicles(e_trigger) {
   wait 0.8;
   n_scale = 3;
-  v_push = vectornormalize(e_trigger.origin - self.origin) * n_scale;
+  v_push = vectorNormalize(e_trigger.origin - self.origin) * n_scale;
   self physicslaunch(self.origin, v_push);
 }
 
@@ -596,7 +596,7 @@ fake_physics_vehicle_launch() {
         self vehicle_explosion_launch(v_hit_point);
       } else if(b_is_bullet_type) {
         n_scale = randomintrange(n_scale_bullet_min, n_scale_bullet_max);
-        v_launch_direction = vectornormalize(v_hit_point - self.origin) * n_scale * -1;
+        v_launch_direction = vectorNormalize(v_hit_point - self.origin) * n_scale * -1;
         self physicslaunch(v_hit_point, v_launch_direction);
       }
     }
@@ -608,7 +608,7 @@ gas_station_death() {
   flag_set("gas_station_destroyed");
   e_harper = level.convoy.vh_van;
   t_damage = get_ent("gas_station_damage_trigger", "targetname", 1);
-  playsoundatposition("evt_gas_station_explo", t_damage.origin);
+  playSoundAtPosition("evt_gas_station_explo", t_damage.origin);
   v_point = t_damage.origin;
   n_radius = 1024;
   n_force_min = 250;
@@ -1202,7 +1202,7 @@ molotov_throw(str_targetname, v_start, v_end) {
   }
 
   n_gravity = abs(getdvarint(#"bg_gravity")) * -1;
-  v_throw = vectornormalize(v_end - v_start) * 700;
+  v_throw = vectorNormalize(v_end - v_start) * 700;
   n_dist = distance(v_start, v_end);
   n_time = n_dist / 700;
   v_delta = v_end - v_start;
@@ -1425,7 +1425,7 @@ f35_rooftops() {
 }
 
 building_collapse_planes_fly_in() {
-  s_convoy_dust = getstruct("convoy_dust_align", "targetname");
+  s_convoy_dust = getStruct("convoy_dust_align", "targetname");
   exploder(10951);
   playFX(getfx("convoy_dust"), s_convoy_dust.origin);
   level notify("fxanim_bldg_convoy_block_start");
@@ -1531,8 +1531,8 @@ heli_shoot_at_crane() {
   t_crane = get_ent("rooftop_crane_trigger", "targetname");
 
   if(isDefined(t_crane)) {
-    self setgunnertargetent(t_crane, (0, 0, 0), 0);
-    self setgunnertargetent(t_crane, (0, 0, 0), 1);
+    self setgunnertargetEnt(t_crane, (0, 0, 0), 0);
+    self setgunnertargetEnt(t_crane, (0, 0, 0), 1);
     self firegunnerweapon(0);
     self firegunnerweapon(1);
     wait 1;
@@ -1621,7 +1621,7 @@ crane_building_ai_func() {
     }
   }
 
-  self set_goalradius(32);
+  self set_goalRadius(32);
   self set_ignoreall(1);
   self setgoalnode(nd_goal);
   self waittill("goal");
@@ -2101,7 +2101,7 @@ eject_wait_for_player_position() {
 }
 
 waittill_player_near_convoy_and_f35_for_eject() {
-  s_facing_pos = getstruct("eject_facing_pos", "targetname");
+  s_facing_pos = getStruct("eject_facing_pos", "targetname");
   vh_friendly = getEntArray("convoy_f35_ally_4", "targetname")[0];
 
   do {
@@ -2119,9 +2119,9 @@ waittill_player_near_convoy_and_f35_for_eject() {
       n_f35_dist = distancesquared(level.f35.origin, vh_friendly.origin);
 
       if(n_dist <= 225000000 && n_f35_dist <= 225000000) {
-        v_player_to_plane = vectornormalize(vh_friendly.origin - level.f35.origin);
-        v_plane_forward = vectornormalize(anglesToForward(vh_friendly.angles));
-        v_player_forward = vectornormalize(anglesToForward(level.f35.angles));
+        v_player_to_plane = vectorNormalize(vh_friendly.origin - level.f35.origin);
+        v_plane_forward = vectorNormalize(anglesToForward(vh_friendly.angles));
+        v_player_forward = vectorNormalize(anglesToForward(level.f35.angles));
 
         if(vectordot(v_player_to_plane, v_plane_forward) > 0.7) {
           if(vectordot(v_plane_forward, v_player_forward) > 0.8) {
@@ -2137,11 +2137,11 @@ waittill_player_near_convoy_and_f35_for_eject() {
 #using_animtree("vehicles");
 
 eject_move_align_struct(nd_start) {
-  s_align = getstruct("align_eject_sequence", "targetname");
+  s_align = getStruct("align_eject_sequence", "targetname");
   n_speed = level.f35 getmaxspeed();
   n_time = getanimlength(%v_la_10_01_f35eject_drone_intro) + 2;
   n_eject_offset = n_speed * n_time;
-  v_player_to_node = vectornormalize(nd_start.origin - level.f35.origin);
+  v_player_to_node = vectorNormalize(nd_start.origin - level.f35.origin);
   v_start_point = nd_start.origin;
   s_align.origin = v_start_point;
   v_rotate_to = vectortoangles(v_player_to_node);
@@ -2151,7 +2151,7 @@ eject_move_align_struct(nd_start) {
 }
 
 f35_eject_intro() {
-  s_align = getstruct("align_eject_sequence", "targetname");
+  s_align = getStruct("align_eject_sequence", "targetname");
   level notify("kill_ambient_drone_spawn_manager");
   level notify("kill_attacking_drones");
   level.f35 notify("stop_f35_minigun");
@@ -2160,7 +2160,7 @@ f35_eject_intro() {
   level thread f35_eject_enemies_fly_away();
   m_linkto = spawn_model("tag_origin", level.f35.origin, level.f35.angles);
   m_linkto.targetname = "eject_align_origin";
-  m_linkto linkto(level.f35, "tag_origin");
+  m_linkto linkTo(level.f35, "tag_origin");
   m_lookat = spawn_model("tag_origin", s_align.origin, s_align.angles);
   v_to_goal = vectortoangles(s_align.origin - level.f35.origin);
   level.f35 cancelaimove();
@@ -2172,7 +2172,7 @@ f35_eject_intro() {
   vh_plane = maps\_vehicle::spawn_vehicle_from_targetname("eject_sequence_drone");
   wait 0.1;
   vh_plane setModel("veh_t6_drone_avenger_x2");
-  vh_plane linkto(m_linkto);
+  vh_plane linkTo(m_linkto);
   playFXOnTag(level._effect["drone_damaged_state"], vh_plane, "tag_origin");
   add_scene_properties("f35_eject_drone_intro", "eject_align_origin");
   level thread maps\_scene::run_scene("f35_eject_drone_intro");
@@ -2223,11 +2223,11 @@ f35_eject_eject() {
 f35_eject_player() {
   m_linkto = spawn_model("tag_origin", level.f35.origin, level.f35.angles);
   m_linkto.targetname = "eject_align_origin";
-  m_linkto linkto(level.f35, "tag_origin");
+  m_linkto linkTo(level.f35, "tag_origin");
   level.player.body = spawn_anim_model("player_body", level.player.origin);
   level.player.body.angles = level.player.angles;
   m_linkto maps\_anim::anim_first_frame(level.player.body, "f35_eject_start");
-  level.player.body linkto(m_linkto);
+  level.player.body linkTo(m_linkto);
   wait 0.05;
   m_linkto thread maps\_anim::anim_single_aligned(level.player.body, "f35_eject_start");
   wait 0.05;
@@ -2256,7 +2256,7 @@ f38s_play_exhaust() {
   wait 5;
 
   for(i = 2; i < 5; i++) {
-    f35 = getent("f35_" + i, "targetname");
+    f35 = getEnt("f35_" + i, "targetname");
 
     if(isDefined(f35)) {
       playFXOnTag(level._effect["f38_afterburner"], f35, "tag_origin");
@@ -2265,8 +2265,8 @@ f38s_play_exhaust() {
 }
 
 f35_eject_warp_plane_to_collision() {
-  s_align = getstruct("anim_end_struct", "targetname");
-  m_linkto = getent("eject_align_origin", "targetname");
+  s_align = getStruct("anim_end_struct", "targetname");
+  m_linkto = getEnt("eject_align_origin", "targetname");
   v_start_origin = getstartorigin(s_align.origin, s_align.angles, %v_la_10_01_f35eject_f35);
   v_start_angles = getstartangles(s_align.origin, s_align.angles, %v_la_10_01_f35eject_f35);
   level.player thread fadetoblackforxsec(0, 0.05, 0.05, 0.4);
@@ -2303,12 +2303,12 @@ f35_intercepts_drone() {
   level.f35 cancelaimove();
   level.f35 setspeed(200);
   m_linkto = spawn_model("tag_origin", level.f35.origin, level.f35.angles);
-  level.f35 linkto(m_linkto);
+  level.f35 linkTo(m_linkto);
   n_moveto_time = distance(level.f35.origin, vh_drone.origin) / (200 * 20);
-  v_f35_to_drone = vectornormalize(vh_drone.origin - level.f35.origin);
+  v_f35_to_drone = vectorNormalize(vh_drone.origin - level.f35.origin);
   v_rotate_to = vectortoangles(v_f35_to_drone);
-  m_linkto moveto(vh_drone.origin, n_moveto_time);
-  m_linkto rotateto(v_rotate_to, 1, 0.25, 0.25);
+  m_linkto moveTo(vh_drone.origin, n_moveto_time);
+  m_linkto rotateTo(v_rotate_to, 1, 0.25, 0.25);
 
   while(1024 < distance(level.f35.origin, vh_drone.origin)) {
     wait 0.05;
@@ -2361,8 +2361,8 @@ eject_drone_spawn() {
   is_looking_at = 0;
 
   while(!is_looking_at) {
-    v_drone_forward = vectornormalize(anglesToForward(vh_plane.angles));
-    v_f35_forward = vectornormalize(anglesToForward(level.f35.angles));
+    v_drone_forward = vectorNormalize(anglesToForward(vh_plane.angles));
+    v_f35_forward = vectorNormalize(anglesToForward(level.f35.angles));
 
     if(vectordot(v_drone_forward, v_f35_forward) < -0.8) {
       if(level.player is_player_looking_at(vh_plane.origin, 0.8, 1, level.f35)) {
@@ -2481,7 +2481,7 @@ f35_outro() {
 
   level thread press_fadeout();
   wait 1;
-  vh_potus_convoy = getent("convoy_potus", "targetname");
+  vh_potus_convoy = getEnt("convoy_potus", "targetname");
   vh_potus_convoy thread potus_convoy_interior_setup();
   maps\_scene::scene_wait("outro_hero");
   flag_set("outro_done");
@@ -2489,7 +2489,7 @@ f35_outro() {
 
 van_fx() {
   wait 3;
-  van = getent("convoy_van_prop", "targetname");
+  van = getEnt("convoy_van_prop", "targetname");
   playFXOnTag(level._effect["convoy_skid_stop"], van, "tag_origin");
 }
 

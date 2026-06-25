@@ -11,7 +11,7 @@ setjumpattackanimstates(var_0, var_1) {
 choosejumpattackarrival(var_0, var_1) {
   var_2 = 0.707;
   if(isDefined(self.curmeleetarget) && isalive(self.curmeleetarget)) {
-    var_3 = vectornormalize(self.curmeleetarget.origin - var_0.var_A843);
+    var_3 = vectorNormalize(self.curmeleetarget.origin - var_0.var_A843);
     var_4 = anglesToForward(var_0.var_630B);
     var_5 = vectordot(var_3, var_4);
     if(var_5 > var_2) {
@@ -167,7 +167,7 @@ func_A4E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     self scragentsetanimscale(1, 1);
   }
 
-  self setorigin(var_4, 0);
+  self setOrigin(var_4, 0);
 }
 
 play_teleport_start() {
@@ -219,7 +219,7 @@ func_7F2B(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
   var_6 = var_2 - var_0;
   var_7 = var_6 * (1, 1, 0);
-  var_7 = vectornormalize(var_7);
+  var_7 = vectorNormalize(var_7);
   var_5.var_AAB4 = var_0 + var_7 * level.var_1BBA.var_A4E6;
   var_5.var_A843 = var_2;
   var_5.var_A4F8 = var_5.var_A843 - var_5.var_AAB4;
@@ -337,7 +337,7 @@ func_7F28(var_0, var_1) {
 
 func_7F2F(var_0, var_1, var_2) {
   var_3 = anglestoup(var_1);
-  var_4 = vectornormalize(var_2 - var_0);
+  var_4 = vectorNormalize(var_2 - var_0);
   if(vectordot(var_3, var_4) > 0.98) {
     var_4 = (0, 0, 1);
   }
@@ -350,7 +350,7 @@ func_7F2F(var_0, var_1, var_2) {
 func_7F64(var_0) {
   var_1 = 20;
   var_2 = cos(90 - var_1);
-  var_3 = vectornormalize(var_0.var_A4F8);
+  var_3 = vectorNormalize(var_0.var_A4F8);
   var_4 = vectordot(var_3, var_0.var_10E05);
   if(abs(var_4) <= var_2) {
     return "jump_launch_level";
@@ -366,7 +366,7 @@ func_7F64(var_0) {
 }
 
 func_7F63(var_0, var_1) {
-  var_2 = vectornormalize(var_0.launchvelocity2d);
+  var_2 = vectorNormalize(var_0.launchvelocity2d);
   var_2 = rotatevector(var_2, var_0.var_10D6D);
   var_3 = self getanimentrycount(var_1);
   var_4 = 0;
@@ -392,7 +392,7 @@ func_7F16(var_0, var_1, var_2) {
 
 func_7F29(var_0, var_1, var_2) {
   var_3 = anglestoup(var_2);
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   if(vectordot(var_3, var_4) > 0.98) {
     var_4 = (0, 0, 1);
   }
@@ -432,7 +432,7 @@ getlaserdirection(var_0, var_1) {
   var_3 = func_DA68(var_0.var_A844, var_0.var_6397);
   var_4 = var_2 - var_3;
   var_5 = vectorcross(var_3, var_0.var_6397);
-  var_6 = vectornormalize(func_DA68(var_5, var_0.var_6397)) * 100;
+  var_6 = vectorNormalize(func_DA68(var_5, var_0.var_6397)) * 100;
   var_7 = vectordot(var_2 * -1, var_6);
   var_8 = length(var_2);
   var_9 = length(var_3);

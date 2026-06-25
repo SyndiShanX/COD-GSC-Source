@@ -119,14 +119,14 @@ _id_EC26() {
 
       if(var_3) {
         scripts\engine\utility::_id_5474("switch_on");
-        self sethintstring(&"CP_STRIKE/TURN_OFF_ALARM");
+        self setHintString(&"CP_STRIKE/TURN_OFF_ALARM");
       }
     } else {
       var_3 = self._id_CBD0 _id_0788::_id_182B([var_1, var_2], "interact");
 
       if(var_3) {
         scripts\engine\utility::_id_5470("switch_on");
-        self sethintstring(&"CP_STRIKE/TURN_ON_ALARM");
+        self setHintString(&"CP_STRIKE/TURN_ON_ALARM");
       }
     }
 

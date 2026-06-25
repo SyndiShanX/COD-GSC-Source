@@ -63,7 +63,7 @@ function function_af3e97c(localclientnum, oldval, newval, bnewent, binitialsnap,
         }
 
         self.var_b99f92dc[self.var_b99f92dc.size] = var_1c0acf43;
-        var_1c0acf43 linkto(self, str_tag);
+        var_1c0acf43 linkTo(self, str_tag);
         var_1c0acf43.var_f1bf92dc = var_1c0acf43 playLoopSound(var_395f162a);
       }
     }

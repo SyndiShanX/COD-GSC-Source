@@ -80,7 +80,7 @@ function skipto_pallas_start_init(str_objective, b_starting) {
     objectives::set("cp_level_sgen_confront_pallas");
     elevator_setup();
     elevator_set_door_state("back", "open");
-    e_lift = getent("boss_fight_lift", "targetname");
+    e_lift = getEnt("boss_fight_lift", "targetname");
     e_lift movez(-1750, 0.1);
     load::function_a2995f22();
     level thread handle_pallas_animation();
@@ -111,11 +111,11 @@ function skipto_pallas_start_init(str_objective, b_starting) {
 function skipto_pallas_start_done(str_objective, b_starting, b_direct, player) {}
 
 function skipto_pallas_end_init(str_objective, b_starting) {
-  e_lift = getent("boss_fight_lift", "targetname");
+  e_lift = getEnt("boss_fight_lift", "targetname");
   level thread hide_cracked_glass();
   if(b_starting) {
     sgen::init_hendricks(str_objective);
-    e_pallas_spawner = getent("pallas", "targetname");
+    e_pallas_spawner = getEnt("pallas", "targetname");
     e_pallas_spawner spawner::add_spawn_function(&pallas_init);
     spawner::simple_spawn(e_pallas_spawner);
     objectives::complete("cp_level_sgen_enter_sgen_no_pointer");
@@ -237,15 +237,15 @@ function descent_vo() {
 function link_elevator_light_probe() {
   a_probes = getEntArray("pallas_elevator_probe", "targetname");
   a_lights = getEntArray("pallas_elevator_light", "script_noteworthy");
-  e_lift = getent("boss_fight_lift", "targetname");
+  e_lift = getEnt("boss_fight_lift", "targetname");
   array::run_all(a_lights, &linkto, e_lift);
   array::run_all(a_probes, &linkto, e_lift);
 }
 
 function handle_pallas_animation() {
   scene::add_scene_func("cin_sgen_18_01_pallasfight_vign_crucifix_pallas_loop", &scene_callback_pallas_loop, "play");
-  e_pallas_spawner = getent("pallas", "targetname");
-  e_pallas_spawner2 = getent("pallas2", "targetname");
+  e_pallas_spawner = getEnt("pallas", "targetname");
+  e_pallas_spawner2 = getEnt("pallas2", "targetname");
   e_pallas_spawner spawner::add_spawn_function(&pallas_init);
   e_pallas_spawner2 spawner::add_spawn_function(&pallas_init, 1);
   level thread scene::play("cin_sgen_18_01_pallasfight_vign_crucifix_pallas_loop");
@@ -361,7 +361,7 @@ function robot_mindcontrol() {
     self function_969fe47();
   }
   level flag::wait_till("pallas_ambush_over");
-  v_goal_volume = getent("pallas_tier_two_volume", "targetname");
+  v_goal_volume = getEnt("pallas_tier_two_volume", "targetname");
   self setgoal(v_goal_volume);
 }
 
@@ -378,14 +378,14 @@ function robot_mindcontrol_center_guard() {
   level flag::wait_till("pallas_ambush_over");
   if(level.pallas_center_guards.size < 3) {
     level.pallas_center_guards[level.pallas_center_guards.size] = self;
-    v_goal_volume = getent("pallas_center_volume", "targetname");
+    v_goal_volume = getEnt("pallas_center_volume", "targetname");
   } else {
     if(level.pallas_tier_two_guards.size < 6) {
       level.pallas_tier_two_guards[level.pallas_tier_two_guards.size] = self;
-      v_goal_volume = getent("pallas_tier_two_volume", "targetname");
+      v_goal_volume = getEnt("pallas_tier_two_volume", "targetname");
     } else {
       level.pallas_bottom_tier_guards[level.pallas_bottom_tier_guards.size] = self;
-      v_goal_volume = getent("pallas_bottom_tier", "targetname");
+      v_goal_volume = getEnt("pallas_bottom_tier", "targetname");
     }
   }
   self setgoal(v_goal_volume, 1);
@@ -401,7 +401,7 @@ function robot_mindcontrol_core_guard() {
   self function_969fe47();
   level.n_core_guard_count++;
   nd_guard = getnode("core_guard" + level.n_core_guard_count, "script_noteworthy");
-  v_goal_volume = getent("pallas_center_volume", "targetname");
+  v_goal_volume = getEnt("pallas_center_volume", "targetname");
   if(!isDefined(nd_guard) || isnodeoccupied(nd_guard)) {
     self setgoal(v_goal_volume, 1, 16, 16);
   } else {
@@ -429,12 +429,12 @@ function function_39072821() {
 }
 
 function elevator_setup() {
-  e_lift = getent("boss_fight_lift", "targetname");
+  e_lift = getEnt("boss_fight_lift", "targetname");
   e_lift setmovingplatformenabled(1);
   e_lift.a_e_doors = [];
-  e_lift.a_e_doors["front"] = getent("pallas_lift_front", "targetname");
+  e_lift.a_e_doors["front"] = getEnt("pallas_lift_front", "targetname");
   e_lift.a_e_doors["front"].str_state = "close";
-  e_lift.a_e_doors["back"] = getent("pallas_lift_back", "targetname");
+  e_lift.a_e_doors["back"] = getEnt("pallas_lift_back", "targetname");
   e_lift.a_e_doors["back"].str_state = "close";
   array::run_all(e_lift.a_e_doors, &linkto, e_lift);
   e_lift.a_e_doors["front"] clientfield::set("sm_elevator_door_state", 1);
@@ -442,7 +442,7 @@ function elevator_setup() {
 }
 
 function elevator_set_door_state(str_side, str_state) {
-  e_lift = getent("boss_fight_lift", "targetname");
+  e_lift = getEnt("boss_fight_lift", "targetname");
   if(!e_lift.a_e_doors[str_side].str_state === str_state) {
     e_lift.a_e_doors[str_side].str_state = str_state;
     e_lift.a_e_doors[str_side] unlink();
@@ -457,7 +457,7 @@ function elevator_set_door_state(str_side, str_state) {
       e_lift.a_e_doors[str_side] playSound("veh_lift_doors_close");
     }
     e_lift.a_e_doors[str_side] waittill("movedone");
-    e_lift.a_e_doors[str_side] linkto(e_lift);
+    e_lift.a_e_doors[str_side] linkTo(e_lift);
     if(str_state == "open") {
       level flag::set(("pallas_lift_" + str_side) + "_open");
     } else {
@@ -467,7 +467,7 @@ function elevator_set_door_state(str_side, str_state) {
 }
 
 function elevator_set_shaft_state(str_state) {
-  e_lift = getent("boss_fight_lift", "targetname");
+  e_lift = getEnt("boss_fight_lift", "targetname");
   if(!e_lift.a_e_shaft_doors["left"].str_state === str_state) {
     foreach(e_shaft_door in e_lift.a_e_shaft_doors) {
       v_move_value = e_shaft_door.script_vector;
@@ -475,17 +475,17 @@ function elevator_set_shaft_state(str_state) {
         v_move_value = v_move_value * -1;
       }
       e_shaft_door.str_state = str_state;
-      e_shaft_door moveto(e_shaft_door.origin + v_move_value, 3.947368, 3.947368 * 0.1, 3.947368 * 0.25);
+      e_shaft_door moveTo(e_shaft_door.origin + v_move_value, 3.947368, 3.947368 * 0.1, 3.947368 * 0.25);
     }
   }
 }
 
 function elevator_set_move_direction(str_direction) {
   array::run_all(level.players, &util::set_low_ready, 1);
-  e_lift = getent("boss_fight_lift", "targetname");
+  e_lift = getEnt("boss_fight_lift", "targetname");
   e_lift.str_direction = str_direction;
-  e_decon_fx_origin = getent("decon_fx_origin", "targetname");
-  e_decon_fx_origin linkto(e_lift);
+  e_decon_fx_origin = getEnt("decon_fx_origin", "targetname");
+  e_decon_fx_origin linkTo(e_lift);
   playFXOnTag(level._effect["decon_mist"], e_decon_fx_origin, "tag_origin");
   e_decon_fx_origin playSound("veh_lift_mist");
   n_zvalue = 1750;
@@ -495,7 +495,7 @@ function elevator_set_move_direction(str_direction) {
   e_lift movez(n_zvalue, 48.61111, 48.61111 * 0.1, 48.61111 * 0.25);
   e_lift playSound("veh_lift_start");
   loop_snd_ent = spawn("script_origin", e_lift.origin);
-  loop_snd_ent linkto(e_lift);
+  loop_snd_ent linkTo(e_lift);
   loop_snd_ent playLoopSound("veh_lift_loop", 0.5);
   e_lift waittill("movedone");
   loop_snd_ent stoploopsound(0.5);
@@ -505,14 +505,14 @@ function elevator_set_move_direction(str_direction) {
 }
 
 function elevator_set_opaque(n_state) {
-  e_lift = getent("boss_fight_lift", "targetname");
+  e_lift = getEnt("boss_fight_lift", "targetname");
   e_lift clientfield::set("sm_elevator_shader", n_state);
 }
 
 function elevator_lift_intro() {
   elevator_set_door_state("front", "open");
   level flag::wait_till("weapons_research_vo_done");
-  t_lift = getent("pallas_lift_trigger", "targetname");
+  t_lift = getEnt("pallas_lift_trigger", "targetname");
   t_lift sgen_util::gather_point_wait();
   level thread link_elevator_light_probe();
   array::thread_all(getEntArray("head_track_model", "targetname"), &util::delay_notify, 0.05, "stop_head_track_player");
@@ -544,7 +544,7 @@ function elevator_lift_intro() {
 function elevator_lift_outro(b_starting) {
   elevator_set_door_state("back", "close");
   if(!b_starting) {
-    e_lift = getent("boss_fight_lift", "targetname");
+    e_lift = getEnt("boss_fight_lift", "targetname");
     e_lift.origin = e_lift.origin + vectorscale((0, 0, 1), 1750);
   }
   elevator_set_door_state("front", "open");
@@ -564,7 +564,7 @@ function function_87d6b629() {
 
 function pallas_greeting_event(b_starting) {
   if(!b_starting) {
-    var_34a8e0f = getent("pallas_turret_enable_trigger", "targetname");
+    var_34a8e0f = getEnt("pallas_turret_enable_trigger", "targetname");
     var_34a8e0f.origin = var_34a8e0f.origin + (vectorscale((0, -1, 0), 38));
     level waittill("enter_server");
     trigger::wait_or_timeout(30, "pallas_turret_enable_trigger");
@@ -592,7 +592,7 @@ function function_ab0e4cbe() {
   while(true) {
     level waittill("save_restore");
     for(i = 1; i <= 3; i++) {
-      mdl_ball = getent("diaz_ball_" + i, "targetname");
+      mdl_ball = getEnt("diaz_ball_" + i, "targetname");
       mdl_ball globallogic_ui::destroyweakpointwidget(&"tag_weakpoint");
     }
   }
@@ -603,7 +603,7 @@ function handle_pallas_pillar_weakspot() {
   level waittill("pallas_objective_start");
   a_t_coolants = getEntArray("pallas_coolant_control", "targetname");
   foreach(trigger in a_t_coolants) {
-    trigger sethintstring(&"CP_MI_SING_SGEN_DESTROY_PILLAR");
+    trigger setHintString(&"CP_MI_SING_SGEN_DESTROY_PILLAR");
     trigger triggerenable(0);
   }
   level flag::wait_till("pallas_intro_completed");
@@ -642,7 +642,7 @@ function handle_pallas_pillar_weakspot() {
     objectives::complete("cp_level_sgen_destroy_tower");
     level.var_e16e585d++;
     e_pallas_pillar playSound("evt_pillar_dest");
-    playsoundatposition("evt_diaz_alarm", e_pallas_pillar.origin);
+    playSoundAtPosition("evt_diaz_alarm", e_pallas_pillar.origin);
     level thread function_47bd64a2();
     wait(5);
     array::thread_all(level.players, &clientfield::set_to_player, "pallas_monitors_state", 0);
@@ -870,7 +870,7 @@ function activate_flood_spawn() {
 
 function weakspot_damage(n_tower) {
   n_tower = int(n_tower);
-  e_core = getent("diaz_ball_" + n_tower, "targetname");
+  e_core = getEnt("diaz_ball_" + n_tower, "targetname");
   e_core globallogic_ui::createweakpointwidget(&"tag_weakpoint");
   n_total_health = 300 * level.players.size;
   e_core.health = n_total_health;
@@ -1190,15 +1190,15 @@ function show_cracked_glass(n_crack) {
   n_crack = int(n_crack);
   switch (n_crack) {
     case 1: {
-      e_glass = getent("pallas_glass_break_1", "targetname");
+      e_glass = getEnt("pallas_glass_break_1", "targetname");
       break;
     }
     case 2: {
-      e_glass = getent("pallas_glass_break_3", "targetname");
+      e_glass = getEnt("pallas_glass_break_3", "targetname");
       break;
     }
     default: {
-      e_glass = getent("pallas_glass_break_2", "targetname");
+      e_glass = getEnt("pallas_glass_break_2", "targetname");
       break;
     }
   }
@@ -1224,7 +1224,7 @@ function check_for_nearby_players() {
 
 function handle_robot_sm(str_triggername, str_sm) {
   level endon("pallas_death");
-  trigger = getent(str_triggername, "targetname");
+  trigger = getEnt(str_triggername, "targetname");
   while(true) {
     n_player = 0;
     foreach(player in level.players) {

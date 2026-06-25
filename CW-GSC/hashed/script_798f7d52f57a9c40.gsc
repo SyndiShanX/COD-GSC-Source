@@ -37,7 +37,7 @@
 
 function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
-  level thread scene::init_streamer("scene_kgb_env_server_loops", getplayers());
+  level thread scene::init_streamer("scene_kgb_env_server_loops", getPlayers());
 }
 
 function main(str_skipto, b_starting) {
@@ -229,7 +229,7 @@ function function_cd6f4f9c() {
   namespace_e77bf565::function_5dfd7fb1("vault_retreat_used_nodes", "script_noteworthy", 1);
 
   if(isDefined(guys)) {
-    volume = getent("macguffin_guys_retreat_node", "targetname");
+    volume = getEnt("macguffin_guys_retreat_node", "targetname");
 
     if(isDefined(volume)) {
       foreach(guy in guys) {
@@ -426,7 +426,7 @@ function function_f7fd6a9d() {
 
   level notify(#"hash_5794714005eae043");
   wait 0.5;
-  vault_enemy_volume = getent("vault_enemy_volume", "targetname");
+  vault_enemy_volume = getEnt("vault_enemy_volume", "targetname");
 
   while(true) {
     enemies = getaiteamarray("axis");
@@ -481,7 +481,7 @@ function function_74aac033(var_40498194, b_starting = 0) {
 function function_93564051() {
   level.player endon(#"death");
   wait 2.5;
-  vault_breach_guys_audio_org = getent("vault_breach_guys_audio_org", "targetname");
+  vault_breach_guys_audio_org = getEnt("vault_breach_guys_audio_org", "targetname");
   sndobj = snd::function_9ae4fc6f("vox_cp_rkgb_04100_rms2_thedoorsaretoot_86", vault_breach_guys_audio_org.origin);
   snd::function_2fdc4fb(sndobj);
   sndobj = snd::function_9ae4fc6f("vox_cp_rkgb_04100_rms1_usethetorchcutt_3a", vault_breach_guys_audio_org.origin);
@@ -627,7 +627,7 @@ function function_46fe3d22(delay, var_270faa93) {
 }
 
 function function_2a6f3b1(lighttargetname, clientfield = "vault_hanging_light_vfx") {
-  light = getent(lighttargetname, "targetname");
+  light = getEnt(lighttargetname, "targetname");
 
   if(!isDefined(light)) {
     return;
@@ -691,31 +691,31 @@ function function_de62c0a0() {
 
   foreach(clip in vault_breach_dmg_model_clips) {
     clip solid();
-    clip disconnectpaths();
+    clip disconnectPaths();
   }
 }
 
 function function_259d8d6f() {
-  vault_approach_red_tunnel_blocker_clip = getent("vault_approach_red_tunnel_blocker_clip", "targetname");
+  vault_approach_red_tunnel_blocker_clip = getEnt("vault_approach_red_tunnel_blocker_clip", "targetname");
 
   if(isDefined(vault_approach_red_tunnel_blocker_clip)) {
     vault_approach_red_tunnel_blocker_clip.origin += (0, 0, 160);
-    vault_approach_red_tunnel_blocker_clip disconnectpaths();
+    vault_approach_red_tunnel_blocker_clip disconnectPaths();
   }
 
-  vault_approach_red_tunnel_blocker_padlock = getent("vault_approach_red_tunnel_blocker_padlock", "targetname");
+  vault_approach_red_tunnel_blocker_padlock = getEnt("vault_approach_red_tunnel_blocker_padlock", "targetname");
 
   if(isDefined(vault_approach_red_tunnel_blocker_padlock)) {
     vault_approach_red_tunnel_blocker_padlock.origin += (0, 0, 160);
   }
 
-  vault_approach_red_tunnel_blocker_left = getent("vault_approach_red_tunnel_blocker_left", "targetname");
+  vault_approach_red_tunnel_blocker_left = getEnt("vault_approach_red_tunnel_blocker_left", "targetname");
 
   if(isDefined(vault_approach_red_tunnel_blocker_left)) {
     vault_approach_red_tunnel_blocker_left.angles += (0, 97.5, 0);
   }
 
-  vault_approach_red_tunnel_blocker_right = getent("vault_approach_red_tunnel_blocker_right", "targetname");
+  vault_approach_red_tunnel_blocker_right = getEnt("vault_approach_red_tunnel_blocker_right", "targetname");
 
   if(isDefined(vault_approach_red_tunnel_blocker_right)) {
     vault_approach_red_tunnel_blocker_right.angles += (0, -112, 0);
@@ -723,7 +723,7 @@ function function_259d8d6f() {
 }
 
 function function_66b280b8(parms) {
-  vault_control_panel = getent("vault_control_panel", "targetname");
+  vault_control_panel = getEnt("vault_control_panel", "targetname");
   vault_control_panel setModel("p9_rus_control_panel_02_dest");
   exploder::exploder("panel_sparks");
   level flag::wait_till("aslt_bunker_escape_complete");
@@ -736,7 +736,7 @@ function function_66b280b8(parms) {
 }
 
 function vault_close_player_clip() {
-  vault_close_player_clip = getent("vault_close_player_clip", "targetname");
+  vault_close_player_clip = getEnt("vault_close_player_clip", "targetname");
 
   if(isDefined(vault_close_player_clip)) {
     vault_close_player_clip notsolid();

@@ -87,7 +87,7 @@ shoulddoextendedkill(var_0) {
     return undefined;
   }
 
-  var_3 = vectornormalize((var_2[0], var_2[1], 0));
+  var_3 = vectorNormalize((var_2[0], var_2[1], 0));
   var_4 = anglesToForward(var_0.angles);
   var_5 = vectordot(var_4, var_3);
 
@@ -155,7 +155,7 @@ extendedkill_sticktovictim(var_0, var_1, var_2) {
     return;
   }
   var_3 = self.curmeleetarget getcorpseentity();
-  self linkto(var_3);
+  self linkTo(var_3);
   self scragentdoanimrelative(var_0, var_1, var_2);
 }
 
@@ -276,7 +276,7 @@ getupdatedattackpos(var_0, var_1) {
 isprotectedbyriotshield(var_0) {
   if(var_0 maps\mp\_riotshield::hasriotshield()) {
     var_1 = self.origin - var_0.origin;
-    var_2 = vectornormalize((var_1[0], var_1[1], 0));
+    var_2 = vectorNormalize((var_1[0], var_1[1], 0));
     var_3 = anglesToForward(var_0.angles);
     var_4 = vectordot(var_3, var_1);
 

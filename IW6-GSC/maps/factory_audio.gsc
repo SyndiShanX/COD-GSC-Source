@@ -41,9 +41,9 @@ audio_main() {
 
 sfx_rog_reveal_setup() {
   common_scripts\utility::flag_set("trigger_hall");
-  var_0 = getent("trigger_audio_hall", "targetname");
+  var_0 = getEnt("trigger_audio_hall", "targetname");
   var_0 thread sfx_hall_trigger();
-  var_1 = getent("trigger_audio_sat_room", "targetname");
+  var_1 = getEnt("trigger_audio_sat_room", "targetname");
   var_1 thread sfx_sat_trigger();
   level.hallway_rog_mvmt = spawn("script_origin", (7610, -152, 314));
 }
@@ -131,7 +131,7 @@ sfx_factory_intro_lightning_loop() {
 
 audio_setup_tank_room_trigger() {
   common_scripts\utility::flag_init("trigger_tank_room_volume");
-  var_0 = getent("intro_to_tankroom", "targetname");
+  var_0 = getEnt("intro_to_tankroom", "targetname");
   var_0 thread trigger_tank_room_flag();
 }
 
@@ -350,7 +350,7 @@ sfx_bak_mudslide() {
 }
 
 sfx_mudslide_trigger_setup() {
-  var_0 = getent("trigger_mudslide_sfx", "targetname");
+  var_0 = getEnt("trigger_mudslide_sfx", "targetname");
   var_0 thread sfx_plr_mudslide();
 }
 
@@ -360,12 +360,12 @@ sfx_plr_mudslide() {
 }
 
 sfx_crate_trigger_setup() {
-  var_0 = getent("trigger_crate_land", "targetname");
+  var_0 = getEnt("trigger_crate_land", "targetname");
   var_0 thread sfx_crate_trigger();
 }
 
 sfx_mud_trigger_setup() {
-  var_0 = getent("trigger_mud_land", "targetname");
+  var_0 = getEnt("trigger_mud_land", "targetname");
   var_0 thread sfx_mud_trigger();
 }
 
@@ -454,7 +454,7 @@ play_linear_sfx_truckyard(var_0) {
     }
 
     var_3 = pointonsegmentnearesttopoint((3703.7, 3790.7, 346.1), (686.4, 4396.5, 367.1), level.player.origin);
-    var_1 moveto(var_3, 0.01);
+    var_1 moveTo(var_3, 0.01);
 
     if(var_2 == 0) {
       var_1 playLoopSound(var_0);
@@ -494,7 +494,7 @@ play_linear_sfx_conveyor(var_0, var_1, var_2) {
     }
 
     var_12 = pointonsegmentnearesttopoint(var_4.origin, var_5.origin, level.player.origin);
-    var_3 moveto(var_12, 0.01);
+    var_3 moveTo(var_12, 0.01);
 
     if(var_6 == 0) {
       var_3 playLoopSound(var_1);
@@ -513,9 +513,9 @@ audio_sfx_truck_idle_loop_start() {
   common_scripts\utility::flag_wait("factory_exterior_reveal");
   var_0 = level.intro_truck_cab;
   level.truckidlesfx_intro = spawn("script_origin", var_0.origin + (100, 0, 60));
-  level.truckidlesfx_intro linkto(var_0);
+  level.truckidlesfx_intro linkTo(var_0);
   level.truckidlesfx = spawn("script_origin", var_0.origin + (100, 0, 60));
-  level.truckidlesfx linkto(var_0);
+  level.truckidlesfx linkTo(var_0);
   common_scripts\utility::flag_wait("music_stealth_intro");
 
   if(!common_scripts\utility::flag("music_chk_powerstealth")) {
@@ -531,7 +531,7 @@ audio_sfx_truck_in_start() {
   common_scripts\utility::flag_wait("factory_exterior_reveal");
   common_scripts\utility::flag_set("audio_end_thunder");
   level.truckmovesfx = spawn("script_origin", level.intro_truck_cab.origin + (100, 0, 60));
-  level.truckmovesfx linkto(level.intro_truck_cab);
+  level.truckmovesfx linkTo(level.intro_truck_cab);
   waittillframeend;
   level.truckmovesfx playSound("scn_factory_truckinengine");
 }
@@ -552,7 +552,7 @@ audio_sfx_truck_chatter(var_0, var_1) {
   var_0[1] endon("death");
   var_0[2] endon("death");
   level.truckchatter = spawn("script_origin", level.intro_truck_cab.origin + (300, 0, 60));
-  level.truckchatter linkto(level.intro_truck_cab);
+  level.truckchatter linkTo(level.intro_truck_cab);
   waittillframeend;
   var_2 = maps\_utility::get_living_ai("entrance_enemy_02", "script_noteworthy");
   var_3 = maps\_utility::get_living_ai("intro_truck_driver", "script_noteworthy");
@@ -629,16 +629,16 @@ audio_car_explode() {
 }
 
 audio_factory_door_open() {
-  var_0 = getent("factory_entrance_door", "script_noteworthy");
+  var_0 = getEnt("factory_entrance_door", "script_noteworthy");
   var_0 playSound("scn_factory_garage_door_open");
 }
 
 audio_factory_unlock_sound() {}
 
 audio_setup_factory_reveal_ambience_triggers() {
-  var_0 = getent("swap_to_amb_ext", "targetname");
+  var_0 = getEnt("swap_to_amb_ext", "targetname");
   var_0 thread audio_factory_ambient_switch_to_ext();
-  var_1 = getent("swap_to_amb_int", "targetname");
+  var_1 = getEnt("swap_to_amb_int", "targetname");
   var_1 thread audio_factory_ambient_switch_to_int();
 }
 
@@ -902,7 +902,7 @@ sfx_hey_vo_line() {
 audio_sfx_truck_pull_away_start() {
   if(level.start_point != "factory_ingress") {
     level.truckenginesfx = spawn("script_origin", level.intro_truck_cab.origin);
-    level.truckenginesfx linkto(level.intro_truck_cab);
+    level.truckenginesfx linkTo(level.intro_truck_cab);
     level.truckenginesfx playSound("scn_factory_truckawayengine");
     wait 9;
     level.truckenginesfx delete();
@@ -970,7 +970,7 @@ ambush_line_emitter_logic(var_0, var_1, var_2) {
     }
 
     var_12 = pointonsegmentnearesttopoint(var_4.origin, var_5.origin, level.player.origin);
-    var_3 moveto(var_12, 0.01);
+    var_3 moveTo(var_12, 0.01);
 
     if(var_6 == 0) {
       var_3 playLoopSound(var_1);
@@ -1090,7 +1090,7 @@ garage_sfx_reveal() {
 
 sfx_garage_reveal_crane() {
   wait 0.54;
-  level.crane_beam = getent("reveal_crane_org", "targetname");
+  level.crane_beam = getEnt("reveal_crane_org", "targetname");
   level.crane_beam playSound("scn_factory_garage_reveal_crane");
   thread sfx_reveal_mix_down();
   wait 0.1;
@@ -1107,10 +1107,10 @@ sfx_garage_reveal_filtered() {
 sfx_reveal_mix_down() {}
 
 sfx_rods_move() {
-  var_0 = getent("satellite_ROG_05_org", "targetname");
+  var_0 = getEnt("satellite_ROG_05_org", "targetname");
   var_0 playSound("scn_factory_rods_mvmt");
   level.rog_verb = spawn("script_origin", (0, 0, 0));
-  level.rog_verb linkto(level.player);
+  level.rog_verb linkTo(level.player);
   level.rog_verb playSound("scn_factory_rods_verb_lr");
   thread sfx_rods_hallway_start();
 }
@@ -1134,7 +1134,7 @@ sfx_rods_hallway_stop() {
 }
 
 sfx_rods_load() {
-  var_0 = getent("satellite_room_rog_holder_org", "targetname");
+  var_0 = getEnt("satellite_room_rog_holder_org", "targetname");
   var_0 playSound("scn_factory_rods_load");
 }
 
@@ -1331,7 +1331,7 @@ sfx_explo_after_flashbang() {
 sfx_keegan_desk() {
   if(!common_scripts\utility::flag("sfx_dont_play_desk")) {
     level.keegan_search_desk_sfx = spawn("script_origin", self.origin);
-    level.keegan_search_desk_sfx linkto(self);
+    level.keegan_search_desk_sfx linkTo(self);
     level.keegan_search_desk_sfx playSound("scn_factory_keegan_search_desk");
   }
 }
@@ -1383,7 +1383,7 @@ sfx_intro_helicopter_and_splash(var_0) {
 
 moving_platform_warning_beeps_sfx(var_0) {
   level.moving_platform = spawn("script_origin", var_0 - (300, 0, -200));
-  level.moving_platform linkto(self);
+  level.moving_platform linkTo(self);
   wait 1.5;
   level.moving_platform playLoopSound("emt_factory_moving_platform_beeps");
 }
@@ -1394,11 +1394,11 @@ moving_platform_movement_loop_sfx(var_0, var_1) {
   }
 
   var_2 = spawn("script_origin", var_0);
-  var_2 linkto(self);
+  var_2 linkTo(self);
   var_3 = spawn("script_origin", var_0);
-  var_3 linkto(self);
+  var_3 linkTo(self);
   var_4 = spawn("script_origin", var_0);
-  var_4 linkto(self);
+  var_4 linkTo(self);
   var_2 playLoopSound("emt_moving_platform_movement_lp");
   var_3 playLoopSound("emt_moving_platform_movement_close_lp");
   var_2 scalevolume(0.0, 0.01);
@@ -1408,7 +1408,7 @@ moving_platform_movement_loop_sfx(var_0, var_1) {
   var_3 scalevolume(1.0, 0.5);
   wait(var_1);
   var_5 = spawn("script_origin", var_3.origin);
-  var_5 linkto(self);
+  var_5 linkTo(self);
   var_5 playSound("emt_factory_moving_platform_stop");
   wait 0.5;
   var_3 stoploopsound();
@@ -1469,7 +1469,7 @@ stealth_kill_console_chair_sfx() {
 rooftop_heli_speaker_vo_sfx() {
   self endon("rooftop_spotlight_off");
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   level.sfx_heli_spkr_vo_playing = 1;
   level.heli_speaker_vo_array = [];
   sfx_factory_heli_spkr_vo_init("emt_heli_speaker_vo_01", 2.772);
@@ -1528,7 +1528,7 @@ rooftop_heli_speaker_destroy() {
 
 rooftop_heli_engine_sfx() {
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   self playSound("scn_factory_rooftop_heli_reveal");
   thread rooftop_heli_lights_on();
   thread rooftop_heli_engine_2nd_move_watcher();
@@ -1659,25 +1659,25 @@ sfx_car_squeal(var_0) {
 sfx_plane01(var_0) {
   var_1 = spawn("script_origin", (-1066, 1413, 1528));
   var_1 playSound("scn_factory_end_plane_01");
-  var_1 moveto((-2832, -2288, 1656), 3);
+  var_1 moveTo((-2832, -2288, 1656), 3);
 }
 
 sfx_plane02(var_0) {
   var_1 = spawn("script_origin", (-12614, 2954, 1739));
   var_1 playSound("scn_factory_end_plane_02");
-  var_1 moveto((-7725, 2438, 1739), 3);
+  var_1 moveTo((-7725, 2438, 1739), 3);
 }
 
 sfx_plane03(var_0) {
   var_1 = spawn("script_origin", (-19471, 8723, 1549));
   var_1 playSound("scn_factory_end_plane_02");
-  var_1 moveto((-13828, 5489, 2419), 2);
+  var_1 moveTo((-13828, 5489, 2419), 2);
 }
 
 sfx_tower_1(var_0) {
   var_1 = spawn("script_origin", (-4984, -814, 749));
   var_1 playSound("scn_factory_end_stack1");
-  var_1 moveto((-6488, -1384, 200), 4);
+  var_1 moveTo((-6488, -1384, 200), 4);
 }
 
 sfx_tower_1_imp(var_0) {
@@ -1688,7 +1688,7 @@ sfx_tower_1_imp(var_0) {
 sfx_big_tower_debris(var_0) {
   var_1 = spawn("script_origin", (-9978, 1866, 269));
   var_1 playSound("scn_factory_end_stack2");
-  var_1 moveto((-14122, 8865, 344), 8);
+  var_1 moveTo((-14122, 8865, 344), 8);
 }
 
 sfx_tower2_imp(var_0) {

@@ -79,7 +79,7 @@ function open_door(a_str_door_names, var_47eb646a = 0, var_91ccb2d7, b_play_audi
       zombie_door.script_flag_wait = undefined;
       zombie_door notify(#"power_on");
       zombie_door.b_opened = 1;
-      playsoundatposition(#"hash_27dc220231c7b8b3", zombie_door.origin);
+      playSoundAtPosition(#"hash_27dc220231c7b8b3", zombie_door.origin);
     }
 
     if(var_47eb646a) {
@@ -350,7 +350,7 @@ function function_9dc9326c(player) {
 
   if(!is_true(level.var_77f262b9) && get_story() === 2) {
     level.var_77f262b9 = 1;
-    level util::delay(3, "end_game", &array::thread_all, getplayers(), &zm_equipment::show_hint_text, #"hash_68e088397871d66a");
+    level util::delay(3, "end_game", &array::thread_all, getPlayers(), &zm_equipment::show_hint_text, #"hash_68e088397871d66a");
   }
 }
 
@@ -624,7 +624,7 @@ function function_11101458(str_next_defend, var_6cc77d4e = #"hash_3a35084ee8c333
     objective_setinvisibletoall(n_obj_id);
     objective_setinvisibletoall(var_e1feb2f6);
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       e_player thread function_428cfaae(var_679cd7a8, var_6cc77d4e, hide_notify, n_obj_id, var_e1feb2f6);
     }
 
@@ -757,7 +757,7 @@ function function_33798535(var_31721422, a_str_zones, var_ed1db1a7, var_6cc77d4e
   if(!isDefined(level.var_ae5daa6e)) {
     s_defend_area = struct::get(var_ed1db1a7);
     level.var_ae5daa6e = s_defend_area.origin;
-    playsoundatposition(#"hash_6124e4ccaf068cd0", level.var_ae5daa6e);
+    playSoundAtPosition(#"hash_6124e4ccaf068cd0", level.var_ae5daa6e);
     level thread function_4a25b584(level.var_ae5daa6e, 20, 800, 1, 0.25);
     callback::remove_on_ai_killed(&function_cff5da11);
     callback::remove_on_ai_killed(&function_d40910b4);
@@ -816,7 +816,7 @@ function function_3b09971f(var_ed1db1a7, var_de0f1997, a_str_zones) {
     }
 
     if(b_any_player_in_zone && n_time_elapsed >= 5) {
-      playsoundatposition(#"hash_5755957467fab7c0", s_defend_area.origin);
+      playSoundAtPosition(#"hash_5755957467fab7c0", s_defend_area.origin);
       var_d2f964c9++;
 
       switch (var_d2f964c9) {
@@ -886,7 +886,7 @@ function function_d40910b4(params) {
     }
 
     level.var_ae5daa6e = v_start;
-    playsoundatposition(#"hash_6124e4ccaf068cd0", level.var_ae5daa6e);
+    playSoundAtPosition(#"hash_6124e4ccaf068cd0", level.var_ae5daa6e);
     level thread function_4a25b584(level.var_ae5daa6e, 20, 800, 1, 0.25);
     callback::remove_on_ai_killed(&function_cff5da11);
     callback::remove_on_ai_killed(&function_d40910b4);
@@ -1243,7 +1243,7 @@ function function_ac41a624() {
     }
   }
 
-  self setorigin(v_origin);
+  self setOrigin(v_origin);
   self setplayerangles(v_angles);
 }
 
@@ -1426,7 +1426,7 @@ function enable_power_switch(b_enable = 0, var_909e9d3d = 0, str_value, str_key,
 
         if(!var_c996d382) {
           var_c996d382 = 1;
-          level util::delay(4, "end_game", &array::thread_all, getplayers(), &zm_equipment::show_hint_text, #"zmarcade/power_on");
+          level util::delay(4, "end_game", &array::thread_all, getPlayers(), &zm_equipment::show_hint_text, #"zmarcade/power_on");
           level thread zm_audio::sndannouncerplayvox(#"power_activated");
         }
       }
@@ -1438,7 +1438,7 @@ function enable_power_switch(b_enable = 0, var_909e9d3d = 0, str_value, str_key,
   foreach(t_power in a_t_power) {
     if(isDefined(var_34451c07)) {
       t_power.var_b9eb2dbb = 1;
-      t_power sethintstring(var_34451c07);
+      t_power setHintString(var_34451c07);
       continue;
     }
 

@@ -221,19 +221,19 @@ sonic_zombie_spawn(animname_set) {
   self thread _zombie_InitSideStep();
   self thread _zombie_death_watch();
   self thread sonic_zombie_count_watch();
-  closest = GetClosest(self.origin, GetPlayers());
+  closest = GetClosest(self.origin, getPlayers());
   angles = VectorToAngles(closest.origin - self.origin);
   anchor = spawn("script_origin", self.origin);
   anchor.angles = (0, angles[1], 0);
-  self linkto(anchor);
+  self linkTo(anchor);
   self Hide();
   self.a.disablepain = true;
   self.rising = true;
   self magic_bullet_shield();
   anim_org = self.origin + (0, 0, -45);
-  anchor MoveTo(anim_org, 0.05);
+  anchor moveTo(anim_org, 0.05);
   anchor waittill("movedone");
-  anchor RotateTo((0, angles[1], 0), 0.05);
+  anchor rotateTo((0, angles[1], 0), 0.05);
   anchor waittill("rotatedone");
   self Unlink();
   anchor Delete();
@@ -245,7 +245,7 @@ sonic_zombie_spawn(animname_set) {
   spawn_anim = random(level._zombie_rise_anims["zombie"][1][speed]);
   time = getanimlength(spawn_anim);
   speedUp = 1.5;
-  self animscripted("sonic_spawn", self.origin, self.angles, spawn_anim, "normal", %root, speedUp);
+  self animScripted("sonic_spawn", self.origin, self.angles, spawn_anim, "normal", %root, speedUp);
   fxWait = 0.3;
   wait(fxWait);
   self playSound("zmb_vocals_sonic_scream");
@@ -329,9 +329,9 @@ _zombie_screamAttackAnim() {
   time = getAnimLength(scream_attack_anim);
   scream_attack_times = getnotetracktimes(scream_attack_anim, "fire");
   self thread _zombie_screamAttack(scream_attack_times[0] * time);
-  self animscripted("sonic_zombie_scream", self.origin, self.angles, scream_attack_anim);
+  self animScripted("sonic_zombie_scream", self.origin, self.angles, scream_attack_anim);
   self _zombie_screamAttackAnim_wait(time);
-  self stopanimscripted(.5);
+  self stopanimScripted(.5);
   self _zombie_scream_attack_done();
   death_anims = level._zombie_deaths[self.animname];
   self.deathanim = random(death_anims);
@@ -358,13 +358,13 @@ _zombie_screamAttack(delay) {
   wait(delay);
   self playSound("zmb_vocals_sonic_scream");
   self thread _zombie_playscreamfx();
-  players = GetPlayers();
+  players = getPlayers();
   array_thread(players, ::_player_ScreamAttackWatch, self);
   wait(2.0);
   self thread _zombie_scream_attack_done();
 }
 _zombie_scream_attack_done() {
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] notify("scream_watch_done");
   }
@@ -379,7 +379,7 @@ _zombie_playScreamFX() {
   self.screamFX = spawn("script_model", origin);
   self.screamFX setModel("tag_origin");
   self.screamFX.angles = self GetTagAngles(tag);
-  self.screamFX LinkTo(self, tag);
+  self.screamFX linkTo(self, tag);
   playFXOnTag(level._effect["sonic_attack"], self.screamFX, "tag_origin");
   self waittill_any("death", "scream_attack_done", "shrink");
   self.screamFX Delete();
@@ -407,7 +407,7 @@ _player_in_blur_area(sonic_zombie) {
     return false;
   }
   dirToPlayer = self.origin - sonic_zombie.origin;
-  dirToPlayer = vectornormalize(dirToPlayer);
+  dirToPlayer = vectorNormalize(dirToPlayer);
   sonicDir = anglesToForward(sonic_zombie.angles);
   dot = vectordot(dirToPlayer, sonicDir);
   if(dot < .4) {
@@ -446,7 +446,7 @@ _player_screamAttackDamage(time, blurScale, earthquakeScale, rumble, attacker) {
   self thread _player_blurFailsafe();
   Earthquake(earthquakeScale, 3, attacker.origin, level.sonicScreamDamageRadius, self);
   self SetBlur(blurScale, 0.2);
-  self PlayRumbleOnEntity(rumble);
+  self playRumbleOnEntity(rumble);
   self _player_screamAttack_wait(time);
   self SetBlur(0, 0.5);
   self notify("blur_cleared");
@@ -472,7 +472,7 @@ _zombie_SetupFXOnJoint(jointName, fxName) {
   effectEnt = spawn("script_model", origin);
   effectEnt setModel("tag_origin");
   effectEnt.angles = self GetTagAngles(jointName);
-  effectEnt LinkTo(self, jointName);
+  effectEnt linkTo(self, jointName);
   playFXOnTag(level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }
@@ -495,7 +495,7 @@ zombie_sonic_scream_death(attacker) {
     zombie_anim = % ai_zombie_taunts_9;
     time = getAnimLength(zombie_anim);
     self notify("stop_find_flesh");
-    self animscripted("zombie_react", self.origin, self.angles, zombie_anim, "normal", %body, 1, 0.2);
+    self animScripted("zombie_react", self.origin, self.angles, zombie_anim, "normal", %body, 1, 0.2);
     time = time * randomfloatrange(0.75, 1);
     wait(time);
   }
@@ -593,7 +593,7 @@ _sonic_zombie_get_enemies_in_range() {
     if(test_range_squared < fling_range_squared) {
       level.sonicZombie_fling_enemies[level.sonicZombie_fling_enemies.size] = zombies[i];
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-      fling_vec = VectorNormalize(test_origin - center);
+      fling_vec = vectorNormalize(test_origin - center);
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vector_scale(fling_vec, 100 + 100 * dist_mult);
       level.sonicZombie_fling_vecs[level.sonicZombie_fling_vecs.size] = fling_vec;
@@ -667,7 +667,7 @@ _sonic_damage_callback(mod, hit_location, hit_origin, player, amount) {
     if(!isDefined(self.damageCount)) {
       self.damageCount = 0;
     }
-    if(self.damageCount % int(GetPlayers().size * level.sonicHealthMultiplier) == 0) {
+    if(self.damageCount % int(getPlayers().size * level.sonicHealthMultiplier) == 0) {
       player maps\_zombiemode_score::player_add_points("thundergun_fling", 10, hit_location, self.isdog);
     }
     self.damageCount++;

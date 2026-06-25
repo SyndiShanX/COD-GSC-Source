@@ -126,7 +126,7 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
   if(!isDefined(startRadius)) {
     startRadius = 0;
   }
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!isalive(players[i]) || players[i].sessionstate != "playing") {
       continue;
@@ -202,7 +202,7 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
   if(lengthsquared(diff) < startRadius * startRadius) {
     midpos = to;
   }
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
   trace = bulletTrace(midpos, to, false, ignore);
   return (trace["fraction"] == 1);
@@ -229,7 +229,7 @@ watchSmokeGrenadeDetonation() {
   smokeSound playSound("wpn_smoke_hiss_start");
   smokeSound playLoopSound("wpn_smoke_hiss_lp");
   wait(6);
-  playsoundatposition("wpn_smoke_hiss_end", position);
+  playSoundAtPosition("wpn_smoke_hiss_end", position);
   smokeSound StopLoopSound(.5);
   wait(.5);
   smokeSound delete();

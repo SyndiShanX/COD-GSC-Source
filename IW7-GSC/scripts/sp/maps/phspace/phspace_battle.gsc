@@ -34,14 +34,14 @@ func_104B7(var_0) {
   level.var_1CB9 func_0BDC::func_6B4C("space");
   level.var_D299 = scripts\sp\maps\phspace\phspace_launch::func_D2A6("player_sled", 1);
   level.var_D299.var_1FBB = "sled_jackal";
-  var_2 = scripts\engine\utility::getstruct("jackal_launch_animnode_clone", "targetname");
+  var_2 = scripts\engine\utility::getStruct("jackal_launch_animnode_clone", "targetname");
   var_2 = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
   wait 0.1;
   thread func_A24C(var_2);
   var_3 = scripts\sp\vehicle::func_1080C(var_0);
   func_0BDC::func_10CD1(var_3);
   level.var_D299 glinton(#animtree);
-  level.var_D299 animscripted("", var_2.origin, var_2.angles, level.var_EC85["sled_jackal"]["space_launch_boost"]);
+  level.var_D299 animScripted("", var_2.origin, var_2.angles, level.var_EC85["sled_jackal"]["space_launch_boost"]);
   wait 0.05;
   level.var_D299 func_82B0(level.var_EC85["sled_jackal"]["space_launch_boost"], 0.654132);
   wait 0.05;
@@ -322,7 +322,7 @@ func_D868(var_0) {
   }
 
   if(level.var_10CDA == "trench_run" || level.var_10CDA == "ram") {
-    var_8 = getent("ca_olympus", "targetname");
+    var_8 = getEnt("ca_olympus", "targetname");
     var_8.var_EEF9 = "none";
     level.var_3670 = scripts\sp\vehicle::func_1080C("ca_olympus");
     level.var_3670 func_0BB8::func_39CD("off");
@@ -433,7 +433,7 @@ func_12B5F(var_0) {
 
 func_FD5A(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isDefined(var_7)) {
-    var_8 = getent(var_0, "targetname");
+    var_8 = getEnt(var_0, "targetname");
     var_8.var_EEF9 = var_7;
   }
 
@@ -505,7 +505,7 @@ func_12B4D() {
 func_20E9() {
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(12.5);
   thread phspace_audio_mix_for_2nd_explosion();
-  var_0 = getent("trigger_shoot_missiles_at_player", "targetname");
+  var_0 = getEnt("trigger_shoot_missiles_at_player", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   wait 3;
   level.var_3664 thread func_0BB6::func_3966(1, 0, level.var_12B4C);
@@ -523,7 +523,7 @@ phspace_audio_mix_for_2nd_explosion() {
 }
 
 func_6FF4(var_0) {
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -537,7 +537,7 @@ func_6FF4(var_0) {
 
 func_7318(var_0, var_1) {
   if(!isDefined(var_0) || !var_0) {
-    var_2 = getent("trigger_allies_form_up", "targetname");
+    var_2 = getEnt("trigger_allies_form_up", "targetname");
     var_2 func_0BDC::func_136A6(level.var_D127);
   }
 
@@ -564,7 +564,7 @@ func_7318(var_0, var_1) {
 
 func_7317(var_0, var_1) {
   if(!isDefined(var_0) || !var_0) {
-    var_2 = getent("trigger_allies_form_up", "targetname");
+    var_2 = getEnt("trigger_allies_form_up", "targetname");
     var_2 func_0BDC::func_136A6(level.var_D127);
   }
 
@@ -818,7 +818,7 @@ func_491E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   var_9 = spawn("script_origin", var_0.origin + var_7);
-  var_9 linkto(var_0);
+  var_9 linkTo(var_0);
   var_9.var_1A89 = var_4;
   var_9.var_5F27 = 1;
   return var_9;
@@ -841,7 +841,7 @@ func_A0AC() {
   var_0 = scripts\sp\vehicle::func_1080C("player_jackal");
   func_0BDC::func_10CD1(var_0);
   wait 0.05;
-  var_1 = scripts\engine\utility::getstruct("jackal_assault_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("jackal_assault_start", "targetname");
   level.var_D127 vehicle_teleport(var_1.origin, var_1.angles);
   thread func_D868();
   scripts\engine\utility::flag_wait("prespawn_done");
@@ -1029,7 +1029,7 @@ func_A1CC() {
 
   var_0 endon("death");
   var_4 = anglesToForward(level.var_D127.angles);
-  var_4 = vectornormalize(var_4 * -1);
+  var_4 = vectorNormalize(var_4 * -1);
   var_5 = anglestoright(level.var_D127.angles);
   var_6 = level.var_D127.origin + var_4 * 500 + var_5 * 500;
   var_0 vehicle_teleport(var_6, level.var_D127.angles);
@@ -1044,7 +1044,7 @@ func_A1CC() {
     var_4 = anglesToForward(level.var_D127.angles);
     var_9 = anglestoup(level.var_D127.angles);
     var_10 = level.var_D127.origin + var_4 * 20000 + var_9 * 1000;
-    var_11 = vectordot(var_4, vectornormalize(level.var_D127.origin - var_0.origin));
+    var_11 = vectordot(var_4, vectorNormalize(level.var_D127.origin - var_0.origin));
 
     if(var_11 > 0) {
       var_0 thread func_0BDC::func_19AB(1400);
@@ -1081,9 +1081,9 @@ func_6AF6(var_0) {
   var_3 = anglestoup(level.var_D127.angles);
   var_4 = anglesToForward(level.var_D127.angles);
   var_5 = anglestoright(level.var_D127.angles);
-  var_3 = vectornormalize(var_3);
-  var_4 = vectornormalize(var_4);
-  var_5 = vectornormalize(var_5);
+  var_3 = vectorNormalize(var_3);
+  var_4 = vectorNormalize(var_4);
+  var_5 = vectorNormalize(var_5);
 
   while(var_1 > 0) {
     var_2.origin = level.var_D127.origin;
@@ -1176,9 +1176,9 @@ func_1D75(var_0, var_1, var_2) {
     var_3 = anglestoup(level.var_D127.angles);
     var_4 = anglesToForward(level.var_D127.angles);
     var_5 = anglestoright(level.var_D127.angles);
-    var_3 = vectornormalize(var_3);
-    var_4 = vectornormalize(var_4);
-    var_5 = vectornormalize(var_5);
+    var_3 = vectorNormalize(var_3);
+    var_4 = vectorNormalize(var_4);
+    var_5 = vectorNormalize(var_5);
     var_6 = randomfloatrange(500, 2000);
     var_7 = randomfloatrange(500, 3500);
     var_8 = randomfloatrange(-500, 1500);
@@ -1386,7 +1386,7 @@ func_B2E3(var_0, var_1, var_2) {
 
     if(level.var_A1A3 < level.var_B434 && level.var_B434 != 0 && level.var_A243 - level.var_A242 > 3 && var_9 > 5) {
       foreach(var_6 in var_4) {
-        var_11 = vectordot(anglesToForward(level.player getplayerangles()), vectornormalize(var_6.origin - func_0BDC::func_7BBA()));
+        var_11 = vectordot(anglesToForward(level.player getplayerangles()), vectorNormalize(var_6.origin - func_0BDC::func_7BBA()));
 
         if(var_11 < 0.3) {
           var_7 = var_6 scripts\sp\utility::func_10808();
@@ -1559,7 +1559,7 @@ func_FD19() {
   var_0 = scripts\sp\vehicle::func_1080C("player_jackal");
   func_0BDC::func_10CD1(var_0);
   wait 0.05;
-  var_1 = scripts\engine\utility::getstruct("ship_assault_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct("ship_assault_start", "targetname");
   level.var_D127 vehicle_teleport(var_1.origin, var_1.angles);
   thread func_D868();
   scripts\engine\utility::flag_wait("prespawn_done");
@@ -2221,7 +2221,7 @@ func_FD45() {
   wait 0.2;
   var_3 = spawn("script_origin", self.origin);
   var_3.angles = self.angles;
-  self linkto(var_3);
+  self linkTo(var_3);
 
   for(;;) {
     var_4 = randomfloatrange(200, 600);
@@ -2256,13 +2256,13 @@ func_FD45() {
       var_9 = var_9 * -1;
     }
 
-    var_3 moveto(var_3.origin + (var_4, var_5, var_6), var_0, var_1, var_2);
-    var_3 rotateto(var_3.angles + (var_7, var_8, var_9), var_0, var_1, var_2);
+    var_3 moveTo(var_3.origin + (var_4, var_5, var_6), var_0, var_1, var_2);
+    var_3 rotateTo(var_3.angles + (var_7, var_8, var_9), var_0, var_1, var_2);
     var_3 waittill("movedone");
     var_3 waittill("rotatedone");
     wait(randomfloatrange(0, 2));
-    var_3 moveto(var_3.origin - (var_4, var_5, var_6), var_0, var_1, var_2);
-    var_3 rotateto(var_3.angles - (var_7, var_8, var_9), var_0, var_1, var_2);
+    var_3 moveTo(var_3.origin - (var_4, var_5, var_6), var_0, var_1, var_2);
+    var_3 rotateTo(var_3.angles - (var_7, var_8, var_9), var_0, var_1, var_2);
     var_3 waittill("movedone");
     var_3 waittill("rotatedone");
     wait(randomfloatrange(0, 2));
@@ -2289,8 +2289,8 @@ func_5878() {
 func_A24C(var_0) {
   level.var_EA99 func_0BDC::func_19A2();
   level.var_1CB9 func_0BDC::func_19A2();
-  level.var_EA99 animscripted("space_launch_done", var_0.origin, var_0.angles, level.var_EC85["salter_jackal"]["space_launch"]);
-  level.var_1CB9 animscripted("space_launch_done", var_0.origin, var_0.angles, level.var_EC85["jackal_ally1"]["space_launch"]);
+  level.var_EA99 animScripted("space_launch_done", var_0.origin, var_0.angles, level.var_EC85["salter_jackal"]["space_launch"]);
+  level.var_1CB9 animScripted("space_launch_done", var_0.origin, var_0.angles, level.var_EC85["jackal_ally1"]["space_launch"]);
   wait 0.05;
   level.var_EA99 func_82B0(level.var_EC85["salter_jackal"]["space_launch"], 0.803228);
   level.var_1CB9 func_82B0(level.var_EC85["jackal_ally1"]["space_launch"], 0.803228);
@@ -2378,7 +2378,7 @@ spawn_ret_door_hack() {
   }
   level.var_E311 = spawn("script_model", level.var_12B67.origin);
   level.var_E311 setModel("veh_mil_air_un_retribution_details_door");
-  level.var_E311 linkto(level.var_12B67, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.var_E311 linkTo(level.var_12B67, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
 
 delete_ret_door_hack() {

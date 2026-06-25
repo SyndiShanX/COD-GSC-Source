@@ -12,7 +12,7 @@
 
 function hack_packapunch() {
   vending_weapon_upgrade_trigger = getEntArray("pack_a_punch", "script_noteworthy");
-  perk = getent(vending_weapon_upgrade_trigger[0].target, "targetname");
+  perk = getEnt(vending_weapon_upgrade_trigger[0].target, "targetname");
   if(isDefined(perk)) {
     struct = spawnStruct();
     struct.origin = (perk.origin + (anglestoright(perk.angles) * 26)) + vectorscale((0, 0, 1), 48);

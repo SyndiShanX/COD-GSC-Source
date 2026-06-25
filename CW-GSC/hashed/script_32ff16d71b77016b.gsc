@@ -238,8 +238,8 @@ function private function_bfc92d86(drone) {
 }
 
 function private function_19f971bb() {
-  self moveto(self.origin, 0.05);
-  self rotateto(self.angles, 0.05);
+  self moveTo(self.origin, 0.05);
+  self rotateTo(self.angles, 0.05);
   wait 0.1;
   var_361f5589 = getfakeaiarray();
   var_9789086c = 54;
@@ -356,7 +356,7 @@ function drone_idle(stance) {
 
   if(isDefined(self.idleanim) || self function_44dd1cfb(stance, "IDLE")) {
     while(isDefined(self)) {
-      self stopanimscripted();
+      self stopanimScripted();
 
       if(isDefined(self.idleanim)) {
         idleanim = self.idleanim;
@@ -622,7 +622,7 @@ function private function_54f05251() {
           continue;
         }
 
-        direction = vectornormalize(destination - var_792c52e4);
+        direction = vectorNormalize(destination - var_792c52e4);
         destination = var_792c52e4 + direction * var_946a08d6;
       }
 
@@ -647,10 +647,10 @@ function private function_54f05251() {
       self thread function_35b3aa66((0, path[path.size - 1][#"angles"][1], 0), min(var_d7e06ec6, 0.25), var_d7e06ec6 - 0.35);
     } else {
       var_df8541a5 = vectortoangles(destination - self.origin);
-      self rotateto((0, var_df8541a5[1], 0), min(0.5, var_d7e06ec6));
+      self rotateTo((0, var_df8541a5[1], 0), min(0.5, var_d7e06ec6));
     }
 
-    self moveto(destination, var_d7e06ec6);
+    self moveTo(destination, var_d7e06ec6);
     wait var_d7e06ec6;
 
     if(isDefined(path[path_index][#"notify"])) {
@@ -676,7 +676,7 @@ function private function_35b3aa66(angle, duration, delay) {
     wait delay;
   }
 
-  self rotateto(angle, duration);
+  self rotateTo(angle, duration);
 }
 
 function private function_7bce6b25(var_3d70749c, var_a3375299) {

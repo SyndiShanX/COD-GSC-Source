@@ -238,7 +238,7 @@ function_a596ea8d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     if(!isDefined(self.var_95496a89[localclientnum])) {
       self.var_95496a89[localclientnum] = util::spawn_model(localclientnum, "tag_origin", self.origin + (0, 0, 40), self.angles);
-      self.var_95496a89[localclientnum] linkto(self, "tag_origin");
+      self.var_95496a89[localclientnum] linkTo(self, "tag_origin");
     }
 
     self.var_86931af3[localclientnum] = level beam::launch(self.var_95496a89[localclientnum], "tag_origin", self.var_d1f92a1c[localclientnum], "tag_origin", "beam8_zm_shield_key_ray_targeted");
@@ -504,9 +504,9 @@ setup_outro_ghosts(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 }
 
 function_d663c13e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, #"hash_738338790dfa1ece");
+  self playRumbleOnEntity(localclientnum, #"hash_738338790dfa1ece");
 }
 
 map_interact_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, #"zm_escape_map_interact");
+  self playRumbleOnEntity(localclientnum, #"zm_escape_map_interact");
 }

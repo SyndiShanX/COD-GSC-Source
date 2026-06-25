@@ -76,7 +76,7 @@ radarMover(portableRadar) {
   self endon("personal_uav_removed");
 
   for(;;) {
-    portableRadar MoveTo(self.origin, .05);
+    portableRadar moveTo(self.origin, .05);
     wait(0.05);
   }
 }

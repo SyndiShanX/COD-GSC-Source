@@ -34,15 +34,15 @@ function initzipline() {
   level.zrnodes = [];
   level.zipinuse = 0;
   for(i = 0; i < zipbuytrigger.size; i++) {
-    zipbuytrigger[i].zip = getent(zipbuytrigger[i].target, "targetname");
-    zipbuytrigger[i].blocker = getent("zipline_blocker", "targetname");
-    zipbuytrigger[i].aiblocker = getent("zipline_ai_blocker", "targetname");
+    zipbuytrigger[i].zip = getEnt(zipbuytrigger[i].target, "targetname");
+    zipbuytrigger[i].blocker = getEnt("zipline_blocker", "targetname");
+    zipbuytrigger[i].aiblocker = getEnt("zipline_ai_blocker", "targetname");
     zipbuytrigger[i].tempclip = getEntArray("zip_temp_clip", "targetname");
-    zipbuytrigger[i].handle = getent("zip_handle", "targetname");
-    zipbuytrigger[i].lever = getent("zip_lever", "targetname");
-    zipbuytrigger[i].volume = getent(zipbuytrigger[i].zip.target, "targetname");
-    zipbuytrigger[i].zipdamagetrigger = getent(zipbuytrigger[i].volume.target, "targetname");
-    zipbuytrigger[i].zipdamagevolume = getent(zipbuytrigger[i].zipdamagetrigger.target, "targetname");
+    zipbuytrigger[i].handle = getEnt("zip_handle", "targetname");
+    zipbuytrigger[i].lever = getEnt("zip_lever", "targetname");
+    zipbuytrigger[i].volume = getEnt(zipbuytrigger[i].zip.target, "targetname");
+    zipbuytrigger[i].zipdamagetrigger = getEnt(zipbuytrigger[i].volume.target, "targetname");
+    zipbuytrigger[i].zipdamagevolume = getEnt(zipbuytrigger[i].zipdamagetrigger.target, "targetname");
     if(isDefined(zipbuytrigger[i].script_noteworthy) && zipbuytrigger[i].script_noteworthy == "nonstatic") {
       nonstatictrig = zipbuytrigger[i];
     } else if(isDefined(zipbuytrigger[i].script_noteworthy) && zipbuytrigger[i].script_noteworthy == "static") {
@@ -50,26 +50,26 @@ function initzipline() {
     }
     level.znodes = getEntArray("zipline_nodes", "script_noteworthy");
     level.zrnodes = [];
-    zipbuytrigger[i] setcursorhint("HINT_NOICON");
+    zipbuytrigger[i] setCursorHint("HINT_NOICON");
   }
-  nonstatictrig enablelinkto();
-  nonstatictrig linkto(nonstatictrig.zip);
+  nonstatictrig enablelinkTo();
+  nonstatictrig linkTo(nonstatictrig.zip);
   statictrig triggerenable(0);
-  zipbuytrigger[0].volume enablelinkto();
-  zipbuytrigger[0].volume linkto(zipbuytrigger[0].zip);
-  zipbuytrigger[0].zipdamagetrigger enablelinkto();
-  zipbuytrigger[0].zipdamagetrigger linkto(zipbuytrigger[0].zip);
-  zipbuytrigger[0].zipdamagevolume enablelinkto();
-  zipbuytrigger[0].zipdamagevolume linkto(zipbuytrigger[0].zip);
+  zipbuytrigger[0].volume enablelinkTo();
+  zipbuytrigger[0].volume linkTo(zipbuytrigger[0].zip);
+  zipbuytrigger[0].zipdamagetrigger enablelinkTo();
+  zipbuytrigger[0].zipdamagetrigger linkTo(zipbuytrigger[0].zip);
+  zipbuytrigger[0].zipdamagevolume enablelinkTo();
+  zipbuytrigger[0].zipdamagevolume linkTo(zipbuytrigger[0].zip);
   for(i = 0; i < zipbuytrigger[0].tempclip.size; i++) {
-    zipbuytrigger[0].tempclip[i] linkto(zipbuytrigger[0].zip);
+    zipbuytrigger[0].tempclip[i] linkTo(zipbuytrigger[0].zip);
   }
-  zippowertrigger = getent("zip_lever_trigger", "targetname");
-  zippowertrigger.lever = getent(zippowertrigger.target, "targetname");
-  zippowertrigger sethintstring(&"ZOMBIE_ZIPLINE_ACTIVATE");
-  zippowertrigger setcursorhint("HINT_NOICON");
+  zippowertrigger = getEnt("zip_lever_trigger", "targetname");
+  zippowertrigger.lever = getEnt(zippowertrigger.target, "targetname");
+  zippowertrigger setHintString(&"ZOMBIE_ZIPLINE_ACTIVATE");
+  zippowertrigger setCursorHint("HINT_NOICON");
   zippowertrigger waittill("trigger", who);
-  ziphintdeactivated = getent("zipline_deactivated_hint_trigger", "targetname");
+  ziphintdeactivated = getEnt("zipline_deactivated_hint_trigger", "targetname");
   ziphintdeactivated delete();
   zippowertrigger thread recallzipswitch(180);
   zippowertrigger waittill("recallleverdone");
@@ -80,7 +80,7 @@ function initzipline() {
   zipbuytrigger[0].blocker connectpaths();
   zipbuytrigger[0].blocker notsolid();
   zm_utility::play_sound_at_pos("door_rotate_open", zipbuytrigger[0].blocker.origin);
-  zipbuytrigger[0].blocker rotateyaw(80, 1);
+  zipbuytrigger[0].blocker rotateYaw(80, 1);
   zipbuytrigger[0].blocker playSound("zmb_wooden_door");
   zipbuytrigger[0].blocker waittill("rotatedone");
   zipbuytrigger[0].blocker thread objectsolid();
@@ -135,7 +135,7 @@ function zip_line_stopsound() {
 
 function recallzipswitch(dir) {
   self.lever rotatepitch(dir, 0.5);
-  org = getent("zip_line_switch", "targetname");
+  org = getEnt("zip_line_switch", "targetname");
   if(isDefined(org)) {
     if(dir == 180) {
       org playSound("zmb_switch_on");
@@ -208,8 +208,8 @@ function function_d3655c8e(e_trigger) {
 }
 
 function zipthink() {
-  self sethintstring(&"ZOMBIE_ZIPLINE_USE");
-  self setcursorhint("HINT_NOICON");
+  self setHintString(&"ZOMBIE_ZIPLINE_USE");
+  self setCursorHint("HINT_NOICON");
   self.zombie_cost = 1500;
   zipbuytrigger = getEntArray("zipline_buy_trigger", "targetname");
   self thread function_73a6adde();
@@ -231,8 +231,8 @@ function zipthink() {
             for(i = 0; i < zipbuytrigger.size; i++) {
               if(isDefined(zipbuytrigger[i].script_noteworthy) && zipbuytrigger[i].script_noteworthy == "nonstatic") {
                 zipbuytrigger[i] notify("stopstringmonitor");
-                zipbuytrigger[i] linkto(zipbuytrigger[i].zip);
-                zipbuytrigger[i] sethintstring("");
+                zipbuytrigger[i] linkTo(zipbuytrigger[i].zip);
+                zipbuytrigger[i] setHintString("");
                 continue;
               }
               if(isDefined(zipbuytrigger[i].script_noteworthy) && zipbuytrigger[i].script_noteworthy == "static" && !isDefined(level.direction)) {
@@ -266,8 +266,8 @@ function zipthink() {
             }
             for(i = 0; i < zipbuytrigger.size; i++) {
               if(isDefined(zipbuytrigger[i].script_noteworthy) && zipbuytrigger[i].script_noteworthy == "nonstatic") {
-                zipbuytrigger[i] sethintstring(&"ZOMBIE_ZIPLINE_USE");
-                zipbuytrigger[i] setcursorhint("HINT_NOICON");
+                zipbuytrigger[i] setHintString(&"ZOMBIE_ZIPLINE_USE");
+                zipbuytrigger[i] setCursorHint("HINT_NOICON");
                 zipbuytrigger[i] triggerenable(1);
                 zipbuytrigger[i] thread monitorziphint();
               }
@@ -300,7 +300,7 @@ function triggeroffsumpf() {
 function monitorziphint() {
   self endon("stopstringmonitor");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     downedplayers = [];
     aliveplayers = [];
     stoptrigger = 0;
@@ -361,7 +361,7 @@ function activatezip(rider) {
   }
   level thread zip_line_audio();
   var_d496a1ae = array("link_player1", "link_player2", "link_player3", "link_player4");
-  peeps = getplayers();
+  peeps = getPlayers();
   for(i = 0; i < peeps.size; i++) {
     if(zombie_utility::is_player_valid(peeps[i]) && (peeps[i] istouching(self.volume) || (isDefined(rider) && peeps[i] == rider))) {
       prevdist = undefined;
@@ -393,7 +393,7 @@ function activatezip(rider) {
       peeps[i] allowcrouch(0);
       peeps[i] allowprone(0);
       peeps[i] clientfield::set("player_legs_hide", 1);
-      peeps[i] playerlinkto(self.zip, playerspot, 0, 180, 180, 180, 180, 1);
+      peeps[i] playerlinkTo(self.zip, playerspot, 0, 180, 180, 180, 180, 1);
       arrayremovevalue(var_d496a1ae, playerspot);
     }
   }
@@ -405,7 +405,7 @@ function activatezip(rider) {
   self thread function_58047fdd();
   if(!isDefined(level.direction)) {
     self.aiblocker solid();
-    self.aiblocker disconnectpaths(0, 0);
+    self.aiblocker disconnectPaths(0, 0);
     for(i = 0; i < self.riders.size; i++) {
       self.riders[i] thread zm::store_crumb((11216, 2883, -648));
     }
@@ -461,7 +461,7 @@ function zipdamage(parent) {
 function playerzipdamage(parent) {
   self endon("death");
   self endon("disconnect");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < parent.riders.size; i++) {
     if(self == parent.riders[i]) {
       return;
@@ -488,7 +488,7 @@ function zombiezipdamage() {
 function objectsolid() {
   self endon("stopmonitorsolid");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     player_touching = 0;
     for(i = 0; i < players.size; i++) {
       if(players[i] istouching(self)) {
@@ -520,7 +520,7 @@ function player_collision_fix() {
   }
   assert(isDefined(base));
   z = base.origin[2];
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!zombie_utility::is_player_valid(player)) {
@@ -532,7 +532,7 @@ function player_collision_fix() {
     if(player.origin[2] < z) {
       offset = z + 6;
       origin = (player.origin[0], player.origin[1], offset);
-      player setorigin(origin);
+      player setOrigin(origin);
     }
   }
 }

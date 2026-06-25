@@ -90,7 +90,7 @@ monitorGeneratorUse(generatorType) {
 
         parent = grenade GetLinkedParent();
         if(isDefined(parent)) {
-          generator LinkTo(parent);
+          generator linkTo(parent);
         }
 
         if(isDefined(grenade)) {

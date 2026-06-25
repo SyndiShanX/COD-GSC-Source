@@ -231,7 +231,7 @@ func_F13F(var_0) {
 func_F146() {
   self endon("meleegrab_interupt");
   for(;;) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     earthquake(0.15, 0.1, level.player.origin, 5000);
     wait(0.05);
   }
@@ -239,7 +239,7 @@ func_F146() {
 
 func_F143() {
   var_0 = spawn("script_model", self.origin);
-  var_0 linkto(self, "j_hip_le", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "j_hip_le", (0, 0, 0), (0, 0, 0));
   var_0 lib_0E46::func_48C4(undefined, undefined, "", undefined, undefined, undefined, 1, 1);
   self waittill("meleegrab_interupt");
   var_0 lib_0E46::func_DFE3();

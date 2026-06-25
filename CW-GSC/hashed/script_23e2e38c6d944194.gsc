@@ -38,7 +38,7 @@ function function_32e330d() {
 function function_c46b4b94() {
   self endon(#"entitydeleted", #"hash_27629c40b49f163c");
   self setCanDamage(1);
-  self disconnectpaths();
+  self disconnectPaths();
   origin = self.origin;
   s_notify = self waittill(#"damage");
   level thread function_93b6095f(s_notify, origin);
@@ -98,7 +98,7 @@ function function_93b6095f(s_notify, origin) {
 function function_69e2587b() {
   self endon(#"entitydeleted", #"hash_27629c40b49f163c");
   self setCanDamage(1);
-  self disconnectpaths();
+  self disconnectPaths();
   origin = self.origin;
   s_notify = self waittill(#"damage");
   level thread function_83da8e07(s_notify, origin);
@@ -160,7 +160,7 @@ function function_83da8e07(s_notify, origin) {
 function function_42a285bf() {
   self endon(#"entitydeleted", #"hash_27629c40b49f163c");
   self setCanDamage(1);
-  self disconnectpaths();
+  self disconnectPaths();
   origin = self.origin;
   s_notify = self waittill(#"damage");
   level thread function_c59775f7(s_notify, origin);

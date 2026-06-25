@@ -88,7 +88,7 @@ func_2831(var_0, var_1) {
   }
 
   if(var_2 > squared(var_0 * 0.25)) {
-    var_3 = vectordot(scripts\engine\utility::flatten_vector(vectornormalize(var_1 - level.player.origin)), anglesToForward(level.player.angles));
+    var_3 = vectordot(scripts\engine\utility::flatten_vector(vectorNormalize(var_1 - level.player.origin)), anglesToForward(level.player.angles));
     if(var_3 < 0) {
       return;
     }
@@ -129,7 +129,7 @@ func_2837(var_0, var_1, var_2) {
     return;
   }
 
-  var_3 = vectornormalize(self.origin - var_0);
+  var_3 = vectorNormalize(self.origin - var_0);
   var_4 = self.var_CAEC;
   if(var_1 <= self.var_B74E) {
     var_4 = self.var_CAEB;
@@ -157,7 +157,7 @@ func_283E() {
 
     var_0 = self physics_getentitycenterofmass();
     var_0 = var_0["unscaled"] + (0, 0, 4);
-    self physicslaunchserver(var_0, vectornormalize(self.origin - level.player.origin) * 1000);
+    self physicslaunchserver(var_0, vectorNormalize(self.origin - level.player.origin) * 1000);
     wait(0.05);
   }
 }

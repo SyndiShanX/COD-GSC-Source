@@ -439,7 +439,7 @@ function logdamage(attacker, victim, weapon, damage, damagetype, hitlocation, vi
 
 function logaispawn(aient, spawner) {}
 
-function function_cd497743(notificationtype, player = getplayers()[0]) {
+function function_cd497743(notificationtype, player = getPlayers()[0]) {
   if(!isPlayer(player) && !isai(player)) {
     return;
   }
@@ -540,7 +540,7 @@ function function_141c945e(action, weapon, player) {
   function_92d1707f(#"hash_62009457b268d346", var_2084f739);
 }
 
-function function_248394b9(event, num, player = getplayers()[0]) {
+function function_248394b9(event, num, player = getPlayers()[0]) {
   if(!isfloat(num) && !isint(num)) {
     return;
   }

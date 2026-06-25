@@ -42,7 +42,7 @@ _id_E1E6(var_0, var_1, var_2, var_3, var_4) {
   var_9 = spawn("script_model", var_7);
   var_9.angles = var_8;
   var_9 setModel(var_4);
-  var_9 linkto(self);
+  var_9 linkTo(self);
 
   if(isDefined(var_2)) {
     var_9 _meth_82CB(var_2);
@@ -84,9 +84,9 @@ _id_E236(var_0, var_1, var_2, var_3) {
   var_6 = self gettagorigin(var_5);
 
   if(isDefined(var_6)) {
-    var_4 linkto(self, var_5, var_2, var_3);
+    var_4 linkTo(self, var_5, var_2, var_3);
   } else {
-    var_4 linkto(self);
+    var_4 linkTo(self);
   }
 
   var_4._id_0481 = self._id_0481 + "_accessory";

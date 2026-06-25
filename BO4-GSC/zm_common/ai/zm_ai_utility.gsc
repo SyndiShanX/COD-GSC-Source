@@ -470,7 +470,7 @@ function_991333ce(entity, ai_array) {
 }
 
 function_f1b557c6() {
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     return false;
   }
 

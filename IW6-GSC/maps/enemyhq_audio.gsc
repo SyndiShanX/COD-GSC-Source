@@ -12,9 +12,9 @@ aud_init_globals() {
   level.aud_zoom_on = 0;
   level.aud_last_zoom = 1;
   level.aud_zoom_in_sound = spawn("script_origin", level.player.origin);
-  level.aud_zoom_in_sound linkto(level.player);
+  level.aud_zoom_in_sound linkTo(level.player);
   level.aud_zoom_out_sound = spawn("script_origin", level.player.origin);
-  level.aud_zoom_out_sound linkto(level.player);
+  level.aud_zoom_out_sound linkTo(level.player);
   level.aud_sniper_background = spawn("script_origin", level.player.origin);
   level.aud_bullet_count = 0;
   level.aud_max_bullets = 8;
@@ -196,8 +196,8 @@ aud_start_sniper(var_0) {
   thread aud_sniper_fire();
 
   if(var_0 == "enhq_atrium_covered") {
-    level.aud_convo linkto(level.player);
-    level.aud_vip_combat linkto(level.player);
+    level.aud_convo linkTo(level.player);
+    level.aud_vip_combat linkTo(level.player);
     var_1 = getaiarray("axis");
     var_2 = getaiarray("allies");
 
@@ -222,12 +222,12 @@ aud_start_sniper(var_0) {
       var_7 thread aud_handle_remote_sniper_ai(level.aud_finale_sniper);
     }
 
-    level.aud_finale_sniper linkto(level.player);
-    level.aud_finale_sniper2 linkto(level.player);
+    level.aud_finale_sniper linkTo(level.player);
+    level.aud_finale_sniper2 linkTo(level.player);
     thread aud_pa_guys();
   } else if(var_0 == "enhq_stadium_open") {
-    level.aud_stadium_crumble1 linkto(level.player);
-    level.aud_stadium_crumble2 linkto(level.player);
+    level.aud_stadium_crumble1 linkTo(level.player);
+    level.aud_stadium_crumble2 linkTo(level.player);
     thread aud_rpg_listener();
     var_2 = getaiarray("allies");
 
@@ -243,8 +243,8 @@ aud_start_sniper(var_0) {
     level.player waittill("sniper_done");
     level.aud_stadium_crumble1 unlink();
     level.aud_stadium_crumble2 unlink();
-    level.aud_stadium_crumble1 moveto((613, -5735, -212), 0.05);
-    level.aud_stadium_crumble2 moveto((1288, -5762, -165), 0.05);
+    level.aud_stadium_crumble1 moveTo((613, -5735, -212), 0.05);
+    level.aud_stadium_crumble2 moveTo((1288, -5762, -165), 0.05);
   }
 }
 
@@ -402,7 +402,7 @@ aud_convoy_done() {
 aud_play_and_move_sound(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_origin", var_1);
   var_4 playSound(var_0, "sounddone");
-  var_4 moveto(var_2, var_3);
+  var_4 moveTo(var_2, var_3);
   var_4 waittill("sounddone");
   var_4 delete();
 }
@@ -529,22 +529,22 @@ aud_truck_drive() {
   wait 0.3;
   level.player thread maps\_utility::play_sound_on_entity("enhq_truck_ride");
   level.allies[1] playSound("enhq_truck_ride_gear");
-  level.player playrumbleonentity("light_3s");
+  level.player playRumbleOnEntity("light_3s");
   wait 8.4;
   level.player thread maps\_utility::play_sound_on_entity("enhq_truck_suspension_potholes_1");
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 1.3;
   level.player thread maps\_utility::play_sound_on_entity("enhq_truck_suspension_potholes_2");
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 2;
   level.player thread maps\_utility::play_sound_on_entity("enhq_truck_suspension_potholes_3");
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
 }
 
 aud_truck_ride_idle() {
   wait 3;
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   var_0 thread maps\_utility::sound_fade_in("enhq_truck_ride_idle_loop", 1, 2, 1);
   wait 2;
   var_0 thread maps\_utility::sound_fade_and_delete(4);
@@ -663,7 +663,7 @@ aud_bust_windshield() {
 aud_jeep_flip(var_0) {
   var_1 = spawn("script_origin", (2262, -1494, -797));
   var_1 playSound("enhq_npc_vehicle_twist");
-  var_1 moveto((2572, -1558, -797), 2);
+  var_1 moveTo((2572, -1558, -797), 2);
   wait 1.05;
   var_1 playSound("enhq_npc_vehicle_fall_crash", "sounddone");
   var_1 waittill("sounddone");
@@ -697,7 +697,7 @@ aud_bust_thru() {
 aud_end_truck() {
   wait 3;
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   var_0 thread maps\_utility::sound_fade_in("enhq_truck_ride_idle_loop", 1, 4, 1);
   wait 2;
   level.dog maps\_utility::play_sound_on_entity("enhq_dog_bark");
@@ -743,7 +743,7 @@ aud_enemy_muffled_vo(var_0, var_1, var_2) {
   var_3[5] = "enemyhq_saf2_wellwecantjust";
   var_4 = 0;
   common_scripts\utility::flag_wait(var_2);
-  level.aud_convo = getent(var_1, "targetname");
+  level.aud_convo = getEnt(var_1, "targetname");
 
   while(!common_scripts\utility::flag(var_0)) {
     level.aud_convo playSound(var_3[var_4], "done", 1);
@@ -853,14 +853,14 @@ aud_pre_sniper_rpg_gunner_listener() {
 aud_pre_sniper_rpg_explode(var_0) {
   var_0 endon("death");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playLoopSound("weap_rpg_loop");
   var_0 thread aud_pre_sniper_rpg_death_listener(var_1);
   level.player waittill("sniper_started");
 
   if(isDefined(var_1)) {
     var_1 unlink();
-    var_1 linkto(level.player);
+    var_1 linkTo(level.player);
   }
 }
 
@@ -903,7 +903,7 @@ aud_rpg_explode(var_0, var_1) {
   var_0 stopsounds();
   var_2 = spawn("script_origin", (2316, 294, 136));
   var_2 playLoopSound("weap_rpg_loop");
-  var_2 moveto(var_1, 1.5);
+  var_2 moveTo(var_1, 1.5);
   wait 1.5;
   var_2 stoploopsound();
   var_3 = spawn("script_origin", var_1);
@@ -937,16 +937,16 @@ aud_flare_grab() {
   level.allies[1] waittill("start_flare");
   wait 0.85;
   level.allies[1] thread maps\_utility::play_sound_on_entity("enhq_flare_pickup");
-  var_0 moveto((4084, -5664, -915), 1);
+  var_0 moveTo((4084, -5664, -915), 1);
   wait 1;
-  var_0 linkto(level.allies[1]);
+  var_0 linkTo(level.allies[1]);
   thread aud_random_metal_crumbles();
   level.allies[1] waittill("steath_kill_done");
   wait 9.9;
   level.allies[1] thread maps\_utility::play_sound_on_entity("enhq_flare_drop_foley");
   wait 0.7;
   var_0 unlink();
-  var_0 moveto((4813, -5840, -953), 0.25);
+  var_0 moveTo((4813, -5840, -953), 0.25);
   wait 0.1;
   thread common_scripts\utility::play_sound_in_space("enhq_flare_drop", (4813, -5840, -953));
 }
@@ -1045,7 +1045,7 @@ aud_hvt_rescue_thread() {
   wait 23.95;
   var_0 = spawn("script_origin", (4925, -4573, -934));
   var_0 playSound("enhq_chair_roll");
-  var_0 moveto((4867, -4627, -934), 2);
+  var_0 moveTo((4867, -4627, -934), 2);
   wait 2;
   var_0 delete();
   wait 21;
@@ -1057,7 +1057,7 @@ aud_ajax_coughing() {
   var_0 = spawn("script_origin", (5192, -4678, -952));
   var_0 playSound("enemyhq_ajx_wounded", "sounddone");
   wait 3.75;
-  var_0 moveto((5205, -4711, -931), 3);
+  var_0 moveTo((5205, -4711, -931), 3);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -1073,13 +1073,13 @@ aud_ajax_flare() {
   wait 25;
   var_0 = spawn("script_origin", (4988, -4564, -908));
   var_0 playSound("enhq_flare_start");
-  var_0 moveto((4925, -4549, -906), 1);
+  var_0 moveTo((4925, -4549, -906), 1);
   var_1 = spawn("script_origin", (4988, -4564, -908));
-  var_1 moveto((4925, -4549, -906), 1);
+  var_1 moveTo((4925, -4549, -906), 1);
   wait 0.5;
   var_1 playLoopSound("enhq_flare_lp");
   wait 21;
-  var_1 moveto((4973, -4539, -958), 0.25);
+  var_1 moveTo((4973, -4539, -958), 0.25);
   wait 0.25;
   thread common_scripts\utility::play_sound_in_space("enhq_flare_drop", (4973, -4539, -958));
   var_0 delete();
@@ -1174,10 +1174,10 @@ aud_play_whizby() {
 }
 
 aud_pa_guys() {
-  level.aud_finale_pa_guys linkto(level.player);
+  level.aud_finale_pa_guys linkTo(level.player);
   thread aud_random_enemy_pa(level.aud_finale_pa_guys);
   common_scripts\utility::flag_wait("end_of_sniping");
-  level.aud_finale_pa_guys moveto((2270, -875, -591), 0.05);
+  level.aud_finale_pa_guys moveTo((2270, -875, -591), 0.05);
   common_scripts\utility::flag_wait("get_in_choppa");
   level.aud_finale_pa_guys notify("chatter_done");
 }
@@ -1209,13 +1209,13 @@ aud_chopper_second(var_0) {
   var_1 playLoopSound("enhq_heli_finale_lp");
   var_2 playLoopSound("enhq_heli_finale_near_lp");
   wait 1.8;
-  var_1 linkto(level.player);
-  var_2 linkto(level.player);
+  var_1 linkTo(level.player);
+  var_2 linkTo(level.player);
   var_4 = getaiarray("axis");
-  level.aud_finale_chopper1 linkto(level.player);
-  level.aud_finale_chopper2 linkto(level.player);
-  level.aud_finale_chopper3 linkto(level.player);
-  level.aud_finale_chopper4 linkto(level.player);
+  level.aud_finale_chopper1 linkTo(level.player);
+  level.aud_finale_chopper2 linkTo(level.player);
+  level.aud_finale_chopper3 linkTo(level.player);
+  level.aud_finale_chopper4 linkTo(level.player);
 
   foreach(var_6 in var_4) {
     var_6 thread aud_handle_remote_sniper_ai(level.aud_finale_chopper1);

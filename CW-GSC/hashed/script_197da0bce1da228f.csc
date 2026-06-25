@@ -91,7 +91,7 @@ function function_81c73263(localclientnum, rob) {
   while(true) {
     wait 0.1;
 
-    if(!self function_d2503806(rob) && getplayers(localclientnum, undefined, self.origin, maxdist).size) {
+    if(!self function_d2503806(rob) && getPlayers(localclientnum, undefined, self.origin, maxdist).size) {
       self playrenderoverridebundle(rob);
     }
   }

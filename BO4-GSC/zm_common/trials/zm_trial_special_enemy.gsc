@@ -25,7 +25,7 @@ __init__() {
 }
 
 on_begin(enemy_type, var_6b96eb7b, var_46cce0c5, var_6ad4e7c6, var_44445188) {
-  if(getplayers().size > 1) {
+  if(getPlayers().size > 1) {
     self.enemy_count = zm_trial::function_5769f26a(var_46cce0c5);
   } else {
     self.enemy_count = zm_trial::function_5769f26a(var_6b96eb7b);

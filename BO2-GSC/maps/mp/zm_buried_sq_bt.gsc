@@ -108,7 +108,7 @@ stage_vo_nag() {
   level endon("sq_is_ric_tower_built");
   level endon("end_game_reward_starts_maxis");
   level endon("end_game_reward_starts_richtofen");
-  s_struct = getstruct("sq_gallows", "targetname");
+  s_struct = getStruct("sq_gallows", "targetname");
   m_maxis_vo_spot = spawn("script_model", s_struct.origin);
   m_maxis_vo_spot setModel("tag_origin");
 
@@ -123,7 +123,7 @@ stage_vo_watch_guillotine() {
   level endon("sq_bt_over");
   level endon("end_game_reward_starts_maxis");
   level endon("end_game_reward_starts_richtofen");
-  s_struct = getstruct("sq_guillotine", "targetname");
+  s_struct = getStruct("sq_guillotine", "targetname");
   trigger = spawn("trigger_radius", s_struct.origin, 0, 128, 72);
   trigger waittill("trigger");
   trigger delete();
@@ -143,7 +143,7 @@ stage_vo_watch_gallows() {
   level endon("sq_bt_over");
   level endon("end_game_reward_starts_maxis");
   level endon("end_game_reward_starts_richtofen");
-  s_struct = getstruct("sq_gallows", "targetname");
+  s_struct = getStruct("sq_gallows", "targetname");
   trigger = spawn("trigger_radius", s_struct.origin, 0, 128, 72);
   trigger waittill("trigger");
   trigger delete();

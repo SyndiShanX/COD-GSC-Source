@@ -296,7 +296,7 @@ dyndof_system_start(var_0) {
           var_8.reference_point = var_8.reference_point + var_11;
         }
 
-        var_12 = vectornormalize(var_8.reference_point - var_5);
+        var_12 = vectorNormalize(var_8.reference_point - var_5);
         var_13 = vectordot(var_4, var_12);
         var_9 = acos(var_13);
         var_14 = var_8.min_range * var_8.min_range;
@@ -387,7 +387,7 @@ __dyndof_bullet_trace_ignore_glass(var_0, var_1, var_2) {
     var_5 = bulletTrace(var_4, var_1, 1, var_6, 0, 1, 0);
     var_8 = distancesquared(var_4, var_1);
     var_9 = var_5["entity"];
-    var_10 = vectornormalize(var_1 - var_4);
+    var_10 = vectorNormalize(var_1 - var_4);
 
     if(var_8 > 800 && var_5["surfacetype"] == "glass") {
       var_4 = var_5["position"] + var_10 * 2;
@@ -534,7 +534,7 @@ __cinseq_activate_key(var_0) {
   }
 
   if(isDefined(self.rumble_name)) {
-    self.rumble_entity playrumbleonentity(self.rumble_name);
+    self.rumble_entity playRumbleOnEntity(self.rumble_name);
   }
 }
 

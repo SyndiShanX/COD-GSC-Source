@@ -64,10 +64,10 @@ function init() {
 
 function function_5a72edf0() {
   level clientfield::set("" + #"hash_45c3013f063fe2c7", 1);
-  portal_fx = getent("portal_fx_bunker_to_observation", "targetname");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
-  portal_fx = getent("portal_fx_helipads_to_observation", "targetname");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("portal_fx_bunker_to_observation", "targetname");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("portal_fx_helipads_to_observation", "targetname");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_7c52431e19ff8737", "targetname");
   level clientfield::set("" + #"hash_27308a7dd991ce8d", 1);
   level thread gestures::function_ba4529d4(#"hash_606686a1b66827ac");
@@ -199,7 +199,7 @@ function private function_7d10c7c2() {
 }
 
 function private function_6b9d74df() {
-  playsoundatposition(#"hash_51cf3af54355aedc", (0, 0, 0));
+  playSoundAtPosition(#"hash_51cf3af54355aedc", (0, 0, 0));
 }
 
 function function_d6912122(b_skipped) {
@@ -225,8 +225,8 @@ function function_901d4808(b_skipped, var_19e802fa) {
   zm_sq::objective_complete(#"hash_6b0d99dea8e99af5");
   level flag::set(#"hash_5981a23fdea21f78");
   level clientfield::set("" + #"hash_2c7fb1cc66c590a0", 1);
-  portal_fx = getent("portal_fx_helipads_to_main_street", "targetname");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("portal_fx_helipads_to_main_street", "targetname");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_5b9b9143bf52fa5f", "targetname");
 }
 
@@ -493,7 +493,7 @@ function function_3ddd0bcb(str_part) {
     level function_ec1c666a();
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     zm_items::player_pick_up(e_player, zm_crafting::get_component(hash("zitem_tungsten_teleporter_part_" + str_part)));
   }
 
@@ -561,7 +561,7 @@ function private function_43828640() {
   level zm_ui_inventory::function_7df6bb60(#"hash_689d91f2ecc4aaeb", 1);
   level zm_ui_inventory::function_7df6bb60(#"hash_689d96f2ecc4b36a", 1);
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     zm_items::player_pick_up(e_player, zm_crafting::get_component(#"hash_4d2989acf6d2c3f4"));
     zm_items::player_pick_up(e_player, zm_crafting::get_component(#"hash_4d298cacf6d2c90d"));
     zm_items::player_pick_up(e_player, zm_crafting::get_component(#"hash_4d298bacf6d2c75a"));
@@ -596,8 +596,8 @@ function function_57c1663d(b_skipped) {
   zm_crafting::function_ca244624(#"hash_434e63df930cc195");
   zm_sq::objective_complete(#"hash_6b0d93dea8e990c3");
   level clientfield::set("" + #"hash_18f96dcb4766fbe8", 1);
-  portal_fx = getent("portal_fx_anytown_usa_to_bunker", "targetname");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("portal_fx_anytown_usa_to_bunker", "targetname");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_12a9771a2346ed59", "targetname");
   level clientfield::set("" + #"hash_27308a7dd991ce8d", 0);
   level function_891d8fc(#"hash_3976f9f041f5b338");
@@ -628,16 +628,16 @@ function function_80f4c05c(b_skipped, var_19e802fa) {
     zm_sq::objective_complete(#"hash_6b0d93dea8e990c3");
     zm_crafting::function_ca244624(#"hash_434e63df930cc195");
     level clientfield::set("" + #"hash_18f96dcb4766fbe8", 1);
-    portal_fx = getent("portal_fx_anytown_usa_to_bunker", "targetname");
-    playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+    portal_fx = getEnt("portal_fx_anytown_usa_to_bunker", "targetname");
+    playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
     level thread scene::play(#"hash_12a9771a2346ed59", "targetname");
     level clientfield::set("" + #"hash_27308a7dd991ce8d", 0);
     level flag::set(#"hash_3976f9f041f5b338");
   } else if(b_skipped) {
     zm_crafting::function_ca244624(#"hash_434e63df930cc195");
     level clientfield::set("" + #"hash_18f96dcb4766fbe8", 1);
-    portal_fx = getent("portal_fx_anytown_usa_to_bunker", "targetname");
-    playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+    portal_fx = getEnt("portal_fx_anytown_usa_to_bunker", "targetname");
+    playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
     level thread scene::play(#"hash_12a9771a2346ed59", "targetname");
     level clientfield::set("" + #"hash_27308a7dd991ce8d", 0);
     level flag::set(#"hash_3976f9f041f5b338");
@@ -717,7 +717,7 @@ function function_4710b248(b_skipped) {
   level scene::init(#"hash_2db28dd555f08d92", "targetname");
   wait 0.5;
   level scene::play(#"hash_2db28dd555f08d92", "targetname");
-  playsoundatposition(#"hash_52aaa9a4a2e71c73", level.ai_abomination.origin + (0, 0, 40));
+  playSoundAtPosition(#"hash_52aaa9a4a2e71c73", level.ai_abomination.origin + (0, 0, 40));
   level flag::set(#"hash_820c83920af16b7");
   level flag::set("pause_round_timeout");
 
@@ -741,7 +741,7 @@ function function_54dd8e5d(a_ents) {
 
 function private function_168d593a() {
   level endon(#"end_game", #"hash_19c523c64529d390", #"hash_13f94cabb3a57dc4");
-  var_34596f46 = getdvarint(#"hash_384ba2437ce660b", getplayers().size);
+  var_34596f46 = getdvarint(#"hash_384ba2437ce660b", getPlayers().size);
 
   switch (var_34596f46) {
     case 4:
@@ -899,8 +899,8 @@ function function_8ad7a0a7(b_skipped, var_19e802fa) {
   zm_unitrigger::unregister_unitrigger(level.var_2932d13.s_unitrigger);
   level flag::set("enable_round_timeout");
   level clientfield::set("" + #"hash_3432d09ff93c9a0c", 1);
-  portal_fx = getent("portal_fx_observation_to_helipads", "targetname");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("portal_fx_observation_to_helipads", "targetname");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_6331244ff2bb3ab1", "targetname");
   level thread function_891d8fc(#"hash_4c3af4729843e724");
 }
@@ -967,15 +967,15 @@ function function_b279c743() {
 
       if(activator gestures::function_8cc27b6d(#"hash_606686a1b66827ac")) {
         activator zm_tungsten::function_2a73b31d();
-        activator setorigin((6233, 4653, 556));
+        activator setOrigin((6233, 4653, 556));
         activator setplayerangles((45, 91, 0));
         activator playgestureviewmodel(#"hash_606686a1b66827ac");
         wait 0.5;
         activator zm_tungsten::function_202a6698();
       }
 
-      activator playrumbleonentity("damage_light");
-      playsoundatposition(#"hash_24529e08fd2e1264", s_interact.origin);
+      activator playRumbleOnEntity("damage_light");
+      playSoundAtPosition(#"hash_24529e08fd2e1264", s_interact.origin);
       level flag::set(#"hash_3814c5c6793e2b2d");
       break;
     }
@@ -1000,9 +1000,9 @@ function function_5ad3e281() {
 }
 
 function function_8ca5e5a(var_7a54a362, str_trigger, var_95c6b9dd) {
-  trigger = getent(str_trigger, "targetname");
+  trigger = getEnt(str_trigger, "targetname");
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player thread function_69054a6f(var_7a54a362, trigger, var_95c6b9dd);
   }
 }
@@ -1032,20 +1032,20 @@ function function_891d8fc(var_324be745) {
 function function_8ac7a154() {
   level flag::set(#"hash_23042147964b0bc2");
   level clientfield::set("<dev string:x38>" + #"hash_2c7fb1cc66c590a0", 1);
-  portal_fx = getent("<dev string:x3c>", "<dev string:x61>");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("<dev string:x3c>", "<dev string:x61>");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_5b9b9143bf52fa5f", "<dev string:x61>");
   level flag::set(#"hash_3976f9f041f5b338");
   level clientfield::set("<dev string:x38>" + #"hash_18f96dcb4766fbe8", 1);
-  portal_fx = getent("<dev string:x6f>", "<dev string:x61>");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("<dev string:x6f>", "<dev string:x61>");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level clientfield::set("<dev string:x38>" + #"hash_27308a7dd991ce8d", 0);
   level thread scene::play(#"hash_12a9771a2346ed59", "<dev string:x61>");
   level clientfield::set("<dev string:x38>" + #"hash_3432d09ff93c9a0c", 1);
-  portal_fx = getent("<dev string:x92>", "<dev string:x61>");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
-  portal_fx = getent("<dev string:xb7>", "<dev string:x61>");
-  playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("<dev string:x92>", "<dev string:x61>");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
+  portal_fx = getEnt("<dev string:xb7>", "<dev string:x61>");
+  playSoundAtPosition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_6331244ff2bb3ab1", "<dev string:x61>");
   level thread scene::play(#"hash_7c52431e19ff8737", "<dev string:x61>");
   level flag::set(#"hash_67685d2c51bd61db");

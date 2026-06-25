@@ -317,7 +317,7 @@ function function_3a93afbe(attacker) {
   }
 
   playFX(#"hash_131031222bb89ea", self.origin);
-  playsoundatposition(#"wpn_frag_explode", self.origin);
+  playSoundAtPosition(#"wpn_frag_explode", self.origin);
   var_db24292 radiusdamage(self.ent.origin, 128, 50, 10, undefined, "MOD_EXPLOSIVE", getweapon(#"supplydrop"));
 
   if(self.state == 1 || self.state == 0) {
@@ -358,10 +358,10 @@ function private function_31f25d73(offsets, angle_offset, trigger_length, trigge
   level waittill(#"hash_2f26b8ad3c26a7cb", #"hash_63497adad2aaccba");
   self.ent clientfield::set("" + #"hash_732102339886b628", 1);
   self.trigger = spawn("trigger_radius_use", self.origin + offsets, 0, trigger_length, trigger_height);
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger triggerenable(1);
   self.trigger function_ea899419();
-  self.trigger sethintstring(#"hash_64fe596059ab7e0e");
+  self.trigger setHintString(#"hash_64fe596059ab7e0e");
   self.trigger.deaddrop = self;
   ang_offset = angle_offset;
   self.trigger callback::on_trigger(&function_13f62d64, undefined, ang_offset);
@@ -430,10 +430,10 @@ function private function_d0c47f4f(offsets, trigger_length, trigger_height) {
   if(isDefined(self)) {
     self.destroytrigger = spawn("trigger_radius_use", self.origin + offsets, 0, trigger_length, trigger_height);
     self.destroytrigger triggerenable(1);
-    self.destroytrigger triggerignoreteam();
+    self.destroytrigger triggerIgnoreTeam();
     self.destroytrigger.deaddrop = self;
     self.destroytrigger thread function_a961266f(self.owner);
-    self.destroytrigger sethintstring(#"hash_4e6ee75bff4f0f60");
+    self.destroytrigger setHintString(#"hash_4e6ee75bff4f0f60");
     self.destroytrigger callback::on_trigger(&function_479e8def);
   }
 }
@@ -477,7 +477,7 @@ function private function_ea899419() {
   self setinvisibletoall();
   level flag::wait_till("spy_role_assigned");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.spyRole === 1) {
       self setvisibletoplayer(player);
     }
@@ -567,7 +567,7 @@ function function_3fef0b35() {
   wait 1;
   level flag::wait_till("spy_role_assigned");
 
-  if(getplayers().size <= 1) {
+  if(getPlayers().size <= 1) {
     return;
   }
 
@@ -597,7 +597,7 @@ function function_8f295af0(player) {
   self.e_device.state = 0;
   self.var_dfb87540 = [];
 
-  foreach(p in getplayers()) {
+  foreach(p in getPlayers()) {
     if(isDefined(p.spyRole) && p.spyRole == 1) {
       if(p !== player) {
         self thread function_2eae1b23(p);
@@ -649,13 +649,13 @@ function private function_78a857df(offsets, trigger_length, trigger_height) {
   self.e_device clientfield::set("" + #"hash_7850e541b1606b4a", 1);
   self.e_device.trigger = spawn("trigger_radius_use", self.origin + offsets, 0, trigger_length, trigger_height);
   self.e_device.trigger triggerenable(1);
-  self.e_device.trigger triggerignoreteam();
+  self.e_device.trigger triggerIgnoreTeam();
   self.e_device.trigger setignoreentfortrigger(self.e_device);
   self.e_device.trigger.listeningdevice = self;
   self.e_device.trigger thread function_aa539a6d();
-  self.e_device.trigger sethintstring(#"hash_3181b7331c52ff62");
-  self.e_device.trigger enablelinkto();
-  self.e_device.trigger linkto(self.e_device);
+  self.e_device.trigger setHintString(#"hash_3181b7331c52ff62");
+  self.e_device.trigger enablelinkTo();
+  self.e_device.trigger linkTo(self.e_device);
   self.e_device thread weaponobjects::watchusetrigger(self.e_device.trigger, &function_4d118352);
   self.e_device thread watchshutdown(self);
 }
@@ -667,13 +667,13 @@ function private function_b48a9edd(offsets, trigger_length, trigger_height) {
   if(isDefined(self) && isDefined(self.e_device)) {
     self.e_device.destroytrigger = spawn("trigger_radius_use", self.origin + offsets, 0, trigger_length, trigger_height);
     self.e_device.destroytrigger triggerenable(1);
-    self.e_device.destroytrigger triggerignoreteam();
+    self.e_device.destroytrigger triggerIgnoreTeam();
     self.e_device.destroytrigger setignoreentfortrigger(self.e_device);
     self.e_device.destroytrigger.listeningdevice = self;
     self.e_device.destroytrigger thread function_a961266f(self.owner);
-    self.e_device.destroytrigger sethintstring(#"hash_4e6ee75bff4f0f60");
-    self.e_device.destroytrigger enablelinkto();
-    self.e_device.destroytrigger linkto(self.e_device);
+    self.e_device.destroytrigger setHintString(#"hash_4e6ee75bff4f0f60");
+    self.e_device.destroytrigger enablelinkTo();
+    self.e_device.destroytrigger linkTo(self.e_device);
     self.e_device thread weaponobjects::watchusetrigger(self.e_device.destroytrigger, &function_ee5d41fb);
     self.e_device thread watchshutdown(self);
     self.e_device thread function_152526e9();
@@ -740,7 +740,7 @@ function private function_a961266f(owner) {
   self setinvisibletoall();
   level flag::wait_till("spy_role_assigned");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.spyRole === 2 || player.spyRole === 3) {
       self setvisibletoplayer(player);
     }
@@ -813,7 +813,7 @@ function private function_aa539a6d() {
   self setinvisibletoall();
   level flag::wait_till("spy_role_assigned");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.spyRole === 1) {
       self setvisibletoplayer(player);
     }
@@ -946,11 +946,11 @@ function private function_6a9ca122() {
   level endon(#"game_ended");
   level waittill(#"hash_2f26b8ad3c26a7cb");
   self.trigger = spawn("trigger_radius_use", self.origin + (0, 0, 40), 0, 120, 50, 1);
-  self.trigger triggerignoreteam();
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger triggerIgnoreTeam();
+  self.trigger setCursorHint("HINT_NOICON");
   self.trigger triggerenable(1);
   self.trigger usetriggerignoreuseholdtime();
-  self.trigger sethintstring("MENU/PROMPT_DIRTY_BOMB_DETONATE");
+  self.trigger setHintString("MENU/PROMPT_DIRTY_BOMB_DETONATE");
   self.trigger callback::on_trigger(&function_2f5dd98c);
   self.trigger.bomb = self;
   self.trigger.using = 0;
@@ -958,10 +958,10 @@ function private function_6a9ca122() {
   self.trigger thread function_c8ba2f6b(spy::function_3919b452(1));
   self.trigger thread function_f9f4b255();
   self.var_af39ce0d = spawn("trigger_radius_use", self.origin + (0, 0, 40), 0, 120, 50, 1);
-  self.var_af39ce0d triggerignoreteam();
-  self.var_af39ce0d setcursorhint("HINT_NOICON");
+  self.var_af39ce0d triggerIgnoreTeam();
+  self.var_af39ce0d setCursorHint("HINT_NOICON");
   self.var_af39ce0d triggerenable(1);
-  self.var_af39ce0d sethintstring(#"hash_62febf24d633ff3c");
+  self.var_af39ce0d setHintString(#"hash_62febf24d633ff3c");
   self.var_af39ce0d.bomb = self;
   self.var_af39ce0d.using = 0;
   self.var_af39ce0d setinvisibletoall();
@@ -994,11 +994,11 @@ function private function_f135f23a() {
   level endon(#"game_ended");
   level waittill(#"hash_2f26b8ad3c26a7cb");
   self.var_1afb163d = spawn("trigger_radius_use", self.origin + (0, 0, 45), 0, 120, 90, 1);
-  self.var_1afb163d triggerignoreteam();
-  self.var_1afb163d setcursorhint("HINT_NOICON");
+  self.var_1afb163d triggerIgnoreTeam();
+  self.var_1afb163d setCursorHint("HINT_NOICON");
   self.var_1afb163d triggerenable(1);
   self.var_1afb163d usetriggerignoreuseholdtime();
-  self.var_1afb163d sethintstring(#"hash_325ad2dab1be0d4a");
+  self.var_1afb163d setHintString(#"hash_325ad2dab1be0d4a");
   self.var_1afb163d.bomb = self;
   self.var_1afb163d.using = 0;
   self.var_1afb163d thread function_c8ba2f6b(spy::function_7a7907d4());
@@ -1420,7 +1420,7 @@ function function_93098bd9(dialogkey, team, origin, radius) {
     return;
   }
 
-  players = getplayers(team, origin, radius);
+  players = getPlayers(team, origin, radius);
 }
 
 function function_91c39737(player, team) {
@@ -1443,7 +1443,7 @@ function function_91c39737(player, team) {
     self.var_af39ce0d delete();
   }
 
-  playsoundatposition("exp_dirty_bomb_explo", origin + (0, 0, 60));
+  playSoundAtPosition("exp_dirty_bomb_explo", origin + (0, 0, 60));
   objective_setgamemodeflags(self.objective_id, 3);
 
   if(team.spyRole === 1) {
@@ -1643,7 +1643,7 @@ function private function_14572a9e(var_bed240f1) {
   self setinvisibletoall();
   level flag::wait_till("spy_role_assigned");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.spyRole === 1) {
       if(var_bed240f1) {
         self setvisibletoplayer(player);
@@ -2080,7 +2080,7 @@ function private function_945ccf34() {
 }
 
 function private function_d587b657(cooldowntime) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.spyhud hud_spy::function_47aa7bfd(player, cooldowntime);
   }
 }
@@ -2092,10 +2092,10 @@ function private function_9d70f23a(offsets, trigger_length, trigger_height) {
   self endon(#"death");
   self waittill(#"hash_6701ed9cbfbea517");
   self.trigger = spawn("trigger_radius_use", self.origin + offsets, 0, trigger_length, trigger_height);
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger triggerenable(1);
   self.trigger usetriggerignoreuseholdtime();
-  self.trigger sethintstring(#"hash_76430d002eba2777");
+  self.trigger setHintString(#"hash_76430d002eba2777");
   self.trigger.encodedradio = self;
   self.ent clientfield::set("" + #"hash_3b8f220452f1fe4c", 1);
   self.ent playSound(#"hash_54c2b44022415883");
@@ -2446,7 +2446,7 @@ function function_61203128() {
   objective_setposition(self.objidfriendly, self.origin);
   objective_setposition(self.var_81e11916, self.origin);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.spyRole === 1) {
       objective_setvisibletoplayer(self.objidfriendly, player);
       objective_setinvisibletoplayer(self.var_81e11916, player);
@@ -2466,19 +2466,19 @@ function function_a19ce5a8(playerorigin, var_d17e4c1e) {
 }
 
 function function_1dc93253(var_38ef2f1a) {
-  foreach(var_dfe526e8 in getplayers()) {
+  foreach(var_dfe526e8 in getPlayers()) {
     level.spyhud hud_spy::function_adf24ba3(var_dfe526e8, var_38ef2f1a);
   }
 }
 
 function function_b455be75(suspect_gender_type) {
-  foreach(var_dfe526e8 in getplayers()) {
+  foreach(var_dfe526e8 in getPlayers()) {
     level.spyhud hud_spy::function_ddf21dbe(var_dfe526e8, suspect_gender_type);
   }
 }
 
 function function_57cab68b(suspect_id_number) {
-  foreach(var_dfe526e8 in getplayers()) {
+  foreach(var_dfe526e8 in getPlayers()) {
     level.spyhud hud_spy::function_410e8b54(var_dfe526e8, suspect_id_number);
   }
 }
@@ -2497,7 +2497,7 @@ function function_cd002276() {
         var_9af06a57 thread globallogic_audio::function_c246758e("none");
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player function_3d8b0693();
         player.var_2597016d = 0;
         player function_3bddd7d();
@@ -2695,7 +2695,7 @@ function function_fa207882(notification_id) {
 }
 
 function function_4f53c9a2(notification_id) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player)) {
@@ -2781,7 +2781,7 @@ function function_48d2ab4c(index, position) {
   marker.waypoint = gameobjects::get_next_obj_id();
   objective_add(marker.waypoint, "active", position, #"hash_6410fe6e5b9752b2");
   marker.trigger = spawn("trigger_radius", position, 0, 10, 10);
-  marker.trigger triggerignoreteam();
+  marker.trigger triggerIgnoreTeam();
   marker.trigger triggerenable(1);
   marker.trigger setvisibletoall();
   marker.index = index;
@@ -2818,7 +2818,7 @@ function function_9b430395() {
 }
 
 function function_1b0509bc() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_36004926();
   }
 }

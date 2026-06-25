@@ -69,7 +69,7 @@ function start(str_objective) {
 }
 
 function main(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     namespace_5ceacc03::music("5.0_kraus");
@@ -101,7 +101,7 @@ function function_dc6107f7(str_objective, b_starting, var_aa1a6455, player) {
 }
 
 function function_70978834(skipto) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player enableweaponcycling();
   player val::set("street_stealth", "allow_melee", 0);
   player val::set("street_stealth", "allow_sprint", 0);
@@ -139,7 +139,7 @@ function function_5bb4901() {
     ai::setaiattribute(guy, "can_melee", 0);
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player namespace_979752dc::set_disguised(0);
   closest_guy = arraygetclosest(player.origin, ai_array);
   closest_guy thread dialogue::queue("vox_cp_stkt_07130_gms2_stoppolice_64");
@@ -192,7 +192,7 @@ function rooftop_descend() {
   }
 
   level thread namespace_5ceacc03::function_dceebb0a();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread util::blend_movespeedscale(0.8, 1.5);
   level scene::play("aib_vign_stakeout_street_rooftop_descend", "rooftop_descend_alley");
   level thread scene::play("aib_vign_stakeout_street_rooftop_descend", "rooftop_descend_alley_loop");
@@ -225,18 +225,18 @@ function function_bd064da5(a_ents) {
   assert(isDefined(level.rooftop_to_street_anim_org), "<dev string:x38>");
   level.var_47fb3484 = a_ents[#"hash_77e429d3dc04d06"];
   level.var_47fb3484 attach("stk_door_metal_painted_rusted_01_orange", "j_prop_1");
-  level.rooftop_descend_door_01_clip = getent("rooftop_descend_door_01_clip", "targetname");
+  level.rooftop_descend_door_01_clip = getEnt("rooftop_descend_door_01_clip", "targetname");
 
   if(isDefined(level.rooftop_descend_door_01_clip)) {
-    level.rooftop_descend_door_01_clip linkto(level.var_47fb3484, "j_prop_1", (0, 0, 0), (0, 0, 0));
+    level.rooftop_descend_door_01_clip linkTo(level.var_47fb3484, "j_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
   level.var_a23ce906 = a_ents[#"hash_77e419d3dc04b53"];
   level.var_a23ce906 attach("stk_door_metal_painted_rusted_01_orange", "j_prop_1");
-  level.rooftop_descend_door_02_clip = getent("rooftop_descend_door_02_clip", "targetname");
+  level.rooftop_descend_door_02_clip = getEnt("rooftop_descend_door_02_clip", "targetname");
 
   if(isDefined(level.rooftop_descend_door_02_clip)) {
-    level.rooftop_descend_door_02_clip linkto(level.var_a23ce906, "j_prop_1", (0, 0, 0), (0, 0, 0));
+    level.rooftop_descend_door_02_clip linkTo(level.var_a23ce906, "j_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
   waitframe(1);
@@ -271,7 +271,7 @@ function function_c4fa138b(skipto) {
 function function_a51eff8d() {
   self notify("7ef2d8f45e308b79");
   self endon("7ef2d8f45e308b79");
-  t_bar_search_area = getent("t_bar_search_area", "targetname");
+  t_bar_search_area = getEnt("t_bar_search_area", "targetname");
   objectives::area(#"hash_116f8a0affe35d82", t_bar_search_area, undefined, undefined, 0, 0, undefined, #"hash_b1305ea2f0825bd");
   level endon(#"flag_found_contact");
 
@@ -377,7 +377,7 @@ function function_ae924b50(str_objective) {
 }
 
 function function_9145f67a(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     namespace_11998b8f::stakeout_stow_weapon();
@@ -399,14 +399,14 @@ function function_9145f67a(str_objective, b_starting) {
   level thread namespace_5ceacc03::function_4b6fc5b8();
   level thread namespace_5ceacc03::function_4e7aa055();
   level flag::wait_till("bar_bathroom_door_locked");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   clientfield::set("force_stream_bar", 0);
   skipto::function_4e3ab877("bar");
 }
 
 function function_34aae650(str_objective, b_starting, var_aa1a6455, player) {
-  var_33b3e0a3 = getent("adler_alley_door", "targetname");
-  var_2e0784ad = getent(var_33b3e0a3.target, "targetname");
+  var_33b3e0a3 = getEnt("adler_alley_door", "targetname");
+  var_2e0784ad = getEnt(var_33b3e0a3.target, "targetname");
 
   if(isDefined(var_33b3e0a3)) {
     var_33b3e0a3 delete();
@@ -416,8 +416,8 @@ function function_34aae650(str_objective, b_starting, var_aa1a6455, player) {
     var_2e0784ad delete();
   }
 
-  var_8bf7c32b = getent("adler_roof_door1", "targetname");
-  var_3d2edef2 = getent(var_8bf7c32b.target, "targetname");
+  var_8bf7c32b = getEnt("adler_roof_door1", "targetname");
+  var_3d2edef2 = getEnt(var_8bf7c32b.target, "targetname");
 
   if(isDefined(var_8bf7c32b)) {
     var_8bf7c32b delete();
@@ -462,9 +462,9 @@ function function_ab5026e9(str_id) {
   if(!isDefined(level.kraus)) {
     level.kraus = spawner::simple_spawn_single("kraus_cp_streets");
     level.kraus.var_5b22d53 = 0;
-    level.kraus.var_34fc6abf = getent("kraus_cp_umbrella", "targetname");
+    level.kraus.var_34fc6abf = getEnt("kraus_cp_umbrella", "targetname");
     level.kraus.var_34fc6abf.animname = "kraus_umbrella";
-    level.kraus.briefcase = getent("kraus_cp_briefcase", "targetname");
+    level.kraus.briefcase = getEnt("kraus_cp_briefcase", "targetname");
     level.kraus.briefcase.animname = "kraus_briefcase";
     level.kraus namespace_acaa3a2e::function_bfd89ef1();
     wait 0.5;
@@ -473,7 +473,7 @@ function function_ab5026e9(str_id) {
 }
 
 function function_e632b562(skipto) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   clientfield::set("force_stream_bar", 1);
   level thread function_6c634ee9();
 
@@ -503,7 +503,7 @@ function function_e632b562(skipto) {
 function function_510e7c9e() {
   level flag::wait_till("bar_done");
   level flag::wait_till("close_bar_bathroom_door");
-  bar_bathroom_door_close_safely_clip = getent("bar_bathroom_door_close_safely_clip", "targetname");
+  bar_bathroom_door_close_safely_clip = getEnt("bar_bathroom_door_close_safely_clip", "targetname");
 
   if(isDefined(bar_bathroom_door_close_safely_clip)) {
     bar_bathroom_door_close_safely_clip.origin += (0, 0, 128);
@@ -532,7 +532,7 @@ function function_8cb46516(modelname, var_b92254fd, var_8964d1a4, spawnfunc = un
   assert(isDefined(var_b92254fd), "<dev string:x84>");
   prop = spawn("script_model", self.origin);
   prop setModel(modelname);
-  prop linkto(self, var_b92254fd, (0, 0, 0), (0, 0, 0));
+  prop linkTo(self, var_b92254fd, (0, 0, 0), (0, 0, 0));
 
   if(isDefined(spawnfunc)) {
     prop thread[[spawnfunc]]();
@@ -738,7 +738,7 @@ function function_b41a23bd() {
     level thread namespace_5ceacc03::function_106f9fd1();
 
     while(true) {
-      distsquared = distance2dsquared(self.origin, getplayers()[0].origin);
+      distsquared = distance2dsquared(self.origin, getPlayers()[0].origin);
 
       if(level flag::get("player_in_bar") && distsquared >= 16384) {
         doors::function_f35467ac("bar_front_door");
@@ -767,7 +767,7 @@ function function_6c634ee9() {
 }
 
 function bar_dialogue_enter() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   contact_convo_interact_org = struct::get("contact_convo_interact_org", "targetname");
   var_54a1c7b9 = util::spawn_model("tag_origin", contact_convo_interact_org.origin, contact_convo_interact_org.angles);
   var_54a1c7b9 util::create_cursor_hint("tag_origin", (0, 0, 0), #"hash_42f5f0e2657a29da", 64);
@@ -870,7 +870,7 @@ function function_2bf10776() {
   waitframe(1);
   level.var_ee1e1434 thread function_a96305d1();
   level.bar_contact flag::wait_till_clear(#"scriptedanim");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!player gamepadusedlast()) {
     player setviewclamp(20, 20, 20, 20, 0, 1, 0);
@@ -892,7 +892,7 @@ function function_f752e215() {
   level thread bar_dialogue_exit();
 
   if(!level flag::get("bar_dialog_choice_01_finished") || !level flag::get("bar_dialog_choice_02_finished") || !level flag::get("learned_about_alley_stasi_field_house")) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     if(!player gamepadusedlast()) {
       player setviewclamp(20, 20, 20, 20, 0, 1, 0);
@@ -942,7 +942,7 @@ function bar_dialogue_exit() {
   level thread function_4bb16d5();
   level thread scene::play("cin_stakeout_street_bar_contact", "bar_dialogue_exit");
   doors::unlock("bar_bathroom_door", undefined, 0);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player flag::wait_till_clear(#"scriptedanim");
   savegame::checkpoint_save(1);
   player val::reset("bar_dialogue", "ignoreme");
@@ -961,7 +961,7 @@ function bar_dialogue_exit() {
 }
 
 function function_bf0b5031() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::set("alley1", "allow_melee", 0);
   player val::set("alley1", "allow_sprint", 0);
   player waittill(#"hash_6b37ff1b3eda2e5f");
@@ -969,10 +969,10 @@ function function_bf0b5031() {
 }
 
 function function_394fb635() {
-  getplayers()[0] clientfield::set_to_player("lerp_fov", 3);
-  getplayers()[0] waittill(#"hash_6373a88215561f04");
-  getplayers()[0] waittill(#"hash_6b37ff1b3eda2e5f");
-  getplayers()[0] clientfield::set_to_player("lerp_fov", 4);
+  getPlayers()[0] clientfield::set_to_player("lerp_fov", 3);
+  getPlayers()[0] waittill(#"hash_6373a88215561f04");
+  getPlayers()[0] waittill(#"hash_6b37ff1b3eda2e5f");
+  getPlayers()[0] clientfield::set_to_player("lerp_fov", 4);
 }
 
 function function_a96305d1() {
@@ -1000,7 +1000,7 @@ function function_3d51da22(a_ents) {
 }
 
 function function_4bb16d5() {
-  getplayers()[0] flag::wait_till_clear(#"scriptedanim");
+  getPlayers()[0] flag::wait_till_clear(#"scriptedanim");
   level flag::set("bar_done");
 }
 
@@ -1012,45 +1012,45 @@ function function_7691a965() {
   wait 2;
 
   while(true) {
-    var_500e35ed = playsoundatposition("vox_cp_stkt_06600_gms1_openupthisisthe_2c", org);
+    var_500e35ed = playSoundAtPosition("vox_cp_stkt_06600_gms1_openupthisisthe_2c", org);
     wait randomfloatrange(1, 4);
-    var_1cd886c0 = playsoundatposition("evt_stk_apt_door_pound", org);
+    var_1cd886c0 = playSoundAtPosition("evt_stk_apt_door_pound", org);
 
     if(level flag::get("get_to_safehouse_meetup_breadcrumb_01_org_reached")) {
       return;
     }
 
     wait randomfloatrange(2, 5);
-    var_500e35ed = playsoundatposition("vox_cp_stkt_06600_gms1_openthisdoornow_ee", org);
+    var_500e35ed = playSoundAtPosition("vox_cp_stkt_06600_gms1_openthisdoornow_ee", org);
     wait randomfloatrange(2, 5);
-    var_1cd886c0 = playsoundatposition("evt_stk_apt_door_pound", org);
+    var_1cd886c0 = playSoundAtPosition("evt_stk_apt_door_pound", org);
 
     if(level flag::get("get_to_safehouse_meetup_breadcrumb_01_org_reached")) {
       return;
     }
 
     wait randomfloatrange(2, 5);
-    var_500e35ed = playsoundatposition("vox_cp_stkt_06600_gms1_doyouhearmeopen_29", org);
+    var_500e35ed = playSoundAtPosition("vox_cp_stkt_06600_gms1_doyouhearmeopen_29", org);
     wait randomfloatrange(2, 5);
-    var_1cd886c0 = playsoundatposition("evt_stk_apt_door_pound", org);
+    var_1cd886c0 = playSoundAtPosition("evt_stk_apt_door_pound", org);
 
     if(level flag::get("get_to_safehouse_meetup_breadcrumb_01_org_reached")) {
       return;
     }
 
     wait randomfloatrange(2, 5);
-    var_500e35ed = playsoundatposition("vox_cp_stkt_06600_gms1_unlockthisdoori_ed", org);
+    var_500e35ed = playSoundAtPosition("vox_cp_stkt_06600_gms1_unlockthisdoori_ed", org);
     wait randomfloatrange(2, 5);
-    var_1cd886c0 = playsoundatposition("evt_stk_apt_door_pound", org);
+    var_1cd886c0 = playSoundAtPosition("evt_stk_apt_door_pound", org);
 
     if(level flag::get("get_to_safehouse_meetup_breadcrumb_01_org_reached")) {
       return;
     }
 
     wait randomfloatrange(2, 5);
-    var_500e35ed = playsoundatposition("vox_cp_stkt_06600_gms1_iorderyoutocome_26", org);
+    var_500e35ed = playSoundAtPosition("vox_cp_stkt_06600_gms1_iorderyoutocome_26", org);
     wait randomfloatrange(2, 5);
-    var_1cd886c0 = playsoundatposition("evt_stk_apt_door_pound", org);
+    var_1cd886c0 = playSoundAtPosition("evt_stk_apt_door_pound", org);
 
     if(level flag::get("get_to_safehouse_meetup_breadcrumb_01_org_reached")) {
       return;
@@ -1068,8 +1068,8 @@ function function_4b0934d0() {
   var_1ee7233e[var_1ee7233e.size] = "vox_cp_stkt_06250_adlr_gotothebarandme_d3_1";
   var_1ee7233e[var_1ee7233e.size] = "vox_cp_stkt_06250_adlr_gettothemeeting_66_1";
   var_1ee7233e[var_1ee7233e.size] = "vox_cp_stkt_06250_adlr_bellthecontacts_16_1";
-  e_vol = getent("vol_street_in_talk_range", "targetname");
-  player = getplayers()[0];
+  e_vol = getEnt("vol_street_in_talk_range", "targetname");
+  player = getPlayers()[0];
   start_time = gettime();
 
   while(true) {

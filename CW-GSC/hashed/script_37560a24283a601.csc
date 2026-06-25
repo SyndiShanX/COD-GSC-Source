@@ -33,7 +33,7 @@ function function_9cb928dc(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(var_8cce6a5c)) {
     self.var_b4afca05 = util::spawn_model(fieldname, "tag_origin", self.origin, (0, 0, 0));
-    self.var_b4afca05 linkto(self);
+    self.var_b4afca05 linkTo(self);
     self.var_214a11f9 = util::playFXOnTag(fieldname, var_8cce6a5c, self.var_b4afca05, "tag_origin");
     self thread function_add31c08();
 

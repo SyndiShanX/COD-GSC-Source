@@ -30,7 +30,7 @@ function function_bea20a96(event, params) {
 }
 
 function function_daed27e8(event, params) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player mpl_heatwave_fx(level, event, params);
@@ -800,7 +800,7 @@ function event_handler[event_a98a54a7] function_323548ba(eventstruct) {
 
 function event_handler[player_laststand] codecallback_playerlaststand(eventstruct) {
   self endon(#"disconnect");
-  self stopanimscripted();
+  self stopanimScripted();
   [[level.callbackplayerlaststand]](eventstruct.inflictor, eventstruct.attacker, eventstruct.amount, eventstruct.mod, eventstruct.weapon, eventstruct.var_fd90b0bb, eventstruct.direction, eventstruct.hit_location, eventstruct.time_offset, eventstruct.delay);
 }
 
@@ -1025,7 +1025,7 @@ function killedcustomtraversallistener() {
 
   if(isDefined(self)) {
     self finishtraversal();
-    self stopanimscripted();
+    self stopanimScripted();
     self unlink();
   }
 }
@@ -1042,10 +1042,10 @@ function event_handler[entity_playcustomtraversal] codecallback_playcustomtraver
 
   if(isDefined(endparent)) {
     offset = entity.origin - endparent.origin;
-    entity linkto(endparent, "", offset);
+    entity linkTo(endparent, "", offset);
   }
 
-  entity animscripted("custom_traversal_anim_finished", eventstruct.location, eventstruct.direction, eventstruct.animation, eventstruct.anim_mode, undefined, eventstruct.playback_speed, eventstruct.goal_time, eventstruct.lerp_time);
+  entity animScripted("custom_traversal_anim_finished", eventstruct.location, eventstruct.direction, eventstruct.animation, eventstruct.anim_mode, undefined, eventstruct.playback_speed, eventstruct.goal_time, eventstruct.lerp_time);
   entity thread finishcustomtraversallistener();
   entity thread killedcustomtraversallistener();
 }
@@ -1169,7 +1169,7 @@ function event_handler[event_5d98e413] function_81d4b0fe(eventstruct) {
   player = self;
 
   if(!isPlayer(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   if(isDefined(player)) {

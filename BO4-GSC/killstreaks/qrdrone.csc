@@ -216,11 +216,11 @@ collisionhandler(localclientnum) {
 
       if(isDefined(player)) {
         if(hit_intensity > 15) {
-          player playrumbleonentity(driver_local_client, "damage_heavy");
+          player playRumbleOnEntity(driver_local_client, "damage_heavy");
           continue;
         }
 
-        player playrumbleonentity(driver_local_client, "damage_light");
+        player playRumbleOnEntity(driver_local_client, "damage_light");
       }
     }
   }
@@ -279,7 +279,7 @@ qrdrone_watch_distance() {
   self.minheight = level.mapcenter[2] - 800;
   inrangepos = self.origin;
   soundent = spawn(0, self.origin, "script_origin");
-  soundent linkto(self);
+  soundent linkTo(self);
   self thread qrdrone_staticstopondeath(soundent);
 
   while(true) {

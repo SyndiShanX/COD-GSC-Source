@@ -82,7 +82,7 @@ common_move_to_table(stub, table, asd_name, check_pickup) {
       sloth_print("location change during pathing");
 
       stub = self.buildable_zone.stub;
-      table = getent(stub.model.target, "targetname");
+      table = getEnt(stub.model.target, "targetname");
 
       if(!isDefined(table)) {
         assertmsg("Table not found for " + self.buildable_zone.buildable_name);
@@ -115,16 +115,16 @@ build_buildable_action() {
   self endon("stop_action");
   self maps\mp\zombies\_zm_ai_sloth::common_context_action();
   stub = self.buildable_zone.stub;
-  table = getent(stub.model.target, "targetname");
+  table = getEnt(stub.model.target, "targetname");
 
   if(!self common_move_to_table(stub, table, "zm_make_buildable_intro")) {
     return;
   }
-  self maps\mp\zombies\_zm_ai_sloth::action_animscripted("zm_make_buildable_intro", "make_buildable_intro_anim", table.origin, table.angles);
+  self maps\mp\zombies\_zm_ai_sloth::action_animScripted("zm_make_buildable_intro", "make_buildable_intro_anim", table.origin, table.angles);
 
   sloth_print("looking for " + self.buildable_zone.buildable_name + " pieces");
 
-  store = getstruct("sloth_general_store", "targetname");
+  store = getStruct("sloth_general_store", "targetname");
   self setgoalpos(store.origin);
   self waittill("goal");
   self.pieces = [];
@@ -151,7 +151,7 @@ build_buildable_action() {
     }
   }
 
-  self animscripted(self.origin, self.angles, "zm_pickup_part");
+  self animScripted(self.origin, self.angles, "zm_pickup_part");
   maps\mp\animscripts\zm_shared::donotetracks("pickup_part_anim");
 
   sloth_print("took " + self.pieces.size + " pieces");
@@ -163,11 +163,11 @@ build_buildable_action() {
 
   if(stub != self.buildable_zone.stub) {
     stub = self.buildable_zone.stub;
-    table = getent(stub.model.target, "targetname");
+    table = getEnt(stub.model.target, "targetname");
   }
 
   self thread build_buildable_fx(table);
-  self animscripted(table.origin, table.angles, "zm_make_buildable");
+  self animScripted(table.origin, table.angles, "zm_make_buildable");
   wait 2.5;
   self notify("stop_buildable_fx");
   self maps\mp\zombies\_zm_buildables::player_build(self.buildable_zone, self.pieces);
@@ -378,13 +378,13 @@ fetch_buildable_action(item) {
 
   append_name = "equipment";
   pickup_asd = "zm_pickup_" + append_name;
-  table = getent(stub.model.target, "targetname");
+  table = getEnt(stub.model.target, "targetname");
 
   if(!self common_move_to_table(stub, table, pickup_asd, 1)) {
     return;
   }
   self.buildable_item = item;
-  self animscripted(table.origin, table.angles, pickup_asd);
+  self animScripted(table.origin, table.angles, pickup_asd);
   maps\mp\animscripts\zm_shared::donotetracks("pickup_equipment_anim", ::pickup_notetracks, stub);
 
   if(player is_player_equipment(stub.weaponname)) {
@@ -437,10 +437,10 @@ fetch_buildable_action(item) {
   if(item == "turbine") {
     if(isDefined(self.turbine)) {
       self orientmode("face point", self.turbine.origin);
-      self animscripted(self.origin, flat_angle(vectortoangles(self.turbine.origin - self.origin)), "zm_kick_equipment");
+      self animScripted(self.origin, flat_angle(vectortoangles(self.turbine.origin - self.origin)), "zm_kick_equipment");
       maps\mp\animscripts\zm_shared::donotetracks("kick_equipment_anim", ::destroy_item, self.turbine);
       self orientmode("face default");
-      self animscripted(self.origin, self.angles, "zm_idle_equipment");
+      self animScripted(self.origin, self.angles, "zm_idle_equipment");
       wait 3;
     }
   }
@@ -451,7 +451,7 @@ fetch_buildable_action(item) {
   }
 
   drop_asd = "zm_drop_" + append_name;
-  self maps\mp\zombies\_zm_ai_sloth::action_animscripted(drop_asd, "drop_equipment_anim");
+  self maps\mp\zombies\_zm_ai_sloth::action_animScripted(drop_asd, "drop_equipment_anim");
 
   if(player has_player_equipment(stub.weaponname)) {
     player equipment_take(stub.weaponname);
@@ -501,7 +501,7 @@ pickup_notetracks(note, stub) {
       self.buildable_model setModel(stub.model.model);
     }
 
-    self.buildable_model linkto(self, tag_name);
+    self.buildable_model linkTo(self, tag_name);
   }
 }
 
@@ -611,7 +611,7 @@ wallbuy_action() {
   self endon("death");
   self endon("stop_action");
   self maps\mp\zombies\_zm_ai_sloth::common_context_action();
-  wallbuy_struct = getstruct("sloth_allign_gunshop", "targetname");
+  wallbuy_struct = getStruct("sloth_allign_gunshop", "targetname");
   asd_name = "zm_wallbuy_remove";
   anim_id = self getanimfromasd(asd_name, 0);
   start_org = getstartorigin(wallbuy_struct.origin, wallbuy_struct.angles, anim_id);
@@ -620,7 +620,7 @@ wallbuy_action() {
   self waittill("goal");
   self setgoalpos(self.origin);
   self sloth_face_object(undefined, "angle", start_ang[1], 0.9);
-  self animscripted(wallbuy_struct.origin, wallbuy_struct.angles, asd_name);
+  self animScripted(wallbuy_struct.origin, wallbuy_struct.angles, asd_name);
   maps\mp\animscripts\zm_shared::donotetracks("wallbuy_remove_anim", ::wallbuy_grab_pieces);
 
   if(!self.wallbuy_stubs.size || !self.wallbuy_pieces.size) {
@@ -630,7 +630,7 @@ wallbuy_action() {
 
   for(i = 0; i < self.pieces_needed; i++) {
     stub = self.wallbuy_stubs[i];
-    vec_right = vectornormalize(anglestoright(stub.angles));
+    vec_right = vectorNormalize(anglestoright(stub.angles));
     org = stub.origin - vec_right * 60;
     org = groundpos(org);
     self setgoalpos(org);
@@ -676,9 +676,9 @@ wallbuy_action() {
     }
 
     self thread player_draw_chalk(stub);
-    self maps\mp\zombies\_zm_ai_sloth::action_animscripted("zm_wallbuy_add", "wallbuy_add_anim", org, chalk_angle);
+    self maps\mp\zombies\_zm_ai_sloth::action_animScripted("zm_wallbuy_add", "wallbuy_add_anim", org, chalk_angle);
     self notify("end_chalk_dust");
-    playsoundatposition("zmb_cha_ching_loud", stub.origin);
+    playSoundAtPosition("zmb_cha_ching_loud", stub.origin);
 
     if(is_true(stub.built)) {
       current_piece maps\mp\zm_buried_buildables::ondrop_chalk(self);

@@ -273,10 +273,10 @@ move_player_to_start(var_0) {
 }
 
 _id_64AA(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, var_1);
+  var_2 = common_scripts\utility::getStruct(var_0, var_1);
 
   if(isDefined(var_2)) {
-    level.player setorigin(var_2.origin);
+    level.player setOrigin(var_2.origin);
     level.player setplayerangles(var_2.angles);
     return 1;
   }
@@ -318,8 +318,8 @@ _id_5DD7(var_0) {
 }
 
 _id_594B(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
   var_2.origin = var_3.origin;
 
   if(isDefined(var_3.angles)) {
@@ -578,7 +578,7 @@ _id_64C2() {
 }
 
 _id_64C3(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 notify("trigger");
@@ -769,7 +769,7 @@ _id_64D4() {
 
     if(isDefined(level.chopper)) {
       var_1.origin = level.chopper.origin;
-      var_1 linkto(level.chopper);
+      var_1 linkTo(level.chopper);
     }
   }
 }
@@ -807,7 +807,7 @@ _id_64D8(var_0, var_1, var_2, var_3) {
 }
 
 _id_64D9(var_0, var_1) {
-  var_2 = vectornormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)));
+  var_2 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)));
   var_3 = 1;
 
   if(vectordot(var_2, var_0) < 0) {
@@ -815,7 +815,7 @@ _id_64D9(var_0, var_1) {
   }
   var_4 = (1.0 - var_1) * var_0;
   var_5 = var_3 * var_1 * var_2;
-  return vectornormalize(var_4 + var_5);
+  return vectorNormalize(var_4 + var_5);
 }
 
 _id_64DA(var_0) {
@@ -838,16 +838,16 @@ _id_64DA(var_0) {
 _id_64DB(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_4 = self.origin;
-  var_0 = vectornormalize(var_0);
+  var_0 = vectorNormalize(var_0);
   var_5 = 1.0 / var_2;
 
   if(isDefined(var_3)) {
     thread _id_64DC();
   }
   for(;;) {
-    self moveto(var_4 + var_0 * var_1, var_5, 0.05, 0.05);
+    self moveTo(var_4 + var_0 * var_1, var_5, 0.05, 0.05);
     wait(var_5);
-    self moveto(var_4 + var_0 * var_1 * -1, var_5, 0.05, 0.05);
+    self moveTo(var_4 + var_0 * var_1 * -1, var_5, 0.05, 0.05);
     wait(var_5);
   }
 }
@@ -996,7 +996,7 @@ _id_64E6(var_0, var_1, var_2, var_3) {
 
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
     var_7 = var_2[var_6];
-    var_8 = vectornormalize(var_7.origin - var_0);
+    var_8 = vectorNormalize(var_7.origin - var_0);
     var_9 = vectordot(var_1, var_8);
     var_7._id_64E3 = var_9;
     var_10 = var_9 >= var_3;
@@ -1069,7 +1069,7 @@ _id_64E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(isDefined(var_9.radius)) {
       var_8 = var_9.radius;
     }
-    var_10 = vectornormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)));
+    var_10 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)));
 
     if(vectordot(var_10, (0, 0, 1)) < 0) {
       var_10 = var_10 * -1;
@@ -1078,7 +1078,7 @@ _id_64E9(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_11 = var_9.origin + var_10;
     var_12 = var_11 - var_0.origin;
     var_13 = length(var_12);
-    var_12 = vectornormalize(var_12);
+    var_12 = vectorNormalize(var_12);
     var_14 = vectortoangles(var_12);
     var_14 = anglestoup(var_14);
     var_14 = _id_64D9(var_14, 0.6);
@@ -1274,7 +1274,7 @@ _id_64ED() {
 }
 
 _id_64F0(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 maps\_utility::_id_2789("axis");
   var_4 = var_3.size;
 

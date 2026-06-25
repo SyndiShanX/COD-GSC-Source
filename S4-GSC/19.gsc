@@ -1601,7 +1601,7 @@ _id_CBA9() {
   self._id_FE90 = _id_07D6::_id_3FF0(self.origin + anglestoup(self.angles) * 1, "HINT_BUTTON", undefined, var_0, undefined, undefined, "show", 200, 160, 100, 160);
   self._id_FE90.owner = self.owner;
   self._id_FE90.team = self.team;
-  self._id_FE90 linkto(self);
+  self._id_FE90 linkTo(self);
 
   foreach(var_2 in level.players) {
     self._id_FE90 disableplayeruse(var_2);
@@ -1752,7 +1752,7 @@ _id_406D() {
   var_0._id_FEB1 = 3000;
   var_0._id_84EF = 0;
   var_0._id_7C8C = self._id_7C8C;
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 thread _id_479C(self);
   return var_0;
 }
@@ -2641,14 +2641,14 @@ launcherbackblast_modifieddamage(var_0, var_1, var_2, var_3, var_4) {
 
 backblastcheckpoints(var_0, var_1, var_2) {
   if(!isPlayer(var_1)) {
-    var_3 = vectornormalize(var_1.origin - var_0 getEye());
+    var_3 = vectorNormalize(var_1.origin - var_0 getEye());
     return [var_3];
   }
 
   var_4 = 0;
-  var_5 = vectornormalize(var_1 getEye() - var_0 getEye());
-  var_6 = vectornormalize(var_1 scripts\mp\utility\player::_id_6D7F() + scripts\engine\utility::ter_op(var_1 getstance() == "prone", anglesToForward(var_1 getplayerangles(1)) * -20, (0, 0, 0)) - var_0 getEye());
-  var_3 = vectornormalize(var_1.origin + scripts\engine\utility::ter_op(var_1 getstance() == "prone", anglesToForward(var_1 getplayerangles(1)) * -40, (0, 0, 0)) - var_0 getEye());
+  var_5 = vectorNormalize(var_1 getEye() - var_0 getEye());
+  var_6 = vectorNormalize(var_1 scripts\mp\utility\player::_id_6D7F() + scripts\engine\utility::ter_op(var_1 getstance() == "prone", anglesToForward(var_1 getplayerangles(1)) * -20, (0, 0, 0)) - var_0 getEye());
+  var_3 = vectorNormalize(var_1.origin + scripts\engine\utility::ter_op(var_1 getstance() == "prone", anglesToForward(var_1 getplayerangles(1)) * -40, (0, 0, 0)) - var_0 getEye());
 
   if(var_4) {
     var_7 = (var_5 + var_6) / 2;
@@ -2904,7 +2904,7 @@ _id_99ED(var_0) {
   }
 
   var_1 = spawn("script_origin", self.origin + var_0 * anglestoup(self.angles));
-  var_1 linkto(self);
+  var_1 linkTo(self);
   self.trigger = var_1;
   var_1.owner = self;
   thread _id_99EE();
@@ -2943,7 +2943,7 @@ _id_10AE4() {
   var_1 endon("death");
   var_0 endon("disconnect");
   level endon("game_ended");
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 setCursorHint("HINT_NOICON");
   var_1 scripts\mp\utility\usability::_id_D6C2(var_0);
   var_1 childthread scripts\mp\utility\usability::_id_A6C3(var_0);
   var_1 childthread scripts\mp\utility\usability::_id_A6C2(var_0, self);
@@ -2982,7 +2982,7 @@ _id_99EF(var_0, var_1) {
   if(var_1) {
     self enablemissilehint(1);
   } else {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 
   self _meth_84D7(var_0);
@@ -3036,21 +3036,21 @@ _id_99EC() {
 _id_D549(var_0) {
   switch (var_0) {
     case "s4_c4_mp":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_C4");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_C4");
       self _meth_84D4(125);
       self setuserange(125);
       break;
     case "s4_mine_ger_s44_mp":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_AT_MINE");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_AT_MINE");
       break;
     case "claymore_mp":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_CLAYMORE");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_CLAYMORE");
       break;
     case "gas_grenade_mp":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_GAS_GRENADE");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_GAS_GRENADE");
       break;
     case "trophy_mp":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_TROPHY");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_TROPHY");
       break;
   }
 }
@@ -3189,7 +3189,7 @@ _id_10D70(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  var_6 = vectornormalize(var_5);
+  var_6 = vectorNormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
   var_7 = scripts\engine\trace::_bullet_trace(var_4, var_1, 0, var_3);
 
@@ -4497,11 +4497,11 @@ _id_7D5B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_15 = anglestoup(var_0.angles);
     var_16 = _func_025B(var_14, var_15);
     var_17 = scripts\engine\utility::spawn_tag_origin(var_4, _func_0017(var_14, var_16, var_15));
-    var_17 moveto(var_9, var_12);
+    var_17 moveTo(var_9, var_12);
     var_18 = _func_0212(var_1._id_25CA, var_6, var_7, var_8);
     var_18.origin = var_17.origin;
     var_18.angles = var_17.angles;
-    var_18 linkto(var_17);
+    var_18 linkTo(var_17);
 
     if(var_12 > 1) {
       thread _id_7D5D(var_18, 1);
@@ -5430,7 +5430,7 @@ _id_523D() {
 
   if(!isDefined(self._id_2D93)) {
     self._id_2D93 = spawn("script_origin", self.origin);
-    self._id_2D93 linkto(self);
+    self._id_2D93 linkTo(self);
     self._id_2D93 _id_078E::_id_C2B6(1);
     wait 0.05;
   }

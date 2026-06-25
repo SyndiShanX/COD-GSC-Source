@@ -86,7 +86,7 @@ _id_5AE8(var_0, var_1) {
       continue;
     }
     var_11 = (var_7[1], -1 * var_7[0], 0);
-    var_11 = vectornormalize(var_11);
+    var_11 = vectorNormalize(var_11);
     var_12 = abs(vectordot(var_11, var_9));
 
     if(var_3 <= 0 || var_12 < var_3) {

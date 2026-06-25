@@ -165,20 +165,20 @@ _id_4B0E(var_0, var_1, var_2, var_3, var_4) {
   self._id_94EB thread _id_8D2E(self);
 
   if(!var_6) {
-    self linkto(self._id_94EB);
+    self linkTo(self._id_94EB);
   }
 
   thread _id_4B10(var_0, var_1, var_2, var_3, var_7, 0.5);
-  self._id_94EB rotateyaw(360, 1.0);
+  self._id_94EB rotateYaw(360, 1.0);
   wait 0.5;
   thread _id_4B10(var_0, var_1, var_2, var_3, var_7, 0.5);
-  self._id_94EB rotateyaw(720, 1.0);
+  self._id_94EB rotateYaw(720, 1.0);
   wait 0.5;
   thread _id_4B10(var_0, var_1, var_2, var_3, var_7, 1);
-  self._id_94EB rotateyaw(1080, 1.0);
+  self._id_94EB rotateYaw(1080, 1.0);
   wait 1;
   thread _id_4B10(var_0, var_1, var_2, var_3, var_7, 1);
-  self._id_94EB rotateyaw(1240, 1.0);
+  self._id_94EB rotateYaw(1240, 1.0);
   wait 1;
 
   if(var_6) {
@@ -287,7 +287,7 @@ _id_5CFA(var_0, var_1, var_2, var_3) {
       self dodamage(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", "iw7_dischorddummy_zm");
     }
   } else {
-    self setvelocity(vectornormalize(self.origin - var_1.origin) * 200 + (0, 0, 800));
+    self setvelocity(vectorNormalize(self.origin - var_1.origin) * 200 + (0, 0, 800));
     wait 0.1;
 
     if(isDefined(var_2)) {
@@ -359,7 +359,7 @@ _id_5883(var_0, var_1, var_2, var_3, var_4) {
     self._id_94EB = spawn("script_origin", self.origin);
     self._id_94EB.angles = self.angles;
     self._id_94EB thread _id_8D2E(self);
-    self linkto(self._id_94EB);
+    self linkTo(self._id_94EB);
     var_6 = self.origin + (0, 0, 200);
     var_7 = self _meth_8008(self.origin, self.origin + (0, 0, 200), 15, 60, 1, 1);
     var_8 = 1;
@@ -376,7 +376,7 @@ _id_5883(var_0, var_1, var_2, var_3, var_4) {
       var_8 = var_8 / 200;
     }
 
-    self._id_94EB moveto(var_6, var_8);
+    self._id_94EB moveTo(var_6, var_8);
     wait 0.1;
     self setscriptablepartstate("left_leg", "detached", 1);
     self setscriptablepartstate("right_leg", "detached", 1);
@@ -967,7 +967,7 @@ _id_65A0(var_0, var_1) {
 
 _id_3F0A(var_0) {
   var_1 = var_0 / 2;
-  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglesToForward(self.angles));
   var_3 = var_2 * var_1;
   var_4 = self.origin + var_3;
   physicsexplosionsphere(var_4, var_1, 1, 2.0);
@@ -993,7 +993,7 @@ _id_34FB(var_0, var_1, var_2) {
 
   foreach(var_8 in var_6) {
     var_9 = anglesToForward(self.angles);
-    var_10 = vectornormalize(var_9) * -25;
+    var_10 = vectorNormalize(var_9) * -25;
     var_11 = 0;
     var_12 = var_8.origin;
     var_13 = scripts\engine\utility::_id_10E76(self getEye() + var_10, self.angles, var_12 + (0, 0, 30), var_3);

@@ -40,8 +40,8 @@
 #namespace namespace_d6f0b09d;
 
 function function_ad4c4af2(str_objective) {
-  level thread scene::init_streamer("scene_duga_intro", getplayers());
-  level thread scene::init_streamer("scene_duga_intro_adler", getplayers());
+  level thread scene::init_streamer("scene_duga_intro", getPlayers());
+  level thread scene::init_streamer("scene_duga_intro_adler", getPlayers());
   animation::add_notetrack_func("duga_intro::bannerocks_brake", &function_1ab4d3a1);
 }
 
@@ -67,7 +67,7 @@ function function_fa8186e9() {
 }
 
 function function_73f39397() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player val::set(#"hash_4d99b770ba54ea0d", "freezecontrols", 1);
   var_b29e95a1 = [level.woods, level.mason];
 
@@ -75,7 +75,7 @@ function function_73f39397() {
     array::add(var_b29e95a1, level.var_c1881cdd);
   }
 
-  var_b29e95a1[var_b29e95a1.size] = getplayers()[0];
+  var_b29e95a1[var_b29e95a1.size] = getPlayers()[0];
   level.adler thread scene::play("scene_duga_intro_adler", "dt4_end", level.adler);
   level thread scene::play("scene_duga_intro", "dt4_end", var_b29e95a1);
   e_player thread function_d64a7119();
@@ -115,11 +115,11 @@ function function_60a583d8(str_objective, b_starting) {
   level.var_c0c469ea = 2.5;
   level battlechatter::function_2ab9360b(0);
   level thread function_7de1bd9d();
-  var_5a17d5a0 = getent("lazar", "targetname");
-  var_ad36234a = getent("park", "targetname");
+  var_5a17d5a0 = getEnt("lazar", "targetname");
+  var_ad36234a = getEnt("park", "targetname");
   var_5a17d5a0 spawner::add_spawn_function(&function_677d3651);
   var_ad36234a spawner::add_spawn_function(&function_e240f461);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player showcrosshair(0);
   namespace_82bfe441::fade(1, "FadeImmediate");
   e_player takeallweapons();
@@ -157,7 +157,7 @@ function function_60a583d8(str_objective, b_starting) {
 
   var_3e3877e9 = spawner::simple_spawn("spawners_intro_redshirts");
   a_actors = arraycombine(a_actors, var_3e3877e9);
-  a_actors[a_actors.size] = getplayers()[0];
+  a_actors[a_actors.size] = getPlayers()[0];
   level thread scene::play("scene_duga_intro", "introCam", a_actors);
   level thread scene::play("scene_duga_intro_adler", "introCam", [level.adler]);
   level waittill(#"hash_4eb1d6bbf8be77fc");
@@ -261,7 +261,7 @@ function function_7de1bd9d() {
   level.var_4222855a dialog_tree::function_6ebd37a4();
   level.var_4222855a dialog_tree::add_option(#"hash_762b5d6397cfcbbd", undefined, undefined, "dt_idle", 1, undefined, undefined, &function_b31036ab);
   level.var_4222855a dialog_tree::function_6ebd37a4();
-  var_1584d516 = getplayers()[0] player_decision::function_1c4fb6d4();
+  var_1584d516 = getPlayers()[0] player_decision::function_1c4fb6d4();
 
   var_9a7b5d79 = getdvarint(#"hash_4dd19684bf68597b", -1);
 

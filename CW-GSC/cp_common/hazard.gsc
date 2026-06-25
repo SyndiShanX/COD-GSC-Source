@@ -183,7 +183,7 @@ function function_c370832e() {
 
 function function_81d8cdd8() {
   level.var_a51b5712 = 1;
-  a_players = getplayers();
+  a_players = getPlayers();
   array::thread_all(a_players, &function_c370832e);
   callback::on_spawned(&function_c370832e);
 }
@@ -193,7 +193,7 @@ function function_6faef2d1() {
   level.var_a51b5712 = undefined;
   level notify(#"hash_440299874a982aae");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(is_true(player.var_bbfa647a)) {
       player.var_bbfa647a = undefined;
       player allowsprint(1);

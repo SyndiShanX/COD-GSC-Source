@@ -81,8 +81,8 @@ slam_executeinternal(var_0, var_1, var_2, var_3) {
   }
 
   var_0 setstance("crouch");
-  var_0 playerlinkto(var_2, "tag_origin");
-  var_2 moveto(var_1, 0.25, 0.1, 0);
+  var_0 playerlinkTo(var_2, "tag_origin");
+  var_2 moveTo(var_1, 0.25, 0.1, 0);
   wait(0.25);
   var_0 thread scripts\cp\cp_weapon::grenade_earthquake(0);
   if(!isDefined(var_3)) {

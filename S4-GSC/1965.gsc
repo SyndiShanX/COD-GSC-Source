@@ -26,7 +26,7 @@ _id_8138() {
       var_4._id_5528 = [];
 
       if(isDefined(var_2.target)) {
-        var_4._id_2299 = getent(var_2.target, "targetname");
+        var_4._id_2299 = getEnt(var_2.target, "targetname");
         var_4._id_257F = var_4._id_2299.origin + (0, 0, -175);
       }
 

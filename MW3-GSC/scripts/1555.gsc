@@ -825,11 +825,11 @@ _id_3C16(var_0, var_1) {
     var_0 disableweapons();
 
     if(isDefined(level._id_3C1E)) {
-      var_0 cameralinkto(var_10, level._id_3C1E);
+      var_0 cameralinkTo(var_10, level._id_3C1E);
     } else {
-      var_0 cameralinkto(var_10, "tag_origin");
+      var_0 cameralinkTo(var_10, "tag_origin");
     }
-    var_0 controlslinkto(var_10);
+    var_0 controlslinkTo(var_10);
     var_4 = _id_3C0E(0.2);
 
     if(!var_4) {

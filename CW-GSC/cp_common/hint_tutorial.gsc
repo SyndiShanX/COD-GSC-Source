@@ -26,7 +26,7 @@ function function_4c2d4fc4(message, title = #"", var_9696a2d = 0, var_db331a85 =
   player = self;
 
   if(!isPlayer(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player endon(#"death");
@@ -104,7 +104,7 @@ function private function_142b2d59(var_572eedec) {
     var_572eedec = array(var_572eedec);
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   for(line_num = 0; line_num < var_572eedec.size; line_num++) {
     data = var_572eedec[line_num];
@@ -162,7 +162,7 @@ function pause(var_1d470cc4 = #"ui_cancel", var_63d0d48f = #"hash_3f87d00d07eb79
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level endoncallback(&function_18c01825, #"game_ended", #"mission_failed", #"hash_2bb74762daab3cd", #"restart_checkpoint", #"restart_mission");
 
@@ -200,7 +200,7 @@ function pause(var_1d470cc4 = #"ui_cancel", var_63d0d48f = #"hash_3f87d00d07eb79
 }
 
 function private function_18c01825(parms) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player)) {
       player thread clientfield::set_to_player("hint_pause_state", 0);
     }

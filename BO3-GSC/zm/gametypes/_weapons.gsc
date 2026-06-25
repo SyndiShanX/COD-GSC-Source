@@ -775,7 +775,7 @@ function playconcussionsound(duration) {
   self endon("disconnect");
   concussionsound = spawn("script_origin", (0, 0, 1));
   concussionsound.origin = self.origin;
-  concussionsound linkto(self);
+  concussionsound linkTo(self);
   concussionsound thread deleteentonownerdeath(self);
   concussionsound playSound("");
   concussionsound playLoopSound("");

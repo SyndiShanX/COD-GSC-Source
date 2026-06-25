@@ -91,7 +91,7 @@ horse_feet(localclientnum, note, ground_type) {
   if(self islocalclientdriver(localclientnum)) {
     if(note == "step_front_left_walk" || note == "step_rear_left_walk" || note == "step_front_left_trot" || note == "step_rear_left_trot" || note == "step_front_left_run" || note == "step_rear_left_run" || note == "step_front_left_canter" || note == "step_rear_left_canter" || note == "step_front_left_sprint" || note == "step_rear_left_sprint") {
       player = getlocalplayer(localclientnum);
-      player playrumbleonentity(localclientnum, "pullout_small");
+      player playRumbleOnEntity(localclientnum, "pullout_small");
       speed = self getspeed() / 17.6;
       speed = abs(speed) / 25.0;
       intensity = 0.065 + 0.065 * speed;

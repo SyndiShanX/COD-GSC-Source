@@ -50,7 +50,7 @@ _id_D87C(var_0) {
   var_3 = 1;
   var_4 = 3;
   var_5 = 0;
-  var_6 = getent("airstrikeheight", "targetname");
+  var_6 = getEnt("airstrikeheight", "targetname");
   var_7 = level._id_2A73._id_2A1F[level._id_2BB5._id_7769];
   var_8 = level._id_2A73._id_2A25[level._id_2BB5._id_7769];
   var_9 = var_7;
@@ -307,7 +307,7 @@ _id_5845(var_0) {
 }
 
 _id_6A97() {
-  var_0 = getent("airstrikeheight", "targetname");
+  var_0 = getEnt("airstrikeheight", "targetname");
   var_1 = var_0.origin[2] - 300;
   return var_1;
 }
@@ -356,11 +356,11 @@ _id_77B8() {
   var_0 = spawn("script_model", level._id_2BB5._id_77C1 + (0, 0, 20));
   var_0 setModel("tag_origin");
   var_0 makeuseable();
-  var_0 setcursorhint("HINT_NOICON");
+  var_0 setCursorHint("HINT_NOICON");
   var_0 setuseholdduration("duration_short");
   var_0 sethintrequiresholding(1);
   var_0 setuserange(230);
-  var_0 sethintstring(&"MP_BR_INGAME/EXTRACT");
+  var_0 setHintString(&"MP_BR_INGAME/EXTRACT");
   self._id_FDB2 = var_0;
   thread _id_77E5(var_0);
   wait(level._id_2BB5._id_77B8);

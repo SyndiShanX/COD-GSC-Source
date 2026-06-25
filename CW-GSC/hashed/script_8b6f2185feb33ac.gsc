@@ -29,7 +29,7 @@ function function_c17f029c() {
   level endon(#"game_ended");
 
   if(!isDefined(level.player)) {
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
     level.player = a_e_players[0];
   }
 
@@ -111,7 +111,7 @@ function function_a9cee9e2() {
   wait 0.35;
   var_b22820f2.var_afe8c0dc = util::spawn_model(#"tag_origin", var_b22820f2.origin - (0, 0, 60), var_b22820f2.angles);
   var_afe8c0dc = level.var_b22820f2.var_afe8c0dc;
-  self setorigin(var_afe8c0dc.origin);
+  self setOrigin(var_afe8c0dc.origin);
   self setplayerangles(var_afe8c0dc.angles);
   self playerlinktodelta(var_afe8c0dc, "tag_origin", 1, 28, 28, 28, 28);
   self hideviewmodel();
@@ -132,7 +132,7 @@ function function_86617714() {
   self surveycam::function_56d93dca(0);
   var_b22820f2.var_afe8c0dc unlink();
   var_b22820f2.var_afe8c0dc delete();
-  self setorigin(var_b22820f2.var_721fe4cf);
+  self setOrigin(var_b22820f2.var_721fe4cf);
   self setplayerangles(var_b22820f2.var_d298ff03);
   self showviewmodel();
   setslowmotion(0.999, 1, 0.1, 0.45, 1);

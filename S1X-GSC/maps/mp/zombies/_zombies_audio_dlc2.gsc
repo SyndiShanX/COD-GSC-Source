@@ -266,7 +266,7 @@ zmbciviliansurvivorvo() {
   var_0 endon("death");
   var_1 = level.survivorvoent;
   var_1.zmbvoxid = "survivor" + randomintrange(1, 4);
-  var_1 linkto(var_0, "tag_origin", (0, 0, 60), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_origin", (0, 0, 60), (0, 0, 0));
   waitframe();
 
   if(var_1 maps\mp\zombies\_zombies_audio::create_and_play_dialog("general", "callout")) {

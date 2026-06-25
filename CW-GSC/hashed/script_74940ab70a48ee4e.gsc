@@ -9,7 +9,7 @@
 #namespace namespace_29a279dd;
 
 function set_display(state, text, desc) {
-  getplayers()[0] val::set(#"hash_6420a4a05af52d6e", "show_crosshair", 0);
+  getPlayers()[0] val::set(#"hash_6420a4a05af52d6e", "show_crosshair", 0);
 
   if(!namespace_61e6d095::exists(#"hash_767355dc5e1cddfb")) {
     namespace_61e6d095::create(#"hash_767355dc5e1cddfb", #"hash_6420a4a05af52d6e");
@@ -32,5 +32,5 @@ function remove() {
     namespace_61e6d095::remove(#"hash_767355dc5e1cddfb");
   }
 
-  getplayers()[0] val::reset_all();
+  getPlayers()[0] val::reset_all();
 }

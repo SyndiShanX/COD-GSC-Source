@@ -172,7 +172,7 @@ _id_D0FF(var_0, var_1) {
   var_6 = var_3 gettagorigin("tag_laser") + (0, 0, 10);
   var_6 = var_6 - var_5 * 20;
   var_7 = spawn("script_model", var_6);
-  var_7 linkto(var_3);
+  var_7 linkTo(var_3);
   var_3.killcament = var_7;
   var_3._id_3A67 = spawn("script_model", var_3.origin);
   var_3._id_3A67.team = var_3.team;
@@ -218,7 +218,7 @@ _id_D114(var_0, var_1) {
   var_0._id_3A67 show();
   var_0._id_3A67.angles = var_0.angles;
   var_0._id_3A67.origin = var_0.origin;
-  var_0._id_3A67 linkto(var_0, "tag_aim_pivot");
+  var_0._id_3A67 linkTo(var_0, "tag_aim_pivot");
   var_4 = "icon_minimap_sentry";
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "createObjective")) {
@@ -258,7 +258,7 @@ _id_D114(var_0, var_1) {
     var_0.useownerobj.origin = var_8;
   }
 
-  var_0.useownerobj linkto(var_0, var_7);
+  var_0.useownerobj linkTo(var_0, var_7);
 
   foreach(var_10 in level.players) {
     if(var_10 != var_0.owner) {

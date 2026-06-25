@@ -43,7 +43,7 @@ setinvisibletoall() {
 spawnandlinkfxtotag(effect, ent, tag) {
   fxent = spawn("script_model", ent gettagorigin(tag));
   fxent setModel("tag_origin");
-  fxent linkto(ent, tag);
+  fxent linkTo(ent, tag);
   wait_network_frame();
   playFXOnTag(effect, fxent, "tag_origin");
   return fxent;
@@ -52,7 +52,7 @@ spawnandlinkfxtotag(effect, ent, tag) {
 spawnandlinkfxtooffset(effect, ent, offsetorigin, offsetangles) {
   fxent = spawn("script_model", (0, 0, 0));
   fxent setModel("tag_origin");
-  fxent linkto(ent, "", offsetorigin, offsetangles);
+  fxent linkTo(ent, "", offsetorigin, offsetangles);
   wait_network_frame();
   playFXOnTag(effect, fxent, "tag_origin");
   return fxent;

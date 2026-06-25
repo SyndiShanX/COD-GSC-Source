@@ -83,7 +83,7 @@ modkit_crafted(e_player) {
 
 function_1665b086() {
   function_456e91dd();
-  level.a_t_crafting[#"ztable_white_ww_modkit"][0] zm_crafting::function_a187b293(getplayers()[0]);
+  level.a_t_crafting[#"ztable_white_ww_modkit"][0] zm_crafting::function_a187b293(getPlayers()[0]);
   zm_crafting::function_ca244624(#"ztable_white_ww_modkit");
 }
 
@@ -107,20 +107,20 @@ modkit_hint(e_player) {
   var_2c09b688 = e_player zm_white_util::function_c7274071();
 
   if(zm_white_util::function_c654e39a(var_2c09b688)) {
-    self sethintstring(#"hash_253d93e1249b135c");
+    self setHintString(#"hash_253d93e1249b135c");
   } else if(e_player.var_382b64f2 !== 1) {
-    self sethintstring(#"hash_38c5e4e71fc96473");
+    self setHintString(#"hash_38c5e4e71fc96473");
   } else if(!isDefined(e_player.var_f7694097)) {
-    self sethintstring(#"hash_385e1ce240650791");
+    self setHintString(#"hash_385e1ce240650791");
   } else {
     str_weapon_name = level.var_57f4595b[e_player.var_f7694097].displayname;
 
     if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
-      self sethintstring("");
+      self setHintString("");
     } else if(isDefined(var_2c09b688)) {
-      self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), str_weapon_name, var_2c09b688.displayname);
+      self setHintString(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), str_weapon_name, var_2c09b688.displayname);
     } else {
-      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), str_weapon_name);
+      self setHintString(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), str_weapon_name);
     }
   }
 

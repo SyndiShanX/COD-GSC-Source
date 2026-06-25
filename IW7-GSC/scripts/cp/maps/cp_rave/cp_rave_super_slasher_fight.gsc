@@ -83,7 +83,7 @@ complete_to_island() {
 
 move_lost_and_found(var_0) {
   if(!isDefined(level.lnf_struct)) {
-    level.lnf_struct = scripts\engine\utility::getstruct("lost_and_found", "script_noteworthy");
+    level.lnf_struct = scripts\engine\utility::getStruct("lost_and_found", "script_noteworthy");
     level.lnf_struct.og_origin = level.lnf_struct.origin;
   }
 
@@ -507,10 +507,10 @@ set_up_weak_spot(var_0, var_1, var_2) {
   var_5 = var_1 gettagorigin(var_4);
   var_7 = spawn("script_model", var_5);
   var_7 setModel("zmb_superslasher_weak_spot");
-  var_7 linkto(var_1, var_4, var_3.damage_model_offset, var_3.angular_offset);
+  var_7 linkTo(var_1, var_4, var_3.damage_model_offset, var_3.angular_offset);
   var_7 getrandomweaponfromcategory();
   playFXOnTag(level._effect[var_2], var_6, "tag_origin");
-  var_6 linkto(var_1, var_4, var_3.vfx_offset, var_3.angular_offset);
+  var_6 linkTo(var_1, var_4, var_3.vfx_offset, var_3.angular_offset);
   var_8 = spawnStruct();
   var_8.weak_spot_vfx_ent = var_6;
   var_8.weak_spot_model = var_7;
@@ -654,7 +654,7 @@ item_keep_rotating(var_0) {
   var_0 endon("death");
   var_1 = var_0.angles;
   for(;;) {
-    var_0 rotateto(var_1 + (randomintrange(-40, 40), randomintrange(-40, 90), randomintrange(-40, 90)), 3);
+    var_0 rotateTo(var_1 + (randomintrange(-40, 40), randomintrange(-40, 90), randomintrange(-40, 90)), 3);
     wait(3);
   }
 }
@@ -709,7 +709,7 @@ vfx_point_to_trap(var_0) {
 charm_fly_to_trap_loc(var_0) {
   var_1 = var_0.memory_trap_loc;
   foreach(var_3 in level.soul_collection_models) {
-    var_3 moveto(var_1, 1.5);
+    var_3 moveTo(var_1, 1.5);
   }
 
   wait(1.5);
@@ -752,7 +752,7 @@ soul_deplete_mon(var_0) {
   var_2 = var_1 / 30;
   var_3 = var_0.soul_collected;
   for(var_4 = 0; var_4 < var_3; var_4++) {
-    var_0 moveto(var_0.origin - (0, 0, var_1), var_2);
+    var_0 moveTo(var_0.origin - (0, 0, var_1), var_2);
     var_0 waittill("movedone");
     update_soul_collected(var_0, -1);
   }
@@ -763,7 +763,7 @@ move_up(var_0) {
   var_2 = var_0.original_pos + (0, 0, var_1) * var_0.soul_collected;
   if(var_0.origin != var_2) {
     var_3 = abs(var_2[2] - var_0.origin[2]) / 60;
-    var_0 moveto(var_2, var_3, var_3 / 2, var_3 / 2);
+    var_0 moveTo(var_2, var_3, var_3 / 2, var_3 / 2);
   }
 }
 
@@ -845,7 +845,7 @@ soul_fly_charm(var_0, var_1) {
       var_6 = 0.05;
     }
 
-    var_2 moveto(var_3, var_6);
+    var_2 moveTo(var_3, var_6);
     wait(0.05);
     if(isDefined(var_1) && distancesquared(var_2.origin, var_1.origin) > 256) {
       continue;
@@ -1085,13 +1085,13 @@ activate_super_slasher_barrier(var_0) {
     level.active_super_slasher_barrierfunc_list = [];
   }
 
-  var_1 = getent("super_slasher_barrier_" + var_0, "targetname");
+  var_1 = getEnt("super_slasher_barrier_" + var_0, "targetname");
   if(isDefined(var_1)) {
     var_2 = var_1.origin;
     var_3 = (var_2[0], var_2[1], var_2[2] - 1024);
-    var_1 moveto(var_3, 0.05);
+    var_1 moveTo(var_3, 0.05);
     var_1 waittill("movedone");
-    var_1 disconnectpaths();
+    var_1 disconnectPaths();
   }
 
   var_1.barrier_models = [];
@@ -1143,11 +1143,11 @@ deactivate_super_slasher_barrier(var_0) {
     return;
   }
 
-  var_1 = getent("super_slasher_barrier_" + var_0, "targetname");
+  var_1 = getEnt("super_slasher_barrier_" + var_0, "targetname");
   if(isDefined(var_1)) {
     var_2 = var_1.origin;
     var_3 = (var_2[0], var_2[1], var_2[2] + 1024);
-    var_1 moveto(var_3, 0.05);
+    var_1 moveTo(var_3, 0.05);
     var_1 waittill("movedone");
     var_1 connectpaths();
   }
@@ -1284,7 +1284,7 @@ drop_soul_key() {
 soul_key_pick_up_monitor(var_0, var_1) {
   var_0 endon("death");
   var_0 makeusable();
-  var_0 sethintstring(&"CP_RAVE_PICK_UP_SOUL_KEY");
+  var_0 setHintString(&"CP_RAVE_PICK_UP_SOUL_KEY");
   for(;;) {
     var_0 waittill("trigger", var_2);
     if(isPlayer(var_2)) {
@@ -1324,14 +1324,14 @@ delay_resume_wave_progression() {
 }
 
 deploy_stair_barrier() {
-  var_0 = getent("super_slasher_stair_clip", "targetname");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_0 = getEnt("super_slasher_stair_clip", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   playFX(level._effect["super_slasher_saw_shark_hit"], scripts\engine\utility::drop_to_ground(var_1.origin, 50, -500));
   var_2 = var_0.origin;
   var_3 = (var_2[0], var_2[1], var_2[2] - 1024);
-  var_0 moveto(var_3, 0.05);
+  var_0 moveTo(var_3, 0.05);
   var_0 waittill("movedone");
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_4 = spawn("script_model", var_1.origin);
   var_4 setModel("cp_rave_punji_stream");
   var_4.angles = var_1.angles;
@@ -1339,12 +1339,12 @@ deploy_stair_barrier() {
 }
 
 destroy_stair_barrier() {
-  var_0 = getent("super_slasher_stair_clip", "targetname");
+  var_0 = getEnt("super_slasher_stair_clip", "targetname");
   playFX(level._effect["super_slasher_saw_shark_hit"], scripts\engine\utility::drop_to_ground(var_0.stair_barrier_model.origin, 50, -500));
   var_0 connectpaths();
   var_1 = var_0.origin;
   var_2 = (var_1[0], var_1[1], var_1[2] + 1024);
-  var_0 moveto(var_2, 0.05);
+  var_0 moveTo(var_2, 0.05);
   var_0 waittill("movedone");
   var_0.stair_barrier_model delete();
 }

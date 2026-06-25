@@ -635,7 +635,7 @@ crawlingPain() {
     return false;
   }
 
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 0) {
     return false;
   }
@@ -987,7 +987,7 @@ preventPainForAShortTime(type) {
   if(type == "crawling") {
     wait 1.0;
 
-    players = GetPlayers();
+    players = getPlayers();
     anybody_nearby = 0;
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i]) && distanceSquared(self.origin, players[i].origin) < 1048576) {
@@ -1012,7 +1012,7 @@ preventPainForAShortTime(type) {
   } else if(type == "corner_grenade") {
     wait 1.0;
 
-    players = GetPlayers();
+    players = getPlayers();
     anybody_nearby = 0;
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i]) && distanceSquared(self.origin, players[i].origin) < 490000) {
@@ -1090,7 +1090,7 @@ TryCornerRightGrenadeDeath() {
     return false;
   }
 
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 0) {
     return false;
   }

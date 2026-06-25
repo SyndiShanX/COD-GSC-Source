@@ -335,7 +335,7 @@ waitfordodge() {
     var_2 = var_1.origin - self.origin;
     var_3 = anglesToForward(self.angles);
 
-    if(vectordot(vectornormalize(var_2), var_3) < 0.7) {
+    if(vectordot(vectorNormalize(var_2), var_3) < 0.7) {
       continue;
     }
     var_4 = lengthsquared(var_2);
@@ -359,7 +359,7 @@ waitfordodge() {
       }
       cancelallbut("dodge");
       self.lungelast = gettime();
-      var_5 = vectornormalize((var_2[0], var_2[1], 0));
+      var_5 = vectorNormalize((var_2[0], var_2[1], 0));
       var_6 = vectortoangles(var_5);
       var_7 = self.dodgeanimstate;
       var_8 = randomint(self getanimentrycount(var_7));
@@ -545,7 +545,7 @@ startmove() {
   var_4 = self getvelocity();
 
   if(length2dsquared(var_4) > 16) {
-    var_4 = vectornormalize(var_4);
+    var_4 = vectorNormalize(var_4);
 
     if(vectordot(var_4, var_2) > 0.707) {
       return;

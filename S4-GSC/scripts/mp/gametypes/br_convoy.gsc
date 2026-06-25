@@ -434,9 +434,9 @@ _id_8CA3(var_0) {
 
   if(isDefined(var_6) && var_6.size > 0) {
     var_7 = var_6[0]["position"];
-    self setorigin(var_7, 1, 1);
+    self setOrigin(var_7, 1, 1);
   } else
-    self setorigin(var_0.origin + var_2, 1, 1);
+    self setOrigin(var_0.origin + var_2, 1, 1);
 
   waitframe();
   var_8 = game["music"]["snatch_spawn"].size;
@@ -450,7 +450,7 @@ _id_8CA3(var_0) {
 
 _id_AC5E(var_0) {
   self.angles = var_0.angles;
-  self playerlinkto(var_0, "tag_origin");
+  self playerlinkTo(var_0, "tag_origin");
   self playerhide();
   scripts\mp\utility\player::_id_0DC2("", 0);
   self _meth_8697("camera_custom_orbit_1");

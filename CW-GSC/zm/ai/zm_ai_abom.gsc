@@ -91,7 +91,7 @@ function function_2995325f() {
 
   while(true) {
     var_f1d04f0a = 2147483647;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       var_f1d04f0a = min(player.origin[2], var_f1d04f0a);
@@ -173,7 +173,7 @@ function function_48924a80(var_dbce0c44) {
     return 0;
   }
 
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   if(n_player_count == 1) {
     switch (level.var_59adf71) {
@@ -280,7 +280,7 @@ function function_dafc9693() {
 }
 
 function function_b68d818c() {
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   switch (n_player_count) {
     case 1:
@@ -308,7 +308,7 @@ function function_9282dcac(n_round_number) {
 
     if(zm_round_spawning::function_d0db51fc(#"abom")) {
       level.var_59adf71++;
-      n_player_count = zm_utility::function_a2541519(getplayers().size);
+      n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
       if(n_player_count == 1) {
         level.var_9135c56e = level.round_number + randomintrangeinclusive(3, 5);
@@ -331,7 +331,7 @@ function private function_3ec01d7a() {
   while(true) {
     waitresult = self waittilltimeout(2, #"bad_path");
 
-    if(self isplayinganimscripted()) {
+    if(self isplayinganimScripted()) {
       continue;
     }
 

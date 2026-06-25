@@ -29,7 +29,7 @@ func_F990() {
     var_1.var_10CF0 = var_1 getspawnpoint();
   }
 
-  level.var_13563.var_2F09 = getent("vr_boundary_wall", "targetname");
+  level.var_13563.var_2F09 = getEnt("vr_boundary_wall", "targetname");
   level.var_13563.var_2F09 hide();
   level.var_13563.var_760D = [];
   level.var_13563.var_5BDE = 0;
@@ -49,10 +49,10 @@ func_13569() {
 }
 
 func_F9AF() {
-  level.var_13563.var_9B3D = getent("vr_iris", "targetname");
-  level.var_13563.var_9B3D.var_CBFA = getent("vr_iris_pivot", "targetname");
+  level.var_13563.var_9B3D = getEnt("vr_iris", "targetname");
+  level.var_13563.var_9B3D.var_CBFA = getEnt("vr_iris_pivot", "targetname");
   level.var_13563.var_9B3D.var_CBFA.start_pos = level.var_13563.var_9B3D.var_CBFA.origin;
-  level.var_13563.var_9B3D linkto(level.var_13563.var_9B3D.var_CBFA);
+  level.var_13563.var_9B3D linkTo(level.var_13563.var_9B3D.var_CBFA);
 }
 
 func_F930() {
@@ -64,7 +64,7 @@ func_F930() {
     }
 
     if(isDefined(var_2.target)) {
-      var_2.var_A645 = getent(var_2.target, "targetname");
+      var_2.var_A645 = getEnt(var_2.target, "targetname");
       var_2.var_A645 thread func_F9BC(var_2);
     }
 
@@ -95,14 +95,14 @@ func_F9BC(var_0) {
   }
 
   self hide();
-  self linkto(var_0, "tag_enemy_counter", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_enemy_counter", (0, 0, 0), (0, 0, 0));
 }
 
 func_FA28() {
   var_0 = getEntArray("vr_ring_rig", "targetname");
   foreach(var_2 in var_0) {
     level.var_13563.var_E546[var_2.var_EDD5] = var_2;
-    var_3 = scripts\engine\utility::getstruct("vr_ring" + var_2.var_EDD5 + "_start", "targetname");
+    var_3 = scripts\engine\utility::getStruct("vr_ring" + var_2.var_EDD5 + "_start", "targetname");
     var_2.start_pos = var_3.origin;
     var_2.var_10BA1 = var_3.angles;
     var_2 scripts\sp\utility::func_65E0("ring_spinning");
@@ -111,8 +111,8 @@ func_FA28() {
     var_2 scripts\sp\utility::func_23B7("ring" + var_2.var_EDD5);
     var_2 hide();
     if(var_2.var_EDD5 == 0) {
-      var_2.var_D958 = getent("vr_ring" + var_2.var_EDD5 + "_probe", "targetname");
-      var_2.var_D958 linkto(var_2, "tag_origin", (0, 0, 0), (0, 90, 0));
+      var_2.var_D958 = getEnt("vr_ring" + var_2.var_EDD5 + "_probe", "targetname");
+      var_2.var_D958 linkTo(var_2, "tag_origin", (0, 0, 0), (0, 90, 0));
     }
   }
 }
@@ -143,17 +143,17 @@ func_F921() {
           var_10.var_8D0D = 512;
           var_10.var_D6A0 = var_10.origin + (0, 0, var_10.var_8D0D) - var_6.var_CBFA.origin;
           var_10.var_42 = var_10.angles - var_6.var_CBFA.angles;
-          var_10 linkto(var_6.var_CBFA, "", var_10.var_D6A0, var_10.var_42);
+          var_10 linkTo(var_6.var_CBFA, "", var_10.var_D6A0, var_10.var_42);
         }
 
         var_6.var_6B71 = var_8;
       }
 
-      var_6 linkto(var_6.var_CBFA);
-      var_6.var_AC84 linkto(var_6.var_CBFA);
-      var_6.var_6128 linkto(var_6.var_CBFA);
-      var_6.var_6123 linkto(var_6.var_CBFA);
-      var_6.var_CBFA linkto(var_1, "j_corner" + var_6.script_index, (0, 0, 0), (0, 0, 0));
+      var_6 linkTo(var_6.var_CBFA);
+      var_6.var_AC84 linkTo(var_6.var_CBFA);
+      var_6.var_6128 linkTo(var_6.var_CBFA);
+      var_6.var_6123 linkTo(var_6.var_CBFA);
+      var_6.var_CBFA linkTo(var_1, "j_corner" + var_6.script_index, (0, 0, 0), (0, 0, 0));
     }
   }
 }
@@ -196,7 +196,7 @@ func_FA3C() {
         var_5 = [];
       }
 
-      var_1.segments[var_4.script_index] = getent("vr_ring" + var_1.var_EDD5 + "_" + var_4.script_index, "targetname");
+      var_1.segments[var_4.script_index] = getEnt("vr_ring" + var_1.var_EDD5 + "_" + var_4.script_index, "targetname");
       var_6 = func_7835("traverse", "targetname", var_1.var_EDD5, var_4.script_index);
       var_5 = scripts\engine\utility::array_combine(var_5, var_6);
       var_7 = var_1.segments[var_4.script_index];
@@ -206,7 +206,7 @@ func_FA3C() {
       var_7.collision = undefined;
       if(var_1.var_EDD5 == 0) {
         if(var_7.script_index == 0 || var_7.script_index == 2) {
-          var_7.var_6E86 = getent("vr_cap" + var_7.script_index, "targetname");
+          var_7.var_6E86 = getEnt("vr_cap" + var_7.script_index, "targetname");
         } else {
           var_8 = getEntArray("vr_cap" + var_7.script_index, "targetname");
           foreach(var_10 in var_8) {
@@ -238,20 +238,20 @@ func_FA3C() {
 
       if(var_1.var_EDD5 == 5) {
         if(var_7.script_index == 1) {
-          var_7.var_6128 = getent("vr_ring5_1_blue_light", "targetname");
-          var_7.var_6123 = getent("vr_ring5_1_red_light", "targetname");
+          var_7.var_6128 = getEnt("vr_ring5_1_blue_light", "targetname");
+          var_7.var_6123 = getEnt("vr_ring5_1_red_light", "targetname");
           var_7.var_6128 hide();
           var_7.var_6123 hide();
         } else if(var_7.script_index == 3) {
-          var_7.var_6128 = getent("vr_ring5_3_blue_light", "targetname");
-          var_7.var_6123 = getent("vr_ring5_3_red_light", "targetname");
+          var_7.var_6128 = getEnt("vr_ring5_3_blue_light", "targetname");
+          var_7.var_6123 = getEnt("vr_ring5_3_red_light", "targetname");
           var_7.var_6128 hide();
           var_7.var_6123 hide();
         }
       }
 
       func_F18A(var_5, var_1, var_7);
-      var_7 linkto(var_7.var_CBFA);
+      var_7 linkTo(var_7.var_CBFA);
       foreach(var_15 in var_7.var_10870) {
         var_15.var_F187 = var_15.origin - var_7.var_CBFA.origin;
       }
@@ -270,19 +270,19 @@ func_FA3C() {
         var_7.var_6E86.var_42 = var_7.var_6E86.angles - var_7.var_CBFA.angles;
         var_7.var_6E86.var_D6A0 = var_7.var_6E86.origin - var_7.var_CBFA.origin;
         if(isDefined(var_7.var_6E86.var_6128)) {
-          var_7.var_6E86.var_6128 linkto(var_7.var_6E86, "", (0, 0, 0), (0, 0, 0));
-          var_7.var_6E86.var_6123 linkto(var_7.var_6E86, "", (0, 0, 0), (0, 0, 0));
+          var_7.var_6E86.var_6128 linkTo(var_7.var_6E86, "", (0, 0, 0), (0, 0, 0));
+          var_7.var_6E86.var_6123 linkTo(var_7.var_6E86, "", (0, 0, 0), (0, 0, 0));
         }
 
-        var_7.var_6E86 linkto(var_7.var_CBFA, "", var_7.var_6E86.var_D6A0, var_7.var_6E86.var_42);
+        var_7.var_6E86 linkTo(var_7.var_CBFA, "", var_7.var_6E86.var_D6A0, var_7.var_6E86.var_42);
       }
 
       if(isDefined(var_7.var_6128)) {
-        var_7.var_6128 linkto(var_7.var_CBFA, "", (0, 0, 0), (0, 0, 0));
+        var_7.var_6128 linkTo(var_7.var_CBFA, "", (0, 0, 0), (0, 0, 0));
       }
 
       if(isDefined(var_7.var_6123)) {
-        var_7.var_6123 linkto(var_7.var_CBFA, "", (0, 0, 0), (0, 0, 0));
+        var_7.var_6123 linkTo(var_7.var_CBFA, "", (0, 0, 0), (0, 0, 0));
       }
 
       if(isDefined(var_7.var_6B71)) {
@@ -300,22 +300,22 @@ func_FA3C() {
             } else if(var_17.script_parameters == "unfold") {
               var_17.var_7595 = "vfx_vr_blockdrop_extra_small";
             } else if(var_17.script_parameters == "angled") {
-              var_15 = scripts\engine\utility::getstruct(var_17.target, "targetname");
+              var_15 = scripts\engine\utility::getStruct(var_17.target, "targetname");
               var_17.var_7587 = anglesToForward(var_15.angles);
             }
           }
 
-          var_17 linkto(var_7.var_CBFA, "", var_17.var_D6A0, var_17.var_42);
+          var_17 linkTo(var_7.var_CBFA, "", var_17.var_D6A0, var_17.var_42);
         }
 
         var_7.var_6B71 = var_15;
       }
 
       if(isDefined(var_7.collision)) {
-        var_7.collision linkto(var_7.var_CBFA);
+        var_7.collision linkTo(var_7.var_CBFA);
       }
 
-      var_7.var_CBFA linkto(var_1, "j_segment" + var_7.script_index, (0, 0, 0), (0, 0, 0));
+      var_7.var_CBFA linkTo(var_1, "j_segment" + var_7.script_index, (0, 0, 0), (0, 0, 0));
     }
   }
 }
@@ -362,8 +362,8 @@ func_F9EB(var_0, var_1, var_2) {
 }
 
 func_F927() {
-  var_0 = getent("start_vr_chamber", "targetname").origin;
-  var_1 = getent("start_vr_chamber", "targetname").angles;
+  var_0 = getEnt("start_vr_chamber", "targetname").origin;
+  var_1 = getEnt("start_vr_chamber", "targetname").angles;
   var_2 = (11008, 3712, 2362);
   var_3 = (0, 90, 0);
   var_4 = (11235.1, 3926.81, 2380.24) - var_2;

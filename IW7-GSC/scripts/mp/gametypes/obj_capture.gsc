@@ -28,7 +28,7 @@ createcaptureobjective(var_0, var_1, var_2) {
 }
 
 createcarryobject(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   if(!isDefined(var_3)) {
     scripts\engine\utility::error("No model named " + var_0 + " found!");
     return;
@@ -61,7 +61,7 @@ createcarryobject(var_0, var_1, var_2) {
 }
 
 creategoal(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   if(!isDefined(var_4)) {
     scripts\engine\utility::error("No goal trigger named " + var_4 + " found!");
     return;

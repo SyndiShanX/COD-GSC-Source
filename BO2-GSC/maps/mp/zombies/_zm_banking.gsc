@@ -35,15 +35,15 @@ main() {
 }
 
 bank_teller_init() {
-  level.bank_teller_dmg_trig = getent("bank_teller_tazer_trig", "targetname");
+  level.bank_teller_dmg_trig = getEnt("bank_teller_tazer_trig", "targetname");
 
   if(isDefined(level.bank_teller_dmg_trig)) {
-    level.bank_teller_transfer_trig = getent(level.bank_teller_dmg_trig.target, "targetname");
-    level.bank_teller_powerup_spot = getstruct(level.bank_teller_transfer_trig.target, "targetname");
+    level.bank_teller_transfer_trig = getEnt(level.bank_teller_dmg_trig.target, "targetname");
+    level.bank_teller_powerup_spot = getStruct(level.bank_teller_transfer_trig.target, "targetname");
     level thread bank_teller_logic();
     level.bank_teller_transfer_trig.origin = level.bank_teller_transfer_trig.origin + vectorscale((-1, 0, 0), 25.0);
     level.bank_teller_transfer_trig trigger_off();
-    level.bank_teller_transfer_trig sethintstring(&"ZOMBIE_TELLER_GIVE_MONEY", level.ta_tellerfee);
+    level.bank_teller_transfer_trig setHintString(&"ZOMBIE_TELLER_GIVE_MONEY", level.ta_tellerfee);
   }
 }
 
@@ -95,8 +95,8 @@ stop_bank_teller() {
 delete_bank_teller() {
   wait 1;
   level notify("stop_bank_teller");
-  bank_teller_dmg_trig = getent("bank_teller_tazer_trig", "targetname");
-  bank_teller_transfer_trig = getent(bank_teller_dmg_trig.target, "targetname");
+  bank_teller_dmg_trig = getEnt("bank_teller_tazer_trig", "targetname");
+  bank_teller_transfer_trig = getEnt(bank_teller_dmg_trig.target, "targetname");
   bank_teller_dmg_trig delete();
   bank_teller_transfer_trig delete();
 }
@@ -191,11 +191,11 @@ bank_unitrigger(name, prompt_fn, think_fn, override_length, override_width, over
 trigger_deposit_update_prompt(player) {
   if(player.score < level.bank_deposit_ddl_increment_amount || player.account_value >= level.bank_account_max) {
     player show_balance();
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
 
-  self sethintstring(&"ZOMBIE_BANK_DEPOSIT_PROMPT", level.bank_deposit_ddl_increment_amount);
+  self setHintString(&"ZOMBIE_BANK_DEPOSIT_PROMPT", level.bank_deposit_ddl_increment_amount);
   return true;
 }
 
@@ -219,7 +219,7 @@ trigger_deposit_think() {
       }
 
       if(player.account_value >= level.bank_account_max) {
-        self sethintstring("");
+        self setHintString("");
       }
     } else
       player thread do_player_general_vox("general", "exert_sigh", 10, 50);
@@ -230,12 +230,12 @@ trigger_deposit_think() {
 
 trigger_withdraw_update_prompt(player) {
   if(player.account_value <= 0) {
-    self sethintstring("");
+    self setHintString("");
     player show_balance();
     return false;
   }
 
-  self sethintstring(&"ZOMBIE_BANK_WITHDRAW_PROMPT", level.bank_deposit_ddl_increment_amount, level.ta_vaultfee);
+  self setHintString(&"ZOMBIE_BANK_WITHDRAW_PROMPT", level.bank_deposit_ddl_increment_amount, level.ta_vaultfee);
   return true;
 }
 
@@ -264,7 +264,7 @@ trigger_withdraw_think() {
       player thread player_withdraw_fee();
 
       if(player.account_value < level.bank_account_increment) {
-        self sethintstring("");
+        self setHintString("");
       }
     } else
       player thread do_player_general_vox("general", "exert_sigh", 10, 50);

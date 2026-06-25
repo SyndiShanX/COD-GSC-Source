@@ -158,7 +158,7 @@ function function_a7ec2e8f(var_c79d614f) {
 
 function function_1fd8aab8(var_c79d614f) {
   namespace_82bfe441::fade(1, "FadeImmediate");
-  var_4c7200d2 = getent("clip_rat_tunnel_ladder", "targetname");
+  var_4c7200d2 = getEnt("clip_rat_tunnel_ladder", "targetname");
   var_a5cfc1d9 = getEntArray("model_rat_tunnels_ladder", "targetname");
   level thread namespace_b6fe1dbe::function_3047c3a4();
   var_4c7200d2 delete();
@@ -226,8 +226,8 @@ function function_9bea58bf() {
 }
 
 function function_6deb6ac2() {
-  e_model = getent("model_rat_tunnel_rock_blocker", "targetname");
-  e_clip = getent("clip_rat_tunnel_blocker", "targetname");
+  e_model = getEnt("model_rat_tunnel_rock_blocker", "targetname");
+  e_clip = getEnt("clip_rat_tunnel_blocker", "targetname");
   e_model hide();
   e_clip hide();
   level flag::wait_till("flag_rat_tunnels_large_enter");
@@ -415,7 +415,7 @@ function function_6b6ab2a9(params) {
     util::function_323d3227();
     s_teleport = struct::get("struct_rat_tunnels2_lookat_door", "targetname");
     e_teleport = util::spawn_model("tag_origin", s_teleport.origin, s_teleport.angles);
-    level.player setorigin(e_teleport.origin);
+    level.player setOrigin(e_teleport.origin);
     level.player playerlinktodelta(e_teleport, "tag_origin", 0, 0, 0, 0, 0);
     thread namespace_b6fe1dbe::rat_tunnels_ambience_fade_out();
     level notify(#"rat_tunnels_ambience_fade_out");
@@ -596,39 +596,39 @@ function function_6afceef5() {
 }
 
 function function_bc4360c2() {
-  probe = getent("flashlight_probe_1", "targetname");
+  probe = getEnt("flashlight_probe_1", "targetname");
 
   if(isDefined(probe)) {
-    probe linkto(self, "tag_eye", (80, 0, 0), (0, 0, 0));
+    probe linkTo(self, "tag_eye", (80, 0, 0), (0, 0, 0));
   }
 
-  probe = getent("flashlight_probe_2", "targetname");
+  probe = getEnt("flashlight_probe_2", "targetname");
 
   if(isDefined(probe)) {
-    probe linkto(self, "tag_eye", (-32, 0, 0), (0, 0, 0));
+    probe linkTo(self, "tag_eye", (-32, 0, 0), (0, 0, 0));
   }
 
-  probe = getent("flashlight_near_probe", "targetname");
+  probe = getEnt("flashlight_near_probe", "targetname");
 
   if(isDefined(probe)) {
-    probe linkto(self, "tag_eye", (8, 0, 0), (0, 0, 0));
+    probe linkTo(self, "tag_eye", (8, 0, 0), (0, 0, 0));
   }
 }
 
 function function_ae264f6a() {
-  probe = getent("flashlight_probe_1", "targetname");
+  probe = getEnt("flashlight_probe_1", "targetname");
 
   if(isDefined(probe)) {
     probe unlink();
   }
 
-  probe = getent("flashlight_probe_2", "targetname");
+  probe = getEnt("flashlight_probe_2", "targetname");
 
   if(isDefined(probe)) {
     probe unlink();
   }
 
-  probe = getent("flashlight_near_probe", "targetname");
+  probe = getEnt("flashlight_near_probe", "targetname");
 
   if(isDefined(probe)) {
     probe unlink();

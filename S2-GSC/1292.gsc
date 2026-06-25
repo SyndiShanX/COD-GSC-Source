@@ -1022,7 +1022,7 @@ lib_050C::func_A11B() {
   foreach(var_1B in var_19) {
     var_1C = undefined;
     var_1D = var_00.var_6162 - var_1B.var_0116;
-    var_18 = vectordot(vectornormalize(var_1D), vectornormalize(var_16));
+    var_18 = vectordot(vectorNormalize(var_1D), vectorNormalize(var_16));
     if((var_00.var_9A9D == "allies" && var_18 > 0) || var_00.var_9A9D != "allies" && var_18 <= 0) {
       if(!var_12) {
         var_1C = "allies";

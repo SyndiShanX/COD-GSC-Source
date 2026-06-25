@@ -251,7 +251,7 @@ _id_7329(var_0, var_1) {
   var_4 = var_0.origin;
   var_0 = _id_3C79(var_0);
   _id_4887(var_0, "weapon_");
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 notsolid();
   var_0 _meth_82D9(var_1._id_0153);
 
@@ -706,7 +706,7 @@ _id_94F7(var_0, var_1, var_2, var_3, var_4) {
   if(var_4 && !isDefined(var_0._id_CD21)) {
     var_0 _meth_820D(self, var_1, 0);
   } else {
-    var_0 linkto(self, var_1, var_2, var_3);
+    var_0 linkTo(self, var_1, var_2, var_3);
   }
 }
 
@@ -1175,7 +1175,7 @@ _id_6BEA(var_0, var_1, var_2) {
   var_7 useanimtree(#animtree);
   var_7 setModel(level.vehicle._id_F078._id_1D82[var_3][var_1._id_59C0].model);
   self._id_59C0[var_1._id_59C0] = var_7;
-  var_7 linkto(var_0, level.vehicle._id_F078._id_1D82[var_3][var_1._id_59C0]._id_0427);
+  var_7 linkTo(var_0, level.vehicle._id_F078._id_1D82[var_3][var_1._id_59C0]._id_0427);
 
   if(getdvarint("#x32923f011fc14a85b")) {
     thread _id_6BF6(var_1, var_7, level.vehicle._id_F078._id_1D82[var_3][var_1._id_59C0]._id_0427, level.vehicle._id_F078._id_1D82[var_3][var_1._id_59C0]._id_500B, var_2);
@@ -1705,7 +1705,7 @@ _id_733B(var_0, var_1, var_2, var_3, var_4) {
   var_10.angles = var_0.angles;
   var_10 dontinterpolate();
   var_0 dontinterpolate();
-  var_0 linkto(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0._id_0040 = 1;
   var_0 setCanDamage(1);
   var_0._id_F971 = var_3;
@@ -1719,7 +1719,7 @@ _id_733B(var_0, var_1, var_2, var_3, var_4) {
   var_18 = length((0, 0, var_17[2]) - (0, 0, var_12[2]));
   var_19 = 350;
   var_20 = var_18 / var_19;
-  var_10 moveto(var_17, var_20);
+  var_10 moveTo(var_17, var_20);
   var_10 waittill("movedone");
   var_0 unlink();
   var_0 _meth_801B("dropship_land", var_0.origin, var_0.angles, var_4);
@@ -1770,7 +1770,7 @@ _id_7331(var_0) {
     return 0;
   }
 
-  var_3 = getent(var_0.target, "targetname");
+  var_3 = getEnt(var_0.target, "targetname");
 
   if(isDefined(var_3) && var_3.classname == "info_volume") {
     return 0;

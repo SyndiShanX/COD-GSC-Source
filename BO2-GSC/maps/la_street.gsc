@@ -176,7 +176,7 @@ street_harper_finish() {
 }
 
 street_move_remaining_ais() {
-  e_street_volume = getent("street_volume", "targetname");
+  e_street_volume = getEnt("street_volume", "targetname");
   a_street_ais = getaiarray("axis");
 
   foreach(ai_street in a_street_ais) {
@@ -187,7 +187,7 @@ street_move_remaining_ais() {
 }
 
 street_kill_extra_enemies() {
-  ai_stair_sniper = getent("street_sniper_stair_ai", "targetname");
+  ai_stair_sniper = getEnt("street_sniper_stair_ai", "targetname");
 
   if(isalive(ai_stair_sniper)) {
     ai_stair_sniper bloody_death();
@@ -240,9 +240,9 @@ watch_bigdog_objective_noharper() {
 }
 
 street_bdogs() {
-  sp_street_bdog_front = getent("bdog_front", "targetname");
+  sp_street_bdog_front = getEnt("bdog_front", "targetname");
   sp_street_bdog_front add_spawn_function(::street_claw, ::street_claw_front, 1);
-  sp_street_bdog_back = getent("bdog_back", "targetname");
+  sp_street_bdog_back = getEnt("bdog_back", "targetname");
   sp_street_bdog_back add_spawn_function(::street_claw, ::street_claw_back, 1);
 }
 
@@ -265,8 +265,8 @@ street_claw(func_logic, attack_player) {
 }
 
 cougar_exit_claw_noharper() {
-  s_moveto_1 = getstruct("claw_harper_dead_pos_1", "targetname");
-  s_moveto_2 = getstruct("claw_harper_dead_pos_2", "targetname");
+  s_moveto_1 = getStruct("claw_harper_dead_pos_1", "targetname");
+  s_moveto_2 = getStruct("claw_harper_dead_pos_2", "targetname");
   wait 12;
   ai_claw = simple_spawn_single("claw_harper_dead");
   ai_claw.goalradius = 32;
@@ -285,10 +285,10 @@ cougar_exit_claw_noharper() {
   flag_set("bdog_noharper_moved_down_street");
   level.cop_1 disable_ai_color();
   level.cop_2 disable_ai_color();
-  e_front_volume = getent("bdog_noharper_cover_front_volume_1", "targetname");
+  e_front_volume = getEnt("bdog_noharper_cover_front_volume_1", "targetname");
   ai_claw setgoalvolumeauto(e_front_volume);
   flag_wait("bdog_cover_back");
-  e_front_volume = getent("bdog_cover_front_volume_1", "targetname");
+  e_front_volume = getEnt("bdog_cover_front_volume_1", "targetname");
   ai_claw setgoalvolumeauto(e_front_volume);
 }
 
@@ -339,9 +339,9 @@ street_claw_front() {
   nd_street_middle = getnode("street_middle", "targetname");
   self setgoalnode(nd_street_middle);
   self waittill("goal");
-  e_bdog_front_volume_1 = getent("bdog_cover_front_volume_1", "targetname");
-  e_bdog_front_volume_2 = getent("bdog_cover_front_volume_2", "targetname");
-  e_bdog_move_back = getent("bdog_cover_back", "targetname");
+  e_bdog_front_volume_1 = getEnt("bdog_cover_front_volume_1", "targetname");
+  e_bdog_front_volume_2 = getEnt("bdog_cover_front_volume_2", "targetname");
+  e_bdog_move_back = getEnt("bdog_cover_back", "targetname");
   self setgoalvolumeauto(e_bdog_front_volume_1);
   flag_wait("bdog_cover_back");
   self setgoalvolumeauto(e_bdog_front_volume_2);
@@ -380,7 +380,7 @@ street_claw_back(takes_in_route) {
   nd_street_middle = getnode("claw_back_start_node", "targetname");
   self setgoalnode(nd_street_middle);
   self waittill("goal");
-  e_bdog_back_volume = getent("bdog_back_cover_back_vol", "targetname");
+  e_bdog_back_volume = getEnt("bdog_back_cover_back_vol", "targetname");
   self setgoalvolumeauto(e_bdog_back_volume);
 }
 
@@ -412,7 +412,7 @@ street_snipers() {
 }
 
 street_train_surprise() {
-  t_sm_street_back = getent("sm_street_back", "targetname");
+  t_sm_street_back = getEnt("sm_street_back", "targetname");
   t_sm_street_back endon("trigger");
   trigger_wait("trig_street_train_surprise");
   run_scene("train_surprise_attack");
@@ -428,7 +428,7 @@ street_anim_entries() {
   level thread run_scene("ladder_entry_2");
   wait 0.05;
   scene_wait("ladder_entry_2");
-  sp_generic = getent("street_generic", "targetname");
+  sp_generic = getEnt("street_generic", "targetname");
   a_str_scenes = array("ladder_entry_1", "pipe_entry_2");
 
   while(sp_generic.count > 0) {
@@ -458,20 +458,20 @@ set_force_ragdoll() {
 }
 
 street_hotdog_cart() {
-  m_cart = getent("hot_dog_cart_push", "script_noteworthy");
-  m_cart_dyn_path = getent("cart_dynamic_path", "targetname");
-  m_cart_dyn_path linkto(m_cart);
+  m_cart = getEnt("hot_dog_cart_push", "script_noteworthy");
+  m_cart_dyn_path = getEnt("cart_dynamic_path", "targetname");
+  m_cart_dyn_path linkTo(m_cart);
   m_cart thread street_cart_listener();
   level thread run_scene("cart_push");
   flag_wait("cart_push_started");
   m_cart_dyn_path connectpaths();
-  ai_cart_1 = getent("guy_push_cart_1_ai", "targetname");
+  ai_cart_1 = getEnt("guy_push_cart_1_ai", "targetname");
   ai_cart_1 thread street_cart_vo();
   ai_cart_1 waittill("death");
   level notify("street_cart_guy_died");
   end_scene("cart_push");
-  m_cart_dyn_path disconnectpaths();
-  ai_cart_2 = getent("guy_push_cart_2_ai", "targetname");
+  m_cart_dyn_path disconnectPaths();
+  ai_cart_2 = getEnt("guy_push_cart_2_ai", "targetname");
 
   if(isalive(ai_cart_2)) {
     ai_cart_2 queue_dialog("pmc0_they_re_in_the_killz_0");
@@ -481,8 +481,8 @@ street_hotdog_cart() {
 street_cart_listener() {
   level endon("street_cart_guy_died");
   scene_wait("cart_push");
-  m_cart_dyn_path = getent("cart_dynamic_path", "targetname");
-  m_cart_dyn_path disconnectpaths();
+  m_cart_dyn_path = getEnt("cart_dynamic_path", "targetname");
+  m_cart_dyn_path disconnectPaths();
 }
 
 street_cart_vo() {
@@ -511,7 +511,7 @@ steet_ambush_outside_spawn_func() {
   self endon("death");
   self force_goal(undefined, 16, 1);
   n_old_goalradius = self.goalradius;
-  e_cougar_window = getent("target_window", "targetname");
+  e_cougar_window = getEnt("target_window", "targetname");
   wait 0.05;
   self.perfectaim = 1;
   self.goalradius = 16;
@@ -630,7 +630,7 @@ cougar_exit_player() {
   level.player playSound("evt_cougar_exit");
   level thread run_scene("cougar_exit_player");
   flag_wait("cougar_exit_player_started");
-  m_18_wheeler_clip = getent("street_truck_collision", "targetname");
+  m_18_wheeler_clip = getEnt("street_truck_collision", "targetname");
   m_18_wheeler_clip connectpaths();
   m_18_wheeler_clip notsolid();
   level thread maps\la_1b_amb::force_snapshot_wait();
@@ -640,7 +640,7 @@ cougar_exit_player() {
 
 cougar_exit_cop_car() {
   level thread street_spawn_scripted_cop_car();
-  m_ce_cop_car = getent("ce_cop_car", "script_noteworthy");
+  m_ce_cop_car = getEnt("ce_cop_car", "script_noteworthy");
   m_ce_cop_car thread police_car();
   level thread run_scene("cougar_exit_cop_car");
   level waittill("cop_car_skid_done");
@@ -654,7 +654,7 @@ cougar_exit_cop_car() {
 }
 
 cop_car_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime) {
-  m_ce_cop_car = getent("ce_cop_car", "script_noteworthy");
+  m_ce_cop_car = getEnt("ce_cop_car", "script_noteworthy");
 
   if(isDefined(e_inflictor) && isDefined(m_ce_cop_car) && m_ce_cop_car == e_inflictor) {
     return 50;
@@ -667,7 +667,7 @@ street_spawn_scripted_cop_car() {
   wait 28;
   trigger_use("street_cop_car_entry");
   wait 1;
-  vh_cop_car = getent("street_police_car", "targetname");
+  vh_cop_car = getEnt("street_police_car", "targetname");
   vh_cop_car thread police_car();
   vh_cop_car thread play_police_pullup();
   vh_cop_car veh_magic_bullet_shield(1);
@@ -693,13 +693,13 @@ play_police_pullup() {
 play_pullup_arrival_sound() {
   self endon("death");
   self waittill("play_arrive_sound");
-  playsoundatposition("evt_la_1_police_drive_up", (0, 0, 0));
+  playSoundAtPosition("evt_la_1_police_drive_up", (0, 0, 0));
 }
 
 cougar_exit_everything_else() {
-  m_cougar_shadow_prop = getent("cougar_shadow_prop", "targetname");
+  m_cougar_shadow_prop = getEnt("cougar_shadow_prop", "targetname");
   m_cougar_shadow_prop delete();
-  m_cougar_interior = getent("interior_cougar_exit", "targetname");
+  m_cougar_interior = getEnt("interior_cougar_exit", "targetname");
   m_cougar_interior attach("veh_t6_mil_cougar");
   m_cougar_interior hidepart("tag_windshield");
   m_cougar_interior showpart("tag_windshield_d2");
@@ -736,7 +736,7 @@ cougar_exit_everything_else() {
   m_ce_bike_2 thread police_motorcycle();
   m_ce_bike_3 = get_model_or_models_from_scene("cougar_exit", "ce_bike_3");
   m_ce_bike_3 thread police_motorcycle();
-  ai_ce_cop_2 = getent("ce_cop_2_ai", "targetname");
+  ai_ce_cop_2 = getEnt("ce_cop_2_ai", "targetname");
   ai_ce_cop_2.name = "";
   level thread maps\_audio::switch_music_wait("LA_1B_STREET", 30);
 
@@ -760,7 +760,7 @@ harper_fire_sniperstorm(ai_harper) {
 intersection_osprey() {
   trigger_wait("intersection_osprey_trig");
   wait 0.2;
-  intersection_osprey = getent("intersection_osprey", "targetname");
+  intersection_osprey = getEnt("intersection_osprey", "targetname");
   intersection_osprey veh_magic_bullet_shield();
   intersection_osprey waittill("reached_end_node");
   intersection_osprey veh_magic_bullet_shield(0);
@@ -773,12 +773,12 @@ intersection_osprey() {
 }
 
 clear_the_street() {
-  m_clip = getent("street_truck_collision", "targetname");
-  m_car_clip = getent("street_police_collision", "targetname");
+  m_clip = getEnt("street_truck_collision", "targetname");
+  m_car_clip = getEnt("street_police_collision", "targetname");
   m_clip connectpaths();
   m_clip notsolid();
   m_car_clip solid();
-  m_car_clip disconnectpaths();
+  m_car_clip disconnectPaths();
   run_scene_first_frame("clear_the_street", 1);
   flag_wait("fl_clear_the_street");
   clientnotify("fbsoff");
@@ -789,7 +789,7 @@ clear_the_street() {
   level thread setup_clear_the_street_ai();
   level thread run_scene("clear_the_street");
   m_clip solid();
-  m_clip disconnectpaths();
+  m_clip disconnectPaths();
   simple_spawn_single("bdog_back");
 }
 
@@ -819,15 +819,15 @@ setup_clear_the_street_ai() {
 brute_force_use() {
   level endon("brute_force_fail");
   run_scene_first_frame("brute_force_cougar");
-  m_bruteforce_cougar = getent("bruteforce_cougar", "targetname");
+  m_bruteforce_cougar = getEnt("bruteforce_cougar", "targetname");
   m_bruteforce_cougar setModel("veh_t6_mil_cougar_low_dead");
   trigger_off("t_brute_force_use", "targetname");
   level.player waittill_player_has_brute_force_perk();
-  t_perk_use = getent("t_brute_force_use", "targetname");
-  t_perk_use setcursorhint("HINT_NOICON");
-  t_perk_use sethintstring(&"SCRIPT_HINT_BRUTE_FORCE");
+  t_perk_use = getEnt("t_brute_force_use", "targetname");
+  t_perk_use setCursorHint("HINT_NOICON");
+  t_perk_use setHintString(&"SCRIPT_HINT_BRUTE_FORCE");
   trigger_on("t_brute_force_use", "targetname");
-  s_brute_force_pos = getstruct("brute_force_use_pos", "targetname");
+  s_brute_force_pos = getStruct("brute_force_use_pos", "targetname");
   set_objective_perk(level.obj_brute_perk, s_brute_force_pos);
   trigger_wait("t_brute_force_use");
   remove_objective_perk(level.obj_brute_perk);
@@ -842,7 +842,7 @@ brute_force_fail() {
   flag_set("brute_force_fail");
   remove_objective_perk(level.obj_brute_perk);
   trigger_off("t_brute_force_use", "targetname");
-  m_brute_force_cougar = getent("bruteforce_cougar", "targetname");
+  m_brute_force_cougar = getEnt("bruteforce_cougar", "targetname");
   m_brute_force_cougar playSound("exp_armor_vehicle");
   playFXOnTag(level._effect["brute_force_explosion"], m_brute_force_cougar, "tag_origin");
 }
@@ -878,19 +878,19 @@ street_veh_unload() {
     wait 0.05;
   }
 
-  m_fire_hydrant = getent("truck_hydrant", "script_noteworthy");
+  m_fire_hydrant = getEnt("truck_hydrant", "script_noteworthy");
   m_fire_hydrant dodamage(m_fire_hydrant.health, m_fire_hydrant.origin, undefined, undefined, "riflebullet");
   m_fire_hydrant dodamage(m_fire_hydrant.health, m_fire_hydrant.origin, undefined, undefined, "riflebullet");
 }
 
 setup_street_middle() {
-  street_trigger = getent("street_truck_entry", "targetname");
+  street_trigger = getEnt("street_truck_entry", "targetname");
   street_trigger waittill("trigger");
   level thread street_spawn_bdog_middle(2.5);
   wait 6;
-  m_18_wheeler_clip = getent("street_truck_collision", "targetname");
+  m_18_wheeler_clip = getEnt("street_truck_collision", "targetname");
   m_18_wheeler_clip solid();
-  m_18_wheeler_clip disconnectpaths();
+  m_18_wheeler_clip disconnectPaths();
 }
 
 delete_vehicle_on_notify(str_notify) {
@@ -900,7 +900,7 @@ delete_vehicle_on_notify(str_notify) {
 }
 
 street_elec_on_ground() {
-  t_street_push_back = getent("street_push_back", "targetname");
+  t_street_push_back = getEnt("street_push_back", "targetname");
 
   while(true) {
     if(level.player istouching(t_street_push_back)) {
@@ -914,7 +914,7 @@ street_elec_on_ground() {
 }
 
 street_fire_hydrant() {
-  m_fire_hydrant = getent("street_hydrant", "script_noteworthy");
+  m_fire_hydrant = getEnt("street_hydrant", "script_noteworthy");
   n_player_fov = getdvarfloat(#"cg_fov");
   n_cos_player_fov = cos(n_player_fov);
   level waittill("street_battle_started");
@@ -1215,14 +1215,14 @@ intruder_hide_bolts(m_cage) {
 }
 
 autoexec init_attackdrones() {
-  t_use = getent("trig_attackdrone", "targetname");
-  t_use sethintstring(&"SCRIPT_HINT_INTRUDER");
-  t_use setcursorhint("HINT_NOICON");
+  t_use = getEnt("trig_attackdrone", "targetname");
+  t_use setHintString(&"SCRIPT_HINT_INTRUDER");
+  t_use setCursorHint("HINT_NOICON");
   t_use trigger_off();
   flag_wait("level.player");
   level.player waittill_player_has_intruder_perk();
   t_use trigger_on();
-  str_objective = getstruct("intruder_perk_use_pos", "targetname");
+  str_objective = getStruct("intruder_perk_use_pos", "targetname");
   set_objective_perk(level.obj_intruder_perk, str_objective, 850);
   t_use waittill("trigger");
   a_drones = spawn_vehicles_from_targetname("attackdrone");
@@ -1248,10 +1248,10 @@ autoexec init_attackdrones() {
 }
 
 intruder_rumble() {
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   self rumble_loop(6, 0.75, "reload_clipout");
-  self playrumbleonentity("damage_light");
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
+  self playRumbleOnEntity("damage_light");
   earthquake(0.08, 1, self.origin, 1000, self);
 }
 
@@ -1271,7 +1271,7 @@ follow_player(follow_close) {
   self endon("stop_follow");
 
   while(true) {
-    v_goal = level.player.origin + vectornormalize(anglesToForward(level.player.angles)) * 300;
+    v_goal = level.player.origin + vectorNormalize(anglesToForward(level.player.angles)) * 300;
     self defend(v_goal, 300);
 
     if(follow_close) {
@@ -1295,7 +1295,7 @@ street_quadrotors() {
     vh_drone maps\_quadrotor::quadrotor_start_scripted();
     vh_drone drivepath(nd_exit_path);
     vh_drone thread init_attackdrones_start_ai();
-    playsoundatposition("evt_drone_flyby_swt", level.player.origin);
+    playSoundAtPosition("evt_drone_flyby_swt", level.player.origin);
     wait 1;
   }
 

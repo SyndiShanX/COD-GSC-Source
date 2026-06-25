@@ -89,7 +89,7 @@ init_pap_animtree() {
 }
 
 setup_capture_zones() {
-  spawner_capture_zombie = getent("capture_zombie_spawner", "targetname");
+  spawner_capture_zombie = getEnt("capture_zombie_spawner", "targetname");
   spawner_capture_zombie add_spawn_function(::capture_zombie_spawn_init);
   a_s_generator = getStructArray("s_generator", "targetname");
   registerclientfield("world", "packapunch_anim", 14000, 3, "int");
@@ -207,7 +207,7 @@ quick_revive_game_type_watcher() {
     } else {
       level notify("revive_off");
       t_revive_machine.is_locked = 1;
-      t_revive_machine sethintstring(&"ZM_TOMB_ZC");
+      t_revive_machine setHintString(&"ZM_TOMB_ZC");
     }
   }
 }
@@ -259,11 +259,11 @@ pack_a_punch_dummy_init() {}
 pack_a_punch_init() {
   vending_weapon_upgrade_trigger = getEntArray("specialty_weapupgrade", "script_noteworthy");
   level.pap_triggers = vending_weapon_upgrade_trigger;
-  t_pap = getent("specialty_weapupgrade", "script_noteworthy");
+  t_pap = getEnt("specialty_weapupgrade", "script_noteworthy");
   t_pap.machine ghost();
   t_pap.machine notsolid();
-  t_pap.bump enablelinkto();
-  t_pap.bump linkto(t_pap);
+  t_pap.bump enablelinkTo();
+  t_pap.bump linkTo(t_pap);
   level thread pack_a_punch_think();
 }
 
@@ -277,7 +277,7 @@ pack_a_punch_think() {
 }
 
 pack_a_punch_enable() {
-  t_pap = getent("specialty_weapupgrade", "script_noteworthy");
+  t_pap = getEnt("specialty_weapupgrade", "script_noteworthy");
   t_pap trigger_on();
   flag_set("power_on");
   level setclientfield("zone_capture_hud_all_generators_captured", 1);
@@ -288,7 +288,7 @@ pack_a_punch_enable() {
 }
 
 pack_a_punch_disable() {
-  t_pap = getent("specialty_weapupgrade", "script_noteworthy");
+  t_pap = getEnt("specialty_weapupgrade", "script_noteworthy");
   level setclientfield("zone_capture_hud_all_generators_captured", 0);
   flag_waitopen("pack_machine_in_use");
   t_pap trigger_off();
@@ -400,7 +400,7 @@ disable_perk_machines_in_zone() {
     for(i = 0; i < a_keys.size; i++) {
       e_perk_trigger = self.perk_machines[a_keys[i]];
       e_perk_trigger.is_locked = 1;
-      e_perk_trigger sethintstring(&"ZM_TOMB_ZC");
+      e_perk_trigger setHintString(&"ZM_TOMB_ZC");
     }
   }
 }
@@ -409,7 +409,7 @@ enable_random_perk_machines_in_zone() {
   if(isDefined(self.perk_machines_random) && isarray(self.perk_machines_random)) {
     foreach(random_perk_machine in self.perk_machines_random) {
       random_perk_machine.is_locked = 0;
-      random_perk_machine sethintstring(&"ZM_TOMB_RPB", level._random_zombie_perk_cost);
+      random_perk_machine setHintString(&"ZM_TOMB_RPB", level._random_zombie_perk_cost);
     }
   }
 }
@@ -439,7 +439,7 @@ disable_mystery_boxes_in_zone() {
 }
 
 get_perk_machine_trigger_from_vending_entity(str_vending_machine_targetname) {
-  e_trigger = getent(str_vending_machine_targetname, "target");
+  e_trigger = getEnt(str_vending_machine_targetname, "target");
   assert(isDefined(e_trigger), "get_perk_machine_trigger_from_vending_entity couldn't find perk machine trigger with target = " + str_vending_machine_targetname);
   return e_trigger;
 }
@@ -517,9 +517,9 @@ generator_trigger_prompt_and_visibility(e_player) {
   }
 
   if(flag("zone_capture_in_progress")) {
-    self sethintstring(&"ZM_TOMB_ZCIP");
+    self setHintString(&"ZM_TOMB_ZCIP");
   } else {
-    self sethintstring(&"ZM_TOMB_CAP", get_generator_capture_start_cost());
+    self setHintString(&"ZM_TOMB_CAP", get_generator_capture_start_cost());
   }
 
   self setinvisibletoplayer(e_player, !b_can_see_hint);
@@ -806,7 +806,7 @@ delete_self_after_time(n_time) {
 
 monitor_capture_zombies() {
   self ent_flag_wait("zone_contested");
-  e_spawner_capture_zombie = getent("capture_zombie_spawner", "targetname");
+  e_spawner_capture_zombie = getEnt("capture_zombie_spawner", "targetname");
   self.capture_zombies = [];
   self.capture_zombie_limit = self set_capture_zombies_needed_per_zone();
 
@@ -825,7 +825,7 @@ monitor_capture_zombies() {
 }
 
 monitor_recapture_zombies() {
-  e_spawner_capture_zombie = getent("capture_zombie_spawner", "targetname");
+  e_spawner_capture_zombie = getEnt("capture_zombie_spawner", "targetname");
   self.capture_zombie_limit = get_recapture_zombies_needed();
   n_capture_zombie_spawns = 0;
   self thread play_vo_when_generator_is_attacked();
@@ -1148,7 +1148,7 @@ play_melee_attack_animation() {
     v_angles = vectortoangles((v_angles[0], v_angles[1], 0));
   }
 
-  self animscripted(self.origin, v_angles, "zm_generator_melee");
+  self animScripted(self.origin, v_angles, "zm_generator_melee");
 
   while(true) {
     self waittill("static_melee_anim", note);
@@ -1188,7 +1188,7 @@ recapture_zombie_poi_think() {
 
     if(self.using_poi_last_check != self.zombie_has_point_of_interest) {
       self notify("poi_state_changed");
-      self stopanimscripted(0.2);
+      self stopanimScripted(0.2);
     }
 
     wait 1;
@@ -1912,9 +1912,9 @@ magic_box_trigger_update_prompt(player) {
 
   if(isDefined(self.stub.hint_string)) {
     if(isDefined(self.stub.hint_parm1)) {
-      self sethintstring(self.stub.hint_string, self.stub.hint_parm1);
+      self setHintString(self.stub.hint_string, self.stub.hint_parm1);
     } else {
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
   }
 
@@ -1922,7 +1922,7 @@ magic_box_trigger_update_prompt(player) {
 }
 
 magic_box_stub_update_prompt(player) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   if(!self trigger_visible_to_player(player)) {
     return false;

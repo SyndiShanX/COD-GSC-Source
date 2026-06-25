@@ -53,14 +53,14 @@ function function_d28e9b17() {
 
   if(isDefined(leftglove)) {
     leftglove.targetname = "leftglove";
-    leftglove setplayercollision(0);
-    leftglove linkto(org, "tag_origin", (0, 60, 32), (90, 0, 0));
+    leftglove setPlayerCollision(0);
+    leftglove linkTo(org, "tag_origin", (0, 60, 32), (90, 0, 0));
     trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", leftglove.origin, 1 | 512 | 8, 40, 50);
 
     if(isDefined(trigger)) {
       trigger.targetname = "leftGlove";
-      trigger enablelinkto();
-      trigger linkto(leftglove);
+      trigger enablelinkTo();
+      trigger linkTo(leftglove);
       trigger thread function_7c757878(self, "MOD_IMPACT", &function_c2d94d61);
     }
   }
@@ -71,21 +71,21 @@ function function_d28e9b17() {
 
   if(isDefined(rightglove)) {
     rightglove.targetname = "rightGlove";
-    rightglove setplayercollision(0);
-    rightglove linkto(org, "tag_origin", (0, -60, 32), (90, 0, 0));
+    rightglove setPlayerCollision(0);
+    rightglove linkTo(org, "tag_origin", (0, -60, 32), (90, 0, 0));
     trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", rightglove.origin, 1 | 512 | 8, 40, 50);
 
     if(isDefined(trigger)) {
       trigger.targetname = "rightGlove";
-      trigger enablelinkto();
-      trigger linkto(rightglove);
+      trigger enablelinkTo();
+      trigger linkTo(rightglove);
       trigger thread function_7c757878(self, "MOD_IMPACT", &function_c2d94d61);
     }
   }
 
   org.var_b981836 = rightglove;
   org.trigger2 = trigger;
-  org linkto(self, "", (0, 0, 10), (0, 0, 0));
+  org linkTo(self, "", (0, 0, 10), (0, 0, 0));
   self thread function_61888137(org);
   self thread function_f0855523(org);
   self waittill(#"hash_6733dfa48ff87a81");
@@ -156,7 +156,7 @@ function private function_7c757878(player, mod = "MOD_UNKNOWN", var_70c63791) {
       guy dodamage(guy.health + 1, guy.origin, player, player, "none", mod, 0, level.doa.default_weapon);
     }
 
-    player playrumbleonentity("damage_light");
+    player playRumbleOnEntity("damage_light");
   }
 }
 

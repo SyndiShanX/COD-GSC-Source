@@ -223,7 +223,7 @@ ghillie_enemy_resume_moving(stance, move_time) {
 
   self endon("stop_moving");
 
-  anim_stopanimscripted();
+  anim_stopanimScripted();
 
   self allowedstances(stance);
   self.ghillie_is_frozen = false;
@@ -265,7 +265,7 @@ ghillie_enemy_crouch_and_fire() {
   self endon("death");
   self endon("pain_death");
 
-  anim_stopanimscripted();
+  anim_stopanimScripted();
 
   self allowedstances("crouch");
   self.ghillie_is_prone = false;
@@ -367,7 +367,7 @@ ghillie_enemy_quit_ghillie() {
   self setEngagementMinDist(0, 0);
   self setEngagementMaxDist(8000, 9000);
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self notify("quit_ghillie_behavior");
   self notify("quit_ghillie_forever");
 
@@ -981,7 +981,7 @@ hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills) {
 }
 flag_wait("so_hidden_obj_chopper");
 
-obj = getstruct("so_hidden_obj_chopper", "script_noteworthy");
+obj = getStruct("so_hidden_obj_chopper", "script_noteworthy");
 objective_position(1, obj.origin);
 playFX(getfx("extraction_smoke"), obj.origin);
 }
@@ -1124,7 +1124,7 @@ chatter_play_sound(alias) {
 
   org.origin = self.origin;
   org.angles = self.angles;
-  org LinkTo(self);
+  org linkTo(self);
 
   org playSound(alias, "sounddone");
 

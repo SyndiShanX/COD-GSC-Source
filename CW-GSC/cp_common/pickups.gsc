@@ -140,7 +140,7 @@ class class_23a25920: class_853435cd {
     var_41c57d21 notify(#"hash_57abab410be3519a", {
       #is_enabled: 1
     });
-    var_41c57d21 sethintstring(var_f88b64e8);
+    var_41c57d21 setHintString(var_f88b64e8);
     var_41c57d21.var_e80dc2c9 = var_321c3bc5;
 
     if(!isDefined(var_41c57d21.targetname)) {
@@ -386,13 +386,13 @@ class class_853435cd {
     assert(isDefined(n_radius), "<dev string:x69>");
     assert(isDefined(n_height), "<dev string:x9a>");
     e_trigger = spawn("trigger_radius", v_origin, 0, n_radius, n_height);
-    e_trigger triggerignoreteam();
+    e_trigger triggerIgnoreTeam();
     e_trigger setvisibletoall();
     e_trigger setteamfortrigger(#"none");
-    e_trigger setcursorhint("HINT_NOICON");
+    e_trigger setCursorHint("HINT_NOICON");
 
     if(isDefined(str_hint)) {
-      e_trigger sethintstring(str_hint);
+      e_trigger setHintString(str_hint);
     }
 
     return e_trigger;
@@ -544,7 +544,7 @@ class class_853435cd {
 
     while(isDefined(var_41c57d21)) {
       if(!var_1eebdf18) {
-        var_41c57d21 sethintstring("Bring Toolbox to repair");
+        var_41c57d21 setHintString("Bring Toolbox to repair");
         waitframe(1);
         continue;
       }

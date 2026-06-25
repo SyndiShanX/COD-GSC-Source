@@ -316,9 +316,9 @@ getstage1phase() {
 
 oz_room_open_door(var_0, var_1) {
   if(var_0) {
-    self.doorbrushmodel moveto(self.doorbrushmodel.startorigin + (0, 0, 160), var_1);
+    self.doorbrushmodel moveTo(self.doorbrushmodel.startorigin + (0, 0, 160), var_1);
   } else {
-    self.doorbrushmodel moveto(self.doorbrushmodel.startorigin, var_1);
+    self.doorbrushmodel moveTo(self.doorbrushmodel.startorigin, var_1);
   }
 }
 

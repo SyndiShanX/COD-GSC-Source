@@ -272,7 +272,7 @@ vignette_execute_paired_scene(param_00, param_01, param_02, param_03, param_04) 
 vignette_actor_run_anim_entry(param_00, param_01, param_02, param_03) {
   self endon("damage");
   self endon("death");
-  self setorigin(param_00, 0);
+  self setOrigin(param_00, 0);
   self.var_1D = param_01;
   self method_839C("anim deltas");
   self scragentsetorientmode("face angle abs", param_01);

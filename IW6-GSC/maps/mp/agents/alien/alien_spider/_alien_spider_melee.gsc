@@ -296,7 +296,7 @@ regenfx(var_0) {
   self endon("regen_interrupted");
   self endon("regen_complete");
   var_0 endon("destroyed");
-  var_1 = vectornormalize(self gettagorigin("tag_belly_f") - var_0.origin) * 300;
+  var_1 = vectorNormalize(self gettagorigin("tag_belly_f") - var_0.origin) * 300;
   var_2 = var_1 * -1;
   var_3 = 0.25;
 
@@ -389,7 +389,7 @@ beamsweepattack() {
   }
 
   self.beam_origin_dummy.angles = self.angles;
-  self.sweep_dummy linkto(self.beam_origin_dummy);
+  self.sweep_dummy linkTo(self.beam_origin_dummy);
   self.beam_turret["left"] settargetentity(self.sweep_dummy);
   self.beam_turret["right"] settargetentity(self.sweep_dummy);
   thread beam_anim_turn_monitor(self.sweep_dummy, self.sweep_dummy, 10);
@@ -405,7 +405,7 @@ beamsweepattack() {
     thread beamattacktarget(self.sweep_dummy, "right", var_11, 0.1);
 
     for(var_15 = 0; var_15 < var_12; var_15++) {
-      self.beam_origin_dummy rotateyaw(var_13, var_10);
+      self.beam_origin_dummy rotateYaw(var_13, var_10);
       wait(var_10);
     }
 
@@ -425,14 +425,14 @@ beam_cone_damage(var_0) {
 
   for(;;) {
     var_1 = var_0 gettagangles("tag_flash");
-    var_2 = vectornormalize(anglesToForward(var_1));
+    var_2 = vectorNormalize(anglesToForward(var_1));
     var_3 = var_0 gettagorigin("tag_flash");
 
     foreach(var_5 in level.players) {
       if(!self agentcanseesentient(var_5) || !isalive(var_5) || isDefined(var_5.laststand) && var_5.laststand) {
         continue;
       }
-      var_6 = vectordot(var_2, vectornormalize(var_5.origin - var_3));
+      var_6 = vectordot(var_2, vectorNormalize(var_5.origin - var_3));
 
       if(var_6 >= 0.995) {
         var_5 dodamage(3, var_5.origin, self, var_0);
@@ -569,7 +569,7 @@ beam_anim_turn_monitor(var_0, var_1, var_2) {
   }
 
   for(;;) {
-    var_3 = vectornormalize(var_1.origin - self.origin);
+    var_3 = vectorNormalize(var_1.origin - self.origin);
     var_4 = maps\mp\agents\alien\_alien_anim_utils::getprojectiondata(anglesToForward(self.angles), var_3, anglestoup(self.angles));
 
     if(var_4.rotatedyaw > var_2) {
@@ -612,7 +612,7 @@ update_target_dummy(var_0, var_1, var_2) {
       var_4 = get_edge_of_cone(var_0, var_4, 0.85);
     }
 
-    self.target_dummy moveto(var_4, var_3);
+    self.target_dummy moveTo(var_4, var_3);
     wait(var_3);
   }
 
@@ -647,8 +647,8 @@ update_target_dummy(var_0, var_1, var_2) {
     var_14 = abs(var_5 - var_13);
     var_5 = var_13;
     var_15 = 3;
-    var_16 = vectornormalize(self.target_dummy.origin - var_4) * (var_14 * var_15) + var_4;
-    self.target_dummy moveto(var_16, 0.1);
+    var_16 = vectorNormalize(self.target_dummy.origin - var_4) * (var_14 * var_15) + var_4;
+    self.target_dummy moveTo(var_16, 0.1);
     wait 0.1;
   }
 }
@@ -658,8 +658,8 @@ get_edge_of_cone(var_0, var_1, var_2) {
   var_4 = var_1[2];
   var_5 = var_0.angles + (0, acos(var_2), 0);
   var_6 = var_0.angles - (0, acos(var_2), 0);
-  var_7 = var_0.origin + vectornormalize(anglesToForward(var_5)) * var_3;
-  var_8 = var_0.origin + vectornormalize(anglesToForward(var_6)) * var_3;
+  var_7 = var_0.origin + vectorNormalize(anglesToForward(var_5)) * var_3;
+  var_8 = var_0.origin + vectorNormalize(anglesToForward(var_6)) * var_3;
   var_7 = (var_7[0], var_7[1], var_4);
   var_8 = (var_8[0], var_8[1], var_4);
 
@@ -671,7 +671,7 @@ get_edge_of_cone(var_0, var_1, var_2) {
 }
 
 is_target_in_attack_cone(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_1 - var_0.origin);
+  var_3 = vectorNormalize(var_1 - var_0.origin);
   var_3 = (var_3[0], var_3[1], 0);
   var_4 = (anglesToForward(var_0.angles)[0], anglesToForward(var_0.angles)[1], 0);
   var_5 = vectordot(var_3, var_4);
@@ -765,8 +765,8 @@ beamattacktarget(var_0, var_1, var_2, var_3) {
 
   while(var_6 > 0 && isDefined(var_0)) {
     var_7 = var_4 gettagangles("tag_flash");
-    var_8 = vectornormalize(anglesToForward(var_7));
-    var_9 = vectornormalize(var_0.origin - var_4.origin);
+    var_8 = vectorNormalize(anglesToForward(var_7));
+    var_9 = vectorNormalize(var_0.origin - var_4.origin);
     var_10 = vectordot(var_8, var_9);
 
     if(var_10 > 0.95) {
@@ -841,7 +841,7 @@ setupbeamweapon(var_0, var_1, var_2) {
     return;
   }
   self.beam_turret[var_1] = spawnturret("misc_turret", self gettagorigin(var_0), "spider_beam_mp");
-  self.beam_turret[var_1] linkto(self, var_0);
+  self.beam_turret[var_1] linkTo(self, var_0);
   self.beam_turret[var_1] setModel("spider_beam_gun");
   self.beam_turret[var_1].angles = self gettagangles(var_0);
   self.beam_turret[var_1].team = var_2;
@@ -963,7 +963,7 @@ getplayerspittargets(var_0) {
 }
 
 player_in_spit_exclusion_volume(var_0) {
-  var_1 = getent("spit_exclusion", "targetname");
+  var_1 = getEnt("spit_exclusion", "targetname");
 
   if(var_0 istouching(var_1)) {
     return 1;
@@ -1086,7 +1086,7 @@ closemelee() {
 
   if(isDefined(self.close_melee_target)) {
     var_0 = anglesToForward(self.angles);
-    var_1 = vectornormalize(self.close_melee_target.origin - self.origin);
+    var_1 = vectorNormalize(self.close_melee_target.origin - self.origin);
     var_2 = angleclamp180(vectortoyaw(var_1) - self.angles[1]);
     var_3 = maps\mp\agents\_scriptedagents::getangleindex(var_2);
   } else
@@ -1106,7 +1106,7 @@ handlemeleedamage() {
 
     if(distancesquared(self.origin, self.close_melee_target.origin) < var_0) {
       maps\mp\agents\alien\_alien_melee::melee_dodamage(self.close_melee_target, "swipe");
-      self.close_melee_target player_impulse(800, vectornormalize(self.close_melee_target.origin - self.origin));
+      self.close_melee_target player_impulse(800, vectorNormalize(self.close_melee_target.origin - self.origin));
     }
   }
 }
@@ -1119,7 +1119,7 @@ player_impulse(var_0, var_1) {
   var_6 = length(var_5);
 
   if(var_6 >= 400.0) {
-    var_5 = vectornormalize(var_5) * 400.0;
+    var_5 = vectorNormalize(var_5) * 400.0;
   }
 
   self setvelocity(var_5);
@@ -1384,9 +1384,9 @@ throwegg(var_0, var_1) {
   var_6.targetname = "alien_spider_egg";
 
   if(isevenint(var_1)) {
-    var_6 linkto(self, "tag_tail_laser_r");
+    var_6 linkTo(self, "tag_tail_laser_r");
   } else {
-    var_6 linkto(self, "tag_tail_laser_l");
+    var_6 linkTo(self, "tag_tail_laser_l");
   }
 
   wait 0.45;
@@ -1466,11 +1466,11 @@ nonphysicslaunch(var_0, var_1, var_2) {
 burst_out(var_0, var_1, var_2, var_3) {
   self endon("death");
   maps\mp\alien\_utility::enable_alien_scripted();
-  self scragentsetgoalradius(4000);
+  self scragentsetgoalRadius(4000);
   self scragentsetanimmode("anim deltas");
   self scragentsetorientmode("face angle abs", self.angles);
   self scragentsetphysicsmode("noclip");
-  self setorigin(var_1);
+  self setOrigin(var_1);
   var_4 = 1.5;
   var_3 = var_3 / var_4;
 
@@ -1529,7 +1529,7 @@ movetoendonground(var_0, var_1, var_2, var_3) {
   var_12 = var_11 - (0, 0, 2 * var_5);
   var_13 = self aiphysicstrace(var_11, var_12, var_6, 65);
   var_14 = var_13 - var_10 + (0, 0, var_4);
-  self setorigin(var_14);
+  self setOrigin(var_14);
 }
 
 monitoroutofbound(var_0, var_1, var_2) {
@@ -1797,7 +1797,7 @@ traverse() {
 
 play_retreat() {
   level notify("dlc_vo_notify", "spider_retreat");
-  var_0 = common_scripts\utility::getstruct("spider_blocker_01", "targetname");
+  var_0 = common_scripts\utility::getStruct("spider_blocker_01", "targetname");
   var_1 = anglesToForward(var_0.angles);
   maps\mp\agents\alien\alien_spider\_alien_spider::setxyanimscale(1.0);
   self scragentsetphysicsmode("noclip");
@@ -1822,7 +1822,7 @@ elevatedretreat() {
   self scragentsetorientmode("face angle abs", self.retreatstruct.angles);
   thread maps\mp\agents\alien\_alien_melee::synch_attack_anim_lerp(var_1, self.retreatstruct.origin, self.retreatstruct.angles);
   maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("elevated_retreat", 0, "elevated_retreat", "end");
-  self setorigin(self.elevatedretreatstruct.origin);
+  self setOrigin(self.elevatedretreatstruct.origin);
   self setplayerangles(self.elevatedretreatstruct.angles);
 }
 

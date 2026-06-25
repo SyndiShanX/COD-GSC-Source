@@ -326,7 +326,7 @@ func_38B1(var_0, var_1, var_2) {
 
   var_5 = getmovedelta(var_0, 0, 1);
   var_9 = self localtoworldcoords(var_5);
-  var_9 = var_6 + vectornormalize(var_9 - var_6) * 20;
+  var_9 = var_6 + vectorNormalize(var_9 - var_6) * 20;
   var_10 = navtrace(var_6, var_9, self);
 
   if(var_10) {

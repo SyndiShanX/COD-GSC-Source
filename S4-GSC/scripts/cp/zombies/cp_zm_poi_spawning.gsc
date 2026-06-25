@@ -313,7 +313,7 @@ play_ambush_audio_stinger() {
 set_poi_combat_on_ai_killed(var_0) {
   if(istrue(self.poi_spawned) && isDefined(self._id_106A1)) {
     var_1 = self._id_106A1;
-    var_2 = scripts\engine\utility::getstruct(var_1._id_0481, "target");
+    var_2 = scripts\engine\utility::getStruct(var_1._id_0481, "target");
 
     if(isDefined(var_2) && !istrue(var_2.is_combat_active)) {
       var_2.is_combat_active = 1;

@@ -84,13 +84,13 @@ function_d159d50e() {
 }
 
 chest_init() {
-  self.var_4f8a10d5 = getent(self.target, "targetname");
+  self.var_4f8a10d5 = getEnt(self.target, "targetname");
   self.s_chest = struct::get(self.target, "targetname");
 }
 
 function_2c93a769() {
   level waittill(#"all_players_spawned");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   for(i = 0; i < a_e_players.size; i++) {
     level.var_a4674e38[i] = 0;
@@ -142,15 +142,15 @@ function_f7b0a02a() {
         level.var_86d6efbf playSound(#"hash_1390af6222266716");
         level.var_86d6efbf playLoopSound(#"hash_1f450c20e20a55c5", 2);
         level.var_85a8dbba = spawn("trigger_radius_use", level.var_86d6efbf.origin, 0, 72, 72);
-        level.var_85a8dbba setcursorhint("HINT_NOICON");
+        level.var_85a8dbba setCursorHint("HINT_NOICON");
 
         if(function_8b1a219a()) {
-          level.var_85a8dbba sethintstring(#"hash_448bba92cdb05ab3");
+          level.var_85a8dbba setHintString(#"hash_448bba92cdb05ab3");
         } else {
-          level.var_85a8dbba sethintstring(#"hash_6b3d148fe21d6acd");
+          level.var_85a8dbba setHintString(#"hash_6b3d148fe21d6acd");
         }
 
-        level.var_85a8dbba triggerignoreteam();
+        level.var_85a8dbba triggerIgnoreTeam();
         level.var_85a8dbba setvisibletoall();
         level thread function_a20e6e5d();
         level thread function_ca409b53();
@@ -259,7 +259,7 @@ step_3_cleanup(var_a276c861, var_19e802fa) {
   iprintlnbold("<dev string:x58>");
 
   var_31998302 = getEntArray("kraken_cleanup", "script_noteworthy");
-  var_24402eb8 = getent(level.var_f3abf34a.target, "targetname");
+  var_24402eb8 = getEnt(level.var_f3abf34a.target, "targetname");
 
   foreach(ent in var_31998302) {
     if(ent !== var_24402eb8) {
@@ -269,7 +269,7 @@ step_3_cleanup(var_a276c861, var_19e802fa) {
 }
 
 function_887ad605() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   switch (a_e_players.size) {
     case 1:
@@ -341,7 +341,7 @@ step_4_setup(var_a276c861) {
   if(!var_a276c861) {
     array::run_all(util::get_active_players(), &forcestreambundle, #"p8_fxanim_zm_zod_tentacle_bundle");
     trigger::wait_till(level.var_f3abf34a.target);
-    getent(level.var_f3abf34a.target, "targetname") delete();
+    getEnt(level.var_f3abf34a.target, "targetname") delete();
   }
 }
 
@@ -409,8 +409,8 @@ function_10d4ff8d(e_player) {
 
   if(function_e796525(e_player)) {
     self setvisibletoplayer(e_player);
-    self setcursorhint("HINT_WEAPON", level.w_tricannon_base);
-    self sethintstring(#"zombie/trade_weapon_fill");
+    self setCursorHint("HINT_WEAPON", level.w_tricannon_base);
+    self setHintString(#"zombie/trade_weapon_fill");
     return 1;
   }
 
@@ -477,7 +477,7 @@ function_8498110e(e_player) {
 
 registerblinkingshouldshowpain(e_player) {
   if(zm_trial_disable_buys::is_active()) {
-    self sethintstring(#"hash_55d25caf8f7bbb2f");
+    self setHintString(#"hash_55d25caf8f7bbb2f");
     return 1;
   }
 
@@ -491,25 +491,25 @@ registerblinkingshouldshowpain(e_player) {
         if(var_9102824b.name == #"ww_tricannon_earth_t8" || var_9102824b.name == #"ww_tricannon_earth_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
-              self sethintstring(#"hash_1349c5305046946d");
+              self setHintString(#"hash_1349c5305046946d");
             } else {
-              self sethintstring(#"hash_7a93670a32eaa8cf");
+              self setHintString(#"hash_7a93670a32eaa8cf");
             }
           } else if(function_8b1a219a()) {
-            self sethintstring(#"hash_7f12bb33e3e10d68", n_cost);
+            self setHintString(#"hash_7f12bb33e3e10d68", n_cost);
           } else {
-            self sethintstring(#"hash_523a7a63472e8204", n_cost);
+            self setHintString(#"hash_523a7a63472e8204", n_cost);
           }
         } else if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_229651b097292334");
+            self setHintString(#"hash_229651b097292334");
           } else {
-            self sethintstring(#"hash_46ac72784c5bf3f8");
+            self setHintString(#"hash_46ac72784c5bf3f8");
           }
         } else if(function_8b1a219a()) {
-          self sethintstring(#"hash_8235259468a1297", n_cost);
+          self setHintString(#"hash_8235259468a1297", n_cost);
         } else {
-          self sethintstring(#"hash_353f3ec1f4fa0109", n_cost);
+          self setHintString(#"hash_353f3ec1f4fa0109", n_cost);
         }
 
         break;
@@ -517,25 +517,25 @@ registerblinkingshouldshowpain(e_player) {
         if(var_9102824b.name == #"ww_tricannon_fire_t8" || var_9102824b.name == #"ww_tricannon_fire_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
-              self sethintstring(#"hash_641a4f757e565e1");
+              self setHintString(#"hash_641a4f757e565e1");
             } else {
-              self sethintstring(#"hash_2b3bb217a51771eb");
+              self setHintString(#"hash_2b3bb217a51771eb");
             }
           } else if(function_8b1a219a()) {
-            self sethintstring(#"hash_54eb3433c7a64784", n_cost);
+            self setHintString(#"hash_54eb3433c7a64784", n_cost);
           } else {
-            self sethintstring(#"hash_eb05b70f6927e88", n_cost);
+            self setHintString(#"hash_eb05b70f6927e88", n_cost);
           }
         } else if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_d2cd93392e5a52e");
+            self setHintString(#"hash_d2cd93392e5a52e");
           } else {
-            self sethintstring(#"hash_537338a5d8fb2aea");
+            self setHintString(#"hash_537338a5d8fb2aea");
           }
         } else if(function_8b1a219a()) {
-          self sethintstring(#"hash_43dec5d78cfbe549", n_cost);
+          self setHintString(#"hash_43dec5d78cfbe549", n_cost);
         } else {
-          self sethintstring(#"hash_739ddf7e1e7126a3", n_cost);
+          self setHintString(#"hash_739ddf7e1e7126a3", n_cost);
         }
 
         break;
@@ -543,25 +543,25 @@ registerblinkingshouldshowpain(e_player) {
         if(var_9102824b.name == #"ww_tricannon_water_t8" || var_9102824b.name == #"ww_tricannon_water_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
-              self sethintstring(#"hash_6734cd1a9daa86ee");
+              self setHintString(#"hash_6734cd1a9daa86ee");
             } else {
-              self sethintstring(#"hash_1d35ea46da22acaa");
+              self setHintString(#"hash_1d35ea46da22acaa");
             }
           } else if(function_8b1a219a()) {
-            self sethintstring(#"hash_6ee35e51741fd209", n_cost);
+            self setHintString(#"hash_6ee35e51741fd209", n_cost);
           } else {
-            self sethintstring(#"hash_34dfed25a796d563", n_cost);
+            self setHintString(#"hash_34dfed25a796d563", n_cost);
           }
         } else if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_12b10b6908407b3d");
+            self setHintString(#"hash_12b10b6908407b3d");
           } else {
-            self sethintstring(#"hash_7217a104b05f83df");
+            self setHintString(#"hash_7217a104b05f83df");
           }
         } else if(function_8b1a219a()) {
-          self sethintstring(#"hash_51f6634f54cd9d8", n_cost);
+          self setHintString(#"hash_51f6634f54cd9d8", n_cost);
         } else {
-          self sethintstring(#"hash_126fd9abaad51c74", n_cost);
+          self setHintString(#"hash_126fd9abaad51c74", n_cost);
         }
 
         break;
@@ -569,25 +569,25 @@ registerblinkingshouldshowpain(e_player) {
         if(var_9102824b.name == #"ww_tricannon_air_t8" || var_9102824b.name == #"ww_tricannon_air_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
-              self sethintstring(#"hash_609587f477ef819e");
+              self setHintString(#"hash_609587f477ef819e");
             } else {
-              self sethintstring(#"hash_2b4ea12debb30fda");
+              self setHintString(#"hash_2b4ea12debb30fda");
             }
           } else if(function_8b1a219a()) {
-            self sethintstring(#"hash_5f150c9714252dd9", n_cost);
+            self setHintString(#"hash_5f150c9714252dd9", n_cost);
           } else {
-            self sethintstring(#"hash_7028ec2236ab3e73", n_cost);
+            self setHintString(#"hash_7028ec2236ab3e73", n_cost);
           }
         } else if(zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_46d9122da1e5c931");
+            self setHintString(#"hash_46d9122da1e5c931");
           } else {
-            self sethintstring(#"hash_3427b86de4fb527b");
+            self setHintString(#"hash_3427b86de4fb527b");
           }
         } else if(function_8b1a219a()) {
-          self sethintstring(#"hash_4b7df23eb95b68f4", n_cost);
+          self setHintString(#"hash_4b7df23eb95b68f4", n_cost);
         } else {
-          self sethintstring(#"hash_3576a4d9b2baf4b8", n_cost);
+          self setHintString(#"hash_3576a4d9b2baf4b8", n_cost);
         }
 
         break;
@@ -596,7 +596,7 @@ registerblinkingshouldshowpain(e_player) {
     return 1;
   }
 
-  self sethintstring("");
+  self setHintString("");
   return 0;
 }
 
@@ -722,34 +722,34 @@ function_4facba35(str_drop, v_origin, v_spawn) {
   var_abf1e2f7 = util::spawn_model("tag_origin", v_spawn);
   var_abf1e2f7 notsolid();
   var_a071ccba = spawn("trigger_radius_use", v_origin + (0, 0, 32), 0, 64, 72);
-  var_a071ccba setcursorhint("HINT_NOICON");
+  var_a071ccba setCursorHint("HINT_NOICON");
 
   switch (str_drop) {
     case #"concentrated_decay":
       str_prompt = zm_utility::function_d6046228(#"hash_1fe854f6441b337e", #"hash_1b7e2d2bbc1de36a");
-      var_a071ccba sethintstring(str_prompt);
+      var_a071ccba setHintString(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_heart");
       v_origin += (0, 0, 5);
       break;
     case #"concentrated_plasma":
       str_prompt = zm_utility::function_d6046228(#"hash_1da4ec6fc5b6b9e6", #"hash_2eb14d935f8e39c2");
-      var_a071ccba sethintstring(str_prompt);
+      var_a071ccba setHintString(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_skull");
       break;
     case #"concentrated_purity":
       str_prompt = zm_utility::function_d6046228(#"hash_7ee0d1946efa3d21", #"hash_669c0c5deaada19f");
-      var_a071ccba sethintstring(str_prompt);
+      var_a071ccba setHintString(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_foot");
       break;
     case #"concentrated_radiance":
       str_prompt = zm_utility::function_d6046228(#"hash_1b1948d30c6b8ec9", #"hash_29b72f36c8ee8557");
-      var_a071ccba sethintstring(str_prompt);
+      var_a071ccba setHintString(str_prompt);
       var_abf1e2f7 setModel(#"c_t8_zmb_concentrated_catalyst_hand");
       break;
   }
 
   var_abf1e2f7 thread function_7edbaf3a(v_origin);
-  var_a071ccba triggerignoreteam();
+  var_a071ccba triggerIgnoreTeam();
   var_a071ccba setvisibletoall();
   var_a071ccba.var_abf1e2f7 = var_abf1e2f7;
   var_a071ccba.str_drop = str_drop;
@@ -796,7 +796,7 @@ function_74df2b21(t_trig) {
 
 function_7edbaf3a(v_origin) {
   self endon(#"death");
-  self moveto(v_origin + (0, 0, 1), 0.5, 0.4);
+  self moveTo(v_origin + (0, 0, 1), 0.5, 0.4);
   self waittill(#"movedone");
   self clientfield::set("" + #"hash_1c8f8a5e03b36070", 1);
   wait randomfloat(2);
@@ -806,12 +806,12 @@ function_7edbaf3a(v_origin) {
     n_move_x = randomfloatrange(0.1, 0.5);
     n_move_y = randomfloatrange(0.1, 0.5);
     var_ac28398c = randomintrange(-180, 180);
-    self moveto(self.origin + (n_move_x, n_move_y, 0), 0.15);
+    self moveTo(self.origin + (n_move_x, n_move_y, 0), 0.15);
     self rotatevelocity((0, var_ac28398c, 0), 0.15);
     self waittill(#"movedone");
     wait 0.25;
     var_ac28398c = randomintrange(-180, 180);
-    self moveto(self.origin - (n_move_x, n_move_y, 0), 0.15);
+    self moveTo(self.origin - (n_move_x, n_move_y, 0), 0.15);
     self rotatevelocity((0, var_ac28398c, 0), 0.15);
     self waittill(#"movedone");
   }

@@ -42,7 +42,7 @@ main() {
 }
 
 hummer_steam() {
-  hummer_steam = getent("hummer_steam", "targetname");
+  hummer_steam = getEnt("hummer_steam", "targetname");
   playFX(getfx("humvee_radiator_steam"), hummer_steam.origin);
   hummer_steam thread play_sound_in_space("scn_trainer_radiator_start");
   wait(2);

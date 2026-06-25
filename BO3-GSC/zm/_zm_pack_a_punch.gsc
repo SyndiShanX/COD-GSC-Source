@@ -71,14 +71,14 @@ function private spawn_init() {
     }
     use_trigger = spawn("trigger_radius_use", zbarriers[i].origin + (0, 0, level.pack_a_punch.interaction_height), 0, level.pack_a_punch.interaction_trigger_radius, level.pack_a_punch.interaction_trigger_height);
     use_trigger.script_noteworthy = "pack_a_punch";
-    use_trigger triggerignoreteam();
+    use_trigger triggerIgnoreTeam();
     use_trigger thread pap_trigger_hintstring_monitor();
     use_trigger flag::init("pap_offering_gun");
     collision = spawn("script_model", zbarriers[i].origin, 1);
     collision.angles = zbarriers[i].angles;
     collision setModel("zm_collision_perks1");
     collision.script_noteworthy = "clip";
-    collision disconnectpaths();
+    collision disconnectPaths();
     use_trigger.clip = collision;
     use_trigger.zbarrier = zbarriers[i];
     use_trigger.script_sound = "mus_perks_packa_jingle";
@@ -214,7 +214,7 @@ function private pack_a_punch_machine_trigger_think() {
   self notify("pack_a_punch_trigger_think");
   self endon("pack_a_punch_trigger_think");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(self.pack_player) && self.pack_player != players[i] || !players[i] player_use_can_pack_now() || players[i] bgb::is_active("zm_bgb_ephemeral_enhancement")) {
         self setinvisibletoplayer(players[i], 1);
@@ -228,16 +228,16 @@ function private pack_a_punch_machine_trigger_think() {
 
 function private vending_weapon_upgrade() {
   level endon("pack_a_punch_off");
-  pap_machine = getent(self.target, "targetname");
+  pap_machine = getEnt(self.target, "targetname");
   self.pap_machine = pap_machine;
   pap_machine_sound = getEntArray("perksacola", "targetname");
   packa_rollers = spawn("script_origin", self.origin);
   packa_timer = spawn("script_origin", self.origin);
-  packa_rollers linkto(self);
-  packa_timer linkto(self);
-  self usetriggerrequirelookat();
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self setcursorhint("HINT_NOICON");
+  packa_rollers linkTo(self);
+  packa_timer linkTo(self);
+  self useTriggerRequireLookAt();
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
   power_off = !self is_on();
   if(power_off) {
     pap_array = [];
@@ -343,7 +343,7 @@ function private vending_weapon_upgrade() {
     upgrade_weapon = zm_weapons::get_upgrade_weapon(current_weapon, b_weapon_supports_aat);
     player third_person_weapon_upgrade(current_weapon, upgrade_weapon, packa_rollers, pap_machine, self);
     self triggerenable(1);
-    self setcursorhint("HINT_WEAPON", upgrade_weapon);
+    self setCursorHint("HINT_WEAPON", upgrade_weapon);
     self flag::set("pap_offering_gun");
     if(isDefined(player)) {
       self setinvisibletoall();
@@ -355,7 +355,7 @@ function private vending_weapon_upgrade() {
       self wait_for_timeout(current_weapon, packa_timer, player, isrepack);
     }
     self.zbarrier set_pap_zbarrier_state("powered");
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
     self.current_weapon = level.weaponnone;
     self flag::clear("pap_offering_gun");
     self thread pack_a_punch_machine_trigger_think();

@@ -65,7 +65,7 @@ breach_init() {
     }
 
     if(target.script_noteworthy == "trigger_use_touch") {
-      target UseTriggerRequireLookAt();
+      target useTriggerRequireLookAt();
       target.script_noteworthy = "trigger_use";
     }
     if(!isDefined(target.isPathNode) || target.isPathNode == false) {
@@ -265,7 +265,7 @@ get_breach_targets(action, event_name, player) {
       if(!s.facing_angles3d) {
         player_dir = (player_dir[0], player_dir[1], 0);
       }
-      player_dir = VectorNormalize(player_dir);
+      player_dir = vectorNormalize(player_dir);
 
       dot = VectorDot(player_dir, s.facing_dir);
       if(dot < s.facing_dot) {

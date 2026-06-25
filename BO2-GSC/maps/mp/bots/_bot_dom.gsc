@@ -171,7 +171,7 @@ bot_capture_flag(flag) {
       self.bot.update_lookat = time + randomintrange(1500, 3000);
 
       if(distancesquared(origin, self.origin) > 65536) {
-        dir = vectornormalize(self.origin - origin);
+        dir = vectorNormalize(self.origin - origin);
         dir = vectorscale(dir, 256);
         origin = origin + dir;
       }

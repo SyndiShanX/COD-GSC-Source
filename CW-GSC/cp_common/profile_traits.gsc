@@ -68,7 +68,7 @@ function function_df62d47f(params) {
 function private function_b8f86396(params) {
   level endon(#"game_ended");
   waitframe(1);
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(params.name == "<dev string:x88>") {
     var_e3ffeeb4 = params.value;

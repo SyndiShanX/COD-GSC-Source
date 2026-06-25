@@ -14,13 +14,13 @@ _id_9127(var_0) {
 }
 
 _id_912A(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstruct(var_1, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
   var_4 = spawn("script_origin", var_3.origin);
   var_4.angles = var_3.angles;
   var_4._id_CBC0 = var_3;
 
   if(isDefined(var_3.target)) {
-    var_4._id_AEC7 = scripts\engine\utility::getstruct("lbravoAlphaAdvancedPath", "targetname");
+    var_4._id_AEC7 = scripts\engine\utility::getStruct("lbravoAlphaAdvancedPath", "targetname");
   }
 
   var_4 thread _id_7E7B(var_0, var_2);
@@ -56,7 +56,7 @@ _id_B535(var_0, var_1) {
   thread _id_B4F7(var_0);
   thread _id_0736::_id_7E51("slot_" + var_1, "viewhands_base_iw8");
   self._id_B5A4._id_10D19 = _id_0736::_id_74B5;
-  self._id_B5A4 linkto(var_0._id_9515, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  self._id_B5A4 linkTo(var_0._id_9515, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
   self _meth_8282(var_0._id_9515.origin);
   self _meth_8577("80_instant");
   self _meth_84AC("safe", "iw8_ges_demeanor_safe_heli");
@@ -326,7 +326,7 @@ _id_E0CE(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_3)) {
     var_6 = spawn("script_model", (0, 0, 0));
     var_6 setModel(var_3);
-    var_6 linkto(var_5, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_6 linkTo(var_5, "j_spine4", (0, 0, 0), (0, 0, 0));
     var_5._id_75DA = var_6;
     var_5 thread scripts\engine\utility::_id_472E(var_6);
   }
@@ -334,7 +334,7 @@ _id_E0CE(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     var_7 = spawn("script_model", (0, 0, 0));
     var_7 setModel(var_4);
-    var_7 linkto(var_5, "j_gun", (0, 0, 0), (0, 0, 0));
+    var_7 linkTo(var_5, "j_gun", (0, 0, 0), (0, 0, 0));
     var_5 thread scripts\engine\utility::_id_472E(var_7);
     var_5._id_04F6 = var_7;
   }
@@ -344,7 +344,7 @@ _id_E0CE(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_1)) {
     thread scripts\engine\utility::_id_472E(var_5);
-    var_5 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_5 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
   return var_5;
@@ -602,7 +602,7 @@ _id_10302(var_0) {
   self endon("stop_follow_path");
   self _meth_83DC(var_0);
 
-  for(var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname"); isDefined(var_1); var_1 = scripts\engine\utility::getstruct(var_1.target, "targetname")) {
+  for(var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname"); isDefined(var_1); var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname")) {
     var_1 waittill("trigger");
 
     if(!isDefined(var_1.target)) {
@@ -876,7 +876,7 @@ _id_64B8(var_0) {
 }
 
 _id_64B7(var_0) {
-  return scripts\engine\utility::getstruct(var_0, "targetname");
+  return scripts\engine\utility::getStruct(var_0, "targetname");
 }
 
 _id_64B6(var_0) {
@@ -890,7 +890,7 @@ _id_64B6(var_0) {
 }
 
 _id_D280(var_0) {
-  var_1 = getent(var_0._id_0399, "script_linkname");
+  var_1 = getEnt(var_0._id_0399, "script_linkname");
 
   if(!isDefined(var_1)) {
     return;
@@ -921,7 +921,7 @@ _id_AE74() {
       break;
     }
 
-    var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
     if(!isDefined(var_2)) {
       break;

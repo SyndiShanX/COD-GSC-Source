@@ -558,8 +558,8 @@ get_most_threatening_object() {
         player_origin = (self.origin[0], self.origin[1], 0);
         player_vec = anglesToForward(self.angles);
         player_vec = (player_vec[0], player_vec[1], 0);
-        player_vec = VectorNormalize(player_vec);
-        target_vec = VectorNormalize(object_origin - player_origin);
+        player_vec = vectorNormalize(player_vec);
+        target_vec = vectorNormalize(object_origin - player_origin);
         dot = VectorDot(target_vec, player_vec);
         if(acos(dot) < 32.5) {
           best_ent = level.enemy_armor[i];
@@ -579,8 +579,8 @@ get_most_threatening_object() {
         player_origin = (self.origin[0], self.origin[1], 0);
         player_vec = anglesToForward(self.angles);
         player_vec = (player_vec[0], player_vec[1], 0);
-        player_vec = VectorNormalize(player_vec);
-        target_vec = VectorNormalize(object_origin - player_origin);
+        player_vec = vectorNormalize(player_vec);
+        target_vec = vectorNormalize(object_origin - player_origin);
         dot = VectorDot(target_vec, player_vec);
 
         if(acos(dot) > 10) {
@@ -605,8 +605,8 @@ get_most_threatening_object() {
         player_origin = (self.origin[0], self.origin[1], 0);
         player_vec = anglesToForward(self.angles);
         player_vec = (player_vec[0], player_vec[1], 0);
-        player_vec = VectorNormalize(player_vec);
-        target_vec = VectorNormalize(object_origin - player_origin);
+        player_vec = vectorNormalize(player_vec);
+        target_vec = vectorNormalize(object_origin - player_origin);
         dot = VectorDot(target_vec, player_vec);
         if(acos(dot) > 10) {
           trace = bulletTrace(player_origin + (0, 0, 120), object_origin + (0, 0, 120), false, get_players()[0].myTank);
@@ -630,8 +630,8 @@ get_most_threatening_object() {
         player_origin = (self.origin[0], self.origin[1], 0);
         player_vec = anglesToForward(self.angles);
         player_vec = (player_vec[0], player_vec[1], 0);
-        player_vec = VectorNormalize(player_vec);
-        target_vec = VectorNormalize(object_origin - player_origin);
+        player_vec = vectorNormalize(player_vec);
+        target_vec = vectorNormalize(object_origin - player_origin);
         dot = VectorDot(target_vec, player_vec);
         if(acos(dot) > 32.5) {
           trace = bulletTrace(player_origin + (0, 0, 120), object_origin + (0, 0, 120), false, get_players()[0].myTank);

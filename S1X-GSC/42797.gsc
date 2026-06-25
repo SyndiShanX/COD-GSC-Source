@@ -128,7 +128,7 @@ setheadicon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9
       var_13.x = var_2[0];
       var_13.y = var_2[1];
       var_13.z = var_2[2];
-      var_13 settargetent(self, var_11);
+      var_13 settargetEnt(self, var_11);
     }
 
     thread destroyiconsondeath();
@@ -242,7 +242,7 @@ setteamheadicon(var_0, var_1, var_2, var_3) {
       var_6.x = self.entityheadiconoffset[0];
       var_6.y = self.entityheadiconoffset[1];
       var_6.z = self.entityheadiconoffset[2];
-      var_6 settargetent(self, var_2);
+      var_6 settargetEnt(self, var_2);
     }
   } else {
     var_7 = anglestoup(self.angles);
@@ -257,7 +257,7 @@ setteamheadicon(var_0, var_1, var_2, var_3) {
       var_6.x = var_8[0];
       var_6.y = var_8[1];
       var_6.z = var_8[2];
-      var_6 settargetent(self, var_2);
+      var_6 settargetEnt(self, var_2);
     }
   }
 
@@ -313,7 +313,7 @@ setplayerheadicon(var_0, var_1, var_2) {
     var_5.x = self.entityheadiconoffset[0];
     var_5.y = self.entityheadiconoffset[1];
     var_5.z = self.entityheadiconoffset[2];
-    var_5 settargetent(self, var_2);
+    var_5 settargetEnt(self, var_2);
   }
 
   thread destroyheadiconsondeath();

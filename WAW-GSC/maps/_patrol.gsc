@@ -221,7 +221,7 @@ waittill_combat() {
     self allowedStances("stand", "crouch", "prone");
     self.disableArrivals = false;
     self.disableExits = false;
-    self stopanimscripted();
+    self stopanimScripted();
     self notify("stop_animmode");
   }
   self.allowdeath = false;

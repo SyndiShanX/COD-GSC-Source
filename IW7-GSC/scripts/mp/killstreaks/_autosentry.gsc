@@ -283,7 +283,7 @@ sentry_initsentry(var_0, var_1, var_2, var_3) {
       self setdefaultdroppitch(-89);
       self.laser_on = 0;
       var_4 = spawn("script_model", self gettagorigin("tag_laser"));
-      var_4 linkto(self);
+      var_4 linkTo(self);
       self.killcament = var_4;
       self.killcament setscriptmoverkillcam("explosive");
       break;
@@ -294,7 +294,7 @@ sentry_initsentry(var_0, var_1, var_2, var_3) {
       var_6 = self gettagorigin("tag_laser") + (0, 0, 10);
       var_6 = var_6 - var_5 * 20;
       var_4 = spawn("script_model", var_6);
-      var_4 linkto(self);
+      var_4 linkTo(self);
       self.killcament = var_4;
       break;
 
@@ -364,7 +364,7 @@ sentry_createbombsquadmodel(var_0) {
     var_1 hide();
     var_1 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
     var_1 setModel(level.sentrysettings[var_0].modelbombsquad);
-    var_1 linkto(self);
+    var_1 linkTo(self);
     var_1 setcontents(0);
     self.bombsquadmodel = var_1;
     self waittill("death");
@@ -737,7 +737,7 @@ turret_handleuse() {
         var_3.turret_overheat_bar scripts\mp\hud_util::destroyelem();
         var_3 restoreperks();
         var_3 restoreweapons();
-        self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
+        self setHintString(level.sentrysettings[self.sentrytype].hintstring);
         self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
         sentry_setowner(self.originalowner);
         self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
@@ -861,8 +861,8 @@ sentry_setplaced(var_0) {
         }
 
         self.ownertrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 105, 64);
-        self.ownertrigger enablelinkto();
-        self.ownertrigger linkto(self);
+        self.ownertrigger enablelinkTo();
+        self.ownertrigger linkTo(self);
         self.originalowner thread turret_handlepickup(self);
         thread turret_handleuse();
       }
@@ -1031,8 +1031,8 @@ sentry_ongameended(var_0) {
 sentry_setactive(var_0) {
   self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
   if(var_0) {
-    self setcursorhint("HINT_NOICON");
-    self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
+    self setCursorHint("HINT_NOICON");
+    self setHintString(level.sentrysettings[self.sentrytype].hintstring);
     self makeusable();
   }
 
@@ -1554,7 +1554,7 @@ sam_fireontarget() {
 
       self shootturret();
       var_3 = scripts\mp\utility::_magicbullet("sam_projectile_mp", var_0[var_2], self.samtargetent.origin, self.owner);
-      var_3 missile_settargetent(self.samtargetent);
+      var_3 missile_settargetEnt(self.samtargetent);
       var_3 missile_setflightmodedirect();
       var_3.samturret = self;
       var_3.sammissilegroup = var_1;
@@ -1766,7 +1766,7 @@ sentryshocktargets() {
   level endon("game_ended");
   thread watchsentryshockpickup();
   self.airlookatent = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
-  self.airlookatent linkto(self, "tag_flash");
+  self.airlookatent linkTo(self, "tag_flash");
   for(;;) {
     var_0 = scripts\engine\utility::waittill_any_timeout(1, "turret_on_target");
     if(var_0 == "timeout") {
@@ -1903,7 +1903,7 @@ targetvisibleinfront(var_0) {
   var_1 = 0;
   var_2 = self gettagorigin("tag_flash");
   var_3 = var_0.origin;
-  var_4 = vectornormalize(var_3 - var_2);
+  var_4 = vectorNormalize(var_3 - var_2);
   var_5 = anglesToForward(self.angles);
   var_6 = [self, self.owner, var_0];
   var_7 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
@@ -1919,7 +1919,7 @@ shootshocksentrysamtarget(var_0, var_1) {
   self endon("carried");
   level endon("game_ended");
   self give_player_session_tokens("manual");
-  thread setshocksamtargetent(var_0, var_1);
+  thread setshocksamtargetEnt(var_0, var_1);
   self.sentryshocksamtarget = undefined;
   self waittill("turret_on_target");
   thread marktargetlaser(var_0);
@@ -1934,7 +1934,7 @@ shootshocksentrysamtarget(var_0, var_1) {
   while(isDefined(var_0) && targetvisibleinfront(var_0)) {
     var_4 = self gettagorigin("tag_flash");
     var_5 = scripts\mp\utility::_magicbullet("sentry_shock_missile_mp", var_4, var_0.origin, self.owner);
-    var_5 missile_settargetent(var_0);
+    var_5 missile_settargetEnt(var_0);
     var_5 missile_setflightmodedirect();
     var_5.killcament = self.killcament;
     var_5.streakinfo = self.streakinfo;
@@ -1952,7 +1952,7 @@ shootshocksentrysamtarget(var_0, var_1) {
   self notify("sentry_lost_target");
   var_1 unlink();
   var_1.origin = self gettagorigin("tag_flash");
-  var_1 linkto(self, "tag_flash");
+  var_1 linkTo(self, "tag_flash");
   self give_player_session_tokens("sentry");
   self cleartargetentity();
   self setscriptablepartstate("coil", "idle");
@@ -1960,7 +1960,7 @@ shootshocksentrysamtarget(var_0, var_1) {
   self notify("done_firing");
 }
 
-setshocksamtargetent(var_0, var_1) {
+setshocksamtargetEnt(var_0, var_1) {
   self endon("death");
   self endon("carried");
   self endon("sentry_lost_target");
@@ -1969,11 +1969,11 @@ setshocksamtargetent(var_0, var_1) {
   for(;;) {
     var_2 = self gettagorigin("tag_aim");
     var_3 = var_0.origin;
-    var_4 = vectornormalize(var_3 - var_2);
+    var_4 = vectorNormalize(var_3 - var_2);
     var_5 = var_2 + var_4 * 500;
     var_1 unlink();
     var_1.origin = var_5;
-    var_1 linkto(self);
+    var_1 linkTo(self);
     self settargetentity(var_1);
     scripts\engine\utility::waitframe();
   }
@@ -2050,7 +2050,7 @@ missileburstfire(var_0) {
 
     var_3 = scripts\mp\utility::_magicbullet("sentry_shock_grenade_mp", self gettagorigin("tag_flash"), var_0.origin, self.owner);
     if(scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_0)) {
-      var_3 missile_settargetent(var_0, gettargetoffset(var_0));
+      var_3 missile_settargetEnt(var_0, gettargetoffset(var_0));
       var_0 thread watchtarget(var_3);
     }
 

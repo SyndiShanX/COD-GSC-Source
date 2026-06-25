@@ -201,7 +201,7 @@ function function_84d33874() {
 
         var_8675da3 = player.origin - var_483a1937.origin;
         var_8675da3 = (var_8675da3[0], var_8675da3[1], 0);
-        var_bd581e61 = vectornormalize(var_8675da3) * radius;
+        var_bd581e61 = vectorNormalize(var_8675da3) * radius;
 
         if(isDefined(var_4f67e1b.targetent)) {
           target = var_4f67e1b.targetent.origin;

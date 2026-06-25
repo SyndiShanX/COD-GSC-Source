@@ -70,7 +70,7 @@ function function_d17ab8c6() {
 function function_bbe228f8() {
   level endon("connect_bunker_exterior_to_bunker_interior");
   zm_utility::add_zombie_hint("bunker_door_text", &"ZM_ISLAND_BUNKER_DOOR_OPEN");
-  var_25d5f24c = getent("door_bunker_main", "target");
+  var_25d5f24c = getEnt("door_bunker_main", "target");
   while(true) {
     level waittill("override_bunker_door_string");
     var_25d5f24c zm_utility::set_hint_string(var_25d5f24c, "bunker_door_text");
@@ -84,15 +84,15 @@ function function_9e6292be() {
 
 function function_fbe51672() {
   level flag::init("power_on" + 4);
-  var_2a07ad9e = getent("bunker_cypher_screen", "targetname");
+  var_2a07ad9e = getEnt("bunker_cypher_screen", "targetname");
   var_2a07ad9e hide();
-  var_3968d838 = getent("bunker_cypher_screen_4codes", "targetname");
+  var_3968d838 = getEnt("bunker_cypher_screen_4codes", "targetname");
   var_3968d838 hide();
   level flag::wait_till("power_on" + 4);
   foreach(var_ac878678 in level.var_769c0729) {
     var_ac878678 hide();
   }
-  playsoundatposition("zmb_island_main_power_on", (0, 0, 0));
+  playSoundAtPosition("zmb_island_main_power_on", (0, 0, 0));
   level clientfield::set(("power_switch_" + 1) + "_fx", 0);
   level clientfield::set(("power_switch_" + 2) + "_fx", 0);
   exploder::exploder("ex_power_bdoor_left");
@@ -158,10 +158,10 @@ function function_46ffc7b4() {
 }
 
 function function_801ffa37() {
-  var_ac878678 = getent("use_elec_switch_deferred", "targetname");
-  var_ac878678 sethintstring(&"ZM_ISLAND_PENSTOCK_DEBRIS");
+  var_ac878678 = getEnt("use_elec_switch_deferred", "targetname");
+  var_ac878678 setHintString(&"ZM_ISLAND_PENSTOCK_DEBRIS");
   var_ac878678 setvisibletoall();
-  var_ac878678 setcursorhint("HINT_NOICON");
+  var_ac878678 setCursorHint("HINT_NOICON");
   level flag::init(var_ac878678.script_string);
   level clientfield::set("penstock_fx_anim", 1);
   function_e9f46546();
@@ -184,7 +184,7 @@ function function_e9f46546() {
   while(!isDefined(level.var_d3b40681)) {
     wait(1);
   }
-  var_e08b3d94 = getent("penstock_web_trigger", "targetname");
+  var_e08b3d94 = getEnt("penstock_web_trigger", "targetname");
   var_e08b3d94 zm_ai_spiders::function_7428955c();
   if(!isDefined(level.var_d3b40681)) {
     level.var_d3b40681 = [];
@@ -214,7 +214,7 @@ function function_156f973e() {
     return;
   }
   if(self.script_string === "temporary_power_switch") {
-    self sethintstring(&"ZM_ISLAND_POWER_SWITCH_NEEEDS_WATER");
+    self setHintString(&"ZM_ISLAND_POWER_SWITCH_NEEEDS_WATER");
   }
   if(isDefined(self.target)) {
     ent_parts = getEntArray(self.target, "targetname");
@@ -244,7 +244,7 @@ function function_156f973e() {
   }
   while(isDefined(self)) {
     self setvisibletoall();
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
     self waittill("trigger", user);
     if(isDefined(user.var_6fd3d65c) && user.var_6fd3d65c && user.var_bb2fd41c === 3) {
       user thread function_a84a1aec(undefined, 1);
@@ -301,7 +301,7 @@ function function_156f973e() {
         level thread zm_island_vo::function_3bf2d62a("local_power_off", 0, 0, 1);
       }
     } else {
-      self sethintstring(&"ZOMBIE_ELECTRIC_SWITCH_OFF");
+      self setHintString(&"ZOMBIE_ELECTRIC_SWITCH_OFF");
       self setvisibletoall();
       self waittill("trigger", user);
       self setinvisibletoall();
@@ -420,12 +420,12 @@ function function_5144d0ee() {
 
 function function_3d11144a() {
   level thread util::delayed_notify("spawn_bunker_thrasher", 2.5);
-  var_1e9b1719 = getent("fxanim_bunker_door_main", "targetname");
-  var_c0abb8f1 = getent("bunker_door_clip_left", "targetname");
-  var_c0abb8f1 linkto(var_1e9b1719, "door_lft_jnt");
+  var_1e9b1719 = getEnt("fxanim_bunker_door_main", "targetname");
+  var_c0abb8f1 = getEnt("bunker_door_clip_left", "targetname");
+  var_c0abb8f1 linkTo(var_1e9b1719, "door_lft_jnt");
   level thread zm_island_vo::function_3bf2d62a("bunker_open", 1, 1, 1);
-  var_83cb019c = getent("bunker_door_clip_right", "targetname");
-  var_83cb019c linkto(var_1e9b1719, "door_rt_jnt");
+  var_83cb019c = getEnt("bunker_door_clip_right", "targetname");
+  var_83cb019c linkTo(var_1e9b1719, "door_rt_jnt");
   e_closest_player = arraygetclosest(var_c0abb8f1.origin, level.activeplayers);
   e_closest_player notify("player_opened_bunker");
   level scene::play("p7_fxanim_zm_island_bunker_door_main_bundle");
@@ -622,14 +622,14 @@ function function_c5751341() {
   foreach(var_7e208829 in level.var_4a0060c0) {
     var_7e208829 thread function_3e519f17();
   }
-  var_72b16720 = getent("water_source_ee", "targetname");
+  var_72b16720 = getEnt("water_source_ee", "targetname");
   var_72b16720 thread function_d99ed9ac();
 }
 
 function function_3e519f17() {
   self setinvisibletoall();
-  self sethintstring(&"ZM_ISLAND_FILL_BUCKET");
-  self setcursorhint("HINT_NOICON");
+  self setHintString(&"ZM_ISLAND_FILL_BUCKET");
+  self setCursorHint("HINT_NOICON");
   while(true) {
     self waittill("trigger", e_who);
     if(!e_who clientfield::get_to_player("bucket_held")) {
@@ -644,7 +644,7 @@ function function_3e519f17() {
 }
 
 function function_d99ed9ac() {
-  self sethintstring(&"");
+  self setHintString(&"");
   while(true) {
     self waittill("touch", e_who);
     if(isvehicle(e_who)) {
@@ -671,7 +671,7 @@ function function_d99ed9ac() {
 function function_a7a30925() {
   self endon("death");
   self endon("sewer_over");
-  var_72b16720 = getent("water_source_ee", "targetname");
+  var_72b16720 = getEnt("water_source_ee", "targetname");
   while(true) {
     self util::waittill_use_button_pressed();
     if(!self istouching(var_72b16720)) {

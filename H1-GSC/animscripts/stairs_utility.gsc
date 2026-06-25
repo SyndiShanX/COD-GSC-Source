@@ -48,7 +48,7 @@ findstaircorner(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = (0, 0, var_6);
   var_8 = var_4[2] - var_2[2];
   var_9 = (var_0[0], var_0[1], 0);
-  var_10 = vectornormalize(var_9);
+  var_10 = vectorNormalize(var_9);
   var_11 = vectordot(var_3, var_10);
 
   if(var_11 > 0) {
@@ -71,7 +71,7 @@ findstaircorner(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_12["position"] = sweptspherecast(var_7, var_13, var_6, var_3, var_14);
   var_12["position"] = var_12["position"] - (0, 0, var_6);
   var_12["stairEdgeDirection"] = vectorcross(var_3, var_5);
-  var_12["stairEdgeDirection"] = vectornormalize(var_12["stairEdgeDirection"]);
+  var_12["stairEdgeDirection"] = vectorNormalize(var_12["stairEdgeDirection"]);
   return var_12;
 }
 
@@ -158,7 +158,7 @@ stairupdatepos(var_0, var_1, var_2, var_3, var_4, var_5) {
           self.stairstransition["wantedPos"] = var_6;
         }
       } else {
-        var_11 = vectornormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
+        var_11 = vectorNormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
         var_12 = distancebetweentwolines(self.origin, var_11, var_6, var_7);
         self.stairstransition["wantedPos"] = var_12["intersectionLine2"];
       }
@@ -280,7 +280,7 @@ gettracecontactpos(var_0, var_1, var_2, var_3, var_4) {
   var_7 = var_1 + (0, 0, var_5);
   var_8 = var_7 - var_6;
   var_9 = var_5 - var_3;
-  var_10 = vectornormalize(var_8);
+  var_10 = vectorNormalize(var_8);
   var_10 = var_10 * var_9;
   var_11 = var_8 * var_2["fraction"] + var_6;
   var_11 = var_11 + var_10;
@@ -442,11 +442,11 @@ checktransition_down_in(var_0, var_1, var_2, var_3) {
 
   if(getdvarint("ai_useStairsTraceErrorOffset", 1)) {
     var_16 = (self.lookaheaddir[0], self.lookaheaddir[1], 0);
-    var_16 = vectornormalize(var_16);
+    var_16 = vectorNormalize(var_16);
 
     if(vectordot(var_10, var_16) > 0) {
       var_17 = (var_10[0], var_10[1], 0);
-      var_17 = vectornormalize(var_17);
+      var_17 = vectorNormalize(var_17);
       var_17 = common_scripts\utility::vectorscale(var_17, 0.5);
       var_15["wantedPos"] = var_15["wantedPos"] + var_17;
     }
@@ -551,7 +551,7 @@ getexpectedstairstransition(var_0, var_1, var_2, var_3) {
   }
 
   var_5 = getanimationcontext(var_0);
-  var_6 = vectornormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
+  var_6 = vectorNormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
   var_7 = !isDefined(var_3) || var_3 == "inOnly";
   var_8 = !isDefined(var_3) || var_3 == "outOnly";
 

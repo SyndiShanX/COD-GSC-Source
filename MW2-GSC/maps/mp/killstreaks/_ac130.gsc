@@ -721,16 +721,16 @@ rotatePlane(toggle) {
   if(toggle == "on") {
     rampupDegrees = 10;
     rotateTime = (level.ac130_Speed["rotate"] / 360) * rampupDegrees;
-    level.ac130 rotateyaw(level.ac130.angles[2] + rampupDegrees, rotateTime, rotateTime, 0);
+    level.ac130 rotateYaw(level.ac130.angles[2] + rampupDegrees, rotateTime, rotateTime, 0);
 
     for(;;) {
-      level.ac130 rotateyaw(360, level.ac130_Speed["rotate"]);
+      level.ac130 rotateYaw(360, level.ac130_Speed["rotate"]);
       wait level.ac130_Speed["rotate"];
     }
   } else if(toggle == "off") {
     slowdownDegrees = 10;
     rotateTime = (level.ac130_Speed["rotate"] / 360) * slowdownDegrees;
-    level.ac130 rotateyaw(level.ac130.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
+    level.ac130 rotateYaw(level.ac130.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
   }
 }
 

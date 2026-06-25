@@ -44,7 +44,7 @@ _id_8173() {
   var_0._id_FDB3 = [];
   level._id_3E85 = var_0;
   level._id_A2B5 = scripts\common\utility::_id_152F;
-  level._id_3E85._id_A1C0 = getent("care_package_col", "targetname");
+  level._id_3E85._id_A1C0 = getEnt("care_package_col", "targetname");
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("airdrop", "registerActionSet")) {
     [[scripts\cp_mp\utility\script_utility::getsharedfunc("airdrop", "registerActionSet")]]();
@@ -223,7 +223,7 @@ createcrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_11 setModel(var_9._id_508A);
     }
 
-    var_11 linkto(var_10);
+    var_11 linkTo(var_10);
     var_10._id_357A = [var_11];
   } else
     var_11 = var_10;
@@ -243,7 +243,7 @@ createcrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       var_12 setModel(var_9._id_508A);
     }
 
-    var_12 linkto(var_10);
+    var_12 linkTo(var_10);
   }
 
   var_10._id_5420 = var_12;
@@ -264,7 +264,7 @@ createcrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
           if(var_7) {
             var_13 thread _id_984C(var_10, (0, 0, 0));
           } else {
-            var_13 linkto(var_10);
+            var_13 linkTo(var_10);
           }
         }
       }
@@ -633,7 +633,7 @@ _id_5029(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_10._id_766D = var_13;
   var_14 = createcrate(var_0, var_1, var_2, var_11, var_13.angles, var_7, undefined, 0, var_8);
   var_14._id_5066 = var_10;
-  var_14 linkto(var_13, "tag_origin", (16, 0, -156), (0, 0, 0));
+  var_14 linkTo(var_13, "tag_origin", (16, 0, -156), (0, 0, 0));
   var_10._id_3E6D = var_14;
   var_10 thread _id_10ACE();
   return var_10;
@@ -873,7 +873,7 @@ _id_10AD0(var_0, var_1) {
 
 _id_10AD1(var_0, var_1) {
   level endon("game_ended");
-  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglesToForward(self.angles));
   var_3 = 70000;
   var_4 = 19.5;
   var_5 = 1300;
@@ -889,7 +889,7 @@ _id_10AD1(var_0, var_1) {
   var_7 = var_0 - var_2 * var_3 / 2.0;
   var_8 = var_0 + var_2 * var_3 / 2.0;
   self.origin = var_7;
-  self moveto(var_8, var_4);
+  self moveTo(var_8, var_4);
   var_9 = var_3 / var_4;
   var_10 = getdvarfloat("#x33c01342f08fa6256");
   var_11 = 150;
@@ -1186,7 +1186,7 @@ _id_99E4() {
     if(!isDefined(var_1)) {
       var_1 = spawn("script_model", self gettagorigin(var_0._id_FEDB));
       var_1 setModel("tag_origin");
-      var_1 linkto(self);
+      var_1 linkTo(self);
       var_1 makeunusable();
       self._id_FE92 = var_1;
     }
@@ -1217,7 +1217,7 @@ _id_10ABE(var_0, var_1) {
   var_2 = _id_6B00(self.cratetype);
   var_3 = _id_6E00(var_1);
   var_3._id_FEED = var_0;
-  var_3 setcursorhint("HINT_NOICON");
+  var_3 setCursorHint("HINT_NOICON");
   var_3 _meth_84D9("show");
   var_3 _meth_84D7(var_2._id_FEDB);
   var_3 _meth_84D4(var_2._id_FEB0);
@@ -1228,9 +1228,9 @@ _id_10ABE(var_0, var_1) {
   var_3 setuseholdduration("duration_none");
 
   if(var_3._id_FEED == 1 && self._id_EB9F) {
-    var_3 sethintstring(self._id_C58F);
+    var_3 setHintString(self._id_C58F);
   } else {
-    var_3 sethintstring(self._id_3234);
+    var_3 setHintString(self._id_3234);
   }
 
   var_3._id_FEB1 = 1;
@@ -2105,7 +2105,7 @@ _id_4019() {
     var_2.killcament = self.killcament;
     var_2._id_A1C0 = 1;
     var_2 clonebrushmodeltoscriptmodel(var_0._id_A1C0);
-    var_2 linkto(self);
+    var_2 linkTo(self);
     self._id_A1C0 = var_2;
     var_2._id_3E6D = self;
   }
@@ -2276,7 +2276,7 @@ _id_984C(var_0, var_1, var_2) {
     waitframe();
   }
 
-  self linkto(var_0);
+  self linkTo(var_0);
 }
 
 _id_1161() {
@@ -2386,7 +2386,7 @@ flipcrate(var_0) {
   var_2 = spawn("script_model", var_1);
   var_2 setModel("tag_origin");
   var_2.angles = self.angles;
-  self linkto(var_2);
+  self linkTo(var_2);
   var_3 = self.owner getplayerangles(1);
   var_4 = var_2.angles;
   var_5 = var_3 - (0, 90, 0);
@@ -2516,7 +2516,7 @@ _id_AD4A(var_0) {
 
   foreach(var_3 in var_1) {
     if(!self._id_EB9F || var_3._id_FEED == 2) {
-      var_3 sethintstring(self._id_3234);
+      var_3 setHintString(self._id_3234);
     }
   }
 }
@@ -2534,7 +2534,7 @@ _id_AD5C(var_0) {
 
   foreach(var_3 in var_1) {
     if(self._id_EB9F && var_3._id_FEED == 1) {
-      var_3 sethintstring(self._id_C58F);
+      var_3 setHintString(self._id_C58F);
     }
   }
 }
@@ -2603,7 +2603,7 @@ _id_AD5F(var_0) {
 
     foreach(var_3 in var_1) {
       if(var_3._id_FEED == 1) {
-        var_3 sethintstring(self._id_C58F);
+        var_3 setHintString(self._id_C58F);
       }
     }
   }
@@ -3661,7 +3661,7 @@ _id_8147() {
   var_0._id_5420 = undefined;
   var_0._id_5FB8 = "wm_equip_nebula_warhead_crate_00";
   var_0._id_508A = "wm_equip_nebula_warhead_crate_00";
-  var_0._id_A1C0 = getent("nebula_package_col", "targetname");
+  var_0._id_A1C0 = getEnt("nebula_package_col", "targetname");
   var_0.mountmantlemodeloffset = (0, 0, 17);
   var_0._id_75EE = 5000;
   var_0._id_75E9 = undefined;
@@ -3828,7 +3828,7 @@ getkillstreakangles(var_0, var_1, var_2) {
 
   for(var_18 = 0; var_18 < var_17.size; var_18++) {
     var_19 = var_3 + (0, var_17[var_18], 0);
-    var_20 = vectornormalize(-1 * anglesToForward(var_19));
+    var_20 = vectorNormalize(-1 * anglesToForward(var_19));
     var_21 = var_6 - var_20 * var_15;
     var_22 = _func_02C1(var_21, var_5, var_16, undefined, 0, "physicsquery_closest");
 

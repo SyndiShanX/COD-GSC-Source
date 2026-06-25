@@ -187,7 +187,7 @@ _id_12B2(var_0, var_1) {
 }
 
 _id_6AFA(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = vectortoangles(var_3);
   var_5 = (0, var_1[1], 0);
   var_6 = var_5 + (45, 0, 0);
@@ -200,7 +200,7 @@ _id_628A() {
 
 _id_A08E(var_0, var_1, var_2, var_3, var_4) {
   var_5 = undefined;
-  var_6 = vectornormalize(var_3);
+  var_6 = vectorNormalize(var_3);
   var_7 = anglestoup(var_0.angles);
   var_8 = anglestoright(var_2);
 
@@ -234,8 +234,8 @@ _id_A08F(var_0, var_1, var_2, var_3) {
   var_4 = 1;
 
   if(isagent(var_1) && istrue(var_1._id_24F9)) {
-    var_5 = -1 * vectornormalize((var_3[0], var_3[1], 0));
-    var_6 = -1 * vectornormalize(var_3);
+    var_5 = -1 * vectorNormalize((var_3[0], var_3[1], 0));
+    var_6 = -1 * vectorNormalize(var_3);
 
     if(vectordot(anglesToForward(var_1.angles), var_5) > 0.5 && -0.5 < var_6[2] && var_6[2] < 0.5) {
       var_4 = 0;
@@ -301,7 +301,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_14 thread _id_A03E();
   var_15 = _id_A066();
   var_16 = 0;
-  var_17 = vectordot(vectornormalize(var_4), -1 * var_8);
+  var_17 = vectordot(vectorNormalize(var_4), -1 * var_8);
 
   if(var_17 < 0.96593) {
     var_16 = 1;
@@ -349,7 +349,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, var_24);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -363,7 +363,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, -1 * var_24);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -377,7 +377,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, var_25);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -391,7 +391,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, -1 * var_25);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -1031,7 +1031,7 @@ _id_A04A(var_0, var_1, var_2) {
 
   if(isDefined(self._id_EA93)) {
     var_4 _meth_80DB();
-    var_4 linkto(self._id_EA93);
+    var_4 linkTo(self._id_EA93);
   }
 
   var_4 hide();
@@ -1094,7 +1094,7 @@ _id_A09E() {
     }
     if(isagent(var_0) && istrue(var_0._id_24F9) && isDefined(self.inflictor)) {
       var_3 = self.inflictor.origin - var_0.origin;
-      var_3 = vectornormalize((var_3[0], var_3[1], 0));
+      var_3 = vectorNormalize((var_3[0], var_3[1], 0));
 
       if(vectordot(anglesToForward(var_0.angles), var_3) > 0.5) {
         continue;
@@ -1229,7 +1229,7 @@ _id_A082(var_0, var_1) {
   var_3 = anglestoup(var_0);
   var_4 = undefined;
   var_2 = _func_01C6(var_3, var_2, var_1);
-  var_4 = vectornormalize(_func_025B(var_2, var_3));
+  var_4 = vectorNormalize(_func_025B(var_2, var_3));
   var_3 = _func_025B(var_4, var_2);
   return _func_0017(var_2, var_4, var_3);
 }
@@ -1357,13 +1357,13 @@ _id_A060() {
 }
 
 _id_A07B(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_0, var_1));
+  var_2 = vectorNormalize(_func_025B(var_0, var_1));
   var_1 = _func_025B(var_2, var_0);
   return _func_0017(var_2, var_1, var_0);
 }
 
 _id_A07A(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_1, var_0));
+  var_2 = vectorNormalize(_func_025B(var_1, var_0));
   var_1 = _func_025B(var_0, var_2);
   return _func_0017(var_1, var_2, var_0);
 }
@@ -1523,7 +1523,7 @@ _id_A097() {
           self._id_0B67._id_8796 = 1;
           self._id_2D90 = 0;
           var_9 = anglestoright(self.angles);
-          var_10 = vectornormalize(var_8 - self.origin);
+          var_10 = vectorNormalize(var_8 - self.origin);
 
           if(vectordot(var_9, var_10) > 0) {
             self._id_2D8A = "right";

@@ -346,7 +346,7 @@ function explosive_incendiary_explosion(attacker, explosion_radius, physics_expl
     physics_explosion_and_rumble(self.origin, 255, physics_explosion);
   }
   if(isDefined(self.target)) {
-    dest_clip = getent(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     if(isDefined(dest_clip)) {
       dest_clip delete();
     }
@@ -365,7 +365,7 @@ function explosive_electrical_explosion(attacker, explosion_radius, physics_expl
     physics_explosion_and_rumble(self.origin, 255, physics_explosion);
   }
   if(isDefined(self.target)) {
-    dest_clip = getent(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     if(isDefined(dest_clip)) {
       dest_clip delete();
     }
@@ -384,7 +384,7 @@ function explosive_concussive_explosion(attacker, explosion_radius, physics_expl
     physics_explosion_and_rumble(self.origin, 255, physics_explosion);
   }
   if(isDefined(self.target)) {
-    dest_clip = getent(self.target, "targetname");
+    dest_clip = getEnt(self.target, "targetname");
     if(isDefined(dest_clip)) {
       dest_clip delete();
     }

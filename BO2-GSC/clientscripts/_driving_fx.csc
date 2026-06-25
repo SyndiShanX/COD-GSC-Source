@@ -166,12 +166,12 @@ collision_thread(localclientnum) {
           volume = get_impact_vol_from_speed();
           id = playSound(0, "veh_suspension_lg_hd", self.origin, volume);
           player earthquake(0.5, 0.5, player.origin, 200);
-          player playrumbleonentity(localclientnum, "damage_heavy");
+          player playRumbleOnEntity(localclientnum, "damage_heavy");
         } else {
           volume = get_impact_vol_from_speed();
           id = playSound(0, "veh_suspension_lg_lt", self.origin, volume);
           player earthquake(0.3, 0.3, player.origin, 200);
-          player playrumbleonentity(localclientnum, "damage_light");
+          player playRumbleOnEntity(localclientnum, "damage_light");
         }
       }
     }
@@ -191,7 +191,7 @@ jump_landing_thread(localclientnum) {
         volume = get_impact_vol_from_speed();
         id = playSound(0, "veh_suspension_lg_hd", self.origin, volume);
         player earthquake(0.7, 1.2, player.origin, 200);
-        player playrumbleonentity(localclientnum, "damage_heavy");
+        player playRumbleOnEntity(localclientnum, "damage_heavy");
       }
     }
   }
@@ -209,7 +209,7 @@ suspension_thread(localclientnum) {
       if(isDefined(player)) {
         volume = get_impact_vol_from_speed();
         id = playSound(0, "veh_suspension_lg_lt", self.origin, volume);
-        player playrumbleonentity(localclientnum, "damage_light");
+        player playRumbleOnEntity(localclientnum, "damage_light");
       }
     }
   }

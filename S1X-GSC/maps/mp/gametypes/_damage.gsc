@@ -2941,7 +2941,7 @@ getMostKilled() {
 
 damageShellshockAndRumble(eInflictor, sWeapon, sMeansOfDeath, iDamage, iDFlags, eAttacker) {
   self thread maps\mp\gametypes\_weapons::onWeaponDamage(eInflictor, sWeapon, sMeansOfDeath, iDamage, eAttacker);
-  self PlayRumbleOnEntity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
 }
 
 reviveSetup(owner) {
@@ -3058,7 +3058,7 @@ reviveHoldThink(player, useTime, shouldDisableWeapons) {
 
   reviveSpot = spawn("script_origin", self.origin);
   reviveSpot hide();
-  player playerLinkTo(reviveSpot);
+  player playerlinkTo(reviveSpot);
   player PlayerLinkedOffsetEnable();
 
   if(!isDefined(shouldDisableWeapons)) {
@@ -3321,7 +3321,7 @@ processDamageTaken(inflictor, attacker, damage, iDFlags, meansOfDeath, weapon, p
     return;
   }
 
-  attacker PlayRumbleOnEntity("damage_light");
+  attacker playRumbleOnEntity("damage_light");
 
   if(isDefined(self.isCrashing) && self.isCrashing) {
     return;

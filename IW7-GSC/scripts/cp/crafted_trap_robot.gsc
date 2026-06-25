@@ -321,8 +321,8 @@ func_9371(var_0) {
 
 robot_trap_setactive() {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.robot_trap_settings[self.robot_trap_type].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.robot_trap_settings[self.robot_trap_type].hintstring);
   scripts\cp\utility::addtotraplist();
   var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
@@ -342,8 +342,8 @@ robot_trap_setactive() {
   self.attacklaunchpos[1] = self gettagorigin("tag_rocket_tube_02") + (0, 0, -10);
   var_3 = spawn("trigger_radius", self.origin, 0, 300, 100);
   self.var_2536 = var_3;
-  self.var_2536 enablelinkto();
-  self.var_2536 linkto(self);
+  self.var_2536 enablelinkTo();
+  self.var_2536 linkTo(self);
   self.var_2528 = 0.72;
   wait(0.75);
   self setscriptablepartstate("main", "anim_idle");
@@ -362,7 +362,7 @@ rotate_robot() {
   self endon("death");
   self playLoopSound("disco_toy_robot_mvmt_lp");
   for(;;) {
-    self rotateyaw(15, 2);
+    self rotateYaw(15, 2);
     wait(2);
   }
 }
@@ -392,7 +392,7 @@ robot_usability_monitor(var_0) {
           self makeunusable();
           self disableplayeruse(var_0);
         } else {
-          self sethintstring(level.robot_trap_settings[self.robot_trap_type].hintstring);
+          self setHintString(level.robot_trap_settings[self.robot_trap_type].hintstring);
           self setusefov(120);
           self setuserange(112);
           self makeusable();
@@ -542,7 +542,7 @@ launch_rocket(var_0, var_1, var_2) {
     var_7 = self.alt_attackheightpos;
   }
 
-  var_4 moveto(var_7, self.var_2528, self.var_2528 * 0.5, 0);
+  var_4 moveTo(var_7, self.var_2528, self.var_2528 * 0.5, 0);
   wait(self.var_2528);
   var_4 setscriptablepartstate("rocket", "explode");
   if(isDefined(var_6)) {
@@ -554,7 +554,7 @@ launch_rocket(var_0, var_1, var_2) {
   var_8 thread watch_for_death();
   wait(0.1);
   var_4 delete();
-  var_8 missile_settargetent(var_0);
+  var_8 missile_settargetEnt(var_0);
   wait(1.5);
   self notify("firework_exploded");
 }

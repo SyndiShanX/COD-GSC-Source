@@ -325,8 +325,8 @@ wait_and_revive() {
 
   if(isDefined(level.exit_level_func)) {
     self thread[[level.exit_level_func]]();
-  } else if(getplayers().size == 1) {
-    player = getplayers()[0];
+  } else if(getPlayers().size == 1) {
+    player = getPlayers()[0];
     level.move_away_points = positionquery_source_navigation(player.origin, 480, 960, 120, 20);
 
     if(!isDefined(level.move_away_points)) {
@@ -796,7 +796,7 @@ check_self_revive_for_hotjoin() {
   var_9156a121 = 0;
   var_972a361b = 0;
   waitframe(1);
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(a_e_players.size == 1) {
     var_9156a121 = 1;
@@ -865,7 +865,7 @@ function_b7c101fa() {
   self waittill(#"spawned");
   level flag::wait_till("start_zombie_round_logic");
 
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     self_revive_count = self.var_d66589da;
     self.var_240cf7be = 1;
   } else {
@@ -1004,12 +1004,12 @@ revive_trigger_spawn() {
 
   radius = getdvarint(#"revive_trigger_radius", 75);
   self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-  self.revivetrigger sethintstring("");
-  self.revivetrigger setcursorhint("HINT_NOICON");
+  self.revivetrigger setHintString("");
+  self.revivetrigger setCursorHint("HINT_NOICON");
   self.revivetrigger setmovingplatformenabled(1);
-  self.revivetrigger enablelinkto();
+  self.revivetrigger enablelinkTo();
   self.revivetrigger.origin = self.origin;
-  self.revivetrigger linkto(self);
+  self.revivetrigger linkTo(self);
   self.revivetrigger setinvisibletoplayer(self);
   self.revivetrigger.beingrevived = 0;
   self.revivetrigger.createtime = gettime();
@@ -1029,9 +1029,9 @@ revive_trigger_think(t_secondary) {
       t_revive = self.revivetrigger;
     }
 
-    t_revive sethintstring("");
+    t_revive setHintString("");
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       n_depth = 0;
       n_depth = self depthinwater();
 
@@ -1050,7 +1050,7 @@ revive_trigger_think(t_secondary) {
       }
     }
 
-    foreach(e_reviver in getplayers()) {
+    foreach(e_reviver in getPlayers()) {
       if(!isDefined(e_reviver) || self == e_reviver && !isDefined(self.var_6d772cb) || !e_reviver is_reviving(self, t_secondary)) {
         continue;
       }
@@ -1283,7 +1283,7 @@ revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
   e_revivee notify(#"player_being_revived");
   e_revivee.revivetrigger.beingrevived = 1;
   e_revivee thread laststand::revive_hud_show_n_fade(#"zombie/player_is_reviving_you", 3, self);
-  e_revivee.revivetrigger sethintstring("");
+  e_revivee.revivetrigger setHintString("");
 
   if(isPlayer(e_revivee)) {
     e_revivee startrevive(self);
@@ -1328,7 +1328,7 @@ revive_do_revive(e_revivee, w_reviver, w_revive_tool, t_secondary) {
     }
   }
 
-  e_revivee.revivetrigger sethintstring(#"zombie/button_to_revive_player");
+  e_revivee.revivetrigger setHintString(#"zombie/button_to_revive_player");
   e_revivee.revivetrigger.beingrevived = 0;
 
   if(isDefined(self)) {
@@ -1503,7 +1503,7 @@ revive_internal(reviver, b_track_stats, var_c0ab6a65 = 0) {
     self thread laststand_enable_player_weapons();
   }
 
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     ais = getactorarray();
 
     foreach(ai in ais) {
@@ -1545,7 +1545,7 @@ revive_hud_think() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
     playertorevive = undefined;
 
     for(i = 0; i < players.size; i++) {

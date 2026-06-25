@@ -263,7 +263,7 @@ ims_createBombSquadModel() {
 
   bombSquadModel thread maps\mp\gametypes\_weapons::bombSquadVisibilityUpdater(self.owner);
   bombSquadModel setModel(level.imsSettings[self.imsType].modelBombSquad);
-  bombSquadModel LinkTo(self);
+  bombSquadModel linkTo(self);
   bombSquadModel SetContents(0);
   self.bombSquadModel = bombSquadModel;
 
@@ -701,8 +701,8 @@ ims_setActive() {
 
   attackTrigger = spawn("trigger_radius", self.origin, 0, 256, 100);
   self.attackTrigger = attackTrigger;
-  self.attackTrigger EnableLinkTo();
-  self.attackTrigger LinkTo(self);
+  self.attackTrigger EnablelinkTo();
+  self.attackTrigger linkTo(self);
 
   self.attackMoveTime = Length(self.attackHeightPos) / 200;
 
@@ -939,8 +939,8 @@ fire_sensor(targetEnt, explNum) {
   savedOwner = self.owner;
 
   sensor Unlink();
-  sensor RotateYaw(3600, self.attackMoveTime);
-  sensor MoveTo(self.attackHeightPos + self.origin, self.attackMoveTime, self.attackMoveTime * 0.25, self.attackMoveTime * 0.25);
+  sensor rotateYaw(3600, self.attackMoveTime);
+  sensor moveTo(self.attackHeightPos + self.origin, self.attackMoveTime, self.attackMoveTime * 0.25, self.attackMoveTime * 0.25);
 
   if(isDefined(sensor.killCamEnt)) {
     killCamEnt = sensor.killCamEnt;
@@ -950,7 +950,7 @@ fire_sensor(targetEnt, explNum) {
       self.owner.imsKillCamEnt = killCamEnt;
     }
 
-    killCamEnt MoveTo(self.attackHeightPos + self.origin + self.config.killCamOffset, self.attackMoveTime, self.attackMoveTime * 0.25, self.attackMoveTime * 0.25);
+    killCamEnt moveTo(self.attackHeightPos + self.origin + self.config.killCamOffset, self.attackMoveTime, self.attackMoveTime * 0.25, self.attackMoveTime * 0.25);
 
     if(!numExplosivesExceedModelCapacity()) {
       killCamEnt thread deleteAfterTime(5.0);
@@ -1040,7 +1040,7 @@ imsCreateExplosive(explNum) {
   expl.angles = self.angles;
 
   expl.killCamEnt = self.killcam_ents[explNum - 1];
-  expl.killCamEnt LinkTo(self);
+  expl.killCamEnt linkTo(self);
 
   return expl;
 }
@@ -1057,7 +1057,7 @@ imsCreateExplosiveWithKillCam() {
     }
 
     expl = self imsCreateExplosive(i);
-    expl LinkTo(self);
+    expl linkTo(self);
     self.explosive1 = expl;
   }
 }

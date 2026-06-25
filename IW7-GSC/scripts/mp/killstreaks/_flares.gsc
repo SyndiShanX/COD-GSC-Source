@@ -119,7 +119,7 @@ ks_laserguidedmissile_monitorproximity(var_0, var_1, var_2, var_3) {
         var_5 = flares_getflarereserve(var_3);
       }
 
-      var_0 missile_settargetent(var_5);
+      var_0 missile_settargetEnt(var_5);
       var_0 notify("missile_pairedWithFlare");
       break;
     }
@@ -170,7 +170,7 @@ func_6EB1(var_0, var_1, var_2, var_3) {
           var_7 = var_2 func_6EA0();
           for(var_8 = 0; var_8 < var_3.size; var_8++) {
             if(isDefined(var_3[var_8])) {
-              var_3[var_8] missile_settargetent(var_7);
+              var_3[var_8] missile_settargetEnt(var_7);
               var_3[var_8] notify("missile_pairedWithFlare");
             }
           }
@@ -220,7 +220,7 @@ func_6EB2(var_0, var_1, var_2, var_3) {
       var_2.flaresreservecount--;
       var_2 thread func_6EAE(var_3);
       var_6 = var_2 func_6EA0();
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -277,8 +277,8 @@ func_A72D(var_0) {
     self.owner playlocalsound("missile_incoming");
     self.owner thread ks_watch_death_stop_sound(self, "missile_incoming");
     if(isDefined(var_0)) {
-      var_2 = vectornormalize(var_1[0].origin - self.origin);
-      var_3 = vectornormalize(anglestoright(self.angles));
+      var_2 = vectorNormalize(var_1[0].origin - self.origin);
+      var_3 = vectorNormalize(anglestoright(self.angles));
       var_4 = vectordot(var_2, var_3);
       var_5 = 1;
       if(var_4 > 0) {
@@ -310,7 +310,7 @@ func_A72E(var_0) {
     if(distancesquared(var_0.origin, var_1) < 4000000) {
       var_2 = flares_getflarelive(self);
       if(isDefined(var_2)) {
-        var_0 missile_settargetent(var_2);
+        var_0 missile_settargetEnt(var_2);
         var_0 notify("missile_pairedWithFlare");
         self.owner stoplocalsound("missile_incoming");
         break;

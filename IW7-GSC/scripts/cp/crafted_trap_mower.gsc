@@ -366,7 +366,7 @@ adswatcher(var_0, var_1, var_2) {
       if(var_3 <= gettime()) {
         var_0 stoploopsound();
         self earthquakeforplayer(0.23, 1, self.origin, 128);
-        self playrumbleonentity("heavy_3s");
+        self playRumbleOnEntity("heavy_3s");
         var_0 playSound("craftable_lawn_mower_high_start");
         var_0 playLoopSound("craftable_lawn_mower_high_lp");
         var_3 = gettime() + 30000;
@@ -417,7 +417,7 @@ adswatcher(var_0, var_1, var_2) {
         var_6.full_gib = 1;
         if(gettime() > var_5) {
           self earthquakeforplayer(0.35, 1.5, var_6.origin, 128);
-          self playrumbleonentity("heavy_1s");
+          self playRumbleOnEntity("heavy_1s");
           self setscriptablepartstate("mower_death", "on");
           var_5 = gettime() + 1000;
         }
@@ -475,8 +475,8 @@ adswatcher(var_0, var_1, var_2) {
 }
 
 func_126A6(var_0) {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_47B3["crafted_trap_mower"].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.var_47B3["crafted_trap_mower"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
@@ -561,8 +561,8 @@ suck_zombie(var_0, var_1, var_2) {
   var_0.precacheleaderboards = 1;
   var_0.anchor = spawn("script_origin", var_0.origin);
   var_0.anchor.angles = var_0.angles;
-  var_0 linkto(var_0.anchor);
-  var_0.anchor moveto(var_2.origin + (0, 0, -10), 0.15);
+  var_0 linkTo(var_0.anchor);
+  var_0.anchor moveTo(var_2.origin + (0, 0, -10), 0.15);
   wait(0.15);
   playFX(level._effect["woodchipper_entry"], var_0.origin, anglesToForward((0, 0, 0)), anglestoup((0, 0, 0)));
   var_0.anchor delete();

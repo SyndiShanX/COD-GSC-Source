@@ -618,14 +618,14 @@ function function_294b258e(localclientnum, var_1280faf3) {
 
       if(i <= 0) {
         var_969f45da = mdl_beam;
-        var_969f45da linkto(var_1280faf3, str_tag);
+        var_969f45da linkTo(var_1280faf3, str_tag);
         continue;
       }
 
       var_96ce3194 = mdl_beam;
 
       if(isDefined(var_969f45da)) {
-        var_96ce3194 linkto(var_969f45da, "tag_origin");
+        var_96ce3194 linkTo(var_969f45da, "tag_origin");
       }
     }
 

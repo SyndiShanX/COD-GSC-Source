@@ -88,12 +88,12 @@ function_6b6712e3() {
   var_ca45945a = scene::get_active_scenes(#"p8_fxanim_zm_man_bookcase_04_bundle");
   var_48e18d96 = var_ca45945a[0];
   var_80c684f = var_48e18d96.scene_ents[#"prop 1"];
-  var_728bcf6e = getent("ww_l2_part_clip_right", "targetname");
-  var_728bcf6e linkto(var_80c684f, "tag_animate_02");
-  var_45e56423 = getent("ww_l2_part_clip_left", "targetname");
-  var_45e56423 linkto(var_80c684f, "tag_animate_01");
-  var_728bcf6e disconnectpaths();
-  var_45e56423 disconnectpaths();
+  var_728bcf6e = getEnt("ww_l2_part_clip_right", "targetname");
+  var_728bcf6e linkTo(var_80c684f, "tag_animate_02");
+  var_45e56423 = getEnt("ww_l2_part_clip_left", "targetname");
+  var_45e56423 linkTo(var_80c684f, "tag_animate_01");
+  var_728bcf6e disconnectPaths();
+  var_45e56423 disconnectPaths();
   var_80c684f thread function_4a81e337();
   level waittill(#"hash_2588983e2be22ca5");
   s_loc = struct::get("s_wwlvl2_quest_pickup_1", "targetname");
@@ -258,7 +258,7 @@ function_672eb1dc(var_21839a96, var_57ec466d) {
   s_loc = struct::get("s_prima_material_spawn_loc");
   wait 5;
   var_58b3e56b = mansion_util::function_89e9bca5(var_21839a96, s_loc.origin, s_loc.angles);
-  playsoundatposition(var_57ec466d, var_58b3e56b.origin);
+  playSoundAtPosition(var_57ec466d, var_58b3e56b.origin);
   level notify(#"prima_materia_created");
 }
 
@@ -306,11 +306,11 @@ function_7aa50bb7(e_player) {
   can_use = self.stub zm_crafting::function_18f2be60(e_player);
 
   if(e_player zm_weapons::has_weapon_or_upgrade(level.var_6fe89212) || e_player zm_weapons::has_weapon_or_upgrade(level.var_7b9ca97a)) {
-    self sethintstring("");
+    self setHintString("");
   } else if(e_player zm_weapons::has_weapon_or_upgrade(level.var_f086136b)) {
-    self sethintstring(self.stub.blueprint.craftingprompt);
+    self setHintString(self.stub.blueprint.craftingprompt);
   } else {
-    self sethintstring(#"hash_61bd1f669b4c6a1c");
+    self setHintString(#"hash_61bd1f669b4c6a1c");
   }
 
   return can_use;

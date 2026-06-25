@@ -219,7 +219,7 @@ main() {
   common_scripts\utility::run_thread_on_noteworthy("clear_target_radius", maps\blackout_code::clear_target_radius);
   common_scripts\utility::run_thread_on_noteworthy("visible_mgguy", maps\_utility::add_spawn_function, maps\blackout_code::visible_mgguy_think);
   common_scripts\utility::run_thread_on_noteworthy("bored_guy", maps\blackout_code::ignore_until_high_alert);
-  var_1 = getent("hut_runner", "script_linkname");
+  var_1 = getEnt("hut_runner", "script_linkname");
   var_1 thread maps\blackout_code::hut_runner_think();
   common_scripts\utility::run_thread_on_noteworthy("hut_sentry", maps\blackout_code::tango_down_detection);
   common_scripts\utility::run_thread_on_targetname("hut_patrol", maps\blackout_code::tango_down_detection);
@@ -233,7 +233,7 @@ main() {
   thread maps\blackout_code::power_station_dialogue();
   thread maps\blackout_code::descriptions();
   thread maps\blackout_code::blackout_stealth_settings();
-  level.respawn_spawner = getent("ally_respawn", "targetname");
+  level.respawn_spawner = getEnt("ally_respawn", "targetname");
   common_scripts\utility::flag_set("respawn_friendlies");
   var_2 = getEntArray("assault_spawner", "targetname");
   common_scripts\utility::array_thread(var_2, maps\_utility::add_spawn_function, maps\_utility::replace_on_death);
@@ -243,12 +243,12 @@ main() {
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, maps\blackout_code::ground_allied_forces);
   var_4 = getEntArray("color_spawner", "targetname");
   common_scripts\utility::array_thread(var_4, maps\_utility::add_spawn_function, maps\blackout_code::ground_allied_forces);
-  var_5 = getent("heli_rescue_trigger", "script_noteworthy");
+  var_5 = getEnt("heli_rescue_trigger", "script_noteworthy");
   var_5 common_scripts\utility::trigger_off();
-  var_6 = getent("blackout_fence_down", "targetname");
+  var_6 = getEnt("blackout_fence_down", "targetname");
   var_6 hide();
   var_6 notsolid();
-  var_7 = getent("blackout_fence_down_model", "targetname");
+  var_7 = getEnt("blackout_fence_down_model", "targetname");
   var_7 hide();
   level.friendlynamedist = getdvarint("g_friendlynamedist");
   thread maps\blackout_code::player_rappel_think();
@@ -292,16 +292,16 @@ loop_cinematic() {
 
 burning_house_exploders_init() {
   common_scripts\utility::flag_wait("mgs_cleared");
-  var_0 = getent("burning_house_exploder_78", "targetname");
+  var_0 = getEnt("burning_house_exploder_78", "targetname");
   var_0 waittill("trigger");
   thread common_scripts\_exploder::exploder(78);
   thread maps\blackout_code::shoot_magic_rocket("overlook_magic_rocket_02");
 
   if(getdvarint("use_old_burning_house") == 1) {
-    var_0 = getent("burning_house_exploder_76", "targetname");
+    var_0 = getEnt("burning_house_exploder_76", "targetname");
     var_0 waittill("trigger");
     thread common_scripts\_exploder::exploder(76);
-    var_0 = getent("burning_house_exploder_77", "targetname");
+    var_0 = getEnt("burning_house_exploder_77", "targetname");
     var_0 waittill("trigger");
     thread common_scripts\_exploder::exploder(77);
   }
@@ -318,8 +318,8 @@ start_normal() {
 
 start_chess() {
   soundscripts\_snd::snd_message("start_chess_checkpoint");
-  var_0 = getent("player_chess_org", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("player_chess_org", "targetname");
+  level.player setOrigin(var_0.origin);
   maps\_utility::activate_trigger_with_targetname("second_shack_trigger");
   start_normal();
 }
@@ -332,7 +332,7 @@ walking_the_stream() {
   var_1 = getaiarray("allies");
   common_scripts\utility::array_thread(var_1, maps\blackout_code::friendly_think);
   thread maps\blackout_code::hut_tv();
-  var_2 = getent("hut_sentry", "script_noteworthy");
+  var_2 = getEnt("hut_sentry", "script_noteworthy");
   var_2 thread maps\blackout_code::idle_relative_to_target("smoke_idle", "bored_alert");
   var_2 thread maps\blackout_code::alert_on_grenade_body_impact();
   var_3 = getEntArray("bored_guy", "script_noteworthy");
@@ -373,7 +373,7 @@ walking_the_stream() {
       level.price animscripts\combat_utility::h1_grenade_attach_detach_listener("grenade_throw");
     }
 
-    level.price stopanimscripted();
+    level.price stopanimScripted();
     var_7 = getnode("gaz_hut_node", "targetname");
     level.gaz maps\_utility::disable_ai_color();
     level.gaz.fixednodesaferadius = 0;
@@ -448,20 +448,20 @@ start_field() {
   common_scripts\utility::array_levelthread(var_0, maps\_utility::deleteent);
   var_1 = getaiarray("allies");
   common_scripts\utility::flag_set("second_shacks");
-  var_2 = getent("player_meeting_org", "targetname");
-  level.player setorigin(var_2.origin + (0, 0, -27000));
-  var_3 = getent("price_meeting_org", "targetname");
-  var_4 = getent("price_meeting_org", "targetname");
+  var_2 = getEnt("player_meeting_org", "targetname");
+  level.player setOrigin(var_2.origin + (0, 0, -27000));
+  var_3 = getEnt("price_meeting_org", "targetname");
+  var_4 = getEnt("price_meeting_org", "targetname");
   level.price teleport(var_3.origin, var_3.angles);
   level.gaz teleport(var_4.origin, var_4.angles);
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   maps\_utility::activate_trigger_with_targetname("meet_at_field");
   level.gaz maps\_utility::set_force_color("y");
 }
 
 field_meeting() {
   var_0 = getnode("farm_meet_node", "targetname");
-  var_0 = getent("farm_meet_org", "targetname");
+  var_0 = getEnt("farm_meet_org", "targetname");
   common_scripts\utility::flag_wait("second_shacks");
   thread overlook_sniping();
   maps\_utility::fail_on_friendly_fire();
@@ -469,7 +469,7 @@ field_meeting() {
   var_1 = getEntArray("field_russian", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, maps\blackout_code::field_russian_think);
   common_scripts\utility::array_thread(var_1, maps\_utility::spawn_ai);
-  var_2 = getent("russian_leader", "targetname");
+  var_2 = getEnt("russian_leader", "targetname");
   var_2 thread maps\_utility::add_spawn_function(maps\blackout_code::russian_leader_think, 1);
   var_2 thread maps\_utility::add_spawn_function(maps\_utility::magic_bullet_shield);
   var_2 thread maps\_utility::add_spawn_function(maps\blackout_code::set_allowed_stances, "crouch");
@@ -480,7 +480,7 @@ field_meeting() {
     var_0 thread maps\_anim::anim_loop_solo(level.kamarov, "meeting_idle", undefined, "stop_kam_loop");
   }
 
-  var_3 = getent("meeting_clip", "targetname");
+  var_3 = getEnt("meeting_clip", "targetname");
   common_scripts\utility::flag_wait("meeting_begins");
   maps\_utility::arcademode_checkpoint(6, "a");
   level.price maps\_utility::disable_ai_color();
@@ -506,13 +506,13 @@ field_meeting() {
     common_scripts\utility::flag_wait_all("meeting_reached_price", "meeting_reached_gaz", "field_trigger");
   }
 
-  var_0 = getent("farm_meet_org", "targetname");
+  var_0 = getEnt("farm_meet_org", "targetname");
   thread maps\blackout_code::field_russians_go_up_hill();
   thread maps\blackout_code::kam_and_price_chat();
   level.price.a.movement = "run";
   level.kamarov.a.movement = "run";
   level.kamarov.a.pose = "stand";
-  var_3 disconnectpaths();
+  var_3 disconnectPaths();
   var_3 solid();
   setsaveddvar("g_friendlynamedist", "0");
   maps\_utility::delaythread(7, common_scripts\utility::flag_set, "russians_stand_up");
@@ -533,7 +533,7 @@ field_meeting() {
   }
 
   level.timer = gettime();
-  var_7 = getent("kaz_overlook_org", "targetname");
+  var_7 = getEnt("kaz_overlook_org", "targetname");
   level.kamarov setgoalpos(var_7.origin);
 
   if(getdvarint("use_old_meeting") != 1) {
@@ -604,7 +604,7 @@ start_overlook() {
   common_scripts\utility::flag_set("ready_to_commence_attack");
   thread overlook_mortars();
   maps\blackout_code::setup_sas_buddies();
-  var_0 = getent("russian_leader", "targetname");
+  var_0 = getEnt("russian_leader", "targetname");
   var_0 thread maps\_utility::add_spawn_function(maps\blackout_code::russian_leader_think);
   var_0 thread maps\_utility::add_spawn_function(maps\blackout_code::sas_main_think);
   var_0 thread maps\_utility::spawn_ai();
@@ -613,8 +613,8 @@ start_overlook() {
   var_1 = getaiarray("axis");
   common_scripts\utility::array_levelthread(var_1, maps\_utility::deleteent);
   var_2 = getaiarray("allies");
-  var_3 = getent("player_overlook_org", "targetname");
-  level.player setorigin(var_3.origin + (0, 0, -27000));
+  var_3 = getEnt("player_overlook_org", "targetname");
+  level.player setOrigin(var_3.origin + (0, 0, -27000));
   var_4 = getEntArray("friendly_overlook_org", "targetname");
 
   for(var_5 = 0; var_5 < var_2.size; var_5++) {
@@ -623,7 +623,7 @@ start_overlook() {
   }
 
   thread overlook_sniping();
-  level.player setorigin(var_3.origin);
+  level.player setOrigin(var_3.origin);
   wait 2;
   common_scripts\utility::flag_set("commence_attack");
 }
@@ -631,7 +631,7 @@ start_overlook() {
 overlook_sniping() {
   common_scripts\utility::flag_wait("go_up_hill");
   thread maps\blackout_code::price_tells_player_to_come_over();
-  var_0 = getent("village_blocker", "targetname");
+  var_0 = getEnt("village_blocker", "targetname");
   var_0 connectpaths();
   var_0 notsolid();
   var_1 = getEntArray("overlook_runner", "script_noteworthy");
@@ -667,7 +667,7 @@ overlook_sniping() {
   common_scripts\utility::array_thread(var_7, maps\_utility::spawn_ai);
   thread maps\blackout_code::overlook_price_tells_you_to_shoot_mgs();
   thread overlook_badguys_pour_in();
-  var_8 = getent("first_rpg_spawner", "targetname");
+  var_8 = getEnt("first_rpg_spawner", "targetname");
   var_8 thread maps\_utility::add_spawn_function(maps\blackout_code::first_rpg_spawner_think);
   var_8 maps\_utility::spawn_ai();
   common_scripts\utility::flag_wait("first_bmp_destroyed");
@@ -764,7 +764,7 @@ overlook_badguys_pour_in() {
 }
 
 haunted_sniping() {
-  var_0 = getent("bmp_trigger", "targetname");
+  var_0 = getEnt("bmp_trigger", "targetname");
   var_0 waittill("trigger");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("bmp");
 }
@@ -779,7 +779,7 @@ start_cliff() {
   common_scripts\utility::flag_set("breach_complete");
   common_scripts\utility::flag_set("bm21s_attack");
   maps\_utility::delaythread(1, common_scripts\utility::flag_set, "power_plant_cleared");
-  var_0 = getent("russian_leader", "targetname");
+  var_0 = getEnt("russian_leader", "targetname");
   var_0 thread maps\_utility::add_spawn_function(maps\blackout_code::russian_leader_think);
   var_0 thread maps\_utility::spawn_ai();
   var_1 = getaiarray("allies");
@@ -800,15 +800,15 @@ start_cliff() {
 
   common_scripts\utility::flag_set("player_reaches_cliff_area");
   wait 0.5;
-  var_7 = getent("player_cliff_org", "targetname");
-  level.player setorigin(var_7.origin + (0, 0, -27000));
+  var_7 = getEnt("player_cliff_org", "targetname");
+  level.player setOrigin(var_7.origin + (0, 0, -27000));
   var_8 = getEntArray("friendly_cliff_org", "targetname");
 
   for(var_6 = 0; var_6 < var_1.size; var_6++) {
     var_1[var_6] teleport(var_8[var_6].origin, var_8[var_6].angles);
   }
 
-  level.player setorigin(var_7.origin);
+  level.player setOrigin(var_7.origin);
 }
 
 cliff_sniping() {
@@ -816,7 +816,7 @@ cliff_sniping() {
   level.price.norunngun = 1;
   level.gaz.norunngun = 1;
   level.kamarov.norunngun = 1;
-  level.respawn_spawner = getent("ally_cliff_spawner", "targetname");
+  level.respawn_spawner = getEnt("ally_cliff_spawner", "targetname");
   common_scripts\utility::flag_set("cliff_fighting");
   thread maps\blackout_code::spawn_replacement_cliff_baddies();
   level.enemy_bmp = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("enemy_bmp");
@@ -832,7 +832,7 @@ cliff_sniping() {
   maps\_utility::activate_trigger_with_targetname("cliff_allies_advance");
   common_scripts\utility::flag_wait("cliff_tank_path_end");
   wait 3;
-  var_0 = getent("bmp_killer_spawner", "targetname");
+  var_0 = getEnt("bmp_killer_spawner", "targetname");
   var_0 thread maps\_utility::add_spawn_function(maps\blackout_code::bmp_killer_spawner_think);
   var_0 thread maps\_utility::spawn_ai();
   wait 0.05;
@@ -907,15 +907,15 @@ start_farmhouse() {
   common_scripts\utility::array_levelthread(var_1, maps\_utility::deleteent);
   common_scripts\utility::flag_set("player_reaches_cliff_area");
   wait 0.5;
-  var_2 = getent("player_farmhouse_org", "targetname");
-  level.player setorigin(var_2.origin + (0, 0, -27000));
+  var_2 = getEnt("player_farmhouse_org", "targetname");
+  level.player setOrigin(var_2.origin + (0, 0, -27000));
   var_3 = getEntArray("ally_farmhouse_org", "targetname");
 
   for(var_4 = 0; var_4 < var_0.size; var_4++) {
     var_0[var_4] teleport(var_3[var_4].origin, var_3[var_4].angles);
   }
 
-  level.player setorigin(var_2.origin);
+  level.player setOrigin(var_2.origin);
   thread raid_farmhouse();
   common_scripts\_exploder::exploder(300);
 }
@@ -925,7 +925,7 @@ raid_farmhouse() {
   var_0 = getEntArray("ally_forced_farm_spawner", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, maps\_utility::replace_on_death);
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
-  var_1 = getent("ally_farm_spawner", "targetname");
+  var_1 = getEnt("ally_farm_spawner", "targetname");
   level.respawn_spawner = var_1;
   maps\_utility::clear_promotion_order();
   maps\_utility::set_promotion_order("c", "r");
@@ -933,7 +933,7 @@ raid_farmhouse() {
   maps\_utility::instantly_promote_nearest_friendly("r", "c");
   maps\_utility::instantly_promote_nearest_friendly("r", "c");
   thread maps\blackout_code::activate_farmhouse_defenders();
-  var_2 = getent("farm_rpg_spawner", "targetname");
+  var_2 = getEnt("farm_rpg_spawner", "targetname");
   var_2 thread maps\_utility::add_spawn_function(maps\blackout_code::farm_rpg_guy_attacks_bm21s);
   var_2 maps\_utility::spawn_ai();
   common_scripts\utility::flag_wait("rpg_guy_attacks_bm21s");
@@ -958,8 +958,8 @@ start_blackout() {
   maps\blackout_code::setup_player();
   var_0 = getaiarray("axis");
   common_scripts\utility::array_levelthread(var_0, maps\_utility::deleteent);
-  var_1 = getent("player_blackout_org", "targetname");
-  level.player setorigin(var_1.origin + (0, 0, -27000));
+  var_1 = getEnt("player_blackout_org", "targetname");
+  level.player setOrigin(var_1.origin + (0, 0, -27000));
   var_2 = getaiarray("allies");
   var_3 = getEntArray("ally_blackout_org", "targetname");
 
@@ -967,7 +967,7 @@ start_blackout() {
     var_2[var_4] teleport(var_3[var_4].origin, var_3[var_4].angles);
   }
 
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   thread blackout_house();
   common_scripts\_exploder::exploder(300);
 }
@@ -976,7 +976,7 @@ blackout_house() {
   maps\_utility::battlechatter_off("allies");
   objective_position(7, maps\blackout_code::informant_org());
   objective_ring(7);
-  var_0 = getent("blackout_path_block", "targetname");
+  var_0 = getEnt("blackout_path_block", "targetname");
   var_0 connectpaths();
   var_0 notsolid();
   common_scripts\utility::flag_wait("blackout_house_begins");
@@ -1068,11 +1068,11 @@ start_rescue() {
   maps\blackout_code::setup_player();
   var_0 = getaiarray("axis");
   common_scripts\utility::array_levelthread(var_0, maps\_utility::deleteent);
-  var_1 = getent("rescue_player_org", "targetname");
-  level.player setorigin(var_1.origin + (0, 0, -27000));
-  var_2 = getent("rescue_price_org", "targetname");
+  var_1 = getEnt("rescue_player_org", "targetname");
+  level.player setOrigin(var_1.origin + (0, 0, -27000));
+  var_2 = getEnt("rescue_price_org", "targetname");
   level.price teleport(var_2.origin);
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
   var_3 = getnode("gaz_door_dead_node", "targetname");
   level.gaz teleport(var_3.origin);
@@ -1087,7 +1087,7 @@ start_rescue() {
   level.price.goalradius = 32;
   level.gaz setgoalnode(var_3);
   level.gaz.goalradius = 32;
-  var_4 = getent("exit_door", "targetname");
+  var_4 = getEnt("exit_door", "targetname");
   var_4 thread maps\_utility::palm_style_door_open();
   common_scripts\_exploder::exploder(300);
 }
@@ -1102,15 +1102,15 @@ blackout_rescue() {
   common_scripts\utility::flag_set("blackhawk_spawn_start");
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname("rescue_blackhawk");
   var_0.script_disablevehicleaudio = 1;
-  var_1 = getent("rescue_heli_org", "targetname");
+  var_1 = getEnt("rescue_heli_org", "targetname");
   var_2 = spawn("script_model", var_0 gettagorigin("body_animate_jnt"));
   var_2 setModel("vehicle_blackhawk_sas_night_interior");
   var_2.angles = var_0.angles;
-  var_2 linkto(var_0, "body_animate_jnt");
-  var_3 = getent("blackhawk_collision", "targetname");
-  var_3 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_4 = getent("blackhawk_death_trigger", "targetname");
-  var_4 thread maps\_utility::manual_linkto(var_0, (0, 0, -50));
+  var_2 linkTo(var_0, "body_animate_jnt");
+  var_3 = getEnt("blackhawk_collision", "targetname");
+  var_3 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_4 = getEnt("blackhawk_death_trigger", "targetname");
+  var_4 thread maps\_utility::manual_linkTo(var_0, (0, 0, -50));
   var_4 thread maps\_vehicle::heli_squashes_stuff("blackhawk_lands");
   var_0.animname = "blackhawk";
   var_0 thread maps\_vehicle_code::rotor_anim();
@@ -1136,14 +1136,14 @@ blackout_rescue() {
 
   var_5 hide();
   var_0 maps\_anim::anim_first_frame_solo(var_5, "player_evac", "tag_detach");
-  var_5 linkto(var_0, "tag_detach");
+  var_5 linkTo(var_0, "tag_detach");
   common_scripts\utility::flag_wait("friendly_head_to_LZ");
   var_0 maps\_anim::anim_reach_solo(level.price, "evac", "tag_detach");
-  level.price linkto(var_0, "tag_detach");
+  level.price linkTo(var_0, "tag_detach");
   level.price maps\_headtracking::head_tracking_end();
   var_0 thread maps\_anim::anim_single_solo(level.price, "evac", "tag_detach");
   var_0 thread maps\blackout_code::price_evac_idle();
-  var_6 = getent("heli_rescue_trigger", "script_noteworthy");
+  var_6 = getEnt("heli_rescue_trigger", "script_noteworthy");
   var_6 common_scripts\utility::trigger_on();
   thread maps\blackout_code::player_jumps_into_heli();
   common_scripts\utility::flag_wait("player_gets_on_heli");
@@ -1171,8 +1171,8 @@ blackout_rescue() {
     var_0 thread maps\_anim::anim_single_solo(var_5, "player_evac", "tag_detach");
     thread h1_rescueclimbheli_viewclamp_seq();
     var_0 maps\_anim::anim_first_frame(var_8, "evac", "tag_detach");
-    level.gaz linkto(var_0, "tag_detach");
-    level.vip linkto(var_0, "tag_detach");
+    level.gaz linkTo(var_0, "tag_detach");
+    level.vip linkTo(var_0, "tag_detach");
     wait 1.5;
     var_0 thread maps\_anim::anim_single(var_8, "evac", "tag_detach");
     wait 5.5;
@@ -1215,6 +1215,6 @@ rescue_blackhawk_spotlight() {
   }
 
   self waittillmatch("single anim", "spot_path");
-  var_0 = getent("first_spotlight_org", "targetname");
+  var_0 = getEnt("first_spotlight_org", "targetname");
   thread maps\blackout_code::spot_target(var_0);
 }

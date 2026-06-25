@@ -361,7 +361,7 @@ function_2af9b775(planner, constants) {
 
   foreach(var_a1cd9f8e in blockers) {
     if(isDefined(var_a1cd9f8e) && getdvarint(#"hash_76cdb24d903cc201", 0)) {
-      recordline(getplayers()[0].origin, var_a1cd9f8e[#"origin"], (1, 0.5, 0), "<dev string:x101>");
+      recordline(getPlayers()[0].origin, var_a1cd9f8e[#"origin"], (1, 0.5, 0), "<dev string:x101>");
       recordsphere(var_a1cd9f8e[#"origin"], 4, (1, 0.5, 0), "<dev string:x10a>");
     }
 

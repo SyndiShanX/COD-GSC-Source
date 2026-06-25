@@ -84,12 +84,12 @@ trail_effect() {
   }
   if(isDefined(self.v["target"])) {
     println("*** Client Trail : target defined.");
-    temp_ent = GetEnt(0, self.v["target"], "targetname");
+    temp_ent = getEnt(0, self.v["target"], "targetname");
     if(isDefined(temp_ent)) {
       println("*** Client : Trail found target ent.");
       org = temp_ent.origin;
     } else {
-      temp_ent = GetStruct(self.v["target"], "targetname");
+      temp_ent = getStruct(self.v["target"], "targetname");
       org = temp_ent.origin;
     }
     if(isDefined(org)) {

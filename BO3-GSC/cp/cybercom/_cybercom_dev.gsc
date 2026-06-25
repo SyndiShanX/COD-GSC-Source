@@ -64,7 +64,7 @@ function cybercom_devguithink() {
       continue;
     }
     playernum = getdvarint("scr_player_number") - 1;
-    players = getplayers();
+    players = getPlayers();
     if(playernum >= players.size) {
       setDvar("devgui_cybercore", "");
       setDvar("devgui_cybercore_upgrade", "");

@@ -24,7 +24,7 @@ missilespawned(var_0, var_1) {
   if(var_7) {
     var_8 = var_6[0]["position"];
     var_9 = distance(var_8, var_3);
-    var_10 = vectornormalize(var_3 - var_8);
+    var_10 = vectorNormalize(var_3 - var_8);
     var_11 = var_8 + var_10 * 80;
   } else {
     var_9 = 1920;
@@ -49,12 +49,12 @@ missilespawned(var_0, var_1) {
   var_15 = spawn("script_model", var_3);
   var_15 setModel("prop_mp_super_blackholegun_projectile");
   var_15 setotherent(self);
-  var_15 moveto(var_11, var_14, 0.1, 0.95);
+  var_15 moveTo(var_11, var_14, 0.1, 0.95);
   var_15.owner = var_1.owner;
   var_15 setscriptmoverkillcam("rocket");
   var_10 = var_15.owner scripts\cp\utility::_launchgrenade("blackholegun_indicator_zm", self.origin, (0, 0, 0));
   var_10.weapon_name = "blackholegun_indicator_zm";
-  var_10 linkto(var_15);
+  var_10 linkTo(var_15);
   var_15 thread monitorprojectilearrive(var_14, self, var_10, var_2);
   var_1.owner thread scripts\cp\powers\coop_blackholegrenade::grabclosestzombies(var_15, 1);
   var_15 setscriptablepartstate("projectile", "on", 0);
@@ -99,7 +99,7 @@ ownerdisconnectcleanup(var_0) {
 
 makeblackholeimpulsefield(var_0) {
   var_1 = spawnimpulsefield(self.owner, "bhgunfield_mp", self.origin);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   return var_1;
 }
 
@@ -162,8 +162,8 @@ watchfordirectplayerdamage(var_0, var_1) {
   self.owner endon("disconnect");
   wait(0.1);
   var_2 = spawn("trigger_radius", self.origin - (0, 0, 32), 0, 24, 64);
-  var_2 enablelinkto();
-  var_2 linkto(self);
+  var_2 enablelinkTo();
+  var_2 linkTo(self);
   var_2 thread cleanuptrigger(self);
   for(;;) {
     var_2 waittill("trigger", var_3);
@@ -190,7 +190,7 @@ watchfordirectplayerdamage(var_0, var_1) {
 
     self notify("blackhole_projectile_impact");
     var_3 dodamage(var_3.maxhealth, self.origin, self.owner, self, "MOD_EXPLOSIVE", "iw7_blackholegun_mp");
-    self moveto(self.origin, 0.05, 0, 0);
+    self moveTo(self.origin, 0.05, 0, 0);
     thread projectilearrived(var_0, var_1);
     break;
   }

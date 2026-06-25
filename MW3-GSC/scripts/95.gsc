@@ -174,7 +174,7 @@ _id_2903() {
 
   foreach(var_4 in var_0) {
     if(var_4 != var_2) {
-      var_4 linkto(var_2);
+      var_4 linkTo(var_2);
     }
   }
 
@@ -184,7 +184,7 @@ _id_2903() {
     var_4 show();
 
     if(var_4 != var_2) {
-      var_4 linkto(var_8);
+      var_4 linkTo(var_8);
     }
   }
 
@@ -630,8 +630,8 @@ _id_2931(var_0) {
   var_0 maps\_utility::_id_2521();
 
   if(self vehicle_getspeed() < 1) {
-    var_0 linkto(self);
-    var_0 animscripted("hopinend", var_8, var_9, var_3[var_6]);
+    var_0 linkTo(self);
+    var_0 animScripted("hopinend", var_8, var_9, var_3[var_6]);
     var_0 waittillmatch("hopinend", "end");
     maps\_utility::_id_2683(var_0);
   }
@@ -1361,11 +1361,11 @@ _id_2959(var_0, var_1) {
 }
 
 _id_2964(var_0) {
-  var_1 = getent(var_0.script_linkto, "script_linkname");
+  var_1 = getEnt(var_0.script_linkto, "script_linkname");
   var_2 = !isDefined(var_1);
 
   if(!isDefined(var_1)) {
-    var_1 = common_scripts\utility::getstruct(var_0.script_linkto, "script_linkname");
+    var_1 = common_scripts\utility::getStruct(var_0.script_linkto, "script_linkname");
   }
   var_3 = var_0._id_2962;
 
@@ -1389,7 +1389,7 @@ _id_2964(var_0) {
       var_4 = [0.1, 0.2, 0.3];
       wait 1;
       var_1.origin = var_1.origin + (0, 0, -150);
-      var_1 moveto(var_1.origin + (0, 0, 150), 0.6, 0, 0);
+      var_1 moveTo(var_1.origin + (0, 0, 150), 0.6, 0, 0);
 
       foreach(var_6 in var_4) {
         if(!isDefined(self)) {
@@ -1420,7 +1420,7 @@ _id_2964(var_0) {
 _id_2965(var_0, var_1, var_2) {
   self setairresistance(30);
   self vehicle_setspeed(var_1, var_2, level._id_28F3);
-  _id_26A1(common_scripts\utility::getstruct(var_0, "targetname"));
+  _id_26A1(common_scripts\utility::getStruct(var_0, "targetname"));
 }
 
 _id_2966() {
@@ -1459,7 +1459,7 @@ _id_2969(var_0) {
     }
 
     if(!isDefined(var_1)) {
-      var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+      var_1 = common_scripts\utility::getStruct(self.target, "targetname");
     }
   }
 
@@ -1579,7 +1579,7 @@ _id_211F(var_0) {
 }
 
 _id_2975(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1._id_2644)) {
     return var_1._id_2644;
@@ -1593,7 +1593,7 @@ _id_2976() {
 }
 
 _id_2977(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1._id_2973)) {
     return var_1._id_2973;
@@ -1616,7 +1616,7 @@ _id_2978(var_0) {
   if(isDefined(var_2._id_2973)) {
     return var_2._id_2973;
   }
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   var_2 waittill("spawned", var_6);
   return var_6;
 }
@@ -1959,7 +1959,7 @@ _id_2990() {
       wait 0.05;
 
       if(!isDefined(self._id_2998) && !self isphysveh()) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
       _id_299C();
       wait 0.05;
@@ -1972,7 +1972,7 @@ _id_2990() {
       self notify("newpath");
 
       if(!isDefined(self._id_2998)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
       _id_2A74();
       _id_299C();
@@ -2009,7 +2009,7 @@ _id_2990() {
         if(!isDefined(self)) {
           return;
         }
-        self disconnectpaths();
+        self disconnectPaths();
         self notify("kill_badplace_forever");
         self kill();
         self notify("newpath");
@@ -2219,7 +2219,7 @@ _id_29D0(var_0, var_1, var_2) {
       self notify("deadstop");
 
       if(!isDefined(self._id_2998)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
       if(isDefined(self._id_29D1) && self._id_29D1 > 0) {
         self waittill("animsdone");
@@ -2230,7 +2230,7 @@ _id_29D0(var_0, var_1, var_2) {
       self notify("deadstop");
 
       if(!isDefined(self._id_2998)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
       if(isDefined(self._id_29D1) && self._id_29D1 > 0) {
         self waittill("animsdone");
@@ -2895,7 +2895,7 @@ _id_2A09() {
   while(isDefined(self)) {
     if(self vehicle_getspeed() < 1) {
       if(!isDefined(self._id_2998)) {
-        self disconnectpaths();
+        self disconnectPaths();
       } else {}
 
       self notify("speed_zero_path_disconnect");
@@ -3232,7 +3232,7 @@ _id_2A2A(var_0) {
   if(!isDefined(var_0.targetname)) {
     return 0;
   }
-  return isDefined(common_scripts\utility::getstruct(var_0.targetname, "targetname"));
+  return isDefined(common_scripts\utility::getStruct(var_0.targetname, "targetname"));
 }
 
 _id_2A2B(var_0) {
@@ -3326,9 +3326,9 @@ _id_2A33() {
     var_6 = spawnturret("misc_turret", (0, 0, 0), var_5._id_2A36);
 
     if(isDefined(var_5._id_2A37)) {
-      var_6 linkto(self, var_5.tag, var_5._id_2A37, (0, -1 * var_1, 0));
+      var_6 linkTo(self, var_5.tag, var_5._id_2A37, (0, -1 * var_1, 0));
     } else {
-      var_6 linkto(self, var_5.tag, (0, 0, 0), (0, -1 * var_1, 0));
+      var_6 linkTo(self, var_5.tag, (0, 0, 0), (0, -1 * var_1, 0));
     }
     var_6 setModel(var_5.model);
     var_6.angles = self.angles;
@@ -3913,7 +3913,7 @@ _id_2A71(var_0) {
 
 _id_2A72(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(var_0.origin - self.origin);
+  var_3 = vectorNormalize(var_0.origin - self.origin);
 
   if(vectordot(var_2, var_3) > 0.86) {
     self.health = self.health + int(var_1 * level._id_2A5D[self.vehicletype]);
@@ -3946,8 +3946,8 @@ _id_2994() {
   var_2 = var_1.radius * 2;
   var_3 = -1 * var_1.radius;
   var_4 = spawn("trigger_radius", self.origin + (0, 0, var_3), 0, var_1.radius, var_2);
-  var_4 enablelinkto();
-  var_4 linkto(self);
+  var_4 enablelinkTo();
+  var_4 linkTo(self);
   self._id_2991 = var_4;
   self endon("death");
 
@@ -4302,11 +4302,11 @@ _id_2A87(var_0) {
   var_1 = getvehiclenode(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   } else if(_id_21ED()) {}
 
   if(!isDefined(var_1)) {
-    var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   }
   return var_1;
 }
@@ -4455,7 +4455,7 @@ _id_2A8C(var_0) {
   }
   foreach(var_4, var_3 in self.mgturret) {
     var_3 unlink();
-    var_3 linkto(var_0, level._id_2A34[var_1][var_4].tag, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, level._id_2A34[var_1][var_4].tag, (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -4493,7 +4493,7 @@ _id_2A8D() {
 _id_2A8E(var_0) {
   var_1 = _id_2AB9();
   var_1 unlink();
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
 }
 
 _id_2A8F() {
@@ -4526,11 +4526,11 @@ _id_2A91(var_0) {
     var_2 unlink();
 
     if(isDefined(var_2._id_2A92)) {
-      var_2 linkto(var_0, var_2._id_2A92, var_2._id_2A94, var_2._id_2A93);
+      var_2 linkTo(var_0, var_2._id_2A92, var_2._id_2A94, var_2._id_2A93);
       continue;
     }
 
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
   }
 }
 
@@ -4575,7 +4575,7 @@ _id_2A96(var_0) {
       continue;
     }
     var_3 unlink();
-    var_3 linkto(var_0, var_4._id_24F2, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, var_4._id_24F2, (0, 0, 0), (0, 0, 0));
 
     if(isai(var_3)) {
       var_3 forceteleport(var_0 gettagorigin(var_4._id_24F2));
@@ -4756,23 +4756,23 @@ _id_2A9F(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_5)) {
     level thread common_scripts\utility::play_sound_in_space(var_5, var_11);
   }
-  var_7 linkto(var_28);
+  var_7 linkTo(var_28);
   var_0 useanimtree(var_4);
   var_7 useanimtree(var_4);
   var_0 thread _id_2AA2("tag_window_left_glass_fx", level._id_28F0["tankcrush"]["window_med"], "veh_glass_break_small", 0.2);
   var_0 thread _id_2AA2("tag_window_right_glass_fx", level._id_28F0["tankcrush"]["window_med"], "veh_glass_break_small", 0.4);
   var_0 thread _id_2AA2("tag_windshield_back_glass_fx", level._id_28F0["tankcrush"]["window_large"], "veh_glass_break_large", 0.7);
   var_0 thread _id_2AA2("tag_windshield_front_glass_fx", level._id_28F0["tankcrush"]["window_large"], "veh_glass_break_large", 1.5);
-  var_0 animscripted("tank_crush_anim", var_11, var_12, var_3);
-  var_7 animscripted("tank_crush_anim", var_28.origin, var_28.angles, var_2);
+  var_0 animScripted("tank_crush_anim", var_11, var_12, var_3);
+  var_7 animScripted("tank_crush_anim", var_28.origin, var_28.angles, var_2);
 
   if(var_6 != 1) {
     var_0 setflaggedanim("tank_crush_anim", var_3, 1, 0, var_6);
     var_7 setflaggedanim("tank_crush_anim", var_2, 1, 0, var_6);
   }
 
-  var_28 moveto(var_11, var_9, var_9 / 2, var_9 / 2);
-  var_28 rotateto(var_12, var_9, var_9 / 2, var_9 / 2);
+  var_28 moveTo(var_11, var_9, var_9 / 2, var_9 / 2);
+  var_28 rotateTo(var_12, var_9, var_9 / 2, var_9 / 2);
   wait(var_9);
   var_8 = var_8 - var_9;
   var_8 = var_8 - var_10;
@@ -4812,8 +4812,8 @@ _id_2A9F(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     thread maps\_utility::_id_2653(level.player, var_28, 0, 0, 1, var_8 / 2);
   }
 
-  var_28 moveto(var_28._id_2AA0, var_10, var_10 / 2, var_10 / 2);
-  var_28 rotateto(var_28._id_2AA1, var_10, var_10 / 2, var_10 / 2);
+  var_28 moveTo(var_28._id_2AA0, var_10, var_10 / 2, var_10 / 2);
+  var_28 rotateTo(var_28._id_2AA1, var_10, var_10 / 2, var_10 / 2);
   wait(var_10);
   self attachpath(var_1);
   common_scripts\utility::waitframe();
@@ -5084,7 +5084,7 @@ _id_2AB9() {
     var_0.angles = var_1.angles;
     var_0 notsolid();
     var_0 hide();
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
     self._id_2AB9 = var_0;
   } else {
     self._id_2AB9 setModel(self.model);
@@ -5358,7 +5358,7 @@ _id_2AD2(var_0) {
 }
 
 _id_2AD3(var_0) {
-  return common_scripts\utility::getstruct(var_0, "targetname");
+  return common_scripts\utility::getStruct(var_0, "targetname");
 }
 
 _id_2AD4(var_0) {
@@ -5371,11 +5371,11 @@ _id_2AD4(var_0) {
 }
 
 _id_2AD5(var_0) {
-  return common_scripts\utility::getstruct(var_0, "target");
+  return common_scripts\utility::getStruct(var_0, "target");
 }
 
 _id_2AD6(var_0) {
-  return getent(var_0, "target");
+  return getEnt(var_0, "target");
 }
 
 _id_2AD7(var_0) {
@@ -5383,7 +5383,7 @@ _id_2AD7(var_0) {
 }
 
 _id_2AD8(var_0) {
-  var_1 = getent(var_0.script_linkto, "script_linkname");
+  var_1 = getEnt(var_0.script_linkto, "script_linkname");
 
   if(!isDefined(var_1) || level.script == "hunted") {
     return;
@@ -5560,7 +5560,7 @@ _id_2AE1() {
     if(isDefined(var_2._id_164F)) {
       var_3._id_164F = var_2._id_164F;
     }
-    var_3 linkto(self, var_4, var_2.origin, var_2.angles);
+    var_3 linkTo(self, var_4, var_2.origin, var_2.angles);
 
     if(isDefined(var_2.destructible_type)) {
       var_3.destructible_type = var_2.destructible_type;
@@ -5580,19 +5580,19 @@ _id_2AE3(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   playFXOnTag(self._id_2AE2, var_1, "tag_origin");
 }
 
 _id_2974() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = _id_2AE4(var_0);
 
   if(isspawner(self)) {
     var_1.spawner = self;
   }
   if(isDefined(self.targetname)) {
-    var_2 = getent(self.targetname, "target");
+    var_2 = getEnt(self.targetname, "target");
 
     if(isspawner(var_2)) {
       var_1.spawner = var_2;
@@ -6299,7 +6299,7 @@ _id_2B0B(var_0, var_1, var_2) {
     maps\_utility::_id_13DE("guy2_in_" + var_2);
   }
   var_3 = _id_2B0A(var_0, var_2);
-  var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_5 = spawn("script_model", (0, 0, 0));
   var_5 setModel(self.model);
 

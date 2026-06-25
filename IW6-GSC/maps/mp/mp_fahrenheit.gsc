@@ -75,37 +75,37 @@ main() {
 }
 
 initExtraCollision() {
-  collision1 = GetEnt("clip128x128x8", "targetname");
+  collision1 = getEnt("clip128x128x8", "targetname");
   collision1Ent = spawn("script_model", (-2352, -1938, 512));
   collision1Ent.angles = (0, 0, 0);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
 
-  collision2 = GetEnt("clip32x32x256", "targetname");
+  collision2 = getEnt("clip32x32x256", "targetname");
   collision2Ent = spawn("script_model", (176, -2420, 848));
   collision2Ent.angles = (0, 0, 0);
   collision2Ent CloneBrushmodelToScriptmodel(collision2);
 
-  collision3 = GetEnt("clip32x32x256", "targetname");
+  collision3 = getEnt("clip32x32x256", "targetname");
   collision3Ent = spawn("script_model", (176, -2452, 848));
   collision3Ent.angles = (0, 0, 0);
   collision3Ent CloneBrushmodelToScriptmodel(collision3);
 
-  collision4 = GetEnt("clip32x32x256", "targetname");
+  collision4 = getEnt("clip32x32x256", "targetname");
   collision4Ent = spawn("script_model", (666, -1824, 868));
   collision4Ent.angles = (0, 0, 0);
   collision4Ent CloneBrushmodelToScriptmodel(collision4);
 
-  collision5 = GetEnt("clip256x256x8", "targetname");
+  collision5 = getEnt("clip256x256x8", "targetname");
   collision5Ent = spawn("script_model", (-1372, -3232, 784));
   collision5Ent.angles = (0, 0, 0);
   collision5Ent CloneBrushmodelToScriptmodel(collision5);
 
-  collision6 = GetEnt("clip64x64x256", "targetname");
+  collision6 = getEnt("clip64x64x256", "targetname");
   collision6Ent = spawn("script_model", (-1928, 624, 680));
   collision6Ent.angles = (0, 0, -90);
   collision6Ent CloneBrushmodelToScriptmodel(collision6);
 
-  collision7 = GetEnt("clip256x256x8", "targetname");
+  collision7 = getEnt("clip256x256x8", "targetname");
   collision7Ent = spawn("script_model", (-1808, 760, 648));
   collision7Ent.angles = (0, 0, 0);
   collision7Ent CloneBrushmodelToScriptmodel(collision7);
@@ -294,7 +294,7 @@ visiontest() {
   MAX_STAGES = 2;
   sign = -1;
 
-  level.skydome = GetEnt("skydome", "targetname");
+  level.skydome = getEnt("skydome", "targetname");
 
   {
     current_stage = current_stage + 1;

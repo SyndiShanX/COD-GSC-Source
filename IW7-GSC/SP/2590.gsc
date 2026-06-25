@@ -1204,7 +1204,7 @@ func_2307(var_0, var_1) {
     return;
   }
 
-  scripts\asm\asm_bb::bb_setanimscripted();
+  scripts\asm\asm_bb::bb_setanimScripted();
   self.asm.var_1FAC = var_1;
   self animcustom(var_0, ::func_2308);
   var_2 = self.asmname;
@@ -1215,7 +1215,7 @@ func_2307(var_0, var_1) {
 }
 
 func_2308() {
-  scripts\asm\asm_bb::bb_clearanimscripted();
+  scripts\asm\asm_bb::bb_clearanimScripted();
   if(!isDefined(self.asm.var_1FAC)) {
     return;
   }

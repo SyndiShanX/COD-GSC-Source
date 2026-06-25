@@ -304,7 +304,7 @@ function function_10d1e2b8(params) {
 function function_e6fcee54() {
   level.lazar = spawner::simple_spawn_single("lazar");
   level.lazar battlechatter::function_2ab9360b(0);
-  level.escape_vehicle = getent("escape_vehicle", "targetname");
+  level.escape_vehicle = getEnt("escape_vehicle", "targetname");
   level.var_fb380007 = [];
   level.var_fb380007[#"lazar"] = level.lazar;
   level.var_fb380007[#"escape_vehicle"] = level.escape_vehicle;
@@ -325,7 +325,7 @@ function function_77668431() {
   level.player endon(#"death");
   level flag::wait_till("escape_enable_car_interact");
   level.var_ea185900 = util::spawn_model("tag_origin");
-  level.var_ea185900 linkto(level.escape_vehicle, "tag_enter_passenger2", (-10, 11, 42), (0, 0, 0));
+  level.var_ea185900 linkTo(level.escape_vehicle, "tag_enter_passenger2", (-10, 11, 42), (0, 0, 0));
   level.var_ea185900 util::create_cursor_hint("tag_origin", undefined, #"hash_35327dad8881bb8f", undefined, 0.2, undefined, undefined, undefined, undefined, undefined, 0);
   level flag::set("escape_enable_car_interact_waypoint");
   level flag::wait_till("escape_car_interact_tag_obj_created");
@@ -340,8 +340,8 @@ function function_77668431() {
   level.player val::set("exfil", "disable_aim_assist", 1);
   setDvar(#"hash_3d9a09e7ecea2271", 0);
   snd::client_msg("exfil_car_enter");
-  level.lazar stopanimscripted();
-  level.escape_vehicle stopanimscripted();
+  level.lazar stopanimScripted();
+  level.escape_vehicle stopanimScripted();
   level thread function_1147675b();
   level thread namespace_82bfe441::fade(1, "FadeFast");
   level notify(#"hash_32e3ef5fcfcdd1");
@@ -589,7 +589,7 @@ function function_8346d62f() {
 
   foreach(clip in exfil_escape_cover_og_clip) {
     clip solid();
-    clip disconnectpaths();
+    clip disconnectPaths();
   }
 
   level flag::set("exfil_escape_cover_hidden");
@@ -601,7 +601,7 @@ function function_1f999428() {
 
   foreach(clip in exfil_escape_cover_clip) {
     clip solid();
-    clip disconnectpaths();
+    clip disconnectPaths();
   }
 
   exfil_escape_cover_og_clip = getEntArray("exfil_escape_cover_og_clip", "targetname");
@@ -630,19 +630,19 @@ function function_1f999428() {
 }
 
 function function_f58c4091() {
-  exfil_tunnel_exit_scissor_gate_right = getent("exfil_tunnel_exit_scissor_gate_right", "targetname");
+  exfil_tunnel_exit_scissor_gate_right = getEnt("exfil_tunnel_exit_scissor_gate_right", "targetname");
 
   if(isDefined(exfil_tunnel_exit_scissor_gate_right)) {
     exfil_tunnel_exit_scissor_gate_right delete();
   }
 
-  exfil_tunnel_exit_scissor_gate_left = getent("exfil_tunnel_exit_scissor_gate_left", "targetname");
+  exfil_tunnel_exit_scissor_gate_left = getEnt("exfil_tunnel_exit_scissor_gate_left", "targetname");
 
   if(isDefined(exfil_tunnel_exit_scissor_gate_left)) {
     exfil_tunnel_exit_scissor_gate_left delete();
   }
 
-  exfil_tunnel_exit_scissor_gate_clip = getent("exfil_tunnel_exit_scissor_gate_clip", "targetname");
+  exfil_tunnel_exit_scissor_gate_clip = getEnt("exfil_tunnel_exit_scissor_gate_clip", "targetname");
 
   if(isDefined(exfil_tunnel_exit_scissor_gate_clip)) {
     exfil_tunnel_exit_scissor_gate_clip delete();
@@ -787,61 +787,61 @@ function function_585f1d81() {
   array::delete_all(ents);
   ents = getEntArray("fake_basement_elevator", "targetname");
   array::delete_all(ents);
-  ent = getent("charkov_prison_door", "targetname");
+  ent = getEnt("charkov_prison_door", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("elevator_body_clip", "targetname");
+  ent = getEnt("elevator_body_clip", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("elevator_right_door_clip", "targetname");
+  ent = getEnt("elevator_right_door_clip", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("elevator_left_door_clip", "targetname");
+  ent = getEnt("elevator_left_door_clip", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("elevator_doorway_player_clip", "targetname");
+  ent = getEnt("elevator_doorway_player_clip", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("frisk_clip", "targetname");
+  ent = getEnt("frisk_clip", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("frisk_blocker", "targetname");
+  ent = getEnt("frisk_blocker", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("briefing_clip", "targetname");
+  ent = getEnt("briefing_clip", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("elevator", "targetname");
+  ent = getEnt("elevator", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("tutorial_chair", "targetname");
+  ent = getEnt("tutorial_chair", "targetname");
 
   if(isDefined(ent)) {
     ent delete();

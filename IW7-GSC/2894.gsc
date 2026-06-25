@@ -66,7 +66,7 @@ func_FE5E(var_0) {
   while(self cansee(var_1)) {
     var_2 = vectortoangles(var_1 getEye() - var_0.origin);
     var_2 = anglesToForward(var_2);
-    var_0 moveto(var_0.origin + var_2 * 12, 0.1);
+    var_0 moveTo(var_0.origin + var_2 * 12, 0.1);
     wait 0.1;
   }
 
@@ -79,7 +79,7 @@ func_FE5E(var_0) {
     var_5 = distance(var_0.origin, self.var_A8BB) / var_4;
 
     if(var_5 > 0) {
-      var_0 moveto(self.var_A8BB, var_5);
+      var_0 moveTo(self.var_A8BB, var_5);
       wait(var_5);
     }
 
@@ -90,9 +90,9 @@ func_FE5E(var_0) {
       var_7 = var_0.origin;
     }
 
-    var_0 moveto(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
+    var_0 moveTo(var_0.origin + var_2 * 80 + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait 3.5;
-    var_0 moveto(var_7 + var_2 * -20, 3, 1, 1);
+    var_0 moveTo(var_7 + var_2 * -20, 3, 1, 1);
   }
 
   wait(randomfloatrange(2.5, 4));

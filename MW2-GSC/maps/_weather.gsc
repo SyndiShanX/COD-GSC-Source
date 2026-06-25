@@ -327,7 +327,7 @@ thunder() {
   }
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = level.player.origin + (0, 0, 60);
-  ent linkto(level.player);
+  ent linkTo(level.player);
   if(level.rainlevel <= 8) {
     ent playSound("elm_thunder_distant", "sounddone");
   } else {

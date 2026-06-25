@@ -115,7 +115,7 @@ _id_3D33(var_0, var_1, var_2, var_3, var_4) {
   level endon("special_op_terminated");
   var_5 = spawn("script_model", self gettagorigin(var_4));
   var_5 setModel(var_3);
-  var_5 linkto(self, var_4, (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(self, var_4, (0, 0, 0), (0, 0, 0));
   common_scripts\utility::waittill_any("death", "long_death");
 
   if(!isDefined(self)) {

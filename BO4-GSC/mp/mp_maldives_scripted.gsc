@@ -25,7 +25,7 @@ __main__() {
 }
 
 on_game_playing() {
-  laser_trig = getent("laser_kill_trig", "targetname");
+  laser_trig = getEnt("laser_kill_trig", "targetname");
   laser_trig triggerenable(0);
   laser_trig callback::on_trigger(&function_7da97cb5);
   laser_button = struct::get("laser_button");
@@ -83,9 +83,9 @@ function_62a2843c(a_ents) {
   shark = a_ents[#"prop 1"];
   trigger = spawn("trigger_radius_new", shark gettagorigin("head_jnt") + (0, 0, -20), 0, 34, 38);
   trigger.shark = shark;
-  trigger triggerignoreteam();
-  trigger enablelinkto();
-  trigger linkto(shark);
+  trigger triggerIgnoreTeam();
+  trigger enablelinkTo();
+  trigger linkTo(shark);
   trigger callback::on_trigger(&function_9534b46c);
 }
 

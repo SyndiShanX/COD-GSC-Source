@@ -285,7 +285,7 @@ connection_enemy_angle(check_angle, compare_type) {
   }
 
   forward = anglesToForward(self.angles);
-  vec_to_enemy = vectornormalize(self.enemy.origin - self.origin);
+  vec_to_enemy = vectorNormalize(self.enemy.origin - self.origin);
   dot = vectordot(forward, vec_to_enemy);
   angle = acos(dot);
 

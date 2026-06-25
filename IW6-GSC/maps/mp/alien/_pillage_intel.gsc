@@ -245,13 +245,13 @@ intel_listener() {
     self.pillage_trigger setModel("tag_origin");
 
   thread toggle_usablity_on_distance();
-  self.pillage_trigger setcursorhint("HINT_NOICON");
+  self.pillage_trigger setCursorHint("HINT_NOICON");
   self.pillage_trigger makeusable();
 
   if(self.type == 1) {
-    self.pillage_trigger sethintstring(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
+    self.pillage_trigger setHintString(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
   } else {
-    self.pillage_trigger sethintstring(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
+    self.pillage_trigger setHintString(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
   }
 
   for(;;) {

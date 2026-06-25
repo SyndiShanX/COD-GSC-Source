@@ -33,8 +33,8 @@ elevator_setup(doors) {
 elevator_close_doors(doors, snd, speed) {
   snd playSound("elev_door_close");
 
-  doors["left"] DisconnectPaths();
-  doors["right"] DisconnectPaths();
+  doors["left"] disconnectPaths();
+  doors["right"] disconnectPaths();
 
   if(!isDefined(speed)) {
     speed = 14;
@@ -44,8 +44,8 @@ elevator_close_doors(doors, snd, speed) {
   dist = abs(Distance(doors["left"].open_pos, closed_pos));
   moveTime = dist / speed;
 
-  doors["left"] MoveTo(closed_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
-  doors["right"] MoveTo(closed_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
+  doors["left"] moveTo(closed_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
+  doors["right"] moveTo(closed_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
 
   doors["left"] waittill("movedone");
 }
@@ -61,8 +61,8 @@ elevator_open_doors(doors, snd) {
   dist = abs(Distance(doors["left"].open_pos, closed_pos));
   moveTime = (dist / speed) * 0.5;
 
-  doors["left"] MoveTo(doors["left"].open_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
-  doors["right"] MoveTo(doors["right"].open_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
+  doors["left"] moveTo(doors["left"].open_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
+  doors["right"] moveTo(doors["right"].open_pos, moveTime, moveTime * 0.1, moveTime * 0.25);
 
   doors["left"] waittill("movedone");
 }
@@ -248,7 +248,7 @@ player_DMS_ahead_test() {
 }
 
 lobby_sign() {
-  sign = GetEnt("intro_security_sign", "targetname");
+  sign = getEnt("intro_security_sign", "targetname");
 
   time1 = 1;
   time2 = 1;
@@ -281,8 +281,8 @@ elevator_floor_indicator() {
   lights["l1"] Hide();
 
   doors = [];
-  doors["left"] = GetEnt("intro_elevator_door_left", "targetname");
-  doors["right"] = GetEnt("intro_elevator_door_right", "targetname");
+  doors["left"] = getEnt("intro_elevator_door_left", "targetname");
+  doors["right"] = getEnt("intro_elevator_door_right", "targetname");
   elevator_setup(doors);
 
   snd = spawn("script_origin", doors["left"].close_pos);
@@ -375,7 +375,7 @@ lobby_people_create(data) {
   group = data[self.targetname];
 
   foreach(actor in group) {
-    spawner = GetEnt(actor["model"], "targetname");
+    spawner = getEnt(actor["model"], "targetname");
     spawner.count = 1;
 
     if(actor["anime"] == "airport_civ_in_line_6_C") {
@@ -454,7 +454,7 @@ lobby_people_logic() {
 
   node thread anim_generic(self, self.anime);
   wait .05;
-  self StopAnimScripted();
+  self StopanimScripted();
   node anim_generic_first_frame(self, self.anime);
 
   self thread do_lobby_player_fire();
@@ -471,7 +471,7 @@ lobby_people_logic() {
 
     wait self.deathtime;
 
-    self StopAnimScripted();
+    self StopanimScripted();
     self anim_generic(self, self._deathanim);
   } else
   if(self.anime == "airport_civ_in_line_6_C") {
@@ -577,7 +577,7 @@ lobby_generic_non_crawlers() {
   wait .5;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
 }
 
 lobby_generic_logic_crawlers() {
@@ -594,7 +594,7 @@ lobby_generic_logic_crawlers() {
   wait .5;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   if(self.script_noteworthy == "crawler2") {
     self DoDamage(1, level.player.origin);
@@ -707,7 +707,7 @@ running_civ_soundscape(array, alias) {
 
   while(array.size) {
     origin = get_average_origin(array);
-    obj MoveTo(origin + (0, 0, 64), time);
+    obj moveTo(origin + (0, 0, 64), time);
 
     wait time;
 
@@ -737,7 +737,7 @@ intro_security_run_die() {
 
   switch (self.script_animation) {
     case "airport_security_guard_2":
-      innerdoor = GetEnt("security_door_early", "targetname");
+      innerdoor = getEnt("security_door_early", "targetname");
       innerdoor ConnectPaths();
       innerdoor NotSolid();
 
@@ -761,7 +761,7 @@ intro_security_run_die() {
 
   self gun_remove();
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   node anim_generic_reach(self, self.script_animation);
 
@@ -773,9 +773,9 @@ intro_security_run_die() {
   self.noragdoll = true;
 
   if(self.script_animation == "airport_security_guard_2") {
-    door = GetEnt("lobby_security_door", "targetname");
-    model = GetEnt("lobby_security_door_model", "targetname");
-    model LinkTo(door);
+    door = getEnt("lobby_security_door", "targetname");
+    model = getEnt("lobby_security_door_model", "targetname");
+    model linkTo(door);
 
     door delayThread(.8, ::_rotateyaw, 60, .5, .05, .35);
   }
@@ -896,7 +896,7 @@ lobby_ai_new() {
     case "cliffhanger_capture_Price_idle":
       wait .5;
       self notify("stop_loop");
-      self StopAnimScripted();
+      self StopanimScripted();
       self.health = 1;
 
       self.allowdeath = 1;
@@ -906,7 +906,7 @@ lobby_ai_new() {
       time = GetAnimLength(getanim_generic("stand_2_run_L"));
       wait time - .2;
 
-      self StopAnimScripted();
+      self StopanimScripted();
       self bodyshot("bodyshot");
       self thread anim_generic(self, "run_pain_fallonknee");
 
@@ -950,7 +950,7 @@ lobby_ai_run() {
   }
   self endon("death");
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   self set_generic_run_anim_array("civ_run_array");
   reach = node.script_animation + "_reach";
@@ -984,7 +984,7 @@ lobby_ai_run() {
 
       node notify("stop_loop");
       self notify("stop_loop");
-      self StopAnimScripted();
+      self StopanimScripted();
       self.health = 1;
 
       self.allowdeath = 1;
@@ -1001,7 +1001,7 @@ lobby_ai_run() {
 
       node notify("stop_loop");
       self notify("stop_loop");
-      self StopAnimScripted();
+      self StopanimScripted();
       self.health = 1;
 
       self.allowdeath = 1;
@@ -1016,10 +1016,10 @@ lobby_ai_run() {
     case "unarmed_cowercrouch_idle":
       node notify("stop_loop");
       self notify("stop_loop");
-      self StopAnimScripted();
+      self StopanimScripted();
       self.health = 1;
 
-      node = getstruct(node.target, "targetname");
+      node = getStruct(node.target, "targetname");
       node anim_generic_reach(self, node.script_animation);
 
       self.IgnoreRandomBulletDamage = true;
@@ -1036,13 +1036,13 @@ lobby_ai_run() {
 
       node notify("stop_loop");
       self notify("stop_loop");
-      self StopAnimScripted();
+      self StopanimScripted();
       self.health = 1;
 
       self.allowdeath = true;
       self enable_exits();
 
-      node = getstruct(node.target, "targetname");
+      node = getStruct(node.target, "targetname");
       node anim_generic_reach(self, node.script_animation);
 
       self.IgnoreRandomBulletDamage = true;
@@ -1105,7 +1105,7 @@ lobby_open_fire(node) {
       break;
   }
 
-  self StopAnimScripted();
+  self StopanimScripted();
   self thread spray_and_pray(delay, speed, forward);
 
   wait time;
@@ -1127,7 +1127,7 @@ lobby_moveout_to_stairs_makarov(node) {
   delayThread(time + .75, ::fire_full_auto, .1, "stop_spray_and_pray");
 
   wait 1.5;
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self set_moveplaybackrate(1.15);
   self disable_arrivals();
@@ -1194,7 +1194,7 @@ lobby_moveout_to_stairs_saw(node) {
   delayThread(time, ::fire_full_auto, .1, "stop_spray_and_pray");
   delayThread(time + 4.5, ::send_notify, "stop_spray_and_pray");
 
-  self StopAnimScripted();
+  self StopanimScripted();
 
   thread follow_path(node);
 
@@ -1231,7 +1231,7 @@ lobby_moveout_to_stairs_m4(node) {
 
   wait 1;
 
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self disable_arrivals();
   self add_wait(::waittill_msg, "goal");
@@ -1282,7 +1282,7 @@ lobby_moveout_to_stairs_shotgun(node) {
   delayThread(time + 2, ::send_notify, "stop_spray_and_pray");
 
   delayThread(time + 1, ::enable_arrivals);
-  self StopAnimScripted();
+  self StopanimScripted();
 
   follow_path(node);
   flag_set("lobby_cleanup");
@@ -1431,7 +1431,7 @@ stairs_team_at_top(node) {
   delay = undefined;
   forward = undefined;
 
-  self StopAnimScripted();
+  self StopanimScripted();
   node = GetNode(node.target, "targetname");
   self OrientMode("face angle", node.angles[1]);
 
@@ -1525,7 +1525,7 @@ upperdeck_makarov_moveup(node) {
   self notify("stop_spray_and_pray");
   self.upperdeck_enemies--;
 
-  node = getstruct("stairs_mak_point", "script_noteworthy");
+  node = getStruct("stairs_mak_point", "script_noteworthy");
   self ent_flag_clear("massacre_ready");
 
   self add_wait(::waittill_msg, "reached_path_end");
@@ -1753,7 +1753,7 @@ upperdeck_runners_go() {
   }
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   if(self.script_animation == "airport_civ_cellphone_hide") {
     self thread anim_generic_run(self, "crouch_2run_L");
@@ -1775,7 +1775,7 @@ upperdeck_runners_go() {
 
 upperdeck_canned_deaths_setup(_flag) {
   if(isDefined(self.target)) {
-    mate = GetEnt(self.target, "targetname");
+    mate = getEnt(self.target, "targetname");
     mate thread upperdeck_canned_deaths_setup(_flag);
   }
 
@@ -1793,7 +1793,7 @@ upperdeck_canned_deaths_setup(_flag) {
       name = "civilian_male_suit";
     }
 
-    spawner = GetEnt(name, "targetname");
+    spawner = getEnt(name, "targetname");
     spawner.count = 1;
     drone = dronespawn(spawner);
   }
@@ -1897,7 +1897,7 @@ upperdeck_canned_deaths() {
 }
 
 upperdeck_canned_deaths_groupB_pull() {
-  mate = GetEnt(self.target, "targetname");
+  mate = getEnt(self.target, "targetname");
   self.deathanim = % airport_civ_dying_groupB_pull_death;
   mate.deathanim = % airport_civ_dying_groupB_wounded_death;
 
@@ -1916,7 +1916,7 @@ upperdeck_canned_deaths_groupB_pull() {
 }
 
 upperdeck_canned_deaths_groupA_kneel() {
-  mate = GetEnt(self.target, "targetname");
+  mate = getEnt(self.target, "targetname");
   mate.skipDeathAnim = 1;
   mate.noragdoll = 1;
   self.deathanim = % coverstand_death_right;
@@ -2007,7 +2007,7 @@ upperdeck_canned_deaths_group(mate, type) {
 
   if(IsSentient(self)) {
     self notify("stop_loop");
-    self StopAnimScripted();
+    self StopanimScripted();
 
     self follow_path(GetNode("upperdeck_escape_node", "targetname"));
   }
@@ -2054,7 +2054,7 @@ upperdeck_canned_deaths_single(type) {
 
   if(IsSentient(self)) {
     self notify("stop_loop");
-    self StopAnimScripted();
+    self StopanimScripted();
 
     self follow_path(GetNode("upperdeck_escape_node", "targetname"));
   }
@@ -2064,7 +2064,7 @@ upperdeck_canned_deaths_single(type) {
 upperdeck_canned_deaths_first_frame() {
   self.enode thread anim_generic(self, self.enode.animation);
   wait .05;
-  self StopAnimScripted();
+  self StopanimScripted();
   self.enode anim_generic_first_frame(self, self.enode.animation);
 }
 
@@ -2263,7 +2263,7 @@ upperdeck_canned_deaths_execute_fake_target(enemy, target) {
   while(1) {
     start = self GetTagOrigin("j_elbow_ri");
     end = enemy GetTagOrigin("tag_eye");
-    vec = VectorNormalize(end - start);
+    vec = vectorNormalize(end - start);
     vec = vector_multiply(vec, 80);
 
     origin = (start + vec);
@@ -2290,14 +2290,14 @@ upperdeck_canned_deaths_cleanup() {
 upperdeck_fakesound() {
   self waittill("trigger");
 
-  node = GetEnt(self.target, "targetname");
+  node = getEnt(self.target, "targetname");
 
   forward = anglesToForward(node.angles);
   end = node.origin + vector_multiply(forward, 512);
   time = 8;
 
   node playSound(self.script_soundalias);
-  node MoveTo(end, time);
+  node moveTo(end, time);
 
   wait time;
   node Delete();
@@ -2357,7 +2357,7 @@ cop_function(_flag, time) {
 massacre_rentacop_rush_main() {
   flag_wait("massacre_rentacop_rush");
 
-  node = getstruct(level.massacre_rush["cop"].target, "targetname");
+  node = getStruct(level.massacre_rush["cop"].target, "targetname");
 
   level.massacre_rush["cop"] gun_remove();
   level.massacre_rush["cop"] animscripts\shared::placeWeaponOn(level.massacre_rush["cop"].sidearm, "right");
@@ -2375,7 +2375,7 @@ massacre_rentacop_rush_main() {
 massacre_rentacop_rush_animate(guy, anime) {
   guy endon("death");
   guy notify("stop_loop");
-  guy StopAnimScripted();
+  guy StopanimScripted();
   wait .2;
   self anim_generic(guy, anime);
 
@@ -2419,7 +2419,7 @@ massacre_rentacop_rush_guy() {
     flag_set("massacre_rentacop_rush");
   }
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   switch (self.script_noteworthy) {
     case "cop":
@@ -2455,7 +2455,7 @@ massacre_rentacop_runaway_guy() {
   self.health = 1;
   self.allowdeath = 1;
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
   temp = spawnStruct();
   temp.origin = GetStartOrigin(node.origin, node.angles, getanim_generic("airport_security_guard_4"));
   temp.angles = GetStartAngles(node.origin, node.angles, getanim_generic("airport_security_guard_4"));
@@ -2467,7 +2467,7 @@ massacre_rentacop_runaway_guy() {
   wait 6;
 
   temp notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self.deathanim = % airport_security_guard_4_reaction;
   self.noragdoll = 1;
@@ -2491,7 +2491,7 @@ massacre_rentacop_row1_fighter() {
   self.IgnoreRandomBulletDamage = true;
   self.pathrandompercent = 0;
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
   self thread anim_generic_loop(self, "CornerCrL_alert_idle");
 
   flag_wait("massacre_rentacop_rush");
@@ -2499,7 +2499,7 @@ massacre_rentacop_row1_fighter() {
   wait 12;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self.oldprimary = self.primaryweapon;
   self forceUseWeapon(self.sidearm, "primary");
 
@@ -2533,7 +2533,7 @@ massacre_rentacop_row1_runner() {
   self.allowdeath = 1;
   self.pathrandompercent = 0;
 
-  node = getstruct("massacre_rentacop_row1_defender_node", "targetname");
+  node = getStruct("massacre_rentacop_row1_defender_node", "targetname");
   self thread anim_generic_loop(self, "CornerCrR_alert_idle");
 
   flag_wait("massacre_rentacop_rush");
@@ -2541,7 +2541,7 @@ massacre_rentacop_row1_runner() {
   wait 8;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self.oldprimary = self.primaryweapon;
   self forceUseWeapon(self.sidearm, "primary");
 
@@ -2590,7 +2590,7 @@ massacre_rentacop_row1_defender() {
   wait 9.5;
 
   node notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self.favoriteenemy = level.team["saw"];
   self.ignoreSuppression = 1;
   self AllowedStances("stand");
@@ -2607,7 +2607,7 @@ massacre_rentacop_row1_defender() {
 
   level.makarov waittill("m79_shot2");
 
-  origin = getstruct("massacre_m79_impact_2", "targetname");
+  origin = getStruct("massacre_m79_impact_2", "targetname");
   if(DistanceSquared(self.origin, origin.origin) > squared(100)) {
     return;
   }
@@ -2682,7 +2682,7 @@ massacre_rentacops_rear() {
     self.ignoreall = false;
     self AllowedStances("stand");
     self notify("stop_loop");
-    self StopAnimScripted();
+    self StopanimScripted();
     self.baseaccuracy = self.baseaccuracy * .3;
     self.accuracy = self.accuracy * .3;
   }
@@ -2695,7 +2695,7 @@ massacre_rentacops_rear() {
     self.ignoreall = false;
     self AllowedStances("stand");
     self notify("stop_loop");
-    self StopAnimScripted();
+    self StopanimScripted();
     self.baseaccuracy = self.baseaccuracy * .3;
     self.accuracy = self.accuracy * .3;
   }
@@ -2743,7 +2743,7 @@ massacre_rentacops_rear() {
     time = GetAnimLength(getGenericAnim(deathanim)) - .2;
     dettime = time - .4;
     time -= .45;
-    ent = getstruct("massacre_glass_shatter", "targetname");
+    ent = getStruct("massacre_glass_shatter", "targetname");
 
     level thread delayThread(dettime, ::_radiusdamage, ent.origin, 32, 2000, 2000);
     self thread grenade_death_scripted(node, deathanim, time);
@@ -2761,7 +2761,7 @@ grenade_death_scripted(node, deathanim, ragtime) {
 
   wait .05;
 
-  self StopAnimScripted();
+  self StopanimScripted();
   node.origin = self.origin;
   node thread anim_generic(self, deathanim);
 
@@ -2784,7 +2784,7 @@ massacre_rentacops_blindfire() {
 
     self notify("stop_loop");
 
-    self StopAnimScripted();
+    self StopanimScripted();
 
     self anim_generic(self, "covercrouch_blindfire_1");
 
@@ -2831,14 +2831,14 @@ massacre_rentacops_elevator_1() {
   wait 1;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self SetGoalNode(node);
   self waittill("goal");
 
   flag_wait("massacre_elevator_up");
   self.ignoreall = false;
 
-  self LinkTo(level.massacre_elevator.e["housing"]["mainframe"][0]);
+  self linkTo(level.massacre_elevator.e["housing"]["mainframe"][0]);
 
   flag_wait("massacre_elevator_at_top");
   self.goalradius = 100;
@@ -2847,7 +2847,7 @@ massacre_rentacops_elevator_1() {
 
   self Unlink();
 
-  node = getstruct("massacre_elevator_jump_node", "targetname");
+  node = getStruct("massacre_elevator_jump_node", "targetname");
   node.angles = (0, 90, 0);
 
   self.oldcontents = self SetContents(0);
@@ -2862,7 +2862,7 @@ massacre_rentacops_elevator_1() {
   self SetContents(self.oldcontents);
   self.allowdeath = true;
   node notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self playSound("airport_rmc2_scream1");
   node thread anim_generic(self, "corner_standL_explosion_B");
 
@@ -2894,7 +2894,7 @@ massacre_rentacops_elevator_2() {
   wait 2;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self SetGoalNode(node);
   self waittill("goal");
 
@@ -2903,7 +2903,7 @@ massacre_rentacops_elevator_2() {
   self.ignoreall = false;
   self.goalradius = 32;
 
-  self LinkTo(level.massacre_elevator.e["housing"]["mainframe"][0]);
+  self linkTo(level.massacre_elevator.e["housing"]["mainframe"][0]);
 
   self thread anim_generic_loop(self, "corner_standL_alert_idle");
 
@@ -2911,7 +2911,7 @@ massacre_rentacops_elevator_2() {
 
   self Unlink();
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   node = spawnStruct();
   node.origin = self.origin;
@@ -2941,7 +2941,7 @@ massacre_rentacops_elevator_3() {
   wait 3;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self SetGoalNode(node);
   self waittill("goal");
 
@@ -2952,7 +2952,7 @@ massacre_rentacops_elevator_3() {
   flag_wait("massacre_elevator_up");
   self.ignoreall = false;
 
-  self LinkTo(level.massacre_elevator.e["housing"]["mainframe"][0]);
+  self linkTo(level.massacre_elevator.e["housing"]["mainframe"][0]);
 
   self thread anim_generic_loop(self, "corner_standR_alert_idle");
   flag_wait("massacre_elevator_at_top");
@@ -2961,7 +2961,7 @@ massacre_rentacops_elevator_3() {
   self SetGoalPos(self.origin);
   self Unlink();
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   flag_wait("massacre_elevator_grenade_throw");
 
@@ -2973,7 +2973,7 @@ massacre_rentacops_elevator_3() {
 
   wait 1.35;
 
-  self StopAnimScripted();
+  self StopanimScripted();
   self thread anim_generic(self, "stand_2_run_F_2");
 
   flag_wait("massacre_elevator_grenade_exp");
@@ -2985,7 +2985,7 @@ massacre_rentacops_elevator_3() {
   }
   self set_allowdeath(false);
   self.noragdoll = true;
-  self StopAnimScripted();
+  self StopanimScripted();
   self thread anim_generic(self, "exposed_death_blowback");
 
   wait 1.55;
@@ -3032,7 +3032,7 @@ massacre_elevator() {
   wait .05;
 
   exploder(1);
-  struct = getstruct("elevator_pick", "targetname");
+  struct = getStruct("elevator_pick", "targetname");
   array = getEntArray("elevator_casing_glass", "targetname");
   glass = getClosest(struct.origin, array);
   glass Delete();
@@ -3078,7 +3078,7 @@ massacre_set_elevator_const(const) {
 }
 
 massacre_elevator_get() {
-  struct = getstruct("elevator_pick", "targetname");
+  struct = getStruct("elevator_pick", "targetname");
 
   elevator = level.elevators[0];
   dist = Distance(elevator.e["housing"]["mainframe"][0] GetOrigin(), struct.origin);
@@ -3108,7 +3108,7 @@ massacre_runners1() {
   wait 5;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self.IgnoreRandomBulletDamage = false;
   self.useChokePoints = false;
 
@@ -3130,8 +3130,8 @@ massacre_runners1() {
       wait 1;
 
       self notify("stop_loop");
-      self StopAnimScripted();
-      node = getstruct(self.target, "targetname");
+      self StopanimScripted();
+      node = getStruct(self.target, "targetname");
       node anim_generic(self, "civilian_run_hunched_flinch");
     } else {
       node = GetNode(self.target, "targetname");
@@ -3164,7 +3164,7 @@ massacre_runners2(scream) {
     level.massacre_runners2[level.massacre_runners2.size] = self;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self.IgnoreRandomBulletDamage = false;
   self.useChokePoints = false;
 
@@ -3181,7 +3181,7 @@ massacre_runners_m79_death() {
 
   level.makarov waittill("m79_shot2");
 
-  origin = getstruct("massacre_m79_impact_2", "targetname");
+  origin = getStruct("massacre_m79_impact_2", "targetname");
   if(DistanceSquared(self.origin, origin.origin) > squared(100)) {
     return;
   }
@@ -3238,7 +3238,7 @@ massacre_crawler() {
   self force_crawling_death(self.angles[1], 2, undefined, 1);
 
   flag_wait("massacre_elevator_grenade_exp");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self DoDamage(1, level.player.origin);
 }
@@ -3255,7 +3255,7 @@ massacre_civ_setup() {
       break;
   }
 
-  spawner = GetEnt(name, "targetname");
+  spawner = getEnt(name, "targetname");
   spawner.count = 1;
 
   drone = dronespawn(spawner);
@@ -3298,9 +3298,9 @@ massacre_civ_die() {
     level.team["m4"] ent_flag_wait("massacre_firing_into_crowd");
   }
 
-  timing_node = getstruct("massacre_random_timing", "targetname");
+  timing_node = getStruct("massacre_random_timing", "targetname");
   timing_node.origin = (2570, 3777, 144);
-  group_node = getstruct(node.target, "targetname");
+  group_node = getStruct(node.target, "targetname");
 
   dist2rd = squared(timing_node.radius);
   dist = DistanceSquared(timing_node.origin, group_node.origin);
@@ -3359,7 +3359,7 @@ massacre_node_flag(node) {
   self ent_flag_init("massacre_node_end");
 
   while(isDefined(node.target)) {
-    node = getstruct(node.target, "targetname");
+    node = getStruct(node.target, "targetname");
   }
 
   node waittill("trigger");
@@ -3616,7 +3616,7 @@ massacre_killers_saw2() {
 
   self.moveplaybackrate = 1.1;
 
-  target = GetEnt("massacre_civ_aim_node", "targetname");
+  target = getEnt("massacre_civ_aim_node", "targetname");
   target.health = 100;
 
   wait 2;
@@ -3716,7 +3716,7 @@ massacre_killers_shotgun(node) {
 
   wait 1;
 
-  trig = GetEnt("massacre_line_of_fire_trig", "targetname");
+  trig = getEnt("massacre_line_of_fire_trig", "targetname");
   trig thread player_line_of_fire("massacre_line_of_fire_done", level.team);
 
   add_wait(::trigger_wait_targetname, "massacre_line_of_fire_trig_final");
@@ -3739,7 +3739,7 @@ massacre_killers_shotgun(node) {
 }
 
 massacre_restaurant_destroy() {
-  roof = GetEnt("massacre_post_roof", "script_noteworthy");
+  roof = getEnt("massacre_post_roof", "script_noteworthy");
 
   poles = getEntArray("massacre_post_post_exp", "targetname");
   foreach(pole in poles) {
@@ -3760,7 +3760,7 @@ massacre_restaurant_destroy() {
 
     foreach(piece in pieces) {
       piece Show();
-      piece LinkTo(pole);
+      piece linkTo(pole);
     }
 
     pole Show();
@@ -3774,7 +3774,7 @@ massacre_restaurant_destroy() {
     pole RotatePitch(angle, time, 0, time);
   }
 
-  pole = GetEnt("massacre_post_pre_exp", "targetname");
+  pole = getEnt("massacre_post_pre_exp", "targetname");
   pole Delete();
 
   vec = anglesToForward((0, 180, 0));
@@ -3783,20 +3783,20 @@ massacre_restaurant_destroy() {
   array_levelcall(glass, ::destroyglass, vec);
 
   roof playSound("storefront_glass_pane_blowout");
-  pole = GetEnt("massacre_post_top", "script_noteworthy");
+  pole = getEnt("massacre_post_top", "script_noteworthy");
   pole playSound("storefront_wood_break");
 
-  sign = GetEnt("massacre_sign", "script_noteworthy");
+  sign = getEnt("massacre_sign", "script_noteworthy");
   sign PhysicsLaunchClient(sign.origin + (0, 50, 5), (50, 500, -100));
 
   wait 1;
   roof playSound("storefront_wood_collapse");
-  pole LinkTo(roof);
+  pole linkTo(roof);
 
   angles = (357.694 - 360, 3.01101, -13.3077);
   time = .7;
 
-  roof RotateTo(angles, time, time);
+  roof rotateTo(angles, time, time);
 
   foreach(pole in poles) {
     if(isDefined(pole.script_noteworthy)) {
@@ -3809,17 +3809,17 @@ massacre_restaurant_destroy() {
   wait time;
 
   time = .35;
-  roof RotateTo(angles * .7, time, 0, time);
+  roof rotateTo(angles * .7, time, 0, time);
   wait time - .05;
 
-  roof RotateTo(angles, time, time);
+  roof rotateTo(angles, time, time);
 
   wait time;
   time = .2;
-  roof RotateTo(angles * .9, time, 0, time);
+  roof rotateTo(angles * .9, time, 0, time);
   wait time;
 
-  roof RotateTo(angles, time, time);
+  roof rotateTo(angles, time, time);
 }
 
 massacre_killers_makarov(node) {
@@ -3834,7 +3834,7 @@ massacre_killers_makarov(node) {
 
   height = (0, 0, 10);
   self thread notify_delay("m79_shot", .15);
-  node = getstruct("massacre_m79_target_1", "targetname");
+  node = getStruct("massacre_m79_target_1", "targetname");
   self fire_thumper(node, height);
 
   wait 2.5;
@@ -3848,7 +3848,7 @@ massacre_killers_makarov(node) {
 
   height = (0, 0, 15);
   self thread notify_delay("m79_shot2", .15);
-  node = getstruct("massacre_m79_target_2", "targetname");
+  node = getStruct("massacre_m79_target_2", "targetname");
   self fire_thumper(node, height);
 
   wait .2;
@@ -3873,7 +3873,7 @@ massacre_killers_makarov(node) {
 
   height = (0, 0, 8);
   self thread notify_delay("m79_shot3", .2);
-  node = getstruct("massacre_m79_target_3", "targetname");
+  node = getStruct("massacre_m79_target_3", "targetname");
   self fire_thumper(node, height);
 
   self.moveplaybackrate = 1.1;
@@ -3913,7 +3913,7 @@ fire_thumper(node, height) {
 massacre_killers_makarov2() {
   wait 2;
 
-  target = GetEnt("massacre_civ_aim_node", "targetname");
+  target = getEnt("massacre_civ_aim_node", "targetname");
   target.health = 100;
 
   self thread fire_full_auto(.1, "stop_spray_and_pray");
@@ -4050,7 +4050,7 @@ massacre_killers_attack_civs(node) {
   }
 
   self thread massacre_lean_shoot_anims();
-  node = getstruct("massacre_civ_lobby_aim_node", "targetname");
+  node = getStruct("massacre_civ_lobby_aim_node", "targetname");
 
   self thread spray_and_pray_node(0, 4, node);
   self delayThread(1.5, ::massacre_killers_attack_civs_burst_fire);
@@ -4266,7 +4266,7 @@ gate_canned_deaths_execute(enemy, type) {
     target = spawn("script_origin", enemy.origin + (0, 0, 35));
     target.health = 100;
 
-    target LinkTo(enemy);
+    target linkTo(enemy);
   }
 
   self SetEntityTarget(target);
@@ -4375,7 +4375,7 @@ gate_runners1() {
   wait RandomFloat(1);
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self.interval = 50;
   self.IgnoreRandomBulletDamage = false;
@@ -4391,7 +4391,7 @@ gate_sliders() {
   self endon("death");
 
   gate_runners_setup();
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   anime = undefined;
   runanim = undefined;
@@ -4412,7 +4412,7 @@ gate_sliders() {
   wait 6.5;
 
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self.interval = 50;
   self.IgnoreRandomBulletDamage = false;
 
@@ -4445,15 +4445,15 @@ gate_klaxon_rotate() {
   wait RandomFloat(.5);
   time = RandomFloatRange(1, 1.15);
   while(1) {
-    self RotateYaw(360, time);
+    self rotateYaw(360, time);
     self waittill("rotatedone");
   }
 }
 
 gate_open_gate() {
   dist = 85;
-  gate1 = GetEnt("gate_gate_closing", "targetname");
-  gate2 = GetEnt("gate_gate_closing2", "targetname");
+  gate1 = getEnt("gate_gate_closing", "targetname");
+  gate2 = getEnt("gate_gate_closing2", "targetname");
 
   gate2 ConnectPaths();
 
@@ -4463,8 +4463,8 @@ gate_open_gate() {
 
 gate_close_gate() {
   dist = 85;
-  gate1 = GetEnt("gate_gate_closing", "targetname");
-  gate2 = GetEnt("gate_gate_closing2", "targetname");
+  gate1 = getEnt("gate_gate_closing", "targetname");
+  gate2 = getEnt("gate_gate_closing2", "targetname");
 
   time = 1.5;
   gate1 MoveZ(dist * -1, time);
@@ -4473,7 +4473,7 @@ gate_close_gate() {
   gate1 playSound("scn_airport_sec_gate_close");
 
   wait time * 2;
-  gate2 DisconnectPaths();
+  gate2 disconnectPaths();
 
   time = .1;
 
@@ -4562,7 +4562,7 @@ basement_makarov_speach() {
 
   wait 3.75;
   level.makarov notify("stop_animmode");
-  level.makarov StopAnimScripted();
+  level.makarov StopanimScripted();
 }
 
 basement_pre_moveout() {
@@ -4697,7 +4697,7 @@ tarmac_riotshield_group_van(_flag, vanname, name) {
     level notify("tarmac_riotshield_group_van_ready");
     return;
   }
-  node = getstruct(team[0].target, "targetname");
+  node = getStruct(team[0].target, "targetname");
   dir = anglesToForward(node.angles);
 
   group = group_create(team);
@@ -4748,7 +4748,7 @@ tarmac_riotshield_group_van_combine() {
     member enable_exits();
   }
 
-  node = getstruct("tarmac_riot_node_retreat1_group_van", "targetname");
+  node = getStruct("tarmac_riot_node_retreat1_group_van", "targetname");
   dir = anglesToForward(node.angles);
 
   group group_lock_angles(dir);
@@ -4770,9 +4770,9 @@ tarmac_riotshield_group_last_stand() {
   actors = array_combine(actors, get_living_ai_array("riotshield_group_3", "script_noteworthy"));
 
   nodes = [];
-  nodes["weak"] = getstruct("tarmac_riotshield_van2_retreat1", "targetname");
-  nodes["center"] = getstruct("tarmac_riotshield_consolodate_node", "targetname");
-  nodes["strong"] = getstruct("tarmac_riotshield_van1_retreat1", "targetname");
+  nodes["weak"] = getStruct("tarmac_riotshield_van2_retreat1", "targetname");
+  nodes["center"] = getStruct("tarmac_riotshield_consolodate_node", "targetname");
+  nodes["strong"] = getStruct("tarmac_riotshield_van1_retreat1", "targetname");
 
   tarmac_riotshield_group_last_stand_proc(actors, nodes);
 
@@ -4781,9 +4781,9 @@ tarmac_riotshield_group_last_stand() {
   actors = array_removeDead(actors);
 
   nodes = [];
-  nodes["weak"] = getstruct("tarmac_riotshield_last_stand_right", "targetname");
-  nodes["center"] = getstruct("tarmac_riotshield_last_stand_center", "targetname");
-  nodes["strong"] = getstruct("tarmac_riotshield_last_stand_left", "targetname");
+  nodes["weak"] = getStruct("tarmac_riotshield_last_stand_right", "targetname");
+  nodes["center"] = getStruct("tarmac_riotshield_last_stand_center", "targetname");
+  nodes["strong"] = getStruct("tarmac_riotshield_last_stand_left", "targetname");
 
   groups = tarmac_riotshield_group_last_stand_proc(actors, nodes);
 
@@ -4887,7 +4887,7 @@ tarmac_move_through_smoke() {
 
   node = GetNode(self.target, "targetname");
   if(!isDefined(node)) {
-    node = getstruct(self.target, "targetname");
+    node = getStruct(self.target, "targetname");
   }
 
   goal_type = undefined;
@@ -4989,19 +4989,19 @@ tarmac_riotshield_group(name) {
 
   flag_wait("tarmac_retreat1");
 
-  node = getstruct("tarmac_riot_node_retreat1_" + nodename, "targetname");
+  node = getStruct("tarmac_riot_node_retreat1_" + nodename, "targetname");
   group group_move(node.origin, dir);
   group thread tarmac_retreat_logic();
 
   flag_wait("tarmac_retreat2");
 
-  node = getstruct("tarmac_riot_node_retreat2_" + nodename, "targetname");
+  node = getStruct("tarmac_riot_node_retreat2_" + nodename, "targetname");
   group group_move(node.origin, dir);
   group thread tarmac_retreat_logic();
 
   flag_wait("tarmac_retreat3");
 
-  node = getstruct("tarmac_riot_node_retreat3_" + nodename, "targetname");
+  node = getStruct("tarmac_riot_node_retreat3_" + nodename, "targetname");
   group group_move(node.origin, dir);
   group thread tarmac_retreat_logic();
 }
@@ -5042,7 +5042,7 @@ tarmac_riotshield_group_3() {
 
   trigger_wait("tarmac_enemies_wave2", "target");
 
-  node = getstruct("tarmac_riot_node_group3", "targetname");
+  node = getStruct("tarmac_riot_node_group3", "targetname");
 
   wait .05;
 
@@ -5082,7 +5082,7 @@ tarmac_riotshield_group_3() {
 
   flag_wait("tarmac_advance4");
 
-  node = getstruct("tarmac_riot_node_group3_retreat1", "targetname");
+  node = getStruct("tarmac_riot_node_group3_retreat1", "targetname");
   dir = anglesToForward(node.angles);
   group group_lock_angles(dir);
   group group_initialize_formation(dir);
@@ -5277,7 +5277,7 @@ tarmac_sec_node_behavior_loop() {
 
   self.radius = 16;
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
   name = "walk";
 
   while(1) {
@@ -5288,7 +5288,7 @@ tarmac_sec_node_behavior_loop() {
     name = node.script_noteworthy;
     tarmac_sec_do_this_node(node, name);
 
-    node = getstruct(node.target, "targetname");
+    node = getStruct(node.target, "targetname");
   }
 }
 
@@ -5306,17 +5306,17 @@ tarmac_sec_node_logic_stand(node) {
   }
 
   self.ref notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self Unlink();
 }
 
 tarmac_sec_node_stand_idle() {
   self.ref.origin = self.origin;
   self.ref.angles = self.angles;
-  self LinkTo(self.ref);
+  self linkTo(self.ref);
 
   self ClearAnim(%body, 0.2);
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self SetFlaggedAnimKnobAllRestart("drone_anim", %pistol_stand_aim_5, %body, 1, 0.2, 1);
 }
@@ -5324,7 +5324,7 @@ tarmac_sec_node_stand_idle() {
 tarmac_sec_node_stand_update() {
   origin = (self.target_obj.origin[0], self.target_obj.origin[1], self.origin[2]);
   angles = VectorToAngles(origin - self.origin);
-  self.ref RotateTo(angles, .05);
+  self.ref rotateTo(angles, .05);
 }
 
 tarmac_sec_node_logic_walk(node) {
@@ -5360,7 +5360,7 @@ tarmac_sec_node_do_movement(node) {
   self tarmac_sec_node_goal(node);
 
   self ClearAnim(%body, 0.2);
-  self StopAnimScripted();
+  self StopanimScripted();
 }
 tarmac_sec_run_cycle(node) {
   self endon("death");
@@ -5368,19 +5368,19 @@ tarmac_sec_run_cycle(node) {
   self.target_obj endon("death");
 
   self ClearAnim(%body, 0.2);
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self SetFlaggedAnimKnobAllRestart("drone_anim", getanim_generic(self.run_anim), %body, 1, 0.2, self.moveplaybackrate * self.run_rate);
 
   angles = tarmac_sec_find_move_angles(node);
 
-  self RotateTo(angles, .2);
+  self rotateTo(angles, .2);
   wait .2;
 
   while(1) {
     angles = tarmac_sec_find_move_angles(node);
 
-    self RotateTo(angles, .2);
+    self rotateTo(angles, .2);
     wait .2;
   }
 }
@@ -5401,7 +5401,7 @@ tarmac_sec_find_move_angles(node) {
       angles = VectorToAngles((self.origin - node.origin));
       break;
     case "pistol_sprint":
-      angles = VectorToAngles(VectorNormalize(node.origin - self.origin));
+      angles = VectorToAngles(vectorNormalize(node.origin - self.origin));
       break;
   }
   return angles;
@@ -5511,7 +5511,7 @@ tarmac_handle_player_too_far() {
   flag_waitopen("friendly_fire_warning");
   level endon("friendly_fire_warning");
 
-  trigger = GetEnt("tarmac_player_too_far", "targetname");
+  trigger = getEnt("tarmac_player_too_far", "targetname");
 
   while(1) {
     trigger waittill("trigger");
@@ -5576,7 +5576,7 @@ tarmac_moveout(node) {
 
   wait 1.25;
 
-  self StopAnimScripted();
+  self StopanimScripted();
   self thread follow_path(node);
 
   node waittill("trigger");
@@ -5677,7 +5677,7 @@ handle_threat_bias_stuff() {
   SetIgnoreMeGroup("2ndfloorenemies", "underpass_guys");
   SetIgnoreMeGroup("underpass_guys", "2ndfloorenemies");
 
-  GetEnt("tarmac_threatbias_group", "targetname") thread handle_tarmac_threat_bias();
+  getEnt("tarmac_threatbias_group", "targetname") thread handle_tarmac_threat_bias();
 }
 
 tarmac_autosaves_wait() {
@@ -5765,7 +5765,7 @@ tarmac_get_enemies() {
 }
 
 tarmac_van_setup(name) {
-  van_hack = GetEnt(name, "targetname");
+  van_hack = getEnt(name, "targetname");
 
   tarmac_van_create();
   array_thread(getEntArray(van_hack.target, "targetname"), ::add_spawn_function, ::tarmac_van_attach_guy, self);
@@ -5795,7 +5795,7 @@ tarmac_van_attach_guy(van) {
 
 tarmac_van_guy_take_seat(van, index) {
   van.seats[index]["free"] = false;
-  self LinkTo(van.seats[index]["node"]);
+  self linkTo(van.seats[index]["node"]);
 
   if(index == 0) {
     van.seats[index]["node"] thread anim_generic_loop(self, "bm21_driver_idle");
@@ -5863,7 +5863,7 @@ tarmac_van_unload_guy(index, seat) {
   wait interval * .5;
 
   self.seats[index]["node"] notify("stop_loop");
-  guy StopAnimScripted();
+  guy StopanimScripted();
   guy.allowdeath = true;
 
   length = GetAnimLength(getGenericAnim(animation));
@@ -5871,7 +5871,7 @@ tarmac_van_unload_guy(index, seat) {
   if(index == 0) {
     movenode = spawn("script_origin", node.origin);
     movenode.angles = self.angles;
-    guy LinkTo(movenode);
+    guy linkTo(movenode);
 
     movenode thread anim_generic(guy, animation);
     wait .25;
@@ -5881,7 +5881,7 @@ tarmac_van_unload_guy(index, seat) {
 
     movenode = spawn("script_origin", node.origin + vector_multiply(forward, 16));
     movenode.angles = self.angles;
-    guy LinkTo(movenode);
+    guy linkTo(movenode);
 
     guy.moveplaybackrate = RandomFloatRange(.9, 1.1);
     movenode thread anim_generic(guy, animation);
@@ -5929,7 +5929,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = van.angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 1;
@@ -5937,7 +5937,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 2;
@@ -5945,7 +5945,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 3;
@@ -5953,7 +5953,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 4;
@@ -5961,7 +5961,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 5;
@@ -5969,7 +5969,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 6;
@@ -5977,7 +5977,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 7;
@@ -5985,7 +5985,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   i = 8;
@@ -5993,7 +5993,7 @@ tarmac_van_create() {
   van.seats[i] = [];
   van.seats[i]["node"] = spawn("script_origin", origin);
   van.seats[i]["node"].angles = angles;
-  van.seats[i]["node"] LinkTo(van);
+  van.seats[i]["node"] linkTo(van);
   van.seats[i]["free"] = true;
 
   van thread tarmac_van_wait_unload();
@@ -6084,12 +6084,12 @@ escape_van_mate() {
 
   van = level.escape_van_dummy;
   self.van_seat notify("stop_loop");
-  self LinkTo(van, "tag_body");
+  self linkTo(van, "tag_body");
   van thread anim_loop_solo(self, "end_ride_in", "stop_loop", "tag_body");
 }
 
 escape_van_setup(name) {
-  van_hack = GetEnt(name, "targetname");
+  van_hack = getEnt(name, "targetname");
 
   self tarmac_van_create();
   array_thread(getEntArray(van_hack.target, "targetname"), ::add_spawn_function, ::tarmac_van_attach_guy, self);
@@ -6141,8 +6141,8 @@ escape_setup_variables() {
 
   level notify("friendly_fire_stop_checking_for_player_fire");
 
-  doorR = GetEnt("ambulance_door_right", "targetname");
-  doorL = GetEnt("ambulance_door_left", "targetname");
+  doorR = getEnt("ambulance_door_right", "targetname");
+  doorL = getEnt("ambulance_door_left", "targetname");
   doorL ConnectPaths();
   doorR ConnectPaths();
 
@@ -6332,7 +6332,7 @@ escape_animate_player_death2() {
 
   van notify("stop_loop");
   van thread anim_single(team, "end_player_shot", "origin_animate_jnt");
-  level.makarov StopAnimScripted();
+  level.makarov StopanimScripted();
   level.makarov AnimCustom(::makarov_shoot_player);
 
   flag_wait("escape_player_shot");
@@ -6344,19 +6344,19 @@ escape_animate_player_death2() {
 
   level.player FreezeControls(true);
 
-  ent = getstruct("escape_ending_node", "targetname");
+  ent = getStruct("escape_ending_node", "targetname");
   origin = (level.player.origin[0], level.player.origin[1], ent.origin[2]) + (0, 0, 4.5);
   node = spawn("script_origin", origin);
   node.angles = level.player.angles;
 
   model = spawn_anim_model("player_ending");
   level.playermodel = model;
-  model LinkTo(node);
+  model linkTo(node);
   model NotSolid();
 
   angles = VectorToAngles(level.makarov.origin - level.player.origin);
 
-  node RotateTo((0, angles[1], 0), 1.5);
+  node rotateTo((0, angles[1], 0), 1.5);
   time = .1;
   level.player PlayerLinkToBlend(model, "tag_player", time, time * .5, time * .5);;
   node thread anim_single_solo(model, "end_player_shot_alt");
@@ -6393,7 +6393,7 @@ player_would_see_ending() {
   og2 = (level.player.origin[0], level.player.origin[1], 0);
 
   vec1 = anglesToForward(angles);
-  vec2 = VectorNormalize(og1 - og2);
+  vec2 = vectorNormalize(og1 - og2);
 
   dot = VectorDot(vec1, vec2) > 0.75;
   return dot;
@@ -6418,14 +6418,14 @@ escape_final_guys2() {
   self.ignoreme = true;
   self.dontEverShoot = true;
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   self set_generic_run_anim("patrol_jog");
 
   node anim_generic_reach(self, self.animation);
   node anim_generic_run(self, self.animation);
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   self clear_run_anim();
   self thread follow_path(node);
@@ -6439,7 +6439,7 @@ escape_final_guys2() {
   self disable_arrivals();
 
   if(flag("escape_player_realdeath")) {
-    node = getstruct("find_body", "script_noteworthy");
+    node = getStruct("find_body", "script_noteworthy");
     node waittill("trigger");
     node thread anim_generic(self, "patrol_boredrun_find");
   } else {
@@ -6659,7 +6659,7 @@ do_blood_notetracks() {
       case "headshot":
         origin = self GetTagOrigin("tag_eye");
         enemy = random(level.team);
-        vec = VectorNormalize(origin - enemy.origin);
+        vec = vectorNormalize(origin - enemy.origin);
 
         playFX(getfx("headshot"), origin, vec);
         break;
@@ -6670,7 +6670,7 @@ do_blood_notetracks() {
 bodyshot(fx) {
   origin = self GetTagOrigin("J_SpineUpper");
   enemy = random(level.team);
-  vec = VectorNormalize(enemy.origin - origin);
+  vec = vectorNormalize(enemy.origin - origin);
   vec = vector_multiply(vec, 10);
 
   playFX(getfx(fx), origin + vec);
@@ -6682,11 +6682,11 @@ scream_track(node, alias, speed) {
   obj playSound(alias);
 
   while(isDefined(node.target)) {
-    next = getstruct(node.target, "targetname");
+    next = getStruct(node.target, "targetname");
     dist = Distance(node.origin, next.origin);
     time = dist / speed;
 
-    obj MoveTo(next.origin, time);
+    obj moveTo(next.origin, time);
     wait time;
     node = next;
   }
@@ -6763,7 +6763,7 @@ spray_and_pray_move_target(array) {
     dist = Distance(array["node_origin"], array["target"].origin);
     time = dist / array["speed"];
 
-    array["target"] MoveTo(array["node_origin"], time, time * .1, time * .1);
+    array["target"] moveTo(array["node_origin"], time, time * .1, time * .1);
     wait time;
 
     if(array["node_origin"] == array["start_origin"]) {
@@ -6778,12 +6778,12 @@ spray_and_pray_move_target_node(array) {
   node = array["node"];
 
   while(1) {
-    node = getstruct(node.target, "targetname");
+    node = getStruct(node.target, "targetname");
 
     dist = Distance(node.origin, array["target"].origin);
     time = dist / array["speed"];
 
-    array["target"] MoveTo(node.origin, time, time * .1, time * .1);
+    array["target"] moveTo(node.origin, time, time * .1, time * .1);
     wait time;
   }
 }
@@ -6892,11 +6892,11 @@ ap_teleport_team(nodes) {
 teleport_actor(node) {
   link = spawn("script_origin", self.origin);
   link.angles = self.angles;
-  self LinkTo(link);
+  self linkTo(link);
 
-  link MoveTo(node.origin, .05);
+  link moveTo(node.origin, .05);
   if(isDefined(node.angles)) {
-    link RotateTo(node.angles, .05);
+    link rotateTo(node.angles, .05);
   }
 
   link waittill("movedone");
@@ -6951,7 +6951,7 @@ side_step(anime, angles) {
 
 side_step_stop() {
   self.sidestep = false;
-  self StopAnimScripted();
+  self StopanimScripted();
 }
 
 kill_player() {
@@ -7015,8 +7015,8 @@ player_line_of_fire(_flag, team) {
       foreach(member in team) {
         vec1a = anglesToForward(guy GetTagAngles("tag_flash"));
         vec2a = anglesToForward(member GetTagAngles("tag_flash"));
-        vec1b = VectorNormalize(level.player.origin - guy.origin);
-        vec2b = VectorNormalize(level.player.origin - member.origin);
+        vec1b = vectorNormalize(level.player.origin - guy.origin);
+        vec2b = vectorNormalize(level.player.origin - member.origin);
 
         if(VectorDot(vec1a, vec1b) < VectorDot(vec2a, vec2b)) {
           guy = member;
@@ -7441,7 +7441,7 @@ friendly_fire_kill_player() {
   self.moveplaybackrate = 1.1;
   self notify("stop_spray_and_pray");
   self notify("stop_loop");
-  self StopAnimScripted();
+  self StopanimScripted();
   self PushPlayer(false);
   self.fixednode = 0;
   self.fixednodewason = 0;
@@ -7532,7 +7532,7 @@ airport_vision_elevator() {
   SetSavedDvar("hud_gasMaskOverlay", 1);
   maps\_utility::set_vision_set("airport_green", 0);
 
-  level.player playerlinkto(node, undefined, 1, 0, 0, 0, 0, 0);
+  level.player playerlinkTo(node, undefined, 1, 0, 0, 0, 0, 0);
   SetSavedDvar("cg_fovscale", .3);
 
   wait 20;
@@ -7580,7 +7580,7 @@ airport_vision_elevator_black(node, angles) {
 
 airport_elev_black_shuffle1(introblack, node, angles) {
   node.angles = angles + (10, 20, 0);
-  node rotateyaw(7, 2);
+  node rotateYaw(7, 2);
 
   time = .25;
   introblack FadeOverTime(time);
@@ -7592,7 +7592,7 @@ airport_elev_black_shuffle1(introblack, node, angles) {
 
 airport_elev_black_shuffle2(introblack, node, angles) {
   node.angles = angles + (10, -7, 0);
-  node rotateyaw(-7, 2);
+  node rotateYaw(-7, 2);
 
   time = .25;
   introblack FadeOverTime(time);
@@ -7604,7 +7604,7 @@ airport_elev_black_shuffle2(introblack, node, angles) {
 
 airport_elev_black_click1(introblack, node, angles) {
   node.angles = angles + (15, -27, 0);
-  node rotateyaw(6, 2);
+  node rotateYaw(6, 2);
 
   time = .05;
   introblack FadeOverTime(time);
@@ -7616,7 +7616,7 @@ airport_elev_black_click1(introblack, node, angles) {
 
 airport_elev_black_click2(introblack, node, angles) {
   node.angles = angles + (7, 23, 0);
-  node rotateyaw(-5, 2);
+  node rotateYaw(-5, 2);
 
   time = .05;
   introblack FadeOverTime(time);
@@ -7629,7 +7629,7 @@ airport_elev_black_click2(introblack, node, angles) {
 airport_elev_black_cough(introblack, node, angles) {
   SetSavedDvar("cg_fovscale", .2);
   node.angles = angles + (0, 29, 0);
-  node rotateyaw(3, 2);
+  node rotateYaw(3, 2);
 
   time = .25;
   introblack FadeOverTime(time);
@@ -7854,7 +7854,7 @@ jet_engine_suck_debris(engine) {
   org1 = engine.suck_org.origin - (0, 0, 76);
   org2 = (self.origin[0], self.origin[1], org1[2]);
 
-  vec = VectorNormalize(self.origin - engine.suck_org.origin);
+  vec = vectorNormalize(self.origin - engine.suck_org.origin);
   if(VectorDot(vec, anglesToForward(engine.suck_org.angles)) < .4) {
     return;
   }
@@ -7869,7 +7869,7 @@ jet_engine_suck_debris(engine) {
     wait .1;
   }
 
-  dir = VectorNormalize(org1 - org2);
+  dir = vectorNormalize(org1 - org2);
   scale = 1;
   while(DistanceSquared(engine.suck_org.origin, self.origin) > pull) {
     scale *= 1.5;
@@ -7878,7 +7878,7 @@ jet_engine_suck_debris(engine) {
     }
 
     vec = vector_multiply(dir, scale);
-    self MoveTo((self.origin + vec), .1);
+    self moveTo((self.origin + vec), .1);
     self RotateVelocity((0, 300, 0), .1);
     wait .05;
   }
@@ -7889,7 +7889,7 @@ jet_engine_suck_debris(engine) {
 jet_engine_suck_debris_final(engine) {
   speed = 400;
   time = Distance(engine.suck_org.origin, self.origin) / speed;
-  self MoveTo(engine.suck_org.origin + (RandomFloatRange(-10, 10), RandomFloatRange(-10, 10), RandomFloat(10)), time);
+  self moveTo(engine.suck_org.origin + (RandomFloatRange(-10, 10), RandomFloatRange(-10, 10), RandomFloat(10)), time);
   self RotateVelocity((RandomIntRange(-650, -550), RandomIntRange(350, 450), RandomIntRange(50, 150)), time);
 
   wait time;
@@ -7934,15 +7934,15 @@ jet_engine_setup() {
 
   self.state = "new";
 
-  self.new = GetEnt(self.target, "targetname");
+  self.new = getEnt(self.target, "targetname");
   self.new setCanDamage(true);
 
-  self.des = GetEnt(self.new.target, "targetname");
+  self.des = getEnt(self.new.target, "targetname");
   self.des.destructible_type = "jet_engine";
   self.des Hide();
   self.des NotSolid();
 
-  self.fx = getstruct(self.des.target, "targetname");
+  self.fx = getStruct(self.des.target, "targetname");
 
   self thread jet_engine_take_damage(self);
   self.new thread jet_engine_take_damage(self);
@@ -7986,15 +7986,15 @@ glass_elevator_setup() {
 
   foreach(piece in elevator_glass) {
     house = getClosest(piece GetOrigin(), elevator_house);
-    piece LinkTo(house);
+    piece linkTo(house);
   }
   foreach(piece in elevator_model) {
     house = getClosest(piece.origin, elevator_house);
-    piece LinkTo(house);
+    piece linkTo(house);
   }
   foreach(piece in elevator_door_models) {
     door = getClosest(piece.origin, elevator_doors);
-    piece LinkTo(door);
+    piece linkTo(door);
   }
 
   wait .05;
@@ -8009,7 +8009,7 @@ glass_elevator_setup() {
     cable.wheels = [];
     foreach(item in wheels) {
       anchor = spawn("script_origin", item.origin);
-      item LinkTo(anchor);
+      item linkTo(anchor);
       cable.wheels[item.script_noteworthy] = anchor;
     }
   }
@@ -8021,7 +8021,7 @@ glass_elevator_cable() {
   cable = self;
 
   while(isDefined(cable.target)) {
-    cable = GetEnt(cable.target, "targetname");
+    cable = getEnt(cable.target, "targetname");
     cable Hide();
   }
 
@@ -8089,19 +8089,19 @@ glass_elevator_cable_down(housing, elevator) {
   if(!isDefined(self.target)) {
     return;
   }
-  next_cable = GetEnt(self.target, "targetname");
+  next_cable = getEnt(self.target, "targetname");
   next_cable thread glass_elevator_cable_down(housing, elevator);
 }
 
 attach_housing(housing) {
   self.og = self GetOrigin();
-  self LinkTo(housing);
+  self linkTo(housing);
   housing.last_cable = self;
 
   if(!isDefined(self.target)) {
     return;
   }
-  next_cable = GetEnt(self.target, "targetname");
+  next_cable = getEnt(self.target, "targetname");
   next_cable Show();
 }
 
@@ -8117,7 +8117,7 @@ glass_elevator_cable_up(housing, elevator) {
   if(self.targetname == "elevator_cable") {
     return;
   }
-  prev_cable = GetEnt(self.targetname, "target");
+  prev_cable = getEnt(self.targetname, "target");
   prev_cable thread glass_elevator_cable_up(housing, elevator);
 }
 
@@ -8127,7 +8127,7 @@ detach_housing(housing) {
   }
   self Unlink();
   time = .5;
-  self MoveTo(self.og, time);
+  self moveTo(self.og, time);
   wait time;
   self Hide();
 }
@@ -8213,7 +8213,7 @@ should_break_m203_hint(nothing) {
 van_opendoors() {
   self UseAnimTree(#animtree);
   self SetAnim(%airport_ending_open_doors);
-  sndent = GetEnt("escape_amb_door_snd", "targetname");
+  sndent = getEnt("escape_amb_door_snd", "targetname");
   sndent playSound("scn_ambulance_doors_open");
 }
 
@@ -8221,7 +8221,7 @@ van_closedoors() {
   self UseAnimTree(#animtree);
   self ClearAnim(%airport_ending_open_doors, .2);
   self SetAnim(%airport_ending_close_doors);
-  sndent = GetEnt("escape_amb_door_snd", "targetname");
+  sndent = getEnt("escape_amb_door_snd", "targetname");
 
   sndent delaycall(1, ::PlaySound, "scn_ambulance_doors_close");
   sndent delaycall(5.25, ::PlaySound, "scn_ambulance_doors_close");
@@ -8231,7 +8231,7 @@ music_sfx_to_music(alias, time, fade, timesfx) {
   level endon("stop_music");
 
   snd = spawn("script_origin", level.player.origin);
-  snd linkto(level.player);
+  snd linkTo(level.player);
   snd playSound(alias + "_sfx");
 
   snd thread music_sfx_to_music_kill();

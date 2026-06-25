@@ -389,7 +389,7 @@ function structs_code() {
   self.radiussq = self.radius * self.radius;
   playersinradius = [];
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = playersinradius.size - 1; i >= 0; i--) {
       player = playersinradius[i];
       if(!self is_player_in_radius(player)) {

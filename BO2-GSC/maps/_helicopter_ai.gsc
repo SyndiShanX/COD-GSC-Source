@@ -73,18 +73,18 @@ attack_target() {
   while(isDefined(self.cur_target)) {
     self setlookatent(self.cur_target);
     vec_to_attacker = self.cur_target.origin - self.origin;
-    vec_to_attacker = vectornormalize(vec_to_attacker);
+    vec_to_attacker = vectorNormalize(vec_to_attacker);
 
     if(self.cur_target isvehicle()) {
       driver = self.cur_target getseatoccupant(0);
 
       if(isDefined(driver)) {
         vec_to_attacker = vec_to_attacker - anglesToForward(driver getplayerangles());
-        vec_to_attacker = vectornormalize(vec_to_attacker);
+        vec_to_attacker = vectorNormalize(vec_to_attacker);
       }
     } else if(isPlayer(self.cur_target)) {
       vec_to_attacker = vec_to_attacker - anglesToForward(self.cur_target getplayerangles());
-      vec_to_attacker = vectornormalize(vec_to_attacker);
+      vec_to_attacker = vectorNormalize(vec_to_attacker);
     }
 
     right = vectorcross(vec_to_attacker, (0, 0, 1));
@@ -102,8 +102,8 @@ attack_target() {
 }
 
 helicopter_fire_rockets() {
-  self setgunnertargetent(self.cur_target, vectorscale((0, 0, 1), 20.0), 0);
-  self setgunnertargetent(self.cur_target, vectorscale((0, 0, 1), 20.0), 1);
+  self setgunnertargetEnt(self.cur_target, vectorscale((0, 0, 1), 20.0), 0);
+  self setgunnertargetEnt(self.cur_target, vectorscale((0, 0, 1), 20.0), 1);
   self firegunnerweapon(0);
   self firegunnerweapon(1);
 }

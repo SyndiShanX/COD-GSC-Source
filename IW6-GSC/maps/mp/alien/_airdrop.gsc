@@ -73,15 +73,15 @@ escape() {
   icon.y = nuke_trig.origin[1];
   icon.z = nuke_trig.origin[2];
 
-  nuke_trig SetCursorHint("HINT_ACTIVATE");
+  nuke_trig setCursorHint("HINT_ACTIVATE");
 
   level thread players_use_nuke_monitor(nuke_trig);
 
   if(isDefined(level.players) && level.players.size > 1) {
-    nuke_trig SetHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_NUKE");
+    nuke_trig setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_NUKE");
     IPrintLnBold(&"ALIEN_COLLECTIBLES_NUKE_ACTIVATE_USE");
   } else {
-    nuke_trig SetHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_NUKE_SOLO");
+    nuke_trig setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_NUKE_SOLO");
     IPrintLnBold(&"ALIEN_COLLECTIBLES_NUKE_ACTIVATE_USE_SOLO");
   }
 
@@ -91,7 +91,7 @@ escape() {
 
   level thread maps\mp\alien\_music_and_dialog::playVOForNukeArmed();
 
-  escape_ent = getent("escape_zone", "targetname");
+  escape_ent = getEnt("escape_zone", "targetname");
   if(isDefined(level.rescue_waypoint)) {
     level.rescue_waypoint destroy();
   }
@@ -112,8 +112,8 @@ escape() {
 
   icon destroy();
   nuke_trig MakeUnUsable();
-  nuke_trig SetCursorHint("HINT_ACTIVATE");
-  nuke_trig SetHintString("");
+  nuke_trig setCursorHint("HINT_ACTIVATE");
+  nuke_trig setHintString("");
   nuke_trig delete();
 
   escape_start_time = getTime();
@@ -141,8 +141,8 @@ players_use_nuke_monitor(nuke_trig) {
 rescue_think(escape_start_time) {
   level endon("game_ended");
 
-  escape_ent = getent("escape_zone", "targetname");
-  chopper_struct = getstruct(escape_ent.target, "targetname");
+  escape_ent = getEnt("escape_zone", "targetname");
+  chopper_struct = getStruct(escape_ent.target, "targetname");
   chopper_loc = chopper_struct.origin;
   chopper_angles = chopper_struct.angles;
 
@@ -203,7 +203,7 @@ fly_to_extraction_on_trigger() {
   level endon("nuke_went_off");
   self endon("death");
 
-  fly_to_extraction_trigger = getent("fly_to_extraction_trig", "targetname");
+  fly_to_extraction_trigger = getEnt("fly_to_extraction_trig", "targetname");
   while(1) {
     fly_to_extraction_trigger waittill("trigger", owner);
     if(isPlayer(owner)) {
@@ -278,7 +278,7 @@ watch_player_escape(escape_ent, escape_start_time) {
 
   escape_time_remains = get_escape_time_remains(escape_start_time);
 
-  teleport_struct = getstruct("player_teleport_loc", "targetname");
+  teleport_struct = getStruct("player_teleport_loc", "targetname");
   teleport_loc = teleport_struct.origin;
 
   foreach(player in players_escaped) {
@@ -357,7 +357,7 @@ player_blend_to_chopper() {
 
   wait 0.6;
 
-  self PlayerLinkTo(level.rescue_heli, position, 1, 50, 50, 18, 30, false);
+  self PlayerlinkTo(level.rescue_heli, position, 1, 50, 50, 18, 30, false);
 
   self thread force_crouch(true);
   self allowJump(false);
@@ -386,7 +386,7 @@ play_nuke_rumble(delay) {
   wait delay;
   foreach(player in level.players) {
     Earthquake(0.33, 4, player.origin, 1000);
-    player PlayRumbleOnEntity("heavy_3s");
+    player playRumbleOnEntity("heavy_3s");
   }
 }
 
@@ -715,10 +715,10 @@ call_in_rescue_heli(drop_loc, drop_angles, player_loops) {
   level.rescue_heli.drop_loc = drop_loc;
   level.rescue_heli.exit_path = [];
 
-  cur_node = getstruct("heli_extraction_start", "targetname");
+  cur_node = getStruct("heli_extraction_start", "targetname");
   level.rescue_heli.exit_path[0] = cur_node;
   while(isDefined(cur_node.target)) {
-    cur_node = getstruct(cur_node.target, "targetname");
+    cur_node = getStruct(cur_node.target, "targetname");
     level.rescue_heli.exit_path[level.rescue_heli.exit_path.size] = cur_node;
   }
 
@@ -1043,7 +1043,7 @@ get_assault_loop_loc() {
   assert(isDefined(level.cycle_count));
 
   loop_struct_name = "assault_loop_" + maps\mp\alien\_hive::get_blocker_hive_index();
-  loop_struct = getstruct(loop_struct_name, "targetname");
+  loop_struct = getStruct(loop_struct_name, "targetname");
 
   if(flag_exist("evade") && flag("evade")) {
     return loop_struct.origin + (0, 0, 600);
@@ -1632,7 +1632,7 @@ sfx_rescue_heli_flyin(heli) {
   heli Vehicle_TurnEngineOff();
   wait 1.6;
   level.heli_lp = spawn("script_origin", heli.origin);
-  level.heli_lp LinkTo(heli);
+  level.heli_lp linkTo(heli);
   level.heli_lp playLoopSound("alien_heli_rescue_dz_engine_lp");
 }
 
@@ -1644,7 +1644,7 @@ sfx_rescue_heli_escape(heli) {
 
   wait 5;
   level.heli_exfil_lp = spawn("script_origin", heli.origin);
-  level.heli_exfil_lp LinkTo(heli);
+  level.heli_exfil_lp linkTo(heli);
   level.heli_exfil_lp playLoopSound("alien_heli_exfil_engine_lp");
 
   wait 18;

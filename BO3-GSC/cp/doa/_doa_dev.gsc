@@ -17,7 +17,7 @@
 function function_40206fdf() {
   level endon("hash_1684cf71");
   while(true) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     wait(0.05);
     if(level.var_cee29ae7 != 1 || !isDefined(player)) {
       continue;
@@ -244,7 +244,7 @@ function function_a3bba13d() {
       level.botcount--;
       doa_utility::debugmsg("Bot is being removed. Count=" + level.botcount);
     } else if(level.botcount < 3 && randomint(100) > 70) {
-      if(getplayers().size < 4) {
+      if(getPlayers().size < 4) {
         adddebugcommand("set devgui_bot add");
         level.botcount++;
         doa_utility::debugmsg("Bot is being added.Count=" + level.botcount);
@@ -254,7 +254,7 @@ function function_a3bba13d() {
       i = 0;
       foreach(guy in namespace_831a4a7c::function_5eb6e4d1()) {
         if(guy arecontrolsfrozen() == 0) {
-          guy setorigin(level.doa.var_b1698a42.var_cadf4b04[i].origin);
+          guy setOrigin(level.doa.var_b1698a42.var_cadf4b04[i].origin);
           i++;
         }
       }
@@ -297,7 +297,7 @@ function function_f24eee41() {
   level endon("hash_da8786df");
   lockspot = self.origin;
   while(true) {
-    self setorigin(lockspot);
+    self setOrigin(lockspot);
     wait(0.05);
   }
 }
@@ -389,7 +389,7 @@ function devguithink() {
         level clientfield::set("debugCamera", level.var_cee29ae7);
         level notify("hash_da8786df");
         if(level.var_cee29ae7 == 1) {
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             player thread function_f24eee41();
           }
         }
@@ -615,7 +615,7 @@ function function_5e6b8376(origin, radius, time, color = (0, 1, 0)) {
     plotpoints = [];
     rad = 0;
     wait(hangtime);
-    players = getplayers();
+    players = getPlayers();
     angletoplayer = vectortoangles(origin - players[0].origin);
     for(i = 0; i < circleres; i++) {
       plotpoints[plotpoints.size] = (origin + (vectorscale(anglesToForward(angletoplayer + (rad, 90, 0)), radius))) + vectorscale((0, 0, 1), 12);

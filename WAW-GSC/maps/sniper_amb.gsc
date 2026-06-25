@@ -23,18 +23,18 @@ sound_follow_plane(planes, offset) {
   org2 playSound("bombers_low_right");
 
   while(isDefined(planes)) {
-    org1 MoveTo(planes.origin + offset, (0.25, 0, 0));
-    org2 MoveTo(planes.origin + offset, (0.00, 0.25, 0));
+    org1 moveTo(planes.origin + offset, (0.25, 0, 0));
+    org2 moveTo(planes.origin + offset, (0.00, 0.25, 0));
     wait(0.25);
   }
 }
 plane_shockwave() {
   self endon("death");
 
-  origin_left = getent("bombers_low_left", "targetname");
-  origin_right = getent("bombers_low_right", "targetname");
-  target_left = getent(origin_left.target, "targetname");
-  target_right = getent(origin_right.target, "targetname");
+  origin_left = getEnt("bombers_low_left", "targetname");
+  origin_right = getEnt("bombers_low_right", "targetname");
+  target_left = getEnt(origin_left.target, "targetname");
+  target_right = getEnt(origin_right.target, "targetname");
 
   while(distancesquared(origin_left.origin, self.origin) > 8000 * 8000) {
     wait(0.1);
@@ -46,8 +46,8 @@ plane_shockwave() {
   ent1 playSound("bombers_low_left", "sound_done");
   ent2 playSound("bombers_low_right", "sound_done");
 
-  ent1 moveto(target_left.origin, 25);
-  ent2 moveto(target_right.origin, 25);
+  ent1 moveTo(target_left.origin, 25);
+  ent2 moveTo(target_right.origin, 25);
 
   ent1 waittill("sound_done");
   ent1 delete();
@@ -94,14 +94,14 @@ mph_to_ups(mph) {
   distance_to_play_sound = ups * seconds_before_plane_overhead;
 }
 play_fire_sounds() {
-  playsoundatposition("fire_ignite", (0, 0, 0));
+  playSoundAtPosition("fire_ignite", (0, 0, 0));
   fire_sounds = getEntArray("fire_origin", "targetname");
   for(i = 0; i < fire_sounds.size; i++) {
     fire_sounds[i] playLoopSound("large_fire_building");
   }
 }
 play_clock_sounds() {
-  level.clock = getstruct("clock_origin", "targetname");
+  level.clock = getStruct("clock_origin", "targetname");
 
   ent_clock = spawn("script_origin", level.clock.origin);
   ent_clock playLoopSound("amb_clock_tick_scripted");
@@ -144,7 +144,7 @@ play_distant_bombs(time) {
   number_of_bombs_counter = 0;
   while(number_of_bombs_counter < number_of_bombs) {
     number_of_bombs_counter = number_of_bombs_counter + 1;
-    playsoundatposition("bomb_far_scripted", (-3059, -4365, 272));
+    playSoundAtPosition("bomb_far_scripted", (-3059, -4365, 272));
     wait(randomfloatrange(0.2, 4));
   }
 }
@@ -165,10 +165,10 @@ player_air_raid_timer() {
   }
 }
 play_ambient_planes(number_of_planes) {
-  origin_left = getent("bombers_low_left", "targetname");
-  origin_right = getent("bombers_low_right", "targetname");
-  target_left = getent(origin_left.target, "targetname");
-  target_right = getent(origin_right.target, "targetname");
+  origin_left = getEnt("bombers_low_left", "targetname");
+  origin_right = getEnt("bombers_low_right", "targetname");
+  target_left = getEnt(origin_left.target, "targetname");
+  target_right = getEnt(origin_right.target, "targetname");
 
   for(i = 0; i < number_of_planes; i++) {
     wait(2);
@@ -178,8 +178,8 @@ play_ambient_planes(number_of_planes) {
     ent1 playSound("bombers_low_left_scripted", "sound_done");
     ent2 playSound("bombers_low_left_scripted", "sound_done");
 
-    ent1 moveto(target_left.origin, 25);
-    ent2 moveto(target_right.origin, 25);
+    ent1 moveTo(target_left.origin, 25);
+    ent2 moveTo(target_right.origin, 25);
 
     ent1 waittill("sound_done");
     ent1 delete();
@@ -200,6 +200,6 @@ play_random_crow_sounds(crow) {
 play_quad_fly() {
   while(1) {
     wait(randomintrange(10, 60));
-    playsoundatposition("quad_fly", (0, 0, 0));
+    playSoundAtPosition("quad_fly", (0, 0, 0));
   }
 }

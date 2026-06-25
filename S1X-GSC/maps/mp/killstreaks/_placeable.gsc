@@ -503,7 +503,7 @@ createBombSquadModel(streakName) {
 
     bombSquadModel thread maps\mp\gametypes\_weapons::bombSquadVisibilityUpdater(self.owner);
     bombSquadModel setModel(config.modelBombSquad);
-    bombSquadModel LinkTo(self);
+    bombSquadModel linkTo(self);
     bombSquadModel SetContents(0);
     self.bombSquadModel = bombSquadModel;
 

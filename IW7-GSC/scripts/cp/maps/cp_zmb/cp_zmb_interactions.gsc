@@ -234,13 +234,13 @@ give_player_cryobomb(var_0, var_1) {
 }
 
 init_cryobomb() {
-  var_0 = scripts\engine\utility::getstruct("zfreeze_semtex_mp", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("zfreeze_semtex_mp", "script_noteworthy");
   var_0.randomintrange = var_0.trigger;
   var_0.randomintrange.hint_string = level.interaction_hintstrings["zfreeze_semtex_mp"];
 }
 
 init_cryobomb() {
-  var_0 = scripts\engine\utility::getstruct("iw7_forgefreeze_zm+forgefreezealtfire", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("iw7_forgefreeze_zm+forgefreezealtfire", "script_noteworthy");
   var_0.randomintrange = var_0.trigger;
   var_0.randomintrange.hint_string = level.interaction_hintstrings["iw7_forgefreeze_zm"];
 }

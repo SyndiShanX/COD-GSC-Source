@@ -379,7 +379,7 @@ function killedcustomtraversallistener() {
   self waittill("death");
   if(isDefined(self)) {
     self finishtraversal();
-    self stopanimscripted();
+    self stopanimScripted();
     self unlink();
   }
 }
@@ -393,9 +393,9 @@ function codecallback_playcustomtraversal(entity, beginparent, endparent, origin
   entity orientmode("face angle", angles[1]);
   if(isDefined(endparent)) {
     offset = entity.origin - endparent.origin;
-    entity linkto(endparent, "", offset);
+    entity linkTo(endparent, "", offset);
   }
-  entity animscripted("custom_traversal_anim_finished", origin, angles, animhandle, animmode, undefined, playbackspeed, goaltime, lerptime);
+  entity animScripted("custom_traversal_anim_finished", origin, angles, animhandle, animmode, undefined, playbackspeed, goaltime, lerptime);
   entity thread finishcustomtraversallistener();
   entity thread killedcustomtraversallistener();
 }

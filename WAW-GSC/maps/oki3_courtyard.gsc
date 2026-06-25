@@ -51,7 +51,7 @@ courtyard_upstairs_dialog() {
 courtyard_objectives() {
   objective_add(6, "current", &"OKI3_OBJ1");
   objective_position(6, (8203, -2236, 157));
-  getent("planter_door_end", "targetname") notify("trigger");
+  getEnt("planter_door_end", "targetname") notify("trigger");
 
   trigger_Wait("stairs_down_objective", "targetname");
 
@@ -230,8 +230,8 @@ air_support_nag() {
 
   final_banzai_charge();
 
-  getent("use_mortars_courtyard", "targetname") trigger_off();
-  getent("use_mortars_courtyard", "targetname") notify("stop_thinking");
+  getEnt("use_mortars_courtyard", "targetname") trigger_off();
+  getEnt("use_mortars_courtyard", "targetname") notify("stop_thinking");
 
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -442,61 +442,61 @@ dvar_watcher() {
 }
 
 hide_mghut_dmg() {
-  mg_intact = getent("mortarpit_mghut_intact", "targetname");
-  mg_damage1 = getent("mortarpit_mghut_wrecked", "targetname");
+  mg_intact = getEnt("mortarpit_mghut_intact", "targetname");
+  mg_damage1 = getEnt("mortarpit_mghut_wrecked", "targetname");
 
   mg_damage1 hide();
   mg_damage1 notsolid();
 
   chunks = [];
-  chunks[0] = getent("mortarpit_mghut_wrecked_chunk_1", "script_noteworthy");
-  chunks[1] = getent("mortarpit_mghut_wrecked_chunk_2", "script_noteworthy");
-  chunks[2] = getent("mortarpit_mghut_wrecked_chunk_3", "script_noteworthy");
-  chunks[3] = getent("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
-  chunks[4] = getent("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
-  chunks[5] = getent("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
+  chunks[0] = getEnt("mortarpit_mghut_wrecked_chunk_1", "script_noteworthy");
+  chunks[1] = getEnt("mortarpit_mghut_wrecked_chunk_2", "script_noteworthy");
+  chunks[2] = getEnt("mortarpit_mghut_wrecked_chunk_3", "script_noteworthy");
+  chunks[3] = getEnt("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
+  chunks[4] = getEnt("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
+  chunks[5] = getEnt("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
 
   for(i = 0; i < chunks.size; i++) {
     chunks[i] hide();
   }
 
-  curtains = getent("event1_mg_curtains", "targetname");
-  mg = getent("auto4051", "targetname");
+  curtains = getEnt("event1_mg_curtains", "targetname");
+  mg = getEnt("auto4051", "targetname");
   mg_intact show();
 }
 
 show_mghut_dmg() {
-  mg_intact = getent("mortarpit_mghut_intact", "targetname");
-  mg_damage1 = getent("mortarpit_mghut_wrecked", "targetname");
+  mg_intact = getEnt("mortarpit_mghut_intact", "targetname");
+  mg_damage1 = getEnt("mortarpit_mghut_wrecked", "targetname");
 
   mg_intact hide();
   mg_damage1 show();
 
   chunks = [];
-  chunks[0] = getent("mortarpit_mghut_wrecked_chunk_1", "script_noteworthy");
-  chunks[1] = getent("mortarpit_mghut_wrecked_chunk_2", "script_noteworthy");
-  chunks[2] = getent("mortarpit_mghut_wrecked_chunk_3", "script_noteworthy");
-  chunks[3] = getent("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
-  chunks[4] = getent("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
-  chunks[5] = getent("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
+  chunks[0] = getEnt("mortarpit_mghut_wrecked_chunk_1", "script_noteworthy");
+  chunks[1] = getEnt("mortarpit_mghut_wrecked_chunk_2", "script_noteworthy");
+  chunks[2] = getEnt("mortarpit_mghut_wrecked_chunk_3", "script_noteworthy");
+  chunks[3] = getEnt("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
+  chunks[4] = getEnt("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
+  chunks[5] = getEnt("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
 
   for(i = 0; i < chunks.size; i++) {
     chunks[i] hide();
   }
 
-  curtains = getent("event1_mg_curtains", "targetname");
-  mg = getent("auto4051", "targetname");
+  curtains = getEnt("event1_mg_curtains", "targetname");
+  mg = getEnt("auto4051", "targetname");
   curtains show();
   mg show();
 }
 
 show_bunker_damage(num) {
-  intact = getent("mortar_house_intact", "targetname");
+  intact = getEnt("mortar_house_intact", "targetname");
 
-  damage2 = getent("mortar_house_damage_2", "targetname");
-  damage3 = getent("mortar_house_damage_3", "targetname");
+  damage2 = getEnt("mortar_house_damage_2", "targetname");
+  damage3 = getEnt("mortar_house_damage_3", "targetname");
 
-  bits = getent("mortar_house_damage_delete", "targetname");
+  bits = getEnt("mortar_house_damage_delete", "targetname");
 
   dmg2 = false;
   dmg3 = false;
@@ -577,7 +577,7 @@ init_courtyard_destruction() {
 }
 
 courtyard_north_spawners() {
-  getent("start_final_defend", "script_noteworthy") waittill("trigger");
+  getEnt("start_final_defend", "script_noteworthy") waittill("trigger");
 
   level thread courtyard_prespawn_smoke(850, 900, "nw_smoke");
   wait(7);
@@ -591,8 +591,8 @@ courtyard_north_spawners() {
   level thread maps\oki3_squad_manager::manage_spawners("building1_front_spawners", 3, 7, "b1_spawners", .5, ::spawnfunc_front_line, 7, undefined, "nf_spawn");
 
   wait(5);
-  playsoundatposition("japanese_yell_left", (6742, -3871, 130));
-  playsoundatposition("japanese_yell_right", (8671, -3960, 54.7));
+  playSoundAtPosition("japanese_yell_left", (6742, -3871, 130));
+  playSoundAtPosition("japanese_yell_right", (8671, -3960, 54.7));
   wait(1);
   thread spawn_banzai_wave((7216, -4500, 50));
   level notify("do_dialog", "generic_fight0", level.last_hero);
@@ -679,7 +679,7 @@ north_mg_gunner() {
   self endon("death");
 
   self setCanDamage(false);
-  turret = getent("north_MG", "targetname");
+  turret = getEnt("north_MG", "targetname");
   turret setturretignoregoals(true);
 
   level waittill("building1_destroyed");
@@ -692,12 +692,12 @@ courtyard_castle_spawners() {
   wait(10);
   level thread courtyard_prespawn_smoke(850, 900, "building5_smoke");
   wait(3);
-  getent("defend_south", "targetname") notify("trigger");
+  getEnt("defend_south", "targetname") notify("trigger");
   wait(10);
 
   thread spawn_banzai_wave((8481, -5723, 104));
-  playsoundatposition("japanese_yell_left", (9055, -3704, 85));
-  playsoundatposition("japanese_yell_right", (8760, -5864, 104));
+  playSoundAtPosition("japanese_yell_left", (9055, -3704, 85));
+  playSoundAtPosition("japanese_yell_right", (8760, -5864, 104));
 
   level thread front_line_spawner_think();
 
@@ -806,7 +806,7 @@ hide_damaged(building, dmgstate) {
       ent[i] notsolid();
     }
   } else {
-    ent = getent("roof_building" + building + "_dmg_" + dmgstate, "targetname");
+    ent = getEnt("roof_building" + building + "_dmg_" + dmgstate, "targetname");
     if(isDefined(ent)) {
       ent hide();
       ent notsolid();
@@ -834,12 +834,12 @@ show_damaged(building, dmgstate) {
       ent[i] solid();
     }
   } else {
-    ent = getent("roof_building" + building + "_dmg_" + dmgstate, "targetname");
+    ent = getEnt("roof_building" + building + "_dmg_" + dmgstate, "targetname");
     if(isDefined(ent)) {
       ent show();
       ent solid();
     } else {
-      ent = getent("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
+      ent = getEnt("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
       if(isDefined(ent)) {
         ent show();
         ent solid();
@@ -860,17 +860,17 @@ hide_intact(building, dmgstate) {
       ent[i] notsolid();
     }
   } else {
-    ent = getent("roof_building" + building + "_intact", "targetname");
+    ent = getEnt("roof_building" + building + "_intact", "targetname");
     if(isDefined(ent)) {
       ent hide();
       ent notsolid();
     } else {
-      ent = getent("roof_building_" + building + "_intact", "targetname");
+      ent = getEnt("roof_building_" + building + "_intact", "targetname");
       if(isDefined(ent)) {
         ent hide();
         ent notsolid();
       } else {
-        ent = getent("roof_building_" + building + "_" + dmgstate, "targetname");
+        ent = getEnt("roof_building_" + building + "_" + dmgstate, "targetname");
         if(isDefined(ent)) {
           ent hide();
           ent notsolid();
@@ -893,12 +893,12 @@ show_intact(building, dmgstate) {
       ent[i] solid();
     }
   } else {
-    ent = getent("roof_building" + building + "_intact", "targetname");
+    ent = getEnt("roof_building" + building + "_intact", "targetname");
     if(isDefined(ent)) {
       ent show();
       ent solid();
     } else {
-      ent = getent("roof_building_" + building + "_" + dmgstate, "targetname");
+      ent = getEnt("roof_building_" + building + "_" + dmgstate, "targetname");
       if(isDefined(ent)) {
         ent show();
         ent solid();
@@ -941,19 +941,19 @@ destroy_building1() {
     wait(0.4);
     show_damaged(1, 1);
     hide_intact(1);
-    playsoundatposition("courtyard_building_explo", (7205, -2655, 409));
+    playSoundAtPosition("courtyard_building_explo", (7205, -2655, 409));
     wait(.9);
     show_damaged(2, 1);
     hide_intact(2);
-    playsoundatposition("courtyard_building_explo", (7898, -2743, 559.5));
+    playSoundAtPosition("courtyard_building_explo", (7898, -2743, 559.5));
 
     level notify("building1_destroyed");
     level notify("b1_spawners");
     level.building1_destroyed = true;
   }
 
-  trig = getent("courtyard_ne", "script_noteworthy");
-  trig2 = getent("courtyard_nw", "script_noteworthy");
+  trig = getEnt("courtyard_ne", "script_noteworthy");
+  trig2 = getEnt("courtyard_nw", "script_noteworthy");
 
   dudes = getaiarray("axis");
   for(i = 0; i < dudes.size; i++) {
@@ -962,7 +962,7 @@ destroy_building1() {
     }
   }
 
-  trig = getent("courtyard_se", "script_noteworthy");
+  trig = getEnt("courtyard_se", "script_noteworthy");
   dudes = getaiarray("axis");
 
   for(i = 0; i < dudes.size; i++) {
@@ -983,7 +983,7 @@ destroy_building11() {
 
     stop_exploder(1100);
     exploder(1101);
-    playsoundatposition("courtyard_building_explo", (6611, -3689, 327));
+    playSoundAtPosition("courtyard_building_explo", (6611, -3689, 327));
     wait(0.3);
     show_damaged(11, 1);
     hide_intact(11);
@@ -1006,7 +1006,7 @@ destroy_building_3() {
 
     earthquake(randomfloatrange(0.14, 0.4), randomfloatrange(1.5, 3), (9604, -3162.5, 137), 4048);
 
-    playsoundatposition("courtyard_building_explo", (9672, -2936, 298));
+    playSoundAtPosition("courtyard_building_explo", (9672, -2936, 298));
     exploder(601);
     wait(.4);
     show_damaged(3, 1);
@@ -1033,7 +1033,7 @@ destroy_building4() {
     wait(.45);
     show_damaged(4, 1);
     hide_intact(4, 1);
-    playsoundatposition("courtyard_building_explo", (9800, -4376, 968));
+    playSoundAtPosition("courtyard_building_explo", (9800, -4376, 968));
 
     dragons = getEntArray("roof_building_4_dragons", "targetname");
     for(i = 0; i < dragons.size; i++) {
@@ -1050,7 +1050,7 @@ destroy_building4() {
     stop_exploder(502);
     exploder(503);
     earthquake(randomfloatrange(0.4, 0.7), randomfloatrange(1.5, 3), (9800, -4376, 968), 4048);
-    playsoundatposition("courtyard_building_explo", (9576, -4180, 574));
+    playSoundAtPosition("courtyard_building_explo", (9576, -4180, 574));
 
     wait(.3);
     show_damaged(4, 3);
@@ -1058,9 +1058,9 @@ destroy_building4() {
 
     level.building4_3_destroyed = true;
 
-    getent("castle_paperwindows", "targetname") delete();
-    getent("ne_door1", "targetname") delete();
-    getent("ne_door2", "targetname") delete();
+    getEnt("castle_paperwindows", "targetname") delete();
+    getEnt("ne_door1", "targetname") delete();
+    getEnt("ne_door2", "targetname") delete();
     wait(2);
 
     castle_front_fall();
@@ -1076,7 +1076,7 @@ destroy_castle_damagestate_2() {
 
   stop_exploder(501);
   exploder(502);
-  playsoundatposition("courtyard_building_explo", (9576, -4180, 674));
+  playSoundAtPosition("courtyard_building_explo", (9576, -4180, 674));
   earthquake(randomfloatrange(0.4, 0.7), randomfloatrange(1.5, 3), (9800, -4376, 968), 4048);
 
   wait(.25);
@@ -1166,7 +1166,7 @@ too_think() {
 monitor_too_mg() {
   level endon("stop_too_mg");
 
-  mg = getent("auto3946", "targetname");
+  mg = getEnt("auto3946", "targetname");
 
   firing = false;
   while(!firing) {
@@ -1218,7 +1218,7 @@ courtyard_spawn_bomber_test(iplane_spline, offset_vector, noFX) {
   x = 0;
   while(1) {
     if(isDefined(plane_spline[x].target)) {
-      target = getstruct(plane_spline[x].target, "targetname");
+      target = getStruct(plane_spline[x].target, "targetname");
       target.origin = target.origin + (0, 0, 150);
       plane_spline[plane_spline.size] = target;
       x++;
@@ -1231,8 +1231,8 @@ courtyard_spawn_bomber_test(iplane_spline, offset_vector, noFX) {
     offset_vector = (0, 0, 0);
   }
 
-  plane1 = SpawnVehicle("vehicle_p51_mustang", "new_plane", "p51", plane_spline[0].origin, plane_spline[0].angles);
-  plane2 = SpawnVehicle("vehicle_p51_mustang", "new_plane", "p51", plane_spline[0].origin, plane_spline[0].angles);
+  plane1 = spawnVehicle("vehicle_p51_mustang", "new_plane", "p51", plane_spline[0].origin, plane_spline[0].angles);
+  plane2 = spawnVehicle("vehicle_p51_mustang", "new_plane", "p51", plane_spline[0].origin, plane_spline[0].angles);
 
   level.plane_bomb_model["p51"] = "aircraft_bomb";
 
@@ -1282,9 +1282,9 @@ attach_bombs_p51() {
     self.bomb[i].dropped = false;
     wait(.5);
     if(i == 0) {
-      self.bomb[i] LinkTo(self, "tag_gunLeft", (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, "tag_gunLeft", (0, 0, -4), (-10, 0, 0));
     } else if(i == 1) {
-      self.bomb[i] LinkTo(self, "tag_gunRight", (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, "tag_gunRight", (0, 0, -4), (-10, 0, 0));
     }
   }
 }
@@ -1301,7 +1301,7 @@ building_l_spawners() {
 }
 
 spawn_shadow_guys() {
-  ent = getent("shadow_guy_test", "targetname");
+  ent = getEnt("shadow_guy_test", "targetname");
   ent.count = 5;
   for(i = 0; i < 6; i++) {
     simple_spawn("shadow_guy_test", ::spawnfunc_shadow_runners);
@@ -1405,7 +1405,7 @@ castle_front_fall() {
 }
 
 monitor_mg_usage() {
-  mg = getent("courtyard_mg", "targetname");
+  mg = getEnt("courtyard_mg", "targetname");
 
   while(1) {
     owner = undefined;
@@ -1463,7 +1463,7 @@ restore_all_grenades() {
 
 courtyard_dragon_falls() {
   wait(2);
-  broken_dragon = getent("courtyard_dragon_broken1", "targetname");
+  broken_dragon = getEnt("courtyard_dragon_broken1", "targetname");
   broken_dragon connectpaths();
   broken_dragon hide();
   broken_dragon notsolid();
@@ -1473,19 +1473,19 @@ courtyard_dragon_falls() {
 
   for(i = 0; i < dragon.size; i++) {
     if(dragon[i].model == "static_okinawa_dragonpost") {
-      dragon[i] moveto((7278, -4068, 54), 1);
-      dragon[i] rotateto((90, 122.462, 122.461), .8);
+      dragon[i] moveTo((7278, -4068, 54), 1);
+      dragon[i] rotateTo((90, 122.462, 122.461), .8);
       dragon[i] waittill("movedone");
       broken_dragon show();
       dragon[i] hide();
-      broken_dragon disconnectpaths();
+      broken_dragon disconnectPaths();
       broken_dragon solid();
     }
   }
 }
 
 courtyard_mg_stuff() {
-  mg = getent("courtyard_mg2", "targetname");
+  mg = getEnt("courtyard_mg2", "targetname");
   while(1) {
     guy = mg getturretowner();
     if(!isDefined(guy)) {
@@ -1507,10 +1507,10 @@ get_closest_2_mg(mg) {
 }
 
 fake_surrender_guys() {
-  getent("use_mortars_courtyard", "targetname") trigger_off();
-  getent("start_final_defend", "script_noteworthy") trigger_off();
+  getEnt("use_mortars_courtyard", "targetname") trigger_off();
+  getEnt("start_final_defend", "script_noteworthy") trigger_off();
   trigger_wait("spawn_feigning_guys", "targetname");
-  getent("enter_courtyard", "targetname") trigger_off();
+  getEnt("enter_courtyard", "targetname") trigger_off();
 
   level.sarge thread sarge_waittill_death();
   level.polonsky thread sarge_waittill_death();
@@ -1591,7 +1591,7 @@ fake_surrender_guys() {
 
   split_heros();
 
-  getent("secure_courtyard_drop_objective", "targetname") notify("trigger");
+  getEnt("secure_courtyard_drop_objective", "targetname") notify("trigger");
 
   level waittill_either("sarge_saved", "polonsky_saved");
 
@@ -1664,7 +1664,7 @@ fake_surrender_guys() {
   }
 
   level.last_hero set_force_color("o");
-  getent("enter_courtyard", "targetname") notify("trigger");
+  getEnt("enter_courtyard", "targetname") notify("trigger");
 
   level.last_hero.grenadeawareness = 1;
   level.last_hero.ignoreall = false;
@@ -1677,13 +1677,13 @@ fake_surrender_guys() {
   battlechatter_on("allies");
   battlechatter_on("axis");
 
-  getent("use_mortars_courtyard", "targetname") trigger_on();
+  getEnt("use_mortars_courtyard", "targetname") trigger_on();
   level thread mortar_round_think("courtyard");
 }
 
 warp_players_to_courtyard() {
-  vol1 = getent("courtyard_player_check", "targetname");
-  vol2 = getent("drop_volume", "targetname");
+  vol1 = getEnt("courtyard_player_check", "targetname");
+  vol2 = getEnt("drop_volume", "targetname");
   spots = getStructArray("courtyard_players", "targetname");
 
   players = get_players();
@@ -1704,7 +1704,7 @@ warp_players_to_courtyard() {
 
 start_courtyard_ambush(wait_time) {
   wait(wait_time);
-  getent("start_final_defend", "script_noteworthy") notify("trigger");
+  getEnt("start_final_defend", "script_noteworthy") notify("trigger");
 }
 
 sarge_waittill_death() {
@@ -1845,7 +1845,7 @@ handle_feigner_death() {
   self endon("damage");
 
   self.allowdeath = true;
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 fake_surrender(anim_node) {
@@ -1865,7 +1865,7 @@ split_heros() {
 setup_surrender_dialogue() {
   trigger_wait("setup_surrender", "targetname");
   thread kick_courtyard_door();
-  northdoor = getent("building1_door", "targetname");
+  northdoor = getEnt("building1_door", "targetname");
   northdoor connectpaths();
   wait_network_frame();
   northdoor delete();
@@ -1946,11 +1946,11 @@ courtyard_death_scene() {
 }
 
 open_courtyard_door(guy) {
-  door = getent("upstairs_door", "targetname");
+  door = getEnt("upstairs_door", "targetname");
   door playSound("door_kick");
   door connectpaths();
   wait_network_frame();
-  door rotateyaw(-105, 1, 0.25, 0.25);
+  door rotateYaw(-105, 1, 0.25, 0.25);
 }
 
 #using_animtree("generic_human");
@@ -1990,7 +1990,7 @@ surrender_death(guy) {
     }
 
     level.sarge_dead = true;
-    PlaySoundAtPosition(level.scr_sound["sarge"]["sarge_death"], level.death_org);
+    playSoundAtPosition(level.scr_sound["sarge"]["sarge_death"], level.death_org);
   }
 }
 play_sarge_death(animnode) {
@@ -1998,7 +1998,7 @@ play_sarge_death(animnode) {
     return;
   }
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   wait(0.05);
   maps\_anim::anim_single_solo(self, "fake_surrender_death", undefined, animnode);
   self.deathanim = undefined;
@@ -2040,7 +2040,7 @@ roebuck_attackers_think() {
   level waittill_multiple("attacker1", "attacker2");
 
   if(!isDefined(level.attacker_shot)) {
-    level.sarge stopanimscripted();
+    level.sarge stopanimScripted();
   }
   level.sarge_saved = true;
   level notify("sarge_saved");
@@ -2089,7 +2089,7 @@ polonsky_attacker_think() {
     surrender_node thread maps\_anim::anim_single_solo(level.polonsky, "fake_surrender_death");
     level.polonsky.allowdeath = true;
     self magicgrenadetype("fraggrenade", org, (0, 0, -1), .05);
-    PlaySoundAtPosition(level.scr_sound["polonsky"]["polonsky_death"], org);
+    playSoundAtPosition(level.scr_sound["polonsky"]["polonsky_death"], org);
   }
 }
 
@@ -2144,9 +2144,9 @@ kill_sarge_if_me_is_killed() {
     level notify("polonsky_saved");
     level.polonsky_saved = true;
     level.sarge_dead = true;
-    PlaySoundAtPosition(level.scr_sound["sarge"]["sarge_death"], level.death_org);
+    playSoundAtPosition(level.scr_sound["sarge"]["sarge_death"], level.death_org);
     level.polonsky_attacker_shot = true;
-    level.polonsky stopanimscripted();
+    level.polonsky stopanimScripted();
     level.polonsky.a.pose = "stand";
   }
 }

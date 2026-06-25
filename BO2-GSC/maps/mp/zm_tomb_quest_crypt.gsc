@@ -73,11 +73,11 @@ chamber_disc_run() {
 }
 
 init_crypt_gems() {
-  disc = getent("crypt_puzzle_disc_main", "targetname");
+  disc = getEnt("crypt_puzzle_disc_main", "targetname");
   gems = getEntArray("crypt_gem", "script_noteworthy");
 
   foreach(gem in gems) {
-    gem linkto(disc);
+    gem linkTo(disc);
     gem thread run_crypt_gem_pos();
   }
 }
@@ -137,8 +137,8 @@ run_crypt_gem_pos() {
   }
 
   e_gem_model = puzzle_orb_chamber_to_crypt(str_orb_path, self);
-  e_main_disc = getent("crypt_puzzle_disc_main", "targetname");
-  e_gem_model linkto(e_main_disc);
+  e_main_disc = getEnt("crypt_puzzle_disc_main", "targetname");
+  e_gem_model linkTo(e_main_disc);
   str_targetname = self.targetname;
   self delete();
   e_gem_model setCanDamage(1);
@@ -168,7 +168,7 @@ run_crypt_gem_pos() {
   light_discs_bottom_to_top();
   level thread puzzle_orb_pillar_show();
   e_gem_model unlink();
-  s_ascent = getstruct("orb_crypt_ascent_path", "targetname");
+  s_ascent = getStruct("orb_crypt_ascent_path", "targetname");
   v_next_pos = (e_gem_model.origin[0], e_gem_model.origin[1], s_ascent.origin[2]);
   e_gem_model setclientfield("element_glow_fx", n_element);
   playFXOnTag(level._effect["puzzle_orb_trail"], e_gem_model, "tag_origin");
@@ -179,11 +179,11 @@ run_crypt_gem_pos() {
   e_gem_model puzzle_orb_follow_path(s_ascent);
   v_next_pos = (e_gem_model.origin[0], e_gem_model.origin[1], e_gem_model.origin[2] + 2000);
   e_gem_model puzzle_orb_move(v_next_pos);
-  s_chamber_path = getstruct(str_orb_path, "targetname");
+  s_chamber_path = getStruct(str_orb_path, "targetname");
   str_model = e_gem_model.model;
   e_gem_model delete();
   e_gem_model = puzzle_orb_follow_return_path(s_chamber_path, n_element);
-  s_final = getstruct(str_final_pos, "targetname");
+  s_final = getStruct(str_final_pos, "targetname");
   e_gem_model puzzle_orb_move(s_final.origin);
   e_new_gem = spawn("script_model", s_final.origin);
   e_new_gem setModel(e_gem_model.model);
@@ -197,7 +197,7 @@ run_crypt_gem_pos() {
 
 chamber_disc_move_to_position() {
   new_angles = (self.angles[0], self.position * 90, self.angles[2]);
-  self rotateto(new_angles, 1.0, 0.0, 0.0);
+  self rotateTo(new_angles, 1.0, 0.0, 0.0);
   self playSound("zmb_crypt_disc_turn");
   wait(1.0 * 0.75);
   self bryce_cake_light_update(0);
@@ -226,7 +226,7 @@ chamber_discs_move_all_to_position(discs) {
 }
 
 chamber_disc_get_gem_position(gem_name) {
-  disc = getent("crypt_puzzle_disc_main", "targetname");
+  disc = getEnt("crypt_puzzle_disc_main", "targetname");
   return (disc.position + level.gem_start_pos[gem_name]) % 4;
 }
 

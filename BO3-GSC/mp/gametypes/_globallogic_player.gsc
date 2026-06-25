@@ -2742,7 +2742,7 @@ function callback_playerlaststand(einflictor, eattacker, idamage, smeansofdeath,
 function damageshellshockandrumble(eattacker, einflictor, weapon, smeansofdeath, idamage) {
   self thread weapons::on_damage(eattacker, einflictor, weapon, smeansofdeath, idamage);
   if(!self util::isusingremote()) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 

@@ -128,7 +128,7 @@ class cpickupitem: cbaseinteractable {
     m_e_body_trigger.origin = v_pos;
     m_e_body_trigger notify("upgrade_trigger_moved");
     m_e_body_trigger notify("upgrade_trigger_enable", 1);
-    m_e_body_trigger sethintstring(m_str_pickup_hintstring);
+    m_e_body_trigger setHintString(m_str_pickup_hintstring);
     m_e_body_trigger.str_itemname = m_str_itemname;
     if(!isDefined(m_e_body_trigger.targetname)) {
       m_str_targetname = "";
@@ -225,12 +225,12 @@ class cbaseinteractable {
     assert(isDefined(n_radius), "");
     assert(isDefined(n_height), "");
     e_trigger = spawn("trigger_radius", v_origin, 0, n_radius, n_height);
-    e_trigger triggerignoreteam();
+    e_trigger triggerIgnoreTeam();
     e_trigger setvisibletoall();
     e_trigger setteamfortrigger("none");
-    e_trigger setcursorhint("HINT_NOICON");
+    e_trigger setCursorHint("HINT_NOICON");
     if(isDefined(str_hint)) {
-      e_trigger sethintstring(str_hint);
+      e_trigger setHintString(str_hint);
     }
     return e_trigger;
   }
@@ -482,7 +482,7 @@ class cbaseinteractable {
     } else {
       while(isDefined(m_e_body_trigger)) {
         if(!m_isfunctional) {
-          m_e_body_trigger sethintstring("Bring Toolbox to repair");
+          m_e_body_trigger setHintString("Bring Toolbox to repair");
           wait(0.05);
           continue;
         }

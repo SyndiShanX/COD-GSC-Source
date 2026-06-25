@@ -920,7 +920,7 @@ _id_0D66(var_0) {
   if(!isDefined(self.enemy)) {
     return 0;
   }
-  var_1 = vectornormalize(self.enemy getshootatpos() - self getEye());
+  var_1 = vectorNormalize(self.enemy getshootatpos() - self getEye());
   return vectordot(var_1, var_0) > 0.5;
 }
 

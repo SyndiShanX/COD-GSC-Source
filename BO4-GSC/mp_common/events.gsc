@@ -85,7 +85,7 @@ score_team_event_monitor(score, notify_string, client_notify_string) {
 score_event_monitor(score, notify_string, client_notify_string) {
   for(;;) {
     wait 0.5;
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i].score) && players[i].score >= score) {

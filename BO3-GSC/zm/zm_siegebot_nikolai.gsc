@@ -135,11 +135,11 @@ function function_f7035c2f(nikolai_driver) {
   self endon("death");
   nikolai_driver endon("death");
   self.nikolai_driver = nikolai_driver;
-  self enablelinkto();
+  self enablelinkTo();
   nikolai_driver.origin = self gettagorigin("tag_driver");
   nikolai_driver.angles = self gettagangles("tag_driver");
   nikolai_driver.targetname = "nikolai_driver";
-  nikolai_driver linkto(self, "tag_driver");
+  nikolai_driver linkTo(self, "tag_driver");
   while(true) {
     nikolai_driver scene::play("cin_zm_stalingrad_nikolai_cockpit_drink");
     nikolai_driver thread scene::play("cin_zm_stalingrad_nikolai_cockpit_idle");
@@ -267,7 +267,7 @@ function state_jump_update(params) {
   self.jump.linkent.origin = self.origin;
   self.jump.linkent.angles = self.angles;
   wait(0.05);
-  self linkto(self.jump.linkent);
+  self linkTo(self.jump.linkent);
   self.jump.in_air = 1;
   totaldistance = distance2d(goal, self.jump.linkent.origin);
   forward = ((goal - self.jump.linkent.origin) / totaldistance[0], (goal - self.jump.linkent.origin) / totaldistance[1], 0);
@@ -308,7 +308,7 @@ function state_jump_update(params) {
       self notify("start_landing");
       if(isDefined(self.enemy)) {
         forward = anglesToForward(self.angles);
-        dir = vectornormalize(self.enemy.origin - self.origin);
+        dir = vectorNormalize(self.enemy.origin - self.origin);
         dot = vectordot(dir, forward);
         if(dot < -0.7) {
           params.coptermodel = "land_turn@jump";
@@ -326,7 +326,7 @@ function state_jump_update(params) {
       if(abs(direction[0]) < 0.01 && abs(direction[1]) < 0.01) {
         direction = (randomfloatrange(1, 2), randomfloatrange(1, 2), 0);
       }
-      direction = vectornormalize(direction);
+      direction = vectorNormalize(direction);
       strength = 700;
       player setvelocity(player getvelocity() + (direction * strength));
       player dodamage(50, self.origin, self);
@@ -522,7 +522,7 @@ function stopmovementandsetbrake() {
 
 function face_target(position, targetanglediff = 30, var_a39fa3d8 = 1) {
   v_to_enemy = (position - self.origin[0], position - self.origin[1], 0);
-  v_to_enemy = vectornormalize(v_to_enemy);
+  v_to_enemy = vectorNormalize(v_to_enemy);
   goalangles = vectortoangles(v_to_enemy);
   anglediff = absangleclamp180(self.angles[1] - goalangles[1]);
   if(anglediff <= targetanglediff) {
@@ -782,7 +782,7 @@ function function_59fe8c9c(targetposition) {
       spawntag = self gettagorigin("tag_flash");
       tagangles = self gettagangles("tag_flash");
       var_5d7a8c53 = anglestoup(tagangles);
-      ai_raps = spawnvehicle("spawner_zm_dlc3_vehicle_raps_nikolai", spawntag, self.angles);
+      ai_raps = spawnVehicle("spawner_zm_dlc3_vehicle_raps_nikolai", spawntag, self.angles);
       if(!isDefined(ai_raps)) {
         wait(0.1);
       }

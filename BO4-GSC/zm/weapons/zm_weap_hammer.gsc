@@ -303,10 +303,10 @@ function_9799924f(e_target, weapon = level.weaponnone, var_3e3892a7, v_to_target
           break;
       }
 
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       e_target zm_utility::function_ffc279(v_fling, self, undefined, weapon);
     } else {
-      self playrumbleonentity("shotgun_fire");
+      self playRumbleOnEntity("shotgun_fire");
     }
 
     return;
@@ -351,7 +351,7 @@ function_1b29b59e(var_3e3892a7, weapon = level.weaponnone) {
       continue;
     }
 
-    v_normal = vectornormalize(test_origin - self.origin);
+    v_normal = vectorNormalize(test_origin - self.origin);
     dot = vectordot(var_ccb70dad, v_normal);
 
     if(dot <= 0 && dist_sq > 1600) {
@@ -365,7 +365,7 @@ function_1b29b59e(var_3e3892a7, weapon = level.weaponnone) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
     var_61906722 = randomfloatrange(5, 20);
-    v_ragdoll = vectornormalize(e_target.origin - self.origin + (n_random_x, n_random_y, var_61906722));
+    v_ragdoll = vectorNormalize(e_target.origin - self.origin + (n_random_x, n_random_y, var_61906722));
 
     if(isDefined(e_target.var_5554df1)) {
       self thread[[e_target.var_5554df1]](e_target, weapon, var_3e3892a7, v_ragdoll);
@@ -420,7 +420,7 @@ lightning_bolt(weapon) {
   n_movetime_s = n_dist / staff_lightning_ball_speed;
   n_leftover_time = n_max_movetime_s - n_movetime_s;
   e_ball_fx thread staff_lightning_ball_kill_zombies(self);
-  e_ball_fx moveto(v_end, n_movetime_s);
+  e_ball_fx moveTo(v_end, n_movetime_s);
   finished_playing = e_ball_fx lightning_ball_wait(n_leftover_time);
 
   if(isDefined(e_ball_fx)) {
@@ -796,7 +796,7 @@ hammer_rumble(n_index) {
 
     switch (n_index) {
       case 1:
-        self playrumbleonentity("zm_weap_special_activate_rumble");
+        self playRumbleOnEntity("zm_weap_special_activate_rumble");
         break;
       case 2:
         playrumbleonposition("zm_weap_hammer_slam_rumble", self.origin);

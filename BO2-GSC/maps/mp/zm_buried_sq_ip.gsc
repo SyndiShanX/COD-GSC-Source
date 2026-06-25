@@ -13,7 +13,7 @@
 init() {
   flag_init("sq_ip_puzzle_complete");
   level.sq_bp_buttons = [];
-  s_lightboard = getstruct("zm_sq_lightboard", "targetname");
+  s_lightboard = getStruct("zm_sq_lightboard", "targetname");
   s_lightboard sq_bp_spawn_board();
   declare_sidequest_stage("sq", "ip", ::init_stage, ::stage_logic, ::exit_stage);
 }
@@ -30,13 +30,13 @@ init_stage() {
 }
 
 stage_vo_max() {
-  s_struct = getstruct("sq_gallows", "targetname");
+  s_struct = getStruct("sq_gallows", "targetname");
   trigger = spawn("trigger_radius", s_struct.origin, 0, 128, 72);
   m_maxis_vo_spot = spawn("script_model", s_struct.origin);
   m_maxis_vo_spot setModel("tag_origin");
   maxissay("vox_maxi_sidequest_ip_0", m_maxis_vo_spot);
   maxissay("vox_maxi_sidequest_ip_1", m_maxis_vo_spot);
-  m_lightboard = getent("sq_bp_board", "targetname");
+  m_lightboard = getEnt("sq_bp_board", "targetname");
   trigger = spawn("trigger_radius", m_lightboard.origin, 0, 128, 72);
   trigger waittill("trigger");
   maxissay("vox_maxi_sidequest_ip_2", m_lightboard);
@@ -65,7 +65,7 @@ stage_logic() {
   if(flag("sq_is_max_tower_built")) {
     a_button_structs = getStructArray("sq_bp_button", "targetname");
     array_thread(a_button_structs, ::sq_bp_spawn_trigger);
-    m_lightboard = getent("sq_bp_board", "targetname");
+    m_lightboard = getEnt("sq_bp_board", "targetname");
     m_lightboard setclientfield("buried_sq_bp_set_lightboard", 1);
 
     while(!flag("sq_ip_puzzle_complete")) {
@@ -94,17 +94,17 @@ exit_stage(success) {}
 sq_bp_spawn_trigger() {
   level endon("sq_ip_puzzle_complete");
   self.trig = spawn("trigger_radius_use", self.origin, 0, 16, 16);
-  self.trig setcursorhint("HINT_NOICON");
-  self.trig sethintstring(&"ZM_BURIED_SQ_BUT_U");
-  self.trig triggerignoreteam();
-  self.trig usetriggerrequirelookat();
+  self.trig setCursorHint("HINT_NOICON");
+  self.trig setHintString(&"ZM_BURIED_SQ_BUT_U");
+  self.trig triggerIgnoreTeam();
+  self.trig useTriggerRequireLookAt();
 
   while(true) {
     self.trig waittill("trigger");
-    self.trig sethintstring("");
+    self.trig setHintString("");
     level thread sq_bp_button_pressed(self.script_string, self.trig);
     wait 1;
-    self.trig sethintstring(&"ZM_BURIED_SQ_BUT_U");
+    self.trig setHintString(&"ZM_BURIED_SQ_BUT_U");
   }
 }
 
@@ -149,16 +149,16 @@ sq_bp_start_puzzle_lights() {
   }
 
   a_tags = array_randomize(a_tags);
-  m_lightboard = getent("sq_bp_board", "targetname");
+  m_lightboard = getEnt("sq_bp_board", "targetname");
 
   if(!isDefined(level.t_start)) {
     level.t_start = spawn("trigger_radius_use", m_lightboard.origin, 0, 16, 16);
   }
 
-  level.t_start setcursorhint("HINT_NOICON");
-  level.t_start sethintstring(&"ZM_BURIED_SQ_SWIT_U");
-  level.t_start triggerignoreteam();
-  level.t_start usetriggerrequirelookat();
+  level.t_start setCursorHint("HINT_NOICON");
+  level.t_start setHintString(&"ZM_BURIED_SQ_SWIT_U");
+  level.t_start triggerIgnoreTeam();
+  level.t_start useTriggerRequireLookAt();
   level.t_start waittill("trigger");
   level.t_start delete();
 
@@ -241,9 +241,9 @@ sq_ml_spawn_lever(n_index) {
 
     if(isDefined(level._maze._active_perm_list[n_index])) {
       is_flip = randomint(2);
-      s_spot = getstruct(level._maze._active_perm_list[n_index], "script_noteworthy");
+      s_spot = getStruct(level._maze._active_perm_list[n_index], "script_noteworthy");
       v_right = anglestoright(s_spot.angles);
-      v_offset = vectornormalize(v_right) * 2;
+      v_offset = vectorNormalize(v_right) * 2;
 
       if(is_flip) {
         v_offset = v_offset * -1;
@@ -280,28 +280,28 @@ sq_ml_show_lever_debug(v_spot, n_index) {
 
 sq_ml_spawn_trigger() {
   v_right = anglesToForward(self.angles);
-  v_offset = vectornormalize(v_right) * 8;
+  v_offset = vectorNormalize(v_right) * 8;
   self.trig = spawn("trigger_box_use", self.origin - v_offset, 0, 16, 16, 16);
-  self.trig enablelinkto();
-  self.trig linkto(self);
-  self.trig setcursorhint("HINT_NOICON");
-  self.trig sethintstring(&"ZM_BURIED_SQ_SWIT_U");
-  self.trig triggerignoreteam();
-  self.trig usetriggerrequirelookat();
+  self.trig enablelinkTo();
+  self.trig linkTo(self);
+  self.trig setCursorHint("HINT_NOICON");
+  self.trig setHintString(&"ZM_BURIED_SQ_SWIT_U");
+  self.trig triggerIgnoreTeam();
+  self.trig useTriggerRequireLookAt();
   self.is_flipped = 0;
   self useanimtree(#animtree);
 
   while(true) {
     self.trig waittill("trigger");
     self setanim(level.maze_switch_anim["switch_down"]);
-    self.trig sethintstring("");
+    self.trig setHintString("");
     self.is_flipped = 1;
     self.n_flip_number = level.sq_ml_curr_lever;
     level.sq_ml_curr_lever++;
     self.trig playSound("zmb_sq_maze_switch");
     level waittill("sq_ml_reset_levers");
     self setanim(level.maze_switch_anim["switch_up"]);
-    self.trig sethintstring(&"ZM_BURIED_SQ_SWIT_U");
+    self.trig setHintString(&"ZM_BURIED_SQ_SWIT_U");
     self.is_flipped = 0;
   }
 }

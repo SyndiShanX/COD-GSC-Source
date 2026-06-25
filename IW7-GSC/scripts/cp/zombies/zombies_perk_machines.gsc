@@ -121,7 +121,7 @@ init_change_machines_func() {
 
 delay_rotate_func(var_0) {
   wait(var_0);
-  var_1 = getent("change_chews_lower", "targetname");
+  var_1 = getEnt("change_chews_lower", "targetname");
   if(isDefined(var_1)) {
     var_2 = getDvar("ui_mapname");
     if(var_2 == "cp_town") {
@@ -137,11 +137,11 @@ delay_rotate_func(var_0) {
 }
 
 rotate_loop_by_targetname(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   for(;;) {
-    var_3 rotateto(var_2, 1);
+    var_3 rotateTo(var_2, 1);
     var_3 waittill("rotatedone");
-    var_3 rotateto(var_1, 1);
+    var_3 rotateTo(var_1, 1);
     var_3 waittill("rotatedone");
   }
 }
@@ -156,7 +156,7 @@ init_perk_machines_func(var_0) {
 revive_power_on_func(var_0) {
   var_1 = undefined;
   if(isDefined(self.target)) {
-    self.setminimap = getent(self.target, "targetname");
+    self.setminimap = getEnt(self.target, "targetname");
     self.setminimap setlightintensity(0);
   }
 
@@ -1429,7 +1429,7 @@ weapon_replaced_monitor(var_0) {
 
 create_zap_ring(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_2 = var_2 * 100;
   var_3 = "reload_zap_m";
   if(var_0 < 72) {
@@ -1595,7 +1595,7 @@ burn_loop(var_0) {
 
 create_fire_wave(var_0) {
   var_1 = var_0 / 2;
-  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglesToForward(self.angles));
   var_3 = var_2 * var_1;
   foreach(var_5 in level.players) {
     if(var_5 == self) {

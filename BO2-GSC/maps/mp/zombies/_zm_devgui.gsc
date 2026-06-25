@@ -992,7 +992,7 @@ devgui_bot_spawn_think(origin, yaw) {
 
   for(;;) {
     self waittill("spawned_player");
-    self setorigin(origin);
+    self setOrigin(origin);
     angles = (0, yaw, 0);
     self setplayerangles(angles);
   }

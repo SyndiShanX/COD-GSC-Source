@@ -100,7 +100,7 @@ preload_weapon_internal(var_0, var_1) {
 spawn_winner_circle_weapon(var_0) {
   var_1 = spawn("weapon_" + var_0, level._id_60B7.origin);
   var_1 hide(1);
-  var_1 linkto(level.post_match_flow_weapon_link_ent);
+  var_1 linkTo(level.post_match_flow_weapon_link_ent);
 }
 
 have_preloaded_weapons(var_0) {
@@ -418,7 +418,7 @@ _id_C5AA() {
 
 _id_44B6(var_0, var_1) {
   for(;;) {
-    level thread scripts\engine\utility::_id_4EED(var_0, var_0 + 32 * vectornormalize(anglesToForward(var_1)), (1, 1, 1));
+    level thread scripts\engine\utility::_id_4EED(var_0, var_0 + 32 * vectorNormalize(anglesToForward(var_1)), (1, 1, 1));
     waitframe();
   }
 }

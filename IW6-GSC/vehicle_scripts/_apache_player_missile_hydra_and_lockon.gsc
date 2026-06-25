@@ -390,7 +390,7 @@ target_trace_to_owners_eyes(var_0, var_1) {
 
   var_2 = var_1 getEye();
   var_3 = var_0 getcentroid();
-  var_4 = vectornormalize(var_3 - var_2);
+  var_4 = vectorNormalize(var_3 - var_2);
   var_4 = var_4 * 500;
   var_4 = var_4 + var_2;
   var_5 = bulletTrace(var_4, var_3, 0, var_1.riding_vehicle);
@@ -779,7 +779,7 @@ lock_dummy_add(var_0) {
 
   var_0.lock_dummy = var_0 common_scripts\utility::spawn_tag_origin();
   var_0.lock_dummy setModel("fx");
-  var_0.lock_dummy linkto(var_0, "tag_origin", (0, 0, 0), var_0.angles);
+  var_0.lock_dummy linkTo(var_0, "tag_origin", (0, 0, 0), var_0.angles);
 
   if(!vehicle_scripts\_apache_player_targeting::target_alloc_limit_fail_passed(var_0.lock_dummy, var_1)) {
     var_0.lock_dummy delete();
@@ -862,7 +862,7 @@ fire_lockon() {
 
     var_13 maps\_utility::delaythread(0.1, ::passive_missile_settargetandflightmode, var_5, "direct", var_14);
     thread common_scripts\utility::play_sound_in_space(var_10, var_11);
-    var_0 playrumbleonentity("heavygun_fire");
+    var_0 playRumbleOnEntity("heavygun_fire");
     earthquake(0.3, 0.6, var_0.origin, 5000);
     var_13 thread vehicle_scripts\_chopper_missile_defense_utility::missile_monitormisstarget(var_5, 0, undefined, "LISTEN_missile_missed_target", "LISTEN_missile_attached_to_flare");
     var_5 thread target_monitorfreelockedon(var_0, var_13);
@@ -953,7 +953,7 @@ missile_move_firemissile() {
     var_1 = self.origin;
 
     if(!isDefined(self.homing)) {
-      self moveto(var_1 + 0.1 * self.speed * var_0, 0.1);
+      self moveTo(var_1 + 0.1 * self.speed * var_0, 0.1);
     }
 
     var_2 = bullettracepassed(var_1, var_1 + self.trace_length * var_0, 1, self);
@@ -1036,7 +1036,7 @@ fire_hydra(var_0) {
     var_28 = magicbullet("apache_hydra_missile", var_22 + var_26 * 60, var_27, var_1);
     var_28.type_missile = "straight";
     level notify("LISTEN_apache_player_missile_fire", var_28);
-    var_1 playrumbleonentity("smg_fire");
+    var_1 playRumbleOnEntity("smg_fire");
 
     if(!var_0) {
       hud_markused_firstavailablemissileicon("missile_straight");
@@ -1072,7 +1072,7 @@ targetssortbydot(var_0, var_1, var_2) {
   var_5 = [];
 
   foreach(var_7 in var_0) {
-    var_5[var_5.size] = vectordot(var_3, vectornormalize(var_7.origin - var_1));
+    var_5[var_5.size] = vectordot(var_3, vectorNormalize(var_7.origin - var_1));
   }
 
   return doublereversebubblesort(var_5, var_0);

@@ -43,16 +43,16 @@ function init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballisti
   add_melee_weapon(weapon, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn);
   melee_weapon_triggers = getEntArray(wallbuy_targetname, "targetname");
   for(i = 0; i < melee_weapon_triggers.size; i++) {
-    knife_model = getent(melee_weapon_triggers[i].target, "targetname");
+    knife_model = getEnt(melee_weapon_triggers[i].target, "targetname");
     if(isDefined(knife_model)) {
       knife_model hide();
     }
     melee_weapon_triggers[i] thread melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_weapon, ballistic_weapon, ballistic_upgraded_weapon);
-    melee_weapon_triggers[i] sethintstring(hint_string, cost);
+    melee_weapon_triggers[i] setHintString(hint_string, cost);
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = weapon;
-    melee_weapon_triggers[i] setcursorhint(cursor_hint, cursor_hint_weapon);
-    melee_weapon_triggers[i] usetriggerrequirelookat();
+    melee_weapon_triggers[i] setCursorHint(cursor_hint, cursor_hint_weapon);
+    melee_weapon_triggers[i] useTriggerRequireLookAt();
   }
   melee_weapon_structs = struct::get_array(wallbuy_targetname, "targetname");
   for(i = 0; i < melee_weapon_structs.size; i++) {
@@ -181,7 +181,7 @@ function spectator_respawn_all() {
 
 function spectator_respawn(wallbuy_targetname, weapon) {
   melee_triggers = getEntArray(wallbuy_targetname, "targetname");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < melee_triggers.size; i++) {
     melee_triggers[i] setvisibletoall();
     if(!(isDefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
@@ -300,7 +300,7 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
     flourish_weapon = self.stub.flourish_weapon;
     ballistic_weapon = self.stub.ballistic_weapon;
     ballistic_upgraded_weapon = self.stub.ballistic_upgraded_weapon;
-    players = getplayers();
+    players = getPlayers();
     if(!(isDefined(level._allow_melee_weapon_switching) && level._allow_melee_weapon_switching)) {
       for(i = 0; i < players.size; i++) {
         if(!players[i] player_can_see_weapon_prompt()) {
@@ -357,7 +357,7 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
       }
       if(player zm_score::can_player_purchase(cost)) {
         if(self.first_time_triggered == 0) {
-          model = getent(self.target, "targetname");
+          model = getEnt(self.target, "targetname");
           if(isDefined(model)) {
             model thread melee_weapon_show(player);
           } else if(isDefined(self.clientfieldname)) {
@@ -398,7 +398,7 @@ function melee_weapon_show(player) {
   self show();
   zm_utility::play_sound_at_pos("weapon_show", self.origin, self);
   time = 1;
-  self moveto(self.og_origin, time);
+  self moveTo(self.og_origin, time);
 }
 
 function award_melee_weapon(weapon_name) {

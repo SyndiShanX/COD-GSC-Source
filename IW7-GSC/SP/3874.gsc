@@ -49,9 +49,9 @@ func_9B26(var_0) {
     var_4 = 1;
     thread func_9B1E();
     if(isDefined(self.var_10E6D.var_9B20)) {
-      var_5 = vectornormalize(self.objective_playermask_hidefromall - self.origin);
+      var_5 = vectorNormalize(self.objective_playermask_hidefromall - self.origin);
       var_6 = anglesToForward(self.angles);
-      var_7 = vectornormalize(var_1 - self.origin);
+      var_7 = vectorNormalize(var_1 - self.origin);
       if(isPlayer(var_0.issplitscreen) && !isPlayer(self.var_10E6D.var_9B1D)) {
         var_4 = 1;
       } else if(vectordot(var_5, var_7) < 0 && vectordot(var_6, var_7) < 0) {
@@ -221,7 +221,7 @@ func_7B1A() {
       return var_0;
     }
 
-    var_0 = scripts\engine\utility::getstruct(self.var_10E6D.var_9B27.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.var_10E6D.var_9B27.target, "targetname");
     if(isDefined(var_0) && distancesquared(var_0.origin, self.origin) > squared(100)) {
       var_0.var_13070 = gettime();
       return var_0;

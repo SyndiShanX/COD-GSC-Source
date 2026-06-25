@@ -17,7 +17,7 @@ _id_806F() {
 
 _id_7F95(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_0._id_73E3 = undefined;
   var_0._id_2968 = undefined;
 

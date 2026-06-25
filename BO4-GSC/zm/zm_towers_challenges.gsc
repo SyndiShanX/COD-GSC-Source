@@ -74,7 +74,7 @@ init() {
   level.var_9f50bc60 = array(&function_89f10652, &function_43020320);
   level.var_24230bcd = array(&function_99f8f485, &function_e50d2a3d, &function_b1a2d509);
   level.var_93527b27 = array(&function_2bdfb862, &function_1e0efdcd, &function_cd3a4ff5);
-  level.var_b56b2097 = getent("zm_towers_trap_piece_3", "targetname");
+  level.var_b56b2097 = getEnt("zm_towers_trap_piece_3", "targetname");
   level.var_b56b2097 hide();
   level.var_38935e23 = getEntArray("t_challenge_brazier_trigger", "script_noteworthy");
   array::run_all(level.var_38935e23, &sethintstring, #"hash_37fe206ef8f70207");
@@ -105,8 +105,8 @@ init() {
 
   foreach(var_986431d3 in var_6eaa1749) {
     if(!level flag::get(#"hash_7e6d1a215978eac4")) {
-      var_394c506d = getent(var_986431d3.targetname + "_hint", "targetname");
-      thread function_ea1042c6(getent(var_986431d3.targetname, "targetname"), var_394c506d);
+      var_394c506d = getEnt(var_986431d3.targetname + "_hint", "targetname");
+      thread function_ea1042c6(getEnt(var_986431d3.targetname, "targetname"), var_394c506d);
     }
   }
 
@@ -213,8 +213,8 @@ function_1583001a(e_player, var_986431d3) {
   e_player flag::init(#"flag_player_completed_all_challenges");
   e_trig = self;
   e_trig flag::set(#"hash_19856658ee6e4f3a");
-  e_trig.banner = getent(e_trig.target, "targetname");
-  e_trig.banner.var_d412a3e6 = getent(e_trig.banner.target, "targetname");
+  e_trig.banner = getEnt(e_trig.target, "targetname");
+  e_trig.banner.var_d412a3e6 = getEnt(e_trig.banner.target, "targetname");
   var_986431d3.challenge_struct.e_trig = e_trig;
   e_trig.challenge_struct = var_986431d3.challenge_struct;
 
@@ -241,7 +241,7 @@ function_1583001a(e_player, var_986431d3) {
   var_986431d3.challenge_struct thread function_702ac990(e_player, e_trig);
   wait 0.1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player != e_player) {
       if(player flag::exists(#"flag_player_completed_all_challenges") && player flag::get(#"flag_player_completed_all_challenges")) {
         player function_11e35de5(e_trig);
@@ -357,7 +357,7 @@ function_702ac990(e_player, e_trig) {
     }
   }
 
-  e_trig sethintstring(#"zm_towers/challenge_complete");
+  e_trig setHintString(#"zm_towers/challenge_complete");
 
   switch (e_trig.challenge_struct.targetname) {
     case #"odin_brazier":
@@ -443,7 +443,7 @@ function_ae982bb9(str_type) {
 function_c3158242(var_38e7a8be) {
   self endon(#"disconnect");
   level zm_audio::sndannouncerplayvox(var_38e7a8be);
-  a_e_players = getplayers(#"allies");
+  a_e_players = getPlayers(#"allies");
   arrayremovevalue(a_e_players, self);
 
   foreach(e_player in a_e_players) {
@@ -476,7 +476,7 @@ function_45f9a547() {
   fx_model clientfield::set("blue_glow", 1);
   wait 1;
   level.var_b56b2097 show();
-  mdl_clip = getent("mdl_acid_trap_cauldron_piece_clip", "targetname");
+  mdl_clip = getEnt("mdl_acid_trap_cauldron_piece_clip", "targetname");
   mdl_clip solid();
   wait 1;
 
@@ -565,31 +565,31 @@ function_2ae8eabe(n_current_progress, var_8d9da2cd) {
   }
 
   if(var_9667b963 >= 20) {
-    var_c0f2a5df = getent(self.targetname + "_head1", "targetname");
+    var_c0f2a5df = getEnt(self.targetname + "_head1", "targetname");
     var_c0f2a5df show();
     var_c0f2a5df clientfield::set(var_fe02dade, 1);
   }
 
   if(var_9667b963 >= 40) {
-    var_c0f2a5df = getent(self.targetname + "_head2", "targetname");
+    var_c0f2a5df = getEnt(self.targetname + "_head2", "targetname");
     var_c0f2a5df show();
     var_c0f2a5df clientfield::set(var_fe02dade, 1);
   }
 
   if(var_9667b963 >= 60) {
-    var_c0f2a5df = getent(self.targetname + "_head3", "targetname");
+    var_c0f2a5df = getEnt(self.targetname + "_head3", "targetname");
     var_c0f2a5df show();
     var_c0f2a5df clientfield::set(var_fe02dade, 1);
   }
 
   if(var_9667b963 >= 80) {
-    var_c0f2a5df = getent(self.targetname + "_head4", "targetname");
+    var_c0f2a5df = getEnt(self.targetname + "_head4", "targetname");
     var_c0f2a5df show();
     var_c0f2a5df clientfield::set(var_fe02dade, 1);
   }
 
   if(var_9667b963 == 100) {
-    var_c0f2a5df = getent(self.targetname + "_head5", "targetname");
+    var_c0f2a5df = getEnt(self.targetname + "_head5", "targetname");
     var_c0f2a5df show();
     var_c0f2a5df clientfield::set(var_fe02dade, 1);
   }
@@ -626,7 +626,7 @@ function_15280d13(e_player, e_trig, var_5f06d3f8) {
   e_player endon(#"disconnect");
 
   if(var_5f06d3f8 === 1) {
-    e_trig sethintstring(#"hash_9b98137ec7cd136");
+    e_trig setHintString(#"hash_9b98137ec7cd136");
     e_trig waittill(#"trigger");
   }
 
@@ -644,7 +644,7 @@ function_15280d13(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"equipment_kills_challenge_completed");
   self function_544b63c0(6);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_2d8a5fb9 = undefined;
   e_trig function_d2103a80(e_player, 6);
   self flag::clear(#"flag_challenge_active");
@@ -695,7 +695,7 @@ function_1abdfaa6(e_player, e_trig, var_5f06d3f8) {
   e_player endon(#"disconnect");
 
   if(var_5f06d3f8 === 1) {
-    e_trig sethintstring(#"hash_9b98137ec7cd136");
+    e_trig setHintString(#"hash_9b98137ec7cd136");
     e_trig waittill(#"trigger");
   }
 
@@ -713,7 +713,7 @@ function_1abdfaa6(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"hash_7731445a0fb80df");
   self function_544b63c0(10);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_fa64a47b = undefined;
   e_trig function_d2103a80(e_player, 10);
   self flag::clear(#"flag_challenge_active");
@@ -759,7 +759,7 @@ function_75b0f76a(e_player, e_trig, var_5f06d3f8) {
   e_player endon(#"disconnect");
 
   if(var_5f06d3f8 === 1) {
-    e_trig sethintstring(#"hash_9b98137ec7cd136");
+    e_trig setHintString(#"hash_9b98137ec7cd136");
     e_trig waittill(#"trigger");
   }
 
@@ -777,7 +777,7 @@ function_75b0f76a(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"knife_kill_challenge_completed");
   self function_544b63c0(13);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_dd287f97 = undefined;
   e_trig function_d2103a80(e_player, 13);
   self flag::clear(#"flag_challenge_active");
@@ -820,7 +820,7 @@ function_2cf8fe6a(e_player, e_trig, var_5f06d3f8) {
   e_player endon(#"disconnect");
 
   if(var_5f06d3f8 === 1) {
-    e_trig sethintstring(#"hash_9b98137ec7cd136");
+    e_trig setHintString(#"hash_9b98137ec7cd136");
     e_trig waittill(#"trigger");
   }
 
@@ -838,7 +838,7 @@ function_2cf8fe6a(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"headshot_challenge_completed");
   self function_544b63c0(5);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_6c499d = undefined;
   e_trig function_d2103a80(e_player, 5);
   self flag::clear(#"flag_challenge_active");
@@ -884,7 +884,7 @@ function_ce7b3715(e_player, e_trig, var_5f06d3f8) {
   e_player endon(#"disconnect");
 
   if(var_5f06d3f8 === 1) {
-    e_trig sethintstring(#"hash_9b98137ec7cd136");
+    e_trig setHintString(#"hash_9b98137ec7cd136");
     e_trig waittill(#"trigger");
   }
 
@@ -903,7 +903,7 @@ function_ce7b3715(e_player, e_trig, var_5f06d3f8) {
   e_player thread function_1dd6c24f();
   self waittill(#"hash_1b7d29ca77ce35c");
   self function_544b63c0(1);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_b0508fbc = undefined;
   e_trig function_d2103a80(e_player, 1);
   self flag::clear(#"flag_challenge_active");
@@ -960,7 +960,7 @@ function_43020320(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"hash_6edbb9b7bfeb38a3");
   self function_544b63c0(9);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_a86b6f54 = undefined;
   e_trig function_d2103a80(e_player, 9);
   self flag::clear(#"flag_challenge_active");
@@ -1009,7 +1009,7 @@ function_d9ed4d25(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"hash_31d79470abcf1282");
   self function_544b63c0(5);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_8c74b626 = undefined;
   e_trig function_d2103a80(e_player, 5);
   self flag::clear(#"flag_challenge_active");
@@ -1064,7 +1064,7 @@ function_89f10652(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"hash_5b6a8d05204c98e1");
   self function_544b63c0(3);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_4423c8ba = undefined;
   e_trig function_d2103a80(e_player, 3);
   self flag::clear(#"flag_challenge_active");
@@ -1124,7 +1124,7 @@ function_8b70fc31(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"temple_challenge_completed");
   self function_544b63c0(1);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_edf07bbf = undefined;
   e_trig function_d2103a80(e_player, 1);
   self flag::clear(#"flag_challenge_active");
@@ -1202,7 +1202,7 @@ function_b1a2d509(e_player, e_trig, var_5f06d3f8) {
   }
 
   self waittill(#"beloved_challenge_completed");
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   e_player.var_4b213d1b = undefined;
   e_trig function_d2103a80(e_player, 120);
   self flag::clear(#"flag_challenge_active");
@@ -1265,7 +1265,7 @@ function_45396550(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"shield_challenge_completed");
   self function_544b63c0(9);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_d7571058 = undefined;
   e_trig function_d2103a80(e_player, 9);
   self flag::clear(#"flag_challenge_active");
@@ -1333,7 +1333,7 @@ function_99f8f485(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"hash_47170980360105a8");
   self function_544b63c0(9);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_b6cfe237 = undefined;
   e_trig function_d2103a80(e_player, 9);
   self flag::clear(#"flag_challenge_active");
@@ -1388,7 +1388,7 @@ function_e50d2a3d(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"hash_b7f3e44410f5062");
   self function_544b63c0(9);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_b11d9e23 = undefined;
   e_trig function_d2103a80(e_player, 9);
   self flag::clear(#"flag_challenge_active");
@@ -1438,7 +1438,7 @@ function_1e0efdcd(e_player, e_trig, var_5f06d3f8) {
   e_player thread function_295948b2();
   self waittill(#"hash_5d7c0e41aec8535e");
   self function_544b63c0(1);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_8bafcbf3 = undefined;
   e_trig function_d2103a80(e_player, 1);
   self flag::clear(#"flag_challenge_active");
@@ -1504,7 +1504,7 @@ function_cd3a4ff5(e_player, e_trig, var_5f06d3f8) {
 
   self waittill(#"hash_93d348ce67aaf63");
   self function_544b63c0(1);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_ea6db531 = undefined;
   e_trig function_d2103a80(e_player, 1);
   self flag::clear(#"flag_challenge_active");
@@ -1559,7 +1559,7 @@ function_2bdfb862(e_player, e_trig, var_5f06d3f8) {
   self thread function_fc8ff5f4(e_player);
   self waittill(#"hash_3c4a9ff92127458d");
   self function_544b63c0(20);
-  playsoundatposition(#"zmb_challenges_complete", (0, 0, 0));
+  playSoundAtPosition(#"zmb_challenges_complete", (0, 0, 0));
   self.var_83798eab = undefined;
   e_trig function_d2103a80(e_player, 20);
   self flag::clear(#"flag_challenge_active");
@@ -1615,7 +1615,7 @@ function_fc8ff5f4(e_player) {
   }
 
   e_player.var_29f318bb = 0;
-  var_9b5260f3 = getent("e_challenge_center_stage", "targetname");
+  var_9b5260f3 = getEnt("e_challenge_center_stage", "targetname");
 
   while(self.var_83798eab < 20) {
     if(e_player === self.var_25276720) {
@@ -1644,7 +1644,7 @@ function_fc8ff5f4(e_player) {
 
 function_ea1042c6(var_986431d3, var_394c506d) {
   var_986431d3.challenge_struct = struct::get(var_986431d3.target);
-  var_394c506d sethintstring(#"hash_685d7c68f4c511a7");
+  var_394c506d setHintString(#"hash_685d7c68f4c511a7");
 
   while(true) {
     s_info = var_986431d3 waittill(#"trigger");
@@ -1657,11 +1657,11 @@ function_ea1042c6(var_986431d3, var_394c506d) {
 
   e_player.challenge_struct = var_986431d3.challenge_struct;
   e_player.challenge_struct.var_25276720 = e_player;
-  e_player.challenge_struct.var_4931480f = getent(var_986431d3.challenge_struct.target, "targetname");
+  e_player.challenge_struct.var_4931480f = getEnt(var_986431d3.challenge_struct.target, "targetname");
   e_player.challenge_struct.var_4931480f flag::init(#"hash_19856658ee6e4f3a");
   var_394c506d setinvisibletoall();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player != e_player) {
       var_394c506d setvisibletoplayer(player);
       var_394c506d sethintstringforplayer(player, #"hash_1705b54e6528bc52");
@@ -1704,7 +1704,7 @@ function_ea1042c6(var_986431d3, var_394c506d) {
 
   e_player.challenge_struct.var_4931480f function_1583001a(e_player, var_986431d3);
   var_20e5c3e2 = var_986431d3.target + "_banner";
-  e_banner = getent(var_20e5c3e2, "targetname");
+  e_banner = getEnt(var_20e5c3e2, "targetname");
   str_color = function_7e61f202(e_banner);
   e_banner scene::play("p8_fxanim_zm_towers_banner_achievement_" + str_color + "_bundle");
 }
@@ -1722,9 +1722,9 @@ function_d2103a80(e_player, n_required_goal) {
   self.var_f2e7f46a = 0;
 
   if(!e_player gamepadusedlast()) {
-    self sethintstring(#"hash_63302e97b05d8fc4");
+    self setHintString(#"hash_63302e97b05d8fc4");
   } else {
-    self sethintstring(#"hash_710531ce6bfa48c8");
+    self setHintString(#"hash_710531ce6bfa48c8");
   }
 
   foreach(var_6bf81b9d in e_player.challenge_struct function_876f93aa()) {
@@ -1820,9 +1820,9 @@ function_577792a1(e_trig, e_player) {
     if(!zm_utility::can_use(e_player, e_trig.var_f2e7f46a) && e_player == e_player.challenge_struct.var_25276720) {
       e_trig sethintstringforplayer(e_player, "");
     } else if(!e_player gamepadusedlast()) {
-      self sethintstring(#"hash_63302e97b05d8fc4");
+      self setHintString(#"hash_63302e97b05d8fc4");
     } else {
-      self sethintstring(#"hash_710531ce6bfa48c8");
+      self setHintString(#"hash_710531ce6bfa48c8");
     }
 
     wait 0.25;
@@ -1895,7 +1895,7 @@ _good_door_opened(e_player, e_trig) {
       break;
     case #"free_perk":
       sound = "evt_bottle_dispense";
-      playsoundatposition(sound, self.origin);
+      playSoundAtPosition(sound, self.origin);
       var_62fef0f1 = e_player zm_perks::function_5ea0c6cf();
 
       if(!isDefined(var_62fef0f1)) {
@@ -2107,7 +2107,7 @@ function_876f93aa() {
 
 function_a83b406a() {
   if(isDefined(self.var_9276b18a) && self.var_9276b18a) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(isDefined(e_player.challenge_struct)) {
         if(isDefined(e_player.challenge_struct.var_97467803) && e_player.challenge_struct.var_97467803) {
           if(e_player.challenge_struct flag::get(#"flag_challenge_active")) {

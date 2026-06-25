@@ -102,7 +102,7 @@ _id_10A94(var_0, var_1) {
   level endon("game_ended");
   var_2 = spawn("trigger_radius", self.origin - (0, 0, 40), 0, 64, 64);
   var_2 _meth_80DB();
-  var_2 linkto(self);
+  var_2 linkTo(self);
   self._id_8E32 = var_2;
   var_2 endon("death");
 
@@ -130,18 +130,18 @@ _id_10A96(var_0, var_1) {
   self endon("death");
   level endon("game_ended");
   var_2 = spawn("script_model", self.origin);
-  var_2 linkto(self);
+  var_2 linkTo(self);
   self._id_FE91 = var_2;
   var_2 makeuseable();
-  var_2 setcursorhint("HINT_NOICON");
+  var_2 setCursorHint("HINT_NOICON");
   var_2 _meth_84D9("show");
 
   switch (var_1.basename) {
     case "s4_me_icepick_mp":
-      var_2 sethintstring(&"WEAPON_THROWINGMELEE/PICKUP_ICEPICK");
+      var_2 setHintString(&"WEAPON_THROWINGMELEE/PICKUP_ICEPICK");
       break;
     case "s4_me_axe_mp":
-      var_2 sethintstring(&"WEAPON_THROWINGMELEE/PICKUP_AXE");
+      var_2 setHintString(&"WEAPON_THROWINGMELEE/PICKUP_AXE");
       break;
   }
 

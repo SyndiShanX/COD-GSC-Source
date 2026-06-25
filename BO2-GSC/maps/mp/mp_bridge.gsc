@@ -184,6 +184,6 @@ disconnect_node(node) {
   ent = spawn("script_model", node.origin, 1);
   ent setModel(level.deployedshieldmodel);
   ent hide();
-  ent disconnectpaths();
+  ent disconnectPaths();
   ent.origin = ent.origin - vectorscale((0, 0, 1), 64.0);
 }

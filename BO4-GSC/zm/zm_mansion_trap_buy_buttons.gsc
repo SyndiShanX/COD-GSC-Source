@@ -84,9 +84,9 @@ function_63be76e0() {
 }
 
 function_8724b9c4() {
-  self moveto(self.v_down, 0.5);
+  self moveTo(self.v_down, 0.5);
 }
 
 function_a82eb7c1() {
-  self moveto(self.v_up, 0.5);
+  self moveTo(self.v_up, 0.5);
 }

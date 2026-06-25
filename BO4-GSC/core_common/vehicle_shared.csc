@@ -1539,7 +1539,7 @@ field_do_standarddeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, 
     }
 
     if(isDefined(self.var_d0569e25) && self.var_d0569e25 != "") {
-      self playrumbleonentity(localclientnum, self.var_d0569e25);
+      self playRumbleOnEntity(localclientnum, self.var_d0569e25);
     }
   }
 }

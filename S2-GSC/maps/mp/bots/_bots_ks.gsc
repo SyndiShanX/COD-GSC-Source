@@ -459,9 +459,9 @@ func_62DF(param_00) {
   }
 
   self.var_0A2D[self.var_0A2D.size] = param_00;
-  var_01 = vectornormalize(param_00.var_0116 - self.var_0116 * (1, 1, 0));
+  var_01 = vectorNormalize(param_00.var_0116 - self.var_0116 * (1, 1, 0));
   while(isalive(param_00)) {
-    var_02 = vectornormalize(param_00.var_0116 - self.var_0116 * (1, 1, 0));
+    var_02 = vectorNormalize(param_00.var_0116 - self.var_0116 * (1, 1, 0));
     var_03 = vectordot(var_01, var_02);
     if(var_03 <= 0) {
       var_01 = var_02;

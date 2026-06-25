@@ -100,7 +100,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     e_grenade.angles = self.angles;
     mdl_monkey = util::spawn_model(e_grenade.model, e_grenade.origin, e_grenade.angles);
     e_grenade.mdl_monkey = mdl_monkey;
-    e_grenade.mdl_monkey linkto(e_grenade);
+    e_grenade.mdl_monkey linkTo(e_grenade);
     e_grenade.mdl_monkey.var_38af96b9 = e_grenade;
     e_grenade.mdl_monkey.team = e_grenade.team;
     e_grenade.mdl_monkey clientfield::set("enemyequip", 1);
@@ -150,7 +150,7 @@ function_4e61e1d() {
 function_4f90c4c2() {
   if(isDefined(self.var_38af96b9)) {
     self callback::callback(#"hash_6aa0232dd3c8376a");
-    playsoundatposition(#"wpn_claymore_alert", self.origin);
+    playSoundAtPosition(#"wpn_claymore_alert", self.origin);
     self.var_38af96b9 detonate();
   }
 

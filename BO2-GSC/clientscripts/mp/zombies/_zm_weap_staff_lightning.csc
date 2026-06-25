@@ -33,7 +33,7 @@ lightning_miss_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     playFXOnTag(localclientnum, level._effect["lightning_miss"], self, "tag_origin");
     level.lightning_ball_fx[localclientnum] = self;
     ent = spawn(0, self.origin, "script_origin");
-    ent linkto(self);
+    ent linkTo(self);
     ent playLoopSound("wpn_lightningstaff_ball", 1);
     self thread watch_ball_fx_killed(localclientnum, ent);
     level notify("lightning_ball_created");
@@ -65,9 +65,9 @@ lightning_arc_play_fx_thread(localclientnum) {
 
   while(true) {
     v_spine = self gettagorigin("J_SpineUpper");
-    self.e_fx moveto(v_spine, 0.1);
+    self.e_fx moveTo(v_spine, 0.1);
     serverwait(localclientnum, 0.5);
-    self.e_fx moveto(e_ball.origin, 0.1);
+    self.e_fx moveTo(e_ball.origin, 0.1);
     serverwait(localclientnum, 0.5);
   }
 }

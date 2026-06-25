@@ -48,7 +48,7 @@ function sensorgrenadethink(sensorent, sensorhandle, localclientnum) {
     return;
   }
   while(true) {
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     foreach(player in players) {
       if(self util::isenemyplayer(player)) {
         if(player hasperk(localclientnum, "specialty_nomotionsensor") || player hasperk(localclientnum, "specialty_sengrenjammer")) {
@@ -79,7 +79,7 @@ function clearthreatdetectorondelete(sensorent, sensorhandle, localclientnum) {
       break;
     }
   }
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
   foreach(player in players) {
     if(self util::isenemyplayer(player)) {
       player duplicate_render::set_player_threat_detected(localclientnum, 0);

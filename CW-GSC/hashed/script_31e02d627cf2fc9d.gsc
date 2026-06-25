@@ -114,10 +114,10 @@ function function_bf9c2634() {
 }
 
 function trailer_park_combat() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level thread function_d9c93f85();
-  var_cb15424a = getent("vol_gas_station_all", "targetname");
+  var_cb15424a = getEnt("vol_gas_station_all", "targetname");
   var_bd5393e2 = ai::array_spawn("axis_gas_station");
   level flag::wait_till("flag_gas_station_end");
   function_1eaaceab(var_bd5393e2);

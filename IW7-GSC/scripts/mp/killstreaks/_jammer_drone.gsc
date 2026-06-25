@@ -64,7 +64,7 @@ func_618B(var_0) {
 }
 
 func_49DE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = getent("airstrikeheight", "targetname");
+  var_7 = getEnt("airstrikeheight", "targetname");
   var_8 = var_2.origin;
   var_9 = anglesToForward(var_3);
   var_10 = var_1.origin;
@@ -166,7 +166,7 @@ func_9DD5(var_0) {
 
 func_6CBF(var_0) {
   var_1 = var_0.target;
-  var_2 = scripts\engine\utility::getstruct(var_1, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1, "targetname");
   return var_2;
 }
 

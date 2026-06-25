@@ -234,19 +234,19 @@ main() {
   base_vehicles = getEntArray("base_vehicles", "script_noteworthy");
   array_thread(base_vehicles, ::add_spawn_function, ::setup_base_vehicles);
 
-  base_troop_transport1 = getent("base_troop_transport1", "targetname");
+  base_troop_transport1 = getEnt("base_troop_transport1", "targetname");
   base_troop_transport1 add_spawn_function(::unload_when_close_to_player);
   base_troop_transport1 add_spawn_function(::dialog_destroyed_vehicle, "cont_cmt_goodkilltruck");
 
-  base_troop_transport2 = getent("base_troop_transport2", "targetname");
+  base_troop_transport2 = getEnt("base_troop_transport2", "targetname");
   base_troop_transport2 add_spawn_function(::unload_when_close_to_player);
   base_troop_transport2 add_spawn_function(::dialog_destroyed_vehicle, "cont_cmt_goodkilltruck");
 
-  base_truck2 = getent("base_truck2", "targetname");
+  base_truck2 = getEnt("base_truck2", "targetname");
   base_truck2 add_spawn_function(::unload_when_close_to_player);
   base_truck2 add_spawn_function(::dialog_destroyed_vehicle, "cont_cmt_directhitjeep");
 
-  price_spawner = getent("price", "script_noteworthy");
+  price_spawner = getEnt("price", "script_noteworthy");
   price_spawner add_spawn_function(::setup_price);
   price_spawner add_spawn_function(::set_threatbias_group, "price");
 
@@ -257,13 +257,13 @@ main() {
   thread dialog_handle_predator_infantry_kills();
 
   flag_init("base_troop_transport2_spawned");
-  base_troop_transport2 = getent("base_troop_transport2", "targetname");
+  base_troop_transport2 = getEnt("base_troop_transport2", "targetname");
   base_troop_transport2 add_spawn_function(::flag_set, "base_troop_transport2_spawned");
 
   village_truck_guys = getEntArray("village_truck_guys", "script_noteworthy");
   array_thread(village_truck_guys, ::add_spawn_function, ::village_truck_guys_setup);
 
-  sub_ladder = getent("sub_ladder", "targetname");
+  sub_ladder = getEnt("sub_ladder", "targetname");
   sub_ladder.realOrigin = sub_ladder.origin;
   sub_ladder.origin += (0, 0, -10000);
 
@@ -287,7 +287,7 @@ start_start() {
 }
 
 start_base() {
-  start = getstruct("base_start_player", "targetname");
+  start = getStruct("base_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
@@ -314,7 +314,7 @@ start_base() {
 }
 
 start_defend_sub() {
-  start = getstruct("defend_sub_start_player", "targetname");
+  start = getStruct("defend_sub_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
@@ -380,7 +380,7 @@ handle_start() {
 
   maps\_introscreen::contingency_black_screen_intro();
 
-  price_spawner = getent("price", "script_noteworthy");
+  price_spawner = getEnt("price", "script_noteworthy");
   price_spawner spawn_ai();
 
   thread cargo_choppers();
@@ -433,7 +433,7 @@ handle_start() {
 }
 
 start_slide() {
-  start = getstruct("slide_start_player", "targetname");
+  start = getStruct("slide_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
@@ -481,7 +481,7 @@ handle_slide() {
 
   level.btr_slider.animname = "contingency_btr_slide";
 
-  btr81_slide_node = getstruct("btr81_slide_node", "targetname");
+  btr81_slide_node = getStruct("btr81_slide_node", "targetname");
 
   btr81_slide_node thread anim_single_solo(level.btr_slider, "contingency_btr_slide");
   level.btr_slider playSound("scn_con_bmp_skid");
@@ -490,7 +490,7 @@ handle_slide() {
   wait wait_to_hide;
 
   level notify("run_to_woods");
-  level.price anim_stopanimscripted();
+  level.price anim_stopanimScripted();
   level.price thread dialogue_queue("cont_pri_incoming");
 
   thread stealth_ai_ignore_tree_explosions();
@@ -513,7 +513,7 @@ handle_slide() {
 }
 
 start_woods() {
-  start = getstruct("woods_start_player", "targetname");
+  start = getStruct("woods_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
@@ -537,7 +537,7 @@ start_woods() {
 }
 
 start_midwoods() {
-  start = getstruct("midwoods_start_player", "targetname");
+  start = getStruct("midwoods_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
@@ -610,7 +610,7 @@ handle_midwoods() {
 }
 
 start_ridge() {
-  start = getstruct("ridge_start_player", "targetname");
+  start = getStruct("ridge_start_player", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
@@ -702,7 +702,7 @@ first_uav_sequence() {
   if((isalive(level.gauntlet_east)) && (isalive(level.gauntlet_west))) {
     flag_set("first_uav_destroyed");
 
-    gauntlet_west = getent("gauntlet_west", "targetname");
+    gauntlet_west = getEnt("gauntlet_west", "targetname");
     stinger_source = spawn("script_origin", gauntlet_west.origin + (0, 0, 220));
 
     fire_stinger_at_uav(stinger_source);
@@ -842,7 +842,7 @@ handle_base() {
 
   thread setup_friendlies_for_base();
 
-  retreat_pos = getstruct("village_enemies_retreat_pos", "targetname").origin;
+  retreat_pos = getStruct("village_enemies_retreat_pos", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(mf in enemies) {
     mf thread village_enemies_setup_retreat(retreat_pos);
@@ -929,7 +929,7 @@ handle_defend_sub() {
   thread dialog_price_splits_off();
 
   level.price disable_ai_color();
-  price_key_pos = getent("price_key_pos", "targetname");
+  price_key_pos = getEnt("price_key_pos", "targetname");
   level.price setgoalpos(price_key_pos.origin);
   level.price.goalradius = 64;
 
@@ -955,13 +955,13 @@ handle_defend_sub() {
   flag_wait_or_timeout("defend_sub_vehicle_guys_dead", 50);
   flag_wait("player_on_guardhouse");
 
-  flee_pos = getstruct("sub_obj_enemies_flee", "targetname").origin;
+  flee_pos = getStruct("sub_obj_enemies_flee", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
     guy thread enemies_flee(flee_pos);
   }
 
-  stinger_source = getent("defend_sub_stinger_source", "targetname");
+  stinger_source = getEnt("defend_sub_stinger_source", "targetname");
 
   fire_stinger_at_uav(stinger_source);
 
@@ -993,7 +993,7 @@ handle_defend_sub() {
 
   wait 4;
 
-  flee_pos = getstruct("contacts_south_flee_pos", "targetname").origin;
+  flee_pos = getStruct("contacts_south_flee_pos", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
     guy thread enemies_flee(flee_pos);
@@ -1081,9 +1081,9 @@ dialog_roach_change_guns() {
 }
 
 spawn_ghosts_team() {
-  bricktop_spawner = getent("bricktop", "script_noteworthy");
+  bricktop_spawner = getEnt("bricktop", "script_noteworthy");
   bricktop_spawner spawn_ai();
-  rasta_spawner = getent("rasta", "script_noteworthy");
+  rasta_spawner = getEnt("rasta", "script_noteworthy");
   rasta_spawner spawn_ai();
 
   if(isalive(level.gauntlet_east)) {
@@ -1120,7 +1120,7 @@ faster_price_if_player_close() {
     if(distance(level.player.origin, level.price.origin) < 400) {
       level.price.moveplaybackrate = 1;
     } else {
-      vec2 = VectorNormalize((level.player.origin - level.price.origin));
+      vec2 = vectorNormalize((level.player.origin - level.price.origin));
       vec = anglesToForward(level.price.angles);
       vecdot = vectordot(vec, vec2);
 
@@ -1218,11 +1218,11 @@ setup_vehicle_gate(stringname) {
 }
 
 setup_sub_hatch() {
-  sub_hatch_th = getent("sub_hatch_th", "targetname");
+  sub_hatch_th = getEnt("sub_hatch_th", "targetname");
   sub_hatch_th trigger_off();
-  hatch_model = getent("hatch_model", "targetname");
-  hatch_model_collision = getent("hatch_model_collision", "targetname");
-  hatch_model_collision linkto(hatch_model);
+  hatch_model = getEnt("hatch_model", "targetname");
+  hatch_model_collision = getEnt("hatch_model_collision", "targetname");
+  hatch_model_collision linkTo(hatch_model);
   hatch_model rotatepitch(120, .05);
 
   flag_wait("close_sub_hatch");
@@ -1300,9 +1300,9 @@ dialog_looking_for_us() {
 }
 
 launch_nuke() {
-  icbm_missile01 = getent("icbm_missile01", "targetname");
-  missile01_start = getent("missile01_start", "targetname");
-  missile01_end = getent("missile01_end", "targetname");
+  icbm_missile01 = getEnt("icbm_missile01", "targetname");
+  missile01_start = getEnt("missile01_start", "targetname");
+  missile01_end = getEnt("missile01_end", "targetname");
 
   earthquake(0.3, 12, icbm_missile01.origin, 8000);
 
@@ -1311,9 +1311,9 @@ launch_nuke() {
 
   icbm_missile01 playSound("scn_con_icbm_ignition");
 
-  icbm_missile01 linkto(missile01_start);
+  icbm_missile01 linkTo(missile01_start);
 
-  missile01_start moveto(missile01_end.origin, 50, 10, 0);
+  missile01_start moveTo(missile01_end.origin, 50, 10, 0);
 
   playFXOnTag(level._effect["smoke_geotrail_icbm"], icbm_missile01, "TAG_NOZZLE");
   exploder("icbm_launch");
@@ -1332,8 +1332,8 @@ launch_nuke() {
 
 uaz_control() {
   trigger = spawn("trigger_radius", self gettagorigin("tag_passenger") + (0, 0, -48), 0, 72, 72);
-  trigger enablelinkto();
-  trigger linkto(self);
+  trigger enablelinkTo();
+  trigger linkTo(self);
   trigger waittill("trigger");
 
   level.player allowProne(false);
@@ -1344,7 +1344,7 @@ uaz_control() {
   level.player.rig = spawn_anim_model("player_rig");
   level.player.rig hide();
 
-  level.player.rig linkto(self, "tag_body");
+  level.player.rig linkTo(self, "tag_body");
   self thread anim_single_solo(level.player.rig, "boneyard_uaz_mount", "tag_body");
   self thread ride_uaz_door();
 
@@ -1377,7 +1377,7 @@ spawn_sub_enemies() {
 
 sub_ladder() {
   flag_wait("player_on_sub");
-  sub_ladder = getent("sub_ladder", "targetname");
+  sub_ladder = getEnt("sub_ladder", "targetname");
 
   sub_ladder.realOrigin = sub_ladder.origin;
   sub_ladder.origin += (0, 0, -10000);
@@ -1393,7 +1393,7 @@ single_shots() {
 
 activate_players_key() {
   flag_set("player_key_rdy");
-  players_key = getent("players_key", "targetname");
+  players_key = getEnt("players_key", "targetname");
   players_key glow();
 
   players_key setCursorHint("HINT_NOICON");
@@ -1427,7 +1427,7 @@ start_tear_gas_guys() {
   flag_wait("player_dropping_into_sub");
   tear_gas_nodes = getEntArray("tear_gas_nodes", "script_noteworthy");
   foreach(anode in tear_gas_nodes) {
-    spawner = getent(anode.target, "targetname");
+    spawner = getEnt(anode.target, "targetname");
     anim_name = anode.script_animation;
     spawner add_spawn_function(::setup_tear_gas_guy, anim_name, anode);
     spawner spawn_ai();
@@ -1528,8 +1528,8 @@ base_alarm_sound() {
   dialog[dialog.size] = "cont_bpa_battlestations";
   current = 0;
 
-  base_pa = getent("base_pa", "targetname");
-  base_alarm_sound = getent("base_alarm_sound", "targetname");
+  base_pa = getEnt("base_pa", "targetname");
+  base_alarm_sound = getEnt("base_alarm_sound", "targetname");
   while(!flag("price_splits_off")) {
     while(1) {}
     base_alarm_sound playLoopSound("emt_alarm_base_alert");
@@ -1719,7 +1719,7 @@ dead_vehicle_enable_paths_thread() {
 
   wait(5);
 
-  self DisconnectPaths();
+  self disconnectPaths();
   self.dead_vehicle_enable_paths = undefined;
 }
 
@@ -1762,7 +1762,7 @@ vehicle_death_paths() {
         death_origin = self.origin;
       }
 
-      self DisconnectPaths();
+      self disconnectPaths();
     }
 
     wait(0.05);
@@ -1923,7 +1923,7 @@ smart_barney(end_flag, end_goal, end_volume) {
 
   while(!flag(end_flag)) {
     player = level.player.origin;
-    vec = VectorNormalize(end_goal - player);
+    vec = vectorNormalize(end_goal - player);
     forward = vector_multiply(vec, 400);
     goal = forward + player;
     self setgoalpos(goal);
@@ -1974,11 +1974,11 @@ friendlies_shoot_at_truck_until_its_unloads() {
 handle_stealth_spotted() {
   level endon("price_starts_moving");
   flag_wait("_stealth_spotted");
-  level.price anim_stopanimscripted();
+  level.price anim_stopanimScripted();
 }
 
 price_intro_anim() {
-  spot = getstruct("price_intro_talk_struct", "script_noteworthy");
+  spot = getStruct("price_intro_talk_struct", "script_noteworthy");
   spot thread handle_stealth_spotted();
   spot anim_reach_solo(level.price, "intro");
   spot anim_single_solo(level.price, "intro");
@@ -1998,7 +1998,7 @@ price_slides_down_the_ridge() {
   wait 3;
   flag_wait("going_down_ridge");
 
-  buddy_slide_node = getent("ridge_price_overlook_org", "targetname");
+  buddy_slide_node = getEnt("ridge_price_overlook_org", "targetname");
 
   buddy_slide_node anim_single_solo(level.price, "slide");
 
@@ -2019,7 +2019,7 @@ kill_helicopter_fail_safe() {
   }
   origin = (-13500.0, 876.0, 749.0);
 
-  kill_heli_fail_safe = getstruct("kill_heli_fail_safe", "targetname");
+  kill_heli_fail_safe = getStruct("kill_heli_fail_safe", "targetname");
   if(isDefined(kill_heli_fail_safe)) {
     origin = kill_heli_fail_safe.origin;
   }
@@ -2165,7 +2165,7 @@ UAVRigAiming() {
     return;
   }
   focus_points = getEntArray("uav_focus_point", "targetname");
-  village_focus_point = getent("village_focus_point", "script_noteworthy");
+  village_focus_point = getEnt("village_focus_point", "script_noteworthy");
 
   level endon("uav_destroyed");
   level.uav endon("death");
@@ -2179,8 +2179,8 @@ UAVRigAiming() {
 
     angles = VectorToAngles(targetPos - level.uav.origin);
 
-    level.uavRig MoveTo(level.uav.origin, 0.10, 0, 0);
-    level.uavRig RotateTo(ANGLES, 0.10, 0, 0);
+    level.uavRig moveTo(level.uav.origin, 0.10, 0, 0);
+    level.uavRig rotateTo(ANGLES, 0.10, 0, 0);
     wait 0.05;
   }
 }
@@ -2350,7 +2350,7 @@ destroy_chain(start_ent) {
   current_target = start_ent;
   while(1) {
     if(isDefined(current_target.script_linkTo)) {
-      tree = getent(current_target.script_linkTo, "script_linkname");
+      tree = getEnt(current_target.script_linkTo, "script_linkname");
       tree notify("explode");
     }
 
@@ -2361,7 +2361,7 @@ destroy_chain(start_ent) {
     }
 
     if(isDefined(current_target.target)) {
-      next_target = getstruct(current_target.target, "targetname");
+      next_target = getStruct(current_target.target, "targetname");
       assert(isDefined(next_target));
       current_target = next_target;
     } else
@@ -2417,14 +2417,14 @@ monitor_player_returns_to_btrs() {
   level endon("player_slid_down");
   flag_wait("returning_to_btrs");
 
-  level.btr_tree_destroyer setturrettargetent(level.player);
+  level.btr_tree_destroyer setturrettargetEnt(level.player);
 
   shots = randomintrange(2, 5);
   for(i = 0; i < shots; i++) {
     level.btr_tree_destroyer fireWeapon();
     wait(0.35);
   }
-  level.btr_slider setturrettargetent(level.player);
+  level.btr_slider setturrettargetEnt(level.player);
   wait(randomfloatrange(.2, .5));
 
   shots = randomintrange(2, 4);
@@ -2444,7 +2444,7 @@ monitor_distance_player_vs_price() {
   while(1) {
     level.player waittill_entity_out_of_range(level.price, 1000);
 
-    vec2 = VectorNormalize((level.player.origin - level.price.origin));
+    vec2 = vectorNormalize((level.player.origin - level.price.origin));
 
     vec = anglesToForward(level.price.angles);
     vecdot = vectordot(vec, vec2);
@@ -2458,14 +2458,14 @@ monitor_distance_player_vs_price() {
 
   level notify("shoot_at_player");
 
-  self setturrettargetent(level.player);
+  self setturrettargetEnt(level.player);
 
   shots = randomintrange(2, 5);
   for(i = 0; i < shots; i++) {
     self fireWeapon();
     wait(0.35);
   }
-  level.btr_slider setturrettargetent(level.player);
+  level.btr_slider setturrettargetEnt(level.player);
   wait(randomfloatrange(.2, .5));
 
   shots = randomintrange(2, 4);
@@ -2537,7 +2537,7 @@ setup_destroyable_tree() {
   level endon("shoot_at_player");
 
   small_tree = false;
-  tree_base = getent(self.target, "targetname");
+  tree_base = getEnt(self.target, "targetname");
   destroyed_top = undefined;
   clip_brush = undefined;
   if(tree_base.model == "foliage_tree_pine_snow_tall_b_broken_btm") {
@@ -2611,7 +2611,7 @@ setup_destroyable_tree() {
 
   accel_time = drop_time;
 
-  destroyed_top RotateTo(destroyed_top.goalangles, drop_time, accel_time, 0);
+  destroyed_top rotateTo(destroyed_top.goalangles, drop_time, accel_time, 0);
 
   wait(drop_time - pre_hit_fx_time);
 
@@ -3753,7 +3753,7 @@ spawn_cargo_chopper(cargo_heli_spawner) {
     if(new_cargo[i].classname == "script_model") {
       new_cargo[i] setModel(cargo_item_spawners[i].model);
     }
-    new_cargo[i] linkto(cargo_heli);
+    new_cargo[i] linkTo(cargo_heli);
   }
 
   wait .1;
@@ -3824,7 +3824,7 @@ setup_bricktop_village() {
   if(isalive(level.gauntlet_east)) {
     self place_weapon_on("at4", "back");
 
-    fire_pos_ent = getent(self.target, "targetname");
+    fire_pos_ent = getEnt(self.target, "targetname");
     thing = level.gauntlet_east;
     thing_offset = (0, 0, 64);
     self thread destroy_thing_with_at4(fire_pos_ent, thing, thing_offset);
@@ -3851,7 +3851,7 @@ setup_rasta_village() {
   if(isalive(level.gauntlet_west)) {
     self place_weapon_on("at4", "back");
 
-    fire_pos_ent = getent(self.target, "targetname");
+    fire_pos_ent = getEnt(self.target, "targetname");
     thing = level.gauntlet_west;
     thing_offset = (0, 0, 64);
     self thread destroy_thing_with_at4(fire_pos_ent, thing, thing_offset);
@@ -4695,7 +4695,7 @@ objective_get_to_sub() {
   }
   origin = (-11742.0, 2368.0, 643.0);
 
-  obj_reach_split_off = getstruct("obj_reach_split_off", "targetname");
+  obj_reach_split_off = getStruct("obj_reach_split_off", "targetname");
   if(isDefined(obj_reach_split_off)) {
     origin = obj_reach_split_off.origin;
   }
@@ -4710,7 +4710,7 @@ objective_get_to_sub() {
 objective_defend_sub() {
   flag_wait("price_splits_off");
 
-  origin = getstruct("obj_guard_house", "targetname").origin;
+  origin = getStruct("obj_guard_house", "targetname").origin;
   registerObjective("obj_sub", &"CONTINGENCY_OBJ_DEFEND_SUB", origin + (0, 0, 48));
   setObjectiveState("obj_sub", "current");
   setObjectiveWaypoint("obj_sub", &"CONTINGENCY_OBJ_DEFEND");
@@ -4947,7 +4947,7 @@ fire_at_player(player) {
 
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
+    self setturrettargetEnt(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
@@ -4963,7 +4963,7 @@ miss_player(player) {
   for(i = 0; i < burstsize; i++) {
     offset = randomvector(15) + miss_vec + (0, 0, 64);
 
-    self setturrettargetent(player, offset);
+    self setturrettargetEnt(player, offset);
     self fireweapon();
     wait fireTime;
   }

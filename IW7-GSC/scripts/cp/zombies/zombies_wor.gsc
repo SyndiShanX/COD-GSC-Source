@@ -296,7 +296,7 @@ fake_crystal_logic(var_0, var_1, var_2, var_3, var_4) {
   var_0 setuserange(64);
   var_0 setusefov(120);
   var_7 = playFXOnTag(var_6, var_0, "tag_origin");
-  var_0 sethintstring(&"CP_QUEST_WOR_PART");
+  var_0 setHintString(&"CP_QUEST_WOR_PART");
   var_0 waittill("trigger", var_8);
   stopFXOnTag(var_6, var_0, "tag_origin");
   level.wor_items_picked_up[var_1.gun][var_4] = 1;
@@ -307,7 +307,7 @@ update_ufo_angles(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     var_0 waittill("next_position_found", var_6, var_7);
     var_8 = vectortoangles(var_7.origin - var_6.origin) + (180, 0, 0);
-    var_0 rotateto(var_8, 0.5, 0.05, 0.05);
+    var_0 rotateTo(var_8, 0.5, 0.05, 0.05);
   }
 }
 
@@ -328,12 +328,12 @@ start_crystal_path(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_15 = var_12;
     var_15 = get_next_valid_struct(var_6, var_15);
     thread changeangledelay(var_6, var_14, var_15, var_9, var_12);
-    var_6 moveto(var_12.origin, var_14);
+    var_6 moveTo(var_12.origin, var_14);
     var_10 = var_6 scripts\engine\utility::waittill_any_return("movedone", "fully_charged");
     if(scripts\engine\utility::istrue(var_6.fully_charged)) {
       for(;;) {
         var_14 = get_move_rate(var_6, var_6.origin, var_12.origin, 2000);
-        var_6 moveto(var_12.origin, var_14);
+        var_6 moveTo(var_12.origin, var_14);
         if(can_use_struct_for_final_pos(var_0, var_12)) {
           var_11 = scripts\engine\utility::drop_to_ground(var_12.origin, 0, -400) + (0, 0, 40);
           var_12 = magicbullet("bolasprayprojhome_mp", var_6.origin, var_11);
@@ -421,7 +421,7 @@ move_crystal_to_end_pos(var_0) {
   }
 
   wait(2);
-  var_0 moveto(var_1, var_4);
+  var_0 moveTo(var_1, var_4);
   var_0.at_end_loc = 1;
 }
 
@@ -717,11 +717,11 @@ struct_wait_for_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = strtok(var_1, "_");
   var_8 = var_7[3];
   var_9 = level.arkqueststation;
-  var_10 = scripts\engine\utility::getstruct("slot_" + var_0, "script_noteworthy");
+  var_10 = scripts\engine\utility::getStruct("slot_" + var_0, "script_noteworthy");
   var_2.origin = var_10.origin;
   var_2.angles = anglestoup(var_10.angles);
   var_2 setModel(var_1);
-  var_11 = getent("crystal_damage_trigger_" + var_0, "targetname");
+  var_11 = getEnt("crystal_damage_trigger_" + var_0, "targetname");
   var_11.origin = var_11.origin + (0, 0.25, 0);
   var_11 setCanDamage(1);
   var_11.team = "axis";
@@ -810,7 +810,7 @@ run_battery_logic(var_0, var_1, var_2, var_3, var_4) {
   var_0 makeusable();
   var_0 setuserange(64);
   var_0 setusefov(120);
-  var_0 sethintstring(&"CP_QUEST_WOR_PART");
+  var_0 setHintString(&"CP_QUEST_WOR_PART");
   var_0 waittill("trigger", var_7);
   var_7 thread scripts\cp\cp_vo::try_to_play_vo("quest_" + var_6 + "_battery", "zmb_comment_vo", "highest", 10, 1, 0, 0, 100);
   var_0 setscriptablepartstate("pickup_piece", "pickup_piece");
@@ -822,10 +822,10 @@ run_battery_logic(var_0, var_1, var_2, var_3, var_4) {
 rotate_wor_piece() {
   self endon("death");
   for(;;) {
-    self rotateyaw(360, 2);
+    self rotateYaw(360, 2);
     self movez(-5, 2);
     self waittill("movedone");
-    self rotateyaw(360, 2);
+    self rotateYaw(360, 2);
     self movez(5, 2);
     self waittill("movedone");
   }
@@ -836,28 +836,28 @@ run_toy_logic(var_0, var_1, var_2, var_3, var_4) {
   var_6 = (0, 0, 0);
   switch (var_1.gun) {
     case "iw7_shredder_zm":
-      var_7 = getent("toy_angry_mike", "targetname");
+      var_7 = getEnt("toy_angry_mike", "targetname");
       var_5 = var_7.origin;
       var_6 = var_7.angles;
       var_7 hide();
       break;
 
     case "iw7_facemelter_zm":
-      var_7 = getent("toy_shuttle", "targetname");
+      var_7 = getEnt("toy_shuttle", "targetname");
       var_5 = var_7.origin;
       var_6 = var_7.angles;
       var_7 hide();
       break;
 
     case "iw7_dischord_zm":
-      var_7 = getent("toy_disco_ball", "targetname");
+      var_7 = getEnt("toy_disco_ball", "targetname");
       var_5 = var_7.origin;
       var_6 = var_7.angles;
       var_7 hide();
       break;
 
     case "iw7_headcutter_zm":
-      var_7 = getent("toy_yeti", "targetname");
+      var_7 = getEnt("toy_yeti", "targetname");
       var_5 = var_7.origin;
       var_6 = var_7.angles;
       var_7 hide();
@@ -879,7 +879,7 @@ run_toy_logic(var_0, var_1, var_2, var_3, var_4) {
   var_0 makeusable();
   var_0 setuserange(64);
   var_0 setusefov(120);
-  var_0 sethintstring(&"CP_QUEST_WOR_PART");
+  var_0 setHintString(&"CP_QUEST_WOR_PART");
   var_0 thread spin_toy();
   var_0 waittill("trigger", var_10);
   switch (var_0.model) {
@@ -1002,7 +1002,7 @@ crytsal_capture_killed_essense(var_0, var_1) {
       var_7 = 0.05;
     }
 
-    var_2 moveto(var_3, var_7);
+    var_2 moveTo(var_3, var_7);
     var_2 waittill("movedone");
     if(distance(var_2.origin, var_1.origin) > 16) {
       var_3 = var_1.origin;
@@ -1392,22 +1392,22 @@ follow_struct_trail(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::getStructArray("toy_trail_start", "targetname");
   var_4 = scripts\engine\utility::getclosest(self.origin, var_3);
   wait(0.5);
-  self moveto(var_4.origin, 0.5);
+  self moveTo(var_4.origin, 0.5);
   self waittill("movedone");
-  var_5 = scripts\engine\utility::getstruct(var_4.target, "targetname");
-  self moveto(var_5.origin, 0.5);
+  var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
+  self moveTo(var_5.origin, 0.5);
   self waittill("movedone");
   while(isDefined(var_5.target)) {
-    var_5 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+    var_5 = scripts\engine\utility::getStruct(var_5.target, "targetname");
     if(!isDefined(var_5.target)) {
       var_6 = var_5.origin - var_4.origin;
-      var_6 = vectornormalize(var_6);
+      var_6 = vectorNormalize(var_6);
       var_6 = var_6 * 40;
       var_6 = (var_6[0], var_6[1], 0);
       var_5.origin = var_5.origin + var_6;
     }
 
-    self moveto(var_5.origin, 0.75);
+    self moveTo(var_5.origin, 0.75);
     self waittill("movedone");
   }
 
@@ -1419,11 +1419,11 @@ spin_toy() {
   self endon("death");
   self endon("trigger");
   for(;;) {
-    self rotateyaw(360, 2);
+    self rotateYaw(360, 2);
     self movez(5, 2);
     self waittill("movedone");
     self movez(-5, 2);
-    self rotateyaw(360, 2);
+    self rotateYaw(360, 2);
     self waittill("movedone");
   }
 }
@@ -1580,7 +1580,7 @@ wait_for_impact(var_0, var_1, var_2) {
         level.hot_potato_carrier = undefined;
         thread notify_on_explode();
         thread listen_for_pickup();
-        var_0 = getent("center_portal_grenade_volume", "targetname");
+        var_0 = getEnt("center_portal_grenade_volume", "targetname");
         thread check_for_grenade_in_volume(var_0, var_1, var_2);
       }
     }
@@ -1606,7 +1606,7 @@ listen_for_mouth_explosion(var_0, var_1, var_2) {
   }
 
   self waittill("explode", var_3);
-  var_4 = getent("headcutter_grenade_vol", "targetname");
+  var_4 = getEnt("headcutter_grenade_vol", "targetname");
   if(ispointinvolume(var_3, var_4)) {
     var_1 notify("cryo_hit");
     if(isDefined(var_2)) {
@@ -1634,7 +1634,7 @@ wor_change_portal(var_0) {
 
 wait_to_spawn_facemelter_battery() {
   level waittill("player_entering_wor_changed_portal", var_0);
-  var_1 = scripts\engine\utility::getstruct("facemelter_battery_org", "targetname");
+  var_1 = scripts\engine\utility::getStruct("facemelter_battery_org", "targetname");
   level notify("ww_iw7_facemelter_zm_battery_dropped", var_1.origin);
   while(!isDefined(level.facemelter_battery)) {
     wait(0.1);
@@ -1784,8 +1784,8 @@ debug_make_dischord_targets_invisible() {
 }
 
 dischord_battery_move() {
-  var_0 = scripts\engine\utility::getstruct("dischord_battery_end_loc", "targetname");
-  self moveto(var_0.origin, 5, 0.1, 0.1);
+  var_0 = scripts\engine\utility::getStruct("dischord_battery_end_loc", "targetname");
+  self moveTo(var_0.origin, 5, 0.1, 0.1);
   self waittill("movedone");
 }
 
@@ -1916,7 +1916,7 @@ launch_glasses() {
   var_1 = self gettagorigin("tag_eye");
   var_2 = self gettagangles("tag_eye");
   var_2 = anglesToForward(var_2);
-  var_3 = vectornormalize(var_2) + (0, 0, 0.25);
+  var_3 = vectorNormalize(var_2) + (0, 0, 0.25);
   var_3 = var_3 * var_0;
   var_4 = self getvelocity();
   var_3 = var_3 + var_4;
@@ -1982,7 +1982,7 @@ pick_up_knocked_off_glasses() {
   self hudoutlineenable(2, 1, 0);
   self makeusable();
   var_0 = &"CP_QUEST_WOR_PART";
-  self sethintstring(var_0);
+  self setHintString(var_0);
 }
 
 init_dischord_glasses_power() {
@@ -2011,7 +2011,7 @@ usedischordglasses() {
 }
 
 headcutter_freeze_test() {
-  level.headcutter_org = scripts\engine\utility::getstruct("headcutter_battery_loc", "targetname");
+  level.headcutter_org = scripts\engine\utility::getStruct("headcutter_battery_loc", "targetname");
   if(scripts\cp\utility::is_codxp()) {
     return;
   }
@@ -2034,8 +2034,8 @@ headcutter_freeze_loop() {
 
 freeze_check_loop() {
   self endon("stop_feeze_loop");
-  self.freeze_volume = getent(self.target, "targetname");
-  var_0 = getent("main_street_monster", "targetname");
+  self.freeze_volume = getEnt(self.target, "targetname");
+  var_0 = getEnt("main_street_monster", "targetname");
   var_1 = 10;
   for(;;) {
     self waittill("cryo_hit");
@@ -2067,7 +2067,7 @@ activate_freeze_volume(var_0) {
 }
 
 freeze_breath(var_0) {
-  var_1 = getent("main_street_monster", "targetname");
+  var_1 = getEnt("main_street_monster", "targetname");
   var_2 = spawnfx(level._effect["coaster_ice_frost"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   wait(2);
   var_1 playSound("yeti_frost_breath");
@@ -2085,7 +2085,7 @@ listen_for_cryo_kills() {
     level.total_cryo_kills++;
   }
 
-  var_4 = getent("main_street_monster", "targetname");
+  var_4 = getEnt("main_street_monster", "targetname");
   var_4 playSound("yeti_growl");
 }
 

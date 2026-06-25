@@ -28,7 +28,7 @@ rkfightinit() {
   scripts\engine\utility::flag_init("max_ammo_active");
   level thread setuprkcrates();
   precachempanim("IW7_cp_king_death");
-  level.rk_lostnfound = getent("rk_lostnfound", "targetname");
+  level.rk_lostnfound = getEnt("rk_lostnfound", "targetname");
   level.rk_lostnfound hide();
   level.available_crate_perks = scripts\engine\utility::array_randomize_objects(["perk_machine_revive", "perk_machine_flash", "perk_machine_tough", "perk_machine_run", "perk_machine_rat_a_tat"]);
   level.num_crates_broken = 0;
@@ -93,7 +93,7 @@ breakcrateandwait(var_0) {
 init_rk_candy_interactions() {
   var_0 = scripts\engine\utility::getStructArray("perk_candy_box", "script_noteworthy");
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_3.parent_struct = var_2;
     var_2.fx_struct = var_3;
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
@@ -428,14 +428,14 @@ setupplayerrkstart(var_0, var_1) {
   var_0 thread rkintroblackscreen();
   wait(1.25);
   if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-    var_0 setorigin(var_1.origin);
+    var_0 setOrigin(var_1.origin);
     var_0 setplayerangles(var_1.angles);
   }
 
   var_0.anchor = spawn("script_model", var_0.origin);
   var_0.anchor setModel("tag_origin");
   var_0.anchor.angles = var_1.angles;
-  var_0 playerlinkto(var_0.anchor, "tag_origin", 0, 30, 30, 10, 10, 0);
+  var_0 playerlinkTo(var_0.anchor, "tag_origin", 0, 30, 30, 10, 10, 0);
 }
 
 rkintroresumeprogression(var_0) {
@@ -496,7 +496,7 @@ outroblackscreen() {
 
   self.bs_anchor = spawn("script_model", self.origin);
   self.bs_anchor setModel("tag_origin");
-  self playerlinkto(self.bs_anchor);
+  self playerlinkTo(self.bs_anchor);
   scripts\cp\utility::freezecontrolswrapper(1);
   self setclientomnvar("ui_hide_hud", 1);
   self.ability_invulnerable = 1;
@@ -762,9 +762,9 @@ startactiveloop(var_0, var_1) {
 
   for(;;) {
     var_2 = randomfloatrange(2, 4);
-    self moveto(self.origin + (0, 0, 32), var_2);
+    self moveTo(self.origin + (0, 0, 32), var_2);
     wait(var_2);
-    self moveto(self.origin + (0, 0, -32), var_2);
+    self moveTo(self.origin + (0, 0, -32), var_2);
     wait(var_2);
   }
 }
@@ -784,7 +784,7 @@ moverelictoog(var_0) {
   if(isDefined(var_0.model)) {
     var_1 = spawnfx(level._effect["relic_idle"], var_0.origin);
     if(isDefined(var_0.ogpos)) {
-      var_0.model moveto(var_0.ogpos, 0.5);
+      var_0.model moveTo(var_0.ogpos, 0.5);
     }
 
     wait(0.5);
@@ -1171,7 +1171,7 @@ item_keep_rotating(var_0) {
   var_0 endon("death");
   var_1 = var_0.angles;
   for(;;) {
-    var_0 rotateto(var_1 + (randomintrange(-40, 40), randomintrange(-40, 90), randomintrange(-40, 90)), 3);
+    var_0 rotateTo(var_1 + (randomintrange(-40, 40), randomintrange(-40, 90), randomintrange(-40, 90)), 3);
     wait(3);
   }
 }
@@ -1179,7 +1179,7 @@ item_keep_rotating(var_0) {
 soul_key_pick_up_monitor(var_0) {
   var_0 endon("death");
   var_0 makeusable();
-  var_0 sethintstring(&"CP_DISCO_INTERACTIONS_PICKUP_SOUL_KEY");
+  var_0 setHintString(&"CP_DISCO_INTERACTIONS_PICKUP_SOUL_KEY");
   for(;;) {
     var_0 waittill("trigger", var_1);
     scripts\cp\zombies\directors_cut::give_dc_player_extra_xp_for_carrying_newb();
@@ -1227,7 +1227,7 @@ resume_spawn_wave() {
 }
 
 init_rkrelic() {
-  level.rk_center_arena_struct = scripts\engine\utility::getstruct("rk_arena_center", "script_noteworthy");
+  level.rk_center_arena_struct = scripts\engine\utility::getStruct("rk_arena_center", "script_noteworthy");
   level.rk_center_arena_struct scripts\cp\cp_interaction::remove_from_current_interaction_list(level.rk_center_arena_struct);
   level.rk_center_arena_struct.custom_search_dist = 128;
   if(!isDefined(level.rk_center_arena_struct.model)) {
@@ -1401,11 +1401,11 @@ heartsolotunedata(var_0) {
 startheartquestfunctionality() {
   var_0 = scripts\engine\utility::getStructArray("sewage_pool_start_loc", "targetname");
   var_1 = scripts\engine\utility::getStructArray("sewage_pool_loc", "script_noteworthy");
-  var_2 = getent("slime_pool", "targetname");
+  var_2 = getEnt("slime_pool", "targetname");
   var_2.team = "axis";
   var_2.objective_icon = var_1.size;
   var_2.var_C1 = 0;
-  var_3 = getent("arena_water", "targetname");
+  var_3 = getEnt("arena_water", "targetname");
   var_2.activestructs = var_1;
   var_3 thread watchforplayerstouchingwater(var_3);
   var_2 thread clearsewageonzombiedeath(var_2, var_1);
@@ -2459,9 +2459,9 @@ startcenteractiveloop(var_0) {
   self endon("death");
   for(;;) {
     var_1 = randomfloatrange(2, 4);
-    self moveto(self.origin + (0, 0, 32), var_1);
+    self moveTo(self.origin + (0, 0, 32), var_1);
     wait(var_1);
-    self moveto(self.origin + (0, 0, -32), var_1);
+    self moveTo(self.origin + (0, 0, -32), var_1);
     wait(var_1);
   }
 }

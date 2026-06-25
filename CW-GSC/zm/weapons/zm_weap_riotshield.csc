@@ -50,12 +50,12 @@ function watch_weapon_changes(localclientnum) {
 
 function zm_shield_damage_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, "zm_shield_damage");
+    self playRumbleOnEntity(fieldname, "zm_shield_damage");
   }
 }
 
 function zm_shield_break_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, "zm_shield_break");
+    self playRumbleOnEntity(fieldname, "zm_shield_break");
   }
 }

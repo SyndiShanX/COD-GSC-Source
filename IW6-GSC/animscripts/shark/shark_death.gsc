@@ -12,7 +12,7 @@ main() {
   var_0 setModel(self.model);
   var_0 useanimtree(#animtree);
   var_0 hide();
-  self linkto(var_0);
+  self linkTo(var_0);
   var_0 find_available_collision_model();
 
   if(randomintrange(0, 100) < 50) {
@@ -35,7 +35,7 @@ main() {
   }
 
   var_9 = 1;
-  var_0 moveto(var_0.origin - (0, 0, 1000), 100, 0, 100);
+  var_0 moveTo(var_0.origin - (0, 0, 1000), 100, 0, 100);
 
   while(var_9) {
     var_10 = bullettracepassed(var_0.origin, var_0.origin - (0, 0, 10), 1, self);
@@ -49,7 +49,7 @@ main() {
   }
 
   self setanimknobrestart(var_3, 1, 0, 1);
-  var_0 moveto(var_0.origin - (0, 0, 10), 5, 0, 5);
+  var_0 moveTo(var_0.origin - (0, 0, 10), 5, 0, 5);
 
   foreach(var_7 in var_5) {
     stopFXOnTag(level._effect["water_bubbles_wide_sm_lp"], var_0, var_7);
@@ -72,7 +72,7 @@ find_available_collision_model() {
       level.shark_collsions[var_0] solid();
       level.shark_collsions[var_0].origin = self.origin;
       level.shark_collsions[var_0].angles = self.angles;
-      level.shark_collsions[var_0] linkto(self);
+      level.shark_collsions[var_0] linkTo(self);
       self.shark_collision_model = level.shark_collsions[var_0];
 
       foreach(var_2 in level.players) {

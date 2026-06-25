@@ -83,7 +83,7 @@ function function_64b44f6b(localclientnum, oldval, newval, bnewent, binitialsnap
     }
     if(!isDefined(self.var_3a8912f4)) {
       self.var_3a8912f4 = spawn(0, self.origin, "script_origin");
-      self.var_3a8912f4 linkto(self);
+      self.var_3a8912f4 linkTo(self);
       self.var_3a8912f4 playLoopSound("zmb_squest_punchtime_fist_loop", 1);
       self thread snddeletesndent(self.var_3a8912f4);
     }
@@ -103,13 +103,13 @@ function snddeletesndent(ent) {
 }
 
 function function_a8fdf631(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  v_dest = getent(localclientnum, "ee_sam_portal", "targetname").origin;
+  v_dest = getEnt(localclientnum, "ee_sam_portal", "targetname").origin;
   e_fx = spawn(localclientnum, self gettagorigin("J_SpineUpper"), "script_model");
   e_fx setModel("tag_origin");
   playSound(localclientnum, "zmb_squest_charge_soul_leave", self.origin);
   e_fx playLoopSound("zmb_squest_charge_soul_lp");
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(v_dest + vectorscale((0, 0, 1), 5), 1);
+  e_fx moveTo(v_dest + vectorscale((0, 0, 1), 5), 1);
   e_fx waittill("movedone");
   playSound(localclientnum, "zmb_squest_charge_soul_impact", v_dest);
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
@@ -118,7 +118,7 @@ function function_a8fdf631(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_aff1c5b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  e_fx = getent(localclientnum, "ee_sam_portal", "targetname");
+  e_fx = getEnt(localclientnum, "ee_sam_portal", "targetname");
   if(isDefined(e_fx.fx_id)) {
     e_fx stoploopsound(5);
     stopfx(localclientnum, e_fx.fx_id);
@@ -159,7 +159,7 @@ function function_74610c8a(localclientnum, oldval, newval, bnewent, binitialsnap
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
   e_fx playLoopSound("zmb_squest_charge_soul_lp");
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(s_box.origin, 1);
+  e_fx moveTo(s_box.origin, 1);
   e_fx waittill("movedone");
   playSound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
@@ -192,7 +192,7 @@ function function_17bc361f(localclientnum) {
   self movey(-50, 2, 0, 1);
   self waittill("movedone");
   while(true) {
-    self rotateyaw(360, 4);
+    self rotateYaw(360, 4);
     self waittill("rotatedone");
   }
 }

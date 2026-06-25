@@ -26,7 +26,7 @@ init() {
   traintriggers = getEntArray("train_kill_trigger", "targetname");
 
   foreach(brush in brushes) {
-    brush disconnectpaths();
+    brush disconnectPaths();
   }
 
   waittime = 0.05;
@@ -36,12 +36,12 @@ init() {
     waittime = waittime + 0.05;
     gate.og_origin = gate.origin;
     brush = getclosest(gate.origin, brushes);
-    brush linkto(gate);
+    brush linkTo(gate);
     gate.kill_trigger = getclosest(gate.origin, triggers);
 
     if(isDefined(gate.kill_trigger)) {
-      gate.kill_trigger enablelinkto();
-      gate.kill_trigger linkto(gate);
+      gate.kill_trigger enablelinkTo();
+      gate.kill_trigger linkTo(gate);
     }
   }
 
@@ -58,19 +58,19 @@ init() {
   }
 
   cars = [];
-  cars[0] = spawnvehicle("p6_bullet_train_engine_phys", "train", "express_train_engine_mp", start.origin, (0, 0, 0));
+  cars[0] = spawnVehicle("p6_bullet_train_engine_phys", "train", "express_train_engine_mp", start.origin, (0, 0, 0));
   cars[0] ghost();
   cars[0] setcheapflag(1);
   cars[0].ismagicbullet = 1;
   killcam = spawn("script_model", cars[0].origin + vectorscale((0, 0, 1), 25.0));
   killcam.angles = cars[0].angles + vectorscale((0, -1, 0), 10.0);
-  killcam linkto(cars[0]);
+  killcam linkTo(cars[0]);
 
   foreach(traintrigger in traintriggers) {
     cars[0].trainkilltrigger = traintrigger;
     traintrigger.origin = start.origin;
-    traintrigger enablelinkto();
-    traintrigger linkto(cars[0]);
+    traintrigger enablelinkTo();
+    traintrigger linkTo(cars[0]);
   }
 
   for(i = 1; i < 20; i++) {
@@ -260,7 +260,7 @@ car_move() {
 }
 
 gate_rotate(yaw) {
-  self rotateyaw(yaw, 5);
+  self rotateYaw(yaw, 5);
 }
 
 gate_move(z_dist) {
@@ -269,7 +269,7 @@ gate_move(z_dist) {
   }
 
   if(!isDefined(z_dist)) {
-    self moveto(self.og_origin, 5);
+    self moveTo(self.og_origin, 5);
   } else {
     self.og_origin = self.origin;
     self movez(z_dist, 5);
@@ -514,7 +514,7 @@ destroy_supply_crates() {
     if(distancesquared(crate.origin, self.origin) < 10000) {
       if(crate istouching(self)) {
         playFX(level._supply_drop_explosion_fx, crate.origin);
-        playsoundatposition("wpn_grenade_explode", crate.origin);
+        playSoundAtPosition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();
       }

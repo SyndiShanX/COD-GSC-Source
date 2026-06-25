@@ -394,7 +394,7 @@ function_2cbae477(var_babebdbc = #"weapon/fx8_equip_swat_smk_signal", var_76361c
   playFXOnTag(var_babebdbc, self, var_76361c1a);
   self playSound(#"evt_strobe_start");
   self.sndent = spawn("script_origin", self.origin);
-  self.sndent linkto(self);
+  self.sndent linkTo(self);
   self.sndent playLoopSound(#"evt_strobe_lp");
 }
 

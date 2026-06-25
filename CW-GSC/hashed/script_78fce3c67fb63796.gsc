@@ -40,7 +40,7 @@ function function_dbeb79a6() {
 }
 
 function function_5043d668() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   e_player = a_e_players[0];
   e_player endon(#"death");
 

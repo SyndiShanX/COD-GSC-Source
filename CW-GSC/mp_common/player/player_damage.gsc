@@ -591,7 +591,7 @@ function private function_961fe569(einflictor, eattacker, idamage, idflags, smea
     if(weapons::isbulletdamage(smeansofdeath)) {
       angles = self getplayerangles();
       forward = anglesToForward((0, angles[1], 0));
-      dirtoattacker = vectornormalize(eattacker.origin - self.origin);
+      dirtoattacker = vectorNormalize(eattacker.origin - self.origin);
 
       if(vectordot(forward, dirtoattacker) < 0.7) {
         if(!isDefined(self.var_ea1458aa.var_64ffda50)) {
@@ -813,7 +813,7 @@ function private does_player_completely_avoid_damage(idflags, shitloc, weapon, f
     }
 
     dirtoplayer = self.origin - vpoint;
-    dir = vectornormalize((dirtoplayer[0], dirtoplayer[1], 0));
+    dir = vectorNormalize((dirtoplayer[0], dirtoplayer[1], 0));
     dot = vectordot(forward, dir);
     dot_threshold = -0.7;
 
@@ -1179,7 +1179,7 @@ function private modify_player_damage(einflictor, eattacker, idamage, idflags, s
     angles = self getplayerangles();
     forward = anglesToForward((0, angles[1], 0));
     dirtoplayer = self.origin - vpoint;
-    dir = vectornormalize((dirtoplayer[0], dirtoplayer[1], 0));
+    dir = vectorNormalize((dirtoplayer[0], dirtoplayer[1], 0));
     dot = vectordot(forward, dir);
 
     if(dot < -0.7) {
@@ -1557,7 +1557,7 @@ function function_201c298c() {
   }
 
   if(isDefined(var_28214e57)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.clientid === var_28214e57) {
         return player;
       }

@@ -1246,7 +1246,7 @@ lib_055A::func_1E4E(param_00, param_01, param_02, param_03) {
 
     var_28 = function_038E(var_27, var_11.var_0116);
     var_26 = var_26 + var_28 / var_1E;
-    var_26 = var_26 / common_scripts\utility::func_5D93(vectordot(vectornormalize(var_11 getvelocity()), vectornormalize(var_27 - var_11.var_0116)), 0, 1, 1, 1 + var_1D);
+    var_26 = var_26 / common_scripts\utility::func_5D93(vectordot(vectorNormalize(var_11 getvelocity()), vectorNormalize(var_27 - var_11.var_0116)), 0, 1, 1, 1 + var_1D);
     var_26 = var_26 + randomfloat(var_26 * var_1C + var_1B);
     if(!isDefined(var_22) || var_26 < var_22) {
       var_22 = var_26;

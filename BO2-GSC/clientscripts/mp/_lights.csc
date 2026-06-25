@@ -158,7 +158,7 @@ rotate_light_yaw() {
   while(true) {
     for(i = 0; i < self.lights.size; i++) {
       if(isDefined(self.lights[i])) {
-        self.lights[i] rotateyaw(360, self.script_light_rotate_yaw);
+        self.lights[i] rotateYaw(360, self.script_light_rotate_yaw);
       }
     }
 
@@ -549,7 +549,7 @@ setup_mixer_lights() {
 
 light_model_init_pause() {
   waittillframeend;
-  ent = getent(0, self.script_light_model, "targetname");
+  ent = getEnt(0, self.script_light_model, "targetname");
 
   if(isDefined(ent) && isDefined(self.script_light_on_spin_model)) {
     self.lights[0] setmixerspinmodels(ent, self.script_light_on_spin_model, self.script_light_off_spin_model, level._effect[self.script_light_spin_fx], self.script_light_spin_tag);

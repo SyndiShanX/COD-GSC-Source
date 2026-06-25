@@ -109,7 +109,7 @@ function function_1a90da2b(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_6b8c4c36(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, #"hash_431e56f34a345079");
+    self playRumbleOnEntity(fieldname, #"hash_431e56f34a345079");
     self postfx::playpostfxbundle(#"hash_1c01122f6d0510cf");
     return;
   }
@@ -119,12 +119,12 @@ function function_6b8c4c36(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_ccd8d6e0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    self playrumbleonentity(fieldname, #"hash_575c14596fbb0902");
+    self playRumbleOnEntity(fieldname, #"hash_575c14596fbb0902");
     return;
   }
 
   if(bwastimejump == 2) {
-    self playrumbleonentity(fieldname, #"hash_701661f6699fd075");
+    self playRumbleOnEntity(fieldname, #"hash_701661f6699fd075");
   }
 }
 

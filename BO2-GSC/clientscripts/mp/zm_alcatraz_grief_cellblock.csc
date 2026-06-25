@@ -18,9 +18,9 @@ main() {
   a_players = getlocalplayers();
 
   for(i = 0; i < a_players.size; i++) {
-    m_master_key_attachment = getent(i, "master_key_attachment", "targetname");
+    m_master_key_attachment = getEnt(i, "master_key_attachment", "targetname");
     m_master_key_attachment delete();
-    m_dryer = getent(i, "dryer_model", "targetname");
+    m_dryer = getEnt(i, "dryer_model", "targetname");
     m_dryer delete();
   }
 }

@@ -61,7 +61,7 @@ lava_damage_think() {
   }
 
   if(isDefined(self.target)) {
-    self.volume = getent(self.target, "targetname");
+    self.volume = getEnt(self.target, "targetname");
     assert(isDefined(self.volume), "No volume found for lava target " + self.target);
   }
 
@@ -231,7 +231,7 @@ player_burning_fx() {
 player_burning_audio() {
   fire_ent = spawn("script_model", self.origin);
   wait_network_frame();
-  fire_ent linkto(self);
+  fire_ent linkTo(self);
   fire_ent playLoopSound("evt_plr_fire_loop");
   self waittill_any("stop_flame_damage", "stop_flame_sounds", "death", "discoonect");
   fire_ent delete();

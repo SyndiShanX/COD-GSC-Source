@@ -127,7 +127,7 @@ function wasp_round_spawning() {
   parasite_round_fx();
   visionset_mgr::activate("visionset", "zm_wasp_round_visionset", undefined, 1.5, 1.5, 2);
   level clientfield::set("toggle_on_parasite_fog", 1);
-  playsoundatposition("vox_zmba_event_waspstart_0", (0, 0, 0));
+  playSoundAtPosition("vox_zmba_event_waspstart_0", (0, 0, 0));
   wait(6);
   n_wasps_alive = 0;
   level flag::set("wasp_round_in_progress");
@@ -161,7 +161,7 @@ function spawn_wasp() {
       favorite_enemy = get_favorite_enemy();
       spawn_enemy = favorite_enemy;
       if(!isDefined(spawn_enemy)) {
-        spawn_enemy = getplayers()[0];
+        spawn_enemy = getPlayers()[0];
       }
       if(isDefined(level.wasp_spawn_func)) {
         spawn_point = [[level.wasp_spawn_func]](spawn_enemy);
@@ -285,7 +285,7 @@ function parasite_drop_item(v_parasite_origin) {
       if(isDefined(e_closest_player)) {
         v_target = e_closest_player.origin + (0, 0, 20);
         n_distance_to_target = distance(v_start, v_target);
-        v_dir = vectornormalize(v_target - v_start);
+        v_dir = vectorNormalize(v_target - v_start);
         n_step = 50;
         n_distance_moved = 0;
         v_position = v_start;
@@ -308,7 +308,7 @@ function parasite_drop_item(v_parasite_origin) {
         if(n_flight_time > 4) {
           n_flight_time = 4;
         }
-        e_parasite_drop moveto(v_position, n_flight_time);
+        e_parasite_drop moveTo(v_position, n_flight_time);
       } else {
         v_nav_check = getclosestpointonnavmesh(e_parasite_drop.origin, 2000, 32);
       }
@@ -451,7 +451,7 @@ function get_favorite_enemy() {
 }
 
 function wasp_health_increase() {
-  players = getplayers();
+  players = getPlayers();
   level.wasp_health = level.round_number * 50;
   if(level.wasp_health > 1600) {
     level.wasp_health = 1600;
@@ -489,7 +489,7 @@ function wasp_round_tracker() {
       } else {
         level.next_wasp_round = (5 + (level.wasp_round_count * 10)) + (randomintrange(-1, 1));
       }
-      getplayers()[0] iprintln("" + level.next_wasp_round);
+      getPlayers()[0] iprintln("" + level.next_wasp_round);
     } else if(level flag::get("wasp_round")) {
       wasp_round_stop();
       level.round_spawn_func = old_spawn_func;
@@ -532,7 +532,7 @@ function play_wasp_round() {
   self playlocalsound("zmb_wasp_round_start");
   variation_count = 5;
   wait(4.5);
-  players = getplayers();
+  players = getPlayers();
   num = randomintrange(0, players.size);
   players[num] zm_audio::create_and_play_dialog("general", "wasp_spawn");
 }
@@ -686,7 +686,7 @@ function wasp_behind_audio() {
   self util::waittill_any("wasp_running", "wasp_combat");
   wait(3);
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       waspangle = angleclamp180((vectortoangles(self.origin - players[i].origin)[1]) - players[i].angles[1]);
       if(isalive(players[i]) && !isDefined(players[i].revivetrigger)) {
@@ -706,7 +706,7 @@ function special_wasp_spawn(n_to_spawn = 1, spawn_point, n_radius = 32, n_half_h
   }
   count = 0;
   while(count < n_to_spawn) {
-    players = getplayers();
+    players = getPlayers();
     favorite_enemy = get_favorite_enemy();
     spawn_enemy = favorite_enemy;
     if(!isDefined(spawn_enemy)) {
@@ -776,7 +776,7 @@ function watch_player_melee() {
     }
     pfwd = player getweaponforwarddir();
     tome = self.origin - peye;
-    tome = vectornormalize(tome);
+    tome = vectorNormalize(tome);
     dot = vectordot(pfwd, tome);
     if(dot < 0.5) {
       continue;

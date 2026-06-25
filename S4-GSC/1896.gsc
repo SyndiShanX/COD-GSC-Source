@@ -278,7 +278,7 @@ _id_7059(var_0) {
   self._id_A991 = self._id_0201;
   self._id_0201 = 48;
   _id_06BD::_id_23F3("combat");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   self _meth_8326(_func_02AB(var_1.origin));
   scripts\engine\utility::waittill_any_2("goal_reached", "goal");
 
@@ -362,14 +362,14 @@ _id_D1BB() {
 _id_EE83(var_0) {
   self endon("death");
   self endon("alerted");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
   for(;;) {
     self _meth_8326(_func_02AB(var_1.origin));
     scripts\engine\utility::waittill_any_2("goal_reached", "goal");
 
     if(isDefined(var_1.target)) {
-      var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       var_1 = var_2;
       continue;
     }
@@ -748,10 +748,10 @@ _id_5494() {
   }
 
   if(isDefined(self._id_E342._id_CD76)) {
-    var_0 = getent(self._id_E342._id_CD76, "script_noteworthy");
+    var_0 = getEnt(self._id_E342._id_CD76, "script_noteworthy");
 
     if(!isDefined(var_0)) {
-      var_0 = getent(self._id_E342._id_CD76, "targetname");
+      var_0 = getEnt(self._id_E342._id_CD76, "targetname");
     }
 
     if(isDefined(var_0)) {

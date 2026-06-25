@@ -41,9 +41,9 @@ main() {
   level endon(#"end_game");
   level.var_4182b94e = struct::get_array("initial_spawn_points", "targetname");
   level flag::init(#"slumber_party");
-  var_50f6b3f4 = getent("counter_tens", "targetname");
+  var_50f6b3f4 = getEnt("counter_tens", "targetname");
   var_50f6b3f4.start_angles = var_50f6b3f4.angles;
-  var_d02e9cd = getent("counter_ones", "targetname");
+  var_d02e9cd = getEnt("counter_ones", "targetname");
   var_d02e9cd.start_angles = var_d02e9cd.angles;
   level.var_b691023c = 0;
 
@@ -93,7 +93,7 @@ function_1a2500e5() {
   level.var_806abe8f = level.var_f44e37f7;
   level.var_f44e37f7 = &function_c4d44a1b;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread teleport_player();
   }
 
@@ -202,7 +202,7 @@ spawn_done(n_threshold) {
   if(isDefined(level.e_avogadro)) {
     self zm_ai_avogadro::function_ed39491e(4);
     exploder::exploder("fxexp_pyramid_capture");
-    level.vol_toast_trap = getent("vol_toast_trap", "targetname");
+    level.vol_toast_trap = getEnt("vol_toast_trap", "targetname");
 
     while(isDefined(level.e_avogadro) && !level.e_avogadro istouching(level.vol_toast_trap)) {
       wait 0.1;

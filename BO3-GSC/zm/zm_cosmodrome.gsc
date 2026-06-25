@@ -262,7 +262,7 @@ function zombie_cosmodrome_player_out_of_playable_area_monitor_callback() {
 }
 
 function centrifuge_jumpup_fix() {
-  var_157ff899 = getent("centrifuge_jumpup", "targetname");
+  var_157ff899 = getEnt("centrifuge_jumpup", "targetname");
   if(!isDefined(var_157ff899)) {
     return;
   }
@@ -271,10 +271,10 @@ function centrifuge_jumpup_fix() {
   while(true) {
     if(level.zones["centrifuge_zone"].is_occupied && var_b9bd08ae == 0) {
       var_157ff899 movex(jump_pos[0] + 64, 0.1);
-      var_157ff899 disconnectpaths();
+      var_157ff899 disconnectPaths();
       var_b9bd08ae = 1;
     } else if(!level.zones["centrifuge_zone"].is_occupied && var_b9bd08ae == 1) {
-      var_157ff899 moveto(jump_pos, 0.1);
+      var_157ff899 moveTo(jump_pos, 0.1);
       var_157ff899 connectpaths();
       var_b9bd08ae = 0;
     }
@@ -283,7 +283,7 @@ function centrifuge_jumpup_fix() {
 }
 
 function centrifuge_jumpdown_fix() {
-  var_157ff899 = getent("centrifuge_jumpdown", "targetname");
+  var_157ff899 = getEnt("centrifuge_jumpdown", "targetname");
   if(!isDefined(var_157ff899)) {
     return;
   }
@@ -292,10 +292,10 @@ function centrifuge_jumpdown_fix() {
   while(true) {
     if(level.zones["centrifuge_zone2"].is_occupied && var_ac214666 == 0) {
       var_157ff899 movex(jump_pos[0] + 64, 0.1);
-      var_157ff899 disconnectpaths();
+      var_157ff899 disconnectPaths();
       var_ac214666 = 1;
     } else if(!level.zones["centrifuge_zone2"].is_occupied && var_ac214666 == 1) {
-      var_157ff899 moveto(jump_pos, 0.1);
+      var_157ff899 moveTo(jump_pos, 0.1);
       var_157ff899 connectpaths();
       var_ac214666 = 0;
     }
@@ -314,7 +314,7 @@ function custom_add_vox() {
 
 function function_7eea24df() {
   level flag::wait_till("all_players_connected");
-  players = getplayers();
+  players = getPlayers();
   level.chest_min_move_usage = players.size;
   chest = level.chests[level.chest_index];
   while(level.chest_accessed < level.chest_min_move_usage) {
@@ -401,21 +401,21 @@ function function_54da140a() {
 }
 
 function electric_switch() {
-  trig = getent("use_elec_switch", "targetname");
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  trig setcursorhint("HINT_NOICON");
+  trig = getEnt("use_elec_switch", "targetname");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setCursorHint("HINT_NOICON");
   level thread wait_for_power();
   trig waittill("trigger", user);
-  playsoundatposition("zmb_poweron_front", (0, 0, 0));
+  playSoundAtPosition("zmb_poweron_front", (0, 0, 0));
 }
 
 function wait_for_power() {
   var_cf413835 = struct::get("power_switch", "targetname");
   level flag::wait_till("power_on");
-  playsoundatposition("zmb_switch_flip_start", var_cf413835.origin);
+  playSoundAtPosition("zmb_switch_flip_start", var_cf413835.origin);
   var_cf413835 scene::play("p7_fxanim_zmhd_power_switch_bundle");
   playFX(level._effect["switch_sparks"], struct::get("elec_switch_fx", "targetname").origin);
-  playsoundatposition("zmb_switch_flip", var_cf413835.origin);
+  playSoundAtPosition("zmb_switch_flip", var_cf413835.origin);
   level thread zm_cosmodrome_amb::power_clangs();
   level thread zm_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_power_switch");
   level flag::set("lander_power");
@@ -433,15 +433,15 @@ function function_98fe9c46() {
 
 function custom_pandora_show_func(anchor, anchortarget, pieces) {
   level.pandora_light.angles = (-90, anchortarget.angles[1] + 180, 0);
-  level.pandora_light moveto(anchortarget.origin, 0.05);
+  level.pandora_light moveTo(anchortarget.origin, 0.05);
   wait(1);
   playFX(level._effect["lght_marker_flare"], level.pandora_light.origin);
 }
 
 function custom_pandora_fx_func() {
-  start_chest = getent("start_chest", "script_noteworthy");
-  anchor = getent(start_chest.target, "targetname");
-  anchortarget = getent(anchor.target, "targetname");
+  start_chest = getEnt("start_chest", "script_noteworthy");
+  anchor = getEnt(start_chest.target, "targetname");
+  anchortarget = getEnt(anchor.target, "targetname");
   level.pandora_light = spawn("script_model", anchortarget.origin);
   level.pandora_light.angles = anchortarget.angles + (vectorscale((-1, 0, 0), 90));
   level.pandora_light setModel("tag_origin");
@@ -449,7 +449,7 @@ function custom_pandora_fx_func() {
 }
 
 function centrifuge_init() {
-  centrifuge = getent("centrifuge", "targetname");
+  centrifuge = getEnt("centrifuge", "targetname");
   if(isDefined(centrifuge)) {
     centrifuge function_c6807eeb();
   }
@@ -459,7 +459,7 @@ function function_a97cb654() {
   pieces = getEntArray(self.target, "targetname");
   if(isDefined(pieces)) {
     for(i = 0; i < pieces.size; i++) {
-      pieces[i] linkto(self);
+      pieces[i] linkTo(self);
     }
   }
   self thread function_c6807eeb();
@@ -467,7 +467,7 @@ function function_a97cb654() {
 
 function function_c6807eeb() {
   while(true) {
-    self rotateyaw(360, 20);
+    self rotateYaw(360, 20);
     self waittill("rotatedone");
   }
 }
@@ -535,7 +535,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     if(charindexarray[0] == 2) {
@@ -623,7 +623,7 @@ function setupmusic() {
 
 function function_9503fe88() {
   perk_machines = getEntArray("zombie_vending", "targetname");
-  new_revive_clip = getent("new_revive_clip", "targetname");
+  new_revive_clip = getEnt("new_revive_clip", "targetname");
   foreach(perk_machine in perk_machines) {
     if(isDefined(perk_machine.clip)) {
       perk_machine.clip delete();
@@ -876,7 +876,7 @@ function function_797b2641() {
     zm_devgui::zombie_devgui_give_perk("");
   } else {
     var_2921da00 = array("", "", "", "", "", "", "");
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     var_18253ec9 = randomintrange(0, var_2921da00.size - 1);
     while(e_player hasperk(var_2921da00[var_18253ec9])) {
       var_18253ec9 = randomintrange(0, var_2921da00.size - 1);
@@ -901,7 +901,7 @@ function function_797b2641() {
 function function_9d5d7bb3(choose) {
   vending_triggers = zm_ai_monkey::function_5b9c3e11();
   target_trigger = vending_triggers[0];
-  player = getplayers()[0];
+  player = getPlayers()[0];
   closest_dist_sq = distancesquared(player.origin, target_trigger.origin);
   foreach(var_807754d1 in vending_triggers) {
     if(var_807754d1 == target_trigger) {
@@ -970,7 +970,7 @@ function function_9d5d7bb3(choose) {
         }
       }
     }
-    level.var_93621cb stopanimscripted();
+    level.var_93621cb stopanimScripted();
     level.var_93621cb notify("hash_cb63b091");
     level.var_93621cb thread function_a15d765e(spot, perk_attack_anim);
   }
@@ -983,7 +983,7 @@ function function_a15d765e(spot, perk_attack_anim) {
   if(isDefined(spot)) {
     while(true) {
       time = getanimlength(perk_attack_anim);
-      level.var_93621cb animscripted("", spot.origin, spot.angles, perk_attack_anim);
+      level.var_93621cb animScripted("", spot.origin, spot.angles, perk_attack_anim);
       wait(time);
     }
   }
@@ -1001,14 +1001,14 @@ function function_5b312f() {
 }
 
 function function_f0357d95() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] zm_weap_black_hole_bomb::player_give_black_hole_bomb();
   }
 }
 
 function function_d360e7c6() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] _zm_weap_nesting_dolls::player_give_nesting_dolls();
   }

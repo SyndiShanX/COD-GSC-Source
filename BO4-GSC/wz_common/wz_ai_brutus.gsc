@@ -154,7 +154,7 @@ function_ea3e1b6c(entity) {
 
 on_brutus_killed(params) {
   self clientfield::set("brutus_spawn_clientfield", 0);
-  playsoundatposition(#"zmb_ai_brutus_death", self.origin);
+  playSoundAtPosition(#"zmb_ai_brutus_death", self.origin);
   self destructserverutils::togglespawngibs(self, 1);
   self destructserverutils::function_629a8d54(self, "tag_weapon_right");
 }
@@ -277,7 +277,7 @@ function_85e8940a(entity) {
   }
 
   var_aa6baab8 = entity ai::function_9139c839().var_1709a39;
-  players = getplayers(#"all", entity.origin, var_aa6baab8);
+  players = getPlayers(#"all", entity.origin, var_aa6baab8);
   shock_status_effect = getstatuseffect(#"shock_zm_trap");
   entity clientfield::increment("brutus_shock_attack", 1);
 

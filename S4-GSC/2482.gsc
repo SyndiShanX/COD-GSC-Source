@@ -8,7 +8,7 @@ init() {
   level._effect["firebombing_impact"] = loadfx("vfx/s4/killstreaks/vfx_firebomb_imp_exp_rnr.vfx");
   level._id_0F6C = [];
   level._id_0F6B = [];
-  level._id_10E0A = getent("white_phosphorus_damage", "targetname");
+  level._id_10E0A = getEnt("white_phosphorus_damage", "targetname");
 }
 
 _id_10F9E() {
@@ -221,7 +221,7 @@ _id_10F62(var_0) {
   var_7 = 30;
   self.owner thread _id_10F92(var_0, var_7);
   self.owner thread _id_10F99(var_0);
-  self moveto(var_2, var_3);
+  self moveTo(var_2, var_3);
   self setscriptablepartstate("bodyFX", "on", 0);
   self _meth_82CB("mp_suniform25_flyin");
   var_9 = 3;
@@ -295,7 +295,7 @@ _id_10F6B(var_0, var_1, var_2, var_3) {
   var_6._id_57B8 setentityowner(self.owner);
   var_6._id_57B8 thread bombmovementrotation(var_6);
   var_7 = spawn("script_model", var_0);
-  var_7 linkto(var_6, "tag_origin", (10, 0, 10), (0, 0, 0));
+  var_7 linkTo(var_6, "tag_origin", (10, 0, 10), (0, 0, 0));
   var_6.killcament = var_7;
   var_6.owner = self.owner;
   var_6.team = self.team;
@@ -372,7 +372,7 @@ _id_F30E(var_0, var_1, var_2) {
 
 _id_F309(var_0, var_1, var_2) {
   var_3 = undefined;
-  var_4 = vectornormalize(var_2);
+  var_4 = vectorNormalize(var_2);
   var_5 = anglestoup(self.angles);
   var_6 = anglestoright(var_1);
 
@@ -386,13 +386,13 @@ _id_F309(var_0, var_1, var_2) {
 }
 
 _id_F301(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_0, var_1));
+  var_2 = vectorNormalize(_func_025B(var_0, var_1));
   var_1 = _func_025B(var_2, var_0);
   return _func_0017(var_2, var_1, var_0);
 }
 
 _id_F300(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_1, var_0));
+  var_2 = vectorNormalize(_func_025B(var_1, var_0));
   var_1 = _func_025B(var_0, var_2);
   return _func_0017(var_1, var_2, var_0);
 }
@@ -499,9 +499,9 @@ _id_10F79(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_1 = var_1 - var_2 * 3500;
   var_4 = var_1 - var_2 * 1000;
-  self moveto(var_1, var_0 + 3);
+  self moveTo(var_1, var_0 + 3);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0 + 2);
-  self moveto(var_4, 3);
+  self moveTo(var_4, 3);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_3);
   self delete();
 }
@@ -1336,7 +1336,7 @@ _id_13D4(var_0) {
     self setscriptablepartstate("marker_scope", "off", 0);
     var_2 = anglesToForward(var_0 getplayerangles());
     var_3 = var_0 getEye();
-    var_4 = vectornormalize(self.origin - var_3);
+    var_4 = vectorNormalize(self.origin - var_3);
     var_5 = self.origin + var_4 * 20;
     var_6 = scripts\engine\trace::ray_trace(var_3, var_5, var_0);
     var_7 = var_6["normal"];

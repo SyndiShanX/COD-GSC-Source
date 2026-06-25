@@ -77,7 +77,7 @@ function threatdetectordestroyed(attacker, weapon, target) {
       scoreevents::processscoreevent("destroyed_motion_sensor", attacker, self.owner, weapon);
     }
   }
-  playsoundatposition("wpn_sensor_nade_explo", self.origin);
+  playSoundAtPosition("wpn_sensor_nade_explo", self.origin);
   self delete();
 }
 

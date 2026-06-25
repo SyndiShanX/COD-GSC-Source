@@ -218,7 +218,7 @@ do_shield_ground_slam() {
   self playsoundtoteam("wpn_decimator_impact_npc", self.team, self);
   playsoundatpos(self.origin, "wpn_decimator_debris");
   playFX(level.shield_explosion_vfx, self.origin);
-  self playrumbleonentity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
 }
 
 shield_ground_slam_explode() {
@@ -293,7 +293,7 @@ ww_riotshield_on_ai_killed(var_0) {
       return;
     }
 
-    var_2 = vectornormalize((var_1[0], var_1[1], 0));
+    var_2 = vectorNormalize((var_1[0], var_1[1], 0));
     var_3 = _func_01C6((0, 0, 1), var_2, 10 - randomint(20));
     var_3 = var_3 * (4000 + randomint(3000));
     var_3 = (var_3[0], var_3[1], randomint(3) + 1);

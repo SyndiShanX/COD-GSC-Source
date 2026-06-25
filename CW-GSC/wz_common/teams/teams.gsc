@@ -27,7 +27,7 @@ function function_f1394038() {
 
   foreach(team, _ in level.teams) {
     if(function_9dd75dad(team) && !is_true(level.var_606becce[team]) && !isDefined(level.var_eed7c027[team])) {
-      players = getplayers(team);
+      players = getPlayers(team);
       team_score = [[level._getteamscore]](team);
       team_kills = function_7e309c84(team, players);
       damage_done = function_3915e148(team, players);
@@ -132,7 +132,7 @@ function function_c7eae573() {
 
   foreach(team, _ in level.teams) {
     if(function_9dd75dad(team) && !is_true(level.var_606becce[team]) && is_all_dead(team)) {
-      players = getplayers(team);
+      players = getPlayers(team);
       last_alive = function_94203702(team, players);
       team_kills = function_7e309c84(team, players);
       damage_done = function_3915e148(team, players);
@@ -164,7 +164,7 @@ function function_5fed3908(team) {
   }
 
   callback::callback(#"hash_677c43609aa6ce47", team);
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     if(player function_8b1a219a()) {
@@ -180,7 +180,7 @@ function team_eliminated(team, var_293493b) {
   });
   level hud::function_22df4165();
   level thread function_9498e451(team);
-  deadteam = getplayers(team);
+  deadteam = getPlayers(team);
 
   foreach(teammember in deadteam) {
     teammember notify(#"end_respawn");

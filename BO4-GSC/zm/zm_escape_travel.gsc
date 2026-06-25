@@ -32,33 +32,33 @@ init_alcatraz_zipline() {
   level flag::init("gondola_doors_moving");
   level flag::init("gondola_in_motion");
   level flag::init("gondola_initialized");
-  e_gondola = getent("zipline_gondola", "targetname");
+  e_gondola = getEnt("zipline_gondola", "targetname");
   e_gondola setmovingplatformenabled(1);
   e_gondola.takedamage = 0;
   level.e_gondola = e_gondola;
   e_gondola.location = "roof";
   e_gondola.destination = undefined;
-  level.e_gondola.t_ride = getent("gondola_ride_trigger", "targetname");
-  level.e_gondola.t_ride enablelinkto();
-  level.e_gondola.t_ride linkto(e_gondola);
+  level.e_gondola.t_ride = getEnt("gondola_ride_trigger", "targetname");
+  level.e_gondola.t_ride enablelinkTo();
+  level.e_gondola.t_ride linkTo(e_gondola);
   a_t_call_triggers = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call_triggers) {
-    trigger sethintstring(#"hash_ebd3d1458a3b46e");
+    trigger setHintString(#"hash_ebd3d1458a3b46e");
   }
 
   function_815e3997();
   a_gondola_doors = getEntArray("gondola_doors", "targetname");
 
   foreach(mdl_door in a_gondola_doors) {
-    mdl_door linkto(e_gondola);
+    mdl_door linkTo(e_gondola);
     e_gondola establish_gondola_door_definition(mdl_door);
   }
 
   a_gondola_gates = getEntArray("gondola_gates", "targetname");
 
   foreach(mdl_gate in a_gondola_gates) {
-    mdl_gate linkto(e_gondola);
+    mdl_gate linkTo(e_gondola);
     e_gondola establish_gondola_gate_definition(mdl_gate);
   }
 
@@ -102,12 +102,12 @@ function_815e3997() {
   foreach(trigger in a_t_move_triggers) {
     if(zm_utility::is_standard()) {
       if(function_8b1a219a()) {
-        trigger sethintstring(#"hash_23ae833352769f3a");
+        trigger setHintString(#"hash_23ae833352769f3a");
       } else {
-        trigger sethintstring(#"hash_675cfe2c548c034e");
+        trigger setHintString(#"hash_675cfe2c548c034e");
       }
     } else {
-      trigger sethintstring(#"zm_escape/move_gondola", 750);
+      trigger setHintString(#"zm_escape/move_gondola", 750);
     }
 
     trigger setinvisibletoall();
@@ -121,7 +121,7 @@ gondola_hostmigration() {
 
   while(true) {
     level waittill(#"host_migration_begin");
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player val::set("host_migration", "allowdeath", 0);
@@ -151,7 +151,7 @@ gondola_hostmigration() {
     wait 1;
     player_escaped_gondola_failsafe();
     wait 5;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player val::reset("host_migration", "allowdeath");
@@ -165,8 +165,8 @@ link_player_to_gondola() {
     self endon(#"disconnect", #"death");
     e_origin = util::spawn_model("tag_origin", self.origin, self.angles);
     level.var_ee9168a2[level.var_ee9168a2.size] = e_origin;
-    e_origin linkto(level.e_gondola);
-    self playerlinkto(e_origin);
+    e_origin linkTo(level.e_gondola);
+    self playerlinkTo(e_origin);
   }
 }
 
@@ -348,27 +348,27 @@ gondola_doors_move(str_side, n_state) {
   }
 
   foreach(mdl_model in a_doors_and_gates) {
-    mdl_model linkto(self);
+    mdl_model linkTo(self);
   }
 }
 
 gondola_gate_moves(n_state, n_side_modifier, var_d134f0d1, var_b82242be, var_8bd1eeb0, var_b0f06f50) {
-  var_d134f0d1 moveto(var_d134f0d1.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  var_b82242be moveto(var_b82242be.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  var_8bd1eeb0 moveto(var_8bd1eeb0.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  var_b0f06f50 moveto(var_b0f06f50.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  var_d134f0d1 moveTo(var_d134f0d1.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  var_b82242be moveTo(var_b82242be.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  var_8bd1eeb0 moveTo(var_8bd1eeb0.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  var_b0f06f50 moveTo(var_b0f06f50.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
   var_b82242be waittill(#"movedone");
 }
 
 gondola_gate_and_door_moves(n_state, n_side_modifier, var_d134f0d1, mdl_door_left, var_b82242be, mdl_door_right, var_8bd1eeb0, var_b3c73561, var_b0f06f50, var_1c80ffe2) {
-  mdl_door_left moveto(mdl_door_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  var_d134f0d1 moveto(var_d134f0d1.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  mdl_door_right moveto(mdl_door_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  var_b82242be moveto(var_b82242be.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  var_b3c73561 moveto(var_b3c73561.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  var_8bd1eeb0 moveto(var_8bd1eeb0.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  var_1c80ffe2 moveto(var_1c80ffe2.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  var_b0f06f50 moveto(var_b0f06f50.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  mdl_door_left moveTo(mdl_door_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  var_d134f0d1 moveTo(var_d134f0d1.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  mdl_door_right moveTo(mdl_door_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  var_b82242be moveTo(var_b82242be.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  var_b3c73561 moveTo(var_b3c73561.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  var_8bd1eeb0 moveTo(var_8bd1eeb0.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  var_1c80ffe2 moveTo(var_1c80ffe2.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  var_b0f06f50 moveTo(var_b0f06f50.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
   var_b82242be waittill(#"movedone");
 }
 
@@ -377,7 +377,7 @@ zipline_move_trigger_think() {
   self.cost = 750;
   self.in_use = 0;
   self.is_available = 1;
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   while(true) {
     level flag::wait_till("gondola_at_" + self.script_string);
@@ -443,7 +443,7 @@ zipline_call_trigger_think() {
   self.cost = 0;
   self.in_use = 0;
   self.is_available = 1;
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   e_gondola = level.e_gondola;
 
   if(self.script_string == "roof") {
@@ -453,14 +453,14 @@ zipline_call_trigger_think() {
   }
 
   while(true) {
-    self sethintstring("");
+    self setHintString("");
     level flag::wait_till("gondola_at_" + str_gondola_loc);
     self notify(#"available");
 
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_23dad9a3f61cf052");
+      self setHintString(#"hash_23dad9a3f61cf052");
     } else {
-      self sethintstring(#"hash_bbb24669638bc76");
+      self setHintString(#"hash_bbb24669638bc76");
     }
 
     s_result = self waittill(#"trigger");
@@ -518,7 +518,7 @@ move_gondola(b_suppress_doors_close = 0) {
   a_t_call = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call) {
-    trigger sethintstring(#"hash_1923fe59e50dfb0e");
+    trigger setHintString(#"hash_1923fe59e50dfb0e");
   }
 
   e_gondola = level.e_gondola;
@@ -547,7 +547,7 @@ move_gondola(b_suppress_doors_close = 0) {
   }
 
   level flag::clear("gondola_at_" + e_gondola.location);
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player function_9a8ab327()) {
@@ -563,7 +563,7 @@ move_gondola(b_suppress_doors_close = 0) {
   level notify(#"gondola_moving");
   check_when_gondola_moves_if_groundent_is_undefined(e_gondola);
   level flag::clear("gondola_doors_moving");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player function_9a8ab327()) {
@@ -591,7 +591,7 @@ move_gondola(b_suppress_doors_close = 0) {
   }
 
   e_gondola thread create_gondola_poi();
-  playsoundatposition(#"hash_7039f3801f51d75e", (878, 5659, 327));
+  playSoundAtPosition(#"hash_7039f3801f51d75e", (878, 5659, 327));
   level util::clientnotify("gondola_cable_wheels");
   e_gondola playSound(#"zmb_gondola_start");
   e_gondola playLoopSound(#"zmb_gondola_lp", 1);
@@ -625,9 +625,9 @@ move_gondola(b_suppress_doors_close = 0) {
   level util::clientnotify("gondola_cable_wheels");
   e_gondola thread function_d8e07db3();
   e_gondola playSound(#"zmb_gondola_stop");
-  playsoundatposition(#"hash_46431e99e4f9f9e6", (878, 5659, 327));
+  playSoundAtPosition(#"hash_46431e99e4f9f9e6", (878, 5659, 327));
   player_escaped_gondola_failsafe();
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player.is_on_gondola) && player.is_on_gondola) {
@@ -661,7 +661,7 @@ gondola_lights_red() {
 
   foreach(model in var_1d558ef4) {
     model setModel(#"p8_zm_esc_gondola_frame_light_red");
-    playsoundatposition(#"zmb_gondola_start_alert", model.origin);
+    playSoundAtPosition(#"zmb_gondola_start_alert", model.origin);
     waitframe(1);
   }
 
@@ -708,7 +708,7 @@ check_when_gondola_moves_if_groundent_is_undefined(e_gondola) {
 }
 
 create_gondola_poi() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(!(isDefined(player.is_on_gondola) && player.is_on_gondola)) {
@@ -759,7 +759,7 @@ gondola_moving_vo() {
 
 array_players_on_gondola() {
   a_players_on_gondola = [];
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player function_9a8ab327()) {
@@ -873,14 +873,14 @@ player_escaped_gondola_failsafe() {
 function_da48c149(s_pos) {
   n_attempts = 0;
   self dontinterpolate();
-  self setorigin(s_pos.origin);
+  self setOrigin(s_pos.origin);
 
   do {
     wait 1;
 
     if(!(isDefined(self zm_utility::in_playable_area()) && self zm_utility::in_playable_area())) {
       self dontinterpolate();
-      self setorigin(s_pos.origin);
+      self setOrigin(s_pos.origin);
     }
 
     n_attempts++;
@@ -892,7 +892,7 @@ gondola_cooldown() {
   a_t_call = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call) {
-    trigger sethintstring(#"zm_escape/gondola_cooldown");
+    trigger setHintString(#"zm_escape/gondola_cooldown");
   }
 
   wait 10;

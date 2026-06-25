@@ -36,7 +36,7 @@ main() {
 }
 
 fixcollision() {
-  var_0 = getent("clip64x64x128", "targetname");
+  var_0 = getEnt("clip64x64x128", "targetname");
   var_1 = spawn("script_model", (818, 1916, 56));
   var_1.angles = (0, 333, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
@@ -50,11 +50,11 @@ fixcollision() {
 
 wiggletheballoon(var_0) {
   level endon("game_ended");
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   for(;;) {
-    var_1 rotateto((0, 0, 3), 5, 1, 1);
+    var_1 rotateTo((0, 0, 3), 5, 1, 1);
     wait(5);
-    var_1 rotateto((0, 0, 0), 5, 1, 1);
+    var_1 rotateTo((0, 0, 0), 5, 1, 1);
     wait(5);
   }
 }
@@ -66,7 +66,7 @@ setupspinningblades() {
     thread spinthisblade(var_2);
   }
 
-  var_4 = getent("decapitator_kill_trigger", "targetname");
+  var_4 = getEnt("decapitator_kill_trigger", "targetname");
   for(;;) {
     var_4 waittill("trigger", var_5);
     if(isDefined(var_5)) {
@@ -109,14 +109,14 @@ setupspinningblades() {
 spinthisblade(var_0) {
   level endon("game_ended");
   for(;;) {
-    var_0 rotateyaw(360, 0.25, 0, 0);
+    var_0 rotateYaw(360, 0.25, 0, 0);
     wait(0.25);
   }
 }
 
 setuppowerlines() {
   level endon("game_ended");
-  var_0 = getent("power_line_death", "targetname");
+  var_0 = getEnt("power_line_death", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(isDefined(var_1)) {
@@ -147,24 +147,24 @@ setuppowerlines() {
 }
 
 barreldroppersetup(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   var_4 makeusable();
-  var_4 sethintstring(&"MP_RALLY_ACTIVATE_BARREL");
+  var_4 setHintString(&"MP_RALLY_ACTIVATE_BARREL");
   var_4 func_84A4(64);
   var_4 func_84A6(60);
   var_4 setuserange(64);
   var_4 setusefov(60);
-  var_5 = getent(var_3, "targetname");
+  var_5 = getEnt(var_3, "targetname");
   var_5.killcament = spawn("script_model", (-544, -1312, 352));
   var_5.killcament setModel("tag_origin");
   var_5.israllytrap = 1;
-  var_6 = scripts\engine\utility::getstruct("gas_barrel_explosion_loc", "targetname");
+  var_6 = scripts\engine\utility::getStruct("gas_barrel_explosion_loc", "targetname");
   var_5.explosionloc = var_6.origin;
   var_5 scripts\engine\utility::trigger_off(var_5.var_336, "targetname");
-  var_7 = getent(var_1, "targetname");
+  var_7 = getEnt(var_1, "targetname");
   var_7.initialpos = var_7.origin;
   var_7.activepos = var_7.origin + (0, 0, -16);
-  var_8 = getent(var_2, "targetname");
+  var_8 = getEnt(var_2, "targetname");
   var_8.initialpos = var_8.origin;
   var_8.activepos = var_8.origin + (0, 0, -16);
   thread barreldropperloop(var_4, var_7, var_8, var_5);
@@ -177,7 +177,7 @@ barrelhandelwobbel(var_0) {
     var_1 = randomfloatrange(-0.1, 0.1);
     var_2 = randomfloatrange(-5, 5);
     var_3 = randomfloatrange(-0.1, 0.1);
-    var_0 rotateto((var_1, var_2, var_3), 2, 0.25, 0.25);
+    var_0 rotateTo((var_1, var_2, var_3), 2, 0.25, 0.25);
     wait(2);
   }
 }
@@ -190,12 +190,12 @@ barreldropperloop(var_0, var_1, var_2, var_3) {
     var_5 = var_4.team;
     var_4 playlocalsound("barrel_lever");
     scripts\engine\utility::exploder(30);
-    var_1 moveto(var_1.activepos, 1, 0.5, 0.5);
-    var_2 moveto(var_2.activepos, 1, 0.5, 0.5);
+    var_1 moveTo(var_1.activepos, 1, 0.5, 0.5);
+    var_2 moveTo(var_2.activepos, 1, 0.5, 0.5);
     playsoundatpos((-803, -1234, 526), "barrel_tumble");
     wait(1);
-    var_1 moveto(var_1.initialpos, 1, 0.5, 0.5);
-    var_2 moveto(var_2.initialpos, 1, 0.5, 0.5);
+    var_1 moveTo(var_1.initialpos, 1, 0.5, 0.5);
+    var_2 moveTo(var_2.initialpos, 1, 0.5, 0.5);
     wait(1);
     var_6 = level.players;
     var_7 = level.var_1655;
@@ -323,10 +323,10 @@ playeringaswatcher(var_0, var_1, var_2, var_3, var_4) {
 }
 
 burninatorsetup(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_2.bigredbutton = getent(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_2.bigredbutton = getEnt(var_1, "targetname");
   var_2.bigredbutton makeusable();
-  var_2.bigredbutton sethintstring(&"MP_RALLY_ACTIVATE_FIRE");
+  var_2.bigredbutton setHintString(&"MP_RALLY_ACTIVATE_FIRE");
   var_2.bigredbutton func_84A4(64);
   var_2.bigredbutton func_84A6(60);
   var_2.bigredbutton setuserange(64);
@@ -500,7 +500,7 @@ firebroshotexploders() {
 
 apex_not_outofbounds() {
   level.outofboundstriggerpatches = [];
-  var_0 = getent("apex_unoutofbounds", "targetname");
+  var_0 = getEnt("apex_unoutofbounds", "targetname");
   level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
   foreach(var_0 in level.outofboundstriggerpatches) {

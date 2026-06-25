@@ -20,10 +20,10 @@ randomize_vending_machines() {
     }
   }
   start_locations = [];
-  start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
-  start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
-  start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
-  start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+  start_locations[0] = getEnt("random_vending_start_location_0", "script_noteworthy");
+  start_locations[1] = getEnt("random_vending_start_location_1", "script_noteworthy");
+  start_locations[2] = getEnt("random_vending_start_location_2", "script_noteworthy");
+  start_locations[3] = getEnt("random_vending_start_location_3", "script_noteworthy");
   level.start_locations = [];
   level.start_locations[level.start_locations.size] = start_locations[0].origin;
   level.start_locations[level.start_locations.size] = start_locations[1].origin;
@@ -67,12 +67,12 @@ get_vending_machine(start_location) {
     return;
   }
   if(isDefined(machine_clip)) {
-    machine_clip LinkTo(machine);
+    machine_clip linkTo(machine);
   }
   start_location.origin = machine.origin;
   start_location.angles = machine.angles;
-  self enablelinkto();
-  self linkto(start_location);
+  self enablelinkTo();
+  self linkTo(start_location);
   return machine;
 }
 activate_vending_machine(machine, origin, entity) {
@@ -162,10 +162,10 @@ vending_randomization_effect(index) {
           }
         }
         start_locations = [];
-        start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
-        start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
-        start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
-        start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+        start_locations[0] = getEnt("random_vending_start_location_0", "script_noteworthy");
+        start_locations[1] = getEnt("random_vending_start_location_1", "script_noteworthy");
+        start_locations[2] = getEnt("random_vending_start_location_2", "script_noteworthy");
+        start_locations[3] = getEnt("random_vending_start_location_3", "script_noteworthy");
         target_index = undefined;
         switch_index = undefined;
         for(x = 0; x < start_locations.size; x++) {
@@ -191,24 +191,24 @@ vending_randomization_effect(index) {
       level.first_time_opening_perk_hut = false;
     }
   }
-  playsoundatposition("rando_start", machines[j].origin);
+  playSoundAtPosition("rando_start", machines[j].origin);
   origin = machines[j].origin;
   if(level.vending_model_info.size > 1) {
     playFXOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
-    playsoundatposition("rando_perk", machines[j].origin);
+    playSoundAtPosition("rando_perk", machines[j].origin);
   } else {
     playFXOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
-    playsoundatposition("rando_perk", machines[j].origin);
+    playSoundAtPosition("rando_perk", machines[j].origin);
   }
   true_model = machines[j].model;
   machines[j] setModel(true_model);
   machines[j] show();
   floatHeight = 40;
   level thread play_sound_2D("perk_lottery");
-  machines[j] moveto(origin + (0, 0, floatHeight), 5, 3, 0.5);
+  machines[j] moveTo(origin + (0, 0, floatHeight), 5, 3, 0.5);
   tag_fx = spawn("script_model", machines[j].origin + (0, 0, 40));
   tag_fx setModel("tag_origin");
-  tag_fx LinkTo(machines[j]);
+  tag_fx linkTo(machines[j]);
   modelindex = 0;
   machines[j] Vibrate(machines[j].angles, 2, 1, 4);
   for(i = 0; i < 30; i++) {
@@ -231,9 +231,9 @@ vending_randomization_effect(index) {
   }
   modelname = true_model;
   machines[j] setModel(modelname);
-  machines[j] moveto(origin, 0.3, 0.3, 0);
+  machines[j] moveTo(origin, 0.3, 0.3, 0);
   playFXOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
-  playsoundatposition("perks_rattle", machines[j].origin);
+  playSoundAtPosition("perks_rattle", machines[j].origin);
   maps\zombie_cod5_sumpf_perks::activate_vending_machine(true_model, origin, machines[j]);
   for(i = 0; i < machines.size; i++) {
     if(isDefined(level.vending_model_info[i])) {

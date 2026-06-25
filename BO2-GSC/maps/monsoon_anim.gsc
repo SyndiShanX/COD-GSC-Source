@@ -835,5 +835,5 @@ escape_anims() {
 }
 
 sndcough(guy) {
-  playsoundatposition("evt_isaac_defend_cough", (6849, 56024, -1196));
+  playSoundAtPosition("evt_isaac_defend_cough", (6849, 56024, -1196));
 }

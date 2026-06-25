@@ -36,9 +36,9 @@ rungenerator_jump() {
         var_00 maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_05);
         var_05 method_805B();
         if(var_04 == level.oribital_rotator_2) {
-          var_05 rotateyaw(-310, 1.7, 0, 0.8);
+          var_05 rotateYaw(-310, 1.7, 0, 0.8);
         } else {
-          var_05 rotateyaw(310, 1.7, 0, 0.8);
+          var_05 rotateYaw(310, 1.7, 0, 0.8);
         }
 
         var_00 setstance("crouch");
@@ -147,7 +147,7 @@ run_mini_game(param_00) {
   var_09 = spawn_a_floating_weapon_award(maps\mp\zombies\_zombies_magicbox::func_454B(var_03, "blunderbuss_pap_zm"), var_04.var_116, var_03);
   var_09.linkent.var_116 = var_04.var_116;
   var_0A = undefined;
-  var_09.linkent moveto(var_05.var_116, 4, 0, 1);
+  var_09.linkent moveTo(var_05.var_116, 4, 0, 1);
   wait(3.5);
   while(!isDefined(var_0A) || var_0A != var_03) {
     var_0A = get_new_player(var_09);
@@ -215,7 +215,7 @@ prespawn_a_floating_award(param_00, param_01, param_02) {
   var_03.var_116 = var_04.var_116;
   var_03 method_8449(var_04, "tag_origin");
   var_03.linkent = var_04;
-  var_04 rotateyaw(-29536, 850);
+  var_04 rotateYaw(-29536, 850);
   var_05 = spawnStruct();
   var_05.var_116 = var_03.var_116;
   return var_03;
@@ -532,7 +532,7 @@ launchplayers(param_00) {
       var_05 method_805B();
       var_06 = var_01 common_scripts\utility::func_8FFC();
       var_06 method_805B();
-      var_01 playerlinkto(var_05, "tag_player");
+      var_01 playerlinkTo(var_05, "tag_player");
       var_07 = get_required_velocity(param_00.dest_path.var_116, var_01.var_116);
       var_08 = param_00.dest_path.landing.var_116[2] - var_01.var_116[2];
       var_03 = func_8F12(var_02 / 2, var_07[2], -1 * var_08);
@@ -541,8 +541,8 @@ launchplayers(param_00) {
       var_0A = var_05 track_velocity();
       var_01 unlink();
       var_06.var_116 = var_05.var_116;
-      var_01 playerlinkto(var_06, "tag_player");
-      var_06 moveto(var_0A, 0.3);
+      var_01 playerlinkTo(var_06, "tag_player");
+      var_06 moveTo(var_0A, 0.3);
       wait(0.3);
       var_01 unlink();
       var_05 delete();
@@ -550,7 +550,7 @@ launchplayers(param_00) {
     } else {
       var_0B = var_01 geteyeangles();
       var_0B = common_scripts\utility::func_3D5C(var_0B);
-      var_0C = vectornormalize(anglesToForward(var_0B));
+      var_0C = vectorNormalize(anglesToForward(var_0B));
       var_07 = get_required_velocity((var_01.var_116[0] + 128 * var_0C[0], var_01.var_116[1] + 128 * var_0C[1], param_00.dest_path.var_116[2]), var_01.var_116);
       var_01 setvelocity(var_07);
     }
@@ -585,7 +585,7 @@ track_velocity() {
     var_06 = self.var_116[2];
     var_07 = gettime();
     if(self.my_velocity[2] < 0) {
-      var_09 = vectornormalize(self.my_velocity);
+      var_09 = vectorNormalize(self.my_velocity);
       var_0A = self.var_116;
       var_0B = var_0A + 1000 * var_09;
       var_08 = bulletTrace(var_0A, var_0B, 0);

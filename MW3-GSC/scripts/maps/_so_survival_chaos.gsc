@@ -807,10 +807,10 @@ spawn_chaos_squad(var_0, var_1, var_2, var_3) {
     var_6 = 0;
 
     for(var_7 = 1; var_7 < var_5; var_7++) {
-      var_8 = vectornormalize(anglesToForward(var_4 getplayerangles()));
-      var_9 = vectornormalize(var_0[var_7 - 1].origin - var_4 getEye());
+      var_8 = vectorNormalize(anglesToForward(var_4 getplayerangles()));
+      var_9 = vectorNormalize(var_0[var_7 - 1].origin - var_4 getEye());
       var_10 = vectordot(var_8, var_9);
-      var_11 = vectornormalize(var_0[var_7].origin - var_4 getEye());
+      var_11 = vectorNormalize(var_0[var_7].origin - var_4 getEye());
       var_12 = vectordot(var_8, var_11);
 
       if(var_10 < var_12) {
@@ -2048,7 +2048,7 @@ chaos_add_custom_eog_summary_line_blank() {
 radio_dialogue_to_player(var_0, var_1, var_2) {
   if(!isDefined(level._id_26B0)) {
     var_3 = spawn("script_origin", (0, 0, 0));
-    var_3 linkto(level.player, "", (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level._id_26B0 = var_3;
   }
 
@@ -3708,7 +3708,7 @@ _id_3BAB(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
   self.owner endon("disconnect");
   var_6 = _id_3BAC(self.owner, var_0, var_5);
-  var_6 linkto(self, "tag_ground", (32, 0, 5), (0, 0, 0));
+  var_6 linkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
   var_6.angles = (0, 0, 0);
   var_6 show();
   var_7 = self.veh_speed;
@@ -3788,7 +3788,7 @@ _id_3BB4() {
   var_0.origin = self.origin;
   var_0.angles = self.angles;
   var_0 solid();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0._id_3BB3 = 1;
   self.collision = var_0;
 }
@@ -3873,8 +3873,8 @@ _id_3BBB() {
   self endon("death");
   _id_3BC3();
   var_0 = spawn("trigger_radius", self.origin, 0, 50, 50);
-  var_0 enablelinkto();
-  var_0 linkto(self);
+  var_0 enablelinkTo();
+  var_0 linkTo(self);
   var_0.radius = self;
   var_0.owner = self;
   self.care_package_trigger = var_0;
@@ -3971,11 +3971,11 @@ _id_3BC0(var_0) {
 }
 
 _id_3BC3() {
-  self.collision disconnectpaths();
+  self.collision disconnectPaths();
   var_0 = _id_0611::_id_3BC4(self.cratetype);
   self._id_3BBD = var_0;
   _id_3BCB(var_0._id_3BC5, (0, 0, 12), 256, 256);
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self makeusable();
 
   if(isDefined(level._id_3BC7) && level._id_3BC7) {
@@ -4351,7 +4351,7 @@ temp_chaos_dog_tags_rotate() {
   self endon("death");
 
   for(;;) {
-    self rotateyaw(359, 1, 0, 0);
+    self rotateYaw(359, 1, 0, 0);
     wait 1.0;
   }
 }
@@ -4421,7 +4421,7 @@ chaos_armories_disable() {
 
   foreach(var_2 in var_0) {
     var_3 = "armory_" + var_2;
-    var_4 = getent(var_3, "targetname");
+    var_4 = getEnt(var_3, "targetname");
 
     if(!isDefined(var_4)) {
       continue;

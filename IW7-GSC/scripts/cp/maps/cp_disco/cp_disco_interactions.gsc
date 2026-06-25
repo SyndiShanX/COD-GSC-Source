@@ -310,7 +310,7 @@ pivot_power_door() {
         var_2.angles = (0, 0, 0);
       }
 
-      var_2 rotateto(var_2.angles + self.script_angles, 1);
+      var_2 rotateTo(var_2.angles + self.script_angles, 1);
       continue;
     }
 
@@ -348,17 +348,17 @@ sliding_power_door() {
 
     var_3 = undefined;
     if(isDefined(var_2.target)) {
-      var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     }
 
     if(isDefined(var_3)) {
       var_4 = var_3.origin - var_2.origin;
-      var_2 moveto(var_2.origin + (var_4[0], var_4[1], 0), 0.5, 0.1, 0.1);
+      var_2 moveTo(var_2.origin + (var_4[0], var_4[1], 0), 0.5, 0.1, 0.1);
       continue;
     }
 
     if(isDefined(var_2.script_angles)) {
-      var_2 rotateto(var_2.script_angles, 0.75);
+      var_2 rotateTo(var_2.script_angles, 0.75);
       continue;
     }
 
@@ -460,7 +460,7 @@ watch_for_rewind_triggered_on_completion() {
       self setscriptablepartstate("scripted_rewind", "inactive");
       self setscriptablepartstate("clockFx", "inactive");
       self dontinterpolate();
-      self setorigin(var_0, 1);
+      self setOrigin(var_0, 1);
       self setvelocity((0, 0, 0));
       self setstance("stand");
       if(!scripts\engine\utility::isweaponswitchallowed()) {
@@ -1337,7 +1337,7 @@ use_nunchucks_object(var_0, var_1) {
 
 player_clock_tick_sfx(var_0) {
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playLoopSound("quest_rewind_clock_tick_long");
   var_0 scripts\engine\utility::waittill_any("stop_clock_sfx", "objects_reset_q2", "objects_reset_q3", "part_1_VO_done", "part_2_VO_done", "part_3_VO_done", "backstory_quest_complete", "clocks_reset");
   var_1 stoploopsound();
@@ -3176,7 +3176,7 @@ runrewind(var_0) {
   self.rewindmover.angles = self getplayerangles();
   self.rewindmover hidefromplayer(self);
   self.rewindmover notsolid();
-  self playerlinkto(self.rewindmover, "tag_origin", 0, 10, 10, 10, 10, 0);
+  self playerlinkTo(self.rewindmover, "tag_origin", 0, 10, 10, 10, 10, 0);
   self getweaponrankxpmultiplier();
   scripts\engine\utility::allow_melee(0);
   scripts\engine\utility::allow_weapon(0);
@@ -3267,7 +3267,7 @@ return_player_to_clock(var_0, var_1) {
 
   var_8 = vectorlerp(var_0.origin, var_5, 0.05);
   var_9 = getclosestpointonnavmesh(var_5);
-  var_0 setorigin(var_9, 0);
+  var_0 setOrigin(var_9, 0);
   var_0 setvelocity(var_7);
   var_0 setstance("stand");
   var_0 setscriptablepartstate("scripted_rewind", "inactive");
@@ -3294,7 +3294,7 @@ resetrecordedlocations() {
 
 completeplayerwarp(var_0, var_1, var_2, var_3, var_4) {
   var_5 = vectorlerp(var_0.origin, var_1, 0.05);
-  self setorigin(var_5, 0);
+  self setOrigin(var_5, 0);
   self setvelocity(var_3);
   self setstance("stand");
   scripts\engine\utility::waitframe();
@@ -3375,9 +3375,9 @@ restrictfunctionalitycleanup() {
 
 rotate_fans() {
   level endon("stop_waterfall_trap");
-  level.center_sewer_fan rotateyaw(7200, 28, 2, 5);
+  level.center_sewer_fan rotateYaw(7200, 28, 2, 5);
   foreach(var_1 in level.sewer_fans) {
-    var_1 rotateyaw(14400, 28, randomintrange(1, 4), 5);
+    var_1 rotateYaw(14400, 28, randomintrange(1, 4), 5);
   }
 }
 
@@ -3387,7 +3387,7 @@ rotate_center_fan() {
       wait(0.1);
       continue;
     } else {
-      level.center_sewer_fan rotateyaw(15, 1);
+      level.center_sewer_fan rotateYaw(15, 1);
     }
 
     wait(1);
@@ -3396,12 +3396,12 @@ rotate_center_fan() {
 
 init_fan_trap() {
   level.sewer_fans = getEntArray("sewer_fans", "targetname");
-  level.center_sewer_fan = getent("center_fan", "targetname");
+  level.center_sewer_fan = getEnt("center_fan", "targetname");
   level.sewer_fan_interactions = scripts\engine\utility::getStructArray("fan_trap", "script_noteworthy");
   level.sewer_fan_switches = getEntArray(level.sewer_fan_interactions[0].target, "targetname");
-  level.lower_sewer_phys_vol = getent("lower_sewer_phys_vol", "targetname");
-  level.upper_sewer_phys_vol = getent("upper_sewer_phys_vol", "targetname");
-  level.lower_sewer_phys_point = scripts\engine\utility::getstruct(level.lower_sewer_phys_vol.target, "targetname");
+  level.lower_sewer_phys_vol = getEnt("lower_sewer_phys_vol", "targetname");
+  level.upper_sewer_phys_vol = getEnt("upper_sewer_phys_vol", "targetname");
+  level.lower_sewer_phys_point = scripts\engine\utility::getStruct(level.lower_sewer_phys_vol.target, "targetname");
   level.sewer_fan_trig = spawn("trigger_radius", (-882.5, 1846, 151.5), 0, 585, 96);
   foreach(var_1 in level.sewer_fan_interactions) {
     var_1 thread sewer_fan_power_handler();
@@ -3468,7 +3468,7 @@ electric_trap_fx() {
 electric_trap_damage(var_0, var_1) {
   level endon("stop_electric_trap");
   var_2 = gettime();
-  var_3 = getent(var_0.target, "targetname");
+  var_3 = getEnt(var_0.target, "targetname");
   for(;;) {
     var_3 waittill("trigger", var_4);
     if(isPlayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {

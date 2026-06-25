@@ -367,7 +367,7 @@ function function_47867b41(var_3fbc06aa, str_part) {
     trace = bulletTrace(v_origin, v_origin + direction_vec, 0, undefined);
     drop_point = trace["position"];
     drop_point = drop_point + vectorscale((0, 0, 1), 10);
-    self moveto(drop_point, 1);
+    self moveTo(drop_point, 1);
     wait(1);
     self hide();
     playFX(level._effect["idgun_cocoon_off"], self.origin);
@@ -402,7 +402,7 @@ function idgun_proximity_sensor(var_3fbc06aa) {
       n_time_before_next_pulse = 1;
       v_eye_origin = self getplayercamerapos();
       v_eye_direction = anglesToForward(self getplayerangles());
-      var_744d3805 = vectornormalize(var_e610614b - v_eye_origin);
+      var_744d3805 = vectorNormalize(var_e610614b - v_eye_origin);
       n_dot = vectordot(var_744d3805, v_eye_direction);
       if(n_dot > 0.9) {
         n_time_before_next_pulse = 0.3;

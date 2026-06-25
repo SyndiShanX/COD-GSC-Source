@@ -148,7 +148,7 @@ function function_912eedf3(zombie, eattacker) {
   zombie endon(#"death");
 
   if(isDefined(zombie) && !is_true(zombie.var_a950813d) && zombie.zm_ai_category === #"normal" && isDefined(self)) {
-    v_dir = vectornormalize(zombie.origin - self.origin);
+    v_dir = vectorNormalize(zombie.origin - self.origin);
     v_launch = v_dir * randomintrange(10, 25) + (0, 0, randomintrange(100, 150));
 
     if(!zombie isragdoll()) {
@@ -241,7 +241,7 @@ function vehicle_spawn(s_instance) {
     foreach(var_50b7449f in var_f6b6b97e) {
       for(i = 0; i < var_8ebffad3; i++) {
         if(var_50b7449f.script_int === var_476999d6[i] && var_7a436008[i] < 4) {
-          vehicle = spawnvehicle(var_50b7449f.vehicletype, var_50b7449f.origin, var_50b7449f.angles, "sr_vehicle");
+          vehicle = spawnVehicle(var_50b7449f.vehicletype, var_50b7449f.origin, var_50b7449f.angles, "sr_vehicle");
 
           if(isDefined(vehicle)) {
             if(isDefined(var_50b7449f.var_df2f9ba4)) {
@@ -268,7 +268,7 @@ function vehicle_spawn(s_instance) {
             if(vehicle.vehicletype === "vehicle_motorcycle_mil_us_offroad" || vehicle.vehicletype === "vehicle_t9_mil_fav_light") {
               foreach(var_f8d6002f in var_f6b6b97e) {
                 if(var_f8d6002f != var_50b7449f && var_f8d6002f.script_int === var_50b7449f.script_int && (var_f8d6002f.vehicletype === var_50b7449f.vehicletype || var_f8d6002f.vehicletype === "vehicle_motorcycle_mil_us_offroad")) {
-                  vehicle = spawnvehicle(var_f8d6002f.vehicletype, var_f8d6002f.origin, var_f8d6002f.angles, "sr_vehicle");
+                  vehicle = spawnVehicle(var_f8d6002f.vehicletype, var_f8d6002f.origin, var_f8d6002f.angles, "sr_vehicle");
 
                   if(isDefined(vehicle)) {
                     if(isDefined(var_50b7449f.var_df2f9ba4)) {
@@ -311,10 +311,10 @@ function vehicle_spawn(s_instance) {
     if(s_instance.var_2bb61e5b < 4) {
       if(isDefined(var_50b7449f.var_128ef0fc) && getdvarint(#"hash_5b75dfae822b95aa", 0)) {
         if(isDefined(level.contentmanager.nextspawn) && level.contentmanager.nextspawn.script_int === var_50b7449f.var_128ef0fc) {
-          vehicle = spawnvehicle(var_50b7449f.vehicletype, var_50b7449f.origin, var_50b7449f.angles, "sr_vehicle");
+          vehicle = spawnVehicle(var_50b7449f.vehicletype, var_50b7449f.origin, var_50b7449f.angles, "sr_vehicle");
         }
       } else if(!isDefined(var_50b7449f.var_128ef0fc)) {
-        vehicle = spawnvehicle(var_50b7449f.vehicletype, var_50b7449f.origin, var_50b7449f.angles, "sr_vehicle");
+        vehicle = spawnVehicle(var_50b7449f.vehicletype, var_50b7449f.origin, var_50b7449f.angles, "sr_vehicle");
       }
 
       if(isDefined(vehicle)) {
@@ -341,7 +341,7 @@ function vehicle_spawn(s_instance) {
         if(vehicle.vehicletype === "vehicle_motorcycle_mil_us_offroad" || vehicle.vehicletype === "vehicle_t9_mil_fav_light") {
           foreach(var_f8d6002f in var_f6b6b97e) {
             if(var_f8d6002f != var_50b7449f && var_f8d6002f.script_int === var_50b7449f.script_int && (var_f8d6002f.vehicletype === var_50b7449f.vehicletype || var_f8d6002f.vehicletype === "vehicle_motorcycle_mil_us_offroad")) {
-              vehicle = spawnvehicle(var_f8d6002f.vehicletype, var_f8d6002f.origin, var_f8d6002f.angles, "sr_vehicle");
+              vehicle = spawnVehicle(var_f8d6002f.vehicletype, var_f8d6002f.origin, var_f8d6002f.angles, "sr_vehicle");
 
               if(isDefined(vehicle)) {
                 if(isDefined(var_50b7449f.var_df2f9ba4)) {
@@ -474,7 +474,7 @@ function function_724dafb1(destination) {
     }
 
     if(isDefined(var_22e1dc7) && function_e0a22931(var_22e1dc7)) {
-      vehicle = spawnvehicle(var_22e1dc7, spawn.origin, spawn.angles, "sr_vehicle");
+      vehicle = spawnVehicle(var_22e1dc7, spawn.origin, spawn.angles, "sr_vehicle");
       vehicle makevehicleusable();
 
       if(!isDefined(destination.a_vehicles)) {
@@ -519,7 +519,7 @@ function function_6465d1fa(destination) {
   var_a91694c7 = function_de75fe06();
 
   foreach(struct in destination.contentgroups[#"hash_3460aae6bb799a99"]) {
-    triggers[triggers.size] = getent(struct.targetname, "target");
+    triggers[triggers.size] = getEnt(struct.targetname, "target");
   }
 
   a_spawns = [];
@@ -645,7 +645,7 @@ function on_vehicle_spawned() {
         var_6031fb1f.var_369c83bd = 1;
         var_6031fb1f.var_475b9991 = 1;
         var_6031fb1f.var_c0381a15 = 1;
-        var_6031fb1f linkto(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
+        var_6031fb1f linkTo(var_d487d45c, "tag_jetski", (0, 0, 0), (0, 0, 0));
       }
 
       var_c8229258 = "enter_vehicle";
@@ -706,11 +706,11 @@ function on_vehicle_spawned() {
 
               if(isalive(var_6031fb1f)) {
                 var_6031fb1f unlink();
-                var_6031fb1f linkto(var_c11876a8);
-                var_c11876a8 rotateyaw(rotation, fall_time);
+                var_6031fb1f linkTo(var_c11876a8);
+                var_c11876a8 rotateYaw(rotation, fall_time);
 
                 if(isDefined(var_c11876a8)) {
-                  var_c11876a8 moveto(var_6b6fec6c, fall_time);
+                  var_c11876a8 moveTo(var_6b6fec6c, fall_time);
                   var_c11876a8 waittill(#"movedone");
                 }
               }
@@ -797,7 +797,7 @@ function on_vehicle_damage(params) {
   if(isDefined(params.eattacker) && isactor(params.eattacker)) {
     if(params.eattacker.archetype === #"raz" && params.smeansofdeath === "MOD_EXPLOSIVE") {
       vehicle dodamage(500, params.eattacker.origin, params.eattacker);
-      vehicle playrumbleonentity("sr_prototype_vehicle_run_over");
+      vehicle playRumbleOnEntity("sr_prototype_vehicle_run_over");
       occupants = vehicle getvehoccupants();
 
       foreach(occupant in occupants) {

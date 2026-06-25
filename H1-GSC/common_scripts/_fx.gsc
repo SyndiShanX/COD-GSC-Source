@@ -422,7 +422,7 @@ gunfireloopfxvecthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   var_14 = var_3;
   var_15 = var_4 - var_3;
-  var_2 = vectornormalize(var_2 - var_1);
+  var_2 = vectorNormalize(var_2 - var_1);
   var_16 = spawnfx(level._effect[var_0], var_1, var_2);
 
   if(!level.createfx_enabled) {
@@ -466,7 +466,7 @@ setup_fx() {
   var_0 = undefined;
 
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
 
     if(isDefined(var_1)) {
       var_0 = var_1.origin;
@@ -671,8 +671,8 @@ sort_reactive_ents(var_0, var_1) {
   foreach(var_5 in var_2) {
     var_9 = vector2d(var_5.v["origin"] - level.player.origin);
     var_10 = vector2d(var_0 - level.player.origin);
-    var_11 = vectornormalize(var_9);
-    var_12 = vectornormalize(var_10);
+    var_11 = vectorNormalize(var_9);
+    var_12 = vectorNormalize(var_10);
     var_5.dot = vectordot(var_11, var_12);
   }
 

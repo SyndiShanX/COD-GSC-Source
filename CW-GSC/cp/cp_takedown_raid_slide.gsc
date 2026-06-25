@@ -37,7 +37,7 @@
 #namespace tkdn_raid_slide;
 
 function starting(str_skipto) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
   woods_spawner = getspawnerarray("raid_woods", "targetname");
@@ -71,7 +71,7 @@ function main(str_skipto, b_starting) {
     level thread namespace_a052577e::function_1dc92e4f();
     level thread scene::init("scene_tkd_hit2_adler_alley");
     level thread scene::play("scene_tkd_hit2_adler_alley", "gate_closed");
-    var_efac709f = getent("player_breach_clip", "targetname");
+    var_efac709f = getEnt("player_breach_clip", "targetname");
     var_efac709f connectpaths();
     var_efac709f delete();
     getactorarray("apt_blindfire_bathroom", "targetname")[0] delete();
@@ -79,7 +79,7 @@ function main(str_skipto, b_starting) {
 
   level thread tkdn_raid_capture::function_daaa52d5();
   level thread tkdn_raid_capture::function_b47183fb();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_1fbc6848 = getspawnerarray("ledge_lmg_guy", "script_noteworthy");
   var_1fbc6848[0] spawner::add_spawn_function(&function_b8018dce);
   level endon(#"hash_7d9928c92b67b6b2");
@@ -198,7 +198,7 @@ function function_58b2cc80() {
 
 function function_85757fc8() {
   level waittill(#"land_rumble");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   objectives::complete("obj_takedown_qasim", level.qasim, 0);
 }
 
@@ -214,7 +214,7 @@ function give_player_max_ammo() {
 
 function function_624525f() {
   level endon(#"shot_slide_enemy1");
-  var_b84b1bf9 = getent("mb_slide_enemy1", "targetname");
+  var_b84b1bf9 = getEnt("mb_slide_enemy1", "targetname");
   level waittill(#"land_rumble");
 
   if(isalive(level.slide_enemy1) && !isDefined(level.slide_enemy1.var_b481f04a)) {
@@ -249,7 +249,7 @@ function function_e99afe47() {
 }
 
 function function_f9dfbac1() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.var_962e7d10 = 1;
   level endon(#"hash_1480b995232f9d53");
   namespace_a052577e::function_c2eee241();
@@ -316,7 +316,7 @@ function function_edf70272() {
 }
 
 function function_83cb8fb7() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self waittill(#"damage", #"fake_damage");
 
   if(self == level.slide_enemy1) {

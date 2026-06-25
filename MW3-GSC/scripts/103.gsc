@@ -1100,7 +1100,7 @@ _id_175B(var_0, var_1) {
       wait(var_6.delay);
     }
     var_7 = spawn("script_origin", (0, 0, 0));
-    var_7 linkto(var_6._id_14B9, "", (0, 0, 0), (0, 0, 0));
+    var_7 linkTo(var_6._id_14B9, "", (0, 0, 0), (0, 0, 0));
     var_7 playSound(var_6.sound, "sounddone");
     var_7 waittill("sounddone");
     wait 0.05;
@@ -1451,7 +1451,7 @@ _id_1765(var_0) {
 }
 
 _id_1772(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = var_3 - var_0;
   var_6 = vectordot(var_5, var_4);
   var_6 = var_6 / var_2;
@@ -1459,7 +1459,7 @@ _id_1772(var_0, var_1, var_2, var_3) {
 }
 
 _id_1773(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_1 - var_0);
+  var_3 = vectorNormalize(var_1 - var_0);
   var_4 = var_2 - var_0;
   var_5 = vectordot(var_4, var_3);
   return var_3 * var_5 + var_0;
@@ -1511,8 +1511,8 @@ _id_1775(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_13 = spawn("script_origin", var_7.origin);
     var_12 playSound(var_1);
     var_13 playSound(var_2);
-    var_12 moveto(var_9[0], var_11, 0, 0);
-    var_13 moveto(var_9[1], var_11, 0, 0);
+    var_12 moveTo(var_9[0], var_11, 0, 0);
+    var_13 moveTo(var_9[1], var_11, 0, 0);
   }
 }
 
@@ -1891,9 +1891,9 @@ _id_15D7(var_0, var_1, var_2, var_3, var_4) {
   var_6 = spawn("script_origin", var_1.origin);
 
   if(isDefined(var_4)) {
-    var_6 linkto(var_1, "tag_origin", var_4, (0, 0, 0));
+    var_6 linkTo(var_1, "tag_origin", var_4, (0, 0, 0));
   } else {
-    var_6 linkto(var_1);
+    var_6 linkTo(var_1);
   }
   if(var_5 == "loop") {
     var_1 thread _id_1797(var_6, var_3);
@@ -1904,7 +1904,7 @@ _id_15D7(var_0, var_1, var_2, var_3, var_4) {
 
 _id_1798(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", var_1.origin);
-  var_3 linkto(var_1);
+  var_3 linkTo(var_1);
   var_4 = "oneshot";
 
   if(isDefined(var_2)) {
@@ -2357,7 +2357,7 @@ _id_17C7() {
 _id_17C8() {
   level endon(self.label + "_line_emitter_stop");
   var_0 = self._id_17C9 - self._id_17CA;
-  var_1 = vectornormalize(var_0);
+  var_1 = vectorNormalize(var_0);
   var_2 = distance(self._id_17CA, self._id_17C9);
   var_3 = 0.1;
 
@@ -2375,7 +2375,7 @@ _id_17C8() {
       self scalevolume(1.0, self._id_17CC);
       self._id_17CB = 1;
     } else {
-      self moveto(var_6, var_3);
+      self moveTo(var_6, var_3);
     }
     wait(var_3);
   }

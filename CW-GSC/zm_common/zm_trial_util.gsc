@@ -638,7 +638,7 @@ function open_all_doors() {
 }
 
 function function_9c71b46f() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     for(i = 0; i < player.var_c27f1e90.size; i++) {
       perk = player.var_c27f1e90[i];
 

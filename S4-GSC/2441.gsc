@@ -633,7 +633,7 @@ soul_collected(var_0) {
   var_0.player.soul_count = scripts\cp\utility::_id_459B(var_0.player.soul_count, 0);
   var_0.player.soul_count++;
   var_0.player _id_0987::set_objective_ui_counter(var_0.player.soul_count, level._id_3BE9._id_0F51.n_player_max_souls);
-  var_0.player playrumbleonentity("damage_light");
+  var_0.player playRumbleOnEntity("damage_light");
 
   if(isDefined(level._id_3BE9._id_0F51.n_player_max_souls) && var_0.player.soul_count >= level._id_3BE9._id_0F51.n_player_max_souls) {
     var_0.player.a_disable_grab_for_powerup["soul"] = 1;
@@ -675,7 +675,7 @@ spawn_demonic_idol_model(var_0, var_1, var_2) {
 
   var_1 play_sin_eater_fx(var_1.demonic_idol_interact, "sin_eater_idle", "idle", 0);
   var_1.demonic_idol_interact thread _id_0987::_id_CF90(var_1.demonic_idol_interact, 6, 4, 0, 0, 1);
-  var_3 = getent("sin_eater_objective_clip_prop_singular", "targetname");
+  var_3 = getEnt("sin_eater_objective_clip_prop_singular", "targetname");
 
   if(isDefined(var_3)) {
     var_3.origin = var_0.origin + (0, 0, 24);
@@ -777,13 +777,13 @@ set_interaction_struct_hold_duration(var_0, var_1) {
 
 toggle_idol_clip(var_0, var_1, var_2) {
   var_3 = getEntArray(var_0._id_0481, "target");
-  var_4 = getent("sin_eater_objective_clip_prop_singular", "targetname");
+  var_4 = getEnt("sin_eater_objective_clip_prop_singular", "targetname");
 
   if(isDefined(var_4)) {
     var_3[var_3.size] = var_4;
   }
 
-  var_5 = getent("sin_eater_objective_clip_navmesh", "targetname");
+  var_5 = getEnt("sin_eater_objective_clip_navmesh", "targetname");
 
   if(isDefined(var_5)) {
     if(var_1) {
@@ -815,7 +815,7 @@ animate_demonic_idol_clip(var_0, var_1) {
   if(scripts\engine\utility::is_equal(var_0, 1)) {
     var_2 = self.origin + (0, 0, 25);
     self.origin = self.origin - (0, 0, 105);
-    self moveto(var_2, 1.25, 0, 0);
+    self moveTo(var_2, 1.25, 0, 0);
   }
 
   self show();
@@ -852,7 +852,7 @@ update_demonic_idol_hint(var_0) {
   for(;;) {
     if(!scripts\engine\utility::is_equal(self.inlaststand, 1)) {
       var_1 = get_demonic_idol_hint_string(undefined, self);
-      self._id_8388 sethintstring(var_1);
+      self._id_8388 setHintString(var_1);
     }
 
     wait 1.0;
@@ -899,7 +899,7 @@ demonic_idol_interaction_watcher(var_0, var_1) {
 
         if(self useButtonPressed() && isDefined(self._id_8388)) {
           _id_FBC6(level._id_3BE9._id_0F51, 1, self);
-          self playrumbleonentity("damage_light");
+          self playRumbleOnEntity("damage_light");
           var_0 play_sin_eater_fx(var_0.demonic_idol_interact, "sin_eater_deliver", "runestone_delivery", 0);
           thread _id_0752::_id_7003("objective_soul_capture_deposit");
         }

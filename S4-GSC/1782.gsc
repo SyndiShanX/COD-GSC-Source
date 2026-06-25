@@ -16,7 +16,7 @@ _id_E417(var_0) {
     var_3.owner = self;
     var_3.team = self.team;
     var_3.weapon_name = "zmb_globproj_zm";
-    var_3 linkto(var_0, "", (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, "", (0, 0, 0), (0, 0, 0));
     var_3 hide(1);
     var_0._id_7177[var_0._id_7177.size] = var_3;
     var_3 thread _id_715C();
@@ -171,7 +171,7 @@ _id_9EFF(var_0, var_1) {
   var_5.angles = var_0.angles;
   var_5.owner = self;
   var_5 _meth_80DB();
-  var_5 linkto(var_0);
+  var_5 linkTo(var_0);
   var_5 hide();
   var_5._id_9EFE = var_0;
   var_5 thread _id_10C21();

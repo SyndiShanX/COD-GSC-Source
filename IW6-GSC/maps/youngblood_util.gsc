@@ -3,7 +3,7 @@
  * Script: maps\youngblood_util.gsc
 *****************************************************/
 
-trigger_moveto(var_0) {
+trigger_moveTo(var_0) {
   if(!isDefined(level.mover_candidates)) {
     level.mover_candidates = getEntArray("script_brushmodel", "classname");
     level.mover_candidates = common_scripts\utility::array_combine(level.mover_candidates, getEntArray("script_model", "classname"));
@@ -38,7 +38,7 @@ moveto_volume_think(var_0) {
 
   foreach(var_4 in var_1) {
     if(var_6 != var_4) {
-      var_4 linkto(var_6);
+      var_4 linkTo(var_6);
     }
   }
 
@@ -91,7 +91,7 @@ moveto_volume_think(var_0) {
       var_11.angles = (0, 0, 0);
     }
 
-    var_6 moveto_rotateto(var_11, var_13, var_14, var_15);
+    var_6 moveto_rotateTo(var_11, var_13, var_14, var_15);
     var_6 notify("stop_constant_quake");
     var_13 = 5;
     var_14 = 0;
@@ -167,7 +167,7 @@ attach_in_volume(var_0) {
 
   foreach(var_4 in var_1) {
     if(var_6 != var_4) {
-      var_4 linkto(var_6);
+      var_4 linkTo(var_6);
     }
   }
 }
@@ -195,14 +195,14 @@ moveto_rotateto_speed(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  self rotateto(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
-  self moveto(var_4, var_7, var_7 * var_2, var_7 * var_3);
+  self rotateTo(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
+  self moveTo(var_4, var_7, var_7 * var_2, var_7 * var_3);
   self waittill("movedone");
 }
 
-moveto_rotateto(var_0, var_1, var_2, var_3) {
-  self moveto(var_0.origin, var_1, var_2, var_3);
-  self rotateto(var_0.angles, var_1, var_2, var_3);
+moveto_rotateTo(var_0, var_1, var_2, var_3) {
+  self moveTo(var_0.origin, var_1, var_2, var_3);
+  self rotateTo(var_0.angles, var_1, var_2, var_3);
   self waittill("movedone");
 }
 
@@ -212,7 +212,7 @@ set_start_positions(var_0) {
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":
-        level.player setorigin(var_3.origin);
+        level.player setOrigin(var_3.origin);
         level.player setplayerangles(var_3.angles);
         break;
       case "hesh":
@@ -382,7 +382,7 @@ yb_player_speed_percent(var_0, var_1) {
 }
 
 trigger_activate_targetname_safe(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 notify("trigger");
@@ -430,7 +430,7 @@ heroes_light_earthquake(var_0) {
   level.no_tremor = 0;
   waittillframeend;
   level.player yb_player_speed_percent(25, 0.75);
-  level.player playrumbleonentity("light_2s");
+  level.player playRumbleOnEntity("light_2s");
   earthquake(0.3, 2.5, level.player.origin, 64);
   setblur(1, 0.1);
   level.player allowsprint(0);
@@ -450,7 +450,7 @@ heavy_quake(var_0, var_1) {
     var_1 = 25;
   }
 
-  level.player playrumbleonentity("light_2s");
+  level.player playRumbleOnEntity("light_2s");
   earthquake(0.4, 2.5, level.player.origin, 512);
   level.player thread yb_player_speed_percent(var_1, 0.75);
   level.player thread maps\_player_limp::stumble((20, 5, 35), 0.75, 2);
@@ -978,7 +978,7 @@ videotaper_think() {
 
     var_2 = spawn("script_model", (0, 0, 0));
     var_2 setModel(var_6);
-    var_2 linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
   }
 
   if(isDefined(self.script_parameters) && self.script_parameters == "approach") {
@@ -1071,7 +1071,7 @@ falling_debris(var_0) {
   var_5 = 1000.0;
   var_6 = distance(var_1.origin, var_3);
   var_7 = var_6 / var_5;
-  var_1 moveto(var_3, var_7, 0, 0);
+  var_1 moveTo(var_3, var_7, 0, 0);
   var_1 maps\_utility::delaythread(max(var_7 - 1.75, 0), maps\_utility::play_sound_on_entity, "debris_inc_whoosh");
   common_scripts\utility::noself_delaycall(max(var_7 - 1.75, 0), ::playfxontag, common_scripts\utility::getfx("ygb_chaos_debris_smk"), var_1, "tag_origin");
   wait(var_7);
@@ -1261,7 +1261,7 @@ chaos_chunk_fall() {
   self waittill("trigger");
   var_0 show();
   var_0 thread maps\_utility::play_sound_on_entity("scn_yb_final_street_piece_incoming");
-  var_0 moveto_rotateto(var_1[0], 1.5, 1.5, 0);
+  var_0 moveto_rotateTo(var_1[0], 1.5, 1.5, 0);
   earthquake(0.6, 1, var_0.origin, 1024);
   playFX(level._effect["vfx_lrg_vehicle_exp"], var_0.origin);
   var_0 thread maps\_utility::play_sound_on_entity("scn_yb_final_street_piece_hit");

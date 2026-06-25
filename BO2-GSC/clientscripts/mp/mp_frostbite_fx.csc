@@ -69,7 +69,7 @@ fxanim_init(localclientnum) {
   }
 
   level thread clientscripts\mp\_fxanim_dlc4::fxanim_init_dlc(localclientnum);
-  radar = getent(localclientnum, "fxanim_dlc4_crane", "targetname");
+  radar = getEnt(localclientnum, "fxanim_dlc4_crane", "targetname");
 
   if(isDefined(radar)) {
     if(!isDefined(level.radar_waits)) {

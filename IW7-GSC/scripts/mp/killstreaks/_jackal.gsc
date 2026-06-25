@@ -27,7 +27,7 @@ func_2A6B(var_0, var_1, var_2, var_3) {
 
   self notify("called_in_jackal");
   level.var_A22D = 1;
-  var_5 = getent("airstrikeheight", "targetname");
+  var_5 = getEnt("airstrikeheight", "targetname");
   if(isDefined(var_5)) {
     var_6 = var_5.origin[2] + 100;
   } else if(isDefined(level.airstrikeheightscale)) {
@@ -140,7 +140,7 @@ func_108DE(var_0, var_1, var_2, var_3, var_4) {
   var_14.turret.angles = var_14.angles;
   var_14.turret.type = "Machine_Gun";
   var_14.turret.streakinfo = var_4;
-  var_14.turret linkto(var_14, "tag_turret");
+  var_14.turret linkTo(var_14, "tag_turret");
   var_14.turret setturretmodechangewait(0);
   var_14.turret give_player_session_tokens("manual_target");
   var_14.turret setsentryowner(var_1);
@@ -151,12 +151,12 @@ func_108DE(var_0, var_1, var_2, var_3, var_4) {
   var_14.cannon.angles = var_14.angles;
   var_14.cannon.type = "Cannon";
   var_14.cannon.streakinfo = var_4;
-  var_14.cannon linkto(var_14, "tag_origin", (-300, 0, 30), (0, 0, 0));
+  var_14.cannon linkTo(var_14, "tag_origin", (-300, 0, 30), (0, 0, 0));
   var_14.cannon setturretmodechangewait(0);
   var_14.cannon give_player_session_tokens("manual_target");
   var_14.cannon setsentryowner(var_1);
   var_14.useobj = spawn("script_model", var_14 gettagorigin("tag_origin"));
-  var_14.useobj linkto(var_14, "tag_origin");
+  var_14.useobj linkTo(var_14, "tag_origin");
   level.jackals[level.jackals.size] = var_14;
   level.jackals = scripts\engine\utility::array_removeundefined(level.jackals);
   level.var_A22D = undefined;
@@ -170,10 +170,10 @@ func_108DE(var_0, var_1, var_2, var_3, var_4) {
   var_14.cannon.vehicle_fired_from = var_14;
   var_16 = anglesToForward(var_14.angles);
   var_14.turret.vehicle_fired_from.killcament = spawn("script_model", var_14 gettagorigin("tag_turret_front"));
-  var_14.turret.vehicle_fired_from.killcament linkto(var_14, "tag_turret_front");
+  var_14.turret.vehicle_fired_from.killcament linkTo(var_14, "tag_turret_front");
   var_14.cannon.vehicle_fired_from.killcament = var_14.turret.vehicle_fired_from.killcament;
   if(scripts\mp\killstreaks\_utility::func_A69F(var_4, "passive_moving_fortress")) {
-    var_14.cannon.vehicle_fired_from.killcament linkto(var_14, "tag_turret_rear");
+    var_14.cannon.vehicle_fired_from.killcament linkTo(var_14, "tag_turret_rear");
   }
 
   if(scripts\mp\killstreaks\_utility::func_A69F(var_4, "passive_support_drop")) {
@@ -183,7 +183,7 @@ func_108DE(var_0, var_1, var_2, var_3, var_4) {
     for(var_19 = 0; var_19 < 3; var_19++) {
       var_1A = scripts\mp\killstreaks\_airdrop::getcratetypefordroptype(var_18);
       var_1B = var_14 scripts\mp\killstreaks\_airdrop::createairdropcrate(var_1, var_18, var_1A, var_14.origin);
-      var_1B linkto(var_14, "tag_origin", (var_17, 0, 0), (0, 0, 0));
+      var_1B linkTo(var_14, "tag_origin", (var_17, 0, 0), (0, 0, 0));
       var_14.dropcrates[var_14.dropcrates.size] = var_1B;
       var_17 = var_17 + 60;
     }
@@ -897,8 +897,8 @@ isreadytofire(var_0) {
   var_2 = self.turrettarget.origin - self.origin;
   var_1 = var_1 * (1, 1, 0);
   var_2 = var_2 * (1, 1, 0);
-  var_2 = vectornormalize(var_2);
-  var_1 = vectornormalize(var_1);
+  var_2 = vectorNormalize(var_2);
+  var_1 = vectorNormalize(var_1);
   var_3 = vectordot(var_2, var_1);
   var_4 = cos(var_0);
   if(var_3 >= var_4) {

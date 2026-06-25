@@ -206,9 +206,9 @@ collisionhandler(localclientnum) {
 
       if(isDefined(player)) {
         if(hit_intensity > 15) {
-          player playrumbleonentity(driver_local_client, "damage_heavy");
+          player playRumbleOnEntity(driver_local_client, "damage_heavy");
         } else {
-          player playrumbleonentity(driver_local_client, "damage_light");
+          player playRumbleOnEntity(driver_local_client, "damage_light");
         }
       }
     }
@@ -225,7 +225,7 @@ enginestutterhandler(localclientnum) {
       player = getlocalplayer(localclientnum);
 
       if(isDefined(player)) {
-        player playrumbleonentity(localclientnum, "rcbomb_engine_stutter");
+        player playRumbleOnEntity(localclientnum, "rcbomb_engine_stutter");
       }
     }
   }
@@ -236,7 +236,7 @@ getminimumflyheight() {
     level.airsupportheightscale = 1;
   }
 
-  airsupport_height = getstruct("air_support_height", "targetname");
+  airsupport_height = getStruct("air_support_height", "targetname");
 
   if(isDefined(airsupport_height)) {
     planeflyheight = airsupport_height.origin[2];
@@ -260,7 +260,7 @@ getminimumflyheight() {
 
 qrdrone_watch_distance() {
   self endon("entityshutdown");
-  qrdrone_height = getstruct("qrdrone_height", "targetname");
+  qrdrone_height = getStruct("qrdrone_height", "targetname");
 
   if(isDefined(qrdrone_height)) {
     self.maxheight = qrdrone_height.origin[2];
@@ -273,7 +273,7 @@ qrdrone_watch_distance() {
   self.minheight = level.mapcenter[2] - 800;
   inrangepos = self.origin;
   soundent = spawn(0, self.origin, "script_origin");
-  soundent linkto(self);
+  soundent linkTo(self);
   self thread qrdrone_staticstopondeath(soundent);
 
   while(true) {

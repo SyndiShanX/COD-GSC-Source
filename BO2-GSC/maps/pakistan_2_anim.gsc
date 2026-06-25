@@ -497,12 +497,12 @@ stat_vo_check_3(menendez) {
 }
 
 door_shut_rumble(truck) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 rooftop_melee_bloodfx(guard) {
   playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_Head");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1;
   playFXOnTag(getfx("melee_knife_blood_player"), guard, "J_NECK");
   level waittill("knife_pullout");
@@ -511,7 +511,7 @@ rooftop_melee_bloodfx(guard) {
 
 rooftop_melee_knifeout(player) {
   level notify("knife_pullout");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 tower_guard_bloodfx(guard) {
@@ -520,19 +520,19 @@ tower_guard_bloodfx(guard) {
 
 incendiary_grenade_explosion(e_temp) {
   wait 0.5;
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   level.player shellshock("default", 3);
   earthquake(1.0, 3.0, level.player.origin, 100);
-  e_fire_water = getent("firewater", "targetname");
+  e_fire_water = getEnt("firewater", "targetname");
   e_fire_water setclientflag(5);
-  e_fire_after = getent("firewater_after", "targetname");
+  e_fire_after = getEnt("firewater_after", "targetname");
   e_fire_after setclientflag(5);
   level thread firewater_visionset();
   exploder(700);
   wait 0.5;
   flag_wait("firewater_surface");
   stop_exploder(700);
-  level.player playrumbleonentity("reload_small");
+  level.player playRumbleOnEntity("reload_small");
   level.player shellshock("default", 2);
   earthquake(0.5, 2.0, level.player.origin, 100);
   level.player setwatersheeting(1, 4);
@@ -591,7 +591,7 @@ firewater_exposure() {
 
 claw_data_glove_on(m_player_body) {
   e_hint = createstreamerhint(level.player.origin, 1.0);
-  e_hint linkto(m_player_body, "tag_origin", vectorscale((0, 0, 1), 8.0));
+  e_hint linkTo(m_player_body, "tag_origin", vectorscale((0, 0, 1), 8.0));
   m_player_body attach("c_usa_cia_claw_viewbody_vson", "J_WristTwist_LE");
   wait 5;
   e_hint delete();
@@ -599,7 +599,7 @@ claw_data_glove_on(m_player_body) {
 
 frontend_data_glove_on(m_player_body) {
   e_hint = createstreamerhint(level.player.origin, 1.0);
-  e_hint linkto(m_player_body, "tag_origin");
+  e_hint linkTo(m_player_body, "tag_origin");
   m_player_body attach("c_usa_cia_frnd_viewbody_vson", "J_WristTwist_LE");
   wait 12;
   e_hint delete();

@@ -197,7 +197,7 @@ func_619F() {
   foreach(var_1 in level.players) {
     var_2 = anglesToForward(var_1.angles);
     var_2 = (var_2[0], var_2[1], 0);
-    var_2 = vectornormalize(var_2);
+    var_2 = vectorNormalize(var_2);
     var_3 = 20000;
     var_4 = spawn("script_model", var_1.origin + (0, 0, 8000) + var_2 * var_3);
     var_4 setModel("tag_origin");

@@ -293,7 +293,7 @@ function private interact_door_ispushentclose() {
     team = #"all";
   }
 
-  pushents = getplayers(team);
+  pushents = getPlayers(team);
 
   if(isDefined(self.var_d0ca7119)) {
     pushents = arraycombine(pushents, self.var_d0ca7119);
@@ -433,7 +433,7 @@ function push_door(e_who, var_5991aa24) {
 
     physicsexplosionsphere(self.m_e_door.origin, 64, 0, 0);
     self.m_e_door setforcenocull();
-    self.m_e_door rotateto(target_angles, open_time);
+    self.m_e_door rotateTo(target_angles, open_time);
     self.m_e_door waittill(#"rotatedone");
     self.m_e_door removeforcenocull();
     physicsexplosionsphere(self.m_e_door.origin, 64, 0, 0);
@@ -679,7 +679,7 @@ function function_c152a0ca(user) {
   var_903d67c4 = self doors::function_fb354714();
   var_6209ecfe = self interact_door_get_endpoint() - user.origin;
   var_4443000b = (var_6209ecfe[0], var_6209ecfe[1], 0);
-  var_4443000b = vectornormalize(var_4443000b);
+  var_4443000b = vectorNormalize(var_4443000b);
   var_79467049 = vectordot(var_4443000b, var_903d67c4);
   v_movement = undefined;
   var_86c03756 = math::sign(var_79467049);
@@ -688,11 +688,11 @@ function function_c152a0ca(user) {
     var_22efce82 = user getnormalizedmovement();
     var_22efce82 = (var_22efce82[0], var_22efce82[1] * -1, 0);
     v_movement = rotatepoint(var_22efce82, user.angles);
-    v_movement = vectornormalize(v_movement);
+    v_movement = vectorNormalize(v_movement);
   } else {
     v_movement = user getvelocity();
     v_movement = (v_movement[0], v_movement[1], 0);
-    v_movement = vectornormalize(v_movement);
+    v_movement = vectorNormalize(v_movement);
   }
 
   if(lengthsquared(v_movement) < 0.01) {

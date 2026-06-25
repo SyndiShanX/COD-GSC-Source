@@ -25,8 +25,8 @@ jailuseanimtree() {
 
 init_jail() {
   init_jail_anims();
-  level.cell_door = getent("sloth_cell_door", "targetname");
-  level.cell_door.clip = getent(level.cell_door.target, "targetname");
+  level.cell_door = getEnt("sloth_cell_door", "targetname");
+  level.cell_door.clip = getEnt(level.cell_door.target, "targetname");
   level.cell_door jailuseanimtree();
   level.jail_open_door = ::jail_open_door;
   level.jail_close_door = ::jail_close_door;
@@ -53,6 +53,6 @@ jail_close_door() {
 
   if(isDefined(level.cell_door.clip)) {
     level.cell_door.clip solid();
-    level.cell_door.clip disconnectpaths();
+    level.cell_door.clip disconnectPaths();
   }
 }

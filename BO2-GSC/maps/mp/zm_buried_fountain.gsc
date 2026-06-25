@@ -41,7 +41,7 @@ maze_fountain_collmap() {
 sloth_fountain_think() {
   flag_wait("courtyard_fountain_broken");
   level setclientfield("sloth_fountain_start", 1);
-  s_courtyard_fountain = getstruct("courtyard_fountain_struct", "targetname");
+  s_courtyard_fountain = getStruct("courtyard_fountain_struct", "targetname");
 
   if(isDefined(s_courtyard_fountain)) {
     sound_offset = vectorscale((0, 0, 1), 100.0);
@@ -75,15 +75,15 @@ maze_fountain_think() {
 }
 
 hide_maze_fountain_water() {
-  t_water = getent("maze_fountain_water_trigger", "targetname");
-  t_water enablelinkto();
-  m_water = getent("maze_fountain_water", "targetname");
-  t_water linkto(m_water);
+  t_water = getEnt("maze_fountain_water_trigger", "targetname");
+  t_water enablelinkTo();
+  m_water = getEnt("maze_fountain_water", "targetname");
+  t_water linkTo(m_water);
   m_water movez(-475, 0.05);
 }
 
 show_maze_fountain_water() {
-  m_water = getent("maze_fountain_water", "targetname");
+  m_water = getEnt("maze_fountain_water", "targetname");
   m_water movez(398, 6);
   m_water ghost();
   fountain_debug_print("maze water ready");
@@ -92,7 +92,7 @@ show_maze_fountain_water() {
 wait_for_maze_fountain_to_be_destroyed() {
   level endon("_destroy_maze_fountain");
 
-  t_damage = getent("maze_fountain_trigger", "targetname");
+  t_damage = getEnt("maze_fountain_trigger", "targetname");
   health = 1000;
 
   while(health > 0) {
@@ -109,20 +109,20 @@ wait_for_maze_fountain_to_be_destroyed() {
 }
 
 destroy_maze_fountain() {
-  s_fountain = getstruct("maze_fountain_struct", "targetname");
+  s_fountain = getStruct("maze_fountain_struct", "targetname");
   level setclientfield("maze_fountain_start", 1);
 
   if(isDefined(s_fountain)) {
     playFX(level._effect["fountain_break"], s_fountain.origin);
   }
 
-  s_fountain_clip = getent("maze_fountain_clip", "targetname");
+  s_fountain_clip = getEnt("maze_fountain_clip", "targetname");
   s_fountain_clip delete();
   flag_set("maze_fountain_broken");
 }
 
 fountain_transport_think() {
-  t_transporter = getent("maze_fountain_water_trigger", "targetname");
+  t_transporter = getEnt("maze_fountain_water_trigger", "targetname");
 
   while(true) {
     t_transporter waittill("trigger", player);
@@ -182,7 +182,7 @@ transport_player_to_start_zone() {
     }
   }
 
-  self setorigin(level._fountain_transporter.end_points[level._fountain_transporter.index].origin);
+  self setOrigin(level._fountain_transporter.end_points[level._fountain_transporter.index].origin);
   self setplayerangles(level._fountain_transporter.end_points[level._fountain_transporter.index].angles);
   level._fountain_transporter.index++;
   wait_network_frame();
@@ -251,13 +251,13 @@ debug_warp_player_to_fountain() {
 
 _warp_player_to_maze_fountain(player, str_teleport_point) {
   fountain_debug_print("teleporting player to " + str_teleport_point);
-  s_warp = getstruct(str_teleport_point, "targetname");
+  s_warp = getStruct(str_teleport_point, "targetname");
 
   for(origin = s_warp.origin; positionwouldtelefrag(origin); origin = s_warp.origin + (randomfloatrange(-64, 64), randomfloatrange(-64, 64), 0)) {
     wait 0.05;
   }
 
-  player setorigin(origin);
+  player setOrigin(origin);
   player setplayerangles(s_warp.angles);
 }
 

@@ -177,7 +177,7 @@ onBombImpact(owner, position, streakName) {
   timeRemaining = config.effectLifeSpan;
 
   killCamEnt = spawn("script_model", position + config.killCamOffset);
-  killCamEnt LinkTo(effectArea);
+  killCamEnt linkTo(effectArea);
   self.killCamEnt = killCamEnt;
 
   while(timeRemaining > 0.0) {

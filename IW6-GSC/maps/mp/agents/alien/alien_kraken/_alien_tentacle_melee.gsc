@@ -150,7 +150,7 @@ getsmashtriggerorigin() {
     return undefined;
   }
 
-  var_0 = common_scripts\utility::getstruct(self.smash_trigger.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.smash_trigger.target, "targetname");
 
   if(!isDefined(var_0)) {
     return undefined;
@@ -235,7 +235,7 @@ dosmash(var_0) {
       var_6 = length(var_5);
 
       if(var_6 > var_4) {
-        var_5 = vectornormalize(var_5) * var_4;
+        var_5 = vectorNormalize(var_5) * var_4;
       }
 
       var_7 = level.alien_types["kraken"].attributes[self.tentacle_name]["anim_index"];
@@ -246,7 +246,7 @@ dosmash(var_0) {
   }
 
   playanim(var_0, undefined, ::handlesmashnotetracks);
-  self setorigin(var_2, 0);
+  self setOrigin(var_2, 0);
   self notify("smash_complete");
 }
 
@@ -302,12 +302,12 @@ smashplayersback() {
       continue;
     }
     var_9 = var_8 getvelocity();
-    var_10 = vectornormalize((var_8.origin - var_5) * (1, 1, 0)) * var_2;
+    var_10 = vectorNormalize((var_8.origin - var_5) * (1, 1, 0)) * var_2;
     var_11 = (var_9 + var_10) * (1, 1, 0);
     var_12 = length(var_11);
 
     if(var_12 >= var_0) {
-      var_11 = vectornormalize(var_11) * var_0;
+      var_11 = vectorNormalize(var_11) * var_0;
     }
 
     var_8 setvelocity(var_11);

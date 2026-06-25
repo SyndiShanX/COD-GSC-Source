@@ -83,7 +83,7 @@ play_foot_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     v_fx_pos = v_fx_pos - v_fx_offset;
     ai_robot.e_damage_fx = spawn(localclientnum, v_fx_pos, "script_model");
     ai_robot.e_damage_fx setModel("tag_origin");
-    ai_robot.e_damage_fx linkto(ai_robot, "tag_hatch_fx_ri");
+    ai_robot.e_damage_fx linkTo(ai_robot, "tag_hatch_fx_ri");
     ai_robot.e_damage_fx playSound(0, "zmb_zombieblood_3rd_plane_explode");
     playFXOnTag(localclientnum, level._effect["mechz_death"], ai_robot.e_damage_fx, "tag_origin");
   } else if(newval == 2) {
@@ -91,7 +91,7 @@ play_foot_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     v_fx_pos = v_fx_pos - v_fx_offset;
     ai_robot.e_damage_fx = spawn(localclientnum, v_fx_pos, "script_model");
     ai_robot.e_damage_fx setModel("tag_origin");
-    ai_robot.e_damage_fx linkto(ai_robot, "tag_hatch_fx_le");
+    ai_robot.e_damage_fx linkTo(ai_robot, "tag_hatch_fx_le");
     ai_robot.e_damage_fx playSound(0, "zmb_zombieblood_3rd_plane_explode");
     playFXOnTag(localclientnum, level._effect["mechz_death"], ai_robot.e_damage_fx, "tag_origin");
   } else if(isDefined(ai_robot.e_damage_fx))
@@ -100,7 +100,7 @@ play_foot_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 play_eject_warning_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    s_origin = getstruct(fieldname, "targetname");
+    s_origin = getStruct(fieldname, "targetname");
     v_fx_pos = s_origin.origin;
     level.fieldname[localclientnum] = spawn(localclientnum, v_fx_pos, "script_model");
     level.fieldname[localclientnum] setModel("tag_origin");
@@ -236,8 +236,8 @@ toggle_robot_warning_lights(localclientnum, oldval, newval, bnewent, binitialsna
     return;
   }
   if(newval == 1) {
-    ai_robot.next_foot_left = getstruct(level.robot_light_positions[ai_robot._index_for_lights].struct_name + "_left", "targetname");
-    ai_robot.next_foot_right = getstruct(level.robot_light_positions[ai_robot._index_for_lights].struct_name + "_right", "targetname");
+    ai_robot.next_foot_left = getStruct(level.robot_light_positions[ai_robot._index_for_lights].struct_name + "_left", "targetname");
+    ai_robot.next_foot_right = getStruct(level.robot_light_positions[ai_robot._index_for_lights].struct_name + "_right", "targetname");
     ai_robot turn_on_warning_lights(localclientnum, ai_robot.next_foot_left);
     ai_robot turn_on_warning_lights(localclientnum, ai_robot.next_foot_right);
   } else {
@@ -305,7 +305,7 @@ play_warning_lights_in_footprints_fx(localclientnum, oldval, newval, bnewent, bi
         wait 0.05;
 
         if(isDefined(self.next_foot_right.target)) {
-          self.next_foot_right = getstruct(self.next_foot_right.target, "targetname");
+          self.next_foot_right = getStruct(self.next_foot_right.target, "targetname");
           turn_on_warning_lights(localclientnum, self.next_foot_right);
         } else
           self.next_foot_right = undefined;
@@ -320,7 +320,7 @@ play_warning_lights_in_footprints_fx(localclientnum, oldval, newval, bnewent, bi
         wait 0.05;
 
         if(isDefined(self.next_foot_left.target)) {
-          self.next_foot_left = getstruct(self.next_foot_left.target, "targetname");
+          self.next_foot_left = getStruct(self.next_foot_left.target, "targetname");
           turn_on_warning_lights(localclientnum, self.next_foot_left);
         } else
           self.next_foot_left = undefined;
@@ -334,15 +334,15 @@ giant_robot_rumble_and_shake(localclientnum, oldval, newval, bnewent, binitialsn
 
   if(newval == 3) {
     self earthquake(0.6, 1.5, self.origin, 100);
-    self playrumbleonentity(localclientnum, "artillery_rumble");
+    self playRumbleOnEntity(localclientnum, "artillery_rumble");
     level thread clientscripts\mp\zm_tomb_amb::snd_shake_hvy();
   } else if(newval == 2) {
     self earthquake(0.3, 1.5, self.origin, 100);
-    self playrumbleonentity(localclientnum, "shotgun_fire");
+    self playRumbleOnEntity(localclientnum, "shotgun_fire");
     level thread clientscripts\mp\zm_tomb_amb::snd_shake_med();
   } else if(newval == 1) {
     self earthquake(0.1, 1.0, self.origin, 100);
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
     level thread clientscripts\mp\zm_tomb_amb::snd_shake_lgt();
   } else
     self notify("stop_giant_robot_rumble_and_shake");
@@ -353,7 +353,7 @@ giant_robot_rumble_and_shake(localclientnum, oldval, newval, bnewent, binitialsn
 church_ceiling_fxanim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     n_time = getanimlength(level.scr_anim["fxanim_props_dlc4"]["church_ceiling"]);
-    e_church_ceiling = getent(localclientnum, "church_ceiling", "targetname");
+    e_church_ceiling = getEnt(localclientnum, "church_ceiling", "targetname");
     e_church_ceiling useanimtree(#animtree);
     e_church_ceiling setanim(level.scr_anim["fxanim_props_dlc4"]["church_ceiling"], 1, 0.1, 1);
   }

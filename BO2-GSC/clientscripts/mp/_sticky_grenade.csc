@@ -71,7 +71,7 @@ fullscreen_fx(localclientnum) {
   parent = self getparententity();
 
   if(isDefined(parent) && parent == player) {
-    parent playrumbleonentity(localclientnum, "buzz_high");
+    parent playRumbleOnEntity(localclientnum, "buzz_high");
 
     if(issplitscreen()) {
       animateui(localclientnum, "sticky_grenade_overlay_ss" + localclientnum, "overlay", "pulse", 0);

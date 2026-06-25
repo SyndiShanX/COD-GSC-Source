@@ -194,7 +194,7 @@ function aileapgoalservice(entity) {
   distance2d = distance2d(goalpos, startpos);
   dir = goalpos - startpos;
   dir = (dir[0], dir[1], 0);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   time = mapfloat(var_ab0e4f00, 10000, 1, 3.5, distance2d);
 
   record3dtext(time, entity.origin, (0, 0, 1), "<dev string:x61>", entity);
@@ -390,7 +390,7 @@ function private function_3cc9b7f6(entity, asmstatename) {
   }
 
   velocity = isDefined(entity.var_fbe88cc3) ? entity.var_fbe88cc3 : 800;
-  dir = vectornormalize(entity.var_ed09bf93.origin - entity.origin);
+  dir = vectorNormalize(entity.var_ed09bf93.origin - entity.origin);
   entity.var_6da37a9a.nextpos = entity.origin + dir * velocity * float(function_60d95f53()) / 1000;
 
   if(isDefined(new_node)) {

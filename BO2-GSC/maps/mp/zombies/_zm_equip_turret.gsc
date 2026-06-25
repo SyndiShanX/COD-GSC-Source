@@ -188,7 +188,7 @@ startturretdeploy(weapon) {
     turret setModel("p6_anim_zm_buildable_turret");
     turret.origin = weapon.origin;
     turret.angles = weapon.angles;
-    turret linkto(weapon);
+    turret linkTo(weapon);
     turret makeunusable();
     turret.owner = self;
     turret setowner(turret.owner);

@@ -86,8 +86,8 @@ craneswing() {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.target)) {
-      var_2.cratemesh = getent(var_2.target, "targetname");
-      var_2.cratemesh linkto(var_2);
+      var_2.cratemesh = getEnt(var_2.target, "targetname");
+      var_2.cratemesh linkTo(var_2);
     }
 
     var_2 thread craneswingthink();
@@ -103,16 +103,16 @@ craneswingthink() {
   wait(var_0);
 
   for(;;) {
-    self rotateto(var_2, var_1, 0.5, 0.5);
+    self rotateTo(var_2, var_1, 0.5, 0.5);
     self waittill("rotatedone");
-    self rotateto(var_3, var_1, 0.5, 0.5);
+    self rotateTo(var_3, var_1, 0.5, 0.5);
     self waittill("rotatedone");
   }
 }
 
 craneswingshort() {
   level endon("game_ended");
-  var_0 = getent("crane_rope_short", "targetname");
+  var_0 = getEnt("crane_rope_short", "targetname");
   var_1 = randomfloatrange(0.1, 1.0);
   var_2 = randomfloatrange(4.0, 5.0);
   var_3 = (0, 40, -3);
@@ -120,23 +120,23 @@ craneswingshort() {
   wait(var_1);
 
   for(;;) {
-    var_0 rotateto(var_3, var_2, 1, 1);
+    var_0 rotateTo(var_3, var_2, 1, 1);
     var_0 waittill("rotatedone");
-    var_0 rotateto(var_4, var_2, 1, 1);
+    var_0 rotateTo(var_4, var_2, 1, 1);
     var_0 waittill("rotatedone");
   }
 }
 
 fix_collision() {
-  var_0 = getent("clip128x128x8", "targetname");
+  var_0 = getEnt("clip128x128x8", "targetname");
   var_1 = spawn("script_model", (-769, 658, 501));
   var_1.angles = (0, 0, -90);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("clip64x64x256", "targetname");
+  var_2 = getEnt("clip64x64x256", "targetname");
   var_3 = spawn("script_model", (-2098, 8, 236));
   var_3.angles = (0, 0, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("clip64x64x256", "targetname");
+  var_4 = getEnt("clip64x64x256", "targetname");
   var_5 = spawn("script_model", (-2082, 8, 236));
   var_5.angles = (0, 0, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
@@ -149,7 +149,7 @@ fix_collision() {
   var_8 = spawn("script_model", (-2122, -292, 214));
   var_8 setModel("s4_rus_sandbag_lrg_01");
   var_8.angles = (6.94011, 313.26, 1.80004);
-  var_9 = getent("clip32x32x256", "targetname");
+  var_9 = getEnt("clip32x32x256", "targetname");
   var_10 = spawn("script_model", (300, 1658, 128));
   var_10.angles = (0, 180, -180);
   var_10 clonebrushmodeltoscriptmodel(var_9);

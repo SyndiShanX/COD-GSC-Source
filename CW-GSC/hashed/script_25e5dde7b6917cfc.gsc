@@ -317,7 +317,7 @@ function function_3a5d1f07(scene, flag_cleanup) {
 
 function function_9180c609(struct_targetname, start_flag, spawner_targetname = "intro_fake_runner_spawner") {
   guys = [];
-  spawner = getent(spawner_targetname, "targetname");
+  spawner = getEnt(spawner_targetname, "targetname");
   start_structs = struct::get_array(struct_targetname);
 
   foreach(struct in start_structs) {
@@ -1074,7 +1074,7 @@ function function_13a39590() {
 
   if(!level flag::get(#"flag_intro_player_boarded_chopper")) {
     self.var_e282ccde = util::spawn_model(#"wpn_t9_tr_fullauto_classic_prop", self gettagorigin("tag_weapon_left"), self gettagangles("tag_weapon_left"));
-    self.var_e282ccde linkto(self, "tag_weapon_left");
+    self.var_e282ccde linkTo(self, "tag_weapon_left");
     level flag::wait_till_timeout(0.5, #"flag_intro_player_boarded_chopper");
 
     if(!level flag::get(#"flag_intro_player_boarded_chopper")) {
@@ -1161,7 +1161,7 @@ function function_24cba40() {
 
 function function_d3f013d7() {
   music::setmusicstate("death");
-  playsoundatposition(#"hash_12f61c9ed705c06b", (0, 0, 0));
+  playSoundAtPosition(#"hash_12f61c9ed705c06b", (0, 0, 0));
 }
 
 function function_e2df4629(spawner_targetname, start_flag, var_887853be, max_drones) {
@@ -1244,7 +1244,7 @@ function function_3705ef2f(wait_flag) {
 }
 
 function function_c81e0f3f(str_skipto, b_starting) {
-  var_a129a5ee = getent("trigger_oob_firebase_to_branch", "targetname");
+  var_a129a5ee = getEnt("trigger_oob_firebase_to_branch", "targetname");
   thread function_d97a8605();
   thread function_b53b7c30(34);
   a_ents = [];
@@ -1443,7 +1443,7 @@ function function_c66e98bf() {
   self thread namespace_b7cfe907::delete_on_flag("flag_firebase_enemy_cliff_despawn");
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "chopper_attacker") {
-    trigger = getent(self.var_23da1376, "targetname");
+    trigger = getEnt(self.var_23da1376, "targetname");
     trigger waittill(#"trigger");
     self.ignoreall = 0;
     self setentitytarget(level.player, 1);
@@ -1498,8 +1498,8 @@ function function_fccd2779() {
 
 function function_f56d55e3() {
   spawner = level vehicle::simple_spawn_and_drive("firebase_arrival_spawner_cliff_friendly_littlebird");
-  var_dd4aa81d = getent("lb_01_target_01", "targetname");
-  var_af91cca8 = getent("lb_02_target_01", "targetname");
+  var_dd4aa81d = getEnt("lb_01_target_01", "targetname");
+  var_af91cca8 = getEnt("lb_02_target_01", "targetname");
 
   foreach(littlebirds in spawner) {
     littlebirds thread namespace_b7cfe907::function_53c06d6e();
@@ -1563,15 +1563,15 @@ function function_267a1d12() {
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "trench_chopper_attacker") {
     self.script_accuracy = 125;
-    trigger = getent(self.var_ff2b3d8a, "targetname");
+    trigger = getEnt(self.var_ff2b3d8a, "targetname");
     trigger waittill(#"trigger");
     self.ignoreall = 0;
     self setentitytarget(level.player, 1);
   } else if(isDefined(self.script_noteworthy) && self.script_noteworthy == "trench_entrance") {
     self setentitytarget(level.player, 1);
-    trigger = getent(self.var_ff2b3d8a, "targetname");
+    trigger = getEnt(self.var_ff2b3d8a, "targetname");
     trigger waittill(#"trigger");
-    info_vol = getent("info_vol_trench_enemy_position_02", "targetname");
+    info_vol = getEnt("info_vol_trench_enemy_position_02", "targetname");
     wait 5.5;
     self setgoal(info_vol);
   }
@@ -1617,10 +1617,10 @@ function function_188f0d9e() {
 
 function function_82bec60b() {
   spawner = level vehicle::simple_spawn_and_drive("firebase_arrival_spawner_ally_trench_cobra");
-  t_gs01_t01 = getent("t_gs01_t01", "targetname");
-  t_gs01_t02 = getent("t_gs01_t02", "targetname");
-  t_gs02_t01 = getent("t_gs02_t01", "targetname");
-  t_gs02_t02 = getent("t_gs02_t02", "targetname");
+  t_gs01_t01 = getEnt("t_gs01_t01", "targetname");
+  t_gs01_t02 = getEnt("t_gs01_t02", "targetname");
+  t_gs02_t01 = getEnt("t_gs02_t01", "targetname");
+  t_gs02_t02 = getEnt("t_gs02_t02", "targetname");
 
   foreach(gunship in spawner) {
     gunship thread namespace_b7cfe907::function_53c06d6e();
@@ -1711,7 +1711,7 @@ function function_55a3220(str_skipto, b_starting) {
   level.player setplayerangles(org.angles);
   callback::remove_on_player_damage(&namespace_b7cfe907::function_38a76cc5);
   namespace_b7cfe907::function_d777fe61(0);
-  var_a129a5ee = getent("trigger_oob_firebase_to_branch", "targetname");
+  var_a129a5ee = getEnt("trigger_oob_firebase_to_branch", "targetname");
   var_a129a5ee triggerenable(1);
 
   if(!is_true(b_starting)) {

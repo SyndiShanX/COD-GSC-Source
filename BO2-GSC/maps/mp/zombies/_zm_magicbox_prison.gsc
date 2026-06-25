@@ -41,7 +41,7 @@ custom_joker_movement() {
   wait 0.5;
   level notify("weapon_fly_away_start");
   wait 1;
-  m_lock rotateyaw(3000, 4, 4);
+  m_lock rotateYaw(3000, 4, 4);
   wait 3;
   m_lock movez(20, 0.5, 0.5);
   m_lock waittill("movedone");

@@ -167,7 +167,7 @@ function firefly_pod_detonate(attacker, weapon, target) {
 function firefly_pod_destroyed() {
   fx_ent = playFX("weapon/fx_hero_chem_gun_blob_death", self.origin);
   fx_ent.team = self.team;
-  playsoundatposition("wpn_gelgun_blob_destroy", self.origin);
+  playSoundAtPosition("wpn_gelgun_blob_destroy", self.origin);
   if(isDefined(self.trigger)) {
     self.trigger delete();
   }
@@ -183,13 +183,13 @@ function firefly_killcam_move(position, time) {
   wait(0.5);
   accel = 0;
   decel = 0;
-  self.killcament moveto(position, time, accel, decel);
+  self.killcament moveTo(position, time, accel, decel);
 }
 
 function firefly_killcam_stop() {
   self notify("stop_killcam");
   if(isDefined(self.killcament)) {
-    self.killcament moveto(self.killcament.origin, 0.1, 0, 0);
+    self.killcament moveTo(self.killcament.origin, 0.1, 0, 0);
   }
 }
 
@@ -198,7 +198,7 @@ function firefly_move(position, time) {
   accel = 0;
   decel = 0;
   self thread firefly_killcam_move(position, time);
-  self moveto(position, time, accel, decel);
+  self moveTo(position, time, accel, decel);
   self waittill("movedone");
 }
 
@@ -208,7 +208,7 @@ function firefly_partial_move(target, position, time, percent) {
   accel = 0;
   decel = 0;
   self thread firefly_killcam_move(position, time);
-  self moveto(position, time, accel, decel);
+  self moveTo(position, time, accel, decel);
   self thread firefly_check_for_collisions(target, position, time);
   wait(time * percent);
   self notify("movedone");
@@ -216,7 +216,7 @@ function firefly_partial_move(target, position, time, percent) {
 
 function firefly_rotate(angles, time) {
   self endon("death");
-  self rotateto(angles, time, 0, 0);
+  self rotateTo(angles, time, 0, 0);
   self waittill("rotatedone");
 }
 
@@ -224,7 +224,7 @@ function firefly_check_for_collisions(target, move_to, time) {
   self endon("death");
   self endon("movedone");
   original_position = self.origin;
-  dir = vectornormalize(move_to - self.origin);
+  dir = vectorNormalize(move_to - self.origin);
   dist = distance(self.origin, move_to);
   speed = dist / time;
   delta = dir * (speed * level.fireflies_collision_check_interval);
@@ -400,7 +400,7 @@ function firefly_attack(target, state) {
   if(!isDefined(target) || !isalive(target)) {
     return;
   }
-  self linkto(target);
+  self linkTo(target);
   wait(time);
   if(!isalive(target)) {
     return;
@@ -539,7 +539,7 @@ function firefly_pod_start(start_pos, target, linked) {
     return;
   }
   thread target_bread_crumbs(target);
-  self moveto(start_pos, level.fireflies_emit_time, 0, level.fireflies_emit_time);
+  self moveTo(start_pos, level.fireflies_emit_time, 0, level.fireflies_emit_time);
   self waittill("movedone");
   if(isDefined(target) && isDefined(target.origin)) {
     delta = target.origin - self.origin;
@@ -555,7 +555,7 @@ function firefly_pod_start(start_pos, target, linked) {
 }
 
 function firefly_pod_release_fireflies(attacker, target) {
-  jumpdir = vectornormalize(anglestoup(self.angles));
+  jumpdir = vectorNormalize(anglestoup(self.angles));
   if(jumpdir[2] > level.fireflies_spawn_height_wall_angle_cos) {
     jumpheight = level.fireflies_spawn_height;
   } else {
@@ -569,7 +569,7 @@ function firefly_pod_release_fireflies(attacker, target) {
     fx_ent = playFX("weapon/fx_hero_firefly_start", self.origin, anglestoup(self.angles));
     fx_ent.team = self.team;
     self.firefly_mover clientfield::set("firefly_state", 1);
-    self.firefly_mover.killcament moveto(explodepos + self.firefly_mover.killcamoffset, level.fireflies_emit_time, 0, level.fireflies_emit_time);
+    self.firefly_mover.killcament moveTo(explodepos + self.firefly_mover.killcamoffset, level.fireflies_emit_time, 0, level.fireflies_emit_time);
   }
   self.firefly_mover thread firefly_pod_start(explodepos, target, linked);
   self delete();

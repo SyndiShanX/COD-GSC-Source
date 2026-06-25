@@ -72,7 +72,7 @@ house_intro_setup() {
   level thread run_scene("civ_idle_3");
   level thread run_scene("civ_idle_4");
   level thread run_scene("civ_idle_5");
-  m_gringo_graffiti = getent("m_gringo_graffiti", "targetname");
+  m_gringo_graffiti = getEnt("m_gringo_graffiti", "targetname");
   m_gringo_graffiti hide();
   level.player init_player();
   exploder(1001);
@@ -81,7 +81,7 @@ house_intro_setup() {
 
 get_skinner_ai() {
   flag_wait("mason_greets_mcknight_started");
-  level.ai_skinner_casual = getent("skinner_ai", "targetname");
+  level.ai_skinner_casual = getEnt("skinner_ai", "targetname");
 }
 
 init_player() {
@@ -103,7 +103,7 @@ init_casual_hero() {
 
 street_fail_condition() {
   level endon("player_opened_shed");
-  t_fail_player = getent("fail_player", "targetname");
+  t_fail_player = getEnt("fail_player", "targetname");
 
   while(true) {
     if(!self istouching(t_fail_player)) {
@@ -164,7 +164,7 @@ house_clean_up_and_reset() {
 }
 
 player_exits_hummer() {
-  vh_player_hummer = getent("vh_player_humvee", "targetname");
+  vh_player_hummer = getEnt("vh_player_humvee", "targetname");
   vh_player_hummer veh_toggle_tread_fx(0);
   vh_player_hummer veh_toggle_exhaust_fx(0);
   vh_player_hummer attach("veh_iw_hummer_win_xcam", "front_door_left_jnt");
@@ -193,7 +193,7 @@ house_drive_by() {
   vh_hatch thread truck_play_music();
   level thread run_scene("gringo_driveby");
   wait 3;
-  vh_truck_driveway = getent("truck_driveway", "targetname");
+  vh_truck_driveway = getEnt("truck_driveway", "targetname");
   vh_truck_driveway thread go_path(getvehiclenode("start_driveway", "targetname"));
   wait 13;
   level thread ambient_neighborhood_vehicles();
@@ -202,7 +202,7 @@ house_drive_by() {
 truck_play_music() {
   music_ent = spawn("script_origin", self.origin);
   music_ent playLoopSound("mus_intro_truck");
-  music_ent linkto(self);
+  music_ent linkTo(self);
 }
 
 ambient_neighborhood_vehicles() {
@@ -243,7 +243,7 @@ house_events() {
 }
 
 house_event_front() {
-  vh_mason_hummer = getent("mason_hummer", "targetname");
+  vh_mason_hummer = getEnt("mason_hummer", "targetname");
   vh_mason_hummer thread turn_off_mason_hummer();
   level thread start_mcknight_arguing_vo();
   trigger_wait("trig_mason_greet");
@@ -271,8 +271,8 @@ after_meeting_mason_driveby() {
 house_event_walk_to_shed() {
   trigger_wait("trig_front_gate");
   flag_set("player_at_front_gate");
-  m_front_gate_clip = getent("m_front_gate_clip", "targetname");
-  m_front_gate_clip moveto(m_front_gate_clip.origin - vectorscale((0, 0, 1), 128.0), 0.05);
+  m_front_gate_clip = getEnt("m_front_gate_clip", "targetname");
+  m_front_gate_clip moveTo(m_front_gate_clip.origin - vectorscale((0, 0, 1), 128.0), 0.05);
   level thread run_scene("squad_to_backyard");
   level thread run_scene("front_gate");
   level thread open_front_gate_clip();
@@ -289,8 +289,8 @@ house_event_walk_to_shed() {
 
 open_front_gate_clip() {
   wait 1.5;
-  front_gate_clip = getent("backyard_gate_clip", "targetname");
-  front_gate_clip rotateyaw(110, 1.2);
+  front_gate_clip = getEnt("backyard_gate_clip", "targetname");
+  front_gate_clip rotateYaw(110, 1.2);
   level waittill("player_opened_shed");
   front_gate_clip delete();
 }
@@ -308,7 +308,7 @@ house_event_backyard() {
   level thread maps\_audio::switch_music_wait("PANAMA_INTRO", 17);
   flag_set("player_opened_shed");
   turn_on_reflection_cam("reflection_cam");
-  m_shed_door_extra = getent("m_mirrored_shed_door", "targetname");
+  m_shed_door_extra = getEnt("m_mirrored_shed_door", "targetname");
   m_shed_door_extra delete();
   level thread run_scene("reflection_woods_grabs_bag");
   level thread run_scene("reflection_woods_grabs_bag_door");
@@ -338,7 +338,7 @@ house_event_exit() {
   trigger_wait("trig_exit_gate");
   flag_set("house_player_at_exit");
   setmusicstate("PANAMA_GATE_OPENED");
-  m_gringo_graffiti = getent("m_gringo_graffiti", "targetname");
+  m_gringo_graffiti = getEnt("m_gringo_graffiti", "targetname");
   m_gringo_graffiti show();
   delay_thread(6, ::flag_set, "show_introscreen_title");
   level thread house_end_flag();
@@ -348,7 +348,7 @@ house_event_exit() {
   level thread run_scene_and_delete("player_outro", 1);
   level thread hide_beer_can();
   flag_wait("player_outro_started");
-  ai_tagger = getent("gringo_tagger_ai", "targetname");
+  ai_tagger = getEnt("gringo_tagger_ai", "targetname");
   ai_tagger attach("p_glo_spray_can", "tag_weapon_left");
   level thread fade_out_house_end();
   scene_wait("player_outro");
@@ -390,9 +390,9 @@ turn_off_mason_hummer() {
 front_gate_close_wait() {
   trigger_wait("trig_use_shed_door");
   run_scene_first_frame("front_gate");
-  m_front_door_open_clip = getent("front_gate_open", "targetname");
+  m_front_door_open_clip = getEnt("front_gate_open", "targetname");
   m_front_door_open_clip delete();
-  self moveto(self.origin + vectorscale((0, 0, 1), 128.0), 0.05);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 128.0), 0.05);
 }
 
 shed_door_wait() {
@@ -411,7 +411,7 @@ house_end_flag() {
 
 turn_on_reflection_cam(str_extra_cam) {
   setsaveddvar("r_extracam_custom_aspectratio", 1.38636);
-  sm_cam_ent = getent(str_extra_cam, "targetname");
+  sm_cam_ent = getEnt(str_extra_cam, "targetname");
   level.e_tag_origin = spawn("script_model", sm_cam_ent.origin);
   level.e_tag_origin setModel("tag_origin");
   level.e_tag_origin.angles = sm_cam_ent.angles;
@@ -419,7 +419,7 @@ turn_on_reflection_cam(str_extra_cam) {
 }
 
 turn_off_reflection_cam(str_extra_cam) {
-  sm_cam_ent = getent(str_extra_cam, "targetname");
+  sm_cam_ent = getEnt(str_extra_cam, "targetname");
   level.e_tag_origin clearclientflag(1);
   level.e_tag_origin delay_thread(2, ::self_delete);
   sm_cam_ent delay_thread(2, ::self_delete);
@@ -491,11 +491,11 @@ paint_spray() {
 }
 
 start_mcknight_arguing_vo() {
-  spawner = getent("skinner", "targetname");
+  spawner = getEnt("skinner", "targetname");
   level.mcknight = simple_spawn_single("skinner");
   level.mcknight.animname = "skinner";
   level.mcknight forceteleport(spawner.origin, spawner.angles);
-  skinner_vo = getent("skinner_vo", "targetname");
+  skinner_vo = getEnt("skinner_vo", "targetname");
   skinner_vo say_dialog("mckn_honey_you_need_to_0", 0, 1);
   skinner_vo say_dialog("jane_i_am_calm_0", 0, 1);
   flag_wait("house_follow_mason");
@@ -505,7 +505,7 @@ start_mcknight_arguing_vo() {
 }
 
 mcknight_close_the_door_argument_vo(guy) {
-  skinner_vo = getent("skinner_vo", "targetname");
+  skinner_vo = getEnt("skinner_vo", "targetname");
   skinner_vo say_dialog("mckn_family_i_thought_th_0", 0, 1);
   skinner_vo say_dialog("jane_it_s_about_everythin_0", 0, 1);
   skinner_vo playSound("fly_pan_house_end");
@@ -519,7 +519,7 @@ gringo_spraypaint_vo() {
   level endon("player_outro_started");
   time = getanimlength(%ch_pan_01_06_intro_backyard_leave_mason);
   wait(time - 10);
-  m_gringo_graffiti = getent("m_gringo_graffiti", "targetname");
+  m_gringo_graffiti = getEnt("m_gringo_graffiti", "targetname");
   m_gringo_graffiti say_dialog("tee1_hurry_it_up_0", 3, 1);
   m_gringo_graffiti say_dialog("tee2_okay_okay_0", 2, 1);
   m_gringo_graffiti say_dialog("tee1_that_s_good_come_0", 2, 1);

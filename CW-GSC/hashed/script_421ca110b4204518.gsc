@@ -201,7 +201,7 @@ function private function_1cbc22b0(weapon, n_radius) {
 
 function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53ab1f = 0) {
   while(isDefined(self)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isalive(player) && !isinarray(player.var_d93ab65, self) && function_baaff75b(self, player)) {
         if(!player.var_d93ab65.size) {
           player clientfield::set_to_player("" + #"hash_717ed5a81b281ebd", 1);
@@ -268,7 +268,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
 
         if(function_baaff75b(self, missile)) {
           v_dir = missile.origin - self.origin;
-          v_dir = vectornormalize(v_dir);
+          v_dir = vectorNormalize(v_dir);
 
           if(v_dir[0] == 0) {
             var_c51499f8 = 1;
@@ -340,7 +340,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
     waitframe(1);
   }
 
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     arrayremovevalue(player.var_d93ab65, undefined);

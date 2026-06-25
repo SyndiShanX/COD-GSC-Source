@@ -157,7 +157,7 @@ startcornerapproachconditions(approachpoint, approachtype, approachnumber, appro
     return false;
   }
 
-  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.6) {
+  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectorNormalize(self.enemy.origin - self.origin)) > 0.6) {
     if(distancesquared(self.origin, self.enemy.origin) < 262144) {
       debug_arrival("approach aborted at last minute: facing enemy instead of current motion angle");
 
@@ -239,7 +239,7 @@ startcornerapproach(approachtype, approachpoint, approachnodeyaw, approachfinaly
   approachnumber = -1;
   node = getapproachent();
   arrivalfromfront = vectordot(approach_dir, anglesToForward(node.angles)) >= 0;
-  arrivalfromfront = arrivalfromfront && vectordot(vectornormalize(self.origin - node.origin), anglesToForward(node.angles)) <= 0;
+  arrivalfromfront = arrivalfromfront && vectordot(vectorNormalize(self.origin - node.origin), anglesToForward(node.angles)) <= 0;
   doingcqbapproach = shoulddocqbtransition(self.node, approachtype, 1, forcecqb);
 
   if(doingcqbapproach) {
@@ -278,7 +278,7 @@ startcornerapproach(approachtype, approachpoint, approachnodeyaw, approachfinaly
     self endon("goal_changed");
     self.arrivalstartdist = longestapproachdist("arrive_" + approachtype);
     approachwaittillclose(node, self.arrivalstartdist + 8);
-    dirtonode = vectornormalize(approachpoint - self.origin);
+    dirtonode = vectorNormalize(approachpoint - self.origin);
 
     if(approachnumber == 4) {
       excludedir = 7;
@@ -401,8 +401,8 @@ checkarrivalenterpositions(approachpoint, approachyaw, approachtype, approach_di
     }
 
     if(!arrivalfromfront) {
-      selftoanimstart = vectornormalize(self.coverenterpos - self.origin);
-      animstarttonode = vectornormalize(approachpoint - self.coverenterpos);
+      selftoanimstart = vectorNormalize(self.coverenterpos - self.origin);
+      animstarttonode = vectorNormalize(approachpoint - self.coverenterpos);
       cosangle = vectordot(selftoanimstart, animstarttonode);
 
       if(cosangle < 0.707) {
@@ -627,7 +627,7 @@ dolastminuteexposedapproach() {
     approachtype = determineexposedapproachtype(self.node);
   }
 
-  approachdir = vectornormalize(self.pathgoalpos - self.origin);
+  approachdir = vectorNormalize(self.pathgoalpos - self.origin);
   desiredfacingyaw = vectortoangles(approachdir)[1];
 
   if(faceenemyatendofapproach(self.node)) {
@@ -701,7 +701,7 @@ dolastminuteexposedapproach() {
       requiredyaw = self.angles[1];
 
     closerdist = dist - animdist;
-    idealstartpos = self.origin + vectorscale(vectornormalize(self.pathgoalpos - self.origin), closerdist);
+    idealstartpos = self.origin + vectorscale(vectorNormalize(self.pathgoalpos - self.origin), closerdist);
   } else {
     requiredyaw = self.angles[1];
     idealstartpos = self.origin;
@@ -1341,7 +1341,7 @@ calculatenodetransitionangles(angledataobj, approachtype, isarrival, arrivalyaw,
     }
 
     angles = (0, arrivalyaw + sign * anglearray[i] + offset, 0);
-    dir = vectornormalize(anglesToForward(angles));
+    dir = vectorNormalize(anglesToForward(angles));
     angledataobj.transitions[i] = vectordot(approach_dir, dir);
   }
 }

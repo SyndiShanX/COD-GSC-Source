@@ -212,7 +212,7 @@ LoopLocalSeekSound(alias, interval) {
 
   for(;;) {
     self playLocalSound(alias);
-    self PlayRumbleOnEntity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
 
     wait interval;
   }
@@ -229,13 +229,13 @@ LoopLocalLockSound(alias, interval) {
   self.stinger.stingerlocksound = true;
   for(;;) {
     self playLocalSound(alias);
-    self PlayRumbleOnEntity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait interval / 3;
 
-    self PlayRumbleOnEntity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait interval / 3;
 
-    self PlayRumbleOnEntity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait interval / 3;
 
     self StopRumble("stinger_lock_rumble");

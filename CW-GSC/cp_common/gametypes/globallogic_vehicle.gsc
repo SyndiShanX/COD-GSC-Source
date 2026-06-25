@@ -101,7 +101,7 @@ function private function_d521a2c1() {
 }
 
 function function_5310fa38(vh_target, n_seat) {
-  if(isbot(self) && (is_true(vh_target.var_3a60b519) || self isplayinganimscripted())) {
+  if(isbot(self) && (is_true(vh_target.var_3a60b519) || self isplayinganimScripted())) {
     return false;
   }
 

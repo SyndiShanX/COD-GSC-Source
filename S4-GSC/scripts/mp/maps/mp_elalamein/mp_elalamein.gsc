@@ -126,49 +126,49 @@ disconnectbadpathnodes() {
 
 fix_collision() {
   if(scripts\mp\utility\game::getgametype() == "sd") {
-    var_0 = getent("clip32x32x32", "targetname");
+    var_0 = getEnt("clip32x32x32", "targetname");
     var_1 = spawn("script_model", (494, 1894.5, 255));
     var_1.angles = (0, 0, 0);
     var_1 clonebrushmodeltoscriptmodel(var_0);
-    var_2 = getent("clip32x32x32", "targetname");
+    var_2 = getEnt("clip32x32x32", "targetname");
     var_3 = spawn("script_model", (494, 1894.5, 240));
     var_3.angles = (0, 0, 0);
     var_3 clonebrushmodeltoscriptmodel(var_2);
   }
 
-  var_4 = getent("clip256x256x256", "targetname");
+  var_4 = getEnt("clip256x256x256", "targetname");
   var_5 = spawn("script_model", (1664.81, 1289.7, 542.26));
   var_5.angles = (0, 0, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
-  var_6 = getent("clip256x256x256", "targetname");
+  var_6 = getEnt("clip256x256x256", "targetname");
   var_7 = spawn("script_model", (1533.92, 1367.58, 542.26));
   var_7.angles = (0, 0, 0);
   var_7 clonebrushmodeltoscriptmodel(var_6);
-  var_8 = getent("player32x32x256", "targetname");
+  var_8 = getEnt("player32x32x256", "targetname");
   var_9 = spawn("script_model", (1296.54, 1559.98, 482.603));
   var_9.angles = (0, 0, 0);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("clip256x256x256", "targetname");
+  var_10 = getEnt("clip256x256x256", "targetname");
   var_11 = spawn("script_model", (-2127.31, 2403.24, 112.362));
   var_11.angles = (0, 341.787, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("clip256x256x256", "targetname");
+  var_12 = getEnt("clip256x256x256", "targetname");
   var_13 = spawn("script_model", (-2058.92, 2622.48, 112.362));
   var_13.angles = (0, 341.787, 0);
   var_13 clonebrushmodeltoscriptmodel(var_12);
-  var_14 = getent("clip512x512x8", "targetname");
+  var_14 = getEnt("clip512x512x8", "targetname");
   var_15 = spawn("script_model", (1990, 2061, 498.75));
   var_15.angles = (0, 0, -90);
   var_15 clonebrushmodeltoscriptmodel(var_14);
-  var_16 = getent("clip512x512x8", "targetname");
+  var_16 = getEnt("clip512x512x8", "targetname");
   var_17 = spawn("script_model", (2142.75, 2249.25, 498.75));
   var_17.angles = (0, 90, -90);
   var_17 clonebrushmodeltoscriptmodel(var_16);
-  var_18 = getent("clip256x256x256", "targetname");
+  var_18 = getEnt("clip256x256x256", "targetname");
   var_19 = spawn("script_model", (2485, -731.5, 79.5));
   var_19.angles = (0, 270, 0);
   var_19 clonebrushmodeltoscriptmodel(var_18);
-  var_20 = getent("clip256x256x256", "targetname");
+  var_20 = getEnt("clip256x256x256", "targetname");
   var_21 = spawn("script_model", (2485, -731.5, 335.25));
   var_21.angles = (0, 270, 0);
   var_21 clonebrushmodeltoscriptmodel(var_20);

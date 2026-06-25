@@ -127,7 +127,7 @@ trap_gator_spawn(var_0, var_1) {
 gator_collision_attach(var_0, var_1) {
   var_0.origin = self.origin;
   var_0.angles = self.angles + (0, 90, 0);
-  var_0 linkto(self, "J_MainRoot");
+  var_0 linkTo(self, "J_MainRoot");
 
   if(var_1) {
     var_2 = "J_Head";
@@ -136,7 +136,7 @@ gator_collision_attach(var_0, var_1) {
     var_5 = spawn("script_model", var_3);
     var_5.angles = var_4;
     var_5 setModel("dlc2_zom_gib_arm_pickup");
-    var_5 linkto(self, var_2, (14, -20, -7), (0, 0, 0));
+    var_5 linkTo(self, var_2, (14, -20, -7), (0, 0, 0));
     waittill_gator_death();
     var_5 delete();
   }
@@ -171,7 +171,7 @@ trap_gator_gib_death() {
     return;
   }
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self, "J_MainRoot");
+  var_0 linkTo(self, "J_MainRoot");
   level waittill("gator_killed");
   self hide();
   playFX(common_scripts\utility::getfx("dlc_gator_death"), var_0.origin + (0, 0, 32));
@@ -279,7 +279,7 @@ trap_gator_radius_damage(var_0) {
 
 trap_gator_push_players(var_0) {
   waitframe();
-  var_1 = vectornormalize((self.origin - var_0) * (1, 1, 0));
+  var_1 = vectorNormalize((self.origin - var_0) * (1, 1, 0));
   self setvelocity(var_1 * 100);
 }
 

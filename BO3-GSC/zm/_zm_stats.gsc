@@ -441,7 +441,7 @@ function update_global_counters_on_match_end() {
   cheat_out_of_playable_area = 0;
   cheat_too_friendly = 0;
   cheat_total = 0;
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     deaths = deaths + player.pers["deaths"];
     kills = kills + player.pers["kills"];

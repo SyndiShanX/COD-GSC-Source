@@ -302,7 +302,7 @@ function jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
     self.poi_spot zm_utility::create_zombie_point_of_interest(attract_dist, num_attractors, added_poi_value, start_turned_on, poi_start_func);
     self thread disconnect_failsafe_pad_poi_clean();
   }
-  self setorigin(self.origin + (0, 0, 1));
+  self setOrigin(self.origin + (0, 0, 1));
   if(20 >= randomintrange(0, 101)) {
     self thread zm_audio::create_and_play_dialog("general", "jumppad");
   }
@@ -357,7 +357,7 @@ function jump_pad_enemy_follow_or_ignore(ent_poi) {
   self endon("death");
   self endon("disconnect");
   zombies = getaiteamarray(level.zombie_team);
-  players = getplayers();
+  players = getPlayers();
   valid_players = 0;
   for(p = 0; p < players.size; p++) {
     if(zm_utility::is_player_valid(players[p])) {
@@ -408,7 +408,7 @@ function stop_chasing_the_sky(ent_poi) {
   self endon("stop_chasing_the_sky");
   while(isDefined(self._pad_follow) && self._pad_follow) {
     if(isDefined(self.favoriteenemy)) {
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         if(zm_utility::is_player_valid(players[i]) && players[i] != self.favoriteenemy) {
           if(distance2dsquared(players[i].origin, self.origin) < 10000) {

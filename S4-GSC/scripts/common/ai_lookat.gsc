@@ -100,7 +100,7 @@ _id_7CCC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
     var_30 = anglesToForward(self.angles);
     var_31 = anglesToForward(level.player.angles);
-    var_32 = vectornormalize(level.player.origin - self.origin);
+    var_32 = vectorNormalize(level.player.origin - self.origin);
     var_33 = vectordot(var_30, var_32) > var_10 && var_28 < var_5;
     var_34 = vectordot(var_31, -1.0 * var_32) > var_11;
 
@@ -299,7 +299,7 @@ _id_37BC(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_15 = distance(level.player.origin, self.origin);
     var_16 = anglesToForward(self.angles);
     var_17 = anglesToForward(level.player.angles);
-    var_18 = vectornormalize(level.player.origin - self.origin);
+    var_18 = vectorNormalize(level.player.origin - self.origin);
     var_19 = vectordot(var_16, var_18) > var_5 && var_15 < var_2;
     var_20 = vectordot(var_17, -1.0 * var_18) > var_6;
     var_19 = var_19 && var_20;

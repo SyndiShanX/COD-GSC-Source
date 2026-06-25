@@ -196,7 +196,7 @@ func_F5F3(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
   var_1.angles = vectortoangles((0, 0, 1));
-  var_1 linkto(var_0, "tag_origin");
+  var_1 linkTo(var_0, "tag_origin");
   var_1 thread func_CD2C(var_1, var_0);
   var_1 thread func_13340(var_1, var_0);
   if(!isDefined(level.var_85EB)) {
@@ -427,7 +427,7 @@ func_5D40(var_0, var_1, var_2) {
   var_8 setModel("tag_origin");
   wait(var_3);
   playFXOnTag(level._effect["zombie_grey_teleport_trail"], var_8, "tag_origin");
-  var_8 moveto(var_2, var_7 - var_3);
+  var_8 moveTo(var_2, var_7 - var_3);
   scripts\engine\utility::waittill_any_ents(var_8, "movedone", var_0, "death");
   var_8 delete();
 }
@@ -573,8 +573,8 @@ func_1164C(var_0, var_1, var_2, var_3) {
   var_6 thread func_4104(var_0, var_6);
   var_0 setscriptablepartstate("teleport_attack_trail", "on");
   var_0 func_CECC(var_2, "start");
-  var_0 linkto(var_6);
-  var_6 moveto(var_1, var_5);
+  var_0 linkTo(var_6);
+  var_6 moveTo(var_1, var_5);
   var_6 waittill("movedone");
   var_0 playSound("grey_teleport_end");
   if(isDefined(var_3)) {
@@ -694,14 +694,14 @@ func_13F7A(var_0, var_1, var_2, var_3) {
   self notify("update_mobile_shield_visibility", 0);
   var_4 = self.origin;
   var_5 = (650, 625, 100);
-  self setorigin(var_5);
+  self setOrigin(var_5);
   var_6 = func_85F4(var_4);
   var_7 = self.teleport_loner_target_player;
   var_8 = func_7B0B(var_7.origin);
   var_9 = func_7B0A(var_7 getplayerangles(), var_7.origin, func_7CE9(), 350);
   var_10 = func_7CEE(self, var_8, var_9);
   func_85F3(var_6, var_10);
-  self setorigin(var_10);
+  self setOrigin(var_10);
   self.angles = vectortoangles(var_7.origin - self.origin);
   self show();
   self notify("update_mobile_shield_visibility", 1);
@@ -739,7 +739,7 @@ func_7B0B(var_0) {
     return var_2;
   }
 
-  var_3 = vectornormalize(var_2 - var_1);
+  var_3 = vectorNormalize(var_2 - var_1);
   var_4 = var_2 + var_3;
   return getclosestpointonnavmesh(var_4);
 }
@@ -775,7 +775,7 @@ func_85F4(var_0) {
   var_1 setModel("tag_origin");
   wait(0.2);
   playFXOnTag(level._effect["zombie_grey_teleport_trail"], var_1, "tag_origin");
-  var_1 moveto((648, 654, 326), 2, 2);
+  var_1 moveTo((648, 654, 326), 2, 2);
   var_1 waittill("movedone");
   wait(1);
   return var_1;
@@ -784,7 +784,7 @@ func_85F4(var_0) {
 func_85F3(var_0, var_1) {
   var_2 = spawnfx(level._effect["zombie_grey_teleport_trail"], var_1);
   triggerfx(var_2);
-  var_0 moveto(var_1, 1, 1);
+  var_0 moveTo(var_1, 1, 1);
   var_0 waittill("movedone");
   var_0 delete();
   var_2 delete();
@@ -866,7 +866,7 @@ func_85FF(var_0, var_1, var_2, var_3) {
     self orientmode("face enemy");
   } else {
     var_5 = var_4.origin - self.origin;
-    var_6 = vectornormalize(var_5);
+    var_6 = vectorNormalize(var_5);
     var_7 = vectortoangles(var_6);
     self orientmode("face angle abs", var_7);
   }
@@ -979,7 +979,7 @@ func_6D07(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_6.origin = var_0;
   var_6.angles = func_7827(var_3, var_4);
   var_7 = int(var_2 * 20);

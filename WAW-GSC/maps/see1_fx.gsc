@@ -149,8 +149,8 @@ footsteps() {
 
 cull_dist_adjustment() {
   wait(1);
-  trigger1 = getent("cull_set_forest_trench", "targetname");
-  trigger2 = getent("cull_set_forest_entrance", "targetname");
+  trigger1 = getEnt("cull_set_forest_trench", "targetname");
+  trigger2 = getEnt("cull_set_forest_entrance", "targetname");
 
   current_cull = 15000;
   while(1) {

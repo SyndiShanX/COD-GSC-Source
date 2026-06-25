@@ -70,7 +70,7 @@ spawn_array_struct() {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -212,7 +212,7 @@ brush_throw() {
   ent = undefined;
 
   if(isDefined(self.v["target"])) {
-    ent = getent(self.v["target"], "targetname");
+    ent = getEnt(self.v["target"], "targetname");
   }
 
   if(!isDefined(ent)) {
@@ -308,7 +308,7 @@ orienttonormal(normal) {
     return (0, 0, 0);
   }
 
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
@@ -724,12 +724,12 @@ dvarfloatvalue(dvar, defval, minval, maxval) {
 play_sound_on_tag(alias, tag) {
   if(isDefined(tag)) {
     org = spawn("script_origin", self gettagorigin(tag));
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org = spawn("script_origin", (0, 0, 0));
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playSound(alias);
@@ -884,7 +884,7 @@ trail_effect() {
   } else {
     temp_ent = spawn("script_model", self.model.origin);
     temp_ent setModel("tag_origin");
-    temp_ent linkto(self.model, self.v["trailfxtag"]);
+    temp_ent linkTo(self.model, self.v["trailfxtag"]);
     playFXOnTag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
   }
 
@@ -1465,7 +1465,7 @@ alphabetize(array) {
 }
 
 get_players() {
-  players = getplayers();
+  players = getPlayers();
   return players;
 }
 

@@ -215,7 +215,7 @@ function astro_zombie_spawn(astro_zombie) {
   level.num_astro_zombies++;
   astro_zombie.has_legs = 1;
   self.count = 100;
-  playsoundatposition("evt_astro_spawn", self.origin);
+  playSoundAtPosition("evt_astro_spawn", self.origin);
   astro_zombie.deathfunction = &astro_zombie_die;
   astro_zombie.animname = "astro_zombie";
   astro_zombie.loopsound = "evt_astro_gasmask_loop";
@@ -238,7 +238,7 @@ function astro_zombie_think() {
   self endon("death");
   self.entered_level = 0;
   self.ignoreall = 0;
-  self.maxhealth = (level.zombie_health * getplayers().size) * level.astro_zombie_health_mult;
+  self.maxhealth = (level.zombie_health * getPlayers().size) * level.astro_zombie_health_mult;
   self.health = self.maxhealth;
   self.maxsightdistsqrd = 9216;
   self.zombie_move_speed = "walk";
@@ -281,7 +281,7 @@ function astro_zombie_headbutt_think() {
       headbutt_anim = self animmappingsearch(istring("anim_astro_headbutt"));
       time = getanimlength(headbutt_anim);
       self.player_to_headbutt thread astro_restore_move_speed(time);
-      self animscripted("headbutt_anim", self.origin, self.angles, "ai_zm_dlc5_zombie_astro_headbutt");
+      self animScripted("headbutt_anim", self.origin, self.angles, "ai_zm_dlc5_zombie_astro_headbutt");
       wait(time);
       self.next_headbutt_time = gettime() + level.astro_headbutt_delay;
       self.is_headbutt = 0;
@@ -322,7 +322,7 @@ function astro_turn_player() {
     player freezecontrols(1);
   }
   lerp_time = 0.2;
-  enemy_to_player = vectornormalize(player.origin - self.origin);
+  enemy_to_player = vectorNormalize(player.origin - self.origin);
   link_org = self.origin + (40 * enemy_to_player);
   player lerp_player_view_to_position(link_org, facing_astro, lerp_time, 1);
   wait(lerp_time);
@@ -345,20 +345,20 @@ function lerp_player_view_to_position(origin, angles, lerptime, fraction, right_
   linker.origin = self.origin;
   linker.angles = self getplayerangles();
   if(isDefined(hit_geo)) {
-    self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
+    self playerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
   } else {
     if(isDefined(right_arc)) {
-      self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
+      self playerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
     } else {
       if(isDefined(fraction)) {
-        self playerlinkto(linker, "", fraction);
+        self playerlinkTo(linker, "", fraction);
       } else {
-        self playerlinkto(linker);
+        self playerlinkTo(linker);
       }
     }
   }
-  linker moveto(origin, lerptime, lerptime * 0.25);
-  linker rotateto(angles, lerptime, lerptime * 0.25);
+  linker moveTo(origin, lerptime, lerptime * 0.25);
+  linker rotateTo(angles, lerptime, lerptime * 0.25);
   linker waittill("movedone");
   linker delete();
 }
@@ -395,7 +395,7 @@ function astro_zombie_headbutt_release(entity) {
   player allowprone(1);
   player allowcrouch(1);
   player setmovespeedscale(1);
-  self animscripted("headbutt_anim", entity.origin, entity.angles, "ai_zm_dlc5_zombie_astro_headbutt_release");
+  self animScripted("headbutt_anim", entity.origin, entity.angles, "ai_zm_dlc5_zombie_astro_headbutt_release");
 }
 
 function astro_zombie_attack() {
@@ -500,7 +500,7 @@ function astro_zombie_teleport(struct_dest) {
   self disableoffhandweapons();
   self disableweapons();
   self dontinterpolate();
-  self setorigin(destination);
+  self setOrigin(destination);
   self setplayerangles(struct_dest.angles);
   self enableoffhandweapons();
   self enableweapons();
@@ -524,7 +524,7 @@ function astro_zombie_die(einflictor, attacker, idamage, smeansofdeath, weapon, 
 
 function astro_delay_delete() {
   self endon("death");
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self thread zombie_utility::zombie_eye_glow_stop();
   wait(0.05);
   self ghost();
@@ -545,7 +545,7 @@ function astro_player_pulse() {
     wait(0.05);
     wait(0.05);
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!zombie_utility::is_player_valid(player)) {
@@ -573,10 +573,10 @@ function astro_player_pulse() {
     bonus = (level.astro_explode_pulse_max - level.astro_explode_pulse_min) * scale;
     pulse = level.astro_explode_pulse_min + bonus;
     dir = (player.origin[0] - astro_org[0], player.origin[1] - astro_org[1], 0);
-    dir = vectornormalize(dir);
+    dir = vectorNormalize(dir);
     dir = dir + (0, 0, 1);
     dir = dir * pulse;
-    player setorigin(player.origin + (0, 0, 1));
+    player setOrigin(player.origin + (0, 0, 1));
     player_velocity = dir;
     player setvelocity(player_velocity);
     if(isDefined(level.ai_astro_explode)) {
@@ -616,8 +616,8 @@ function astro_microwavegun_sizzle(player) {
 
 function astro_zombie_default_enter_level() {
   playFX(level._effect["astro_spawn"], self.origin);
-  playsoundatposition("zmb_bolt", self.origin);
-  players = getplayers();
+  playSoundAtPosition("zmb_bolt", self.origin);
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("general", "astro_spawn");
   self.entered_level = 1;
 }

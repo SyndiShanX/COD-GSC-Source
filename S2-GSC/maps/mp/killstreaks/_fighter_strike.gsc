@@ -276,7 +276,7 @@ func_9080(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
   var_0B = spawn("script_model", var_0A.var_0116);
   var_0B.var_001D = var_0A.var_001D;
-  var_0B linkto(var_0A, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0B linkTo(var_0A, "tag_origin", (0, 0, 0), (0, 0, 0));
   if(!isDefined(param_01)) {
     var_0A setentityowner(var_0B);
   }
@@ -309,13 +309,13 @@ func_9080(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_0B scriptmodelplayanim("ks_fighter_strafe_usa");
     playFXOnTag(level.var_0611["fighter_trail"], var_0B, "TAG_TRAIL_FX");
     if(isDefined(var_0C)) {
-      var_0C linkto(var_0A, "tag_origin", (46, 0, 6), (0, 0, 0));
+      var_0C linkTo(var_0A, "tag_origin", (46, 0, 6), (0, 0, 0));
       var_0C setModel("usa_fighter_thunderbolt_cockpit");
       var_0C scriptmodelplayanim("vm_fighter_strafe_usa");
     }
 
-    var_0D linkto(var_0A, "tag_origin", (30, 0, 134), (0, 0, 0));
-    var_0E linkto(var_0A, "tag_origin", (30, 0, 134), (0, 0, 0));
+    var_0D linkTo(var_0A, "tag_origin", (30, 0, 134), (0, 0, 0));
+    var_0E linkTo(var_0A, "tag_origin", (30, 0, 134), (0, 0, 0));
   } else {
     var_0F = "ger_bomber_stuka_vista_fade";
     var_0B setModel(var_0F);
@@ -323,13 +323,13 @@ func_9080(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     var_0B scriptmodelplayanim("ks_fighter_strafe_ger");
     playFXOnTag(level.var_0611["fighter_trail"], var_0B, "TAG_TRAIL_FX");
     if(isDefined(var_0C)) {
-      var_0C linkto(var_0A, "tag_origin", (1, 0, 1), (0, 0, 0));
+      var_0C linkTo(var_0A, "tag_origin", (1, 0, 1), (0, 0, 0));
       var_0C setModel("ger_bomber_stuka_cockpit");
       var_0C scriptmodelplayanim("vm_fighter_strafe_ger");
     }
 
-    var_0D linkto(var_0A, "tag_origin", (-8, 0, 130), (0, 0, 0));
-    var_0E linkto(var_0A, "tag_origin", (-8, 0, 130), (0, 0, 0));
+    var_0D linkTo(var_0A, "tag_origin", (-8, 0, 130), (0, 0, 0));
+    var_0E linkTo(var_0A, "tag_origin", (-8, 0, 130), (0, 0, 0));
   }
 
   if(isDefined(param_01)) {
@@ -457,7 +457,7 @@ func_3AAB(param_00, param_01) {
   var_07 = param_00.var_703D gettagorigin("TAG_MUZZLE_FX_2");
   magicbullet("fighter_strike_gun_mp", var_07, var_06, param_01, undefined, undefined, 1);
   if(isDefined(param_01)) {
-    param_01 playrumbleonentity("heavygun_fire");
+    param_01 playRumbleOnEntity("heavygun_fire");
   }
 
   thread func_3AA8(param_00, param_01);
@@ -534,7 +534,7 @@ func_6390(param_00, param_01, param_02) {
   var_04 = spawn("script_model", (param_00[0], param_00[1], self.var_0116[2]));
   self method_81D9(var_04);
   wait(0.2);
-  var_04 moveto(param_00, 1.8, 0.8, 0.4);
+  var_04 moveTo(param_00, 1.8, 0.8, 0.4);
   wait(1.8);
   self method_81DB();
   var_04 delete();
@@ -951,7 +951,7 @@ func_27EA(param_00, param_01) {
 
   var_05 method_805C();
   var_05 showtoclient(param_01);
-  var_05 moveto(var_03, var_04);
+  var_05 moveTo(var_03, var_04);
   common_scripts\utility::func_A71A(var_04, "StopWaitForExitCommand");
   if(isDefined(var_05)) {
     var_05 delete();

@@ -34,8 +34,8 @@ wait_for_craftable(craftable_name) {
 }
 
 is_team_on_golden_gate_bridge() {
-  players = getplayers();
-  e_zone = getent("zone_golden_gate_bridge", "targetname");
+  players = getPlayers();
+  e_zone = getEnt("zone_golden_gate_bridge", "targetname");
 
   foreach(player in players) {
     if(player istouching(e_zone)) {
@@ -145,16 +145,16 @@ blundergat_change_hintstring(hint_string) {
     wait 0.05;
   }
 
-  self sethintstring(hint_string);
+  self setHintString(hint_string);
   wait 0.05;
-  self sethintstring(hint_string);
+  self setHintString(hint_string);
 }
 
 #using_animtree("fxanim_props");
 
 blundergat_upgrade_station() {
-  t_upgrade = getent("blundergat_upgrade", "targetname");
-  t_upgrade sethintstring(&"ZM_PRISON_CONVERT_START");
+  t_upgrade = getEnt("blundergat_upgrade", "targetname");
+  t_upgrade setHintString(&"ZM_PRISON_CONVERT_START");
   waittill_crafted("packasplat");
   m_converter = t_upgrade.m_upgrade_machine;
   v_angles = m_converter gettagangles("tag_origin");
@@ -817,7 +817,7 @@ crawler_created_vo_cooldown() {
 alcatraz_first_magic_box_seen_vo() {
   flag_wait("start_zombie_round_logic");
   magicbox = level.chests[level.chest_index];
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player thread wait_and_play_first_magic_box_seen_vo(magicbox.unitrigger_stub);
@@ -889,7 +889,7 @@ brutus_spawn_vo_watcher() {
     if(!isalive(ai_brutus)) {
       continue;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
     a_closest = get_array_of_closest(ai_brutus.origin, a_players);
 
     for(i = 0; i < a_closest.size; i++) {
@@ -915,7 +915,7 @@ brutus_reaction_vo_watcher() {
 
   while(isalive(self)) {
     wait(randomfloatrange(20, 40));
-    a_players = getplayers();
+    a_players = getPlayers();
     a_closest = get_array_of_closest(self.origin, a_players);
 
     for(i = 0; i < a_closest.size; i++) {
@@ -959,7 +959,7 @@ easter_egg_song_vo(player) {
     player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("quest", "find_secret");
   } else {
     while(true) {
-      a_players = getplayers();
+      a_players = getPlayers();
 
       foreach(player in a_players) {
         if(isalive(player)) {
@@ -1070,7 +1070,7 @@ alcatraz_audio_custom_response_line(player, index, category, type) {
 }
 
 play_vo_category_on_closest_player(category, type) {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size <= 1) {
     return;

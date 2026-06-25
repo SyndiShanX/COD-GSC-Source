@@ -11,7 +11,7 @@ do_gas_station_blocker() {
   var_2 = (-3332.5, 3723.5, 509.4);
   wait 1.0;
   level.ancestor_shield_up_override = 10;
-  var_3 = common_scripts\utility::getstruct("ancestor_gas_station", "targetname");
+  var_3 = common_scripts\utility::getStruct("ancestor_gas_station", "targetname");
   var_4 = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_3.origin, level.players[0].angles);
   level thread gas_station_ancestor_logic(var_4);
   level thread gas_station_blocker_ancestor_leave(var_4);
@@ -184,7 +184,7 @@ play_get_back_base_nag_vo() {
 
 do_garage_blocker() {
   level.ancestor_shield_up_override = 10;
-  var_0 = common_scripts\utility::getstruct("ancestor_parking_1", "targetname");
+  var_0 = common_scripts\utility::getStruct("ancestor_parking_1", "targetname");
   var_1 = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_0.origin, level.players[0].angles);
   wait 0.5;
   var_2 = getnode("ancestor_garage_start_01", "targetname");
@@ -271,7 +271,7 @@ give_blocker_awards() {
 }
 
 spawn_proto_ancestor() {
-  var_0 = getent("temp_spawn_ancestor", "targetname");
+  var_0 = getEnt("temp_spawn_ancestor", "targetname");
   var_0 waittill("trigger");
   setDvar("scr_debug_ancestor_spawn", 1);
 }

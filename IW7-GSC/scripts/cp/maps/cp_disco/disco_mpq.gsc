@@ -305,7 +305,7 @@ spawn_rat_cage() {
   self.cage_model = spawn("script_model", self.origin);
   self.cage_model.angles = self.angles;
   self.cage_model setModel("cp_disco_rat_cage");
-  var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
   self.cage_rat = spawn("script_model", var_0.origin);
   self.cage_rat.angles = var_0.angles;
   self.cage_rat setModel("zmb_rat");
@@ -423,7 +423,7 @@ build_path_network(var_0, var_1, var_2) {
 
     var_8 = [];
     var_8[var_8.size] = var_9.origin;
-    var_13 = scripts\engine\utility::getstruct(var_9.target, "targetname");
+    var_13 = scripts\engine\utility::getStruct(var_9.target, "targetname");
     var_8[var_8.size] = var_13.origin;
     var_3 = scripts\engine\utility::array_combine(var_3, var_8);
     wait(0.05);
@@ -452,8 +452,8 @@ rat_follow_path(var_0, var_1) {
         }
 
         var_9 = (var_9[0], var_9[1] + 90, var_9[2]);
-        self rotateto(var_9, 0.05);
-        self moveto(var_10, var_11);
+        self rotateTo(var_9, 0.05);
+        self moveTo(var_10, var_11);
         wait(var_11);
       }
     }
@@ -467,8 +467,8 @@ rat_follow_path(var_0, var_1) {
     }
 
     var_13 = (var_13[0], var_13[1] - 90, var_13[2]);
-    self rotateto(var_13, 0.1);
-    self moveto(var_4, var_11);
+    self rotateTo(var_13, 0.1);
+    self moveTo(var_4, var_11);
     wait(var_11);
   }
 
@@ -558,8 +558,8 @@ monitor_cage_visibility() {
 p2t1_2_subway_locker() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t1_2", "skq_p2t1_2dbg");
-  var_1 = getent("subway_locker_door", "targetname");
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_1 = getEnt("subway_locker_door", "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("tag_origin");
   var_3 makeusable();
@@ -569,12 +569,12 @@ p2t1_2_subway_locker() {
     level thread scripts\cp\cp_vo::remove_from_nag_vo("missing_item_misc");
   }
 
-  var_5 = scripts\engine\utility::getstruct("locker_rortator_mpq", "targetname");
+  var_5 = scripts\engine\utility::getStruct("locker_rortator_mpq", "targetname");
   if(isDefined(var_5)) {
     var_6 = scripts\engine\utility::spawn_tag_origin(var_5.origin, var_5.angles);
-    var_1 linkto(var_6);
+    var_1 linkTo(var_6);
     playsoundatpos(var_6.origin, "disco_locker_open");
-    var_6 rotateyaw(120, 2, 1, 0.5);
+    var_6 rotateYaw(120, 2, 1, 0.5);
     wait(2);
     var_6 delete();
   } else {
@@ -587,9 +587,9 @@ p2t1_2_subway_locker() {
 p2t1_3_decal_puzzle() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t1_3", "skq_p2t1_3dbg");
-  var_1 = getent("graffiti_quest_clip", "targetname");
-  var_2 = getent("graffiti_quest_fail_clip", "targetname");
-  var_3 = getent("graffiti_quest_clip_alt", "targetname");
+  var_1 = getEnt("graffiti_quest_clip", "targetname");
+  var_2 = getEnt("graffiti_quest_fail_clip", "targetname");
+  var_3 = getEnt("graffiti_quest_clip_alt", "targetname");
   var_1 thread setup_chinese_targ_clip();
   var_2 thread setup_chinese_fail_clip();
   var_3 thread setup_chinese_alt_clip();
@@ -715,7 +715,7 @@ setup_chinese_alt_clip() {
 
 p2t1_4_rat_king_fight() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("p2t1_4", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("p2t1_4", "script_noteworthy");
   var_1 = scripts\engine\utility::flag_wait_any_return("skq_p2t1_4", "skq_p2t1_4dbg");
   level thread play_rat_king_vo_discussion(1);
   scripts\cp\maps\cp_disco\rat_king::spawn_rat_king(var_0.origin, var_0.angles, 1);
@@ -916,9 +916,9 @@ active_symbol_logic() {
 
   level endon("game_ended");
   thread toggle_symbols_for_players();
-  var_0 = getent("symbol_point_clip", "targetname");
-  var_1 = getent(var_0.target, "targetname");
-  var_1 linkto(var_0);
+  var_0 = getEnt("symbol_point_clip", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_1 linkTo(var_0);
   var_0.origin = level.active_hunt_symbol.origin;
   var_0.angles = level.active_hunt_symbol.angles;
   wait(0.1);
@@ -1054,9 +1054,9 @@ p2t2_3_poster_puzzle() {
   level endon("game_ended");
   var_0 = init_poster_nums(0);
   var_1 = spawnStruct();
-  var_1.setminimap = getent("spotlight_light", "targetname");
-  var_1.poster = getent(var_1.setminimap.target, "targetname");
-  var_1.fx_struct = scripts\engine\utility::getstruct(var_1.poster.target, "targetname");
+  var_1.setminimap = getEnt("spotlight_light", "targetname");
+  var_1.poster = getEnt(var_1.setminimap.target, "targetname");
+  var_1.fx_struct = scripts\engine\utility::getStruct(var_1.poster.target, "targetname");
   var_1.poster hide();
   thread watch_for_spotlight_power(var_1);
   var_2 = scripts\engine\utility::flag_wait_any_return("skq_p2t2_3", "skq_p2t2_3dbg");
@@ -1086,7 +1086,7 @@ p2t2_3_poster_puzzle() {
   level thread scripts\cp\cp_vo::remove_from_nag_vo("missing_item_misc");
   var_1.poster setModel("cp_disco_poster_nightmare_summer_torn");
   var_1.poster show();
-  var_13 = scripts\engine\utility::getstruct("nade_toss_point", "targetname");
+  var_13 = scripts\engine\utility::getStruct("nade_toss_point", "targetname");
   var_14 = spawn("script_model", var_13.origin);
   var_14 setModel("zmb_rat");
   var_14 setCanDamage(1);
@@ -1120,7 +1120,7 @@ watch_for_spotlight_power(var_0) {
     }
   }
 
-  var_6 = scripts\engine\utility::getstruct("spotlight_x_marker", "targetname");
+  var_6 = scripts\engine\utility::getStruct("spotlight_x_marker", "targetname");
   var_10 = undefined;
   if(isDefined(var_6)) {
     playsoundatpos((-1096, 3287, 1222), "place_flyer_on_spotlight");
@@ -1145,7 +1145,7 @@ init_poster_nums(var_0) {
   var_1 = getEntArray("mpq_poster_model", "targetname");
   if(!var_0) {
     foreach(var_3 in var_1) {
-      var_3.number = getent(var_3.target, "targetname");
+      var_3.number = getEnt(var_3.target, "targetname");
     }
   } else {
     foreach(var_3 in var_3) {
@@ -1222,7 +1222,7 @@ empty_hint(var_0, var_1) {
 p2t2_4_kung_fu_fight() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t2_4", "skq_p2t2_4dbg");
-  var_1 = scripts\engine\utility::getstruct("kf_zombies_disco_roof", "targetname");
+  var_1 = scripts\engine\utility::getStruct("kf_zombies_disco_roof", "targetname");
   level.spotlight_roof_zoms = 0;
   var_1 mpq_spawn_special_wave(level.spotlight_roof_zoms, 10);
   scripts\engine\utility::flag_set("skq_p2t2_5");
@@ -1238,12 +1238,12 @@ p2t2_5_rat_king_puzzle() {
 solve_word_logic(var_0) {
   level endon("game_ended");
   var_1 = [];
-  var_1[0] = ::scripts\engine\utility::getstruct("letter_puzzle_solve_struct", "targetname");
+  var_1[0] = ::scripts\engine\utility::getStruct("letter_puzzle_solve_struct", "targetname");
   level.bchartoggle = 0;
   level.cur_puzzle_letter = undefined;
   level.rooftopcypherglyphs = [];
   while(isDefined(var_1[var_1.size - 1].target)) {
-    var_1[var_1.size] = ::scripts\engine\utility::getstruct(var_1[var_1.size - 1].target, "targetname");
+    var_1[var_1.size] = ::scripts\engine\utility::getStruct(var_1[var_1.size - 1].target, "targetname");
     wait(0.05);
   }
 
@@ -1345,7 +1345,7 @@ setup_cipher_glyphs() {
   level endon("game_ended");
   level endon("skq_p2t2_6");
   var_0 = scripts\engine\utility::getStructArray("letter_puzzle_struct", "script_noteworthy");
-  var_1 = getent("letter_puzzle_clip", "targetname");
+  var_1 = getEnt("letter_puzzle_clip", "targetname");
   var_2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
   foreach(var_4 in var_0) {
     var_4.current_letter = undefined;
@@ -1419,7 +1419,7 @@ setup_cipher_glyphs() {
 
 p2t2_6_rat_king_fight() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("p2t2_6", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("p2t2_6", "script_noteworthy");
   var_1 = scripts\engine\utility::flag_wait_any_return("skq_p2t2_6", "skq_p2t2_6dbg");
   scripts\cp\maps\cp_disco\rat_king::spawn_rat_king(var_0.origin, var_0.angles, 1);
   level thread scripts\cp\maps\cp_disco\cp_disco::enableratkingpas();
@@ -1520,9 +1520,9 @@ startrelicmoveloop(var_0, var_1) {
   var_1 endon("death");
   for(;;) {
     var_2 = 3;
-    var_1 moveto(var_0.origin + (0, 0, 32), var_2);
+    var_1 moveTo(var_0.origin + (0, 0, 32), var_2);
     wait(var_2);
-    var_1 moveto(var_0.origin, var_2);
+    var_1 moveTo(var_0.origin, var_2);
     wait(var_2);
   }
 }
@@ -1745,7 +1745,7 @@ p2t3_0_missing_reel() {
   }
 
   var_5 = scripts\engine\utility::getStructArray("missing_reel_tp_struct", "targetname");
-  var_6 = getent("missing_reel_fire_trig", "targetname");
+  var_6 = getEnt("missing_reel_fire_trig", "targetname");
   var_7 = scripts\engine\utility::getStructArray("missing_reel_fire_struct", "targetname");
   stop_spawn_wave();
   foreach(var_3 in level.players) {
@@ -1792,7 +1792,7 @@ p2t3_0_missing_reel() {
   var_13 = spawn("script_model", var_12 + (0, 0, 32));
   var_14 = scripts\engine\utility::spawn_tag_origin(var_13.origin + anglesToForward(var_13.angles) * 2, (0, 0, 0));
   var_13 setModel("tag_origin");
-  var_13 linkto(var_14);
+  var_13 linkTo(var_14);
   var_14 thread spin_linker_turnstile(var_13);
   wait(0.5);
   playFXOnTag(level._effect["turnstile_arm"], var_13, "tag_origin");
@@ -1827,7 +1827,7 @@ missing_reel_pickup_players(var_0, var_1) {
     }
   }
 
-  var_1 setorigin(var_0.origin);
+  var_1 setOrigin(var_0.origin);
   var_1 setplayerangles(var_0.angles);
   var_1.missing_reel = 1;
   var_1.ignoreselfrevive = undefined;
@@ -1836,7 +1836,7 @@ missing_reel_pickup_players(var_0, var_1) {
 spin_linker_turnstile(var_0) {
   var_0 endon("trigger");
   for(;;) {
-    self rotateyaw(360, 2, 0, 0);
+    self rotateYaw(360, 2, 0, 0);
     wait(2);
   }
 }
@@ -1927,7 +1927,7 @@ missing_reel_trigger_damage(var_0) {
   thread damage_reel_trigger_solo();
   for(;;) {
     level waittill("connected", var_2);
-    var_2 setorigin(var_0[var_1].origin);
+    var_2 setOrigin(var_0[var_1].origin);
     var_2 setplayerangles(var_0[var_1].angles);
     var_2 thread damage_reel_trigger_solo(self);
     if(var_1 == 3) {
@@ -1950,9 +1950,9 @@ damage_reel_trigger_solo() {
 
 p2t3_1_turnstile_puzzle() {
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t3_1", "skq_p2t3_1dbg");
-  var_1 = getent("window_cover", "targetname");
+  var_1 = getEnt("window_cover", "targetname");
   var_1.ogpos = var_1.origin;
-  var_2 = getent("window_cover_struct_clip", "targetname");
+  var_2 = getEnt("window_cover_struct_clip", "targetname");
   var_3 = 25;
   thread turnstile_glyph_logic();
   scripts\engine\utility::flag_wait("turnstile_done");
@@ -1965,8 +1965,8 @@ p2t3_1_turnstile_puzzle() {
 }
 
 turnstile_glyph_logic() {
-  var_0 = scripts\engine\utility::getstruct("window_cover_struct", "targetname");
-  var_1 = getent("window_cover_struct_clip", "targetname");
+  var_0 = scripts\engine\utility::getStruct("window_cover_struct", "targetname");
+  var_1 = getEnt("window_cover_struct_clip", "targetname");
   var_2 = spawnfx(level._effect["test_glyph_mpq"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   scripts\engine\utility::flag_wait("turnstile_done");
   triggerfx(var_2);
@@ -1980,7 +1980,7 @@ turnstile_glyph_logic() {
 }
 
 init_turnstile() {
-  var_0 = scripts\engine\utility::getstruct("turnstile", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("turnstile", "script_noteworthy");
   var_0.groupname = "locoverride";
   scripts\cp\maps\cp_disco\cp_disco::addtopersonalinteractionlist(var_0);
   level.special_mode_activation_funcs["turnstile"] = ::setup_turnstile;
@@ -2014,7 +2014,7 @@ use_turnstile(var_0, var_1) {
 
 p2t3_2_chi_symbol() {
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t3_2", "skq_p2t3_2dbg");
-  level.task3ring_fxstruct = scripts\engine\utility::getstruct("task_3_ring_struct", "targetname");
+  level.task3ring_fxstruct = scripts\engine\utility::getStruct("task_3_ring_struct", "targetname");
   var_1 = randomintrange(6, 10);
   zombie_challenge_ring(var_1, level.task3ring_fxstruct);
   var_2 = 5;
@@ -2080,7 +2080,7 @@ p2t3_3_disco_fever() {
   var_1 = 10;
   var_2 = undefined;
   var_3 = 1;
-  var_4 = scripts\engine\utility::getstruct("disco_fever_spawn_struct", "targetname");
+  var_4 = scripts\engine\utility::getStruct("disco_fever_spawn_struct", "targetname");
   for(;;) {
     if(isDefined(var_2)) {
       var_1--;
@@ -2144,7 +2144,7 @@ setfevereffectsonhostmigration() {
 }
 
 find_near_disco_zombie(var_0) {
-  var_1 = getent("disco_fever_vol", "targetname");
+  var_1 = getEnt("disco_fever_vol", "targetname");
   var_2 = [];
   foreach(var_4 in level.spawned_enemies) {
     if(isDefined(var_4.dismember_crawl) && var_4.dismember_crawl) {
@@ -2167,7 +2167,7 @@ find_near_disco_zombie(var_0) {
 }
 
 spawn_fever_zombie() {
-  var_0 = scripts\engine\utility::getstruct("disco_fever_spawn_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("disco_fever_spawn_struct", "targetname");
   var_1 = scripts\engine\utility::drop_to_ground(var_0.origin, 30, -100);
   var_2 = spawnStruct();
   var_2.origin = var_1;
@@ -2186,7 +2186,7 @@ spawn_fever_zombie() {
 }
 
 init_turntable() {
-  var_0 = scripts\engine\utility::getstruct("disco_fever_interact", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("disco_fever_interact", "script_noteworthy");
   var_0.groupname = "locoverride";
   scripts\cp\maps\cp_disco\cp_disco::addtopersonalinteractionlist(var_0);
   level.special_mode_activation_funcs["disco_fever_interact"] = ::setup_turntable;
@@ -2205,13 +2205,13 @@ rotate_platter(var_0) {
   level endon("game_ended");
   self endon("p_ent_reset");
   while(self.model == "cp_disco_record_02") {
-    self rotateyaw(360, 1.5, 0, 0);
+    self rotateYaw(360, 1.5, 0, 0);
     wait(1.5);
   }
 }
 
 discofeverhintfunc(var_0, var_1) {
-  var_1.interaction_trigger usetriggerrequirelookat(0);
+  var_1.interaction_trigger useTriggerRequireLookAt(0);
   var_1.interaction_trigger setusefov(360);
   return "";
 }
@@ -2228,7 +2228,7 @@ p2t3_4_final_chi_door() {
 }
 
 p2t3_5_rat_king_fight() {
-  var_0 = scripts\engine\utility::getstruct("p2t3_5", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("p2t3_5", "script_noteworthy");
   var_1 = scripts\engine\utility::flag_wait_any_return("skq_p2t3_5", "skq_p2t3_5dbg");
   scripts\cp\maps\cp_disco\rat_king::spawn_rat_king(var_0.origin, var_0.angles, 1);
   level thread scripts\cp\maps\cp_disco\cp_disco::enableratkingpas();
@@ -2283,7 +2283,7 @@ p2t3_6_complete_task() {
 
 watchforallplayersinroom() {
   level endon("game_Ended");
-  var_0 = getent("slime_pool", "targetname");
+  var_0 = getEnt("slime_pool", "targetname");
   for(;;) {
     wait(0.1);
     var_0 waittill("trigger", var_1);
@@ -2647,7 +2647,7 @@ monitor_spawning_agents(var_0, var_1) {
 
 rk_symbol_handler(var_0, var_1) {
   level endon("game_ended");
-  var_2 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_3 = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
   var_3 makeusable();
   var_3 setusefov(45);

@@ -12,7 +12,7 @@ main() {
   play_flickering_light();
   setup_lighting_triggers();
   thread play_flickering_light();
-  var_0 = getent("lightshadow", "targetname");
+  var_0 = getEnt("lightshadow", "targetname");
   var_0 setlightshadowstate("force_off");
   var_0 office_light_force_on();
   setsaveddvar("fx_cast_shadow", 0);

@@ -217,7 +217,7 @@ lib_054D::func_7B4B() {
     foreach(var_06 in level.var_744A) {
       var_07 = var_06.var_0116 - var_03.var_0116;
       var_08 = anglesToForward(var_06 geteyeangles());
-      var_09 = 1 - vectordot(var_08, vectornormalize(var_07)) / 2;
+      var_09 = 1 - vectordot(var_08, vectorNormalize(var_07)) / 2;
       var_0A = common_scripts\utility::func_5D93(length(var_07), 100, 10000, 0, 1);
       if(var_03 common_scripts\utility::func_3794("zombie_passive")) {
         var_0B = 1;
@@ -642,7 +642,7 @@ lib_054D::func_7230(param_00) {
   }
 
   var_08 = anglesToForward(self getangles());
-  var_09 = vectordot(vectornormalize(var_07), var_08);
+  var_09 = vectordot(vectorNormalize(var_07), var_08);
   if(var_09 > var_04) {
     return 1;
   }
@@ -726,7 +726,7 @@ monitorstuckfortraversal() {
     }
 
     var_04.var_98C3 = self;
-    self setorigin(var_07, 0);
+    self setOrigin(var_07, 0);
     wait(var_02);
     if(lib_0547::func_5565(var_04.var_98C3, self)) {
       var_04.var_98C3 = undefined;

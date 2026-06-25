@@ -34,10 +34,10 @@ function achievement_set_interim_sidequest_stat_for_all_players(stat_name) {
   if(level.systemlink) {
     return;
   }
-  if(getdvarint("splitscreen_playerCount") == getplayers().size) {
+  if(getdvarint("splitscreen_playerCount") == getPlayers().size) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] zm_stats::add_global_stat(stat_name, 1);
   }

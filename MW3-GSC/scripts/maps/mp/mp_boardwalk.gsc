@@ -39,14 +39,14 @@ setup_carnival_items() {
   level.carnival_fx_tag_06 = common_scripts\utility::spawn_tag_origin();
   level.carnival_fx_tag_07 = common_scripts\utility::spawn_tag_origin();
   level.carnival_fx_tag_08 = common_scripts\utility::spawn_tag_origin();
-  level.carnival_fx_tag_01 moveto((-169.714, 1972.79, 184.634), 0.05);
-  level.carnival_fx_tag_02 moveto((-170.491, 2044.83, 184.671), 0.05);
-  level.carnival_fx_tag_03 moveto((-170.427, 2108.7, 184.655), 0.05);
-  level.carnival_fx_tag_04 moveto((-170.185, 2176.83, 184.662), 0.05);
-  level.carnival_fx_tag_05 moveto((-170.055, 2240.88, 184.664), 0.05);
-  level.carnival_fx_tag_06 moveto((132.078, 1536.49, 193), 0.05);
-  level.carnival_fx_tag_07 moveto((63.9661, 1536.99, 192.946), 0.05);
-  level.carnival_fx_tag_08 moveto((1.6665, 1530.19, 189.955), 0.05);
+  level.carnival_fx_tag_01 moveTo((-169.714, 1972.79, 184.634), 0.05);
+  level.carnival_fx_tag_02 moveTo((-170.491, 2044.83, 184.671), 0.05);
+  level.carnival_fx_tag_03 moveTo((-170.427, 2108.7, 184.655), 0.05);
+  level.carnival_fx_tag_04 moveTo((-170.185, 2176.83, 184.662), 0.05);
+  level.carnival_fx_tag_05 moveTo((-170.055, 2240.88, 184.664), 0.05);
+  level.carnival_fx_tag_06 moveTo((132.078, 1536.49, 193), 0.05);
+  level.carnival_fx_tag_07 moveTo((63.9661, 1536.99, 192.946), 0.05);
+  level.carnival_fx_tag_08 moveTo((1.6665, 1530.19, 189.955), 0.05);
   level.carnival_fx_tag_01.angles = (270, 0, 0);
   level.carnival_fx_tag_02.angles = (270, 0, 0);
   level.carnival_fx_tag_03.angles = (270, 0, 0);
@@ -72,7 +72,7 @@ audio_settings() {
 
 rotate_sign() {
   level endon("game_ended");
-  var_0 = getent("bbq_sign", "targetname");
+  var_0 = getEnt("bbq_sign", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -80,7 +80,7 @@ rotate_sign() {
   var_1 = 8;
 
   for(;;) {
-    var_0 rotateyaw(360, var_1, 0, 0);
+    var_0 rotateYaw(360, var_1, 0, 0);
     wait(var_1 - 0.1);
   }
 }
@@ -123,7 +123,7 @@ carnival_games() {
 }
 
 roller_coaster() {
-  var_0 = getent("roller_coaster", "targetname");
+  var_0 = getEnt("roller_coaster", "targetname");
   var_1 = getEntArray("animated_model", "targetname");
 
   if(!isDefined(var_0)) {
@@ -131,7 +131,7 @@ roller_coaster() {
   }
   foreach(var_3 in var_1) {
     if(var_3.model == "generic_prop_raven") {
-      var_0 linkto(var_3, "J_prop_1", (0, 0, 0), (180, 180, 180));
+      var_0 linkTo(var_3, "J_prop_1", (0, 0, 0), (180, 180, 180));
       break;
     }
   }
@@ -147,8 +147,8 @@ animial_setup() {
   var_0 = getEntArray("animal_stick", "targetname");
 
   foreach(var_3, var_2 in var_0) {
-    level.animals[var_3] = getent(var_2.target, "targetname");
-    var_2 linkto(level.animals[var_3]);
+    level.animals[var_3] = getEnt(var_2.target, "targetname");
+    var_2 linkTo(level.animals[var_3]);
     level.animals[var_3].original_pos = level.animals[var_3].origin;
   }
 
@@ -165,10 +165,10 @@ start_animal_race() {
 
 monitor_accelerator_damage(var_0) {
   level endon("race_over");
-  var_1 = getent(var_0.target, "targetname");
-  var_1.lightent = getent(var_1.targetname + "_light", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_1.lightent = getEnt(var_1.targetname + "_light", "targetname");
   var_2 = var_1.origin;
-  var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1.target, "targetname");
   var_4 = abs(var_1.origin[1] - var_3.origin[1]) / 80;
   var_5 = 0;
 
@@ -180,7 +180,7 @@ monitor_accelerator_damage(var_0) {
     }
     var_5 = var_5 + var_4;
     var_8 = var_2 + (0, var_5, 0);
-    var_1 moveto(var_8, 0.25);
+    var_1 moveTo(var_8, 0.25);
 
     if(distance2d(var_8, var_3.origin) < var_4) {
       var_1 waittill("movedone");
@@ -204,7 +204,7 @@ animal_race_victory(var_0) {
   wait 4;
 
   foreach(var_5 in level.animals) {}
-  var_5 moveto(var_5.original_pos, 5);
+  var_5 moveTo(var_5.original_pos, 5);
 
   wait 5;
   var_0.lightent setModel("bw_light_game");

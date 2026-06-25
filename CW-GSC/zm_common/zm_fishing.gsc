@@ -76,7 +76,7 @@ function function_29307fae(struct) {
     var_df283c09 = spawn_struct.contentgroups[#"hash_61b2fec1f617bb75"];
     var_9fadc93c = var_df283c09[0];
     forward = anglesToForward(var_16129dba.angles);
-    forward = vectornormalize(forward);
+    forward = vectorNormalize(forward);
     forward = (forward[0] * 8, forward[1] * 8, forward[2] * 8);
     forward = (forward[0], forward[1], forward[2] + 16);
     trigger = content_manager::spawn_interact(spawn_struct, &function_e126c567, #"hash_6ca9ecf6df3b77ed", 0, isDefined(spawn_struct.radius) ? spawn_struct.radius : 94, isDefined(spawn_struct.height) ? spawn_struct.height : 94, undefined, forward);
@@ -86,7 +86,7 @@ function function_29307fae(struct) {
     trigger.var_1dfa9e6 = var_1dfa9e6;
     var_cf8192ca.var_ccd7223 = var_cf8192ca.origin;
     var_cf8192ca hide();
-    playsoundatposition(#"hash_20c4f0485930af2a", struct.origin);
+    playSoundAtPosition(#"hash_20c4f0485930af2a", struct.origin);
     var_16129dba function_619a5c20();
   }
 }
@@ -121,7 +121,7 @@ function function_1cbcfab5(player) {
   }
 
   if(player getstance() == "prone") {
-    self sethintstring(#"hash_10249865c7d6aeb8");
+    self setHintString(#"hash_10249865c7d6aeb8");
     return false;
   }
 
@@ -133,12 +133,12 @@ function function_1cbcfab5(player) {
 
   if(isDefined(currentweapon) && currentweapon != level.weaponnone) {
     if(currentweapon.isdualwield) {
-      self sethintstring(#"hash_7837638f250e6186");
+      self setHintString(#"hash_7837638f250e6186");
       return false;
     }
 
     if(killstreaks::is_killstreak_weapon(currentweapon)) {
-      self sethintstring(#"hash_189973fb11ef10ea");
+      self setHintString(#"hash_189973fb11ef10ea");
       return false;
     }
   } else {
@@ -153,7 +153,7 @@ function function_2bf9274() {
   self endon("6903aa98af509547");
   self endon(#"death");
   wait 1;
-  self sethintstring(#"hash_6ca9ecf6df3b77ed");
+  self setHintString(#"hash_6ca9ecf6df3b77ed");
 }
 
 function function_e126c567(eventstruct) {
@@ -179,7 +179,7 @@ function function_e126c567(eventstruct) {
     }
 
     player val::set(#"fishing", "freezecontrols_allowlook", 1);
-    self sethintstring("");
+    self setHintString("");
     self.isfishing = 1;
     var_16129dba = self.var_16129dba;
     var_cf8192ca = self.var_cf8192ca;
@@ -240,7 +240,7 @@ function function_b828bd39(player, var_cdef1b0e) {
   var_95981760 = self fake_physicslaunch(self.origin, var_cdef1b0e, 120);
   self function_86edc85c(var_cdef1b0e, var_95981760);
   self thread fishing_buoy_splash(var_cdef1b0e);
-  self moveto(var_cdef1b0e, 2);
+  self moveTo(var_cdef1b0e, 2);
   self waittill(#"movedone");
   self.origin = var_cdef1b0e;
   self.var_3fa8a746 = 0;
@@ -250,13 +250,13 @@ function function_b828bd39(player, var_cdef1b0e) {
     wait time;
     self.var_3fa8a746 = 1;
     player function_bc82f900("fishing_rumble");
-    playsoundatposition(#"hash_5784befa5a563866", player.origin);
+    playSoundAtPosition(#"hash_5784befa5a563866", player.origin);
     self thread fishing_buoy_splash();
     new_pos = self.origin + (0, 0, -5);
-    self moveto(new_pos, 0.5);
+    self moveTo(new_pos, 0.5);
     self waittill(#"movedone");
     new_pos = self.origin + (0, 0, 5);
-    self moveto(new_pos, 0.5);
+    self moveTo(new_pos, 0.5);
     self waittill(#"movedone");
     self.var_3fa8a746 = 0;
     waitframe(1);
@@ -379,7 +379,7 @@ function function_16e4e507(var_558f00ed, var_886a6495, trigger, var_da4747b7) {
         var_886a6495.origin = var_886a6495.var_ccd7223;
         var_886a6495 hide();
         var_558f00ed show();
-        trigger sethintstring(#"hash_6ca9ecf6df3b77ed");
+        trigger setHintString(#"hash_6ca9ecf6df3b77ed");
       }
     }
   }
@@ -408,7 +408,7 @@ function function_73532e4f(str_notify) {
 
   if(isDefined(self.var_995e72b4)) {
     self.var_995e72b4.isfishing = 0;
-    self.var_995e72b4 sethintstring(#"hash_6ca9ecf6df3b77ed");
+    self.var_995e72b4 setHintString(#"hash_6ca9ecf6df3b77ed");
   }
 }
 

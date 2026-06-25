@@ -123,7 +123,7 @@ _id_4A38() {
   for(;;) {
     common_scripts\utility::flag_waitopen("msg_vfx_sub_interior_minus_25000");
     var_4 = level.player getplayerangles();
-    var_5 = vectornormalize(anglesToForward(var_4));
+    var_5 = vectorNormalize(anglesToForward(var_4));
     var_6 = -1;
     var_7 = [];
 
@@ -131,7 +131,7 @@ _id_4A38() {
       if(!isDefined(var_3)) {
         continue;
       }
-      var_9 = vectornormalize(var_0[var_8] - level.player.origin);
+      var_9 = vectorNormalize(var_0[var_8] - level.player.origin);
 
       if(vectordot(var_5, var_9) > 0.45) {
         var_6 = 1;
@@ -172,7 +172,7 @@ _id_4A39() {
   for(;;) {
     common_scripts\utility::flag_waitopen("msg_vfx_sub_interior_minus_25000");
     var_4 = level.player getplayerangles();
-    var_5 = vectornormalize(anglesToForward(var_4));
+    var_5 = vectorNormalize(anglesToForward(var_4));
     var_6 = -1;
     var_7 = [];
 
@@ -180,7 +180,7 @@ _id_4A39() {
       if(!isDefined(var_3)) {
         continue;
       }
-      var_9 = vectornormalize(var_0[var_8] - level.player.origin);
+      var_9 = vectorNormalize(var_0[var_8] - level.player.origin);
 
       if(vectordot(var_5, var_9) > 0.45) {
         var_6 = 1;
@@ -271,12 +271,12 @@ _id_4770() {
 _id_4A3E() {
   common_scripts\utility::flag_init("msg_fx_set_buildinghit2");
   wait 1.0;
-  var_0 = getent("sub_board_anim_node", "targetname");
+  var_0 = getEnt("sub_board_anim_node", "targetname");
   var_1 = maps\_shg_fx::_id_446A(248);
   var_1.v["origin"] = var_0.origin + (-5035, -4309, 380);
-  var_2 = getent("ny_manhattan_building_exchange_01_facade_des", "targetname");
-  var_3 = getent("ny_manhattan_building_exchange_01_facade_des2", "targetname");
-  var_4 = getent("ny_manhattan_building_exchange_01_facade_des3", "targetname");
+  var_2 = getEnt("ny_manhattan_building_exchange_01_facade_des", "targetname");
+  var_3 = getEnt("ny_manhattan_building_exchange_01_facade_des2", "targetname");
+  var_4 = getEnt("ny_manhattan_building_exchange_01_facade_des3", "targetname");
   var_2._id_1032 = "building_des";
   var_3._id_1032 = "building_des";
   var_4._id_1032 = "building_des";
@@ -286,7 +286,7 @@ _id_4A3E() {
   var_2 hide();
   var_3 hide();
   var_4 hide();
-  var_5 = getent("surface_building_hit_undamaged", "targetname");
+  var_5 = getEnt("surface_building_hit_undamaged", "targetname");
   common_scripts\utility::flag_wait("msg_fx_set_buildinghit2");
   level notify("msg_nyharbor_stoplandexplosions");
   level notify("msg_nyharbor_stopwaterexplosions");
@@ -349,15 +349,15 @@ _id_4A41() {
 
 _id_4A42() {
   wait 1.0;
-  var_0 = getent("sub_breach_anim_node", "targetname");
+  var_0 = getEnt("sub_breach_anim_node", "targetname");
   var_1 = maps\_shg_fx::_id_446A(249);
   var_1.v["origin"] = (-37920.9, -22439.9, -335);
   var_2 = maps\_shg_fx::_id_446A(250);
   var_2.v["origin"] = (-39290.9, -23624.6, -276.368);
-  var_3 = getent("ny_manhattan_building_exchange_01_facade_des4", "targetname");
+  var_3 = getEnt("ny_manhattan_building_exchange_01_facade_des4", "targetname");
   var_3._id_1032 = "building_des";
   var_3 maps\_anim::_id_1244();
-  var_4 = getent("surface_building_hit_undamaged2", "targetname");
+  var_4 = getEnt("surface_building_hit_undamaged2", "targetname");
   var_3 hide();
   common_scripts\utility::flag_wait("sub_breach_started");
   wait 15.66;
@@ -389,7 +389,7 @@ _id_4A43(var_0) {
 
   for(;;) {
     var_2 = level.player.origin - var_0.origin;
-    var_3 = vectortoangles(vectornormalize(var_2));
+    var_3 = vectortoangles(vectorNormalize(var_2));
     var_4 = var_3[1] - 90.0;
 
     if(var_4 < 0) {
@@ -469,11 +469,11 @@ _id_4A47(var_0, var_1, var_2) {
 
 _id_4A48(var_0) {
   var_1 = level._id_4A49;
-  var_2 = vectornormalize((0.88, 0.5, 0.82));
-  var_3 = vectornormalize((0.34, 0.939, 0.82));
-  var_4 = vectornormalize((-0.34, 0.939, 0.62));
+  var_2 = vectorNormalize((0.88, 0.5, 0.82));
+  var_3 = vectorNormalize((0.34, 0.939, 0.82));
+  var_4 = vectorNormalize((-0.34, 0.939, 0.62));
   var_5 = getmapsunlight();
-  var_6 = vectornormalize((var_5[0], var_5[1], var_5[2])) * 2.25;
+  var_6 = vectorNormalize((var_5[0], var_5[1], var_5[2])) * 2.25;
   setsundirection(var_0);
   level._id_49C1 waittillmatch("single anim", "waterout");
   thread maps\_utility::vision_set_fog_changes("ny_harbor_surfacing", 0);
@@ -481,7 +481,7 @@ _id_4A48(var_0) {
   thread _id_4A46(2.0);
   wait 2.05;
   var_5 = getmapsunlight();
-  var_6 = vectornormalize((var_5[0], var_5[1], var_5[2])) * 2.25;
+  var_6 = vectorNormalize((var_5[0], var_5[1], var_5[2])) * 2.25;
   var_1 waittillmatch("single anim", "breach_impact");
   lerpsundirection(var_2, var_3, 6.3);
   wait 6.3;
@@ -491,11 +491,11 @@ _id_4A48(var_0) {
 }
 
 _id_4A4A() {
-  var_0 = getent("dyn_water_breachpatch_high", "script_noteworthy");
-  var_1 = getent("dyn_water_breachpatch2_high", "targetname");
-  var_2 = getent("dyn_water_breachpatchfoamy_high", "script_noteworthy");
-  var_3 = getent("dyn_water_breachpatchfoamy2_high", "targetname");
-  var_4 = getent("dyn_water_breachpatch_low", "script_noteworthy");
+  var_0 = getEnt("dyn_water_breachpatch_high", "script_noteworthy");
+  var_1 = getEnt("dyn_water_breachpatch2_high", "targetname");
+  var_2 = getEnt("dyn_water_breachpatchfoamy_high", "script_noteworthy");
+  var_3 = getEnt("dyn_water_breachpatchfoamy2_high", "targetname");
+  var_4 = getEnt("dyn_water_breachpatch_low", "script_noteworthy");
   var_0 hide();
   var_2 show();
   var_1 hide();
@@ -503,15 +503,15 @@ _id_4A4A() {
   var_4 show();
   var_2.origin = (-35356, -20967, -240);
   wait 1.0;
-  var_5 = getent("fx_nyharbor_wave_front", "targetname");
-  var_6 = getent("fx_nyharbor_wave_side", "targetname");
-  var_7 = getent("fx_nyharbor_wave_displace", "targetname");
-  var_8 = getent("fx_nyharbor_wave_crashing", "targetname");
+  var_5 = getEnt("fx_nyharbor_wave_front", "targetname");
+  var_6 = getEnt("fx_nyharbor_wave_side", "targetname");
+  var_7 = getEnt("fx_nyharbor_wave_displace", "targetname");
+  var_8 = getEnt("fx_nyharbor_wave_crashing", "targetname");
   var_5 hide();
   var_6 hide();
   var_7 hide();
   var_8 hide();
-  var_9 = getent("sub_breach_anim_node", "targetname");
+  var_9 = getEnt("sub_breach_anim_node", "targetname");
   var_10 = spawn("script_origin", var_9.origin + (0, 0, -96));
   var_10.angles = var_9.angles;
   var_11 = spawn("script_origin", var_9.origin + (0, 0, -96));
@@ -547,13 +547,13 @@ _id_4A4A() {
   level notify("msg_nyharbor_stopwaterexplosions");
   level notify("msg_fx_stop_slava_missiles");
   var_16 = getmapsundirection();
-  var_17 = vectornormalize((0.88, 0.5, 0.82));
+  var_17 = vectorNormalize((0.88, 0.5, 0.82));
   thread _id_4A48(var_17);
   level._id_49C1 waittillmatch("single anim", "waterout");
   var_18 = common_scripts\utility::spawn_tag_origin();
   var_18.origin = level._id_49C1.origin + (0, 0, 40);
   var_18.angles = (270, 0, 0);
-  var_18 linkto(level._id_49C1);
+  var_18 linkTo(level._id_49C1);
   playFXOnTag(common_scripts\utility::getfx("ny_sub_playerwaterripple"), var_18, "tag_origin");
   var_0 show();
   var_2 hide();
@@ -578,12 +578,12 @@ _id_4A4A() {
   var_21 = common_scripts\utility::spawn_tag_origin();
   var_21.angles = (270, 0, 0);
   var_21.origin = var_19 gettagorigin("tag_fx_bow2");
-  var_21 linkto(var_19, "tag_fx_bow2");
+  var_21 linkTo(var_19, "tag_fx_bow2");
   playFXOnTag(common_scripts\utility::getfx("ny_sub_breachMainBow"), var_21, "tag_origin");
   var_22 = common_scripts\utility::spawn_tag_origin();
   var_22.origin = var_19 gettagorigin("body");
   var_22.angles = var_19 gettagangles("body");
-  var_22 linkto(var_19, "body", (2226, -216, 221), (0, 0, 0));
+  var_22 linkTo(var_19, "body", (2226, -216, 221), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("ny_sub_breachmainBow_gush"), var_22, "tag_origin");
   var_23 = maps\_shg_fx::_id_4474(var_15);
   wait 0.1;
@@ -605,15 +605,15 @@ _id_4A4A() {
   var_25 = common_scripts\utility::spawn_tag_origin();
   var_25.origin = var_19 gettagorigin("tag_origin");
   var_25.angles = var_19 gettagangles("tag_origin");
-  var_25 linkto(var_19, "body", (-1130, 0, 233), (0, 0, 0));
+  var_25 linkTo(var_19, "body", (-1130, 0, 233), (0, 0, 0));
   var_26 = common_scripts\utility::spawn_tag_origin();
   var_26.origin = var_25.origin;
   var_26.angles = var_25.angles;
-  var_26 linkto(var_19, "body", (-708, 0, 233), (0, 0, 0));
+  var_26 linkTo(var_19, "body", (-708, 0, 233), (0, 0, 0));
   var_27 = common_scripts\utility::spawn_tag_origin();
   var_27.origin = var_25.origin;
   var_27.angles = var_25.angles;
-  var_27 linkto(var_19, "body", (0, 0, 280), (0, 0, 0));
+  var_27 linkTo(var_19, "body", (0, 0, 280), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("ny_sub_directionalgushes"), var_22, "tag_origin");
   var_7 waittillmatch("single anim", "breach_displace_fx");
   var_14.v["wake"] = ["tag_fx_wake_", "tag_fx_wake_1", "tag_fx_wake_2", "tag_fx_wake_3", "tag_fx_wake_4"];
@@ -696,7 +696,7 @@ _id_4A4A() {
 _id_4A4D() {
   var_0 = undefined;
   wait 0.1;
-  var_1 = getent("fx_id_smokeguy", "targetname");
+  var_1 = getEnt("fx_id_smokeguy", "targetname");
   var_2 = getEntArray("actor_enemy_opforce_navy_short_P90", "classname");
 
   foreach(var_4 in var_2) {
@@ -755,8 +755,8 @@ _id_4A4F(var_0) {
   var_1 = var_0 + (0, 0, 48);
   var_2 = var_1 - level.player.origin;
   var_3 = length(var_2);
-  var_4 = vectornormalize(var_2);
-  var_5 = vectornormalize(anglesToForward(level.player.angles));
+  var_4 = vectorNormalize(var_2);
+  var_5 = vectorNormalize(anglesToForward(level.player.angles));
   var_6 = vectordot(var_4, var_5);
 
   if(var_6 > 0.3 && var_3 < 1000) {
@@ -847,7 +847,7 @@ _id_4A52(var_0, var_1, var_2) {
       var_7 = maps\_ocean::_id_4A36(level._id_4A30["water_patch"], var_5);
     }
     if(isDefined(self)) {
-      self moveto((var_5[0], var_5[1], var_7 + var_4), 0.12);
+      self moveTo((var_5[0], var_5[1], var_7 + var_4), 0.12);
     }
     wait 0.12;
   }
@@ -864,13 +864,13 @@ _id_4A53() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = self gettagorigin("tag_wheel_front_left");
   var_0.angles = combineangles(self gettagangles("tag_origin"), (270, 0, 0));
-  var_0 linkto(self, "tag_wheel_front_left");
+  var_0 linkTo(self, "tag_wheel_front_left");
   playFXOnTag(common_scripts\utility::getfx("ny_dvora_zodiac_bump"), var_0, "tag_origin");
   wait 0.25;
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = level._id_4A54 gettagorigin("tag_wheel_front_left");
   var_1.angles = combineangles(level._id_4A54 gettagangles("tag_wheel_front_left"), (270, 0, 0));
-  var_1 linkto(level._id_4A54, "tag_wheel_front_left", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(level._id_4A54, "tag_wheel_front_left", (0, 0, 0), (0, 0, 0));
   level thread maps\_shg_fx::_id_444E(0.35, 1, 0.3, 0.53);
   playFXOnTag(common_scripts\utility::getfx("ny_dvora_zodiac_bump"), var_1, "tag_origin");
 
@@ -898,11 +898,11 @@ _id_4A55() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = self gettagorigin("tag_wheel_back_right");
   var_0.angles = self gettagangles("tag_wheel_back_right");
-  var_0 linkto(self, "tag_wheel_back_right", (0, 0, 50), (0, 0, 0));
+  var_0 linkTo(self, "tag_wheel_back_right", (0, 0, 50), (0, 0, 0));
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = self gettagorigin("tag_wheel_back_right");
   var_1.angles = self gettagangles("tag_wheel_back_right");
-  var_1 linkto(self, "tag_wheel_back_left", (0, 0, -50), (0, 0, 0));
+  var_1 linkTo(self, "tag_wheel_back_left", (0, 0, -50), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("zubr_wakeside_nyharbor"), var_0, "tag_origin");
   playFXOnTag(common_scripts\utility::getfx("zubr_wakeside_nyharbor"), var_1, "tag_origin");
   common_scripts\utility::waittill_either("death", "stop_fx");
@@ -923,7 +923,7 @@ _id_4A56(var_0) {
       var_4 = var_0 gettagangles("tag_propeller_fx");
       self.angles = var_4;
       var_3 = var_3 + anglesToForward(var_4) * -150;
-      self moveto((var_3[0], var_3[1], var_2 - 300), 0.2);
+      self moveTo((var_3[0], var_3[1], var_2 - 300), 0.2);
       wait 0.2;
     }
   }
@@ -972,7 +972,7 @@ _id_4A5A(var_0) {
       var_2 = maps\_ocean::_id_4A36(level._id_4A30["water_patch"], var_1);
       var_3 = var_1;
       var_3 = var_3 + anglestoup(var_0.angles) * (var_2 * 2);
-      var_0 moveto(var_3, 0.1);
+      var_0 moveTo(var_3, 0.1);
       wait 0.1;
     }
   }
@@ -992,7 +992,7 @@ _id_4A5B(var_0, var_1) {
   var_11 = common_scripts\utility::spawn_tag_origin();
   var_11.origin = self gettagorigin("j_spine4");
   var_11.angles = vectortoangles(var_4);
-  var_11 linkto(self, var_8);
+  var_11 linkTo(self, var_8);
   playFXOnTag(common_scripts\utility::getfx("ny_harbor_dvora_bloodhit"), var_11, "tag_origin");
 
   if(var_1 == 3) {
@@ -1042,7 +1042,7 @@ _id_4A5E() {
   var_2 = level.player.origin;
   var_3 = anglesToForward(level.player.angles);
   var_4 = level.player getvelocity() / 20.0 + (1, 0, 0);
-  var_5 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_4);
   var_1 = 1000;
   var_6 = var_2 + var_3 * var_1 + var_4 * var_0;
   var_7 = maps\_ocean::_id_4A36(level._id_4A30["water_patch"], var_6);
@@ -1068,7 +1068,7 @@ _id_4A61() {
     var_3 = level.player.origin;
     var_4 = anglesToForward(level.player.angles);
     var_5 = level.player getvelocity() / 20.0 + (1, 0, 0);
-    var_6 = vectornormalize(var_5);
+    var_6 = vectorNormalize(var_5);
     var_7 = maps\_shg_common::_id_1684(var_4, (0, 0, 1));
 
     if(var_0 < 5) {
@@ -1092,7 +1092,7 @@ _id_4A62() {
   var_4 = var_3 / var_0;
   var_1 = var_1 + level.player getvelocity() / 20.0 * var_4;
   var_5 = var_1 - var_2;
-  var_6 = vectornormalize(var_5);
+  var_6 = vectorNormalize(var_5);
   playFX(common_scripts\utility::getfx("ny_harbor_dvora_debrisatplayer"), var_2, var_6, (0, 0, 1));
 }
 
@@ -1144,8 +1144,8 @@ _id_4A66(var_0, var_1) {
 _id_4A67() {
   level common_scripts\utility::waitframe();
   level common_scripts\utility::waitframe();
-  var_0 = getent("vehicle_russian_super_dvora_mark2_destroyA", "targetname");
-  var_1 = getent("vehicle_russian_super_dvora_mark2_destroyB", "targetname");
+  var_0 = getEnt("vehicle_russian_super_dvora_mark2_destroyA", "targetname");
+  var_1 = getEnt("vehicle_russian_super_dvora_mark2_destroyB", "targetname");
   var_0 hide();
   var_1 hide();
 }
@@ -1168,11 +1168,11 @@ _id_4A68(var_0) {
     var_4[var_4.size] = var_6;
   }
 
-  var_7 = getent("vehicle_russian_super_dvora_mark2_destroyA", "targetname");
-  var_8 = getent("vehicle_russian_super_dvora_mark2_destroyB", "targetname");
+  var_7 = getEnt("vehicle_russian_super_dvora_mark2_destroyA", "targetname");
+  var_8 = getEnt("vehicle_russian_super_dvora_mark2_destroyB", "targetname");
   var_2.origin = var_7 gettagorigin("tag_body_state2");
   var_2.angles = var_7 gettagangles("tag_body_state2");
-  var_2 linkto(var_7, "tag_body_state2");
+  var_2 linkTo(var_7, "tag_body_state2");
   var_7 hide();
   var_8 hide();
   self waittill("dvora_destroyed");
@@ -1180,12 +1180,12 @@ _id_4A68(var_0) {
   var_7 show();
   var_7.origin = self gettagorigin("tag_origin");
   var_7.angles = self gettagangles("tag_origin");
-  var_7 linkto(self, "tag_origin");
+  var_7 linkTo(self, "tag_origin");
   var_7._id_1032 = "dvora";
   var_7 maps\_anim::_id_1244();
   var_8.origin = self gettagorigin("tag_origin");
   var_8.angles = self gettagangles("tag_origin");
-  var_8 linkto(self, "tag_origin");
+  var_8 linkTo(self, "tag_origin");
   var_8._id_1032 = "dvora";
   var_8 maps\_anim::_id_1244();
   var_7 setanim(level._id_0C59["dvora"]["destorychunk"]);
@@ -1988,7 +1988,7 @@ _id_4A80() {
     var_6[var_5] = common_scripts\utility::spawn_tag_origin();
     var_6[var_5].origin = var_1[var_5];
     var_6[var_5].angles = var_2[var_5];
-    var_6[var_5] linkto(level._id_4A81, "tag_origin");
+    var_6[var_5] linkTo(level._id_4A81, "tag_origin");
   }
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
@@ -2018,7 +2018,7 @@ _id_4A82() {
     var_4[var_5] = common_scripts\utility::spawn_tag_origin();
     var_4[var_5].origin = var_1[var_5];
     var_4[var_5].angles = var_2[var_5];
-    var_4[var_5] linkto(level._id_4A81, "tag_origin");
+    var_4[var_5] linkTo(level._id_4A81, "tag_origin");
   }
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
@@ -2044,7 +2044,7 @@ _id_4A83() {
     var_4[var_5] = common_scripts\utility::spawn_tag_origin();
     var_4[var_5].origin = var_1[var_5];
     var_4[var_5].angles = var_2[var_5];
-    var_4[var_5] linkto(level._id_4A81, "tag_origin");
+    var_4[var_5] linkTo(level._id_4A81, "tag_origin");
   }
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
@@ -2070,7 +2070,7 @@ _id_4A84() {
     var_4[var_5] = common_scripts\utility::spawn_tag_origin();
     var_4[var_5].origin = var_1[var_5];
     var_4[var_5].angles = var_2[var_5];
-    var_4[var_5] linkto(level._id_4A81, "tag_origin");
+    var_4[var_5] linkTo(level._id_4A81, "tag_origin");
   }
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
@@ -2219,7 +2219,7 @@ _id_4A93() {
   thread _id_4A95();
   wait 0.05;
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(level._id_4A49, "tag_fx_fin_b_left", (175, 0, 450), (0, 0, 0));
+  var_0 linkTo(level._id_4A49, "tag_fx_fin_b_left", (175, 0, 450), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("sub_surfacing_explosion2"), var_0, "tag_origin");
   level.player thread _id_4AD3();
   earthquake(0.25, 1.7, level.player.origin, 1024);
@@ -2227,7 +2227,7 @@ _id_4A93() {
   thread _id_4A95();
   wait 0.05;
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(level._id_4A49, "tag_fx_ventback_single7", (-200, -100, -100), (0, 0, 0));
+  var_1 linkTo(level._id_4A49, "tag_fx_ventback_single7", (-200, -100, -100), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("sub_surfacing_explosion3"), var_1, "tag_origin");
   level.player thread _id_4AD3();
   earthquake(0.4, 1.7, level.player.origin, 1024);
@@ -2328,7 +2328,7 @@ _id_4A9A() {
 }
 
 _id_4A9B() {
-  var_0 = getent("harbor_underwater_geo", "script_noteworthy");
+  var_0 = getEnt("harbor_underwater_geo", "script_noteworthy");
   var_0 hide();
 }
 
@@ -2507,7 +2507,7 @@ _id_4AAC(var_0) {
   wait 1.0;
   common_scripts\utility::exploder(264);
   wait 0.05;
-  var_1 = getent("control_room_seat", "script_noteworthy");
+  var_1 = getEnt("control_room_seat", "script_noteworthy");
 
   if(isDefined(var_1)) {
     var_1 hide();
@@ -2555,7 +2555,7 @@ _id_4AB4(var_0) {
 }
 
 _id_4AB5() {
-  var_0 = getent("hatch_light", "targetname");
+  var_0 = getEnt("hatch_light", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2711,10 +2711,10 @@ _id_4ABE(var_0, var_1) {
 _id_4ABF(var_0) {
   wait 0.15;
   self show();
-  var_1 = getent(self.script_noteworthy + "_col", "script_noteworthy");
+  var_1 = getEnt(self.script_noteworthy + "_col", "script_noteworthy");
 
   if(isDefined(var_1)) {
-    var_1 linkto(self, "tag_collision", (0, 0, 0), (0, -90, 0));
+    var_1 linkTo(self, "tag_collision", (0, 0, 0), (0, -90, 0));
   }
   maps\_audio::aud_send_msg("explode_wave", var_1);
   self._id_1032 = "explosion_wave";
@@ -2743,17 +2743,17 @@ _id_4AC1() {
 
 _id_4AC2() {
   wait 1.0;
-  var_0 = getent("destroyer_wave", "script_noteworthy");
+  var_0 = getEnt("destroyer_wave", "script_noteworthy");
   var_0 hide();
-  var_1 = getent("ship_splode_1_wave", "script_noteworthy");
+  var_1 = getEnt("ship_splode_1_wave", "script_noteworthy");
   var_1 hide();
-  var_2 = getent("ship_splode_2_wave", "script_noteworthy");
+  var_2 = getEnt("ship_splode_2_wave", "script_noteworthy");
   var_2 hide();
-  var_3 = getent("ship_splode_3_wave", "script_noteworthy");
+  var_3 = getEnt("ship_splode_3_wave", "script_noteworthy");
   var_3 hide();
-  var_4 = getent("ship_splode_4_wave", "script_noteworthy");
+  var_4 = getEnt("ship_splode_4_wave", "script_noteworthy");
   var_4 hide();
-  var_5 = getent("ship_splode_6_wave", "script_noteworthy");
+  var_5 = getEnt("ship_splode_6_wave", "script_noteworthy");
   var_5 hide();
 }
 
@@ -2862,12 +2862,12 @@ _id_4AC8() {
     common_scripts\utility::flag_wait("msg_vfx_surface_zone_25000");
     common_scripts\utility::flag_waitopen("msg_vfx_sub_interior_minus_25000");
     var_3 = level.player getplayerangles();
-    var_4 = vectornormalize(anglesToForward(var_3));
+    var_4 = vectorNormalize(anglesToForward(var_3));
     var_5 = -1;
     var_6 = [];
 
     for(var_7 = 0; var_7 < var_0.size; var_7++) {
-      var_8 = vectornormalize(var_0[var_7].origin - level.player.origin);
+      var_8 = vectorNormalize(var_0[var_7].origin - level.player.origin);
       var_9 = vectordot(var_4, var_8);
 
       if(vectordot(var_4, var_8) > 0.75) {
@@ -2907,7 +2907,7 @@ _id_4AC9(var_0) {
   playFXOnTag(common_scripts\utility::getfx("slava_missile_bg"), var_1, "tag_fx");
   var_3 = 12000;
   var_4 = 130;
-  var_5 = vectornormalize(anglesToForward(var_1.angles));
+  var_5 = vectorNormalize(anglesToForward(var_1.angles));
   var_6 = var_5;
   var_7 = var_6 * var_3 * 0.05;
   var_8 = (0, 0, -4);
@@ -2916,7 +2916,7 @@ _id_4AC9(var_0) {
   while(var_9 == 0) {
     var_1.origin = var_1.origin + var_7;
     var_7 = var_7 + var_8;
-    var_10 = vectornormalize(var_7);
+    var_10 = vectorNormalize(var_7);
     var_11 = vectortoangles(var_10);
     var_1.angles = var_11;
     level common_scripts\utility::waitframe();
@@ -2996,7 +2996,7 @@ _id_4ACF() {
   wait 21.5;
   playFXOnTag(common_scripts\utility::getfx("sub_volumetric_shadow_fin_rear"), level._id_49C3, "tag_fx_fin_b_right");
   var_4 = common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(level._id_49C3, "tag_fx_fin_b_left", (0, -365, 0), (0, 0, 0));
+  var_4 linkTo(level._id_49C3, "tag_fx_fin_b_left", (0, -365, 0), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("sub_volumetric_shadow_fin_rear"), var_4, "tag_origin");
   common_scripts\utility::flag_waitopen("msg_vfx_udrwtr_b");
   var_3 delete();
@@ -3031,7 +3031,7 @@ _id_4AD3() {
   var_0 = 0.25;
 
   for(var_1 = 0; var_1 < var_0; var_1 = var_1 + 0.05) {
-    level.player playrumbleonentity("falling_land");
+    level.player playRumbleOnEntity("falling_land");
     wait 0.05;
   }
 

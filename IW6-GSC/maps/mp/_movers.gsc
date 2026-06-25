@@ -96,7 +96,7 @@ script_mover_int() {
         self.origin_ent = spawn("script_model", target.origin);
         self.origin_ent.angles = target.angles;
         self.origin_ent setModel("tag_origin");
-        self.origin_ent LinkTo(self);
+        self.origin_ent linkTo(self);
         break;
       default:
         break;
@@ -110,8 +110,8 @@ script_mover_int() {
     }
     switch (target.script_noteworthy) {
       case "use_trigger_link":
-        target EnableLinkTo();
-        target LinkTo(self);
+        target EnablelinkTo();
+        target linkTo(self);
 
       case "use_trigger":
         target script_mover_parse_targets();
@@ -119,7 +119,7 @@ script_mover_int() {
         self.use_triggers[self.use_triggers.size] = target;
         break;
       case "link":
-        target LinkTo(self);
+        target linkTo(self);
         self.linked_ents[self.linked_ents.size] = target;
         break;
       default:
@@ -325,7 +325,7 @@ script_mover_move_to_target(current) {
         decel_time = mover.params["decel_frac"] * move_time;
       }
 
-      mover MoveTo(trans["origin"], move_time, accel_time, decel_time);
+      mover moveTo(trans["origin"], move_time, accel_time, decel_time);
 
       foreach(note in goal.level_notify) {
         self thread script_mover_run_notify(note.origin, note.script_parameters, self.origin, goal.origin);
@@ -335,7 +335,7 @@ script_mover_move_to_target(current) {
     }
 
     if(anglesClamp180(trans["angles"]) != anglesClamp180(mover.angles)) {
-      mover RotateTo(trans["angles"], move_time, accel_time, decel_time);
+      mover rotateTo(trans["angles"], move_time, accel_time, decel_time);
       is_rotateTo = true;
     }
 
@@ -393,9 +393,9 @@ script_mover_run_notify(notify_origin, level_notify, start, end) {
   self endon("move_end");
 
   mover = self;
-  move_dir = VectorNormalize(end - start);
+  move_dir = vectorNormalize(end - start);
   while(1) {
-    notify_dir = VectorNormalize(notify_origin - mover.origin);
+    notify_dir = vectorNormalize(notify_origin - mover.origin);
     if(VectorDot(move_dir, notify_dir) <= 0) {
       break;
     }
@@ -518,8 +518,8 @@ script_mover_allow_usable(usable) {
 script_mover_set_usable(use_ent, usable) {
   if(usable) {
     use_ent MakeUsable();
-    use_ent SetCursorHint("HINT_ACTIVATE");
-    use_ent SetHintString(level.script_mover_hintstrings[self.params["hintstring"]]);
+    use_ent setCursorHint("HINT_ACTIVATE");
+    use_ent setHintString(level.script_mover_hintstrings[self.params["hintstring"]]);
   } else {
     use_ent MakeUnusable();
   }
@@ -661,7 +661,7 @@ unresolved_collision_nearest_node(player, bAllowSuicide) {
 
   player CancelMantle();
   player DontInterpolate();
-  player SetOrigin(player.origin + avoid_telefrag_offset);
+  player setOrigin(player.origin + avoid_telefrag_offset);
 
   for(i = 0; i < nodes.size; i++) {
     check_node = nodes[i];
@@ -677,11 +677,11 @@ unresolved_collision_nearest_node(player, bAllowSuicide) {
       player Setstance("crouch");
     }
 
-    player SetOrigin(org);
+    player setOrigin(org);
     return;
   }
 
-  player SetOrigin(player.origin - avoid_telefrag_offset);
+  player setOrigin(player.origin - avoid_telefrag_offset);
 
   if(!isDefined(bAllowSuicide)) {
     bAllowSuicide = true;
@@ -809,9 +809,9 @@ script_mover_link_to_use_object(player) {
       player thread sciprt_mover_use_object_wait_for_disconnect(linkToObject);
     }
 
-    player PlayerLinkTo(linkToObject);
+    player PlayerlinkTo(linkToObject);
   } else {
-    player LinkTo(self);
+    player linkTo(self);
   }
   player PlayerLinkedOffsetEnable();
 }
@@ -932,7 +932,7 @@ handle_moving_platforms(data) {
   if(isDefined(data.linkParent)) {
     parent = self GetLinkedParent();
     if(!isDefined(parent) || parent != data.linkParent) {
-      self linkto(data.linkParent);
+      self linkTo(data.linkParent);
     }
   }
 

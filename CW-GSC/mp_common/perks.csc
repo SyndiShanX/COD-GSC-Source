@@ -213,7 +213,7 @@ function get_players(local_client_num) {
 function monitor_tracker_existing_players(local_client_num) {
   self notify(#"monitor_tracker_existing_players");
   self endon(#"death", #"monitor_tracker_existing_players");
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(isDefined(player) && player != self) {
@@ -472,7 +472,7 @@ function function_365c39ef(awareness_action, bundle) {
 
 function function_255fe01d(var_bf36ab55, localplayerorigin, playerforward, playerright) {
   vector = var_bf36ab55 - localplayerorigin;
-  vectorflat = vectornormalize((vector[0], vector[1], 0));
+  vectorflat = vectorNormalize((vector[0], vector[1], 0));
   var_451ea257 = vectordot(vectorflat, playerforward);
   var_2f93b65 = var_451ea257 > 0;
   var_8add8d51 = vectordot(vectorflat, playerright);
@@ -581,7 +581,7 @@ function function_e3426b1f(local_client_num) {
       }
     }
 
-    foreach(p in getplayers(local_client_num)) {
+    foreach(p in getPlayers(local_client_num)) {
       clientnum = p getentitynumber();
       var_5ac20585 = createuimodel(function_5f72e972(#"clients_global"), clientnum + ".compassAnchoredEspionage");
 
@@ -684,7 +684,7 @@ function monitor_detectnearbyenemies(local_client_num) {
     }
 
     localplayeranglestoforward = anglesToForward(playerangles);
-    players = getplayers(local_client_num);
+    players = getPlayers(local_client_num);
     clones = getclones(local_client_num);
     sixthsenseents = arraycombine(players, clones, 0, 0);
 
@@ -789,7 +789,7 @@ function monitor_detectnearbyenemies(local_client_num) {
 
       if(detected) {
         vector = sixthsenseent.origin - localplayer.origin;
-        vectorflat = vectornormalize((vector[0], vector[1], 0));
+        vectorflat = vectorNormalize((vector[0], vector[1], 0));
         cosangle = vectordot(vectorflat, localplayeranglestoforward);
 
         if(distcurrentsq < sqr(range * bundle.var_7c9cab4f)) {

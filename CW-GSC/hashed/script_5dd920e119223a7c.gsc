@@ -108,7 +108,7 @@ function function_39f990f4() {
   var_812457c = 0;
 
   while(!var_812457c) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(player.origin, self.origin) <= 25000000) {
         level clientfield::set("" + #"console_stream", 1);
         var_812457c = 1;
@@ -223,10 +223,10 @@ function function_ccaf09a(instance) {
 function function_fe2c378a(instance) {
   self endon(#"death");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player)) {
       if(distance2dsquared(self.origin, player.origin) >= 1440000) {
-        n_dot = vectordot((0, 180, 0), vectornormalize(self.origin - player.origin));
+        n_dot = vectordot((0, 180, 0), vectorNormalize(self.origin - player.origin));
         n_frac = cos(n_dot);
 
         if(n_dot >= 165 && n_dot <= 180) {
@@ -466,14 +466,14 @@ function function_78f3b160() {
 }
 
 function private function_fa7f10a(s_instance) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::function_7491d6c5(player, #"hash_36989b23ebea2980");
   }
 
   s_instance waittilltimeout(5, #"complete");
 
   if(!s_instance flag::get("complete")) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       level.var_31028c5d prototype_hud::set_active_objective_string(e_player, #"hash_36989b23ebea2980");
       level.var_31028c5d prototype_hud::function_817e4d10(e_player, 1);
     }
@@ -481,7 +481,7 @@ function private function_fa7f10a(s_instance) {
     s_instance flag::wait_till("complete");
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     level.var_31028c5d prototype_hud::function_7491d6c5(e_player, #"");
     level.var_31028c5d prototype_hud::set_active_objective_string(e_player, #"");
     level.var_31028c5d prototype_hud::function_817e4d10(e_player, 0);
@@ -682,7 +682,7 @@ function function_37aa3b64(s_instance) {
   waitframe(1);
 
   if(isDefined(e_linkto)) {
-    self linkto(e_linkto);
+    self linkTo(e_linkto);
     str_scene = self function_aa3799b9();
 
     if(isDefined(str_scene)) {
@@ -1104,7 +1104,7 @@ function function_72213470(s_instance) {
   }
 
   wait 3;
-  var_d8f8912 = getent("death_sound_entity", "targetname");
+  var_d8f8912 = getEnt("death_sound_entity", "targetname");
 
   if(isDefined(var_d8f8912)) {
     level thread namespace_cda50904::function_a92a93e9(var_d8f8912.origin + (0, 0, 48), undefined, 1);
@@ -1153,7 +1153,7 @@ function private function_15bda870(s_spawn, var_109708e0, s_instance) {
   if(isDefined(self.mdl_portal)) {
     self.mdl_portal clientfield::set("" + #"hash_60e4230d63925ac1", 1);
     self.mdl_portal thread clear_vehicles(s_instance);
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(isalive(player)) {
@@ -1193,7 +1193,7 @@ function private function_15bda870(s_spawn, var_109708e0, s_instance) {
     s_instance.a_ai_spawned[s_instance.a_ai_spawned.size] = level.var_1f73a372;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isalive(player)) {
@@ -1416,7 +1416,7 @@ function function_6af3ebd6(s_instance) {
 
 function function_b173d287() {
   self endon(#"death");
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -1569,7 +1569,7 @@ function function_d20a3932(s_instance, var_f5064815, var_6a4ec994) {
 }
 
 function function_336cb6b9(str_aitype) {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       if(str_aitype == #"spawner_bo5_avogadro_sr" || str_aitype == #"spawner_bo5_soa") {
         var_e00b0988 = 2;
@@ -1808,7 +1808,7 @@ function private function_90591f67(var_f5064815, var_109708e0, s_instance) {
   s_next_spawn = var_6e468adf[0];
 
   if(isDefined(self.mdl_trail)) {
-    self linkto(self.mdl_trail, "tag_origin");
+    self linkTo(self.mdl_trail, "tag_origin");
     wait 0.1;
     self ghost();
     self thread function_c90d3dcf();
@@ -1825,9 +1825,9 @@ function private function_90591f67(var_f5064815, var_109708e0, s_instance) {
 
       if(isDefined(self.mdl_trail)) {
         if(self.var_6a4ec994 < 1) {
-          self.mdl_trail moveto(var_bd04a254.origin, 2);
+          self.mdl_trail moveTo(var_bd04a254.origin, 2);
         } else {
-          self.mdl_trail moveto(var_9656bbdd.origin, 2);
+          self.mdl_trail moveTo(var_9656bbdd.origin, 2);
         }
 
         self.mdl_trail waittill(#"movedone");
@@ -1857,7 +1857,7 @@ function function_7db7fcd5(instance) {
 
   foreach(player in players) {
     targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
-    var_a6470558 = vectornormalize(targetorigin - self.origin);
+    var_a6470558 = vectorNormalize(targetorigin - self.origin);
     player function_bc82f900("damage_heavy");
     player playerknockback(1);
     player applyknockback(100, var_a6470558);
@@ -1906,7 +1906,7 @@ function function_42fbf5d9(s_dest, s_instance, var_f5064815) {
         break;
       }
 
-      self moveto(v_dest, n_time);
+      self moveTo(v_dest, n_time);
     }
 
     waitframe(1);
@@ -1915,7 +1915,7 @@ function function_42fbf5d9(s_dest, s_instance, var_f5064815) {
   if(isDefined(self)) {
     n_dist = distance(self.origin, s_dest.origin);
     n_time = n_dist / 1000;
-    self moveto(s_dest.origin + (0, 0, 40), n_time);
+    self moveTo(s_dest.origin + (0, 0, 40), n_time);
     self waittill(#"movedone");
   }
 
@@ -1999,7 +1999,7 @@ function function_a1829ee4() {
   v_origin = self getcentroid();
   v_upper = v_origin + (0, 0, 30);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player util::is_player_looking_at(v_origin, 0.6, 1, self) || player util::is_player_looking_at(v_upper, 0.6, 1, self) || player util::is_player_looking_at(self.origin, 0.6, 1, self)) {
       return true;
     }
@@ -2016,7 +2016,7 @@ function function_667a319b(s_instance, b_play_vo) {
     v_origin = self getcentroid();
     v_upper = v_origin + (0, 0, 30);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isalive(player) && isDefined(v_origin) && isDefined(v_upper)) {
         if(player util::is_player_looking_at(v_origin, 0.6, 1, self) || player util::is_player_looking_at(v_upper, 0.6, 1, self) || player util::is_player_looking_at(self.origin, 0.6, 1, self)) {
           level namespace_7589cf5c::play_vo("objectiveKillHVTSpotted");
@@ -2307,7 +2307,7 @@ function private function_a96eb06b(var_f5064815, var_6cd7585c, s_instance) {
             v_facing = v_dir;
           }
 
-          v_center = checknavmeshdirection(v_origin, vectornormalize(v_dir), var_719f528b);
+          v_center = checknavmeshdirection(v_origin, vectorNormalize(v_dir), var_719f528b);
           var_7168e01b = function_c9a44b0b(v_center);
 
           if(!var_7168e01b) {
@@ -2320,7 +2320,7 @@ function private function_a96eb06b(var_f5064815, var_6cd7585c, s_instance) {
               if(var_3a0b4224 >= 3) {
                 var_719f528b += 128;
                 var_3a0b4224 = 0;
-                v_center = checknavmeshdirection(v_origin, vectornormalize(v_dir), var_719f528b);
+                v_center = checknavmeshdirection(v_origin, vectorNormalize(v_dir), var_719f528b);
                 var_7168e01b = function_c9a44b0b(v_center);
 
                 if(var_7168e01b) {
@@ -2337,7 +2337,7 @@ function private function_a96eb06b(var_f5064815, var_6cd7585c, s_instance) {
                   var_4027630a *= -1;
                 }
 
-                v_spawn = checknavmeshdirection(v_center, vectornormalize(var_4027630a), 128 * var_16379b1d);
+                v_spawn = checknavmeshdirection(v_center, vectorNormalize(var_4027630a), 128 * var_16379b1d);
                 b_right = !b_right;
               }
 
@@ -2651,7 +2651,7 @@ function clear_vehicles(instance) {
 
 function teleport_vehicle() {
   self endon(#"death");
-  self playrumbleonentity("sr_transmitter_clear");
+  self playRumbleOnEntity("sr_transmitter_clear");
   self makevehicleunusable();
   a_occupants = self getvehoccupants();
 

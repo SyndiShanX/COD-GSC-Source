@@ -42,8 +42,8 @@ zodiac_treadfx_chaser(chaseobj) {
   childthread zodiac_treadfx_toggle(chaseobj);
 
   while(IsAlive(chaseobj)) {
-    self MoveTo(chaseobj GetTagOrigin("tag_origin") + ZODIAC_TREADFX_HEIGHTOFFSET + (chaseobj Vehicle_GetVelocity() / ZODIAC_TREADFX_MOVETIMEFRACTION), ZODIAC_TREADFX_MOVETIME);
-    self RotateTo((0, chaseobj.angles[1], 0), ZODIAC_TREADFX_MOVETIME);
+    self moveTo(chaseobj GetTagOrigin("tag_origin") + ZODIAC_TREADFX_HEIGHTOFFSET + (chaseobj Vehicle_GetVelocity() / ZODIAC_TREADFX_MOVETIMEFRACTION), ZODIAC_TREADFX_MOVETIME);
+    self rotateTo((0, chaseobj.angles[1], 0), ZODIAC_TREADFX_MOVETIME);
     wait ZODIAC_TREADFX_MOVETIME + .05;
     waittillframeend;
   }
@@ -277,9 +277,9 @@ water_bump(bumptype) {
     return;
   }
   if(bumptype == "bump_big") {
-    level.player PlayRumbleOnEntity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   } else {
-    level.player PlayRumbleOnEntity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 
   if(!flag("no_more_physics_effects")) {
@@ -435,7 +435,7 @@ bread_crumb_chase() {
 
   foreach(crumb in test_array) {
     vec = anglesToForward(crumb.angles);
-    vec2 = VectorNormalize((level.player.origin - crumb.origin));
+    vec2 = vectorNormalize((level.player.origin - crumb.origin));
     vecdot = VectorDot(vec, vec2);
     if(vecdot > 0) {
       level.breadcrumb = array_remove(level.breadcrumb, crumb);
@@ -605,7 +605,7 @@ rumble_with_throttle() {
 }
 
 kill_ai_in_volume() {
-  volume = GetEnt(self.target, "targetname");
+  volume = getEnt(self.target, "targetname");
   Assert(isDefined(volume));
 
   self waittill("trigger");
@@ -645,7 +645,7 @@ kill_all_the_ai_and_fx_from_boatride() {
 }
 
 kill_destructibles_and_barrels_in_volume() {
-  volume = GetEnt(self.target, "targetname");
+  volume = getEnt(self.target, "targetname");
   Assert(isDefined(volume));
 
   self waittill("trigger");
@@ -688,7 +688,7 @@ disable_origin_offset() {
 
 destructible_fake() {
   self waittill("trigger");
-  destructible_org = GetEnt(self.target, "targetname");
+  destructible_org = getEnt(self.target, "targetname");
 
   radius = 600;
   if(isDefined(destructible_org.radius)) {
@@ -825,7 +825,7 @@ conveyerbelt_player_speed_mod() {
 
   velocity = flat_origin(velocity);
 
-  normal = VectorNormalize(velocity);
+  normal = vectorNormalize(velocity);
   forward = anglesToForward((0, level.VehPhys_SetConveyorBelt_yaw, 0));
   dot = VectorDot(forward, normal);
 
@@ -896,8 +896,8 @@ river_current(noteworthy) {
     return;
   }
 
-  current_node = getstruct(noteworthy, "script_noteworthy");
-  next_node = getstruct(current_node.target, "targetname");
+  current_node = getStruct(noteworthy, "script_noteworthy");
+  next_node = getStruct(current_node.target, "targetname");
 
   maxdropspeed_cos = Cos(35);
   maxdropspeed = 45;
@@ -932,9 +932,9 @@ river_current(noteworthy) {
         wait .05;
         continue;
       } else {
-        current_node = getstruct(current_node.targetname, "target");
+        current_node = getStruct(current_node.targetname, "target");
         if(!isDefined(current_node)) {
-          current_node = getstruct(next_node.targetname, "target");
+          current_node = getStruct(next_node.targetname, "target");
           level.players_boat thread conveyerbelt_speed(flat_angle[1], 0, CONVEYER_RATE);
         }
       }
@@ -954,10 +954,10 @@ river_current(noteworthy) {
     } else {
       maxdropspeed = maxdropspeed_lower_cap;
     }
-    next_node = getstruct(current_node.target, "targetname");
+    next_node = getStruct(current_node.target, "targetname");
     if(!isDefined(next_node)) {
       next_node = current_node;
-      current_node = getstruct(next_node.targetname, "target");
+      current_node = getStruct(next_node.targetname, "target");
       wait .05;
       continue;
     }
@@ -1006,7 +1006,7 @@ river_current_apply() {
 }
 
 get_next_angle(current_node, currentangles) {
-  next_node = getstruct(current_node.target, "targetname");
+  next_node = getStruct(current_node.target, "targetname");
   Assert(isDefined(next_node));
   return VectorToAngles(next_node.origin - current_node.origin);
 }
@@ -1190,7 +1190,7 @@ movewithrate(dest, moverate, accelfraction, decelfraction) {
 
   dist = Distance(self.origin, dest);
   movetime = dist / moverate;
-  movevec = VectorNormalize(dest - self.origin);
+  movevec = vectorNormalize(dest - self.origin);
 
   accel = 0;
   decel = 0;
@@ -1202,7 +1202,7 @@ movewithrate(dest, moverate, accelfraction, decelfraction) {
     decel = movetime * decelfraction;
   }
 
-  self MoveTo(dest, movetime, accel, decel);
+  self moveTo(dest, movetime, accel, decel);
 
   wait movetime;
 
@@ -1225,7 +1225,7 @@ price_anim_single_on_boat(anim_scene, relink) {
   flag_set("price_anim_on_boat");
 
   level.price radio_dialogue_stop();
-  level.price LinkTo(level.players_boat, "tag_guy2");
+  level.price linkTo(level.players_boat, "tag_guy2");
   level.players_boat anim_generic_queue(level.price, anim_scene, "tag_guy2");
 
   if(!relink) {
@@ -1339,13 +1339,13 @@ player_lerplink_fov(opts) {
 }
 
 trigger_thread_the_needle() {
-  targetent = getstruct(self.target, "targetname");
+  targetent = getStruct(self.target, "targetname");
   Assert(isDefined(targetent));
 
   self waittill("trigger");
 
-  normal = VectorNormalize(self.origin - targetent.origin);
-  forward = VectorNormalize(level.players_boat Vehicle_GetVelocity());
+  normal = vectorNormalize(self.origin - targetent.origin);
+  forward = vectorNormalize(level.players_boat Vehicle_GetVelocity());
   dot = VectorDot(forward, normal);
 
   if(dot > 0.984807) {
@@ -1567,7 +1567,7 @@ dialog_fire_volley_of_missiles_at_player(base_origin) {
   if(flag("rapids_trigger")) {
     return;
   }
-  normal = VectorNormalize(base_origin - level.players_boat.origin);
+  normal = vectorNormalize(base_origin - level.players_boat.origin);
   forward = AnglesToRight(level.players_boat.angles);
   dot = VectorDot(forward, normal);
   if(dot < 0) {
@@ -1617,7 +1617,7 @@ fire_volley_of_missiles_at_player() {
 
   for(i = 0; i < number_of_shots; i++) {
     shotorgs[i] = spawn("script_origin", shot_origin);
-    shotorgs[i] LinkTo(linkorg);
+    shotorgs[i] linkTo(linkorg);
     shot_origin += velocity * .1;
   }
 
@@ -1653,7 +1653,7 @@ linkorg(linkent) {
   linkent endon("death");
   offset = self.origin - linkent.origin;
   while(1) {
-    self MoveTo(linkent.origin + offset, .05, 0, 0);
+    self moveTo(linkent.origin + offset, .05, 0, 0);
 
     wait .05;
   }
@@ -1697,11 +1697,11 @@ flip_when_player_dies() {
   linkobj.angles = level.player.angles;
   linkobj Hide();
   linkobj setModel("zodiac_head_roller");
-  linkobj LinkTo(self, "tag_player", (0, 0, 60), (0, 0, 0));
+  linkobj linkTo(self, "tag_player", (0, 0, 60), (0, 0, 0));
 
   offset_obj = spawn("script_model", level.player.origin);
   offset_obj setModel("zodiac_head_roller");
-  offset_obj LinkTo(linkobj, "tag_player", (0, 0, -60), (0, 0, 0));
+  offset_obj linkTo(linkobj, "tag_player", (0, 0, -60), (0, 0, 0));
   offset_obj.angles = level.player.angles;
   offset_obj Hide();
 
@@ -1754,7 +1754,7 @@ node_can_reach_spot_infront_of_player(basenode) {
   nodearray = GetNodesInRadius(level.player.origin, 800, 500, 1000, "path");
   forward = anglesToForward(level.player.angles);
   foreach(node in nodearray) {
-    normal = VectorNormalize(node.origin - level.player.origin);
+    normal = vectorNormalize(node.origin - level.player.origin);
     dot = VectorDot(forward, normal);
     if(dot > Cos(15)) {
       level.node_to_reach = node;
@@ -1768,7 +1768,7 @@ find_good_node_for_price_to_spawn_at() {
   nodearray = GetNodesInRadius(level.player.origin, 230, 100, 1000, "path");
   forward = anglesToForward(level.player.angles);
   foreach(node in nodearray) {
-    normal = VectorNormalize(node.origin - level.player.origin);
+    normal = vectorNormalize(node.origin - level.player.origin);
     dot = VectorDot(forward, normal);
 
     if(dot < Cos(45) && dot > 0 && node_can_reach_spot_infront_of_player(node)) {
@@ -1859,7 +1859,7 @@ setup_boat_for_drive() {
   } else {
     boatrider ent_flag_wait("price_animated_into_boat");
     level notify("stop_animate_price_into_boat");
-    level.price StopAnimScripted();
+    level.price StopanimScripted();
     level.price thread boatrider_think(level.players_boat);
   }
 }
@@ -1885,14 +1885,14 @@ price_ai_mods(price) {
 players_boat() {}
 
 change_target_on_vehicle_spawner(boat_targetname, boat_destination_node) {
-  boat = GetEnt(boat_targetname, "targetname");
+  boat = getEnt(boat_targetname, "targetname");
   destnode = GetVehicleNode(boat_destination_node, "targetname");
   boat.target = destnode.targetname;
 }
 
 change_target_ent_on_vehicle_spawner(heli_targetname, boat_destination_node) {
-  boat = GetEnt(heli_targetname, "targetname");
-  destnode = GetEnt(boat_destination_node, "targetname");
+  boat = getEnt(heli_targetname, "targetname");
+  destnode = getEnt(boat_destination_node, "targetname");
   boat.target = destnode.targetname;
 
   boat.origin = destnode.origin;
@@ -2254,7 +2254,7 @@ animate_price_into_boat() {
   thread teleport_price_on_mount(node);
   node anim_generic_reach(level.price, "price_into_boat");
   level notify("end_teleport_price_on_mount");
-  level.price LinkTo(node);
+  level.price linkTo(node);
 
   level.price delayThread(1.5, ::ent_flag_set, "price_animated_into_boat");
   level.players_boat delayCall(1, ::JoltBody, level.price.origin, .15);
@@ -2265,11 +2265,11 @@ animate_price_into_boat() {
 }
 
 search_the_scrash_site() {
-  GetEnt("damaged_pavelow", "targetname") Hide();
+  getEnt("damaged_pavelow", "targetname") Hide();
 
   flag_wait("end_heli_crashed");
   exploder("heli_fire");
-  damaged_heli = GetEnt("damaged_pavelow", "targetname");
+  damaged_heli = getEnt("damaged_pavelow", "targetname");
   wait .5;
   damaged_heli Show();
   trigger = spawn("trigger_radius", damaged_heli.origin + (0, 0, -100), 0, 670, 600);
@@ -2354,7 +2354,7 @@ trigger_rapids() {
   level.price generic_dialogue_queue("afchase_pri_rapidsahead");
   thread price_anim_loop_on_boat("rapids_loop", "end_the_rapids_loop");
 
-  end_price_crazy = GetEnt("end_price_crazy", "targetname");
+  end_price_crazy = getEnt("end_price_crazy", "targetname");
   end_price_crazy waittill("trigger");
   flag_clear("rapids_head_bobbing");
 

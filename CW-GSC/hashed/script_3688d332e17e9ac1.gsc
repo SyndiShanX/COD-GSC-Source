@@ -27,7 +27,7 @@ function private on_begin(var_59803fa8) {
   callback::on_ai_damage(&on_ai_damage);
   level.var_3c453815 = zm_trial::function_5769f26a(var_59803fa8);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_8677ce00(1);
     player.b_hit = 0;
     player callback::on_weapon_fired(&on_weapon_fired);
@@ -59,7 +59,7 @@ function private on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
   level.var_3c453815 = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_9979ffd6 = undefined;
     player.b_hit = undefined;
     player callback::remove_on_weapon_fired(&on_weapon_fired);

@@ -11,10 +11,10 @@ setup_common() {
 
 setup_player() {
   var_0 = level.start_point + "_start";
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
-    level.player setorigin(var_1.origin);
+    level.player setOrigin(var_1.origin);
 
     if(isDefined(var_1.angles)) {
       level.player setplayerangles(var_1.angles);
@@ -95,8 +95,8 @@ spawn_ally(var_0, var_1) {
 }
 
 spawn_targetname_at_struct_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2.origin = var_3.origin;
@@ -127,7 +127,7 @@ ally_goggle_glow_on() {
   var_2.angles = var_1;
   var_2 setModel("head_cnd_test_goggles_glow");
   waittillframeend;
-  var_2 linkto(self, "j_head");
+  var_2 linkTo(self, "j_head");
   self.glowmodel = var_2;
 }
 
@@ -201,7 +201,7 @@ rotatefan() {
   self endon("death");
 
   for(;;) {
-    self rotateyaw(-360, 1);
+    self rotateYaw(-360, 1);
     wait 1;
   }
 }
@@ -244,7 +244,7 @@ watch_tv_for_damage(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_3 delete();
-    var_4 = getent("building_entry_tv_light", "targetname");
+    var_4 = getEnt("building_entry_tv_light", "targetname");
 
     if(isDefined(var_4)) {
       var_4 setlightintensity(0.01);
@@ -409,7 +409,7 @@ waittill_enemies_above_killed(var_0, var_1) {
 }
 
 death_only_ragdoll() {
-  self stopanimscripted();
+  self stopanimScripted();
   self startragdoll();
 }
 
@@ -424,11 +424,11 @@ generic_prop_raven_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   var_11 = maps\_utility::spawn_anim_model(var_1);
 
   if(isDefined(var_3)) {
-    var_9 = getent(var_3, "targetname");
+    var_9 = getEnt(var_3, "targetname");
   }
 
   if(isDefined(var_4)) {
-    var_10 = getent(var_4, "targetname");
+    var_10 = getEnt(var_4, "targetname");
   }
 
   var_0 maps\_anim::anim_first_frame_solo(var_11, var_2);
@@ -457,11 +457,11 @@ generic_prop_raven_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   common_scripts\utility::waitframe();
 
   if(isDefined(var_3)) {
-    var_9 linkto(var_11, "J_prop_1");
+    var_9 linkTo(var_11, "J_prop_1");
   }
 
   if(isDefined(var_4)) {
-    var_10 linkto(var_11, "J_prop_2");
+    var_10 linkTo(var_11, "J_prop_2");
   }
 
   common_scripts\utility::flag_wait(var_6);
@@ -682,7 +682,7 @@ littlebird_handle_spotlight(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.spotlight = spawnturret("misc_turret", self gettagorigin("tag_flash"), "heli_spotlight");
   self.spotlight setmode("manual");
   self.spotlight setModel("com_blackhawk_spotlight_on_mg_setup");
-  self.spotlight linkto(self, "tag_flash", (0, 0, -7), (-20, 0, 0));
+  self.spotlight linkTo(self, "tag_flash", (0, 0, -7), (-20, 0, 0));
   thread littlebird_spotlight_think(var_0, var_1, var_2, var_3, var_4, var_5);
   thread littlebird_spotlight_death();
 }
@@ -755,7 +755,7 @@ littlebird_spotlight_think(var_0, var_1, var_2, var_3, var_4, var_5) {
   } else {
     var_9 = anglesToForward(self.spotlight.angles);
     var_10 = spawn("script_origin", self.spotlight.origin + var_9 * 500 + (0, 0, -500));
-    var_10 linkto(self);
+    var_10 linkTo(self);
     self.spotlight settargetentity(var_10, var_2 + common_scripts\utility::randomvector(var_3));
     var_8 = 1;
 
@@ -767,7 +767,7 @@ littlebird_spotlight_think(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 send_to_node_and_set_flag_if_specified_when_reached(var_0, var_1) {
-  maps\_utility::set_goalradius(16);
+  maps\_utility::set_goalRadius(16);
   self setgoalnode(var_0);
 
   if(isDefined(var_1)) {
@@ -821,7 +821,7 @@ watch_player_pitch_in_volume(var_0, var_1, var_2, var_3, var_4) {
     level endon(var_4);
   }
 
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
   var_5 endon("death");
   var_6 = 0;
 
@@ -986,7 +986,7 @@ ally_to_magicbullet(var_0, var_1, var_2) {
     while(isDefined(var_5) && isalive(var_5)) {
       var_6 = var_0 gettagorigin("j_head");
       var_7 = var_5 gettagorigin("j_head");
-      var_8 = vectornormalize(var_7 - var_6);
+      var_8 = vectorNormalize(var_7 - var_6);
       var_9 = var_6 + var_8 * (distance(var_7, var_6) - 10);
       var_5.health = 1;
       magicbullet(var_0.weapon, var_9, var_7);
@@ -1304,7 +1304,7 @@ launch_rope(var_0, var_1, var_2, var_3) {
 }
 
 delete_building_glow() {
-  var_0 = getent("building_glow", "targetname");
+  var_0 = getEnt("building_glow", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
@@ -1348,9 +1348,9 @@ lerp_entity_to_position_accurate(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_model", var_0.origin);
   var_4 setModel("tag_origin");
   var_4.angles = var_0.angles;
-  var_0 linkto(var_4, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_4 moveto(var_1, var_3);
-  var_4 rotateto(var_2, var_3);
+  var_0 linkTo(var_4, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_4 moveTo(var_1, var_3);
+  var_4 rotateTo(var_2, var_3);
   wait(var_3);
   var_4 delete();
 }
@@ -1429,7 +1429,7 @@ rappel_get_plane_normal_left(var_0) {
     var_1 = rappel_get_angle_facing_wall("combat");
     var_2 = var_1 + 180;
     var_3 = (0, var_2, 0);
-    var_4 = vectornormalize(anglestoright(var_3));
+    var_4 = vectorNormalize(anglestoright(var_3));
     return var_4;
   } else
     return (-1, 0, 0);
@@ -1440,7 +1440,7 @@ rappel_get_plane_normal_out(var_0) {
     var_1 = rappel_get_angle_facing_wall("combat");
     var_2 = var_1 + 180;
     var_3 = (0, var_2, 0);
-    var_4 = vectornormalize(anglesToForward(var_3));
+    var_4 = vectorNormalize(anglesToForward(var_3));
     return var_4;
   } else
     return (0, -1, 0);
@@ -1465,7 +1465,7 @@ waittill_player_looking_at_ent(var_0, var_1, var_2) {
   var_3 = gettime() + var_1 * 1000;
 
   while(gettime() < var_3) {
-    var_4 = vectornormalize(var_0.origin - level.player.origin);
+    var_4 = vectorNormalize(var_0.origin - level.player.origin);
     var_5 = get_rappel_player_angles();
     var_6 = anglesToForward(var_5);
     var_7 = vectordot(var_6, var_4);
@@ -1521,7 +1521,7 @@ player_flap_sleeves_setup(var_0) {
     self.sleeve_flap_l linktoplayerview(self, "J_WristTwist_LE", (0, 0, 0), (0, 0, 0), 1);
     self.sleeve_flap_l.is_view_linked = 1;
   } else
-    self.sleeve_flap_l linkto(self, "J_WristTwist_LE", (0, 0, 0), (0, 0, 0));
+    self.sleeve_flap_l linkTo(self, "J_WristTwist_LE", (0, 0, 0), (0, 0, 0));
 
   self.sleeve_flap_r = spawn("script_model", self.origin);
   self.sleeve_flap_r.angles = self.angles;
@@ -1532,7 +1532,7 @@ player_flap_sleeves_setup(var_0) {
     self.sleeve_flap_r linktoplayerview(self, "J_WristTwist_RI", (0, 0, 0), (0, 0, 0), 1);
     self.sleeve_flap_r.is_view_linked = 1;
   } else
-    self.sleeve_flap_r linkto(self, "J_WristTwist_RI", (0, 0, 0), (0, 0, 0));
+    self.sleeve_flap_r linkTo(self, "J_WristTwist_RI", (0, 0, 0), (0, 0, 0));
 
   if(!var_0) {
     thread player_hide_flaps_death();
@@ -1775,7 +1775,7 @@ demo_setup_allies(var_0) {
   wait(var_0);
 
   foreach(var_2 in level.allies) {
-    var_2 stopanimscripted();
+    var_2 stopanimScripted();
   }
 
   if(isDefined(level.rorke_inverted_kill_knife)) {
@@ -1884,7 +1884,7 @@ custom_balcony_death_animscript() {
 
 translate_off_edge() {
   wait 1;
-  var_0 = vectornormalize(anglesToForward(self.angles));
+  var_0 = vectorNormalize(anglesToForward(self.angles));
   var_1 = -1 * var_0;
   self animmode("nogravity");
   var_2 = 20;
@@ -1981,7 +1981,7 @@ dof_process_ads_rooftop() {
     var_12 = var_11;
   }
 
-  var_13 = vectornormalize(anglesToForward(var_12));
+  var_13 = vectorNormalize(anglesToForward(var_12));
   var_14 = bulletTrace(var_10, var_10 + var_13 * var_1, 1, self, 1, 0, 0, 0, 0);
 
   if(var_14["fraction"] == 1) {

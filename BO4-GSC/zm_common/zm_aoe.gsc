@@ -233,7 +233,7 @@ function_e5950b1e(type) {
 function_bea2e288(type) {
   var_46f1b5eb = function_e969e75(type);
   assert(isDefined(var_46f1b5eb));
-  players = getplayers();
+  players = getPlayers();
 
   foreach(aoe in var_46f1b5eb.var_9a08bb02) {
     foreach(player in players) {

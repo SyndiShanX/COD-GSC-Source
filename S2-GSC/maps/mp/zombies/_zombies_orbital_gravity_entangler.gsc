@@ -123,7 +123,7 @@ rotate_me(param_00) {
       return;
     }
 
-    self rotateyaw(var_01 * 180, 1);
+    self rotateYaw(var_01 * 180, 1);
     wait(1);
   }
 }
@@ -195,8 +195,8 @@ watch_for_grenades_and_projectiles(param_00) {
 move_no_gravity(param_00, param_01) {
   var_02 = self;
   var_02 endon("entitydeleted");
-  var_03 = param_00 getEye() + 10000 * vectornormalize(anglesToForward(param_00 geteyeangles()));
-  var_04 = param_00 getEye() + 32 * vectornormalize(anglesToForward(param_00 geteyeangles()));
+  var_03 = param_00 getEye() + 10000 * vectorNormalize(anglesToForward(param_00 geteyeangles()));
+  var_04 = param_00 getEye() + 32 * vectorNormalize(anglesToForward(param_00 geteyeangles()));
   var_05 = bulletTrace(var_04, var_03, 0);
   var_06 = var_05["position"];
   if(!isDefined(var_06)) {
@@ -204,7 +204,7 @@ move_no_gravity(param_00, param_01) {
   }
 
   var_07 = distance(param_00 getEye(), var_06) / param_01;
-  var_02 moveto(var_06, var_07);
+  var_02 moveTo(var_06, var_07);
   wait(var_07);
   var_02.forcedetonate = 1;
 }

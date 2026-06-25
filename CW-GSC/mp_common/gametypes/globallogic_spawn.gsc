@@ -614,7 +614,7 @@ function function_3ee5119e() {
 
   if(self.pers[#"team"] != #"spectator" && level.spectatetype == 4 && self.spectatorteam == #"invalid") {
     spectating::set_permissions();
-    team_players = getplayers(self.team);
+    team_players = getPlayers(self.team);
     player = spectating::function_327e6270(team_players, &spectating::spectator_team, #"invalid");
     assert(isDefined(player));
 
@@ -780,7 +780,7 @@ function spawninterroundintermission() {
   self.friendlydamage = undefined;
   self ghost();
   self globallogic_defaults::default_onspawnintermission();
-  self setorigin(self.origin);
+  self setOrigin(self.origin);
   self setplayerangles(self.angles);
   self clientfield::set_to_player("player_dof_settings", 2);
 }
@@ -980,7 +980,7 @@ function waitandspawnclient(timealreadypassed) {
   if(util::isfirstround()) {
     self namespace_66d6aa44::function_a8f822ee();
 
-    while(self isplayinganimscripted()) {
+    while(self isplayinganimScripted()) {
       waitframe(1);
     }
   } else {

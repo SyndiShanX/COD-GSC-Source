@@ -459,13 +459,13 @@ func_B6AA() {
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1.var_C6EA = var_0.origin;
 
   if(isDefined(var_1.target)) {
     if(!isDefined(level.var_B6AB) || !isDefined(level.var_B6AB[var_1.target])) {
       level.var_B6AB[var_1.target] = 0;
-      getent(var_1.target, "targetname") thread func_B6AB();
+      getEnt(var_1.target, "targetname") thread func_B6AB();
     }
 
     var_2 = 1;
@@ -611,7 +611,7 @@ func_B6A4(var_0, var_1) {
       var_7 = var_2.origin;
 
       if(distance(var_7, var_5[self.var_86EA].origin) > var_8) {
-        var_12 = vectornormalize(var_5[self.var_86EA].origin - var_7);
+        var_12 = vectorNormalize(var_5[self.var_86EA].origin - var_7);
         var_12 = var_12 * var_8;
         var_7 = var_7 + var_12;
       } else {
@@ -660,7 +660,7 @@ func_B6A4(var_0, var_1) {
         var_7 = var_2.origin;
 
         if(distance(var_7, var_5[self.var_86EA].origin) > var_8) {
-          var_12 = vectornormalize(var_5[self.var_86EA].origin - var_7);
+          var_12 = vectorNormalize(var_5[self.var_86EA].origin - var_7);
           var_12 = var_12 * var_8;
           var_7 = var_7 + var_12;
         } else {
@@ -782,7 +782,7 @@ func_116C2(var_0, var_1) {
 }
 
 func_12A42(var_0) {
-  var_1 = getent(var_0.var_263A, "targetname");
+  var_1 = getEnt(var_0.var_263A, "targetname");
   var_2 = 0.5;
 
   if(isDefined(var_1.var_EEF6)) {
@@ -1301,7 +1301,7 @@ func_1A30(var_0, var_1) {
 
   for(var_3 = var_1.var_2FAE.size - 3; var_3 >= 0; var_3--) {
     var_4 = var_1.var_2FAE[var_3];
-    var_5 = vectornormalize(var_4 - var_0.origin);
+    var_5 = vectorNormalize(var_4 - var_0.origin);
     var_6 = vectordot(var_2, var_5);
 
     if(var_6 < 0.75) {
@@ -1416,7 +1416,7 @@ func_E826(var_0) {
     _playworldsound("weapon_setup", self.origin);
   }
 
-  self animscripted("setup_done", var_0.origin, var_0.angles, var_2);
+  self animScripted("setup_done", var_0.origin, var_0.angles, var_2);
   func_E2DB();
   self waittillmatch("setup_done", "end");
   var_0 notify("restore_default_drop_pitch");

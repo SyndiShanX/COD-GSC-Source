@@ -919,7 +919,7 @@ _id_FD2E(var_0) {
 
   if(_id_06BD::_id_240F() && isDefined(self._id_0B67._id_03C8)) {
     var_4 = self _meth_8561();
-    var_5 = vectornormalize(self._id_0B67._id_03C8 - self getEye());
+    var_5 = vectorNormalize(self._id_0B67._id_03C8 - self getEye());
     var_6 = vectordot(var_4, var_5);
 
     if(var_6 < 0.906) {
@@ -1072,7 +1072,7 @@ _id_F465(var_0) {
     }
     if(issubstr(var_7, "BULLET")) {
       var_13 = anglesToForward(var_4 gettagangles("tag_flash"));
-      var_14 = vectornormalize(self getEye() - var_4 gettagorigin("tag_flash"));
+      var_14 = vectorNormalize(self getEye() - var_4 gettagorigin("tag_flash"));
 
       if(vectordot(var_13, var_14) < 0.9) {
         continue;
@@ -1114,7 +1114,7 @@ axis_damage_shield_watcher() {
     var_6 = var_1;
     var_7 = var_2 getEye();
     var_8 = var_3 getEye();
-    var_9 = vectornormalize(var_7 - var_8);
+    var_9 = vectorNormalize(var_7 - var_8);
     var_10 = anglesToForward(var_3 getplayerangles());
     var_11 = vectordot(var_9, var_10);
     var_12 = 0.819;

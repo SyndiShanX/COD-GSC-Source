@@ -111,7 +111,7 @@ func_85F6(var_0, var_1) {
 }
 
 func_85F8(var_0, var_1) {
-  var_2 = vectornormalize(var_1.origin - var_0.origin) * (1, 1, 0);
+  var_2 = vectorNormalize(var_1.origin - var_0.origin) * (1, 1, 0);
   var_1 setvelocity(var_2 * 800);
   var_0 playSound("grey_force_push");
   if(isPlayer(var_1)) {
@@ -391,7 +391,7 @@ func_CD95(var_0, var_1) {
   var_2 setModel("tag_origin");
   wait(0.2);
   playFXOnTag(level._effect["zombie_grey_teleport_trail"], var_2, "tag_origin");
-  var_2 moveto(var_1.origin + (0, 0, 50), 0.8, 0.8);
+  var_2 moveTo(var_1.origin + (0, 0, 50), 0.8, 0.8);
   var_2 waittill("movedone");
   var_2 delete();
 }

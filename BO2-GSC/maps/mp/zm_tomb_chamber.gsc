@@ -28,7 +28,7 @@ inits() {
   wait 3.0;
 
   foreach(e_wall in a_walls) {
-    e_wall moveto(e_wall.up_origin, 0.05);
+    e_wall moveTo(e_wall.up_origin, 0.05);
     e_wall connectpaths();
   }
 
@@ -79,7 +79,7 @@ chamber_change_walls(n_element) {
   }
   e_current_wall = undefined;
   e_new_wall = undefined;
-  playsoundatposition("zmb_chamber_wallchange", (10342, -7921, -272));
+  playSoundAtPosition("zmb_chamber_wallchange", (10342, -7921, -272));
   a_walls = getEntArray("chamber_wall", "script_noteworthy");
 
   foreach(e_wall in a_walls) {
@@ -97,7 +97,7 @@ chamber_change_walls(n_element) {
 }
 
 is_chamber_occupied() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(e_player in a_players) {
     if(is_point_in_chamber(e_player.origin)) {
@@ -110,7 +110,7 @@ is_chamber_occupied() {
 
 is_point_in_chamber(v_origin) {
   if(!isDefined(level.s_chamber_center)) {
-    level.s_chamber_center = getstruct("chamber_center", "targetname");
+    level.s_chamber_center = getStruct("chamber_center", "targetname");
     level.s_chamber_center.radius_sq = level.s_chamber_center.script_float * level.s_chamber_center.script_float;
   }
 
@@ -144,17 +144,17 @@ chamber_wall_change_randomly() {
 }
 
 move_wall_up() {
-  self moveto(self.up_origin, 1);
+  self moveTo(self.up_origin, 1);
   self waittill("movedone");
   self connectpaths();
 }
 
 move_wall_down() {
-  self moveto(self.down_origin, 1);
+  self moveTo(self.down_origin, 1);
   self waittill("movedone");
   rumble_players_in_chamber(2, 0.1);
   self thread chamber_wall_dust();
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 random_shuffle(a_items, item) {
@@ -183,7 +183,7 @@ tomb_chamber_find_exit_point() {
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
 
@@ -225,7 +225,7 @@ chamber_zombies_find_poi() {
 }
 
 tomb_is_valid_target_in_chamber() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(e_player in a_players) {
     if(e_player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {

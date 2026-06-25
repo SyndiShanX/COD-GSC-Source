@@ -252,7 +252,7 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
       continue;
     }
 
-    var_15 = vectornormalize(var_14.origin - self.origin);
+    var_15 = vectorNormalize(var_14.origin - self.origin);
     var_10 = vectordot(var_7, var_15);
     for(var_11 = 0; var_11 < var_12.size; var_11++) {
       if(var_10 > var_12[var_11]) {

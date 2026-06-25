@@ -139,7 +139,7 @@ enemy_garage_jumper(var_0) {
   self.ignoreme = 1;
 
   if(isDefined(var_0)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
     var_1 notsolid();
     var_1 connectpaths();
   }
@@ -147,9 +147,9 @@ enemy_garage_jumper(var_0) {
   self waittill("goal");
 
   if(isDefined(var_0)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
     var_1 solid();
-    var_1 disconnectpaths();
+    var_1 disconnectPaths();
   }
 
   self.allowdeath = 1;
@@ -181,7 +181,7 @@ track_ai() {
 }
 
 garage_wave2_trig() {
-  var_0 = getent("garage_wave2_trig", "targetname");
+  var_0 = getEnt("garage_wave2_trig", "targetname");
   var_0 waittill("trigger");
   maps\flood_util::jkuprint("g: 2");
   var_1 = getEntArray("garage_wave2_ai", "targetname");
@@ -193,7 +193,7 @@ garage_wave2_trig() {
 }
 
 garage_wave3_trig() {
-  var_0 = getent("garage_wave3_trig", "targetname");
+  var_0 = getEnt("garage_wave3_trig", "targetname");
   var_0 waittill("trigger");
   maps\flood_util::jkuprint("g: 3");
   var_1 = getEntArray("garage_wave2above_ai", "targetname");
@@ -206,7 +206,7 @@ garage_wave3_trig() {
 }
 
 garage_wave4_trig() {
-  var_0 = getent("garage_wave4_trig", "targetname");
+  var_0 = getEnt("garage_wave4_trig", "targetname");
   var_0 waittill("trigger");
   maps\flood_util::jkuprint("g: 4");
   var_1 = getEntArray("garage_wave4_ai", "targetname");
@@ -230,7 +230,7 @@ pause_ally_suppression(var_0) {
 }
 
 garage_ally_move476_jumpers() {
-  var_0 = getent("garage_ally_move476", "targetname");
+  var_0 = getEnt("garage_ally_move476", "targetname");
   var_0 waittill("trigger");
   var_1 = getEntArray("garage_wave1_ai_jumper1", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, ::enemy_garage_jumper, "garage_jumper_clip_hack1");
@@ -241,7 +241,7 @@ garage_ally_move476_jumpers() {
 }
 
 garage_ally_move476() {
-  var_0 = getent("garage_ally_move476", "targetname");
+  var_0 = getEnt("garage_ally_move476", "targetname");
   var_0 endon("death");
 
   for(;;) {
@@ -263,7 +263,7 @@ garage_ally_move476() {
 }
 
 garage_ally_move477() {
-  var_0 = getent("garage_ally_move477", "targetname");
+  var_0 = getEnt("garage_ally_move477", "targetname");
   var_0 endon("death");
 
   for(;;) {
@@ -285,7 +285,7 @@ garage_ally_move477() {
 }
 
 garage_ally_move478() {
-  var_0 = getent("garage_ally_move478", "targetname");
+  var_0 = getEnt("garage_ally_move478", "targetname");
   var_0 endon("death");
 
   for(;;) {
@@ -309,7 +309,7 @@ garage_ally_move478() {
 }
 
 garage_ally_move479() {
-  var_0 = getent("garage_ally_move479", "targetname");
+  var_0 = getEnt("garage_ally_move479", "targetname");
   var_0 endon("death");
 
   for(;;) {
@@ -376,11 +376,11 @@ floater_logic(var_0) {
       }
 
       for(;;) {
-        self moveto(self.origin - (0, 0, 1), 1, 0.2, 0.2);
-        self rotateto(self.angles - (0, 0, 25), 2);
+        self moveTo(self.origin - (0, 0, 1), 1, 0.2, 0.2);
+        self rotateTo(self.angles - (0, 0, 25), 2);
         wait 1;
-        self moveto(self.origin + (0, 0, 1), 1, 0.2, 0.2);
-        self rotateto(self.angles - (0, 0, 25), 2);
+        self moveTo(self.origin + (0, 0, 1), 1, 0.2, 0.2);
+        self rotateTo(self.angles - (0, 0, 25), 2);
         wait 1;
       }
     case "bob":
@@ -388,11 +388,11 @@ floater_logic(var_0) {
         var_1 = 2;
         var_2 = 1;
         var_3 = 1.25;
-        self moveto(self.origin - (0, 0, var_1), var_3, 0.2, 0.2);
-        self rotateto(self.angles - (var_2, 0, var_2), var_3, 0.4, 0.4);
+        self moveTo(self.origin - (0, 0, var_1), var_3, 0.2, 0.2);
+        self rotateTo(self.angles - (var_2, 0, var_2), var_3, 0.4, 0.4);
         wait(var_3);
-        self moveto(self.origin + (0, 0, var_1), var_3, 0.2, 0.2);
-        self rotateto(self.angles + (var_2, 0, var_2), var_3, 0.4, 0.4);
+        self moveTo(self.origin + (0, 0, var_1), var_3, 0.2, 0.2);
+        self rotateTo(self.angles + (var_2, 0, var_2), var_3, 0.4, 0.4);
         wait(var_3);
       }
     case "car_bob":
@@ -404,11 +404,11 @@ floater_logic(var_0) {
         var_3 = 4;
 
         for(var_4 = 0; var_4 < 2; var_4++) {
-          self moveto(self.origin - (0, 0, var_1), var_3, var_3 * 0.4, var_3 * 0.4);
-          self rotateto(self.angles - (var_2, 0, var_2), var_3, var_3 * 0.4, var_3 * 0.4);
+          self moveTo(self.origin - (0, 0, var_1), var_3, var_3 * 0.4, var_3 * 0.4);
+          self rotateTo(self.angles - (var_2, 0, var_2), var_3, var_3 * 0.4, var_3 * 0.4);
           wait(var_3);
-          self moveto(self.origin + (0, 0, var_1), var_3, var_3 * 0.4, var_3 * 0.4);
-          self rotateto(self.angles + (var_2, 0, var_2), var_3, var_3 * 0.4, var_3 * 0.4);
+          self moveTo(self.origin + (0, 0, var_1), var_3, var_3 * 0.4, var_3 * 0.4);
+          self rotateTo(self.angles + (var_2, 0, var_2), var_3, var_3 * 0.4, var_3 * 0.4);
           wait(var_3);
         }
       }
@@ -419,8 +419,8 @@ car_sink_logic() {
   maps\_utility::ent_flag_init("destroyed");
 
   if(isDefined(self.script_noteworthy)) {
-    var_0 = getent(self.script_noteworthy + "_destroyed", "targetname");
-    var_1 = getent(self.script_noteworthy + "_notdestroyed", "targetname");
+    var_0 = getEnt(self.script_noteworthy + "_destroyed", "targetname");
+    var_1 = getEnt(self.script_noteworthy + "_notdestroyed", "targetname");
     var_0 hide();
     var_0 notsolid();
     var_1 hide();
@@ -439,11 +439,11 @@ car_sink_logic() {
   wait 1.5;
 
   if(isDefined(self.script_noteworthy)) {
-    var_0 = getent(self.script_noteworthy + "_destroyed", "targetname");
-    var_1 = getent(self.script_noteworthy + "_notdestroyed", "targetname");
+    var_0 = getEnt(self.script_noteworthy + "_destroyed", "targetname");
+    var_1 = getEnt(self.script_noteworthy + "_notdestroyed", "targetname");
     var_1 show();
     var_1 solid();
-    var_1 disconnectpaths();
+    var_1 disconnectPaths();
     var_1 hide();
     var_1 notsolid();
     var_0 connectpaths();
@@ -466,7 +466,7 @@ door_open() {
   var_2 = 0.3;
 
   foreach(var_4 in var_0) {
-    var_4 rotateyaw(130, var_2, 0, 0.2);
+    var_4 rotateYaw(130, var_2, 0, 0.2);
 
     if(var_4.classname == "script_brushmodel") {
       var_4 connectpaths();
@@ -474,7 +474,7 @@ door_open() {
   }
 
   foreach(var_4 in var_1) {
-    var_4 rotateyaw(-130, var_2, 0, 0.2);
+    var_4 rotateYaw(-130, var_2, 0, 0.2);
 
     if(var_4.classname == "script_brushmodel") {
       var_4 connectpaths();
@@ -486,16 +486,16 @@ door_open() {
 }
 
 garage_teleport_allies_off_debrisbridge() {
-  var_0 = getent("garage_ally_teleport", "targetname");
-  var_1 = common_scripts\utility::getstruct("garage_ally0_teleport", "targetname");
-  var_2 = common_scripts\utility::getstruct("garage_ally1_teleport", "targetname");
-  var_3 = common_scripts\utility::getstruct("garage_ally2_teleport", "targetname");
+  var_0 = getEnt("garage_ally_teleport", "targetname");
+  var_1 = common_scripts\utility::getStruct("garage_ally0_teleport", "targetname");
+  var_2 = common_scripts\utility::getStruct("garage_ally1_teleport", "targetname");
+  var_3 = common_scripts\utility::getStruct("garage_ally2_teleport", "targetname");
   var_0 waittill("trigger");
 
   if(isDefined(level.allies[0].ondebrisbridge) && level.allies[0].ondebrisbridge == 1) {
     maps\flood_util::jkuprint("teleporting ally 0");
     level.allies[0].garage_teleported = 1;
-    level.allies[0] stopanimscripted();
+    level.allies[0] stopanimScripted();
     level.allies[0] maps\flood_anim::vignette_actor_aware_everything();
     level.allies[0].ondebrisbridge = 0;
     level.allies[0] forceteleport(var_1.origin, var_1.angles);
@@ -513,7 +513,7 @@ garage_teleport_allies_off_debrisbridge() {
   if(isDefined(level.allies[1].ondebrisbridge) && level.allies[1].ondebrisbridge == 1) {
     maps\flood_util::jkuprint("teleporting ally 1");
     level.allies[1].garage_teleported = 1;
-    level.allies[1] stopanimscripted();
+    level.allies[1] stopanimScripted();
     level.allies[1] maps\flood_anim::vignette_actor_aware_everything();
     level.allies[1].ondebrisbridge = 0;
     level.allies[1] forceteleport(var_2.origin, var_2.angles);
@@ -531,7 +531,7 @@ garage_teleport_allies_off_debrisbridge() {
   if(isDefined(level.allies[2].ondebrisbridge) && level.allies[2].ondebrisbridge == 1) {
     maps\flood_util::jkuprint("teleporting ally 2");
     level.allies[2].garage_teleported = 1;
-    level.allies[2] stopanimscripted();
+    level.allies[2] stopanimScripted();
     level.allies[2] maps\flood_anim::vignette_actor_aware_everything();
     level.allies[2].ondebrisbridge = 0;
     level.allies[2] forceteleport(var_3.origin, var_3.angles);

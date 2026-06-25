@@ -89,7 +89,7 @@ main() {
   }
 
   level.zm_traversal_override = ::zm_traversal_override;
-  level.the_bus = getent("the_bus", "targetname");
+  level.the_bus = getEnt("the_bus", "targetname");
   level thread init_bus();
   level thread maps\mp\zm_transit_sq::start_transit_sidequest();
   level thread inert_zombies_init();
@@ -162,7 +162,7 @@ zm_traversal_override(traversealias) {
 
     if(chance != 0 && randomint(100) <= chance) {
       if(isDefined(sndalias) && randomint(100) <= sndchance) {
-        playsoundatposition(sndalias, self.origin);
+        playSoundAtPosition(sndalias, self.origin);
       }
 
       traversealias = traversealias + suffix;
@@ -197,8 +197,8 @@ transit_vault_breach() {
     self.damage_state = 0;
 
     if(isDefined(self.target)) {
-      clip = getent(self.target, "targetname");
-      clip linkto(self);
+      clip = getEnt(self.target, "targetname");
+      clip linkTo(self);
       self.clip = clip;
     }
 
@@ -243,7 +243,7 @@ vault_breach_think() {
       }
 
       wait 1;
-      playsoundatposition("zmb_cha_ching_loud", self.origin);
+      playSoundAtPosition("zmb_cha_ching_loud", self.origin);
       return;
     }
   }
@@ -268,14 +268,14 @@ bunkerdoorrotate(open, time) {
 
   if(isDefined(self.script_angles)) {
     self notsolid();
-    self rotateto(self.script_angles, time, 0, 0);
+    self rotateTo(self.script_angles, time, 0, 0);
     self thread maps\mp\zombies\_zm_blockers::door_solid_thread();
   }
 }
 
 collapsing_bridge_init() {
   time = 1.5;
-  trig = getent("bridge_trig", "targetname");
+  trig = getEnt("bridge_trig", "targetname");
 
   if(!isDefined(trig)) {
     return;
@@ -298,7 +298,7 @@ collapsing_bridge_init() {
 
     earthquake(randomfloatrange(0.5, 1), 1.5, bridge[i].origin, 1000);
     exploder(150);
-    bridge[i] rotateto(rot_angle, time, 0, 0);
+    bridge[i] rotateTo(rot_angle, time, 0, 0);
   }
 
   wait 1;
@@ -365,9 +365,9 @@ bus_roof_damage() {
 }
 
 diner_hatch_access() {
-  diner_hatch = getent("diner_hatch", "targetname");
-  diner_hatch_col = getent("diner_hatch_collision", "targetname");
-  diner_hatch_mantle = getent("diner_hatch_mantle", "targetname");
+  diner_hatch = getEnt("diner_hatch", "targetname");
+  diner_hatch_col = getEnt("diner_hatch_collision", "targetname");
+  diner_hatch_mantle = getEnt("diner_hatch_mantle", "targetname");
 
   if(!isDefined(diner_hatch) || !isDefined(diner_hatch_col)) {
     return;

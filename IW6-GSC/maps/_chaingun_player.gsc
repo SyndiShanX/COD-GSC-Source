@@ -144,8 +144,8 @@ handle_dismount() {
     var_5 = spawn("script_origin", (0, 0, 0));
     var_5.origin = self gettagorigin("tag_ground");
     var_5.angles = var_0;
-    level.player playerlinkto(var_5, "", 1, 0, 0, 0, 0, 0);
-    var_5 moveto(self.mount_pos, var_4, var_4 * 0.25);
+    level.player playerlinkTo(var_5, "", 1, 0, 0, 0, 0, 0);
+    var_5 moveTo(self.mount_pos, var_4, var_4 * 0.25);
     wait(var_4 + 0.1);
     var_5 delete();
 
@@ -183,7 +183,7 @@ player_use_chaingun_with_viewmodel(var_0, var_1, var_2) {
   self.mount_pos = var_1.origin;
   var_0.player_rig = maps\_utility::spawn_anim_model("turret_player_rig");
   var_0.player_rig.animname = "turret_player_rig";
-  var_0.player_rig linkto(var_0, "tag_ground", (0, 0, 0), (0, 0, 0));
+  var_0.player_rig linkTo(var_0, "tag_ground", (0, 0, 0), (0, 0, 0));
   var_0.player_rig hide();
   var_0.player_rig common_scripts\utility::delaycall(0.25, ::show);
   var_0 maps\_anim::anim_first_frame_solo(var_0.player_rig, "chaingun_hands_geton", "tag_player");

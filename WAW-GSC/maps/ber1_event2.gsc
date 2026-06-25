@@ -54,7 +54,7 @@ street_battle() {
   level thread spawn_street_pickup_weapons();
   level thread maps\ber1_asylum::setup_crows();
 
-  bathroom_mg = getent("bathroom_mg", "script_noteworthy");
+  bathroom_mg = getEnt("bathroom_mg", "script_noteworthy");
   bathroom_mg setturretignoregoals(true);
 
   maps\ber1_asylum::main();
@@ -102,7 +102,7 @@ street_first_floodspawners() {
 monitor_killspawner_151() {
   trigger_wait("trig_killspawner_151", "targetname");
 
-  spawn_trig = getent("trig_spawn_street_guys_late_2", "script_noteworthy");
+  spawn_trig = getEnt("trig_spawn_street_guys_late_2", "script_noteworthy");
   if(isDefined(spawn_trig)) {
     spawn_trig delete();
   }
@@ -115,19 +115,19 @@ roof_shreks() {
 
   simple_spawn("street_asylum_roof_shreks", ::street_asylum_roof_shreks_strat);
 
-  shrek_target = getent("shrek_1_orig", "targetname");
+  shrek_target = getEnt("shrek_1_orig", "targetname");
   shrek_target.health = 1000000;
   level thread flame_move_target(shrek_target, 6);
 
-  shrek_target = getent("shrek_2_orig", "targetname");
+  shrek_target = getEnt("shrek_2_orig", "targetname");
   shrek_target.health = 1000000;
   level thread flame_move_target(shrek_target, 6);
 
-  shrek_target = getent("shrek_3_orig", "targetname");
+  shrek_target = getEnt("shrek_3_orig", "targetname");
   shrek_target.health = 1000000;
   level thread flame_move_target(shrek_target, 6);
 
-  shrek_target = getent("shrek_4_orig", "targetname");
+  shrek_target = getEnt("shrek_4_orig", "targetname");
   shrek_target.health = 1000000;
   level thread flame_move_target(shrek_target, 6);
 }
@@ -142,10 +142,10 @@ street_asylum_roof_shreks_strat() {
   self.ignoresuppression = 1;
 
   origins = [];
-  origins[origins.size] = getent("shrek_1_orig", "targetname");
-  origins[origins.size] = getent("shrek_2_orig", "targetname");
-  origins[origins.size] = getent("shrek_3_orig", "targetname");
-  origins[origins.size] = getent("shrek_4_orig", "targetname");
+  origins[origins.size] = getEnt("shrek_1_orig", "targetname");
+  origins[origins.size] = getEnt("shrek_2_orig", "targetname");
+  origins[origins.size] = getEnt("shrek_3_orig", "targetname");
+  origins[origins.size] = getEnt("shrek_4_orig", "targetname");
 
   self.a.rockets = 7;
 
@@ -183,12 +183,12 @@ chain_near_asylum() {
   waittill_aigroupcount("last_street_ai", 3);
   waittill_aigroupcleared("last_street_mg");
 
-  killspawner_trig = getent("trig_killspawner_164", "targetname");
+  killspawner_trig = getEnt("trig_killspawner_164", "targetname");
   if(isDefined(killspawner_trig)) {
     killspawner_trig notify("trigger");
   }
 
-  color_trig = getent("chain_near_asylum", "targetname");
+  color_trig = getEnt("chain_near_asylum", "targetname");
   if(isDefined(color_trig)) {
     quick_text("chain_near_asylum");
     color_trig notify("trigger");
@@ -202,13 +202,13 @@ chain_street_right_1() {
 
   wait(randomfloatrange(0.75, 1.75));
 
-  color_trig = getent("chain_street_1a", "targetname");
+  color_trig = getEnt("chain_street_1a", "targetname");
   if(isDefined(color_trig)) {
     quick_text("chain_street_1a");
     color_trig notify("trigger");
   }
 
-  spawn_trig = getent("trig_roof_shreks", "targetname");
+  spawn_trig = getEnt("trig_roof_shreks", "targetname");
   if(isDefined(spawn_trig)) {
     spawn_trig notify("trigger");
   }
@@ -217,20 +217,20 @@ chain_street_right_1() {
 
   wait(randomfloatrange(0.75, 1.75));
 
-  color_trig = getent("chain_street_right_1", "targetname");
+  color_trig = getEnt("chain_street_right_1", "targetname");
   if(isDefined(color_trig)) {
     quick_text("chain_street_right_1");
     color_trig notify("trigger");
   }
 
-  spawn_trig = getent("trig_spawn_street_guys_late", "script_noteworthy");
+  spawn_trig = getEnt("trig_spawn_street_guys_late", "script_noteworthy");
   if(isDefined(spawn_trig)) {
     spawn_trig notify("trigger");
   }
 
   wait(7);
 
-  spawn_trig = getent("trig_spawn_street_guys_late_2", "script_noteworthy");
+  spawn_trig = getEnt("trig_spawn_street_guys_late_2", "script_noteworthy");
   if(isDefined(spawn_trig)) {
     spawn_trig notify("trigger");
   }
@@ -244,17 +244,17 @@ chain_street_right_2() {
 
   wait(randomfloatrange(0.75, 1.75));
 
-  color_trig = getent("chain_street_2", "targetname");
+  color_trig = getEnt("chain_street_2", "targetname");
   if(isDefined(color_trig)) {
     quick_text("chain_street_2");
     color_trig notify("trigger");
   }
 
-  old_color_trig = getent("chain_street_right_1", "targetname");
+  old_color_trig = getEnt("chain_street_right_1", "targetname");
   if(isDefined(old_color_trig)) {
     old_color_trig delete();
   }
-  old_color_trig = getent("chain_street_left_1", "targetname");
+  old_color_trig = getEnt("chain_street_left_1", "targetname");
   if(isDefined(old_color_trig)) {
     old_color_trig delete();
   }
@@ -269,18 +269,18 @@ chain_street_left_1() {
 
   wait(randomfloatrange(0.75, 1.75));
 
-  color_trig = getent("chain_street_left_1", "targetname");
+  color_trig = getEnt("chain_street_left_1", "targetname");
   if(isDefined(color_trig)) {
     quick_text("chain_street_left_1");
     color_trig notify("trigger");
   }
 
-  spawn_trig = getent("trig_spawn_street_guys_left_1", "script_noteworthy");
+  spawn_trig = getEnt("trig_spawn_street_guys_left_1", "script_noteworthy");
   if(isDefined(spawn_trig)) {
     spawn_trig notify("trigger");
   }
 
-  bookcase_trig = getent("trig_close_to_bookcase", "targetname");
+  bookcase_trig = getEnt("trig_close_to_bookcase", "targetname");
   if(isDefined(bookcase_trig)) {
     bookcase_trig notify("trigger");
   }
@@ -297,14 +297,14 @@ chain_street_left_2() {
 
   quick_text("chain_street_left_2");
 
-  spawn_trig = getent("trig_asylum_entryway_spawners", "script_noteworthy");
+  spawn_trig = getEnt("trig_asylum_entryway_spawners", "script_noteworthy");
   if(isDefined(spawn_trig)) {
     spawn_trig notify("trigger");
   }
 
   waittill_aigroupcount("last_street_ai", 8);
 
-  spawn_trig = getent("trig_last_yard_floodspawners", "script_noteworthy");
+  spawn_trig = getEnt("trig_last_yard_floodspawners", "script_noteworthy");
   if(isDefined(spawn_trig)) {
     spawn_trig notify("trigger");
   }
@@ -329,10 +329,10 @@ pub_bookcase_strat() {
   self.goalradius = 30;
   self.animname = "street";
 
-  anim_node = getent("orig_pub_bookcase", "targetname");
+  anim_node = getEnt("orig_pub_bookcase", "targetname");
   anim_reach_solo(self, "bookcase_push", undefined, anim_node);
 
-  bookcase_clip_brush = getent("pub_bookcase_brush", "targetname");
+  bookcase_clip_brush = getEnt("pub_bookcase_brush", "targetname");
   bookcase_clip_brush solid();
 
   self.a.pose = "crouch";
@@ -391,8 +391,8 @@ cafe_wall_crumble() {
     pieces[i] connectpaths();
   }
 
-  getent("delete_chunk", "targetname") connectpaths();
-  getent("delete_chunk", "targetname") delete();
+  getEnt("delete_chunk", "targetname") connectpaths();
+  getEnt("delete_chunk", "targetname") delete();
 
   playFX(level._effect["tank_thru_cafe_wall"], org_node.origin + (0, 0, 54), anglesToForward(org_node.angles - (0, 90, 0)));
   SetClientSysState("levelNotify", "tank_wall_sound");
@@ -407,27 +407,27 @@ cafe_wall_crumble() {
   simple_floodspawn("street_right_spawners_1");
 
   if(!level.wii && !NumRemoteClients()) {
-    drone_trig = getent("street_drones_1", "script_noteworthy");
+    drone_trig = getEnt("street_drones_1", "script_noteworthy");
     drone_trig notify("trigger");
   }
 }
 
 set_flags_on_street_triggers() {
-  trig = getent("chain_street_right_1", "targetname");
+  trig = getEnt("chain_street_right_1", "targetname");
   level thread set_flag_on_trigger(trig, "chain_street_right_1");
 
-  trig = getent("chain_street_left_1", "targetname");
+  trig = getEnt("chain_street_left_1", "targetname");
   level thread set_flag_on_trigger(trig, "chain_street_left_1");
 
-  trig = getent("trig_last_yard_floodspawners", "script_noteworthy");
+  trig = getEnt("trig_last_yard_floodspawners", "script_noteworthy");
   level thread set_flag_on_trigger(trig, "last_yard_floodspawners");
 }
 
 panzershrek_hits_wall() {
   trigger_wait("trig_spawn_street_guys_late", "script_noteworthy");
 
-  panzershrek_2_spawn = getstruct("ps2_spawn", "targetname");
-  low_wall = getstruct("ps2_target", "targetname");
+  panzershrek_2_spawn = getStruct("ps2_spawn", "targetname");
+  low_wall = getStruct("ps2_target", "targetname");
 
   level thread fire_shrecks(panzershrek_2_spawn, low_wall, undefined, "rpg_impact_boom", 1);
   wait(1);

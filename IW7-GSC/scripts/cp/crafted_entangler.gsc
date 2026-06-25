@@ -21,7 +21,7 @@ watchforentangleractivation() {
   level waittill("complete_stay_on_pressure_plates");
   scripts\cp\utility::set_quest_icon(2);
   scripts\cp\maps\cp_final\cp_final_mpq::activateinteractionsbynoteworthy("entangler_spawner");
-  var_0 = scripts\engine\utility::getstruct("entangler_spawner", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("entangler_spawner", "script_noteworthy");
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 setModel("weapon_entangler_wm");
@@ -36,10 +36,10 @@ watchforentangleractivation() {
 moveandrotateentangler(var_0, var_1) {
   level endon("game_ended");
   for(;;) {
-    var_0 rotateyaw(360, 6);
-    var_0 moveto(var_1 + (0, 0, 48), 3, 1, 1);
+    var_0 rotateYaw(360, 6);
+    var_0 moveTo(var_1 + (0, 0, 48), 3, 1, 1);
     wait(3);
-    var_0 moveto(var_1, 3, 0.5, 0.5);
+    var_0 moveTo(var_1, 3, 0.5, 0.5);
     wait(3);
   }
 }
@@ -400,7 +400,7 @@ watchforentanglerdamage(var_0, var_1) {
       var_1 waittill("released", var_5, var_6, var_7);
       var_8 = isDefined(var_0.groupname);
       var_9 = var_1.origin;
-      if(var_1 istouching(getent("electric_trap_trig", "targetname"))) {
+      if(var_1 istouching(getEnt("electric_trap_trig", "targetname"))) {
         var_5 = 1;
       }
 
@@ -534,7 +534,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
         if(var_24 <= 64) {
           var_7.origin = var_1F;
         } else {
-          var_7 moveto(var_1F, var_4);
+          var_7 moveTo(var_1F, var_4);
           var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
         }
       } else if(isDefined(var_1.entanglemovetofunc)) {
@@ -543,7 +543,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
           if(var_24 <= 64) {
             var_7.origin = var_1F;
           } else {
-            var_7 moveto(var_1F, var_4);
+            var_7 moveTo(var_1F, var_4);
             var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
           }
         } else {
@@ -555,7 +555,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
       } else if(var_24 <= 56) {
         var_7.origin = var_1F;
       } else {
-        var_7 moveto(var_1F, var_4);
+        var_7 moveTo(var_1F, var_4);
         var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
       }
 
@@ -580,7 +580,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
         }
       }
     } else if(var_24 >= 8) {
-      var_7 moveto(var_1F, var_4);
+      var_7 moveTo(var_1F, var_4);
       var_0 scripts\engine\utility::waittill_any_timeout(var_4, "update_item_pos", "delete_equipment");
     } else {
       scripts\engine\utility::waitframe();
@@ -638,7 +638,7 @@ monitorplayerviewangles(var_0, var_1) {
   level endon("entangler_removed_" + var_0.name);
   for(;;) {
     var_2 = var_0 getEye();
-    var_3 = vectornormalize(anglesToForward(var_0 getplayerangles())) * 72;
+    var_3 = vectorNormalize(anglesToForward(var_0 getplayerangles())) * 72;
     var_4 = var_2 + var_3;
     if(distance(var_1.origin, var_4) >= 5) {
       var_0 notify("update_item_pos");
@@ -693,7 +693,7 @@ launchitem(var_0, var_1, var_2) {
   var_11 = scripts\common\trace::capsule_trace(var_4, var_5 + var_9, 16, 32, undefined, var_3, var_10, 24);
   var_12 = var_11["shape_position"];
   var_13 = var_5;
-  var_14 = vectornormalize(var_5 - var_12);
+  var_14 = vectorNormalize(var_5 - var_12);
   var_14 = var_14 * 10000;
   if(isDefined(var_1.script_parameters) && var_1.script_parameters == "heavy_helmet") {
     var_14 = var_14 / 2;

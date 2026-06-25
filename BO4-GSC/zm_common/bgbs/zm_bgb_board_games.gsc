@@ -69,7 +69,7 @@ function_c2342058(s_window) {
 
     if(isDefined(s_window.clip)) {
       s_window.clip triggerenable(1);
-      s_window.clip disconnectpaths();
+      s_window.clip disconnectPaths();
     } else {
       zm_blockers::blocker_disconnect_paths(s_window.neg_start, s_window.neg_end);
     }

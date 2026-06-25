@@ -92,7 +92,7 @@ function getplayer(params) {
   if(isDefined(params._xuid)) {
     xuid = int(params._xuid);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player.bot)) {
         player_xuid = int(player getxuid(1));
 
@@ -131,7 +131,7 @@ function function_1b77bedd(params) {
 function rscteleport(params) {
   player = getplayer(params);
   pos = (float(params.x), float(params.y), float(params.z));
-  player setorigin(pos);
+  player setOrigin(pos);
 
   if(isDefined(params.ax)) {
     angles = (float(params.ax), float(params.ay), float(params.az));
@@ -279,7 +279,7 @@ function function_51706559(params) {
     }
 
     pos = (float(params.x), float(params.y), float(params.z));
-    player setorigin(pos);
+    player setOrigin(pos);
 
     if(isDefined(params.ax)) {
       angles = (float(params.ax), float(params.ay), float(params.az));
@@ -312,7 +312,7 @@ function function_dec22d87(params) {
       continue;
     }
 
-    other_player setorigin(spawn);
+    other_player setOrigin(spawn);
   }
 }
 
@@ -333,7 +333,7 @@ function function_e3ab4393(params) {
     }
 
     if(player getteam() != other_player getteam()) {
-      other_player setorigin(spawn);
+      other_player setOrigin(spawn);
       other_player setplayerangles(player.angles);
       return;
     }
@@ -352,12 +352,12 @@ function function_1ac5a32b(params) {
   }
 
   front = player.origin + forward * distance;
-  player setorigin(front);
+  player setOrigin(front);
 }
 
 function function_ccc178f3(params) {
   player = getplayer(params);
-  return player isplayinganimscripted();
+  return player isplayinganimScripted();
 }
 
 function function_6fb461e2(params) {
@@ -377,7 +377,7 @@ function function_2fa64525(params) {
 }
 
 function function_1f00a502(params) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isbot(player)) {
       return player.health;
     }
@@ -482,7 +482,7 @@ function function_9efe300c(params) {
   }
 
   if(isDefined(level.spawn_start) && isDefined(level.spawn_start[team])) {
-    player setorigin(level.spawn_start[team][spawn].origin);
+    player setOrigin(level.spawn_start[team][spawn].origin);
     player setplayerangles(level.spawn_start[team][spawn].angles);
   }
 }

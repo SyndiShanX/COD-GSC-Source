@@ -175,7 +175,7 @@ function_ab898b2d(notifystring) {
         self callback::on_end_game(&on_game_ended);
         waitframe(1);
         self.var_168d7f5c = 0;
-        enemies = getplayers(localclientnum);
+        enemies = getPlayers(localclientnum);
 
         foreach(enemy in enemies) {
           if(isDefined(enemy) && util::function_fbce7263(enemy.team, self.team)) {
@@ -201,7 +201,7 @@ function_ab898b2d(notifystring) {
 
 function_f4ebfe85(localclientnum) {
   if(isDefined(self)) {
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
 
     foreach(enemy in players) {
       if(isDefined(enemy) && isalive(enemy) && util::function_fbce7263(enemy.team, self.team) && (isDefined(enemy.visionpulsereveal) && enemy.visionpulsereveal || isDefined(enemy.var_f4f50357) && enemy.var_f4f50357)) {

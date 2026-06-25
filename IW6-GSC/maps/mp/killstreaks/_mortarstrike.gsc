@@ -146,7 +146,7 @@ warning_audio() {
     return;
   }
   if(!isDefined(self.warning_sfx_ent)) {
-    self.warning_sfx_ent = GetEnt(self.warningSfxEntName, "targetname");
+    self.warning_sfx_ent = getEnt(self.warningSfxEntName, "targetname");
   }
 
   if(isDefined(self.warning_sfx_ent)) {

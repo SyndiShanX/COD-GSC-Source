@@ -228,17 +228,17 @@ function_3a7f44f7() {
 }
 
 function_814cda18() {
-  var_d8f4b898 = getent("bread_door", "targetname");
+  var_d8f4b898 = getEnt("bread_door", "targetname");
   var_e1177b43 = 0;
 
   if(var_e1177b43) {
-    var_d8f4b898 rotateto(var_d8f4b898.angles + (0, -170, 0), 1);
+    var_d8f4b898 rotateTo(var_d8f4b898.angles + (0, -170, 0), 1);
     var_d8f4b898 waittill(#"movedone");
   }
 
-  var_d8f4b898 disconnectpaths();
+  var_d8f4b898 disconnectPaths();
   v_blocker = spawn("trigger_box", (-800, -1070, -132), 0, 408, 164, 132);
-  v_blocker disconnectpaths();
+  v_blocker disconnectPaths();
 }
 
 init_pap() {
@@ -292,8 +292,8 @@ function_70a36cd8(is_powered) {
 }
 
 function_ba054e47() {
-  e_pap_door = getent("pap_door", "targetname");
-  var_c72d9a7c = getent("pap_door_blocker", "targetname");
+  e_pap_door = getEnt("pap_door", "targetname");
+  var_c72d9a7c = getEnt("pap_door_blocker", "targetname");
   level flag::wait_till(#"power_on1");
   exploder::exploder("fxexp_toxic_gas_pap_tube");
 
@@ -301,7 +301,7 @@ function_ba054e47() {
     level flag::wait_till("pap_power_ready");
     exploder::stop_exploder("fxexp_toxic_gas_pap_tube");
     e_pap_door playSound(#"hash_1ca46207f2ed8876");
-    e_pap_door rotateyaw(180, 1.5);
+    e_pap_door rotateYaw(180, 1.5);
     e_pap_door playSound(#"hash_41e4c1b28052a5f3");
     wait 1.5;
     var_c72d9a7c hide();
@@ -310,17 +310,17 @@ function_ba054e47() {
     var_c72d9a7c show();
     var_c72d9a7c solid();
     e_pap_door playSound(#"hash_1ca46207f2ed8876");
-    e_pap_door rotateyaw(-180, 1.5);
+    e_pap_door rotateYaw(-180, 1.5);
     e_pap_door playSound(#"hash_41e4c1b28052a5f3");
     exploder::exploder("fxexp_toxic_gas_pap_tube");
   }
 }
 
 function_fb29042d() {
-  e_pap_door = getent("pap_door", "targetname");
-  var_c72d9a7c = getent("pap_door_blocker", "targetname");
+  e_pap_door = getEnt("pap_door", "targetname");
+  var_c72d9a7c = getEnt("pap_door_blocker", "targetname");
   e_pap_door playSound(#"hash_1ca46207f2ed8876");
-  e_pap_door rotateyaw(180, 1.5);
+  e_pap_door rotateYaw(180, 1.5);
   e_pap_door playSound(#"hash_41e4c1b28052a5f3");
   wait 1.5;
   var_c72d9a7c hide();
@@ -456,13 +456,13 @@ offhand_weapon_give_override(str_weapon) {
 }
 
 function_79672a3d() {
-  var_76945247 = getent("green_backyard_bunker_door_front", "targetname");
+  var_76945247 = getEnt("green_backyard_bunker_door_front", "targetname");
 
   if(isDefined(var_76945247)) {
-    var_76945247 sethintstring(#"hash_6048bb3579a34287");
+    var_76945247 setHintString(#"hash_6048bb3579a34287");
   }
 
-  var_cd681b8a = getent("green_backyard_bunker_door_release", "targetname");
+  var_cd681b8a = getEnt("green_backyard_bunker_door_release", "targetname");
 
   if(isDefined(var_cd681b8a)) {
     a_e_zombie_doors = getEntArray("zombie_door", "targetname");
@@ -477,7 +477,7 @@ function_79672a3d() {
       }
     }
 
-    var_cd681b8a sethintstring(#"hash_3b1888151d4b06b");
+    var_cd681b8a setHintString(#"hash_3b1888151d4b06b");
     var_cd681b8a thread function_39463122();
   }
 }
@@ -486,13 +486,13 @@ function_39463122() {
   waitresult = self waittill(#"trigger");
   player = waitresult.activator;
   self setinvisibletoall();
-  var_76945247 = getent("green_backyard_bunker_door_front", "targetname");
+  var_76945247 = getEnt("green_backyard_bunker_door_front", "targetname");
 
   if(isDefined(var_76945247)) {
     var_76945247 setinvisibletoall();
   }
 
-  e_switch = getent(self.target, "targetname");
+  e_switch = getEnt(self.target, "targetname");
   s_fx_pos = struct::get(self.target, "targetname");
 
   if(isDefined(e_switch) && isDefined(s_fx_pos)) {
@@ -716,7 +716,7 @@ function_785cadc4() {
 }
 
 function_d574cfc6() {
-  level.var_1fff8fd2 = getent("sfx_apd_top", "targetname");
+  level.var_1fff8fd2 = getEnt("sfx_apd_top", "targetname");
   level flag::wait_till("power_on1");
   exploder::exploder("fxexp_script_power_on");
   waitframe(1);

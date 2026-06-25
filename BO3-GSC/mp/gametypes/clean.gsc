@@ -453,7 +453,7 @@ function function_9bc55b1b() {
   time_left = time_left + 0.25;
   var_3112d2e7 = 3;
   angles = (self.var_6de41998.angles[0], self.var_6de41998.angles[1] - (var_3112d2e7 * 360), self.var_6de41998.angles[2]);
-  self.var_6de41998 rotateto(angles, time_left, time_left, 0, 0);
+  self.var_6de41998 rotateTo(angles, time_left, time_left, 0, 0);
 }
 
 function function_5b1f87d2() {
@@ -696,7 +696,7 @@ function function_52f9b039(player) {
 
 function function_9629206a(player) {
   if(self.victimteam == player.team) {
-    playsoundatposition("mpl_fracture_enemy_pickup_m", self.origin);
+    playSoundAtPosition("mpl_fracture_enemy_pickup_m", self.origin);
     if(isDefined(player.pers["cleandenies"])) {
       player.pers["cleandenies"] = player.pers["cleandenies"] + 1;
       player.cleandenies = player.pers["cleandenies"];
@@ -721,12 +721,12 @@ function function_9629206a(player) {
     player clientfield::set_player_uimodel("hudItems.cleanCarryCount", player.carriedtacos);
     player function_65ae6452();
     if(player.carriedtacos < 4) {
-      playsoundatposition("mpl_fracture_enemy_pickup_s", self.origin);
+      playSoundAtPosition("mpl_fracture_enemy_pickup_s", self.origin);
     } else {
       if(player.carriedtacos < 7) {
-        playsoundatposition("mpl_fracture_enemy_pickup_m", self.origin);
+        playSoundAtPosition("mpl_fracture_enemy_pickup_m", self.origin);
       } else {
-        playsoundatposition("mpl_fracture_enemy_pickup_l", self.origin);
+        playSoundAtPosition("mpl_fracture_enemy_pickup_l", self.origin);
       }
     }
     scoreevents::processscoreevent("clean_enemy_collect", player);

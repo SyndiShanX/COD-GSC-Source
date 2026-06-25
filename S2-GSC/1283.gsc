@@ -159,7 +159,7 @@ func_1D62(param_00, param_01, param_02, param_03) {
   var_04 setModel(param_01);
   if(!isDefined(param_03) || !param_03) {
     var_04.var_1D = self gettagangles(param_02);
-    var_04 linkto(self, param_02, (0, 0, 0), (0, 0, 0));
+    var_04 linkTo(self, param_02, (0, 0, 0), (0, 0, 0));
     var_04 func_9F53();
     var_04 setmode("auto_nonai");
     var_04 method_80F9(undefined);
@@ -332,7 +332,7 @@ func_9F9C() {
       var_00 = self gettagorigin("TAG_AIM");
       var_01 = self gettagangles("TAG_AIM");
       var_02 = anglesToForward(var_01);
-      var_03 = vectornormalize(self.var_6E7A.var_9828.var_116 - var_00);
+      var_03 = vectorNormalize(self.var_6E7A.var_9828.var_116 - var_00);
       var_04 = vectordot(var_02, var_03);
       if(var_04 > 0.9) {
         self method_80D5();
@@ -355,7 +355,7 @@ func_A3FF() {
       var_00 = self gettagorigin("TAG_AIM");
       var_01 = self gettagangles("TAG_AIM");
       var_02 = anglesToForward(var_01);
-      var_03 = vectornormalize(self.var_9828.var_116 - var_00);
+      var_03 = vectorNormalize(self.var_9828.var_116 - var_00);
       var_04 = vectordot(var_02, var_03);
       if(var_04 > 0.9) {
         self method_8263();
@@ -404,12 +404,12 @@ func_9F28(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 }
 
 func_A3EE(param_00) {
-  param_00 = getent(param_00, "targetname");
+  param_00 = getEnt(param_00, "targetname");
   var_01 = [param_00];
   var_02 = param_00;
   for(;;) {
     if(isDefined(var_02.var_1A2)) {
-      var_03 = getent(var_02.var_1A2, "targetname");
+      var_03 = getEnt(var_02.var_1A2, "targetname");
       var_01[var_01.size] = var_03;
       var_02 = var_03;
       continue;
@@ -827,7 +827,7 @@ func_97C3() {
 func_57FA(param_00) {
   var_01 = self gettagorigin("tag_flash");
   var_02 = param_00 - var_01;
-  var_02 = vectornormalize(var_02);
+  var_02 = vectorNormalize(var_02);
   var_03 = self gettagangles("tag_flash");
   var_03 = anglesToForward(var_03);
   if(vectordot(var_02, var_03) > 0.99) {

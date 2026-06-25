@@ -169,9 +169,9 @@ function function_b546cde6(b_skipped) {
   var_8a29121f = struct::get_array("debris_pile", "targetname");
   var_10972b21 = array::random(var_8a29121f);
   var_10972b21.var_b9c671f = 1;
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   var_9039575a.is_active = 1;
-  var_9039575a disconnectpaths();
+  var_9039575a disconnectPaths();
   var_1baed918 = struct::get_array(var_9039575a.target, "targetname");
 
   foreach(target_pos in var_1baed918) {
@@ -226,7 +226,7 @@ function function_fd853e02(b_skipped, var_19e802fa) {
 }
 
 function function_4675ef4e() {
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   level flag::wait_till("power_on");
 
   if(!isarray(var_9039575a.var_2409a5e6)) {
@@ -235,11 +235,11 @@ function function_4675ef4e() {
 
   foreach(var_2551a4be in var_9039575a.var_2409a5e6) {
     var_2551a4be.mdl = util::spawn_model(#"p9_zm_platinum_armor_station_abandoned_screen_01", var_9039575a gettagorigin("monitor_02_jnt"), var_9039575a gettagangles("monitor_02_jnt"));
-    var_2551a4be.mdl linkto(var_9039575a, "monitor_02_jnt");
+    var_2551a4be.mdl linkTo(var_9039575a, "monitor_02_jnt");
     var_2551a4be.mdl playSound(#"hash_5e793e8deaf716a6");
     var_2551a4be.mdl playLoopSound(#"hash_648ae65d9a233cf9");
     var_2551a4be.var_429cef67 = util::spawn_model(#"p9_zm_platinum_armor_station_abandoned_screen_05", var_9039575a gettagorigin("monitor_01_jnt"), var_9039575a gettagangles("monitor_01_jnt"));
-    var_2551a4be.var_429cef67 linkto(var_9039575a, "monitor_01_jnt");
+    var_2551a4be.var_429cef67 linkTo(var_9039575a, "monitor_01_jnt");
     var_2551a4be.var_429cef67 playLoopSound(#"hash_19b4044ad55db503");
   }
 
@@ -275,7 +275,7 @@ function function_47a1b8() {
   self.scriptmodel setscale(0.6);
   self zm_unitrigger::function_fac87205(#"hash_2813adbf78aefe3f", 64);
   self.scriptmodel clientfield::set("" + #"hash_8b9fe3412e34513", 1);
-  self.scriptmodel moveto(self.scriptmodel.origin + (0, 0, -30), 3);
+  self.scriptmodel moveTo(self.scriptmodel.origin + (0, 0, -30), 3);
 
   if(is_true(self.var_b9c671f)) {
     point = function_4ba8fde(#"hash_4ad785fc5428f484");
@@ -336,7 +336,7 @@ function function_c490ff56(params) {
 
   if(attacker.var_e941964e >= 50) {
     level flag::set(#"hash_73b91a4076d8a5fd");
-    playsoundatposition(#"hash_77b21ab51a834aa5", (0, 0, 0));
+    playSoundAtPosition(#"hash_77b21ab51a834aa5", (0, 0, 0));
     callback::remove_on_ai_killed(&function_c490ff56);
 
     iprintlnbold("<dev string:x81>");
@@ -344,7 +344,7 @@ function function_c490ff56(params) {
 }
 
 function function_f23e8f24() {
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   var_1f969649 = var_9039575a zm_unitrigger::create(&function_5aaec675, 64, &function_dc580b92);
   var_1f969649.script_model = var_9039575a;
 }
@@ -354,7 +354,7 @@ function function_5aaec675(e_player) {
     if(!level flag::get(#"hash_685bfabd9ce72d7c")) {
       return false;
     } else {
-      self sethintstring(#"hash_6dce81d52c41f3e4");
+      self setHintString(#"hash_6dce81d52c41f3e4");
       return true;
     }
   }
@@ -420,7 +420,7 @@ function function_f0be2da6() {
   level endon(#"hash_5eb0053f75fee299", #"hash_2304a1d24bb8597f");
   self notify("14e5d3019feff44f");
   self endon("14e5d3019feff44f");
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
 
   if(!isDefined(level.klaus)) {
     return;
@@ -520,7 +520,7 @@ function function_d780da65() {
 }
 
 function function_f26e6dd8() {
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   var_9039575a val::set("defend", "takedamage", 1);
   slots = namespace_85745671::function_bdb2b85b(var_9039575a, var_9039575a.origin, var_9039575a.angles, 30, 10, undefined, 1);
   var_9039575a.is_active = 1;
@@ -930,7 +930,7 @@ function function_52da09c5() {
       if(isDefined(level.klaus.attackable)) {
         iprintlnbold("<dev string:x132>");
 
-        playsoundatposition(#"hash_3a464371e80d6623", self.origin);
+        playSoundAtPosition(#"hash_3a464371e80d6623", self.origin);
         namespace_85745671::function_2b925fa5(level.klaus);
         self.var_67fbb89d clientfield::increment("" + #"hash_47839169ce0224b7", 1);
 
@@ -959,7 +959,7 @@ function function_52da09c5() {
 
 function function_ed04cf0f(b_debug = 0) {
   level endon(#"end_game");
-  self moveto(self.origin + (0, 0, 16), 3);
+  self moveTo(self.origin + (0, 0, 16), 3);
   self playSound(#"hash_374ec9a1c638132d");
 
   switch (self.index) {
@@ -991,7 +991,7 @@ function function_ed04cf0f(b_debug = 0) {
 
   wait 30;
   self playSound(#"hash_6d4b0bc39a6f348f");
-  self moveto(self.origin - (0, 0, 16), 3);
+  self moveTo(self.origin - (0, 0, 16), 3);
   self waittill(#"movedone");
 
   if(isDefined(var_22009b28)) {
@@ -1002,25 +1002,25 @@ function function_ed04cf0f(b_debug = 0) {
 }
 
 function function_fe052ae() {
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   var_9039575a zm_unitrigger::create(&function_bbadb4b5, 128, &function_4246a0a4);
 }
 
 function function_bbadb4b5(e_player) {
   if(isPlayer(e_player)) {
     if(isDefined(level.var_c5b55a18) && level.var_c5b55a18 > level.round_number || level flag::get(#"hash_3619125fe3a40ead")) {
-      self sethintstring(#"hash_36868d63582532f7");
+      self setHintString(#"hash_36868d63582532f7");
       return true;
     }
 
     if(!is_true(level.var_459ddb9c)) {
-      self sethintstring(#"hash_176d8f196a4cc992");
+      self setHintString(#"hash_176d8f196a4cc992");
       return true;
     } else if(isDefined(level.var_3d8c252b) && level.var_3d8c252b != 0) {
-      self sethintstring(#"hash_7945985808402ef6");
+      self setHintString(#"hash_7945985808402ef6");
       return true;
     } else {
-      self sethintstring(#"hash_198d050c8b417c2d");
+      self setHintString(#"hash_198d050c8b417c2d");
       return true;
     }
   }
@@ -1059,7 +1059,7 @@ function function_4246a0a4() {
 
 function function_7d8f4a5b() {
   level endon(#"end_game");
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
 
   while(!level flag::get(#"hash_6ee0214c0ffd7fd5")) {
     if(isDefined(level.klaus)) {
@@ -1088,7 +1088,7 @@ function function_9d903a8e(index) {
     level.klaus thread scene::play(#"hash_423ce4528e7aaf1f", "upgrade_loop_" + level.var_7c745515, level.klaus);
   }
 
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   var_9039575a thread scene::play(#"hash_a4fed5bd30bd26b", "play1", var_9039575a);
   wait 5;
   var_9039575a scene::stop(#"hash_a4fed5bd30bd26b");
@@ -1178,7 +1178,7 @@ function function_e243a545() {
     level.klaus thread scene::play(#"hash_423ce4528e7aaf1f", "upgrade_loop_" + level.var_7c745515, level.klaus);
   }
 
-  var_9039575a = getent("klaus_upgrade_station", "targetname");
+  var_9039575a = getEnt("klaus_upgrade_station", "targetname");
   var_9039575a thread scene::play(#"hash_a4fed5bd30bd26b", "play1", var_9039575a);
   wait 5;
   var_9039575a scene::stop(#"hash_a4fed5bd30bd26b");
@@ -1248,7 +1248,7 @@ function cmd(cmd) {
       break;
     case #"hash_2a439dc6ff821f8c":
       level flag::set(#"hash_73b91a4076d8a5fd");
-      playsoundatposition(#"hash_77b21ab51a834aa5", (0, 0, 0));
+      playSoundAtPosition(#"hash_77b21ab51a834aa5", (0, 0, 0));
       break;
     case #"hash_7f4f450f45fab726":
       spawn_loc = level.klaus.origin;

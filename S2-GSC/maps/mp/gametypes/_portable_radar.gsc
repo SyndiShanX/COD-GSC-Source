@@ -146,8 +146,8 @@ func_757F(param_00) {
   self endon("death");
   level endon("game_ended");
   param_00 endon("disconnect");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_PATCH_PICKUP_PORTABLE_RADAR");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_PATCH_PICKUP_PORTABLE_RADAR");
   maps\mp\_utility::func_871E(param_00);
   for(;;) {
     self waittill("trigger", param_00);

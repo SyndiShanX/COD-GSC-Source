@@ -62,7 +62,7 @@
 function function_4bf845e0() {}
 
 function function_9de162de(str_objective) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player setmovespeedscale(0.8);
   player namespace_979752dc::set_disguised(1);
   player setcinematicmotionoverride("cinematicmotion_kgb");
@@ -71,7 +71,7 @@ function function_9de162de(str_objective) {
 }
 
 function function_b3837ddc(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     namespace_5ceacc03::music("6.0_incoming_skipto");
@@ -266,7 +266,7 @@ function function_9c8bff5() {
 }
 
 function function_2855eba1() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   bar_bathroom_window_cursor_hint_org = struct::get("bar_bathroom_window_cursor_hint_org");
   bar_bathroom_window_cursor_hint_org util::create_cursor_hint(undefined, (0, 0, -32), #"hash_65c0b59d247abbb7");
   level scene::init("cin_stakeout_alley1_bar_alley");
@@ -342,7 +342,7 @@ function function_92e02d40() {
 
 function function_86fa401d() {
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"takedown_active");
   self dialogue::queue("vox_cp_stkt_07715_gms2_comeoutiknowyou_d6");
   wait 5;
@@ -376,7 +376,7 @@ function function_f84a2038() {
 }
 
 function function_22b1287a() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   wait 1;
   self util::waittill_any_ents(self, "stealth_combat", self, "set_alert_level", self, "stealth_investigate", self, "damage", self, "death", player, "takedown_active");
@@ -399,7 +399,7 @@ function function_2d6c81be(str_objective) {
 }
 
 function function_34ee80b8(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     level thread function_c5a860f1(1);
@@ -430,7 +430,7 @@ function function_34ee80b8(str_objective, b_starting) {
   level thread function_9f5019a();
   level thread namespace_11998b8f::function_91a7f501("alley_2_ambient_harass_loop", "alley_2_done");
   level thread namespace_11998b8f::function_a34d0dd3("alley_2_one_off", "alley_2_done");
-  var_184d8d2 = getent("alley_2_police_car_static", "targetname");
+  var_184d8d2 = getEnt("alley_2_police_car_static", "targetname");
   var_184d8d2 thread function_78f01844("light_copcar01_");
   var_184d8d2 thread function_a3e65ec0(undefined, "copcar01_lights");
   var_364e83ee = spawner::simple_spawn("alley_2_enemies_hunt", &function_8ed10706);
@@ -524,10 +524,10 @@ function function_d7595334() {
 
 function function_67faeb63() {
   level endon(#"alley_2_done");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level flag::wait_till("stealth_spotted");
-  e_vol = getent("vol_tailor_shop", "targetname");
+  e_vol = getEnt("vol_tailor_shop", "targetname");
   start_time = undefined;
 
   while(flag::get("stealth_spotted")) {
@@ -555,7 +555,7 @@ function function_67faeb63() {
 
 function function_b73565a9() {
   level endon(#"alley_2_done");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   var_20ffd2a = level.var_364e83ee.size;
   level flag::wait_till("stealth_spotted");
@@ -608,7 +608,7 @@ function function_b73565a9() {
   level thread ai::function_b0bd06fa("alley_enemies", 6, "flag_alley_retreat_to_end");
   level flag::wait_till("flag_alley_retreat_to_end");
 
-  var_c6e544e = getent("alley_2_end_volume", "targetname");
+  var_c6e544e = getEnt("alley_2_end_volume", "targetname");
   var_34b493cd = [];
   function_1eaaceab(level.var_364e83ee);
 
@@ -634,13 +634,13 @@ function function_6a2ab90() {
 
   goal_radius = 256;
   self.ignoresuppression = 1;
-  self setgoal(getplayers()[0], 0, goal_radius);
+  self setgoal(getPlayers()[0], 0, goal_radius);
   self thread function_9df23ee0();
   level flag::wait_till("flag_alley_retreat_to_end");
 
   if(isDefined(self) && isalive(self)) {
     self.ignoresuppression = 0;
-    vol = getent("alley_2_end_volume", "targetname");
+    vol = getEnt("alley_2_end_volume", "targetname");
 
     if(isDefined(vol)) {
       self setgoal(vol, 1);
@@ -654,7 +654,7 @@ function function_9df23ee0() {
 
   if(isDefined(self) && isalive(self)) {
     self.ignoresuppression = 0;
-    vol = getent("alley_2_end_volume", "targetname");
+    vol = getEnt("alley_2_end_volume", "targetname");
 
     if(isDefined(vol)) {
       self setgoal(vol, 1);
@@ -687,7 +687,7 @@ function function_d5e510c4(var_d98f08de) {
 
 function function_1f109c27(player_loc, var_d98f08de, var_20ffd2a) {
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(player_loc) && !isDefined(player_loc.script_noteworthy)) {
     return;
@@ -716,7 +716,7 @@ function function_1f109c27(player_loc, var_d98f08de, var_20ffd2a) {
         var_9e2a9e1 = volume;
 
         if(isDefined(var_9e2a9e1.linkto)) {
-          var_46921b42 = getent(var_9e2a9e1.linkto, "linkname");
+          var_46921b42 = getEnt(var_9e2a9e1.linkto, "linkname");
         }
       }
 
@@ -724,7 +724,7 @@ function function_1f109c27(player_loc, var_d98f08de, var_20ffd2a) {
         var_37cc4e07 = volume;
 
         if(isDefined(var_37cc4e07.linkto)) {
-          var_b7deadbf = getent(var_37cc4e07.linkto, "linkname");
+          var_b7deadbf = getEnt(var_37cc4e07.linkto, "linkname");
         }
       }
 
@@ -861,7 +861,7 @@ function function_4c05f374(var_d98f08de) {
         var_9e2a9e1 = volume;
 
         if(isDefined(var_9e2a9e1.linkto)) {
-          var_46921b42 = getent(var_9e2a9e1.linkto, "linkname");
+          var_46921b42 = getEnt(var_9e2a9e1.linkto, "linkname");
         }
       }
 
@@ -869,7 +869,7 @@ function function_4c05f374(var_d98f08de) {
         var_37cc4e07 = volume;
 
         if(isDefined(var_37cc4e07.linkto)) {
-          var_b7deadbf = getent(var_37cc4e07.linkto, "linkname");
+          var_b7deadbf = getEnt(var_37cc4e07.linkto, "linkname");
         }
       }
 
@@ -907,7 +907,7 @@ function function_4c05f374(var_d98f08de) {
 
 function function_6220c1cb() {
   level endon(#"alley_2_done");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::set("alley_reinforcements_active");
   flag_return = level flag::wait_till_any(array("alley_reinforcements_west", "alley_reinforcements_east", "alley_reinforcements_middle"));
   triggers = getEntArray("alley_reinforcement_triggers", "targetname");
@@ -1177,35 +1177,35 @@ function function_a3e65ec0(var_ad04d74, var_4f28206f, lights_on) {
 function function_cb6db640(car, lights_on) {
   if(isDefined(self.targetname) && isDefined(car) && isDefined(car.model)) {
     if(issubstr(self.targetname, "headlight_driver")) {
-      self linkto(car, "tag_fx_headlight_left", (2, 0, 0), (15, 0, 0));
+      self linkTo(car, "tag_fx_headlight_left", (2, 0, 0), (15, 0, 0));
     }
 
     if(issubstr(self.targetname, "headlight_passenger")) {
-      self linkto(car, "tag_fx_headlight_right", (2, 0, 0), (15, 0, 0));
+      self linkTo(car, "tag_fx_headlight_right", (2, 0, 0), (15, 0, 0));
     }
 
     if(issubstr(self.targetname, "fog_driver")) {
-      self linkto(car, "tag_fx_foglight_left", (3, 0, 0), (0, 0, 0));
+      self linkTo(car, "tag_fx_foglight_left", (3, 0, 0), (0, 0, 0));
     }
 
     if(issubstr(self.targetname, "fog_passenger")) {
-      self linkto(car, "tag_fx_foglight_right", (3, 0, 0), (0, 0, 0));
+      self linkTo(car, "tag_fx_foglight_right", (3, 0, 0), (0, 0, 0));
     }
 
     if(issubstr(self.targetname, "brake_driver")) {
-      self linkto(car, "tag_fx_tail_light_left", (3, 0, 0), (30, 0, 0));
+      self linkTo(car, "tag_fx_tail_light_left", (3, 0, 0), (30, 0, 0));
     }
 
     if(issubstr(self.targetname, "brake_passenger")) {
-      self linkto(car, "tag_fx_tail_light_right", (3, 0, 0), (30, 0, 0));
+      self linkTo(car, "tag_fx_tail_light_right", (3, 0, 0), (30, 0, 0));
     }
 
     if(issubstr(self.targetname, "flashing_driver")) {
-      self linkto(car, "tag_siren_glass_left_d0");
+      self linkTo(car, "tag_siren_glass_left_d0");
     }
 
     if(issubstr(self.targetname, "flashing_passenger")) {
-      self linkto(car, "tag_siren_glass_right_d0");
+      self linkTo(car, "tag_siren_glass_right_d0");
     }
   }
 
@@ -1295,7 +1295,7 @@ function function_e192b067() {
 function function_1b5a6cdf() {
   level endon(#"alley_2_done", #"stealth_spotted");
   wait 3;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread spy_camera::function_69190c4e();
   player util::show_hint_text(#"hash_781598921bc9b69e", undefined, undefined, 4);
   player waittill(#"hash_59b80e9e535f9788");
@@ -1313,7 +1313,7 @@ function function_2470214() {
 }
 
 function function_fa0e91cf() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level flag::wait_till("start_alley_2_mid_team_checkin_vo");
   dialogue::radio("vox_cp_stkt_07286_adlr_parkgimmeasitre_4f");
@@ -1339,7 +1339,7 @@ function function_1340adc1() {
 function function_2bebd40b() {
   level endon(#"hash_5d918db7108403b2");
   level thread function_fdfb1e97();
-  var_9a690256 = getent("collectible_reel", "targetname");
+  var_9a690256 = getEnt("collectible_reel", "targetname");
 
   if(isDefined(var_9a690256)) {
     if(collectibles::function_ab921f3d(2)) {
@@ -1367,7 +1367,7 @@ function private function_fdfb1e97() {
 
     if(collectibles::function_ab921f3d(2)) {
       level notify(#"hash_5d918db7108403b2");
-      var_9a690256 = getent("collectible_reel", "targetname");
+      var_9a690256 = getEnt("collectible_reel", "targetname");
 
       if(isDefined(var_9a690256)) {
         var_9a690256 util::remove_cursor_hint();
@@ -1420,9 +1420,9 @@ function function_d5bb4d12() {
 }
 
 function function_51bd3310() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
-  stasi_field_house_note_01 = getent("stasi_field_house_note_01", "targetname");
+  stasi_field_house_note_01 = getEnt("stasi_field_house_note_01", "targetname");
   stasi_field_house_note_01 util::create_cursor_hint(undefined, (0, 0, 2), #"hash_278936de1fc46bb3");
 
   while(true) {
@@ -1470,9 +1470,9 @@ function function_82101426() {
 }
 
 function function_c58eb80a() {
-  vol = getent("informant_gv", "targetname");
+  vol = getEnt("informant_gv", "targetname");
   vol endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(!flag::get("alley_2_done")) {
     while(!player istouching(vol)) {
@@ -1524,7 +1524,7 @@ function function_dfd339e4() {
   self pushplayer(1);
   self.skipdeath = 0;
   self.health = 10;
-  self.favoriteenemy = getplayers()[0];
+  self.favoriteenemy = getPlayers()[0];
   self waittill(#"released");
   self thread function_e92085b3();
   self thread function_5b6b3eb1();
@@ -1548,9 +1548,9 @@ function function_4c53321a() {
 
 function function_5b6b3eb1() {
   self endon(#"death");
-  var_f6c40dcd = getent("informant_gv", "targetname");
+  var_f6c40dcd = getEnt("informant_gv", "targetname");
   wait 8;
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(player istouching(var_f6c40dcd)) {
     self dialogue::queue("vox_cp_stkt_07300_info_goaheadillbefin_36");
@@ -1561,7 +1561,7 @@ function function_90382186() {
   self endon(#"death");
   level waittill(#"hash_53933f4c3658c33c");
   self.fixednode = 1;
-  var_f6c40dcd = getent("informant_gv", "targetname");
+  var_f6c40dcd = getEnt("informant_gv", "targetname");
 
   if(isDefined(var_f6c40dcd)) {
     self setgoal(var_f6c40dcd);
@@ -1621,7 +1621,7 @@ function function_e92085b3() {
 }
 
 function function_761b250d() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   s_result = self waittill(#"death", #"informant_death");
   self ai::function_603b970a();
 
@@ -1634,7 +1634,7 @@ function function_761b250d() {
   if(level flag::get("informant_deleted")) {
     if(level flag::get("informant_released")) {
       player_decision::function_83bb4d9c(0);
-      getplayers()[0] stats::function_dad108fa(#"hash_3d9eacd5207117df", 1);
+      getPlayers()[0] stats::function_dad108fa(#"hash_3d9eacd5207117df", 1);
       player_decision::function_8c0836dd(4);
     } else {
       level flag::set("informant_killed");
@@ -1651,7 +1651,7 @@ function function_761b250d() {
 
   level flag::set("informant_killed");
   player_decision::function_83bb4d9c(1);
-  getplayers()[0] stats::function_dad108fa(#"hash_40745959404663d3", 1);
+  getPlayers()[0] stats::function_dad108fa(#"hash_40745959404663d3", 1);
   player_decision::function_8c0836dd(3);
   level flag::clear("informant_released");
 
@@ -1759,7 +1759,7 @@ function function_8262abe1(str_objective) {
 }
 
 function function_b4ae0031(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     level thread function_c5a860f1(1);
@@ -1767,7 +1767,7 @@ function function_b4ae0031(str_objective, b_starting) {
     level function_3e93882(b_starting);
   }
 
-  level.var_351720cf = getent("alley_3_courtyard_door_blocker", "targetname");
+  level.var_351720cf = getEnt("alley_3_courtyard_door_blocker", "targetname");
   level.var_351720cf hide();
   level thread function_b76115bc();
   level thread namespace_11998b8f::function_d81925f5("vol_alley_3_body_drop", "alley_3_done");
@@ -1828,11 +1828,11 @@ function function_b4ae0031(str_objective, b_starting) {
 }
 
 function function_750fe887() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
-  door_blocker = getent("alley_3_player_blocker", "targetname");
+  door_blocker = getEnt("alley_3_player_blocker", "targetname");
   door_blocker movez(-5000, 0.1);
-  var_54d36352 = getent("alley_3_player_blocker_temp", "targetname");
+  var_54d36352 = getEnt("alley_3_player_blocker_temp", "targetname");
   var_54d36352 movez(-5000, 0.1);
   level flag::wait_till("flag_alley_3_lazar_close_door");
   player util::function_749362d7(1);
@@ -1946,7 +1946,7 @@ function function_c5a860f1(skipto) {
   }
 
   level flag::wait_till("alley_2_ping_lazar");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread objectives_ui::show_objectives(1);
   doors::waittill_door_opened("alley_2_end_door");
   objectives::update_position(#"hash_3e6960719d61e4c7", position2.origin);
@@ -1967,7 +1967,7 @@ function function_da707a70(skipto) {
 
 function function_dee5c2a0() {
   level flag::wait_till("flag_alley_ping_hint");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player util::hide_hint_text();
   waitframe(1);
 
@@ -1978,7 +1978,7 @@ function function_dee5c2a0() {
 
 function function_deb70deb() {
   level flag::wait_till("flag_exit_informant_room_ping");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread objectives_ui::show_objectives(1);
 }
 

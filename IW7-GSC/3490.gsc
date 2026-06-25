@@ -15,7 +15,7 @@ init() {
   level.helipilotsettings["heli_pilot"].modelbase = "vehicle_aas_72x_killstreak";
   level.helipilotsettings["heli_pilot"].teamsplash = "used_heli_pilot";
   helipilot_setairstartnodes();
-  level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
+  level.heli_pilot_mesh = getEnt("heli_pilot_mesh", "targetname");
 
   if(!isDefined(level.heli_pilot_mesh)) {} else {
     level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility\game::gethelipilotmeshoffset();
@@ -432,7 +432,7 @@ helipilot_getlinkedstruct(var_0) {
     var_1 = var_0 scripts\engine\utility::get_links();
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_3 = scripts\engine\utility::getstruct(var_1[var_2], "script_linkname");
+      var_3 = scripts\engine\utility::getStruct(var_1[var_2], "script_linkname");
 
       if(isDefined(var_3)) {
         return var_3;

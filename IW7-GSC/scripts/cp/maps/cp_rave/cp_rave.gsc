@@ -170,7 +170,7 @@ main() {
   level thread spawn_afterlife_speaker();
   level.no_ticket_machine = 1;
   level thread adjust_doorbuy_triggers();
-  level.lnf_sign = getent("lost_found_island", "targetname");
+  level.lnf_sign = getEnt("lost_found_island", "targetname");
   if(isDefined(level.lnf_sign)) {
     level.lnf_sign hide();
   }
@@ -192,9 +192,9 @@ fix_map_exploits() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_1 = spawn("script_model", (0, 0, 0));
   var_2 = spawn("script_model", (0, 0, 0));
-  var_0 clonebrushmodeltoscriptmodel(getent("playerai128x128x8", "targetname"));
-  var_1 clonebrushmodeltoscriptmodel(getent("playerai128x128x8", "targetname"));
-  var_2 clonebrushmodeltoscriptmodel(getent("player64x64x8", "targetname"));
+  var_0 clonebrushmodeltoscriptmodel(getEnt("playerai128x128x8", "targetname"));
+  var_1 clonebrushmodeltoscriptmodel(getEnt("playerai128x128x8", "targetname"));
+  var_2 clonebrushmodeltoscriptmodel(getEnt("player64x64x8", "targetname"));
   var_0.origin = (-2003.5, 1365, -83);
   var_0.angles = (-90, 45, 0);
   var_1.origin = (-2425.5, -4892, 393);
@@ -259,7 +259,7 @@ show_pap_symbols() {
 
 adjust_portal_location() {
   wait(5);
-  var_0 = scripts\engine\utility::getstruct("selfrevive_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("selfrevive_portal", "targetname");
   var_0.origin = var_0.origin + (0, 7, 11);
 }
 
@@ -470,7 +470,7 @@ activate_struct_when_quest_complete(var_0) {
 
 adjust_computer_interaction_pos() {
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstruct("computer", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("computer", "script_noteworthy");
   var_0.origin = (-554.2, -1444.3, 252);
   thread delay_remove_from_interactions(var_0);
   thread turn_on_effect_with_power(var_0, (-524.4, -1445.5, 265), (0, 38, 0));
@@ -497,7 +497,7 @@ wait_for_player_approach(var_0) {
   level endon("game_ended");
   var_1 = 26896;
   if(isDefined(var_0.target)) {
-    var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_3 = 0;
     var_4 = spawn("script_model", var_0.origin);
     if(isDefined(var_0.angles)) {
@@ -754,7 +754,7 @@ init_rave_quests() {
   level.animal_statue_weapons["wolf"] = "iw7_harpoon2_zm";
   level.animal_statue_weapons["eagle"] = "iw7_harpoon3_zm+akimbo";
   level.animal_statue_weapons["deer"] = "iw7_harpoon4_zm";
-  level.animal_quest_volume = getent("animal_statues", "targetname");
+  level.animal_quest_volume = getEnt("animal_statues", "targetname");
   scripts\engine\utility::flag_set("harpoon_upgrade_quest_active");
   level.rave_mode_activation_funcs = [];
   level.normal_mode_activation_funcs = [];
@@ -977,7 +977,7 @@ toy_statue_end_pos_hint_func(var_0, var_1) {
 
 run_charge_toy_statue_quest(var_0) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   var_2 setModel("tag_origin_toy_statues");
@@ -1010,7 +1010,7 @@ b_man_head_tracking() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("interactions_initialized");
   level endon("all_statues_charged");
-  var_0 = getent("b_man_head", "targetname");
+  var_0 = getEnt("b_man_head", "targetname");
   var_0.og_angles = var_0.angles;
   var_0.og_origin = var_0.origin;
   level.head = var_0;
@@ -1056,7 +1056,7 @@ b_man_head_tracking() {
     }
 
     if(isDefined(var_4)) {
-      var_0 rotateto(vectortoangles(var_4 - var_0.og_origin) + (var_1, var_2, var_3), 0.25);
+      var_0 rotateTo(vectortoangles(var_4 - var_0.og_origin) + (var_1, var_2, var_3), 0.25);
       wait(0.25);
       if(isDefined(var_10)) {
         var_0 laser_eye_kill_target(var_10);
@@ -1065,7 +1065,7 @@ b_man_head_tracking() {
       continue;
     }
 
-    var_0 rotateto(var_0.og_angles, 0.25);
+    var_0 rotateTo(var_0.og_angles, 0.25);
     wait(0.25);
   }
 }
@@ -1121,7 +1121,7 @@ laser_eye_kill_target(var_0) {
 
     if(level.head_statues_charged >= 4) {
       level notify("all_statues_charged");
-      self rotateto(self.og_angles, 0.25);
+      self rotateTo(self.og_angles, 0.25);
     }
   }
 }
@@ -1646,7 +1646,7 @@ watchplayermelee(var_0, var_1, var_2) {
 
 spawn_initial_rave_pouch() {
   scripts\engine\utility::flag_wait("init_interaction_done");
-  var_0 = scripts\engine\utility::getstruct("ritual_pouch", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ritual_pouch", "targetname");
   var_0.origin = scripts\engine\utility::drop_to_ground((-682, -1621, 252), 12, -200);
   foreach(var_2 in level.players) {
     var_2.rave_dust_pouch = spawn("script_model", var_0.origin + (0, 0, 40));
@@ -1692,12 +1692,12 @@ dust_initial_pickup(var_0, var_1) {
   var_2 = 0;
   for(;;) {
     if(var_2 == 0) {
-      var_1 rotateyaw(360, 2);
+      var_1 rotateYaw(360, 2);
       var_1 movez(5, 2);
     }
 
     if(var_2 == 2) {
-      var_1 rotateyaw(360, 2);
+      var_1 rotateYaw(360, 2);
       var_1 movez(-5, 2);
     }
 
@@ -1725,12 +1725,12 @@ show_rave_dust_pickup(var_0, var_1) {
   var_4 = 0;
   for(var_5 = 0; gettime() < var_3; var_5++) {
     if(var_5 == 0) {
-      var_1 rotateyaw(360, 2);
+      var_1 rotateYaw(360, 2);
       var_1 movez(5, 2);
     }
 
     if(var_5 == 2) {
-      var_1 rotateyaw(360, 2);
+      var_1 rotateYaw(360, 2);
       var_1 movez(-5, 2);
     }
 
@@ -1756,9 +1756,9 @@ destroy_rave_dust_on_player_disconnect(var_0, var_1) {
 }
 
 log_swing_trap() {
-  var_0 = getent("log_swing_rope", "targetname");
-  var_1 = getent("log_swing_log", "targetname");
-  var_1 linkto(var_0);
+  var_0 = getEnt("log_swing_rope", "targetname");
+  var_1 = getEnt("log_swing_log", "targetname");
+  var_1 linkTo(var_0);
   wait(5);
   for(;;) {
     var_0 rotatepitch(110, 1);
@@ -2107,7 +2107,7 @@ getscriptablestatefromstructmodel(var_0, var_1) {
 }
 
 setup_slide() {
-  var_0 = getent("slide", "targetname");
+  var_0 = getEnt("slide", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(scripts\engine\utility::istrue(var_1.onslide)) {
@@ -2125,7 +2125,7 @@ player_down_slide(var_0) {
   self endon("disconnect");
   self.is_slide_sfx_playing = 0;
   self.is_slide_land_sfx_playing = 0;
-  var_1 = scripts\engine\utility::getstruct("slide_dir_struct", "targetname");
+  var_1 = scripts\engine\utility::getStruct("slide_dir_struct", "targetname");
   while(self isjumping()) {
     wait(0.05);
   }
@@ -2149,7 +2149,7 @@ player_down_slide(var_0) {
       self.is_slide_sfx_playing = 1;
     }
 
-    self setvelocity(vectornormalize(var_1.origin - self.origin) * 500);
+    self setvelocity(vectorNormalize(var_1.origin - self.origin) * 500);
     wait(0.05);
   }
 
@@ -2208,17 +2208,17 @@ last_stand_player_down_slide(var_0) {
   self notify("stopslideanim");
   if(scripts\cp\cp_laststand::self_revive_activated()) {
     reset_slide_variables();
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
     return;
   }
 
   if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && scripts\cp\utility::has_zombie_perk("perk_machine_revive")) {
     reset_slide_variables();
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
     return;
   }
 
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   reset_slide_variables();
 }
 
@@ -2260,7 +2260,7 @@ watchforplayerzonechange(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   scripts\engine\utility::flag_wait("init_interaction_done");
-  var_1 = getent("rave_zone_change", "targetname");
+  var_1 = getEnt("rave_zone_change", "targetname");
   for(;;) {
     if(var_0 istouching(var_1)) {
       var_2 = gettime();
@@ -2393,7 +2393,7 @@ run_harpoon_interaction_logic(var_0) {
 
 run_pap_machine_logic(var_0) {
   wait(3);
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   if(scripts\engine\utility::istrue(var_0.has_zis_soul_key) || scripts\engine\utility::istrue(level.placed_alien_fuses)) {
@@ -3260,10 +3260,10 @@ spawn_ground_pound_flowers(var_0) {
   var_1 = var_0.origin;
   var_2 = var_0.angles;
   var_3 = var_0 getEye();
-  var_4 = vectornormalize(anglesToForward(var_2)) * 50;
-  var_5 = -1 * vectornormalize(var_4) * 50;
-  var_6 = vectornormalize(anglestoright(var_2)) * 50;
-  var_7 = -1 * vectornormalize(var_6) * 50;
+  var_4 = vectorNormalize(anglesToForward(var_2)) * 50;
+  var_5 = -1 * vectorNormalize(var_4) * 50;
+  var_6 = vectorNormalize(anglestoright(var_2)) * 50;
+  var_7 = -1 * vectorNormalize(var_6) * 50;
   var_8 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_item", "physicscontents_detail", "physicscontents_vehicleclip", "physicscontents_vehicle", "physicscontents_canshootclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
   var_9 = [];
   var_9[var_9.size] = ::scripts\engine\utility::drop_to_ground(var_1 + var_4, 32, -100);
@@ -3281,7 +3281,7 @@ spawn_ground_pound_flowers(var_0) {
   foreach(var_12 in var_10) {
     var_13 = scripts\common\trace::ray_trace(var_12 + (0, 0, 32), var_12, var_0, var_8);
     var_13 = var_13["normal"];
-    var_10[var_10.size] = vectortoangles(vectornormalize(var_13 + (-90, 0, 0)));
+    var_10[var_10.size] = vectortoangles(vectorNormalize(var_13 + (-90, 0, 0)));
   }
 
   for(var_15 = 0; var_15 < var_10.size; var_15++) {
@@ -3634,7 +3634,7 @@ setvelocitybasedonplayerpos(var_0, var_1, var_2, var_3) {
   var_0.movespeedscaler = 0.1;
   var_0[[level.move_speed_scale]]();
   while(var_4) {
-    var_0 setvelocity(vectornormalize(var_2.origin + (0, 0, -100) - var_0.origin) * 100);
+    var_0 setvelocity(vectorNormalize(var_2.origin + (0, 0, -100) - var_0.origin) * 100);
     scripts\engine\utility::waitframe();
     var_5 = getdistancetocheck(var_2, var_1, var_0);
     var_4 = isDefined(var_5) && distance2dsquared(var_0.origin, var_1) < var_5 * var_5;
@@ -3648,7 +3648,7 @@ setvelocitybasedonplayerpos(var_0, var_1, var_2, var_3) {
 getdistancetocheck(var_0, var_1, var_2) {
   var_3 = cos(89);
   var_4 = vectortoangles(var_0.origin - var_1);
-  var_5 = vectornormalize(var_2.origin - var_1);
+  var_5 = vectorNormalize(var_2.origin - var_1);
   var_6 = anglesToForward(var_4);
   var_7 = vectordot(var_6, var_5);
   if(var_7 >= var_3) {
@@ -4122,7 +4122,7 @@ move_player_to_closest_spot(var_0) {
     var_3 = var_1.origin;
   }
 
-  var_0 setorigin(var_3);
+  var_0 setOrigin(var_3);
   wait(0.5);
 }
 
@@ -4389,7 +4389,7 @@ checkenemiesinfov(var_0, var_1, var_2) {
   var_6 = scripts\engine\utility::get_array_of_closest(self.origin, var_5, undefined, 24, var_1, 1);
   foreach(var_8 in var_6) {
     var_9 = anglesToForward(self.angles);
-    var_10 = vectornormalize(var_9) * -35;
+    var_10 = vectorNormalize(var_9) * -35;
     var_11 = 0;
     var_12 = var_8.origin;
     var_13 = scripts\engine\utility::within_fov(self getEye() + var_10, self.angles, var_12 + (0, 0, 30), var_3);
@@ -4573,8 +4573,8 @@ waitforplayertorevive(var_0, var_1) {
 killnearbyvictim(var_0, var_1, var_2, var_3, var_4) {
   var_1 = self.maxhealth;
   var_5 = anglesToForward(var_0.angles);
-  var_6 = vectornormalize(var_5) * -100;
-  self setvelocity(vectornormalize(self.origin - var_4) * 800 + (0, 0, 300));
+  var_6 = vectorNormalize(var_5) * -100;
+  self setvelocity(vectorNormalize(self.origin - var_4) * 800 + (0, 0, 300));
   self.do_immediate_ragdoll = 1;
   if(var_1 >= self.health) {
     self.customdeath = 1;
@@ -5428,7 +5428,7 @@ move_struct(var_0, var_1, var_2) {
 }
 
 survivor_logic() {
-  var_0 = scripts\engine\utility::getstruct("slasher_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("slasher_pos", "targetname");
   level.survivor = spawn("script_model", var_0.origin);
   level.survivor.angles = var_0.angles;
   level.survivor setModel("zmb_world_k_smith");
@@ -5447,7 +5447,7 @@ survivor_logic() {
 }
 
 rockwall_logic() {
-  var_0 = getent("rockwall", "targetname");
+  var_0 = getEnt("rockwall", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(!isPlayer(var_1)) {
@@ -5576,12 +5576,12 @@ rave_set_interaction_trigger_properties(var_0, var_1, var_2) {
   }
 
   if(var_1.script_noteworthy == "memory_quest_start_pos" || var_1.script_noteworthy == "memory_quest_end_pos" || var_1.script_noteworthy == "ring_quest_lights" || var_1.script_noteworthy == "animal_statue_toys" || var_1.script_noteworthy == "animal_statue_end_pos" || var_1.script_noteworthy == "charge_animal_toys" || var_1.script_noteworthy == "survivor_interaction" || var_1.script_noteworthy == "boat_quest_piece" || var_1.script_noteworthy == "ritual_stone" || var_1.script_noteworthy == "pap_quest_piece" || var_1.script_noteworthy == "mushroom_patch") {
-    self.interaction_trigger usetriggerrequirelookat(0);
+    self.interaction_trigger useTriggerRequireLookAt(0);
     self.interaction_trigger setusefov(360);
   }
 
   if(var_1.script_noteworthy == "charge_animal_toys") {
-    self.interaction_trigger usetriggerrequirelookat(1);
+    self.interaction_trigger useTriggerRequireLookAt(1);
     self.interaction_trigger setusefov(160);
   }
 }

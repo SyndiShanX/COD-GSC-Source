@@ -33,11 +33,11 @@ function function_40349f7c(localclientnum) {
 
   for(localclientnum = 0; localclientnum < maxclients; localclientnum++) {
     if(isDefined(function_5c10bd79(localclientnum))) {
-      foreach(player in getplayers(localclientnum)) {
+      foreach(player in getPlayers(localclientnum)) {
         player zm::function_92f0c63(localclientnum);
       }
 
-      foreach(player in getplayers(localclientnum)) {
+      foreach(player in getPlayers(localclientnum)) {
         player zm_perk_death_perception::function_25410869(localclientnum);
       }
     }
@@ -51,11 +51,11 @@ function private on_end(local_client_num) {
 
   for(localclientnum = 0; localclientnum < maxclients; localclientnum++) {
     if(isDefined(function_5c10bd79(localclientnum))) {
-      foreach(player in getplayers(localclientnum)) {
+      foreach(player in getPlayers(localclientnum)) {
         player zm::function_92f0c63(localclientnum);
       }
 
-      foreach(player in getplayers(localclientnum)) {
+      foreach(player in getPlayers(localclientnum)) {
         player zm_perk_death_perception::function_25410869(localclientnum);
       }
     }

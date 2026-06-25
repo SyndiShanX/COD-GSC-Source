@@ -26,14 +26,14 @@ trial_c_init_clip() {
   trial_c_wall_block();
   trial_c_oblesik_clip();
   trial_c_syphoncore_clip();
-  level.shield_clip = getent("mq_shield_clip", "script_noteworthy");
+  level.shield_clip = getEnt("mq_shield_clip", "script_noteworthy");
 
   if(isDefined(level.shield_clip)) {
     level.shield_clip notsolid();
     level.shield_clip _meth_8093();
   }
 
-  level.fountain_clip = getent("trial_of_resilience_fountain_blocker", "script_noteworthy");
+  level.fountain_clip = getEnt("trial_of_resilience_fountain_blocker", "script_noteworthy");
 
   if(isDefined(level.fountain_clip)) {
     level.fountain_clip notsolid();
@@ -44,12 +44,12 @@ trial_c_init_clip() {
     return;
   }
   if(!isDefined(level.e_crystal_hand)) {
-    var_0 = scripts\engine\utility::getstruct("trial_of_resilience_crystalized_hand", "script_noteworthy");
+    var_0 = scripts\engine\utility::getStruct("trial_of_resilience_crystalized_hand", "script_noteworthy");
     level.e_crystal_hand = scripts\cp\utility::_id_E190("s4_zm_crystalized_hand", var_0.origin, var_0.angles);
   }
 
   if(!isDefined(level.e_shield)) {
-    var_1 = scripts\engine\utility::getstruct("trial_of_resilience_lock_shield", "script_noteworthy");
+    var_1 = scripts\engine\utility::getStruct("trial_of_resilience_lock_shield", "script_noteworthy");
     level.e_shield = scripts\cp\utility::_id_E190("vm_shield_demonic_zm_closeeye_200", var_1.origin, var_1.angles);
 
     if(scripts\engine\utility::_id_608B("mq_trial_c_hand_idle")) {
@@ -117,7 +117,7 @@ handle_trial_c_flow() {
   level endon("game_ended");
   level endon("mq_trial_c_done");
   level endon("start_rbz_exfil");
-  level.main_obelisk_c = scripts\engine\utility::getstruct("trial_of_resilience_obelisk", "script_noteworthy");
+  level.main_obelisk_c = scripts\engine\utility::getStruct("trial_of_resilience_obelisk", "script_noteworthy");
 
   if(!isDefined(level.main_obelisk_c)) {
     return;
@@ -128,13 +128,13 @@ handle_trial_c_flow() {
   }
 
   if(!isDefined(level.e_crystal_hand)) {
-    var_0 = scripts\engine\utility::getstruct("trial_of_resilience_crystalized_hand", "script_noteworthy");
+    var_0 = scripts\engine\utility::getStruct("trial_of_resilience_crystalized_hand", "script_noteworthy");
     level.e_crystal_hand = scripts\cp\utility::_id_E190("s4_zm_crystalized_hand", var_0.origin, var_0.angles);
   } else
     level.e_crystal_hand setModel("s4_zm_crystalized_hand");
 
   if(!isDefined(level.e_shield)) {
-    var_1 = scripts\engine\utility::getstruct("trial_of_resilience_lock_shield", "script_noteworthy");
+    var_1 = scripts\engine\utility::getStruct("trial_of_resilience_lock_shield", "script_noteworthy");
     level.e_shield = scripts\cp\utility::_id_E190("vm_shield_demonic_zm_200", var_1.origin, var_1.angles);
     playFXOnTag(scripts\engine\utility::getfx("mq_trial_c_hand_idle"), level.e_shield, "tag_riot_shield");
   } else
@@ -169,13 +169,13 @@ handle_trial_c_flow() {
   playFXOnTag(scripts\engine\utility::getfx("mq_trial_c_orb"), level.yellow_orb, "tag_origin");
   level.yellow_orb playSound("zmb_trail_orb_spawn");
   level.yellow_orb playLoopSound("zmb_trial_orb_lp");
-  level.yellow_orb moveto(level.yellow_orb.origin + (0, 0, 50), 1, 0.5, 0.1);
+  level.yellow_orb moveTo(level.yellow_orb.origin + (0, 0, 50), 1, 0.5, 0.1);
   wait 1.2;
   level thread scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::play_narrations_to_players(scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::get_players_in_trial_zone(level.trial_c_zones), ["zm_cpm5_mqs5_krft_qied", "zm_cpm5_mqs5_vlst_qiee"], 1);
-  var_8 = scripts\engine\utility::getstruct("orb_trial_c_loc", "script_noteworthy");
+  var_8 = scripts\engine\utility::getStruct("orb_trial_c_loc", "script_noteworthy");
   var_9 = distance(var_8.origin, level.yellow_orb.origin) / 250;
   var_9 = max(0.7, var_9);
-  level.yellow_orb moveto(var_8.origin, var_9, 0.5, 0.1);
+  level.yellow_orb moveTo(var_8.origin, var_9, 0.5, 0.1);
   level.yellow_orb waittill("movedone");
   level.main_obelisk_c.origin = level.yellow_orb.origin;
   level.yellow_orb playSound("zmb_trial_orb_voice_stinger");
@@ -239,7 +239,7 @@ handle_trial_c_flow() {
   _id_07A1::scriptable_removedamagecallback(::destroy_soul_crystal);
   var_9 = distance(level.e_shield.origin, level.yellow_orb.origin) / 250;
   var_9 = max(0.7, var_9);
-  level.yellow_orb moveto(level.e_shield.origin + (0, 0, 120), var_9, 0.5, 0.1);
+  level.yellow_orb moveTo(level.e_shield.origin + (0, 0, 120), var_9, 0.5, 0.1);
   level.yellow_orb waittill("movedone");
   wait 0.5;
   level thread scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::obelisk_send_fx_trail(level.yellow_orb.origin, level.e_shield gettagorigin("tag_riot_shield"), "mq_trial_c_shield_charged", 500);
@@ -254,7 +254,7 @@ handle_trial_c_flow() {
   level.main_obelisk_c.origin = level.main_obelisk_c.mdl.origin;
   var_9 = distance(level.main_obelisk_c.origin, level.yellow_orb.origin) / 250;
   var_9 = max(0.7, var_9);
-  level.yellow_orb moveto(level.main_obelisk_c.origin + (0, 0, 120), var_9, 0.5, 0.1);
+  level.yellow_orb moveTo(level.main_obelisk_c.origin + (0, 0, 120), var_9, 0.5, 0.1);
   wait 1.2;
   level.e_shield playSound("zmb_shield_drop");
   level.e_shield playSound("wpn_decimator_impact_npc");
@@ -722,7 +722,7 @@ shield_challenge_flow() {
   trial_c_wall_block(1);
   wait 0.5;
   scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::pause_round_base_spawn();
-  level.trial_c_fountain = scripts\engine\utility::getstruct("trial_of_resilience_fountain", "script_noteworthy");
+  level.trial_c_fountain = scripts\engine\utility::getStruct("trial_of_resilience_fountain", "script_noteworthy");
 
   if(!isDefined(level.trial_c_fountain.mdl)) {
     level.trial_c_fountain.mdl = scripts\cp\utility::_id_E190("s4_zm_broken_demonic_fountain_revive", level.trial_c_fountain.origin, level.trial_c_fountain.angles);
@@ -760,7 +760,7 @@ shield_challenge_flow() {
     if(var_10 < var_7) {
       var_8[var_10] childthread handle_syphoncore_instance();
       level.a_trial_c_syphoncore[var_10] = var_8[var_10];
-      var_9[var_9.size] = getent(var_8[var_10].target, "targetname");
+      var_9[var_9.size] = getEnt(var_8[var_10].target, "targetname");
     }
   }
 
@@ -936,7 +936,7 @@ set_blood_surface_height(var_0) {
   var_5 = distance(var_1.origin, var_4) / 10;
 
   if(var_5 > 0) {
-    var_1 moveto(var_4, var_5, 0, 0);
+    var_1 moveTo(var_4, var_5, 0, 0);
   }
 }
 

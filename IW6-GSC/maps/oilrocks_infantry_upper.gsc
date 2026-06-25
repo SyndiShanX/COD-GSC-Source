@@ -18,7 +18,7 @@ catchup_function() {
 }
 
 merrick_goes_green() {
-  var_0 = getent("keegan_goes_green", "targetname");
+  var_0 = getEnt("keegan_goes_green", "targetname");
   var_0 waittill("trigger");
   level.merrick maps\_utility::set_force_color("g");
 }

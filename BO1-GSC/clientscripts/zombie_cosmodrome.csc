@@ -78,7 +78,7 @@ main() {
   for(i = 0; i < players.size; i++) {
     level thread nml_fx_monitor(i);
   }
-  level.nml_spark_pull = GetStruct("nml_spark_pull", "targetname");
+  level.nml_spark_pull = getStruct("nml_spark_pull", "targetname");
   level thread monkey_start_monitor();
   level thread monkey_stop_monitor();
   level thread monkey_land_on();
@@ -193,7 +193,7 @@ vista_rockets() {
 }
 rocket_launch(rocket) {
   wait(.1);
-  rocket moveto(rocket.origin + (0, 0, 50000), 50, 45);
+  rocket moveTo(rocket.origin + (0, 0, 50000), 50, 45);
   rocket waittill("movedone");
   rocket delete();
 }
@@ -280,10 +280,10 @@ migs_fly_by() {
     }
     for(i = 0; i < planes.size; i++) {
       playFXOnTag(0, level._effect["mig_trail"], planes[i], "tag_engine");
-      planes[i] rotateto(point.angles, .05);
+      planes[i] rotateTo(point.angles, .05);
       forward = anglesToForward(point.angles);
       moveto_spot = vector_scale_2d(forward, 50000);
-      planes[i] moveto(moveto_spot, 20);
+      planes[i] moveTo(moveto_spot, 20);
       if(planes.size > 2 && i == 0) {
         wait(.35);
       }
@@ -314,7 +314,7 @@ radar_dish_init() {
 radar_dish_rotate() {
   wait(0.1);
   while(true) {
-    self rotateyaw(360, 10);
+    self rotateYaw(360, 10);
     self waittill("rotatedone");
   }
 }
@@ -389,7 +389,7 @@ nml_fx_monitor(client_num) {
 }
 perk_wire_fx_client(client_num, done_notify) {
   println("perk_wire_fx_client for client #" + client_num);
-  targ = GetStruct(self.target, "targetname");
+  targ = getStruct(self.target, "targetname");
   if(!isDefined(targ)) {
     return;
   }
@@ -399,8 +399,8 @@ perk_wire_fx_client(client_num, done_notify) {
   while(isDefined(targ)) {
     if(isDefined(targ.target)) {
       println("perk_wire_fx_client#" + client_num + " next target: " + targ.target);
-      target = getstruct(targ.target, "targetname");
-      mover MoveTo(target.origin, 0.5);
+      target = getStruct(targ.target, "targetname");
+      mover moveTo(target.origin, 0.5);
       wait(0.5);
       targ = target;
     } else {
@@ -429,7 +429,7 @@ soul_pull(client_num) {
   mover setModel("tag_origin");
   fx = playFXOnTag(client_num, level._effect["soul_spark"], mover, "tag_origin");
   wait(1.0);
-  mover MoveTo(level.nml_spark_pull.origin, 3.0);
+  mover moveTo(level.nml_spark_pull.origin, 3.0);
   wait(3.0);
   mover Delete();
 }
@@ -682,10 +682,10 @@ open_lander_bay_doors(door_name) {
   for(x = 0; x < players.size; x++) {
     doors = getEntArray(x, door_name, "targetname");
     for(i = 0; i < doors.size; i++) {
-      open_pos = getstruct(doors[i].target, "targetname");
-      start_pos = getstruct(open_pos.target, "targetname");
+      open_pos = getStruct(doors[i].target, "targetname");
+      start_pos = getStruct(open_pos.target, "targetname");
       if(!isDefined(doors[i].script_noteworthy)) {
-        doors[i] moveto(start_pos.origin, 1.0);
+        doors[i] moveTo(start_pos.origin, 1.0);
         if(sound_count == 0) {
           playSound(0, "zmb_lander_door", doors[i].origin);
           sound_count++;
@@ -700,10 +700,10 @@ open_lander_bay_doors(door_name) {
   for(x = 0; x < players.size; x++) {
     doors = getEntArray(x, door_name, "targetname");
     for(i = 0; i < doors.size; i++) {
-      open_pos = getstruct(doors[i].target, "targetname");
-      start_pos = getstruct(open_pos.target, "targetname");
+      open_pos = getStruct(doors[i].target, "targetname");
+      start_pos = getStruct(open_pos.target, "targetname");
       if(isDefined(doors[i].script_noteworthy)) {
-        doors[i] moveto(open_pos.origin, 1.0);
+        doors[i] moveTo(open_pos.origin, 1.0);
         if(sound_count == 0) {
           playSound(0, "zmb_lander_door", doors[i].origin);
           sound_count++;
@@ -718,9 +718,9 @@ open_lander_bay_doors_only(door_name) {
   for(x = 0; x < players.size; x++) {
     doors = getEntArray(x, door_name, "targetname");
     for(i = 0; i < doors.size; i++) {
-      open_pos = getstruct(doors[i].target, "targetname");
+      open_pos = getStruct(doors[i].target, "targetname");
       if(!isDefined(doors[i].script_noteworthy)) {
-        doors[i] moveto(open_pos.origin, 1.0);
+        doors[i] moveTo(open_pos.origin, 1.0);
         if(sound_count == 0) {
           playSound(0, "zmb_lander_door", doors[i].origin);
           sound_count++;
@@ -736,10 +736,10 @@ close_lander_bay_doors(door_name) {
   for(x = 0; x < players.size; x++) {
     doors = getEntArray(x, door_name, "targetname");
     for(i = 0; i < doors.size; i++) {
-      open_pos = getstruct(doors[i].target, "targetname");
-      start_pos = getstruct(open_pos.target, "targetname");
+      open_pos = getStruct(doors[i].target, "targetname");
+      start_pos = getStruct(open_pos.target, "targetname");
       if(isDefined(doors[i].script_noteworthy)) {
-        doors[i] moveto(start_pos.origin, 1.0);
+        doors[i] moveTo(start_pos.origin, 1.0);
         if(sound_count == 0) {
           playSound(0, "zmb_lander_door", doors[i].origin);
           sound_count++;
@@ -753,10 +753,10 @@ close_lander_bay_doors(door_name) {
   for(x = 0; x < players.size; x++) {
     doors = getEntArray(x, door_name, "targetname");
     for(i = 0; i < doors.size; i++) {
-      open_pos = getstruct(doors[i].target, "targetname");
-      start_pos = getstruct(open_pos.target, "targetname");
+      open_pos = getStruct(doors[i].target, "targetname");
+      start_pos = getStruct(open_pos.target, "targetname");
       if(!isDefined(doors[i].script_noteworthy)) {
-        doors[i] moveto(start_pos.origin, 1.0);
+        doors[i] moveTo(start_pos.origin, 1.0);
         if(sound_count == 0) {
           playSound(0, "zmb_lander_door", doors[i].origin);
           sound_count++;
@@ -885,9 +885,9 @@ rain_debris(clientnum) {
 }
 debris_crash_and_burn(spot, client, player) {
   playFXOnTag(client, level._effect["debris_trail"], self, "tag_origin");
-  self moveto(spot, 3.1);
+  self moveTo(spot, 3.1);
   for(i = 0; i < 10; i++) {
-    self rotateto((randomint(360), randomint(360), randomint(360)), .3);
+    self rotateTo((randomint(360), randomint(360), randomint(360)), .3);
     wait(.3);
   }
   wait(3.1);
@@ -972,7 +972,7 @@ lander_station_move_lander_marker(localClientNum) {
         dest = screen gettagorigin("tag_location_2");
         break;
     }
-    screen.lander_fx_ent moveto(dest, 10);
+    screen.lander_fx_ent moveTo(dest, 10);
   }
 }
 lander_station_think() {
@@ -1131,7 +1131,7 @@ lander_rumble_and_quake(localClientNum, set, newEnt) {
   }
   if(set) {
     player Earthquake(RandomFloatRange(0.2, 0.3), RandomFloatRange(2, 2.5), player.origin, 150);
-    player PlayRumbleOnEntity(localClientNum, "artillery_rumble");
+    player playRumbleOnEntity(localClientNum, "artillery_rumble");
     self thread do_lander_rumble_quake(localClientNum);
   } else {
     self thread end_ground_sounds();
@@ -1165,7 +1165,7 @@ do_lander_rumble_quake(localClientNum) {
       player Earthquake(RandomFloatRange(0.15, 0.2), RandomFloatRange(0.15, 0.16), self.origin, 750);
       rumble = "damage_light";
     }
-    player PlayRumbleOnEntity(localClientNum, rumble);
+    player playRumbleOnEntity(localClientNum, rumble);
     wait(.1);
   }
 }
@@ -1193,7 +1193,7 @@ centrifuge_rumble_when_close(ent_centrifuge, int_client_num) {
     distance_to_centrifuge = DistanceSquared(self.origin, ent_centrifuge.origin);
     if((distance_to_centrifuge < rumble_range) && isDefined(self)) {
       if(isDefined(int_client_num)) {
-        self PlayRumbleOnEntity(int_client_num, centrifuge_rumble);
+        self playRumbleOnEntity(int_client_num, centrifuge_rumble);
       }
     }
     if((distance_to_centrifuge > rumble_range)) {
@@ -1306,7 +1306,7 @@ centrifuge_warning_lights_on(client_num) {
     temp_mdl = spawn(client_num, self GetTagOrigin(self._centrifuge_lights_[client_num][i]), "script_model");
     temp_mdl.angles = self GetTagAngles(self._centrifuge_lights_[client_num][i]);
     temp_mdl setModel("tag_origin");
-    temp_mdl LinkTo(self, self._centrifuge_lights_[client_num][i]);
+    temp_mdl linkTo(self, self._centrifuge_lights_[client_num][i]);
     playFXOnTag(client_num, level._effect["centrifuge_warning_light"], temp_mdl, "tag_origin");
     self._centrifuge_light_mdls_[client_num] = add_to_array(self._centrifuge_light_mdls_[client_num], temp_mdl, false);
   }
@@ -1314,7 +1314,7 @@ centrifuge_warning_lights_on(client_num) {
     temp_mdl = spawn(client_num, self GetTagOrigin(self._centrifuge_sparks_[client_num][i]), "script_model");
     temp_mdl.angles = self GetTagAngles(self._centrifuge_sparks_[client_num][i]);
     temp_mdl setModel("tag_origin");
-    temp_mdl LinkTo(self, self._centrifuge_sparks_[client_num][i]);
+    temp_mdl linkTo(self, self._centrifuge_sparks_[client_num][i]);
     playFXOnTag(client_num, level._effect["centrifuge_light_spark"], temp_mdl, "tag_origin");
     self._centrifuge_light_mdls_[client_num] = add_to_array(self._centrifuge_light_mdls_[client_num], temp_mdl, false);
   }

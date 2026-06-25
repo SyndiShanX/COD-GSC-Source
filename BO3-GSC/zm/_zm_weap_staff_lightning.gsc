@@ -88,7 +88,7 @@ function staff_lightning_position_source(v_detonate, v_angles, str_weapon) {
   n_leftover_time = n_max_movetime_s - n_movetime_s;
   e_ball_fx thread staff_lightning_ball_kill_zombies(self);
   e_ball_fx thread zm_tomb_utility::puzzle_debug_position("", (175, 0, 255));
-  e_ball_fx moveto(v_end, n_movetime_s);
+  e_ball_fx moveTo(v_end, n_movetime_s);
   finished_playing = e_ball_fx lightning_ball_wait(n_leftover_time);
   e_ball_fx notify("stop_killing");
   e_ball_fx notify("stop_debug_position");

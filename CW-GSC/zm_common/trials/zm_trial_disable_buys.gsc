@@ -120,7 +120,7 @@ function private function_6fd56055() {
     target_struct = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(target_struct) && isDefined(target_struct.target)) {
-      wallbuy_fx = getent(target_struct.target, "targetname");
+      wallbuy_fx = getEnt(target_struct.target, "targetname");
 
       if(isDefined(wallbuy_fx)) {
         wallbuy_fx ghost();
@@ -130,7 +130,7 @@ function private function_6fd56055() {
     model = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(model) && isDefined(model.target)) {
-      var_393a819e = getent(model.target, "targetname");
+      var_393a819e = getEnt(model.target, "targetname");
 
       if(isDefined(var_393a819e)) {
         var_393a819e ghost();
@@ -156,7 +156,7 @@ function private function_fa70c8c4() {
     target_struct = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(target_struct) && isDefined(target_struct.target)) {
-      wallbuy_fx = getent(target_struct.target, "targetname");
+      wallbuy_fx = getEnt(target_struct.target, "targetname");
 
       if(isDefined(wallbuy_fx)) {
         wallbuy_fx show();
@@ -166,7 +166,7 @@ function private function_fa70c8c4() {
     model = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(model) && isDefined(model.target)) {
-      var_393a819e = getent(model.target, "targetname");
+      var_393a819e = getEnt(model.target, "targetname");
 
       if(isDefined(var_393a819e)) {
         var_393a819e show();

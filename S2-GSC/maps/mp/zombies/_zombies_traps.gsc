@@ -468,7 +468,7 @@ func_9CD5(param_00) {
     switch (var_04) {
       case "no_power":
         if(0) {
-          param_00 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+          param_00 setHintString(&"ZOMBIES_REQUIRES_POWER");
           param_00 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           param_00 lib_0547::func_9A85(0);
         }
@@ -481,7 +481,7 @@ func_9CD5(param_00) {
 
       case "active":
         if(0) {
-          param_00 sethintstring(&"ZOMBIES_EMPTY_STRING");
+          param_00 setHintString(&"ZOMBIES_EMPTY_STRING");
           param_00 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
           param_00 lib_0547::func_9A85(0);
         }
@@ -495,9 +495,9 @@ func_9CD5(param_00) {
       case "cooldown":
         if(0) {
           if(isDefined(self.var_4DAF)) {
-            param_00 sethintstring(self.var_4DAF["hint_cooldown"]);
+            param_00 setHintString(self.var_4DAF["hint_cooldown"]);
           } else {
-            param_00 sethintstring(&"ZOMBIES_TRAP_COOLDOWN");
+            param_00 setHintString(&"ZOMBIES_TRAP_COOLDOWN");
           }
 
           param_00 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
@@ -525,9 +525,9 @@ func_9CD5(param_00) {
 
         if(0) {
           if(isDefined(self.var_4DAF)) {
-            param_00 sethintstring(self.var_4DAF["hint_ready"]);
+            param_00 setHintString(self.var_4DAF["hint_ready"]);
           } else {
-            param_00 sethintstring(&"ZOMBIES_TRAP_BUY_GENERIC");
+            param_00 setHintString(&"ZOMBIES_TRAP_BUY_GENERIC");
           }
 
           param_00 setsecondaryhintstring(lib_0547::func_4474(var_05));
@@ -548,7 +548,7 @@ func_9CD5(param_00) {
 
       case "deactivate":
         if(0) {
-          var_01 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+          var_01 setHintString(&"ZOMBIES_REQUIRES_POWER");
           var_01 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
         }
 
@@ -585,8 +585,8 @@ func_9CAC(param_00) {
     switch (var_06.var_0165) {
       case "damage_over_time":
       case "damage":
-        var_06 enablelinkto();
-        var_06 linkto(var_01);
+        var_06 enablelinkTo();
+        var_06 linkTo(var_01);
         thread func_9CA0(var_06, var_06.var_0165 == "damage_over_time", "fx_trap_move");
         break;
 
@@ -664,8 +664,8 @@ func_9CB1(param_00) {
     switch (var_06.var_0165) {
       case "damage_over_time":
       case "damage":
-        var_06 enablelinkto();
-        var_06 linkto(var_01);
+        var_06 enablelinkTo();
+        var_06 linkTo(var_01);
         thread func_9CA0(var_06, var_06.var_0165 == "damage_over_time", "laser");
         break;
 
@@ -778,11 +778,11 @@ func_9CB5(param_00) {
     }
 
     if(var_06 > 0) {
-      param_00 moveto(var_04.var_0116, var_05);
+      param_00 moveTo(var_04.var_0116, var_05);
     }
 
     if(var_07 > 0) {
-      param_00 rotateto(var_04.var_001D, var_05);
+      param_00 rotateTo(var_04.var_001D, var_05);
     }
 
     if(var_05 > 0) {
@@ -1253,7 +1253,7 @@ func_9CD7(param_00) {
     var_0B = spawn("script_model", var_0A);
     var_0B.var_001D = var_01 gettagangles(var_08);
     var_0B setModel("tag_origin");
-    var_0B linkto(var_01, var_08);
+    var_0B linkTo(var_01, var_08);
     var_0B.var_4836 = var_02;
     var_0B.var_5983 = var_03;
     var_0B.var_1173 = var_04;
@@ -1278,12 +1278,12 @@ func_9CD7(param_00) {
         var_11.var_A045 = ::func_9CEE;
         var_11.var_AC77 = var_01;
         var_01.var_241F = var_11;
-        var_11 linkto(var_01);
+        var_11 linkTo(var_01);
         break;
 
       case "kill_trigger":
-        var_11 enablelinkto();
-        var_11 linkto(var_01);
+        var_11 enablelinkTo();
+        var_11 linkTo(var_01);
         var_01.var_5A81 = var_11;
         break;
 
@@ -1334,7 +1334,7 @@ func_9CEA(param_00) {
 func_9CE0(param_00, param_01) {
   var_02 = [];
   var_03 = [(-16, 16, 56), (0, 16, 56), (18, 16, 56), (-16, -22, 56), (0, -22, 56), (18, -22, 56), (-16, -60, 56), (0, -60, 56), (18, -60, 56)];
-  var_04 = getent("zomboni_room_volume", "targetname");
+  var_04 = getEnt("zomboni_room_volume", "targetname");
   var_05 = param_00 gettagorigin("body_animate_jnt");
   var_05 = (var_05[0], var_05[1], param_00.var_0116[2]);
   foreach(var_07 in var_03) {
@@ -1348,7 +1348,7 @@ func_9CE0(param_00, param_01) {
   var_0A = getnodesinradius(var_05, 200, 0, 100);
   var_0B = anglesToForward(param_00.var_001D);
   foreach(var_0D in var_0A) {
-    var_0E = vectornormalize(var_0D.var_0116 - var_05);
+    var_0E = vectorNormalize(var_0D.var_0116 - var_05);
     if(vectordot(var_0B, var_0E) < 0) {
       var_02[var_02.size] = var_0D;
     }
@@ -1512,7 +1512,7 @@ func_9CF4(param_00) {
           continue;
         }
 
-        var_0C = vectornormalize(param_00.var_0116 - var_05.var_0116);
+        var_0C = vectorNormalize(param_00.var_0116 - var_05.var_0116);
         if(vectordot(var_0C, var_0B) < 0.1) {
           continue;
         }
@@ -1710,11 +1710,11 @@ func_9CD8(param_00, param_01) {
 }
 
 func_9CDF(param_00, param_01) {
-  param_00 moveto(param_00.var_6BED, param_01);
+  param_00 moveTo(param_00.var_6BED, param_01);
 }
 
 func_9CDE(param_00, param_01) {
-  param_00 moveto(param_00.var_2438, param_01);
+  param_00 moveTo(param_00.var_2438, param_01);
 }
 
 func_9CE3(param_00) {
@@ -1995,7 +1995,7 @@ func_9CE5(param_00, param_01) {
   if(isDefined(param_00.var_81EF)) {
     var_03 = strtok(param_00.var_81EF, " ");
     for(var_04 = 0; var_04 < var_03.size; var_04++) {
-      var_05 = getent(var_03[var_04], "script_linkname");
+      var_05 = getEnt(var_03[var_04], "script_linkname");
       if(isDefined(var_05)) {
         if(!isDefined(param_01) || isDefined(var_05.var_0165) && var_05.var_0165 == param_01) {
           var_02[var_02.size] = var_05;

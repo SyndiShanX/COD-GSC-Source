@@ -97,7 +97,7 @@ function private play_critical_health_rumble(localclientnum) {
 
   while(true) {
     self waittill(#"pulse_blood");
-    self playrumbleonentity(localclientnum, var_cf155b98);
+    self playRumbleOnEntity(localclientnum, var_cf155b98);
 
     if(!is_true(self.var_e9dd2ca0)) {
       self playSound(localclientnum, sound);
@@ -712,7 +712,7 @@ function private play_new_stage_rumble(localclientnum) {
   self endon(#"death", #"disconnect");
 
   for(i = 0; i < 2; i++) {
-    self playrumbleonentity(localclientnum, "new_health_stage");
+    self playRumbleOnEntity(localclientnum, "new_health_stage");
     wait 0.4;
   }
 }

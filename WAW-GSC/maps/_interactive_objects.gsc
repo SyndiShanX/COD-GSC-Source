@@ -1399,7 +1399,7 @@ tincan_think() {
     direction_org = ent.origin;
   }
 
-  direction_vec = vectornormalize(self.origin - direction_org);
+  direction_vec = vectorNormalize(self.origin - direction_org);
   direction_vec = vectorScale(direction_vec, .5 + randomfloat(1));
 
   self notify("death");
@@ -1426,7 +1426,7 @@ helmet_logic() {
     direction_org = ent.origin;
   }
 
-  direction_vec = vectornormalize(self.origin - direction_org);
+  direction_vec = vectorNormalize(self.origin - direction_org);
 
   if(!isDefined(self.dontremove) && ent == level.player) {
     self thread animscripts\death::helmetLaunch(direction_vec);
@@ -1602,7 +1602,7 @@ breakable_think() {
   }
 
   if(isDefined(self.target)) {
-    trig = getent(self.target, "targetname");
+    trig = getEnt(self.target, "targetname");
     if((isDefined(trig)) && (trig.classname == "trigger_multiple")) {
       trig thread breakable_think_triggered(self);
     }
@@ -1757,7 +1757,7 @@ xenon_enable_auto_aim(wait_message) {
 
 breakable_clip() {
   if(isDefined(self.target)) {
-    targ = getent(self.target, "targetname");
+    targ = getEnt(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
       self.remove = targ;
       return;
@@ -1947,7 +1947,7 @@ pieces_move(origin) {
     return;
   }
   org = spawn("script_origin", self.origin);
-  self linkto(org);
+  self linkTo(org);
   end = self.origin + (randomfloat(10) - 5, randomfloat(10) - 5, randomfloat(10) + 5);
 
   vec = undefined;
@@ -1968,7 +1968,7 @@ pieces_move(origin) {
 
     org rotatevelocity((250 * x, 250 * y, randomfloat(100) * z), 2, 0, .5);
   } else if(isDefined(self.type) && self.type == "plate") {
-    vec = vectornormalize(end - origin);
+    vec = vectorNormalize(end - origin);
     vec = vectorScale(vec, 125 + randomfloat(25));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
@@ -1976,7 +1976,7 @@ pieces_move(origin) {
       org rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
-    vec = vectornormalize(end - origin);
+    vec = vectorNormalize(end - origin);
     vec = vectorScale(vec, 60 + randomfloat(50));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);

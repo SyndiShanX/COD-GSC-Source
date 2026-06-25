@@ -74,14 +74,14 @@ function_f6048ee(e_player) {
   if(isDefined(e_player)) {
     if(!isDefined(level.var_74170866.e_player)) {
       if(isDefined(e_player.var_9c20e2c9)) {
-        self sethintstring(#"hash_744b68f010abb05");
+        self setHintString(#"hash_744b68f010abb05");
       } else {
-        self sethintstring(#"hash_12346bdab086516e");
+        self setHintString(#"hash_12346bdab086516e");
       }
     } else if(level.var_74170866.e_player == e_player) {
-      self sethintstring(#"hash_74fc96e8d58ff646");
+      self setHintString(#"hash_74fc96e8d58ff646");
     } else {
-      self sethintstring(#"hash_2054e8fdb6521566");
+      self setHintString(#"hash_2054e8fdb6521566");
     }
 
     return true;
@@ -275,7 +275,7 @@ function_473f437() {
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");
-    playsoundatposition("evt_rgun_frame_putback", (-759, -626, -7));
+    playSoundAtPosition("evt_rgun_frame_putback", (-759, -626, -7));
 
     if(function_18a1849f(s_notify.e_who)) {
       level.var_74170866.var_fead3ae9 = util::spawn_model("p8_zm_whi_fuse_pickup_fluid_magenta_pink_half", self.origin, self.angles);
@@ -321,9 +321,9 @@ function_17f3e9e2() {
 function_7015dc35(e_player) {
   if(isDefined(e_player)) {
     if(level.var_74170866.e_player === e_player) {
-      self sethintstring(#"hash_14eae7c162ebb8d2");
+      self setHintString(#"hash_14eae7c162ebb8d2");
     } else {
-      self sethintstring(#"hash_2054e8fdb6521566");
+      self setHintString(#"hash_2054e8fdb6521566");
     }
 
     return true;

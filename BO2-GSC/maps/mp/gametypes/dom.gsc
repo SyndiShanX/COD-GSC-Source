@@ -279,7 +279,7 @@ domflags() {
     trigger = level.flags[index];
 
     if(isDefined(trigger.target)) {
-      visuals[0] = getent(trigger.target, "targetname");
+      visuals[0] = getEnt(trigger.target, "targetname");
     } else {
       visuals[0] = spawn("script_model", trigger.origin);
       visuals[0].angles = trigger.angles;

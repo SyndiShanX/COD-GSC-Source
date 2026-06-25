@@ -319,8 +319,8 @@ _id_7D65(var_0) {
 
 _id_5B9A() {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level._id_5B9F[self._id_5BA0]._id_0224);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level._id_5B9F[self._id_5BA0]._id_0224);
   scripts\cp\utility::_id_1179();
   var_0 = self.owner;
   var_0 _meth_80FC();
@@ -347,7 +347,7 @@ _id_5B9A() {
   var_7 = spawn("trigger_radius", self.origin, 0, 256, 100);
   self._id_1DFB = var_7;
   self._id_1DFB _meth_80DB();
-  self._id_1DFB linkto(self);
+  self._id_1DFB linkTo(self);
   self._id_1DF4 = length(self._id_1DE5) / 400;
   wait 0.75;
   self setscriptablepartstate("base", "on");
@@ -427,7 +427,7 @@ _id_90DE(var_0, var_1) {
   var_2 setscriptablepartstate("rocket", "launch");
   var_3 = self._id_3B73.weaponinfo;
   var_4 = self.owner;
-  var_2 moveto(self._id_1DE5 + self.origin, self._id_1DF4, self._id_1DF4 * 0.5, 0);
+  var_2 moveTo(self._id_1DE5 + self.origin, self._id_1DF4, self._id_1DF4 * 0.5, 0);
   var_2 waittill("movedone");
   var_2 setscriptablepartstate("rocket", "explode");
   wait 0.1;

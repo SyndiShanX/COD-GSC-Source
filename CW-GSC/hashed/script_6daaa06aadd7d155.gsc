@@ -56,7 +56,7 @@ function function_4b8cec86(str_skipto) {
 
 function outro_main(str_skipto, b_starting) {
   level flag::wait_till("level_is_go");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level notify(#"hash_146b46855a0f35b8");
   level flag::set("flag_spawn_motor_pool_enemies");
   level flag::set("flag_spawn_radar_enemies");
@@ -135,7 +135,7 @@ function function_40ceace8() {
 }
 
 function function_8b371bd3() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("smoke_tossed");
   player dialogue::queue("vox_cp_rcir_01300_masn_smokeout_98");
   wait 1;
@@ -214,7 +214,7 @@ function function_45a92388() {
 }
 
 function function_d78fcf75() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("ac130_support_used");
   player dialogue::queue("vox_cp_rcir_01300_masn_senditin_9f");
   dialogue::radio("vox_cp_rcir_01300_pilo_rogerthat_fe");
@@ -301,7 +301,7 @@ function function_df7926cc(b_starting) {
   ret = grenade waittilltimeout(10, ["death", #"projectile_impact", #"explode"]);
   level.var_a16d9e19 = grenade.origin;
   evac::function_d1e14c76(level.var_a16d9e19);
-  e_vol = getent("volume_evac_loc", "targetname");
+  e_vol = getEnt("volume_evac_loc", "targetname");
 
   if(isDefined(e_vol) && isDefined(level.var_dc8cac2a)) {
     e_vol.origin = level.var_a16d9e19;
@@ -349,11 +349,11 @@ function function_29758311() {
     self switchtoweapon(weap);
     level.var_dd0b1f89 = 8;
     level flag::set("evac_start_next_wave");
-    level.player playrumbleonentity(#"damage_light");
+    level.player playRumbleOnEntity(#"damage_light");
     wait 0.3;
     level.var_dd0b1f89 = 15;
   } else {
-    level.player playrumbleonentity(#"damage_light");
+    level.player playRumbleOnEntity(#"damage_light");
     level flag::set("evac_start_next_wave");
   }
 

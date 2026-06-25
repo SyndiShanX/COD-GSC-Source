@@ -219,7 +219,7 @@ wheel_of_misfortune_start_func(var_0, var_1) {
   var_4 = var_0.skull_target;
   var_4.origin = var_3;
   var_4.angles = var_0.angles;
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   var_5 = randomfloatrange(0.1, 0.7);
   wait(var_5);
   var_4 show();
@@ -347,7 +347,7 @@ skull_escape(var_0, var_1) {
   var_2 thread color_manager(var_2, var_1);
   var_2.angles = (0, 225, 0);
   var_2 set_skull_color(var_2, "green");
-  var_2 moveto(var_0 + (0, 0, 500), var_1);
+  var_2 moveTo(var_0 + (0, 0, 500), var_1);
   var_2 waittill("movedone");
   level notify("skull_escaped");
   level thread clear_escaping_skulls();

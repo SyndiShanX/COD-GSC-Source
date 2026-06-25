@@ -52,7 +52,7 @@ _id_76EF(var_0, var_1, var_2, var_3) {
   self._id_9F00 _meth_82F0(90);
   self._id_9F00 _meth_8302(0.05, "yaw");
   self._id_9F00 _meth_8302(0.05, "pitch");
-  self._id_9F00 linkto(self, var_4, var_5, (0, 0, 0));
+  self._id_9F00 linkTo(self, var_4, var_5, (0, 0, 0));
   self._id_9F00 _meth_83A0("axis");
   self._id_9F00._id_3643 = self;
   thread scripts\engine\utility::_id_472E(self._id_9F00);
@@ -535,7 +535,7 @@ _id_76CB(var_0, var_1, var_2) {
     self._id_9F00 _meth_8086();
   }
 
-  var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   self setvehgoalpos(var_3.origin, 0);
   thread _id_7682();
   scripts\engine\utility::_id_108A8(15, "goal", "goal_reached");
@@ -545,7 +545,7 @@ _id_76CB(var_0, var_1, var_2) {
   for(;;) {
     self setvehgoalpos(var_4.origin, 0);
     scripts\engine\utility::_id_108A8(15, "goal", "goal_reached");
-    var_4 = scripts\engine\utility::getstruct(var_4.target, "targetname");
+    var_4 = scripts\engine\utility::getStruct(var_4.target, "targetname");
   }
 }
 
@@ -794,7 +794,7 @@ _id_6489(var_0) {
   var_3 = anglesToForward(var_0.angles);
 
   foreach(var_5 in var_2) {
-    var_6 = vectornormalize(var_5.origin - var_0.origin);
+    var_6 = vectorNormalize(var_5.origin - var_0.origin);
 
     if(vectordot(var_6, var_3) > 0) {
       var_1[var_1.size] = var_5;
@@ -832,7 +832,7 @@ _id_D7FC(var_0, var_1, var_2, var_3) {
 
   var_7 = spawn("script_model", self gettagorigin(var_4));
   var_7 setModel("aq_pilot_fullbody_1");
-  var_7 linkto(self, var_4, var_5, var_6);
+  var_7 linkTo(self, var_4, var_5, var_6);
   var_7 _meth_82CB("vh_mindia8_pilot_idle");
   self._id_B0CB = var_7;
 

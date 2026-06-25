@@ -123,7 +123,7 @@ function function_6dcb2e93() {
     return;
   }
 
-  foreach(other in getplayers()) {
+  foreach(other in getPlayers()) {
     if(level.var_3c3b40c7 sr_orda_health_bar::is_open(other)) {
       var_3acd97a5 = arraygetclosest(other.origin, getaiarchetypearray(#"hulk"));
 
@@ -149,7 +149,7 @@ function function_cfa54bac() {
   callback::on_connect(&function_6dcb2e93);
   n_health_percent = self.health / self.maxhealth;
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(!level.var_3c3b40c7 sr_orda_health_bar::is_open(e_player)) {
       level.var_3c3b40c7 sr_orda_health_bar::open(e_player, 1);
     }
@@ -164,7 +164,7 @@ function function_cfa54bac() {
     self waittill(#"damage", #"healing");
     n_health_percent = self.health / self.maxhealth;
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(level.var_3c3b40c7 sr_orda_health_bar::is_open(e_player)) {
         level.var_3c3b40c7 sr_orda_health_bar::set_health(e_player, n_health_percent);
       }
@@ -177,7 +177,7 @@ function function_cfa54bac() {
 function function_8bed563f(str_notify) {
   self notify(#"hash_5dbe35d2a8f175a5");
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(level.var_3c3b40c7 sr_orda_health_bar::is_open(e_player)) {
       level.var_3c3b40c7 sr_orda_health_bar::close(e_player);
     }

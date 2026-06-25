@@ -82,7 +82,7 @@ is_mason_stealth_crouched() {
 }
 
 setup_mason_carry_woods() {
-  level.m_player_rig linkto(level.m_player_spot, "tag_origin");
+  level.m_player_rig linkTo(level.m_player_spot, "tag_origin");
   level.m_player_rig.animname = "player_body_river";
   level.m_player_spot thread anim_loop_aligned(level.m_player_rig, "mason_carry_idle");
   link_player_and_woods_together();
@@ -93,7 +93,7 @@ setup_mason_carry_woods() {
 }
 
 link_player_and_woods_together() {
-  level.ai_woods linkto(level.m_player_rig, "tag_origin");
+  level.ai_woods linkTo(level.m_player_rig, "tag_origin");
 }
 
 mason_movement() {
@@ -244,7 +244,7 @@ mason_movement_translation(m_player_rig) {
 
           if(a_forward_trace == trace_end) {
             v_movement = v_forward_trace - trace_start;
-            v_movement_perp = vectorcross(vectornormalize(v_movement), v_up);
+            v_movement_perp = vectorcross(vectorNormalize(v_movement), v_up);
             v_movement_perp_inverse = v_movement_perp * -1;
             a_movement_perp_trace = physicstrace(v_forward_trace, v_forward_trace + v_movement_perp * speed_forward);
             a_movement_perp_inverse_trace = physicstrace(v_forward_trace, v_forward_trace + v_movement_perp_inverse * speed_forward);
@@ -266,8 +266,8 @@ mason_movement_translation(m_player_rig) {
           v_collision_normal = use_normal;
           n_projection = 1 - use_frac;
           v_velocity = v_velocity + v_collision_normal * n_speed;
-          v_collision_parallel = vectorcross(vectornormalize(v_collision_normal), v_up);
-          v_collision_to_player = vectornormalize(v_forward_trace - level.player.origin);
+          v_collision_parallel = vectorcross(vectorNormalize(v_collision_normal), v_up);
+          v_collision_to_player = vectorNormalize(v_forward_trace - level.player.origin);
           n_parallel_dot = vectordot(v_collision_parallel, v_collision_to_player);
 
           if(n_parallel_dot < 0) {
@@ -277,9 +277,9 @@ mason_movement_translation(m_player_rig) {
           v_velocity = v_velocity + v_collision_parallel * (n_projection * abs(n_parallel_dot));
         }
 
-        v_woods_spot = level.m_player_spot.origin + vectornormalize(right) * -1 * 8;
+        v_woods_spot = level.m_player_spot.origin + vectorNormalize(right) * -1 * 8;
         v_final_spot = playerphysicstrace(level.m_player_spot.origin + level.woods_carry_height_offset, level.m_player_spot.origin + v_velocity * 0.05 + level.woods_carry_height_offset);
-        v_final_woods_spot = v_woods_spot + vectornormalize(v_velocity) * 16 + level.woods_carry_height_offset;
+        v_final_woods_spot = v_woods_spot + vectorNormalize(v_velocity) * 16 + level.woods_carry_height_offset;
         v_final_woods_trace = playerphysicstrace(v_woods_spot + level.woods_carry_height_offset, v_final_woods_spot);
 
         if(v_final_woods_spot != v_final_woods_trace) {
@@ -360,7 +360,7 @@ mason_movement_rotation(m_player_rig) {
 
     if(a_normalized_rotation[1] >= 0.2) {
       v_rotate_vel = v_rotate_speed * a_normalized_rotation[1];
-      v_woods_spot = level.m_player_spot.origin + vectornormalize(right) * -1 * 16;
+      v_woods_spot = level.m_player_spot.origin + vectorNormalize(right) * -1 * 16;
       v_rotate_radius = v_woods_spot - level.m_player_spot.origin;
       v_rotation_movement = v_rotate_vel + vectorcross(v_rotate_radius, v_up);
       v_rotation_point = v_woods_spot + v_rotation_movement;
@@ -369,11 +369,11 @@ mason_movement_rotation(m_player_rig) {
 
       if(length(v_difference) < 0.01) {
         v_final_angles = level.m_player_spot.angles - v_rotate_speed * abs(a_normalized_rotation[1]);
-        level.m_player_spot rotateto(v_final_angles, 0.05);
+        level.m_player_spot rotateTo(v_final_angles, 0.05);
       }
     } else if(a_normalized_rotation[1] <= -0.2) {
       v_rotate_vel = v_rotate_speed * a_normalized_rotation[1];
-      v_woods_spot = level.m_player_spot.origin + vectornormalize(right) * -1 * 16;
+      v_woods_spot = level.m_player_spot.origin + vectorNormalize(right) * -1 * 16;
       v_rotate_radius = v_woods_spot - level.m_player_spot.origin;
       v_rotation_movement = v_rotate_vel + vectorcross(v_rotate_radius, v_up);
       v_rotation_point = v_woods_spot + v_rotation_movement;
@@ -382,7 +382,7 @@ mason_movement_rotation(m_player_rig) {
 
       if(length(v_difference) < 0.01) {
         v_final_angles = level.m_player_spot.angles + v_rotate_speed * abs(a_normalized_rotation[1]);
-        level.m_player_spot rotateto(v_final_angles, 0.05);
+        level.m_player_spot rotateTo(v_final_angles, 0.05);
       }
     }
 
@@ -494,7 +494,7 @@ unhide_player_carry() {
   level.m_player_rig anim_set_blend_out_time(0.2);
   level.m_player_spot.origin = level.m_player_rig.origin;
   level.m_player_spot.angles = level.m_player_rig.angles;
-  level.m_player_rig linkto(level.m_player_spot);
+  level.m_player_rig linkTo(level.m_player_spot);
   level.m_player_spot thread anim_loop_aligned(level.m_player_rig, "mason_carry_idle");
   level.m_player_rig thread anim_loop_aligned(level.ai_woods, "mason_carry_idle");
   wait 0.2;

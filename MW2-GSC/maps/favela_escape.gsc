@@ -288,7 +288,7 @@ setup_enemies() {
   noBackShooters = getEntArray("dont_shoot_player_in_back", "script_noteworthy");
   array_thread(noBackShooters, ::add_spawn_function, ::dont_shoot_player_in_back);
 
-  guy = GetEnt("spawner_vista2_endhouse", "script_noteworthy");
+  guy = getEnt("spawner_vista2_endhouse", "script_noteworthy");
   guy thread add_spawn_function(::ai_unlimited_rocket_ammo);
 
   roofRunners = getEntArray("solorun_roofrunner", "script_noteworthy");
@@ -534,7 +534,7 @@ start_market_evac_escape() {
   guys = get_nonhero_friends();
   redshirt = guys[0];
 
-  struct = GetStruct("struct_start_market_evac_escape_player", "targetname");
+  struct = getStruct("struct_start_market_evac_escape_player", "targetname");
   level.player teleport_to_origin(struct.origin, struct.angles);
 
   sargeNode = GetNode("node_sarge_preclimb", "targetname");
@@ -607,10 +607,10 @@ start_roofrun_player_jump() {
 
   array_thread(level.friends, ::ent_flag_init, "roofrun_start");
 
-  sargeorg = GetStruct("roofrun_sarge_waitforplayer", "targetname");
+  sargeorg = getStruct("roofrun_sarge_waitforplayer", "targetname");
   level.sarge teleport_to_origin(sargeorg.origin, sargeorg.angles);
 
-  playerorg = GetStruct("struct_start_roofrun_player_jump_player", "targetname");
+  playerorg = getStruct("struct_start_roofrun_player_jump_player", "targetname");
   level.player teleport_to_origin(playerorg.origin, playerorg.angles);
 
   wait(0.05);
@@ -639,7 +639,7 @@ start_solorun() {
 
   level.player TakeAllWeapons();
 
-  playerorg = GetStruct("struct_solorun_beginning_start_player", "targetname");
+  playerorg = getStruct("struct_solorun_beginning_start_player", "targetname");
   level.player thread teleport_to_origin(playerorg.origin, playerorg.angles);
 
   thread favesc_finalrun_music();
@@ -659,7 +659,7 @@ start_solorun_rooftops() {
 
   level.player TakeAllWeapons();
 
-  playerorg = GetStruct("struct_solorun_rooftops_start_player", "targetname");
+  playerorg = getStruct("struct_solorun_rooftops_start_player", "targetname");
   level.player teleport_to_origin(playerorg.origin, playerorg.angles);
 
   thread solorun("rooftops");
@@ -674,7 +674,7 @@ start_solorun_chopper() {
 
   level.player TakeAllWeapons();
 
-  playerorg = GetStruct("struct_solorun_chopper_start_player", "targetname");
+  playerorg = getStruct("struct_solorun_chopper_start_player", "targetname");
   level.player teleport_to_origin(playerorg.origin, playerorg.angles);
 
   thread solorun("chopperjump");
@@ -731,8 +731,8 @@ intro_rojas_crucified() {
   level endon("radiotower_exit");
   level endon("cleaning_up_rojas");
 
-  animref = GetEnt("intro_rojas_beaten_animref", "targetname");
-  spawner = GetEnt(animref.target, "targetname");
+  animref = getEnt("intro_rojas_beaten_animref", "targetname");
+  spawner = getEnt(animref.target, "targetname");
   ASSERT(isDefined(animref) && isDefined(spawner));
 
   spawner.script_drone = undefined;
@@ -776,8 +776,8 @@ intro_rojas_crucified() {
     }
   }
 
-  animref anim_stopanimscripted();
-  rojas anim_stopanimscripted();
+  animref anim_stopanimScripted();
+  rojas anim_stopanimScripted();
 
   rojas.allowDeath = true;
   rojas.a.nodeath = true;
@@ -794,10 +794,10 @@ intro_rojas_crucified_cleanup(rojas, animref, restraints) {
   level notify("cleaning_up_rojas");
 
   if(isDefined(rojas)) {
-    rojas anim_stopanimscripted();
+    rojas anim_stopanimScripted();
   }
-  animref anim_stopanimscripted();
-  restraints anim_stopanimscripted();
+  animref anim_stopanimScripted();
+  restraints anim_stopanimScripted();
 
   wait(0.05);
 
@@ -917,7 +917,7 @@ market_evac() {
       }
     }
 
-    spawner = GetEnt("market_evac_redshirt_spawner", "targetname");
+    spawner = getEnt("market_evac_redshirt_spawner", "targetname");
 
     guy = spawner spawn_ai();
     ASSERTEX(isDefined(guy), "Couldn't spawn emergency friendly for market evac escape.");
@@ -1019,7 +1019,7 @@ market_evac_friend_outside_setup() {
   self thread clear_force_color();
   self thread enable_heat_behavior();
   self thread be_less_scared();
-  self thread set_temp_goalradius(256);
+  self thread set_temp_goalRadius(256);
   self thread disable_arrivals();
   self thread set_fixednode_false();
   self thread pathrandompercent_set(0);
@@ -1072,8 +1072,8 @@ market_evac_escape() {
 }
 
 market_evac_friendlies_climb() {
-  animref = GetStruct("market_evac_friendlies_climb_animspot", "targetname");
-  animref2 = GetStruct("market_evac_friendlies_climb_animspot_2", "targetname");
+  animref = getStruct("market_evac_friendlies_climb_animspot", "targetname");
+  animref2 = getStruct("market_evac_friendlies_climb_animspot_2", "targetname");
   animeL = "favela_escape_rooftop_traverse_L";
   animeR = "favela_escape_rooftop_traverse_R";
   animeM = "favela_escape_rooftop_traverse_M";
@@ -1154,7 +1154,7 @@ market_evac_sarge_should_idle() {
     return false;
   }
 
-  trig = GetEnt("trig_market_evac_mantlehelper", "targetname");
+  trig = getEnt("trig_market_evac_mantlehelper", "targetname");
   if(level.player IsTouching(trig)) {
     return false;
   }
@@ -1198,7 +1198,7 @@ thread solorun();
 }
 
 roofrun_chopper_cargodoor_open() {
-  chopperSpawner = GetEnt("veh_chopper_roofrun", "targetname");
+  chopperSpawner = getEnt("veh_chopper_roofrun", "targetname");
 
   chopper = undefined;
   if(isDefined(chopperSpawner.last_spawned_vehicle)) {
@@ -1310,7 +1310,7 @@ solorun_balcony_save() {
   }
 }
 solorun_balcony_save_aicheck() {
-  volume = GetEnt("vol_solorun_ai_behind_player_near_balcony", "targetname");
+  volume = getEnt("vol_solorun_ai_behind_player_near_balcony", "targetname");
 
   enemies = GetAISpeciesArray("bad_guys", "all");
 

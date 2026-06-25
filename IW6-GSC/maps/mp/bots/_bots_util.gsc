@@ -14,10 +14,10 @@ bot_get_nodes_in_cone(max_dist, vector_dot, only_visible_nodes) {
 
   nearest_node_to_bot = self GetNearestNode();
   bot_dir = anglesToForward(self GetPlayerAngles());
-  bot_dir_norm = VectorNormalize(bot_dir * (1, 1, 0));
+  bot_dir_norm = vectorNormalize(bot_dir * (1, 1, 0));
 
   foreach(node in nodes_around_bot) {
-    bot_to_node_norm = VectorNormalize((node.origin - self.origin) * (1, 1, 0));
+    bot_to_node_norm = vectorNormalize((node.origin - self.origin) * (1, 1, 0));
     dot = VectorDot(bot_to_node_norm, bot_dir_norm);
     if(dot > vector_dot) {
       if(!only_visible_nodes || (isDefined(nearest_node_to_bot) && NodesVisible(node, nearest_node_to_bot, true))) {
@@ -580,9 +580,9 @@ bot_find_node_to_guard_player(center_of_search, radius, opposide_side_of_player)
     all_nodes_raw = GetNodesInRadius(center_of_search, radius * 1.75, radius * 0.5, 500);
 
     all_nodes = [];
-    normalized_velocity = VectorNormalize(player_guarding_velocity);
+    normalized_velocity = vectorNormalize(player_guarding_velocity);
     for(i = 0; i < all_nodes_raw.size; i++) {
-      player_to_node = VectorNormalize(all_nodes_raw[i].origin - self.bot_defend_player_guarding.origin);
+      player_to_node = vectorNormalize(all_nodes_raw[i].origin - self.bot_defend_player_guarding.origin);
       if(VectorDot(player_to_node, normalized_velocity) > 0.1) {
         all_nodes[all_nodes.size] = all_nodes_raw[i];
       }
@@ -592,11 +592,11 @@ bot_find_node_to_guard_player(center_of_search, radius, opposide_side_of_player)
   }
 
   if(isDefined(opposide_side_of_player) && opposide_side_of_player) {
-    bot_to_player = VectorNormalize(self.bot_defend_player_guarding.origin - self.origin);
+    bot_to_player = vectorNormalize(self.bot_defend_player_guarding.origin - self.origin);
     all_nodes_old = all_nodes;
     all_nodes = [];
     foreach(node in all_nodes_old) {
-      player_to_node = VectorNormalize(node.origin - self.bot_defend_player_guarding.origin);
+      player_to_node = vectorNormalize(node.origin - self.bot_defend_player_guarding.origin);
       if(VectorDot(bot_to_player, player_to_node) > 0.2) {
         all_nodes[all_nodes.size] = node;
       }
@@ -713,7 +713,7 @@ bot_pick_random_point_from_set(center_point, node_set, point_test_func) {
     rand_node_picked = Random(node_set);
     vec_to_rand_node = rand_node_picked.origin - center_point;
 
-    point_picked = center_point + VectorNormalize(vec_to_rand_node) * Length(vec_to_rand_node) * RandomFloat(1.0);
+    point_picked = center_point + vectorNormalize(vec_to_rand_node) * Length(vec_to_rand_node) * RandomFloat(1.0);
   }
 
   return point_picked;
@@ -1064,7 +1064,7 @@ bot_watch_nodes(nodes, yaw, yaw_fov, end_time, end1, end2, end3, end4) {
       }
 
       self_eye = self getEye();
-      dot_to_node = VectorDot((0, 0, 1), VectorNormalize(node.origin - self_eye));
+      dot_to_node = VectorDot((0, 0, 1), vectorNormalize(node.origin - self_eye));
       if(abs(dot_to_node) > 0.92) {
         node_invalid = true;
         AssertEx(abs(node.origin[2] - self_eye[2]) < 1000, "bot_watch_nodes() error - Bot with eyes at location " + self_eye + " trying to watch invalid point " + node.origin);
@@ -1142,10 +1142,10 @@ bot_watch_nodes(nodes, yaw, yaw_fov, end_time, end1, end2, end3, end4) {
         enemyKnownPos = self LastKnownPos(self.enemy);
         enemyKnownTime = self LastKnownTime(self.enemy);
         if(enemyKnownTime && ((now - enemyKnownTime) < 5000)) {
-          dirEnemy = VectorNormalize(enemyKnownPos - self.origin);
+          dirEnemy = vectorNormalize(enemyKnownPos - self.origin);
           maxDot = 0;
           for(i = 0; i < self.watch_nodes.size; i++) {
-            dirNode = VectorNormalize(self.watch_nodes[i].origin - self.origin);
+            dirNode = vectorNormalize(self.watch_nodes[i].origin - self.origin);
             dot = VectorDot(dirEnemy, dirNode);
 
             if(dot > maxDot) {
@@ -1201,7 +1201,7 @@ bot_watch_nodes(nodes, yaw, yaw_fov, end_time, end1, end2, end3, end4) {
         look_at_point = lookingAtNode.origin + node_offset;
 
         eyePos = self.origin + (0, 0, 55);
-        botToPoint = VectorNormalize(look_at_point - eyePos);
+        botToPoint = vectorNormalize(look_at_point - eyePos);
         vecUp = (0, 0, 1);
 
         if(VectorDot(vecUp, botToPoint) > 0.92) {

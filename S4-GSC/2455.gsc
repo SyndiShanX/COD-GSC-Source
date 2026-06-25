@@ -737,7 +737,7 @@ _id_4327(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread _id_ABD9(var_0, var_1, var_2, var_3, var_5);
 
   if(!isai(self)) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 

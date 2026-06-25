@@ -115,15 +115,15 @@ cornered_infil_pre_load() {
   maps\_utility::add_hint_string("rappel_movement_gamepad_l", &"CORNERED_RAPPEL_HINT_GAMEPAD_L", ::should_break_rappel_movement_hint);
   maps\_utility::add_hint_string("rappel_movement_gamepad_l_no_glyph", &"CORNERED_RAPPEL_HINT_GAMEPAD_L_NO_GLYPH", ::should_break_rappel_movement_hint);
   maps\_utility::add_hint_string("jump", &"CORNERED_RAPPEL_JUMP");
-  var_0 = getent("player_rappel_rope_stealth", "targetname");
+  var_0 = getEnt("player_rappel_rope_stealth", "targetname");
   var_0 hide();
-  level.first_floor_shift_right_trigger = getent("first_floor_shift_right_trigger", "targetname");
+  level.first_floor_shift_right_trigger = getEnt("first_floor_shift_right_trigger", "targetname");
   level.first_floor_shift_right_trigger common_scripts\utility::trigger_off();
-  level.laptop_destroyed = getent("laptop_sit_react_laptop_destroyed", "targetname");
+  level.laptop_destroyed = getEnt("laptop_sit_react_laptop_destroyed", "targetname");
   level.laptop_destroyed hide();
-  level.second_floor_shift_left_trigger = getent("second_floor_shift_left_trigger", "targetname");
+  level.second_floor_shift_left_trigger = getEnt("second_floor_shift_left_trigger", "targetname");
   level.second_floor_shift_left_trigger common_scripts\utility::trigger_off();
-  level.hide_bink_brush = getent("hide_bink_brush", "targetname");
+  level.hide_bink_brush = getEnt("hide_bink_brush", "targetname");
   level.hide_bink_brush hide();
   common_scripts\utility::flag_init("rappel_stealth_finished");
   level.rappel_rope_rig = undefined;
@@ -132,8 +132,8 @@ cornered_infil_pre_load() {
   level.rappel_max_lateral_speed = 9.0;
   level.rappel_max_downward_speed = 4.0;
   level.rappel_max_upward_speed = 3.0;
-  var_1 = common_scripts\utility::getstruct("third_combat_floor", "targetname");
-  var_2 = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("third_combat_floor", "targetname");
+  var_2 = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
   var_3 = var_2.origin;
   var_4 = var_2.angles;
   level.rorke_glass_start_org = getstartorigin(var_3, var_4, level.scr_anim["rorke"]["building_entry_rorke"]);
@@ -184,7 +184,7 @@ rappel_stealth() {
 
 handle_rappel_stealth() {
   if(!isDefined(level.zipline_anim_struct)) {
-    level.zipline_anim_struct = common_scripts\utility::getstruct("zipline_anim_struct", "targetname");
+    level.zipline_anim_struct = common_scripts\utility::getStruct("zipline_anim_struct", "targetname");
   }
 
   level.player thread maps\cornered_code::unlimited_ammo();
@@ -279,7 +279,7 @@ rappel_stealth_combat() {
     common_scripts\utility::flag_wait("first_floor_enemies_dead");
     common_scripts\utility::flag_clear("enemies_aware");
     common_scripts\utility::flag_clear("player_shot_in_right_volume");
-    level.second_floor_anim_struct = common_scripts\utility::getstruct("second_floor_anim_struct", "targetname");
+    level.second_floor_anim_struct = common_scripts\utility::getStruct("second_floor_anim_struct", "targetname");
     level.second_floor_left_enemies = [];
     level.second_floor_middle_enemies = [];
     var_1 = maps\_utility::array_spawn_targetname("second_floor_enemies", 1);
@@ -307,7 +307,7 @@ rappel_stealth_combat() {
 
 first_floor_sitting_laptop_guy_setup() {
   self endon("death");
-  var_0 = getent("rappel_stealth_tv_script_brushmodel", "targetname");
+  var_0 = getEnt("rappel_stealth_tv_script_brushmodel", "targetname");
   thread maps\cornered_code::watch_tv_for_damage(var_0, "player_jumped_into_building", 1);
   self.ignoreall = 1;
   self.animname = "generic";
@@ -318,7 +318,7 @@ first_floor_sitting_laptop_guy_setup() {
   self.deathanim = % cnd_rappel_stealth_chair_death_rear;
   childthread maps\cornered_code::wait_till_shot("enemies_aware", undefined, "enemy_aware");
   childthread maps\cornered_code::alert_all();
-  self.struct = common_scripts\utility::getstruct(self.script_noteworthy + "_struct", "targetname");
+  self.struct = common_scripts\utility::getStruct(self.script_noteworthy + "_struct", "targetname");
   self.struct thread maps\_anim::anim_loop_solo(self, "laptop_sit_idle_calm", "stop_loop");
   thread first_floor_sitting_laptop_guy_react();
 }
@@ -329,22 +329,22 @@ first_floor_sitting_laptop_guy_react() {
   var_0 thread maps\cornered_code::entity_cleanup("player_entering_building");
   var_1 = maps\_utility::spawn_anim_model("laptop_sit_react_props");
   var_1 thread maps\cornered_code::entity_cleanup("player_entering_building");
-  var_2 = getent("laptop_sit_react_chair", "targetname");
+  var_2 = getEnt("laptop_sit_react_chair", "targetname");
   var_2 thread maps\cornered_code::entity_cleanup("player_entering_building");
-  var_3 = getent("laptop_sit_react_laptop", "targetname");
+  var_3 = getEnt("laptop_sit_react_laptop", "targetname");
   var_3 setCanDamage(1);
   var_3 thread maps\cornered_code::entity_cleanup("player_entering_building");
   var_3 thread watch_for_damage();
   level.laptop_destroyed thread maps\cornered_code::entity_cleanup("player_entering_building");
   self.struct maps\_anim::anim_first_frame_solo(var_0, "laptop_sit_react");
   self.struct maps\_anim::anim_first_frame_solo(var_1, "laptop_sit_react");
-  var_2 linkto(var_0, "J_prop_1");
-  var_3 linkto(var_1, "J_prop_2");
-  level.laptop_destroyed linkto(var_1, "J_prop_2");
-  level.laptop_hdr = getent("laptop_hdr", "targetname");
+  var_2 linkTo(var_0, "J_prop_1");
+  var_3 linkTo(var_1, "J_prop_2");
+  level.laptop_destroyed linkTo(var_1, "J_prop_2");
+  level.laptop_hdr = getEnt("laptop_hdr", "targetname");
   var_4 = var_3 common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(var_1, "J_prop_2");
-  level.laptop_hdr linkto(var_4, "tag_origin");
+  var_4 linkTo(var_1, "J_prop_2");
+  level.laptop_hdr linkTo(var_4, "tag_origin");
   level.laptop_hdr thread maps\cornered_code::entity_cleanup("player_entering_building");
   var_4 thread maps\cornered_code::entity_cleanup("player_entering_building");
   var_5 = [];
@@ -367,7 +367,7 @@ first_floor_sitting_laptop_guy_react() {
   self.noragdoll = 0;
   self.struct notify("stop_loop");
   waittillframeend;
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 watch_for_damage() {
@@ -442,7 +442,7 @@ first_floor_patroller_2_setup() {
   }
 
   waittillframeend;
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   maps\_anim::anim_single_solo(self, "exposed_idle_reactA");
   self.ignoreall = 0;
 
@@ -466,11 +466,11 @@ two_guys_talking_patrol() {
   if(self.script_noteworthy == "first_floor_patroller_1") {
     common_scripts\utility::flag_wait("first_floor_patroller_1_in_place");
     level.enemy_patrol_phone = spawn("script_model", (0, 0, 0));
-    level.enemy_patrol_phone linkto(self, "tag_inhand", (0, -1, 0), (0, 0, 0));
+    level.enemy_patrol_phone linkTo(self, "tag_inhand", (0, -1, 0), (0, 0, 0));
     level.enemy_patrol_phone setModel("cnd_cellphone_01_off_anim");
     thread maps\_anim::anim_loop_solo(self, "so_hijack_search_texting_loop", "stop_loop");
   } else {
-    self.struct = common_scripts\utility::getstruct("first_floor_patrol_talking_struct", "targetname");
+    self.struct = common_scripts\utility::getStruct("first_floor_patrol_talking_struct", "targetname");
     self.struct thread maps\_anim::anim_loop_solo(self, "first_floor_patroller_2", "stop_loop");
   }
 }
@@ -488,7 +488,7 @@ allies_help_when_player_shoots_first_floor() {
   }
 
   if(common_scripts\utility::flag("first_floor_combat_weapons_free")) {
-    var_1 = getent("first_floor_right_volume_player", "targetname");
+    var_1 = getEnt("first_floor_right_volume_player", "targetname");
     level.player thread maps\cornered_code::watch_for_player_to_shoot_while_in_volume(var_1, "player_shot_in_right_volume", "first_floor_enemies_dead");
     thread maps\cornered_code::waittill_dead_set_flag(level.first_floor_combat_enemies_right, "player_shot_in_right_volume", "first_floor_enemies_dead");
     level.player maps\cornered_code::coordinated_kills(var_0, level.first_floor_combat_enemies_right, "player_shot_in_right_volume", "first_floor_enemies_dead");
@@ -500,8 +500,8 @@ allies_help_when_player_shoots_first_floor() {
 
 open_elevator_doors() {
   var_0 = getEntArray("rappel_stealth_elevator_doors", "targetname");
-  var_1 = getent("elevator_door_clip_right", "targetname");
-  var_2 = getent("elevator_door_clip_left", "targetname");
+  var_1 = getEnt("elevator_door_clip_right", "targetname");
+  var_2 = getEnt("elevator_door_clip_left", "targetname");
   level.door_shut_x = 0;
   level.door_open_x = 0;
 
@@ -516,14 +516,14 @@ open_elevator_doors() {
 
   foreach(var_4 in var_0) {
     if(var_4.script_noteworthy == "right") {
-      var_1 linkto(var_4);
-      var_4 moveto(var_4.origin + (58, 0, 0), 2.5, 0.5, 0.5);
+      var_1 linkTo(var_4);
+      var_4 moveTo(var_4.origin + (58, 0, 0), 2.5, 0.5, 0.5);
       var_1 connectpaths();
       continue;
     }
 
-    var_2 linkto(var_4);
-    var_4 moveto(var_4.origin + (-58, 0, 0), 2.5, 0.5, 0.5);
+    var_2 linkTo(var_4);
+    var_4 moveTo(var_4.origin + (-58, 0, 0), 2.5, 0.5, 0.5);
     var_2 connectpaths();
   }
 
@@ -540,16 +540,16 @@ close_elevator_doors(var_0, var_1, var_2) {
 
   foreach(var_4 in var_0) {
     if(var_4.script_noteworthy == "right") {
-      var_4 moveto(var_4.origin + (-58, 0, 0), 2.5, 0.5, 0.5);
+      var_4 moveTo(var_4.origin + (-58, 0, 0), 2.5, 0.5, 0.5);
       continue;
     }
 
-    var_4 moveto(var_4.origin + (58, 0, 0), 2.5, 0.5, 0.5);
+    var_4 moveTo(var_4.origin + (58, 0, 0), 2.5, 0.5, 0.5);
   }
 
   wait 1.5;
-  var_1 disconnectpaths();
-  var_2 disconnectpaths();
+  var_1 disconnectPaths();
+  var_2 disconnectPaths();
   wait 1.5;
   common_scripts\utility::flag_set("elevator_doors_shut");
   wait 3;
@@ -571,11 +571,11 @@ open_elevator_doors_if_stealth_broken(var_0, var_1, var_2) {
 
   foreach(var_6 in var_0) {
     if(var_6.script_noteworthy == "right") {
-      var_6 moveto(var_6.origin + (var_3, 0, 0), 2);
+      var_6 moveTo(var_6.origin + (var_3, 0, 0), 2);
       continue;
     }
 
-    var_6 moveto(var_6.origin + (var_3 * -1, 0, 0), 2);
+    var_6 moveTo(var_6.origin + (var_3 * -1, 0, 0), 2);
   }
 
   wait 2;
@@ -594,7 +594,7 @@ second_floor_poker_table_guys_setup() {
   level.second_floor_middle_enemies = common_scripts\utility::add_to_array(level.second_floor_middle_enemies, self);
 
   if(self.script_noteworthy == "enemy_1") {
-    self.struct = common_scripts\utility::getstruct("enemy_1", "targetname");
+    self.struct = common_scripts\utility::getStruct("enemy_1", "targetname");
     self.animation = "enemy_1_cards_idle";
     self.interruptedanim = "enemy_1_cards_interrupted";
     self.reactanim = "enemy_1_cards_alert";
@@ -603,7 +603,7 @@ second_floor_poker_table_guys_setup() {
   }
 
   if(self.script_noteworthy == "enemy_2") {
-    self.struct = common_scripts\utility::getstruct("enemy_2", "targetname");
+    self.struct = common_scripts\utility::getStruct("enemy_2", "targetname");
     self.animation = "enemy_2_cards_idle";
     self.interruptedanim = "enemy_2_cards_interrupted";
     self.reactanim = "enemy_2_cards_alert";
@@ -611,7 +611,7 @@ second_floor_poker_table_guys_setup() {
   }
 
   if(self.script_noteworthy == "enemy_3") {
-    self.struct = common_scripts\utility::getstruct("enemy_3", "targetname");
+    self.struct = common_scripts\utility::getStruct("enemy_3", "targetname");
     self.animation = "enemy_3_cards_idle";
     self.interruptedanim = "enemy_3_cards_interrupted";
     self.reactanim = "enemy_3_cards_alert";
@@ -624,7 +624,7 @@ second_floor_poker_table_guys_setup() {
   thread maps\cornered_code::wait_till_shot("enemies_aware", undefined, "enemy_aware");
   thread handle_alerted();
   thread maps\cornered_code::alert_all("poker_table_alerted", "second_floor_stealth_broken");
-  self.volume = getent("second_floor_middle_volume", "targetname");
+  self.volume = getEnt("second_floor_middle_volume", "targetname");
   thread maps\cornered_code::watch_for_death_and_alert_all_in_volume();
   self waittill("enemy_aware");
   self.noragdoll = 0;
@@ -637,17 +637,17 @@ second_floor_poker_table_guys_setup() {
 
 enemy_poker_cards() {
   var_0 = self gettagorigin("j_index_ri_3");
-  var_1 = getent(self.script_noteworthy + "_card_1", "script_noteworthy");
-  var_2 = getent(self.script_noteworthy + "_card_2", "script_noteworthy");
+  var_1 = getEnt(self.script_noteworthy + "_card_1", "script_noteworthy");
+  var_2 = getEnt(self.script_noteworthy + "_card_2", "script_noteworthy");
   var_1.origin = var_0;
   var_2.origin = var_0;
 
   if(self.script_noteworthy == "enemy_1") {
-    var_1 linkto(self, "j_index_le_3", (1, 2, 0), (90, 270, 5));
-    var_2 linkto(self, "j_index_le_3", (1, 2, 0), (90, 270, 5));
+    var_1 linkTo(self, "j_index_le_3", (1, 2, 0), (90, 270, 5));
+    var_2 linkTo(self, "j_index_le_3", (1, 2, 0), (90, 270, 5));
   } else {
-    var_1 linkto(self, "j_index_ri_3", (1, 2, 0), (90, 270, 5));
-    var_2 linkto(self, "j_index_ri_3", (1, 2, 0), (90, 270, 5));
+    var_1 linkTo(self, "j_index_ri_3", (1, 2, 0), (90, 270, 5));
+    var_2 linkTo(self, "j_index_ri_3", (1, 2, 0), (90, 270, 5));
   }
 
   if(self.script_noteworthy == "enemy_1") {
@@ -687,17 +687,17 @@ poker_table_spooked() {
   level endon("second_floor_enemies_dead");
   common_scripts\utility::flag_wait_any("player_shot_in_left_volume", "second_floor_left_enemies_taken_out");
   maps\_utility::delaythread(1, common_scripts\utility::flag_set, "poker_table_spooked");
-  var_0 = getent("second_floor_left_volume_player", "targetname");
+  var_0 = getEnt("second_floor_left_volume_player", "targetname");
 
   while(level.player istouching(var_0)) {
     common_scripts\utility::waitframe();
   }
 
-  var_1 = common_scripts\utility::getstruct("enemy_2", "targetname");
+  var_1 = common_scripts\utility::getStruct("enemy_2", "targetname");
   maps\cornered_code::waittill_player_looking_at_ent(var_1, 10);
   self.struct notify("stop_loop");
   waittillframeend;
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 
   if(self.script_noteworthy == "enemy_1") {
     self.struct thread maps\_anim::anim_single_solo(self, self.interruptedanim);
@@ -722,7 +722,7 @@ chair_death_right() {
   if(common_scripts\utility::flag("poker_table_enemy_1_standing")) {
     return;
   }
-  var_0 = getent("chair_death_right", "targetname");
+  var_0 = getEnt("chair_death_right", "targetname");
   var_0.animname = "chair";
   var_0 maps\_anim::setanimtree();
   var_0 thread maps\_anim::anim_single_solo(var_0, "chair_death_right");
@@ -750,7 +750,7 @@ second_floor_fridge_guy_setup() {
   thread fridge_anims();
   thread maps\cornered_code::wait_till_shot("enemies_aware", undefined, "enemy_aware");
   thread maps\cornered_code::alert_all("second_floor_stealth_broken");
-  self.volume = getent("second_floor_left_volume", "targetname");
+  self.volume = getEnt("second_floor_left_volume", "targetname");
   thread maps\cornered_code::watch_for_death_and_alert_all_in_volume("second_floor_fridge_guy_out_of_middle_volume");
   self waittill("enemy_aware");
 
@@ -763,7 +763,7 @@ second_floor_fridge_guy_setup() {
 
 fridge_anims() {
   self endon("death");
-  var_0 = getent("fridge", "targetname");
+  var_0 = getEnt("fridge", "targetname");
   var_0.animname = "fridge";
   var_0 maps\_anim::setanimtree();
   thread handle_beer_bottles();
@@ -772,7 +772,7 @@ fridge_anims() {
   level.second_floor_anim_struct thread maps\_anim::anim_first_frame_solo(level.guy_fridge_beers[1], "cornered_stealth_fridge_anims");
   thread fridge_guy_alerted();
   thread second_floor_fridge_guy_path();
-  var_1 = common_scripts\utility::getstruct("second_floor_fridge_guy_start_patrol", "targetname");
+  var_1 = common_scripts\utility::getStruct("second_floor_fridge_guy_start_patrol", "targetname");
   var_1 waittill("trigger");
   waittillframeend;
   level.second_floor_anim_struct thread maps\_anim::anim_loop_solo(self, "fridge_idle", "stop_loop");
@@ -787,7 +787,7 @@ second_floor_fridge_guy_path() {
   common_scripts\utility::flag_wait("second_floor_shift_left");
   level.second_floor_anim_struct notify("stop_loop");
   waittillframeend;
-  self stopanimscripted();
+  self stopanimScripted();
   common_scripts\utility::flag_set("fridge_guy_leaving_fridge");
   level.second_floor_anim_struct maps\_anim::anim_single(level.guy_fridge_beers, "cornered_stealth_fridge_anims");
   common_scripts\utility::flag_set("second_floor_fridge_guy_start_patrol");
@@ -798,7 +798,7 @@ second_floor_fridge_guy_path() {
   if(common_scripts\utility::flag("second_floor_poker_guys_dead")) {
     common_scripts\utility::flag_set("second_floor_fridge_guy_will_be_alerted");
   } else {
-    var_0 = getent(self.volume.targetname + "_player", "targetname");
+    var_0 = getEnt(self.volume.targetname + "_player", "targetname");
 
     if(level.player istouching(var_0)) {
       common_scripts\utility::flag_set("take_the_shot_vo");
@@ -806,7 +806,7 @@ second_floor_fridge_guy_path() {
   }
 
   common_scripts\utility::flag_wait("second_floor_fridge_guy_in_middle_volume");
-  self.volume = getent("second_floor_middle_volume", "targetname");
+  self.volume = getEnt("second_floor_middle_volume", "targetname");
 
   if(common_scripts\utility::flag("second_floor_poker_guys_dead")) {
     thread second_floor_fridge_guy_spooked();
@@ -833,7 +833,7 @@ second_floor_fridge_guy_spooked() {
   maps\_utility::set_run_anim("cqb_walk");
   self.patrol_walk_anim = "cqb_walk";
   maps\_utility::set_moveplaybackrate(0.5);
-  var_0 = common_scripts\utility::getstruct("second_floor_fridge_guy_middle_spook_patrol_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("second_floor_fridge_guy_middle_spook_patrol_start", "targetname");
   self.target = var_0.targetname;
   thread maps\_patrol::patrol(self.target);
   common_scripts\utility::flag_wait("second_floor_fridge_guy_middle_spook_patrol_end");
@@ -853,8 +853,8 @@ fridge_guy_alerted() {
     if(common_scripts\utility::flag("fridge_guy_leaving_fridge") && !common_scripts\utility::flag("second_floor_fridge_guy_start_patrol")) {
       level.second_floor_anim_struct notify("stop_loop");
       waittillframeend;
-      self stopanimscripted();
-      level.guy_fridge_beers[1] stopanimscripted();
+      self stopanimScripted();
+      level.guy_fridge_beers[1] stopanimScripted();
       self.ignoreall = 0;
     } else if(common_scripts\utility::flag("fridge_guy_leaving_fridge") && common_scripts\utility::flag("second_floor_fridge_guy_start_patrol")) {
       self notify("end_patrol");
@@ -862,7 +862,7 @@ fridge_guy_alerted() {
     } else if(!common_scripts\utility::flag("fridge_guy_leaving_fridge")) {
       level.second_floor_anim_struct notify("stop_loop");
       waittillframeend;
-      self stopanimscripted();
+      self stopanimScripted();
       level.guy_fridge_beers[1] maps\_anim::anim_single_solo(self, "fridge_react");
       self.ignoreall = 0;
     }
@@ -873,19 +873,19 @@ handle_beer_bottles() {
   var_0 = [];
   var_0[0] = spawn("script_model", (0, 0, 0));
   var_0[0] setModel("bo_p_glo_beer_bottle01_world");
-  var_0[0] linkto(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  var_0[0] linkTo(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   var_0[1] = spawn("script_model", (0, 0, 0));
   var_0[1] setModel("bo_p_glo_beer_bottle01_world");
-  var_0[1] linkto(self, "tag_shield_back", (0, 0, 0), (0, 0, 0));
+  var_0[1] linkTo(self, "tag_shield_back", (0, 0, 0), (0, 0, 0));
   var_0[2] = spawn("script_model", (0, 0, 0));
   var_0[2] setModel("bo_p_glo_beer_bottle01_world");
-  var_0[2] linkto(self, "tag_stowed_back", (0, 0, 0), (0, 0, 0));
+  var_0[2] linkTo(self, "tag_stowed_back", (0, 0, 0), (0, 0, 0));
   var_0[3] = spawn("script_model", (0, 0, 0));
   var_0[3] setModel("bo_p_glo_beer_bottle01_world");
-  var_0[3] linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  var_0[3] linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
   var_0[4] = spawn("script_model", (0, 0, 0));
   var_0[4] setModel("bo_p_glo_beer_bottle01_world");
-  var_0[4] linkto(self, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  var_0[4] linkTo(self, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_wait_any("fridge_guy_alerted_or_dead", "second_floor_fridge_guy_end_patrol", "second_floor_fridge_guy_spooked");
 
   if(common_scripts\utility::flag("second_floor_fridge_guy_end_patrol")) {
@@ -929,7 +929,7 @@ second_floor_kitchenette_guy_setup() {
   thread maps\cornered_code::wait_till_shot("enemies_aware", undefined, "enemy_aware");
   thread handle_alerted();
   thread maps\cornered_code::alert_all("second_floor_stealth_broken");
-  var_0 = getent("elevator_volume", "targetname");
+  var_0 = getEnt("elevator_volume", "targetname");
   thread watch_while_in_volume_and_set_flag_when_out(var_0, "second_floor_kitchenette_guy_out_of_elevator");
   common_scripts\utility::flag_wait_all("elevator_doors_open", "second_floor_combat_vo");
   common_scripts\utility::flag_set("second_floor_kitchenette_guy_leave_elevator");
@@ -939,12 +939,12 @@ second_floor_kitchenette_guy_setup() {
   maps\_utility::enable_surprise();
   self.disablebulletwhizbyreaction = 0;
   maps\_utility::set_ignoresuppression(0);
-  var_0 = getent("second_floor_middle_volume", "targetname");
+  var_0 = getEnt("second_floor_middle_volume", "targetname");
   thread watch_while_in_volume_and_set_flag_when_out(var_0, "second_floor_kitchenette_guy_out_middle_volume");
-  self.volume = getent("second_floor_middle_volume", "targetname");
+  self.volume = getEnt("second_floor_middle_volume", "targetname");
   thread maps\cornered_code::watch_for_death_and_alert_all_in_volume("second_floor_kitchenette_guy_out_middle_volume");
-  var_0 = getent("second_floor_left_volume", "targetname");
-  self.volume = getent("second_floor_left_volume", "targetname");
+  var_0 = getEnt("second_floor_left_volume", "targetname");
+  self.volume = getEnt("second_floor_left_volume", "targetname");
   thread maps\cornered_code::watch_for_death_and_alert_all_in_volume("intro_vo_done");
   self waittill("enemy_aware");
 
@@ -1002,7 +1002,7 @@ kitchenette_guy_continue() {
   common_scripts\utility::flag_wait("second_floor_kitchenette_guy_at_stir_node");
   self.reactanim = "patrol_bored_react_look_retreat";
   level.enemy_patrol_phone = spawn("script_model", (0, 0, 0));
-  level.enemy_patrol_phone linkto(self, "tag_inhand", (0, 1, 0), (0, 0, 0));
+  level.enemy_patrol_phone linkTo(self, "tag_inhand", (0, 1, 0), (0, 0, 0));
   level.enemy_patrol_phone setModel("cnd_cellphone_01_off_anim");
   thread maps\_anim::anim_loop_solo(self, "patrol_bored_idle_cellphone", "stop_loop");
 }
@@ -1042,9 +1042,9 @@ elevator_door_close(var_0) {
 elevator_guys_react() {
   self endon("death");
   self waittill("enemy_aware");
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = 0;
-  var_0 = getent("second_floor_middle_volume", "targetname");
+  var_0 = getEnt("second_floor_middle_volume", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
@@ -1065,7 +1065,7 @@ allies_help_when_player_shoots_second_floor_left() {
   }
 
   var_0 thread ally_reset_second_floor_left();
-  var_1 = getent("second_floor_left_volume_player", "targetname");
+  var_1 = getEnt("second_floor_left_volume_player", "targetname");
   level.player thread maps\cornered_code::watch_for_player_to_shoot_while_in_volume(var_1, "player_shot_in_left_volume", "second_floor_enemies_dead");
   childthread maps\cornered_code::waittill_dead_set_flag(level.second_floor_left_enemies, "player_shot_in_left_volume", "second_floor_enemies_dead");
   level.player maps\cornered_code::coordinated_kills(level.allies[level.const_baker], level.second_floor_left_enemies, "player_shot_in_left_volume", "second_floor_enemies_dead", "shot_at_left_guys");
@@ -1103,9 +1103,9 @@ allies_help_when_player_shoots_second_floor_middle_or_right() {
   }
 
   var_0 thread ally_reset_second_floor_right();
-  var_1 = getent("second_floor_middle_volume_player", "targetname");
+  var_1 = getEnt("second_floor_middle_volume_player", "targetname");
   level.player childthread maps\cornered_code::watch_for_player_to_shoot_while_in_volume(var_1, "player_shot_in_middle_volume", "second_floor_enemies_dead");
-  var_1 = getent("second_floor_right_volume_player", "targetname");
+  var_1 = getEnt("second_floor_right_volume_player", "targetname");
   level.player childthread maps\cornered_code::watch_for_player_to_shoot_while_in_volume(var_1, "player_shot_in_middle_volume", "second_floor_enemies_dead");
   childthread maps\cornered_code::waittill_dead_set_flag(level.second_floor_middle_enemies, "player_shot_in_middle_volume", "second_floor_enemies_dead");
   level.player childthread maps\cornered_code::coordinated_kills(level.allies[level.const_rorke], level.second_floor_middle_enemies, "player_shot_in_middle_volume", "second_floor_enemies_dead", "shot_at_middle_guys");
@@ -1152,12 +1152,12 @@ handle_alerted(var_0) {
   if(isDefined(self.struct)) {
     self.struct notify("stop_loop");
     waittillframeend;
-    self stopanimscripted();
+    self stopanimScripted();
     self.favoriteenemy = level.player;
   } else {
     self notify("stop_loop");
     waittillframeend;
-    self stopanimscripted();
+    self stopanimScripted();
     self.favoriteenemy = level.player;
   }
 
@@ -1515,7 +1515,7 @@ allies_rappel_stealth_anims() {
   maps\cornered_code_rappel_allies::ally_rappel_movement_setup("stealth", "first_floor_enemies_dead");
 
   if(isDefined(level.rappel_stealth_checkpoint)) {
-    level.zipline_anim_struct = common_scripts\utility::getstruct("zipline_anim_struct", "targetname");
+    level.zipline_anim_struct = common_scripts\utility::getStruct("zipline_anim_struct", "targetname");
     level.zipline_anim_struct thread maps\_anim::anim_single_solo(self, "zipline_" + self.animname);
     common_scripts\utility::waitframe();
     self setanim(maps\_utility::getanim("zipline_" + self.animname), 1.0, 0, 0);
@@ -1607,8 +1607,8 @@ allies_move_down_to_first_floor_combat() {
   level endon(self.stealth_broken_flag);
   level.last_goal_struct = 0;
   level.vertical_struct = [];
-  level.vertical_struct[0] = common_scripts\utility::getstruct("first_empty_floor", "targetname");
-  level.vertical_struct[1] = common_scripts\utility::getstruct("first_combat_floor", "targetname");
+  level.vertical_struct[0] = common_scripts\utility::getStruct("first_empty_floor", "targetname");
+  level.vertical_struct[1] = common_scripts\utility::getStruct("first_combat_floor", "targetname");
   ally_rappel_stealth_movement_vertical("first_floor_enemies_dead");
 
   if(!common_scripts\utility::flag("first_floor_enemies_dead")) {
@@ -1630,7 +1630,7 @@ allies_move_down_to_second_floor_combat() {
   level endon(self.stealth_broken_flag);
   level.last_goal_struct = 0;
   level.vertical_struct = [];
-  level.vertical_struct[0] = common_scripts\utility::getstruct("second_combat_floor", "targetname");
+  level.vertical_struct[0] = common_scripts\utility::getStruct("second_combat_floor", "targetname");
   ally_rappel_stealth_movement_vertical("second_floor_enemies_dead");
 
   if(!common_scripts\utility::flag("second_floor_enemies_dead")) {
@@ -1652,8 +1652,8 @@ allies_move_down_to_third_floor_combat() {
   level endon(self.stealth_broken_flag);
   level.last_goal_struct = 0;
   level.vertical_struct = [];
-  level.vertical_struct[0] = common_scripts\utility::getstruct("second_empty_floor", "targetname");
-  level.vertical_struct[1] = common_scripts\utility::getstruct("third_combat_floor", "targetname");
+  level.vertical_struct[0] = common_scripts\utility::getStruct("second_empty_floor", "targetname");
+  level.vertical_struct[1] = common_scripts\utility::getStruct("third_combat_floor", "targetname");
 
   if(self.animname == "rorke") {
     maps\cornered_code_rappel_allies::ally_rappel_pause_movement_horizontal(0);
@@ -1832,8 +1832,8 @@ ally_rappel_stealth_movement_vertical(var_0, var_1, var_2) {
   var_6 = 176400;
   var_7 = (0, 90, 0);
   self forceteleport(self.origin, var_7);
-  self.out_volume = getent(self.animname + "_stealth_out", "targetname");
-  self.in_volume = getent(self.animname + "_stealth_in", "targetname");
+  self.out_volume = getEnt(self.animname + "_stealth_out", "targetname");
+  self.in_volume = getEnt(self.animname + "_stealth_in", "targetname");
   self.doing_start_anim = 0;
 
   while(!common_scripts\utility::flag(var_3)) {

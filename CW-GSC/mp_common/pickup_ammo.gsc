@@ -14,8 +14,8 @@ function function_cff1656d() {
 
   foreach(pickup in pickup_ammos) {
     pickup.trigger = spawn("trigger_radius_use", pickup.origin + (0, 0, 15), 0, 120, 100);
-    pickup.trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
-    pickup.trigger triggerignoreteam();
+    pickup.trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
+    pickup.trigger triggerIgnoreTeam();
     pickup.gameobject = gameobjects::create_use_object(#"neutral", pickup.trigger, [], (0, 0, 0), "pickup_ammo");
     pickup.gameobject gameobjects::set_objective_entity(pickup.gameobject);
     pickup.gameobject gameobjects::set_visible(#"group_all");

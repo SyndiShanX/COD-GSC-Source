@@ -17,7 +17,7 @@ init_traps() {
 claw_attach(arm, claw_name) {
   claws = getEntArray(claw_name, "targetname");
   for(i = 0; i < claws.size; i++) {
-    claws[i] LinkTo(arm);
+    claws[i] linkTo(arm);
   }
 }
 claw_detach(arm, claw_name) {
@@ -29,57 +29,57 @@ claw_detach(arm, claw_name) {
 rocket_init() {
   flag_wait("all_players_spawned");
   wait(1);
-  retract_l = GetStruct("claw_l_retract", "targetname");
-  retract_r = GetStruct("claw_r_retract", "targetname");
-  extend_l = GetStruct("claw_l_extend", "targetname");
-  extend_r = GetStruct("claw_r_extend", "targetname");
+  retract_l = getStruct("claw_l_retract", "targetname");
+  retract_r = getStruct("claw_r_retract", "targetname");
+  extend_l = getStruct("claw_l_extend", "targetname");
+  extend_r = getStruct("claw_r_extend", "targetname");
   level.claw_retract_l_pos = retract_l.origin;
   level.claw_retract_r_pos = retract_r.origin;
   level.claw_extend_l_pos = extend_l.origin;
   level.claw_extend_r_pos = extend_r.origin;
-  level.gantry_l = getent("claw_arm_l", "targetname");
-  level.gantry_r = getent("claw_arm_r", "targetname");
-  level.claw_arm_l = GetEnt("claw_l_arm", "targetname");
+  level.gantry_l = getEnt("claw_arm_l", "targetname");
+  level.gantry_r = getEnt("claw_arm_r", "targetname");
+  level.claw_arm_l = getEnt("claw_l_arm", "targetname");
   claw_attach(level.claw_arm_l, "claw_l");
-  level.claw_arm_r = GetEnt("claw_r_arm", "targetname");
+  level.claw_arm_r = getEnt("claw_r_arm", "targetname");
   claw_attach(level.claw_arm_r, "claw_r");
-  level.rocket = GetEnt("zombie_rocket", "targetname");
+  level.rocket = getEnt("zombie_rocket", "targetname");
   rocket_pieces = getEntArray(level.rocket.target, "targetname");
   for(i = 0; i < rocket_pieces.size; i++) {
     rocket_pieces[i] setforcenocull();
-    rocket_pieces[i] linkto(level.rocket);
+    rocket_pieces[i] linkTo(level.rocket);
   }
-  level.rocket_lifter = GetEnt("lifter_body", "targetname");
+  level.rocket_lifter = getEnt("lifter_body", "targetname");
   lifter_pieces = getEntArray(level.rocket_lifter.target, "targetname");
   for(i = 0; i < lifter_pieces.size; i++) {
-    lifter_pieces[i] linkto(level.rocket_lifter);
+    lifter_pieces[i] linkTo(level.rocket_lifter);
   }
-  level.rocket_lifter_arm = GetEnt("lifter_arm", "targetname");
+  level.rocket_lifter_arm = getEnt("lifter_arm", "targetname");
   level.rocket_lifter_clamps = getEntArray("lifter_clamp", "targetname");
   for(i = 0; i < level.rocket_lifter_clamps.size; i++) {
-    level.rocket_lifter_clamps[i] linkto(level.rocket_lifter_arm);
+    level.rocket_lifter_clamps[i] linkTo(level.rocket_lifter_arm);
   }
-  level.rocket linkto(level.rocket_lifter_arm);
-  level.rocket_lifter_arm linkto(level.rocket_lifter);
+  level.rocket linkTo(level.rocket_lifter_arm);
+  level.rocket_lifter_arm linkTo(level.rocket_lifter);
   level thread rocket_move_ready();
   level thread rocket_spotlight_init();
 }
 rocket_move_ready() {
-  start_spot = GetStruct("rail_start_spot", "targetname");
-  dock_spot = GetStruct("rail_dock_spot", "targetname");
-  level.claw_arm_r MoveTo(level.claw_retract_r_pos, 0.05);
-  level.claw_arm_l MoveTo(level.claw_retract_l_pos, 0.05);
-  level.rocket_lifter MoveTo(start_spot.origin, 0.05);
+  start_spot = getStruct("rail_start_spot", "targetname");
+  dock_spot = getStruct("rail_dock_spot", "targetname");
+  level.claw_arm_r moveTo(level.claw_retract_r_pos, 0.05);
+  level.claw_arm_l moveTo(level.claw_retract_l_pos, 0.05);
+  level.rocket_lifter moveTo(start_spot.origin, 0.05);
   level.rocket_lifter waittill("movedone");
   level.rocket_lifter_arm unlink();
-  level.rocket_lifter_arm RotateTo((13, 0, 0), 0.05);
+  level.rocket_lifter_arm rotateTo((13, 0, 0), 0.05);
   level.rocket_lifter_arm waittill("rotatedone");
   unlink_rocket_pieces();
   level waittill("power_on");
   wait(5.0);
   link_rocket_pieces();
-  level.rocket_lifter_arm linkto(level.rocket_lifter);
-  level.rocket_lifter MoveTo(dock_spot.origin, 10, 3, 3);
+  level.rocket_lifter_arm linkTo(level.rocket_lifter);
+  level.rocket_lifter moveTo(dock_spot.origin, 10, 3, 3);
   level.rocket_lifter playSound("evt_rocket_roll");
   level.rocket_lifter waittill("movedone");
   level.rocket_lifter_arm unlink();
@@ -96,24 +96,24 @@ rocket_spotlight_init() {
 }
 rocket_move_vertical() {
   level thread rocket_arm_sounds();
-  level.rocket_lifter_arm RotateTo((90, 0, 0), 15, 3, 5);
+  level.rocket_lifter_arm rotateTo((90, 0, 0), 15, 3, 5);
   wait(16.0);
   level.rocket unlink();
   level.rocket MoveZ(-20, 3);
   level.claw_arm_r playSound("evt_rocket_claw_arm");
-  level.claw_arm_r MoveTo(level.claw_extend_r_pos, 3.0);
-  level.claw_arm_l MoveTo(level.claw_extend_l_pos, 3.0);
+  level.claw_arm_r moveTo(level.claw_extend_r_pos, 3.0);
+  level.claw_arm_l moveTo(level.claw_extend_l_pos, 3.0);
   level thread maps\zombie_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_rocket_anim");
   wait(3);
 }
 move_lifter_away() {
-  start_spot = GetStruct("rail_start_spot", "targetname");
-  level.rocket_lifter_arm linkto(level.rocket_lifter);
+  start_spot = getStruct("rail_start_spot", "targetname");
+  level.rocket_lifter_arm linkTo(level.rocket_lifter);
   offset = level.rocket_lifter_arm.origin - level.rocket_lifter.origin;
   level.rocket_lifter_arm unlink();
-  level.rocket_lifter_arm RotateTo((0, 0, 0), 15);
-  level.rocket_lifter_arm MoveTo(start_spot.origin + offset, 15, 3, 3);
-  level.rocket_lifter MoveTo(start_spot.origin, 15, 3, 3);
+  level.rocket_lifter_arm rotateTo((0, 0, 0), 15);
+  level.rocket_lifter_arm moveTo(start_spot.origin + offset, 15, 3, 3);
+  level.rocket_lifter moveTo(start_spot.origin, 15, 3, 3);
   wait(15.0);
   claw_detach(level.claw_arm_l, "claw_l");
   claw_detach(level.claw_arm_r, "claw_r");
@@ -125,20 +125,20 @@ centrifuge_init() {
   spinner_add_award(175, 185, "zero");
   spinner_add_award(265, 275, "double_points");
   spinner_add_award(355, 359, "jackpot");
-  centrifuge_trig = GetEnt("trigger_centrifuge_damage", "targetname");
-  centrifuge_trap = GetEnt("rotating_trap_group1", "targetname");
+  centrifuge_trig = getEnt("trigger_centrifuge_damage", "targetname");
+  centrifuge_trap = getEnt("rotating_trap_group1", "targetname");
   level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_RUMBLE = 8;
   level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_LIGHTS = 11;
-  centrifuge_trig EnableLinkTo();
-  centrifuge_trig LinkTo(centrifuge_trap);
-  centrifuge_collision_brush = GetEnt("rotating_trap_collision", "targetname");
-  centrifuge_collision_brush LinkTo(GetEnt(centrifuge_collision_brush.target, "targetname"));
+  centrifuge_trig EnablelinkTo();
+  centrifuge_trig linkTo(centrifuge_trap);
+  centrifuge_collision_brush = getEnt("rotating_trap_collision", "targetname");
+  centrifuge_collision_brush linkTo(getEnt(centrifuge_collision_brush.target, "targetname"));
   tip_sound_origins = getEntArray("origin_centrifuge_spinning_sound", "targetname");
   array_thread(tip_sound_origins, ::centrifuge_spinning_edge_sounds);
   flag_wait("all_players_connected");
   centrifuge_trap SetClientFlag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_LIGHTS);
   wait(4);
-  centrifuge_trap RotateYaw(720, 10.0, 0.0, 4.5);
+  centrifuge_trap rotateYaw(720, 10.0, 0.0, 4.5);
   centrifuge_trap waittill("rotatedone");
   centrifuge_trap playSound("zmb_cent_end");
   centrifuge_trap ClearClientFlag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_LIGHTS);
@@ -151,7 +151,7 @@ centrifuge_activate() {
   old_angles = centrifuge.angles;
   self thread maps\_zombiemode_traps::trig_update(centrifuge);
   for(i = 0; i < self._trap_movers.size; i++) {
-    self._trap_movers[i] RotateYaw(360, 5.0, 4.5);
+    self._trap_movers[i] rotateYaw(360, 5.0, 4.5);
   }
   wait(2.0);
   self thread centrifuge_damage();
@@ -160,7 +160,7 @@ centrifuge_activate() {
   step = 3.0;
   for(t = 0; t < self._trap_duration; t = t + step) {
     for(i = 0; i < self._trap_movers.size; i++) {
-      self._trap_movers[i] RotateYaw(360, step);
+      self._trap_movers[i] rotateYaw(360, step);
     }
     wait(step);
   }
@@ -173,27 +173,27 @@ centrifuge_activate() {
   if(degrees > 0) {
     time = degrees / 360 * step;
     for(i = 0; i < self._trap_movers.size; i++) {
-      self._trap_movers[i] RotateYaw(degrees, time);
+      self._trap_movers[i] rotateYaw(degrees, time);
     }
     wait(time);
   }
   self stoploopsound(2);
   self playSound("zmb_cent_end");
   for(i = 0; i < self._trap_movers.size; i++) {
-    self._trap_movers[i] RotateYaw(360, 5.0, 0.0, 4.0);
+    self._trap_movers[i] rotateYaw(360, 5.0, 0.0, 4.0);
   }
   wait(5.0);
   self notify("trap_done");
   for(i = 0; i < self._trap_movers.size; i++) {
-    self._trap_movers[i] RotateTo((0, end_angle % 360, 0), 1.0, 0.0, 0.9);
+    self._trap_movers[i] rotateTo((0, end_angle % 360, 0), 1.0, 0.0, 0.9);
   }
   wait(1.0);
   self playSound("zmb_cent_lockdown");
   self notify("kill_counter_end");
 }
 centrifuge_random() {
-  centrifuge_model = GetEnt("rotating_trap_group1", "targetname");
-  centrifuge_damage_trigger = GetEnt("trigger_centrifuge_damage", "targetname");
+  centrifuge_model = getEnt("rotating_trap_group1", "targetname");
+  centrifuge_damage_trigger = getEnt("trigger_centrifuge_damage", "targetname");
   centrifuge_start_angles = centrifuge_model.angles;
   while(true) {
     malfunction_for_round = RandomInt(10);
@@ -208,7 +208,7 @@ centrifuge_random() {
     wait_time = RandomIntRange(4, 7);
     level centrifuge_spin_warning(centrifuge_model);
     centrifuge_model SetClientFlag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_CENTRIFUGE_RUMBLE);
-    centrifuge_model RotateYaw(rotation_amount, wait_time, 1.0, 2.0);
+    centrifuge_model rotateYaw(rotation_amount, wait_time, 1.0, 2.0);
     centrifuge_damage_trigger thread centrifuge_damage();
     wait(3.0);
     slow_down_moment = wait_time - 3;
@@ -238,7 +238,7 @@ centrifuge_spin_warning(ent_centrifuge_model) {
 centrifuge_damage() {
   self endon("trap_done");
   self._trap_type = self.script_noteworthy;
-  players = getplayers();
+  players = getPlayers();
   while(1) {
     self waittill("trigger", ent);
     if(isPlayer(ent) && ent.health > 1) {
@@ -264,7 +264,7 @@ centrifuge_spinning_edge_sounds() {
   if(!isDefined(self.target)) {
     return;
   }
-  self LinkTo(GetEnt(self.target, "targetname"));
+  self linkTo(getEnt(self.target, "targetname"));
   while(true) {
     flag_wait("fuge_spining");
     self playLoopSound("zmb_cent_close_loop", .5);
@@ -274,7 +274,7 @@ centrifuge_spinning_edge_sounds() {
   }
 }
 kill_counter() {
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] playlocalsound("zmb_laugh_child");
   }
@@ -396,18 +396,18 @@ unlink_rocket_pieces() {
 }
 link_rocket_pieces() {
   claw_attach(level.claw_arm_l, "claw_l");
-  level.claw_arm_r = GetEnt("claw_r_arm", "targetname");
+  level.claw_arm_r = getEnt("claw_r_arm", "targetname");
   claw_attach(level.claw_arm_r, "claw_r");
   rocket_pieces = getEntArray(level.rocket.target, "targetname");
   for(i = 0; i < rocket_pieces.size; i++) {
-    rocket_pieces[i] linkto(level.rocket);
+    rocket_pieces[i] linkTo(level.rocket);
   }
   lifter_pieces = getEntArray(level.rocket_lifter.target, "targetname");
   for(i = 0; i < lifter_pieces.size; i++) {
-    lifter_pieces[i] linkto(level.rocket_lifter);
+    lifter_pieces[i] linkTo(level.rocket_lifter);
   }
   level.rocket_lifter_clamps = getEntArray("lifter_clamp", "targetname");
   for(i = 0; i < level.rocket_lifter_clamps.size; i++) {
-    level.rocket_lifter_clamps[i] linkto(level.rocket_lifter_arm);
+    level.rocket_lifter_clamps[i] linkTo(level.rocket_lifter_arm);
   }
 }

@@ -78,11 +78,11 @@ _id_3541(var_0) {
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   var_2 setModel("military_carepackage_01_friendly");
-  var_3 = getent("care_package_col", "targetname");
+  var_3 = getEnt("care_package_col", "targetname");
   var_4 = spawn("script_model", var_1.origin);
   var_4.angles = var_1.angles;
   var_4 clonebrushmodeltoscriptmodel(var_3);
-  var_4 linkto(var_2);
+  var_4 linkTo(var_2);
   var_5 = spawn("script_model", var_1.origin + (0, 0, 35));
   var_5 setModel("tag_origin");
   var_5 scripts\cp\utility::_id_D5A6(undefined, "HINT_BUTTON", undefined, &"CP_STRIKE/EDIT_LOADOUT", 25, "duration_short", "hide", 256, 75, 128, 75);

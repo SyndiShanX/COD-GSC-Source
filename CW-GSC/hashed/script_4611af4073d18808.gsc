@@ -123,8 +123,8 @@ function function_1735c657(forced) {
     if(isDefined(org)) {
       org thread namespace_ec06fe4a::function_ae010bb4(self);
       org.angles = self.angles;
-      self linkto(org);
-      org rotateto(faceangles, 0.25);
+      self linkTo(org);
+      org rotateTo(faceangles, 0.25);
       wait 0.25;
     }
   }
@@ -146,7 +146,7 @@ function function_1735c657(forced) {
   self clientfield::increment_to_player("controlBinding");
   self clientfield::increment_to_player("setCompassVis");
   level clientfield::set("doafps", 0);
-  self setorigin(self.origin + (0, 0, 20));
+  self setOrigin(self.origin + (0, 0, 20));
   self notify(#"hash_5a8ee2526fb3775b");
 
   namespace_1e25ad94::debugmsg("<dev string:x38>" + self.name + "<dev string:x6a>" + gettime());
@@ -220,8 +220,8 @@ function function_1f704cee(force = 0, faceangles = 1) {
     if(isDefined(self.doa.var_5d4bd96f)) {
       self.doa.var_5d4bd96f thread namespace_ec06fe4a::function_ae010bb4(self);
       self.doa.var_5d4bd96f.angles = self.angles;
-      self linkto(self.doa.var_5d4bd96f);
-      self.doa.var_5d4bd96f rotateto(angles, 0.25);
+      self linkTo(self.doa.var_5d4bd96f);
+      self.doa.var_5d4bd96f rotateTo(angles, 0.25);
       wait 0.25;
       self unlink();
       self.doa.var_5d4bd96f delete();

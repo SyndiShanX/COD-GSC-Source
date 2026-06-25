@@ -503,7 +503,7 @@ endMeleeOnKillanimscript() {
 }
 
 meleeLink() {
-  self linkto(self.meleePartner);
+  self linkTo(self.meleePartner);
 
   self waittill("end_melee");
 

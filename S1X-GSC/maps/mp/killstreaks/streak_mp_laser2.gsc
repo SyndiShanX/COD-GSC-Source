@@ -102,14 +102,14 @@ initLaserEnts() {
   PreCacheItem("mp_laser2_core");
   PreCacheModel("lsr_laser_button_01_obj");
 
-  laserEnt = GetEnt("lasergun", "targetname");
+  laserEnt = getEnt("lasergun", "targetname");
   assertEx(isDefined(laserEnt), "ent with targetname of lasergun is undefined");
   laserEnt hide();
   laserEnt laserlightfill();
   laserEnt.FxEnts = laserEnt laser_initFxEnts();
   laserEnt.offSwitch = laserEnt laser_initOffSwitch();
 
-  laserEnt.lifter = GetEnt("laser_animated_prop", "targetname");
+  laserEnt.lifter = getEnt("laser_animated_prop", "targetname");
   laserEnt.lifter.parts = getEntArray("lsr_animated_parts", "targetname");
   laserEnt.lifter laserlightfill();
   assertEx(isDefined(laserEnt), "ent with targetname of laser_lifter is undefined");
@@ -119,28 +119,28 @@ initLaserEnts() {
   laserEnt.lifter.animIdleDown = "lsr_laser_turret_idle_down";
   laserEnt.lifter.animIdleUp = "lsr_laser_turret_idle_up";
 
-  laserEnt.GeneratorHat = GetEnt("generator_hat", "targetname");
+  laserEnt.GeneratorHat = getEnt("generator_hat", "targetname");
   assertEx(isDefined(laserEnt), "ent with targetname of generator_hat is undefined");
   laserEnt.GeneratorHat.anim_up = "laser_button_on";
   laserEnt.GeneratorHat.anim_down = "laser_button_off";
   laserEnt.GeneratorHat.anim_idle_up = "laser_button_idle_on";
   laserEnt.GeneratorHat.anim_idle_down = "laser_button_idle_off";
 
-  laserEnt.coreDamageTrig = getent("trig_lasercore_damage", "targetname");
+  laserEnt.coreDamageTrig = getEnt("trig_lasercore_damage", "targetname");
   assertEx(isDefined(laserEnt.coreDamageTrig), "ent with targetname of trig_lasercore_damage is undefined");
 
-  laserEnt.coreDeathTrig = getent("trig_lasercore_death", "targetname");
+  laserEnt.coreDeathTrig = getEnt("trig_lasercore_death", "targetname");
   assertEx(isDefined(laserEnt.coreDeathTrig), "ent with targetname of trig_lasercore_death is undefined");
 
-  laserEnt.firingDamageTrig = getent("trig_laserfire_damage", "targetname");
+  laserEnt.firingDamageTrig = getEnt("trig_laserfire_damage", "targetname");
   assertEx(isDefined(laserEnt.firingDamageTrig), "ent with targetname of trig_laserfire_damage is undefined");
 
   laserEnt.ownerList = [];
 
   laserEnt.collision = spawnStruct();
 
-  laserEnt.collision.col_base = GetEnt("laser_collision_base", "targetname");
-  laserEnt.collision.col_head = GetEnt("laser_collision_head", "targetname");
+  laserEnt.collision.col_base = getEnt("laser_collision_base", "targetname");
+  laserEnt.collision.col_head = getEnt("laser_collision_head", "targetname");
 
   laserEnt.flaps_top = getEntArray("lsr_flap_top", "targetname");
   laserEnt.attachments = getEntArray("lsr_geo_attach", "targetname");
@@ -150,11 +150,11 @@ initLaserEnts() {
   flaps_bottom = getEntArray("lsr_flap_bottom", "targetname");
   laserEnt.flaps = array_combine(laserEnt.flaps_top, flaps_bottom);
   foreach(flap in laserEnt.flaps) {
-    flap.col_base = getent(flap.target, "targetname");
+    flap.col_base = getEnt(flap.target, "targetname");
     if(isDefined(flap.col_base)) {
       flap.col_base.unresolved_collision_kill = true;
     }
-    flap.col_T = getent(flap.col_base.target, "targetname");
+    flap.col_T = getEnt(flap.col_base.target, "targetname");
     if(isDefined(flap.col_T)) {
       flap.col_T.unresolved_collision_kill = true;
     }
@@ -184,8 +184,8 @@ LinkGeoToTurret(laser, ShouldLink) {
       part unlink();
     }
   } else if(ShouldLink == true) {
-    laser.collision.col_base linkto(self, "tag_origin");
-    laser.collision.col_head linkto(self, "tag_aim_pivot");
+    laser.collision.col_base linkTo(self, "tag_origin");
+    laser.collision.col_head linkTo(self, "tag_aim_pivot");
 
     foreach(flap in laser.flaps_top) {
       flap linktoSynchronizedParent(self);
@@ -217,7 +217,7 @@ laser_initMoveOrgs() {
 laser_initFxEnts() {
   charge_up = undefined;
 
-  coreStruct = getstruct("laser_core_fx_pos", "targetname");
+  coreStruct = getStruct("laser_core_fx_pos", "targetname");
 
   assertEx(isDefined(coreStruct), "struct with targetname of laser_core_fx_pos is undefined");
 
@@ -231,8 +231,8 @@ laser_initFxEnts() {
 }
 
 laser_initOffSwitch() {
-  trigger = GetEnt("laser_use_trig", "targetname");
-  offSwitchEnt = GetEnt("laser_switch", "targetname");
+  trigger = getEnt("laser_use_trig", "targetname");
+  offSwitchEnt = getEnt("laser_switch", "targetname");
 
   assertEx(isDefined(offSwitchEnt), "ent with targetname of laser_switch is not defined");
   assertEx(isDefined(trigger), "ent with targetname of laser_use_trig is not defined");
@@ -305,7 +305,7 @@ laser_initSentry(sentryType) {
   }
 
   killCamEnt = spawn("script_model", self GetTagOrigin("tag_laser"));
-  killCamEnt LinkTo(self);
+  killCamEnt linkTo(self);
   self.killCamEnt = killCamEnt;
   self.killCamEnt SetScriptMoverKillCam("explosive");
 

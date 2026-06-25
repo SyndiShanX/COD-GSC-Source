@@ -123,7 +123,7 @@ _id_2860(var_0, var_1) {
 
   if(isDefined(var_0._id_2861)) {
     for(var_5 = 0; var_5 < var_0._id_2861.size; var_5++) {
-      var_0._id_2861[var_5] missile_settargetent(var_3);
+      var_0._id_2861[var_5] missile_settargetEnt(var_3);
     }
   }
 
@@ -145,7 +145,7 @@ _id_2860(var_0, var_1) {
     return;
   }
   for(var_5 = 0; var_5 < var_0._id_2861.size; var_5++) {
-    var_0._id_2861[var_5] missile_settargetent(var_0, var_6);
+    var_0._id_2861[var_5] missile_settargetEnt(var_0, var_6);
   }
 }
 
@@ -231,7 +231,7 @@ _id_2865(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(isDefined(var_1)) {
-      var_15 = vectornormalize(var_10[var_11].origin - self.origin);
+      var_15 = vectorNormalize(var_10[var_11].origin - self.origin);
       var_16 = vectordot(var_13, var_15);
 
       if(var_16 <= var_1) {
@@ -285,7 +285,7 @@ _id_2867(var_0) {
   } else if(issentient(var_0)) {
     var_1 = (0, 0, 32);
   }
-  self setturrettargetent(var_0, var_1);
+  self setturrettargetEnt(var_0, var_1);
 
   while(self.health > 0) {
     var_2 = randomintrange(1, 25);

@@ -45,7 +45,7 @@ setup_ctf_flag_offsets() {
 }
 
 func_0EA3() {
-  var_00 = getent("wheel", "targetname");
+  var_00 = getEnt("wheel", "targetname");
   var_00.var_99DA = 60;
   var_00.var_18A = -15;
   level.var_AA10 = var_00;

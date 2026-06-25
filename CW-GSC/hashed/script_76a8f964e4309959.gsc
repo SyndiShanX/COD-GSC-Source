@@ -112,7 +112,7 @@ function function_e0968877() {
 }
 
 function function_4b283bfa() {
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   switch (n_player_count) {
     case 1:
@@ -154,7 +154,7 @@ function function_5e09bd0f() {
 
 function function_44d45595(var_dbce0c44) {
   if(zm_round_spawning::function_fab464c4(level.round_number)) {
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
 
     if(level.var_f4b9daca < 3) {
       n_max = a_e_players.size * 8;

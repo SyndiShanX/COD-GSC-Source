@@ -24,7 +24,7 @@ function enable(handler) {
 
   handler.enabled = 1;
   level.handlerglobalflagval++;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i].handlerflagval = level.handlerglobalflagval;
@@ -50,7 +50,7 @@ function disable(handler) {
 
   handler.enabled = 0;
   level.handlerglobalflagval++;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i].handlerflagval = level.handlerglobalflagval;

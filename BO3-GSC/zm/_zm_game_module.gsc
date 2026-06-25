@@ -85,14 +85,14 @@ function game_module_post_zombie_spawn_init() {
 }
 
 function freeze_players(freeze) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] util::freeze_player_controls(freeze);
   }
 }
 
 function respawn_spectators_and_freeze_players() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player.sessionstate == "spectator") {
       if(isDefined(player.spectate_hud)) {
@@ -118,7 +118,7 @@ function damage_callback_no_pvp_damage(einflictor, eattacker, idamage, idflags, 
 }
 
 function respawn_players() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     player[[level.spawnplayer]]();
     player util::freeze_player_controls(1);
@@ -174,10 +174,10 @@ function game_module_custom_intermission(intermission_struct) {
   self camerasetposition(level.intermission_cam_model);
   self camerasetlookat();
   self cameraactivate(1);
-  self linkto(level.intermission_cam_model);
-  level.intermission_cam_model moveto(struct::get(s_point.target, "targetname").origin, 12);
+  self linkTo(level.intermission_cam_model);
+  level.intermission_cam_model moveTo(struct::get(s_point.target, "targetname").origin, 12);
   if(isDefined(level.intermission_cam_model.angles)) {
-    level.intermission_cam_model rotateto(struct::get(s_point.target, "targetname").angles, 12);
+    level.intermission_cam_model rotateTo(struct::get(s_point.target, "targetname").angles, 12);
   }
   self.game_over_bg fadeovertime(2);
   self.game_over_bg.alpha = 0;
@@ -213,7 +213,7 @@ function fireworks_launch(launch_spot) {
     dest = new_dest;
     dist = distance(new_dest.origin + random_offset, firework.origin);
     time = dist / 700;
-    firework moveto(new_dest.origin + random_offset, time);
+    firework moveTo(new_dest.origin + random_offset, time);
     firework waittill("movedone");
   }
   firework playSound("zmb_souls_end");

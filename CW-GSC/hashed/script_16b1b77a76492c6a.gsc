@@ -149,7 +149,7 @@ function function_47838885(var_120d0570) {
 }
 
 function private function_8d3a76bb(var_cf21a49f) {
-  switch (getplayers("allies", var_cf21a49f, 4096).size) {
+  switch (getPlayers("allies", var_cf21a49f, 4096).size) {
     case 1:
       return 5;
     case 2:
@@ -164,7 +164,7 @@ function private function_8d3a76bb(var_cf21a49f) {
 function function_8b6ae460(v_loc, var_aa19ae, var_437c9d8d, var_f24d0052, var_6a7b6ec4, var_6cd49f50, var_c8c520ef = 1, str_targetname, n_height, var_dc0c4612 = 0) {
   var_120d0570 = array::get_all_closest(v_loc, getaiarray(), undefined, undefined, var_f24d0052);
   function_47838885(var_120d0570);
-  var_76913854 = getplayers("allies", v_loc, 4096);
+  var_76913854 = getPlayers("allies", v_loc, 4096);
 
   if(is_true(var_c8c520ef)) {
     array::thread_all(var_76913854, &function_f4413120);
@@ -286,7 +286,7 @@ function function_1c491c2b(var_6cd49f50 = 120, var_f6dca9f2, var_6443acc) {
 
   while(true) {
     wait 5;
-    a_players = getplayers("all", self.origin, 4096);
+    a_players = getPlayers("all", self.origin, 4096);
 
     if(a_players.size == 0 || isDefined(self.var_eb221ba) && self.var_eb221ba >= 10) {
       if(isDefined(var_f6dca9f2) && isDefined(var_6443acc)) {
@@ -306,7 +306,7 @@ function function_12db74f8() {
 
 function private function_8af8f660() {
   v_average = (0, 0, 0);
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player.sessionstate === "spectator") {
@@ -433,7 +433,7 @@ function function_5c3d1f() {
     return;
   }
 
-  while(self.birthtime + int(30 * 1000) > gettime() || getplayers(undefined, self.origin, 2048).size > 0) {
+  while(self.birthtime + int(30 * 1000) > gettime() || getPlayers(undefined, self.origin, 2048).size > 0) {
     wait 1;
   }
 

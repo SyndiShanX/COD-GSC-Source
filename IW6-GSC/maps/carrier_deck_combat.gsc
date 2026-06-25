@@ -54,14 +54,14 @@ deck_combat_pre_load() {
   thread maps\carrier_code::check_trigger_flagset("dc_ally_move_3");
   var_0 = getEntArray("kill_triggers", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, maps\_utility::hide_entity);
-  var_1 = getent("dc_island_door_clip", "targetname");
+  var_1 = getEnt("dc_island_door_clip", "targetname");
   var_1 maps\_utility::hide_entity();
-  var_2 = getent("jav_crate", "targetname");
-  var_3 = getent("jav_crate_clip", "targetname");
+  var_2 = getEnt("jav_crate", "targetname");
+  var_3 = getEnt("jav_crate_clip", "targetname");
   var_2 maps\_utility::hide_entity();
   var_3 maps\_utility::hide_entity();
-  level.sparrow_left = common_scripts\utility::getstruct("dc1_sparrow_left", "targetname");
-  level.sparrow_right = common_scripts\utility::getstruct("dc1_sparrow_right", "targetname");
+  level.sparrow_left = common_scripts\utility::getStruct("dc1_sparrow_left", "targetname");
+  level.sparrow_right = common_scripts\utility::getStruct("dc1_sparrow_right", "targetname");
 }
 
 setup_deck_combat() {
@@ -73,23 +73,23 @@ setup_deck_combat() {
   maps\_utility::flavorbursts_on("allies");
   thread maps\carrier::obj_flight_deck();
   thread maps\carrier_audio::aud_check("deck_combat");
-  var_0 = getent("water_wake_intro", "targetname");
+  var_0 = getEnt("water_wake_intro", "targetname");
   var_0 delete();
-  var_1 = getent("hallway_door", "targetname");
-  var_1 rotateto((0, -90, 0), 0.5);
-  var_2 = getent("hallway_door_clip", "targetname");
+  var_1 = getEnt("hallway_door", "targetname");
+  var_1 rotateTo((0, -90, 0), 0.5);
+  var_2 = getEnt("hallway_door_clip", "targetname");
   var_2 movez(120, 0.5);
-  var_3 = getent("hallway_door_open_clip", "targetname");
+  var_3 = getEnt("hallway_door_open_clip", "targetname");
   var_3 delete();
   common_scripts\utility::flag_set("exterior_effects_off");
   wait 0.25;
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
 }
 
 catchup_deck_combat() {
   common_scripts\utility::flag_set("exterior_effects_on");
   thread taxing_jet_anim_catchup();
-  var_0 = getent("dc_island_door_clip", "targetname");
+  var_0 = getEnt("dc_island_door_clip", "targetname");
   var_0 maps\_utility::show_entity();
   thread medbay_cleanup();
   var_1 = getEntArray("deck_combat_respawn_triggers", "targetname");
@@ -107,22 +107,22 @@ begin_deck_combat() {
   thread jet_blast_shields();
   badplace_brush("badplace_rear_elevator", -1, level.rear_elevator_vol, "axis");
   thread maps\carrier_deck_transition::setup_taxing_osprey();
-  var_0 = getent("blast_shield1_clip", "targetname");
+  var_0 = getEnt("blast_shield1_clip", "targetname");
   var_0 maps\_utility::show_entity();
-  var_1 = getent("blast_shield2_clip", "targetname");
+  var_1 = getEnt("blast_shield2_clip", "targetname");
   var_1 maps\_utility::show_entity();
-  var_2 = getent("heli_elevator_fake", "script_noteworthy");
+  var_2 = getEnt("heli_elevator_fake", "script_noteworthy");
   var_2 maps\_utility::show_entity();
   thread setup_static_osprey();
-  var_3 = getent("deck_combat_door", "targetname");
-  var_4 = getent("dc_island_door_clip", "targetname");
+  var_3 = getEnt("deck_combat_door", "targetname");
+  var_4 = getEnt("dc_island_door_clip", "targetname");
   var_4 maps\_utility::show_entity();
-  var_4 linkto(var_3);
+  var_4 linkTo(var_3);
   var_4 connectpaths();
-  var_3 rotateto(var_3.angles - (0, 100, 0), 0.01);
+  var_3 rotateTo(var_3.angles - (0, 100, 0), 0.01);
   thread kill_trigger_setup();
-  var_5 = getent("front_kill_volume", "targetname");
-  var_6 = getent("rear_kill_volume", "targetname");
+  var_5 = getEnt("front_kill_volume", "targetname");
+  var_6 = getEnt("rear_kill_volume", "targetname");
   var_5 thread kill_trigger("warning_1");
   var_6 thread kill_trigger("warning_1_rear");
   thread combat_ally_spawn();
@@ -149,18 +149,18 @@ medbay_cleanup() {
 }
 
 jet_blast_shields() {
-  var_0 = getent("blast_shield1", "targetname");
-  var_0 rotateto((0, 0, 0), 0.05);
-  var_1 = getent("blast_shield2", "targetname");
-  var_1 rotateto((0, 0, 0), 0.05);
-  var_2 = getent("blast_shield3", "targetname");
-  var_2 rotateto((0, 0, 0), 0.05);
-  var_3 = getent("blast_shield4", "targetname");
-  var_3 rotateto((0, 0, 0), 0.05);
-  var_4 = getent("blast_shield5", "targetname");
-  var_4 rotateto((0, 0, 0), 0.05);
-  var_5 = getent("blast_shield6", "targetname");
-  var_5 rotateto((0, 0, 0), 0.05);
+  var_0 = getEnt("blast_shield1", "targetname");
+  var_0 rotateTo((0, 0, 0), 0.05);
+  var_1 = getEnt("blast_shield2", "targetname");
+  var_1 rotateTo((0, 0, 0), 0.05);
+  var_2 = getEnt("blast_shield3", "targetname");
+  var_2 rotateTo((0, 0, 0), 0.05);
+  var_3 = getEnt("blast_shield4", "targetname");
+  var_3 rotateTo((0, 0, 0), 0.05);
+  var_4 = getEnt("blast_shield5", "targetname");
+  var_4 rotateTo((0, 0, 0), 0.05);
+  var_5 = getEnt("blast_shield6", "targetname");
+  var_5 rotateTo((0, 0, 0), 0.05);
 }
 
 deck_combat_vo() {
@@ -190,7 +190,7 @@ deck_combat_nag_vo() {
   level endon("deck_transition");
   level endon("door_closed");
   common_scripts\utility::flag_wait("combat_1_kick");
-  var_0 = getent("nag_leave_island", "targetname");
+  var_0 = getEnt("nag_leave_island", "targetname");
 
   for(;;) {
     wait 8;
@@ -246,11 +246,11 @@ handle_front_elevator() {
     var_3 = var_5;
   }
 
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   var_3 delete();
   var_1.animname = "tugger";
   var_1 maps\_anim::setanimtree();
-  var_7 = common_scripts\utility::getstruct("redshirt_forklift_stopper_ref", "targetname");
+  var_7 = common_scripts\utility::getStruct("redshirt_forklift_stopper_ref", "targetname");
   var_8 = [];
   var_8[0] = maps\_utility::spawn_targetname("tugger_director");
   var_8[0].animname = "director";
@@ -275,7 +275,7 @@ handle_front_elevator() {
   var_7 thread maps\_anim::anim_single(var_8, "tugger_scene_enter");
   var_7 thread maps\_anim::anim_single_solo(var_1, "tugger_scene_enter");
   wait 7.8;
-  var_9 = getent("elevator_jet_kill", "targetname");
+  var_9 = getEnt("elevator_jet_kill", "targetname");
   var_9 thread elevator_jet_kill();
   var_1 waittillmatch("single anim", "end");
   var_9 notify("end_kill");
@@ -331,7 +331,7 @@ elevator_jet_kill() {
 }
 
 front_elevator_jet_anim() {
-  var_0 = common_scripts\utility::getstruct("redshirt_forklift_stopper_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("redshirt_forklift_stopper_ref", "targetname");
   var_1 = maps\carrier_code::setup_jet_and_clip("front_elevator_jet");
   var_1.animname = "elevator_jet";
   var_1 maps\_anim::setanimtree();
@@ -360,7 +360,7 @@ jet_takeoff2() {
 }
 
 handle_jet_taxi() {
-  var_0 = common_scripts\utility::getstruct("jet_tugger_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("jet_tugger_ref", "targetname");
   var_1 = [];
   var_1[3] = maps\carrier_code::setup_jet_and_clip("odin_jet_1");
   var_1[0] = maps\_utility::spawn_targetname("taxing_tugger_driver");
@@ -391,8 +391,8 @@ handle_jet_taxi() {
     var_5 = var_7;
   }
 
-  var_4 linkto(var_1[2]);
-  var_5 linkto(var_1[2]);
+  var_4 linkTo(var_1[2]);
+  var_5 linkTo(var_1[2]);
   var_1[2].animname = "taxing_tugger";
   var_1[2] maps\_anim::setanimtree();
   var_1[3].animname = "taxing_jet";
@@ -418,7 +418,7 @@ handle_jet_taxi() {
 }
 
 taxing_jet_anim_catchup() {
-  var_0 = common_scripts\utility::getstruct("jet_tugger_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("jet_tugger_ref", "targetname");
   var_1 = getEntArray("large_tugger2", "targetname");
   var_2 = [];
   var_3 = [];
@@ -438,8 +438,8 @@ taxing_jet_anim_catchup() {
     var_4 = var_6;
   }
 
-  var_3 linkto(var_2);
-  var_4 linkto(var_2);
+  var_3 linkTo(var_2);
+  var_4 linkTo(var_2);
   var_2.animname = "taxing_tugger";
   var_2 maps\_anim::setanimtree();
   var_8 = maps\carrier_code::setup_jet_and_clip("odin_jet_1");
@@ -456,14 +456,14 @@ hallway_door_shut() {
   common_scripts\utility::flag_wait("hallway_door_close");
 
   if(level.start_point != "deck_combat") {
-    var_0 = getent("hallway_door", "targetname");
-    var_0 rotateto((0, -90, 0), 0.5);
-    var_1 = getent("hallway_door_clip", "targetname");
+    var_0 = getEnt("hallway_door", "targetname");
+    var_0 rotateTo((0, -90, 0), 0.5);
+    var_1 = getEnt("hallway_door_clip", "targetname");
     var_1 movez(120, 0.5);
-    var_2 = getent("hallway_door_open_clip", "targetname");
+    var_2 = getEnt("hallway_door_open_clip", "targetname");
     var_2 delete();
     wait 0.25;
-    var_1 disconnectpaths();
+    var_1 disconnectPaths();
   }
 }
 
@@ -475,9 +475,9 @@ island_door_shut() {
     thread maps\_utility::autosave_tactical();
   }
 
-  var_0 = getent("deck_combat_door", "targetname");
-  var_0 rotateto(var_0.angles - (0, -100, 0), 0.5);
-  var_1 = getent("dc_island_door_clip", "targetname");
+  var_0 = getEnt("deck_combat_door", "targetname");
+  var_0 rotateTo(var_0.angles - (0, -100, 0), 0.5);
+  var_1 = getEnt("dc_island_door_clip", "targetname");
   var_1 maps\_utility::show_entity();
   thread maps\carrier_audio::aud_hatch_close();
   common_scripts\utility::flag_set("door_closed");
@@ -485,8 +485,8 @@ island_door_shut() {
 
 island_drone_anim_helper() {
   var_0 = 1.5;
-  var_1 = common_scripts\utility::getstruct("island_wounded_ref", "targetname");
-  var_2 = getent("redshirt_island_idle", "targetname");
+  var_1 = common_scripts\utility::getStruct("island_wounded_ref", "targetname");
+  var_2 = getEnt("redshirt_island_idle", "targetname");
   var_3 = var_2 maps\_utility::spawn_ai(1, 0);
   var_3.animname = "generic";
   var_3 maps\_utility::gun_remove();
@@ -507,8 +507,8 @@ island_drone_anim_helper() {
 
 island_drone_anim_wounded() {
   var_0 = 1.5;
-  var_1 = common_scripts\utility::getstruct("island_wounded_ref", "targetname");
-  var_2 = getent("redshirt_island_idle2", "targetname");
+  var_1 = common_scripts\utility::getStruct("island_wounded_ref", "targetname");
+  var_2 = getEnt("redshirt_island_idle2", "targetname");
   var_3 = var_2 maps\_utility::spawn_ai(1, 0);
   var_3.animname = "generic";
   var_3 maps\_utility::gun_remove();
@@ -531,11 +531,11 @@ missile_towerbuzz() {
   common_scripts\utility::flag_wait("door_missile_launch");
   level.player setmovespeedscale(1);
   level.player allowsprint(1);
-  var_0 = getent("jet_missile_launch1_struct", "targetname");
-  var_1 = getent("jet_missile_launch1_struct_endpoint", "targetname");
+  var_0 = getEnt("jet_missile_launch1_struct", "targetname");
+  var_1 = getEnt("jet_missile_launch1_struct_endpoint", "targetname");
   magicbullet("panzerfaust3_straight", var_0.origin, var_1.origin);
-  var_2 = getent("jet_missile_launch3_struct", "targetname");
-  var_3 = getent("jet_missile_launch3_struct_endpoint", "targetname");
+  var_2 = getEnt("jet_missile_launch3_struct", "targetname");
+  var_3 = getEnt("jet_missile_launch3_struct_endpoint", "targetname");
   magicbullet("panzerfaust3_straight", var_2.origin, var_3.origin);
 }
 
@@ -547,7 +547,7 @@ run_deck_combat() {
   thread deck_combat_wave1();
   thread deck_combat_wave1_flank();
   thread deck_combat_wave1_helis();
-  var_0 = getent("rear_elevator_clip", "targetname");
+  var_0 = getEnt("rear_elevator_clip", "targetname");
   var_0 delete();
   common_scripts\utility::flag_wait("dc_wave2_start");
   thread deck_combat_wave2_helis();
@@ -603,13 +603,13 @@ deck_combat_wave1() {
   common_scripts\utility::flag_wait("dc_wave1_allies_advance_2");
   thread maps\carrier_code::retreat_from_vol_to_vol("dc_wave1_rear_vol", "dc_wave1_rear_retreat_vol", 0.25, 0.6);
   thread maps\carrier_deck_transition::bring_up_osprey();
-  var_5 = getent("wave1_enemy_count_check", "targetname");
+  var_5 = getEnt("wave1_enemy_count_check", "targetname");
   var_6 = var_5 maps\_utility::get_ai_touching_volume("axis");
   thread maps\carrier_code::ai_array_killcount_flag_set(var_6, var_6.size - 6, "dc_wave2_start");
   common_scripts\utility::flag_wait("dc_wave2_start");
   thread maps\carrier_code::retreat_from_vol_to_vol("wave1_enemy_count_check", "dc_wave2_vol", 0.5, 1.25);
   wait 2;
-  var_7 = getent("dc_ally_move_2", "targetname");
+  var_7 = getEnt("dc_ally_move_2", "targetname");
 
   if(isDefined(var_7)) {
     var_7 delete();
@@ -625,7 +625,7 @@ deck_combat_wave1_flank() {
     maps\_utility::array_spawn_function_targetname("deck_combat_left_reinforcement", ::dc_shotgun_seek);
     var_0 = maps\_utility::array_spawn_targetname("deck_combat_left_reinforcement", 1);
   } else {
-    var_1 = getent("player_flank_trigger", "targetname");
+    var_1 = getEnt("player_flank_trigger", "targetname");
     var_1 delete();
   }
 }
@@ -667,7 +667,7 @@ deck_combat_wave2_helis() {
 
 deck_combat_wave3() {
   common_scripts\utility::flag_wait("wave2_heli2_unloaded");
-  var_0 = getent("final_enemy_vol", "targetname");
+  var_0 = getEnt("final_enemy_vol", "targetname");
   var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
 }
 
@@ -768,10 +768,10 @@ heli_unload_flag_set(var_0) {
 }
 
 setup_static_osprey() {
-  var_0 = getent("heli_elevator_fake", "script_noteworthy");
-  var_1 = getent("taxing_osprey_clip", "targetname");
+  var_0 = getEnt("heli_elevator_fake", "script_noteworthy");
+  var_1 = getEnt("taxing_osprey_clip", "targetname");
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
-  var_1 linkto(var_0, "tag_body", (-75, 0, -125), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_body", (-75, 0, -125), (0, 0, 0));
   level.elevator_osprey_clip = var_1;
 }

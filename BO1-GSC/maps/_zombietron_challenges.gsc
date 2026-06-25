@@ -260,7 +260,7 @@ barrel_bomb_think() {
   physicsExplosionSphere(self.origin, 128, 64, 2);
   RadiusDamage(self.origin + (0, 0, 20), 128, 7000, 5000, self, "MOD_PROJECTILE_SPLASH");
   playRumbleOnPosition("grenade_rumble", self.origin);
-  playsoundatposition("exp_tron_barrel", self.origin);
+  playSoundAtPosition("exp_tron_barrel", self.origin);
   self Delete();
 }
 barrel_burst(which) {
@@ -308,7 +308,7 @@ barrel_dropper() {
   flag_clear("barrel_burst1");
   flag_clear("barrel_burst2");
   while(1) {
-    players = GetPlayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(players[i] isTouching(btrig1)) {
         level thread barrel_burst("barrel_burst1");

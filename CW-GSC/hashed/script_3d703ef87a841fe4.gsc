@@ -33,7 +33,7 @@ function function_dc7eaabd(assignment) {
 }
 
 function is_team_empty(team) {
-  team_players = getplayers(team);
+  team_players = getPlayers(team);
 
   if(team_players.size > 0) {
     return false;
@@ -178,7 +178,7 @@ function function_a9d594a0(party) {
 }
 
 function function_d28f6fa0(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     function_a9d594a0(player getparty());

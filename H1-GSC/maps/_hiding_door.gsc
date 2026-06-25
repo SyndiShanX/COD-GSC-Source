@@ -48,11 +48,11 @@ hiding_door_spawner() {
     }
   }
 
-  var_11 = getent(var_5.target, "targetname");
+  var_11 = getEnt(var_5.target, "targetname");
   var_12 = undefined;
 
   if(isDefined(var_11.target)) {
-    var_12 = getent(var_11.target, "targetname");
+    var_12 = getEnt(var_11.target, "targetname");
   }
 
   if(isDefined(var_12)) {
@@ -74,19 +74,19 @@ hiding_door_spawner() {
   var_3 thread maps\_anim::anim_first_frame_solo(var_13, "fire_3");
 
   if(isDefined(var_6)) {
-    var_6 linkto(var_13, "door_hinge_jnt");
+    var_6 linkTo(var_13, "door_hinge_jnt");
     var_13 hide();
   }
 
   if(isDefined(var_11)) {
-    var_11 linkto(var_13, "door_hinge_jnt");
-    var_11 disconnectpaths();
+    var_11 linkTo(var_13, "door_hinge_jnt");
+    var_11 disconnectPaths();
   }
 
   var_14 = undefined;
 
   if(isDefined(self.target)) {
-    var_14 = getent(self.target, "targetname");
+    var_14 = getEnt(self.target, "targetname");
 
     if(!issubstr(var_14.classname, "trigger")) {
       var_14 = undefined;
@@ -239,7 +239,7 @@ quit_door_behavior(var_0, var_1) {
   self.goalradius = 512;
   self setgoalpos(self.origin);
   self notify("quit_door_behavior");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("killanimscript");
   return 1;
 }
@@ -310,7 +310,7 @@ hiding_door_guy_should_throw_grenade(var_0, var_1) {
 
 hiding_door_get_enemy_direction(var_0, var_1, var_2) {
   var_3 = anglesToForward(var_0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - var_1);
   var_7 = var_5[1] - var_6[1];
@@ -360,7 +360,7 @@ hiding_door_guy_cleanup(var_0, var_1, var_2, var_3, var_4) {
 
 hiding_door_guy_pushplayer(var_0) {
   self waittill("push_player");
-  var_0 moveto(self.origin, 1.5);
+  var_0 moveTo(self.origin, 1.5);
   wait 1.5;
   var_0 delete();
 }
@@ -388,7 +388,7 @@ hiding_door_guy_grenade_throw(var_0) {
     var_2 = 1000;
   }
 
-  var_3 = vectornormalize(level.player.origin - var_0.origin);
+  var_3 = vectorNormalize(level.player.origin - var_0.origin);
   var_4 = var_3 * var_2;
   var_0 magicgrenademanual(var_1, var_4, randomfloatrange(3.0, 5.0));
 }
@@ -426,7 +426,7 @@ hiding_door_death_door_connections(var_0, var_1) {
   wait 2;
 
   if(isDefined(var_0)) {
-    var_0 disconnectpaths();
+    var_0 disconnectPaths();
   }
 
   if(isDefined(var_1)) {

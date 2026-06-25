@@ -8,7 +8,7 @@ _id_4CBD(var_0, var_1, var_2) {
   self _meth_87CE();
   self._id_1C30._id_426A = spawnStruct();
   self._id_E061 = scripts\engine\utility::spawn_tag_origin();
-  self._id_E061 linkto(self, "tag_eye");
+  self._id_E061 linkTo(self, "tag_eye");
   self _meth_85E3("speed");
   self _meth_8709();
   thread _id_107FF(self._id_E061);
@@ -41,7 +41,7 @@ _id_A419(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  var_5 = vectornormalize(var_4.origin - self.origin);
+  var_5 = vectorNormalize(var_4.origin - self.origin);
   var_6 = _func_0261(var_5);
   var_7 = _func_000B(var_6 - self.angles[1]);
   var_8 = var_7 < -35 || var_7 > 35;

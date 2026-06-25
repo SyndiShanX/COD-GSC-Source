@@ -47,7 +47,7 @@ func_F03D() {
   level endon("game_ended");
   self endon("death");
   waittillframeend;
-  self.var_75A4 = getscriptablearray(scripts\engine\utility::getstruct("thruster_fx_lights", "script_noteworthy").target, "targetname");
+  self.var_75A4 = getscriptablearray(scripts\engine\utility::getStruct("thruster_fx_lights", "script_noteworthy").target, "targetname");
   foreach(var_1 in self.var_75A4) {
     var_1 setscriptablepartstate("onoff", "off");
   }

@@ -33,7 +33,7 @@ _id_D896(var_0, var_1, var_2) {
 
   if(scripts\mp\utility\game::getgametype() == "dd" || scripts\mp\utility\game::getgametype() == "to_dd") {
     var_4 = var_0._id_CD99;
-    var_8 = getent("dd_bombzone_clip" + var_4, "targetname");
+    var_8 = getEnt("dd_bombzone_clip" + var_4, "targetname");
 
     if(scripts\mp\utility\game::_id_82D1()) {
       if(var_4 == "_a" || var_4 == "_b") {
@@ -119,7 +119,7 @@ _id_D896(var_0, var_1, var_2) {
     }
   }
 
-  var_3._id_2636 = getent(var_5[0].target, "targetname");
+  var_3._id_2636 = getEnt(var_5[0].target, "targetname");
   var_3._id_2636.origin = var_3._id_2636.origin + (0, 0, -10000);
   var_3._id_2636.label = var_4;
   var_3._id_A6C9 = spawn("trigger_radius", var_3.trigger.origin, 0, 140, 100);
@@ -139,7 +139,7 @@ _id_6CED(var_0) {
 _id_D886(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 rotateyaw(-45, 0.05);
+  var_1 rotateYaw(-45, 0.05);
   waitframe();
   var_2 = undefined;
   var_3 = self.origin + (0, 0, 45);
@@ -704,13 +704,13 @@ _id_8245(var_0) {
   var_6 = [];
 
   if(isDefined(var_1) && isDefined(var_1.target)) {
-    var_7 = getent(var_1.target, "targetname");
+    var_7 = getEnt(var_1.target, "targetname");
 
     while(isDefined(var_7)) {
       var_6[var_6.size] = var_7;
 
       if(isDefined(var_7.target)) {
-        var_7 = getent(var_7.target, "targetname");
+        var_7 = getEnt(var_7.target, "targetname");
         continue;
       }
 
@@ -766,8 +766,8 @@ _id_CA65() {
       var_7 = 5 / self._id_AEC7.size / 2;
     }
 
-    self moveto(self._id_AEC7[var_5].origin, 5 / self._id_AEC7.size, var_6, var_7);
-    self rotateto(self._id_AEC7[var_5].angles, 5 / self._id_AEC7.size, var_6, var_7);
+    self moveTo(self._id_AEC7[var_5].origin, 5 / self._id_AEC7.size, var_6, var_7);
+    self rotateTo(self._id_AEC7[var_5].angles, 5 / self._id_AEC7.size, var_6, var_7);
     wait(5 / self._id_AEC7.size);
   }
 }
@@ -859,12 +859,12 @@ _id_2694(var_0) {
   level._id_2663 = 0;
   level._id_2635 = 0;
   level._id_265C = 0;
-  var_1 = getent(var_0 + "_pickup_trig", "targetname");
+  var_1 = getEnt(var_0 + "_pickup_trig", "targetname");
 
   if(!isDefined(var_1)) {
     scripts\engine\utility::_id_5598("No " + var_0 + "_pickup_trig trigger found in map.");
   } else {
-    var_2[0] = getent(var_0, "targetname");
+    var_2[0] = getEnt(var_0, "targetname");
 
     if(!isDefined(var_2[0])) {
       scripts\engine\utility::_id_5598("No " + var_0 + " script_model found in map.");

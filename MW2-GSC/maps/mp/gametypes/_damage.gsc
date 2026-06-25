@@ -1920,7 +1920,7 @@ getMostKilled() {
 
 damageShellshockAndRumble(eInflictor, sWeapon, sMeansOfDeath, iDamage, iDFlags, eAttacker) {
   self thread maps\mp\gametypes\_weapons::onWeaponDamage(eInflictor, sWeapon, sMeansOfDeath, iDamage, eAttacker);
-  self PlayRumbleOnEntity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 reviveSetup(owner) {
@@ -2036,7 +2036,7 @@ reviveTriggerThink(team) {
 useHoldThink(player) {
   reviveSpot = spawn("script_origin", self.origin);
   reviveSpot hide();
-  player playerLinkTo(reviveSpot);
+  player playerlinkTo(reviveSpot);
   player PlayerLinkedOffsetEnable();
 
   player _disableWeapon();
@@ -2187,11 +2187,11 @@ drawLine(start, end, timeSlice) {
 isFlankKill(victim, attacker) {
   victimForward = anglesToForward(victim.angles);
   victimForward = (victimForward[0], victimForward[1], 0);
-  victimForward = VectorNormalize(victimForward);
+  victimForward = vectorNormalize(victimForward);
 
   attackDirection = victim.origin - attacker.origin;
   attackDirection = (attackDirection[0], attackDirection[1], 0);
-  attackDirection = VectorNormalize(attackDirection);
+  attackDirection = vectorNormalize(attackDirection);
 
   dotProduct = VectorDot(victimForward, attackDirection);
   if(dotProduct > 0) {

@@ -21,41 +21,41 @@ main() {
 
   setDvar("r_diffusecolorscale", "1.5");
 
-  alleyTrigger = getent("alleyTrigger", "targetname");
-  windowTrigger = getent("triggerwindowTarget", "targetname");
+  alleyTrigger = getEnt("alleyTrigger", "targetname");
+  windowTrigger = getEnt("triggerwindowTarget", "targetname");
 
-  target1 = getent("fieldTarget_BackLeft", "targetname");
-  target2 = getent("fieldTarget_FrontLeft", "targetname");
-  target3 = getent("fieldTarget_Middle", "targetname");
-  target4 = getent("fieldTarget_BackRight", "targetname");
-  target5 = getent("fieldTarget_FrontRight", "targetname");
-  target6 = getent("trenchTarget_GroundWall", "targetname");
-  target7 = getent("trailerTarget_Window", "targetname");
-  target8 = getent("alleyTarget_Cover", "targetname");
-  target9 = getent("alleyTarget_Path", "targetname");
-  target10 = getent("centerTarget_Sandbags", "targetname");
-  target11 = getent("towerTarget_Front", "targetname");
-  target12 = getent("towerTarget_Back", "targetname");
-  target13 = getent("centerTarget_Path", "targetname");
-  target14 = getent("centerTarget_PathBunkerL", "targetname");
-  target15 = getent("centerTarget_PathBunkerR", "targetname");
-  target16 = getent("steelBuildingTarget_Slide1", "targetname");
-  target17 = getent("steelBuildingTarget_PopUp", "targetname");
-  target18 = getent("target_alleyWindow1", "targetname");
-  target19 = getent("target_alleyWindow2", "targetname");
-  target20 = getent("target_alleyWindow3", "targetname");
+  target1 = getEnt("fieldTarget_BackLeft", "targetname");
+  target2 = getEnt("fieldTarget_FrontLeft", "targetname");
+  target3 = getEnt("fieldTarget_Middle", "targetname");
+  target4 = getEnt("fieldTarget_BackRight", "targetname");
+  target5 = getEnt("fieldTarget_FrontRight", "targetname");
+  target6 = getEnt("trenchTarget_GroundWall", "targetname");
+  target7 = getEnt("trailerTarget_Window", "targetname");
+  target8 = getEnt("alleyTarget_Cover", "targetname");
+  target9 = getEnt("alleyTarget_Path", "targetname");
+  target10 = getEnt("centerTarget_Sandbags", "targetname");
+  target11 = getEnt("towerTarget_Front", "targetname");
+  target12 = getEnt("towerTarget_Back", "targetname");
+  target13 = getEnt("centerTarget_Path", "targetname");
+  target14 = getEnt("centerTarget_PathBunkerL", "targetname");
+  target15 = getEnt("centerTarget_PathBunkerR", "targetname");
+  target16 = getEnt("steelBuildingTarget_Slide1", "targetname");
+  target17 = getEnt("steelBuildingTarget_PopUp", "targetname");
+  target18 = getEnt("target_alleyWindow1", "targetname");
+  target19 = getEnt("target_alleyWindow2", "targetname");
+  target20 = getEnt("target_alleyWindow3", "targetname");
 
-  targetLight1_off = getent("steelBuildingTargetLight1_off", "targetname");
-  targetLight1_on = getent("steelBuildingTargetLight1_on", "targetname");
+  targetLight1_off = getEnt("steelBuildingTargetLight1_off", "targetname");
+  targetLight1_on = getEnt("steelBuildingTargetLight1_on", "targetname");
 
-  targetLight2_off = getent("steelBuildingTargetLight2_off", "targetname");
-  targetLight2_on = getent("steelBuildingTargetLight2_on", "targetname");
+  targetLight2_off = getEnt("steelBuildingTargetLight2_off", "targetname");
+  targetLight2_on = getEnt("steelBuildingTargetLight2_on", "targetname");
 
   level.const_fx_exploder_red_light_1 = 1001;
   level.const_fx_exploder_red_light_2 = 1002;
 
-  speaker1 = getent("loudspeaker1", "targetname");
-  speaker2 = getent("loudspeaker2", "targetname");
+  speaker1 = getEnt("loudspeaker1", "targetname");
+  speaker2 = getEnt("loudspeaker2", "targetname");
 
   targetLight1_on Hide();
   targetLight2_on Hide();
@@ -163,7 +163,7 @@ damageTarget(dir) {
         rotation = 1;
         if(isDefined(attacker) && isPlayer(attacker)) {}
 
-        self rotateyaw(self.angles[2] + (180 * rotation), .3);
+        self rotateYaw(self.angles[2] + (180 * rotation), .3);
         self playSound("amb_target_twirl");
         self waittill("rotatedone");
       }
@@ -201,7 +201,7 @@ moveTarget(dir, dis, speed) {
   FarPOS = self.origin;
 
   sound = spawn("script_origin", self.origin);
-  sound LinkTo(self);
+  sound linkTo(self);
   sound playLoopSound("amb_target_chain");
 
   switch (dir) {
@@ -235,7 +235,7 @@ moveTarget(dir, dis, speed) {
 
     switch (dir) {
       case 1:
-        self moveto(farPOS, speed);
+        self moveTo(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
@@ -246,12 +246,12 @@ moveTarget(dir, dis, speed) {
         if(keepMoving == false) {
           break;
         }
-        self moveto(startPOS, speed);
+        self moveTo(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
       case 2:
-        self moveto(farPOS, speed);
+        self moveTo(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
@@ -262,12 +262,12 @@ moveTarget(dir, dis, speed) {
         if(keepMoving == false) {
           break;
         }
-        self moveto(startPOS, speed);
+        self moveTo(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
       case 3:
-        self moveto(farPOS, speed);
+        self moveTo(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
@@ -278,12 +278,12 @@ moveTarget(dir, dis, speed) {
         if(keepMoving == false) {
           break;
         }
-        self moveto(startPOS, speed);
+        self moveTo(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
       case 4:
-        self moveto(farPOS, speed);
+        self moveTo(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
@@ -294,12 +294,12 @@ moveTarget(dir, dis, speed) {
         if(keepMoving == false) {
           break;
         }
-        self moveto(startPOS, speed);
+        self moveTo(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
       case 5:
-        self moveto(farPOS, speed);
+        self moveTo(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
 
@@ -310,12 +310,12 @@ moveTarget(dir, dis, speed) {
         if(keepMoving == false) {
           break;
         }
-        self moveto(startPOS, speed);
+        self moveTo(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
       case 6:
-        self moveto(farPOS, speed);
+        self moveTo(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         if(isDefined(self.triggeroff)) {
@@ -325,7 +325,7 @@ moveTarget(dir, dis, speed) {
         if(keepMoving == false) {
           break;
         }
-        self moveto(startPOS, speed);
+        self moveTo(startPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         break;
@@ -334,7 +334,7 @@ moveTarget(dir, dis, speed) {
           self waittill("targetStopMoving");
         }
 
-        self moveto(farPOS, speed);
+        self moveTo(farPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
         if(isDefined(self.triggeroff)) {
@@ -344,7 +344,7 @@ moveTarget(dir, dis, speed) {
         if(keepMoving == false) {
           self waittill("targetStopMoving");
         }
-        self moveto(StartPOS, speed);
+        self moveTo(StartPOS, speed);
         self waittill_any("movedone", "targetStopMoving");
         self playSound("amb_target_stop");
     }
@@ -356,18 +356,18 @@ rotateTarget(dir, deg, speed, pauseTime) {
   while(1) {
     switch (dir) {
       case 1:
-        self rotateyaw(self.angles[2] + deg, speed);
+        self rotateYaw(self.angles[2] + deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
-        self rotateyaw(self.angles[2] - deg, speed);
+        self rotateYaw(self.angles[2] - deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
         break;
       case 2:
-        self rotateyaw(self.angles[2] - deg, speed);
+        self rotateYaw(self.angles[2] - deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
-        self rotateyaw(self.angles[2] + deg, speed);
+        self rotateYaw(self.angles[2] + deg, speed);
         self playSound("amb_target_rotate");
         wait(pauseTime);
         break;
@@ -402,9 +402,9 @@ rotateTarget(dir, deg, speed, pauseTime) {
         wait(pauseTime);
         break;
       case 7:
-        self rotateto((self.angles[0] + 90, self.angles[1] - 90, self.angles[2] + 45), speed);
+        self rotateTo((self.angles[0] + 90, self.angles[1] - 90, self.angles[2] + 45), speed);
         wait(pauseTime);
-        self rotateto((self.angles[0] - 90, self.angles[1] + 90, self.angles[2] - 45), speed);
+        self rotateTo((self.angles[0] - 90, self.angles[1] + 90, self.angles[2] - 45), speed);
         wait(pauseTime);
     }
   }

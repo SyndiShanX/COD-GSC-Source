@@ -245,7 +245,7 @@ func_13ACC(var_0) {
     var_3 = anglesToForward(self.angles);
     var_4 = anglestoright(self.angles);
     scripts\mp\utility::_magicbullet("iw7_erad_mp", self.origin + (0, 0, 4500), self.origin + (0, 0, 5500), self);
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     earthquake(0.2, 0.1, self.origin, 32);
     var_5 = func_36DB(var_0);
     var_5 = var_5 + var_1;

@@ -54,14 +54,14 @@ heli_path_graph() {
     startnode_array = [];
 
     destnode_pointer = path_dest[i];
-    destnode = getent(destnode_pointer.target, "targetname");
+    destnode = getEnt(destnode_pointer.target, "targetname");
 
     for(j = 0; j < path_start.size; j++) {
       toDest = false;
       currentnode = path_start[j];
 
       while(isDefined(currentnode.target)) {
-        nextnode = getent(currentnode.target, "targetname");
+        nextnode = getEnt(currentnode.target, "targetname");
         if(nextnode.origin == destnode.origin) {
           {}
           toDest = true;
@@ -70,7 +70,7 @@ heli_path_graph() {
 
         debug_print3d_simple("+", currentnode, (0, 0, -10));
         if(isDefined(nextnode.target)) {
-          debug_line(nextnode.origin, getent(nextnode.target, "targetname").origin, (0.25, 0.5, 0.25));
+          debug_line(nextnode.origin, getEnt(nextnode.target, "targetname").origin, (0.25, 0.5, 0.25));
         }
         if(isDefined(currentnode.script_delay)) {
           debug_print3d_simple("Wait: " + currentnode.script_delay, currentnode, (0, 0, 10));
@@ -79,7 +79,7 @@ heli_path_graph() {
         currentnode = nextnode;
       }
       if(toDest) {
-        startnode_array[startnode_array.size] = getent(path_start[j].target, "targetname");
+        startnode_array[startnode_array.size] = getEnt(path_start[j].target, "targetname");
       }
     }
     assertex((isDefined(startnode_array) && startnode_array.size > 0), "No path(s) to destination");
@@ -88,7 +88,7 @@ heli_path_graph() {
   }
 
   for(i = 0; i < loop_start.size; i++) {
-    startnode = getent(loop_start[i].target, "targetname");
+    startnode = getEnt(loop_start[i].target, "targetname");
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
   assertex(isDefined(level.heli_loop_paths[0]), "No helicopter loop paths found in map");
@@ -99,7 +99,7 @@ heli_path_graph() {
   assertex(isDefined(level.heli_leavenodes[0]), "No helicopter leave nodes found in map");
 
   for(i = 0; i < crash_start.size; i++) {
-    crash_start_node = getent(crash_start[i].target, "targetname");
+    crash_start_node = getEnt(crash_start[i].target, "targetname");
     level.heli_crash_paths[level.heli_crash_paths.size] = crash_start_node;
   }
   assertex(isDefined(level.heli_crash_paths[0]), "No helicopter crash paths found in map");
@@ -657,7 +657,7 @@ heli_fly(currentnode) {
   wait(2);
 
   while(isDefined(currentnode.target)) {
-    nextnode = getent(currentnode.target, "targetname");
+    nextnode = getEnt(currentnode.target, "targetname");
     assertex(isDefined(nextnode), "Next node in path is undefined, but has targetname");
 
     pos = nextnode.origin + (0, 0, 30);
@@ -826,9 +826,9 @@ attack_secondary() {
   }
 }
 missile_target_sight_check(missiletarget) {
-  heli2target_normal = vectornormalize(missiletarget.origin - self.origin);
+  heli2target_normal = vectorNormalize(missiletarget.origin - self.origin);
   heli2forward = anglesToForward(self.angles);
-  heli2forward_normal = vectornormalize(heli2forward);
+  heli2forward_normal = vectorNormalize(heli2forward);
 
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
 

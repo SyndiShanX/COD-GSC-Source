@@ -88,15 +88,15 @@ levelspawndvars(reset_dvars) {
 
 turbine_spin_init() {
   level endon("game_ended");
-  turbine1 = getent("turbine_blades", "targetname");
+  turbine1 = getEnt("turbine_blades", "targetname");
   turbine1 thread rotate_blades(4);
-  turbine2 = getent("turbine_blades2", "targetname");
+  turbine2 = getEnt("turbine_blades2", "targetname");
   turbine2 thread rotate_blades(3);
-  turbine3 = getent("turbine_blades3", "targetname");
+  turbine3 = getEnt("turbine_blades3", "targetname");
   turbine3 thread rotate_blades(6);
-  turbine4 = getent("turbine_blades4", "targetname");
+  turbine4 = getEnt("turbine_blades4", "targetname");
   turbine4 thread rotate_blades(3);
-  turbine6 = getent("turbine_blades6", "targetname");
+  turbine6 = getEnt("turbine_blades6", "targetname");
   turbine6 thread rotate_blades(4);
 }
 

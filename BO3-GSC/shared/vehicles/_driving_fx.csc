@@ -110,7 +110,7 @@ class vehiclewheelfx {
     if(rumble) {
       if(vehicle islocalclientdriver(localclientnum)) {
         player = getlocalplayer(localclientnum);
-        player playrumbleonentity(localclientnum, "reload_small");
+        player playRumbleOnEntity(localclientnum, "reload_small");
       }
     }
   }
@@ -152,7 +152,7 @@ class vehicle_camera_fx {
         player earthquake(strength, time, player.origin, 500);
         if(rumble_name != "" && speed_fraction > 0.5) {
           if(randomint(100) < 10) {
-            player playrumbleonentity(localclientnum, rumble_name);
+            player playRumbleOnEntity(localclientnum, rumble_name);
           }
         }
       }
@@ -299,7 +299,7 @@ function collision_thread(localclientnum) {
           }
           id = playSound(0, alias, self.origin, volume);
           if(isDefined(self.heavycollisionrumble)) {
-            player playrumbleonentity(localclientnum, self.heavycollisionrumble);
+            player playRumbleOnEntity(localclientnum, self.heavycollisionrumble);
           }
         } else if(hit_intensity > self.lightcollisionspeed) {
           volume = get_impact_vol_from_speed();
@@ -310,7 +310,7 @@ function collision_thread(localclientnum) {
           }
           id = playSound(0, alias, self.origin, volume);
           if(isDefined(self.lightcollisionrumble)) {
-            player playrumbleonentity(localclientnum, self.lightcollisionrumble);
+            player playRumbleOnEntity(localclientnum, self.lightcollisionrumble);
           }
         }
       }
@@ -337,7 +337,7 @@ function jump_landing_thread(localclientnum) {
           }
           id = playSound(0, alias, self.origin, volume);
           if(isDefined(self.jumplandingrumble)) {
-            player playrumbleonentity(localclientnum, self.jumplandingrumble);
+            player playRumbleOnEntity(localclientnum, self.jumplandingrumble);
           }
         }
       }
@@ -360,7 +360,7 @@ function suspension_thread(localclientnum) {
           alias = "veh_default_suspension_lg_lt";
         }
         id = playSound(0, alias, self.origin, volume);
-        player playrumbleonentity(localclientnum, "damage_light");
+        player playRumbleOnEntity(localclientnum, "damage_light");
       }
     }
   }

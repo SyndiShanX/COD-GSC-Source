@@ -95,10 +95,10 @@ skipto_intro() {
   setsaveddvar("cg_objectiveIndicatorFarFadeDist", "50000");
   rpc("clientscripts/haiti", "put_on_oxygen_mask");
   rpc("clientscripts/haiti", "set_intro_fog");
-  level.drop_vista_1 = getent("drop_vista", "targetname");
+  level.drop_vista_1 = getEnt("drop_vista", "targetname");
   level.drop_vista_1 setforcenocull();
   level.drop_vista_1 ignorecheapentityflag(1);
-  level.drop_vista_2 = getent("drop_vista_2", "targetname");
+  level.drop_vista_2 = getEnt("drop_vista_2", "targetname");
   level.drop_vista_2 setforcenocull();
   level.drop_vista_2 hide();
   level.drop_vista_2 ignorecheapentityflag(1);
@@ -168,10 +168,10 @@ intro() {
   level thread pregameplay_fx();
   level thread assemble_vtol_explode2();
   level clientnotify("hmt");
-  player_body = getent("player_body", "targetname");
+  player_body = getEnt("player_body", "targetname");
   player_body attach("c_usa_cia_haiti_viewbody_vson", "J_WristTwist_LE");
   level thread maps\createart\haiti_art::vtol_interior();
-  vtol_exterior = getent("intro_v78_exterior", "targetname");
+  vtol_exterior = getEnt("intro_v78_exterior", "targetname");
   vtol_exterior hide();
   vtol_exterior thread intro_vtol_sound();
   level thread vtol_hatch_open();
@@ -187,7 +187,7 @@ intro() {
 
 intro_vtol_sound() {
   vtol_snd_ent = spawn("script_origin", (0, 0, 0));
-  vtol_snd_ent linkto(self);
+  vtol_snd_ent linkTo(self);
   vtol_snd_ent playLoopSound("veh_plr_vtol_interior", 2);
   wait 43;
   vtol_snd_ent stoploopsound(1);
@@ -413,7 +413,7 @@ start_jetwing_land_exhaust() {
   flag_wait("jetwing_land_started");
 
   for(i = 1; i < 18; i++) {
-    jetwing = getent("intro_jetwing" + i + "_landing", "targetname");
+    jetwing = getEnt("intro_jetwing" + i + "_landing", "targetname");
     playFXOnTag(level._effect["jetwing_hero_exhaust"], jetwing, "tag_engine_left");
   }
 }
@@ -536,10 +536,10 @@ avoid_vtol_death() {
     return;
   }
   self dodamage(self.health + 1000, self.origin);
-  dir = vectornormalize(level.jetwing.origin - self.origin);
+  dir = vectorNormalize(level.jetwing.origin - self.origin);
   self movegravity(dir * 100, 5);
   aerial_explosion(self.origin, self.angles, "vtol_explode");
-  playsoundatposition("exp_air_vtol", self.origin);
+  playSoundAtPosition("exp_air_vtol", self.origin);
   playFXOnTag(level._effect["vtol_trail_cheap"], self, "tag_origin");
   torque = (0, 0, randomintrange(25, 45));
 
@@ -571,9 +571,9 @@ vtol_death_piece(origin, offset, model, fwd, right, up) {
   self endon("death");
   offset = (offset[0], offset[1], offset[2] + randomintrange(-100, 100));
   new_origin = origin + (fwd * offset[0] + right * offset[1] + up * offset[2]);
-  dir = vectornormalize(new_origin - origin);
-  dir_to_player = vectornormalize(level.player.origin - new_origin);
-  dir = vectornormalize(dir + dir_to_player);
+  dir = vectorNormalize(new_origin - origin);
+  dir_to_player = vectorNormalize(level.player.origin - new_origin);
+  dir = vectorNormalize(dir + dir_to_player);
   self setModel(model);
   playFXOnTag(level._effect["vtol_piece_trail"], self, "tag_origin");
   self thread vtol_death_piece_delete();
@@ -813,7 +813,7 @@ do_vtol_halo_jump(b_think) {
 
   self endon("death");
   guys = simple_spawn("halo_guys");
-  goto = getent("halo_jump_goto", "targetname");
+  goto = getEnt("halo_jump_goto", "targetname");
   jetwings = [];
 
   for(i = 0; i < guys.size; i++) {
@@ -821,8 +821,8 @@ do_vtol_halo_jump(b_think) {
     jetwings[i].supportsanimscripted = 1;
     jetwings[i].animname = "halo_jetwing_" + (i + 1);
     jetwings[i] setforcenocull();
-    guys[i] linkto(self, "tag_detach");
-    jetwings[i] linkto(self, "tag_detach");
+    guys[i] linkTo(self, "tag_detach");
+    jetwings[i] linkTo(self, "tag_detach");
     guys[i] setforcenocull();
   }
 
@@ -896,7 +896,7 @@ get_best_vtol() {
         dist = 1.0;
         dist = dist / 50000;
         dist = 1.0 - dist;
-        dir = vectornormalize(delta);
+        dir = vectorNormalize(delta);
         dot = vectordot(dir, fwd);
 
         if(dot < 0) {
@@ -1053,7 +1053,7 @@ drop_vista_think(v) {
 
   while(true) {
     new_pos = self.origin + v * 0.05;
-    self moveto(new_pos, 0.05);
+    self moveTo(new_pos, 0.05);
     self waittill("movedone");
   }
 }
@@ -1096,7 +1096,7 @@ player_intro_rumble() {
     time = randomfloatrange(0.1, 0.15);
     earthquake(0.2, time, level.player.origin, 200);
     level.player playSound("exp_flak_on_plane");
-    level.player playrumbleonentity("pullout_small");
+    level.player playRumbleOnEntity("pullout_small");
     wait(time);
   }
 }
@@ -1122,7 +1122,7 @@ jetwing_guys_explode() {
 
   average_pos = average_pos / jetwings.size;
   average_pitch = average_pitch / jetwings.size;
-  dir = vectornormalize(jetwings[0].pathlookpos - jetwings[0].pathpos);
+  dir = vectorNormalize(jetwings[0].pathlookpos - jetwings[0].pathpos);
   pos = average_pos + dir * 1000;
   aerial_explosion(pos, (0, 0, 0), "sam_explode_cheap", 1);
 
@@ -1141,33 +1141,33 @@ jetwing_guys_explode() {
 #using_animtree("animated_props");
 
 jetwing_fx_anims() {
-  fx_vtol_1 = getent("fxanim_deck_vtol_4", "targetname");
-  fx_vtol_debris_1 = getent("fxanim_deck_vtol_4_debris", "targetname");
-  fx_vtol_debris_1 linkto(fx_vtol_1, "tag_origin", (0, 0, 0), (0, 0, 0));
+  fx_vtol_1 = getEnt("fxanim_deck_vtol_4", "targetname");
+  fx_vtol_debris_1 = getEnt("fxanim_deck_vtol_4_debris", "targetname");
+  fx_vtol_debris_1 linkTo(fx_vtol_1, "tag_origin", (0, 0, 0), (0, 0, 0));
   fx_vtol_debris_1 playLoopSound("evt_drone_piece_trail");
   fx_vtol_1 thread avoid_vtol_think(0, 0, 0);
-  fx_vtol_2 = getent("fxanim_deck_vtol_5", "targetname");
+  fx_vtol_2 = getEnt("fxanim_deck_vtol_5", "targetname");
   fx_vtol_2 setforcenocull();
   fx_vtol_2_parts = getEntArray("fxanim_vtol_5_piece", "targetname");
 
   foreach(part in fx_vtol_2_parts) {
-    part linkto(fx_vtol_2, part.fxanim_tag, (0, 0, 0), (0, 0, 0));
+    part linkTo(fx_vtol_2, part.fxanim_tag, (0, 0, 0), (0, 0, 0));
     part playLoopSound("evt_drone_piece_trail_lt");
     part setforcenocull();
   }
 
   fx_vtol_2 thread avoid_vtol_think(0, 0, 0);
-  fx_vtol_3 = getent("fxanim_deck_vtol_7", "targetname");
+  fx_vtol_3 = getEnt("fxanim_deck_vtol_7", "targetname");
   fx_vtol_3 setforcenocull();
-  fx_vtol_debris_2 = getent("fxanim_deck_vtol_7_debris", "targetname");
+  fx_vtol_debris_2 = getEnt("fxanim_deck_vtol_7_debris", "targetname");
   fx_vtol_debris_2 hide();
-  fx_vtol_debris_2 linkto(fx_vtol_3, "tag_fuselage_link_jnt", (0, 0, 0), (0, 0, 0));
+  fx_vtol_debris_2 linkTo(fx_vtol_3, "tag_fuselage_link_jnt", (0, 0, 0), (0, 0, 0));
   fx_vtol_debris_2 playLoopSound("evt_drone_piece_trail");
   fx_vtol_debris_2 setforcenocull();
   fx_vtol_3_parts = getEntArray("fxanim_vtol_7_piece", "targetname");
 
   foreach(part in fx_vtol_3_parts) {
-    part linkto(fx_vtol_3, part.fxanim_tag, (0, 0, 0), (0, 0, 0));
+    part linkTo(fx_vtol_3, part.fxanim_tag, (0, 0, 0), (0, 0, 0));
     part playLoopSound("evt_drone_piece_trail_lt");
     part setforcenocull();
   }
@@ -1175,9 +1175,9 @@ jetwing_fx_anims() {
   fx_vtol_3.animname = "fxanim_props";
   fx_vtol_3 useanimtree(#animtree);
   fx_vtol_3 maps\_anim::anim_first_frame(fx_vtol_3, "jetpack_vtol_explode_4");
-  fx_vtol_4 = getent("fxanim_deck_vtol_6", "targetname");
-  fx_vtol_debris_3 = getent("fxanim_deck_vtol_6_debris", "targetname");
-  fx_vtol_debris_3 linkto(fx_vtol_4);
+  fx_vtol_4 = getEnt("fxanim_deck_vtol_6", "targetname");
+  fx_vtol_debris_3 = getEnt("fxanim_deck_vtol_6_debris", "targetname");
+  fx_vtol_debris_3 linkTo(fx_vtol_4);
   fx_vtol_debris_3 playLoopSound("evt_drone_piece_trail");
   trigger_wait("trig_vtols_start_move", "targetname");
   wait 0.5;
@@ -1208,7 +1208,7 @@ jetwing_fx_anims() {
 }
 
 explode_vtol(targetname) {
-  target = getent(targetname, "targetname");
+  target = getEnt(targetname, "targetname");
 
   if(isDefined(target)) {
     origin = level.jetwing.origin + anglesToForward(level.jetwing.angles) * 5000;
@@ -1220,16 +1220,16 @@ explode_vtol(targetname) {
 }
 
 intro_fxanims() {
-  vtol_interior = getent("intro_v78_player", "targetname");
-  fxanim_vtol_door = getent("fxanim_vtol_door", "targetname");
+  vtol_interior = getEnt("intro_v78_player", "targetname");
+  fxanim_vtol_door = getEnt("fxanim_vtol_door", "targetname");
   origin = vtol_interior gettagorigin("tag_body_back");
   fxanim_vtol_door.origin = origin;
-  fxanim_vtol_door linkto(vtol_interior, "tag_body_back");
+  fxanim_vtol_door linkTo(vtol_interior, "tag_body_back");
   level waittill("swap_vtol");
   fxanim_vtol_door unlink();
   fxanim_vtol_door delete();
-  fxanim_vtol_interior = getent("fxanim_vtol_interior", "targetname");
-  fxanim_vtol_int_debris = getent("fxanim_vtol_int_debris", "targetname");
+  fxanim_vtol_interior = getEnt("fxanim_vtol_interior", "targetname");
+  fxanim_vtol_int_debris = getEnt("fxanim_vtol_int_debris", "targetname");
   fxanim_vtol_interior delete();
   fxanim_vtol_int_debris delete();
 }
@@ -1268,7 +1268,7 @@ landing_aa_fire() {
 
 landing_vtol_flock_manager(struct_name, min, max) {
   level endon("end_flock_manager_" + struct_name);
-  vtol_spawn_struct = getstruct(struct_name, "targetname");
+  vtol_spawn_struct = getStruct(struct_name, "targetname");
   fwd = anglesToForward(vtol_spawn_struct.angles);
   right = anglestoright(vtol_spawn_struct.angles);
   up = anglestoup(vtol_spawn_struct.angles);
@@ -1298,7 +1298,7 @@ air_battle_manager() {
 
 landing_air_battle_manager(struct_name, min, max) {
   level endon("end_air_battle_manager_" + struct_name);
-  vtol_spawn_struct = getstruct(struct_name, "targetname");
+  vtol_spawn_struct = getStruct(struct_name, "targetname");
   angles = vtol_spawn_struct.angles;
   angles = (angles[0], randomfloatrange(-180, 180), angles[2]);
   fwd = anglesToForward(angles);
@@ -1323,7 +1323,7 @@ spawn_clouds(struct_name, str_endon, angles) {
     name = isDefined(struct.script_string) && struct.script_string == "right" ? "cloud_spawner_right" : name;
     name = isDefined(struct.script_string) && struct.script_string == "locked" ? "cloud_locked" : name;
     name = isDefined(struct_name) && struct_name == "section_4_locked_cloud_struct" ? "cloud_spawner" : name;
-    delta = vectornormalize(struct.origin - level.player.origin);
+    delta = vectorNormalize(struct.origin - level.player.origin);
     yaw = vectoangles(delta);
     xy_delta = (delta[0], delta[1], 0);
     xy = length(delta);
@@ -1342,8 +1342,8 @@ cloud_ent_delete(str_endon) {
 
 spawn_moving_cloud(struct_name, str_endon, side) {
   level endon(str_endon);
-  start = getstruct(struct_name + "_start", "targetname");
-  end = getstruct(struct_name + "_end", "targetname");
+  start = getStruct(struct_name + "_start", "targetname");
+  end = getStruct(struct_name + "_end", "targetname");
 
   while(true) {
     mover = spawn_model("tag_origin", start.origin + (randomintrange(-150, 150), randomintrange(-150, 150), randomintrange(-400, -100)), (0, 0, 0));
@@ -1351,7 +1351,7 @@ spawn_moving_cloud(struct_name, str_endon, side) {
     mover thread moving_cloud_delete(str_endon);
     name = side == "left" ? "cloud_locked_left" : "cloud_locked_right";
     playFXOnTag(level._effect[name], mover, "tag_origin");
-    mover moveto(end.origin, randomfloatrange(8, 9), 0.05);
+    mover moveTo(end.origin, randomfloatrange(8, 9), 0.05);
     wait 5;
   }
 }
@@ -1372,7 +1372,7 @@ pregameplay_fx() {
   level endon("avoid_vtols");
   level thread pregameplay_exposure();
   level waittill("swap_vtol");
-  struct = getstruct("pregameplay_fx_struct", "targetname");
+  struct = getStruct("pregameplay_fx_struct", "targetname");
   level thread pregameplay_missiles();
   level thread aerial_explosion_manager("pregameplay", 0.5, 0.75, (2000, -2500, -1000), (7500, 2500, 1000));
 
@@ -1428,11 +1428,11 @@ cloud_exposure(time, time_high, time_low) {
 }
 
 assemble_vtol_explode2() {
-  parent = getent("vtol_explode2", "targetname");
+  parent = getEnt("vtol_explode2", "targetname");
   pieces = getEntArray("vtol_explode2_piece", "targetname");
 
   foreach(piece in pieces) {
-    piece linkto(parent, piece.fxanim_tag, (0, 0, 0), (0, 0, 0));
+    piece linkTo(parent, piece.fxanim_tag, (0, 0, 0), (0, 0, 0));
   }
 }
 

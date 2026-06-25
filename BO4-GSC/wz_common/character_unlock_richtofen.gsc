@@ -41,14 +41,14 @@ function_2613aeec(enabled) {
       return;
     }
 
-    trigger triggerignoreteam();
+    trigger triggerIgnoreTeam();
     trigger setinvisibletoall();
     trigger setteamfortrigger(#"none");
-    trigger setcursorhint("HINT_NOICON");
+    trigger setCursorHint("HINT_NOICON");
     trigger usetriggerignoreuseholdtime();
     trigger function_4bf6de9a(1);
-    trigger usetriggerrequirelookat();
-    trigger sethintstring(#"hash_5082ca83a4dd1416");
+    trigger useTriggerRequireLookAt();
+    trigger setHintString(#"hash_5082ca83a4dd1416");
     trigger callback::on_trigger(&function_2043936c);
     trigger thread update_trigger_visibility();
   }
@@ -105,7 +105,7 @@ function_4ac25840(dead_team) {
   if(var_c503939b <= function_c816ea5b()) {
     foreach(team in level.teams) {
       if(teams::function_9dd75dad(team) && !teams::is_all_dead(team)) {
-        players = getplayers(team);
+        players = getPlayers(team);
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"richtofen_unlock")) {

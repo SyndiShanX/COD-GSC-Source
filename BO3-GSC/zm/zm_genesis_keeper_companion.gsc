@@ -63,7 +63,7 @@ function main() {
   level flag::init("companion_box_building");
   level.var_67d8db6f = 5000;
   level flag::wait_till("initial_blackscreen_passed");
-  level.var_214b85da = getent("keeper_companion_spawner", "script_noteworthy");
+  level.var_214b85da = getEnt("keeper_companion_spawner", "script_noteworthy");
   level thread function_2dc24f4b();
   if(!isDefined(level.powerup_grab_get_players_override)) {
     level.powerup_grab_get_players_override = &powerup_grab_get_players_override;
@@ -71,7 +71,7 @@ function main() {
 }
 
 function powerup_grab_get_players_override() {
-  players = getplayers();
+  players = getPlayers();
   if(isDefined(level.ai_companion)) {
     players[players.size] = level.ai_companion;
   }
@@ -144,14 +144,14 @@ function function_85555c9() {
 
 function function_fe778474(e_player) {
   if(self.stub flag::get("part_picked_up")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(level flag::get("companion_box_parts_collected")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_GENESIS_CALLBOX_PICKUP_PART");
+  self setHintString(&"ZM_GENESIS_CALLBOX_PICKUP_PART");
   return true;
 }
 
@@ -189,7 +189,7 @@ function private function_6ba7e9d6(e_player) {
   mdl_anchor = util::spawn_model("tag_origin", e_player.origin, e_player.angles);
   e_player thread anchor_delete_watcher(mdl_anchor);
   e_player zm_utility::disable_player_move_states(1);
-  e_player linkto(mdl_anchor);
+  e_player linkTo(mdl_anchor);
   e_player playSound("zmb_keeper_callbox_build_start");
   e_player playLoopSound("zmb_keeper_callbox_build_lp");
   while(isDefined(e_player.usebar)) {
@@ -285,29 +285,29 @@ function create_callbox_unitrigger(str_areaname, func_trigger_visibility, func_t
 
 function function_adb2c149(e_player) {
   if(!self zm_craftables::anystub_update_prompt(e_player)) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(e_player bgb::is_enabled("zm_bgb_disorderly_combat")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   initial_current_weapon = e_player getcurrentweapon();
   current_weapon = zm_weapons::get_nonalternate_weapon(initial_current_weapon);
   if(current_weapon.isheroweapon || current_weapon.isgadget) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(!level flag::get("companion_box_built")) {
     if(level flag::get("companion_box_building")) {
-      self sethintstring(&"");
+      self setHintString(&"");
       return false;
     }
     if(!level flag::get("companion_box_parts_collected")) {
-      self sethintstring(&"ZM_GENESIS_CALLBOX_MISSING_PARTS");
+      self setHintString(&"ZM_GENESIS_CALLBOX_MISSING_PARTS");
       return false;
     }
-    self sethintstring(&"ZM_GENESIS_CALLBOX_BUILD");
+    self setHintString(&"ZM_GENESIS_CALLBOX_BUILD");
     return true;
   }
   if(isDefined(level.ai_companion)) {
@@ -333,13 +333,13 @@ function function_adb2c149(e_player) {
         break;
       }
     }
-    self sethintstring(&"ZM_GENESIS_ROBOT_ONCALL_IN", hintstring_areaname);
+    self setHintString(&"ZM_GENESIS_ROBOT_ONCALL_IN", hintstring_areaname);
     return false;
   }
   if(e_player.score < level.var_67d8db6f) {
-    self sethintstring(&"ZM_GENESIS_ROBOT_PAY_TOWARDS", level.var_67d8db6f);
+    self setHintString(&"ZM_GENESIS_ROBOT_PAY_TOWARDS", level.var_67d8db6f);
   } else {
-    self sethintstring(&"ZM_GENESIS_ROBOT_SUMMON", level.var_67d8db6f);
+    self setHintString(&"ZM_GENESIS_ROBOT_SUMMON", level.var_67d8db6f);
   }
   return true;
 }
@@ -384,7 +384,7 @@ function function_d6422d13() {
       self.stub zm_unitrigger::run_visibility_function_for_all_triggers();
     } else {
       level flag::set("companion_box_in_use");
-      self sethintstring("");
+      self setHintString("");
       e_player zm_score::minus_to_player_score(level.var_67d8db6f);
       if(!e_player bgb::is_enabled("zm_bgb_shopping_free")) {
         level.var_67d8db6f = 0;

@@ -138,7 +138,7 @@ function pers_upgrade_insta_kill_upgrade_check() {
     if(!zm_pers_upgrades::is_pers_system_active()) {
       return;
     }
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       e_player = players[i];
       if(isDefined(e_player.pers_upgrades_awarded["insta_kill"]) && e_player.pers_upgrades_awarded["insta_kill"]) {
@@ -866,7 +866,7 @@ function pers_nube_ammo_hint_string(player, weapon) {
     return false;
   }
   self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
-  self sethintstring(self.stub.hint_string, ammo_cost);
+  self setHintString(self.stub.hint_string, ammo_cost);
   return true;
 }
 

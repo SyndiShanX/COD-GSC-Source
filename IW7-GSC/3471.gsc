@@ -138,9 +138,9 @@ createboxforplayer(var_0, var_1, var_2) {
 }
 
 box_setactive(var_0) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   var_1 = level.boxsettings[self.boxtype];
-  self sethintstring(var_1.hintstring);
+  self setHintString(var_1.hintstring);
   self.inuse = 0;
   var_2 = scripts\mp\objidpoolmanager::requestminimapid(1);
 
@@ -485,7 +485,7 @@ box_leave() {
 
 deleteonownerdeath(var_0) {
   wait 0.25;
-  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 waittill("death");
   box_leave();
 }
@@ -603,7 +603,7 @@ createbombsquadmodel(var_0) {
     var_2 hide();
     var_2 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
     var_2 setModel(var_1.modelbombsquad);
-    var_2 linkto(self);
+    var_2 linkTo(self);
     var_2 setcontents(0);
     self.bombsquadmodel = var_2;
     self waittill("death");

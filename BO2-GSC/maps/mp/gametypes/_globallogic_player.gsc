@@ -2149,7 +2149,7 @@ callback_playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, 
 
 damageshellshockandrumble(eattacker, einflictor, sweapon, smeansofdeath, idamage) {
   self thread maps\mp\gametypes\_weapons::onweapondamage(eattacker, einflictor, sweapon, smeansofdeath, idamage);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 createdeadbody(idamage, smeansofdeath, sweapon, shitloc, vdir, vattackerorigin, deathanimduration, einflictor, ragdoll_jib, body) {

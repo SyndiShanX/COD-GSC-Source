@@ -74,7 +74,7 @@ _id_406F(var_0, var_1) {
 _id_4070(var_0) {
   self endon("death");
   var_0 endon("death");
-  var_0 linkto(self, "tag_origin");
+  var_0 linkTo(self, "tag_origin");
   wait 0.05;
   var_0 thread maps\_anim::_id_11C8(var_0, "wounded_walk_loop", "stop_carried_loop");
 }
@@ -106,7 +106,7 @@ _id_4071(var_0, var_1) {
   while(isDefined(var_1.target)) {
     self.ignoresuppression = 1;
     self._id_117F = 1;
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
     var_2 = common_scripts\utility::ter_op(isDefined(var_2), var_2, getnode(var_1.target, "targetname"));
 
     if(!isDefined(var_2.target)) {

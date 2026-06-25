@@ -248,11 +248,11 @@ jeep1_by() {
   var_2 = (-35421, 8299, 3586);
   var_3 = (-37562, 9396, 3586);
   var_0 playSound("clkw_scn_jeep1_by", "sounddone");
-  var_0 moveto(var_1, 5);
+  var_0 moveTo(var_1, 5);
   wait 5;
-  var_0 moveto(var_2, 3.0);
+  var_0 moveTo(var_2, 3.0);
   wait 3;
-  var_0 moveto(var_3, 4.0);
+  var_0 moveTo(var_3, 4.0);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -263,11 +263,11 @@ jeep2_by() {
   var_2 = (-35421, 8299, 3586);
   var_3 = (-37562, 9396, 3586);
   var_0 playSound("clkw_scn_jeep2_by", "sounddone");
-  var_0 moveto(var_1, 5.5);
+  var_0 moveTo(var_1, 5.5);
   wait 5.5;
-  var_0 moveto(var_2, 3.0);
+  var_0 moveTo(var_2, 3.0);
   wait 3;
-  var_0 moveto(var_3, 4.0);
+  var_0 moveTo(var_3, 4.0);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -310,7 +310,7 @@ keegan_drag_body() {
   var_1 = (-37737, 8948, 3509);
   var_0 playSound("clkw_scn_keegan_drag_body", "sounddone");
   wait 0.5;
-  var_0 moveto(var_1, 2.5);
+  var_0 moveTo(var_1, 2.5);
   wait 2.5;
   var_0 waittill("sounddone");
   var_0 delete();
@@ -324,9 +324,9 @@ baker_drag_body1() {
   var_2 = (-38557, 9576, 3509);
   var_0 playSound("clkw_scn_baker_drag_body", "sounddone");
   wait 2.5;
-  var_0 moveto(var_1, 5);
+  var_0 moveTo(var_1, 5);
   wait 5;
-  var_0 moveto(var_2, 1.5);
+  var_0 moveTo(var_2, 1.5);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -348,9 +348,9 @@ jeep_and_btr_appear() {
   var_2 = (-36290, 8662, 3568);
   var_0 playSound("clkw_scn_ambush_approach", "sounddone");
   wait 7;
-  var_0 moveto(var_1, 5);
+  var_0 moveTo(var_1, 5);
   wait 6;
-  var_0 moveto(var_2, 8);
+  var_0 moveTo(var_2, 8);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -423,7 +423,7 @@ keegan_drag_body2() {
   var_1 = (-38533, 9643, 3522);
   var_0 playSound("clkw_scn_keegan_drag_body", "sounddone");
   wait 0.5;
-  var_0 moveto(var_1, 2.5);
+  var_0 moveTo(var_1, 2.5);
   wait 2.5;
   var_0 waittill("sounddone");
   var_0 delete();
@@ -453,7 +453,7 @@ btr_by_mountainside() {
   var_0 = spawn("script_origin", (-32286, 3039, 2252));
   var_1 = (-32979, 2986, 2344);
   var_0 playSound("clkw_scn_interior_btr_by", "sounddone");
-  var_0 moveto(var_1, 2);
+  var_0 moveTo(var_1, 2);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -473,7 +473,7 @@ jeep_exit_bags() {
   var_1 = (-29246, 2938, 2064);
   var_0 playSound("clkw_scn_pickup_bags");
   wait 1;
-  var_0 moveto(var_1, 0.5);
+  var_0 moveTo(var_1, 0.5);
   wait 1;
   var_0 playSound("clkw_scn_bag_drop");
   wait 0.5;
@@ -512,9 +512,9 @@ entry_door_close_layer2() {
   var_1 = (-28735, 2746, 2129);
   var_2 = (-28891, 2608, 2129);
   var_0 playSound("clkw_scn_entry_door_close_layer2", "sounddone");
-  var_0 moveto(var_1, 8.5);
+  var_0 moveTo(var_1, 8.5);
   wait 8.5;
-  var_0 moveto(var_2, 8.5);
+  var_0 moveTo(var_2, 8.5);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -617,7 +617,7 @@ door_break_foley() {
   var_0 = spawn("script_origin", (-26724, 752, 1995));
   var_1 = (-26888, 752, 1995);
   var_0 playSound("clkw_scn_door_break_foley_01", "sounddone");
-  var_0 moveto(var_1, 1.5);
+  var_0 moveTo(var_1, 1.5);
   wait 1.5;
   var_0 waittill("sounddone");
   var_0 delete();
@@ -913,7 +913,7 @@ pa_announcements_chaos() {
 }
 
 pa_announcements_interior_combat_thread(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
   var_3 = 700;
   var_3 = var_3 * var_3;
   var_4 = [];
@@ -956,7 +956,7 @@ pa_announcements_interior_combat_thread(var_0, var_1) {
 }
 
 pa_announcements_cqb_thread(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
   var_3 = 700;
   var_3 = var_3 * var_3;
   var_4 = [];
@@ -999,7 +999,7 @@ pa_announcements_cqb_thread(var_0, var_1) {
 }
 
 pa_announcements_chaos_thread(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
   var_3 = 700;
   var_3 = var_3 * var_3;
   var_4 = [];
@@ -1058,7 +1058,7 @@ get_closest_speaker_nodes(var_0) {
   var_2 = var_0;
 
   while(isDefined(var_0.target)) {
-    var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
     var_3 = distancesquared(level.player.origin, var_0.origin);
 
     if(var_3 < var_1) {
@@ -1068,11 +1068,11 @@ get_closest_speaker_nodes(var_0) {
   }
 
   var_4 = undefined;
-  var_4 = common_scripts\utility::getstruct(var_2.targetname, "target");
+  var_4 = common_scripts\utility::getStruct(var_2.targetname, "target");
   var_5 = undefined;
 
   if(isDefined(var_2.target)) {
-    var_5 = common_scripts\utility::getstruct(var_2.target, "targetname");
+    var_5 = common_scripts\utility::getStruct(var_2.target, "targetname");
   }
 
   var_1 = 64000000;
@@ -1153,11 +1153,11 @@ locker_brawl(var_0) {
   var_3 = (-30628, -1733, 1855);
   var_4 = (-30627, -1687, 1803);
   var_1 playSound("clkw_scn_cqb_locker_brawl", "sounddone");
-  var_1 moveto(var_2, 1);
+  var_1 moveTo(var_2, 1);
   wait 2;
-  var_1 moveto(var_3, 0.5);
+  var_1 moveTo(var_3, 0.5);
   wait 0.7;
-  var_1 moveto(var_4, 0.5);
+  var_1 moveTo(var_4, 0.5);
   var_1 waittill("sounddone");
   var_1 delete();
   thread alarms_2();
@@ -1170,11 +1170,11 @@ locker_brawl_vo(var_0) {
   var_2 = (-30650, -1613, 1860);
   var_3 = (-30628, -1733, 1855);
   var_4 = (-30627, -1687, 1803);
-  var_1 moveto(var_2, 1);
+  var_1 moveTo(var_2, 1);
   wait 2;
-  var_1 moveto(var_3, 0.5);
+  var_1 moveTo(var_3, 0.5);
   wait 0.7;
-  var_1 moveto(var_4, 0.5);
+  var_1 moveTo(var_4, 0.5);
   var_1 waittill("sounddone");
   var_1 delete();
   thread alarms_2();
@@ -1302,7 +1302,7 @@ garage_jeep_start_skid() {
   var_1 = (-27091, 3032, 2060);
   var_0 playSound("clkw_garage_jeep_start_skid", "sounddone");
   wait 2.1;
-  var_0 moveto(var_1, 5);
+  var_0 moveTo(var_1, 5);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -1397,11 +1397,11 @@ lead_jeep() {
   var_2 = (-27412, 2934, 2074);
   var_3 = (-25944, 3491, 2069);
   var_0 playSound("clkw_garage_lead_jeep_by", "sounddone");
-  var_0 moveto(var_1, 1.5);
+  var_0 moveTo(var_1, 1.5);
   wait 1.5;
-  var_0 moveto(var_2, 4);
+  var_0 moveTo(var_2, 4);
   wait 4;
-  var_0 moveto(var_3, 3.5);
+  var_0 moveTo(var_3, 3.5);
   wait 3.5;
   var_0 waittill("sounddone");
   var_0 delete();
@@ -1420,13 +1420,13 @@ chase_tower_fire() {
   var_4 = (-10433, -4780, 264);
   var_5 = (-9275, -4338, 264);
   var_0 playSound("clkw_scn_chase_tower_fire_01", "sounddone");
-  var_0 moveto(var_3, 1);
+  var_0 moveTo(var_3, 1);
   wait 1;
   var_1 playSound("clkw_scn_chase_tower_fire_01", "sounddone");
-  var_1 moveto(var_4, 1);
+  var_1 moveTo(var_4, 1);
   wait 1;
   var_2 playSound("clkw_scn_chase_tower_fire_01", "sounddone");
-  var_2 moveto(var_5, 1);
+  var_2 moveTo(var_5, 1);
   var_2 waittill("sounddone");
   var_0 delete();
   var_1 delete();
@@ -1461,7 +1461,7 @@ exit_tunnel_jeep_by() {
   var_0 = spawn("script_origin", (-25590, 3743, 2069));
   var_1 = (-26031, 3615, 2069);
   var_0 playSound("clkw_exfil_garage_jeep_by", "sounddone");
-  var_0 moveto(var_1, 4);
+  var_0 moveTo(var_1, 4);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -1857,7 +1857,7 @@ ravine_jeeps_to_the_right() {
   var_1 = (-8667, -4029, 461);
   var_0 playSound("clkw_scn_chase_jeeps_right", "sounddone");
   var_0 scalevolume(0.562);
-  var_0 moveto(var_1, 8, 4);
+  var_0 moveTo(var_1, 8, 4);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -1881,7 +1881,7 @@ chase_tunnel_jeep() {
   var_0 = spawn("script_origin", (-6356, -6559, 319));
   var_1 = (-5572, -6555, 257);
   var_0 playSound("clkw_scn_chase_tunnel_jeep", "sounddone");
-  var_0 moveto(var_1, 1.8);
+  var_0 moveTo(var_1, 1.8);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -1892,9 +1892,9 @@ snowmobiles_tunnel() {
   var_0 playSound("clkw_scn_chase_snowmb_tunnel", "sounddone");
   var_1 = (-5018, -8417, 285);
   var_2 = (-972, -8607, 285);
-  var_0 moveto(var_1, 1.3);
+  var_0 moveTo(var_1, 1.3);
   wait 1.3;
-  var_0 moveto(var_2, 5);
+  var_0 moveTo(var_2, 5);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -1922,9 +1922,9 @@ tunnel_exit_jeeps() {
   var_1 = (273, -8376, 274);
   var_2 = (762, -7454, 266);
   var_0 playSound("clkw_scn_chase_tunnel_exit_jeeps", "sounddone");
-  var_0 moveto(var_1, 1.5);
+  var_0 moveTo(var_1, 1.5);
   wait 1.5;
-  var_0 moveto(var_2, 1.5);
+  var_0 moveTo(var_2, 1.5);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -1954,11 +1954,11 @@ snowmobiles() {
     var_0 = spawn("script_origin", (-273, -1821, 272));
     var_1 = (348, 3222, 272);
     var_2 = (3711, 2575, 272);
-    var_0 moveto(var_1, 5);
+    var_0 moveTo(var_1, 5);
     wait 1;
     var_0 playSound("clkw_scn_chase_snowmobiles", "sounddone");
     wait 4;
-    var_0 moveto(var_2, 3);
+    var_0 moveTo(var_2, 3);
     var_0 waittill("sounddone");
     var_0 delete();
   }
@@ -2022,7 +2022,7 @@ bridge_jeep_by() {
   var_1 = (15300, 4213, 273);
   var_0 playSound("clkw_scn_chase_bridge_jeep_by", "sounddone");
   wait 1.25;
-  var_0 moveto(var_1, 0.8);
+  var_0 moveTo(var_1, 0.8);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -2034,11 +2034,11 @@ bridge_jeeps_to_the_right() {
   var_2 = (18420, 6547, 273);
   var_3 = (19251, 9325, 273);
   var_0 playSound("clkw_scn_chase_jeeps_right", "sounddone");
-  var_0 moveto(var_1, 3);
+  var_0 moveTo(var_1, 3);
   wait 3;
-  var_0 moveto(var_2, 4);
+  var_0 moveTo(var_2, 4);
   wait 4;
-  var_0 moveto(var_3, 4);
+  var_0 moveTo(var_3, 4);
   var_0 waittill("sounddone");
   var_0 delete();
 }

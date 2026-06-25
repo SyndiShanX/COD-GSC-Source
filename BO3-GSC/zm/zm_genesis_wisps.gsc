@@ -147,10 +147,10 @@ function function_3bcaa1c() {
 
 function function_836f0458(e_player) {
   if(isDefined(self.stub.b_on) && self.stub.b_on && level.var_c1feb276 !== "off") {
-    self sethintstring("");
+    self setHintString("");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -248,13 +248,13 @@ function function_198aed06() {
 function function_caef395a(e_player) {
   if(isDefined(self.stub.b_on) && self.stub.b_on) {
     if(self.stub.script_int == e_player.characterindex) {
-      self sethintstring("");
+      self setHintString("");
       return true;
     }
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -313,7 +313,7 @@ function function_d4b54e53(n_val) {
   if(isDefined(s_dest)) {
     player = level.activeplayers[0];
     var_5d8a4d6d = util::spawn_model("", player.origin, player.angles);
-    player linkto(var_5d8a4d6d);
+    player linkTo(var_5d8a4d6d);
     var_5d8a4d6d.origin = s_dest.origin;
     wait(0.5);
     player unlink();
@@ -362,7 +362,7 @@ function function_371c89ce(n_val) {
   if(isDefined(s_dest)) {
     player = level.activeplayers[0];
     var_5d8a4d6d = util::spawn_model("", player.origin, player.angles);
-    player linkto(var_5d8a4d6d);
+    player linkTo(var_5d8a4d6d);
     var_5d8a4d6d.origin = s_dest.origin;
     wait(0.5);
     player unlink();

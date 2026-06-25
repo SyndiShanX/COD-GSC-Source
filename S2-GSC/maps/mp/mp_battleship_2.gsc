@@ -67,7 +67,7 @@ func_6B82() {
 
 func_9B93() {
   self endon("death");
-  var_00 = getent("death_trigger", "targetname");
+  var_00 = getEnt("death_trigger", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -82,10 +82,10 @@ func_9B93() {
 }
 
 func_0E99() {
-  var_00 = getent("scavanger_yacht", "targetname");
-  var_01 = getent("scavanger_ketch", "targetname");
-  var_02 = getent("sunken_front", "targetname");
-  var_03 = getent("sunken_back", "targetname");
+  var_00 = getEnt("scavanger_yacht", "targetname");
+  var_01 = getEnt("scavanger_ketch", "targetname");
+  var_02 = getEnt("sunken_front", "targetname");
+  var_03 = getEnt("sunken_back", "targetname");
   var_00 thread func_AA88();
   var_01 thread func_AA88();
   var_02 thread func_AA88();
@@ -145,20 +145,20 @@ func_6DDC(param_00) {
 }
 
 func_6477() {
-  var_00 = getent("cliffs_01", "targetname");
+  var_00 = getEnt("cliffs_01", "targetname");
   var_00 thread func_AA88();
   var_00 method_8278("bsh_vista_cliff_01_anim");
 }
 
 func_648D() {
-  var_00 = getent("skydome", "targetname");
+  var_00 = getEnt("skydome", "targetname");
   var_00 func_AA88();
 }
 
 func_9201() {
   var_00 = 0.5;
   var_01 = 2;
-  var_02 = getent("explosion_loc", "targetname");
+  var_02 = getEnt("explosion_loc", "targetname");
   var_02 func_AA88();
   wait(3);
   var_03 = 0;
@@ -176,12 +176,12 @@ func_9201() {
 
 func_71B0() {
   wait 0.05;
-  var_00 = getent("explosion_loc", "targetname");
+  var_00 = getEnt("explosion_loc", "targetname");
   playFXOnTag(common_scripts\utility::func_44F5("fx_sunflare_mp_battleship_01"), var_00, "sunflare_loc");
 }
 
 func_6483() {
-  var_00 = getent("ocean", "targetname");
+  var_00 = getEnt("ocean", "targetname");
   var_00 thread func_AA88();
 }
 
@@ -199,7 +199,7 @@ func_89F9() {
   playFXOnTag(common_scripts\utility::func_44F5("mp_bat_vista_attack_transport"), level.var_99D9, "tag_origin");
   while(isDefined(self)) {
     var_00 = function_021F("bship_gravity_tilt_scrp", "targetname");
-    level.var_99D9 rotateto((0, 0, level.var_99D8), level.var_A983, level.var_A983 / 2, level.var_A983 / 2);
+    level.var_99D9 rotateTo((0, 0, level.var_99D8), level.var_A983, level.var_A983 / 2, level.var_A983 / 2);
     lib_0378::func_8D74("if_the_boat_is_a_rockin_dont_come_a_knockin", "interior");
     activateclientexploder(20);
     foreach(var_02 in var_00) {
@@ -207,7 +207,7 @@ func_89F9() {
     }
 
     wait(level.var_A983);
-    level.var_99D9 rotateto((0, 0, -1 * level.var_99D8), level.var_A983, level.var_A983 / 2, level.var_A983 / 2);
+    level.var_99D9 rotateTo((0, 0, -1 * level.var_99D8), level.var_A983, level.var_A983 / 2, level.var_A983 / 2);
     lib_0378::func_8D74("if_the_boat_is_a_rockin_dont_come_a_knockin", "interior");
     activateclientexploder(10);
     foreach(var_02 in var_00) {
@@ -219,7 +219,7 @@ func_89F9() {
 }
 
 func_AA88() {
-  self linkto(level.var_99D9, "tag_origin");
+  self linkTo(level.var_99D9, "tag_origin");
 }
 
 func_29B8(param_00, param_01, param_02, param_03) {

@@ -68,11 +68,11 @@ init_quest() {
   if(zm_utility::is_ee_enabled()) {
     level.var_d416f0ff = spawnStruct();
     nd_start = getvehiclenode("insanity_mode_wisp_path_start", "targetname");
-    var_ef55363f = getent("insanity_mode_wisp_info_volume", "targetname");
+    var_ef55363f = getEnt("insanity_mode_wisp_info_volume", "targetname");
 
     if(isDefined(nd_start) && isDefined(var_ef55363f)) {
       do {
-        vh_wisp = spawner::simple_spawn_single(getent("veh_insanity_mode_wisp", "targetname"));
+        vh_wisp = spawner::simple_spawn_single(getEnt("veh_insanity_mode_wisp", "targetname"));
         waitframe(1);
       }
       while(!isDefined(vh_wisp));
@@ -82,8 +82,8 @@ init_quest() {
       arrayremovevalue(level.ai[#"axis"], vh_wisp);
       var_ef55363f.origin = nd_start.origin;
       var_ef55363f.angles = nd_start.angles;
-      var_ef55363f enablelinkto();
-      var_ef55363f linkto(vh_wisp);
+      var_ef55363f enablelinkTo();
+      var_ef55363f linkTo(vh_wisp);
       vh_wisp.var_ef55363f = var_ef55363f;
       vh_wisp val::set(#"insanity_mode_wisp", "takedamage", 0);
       level.var_d416f0ff.vh_wisp = vh_wisp;
@@ -102,9 +102,9 @@ init_quest() {
 }
 
 function_52a6a332(var_1e3deed9 = 1) {
-  var_9d62fe6f = getent("insanity_mode_wisp_start_trigger", "targetname");
-  var_ef55363f = getent("insanity_mode_wisp_info_volume", "targetname");
-  var_7a5bbd26 = getent("insanity_mode_damage_trigger", "targetname");
+  var_9d62fe6f = getEnt("insanity_mode_wisp_start_trigger", "targetname");
+  var_ef55363f = getEnt("insanity_mode_wisp_info_volume", "targetname");
+  var_7a5bbd26 = getEnt("insanity_mode_damage_trigger", "targetname");
   var_d190efa8 = struct::get_array("insanity_mode_zone_containment_model");
   var_bdd13992 = getEntArray("insanity_mode_zone_containment_clip", "targetname");
   var_9d62fe6f delete();
@@ -127,7 +127,7 @@ function_52a6a332(var_1e3deed9 = 1) {
 insanity_mode_step1_setup(var_5ea5c94d) {
   if(!var_5ea5c94d) {
     level waittill(#"update_doomsday_clock");
-    var_9d62fe6f = getent("insanity_mode_wisp_start_trigger", "targetname");
+    var_9d62fe6f = getEnt("insanity_mode_wisp_start_trigger", "targetname");
     level thread function_4bcfb4d9();
 
     while(!level flag::get(#"wisp_path_completed")) {
@@ -168,11 +168,11 @@ insanity_mode_step1_cleanup(var_5ea5c94d, ended_early) {
 
 function_d7fe6be2() {
   self endon(#"end_game", #"hash_227a6fc118040203");
-  var_9d62fe6f = getent("insanity_mode_wisp_start_trigger", "targetname");
+  var_9d62fe6f = getEnt("insanity_mode_wisp_start_trigger", "targetname");
   level flag::set(#"shed_waiting");
 
   while(level flag::get(#"shed_waiting")) {
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
 
     foreach(e_player in a_e_players) {
       if(e_player istouching(var_9d62fe6f)) {
@@ -214,7 +214,7 @@ function_dba32984() {
 
   if(isDefined(self.var_ef55363f)) {
     is_player_touching = 1;
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
 
     while(is_player_touching) {
       wait 0.25;
@@ -262,7 +262,7 @@ insanity_mode_step2_setup(var_5ea5c94d) {
   if(!var_5ea5c94d) {
     pixbeginevent(#"hash_7e38a18c8bc5484c");
     level thread zm_white_computer_system::function_5fbede7a();
-    var_7a5bbd26 = getent("insanity_mode_damage_trigger", "targetname");
+    var_7a5bbd26 = getEnt("insanity_mode_damage_trigger", "targetname");
 
     while(true) {
       waitresult = var_7a5bbd26 waittill(#"damage");
@@ -299,7 +299,7 @@ insanity_mode_step3_setup(var_5ea5c94d) {
       iprintlnbold("<dev string:xdb>");
 
       wait 0.5;
-      level.var_c2511d7b = getplayers();
+      level.var_c2511d7b = getPlayers();
       s_insanity_mode_confirmation zm_unitrigger::create(str_hint, 96);
       zm_unitrigger::function_89380dda(s_insanity_mode_confirmation.s_unitrigger, 1);
       s_insanity_mode_confirmation thread function_3d4b148b();
@@ -364,7 +364,7 @@ function_1541f1c9() {
   level.var_3c9cfd6f = 1;
   level.var_d555ff19 = 1;
   function_52a6a332(0);
-  playsoundatposition(#"hash_83b85ca3e963765", (0, 0, 0));
+  playSoundAtPosition(#"hash_83b85ca3e963765", (0, 0, 0));
   level thread lui::screen_flash(1, 2, 1, 1, "white");
   array::run_all(getaiarray(), &namespace_9ff9f642::freeze);
   wait 1;
@@ -376,7 +376,7 @@ function_1541f1c9() {
   function_4f84973a();
   function_ff416940();
   function_7cb78bcd();
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   var_a0b0c8c4 = struct::get_array("insanity_mode_teleport_location", "targetname");
 
   for(i = 0; i < a_e_players.size; i++) {
@@ -483,7 +483,7 @@ function_69a6d31a(b_show) {
 }
 
 function_83c13f8e() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     e_player zm_perks::function_cc24f525();
@@ -491,7 +491,7 @@ function_83c13f8e() {
 }
 
 function_5ac5f2aa() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     e_player.var_c09adff0 = 1;
@@ -503,7 +503,7 @@ function_5ac5f2aa() {
 }
 
 function_4f84973a() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     a_weapon_curr = e_player getweaponslistprimaries();
@@ -557,7 +557,7 @@ function_7cb78bcd() {
         case #"culdesac_to_green_house":
         case #"yellow_backyard_to_yellow_house":
           if(!(isDefined(var_6620353d.has_been_opened) && var_6620353d.has_been_opened)) {
-            a_e_players = getplayers();
+            a_e_players = getPlayers();
             var_6620353d notify(#"trigger", {
               #activator: a_e_players[0], #is_forced: 1
             });
@@ -593,7 +593,7 @@ enable_zone(zone, is_enabled = 1) {
 }
 
 function_ff416940() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     w_lethal = e_player zm_loadout::get_player_lethal_grenade();

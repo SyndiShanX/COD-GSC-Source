@@ -276,7 +276,7 @@ function function_f51d2b7e(victim, damage, attacker, dir, smeansofdeath, weapon)
   if(!isDefined(level.doa.var_b86d53a5)) {
     level.doa.var_b86d53a5 = 3;
   }
-  dir = vectornormalize(dir + (0, 0, level.doa.var_b86d53a5));
+  dir = vectorNormalize(dir + (0, 0, level.doa.var_b86d53a5));
   dir = dir * level.doa.var_f6ac2080;
   if(!(isDefined(victim.boss) && victim.boss)) {
     victim namespace_fba031c8::function_ddf685e8(dir, attacker);

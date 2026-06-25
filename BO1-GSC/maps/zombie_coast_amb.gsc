@@ -13,7 +13,7 @@ main() {
   level._audio_director_vox_play = ::do_director_playvox;
   level.AUDIO_last_d = undefined;
   level.AUDIO_current_character = undefined;
-  level.door_trig = GetEnt("trig_start_voices", "targetname");
+  level.door_trig = getEnt("trig_start_voices", "targetname");
   level.skit_vox_override = false;
   level thread power_clangs();
   level thread radio_easter_eggs();
@@ -27,7 +27,7 @@ power_clangs() {
     return;
   }
   for(i = 0; i < clangs.size; i++) {
-    playsoundatposition("zmb_circuit", clangs[i].origin);
+    playSoundAtPosition("zmb_circuit", clangs[i].origin);
     wait(RandomFloatrange(0.25, 0.7));
   }
 }
@@ -161,7 +161,7 @@ director_ambient_vox() {
   level endon("end_game");
   while(!is_true(self.defeated)) {
     wait(RandomIntRange(25, 70));
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(DistanceSquared(self.origin, players[i].origin) <= 500 * 500) {
         self create_and_play_director_vox("find");
@@ -268,12 +268,12 @@ do_director_playvox(sound_to_play, waittime, override) {
 }
 radio_easter_eggs() {
   wait(3);
-  teststruct = getstruct("radio_egg_0", "targetname");
+  teststruct = getStruct("radio_egg_0", "targetname");
   if(!isDefined(teststruct)) {
     return;
   }
   for(i = 0; i < 5; i++) {
-    ent[i] = getstruct("radio_egg_" + i, "targetname");
+    ent[i] = getStruct("radio_egg_" + i, "targetname");
     ent[i] thread activate_radio_egg(i);
   }
 }
@@ -294,7 +294,7 @@ activate_radio_egg(num) {
     }
   }
   radio_trig Delete();
-  playsoundatposition("vox_radio_egg_" + num, self.origin);
+  playSoundAtPosition("vox_radio_egg_" + num, self.origin);
 }
 setup_music_egg() {
   wait(3);
@@ -445,7 +445,7 @@ create_and_play_dialog_egg(category, type, response, force_variant, override) {
   self do_player_playvox_egg(prefix, index, sound_to_play, waittime, category, type, override);
 }
 do_player_playvox_egg(prefix, index, sound_to_play, waittime, category, type, override) {
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }

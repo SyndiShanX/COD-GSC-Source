@@ -99,7 +99,7 @@ function function_2a9d57ae() {
 
 function function_9c86c1bb() {
   level flag::wait_till("spider_lair_webs_destroyed");
-  getent("clip_spider_lair_entrance", "targetname") delete();
+  getEnt("clip_spider_lair_entrance", "targetname") delete();
   level scene::init("p7_fxanim_zm_island_spider_queen_lair_rocks_bundle");
 }
 
@@ -132,7 +132,7 @@ function function_83953ff7() {
 function function_c225d3aa() {
   wait(1.5);
   level thread function_f7244a06(1);
-  playsoundatposition("zmb_vocals_squeen_roar_start", (-5000, 932, -157));
+  playSoundAtPosition("zmb_vocals_squeen_roar_start", (-5000, 932, -157));
   wait(1.5);
   level util::delay(1, undefined, &function_f7244a06, 2);
   level util::delay(5.23, undefined, &function_f7244a06, 3);
@@ -141,18 +141,18 @@ function function_c225d3aa() {
 }
 
 function function_f7244a06(n_index) {
-  var_297c6282 = getent("spider_queen_start_fight", "targetname");
+  var_297c6282 = getEnt("spider_queen_start_fight", "targetname");
   foreach(player in level.players) {
     if(zm_utility::is_player_valid(player) && player istouching(var_297c6282)) {
       if(n_index == 1) {
-        player playrumbleonentity("zm_island_rumble_spider_queen_intro_01");
+        player playRumbleOnEntity("zm_island_rumble_spider_queen_intro_01");
         continue;
       }
       if(n_index == 2) {
-        player playrumbleonentity("zm_island_rumble_spider_queen_intro_02");
+        player playRumbleOnEntity("zm_island_rumble_spider_queen_intro_02");
         continue;
       }
-      player playrumbleonentity("zm_island_rumble_spider_queen_intro_03");
+      player playRumbleOnEntity("zm_island_rumble_spider_queen_intro_03");
     }
   }
 }
@@ -271,7 +271,7 @@ function function_7b31e716() {
 
 function function_e949d1d7() {
   level endon("hash_2dc546da");
-  var_297c6282 = getent("spider_queen_start_fight", "targetname");
+  var_297c6282 = getEnt("spider_queen_start_fight", "targetname");
   while(true) {
     var_c0d42e55 = [];
     foreach(player in level.players) {
@@ -344,9 +344,9 @@ function function_f0c6c167() {
   }
   self clientfield::set("spider_queen_mouth_weakspot", 0);
   level flag::set("zombie_drop_powerups");
-  var_8b5cd120 = getent("volume_thrasher_non_teleport_spider_boss", "targetname");
+  var_8b5cd120 = getEnt("volume_thrasher_non_teleport_spider_boss", "targetname");
   var_8b5cd120 delete();
-  var_794ac17c = getent("clip_monster_spider_queen_entrance", "targetname");
+  var_794ac17c = getEnt("clip_monster_spider_queen_entrance", "targetname");
   var_794ac17c delete();
   level thread function_199d01b5();
   self thread zm_island_ww_quest::function_bc717528();
@@ -357,11 +357,11 @@ function function_f0c6c167() {
 
 function function_a38800f6() {
   self endon("hash_aaf78b5");
-  var_297c6282 = getent("spider_queen_start_fight", "targetname");
+  var_297c6282 = getEnt("spider_queen_start_fight", "targetname");
   while(true) {
     foreach(player in level.players) {
       if(zm_utility::is_player_valid(player) && player istouching(var_297c6282)) {
-        player playrumbleonentity("tank_damage_heavy_mp");
+        player playRumbleOnEntity("tank_damage_heavy_mp");
         earthquake(0.35, 0.5, player.origin, 325);
       }
     }
@@ -372,7 +372,7 @@ function function_a38800f6() {
 function function_7ed6256d() {
   level thread scene::play("p7_fxanim_zm_island_spider_queen_lair_rocks_bundle");
   wait(4);
-  getent("spiderlair_pathblocker", "targetname") notsolid();
+  getEnt("spiderlair_pathblocker", "targetname") notsolid();
 }
 
 function function_5a50e7f() {
@@ -406,8 +406,8 @@ function function_9b964659() {
   var_a857d88e = [];
   var_27730eaa = [];
   for(i = 0; i < 5; i++) {
-    var_a857d88e[i] = getent("spider_queen_arm_0" + i, "targetname");
-    var_27730eaa[i] = getent("spider_leg_damage_0" + i, "targetname");
+    var_a857d88e[i] = getEnt("spider_queen_arm_0" + i, "targetname");
+    var_27730eaa[i] = getEnt("spider_leg_damage_0" + i, "targetname");
   }
   self thread function_291b262e(var_a857d88e, var_27730eaa);
 }
@@ -471,7 +471,7 @@ function function_9d6e8018() {
 function function_9d331ff6() {
   s_org = struct::get("spider_leg_hit_" + self.script_noteworthy);
   e_pos = util::spawn_model("tag_origin", s_org.origin);
-  e_pos playrumbleonentity("tank_damage_heavy_mp");
+  e_pos playRumbleOnEntity("tank_damage_heavy_mp");
   screenshake(e_pos.origin, 5, 2, 2, 0.5, 0, -1, 150, 7, 1, 1, 1);
   wait(3);
   e_pos delete();
@@ -479,7 +479,7 @@ function function_9d331ff6() {
 
 function function_8e1549bd() {
   self dodamage(90, self.origin, undefined, undefined, undefined, "MOD_MELEE");
-  self playrumbleonentity("tank_damage_heavy_mp");
+  self playRumbleOnEntity("tank_damage_heavy_mp");
 }
 
 function function_e2b5f12f() {
@@ -555,12 +555,12 @@ function function_9ee2204c(var_85683d05) {
 function function_bcafc53d(var_85683d05) {
   s_org = spawn("script_model", var_85683d05 gettagorigin("tag_turret"));
   s_org setModel("tag_origin");
-  s_org enablelinkto();
+  s_org enablelinkTo();
   s_org fx::play("spider_queen_spit_attack", s_org.origin, undefined, 0.5, 1, "tag_origin");
-  s_org moveto(self.origin, 0.5);
+  s_org moveTo(self.origin, 0.5);
   s_org util::waittill_any_timeout(0.5, "movedone");
   self fx::play("spider_queen_spit_impact", self.origin, undefined);
-  s_org playrumbleonentity("tank_damage_heavy_mp");
+  s_org playRumbleOnEntity("tank_damage_heavy_mp");
   earthquake(0.35, 0.5, s_org.origin, 325);
   wait(1);
   s_org delete();
@@ -574,7 +574,7 @@ function function_fcb8aed2(var_e70fce50) {
 function function_ae6c3ac5() {
   self dodamage(40, self.origin, undefined, undefined, undefined, "MOD_MELEE");
   self shellshock("default", 2);
-  self playrumbleonentity("tank_damage_heavy_mp");
+  self playRumbleOnEntity("tank_damage_heavy_mp");
 }
 
 function function_b6ea5d0d() {
@@ -676,7 +676,7 @@ function function_3d4c345d() {
   var_c79d3f71.favoriteenemy = zm_ai_spiders::get_favorite_enemy();
   self thread zm_ai_spiders::function_49e57a3b(var_c79d3f71, self);
   var_c79d3f71 thread function_46c109d1();
-  playsoundatposition("zmb_foley_squeen_birth_spider", self.origin);
+  playSoundAtPosition("zmb_foley_squeen_birth_spider", self.origin);
   level.var_e18ab0f2++;
 }
 
@@ -709,7 +709,7 @@ function function_81898ad7() {
 
 function function_2ff7183() {
   level endon("hash_2dc546da");
-  trigger = getent("sndEnterLair", "targetname");
+  trigger = getEnt("sndEnterLair", "targetname");
   if(!isDefined(trigger)) {
     return;
   }
@@ -936,16 +936,16 @@ function function_bccbf63c() {
 
 function function_65f4b50(player) {
   if(player hasperk("specialty_widowswine")) {
-    self sethintstring("");
+    self setHintString("");
     player zm_audio::create_and_play_dialog("general", "sigh");
     return false;
   }
   if(!player zm_utility::can_player_purchase_perk()) {
-    self sethintstring("");
+    self setHintString("");
     player zm_audio::create_and_play_dialog("general", "sigh");
     return false;
   }
-  self sethintstring(&"ZM_ISLAND_SPIDER_QUEEN_WINE");
+  self setHintString(&"ZM_ISLAND_SPIDER_QUEEN_WINE");
   return true;
 }
 

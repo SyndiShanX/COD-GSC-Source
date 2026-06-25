@@ -54,7 +54,7 @@ dog_fx_eye_glow() {
   assert(isDefined(self.fx_dog_eye));
   self.fx_dog_eye.angles = self GetTagAngles("J_EyeBall_LE");
   self.fx_dog_eye setModel("tag_origin");
-  self.fx_dog_eye LinkTo(self, "J_EyeBall_LE");
+  self.fx_dog_eye linkTo(self, "J_EyeBall_LE");
 }
 dog_fx_trail() {
   if(randomint(100) > level.zombie_vars["dog_fire_trail_percent"]) {
@@ -69,7 +69,7 @@ dog_fx_trail() {
   assert(isDefined(self.fx_dog_trail));
   self.fx_dog_trail.angles = self GetTagAngles("tag_origin");
   self.fx_dog_trail setModel("tag_origin");
-  self.fx_dog_trail LinkTo(self, "tag_origin");
+  self.fx_dog_trail linkTo(self, "tag_origin");
 }
 dog_death() {
   self waittill("death");

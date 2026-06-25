@@ -127,7 +127,7 @@ _enable_wisp_fx(localclientnumber) {
   if(!isDefined(self.m_client)) {
     self.m_client = spawn(localclientnumber, self.origin, "script_model");
     self.m_client setModel(self.model);
-    self.m_client linkto(self);
+    self.m_client linkTo(self);
     self.m_client cleanup_m_client(self);
   }
 
@@ -199,7 +199,7 @@ sq_bp_spawn_button(clientnum) {
 }
 
 sq_spawn_model_at_struct(clientnum, str_struct, str_model) {
-  s_struct = getstruct(str_struct, "targetname");
+  s_struct = getStruct(str_struct, "targetname");
 
   if(!isDefined(s_struct)) {
     return undefined;
@@ -226,10 +226,10 @@ sq_gallows_light_tubes(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 }
 
 ctw_light_tube_think(clientnum, newval) {
-  m_gallows = getent(clientnum, "sq_gallows", "targetname");
+  m_gallows = getEnt(clientnum, "sq_gallows", "targetname");
 
   while(!isDefined(m_gallows)) {
-    m_gallows = getent(clientnum, "sq_gallows", "targetname");
+    m_gallows = getEnt(clientnum, "sq_gallows", "targetname");
     wait 0.5;
   }
 
@@ -267,10 +267,10 @@ sq_gallows_build_wire_spool(localclientnum, oldval, newval, bnewent, binitialsna
 }
 
 build_tower_think(clientnum, event) {
-  m_tower = getent(clientnum, "sq_gallows", "targetname");
+  m_tower = getEnt(clientnum, "sq_gallows", "targetname");
 
   while(!isDefined(m_tower)) {
-    m_tower = getent(clientnum, "sq_gallows", "targetname");
+    m_tower = getEnt(clientnum, "sq_gallows", "targetname");
     wait 0.5;
   }
 
@@ -298,7 +298,7 @@ sq_tower_spawn_attachment(clientnum, str_model, str_tag) {
 }
 
 sq_endgamemachine_animate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  endgamemachine = getent(localclientnum, "sq_endgame_machine", "targetname");
+  endgamemachine = getEnt(localclientnum, "sq_endgame_machine", "targetname");
 
   if(!oldval && newval) {
     endgamemachine useanimtree(#animtree);
@@ -312,7 +312,7 @@ sq_endgamemachine_animate(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 sq_endgamemachine_toggle_light(localclientnum, fxbit, tag) {
-  endgamemachine = getent(localclientnum, "sq_endgame_machine", "targetname");
+  endgamemachine = getEnt(localclientnum, "sq_endgame_machine", "targetname");
 
   if(!isDefined(endgamemachine._lights)) {
     endgamemachine._lights = [];
@@ -488,7 +488,7 @@ run_richtofen_earthquake_and_rumble(localclientnumber) {
 
     for(j = 0; j < a_players.size; j++) {
       str_rumble = random(a_rumbles);
-      a_players[j] playrumbleonentity(a_players[j] getlocalclientnumber(), "grenade_rumble");
+      a_players[j] playRumbleOnEntity(a_players[j] getlocalclientnumber(), "grenade_rumble");
     }
 
     wait 0.25;
@@ -521,7 +521,7 @@ run_maxis_earthquake_and_rumble(localclientnumber) {
     a_players = getlocalplayers();
 
     foreach(player in a_players) {
-      player playrumbleonentity(player getlocalclientnumber(), str_rumble);
+      player playRumbleOnEntity(player getlocalclientnumber(), str_rumble);
       player earthquake(size, duration, player.origin, 99999);
     }
 

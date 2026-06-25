@@ -111,8 +111,8 @@ function function_644621c0() {
 
   if(isDefined(self.trigger)) {
     self.trigger thread function_f87ac23b(self);
-    self.trigger enablelinkto();
-    self.trigger linkto(self);
+    self.trigger enablelinkTo();
+    self.trigger linkTo(self);
     self.trigger thread namespace_ec06fe4a::function_d55f042c(self, "death");
     self.trigger thread namespace_ec06fe4a::function_d55f042c(self, "killTrigger");
   }
@@ -160,7 +160,7 @@ function function_8ef296ea() {
     }
 
     function_1eaaceab(level.doa.var_5598fe58);
-    chance = 100 - level.doa.var_5598fe58.size * 25 + getplayers().size * 10;
+    chance = 100 - level.doa.var_5598fe58.size * 25 + getPlayers().size * 10;
 
     foreach(monkey in level.doa.var_5598fe58) {
       if(monkey.var_b0f99546 === #"hash_3dd480845ef2e135") {
@@ -261,7 +261,7 @@ function function_d1183a88() {
 
   var_4fb43dc5 = self.favoriteenemy;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isalive(player) || is_true(player.laststand)) {
       continue;
     }
@@ -316,7 +316,7 @@ function function_11e05208() {
 
   var_4fb43dc5 = self.favoriteenemy;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isalive(player) || is_true(player.laststand)) {
       continue;
     }
@@ -467,7 +467,7 @@ function function_fa03570e() {
 
 function function_31f5e5b(params) {
   if(is_true(level.doa.var_41adf604)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player namespace_d2efac9a::function_3f112727();
     }
   }
@@ -814,7 +814,7 @@ function private function_6d8dd464(entity, asmstatename) {
   entity pathmode("dont move");
   entity.var_febfd0.angles = entity.angles;
   entity.var_febfd0.origin = entity.origin;
-  entity linkto(entity.var_febfd0);
+  entity linkTo(entity.var_febfd0);
   entity.var_c4b93228 = randomint(3) + 2;
   entity thread namespace_6e90e490::function_47e11416(6);
   entity thread function_396fbf53(entity.var_febfd0, entity.var_c4b93228);
@@ -856,14 +856,14 @@ function function_396fbf53(var_febfd0, numattacks = 1) {
   self endon(#"death");
   var_accea2d5 = sqr(64);
   anim_ang = vectortoangles(self.enemy.origin - self.origin);
-  var_febfd0 rotateto((0, anim_ang[1], 0), 0.5);
+  var_febfd0 rotateTo((0, anim_ang[1], 0), 0.5);
   self waittill(#"hash_4effc2ad460c79a6");
 
   while(numattacks && isDefined(self.enemy)) {
     numattacks--;
     targetorigin = self.enemy.origin;
     anim_ang = vectortoangles(targetorigin - self.origin);
-    var_febfd0 rotateto((0, anim_ang[1], 0), 0.5);
+    var_febfd0 rotateTo((0, anim_ang[1], 0), 0.5);
     var_febfd0 waittill(#"rotatedone");
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_silverback_boost");
     playrumbleonposition("explosion_generic", self.origin);
@@ -884,7 +884,7 @@ function function_396fbf53(var_febfd0, numattacks = 1) {
 
     var_febfd0 thread function_51226983(self.enemy);
     self.boosting = 1;
-    var_febfd0 moveto(var_49e4e4be, traveltime);
+    var_febfd0 moveTo(var_49e4e4be, traveltime);
     var_febfd0 waittilltimeout(traveltime + 2, #"movedone");
     self.boosting = undefined;
     var_febfd0 notify(#"hash_531e95963631c569");
@@ -909,7 +909,7 @@ function private function_51226983(target) {
 
   while(isDefined(target)) {
     anim_ang = vectortoangles(target.origin - self.origin);
-    self rotateto((0, anim_ang[1], 0), 0.5);
+    self rotateTo((0, anim_ang[1], 0), 0.5);
     self waittill(#"rotatedone");
   }
 }
@@ -923,7 +923,7 @@ function private function_a1f4593d(entity, asmstatename) {
   entity pathmode("dont move");
   entity.var_febfd0.angles = entity.angles;
   entity.var_febfd0.origin = entity.origin;
-  entity linkto(entity.var_febfd0);
+  entity linkTo(entity.var_febfd0);
   entity.var_66f5fb1a = randomint(3) + 1;
   entity thread function_de1c2fc3(entity.var_febfd0, entity.var_66f5fb1a);
 
@@ -1015,7 +1015,7 @@ function function_de1c2fc3(var_febfd0, numattacks = 1) {
     timems = height / 1000 * 3000;
     var_febfd0.angles = self.angles;
     var_febfd0.origin = self.origin;
-    self linkto(var_febfd0);
+    self linkTo(var_febfd0);
 
     if(getdvarint(#"hash_225943d24ee71d", 0)) {
       level thread namespace_1e25ad94::debugcircle(targetpos + (0, 0, 20), 30, 3, (1, 0, 0));
@@ -1052,7 +1052,7 @@ function private function_3a558b65(var_8767c017) {
   self endon("3bc44bd3b2c292ff");
   self endon(#"death");
   level waittill(var_8767c017);
-  self thread function_bf9a2a1d(getplayers().size + 1);
+  self thread function_bf9a2a1d(getPlayers().size + 1);
 }
 
 function function_7d0161cb(ent) {
@@ -1161,8 +1161,8 @@ function private function_ea163d5b(entity, asmstatename) {
     if(isDefined(banana1)) {
       banana1.targetname = "banana1";
       banana1 setModel("zombietron_banana");
-      banana1 enablelinkto();
-      banana1 linkto(self, "j_thumb_ri_3", (0, 0, 0), (0, 0, 0));
+      banana1 enablelinkTo();
+      banana1 linkTo(self, "j_thumb_ri_3", (0, 0, 0), (0, 0, 0));
       banana1 thread function_bcfd19b2(self, "fire_banana_right");
     }
   }
@@ -1173,8 +1173,8 @@ function private function_ea163d5b(entity, asmstatename) {
     if(isDefined(banana2)) {
       banana2.targetname = "banana2";
       banana2 setModel("zombietron_banana");
-      banana2 enablelinkto();
-      banana2 linkto(self, "j_thumb_le_3", (0, 0, 0), (0, 0, 0));
+      banana2 enablelinkTo();
+      banana2 linkTo(self, "j_thumb_le_3", (0, 0, 0), (0, 0, 0));
       banana2 thread function_bcfd19b2(self, "fire_banana_left");
     }
   }
@@ -1236,7 +1236,7 @@ function function_bcfd19b2(silverback, note, angles) {
   }
 
   target_point = silverback.origin + 64 * forward + (randomfloatrange(2 * -1, 2), randomfloatrange(2 * -1, 2), 130);
-  dir = vectornormalize(target_point - silverback.origin);
+  dir = vectorNormalize(target_point - silverback.origin);
 
   if(isDefined(note)) {
     silverback waittilltimeout(2, note, #"death");

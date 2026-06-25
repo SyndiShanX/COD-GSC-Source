@@ -467,7 +467,7 @@ setdropped() {
 
     if(angletrace["fraction"] < 1 && distance(angletrace["position"], trace) < 10.0) {
       forward = (cos(tempangle), sin(tempangle), 0);
-      forward = vectornormalize(forward - vectorscale(angletrace["normal"], vectordot(forward, angletrace["normal"])));
+      forward = vectorNormalize(forward - vectorscale(angletrace["normal"], vectordot(forward, angletrace["normal"])));
       dropangles = vectortoangles(forward);
     } else
       dropangles = (0, tempangle, 0);
@@ -1309,9 +1309,9 @@ updateworldicon(relativeteam, showicon) {
 
       if(self.type == "carryObject") {
         if(isDefined(self.carrier) && !shouldpingobject(relativeteam)) {
-          objpoint settargetent(self.carrier);
+          objpoint settargetEnt(self.carrier);
         } else {
-          objpoint cleartargetent();
+          objpoint cleartargetEnt();
         }
       }
 
@@ -1321,7 +1321,7 @@ updateworldicon(relativeteam, showicon) {
     objpoint fadeovertime(0.05);
     objpoint.alpha = 0;
     objpoint.isshown = 0;
-    objpoint cleartargetent();
+    objpoint cleartargetEnt();
   }
 }
 
@@ -1450,7 +1450,7 @@ setusetext(text) {
 }
 
 setusehinttext(text) {
-  self.trigger sethintstring(text);
+  self.trigger setHintString(text);
 }
 
 allowcarry(relativeteam) {

@@ -78,14 +78,14 @@ pip_set_entity(var_0, var_1, var_2, var_3, var_4) {
         var_5 = spawn("script_model", (var_6[0], var_6[1], var_7[2]));
         var_5 setModel("tag_origin");
         var_5.angles = var_0.angles;
-        var_5 linkto(var_0, "j_neck");
+        var_5 linkTo(var_0, "j_neck");
       } else {
         var_8 = (-14, -14, 63);
         var_6 = get_world_relative_offset(var_0.origin, var_0.angles, var_8);
         var_5 = spawn("script_model", var_6);
         var_5 setModel("tag_origin");
         var_5.angles = var_0.angles + (0, 6.8, 0);
-        var_5 linkto(var_0, "j_neck");
+        var_5 linkTo(var_0, "j_neck");
       }
     } else {
       if(isDefined(var_3)) {
@@ -96,7 +96,7 @@ pip_set_entity(var_0, var_1, var_2, var_3, var_4) {
 
       var_5 setModel("tag_origin");
       var_5.angles = var_0.angles;
-      var_5 linkto(var_0);
+      var_5 linkTo(var_0);
     }
   }
 

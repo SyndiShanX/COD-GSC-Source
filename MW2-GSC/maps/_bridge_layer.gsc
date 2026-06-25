@@ -27,6 +27,6 @@ main(model, type) {
 init_local() {
   model = spawn("script_model", (0, 0, 0));
   model setModel("vehicle_m60a1_bridge");
-  model linkto(self, "tag_bridge_attach", (0, 0, 0), (0, 0, 0));
+  model linkTo(self, "tag_bridge_attach", (0, 0, 0), (0, 0, 0));
   self.bridge_model = model;
 }

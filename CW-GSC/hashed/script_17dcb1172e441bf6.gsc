@@ -181,7 +181,7 @@ function function_72f01f3f(origin, radius, time, color = (0, 1, 0)) {
     plotpoints = [];
     rad = 0;
     wait var_264789d0;
-    players = getplayers();
+    players = getPlayers();
     angletoplayer = vectortoangles(origin - players[0].origin);
 
     for(i = 0; i < circleres; i++) {

@@ -87,7 +87,7 @@ function function_be3960b8(var_faa5f280) {
 
 function function_4a05e25f(vol_forced) {
   if(isstring(vol_forced)) {
-    vol_forced = getent(vol_forced, "targetname");
+    vol_forced = getEnt(vol_forced, "targetname");
   }
 
   if(isentity(vol_forced)) {
@@ -105,7 +105,7 @@ function function_4a05e25f(vol_forced) {
 
 function function_faa74262(vol_forced) {
   if(isstring(vol_forced)) {
-    vol_forced = getent(vol_forced, "targetname");
+    vol_forced = getEnt(vol_forced, "targetname");
   }
 
   if(isentity(vol_forced)) {
@@ -332,13 +332,13 @@ function function_c5e5e928(var_e14b4254) {
   if(isDefined(v_teleport)) {
     v_dir = v_teleport - self.origin;
     v_dir = (v_dir[0], v_dir[1], 1);
-    v_dir = vectornormalize(v_dir);
+    v_dir = vectorNormalize(v_dir);
     self playSound(#"hash_3d03d5d52c39fe35");
     var_dcbe57af = self getvelocity();
     n_length = length(var_dcbe57af);
     var_7bfb3e25 = var_dcbe57af + v_dir * n_length;
     self dontinterpolate();
-    self setorigin(v_teleport);
+    self setOrigin(v_teleport);
     self setvelocity(var_7bfb3e25);
   }
 }

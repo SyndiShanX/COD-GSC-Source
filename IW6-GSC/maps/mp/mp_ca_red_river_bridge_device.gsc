@@ -61,7 +61,7 @@ disable_redriver_nuke() {
 }
 
 bridge_device_init() {
-  self.device_model = GetEnt("bridge_device_model", "targetname");
+  self.device_model = getEnt("bridge_device_model", "targetname");
   if(!isDefined(self.device_model)) {
     PrintLn("ERROR: No bridge_device_model available.");
     return;
@@ -96,7 +96,7 @@ bridge_extras_init(bridge_device) {
 bridge_device_scramble_radar(bridge_device) {
   level endon("bridge_fully_exploded");
 
-  device_scrambler = GetStruct("device_scrambler", "targetname");
+  device_scrambler = getStruct("device_scrambler", "targetname");
   if(!isDefined(device_scrambler)) {
     PrintLn("No Device Radar Scrambler");
     return;
@@ -153,14 +153,14 @@ bridge_device_sequence_waitforhit() {
 }
 
 bridge_device_sequence_volley(player) {
-  start_org = GetStruct("mortar_launch_start", "targetname");
-  target_org = GetStruct(start_org.target, "targetname");
+  start_org = getStruct("mortar_launch_start", "targetname");
+  target_org = getStruct(start_org.target, "targetname");
   while(1) {
     self thread bridge_device_mortar_attack(start_org, target_org, player);
     if(!isDefined(target_org.target)) {
       break;
     }
-    target_org = GetStruct(target_org.target, "targetname");
+    target_org = getStruct(target_org.target, "targetname");
   }
 }
 
@@ -332,7 +332,7 @@ destroyTargetArray(refPos, explosionRadiusSq, targetList) {
 }
 
 update_bridge_event_player_effects(refPoint, det_distance, splash_distance, skip_shock) {
-  self PlayRumbleOnEntity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
   wait 0.3;
 
   if(!skip_shock && !(self isUsingRemote())) {
@@ -350,9 +350,9 @@ update_bridge_event_player_effects(refPoint, det_distance, splash_distance, skip
   }
 
   wait 1.0;
-  self PlayRumbleOnEntity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
   wait 1.3;
-  self PlayRumbleOnEntity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
 }
 
 bridge_device_static(static_center, static_dist) {
@@ -496,7 +496,7 @@ redriver_update_hitsway_churchbell(attacker) {
     return;
   }
   vec = AnglesToRight(self.angles);
-  vec2 = VectorNormalize(attacker.origin - self.origin);
+  vec2 = vectorNormalize(attacker.origin - self.origin);
   swing_dir = vectordot(vec, vec2) * 2.0;
   if(swing_dir > 0.0) {
     swing_dir = Max(0.3, swing_dir);
@@ -529,7 +529,7 @@ bridge_event_update_churchbell(blast_origin) {
   level waittill("bridge_device_activate");
 
   vec = AnglesToRight(self.angles);
-  vec2 = VectorNormalize(blast_origin - self.origin);
+  vec2 = vectorNormalize(blast_origin - self.origin);
   swing_dir = vectordot(vec, vec2) * 2.0;
   if(swing_dir > 0.0) {
     swing_dir = Max(0.7, swing_dir);

@@ -17,11 +17,11 @@ spawnsolarpanelsinit(var_0) {
 
   for(var_1 = 1; var_1 <= 4; var_1++) {
     var_2 = "odin_sat_section_02_solar_wing_0" + var_1;
-    var_3 = getent(var_2, "script_noteworthy");
+    var_3 = getEnt(var_2, "script_noteworthy");
     level.frames[var_2] = var_3;
   }
 
-  level.sat_base_s = getent("odin_sat_section_01", "script_noteworthy");
+  level.sat_base_s = getEnt("odin_sat_section_01", "script_noteworthy");
 
   foreach(var_5 in level.frames) {
     var_5 thread addpaneltimesarray(var_5);
@@ -48,7 +48,7 @@ spawnsolarpanels(var_0, var_1) {
     var_6 setModel(var_0);
     var_6.my_name = var_3;
     var_6.angles = var_5;
-    var_6 linkto(self, var_3);
+    var_6 linkTo(self, var_3);
     wait 0.05;
     self.panel_array = common_scripts\utility::add_to_array(self.panel_array, var_6);
   }
@@ -94,13 +94,13 @@ destructsolarpanels(var_0, var_1, var_2, var_3, var_4) {
   var_11 = (-6257, 50029, -17584);
   var_12 = var_11 - level.sat_base_s.origin;
   var_13 = length(var_12);
-  var_12 = vectornormalize(var_12);
+  var_12 = vectorNormalize(var_12);
   var_14 = 38 + var_3;
   playFXOnTag(level._effect["solar_panel_break"], var_0, "tag_origin");
   var_15 = 8;
   var_0 unlink();
   var_0 rotateby(var_5 * 32, var_14);
-  var_0 moveto(var_0.origin + var_12 * (var_13 * var_15) + var_10 * var_15, var_14);
+  var_0 moveTo(var_0.origin + var_12 * (var_13 * var_15) + var_10 * var_15, var_14);
   wait 0.1;
 
   if(randomint(2) == 0) {

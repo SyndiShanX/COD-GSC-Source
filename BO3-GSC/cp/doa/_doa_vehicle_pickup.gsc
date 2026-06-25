@@ -25,12 +25,12 @@
 #namespace namespace_2848f8c2;
 
 function init() {
-  level.doa.var_b3040642 = getent("doa_heli", "targetname");
-  level.doa.var_37219336 = getent("doa_siegebot", "targetname");
-  level.doa.var_1179f89e = getent("doa_tank", "targetname");
-  level.doa.var_95dee038 = getent("doa_rapps", "targetname");
-  level.doa.var_82433985 = getent("doa_quadtank", "targetname");
-  level.doa.var_32e07142 = getent("doa_siegechicken", "targetname");
+  level.doa.var_b3040642 = getEnt("doa_heli", "targetname");
+  level.doa.var_37219336 = getEnt("doa_siegebot", "targetname");
+  level.doa.var_1179f89e = getEnt("doa_tank", "targetname");
+  level.doa.var_95dee038 = getEnt("doa_rapps", "targetname");
+  level.doa.var_82433985 = getEnt("doa_quadtank", "targetname");
+  level.doa.var_32e07142 = getEnt("doa_siegechicken", "targetname");
 }
 
 function function_254eefd6(player, time) {
@@ -142,7 +142,7 @@ function function_2ef99744(player, origin) {
   chicken = spawn("script_model", origin);
   chicken.targetname = "fidoMech";
   chicken setModel("zombietron_anim_chicken_nolegs");
-  chicken enablelinkto();
+  chicken enablelinkTo();
   siegebot thread doa_utility::function_a625b5d3(player);
   chicken thread doa_utility::function_a625b5d3(player);
   chicken thread doa_utility::function_75e76155(siegebot, "death");
@@ -156,7 +156,7 @@ function function_2ef99744(player, origin) {
   siegebot.playercontrolled = 1;
   siegebot usevehicle(player, 0);
   siegebot makeunusable();
-  chicken linkto(siegebot, "tag_driver", vectorscale((0, 0, -1), 70), vectorscale((0, -1, 0), 120));
+  chicken linkTo(siegebot, "tag_driver", vectorscale((0, 0, -1), 70), vectorscale((0, -1, 0), 120));
   siegebot.health = 9999999;
   siegebot hidepart("tag_turret", "", 1);
   siegebot hidepart("tag_nameplate", "", 1);
@@ -371,9 +371,9 @@ function function_3b1b644d(var_85f85940, vehicle) {
   if(isDefined(spot)) {
     trace = bulletTrace(spot + vectorscale((0, 0, 1), 48), spot + (vectorscale((0, 0, -1), 64)), 0, undefined);
     spot = trace["position"];
-    self setorigin(spot);
+    self setOrigin(spot);
   } else {
-    self setorigin(var_85f85940);
+    self setOrigin(var_85f85940);
   }
   self namespace_831a4a7c::function_4519b17(0);
   self function_d41a4517();

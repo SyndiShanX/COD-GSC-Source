@@ -132,7 +132,7 @@ vehicle_zpu_register_target(var_0) {
 
 vehicle_zpu_shoot_target(var_0) {
   var_0 endon("death");
-  self setturrettargetent(var_0, (0, 0, -96));
+  self setturrettargetEnt(var_0, (0, 0, -96));
   var_0.request_move = 1;
   var_0 notify("request_move_update");
   var_1 = 0;

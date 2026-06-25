@@ -36,7 +36,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.avogadro_spawner = getent("avogadro_spawner", "script_noteworthy", 0);
+  level.avogadro_spawner = getEnt("avogadro_spawner", "script_noteworthy", 0);
   level.avogadro_intro_location = struct::get("avogadro_intro_location", "script_noteworthy");
   level.avogadro_outro_location = struct::get("avogadro_outro_location", "script_noteworthy");
   level.var_8791f7c5 = &function_ef12dc20;
@@ -358,8 +358,8 @@ function_4ee74b24() {
   if(isDefined(self.favoriteenemy) && self.var_6d5a7a2d < gettime()) {
     var_4bd2cffc = self.favoriteenemy.origin - self.origin;
     var_7453ab4f = anglesToForward(self.angles);
-    var_4bd2cffc = vectornormalize(var_4bd2cffc * (1, 1, 0));
-    var_7453ab4f = vectornormalize(var_7453ab4f * (1, 1, 0));
+    var_4bd2cffc = vectorNormalize(var_4bd2cffc * (1, 1, 0));
+    var_7453ab4f = vectorNormalize(var_7453ab4f * (1, 1, 0));
     dot = vectordot(var_7453ab4f, var_4bd2cffc);
     cosine_angle = cos(3);
     self.var_6d5a7a2d = gettime() + 50;
@@ -415,7 +415,7 @@ function_c8179930() {
 
 function_be9ade6d(entity) {
   var_e98404d8 = entity getcentroid();
-  players = getplayers();
+  players = getPlayers();
 
   enabled = getdvarint(#"hash_5810c8643adc3e7c", 0);
 
@@ -517,7 +517,7 @@ function_96e43661(entity) {
   registernotice_walla = anglesToForward(var_c89fc811);
   var_e98404d8 = entity getcentroid();
   var_9a123fd6 = var_e98404d8 + registernotice_walla * 30;
-  players = getplayers();
+  players = getPlayers();
   result = 0;
 
   enabled = getdvarint(#"hash_5810c8643adc3e7c", 0);
@@ -596,7 +596,7 @@ function_fceafc5f() {
 
 function_9c41ab55(entity) {
   var_e98404d8 = entity getcentroid();
-  players = getplayers();
+  players = getPlayers();
 
   enabled = getdvarint(#"hash_5810c8643adc3e7c", 0);
 
@@ -625,7 +625,7 @@ function_c96c9ef8(entity) {
   player_touching_volume = 0;
 
   if(isDefined(entity.var_885c1824)) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(players[i] istouching(entity.var_885c1824)) {
@@ -684,7 +684,7 @@ function_f1d5bfef(entity) {
   var_9c273f20 = [];
 
   if(isDefined(entity.var_885c1824)) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(players[i] istouching(entity.var_885c1824)) {
@@ -712,7 +712,7 @@ function_7615515e(entity) {
   }
 
   var_e98404d8 = entity getcentroid();
-  players = getplayers();
+  players = getPlayers();
   player_in_range = 0;
 
   for(i = 0; i < players.size; i++) {

@@ -24,7 +24,7 @@ setuphumanoidstate() {
   self.meleeradiusbasesq = squared(self.meleeradiusbase);
   maps\mp\zombies\_util::setmeleeradius(self.meleeradiusbase);
   self.defaultgoalradius = self.radius + 1;
-  self scragentsetgoalradius(self.defaultgoalradius);
+  self scragentsetgoalRadius(self.defaultgoalradius);
   self.meleedot = 0.5;
 }
 
@@ -298,7 +298,7 @@ ondamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self.timeoflastdamage = gettime();
 
   if(isDefined(self.owner)) {
-    self.damagedownertome = vectornormalize(self.origin - self.owner.origin);
+    self.damagedownertome = vectorNormalize(self.origin - self.owner.origin);
   }
 
   if(shouldplaystophitreaction(var_2, var_5, var_4, var_8)) {

@@ -130,7 +130,7 @@ function function_eb81be7e(attacker, weapon, shitloc, vpoint) {
 
 function function_a97aaed0(attacker, weapon, shitloc, point) {
   self endon(#"death");
-  self moveto(point, 0.2);
+  self moveTo(point, 0.2);
   self waittill(#"movedone");
   level thread function_aa443b97(attacker, weapon, shitloc, point, 5, 1);
   self deletedelay();
@@ -232,7 +232,7 @@ function function_aa443b97(attacker, weapon, shitloc, vpoint, tier, extra = 0) {
       n_random_x = randomfloatrange(-3, 3);
       n_random_y = randomfloatrange(-3, 3);
       zombie zm_utility::start_ragdoll(1);
-      zombie launchragdoll(60 * vectornormalize(v_curr_zombie_origin - vpoint + (n_random_x, n_random_y, 10)), "torso_lower");
+      zombie launchragdoll(60 * vectorNormalize(v_curr_zombie_origin - vpoint + (n_random_x, n_random_y, 10)), "torso_lower");
     }
 
     util::wait_network_frame();

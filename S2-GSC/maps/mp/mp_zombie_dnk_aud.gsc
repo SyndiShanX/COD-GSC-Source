@@ -77,7 +77,7 @@ func_ABF8(param_00, param_01) {
   var_03 = 0;
   var_04 = 0.875;
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02, 0, var_04);
-  var_02 moveto(param_01, 1.9);
+  var_02 moveTo(param_01, 1.9);
   wait(2);
   var_02 delete();
 }

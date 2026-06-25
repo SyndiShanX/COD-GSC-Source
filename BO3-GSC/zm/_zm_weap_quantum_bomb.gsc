@@ -173,7 +173,7 @@ function player_handle_quantum_bomb() {
         continue;
       }
       grenade waittill("explode", position);
-      playsoundatposition("wpn_quantum_exp", position);
+      playSoundAtPosition("wpn_quantum_exp", position);
       result = self quantum_bomb_select_result(position);
       self thread[[result.result_func]](position);
       quantum_bomb_debug_print_bold(((("quantum_bomb exploded at " + position) + ", result: '") + result.name) + "'.\n");
@@ -263,7 +263,7 @@ function quantum_bomb_random_weapon_starburst_result(position) {
   start_yaw = vectortoangles(base_pos - self.origin);
   start_yaw = (0, start_yaw[1], 0);
   weapon_model = zm_utility::spawn_weapon_model(weapon, undefined, position, start_yaw);
-  weapon_model moveto(base_pos, 1, 0.25, 0.25);
+  weapon_model moveTo(base_pos, 1, 0.25, 0.25);
   weapon_model waittill("movedone");
   for(i = 0; i < 36; i++) {
     yaw = start_yaw + (randomintrange(-3, 3), i * 10, 0);
@@ -292,7 +292,7 @@ function quantum_bomb_pack_or_unpack_current_weapon_validation(position) {
 
 function quantum_bomb_pack_or_unpack_current_weapon_result(position) {
   quantum_bomb_play_mystery_effect(position);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player.sessionstate == "spectator" || player laststand::player_is_in_laststand()) {
@@ -344,7 +344,7 @@ function quantum_bomb_auto_revive_validation(position) {
   if(level flag::get("solo_game")) {
     return false;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player laststand::player_is_in_laststand()) {
@@ -356,7 +356,7 @@ function quantum_bomb_auto_revive_validation(position) {
 
 function quantum_bomb_auto_revive_result(position) {
   quantum_bomb_play_mystery_effect(position);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(player laststand::player_is_in_laststand() && randomint(3)) {
@@ -368,7 +368,7 @@ function quantum_bomb_auto_revive_result(position) {
 
 function quantum_bomb_player_teleport_result(position) {
   quantum_bomb_play_mystery_effect(position);
-  players = getplayers();
+  players = getPlayers();
   players_to_teleport = [];
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -443,7 +443,7 @@ function quantum_bomb_teleport(struct_dest) {
   self disableweapons();
   self playsoundtoplayer("zmb_gersh_teleporter_go_2d", self);
   self dontinterpolate();
-  self setorigin(destination);
+  self setOrigin(destination);
   self setplayerangles(struct_dest.angles);
   self enableoffhandweapons();
   self enableweapons();
@@ -500,7 +500,7 @@ function quantum_bomb_zombie_fling_result(position) {
       break;
     }
     dist_mult = (range_squared - test_origin_squared) / range_squared;
-    fling_vec = vectornormalize(test_origin - position);
+    fling_vec = vectorNormalize(test_origin - position);
     fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
     fling_vec = vectorscale(fling_vec, 100 + (100 * dist_mult));
     zombie quantum_bomb_fling_zombie(self, fling_vec);

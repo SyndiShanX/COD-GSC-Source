@@ -110,12 +110,12 @@ function main() {
     setDvar("art_review", "1");
     level.random_pandora_box_start = 0;
     level.start_chest_name = "chest_4";
-    clock_snow = getent("clock_snow", "targetname");
+    clock_snow = getEnt("clock_snow", "targetname");
     clock_snow ghost();
     scene::add_scene_func("cin_der_01_intro_3rd_sh050", &clock_shot, "play");
     level thread cinematic();
   } else {
-    clock = getent("factory_clock", "targetname");
+    clock = getEnt("factory_clock", "targetname");
     clock thread scene::play("p7_fxanim_zm_factory_clock_bundle");
   }
   level.has_richtofen = 0;
@@ -173,7 +173,7 @@ function main() {
   level.grenade_planted = &function_6ea54e62;
   level thread sndfunctions();
   level.sndtrapfunc = &sndpa_traps;
-  level.monk_scream_trig = getent("monk_scream_trig", "targetname");
+  level.monk_scream_trig = getEnt("monk_scream_trig", "targetname");
   zombie_utility::set_zombie_var("zombie_powerup_drop_max_per_round", 4);
   a_t_audio = getEntArray("audio_bump_trigger", "targetname");
   foreach(t_audio_bump in a_t_audio) {
@@ -234,7 +234,7 @@ function cinematic() {
 }
 
 function clock_shot(a_ents) {
-  clock = getent("factory_clock", "targetname");
+  clock = getEnt("factory_clock", "targetname");
   clock thread scene::play("p7_fxanim_zm_factory_clock_igc_bundle");
 }
 
@@ -305,7 +305,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     if(charindexarray[0] == 2) {
@@ -552,7 +552,7 @@ function no_target_override(zombie) {
         if(player laststand::player_is_in_laststand()) {
           continue;
         }
-        away = vectornormalize(self.origin - player.origin);
+        away = vectorNormalize(self.origin - player.origin);
         endpos = self.origin + vectorscale(away, 600);
         dist_zombie = distancesquared(locs[i].origin, endpos);
         dist_player = distancesquared(locs[i].origin, player.origin);
@@ -603,13 +603,13 @@ function bridge_init() {
   level thread scene::play("p7_fxanim_zm_factory_bridge_lft_bundle");
   level scene::play("p7_fxanim_zm_factory_bridge_rt_bundle");
   level flag::set("bridge_down");
-  wnuen_bridge_clip = getent("wnuen_bridge_clip", "targetname");
+  wnuen_bridge_clip = getEnt("wnuen_bridge_clip", "targetname");
   wnuen_bridge_clip connectpaths();
   wnuen_bridge_clip delete();
-  warehouse_bridge_clip = getent("warehouse_bridge_clip", "targetname");
+  warehouse_bridge_clip = getEnt("warehouse_bridge_clip", "targetname");
   warehouse_bridge_clip connectpaths();
   warehouse_bridge_clip delete();
-  wnuen_bridge = getent("wnuen_bridge", "targetname");
+  wnuen_bridge = getEnt("wnuen_bridge", "targetname");
   wnuen_bridge connectpaths();
   zm_zonemgr::connect_zones("wnuen_bridge_zone", "bridge_zone");
   zm_zonemgr::connect_zones("warehouse_top_zone", "bridge_zone");
@@ -619,7 +619,7 @@ function bridge_init() {
 
 function bridge_disconnect(a_parts) {
   foreach(part in a_parts) {
-    part disconnectpaths();
+    part disconnectPaths();
   }
 }
 
@@ -630,7 +630,7 @@ function bridge_connect(a_parts) {
 }
 
 function jump_from_bridge() {
-  trig = getent("trig_outside_south_zone", "targetname");
+  trig = getEnt("trig_outside_south_zone", "targetname");
   trig waittill("trigger");
   zm_zonemgr::connect_zones("outside_south_zone", "bridge_zone", 1);
   zm_zonemgr::connect_zones("outside_south_zone", "wnuen_bridge_zone", 1);
@@ -659,7 +659,7 @@ function factory_ray_gun_weighting_func() {
 }
 
 function factory_cymbal_monkey_weighting_func() {
-  players = getplayers();
+  players = getPlayers();
   count = 0;
   for(i = 0; i < players.size; i++) {
     if(players[i] zm_weapons::has_weapon_or_upgrade("cymbal_monkey_zm")) {
@@ -692,9 +692,9 @@ function power_on_listener(trig) {
 }
 
 function power_electric_switch() {
-  trig = getent("use_power_switch", "targetname");
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  trig setcursorhint("HINT_NOICON");
+  trig = getEnt("use_power_switch", "targetname");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setCursorHint("HINT_NOICON");
   cheat = 0;
   if(getdvarint("") >= 3) {
     wait(5);
@@ -752,10 +752,10 @@ function check_for_change() {
 }
 
 function extra_events() {
-  self usetriggerrequirelookat();
-  self setcursorhint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
   self waittill("trigger");
-  targ = getent(self.target, "targetname");
+  targ = getEnt(self.target, "targetname");
   if(isDefined(targ)) {
     targ movez(-10, 5);
   }
@@ -771,7 +771,7 @@ function flytrap() {
   util::wait_network_frame();
   level thread hide_and_seek_target("ee_perk_bear");
   util::wait_network_frame();
-  trig_control_panel = getent("trig_ee_flytrap", "targetname");
+  trig_control_panel = getEnt("trig_ee_flytrap", "targetname");
   upgrade_hit = 0;
   while(!upgrade_hit) {
     trig_control_panel waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weapon);
@@ -796,7 +796,7 @@ function hide_and_seek_target(target_name) {
   for(i = 0; i < obj_array.size; i++) {
     obj_array[i] hide();
   }
-  trig = getent("trig_" + target_name, "targetname");
+  trig = getEnt("trig_" + target_name, "targetname");
   trig triggerenable(0);
   level flag::wait_till("hide_and_seek");
   for(i = 0; i < obj_array.size; i++) {
@@ -817,14 +817,14 @@ function phono_egg_init(trigger_name, origin_name) {
   if(!isDefined(level.phono_counter)) {
     level.phono_counter = 0;
   }
-  players = getplayers();
-  phono_trig = getent(trigger_name, "targetname");
-  phono_origin = getent(origin_name, "targetname");
+  players = getPlayers();
+  phono_trig = getEnt(trigger_name, "targetname");
+  phono_origin = getEnt(origin_name, "targetname");
   if(!isDefined(phono_trig) || !isDefined(phono_origin)) {
     return;
   }
-  phono_trig usetriggerrequirelookat();
-  phono_trig setcursorhint("HINT_NOICON");
+  phono_trig useTriggerRequireLookAt();
+  phono_trig setCursorHint("HINT_NOICON");
   for(i = 0; i < players.size; i++) {
     phono_trig waittill("trigger", players);
     level.phono_counter = level.phono_counter + 1;
@@ -848,14 +848,14 @@ function play_phono_egg() {
 }
 
 function radio_egg_init(trigger_name, origin_name) {
-  players = getplayers();
-  radio_trig = getent(trigger_name, "targetname");
-  radio_origin = getent(origin_name, "targetname");
+  players = getPlayers();
+  radio_trig = getEnt(trigger_name, "targetname");
+  radio_origin = getEnt(origin_name, "targetname");
   if(!isDefined(radio_trig) || !isDefined(radio_origin)) {
     return;
   }
-  radio_trig usetriggerrequirelookat();
-  radio_trig setcursorhint("HINT_NOICON");
+  radio_trig useTriggerRequireLookAt();
+  radio_trig setCursorHint("HINT_NOICON");
   radio_origin playLoopSound("amb_radio_static");
   for(i = 0; i < players.size; i++) {
     radio_trig waittill("trigger", players);
@@ -875,9 +875,9 @@ function play_music_easter_egg(player) {
 }
 
 function meteor_egg(trigger_name) {
-  meteor_trig = getent(trigger_name, "targetname");
-  meteor_trig usetriggerrequirelookat();
-  meteor_trig setcursorhint("HINT_NOICON");
+  meteor_trig = getEnt(trigger_name, "targetname");
+  meteor_trig useTriggerRequireLookAt();
+  meteor_trig setCursorHint("HINT_NOICON");
   meteor_trig playLoopSound("zmb_meteor_loop");
   meteor_trig waittill("trigger", player);
   meteor_trig stoploopsound(1);
@@ -916,11 +916,11 @@ function factory_exit_level() {
 
 function factory_find_exit_point() {
   self endon("death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = array::randomize(level.zm_loc_types["dog_location"]);
   for(i = 0; i < locs.size; i++) {
@@ -974,11 +974,11 @@ function powerup_special_drop_override() {
         is_powerup = [[level._zombiemode_special_drop_setup]](powerup);
       } else {
         playFX(level._effect["lightning_dog_spawn"], self.origin);
-        playsoundatposition("zmb_hellhound_prespawn", self.origin);
+        playSoundAtPosition("zmb_hellhound_prespawn", self.origin);
         wait(1.5);
-        playsoundatposition("zmb_hellhound_bolt", self.origin);
+        playSoundAtPosition("zmb_hellhound_bolt", self.origin);
         earthquake(0.5, 0.75, self.origin, 1000);
-        playsoundatposition("zmb_hellhound_spawn", self.origin);
+        playSoundAtPosition("zmb_hellhound_spawn", self.origin);
         wait(1);
         thread zm_utility::play_sound_2d("vox_sam_nospawn");
         self delete();
@@ -1414,7 +1414,7 @@ function factory_custom_spawn_location_selection(a_spots) {
     if(!isDefined(level.n_player_spawn_selection_index)) {
       level.n_player_spawn_selection_index = 0;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
     level.n_player_spawn_selection_index++;
     if(level.n_player_spawn_selection_index >= a_players.size) {
       level.n_player_spawn_selection_index = 0;
@@ -1474,7 +1474,7 @@ function fx_overrides() {
 }
 
 function function_6d012317() {
-  var_3d01fc2c = getent("cipher_brick_main", "script_noteworthy");
+  var_3d01fc2c = getEnt("cipher_brick_main", "script_noteworthy");
   var_3d01fc2c thread brick_cipher();
 }
 
@@ -1534,7 +1534,7 @@ function function_5d386c43() {
   var_d3486562 = struct::get("snowpile_console");
   var_d3486562 create_unitrigger();
   var_d3486562 waittill("trigger_activated");
-  playsoundatposition("zmb_snowmelt_button_press", var_d3486562.origin);
+  playSoundAtPosition("zmb_snowmelt_button_press", var_d3486562.origin);
   zm_unitrigger::unregister_unitrigger(var_d3486562.s_unitrigger);
   level util::clientnotify("sndSB");
   level thread function_428d50ed();
@@ -1543,7 +1543,7 @@ function function_5d386c43() {
   scene::play("p7_fxanim_zm_factory_snowbank_bundle");
   wait(0.5);
   exploder::stop_exploder("fx_expl_robothead_laser");
-  mdl_clip = getent("snowbank_clip", "targetname");
+  mdl_clip = getEnt("snowbank_clip", "targetname");
   mdl_clip delete();
 }
 
@@ -1591,7 +1591,7 @@ function function_ffa4d8ca(var_7d7ca0ea) {
 }
 
 function function_c7b37638() {
-  var_3c2393cb = getent(self.targetname, "script_noteworthy");
+  var_3c2393cb = getEnt(self.targetname, "script_noteworthy");
   if(isDefined(var_3c2393cb.var_634166a2) && var_3c2393cb.var_634166a2.size) {
     switch (var_3c2393cb.script_noteworthy) {
       case "trigger_teleport_pad_0": {
@@ -1683,8 +1683,8 @@ function function_f8f36ff3(str_key, s_custom_perk) {
 }
 
 function function_8fbb6760(str_perk) {
-  t_perk = getent(str_perk, "script_noteworthy");
-  t_perk sethintstring(&"");
+  t_perk = getEnt(str_perk, "script_noteworthy");
+  t_perk setHintString(&"");
 }
 
 function flytrap_prize() {
@@ -1698,7 +1698,7 @@ function flytrap_prize() {
 function function_45814329(var_3c100ea1) {
   self endon("death");
   while(true) {
-    self rotateto(self.angles + vectorscale((0, 1, 0), 180), 2);
+    self rotateTo(self.angles + vectorscale((0, 1, 0), 180), 2);
     wait(1.9);
   }
 }
@@ -1743,7 +1743,7 @@ function function_869d6f66() {
 }
 
 function function_dabc4be1() {
-  trig_control_panel = getent("", "");
+  trig_control_panel = getEnt("", "");
   var_5dc8ad42 = getweapon("");
   trig_control_panel dodamage(100, trig_control_panel.origin, undefined, undefined, undefined, "", 0, var_5dc8ad42);
 }

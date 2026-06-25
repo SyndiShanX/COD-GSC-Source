@@ -49,7 +49,7 @@ _id_10D76(var_0, var_1) {
     var_3 setotherent(var_0);
     var_3.owner = var_0;
     var_3.team = var_0.team;
-    var_3 linkto(var_2, "tag_origin", (0, 0, -15), (0, 0, 0));
+    var_3 linkTo(var_2, "tag_origin", (0, 0, -15), (0, 0, 0));
     var_3 _meth_86FE("killstreak");
     var_3 _meth_8706(var_0.team);
     var_2._id_47A1 = var_3;

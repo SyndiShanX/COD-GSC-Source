@@ -642,7 +642,7 @@ function_554a6177(actionparams) {
   }
 
   eye = self getEye();
-  vectotarget = vectornormalize(target - eye);
+  vectotarget = vectorNormalize(target - eye);
   traceend = eye + vectotarget * 2000;
   trace = bulletTrace(eye, traceend, 0, self);
 
@@ -1160,7 +1160,7 @@ function_d18123f8(actionparams) {
     offsetvec = vectorscale(offsetvec, -1);
   }
 
-  offsetvec = vectornormalize(offsetvec);
+  offsetvec = vectorNormalize(offsetvec);
   offsetvec = vectorscale(offsetvec, 200) + (0, 0, 25);
   actionparams.target = target;
   actionparams.target2 = target + offsetvec;
@@ -1392,12 +1392,12 @@ function_d2107b(actionparams) {
   var_e50a845c = tacticalquery("stratcom_tacquery_position", cylinder);
   var_6fa334a7 = array::randomize(var_e50a845c);
   botdir = anglesToForward(self getplayerangles());
-  var_ff975a6 = vectornormalize(botdir * (1, 1, 0));
+  var_ff975a6 = vectorNormalize(botdir * (1, 1, 0));
   var_c375900c = undefined;
 
   foreach(point in var_6fa334a7) {
     if(function_96c81b85(var_7607a546, point.origin)) {
-      var_4102ab31 = vectornormalize((point.origin - self.origin) * (1, 1, 0));
+      var_4102ab31 = vectorNormalize((point.origin - self.origin) * (1, 1, 0));
       dot = vectordot(var_4102ab31, var_ff975a6);
 
       if(dot > 0.707) {

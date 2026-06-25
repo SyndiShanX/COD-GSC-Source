@@ -761,7 +761,7 @@ function endgame(winner, endreasontext) {
 
   level.winningteam = endreasontext;
   outcome = endreasontext === level.zombie_team ? #"loss" : #"win";
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player.pers[#"outcome"] = outcome;
@@ -1120,7 +1120,7 @@ function updateteamstatus(var_bdfe75a7) {
 
   self.var_bdfe75a7 = var_bdfe75a7;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     team = player.team;
 
     if(team != "spectator") {

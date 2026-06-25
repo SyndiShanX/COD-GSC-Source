@@ -172,7 +172,7 @@ register_encounters() {
 initSpawnableCollision() {
   level waittill("spawn_nondeterministic_entities");
 
-  collision1 = GetEnt("player512x512x8", "targetname");
+  collision1 = getEnt("player512x512x8", "targetname");
   collision1Ent = spawn("script_model", (-5332.5, -4394, 774.5));
   collision1Ent.angles = (90, 274, 7);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
@@ -221,7 +221,7 @@ town_hint_precache() {
 }
 
 rescue_waypoint_setting() {
-  escape_ent = getent("escape_zone", "targetname");
+  escape_ent = getEnt("escape_zone", "targetname");
   assertex(isDefined(escape_ent), "Level missing escape_zone");
   final_waypoint_loc = escape_ent.origin;
 
@@ -369,7 +369,7 @@ run_quake_scene() {
 
         Earthquake(0.3, 3, quake_origin, outter_radius);
         PhysicsJitter(quake_origin, outter_radius, inner_radius, 4.0, 6.0);
-        player PlayRumbleOnEntity("heavy_3s");
+        player playRumbleOnEntity("heavy_3s");
 
         foreach(movable in self.movables) {
           self thread quake_rotate(movable);
@@ -389,7 +389,7 @@ quake_rotate(movable_ent) {
   self notify("moving");
   self endon("moving");
 
-  moveto_ent = getstruct(movable_ent.target, "targetname");
+  moveto_ent = getStruct(movable_ent.target, "targetname");
   assert(isDefined(moveto_ent));
 
   original_angles = movable_ent.angles;
@@ -401,9 +401,9 @@ quake_rotate(movable_ent) {
     angles = angles_frac(original_angles, moveto_angles, 1 - (i / oscillation));
     interval = move_interval * ((i + 1) / oscillation);
 
-    movable_ent rotateto(angles, interval);
+    movable_ent rotateTo(angles, interval);
     wait interval;
-    movable_ent rotateto(original_angles, interval);
+    movable_ent rotateTo(original_angles, interval);
     wait interval;
   }
 }
@@ -483,7 +483,7 @@ alter_drill_locations() {
 }
 
 set_drill_location(target_name, location, orientation) {
-  drillLocation = GetEnt(target_name, "target");
+  drillLocation = getEnt(target_name, "target");
 
   if(isDefined(drillLocation)) {
     drillLocation.origin = location;
@@ -571,19 +571,19 @@ mp_alien_town_try_use_drone_hive(rank, num_missiles, missile_name, altitude, bab
 /
 
 move_clip_brush_cabin_to_city() {
-  clip = GetEnt("player256x256x256", "targetname");
+  clip = getEnt("player256x256x256", "targetname");
   clip.origin = (-5374, -2662, 498);
   clip.angles = (0, 248, 0);
 }
 
 move_clip_brush_cabin_to_lake() {
-  clip = GetEnt("player128x128x256", "targetname");
+  clip = getEnt("player128x128x256", "targetname");
   clip.origin = (-3448, 2256, 618);
   clip.angles = (270, 344, -8.36695);
 }
 
 delete_intro_heli_clip() {
-  helibrush = GetEnt("helicoptercoll", "targetname");
+  helibrush = getEnt("helicoptercoll", "targetname");
   helibrush delete();
 }
 

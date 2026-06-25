@@ -5,7 +5,7 @@
 ****************************************/
 
 minigun_player_anims() {
-  level.minigun_node = getent("minigun_anim_node", "targetname");
+  level.minigun_node = getEnt("minigun_anim_node", "targetname");
   maps\_anim::anim_first_frame_solo(self, "use");
 
   for(;;) {
@@ -50,7 +50,7 @@ minigun_player_drop() {
   var_5 = var_3 - var_0;
   var_6 = (vectordot(var_5, var_2["forward"]), vectordot(var_5, var_2["right"]), vectordot(var_5, var_2["up"]));
   var_6 = var_6 - (0, 0, level.minigun_eye_height);
-  level.eplayerview linkto(self, "tag_flash", var_6, (0, 0, 0));
+  level.eplayerview linkTo(self, "tag_flash", var_6, (0, 0, 0));
   level.player playerlinktoabsolute(level.eplayerview, undefined);
   waitframe();
   self _meth_856D();
@@ -66,7 +66,7 @@ minigun_player_drop() {
   var_9 = var_9 - var_8 * 20;
   var_10 = var_9 - (0, 0, 100);
   var_11 = playerphysicstrace(var_9, var_10);
-  level.eplayerview moveto(var_11, 0.5, 0.2, 0.2);
+  level.eplayerview moveTo(var_11, 0.5, 0.2, 0.2);
   level.player lerpfov(level.minigun_previous_fov, 0.5);
   level.player disablephysicaldepthoffieldscripting();
   wait 0.5;
@@ -116,7 +116,7 @@ minigun_const() {
   level.turret_heat_max = 114;
   level.turret_cooldownrate = 15;
   level.overheat_hud_height_max = 110;
-  var_0 = getent("minigun", "targetname");
+  var_0 = getEnt("minigun", "targetname");
   var_0 _meth_8569(150);
   var_0 setdefaultdroppitch(0);
   var_0 _meth_856B(1);
@@ -135,12 +135,12 @@ minigun_rumble() {
       continue;
     }
     self.rumble_ent.origin = level.player getEye() + (0, 0, var_1 - var_2 * self.momentum);
-    self.rumble_ent playrumbleonentity("minigun_rumble");
+    self.rumble_ent playRumbleOnEntity("minigun_rumble");
   }
 }
 
 minigun_console_hint() {
-  var_0 = getent("minigun", "targetname");
+  var_0 = getEnt("minigun", "targetname");
 
   while(!common_scripts\utility::flag("minigun_lesson_learned")) {
     wait 0.05;
@@ -720,11 +720,11 @@ seaknight() {
   var_0 = spawn("script_model", level.seaknight1 gettagorigin("body_animate_jnt"));
   var_0 setModel("vehicle_ch46e_opened_door_interior_b");
   var_0.angles = level.seaknight1.angles;
-  var_0 linkto(level.seaknight1, "body_animate_jnt");
+  var_0 linkTo(level.seaknight1, "body_animate_jnt");
   var_1 = spawn("script_model", level.seaknight1 gettagorigin("body_animate_jnt"));
   var_1 setModel("vehicle_ch46e_wires");
   var_1.angles = level.seaknight1.angles;
-  var_1 linkto(level.seaknight1, "body_animate_jnt");
+  var_1 linkTo(level.seaknight1, "body_animate_jnt");
   maps\_wibble::wibble_add_heli_to_track(level.seaknight1);
   wait 0.05;
   var_2 = [];
@@ -789,10 +789,10 @@ seaknight() {
 
   createthreatbiasgroup("sas_evac_guy");
   wait 0.25;
-  var_7 = getent("redshirt1", "targetname");
+  var_7 = getEnt("redshirt1", "targetname");
   var_7 thread seaknight_sas_load();
   level.sasseaknightboarded++;
-  var_8 = getent("redshirt2", "targetname");
+  var_8 = getEnt("redshirt2", "targetname");
   var_8 thread seaknight_sas_load();
   level.sasseaknightboarded++;
   level.sasgunner thread seaknight_sas_load();
@@ -889,13 +889,13 @@ vehicle_seaknight_idle_and_load_think(var_0) {
   common_scripts\utility::flag_wait("seaknight_guards_boarding");
   var_1 = "ch46_load_" + var_0;
   level.seaknight1 maps\_anim::anim_generic(self, var_1, "tag_detach");
-  var_2 = getent("seaknight_guards_loading_org_" + var_0, "targetname");
+  var_2 = getEnt("seaknight_guards_loading_org_" + var_0, "targetname");
   self setgoalpos(var_2.origin);
   self.goalradius = 4;
 
   if(!common_scripts\utility::flag("player_made_it")) {
     self waittill("goal");
-    self linkto(level.seaknight1, "tag_detach");
+    self linkTo(level.seaknight1, "tag_detach");
   }
 
   common_scripts\utility::flag_wait("player_made_it");
@@ -979,7 +979,7 @@ can_display_pvt_parity_name() {
   var_2 = bulletTrace(level.player getEye(), var_1, 0, level.player);
 
   if(isDefined(var_2["surfacetype"]) && issubstr(var_2["surfacetype"], "water")) {
-    var_3 = var_2["position"] + 2 * vectornormalize(anglesToForward(level.player getplayerangles()));
+    var_3 = var_2["position"] + 2 * vectorNormalize(anglesToForward(level.player getplayerangles()));
     var_2 = bulletTrace(var_3, var_1, 0, level.player);
   }
 

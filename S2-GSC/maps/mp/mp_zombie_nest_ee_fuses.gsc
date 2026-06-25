@@ -32,8 +32,8 @@ func_7860() {
 }
 
 func_785C() {
-  var_00 = getent("right_hand_of_god_trig", "targetname");
-  var_00 sethintstring(&"ZOMBIE_NEST_ENABLE_RIGHT_HAND");
+  var_00 = getEnt("right_hand_of_god_trig", "targetname");
+  var_00 setHintString(&"ZOMBIE_NEST_ENABLE_RIGHT_HAND");
   var_01 = common_scripts\utility::func_46B5("tower_battle_sfx_top", "targetname");
   var_02 = getEntArray("inner_spire", "targetname");
   var_01 thread lib_0378::func_8D74("aud_tower_shockwave", var_02);
@@ -49,7 +49,7 @@ func_785C() {
   func_7E91(1);
   level thread func_2E9A();
   func_A689();
-  var_07 = getent("rhog_control", "targetname");
+  var_07 = getEnt("rhog_control", "targetname");
   if(isDefined(var_07)) {
     var_07 thread maps\mp\mp_zombie_nest_ee_util::func_4D76();
     var_07 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("green");
@@ -104,7 +104,7 @@ func_9B68(param_00) {
   thread func_9B71();
   earthquake(0.5, 5, param_00, 3000, self);
   self shellshock("ear_ring_mp", 5, 0);
-  self playrumbleonentity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
   level notify("zone1EarthquakeBegin");
   var_01 = randomfloatrange(1, 2);
   var_02 = randomfloatrange(1, 2);
@@ -155,7 +155,7 @@ func_9DBC(param_00, param_01) {
   }
 
   level thread common_scripts\_exploder::func_088E(214);
-  var_04 = getent("right_hand_of_god_model", "targetname");
+  var_04 = getEnt("right_hand_of_god_model", "targetname");
   playFXOnTag(level.var_0611["zmb_rhog_on"], var_04, "Tag_Origin");
   var_04 lib_0378::func_8D74("aud_right_hand_of_god_ready");
 }
@@ -199,7 +199,7 @@ func_7218(param_00, param_01, param_02) {
     playFX(level.var_0611["zmb_fuse_chain_box"], var_03.var_0116, var_04, var_05);
   }
 
-  var_03 moveto(param_01.var_0116, param_02);
+  var_03 moveTo(param_01.var_0116, param_02);
   wait(param_02);
   var_03 delete();
 }
@@ -209,18 +209,18 @@ func_16FD(param_00, param_01, param_02) {
 }
 
 func_A689() {
-  var_00 = getent("right_hand_of_god_trig", "targetname");
+  var_00 = getEnt("right_hand_of_god_trig", "targetname");
   var_00 notify("right hand ready");
   var_00 waittill("trigger", var_01);
   var_00 lib_0378::func_8D74("aud_activate_right_hand_of_god");
   var_01 maps\mp\_utility::func_2CED(2, ::lib_0367::func_8E3C, "righthandgodtouch");
   var_00 common_scripts\utility::func_9D9F();
-  var_02 = getent("right_hand_of_god_model", "targetname");
+  var_02 = getEnt("right_hand_of_god_model", "targetname");
   playFXOnTag(level.var_0611["zmb_rhog_init"], var_02, "Tag_Origin");
 }
 
 func_785D() {
-  var_00 = getent("rhog_control", "targetname");
+  var_00 = getEnt("rhog_control", "targetname");
   if(isDefined(var_00)) {
     var_00 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("red");
   }
@@ -263,7 +263,7 @@ quest_step_match_fuses_helper() {
 func_7E91(param_00) {
   if(1) {
     if(!isDefined(level.var_7E68)) {
-      var_01 = getent("right_hand_of_god_model", "targetname");
+      var_01 = getEnt("right_hand_of_god_model", "targetname");
       level.var_7E68 = lib_0557::func_782F(undefined, var_01);
     }
 
@@ -326,7 +326,7 @@ func_3F2B(param_00) {
 func_4873(param_00) {
   if(1) {
     if(!isDefined(level.var_7D2C)) {
-      var_01 = getent("com_map_frame", "targetname");
+      var_01 = getEnt("com_map_frame", "targetname");
       var_02 = function_021F("fuses_com_map", "targetname");
       level.var_7D2C = lib_0557::func_782F(undefined, [level.var_22F5, var_02[0], var_01]);
     }
@@ -350,9 +350,9 @@ func_4873(param_00) {
 }
 
 func_4874() {
-  var_00 = getent("fuse_quest_start_trigger", "targetname");
+  var_00 = getEnt("fuse_quest_start_trigger", "targetname");
   if(!common_scripts\utility::func_562E(var_00.var_4DAE)) {
-    var_00 sethintstring(&"ZOMBIE_NEST_TURN_FUSE_OBJECTIVE_ON");
+    var_00 setHintString(&"ZOMBIE_NEST_TURN_FUSE_OBJECTIVE_ON");
     var_00.var_4DAE = 1;
   }
 
@@ -478,9 +478,9 @@ func_92D6(param_00) {
     return;
   }
 
-  self.var_6643 moveto(self.var_6647.var_0116, 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6647.var_0116, 0.1, 0, 0);
   wait(0.1);
-  self.var_6643 moveto(self.var_6646.var_0116, param_00 - 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6646.var_0116, param_00 - 0.1, 0, 0);
 }
 
 func_868D() {
@@ -488,7 +488,7 @@ func_868D() {
     return;
   }
 
-  self.var_6643 moveto(self.var_6647.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6647.var_0116, 0.5, 0, 0);
 }
 
 func_868C() {
@@ -496,7 +496,7 @@ func_868C() {
     return;
   }
 
-  self.var_6643 moveto(self.var_6646.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6646.var_0116, 0.5, 0, 0);
 }
 
 func_9ED3() {
@@ -522,7 +522,7 @@ func_2EA4() {
 
 func_2E9A() {
   wait(2);
-  var_00 = getent("inner_spire", "targetname");
+  var_00 = getEnt("inner_spire", "targetname");
   if(isDefined(var_00)) {
     foreach(var_02 in level.var_744A) {
       if(distance2d(var_02.var_0116, var_00.var_0116) < 750) {
@@ -551,7 +551,7 @@ func_8624() {
   }
 
   level.var_22F5 func_856A(undefined, 1);
-  var_03 = getent("fuses_com_map", "targetname");
+  var_03 = getEnt("fuses_com_map", "targetname");
   var_03 func_851D(undefined, 1);
 }
 
@@ -660,7 +660,7 @@ func_3D63() {
 
 func_98A3() {
   wait(1.5);
-  level.var_744A[0] setorigin((954.139, -3445.2, 1502.04));
+  level.var_744A[0] setOrigin((954.139, -3445.2, 1502.04));
   level.var_744A[0] setangles((0, -152.705, 0));
 }
 
@@ -684,12 +684,12 @@ func_6BFF() {
 }
 
 func_5413() {
-  var_00 = getent("right_hand_of_god_trig", "targetname");
+  var_00 = getEnt("right_hand_of_god_trig", "targetname");
   var_00.var_4D91 = lib_0559::func_7BE3(var_00, "rhog");
   var_00 endon("right hand ready");
-  var_00 sethintstring(&"ZOMBIES_SWITCH_HINT_GENERIC_EXAMINE");
+  var_00 setHintString(&"ZOMBIES_SWITCH_HINT_GENERIC_EXAMINE");
   var_00 waittill("trigger", var_01);
-  var_00 sethintstring(&"ZOMBIES_EMPTY_STRING");
+  var_00 setHintString(&"ZOMBIES_EMPTY_STRING");
   if(common_scripts\utility::func_24A6()) {
     var_01 thread lib_0367::func_8E3C("righthandaltar");
   } else {
@@ -706,7 +706,7 @@ func_5413() {
 }
 
 func_3F28() {
-  var_00 = getent("power_grid_hint_trig", "targetname");
+  var_00 = getEnt("power_grid_hint_trig", "targetname");
   if(isDefined(var_00)) {
     for(;;) {
       var_00 waittill("trigger", var_01);
@@ -801,7 +801,7 @@ func_3875() {
   var_00 = [];
   var_00 = [];
   var_01 = "";
-  var_02 = getent("fuses_reset_button", "targetname");
+  var_02 = getEnt("fuses_reset_button", "targetname");
   for(var_03 = 0; var_03 < 4; var_03++) {
     var_04 = randomint(3);
     if(var_00.size != 0) {
@@ -1112,7 +1112,7 @@ func_52E4() {
   level thread func_8BF2();
   var_00 = getEntArray("nest_ee_fuse_trigger", "targetname");
   var_00 = common_scripts\utility::func_0FA5(var_00, ::func_8323);
-  var_01 = getent("rhog_control", "targetname");
+  var_01 = getEnt("rhog_control", "targetname");
   if(isDefined(var_01)) {
     var_01 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("off");
   }
@@ -1122,11 +1122,11 @@ func_52E4() {
     level.var_665B[var_02].var_65E5 = var_02;
   }
 
-  var_03 = getent("fuse_quest_start_trigger", "targetname");
-  var_03 sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
-  level.var_22F5 = getent("fuses_reset_button", "targetname");
+  var_03 = getEnt("fuse_quest_start_trigger", "targetname");
+  var_03 setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  level.var_22F5 = getEnt("fuses_reset_button", "targetname");
   level.var_22F5 func_856A(undefined, 1);
-  var_04 = getent("fuses_com_map", "targetname");
+  var_04 = getEnt("fuses_com_map", "targetname");
   var_04 func_851D(undefined, 1);
 }
 

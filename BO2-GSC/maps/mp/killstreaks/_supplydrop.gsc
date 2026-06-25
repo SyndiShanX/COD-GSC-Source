@@ -846,8 +846,8 @@ geticonforcrate() {
 
 crateactivate(hacker) {
   self makeusable();
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(self.cratetype.hint);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(self.cratetype.hint);
 
   if(isDefined(self.cratetype.hint_gambler)) {
     self sethintstringforperk("specialty_showenemyequipment", self.cratetype.hint_gambler);
@@ -1219,7 +1219,7 @@ dropcrate(origin, angle, category, owner, team, killcament, killstreak_id, packa
 
   crate = cratespawn(category, owner, team, origin, angle);
   killcament unlink();
-  killcament linkto(crate);
+  killcament linkTo(crate);
   crate.killcament = killcament;
   crate.killstreak_id = killstreak_id;
   crate.package_contents_id = package_contents_id;
@@ -1254,12 +1254,12 @@ unlinkonrotation(crate) {
   wait(waitbeforerotationcheck);
   mincos = getdvarintdefault("scr_supplydrop_killcam_max_rot", 0.999);
   cosine = 1;
-  currentdirection = vectornormalize(anglesToForward(crate.angles));
+  currentdirection = vectorNormalize(anglesToForward(crate.angles));
 
   while(cosine > mincos) {
     olddirection = currentdirection;
     wait 0.05;
-    currentdirection = vectornormalize(anglesToForward(crate.angles));
+    currentdirection = vectorNormalize(anglesToForward(crate.angles));
     cosine = vectordot(olddirection, currentdirection);
   }
 
@@ -1321,9 +1321,9 @@ watch_explosive_crate() {
 
     self radiusdamage(self.origin, 256, 300, 75, self.hacker, "MOD_EXPLOSIVE", "supplydrop_mp");
     playFX(level._supply_drop_explosion_fx, self.origin);
-    playsoundatposition("wpn_grenade_explode", self.origin);
+    playSoundAtPosition("wpn_grenade_explode", self.origin);
   } else {
-    playsoundatposition("mpl_turret_alert", self.origin);
+    playSoundAtPosition("mpl_turret_alert", self.origin);
     maps\mp\_scoreevents::processscoreevent("disarm_hacked_care_package", player);
     player maps\mp\_challenges::disarmedhackedcarepackage();
   }
@@ -1337,7 +1337,7 @@ loop_sound(alias, interval) {
   self endon("death");
 
   while(true) {
-    playsoundatposition(alias, self.origin);
+    playSoundAtPosition(alias, self.origin);
     wait(interval);
     interval = interval / 1.2;
 
@@ -1736,7 +1736,7 @@ crategamblerthink() {
 }
 
 cratereactivate() {
-  self sethintstring(self.cratetype.hint);
+  self setHintString(self.cratetype.hint);
   icon = self geticonforcrate();
   self thread maps\mp\_entityheadicons::setentityheadicon(self.team, self, level.crate_headicon_offset, icon, 1);
 }
@@ -1852,7 +1852,7 @@ gethelistart(drop_origin, drop_direction) {
       index = randomintrange(0, level.noflyzones.size);
       delta = drop_origin - level.noflyzones[index].origin;
       delta = (delta[0] + randomint(10), delta[1] + randomint(10), 0);
-      delta = vectornormalize(delta);
+      delta = vectorNormalize(delta);
       start_origin = drop_origin + delta * dist;
     }
   }
@@ -2004,7 +2004,7 @@ helidelivercrate(origin, weaponname, owner, team, killstreak_id, package_content
   killcament = spawn("script_model", chopper.origin + vectorscale((0, 0, 1), 800.0));
   killcament.angles = (100, chopper.angles[1], chopper.angles[2]);
   killcament.starttime = gettime();
-  killcament linkto(chopper);
+  killcament linkTo(chopper);
 
   if(isPlayer(owner)) {
     target_setturretaquire(self, 0);
@@ -2079,10 +2079,10 @@ helidropcrate(category, owner, offset, killcament, killstreak_id, package_conten
   crate = cratespawn(category, owner, self.team, self.origin, self.angles);
 
   if(category == "inventory_supplydrop_mp" || category == "supplydrop_mp") {
-    crate linkto(self, "tag_care_package", (0, 0, 0));
+    crate linkTo(self, "tag_care_package", (0, 0, 0));
     self setclientfield("supplydrop_care_package_state", 1);
   } else if(category == "inventory_ai_tank_drop_mp" || category == "ai_tank_drop_mp") {
-    crate linkto(self, "tag_drop_box", (0, 0, 0));
+    crate linkTo(self, "tag_drop_box", (0, 0, 0));
     self setclientfield("supplydrop_ai_tank_state", 1);
   }
 
@@ -2159,7 +2159,7 @@ attachreconmodel(modelname, owner) {
   reconmodel.angles = self.angles;
   reconmodel setModel(modelname);
   reconmodel.model_name = modelname;
-  reconmodel linkto(self);
+  reconmodel linkTo(self);
   reconmodel setcontents(0);
   reconmodel resetreconmodelvisibility(owner);
   reconmodel thread watchreconmodelfordeath(self);

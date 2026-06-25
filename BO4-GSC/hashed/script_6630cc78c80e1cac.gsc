@@ -28,10 +28,10 @@ init() {
     function_7a7d15c8(var_4f61dc22);
   }
 
-  level.var_d5fff1a7 = getent("jfk_room_oscar_left_0", "targetname");
-  level.var_a83c1620 = getent("jfk_room_oscar_left_1", "targetname");
-  level.var_3830a0d3 = getent("jfk_room_oscar_right_0", "targetname");
-  level.var_2a66053e = getent("jfk_room_oscar_right_1", "targetname");
+  level.var_d5fff1a7 = getEnt("jfk_room_oscar_left_0", "targetname");
+  level.var_a83c1620 = getEnt("jfk_room_oscar_left_1", "targetname");
+  level.var_3830a0d3 = getEnt("jfk_room_oscar_right_0", "targetname");
+  level.var_2a66053e = getEnt("jfk_room_oscar_right_1", "targetname");
   level.var_a83c1620 hide();
   level.var_2a66053e hide();
   level.var_3830a0d3.angles += (20, 0, 0);
@@ -50,7 +50,7 @@ function_4ac6cf37(var_5ea5c94d) {
       waitframe(1);
     }
 
-    playsoundatposition(#"hash_4ff9e8e25196f463", (0, 0, 0));
+    playSoundAtPosition(#"hash_4ff9e8e25196f463", (0, 0, 0));
 
     iprintlnbold("<dev string:x38>");
   }
@@ -66,10 +66,10 @@ function_cb27a665(var_5ea5c94d, ended_early) {
 
 function_7a7d15c8(var_4f61dc22) {
   level.var_143be9f3++;
-  var_637c224f = getent(var_4f61dc22, "targetname");
+  var_637c224f = getEnt(var_4f61dc22, "targetname");
   array::add(level.var_41770f71, var_637c224f);
   var_637c224f.angles += (20, 0, 0);
-  var_637c224f.e_trigger = getent(var_4f61dc22 + "_trigger", "targetname");
+  var_637c224f.e_trigger = getEnt(var_4f61dc22 + "_trigger", "targetname");
 }
 
 function_2d023c13() {
@@ -86,8 +86,8 @@ function_d10bef80() {
     waitresult = self waittill(#"damage");
 
     if(waitresult.weapon == getweapon(#"bowie_knife_story_1")) {
-      var_637c224f = getent(self.target, "targetname");
-      var_637c224f rotateto(var_637c224f.angles - (20, 0, 0), 0.15);
+      var_637c224f = getEnt(self.target, "targetname");
+      var_637c224f rotateTo(var_637c224f.angles - (20, 0, 0), 0.15);
       var_b45fe0b3 = 1;
       level.var_4850c7c6++;
     }
@@ -135,8 +135,8 @@ function_715c9476() {
 }
 
 function_63f29ee9() {
-  var_c4cb303c = getent("jfk_room_oscar_right_0", "targetname");
-  var_c4cb303c rotateto(var_c4cb303c.angles - (20, 0, 0), 0.15);
+  var_c4cb303c = getEnt("jfk_room_oscar_right_0", "targetname");
+  var_c4cb303c rotateTo(var_c4cb303c.angles - (20, 0, 0), 0.15);
   waitresult = self waittill(#"trigger");
   level.var_db90b274--;
   self playSound(#"hash_5104efdd2ef71e39");
@@ -153,7 +153,7 @@ function_bd81f4e2(user) {
     wait 0.1;
     level.var_d5fff1a7 hide();
     level.var_3830a0d3 hide();
-    playsoundatposition(#"hash_4b169927b4789180", (0, 0, 0));
+    playSoundAtPosition(#"hash_4b169927b4789180", (0, 0, 0));
 
     iprintlnbold("<dev string:x9f>");
 

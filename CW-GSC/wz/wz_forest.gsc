@@ -35,10 +35,10 @@ function event_handler[level_init] main(eventstruct) {
   function_564698fd();
 
   if(sessionmodeiswarzonegame()) {
-    var_b1c29e4c = getent("battery_coverup_clip", "targetname");
+    var_b1c29e4c = getEnt("battery_coverup_clip", "targetname");
 
     if(isDefined(var_b1c29e4c)) {
-      var_b1c29e4c disconnectpaths();
+      var_b1c29e4c disconnectPaths();
     }
   }
 }
@@ -94,7 +94,7 @@ function function_1b312da5() {
   hidemiscmodels("mdl_sr_ee_hulk_shatter_02");
   hidemiscmodels("mdl_sr_ee_hulk_shatter_03");
   hidemiscmodels("mdl_sr_ee_hulk_slump");
-  mdl_wall = getent("mdl_sr_ee_hulk_wall_bound", "targetname");
+  mdl_wall = getEnt("mdl_sr_ee_hulk_wall_bound", "targetname");
 
   if(isDefined(mdl_wall)) {
     mdl_wall notsolid();

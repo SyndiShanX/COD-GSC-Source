@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 init() {
-  level.wepbox = GetEnt("weapon_box", "targetname");
+  level.wepbox = getEnt("weapon_box", "targetname");
   if(!isDefined(level.wepbox)) {
     return;
   }

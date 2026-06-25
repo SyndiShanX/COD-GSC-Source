@@ -83,7 +83,7 @@ func_44F5() {
 
     var_15 = min(max(var_14, 296), 550);
     var_10 = 1 - var_15 - 296 / 254;
-    var_11 = 0.5 * 1 + vectordot(var_6, vectornormalize(var_13));
+    var_11 = 0.5 * 1 + vectordot(var_6, vectorNormalize(var_13));
     thread func_44F0(var_12, var_9, var_10, var_11);
     var_10++;
   }
@@ -140,7 +140,7 @@ func_44F6(var_0, var_1, var_2) {
   var_3.angles = var_2;
   var_4 = vectordot(var_1 - var_0, anglesToForward(var_2));
   var_5 = max(0.05, var_4 / 8000);
-  var_3 moveto(var_1, var_5);
+  var_3 moveTo(var_1, var_5);
   var_6 = scripts\engine\utility::getfx("coneFlash_explosion");
   playFXOnTag(var_6, var_3, "tag_origin");
 }

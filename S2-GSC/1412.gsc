@@ -52,7 +52,7 @@ lib_0584::func_9430() {
   }
 
   if(var_03 > 0) {
-    var_00 moveto(var_00.var_2DA7, var_03, var_04, 0);
+    var_00 moveTo(var_00.var_2DA7, var_03, var_04, 0);
   }
 
   var_00.var_2A92 = lib_0580::func_4385() + var_03;

@@ -217,7 +217,7 @@ reconspawnturret(var_0) {
   var_4.angles = var_0 gettagangles(var_2);
   var_4 setModel(var_3);
   var_4 setdefaultdroppitch(45.0);
-  var_4 linkto(var_0, var_2, (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0, var_2, (0, 0, 0), (0, 0, 0));
   var_4.owner = var_0.owner;
   var_4.health = 99999;
   var_4.maxhealth = 1000;
@@ -317,7 +317,7 @@ startusingreconvehicle(var_0) {
   }
 
   var_1 maps\mp\_utility::playersaveangles();
-  var_1 cameralinkto(var_0, "tag_origin");
+  var_1 cameralinkTo(var_0, "tag_origin");
   var_1 remotecontrolvehicle(var_0);
   var_1 thread maps\mp\killstreaks\_drone_common::setdronevisionandlightsetpermap(1.5, var_0);
   var_1.using_remote_tank = 1;

@@ -4,12 +4,12 @@
 *****************************************************/
 
 move_player_to_start_point(var_0) {
-  var_1 = getent(var_0, "targetname");
-  self setorigin(var_1.origin);
+  var_1 = getEnt(var_0, "targetname");
+  self setOrigin(var_1.origin);
   var_2 = undefined;
 
   if(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
   }
 
   if(isDefined(var_2)) {
@@ -20,11 +20,11 @@ move_player_to_start_point(var_0) {
 }
 
 actor_teleport(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(isPlayer(var_0)) {
     var_0 setplayerangles(var_2.angles);
-    var_0 setorigin(var_2.origin);
+    var_0 setOrigin(var_2.origin);
   } else if(isai(var_0))
     var_0 forceteleport(var_2.origin, var_2.angles);
 }
@@ -34,7 +34,7 @@ squad_add_ally(var_0, var_1, var_2) {
     level.squad = [];
   }
 
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
   var_4 = var_3 maps\_utility::spawn_ai();
   var_4.animname = var_2;
   var_4 thread maps\_utility::deletable_magic_bullet_shield();
@@ -51,7 +51,7 @@ squad_add_ally(var_0, var_1, var_2) {
 }
 
 safe_trigger_by_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -60,7 +60,7 @@ safe_trigger_by_targetname(var_0) {
 }
 
 safe_trigger_by_noteworthy(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
 
   if(!isDefined(var_1)) {
     return;
@@ -114,7 +114,7 @@ enable_awareness() {
 }
 
 check_trigger_flagset(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
 
   if(isDefined(var_1.script_flag_set)) {
@@ -135,7 +135,7 @@ factory_set_ignoreme(var_0) {
 }
 
 safe_set_goal_volume(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -379,13 +379,13 @@ create_door(var_0, var_1) {
     return level.doors[var_0];
   }
 
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   level.doors[var_0] = var_2;
   level.doors[var_0].path_connectors = [];
   var_3 = getEntArray(var_2.target, "targetname");
 
   foreach(var_5 in var_3) {
-    var_5 linkto(var_2);
+    var_5 linkTo(var_2);
 
     if(isDefined(var_5.script_parameters) && var_5.script_parameters == "path_connector") {
       level.doors[var_0].path_connectors[level.doors[var_0].path_connectors.size] = var_5;
@@ -408,13 +408,13 @@ open_door(var_0, var_1, var_2, var_3) {
   }
 
   wait 0.01;
-  var_4 rotateyaw(var_1, var_2, 0.1, 0.1);
+  var_4 rotateYaw(var_1, var_2, 0.1, 0.1);
 
   if(isDefined(var_3) && var_3 == 1) {
     var_4 waittill("rotatedone");
 
     foreach(var_6 in var_4.path_connectors) {
-      var_6 disconnectpaths();
+      var_6 disconnectPaths();
     }
   }
 }
@@ -473,14 +473,14 @@ create_automatic_sliding_door(var_0, var_1, var_2, var_3, var_4) {
     var_14 = getEntArray(var_6.right.target, "targetname");
 
     foreach(var_12 in var_14) {
-      var_12 linkto(var_6.right);
+      var_12 linkTo(var_6.right);
       var_12 connectpaths();
     }
 
     var_17 = getEntArray(var_6.left.target, "targetname");
 
     foreach(var_12 in var_17) {
-      var_12 linkto(var_6.left);
+      var_12 linkTo(var_6.left);
       var_12 connectpaths();
     }
 
@@ -508,8 +508,8 @@ automatic_sliding_door_logic() {
       if(self.state == "closing" || self.state == "closed") {
         common_scripts\utility::flag_set("presat_synctransients");
         self.state = "open";
-        self.left moveto(self.left_open.origin, self.time, self.accel);
-        self.right moveto(self.right_open.origin, self.time, self.accel);
+        self.left moveTo(self.left_open.origin, self.time, self.accel);
+        self.right moveTo(self.right_open.origin, self.time, self.accel);
 
         if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01") {
           thread maps\factory_audio::sfx_metal_door_open(self);
@@ -523,8 +523,8 @@ automatic_sliding_door_logic() {
       }
     } else if(self.state == "opening" || self.state == "open") {
       self.state = "closed";
-      self.left moveto(self.origin, self.time, self.accel);
-      self.right moveto(self.origin, self.time, self.accel);
+      self.left moveTo(self.origin, self.time, self.accel);
+      self.right moveTo(self.origin, self.time, self.accel);
 
       if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01") {
         thread maps\factory_audio::sfx_metal_door_close(self);
@@ -557,8 +557,8 @@ automatic_sliding_door_lock() {
   self endon("death");
   level waittill(self.lock_notify);
   self.state = "closed";
-  self.left moveto(self.origin, self.time, self.accel);
-  self.right moveto(self.origin, self.time, self.accel);
+  self.left moveTo(self.origin, self.time, self.accel);
+  self.right moveTo(self.origin, self.time, self.accel);
   thread maps\factory_audio::sfx_glass_door_close(self);
   self.trigger common_scripts\utility::trigger_off();
   self.trigger delete();
@@ -743,7 +743,7 @@ animate_vehicle_from_path(var_0, var_1, var_2, var_3) {
   self useanimtree(#animtree);
   var_4 = maps\_utility::getanim(var_0);
   var_5 = getvehiclenode(var_1, "script_noteworthy");
-  var_6 = getent(var_2, "script_noteworthy");
+  var_6 = getEnt(var_2, "script_noteworthy");
   var_7 = spawnStruct();
   var_7.origin = getstartorigin(var_6.origin, var_6.angles, var_4);
   var_7.angles = getstartangles(var_6.origin, var_6.angles, var_4);
@@ -751,7 +751,7 @@ animate_vehicle_from_path(var_0, var_1, var_2, var_3) {
   self vehicle_orientto(var_7.origin, var_7.angles, var_3, 0.0);
   self waittill("orientto_complete");
   thread animated_script_model(self, var_6, #animtree, var_4);
-  self animscripted("vehicle_animation", var_6.origin, var_6.angles, var_4);
+  self animScripted("vehicle_animation", var_6.origin, var_6.angles, var_4);
   wait(getanimlength(var_4));
 }
 
@@ -763,7 +763,7 @@ animated_script_model(var_0, var_1, var_2, var_3) {
   var_5 = spawn("script_model", var_1.origin);
   var_5 setModel(var_0.model);
   var_5 useanimtree(var_2);
-  var_5 animscripted("blah", var_1.origin + var_4, var_1.angles, var_3);
+  var_5 animScripted("blah", var_1.origin + var_4, var_1.angles, var_3);
   var_0 waittill("death");
   wait 1;
   var_5 delete();

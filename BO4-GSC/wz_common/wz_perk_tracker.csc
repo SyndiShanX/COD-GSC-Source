@@ -32,7 +32,7 @@ tracker(localclientnum) {
     }
 
     origin = getlocalclientpos(localclientnum);
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     players = arraysortclosest(players, origin, undefined, 1, 6000);
     tracked = 0;
 

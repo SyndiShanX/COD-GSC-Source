@@ -115,7 +115,7 @@ function function_762ff0b6(wpn_prev) {
 }
 
 function function_50cf29d(evt) {
-  self playrumbleonentity("lightninggun_charge");
+  self playRumbleOnEntity("lightninggun_charge");
 }
 
 function function_5c998ffc(wpn_excalibur, wpn_autokill, wpn_cur, wpn_prev) {
@@ -248,7 +248,7 @@ function private do_excalibur(wpn_excalibur) {
     if(dist_sq > level.glaive_excalibur_cone_range_sq) {
       continue;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(0.707 > dot) {
       continue;
@@ -381,7 +381,7 @@ function chop_zombies(first_time, var_10ee11e, leftswing, weapon = level.weaponn
     if(dist_sq > dist_to_check) {
       continue;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(dot <= 0) {
       continue;
@@ -497,7 +497,7 @@ function private send_autokill_sword(wpn_autokill) {
 
 function function_e97f78f0() {
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player.sword_power) && !player.sword_allowed) {
         player.sword_power = player gadgetpowerget(0) / 100;
         player clientfield::set_player_uimodel("zmhud.swordEnergy", player.sword_power);

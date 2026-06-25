@@ -384,9 +384,9 @@ collisionhandler(localclientnum) {
 
       if(isDefined(player)) {
         if(hit_intensity > 15) {
-          player playrumbleonentity(driver_local_client, "damage_heavy");
+          player playRumbleOnEntity(driver_local_client, "damage_heavy");
         } else {
-          player playrumbleonentity(driver_local_client, "damage_light");
+          player playRumbleOnEntity(driver_local_client, "damage_light");
         }
       }
     }
@@ -433,7 +433,7 @@ enginestutterhandler(localclientnum) {
       player = getlocalplayer(localclientnum);
 
       if(isDefined(player)) {
-        player playrumbleonentity(localclientnum, "rcbomb_engine_stutter");
+        player playRumbleOnEntity(localclientnum, "rcbomb_engine_stutter");
       }
     }
   }
@@ -454,7 +454,7 @@ slidehandler(localclientnum) {
           }
 
           if(slide_start_time + 200 < getrealtime()) {
-            player playrumbleonentity(localclientnum, "rcbomb_slide");
+            player playRumbleOnEntity(localclientnum, "rcbomb_slide");
           }
         } else
           slide_start_time = 0;

@@ -44,7 +44,7 @@ function robot_horde_start() {
 }
 
 function robot_horde_precache() {
-  trig_color = getent("vtol_tackle_color", "targetname");
+  trig_color = getEnt("vtol_tackle_color", "targetname");
   trig_color triggerenable(0);
 }
 
@@ -147,7 +147,7 @@ function robot_horde_main() {
 }
 
 function function_96157f5d() {
-  var_9a246ea8 = getent("t_robot_horde_oob", "targetname");
+  var_9a246ea8 = getEnt("t_robot_horde_oob", "targetname");
   if(isDefined(var_9a246ea8)) {
     level flag::wait_till("vo_robot");
     wait(1.9);
@@ -164,7 +164,7 @@ function function_21350de5(a_ents) {
 function function_4a895a11() {
   level waittill("hash_d1ef0d27");
   wait(1);
-  playsoundatposition("evt_robot_fake_battle", (15815, -745, 497));
+  playSoundAtPosition("evt_robot_fake_battle", (15815, -745, 497));
 }
 
 function function_94976a83() {
@@ -196,7 +196,7 @@ function function_59071a25() {
 }
 
 function function_f7a7c69a() {
-  var_ede59fe8 = getent("player_inside_garage", "targetname");
+  var_ede59fe8 = getEnt("player_inside_garage", "targetname");
   a_ai_allies = cp_prologue_util::get_ai_allies();
   foreach(ai_ally in a_ai_allies) {
     while(isalive(ai_ally) && !ai_ally istouching(var_ede59fe8)) {
@@ -255,7 +255,7 @@ function function_51280ee5() {
 }
 
 function function_c2619de1() {
-  var_9869c63b = getent("t_kill_robots_inside_garage", "targetname");
+  var_9869c63b = getEnt("t_kill_robots_inside_garage", "targetname");
   a_ai_enemies = getaiteamarray("axis");
   foreach(ai_enemy in a_ai_enemies) {
     if(isalive(ai_enemy)) {
@@ -410,7 +410,7 @@ function function_f4e0744a() {
 
 function function_38c8ec92() {
   level endon("hash_e41afc83");
-  var_49b32118 = getent("pa_nrc_warning", "targetname");
+  var_49b32118 = getEnt("pa_nrc_warning", "targetname");
   var_49b32118 dialog::say("nrcp_warning_nrc_grunt_i_0", 0, 1);
   level flag::wait_till("player_in_alley");
   function_e3231637(1);
@@ -480,7 +480,7 @@ function remove_clips() {
 }
 
 function function_341ece1b() {
-  e_lift_door = getent("clip_player_garage", "targetname");
+  e_lift_door = getEnt("clip_player_garage", "targetname");
   e_lift_door movez(200 * -1, 0.05);
   level flag::wait_till("garage_open");
   e_lift_door movez(200, 2);
@@ -490,7 +490,7 @@ function function_341ece1b() {
 }
 
 function function_79c2bdec() {
-  mdl_clip = getent("clip_ai_garage", "targetname");
+  mdl_clip = getEnt("clip_ai_garage", "targetname");
   level flag::wait_till("garage_open");
   mdl_clip notsolid();
   mdl_clip connectpaths();
@@ -498,5 +498,5 @@ function function_79c2bdec() {
   level flag::wait_till("garage_closed");
   wait(1);
   mdl_clip solid();
-  mdl_clip disconnectpaths();
+  mdl_clip disconnectPaths();
 }

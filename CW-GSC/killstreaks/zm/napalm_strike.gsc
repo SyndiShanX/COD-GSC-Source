@@ -81,12 +81,12 @@ function function_53a0e7ce(var_b004174a) {
 
   if(isDefined(s_location)) {
     forward = anglesToForward((0, s_location.angles[1], 0));
-    forward = vectornormalize(forward);
+    forward = vectorNormalize(forward);
     forward = vectorscale(forward, 190);
     forward = (forward[0], forward[1], forward[2]);
     s_location.origin += forward;
     right = anglestoright((0, s_location.angles[1], 0));
-    right = vectornormalize(right);
+    right = vectorNormalize(right);
     right = vectorscale(right, 256);
     s_location.origin += right;
     s_location.yaw = s_location.angles[1] + 90;

@@ -35,17 +35,17 @@ c4_location(tag, origin_offset, angles_offset, org) {
   c4_model setModel("weapon_c4_obj");
 
   if(isDefined(tag)) {
-    c4_model linkto(self, tag, origin_offset, angles_offset);
+    c4_model linkTo(self, tag, origin_offset, angles_offset);
   } else {
     c4_model.angles = self.angles;
   }
 
   c4_model.trigger = get_use_trigger();
 
-  c4_model.trigger sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
+  c4_model.trigger setHintString(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
 
   if(isDefined(tag)) {
-    c4_model.trigger linkto(self, tag, origin_offset, angles_offset);
+    c4_model.trigger linkTo(self, tag, origin_offset, angles_offset);
     c4_model.trigger.islinked = true;
   } else
     c4_model.trigger.origin = c4_model.origin;
@@ -80,7 +80,7 @@ handle_use(c4_target) {
 
   c4_target.c4_count++;
 
-  self.trigger usetriggerrequirelookat();
+  self.trigger useTriggerRequireLookAt();
   self.trigger waittill("trigger", player);
 
   level notify("c4_in_place", self);
@@ -218,7 +218,7 @@ get_use_trigger() {
       continue;
     }
     if(!isDefined(ents[i].inuse)) {
-      ents[i] enablelinkto();
+      ents[i] enablelinkTo();
     }
     ents[i].inuse = true;
     ents[i].oldorigin = ents[i].origin;

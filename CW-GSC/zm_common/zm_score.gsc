@@ -527,7 +527,7 @@ function add_to_team_score(points) {}
 function minus_to_team_score(points) {}
 
 function player_died_penalty() {
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
 
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -676,7 +676,7 @@ function function_bc9de425(b_lowest_first = 0) {
   var_5e8a44f9 = [];
   var_e8d2685c = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_9fc3ee66)) {
       player.var_9fc3ee66 = -1;
     }
@@ -710,7 +710,7 @@ function function_bc9de425(b_lowest_first = 0) {
       continue;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.score == var_f0c1d3c2) {
         player.var_a8da9faf = player.var_9fc3ee66;
         player.var_9fc3ee66 = var_51639;

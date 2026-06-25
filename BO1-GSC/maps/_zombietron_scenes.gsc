@@ -184,7 +184,7 @@ game_tutorial_render_instructions(curPage, lastPage, instruction1, instruction2,
 }
 game_skipPage_watcher() {
   level endon("exit_taken");
-  player = GetPlayers()[0];
+  player = getPlayers()[0];
   while(1) {
     if(player useButtonPressed()) {
       level notify("next_page");
@@ -260,7 +260,7 @@ begin_game_tutorial() {
   dest_point = (location.origin[0], location.origin[1], trace["position"][2]);
   teleporter = spawn("script_model", dest_point);
   teleporter setModel("zombie_teleporter_pad");
-  playsoundatposition("zmb_teleporter_spawn", teleporter.origin);
+  playSoundAtPosition("zmb_teleporter_spawn", teleporter.origin);
   trigger = spawn("trigger_radius", location.origin, 0, 10, 50);
   objective_add(2, "active", &"ZOMBIETRON_TUTORIAL3", trigger.origin);
   Objective_String(2, &"ZOMBIETRON_TUTORIAL3");
@@ -285,22 +285,22 @@ end_game_introduction(player) {
   level waittill("end_the_intro");
   player thread maps\_zombietron_pickups::update_drop_bomb();
   player thread maps\_zombietron_pickups::update_drop_booster();
-  exit = GetEnt("ape_spawn_point", "script_noteworthy");
-  ape = GetEnt("the_ape", "script_noteworthy");
+  exit = getEnt("ape_spawn_point", "script_noteworthy");
+  ape = getEnt("the_ape", "script_noteworthy");
   if(!isDefined(ape)) {
     ape = simple_spawn_single("ape_taunt", maps\_zombietron_ai_ape::ape_prespawn);
     ape.script_noteworthy = "the_ape";
     ape.takedamage = false;
     ape thread maps\_zombietron_ai_ape::ape_you_greedy_mf(exit.origin);
     ape thread maps\_zombietron_ai_ape::ape_taunt_deleter();
-    spot = GetEnt("ape_intro_spot", "script_noteworthy");
+    spot = getEnt("ape_intro_spot", "script_noteworthy");
     ape forceTeleport(spot.origin, spot.angles);
     level thread maps\_zombietron_pickups::spawn_treasures(spot.origin, 5 + RandomInt(5));
     level waittill("fade_in_complete");
     level.scr_anim["ape_zombie"]["chest_beat"] = % ai_zombie_simianaut_chest_beat;
     ape thread maps\_anim::anim_single(ape, "chest_beat");
     wait 1;
-    ape anim_stopanimscripted(0.15);
+    ape anim_stopanimScripted(0.15);
     ape set_run_anim("sprint3");
     ape.run_combatanim = level.scr_anim["ape_zombie"]["sprint3"];
     ape.crouchRunAnim = level.scr_anim["ape_zombie"]["sprint3"];
@@ -336,7 +336,7 @@ introduction_abort_watcher() {
   level.skip_msg.hidewheninmenu = true;
   while(1) {
     if(self useButtonPressed()) {
-      princess = GetEnt("princess", "script_noteworthy");
+      princess = getEnt("princess", "script_noteworthy");
       princess startragdoll();
       princess launchragdoll((0, 0, 200));
       maps\_zombietron_pickups::clear_all_pickups();
@@ -372,7 +372,7 @@ hide_temple_props(hide) {
         statue_heads[i] SetScale(3.0);
       }
     }
-    podium = GetEnt("temple_podium_first_place", "targetname");
+    podium = getEnt("temple_podium_first_place", "targetname");
     if(isDefined(podium)) {
       podium Hide();
       if(!isDefined(podium.old_origin)) {
@@ -380,7 +380,7 @@ hide_temple_props(hide) {
         podium.origin += (0, 0, -500);
       }
     }
-    podium = GetEnt("temple_podium_second_place", "targetname");
+    podium = getEnt("temple_podium_second_place", "targetname");
     if(isDefined(podium)) {
       podium Hide();
       if(!isDefined(podium.old_origin)) {
@@ -388,7 +388,7 @@ hide_temple_props(hide) {
         podium.origin += (0, 0, -500);
       }
     }
-    podium = GetEnt("temple_podium_third_place", "targetname");
+    podium = getEnt("temple_podium_third_place", "targetname");
     if(isDefined(podium)) {
       podium Hide();
       if(!isDefined(podium.old_origin)) {
@@ -396,7 +396,7 @@ hide_temple_props(hide) {
         podium.origin += (0, 0, -500);
       }
     }
-    podium = GetEnt("temple_podium_last_place", "targetname");
+    podium = getEnt("temple_podium_last_place", "targetname");
     if(isDefined(podium)) {
       podium Hide();
       if(!isDefined(podium.old_origin)) {
@@ -412,7 +412,7 @@ hide_temple_props(hide) {
         statue_heads[i] Hide();
       }
     }
-    podium = GetEnt("temple_podium_first_place", "targetname");
+    podium = getEnt("temple_podium_first_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -420,7 +420,7 @@ hide_temple_props(hide) {
         podium.old_origin = undefined;
       }
     }
-    podium = GetEnt("temple_podium_second_place", "targetname");
+    podium = getEnt("temple_podium_second_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -428,7 +428,7 @@ hide_temple_props(hide) {
         podium.old_origin = undefined;
       }
     }
-    podium = GetEnt("temple_podium_third_place", "targetname");
+    podium = getEnt("temple_podium_third_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -436,7 +436,7 @@ hide_temple_props(hide) {
         podium.old_origin = undefined;
       }
     }
-    podium = GetEnt("temple_podium_last_place", "targetname");
+    podium = getEnt("temple_podium_last_place", "targetname");
     if(isDefined(podium)) {
       podium Show();
       if(isDefined(podium.old_origin)) {
@@ -473,7 +473,7 @@ actor_end_bubbles(place) {
   wait 2.5;
   switch (place) {
     case 0:
-      if(GetPlayers().size > 1) {
+      if(getPlayers().size > 1) {
         level thread bubble_message(&"ZOMBIETRON_BUBBLE_WINNER", originX, originY, 1.5);
         self playSound("zmb_1st_vox_00");
         wait 2;
@@ -569,7 +569,7 @@ end_of_game_summary_begin() {
     players[i] setClientDvars("player_topDownCamMode", 4, "player_topDownCamCenterPos", camera_center, "player_TopDownCamAngles", camera_angles, "cg_fov", 65, "hud_drawHUD", "0", "cl_scoreDraw", "0");
   }
   hide_temple_props("end");
-  spotlight = GetEnt("temple_light_spot", "targetname");
+  spotlight = getEnt("temple_light_spot", "targetname");
   spotlight setModel("tag_origin");
   playFXOnTag(level._effect["spot_light"], spotlight, "tag_origin");
   if(isDefined(level.weatherFx)) {
@@ -588,12 +588,12 @@ end_of_game_summary_begin() {
       "r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure
     );
   }
-  players = sort_by_score(GetPlayers());
+  players = sort_by_score(getPlayers());
   pads = [];
   dudes = [];
   for(i = 0; i < players.size; i++) {
     tname = "temple_player_spot" + (i + 1);
-    padSite = GetEnt(tname, "targetname");
+    padSite = getEnt(tname, "targetname");
     if(isDefined(padSite)) {
       dudes[i] = spawn("script_model", padSite.origin);
       dudes[i].angles = padSite.angles;
@@ -632,21 +632,21 @@ end_of_game_summary_begin() {
   for(i = 0; i < players.size; i++) {
     players[i] setClientDvars("player_topDownCamOffset", offset, "player_TopDownCamAngles", camera_angles);
   }
-  playsoundatposition("zmb_fate_spawn", (0, 0, 0));
+  playSoundAtPosition("zmb_fate_spawn", (0, 0, 0));
   level thread summary_abort_watcher();
   fade_in();
   level notify("summary_ready");
   wait 7;
   prizePoint = dudes[0].origin + (0, 0, 400);
-  playsoundatposition("zmb_prize_shower", (0, 0, 0));
+  playSoundAtPosition("zmb_prize_shower", (0, 0, 0));
   level thread maps\_zombietron_pickups::spawn_uber_prizes(20 * level.zombie_vars["max_prize_inc_range"], prizePoint, true, (0, 0, 20));
   level thread maps\_zombietron_pickups::spawn_treasures(dudes[0].origin, 4, 24, true);
   wait 10;
-  apeSpot = GetEnt("temple_ape_spot", "targetname");
+  apeSpot = getEnt("temple_ape_spot", "targetname");
   playFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
-  playsoundatposition("zmb_ape_prespawn", apeSpot.origin);
+  playSoundAtPosition("zmb_ape_prespawn", apeSpot.origin);
   wait(.5);
-  playsoundatposition("zmb_ape_spawn", apeSpot.origin);
+  playSoundAtPosition("zmb_ape_spawn", apeSpot.origin);
   playFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
   wait(.5);
   playFX(level._effect["ape_lightning_spawn"], apeSpot.origin);
@@ -655,19 +655,19 @@ end_of_game_summary_begin() {
   ape.script_noteworthy = "the_ape";
   ape forceTeleport(apeSpot.origin, apeSpot.angles);
   ape.takedamage = false;
-  playsoundatposition("zmb_ape_spawn", apeSpot.origin);
-  playsoundatposition("zmb_ape_bolt", apeSpot.origin);
+  playSoundAtPosition("zmb_ape_spawn", apeSpot.origin);
+  playSoundAtPosition("zmb_ape_bolt", apeSpot.origin);
   Earthquake(0.5, 0.75, apeSpot.origin, 1000);
   level.scr_anim["ape_zombie"]["chest_beat"] = % ai_zombie_simianaut_chest_beat;
   ape thread maps\_anim::anim_single(ape, "chest_beat");
   wait 1;
   level thread bubble_message(&"ZOMBIETRON_BUBBLE_IMBACK", 320, 60, 1.5);
   wait 1.3;
-  ape anim_stopanimscripted(0.15);
+  ape anim_stopanimScripted(0.15);
   level.scr_anim["ape_zombie"]["chest_beat"] = % ai_zombie_simianaut_chest_beat;
   ape thread maps\_anim::anim_single(ape, "chest_beat");
   wait 2.3;
-  ape anim_stopanimscripted(0.15);
+  ape anim_stopanimScripted(0.15);
   Earthquake(0.5, 0.75, ape.origin, 1000);
   playFXOnTag(level._effect["boss_takeoff"], ape, "tag_origin");
   ape playSound("evt_turret_takeoff");
@@ -687,7 +687,7 @@ end_of_game_summary_begin() {
   level thread bubble_message(&"ZOMBIETRON_BUBBLE_TREASURE", 350, 120, 1.5);
   ape thread ape_you_greedy_mf(ape.origin + (0, 0, 500));
   wait 1.7;
-  ape anim_stopanimscripted(0.15);
+  ape anim_stopanimScripted(0.15);
   level.scr_anim["ape_zombie"]["chest_beat"] = % ai_zombie_simianaut_taunt;
   ape thread maps\_anim::anim_single(ape, "chest_beat");
   wait 2.9;
@@ -714,7 +714,7 @@ ape_you_greedy_mf(exit) {
 }
 end_of_game_summary_end(lastArena, old_camera_angles, old_camera_offset) {
   level waittill("end_the_summary");
-  ape = GetEnt("the_ape", "script_noteworthy");
+  ape = getEnt("the_ape", "script_noteworthy");
   if(isDefined(ape)) {
     ape delete();
   }
@@ -751,7 +751,7 @@ end_of_game_summary() {
 }
 summary_abort_watcher() {
   level endon("end_the_summary");
-  players = sort_by_score(GetPlayers());
+  players = sort_by_score(getPlayers());
   winner = players[0];
   level.skip_msg = NewHudElem(level);
   level.skip_msg.alignX = "right";

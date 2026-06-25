@@ -291,7 +291,7 @@ function_845acdea() {
 }
 
 function_d3beb9d3() {
-  attackers = getplayers(game.attackers);
+  attackers = getPlayers(game.attackers);
 
   if(attackers.size < 2) {
     return;

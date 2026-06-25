@@ -67,10 +67,10 @@ floatmyboat(clientnum, startleft, randomize) {
     }
 
     newangles = (originalangles[0] - roll, originalangles[1], originalangles[0]);
-    self servertimedrotateto(clientnum, newangles, level.servertime, time, slowdowntime, slowdowntime);
+    self servertimedrotateTo(clientnum, newangles, level.servertime, time, slowdowntime, slowdowntime);
     self waittill("rotatedone");
     newangles = (originalangles[0], originalangles[1], originalangles[0]);
-    self servertimedrotateto(clientnum, newangles, level.servertime, time, slowdowntime, slowdowntime);
+    self servertimedrotateTo(clientnum, newangles, level.servertime, time, slowdowntime, slowdowntime);
     self waittill("rotatedone");
   }
 }

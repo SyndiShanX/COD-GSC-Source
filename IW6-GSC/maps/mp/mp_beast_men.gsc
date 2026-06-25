@@ -297,12 +297,12 @@ createEyeFX(eye, fxPos) {
   if(eye == "left") {
     self.leftEyeObj = spawn("script_model", fxPos);
     self.leftEyeObj setModel("tag_origin");
-    self.leftEyeObj LinkTo(self);
+    self.leftEyeObj linkTo(self);
     self.leftEyeObj delayplayFXOnTag(level.zerosub_fx["beast"]["eyeglow"], "tag_origin", 0.05, 0.5);
   } else {
     self.rightEyeObj = spawn("script_model", fxPos);
     self.rightEyeObj setModel("tag_origin");
-    self.rightEyeObj LinkTo(self);
+    self.rightEyeObj linkTo(self);
     self.rightEyeObj delayplayFXOnTag(level.zerosub_fx["beast"]["eyeglow"], "tag_origin", 0.05, 0.5);
   }
 }

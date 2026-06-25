@@ -52,8 +52,8 @@ kick_off_betrayal_event() {
 
 main() {
   wait 0.6;
-  teleport_struct = getstruct("player_teleport_elevator", "targetname");
-  level.player setorigin(teleport_struct.origin);
+  teleport_struct = getStruct("player_teleport_elevator", "targetname");
+  level.player setOrigin(teleport_struct.origin);
   level.player setplayerangles(teleport_struct.angles);
   level.player setlowready(1);
   level thread docks_ik_headtracking_limits();
@@ -70,9 +70,9 @@ main() {
 jeep_intro_setup() {
   trigger_off("sniper_turret_trigger", "targetname");
   maps\createart\panama3_art::docks();
-  s_elevator_light_attach_marker = getstruct("elevator_light_attach_marker", "targetname");
+  s_elevator_light_attach_marker = getStruct("elevator_light_attach_marker", "targetname");
   m_elevator_light_attach_point = spawn_model("tag_origin", s_elevator_light_attach_marker.origin, s_elevator_light_attach_marker.angles);
-  m_elevator_light_attach_point linkto(getent("docks_elevator", "targetname"), "tag_origin");
+  m_elevator_light_attach_point linkTo(getEnt("docks_elevator", "targetname"), "tag_origin");
   playFXOnTag(getfx("elevator_light"), m_elevator_light_attach_point, "tag_origin");
   level.vh_player_jeep = spawn("script_model", (0, 0, 0));
   level.vh_player_jeep setModel("veh_iw_hummer_opentop");
@@ -89,8 +89,8 @@ docks_magic_rpg_setup() {
 
 docks_magic_rpg_think() {
   self waittill("trigger");
-  s_rpg_start = getstruct(self.target, "targetname");
-  s_rpg_end = getstruct(s_rpg_start.target, "targetname");
+  s_rpg_start = getStruct(self.target, "targetname");
+  s_rpg_end = getStruct(s_rpg_start.target, "targetname");
   magicbullet("rpg_magic_bullet_sp", s_rpg_start.origin, s_rpg_end.origin);
   self delete();
 }
@@ -104,7 +104,7 @@ docks_container_moment() {
   wait 2;
 
   for(i = 0; i < 6; i++) {
-    blowup_origin = getent("container_damage_points_" + (i + 1), "targetname");
+    blowup_origin = getEnt("container_damage_points_" + (i + 1), "targetname");
     radiusdamage(blowup_origin.origin, 50, 50, 100, undefined, "MOD_EXPLOSIVE");
     wait 0.2;
   }
@@ -131,7 +131,7 @@ init_docks_container_pdf_rpg() {
   self.ignoreme = 1;
   self.ignoreall = 1;
   trigger_wait("docks_rpg");
-  e_rpg_jeep_target = getent("rpg_jeep_target", "targetname");
+  e_rpg_jeep_target = getEnt("rpg_jeep_target", "targetname");
   wait 4;
   magicbullet("rpg_magic_bullet_sp", self gettagorigin("tag_flash"), e_rpg_jeep_target.origin);
 }
@@ -301,7 +301,7 @@ init_docks_frontgate_pdf() {
 jeep_unload_player() {
   self.e_jeep_door_mount = spawn("script_origin", self.origin);
   self.e_jeep_door_mount.angles = self.angles;
-  self playerlinkto(self.e_jeep_door_mount, undefined, 0, 7, 45, 15, 7);
+  self playerlinkTo(self.e_jeep_door_mount, undefined, 0, 7, 45, 15, 7);
 }
 
 jeep_drive(docks_jeep) {
@@ -393,13 +393,13 @@ elevator_ride() {
   }
 
   setmusicstate("PANAMA_ELEVATOR");
-  top_roll_door = getent("dock_top_roll_door", "targetname");
-  e_elevator = getent("docks_elevator", "targetname");
+  top_roll_door = getEnt("dock_top_roll_door", "targetname");
+  e_elevator = getEnt("docks_elevator", "targetname");
   e_elevator setmovingplatformenabled(1);
-  top_roll_door linkto(e_elevator);
-  e_elevator_move_target = getstruct("docks_elevator_move_target", "targetname");
+  top_roll_door linkTo(e_elevator);
+  e_elevator_move_target = getStruct("docks_elevator_move_target", "targetname");
   level.player playSound("evt_elevator_quad");
-  e_elevator moveto(e_elevator_move_target.origin, 5.0);
+  e_elevator moveTo(e_elevator_move_target.origin, 5.0);
   e_elevator waittill("movedone");
   level thread maps\createart\panama3_art::sniper();
   level notify("elevator_stop_top");
@@ -411,7 +411,7 @@ elevator_ride() {
   level.player setmovespeedscale(0);
   wait 3;
   level.player setmovespeedscale(1);
-  elevator_door_clip = getent("elevator_top_player_clip", "targetname");
+  elevator_door_clip = getEnt("elevator_top_player_clip", "targetname");
   elevator_door_clip delete();
   level.player thread player_walk_speed_adjustment(level.noriega, "docks_rifle_mounted", 128, 256, 0.2, 0.4);
   level.player allowsprint(0);
@@ -420,9 +420,9 @@ elevator_ride() {
 }
 
 open_bottom_elevator_door() {
-  bottom_door_bottom = getent("dock_elevator_bottom_door_bottom", "targetname");
-  bottom_door_top = getent("dock_elevator_bottom_door_top", "targetname");
-  bottom_roll = getent("dock_bottom_roll_door", "targetname");
+  bottom_door_bottom = getEnt("dock_elevator_bottom_door_bottom", "targetname");
+  bottom_door_top = getEnt("dock_elevator_bottom_door_top", "targetname");
+  bottom_roll = getEnt("dock_bottom_roll_door", "targetname");
   bottom_door_top playSound("evt_elevator_middoor");
   bottom_door_bottom movez(-74, 2);
   bottom_door_top movez(74, 2);
@@ -430,32 +430,32 @@ open_bottom_elevator_door() {
   bottom_roll playSound("evt_elevator_topdoor");
   bottom_roll movez(130, 4);
   bottom_roll waittill("movedone");
-  elevator_door_clip = getent("elevator_player_clip", "targetname");
+  elevator_door_clip = getEnt("elevator_player_clip", "targetname");
   elevator_door_clip trigger_off();
 }
 
 close_bottom_door_elevator() {
-  bottom_door_bottom = getent("dock_elevator_bottom_door_bottom", "targetname");
-  bottom_door_top = getent("dock_elevator_bottom_door_top", "targetname");
-  bottom_roll = getent("dock_bottom_roll_door", "targetname");
-  elevator_door_clip = getent("elevator_player_clip", "targetname");
+  bottom_door_bottom = getEnt("dock_elevator_bottom_door_bottom", "targetname");
+  bottom_door_top = getEnt("dock_elevator_bottom_door_top", "targetname");
+  bottom_roll = getEnt("dock_bottom_roll_door", "targetname");
+  elevator_door_clip = getEnt("elevator_player_clip", "targetname");
   trigger_wait("elevator_trigger_interior");
   elevator_door_clip trigger_on();
   bottom_door_top playSound("evt_elevator_middoor");
   bottom_door_bottom movez(74, 2);
   bottom_door_top movez(-74, 2);
   bottom_roll playSound("evt_elevator_topdoor");
-  bottom_roll = getent("dock_bottom_roll_door", "targetname");
+  bottom_roll = getEnt("dock_bottom_roll_door", "targetname");
   bottom_roll movez(-130, 4);
   bottom_roll waittill("movedone");
-  e_elevator = getent("docks_elevator", "targetname");
-  bottom_roll linkto(e_elevator);
+  e_elevator = getEnt("docks_elevator", "targetname");
+  bottom_roll linkTo(e_elevator);
 }
 
 open_top_elevator_door() {
-  top_door_bottom = getent("dock_elevator_top_door_bottom", "targetname");
-  top_door_top = getent("dock_elevator_top_door_top", "targetname");
-  top_roll = getent("dock_top_roll_door", "targetname");
+  top_door_bottom = getEnt("dock_elevator_top_door_bottom", "targetname");
+  top_door_top = getEnt("dock_elevator_top_door_top", "targetname");
+  top_roll = getEnt("dock_top_roll_door", "targetname");
   top_roll unlink();
   top_door_top playSound("evt_elevator_middoor");
   top_door_bottom movez(-74, 2);
@@ -637,9 +637,9 @@ is_fatal_shot() {
 #using_animtree("player");
 
 betrayed_event() {
-  mason_prisoner = getent("mason_prisoner_ai", "targetname");
+  mason_prisoner = getEnt("mason_prisoner_ai", "targetname");
   mason_prisoner_weapon = spawn_model("t6_wpn_pistol_m1911_world", mason_prisoner gettagorigin("tag_weapon_right"), mason_prisoner gettagangles("tag_weapon_right"));
-  mason_prisoner_weapon linkto(mason_prisoner, "tag_weapon_right");
+  mason_prisoner_weapon linkTo(mason_prisoner, "tag_weapon_right");
   wait 2;
   level thread screen_fade_in(0.5);
   end_scene("noriega_idle_woods_snipe");
@@ -703,7 +703,7 @@ start_hearbeat() {
   wait 1;
 
   while(true) {
-    level.player playrumbleonentity("heartbeat_low");
+    level.player playRumbleOnEntity("heartbeat_low");
     wait(randomfloatrange(0.75, 1.25));
   }
 }
@@ -778,9 +778,9 @@ sniper_dialog() {
 dock_rumble() {
   level.player playrumblelooponentity("angola_hind_ride");
   flag_wait("jeep_fence_crash");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 10.5;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   scene_wait("player_jeep_rail");
   level.player stoprumble("angola_hind_ride");
   flag_wait("docks_entering_elevator");
@@ -790,11 +790,11 @@ dock_rumble() {
 }
 
 start_fire_work() {
-  rotator = getent("the_great_rotator", "targetname");
+  rotator = getEnt("the_great_rotator", "targetname");
   spawners = getEntArray("firework_spawner", "script_noteworthy");
 
   for(i = 0; i < spawners.size; i++) {
-    spawners[i] linkto(rotator);
+    spawners[i] linkTo(rotator);
   }
 
   while(true) {

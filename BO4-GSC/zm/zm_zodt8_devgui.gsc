@@ -168,12 +168,12 @@ function_853d8116() {
 }
 
 craft_distiller() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   namespace_4a807bff::function_8498110e(a_e_players[0]);
 }
 
 function_a368f5ed(var_99416cd7) {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     switch (var_99416cd7) {
@@ -194,7 +194,7 @@ function_a368f5ed(var_99416cd7) {
 }
 
 give_flare(str_color) {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     switch (str_color) {
@@ -216,7 +216,7 @@ function_51855e65(round_number) {
   round_index = round_number - 1;
   assert(round_index >= 0 && round_index < 30);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_score::set_player_score(var_efac84b3[round_index]);
   }
 
@@ -238,7 +238,7 @@ function_51855e65(round_number) {
       }
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_devgui::zombie_devgui_weapon_give("<dev string:x689>");
     }
   }

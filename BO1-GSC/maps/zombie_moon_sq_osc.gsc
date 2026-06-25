@@ -19,7 +19,7 @@ init() {
     wait(1.0);
     return;
   }
-  level._osc_struct = getstruct("struct_sq_osc", "targetname");
+  level._osc_struct = getStruct("struct_sq_osc", "targetname");
   if(!isDefined(level._osc_struct)) {
     PrintLn("$$$$ missing _osc_struct, need bsp $$$$");
     wait(1.0);
@@ -45,7 +45,7 @@ init() {
     level._osc_st[k].focus.height = 48;
     level._osc_st[k].focus.script_float = 5;
     level._osc_st[k].focus.script_int = 0;
-    level._osc_st[k].focus._light_spot = getstruct(level._osc_st[k].target, "targetname");
+    level._osc_st[k].focus._light_spot = getStruct(level._osc_st[k].target, "targetname");
   }
   level._osc_min_dist = level._osc_struct.script_wait_min;
   level._osc_max_dist = level._osc_struct.script_wait_max;
@@ -62,7 +62,7 @@ init() {
     }
     level._osc_trial_time = level._osc_struct.script_int;
   }
-  level._osc_cap_spot = getstruct("struct_cover", "targetname");
+  level._osc_cap_spot = getStruct("struct_cover", "targetname");
   level._osc_cap = spawn("script_model", level._osc_cap_spot.origin);
   level._osc_cap.angles = level._osc_cap_spot.angles;
   level._osc_cap setModel("p_zom_moon_py_glyph_dial_cap");
@@ -73,7 +73,7 @@ init() {
 osc_button_cover_setup() {
   flag_wait("all_players_connected");
   for(i = 0; i < level._osc_rbs.size; i++) {
-    osc_target = getstruct(level._osc_rbs[i].target, "targetname");
+    osc_target = getStruct(level._osc_rbs[i].target, "targetname");
     level._osc_rbs[i].cover = spawn("script_model", osc_target.origin);
     level._osc_rbs[i].cover.angles = osc_target.angles;
     level._osc_rbs[i].cover setModel("p_zom_moon_button_console_lid");
@@ -111,7 +111,7 @@ moon_rb_dist_think() {
   level endon("stop_dist_think");
   level._lid_close_sound = 0;
   int_close = 0;
-  dist_struct = getstruct("struct_rb_dist_check", "targetname");
+  dist_struct = getStruct("struct_rb_dist_check", "targetname");
   while(!flag(level._osc_flags[1])) {
     level._osc_check = get_closest_player(dist_struct.origin);
     int_distance = Distance2D(level._osc_check.origin, dist_struct.origin);
@@ -296,7 +296,7 @@ moon_open_access() {
   for(i = 0; i < level._osc_rbs.size; i++) {
     trig = spawn("trigger_radius_use", level._osc_rbs[i].origin, 0, 48, 32);
     trig.radius = 48;
-    trig SetCursorHint("HINT_NOICON");
+    trig setCursorHint("HINT_NOICON");
     trig._hit_already = 0;
     trig thread moon_hit_reaction();
     button_triggers = add_to_array(button_triggers, trig, false);
@@ -377,7 +377,7 @@ play_moon_jolie_access_vox(who) {
   }
 }
 play_moon_pass_vox(who) {
-  playsoundatposition("vox_mcomp_quest_step5_26", self.origin);
+  playSoundAtPosition("vox_mcomp_quest_step5_26", self.origin);
   for(i = 0; i < level._osc_rbs.size; i++) {
     level._osc_rbs[i].cover playSound("vox_mcomp_quest_step5_26", "rbs_sounddone");
   }

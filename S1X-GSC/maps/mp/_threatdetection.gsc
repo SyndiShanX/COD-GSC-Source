@@ -412,7 +412,7 @@ visitorRelink(member, player, bone) {
   member Unlink();
   member.origin = self GetTagOrigin(bone);
   member.angles = self GetTagAngles(bone);
-  member LinkTo(self, bone);
+  member linkTo(self, bone);
   wait .05;
   playFXOnTag(member.fx, member, "tag_origin");
 }
@@ -568,7 +568,7 @@ accessAllMarkers(obj) {
 }
 
 getNormalDirectionVec(raw_vec) {
-  return VectorNormalize(flat_origin(raw_vec));
+  return vectorNormalize(flat_origin(raw_vec));
 }
 
 monitorThreatHighlight() {
@@ -751,7 +751,7 @@ threat_init(threatStyle) {
       tag_org show();
       tag_org.origin = self GetTagOrigin(fx[0]);
       tag_org.angles = self GetTagAngles(fx[0]);
-      tag_org LinkTo(self, fx[0]);
+      tag_org linkTo(self, fx[0]);
       tag_org.fx = fx[1];
 
       mark_fx_struct.fx_ent[i] = tag_org;

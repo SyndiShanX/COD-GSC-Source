@@ -355,7 +355,7 @@ func_2AA4() {
     var_00.var_1D = var_01.var_1D;
     var_00 notsolid();
     var_00 method_805C();
-    var_00 linkto(var_01);
+    var_00 linkTo(var_01);
     self.var_2AA4 = var_00;
   } else {
     self.var_2AA4 setModel(self.var_106);

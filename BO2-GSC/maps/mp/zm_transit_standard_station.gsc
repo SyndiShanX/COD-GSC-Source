@@ -16,7 +16,7 @@ precache() {
 }
 
 station_treasure_chest_init() {
-  chest1 = getstruct("depot_chest", "script_noteworthy");
+  chest1 = getStruct("depot_chest", "script_noteworthy");
   level.chests = [];
   level.chests[level.chests.size] = chest1;
   maps\mp\zombies\_zm_magicbox::treasure_chest_init("depot_chest");
@@ -28,7 +28,7 @@ main() {
   level.enemy_location_override_func = ::enemy_location_override;
   collision = spawn("script_model", (-6896, 4744, 0), 1);
   collision setModel("zm_collision_transit_busdepot_survival");
-  collision disconnectpaths();
+  collision disconnectPaths();
   flag_wait("initial_blackscreen_passed");
   level thread maps\mp\zombies\_zm_perks::perk_machine_removal("specialty_quickrevive", "p_glo_tools_chest_tall");
   flag_set("power_on");

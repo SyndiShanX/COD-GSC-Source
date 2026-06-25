@@ -102,9 +102,9 @@ _id_D88B(var_0, var_1) {
   var_3[1].origin = var_13;
   level._id_9AC7 = vectordot(var_12 - var_13, var_10);
   level._id_9AB1 = var_3;
-  level._id_9AB1[0].angles = _func_030A(vectornormalize(level._id_9AB1[1].origin - level._id_9AB1[0].origin), (0, 0, 1));
+  level._id_9AB1[0].angles = _func_030A(vectorNormalize(level._id_9AB1[1].origin - level._id_9AB1[0].origin), (0, 0, 1));
   level._id_9AB1[0] _meth_8004(45.0);
-  level._id_9AB1[1].angles = _func_030A(vectornormalize(level._id_9AB1[0].origin - level._id_9AB1[1].origin), (0, 0, 1));
+  level._id_9AB1[1].angles = _func_030A(vectorNormalize(level._id_9AB1[0].origin - level._id_9AB1[1].origin), (0, 0, 1));
   level._id_9AB1[1] _meth_8004(45.0);
 
   if(!isDefined(var_1) || var_1 < 1) {

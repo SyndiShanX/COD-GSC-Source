@@ -129,7 +129,7 @@ attachmurderbotweapons() {
   var_1.angles = self gettagangles("TAG_WEAPON_RIGHT");
   var_2 = randomint(var_0.size);
   var_1 setModel(var_0[var_2]);
-  var_1 linkto(self, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   maps\mp\zombies\_util::playfxontagnetwork(common_scripts\utility::getfx("murderbot_melee_sparks"), var_1, "tag_sparks");
   self.murderbotweapon = var_1;
 }
@@ -150,7 +150,7 @@ setupmurderbotstate() {
   self.meleeradiusbase = 60;
   self.meleeradiusbasesq = squared(self.meleeradiusbase);
   self.defaultgoalradius = self.radius + 1;
-  self scragentsetgoalradius(self.defaultgoalradius);
+  self scragentsetgoalRadius(self.defaultgoalradius);
   self.meleedot = 0.5;
   maps\mp\agents\humanoid\_humanoid_util::lungemeleeupdate(1.0, self.meleeradiusbase * 2, self.meleeradiusbase * 1.5, "attack_lunge_boost", level._effect["boost_lunge"]);
   maps\mp\agents\humanoid\_humanoid_util::lungemeleeenable();
@@ -393,7 +393,7 @@ killgoliath(var_0, var_1, var_2, var_3) {
 }
 
 killenemy(var_0, var_1) {
-  var_2 = vectornormalize((self.origin - var_0.origin) * (1, 1, 0));
+  var_2 = vectorNormalize((self.origin - var_0.origin) * (1, 1, 0));
   var_3["enemy"] = var_0;
   var_3["direction"] = var_2;
   var_3["event"] = var_1;
@@ -531,7 +531,7 @@ updatemurderbotlerppos(var_0, var_1, var_2, var_3) {
       var_9 = var_7 - var_4;
 
       if(lengthsquared(var_9) > var_8 * var_8) {
-        var_7 = var_4 + vectornormalize(var_9) * var_8;
+        var_7 = var_4 + vectorNormalize(var_9) * var_8;
       }
     }
 

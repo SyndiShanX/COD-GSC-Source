@@ -98,7 +98,7 @@ getClosestStartNode(pos) {
 }
 
 createHeli(owner, startNode, closestNode, startAng, streakName, lifeId) {
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
   pathGoal = closestNode.origin;
 
   forward = anglesToForward(startAng);
@@ -183,7 +183,7 @@ getBestHeight(centerPoint) {
   self endon("helicopter_removed");
   self endon("heightReturned");
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];

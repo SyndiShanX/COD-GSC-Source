@@ -462,13 +462,13 @@ player_delete_flag_goal_fx(var_0) {
 }
 
 getflagpos(var_0) {
-  var_1 = getent("ctf_flag_" + var_0, "targetname");
+  var_1 = getEnt("ctf_flag_" + var_0, "targetname");
   return var_1.origin;
 }
 
 createteamflag(var_0, var_1) {
   var_2 = 0;
-  var_3 = getent("ctf_zone_" + var_1, "targetname");
+  var_3 = getEnt("ctf_zone_" + var_1, "targetname");
   if(!isDefined(var_3)) {
     var_4 = flag_create_team_goal(var_0);
     var_3 = spawn("trigger_radius", var_4.origin - (0, 0, var_4.fgetarg / 2), 0, var_4.fgetarg, 80);
@@ -480,7 +480,7 @@ createteamflag(var_0, var_1) {
     var_5[0] setasgametypeobjective();
     var_5[0] setteaminhuddatafromteamname(var_1);
   } else {
-    var_5[0] = getent("ctf_flag_" + var_2, "targetname");
+    var_5[0] = getEnt("ctf_flag_" + var_2, "targetname");
   }
 
   if(!isDefined(var_5[0])) {}
@@ -596,7 +596,7 @@ createteamflagbase(var_0, var_1) {
 
 createcapzone(var_0, var_1) {
   var_2 = flag_create_team_goal(var_0);
-  var_3 = getent("ctf_zone_" + var_1, "targetname");
+  var_3 = getEnt("ctf_zone_" + var_1, "targetname");
   if(!isDefined(var_3)) {
     var_3 = spawn("trigger_radius", var_2.origin - (0, 0, var_2.fgetarg / 2), 0, var_2.fgetarg, 80);
     var_3.no_moving_platfrom_unlink = 1;

@@ -48,7 +48,7 @@ function security_camera_precache() {
 }
 
 function security_camera_main() {
-  var_38907d67 = getent("t_regroup_security_camera", "targetname");
+  var_38907d67 = getEnt("t_regroup_security_camera", "targetname");
   var_38907d67 triggerenable(0);
   exploder::exploder("light_exploder_torture_rooms");
   level thread cp_prologue_util::function_950d1c3b(1);
@@ -161,7 +161,7 @@ function turn_off_security_cameras() {
 
 function activate_player_video_screens(var_3675dd99, str_player_use_struct, extra_cam_index) {
   s_player_use = struct::get(str_player_use_struct, "targetname");
-  t_interact = getent(var_3675dd99, "targetname");
+  t_interact = getEnt(var_3675dd99, "targetname");
   t_interact triggerenable(0);
   level waittill("hash_af8926a2");
   level.var_ab82ba6d = 0;
@@ -234,7 +234,7 @@ function player_uses_the_security_camera_station(s_player_use, extra_cam_index) 
   level thread namespace_21b2c1f2::function_973b77f9();
   level.minister_located = 1;
   level notify("minister_located");
-  var_38907d67 = getent("t_regroup_security_camera", "targetname");
+  var_38907d67 = getEnt("t_regroup_security_camera", "targetname");
   var_38907d67 triggerenable(1);
   snd_key delete();
   s_align_struct scene::play(str_anim_outro, self);
@@ -550,19 +550,19 @@ function function_d6557dc4(a_ents) {
 
 function function_2b60c70b(a_ents) {
   level waittill("hash_55529da");
-  var_fc54e080 = getent("security_control_room_blocker", "targetname");
+  var_fc54e080 = getEnt("security_control_room_blocker", "targetname");
   var_fc54e080 notsolid();
-  var_3c301126 = getent("security_camera_door_r", "targetname");
-  var_280d5f68 = getent("security_camera_door_l", "targetname");
+  var_3c301126 = getEnt("security_camera_door_r", "targetname");
+  var_280d5f68 = getEnt("security_camera_door_l", "targetname");
   var_280d5f68 movey(52, 0.75, 0.25, 0);
   var_3c301126 movey(52 * -1, 0.75, 0.25, 0);
-  playsoundatposition("evt_securityroom_door_open", (3464, -313, -263));
+  playSoundAtPosition("evt_securityroom_door_open", (3464, -313, -263));
   level waittill("hash_cfa80fd0");
   trigger::wait_till("close_security_door_trig");
   var_fc54e080 solid();
   var_280d5f68 movey(52 * -1, 0.75, 0.25, 0);
   var_3c301126 movey(52, 0.75, 0.25, 0);
-  playsoundatposition("evt_securityroom_door_close", (3464, -313, -263));
+  playSoundAtPosition("evt_securityroom_door_close", (3464, -313, -263));
 }
 
 function function_fef03d1c() {

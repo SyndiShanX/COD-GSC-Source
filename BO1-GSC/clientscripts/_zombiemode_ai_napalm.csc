@@ -153,7 +153,7 @@ _zombie_SetupFXOnJoint(client_num, jointName, fxName, offset) {
   if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
-  effectEnt LinkTo(self, jointName, offset);
+  effectEnt linkTo(self, jointName, offset);
   playFXOnTag(client_num, level._effect[fxName], effectEnt, "tag_origin");
   return effectEnt;
 }

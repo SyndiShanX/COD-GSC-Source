@@ -6,24 +6,24 @@
 
 main() {
   level._sea_scale = 1;
-  level.sea_model = getent("sea", "targetname");
+  level.sea_model = getEnt("sea", "targetname");
   level._sea_org = spawn("script_origin", level.sea_model.origin);
   level._sea_org.offset = level.sea_model.origin * -1;
   level._sea_org.sway = "sway2";
   level._sea_link = spawn("script_origin", level.sea_model.origin);
   level._sea_link.offset = level._sea_org.offset;
-  level.sea_model linkto(level._sea_link);
-  level.sea_foam = getent("sea_foam", "targetname");
+  level.sea_model linkTo(level._sea_link);
+  level.sea_foam = getEnt("sea_foam", "targetname");
 
   if(isDefined(level.sea_foam)) {
-    level.sea_foam linkto(level._sea_link);
+    level.sea_foam linkTo(level._sea_link);
     level.sea_foam hide();
   }
 
-  level.sea_black = getent("sea_black", "targetname");
+  level.sea_black = getEnt("sea_black", "targetname");
 
   if(isDefined(level.sea_black)) {
-    level.sea_black linkto(level._sea_link);
+    level.sea_black linkTo(level._sea_link);
   }
 
   common_scripts\utility::flag_init("_sea_waves");
@@ -104,7 +104,7 @@ sea_objectbob(var_0) {
     var_1 = getEntArray(self.targetname, "target");
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_1[var_2] linkto(self);
+      var_1[var_2] linkTo(self);
     }
   }
 
@@ -186,7 +186,7 @@ sea_objectbob(var_0) {
   }
 
   wait 0.05;
-  self linkto(var_6);
+  self linkTo(var_6);
 
   if(isDefined(self.script_parameters)) {}
 
@@ -206,7 +206,7 @@ sea_objectbob_logic(var_0, var_1) {
       wait(var_1.waittime);
     }
 
-    var_1 rotateto(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
+    var_1 rotateTo(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
 
     if(var_0.sway == "sway1") {
       var_0 waittill("sway2");
@@ -219,13 +219,13 @@ sea_objectbob_logic(var_0, var_1) {
       wait(var_1.waittime);
     }
 
-    var_1 rotateto(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
+    var_1 rotateTo(var_1.ang, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
   }
 }
 
 sea_objectbob_follow(var_0) {
   for(;;) {
-    self moveto(var_0.origin, 0.1);
+    self moveTo(var_0.origin, 0.1);
     wait 0.1;
   }
 }
@@ -234,7 +234,7 @@ sea_objectbob_findparent(var_0, var_1) {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0.parent = getent(self.target, "targetname");
+  var_0.parent = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0.parent.link)) {
     var_0.parent waittill("got_link");
@@ -246,16 +246,16 @@ sea_objectbob_findparent(var_0, var_1) {
   var_4.angles = var_2.angles;
   var_5 = spawn("script_origin", var_0.origin);
   var_5.angles = var_0.angles;
-  var_5 linkto(var_4);
+  var_5 linkTo(var_4);
   var_0 thread sea_objectbob_follow(var_5);
 
   for(;;) {
     var_2 waittill("precalcdone1");
     wait(var_2.waittime - 0.05);
-    var_4 rotateto(var_2.ang, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
+    var_4 rotateTo(var_2.ang, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
     var_2 waittill("precalcdone2");
     wait(var_2.waittime - 0.05);
-    var_4 rotateto(var_2.ang, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
+    var_4 rotateTo(var_2.ang, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
   }
 }
 
@@ -275,10 +275,10 @@ sea_bob() {
     self notify("sway1");
 
     if(common_scripts\utility::flag("_sea_bob")) {
-      level._sea_link rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
+      level._sea_link rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     }
 
-    self rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
+    self rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     level.heli.heightsea = 110;
     soundscripts\_snd::snd_message("aud_start_sway1");
     wait(self.time);
@@ -287,10 +287,10 @@ sea_bob() {
     self notify("sway2");
 
     if(common_scripts\utility::flag("_sea_bob")) {
-      level._sea_link rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
+      level._sea_link rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     }
 
-    self rotateto(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
+    self rotateTo(self.rotation, self.time, self.time * 0.5, self.time * 0.5);
     level.heli.heightsea = 180;
     soundscripts\_snd::snd_message("aud_start_sway2");
     wait(self.time);
@@ -310,7 +310,7 @@ sea_bob_reset() {
   level endon("_sea_bob");
   var_0 = 1.5;
   var_1 = (0, 0, 0);
-  level._sea_link rotateto(var_1, var_0, var_0 * 0.5, var_0 * 0.5);
+  level._sea_link rotateTo(var_1, var_0, var_0 * 0.5, var_0 * 0.5);
   wait(var_0);
   wait 0.05;
   level.new_lite_settings = level.lite_settings;
@@ -401,7 +401,7 @@ sea_closestwavelogic(var_0, var_1) {
 
 sea_waves_setup() {
   var_0 = common_scripts\utility::getStructArray("wave_fx", "targetname");
-  var_1 = common_scripts\utility::getstruct("wave_fx_center", "targetname");
+  var_1 = common_scripts\utility::getStruct("wave_fx_center", "targetname");
 
   if(!var_0.size) {
     return undefined;

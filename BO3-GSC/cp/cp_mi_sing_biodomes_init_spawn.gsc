@@ -99,7 +99,7 @@ function spawn_infil_zones() {
 }
 
 function handle_role_assignment(handler_struct) {
-  defend_volume = getent("street_battle_volume", "targetname");
+  defend_volume = getEnt("street_battle_volume", "targetname");
   if(isDefined(level.free_targeting) || isDefined(level.target_volume)) {
     if(isDefined(self.script_noteworthy) && self.script_noteworthy != "wasp_swarm" && self.script_noteworthy != "hunter_swarm") {
       self.target = undefined;
@@ -191,7 +191,7 @@ function script_scene_setup(align_node, handler_struct) {
   if(isDefined(self.target)) {
     node = getnode(self.target, "targetname");
     if(isDefined(node)) {} else {
-      defend_volume = getent(self.target, "targetname");
+      defend_volume = getEnt(self.target, "targetname");
     }
   } else {
     if(isDefined(handler_struct.height)) {

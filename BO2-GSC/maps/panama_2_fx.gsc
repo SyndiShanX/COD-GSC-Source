@@ -209,7 +209,7 @@ spinning(num) {
 
   while(true) {
     if(isDefined(self)) {
-      self rotateyaw(360, 1);
+      self rotateYaw(360, 1);
       wait 1;
     }
   }

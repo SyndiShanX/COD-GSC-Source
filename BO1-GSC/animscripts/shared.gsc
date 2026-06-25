@@ -622,7 +622,7 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
       }
       break;
     case "stop anim":
-      anim_stopanimscripted();
+      anim_stopanimScripted();
       return note;
     default:
       if(isDefined(customFunction)) {
@@ -801,7 +801,7 @@ noteTrackFireSpray(note, flagName) {
   dir = anglesToForward(self GetTagAngles("tag_weapon"));
   hitenemy = false;
   if(IsSentient(self.enemy) && IsAlive(self.enemy) && self canShoot(self.enemy GetShootAtPos())) {
-    enemydir = VectorNormalize(self.enemy getEye() - weaporig);
+    enemydir = vectorNormalize(self.enemy getEye() - weaporig);
     if(vectordot(dir, enemydir) > cos(10)) {
       hitenemy = true;
     }
@@ -917,7 +917,7 @@ trackLoop() {
   self.aimAngleOffset = 0;
   self.pitchAngleOffset = 0;
   self waittill("trackLoopStart");
-  players = GetPlayers();
+  players = getPlayers();
   prevYawDelta = 0;
   prevPitchDelta = 0;
   prevAim2 = self.a.aim_2;

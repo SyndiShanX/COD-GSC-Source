@@ -4,7 +4,7 @@
 *************************************************/
 
 _id_7F50() {
-  level._id_E69A = scripts\engine\utility::getstruct("damage_starting_door", "script_noteworthy");
+  level._id_E69A = scripts\engine\utility::getStruct("damage_starting_door", "script_noteworthy");
 
   if(!isDefined(level._id_E69A)) {
     return;
@@ -211,7 +211,7 @@ _id_C436(var_0) {
   var_0 unlink();
 
   if(isDefined(var_0 _meth_812D(var_0.origin))) {
-    var_0 setorigin(var_0 _meth_812D(var_0.origin));
+    var_0 setOrigin(var_0 _meth_812D(var_0.origin));
   }
 
   var_0._id_B5A4 delete();
@@ -778,13 +778,13 @@ _id_25F7(var_0, var_1) {
   thread _id_10BD6(var_0);
   var_0._id_9515 = var_0 scripts\engine\utility::spawn_tag_origin();
   var_0 playerlinktodelta(var_0._id_9515, "tag_origin", 1, 0, 0, 0, 0, 0);
-  var_0._id_9515 moveto(var_1.origin, 0.25, 0.1, 0.1);
+  var_0._id_9515 moveTo(var_1.origin, 0.25, 0.1, 0.1);
 
   if(!isDefined(var_1.angles)) {
     var_1.angles = (0, 0, 0);
   }
 
-  var_0._id_9515 rotateto(var_1.angles, 0.25, 0.1, 0.1);
+  var_0._id_9515 rotateTo(var_1.angles, 0.25, 0.1, 0.1);
   var_0 setstance("stand");
   wait 0.29;
 
@@ -968,22 +968,22 @@ _id_40A6(var_0, var_1, var_2) {
 
   if(var_0._id_2B6B == 1) {
     if(distance(var_0.origin, var_1.origin) > 3) {
-      var_0._id_9515 moveto((var_1.origin + var_0.origin) / 2, 0.25, 0.05, 0.05);
+      var_0._id_9515 moveTo((var_1.origin + var_0.origin) / 2, 0.25, 0.05, 0.05);
     } else {
-      var_0._id_9515 moveto(var_1.origin, 0.25, 0.05, 0.05);
+      var_0._id_9515 moveTo(var_1.origin, 0.25, 0.05, 0.05);
     }
 
     var_3 = _id_6C5B(var_1, var_0);
-    var_0._id_9515 rotateto(var_3, 0.25, 0.05, 0.05);
+    var_0._id_9515 rotateTo(var_3, 0.25, 0.05, 0.05);
   } else if(var_0._id_2B6B == 2) {
     if(distance(var_0.origin, var_1.origin) > 3) {
-      var_0._id_9515 moveto((var_1.origin + var_0.origin) / 2, 0.25, 0.05, 0.05);
+      var_0._id_9515 moveTo((var_1.origin + var_0.origin) / 2, 0.25, 0.05, 0.05);
     } else {
-      var_0._id_9515 moveto(var_1.origin, 0.25, 0.05, 0.05);
+      var_0._id_9515 moveTo(var_1.origin, 0.25, 0.05, 0.05);
     }
 
     var_3 = _id_6C5B(var_1, var_0);
-    var_0._id_9515 rotateto(var_3, 0.25, 0.05, 0.05);
+    var_0._id_9515 rotateTo(var_3, 0.25, 0.05, 0.05);
   }
 
   var_0 setstance("stand");

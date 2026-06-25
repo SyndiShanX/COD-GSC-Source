@@ -59,17 +59,17 @@ mortar_script() {
 
 train_car_fall(var_0) {
   common_scripts\utility::flag_wait("train_fall");
-  var_1 = getent("traincar_fall", "targetname");
-  var_2 = getent("traincar_fall_col", "targetname");
-  var_3 = common_scripts\utility::getstruct("traincar_fall_to", "targetname");
+  var_1 = getEnt("traincar_fall", "targetname");
+  var_2 = getEnt("traincar_fall_col", "targetname");
+  var_3 = common_scripts\utility::getStruct("traincar_fall_to", "targetname");
   var_1 rotatepitch(-10, 1, 0.25, 0.5);
   var_2 rotatepitch(-10, 1, 0.25, 0.5);
   earthquake(0.4, 0.5, level.player.origin, 512);
   playrumbleonposition("damage_heavy", var_3.origin);
   wait 2;
   iprintlnbold("IT'S COMING DOWN!");
-  var_1 moveto(var_3.origin, 2, 0.25, 1);
-  var_2 moveto(var_3.origin, 2, 0.25, 1);
+  var_1 moveTo(var_3.origin, 2, 0.25, 1);
+  var_2 moveTo(var_3.origin, 2, 0.25, 1);
   wait 1;
   earthquake(0.4, 0.5, level.player.origin, 512);
   playrumbleonposition("damage_heavy", var_3.origin);

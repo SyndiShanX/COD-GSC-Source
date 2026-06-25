@@ -94,7 +94,7 @@ deployempturret(emp) {
 
 doneempfx(fxtagorigin) {
   playFX(#"killstreaks/fx_emp_exp_death", fxtagorigin);
-  playsoundatposition(#"mpl_emp_turret_deactivate", fxtagorigin);
+  playSoundAtPosition(#"mpl_emp_turret_deactivate", fxtagorigin);
 }
 
 playempfx() {

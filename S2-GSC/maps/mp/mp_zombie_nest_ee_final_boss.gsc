@@ -46,7 +46,7 @@ func_785A() {
   } else {
     thread func_0C34();
     if(1) {
-      var_04 = getent("hilt_altar_model", "targetname");
+      var_04 = getEnt("hilt_altar_model", "targetname");
       if(isDefined(var_04)) {
         var_05 = lib_0557::func_782F(undefined, var_04);
         lib_0557::func_781D("8A The Hilt", var_05);
@@ -63,7 +63,7 @@ func_785B() {
     maps\mp\_utility::func_2CED(2, ::lib_0555::func_83DD, "nest_no_return", var_01);
   }
 
-  var_03 = getent("hilt_altar_model", "targetname");
+  var_03 = getEnt("hilt_altar_model", "targetname");
   if(isDefined(var_03)) {
     var_04 = lib_0557::func_782F(undefined, var_03);
     lib_0557::func_781D("8A The Hilt", var_04);
@@ -347,10 +347,10 @@ func_8A09() {
 }
 
 func_8A0A() {
-  self.var_3ACE = getent("brute_boss_agent_interact", "targetname");
-  self.var_3ACE enablelinkto();
+  self.var_3ACE = getEnt("brute_boss_agent_interact", "targetname");
+  self.var_3ACE enablelinkTo();
   self.var_3ACE method_8449(self);
-  self.var_3ACE sethintstring(&"ZOMBIES_EMPTY_STRING");
+  self.var_3ACE setHintString(&"ZOMBIES_EMPTY_STRING");
 }
 
 func_2E81() {
@@ -737,7 +737,7 @@ func_310A() {
   var_06 setModel("zom_brute_b_base");
   var_07 = spawn("script_model", (0, 0, 0));
   var_07 setModel("zom_klaus_wholebody");
-  var_07 linkto(var_06, "tag_origin");
+  var_07 linkTo(var_06, "tag_origin");
   var_08 = spawn("script_model", (0, 0, 0));
   var_08 setModel("zmb_rock_intro_02");
   foreach(var_0A in level.var_744A) {
@@ -770,7 +770,7 @@ func_310A() {
     var_0A method_848D();
     var_0A method_8003();
     var_0A method_8322();
-    var_0A setorigin(level.var_7317 gettagorigin("tag_player"));
+    var_0A setOrigin(level.var_7317 gettagorigin("tag_player"));
     var_0A setangles(level.var_7317 gettagangles("tag_player"));
     var_0A playerlinktoabsolute(level.var_7317, "tag_player");
     var_0A lib_0547::func_8A6D(1);
@@ -982,7 +982,7 @@ func_5CCA(param_00) {
     }
   }
 
-  var_0E = getent("brute_debris_floor_clip", "targetname");
+  var_0E = getEnt("brute_debris_floor_clip", "targetname");
   var_0E solid();
   var_0E method_8060();
   var_0F = getEntArray("brute_exit_blocker_village_gallows", "targetname");
@@ -991,7 +991,7 @@ func_5CCA(param_00) {
     var_08 method_8060();
   }
 
-  var_12 = getent("brute_exit_blocker_tower_path", "targetname");
+  var_12 = getEnt("brute_exit_blocker_tower_path", "targetname");
   var_12 method_805C();
   var_0E notsolid();
 }
@@ -1067,12 +1067,12 @@ func_5F28() {
     }
   }
 
-  var_0C = getent("brute_exit_blocker_tower_path", "targetname");
+  var_0C = getEnt("brute_exit_blocker_tower_path", "targetname");
   var_0C method_805B();
 }
 
 func_1CB7() {
-  var_00 = getent("brute_debris_floor_clip", "targetname");
+  var_00 = getEnt("brute_debris_floor_clip", "targetname");
   var_00 solid();
   var_00 method_8060();
 }
@@ -1082,7 +1082,7 @@ func_83DF() {
   level.var_1CBB = var_00;
   for(var_01 = 0; var_01 < level.var_744A.size; var_01++) {
     level.var_744A[var_01].var_763C = level.var_744A[var_01].var_0116;
-    level.var_744A[var_01] setorigin(var_00[var_01].var_0116);
+    level.var_744A[var_01] setOrigin(var_00[var_01].var_0116);
     level.var_744A[var_01] setangles(var_00[var_01].var_001D);
     level.var_744A[var_01] unlink();
     level.var_744A[var_01] method_8323();
@@ -1096,7 +1096,7 @@ func_83E0(param_00) {
   maps\mp\gametypes\zombies::func_7E57();
   var_01 = common_scripts\utility::func_46B7("klaus_player_pos", "targetname");
   for(var_02 = 0; var_02 < level.var_744A.size; var_02++) {
-    level.var_744A[var_02] setorigin(var_01[var_02].var_0116);
+    level.var_744A[var_02] setOrigin(var_01[var_02].var_0116);
     var_03 = param_00.var_0116 - level.var_744A[var_02] getEye();
     level.var_744A[var_02] setangles(vectortoangles(var_03));
     level.var_744A[var_02] allowmovement(0);

@@ -42,7 +42,7 @@ bot_killstreak_remote_control(var_0, var_1, var_2, var_3, var_4) {
   var_7 = undefined;
 
   if(isDefined(self.node_ambushing_from)) {
-    var_8 = self botgetscriptgoalradius();
+    var_8 = self botgetscriptgoalRadius();
     var_9 = distancesquared(self.origin, self.node_ambushing_from.origin);
 
     if(var_9 < squared(var_8)) {

@@ -945,7 +945,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
   if(isDefined(node.target)) {
     temp = [[get_target_func]](node.target);
     if(temp.size == 1) {
-      vec = vectornormalize(temp[0].origin - node.origin);
+      vec = vectorNormalize(temp[0].origin - node.origin);
     } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
@@ -954,7 +954,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
   vec2 = [];
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    vec2[vec2.size] = vectornormalize((player.origin - self.origin));
+    vec2[vec2.size] = vectorNormalize((player.origin - self.origin));
   }
   for(i = 0; i < vec2.size; i++) {
     value = vec2[i];
@@ -1436,12 +1436,12 @@ friendly_mg42_death_notify(guy, mg42) {
 friendly_mg42_wait_for_use(mg42) {
   mg42 endon("friendly_finished_using_mg42");
   self.useable = true;
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self setHintString(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
   println("^a was used by player, stop using turret");
   self.useable = false;
-  self SetHintString("");
+  self setHintString("");
   self StopUSeturret();
   self notify("stopped_use_turret");
   mg42 notify("friendly_finished_using_mg42");
@@ -1514,7 +1514,7 @@ friendly_mg42_think(mg42, node) {
   self thread friendly_mg42_cleanup(mg42);
   self USeturret(mg42);
   if(isDefined(mg42.target)) {
-    stoptrigger = GetEnt(mg42.target, "targetname");
+    stoptrigger = getEnt(mg42.target, "targetname");
     if(isDefined(stoptrigger)) {
       stoptrigger thread friendly_mg42_endtrigger(mg42, self);
     }

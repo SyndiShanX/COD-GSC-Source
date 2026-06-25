@@ -51,7 +51,7 @@ __init__() {
 __main__() {
   level.var_f92c8836 = struct::get_array("lighthouse_trap_switch", "script_noteworthy");
   array::run_all(level.var_f92c8836, &trap_switch_init);
-  level.var_ab11c23d = getent("lighthouse_light", "targetname");
+  level.var_ab11c23d = getEnt("lighthouse_light", "targetname");
   level thread function_ad646ef8(0);
   level.var_98138d6b = 0;
   level thread function_b87894c1("power_on1");
@@ -130,12 +130,12 @@ function_1aeab14e() {
   }
 
   if(self.angles[0] != 0) {
-    self rotateto((10, self.angles[1] + 50, 0), var_14c78bd5);
+    self rotateTo((10, self.angles[1] + 50, 0), var_14c78bd5);
     wait var_14c78bd5;
   }
 
   while(true) {
-    self rotateto((10, self.angles[1] + 5, 0), var_223dfca3);
+    self rotateTo((10, self.angles[1] + 5, 0), var_223dfca3);
     wait var_d4cb0c1;
   }
 }
@@ -145,7 +145,7 @@ lighthouse_freakout() {
 
   while(true) {
     n_time = randomfloatrange(0.5, 1);
-    self rotateto((randomintrange(-90, 90), randomintrange(-180, 180), randomintrange(-90, 90)), n_time);
+    self rotateTo((randomintrange(-90, 90), randomintrange(-180, 180), randomintrange(-90, 90)), n_time);
     self waittill(#"rotatedone");
   }
 }
@@ -162,7 +162,7 @@ function_92b102fc() {
 function_1b488412(v_pos, n_aim_time) {
   v_dir = v_pos - self.origin;
   angles = vectortoangles(v_dir);
-  self rotateto(angles, n_aim_time);
+  self rotateTo(angles, n_aim_time);
 }
 
 function_b87894c1(str_flag) {
@@ -180,14 +180,14 @@ function_b87894c1(str_flag) {
 function_45489835(str_flag) {
   switch (str_flag) {
     case #"power_on1":
-      playsoundatposition(#"hash_5f9ff903d1e07acb", (0, 0, 0));
+      playSoundAtPosition(#"hash_5f9ff903d1e07acb", (0, 0, 0));
       break;
     case #"power_on2":
-      playsoundatposition(#"hash_7bb9774ddb11bc9f", (0, 0, 0));
-      playsoundatposition(#"hash_957e90e703a238a", (1311, -1971, 1102));
+      playSoundAtPosition(#"hash_7bb9774ddb11bc9f", (0, 0, 0));
+      playSoundAtPosition(#"hash_957e90e703a238a", (1311, -1971, 1102));
       break;
     case #"power_on3":
-      playsoundatposition(#"hash_4760ffee46ef7f74", (0, 0, 0));
+      playSoundAtPosition(#"hash_4760ffee46ef7f74", (0, 0, 0));
       break;
   }
 }
@@ -329,7 +329,7 @@ function_74b930af(n_time, n_state) {
 function_71399d9c() {
   self endon(#"death", #"trap_state_change");
 
-  for(vh_target = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
+  for(vh_target = spawner::simple_spawn_single(getEnt("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getEnt("virgil", "targetname"))) {
     waitframe(1);
   }
 
@@ -352,8 +352,8 @@ function_71399d9c() {
 function_2b2f2a7f() {
   t_trap = spawn("trigger_radius_new", self.vh_target.origin, 512 | 1, 100);
   t_trap._trap_type = "lighthouse";
-  t_trap enablelinkto();
-  t_trap linkto(self.vh_target);
+  t_trap enablelinkTo();
+  t_trap linkTo(self.vh_target);
   self.t_trap = t_trap;
   t_trap.activated_by_player = level.var_ab11c23d.activated_by_player;
 }
@@ -427,7 +427,7 @@ trigger_trap_explosion(v_pos, e_activator) {
     });
   }
 
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   var_6cb5ae98 = 250 * 250;
 
   foreach(e_player in a_e_players) {
@@ -489,7 +489,7 @@ function_2ad3b642(s_trap) {
   level.var_ab11c23d.var_223285b1 = s_trap.var_223285b1;
   level.var_ab11c23d.var_3f813eec = s_trap.travel_speed;
   level.var_ab11c23d.var_d9ae30d6 = self;
-  playsoundatposition(#"zmb_cha_ching", (1692, 444, 134));
+  playSoundAtPosition(#"zmb_cha_ching", (1692, 444, 134));
   level.var_ab11c23d.activated_by_player = self;
   level thread function_ad646ef8(3);
   array::run_all(level.var_f92c8836, &function_f7e6bf61, 1);
@@ -510,7 +510,7 @@ electrocute_zombie() {
     refs[5] = "no_legs";
     refs[6] = "head";
     self.a.gib_ref = refs[randomint(refs.size)];
-    playsoundatposition(#"hash_5183b687ad8d715a", self.origin);
+    playSoundAtPosition(#"hash_5183b687ad8d715a", self.origin);
 
     if(math::cointoss()) {
       self thread zm_traps::electroctute_death_fx();
@@ -747,13 +747,13 @@ devgui() {
 
     switch (str_command) {
       case #"hash_2e5bdb11c6bc0cd":
-        getplayers()[0] function_2ad3b642(level.var_10f86d56[0]);
+        getPlayers()[0] function_2ad3b642(level.var_10f86d56[0]);
         break;
       case #"hash_2e5bab11c6bbbb4":
-        getplayers()[0] function_2ad3b642(level.var_10f86d56[1]);
+        getPlayers()[0] function_2ad3b642(level.var_10f86d56[1]);
         break;
       case #"hash_2e5bbb11c6bbd67":
-        getplayers()[0] function_2ad3b642(level.var_10f86d56[2]);
+        getPlayers()[0] function_2ad3b642(level.var_10f86d56[2]);
         break;
     }
 

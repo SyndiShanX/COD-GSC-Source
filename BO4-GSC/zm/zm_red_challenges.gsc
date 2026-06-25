@@ -515,7 +515,7 @@ setup_models() {
     n_index = level.var_3e72dc3c.size;
     level.var_3e72dc3c[n_index] = s_info;
     s_info.s_interact = s_bowl;
-    s_info.var_126ddafe = getent(s_bowl.target, "targetname");
+    s_info.var_126ddafe = getEnt(s_bowl.target, "targetname");
     v_pos = s_bowl.origin;
 
     if(!(isDefined(s_bowl.var_b4a48463) && s_bowl.var_b4a48463)) {
@@ -639,7 +639,7 @@ function_7e8e23a6() {
 }
 
 maxis_quest_(s_bowl) {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player.s_tribute_bowl === s_bowl) {
@@ -682,11 +682,11 @@ start_challenge() {
     waitframe(1);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_red_util::function_76f2fea0(1);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_red_util::function_9ab191d3(0);
   }
 
@@ -696,7 +696,7 @@ start_challenge() {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"start_challenge");
   }
 
@@ -709,13 +709,13 @@ stop_challenge(var_c91a0fe1) {
   level[[level.s_active_challenge.var_3e17832]]();
   level.var_fb3a9df0++;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"stop_challenge");
   }
 
   wait 0.1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_red_util::function_7e30f24c();
   }
 
@@ -789,7 +789,7 @@ function_8f0594cb(s_challenge) {
       break;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_red_util::show_text(level.s_active_challenge.str_msg, 0, "stop_challenge");
     player.var_6b3806e8 = 0;
   }
@@ -821,7 +821,7 @@ function_4a88eb80() {
     wait 2;
     n_time = gettime() / 1000;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       b_reward = 0;
 
       if(!isDefined(player.var_d5e64932)) {
@@ -873,7 +873,7 @@ function_f51adffa() {
   level.var_be2ff8ca = zm_utility::function_d7db256e(level.var_80ec74ca, undefined, 1);
   level.var_2c5f83d = zm_red_zones::function_27028b8e(level.var_4427ebb1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_red_util::show_text(level.var_2c5f83d, 0, "stop_challenge", 0);
     player thread player_zone_watcher(level.s_active_challenge.n_id, level.var_2c5f83d, undefined);
   }
@@ -928,9 +928,9 @@ function_1d60215() {
   }
 
   s_info = struct::get(level.var_c699da9d, "targetname");
-  vol_area = getent(s_info.script_noteworthy, "targetname");
+  vol_area = getEnt(s_info.script_noteworthy, "targetname");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_red_util::show_text(var_9862b6f2, 0, "stop_challenge", 0);
     player thread player_zone_watcher(level.s_active_challenge.n_id, undefined, vol_area);
   }
@@ -940,7 +940,7 @@ function_1d60215() {
   while(true) {
     n_time = gettime() / 1000;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player.var_f94035ca)) {
         player.var_f94035ca = 0;
       }
@@ -980,7 +980,7 @@ function_40ccb2dc(var_893baaf = undefined) {
 }
 
 function_6e07042a(var_893baaf = undefined) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player flag::exists(#"hash_664c4b8d9b3d0237") && player flag::get(#"hash_664c4b8d9b3d0237")) {
       return true;
     }
@@ -1216,7 +1216,7 @@ function_5e882c6f(e_player, var_2b625b6e) {
 }
 
 function_836d2b5b() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_6b3806e8)) {
       player.var_6b3806e8 = 0;
     }
@@ -1259,7 +1259,7 @@ function_a17a600() {
       level.var_fe19836 = 0;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_red_util::function_f0d355fc(level.var_c94140cf);
     }
   }
@@ -1316,7 +1316,7 @@ player_zone_watcher(var_ecffa2a8, var_2c5f83d, vol_override = undefined) {
 }
 
 pause_challenges(b_pause) {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(b_pause && !(isDefined(level.var_dc6fce4f) && level.var_dc6fce4f)) {
     foreach(player in a_players) {
@@ -1350,7 +1350,7 @@ function_304fb042() {
     level.var_483180c5 clientfield::set("" + #"rob_coals", 0);
     level.var_d5ba7324 clientfield::set("" + #"apollo_bowl_fx", 0);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_red_util::function_7e30f24c();
       player zm_red_util::function_7e617e33(0);
       s_bowl = player.s_tribute_bowl;
@@ -1371,7 +1371,7 @@ function_8ff7b0bb() {
   b_play_vo = 0;
 
   while(!b_play_vo) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       n_dist = distance(player.origin, var_6a5f8169.origin);
 
       if(n_dist <= 550) {
@@ -1385,7 +1385,7 @@ function_8ff7b0bb() {
     wait 0.5;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_vo::vo_say(#"hash_3d7811c8269d75cf", 0, 1, 9999, 1, 1, 1);
   }
 }

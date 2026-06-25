@@ -406,7 +406,7 @@ createFlagHint(team, origin) {
 
   trigger = spawn("trigger_radius", origin, 0, radius, height);
   trigger setHintString(&"MP_CTF_CANT_CAPTURE_FLAG");
-  trigger setcursorhint("HINT_NOICON");
+  trigger setCursorHint("HINT_NOICON");
   trigger.original_origin = origin;
 
   trigger turn_off();

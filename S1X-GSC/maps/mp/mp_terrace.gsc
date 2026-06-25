@@ -84,13 +84,13 @@ blimp_run() {
   next = self;
 
   while(isDefined(next.target)) {
-    next = getstruct(next.target, "targetname");
+    next = getStruct(next.target, "targetname");
     if(!isDefined(next)) {
       return;
     }
 
-    self MoveTo(next.origin, move_time, move_time * 0.1, move_time * 0.1);
-    self RotateTo(next.angles, move_time, move_time * 0.1, move_time * 0.1);
+    self moveTo(next.origin, move_time, move_time * 0.1, move_time * 0.1);
+    self rotateTo(next.angles, move_time, move_time * 0.1, move_time * 0.1);
     wait move_time;
   }
 }

@@ -91,7 +91,7 @@ function_124362b5(is_powered) {
 
       if(self.script_string == "roof") {
         level flag::wait_till("power_on1");
-        var_a8d69fbd = getent("pap_shock_box", "script_string");
+        var_a8d69fbd = getEnt("pap_shock_box", "script_string");
 
         for(var_24c740a5 = 0; !var_24c740a5; var_24c740a5 = 1) {
           s_result = var_a8d69fbd waittill(#"hash_7e1d78666f0be68b");
@@ -137,7 +137,7 @@ function_26cff57(a_ents) {
   if(!level flag::get(#"pap_quest_completed")) {
     s_lightning_bridge = struct::get("lightning_bridge");
     level clientfield::increment("" + #"lightning_far");
-    playsoundatposition(#"hash_7804a63a2ff82145", s_lightning_bridge.origin);
+    playSoundAtPosition(#"hash_7804a63a2ff82145", s_lightning_bridge.origin);
     a_ents[#"pap"] waittill(#"fade_in_end");
     s_lightning_near = struct::get("lightning_near");
     wait 1;
@@ -162,9 +162,9 @@ function_59093304(str_zone, var_e07ad59f = 0) {
 
   if(var_e07ad59f) {
     s_lightning_near = struct::get("lightning_near");
-    playsoundatposition(#"hash_6c4553b9c8847808", s_lightning_near.origin);
+    playSoundAtPosition(#"hash_6c4553b9c8847808", s_lightning_near.origin);
   } else {
-    playsoundatposition(#"hash_6c4553b9c8847808", self.origin);
+    playSoundAtPosition(#"hash_6c4553b9c8847808", self.origin);
   }
 
   self waittill(#"fade_in_end");
@@ -193,7 +193,7 @@ function_25adf2e0(str_zone, var_410775ce) {
   self waittill(#"fade_in_start");
   self show();
   self clientfield::increment("" + #"lightning_near");
-  playsoundatposition(#"hash_6c4553b9c8847808", self.origin);
+  playSoundAtPosition(#"hash_6c4553b9c8847808", self.origin);
   self waittill(#"debris_appear");
   pap_debris(1, str_zone);
   level notify(var_410775ce);

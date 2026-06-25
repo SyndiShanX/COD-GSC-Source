@@ -190,7 +190,7 @@ dialog_enemy_vehicle() {
 }
 
 dialog_blow_up_tower() {
-  var_0 = getent("tower_dialog", "targetname");
+  var_0 = getEnt("tower_dialog", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -222,7 +222,7 @@ dialog_contacts_in_the_woods() {
 
 dialog_jackson_do_it() {
   level endon("tower_destroyed");
-  var_0 = getent("tower", "targetname");
+  var_0 = getEnt("tower", "targetname");
   var_1 = getaiarray("allies");
   var_1[var_1.size] = level.player;
 
@@ -274,7 +274,7 @@ dialog_get_fence_open() {
 }
 
 dialog_enemy_helicopters() {
-  var_0 = getent("move_to_oldbase01", "targetname");
+  var_0 = getEnt("move_to_oldbase01", "targetname");
   var_0 waittill("trigger");
   var_0 common_scripts\utility::trigger_off();
   level.gaz maps\_anim::anim_single_queue(level.gaz, "enemyhelicopters");
@@ -283,7 +283,7 @@ dialog_enemy_helicopters() {
 }
 
 dialog_trucks_with_shooters() {
-  var_0 = getent("move_to_oldbase02", "targetname");
+  var_0 = getEnt("move_to_oldbase02", "targetname");
   var_0 waittill("trigger");
   var_0 common_scripts\utility::trigger_off();
   level.price maps\_anim::anim_single_queue(level.price, "truckswithshooters");

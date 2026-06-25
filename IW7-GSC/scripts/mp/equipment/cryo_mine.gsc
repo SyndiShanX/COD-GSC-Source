@@ -161,8 +161,8 @@ func_4ADC() {
 func_4AD1(var_0) {
   var_1 = spawn("trigger_rotatable_radius", var_0.origin, 0, 128, 100);
   var_1.angles = var_0.angles;
-  var_1 enablelinkto();
-  var_1 linkto(var_0);
+  var_1 enablelinkTo();
+  var_1 linkTo(var_0);
   var_1 hide();
   return var_1;
 }

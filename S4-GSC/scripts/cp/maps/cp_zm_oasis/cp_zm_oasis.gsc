@@ -81,7 +81,7 @@ main() {
   level.item_drop_permanent_weapon_list = ["s4_me_rindigoww_mp"];
   scripts\cp\zombies\zm_ww_riotshield::init();
   scripts\cp\zombies\zm_ww_dg2::init();
-  level.outofmap_volume = getent("drk_aether_fall_volume", "targetname");
+  level.outofmap_volume = getEnt("drk_aether_fall_volume", "targetname");
   level.outofmap_teleport_points = scripts\engine\utility::getStructArray("drk_aether_fall_respawn_point", "targetname");
   _id_06CB::_id_AA4E(::onplayerconnect);
   level thread scripts\cp\zombies\zm_rbz_utility::rbz_initialize();
@@ -105,7 +105,7 @@ watch_player_play_close_to_portal_vo() {
   level endon("mq_trial_c_done");
   self endon("disconnect");
   level waittill("mq_step_three_done");
-  var_0 = scripts\engine\utility::getstruct("mq_1st_portal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_1st_portal_loc", "script_noteworthy");
   var_1 = var_0.origin;
 
   for(;;) {
@@ -209,7 +209,7 @@ check_players_get_close_to_pap() {
   level endon("game_ended");
   level endon("papq_top_part_returned");
   level endon("papq_med_part_returned");
-  var_0 = scripts\engine\utility::getstruct("papq_pap_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("papq_pap_center", "script_noteworthy");
   var_1 = var_0.origin;
 
   for(;;) {

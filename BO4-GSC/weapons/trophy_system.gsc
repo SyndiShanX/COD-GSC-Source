@@ -443,7 +443,7 @@ trophysystemdetonate(attacker, weapon, target) {
     }
   }
 
-  playsoundatposition(#"exp_trophy_system", self.origin);
+  playSoundAtPosition(#"exp_trophy_system", self.origin);
   self delete();
 }
 

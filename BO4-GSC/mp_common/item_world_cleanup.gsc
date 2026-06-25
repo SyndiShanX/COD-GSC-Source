@@ -60,7 +60,7 @@ function_b465b436(deathcircle, var_898879a6) {
 }
 
 function_35e11623(deathcircle, var_898879a6) {
-  players = getplayers();
+  players = getPlayers();
   excludelist = [#"eq_acid_bomb": 1, #"eq_cluster_semtex_grenade": 1, #"eq_molotov": 1, #"eq_slow_grenade": 1, #"eq_swat_grenade": 1, #"eq_wraith_fire": 1, #"frag_grenade": 1, #"willy_pete": 1];
 
   foreach(player in players) {
@@ -273,9 +273,9 @@ function_ada16428(deathcircle, var_898879a6) {
         }
 
         var_42beec1c = (deathcircle.origin[0] - player.origin[0], deathcircle.origin[1] - player.origin[1], 0);
-        var_42beec1c = vectornormalize(var_42beec1c);
+        var_42beec1c = vectorNormalize(var_42beec1c);
         var_838d27e = (vehicle.origin[0] - player.origin[0], vehicle.origin[1] - player.origin[1], 0);
-        var_838d27e = vectornormalize(var_838d27e);
+        var_838d27e = vectorNormalize(var_838d27e);
 
         if(vectordot(var_42beec1c, var_838d27e) >= 0.9396) {
           var_c64c4a1f = distance2dsquared(vehicle.origin, player.origin);

@@ -175,7 +175,7 @@ func_54D7() {
     var_09 = spawn("script_model", var_01);
     var_09 setcostumemodels([2, 1, 2, 2, 2, 1], "axis");
     var_05 = spawn("weapon_" + var_08, (0, 0, 0), 1);
-    var_05 linkto(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_05 linkTo(var_09, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_09 method_8495(var_07, var_01, var_02);
     var_03[var_03.size] = var_09;
   }
@@ -184,7 +184,7 @@ func_54D7() {
   var_0C = spawn("script_model", level.var_54D0["allies"].var_8CA7[0].var_13B3 gettagorigin("TAG_INHAND"));
   var_0C setModel("npc_gen_trench_knife_01_excellent");
   var_0C.var_1D = level.var_54D0["allies"].var_8CA7[0].var_13B3 gettagangles("TAG_INHAND");
-  var_0C linkto(level.var_54D0["allies"].var_8CA7[0].var_13B3, "TAG_INHAND");
+  var_0C linkTo(level.var_54D0["allies"].var_8CA7[0].var_13B3, "TAG_INHAND");
   level.introvignette_allies = spawnStruct();
   level.introvignette_allies.var_8F0A = var_03;
   level.introvignette_allies.var_5A9F = var_0C;
@@ -639,7 +639,7 @@ func_6C94() {
     var_0A = spawn("script_model", var_01);
     var_0A setcostumemodels([2, 1, 2, 2, 2, 0], "axis");
     var_10 = spawn("weapon_" + var_09, (0, 0, 0), 1);
-    var_10 linkto(var_0A, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_10 linkTo(var_0A, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_03[var_03.size] = var_10;
     var_0A animscripts\notetracks_common::give_player_xp(var_0F, var_01, var_02);
     var_0C[var_0C.size] = var_0A;
@@ -652,7 +652,7 @@ func_6C94() {
     var_0A setcostumemodels([4, 3, 3, 3, 0, 0], "axis");
     if(var_0F == "mp_raids_husky_axis_win_ground_outro_german_commander_02") {
       var_10 = spawn("weapon_" + var_09, (0, 0, 0), 1);
-      var_10 linkto(var_0A, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_10 linkTo(var_0A, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_03[var_03.size] = var_10;
     }
 
@@ -947,7 +947,7 @@ runbomberobjective() {
   maps\mp\mp_raid_dlc2_fx::sunflare_flying();
   level thread onplayerconnectbomberobjective();
   var_03 = common_scripts\utility::func_46B5("fighter_deathmatch", "targetname");
-  var_04 = getent("mp_global_intermission", "classname");
+  var_04 = getEnt("mp_global_intermission", "classname");
   var_04.var_1D = (0, 0, 0);
   var_04.var_116 = (-5000, 0, var_03.var_116[2]);
   maps\mp\gametypes\_raid_bomber::run_bomber_objective(var_03.var_116, "compass_map_mp_raid_dlc2_objective3");
@@ -1118,17 +1118,17 @@ preoutrovignettecleanup() {
 }
 
 setup_window_open_close(param_00, param_01, param_02) {
-  var_03 = getent(param_00, "script_noteworthy");
-  var_04 = getent(var_03.var_1A2, "targetname");
-  var_05 = getent(param_00 + "_clip_left", "script_noteworthy");
-  var_06 = getent(param_00 + "_clip_right", "script_noteworthy");
-  var_07 = getent(param_00 + "_mantle", "script_noteworthy");
+  var_03 = getEnt(param_00, "script_noteworthy");
+  var_04 = getEnt(var_03.var_1A2, "targetname");
+  var_05 = getEnt(param_00 + "_clip_left", "script_noteworthy");
+  var_06 = getEnt(param_00 + "_clip_right", "script_noteworthy");
+  var_07 = getEnt(param_00 + "_mantle", "script_noteworthy");
   var_08 = var_05.var_116 - var_04 gettagorigin("window_L");
   var_09 = var_05.var_1D - var_04 gettagangles("window_L");
   var_0A = var_06.var_116 - var_04 gettagorigin("window_R");
   var_0B = var_06.var_1D - var_04 gettagangles("window_R");
-  var_05 linkto(var_04, "window_L", var_08, var_09);
-  var_06 linkto(var_04, "window_R", var_0A, var_0B);
+  var_05 linkTo(var_04, "window_L", var_08, var_09);
+  var_06 linkTo(var_04, "window_R", var_0A, var_0B);
   lib_0502::func_1D39(var_04);
   var_04 lib_0502::func_1D3A(var_04.var_116, 1);
   level thread window_open_logic(var_03, var_04, param_01, param_02, var_07);
@@ -1138,7 +1138,7 @@ window_open_logic(param_00, param_01, param_02, param_03, param_04) {
   level endon("game_ended");
   level endon("runBomberObjective");
   param_04 method_805C();
-  param_00 sethintstring(&"RAIDS_HUSKY_OPEN_WINDOW");
+  param_00 setHintString(&"RAIDS_HUSKY_OPEN_WINDOW");
   param_00 waittill("trigger");
   param_01 lib_0502::func_1D3B(0);
   param_00 method_805C();
@@ -1152,7 +1152,7 @@ window_close_logic(param_00, param_01, param_02, param_03, param_04) {
   level endon("game_ended");
   level endon("runBomberObjective");
   param_04 method_805B();
-  param_00 sethintstring(&"RAIDS_HUSKY_CLOSE_WINDOW");
+  param_00 setHintString(&"RAIDS_HUSKY_CLOSE_WINDOW");
   param_00 waittill("trigger");
   param_01 lib_0502::func_1D3B(1);
   param_00 method_805C();

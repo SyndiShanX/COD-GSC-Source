@@ -260,7 +260,7 @@ function drone_pain_for_time(time, stablizeparam, restorelookpoint) {
       restorelookent setModel("tag_origin");
       self clearlookatent();
       self setlookatent(restorelookent);
-      self setturrettargetent(restorelookent);
+      self setturrettargetEnt(restorelookent);
       wait(1.5);
       self clearlookatent();
       self clearturrettarget();
@@ -296,7 +296,7 @@ function spawn(parent, ondeathcallback) {
     return undefined;
   }
   spawnpoint = parent.origin + (vectorscale((0, 0, -1), 50));
-  drone = spawnvehicle("veh_flak_drone_mp", spawnpoint, parent.angles, "dynamic_spawn_ai");
+  drone = spawnVehicle("veh_flak_drone_mp", spawnpoint, parent.angles, "dynamic_spawn_ai");
   drone.death_callback = ondeathcallback;
   drone configureteam(parent, 0);
   drone thread watchgameevents();

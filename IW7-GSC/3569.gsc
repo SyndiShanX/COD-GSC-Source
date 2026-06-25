@@ -50,7 +50,7 @@ func_BB8C() {
   var_2 = scripts\engine\utility::spawn_tag_origin(self.origin, var_1);
   thread func_BB82(var_2);
   var_3 = self getEye() - self.origin;
-  self playerlinkto(var_2, "tag_origin", 0, 0, 0, 0, 0);
+  self playerlinkTo(var_2, "tag_origin", 0, 0, 0, 0, 0);
   func_BB71();
   func_BB72();
   func_BB74();
@@ -59,7 +59,7 @@ func_BB8C() {
   thread func_BB8D();
   wait(0.25);
   self iprintlnbold("Fire at Will!");
-  self playerlinkto(var_2, "tag_origin", 0, 90, 90, 20, 20);
+  self playerlinkTo(var_2, "tag_origin", 0, 90, 90, 20, 20);
   thread func_BB87();
   thread func_BB76();
   thread func_BB8A(var_2);
@@ -95,7 +95,7 @@ func_BB7B() {
   var_4 = (0, 0, 1);
   var_5 = var_3 * var_4;
   var_6 = distance2d(var_0, var_1) / 1.65;
-  var_7 = vectornormalize((var_1[0] - var_0[0], var_1[1] - var_0[1], 0));
+  var_7 = vectorNormalize((var_1[0] - var_0[0], var_1[1] - var_0[1], 0));
   var_8 = var_6 * var_7;
   var_9 = var_8 + var_5;
   var_10 = self launchgrenade("mortarmount_mp", var_0, var_9, 5);
@@ -368,7 +368,7 @@ func_BB7F(var_0, var_1) {
   var_6 = var_4[2] - var_3[2] - var_5 / 1.65;
   var_7 = (0, 0, 1);
   var_8 = distance2d(var_3, var_4) / 1.65;
-  var_9 = vectornormalize((var_4[0] - var_3[0], var_4[1] - var_3[1], 0));
+  var_9 = vectorNormalize((var_4[0] - var_3[0], var_4[1] - var_3[1], 0));
   var_10 = 0;
   var_11 = var_3;
   var_12 = undefined;
@@ -391,7 +391,7 @@ func_BB7F(var_0, var_1) {
   }
 
   if(var_2.var_D648.size > 1) {
-    var_11 = vectornormalize(var_2.var_D648[0] - var_2.var_D648[0]);
+    var_11 = vectorNormalize(var_2.var_D648[0] - var_2.var_D648[0]);
     var_2.var_97CD = vectortoangles(var_11);
   }
 
@@ -437,7 +437,7 @@ func_BB75() {
   for(var_3 = var_2 + 1; var_3 < var_0.size; var_3++) {
     var_4 = length(var_0[var_3] - var_0[var_2]);
     var_5 = var_4 / 1000;
-    var_1 moveto(var_0[var_3], max(var_5, 0.05));
+    var_1 moveTo(var_0[var_3], max(var_5, 0.05));
     wait(var_5);
     var_2++;
   }

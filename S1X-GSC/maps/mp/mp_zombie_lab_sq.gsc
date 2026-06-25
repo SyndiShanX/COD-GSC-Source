@@ -48,13 +48,13 @@ start_lab_sidequest() {
 }
 
 setupweaponstationblocker() {
-  var_0 = getent("weapon_upgrade_blocker_model", "targetname");
+  var_0 = getEnt("weapon_upgrade_blocker_model", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
   if(isDefined(var_0.target)) {
-    var_1 = getent(var_0.target, "targetname");
+    var_1 = getEnt(var_0.target, "targetname");
 
     if(isDefined(var_1)) {
       var_1 linktosynchronizedparent(var_0);
@@ -170,7 +170,7 @@ monitorplayer(var_0) {
 }
 
 stage1_init() {
-  var_0 = getent("blackbox2", "targetname");
+  var_0 = getEnt("blackbox2", "targetname");
 
   if(isDefined(var_0)) {
     var_0 hide();
@@ -178,7 +178,7 @@ stage1_init() {
 }
 
 stage1_logic() {
-  var_0 = common_scripts\utility::getstruct("blackbox1Use", "targetname");
+  var_0 = common_scripts\utility::getStruct("blackbox1Use", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
   var_1 playLoopSound("ee_black_box_loop");
 
@@ -198,7 +198,7 @@ stage1_logic() {
 
 stage1_end(var_0) {
   maps\mp\zombies\_zombies_sidequests::sidequest_iprintlnbold("This looks encrypted.");
-  var_1 = getent("blackbox1", "targetname");
+  var_1 = getEnt("blackbox1", "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -273,7 +273,7 @@ announcerglobalplaysqvowaittilldone(var_0, var_1) {
 
 doblackboxhint(var_0, var_1) {
   level endon(var_1);
-  var_2 = common_scripts\utility::getstruct("blackbox2Use", "targetname");
+  var_2 = common_scripts\utility::getStruct("blackbox2Use", "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -365,7 +365,7 @@ doblackboxhintresponse(var_0, var_1) {
 stage2_init() {}
 
 stage2_logic() {
-  var_0 = common_scripts\utility::getstruct("blackbox2Use", "targetname");
+  var_0 = common_scripts\utility::getStruct("blackbox2Use", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -374,7 +374,7 @@ stage2_logic() {
   var_0 waittill("activated", var_1);
   var_1 playertakebox();
   var_1 playlocalsound("ee_computer_negative");
-  var_2 = getent("blackbox2", "targetname");
+  var_2 = getEnt("blackbox2", "targetname");
 
   if(isDefined(var_2)) {
     var_2 show();
@@ -387,7 +387,7 @@ stage2_logic() {
 }
 
 stage2_end(var_0) {
-  var_1 = getent("blackbox2", "targetname");
+  var_1 = getEnt("blackbox2", "targetname");
 
   if(isDefined(var_1)) {
     var_1 show();
@@ -442,7 +442,7 @@ stage3_init() {
     }
   }
 
-  var_7 = getent("badge_s3", "targetname");
+  var_7 = getEnt("badge_s3", "targetname");
 
   if(isDefined(var_7)) {
     var_7 linktosynchronizedparent(level.sq_cage2);
@@ -460,12 +460,12 @@ stage3_logic() {
   if(var_1.size == 0) {
     return;
   }
-  var_2 = getent("cageWedge", "targetname");
+  var_2 = getEnt("cageWedge", "targetname");
 
   if(!isDefined(var_2)) {
     return;
   }
-  var_3 = getent("badge_s3", "targetname");
+  var_3 = getEnt("badge_s3", "targetname");
 
   if(!isDefined(var_3)) {
     return;
@@ -480,7 +480,7 @@ stage3_logic() {
 }
 
 stage3_end(var_0) {
-  var_1 = getent("cageWedge", "targetname");
+  var_1 = getEnt("cageWedge", "targetname");
 
   if(isDefined(var_1)) {
     var_1 delete();
@@ -507,7 +507,7 @@ cagewedgelogic(var_0) {
     var_0 thread wedgewiggle();
   }
 
-  var_0 moveto(var_0.origin + (0, 0, -100), 1);
+  var_0 moveTo(var_0.origin + (0, 0, -100), 1);
   var_0 playsoundonmovingent("ee_wedge_wiggle_done");
   wait 1;
   level notify("cage_wedge_complete");
@@ -547,9 +547,9 @@ wigglecage() {
   var_1 = var_0 + (0, 0, -20);
   level.sq_cage1 playsoundonmovingent("ee_lift_down_blocked");
   level.sq_cage1.iswiggling = 1;
-  level.sq_cage1 moveto(var_1, 0.5, 0, 0.1);
+  level.sq_cage1 moveTo(var_1, 0.5, 0, 0.1);
   wait 0.6;
-  level.sq_cage1 moveto(var_0, 0.5, 0.2, 0.1);
+  level.sq_cage1 moveTo(var_0, 0.5, 0.2, 0.1);
   wait 0.6;
   level.sq_cage1.iswiggling = undefined;
   level notify("cage_wiggle_complete");
@@ -591,16 +591,16 @@ movecages(var_0) {
   level.sq_cage2 notify("move_start");
   level.sq_cage1.ismoving = 1;
   level.sq_cage2.ismoving = 1;
-  level.sq_cage1 moveto(level.sq_cage1.downposition, 1, 0, 0.1);
-  level.sq_cage2 moveto(level.sq_cage2.upposition, 1, 0, 0.1);
+  level.sq_cage1 moveTo(level.sq_cage1.downposition, 1, 0, 0.1);
+  level.sq_cage2 moveTo(level.sq_cage2.upposition, 1, 0, 0.1);
   level.sq_cage1 playsoundonmovingent("ee_lift_down");
   wait 1.1;
   level thread collectbadgestage3(var_0);
   wait 5;
   level.sq_cage2 playsoundonmovingent("ee_lift_up");
   level notify("cage2_reset");
-  level.sq_cage1 moveto(level.sq_cage1.upposition, 2, 0.3, 0.5);
-  level.sq_cage2 moveto(level.sq_cage2.downposition, 2, 0.3, 0.5);
+  level.sq_cage1 moveTo(level.sq_cage1.upposition, 2, 0.3, 0.5);
+  level.sq_cage2 moveTo(level.sq_cage2.downposition, 2, 0.3, 0.5);
   wait 2.1;
   level.sq_cage1.ismoving = 0;
   level.sq_cage2.ismoving = 0;
@@ -656,7 +656,7 @@ playermonitorgroundslam(var_0) {
 stage4_init() {}
 
 stage4_logic() {
-  var_0 = common_scripts\utility::getstruct("incinerator_teleport", "targetname");
+  var_0 = common_scripts\utility::getStruct("incinerator_teleport", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -762,7 +762,7 @@ stage4_double_check_players_out() {
 
 stage4_get_players_in_incinerator() {
   var_0 = [];
-  var_1 = getent("incinerator_volume", "targetname");
+  var_1 = getEnt("incinerator_volume", "targetname");
 
   if(isDefined(var_1)) {
     foreach(var_3 in level.players) {
@@ -804,11 +804,11 @@ stage4_trigger_teleporter() {
 }
 
 stage4_incinerator_pusher(var_0) {
-  var_1 = getent("incinerator_mover", "targetname");
+  var_1 = getEnt("incinerator_mover", "targetname");
   var_1.start = var_1.origin;
-  var_1.end = common_scripts\utility::getstruct(var_1.target, "targetname").origin;
+  var_1.end = common_scripts\utility::getStruct(var_1.target, "targetname").origin;
   var_1.unresolved_collision_func = ::stage4_force_players_out;
-  var_1 moveto(var_1.end, var_0);
+  var_1 moveTo(var_1.end, var_0);
   var_1 playLoopSound("incinerator_room_machine_loop");
   wait(var_0);
   var_1 stoploopsound();
@@ -880,11 +880,11 @@ stage4_key_show() {
   var_1 = 50;
   var_2 = 0.6;
   var_3 = 5;
-  var_0 moveto(var_0.origin + (0, 0, var_1), var_2, 0, var_2);
+  var_0 moveTo(var_0.origin + (0, 0, var_1), var_2, 0, var_2);
   var_4 = 360 * var_3 / (var_2 * 2);
   var_0 rotatevelocity((var_4, var_4, 0), var_2 * 2);
   wait(var_2);
-  var_0 moveto(var_0.origin - (0, 0, var_1), var_2, var_2, 0);
+  var_0 moveTo(var_0.origin - (0, 0, var_1), var_2, var_2, 0);
 }
 
 stage4_key_pickup() {
@@ -913,12 +913,12 @@ stage5_logic() {
   if(var_0.size == 0) {
     return;
   }
-  var_1 = getent("securityWindow", "targetname");
+  var_1 = getEnt("securityWindow", "targetname");
 
   if(!isDefined(var_1)) {
     return;
   }
-  var_2 = getent("badge_s5", "targetname");
+  var_2 = getEnt("badge_s5", "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -954,7 +954,7 @@ stage5_logic() {
   }
 
   level notify("main_stage4_ending");
-  var_1 moveto(var_1.origin + (0, 40, 0), 3);
+  var_1 moveTo(var_1.origin + (0, 40, 0), 3);
   wait 3.5;
   var_13 = 1;
   var_2 thread maps\mp\zombies\_zombies_sidequests::fake_use("activated", ::playercancollectstagebadge, var_13, "main_stage5_over", 80);
@@ -1378,7 +1378,7 @@ cardreaderlogic(var_0) {
   var_2 = undefined;
 
   if(isDefined(var_0.target)) {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
   }
 
   var_2.characterindex = var_1;
@@ -1450,7 +1450,7 @@ stage9_init() {
 }
 
 stage9_logic() {
-  var_0 = common_scripts\utility::getstruct("blackbox2Use", "targetname");
+  var_0 = common_scripts\utility::getStruct("blackbox2Use", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1519,11 +1519,11 @@ stage10_end(var_0) {
     var_2.usedexoterminalsq = undefined;
   }
 
-  var_4 = getent("weapon_upgrade_blocker_model", "targetname");
+  var_4 = getEnt("weapon_upgrade_blocker_model", "targetname");
 
   if(isDefined(var_4)) {
     var_5 = var_4.origin + (0, 0, var_4.offsetmove);
-    var_4 moveto(var_5, 2, 0.5, 0.5);
+    var_4 moveTo(var_5, 2, 0.5, 0.5);
   }
 
   maps\mp\zombies\_zombies_sidequests::sidequest_iprintlnbold("Super weapon upgrade station unlocked.");
@@ -1598,17 +1598,17 @@ stage11_init() {
 }
 
 stage11_logic() {
-  var_0 = common_scripts\utility::getstruct("heliStart", "targetname");
+  var_0 = common_scripts\utility::getStruct("heliStart", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = common_scripts\utility::getstruct("carepackageEnd", "targetname");
+  var_1 = common_scripts\utility::getStruct("carepackageEnd", "targetname");
 
   if(!isDefined(var_1)) {
     return;
   }
-  var_2 = common_scripts\utility::getstruct("heliEnd1", "targetname");
+  var_2 = common_scripts\utility::getStruct("heliEnd1", "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -1637,7 +1637,7 @@ warbirdtravellogic(var_0) {
   var_1 = var_0;
 
   for(;;) {
-    var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+    var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
 
     if(!isDefined(var_2)) {
       return;
@@ -1763,7 +1763,7 @@ side_quest_end() {
 warbirdtraveltoend(var_0, var_1) {
   if(!level.side_quest_end) {
     var_0 = undefined;
-    var_2 = common_scripts\utility::getstruct("heliEnd2", "targetname");
+    var_2 = common_scripts\utility::getStruct("heliEnd2", "targetname");
 
     if(isDefined(var_2)) {
       var_1 = var_2;
@@ -1837,7 +1837,7 @@ stage11_end(var_0) {
 }
 
 init_song_sidequest() {
-  level.sq_song_ent = getent("sq_song", "targetname");
+  level.sq_song_ent = getEnt("sq_song", "targetname");
 
   if(!isDefined(level.sq_song_ent)) {
     level.sq_song_ent = spawn("script_model", (0, 0, 0));

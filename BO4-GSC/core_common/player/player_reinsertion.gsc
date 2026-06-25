@@ -82,7 +82,7 @@ function_cf96c89c() {
 
 function_ab9a60c8(center, radius) {
   origin = function_a20b914d(center, radius);
-  left = vectornormalize(origin - center);
+  left = vectorNormalize(origin - center);
   forward = vectorcross(left, (0, 0, 1));
   angles = vectortoangles(forward);
   self.origin = origin;
@@ -90,13 +90,13 @@ function_ab9a60c8(center, radius) {
 }
 
 function_d5d96302(center, radius) {
-  spawner = getent("chinook_spawner", "targetname");
+  spawner = getEnt("chinook_spawner", "targetname");
 
   if(!isDefined(spawner)) {
     return;
   }
 
-  while(getplayers().size == 0) {
+  while(getPlayers().size == 0) {
     wait 0.5;
   }
 
@@ -114,14 +114,14 @@ function_15e6e9ae(vehicle) {
   camera = player_insertion::function_57fe9b21(level.insertion, vehicle.origin);
   camera.origin = vehicle.origin;
   camera.angles = vehicle.angles;
-  camera linkto(vehicle);
+  camera linkTo(vehicle);
   return camera;
 }
 
 function_521bff14(center, goal, var_e294ac7d) {
   direction = goal - center;
   steps = int(length(direction) / 5000);
-  direction = vectornormalize(direction);
+  direction = vectorNormalize(direction);
   var_3d4c4e94 = player_insertion::function_f31cf3bb(center, direction, 5000, 0, steps);
 
   if(!isDefined(var_3d4c4e94)) {
@@ -131,7 +131,7 @@ function_521bff14(center, goal, var_e294ac7d) {
   if(distance2dsquared(goal, var_3d4c4e94) > 0.01 * 0.01) {
     delta = var_3d4c4e94 - center;
     length = length(delta);
-    direction = vectornormalize(delta);
+    direction = vectorNormalize(delta);
     new_point = center + direction * length * var_e294ac7d;
 
     var_ced865d2 = center + direction * length;
@@ -184,7 +184,7 @@ function_14f79b33(center, radius, height, var_e294ac7d) {
     level.reinsertion.debug_duration = 1000;
     thread player_insertion::debug_line(circle_origin, level.reinsertion.vehicle.origin, (0, 0, 1), level.reinsertion.debug_duration);
 
-    var_9c068ab1 = vectornormalize(level.reinsertion.vehicle.origin - circle_origin);
+    var_9c068ab1 = vectorNormalize(level.reinsertion.vehicle.origin - circle_origin);
     var_c40f2e06 = vectortoangles(var_9c068ab1);
     current_yaw = var_c40f2e06[1];
     var_c5a2c1c9 = var_5d59bc67 / circle_radius * 57.2958;
@@ -228,7 +228,7 @@ function_b24f3a72(origin, radius, height) {
   }
 
   angle = cos(radius / distance);
-  vec = vectornormalize(point - origin);
+  vec = vectorNormalize(point - origin);
   goal = rotatepoint(vec, (0, angle, 0)) * radius;
   return (goal[0], goal[1], height);
 }
@@ -248,7 +248,7 @@ function_b2df2693() {
 
   foreach(team in level.teams) {
     if(isDefined(level.alivecount) && isDefined(level.alivecount[team]) && level.alivecount[team] > 0) {
-      players = getplayers(team);
+      players = getPlayers(team);
       player_alive = 0;
 
       foreach(player in players) {
@@ -363,7 +363,7 @@ function_f9348c1d() {
   angles = (0, 0, 0);
 
   if(isDefined(level.reinsertion) && isDefined(level.reinsertion.vehicle)) {
-    var_9c068ab1 = vectornormalize(circle_center - level.reinsertion.vehicle.origin);
+    var_9c068ab1 = vectorNormalize(circle_center - level.reinsertion.vehicle.origin);
     angles = vectortoangles(var_9c068ab1);
   }
 
@@ -397,7 +397,7 @@ function_3c4884f1(var_819e1b79) {
   angles = undefined;
   players = [];
 
-  foreach(player in getplayers(self.team)) {
+  foreach(player in getPlayers(self.team)) {
     if(player != self && isalive(player)) {
       players[players.size] = player;
     }
@@ -420,7 +420,7 @@ function_3c4884f1(var_819e1b79) {
   if(isDefined(targetorigin)) {
     fwd = anglesToForward(targetangles);
     spawnorigin = targetorigin - fwd * 1000 + (0, 0, 500);
-    self setorigin(spawnorigin);
+    self setOrigin(spawnorigin);
     self player_insertion::start_freefall(fwd * 1000, 0);
   }
 
@@ -468,7 +468,7 @@ function_fec68e5c() {
       player thread[[level.spawnclient]]();
 
       if(isDefined(player.lastdeathpos)) {
-        player setorigin(player.lastdeathpos);
+        player setOrigin(player.lastdeathpos);
       }
     }
 
@@ -551,7 +551,7 @@ function_5425f45d() {
 
       if(isDefined(nextcircle)) {
         target = nextcircle.origin - portal.origin;
-        target = vectornormalize(target);
+        target = vectorNormalize(target);
         angles = vectortoangles(target);
         portal.angles = angles;
       }
@@ -584,7 +584,7 @@ function_9536aa3d() {
 
   foreach(team in level.teams) {
     var_d3934390 = 0;
-    players_on_team = array::randomize(getplayers(team));
+    players_on_team = array::randomize(getPlayers(team));
 
     foreach(person in players_on_team) {
       if(!isalive(person) || person laststand::player_is_in_laststand()) {
@@ -621,7 +621,7 @@ function_9536aa3d() {
 
   foreach(lucky in var_269add6e) {
     spawn_point = rotatepoint((radius, 0, 0), (0, randomint(360), 0));
-    lucky setorigin(center + spawn_point + (0, 0, 20000));
+    lucky setOrigin(center + spawn_point + (0, 0, 20000));
     lucky forcefreefall(1, (0, 0, 0), 0);
   }
 }

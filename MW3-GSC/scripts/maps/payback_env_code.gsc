@@ -344,13 +344,13 @@ _id_676E(var_0) {
 }
 
 _id_676F() {
-  var_0 = getent("construction_umbrella", "targetname");
+  var_0 = getEnt("construction_umbrella", "targetname");
   var_0 thread _id_676B("umbrella", "heli_wind_far", randomfloatrange(0.0, 1.5));
   common_scripts\utility::flag_wait("stop_construction_anims");
   var_0 notify("deleted_through_script");
   var_0 delete();
   common_scripts\utility::flag_wait("start_rescue_anims");
-  var_1 = getent("nikolai_umbrella", "targetname");
+  var_1 = getEnt("nikolai_umbrella", "targetname");
   var_1 thread _id_676B("umbrella", "heli_wind_far", randomfloatrange(0.0, 1.5));
 }
 
@@ -719,26 +719,26 @@ _id_6789() {
 }
 
 _id_678A() {
-  var_0 = common_scripts\utility::getstruct("gate_origin", "targetname");
+  var_0 = common_scripts\utility::getStruct("gate_origin", "targetname");
   var_1 = "gate_loop_closed";
   var_2 = "gate_loop_closed_single";
-  var_3 = getent("wind_gate_left", "targetname");
-  var_4 = getent("wind_gate_right", "targetname");
+  var_3 = getEnt("wind_gate_left", "targetname");
+  var_4 = getEnt("wind_gate_right", "targetname");
 
   if(isDefined(var_3) && isDefined(var_4)) {
     var_3 delete();
     var_4 delete();
-    var_5 = getent("gate_rig", "targetname");
+    var_5 = getEnt("gate_rig", "targetname");
     thread _id_678B(var_0, var_2, var_1, var_5);
     thread _id_678C(var_5, var_0);
   }
 
-  var_0 = common_scripts\utility::getstruct("sandstorm_gates_2", "targetname");
+  var_0 = common_scripts\utility::getStruct("sandstorm_gates_2", "targetname");
 
   if(isDefined(var_0)) {
     var_1 = "gate_loop_2";
     var_2 = "gate_loop_2_single";
-    var_5 = getent("gate_rig_2", "targetname");
+    var_5 = getEnt("gate_rig_2", "targetname");
     thread _id_678B(var_0, var_2, var_1, var_5);
     thread _id_678C(var_5, var_0);
   }
@@ -765,7 +765,7 @@ _id_678C(var_0, var_1) {
   var_2 maps\_anim::_id_1244();
   var_2 attach("pb_gate_chain", "J_prop_1");
 
-  if(var_0 == getent("gate_rig", "targetname")) {
+  if(var_0 == getEnt("gate_rig", "targetname")) {
     var_3 = "chain_windy_loop_closed_single";
     var_4 = "chain_windy_loop_closed";
     var_5 = "gate_1_stop";
@@ -839,14 +839,14 @@ _id_6791(var_0, var_1, var_2) {
   self waittill("trigger");
   var_3 = undefined;
   var_4 = undefined;
-  var_5 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_5 = common_scripts\utility::getStruct(self.target, "targetname");
 
   if(!isDefined(var_5)) {
-    var_3 = getent(self.target, "targetname");
-    var_5 = common_scripts\utility::getstruct(var_3.target, "targetname");
+    var_3 = getEnt(self.target, "targetname");
+    var_5 = common_scripts\utility::getStruct(var_3.target, "targetname");
   }
 
-  var_6 = common_scripts\utility::getstruct(var_5.target, "targetname");
+  var_6 = common_scripts\utility::getStruct(var_5.target, "targetname");
   var_7 = spawn("script_origin", var_5.origin);
 
   if(isDefined(var_3)) {
@@ -877,13 +877,13 @@ _id_6791(var_0, var_1, var_2) {
 
         if(var_11 <= 50) {
           var_10 solid();
-          var_10 linkto(var_4);
+          var_10 linkTo(var_4);
         }
       }
     }
   }
 
-  var_4 linkto(var_7);
+  var_4 linkTo(var_7);
   var_4 thread maps\_anim::_id_124E(var_4, "roll_loop");
 
   if(var_4._id_1032 == "sstorm_barrel") {
@@ -901,16 +901,16 @@ _id_6791(var_0, var_1, var_2) {
   var_13 = var_5;
 
   for(var_14 = 0; isDefined(var_13.target); var_13 = var_15) {
-    var_15 = common_scripts\utility::getstruct(var_13.target, "targetname");
+    var_15 = common_scripts\utility::getStruct(var_13.target, "targetname");
     var_16 = distance(var_13.origin, var_15.origin);
     var_17 = var_16 / 12;
     var_18 = var_17 / var_13.speed;
-    var_7 moveto(var_15.origin, var_18);
+    var_7 moveTo(var_15.origin, var_18);
     wait(var_18);
     var_14 = var_14 + var_18;
   }
 
-  var_4 stopanimscripted();
+  var_4 stopanimScripted();
   var_4 notify("stop_loop");
 
   if(var_2) {
@@ -931,7 +931,7 @@ _id_6791(var_0, var_1, var_2) {
 
 _id_6793() {
   self waittill("trigger");
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("generic_prop_raven");
   var_1._id_1032 = "sstorm_chicken_coop";
@@ -945,8 +945,8 @@ _id_6793() {
   var_3.angles = var_1 gettagangles("J_prop_2");
   var_3._id_1032 = "sstorm_chicken";
   var_3 maps\_anim::_id_1244();
-  var_2 linkto(var_1, "J_prop_1");
-  var_3 linkto(var_1, "J_prop_2");
+  var_2 linkTo(var_1, "J_prop_1");
+  var_3 linkTo(var_1, "J_prop_2");
   var_1 thread maps\_anim::_id_1246(var_1, "roll_loop");
 
   for(;;) {

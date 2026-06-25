@@ -205,7 +205,7 @@ do_exo_repulsor() {
           var_4 = vectortoangles(var_3);
           var_5 = anglestoup(var_4);
           var_6 = anglesToForward(var_4);
-          var_7 = vectornormalize(var_6);
+          var_7 = vectorNormalize(var_6);
           var_8 = var_1.origin - 0.2 * var_2 * var_7;
           playFX(level.exo_repulsor_impact, var_8, var_7, var_5);
           var_1 maps\mp\_snd_common_mp::snd_message("mp_exo_repulsor_repel");
@@ -249,7 +249,7 @@ do_exo_repulsor() {
           var_12 = vectortoangles(var_11);
           var_13 = anglestoup(var_12);
           var_14 = anglesToForward(var_12);
-          var_15 = vectornormalize(var_14);
+          var_15 = vectorNormalize(var_14);
           var_8 = var_9.origin - 0.2 * var_10 * var_15;
           playFX(level.exo_repulsor_impact, var_8, var_15, var_13);
           var_9 maps\mp\_snd_common_mp::snd_message("mp_exo_repulsor_repel");
@@ -288,7 +288,7 @@ do_exo_repulsor() {
             var_19 = vectortoangles(var_18);
             var_20 = anglestoup(var_19);
             var_21 = anglesToForward(var_19);
-            var_22 = vectornormalize(var_21);
+            var_22 = vectorNormalize(var_21);
             var_8 = var_16.origin - 0.2 * var_17 * var_22;
             playFX(level.exo_repulsor_impact, var_8, var_22, var_20);
             var_16 maps\mp\_snd_common_mp::snd_message("mp_exo_repulsor_repel");
@@ -325,7 +325,7 @@ do_exo_repulsor() {
           var_27 = vectortoangles(var_26);
           var_28 = anglestoup(var_27);
           var_29 = anglesToForward(var_27);
-          var_30 = vectornormalize(var_29);
+          var_30 = vectorNormalize(var_29);
           var_8 = var_24.origin - 0.2 * var_25 * var_30;
           playFX(level.exo_repulsor_impact, var_8, var_30, var_28);
           var_24 maps\mp\_snd_common_mp::snd_message("mp_exo_repulsor_repel");

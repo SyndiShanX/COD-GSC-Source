@@ -465,7 +465,7 @@ function mocomptraversalproceduralinit(entity, mocompanim, mocompanimblendouttim
   traversal.endposition = traversal.startposition + rotatepoint(getmovedelta(mocompanim, 0, end_time), traversal.startangles);
 
   if(isDefined(traversal.endnode) && isDefined(traversal.endnode.script_linkname)) {
-    traversal.endnodeparent = getent(traversal.endnode.script_linkname, "targetname");
+    traversal.endnodeparent = getEnt(traversal.endnode.script_linkname, "targetname");
 
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
@@ -517,7 +517,7 @@ function mocomptraversalproceduralpivotinit(entity, mocompanim, mocompanimblendo
   traversal.endposition = traversal.startposition + rotatepoint(getmovedelta(mocompanim, 0, end_time), traversal.startangles);
 
   if(isDefined(traversal.endnode) && isDefined(traversal.endnode.script_linkname)) {
-    traversal.endnodeparent = getent(traversal.endnode.script_linkname, "targetname");
+    traversal.endnodeparent = getEnt(traversal.endnode.script_linkname, "targetname");
 
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
@@ -713,7 +713,7 @@ function function_f8a10630(entity, mocompanim, mocompanimblendouttime, mocompani
   traversal.endposition = traversal.startposition + rotatepoint(getmovedelta(mocompanimblendouttime, 0, end_time), traversal.startangles);
 
   if(isDefined(traversal.endnode) && isDefined(traversal.endnode.script_linkname)) {
-    traversal.endnodeparent = getent(traversal.endnode.script_linkname, "targetname");
+    traversal.endnodeparent = getEnt(traversal.endnode.script_linkname, "targetname");
 
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = mocompanim setcontents(8192);
@@ -1034,7 +1034,7 @@ function private mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendou
   }
 
   if(var_9efa995e > mocompanim.var_26b7e15a * mocompanim.var_26b7e15a) {
-    movevector = vectornormalize(movevector) * mocompanim.var_26b7e15a;
+    movevector = vectorNormalize(movevector) * mocompanim.var_26b7e15a;
   }
 
   mocompanim forceteleport(mocompanim.origin + movevector, mocompanim.angles, 0);
@@ -1274,7 +1274,7 @@ function private function_c0c49b7f(entity) {
     return;
   }
 
-  velocity_norm = vectornormalize(entity.var_faf3d7c1);
+  velocity_norm = vectorNormalize(entity.var_faf3d7c1);
 
   if(!is_true(entity.var_d4da163b) && !is_true(traced)) {
     entity.var_d4da163b = 1;

@@ -168,7 +168,7 @@ func_7043(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
     }
 
     var_0E[var_0E.size] = var_12;
-    var_12.var_001D = vectortoangles(vectornormalize(var_11 - var_10));
+    var_12.var_001D = vectortoangles(vectorNormalize(var_11 - var_10));
     var_13 = anglesToForward(var_12.var_001D);
     var_14 = anglestoright(var_12.var_001D);
     if(isDefined(param_06) && param_06) {
@@ -222,7 +222,7 @@ func_7043(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
     var_12 thread func_7025();
     var_12 lib_0378::func_8D74("mp_intro_dday_plane_flyover", var_0A, var_12.var_7021);
-    var_12 moveto(var_12.var_4800, param_02);
+    var_12 moveTo(var_12.var_4800, param_02);
     var_0D++;
     wait 0.05;
   }
@@ -243,11 +243,11 @@ func_7025() {
   var_04 = 1;
   for(;;) {
     if(var_04 % 2 == 0) {
-      self rotateto(self.var_001D + (0, 0, var_01), var_03);
+      self rotateTo(self.var_001D + (0, 0, var_01), var_03);
     } else if(var_04 % 3 == 0) {
-      self rotateto(self.var_001D + (0, 0, var_00), var_03);
+      self rotateTo(self.var_001D + (0, 0, var_00), var_03);
     } else {
-      self rotateto(self.var_001D + (0, 0, var_02), var_03);
+      self rotateTo(self.var_001D + (0, 0, var_02), var_03);
     }
 
     wait(var_03);

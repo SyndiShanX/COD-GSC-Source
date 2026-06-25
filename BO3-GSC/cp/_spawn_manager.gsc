@@ -385,7 +385,7 @@ function spawn_manager_think() {
     assert(!level flag::get(("" + self.sm_id) + ""), "");
     assert(!level flag::get(("" + self.sm_id) + ""), "");
     if(!(isDefined(self.script_forcespawn) && self.script_forcespawn)) {
-      numplayers = max(getplayers().size, 1);
+      numplayers = max(getPlayers().size, 1);
       wait((laststand::player_num_in_laststand() / numplayers) * 8);
     }
   }
@@ -540,7 +540,7 @@ function spawn_manager_wait() {
     }
   } else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
     coop_scalar = 1;
-    players = getplayers();
+    players = getPlayers();
     if(players.size == 2) {
       coop_scalar = 0.7;
     } else {
@@ -602,7 +602,7 @@ function set_global_active_count(cnt) {
 
 function use_trig_when_complete(spawn_manager_targetname, trig_name, trig_key, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, trig_key);
+    trigger = getEnt(trig_name, trig_key);
     assert(isDefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
     trigger endon("trigger");
   }
@@ -616,7 +616,7 @@ function use_trig_when_complete(spawn_manager_targetname, trig_name, trig_key, o
 
 function use_trig_when_cleared(spawn_manager_targetname, trig_name, trig_key, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, trig_key);
+    trigger = getEnt(trig_name, trig_key);
     assert(isDefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
     trigger endon("trigger");
   }
@@ -630,7 +630,7 @@ function use_trig_when_cleared(spawn_manager_targetname, trig_name, trig_key, on
 
 function use_trig_when_enabled(spawn_manager_targetname, trig_name, trig_key, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, trig_key);
+    trigger = getEnt(trig_name, trig_key);
     assert(isDefined(trigger), ((("" + trig_key) + "") + trig_name) + "");
     trigger endon("trigger");
   }

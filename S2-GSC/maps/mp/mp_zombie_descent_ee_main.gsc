@@ -100,7 +100,7 @@ descent_give_large_reward() {
 }
 
 quest_step_unlock_pap() {
-  var_00 = getent("zmb_pack_a_punch_descent", "targetname");
+  var_00 = getEnt("zmb_pack_a_punch_descent", "targetname");
   var_00.destination_origin = var_00.var_116;
   var_01 = var_00 common_scripts\utility::func_8FFC();
   var_01 method_805B();
@@ -126,7 +126,7 @@ quest_step_unlock_pap() {
 }
 
 raise_machine_to_unlock_pack_a_punch() {
-  var_00 = getent("pack_a_punch_weapon_display", "targetname");
+  var_00 = getEnt("pack_a_punch_weapon_display", "targetname");
   var_00 method_8511();
   var_01 = function_021F("zmb_upgrade_machine", "targetname");
   foreach(var_03 in var_01) {
@@ -142,7 +142,7 @@ move_to_position(param_00) {
   var_02 = self.destination_origin;
   var_03 = self.var_6C4E;
   lib_0378::func_8D74("aud_pap_rise");
-  self moveto(vectorlerp(var_03, var_02, param_00 / 3), var_01, var_01 / 4, var_01 / 4);
+  self moveTo(vectorlerp(var_03, var_02, param_00 / 3), var_01, var_01 / 4, var_01 / 4);
   wait(var_01);
 }
 
@@ -179,7 +179,7 @@ raven_trial_teleport_on_fall() {
   for(;;) {
     self waittill("trigger", var_00);
     if(isPlayer(var_00) && isalive(var_00)) {
-      var_00 setorigin(common_scripts\utility::func_46B5(self.var_1A2, "targetname").var_116);
+      var_00 setOrigin(common_scripts\utility::func_46B5(self.var_1A2, "targetname").var_116);
       var_00 thread raven_trial_fall_damage();
     }
   }
@@ -355,10 +355,10 @@ reveal_blood_fx(param_00, param_01) {
 }
 
 run_stopper() {
-  var_00 = getent("zmf_bloodraven_plug_find", "targetname");
-  var_01 = getent("zmf_bloodraven_plug_trig_find", "targetname");
-  var_02 = getent("zmf_bloodraven_plug_trig", "targetname");
-  var_03 = getent("zmf_bloodraven_plug", "targetname");
+  var_00 = getEnt("zmf_bloodraven_plug_find", "targetname");
+  var_01 = getEnt("zmf_bloodraven_plug_trig_find", "targetname");
+  var_02 = getEnt("zmf_bloodraven_plug_trig", "targetname");
+  var_03 = getEnt("zmf_bloodraven_plug", "targetname");
   var_03 method_805C();
   var_01 waittill("trigger", var_04);
   var_00 method_805C();
@@ -376,8 +376,8 @@ quest_step_bloodraven_acquire_radio() {
 }
 
 run_bomber_debris_puzzle() {
-  var_00 = getent("zmf_bloodraven_radio_blocker", "targetname");
-  var_01 = getent(var_00.var_1A2, "targetname");
+  var_00 = getEnt("zmf_bloodraven_radio_blocker", "targetname");
+  var_01 = getEnt(var_00.var_1A2, "targetname");
   var_02 = (0, 0, 0);
   var_03 = 0;
   while(distance(var_00.var_116, var_02) > var_03) {
@@ -392,10 +392,10 @@ run_bomber_debris_puzzle() {
 
 acquire_radio() {
   common_scripts\utility::func_3C87("radio_collected");
-  var_00 = getent("zmf_bloodraven_radio_find", "targetname");
-  var_01 = getent("zmf_bloodraven_radio_find_trig", "targetname");
-  var_02 = getent("zmf_bloodraven_radio_place", "targetname");
-  var_03 = getent("zmf_bloodraven_radio_place_trig", "targetname");
+  var_00 = getEnt("zmf_bloodraven_radio_find", "targetname");
+  var_01 = getEnt("zmf_bloodraven_radio_find_trig", "targetname");
+  var_02 = getEnt("zmf_bloodraven_radio_place", "targetname");
+  var_03 = getEnt("zmf_bloodraven_radio_place_trig", "targetname");
   var_00 method_805C();
   var_02 method_805C();
   wait(1);
@@ -411,10 +411,10 @@ acquire_radio() {
 
 acquire_speakers() {
   common_scripts\utility::func_3C87("speakers_collected");
-  var_00 = getent("zmf_bloodraven_speakers_find_trig", "targetname");
-  var_01 = getent("zmf_bloodraven_speakers_find", "targetname");
-  var_02 = getent("zmf_bloodraven_speakers_place_trig", "targetname");
-  var_03 = getent("zmf_bloodraven_speakers_place", "targetname");
+  var_00 = getEnt("zmf_bloodraven_speakers_find_trig", "targetname");
+  var_01 = getEnt("zmf_bloodraven_speakers_find", "targetname");
+  var_02 = getEnt("zmf_bloodraven_speakers_place_trig", "targetname");
+  var_03 = getEnt("zmf_bloodraven_speakers_place", "targetname");
   var_01 method_805C();
   var_03 method_805C();
   wait(1);
@@ -428,7 +428,7 @@ acquire_speakers() {
 }
 
 radio_set() {
-  var_00 = getent("zmf_bloodraven_radio_place", "targetname");
+  var_00 = getEnt("zmf_bloodraven_radio_place", "targetname");
   var_00 method_805B();
   var_00 lib_0378::func_8D74("aud_bloodraven_radio_place");
   common_scripts\utility::func_3C8F("radio_collected");
@@ -442,7 +442,7 @@ turn_on_vfx() {
 }
 
 speakers_set() {
-  var_00 = getent("zmf_bloodraven_speakers_place", "targetname");
+  var_00 = getEnt("zmf_bloodraven_speakers_place", "targetname");
   var_00 method_805B();
   var_00 lib_0378::func_8D74("aud_bloodraven_speaker_place");
   common_scripts\utility::func_3C8F("speakers_collected");
@@ -520,7 +520,7 @@ handle_code_entry() {
   var_03 = var_01.size;
   var_00.row = 0;
   var_00.column = 0;
-  var_04 = getent("zmf_bloodraven_radio_place_trig", "targetname");
+  var_04 = getEnt("zmf_bloodraven_radio_place_trig", "targetname");
   common_scripts\utility::func_3C9F("radio_collected");
   common_scripts\utility::func_3C9F("speakers_collected");
   self.onzombiesacrificedfunc = ::radio_soul_collect_response;
@@ -639,7 +639,7 @@ wait_for_structs_revealed(param_00) {
 }
 
 radio_soul_collect_response(param_00) {
-  var_01 = getent("zmf_bloodraven_radio_place_trig", "targetname");
+  var_01 = getEnt("zmf_bloodraven_radio_place_trig", "targetname");
   thread maps\mp\mp_zombie_descent::on_zombie_soul_collected_func(param_00);
   var_01 notify("trigger");
 }
@@ -660,7 +660,7 @@ quest_step_bloodraven_complete_trial() {
   var_04 = 0;
   while(!var_04) {
     var_00.old_destination = var_03;
-    var_00 setorigin(var_02.var_116, 1);
+    var_00 setOrigin(var_02.var_116, 1);
     if(common_scripts\utility::func_562E(var_00 run_weapon_ritual("zom_dlc4_shield_zm"))) {
       break;
     }
@@ -840,7 +840,7 @@ drain_soul_collect_response(param_00) {
 
 display_progress_in_blood() {
   var_00 = self;
-  var_01 = getent(var_00.var_1A2, "targetname");
+  var_01 = getEnt(var_00.var_1A2, "targetname");
   var_01.full_origin = var_01.var_116;
   var_01.empty_origin = var_01.var_116 - (0, 0, 16);
   var_01.var_116 = var_01.empty_origin;
@@ -861,7 +861,7 @@ display_progress_in_blood() {
       var_02 = 1;
     }
 
-    var_01 moveto(vectorlerp(var_01.empty_origin, var_01.full_origin, var_02), 0.5);
+    var_01 moveTo(vectorlerp(var_01.empty_origin, var_01.full_origin, var_02), 0.5);
     wait(0.5);
   }
 }
@@ -881,9 +881,9 @@ __________________deathraven__________________() {}
 
 quest_step_deathraven_push_stone() {
   level thread handle_wire_pickup();
-  var_00 = getent("zmb_deathraven_stone", "targetname");
+  var_00 = getEnt("zmb_deathraven_stone", "targetname");
   var_00.dest = common_scripts\utility::func_46B5(var_00.var_1A2, "targetname");
-  var_01 = getent("zmb_deathraven_trigger", "targetname");
+  var_01 = getEnt("zmb_deathraven_trigger", "targetname");
   var_01 waittill("trigger", var_02);
   lib_0378::func_8D74("aud_deathraven_button", var_00);
   lib_0557::func_782D("quest_deathraven", "quest_deathraven_activate_rush");
@@ -910,8 +910,8 @@ handle_wire_pickup() {
 }
 
 quest_step_deathraven_survive_rush() {
-  var_00 = getent("zmb_deathraven_stone", "targetname");
-  var_00 moveto(var_00.dest.var_116, 1, 0, 0.2);
+  var_00 = getEnt("zmb_deathraven_stone", "targetname");
+  var_00 moveTo(var_00.dest.var_116, 1, 0, 0.2);
   foreach(var_02 in level.var_744A) {
     if(distance(var_02.var_116, var_00.var_116) > 1000) {
       continue;
@@ -928,7 +928,7 @@ quest_step_deathraven_survive_rush() {
   level.zmb_locked_spawn_zones = ["zone_gallery"];
   maps\mp\mp_zombie_nest_ee_wave_manipulation::func_8606();
   level.overridespawndelay = 0.08;
-  var_05 = getent("deathraven_blood_raise", "targetname");
+  var_05 = getEnt("deathraven_blood_raise", "targetname");
   if(isDefined(var_05)) {
     var_05 movez(7, 35);
   }
@@ -1030,7 +1030,7 @@ show_marked_eater_to_scythe_holders() {
 mark_death_event_goers() {
   level notify("mark_event_goers");
   level endon("mark_event_goers");
-  var_00 = getent("zone_gallery_deathravent_event", "targetname");
+  var_00 = getEnt("zone_gallery_deathravent_event", "targetname");
   while(!common_scripts\utility::func_3C77(lib_0557::func_7838("quest_deathraven", "quest_deathraven_survive_rush"))) {
     foreach(var_02 in level.var_744A) {
       if(var_02 istouching(var_00) && !lib_0547::func_577E(var_02)) {
@@ -1079,10 +1079,10 @@ quest_step_deathraven_pickup_weapon() {
 }
 
 quest_step_deathraven_assemble_weapon() {
-  var_00 = getent("zmb_deathraven_assembly_trigger", "targetname");
-  var_01 = getent("zmb_deathraven_assembly_spine", "targetname");
-  var_02 = getent("zmb_deathraven_assembly_metal", "targetname");
-  var_03 = getent("zmb_deathraven_assembly_scythe", "targetname");
+  var_00 = getEnt("zmb_deathraven_assembly_trigger", "targetname");
+  var_01 = getEnt("zmb_deathraven_assembly_spine", "targetname");
+  var_02 = getEnt("zmb_deathraven_assembly_metal", "targetname");
+  var_03 = getEnt("zmb_deathraven_assembly_scythe", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_04);
     if(common_scripts\utility::func_3C77("deathraven_spine_collected")) {
@@ -1122,7 +1122,7 @@ quest_step_deathraven_assemble_weapon() {
 
 quest_step_deathraven_fuse() {
   show_scythe_assembly();
-  var_00 = getent("zmb_deathraven_assembly_scythe", "targetname");
+  var_00 = getEnt("zmb_deathraven_assembly_scythe", "targetname");
   var_01 = var_00 common_scripts\utility::func_8FFC();
   var_01 method_805B();
   var_01.onzombiesacrificedfunc = ::onscythezombiecollected;
@@ -1132,7 +1132,7 @@ quest_step_deathraven_fuse() {
 }
 
 onscythezombiecollected(param_00) {
-  var_01 = getent("zmb_deathraven_assembly_scythe", "targetname");
+  var_01 = getEnt("zmb_deathraven_assembly_scythe", "targetname");
   if(param_00.var_AC2C == 5) {
     playFXOnTag(common_scripts\utility::func_44F5("zmb_death_scythe_forge"), var_01, "tag_fx");
     var_01 lib_0378::func_8D74("aud_deathraven_scythe_heat_stage_1");
@@ -1140,7 +1140,7 @@ onscythezombiecollected(param_00) {
 }
 
 quest_step_deathraven_transport() {
-  var_00 = getent("zmb_deathraven_assembly_scythe", "targetname");
+  var_00 = getEnt("zmb_deathraven_assembly_scythe", "targetname");
   stopFXOnTag(common_scripts\utility::func_44F5("zmb_death_scythe_forge"), var_00, "tag_fx");
   playFXOnTag(common_scripts\utility::func_44F5("zmb_death_scythe_forge_stage2"), var_00, "tag_fx");
   var_00 lib_0378::func_8D74("aud_deathraven_scythe_heat_stage_2");
@@ -1167,7 +1167,7 @@ quest_step_deathraven_transport() {
 }
 
 wait_for_deathraven_spine_pickup() {
-  var_00 = getent("zmb_deathraven_assembly_trigger", "targetname");
+  var_00 = getEnt("zmb_deathraven_assembly_trigger", "targetname");
   var_01 = undefined;
   var_00 common_scripts\utility::func_9DA3();
   while(!isDefined(var_01) || !common_scripts\utility::func_562E(var_00.assembled)) {
@@ -1234,7 +1234,7 @@ cleanup_deathraven_combat_event(param_00) {
   level endon("cleanup_deathraven_combat_event");
   maps\mp\mp_zombie_nest_ee_wave_manipulation::func_8608();
   maps\mp\gametypes\zombies::func_8B2(param_00, 1);
-  var_01 = getent("deathraven_weapon_cover", "targetname");
+  var_01 = getEnt("deathraven_weapon_cover", "targetname");
   var_01 method_805C();
   level.overridespawndelay = undefined;
   level.zmb_locked_spawn_zones = undefined;
@@ -1247,7 +1247,7 @@ cleanup_deathraven_combat_event(param_00) {
 
 init_deathraven_quest() {
   enable_firewalls(0);
-  var_00 = getent("deathraven_blood_raise", "targetname");
+  var_00 = getEnt("deathraven_blood_raise", "targetname");
   var_00 movez(-7, 0.1);
   common_scripts\utility::func_3C87("deathraven_spine_collected");
   common_scripts\utility::func_3C87("deathraven_metal_collected");
@@ -1258,9 +1258,9 @@ init_deathraven_quest() {
 }
 
 hide_scythe_assembly() {
-  var_00 = getent("zmb_deathraven_assembly_spine", "targetname");
-  var_01 = getent("zmb_deathraven_assembly_metal", "targetname");
-  var_02 = getent("zmb_deathraven_assembly_scythe", "targetname");
+  var_00 = getEnt("zmb_deathraven_assembly_spine", "targetname");
+  var_01 = getEnt("zmb_deathraven_assembly_metal", "targetname");
+  var_02 = getEnt("zmb_deathraven_assembly_scythe", "targetname");
   var_00 method_805C();
   var_01 method_805C();
   var_02 method_805C();
@@ -1268,9 +1268,9 @@ hide_scythe_assembly() {
 
 show_scythe_assembly() {
   level.zmb_scythe_no_spawn = 1;
-  var_00 = getent("zmb_deathraven_assembly_spine", "targetname");
-  var_01 = getent("zmb_deathraven_assembly_metal", "targetname");
-  var_02 = getent("zmb_deathraven_assembly_scythe", "targetname");
+  var_00 = getEnt("zmb_deathraven_assembly_spine", "targetname");
+  var_01 = getEnt("zmb_deathraven_assembly_metal", "targetname");
+  var_02 = getEnt("zmb_deathraven_assembly_scythe", "targetname");
   var_00 method_805B();
   var_01 method_805B();
   var_02 method_805B();
@@ -1332,7 +1332,7 @@ push_off_wall(param_00) {
   param_00 endon("disconnect");
   var_01 = param_00.var_116 - self.var_116;
   var_01 = (var_01[0], var_01[1], 0);
-  var_02 = vectornormalize(var_01);
+  var_02 = vectorNormalize(var_01);
   param_00 setvelocity(300 * var_02 + (0, 0, 100));
   param_00.isonpushcooldown = 1;
   playfxontagforclients(level.var_611["player_screen_burn"], param_00, "TAG_ORIGIN", param_00);
@@ -1382,7 +1382,7 @@ run_weapon_ritual(param_00, param_01) {
     var_02[[var_03.return_func]]();
   } else {
     if(isDefined(var_02.old_destination.var_116)) {
-      var_02 setorigin(var_02.old_destination.var_116);
+      var_02 setOrigin(var_02.old_destination.var_116);
     }
 
     if(isDefined(var_02.old_destination.var_1D)) {
@@ -1659,12 +1659,12 @@ moonraven_trial_flamewave(param_00, param_01) {
 }
 
 moonraven_trial_star_warning() {
-  var_00 = getent("moonraven_trail_star_center", "targetname");
+  var_00 = getEnt("moonraven_trail_star_center", "targetname");
   var_01 = getEntArray("moonraven_trail_star_outer", "targetname");
   var_02 = 3;
   foreach(var_04 in var_01) {
     var_04.old_position = var_04.var_116;
-    var_04 moveto(var_00.var_116, var_02, 0.2, 0.2);
+    var_04 moveTo(var_00.var_116, var_02, 0.2, 0.2);
   }
 
   wait(var_02);
@@ -1693,7 +1693,7 @@ stars_reset(param_00, param_01, param_02) {
 
 star_reset_and_show() {
   var_00 = self;
-  var_00 moveto(var_00.old_position, 0.5);
+  var_00 moveTo(var_00.old_position, 0.5);
   wait(0.6);
   var_00 method_805B();
 }
@@ -1713,7 +1713,7 @@ moonraven_trial_teleport_from_trial() {
   }
 
   waittillframeend;
-  var_01 setorigin(var_00.var_116);
+  var_01 setOrigin(var_00.var_116);
   var_01 setangles(var_00.var_1D);
   if(isDefined(self.wing_fx)) {
     thread maps\mp\zombies\zombie_king::spawn_wings();
@@ -1778,7 +1778,7 @@ bloodraven_exit_from_trial() {
   thread maps\mp\zombies\_zombies_blood_tubes::run_blood_intro(self getEye(), self getEye());
   wait(2);
   var_00 = common_scripts\utility::func_46B5("struct_bloodraven_trial_exit", "targetname");
-  self setorigin(var_00.var_116, 1);
+  self setOrigin(var_00.var_116, 1);
   self setangles(var_00.var_1D);
   playFX(level.var_611["gib_full_body"], self.var_116);
   wait(4);
@@ -1885,7 +1885,7 @@ spawn_pap_zombie(param_00) {
 
 track_pap_zone() {
   self endon("death");
-  var_00 = getent("zone_lost", "targetname");
+  var_00 = getEnt("zone_lost", "targetname");
   self waittill("zombie_fall_impact");
   while(self istouching(var_00) || !common_scripts\utility::func_562E(self.var_4BA0)) {
     wait 0.05;
@@ -2046,7 +2046,7 @@ stormraven_bloodstopper_place() {
 }
 
 stormraven_bloodfall_init() {
-  self.stoppermodel = getent(self.var_1A2, "targetname");
+  self.stoppermodel = getEnt(self.var_1A2, "targetname");
   self.stoppermodel method_805C();
   self.stoppermodel notsolid();
   var_00 = common_scripts\utility::func_46B7(self.var_1A2, "targetname");
@@ -2290,7 +2290,7 @@ stormraven_hammer_summon() {
   level.stormhammer.var_3F76 setModel("tag_origin");
   level.stormhammer.var_3F76 method_8449(level.stormhammer);
   playFXOnTag(common_scripts\utility::func_44F5("zmb_storm_hammer_charge"), level.stormhammer.var_3F76, "tag_origin");
-  var_01 = getent("hammer_tether_location", "targetname");
+  var_01 = getEnt("hammer_tether_location", "targetname");
   level.hammerlocation = var_01;
   level.stormhammer lib_0378::func_8D74("aud_stormraven_warhammer_spawn");
   level notify("stormraven_hammer_summoned");
@@ -2348,15 +2348,15 @@ stormraven_sneaking_init() {
     return;
   }
 
-  var_00 = getent("stormhammer_sneak_trigger", "targetname");
-  var_00 enablelinkto();
+  var_00 = getEnt("stormhammer_sneak_trigger", "targetname");
+  var_00 enablelinkTo();
   if(isDefined(level.stormhammer)) {
     var_00 method_8449(level.stormhammer);
   }
 
   var_00 thread stormraven_sneaking_start_sneak_check();
-  var_01 = getent("stormhammer_disable_tp_trigger", "targetname");
-  var_01 enablelinkto();
+  var_01 = getEnt("stormhammer_disable_tp_trigger", "targetname");
+  var_01 enablelinkTo();
   if(isDefined(level.stormhammer)) {
     var_01 method_8449(level.stormhammer);
   }
@@ -2470,11 +2470,11 @@ stormraven_flee_init() {
   var_00 = common_scripts\utility::func_46B7("hammer_flee_location", "script_noteworthy");
   var_01 = common_scripts\utility::func_4461(level.stormhammer.var_116, var_00, 200);
   level.hammerlocation = var_01;
-  var_02 = getent("stormraven_hammer_impact_trigger", "targetname");
-  var_02 enablelinkto();
+  var_02 = getEnt("stormraven_hammer_impact_trigger", "targetname");
+  var_02 enablelinkTo();
   var_02 method_8449(level.stormhammer);
   var_02 thread stormraven_flee_knockback();
-  var_03 = getent("stormhammer_sneak_trigger", "targetname");
+  var_03 = getEnt("stormhammer_sneak_trigger", "targetname");
   var_03 thread stormraven_flee_detect_player();
   level.stormhammer thread lib_0378::func_8D74("aud_stormraven_warhammer_steady_mvmt");
 }
@@ -2621,12 +2621,12 @@ stormraven_flee_orient_and_move(param_00) {
   var_05 = vectortoangles(var_04);
   common_scripts\utility::func_33BA(level.stormhammer.var_116, param_00.var_116, 0, 1, 1, 6);
   level.stormhammer.var_1D = var_05 + (90, 0, 0);
-  level.stormhammer moveto(param_00.var_116, var_03);
+  level.stormhammer moveTo(param_00.var_116, var_03);
   wait(var_03);
   if(var_02 >= 4) {
-    level.stormhammer moveto(level.hammerlocation.var_116, 0.25);
+    level.stormhammer moveTo(level.hammerlocation.var_116, 0.25);
     wait(0.25);
-    level.stormhammer rotateto((0, 0, 0), 0.25);
+    level.stormhammer rotateTo((0, 0, 0), 0.25);
     wait(0.25);
     return;
   }
@@ -2657,7 +2657,7 @@ stormraven_uber_init() {
   var_00 = common_scripts\utility::func_46B5("stormraven_wreckage_uber", "targetname");
   var_01 = spawn("script_model", var_00.var_116);
   var_01 setModel("npc_zom_uber_01");
-  var_01.var_9D65 = getent("stormraven_wreckage_uber_trigger", "targetname");
+  var_01.var_9D65 = getEnt("stormraven_wreckage_uber_trigger", "targetname");
   var_01.var_9D65 waittill("trigger", var_02);
   var_02 thread lib_0585::func_8555("stormraven_uber");
   level notify("player grabbed uber battery");
@@ -2667,7 +2667,7 @@ stormraven_uber_init() {
 }
 
 stormraven_uber_place() {
-  var_00 = getent("stormraven_uber_place_trigger", "targetname");
+  var_00 = getEnt("stormraven_uber_place_trigger", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     var_00 lib_0378::func_8D74("aud_stormraven_uberschnell_place");
@@ -2773,15 +2773,15 @@ stormraven_lightning_rod_puzzle_init() {
     if(isDefined(var_02.var_8260) && var_02.var_8260 == "shuffled") {
       var_02.rotatestate = randomintrange(1, 4);
       if(var_02.rotatestate == 1) {
-        var_02 rotateyaw(90, 0.05);
+        var_02 rotateYaw(90, 0.05);
       }
 
       if(var_02.rotatestate == 2) {
-        var_02 rotateyaw(180, 0.05);
+        var_02 rotateYaw(180, 0.05);
       }
 
       if(var_02.rotatestate == 3) {
-        var_02 rotateyaw(270, 0.05);
+        var_02 rotateYaw(270, 0.05);
       }
     } else {
       var_02.rotatestate = 0;
@@ -2856,7 +2856,7 @@ stormraven_lightning_rod_rotate_block(param_00, param_01) {
     param_00.rotatestate = 0;
   }
 
-  param_00 rotateyaw(param_01, level.stormravenblockrotatetime);
+  param_00 rotateYaw(param_01, level.stormravenblockrotatetime);
 }
 
 stormraven_lightning_rod_completion() {
@@ -2981,19 +2981,19 @@ stormraven_call_lightning_init() {
   foreach(var_02 in var_00) {
     var_02 setCanDamage(1);
     var_02.ischarged = 0;
-    var_02.damagetrigger = getent(var_02.var_1A2, "targetname");
+    var_02.damagetrigger = getEnt(var_02.var_1A2, "targetname");
     var_02 thread stormraven_lightning_rune_charge_state();
     var_02 thread stormraven_lightning_rune_damage();
   }
 
-  level.specialrune = getent("stormraven_special_lightning_rune", "targetname");
-  var_04 = getent("stormraven_special_lightning_rune_discharge_zone", "targetname");
+  level.specialrune = getEnt("stormraven_special_lightning_rune", "targetname");
+  var_04 = getEnt("stormraven_special_lightning_rune_discharge_zone", "targetname");
   level.specialrune.dischargezone = var_04;
   level.specialrune.ischarged = 0;
   level.specialrune thread stormraven_special_lightning_rune_soulbucket_activate();
   level.specialrune thread stormraven_lightning_rune_charge_state();
-  var_05 = getent("stormraven_charge_puzzle_rune", "targetname");
-  var_05.var_9D65 = getent("stormraven_charge_puzzle_activate_trigger", "targetname");
+  var_05 = getEnt("stormraven_charge_puzzle_rune", "targetname");
+  var_05.var_9D65 = getEnt("stormraven_charge_puzzle_activate_trigger", "targetname");
   var_05 thread stormraven_activate_charge_puzzle();
   lib_0547::func_7BA9(::stormraven_hammer_kill_check);
 }
@@ -3302,7 +3302,7 @@ debug_stormraven_hammer_charge_timer_countdown(param_00) {
 
 warp_special_rune_charged() {
   stormraven_hammer_summon();
-  level.specialrune = getent("stormraven_special_lightning_rune", "targetname");
+  level.specialrune = getEnt("stormraven_special_lightning_rune", "targetname");
   common_scripts\utility::func_3C8F("flag_stormraven_hammer_sneaking_complete");
   common_scripts\utility::func_3C8F("flag_stormraven_hammer_tethered");
   common_scripts\utility::func_3C8F("flag_stormraven_hammer_picked_up");
@@ -3446,7 +3446,7 @@ stormraven_charge_puzzle_block_rotate(param_00) {
     level.chargepuzzlehazard = 1;
     var_01 = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_desc_storm_p_block_reset"), self, "Tag_Origin");
     triggerfx(var_01);
-    self rotateyaw(1080, 3);
+    self rotateYaw(1080, 3);
     wait(3);
     var_01 delete();
     wait 0.05;
@@ -3456,7 +3456,7 @@ stormraven_charge_puzzle_block_rotate(param_00) {
 
   if(self.puzzlestate == "charged") {
     level waittill("charge_puzzle_rotate");
-    self rotateto(self.unchargedpos, param_00);
+    self rotateTo(self.unchargedpos, param_00);
     wait(param_00);
     self.puzzlestate = "uncharged";
     return;
@@ -3464,7 +3464,7 @@ stormraven_charge_puzzle_block_rotate(param_00) {
 
   if(self.puzzlestate == "uncharged") {
     level waittill("charge_puzzle_rotate");
-    self rotateto(self.chargedpos, param_00);
+    self rotateTo(self.chargedpos, param_00);
     wait(param_00);
     self.puzzlestate = "charged";
     return;
@@ -3549,14 +3549,14 @@ stormraven_charge_puzzle_spin(param_00) {
       break;
     }
 
-    self rotateyaw(360, var_02);
+    self rotateYaw(360, var_02);
     wait(var_02);
   }
 }
 
 stormraven_charge_puzzle_spin_to_start_pos(param_00, param_01) {
   for(;;) {
-    self rotateyaw(5, param_01 / 72);
+    self rotateYaw(5, param_01 / 72);
     wait(param_01 / 72);
     var_02 = self.var_1D[1] % 360;
     if(param_00 == "charged") {
@@ -3585,22 +3585,22 @@ stormraven_charge_puzzle_spin_to_start_pos(param_00, param_01) {
   }
 
   if(param_00 == "charged") {
-    self rotateto(self.chargedpos, param_01, param_01 * 0.2, param_01 * 0.8);
+    self rotateTo(self.chargedpos, param_01, param_01 * 0.2, param_01 * 0.8);
     wait(param_01);
     self.puzzlestate = "charged";
     self.var_565F = 1;
   } else if(param_00 == "uncharged") {
-    self rotateto(self.unchargedpos, param_01, param_01 * 0.2, param_01 * 0.8);
+    self rotateTo(self.unchargedpos, param_01, param_01 * 0.2, param_01 * 0.8);
     wait(param_01);
     self.puzzlestate = "uncharged";
     self.var_565F = 1;
   } else if(param_00 == "hazard") {
-    self rotateto(self.hazardpos, param_01, param_01 * 0.2, param_01 * 0.8);
+    self rotateTo(self.hazardpos, param_01, param_01 * 0.2, param_01 * 0.8);
     wait(param_01);
     self.puzzlestate = "hazard";
     self.var_565F = 1;
   } else if(param_00 == "blank" || !isDefined(param_00)) {
-    self rotateto(self.blankpos, param_01, param_01 * 0.2, param_01 * 0.8);
+    self rotateTo(self.blankpos, param_01, param_01 * 0.2, param_01 * 0.8);
     wait(param_01);
     self.puzzlestate = "blank";
     self.var_565F = 0;
@@ -3668,16 +3668,16 @@ stormraven_charge_puzzle_completion_runes() {
 debug_cycle_block_positions() {
   for(;;) {
     iprintlnbold("Uncharged");
-    self rotateto(self.unchargedpos, 0.5);
+    self rotateTo(self.unchargedpos, 0.5);
     wait(1.5);
     iprintlnbold("Charged");
-    self rotateto(self.chargedpos, 0.5);
+    self rotateTo(self.chargedpos, 0.5);
     wait(1.5);
     iprintlnbold("Blank");
-    self rotateto(self.blankpos, 0.5);
+    self rotateTo(self.blankpos, 0.5);
     wait(1.5);
     iprintlnbold("Hazard");
-    self rotateto(self.hazardpos, 0.5);
+    self rotateTo(self.hazardpos, 0.5);
     wait(1.5);
   }
 }
@@ -3728,8 +3728,8 @@ stormraven_path_activate() {
     var_02 thread stormraven_path_make_visible();
   }
 
-  var_04 = getent("stormraven_platform_trigger", "targetname");
-  var_05 = getent("stormraven_platform_trigger_final", "targetname");
+  var_04 = getEnt("stormraven_platform_trigger", "targetname");
+  var_05 = getEnt("stormraven_platform_trigger_final", "targetname");
   foreach(var_07 in level.var_744A) {
     var_07 thread stormraven_player_on_path(var_04);
     var_07 thread stormraven_path_slow(var_04);
@@ -3872,7 +3872,7 @@ stormraven_path_lightning_fx(param_00) {
 
 stormraven_path_enter_trial() {
   level endon("stormraven_combat_trial_complete");
-  var_00 = getent("stormraven_platform_trigger_final", "targetname");
+  var_00 = getEnt("stormraven_platform_trigger_final", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!var_01 stormraven_player_has_stormhammer()) {
@@ -3882,8 +3882,8 @@ stormraven_path_enter_trial() {
     var_02 = common_scripts\utility::func_46B5("stormraven_platform_ascend_point", "targetname");
     var_01 method_81E1(0);
     var_03 = spawn("script_model", var_01.var_116);
-    var_01 playerlinkto(var_03);
-    var_03 moveto(var_02.var_116, 3, 1, 1);
+    var_01 playerlinkTo(var_03);
+    var_03 moveTo(var_02.var_116, 3, 1, 1);
     var_04 = common_scripts\utility::func_46B7("stormraven_platform_ascend_lightning", "targetname");
     var_05 = 0;
     while(var_05 < 20) {
@@ -3974,13 +3974,13 @@ stormraven_trial_check_for_death() {
 
 stormraven_trial_teleport_to_trial() {
   var_00 = common_scripts\utility::func_46B5("stormraven_trial_player_spawner", "script_noteworthy");
-  self setorigin(var_00.var_116);
+  self setOrigin(var_00.var_116);
   self setangles(var_00.var_1D);
   var_01 = spawn("script_model", var_00.var_116);
-  self playerlinkto(var_01);
+  self playerlinkTo(var_01);
   wait(2);
   var_02 = common_scripts\utility::func_46B5("stormraven_trial_player_spawner_down", "script_noteworthy");
-  var_01 moveto(var_02.var_116, 3, 1, 2);
+  var_01 moveTo(var_02.var_116, 3, 1, 2);
   var_01 thread common_scripts\utility::func_2CBE(2, ::delete);
   self unlink();
   self method_81E1(1);
@@ -4085,7 +4085,7 @@ stormraven_trial_ascension() {
   stormraven_lightning_strike(var_00.var_116);
   var_01 = spawn("script_model", var_00.var_116);
   var_01 setModel("zmd_runes_objects_04c");
-  var_02 = getent("stormraven_trial_ascension_trigger", "targetname");
+  var_02 = getEnt("stormraven_trial_ascension_trigger", "targetname");
   var_03 = common_scripts\utility::func_46B5("stormraven_trial_ascension_ground", "targetname");
   var_04 = common_scripts\utility::func_46B5("stormraven_trial_ascension_sky", "targetname");
   thread stormraven_ascend_logic(var_02, var_03, var_04);
@@ -4123,7 +4123,7 @@ stormraven_trial_teleport_from_trial() {
   thread stormraven_path_trial_transition_fade();
   level waittill("stormraven_trial_fade_peak");
   var_00 = common_scripts\utility::func_46B5("stormraven_trial_teleport_exit", "targetname");
-  self setorigin(var_00.var_116);
+  self setOrigin(var_00.var_116);
   common_scripts\utility::func_3C8F("flag_stormraven_trial_completed");
 }
 
@@ -4249,7 +4249,7 @@ rumble_nearby_players(param_00, param_01) {
   for(;;) {
     foreach(var_05 in level.var_744A) {
       if(distance2d(var_05.var_116, self.var_116) <= param_01) {
-        var_05 playrumbleonentity("damage_heavy");
+        var_05 playRumbleOnEntity("damage_heavy");
       }
     }
 
@@ -4312,14 +4312,14 @@ stormraven_ascend_handle_weapons() {
 stormraven_ascend_ascension(param_00, param_01) {
   self method_81E1(0);
   var_02 = spawn("script_model", self.var_116);
-  self playerlinkto(var_02);
-  var_02 moveto(param_00.var_116, 0.5, 0.25, 0.25);
+  self playerlinkTo(var_02);
+  var_02 moveTo(param_00.var_116, 0.5, 0.25, 0.25);
   wait(0.5);
-  var_02 moveto(param_01.var_116, 1, 0.5, 0.5);
+  var_02 moveTo(param_01.var_116, 1, 0.5, 0.5);
   wait(1);
   level notify("stormhammer_ascension_reached_peak");
   wait(20);
-  var_02 moveto(param_00.var_116, 1, 0.5, 0.5);
+  var_02 moveTo(param_00.var_116, 1, 0.5, 0.5);
   wait(1);
   self method_81E1(1);
   self unlink();
@@ -4425,9 +4425,9 @@ init_moonraven_quest() {
   common_scripts\utility::func_3C87("moon_trial_unlocked");
   common_scripts\utility::func_3C87("moon_trial_entered");
   common_scripts\utility::func_3C87("moon_trial_complete");
-  var_00 = getent("moonraven_debug_book", "targetname");
+  var_00 = getEnt("moonraven_debug_book", "targetname");
   var_00 delete();
-  var_01 = getent("moonraven_debug_gear", "targetname");
+  var_01 = getEnt("moonraven_debug_gear", "targetname");
   var_01 delete();
   thread moonraven_init_bookshelf();
   thread moonraven_init_gears();
@@ -4441,30 +4441,30 @@ init_moonraven_quest() {
 moonraven_init_bookshelf() {
   enable_bookshelf_zombies(0);
   var_00 = getEntArray("moonraven_bookshelf_final", "targetname");
-  var_01 = getent("moonraven_bookshelf_link_node", "targetname");
-  var_02 = getent("moonraven_bookshelf_moveStart", "targetname");
+  var_01 = getEnt("moonraven_bookshelf_link_node", "targetname");
+  var_02 = getEnt("moonraven_bookshelf_moveStart", "targetname");
   foreach(var_04 in var_00) {
     var_04 method_8449(var_01);
   }
 
   var_01.var_116 = var_02.var_116;
-  var_06 = getent("moonraven_book_key_placed_01", "targetname");
-  var_07 = getent("moonraven_book_key_placed_02", "targetname");
+  var_06 = getEnt("moonraven_book_key_placed_01", "targetname");
+  var_07 = getEnt("moonraven_book_key_placed_02", "targetname");
   var_06 method_805C();
   var_07 method_805C();
-  var_08 = getent("moonraven_book_key_find_01", "targetname");
-  var_09 = getent("moonraven_book_key_find_01_trigger", "targetname");
+  var_08 = getEnt("moonraven_book_key_find_01", "targetname");
+  var_09 = getEnt("moonraven_book_key_find_01_trigger", "targetname");
   var_0A = common_scripts\utility::func_46B7("moonraven_book_location", "targetname");
   var_0B = common_scripts\utility::func_7A33(var_0A);
-  var_0C = getent("moonraven_book_key_find_02", "targetname");
+  var_0C = getEnt("moonraven_book_key_find_02", "targetname");
   var_0C.var_116 = var_0B.var_116;
   var_0C.var_1D = var_0B.var_1D;
-  var_0D = getent(var_0B.var_1A2, "targetname");
+  var_0D = getEnt(var_0B.var_1A2, "targetname");
   var_0E = ["moonraven_key_collected_01", "moonraven_key_collected_02"];
   thread moonraven_bookshelf_find_book(var_08, var_09, var_0E);
   thread moonraven_bookshelf_find_book(var_0C, var_0D, var_0E);
-  var_0F = getent("moonraven_place_books_trigger_01", "targetname");
-  var_10 = getent("moonraven_place_books_trigger_02", "targetname");
+  var_0F = getEnt("moonraven_place_books_trigger_01", "targetname");
+  var_10 = getEnt("moonraven_place_books_trigger_02", "targetname");
   level.moonraven_books_placed = 0;
   level.moonraven_books_placed_goal = 2;
   thread moonraven_bookshelf_place_book(var_0F, "moonraven_key_collected_01", "moonraven_key_collected_02");
@@ -4473,10 +4473,10 @@ moonraven_init_bookshelf() {
     wait 0.05;
   }
 
-  var_11 = getent("moonraven_bookshelf_moveLoc", "targetname");
+  var_11 = getEnt("moonraven_bookshelf_moveLoc", "targetname");
   var_12 = 8;
-  var_01 moveto(var_11.var_116, var_12);
-  var_13 = getent("moonraven_bookshelf_path", "targetname");
+  var_01 moveTo(var_11.var_116, var_12);
+  var_13 = getEnt("moonraven_bookshelf_path", "targetname");
   var_13 method_8060();
   var_13 notsolid();
   enable_bookshelf_zombies(1);
@@ -4508,7 +4508,7 @@ moonraven_bookshelf_find_book(param_00, param_01, param_02) {
 
 moonraven_bookshelf_place_book(param_00, param_01, param_02) {
   var_03 = 0;
-  var_04 = getent(param_00.var_1A2, "targetname");
+  var_04 = getEnt(param_00.var_1A2, "targetname");
   while(!var_03) {
     wait 0.05;
     param_00 waittill("trigger", var_05);
@@ -4537,25 +4537,25 @@ quest_step_moonraven_chart() {
 }
 
 moonraven_debug_reveal_chart() {
-  var_00 = getent("moonraven_book_key_placed_01", "targetname");
-  var_01 = getent("moonraven_book_key_placed_02", "targetname");
+  var_00 = getEnt("moonraven_book_key_placed_01", "targetname");
+  var_01 = getEnt("moonraven_book_key_placed_02", "targetname");
   var_00 method_805B();
   var_01 method_805B();
-  var_02 = getent("moonraven_book_key_find_01", "targetname");
-  var_03 = getent("moonraven_book_key_find_02", "targetname");
+  var_02 = getEnt("moonraven_book_key_find_01", "targetname");
+  var_03 = getEnt("moonraven_book_key_find_02", "targetname");
   var_02 method_805C();
   var_03 method_805C();
   var_04 = getEntArray("moonraven_bookshelf_final", "targetname");
-  var_05 = getent("moonraven_bookshelf_link_node", "targetname");
-  var_06 = getent("moonraven_bookshelf_moveStart", "targetname");
-  var_07 = getent("moonraven_bookshelf_moveLoc", "targetname");
+  var_05 = getEnt("moonraven_bookshelf_link_node", "targetname");
+  var_06 = getEnt("moonraven_bookshelf_moveStart", "targetname");
+  var_07 = getEnt("moonraven_bookshelf_moveLoc", "targetname");
   foreach(var_09 in var_04) {
     var_09 method_8449(var_05);
   }
 
   var_0B = 1;
-  var_05 moveto(var_07.var_116, var_0B);
-  var_0C = getent("moonraven_bookshelf_path", "targetname");
+  var_05 moveTo(var_07.var_116, var_0B);
+  var_0C = getEnt("moonraven_bookshelf_path", "targetname");
   var_0C method_8060();
   var_0C notsolid();
   common_scripts\utility::func_3C8F("moonraven_reveal_chart");
@@ -4564,15 +4564,15 @@ moonraven_debug_reveal_chart() {
 }
 
 moonraven_init_gears() {
-  var_00 = getent("moonraven_gear_1_placed", "targetname");
-  var_01 = getent("moonraven_gear_2_placed", "targetname");
-  var_02 = getent("moonraven_gear_3_placed", "targetname");
+  var_00 = getEnt("moonraven_gear_1_placed", "targetname");
+  var_01 = getEnt("moonraven_gear_2_placed", "targetname");
+  var_02 = getEnt("moonraven_gear_3_placed", "targetname");
   var_00 method_805C();
   var_01 method_805C();
   var_02 method_805C();
-  var_03 = getent("moonraven_gear_find_01", "targetname");
-  var_04 = getent("moonraven_gear_find_02", "targetname");
-  var_05 = getent("moonraven_gear_find_03", "targetname");
+  var_03 = getEnt("moonraven_gear_find_01", "targetname");
+  var_04 = getEnt("moonraven_gear_find_02", "targetname");
+  var_05 = getEnt("moonraven_gear_find_03", "targetname");
   var_06 = common_scripts\utility::func_46B7("moonraven_gear_location", "targetname");
   foreach(var_08 in var_06) {
     if(distance(var_08.var_116, (924, 2486, 2127)) < 24) {
@@ -4587,19 +4587,19 @@ moonraven_init_gears() {
   var_0C = common_scripts\utility::func_7A33(var_06);
   var_03.var_116 = var_0A.var_116;
   var_03.var_1D = var_0A.var_1D;
-  var_03.var_9D65 = getent(var_0A.var_1A2, "targetname");
+  var_03.var_9D65 = getEnt(var_0A.var_1A2, "targetname");
   var_04.var_116 = var_0B.var_116;
   var_04.var_1D = var_0B.var_1D;
-  var_04.var_9D65 = getent(var_0B.var_1A2, "targetname");
+  var_04.var_9D65 = getEnt(var_0B.var_1A2, "targetname");
   var_05.var_116 = var_0C.var_116;
   var_05.var_1D = var_0C.var_1D;
-  var_05.var_9D65 = getent(var_0C.var_1A2, "targetname");
+  var_05.var_9D65 = getEnt(var_0C.var_1A2, "targetname");
   level.moonraven_gears_collected = 0;
   thread moonraven_fix_machine_gear_watch(var_03, "moonraven_gear_1_collected");
   thread moonraven_fix_machine_gear_watch(var_04, "moonraven_gear_2_collected");
   thread moonraven_fix_machine_gear_watch(var_05, "moonraven_gear_3_collected");
   level.moonraven_gears_placed = 0;
-  var_0D = getent("moonraven_gear_placed_trigger", "targetname");
+  var_0D = getEnt("moonraven_gear_placed_trigger", "targetname");
   while(level.moonraven_gears_placed < 3) {
     wait 0.05;
     var_0D waittill("trigger", var_0E);
@@ -4627,17 +4627,17 @@ moonraven_init_gears() {
 
   common_scripts\utility::func_3C8F("moonraven_gears_all_placed");
   var_0F = 6;
-  var_00 = getent("moonraven_gear_1_placed", "targetname");
-  var_01 = getent("moonraven_gear_2_placed", "targetname");
-  var_02 = getent("moonraven_gear_3_placed", "targetname");
-  var_10 = getent("moonraven_gear_final_1", "targetname");
-  var_11 = getent("moonraven_gear_final_2", "targetname");
-  var_12 = getent("moonraven_gear_final_3", "targetname");
-  var_13 = getent("moonraven_gear_art_horz_1", "targetname");
-  var_14 = getent("moonraven_gear_art_horz_2", "targetname");
-  var_15 = getent("moonraven_gear_art_vert_1", "targetname");
-  var_16 = getent("moonraven_gear_art_vert_2", "targetname");
-  var_17 = getent("moonraven_gear_art_vert_3", "targetname");
+  var_00 = getEnt("moonraven_gear_1_placed", "targetname");
+  var_01 = getEnt("moonraven_gear_2_placed", "targetname");
+  var_02 = getEnt("moonraven_gear_3_placed", "targetname");
+  var_10 = getEnt("moonraven_gear_final_1", "targetname");
+  var_11 = getEnt("moonraven_gear_final_2", "targetname");
+  var_12 = getEnt("moonraven_gear_final_3", "targetname");
+  var_13 = getEnt("moonraven_gear_art_horz_1", "targetname");
+  var_14 = getEnt("moonraven_gear_art_horz_2", "targetname");
+  var_15 = getEnt("moonraven_gear_art_vert_1", "targetname");
+  var_16 = getEnt("moonraven_gear_art_vert_2", "targetname");
+  var_17 = getEnt("moonraven_gear_art_vert_3", "targetname");
   while(!common_scripts\utility::func_3C77("moonraven_gears_stop_rotation")) {
     var_00 rotateby((0, 180, 0), var_0F);
     var_01 rotateby((0, 180, 0), var_0F);
@@ -4663,9 +4663,9 @@ quest_step_moonraven_machine() {
 
 moonraven_debug_fix_machine() {
   thread moonraven_debug_reveal_chart();
-  var_00 = getent("moonraven_gear_find_01", "targetname");
-  var_01 = getent("moonraven_gear_find_02", "targetname");
-  var_02 = getent("moonraven_gear_find_03", "targetname");
+  var_00 = getEnt("moonraven_gear_find_01", "targetname");
+  var_01 = getEnt("moonraven_gear_find_02", "targetname");
+  var_02 = getEnt("moonraven_gear_find_03", "targetname");
   var_00 method_805C();
   var_01 method_805C();
   var_02 method_805C();
@@ -4677,17 +4677,17 @@ moonraven_debug_fix_machine() {
 
 moonraven_debug_fix_machine_extra() {
   var_00 = 6;
-  var_01 = getent("moonraven_gear_1_placed", "targetname");
-  var_02 = getent("moonraven_gear_2_placed", "targetname");
-  var_03 = getent("moonraven_gear_3_placed", "targetname");
-  var_04 = getent("moonraven_gear_final_1", "targetname");
-  var_05 = getent("moonraven_gear_final_2", "targetname");
-  var_06 = getent("moonraven_gear_final_3", "targetname");
-  var_07 = getent("moonraven_gear_art_horz_1", "targetname");
-  var_08 = getent("moonraven_gear_art_horz_2", "targetname");
-  var_09 = getent("moonraven_gear_art_vert_1", "targetname");
-  var_0A = getent("moonraven_gear_art_vert_2", "targetname");
-  var_0B = getent("moonraven_gear_art_vert_3", "targetname");
+  var_01 = getEnt("moonraven_gear_1_placed", "targetname");
+  var_02 = getEnt("moonraven_gear_2_placed", "targetname");
+  var_03 = getEnt("moonraven_gear_3_placed", "targetname");
+  var_04 = getEnt("moonraven_gear_final_1", "targetname");
+  var_05 = getEnt("moonraven_gear_final_2", "targetname");
+  var_06 = getEnt("moonraven_gear_final_3", "targetname");
+  var_07 = getEnt("moonraven_gear_art_horz_1", "targetname");
+  var_08 = getEnt("moonraven_gear_art_horz_2", "targetname");
+  var_09 = getEnt("moonraven_gear_art_vert_1", "targetname");
+  var_0A = getEnt("moonraven_gear_art_vert_2", "targetname");
+  var_0B = getEnt("moonraven_gear_art_vert_3", "targetname");
   var_01 method_805B();
   var_02 method_805B();
   var_03 method_805B();
@@ -4774,10 +4774,10 @@ moonraven_init_moon_chart() {
   level.chart_index_c = common_scripts\utility::func_7A33(var_06);
   var_06 = common_scripts\utility::func_F93(var_06, level.chart_index_c);
   level.chart_index_d = common_scripts\utility::func_7A33(var_06);
-  var_07 = getent("chart_moon_A", "targetname");
-  var_08 = getent("chart_moon_B", "targetname");
-  var_09 = getent("chart_moon_C", "targetname");
-  var_0A = getent("chart_moon_D", "targetname");
+  var_07 = getEnt("chart_moon_A", "targetname");
+  var_08 = getEnt("chart_moon_B", "targetname");
+  var_09 = getEnt("chart_moon_C", "targetname");
+  var_0A = getEnt("chart_moon_D", "targetname");
   level.chart_a_fx = var_07;
   level.chart_b_fx = var_08;
   level.chart_c_fx = var_09;
@@ -4810,10 +4810,10 @@ moonraven_debug_acquire_weapon() {
   common_scripts\utility::func_3C77("orrery_moon_B_valid");
   common_scripts\utility::func_3C77("orrery_moon_C_valid");
   common_scripts\utility::func_3C77("orrery_moon_D_valid");
-  level.orrery_moon_a_trigger = getent("orrery_moon_A_trigger", "targetname");
-  level.orrery_moon_b_trigger = getent("orrery_moon_B_trigger", "targetname");
-  level.orrery_moon_c_trigger = getent("orrery_moon_C_trigger", "targetname");
-  level.orrery_moon_d_trigger = getent("orrery_moon_D_trigger", "targetname");
+  level.orrery_moon_a_trigger = getEnt("orrery_moon_A_trigger", "targetname");
+  level.orrery_moon_b_trigger = getEnt("orrery_moon_B_trigger", "targetname");
+  level.orrery_moon_c_trigger = getEnt("orrery_moon_C_trigger", "targetname");
+  level.orrery_moon_d_trigger = getEnt("orrery_moon_D_trigger", "targetname");
   level.orrery_moon_a_trigger common_scripts\utility::func_9D9F();
   level.orrery_moon_b_trigger common_scripts\utility::func_9D9F();
   level.orrery_moon_c_trigger common_scripts\utility::func_9D9F();
@@ -4822,22 +4822,22 @@ moonraven_debug_acquire_weapon() {
 }
 
 moonraven_init_orrery() {
-  level.lever_moon_a = getent("moon_orrery_plinth_A", "targetname");
-  level.lever_moon_b = getent("moon_orrery_plinth_B", "targetname");
-  level.lever_moon_c = getent("moon_orrery_plinth_C", "targetname");
-  level.lever_moon_d = getent("moon_orrery_plinth_D", "targetname");
+  level.lever_moon_a = getEnt("moon_orrery_plinth_A", "targetname");
+  level.lever_moon_b = getEnt("moon_orrery_plinth_B", "targetname");
+  level.lever_moon_c = getEnt("moon_orrery_plinth_C", "targetname");
+  level.lever_moon_d = getEnt("moon_orrery_plinth_D", "targetname");
   level.lever_moon_a method_805C();
   level.lever_moon_b method_805C();
   level.lever_moon_c method_805C();
   level.lever_moon_d method_805C();
   common_scripts\utility::func_3C9F("moonraven_orrery_collect_complete");
-  level.orrery_moon_a = getent("orrery_moon_A", "targetname");
+  level.orrery_moon_a = getEnt("orrery_moon_A", "targetname");
   level.orrery_moon_a.var_6C50 = level.orrery_moon_a.var_1D;
-  level.orrery_moon_b = getent("orrery_moon_B", "targetname");
+  level.orrery_moon_b = getEnt("orrery_moon_B", "targetname");
   level.orrery_moon_b.var_6C50 = level.orrery_moon_b.var_1D;
-  level.orrery_moon_c = getent("orrery_moon_C", "targetname");
+  level.orrery_moon_c = getEnt("orrery_moon_C", "targetname");
   level.orrery_moon_c.var_6C50 = level.orrery_moon_c.var_1D;
-  level.orrery_moon_d = getent("orrery_moon_D", "targetname");
+  level.orrery_moon_d = getEnt("orrery_moon_D", "targetname");
   level.orrery_moon_d.var_6C50 = level.orrery_moon_d.var_1D;
   level.orrery_moon_a.var_D4 = 1;
   level.orrery_moon_b.var_D4 = 7;
@@ -4852,10 +4852,10 @@ moonraven_init_orrery() {
   level.orrery_moon_b.orbit_time = 3;
   level.orrery_moon_c.orbit_time = 2;
   level.orrery_moon_d.orbit_time = 1;
-  level.orrery_moon_a_trigger = getent("orrery_moon_A_trigger", "targetname");
-  level.orrery_moon_b_trigger = getent("orrery_moon_B_trigger", "targetname");
-  level.orrery_moon_c_trigger = getent("orrery_moon_C_trigger", "targetname");
-  level.orrery_moon_d_trigger = getent("orrery_moon_D_trigger", "targetname");
+  level.orrery_moon_a_trigger = getEnt("orrery_moon_A_trigger", "targetname");
+  level.orrery_moon_b_trigger = getEnt("orrery_moon_B_trigger", "targetname");
+  level.orrery_moon_c_trigger = getEnt("orrery_moon_C_trigger", "targetname");
+  level.orrery_moon_d_trigger = getEnt("orrery_moon_D_trigger", "targetname");
   level.orrery_max_index = 7;
   level.orrery_check_time = 90;
   level.orrery_moons_stopped = 0;
@@ -4906,7 +4906,7 @@ moonraven_orrery_rotate_moon(param_00, param_01, param_02, param_03, param_04, p
       param_01 = 0;
     }
 
-    param_00 rotateto(combineangles(param_00.var_6C50, (0, param_01, 0)), param_05);
+    param_00 rotateTo(combineangles(param_00.var_6C50, (0, param_01, 0)), param_05);
     wait(param_05);
     param_00.var_D4 = param_00.var_D4 + 1;
     if(param_00.var_D4 > level.orrery_max_index) {
@@ -5007,7 +5007,7 @@ moonraven_init_constellations() {
   common_scripts\utility::func_3C87("flag_stars_complete");
   level.star_models = getEntArray("moonraven_star_model", "targetname");
   foreach(var_01 in level.star_models) {
-    var_02 = getent(var_01.var_1A2, "targetname");
+    var_02 = getEnt(var_01.var_1A2, "targetname");
     var_01 method_805C();
     var_02 method_805C();
     var_01.tagged = 0;
@@ -5129,7 +5129,7 @@ moonraven_init_constellations() {
 
 moonraven_contellation_vision() {
   foreach(var_01 in level.star_models) {
-    var_02 = getent(var_01.var_1A2, "targetname");
+    var_02 = getEnt(var_01.var_1A2, "targetname");
     if(isDefined(var_01.solved) && var_01.solved) {
       level.star_models = common_scripts\utility::func_F93(level.star_models, var_01);
       var_01 method_805B();
@@ -5192,7 +5192,7 @@ moonraven_contellation_vision_scan() {
   while(level.showstars) {
     foreach(var_01 in level.star_models) {
       if(maps\mp\_utility::findplayerisfacing(self, var_01, 8) && !var_01.tagged && var_01.var_8260 == level.star_scan_current_rune) {
-        var_02 = getent(var_01.var_1A2, "targetname");
+        var_02 = getEnt(var_01.var_1A2, "targetname");
         var_02 showtoclient(self);
         lib_0378::func_8D74("aud_moonraven_constellation_find");
         var_01 method_805C();
@@ -5227,7 +5227,7 @@ moonraven_contellation_vision_scan() {
   foreach(var_01 in level.star_models) {
     if((level.star_scan_complete_a && var_01.var_8260 == level.star_index_a) || (level.star_scan_complete_b && var_01.var_8260 == level.star_index_b) || level.star_scan_complete_c && var_01.var_8260 == level.star_index_c) {
       level.star_models = common_scripts\utility::func_F93(level.star_models, var_01);
-      var_02 = getent(var_01.var_1A2, "targetname");
+      var_02 = getEnt(var_01.var_1A2, "targetname");
       var_01.solved = 1;
       var_02.solved = 1;
     }
@@ -5236,7 +5236,7 @@ moonraven_contellation_vision_scan() {
   foreach(var_01 in level.star_models) {
     if(!var_01.solved) {
       var_01.tagged = 0;
-      var_02 = getent(var_01.var_1A2, "targetname");
+      var_02 = getEnt(var_01.var_1A2, "targetname");
       var_02 method_805C();
     }
   }
@@ -5246,7 +5246,7 @@ moonraven_contellation_vision_lost() {
   common_scripts\utility::knock_off_battery("spike_lost", "disconnect");
   level.showstars = 0;
   foreach(var_01 in level.star_models) {
-    var_02 = getent(var_01.var_1A2, "targetname");
+    var_02 = getEnt(var_01.var_1A2, "targetname");
     var_01 method_805C();
     var_02 method_805C();
   }
@@ -5351,13 +5351,13 @@ get_scepter_owner() {
 
 moonraven_debug_orrery_capture() {
   activateclientexploder(236);
-  level.orrery_moon_a = getent("orrery_moon_A", "targetname");
+  level.orrery_moon_a = getEnt("orrery_moon_A", "targetname");
   level.orrery_moon_a.var_6C50 = level.orrery_moon_a.var_1D;
-  level.orrery_moon_b = getent("orrery_moon_B", "targetname");
+  level.orrery_moon_b = getEnt("orrery_moon_B", "targetname");
   level.orrery_moon_b.var_6C50 = level.orrery_moon_b.var_1D;
-  level.orrery_moon_c = getent("orrery_moon_C", "targetname");
+  level.orrery_moon_c = getEnt("orrery_moon_C", "targetname");
   level.orrery_moon_c.var_6C50 = level.orrery_moon_c.var_1D;
-  level.orrery_moon_d = getent("orrery_moon_D", "targetname");
+  level.orrery_moon_d = getEnt("orrery_moon_D", "targetname");
   level.orrery_moon_d.var_6C50 = level.orrery_moon_d.var_1D;
   level.orrery_moon_a.var_D4 = 1;
   level.orrery_moon_b.var_D4 = 7;
@@ -5372,10 +5372,10 @@ moonraven_debug_orrery_capture() {
   level.orrery_moon_b.orbit_time = 3;
   level.orrery_moon_c.orbit_time = 2;
   level.orrery_moon_d.orbit_time = 1;
-  level.orrery_moon_a_trigger = getent("orrery_moon_A_trigger", "targetname");
-  level.orrery_moon_b_trigger = getent("orrery_moon_B_trigger", "targetname");
-  level.orrery_moon_c_trigger = getent("orrery_moon_C_trigger", "targetname");
-  level.orrery_moon_d_trigger = getent("orrery_moon_D_trigger", "targetname");
+  level.orrery_moon_a_trigger = getEnt("orrery_moon_A_trigger", "targetname");
+  level.orrery_moon_b_trigger = getEnt("orrery_moon_B_trigger", "targetname");
+  level.orrery_moon_c_trigger = getEnt("orrery_moon_C_trigger", "targetname");
+  level.orrery_moon_d_trigger = getEnt("orrery_moon_D_trigger", "targetname");
   level.orrery_max_index = 7;
   level.orrery_check_time = 90;
   level.orrery_moons_stopped = 0;
@@ -5401,7 +5401,7 @@ moonraven_debug_orrery_capture_rotate_moon(param_00, param_01, param_02, param_0
       param_01 = 0;
     }
 
-    param_00 rotateto(combineangles(param_00.var_6C50, (0, param_01, 0)), param_05);
+    param_00 rotateTo(combineangles(param_00.var_6C50, (0, param_01, 0)), param_05);
     wait(param_05);
     param_00.var_D4 = param_00.var_D4 + 1;
     if(param_00.var_D4 > level.orrery_max_index) {
@@ -5467,14 +5467,14 @@ init_boss_fight_quest() {
   }
 
   level.bossfight.boss_blood_pos = getEntArray("org_boss_blood_pos", "script_noteworthy");
-  level.bossfight.boss_drain_pos = getent("org_boss_drain_pos", "script_noteworthy");
-  level.bossfight.throne_pos = getent("org_boss_throne_pos", "script_noteworthy");
+  level.bossfight.boss_drain_pos = getEnt("org_boss_drain_pos", "script_noteworthy");
+  level.bossfight.throne_pos = getEnt("org_boss_throne_pos", "script_noteworthy");
   level.bossfight.boss_sun_pos = common_scripts\utility::func_46B7("struct_boss_sun_pos", "targetname");
   level thread maps\mp\_utility::func_6F74(::handle_player_boss_respawn);
 }
 
 handle_player_boss_respawn() {
-  var_00 = getent("player_boss_respawner", "targetname");
+  var_00 = getEnt("player_boss_respawner", "targetname");
   var_01 = self;
   for(;;) {
     var_00 waittill("trigger", var_02);
@@ -5631,7 +5631,7 @@ final_boss_intro_scene() {
     var_0E method_848D();
     var_0E method_8003();
     var_0E method_8322();
-    var_0E setorigin(var_08 gettagorigin("tag_player"));
+    var_0E setOrigin(var_08 gettagorigin("tag_player"));
     var_0E setangles(var_08 gettagangles("tag_player"));
     var_0E playerlinktoabsolute(var_08, "tag_player");
     var_0E lib_0547::func_8A6D(1);
@@ -5756,7 +5756,7 @@ final_boss_intro_send_players_to_start_positions_safe() {
   var_01 = common_scripts\utility::func_46B7("zmb_boss_spawns", "targetname");
   level.boss_battle_respawns = var_01;
   var_00.var_763C = var_00.var_116;
-  var_00 setorigin(var_01[var_00 getentitynumber()].var_116);
+  var_00 setOrigin(var_01[var_00 getentitynumber()].var_116);
   var_00 setangles(var_01[var_00 getentitynumber()].var_1D);
   var_00.bossstartorigin = var_00.var_116;
   var_00.bossstartangles = var_00.var_1D;
@@ -5829,7 +5829,7 @@ start_boss_fight() {
   level.zombie_king_sword = spawn("script_model", var_00.var_116);
   level.zombie_king_sword setModel("npc_zom_barb_sword_02");
   level.zombie_king_sword method_8449(level.zombie_king, "TAG_SWORD", (0, 0, 0), (0, 90, 90));
-  level.zombie_king_sword.hitbox = getent("trig_sword_hitbox", "targetname");
+  level.zombie_king_sword.hitbox = getEnt("trig_sword_hitbox", "targetname");
   level.zombie_king_sword.hitbox.var_116 = var_00.var_116;
   level.zombie_king_sword.hitbox method_8449(level.zombie_king, "TAG_SWORD", (0, 0, 0), (0, 90, 90));
   level.zombie_king_sword.hitbox setCanDamage(1);
@@ -5997,7 +5997,7 @@ finale_setup_players() {
   var_01 = common_scripts\utility::func_FA4(var_00, ::sort_by_script_noteworthy);
   foreach(var_05, var_03 in level.var_744A) {
     var_04 = getgroundposition(var_01[var_05].var_116, 64, 128, 12);
-    var_03 setorigin(var_04, 1);
+    var_03 setOrigin(var_04, 1);
   }
 
   thread maps\mp\_utility::func_6F74(::give_raven_form);

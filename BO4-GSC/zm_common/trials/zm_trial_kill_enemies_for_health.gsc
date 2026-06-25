@@ -67,7 +67,7 @@ function_e997bb0b(var_73d6ae36) {
   }
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isgodmode(player) || player isinmovemode("<dev string:x38>", "<dev string:x41>")) {
         continue;
       }
@@ -104,7 +104,7 @@ function_49091c27() {
 
 function_138aec8e(attacker) {
   if(isDefined(self.nuked) && self.nuked) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player function_49091c27();
     }
 

@@ -364,7 +364,7 @@ sndx_play_in_space_delayed_internal(alias_name, delay_time, _cleanup_time, _fade
 
 snd_play_linked(alias_name, ent, _cleanup_time, _fadeout_time) {
   snd_ent = spawn("script_origin", ent.origin);
-  snd_ent linkto(ent);
+  snd_ent linkTo(ent);
   snd_ent thread sndx_play_linked_internal(alias_name, ent, _cleanup_time, _fadeout_time);
   return snd_ent;
 }
@@ -395,7 +395,7 @@ sndx_play_linked_internal(alias_name, ent, _cleanup_time, _fadeout_time) {
 
 snd_play_linked_loop(alias_name, ent, _fadeout_time) {
   snd_ent = spawn("script_origin", ent.origin);
-  snd_ent linkto(ent);
+  snd_ent linkTo(ent);
   snd_ent thread sndx_play_linked_loop_internal(alias_name, ent, _fadeout_time);
   return snd_ent;
 }

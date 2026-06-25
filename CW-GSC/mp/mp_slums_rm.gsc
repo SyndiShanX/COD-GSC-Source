@@ -34,7 +34,7 @@ function function_24198689() {
 }
 
 function function_29584e41() {
-  e_break_glass = getent("e_break_glass", "targetname");
+  e_break_glass = getEnt("e_break_glass", "targetname");
 
   if(isDefined(e_break_glass)) {
     e_break_glass util::break_glass(128);

@@ -606,14 +606,14 @@ fall_down(vdir, stance) {
 
   if(isDefined(vdir) && length(vdir) > 0) {
     xyspeedmag = 40 + randomint(12) + randomint(12);
-    xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+    xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
   }
 
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = origin;
   linker.angles = angles;
   self._fall_down_anchor = linker;
-  self playerlinkto(linker);
+  self playerlinkTo(linker);
   self playsoundtoplayer("zmb_player_death_fall", self);
   falling = stance != "prone";
 
@@ -623,8 +623,8 @@ fall_down(vdir, stance) {
     floor_height = 10 + origin[2] - eye[2];
     origin = origin + (0, 0, floor_height);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
   }
 
   self freezecontrols(1);
@@ -640,13 +640,13 @@ fall_down(vdir, stance) {
     bounce = randomint(4) + 8;
     origin = origin + (0, 0, bounce) - xyspeed * 0.1;
     lerptime = bounce / 50.0;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = origin + (0, 0, bounce * -1) + xyspeed * 0.1;
     lerptime = lerptime / 2.0;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
   }
 
   wait 15;
@@ -684,7 +684,7 @@ equipment_safe_to_drop(weapon) {
     }
   }
 
-  s_check = getstruct("plane_equipment_safe_check", "targetname");
+  s_check = getStruct("plane_equipment_safe_check", "targetname");
 
   if(distance2dsquared(self.origin, s_check.origin) < 65536 && self.origin[2] > s_check.origin[2]) {
     return false;
@@ -1015,18 +1015,18 @@ alcatraz_afterlife_doors() {
   }
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "afterlife_door") {
-    self sethintstring(&"ZM_PRISON_AFTERLIFE_DOOR");
+    self setHintString(&"ZM_PRISON_AFTERLIFE_DOOR");
 
     self thread afterlife_door_open_sesame();
 
-    s_struct = getstruct(self.target, "targetname");
+    s_struct = getStruct(self.target, "targetname");
 
     if(!isDefined(s_struct)) {
       iprintln("Afterlife Door was not targeting a valid struct");
 
       return;
     } else {
-      m_shockbox = getent(s_struct.target, "targetname");
+      m_shockbox = getEnt(s_struct.target, "targetname");
       m_shockbox.health = 5000;
       m_shockbox setCanDamage(1);
       m_shockbox useanimtree(#animtree);
@@ -1034,8 +1034,8 @@ alcatraz_afterlife_doors() {
       t_bump.origin = m_shockbox.origin + anglesToForward(m_shockbox.angles) * 0 + anglestoright(m_shockbox.angles) * 28 + anglestoup(m_shockbox.angles) * 0;
 
       if(isDefined(t_bump)) {
-        t_bump setcursorhint("HINT_NOICON");
-        t_bump sethintstring(&"ZM_PRISON_AFTERLIFE_INTERACT");
+        t_bump setCursorHint("HINT_NOICON");
+        t_bump setHintString(&"ZM_PRISON_AFTERLIFE_INTERACT");
       }
 
       while(true) {

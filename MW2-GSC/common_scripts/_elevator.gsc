@@ -500,7 +500,7 @@ build_elevators() {
   assertex(isDefined(elevator_doorsets) && (elevator_doorsets.size >= elevator_groups.size), "Radiant: Missing elevator door(s)");
 
   foreach(elevator_bound in elevator_groups) {
-    elevator_bound_end = getent(elevator_bound.target, "targetname");
+    elevator_bound_end = getEnt(elevator_bound.target, "targetname");
 
     min_max_xy = [];
     min_max_xy[0] = min(elevator_bound.origin[0], elevator_bound_end.origin[0]);
@@ -524,21 +524,21 @@ build_elevators() {
         if(elevator_housing.code_classname == "light") {
           continue;
         }
-        inner_leftdoor = getent(elevator_housing.target, "targetname");
+        inner_leftdoor = getEnt(elevator_housing.target, "targetname");
         parts.e["housing"]["left_door"] = inner_leftdoor;
         parts.e["housing"]["left_door_opened_pos"] = inner_leftdoor.origin;
 
-        inner_rightdoor = getent(inner_leftdoor.target, "targetname");
+        inner_rightdoor = getEnt(inner_leftdoor.target, "targetname");
         parts.e["housing"]["right_door"] = inner_rightdoor;
         parts.e["housing"]["right_door_opened_pos"] = inner_rightdoor.origin;
 
         inner_door_closed_pos = (inner_leftdoor.origin - inner_rightdoor.origin) * (0.5, 0.5, 0.5) + inner_rightdoor.origin;
         parts.e["housing"]["door_closed_pos"] = inner_door_closed_pos;
 
-        door_trigger = getent(inner_rightdoor.target, "targetname");
+        door_trigger = getEnt(inner_rightdoor.target, "targetname");
         parts.e["housing"]["door_trigger"] = door_trigger;
 
-        inside_trigger = getent(door_trigger.target, "targetname");
+        inside_trigger = getEnt(door_trigger.target, "targetname");
         parts.e["housing"]["inside_trigger"] = inside_trigger;
         inside_trigger make_discrete_trigger();
 
@@ -558,11 +558,11 @@ build_elevators() {
         parts.e["outer_doorset"][door_set_id] = [];
         parts.e["outer_doorset"][door_set_id]["door_closed_pos"] = elevator_doorset.origin;
 
-        leftdoor = getent(elevator_doorset.target, "targetname");
+        leftdoor = getEnt(elevator_doorset.target, "targetname");
         parts.e["outer_doorset"][door_set_id]["left_door"] = leftdoor;
         parts.e["outer_doorset"][door_set_id]["left_door_opened_pos"] = leftdoor.origin;
 
-        rightdoor = getent(leftdoor.target, "targetname");
+        rightdoor = getEnt(leftdoor.target, "targetname");
         parts.e["outer_doorset"][door_set_id]["right_door"] = rightdoor;
         parts.e["outer_doorset"][door_set_id]["right_door_opened_pos"] = rightdoor.origin;
 
@@ -678,7 +678,7 @@ setup_hints() {
     floors = elevator get_outer_doorsets();
     num_of_floors = floors.size;
 
-    use_trig SetCursorHint("HINT_NOICON");
+    use_trig setCursorHint("HINT_NOICON");
     if(num_of_floors > 2) {}
     use_trig setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
     else {}
@@ -686,7 +686,7 @@ setup_hints() {
   }
 
   foreach(callbutton in level.elevator_callbuttons) {
-    callbutton SetCursorHint("HINT_NOICON");
+    callbutton setCursorHint("HINT_NOICON");
 
     callbutton setHintString(&"ELEVATOR_CALL_HINT");
   }

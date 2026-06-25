@@ -148,7 +148,7 @@ function hit1_light(localclientnum, oldval, newval, bnewent, binitialsnap, field
 function hit1_helispotlight(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
   self endon(#"stop_spotlight");
-  getplayers(fieldname)[0] endon(#"death", #"disconnect");
+  getPlayers(fieldname)[0] endon(#"death", #"disconnect");
 
   if(isDefined(level.var_cc43fb24)) {
     level.var_9a3944f4.var_ba240678 = level.var_cc43fb24;
@@ -191,7 +191,7 @@ function hit1_helispotlight(localclientnum, oldval, newval, bnewent, binitialsna
         self function_2e566abb(tag_body, (0, 0, 0), var_76d79dc0);
 
         fwd = anglesToForward(self gettagangles(tag_fx));
-        fwd = vectornormalize(fwd);
+        fwd = vectorNormalize(fwd);
         fwd *= 2512;
       }
 

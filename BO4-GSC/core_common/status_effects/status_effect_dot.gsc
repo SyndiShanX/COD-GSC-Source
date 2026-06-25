@@ -68,7 +68,7 @@ dot_rumble_loop() {
   rumble = isDefined(self.dotrumble) ? self.dotrumble : "status_effect_dot";
 
   while(isDefined(self) && isDefined(self.owner)) {
-    self.owner playrumbleonentity(rumble);
+    self.owner playRumbleOnEntity(rumble);
     wait 0.1;
   }
 }

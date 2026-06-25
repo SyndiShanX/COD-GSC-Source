@@ -72,10 +72,10 @@ func_E5EE() {
     var_2 = spawn("script_model", self.origin);
     if(var_1 == "left") {
       var_2 setModel("robot_c12_prop_rail_l");
-      var_2 linkto(self, "j_clavicle_inner_le", (0, 0, 0), (0, 0, 0));
+      var_2 linkTo(self, "j_clavicle_inner_le", (0, 0, 0), (0, 0, 0));
     } else {
       var_2 setModel("robot_c12_prop_rail_r");
-      var_2 linkto(self, "j_clavicle_inner_ri", (0, 0, 0), (0, 0, 0));
+      var_2 linkTo(self, "j_clavicle_inner_ri", (0, 0, 0), (0, 0, 0));
     }
 
     var_2 scripts\sp\utility::func_9196(3, 1, 1);
@@ -120,22 +120,22 @@ func_B2E2() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
   var_0.var_3508 = self;
   var_0.name = "script_c12_right_arm";
-  var_0 linkto(self, "j_clavicle_ri", (15, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "j_clavicle_ri", (15, 0, 0), (0, 0, 0));
   self.var_C925["right_arm"] = var_0;
   var_1 = scripts\engine\utility::spawn_tag_origin();
   var_1.var_3508 = self;
   var_1.name = "script_c12_left_arm";
-  var_1 linkto(self, "j_clavicle_le", (15, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "j_clavicle_le", (15, 0, 0), (0, 0, 0));
   self.var_C925["left_arm"] = var_1;
   var_2 = scripts\engine\utility::spawn_tag_origin();
   var_2.var_3508 = self;
   var_2.name = "script_c12_right_leg";
-  var_2 linkto(self, "j_mainroot2", (0, 0, 25), (0, 0, 0));
+  var_2 linkTo(self, "j_mainroot2", (0, 0, 25), (0, 0, 0));
   self.var_C925["right_leg"] = var_2;
   var_3 = scripts\engine\utility::spawn_tag_origin();
   var_3.var_3508 = self;
   var_3.name = "script_c12_left_leg";
-  var_3 linkto(self, "j_mainroot2", (0, 0, -25), (0, 0, 0));
+  var_3 linkTo(self, "j_mainroot2", (0, 0, -25), (0, 0, 0));
   self.var_C925["left_leg"] = var_3;
   self waittill("death");
   foreach(var_5 in self.var_C925) {

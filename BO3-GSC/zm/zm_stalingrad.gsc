@@ -331,8 +331,8 @@ function function_438bb72b() {
 function include_weapons() {}
 
 function function_9273a671() {
-  var_ac878678 = getent("use_elec_switch", "targetname");
-  var_ac878678 setcursorhint("HINT_NOICON");
+  var_ac878678 = getEnt("use_elec_switch", "targetname");
+  var_ac878678 setCursorHint("HINT_NOICON");
 }
 
 function precachecustomcharacters() {}
@@ -356,7 +356,7 @@ function function_be9932bc() {
   var_9b100591[1] = 1;
   var_9b100591[2] = 2;
   var_9b100591[3] = 3;
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   if(a_e_players.size == 1) {
     var_9b100591 = array::randomize(var_9b100591);
     if(var_9b100591[0] == 2) {
@@ -938,7 +938,7 @@ function function_897d1ccc() {
 }
 
 function powerup_grab_get_players_override() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(isalive(player.var_4bd1ce6b)) {
       players[players.size] = player.var_4bd1ce6b;
@@ -1092,7 +1092,7 @@ function function_12a6d70c() {
 
 function function_de23a4cc() {
   level waittill("power_on");
-  playsoundatposition("zmb_stalingrad_main_power_on", (0, 0, 0));
+  playSoundAtPosition("zmb_stalingrad_main_power_on", (0, 0, 0));
   exploder::exploder("power_on");
   exploder::exploder("eye_beam_factory_green");
   exploder::exploder("eye_beam_library_green");

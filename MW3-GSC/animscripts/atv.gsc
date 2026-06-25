@@ -446,11 +446,11 @@ _id_24E0() {
   var_1 = (var_1[0], var_1[1], randomfloatrange(200, 400)) * 0.75;
 
   if(lengthsquared(var_1) > 1000000) {
-    var_1 = vectornormalize(var_1) * 1000;
+    var_1 = vectorNormalize(var_1) * 1000;
   }
   var_2 = spawn("script_origin", self.origin);
   var_2 moveslide((0, 0, 40), 15, var_1);
-  self linkto(var_2);
+  self linkTo(var_2);
   var_2 thread _id_0F18();
 }
 

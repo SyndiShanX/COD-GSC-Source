@@ -1248,7 +1248,7 @@ TryExposedReacquire() {
     return;
   }
 
-  dirToEnemy = vectornormalize(self.enemy.origin - self.origin);
+  dirToEnemy = vectorNormalize(self.enemy.origin - self.origin);
   forward = anglesToForward(self.angles);
 
   if(vectordot(dirToEnemy, forward) < 0.5) {

@@ -82,7 +82,7 @@ vehiclemainthread() {
 
 vehiclespawnthread(veh_name, origin, angles, time_interval) {
   level endon(#"game_ended");
-  veh_spawner = getent(veh_name + "_spawner", "targetname");
+  veh_spawner = getEnt(veh_name + "_spawner", "targetname");
 
   while(true) {
     vehicle = veh_spawner spawnfromspawner(veh_name, 1, 1, 1);

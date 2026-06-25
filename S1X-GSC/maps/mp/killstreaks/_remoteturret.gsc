@@ -682,7 +682,7 @@ turret_ModifyDamage(attacker, weapon, type, damage) {
   modifiedDamage = self maps\mp\gametypes\_damage::modifyDamage(attacker, weapon, type, damage);
 
   if(isDefined(self.owner) && (modifiedDamage > 0)) {
-    self.owner PlayRumbleOnEntity("damage_heavy");
+    self.owner playRumbleOnEntity("damage_heavy");
     self.owner thread maps\mp\killstreaks\_aerial_utility::playerShowStreakStaticForDamage();
   }
 
@@ -754,7 +754,7 @@ startUsingRemoteTurret(leftArc, rightArc, topArc, bottomArc, isCoop) {
   owner = self.owner;
 
   if(!isCoop) {
-    owner PlayerLinkTo(self.remoteEnt);
+    owner PlayerlinkTo(self.remoteEnt);
     owner PlayerLinkedOffsetEnable();
     owner _giveWeapon(level.turretSettings[self.turretType].laptopInfo);
     owner SwitchToWeapon(level.turretSettings[self.turretType].laptopInfo);
@@ -1559,8 +1559,8 @@ turret_setPickupHints() {
   Assert(isDefined(self.pickupEnt));
 
   self.pickupEnt MakeUsable();
-  self.pickupEnt SetHintString(level.turretSettings[self.turretType].hintPickUp);
-  self.pickupEnt SetCursorHint("HINT_NOICON");
+  self.pickupEnt setHintString(level.turretSettings[self.turretType].hintPickUp);
+  self.pickupEnt setCursorHint("HINT_NOICON");
   self.pickupEnt SetHintStringVisibleOnlyToOwner(true);
 
   if(self.rippable) {
@@ -1588,7 +1588,7 @@ turret_clearPickupHints() {
   }
 
   self.pickupEnt MakeUnusable();
-  self.pickupEnt SetHintString("");
+  self.pickupEnt setHintString("");
   self.pickupEnt SetSecondaryHintString("");
   self.pickupEnt SetHintStringVisibleOnlyToOwner(false);
 }
@@ -1797,7 +1797,7 @@ turret_fireRocket(isAutoTurret) {
 spawnMuzzleFlashEnt(parent, tagname, hideFromPlayer) {
   muzzleEnt = spawn("script_model", (0, 0, 0));
   muzzleEnt setModel("tag_origin");
-  muzzleEnt LinkTo(parent, tagname, (0, 0, 0), (0, 0, 0));
+  muzzleEnt linkTo(parent, tagname, (0, 0, 0), (0, 0, 0));
   muzzleEnt Hide();
   foreach(player in level.players) {
     if(player != hideFromPlayer) {

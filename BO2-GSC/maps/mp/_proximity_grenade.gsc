@@ -132,9 +132,9 @@ watchproximitygrenadehitplayer(owner) {
 }
 
 performhudeffects(position, distancetogrenade) {
-  forwardvec = vectornormalize(anglesToForward(self.angles));
-  rightvec = vectornormalize(anglestoright(self.angles));
-  explosionvec = vectornormalize(position - self.origin);
+  forwardvec = vectorNormalize(anglesToForward(self.angles));
+  rightvec = vectorNormalize(anglestoright(self.angles));
+  explosionvec = vectorNormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
   rdot = vectordot(explosionvec, rightvec);
   fangle = acos(fdot);
@@ -171,7 +171,7 @@ damageplayerinradius(position, owner, einflictor) {
     self setclientfieldtoplayer("tazered", 1);
   }
 
-  self playrumbleonentity("proximity_grenade");
+  self playRumbleOnEntity("proximity_grenade");
   self playSound("wpn_taser_mine_zap");
   self setclientuivisibilityflag("hud_visible", 0);
 

@@ -33,7 +33,7 @@ function private preinit() {
 }
 
 function grab_free_perk(var_a3878cd) {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(!e_player laststand::player_is_in_laststand() && e_player.sessionstate != "spectator") {
       var_16c042b8 = e_player zm_perks::function_b2cba45a();
     }

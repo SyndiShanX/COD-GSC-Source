@@ -650,13 +650,13 @@ _id_C7EA(var_0) {
   var_0 waittill("last_stand_transition_done");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 setCursorHint("HINT_NOICON");
   var_1 _meth_84D1(1);
   var_1 setuseholdduration("duration_none");
-  var_1 sethintstring(&"MP/LASTSTAND_REVIVE_USE");
+  var_1 setHintString(&"MP/LASTSTAND_REVIVE_USE");
   var_1 _meth_83A1(-2);
   var_2 = var_0.team;
-  var_1 linkto(var_0, "tag_origin", (0, 0, 2), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_origin", (0, 0, 2), (0, 0, 0));
   var_1.owner = var_0;
   var_1._id_84EF = 0;
   var_1._id_7C8C = "laststand_reviver";
@@ -1030,7 +1030,7 @@ _id_FE7D(var_0, var_1) {
 
 _id_4ED6(var_0, var_1) {
   var_2 = self;
-  var_1 playerlinkto(var_0);
+  var_1 playerlinkTo(var_0);
   var_1 _meth_8263();
   var_1 allowmovement(0);
   var_0 setmovespeedscale(getdvarfloat("#x3b9b92953fe1117d9"));
@@ -1092,7 +1092,7 @@ _id_FE7E(var_0, var_1) {
 
 _id_D938() {
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 playLoopSound("br_reviver_use_lp");
   self waittill("sfx_revive_done");
   playsoundatpos(self.origin, "br_reviver_use_end");

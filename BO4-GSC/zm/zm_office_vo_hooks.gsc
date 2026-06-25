@@ -114,7 +114,7 @@ function_76659f5e() {
 function_132e0bea() {
   level endon(#"end_game");
   level waittill(#"start_of_round");
-  power_trig = getent("use_elec_switch", "targetname");
+  power_trig = getEnt("use_elec_switch", "targetname");
 
   if(isDefined(power_trig)) {
     waitresult = power_trig waittill(#"trigger");
@@ -174,7 +174,7 @@ play_initial_alarm() {
   structs = struct::get_array("defcon_alarms", "targetname");
 
   for(i = 0; i < structs.size; i++) {
-    playsoundatposition(#"evt_thief_alarm_single", structs[i].origin);
+    playSoundAtPosition(#"evt_thief_alarm_single", structs[i].origin);
   }
 
   wait 0.5;

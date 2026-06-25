@@ -189,17 +189,17 @@ aud_curb_stomp_event() {
 }
 
 handle_heli_scripted_sfx() {
-  var_0 = common_scripts\utility::getstruct("auto2187", "targetname");
-  var_1 = common_scripts\utility::getstruct("auto2712", "targetname");
-  var_2 = common_scripts\utility::getstruct("auto2718", "targetname");
-  var_3 = common_scripts\utility::getstruct("auto2601", "targetname");
+  var_0 = common_scripts\utility::getStruct("auto2187", "targetname");
+  var_1 = common_scripts\utility::getStruct("auto2712", "targetname");
+  var_2 = common_scripts\utility::getStruct("auto2718", "targetname");
+  var_3 = common_scripts\utility::getStruct("auto2601", "targetname");
   var_0 thread heli_scripted_sfx("scn_hind_passby_01", "unloaded");
   var_1 thread heli_scripted_sfx("scn_hind_passby_02");
   var_2 thread heli_scripted_sfx("scn_hind_passby_03");
   var_3 thread heli_scripted_sfx("scn_hind_passby_04", "unloaded");
-  var_4 = getent("alleyway_hind1_trigger", "targetname");
+  var_4 = getEnt("alleyway_hind1_trigger", "targetname");
   var_4 thread three_heli_passby_trig("scn_alleyway_hind1_0");
-  var_5 = getent("alleyway_hind2_trigger", "targetname");
+  var_5 = getEnt("alleyway_hind2_trigger", "targetname");
   var_5 thread three_heli_passby_trig("scn_alleyway_hind2_0");
 }
 
@@ -243,8 +243,8 @@ play_helicopter_scripted_sfx(var_0) {
 aud_car_sound_node_spawner() {
   level.car_move_engine_sound_node = spawn("script_origin", level.car.origin);
   level.car_idle_engine_sound_node = spawn("script_origin", level.car.origin);
-  level.car_move_engine_sound_node linkto(level.car);
-  level.car_idle_engine_sound_node linkto(level.car);
+  level.car_move_engine_sound_node linkTo(level.car);
+  level.car_idle_engine_sound_node linkTo(level.car);
 }
 
 aud_car_event_handler(var_0, var_1, var_2, var_3, var_4, var_5) {

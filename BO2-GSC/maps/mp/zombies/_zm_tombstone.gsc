@@ -38,7 +38,7 @@ tombstone_spawn() {
   dc_icon = spawn("script_model", self.origin + vectorscale((0, 0, 1), 40.0));
   dc_icon.angles = self.angles;
   dc_icon setModel("ch_tombstone1");
-  dc_icon linkto(dc);
+  dc_icon linkTo(dc);
   dc.icon = dc_icon;
   dc.script_noteworthy = "player_tombstone_model";
   dc.player = self;
@@ -194,7 +194,7 @@ tombstone_grab() {
             playFX(level._effect["powerup_grabbed_wave"], self.origin);
             players[i] tombstone_give();
             wait 0.1;
-            playsoundatposition("zmb_tombstone_grab", self.origin);
+            playSoundAtPosition("zmb_tombstone_grab", self.origin);
             self stoploopsound();
             self.icon unlink();
             self.icon delete();
@@ -311,7 +311,7 @@ tombstone_wobble() {
   }
 
   while(isDefined(self)) {
-    self rotateyaw(360, 3);
+    self rotateYaw(360, 3);
     wait 2.9;
   }
 }

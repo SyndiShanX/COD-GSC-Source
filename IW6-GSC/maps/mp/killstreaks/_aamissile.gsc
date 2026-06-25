@@ -107,8 +107,8 @@ MissileEyes(player, rocket) {
   if(isDefined(rocket)) {
     player VisionSetMissilecamForPlayer(game["thermal_vision"], 1.0);
     player thread delayedFOFOverlay();
-    player CameraLinkTo(rocket, "tag_origin");
-    player ControlsLinkTo(rocket);
+    player CameralinkTo(rocket, "tag_origin");
+    player ControlslinkTo(rocket);
 
     if(getDvarInt("camera_thirdPerson")) {
       player setThirdPersonDOF(false);

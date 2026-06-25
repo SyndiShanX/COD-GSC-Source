@@ -233,7 +233,7 @@ round_spawning() {
   }
 
   profilestop();
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i].zombification_time = 0;
@@ -575,7 +575,7 @@ round_start() {
 }
 
 wait_until_first_player() {
-  players = getplayers();
+  players = getPlayers();
 
   if(!isDefined(players[0])) {
     level waittill(#"first_player_ready");
@@ -606,7 +606,7 @@ round_one_up() {
   }
 
   if(level.round_number == 5 || level.round_number == 10 || level.round_number == 20 || level.round_number == 35 || level.round_number == 50) {
-    players = getplayers();
+    players = getPlayers();
     rand = randomintrange(0, players.size);
     players[rand] thread zm_audio::create_and_play_dialog(#"general", #"round_" + level.round_number);
   }
@@ -638,7 +638,7 @@ round_over() {
     time = 0.1;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     if(!isDefined(players[player_index].pers[#"previous_distance_traveled"])) {
@@ -729,7 +729,7 @@ round_think(restart = 0) {
     }
 
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         player zm_stats::set_global_stat("rounds", level.round_number);
@@ -794,7 +794,7 @@ round_think(restart = 0) {
     recordnumzombierounds(level.round_number - 1);
     recordzombieroundstart();
     bb::logroundevent("start_of_round");
-    players = getplayers();
+    players = getPlayers();
 
     for(index = 0; index < players.size; index++) {
       players[index] recordroundstartstats();
@@ -814,7 +814,7 @@ round_think(restart = 0) {
     uploadstats();
 
     if(!zm_trial::is_trial_mode() || !zm_utility::is_standard()) {
-      playsoundatposition(#"hash_58df62ae7fa7b42b", (0, 0, 0));
+      playSoundAtPosition(#"hash_58df62ae7fa7b42b", (0, 0, 0));
     }
 
     if(isDefined(level.round_end_custom_logic)) {
@@ -828,7 +828,7 @@ round_think(restart = 0) {
       return;
     }
 
-    assert(level.players.size == getplayers().size);
+    assert(level.players.size == getPlayers().size);
 
     if(level.players.size > 1 && !level flag::get("round_reset")) {
       level thread zm_player::spectators_respawn();
@@ -850,7 +850,7 @@ round_think(restart = 0) {
     setroundsplayed(get_round_number());
     zombie_utility::set_zombie_var(#"zombie_spawn_delay", [[level.func_get_zombie_spawn_delay]](get_round_number()));
     matchutctime = getutc();
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(level.curr_gametype_affects_rank && get_round_number() > 3 + level.start_round) {
@@ -950,7 +950,7 @@ function_fb6aa5a3() {
 }
 
 award_grenades_for_survivors() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(!(isDefined(players[i].is_zombie) && players[i].is_zombie) && !(isDefined(players[i].altbody) && players[i].altbody) && !players[i] laststand::player_is_in_laststand()) {
@@ -1080,7 +1080,7 @@ sndmusiconkillround() {
 
 play_level_start_vox_delayed() {
   wait 3;
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size <= 0) {
     return;

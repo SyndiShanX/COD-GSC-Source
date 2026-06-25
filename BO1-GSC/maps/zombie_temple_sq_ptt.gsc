@@ -18,7 +18,7 @@ init() {
 }
 debug_jet() {
   self endon("death");
-  struct = getstruct(self.target, "targetname");
+  struct = getStruct(self.target, "targetname");
   dir = anglesToForward(struct.angles);
   while(1) {
     scale = 0.1;
@@ -92,7 +92,7 @@ player_line_thread() {
 init_stage() {
   level notify("ptt_start");
   flag_clear("sq_ptt_dial_dialed");
-  dial = GetEnt("sq_ptt_dial", "targetname");
+  dial = getEnt("sq_ptt_dial", "targetname");
   dial thread ptt_dial();
   jets = getEntArray("sq_ptt_trig", "targetname");
   level._ptt_jets = jets.size;
@@ -107,7 +107,7 @@ init_stage() {
 }
 play_choking_loop() {
   level endon("sq_PtT_over");
-  struct = getstruct("sq_location_ptt", "targetname");
+  struct = getStruct("sq_location_ptt", "targetname");
   if(!isDefined(struct)) {
     return;
   }
@@ -136,7 +136,7 @@ ptt_lever() {
     self waittill("rotatedone");
   }
   use_trigger = spawn("trigger_radius_use", self.origin, 0, 32, 72);
-  use_trigger SetCursorHint("HINT_NOICON");
+  use_trigger setCursorHint("HINT_NOICON");
   use_trigger waittill("trigger", who);
   use_trigger Delete();
   self playSound("evt_sq_ptt_lever_pull");
@@ -147,7 +147,7 @@ ptt_lever() {
 }
 ptt_story_vox(player) {
   level endon("sq_PtT_over");
-  struct = getstruct("sq_location_ptt", "targetname");
+  struct = getStruct("sq_location_ptt", "targetname");
   if(!isDefined(struct)) {
     return;
   }
@@ -223,7 +223,7 @@ remove_exploders() {
 exit_stage(success) {
   flag_clear("sq_ptt_dial_dialed");
   flag_clear("ptt_plot_vo_done");
-  dial = GetEnt("sq_ptt_dial", "targetname");
+  dial = getEnt("sq_ptt_dial", "targetname");
   dial thread dud_dial_handler();
   ents = GetAIArray("axis");
   for(i = 0; i < ents.size; i++) {
@@ -274,7 +274,7 @@ ptt_dial() {
   }
   level thread ptt_story_vox(who);
   self playSound("evt_sq_ptt_gas_release");
-  lever = GetEnt("sq_ptt_lever", "targetname");
+  lever = getEnt("sq_ptt_lever", "targetname");
   lever thread ptt_lever();
   flag_set("sq_ptt_dial_dialed");
 }

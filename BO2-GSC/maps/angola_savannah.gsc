@@ -27,7 +27,7 @@ skipto_savannah_start() {
   level thread maps\createart\angola_art::savannah_start();
   level.savimbi = init_hero("savimbi", ::savimbi_setup);
   level thread run_scene("savimbi_ride_idle");
-  blocker = getent("buffel_start_blocker", "targetname");
+  blocker = getEnt("buffel_start_blocker", "targetname");
   blocker hide();
   blocker notsolid();
   a_vh = getEntArray("convoy", "script_noteworthy");
@@ -58,9 +58,9 @@ skipto_savannah_start() {
 }
 
 skipto_setup_blocker() {
-  eland = getent("riverbed_convoy_eland", "targetname");
+  eland = getEnt("riverbed_convoy_eland", "targetname");
   eland waittill("riverbed_convoy_buffel_savannah_start");
-  blocker = getent("buffel_start_blocker", "targetname");
+  blocker = getEnt("buffel_start_blocker", "targetname");
   blocker show();
   blocker solid();
 }
@@ -76,7 +76,7 @@ skipto_savannah_hill() {
   level thread hide_victory_grass();
   level.savimbi = init_hero("savimbi", ::savimbi_setup);
   level thread run_scene("savimbi_ride_idle");
-  blocker = getent("buffel_start_blocker", "targetname");
+  blocker = getEnt("buffel_start_blocker", "targetname");
   blocker hide();
   blocker notsolid();
   a_vh = getEntArray("convoy", "script_noteworthy");
@@ -145,7 +145,7 @@ skipto_savannah_finish() {
   flag_set("savannah_done");
   level thread hide_victory_grass();
   level thread hide_savannah_rocks();
-  e_buffel_tip_blocker = getent("buffel_tip_blocker", "targetname");
+  e_buffel_tip_blocker = getEnt("buffel_tip_blocker", "targetname");
   e_buffel_tip_blocker connectpaths();
   e_buffel_tip_blocker notsolid();
   level thread show_static_push_models();
@@ -218,7 +218,7 @@ savannah_drone_setup() {
   level.disable_drone_explosive_deaths = 1;
   level.drones.max_drones = 300;
   maps\_drones::drones_set_impact_effect(level._effect["drone_impact_fx"]);
-  sp_drone_mpla_high = getent("mpla_drone_high", "targetname");
+  sp_drone_mpla_high = getEnt("mpla_drone_high", "targetname");
   drones_assign_spawner("mpla_drones", sp_drone_mpla_high);
 }
 
@@ -243,8 +243,8 @@ savannah_start() {
   savannah_drone_setup();
   level thread setup_threat_bias_group();
   level thread savannah_start_mortars();
-  sp_unita = getent("savannah_start_unita", "targetname");
-  sp_mpla = getent("savannah_start_mpla", "targetname");
+  sp_unita = getEnt("savannah_start_unita", "targetname");
+  sp_mpla = getEnt("savannah_start_mpla", "targetname");
   brim_ally_initial_spawners = getEntArray("brim_ally_initial", "targetname");
   array_thread(brim_ally_initial_spawners, ::add_spawn_function, ::brim_ally_initial_wait);
   trigger_use("sm_brim_initial");
@@ -254,7 +254,7 @@ savannah_start() {
   flag_wait_all("clash_runners_ready", "savimbi_reached_savannah");
   level thread maps\createart\angola_art::savannah_start();
   level thread cleanup_riverbed_fail_triggers();
-  savimbi_buffel = getent("savimbi_buffel", "targetname");
+  savimbi_buffel = getEnt("savimbi_buffel", "targetname");
   savimbi_buffel thread player_convoy_watch("savannah_final_warp");
   stop_exploder(1000);
   level thread cleanup_riverbed_scenes();
@@ -262,7 +262,7 @@ savannah_start() {
   wait 1.5;
   maps\_drones::drones_speed_modifier("brim_mpla_drones", 0.2, 0.4);
   drones_start("brim_mpla_drones");
-  playsoundatposition("evt_enemy_charge", (1243, 1625, 210));
+  playSoundAtPosition("evt_enemy_charge", (1243, 1625, 210));
   setmusicstate("ANGOLA_SAVANNAH_BATTLE");
   level clientnotify("pgw");
   level thread fake_battle_loop();
@@ -344,7 +344,7 @@ savannah_start() {
     }
   }
 
-  vh_lead = getent("savimbi_buffel", "targetname");
+  vh_lead = getEnt("savimbi_buffel", "targetname");
   vh_lead thread savimbi_buffel();
   level thread mortar_buffel_blocker();
   a_veh_elands = getEntArray("convoy", "script_noteworthy");
@@ -397,7 +397,7 @@ do_melee_scene(scene_name) {
 }
 
 savannah_start_savimbi_buffel_go() {
-  vh = getent("savimbi_buffel", "targetname");
+  vh = getEnt("savimbi_buffel", "targetname");
   vh veh_magic_bullet_shield(1);
   vh.drivepath = 1;
   vh thread maps\_vehicle::disconnect_paths_while_moving(0.5);
@@ -409,17 +409,17 @@ savannah_start_savimbi_buffel_go() {
 set_pre_melee_mortars() {
   for(x = 1; x < 6; x++) {
     str_mortar = "start_melee_mortar" + x;
-    s_mortar = getstruct(str_mortar, "script_noteworthy");
+    s_mortar = getStruct(str_mortar, "script_noteworthy");
     playFX(getfx("mortar_savannah"), s_mortar.origin);
-    playsoundatposition("exp_mortar", s_mortar.origin);
+    playSoundAtPosition("exp_mortar", s_mortar.origin);
     wait 1.1;
   }
 }
 
 set_melee_mortars() {
-  melee_pos1 = getent("start_melee_mortar1", "targetname");
-  melee_pos2 = getent("start_melee_mortar2", "targetname");
-  melee_pos3 = getent("start_melee_mortar3", "targetname");
+  melee_pos1 = getEnt("start_melee_mortar1", "targetname");
+  melee_pos2 = getEnt("start_melee_mortar2", "targetname");
+  melee_pos3 = getEnt("start_melee_mortar3", "targetname");
   playFX(getfx("mortar_savannah"), melee_pos1.origin);
   melee_pos1 playSound("exp_mortar");
   wait 0.25;
@@ -436,7 +436,7 @@ vo_play_savannah_start() {
 }
 
 savimbi_rally() {
-  player_body = getent("player_body", "targetname");
+  player_body = getEnt("player_body", "targetname");
   player_body anim_set_blend_in_time(0.0);
   level thread savimbi_riders_rally();
   end_scene("player_ride_buffel_intro");
@@ -462,7 +462,7 @@ rally_stop_rumble(m_body) {
 }
 
 savimbi_riders_rally() {
-  savimbi_buffel = getent("savimbi_buffel", "targetname");
+  savimbi_buffel = getEnt("savimbi_buffel", "targetname");
   savimbi_buffel remove_buffel_riders();
   level thread run_scene("savimbi_buffel_shooters_idle");
   level thread savimbi_riders_rally_prep();
@@ -524,9 +524,9 @@ savannah_start_mortars() {
 
 mortar_buffel_blocker() {
   flag_wait("fire_eland_mortar");
-  vh_buffel_mortar = getent("buffel_mortar", "targetname");
+  vh_buffel_mortar = getEnt("buffel_mortar", "targetname");
   playFX(getfx("mortar_savannah"), vh_buffel_mortar.origin);
-  playsoundatposition("exp_mortar", vh_buffel_mortar.origin);
+  playSoundAtPosition("exp_mortar", vh_buffel_mortar.origin);
   vh_buffel_mortar thread destroy_buffel();
   vh_buffel_mortar waittill("reached_end_node");
   vh_buffel_mortar notify("death");
@@ -570,17 +570,17 @@ savimbi_buffel_drop_mgl(savimbi) {
 #using_animtree("generic_human");
 
 savimbi_buffel_spawn_enemy(savimbi) {
-  v_buffel = getent("savimbi_buffel", "targetname");
+  v_buffel = getEnt("savimbi_buffel", "targetname");
   v_origin = getstartorigin(v_buffel gettagorigin("tag_rear_door_l"), v_buffel gettagangles("tag_rear_door_l"), %ch_ang_03_01_savimbi_joins_enemy);
   playFX(getfx("mortar_savannah"), v_origin);
-  playsoundatposition("exp_mortar", v_origin);
+  playSoundAtPosition("exp_mortar", v_origin);
   ai_savimbi_enemy = simple_spawn_single("post_heli_enemy", undefined, undefined, undefined, undefined, undefined, undefined, 1);
   ai_savimbi_enemy.animname = "savimbi_enemy";
   run_scene("savimbi_join_battle_enemy", undefined, 1);
 }
 
 savannah_destroy_buffel1() {
-  vh_buffel_1 = getent("convoy_destroy_1", "targetname");
+  vh_buffel_1 = getEnt("convoy_destroy_1", "targetname");
   vh_buffel_1 destroy_buffel();
   vh_buffel_1 notify("death");
 }
@@ -600,7 +600,7 @@ savannah_destroy_eland_fight() {
 }
 
 savannah_destroy_eland(e_enemy) {
-  v_eland = getent("eland_hero", "targetname");
+  v_eland = getEnt("eland_hero", "targetname");
   v_eland veh_magic_bullet_shield(0);
   wait 0.05;
   v_eland playSound("exp_veh_large");
@@ -673,10 +673,10 @@ savannah_hill() {
   level.mortar_fail = 1;
   level.friendlyfiredisabled = 0;
   level thread maps\createart\angola_art::savannah_hill();
-  path_blocker = getent("push_path_blocker", "targetname");
+  path_blocker = getEnt("push_path_blocker", "targetname");
   path_blocker notsolid();
   path_blocker connectpaths();
-  e_buffel_tip_blocker = getent("buffel_tip_blocker", "targetname");
+  e_buffel_tip_blocker = getEnt("buffel_tip_blocker", "targetname");
   e_buffel_tip_blocker connectpaths();
   e_buffel_tip_blocker notsolid();
   level.player thread drone_killer();
@@ -712,7 +712,7 @@ savannah_hill() {
   }
 
   trigger_use("sm_hill_shooters");
-  t_use = getent("trigger_board_buffel", "targetname");
+  t_use = getEnt("trigger_board_buffel", "targetname");
   t_use trigger_off();
   a_veh_elands = getEntArray("convoy", "script_noteworthy");
   array_thread(a_veh_elands, ::eland_think, 1);
@@ -764,7 +764,7 @@ vo_play_savannah_hill() {
 
 savannah_hill_deform_terrain(n_topper, b_move) {
   str_name = "mortar_top_" + n_topper;
-  m_terrain = getent(str_name, "targetname");
+  m_terrain = getEnt(str_name, "targetname");
 
   if(isDefined(b_move) && b_move) {
     m_terrain.origin = m_terrain.origin + vectorscale((0, 0, -1), 50.0);
@@ -806,12 +806,12 @@ savannah_wave_one_fights() {
 }
 
 savannah_board_buffel() {
-  veh_buffel = getent("savimbi_buffel", "targetname");
+  veh_buffel = getEnt("savimbi_buffel", "targetname");
   veh_buffel veh_magic_bullet_shield(1);
   veh_buffel hidepart("tag_mirror");
   level thread savannah_board_buffel_savimbi();
   level thread ready_to_mount_buffel();
-  t_use = getent("trigger_board_buffel", "targetname");
+  t_use = getEnt("trigger_board_buffel", "targetname");
   t_use waittill("trigger");
   t_use delete();
   level.player enableinvulnerability();
@@ -834,19 +834,19 @@ savannah_board_buffel() {
   level.player showviewmodel();
   level.player allowsprint(0);
   wait 1;
-  e_mortar1 = getent("final_push_mortar1", "targetname");
-  e_mortar2 = getent("final_push_mortar2", "targetname");
-  e_mortar3 = getent("final_push_mortar3", "targetname");
+  e_mortar1 = getEnt("final_push_mortar1", "targetname");
+  e_mortar2 = getEnt("final_push_mortar2", "targetname");
+  e_mortar3 = getEnt("final_push_mortar3", "targetname");
   delay_thread(0.1, ::savannah_hill_deform_terrain, 5);
   flag_set("final_push");
   wait 0.05;
   veh_buffel setspeed(7);
   wait 0.5;
   wait 0.1;
-  playsoundatposition("exp_mortar", e_mortar2.origin);
+  playSoundAtPosition("exp_mortar", e_mortar2.origin);
   playFX(getfx("mortar_savannah"), e_mortar2.origin);
   wait 0.35;
-  playsoundatposition("exp_mortar", e_mortar3.origin);
+  playSoundAtPosition("exp_mortar", e_mortar3.origin);
   playFX(getfx("mortar_savannah"), e_mortar3.origin);
 }
 
@@ -859,8 +859,8 @@ run_retreat_scene(n_scene) {
 
 ready_to_mount_buffel() {
   wait 14;
-  set_objective(level.obj_get_to_buffel, getent("trigger_board_buffel", "targetname"), "use", undefined, undefined, 12);
-  t_use = getent("trigger_board_buffel", "targetname");
+  set_objective(level.obj_get_to_buffel, getEnt("trigger_board_buffel", "targetname"), "use", undefined, undefined, 12);
+  t_use = getEnt("trigger_board_buffel", "targetname");
   t_use trigger_on();
   level thread savannah_board_buffel_fail();
 }
@@ -903,13 +903,13 @@ savannah_finish() {
   flag_wait("savannah_done");
   setailimit(24);
   spawn_manager_set_global_active_count(22);
-  s_buffel_target = getstruct("victory_shots_target", "targetname");
+  s_buffel_target = getStruct("victory_shots_target", "targetname");
   level thread prep_victory_shots();
   drones_set_max_ragdolls(0);
   fx_node = getvehiclenode("victory_fx", "targetname");
   playFX(getfx("fx_ango_smoke_distant_lrg"), fx_node.origin);
   savimbi_start_node = getvehiclenode("victory_shots_start", "targetname");
-  savimbi_buffel = getent("savimbi_buffel", "targetname");
+  savimbi_buffel = getEnt("savimbi_buffel", "targetname");
   savimbi_buffel veh_magic_bullet_shield(1);
   savimbi_buffel hidepart("tag_mirror");
   buffel2 = spawn_vehicle_from_targetname("victory_buffel");
@@ -982,7 +982,7 @@ prep_scene_heli() {
 }
 
 prep_victory_shot() {
-  vh_end_buffel = getent("savimbi_buffel", "targetname");
+  vh_end_buffel = getEnt("savimbi_buffel", "targetname");
   victory_align = spawn("script_origin", vh_end_buffel.origin);
   victory_align.targetname = "savimbi_buffel_end_enemies";
 }
@@ -1019,7 +1019,7 @@ victory_buffel_target() {
   temp_target_model = spawn_model("tag_origin");
 
   for(x = 3; x < 8; x++) {
-    temp_target = getstruct("victory_target" + x, "script_noteworthy");
+    temp_target = getStruct("victory_target" + x, "script_noteworthy");
     temp_target_model.origin = temp_target.origin + vectorscale((0, -1, 0), 5.0);
     self maps\_turret::set_turret_target(temp_target_model, undefined, 1);
     wait 1.5;
@@ -1166,10 +1166,10 @@ mpla_shoot_hudson() {
 }
 
 mpla_rpg_hudson() {
-  rpg1 = getstruct("hill_launcher_fire_pos", "targetname");
-  rpg2 = getent("hill_launcher4", "targetname");
-  rpg3 = getent("hill_launcher3", "targetname");
-  heli = getent("hudson_helicopter", "targetname");
+  rpg1 = getStruct("hill_launcher_fire_pos", "targetname");
+  rpg2 = getEnt("hill_launcher4", "targetname");
+  rpg3 = getEnt("hill_launcher3", "targetname");
+  heli = getEnt("hudson_helicopter", "targetname");
   wait 2.5;
   level thread fire_magic_rpg(rpg1.origin, heli.origin, 0);
   wait 0.3;
@@ -1210,7 +1210,7 @@ kill_off_tanks(str_name, str_key) {
 
   foreach(veh_tank in a_veh_tanks) {
     if(isalive(veh_tank)) {
-      playsoundatposition("exp_mortar", veh_tank.origin);
+      playSoundAtPosition("exp_mortar", veh_tank.origin);
       playFX(getfx("mortar_savannah"), veh_tank.origin);
       veh_tank notify("death");
     }
@@ -1370,7 +1370,7 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
 
   if(flag("savannah_final_push")) {
     autosave_by_name("savannah_final_push");
-    s_player_pos = getstruct("player_board_start", "targetname");
+    s_player_pos = getStruct("player_board_start", "targetname");
     v_player_origin = s_player_pos.origin;
     v_player_angles = s_player_pos.angles;
   }
@@ -1379,7 +1379,7 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
     delay_thread(1, ::prep_wave_two);
   }
 
-  self setorigin(v_player_origin);
+  self setOrigin(v_player_origin);
   self setplayerangles(v_player_angles);
   flag_clear("stop_strafe_quake");
   flag_clear("player_in_helicopter");
@@ -1640,10 +1640,10 @@ tank_fire() {
 
     if(!flag("pause_fire")) {
       if(isalive(self) && !flag("pause_fire")) {
-        self setturrettargetent(e_target);
+        self setturrettargetEnt(e_target);
       }
 
-      e_target moveto(a_target_pos[randomint(a_target_pos.size)].origin, randomfloatrange(2.0, 4.0), 1.0, 1.0);
+      e_target moveTo(a_target_pos[randomint(a_target_pos.size)].origin, randomfloatrange(2.0, 4.0), 1.0, 1.0);
       e_target waittill("movedone");
 
       if(isalive(self) && !flag("pause_fire")) {
@@ -1663,7 +1663,7 @@ tank_fire_target(e_target, b_scene, n_wait) {
   self notify("pause_fire");
 
   if(isDefined(self)) {
-    self setturrettargetent(e_target);
+    self setturrettargetEnt(e_target);
   }
 
   if(isDefined(n_wait) && n_wait) {
@@ -1885,11 +1885,11 @@ eland_think(b_reach) {
   }
 
   e_target = spawn("script_origin", a_target_pos[0].origin);
-  self setturrettargetent(e_target);
+  self setturrettargetEnt(e_target);
 
   while(isalive(self) && !flag("savannah_final_push_success")) {
     wait(randomfloatrange(3.0, 6.0));
-    e_target moveto(a_target_pos[randomint(a_target_pos.size)].origin, randomfloatrange(2.0, 4.0), 1.0, 1.0);
+    e_target moveTo(a_target_pos[randomint(a_target_pos.size)].origin, randomfloatrange(2.0, 4.0), 1.0, 1.0);
     e_target waittill("movedone");
 
     if(isalive(self)) {
@@ -1905,7 +1905,7 @@ return_prep() {
   switch (level.num_heli_runs) {
     case 1:
       level thread kill_hill_rpgs();
-      vh_buffel = getent("savimbi_buffel", "targetname");
+      vh_buffel = getEnt("savimbi_buffel", "targetname");
       v_origin = vh_buffel gettagorigin("tag_origin");
       v_angles = vh_buffel gettagangles("tag_origin");
       level.savimbi_strafe1 = spawn("script_origin", v_origin);
@@ -1913,13 +1913,13 @@ return_prep() {
       level.savimbi_strafe1.targetname = "savimbi_buffel_strafe1";
       break;
     case 2:
-      m_buffel_flipper = getent("buffel_flip_guy1_drone", "targetname");
+      m_buffel_flipper = getEnt("buffel_flip_guy1_drone", "targetname");
       delete_scene_all("buffel_tip_guys", 1);
       level thread protect_convoy();
       delete_scene_all("savimbi_buffel_shooters_attack", 1);
       level thread kill_wave_one_rpgs();
       flag_set("savannah_final_warp");
-      vh_old_buffel = getent("savimbi_buffel", "targetname");
+      vh_old_buffel = getEnt("savimbi_buffel", "targetname");
       vh_old_buffel unload_buffel();
       wait 0.05;
       vh_old_buffel delete();
@@ -1942,7 +1942,7 @@ hero_eland_scene() {
 }
 
 eland_hero_shoot() {
-  vh_hero_eland = getent("eland_hero", "targetname");
+  vh_hero_eland = getEnt("eland_hero", "targetname");
   vh_hero_eland fireweapon();
   playrumbleonposition("grenade_rumble", vh_hero_eland.origin);
 }
@@ -1950,7 +1950,7 @@ eland_hero_shoot() {
 savannah_buffel_tip() {
   self maps\_vehicle::getoffpath();
   wait 0.1;
-  playsoundatposition("exp_mortar", self.origin);
+  playSoundAtPosition("exp_mortar", self.origin);
   playFX(getfx("mortar_savannah"), self.origin);
 
   foreach(rider in self.riders) {
@@ -1966,9 +1966,9 @@ savannah_buffel_tip() {
   level thread run_scene("buffel_tip_guys");
   self delete();
   scene_wait("buffel_tip");
-  e_buffel_tip_blocker = getent("buffel_tip_blocker", "targetname");
+  e_buffel_tip_blocker = getEnt("buffel_tip_blocker", "targetname");
   e_buffel_tip_blocker solid();
-  e_buffel_tip_blocker disconnectpaths();
+  e_buffel_tip_blocker disconnectPaths();
   level run_scene("buffel_tip_idle");
 }
 
@@ -2036,7 +2036,7 @@ buffel_gunner_think(b_reach, a_fire_nodes) {
   self thread fire_buffel_think();
 
   while(isalive(self) && !flag("savannah_done") && self.fire_turret) {
-    e_target moveto(a_target_pos[randomint(a_target_pos.size)].origin, randomfloatrange(2.0, 4.0), 1.0, 1.0);
+    e_target moveTo(a_target_pos[randomint(a_target_pos.size)].origin, randomfloatrange(2.0, 4.0), 1.0, 1.0);
     n_time = randomfloatrange(3.0, 6.0);
     wait(n_time);
   }
@@ -2069,7 +2069,7 @@ fake_battle_loop() {
 }
 
 start_heli_fire(guy) {
-  hudson_heli = getent("hudson_helicopter", "targetname");
+  hudson_heli = getEnt("hudson_helicopter", "targetname");
   guy shoot_at_target(hudson_heli, undefined, undefined, -1);
 }
 
@@ -2087,7 +2087,7 @@ init_hill_shooter(n_accuracy) {
   if(issubstr(self.targetname, "machete")) {
     self setthreatbiasgroup("machete_guy");
   } else {
-    self set_goalradius(50);
+    self set_goalRadius(50);
     self setthreatbiasgroup("axis_shooters");
     self.script_accuracy = n_accuracy;
   }
@@ -2158,7 +2158,7 @@ cleanup_post_heli_fight() {
   wait 1;
   delete_scene("post_heli_run_fight", 1);
   wait 1;
-  enemy = getent("eland_destroy_enemy", "targetname");
+  enemy = getEnt("eland_destroy_enemy", "targetname");
   enemy delete();
 }
 
@@ -2192,8 +2192,8 @@ setup_wave_one_launchers() {
 
 setup_wave_two_launchers() {
   wait 3;
-  sp_left = getent("hill_launcher3", "targetname");
-  sp_right = getent("hill_launcher4", "targetname");
+  sp_left = getEnt("hill_launcher3", "targetname");
+  sp_right = getEnt("hill_launcher4", "targetname");
 
   for(x = 0; x < 2; x++) {
     tmp_ent = simple_spawn_single(sp_left, ::init_hill_launcher, 2, undefined, undefined, undefined, undefined, 1);
@@ -2210,7 +2210,7 @@ setup_wave_two_launchers() {
 init_hill_launcher(n_wave) {
   self endon("death");
   self thread magic_bullet_shield();
-  self set_goalradius(50);
+  self set_goalRadius(50);
   self.health = self.health + 25;
   self.a.disablelongdeath = 1;
   self setthreatbiasgroup("rpg_guy");
@@ -2222,7 +2222,7 @@ init_hill_launcher(n_wave) {
 
 init_final_launcher() {
   self.dropweapon = 0;
-  self set_goalradius(50);
+  self set_goalRadius(50);
   self.health = self.health + 25;
   self.a.disablelongdeath = 1;
   self setthreatbiasgroup("axis_shooters");
@@ -2323,9 +2323,9 @@ fire_magic_rpd(v_fire_pos, v_target_pos) {
 }
 
 wave_one_tank_fire() {
-  vh_target = getent("eland_hero", "targetname");
+  vh_target = getEnt("eland_hero", "targetname");
   vh_target waittill("reached_end_node");
-  vh_tank = getent("wave_one_fire", "script_noteworthy");
+  vh_tank = getEnt("wave_one_fire", "script_noteworthy");
   wait 5;
   vh_tank thread tank_fire_target(vh_target, 1);
   wait 5;
@@ -2414,7 +2414,7 @@ go_wave_two() {
   level.savimbi setgoalpos(savimbi_goal_pos.origin);
   trigger_use("second_wave");
   level thread setup_wave_two_launchers();
-  vh_buffel = getent("riverbed_convoy_buffel", "targetname");
+  vh_buffel = getEnt("riverbed_convoy_buffel", "targetname");
   vh_buffel waittill("buffel_tip");
   vh_buffel thread savannah_buffel_tip();
   wait 2;
@@ -2422,7 +2422,7 @@ go_wave_two() {
 }
 
 savimbi_return_fight() {
-  vh_lead_buffel = getent("savimbi_buffel", "targetname");
+  vh_lead_buffel = getEnt("savimbi_buffel", "targetname");
   level.savimbi equip_savimbi_machete();
 
   for(x = 1; x < 4; x++) {
@@ -2525,7 +2525,7 @@ mortar_guy_damage(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death
 }
 
 savannah_attack_mortars() {
-  vh_buffel_helper = getent("convoy_destroy_2", "targetname");
+  vh_buffel_helper = getEnt("convoy_destroy_2", "targetname");
   a_fire_nodes = getStructArray("mortar_help", "targetname");
   flag_set("buffel2_continue_path");
   vh_buffel_helper waittill("buffel_helper_explode");
@@ -2562,10 +2562,10 @@ spawn_technicals() {
   level.savannah_technical_gunner_kills = 0;
   add_spawn_function_group("technical_gunner", "script_noteworthy", ::init_technical_gunner);
   add_spawn_function_veh_by_type("civ_pickup_wturret_angola", ::init_technical);
-  technical_trig = getent("trig_trucks", "targetname");
+  technical_trig = getEnt("trig_trucks", "targetname");
   technical_trig useby(level.player);
   wait 0.1;
-  extra_trig = getent("trig_extra_trucks", "targetname");
+  extra_trig = getEnt("trig_extra_trucks", "targetname");
   extra_trig useby(level.player);
 }
 
@@ -2580,7 +2580,7 @@ init_technical() {
 track_and_shoot_heli() {
   self endon("death");
   self.riders[0] endon("death");
-  hud_heli = getent("hudson_helicopter", "targetname");
+  hud_heli = getEnt("hudson_helicopter", "targetname");
   self set_turret_target(hud_heli, vectorscale((0, 0, 1), 150.0), 1);
   self lights_off();
 
@@ -2640,9 +2640,9 @@ wait_for_wave3_spawn() {
 }
 
 protect_convoy() {
-  eland1 = getent("final_push_eland", "targetname");
+  eland1 = getEnt("final_push_eland", "targetname");
   eland1.takedamage = 0;
-  eland2 = getent("eland_destroy", "targetname");
+  eland2 = getEnt("eland_destroy", "targetname");
   eland2.takedamage = 0;
 }
 
@@ -2680,12 +2680,12 @@ warp_buffel() {
   simple_spawn("push_fighter");
   simple_spawn("push_allies", ::init_push_allies);
   add_spawn_function_group("push_gunner", "targetname", ::init_push_gunner);
-  push_technical_trig = getent("trig_push_technical", "targetname");
+  push_technical_trig = getEnt("trig_push_technical", "targetname");
   push_technical_trig useby(level.player);
   level thread spawn_extra_runners();
   flag_wait("technical_explode");
-  vh_eland = getent("technical_shoot_eland", "targetname");
-  vh_truck_push = getent("truck_push", "targetname");
+  vh_eland = getEnt("technical_shoot_eland", "targetname");
+  vh_truck_push = getEnt("truck_push", "targetname");
   vh_eland thread tank_fire_target(vh_truck_push, 0, 0.1);
   wait 0.1;
 
@@ -2704,26 +2704,26 @@ delete_swap_vehicles() {
   delete_array("convoy_destroy_1", "targetname");
   delete_array("convoy_destroy_2", "targetname");
   delete_array("riverbed_convoy_buffel", "targetname");
-  e_buffel_tip_blocker = getent("buffel_tip_blocker", "targetname");
+  e_buffel_tip_blocker = getEnt("buffel_tip_blocker", "targetname");
   e_buffel_tip_blocker connectpaths();
   e_buffel_tip_blocker notsolid();
   level thread cleanup_mortar_models();
 }
 
 warp_convoy() {
-  eland1 = getent("riverbed_convoy_eland", "targetname");
+  eland1 = getEnt("riverbed_convoy_eland", "targetname");
   eland1 delete();
   eland1 = spawn_vehicle_from_targetname("start_convoy_buffel_turret");
   eland1 veh_magic_bullet_shield(1);
   eland1.targetname = "push_buffel";
   eland1 load_buffel(1);
   wait 0.05;
-  eland2 = getent("eland_destroy", "targetname");
+  eland2 = getEnt("eland_destroy", "targetname");
   eland2 delete();
   eland2 = spawn_vehicle_from_targetname("start_convoy_eland");
   eland2 veh_magic_bullet_shield(1);
   wait 0.05;
-  eland3 = getent("final_push_eland", "targetname");
+  eland3 = getEnt("final_push_eland", "targetname");
   eland3 delete();
   eland3 = spawn_vehicle_from_targetname("start_convoy_eland");
   eland3 veh_magic_bullet_shield(1);
@@ -2740,8 +2740,8 @@ warp_convoy() {
   eland3 delay_thread(10, ::tank_fire_position, target_node2.origin, 0.2);
   eland1 thread buffel_gunner_think();
   wait 12;
-  target_ent = getent("truck_push", "targetname");
-  eland3 setturrettargetent(target_ent);
+  target_ent = getEnt("truck_push", "targetname");
+  eland3 setturrettargetEnt(target_ent);
 }
 
 show_static_push_models() {
@@ -2761,9 +2761,9 @@ show_static_push_models() {
     wait 0.05;
   }
 
-  path_blocker = getent("push_path_blocker", "targetname");
+  path_blocker = getEnt("push_path_blocker", "targetname");
   path_blocker solid();
-  path_blocker disconnectpaths();
+  path_blocker disconnectPaths();
 }
 
 prep_push() {
@@ -2785,7 +2785,7 @@ init_push_allies() {
   self setthreatbiasgroup("push_allies");
   self thread magic_bullet_shield();
   self thread disable_pain();
-  self set_goalradius(50);
+  self set_goalRadius(50);
   self.script_accuracy = 0.5;
 }
 
@@ -2799,7 +2799,7 @@ init_fighter(n_accuracy) {
   }
 
   self.a.disablelongdeath = 1;
-  self set_goalradius(50);
+  self set_goalRadius(50);
   self.script_accuracy = n_accuracy;
   self.health = 200;
 
@@ -2837,7 +2837,7 @@ spawn_forward_runners() {
 
 victory_shot_friendlies() {
   wait 3.7;
-  victory_shot_enemy = getent("victory_shot_enemy", "targetname");
+  victory_shot_enemy = getEnt("victory_shot_enemy", "targetname");
 
   for(x = 0; x < 3; x++) {
     enemy_ent = simple_spawn_single(victory_shot_enemy, ::init_victory_enemy, undefined, undefined, undefined, undefined, undefined, 1);
@@ -2845,14 +2845,14 @@ victory_shot_friendlies() {
   }
 
   wait 1;
-  victory_shot_friendly = getent("victory_shot_friendly", "targetname");
+  victory_shot_friendly = getEnt("victory_shot_friendly", "targetname");
 
   for(x = 0; x < 2; x++) {
     victory_ent = simple_spawn_single(victory_shot_friendly, ::init_victory_friendly, undefined, undefined, undefined, undefined, undefined, 1);
     wait 0.05;
   }
 
-  victory_shot_friendly2 = getent("victory_shot_friendly2", "targetname");
+  victory_shot_friendly2 = getEnt("victory_shot_friendly2", "targetname");
 
   for(x = 0; x < 2; x++) {
     victory_ent = simple_spawn_single(victory_shot_friendly2, ::init_victory_friendly, undefined, undefined, undefined, undefined, undefined, 1);

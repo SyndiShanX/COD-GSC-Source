@@ -83,7 +83,7 @@ init_quest() {
     zm_unitrigger::function_89380dda(s_pernell_drawer.s_unitrigger, 1);
   }
 
-  level.mannequin_ally_spawner = getent("mannequin_ally_spawner", "targetname");
+  level.mannequin_ally_spawner = getEnt("mannequin_ally_spawner", "targetname");
   level.var_777acf92 = level.mannequin_ally_spawner;
   zm_sq::register(#"private_mannequin_program", #"step_1", #"private_mannequin_step1", &private_mannequin_step1_setup, &private_mannequin_step1_cleanup);
   zm_sq::register(#"private_mannequin_program", #"step_2", #"private_mannequin_step2", &private_mannequin_step2_setup, &private_mannequin_step2_cleanup);
@@ -116,9 +116,9 @@ delete_entities() {
   }
 
   var_e3d10631 = getEntArray("private_mannequin_parts", "targetname");
-  var_f0aefc5c = getent("pernell_key", "targetname");
-  var_6e32b553 = getent("pernell_drawer", "targetname");
-  mannequin_ally_spawner = getent("mannequin_ally_spawner", "targetname");
+  var_f0aefc5c = getEnt("pernell_key", "targetname");
+  var_6e32b553 = getEnt("pernell_drawer", "targetname");
+  mannequin_ally_spawner = getEnt("mannequin_ally_spawner", "targetname");
 
   foreach(e_part in var_e3d10631) {
     e_part delete();
@@ -228,7 +228,7 @@ function_eb06b83() {
   e_who thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
   level flag::set("pernell_key_acquired");
   zm_ui_inventory::function_7df6bb60("zm_white_private_mannequin_key_part", 1);
-  var_f0aefc5c = getent("pernell_key", "targetname");
+  var_f0aefc5c = getEnt("pernell_key", "targetname");
 
   if(isDefined(var_f0aefc5c)) {
     var_f0aefc5c delete();
@@ -242,12 +242,12 @@ function_65066810() {
   level flag::wait_till("pernell_key_acquired");
   s_waitresult = self waittill(#"trigger_activated");
   e_who = s_waitresult.e_who;
-  var_6e32b553 = getent("pernell_drawer", "targetname");
+  var_6e32b553 = getEnt("pernell_drawer", "targetname");
 
   if(isDefined(var_6e32b553)) {
     var_7b8000e5 = anglestoright(var_6e32b553.angles) * 16;
     var_6e32b553 playSound("zmb_ee_drawer_open");
-    var_6e32b553 moveto(var_6e32b553.origin + var_7b8000e5, 0.33);
+    var_6e32b553 moveTo(var_6e32b553.origin + var_7b8000e5, 0.33);
   }
 
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
@@ -311,19 +311,19 @@ function_a51b6403(is_opening) {
 
   if(is_opening) {
     self playSound("evt_bunker_door_interior_open");
-    self moveto(self.v_start_pos + (0, 0, -128), 1);
+    self moveTo(self.v_start_pos + (0, 0, -128), 1);
     return;
   }
 
   self playSound("evt_bunker_door_interior_close");
-  self moveto(self.v_start_pos, 1);
+  self moveTo(self.v_start_pos, 1);
 }
 
 function_11862a9b(e_player) {
   if(level.var_f5746584 == 0) {
-    self sethintstring(#"hash_5ebbcacfe7506b1b");
+    self setHintString(#"hash_5ebbcacfe7506b1b");
   } else {
-    self sethintstring(#"hash_17a473c2067a81f1", 3000);
+    self setHintString(#"hash_17a473c2067a81f1", 3000);
   }
 
   return true;
@@ -382,7 +382,7 @@ function_88265619() {
   level endon(#"game_ended", #"hash_48039f3a4c1a3248");
   level.var_f5746584 = 0;
   var_e3d10631 = getEntArray("private_mannequin_parts", "targetname");
-  var_a2c75164 = getent("mannequin_ally_door", "targetname");
+  var_a2c75164 = getEnt("mannequin_ally_door", "targetname");
   assert(isDefined(var_a2c75164), "<dev string:x1a4>");
 
   while(true) {
@@ -446,7 +446,7 @@ function_26edbcdc(inflictor, attacker, damage, flags, meansofdeath, weapon, poin
 
 function_8527738e() {
   level._effect[#"paper_stack_explode"] = #"hash_4419642343624864";
-  level.var_c8b6a556 = getent("pernel_paper_stack", "targetname");
+  level.var_c8b6a556 = getEnt("pernel_paper_stack", "targetname");
   level.var_c8b6a556 setCanDamage(1);
   level.var_c8b6a556 val::set("private_mannequin_quest_paper_stack", "allowDeath", 0);
   s_notify = level.var_c8b6a556 waittill(#"damage");
@@ -500,7 +500,7 @@ timer_actual(kills, time) {
       }
 
       if(math::cointoss()) {
-        players = getplayers();
+        players = getPlayers();
 
         foreach(e_player in players) {
           if(!isDefined(e_player)) {

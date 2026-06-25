@@ -363,8 +363,8 @@ _id_2746() {
             continue;
           }
 
-          var_30 = vectornormalize(var_22.origin - var_1.origin);
-          var_31 = vectornormalize(var_29.origin - var_1.origin);
+          var_30 = vectorNormalize(var_22.origin - var_1.origin);
+          var_31 = vectorNormalize(var_29.origin - var_1.origin);
           var_32 = anglesToForward(var_1.angles);
           var_33 = vectordot(var_30, var_32);
           var_34 = vectordot(var_31, var_32);
@@ -466,7 +466,7 @@ _id_2746() {
 
 _id_9F60(var_0, var_1) {
   var_2 = _id_9F5F(var_0, var_1[2]);
-  var_3 = vectornormalize(var_1 - var_2);
+  var_3 = vectorNormalize(var_1 - var_2);
   return vectortoangles(var_3);
 }
 
@@ -628,7 +628,7 @@ _id_2747() {
           var_14 = self._id_10020.origin;
         }
 
-        var_17 = vectornormalize(var_12.origin - self._id_10020.origin);
+        var_17 = vectorNormalize(var_12.origin - self._id_10020.origin);
         self _meth_805A(vectortoangles(var_17)[1], 0.2);
         self _meth_8045(var_12.origin, 0.2, "script_forced");
         var_18 = var_12.origin[2] + 64;
@@ -1086,7 +1086,7 @@ _id_7701() {
 
       var_2 = var_2 + var_5;
       var_14 = self._id_10020 gettagorigin("tag_player");
-      var_15 = vectornormalize(var_2 - var_14);
+      var_15 = vectorNormalize(var_2 - var_14);
       var_16 = anglesToForward(self getplayerangles());
       var_17 = vectordot(var_15, var_16);
 
@@ -1489,8 +1489,8 @@ _id_286B(var_0) {
     var_3 = var_2 - self._id_A937[var_1];
 
     if(var_3 <= 400) {
-      var_4 = vectornormalize(var_0 _meth_8131());
-      var_5 = vectornormalize(self._id_A936[var_1] - var_0.origin);
+      var_4 = vectorNormalize(var_0 _meth_8131());
+      var_5 = vectorNormalize(self._id_A936[var_1] - var_0.origin);
 
       if(vectordot(var_4, var_5) < -0.5) {
         return var_0.origin;

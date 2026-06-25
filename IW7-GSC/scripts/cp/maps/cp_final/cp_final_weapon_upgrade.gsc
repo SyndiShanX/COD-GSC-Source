@@ -23,7 +23,7 @@ init_upgrade_weapon() {
     level scripts\engine\utility::waittill_any("power_on", self.power_area + " power_on");
   }
 
-  var_0 = getent("pap_machine", "targetname");
+  var_0 = getEnt("pap_machine", "targetname");
   if(!isDefined(var_0)) {
     return;
   }
@@ -79,8 +79,8 @@ weapon_upgrade(var_0, var_1) {
 
   if(var_4 can_upgrade(var_5)) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
-    var_13 = scripts\engine\utility::getstruct(var_3.target, "targetname");
-    var_14 = vectornormalize(anglesToForward(var_4.angles)) * 16;
+    var_13 = scripts\engine\utility::getStruct(var_3.target, "targetname");
+    var_14 = vectorNormalize(anglesToForward(var_4.angles)) * 16;
     var_7 = int(var_7);
     var_7++;
     var_15 = var_5;
@@ -125,10 +125,10 @@ weapon_upgrade(var_0, var_1) {
     }
 
     var_18 = scripts\cp\zombies\interaction_weapon_upgrade::getpos1offset(var_6);
-    var_15 moveto(var_13.origin + var_18, 0.75);
-    var_15 rotateto(var_17, 0.75);
+    var_15 moveTo(var_13.origin + var_18, 0.75);
+    var_15 rotateTo(var_17, 0.75);
     var_15 waittill("movedone");
-    var_15 moveto(var_13.origin + var_16, 0.25);
+    var_15 moveTo(var_13.origin + var_16, 0.25);
     var_15 waittill("movedone");
     update_level_pap_machines("door", "close", undefined, undefined, "zmb_packapunch_machine_on");
     wait(0.75);

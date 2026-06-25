@@ -542,7 +542,7 @@ func_5F8E(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_13 = anglesToForward(self.angles);
-    var_14 = vectornormalize(var_9.origin - self.origin);
+    var_14 = vectorNormalize(var_9.origin - self.origin);
     var_15 = vectordot(var_13, var_14);
     var_10 = distancesquared(self.origin, var_9.origin);
     var_11 = var_10;
@@ -634,7 +634,7 @@ func_5F8C(var_0) {
       }
 
       self notify("stop_loop");
-      scripts\sp\utility::anim_stopanimscripted();
+      scripts\sp\utility::anim_stopanimScripted();
       scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
       break;
 
@@ -654,7 +654,7 @@ func_5F8C(var_0) {
       }
 
       self notify("stop_loop");
-      scripts\sp\utility::anim_stopanimscripted();
+      scripts\sp\utility::anim_stopanimScripted();
       scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
       break;
 
@@ -678,7 +678,7 @@ func_5F8C(var_0) {
       }
 
       self notify("stop_loop");
-      scripts\sp\utility::anim_stopanimscripted();
+      scripts\sp\utility::anim_stopanimScripted();
       scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
       break;
 

@@ -80,7 +80,7 @@ fastrope_ai_think_hack(var_0, var_1) {
   }
 
   wait(var_0 - var_1);
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("single_anim_done");
 }
 
@@ -89,7 +89,7 @@ fastrope_ai_think(var_0) {
   self endon("overtakenow");
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  self linkto(var_1);
+  self linkTo(var_1);
   var_1.ai = self;
   var_1.ai hide();
   var_0 fastrope_wait_que(var_1);
@@ -149,14 +149,14 @@ fastrope_ai_think(var_0) {
     self unlink();
     var_1.origin = self.origin;
     var_1.angles = self.angles;
-    var_1 linkto(self);
+    var_1 linkTo(self);
     var_0.heli thread fastrope_ropethink(self);
     var_0.heli.model thread maps\_anim::anim_single_solo(self, "grab", "tag_detach");
     wait 2.5;
     fastrope_calc(var_1);
     self waittillmatch("single anim", "end");
     var_1 unlink();
-    self linkto(var_1);
+    self linkTo(var_1);
     fastrope_calc(var_1);
     var_0 thread fastrope_post_unload(var_1);
     var_1 thread maps\_anim::anim_loop_solo(self, "loop", undefined, "stopanimscripted");
@@ -164,7 +164,7 @@ fastrope_ai_think(var_0) {
     var_1 thread common_scripts\utility::play_loop_sound_on_entity("fastrope_loop_npc");
     var_1 movez(var_1.range * -1, var_1.time);
     var_6 = var_4 - var_5;
-    var_1 rotateyaw(var_6, var_1.time);
+    var_1 rotateYaw(var_6, var_1.time);
     wait(var_1.time);
     var_1 notify("stopanimscripted");
     var_1.angles = self.angles;
@@ -232,7 +232,7 @@ fastrope_ropethink(var_0) {
   var_5 setModel(level.models["heli"]["rope"][var_1]);
   var_5.animname = self.animname;
   var_5 useanimtree(#animtree);
-  var_5 linkto(self.model, var_4);
+  var_5 linkTo(self.model, var_4);
 
   if(isDefined(level.scr_anim[self.targetname][var_3])) {
     var_6 = getanimlength(level.scr_anim[self.targetname][var_3]);
@@ -313,19 +313,19 @@ fastrope_attach_helicopter(var_0) {
   var_0.ai.side = self.heli.seats[var_1].side;
   var_0.ai.spin = self.heli.seats[var_1].spin;
   self.heli.que[self.heli.que.size] = self;
-  var_0 moveto(self.heli.model gettagorigin("tag_detach"), 0.05);
+  var_0 moveTo(self.heli.model gettagorigin("tag_detach"), 0.05);
   wait 0.1;
   var_0.angles = self.heli.model gettagangles("tag_detach");
-  var_0 linkto(self.heli.model, "tag_detach");
+  var_0 linkTo(self.heli.model, "tag_detach");
   var_0.ai show();
-  var_0.ai linkto(self.heli.model, "tag_detach");
+  var_0.ai linkTo(self.heli.model, "tag_detach");
   self.heli thread fastrope_ropethink(var_0.ai);
   self.heli.model endon("stop_" + var_1);
 
   if(isDefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
-    var_0.ai linkto(self.heli.model, "tag_detach");
+    var_0.ai linkTo(self.heli.model, "tag_detach");
     var_0.ai pushplayer(1);
-    var_0 linkto(var_0.ai);
+    var_0 linkTo(var_0.ai);
     self.heli.model thread maps\_anim::anim_single_solo(var_0.ai, "custom_all" + self.heli.targetname, "tag_detach");
     var_0 notify("custom_all");
     var_0.ai thread fastrope_ai_think_hack(getanimlength(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname]), 0.25);
@@ -333,9 +333,9 @@ fastrope_attach_helicopter(var_0) {
   }
 
   if(isDefined(level.scr_anim[var_0.ai.animname]["custom_ride" + self.heli.targetname])) {
-    var_0.ai linkto(self.heli.model, "tag_detach");
+    var_0.ai linkTo(self.heli.model, "tag_detach");
     var_0.ai pushplayer(1);
-    var_0 linkto(var_0.ai);
+    var_0 linkTo(var_0.ai);
     self.heli.model maps\_anim::anim_single_solo(var_0.ai, "custom_ride" + self.heli.targetname, "tag_detach");
 
     if(self.heli.ready) {
@@ -349,7 +349,7 @@ fastrope_attach_helicopter(var_0) {
 fastrope_free_seat(var_0) {
   if(!isDefined(level.scr_anim[var_0.ai.animname]["custom_all" + self.heli.targetname])) {
     self.heli.model notify("stop_" + var_0.ai.seat_index);
-    var_0.ai stopanimscripted();
+    var_0.ai stopanimScripted();
     var_0.origin = var_0.ai.origin;
     var_0.angles = var_0.ai.angles;
   }
@@ -429,7 +429,7 @@ fastrope_player_think() {
 play_fast_rope_fx() {
   var_0 = spawn("script_model", level.player.origin);
   var_0 setModel("tag_origin");
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   playFXOnTag(level._effect["rain_drops_fastrope"], var_0, "tag_origin");
   wait 3;
   var_0 delete();
@@ -466,7 +466,7 @@ fastrope_player_unload_nolock() {
   var_0 = level.player.cgocamera;
   var_1 = spawn("script_origin", var_0.origin);
   var_1.angles = var_0.angles;
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   var_2 = 1;
   var_3 = anglesToForward((0, 233, 0));
   var_3 = maps\_utility::vector_multiply(var_3, 30);
@@ -476,7 +476,7 @@ fastrope_player_unload_nolock() {
   level.player.time = level.player.time + 1;
   self.lasttime = level.player.time;
   var_4 = (level.player.range + 100) * -1;
-  var_1 moveto((3220, 255, 435), level.player.time);
+  var_1 moveTo((3220, 255, 435), level.player.time);
   var_1 thread maps\_anim::anim_loop_solo(var_0, "loop", undefined, "stopanimscripted");
   var_0 thread maps\_utility::play_sound_on_entity("fastrope_start_plr");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("fastrope_loop_plr");
@@ -508,7 +508,7 @@ fastrope_player_unload_nolock2() {
   var_0 = level.player.cgocamera;
   var_1 = spawn("script_origin", var_0.origin);
   var_1.angles = var_0.angles;
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   var_2 = 1;
   var_3 = anglesToForward((0, 233, 0));
   var_3 = maps\_utility::vector_multiply(var_3, 30);
@@ -518,13 +518,13 @@ fastrope_player_unload_nolock2() {
   level.player.time = level.player.time + 1;
   self.lasttime = level.player.time;
   var_4 = (level.player.range + 100) * -1;
-  var_1 moveto((3220, 300, 400), level.player.time);
+  var_1 moveTo((3220, 300, 400), level.player.time);
   var_1 thread maps\_anim::anim_loop_solo(var_0, "loop", undefined, "stopanimscripted");
   var_0 thread maps\_utility::play_sound_on_entity("fastrope_start_plr");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("fastrope_loop_plr");
   var_5 = 0.5;
   wait(level.player.time - var_5);
-  var_1 rotateto((-60, 225, 0), var_5, var_5 * 0.5, var_5 * 0.5);
+  var_1 rotateTo((-60, 225, 0), var_5, var_5 * 0.5, var_5 * 0.5);
   wait(var_5);
   var_0 notify("stop soundfastrope_loop_plr");
   var_0 thread maps\_utility::play_sound_on_entity("fastrope_end_plr");
@@ -555,7 +555,7 @@ fastrope_player_viewshift_lock() {
     var_1.angles = level.player getplayerangles();
     var_2 = 1;
     var_3 = var_0 gettagangles("tag_player");
-    var_1 rotateto(var_3, var_2, var_2 * 0.5, var_2 * 0.5);
+    var_1 rotateTo(var_3, var_2, var_2 * 0.5, var_2 * 0.5);
     var_4 = int(var_2 * 20);
     var_5 = var_4;
     level.player freezecontrols(1);
@@ -576,7 +576,7 @@ fastrope_player_viewshift_lock() {
       }
 
       var_3 = var_0 gettagangles("tag_player");
-      var_1 rotateto(var_3, var_2 * (var_4 / var_5));
+      var_1 rotateTo(var_3, var_2 * (var_4 / var_5));
     }
 
     level.player setplayerangles((var_1.angles[0], var_1.angles[1], level.player getplayerangles()[2]));
@@ -593,7 +593,7 @@ fastrope_player_unload_lock() {
   var_0 = level.player.cgocamera;
   var_1 = spawn("script_origin", var_0.origin);
   var_1.angles = var_0.angles;
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   var_2 = 1;
   var_3 = anglesToForward((0, 233, 0));
   var_3 = maps\_utility::vector_multiply(var_3, -50);
@@ -606,8 +606,8 @@ fastrope_player_unload_lock() {
   var_5 = var_2 / (level.player.time + 0.5);
   var_6 = var_4 * var_5;
   var_7 = var_1.origin + var_3 + (0, 0, var_6);
-  var_1 rotateto((80, 233, 0), var_2, var_2 * 0.5, var_2 * 0.5);
-  var_1 moveto(var_7, var_2);
+  var_1 rotateTo((80, 233, 0), var_2, var_2 * 0.5, var_2 * 0.5);
+  var_1 moveTo(var_7, var_2);
   var_1 thread maps\_anim::anim_loop_solo(var_0, "loop", undefined, "stopanimscripted");
   var_0 thread maps\_utility::play_sound_on_entity("fastrope_start_plr");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("fastrope_loop_plr");
@@ -619,13 +619,13 @@ fastrope_player_unload_lock() {
   var_5 = (level.player.time + 0.5) * (var_6 / var_4);
   var_3 = maps\_utility::vector_multiply(var_3, -1);
   var_7 = var_1.origin + var_3 + (0, 0, var_6);
-  var_1 moveto(var_7, level.player.time + 0.5 - var_2);
+  var_1 moveTo(var_7, level.player.time + 0.5 - var_2);
   wait(var_9);
-  var_1 rotateto((10, 233, 0), var_8, var_8 * 0.5, var_8 * 0.5);
+  var_1 rotateTo((10, 233, 0), var_8, var_8 * 0.5, var_8 * 0.5);
   wait(var_8 - 0.25);
   var_0 notify("stop soundfastrope_loop_plr");
   var_0 thread maps\_utility::play_sound_on_entity("fastrope_end_plr");
-  var_1 moveto((3200, 225, 337), 0.5);
+  var_1 moveTo((3200, 225, 337), 0.5);
   var_1 notify("stopanimscripted");
   maps\mo_tools::playerweapongive();
   setsaveddvar("compass", 1);
@@ -651,7 +651,7 @@ fastrope_player_unload_lock() {
 fastrope_player_attach() {
   var_0 = spawn("script_model", self.model gettagorigin("tag_detach"));
   var_0 setModel(level.models["player"]["fastrope"]);
-  var_0 linkto(self.model, "tag_detach", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self.model, "tag_detach", (0, 0, 0), (0, 0, 0));
   var_0.animname = fastrope_animname(self.type, "player");
   var_0 useanimtree(#animtree);
   var_0 hide();
@@ -663,7 +663,7 @@ fastrope_player_attach() {
 
   if(isDefined(level.scr_model["fastrope_intro"])) {
     var_1 = maps\_utility::spawn_anim_model("fastrope_intro");
-    var_1 linkto(self.model, "tag_detach");
+    var_1 linkTo(self.model, "tag_detach");
     self.model thread maps\_anim::anim_single_solo(var_1, "opening", "tag_detach", self.model);
     level.player playerlinktodelta(var_1, "tag_player", 1, 65, 74, 30, 35, 1);
     level.player.ropecamera = var_1;
@@ -704,7 +704,7 @@ fastrope_heli_fly() {
     self.vehicle = spawn("script_model", var_0);
     self.vehicle.angles = var_1;
   } else if(isDefined(self.startnode))
-    self.vehicle = spawnvehicle(self.modelname, self.targetname, self.type, self.startnode.origin, self.startnode.angles);
+    self.vehicle = spawnVehicle(self.modelname, self.targetname, self.type, self.startnode.origin, self.startnode.angles);
   else {
     return;
   }
@@ -721,7 +721,7 @@ fastrope_heli_fly() {
     self.vehicle setcontents(0);
   }
 
-  self.model linkto(self.vehicle, "tag_detach");
+  self.model linkTo(self.vehicle, "tag_detach");
   self.model useanimtree(#animtree);
   self.model setanim(level.scr_anim[fastrope_animname(self.type, "heli")]["loop"][0]);
   self.model.vehicletype = self.type;
@@ -816,12 +816,12 @@ fastrope_heli_overtake() {
   var_1 = self.vehicle.origin;
   self.vehicle delete();
   self.vehicle = undefined;
-  self.vehicle = spawnvehicle(self.modelname, self.targetname, self.type, var_1, var_0);
+  self.vehicle = spawnVehicle(self.modelname, self.targetname, self.type, var_1, var_0);
   self.vehicle.vehicletype = "blackhawk";
   self.vehicle.health = 100000;
   self.vehicle hide();
   self.vehicle setcontents(0);
-  self.model linkto(self.vehicle, "tag_detach");
+  self.model linkTo(self.vehicle, "tag_detach");
   self.model thread fastrope_heli_fly_sea(self.vehicle);
 }
 
@@ -833,7 +833,7 @@ fastrope_heli_overtake_now() {
   var_1 = self.vehicle.origin;
   self.vehicle delete();
   self.vehicle = undefined;
-  self.vehicle = spawnvehicle(self.modelname, self.targetname, self.type, var_1, var_0);
+  self.vehicle = spawnVehicle(self.modelname, self.targetname, self.type, var_1, var_0);
   self.vehicle.vehicletype = "blackhawk";
   self.vehicle.health = 100000;
   self.vehicle hide();
@@ -859,7 +859,7 @@ fastrope_heli_playinteriorlightfx2() {
 
 fastrope_heli_playinteriorlightgreenfx(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(self, "tag_light_cargo01", (0, 0, 0), (0, -90, 0));
+  var_1 linkTo(self, "tag_light_cargo01", (0, 0, 0), (0, -90, 0));
 
   if(var_0 == 1) {
     playFXOnTag(level._effect["aircraft_light_cockpit_green"], var_1, "tag_origin");
@@ -873,8 +873,8 @@ fastrope_heli_fly_sea(var_0) {
   for(;;) {
     var_1 = level._sea_link localtoworldcoords(var_0.origin);
     var_2 = combineangles(level._sea_link.angles, var_0 gettagangles("tag_detach"));
-    self moveto(var_1 + level._sea_link.offset, 0.1);
-    self rotateto(var_2, 0.1);
+    self moveTo(var_1 + level._sea_link.offset, 0.1);
+    self rotateTo(var_2, 0.1);
     wait 0.1;
   }
 }
@@ -913,7 +913,7 @@ fastrope_heli_setup(var_0) {
     return var_1;
   }
 
-  var_2 = common_scripts\utility::getstruct(var_0, "target");
+  var_2 = common_scripts\utility::getStruct(var_0, "target");
   var_1 = spawnStruct();
   var_1.vehicle = undefined;
   var_1.targetname = fastrope_heliname(var_0);

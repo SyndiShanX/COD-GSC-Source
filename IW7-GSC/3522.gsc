@@ -98,7 +98,7 @@ func_10DF8(var_0) {
   }
 
   var_6 = spawnturret("misc_turret", self.origin, "abrams_minigun_mp");
-  var_6 linkto(self, "tag_engine_left", (0, 0, -20), (0, 0, 0));
+  var_6 linkTo(self, "tag_engine_left", (0, 0, -20), (0, 0, 0));
   var_6 setModel("sentry_minigun");
   var_6.angles = self.angles;
   var_6.owner = self.owner;
@@ -114,7 +114,7 @@ func_10DF8(var_0) {
   thread func_136B8();
   self.var_118F3 = gettime();
   var_10 = spawn("script_origin", self gettagorigin("tag_flash"));
-  var_10 linkto(self, "tag_origin", var_9, (0, 0, 0));
+  var_10 linkTo(self, "tag_origin", var_9, (0, 0, 0));
   var_10 hide();
   self.var_BEF5 = var_10;
   thread func_114E1();
@@ -424,8 +424,8 @@ relative_ads_anims(var_0) {
   var_2 = var_0.origin - self.origin;
   var_1 = var_1 * (1, 1, 0);
   var_2 = var_2 * (1, 1, 0);
-  var_2 = vectornormalize(var_2);
-  var_1 = vectornormalize(var_1);
+  var_2 = vectorNormalize(var_2);
+  var_1 = vectorNormalize(var_1);
   var_3 = vectordot(var_2, var_1);
 
   if(var_3 > 0) {
@@ -667,7 +667,7 @@ func_1572(var_0) {
 
   thread func_F6E3();
   thread func_13B74(var_0);
-  self setturrettargetent(self.besttarget);
+  self setturrettargetEnt(self.besttarget);
   fireontarget();
   thread func_F7B8();
 }
@@ -676,7 +676,7 @@ func_F7B8() {
   self endon("death");
   setstate();
   removetargetmarkergroup();
-  self setturrettargetent(self.var_BEF5);
+  self setturrettargetEnt(self.var_BEF5);
 }
 
 getbesttarget(var_0) {

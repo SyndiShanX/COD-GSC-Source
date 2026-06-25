@@ -77,7 +77,7 @@ function_4e325cd6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       if(distance(e_player.origin, self.origin) <= 128) {
-        e_player playrumbleonentity(localclientnum, "damage_heavy");
+        e_player playRumbleOnEntity(localclientnum, "damage_heavy");
       }
     }
 

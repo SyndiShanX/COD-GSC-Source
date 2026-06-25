@@ -94,7 +94,7 @@ function function_278f20a3(angles, min_dist, max_dist = 0) {
   }
 
   if(isDefined(angles)) {
-    vectornormalize(angles);
+    vectorNormalize(angles);
     self.doa.camera_angles = angles;
     self.doa.var_be529a4e = anglesToForward(angles) * -1;
     self.doa.var_7dd1941e = anglestoup(angles);

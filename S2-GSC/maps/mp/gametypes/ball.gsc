@@ -323,7 +323,7 @@ func_152A() {
 func_8A29() {
   var_00 = spawn("script_origin", self.var_0116);
   var_00.var_001D = self.var_001D;
-  var_00 rotateyaw(-45, 0.05);
+  var_00 rotateYaw(-45, 0.05);
   wait 0.05;
   var_01 = self.var_0116 + (0, 0, 5);
   var_02 = self.var_0116 + anglesToForward(var_00.var_001D) * 100 + (0, 0, 128);
@@ -363,15 +363,15 @@ func_1552(param_00) {
   var_02 notsolid();
   var_02 thread func_6FA2();
   var_03 = 24;
-  var_04 = getent("ball_pickup_" + param_00 + 1, "targetname");
+  var_04 = getEnt("ball_pickup_" + param_00 + 1, "targetname");
   if(isDefined(var_04)) {
     var_04.var_0116 = var_02.var_0116;
   } else {
     var_04 = spawn("trigger_radius", var_02.var_0116 - (0, 0, var_03 / 2), 0, var_03, var_03);
   }
 
-  var_04 enablelinkto();
-  var_04 linkto(var_02);
+  var_04 enablelinkTo();
+  var_04 linkTo(var_02);
   var_04.var_66F0 = 1;
   var_05 = [var_02];
   var_06 = maps\mp\gametypes\_gameobjects::func_27D6("any", var_04, var_05, (0, 0, 32), 1, 0, 1);
@@ -564,14 +564,14 @@ func_153C(param_00, param_01, param_02) {
   }
 
   var_03 = (0, 0, 40);
-  var_04 = vectornormalize(param_02 + var_03 - self.var_A582[0].var_0116);
+  var_04 = vectorNormalize(param_02 + var_03 - self.var_A582[0].var_0116);
   var_05 = var_04 * 1000;
   self.var_776C = magicgrenademanual("gamemode_ball", self.var_A582[0].var_0116, var_05, 30, param_00, 1, 1);
   if(isDefined(param_01)) {
     self.var_776C method_81D9(param_01);
   }
 
-  self.var_A582[0] linkto(self.var_776C);
+  self.var_A582[0] linkTo(self.var_776C);
   func_151D();
   func_151A();
   func_1517();
@@ -586,7 +586,7 @@ func_151A() {
   }
 
   self.var_5A2C = spawn("script_model", self.var_A582[0].var_0116);
-  self.var_5A2C linkto(self.var_A582[0]);
+  self.var_5A2C linkTo(self.var_A582[0]);
   self.var_5A2C method_80B1();
   self.var_5A2C setscriptmoverkillcam("explosive");
 }
@@ -673,7 +673,7 @@ func_1542(param_00, param_01) {
   var_02 = self.var_A582[0];
   var_02.var_6C43 = undefined;
   func_1522();
-  level notify("broadcaster_throw_ball", self.var_5B7E, self, vectornormalize(param_00));
+  level notify("broadcaster_throw_ball", self.var_5B7E, self, vectorNormalize(param_00));
   var_02 physicslaunchserver(var_02.var_0116, param_00);
   thread func_1544();
   thread func_1545(param_01);
@@ -826,7 +826,7 @@ func_1541() {
 
   var_01 = var_00 method_841B();
   var_02 = length(var_01) / 10;
-  var_03 = -1 * vectornormalize(var_01);
+  var_03 = -1 * vectorNormalize(var_01);
   var_00 method_84E0();
   var_00 physicslaunchserver(var_00.var_0116, var_03 * var_02);
 }
@@ -938,7 +938,7 @@ func_8B6F(param_00, param_01) {
 }
 
 func_5D90(param_00, param_01, param_02, param_03) {
-  var_04 = vectornormalize(param_01 - param_00);
+  var_04 = vectorNormalize(param_01 - param_00);
   var_05 = vectordot(var_04, param_00 - param_02);
   var_05 = var_05 * var_05;
   var_06 = param_00 - param_02;
@@ -1038,7 +1038,7 @@ func_154E(param_00) {
   playsoundatpos(param_00.var_0116, "grid_goal_scored");
   var_05 = var_02 + var_04;
   var_06 = var_05 + var_03;
-  var_01 moveto(param_00.var_0116, var_02, 0, var_02);
+  var_01 moveTo(param_00.var_0116, var_02, 0, var_02);
   var_01 rotatevelocity((1080, 1080, 0), var_06, var_06, 0);
   wait(var_05);
   param_00.var_152C = 0;
@@ -1354,7 +1354,7 @@ func_7389(param_00) {
           continue;
         }
 
-        var_0A = vectornormalize(var_08 - var_04);
+        var_0A = vectorNormalize(var_08 - var_04);
         var_0B = vectordot(var_03, var_0A);
         if(var_0B > var_01) {
           var_07.var_6EA4 = var_0B;
@@ -1598,7 +1598,7 @@ func_1538() {
   func_155B();
   maps\mp\gametypes\_gameobjects::func_870A(var_00.var_162D + (0, 0, 4000), (0, 0, 0));
   var_04 = 1.5;
-  var_00 moveto(var_00.var_162D, var_04, 0, var_04);
+  var_00 moveTo(var_00.var_162D, var_04, 0, var_04);
   var_00 rotatevelocity((0, 720, 0), var_04, 0, var_04);
   playsoundatpos(var_00.var_162D, "grid_ball_reset");
   if(!self.var_5B7F && isDefined(var_03) && isDefined(var_02)) {

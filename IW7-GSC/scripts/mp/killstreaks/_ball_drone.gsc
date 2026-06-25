@@ -170,7 +170,7 @@ createballdrone(var_0, var_1) {
   var_6 = bulletTrace(var_5, var_4, 0);
   var_7 = 3;
   while(var_6["surfacetype"] != "none" && var_7 > 0) {
-    var_4 = self.origin + vectornormalize(var_5 - var_6["position"]) * 5;
+    var_4 = self.origin + vectorNormalize(var_5 - var_6["position"]) * 5;
     var_6 = bulletTrace(var_5, var_4, 0);
     var_7--;
     wait(0.05);
@@ -185,7 +185,7 @@ createballdrone(var_0, var_1) {
   var_6 = bulletTrace(var_4, var_9, 0);
   var_7 = 3;
   while(var_6["surfacetype"] != "none" && var_7 > 0) {
-    var_9 = var_4 + vectornormalize(var_4 - var_6["position"]) * 5;
+    var_9 = var_4 + vectorNormalize(var_4 - var_6["position"]) * 5;
     var_6 = bulletTrace(var_4, var_9, 0);
     var_7--;
     wait(0.05);
@@ -239,7 +239,7 @@ createballdrone(var_0, var_1) {
   var_14 func_84E1(1);
   var_14 func_84E0(1);
   var_14.useobj = spawn("script_model", var_14.origin);
-  var_14.useobj linkto(var_14, "tag_origin");
+  var_14.useobj linkTo(var_14, "tag_origin");
   var_14 scripts\mp\killstreaks\_utility::func_1843(var_14.balldronetype, "Killstreak_Ground", var_14.owner, 1);
   if(level.teambased) {
     var_14 scripts\mp\entityheadicons::setteamheadicon(var_14.team, (0, 0, 25));
@@ -269,7 +269,7 @@ createballdrone(var_0, var_1) {
       var_14 func_856A(100, 1.3, 30, 20);
       var_14.followspeed = 140;
       var_12 = spawnturret("misc_turret", var_14 gettagorigin(level.balldronesettings[var_0].weaponswitchendednuke), level.balldronesettings[var_0].weaponinfo);
-      var_12 linkto(var_14, level.balldronesettings[var_0].weaponswitchendednuke);
+      var_12 linkTo(var_14, level.balldronesettings[var_0].weaponswitchendednuke);
       var_12 setModel(level.balldronesettings[var_0].var_13CA8);
       var_12.angles = var_14.angles;
       var_12.owner = var_14.owner;
@@ -300,7 +300,7 @@ createballdrone(var_0, var_1) {
       var_14 = var_14.origin + anglesToForward(var_14.angles) * -10 + anglestoright(var_14.angles) * -10 + (0, 0, 6);
       var_12.killcament = spawn("script_model", var_14);
       var_12.killcament setscriptmoverkillcam("explosive");
-      var_12.killcament linkto(var_14);
+      var_12.killcament linkTo(var_14);
       var_14.turret = var_12;
       var_12.parent = var_14;
       var_14 thread balldrone_backup_handledamage();
@@ -314,7 +314,7 @@ createballdrone(var_0, var_1) {
     case "alien_ball_drone":
     case "ball_drone_eng_lethal":
       var_12 = spawnturret("misc_turret", var_14 gettagorigin(level.balldronesettings[var_0].weaponswitchendednuke), level.balldronesettings[var_0].weaponinfo);
-      var_12 linkto(var_14, level.balldronesettings[var_0].weaponswitchendednuke);
+      var_12 linkTo(var_14, level.balldronesettings[var_0].weaponswitchendednuke);
       var_12 setModel(level.balldronesettings[var_0].var_13CA8);
       var_12.angles = var_14.angles;
       var_12.owner = var_14.owner;
@@ -344,7 +344,7 @@ createballdrone(var_0, var_1) {
       var_14 = var_14.origin + anglesToForward(var_14.angles) * -10 + anglestoright(var_14.angles) * -10 + (0, 0, 10);
       var_12.killcament = spawn("script_model", var_14);
       var_12.killcament setscriptmoverkillcam("explosive");
-      var_12.killcament linkto(var_14);
+      var_12.killcament linkTo(var_14);
       var_14.turret = var_12;
       var_12.parent = var_14;
       var_14 thread balldrone_backup_handledamage();
@@ -402,7 +402,7 @@ idletargetmover(var_0) {
     if(scripts\mp\utility::isreallyalive(self) && !scripts\mp\utility::isusingremote() && anglesToForward(self.angles) != var_1) {
       var_1 = anglesToForward(self.angles);
       var_2 = self.origin + var_1 * -100 + (0, 0, 40);
-      var_0 moveto(var_2, 0.5);
+      var_0 moveTo(var_2, 0.5);
     }
 
     wait(0.5);
@@ -1076,7 +1076,7 @@ radarmover() {
     }
 
     if(isDefined(self.radar)) {
-      self.radar moveto(self.origin, 0.5);
+      self.radar moveTo(self.origin, 0.5);
     }
 
     wait(0.5);
@@ -1266,7 +1266,7 @@ handledeathdamage(var_0, var_1, var_2, var_3) {
       var_5.weapon_name = "dummy_spike_mp";
     }
 
-    var_5 linkto(self);
+    var_5 linkTo(self);
     self setscriptablepartstate("shortout", "active", 0);
     self playSound("vulture_destruct_initiate");
     thread watchselfdestructfx();

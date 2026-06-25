@@ -18,7 +18,7 @@ lib_0583::func_63FF() {
   var_02 = distance(var_00.var_0116, var_00.var_2DA7);
   var_03 = var_02 / var_01;
   if(var_03 > 0) {
-    var_00 moveto(var_00.var_2DA7, var_03, 0, 0);
+    var_00 moveTo(var_00.var_2DA7, var_03, 0, 0);
   }
 
   playFXOnTag(common_scripts\utility::func_44F5("moon_plasma"), var_00, "tag_origin");

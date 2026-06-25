@@ -241,16 +241,16 @@ vignette_end(var_0, var_1, var_2) {
       }
 
       if(!isDefined(self.v.idle_break_anim_played) && !isDefined(self.v.death_anim_played) && self._animactive) {
-        self stopanimscripted();
+        self stopanimScripted();
         self.a.nodeath = 0;
       }
     }
 
     if(isDefined(self.v.prop) && !isDefined(self.v.death_anim_played) && !isDefined(self.v.idle_break_anim_played)) {
-      self.v.prop stopanimscripted();
+      self.v.prop stopanimScripted();
 
       if(self.v.prop_launch) {
-        self.v.prop stopanimscripted();
+        self.v.prop stopanimScripted();
         self.v.prop physicslaunchclient(self.v.prop.origin, (0, 0, 0));
       } else if(self.v.current_anim != "none") {
         var_4 = self.v.prop getanimtime(level.scr_anim[self.v.prop.animname][self.v.current_anim]);

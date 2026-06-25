@@ -30,18 +30,18 @@ slow_intro_pre_load() {
   precacheshader("pip_scene_overlay");
   var_0 = getEntArray("barrack_doors_open", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::hide_entity);
-  var_1 = getent("blast_shield1", "targetname");
-  var_1 rotateto((0, 0, 0), 0.5);
-  var_2 = getent("blast_shield2", "targetname");
-  var_2 rotateto((0, 0, 0), 0.5);
-  var_3 = getent("blast_shield3", "targetname");
-  var_3 rotateto((0, 0, 0), 0.5);
-  var_4 = getent("blast_shield4", "targetname");
-  var_4 rotateto((0, 0, 0), 0.5);
-  var_5 = getent("blast_shield5", "targetname");
-  var_5 rotateto((0, 0, 0), 0.5);
-  var_6 = getent("blast_shield6", "targetname");
-  var_6 rotateto((0, 0, 0), 0.5);
+  var_1 = getEnt("blast_shield1", "targetname");
+  var_1 rotateTo((0, 0, 0), 0.5);
+  var_2 = getEnt("blast_shield2", "targetname");
+  var_2 rotateTo((0, 0, 0), 0.5);
+  var_3 = getEnt("blast_shield3", "targetname");
+  var_3 rotateTo((0, 0, 0), 0.5);
+  var_4 = getEnt("blast_shield4", "targetname");
+  var_4 rotateTo((0, 0, 0), 0.5);
+  var_5 = getEnt("blast_shield5", "targetname");
+  var_5 rotateTo((0, 0, 0), 0.5);
+  var_6 = getEnt("blast_shield6", "targetname");
+  var_6 rotateTo((0, 0, 0), 0.5);
   maps\_utility::add_hint_string("3_days", &"CARRIER_3DAYS");
   maps\_utility::intro_screen_create(&"CARRIER_INTROSCREEN_LINE1", &"CARRIER_INTROSCREEN_LINE2", &"CARRIER_INTROSCREEN_LINE3");
   maps\_utility::intro_screen_custom_func(::custom_intro_screen_func);
@@ -145,16 +145,16 @@ intro_vo() {
 clean_up_intro_exterior_props() {
   var_0 = getEntArray("intro_static_jets", "targetname");
   maps\_utility::array_delete(var_0);
-  var_1 = getent("intro_drive_tugger", "targetname");
+  var_1 = getEnt("intro_drive_tugger", "targetname");
   var_1 delete();
-  var_2 = getent("intro_taxing_jet", "targetname");
+  var_2 = getEnt("intro_taxing_jet", "targetname");
   var_2 delete();
-  var_3 = getent("intro_taxing_tugger", "targetname");
+  var_3 = getEnt("intro_taxing_tugger", "targetname");
   var_3 delete();
-  var_4 = getent("intro_drive_tugger_close_up", "targetname");
+  var_4 = getEnt("intro_drive_tugger_close_up", "targetname");
   var_4 delete();
-  getent("intro_flyby_jet1", "targetname") delete();
-  getent("intro_flyby_jet2", "targetname") delete();
+  getEnt("intro_flyby_jet1", "targetname") delete();
+  getEnt("intro_flyby_jet2", "targetname") delete();
 }
 
 run_promotion() {
@@ -164,7 +164,7 @@ run_promotion() {
   maps\_art::sunflare_changes("carrier_combat_sunflare", 0);
   var_0 = getEntArray("barrack_doors_closed", "targetname");
   common_scripts\utility::array_thread(var_0, maps\_utility::show_entity);
-  var_1 = getent("barrack_doors_closed_clip", "targetname");
+  var_1 = getEnt("barrack_doors_closed_clip", "targetname");
   var_1 movez(200, 0.1);
   thread promotion_dog();
   wait 1.5;
@@ -193,9 +193,9 @@ promo_dof() {
 }
 
 promotion_anims() {
-  var_0 = common_scripts\utility::getstruct("promo_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("promo_animnode", "targetname");
   level.player unlink();
-  var_1 = common_scripts\utility::getstruct("promotion_player_start", "targetname");
+  var_1 = common_scripts\utility::getStruct("promotion_player_start", "targetname");
   maps\_utility::teleport_player(var_1);
   level.player allowjump(0);
   level.player allowcrouch(0);
@@ -207,7 +207,7 @@ promotion_anims() {
   var_2[0] = level.hesh_medbay;
   var_2[0].animname = "hesh";
   var_2[0] maps\_utility::forceuseweapon("honeybadger", "primary");
-  var_2[1] = getent("promotion_mask", "targetname");
+  var_2[1] = getEnt("promotion_mask", "targetname");
   var_2[1].animname = "promotion_mask";
   var_2[1] maps\_anim::setanimtree();
   level.merrick_medbay = maps\_utility::spawn_targetname("merrick_medbay", 1);
@@ -216,7 +216,7 @@ promotion_anims() {
   var_2[2].animname = "merrick";
   var_2[3] = maps\_utility::spawn_anim_model("player_intro_rig");
   var_2[4] = maps\_utility::spawn_anim_model("locker");
-  var_3 = getent("promo_locker", "targetname");
+  var_3 = getEnt("promo_locker", "targetname");
   var_0 maps\_anim::anim_first_frame(var_2, "carrier_promotion");
   common_scripts\utility::waitframe();
   level.player playerlinktoabsolute(var_2[3], "tag_player");
@@ -225,7 +225,7 @@ promotion_anims() {
   var_5 = var_2[4] gettagangles("j_prop_1");
   var_3.origin = var_4;
   var_3.angles = var_5;
-  var_3 linkto(var_2[4], "j_prop_1");
+  var_3 linkTo(var_2[4], "j_prop_1");
   common_scripts\utility::waitframe();
   level.player playerlinktodelta(var_2[3], "tag_player", 1, 30, 30, 15, 15, 1);
   var_0 thread maps\_anim::anim_single(var_2, "carrier_promotion");
@@ -245,7 +245,7 @@ promotion_dog() {
   level.riley.animname = "riley";
   level.riley.name = "Riley";
   level.riley pushplayer(1);
-  var_0 = common_scripts\utility::getstruct("promo_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("promo_animnode", "targetname");
   var_0 maps\_anim::anim_loop_solo(level.riley, "carrier_promotion_loop");
 }
 
@@ -259,9 +259,9 @@ intro_ending() {
   common_scripts\utility::array_thread(var_0, maps\_utility::show_entity);
   var_1 = getEntArray("barrack_doors_closed", "targetname");
   maps\_utility::array_delete(var_1);
-  var_2 = getent("barrack_doors_closed_clip", "targetname");
+  var_2 = getEnt("barrack_doors_closed_clip", "targetname");
   var_2 delete();
-  var_3 = common_scripts\utility::getstruct("intro_medbay_floor", "targetname");
+  var_3 = common_scripts\utility::getStruct("intro_medbay_floor", "targetname");
   level.player maps\_utility::teleport_player(var_3);
   common_scripts\utility::flag_set("slow_intro_finished");
   var_4 = maps\_utility::get_living_ai_array("ally_intro", "script_noteworthy");
@@ -325,7 +325,7 @@ run_exit() {
   thread medbay_player_anim();
   thread maps\_utility::smart_radio_dialogue("carrier_ttn_allcallsignsfederation");
   wait 2;
-  var_0 = common_scripts\utility::getstruct("anim_ref_medbay_door", "targetname");
+  var_0 = common_scripts\utility::getStruct("anim_ref_medbay_door", "targetname");
   var_0 thread maps\_anim::anim_first_frame_solo(level.hesh, "carrier_medbay_letsgo_hesh_enter");
   thread interior_pa_vo();
   thread maps\carrier_code::set_black_fade(0, 2);
@@ -363,17 +363,17 @@ run_exit() {
   thread maps\carrier_vista::run_vista();
   level.deck_clean = getEntArray("deck_clean", "targetname");
   common_scripts\utility::array_thread(level.deck_clean, maps\_utility::show_entity);
-  var_1 = getent("water_wake_intro", "targetname");
+  var_1 = getEnt("water_wake_intro", "targetname");
   var_1 delete();
 }
 
 medbay_player_anim() {
-  var_0 = common_scripts\utility::getstruct("anim_ref_medbay_door", "targetname");
+  var_0 = common_scripts\utility::getStruct("anim_ref_medbay_door", "targetname");
   var_1 = maps\_utility::spawn_anim_model("player_rig");
   var_0 thread maps\_anim::anim_first_frame_solo(var_1, "carrier_medbay_grab_mask_player");
   level.player playerlinktodelta(var_1, "tag_player", 1, 15, 15, 15, 15, 1);
   common_scripts\utility::flag_wait("start_medbay_exit");
-  var_2 = getent("promotion_mask", "targetname");
+  var_2 = getEnt("promotion_mask", "targetname");
   var_2.animname = "promotion_mask";
   var_2 maps\_anim::setanimtree();
   level.player freezecontrols(0);
@@ -422,7 +422,7 @@ interior_pa_vo() {
 }
 
 hall_redshirt_talk() {
-  var_0 = getent("anim_hallway_takers_goal", "targetname");
+  var_0 = getEnt("anim_hallway_takers_goal", "targetname");
   var_1 = [];
   var_1[0] = maps\_utility::spawn_targetname("hall_redshirt_1", 1);
   var_1[1] = maps\_utility::spawn_targetname("hall_redshirt_2", 1);
@@ -430,7 +430,7 @@ hall_redshirt_talk() {
   var_1[1].animname = "rs2";
   var_1[0].health = 1;
   var_1[1].health = 1;
-  var_2 = common_scripts\utility::getstruct("anim_ref_medbay_door", "targetname");
+  var_2 = common_scripts\utility::getStruct("anim_ref_medbay_door", "targetname");
   var_2 thread maps\_anim::anim_loop(var_1, "carrier_hallway_talk_loop", "stop_rs_loop");
   common_scripts\utility::flag_wait("redshirts_start");
   var_2 notify("stop_rs_loop");
@@ -438,7 +438,7 @@ hall_redshirt_talk() {
   var_2 thread maps\_anim::anim_loop(var_1, "carrier_hallway_salute_loop", "stop_rs_loop");
   common_scripts\utility::flag_wait("redshirts_end");
   var_2 notify("stop_rs_loop");
-  var_3 = getent("runback_clip_blocker", "targetname");
+  var_3 = getEnt("runback_clip_blocker", "targetname");
   var_3 movex(-124, 0.1);
   var_2 maps\_anim::anim_single(var_1, "carrier_hallway_salute_exit");
   var_2 thread maps\_anim::anim_loop(var_1, "carrier_hallway_talk_loop", "stop_rs_loop");
@@ -446,7 +446,7 @@ hall_redshirt_talk() {
   var_2 notify("stop_rs_loop");
   common_scripts\utility::waitframe();
   maps\_utility::array_delete(var_1);
-  var_3 = getent("runback_clip_blocker", "targetname");
+  var_3 = getEnt("runback_clip_blocker", "targetname");
   var_3 delete();
 }
 
@@ -473,11 +473,11 @@ run_to_and_delete(var_0) {
 #using_animtree("generic_human");
 
 pharm_roller_shut() {
-  var_0 = getent("pharm_roller_door", "targetname");
+  var_0 = getEnt("pharm_roller_door", "targetname");
   var_1 = maps\_utility::spawn_targetname("pharm_redshirt", 1);
   var_1 maps\_utility::gun_remove();
   var_1.animname = "rs_pharm";
-  var_2 = common_scripts\utility::getstruct("shutter_close_ref", "targetname");
+  var_2 = common_scripts\utility::getStruct("shutter_close_ref", "targetname");
   var_2 maps\_anim::anim_first_frame_solo(var_1, "pharm_shutter_close");
   common_scripts\utility::flag_wait("redshirts_start");
   var_2 thread maps\_anim::anim_single_solo(var_1, "pharm_shutter_close");
@@ -515,8 +515,8 @@ hallway_rear_run_down() {
 
 hallway_rear_run_down_back() {
   level endon("redshirts_end");
-  var_0 = getent("hallway_cross_runners_rear", "targetname");
-  var_1 = getent("end_pos", "targetname");
+  var_0 = getEnt("hallway_cross_runners_rear", "targetname");
+  var_1 = getEnt("end_pos", "targetname");
   common_scripts\utility::flag_wait("redshirts_runners_start");
 
   for(;;) {
@@ -624,7 +624,7 @@ jet_takeoff2() {
 }
 
 slow_intro_jet_takeoff_guys(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = common_scripts\utility::getstruct("slow_intro_jet_ref", "targetname");
+  var_6 = common_scripts\utility::getStruct("slow_intro_jet_ref", "targetname");
   var_7 = maps\_utility::spawn_targetname(var_0);
   var_7.animname = var_1;
   var_7.runanim = maps\_utility::getgenericanim("unarmed_run");
@@ -646,8 +646,8 @@ slow_intro_jet_takeoff_guys(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 slow_intro_jet_takeoff_jet(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("redshirt_forklift_stopper_ref", "targetname");
-  var_5 = getent(var_0, "targetname");
+  var_4 = common_scripts\utility::getStruct("redshirt_forklift_stopper_ref", "targetname");
+  var_5 = getEnt(var_0, "targetname");
   var_5.animname = var_1;
   var_5 maps\_anim::setanimtree();
   var_5 thread maps\carrier_fx::handle_jet_launch_fx();
@@ -660,7 +660,7 @@ slow_intro_jet_takeoff_jet(var_0, var_1, var_2, var_3) {
 }
 
 tugger_hookup() {
-  var_0 = common_scripts\utility::getstruct("intro_tugger_hookup_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("intro_tugger_hookup_ref", "targetname");
   var_1 = getEntArray("anim_tugger", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::show_entity);
   var_2 = [];
@@ -681,8 +681,8 @@ tugger_hookup() {
     var_4 = var_6;
   }
 
-  var_3 linkto(var_2);
-  var_4 linkto(var_2);
+  var_3 linkTo(var_2);
+  var_4 linkTo(var_2);
   var_2.animname = "tugger";
   var_2 maps\_anim::setanimtree();
   var_8 = [];
@@ -715,21 +715,21 @@ tugger_hookup() {
 }
 
 lower_shield1() {
-  var_0 = getent("blast_shield1", "targetname");
-  var_0 rotateto((0, 0, -65), 4);
-  var_1 = getent("blast_shield2", "targetname");
-  var_1 rotateto((0, 0, -65), 3.5);
-  var_2 = getent("blast_shield3", "targetname");
-  var_2 rotateto((0, 0, -65), 4);
+  var_0 = getEnt("blast_shield1", "targetname");
+  var_0 rotateTo((0, 0, -65), 4);
+  var_1 = getEnt("blast_shield2", "targetname");
+  var_1 rotateTo((0, 0, -65), 3.5);
+  var_2 = getEnt("blast_shield3", "targetname");
+  var_2 rotateTo((0, 0, -65), 4);
 }
 
 lower_shield2() {
-  var_0 = getent("blast_shield4", "targetname");
-  var_0 rotateto((0, 0, -65), 3.75);
-  var_1 = getent("blast_shield5", "targetname");
-  var_1 rotateto((0, 0, -65), 4);
-  var_2 = getent("blast_shield6", "targetname");
-  var_2 rotateto((0, 0, -65), 3.5);
+  var_0 = getEnt("blast_shield4", "targetname");
+  var_0 rotateTo((0, 0, -65), 3.75);
+  var_1 = getEnt("blast_shield5", "targetname");
+  var_1 rotateTo((0, 0, -65), 4);
+  var_2 = getEnt("blast_shield6", "targetname");
+  var_2 rotateTo((0, 0, -65), 3.5);
 }
 
 hide_deck_objects() {
@@ -743,7 +743,7 @@ hide_deck_objects() {
   common_scripts\utility::array_call(var_3, ::hide);
   var_4 = getEntArray("large_tugger3", "targetname");
   common_scripts\utility::array_call(var_4, ::hide);
-  var_5 = getent("intro_drive_tugger_close_up", "targetname");
+  var_5 = getEnt("intro_drive_tugger_close_up", "targetname");
   var_5 hide();
   var_6 = getEntArray("barrel_impact", "targetname");
   common_scripts\utility::array_call(var_6, ::hide);
@@ -778,15 +778,15 @@ slow_intro_ally_movement() {
   var_1 = maps\carrier_code::array_spawn_targetname_allow_fail("intro_catwalk_runner", 1);
   wait 2.5;
   var_2 = maps\carrier_code::array_spawn_targetname_allow_fail("intro_chopter_runner_backup_guys", 1);
-  var_3 = getent("intro_chopter_runner_animated", "targetname");
+  var_3 = getEnt("intro_chopter_runner_animated", "targetname");
   var_4 = var_3 maps\_utility::spawn_ai(1, 0);
   var_4.animname = "generic";
 
   if(isalive(var_4)) {
-    var_5 = common_scripts\utility::getstruct("ally_wave1", "targetname");
+    var_5 = common_scripts\utility::getStruct("ally_wave1", "targetname");
     var_5 maps\_anim::anim_reach_solo(var_4, "forward_wave_back");
     var_5 maps\_anim::anim_single_solo(var_4, "forward_wave_back");
-    var_5 = common_scripts\utility::getstruct("ally_wave2", "targetname");
+    var_5 = common_scripts\utility::getStruct("ally_wave2", "targetname");
     var_5 maps\_anim::anim_reach_solo(var_4, "forward_wave_back");
     var_5 maps\_anim::anim_single_solo(var_4, "forward_wave_back");
   }
@@ -803,35 +803,35 @@ tugger_events() {
 
 tugger_jet_taxi() {
   wait 2;
-  var_0 = getent("intro_taxing_jet", "targetname");
-  var_1 = getent("intro_taxing_tugger", "targetname");
-  var_0 linkto(var_1);
-  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
-  var_1 moveto(var_2.origin, 7);
-  var_3 = common_scripts\utility::getstruct(var_2.target, "targetname");
-  var_1 moveto(var_3.origin, 7);
-  var_4 = common_scripts\utility::getstruct("final_pos", "targetname");
-  var_1 rotateto(var_4.angles, 4, 1);
-  var_5 = common_scripts\utility::getstruct(var_3.target, "targetname");
-  var_1 moveto(var_5.origin, 13);
+  var_0 = getEnt("intro_taxing_jet", "targetname");
+  var_1 = getEnt("intro_taxing_tugger", "targetname");
+  var_0 linkTo(var_1);
+  var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
+  var_1 moveTo(var_2.origin, 7);
+  var_3 = common_scripts\utility::getStruct(var_2.target, "targetname");
+  var_1 moveTo(var_3.origin, 7);
+  var_4 = common_scripts\utility::getStruct("final_pos", "targetname");
+  var_1 rotateTo(var_4.angles, 4, 1);
+  var_5 = common_scripts\utility::getStruct(var_3.target, "targetname");
+  var_1 moveTo(var_5.origin, 13);
 }
 
 cross_deck_tugger() {
-  var_0 = getent("intro_drive_tugger", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
-  var_0 moveto(var_1.origin, 7);
-  var_2 = common_scripts\utility::getstruct("tugger_final_pos", "targetname");
-  var_0 rotateto(var_2.angles, 1, 1);
+  var_0 = getEnt("intro_drive_tugger", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
+  var_0 moveTo(var_1.origin, 7);
+  var_2 = common_scripts\utility::getStruct("tugger_final_pos", "targetname");
+  var_0 rotateTo(var_2.angles, 1, 1);
   wait 7;
-  var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
-  var_0 moveto(var_3.origin, 7);
+  var_3 = common_scripts\utility::getStruct(var_1.target, "targetname");
+  var_0 moveTo(var_3.origin, 7);
 }
 
 tugger_closeup() {
-  var_0 = getent("intro_drive_tugger_close_up", "targetname");
+  var_0 = getEnt("intro_drive_tugger_close_up", "targetname");
   var_0 show();
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
-  var_0 moveto(var_1.origin, 5);
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
+  var_0 moveTo(var_1.origin, 5);
 }
 
 cleanup_intro_exterior() {

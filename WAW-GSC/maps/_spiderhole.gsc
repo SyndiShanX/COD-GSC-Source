@@ -35,7 +35,7 @@ spiderhole() {
   ASSERTex(isDefined(self.target), " Spiderhole Spawner @ " + self.origin + " does NOT target anything!");
 
   ents = getEntArray(self.target, "targetname");
-  anim_org = GetStruct(self.target, "targetname");
+  anim_org = getStruct(self.target, "targetname");
 
   for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_noteworthy) && ents[i].script_noteworthy == "spiderhole_lid") {
@@ -250,7 +250,7 @@ spiderhole_anim_internal(anim_ref, anim_org, lid, closest_object) {
 
     tag_origin.angles = anim_org.angles;
 
-    lid LinkTo(tag_origin, "origin_animate_jnt");
+    lid linkTo(tag_origin, "origin_animate_jnt");
     lid.tag_lid = tag_origin;
     lid.tag_lid.anim_ref = anim_ref;
 
@@ -271,7 +271,7 @@ spiderhole_drop_lid_to_ground() {
     wait(1.5);
     self Unlink();
     groundPos = PhysicsTrace(self.origin + (0, 0, 64), self.origin - (0, 0, 256));
-    self MoveTo(groundPos + (0, 0, 6), 0.5);
+    self moveTo(groundPos + (0, 0, 6), 0.5);
   }
 }
 

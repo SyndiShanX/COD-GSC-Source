@@ -340,7 +340,7 @@ playerdoexplosivetouch() {
       if(var_4 < var_0) {
         var_3 dodamage(var_3.health, var_3.origin, self, undefined, "MOD_EXPLOSIVE", "explosive_touch_zombies_mp", "torso_upper");
         earthquake(randomfloatrange(0.35, 0.55), 1, self.origin, 200, self);
-        self playrumbleonentity("damage_heavy");
+        self playRumbleOnEntity("damage_heavy");
         self _meth_8569();
         self.overchargekills++;
 

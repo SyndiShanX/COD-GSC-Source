@@ -95,7 +95,7 @@ staff_lightning_position_source(v_detonate, v_angles, str_weapon) {
 
   e_ball_fx thread puzzle_debug_position("X", (175, 0, 255));
 
-  e_ball_fx moveto(v_end, n_movetime_s);
+  e_ball_fx moveTo(v_end, n_movetime_s);
   finished_playing = e_ball_fx lightning_ball_wait(n_leftover_time);
   e_ball_fx notify("stop_killing");
   e_ball_fx notify("stop_debug_position");
@@ -383,7 +383,7 @@ stun_zombie() {
   network_safe_play_fx_on_tag("lightning_impact", 2, level._effect["lightning_impact"], self, tag);
 
   if(is_true(self.has_legs)) {
-    self animscripted(self.origin, self.angles, "zm_electric_stun");
+    self animScripted(self.origin, self.angles, "zm_electric_stun");
   }
 
   self maps\mp\animscripts\shared::donotetracks("stunned");

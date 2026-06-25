@@ -47,7 +47,7 @@ main() {
 }
 
 initExtraCollision() {
-  collision1 = GetEnt("clip128x128x8", "targetname");
+  collision1 = getEnt("clip128x128x8", "targetname");
   collision1Ent = spawn("script_model", (468, -776, 212));
   collision1Ent.angles = (0, 0, -90);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);

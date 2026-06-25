@@ -29,7 +29,7 @@ _id_E365(var_0) {
   }
 
   var_1 setModel("veh8_mil_lnd_mkilo23_skud_static2");
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
   if(!isDefined(var_1._id_CB2C)) {
     var_3 = spawn("script_model", var_2.origin);
@@ -39,7 +39,7 @@ _id_E365(var_0) {
     }
 
     var_3 setModel("electrical_elevator_access_keypad_01");
-    var_3 setcursorhint("HINT_NOICON");
+    var_3 setCursorHint("HINT_NOICON");
     var_3 setuseholdduration("duration_medium");
     var_3 sethintdisplayfov(120);
     var_3 setusefov(120);
@@ -211,7 +211,7 @@ _id_0C7D(var_0) {
   var_1 = scripts\mp\gametypes\br_functional_poi::_id_6AC4();
   var_0._id_CB2C _meth_81B0(var_1);
   var_0._id_CB2C makeuseable();
-  var_0._id_CB2C sethintstring(&"MP/BR_ACTIVATE_SATELLITE_TRUCK");
+  var_0._id_CB2C setHintString(&"MP/BR_ACTIVATE_SATELLITE_TRUCK");
   var_0 thread _id_0CD6();
   var_2 = scripts\engine\utility::getfx("poi_sat_truck_available");
   playFXOnTag(var_2, var_0, "tag_origin");
@@ -242,7 +242,7 @@ _id_0C7A(var_0) {
   var_1 = scripts\mp\gametypes\br_functional_poi::_id_6AC4();
   var_0._id_CB2C _meth_81B0(var_1);
   var_0._id_CB2C makeuseable();
-  var_0._id_CB2C sethintstring(&"MP/BR_USE_SATELLITE_TRUCK");
+  var_0._id_CB2C setHintString(&"MP/BR_USE_SATELLITE_TRUCK");
   var_0 thread _id_0CD6();
 }
 

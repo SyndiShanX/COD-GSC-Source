@@ -31,7 +31,7 @@ function private function_542758d0() {
   for(i = 0; i < challenges.size; i++) {
     var_d0cde02c = challenges[i];
     var_72085a07 = spawnStruct();
-    var_72085a07.spawner = getent(var_d0cde02c.target, "targetname");
+    var_72085a07.spawner = getEnt(var_d0cde02c.target, "targetname");
     var_72085a07.spawner.var_d0cde02c = var_d0cde02c;
     assert(isDefined(var_d0cde02c.script_noteworthy));
     var_72085a07.number = int(var_d0cde02c.script_noteworthy);
@@ -125,7 +125,7 @@ function function_c81e1083(name) {
 
 function main() {
   level endon("hash_24d3a44");
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread namespace_831a4a7c::function_7d7a7fde();
   }
   level thread function_d87cb356();
@@ -167,7 +167,7 @@ function main() {
       doa_utility::debugmsg((("" + level.doa.round_number) + "") + level.doa.round_end_time);
       flag::clear("doa_round_active");
       level notify("hash_e9dfbb22");
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player notify("hash_e9dfbb22");
       }
       if(level flag::get("doa_game_is_over")) {
@@ -286,7 +286,7 @@ function function_fe0946ac(spawn_origin, var_97887a95 = 1) {
       self.doa.var_f4a883ed = undefined;
       self disableinvulnerability();
     }
-    self setorigin(spawn_origin);
+    self setOrigin(spawn_origin);
   }
   angles = vectortoangles(var_60de7d19 - self.origin);
   self setplayerangles((0, angles[1], 0));
@@ -299,7 +299,7 @@ function function_fe0946ac(spawn_origin, var_97887a95 = 1) {
 
 function function_55762a85(spawn_origin) {
   stopallrumbles();
-  array::thread_all(getplayers(), &function_fe0946ac, spawn_origin);
+  array::thread_all(getPlayers(), &function_fe0946ac, spawn_origin);
   level notify("hash_3b6e1e2");
 }
 
@@ -480,7 +480,7 @@ function function_703bb8b2(round_number) {
 }
 
 function private function_d9345c74() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.doa) && player.doa.var_e1956fd2 > 0) {
       player globallogic_score::incpersstat("score", player.doa.var_e1956fd2, 1, 1);
       self.doa.var_e1956fd2 = 0;

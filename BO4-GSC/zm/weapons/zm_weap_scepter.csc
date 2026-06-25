@@ -296,13 +296,13 @@ scepter_rumble(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldn
   if(newvalue) {
     switch (newvalue) {
       case 2:
-        self playrumbleonentity(localclientnum, "zm_weap_scepter_melee_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_scepter_melee_rumble");
         break;
       case 5:
-        self playrumbleonentity(localclientnum, "zm_weap_scepter_ray_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_scepter_ray_rumble");
         break;
       case 6:
-        self playrumbleonentity(localclientnum, "zm_weap_scepter_ray_hit_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_scepter_ray_hit_rumble");
         break;
     }
   }

@@ -17,7 +17,7 @@ trigger_when_player_close_by() {
   self.trigger = scripts\engine\utility::getclosest(self.origin, var_0, 500);
   self.start_point_name = self.script_noteworthy;
   self.end_point_name = self.script_parameters;
-  self.end_point = scripts\engine\utility::getstruct(self.script_parameters, "script_noteworthy");
+  self.end_point = scripts\engine\utility::getStruct(self.script_parameters, "script_noteworthy");
   self.teleport_door = scripts\engine\utility::getclosest(self.origin, getEntArray("chi_door_fast_travel", "targetname"));
   var_1 = getEntArray("chi_door_fast_travel_symbol", "targetname");
   if(isDefined(var_1)) {
@@ -170,7 +170,7 @@ watch_for_rewind_quest() {
         var_0 = level.clock[self.quest_num - 1].origin;
         var_1 = level.clock[self.quest_num - 1].angles;
         var_2 = getclosestpointonnavmesh(var_0);
-        self setorigin(var_2, 0);
+        self setOrigin(var_2, 0);
         self setvelocity((0, 0, 0));
         self setstance("stand");
       }
@@ -285,7 +285,7 @@ teleport_to_portal_safe_spot(var_0) {
   }
 
   var_0 dontinterpolate();
-  var_0 setorigin(var_2.origin);
+  var_0 setOrigin(var_2.origin);
   var_0 setplayerangles(var_2.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();

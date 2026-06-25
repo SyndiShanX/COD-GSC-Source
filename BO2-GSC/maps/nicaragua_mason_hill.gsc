@@ -73,9 +73,9 @@ nicaragua_mason_hill_objectives() {
 }
 
 intruder_perk() {
-  t_open = getent("intruder_perk_trigger", "targetname");
-  t_open sethintstring(&"SCRIPT_HINT_INTRUDER");
-  t_open setcursorhint("HINT_NOICON");
+  t_open = getEnt("intruder_perk_trigger", "targetname");
+  t_open setHintString(&"SCRIPT_HINT_INTRUDER");
+  t_open setCursorHint("HINT_NOICON");
   t_open trigger_off();
   level.player waittill_player_has_intruder_perk();
   t_open trigger_on();
@@ -118,7 +118,7 @@ mason_hill_setup() {
     spawner add_spawn_function(::make_ai_aggressive);
   }
 
-  e_trigger = getent("mason_river_trigger", "targetname");
+  e_trigger = getEnt("mason_river_trigger", "targetname");
   level.mason_hill_river_trigger = e_trigger;
   level.mason_hill_blood_pools = 0;
   add_spawn_function_ai_group("mason_hill_start_pdf", ::mason_hill_blood_pool_deathfunction_setup);
@@ -239,7 +239,7 @@ mason_hill_first_wave() {
   mason_hill_initial_colorgroup();
   level thread kill_mason_intro_pdf();
   level thread mason_hill_wave1_vo();
-  e_runon = getent("mason_hill_magicgrenade_entity", "targetname");
+  e_runon = getEnt("mason_hill_magicgrenade_entity", "targetname");
   add_cleanup_ent("mason_hill_cleanup", e_runon);
   e_runon thread mason_hill_magic_grenades();
   e_runon thread mason_hill_magic_grenade_scripted();
@@ -263,7 +263,7 @@ mason_hill_initial_colorgroup() {
 }
 
 civilian_drones() {
-  sp_drone_civilian_1 = getent("civilian_drone_spawner_1", "targetname");
+  sp_drone_civilian_1 = getEnt("civilian_drone_spawner_1", "targetname");
   maps\_drones::drones_assign_spawner("civilian_drones_1", sp_drone_civilian_1);
   maps\_drones::drones_start("civilian_drones_1");
 }
@@ -284,7 +284,7 @@ kill_mason_intro_pdf() {
     guy thread timebomb(5.0, 10.0);
   }
 
-  e_target = getent("mason_intro_pdf_snipers_target", "targetname");
+  e_target = getEnt("mason_intro_pdf_snipers_target", "targetname");
   add_cleanup_ent("mason_hill_cleanup", e_target);
 }
 
@@ -386,8 +386,8 @@ setup_mason_hill_initial_mg_gunners() {
   foreach(guy in a_ai_initial_cartel) {
     if(isDefined(guy.script_noteworthy)) {
       if(guy.script_noteworthy == "turret_gunner") {
-        e_turret = getent(guy.target, "targetname");
-        t_trigger = getent(guy.script_string, "targetname");
+        e_turret = getEnt(guy.target, "targetname");
+        t_trigger = getEnt(guy.script_string, "targetname");
         e_turret thread wait_for_ai_to_use_turret();
         guy thread _ai_use_turret(e_turret, 0, t_trigger);
         a_ai_gunners[a_ai_gunners.size] = guy;
@@ -400,7 +400,7 @@ setup_mason_hill_initial_mg_gunners() {
 
 mason_hill_wave1_scripted_mg_kill() {
   trigger_wait("mason_hill_player_near_river");
-  e_turret = getent("mason_hill_right_building_turret", "targetname");
+  e_turret = getEnt("mason_hill_right_building_turret", "targetname");
 
   if(e_turret maps\_turret::does_turret_have_user()) {
     s_target = get_struct("mason_hill_wave1_scripted_mgdeath_target", "targetname");
@@ -638,7 +638,7 @@ mason_hill_civilian_executions() {
   wait 0.1;
   level thread move_squad_up_when_civiliians_dead(a_ai_civ);
   level.player thread mason_hill_kill_civs_with_magicbullets(a_ai_civ);
-  s_target = getstruct("mason_hill_executions2_location", "targetname");
+  s_target = getStruct("mason_hill_executions2_location", "targetname");
   a_ai_pdf = getmasonallies();
   a_ai_sorted = arraysort(a_ai_pdf, s_target.origin);
   a_nd_nodes = getnodearray("mason_hill_execution2_nodes", "script_noteworthy");
@@ -851,7 +851,7 @@ red_barrel_porch() {
     setenablenode(node, 0);
   }
 
-  s_target = getstruct("porch_struct", "targetname");
+  s_target = getStruct("porch_struct", "targetname");
   a_ai_cartel = getaiarray("axis");
   a_ai_cartel = get_within_range(s_target.origin, a_ai_cartel, 320);
 
@@ -865,10 +865,10 @@ red_barrel_porch() {
     }
   }
 
-  e_clip = getent("porch_clip", "targetname");
+  e_clip = getEnt("porch_clip", "targetname");
   e_clip delete();
   a_ai_cartel = getaiarray("axis");
-  e_goalvolume = getent("masonhill_wave2_upperhouse_goalvolume", "targetname");
+  e_goalvolume = getEnt("masonhill_wave2_upperhouse_goalvolume", "targetname");
 
   foreach(guy in a_ai_cartel) {
     if(isalive(guy)) {
@@ -907,7 +907,7 @@ red_barrel_porch_failsafe() {
 mason_hill_wave2_start() {
   trigger_use("mason_hill_wave2_enemies");
   trigger_use("mason_hill_wave2_colotrigger");
-  e_goalvolume = getent("mason_hill_wave2_lowerhouse_goalvolume", "targetname");
+  e_goalvolume = getEnt("mason_hill_wave2_lowerhouse_goalvolume", "targetname");
   a_ai_cartel = get_ai_array("masonhill_wave1_uproad_guys", "script_noteworthy");
 
   foreach(guy in a_ai_cartel) {
@@ -948,7 +948,7 @@ wave1_uproad_cartel_retreat(e_goalvolume) {
 
 lower_house_gunner() {
   ai_gunner = simple_spawn_single("lower_building_gunner");
-  e_turret = getent("mason_hill_lower_building_turret", "targetname");
+  e_turret = getEnt("mason_hill_lower_building_turret", "targetname");
   e_turret thread wait_for_wave2_ai_to_use_turret();
   wait 0.1;
   ai_gunner thread _ai_use_turret(e_turret, 0);
@@ -970,7 +970,7 @@ wave2_lower_house_gunner_dies() {
 
 upper_house_gunner() {
   ai_gunner = simple_spawn_single("upper_building_gunner");
-  e_turret = getent("mason_hill_upper_turret", "targetname");
+  e_turret = getEnt("mason_hill_upper_turret", "targetname");
   wait 0.1;
 
   if(isDefined(ai_gunner)) {
@@ -982,7 +982,7 @@ upper_house_gunner() {
 move_upper_path_cartel_into_house() {
   trigger_wait("mason_hill_player_pushed_past_lower_house");
   a_ai_cartel = get_ai_array("mason_hill_wave2_start_upper_path_ai", "targetname");
-  e_goalvolume = getent("masonhill_wave2_upperhouse_goalvolume", "targetname");
+  e_goalvolume = getEnt("masonhill_wave2_upperhouse_goalvolume", "targetname");
 
   foreach(guy in a_ai_cartel) {
     if(isalive(guy)) {
@@ -998,7 +998,7 @@ player_takes_wave2_sidepath() {
   level thread wave2_sidepath_vo();
   trigger_use("mason_hill_rightpath_upperhouse_colortrigger");
   a_ai_enemies = getaiarray("axis");
-  e_goalvolume = getent("mason_hill_wave2_porchhouse_goalvolume", "targetname");
+  e_goalvolume = getEnt("mason_hill_wave2_porchhouse_goalvolume", "targetname");
 
   foreach(guy in a_ai_enemies) {
     if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == "mason_hill_wave2_rock_guys" && isalive(guy)) {
@@ -1024,11 +1024,11 @@ kill_upper_house_enemies() {
   trigger_wait("mason_hill_porchhouse_kill_upper_house_enemies");
 
   if(!flag("mason_hill_wave2_upperhouse_gunner_died")) {
-    ai_gunner = getent("upper_building_gunner_ai", "targetname");
+    ai_gunner = getEnt("upper_building_gunner_ai", "targetname");
     ai_gunner bloody_death();
   }
 
-  s_struct = getstruct("mason_hill_upper_house_struct", "targetname");
+  s_struct = getStruct("mason_hill_upper_house_struct", "targetname");
   a_ai_enemies = getaiarray("axis");
   a_ai_enemies = get_within_range(s_struct.origin, a_ai_enemies, 512);
 
@@ -1050,7 +1050,7 @@ wave2_rock_guys() {
     }
   }
 
-  e_goalvolume = getent("masonhill_wave2_upperhouse_goalvolume", "targetname");
+  e_goalvolume = getEnt("masonhill_wave2_upperhouse_goalvolume", "targetname");
   flag_wait("wave2_rockguy_dead");
 
   foreach(guy in a_ai_enemies) {
@@ -1305,7 +1305,7 @@ mason_hill_cleanup() {
   spawn_manager_disable("mason_hill_wave2_start_porch_house_sm");
   spawn_manager_disable("mason_hill_wave2_start_upper_path_sm");
   spawn_manager_disable("mason_hill_wave2_player_in_porch_house");
-  e_upper_house_spawner = getent("mason_hill_wave2_start_upper_house", "targetname");
+  e_upper_house_spawner = getEnt("mason_hill_wave2_start_upper_house", "targetname");
 
   if(isDefined(e_upper_house_spawner) && isDefined(e_upper_house_spawner.script_killspawner)) {
     e_upper_house_spawner.script_killspawner = undefined;
@@ -1345,7 +1345,7 @@ fake_grenade_toss(str_targetname, v_start, v_end) {
   }
 
   n_gravity = abs(getdvarint(#"bg_gravity")) * -1;
-  v_throw = vectornormalize(v_end - v_start) * 500;
+  v_throw = vectorNormalize(v_end - v_start) * 500;
   n_dist = distance(v_start, v_end);
   n_time = n_dist / 500;
   v_delta = v_end - v_start;

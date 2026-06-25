@@ -93,12 +93,12 @@ function function_aee99628(player) {
   for(shots = 0; shots < 15; shots++) {
     a_potential_targets = getentitiesinradius(self.origin, 256, 15);
     right = anglestoright(self.angles);
-    right = vectornormalize(right);
+    right = vectorNormalize(right);
     left = right * -1;
 
     foreach(zombie in a_potential_targets) {
       if(isalive(zombie) && zombie.team === level.zombie_team) {
-        var_6e084471 = vectornormalize(zombie.origin - self.origin);
+        var_6e084471 = vectorNormalize(zombie.origin - self.origin);
         rightdot = vectordot(right, var_6e084471);
         leftdot = vectordot(left, var_6e084471);
 

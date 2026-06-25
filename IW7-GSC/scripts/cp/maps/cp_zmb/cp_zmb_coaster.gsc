@@ -12,8 +12,8 @@ init_coaster() {
   }
 
   wait(5);
-  var_4 = scripts\engine\utility::getstruct("ice_frost", "targetname");
-  var_5 = getent(var_4.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct("ice_frost", "targetname");
+  var_5 = getEnt(var_4.target, "targetname");
   var_5 thread freeze_players();
 }
 
@@ -21,15 +21,15 @@ coaster_wait_for_power() {
   level.roller_coasters = [];
   level.coaster_start_path = getvehiclenode("coaster_start_node", "targetname");
   level.coaster_ondeck_path = getvehiclenode("coaster_transition_node", "targetname");
-  level.roller_coasters[0] = spawnvehicle("park_roller_coaster_cart", "coaster", "cp_roller_coaster", level.coaster_start_path.origin, level.coaster_start_path.angles);
-  level.roller_coasters[1] = spawnvehicle("park_roller_coaster_cart", "coaster", "cp_roller_coaster", level.coaster_ondeck_path.origin, level.coaster_ondeck_path.angles);
+  level.roller_coasters[0] = spawnVehicle("park_roller_coaster_cart", "coaster", "cp_roller_coaster", level.coaster_start_path.origin, level.coaster_start_path.angles);
+  level.roller_coasters[1] = spawnVehicle("park_roller_coaster_cart", "coaster", "cp_roller_coaster", level.coaster_ondeck_path.origin, level.coaster_ondeck_path.angles);
   var_0 = getEntArray("coaster_dmg_trig", "targetname");
   level.roller_coasters[0].dmg_trig = scripts\engine\utility::getclosest(level.roller_coasters[0].origin, var_0);
-  level.roller_coasters[0].dmg_trig enablelinkto();
-  level.roller_coasters[0].dmg_trig linkto(level.roller_coasters[0]);
+  level.roller_coasters[0].dmg_trig enablelinkTo();
+  level.roller_coasters[0].dmg_trig linkTo(level.roller_coasters[0]);
   level.roller_coasters[1].dmg_trig = scripts\engine\utility::getclosest(level.roller_coasters[1].origin, var_0);
-  level.roller_coasters[1].dmg_trig enablelinkto();
-  level.roller_coasters[1].dmg_trig linkto(level.roller_coasters[1]);
+  level.roller_coasters[1].dmg_trig enablelinkTo();
+  level.roller_coasters[1].dmg_trig linkTo(level.roller_coasters[1]);
   level thread coaster_dmg_trig_monitor(level.roller_coasters[1].dmg_trig);
   level thread coaster_dmg_trig_monitor(level.roller_coasters[0].dmg_trig);
   level.roller_coasters[0] attachpath(level.coaster_start_path);
@@ -98,13 +98,13 @@ turn_on_coaster_anims() {
 
 open_gates() {
   foreach(var_1 in self.gates) {
-    var_1 rotateto(var_1.script_angles, 1);
+    var_1 rotateTo(var_1.script_angles, 1);
   }
 }
 
 close_gates() {
   foreach(var_1 in self.gates) {
-    var_1 rotateto((0, 270, 0), 1);
+    var_1 rotateTo((0, 270, 0), 1);
   }
 }
 
@@ -392,8 +392,8 @@ coaster_last_stand_monitor(var_0) {
   var_0 unlink();
   scripts\cp\zombies\zombies_spawning::decrease_reserved_spawn_slots(4);
   var_1 = "coaster_exit" + var_0 getentitynumber();
-  var_2 = scripts\engine\utility::getstruct(var_1, "targetname");
-  var_0 setorigin(var_2.origin);
+  var_2 = scripts\engine\utility::getStruct(var_1, "targetname");
+  var_0 setOrigin(var_2.origin);
   var_0 setplayerangles(var_2.angles);
   var_0 allowstand(1);
   var_0 allowprone(1);
@@ -451,8 +451,8 @@ unlink_players_from_coaster(var_0) {
     }
 
     var_3 = "coaster_exit" + var_2 getentitynumber();
-    var_4 = scripts\engine\utility::getstruct(var_3, "targetname");
-    var_2 setorigin(var_4.origin);
+    var_4 = scripts\engine\utility::getStruct(var_3, "targetname");
+    var_2 setOrigin(var_4.origin);
     var_2 setplayerangles(var_4.angles);
     var_2 unlink();
     var_2 allowstand(1);
@@ -668,7 +668,7 @@ open_coaster_door(var_0) {
 }
 
 ice_frost() {
-  var_0 = scripts\engine\utility::getstruct("ice_frost", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ice_frost", "targetname");
   var_1 = spawnfx(level._effect["coaster_ice_frost"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   wait(0.1);
   triggerfx(var_1);
@@ -677,7 +677,7 @@ ice_frost() {
 }
 
 freeze_players() {
-  var_0 = scripts\engine\utility::getstruct("ice_frost", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ice_frost", "targetname");
   var_1 = spawnfx(level._effect["coaster_ice_frost"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   wait(1);
   triggerfx(var_1);
@@ -725,11 +725,11 @@ open_coaster_doors(var_0) {
   var_1 = getEntArray(var_0.script_parameters, "targetname");
   foreach(var_3 in var_1) {
     if(var_3.model == "zmb_triton_ice_door_r_01") {
-      var_3 rotateyaw(-80, 1);
+      var_3 rotateYaw(-80, 1);
       continue;
     }
 
-    var_3 rotateyaw(80, 1);
+    var_3 rotateYaw(80, 1);
   }
 }
 
@@ -737,18 +737,18 @@ close_coaster_doors(var_0) {
   var_1 = getEntArray(var_0.script_parameters, "targetname");
   foreach(var_3 in var_1) {
     if(var_3.model == "zmb_triton_ice_door_r_01") {
-      var_3 rotateyaw(80, 1);
+      var_3 rotateYaw(80, 1);
       continue;
     }
 
-    var_3 rotateyaw(-80, 1);
+    var_3 rotateYaw(-80, 1);
   }
 }
 
 coaster_danger_zone(var_0) {
   var_1 = getEntArray(var_0.script_parameters, "targetname");
   earthquake(0.34, 5, var_1[0].origin, 500);
-  var_2 = scripts\engine\utility::getstruct("coaster_rocks", "targetname");
+  var_2 = scripts\engine\utility::getStruct("coaster_rocks", "targetname");
   playFX(level._effect["coaster_rocks"], var_2.origin);
   for(;;) {
     wait(1.65);
@@ -756,7 +756,7 @@ coaster_danger_zone(var_0) {
       return;
     }
 
-    var_2 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     earthquake(0.34, 3, var_2.origin + (0, 0, -200), 700);
     playFX(level._effect["coaster_rocks"], var_2.origin);
   }
@@ -764,15 +764,15 @@ coaster_danger_zone(var_0) {
 
 open_coaster_arm_gates(var_0) {
   wait(2.5);
-  var_1 = getent("coaster_door_4a", "targetname");
-  var_2 = getent("coaster_door_4b", "targetname");
-  var_1 rotateyaw(110, 0.5);
+  var_1 = getEnt("coaster_door_4a", "targetname");
+  var_2 = getEnt("coaster_door_4b", "targetname");
+  var_1 rotateYaw(110, 0.5);
   wait(3.75);
-  var_2 rotateyaw(-110, 0.5);
+  var_2 rotateYaw(-110, 0.5);
   wait(5);
-  var_1 rotateyaw(-110, 0.5);
+  var_1 rotateYaw(-110, 0.5);
   wait(1);
-  var_2 rotateyaw(110, 0.5);
+  var_2 rotateYaw(110, 0.5);
 }
 
 spawn_targets(var_0, var_1) {
@@ -881,8 +881,8 @@ target_wait_for_damage() {
 
   self playSound("rollercoaster_sign_up");
   self.og_angles = self.angles;
-  var_0 = scripts\engine\utility::getstruct(self.struct.target, "targetname");
-  self rotateto(var_0.angles, 0.25);
+  var_0 = scripts\engine\utility::getStruct(self.struct.target, "targetname");
+  self rotateTo(var_0.angles, 0.25);
   self.health = 999999;
   self setCanDamage(1);
   var_1 = 5;
@@ -918,7 +918,7 @@ target_wait_for_damage() {
 
       var_3 notify("coaster_target_hit_notify");
       self playSound("rollercoaster_target_pings");
-      self rotateto(self.og_angles, 0.25);
+      self rotateTo(self.og_angles, 0.25);
       return;
     }
   }

@@ -526,9 +526,9 @@ function setup_objectives() {
   }
   foreach(team in level.teams) {
     if(!game["switchedsides"]) {
-      trigger = getent("ball_goal_" + team, "targetname");
+      trigger = getEnt("ball_goal_" + team, "targetname");
     } else {
-      trigger = getent("ball_goal_" + util::getotherteam(team), "targetname");
+      trigger = getEnt("ball_goal_" + util::getotherteam(team), "targetname");
     }
     level.ball_goals[team] = setup_goal(trigger, team);
   }
@@ -600,8 +600,8 @@ function spawn_ball(trigger) {
   visuals[0] = spawn("script_model", trigger.origin);
   visuals[0] setModel("wpn_t7_uplink_ball_world");
   visuals[0] notsolid();
-  trigger enablelinkto();
-  trigger linkto(visuals[0]);
+  trigger enablelinkTo();
+  trigger linkTo(visuals[0]);
   trigger.no_moving_platfrom_unlink = 1;
   ballobj = gameobjects::create_carry_object("neutral", trigger, visuals, (0, 0, 0), istring("ball_ball"), "mpl_hit_alert_ballholder");
   ballobj gameobjects::allow_carry("any");
@@ -878,7 +878,7 @@ function upload_ball(goal) {
   total_time = in_enemygoal_time + move_up_time;
   self gameobjects::set_flags(1);
   visual = self.visuals[0];
-  visual moveto(goal.center, move_to_center_time, 0, move_to_center_time);
+  visual moveTo(goal.center, move_to_center_time, 0, move_to_center_time);
   visual rotatevelocity(vectorscale((1, 1, 0), 1080), total_time, total_time, 0);
   wait(in_enemygoal_time);
   goal.ball_in_goal = 0;
@@ -900,7 +900,7 @@ function download_ball() {
   visual.origin = visual.baseorigin + vectorscale((0, 0, 1), 4000);
   visual dontinterpolate();
   fall_time = 3;
-  visual moveto(visual.baseorigin, fall_time, 0, fall_time);
+  visual moveTo(visual.baseorigin, fall_time, 0, fall_time);
   visual rotatevelocity(vectorscale((0, 1, 0), 720), fall_time, 0, fall_time);
   self.visibleteam = "any";
   self gameobjects::update_world_icon("friendly", 1);
@@ -1134,12 +1134,12 @@ function ball_pass_projectile(passer, target, last_target_origin) {
   } else {
     self gameobjects::set_position(trace["position"], self.visuals[0].angles);
   }
-  pass_dir = vectornormalize((last_target_origin + offset) - self.visuals[0].origin);
+  pass_dir = vectorNormalize((last_target_origin + offset) - self.visuals[0].origin);
   pass_vel = pass_dir * 850;
   self.lastprojectile = self.projectile;
   self.projectile = passer magicmissile(level.passingballweapon, self.visuals[0].origin, pass_vel);
   target thread adjust_for_stance(self.projectile);
-  self.visuals[0] linkto(self.projectile);
+  self.visuals[0] linkTo(self.projectile);
   self gameobjects::ghost_visuals();
   self ball_create_killcam_ent();
   self ball_clear_contents();
@@ -1187,7 +1187,7 @@ function ball_create_killcam_ent() {
     self.killcament delete();
   }
   self.killcament = spawn("script_model", self.visuals[0].origin);
-  self.killcament linkto(self.visuals[0]);
+  self.killcament linkTo(self.visuals[0]);
   self.killcament setcontents(0);
 }
 
@@ -1243,7 +1243,7 @@ function ball_physics_launch(force, droppingplayer) {
     right = anglestoright(force);
     origin = origin + ((right[0], right[1], 0) * 7);
     startpos = origin;
-    delta = vectornormalize(force) * 80;
+    delta = vectorNormalize(force) * 80;
     size = 5;
     trace = physicstrace(startpos, startpos + delta, (size * -1, size * -1, size * -1), (size, size, size), droppingplayer, 1);
     if(trace["fraction"] < 1) {
@@ -1254,7 +1254,7 @@ function ball_physics_launch(force, droppingplayer) {
     }
   }
   grenade = owner magicmissile(level.ballworldweapon, visuals.origin, force);
-  visuals linkto(grenade);
+  visuals linkTo(grenade);
   self gameobjects::ghost_visuals();
   self.lastprojectile = self.projectile;
   self.projectile = grenade;
@@ -1304,7 +1304,7 @@ function ball_physics_fake_bounce() {
   ball = self.visuals[0];
   vel = ball getvelocity();
   bounceforce = length(vel) / 10;
-  bouncedir = -1 * vectornormalize(vel);
+  bouncedir = -1 * vectorNormalize(vel);
 }
 
 function ball_watch_touch_enemy_goal() {
@@ -1334,7 +1334,7 @@ function ball_watch_touch_enemy_goal() {
 }
 
 function line_intersect_sphere(line_start, line_end, sphere_center, sphere_radius) {
-  dir = vectornormalize(line_end - line_start);
+  dir = vectorNormalize(line_end - line_start);
   a = vectordot(dir, line_start - sphere_center);
   a = a * a;
   b = line_start - sphere_center;
@@ -1483,7 +1483,7 @@ function player_update_pass_target(ballobj) {
         if(distsq > 1000000) {
           continue;
         }
-        dirtotarget = vectornormalize(targeteye - playereye);
+        dirtotarget = vectorNormalize(targeteye - playereye);
         dot = vectordot(playerdir, dirtotarget);
         if(dot > test_dot) {
           target.pass_dot = dot;

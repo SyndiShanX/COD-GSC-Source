@@ -19,7 +19,7 @@ main() {
   level.chattertrigsexteriror = getEntArray("exterior_bcs", "targetname");
   array_thread(level.chattertrigsexteriror, ::trigger_off);
   array_thread(level.chattertrigsinterior, ::trigger_off);
-  level.monument_target = getent("monument_target", "targetname");
+  level.monument_target = getEnt("monument_target", "targetname");
   level.sniperOrgs = getEntArray("humvee_spotlight_targets", "targetname");
   level.crowsArmor = [];
   level.snipeEnemies = 4;
@@ -359,7 +359,7 @@ start_roof() {
 
 start_heli_ride2() {
   maps\_utility::vision_set_fog_changes("dcburning_heliride", 0);
-  heliNode = getstruct("player_heli_ww2_end", "script_noteworthy");
+  heliNode = getStruct("player_heli_ww2_end", "script_noteworthy");
   player_blackhawk_setup(heliNode);
 
   level.blackhawk.minigunUser = level.player;
@@ -435,7 +435,7 @@ AAA_sequence_bunker_to_commerce() {
   bunker_hallway_injured_guys2 = array_spawn(getEntArray("bunker_hallway_injured_guys2", "targetname"));
   bunker_sleeping_guys = array_spawn(getEntArray("bunker_sleeping_guys", "targetname"));
   bunker_doctor_and_patient = array_spawn(getEntArray("bunker_doctor_and_patient", "targetname"));
-  spawner = getent("bunker_hallway_injured_carrier", "targetname");
+  spawner = getEnt("bunker_hallway_injured_carrier", "targetname");
   bunker_hallway_injured_carrier = spawner spawn_ai();
   bunker_sitting_guys = array_spawn(getEntArray("bunker_sitting_guys", "targetname"));
 
@@ -456,13 +456,13 @@ AAA_sequence_bunker_to_commerce() {
   }
   delaythread(0, maps\_mortar::bog_style_mortar_on, 2);
 
-  drone_warrior_hydrant = dronespawn(getent("drone_warrior_hydrant", "targetname"));
+  drone_warrior_hydrant = dronespawn(getEnt("drone_warrior_hydrant", "targetname"));
   drone_warrior_hydrant thread drone_warrior_hydrant_think();
 
-  seaknight_loader_start = getent("seaknight_loader_start", "targetname");
+  seaknight_loader_start = getEnt("seaknight_loader_start", "targetname");
   seaknight_loader_start notify("spawn");
 
-  seaknight_loader_start2 = getent("seaknight_loader_start2", "targetname");
+  seaknight_loader_start2 = getEnt("seaknight_loader_start2", "targetname");
   seaknight_loader_start2 notify("spawn");
 
   littlebird_monument = spawn_vehicle_from_targetname_and_drive("littlebird_monument");
@@ -473,7 +473,7 @@ AAA_sequence_bunker_to_commerce() {
   array_thread(littlebird_monument_riders_right, ::AI_ignored_and_oblivious_on);
   array_thread(littlebird_monument_riders_right, ::magic_bullet_shield);
 
-  pickup_node_before_stage_monument = getstruct("pickup_node_before_stage_monument", "script_noteworthy");
+  pickup_node_before_stage_monument = getStruct("pickup_node_before_stage_monument", "script_noteworthy");
   littlebird_monument set_stage(pickup_node_before_stage_monument, littlebird_monument_riders_left, "left");
   littlebird_monument set_stage(pickup_node_before_stage_monument, littlebird_monument_riders_right, "right");
 
@@ -484,10 +484,10 @@ AAA_sequence_bunker_to_commerce() {
 
   flag_wait("player_approaching_monument");
 
-  spawner = getent("drones_seaknight", "targetname");
+  spawner = getEnt("drones_seaknight", "targetname");
   thread seaknight_drone_loaders(spawner, "seaknight_drones_loaded", "player_exiting_start_trench2");
 
-  spawner = getent("drones_seaknight2", "targetname");
+  spawner = getEnt("drones_seaknight2", "targetname");
   thread seaknight_drone_loaders(spawner, "seaknight_drones2_loaded", "player_exiting_start_trench");
 
   flag_wait("player_exiting_start_trench");
@@ -501,7 +501,7 @@ AAA_sequence_bunker_to_commerce() {
   spot_targets = getEntArray("spot_targets", "script_noteworthy");
   array_thread(spot_targets, ::spot_targets_think);
 
-  bunker_doorup = getent("bunker_door_up", "targetname");
+  bunker_doorup = getEnt("bunker_door_up", "targetname");
   bunker_doorup hide_entity();
   bunker_door = getEntArray("bunker_door", "targetname");
   array_thread(bunker_door, ::show_entity);
@@ -511,16 +511,16 @@ AAA_sequence_bunker_to_commerce() {
   mortar_bunker_radius_triggers = getEntArray("mortar_bunker", "targetname");
   array_call(mortar_bunker_radius_triggers, ::delete);
   thread struct_delete(mortar_bunker, "delete_bunker_mortars");
-  bunker_radio_org_room2 = getent("bunker_radio_org_room2", "targetname");
+  bunker_radio_org_room2 = getEnt("bunker_radio_org_room2", "targetname");
   bunker_radio_org_room2 delete();
-  volume_bunker = getent("volume_bunker", "targetname");
+  volume_bunker = getEnt("volume_bunker", "targetname");
   aAI = volume_bunker get_ai_touching_volume_non_squad();
   aDrones = volume_bunker get_drones_touching_volume("allies");
   aAI = array_merge(aAI, aDrones);
   array_thread(aAI, ::AI_delete);
   array_thread(level.effects_bunker, ::pauseEffect);
 
-  spawner = getent("monument_waver", "targetname");
+  spawner = getEnt("monument_waver", "targetname");
   monument_waver = spawner spawn_ai(true);
   spawners = getEntArray("friendlies_commerce_street", "targetname");
   friendlies_commerce_street = [];
@@ -547,7 +547,7 @@ AAA_sequence_bunker_to_commerce() {
 
   littlebird_monument thread load_side("left", littlebird_monument_riders_left);
   littlebird_monument thread load_side("right", littlebird_monument_riders_right);
-  littlebird_monument_path = getstruct("littlebird_monument_path", "targetname");
+  littlebird_monument_path = getStruct("littlebird_monument_path", "targetname");
   littlebird_monument thread vehicle_littlebird_gopath_when_loaded_and_flag_set("player_exiting_start_trench", littlebird_monument_path);
 
   drones_flood_monument2 = getEntArray("drones_flood_monument2", "targetname");
@@ -605,15 +605,15 @@ AAA_sequence_bunker_to_commerce() {
   level.squad = remove_dead_from_array(level.squad);
   array_thread(level.squad, ::AI_ignored_and_oblivious_off);
 
-  commerce_blocker_right = getent("commerce_blocker_right", "targetname");
-  commerce_blocker_left = getent("commerce_blocker_left", "targetname");
+  commerce_blocker_right = getEnt("commerce_blocker_right", "targetname");
+  commerce_blocker_left = getEnt("commerce_blocker_left", "targetname");
   aBlockers = [];
   aBlockers[0] = commerce_blocker_right;
   aBlockers[1] = commerce_blocker_left;
   blocker = getfarthest(level.player.origin, aBlockers);
   blocker show();
   blocker solid();
-  blocker disconnectpaths();
+  blocker disconnectPaths();
 
   flag_wait_either("player_entered_commerce_left", "player_entered_commerce_right");
   thread drone_flood_stop("drones_flood_monument");
@@ -642,7 +642,7 @@ AAA_sequence_bunker_to_commerce() {
 
   thread dialogue_nag_get_to_elevator();
 
-  volume_commerce_lobby_upper = getent("volume_commerce_lobby_upper", "targetname");
+  volume_commerce_lobby_upper = getEnt("volume_commerce_lobby_upper", "targetname");
   upper_floor_enemies = volume_commerce_lobby_upper get_ai_touching_volume("axis");
 
   if((isDefined(upper_floor_enemies)) && (upper_floor_enemies.size > 0)) {
@@ -661,7 +661,7 @@ AAA_sequence_bunker_to_commerce() {
   level.player reset_threatbias();
 
   if(!flag("player_middle_commerce_first_floor")) {
-    trig_colornode = getent("colornodes_elevators", "script_noteworthy");
+    trig_colornode = getEnt("colornodes_elevators", "script_noteworthy");
     trig_colornode notify("trigger", level.player);
   }
 
@@ -693,7 +693,7 @@ AI_commerce_rpg_upper_think() {
   self forceTeleport(eNode.origin, eNode.angles);
   self setgoalpos(self.origin);
   self.attackeraccuracy = 0;
-  volume_commerce_front = getent("volume_commerce_front", "targetname");
+  volume_commerce_front = getEnt("volume_commerce_front", "targetname");
   self setgoalvolumeauto(volume_commerce_front);
   flag_wait_either("player_crossing_street", "leader_orders_everyone_across_street");
   wait(randomfloatrange(0, 1));
@@ -790,7 +790,7 @@ bunker_mortars() {
 
 bunker_radio_chatter() {
   level.bunker_radio_org = spawn("script_origin", level.player.origin);
-  level.bunker_radio_org linkto(level.player);
+  level.bunker_radio_org linkTo(level.player);
   level.bunker_radio_org.linked = true;
 
   level endon("javelin_is_owning_fools");
@@ -992,8 +992,8 @@ dialogue_bunker() {
   level endon("bunker_door_closed");
   flag_wait("player_bunker_walk_01");
 
-  bunker_radio_org_room2 = getent("bunker_radio_org_room2", "targetname");
-  bunker_radio_org_room1 = getstruct("bunker_radio_org_room1", "targetname");
+  bunker_radio_org_room2 = getEnt("bunker_radio_org_room2", "targetname");
+  bunker_radio_org_room1 = getStruct("bunker_radio_org_room1", "targetname");
   bunker_radio_org_room2 endon("death");
   bunker_radio_org_room1 endon("death");
 
@@ -1153,7 +1153,7 @@ dialogue_nag_get_to_elevator() {
 }
 
 commerce_first_floor_enemies_dead_monitor() {
-  volume_commerce_lobby_lower = getent("volume_commerce_lobby_lower", "targetname");
+  volume_commerce_lobby_lower = getEnt("volume_commerce_lobby_lower", "targetname");
   enemies = volume_commerce_lobby_lower get_ai_touching_volume("axis");
 
   while(enemies.size > 0) {
@@ -1164,7 +1164,7 @@ commerce_first_floor_enemies_dead_monitor() {
 }
 
 dialogue_trenches() {
-  bunker_radio_org_room2 = getent("bunker_radio_org_room2", "targetname");
+  bunker_radio_org_room2 = getEnt("bunker_radio_org_room2", "targetname");
 
   flag_wait("player_bunker_walk_02");
 
@@ -1244,7 +1244,7 @@ javelins_trench() {
 
   spawn_vehicles_from_targetname_and_drive("apache_01");
 
-  javelin_source_org = getent("javelin_source_org", "targetname");
+  javelin_source_org = getEnt("javelin_source_org", "targetname");
   monument_heli_owned = spawn_vehicle_from_targetname("monument_heli_owned");
 
   m1a1_owned = spawn_vehicle_from_targetname("m1a1_owned");
@@ -1262,7 +1262,7 @@ javelins_trench() {
 
   flag_wait_either("looking_commerce_enemy_javelin", "commerce_enemy_javeling_failsafe");
 
-  spawner = getent("commerce_friendly_fodder", "targetname");
+  spawner = getEnt("commerce_friendly_fodder", "targetname");
   spawner spawn_ai(true);
 
   newMissile = MagicBullet("javelin_noimpact", javelin_source_org.origin, monument_heli_owned.origin);
@@ -1272,7 +1272,7 @@ javelins_trench() {
   newMissile Missile_SetFlightmodeTop();
 
   seaknight_monument_takeoff_01 = get_vehicle("seaknight_monument_takeoff_01", "script_noteworthy");
-  heli_monument_path_01 = getstruct("heli_monument_path_01", "targetname");
+  heli_monument_path_01 = getStruct("heli_monument_path_01", "targetname");
   seaknight_monument_takeoff_01 thread vehicle_paths(heli_monument_path_01);
 
   thread flag_set_delayed("javelin_is_owning_fools", 1);
@@ -1280,7 +1280,7 @@ javelins_trench() {
   thread gopath(m1a1_owned2);
   m1a1_owned2 maps\_vehicle::godoff();
 
-  m1a1_owned setturrettargetent(javelin_source_org);
+  m1a1_owned setturrettargetEnt(javelin_source_org);
   m1a1_owned thread vehicle_tank_fire_turret(javelin_source_org);
   m1a1_owned thread m1a1_owned_think();
 
@@ -1294,7 +1294,7 @@ javelins_trench() {
   thread maps\dcburning_fx::monument_heli_destroyed(monument_heli_owned);
 
   wait(10);
-  m1a1_owned2 setturrettargetent(javelin_source_org);
+  m1a1_owned2 setturrettargetEnt(javelin_source_org);
   m1a1_owned2 thread vehicle_tank_fire_turret(javelin_source_org);
   m1a1_owned2 delaythread(0, ::vehicle_owned_by_javelin, javelin_source_org);
 
@@ -1331,7 +1331,7 @@ javelins_trench() {
 
 m1a1_owned_think() {
   wait(2);
-  eTarget = getent("javelin_source_org", "targetname");
+  eTarget = getEnt("javelin_source_org", "targetname");
   self setTurretTargetEnt(eTarget, (0, 0, -60));
   self waittill_notify_or_timeout("turret_rotate_stopped", 1.0);
   self notify("turret_fire");
@@ -1372,7 +1372,7 @@ vehicle_heli_fire_turret(eTarget) {
     burstsize = randomintrange(10, 20);
     if(!self.firingMissiles) {
       for(i = 0; i < burstsize; i++) {
-        self setturrettargetent(eTarget, randomvector(50) + (0, 0, 32));
+        self setturrettargetEnt(eTarget, randomvector(50) + (0, 0, 32));
         self fireweapon();
         wait fireTime;
       }
@@ -1431,7 +1431,7 @@ humvee_commerce_left() {
     humvee_spotlight_left.turret settargetentity(aTargets[randomint(aTargets.size)]);
     wait(randomfloatrange(1.2, 3.4));
   }
-  target_for_humvee_left = getent("target_for_humvee_left", "targetname");
+  target_for_humvee_left = getEnt("target_for_humvee_left", "targetname");
   humvee_spotlight_left.turret settargetentity(target_for_humvee_left);
   wait(.5);
   humvee_spotlight_left.spotlight_org delete();
@@ -1524,7 +1524,7 @@ bradley_commerce() {
       continue;
     }
 
-    level.bradley_commerce setturrettargetent(eTarget);
+    level.bradley_commerce setturrettargetEnt(eTarget);
     level.bradley_commerce waittill_notify_or_timeout("turret_rotate_stopped", 1);
     iBurstNumber = randomfloatrange(2, 6);
     i = 0;
@@ -1593,7 +1593,7 @@ commerce_rappelers() {
 commerce_rappelers_think() {
   self endon("death");
   self setthreatbiasgroup("oblivious");
-  eAnimEnt = getent(self.target, "targetname");
+  eAnimEnt = getEnt(self.target, "targetname");
   sRappelAnim = eAnimEnt.animation;
   self.eExploder = undefined;
   if(isDefined(eAnimEnt.target)) {
@@ -1677,8 +1677,8 @@ spotlight_preferred_targets() {
 
   flag_wait_either("player_touching_commerce_lobby_right", "player_touching_commerce_lobby_left");
 
-  volume_commerce_lobby_lower = getent("volume_commerce_lobby_lower", "targetname");
-  volume_commerce_lobby_upper = getent("volume_commerce_lobby_upper", "targetname");
+  volume_commerce_lobby_lower = getEnt("volume_commerce_lobby_lower", "targetname");
+  volume_commerce_lobby_upper = getEnt("volume_commerce_lobby_upper", "targetname");
   enemies1 = volume_commerce_lobby_lower get_ai_touching_volume("axis");
   enemies2 = volume_commerce_lobby_upper get_ai_touching_volume("axis");
   aAI = undefined;
@@ -1902,7 +1902,7 @@ samsite_c4_think() {
   triggerFx(fx);
   earthquake(0.6, 1.2, self.base.origin, 1600);
   if(distance(self.base.origin, level.player.origin) < 2048) {
-    level.player PlayRumbleOnEntity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
   flag_wait("player_entering_top_elevator_area");
   fx delete();
@@ -1948,9 +1948,9 @@ atrium_guys() {
 
   flag_wait_either("atrium_guys_at_end_of_anim", "player_entering_courtyard2");
 
-  atrium_bullet = getent("atrium_bullet", "targetname");
+  atrium_bullet = getEnt("atrium_bullet", "targetname");
   headOrigin = puller gettagorigin("tag_eye");
-  vec = vectornormalize(headOrigin - atrium_bullet.origin);
+  vec = vectorNormalize(headOrigin - atrium_bullet.origin);
   thread play_sound_in_space("weap_deserteagle_fire_npc", atrium_bullet.origin);
   playFX(getfx("headshot"), headOrigin, vec);
   magicbullet("m14_scoped", atrium_bullet.origin, headOrigin);
@@ -1958,7 +1958,7 @@ atrium_guys() {
   foreach(guy in atrium_guys) {
     guy kill();
   }
-  atrium_drag_blocker = getent("atrium_drag_blocker", "targetname");
+  atrium_drag_blocker = getEnt("atrium_drag_blocker", "targetname");
   atrium_drag_blocker hide_entity();
 }
 
@@ -1970,7 +1970,7 @@ atrium_guys_end_of_anim() {
 }
 
 samsite_enemy_chatter() {
-  samsite_chater_org = getent("samsite_chater_org", "targetname");
+  samsite_chater_org = getEnt("samsite_chater_org", "targetname");
   origin = samsite_chater_org.origin;
   sFlagToKillDialogue = "player_shot_at_samsite_guys";
   level endon(sFlagToKillDialogue);
@@ -2009,7 +2009,7 @@ samsite_ai_think(eNode) {
 
   self waittill_either("damage", "alerted");
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self.ignorerandombulletdamage = false;
   self.ignoreme = false;
   self.ignoreme = false;
@@ -2021,10 +2021,10 @@ samsite_turret_think() {
   self endon("death");
   flag_wait("commerce_samsite_revealed");
   time = 4.5;
-  self rotateto(self.angles + (0, -50, 0), time, 2, 2);
+  self rotateTo(self.angles + (0, -50, 0), time, 2, 2);
   wait(time / 2);
 
-  targetOrg = getent("slamraam_missile_target", "targetname");
+  targetOrg = getEnt("slamraam_missile_target", "targetname");
   while(!flag("player_approaching_fourth_floor_sam")) {
     self detach("projectile_slamraam_missile", self.missileTags[0]);
     earthquake(.3, .5, self.origin, 1600);
@@ -2150,9 +2150,9 @@ elevator_dude_think(spawner) {
   self setlookattext("", &"");
   reference = spawner;
   iAnimSwitched = 0;
-  elevator_clip = getent("elevator_clip", "targetname");
+  elevator_clip = getEnt("elevator_clip", "targetname");
   elevator_clip.origin = elevator_clip.origin + (0, 0, 32);
-  self stopanimscripted();
+  self stopanimScripted();
   while(!flag("stop_elevator_doors")) {
     reference thread anim_generic_loop(self, sLoop, "stop_idle");
     self waittill("doors_closing");
@@ -2170,11 +2170,11 @@ elevator_dude_think(spawner) {
 }
 
 elevator_start() {
-  spawner = getent("elevator_dude", "targetname");
+  spawner = getEnt("elevator_dude", "targetname");
   elevator_dude = spawner dronespawn();
   elevator_dude thread elevator_dude_think(spawner);
-  elevator_door_left = getent("elevator_door_left", "targetname");
-  elevator_door_right = getent("elevator_door_right", "targetname");
+  elevator_door_left = getEnt("elevator_door_left", "targetname");
+  elevator_door_right = getEnt("elevator_door_right", "targetname");
   elevator_door_left.startPos = elevator_door_left.origin;
   elevator_door_right.startPos = elevator_door_right.origin;
 
@@ -2182,7 +2182,7 @@ elevator_start() {
   movedistRight = -28;
   movetime = 2;
 
-  musak_org = getent("musak_org", "targetname");
+  musak_org = getEnt("musak_org", "targetname");
   musak_org playLoopSound("elev_musak_loop");
 
   while(!flag("stop_elevator_doors")) {
@@ -2196,8 +2196,8 @@ elevator_start() {
     wait(.25);
 
     thread play_sound_in_space("elev_door_open", elevator_door_left.origin);
-    elevator_door_left moveto(elevator_door_left.startPos, movetime, movetime / 2, movetime / 2);
-    elevator_door_right moveto(elevator_door_right.startPos, movetime, movetime / 2, movetime / 2);
+    elevator_door_left moveTo(elevator_door_left.startPos, movetime, movetime / 2, movetime / 2);
+    elevator_door_right moveTo(elevator_door_right.startPos, movetime, movetime / 2, movetime / 2);
 
     wait(movetime);
 
@@ -2345,10 +2345,10 @@ AAA_sequence_elevator_top_2_crowsnest() {
     array_thread(level.vehicles_commerce_ambient, ::vehicle_delete);
   }
 
-  volume_commerce_sector_2 = getent("volume_commerce_sector_2", "targetname");
-  volume_commerce_sector_3 = getent("volume_commerce_sector_3", "targetname");
-  flare_dynamic_01 = getent("flare_dynamic_01", "targetname");
-  dynamicLight = getent(flare_dynamic_01.target, "targetname");
+  volume_commerce_sector_2 = getEnt("volume_commerce_sector_2", "targetname");
+  volume_commerce_sector_3 = getEnt("volume_commerce_sector_3", "targetname");
+  flare_dynamic_01 = getEnt("flare_dynamic_01", "targetname");
+  dynamicLight = getEnt(flare_dynamic_01.target, "targetname");
   dynamicLight setLightIntensity(0);
 
   flag_wait_either("player_approaching_flare_moment", "player_looking_at_flare_moment");
@@ -2386,7 +2386,7 @@ helis_ambient_capitol_think() {
 }
 
 crows_nest_enemy_chatter() {
-  obj_commerce_sector_3 = getstruct("obj_commerce_sector_3", "targetname");
+  obj_commerce_sector_3 = getStruct("obj_commerce_sector_3", "targetname");
   origin = obj_commerce_sector_3.origin;
   sFlagToKillDialogue = "player_shot_at_crowsnest_guys";
   level endon(sFlagToKillDialogue);
@@ -2496,7 +2496,7 @@ AA_crows_nest_snipe_init() {
 
 AAA_sequence_crowsnest() {
   triggersEnable("colornodes_crowsnest", "script_noteworthy", true);
-  volume_crowsnest = getent("volume_crowsnest", "targetname");
+  volume_crowsnest = getEnt("volume_crowsnest", "targetname");
 
   flag_wait("player_approaching_crowsnest");
 
@@ -2519,7 +2519,7 @@ AAA_sequence_crowsnest() {
 
   thread flag_set_delayed("obj_commerce_complete", 1);
 
-  colornodes_crowsnest = getent("colornodes_crowsnest", "script_noteworthy");
+  colornodes_crowsnest = getEnt("colornodes_crowsnest", "script_noteworthy");
   colornodes_crowsnest notify("trigger", level.player);
   thread dummy_trigger("dummy_colornodes_crows1");
   thread dummy_trigger("dummy_colornodes_crows2");
@@ -2534,7 +2534,7 @@ crowsnest_friendlies_inside() {
   self endon("death");
   level endon("player_shot_at_crowsnest_guys");
   flag_wait("player_approaching_crowsnest_door");
-  player_in_crowsnest_room = getent("player_in_crowsnest_room", "targetname");
+  player_in_crowsnest_room = getEnt("player_in_crowsnest_room", "targetname");
   while(!flag("player_shot_at_crowsnest_guys")) {
     wait(.1);
     if(!isDefined(self)) {
@@ -2563,7 +2563,7 @@ AAA_sequence_crowsnest_snipe() {
   flag_wait("player_approaching_crowsnest2");
   thread crowsnest_ambient_vehicles();
 
-  model_barrett = getent("model_barrett", "targetname");
+  model_barrett = getEnt("model_barrett", "targetname");
   model_barrett_glow = spawn("script_model", model_barrett.origin);
   model_barrett_glow setModel("weapon_m82_MG_Setup_obj");
   model_barrett_glow.origin = model_barrett.origin;
@@ -2618,7 +2618,7 @@ AAA_sequence_crowsnest_snipe() {
   level.guysKilled = 0;
 
   triggersEnable("colornodes_crowsnest_surrounded", "script_noteworthy", true);
-  trig_colornode = getent("colornodes_crowsnest_surrounded", "script_noteworthy");
+  trig_colornode = getEnt("colornodes_crowsnest_surrounded", "script_noteworthy");
   trig_colornode notify("trigger", level.player);
 
   flag_wait("player_killed_enough");
@@ -2655,7 +2655,7 @@ player_barrett_damage() {
   }
 
   if(flag("player_is_on_turret")) {
-    obj_commerce_defend_javelin = getstruct("obj_commerce_defend_javelin", "targetname");
+    obj_commerce_defend_javelin = getStruct("obj_commerce_defend_javelin", "targetname");
     MagicGrenade("fraggrenade", obj_commerce_defend_javelin.origin + (0, 0, 144), obj_commerce_defend_javelin.origin + (0, 0, 32));
   }
 }
@@ -2666,7 +2666,7 @@ retreat_to_elevators() {
     return;
   }
   self notify("stop_seeking");
-  position = getstruct("obj_commerce_sector_1d", "targetname");
+  position = getStruct("obj_commerce_sector_1d", "targetname");
   self setgoalpos(position.origin);
 }
 
@@ -2726,10 +2726,10 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
   weapon = "weapon_stinger";
   muzzleFlash = "javelin_muzzle";
   if(stingerJavNode.animation == "stinger_idle") {
-    playerBadPlace = getent("volume_stinger_safezone", "targetname");
+    playerBadPlace = getEnt("volume_stinger_safezone", "targetname");
     self get_stinger_anims();
   } else {
-    playerBadPlace = getent("volume_javelin_safezone", "targetname");
+    playerBadPlace = getEnt("volume_javelin_safezone", "targetname");
     isJavelin = true;
     self.animation = stingerJavNode.animation;
     self get_javelin_anims();
@@ -2775,7 +2775,7 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
   self notify("stop_shooting_stingers_and_javs");
   self notify("stop_first_frame");
   self.reference notify("stop_idle");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self detach(weapon, "TAG_INHAND");
   self.reference = undefined;
   self.scriptedTargets = undefined;
@@ -2836,7 +2836,7 @@ friendly_stinger_target_nodes_think(guy) {
 
 friendlies_shoot_at_crows_drones_start() {
   aNodes = getnodearray("crow_nodes_drone_fire", "targetname");
-  spawner = getent("hostiles_fodder_crowsnest", "targetname");
+  spawner = getEnt("hostiles_fodder_crowsnest", "targetname");
   level.hostiles_fodder_crowsnest = spawner spawn_ai();
   aFriendlies = [];
   aFriendlies[0] = level.teamleader;
@@ -2969,7 +2969,7 @@ evac_site_enemies_fire_live() {
 }
 
 crowsnest_nags_snipe() {
-  volume_crowsnest = getent("volume_crowsnest", "targetname");
+  volume_crowsnest = getEnt("volume_crowsnest", "targetname");
   level.lasttimePlayerKilledEnemy = getTime();
 
   barret_nag_number = 0;
@@ -3019,8 +3019,8 @@ crowsnest_nags_snipe() {
 }
 
 crowsnest_ambient_vehicles() {
-  crowsnest_seaknight_01 = getent("crowsnest_seaknight_01", "targetname");
-  crowsnest_seaknight_02 = getent("crowsnest_seaknight_02", "targetname");
+  crowsnest_seaknight_01 = getEnt("crowsnest_seaknight_01", "targetname");
+  crowsnest_seaknight_02 = getEnt("crowsnest_seaknight_02", "targetname");
   crowsnest_seaknight_01 notify("spawn");
   crowsnest_seaknight_02 notify("spawn");
 
@@ -3265,7 +3265,7 @@ vehicles_crowsnest_defend_think() {
   sound = "exp_tanker_vehicle";
 
   if(isDefined(self.script_linkTo)) {
-    eDeathModel = getent(self.script_linkto, "script_linkname");
+    eDeathModel = getEnt(self.script_linkto, "script_linkname");
     eDeathModel show();
     self delete();
   } else {
@@ -3323,7 +3323,7 @@ vehicles_cheap_waittill_destroyed_think() {
   onFire = false;
 
   if(isDefined(self.script_linkTo)) {
-    eDeathModel = getent(self.script_linkto, "script_linkname");
+    eDeathModel = getEnt(self.script_linkto, "script_linkname");
     eDeathModel show();
     self delete();
   } else {
@@ -3493,9 +3493,9 @@ player_invulnerable_till_one_javelin_target_killed() {
 AAA_sequence_crowsnest_armor() {
   flag_wait("start_crow_armor_sequence");
 
-  barrett_trigger = getent("barrett_trigger", "targetname");
+  barrett_trigger = getEnt("barrett_trigger", "targetname");
   barrett_trigger.origin = barrett_trigger.origin + (0, 0, -20);
-  barrett_trigger usetriggerrequirelookat();
+  barrett_trigger useTriggerRequireLookAt();
 
   level.monument_target thread monument_target_think();
   helis_crowsnest = spawn_vehicles_from_targetname_and_drive("helis_crowsnest");
@@ -3505,7 +3505,7 @@ AAA_sequence_crowsnest_armor() {
 
   thread make_friendlies_shoot_stingers_and_javs();
 
-  volume = getent("perimeter_enemies", "targetname");
+  volume = getEnt("perimeter_enemies", "targetname");
   thread flag_set_when_volume_cleared_of_bad_guys(volume, "perimeter_enemies_have_retreated");
 
   wait(25);
@@ -3585,7 +3585,7 @@ dialogue_crow_armor() {
 }
 
 crowsnest_nags_armor() {
-  volume_crowsnest = getent("volume_crowsnest", "targetname");
+  volume_crowsnest = getEnt("volume_crowsnest", "targetname");
   level.lasttimePlayerKilledEnemy = getTime();
 
   rocket_nag_number = 0;
@@ -3769,7 +3769,7 @@ heli_crowsnest_respawn() {
     self waittill("death");
 
     wait(1);
-    spawner = getent(noteworthyName, "script_noteworthy");
+    spawner = getEnt(noteworthyName, "script_noteworthy");
     assert(isDefined(spawner));
     if(!flag("obj_commerce_defend_javelin_complete")) {
       heli = vehicle_spawn(spawner);
@@ -3791,11 +3791,11 @@ heli_pathnodes_think(heli) {
       eTarget = undefined;
       break;
     case "target_evac":
-      eTarget = getent("monument_target", "targetname");
+      eTarget = getEnt("monument_target", "targetname");
       bGunTarget = eTarget;
       break;
     case "target_crowsnest":
-      eTarget = getent("javelin_source_org", "targetname");
+      eTarget = getEnt("javelin_source_org", "targetname");
       bGunTarget = level.player;
       break;
     default:
@@ -3857,11 +3857,11 @@ AA_commerce_to_roof_init() {
 
 breach_double_door_swings_open() {
   flag_wait("roof_door_kicked");
-  door_to_roof_swing = getent("door_to_roof_swing", "targetname");
+  door_to_roof_swing = getEnt("door_to_roof_swing", "targetname");
   door_to_roof_swing.startingpos = self.origin;
   door_to_roof_swing.startingangles = self.angles;
-  door_to_roof_swing rotateyaw(-170, 0.5);
-  door_to_roof_swing moveto(door_to_roof_swing.origin + (11, 0, 0), 0.1);
+  door_to_roof_swing rotateYaw(-170, 0.5);
+  door_to_roof_swing moveTo(door_to_roof_swing.origin + (11, 0, 0), 0.1);
   door_to_roof_swing connectpaths();
 }
 
@@ -3885,9 +3885,9 @@ AI_breach_defenders_think() {
 AAA_sequence_get_to_roof() {
   flag_wait("only_2_javelin_enemies_remaining");
 
-  trigger_volume_breach_stairwell = getent("trigger_volume_breach_stairwell", "targetname");
+  trigger_volume_breach_stairwell = getEnt("trigger_volume_breach_stairwell", "targetname");
   trigger_volume_breach_stairwell trigger_off();
-  volume_breach_stairwell = getent("volume_breach_stairwell", "targetname");
+  volume_breach_stairwell = getEnt("volume_breach_stairwell", "targetname");
   thread roof_breach_monitor(volume_breach_stairwell);
   aBreachers = array_spawn(getEntArray("crowsnest_breachers", "targetname"));
   aBreachDefenders = array_spawn(getEntArray("friendlies_breach_defend", "targetname"));
@@ -3902,7 +3902,7 @@ AAA_sequence_get_to_roof() {
 
   flag_wait("crowsnest_sequence_finished");
   triggersEnable("colornodes_start_to_roof", "script_noteworthy", true);
-  trig_colornode = getent("colornodes_start_to_roof", "script_noteworthy");
+  trig_colornode = getEnt("colornodes_start_to_roof", "script_noteworthy");
   trig_colornode notify("trigger", level.player);
   level.squad = remove_dead_from_array(level.squad);
 
@@ -4029,7 +4029,7 @@ AI_roof_escape_redshirts_think() {
 }
 
 dummy_trigger(dummyName) {
-  dummy = getent(dummyName, "targetname");
+  dummy = getEnt(dummyName, "targetname");
   trigger = getEnt(dummy.script_LinkTo, "script_linkname");
   if(isDefined(trigger)) {
     trigger notify("trigger", level.player);
@@ -4441,19 +4441,19 @@ AAA_sequence_heli_ride() {
   flag_wait("player_headed_to_roof");
 
   level.AIdeleteExcluders = [];
-  spawner = getent("rooftop_helirider", "targetname");
+  spawner = getEnt("rooftop_helirider", "targetname");
   rooftop_helirider = spawner spawn_ai();
   if(isDefined(rooftop_helirider)) {
     rooftop_helirider thread AI_rooftop_helirider_think();
   }
 
-  spawner = getent("rooftop_defender", "targetname");
+  spawner = getEnt("rooftop_defender", "targetname");
   defender = spawner spawn_ai();
   if(isDefined(defender)) {
     defender thread AI_roof_defenders_think();
   }
 
-  turret2 = getent("turret2", "targetname");
+  turret2 = getEnt("turret2", "targetname");
   if(isDefined(turret2)) {
     turret2 delete();
   }
@@ -4471,15 +4471,15 @@ AAA_sequence_heli_ride() {
 
   player_blackhawk_setup();
   level.blackhawk Vehicle_SetSpeed(5);
-  heli_roof_approach_01_end = getent("heli_roof_approach_01_end", "targetname");
+  heli_roof_approach_01_end = getEnt("heli_roof_approach_01_end", "targetname");
   level.blackhawk SetLookAtEnt(heli_roof_approach_01_end);
 
   flag_wait("roof_littlebird_lifted_off");
   level.blackhawk clearlookatent();
-  heli_roof_approach_01 = getent("heli_roof_approach_01", "targetname");
+  heli_roof_approach_01 = getEnt("heli_roof_approach_01", "targetname");
   level.blackhawk thread vehicle_paths(heli_roof_approach_01);
   level.blackhawk Vehicle_SetSpeed(100);
-  level.blackhawk thread vehicle_heli_land(getent("heli_roof_land_01", "script_noteworthy"));
+  level.blackhawk thread vehicle_heli_land(getEnt("heli_roof_land_01", "script_noteworthy"));
   level.blackhawk waittill("landed");
   flag_set("blackhawk_landed");
 
@@ -4521,13 +4521,13 @@ AAA_sequence_heli_ride() {
   killSpawner(8);
   killSpawner(10);
 
-  volume_roof = getent("volume_roof", "targetname");
+  volume_roof = getEnt("volume_roof", "targetname");
   aAI_to_delete = volume_roof get_ai_touching_volume("axis");
   array_thread(aAI_to_delete, ::AI_delete);
   delaythread(1.5, ::delete_squad);
 
-  roof_seaknight_01 = getent("roof_seaknight_01", "targetname");
-  roof_seaknight_02 = getent("roof_seaknight_02", "targetname");
+  roof_seaknight_01 = getEnt("roof_seaknight_01", "targetname");
+  roof_seaknight_02 = getEnt("roof_seaknight_02", "targetname");
   roof_seaknight_01 notify("spawn");
   roof_seaknight_02 notify("spawn");
 
@@ -4543,17 +4543,17 @@ AAA_sequence_heli_ride() {
 
   ww2_heli = spawn_vehicle_from_targetname("ww2_heli");
 
-  path_player_heli = getstruct("path_player_heli", "targetname");
+  path_player_heli = getStruct("path_player_heli", "targetname");
   level.blackhawk vehicle_liftoff(76);
   level.blackhawk player_blackhawk_default_params();
   level.blackhawk thread player_blackhawk_default_params();
   level.blackhawk thread vehicle_paths(path_player_heli);
 
-  abrams_street = getent("abrams_street", "targetname");
+  abrams_street = getEnt("abrams_street", "targetname");
   abrams_street delete();
   m1a1_heliride_01 = spawn_vehicle_from_targetname_and_drive("m1a1_heliride_01");
   m1a1_heliride_02 = spawn_vehicle_from_targetname_and_drive("m1a1_heliride_02");
-  javelin_source_org = getent(m1a1_heliride_01.script_linkto, "script_linkname");
+  javelin_source_org = getEnt(m1a1_heliride_01.script_linkto, "script_linkname");
   newMissile = MagicBullet("javelin_dcburn", javelin_source_org.origin, m1a1_heliride_01.origin);
   newMissile thread javelin_earthquake();
   newMissile Missile_SetTargetEnt(m1a1_heliride_01);
@@ -4568,7 +4568,7 @@ AAA_sequence_heli_ride() {
   array_thread(level.effects_commerce, ::pauseEffect);
   array_thread(level.effects_bunker, ::pauseEffect);
 
-  eNode = getstruct("helipath_to_ww2_littlebird_wingman_armed", "targetname");
+  eNode = getStruct("helipath_to_ww2_littlebird_wingman_armed", "targetname");
   sSpawnerTargetname = "littlebird_wingman_armed";
   level.littlebird_wingman_armed = level.littlebird_wingman_armed heli_teleport_to_newpath(sSpawnerTargetname, eNode);
   level.littlebird_wingman_armed Vehicle_SetSpeed(100);
@@ -4576,7 +4576,7 @@ AAA_sequence_heli_ride() {
   level.littlebird_wingman_02 vehicle_delete();
   level.littlebird_wingman_02 = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_02_drone_roof");
 
-  eNode = getstruct("helipath_to_ww2_littlebird_wingman_01", "targetname");
+  eNode = getStruct("helipath_to_ww2_littlebird_wingman_01", "targetname");
   sSpawnerTargetname = "littlebird_wingman_01";
   level.littlebird_wingman_01 = level.littlebird_wingman_01 heli_teleport_to_newpath(sSpawnerTargetname, eNode);
   level.littlebird_wingman_01 Vehicle_SetSpeed(55);
@@ -4610,7 +4610,7 @@ AAA_sequence_heli_ride() {
   newMissile Missile_SetTargetEnt(humvee_heliride_01);
   newMissile Missile_SetFlightmodeTop();
 
-  sam_launch_ww2 = getstruct("sam_launch_ww2", "targetname");
+  sam_launch_ww2 = getStruct("sam_launch_ww2", "targetname");
   delaythread(1.5, ::sam_launch, 8, sam_launch_ww2, level.littlebird_wingman_02);
 
   flag_wait("player_heli_05");
@@ -4621,13 +4621,13 @@ AAA_sequence_heli_ride() {
 
   level.littlebird_wingman_armed Vehicle_SetSpeed(150);
 
-  javelin_littlebird_monument = getstruct("javelin_littlebird_monument", "targetname");
+  javelin_littlebird_monument = getStruct("javelin_littlebird_monument", "targetname");
   newMissile2 = MagicBullet("javelin_dcburn", javelin_littlebird_monument.origin, level.littlebird_wingman_02.origin);
   newMissile2 Missile_SetTargetEnt(level.littlebird_wingman_02);
-  littlebird_monument_crash = getstruct("littlebird_monument_crash", "targetname");
+  littlebird_monument_crash = getStruct("littlebird_monument_crash", "targetname");
   level.littlebird_wingman_02 thread maps\dcburning_fx::littlebird_monument_crash(littlebird_monument_crash);
 
-  eNode = getstruct("helipath_to_ww2_strafing_littlebird_wingman_armed", "targetname");
+  eNode = getStruct("helipath_to_ww2_strafing_littlebird_wingman_armed", "targetname");
   sSpawnerTargetname = "littlebird_wingman_armed";
   level.littlebird_wingman_armed = level.littlebird_wingman_armed heli_teleport_to_newpath(sSpawnerTargetname, eNode);
   level.littlebird_wingman_armed Vehicle_SetSpeed(90);
@@ -4727,7 +4727,7 @@ team_leader_gets_on_blackhawk(triggerApproach) {
   ent.forward = -50;
   ent.yaw = 180;
   ent translate_local();
-  animEnt linkto(level.blackhawk);
+  animEnt linkTo(level.blackhawk);
 
   level.teamleader notify("stop_teleport_hack");
 
@@ -4738,7 +4738,7 @@ team_leader_gets_on_blackhawk(triggerApproach) {
   triggerApproach waittill("trigger");
 
   animEnt anim_generic_reach(level.teamleader, "leader_blackhawk_getin");
-  level.teamleader linkto(animEnt);
+  level.teamleader linkTo(animEnt);
   animEnt anim_generic(level.teamleader, "leader_blackhawk_getin");
   animEnt thread anim_generic_loop(level.teamleader, "leader_blackhawk_idle", "stop_idle");
 }
@@ -4767,10 +4767,10 @@ AI_rooftop_helirider_think() {
   ent.forward = 21;
 
   ent translate_local();
-  animEnt linkto(level.blackhawk);
+  animEnt linkTo(level.blackhawk);
 
   animEnt anim_generic_reach(self, "redshirt_blackhawk_getin");
-  self linkto(animEnt);
+  self linkTo(animEnt);
   animEnt anim_generic(self, "redshirt_blackhawk_getin");
   animEnt thread anim_generic_loop(self, "redshirt_blackhawk_idle", "stop_idle");
 }
@@ -4838,7 +4838,7 @@ vehicle_ww2_enemy_helis_think() {
 
   self waittill("liftoff");
   self thread ground_heli_kill_player();
-  ePath = getstruct(self.script_Linkto, "script_linkname");
+  ePath = getStruct(self.script_Linkto, "script_linkname");
   dist = distance(self.origin, ePath.origin);
   self Vehicle_SetSpeed(10);
   self vehicle_liftoff(dist);
@@ -4867,7 +4867,7 @@ ground_heli_kill_player() {
 heli_at4_sequence() {
   flag_wait("player_getting_on_minigun");
 
-  spawner = getent("roof_rocket_guy", "targetname");
+  spawner = getEnt("roof_rocket_guy", "targetname");
   roof_rocket_guy = spawner spawn_ai(true);
   roof_rocket_guy thread AI_ignored_and_oblivious_on();
   roof_rocket_guy thread try_to_magic_bullet_shield();
@@ -4881,7 +4881,7 @@ heli_at4_sequence() {
   heli_roof thread heli_roof_think();
   heli_roof SetLookAtEnt(level.player);
   org = spawn("script_origin", heli_roof.origin + (0, 0, -20));
-  org linkto(heli_roof);
+  org linkTo(heli_roof);
   org thread ent_cleanup(heli_roof);
   attractor = Missile_CreateAttractorEnt(org, 2000, 10000, roof_rocket_guy);
 
@@ -4913,7 +4913,7 @@ heli_roof_think() {
   self waittill("death");
   flag_set("roof_heli_owned");
   earthquake(0.6, 1.2, level.player.origin, 1600);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 heli_roof_death_failsafe() {
@@ -4939,7 +4939,7 @@ littlebird_wingman_02_think() {
   level.littlebird_wingman_02 = spawn_vehicle_from_targetname("littlebird_wingman_02");
   level.littlebird_wingman_02 thread gopath();
 
-  pickup_node_before_stage = getstruct("pickup_node_before_stage", "script_noteworthy");
+  pickup_node_before_stage = getStruct("pickup_node_before_stage", "script_noteworthy");
   level.littlebird_wingman_02 set_stage(pickup_node_before_stage, aRoof_riders_left, "left");
   level.littlebird_wingman_02 set_stage(pickup_node_before_stage, aRoof_riders_right, "right");
 
@@ -4961,7 +4961,7 @@ littlebird_wingman_02_think() {
 
   level.littlebird_wingman_02 thread vehicle_liftoff(3);
 
-  heli_roof_loop_01 = getstruct("heli_roof_loop_01", "targetname");
+  heli_roof_loop_01 = getStruct("heli_roof_loop_01", "targetname");
   wait(1);
   level.littlebird_wingman_02 thread vehicle_paths(heli_roof_loop_01);
   level.littlebird_wingman_02 setmaxpitchroll(20, 50);
@@ -4976,10 +4976,10 @@ littlebird_wingman_armed_think() {
   level.littlebird_wingman_armed = spawn_vehicle_from_targetname_and_drive("littlebird_wingman_armed");
   level.littlebird_wingman_armed Vehicle_SetSpeed(25);
 
-  wingman_roof_node_01 = getstruct("wingman_roof_node_01", "script_noteworthy");
+  wingman_roof_node_01 = getStruct("wingman_roof_node_01", "script_noteworthy");
   wingman_roof_node_01 waittill("trigger");
 
-  roof_target_for_helis = getent("roof_target_for_helis", "targetname");
+  roof_target_for_helis = getEnt("roof_target_for_helis", "targetname");
   level.littlebird_wingman_armed SetLookAtEnt(roof_target_for_helis);
   level.littlebird_wingman_armed Vehicle_SetSpeed(10);
 
@@ -5072,7 +5072,7 @@ AAA_sequence_heli_ride2() {
   targetOrg thread ent_cleanup(littlebird_wingman_02_drone_crash);
   attractor = Missile_CreateAttractorEnt(targetOrg, 8000, 3000);
 
-  missile_org_lincoln = getent("missile_org_lincoln", "targetname");
+  missile_org_lincoln = getEnt("missile_org_lincoln", "targetname");
 
   eMissile1 = magicBullet("slamraam_missile_dcburning", missile_org_lincoln.origin, targetOrg.origin);
   wait(.5);
@@ -5086,7 +5086,7 @@ AAA_sequence_heli_ride2() {
 
   newMissile2 = MagicBullet("javelin_dcburn", missile_org_lincoln.origin, littlebird_wingman_02_drone_crash.origin);
   newMissile2 Missile_SetTargetEnt(littlebird_wingman_02_drone_crash);
-  littlebird_crash_ww2 = getstruct("littlebird_crash_ww2", "targetname");
+  littlebird_crash_ww2 = getStruct("littlebird_crash_ww2", "targetname");
   littlebird_wingman_02_drone_crash thread maps\dcburning_fx::littlebird_monument_crash(littlebird_crash_ww2);
 
   flag_wait("player_heli_18b");
@@ -5096,7 +5096,7 @@ AAA_sequence_heli_ride2() {
   level.blackhawk thread play_sound_in_space("blackhawk_down_missile_impact");
   level.player thread play_sound_in_space("blackhawk_helicopter_secondary_exp");
   playFX(level._effect["player_death_explosion"], level.player.origin + (0, 0, 50));
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player dodamage(10, level.player.origin);
   thread player_heli_damaged_think();
   thread player_heli_damaged_earthquake();
@@ -5187,7 +5187,7 @@ AAA_sequence_heli_ride2() {
 
   level.blackhawk Vehicle_SetSpeed(150, 50, 50);
   playFX(level._effect["player_death_explosion"], level.player.origin);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.blackhawk useby(level.player);
   level.player unlink();
   level.player disableWeapons();
@@ -5215,7 +5215,7 @@ AAA_sequence_heli_ride2() {
 
   earthquake(.7, 2.5, level.player.origin, 1600);
   playFX(level._effect["player_death_explosion"], level.player.origin);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player notify("stop sound" + "dcburning_heli_alarm");
   level.blackhawk notify("stop sound" + "blackhawk_helicopter_dying_loop");
   wait(.1);
@@ -5244,7 +5244,7 @@ AAA_sequence_heli_ride2() {
 
 player_heli_damaged_think() {
   dummy = spawn_tag_origin();
-  dummy linkto(level.blackhawk, "tag_guy5", (0, 0, 0), (0, 0, 0));
+  dummy linkTo(level.blackhawk, "tag_guy5", (0, 0, 0), (0, 0, 0));
   while(!flag("player_crash_done")) {
     playFXOnTag(getfx("dlight_red"), dummy, "tag_origin");
     wait(1);
@@ -5332,7 +5332,7 @@ obj_follow_sgt_macey() {
 obj_commerce() {
   flag_wait("obj_commerce_given");
   objective_number = 2;
-  obj_position = getstruct("obj_commerce_sector_1", "targetname");
+  obj_position = getStruct("obj_commerce_sector_1", "targetname");
 
   objective_add(objective_number, "active", &"DCBURNING_OBJ_COMMERCE");
   objective_current(objective_number);
@@ -5341,7 +5341,7 @@ obj_commerce() {
   flag_wait("player_around_corner_to_crows_nest");
 
   objective_position(objective_number, (0, 0, 0));
-  obj_position = getstruct("obj_commerce_sector_3", "targetname");
+  obj_position = getStruct("obj_commerce_sector_3", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("obj_commerce_complete");
@@ -5352,7 +5352,7 @@ obj_commerce() {
 obj_commerce_defend_snipe() {
   flag_wait("obj_commerce_defend_snipe_given");
   objective_number = 3;
-  obj_position = getstruct("obj_commerce_defend_snipe", "targetname");
+  obj_position = getStruct("obj_commerce_defend_snipe", "targetname");
 
   objective_add(objective_number, "active", &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", obj_position.origin);
   objective_current(objective_number);
@@ -5382,8 +5382,8 @@ obj_commerce_defend_crow() {
   objective_number = 4;
 
   objective_add(objective_number, "invisible", &"DCBURNING_OBJ_COMMERCE_DEFEND_CROW");
-  crow_defend_obj1 = getent("crow_defend_obj1", "targetname");
-  crow_defend_obj2 = getent("crow_defend_obj2", "targetname");
+  crow_defend_obj1 = getEnt("crow_defend_obj1", "targetname");
+  crow_defend_obj2 = getEnt("crow_defend_obj2", "targetname");
   objective_additionalposition(objective_number, 0, crow_defend_obj1.origin);
   objective_additionalposition(objective_number, 1, crow_defend_obj2.origin);
   Objective_SetPointerTextOverride(objective_number, &"DCBURNING_OBJ_TEXT_DEFEND");
@@ -5398,7 +5398,7 @@ obj_commerce_defend_javelin() {
   flag_wait("obj_commerce_defend_javelin_given");
   wait(.5);
   objective_number = 5;
-  obj_position = getstruct("obj_jav_defend2", "targetname");
+  obj_position = getStruct("obj_jav_defend2", "targetname");
 
   objective_add(objective_number, "active", &"DCBURNING_OBJ_COMMERCE_DEFEND_JAVELIN");
   objective_current(objective_number);
@@ -5446,37 +5446,37 @@ obj_rooftop() {
   flag_wait("obj_rooftop_given");
   objective_number = 6;
 
-  obj_position = getstruct("obj_commerce_roof", "targetname");
+  obj_position = getStruct("obj_commerce_roof", "targetname");
 
   objective_add(objective_number, "active", &"DCBURNING_OBJ_ROOFTOP", obj_position.origin);
   objective_current(objective_number);
 
   flag_wait("player_roof_stairs_00");
-  obj_position = getstruct("obj_commerce_roof02", "targetname");
+  obj_position = getStruct("obj_commerce_roof02", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_roof_stairs_01");
-  obj_position = getstruct("obj_commerce_roof03", "targetname");
+  obj_position = getStruct("obj_commerce_roof03", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_roof_stairs_02");
-  obj_position = getstruct("obj_commerce_roof03a", "targetname");
+  obj_position = getStruct("obj_commerce_roof03a", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_outer_balcony_top_commerce");
-  obj_position = getstruct("obj_commerce_roof03b", "targetname");
+  obj_position = getStruct("obj_commerce_roof03b", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_headed_to_roof");
-  obj_position = getstruct("obj_commerce_roof03c", "targetname");
+  obj_position = getStruct("obj_commerce_roof03c", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_approach_commerce_roof_01");
-  obj_position = getstruct("obj_commerce_roof03d", "targetname");
+  obj_position = getStruct("obj_commerce_roof03d", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_approach_commerce_roof_02");
-  obj_position = getstruct("obj_commerce_roof04", "targetname");
+  obj_position = getStruct("obj_commerce_roof04", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("obj_rooftop_complete");
@@ -5490,7 +5490,7 @@ obj_heli_mount() {
 
   obj_org = spawn("script_origin", (0, 0, 0));
   obj_org.origin = level.blackhawk gettagorigin("tag_player");
-  obj_org linkto(level.blackhawk, "tag_player", (0, 0, 25), (0, 0, 0));
+  obj_org linkTo(level.blackhawk, "tag_player", (0, 0, 25), (0, 0, 0));
   objective_add(objective_number, "active", &"DCBURNING_OBJ_HELI_MOUNT", obj_org.origin);
   objective_current(objective_number);
 
@@ -5929,7 +5929,7 @@ AI_jav_sting_spot_react() {
     self.reference notify("stop_idle");
   }
   self notify("stop_idle");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   anim_generic(self, self.sAnimReact);
   self.deathanim = undefined;
 
@@ -6061,7 +6061,7 @@ AI_drone_headshot_death(trigger) {
   thread play_sound_in_space("weap_deserteagle_fire_npc", self.origin);
   thread play_sound_in_space("bullet_large_flesh", self.origin);
   headOrigin = self gettagorigin("tag_eye");
-  vec = vectornormalize(headOrigin - origin);
+  vec = vectorNormalize(headOrigin - origin);
   playFX(getfx("headshot"), headOrigin, vec);
   playFXOnTag(getfx("bodyshot"), self, "tag_eye");
 
@@ -6358,7 +6358,7 @@ vehicle_heli_land(eNode) {
 
 heli_cargo_liftoff_and_go() {
   assertex(isDefined(self.script_noteworthy), "Heli at " + self.origin + " needs to have a script_noteworthy that matches the script_noteworthy of the path you will attach it to.");
-  ePath = getstruct(self.script_noteworthy, "script_noteworthy");
+  ePath = getStruct(self.script_noteworthy, "script_noteworthy");
   assertex(isDefined(ePath), "Heli at " + self.origin + " needs to have a script_noteworthy that matches the script_noteworthy of the path you will attach it to.");
   dist = distance(self.origin, ePath.origin);
   self vehicle_liftoff(dist);
@@ -6423,7 +6423,7 @@ vehicle_think() {
 
 vehicle_slamraam_think() {
   self endon("death");
-  self setturrettargetent(level.player);
+  self setturrettargetEnt(level.player);
   foreach(tag in self.missileTags) {
     self attach(self.missileModel, tag);
   }
@@ -6447,9 +6447,9 @@ vehicle_slamraam_think() {
 
 custom_rumble() {
   org = spawn("script_origin", self.origin + (0, 0, 0));
-  org linkto(self);
+  org linkTo(self);
   while(isDefined(self)) {
-    org PlayRumbleOnEntity("crash_heli_rumble");
+    org playRumbleOnEntity("crash_heli_rumble");
     wait(.4);
   }
   org delete();
@@ -6725,13 +6725,13 @@ vehicle_death(killedByPlayerJavelin) {
   self notify("death", level.player, "MOD_PROJECTILE");
   if(isDefined(killedByPlayerJavelin)) {
     earthquake(0.25, 0.75, level.player.origin, 1250);
-    level.player PlayRumbleOnEntity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 }
 
 ai_ambient_prop_think() {
   self endon("death");
-  eProp = getent(self.target, "targetname");
+  eProp = getEnt(self.target, "targetname");
   self thread delete_on_death(eProp);
   sAnim = self.animation;
   assert(isDefined(eProp));
@@ -6846,7 +6846,7 @@ ai_ambient_cleanup() {
 }
 
 make_ambient_ai(targetname) {
-  spawner = getent(targetname, "targetname");
+  spawner = getEnt(targetname, "targetname");
   self.script_flag = spawner.script_flag;
   self.animation = spawner.animation;
   self.eAnimEnt = spawner;
@@ -6900,14 +6900,14 @@ ai_ambient_noprop_think() {
       bSpecial = true;
       return;
     case "wounded_carry_fastwalk_carrier":
-      spawner = getent(self.target, "targetname");
+      spawner = getEnt(self.target, "targetname");
       eBuddy = spawner spawn_ai();
       self.eAnimEnt anim_generic_first_frame(self, sAnim);
       self.eAnimEnt anim_generic_first_frame(eBuddy, "wounded_carry_fastwalk_wounded");
 
       eBuddy gun_remove();
       bSpecial = true;
-      eEndOrg = getent(self.script_Linkto, "script_linkname");
+      eEndOrg = getEnt(self.script_Linkto, "script_linkname");
       if(isDefined(self.script_flag)) {
         flag_wait(self.script_flag);
       }
@@ -7064,7 +7064,7 @@ dialogue_random_incoming_javelins() {
 
 javelin_earthquake() {
   dummy = spawn("script_origin", self.origin);
-  dummy linkto(self);
+  dummy linkTo(self);
   self waittill("death");
   earthquake(1.2, 1.5, dummy.origin, 1600);
   wait(0.05);
@@ -7140,7 +7140,7 @@ flicker_fire() {
 
 flare_burst_on_and_flicker(rampUpTime, rampDownTime, intensity) {
   assertex(self.classname == "script_model", "This function can only be called on a script_model. Preferably mil_emergency_flare");
-  dynamicLight = getent(self.target, "targetname");
+  dynamicLight = getEnt(self.target, "targetname");
   assertex(maps\_lights::is_light_entity(dynamicLight), "The flare script_model must be targeting a scriptable primary light");
 
   playFXOnTag(getfx("flare_ambient"), self, "TAG_FIRE_FX");
@@ -7193,7 +7193,7 @@ flare_ramp_down(transitionTime) {
 
 flare_flicker(minIntensity, maxIntensity) {
   assertex(self.classname == "script_model", "This function can only be called on a script_model. Preferably mil_emergency_flare");
-  dynamicLight = getent(self.target, "targetname");
+  dynamicLight = getEnt(self.target, "targetname");
   assertex(maps\_lights::is_light_entity(dynamicLight), "The flare script_model must be targeting a scriptable primary light");
 
   if(!isDefined(minIntensity)) {
@@ -7411,7 +7411,7 @@ vehicle_animated_think() {
 }
 hack_height_for_seaknight() {
   wait(5);
-  self moveto(self.origin + (0, 0, 550), 10);
+  self moveTo(self.origin + (0, 0, 550), 10);
 }
 
 animated_seaknight_riders_think(aRiders) {
@@ -7566,7 +7566,7 @@ door_fall_over(org) {
   earthquake(.2, .75, self.origin, 1024);
   self connectpaths();
   self notsolid();
-  self moveto(self.origin + (0, 0, 2), .5, 0, .5);
+  self moveTo(self.origin + (0, 0, 2), .5, 0, .5);
   self rotatepitch(-90, 0.45, 0.40);
   wait 0.449;
   self rotateroll(4, 0.2, 0, 0.2);
@@ -7623,7 +7623,7 @@ AI_cleanup_volume(sVolume, sTeam, dist) {
   if(!isDefined(dist)) {
     dist = 1024;
   }
-  eVolume = getent(sVolume, "targetname");
+  eVolume = getEnt(sVolume, "targetname");
   aAI_to_delete = eVolume get_ai_touching_volume(sTeam);
 
   if(sTeam != "axis") {
@@ -7710,10 +7710,10 @@ AI_invisible_patrol_fodder_think() {
 AI_at4_friendly_think() {}
 
 spawn_trigger_dummy(sDummyTargetname) {
-  ent = getent(sDummyTargetname, "targetname");
+  ent = getEnt(sDummyTargetname, "targetname");
   assert(isDefined(ent));
   assert(isDefined(ent.script_linkTo));
-  trig = getent(ent.script_linkTo, "script_linkname");
+  trig = getEnt(ent.script_linkTo, "script_linkname");
   assert(isDefined(trig));
   trig notify("trigger", level.player);
 }
@@ -7825,8 +7825,8 @@ killSpawner(num) {
 }
 
 rpg_targets_think() {
-  eTrigger = getent(self.script_Linkto, "script_linkname");
-  eRPGsource = getent(self.target, "targetname");
+  eTrigger = getEnt(self.script_Linkto, "script_linkname");
+  eRPGsource = getEnt(self.target, "targetname");
   sFlagToEnd = self.script_flag;
   level endon(sFlagToEnd);
   assert(isDefined(eTrigger));
@@ -7861,11 +7861,11 @@ fx_management() {
     volume.fx = [];
   }
 
-  effects_commerce = getent("effects_commerce", "script_noteworthy");
-  effects_trenches = getent("effects_trenches", "script_noteworthy");
-  effects_bunker = getent("effects_bunker", "script_noteworthy");
-  effects_ww2 = getent("effects_ww2", "script_noteworthy");
-  effects_lincoln = getent("effects_lincoln", "script_noteworthy");
+  effects_commerce = getEnt("effects_commerce", "script_noteworthy");
+  effects_trenches = getEnt("effects_trenches", "script_noteworthy");
+  effects_bunker = getEnt("effects_bunker", "script_noteworthy");
+  effects_ww2 = getEnt("effects_ww2", "script_noteworthy");
+  effects_lincoln = getEnt("effects_lincoln", "script_noteworthy");
 
   dummy = spawn("script_origin", (0, 0, 0));
   for(i = 0; i < level.createfxent.size; i++) {

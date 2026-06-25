@@ -771,7 +771,7 @@ function function_7a00e117() {
 }
 
 function function_be89decb() {
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     var_b8c2f693 = array::random(self.var_2b74c8fe);
   } else {
     var_b8c2f693 = array::random(self.var_82971641);
@@ -830,7 +830,7 @@ function private setup_devgui() {
 
 function private function_c1091a8f(str_cmd, key) {
   var_8327ff7c = getdvarint(#"hash_7877ee182ba11433", 0);
-  a_players = getplayers();
+  a_players = getPlayers();
   keys = getarraykeys(level.bgb);
   var_6c522f60 = 0;
 

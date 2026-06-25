@@ -114,13 +114,13 @@ func_6887(var_0) {
 func_688E(var_0) {
   var_1 = 300;
   var_2 = _getcsplineid(var_0.var_10A45);
-  var_3 = getent("salter_dogandpony", "targetname");
+  var_3 = getEnt("salter_dogandpony", "targetname");
   level.var_EA99 = func_688C(var_3, var_1);
   level.var_EA99 func_0BDC::func_1998();
   level.var_EA99 thread func_0BDC::func_A1EF(var_2);
   level.var_EA99 thread func_0C1B::func_6EAC();
   wait 1.2;
-  var_4 = getent("salter_enemy_dogandpony", "targetname");
+  var_4 = getEnt("salter_enemy_dogandpony", "targetname");
   var_0.enemy = func_688C(var_4, var_1);
   var_0.enemy thread func_0BDC::func_A1EF(var_2);
   wait 0.2;
@@ -343,7 +343,7 @@ func_67E9(var_0) {
     var_6 = anglesToForward(var_5.angles);
     var_7 = var_5.origin + var_6 * 9000;
     var_8 = var_7 - level.var_D127.origin;
-    var_9 = vectordot(vectornormalize(var_8), var_1);
+    var_9 = vectordot(vectorNormalize(var_8), var_1);
 
     if(var_9 < 0.9) {
       var_0.var_A419 = scripts\engine\utility::array_remove(var_0.var_A419, var_5);
@@ -392,7 +392,7 @@ func_67E9(var_0) {
       continue;
     }
     var_6 = anglesToForward(var_5.angles);
-    var_14 = vectordot(vectornormalize(var_8), var_6);
+    var_14 = vectordot(vectorNormalize(var_8), var_6);
 
     if(var_14 < 0.1) {
       continue;
@@ -474,13 +474,13 @@ func_6825(var_0) {
     return 0;
   }
 
-  var_4 = vectordot(vectornormalize(level.var_D127.origin - self.origin), var_1);
+  var_4 = vectordot(vectorNormalize(level.var_D127.origin - self.origin), var_1);
 
   if(var_4 < 0.7) {
     return 0;
   }
 
-  var_4 = vectordot(vectornormalize(var_2), var_0);
+  var_4 = vectordot(vectorNormalize(var_2), var_0);
 
   if(var_4 < 0.85) {
     return 0;
@@ -564,7 +564,7 @@ func_682E(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
   var_3 = self.origin + var_2 * 9000;
   var_4 = var_3 - level.var_D127.origin;
-  var_5 = vectordot(vectornormalize(var_4), var_0);
+  var_5 = vectordot(vectorNormalize(var_4), var_0);
 
   if(var_1) {
     var_6 = 0.97;
@@ -583,7 +583,7 @@ func_682E(var_0, var_1) {
   }
 
   if(var_1) {
-    var_8 = vectordot(vectornormalize(level.var_D127.origin - self.origin), var_2);
+    var_8 = vectordot(vectorNormalize(level.var_D127.origin - self.origin), var_2);
 
     if(var_8 < -0.1) {
       return 0;
@@ -644,7 +644,7 @@ func_686E(var_0, var_1, var_2) {
       if(!var_2) {
         var_7 func_0B76::func_A279();
       } else {
-        var_7 linkto(self.enemy);
+        var_7 linkTo(self.enemy);
         var_7 thread func_0B76::func_B804();
       }
     } else {
@@ -703,18 +703,18 @@ func_6835(var_0, var_1, var_2) {
   }
   var_0 endon("death");
   var_0 endon("stop_strafeattack");
-  var_3 = spawnvehicle("veh_mil_air_un_jackal_02", "player_sled", "jackal_un", level.var_D127.origin, level.var_D127.angles);
+  var_3 = spawnVehicle("veh_mil_air_un_jackal_02", "player_sled", "jackal_un", level.var_D127.origin, level.var_D127.angles);
   var_3 hide();
   var_3 notsolid();
   var_3 makeentitysentient("allies", 0);
-  var_3 linkto(var_0, "j_mainroot_ship", (8000, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_0, "j_mainroot_ship", (8000, 0, 0), (0, 0, 0));
   var_4 = scripts\engine\utility::spawn_script_origin();
   var_0.ignoreme = 1;
   var_0 func_0BDC::func_19A2();
   var_0 func_0BDC::func_199B();
   var_0 func_0BDC::func_19B0("fly");
   var_0 vehicle_teleport(var_1, level.var_D127.angles);
-  var_0 linkto(level.var_D127);
+  var_0 linkTo(level.var_D127);
   var_0 notsolid();
   var_0 scripts\engine\utility::delaycall(3, ::solid);
   var_0 thread func_6834();
@@ -797,7 +797,7 @@ func_6833(var_0) {
     if(var_3 == 0) {
       break;
     }
-    var_4 = vectornormalize(self.origin - level.var_D127.origin);
+    var_4 = vectorNormalize(self.origin - level.var_D127.origin);
     var_0.origin = level.var_D127.origin + var_4 * var_2;
     var_0 playSound("enemy_lockon_bullet_impacts");
     thread scripts\engine\utility::play_sound_in_space("enemy_lockon_whizby", var_0.origin);
@@ -891,7 +891,7 @@ func_6508() {
 
   var_0 = self.origin - level.var_D127.origin;
   var_1 = length(var_0);
-  var_2 = vectornormalize(var_0);
+  var_2 = vectorNormalize(var_0);
   var_3 = vectordot(anglesToForward(level.var_D127.angles), var_2);
 
   if(var_3 > -0.0) {
@@ -1034,7 +1034,7 @@ func_6507() {
 
   var_0 = self.origin - level.var_D127.origin;
   var_1 = length(var_0);
-  var_2 = vectornormalize(var_0);
+  var_2 = vectorNormalize(var_0);
   var_3 = vectordot(anglesToForward(level.var_D127.angles), var_2);
 
   if(var_3 > -0.45) {
@@ -1046,7 +1046,7 @@ func_6507() {
   }
 
   var_4 = self.origin - level.var_D127.origin;
-  var_2 = vectornormalize(var_4);
+  var_2 = vectorNormalize(var_4);
   var_3 = vectordot(anglesToForward(self.angles), var_2);
 
   if(var_3 < 0.0) {
@@ -1068,7 +1068,7 @@ func_64D4() {
   self.var_20F5 = 0;
   self.var_647D = 0.0;
   self.var_B8A4 = [];
-  self.var_138F4 linkto(level.var_D127, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self.var_138F4 linkTo(level.var_D127, "tag_origin", (0, 0, 0), (0, 0, 0));
   thread func_64A1();
 }
 
@@ -1188,7 +1188,7 @@ func_64AD() {
   self.var_C4BB = var_13;
   func_64DC(1);
   var_16 = (randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0);
-  var_16 = vectornormalize(var_16);
+  var_16 = vectorNormalize(var_16);
   var_16 = var_16 * var_13;
   var_0 = var_16[0];
   var_1 = var_16[1];
@@ -1391,7 +1391,7 @@ func_6869() {
       if(var_1 < self.var_B464) {
         break;
       }
-      var_2 = vectornormalize(var_0);
+      var_2 = vectorNormalize(var_0);
       self.angles = vectortoangles(var_2);
       self.origin = self.origin + var_2 * self.var_B464;
       wait 0.05;
@@ -1639,7 +1639,7 @@ func_64AE() {
   self.enemy func_0BDC::func_19AE("dont_shoot");
   self.enemy func_0BDC::func_19B5(level.var_D127);
   self.enemy vehicle_teleport(var_1, level.var_D127.angles);
-  self.enemy linkto(self.var_323B, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self.enemy linkTo(self.var_323B, "tag_origin", (0, 0, 0), (0, 0, 0));
   self.enemy.ignoreme = 1;
 
   if(isDefined(self.enemy._blackboard) && self.enemy._blackboard.var_C97C) {
@@ -1736,7 +1736,7 @@ func_64B8(var_0) {
     setomnvar("ui_jackal_enemy_lockon_isfiring", 1);
 
     if(self.var_C4B9) {
-      var_3 = vectornormalize(self.var_323B.origin - level.var_D127.origin);
+      var_3 = vectorNormalize(self.var_323B.origin - level.var_D127.origin);
       var_4 = level.var_D127.origin + var_3 * var_1;
       self.var_13D10 playSound("enemy_lockon_bullet_impacts");
       level.var_D127 getrandomarmkillstreak(var_2, var_4, self.enemy, self.enemy, "MOD_PROJECTILE", "spaceship_scripted_locked_enemy_bullets");
@@ -1799,7 +1799,7 @@ func_11A95(var_0, var_1, var_2, var_3) {
   self.var_3240.origin = var_16 + var_21;
   var_22 = rotatevector((var_18 * var_11 + var_19 * var_6 * var_0 + var_20 * var_7 * var_1 * -1) * var_8, var_14);
   self.var_323B.origin = var_16 + var_22;
-  var_23 = vectornormalize(self.var_3240.origin - self.var_323B.origin);
+  var_23 = vectorNormalize(self.var_3240.origin - self.var_323B.origin);
   self.var_323B.angles = _axistoangles(var_23, var_19, var_20);
   self.var_13D10.origin = self.var_323B.origin + var_11 * var_23 * -1;
   self.var_13D10.angles = self.var_323B.angles;
@@ -1815,7 +1815,7 @@ func_64AA() {
     var_1 = self gettagorigin("j_mainroot_ship");
     var_2 = self gettagangles("j_mainroot_ship");
     var_3 = var_1 - var_0;
-    var_4 = vectornormalize(var_1 - var_0);
+    var_4 = vectorNormalize(var_1 - var_0);
     var_5 = length(var_3);
     var_6 = func_64AB(var_0, var_4, var_5);
 

@@ -48,7 +48,7 @@ function function_dab39bb8(rocket) {
     }
 
     eyepoint = enemy getEye();
-    relativepos = vectornormalize(self.origin - eyepoint);
+    relativepos = vectorNormalize(self.origin - eyepoint);
     dir = anglesToForward(enemy getplayerangles());
     dotproduct = vectordot(relativepos, dir);
 

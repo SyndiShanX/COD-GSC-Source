@@ -26,9 +26,9 @@ skipto_menendez_enter_mission() {
   sp_truck_gunner add_spawn_function(::func_spawn_truck_gunner);
   sp_truck_driver = get_ent("cartel_courtyard_truck_driver", "targetname", 1);
   sp_truck_driver add_spawn_function(::func_spawn_truck_driver);
-  e_trigger = getent("objective_to_mission_part2_trigger", "targetname");
+  e_trigger = getEnt("objective_to_mission_part2_trigger", "targetname");
   str_struct_name = e_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_menendez_save_josefina, s_struct, "");
   level.player setclientdvar("cg_aggressiveCullRadius", 495);
   model_removal_through_model_convert_system("menendez_lower_village");
@@ -59,7 +59,7 @@ main() {
   flag_wait("truck_drives_through_gate");
   cleanup_ents("menendez_to_mission");
   spawn_manager_enable("sm_mem_truck_target_left");
-  vh_truck = getent("cartel_courtyard_truck", "targetname");
+  vh_truck = getEnt("cartel_courtyard_truck", "targetname");
   vh_truck thread truck_speed_logic();
   vh_truck truck_bashes_gate();
   level thread nicaragua_enter_mission_vo();
@@ -131,7 +131,7 @@ init_spawn_functions() {
 mem_truck_target_logic() {
   wait 0.05;
   self waittill("goal");
-  vh_truck = getent("cartel_courtyard_truck", "targetname");
+  vh_truck = getEnt("cartel_courtyard_truck", "targetname");
   vh_truck add_turret_priority_target(self, 1);
 }
 
@@ -149,13 +149,13 @@ meme_courtyard_spawn_truck_target_center_early() {
 
 mem_courtyard_kill_optional_spawns() {
   trigger_wait("sm_mem_courtyard_center_0");
-  t_spawn_manager = getent("sm_mem_courtyard_right_0", "targetname");
+  t_spawn_manager = getEnt("sm_mem_courtyard_right_0", "targetname");
 
   if(isDefined(t_spawn_manager)) {
     t_spawn_manager delete();
   }
 
-  t_spawn_manager = getent("sm_mem_courtyard_left_1", "targetname");
+  t_spawn_manager = getEnt("sm_mem_courtyard_left_1", "targetname");
 
   if(isDefined(t_spawn_manager)) {
     t_spawn_manager delete();
@@ -167,14 +167,14 @@ event_global_setup() {
 }
 
 nicaragua_enter_mission_objectives() {
-  e_trigger = getent("objective_to_mission_part2_trigger", "targetname");
+  e_trigger = getEnt("objective_to_mission_part2_trigger", "targetname");
   e_trigger waittill("trigger");
   set_objective(level.obj_menendez_save_josefina, undefined, "remove");
   autosave_by_name("to_misssion_part2");
   level clientnotify("chc_bls");
-  e_trigger = getent("menendez_reaches_mission_trigger", "targetname");
+  e_trigger = getEnt("menendez_reaches_mission_trigger", "targetname");
   str_struct_name = e_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_menendez_save_josefina, s_struct, "");
   e_trigger waittill("trigger");
   set_objective(level.obj_menendez_save_josefina, undefined, "remove");
@@ -268,7 +268,7 @@ _trigger_fallback(e_volume, b_sprint, n_delay) {
   self cleargoalvolume();
   n_time_started = gettime();
   n_old_radius = self.goalradius;
-  self set_goalradius(64);
+  self set_goalRadius(64);
 
   if(isDefined(self.rusher) && self.rusher) {
     self maps\_rusher::rusher_go_back_to_normal(undefined, undefined, 1);
@@ -283,7 +283,7 @@ _trigger_fallback(e_volume, b_sprint, n_delay) {
 
   self waittill("goal");
   debug_print_line("guy took " + (gettime() - n_time_started) * 0.001 + " seconds to fall back");
-  self set_goalradius(n_old_radius);
+  self set_goalRadius(n_old_radius);
 
   if(b_sprint) {
     self set_ignoreall(0);

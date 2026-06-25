@@ -15,7 +15,7 @@ initBridgeRiser(bridge_location) {
       bridge_trigs = getEntArray("br_nw_buy_trigger", "targetname");
       array_thread(bridge_trigs, ::bridgeRiserThink, "br_nw");
 
-      level.brVolumeNW = getent("br_nw_volume", "targetname");
+      level.brVolumeNW = getEnt("br_nw_volume", "targetname");
 
       break;
 
@@ -23,7 +23,7 @@ initBridgeRiser(bridge_location) {
       bridge_trigs = getEntArray("br_se_buy_trigger", "targetname");
       array_thread(bridge_trigs, ::bridgeRiserThink, "br_se");
 
-      level.sgVolume = getent("br_se_volume", "targetname");
+      level.sgVolume = getEnt("br_se_volume", "targetname");
 
       break;
 
@@ -31,7 +31,7 @@ initBridgeRiser(bridge_location) {
       bridge_trigs = getEntArray("br_sw_buy_trigger", "targetname");
       array_thread(bridge_trigs, ::bridgeRiserThink, "br_sw");
 
-      level.brVolumeSW = getent("br_sw_volume", "targetname");
+      level.brVolumeSW = getEnt("br_sw_volume", "targetname");
 
       break;
 
@@ -43,7 +43,7 @@ bridgeRiserThink(bridge_area_name) {
   self.is_available = undefined;
   self.in_use = 0;
 
-  bridgeVolume = getent(bridge_area_name + "_volume", "targetname");
+  bridgeVolume = getEnt(bridge_area_name + "_volume", "targetname");
   bridgeTriggers = getEntArray(bridge_area_name + "_buy_trigger", "targetname");
   bridgeFX = getEntArray(bridge_area_name + "_fx", "targetname");
 
@@ -113,7 +113,7 @@ bridgeRiserThink(bridge_area_name) {
               junk[i] solid();
             }
 
-            junk[i] disconnectpaths();
+            junk[i] disconnectPaths();
           }
 
           array_thread(bridgeTriggers, ::trigger_on);

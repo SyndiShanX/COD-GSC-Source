@@ -173,7 +173,7 @@ func_1082F(var_0, var_1, var_2, var_3) {
   var_4.helitype = "littlebird";
   var_4.var_10955 = ::func_3758;
   var_5 = spawnturret("misc_turret", var_4.origin, "apache_minigun_mp");
-  var_5 linkto(var_4, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_4, "tag_turret", (0, 0, 0), (0, 0, 0));
   var_5 setModel("vehicle_apache_mg");
   var_5.angles = var_4.angles;
   var_5.owner = var_4.owner;
@@ -183,7 +183,7 @@ func_1082F(var_0, var_1, var_2, var_3) {
   var_6 = var_4.origin + anglesToForward(var_4.angles) * -200 + anglestoright(var_4.angles) * -200 + (0, 0, 50);
   var_5.killcament = spawn("script_model", var_6);
   var_5.killcament setscriptmoverkillcam("explosive");
-  var_5.killcament linkto(var_4, "tag_origin");
+  var_5.killcament linkTo(var_4, "tag_origin");
   var_4.var_B6BC = var_5;
   var_4.var_B6BC setdefaultdroppitch(0);
   var_4.var_B6BC give_player_session_tokens("auto_nonai");

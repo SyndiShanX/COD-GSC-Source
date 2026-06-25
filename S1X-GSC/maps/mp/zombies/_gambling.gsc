@@ -271,7 +271,7 @@ plinko_init_gate(var_0) {
 
   var_5 = var_0.open_origin - var_0.close_origin;
   var_0.move_dist = length(var_5);
-  var_0.move_dir = vectornormalize(var_5);
+  var_0.move_dir = vectorNormalize(var_5);
   self.gates[self.gates.size] = var_0;
 }
 
@@ -298,7 +298,7 @@ plinko_move_gate(var_0, var_1, var_2) {
   var_3 = var_0.close_origin + var_0.move_dir * var_1;
 
   if(var_3 != var_0.origin) {
-    var_0 moveto(var_3, var_2);
+    var_0 moveTo(var_3, var_2);
   }
 }
 
@@ -374,7 +374,7 @@ plinko_gates_pattern_close_when_looked_at(var_0, var_1, var_2, var_3, var_4, var
 
     foreach(var_11 in level.players) {
       var_12 = anglesToForward(var_11 getplayerangles());
-      var_13 = vectornormalize(var_8 - var_11 getvieworigin());
+      var_13 = vectorNormalize(var_8 - var_11 getvieworigin());
       var_14 = vectordot(var_12, var_13);
 
       if(var_14 > var_7) {
@@ -947,8 +947,8 @@ plinko_run_use_trigger() {
   var_1 = 3;
 
   for(;;) {
-    self.trigger setcursorhint("HINT_NOICON");
-    self.trigger sethintstring("Activate Plinko");
+    self.trigger setCursorHint("HINT_NOICON");
+    self.trigger setHintString("Activate Plinko");
     self.trigger setsecondaryhintstring(maps\mp\zombies\_util::getcoststring(var_0));
     self.trigger waittill("trigger", var_2);
     var_3 = plinko_get_available_token();
@@ -959,7 +959,7 @@ plinko_run_use_trigger() {
     if(!var_2 maps\mp\gametypes\zombies::attempttobuy(var_0)) {
       continue;
     }
-    self.trigger sethintstring("");
+    self.trigger setHintString("");
     self.trigger setsecondaryhintstring("");
     thread plinko_run_token(var_3, var_2);
     plinko_use_wait();
@@ -1199,7 +1199,7 @@ get_linked_structs() {
     var_1 = common_scripts\utility::get_links();
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_3 = common_scripts\utility::getstruct(var_1[var_2], "script_linkname");
+      var_3 = common_scripts\utility::getStruct(var_1[var_2], "script_linkname");
 
       if(isDefined(var_3)) {
         var_0[var_0.size] = var_3;
@@ -1249,12 +1249,12 @@ plinko_sq_goal_fx(var_0) {
 
 plinko_sq_geo(var_0) {
   var_1 = var_0.origin;
-  var_2 = common_scripts\utility::getstruct(var_0.target, "targetname").origin;
+  var_2 = common_scripts\utility::getStruct(var_0.target, "targetname").origin;
   var_0.origin = var_2;
   common_scripts\utility::flag_wait("sq_plinko");
-  var_0 moveto(var_1, 1.0);
+  var_0 moveTo(var_1, 1.0);
   common_scripts\utility::flag_waitopen("sq_plinko");
-  var_0 moveto(var_2, 1.0);
+  var_0 moveTo(var_2, 1.0);
 }
 
 discoverplinkologic(var_0) {
@@ -1288,7 +1288,7 @@ discoverplinkologic(var_0) {
         continue;
       }
       var_10 = anglesToForward(var_4 getplayerangles());
-      var_11 = vectornormalize(var_0.origin - var_4.origin);
+      var_11 = vectorNormalize(var_0.origin - var_4.origin);
       var_12 = vectordot(var_10, var_11);
 
       if(var_12 >= var_2) {

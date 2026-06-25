@@ -34,7 +34,7 @@ main() {
 
 rotateturbine() {
   level endon("game_ended");
-  var_0 = getent("turbine", "targetname");
+  var_0 = getEnt("turbine", "targetname");
   var_1 = (0, 360, 0);
   var_2 = 60;
 
@@ -45,27 +45,27 @@ rotateturbine() {
 }
 
 fixcollision() {
-  var_0 = getent("clip128x128x256", "targetname");
+  var_0 = getEnt("clip128x128x256", "targetname");
   var_1 = spawn("script_model", (-380, 1634, 84));
   var_1.angles = (0, 3.61461, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("clip256x256x8", "targetname");
+  var_2 = getEnt("clip256x256x8", "targetname");
   var_3 = spawn("script_model", (-397, 1446, 212));
   var_3.angles = (270, 0, 15.8515);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("clip128x128x256", "targetname");
+  var_4 = getEnt("clip128x128x256", "targetname");
   var_5 = spawn("script_model", (-380, 1634, 340));
   var_5.angles = (0, 3.61461, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
-  var_6 = getent("clip256x256x8", "targetname");
+  var_6 = getEnt("clip256x256x8", "targetname");
   var_7 = spawn("script_model", (-397, 1446, 468));
   var_7.angles = (270, 0, 15.8515);
   var_7 clonebrushmodeltoscriptmodel(var_6);
-  var_8 = getent("clip256x256x8", "targetname");
+  var_8 = getEnt("clip256x256x8", "targetname");
   var_9 = spawn("script_model", (809, 563, 399));
   var_9.angles = (270, 89.5, -164.649);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("clip256x256x8", "targetname");
+  var_10 = getEnt("clip256x256x8", "targetname");
   var_11 = spawn("script_model", (703, 535, 399));
   var_11.angles = (270, 89.5, -164.649);
   var_11 clonebrushmodeltoscriptmodel(var_10);

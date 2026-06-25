@@ -109,7 +109,7 @@ hijacked_allied_spawnfunc() {
 
 hijacked_threat_bias_control() {
   level endon("capture_started");
-  salazar = getent("sp_salazar_ai", "targetname");
+  salazar = getEnt("sp_salazar_ai", "targetname");
   createthreatbiasgroup("allies");
   createthreatbiasgroup("player");
   createthreatbiasgroup("quadrotors");
@@ -147,14 +147,14 @@ hijacked_skipto_quadrotors_init() {
 }
 
 hijacked_skipto_salazar_init() {
-  ai_salazar = getent("sp_salazar_ai", "targetname");
+  ai_salazar = getEnt("sp_salazar_ai", "targetname");
   a_nd_salazar = getnodearray("nd_hijacked_start_colors", "targetname");
   nd_start = random(a_nd_salazar);
   ai_salazar thread force_goal(nd_start, 32, 0, undefined, 1);
 }
 
 allied_quadrotors_move_ahead_and_delete() {
-  s_goal = getstruct("s_hijacked_hostile_qrotor_goal1");
+  s_goal = getStruct("s_hijacked_hostile_qrotor_goal1");
   a_quadrotors = getEntArray("allied_quadrotor", "targetname");
 
   foreach(vh_quadrotor in a_quadrotors) {
@@ -201,7 +201,7 @@ hijacked_ambient_spawnfunc() {
 hijacked_crash_drone_near_player() {
   v_qrotor = spawn_vehicle_from_targetname("yemen_quadrotor_spawner");
   wait 1;
-  v_trace_to_point = level.player getEye() + vectornormalize(anglesToForward(level.player getplayerangles())) * 350;
+  v_trace_to_point = level.player getEye() + vectorNormalize(anglesToForward(level.player getplayerangles())) * 350;
   v_qrotor.origin = v_trace_to_point + vectorscale((0, 0, 1), 256.0);
   v_qrotor.goalpos = v_trace_to_point + vectorscale((0, 0, 1), 256.0);
   radiusdamage(v_qrotor.origin + vectorscale((0, 0, 1), 10.0), 32, v_qrotor.health + 10, v_qrotor.health + 10);
@@ -229,7 +229,7 @@ setup_vtol_turret() {
 
   recordent(self.turret);
 
-  self.turret linkto(self, "tag_gunner1", (0, 0, 0), (0, 0, 0));
+  self.turret linkTo(self, "tag_gunner1", (0, 0, 0), (0, 0, 0));
 }
 
 menendez_hijack_scene_check() {
@@ -322,8 +322,8 @@ hijacked_drone_control_lost() {
 
 qr_drones_fly_away() {
   a_qrotors = getEntArray("allied_quadrotor", "targetname");
-  s_goal_spot = getstruct("s_qr_drones_fly_away", "targetname");
-  e_target = getent("qr_drones_dummy_target", "targetname");
+  s_goal_spot = getStruct("s_qr_drones_fly_away", "targetname");
+  e_target = getEnt("qr_drones_dummy_target", "targetname");
 
   foreach(veh_qrotor in a_qrotors) {
     veh_qrotor.radius = 128;
@@ -338,7 +338,7 @@ qr_drones_move(s_goal, e_target) {
   self endon("delete");
 
   if(isDefined(e_target)) {
-    self setturrettargetent(e_target);
+    self setturrettargetEnt(e_target);
   }
 
   self.goalpos = s_goal.origin;
@@ -353,7 +353,7 @@ qr_drones_move(s_goal, e_target) {
 
 quadrotors_guard_metalstorm() {
   wait 5;
-  vh_metalstorm = getent("hijacked_first_metalstorm", "targetname");
+  vh_metalstorm = getEnt("hijacked_first_metalstorm", "targetname");
   a_vh_quadrotors = getEntArray("hijacked_first_metalstorm_guard1", "targetname");
   a_vh_quadrotors2 = getEntArray("yemen_hijacked_quadrotor_hostile_formation", "targetname");
   array_thread(a_vh_quadrotors, ::set_quadrotor_guard_position, vh_metalstorm);
@@ -399,7 +399,7 @@ hijacked_bridge_drone_crash() {
 
 hijacked_bridge_explode() {
   exploder(750);
-  playsoundatposition("fxa_bridge_explo", (-9350, -13638, 9280));
+  playSoundAtPosition("fxa_bridge_explo", (-9350, -13638, 9280));
   level notify("fxanim_bridge_explode_start");
   hijacked_bridge_swap();
   flag_wait("hijacked_bridge_fell");
@@ -410,7 +410,7 @@ hijacked_bridge_explode() {
 }
 
 capture_fake_battle() {
-  s_shoot_spot = getstruct("capture_bridge_battle_shoot_spot", "targetname");
+  s_shoot_spot = getStruct("capture_bridge_battle_shoot_spot", "targetname");
   a_ai_seals = get_ai_array("hijacked_ally", "script_noteworthy");
   a_ai_seals_b = get_ai_array("hijacked_ally_bridge", "script_noteworthy");
   o_target = spawn("script_origin", s_shoot_spot.origin);
@@ -507,7 +507,7 @@ spawn_quadrotor_formation(n_count, str_nd_start, str_spawner, str_team, threatgr
 
 activate_ai_on_end_path() {
   self endon("death");
-  trigger = getent("trigs_hijacked_bridge_drop", "targetname");
+  trigger = getEnt("trigs_hijacked_bridge_drop", "targetname");
   self waittill("reached_end_node");
   level notify("awake_axis_quads");
   self pathvariableoffsetclear();
@@ -519,7 +519,7 @@ activate_ai_on_end_path() {
 }
 
 hijacked_bridge_approach_save() {
-  e_trigger = getent("trigger_hijacked_bridge_approach_save", "targetname");
+  e_trigger = getEnt("trigger_hijacked_bridge_approach_save", "targetname");
   e_trigger waittill("trigger");
   autosave_by_name("trigger_hijacked_bridge_approach_save");
 }
@@ -539,14 +539,14 @@ hijacked_bridge_guys_move_up() {
 
   foreach(ai_guy in a_bridge_guys) {
     nd_goal = getnode(self.script_noteworthy, "targetname");
-    ai_guy set_goalradius(64);
+    ai_guy set_goalRadius(64);
     ai_guy setgoalnode(nd_goal);
   }
 }
 
 hijacked_magicbullet_shoot(str_gun) {
-  s_rpg = getstruct(str_gun, "targetname");
-  s_target = getstruct(s_rpg.target, "targetname");
+  s_rpg = getStruct(str_gun, "targetname");
+  s_target = getStruct(s_rpg.target, "targetname");
 
   if(isDefined(s_rpg)) {
     level notify("magic_rgp_fired");
@@ -555,12 +555,12 @@ hijacked_magicbullet_shoot(str_gun) {
 }
 
 hijacked_bridge_enemies_clear() {
-  volume = getent("bridge_enemy_volume", "targetname");
+  volume = getEnt("bridge_enemy_volume", "targetname");
   bridge_axis = get_axis_in_volume(volume);
-  goal_pos = getstruct("bridge_enemies_goal_org", "targetname");
+  goal_pos = getStruct("bridge_enemies_goal_org", "targetname");
 
   foreach(bridge_enemy in bridge_axis) {
-    bridge_enemy set_goalradius(64);
+    bridge_enemy set_goalRadius(64);
     bridge_enemy set_goal_pos(goal_pos.origin);
   }
 }
@@ -609,8 +609,8 @@ stairs_building_damage_listener() {
 
 stairs_shoot_stairs_building() {
   flag_wait("hijacked_blow_up_building");
-  s_rpg = getstruct("s_hijacked_cliffside_magicbullet_rpg_building_collapse", "targetname");
-  s_target = getstruct(s_rpg.target, "targetname");
+  s_rpg = getStruct("s_hijacked_cliffside_magicbullet_rpg_building_collapse", "targetname");
+  s_target = getStruct(s_rpg.target, "targetname");
   magicbullet("usrpg_magic_bullet_sp", s_rpg.origin, s_target.origin);
   wait 3;
   level notify("magic_rgp_fired");
@@ -670,7 +670,7 @@ bridge_groan_sound_loop() {
   o_groan_location = spawn("script_origin", (-9303, -13775, 828));
   o_groan_location playLoopSound("amb_bridge_failing");
   level waittill("fxanim_bridge_drop_start");
-  playsoundatposition("fxa_bridge_give_way", o_groan_location.origin);
+  playSoundAtPosition("fxa_bridge_give_way", o_groan_location.origin);
   o_groan_location stoploopsound(2);
   wait 5;
   o_groan_location delete();

@@ -188,7 +188,7 @@ func_9D8E(param_00, param_01) {
         continue;
       }
 
-      var_09 = vectornormalize(var_05 - var_08.var_0116);
+      var_09 = vectorNormalize(var_05 - var_08.var_0116);
       var_0A = var_08 getangles();
       var_0B = anglesToForward(var_0A);
       var_0C = vectordot(var_0B, var_09);

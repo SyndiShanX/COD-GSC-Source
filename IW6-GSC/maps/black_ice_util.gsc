@@ -4,8 +4,8 @@
 *****************************************************/
 
 player_start(var_0) {
-  var_1 = getent(var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = getEnt(var_0, "targetname");
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
 }
 
@@ -187,12 +187,12 @@ teleport_allies(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    var_1 = common_scripts\utility::array_add(var_1, common_scripts\utility::getstruct(var_3, "targetname"));
+    var_1 = common_scripts\utility::array_add(var_1, common_scripts\utility::getStruct(var_3, "targetname"));
   }
 
   if(var_1.size == 0) {
     foreach(var_3 in var_0) {
-      var_6 = getent(var_3, "targetname");
+      var_6 = getEnt(var_3, "targetname");
       var_1 = common_scripts\utility::array_add(var_1, var_6);
     }
   }
@@ -369,7 +369,7 @@ ai_alert(var_0, var_1) {
     var_1 = 0;
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::enable_danger_react(10);
   maps\_utility::clear_run_anim();
   maps\_utility::clear_deathanim();
@@ -380,7 +380,7 @@ ai_alert(var_0, var_1) {
     thread maps\_anim::anim_single_solo(self, common_scripts\utility::random(var_2));
     self.allowdeath = 1;
     wait(randomfloatrange(0.7, 1.0));
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   self notify("stop_going_to_node");
@@ -422,11 +422,11 @@ ai_alert(var_0, var_1) {
 
 flash_grenade_proc(var_0, var_1) {
   var_2 = var_0 gettagorigin("J_Wrist_LE");
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
   var_3 = var_3.origin;
   var_4 = distance(var_3, var_0.origin) * 2.0;
   var_4 = clamp(var_4, 300, 1000);
-  var_5 = vectornormalize(var_3 - var_0.origin);
+  var_5 = vectorNormalize(var_3 - var_0.origin);
   var_6 = var_5 * var_4;
   magicgrenademanual("flash_grenade", var_2, var_6, 1.0);
 }
@@ -464,7 +464,7 @@ retreat_proc(var_0, var_1, var_2, var_3) {
     var_4 = [];
 
     foreach(var_6 in var_1) {
-      var_6 = getent(var_6, "targetname");
+      var_6 = getEnt(var_6, "targetname");
 
       if(isDefined(var_6)) {
         var_4[var_4.size] = var_6;
@@ -743,7 +743,7 @@ ai_stairs_proc(var_0, var_1) {
 }
 
 waittill_trigger_ent_targetname(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   var_4 waittill_trigger_ent(var_1, var_2, var_3);
 }
 
@@ -834,7 +834,7 @@ setup_door(var_0, var_1, var_2) {
   var_3 = undefined;
 
   if(isstring(var_0)) {
-    var_3 = getent(var_0, "targetname");
+    var_3 = getEnt(var_0, "targetname");
   } else {
     var_3 = var_0;
   }
@@ -856,7 +856,7 @@ setup_door(var_0, var_1, var_2) {
         if(!isDefined(var_2)) {
           var_3.hinge = var_7;
           var_3.hinge.tag_name = var_2;
-          var_3 linkto(var_3.hinge);
+          var_3 linkTo(var_3.hinge);
         }
       }
     }
@@ -868,7 +868,7 @@ setup_door(var_0, var_1, var_2) {
     var_3.hinge.angles = var_3 gettagangles(var_2);
 
     if(!isDefined(var_1)) {
-      var_3 linkto(var_3.hinge);
+      var_3 linkTo(var_3.hinge);
     }
   }
 
@@ -876,9 +876,9 @@ setup_door(var_0, var_1, var_2) {
     var_3.col_brush = var_4;
 
     if(isDefined(var_2)) {
-      var_3.col_brush linkto(var_3, var_2);
+      var_3.col_brush linkTo(var_3, var_2);
     } else {
-      var_3.col_brush linkto(var_3);
+      var_3.col_brush linkTo(var_3);
     }
   } else if(var_3.classname == "script_brushmodel")
     var_3.col_brush = var_3;
@@ -934,7 +934,7 @@ close_door(var_0, var_1, var_2) {
 
   if(isDefined(var_3.hinge)) {
     if(!var_3 islinked()) {
-      var_3 linkto(var_3.hinge);
+      var_3 linkTo(var_3.hinge);
     }
 
     var_4 = var_3.hinge;
@@ -948,9 +948,9 @@ close_door(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_0)) {
-    var_4 rotateyaw(var_0, var_5);
+    var_4 rotateYaw(var_0, var_5);
   } else {
-    var_4 rotateto(var_3.original_angles, var_5);
+    var_4 rotateTo(var_3.original_angles, var_5);
   }
 
   if(isDefined(var_2)) {
@@ -960,7 +960,7 @@ close_door(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_3.col_brush)) {
-    var_3.col_brush disconnectpaths();
+    var_3.col_brush disconnectPaths();
   }
 }
 
@@ -976,7 +976,7 @@ open_door(var_0, var_1, var_2) {
 
   if(isDefined(var_3.hinge)) {
     if(!var_3 islinked()) {
-      var_3 linkto(var_3.hinge);
+      var_3 linkTo(var_3.hinge);
     }
 
     var_4 = var_3.hinge;
@@ -998,7 +998,7 @@ open_door(var_0, var_1, var_2) {
     var_7 = var_1;
   }
 
-  var_4 rotateyaw(var_5, var_7);
+  var_4 rotateYaw(var_5, var_7);
 
   if(isDefined(var_2)) {
     wait(var_2);
@@ -1017,12 +1017,12 @@ open_door(var_0, var_1, var_2) {
   wait 0.05;
 
   if(isDefined(var_6)) {
-    var_4 rotateyaw(var_6, 2.5, 0.05, 2.45);
+    var_4 rotateYaw(var_6, 2.5, 0.05, 2.45);
   }
 }
 
 close_gate(var_0, var_1, var_2) {
-  self moveto(var_0, var_1);
+  self moveTo(var_0, var_1);
 
   if(isDefined(var_2)) {
     wait(var_2);
@@ -1030,11 +1030,11 @@ close_gate(var_0, var_1, var_2) {
     wait(var_1);
   }
 
-  self.col_brush disconnectpaths();
+  self.col_brush disconnectPaths();
 }
 
 open_gate(var_0, var_1, var_2) {
-  self moveto(var_0, var_1);
+  self moveTo(var_0, var_1);
 
   if(isDefined(var_2)) {
     wait(var_2);
@@ -1240,20 +1240,20 @@ jittermove(var_0, var_1, var_2) {
   for(;;) {
     var_5 = var_4 + common_scripts\utility::randomvectorrange(var_3, var_0);
     var_6 = randomfloatrange(var_2, var_1);
-    self moveto(var_5, var_6);
+    self moveTo(var_5, var_6);
     wait(var_6);
-    self moveto(var_4, 0.1);
+    self moveTo(var_4, 0.1);
     wait 0.1;
   }
 }
 
 rotatelights(var_0, var_1, var_2) {
   var_3 = getEntArray(var_1, "targetname");
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   var_4 thread rotateme(-360, var_2);
 
   foreach(var_6 in var_3) {
-    var_6 thread maps\_utility::manual_linkto(var_4, var_6.origin - var_4.origin);
+    var_6 thread maps\_utility::manual_linkTo(var_4, var_6.origin - var_4.origin);
   }
 }
 
@@ -1261,7 +1261,7 @@ rotateme(var_0, var_1) {
   for(;;) {
     switch (var_1) {
       case "yaw":
-        self rotateyaw(var_0, 1);
+        self rotateYaw(var_0, 1);
         wait 1;
         break;
       case "pitch":
@@ -1416,7 +1416,7 @@ ally_cqb_kill_solo(var_0, var_1, var_2) {
     var_4 = undefined;
     var_4 = common_scripts\utility::spawn_tag_origin();
     var_4.origin = var_0 gettagorigin("j_head");
-    var_4 linkto(var_0);
+    var_4 linkTo(var_0);
 
     if(animscripts\utility::canseeandshootpoint(var_4.origin)) {
       var_3 = 1;
@@ -1482,7 +1482,7 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
 
   if(isDefined(var_4)) {
     var_9 = var_0 common_scripts\utility::spawn_tag_origin();
-    var_9 linkto(var_0, var_4, (0, 0, 0), (0, 0, 0));
+    var_9 linkTo(var_0, var_4, (0, 0, 0), (0, 0, 0));
   }
 
   if(!isDefined(var_5)) {
@@ -1560,7 +1560,7 @@ setup_tag_anim_rig(var_0, var_1, var_2, var_3) {
     var_2 = 3;
   }
 
-  var_4 = getent(var_0, "script_noteworthy");
+  var_4 = getEnt(var_0, "script_noteworthy");
   var_4.anim_node = common_scripts\utility::spawn_tag_origin();
   var_4.anim_node.origin = var_4.origin;
   var_4.anim_node.angles = var_4.angles;
@@ -1576,7 +1576,7 @@ setup_tag_anim_rig(var_0, var_1, var_2, var_3) {
       var_9 = spawn("script_model", var_4 gettagorigin(var_7));
       var_9 setModel(var_8);
       var_9.angles = var_4 gettagangles(var_7);
-      var_9 linkto(var_4, var_7);
+      var_9 linkTo(var_4, var_7);
 
       if(isDefined(var_3) && var_3) {
         var_9.coll = "coll_" + getsubstr(var_7, 4, var_7.size);
@@ -1692,7 +1692,7 @@ setup_player_for_animated_sequence(var_0, var_1, var_2, var_3, var_4, var_5, var
   level.player_mover = var_8;
   var_8.origin = var_2;
   var_8.angles = var_3;
-  var_7 linkto(var_8);
+  var_7 linkTo(var_8);
 
   if(var_0) {
     level.player playerlinktodelta(var_7, "tag_player", 1, var_1, var_1, var_1, var_1, 1);
@@ -1802,7 +1802,7 @@ ally_catchup_solo(var_0, var_1, var_2) {
   var_5 = getallnodes();
 
   if(isDefined(var_2) && isDefined(var_2.target)) {
-    var_6 = getent(var_2.target, "targetname");
+    var_6 = getEnt(var_2.target, "targetname");
     var_7 = var_5;
     var_5 = [];
 

@@ -30,7 +30,7 @@ class cscenevehicle: csceneobject {
   function _spawn_ent() {
     if(isDefined(_s.model)) {
       if(isassetloaded("vehicle", _s.model)) {
-        _e = spawnvehicle(_s.model, csceneobject::function_d2039b28(), csceneobject::function_f9936b53(), undefined, 0, undefined, _s.var_6b8decce, _s.var_4f56e47a, _s.var_3b48be8d);
+        _e = spawnVehicle(_s.model, csceneobject::function_d2039b28(), csceneobject::function_f9936b53(), undefined, 0, undefined, _s.var_6b8decce, _s.var_4f56e47a, _s.var_3b48be8d);
 
         if(isDefined(_e)) {
           scene::prepare_generic_model_anim(_e);

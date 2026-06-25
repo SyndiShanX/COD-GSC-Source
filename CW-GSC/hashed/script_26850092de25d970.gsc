@@ -33,13 +33,13 @@
 #namespace namespace_c9f7b6af;
 
 function starting(str_skipto) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
   woods_spawner = getspawnerarray("raid_woods", "targetname");
   woods_spawner[0] spawner::add_spawn_function(&namespace_b100dd86::function_87d56d50);
-  level.var_efac709f = getent("player_breach_clip", "targetname");
-  level.var_efac709f disconnectpaths();
+  level.var_efac709f = getEnt("player_breach_clip", "targetname");
+  level.var_efac709f disconnectPaths();
   level.adler = var_8a3bb97c[0] spawner::spawn(1);
   level.woods = woods_spawner[0] spawner::spawn(1);
   var_fcbd93e0 = struct::get("raid_approach_adler", "targetname");
@@ -53,17 +53,17 @@ function starting(str_skipto) {
   level notify(#"hash_41a9df66948f9e8a");
   scene::add_scene_func("scene_tkd_hit2_intro_bar_v2", &tkdn_raid_bar::function_e2d2754d, "civilians");
   level thread scene::play("scene_tkd_hit2_intro_bar_v2", "civilians");
-  var_b7ec8c4b = getent("bar_door_clip", "targetname");
+  var_b7ec8c4b = getEnt("bar_door_clip", "targetname");
   var_b7ec8c4b delete();
 }
 
 function main(str_skipto, b_starting) {
   if(b_starting) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     player setmovespeedscale(0.4);
     objectives::scripted("obj_takedown_capture", undefined, #"hash_49c1d860c97e3792");
     objectives::follow("follow_adler", level.adler, undefined, 0, 0);
-    level.raid_car = getent("raid_car", "targetname");
+    level.raid_car = getEnt("raid_car", "targetname");
     level thread scene::play("scene_tkd_hit2_intro_bar_v2", "Adler_part_3", [level.raid_car]);
 
     if(isDefined(level.var_d7d201ba)) {
@@ -74,7 +74,7 @@ function main(str_skipto, b_starting) {
   level thread namespace_82bfe441::fade(0, "FadeSlow");
   scene::add_scene_func("scene_tkd_hit2_bar_alley", &function_3f65ad3b, "alley");
   thread namespace_a052577e::function_2032c91c();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_4f2ba130 = player getweaponslistprimaries();
 
   foreach(e_w in var_4f2ba130) {
@@ -90,7 +90,7 @@ function main(str_skipto, b_starting) {
   level flag::wait_till("flag_move_on_to_alley");
   level thread function_3df72127();
   level notify(#"hash_5c41a54cd623966e");
-  alley_clip = getent("alley_clip", "targetname");
+  alley_clip = getEnt("alley_clip", "targetname");
   alley_clip delete();
   player val::reset(#"bar", "allow_sprint");
   player val::reset(#"bar", "allow_mantle");
@@ -101,7 +101,7 @@ function main(str_skipto, b_starting) {
   player util::blend_movespeedscale(0.45, 2);
   level thread function_c05edfd0();
   namespace_a052577e::function_b26ed576();
-  level thread scene::init_streamer(#"scene_tkd_hit2_bar_alley", getplayers());
+  level thread scene::init_streamer(#"scene_tkd_hit2_bar_alley", getPlayers());
   level thread scene::init("scene_tkd_hit2_bar_alley");
   level thread scene::init("scene_tkd_hit2_adler_alley");
   level thread scene::play("scene_tkd_hit2_bar_alley", "Alley");
@@ -154,7 +154,7 @@ function function_c05edfd0() {
 function function_d5cc022() {
   level endon(#"hash_1ab7d54e8692f78a");
   level flag::wait_till("flag_apt_approach_guard_vo");
-  org = getent("org_bodyguard_alleyway_vo", "targetname");
+  org = getEnt("org_bodyguard_alleyway_vo", "targetname");
 
   while(true) {
     voline = snd::play("vox_cp_tdwn_03500_irg3_yellinggroan_7c_1", org.origin);
@@ -176,10 +176,10 @@ function function_d5cc022() {
 
 function function_37ddf68b(a_ents) {
   door = a_ents[#"yard_gate"];
-  var_b7ec8c4b = getent("yard_gate_clip", "targetname");
-  org = getent("yard_gate_org", "targetname");
-  var_b7ec8c4b linkto(org);
-  org linkto(door, "tag_origin");
+  var_b7ec8c4b = getEnt("yard_gate_clip", "targetname");
+  org = getEnt("yard_gate_org", "targetname");
+  var_b7ec8c4b linkTo(org);
+  org linkTo(door, "tag_origin");
 }
 
 function function_4bc3dba() {
@@ -196,7 +196,7 @@ function function_b7d7ba47() {
 }
 
 function function_709cb1b3() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("flag_window_guy");
   level thread scene::play("scene_tkd_hit2_alley_civilians", "drug_waiting");
   wait 1.5;

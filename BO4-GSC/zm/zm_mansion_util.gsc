@@ -68,9 +68,9 @@ function_ab834b07(player) {
   self.hint_string = self.stub.hint_string;
 
   if(isDefined(self.stub.n_cost)) {
-    self sethintstring(self.stub.hint_string, self.stub.n_cost);
+    self setHintString(self.stub.hint_string, self.stub.n_cost);
   } else {
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
   }
 
   return true;
@@ -111,7 +111,7 @@ function_57423f(var_a4107301) {
 }
 
 get_player_index(e_player) {
-  a_players = getplayers(e_player.team);
+  a_players = getPlayers(e_player.team);
 
   for(i = 0; i < a_players.size; i++) {
     if(e_player == a_players[i]) {
@@ -193,7 +193,7 @@ function_ebad0e52(var_88f1eaa8) {
     var_88f1eaa8 movey(-600, 3);
     var_88f1eaa8 waittill(#"movedone");
     var_88f1eaa8 hide();
-    var_88f1eaa8 moveto(v_org, 0.05);
+    var_88f1eaa8 moveTo(v_org, 0.05);
     var_88f1eaa8 waittill(#"movedone");
     var_88f1eaa8 show();
   }
@@ -299,10 +299,10 @@ function_6a523c8c(v_wobble = (0, 0, 1)) {
 
   while(true) {
     n_pitch = randomint(4) + 2;
-    self moveto(self.origin + v_wobble, 0.35);
+    self moveTo(self.origin + v_wobble, 0.35);
     self rotatepitch(n_pitch, 0.35);
     self waittill(#"movedone");
-    self moveto(self.origin - v_wobble, 0.1);
+    self moveTo(self.origin - v_wobble, 0.1);
     self rotatepitch(n_pitch * -1, 0.35);
     self waittill(#"movedone");
     wait 0.2;
@@ -312,11 +312,11 @@ function_6a523c8c(v_wobble = (0, 0, 1)) {
 function_43ac0bb7(str_notify) {
   if(isDefined(self) && str_notify === "stop_wobble") {
     if(isDefined(self.v_start_origin)) {
-      self moveto(self.v_start_origin, 0.1);
+      self moveTo(self.v_start_origin, 0.1);
     }
 
     if(isDefined(self.v_start_angles)) {
-      self rotateto(self.v_start_angles, 0.1);
+      self rotateTo(self.v_start_angles, 0.1);
     }
   }
 }
@@ -326,7 +326,7 @@ function_da5cd631(v_spin = (0, 0, 180)) {
   self notify(#"finish_wobble");
 
   for(n_wait = 6; true; n_wait = max(n_wait - 0.25, 0.25)) {
-    self rotateto(self.angles + v_spin, n_wait);
+    self rotateTo(self.angles + v_spin, n_wait);
     self waittill(#"rotatedone");
   }
 }
@@ -421,7 +421,7 @@ function_e7d4e4f0() {
   level.var_98cb7c84[level.var_98cb7c84.size] = self;
   util::wait_network_frame();
   self.mdl_pickup clientfield::set("" + #"hash_487e544e29aa8e45", 1);
-  playsoundatposition(#"zmb_sq_souls_release", self.mdl_pickup.origin);
+  playSoundAtPosition(#"zmb_sq_souls_release", self.mdl_pickup.origin);
   self.origin += (0, 0, 8);
   e_holder = self zm_unitrigger::function_fac87205(&function_f3d694d6, (64, 64, 100));
 
@@ -721,7 +721,7 @@ function function_bb613572(a_s_spawns, a_str_endons, n_spawn_delay = 1, n_round 
   }
 
   level.var_3dd9f9be = 0;
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   if(n_players < 1) {
     n_players = 1;
@@ -756,7 +756,7 @@ function function_bb613572(a_s_spawns, a_str_endons, n_spawn_delay = 1, n_round 
 }
 
 any_player_looking_at(v_origin, n_dot, b_do_trace, e_ignore) {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player util::is_player_looking_at(v_origin, n_dot, b_do_trace, e_player)) {
       return true;
     }

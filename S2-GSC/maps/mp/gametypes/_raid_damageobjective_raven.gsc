@@ -726,8 +726,8 @@ destructsetuprepair(param_00) {
   param_00.killed = 0;
   param_00.repairenabled = 0;
   param_00.repairinuse = 0;
-  param_00 setcursorhint("HINT_ACTIVATE");
-  param_00 sethintstring(&"RAIDS_REPAIR_HINT");
+  param_00 setCursorHint("HINT_ACTIVATE");
+  param_00 setHintString(&"RAIDS_REPAIR_HINT");
   param_00.var_A23E = 23;
   param_00.var_5022 = "";
   level.var_79BF[level.var_79BF.size] = param_00;
@@ -782,9 +782,9 @@ attempttorepairobject(param_00) {
 
 func_A213(param_00, param_01, param_02) {
   if(isPlayer(param_00)) {
-    param_00 playerlinkto(self);
+    param_00 playerlinkTo(self);
   } else {
-    param_00 linkto(self);
+    param_00 linkTo(self);
   }
 
   if(param_00 getcurrentweapon() != "flamethrower_german_mp") {
@@ -826,13 +826,13 @@ func_A215(param_00) {
 
 lockoutactivate(param_00) {
   param_00.repairinuse = 1;
-  param_00 sethintstring("");
+  param_00 setHintString("");
 }
 
 enableactivate(param_00) {
   param_00.repairinuse = 0;
-  param_00 sethintstring(&"RAIDS_REPAIR_HINT");
-  param_00 setcursorhint("HINT_NOICON");
+  param_00 setHintString(&"RAIDS_REPAIR_HINT");
+  param_00 setCursorHint("HINT_NOICON");
 }
 
 func_6F82(param_00, param_01, param_02) {

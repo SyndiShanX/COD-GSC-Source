@@ -57,7 +57,7 @@ watch_lc_stunned_zombie_nearby() {
         continue;
       }
       if(istrue(var_3.lc_stunned)) {
-        var_4 = vectornormalize(var_3.origin - self.origin);
+        var_4 = vectorNormalize(var_3.origin - self.origin);
         var_5 = anglesToForward(self getplayerangles());
         var_6 = vectordot(var_4, var_5);
 
@@ -334,7 +334,7 @@ lc_play_arc_fx(var_0, var_1) {
 
   var_9 = playFXOnTag(level._effect[var_8], var_7, "tag_origin");
   playsoundatpos(var_7.origin, "prj_dg2_bounce");
-  var_7 moveto(var_5, var_1.arc_travel_time);
+  var_7 moveTo(var_5, var_1.arc_travel_time);
   var_7 waittill("movedone");
   var_7 delete();
 }

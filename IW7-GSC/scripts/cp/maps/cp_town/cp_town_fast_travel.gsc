@@ -11,7 +11,7 @@ init_teleport_portals() {
     self.trigger = scripts\engine\utility::getclosest(self.origin, var_3, 500);
     self.start_point_name = self.script_noteworthy;
     self.end_point_name = self.script_parameters;
-    self.end_point = scripts\engine\utility::getstruct(self.script_parameters, "script_noteworthy");
+    self.end_point = scripts\engine\utility::getStruct(self.script_parameters, "script_noteworthy");
     self.teleport_door = scripts\engine\utility::getclosest(self.origin, getEntArray("chi_door_fast_travel", "targetname"));
     var_4 = getEntArray("chi_door_fast_travel_symbol", "targetname");
     if(isDefined(var_4)) {
@@ -82,8 +82,8 @@ move_through_tube(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   var_0 endon("move_through_tube");
   var_0 earthquakeforplayer(0.3, 0.2, var_0.origin, 200);
-  var_3 = getent(var_1, "targetname");
-  var_4 = getent(var_2, "targetname");
+  var_3 = getEnt(var_1, "targetname");
+  var_4 = getEnt(var_2, "targetname");
   var_0 cancelmantle();
   var_0.no_outline = 1;
   var_0.no_team_outlines = 1;
@@ -93,15 +93,15 @@ move_through_tube(var_0, var_1, var_2) {
   var_0 scripts\cp\utility::adddamagemodifier("fast_travel", 0, 0);
   var_0 scripts\cp\utility::allow_player_ignore_me(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_5);
+  var_0 setOrigin(var_5);
   var_0 setplayerangles(var_3.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_7 = spawn("script_origin", var_5);
-  var_0 playerlinkto(var_7);
+  var_0 playerlinkTo(var_7);
   var_0 getweaponrankxpmultiplier();
   wait(0.1);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
-  var_7 moveto(var_6, 1);
+  var_7 moveTo(var_6, 1);
   wait(1);
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
@@ -176,7 +176,7 @@ teleport_to_portal_safe_spot(var_0, var_1) {
   }
 
   var_0 dontinterpolate();
-  var_0 setorigin(var_3.origin);
+  var_0 setOrigin(var_3.origin);
   var_0 setplayerangles(var_3.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();

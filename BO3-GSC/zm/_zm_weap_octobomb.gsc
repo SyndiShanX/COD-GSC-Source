@@ -145,7 +145,7 @@ function hide_owner(owner) {
   owner show();
 }
 
-function fakelinkto(linkee) {
+function fakelinkTo(linkee) {
   self notify("fakelinkto");
   self endon("fakelinkto");
   self.backlinked = 1;
@@ -172,9 +172,9 @@ function grenade_planted(grenade, model) {
       grenade.move_parent = ride_vehicle;
       if(isDefined(model)) {
         model setmovingplatformenabled(1);
-        model linkto(ride_vehicle);
+        model linkTo(ride_vehicle);
         model.isonvehicle = 1;
-        grenade fakelinkto(model);
+        grenade fakelinkTo(model);
       }
     }
   }
@@ -212,7 +212,7 @@ function player_throw_octobomb(e_grenade, num_attractors, max_attract_dist, attr
   e_grenade ghost();
   e_grenade.angles = v_angles_clone_model;
   e_grenade.clone_model = util::spawn_model(e_grenade.model, e_grenade.origin, e_grenade.angles);
-  e_grenade.clone_model linkto(e_grenade);
+  e_grenade.clone_model linkTo(e_grenade);
   e_grenade thread octobomb_cleanup();
   e_grenade waittill("stationary", v_position, v_normal);
   e_grenade thread check_octobomb_on_train();
@@ -237,9 +237,9 @@ function player_throw_octobomb(e_grenade, num_attractors, max_attract_dist, attr
       e_grenade.anim_model = util::spawn_model(level.mdl_octobomb, e_grenade.origin, e_grenade.angles);
       if(isDefined(e_grenade.isonvehicle) && e_grenade.isonvehicle) {
         e_grenade.anim_model setmovingplatformenabled(1);
-        e_grenade.anim_model linkto(e_grenade.ground_ent);
+        e_grenade.anim_model linkTo(e_grenade.ground_ent);
         e_grenade.anim_model.isonvehicle = 1;
-        e_grenade thread fakelinkto(e_grenade.anim_model);
+        e_grenade thread fakelinkTo(e_grenade.anim_model);
       }
       e_grenade.anim_model clientfield::set("octobomb_fx", 3);
       wait(0.05);
@@ -328,7 +328,7 @@ function grenade_stolen_by_sam(e_grenade) {
     direction = (direction[0] * -1, direction[1], 0);
   }
   if(!(isDefined(e_grenade.sndnosamlaugh) && e_grenade.sndnosamlaugh)) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isalive(players[i])) {
         players[i] playlocalsound(level.zmb_laugh_alias);
@@ -493,7 +493,7 @@ function do_tentacle_grab(e_player, is_upgraded) {
         ai_target octo_gib();
         ai_target dodamage(ai_target.health, ai_target.origin, e_player, self);
         ai_target startragdoll();
-        ai_target launchragdoll(105 * (vectornormalize((ai_target.origin - self.origin) + (n_random_x, n_random_y, 200))));
+        ai_target launchragdoll(105 * (vectorNormalize((ai_target.origin - self.origin) + (n_random_x, n_random_y, 200))));
       }
       if(randomint(6) > (n_grabs + 3)) {
         b_fast_grab = 1;
@@ -671,7 +671,7 @@ function parasite_attractor_grab(e_grenade) {
     }
     if(a_ai_parasites.size > 0) {
       ai_parasite = array::random(a_ai_parasites);
-      v_fling = vectornormalize(ai_parasite.origin - e_grenade.origin);
+      v_fling = vectorNormalize(ai_parasite.origin - e_grenade.origin);
       ai_parasite dodamage(ai_parasite.maxhealth, self.origin);
       if(randomint(6) > (n_grabs + 3)) {
         b_fast_grab = 1;
@@ -736,7 +736,7 @@ function private setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_b
 }
 
 function devgui_octobomb_give(n_player_index) {
-  players = getplayers();
+  players = getPlayers();
   player = players[n_player_index];
   if(isDefined(player)) {
     octobomb_give(player);

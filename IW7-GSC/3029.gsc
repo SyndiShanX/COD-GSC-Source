@@ -217,11 +217,11 @@ func_D135(var_0, var_1) {
   earthquake(var_11, var_12, level.var_D127.origin, 5000);
 
   if(var_0 > 0.5) {
-    level.player playrumbleonentity("grenade_rumbe");
+    level.player playRumbleOnEntity("grenade_rumbe");
   } else if(var_0 > 0.25) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   } else {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 }
 
@@ -316,7 +316,7 @@ func_D184(var_0) {
   level.player playSound("jackal_slow_death_plr_init");
   level.player func_8329("deathsdoor", "deathsdoor", "reverb");
   level.player setsoundsubmix("deaths_door_sp");
-  level.var_D127 playrumbleonentity("damage_heavy");
+  level.var_D127 playRumbleOnEntity("damage_heavy");
   scripts\sp\utility::func_75C4("cockpit_dying_flames", "tag_body");
   func_0BDC::func_A080((randomfloatrange(-60, -3), randomfloatrange(-20, 20), randomfloatrange(-300, 300)), 0.3, "death");
   var_1 = getdvarint("bg_gravity");
@@ -406,7 +406,7 @@ func_D13A() {
 
 func_D52F(var_0, var_1) {
   var_2 = scripts\engine\utility::spawn_script_origin();
-  var_2 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   var_2 playSound(var_0);
   var_2 waittill("sounddone");
   var_2 delete();
@@ -764,9 +764,9 @@ func_D12F(var_0, var_1, var_2) {
   earthquake(var_4, 0.4, level.var_D127.origin, 50000);
 
   if(var_3 > 0.6) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   } else if(var_3 > 0.3) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 
   var_5 = scripts\sp\math::func_6A8E(1.3, 2.0, var_3);
@@ -777,7 +777,7 @@ func_D12F(var_0, var_1, var_2) {
 func_D130(var_0, var_1, var_2) {
   var_3 = scripts\engine\utility::spawn_tag_origin();
   var_4 = var_1 - level.var_D127.origin;
-  var_5 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_4);
   var_6 = rotatevectorinverted(var_5, level.var_D127.angles);
   var_7 = var_6[0];
   var_8 = var_6[1] * -1;
@@ -785,7 +785,7 @@ func_D130(var_0, var_1, var_2) {
   var_7 = scripts\sp\math::func_C097(-1, 1, var_7);
   var_7 = var_7 * var_7;
   var_7 = var_7 * 0.6;
-  var_10 = vectornormalize((var_7, var_8, var_9));
+  var_10 = vectorNormalize((var_7, var_8, var_9));
   var_11 = level.var_D127 gettagangles("j_mainroot_ship");
   var_12 = level.var_D127 gettagorigin("tag_camera");
   var_13 = var_10[0] * 55;
@@ -803,14 +803,14 @@ func_D14E(var_0, var_1, var_2) {
   earthquake(var_4, 0.75, level.var_D127.origin, 50000);
 
   if(var_3 > 0.6) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   } else if(var_3 > 0.3) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 
   var_5 = scripts\sp\math::func_6A8E(0.3, 1.5, var_3);
   thread func_0BDC::func_D527("explosive_impact_player_jackal", var_2, undefined, var_5);
-  var_1 = vectornormalize(level.var_D127.origin - var_2);
+  var_1 = vectorNormalize(level.var_D127.origin - var_2);
 
   if(scripts\sp\utility::func_93A6()) {
     thread func_4D00(var_3, var_1, var_2, 2);
@@ -882,12 +882,12 @@ func_B81C(var_0) {
   earthquake(var_3, 0.75, level.var_D127.origin, 50000);
 
   if(var_2 > 0.6) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   } else if(var_2 > 0.3) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 
-  var_4 = vectornormalize(level.var_D127.origin - var_0);
+  var_4 = vectorNormalize(level.var_D127.origin - var_0);
   var_2 = 1 - scripts\sp\math::func_C097(300, 10000, var_1);
   func_4CFF(var_2, var_4, var_0, 2);
 }

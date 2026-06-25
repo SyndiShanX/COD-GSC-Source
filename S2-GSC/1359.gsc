@@ -31,7 +31,7 @@ lib_054F::func_7BA2(param_00) {
     }
 
     foreach(var_03 in var_01) {
-      var_03 usetriggerrequirelookat(1);
+      var_03 useTriggerRequireLookAt(1);
       param_00 thread lib_054F::func_5F10(var_03);
     }
 

@@ -120,13 +120,13 @@ class class_744b99c {
       while(true) {
         wait 0.25;
 
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           if(!is_true(player.laststand)) {
             continue;
           }
 
           if(player istouching(self)) {
-            player setorigin(var_e275e943[idx].origin);
+            player setOrigin(var_e275e943[idx].origin);
             waitframe(1);
             player namespace_83eb6304::function_3ecfde67("lightningStrike");
             player namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
@@ -146,7 +146,7 @@ class class_744b99c {
       result = self waittill(#"trigger");
 
       if(isDefined(result.activator) && is_true(result.activator.laststand)) {
-        result.activator setorigin(var_d2820900.origin);
+        result.activator setOrigin(var_d2820900.origin);
         waitframe(1);
         result.activator namespace_83eb6304::function_3ecfde67("lightningStrike");
         result.activator namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
@@ -244,7 +244,7 @@ class class_744b99c {
         }
 
         if(distancesquared(player.origin, result.activator.origin) > sqr(700)) {
-          player setorigin(result.activator.origin + (randomintrange(-40, 40), randomintrange(-40, 40), 0));
+          player setOrigin(result.activator.origin + (randomintrange(-40, 40), randomintrange(-40, 40), 0));
           waitframe(1);
           player namespace_83eb6304::function_3ecfde67("lightningStrike");
           player namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
@@ -262,7 +262,7 @@ class class_744b99c {
       idx = 0;
 
       foreach(player in players) {
-        player setorigin(var_4200bfbf[idx].origin);
+        player setOrigin(var_4200bfbf[idx].origin);
         player setplayerangles(var_4200bfbf[idx].angles);
         player clientfield::increment_to_player("resetCamera");
         idx++;
@@ -314,7 +314,7 @@ class class_744b99c {
         player namespace_7f5aeb59::function_513831e1();
       }
 
-      player setorigin(teleporter.origin + (randomintrange(-40, 40), randomintrange(-40, 40), 0));
+      player setOrigin(teleporter.origin + (randomintrange(-40, 40), randomintrange(-40, 40), 0));
       waitframe(1);
       player namespace_83eb6304::function_3ecfde67("lightningStrike");
       player namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
@@ -785,7 +785,7 @@ class class_744b99c {
           var_b458883a clientfield::set("set_icon", 1);
           var_b458883a setModel("zombietron_teleporter");
           var_b458883a setmovingplatformenabled(1, 1);
-          var_b458883a disconnectpaths();
+          var_b458883a disconnectPaths();
           var_b458883a thread namespace_ec06fe4a::function_f506b4c7();
           var_b458883a.trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", var_b458883a.origin, 0, 40, 80);
           var_b458883a thread function_40ee47dc(var_b458883a.var_d1fc07a7);
@@ -955,7 +955,7 @@ function function_7c5bc025(name, section) {
   level.doa.var_fc8d8951 = gettime();
   level.doa.var_be3ad33f = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.doa.var_1f5b5d6b = player.doa.var_370ac26d;
   }
 
@@ -964,7 +964,7 @@ function function_7c5bc025(name, section) {
   level clientfield::set("setWild", [[level.doa.var_a77e6349]] - > getid());
   level clientfield::set("setWildSection", section);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"hash_279998c5df86c04d");
   }
 
@@ -980,11 +980,11 @@ function function_7c5bc025(name, section) {
   level thread function_715ea8aa(level.doa.var_a77e6349);
   level thread function_3efbdeb3(level.doa.var_a77e6349);
   starts = [[level.doa.var_a77e6349]] - > function_5dfb6d67();
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     spot = starts[i];
-    players[i] setorigin(spot.origin + (0, 0, 60));
+    players[i] setOrigin(spot.origin + (0, 0, 60));
     players[i] setplayerangles(spot.angles);
     players[i].doa.var_3cf36932 = 0;
     players[i].doa.var_4847bf49 = 0;
@@ -1020,7 +1020,7 @@ function function_7c5bc025(name, section) {
       level thread namespace_9fc66ac::announce(60);
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player giveachievement(#"doa_achievement_escapewild");
       player thread namespace_7f5aeb59::turnplayershieldon(0);
     }
@@ -1414,7 +1414,7 @@ function function_e8146c4c() {
   level endon(#"game_over");
   wait 5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player namespace_6e90e490::showhint(12);
   }
 
@@ -1425,7 +1425,7 @@ function function_e8146c4c() {
   }
 
   if(!is_true(level.doa.var_318aa67a)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player namespace_6e90e490::showhint(13);
     }
   }

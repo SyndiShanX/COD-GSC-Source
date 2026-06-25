@@ -91,7 +91,7 @@ function function_40296c9b(w_previous) {
   var_cbe49ee = util::spawn_model("p7_zm_isl_cocoon_standing", self.origin, self.angles);
   var_cbe49ee clientfield::set("player_cocooned_fx", 1);
   self.var_cbe49ee = var_cbe49ee;
-  e_spawner = getent("friendly_spider_spawner", "targetname");
+  e_spawner = getEnt("friendly_spider_spawner", "targetname");
   ai = zombie_utility::spawn_zombie(e_spawner);
   ai.origin = self.origin;
   ai.angles = self.angles;
@@ -109,7 +109,7 @@ function function_40296c9b(w_previous) {
   self lui::screen_fade_in(0.25);
   self hide();
   self notsolid();
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self enableinvulnerability();
   self freezecontrols(0);
   self thread function_a21f0b74();
@@ -138,9 +138,9 @@ function function_5ce6002e(e_player, w_previous) {
   e_player unlink();
   e_player show();
   e_player solid();
-  e_player setplayercollision(1);
+  e_player setPlayerCollision(1);
   e_player disableinvulnerability();
-  e_player setorigin(var_f1c825f6);
+  e_player setOrigin(var_f1c825f6);
   e_player.angles = e_player.old_angles;
   e_player switchtoweaponimmediate(w_previous);
   e_player.ignoreme = 0;
@@ -208,7 +208,7 @@ function function_84313596(zone_name) {
   }
   zone = level.zones[zone_name];
   for(i = 0; i < zone.volumes.size; i++) {
-    players = getplayers();
+    players = getPlayers();
     for(j = 0; j < players.size; j++) {
       if(isDefined(players[j].var_59bd3c5a)) {
         if(players[j].var_59bd3c5a istouching(zone.volumes[i]) && !players[j].var_59bd3c5a.sessionstate === "spectator") {
@@ -225,7 +225,7 @@ function function_84313596(zone_name) {
 }
 
 function closest_player_targets_override() {
-  a_targets = getplayers();
+  a_targets = getPlayers();
   for(i = 0; i < a_targets.size; i++) {
     if(isDefined(a_targets[i].var_59bd3c5a)) {
       a_targets[i] = a_targets[i].var_59bd3c5a;

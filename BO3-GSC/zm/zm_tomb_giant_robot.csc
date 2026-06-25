@@ -97,7 +97,7 @@ function function_6e99bd62(localclientnum, oldval, newval, bnewent, binitialsnap
     v_fx_pos = v_fx_pos - v_fx_offset;
     ai_robot.var_140b6e83 = spawn(localclientnum, v_fx_pos, "script_model");
     ai_robot.var_140b6e83 setModel("tag_origin");
-    ai_robot.var_140b6e83 linkto(ai_robot, "tag_hatch_fx_ri");
+    ai_robot.var_140b6e83 linkTo(ai_robot, "tag_hatch_fx_ri");
     ai_robot.var_140b6e83 playSound(0, "zmb_zombieblood_3rd_plane_explode");
     ai_robot.var_140b6e83.n_death_fx = playFXOnTag(localclientnum, level._effect["mechz_death"], ai_robot.var_140b6e83, "tag_origin");
     setfxignorepause(localclientnum, ai_robot.var_140b6e83.n_death_fx, 1);
@@ -107,7 +107,7 @@ function function_6e99bd62(localclientnum, oldval, newval, bnewent, binitialsnap
       v_fx_pos = v_fx_pos - v_fx_offset;
       ai_robot.var_140b6e83 = spawn(localclientnum, v_fx_pos, "script_model");
       ai_robot.var_140b6e83 setModel("tag_origin");
-      ai_robot.var_140b6e83 linkto(ai_robot, "tag_hatch_fx_le");
+      ai_robot.var_140b6e83 linkTo(ai_robot, "tag_hatch_fx_le");
       ai_robot.var_140b6e83 playSound(0, "zmb_zombieblood_3rd_plane_explode");
       ai_robot.var_140b6e83.n_death_fx = playFXOnTag(localclientnum, level._effect["mechz_death"], ai_robot.var_140b6e83, "tag_origin");
       setfxignorepause(localclientnum, ai_robot.var_140b6e83.n_death_fx, 1);
@@ -345,17 +345,17 @@ function giant_robot_rumble_and_shake(localclientnum, oldval, newval, bnewent, b
   self endon("disconnect");
   if(newval == 3) {
     self earthquake(0.6, 1.5, self.origin, 100);
-    self playrumbleonentity(localclientnum, "artillery_rumble");
+    self playRumbleOnEntity(localclientnum, "artillery_rumble");
     soundrattle(self.origin, 250, 750);
   } else {
     if(newval == 2) {
       self earthquake(0.3, 1.5, self.origin, 100);
-      self playrumbleonentity(localclientnum, "shotgun_fire");
+      self playRumbleOnEntity(localclientnum, "shotgun_fire");
       soundrattle(self.origin, 100, 500);
     } else {
       if(newval == 1) {
         self earthquake(0.1, 1, self.origin, 100);
-        self playrumbleonentity(localclientnum, "damage_heavy");
+        self playRumbleOnEntity(localclientnum, "damage_heavy");
         soundrattle(self.origin, 10, 350);
       } else {
         self notify("hash_ee5c27b3");
@@ -366,7 +366,7 @@ function giant_robot_rumble_and_shake(localclientnum, oldval, newval, bnewent, b
 
 function church_ceiling_fxanim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    var_61cbe98c = getent(localclientnum, "church_ceiling", "targetname");
+    var_61cbe98c = getEnt(localclientnum, "church_ceiling", "targetname");
     var_61cbe98c scene::play("p7_fxanim_zm_ori_church_ceiling_bundle", var_61cbe98c);
   }
 }

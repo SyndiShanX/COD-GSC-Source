@@ -48,11 +48,11 @@ trap_altar_spikes_glasses_listen() {
     }
   }
 
-  var_01 = getent("sunglasses_at_night", "script_noteworthy");
+  var_01 = getEnt("sunglasses_at_night", "script_noteworthy");
   var_02 = common_scripts\utility::func_46B5("glasses_dest", "script_noteworthy");
   var_03 = common_scripts\utility::func_46B5("glasses_glint_fx_loc", "script_noteworthy");
   if(isDefined(var_01) && isDefined(var_02)) {
-    var_01 moveto(var_02.var_116, 10, 0.25, 3);
+    var_01 moveTo(var_02.var_116, 10, 0.25, 3);
   }
 
   wait(10);

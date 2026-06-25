@@ -65,7 +65,7 @@ function private _cleanup(eventstruct) {
 function private _think() {
   level endoncallback(&_cleanup, #"level_restarting");
 
-  for(player = getplayers()[0]; !isDefined(player); player = getplayers()[0]) {
+  for(player = getPlayers()[0]; !isDefined(player); player = getPlayers()[0]) {
     waitframe(1);
   }
 

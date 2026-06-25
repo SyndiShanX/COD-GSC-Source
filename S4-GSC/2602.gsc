@@ -88,7 +88,7 @@ _id_A10E(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 0;
   var_7 = anglesToForward(var_1);
   var_7 = (var_7[0], var_7[1], 0);
-  var_7 = vectornormalize(var_7);
+  var_7 = vectorNormalize(var_7);
 
   if(var_4) {
     var_8 = 16;

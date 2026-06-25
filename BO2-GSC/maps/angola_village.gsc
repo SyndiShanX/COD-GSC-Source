@@ -25,7 +25,7 @@ skipto_village() {
   level.ai_hudson = init_hero("hudson");
   level.ai_hudson detach("c_usa_angola_hudson_glasses");
   level.ai_hudson detach("c_usa_angola_hudson_hat");
-  m_radio_tower = getent("radio_tower", "targetname");
+  m_radio_tower = getEnt("radio_tower", "targetname");
   m_radio_tower ignorecheapentityflag(1);
   m_radio_tower setscale(1);
   level.player thread maps\createart\angola_art::village();
@@ -145,7 +145,7 @@ village_stealth_hint() {
 fake_stealth() {
   level endon("stop_village_ambient");
   self endon("death");
-  e_foliage = getent("village_foliage", "targetname");
+  e_foliage = getEnt("village_foliage", "targetname");
   wait 0.5;
 
   while(true) {
@@ -208,7 +208,7 @@ village_runner_logic() {
 
 hut_patroller() {
   run_scene_first_frame("hut_patroller");
-  ai_patroller = getent("hut_patroller_ai", "targetname");
+  ai_patroller = getEnt("hut_patroller_ai", "targetname");
   ai_patroller endon("death");
   trigger_wait("trig_hut_patroller");
   level thread fail_by_hut_patroller();
@@ -222,7 +222,7 @@ hut_patroller() {
 clear_fail_by_hut_patroller() {
   level endon("stop_village_ambient");
   self endon("death");
-  t_fail = getent("trig_fail_by_hut_patroller", "targetname");
+  t_fail = getEnt("trig_fail_by_hut_patroller", "targetname");
 
   while(isDefined(t_fail) && self istouching(t_fail)) {
     wait 0.05;
@@ -236,7 +236,7 @@ fail_by_hut_patroller() {
   level endon("hut_patroller_passed_window");
   level endon("stop_village_ambient");
   trigger_wait("trig_fail_by_hut_patroller");
-  t_enter_hut = getent("objective_player_enter_hut_trigger", "targetname");
+  t_enter_hut = getEnt("objective_player_enter_hut_trigger", "targetname");
 
   if(isDefined(t_enter_hut)) {
     t_enter_hut delete();
@@ -279,16 +279,16 @@ radio_loop() {
 village_objectives() {
   level endon("fake_stealth_spotted");
   wait 0.1;
-  t_trigger = getent("objective_player_enter_hut_trigger", "targetname");
+  t_trigger = getEnt("objective_player_enter_hut_trigger", "targetname");
   str_struct_name = t_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_find_radio, s_struct, "");
   t_trigger waittill("trigger");
   set_objective(level.obj_find_radio, undefined, "delete");
   flag_set("mason_ready_to_enter_hud_window");
-  t_trigger = getent("objective_locates_menendez_in_hut_trigger", "targetname");
+  t_trigger = getEnt("objective_locates_menendez_in_hut_trigger", "targetname");
   str_struct_name = t_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_mason_grab_menendez, s_struct, "");
   t_trigger waittill("trigger");
   set_objective(level.obj_mason_grab_menendez, undefined, "delete");
@@ -356,7 +356,7 @@ meatshield_fail(n_enemy_encounter) {
     level.player enablehealthshield(0);
     level.player.overrideplayerdamage = ::meatshield_player_damage_override;
     end_scene("meatshield_idle_" + n_enemy_encounter + "_enemy");
-    ai_enemy = getent("meatshield_enemy_" + n_enemy_encounter + "_ai", "targetname");
+    ai_enemy = getEnt("meatshield_enemy_" + n_enemy_encounter + "_ai", "targetname");
     ai_enemy setgoalpos(ai_enemy.origin);
     ai_enemy.goalradius = 16;
     ai_enemy.dontmelee = 1;
@@ -383,7 +383,7 @@ village_meatshield_events(str_category) {
   level thread enemy_enter_meatshield_room(str_scene_enemy_attack);
   player_grabs_menendez_in_meatshield_hold();
   player_speed = 1.62;
-  e_menendez = getent("menendez_drone", "targetname");
+  e_menendez = getEnt("menendez_drone", "targetname");
   level.player thread player_meatshield_move_and_rotate(e_menendez, player_speed);
 
   while(flag("meatshield_completed") == 0) {
@@ -455,7 +455,7 @@ player_grabs_menendez_in_meatshield_hold() {
   m_player_rig = a_rigs[0];
   level.m_player_rig = m_player_rig;
   level.mason_meatshield_weapon = spawn_model("t6_wpn_pistol_browninghp_prop_view", level.m_player_rig gettagorigin("tag_weapon1"), level.m_player_rig gettagangles("tag_weapon1"));
-  level.mason_meatshield_weapon linkto(level.m_player_rig, "tag_weapon1");
+  level.mason_meatshield_weapon linkTo(level.m_player_rig, "tag_weapon1");
   scene_wait(str_scene_name);
 }
 
@@ -493,10 +493,10 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
   v_ang_offset = e_menendez.angles - level.m_player_rig.angles;
   level.meatshield_rot = 0.0;
   level thread meatshield_check_for_player_rotation(1.5);
-  s_start = getent("village_meatshield_start_struct", "targetname");
+  s_start = getEnt("village_meatshield_start_struct", "targetname");
   level.player playerlinktoabsolute(level.m_player_rig, "tag_player");
   level.m_player_rig setanim(level.scr_anim["player_body"]["mason_move_loop"][0], 1, 0, 1);
-  e_menendez linkto(level.m_player_rig, "tag_origin", v_offset, v_ang_offset);
+  e_menendez linkTo(level.m_player_rig, "tag_origin", v_offset, v_ang_offset);
   e_menendez setanim(level.scr_anim["menendez"]["walk"][0], 1, 0, 1);
   level thread meatshield_screen_message(3);
   level thread meatshield_player_movement(player_speed);
@@ -505,17 +505,17 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
   back_right_threshold = 40.0;
   back_left_threshold = -40.0;
   n_facing_diff = 0.0;
-  e_end = getent("village_meatshield_end_struct", "targetname");
+  e_end = getEnt("village_meatshield_end_struct", "targetname");
   level thread player_meatshield_facing_rumble(1.0);
 
   while(flag("player_completes_meatshield_movement") == 0) {
     if(isDefined(level.meatshield_v2) && level.meatshield_v2 == 1) {
       v_end = (e_end.origin[0], e_end.origin[1], 0);
       v_start = (level.m_player_rig.origin[0], level.m_player_rig.origin[1], 0);
-      v_norm_vec = vectornormalize(v_end - v_start);
+      v_norm_vec = vectorNormalize(v_end - v_start);
       v_norm_vec = v_norm_vec * -1;
       v_angles = anglesToForward(level.m_player_rig.angles);
-      v_angles = vectornormalize(v_angles);
+      v_angles = vectorNormalize(v_angles);
       n_dot = vectordot(v_norm_vec, v_angles);
       n_facing_diff = acos(n_dot);
       v_cross = vectorcross(v_norm_vec, v_angles);
@@ -548,7 +548,7 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
         }
 
         if(time > 0.0) {
-          level.player playrumbleonentity("damage_light");
+          level.player playRumbleOnEntity("damage_light");
           wait(time);
         }
       }
@@ -577,12 +577,12 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
 
 meatshield_player_movement(player_speed) {
   level endon("meatshield_grenade_explosion");
-  e_end = getent("village_meatshield_end_struct", "targetname");
+  e_end = getEnt("village_meatshield_end_struct", "targetname");
   flag_wait("player_knows_meatshield_controls");
 
   while(true) {
     v_end = (e_end.origin[0], e_end.origin[1], level.m_player_rig.origin[2]);
-    v_dir = vectornormalize(v_end - level.m_player_rig.origin);
+    v_dir = vectorNormalize(v_end - level.m_player_rig.origin);
     level.m_player_rig.origin = level.m_player_rig.origin + v_dir * player_speed;
     dist = distance(level.m_player_rig.origin, v_end);
 
@@ -614,7 +614,7 @@ meatshield_check_for_player_rotation(rot_scale) {
     if(level.meatshield_rot != 0.0) {
       v_rot = (0, level.meatshield_rot, 0);
       v_rot = v_rot + level.m_player_rig.angles;
-      level.m_player_rig rotateto(v_rot, 0.05);
+      level.m_player_rig rotateTo(v_rot, 0.05);
     }
 
     wait 0.01;
@@ -631,7 +631,7 @@ player_meatshield_facing_rumble(min_gap) {
 
     if(dt > min_gap) {
       last_time = time;
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
     }
   }
 }
@@ -658,7 +658,7 @@ meatshield_screen_message(display_time) {
 
 grenade_explosion_effect() {
   level waittill("meatshield_grenade_explosion");
-  e_grenade = getent("nada", "targetname");
+  e_grenade = getEnt("nada", "targetname");
   playFX(level._effect["def_explosion"], e_grenade.origin);
   clientnotify("grn_dgs");
 }
@@ -668,7 +668,7 @@ meatshield_ai_attacker(str_enemy_scene, str_enemy_ai_name) {
   level thread run_scene(str_enemy_scene);
   start_time = gettime();
   wait 0.1;
-  ai_enemy = getent(str_enemy_ai_name, "targetname");
+  ai_enemy = getEnt(str_enemy_ai_name, "targetname");
   ai_enemy endon("death");
   ai_enemy.ignoreall = 1;
   ai_enemy.ignoreme = 1;
@@ -714,7 +714,7 @@ meatshild_ai_try_and_shoot_target(str_enemy_scene, e_target, attack_time, player
     dt = (time - start_time) / 1000;
 
     if(dt >= player_initial_prep_time) {
-      v_dir = vectornormalize(self.origin - e_target.origin);
+      v_dir = vectorNormalize(self.origin - e_target.origin);
       v_forward = anglesToForward(e_target.angles);
       dot = vectordot(v_dir, v_forward);
 
@@ -748,9 +748,9 @@ meatshild_ai_try_and_shoot_target(str_enemy_scene, e_target, attack_time, player
 meatshield_attacker_scene_fails() {
   level.meatshield_fails = 1;
   level notify("meatshield_failed");
-  e_soldier = getent("guy_soldier_ai", "targetname");
-  e_soldier2 = getent("guy_soldier2_ai", "targetname");
-  e_soldier4 = getent("guy_soldier4_ai", "targetname");
+  e_soldier = getEnt("guy_soldier_ai", "targetname");
+  e_soldier2 = getEnt("guy_soldier2_ai", "targetname");
+  e_soldier4 = getEnt("guy_soldier4_ai", "targetname");
   end_scene("meatshield_enemy_attack");
   end_scene("meatshield_enemy_attack_ai2");
   end_scene("meatshield_enemy_attack_ai4");
@@ -763,12 +763,12 @@ meatshield_attacker_scene_fails() {
 }
 
 spinning_fan() {
-  e_fan = getent("fan_spin", "targetname");
+  e_fan = getEnt("fan_spin", "targetname");
   yaw_angle = -360;
   rotate_time = 2.0;
 
   while(true) {
-    e_fan rotateyaw(yaw_angle, rotate_time);
+    e_fan rotateYaw(yaw_angle, rotate_time);
     e_fan waittill("rotatedone");
 
     if(flag("village_cleanup")) {
@@ -778,7 +778,7 @@ spinning_fan() {
 }
 
 clean_up_village_guards() {
-  t_sm_village_fail = getent("sm_fail_village", "targetname");
+  t_sm_village_fail = getEnt("sm_fail_village", "targetname");
   t_sm_village_fail delete();
   a_enemies = getEntArray("village_guards", "script_noteworthy");
 
@@ -801,7 +801,7 @@ village_fails() {
 village_fail_general_logic() {
   flag_set("stop_village_ambient");
   flag_set("fake_stealth_spotted");
-  t_enter_hut = getent("objective_player_enter_hut_trigger", "targetname");
+  t_enter_hut = getEnt("objective_player_enter_hut_trigger", "targetname");
 
   if(!isDefined(t_enter_hut)) {
     missionfailedwrapper(&"ANGOLA_2_STEALTH_FAIL_VILLAGE");
@@ -821,7 +821,7 @@ village_fail_general_logic() {
   foreach(e_enemy in a_enemies) {
     if(isalive(e_enemy)) {
       e_enemy.ignoreall = 0;
-      e_enemy anim_stopanimscripted();
+      e_enemy anim_stopanimScripted();
       e_enemy thread chase_after_target(level.player);
     }
   }

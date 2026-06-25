@@ -130,7 +130,7 @@ function function_11da2524() {
 }
 
 function function_28753fd1() {
-  var_329d83b2 = getent("tesla_trap_console", "targetname");
+  var_329d83b2 = getEnt("tesla_trap_console", "targetname");
   var_33accfa3 = getEntArray("power_cable_proto", "targetname");
   for(i = 0; i < var_33accfa3.size; i++) {
     switch (var_33accfa3[i].script_noteworthy) {
@@ -213,7 +213,7 @@ function function_79774b04() {
     if(var_e6706bab.size == 0) {
       break;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
     for(i = 0; i < a_players.size; i++) {
       e_player = a_players[i];
       var_cebeadd5 = 0;
@@ -249,15 +249,15 @@ function function_19235352(facee) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   if(dotproduct > dot_limit) {
     var_270778cc = anglesToForward(facee.angles);
     var_ed409956 = (var_270778cc[0], var_270778cc[1], 0);
-    var_2ecbb83c = vectornormalize(var_ed409956);
+    var_2ecbb83c = vectorNormalize(var_ed409956);
     var_64886733 = vectordot(var_2ecbb83c, unittofaceevec2d);
     if(var_64886733 > dot_limit) {
       return true;
@@ -285,7 +285,7 @@ function function_fe2cf77b(var_f5f4e9cc) {
 
 function function_b8c60cae(var_f5f4e9cc) {
   n_num = 0;
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     e_player = a_players[i];
     if(function_d46b0523(e_player, var_f5f4e9cc)) {
@@ -320,7 +320,7 @@ function function_fec7f142() {
   while(self.var_98e1d15 == 0) {
     self.var_a7dffe09 = 0;
     e_player = self function_8a3885f2();
-    a_players = getplayers();
+    a_players = getPlayers();
     for(i = 0; i < a_players.size; i++) {
       a_players[i].var_4d307aef = 0;
     }
@@ -344,7 +344,7 @@ function function_fec7f142() {
     }
     level.var_9bbfcb9 = 0;
     self notify("hash_e9b136f1");
-    a_players = getplayers();
+    a_players = getPlayers();
     for(i = 0; i < a_players.size; i++) {
       if(a_players[i].var_4d307aef == 0 && (isDefined(self.var_98e1d15) && self.var_98e1d15)) {
         if(function_d46b0523(a_players[i], self)) {
@@ -409,7 +409,7 @@ function function_8a3885f2() {
   var_93b2c080 = 0;
   while(!var_93b2c080) {
     if(!(isDefined(level.var_9bbfcb9) && level.var_9bbfcb9)) {
-      a_players = getplayers();
+      a_players = getPlayers();
       for(i = 0; i < a_players.size; i++) {
         e_player = a_players[i];
         var_2638ea5e = self function_8961cbdb(e_player);
@@ -425,7 +425,7 @@ function function_8a3885f2() {
               e_player thread function_59bcf901(n_cost, self);
               level thread zm_genesis_vo::corruption_engine_vo();
               var_93b2c080 = 1;
-              playsoundatposition("zmb_apothicon_activate", e_player.origin);
+              playSoundAtPosition("zmb_apothicon_activate", e_player.origin);
               break;
             }
             continue;
@@ -448,7 +448,7 @@ function function_59bcf901(n_cost, var_f5f4e9cc) {
   self zm_score::minus_to_player_score(n_cost);
   self waittill("hash_e95dda8e");
   if(1) {
-    a_players = getplayers();
+    a_players = getPlayers();
     for(i = 0; i < a_players.size; i++) {
       e_player = a_players[i];
       if(e_player istouching(var_f5f4e9cc) && (!(isDefined(e_player.laststand) && e_player.laststand))) {
@@ -582,7 +582,7 @@ function abort_ritual() {
 }
 
 function get_favorite_enemy(v_origin) {
-  a_targets = getplayers();
+  a_targets = getPlayers();
   var_20a0668f = undefined;
   for(i = 0; i < a_targets.size; i++) {
     e_target = a_targets[i];
@@ -736,7 +736,7 @@ function function_e793dedb() {
 function zombie_blood_soul_streak_fx(v_origin, v_angles, v_endpos, time) {
   e_model = util::spawn_model("tag_origin", v_origin, v_angles);
   e_model clientfield::set("power_zombie_soul", 1);
-  e_model moveto(v_endpos, time);
+  e_model moveTo(v_endpos, time);
   e_model waittill("movedone");
   e_model playSound("zmb_ee_soul_impact");
   e_model delete();
@@ -916,7 +916,7 @@ function function_ca2ba8d0() {
 
 function get_spawn_delay() {
   n_delay = 1;
-  a_players = getplayers();
+  a_players = getPlayers();
   switch (a_players.size) {
     case 1: {
       n_delay = randomfloatrange(1.4, 1.6);
@@ -999,7 +999,7 @@ function function_d93bc7dc(var_64e27e68) {
 }
 
 function get_closest_valid_player_override() {
-  a_all_players = getplayers();
+  a_all_players = getPlayers();
   if(!(isDefined(self.var_17de041a) && self.var_17de041a)) {
     return a_all_players;
   }

@@ -40,7 +40,7 @@ function private pulse_rumble_loop(duration) {
   goaltime = gettime() + int(duration * 1000);
 
   while(gettime() < goaltime) {
-    self.owner playrumbleonentity("damage_heavy");
+    self.owner playRumbleOnEntity("damage_heavy");
     waitframe(1);
   }
 }

@@ -447,7 +447,7 @@ artilleryDamageEntsThread() {
 
     if(!ent.isPlayer || isAlive(ent.entity)) {
       ent maps\mp\gametypes\_weapons::damageEnt(
-        ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", "artillery_mp", ent.pos, vectornormalize(ent.damageCenter - ent.pos)
+        ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", "artillery_mp", ent.pos, vectorNormalize(ent.damageCenter - ent.pos)
       );
 
       level.artilleryDamagedEnts[level.artilleryDamagedEntsIndex] = undefined;
@@ -652,7 +652,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   }
 
   hitpos = hitpos / repeat + (0, 0, 128);
-  killCamEnt moveto(bomb.killCamEnt.origin * .35 + hitpos * .65, 1.5, 0, .5);
+  killCamEnt moveTo(bomb.killCamEnt.origin * .35 + hitpos * .65, 1.5, 0, .5);
 
   wait(10.0);
   newBomb delete();
@@ -1048,11 +1048,11 @@ play_loop_sound_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
   org playLoopSound(alias);
   self waittill("stop sound" + alias);
@@ -1594,7 +1594,7 @@ useArtillery(pos) {
   thread doArtillery(pos, self, self.pers["team"], ownerDeathCount);
 }
 air_raid_audio() {
-  air_raid_1 = getent("air_raid_1", "targetname");
+  air_raid_1 = getEnt("air_raid_1", "targetname");
   if(isDefined(air_raid_1)) {
     air_raid_1 playSound("air_raid_a");
   }

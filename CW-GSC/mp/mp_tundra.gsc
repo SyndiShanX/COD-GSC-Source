@@ -160,7 +160,7 @@ function on_end_game() {
 }
 
 function function_e33449fd() {
-  rope_bridge_trig = getent("rope_bridge_trig", "targetname");
+  rope_bridge_trig = getEnt("rope_bridge_trig", "targetname");
   rope_bridge_trig callback::on_trigger(&function_95ec9598);
 }
 
@@ -191,7 +191,7 @@ function function_95ec9598(var_3a72e7b7) {
 }
 
 function function_86072b19() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player) && isDefined(self) && player istouching(self) && player function_64fefea()) {
       return true;
     }
@@ -201,7 +201,7 @@ function function_86072b19() {
 }
 
 function function_acf0ca42() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player) && isDefined(self) && player istouching(self)) {
       return true;
     }

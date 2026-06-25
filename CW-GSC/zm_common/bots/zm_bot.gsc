@@ -42,7 +42,7 @@ function function_1f9de69d(var_40b86c4b) {
     return false;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isbot(player)) {
@@ -76,7 +76,7 @@ function handleplayerfasttravel(player, var_12230d08) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isbot(player)) {
@@ -102,7 +102,7 @@ function handleplayerfasttravel(player, var_12230d08) {
       continue;
     }
 
-    player setorigin(currentorigin);
+    player setOrigin(currentorigin);
     player dontinterpolate();
   }
 }

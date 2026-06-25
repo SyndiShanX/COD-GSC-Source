@@ -109,18 +109,18 @@ custom_flag_trigger() {
   return isDefined(array[self.classname]);
 }
 so_level_cleanup() {
-  ent = GetEnt("predator_drone_control", "targetname");
+  ent = getEnt("predator_drone_control", "targetname");
   ent Delete();
 
   wait(0.1);
 
-  thread do_exploder_custom(getent("north_side_low", "targetname"), "just_swap");
-  thread do_exploder_custom(getent("north_side_high", "targetname"), "just_swap");
-  thread do_exploder_custom(getent("west_side", "targetname"), "just_swap");
+  thread do_exploder_custom(getEnt("north_side_low", "targetname"), "just_swap");
+  thread do_exploder_custom(getEnt("north_side_high", "targetname"), "just_swap");
+  thread do_exploder_custom(getEnt("west_side", "targetname"), "just_swap");
 
-  ladder = getent("nates_kitchen_ladder_clip", "targetname");
+  ladder = getEnt("nates_kitchen_ladder_clip", "targetname");
   ladder Delete();
-  ladder = getent("bt_ktichen_ladder_clip", "targetname");
+  ladder = getEnt("bt_ktichen_ladder_clip", "targetname");
   ladder Delete();
 }
 
@@ -254,7 +254,7 @@ so_init_players() {
 }
 
 so_chopper_invasion_objectives() {
-  ref = getstruct("so_end_of_level", "targetname");
+  ref = getStruct("so_end_of_level", "targetname");
 
   Objective_Add(0, "current", &"SO_CHOPPER_INVASION_OBJ_REGULAR", groundpos(ref.origin));
 }
@@ -276,14 +276,14 @@ chopper_init() {
   level.chopper_funcs["so_guns_guns_guns"] = ::chopper_guns_guns_guns;
   level.chopper_funcs["so_last_driveby_point"] = ::empty;
 
-  start = getstruct("chopper_start", "targetname");
+  start = getStruct("chopper_start", "targetname");
 
   if(1) {
-    chopper_spawner = GetEnt("chopper", "targetname");
+    chopper_spawner = getEnt("chopper", "targetname");
     chopper_spawner.vehicletype = "blackhawk_minigun_so";
     chopper_spawner Delete();
 
-    chopper = SpawnVehicle("vehicle_blackhawk_minigun_hero", "chopper", "blackhawk_minigun_so", start.origin, start.angles);
+    chopper = spawnVehicle("vehicle_blackhawk_minigun_hero", "chopper", "blackhawk_minigun_so", start.origin, start.angles);
     chopper.vehicletype = "blackhawk_minigun_so";
 
     level thread maps\_vehicle::vehicle_init(chopper);
@@ -318,7 +318,7 @@ chopper_driveby_trigger() {
 
   wait(1);
 
-  struct = getstruct("so_last_driveby_point", "script_noteworthy");
+  struct = getStruct("so_last_driveby_point", "script_noteworthy");
   level.chopper SetVehGoalPOs(struct.origin, 1);
   level.chopper SetHoverParams(10, 2, 1);
   level.chopper Vehicle_SetSpeed(10, 2, 2);
@@ -335,7 +335,7 @@ chopper_start_driveby() {
 chopper_driveby_hover() {
   self notify("stop_chopper_gun_face_entity");
   self ClearLookAtEnt();
-  self thread chopper_gun_face_entity(getstruct("chopper_driveby_start_target", "targetname"));
+  self thread chopper_gun_face_entity(getStruct("chopper_driveby_start_target", "targetname"));
 
   self chopper_default_pitch_roll();
   self SetHoverParams(10, 2, 1);
@@ -378,7 +378,7 @@ gas_station_truck() {
 }
 
 gas_station_lookat() {
-  self thread chopper_gun_face_entity(getstruct("so_chopper_gasstation_lookat", "targetname"));
+  self thread chopper_gun_face_entity(getStruct("so_chopper_gasstation_lookat", "targetname"));
 }
 
 parkinglot_chopper() {
@@ -459,11 +459,11 @@ end() {
   level.chopper SetMaxPitchRoll(20, 20);
   level.chopper SetHoverParams(20, 2, 3);
 
-  point = getstruct("so_chopper_end_path", "targetname");
+  point = getStruct("so_chopper_end_path", "targetname");
   dist = DistanceSquared(level.chopper.origin, point.origin);
   closest = point;
   while(isDefined(point.target)) {
-    new_point = getstruct(point.target, "targetname");
+    new_point = getStruct(point.target, "targetname");
     new_dist = DistanceSquared(level.chopper.origin, new_point.origin);
 
     if(new_dist < dist) {
@@ -479,9 +479,9 @@ end() {
   }
 
   if(isDefined(closest.script_noteworthy) && closest.script_noteworthy == "so_end_lookat") {
-    point = getstruct(closest.targetname, "targetname");
+    point = getStruct(closest.targetname, "targetname");
   } else {
-    point = getstruct(closest.target, "targetname");
+    point = getStruct(closest.target, "targetname");
   }
 
   flag_set("so_start_end_path");
@@ -489,7 +489,7 @@ end() {
   level.chopper thread chopper_follow_path(point.targetname, false, undefined, true);
   wait(0.1);
   level.chopper ClearLookAtEnt();
-  level.chopper chopper_gun_face_entity(getstruct("chopper_end_lookat", "targetname"));
+  level.chopper chopper_gun_face_entity(getStruct("chopper_end_lookat", "targetname"));
 }
 
 end_spawners() {
@@ -510,7 +510,7 @@ end_reminder() {
 
   wait(3);
 
-  trigger = GetEnt("so_roof_check", "targetname");
+  trigger = getEnt("so_roof_check", "targetname");
   while(1) {
     if(level.groundplayer IsTouching(trigger)) {
       chopper_dialog("end_reminder");
@@ -546,7 +546,7 @@ end_go_to_diner() {
 end_go_to_diner_thread() {
   self endon("death");
 
-  point = getstruct("so_nates_diner_point", "targetname");
+  point = getStruct("so_nates_diner_point", "targetname");
   if(DistanceSquared(point.origin, self.origin) > 1500 * 1500) {
     wait(RandomFloatRange(0.1, 5));
   }
@@ -576,10 +576,10 @@ end_pickup() {
   level thread end_reminder();
   level thread end_ai_monitor();
 
-  struct = getstruct("so_end_pickup", "script_noteworthy");
+  struct = getStruct("so_end_pickup", "script_noteworthy");
   level.chopper thread chopper_fake_hover(struct.origin, 10, true);
 
-  trigger = GetEnt("so_end_jump_trigger", "targetname");
+  trigger = getEnt("so_end_jump_trigger", "targetname");
   while(!level.groundplayer IsTouching(trigger)) {
     wait(0.05);
   }
@@ -608,9 +608,9 @@ end_pickup() {
   tag_org = tag_org + vector_multiply(forward, 40);
   temp_tag.origin = tag_org;
   temp_tag.angles = tag_angles + (0, -90, 0);
-  temp_tag LinkTo(self);
+  temp_tag linkTo(self);
 
-  level.groundplayer PlayerLinkTo(temp_tag, "tag_origin", 1, 20, 45, 30, 30);
+  level.groundplayer PlayerlinkTo(temp_tag, "tag_origin", 1, 20, 45, 30, 30);
 
   self SetMaxPitchRoll(0, 0);
   self notify("stop_chopper_gun_face_entity");
@@ -620,7 +620,7 @@ end_pickup() {
 }
 
 end_ai_monitor() {
-  trigger = GetEnt("so_roof_check", "targetname");
+  trigger = getEnt("so_roof_check", "targetname");
 
   while(1) {
     wait(0.5);

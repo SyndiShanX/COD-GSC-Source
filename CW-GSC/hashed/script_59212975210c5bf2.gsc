@@ -97,7 +97,7 @@ function private function_cc775529(s_instance) {
       iprintlnbold("<dev string:x38>");
 
       level thread fx::play(#"hash_779e4e163c8d0dae", mdl_orb.origin + var_d263d14a, mdl_orb.angles);
-      playsoundatposition(#"hash_76169abd873150fa", mdl_orb.origin);
+      playSoundAtPosition(#"hash_76169abd873150fa", mdl_orb.origin);
       mdl_orb stoploopsound();
       s_instance thread function_eda98f63();
       break;
@@ -162,7 +162,7 @@ function private function_cc775529(s_instance) {
                 s_result.attacker zm_stats::function_51c1448(#"hash_4945dccf0e8c820a", 1, #"hash_4e7e61b2bbe2f0e1", #"melee_coldwar_t9_dw");
               }
 
-              var_206de304 = int(min(getplayers().size, 2));
+              var_206de304 = int(min(getPlayers().size, 2));
               dropstruct = {
                 #origin: mdl_orb.origin, #angles: mdl_orb.angles, #var_738dfc81: var_206de304
               };
@@ -171,7 +171,7 @@ function private function_cc775529(s_instance) {
                 #scoreevent: "destroy_aether_orb_zm", #allplayers: 1
               });
 
-              foreach(player in getplayers()) {
+              foreach(player in getPlayers()) {
                 player zm_stats::increment_challenge_stat(#"hash_11dc4c118b41495");
               }
 
@@ -204,7 +204,7 @@ function private function_cc775529(s_instance) {
           level thread fx::play(#"hash_779e4e163c8d0dae", mdl_orb.origin + var_d263d14a, mdl_orb.angles);
         }
 
-        playsoundatposition(#"hash_4e565c316ea5ada2", mdl_orb.origin);
+        playSoundAtPosition(#"hash_4e565c316ea5ada2", mdl_orb.origin);
         s_instance thread function_eda98f63();
         break;
       }
@@ -224,7 +224,7 @@ function private function_cc775529(s_instance) {
       n_move_time = n_dist / 300;
       mdl_orb playSound(#"hash_3bd4a77bc51dfb52");
       mdl_orb playLoopSound(#"hash_5455d7addafa1122");
-      mdl_orb moveto(var_1b519b48.origin, n_move_time);
+      mdl_orb moveTo(var_1b519b48.origin, n_move_time);
       mdl_orb waittill(#"movedone");
       mdl_orb playSound(#"hash_55b5e35f7d261fee");
       mdl_orb playLoopSound(#"hash_5dc7884f02e73776");

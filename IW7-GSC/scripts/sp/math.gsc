@@ -12,11 +12,11 @@ func_AB7D(var_0, var_1, var_2) {
 }
 
 func_13198(var_0, var_1) {
-  return vectornormalize(var_0 - vectordot(var_1, var_0) * var_1);
+  return vectorNormalize(var_0 - vectordot(var_1, var_0) * var_1);
 }
 
 func_13199(var_0, var_1) {
-  return vectornormalize(2 * func_13198(var_0, var_1) - var_0);
+  return vectorNormalize(2 * func_13198(var_0, var_1) - var_0);
 }
 
 func_7BC5(var_0, var_1, var_2, var_3) {
@@ -368,5 +368,5 @@ func_D638(var_0, var_1, var_2, var_3) {
 }
 
 func_EB9B(var_0, var_1) {
-  return vectordot(vectornormalize(var_0), var_1);
+  return vectordot(vectorNormalize(var_0), var_1);
 }

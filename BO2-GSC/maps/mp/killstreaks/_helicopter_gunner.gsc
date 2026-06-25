@@ -180,7 +180,7 @@ play_lockon_sounds(player) {
   self endon("leaving");
   self.locksounds = spawn("script_model", self.origin);
   wait 0.1;
-  self.locksounds linkto(self, "tag_player");
+  self.locksounds linkTo(self, "tag_player");
 
   while(true) {
     self waittill("locking on");
@@ -291,7 +291,7 @@ heli_fly_well(startnode, destnodes) {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  nextnode = getent(startnode.target, "targetname");
+  nextnode = getEnt(startnode.target, "targetname");
   assert(isDefined(nextnode), "Next node in path is undefined, but has targetname");
   self setspeed(150, 80);
   self setvehgoalpos(nextnode.origin + self.zoffset, 1);
@@ -362,7 +362,7 @@ updateareanodes(areanodes, forcemove) {
   bestnode = areanodes[0];
 
   foreach(node in areanodes) {
-    helinode = getent(node.target, "targetname");
+    helinode = getEnt(node.target, "targetname");
 
     foreach(player in node.validplayers) {
       node.nodescore = node.nodescore + 1;
@@ -381,7 +381,7 @@ updateareanodes(areanodes, forcemove) {
     }
   }
 
-  return getent(bestnode.target, "targetname");
+  return getEnt(bestnode.target, "targetname");
 }
 
 traveltonode(goalnode) {
@@ -540,13 +540,13 @@ spawnplayerhelicopter(owner, type, origin, angles, hardpointtype) {
   heli setteam(owner.team);
   heli.destroyfunc = ::destroyplayerhelicopter;
   snd_ent = spawn("script_origin", heli gettagorigin("snd_cockpit"));
-  snd_ent linkto(heli, "snd_cockpit", (0, 0, 0), (0, 0, 0));
+  snd_ent linkTo(heli, "snd_cockpit", (0, 0, 0), (0, 0, 0));
   heli.snd_ent = snd_ent;
 
   if(isDefined(level.chopper_interior_models) && isDefined(level.chopper_interior_models[type]) && isDefined(level.chopper_interior_models[type][owner.team])) {
     heli.interior_model = spawn("script_model", heli.origin);
     heli.interior_model setModel(level.chopper_interior_models[type][owner.team]);
-    heli.interior_model linkto(heli, "tag_origin", (0, 0, 0), (0, 0, 0));
+    heli.interior_model linkTo(heli, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
   heli.killcament = owner;
@@ -848,7 +848,7 @@ fire_rocket(tagname, player) {
   magicbullet("heli_gunner_rockets_mp", start_origin, end_origin, self);
   player playlocalsound("wpn_gunner_rocket_fire_plr");
   self playSound("wpn_rpg_fire_npc");
-  player playrumbleonentity("damage_heavy");
+  player playRumbleOnEntity("damage_heavy");
   earthquake(0.35, 0.5, start_origin, 1000, self);
 }
 

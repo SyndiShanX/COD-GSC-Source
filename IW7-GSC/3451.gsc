@@ -98,7 +98,7 @@ bot_set_ambush_trap(var_0, var_1, var_2, var_3, var_4) {
       }
 
       if(distancesquared(var_9.origin, var_2.origin) > 90000) {
-        if(vectordot(var_7, vectornormalize(var_9.origin - var_2.origin)) < 0.4) {
+        if(vectordot(var_7, vectorNormalize(var_9.origin - var_2.origin)) < 0.4) {
           var_6[var_6.size] = var_9;
         }
       }
@@ -347,7 +347,7 @@ bot_defend_think(var_0, var_1, var_2, var_3) {
       var_13 = getnodesinradiussorted(var_12, 256, 0, 500, "path", var_11);
 
       for(var_14 = 0; var_14 < var_13.size; var_14++) {
-        var_15 = vectornormalize(var_13[var_14].origin - var_12);
+        var_15 = vectorNormalize(var_13[var_14].origin - var_12);
         var_16 = var_12 + var_15 * 15;
 
         if(sighttracepassed(var_16, var_13[var_14].origin, 0, undefined)) {
@@ -678,7 +678,7 @@ defense_cautious_approach() {
   }
   childthread monitor_cautious_approach_dangerous_locations();
   var_21 = self botgetscriptgoaltype();
-  var_22 = self botgetscriptgoalradius();
+  var_22 = self botgetscriptgoalRadius();
   var_23 = self botgetscriptgoalyaw();
   wait 0.05;
 
@@ -981,12 +981,12 @@ bot_monitor_watch_entrances_bodyguard() {
 
   for(;;) {
     var_0 = anglesToForward(self.bot_defend_player_guarding.angles) * (1, 1, 0);
-    var_0 = vectornormalize(var_0);
+    var_0 = vectorNormalize(var_0);
 
     foreach(var_2 in self.watch_nodes) {
       var_2.watch_node_chance[self.entity_number] = 1.0;
       var_3 = var_2.origin - self.bot_defend_player_guarding.origin;
-      var_3 = vectornormalize(var_3);
+      var_3 = vectorNormalize(var_3);
       var_4 = vectordot(var_0, var_3);
 
       if(var_4 > 0.6) {
@@ -1006,14 +1006,14 @@ bot_monitor_watch_entrances_bodyguard() {
 
 entrance_to_enemy_zone(var_0) {
   var_1 = getnodezone(var_0);
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
 
   for(var_3 = 0; var_3 < level.zonecount; var_3++) {
     if(botzonegetcount(var_3, self.team, "enemy_predict") > 0) {
       if(isDefined(var_1) && var_3 == var_1) {
         return 1;
       } else {
-        var_4 = vectornormalize(getzoneorigin(var_3) - self.origin);
+        var_4 = vectorNormalize(getzoneorigin(var_3) - self.origin);
         var_5 = vectordot(var_2, var_4);
 
         if(var_5 > 0.2) {
@@ -1039,7 +1039,7 @@ prioritize_watch_nodes_toward_enemies(var_0) {
     if(var_1.size == 0) {
       break;
     }
-    var_3 = vectornormalize(getzoneorigin(var_2) - self.origin);
+    var_3 = vectorNormalize(getzoneorigin(var_2) - self.origin);
 
     for(var_4 = 0; var_4 < var_1.size; var_4++) {
       var_5 = getnodezone(var_1[var_4]);
@@ -1048,7 +1048,7 @@ prioritize_watch_nodes_toward_enemies(var_0) {
       if(isDefined(var_5) && var_2 == var_5) {
         var_6 = 1;
       } else {
-        var_7 = vectornormalize(var_1[var_4].origin - self.origin);
+        var_7 = vectorNormalize(var_1[var_4].origin - self.origin);
         var_8 = vectordot(var_7, var_3);
 
         if(var_8 > 0.2) {
@@ -1080,7 +1080,7 @@ entrance_watched_by_ally(var_0) {
 
 entrance_watched_by_player(var_0, var_1) {
   var_2 = anglesToForward(var_0.angles);
-  var_3 = vectornormalize(var_1.origin - var_0.origin);
+  var_3 = vectorNormalize(var_1.origin - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0.6) {
@@ -1211,8 +1211,8 @@ monitor_defend_player() {
         if(distancesquared(var_2, self.bot_defend_player_guarding.origin) > var_1 * var_1) {
           var_2 = self.bot_defend_player_guarding.origin;
           var_4 = 1;
-          var_8 = vectornormalize(var_5 - self.bot_defend_player_guarding.origin);
-          var_9 = vectornormalize(var_6);
+          var_8 = vectorNormalize(var_5 - self.bot_defend_player_guarding.origin);
+          var_9 = vectorNormalize(var_6);
 
           if(vectordot(var_8, var_9) < 0.1) {
             self notify("defend_force_node_recalculation");
@@ -1255,10 +1255,10 @@ find_defend_node_capture() {
 
   if(isDefined(var_1)) {
     if(isDefined(var_0)) {
-      var_2 = vectornormalize(var_0 - var_1.origin);
+      var_2 = vectorNormalize(var_0 - var_1.origin);
       self.cur_defend_angle_override = vectortoangles(var_2);
     } else {
-      var_3 = vectornormalize(var_1.origin - scripts\mp\bots\bots_util::defend_valid_center());
+      var_3 = vectorNormalize(var_1.origin - scripts\mp\bots\bots_util::defend_valid_center());
       self.cur_defend_angle_override = vectortoangles(var_3);
     }
 
@@ -1276,10 +1276,10 @@ find_defend_node_capture_zone() {
 
   if(isDefined(var_1)) {
     if(isDefined(var_0)) {
-      var_2 = vectornormalize(var_0 - var_1.origin);
+      var_2 = vectorNormalize(var_0 - var_1.origin);
       self.cur_defend_angle_override = vectortoangles(var_2);
     } else {
-      var_3 = vectornormalize(var_1.origin - scripts\mp\bots\bots_util::defend_valid_center());
+      var_3 = vectorNormalize(var_1.origin - scripts\mp\bots\bots_util::defend_valid_center());
       self.cur_defend_angle_override = vectortoangles(var_3);
     }
 
@@ -1295,7 +1295,7 @@ find_defend_node_protect() {
   var_0 = scripts\mp\bots\bots_util::bot_find_node_that_protects_point(scripts\mp\bots\bots_util::defend_valid_center(), self.bot_defending_radius);
 
   if(isDefined(var_0)) {
-    var_1 = vectornormalize(scripts\mp\bots\bots_util::defend_valid_center() - var_0.origin);
+    var_1 = vectorNormalize(scripts\mp\bots\bots_util::defend_valid_center() - var_0.origin);
     self.cur_defend_angle_override = vectortoangles(var_1);
     self.cur_defend_node = var_0;
   } else {
@@ -1343,10 +1343,10 @@ bot_handle_no_valid_defense_node(var_0, var_1) {
   }
 
   if(isDefined(var_0)) {
-    var_2 = vectornormalize(var_0 - self.cur_defend_point_override);
+    var_2 = vectorNormalize(var_0 - self.cur_defend_point_override);
     self.cur_defend_angle_override = vectortoangles(var_2);
   } else if(isDefined(var_1)) {
-    var_2 = vectornormalize(self.cur_defend_point_override - var_1);
+    var_2 = vectorNormalize(self.cur_defend_point_override - var_1);
     self.cur_defend_angle_override = vectortoangles(var_2);
   }
 }

@@ -39,8 +39,8 @@
 function starting(str_skipto) {
   level.var_aece851d = [];
   snd::client_msg("heli_intro_submix");
-  level thread scene::init_streamer(#"scene_tkd_hit1_intro_fly_in", getplayers());
-  level thread scene::init_streamer(#"scene_tkd_hit1_intro_fly_in_trucks", getplayers());
+  level thread scene::init_streamer(#"scene_tkd_hit1_intro_fly_in", getPlayers());
+  level thread scene::init_streamer(#"scene_tkd_hit1_intro_fly_in_trucks", getPlayers());
   level thread function_c6662dbb("intro_enemy_trucks");
   level thread function_3d66ebcc("intro_heli_player");
   namespace_42da7c51::function_ed760ecb("woods", 0);
@@ -54,7 +54,7 @@ function starting(str_skipto) {
 }
 
 function main(str_skipto, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::set(#"intro", "freezecontrols", 1);
   level util::screen_fade_out(0);
   player clientfield::set_to_player("force_stream_weapons", 1);
@@ -199,16 +199,16 @@ function function_3d66ebcc(tname) {
   level.player_heli hidepart("tag_origin", "veh_t9_mil_us_helicopter_large_weapons_mount_attach", 1);
   thread namespace_42da7c51::heli_light(level.var_9a3944f4, "ally_heli_spot_light_bustout", "tag_fx_running_light_front_side_left_01", (-20, 12, 0), level.var_9a3944f4, 0, 1);
   level.var_9a3944f4 thread namespace_42da7c51::function_3cebcd1b();
-  level.player_heli.probe = getent("heli_probe", "targetname");
+  level.player_heli.probe = getEnt("heli_probe", "targetname");
 
   if(isDefined(level.player_heli.probe)) {
-    level.player_heli.probe linkto(level.player_heli, "tag_body_animate", (24, 0, -48), (0, 0, 0));
+    level.player_heli.probe linkTo(level.player_heli, "tag_body_animate", (24, 0, -48), (0, 0, 0));
   }
 
-  level.player_heli.var_6098f318 = getent("heli_cab_probe", "targetname");
+  level.player_heli.var_6098f318 = getEnt("heli_cab_probe", "targetname");
 
   if(isDefined(level.player_heli.var_6098f318)) {
-    level.player_heli.var_6098f318 linkto(level.player_heli, "tag_body_animate", (88, 0, -48), (0, 0, 0));
+    level.player_heli.var_6098f318 linkTo(level.player_heli, "tag_body_animate", (88, 0, -48), (0, 0, 0));
   }
 }
 
@@ -246,8 +246,8 @@ function function_6577ae08(skipto_end = 0) {
   level.player val::set("takedown_hit1_intro", "disable_oob", 1);
   level.player setstance("stand");
   tag = "tag_origin";
-  mover = getent("intro_heli_assault_linked", "targetname");
-  mover linkto(level.player_heli, tag, (0, 0, 0), (0, 0, 0));
+  mover = getEnt("intro_heli_assault_linked", "targetname");
+  mover linkTo(level.player_heli, tag, (0, 0, 0), (0, 0, 0));
   level scene::add_scene_func("scene_tkd_hit1_intro_fly_in", &function_619f168c);
   level.player_heli thread function_62ed011b();
   level.var_9a3944f4 turret::disable(1);
@@ -316,14 +316,14 @@ function function_e826dfbb() {
   woods = undefined;
 
   while(!isDefined(woods)) {
-    woods = getent("woods", "targetname", 1);
+    woods = getEnt("woods", "targetname", 1);
     waitframe(1);
   }
 
   woods colors::disable();
   guys = [];
-  guys[0] = getent("driver_woods_kills", "script_parameters", 1);
-  guys[1] = getent("passenger_woods_kills", "script_parameters", 1);
+  guys[0] = getEnt("driver_woods_kills", "script_parameters", 1);
+  guys[1] = getEnt("passenger_woods_kills", "script_parameters", 1);
 
   for(i = 0; i < 2; i++) {
     woods waittill(#"fire_gun");
@@ -411,7 +411,7 @@ function function_28090f23() {
 
   for(i = 0; i < 2; i++) {
     tags[i] = util::spawn_model("tag_origin", self.origin, self.angles);
-    tags[i] linkto(self, tagnames[i], (0, 0, 0), (0, 0, 0));
+    tags[i] linkTo(self, tagnames[i], (0, 0, 0), (0, 0, 0));
     playFXOnTag(#"hash_45003fc29bb60a21", tags[i], "tag_origin");
   }
 }
@@ -482,7 +482,7 @@ function function_77937c90() {
     to = getnode(self.target, "targetname");
 
     if(!isDefined(to)) {
-      to = getent(self.target, "targetname");
+      to = getEnt(self.target, "targetname");
     }
 
     if(isDefined(to)) {
@@ -583,7 +583,7 @@ function function_a01817ae() {
   woods = undefined;
 
   while(!isDefined(woods)) {
-    woods = getent("woods", "targetname", 1);
+    woods = getEnt("woods", "targetname", 1);
     waitframe(1);
   }
 

@@ -57,7 +57,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
   n_start_time = math::clamp(n_start_time, 0, 1);
 
   if(isvec(n_rate) && isvec(n_blend_in)) {
-    self animscripted("_anim_notify_", n_rate, n_blend_in, v_angles_or_tag, n_lerp, n_blend_out, n_start_time, var_b2e32ae2);
+    self animScripted("_anim_notify_", n_rate, n_blend_in, v_angles_or_tag, n_lerp, n_blend_out, n_start_time, var_b2e32ae2);
   } else {
     if(isstring(n_blend_in)) {
       assert(isDefined(n_rate.model), "<dev string:x76>" + v_angles_or_tag + "<dev string:x92>" + n_blend_in + "<dev string:xa0>");
@@ -66,12 +66,12 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
       self.origin = v_pos;
       self.angles = v_ang;
       b_link = 1;
-      self linkto(n_rate, n_blend_in);
-      self animscripted("_anim_notify_", (0, 0, 0), (0, 0, 0), v_angles_or_tag, n_lerp, n_blend_out, n_start_time, var_b2e32ae2);
+      self linkTo(n_rate, n_blend_in);
+      self animScripted("_anim_notify_", (0, 0, 0), (0, 0, 0), v_angles_or_tag, n_lerp, n_blend_out, n_start_time, var_b2e32ae2);
     } else {
       v_angles = isDefined(n_rate.angles) ? n_rate.angles : (0, 0, 0);
       v_origin = isDefined(n_rate.origin) ? n_rate.origin : (0, 0, 0);
-      self animscripted("_anim_notify_", v_origin, v_angles, v_angles_or_tag, n_lerp, n_blend_out, n_start_time, var_b2e32ae2);
+      self animScripted("_anim_notify_", v_origin, v_angles, v_angles_or_tag, n_lerp, n_blend_out, n_start_time, var_b2e32ae2);
     }
 
     if(n_start_time > 0 && (!isanimlooping(localclientnum, v_angles_or_tag) || n_start_time < 1)) {

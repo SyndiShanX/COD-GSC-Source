@@ -148,7 +148,7 @@ function function_9212e29c(s_instance, s_chest) {
   mdl_chest = s_chest.scriptmodel;
   mdl_chest notsolid();
   mdl_chest function_619a5c20();
-  mdl_chest moveto(s_chest.origin, 9.5);
+  mdl_chest moveTo(s_chest.origin, 9.5);
   mdl_chest rotatevelocity((0, 1080 / 9.5, 0), 9.5);
   wait 9.5;
   level thread function_8fa44fea(mdl_chest);
@@ -205,7 +205,7 @@ function function_19490940(eventstruct) {
   mdl_chest clientfield::set("sr_supply_drop_chest_fx", 2);
   wait 2;
   namespace_2c949ef8::function_8b6ae460(var_571f5454, function_873ab308(), 500, 1500, undefined, undefined, undefined, undefined, undefined, 1);
-  self sethintstring(#"survival/supply_drop_open");
+  self setHintString(#"survival/supply_drop_open");
   self setvisibletoall();
   mdl_chest clientfield::set("sr_supply_drop_chest_fx", 3);
   mdl_chest clientfield::set("reward_chest_fx", 3);
@@ -217,7 +217,7 @@ function function_19490940(eventstruct) {
   level scoreevents::doscoreeventcallback("scoreEventSR", {
     #scoreevent: "event_complete", #nearbyplayers: 1, #var_b0a57f8c: 5000, #location: self.origin
   });
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player zm_stats::function_945c7ce2(#"hash_165462f560a0538c", 1);

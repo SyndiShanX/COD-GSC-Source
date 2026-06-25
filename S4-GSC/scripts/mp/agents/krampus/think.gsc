@@ -335,7 +335,7 @@ setkrampuswakelocation() {
   if(isDefined(var_0)) {
     var_1 = getfarthestnode(var_0);
     self.origin = var_1.origin;
-    self setorigin(var_1.origin);
+    self setOrigin(var_1.origin);
     self.angles = vectortoangles(self._id_01BD.origin - self.origin);
     return 1;
   }
@@ -727,7 +727,7 @@ teleporttotarget(var_0) {
     if(isDefined(var_5)) {
       krampusplayteleportvfx(1);
       self.origin = var_5[0].origin;
-      self setorigin(var_5[0].origin);
+      self setOrigin(var_5[0].origin);
       krampusplayteleportvfx();
       self notify("teleporttotarget");
     }

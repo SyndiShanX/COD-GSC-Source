@@ -42,18 +42,18 @@ function init(weapon_name, flourish_weapon_name, cost, wallbuy_targetname, hint_
   melee_weapon_triggers = getEntArray(wallbuy_targetname, "targetname");
 
   for(i = 0; i < melee_weapon_triggers.size; i++) {
-    knife_model = getent(melee_weapon_triggers[i].target, "targetname");
+    knife_model = getEnt(melee_weapon_triggers[i].target, "targetname");
 
     if(isDefined(knife_model)) {
       knife_model hide();
     }
 
     melee_weapon_triggers[i] thread melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_weapon);
-    melee_weapon_triggers[i] sethintstring(hint_string, cost);
+    melee_weapon_triggers[i] setHintString(hint_string, cost);
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = weapon;
-    melee_weapon_triggers[i] setcursorhint(cursor_hint, cursor_hint_weapon);
-    melee_weapon_triggers[i] usetriggerrequirelookat();
+    melee_weapon_triggers[i] setCursorHint(cursor_hint, cursor_hint_weapon);
+    melee_weapon_triggers[i] useTriggerRequireLookAt();
   }
 
   melee_weapon_structs = struct::get_array(wallbuy_targetname, "targetname");
@@ -193,7 +193,7 @@ function function_e5bf8f08(player) {
       if(self.stub.var_8d306e51) {
         self sethintstringforplayer(player, self.stub.hint_string);
       } else {
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     } else {
       if(player function_8b1a219a()) {
@@ -205,7 +205,7 @@ function function_e5bf8f08(player) {
       if(self.stub.var_8d306e51) {
         self sethintstringforplayer(player, self.stub.hint_string);
       } else {
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     }
   } else {
@@ -214,7 +214,7 @@ function function_e5bf8f08(player) {
     if(self.stub.var_8d306e51) {
       self sethintstringforplayer(player, self.stub.hint_string);
     } else {
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
 
     return false;
@@ -222,7 +222,7 @@ function function_e5bf8f08(player) {
 
   self.stub.cursor_hint = "HINT_WEAPON";
   self.stub.cursor_hint_weapon = weapon;
-  self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
+  self setCursorHint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
   return true;
 }
 
@@ -234,7 +234,7 @@ function spectator_respawn_all() {
 
 function spectator_respawn(wallbuy_targetname, weapon) {
   melee_triggers = getEntArray(weapon, "targetname");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < melee_triggers.size; i++) {
     melee_triggers[i] setvisibletoall();
@@ -289,7 +289,7 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
     flourish_fn = self.stub.flourish_fn;
     vo_dialog_id = self.stub.vo_dialog_id;
     flourish_weapon = self.stub.flourish_weapon;
-    players = getplayers();
+    players = getPlayers();
 
     if(!is_true(level._allow_melee_weapon_switching)) {
       for(i = 0; i < players.size; i++) {
@@ -376,7 +376,7 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
 
       if(player zm_score::can_player_purchase(cost)) {
         if(self.first_time_triggered == 0) {
-          model = getent(self.target, "targetname");
+          model = getEnt(self.target, "targetname");
 
           if(isDefined(model)) {
             model thread melee_weapon_show(player);
@@ -388,7 +388,7 @@ function melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_we
             var_6ff4b667 = struct::get(self.target, "targetname");
 
             if(isDefined(var_6ff4b667) && isDefined(var_6ff4b667.target)) {
-              var_8d0ce13b = getent(var_6ff4b667.target, "targetname");
+              var_8d0ce13b = getEnt(var_6ff4b667.target, "targetname");
               var_8d0ce13b clientfield::set("wallbuy_reveal_fx", 1);
               var_8d0ce13b clientfield::set("wallbuy_ambient_fx", 0);
             }
@@ -442,7 +442,7 @@ function melee_weapon_show(player) {
   self show();
   zm_utility::play_sound_at_pos("weapon_show", self.origin, self);
   time = 1;
-  self moveto(self.og_origin, time);
+  self moveTo(self.og_origin, time);
 }
 
 function award_melee_weapon(weapon_name) {

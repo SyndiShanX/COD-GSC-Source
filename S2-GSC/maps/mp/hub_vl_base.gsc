@@ -296,8 +296,8 @@ func_37B6(param_00) {
   maps\mp\hub_vl_firingrange::func_2A72();
   var_01 = param_00.var_1E99;
   if(!level.var_A1FE) {
-    param_00 setorigin(var_01.var_0116);
-    param_00 playerlinkto(var_01, "tag_player");
+    param_00 setOrigin(var_01.var_0116);
+    param_00 playerlinkTo(var_01, "tag_player");
     param_00 method_81E2(var_01, "tag_player");
   }
 

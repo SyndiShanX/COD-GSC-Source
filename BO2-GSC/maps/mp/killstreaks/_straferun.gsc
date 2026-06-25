@@ -96,7 +96,7 @@ usekillstreakstraferun(hardpointtype) {
     return false;
   }
 
-  plane = spawnvehicle(level.straferunmodel, "straferun", level.straferunvehicle, startnode.origin, (0, 0, 0));
+  plane = spawnVehicle(level.straferunmodel, "straferun", level.straferunvehicle, startnode.origin, (0, 0, 0));
   plane.attackers = [];
   plane.attackerdata = [];
   plane.attackerdamage = [];
@@ -133,7 +133,7 @@ usekillstreakstraferun(hardpointtype) {
   target_setturretaquire(plane, 0);
   plane thread playcontrail();
   plane.gunsoundentity = spawn("script_model", plane gettagorigin("tag_flash"));
-  plane.gunsoundentity linkto(plane, "tag_flash", (0, 0, 0), (0, 0, 0));
+  plane.gunsoundentity linkTo(plane, "tag_flash", (0, 0, 0), (0, 0, 0));
   plane resetkillcams();
   plane thread watchforotherkillstreaks();
   plane thread watchforkills();
@@ -313,7 +313,7 @@ fireflares() {
     chaff_fx = spawn("script_model", self.origin);
     chaff_fx.angles = vectorscale((0, 1, 0), 180.0);
     chaff_fx setModel("tag_origin");
-    chaff_fx linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    chaff_fx linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     wait 0.1;
     playFXOnTag(level.straferunchafffx, chaff_fx, "tag_origin");
     chaff_fx playSound("wpn_a10_drop_chaff");
@@ -347,7 +347,7 @@ startstrafe() {
     gunorigin = self gettagorigin("tag_flash");
     gunorigin = gunorigin + (0, 0, self.straferungunoffset);
     forward = anglesToForward(self.angles);
-    forwardnoz = vectornormalize((forward[0], forward[1], 0));
+    forwardnoz = vectorNormalize((forward[0], forward[1], 0));
     right = vectorcross(forwardnoz, (0, 0, 1));
     perfectattackstartvector = gunorigin + vectorscale(forwardnoz, self.straferungunlookahead);
     attackstartvector = perfectattackstartvector + vectorscale(right, randomfloatrange(0 - self.straferungunradius, self.straferungunradius));
@@ -594,7 +594,7 @@ cantargetactor(actor) {
 
 targetinfrontofplane(target) {
   forward_dir = anglesToForward(self.angles);
-  target_delta = vectornormalize(target.origin - self.origin);
+  target_delta = vectorNormalize(target.origin - self.origin);
   dot = vectordot(forward_dir, target_delta);
 
   if(dot < 0.5) {
@@ -734,7 +734,7 @@ resetkillcament(parent) {
   offset_x = getdvarintdefault(#"_id_33660DD8", -3000);
   offset_y = getdvarintdefault(#"_id_33660DD9", 0);
   offset_z = getdvarintdefault(#"_id_33660DDA", 740);
-  self linkto(parent, "tag_origin", (offset_x, offset_y, offset_z), vectorscale((1, 0, 0), 10.0));
+  self linkTo(parent, "tag_origin", (offset_x, offset_y, offset_z), vectorscale((1, 0, 0), 10.0));
   self thread unlinkwhenparentdies(parent);
 }
 
@@ -745,7 +745,7 @@ resetrocketkillcament(parent, rocketindex) {
   offset_y = getdvarintdefault(#"_id_33660DD9", 0);
   offset_z = getdvarintdefault(#"_id_33660DDA", 740);
   rockettag = level.straferunrockettags[rocketindex % level.straferunrockettags.size];
-  self linkto(parent, rockettag, (offset_x, offset_y, offset_z), vectorscale((1, 0, 0), 10.0));
+  self linkTo(parent, rockettag, (offset_x, offset_y, offset_z), vectorscale((1, 0, 0), 10.0));
   self thread unlinkwhenparentdies(parent);
 }
 
@@ -772,7 +772,7 @@ attachkillcamtorocket(killcament, selectedtarget, targetorigin) {
   killcament unlink();
   killcament.angles = (0, 0, 0);
   killcament.origin = self.origin;
-  killcament linkto(self, "", (offset_x, offset_y, offset_z), vectorscale((1, 0, 0), 9.0));
+  killcament linkTo(self, "", (offset_x, offset_y, offset_z), vectorscale((1, 0, 0), 9.0));
   killcament thread unlinkwhenclose(selectedtarget, targetorigin, self);
 }
 
@@ -801,7 +801,7 @@ unlinkwhenclose(selectedtarget, targetorigin, plane) {
 
 getlookaheadorigin(previous_origin, next_origin, lookahead) {
   delta = next_origin - previous_origin;
-  forwardnoz = vectornormalize((delta[0], delta[1], 0));
+  forwardnoz = vectorNormalize((delta[0], delta[1], 0));
   origin = next_origin + vectorscale(forwardnoz, lookahead);
   return origin;
 }
@@ -824,7 +824,7 @@ strafekillcam(parent, node, distance) {
   start_origin = getlookaheadorigin(previous_origin, start_origin, parent.straferungunlookahead + 1000);
   trace = bulletTrace((start_origin[0], start_origin[1], start_origin[2] + start_height_offset), (start_origin[0], start_origin[1], stop_height), 0, parent, 0, 1);
   pathheight = trace["position"][2];
-  self killcammoveto(trace["position"], speed, accel_time, pathheight);
+  self killcammoveTo(trace["position"], speed, accel_time, pathheight);
   speed = 500;
 
   while(isDefined(node)) {
@@ -832,11 +832,11 @@ strafekillcam(parent, node, distance) {
     node = getvehiclenode(node.target, "targetname");
     start_origin = getlookaheadorigin(previous_origin, node.origin, parent.straferungunlookahead + 1000);
     trace = bulletTrace((start_origin[0], start_origin[1], start_origin[2] + start_height_offset), (start_origin[0], start_origin[1], stop_height), 0, parent, 0, 1);
-    self killcammoveto(trace["position"], speed, 0, pathheight);
+    self killcammoveTo(trace["position"], speed, 0, pathheight);
   }
 }
 
-killcammoveto(goal, speed, accel, pathheight) {
+killcammoveTo(goal, speed, accel, pathheight) {
   self endon("reset");
   height_offset = randomintrange(350, 450);
   origin = (goal[0], goal[1], goal[2] + height_offset);
@@ -847,7 +847,7 @@ killcammoveto(goal, speed, accel, pathheight) {
     accel = time;
   }
 
-  self moveto(origin, time, accel, 0);
+  self moveTo(origin, time, accel, 0);
   self waittill("movedone");
 }
 
@@ -883,7 +883,7 @@ getoriginalongstrafepath(node, start_origin, distance_along) {
   dist = 0;
 
   if(dist + seg_dist > distance_along) {
-    forwardvec = vectornormalize((node.origin[0], node.origin[1], 0) - (start_origin[0], start_origin[1], 0));
+    forwardvec = vectorNormalize((node.origin[0], node.origin[1], 0) - (start_origin[0], start_origin[1], 0));
     origin_node.origin = start_origin + forwardvec * (distance_along - dist);
     origin_node.node = node;
     return origin_node;
@@ -897,7 +897,7 @@ getoriginalongstrafepath(node, start_origin, distance_along) {
     seg_dist = distance((previous_node.origin[0], previous_node.origin[1], 0), (next_node.origin[0], next_node.origin[1], 0));
 
     if(dist + seg_dist > distance_along) {
-      forwardvec = vectornormalize(next_node.origin - previous_node.origin);
+      forwardvec = vectorNormalize(next_node.origin - previous_node.origin);
       origin_node.origin = previous_node.origin + forwardvec * (distance_along - dist);
       origin_node.node = previous_node;
       return origin_node;

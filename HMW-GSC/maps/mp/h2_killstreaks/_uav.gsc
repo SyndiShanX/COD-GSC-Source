@@ -100,7 +100,7 @@ onPlayerConnect() {
 rotateUAVRig() {
   level endon("game_ended");
   for(;;) {
-    self rotateyaw(-360, 60);
+    self rotateYaw(-360, 60);
     wait(60);
   }
 }

@@ -117,7 +117,7 @@ drone_move_custom(var_0) {
 
     var_10 = var_1[var_7]["vec"];
     var_11 = self.origin - var_1[var_7]["origin"];
-    var_12 = vectordot(vectornormalize(var_10), var_11);
+    var_12 = vectordot(vectorNormalize(var_10), var_11);
 
     if(!isDefined(var_1[var_7]["dist"])) {
       break;
@@ -137,7 +137,7 @@ drone_move_custom(var_0) {
       self.cur_node = var_1[var_7];
 
       if(!isDefined(var_1[var_7]["dist"])) {
-        self rotateto(vectortoangles(var_1[var_1.size - 1]["vec"]), var_6);
+        self rotateTo(vectortoangles(var_1[var_1.size - 1]["vec"]), var_6);
         var_15 = distance(self.origin, var_1[var_1.size - 1]["origin"]);
         var_16 = var_15 / (var_4 * self.moveplaybackrate);
         var_17 = var_1[var_1.size - 1]["origin"] + (0, 0, 100);
@@ -149,7 +149,7 @@ drone_move_custom(var_0) {
           thread common_scripts\utility::draw_line_for_time(self.origin, var_19, 0, 0, 1, var_6);
         }
 
-        self moveto(var_19, var_16);
+        self moveTo(var_19, var_16);
         wait(var_16);
         self notify("goal");
 
@@ -217,9 +217,9 @@ drone_move_custom(var_0) {
     }
 
     var_22 = vectortoangles(var_21 - self.origin);
-    self rotateto((0, var_22[1], 0), var_6);
+    self rotateTo((0, var_22[1], 0), var_6);
     var_23 = var_4 * var_6 * self.moveplaybackrate;
-    var_24 = vectornormalize(var_21 - self.origin);
+    var_24 = vectorNormalize(var_21 - self.origin);
     var_20 = var_24 * var_23;
     var_20 = var_20 + self.origin;
 
@@ -227,7 +227,7 @@ drone_move_custom(var_0) {
       thread common_scripts\utility::draw_line_for_time(self.origin, var_20, 0, 0, 1, var_6);
     }
 
-    self moveto(var_20, var_6);
+    self moveTo(var_20, var_6);
     wait(var_6);
   }
 
@@ -308,7 +308,7 @@ drone_animate_on_path(var_0) {
       if(!isDefined(var_7)) {
         return;
       }
-      var_5 = common_scripts\utility::getstruct(var_7, "script_linkname");
+      var_5 = common_scripts\utility::getStruct(var_7, "script_linkname");
     } else
       var_5 = var_4;
 
@@ -320,7 +320,7 @@ drone_animate_on_path(var_0) {
       var_8 = var_5.script_animation;
 
       if(isDefined(var_5.script_linkto)) {
-        var_4 = common_scripts\utility::getstruct(var_5.script_linkto, "script_linkname");
+        var_4 = common_scripts\utility::getStruct(var_5.script_linkto, "script_linkname");
       }
     } else {
       var_9 = var_5 maps\_utility::get_linked_structs();
@@ -331,7 +331,7 @@ drone_animate_on_path(var_0) {
           var_5 = var_11;
 
           if(isDefined(var_11.target)) {
-            var_4 = common_scripts\utility::getstruct(var_11.target, "targetname");
+            var_4 = common_scripts\utility::getStruct(var_11.target, "targetname");
           }
 
           break;
@@ -348,7 +348,7 @@ drone_animate_on_path(var_0) {
 
     if(isDefined(var_5.script_timeout)) {
       wait(var_5.script_timeout);
-      var_1 stopanimscripted();
+      var_1 stopanimScripted();
       continue;
     }
 
@@ -449,7 +449,7 @@ drone_fight_smart(var_0) {
 
 drone_play_anim(var_0, var_1, var_2) {
   self clearanim(%body, 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
   var_3 = "normal";
 
   if(isDefined(var_2)) {
@@ -466,7 +466,7 @@ drone_play_anim(var_0, var_1, var_2) {
     var_1 = self;
 
   var_6 = "drone_anim";
-  self animscripted(var_6, var_1.origin, var_1.angles, var_0, var_3);
+  self animScripted(var_6, var_1.origin, var_1.angles, var_0, var_3);
   self waittillmatch("drone_anim", "end");
 }
 
@@ -559,7 +559,7 @@ beach_path_drones(var_0) {
   }
 
   var_1 = self;
-  var_2 = common_scripts\utility::getstruct(self.script_linkto, "script_linkname");
+  var_2 = common_scripts\utility::getStruct(self.script_linkto, "script_linkname");
   var_3 = 2;
 
   if(isDefined(var_1.script_count)) {
@@ -658,7 +658,7 @@ drone_fire_fake_javelin_loop(var_0, var_1, var_2, var_3, var_4) {
   if(isalive(self)) {
     var_7 = spawn("script_model", self.origin);
     var_7 setModel("weapon_javelin");
-    var_7 linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+    var_7 linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
     self.javelin = var_7;
   }
 
@@ -718,7 +718,7 @@ drone_death_custom() {
   var_1 = common_scripts\utility::random(var_0);
   drone_gun_remove();
   self clearanim(%body, 0.2);
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   maps\_anim::anim_generic(self, var_1);
   wait 0.5;
 
@@ -730,11 +730,11 @@ drone_death_custom() {
 default_mg_drone() {
   thread maps\_utility::magic_bullet_shield();
   maps\_utility::gun_remove();
-  var_0 = getent(self.script_linkto, "script_linkname");
+  var_0 = getEnt(self.script_linkto, "script_linkname");
   self.mg = var_0;
   var_0.owner = self;
   var_0 thread maps\_anim::anim_generic_first_frame(self, "stand_gunner_idle", "tag_butt");
-  self linkto(var_0, "tag_butt", (0, 5, -45), (0, 0, 0));
+  self linkTo(var_0, "tag_butt", (0, 5, -45), (0, 0, 0));
 }
 
 struct_check_delete(var_0) {

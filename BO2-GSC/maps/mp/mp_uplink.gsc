@@ -66,16 +66,16 @@ levelspawndvars(reset_dvars) {
 }
 
 gondola_sway() {
-  gondola_cab = getent("gondola_cab", "targetname");
+  gondola_cab = getEnt("gondola_cab", "targetname");
   gondola_cab setmovingplatformenabled(1);
 
   while(true) {
     randomswingangle = randomfloatrange(0.25, 0.5);
     randomswingtime = randomfloatrange(2.5, 4.0);
-    gondola_cab rotateto((randomswingangle * 0.5, randomswingangle * 0.6, randomswingangle * 0.8), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
+    gondola_cab rotateTo((randomswingangle * 0.5, randomswingangle * 0.6, randomswingangle * 0.8), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
     gondola_cab playSound("amb_gondola_swing");
     wait(randomswingtime);
-    gondola_cab rotateto((randomswingangle * 0.5 * -1, randomswingangle * -1 * 0.6, randomswingangle * 0.8 * -1), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
+    gondola_cab rotateTo((randomswingangle * 0.5 * -1, randomswingangle * -1 * 0.6, randomswingangle * 0.8 * -1), randomswingtime, randomswingtime * 0.3, randomswingtime * 0.3);
     gondola_cab playSound("amb_gondola_swing_back");
     wait(randomswingtime);
     gondola_cab destroy_corpses();

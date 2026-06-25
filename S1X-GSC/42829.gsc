@@ -13,7 +13,7 @@ init() {
   level.riot_shield_names[level.riot_shield_names.size] = "iw5_riotshieldt6loot3_mp";
   level.riot_shield_names[level.riot_shield_names.size] = "iw5_riotshieldjugg_mp";
   precacheanims();
-  level.riot_shield_collision = getent("riot_shield_collision", "targetname");
+  level.riot_shield_collision = getEnt("riot_shield_collision", "targetname");
   level._effect["riot_shield_shock_fx"] = loadfx("vfx/explosion/riotshield_stun");
   level._effect["riot_shield_deploy_smoke"] = loadfx("vfx/smoke/riotshield_deploy_smoke");
   level._effect["riot_shield_deploy_lights"] = loadfx("vfx/lights/riotshield_deploy_lights");
@@ -486,7 +486,7 @@ spawnriotshieldcollision(var_0, var_1, var_2) {
   var_3.owner = self;
   var_3.team = self.team;
   var_3 clonebrushmodeltoscriptmodel(level.riot_shield_collision);
-  var_3 disconnectpaths();
+  var_3 disconnectPaths();
   var_3 sethighjumpresetallowed(0);
   return var_3;
 }

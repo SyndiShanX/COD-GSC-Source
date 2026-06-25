@@ -103,7 +103,7 @@ function function_364bc19c(outcome) {
   }
 
   if(isDefined(outcome.team) && isinarray(getarraykeys(level.teams), hash(outcome.team))) {
-    a_players = getplayers(outcome.team);
+    a_players = getPlayers(outcome.team);
   } else {
     a_players = outcome.players;
   }
@@ -116,8 +116,8 @@ function function_364bc19c(outcome) {
         a_players = array(a_players);
       }
 
-      if(!isinarray(a_players, getplayers()[0])) {
-        a_players[a_players.size] = getplayers()[0];
+      if(!isinarray(a_players, getPlayers()[0])) {
+        a_players[a_players.size] = getPlayers()[0];
       }
 
       if(!isDefined(a_players)) {
@@ -126,8 +126,8 @@ function function_364bc19c(outcome) {
         a_players = array(a_players);
       }
 
-      if(!isinarray(a_players, getplayers()[1])) {
-        a_players[a_players.size] = getplayers()[1];
+      if(!isinarray(a_players, getPlayers()[1])) {
+        a_players[a_players.size] = getPlayers()[1];
       }
 
       if(!isDefined(a_players)) {
@@ -136,8 +136,8 @@ function function_364bc19c(outcome) {
         a_players = array(a_players);
       }
 
-      if(!isinarray(a_players, getplayers()[2])) {
-        a_players[a_players.size] = getplayers()[2];
+      if(!isinarray(a_players, getPlayers()[2])) {
+        a_players[a_players.size] = getPlayers()[2];
       }
 
       if(!isDefined(a_players)) {
@@ -146,8 +146,8 @@ function function_364bc19c(outcome) {
         a_players = array(a_players);
       }
 
-      if(!isinarray(a_players, getplayers()[3])) {
-        a_players[a_players.size] = getplayers()[3];
+      if(!isinarray(a_players, getPlayers()[3])) {
+        a_players[a_players.size] = getPlayers()[3];
       }
 
       arrayremovevalue(a_players, undefined);
@@ -223,7 +223,7 @@ function function_29597300() {
   var_b3160934 = function_1ead85cd();
 
   if(isDefined(var_b3160934)) {
-    level thread scene::init_streamer(var_b3160934, getplayers());
+    level thread scene::init_streamer(var_b3160934, getPlayers());
   }
 }
 

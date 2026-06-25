@@ -288,7 +288,7 @@ function_b4b16823(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     if(self function_3b81466e(5) == 1) {
       self zm_laststand::function_3a00302e();
 
-      if(getplayers().size > 1) {
+      if(getPlayers().size > 1) {
         self.var_20f86af4 = 1;
       }
 
@@ -489,7 +489,7 @@ custom_door_buy_check(e_door) {
 
 function_1ba093e() {
   self endon(#"death");
-  pap_machine = getent("zm_pack_a_punch", "targetname");
+  pap_machine = getEnt("zm_pack_a_punch", "targetname");
   level flag::wait_till("all_players_spawned");
   level flag::wait_till("pap_machine_active");
 

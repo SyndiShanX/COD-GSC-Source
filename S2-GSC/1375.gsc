@@ -146,7 +146,7 @@ lib_055F::func_AB64(param_00) {
     var_03 = common_scripts\utility::func_7A33(var_02);
   }
 
-  self setorigin(var_03.var_0116 + (0, 0, 8));
+  self setOrigin(var_03.var_0116 + (0, 0, 8));
   self.var_001D = var_03.var_001D;
   var_04 = common_scripts\utility::func_46B5("final_brute_boss", "targetname");
   self.var_1928 = var_04;
@@ -166,7 +166,7 @@ lib_055F::func_AB7B() {
 lib_055F::func_AB6A(param_00, param_01) {
   thread lib_055F::func_A6B5(param_01);
   lib_055F::func_7678(param_00, 0, undefined, 1, "brute_stunned", param_01);
-  self.var_3ACE sethintstring(&"ZOMBIES_EMPTY_STRING");
+  self.var_3ACE setHintString(&"ZOMBIES_EMPTY_STRING");
 }
 
 lib_055F::func_AB79() {
@@ -598,7 +598,7 @@ lib_055F::func_A6B5(param_00) {
   self endon(param_00);
   var_01 = undefined;
   for(var_02 = 0; !var_02; var_02 = var_01 lib_0585::func_9E12("Blimp Battery Hunt")) {
-    self.var_3ACE sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
+    self.var_3ACE setHintString(&"ZOMBIE_NEST_PLACE_UBER");
     self.var_3ACE waittill("trigger", var_01);
   }
 
@@ -776,7 +776,7 @@ lib_055F::func_AB5B() {
   var_02 = spawn("script_model", self.var_0116);
   var_02 setModel(var_01.var_1144["whole_body"]);
   var_02.var_001D = self gettagangles(var_00);
-  var_02 linkto(self, var_00);
+  var_02 linkTo(self, var_00);
   self.var_5A9C = var_02;
   self.var_1142 = ::lib_055F::func_84F1;
 }
@@ -873,7 +873,7 @@ lib_055F::func_5725(param_00) {
     return 0;
   }
 
-  var_08 = vectornormalize(var_06 - var_04);
+  var_08 = vectorNormalize(var_06 - var_04);
   var_09 = vectordot(var_03, var_08);
   if(0 > var_09) {
     return 0;
@@ -930,7 +930,7 @@ lib_055F::func_A271(param_00) {
 lib_055F::func_A01F(param_00) {
   var_01 = anglesToForward(param_00);
   var_01 = common_scripts\utility::func_3D5D(var_01);
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   return var_01;
 }
 

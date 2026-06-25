@@ -17,7 +17,7 @@ func_FAB1() {}
 
 func_FAC4() {
   level.var_13182 = getEntArray("remote_heli_range", "targetname");
-  level.var_13181 = getent("airstrikeheight", "targetname");
+  level.var_13181 = getEnt("airstrikeheight", "targetname");
   if(isDefined(level.var_13181)) {
     level.var_13180 = level.var_13181.origin[2];
     level.var_13183 = 163840000;
@@ -181,7 +181,7 @@ func_10E0A(var_0, var_1, var_2) {
 
   scripts\mp\utility::freezecontrolswrapper(0);
   var_0.playerlinked = 1;
-  self cameralinkto(var_0, "tag_origin");
+  self cameralinkTo(var_0, "tag_origin");
   self remotecontrolvehicle(var_0);
   var_0.ammocount = 100;
   self.remote_uav_ridelifeid = var_2;
@@ -214,7 +214,7 @@ func_4A30(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.attackarrow.angles = (-90, 0, 0);
   var_6.attackarrow.offset = 4;
   var_7 = spawnturret("misc_turret", var_6.origin, "ball_drone_gun_mp", 0);
-  var_7 linkto(var_6, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
+  var_7 linkTo(var_6, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
   var_7 setModel("veh_mil_air_un_pocketdrone_gun_mp");
   var_7 getvalidattachments();
   var_6.turret = var_7;
@@ -252,7 +252,7 @@ func_4A30(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 thread watchempdamage();
   var_8 = spawn("script_model", var_6.origin);
   var_8 setscriptmoverkillcam("explosive");
-  var_8 linkto(var_6, "tag_player", (-10, 0, 20), (0, 0, 0));
+  var_8 linkTo(var_6, "tag_player", (-10, 0, 20), (0, 0, 0));
   var_6.killcament = var_8;
   var_6.var_108D4 = gettime() + 2000;
   var_9 = spawnStruct();
@@ -327,7 +327,7 @@ func_1317C(var_0) {
   }
 
   var_0 setotherent(var_0.attackarrow);
-  var_0 setturrettargetent(var_0.attackarrow);
+  var_0 setturrettargetEnt(var_0.attackarrow);
 }
 
 func_1317A(var_0) {
@@ -434,7 +434,7 @@ func_13177(var_0, var_1, var_2) {
   var_0 notify("end_rumble");
   var_0 endon("end_rumble");
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    self playrumbleonentity(var_1);
+    self playRumbleOnEntity(var_1);
     scripts\engine\utility::waitframe();
   }
 }
@@ -496,7 +496,7 @@ func_12F63(var_0, var_1) {
 
 getturrettarget(var_0, var_1) {
   var_2 = (3000, 3000, 3000);
-  var_3 = vectornormalize(var_0.origin - var_1 + (0, 0, -400));
+  var_3 = vectorNormalize(var_0.origin - var_1 + (0, 0, -400));
   var_4 = rotatevector(var_3, (0, 25, 0));
   var_5 = var_1 + var_4 * var_2;
   if(func_9FE6(var_5, var_1)) {

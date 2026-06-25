@@ -29,8 +29,8 @@ main() {
 }
 
 start_intro_sounds() {
-  door_hydro = getent("lst_door_open_sound", "targetname");
-  ramp_location = getent("lst_door_splash_sound", "targetname");
+  door_hydro = getEnt("lst_door_open_sound", "targetname");
+  ramp_location = getEnt("lst_door_splash_sound", "targetname");
 
   level waittill("lst door opening");
   door_hydro playSound("door_hydro");
@@ -45,11 +45,11 @@ start_intro_sounds() {
   activateAmbientRoom("pel1_outdoors", 0);
 
   trigger_wait("ambient_lci_pre_trigger", "targetname");
-  pa_fire = getent("pa_fire_right", "targetname");
-  playsoundatposition("pa_fire", pa_fire.origin);
+  pa_fire = getEnt("pa_fire_right", "targetname");
+  playSoundAtPosition("pa_fire", pa_fire.origin);
 
   wait(0.4);
-  pa_fire_b = getent("pa_fire_left", "targetname");
+  pa_fire_b = getEnt("pa_fire_left", "targetname");
   pa_fire_b playSound("pa_fire");
 }
 
@@ -72,9 +72,9 @@ bunker_voices() {
     lastvoiceover = get_next_vo("amb_dist_voices_", lastvoiceover, 6);
 
     if(randomintrange(1, 2) == 1) {
-      playsoundatposition(lastvoiceover, (1614, -3948, -98));
+      playSoundAtPosition(lastvoiceover, (1614, -3948, -98));
     } else {
-      playsoundatposition(lastvoiceover, (2079, -3951, -107));
+      playSoundAtPosition(lastvoiceover, (2079, -3951, -107));
     }
 
     wait(randomintrange(4, 8));
@@ -85,9 +85,9 @@ bunker_footsteps() {
   level endon("grenades_dropped");
   while(1) {
     if(randomintrange(1, 2) == 1) {
-      playsoundatposition("s_wood_steps_upstairs", (1614, -3948, -98));
+      playSoundAtPosition("s_wood_steps_upstairs", (1614, -3948, -98));
     } else {
-      playsoundatposition("s_wood_steps_upstairs", (2079, -3951, -107));
+      playSoundAtPosition("s_wood_steps_upstairs", (2079, -3951, -107));
     }
 
     wait(randomintrange(5, 8));
@@ -154,8 +154,8 @@ play_end_music() {
 player_fired_rockets() {}
 
 start_igc_audio() {
-  door_hydro = getent("door", "targetname");
-  ramp_location = getent("splash", "targetname");
+  door_hydro = getEnt("door", "targetname");
+  ramp_location = getEnt("splash", "targetname");
 
   level waittill("lst door opening");
   door_hydro playSound("door_hydro");
@@ -170,11 +170,11 @@ start_igc_audio() {
   activateAmbientRoom("pel1_outdoors", 0);
 
   wait(8.5);
-  pa_fire = getent("audio_distant_battle_right", "targetname");
-  playsoundatposition("pa_fire", pa_fire.origin);
+  pa_fire = getEnt("audio_distant_battle_right", "targetname");
+  playSoundAtPosition("pa_fire", pa_fire.origin);
 
   wait(0.4);
-  pa_fire_b = getent("audio_distant_battle_left", "targetname");
+  pa_fire_b = getEnt("audio_distant_battle_left", "targetname");
   pa_fire_b playSound("pa_fire");
 }
 
@@ -223,14 +223,14 @@ start_intro_planes_21() {
 start_intro_planes_9() {
   level waittill("spawnvehiclegroup9");
   wait(1.0);
-  crashing_plane = getent("crashing_plane", "targetname");
+  crashing_plane = getEnt("crashing_plane", "targetname");
   wait(5.0);
   crashing_plane playSound("plane_crashing");
   level thread play_plane_boom();
 }
 play_plane_boom() {
   wait(7);
-  plane_crash_origin = getent("plane_impact", "targetname");
+  plane_crash_origin = getEnt("plane_impact", "targetname");
   wait(0.5);
   plane_crash_origin playSound("imp_plane");
 }
@@ -265,7 +265,7 @@ play_plane_sound_special() {
 play_distant_battle_sound() {
   level waittill("beached");
 
-  sound_origin = getent("audio_distant_battle", "targetname");
+  sound_origin = getEnt("audio_distant_battle", "targetname");
   sound_origin playLoopSound("pel1_dst_btl");
 
   level waittill("rockets red glare");
@@ -273,11 +273,11 @@ play_distant_battle_sound() {
 
   level waittill("flame guy is flaming bunker");
 
-  firelocation = getent("audio_bunkerlocation_banzai", "targetname");
+  firelocation = getEnt("audio_bunkerlocation_banzai", "targetname");
   firelocation playLoopSound("bunker_fire");
   level thread stop_fire_sound_hack(firelocation);
   wait(5);
-  sound_origin2 = getent("audio_distant_walla", "targetname");
+  sound_origin2 = getEnt("audio_distant_walla", "targetname");
 
   wait(3);
   sound_origin2 playSound("distant_walla");

@@ -1434,7 +1434,7 @@ _id_F162(var_0, var_1) {
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
-  var_2 = vectornormalize((var_1[0], var_1[1], var_0.origin[2]) - var_0.origin);
+  var_2 = vectorNormalize((var_1[0], var_1[1], var_0.origin[2]) - var_0.origin);
   var_3 = vectordot(anglesToForward(var_0.angles), var_2);
   var_4 = vectordot(anglestoright(var_0.angles), var_2);
   var_5 = _func_0002(var_3);
@@ -1517,7 +1517,7 @@ _id_F161() {
     var_8 = anglesToForward(self.angles);
 
     foreach(var_10 in var_0) {
-      var_11 = vectornormalize(var_10.origin - self.origin);
+      var_11 = vectorNormalize(var_10.origin - self.origin);
       var_12 = var_10 scripts\mp\utility\perk::_hasperk("specialty_coldblooded");
       var_13 = vectordot(var_8, var_11) > scripts\engine\utility::ter_op(var_3, scripts\engine\utility::ter_op(var_4, 0.965928, 0.984808), scripts\engine\utility::ter_op(var_4, 0.866025, 0.939692));
       var_14 = distancesquared(self.origin, var_10.origin) < var_2;
@@ -2886,7 +2886,7 @@ _id_FF4A(var_0, var_1) {
   }
 
   var_6 = var_1 _id_6B11();
-  var_7 = vectornormalize(var_4 - var_3);
+  var_7 = vectorNormalize(var_4 - var_3);
   var_8 = vectordot(var_6, var_7);
 
   if(var_8 < var_2) {

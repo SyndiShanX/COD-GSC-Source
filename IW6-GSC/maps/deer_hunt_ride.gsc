@@ -84,7 +84,7 @@ init_elias_house_animset() {
 food_truck() {
   level endon("player_in_house");
   common_scripts\utility::flag_wait("gate_clear");
-  var_0 = common_scripts\utility::getstruct("food_truck_ent", "targetname");
+  var_0 = common_scripts\utility::getStruct("food_truck_ent", "targetname");
   var_1 = maps\_utility::spawn_targetname("food_truck_guy", 1);
   var_1.animname = "generic";
   var_2 = var_1 thread maps\deer_hunt_util::spawn_model_and_linkto_me("accessories_sack_coffee_animated", "tag_inhand");
@@ -176,8 +176,8 @@ spawn_and_put_player_in_jeep() {
     level.player unlink();
   }
 
-  var_2 linkto(level.jeep, var_3, var_0, (0, 0, 0));
-  level.player setorigin(var_2.origin);
+  var_2 linkTo(level.jeep, var_3, var_0, (0, 0, 0));
+  level.player setOrigin(var_2.origin);
   level.player setplayerangles(var_2.angles);
   level.player playerlinktodelta(var_2, "tag_origin", 1, 60, 60, 50, 30, 0);
   common_scripts\utility::flag_wait("jeep_ai_spawned");
@@ -191,8 +191,8 @@ spawn_and_put_player_in_jeep() {
 }
 
 spawn_friendlies_and_put_in_jeep() {
-  getent("hesh", "targetname").count = 1;
-  getent("dog", "targetname").count = 1;
+  getEnt("hesh", "targetname").count = 1;
+  getEnt("dog", "targetname").count = 1;
   level.hesh = maps\_utility::spawn_targetname("hesh", 1);
   level.dog = maps\_utility::spawn_targetname("dog", 1);
   level.dog.name = "Riley";
@@ -215,7 +215,7 @@ spawn_friendlies_and_put_in_jeep() {
   level.dog forceteleport(level.jeep.origin, level.jeep.angles, 100000);
   level.jeep thread maps\_anim::anim_loop_solo(level.dog, "matv_idle", "stop_loop", "tag_dog");
   wait 0.1;
-  level.dog linkto(level.jeep, "tag_dog");
+  level.dog linkTo(level.jeep, "tag_dog");
   common_scripts\utility::flag_set("friendlies_in_jeep");
   level thread ride_dog_bark();
   var_0 = (26444, 8072, -184);
@@ -227,7 +227,7 @@ spawn_friendlies_and_put_in_jeep() {
   level.jeep thread maps\_anim::anim_single_solo(level.dog, "matv_exit", "tag_dog");
   level.hesh delete();
   wait 2;
-  var_2 = getent("hesh", "targetname");
+  var_2 = getEnt("hesh", "targetname");
   var_2.count = 10;
   level.hesh = maps\_utility::spawn_targetname("hesh", 1);
   level.hesh maps\_utility::set_force_color("r");
@@ -236,7 +236,7 @@ spawn_friendlies_and_put_in_jeep() {
   var_0 = (26415, 8024, -185);
 
   if(level.dog islinked()) {
-    level.dog stopanimscripted();
+    level.dog stopanimScripted();
     level.dog unlink();
   }
 
@@ -264,7 +264,7 @@ dog_exits_jeep() {
 
   if(level.dog islinked()) {
     level.dog unlink();
-    level.dog stopanimscripted();
+    level.dog stopanimScripted();
   }
 
   var_1 = maps\_utility::groundpos(var_0);
@@ -425,14 +425,14 @@ setup_gate_ai() {
   var_0 = maps\_utility::array_spawn_targetname("jeep_patroller", 1);
   var_1 = maps\_utility::array_spawn_targetname("road_guys", 1);
   thread maps\_utility::array_spawn_targetname("patrol_jog_guys", 1);
-  var_2 = getent("gate_spawner", "targetname");
+  var_2 = getEnt("gate_spawner", "targetname");
   var_3 = common_scripts\utility::getStructArray("jeep_anims", "targetname");
   spawn_ai_for_structs(var_2, var_3, 1);
-  var_2 = getent("gate_civ", "targetname");
+  var_2 = getEnt("gate_civ", "targetname");
   var_3 = common_scripts\utility::getStructArray("jeep_anims_civ", "targetname");
   spawn_ai_for_structs(var_2, var_3, 1);
   common_scripts\utility::flag_set("jeep_ai_spawned");
-  var_4 = getent("gate_entrance", "targetname");
+  var_4 = getEnt("gate_entrance", "targetname");
   var_5 = var_4 maps\_utility::get_drones_touching_volume();
   var_6 = var_4 maps\_utility::get_ai_touching_volume();
   var_7 = common_scripts\utility::array_combine(var_5, var_6);
@@ -444,7 +444,7 @@ setup_gate_ai() {
   }
 
   common_scripts\utility::flag_wait("gate_clear");
-  var_2 = getent("garage_spawner", "targetname");
+  var_2 = getEnt("garage_spawner", "targetname");
   var_3 = common_scripts\utility::getStructArray("after_gate", "targetname");
   spawn_ai_for_structs(var_2, var_3, 1);
   maps\_utility::spawn_targetname("garage_standing_guy", 1);
@@ -470,7 +470,7 @@ spawn_stair_runner() {
 
   if(!maps\_utility::spawn_failed(var_0)) {
     var_0.goalradius = 24;
-    var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
     var_0 thread maps\_utility::follow_path_and_animate(var_1, 100000);
   }
 }
@@ -585,7 +585,7 @@ patrol_jog_guys_logic() {
   self.animname = "generic";
   var_0 = "run_gun_up";
   maps\_utility::set_run_anim(var_0);
-  var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.target, "targetname");
   thread maps\_utility::follow_path_and_animate(var_1, 100000);
 }
 
@@ -629,7 +629,7 @@ custom_flavor_burst_on_me() {
   if(isDefined(var_2.size)) {
     if(var_2.size > 0) {
       self.sound_ent = spawn("script_origin", self getEye());
-      self.sound_ent linkto(self);
+      self.sound_ent linkTo(self);
       level.custom_flavorburst_ents = common_scripts\utility::add_to_array(level.custom_flavorburst_ents, self.sound_ent);
       self.sound_ent thread maps\deer_hunt_util::delete_me_on_notifies("sounddone");
       self.sound_ent playSound(common_scripts\utility::random(var_2), "sounddone");
@@ -658,7 +658,7 @@ setup_house() {
   thread init_hesh_house_animset();
   thread init_elias_house_animset();
   thread outside_reads();
-  getent("elias", "targetname") maps\_utility::add_spawn_function(::elias_logic);
+  getEnt("elias", "targetname") maps\_utility::add_spawn_function(::elias_logic);
   level.elias = maps\_utility::spawn_targetname("elias", 1);
   thread ending_scene();
   common_scripts\utility::flag_wait("player_in_house");
@@ -669,7 +669,7 @@ setup_house() {
     clean_up(var_0);
   }
 
-  var_1 = getent("house_spawner", "targetname");
+  var_1 = getEnt("house_spawner", "targetname");
   var_2 = common_scripts\utility::getStructArray("house_scene", "targetname");
   spawn_ai_for_structs(var_1, var_2, 1, 1);
   var_0 = maps\_utility::get_drones_with_targetname("house_spawner");
@@ -713,7 +713,7 @@ ending_scene() {
   common_scripts\utility::flag_wait("player_exited_jeep");
   maps\_anim::addnotetrack_customfunction("elias", "tablet_switch", ::swap_tablet, "2nd_floor");
   thread house_vo();
-  var_0 = getent("house_spawner", "targetname");
+  var_0 = getEnt("house_spawner", "targetname");
   var_0.count = 1;
   level.brian = var_0 maps\_utility::spawn_ai(1);
   level.brian.animname = "brian";
@@ -731,8 +731,8 @@ ending_scene() {
   }
 
   common_scripts\utility::array_thread(level.third_floor_actors, maps\deer_hunt_util::retain_alert_level, 1);
-  var_4 = common_scripts\utility::getstruct("house1", "targetname");
-  var_5 = common_scripts\utility::getstruct("house2", "targetname");
+  var_4 = common_scripts\utility::getStruct("house1", "targetname");
+  var_5 = common_scripts\utility::getStruct("house2", "targetname");
   var_6 = spawnStruct();
   var_6.angles = (0, 0, 0);
   var_6.origin = (26489, 8027, -57);
@@ -747,7 +747,7 @@ ending_scene() {
   level.elias.tablet setModel("hjk_tablet_01");
   level.elias.tablet.origin = level.elias gettagorigin("tag_inhand");
   level.elias.tablet.angles = level.elias gettagangles("tag_inhand");
-  level.elias.tablet linkto(level.elias, "tag_inhand");
+  level.elias.tablet linkTo(level.elias, "tag_inhand");
   level.hesh thread set_goal_and_angle((26662, 7328, -174), 90);
   common_scripts\utility::flag_wait("player_in_house");
   level.hesh thread restore_playback_on_stairs_end();
@@ -778,7 +778,7 @@ ending_scene() {
   wait 1;
   level.elias.anim_reach_playback_scale = 0.875;
   level.hesh.anim_reach_playback_scale = 0.9;
-  var_14 = common_scripts\utility::getstruct("house2_animreach_path", "targetname");
+  var_14 = common_scripts\utility::getStruct("house2_animreach_path", "targetname");
   var_14 anim_reach_path(level.third_floor_actors, "3rd_floor_start");
   var_5 maps\_anim::anim_reach([level.hesh, level.elias], "3rd_floor_start");
   common_scripts\utility::flag_set("3rd_floor_start");
@@ -816,7 +816,7 @@ anim_reach_path(var_0, var_1) {
       break;
     }
 
-    var_2 = common_scripts\utility::getstruct(var_2.target, "targetname");
+    var_2 = common_scripts\utility::getStruct(var_2.target, "targetname");
   }
 }
 
@@ -856,7 +856,7 @@ restore_playback_on_stairs_end() {
 
 swap_tablet(var_0) {
   var_0.tablet unlink();
-  var_0.tablet linkto(level.brian, "tag_inhand");
+  var_0.tablet linkTo(level.brian, "tag_inhand");
 }
 
 level_end() {
@@ -904,7 +904,7 @@ elias_logic() {
 
 balcony_read() {
   common_scripts\utility::flag_wait("3rd_floor_player");
-  var_0 = getent("beach_scene_actor", "targetname");
+  var_0 = getEnt("beach_scene_actor", "targetname");
   var_1 = common_scripts\utility::getStructArray("beach_anims", "targetname");
   spawn_ai_for_structs(var_0, var_1, 1);
   thread beach_matv();
@@ -985,7 +985,7 @@ getnonheroallies() {
 target_practice_guys_logic() {
   self.goalradius = 32;
   self setgoalpos(self.origin);
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self setentitytarget(var_0, 1);
   self.dontevershoot = 1;
   self.pistol = 0;

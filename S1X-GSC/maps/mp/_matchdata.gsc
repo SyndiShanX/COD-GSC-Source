@@ -991,7 +991,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sKillersWeapon, sKiller
 
     victimForward = anglesToForward((0, self.angles[1], 0));
     attackDirection = (self.origin - attacker.origin);
-    attackDirection = VectorNormalize((attackDirection[0], attackDirection[1], 0));
+    attackDirection = vectorNormalize((attackDirection[0], attackDirection[1], 0));
     deathDot = VectorDot(victimForward, attackDirection);
     setMatchData("lives", lifeId, "dotOfDeath", deathDot);
 

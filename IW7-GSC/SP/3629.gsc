@@ -631,7 +631,7 @@ func_5C54() {
   var_10 = var_4 + var_0 * var_8 + var_1 * var_9;
   var_5 = scripts\common\trace::ray_trace(var_4, var_10, undefined, scripts\common\trace::create_solid_ai_contents(1));
   if(var_5["fraction"] != 1) {
-    var_11 = vectornormalize(var_10 - var_4);
+    var_11 = vectorNormalize(var_10 - var_4);
     var_12 = distance(var_10, var_4);
     var_10 = var_4 + var_11 * var_5["fraction"] * var_12 - 10;
   }
@@ -689,7 +689,7 @@ func_5C5A(var_0) {
   self.var_4B2E = min(self.var_4B2E + var_1, 128);
   if(self.var_4B2E != 128) {
     var_2 = self.origin - var_0;
-    var_2 = vectornormalize((var_2[0], var_2[1], 0));
+    var_2 = vectorNormalize((var_2[0], var_2[1], 0));
     self.var_4B2F = self.var_4B2F + var_2 * distance2d(self.origin, var_0) / 2 * 0.8 * 0.05;
   }
 }
@@ -731,10 +731,10 @@ func_5C53(var_0) {
   if(var_10 == var_2) {
     var_11 = level.player.angles;
   } else {
-    var_11 = vectortoangles(vectornormalize(var_10 - var_2));
+    var_11 = vectortoangles(vectorNormalize(var_10 - var_2));
   }
 
-  var_12 = vectornormalize(var_10 - var_2);
+  var_12 = vectorNormalize(var_10 - var_2);
   var_13 = distance(var_9, var_2);
   if(var_13 > 700) {
     var_9 = var_2 + var_12 * 700;
@@ -753,7 +753,7 @@ func_5C53(var_0) {
   }
 
   if(isDefined(self.var_1155E) && isalive(self.var_1155E)) {
-    var_10 = vectornormalize(self.var_1155E.origin + (0, 0, var_1) - var_9);
+    var_10 = vectorNormalize(self.var_1155E.origin + (0, 0, var_1) - var_9);
     var_11 = distance(self.var_1155E.origin + (0, 0, var_1), var_9) / 4;
     if(var_11 > 100) {
       var_11 = 100;
@@ -1294,7 +1294,7 @@ func_5C9B(var_0) {
   self notify("trophy_system_engaged");
   thread scripts\engine\utility::stop_loop_sound_on_entity("support_drone_trophy_scan");
   self playSound("support_drone_trophy_fire");
-  var_1 = vectornormalize(var_0.origin - self.var_5CDB gettagorigin("tag_flash"));
+  var_1 = vectorNormalize(var_0.origin - self.var_5CDB gettagorigin("tag_flash"));
   playfxbetweenpoints(level._effect["drone_trophy_laser"], self.var_5CDB gettagorigin("tag_flash"), vectortoangles(var_1), var_0.origin);
   playFX(level._effect["drone_trophy_pop"], var_0.origin);
   playworldsound("support_drone_trophy_impact", var_0.origin);

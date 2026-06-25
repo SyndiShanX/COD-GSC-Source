@@ -191,10 +191,10 @@ run_shellshock(param_00, param_01, param_02, param_03) {
   self endon("death");
   self shellshock("zm_heavy_hit", param_00 * 1.4, param_01);
   self method_8308(0);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_04 = self.var_116 - param_02;
   var_04 = (var_04[0], var_04[1], 0);
-  var_04 = param_03 * vectornormalize(var_04);
+  var_04 = param_03 * vectorNormalize(var_04);
   var_04 = (var_04[0], var_04[1], 125);
   self setvelocity(var_04);
   self method_8308(1);
@@ -887,14 +887,14 @@ set_new_assassin_origin(param_00) {
 
   var_02 = spawn("script_model", self.var_116);
   var_02 setModel("tag_origin");
-  self linkto(var_02);
+  self linkTo(var_02);
   var_02 thread lib_0547::func_2D19(self);
   while(!lib_053C::humanoid_has_valid_targets(1)) {
     wait 0.05;
   }
 
   self unlink();
-  self setorigin(var_01.var_116);
+  self setOrigin(var_01.var_116);
   if(isDefined(var_02)) {
     var_02 delete();
   }
@@ -1134,8 +1134,8 @@ ghost_through_passives() {
         continue;
       }
 
-      var_03 = 8 * vectornormalize(anglestoright(self.var_1D));
-      var_04 = -8 * vectornormalize(anglestoright(self.var_1D));
+      var_03 = 8 * vectorNormalize(anglestoright(self.var_1D));
+      var_04 = -8 * vectorNormalize(anglestoright(self.var_1D));
       if(distance(var_02.var_116, self.var_116 + var_03) < distance(var_02.var_116, self.var_116 + var_04)) {
         var_05 = getclosestpointonnavmesh(var_02.var_116 + var_03);
       } else {
@@ -1143,7 +1143,7 @@ ghost_through_passives() {
       }
 
       var_06 = 0;
-      var_02 setorigin(var_05, var_06);
+      var_02 setOrigin(var_05, var_06);
     }
 
     wait 0.05;
@@ -1479,10 +1479,10 @@ assassin_strike_near_players(param_00, param_01) {
     return param_01;
   }
 
-  var_02 = self.attackpointoffset * vectornormalize(anglesToForward(param_00 geteyeangles()));
-  var_03 = var_02 + self.attackpointoffset * vectornormalize(anglestoright(param_00 geteyeangles()));
+  var_02 = self.attackpointoffset * vectorNormalize(anglesToForward(param_00 geteyeangles()));
+  var_03 = var_02 + self.attackpointoffset * vectorNormalize(anglestoright(param_00 geteyeangles()));
   var_04 = getclosestpointonnavmesh(param_00.var_116 + var_03, self);
-  var_05 = var_02 + self.attackpointoffset * vectornormalize(anglestoright(param_00 geteyeangles() + (0, 180, 0)));
+  var_05 = var_02 + self.attackpointoffset * vectorNormalize(anglestoright(param_00 geteyeangles() + (0, 180, 0)));
   var_06 = getclosestpointonnavmesh(param_00.var_116 + var_05, self);
   if(self.assassin_melee_side > 0) {
     return var_06;
@@ -1943,7 +1943,7 @@ dodamageonjoints(param_00, param_01, param_02) {
 }
 
 get_final_joint_origin(param_00) {
-  return self gettagorigin(param_00) + 42 * vectornormalize(anglesToForward(self gettagangles(param_00)));
+  return self gettagorigin(param_00) + 42 * vectorNormalize(anglesToForward(self gettagangles(param_00)));
 }
 
 zombie_assassin_charge_cleanup() {

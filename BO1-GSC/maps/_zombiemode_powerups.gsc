@@ -348,7 +348,7 @@ specific_powerup_drop(powerup_name, drop_spot) {
   if(isDefined(powerup)) {
     struct = level.zombie_powerups[powerup_name];
     powerup setModel(struct.model_name);
-    playsoundatposition("zmb_spawn_powerup", powerup.origin);
+    playSoundAtPosition("zmb_spawn_powerup", powerup.origin);
     powerup.powerup_name = struct.powerup_name;
     powerup.hint = struct.hint;
     if(isDefined(struct.fx)) {
@@ -383,7 +383,7 @@ powerup_setup() {
   powerup = get_valid_powerup();
   struct = level.zombie_powerups[powerup];
   self setModel(struct.model_name);
-  playsoundatposition("zmb_spawn_powerup", self.origin);
+  playSoundAtPosition("zmb_spawn_powerup", self.origin);
   self.powerup_name = struct.powerup_name;
   self.hint = struct.hint;
   if(isDefined(struct.fx)) {
@@ -431,27 +431,27 @@ special_drop_setup() {
     default:
       is_powerup = false;
       playFX(level._effect["lightning_dog_spawn"], self.origin);
-      playsoundatposition("pre_spawn", self.origin);
+      playSoundAtPosition("pre_spawn", self.origin);
       wait(1.5);
-      playsoundatposition("zmb_bolt", self.origin);
+      playSoundAtPosition("zmb_bolt", self.origin);
       Earthquake(0.5, 0.75, self.origin, 1000);
       PlayRumbleOnPosition("explosion_generic", self.origin);
-      playsoundatposition("spawn", self.origin);
+      playSoundAtPosition("spawn", self.origin);
       wait(1.0);
       thread play_sound_2d("sam_nospawn");
       self Delete();
   }
   if(is_powerup) {
     playFX(level._effect["lightning_dog_spawn"], self.origin);
-    playsoundatposition("pre_spawn", self.origin);
+    playSoundAtPosition("pre_spawn", self.origin);
     wait(1.5);
-    playsoundatposition("zmb_bolt", self.origin);
+    playSoundAtPosition("zmb_bolt", self.origin);
     Earthquake(0.5, 0.75, self.origin, 1000);
     PlayRumbleOnPosition("explosion_generic", self.origin);
-    playsoundatposition("spawn", self.origin);
+    playSoundAtPosition("spawn", self.origin);
     struct = level.zombie_powerups[powerup];
     self setModel(struct.model_name);
-    playsoundatposition("zmb_spawn_powerup", self.origin);
+    playSoundAtPosition("zmb_spawn_powerup", self.origin);
     self.powerup_name = struct.powerup_name;
     self.hint = struct.hint;
     if(isDefined(struct.fx)) {
@@ -528,7 +528,7 @@ powerup_grab() {
           }
         }
         wait(0.1);
-        playsoundatposition("zmb_powerup_grabbed", self.origin);
+        playSoundAtPosition("zmb_powerup_grabbed", self.origin);
         self stoploopsound();
         if(self.powerup_name != "fire_sale") {
           level thread maps\_zombiemode_audio::do_announcer_playvox(level.devil_vox["powerup"][self.powerup_name]);
@@ -614,7 +614,7 @@ start_carpenter(origin) {
       }
       windows thread maps\_zombiemode_blockers::replace_chunk(chunk, undefined, true);
       windows.clip enable_trigger();
-      windows.clip DisconnectPaths();
+      windows.clip disconnectPaths();
       wait_network_frame();
       wait(0.05);
     }
@@ -670,7 +670,7 @@ powerup_wobble() {
       yaw = 60;
     }
     yaw = self.angles[1] + yaw;
-    self rotateto((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }
@@ -741,7 +741,7 @@ nuke_powerup(drop_item) {
   }
 }
 nuke_flash() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] play_sound_2d("evt_nuke_flash");
   }

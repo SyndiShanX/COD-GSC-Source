@@ -343,7 +343,7 @@ use_killstreak() {
 }
 
 set_rank() {
-  players = getplayers();
+  players = getPlayers();
   ranks = [];
   bot_ranks = [];
   human_ranks = [];

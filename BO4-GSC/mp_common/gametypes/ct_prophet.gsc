@@ -94,7 +94,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 
   if(isDefined(weapon) && weapon == getweapon(#"shock_rifle")) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_d471f8fa(10);
   }
 }
@@ -187,7 +187,7 @@ j_fore_le_01() {
       break;
     }
 
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_785eb2ca();
     waitframe(1);
     level.var_8db5b490++;
@@ -257,7 +257,7 @@ function_671e5ede() {
       break;
     }
 
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     n_dist = distance(e_player.origin, level.var_a62b1ae0.origin);
 
     if(n_dist <= 500) {
@@ -301,7 +301,7 @@ function_ca179a0c() {
     a_nd_nodes = getnodearray("nd_prophet_player_start_" + level.var_8db5b490 + 1, "targetname");
     a_nd_nodes = array::randomize(a_nd_nodes);
     var_f34999b8 = a_nd_nodes[0];
-    self setorigin(var_f34999b8.origin);
+    self setOrigin(var_f34999b8.origin);
     self setplayerangles(var_f34999b8.angles);
   }
 }
@@ -317,7 +317,7 @@ function_dd1fa6e7() {
     return;
   }
 
-  self setorigin(level.var_a62b1ae0.origin);
+  self setOrigin(level.var_a62b1ae0.origin);
   self setplayerangles(level.var_a62b1ae0.angles);
   n_goal_radius = 400;
 
@@ -357,11 +357,11 @@ function_e1086742(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 }
 
 intro_msg() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_2ef12070900a4e87", 5, "green");
 }
 
 function_3e3366eb() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player ct_utils::function_329f9ba6(#"hash_3ccd3d10d2142048", 5, "green", 2);
 }

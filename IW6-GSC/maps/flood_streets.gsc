@@ -75,17 +75,17 @@ section_flag_inits() {
 }
 
 test_tracer_fire(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   while(!isDefined(var_3)) {
-    var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+    var_3 = common_scripts\utility::getStruct(var_1, "targetname");
     wait 0.1;
   }
 
-  var_4 = common_scripts\utility::getstruct(var_2, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_2, "targetname");
 
   while(!isDefined(var_4)) {
-    var_4 = common_scripts\utility::getstruct(var_2, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_2, "targetname");
     wait 0.1;
   }
 
@@ -116,7 +116,7 @@ show_missile_launcher_collision() {
 }
 
 enemy_init() {
-  var_0 = common_scripts\utility::getstruct("heli_start_firing_1", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("heli_start_firing_1", "script_noteworthy");
   var_0 waittill("trigger");
   wait 2.0;
 }
@@ -128,7 +128,7 @@ infil_heli_anim_skip() {
 }
 
 notify_with_trigger_targetname(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_2 waittill("trigger");
   self notify(var_0);
 }
@@ -149,14 +149,14 @@ draw_turret_target_line() {
 
 rumble_when_tank_breaks_wall() {
   wait 0.1;
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }
 
 fake_tank_rumble() {
   self endon("death");
 
   for(;;) {
-    level.player playrumbleonentity("tank_rumble");
+    level.player playRumbleOnEntity("tank_rumble");
     wait 0.1;
   }
 }
@@ -224,7 +224,7 @@ converge_on_target(var_0, var_1, var_2) {
     }
 
     var_4 = var_3 / var_2;
-    var_0 moveto(var_1.origin + (0, 0, 16), var_4);
+    var_0 moveTo(var_1.origin + (0, 0, 16), var_4);
     wait 0.1;
   }
 }
@@ -261,14 +261,14 @@ fire_turret(var_0) {
 }
 
 player_forward_skip_baker_hold_up() {
-  var_0 = getent("hold_up_check", "targetname");
+  var_0 = getEnt("hold_up_check", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("player_move_up");
 }
 
 set_group_goalvolume(var_0) {
   var_1 = self;
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   foreach(var_4 in var_1) {
     var_4 cleargoalvolume();
@@ -467,14 +467,14 @@ streets_to_dam() {
   common_scripts\utility::flag_wait("player_on_ladder");
   wait 2.0;
   level thread streets_to_dam_2_side_guys_spawn_logic();
-  var_0 = getent("streets_to_dam_wave_2_start", "targetname");
+  var_0 = getEnt("streets_to_dam_wave_2_start", "targetname");
   var_0 waittill("trigger");
   level notify("end_of_streets_to_dam");
 }
 
 enter_garage() {
   level endon("firing_garage_shot");
-  var_0 = getent("into_parking_garage", "targetname");
+  var_0 = getEnt("into_parking_garage", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -484,9 +484,9 @@ enter_garage() {
     level.enemy_tank_3 notify("stop_firing");
     level notify("stop_shooting_player");
     level.enemy_tank_3 maps\_vehicle::mgoff();
-    var_1 = getent("enemy_tank_2_garage_target", "targetname");
+    var_1 = getEnt("enemy_tank_2_garage_target", "targetname");
     level.enemy_tank_3 setturrettargetvec(var_1.origin);
-    var_0 = getent("parking_garage_doorway", "targetname");
+    var_0 = getEnt("parking_garage_doorway", "targetname");
 
     if(isDefined(var_0)) {
       var_0 waittill("trigger");
@@ -511,7 +511,7 @@ garage_player_invulnerable() {
 
 turret_too_slow_failsafe() {
   level endon("firing_garage_shot");
-  var_0 = getent("player_far_enough_in_garage", "targetname");
+  var_0 = getEnt("player_far_enough_in_garage", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -535,7 +535,7 @@ garage_opening_collapse() {
   var_1 = anglesToForward(var_0);
   level thread maps\flood_infil::kill_infil_enemies();
   playFX(level._effect["tank_concrete_explosion_omni"], level.player.origin, var_1);
-  var_2 = getent("garage_collapse_fx_node", "targetname");
+  var_2 = getEnt("garage_collapse_fx_node", "targetname");
   playFX(level._effect["tank_concrete_explosion_omni"], var_2.origin + (-50, 100, 0), (-1, 2, 0));
   playFX(level._effect["garage_explosion_flash"], level.player.origin);
   level.player shellshock("default_nosound", 3);
@@ -545,17 +545,17 @@ garage_opening_collapse() {
   make_player_look_away("garage_collapse_back_look_check", (45, 135, 0), 0.15, 0);
   thread show_garage_debris();
   thread maps\flood_audio::sfx_parking_lot_explode();
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   common_scripts\utility::exploder("garage_dust");
-  var_3 = getent("garage_collapse_push_volume", "targetname");
+  var_3 = getEnt("garage_collapse_push_volume", "targetname");
   var_4 = (-20, 20, 0);
   push_player_out_of_volume(var_3, var_4);
 
   if(isalive(level.enemy_tank_3)) {
-    var_5 = getent("enemy_tank_3_post_garage_target", "targetname");
-    level.enemy_tank_3 setturrettargetent(var_5);
+    var_5 = getEnt("enemy_tank_3_post_garage_target", "targetname");
+    level.enemy_tank_3 setturrettargetEnt(var_5);
     level.enemy_tank_3.mgturret[1] cleartargetentity();
-    var_6 = getent("enemy_tank_3_post_garage_backup", "targetname");
+    var_6 = getEnt("enemy_tank_3_post_garage_backup", "targetname");
     level.enemy_tank_3 startpath();
     level.enemy_tank_3 vehicle_setspeed(40);
     level.enemy_tank_3 common_scripts\utility::delaycall(0.5, ::vehicle_setspeed, 0);
@@ -571,10 +571,10 @@ garage_opening_collapse() {
 
 teleport_allies_on_flag() {
   common_scripts\utility::flag_wait("player_looking_away");
-  var_0 = getent("inside_garage_volume", "targetname");
-  var_1[0] = getent("streets_to_dam_ally_0_failsafe", "targetname");
-  var_1[1] = getent("streets_to_dam_ally_1_failsafe", "targetname");
-  var_1[2] = getent("streets_to_dam_ally_2_failsafe", "targetname");
+  var_0 = getEnt("inside_garage_volume", "targetname");
+  var_1[0] = getEnt("streets_to_dam_ally_0_failsafe", "targetname");
+  var_1[1] = getEnt("streets_to_dam_ally_1_failsafe", "targetname");
+  var_1[2] = getEnt("streets_to_dam_ally_2_failsafe", "targetname");
 
   for(var_2 = 0; var_2 < level.allies.size; var_2++) {
     if(!level.allies[var_2] istouching(var_0)) {
@@ -604,21 +604,21 @@ stumble_and_quake() {
   var_1 addpitch(10);
   var_1 addroll(5);
   var_3 = 0.4;
-  var_0 rotateto(var_1.angles, var_3, 0.2, 0.2);
+  var_0 rotateTo(var_1.angles, var_3, 0.2, 0.2);
   wait(var_3);
   var_1 addpitch(-5);
   var_1 addroll(-5);
-  var_0 rotateto(var_1.angles, 0.1);
+  var_0 rotateTo(var_1.angles, 0.1);
   wait 0.1;
   var_1 addpitch(5);
   var_1 addroll(5);
-  var_0 rotateto(var_1.angles, 0.1);
+  var_0 rotateTo(var_1.angles, 0.1);
   wait 0.1;
   var_1 addpitch(-35);
   var_1 addroll(-15);
-  var_0 rotateto(var_1.angles, var_3, 0.2, 0.2);
+  var_0 rotateTo(var_1.angles, var_3, 0.2, 0.2);
   wait(var_3);
-  var_0 rotateto(var_2, var_3 + 0.1, 0.2, 0.2);
+  var_0 rotateTo(var_2, var_3 + 0.1, 0.2, 0.2);
 }
 
 adjust_angles_to_player(var_0) {
@@ -672,8 +672,8 @@ make_player_look_away(var_0, var_1, var_2, var_3) {
     var_9 = spawn("script_origin", (0, 0, 0));
     var_9.origin = level.player.origin;
     var_9.angles = level.player getplayerangles();
-    level.player playerlinkto(var_9, "", 1.0);
-    var_9 rotateto(var_1, var_2, var_2 * 0.25);
+    level.player playerlinkTo(var_9, "", 1.0);
+    var_9 rotateTo(var_1, var_2, var_2 * 0.25);
     wait(var_2 / 2);
     wait(var_2 / 2);
     var_9 delete();
@@ -732,7 +732,7 @@ adjust_ally_movement() {
   common_scripts\utility::flag_wait("player_ready_to_progress");
   level.allies[0] thread send_ally_to_garage_node("ally_garage_path_0", "ally_garage_path_0_skip");
   var_3 = undefined;
-  var_4 = getent("past_traversal_volume", "targetname");
+  var_4 = getEnt("past_traversal_volume", "targetname");
 
   for(var_5 = 2; var_5 > 0; var_5--) {
     if(level.allies[var_5] istouching(var_4)) {
@@ -783,7 +783,7 @@ adjust_ally_movement() {
     level.allies[var_5] pushplayer(0);
   }
 
-  var_10 = getent("baker_hold_up", "targetname");
+  var_10 = getEnt("baker_hold_up", "targetname");
 
   if(isDefined(var_10)) {
     var_10 waittill("trigger");
@@ -812,7 +812,7 @@ send_ally_to_garage_node(var_0, var_1) {
 }
 
 set_flag_when_player_ready_to_progress(var_0) {
-  var_1 = getent("player_far_enough_in_garage", "targetname");
+  var_1 = getEnt("player_far_enough_in_garage", "targetname");
 
   if(isDefined(var_1)) {
     var_1 waittill("trigger");
@@ -849,13 +849,13 @@ stumble_anim(var_0) {
 
 turn_off_cqb_if_player_too_far_forward(var_0) {
   level endon("stop_distance_check");
-  var_1 = getent("streets_to_dam_autosave", "targetname");
+  var_1 = getEnt("streets_to_dam_autosave", "targetname");
 
   if(isDefined(var_1)) {
     var_1 waittill("trigger");
   }
 
-  var_2 = getent("garage_hallway_position_check", "targetname");
+  var_2 = getEnt("garage_hallway_position_check", "targetname");
   var_3 = 1;
 
   while(var_3) {
@@ -962,14 +962,14 @@ convoy_spawn_logic() {
     wait 0.1;
   }
 
-  var_14 = getent("enemy_convoy_vehicles_launcher", "targetname");
+  var_14 = getEnt("enemy_convoy_vehicles_launcher", "targetname");
   var_14 maps\_utility::add_spawn_function(::launcher_spawn_func);
   var_14 = var_14 maps\_utility::spawn_vehicle();
   level thread ladder_spot_glow();
   wait 0.1;
   var_14 maps\_vehicle::gopath();
   common_scripts\utility::flag_set("m880_has_spawned");
-  var_15 = getent("enemy_convoy_vehicles_launcher_lynx", "targetname");
+  var_15 = getEnt("enemy_convoy_vehicles_launcher_lynx", "targetname");
   var_15 maps\_utility::add_spawn_function(::launcher_lynx_spawn_func);
   var_15 maps\_vehicle::spawn_vehicle_and_gopath();
 }
@@ -1056,7 +1056,7 @@ debug_timer() {
 
 m880_crash_kill_in_volume() {
   var_0 = getaiarray("axis");
-  var_1 = getent("m880_crash_kill_volume", "targetname");
+  var_1 = getEnt("m880_crash_kill_volume", "targetname");
 
   if(level.player istouching(var_1)) {
     level.player kill();
@@ -1074,15 +1074,15 @@ m880_crash_kill_in_volume() {
 
 m880_crash_kill_player_in_lynx_volume() {
   level waittill("lynx_crash_start");
-  var_0 = getent("lynx_collision_path_200", "targetname");
+  var_0 = getEnt("lynx_collision_path_200", "targetname");
   var_0 thread wait_then_check_if_player_touching_kill(2.0, 2.8);
-  var_0 = getent("lynx_collision_path_250", "targetname");
+  var_0 = getEnt("lynx_collision_path_250", "targetname");
   var_0 thread wait_then_check_if_player_touching_kill(2.5, 3.14);
-  var_0 = getent("lynx_collision_path_290", "targetname");
+  var_0 = getEnt("lynx_collision_path_290", "targetname");
   var_0 thread wait_then_check_if_player_touching_kill(2.9, 3.6);
-  var_0 = getent("lynx_collision_path_330", "targetname");
+  var_0 = getEnt("lynx_collision_path_330", "targetname");
   var_0 thread wait_then_check_if_player_touching_kill(3.3, 4.5);
-  var_0 = getent("lynx_collision_path_385", "targetname");
+  var_0 = getEnt("lynx_collision_path_385", "targetname");
   var_0 thread wait_then_check_if_player_touching_kill(3.85, 4.6);
 }
 
@@ -1130,7 +1130,7 @@ launcher_lynx_spawn_func() {
 
 convoy_kill_player() {
   level endon("remove_checkpoint_kill_trigger");
-  var_0 = getent("kill_player_checkpoint", "targetname");
+  var_0 = getEnt("kill_player_checkpoint", "targetname");
   var_0 waittill("trigger");
   level.player kill();
   wait 0.1;
@@ -1142,7 +1142,7 @@ convoy_death_func() {
   self endon("death");
 
   while(!common_scripts\utility::flag("streets_to_dam_enemies_dead")) {
-    var_0 = getent("kill_convoy", "targetname");
+    var_0 = getEnt("kill_convoy", "targetname");
     var_0 waittill("trigger", var_1);
 
     if(var_1 == self) {
@@ -1157,7 +1157,7 @@ convoy_riders_death_func() {
   self endon("death");
 
   while(!common_scripts\utility::flag("streets_to_dam_enemies_dead")) {
-    var_0 = getent("kill_truck_guys", "targetname");
+    var_0 = getEnt("kill_truck_guys", "targetname");
     var_0 waittill("trigger", var_1);
 
     if(var_1 == self) {
@@ -1187,7 +1187,7 @@ convoy_riders_react_func(var_0) {
 }
 
 check_if_player_close_to_checkpoint() {
-  var_0 = getent("close_to_checkpoint", "targetname");
+  var_0 = getEnt("close_to_checkpoint", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -1228,7 +1228,7 @@ convoy_spacing_func(var_0, var_1, var_2) {
 }
 
 rotate_checkpoint_gate_when_near_m880(var_0) {
-  var_1 = getent("checkpoint_gate", "targetname");
+  var_1 = getEnt("checkpoint_gate", "targetname");
   var_2 = (0, 0, -15);
 
   while(!isDefined(level.first_launcher)) {
@@ -1239,13 +1239,13 @@ rotate_checkpoint_gate_when_near_m880(var_0) {
     wait 0.1;
   }
 
-  var_1 rotateto(var_2, 0.25);
+  var_1 rotateTo(var_2, 0.25);
 }
 
 rotate_checkpoint_concrete_barrier_when_near_m880(var_0) {
   level endon("end_of_streets_to_dam");
-  var_1 = getent("checkpoint_concrete_barrier_1", "targetname");
-  var_2 = getent("checkpoint_concrete_barrier_2", "targetname");
+  var_1 = getEnt("checkpoint_concrete_barrier_1", "targetname");
+  var_2 = getEnt("checkpoint_concrete_barrier_2", "targetname");
   var_2 hide();
   var_3 = var_2.angles;
   var_4 = var_2.origin;
@@ -1258,8 +1258,8 @@ rotate_checkpoint_concrete_barrier_when_near_m880(var_0) {
     wait 0.1;
   }
 
-  var_1 rotateto(var_3, 0.15);
-  var_1 moveto(var_4, 0.15);
+  var_1 rotateTo(var_3, 0.15);
+  var_1 moveTo(var_4, 0.15);
   var_5 = getEntArray("checkpoint_concrete_barrier_1_clip", "targetname");
 
   foreach(var_7 in var_5) {
@@ -1271,7 +1271,7 @@ rotate_checkpoint_concrete_barrier_when_near_m880(var_0) {
 }
 
 streets_to_dam_sequence() {
-  var_0 = getent("rpg_guys_death_trigger", "targetname");
+  var_0 = getEnt("rpg_guys_death_trigger", "targetname");
   var_0 waittill("trigger");
   maps\_utility::kill_deathflag("rpg_guys");
 }
@@ -1301,7 +1301,7 @@ streets_to_dam_wave_1_init() {
 
   if(common_scripts\utility::flag("enemy_alerted")) {}
 
-  var_3 = getent("spawn_scaffold_guys_trigger", "targetname");
+  var_3 = getEnt("spawn_scaffold_guys_trigger", "targetname");
 
   if(isDefined(var_3)) {
     var_3 notify("trigger");
@@ -1365,7 +1365,7 @@ streets_to_dam_wave_1_init() {
 
   common_scripts\utility::flag_set("streets_to_dam_enemies_ALMOST_dead");
   wait 2;
-  var_14 = getent("streets_to_dam_garage_exit", "targetname");
+  var_14 = getEnt("streets_to_dam_garage_exit", "targetname");
 
   if(isDefined(var_14)) {
     var_14 notify("trigger");
@@ -1383,7 +1383,7 @@ streets_to_dam_wave_1_init() {
 }
 
 watch_for_ally_see_convoy() {
-  var_0 = getent("baker_hold_up", "targetname");
+  var_0 = getEnt("baker_hold_up", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("see_convoy");
 }
@@ -1392,7 +1392,7 @@ checkpoint_enemies_run_for_cover() {
   var_0 = spawn("script_origin", level.heli_turret.origin);
   wait 0.1;
   var_0.origin = level.heli_turret.origin + (0, 0, 300);
-  var_0 linkto(level.heli_turret);
+  var_0 linkTo(level.heli_turret);
   var_1 = getnodearray("checkpoint_alert_node", "script_noteworthy");
   var_2 = maps\_utility::get_ai_group_ai("streets_to_dam_wave_1");
   var_3 = var_2[0].goalradius;
@@ -1422,13 +1422,13 @@ checkpoint_rpg_enemies_fire_at_heli() {
     wait 0.1;
   }
 
-  var_1 = getent("streets_to_dam_rpg_target_1", "targetname");
+  var_1 = getEnt("streets_to_dam_rpg_target_1", "targetname");
   var_0 = common_scripts\utility::get_array_of_closest(var_1.origin, var_0);
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(isDefined(var_0[var_2])) {
       if(var_2 != 0) {
-        var_1 = getent("streets_to_dam_rpg_target_2", "targetname");
+        var_1 = getEnt("streets_to_dam_rpg_target_2", "targetname");
       }
 
       var_0[var_2] thread rpg_guy_wait_and_fire_at_target(var_1);
@@ -1511,21 +1511,21 @@ streets_to_dam_wave_1_vignette_spawn_func() {
   ignore_everything();
   common_scripts\utility::flag_wait("enemy_alerted");
   clear_ignore_everything();
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 streets_to_dam_wave_1_vignette_extra_spawn_func() {
   self endon("death");
   self.animname = "convoy_checkpoint_opfor02";
   ignore_everything();
-  var_0 = getent("streets_to_dam_extra_waver_node", "script_noteworthy");
+  var_0 = getEnt("streets_to_dam_extra_waver_node", "script_noteworthy");
   var_0.origin = var_0.origin + (30, 150, 0);
   var_1 = [];
   var_1["convoy_checkpoint_opfor02"] = self;
   var_0 thread maps\_anim::anim_single(var_1, "convoy_checkpoint");
   common_scripts\utility::flag_wait("enemy_alerted");
   clear_ignore_everything();
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 start_combat_after_seeing_launcher() {
@@ -1535,7 +1535,7 @@ start_combat_after_seeing_launcher() {
 
 kill_guys_near_rpg() {
   wait 2.0;
-  var_0 = getent("enemies_near_rpg_volume", "targetname");
+  var_0 = getEnt("enemies_near_rpg_volume", "targetname");
   kill_deathflag_in_area("streets_to_dam_checkpoint_enemies_close", var_0, 2.0);
 }
 
@@ -1630,7 +1630,7 @@ heli_strafing_think() {
 fire_heli_missile(var_0) {
   var_1 = self gettagorigin("tag_flash");
   var_1 = (var_1[0], var_1[1] + 50, var_1[2]);
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   magicbullet("rpg_straight", var_1, var_2.origin);
 }
 
@@ -1639,7 +1639,7 @@ add_turret_to_heli(var_0) {
   var_2 = level.first_launcher gettagorigin("tag_origin");
   var_3 = spawn("script_model", var_2);
   var_3 setModel(var_1);
-  var_3 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_4 = self gettagorigin("tag_doorgun");
   var_4 = self.origin;
 
@@ -1653,7 +1653,7 @@ add_turret_to_heli(var_0) {
   var_5.team = "allies";
   wait 0.1;
   var_5.origin = self gettagorigin("tag_doorgun");
-  var_5 linkto(self, "tag_doorgun", (0, 0, 0), self.angles + (0, 0, 90));
+  var_5 linkTo(self, "tag_doorgun", (0, 0, 0), self.angles + (0, 0, 90));
   var_5 setmode("manual");
   var_5 setturretteam("allies");
   var_5 hide();
@@ -1670,7 +1670,7 @@ fire_heli_turret() {
   self endon("stop_firing_mg");
   self waittill("stop_firing");
   var_0 = level.heli_turret;
-  var_1 = getent("missile_smoke_origin_3", "targetname");
+  var_1 = getEnt("missile_smoke_origin_3", "targetname");
   var_0 settargetentity(var_1);
   var_0 startfiring();
 
@@ -1681,7 +1681,7 @@ fire_heli_turret() {
 }
 
 block_off_road_during_convoy() {
-  var_0 = getent("streets_to_dam_bad_place_brush", "targetname");
+  var_0 = getEnt("streets_to_dam_bad_place_brush", "targetname");
   badplace_brush("street_blocker", -1, var_0, "axis");
   common_scripts\utility::flag_wait("convoy_gone");
   wait 3.0;
@@ -1725,7 +1725,7 @@ watch_for_player_grenade() {
 }
 
 watch_player_for_trigger() {
-  var_0 = getent("streets_to_dam_garage_exit", "targetname");
+  var_0 = getEnt("streets_to_dam_garage_exit", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("enemy_alerted");
 }
@@ -1793,7 +1793,7 @@ trigger_named_and_turn_off_prior(var_0, var_1) {
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(var_2) {
       if(var_0[var_3] == var_1) {
-        var_4 = getent(var_0[var_3], "targetname");
+        var_4 = getEnt(var_0[var_3], "targetname");
 
         if(isDefined(var_4)) {
           var_4 notify("trigger");
@@ -1802,7 +1802,7 @@ trigger_named_and_turn_off_prior(var_0, var_1) {
         var_2 = 0;
       }
 
-      var_4 = getent(var_0[var_3], "targetname");
+      var_4 = getEnt(var_0[var_3], "targetname");
 
       if(isDefined(var_4)) {
         var_4 common_scripts\utility::trigger_off();
@@ -1834,7 +1834,7 @@ convoy_check() {
 
   while(var_2) {
     if(!isDefined(var_0)) {
-      var_3 = getent("missile_launcher_2", "targetname");
+      var_3 = getEnt("missile_launcher_2", "targetname");
 
       if(!isDefined(var_3)) {
         break;
@@ -1897,13 +1897,13 @@ spawn_rpg_guys() {
   var_0 = getEntArray("streets_to_dam_wave_1_rpg", "targetname");
   maps\_utility::array_spawn_function(var_0, ::streets_to_dam_wave_1_rpg_spawn_func);
   wait 0.5;
-  var_1 = getent("rpg_guy_2", "script_noteworthy");
-  var_2 = getent("streets_to_dam_rpg_target_2", "targetname");
+  var_1 = getEnt("rpg_guy_2", "script_noteworthy");
+  var_2 = getEnt("streets_to_dam_rpg_target_2", "targetname");
   var_1 maps\_utility::add_spawn_function(::rpg_guy_wait_and_fire_at_target, var_2);
   var_1 = var_1 maps\_utility::spawn_ai();
   wait 0.5;
-  var_3 = getent("rpg_guy_1", "script_noteworthy");
-  var_2 = getent("streets_to_dam_rpg_target_1", "targetname");
+  var_3 = getEnt("rpg_guy_1", "script_noteworthy");
+  var_2 = getEnt("streets_to_dam_rpg_target_1", "targetname");
   var_3 maps\_utility::add_spawn_function(::rpg_guy_wait_and_fire_at_target, var_2);
   var_3 = var_3 maps\_utility::spawn_ai();
   wait 0.5;
@@ -1948,9 +1948,9 @@ streets_to_dam_wave_1_street_patrol_spawn_func() {
   self notify("stop_going_to_node");
 
   if(common_scripts\utility::flag("convoy_gone")) {
-    var_0 = getent("enemies_left_goal_volume", "targetname");
+    var_0 = getEnt("enemies_left_goal_volume", "targetname");
   } else {
-    var_0 = getent("enemies_convoy_goal_volume", "targetname");
+    var_0 = getEnt("enemies_convoy_goal_volume", "targetname");
   }
 
   self setgoalvolumeauto(var_0);
@@ -1960,13 +1960,13 @@ streets_to_dam_wave_1_street_patrol_spawn_func() {
     wait 0.1;
   }
 
-  var_0 = getent("enemies_left_goal_volume", "targetname");
+  var_0 = getEnt("enemies_left_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
   common_scripts\utility::flag_wait("streets_to_dam_enemies_ALMOST_dead");
-  var_0 = getent("enemies_left_small_goal_volume", "targetname");
+  var_0 = getEnt("enemies_left_small_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
   common_scripts\utility::flag_wait("streets_to_dam_enemies_last_guy");
-  var_0 = getent("enemies_left_last_guy_goal_volume", "targetname");
+  var_0 = getEnt("enemies_left_last_guy_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
@@ -1976,7 +1976,7 @@ spawn_scaffold_guys() {
     common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai);
   }
 
-  var_1 = getent("scaffold_guys_fight", "targetname");
+  var_1 = getEnt("scaffold_guys_fight", "targetname");
   var_1 notify("trigger");
 }
 
@@ -2000,14 +2000,14 @@ streets_to_dam_wave_1_spawn_func() {
   ignore_everything();
   thread set_flag_if_damaged();
   common_scripts\utility::flag_wait("enemy_alerted");
-  var_0 = getent("enemies_convoy_goal_volume", "targetname");
+  var_0 = getEnt("enemies_convoy_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
   wait 2.0;
 
   if(common_scripts\utility::flag("convoy_gone")) {
-    var_0 = getent("enemies_left_goal_volume", "targetname");
+    var_0 = getEnt("enemies_left_goal_volume", "targetname");
   } else {
-    var_0 = getent("enemies_convoy_goal_volume", "targetname");
+    var_0 = getEnt("enemies_convoy_goal_volume", "targetname");
   }
 
   self setgoalvolumeauto(var_0);
@@ -2017,24 +2017,24 @@ streets_to_dam_wave_1_spawn_func() {
     wait 0.1;
   }
 
-  var_0 = getent("enemies_left_goal_volume", "targetname");
+  var_0 = getEnt("enemies_left_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
   common_scripts\utility::flag_wait("streets_to_dam_enemies_ALMOST_dead");
-  var_0 = getent("enemies_left_small_goal_volume", "targetname");
+  var_0 = getEnt("enemies_left_small_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
   common_scripts\utility::flag_wait("streets_to_dam_enemies_last_guy");
-  var_0 = getent("enemies_left_last_guy_goal_volume", "targetname");
+  var_0 = getEnt("enemies_left_last_guy_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
 streets_to_dam_drive_missile_launcher() {
-  var_0 = getent("missile_launcher_2", "targetname");
+  var_0 = getEnt("missile_launcher_2", "targetname");
   common_scripts\utility::flag_wait("rpg_fired_at_launcher");
   level thread show_missile_launcher_collision();
   wait 0.2;
   common_scripts\utility::flag_wait("player_on_ladder");
   level.first_launcher notify("stop_crash_loop");
-  level.first_launcher stopanimscripted();
+  level.first_launcher stopanimScripted();
   missile_launcher_destruction_vignette();
 
   if(level.stabbed) {
@@ -2110,13 +2110,13 @@ missile_launcher_destruction_vignette() {
 }
 
 missile_launcher_destruction_vignette_allies() {
-  var_0 = getent("post_missile_launcher_location_ally1", "targetname");
+  var_0 = getEnt("post_missile_launcher_location_ally1", "targetname");
   level.allies[0] forceteleport(var_0.origin, var_0.angles);
   level.allies[0] ignore_everything();
-  var_0 = getent("post_missile_launcher_location_ally2", "targetname");
+  var_0 = getEnt("post_missile_launcher_location_ally2", "targetname");
   level.allies[1] forceteleport(var_0.origin, var_0.angles);
   level.allies[1] ignore_everything();
-  var_0 = getent("post_missile_launcher_location_ally3", "targetname");
+  var_0 = getEnt("post_missile_launcher_location_ally3", "targetname");
   level.allies[2] forceteleport(var_0.origin, var_0.angles);
   level.allies[2] ignore_everything();
   wait 7.0;
@@ -2124,7 +2124,7 @@ missile_launcher_destruction_vignette_allies() {
   level.allies[1] clear_ignore_everything();
   level.allies[2] clear_ignore_everything();
   wait 0.5;
-  var_1 = getent("streets_to_dam_wave_2_start", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_start", "targetname");
 
   if(isDefined(var_1)) {
     var_1 notify("trigger");
@@ -2140,7 +2140,7 @@ mlrs_kill1_spawn() {
 }
 
 mlrs_kill1_start(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("vignette_m880_crash", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("vignette_m880_crash", "script_noteworthy");
   var_3 = maps\_utility::spawn_anim_model("mlrs_kill1_knife");
   var_3 dontcastshadows();
   var_4 = maps\_utility::spawn_anim_model("mlrs_kill1_gun");
@@ -2262,9 +2262,9 @@ move_to_anim_start_point(var_0, var_1, var_2, var_3) {
     var_6 = spawn("script_origin", (0, 0, 0));
     var_6.origin = self.origin;
     var_6.angles = self.angles;
-    self linkto(var_6);
-    var_6 moveto(var_5.origin, var_3);
-    var_6 rotateto(var_5.angles, var_3);
+    self linkTo(var_6);
+    var_6 moveTo(var_5.origin, var_3);
+    var_6 rotateTo(var_5.angles, var_3);
     self unlink();
     var_6 delete();
   }
@@ -2280,7 +2280,7 @@ m880_kill1_start_spring_cam(var_0, var_1) {
 }
 
 m880_kill1_fail(var_0, var_1, var_2, var_3, var_4) {
-  var_0 = common_scripts\utility::getstruct("vignette_m880_crash", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_m880_crash", "script_noteworthy");
   var_5 = [];
   var_5["mlrs_kill1_opfor"] = var_2;
   var_5["player_rig"] = var_1;
@@ -2399,28 +2399,28 @@ ladder_spot_glow() {
   var_1 = level.first_launcher gettagorigin("tag_ladder");
   var_2 = spawn("script_model", var_1);
   var_2 setModel(var_0);
-  var_2 linkto(level.first_launcher, "tag_ladder", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(level.first_launcher, "tag_ladder", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_wait("player_on_ladder");
   wait 3.0;
   var_2 delete();
 }
 
 wait_for_player_to_use_ladder() {
-  var_0 = getent("player_climb_ladder_trigger_no_use", "targetname");
+  var_0 = getEnt("player_climb_ladder_trigger_no_use", "targetname");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("missile_launcher_in_place");
-  var_0 = getent("streets_to_dam_garage_exit", "targetname");
+  var_0 = getEnt("streets_to_dam_garage_exit", "targetname");
 
   if(isDefined(var_0)) {
     var_0 common_scripts\utility::trigger_off();
   }
 
   level thread end_of_combat_autosave();
-  var_0 = getent("player_climb_ladder_trigger_no_use", "targetname");
+  var_0 = getEnt("player_climb_ladder_trigger_no_use", "targetname");
   var_0 common_scripts\utility::trigger_on();
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("player_on_ladder");
-  var_0 = getent("player_climb_ladder_trigger", "targetname");
+  var_0 = getEnt("player_climb_ladder_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   maps\_utility::kill_deathflag("streets_to_dam_checkpoint_enemies");
   maps\_utility::kill_deathflag("streets_to_dam_checkpoint_enemies_close");
@@ -2431,17 +2431,17 @@ end_of_combat_autosave() {
   common_scripts\utility::flag_wait("streets_to_dam_enemies_dead");
 
   if(!common_scripts\utility::flag("player_on_ladder")) {
-    var_0 = getent("streets_to_dam_end_combat_autosave", "targetname");
+    var_0 = getEnt("streets_to_dam_end_combat_autosave", "targetname");
     var_0 waittill("trigger");
     thread maps\_utility::autosave_by_name("checkpoint_combat_end");
   }
 }
 
 block_garage_exit() {
-  var_0 = getent("garage_exit_player_clip", "targetname");
+  var_0 = getEnt("garage_exit_player_clip", "targetname");
   var_0 hide();
   var_0 notsolid();
-  var_1 = getent("streets_to_dam_end_combat_autosave", "targetname");
+  var_1 = getEnt("streets_to_dam_end_combat_autosave", "targetname");
   var_1 waittill("trigger");
 
   while(level.player istouching(var_0)) {
@@ -2455,20 +2455,20 @@ block_garage_exit() {
 
 teleport_failsafe() {
   wait 10.5;
-  var_0 = getent("streets_to_dam_end_combat_autosave", "targetname");
+  var_0 = getEnt("streets_to_dam_end_combat_autosave", "targetname");
 
   if(level.allies[0] istouching(var_0)) {
-    var_1 = getent("post_missile_launcher_location_ally1", "targetname");
+    var_1 = getEnt("post_missile_launcher_location_ally1", "targetname");
     level.allies[0] forceteleport(var_1.origin, var_1.angles);
   }
 
   if(level.allies[1] istouching(var_0)) {
-    var_1 = getent("post_missile_launcher_location_ally2", "targetname");
+    var_1 = getEnt("post_missile_launcher_location_ally2", "targetname");
     level.allies[1] forceteleport(var_1.origin, var_1.angles);
   }
 
   if(level.allies[2] istouching(var_0)) {
-    var_1 = getent("post_missile_launcher_location_ally3", "targetname");
+    var_1 = getEnt("post_missile_launcher_location_ally3", "targetname");
     level.allies[2] forceteleport(var_1.origin, var_1.angles);
   }
 }
@@ -2477,7 +2477,7 @@ make_allies_shoot_at_targets() {
   common_scripts\utility::flag_wait_either("player_on_ladder", "streets_to_dam_enemies_dead");
 
   if(!common_scripts\utility::flag("player_on_ladder")) {
-    var_0 = getent("streets_to_dam_garage_exit", "targetname");
+    var_0 = getEnt("streets_to_dam_garage_exit", "targetname");
 
     if(isDefined(var_0)) {
       var_0 notify("trigger");
@@ -2487,7 +2487,7 @@ make_allies_shoot_at_targets() {
     wait 0.2;
     var_1 = getnode("streets_to_dam_ally_0_node", "targetname");
     level.allies[0] setgoalnode(var_1);
-    var_0 = getent("streets_to_dam_garage_exit", "targetname");
+    var_0 = getEnt("streets_to_dam_garage_exit", "targetname");
 
     if(isDefined(var_0)) {
       wait 2.0;
@@ -2495,7 +2495,7 @@ make_allies_shoot_at_targets() {
 
     var_1 = getnode("streets_to_dam_ally_1_node", "targetname");
     level.allies[1] thread play_ally_launcher_vignette_wrapper("launcher_callout_ally02", var_1, maps\flood_anim::launcher_callout_ally02, "player_on_ladder", (0, 0, 0));
-    var_0 = getent("streets_to_dam_garage_exit", "targetname");
+    var_0 = getEnt("streets_to_dam_garage_exit", "targetname");
 
     if(isDefined(var_0)) {
       wait 2.0;
@@ -2517,7 +2517,7 @@ play_ally_launcher_vignette_wrapper(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self.animname;
   var_6 = self.goalradius;
   play_ally_launcher_vignette(var_0, var_1, var_2, var_3, var_4);
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(isDefined(var_5)) {
     self.animname = var_5;
@@ -2550,19 +2550,19 @@ play_ally_launcher_vignette(var_0, var_1, var_2, var_3, var_4) {
 
 hide_unhide_crashed_convoy(var_0) {
   if(var_0) {
-    var_1 = getent("crashed_truck", "targetname");
+    var_1 = getEnt("crashed_truck", "targetname");
 
     if(isDefined(var_1)) {
       var_1 hide();
     }
 
-    var_1 = getent("crashed_tank", "targetname");
+    var_1 = getEnt("crashed_tank", "targetname");
 
     if(isDefined(var_1)) {
       var_1 delete();
     }
 
-    var_1 = getent("crashed_m880", "targetname");
+    var_1 = getEnt("crashed_m880", "targetname");
 
     if(isDefined(var_1)) {
       var_1 delete();
@@ -2571,7 +2571,7 @@ hide_unhide_crashed_convoy(var_0) {
     common_scripts\utility::flag_wait("player_on_ladder");
   }
 
-  var_1 = getent("crashed_truck", "targetname");
+  var_1 = getEnt("crashed_truck", "targetname");
 
   if(isDefined(var_1)) {
     wait 2.0;
@@ -2586,7 +2586,7 @@ dialogue_streets_to_dam() {
   level.allies[2] maps\_utility::smart_dialogue("flood_kgn_wereblockedinnow");
   level.allies[0] maps\_utility::smart_dialogue("flood_bkr_doesntmatterweneed");
   level thread nag_player_in_garage();
-  var_0 = getent("baker_hold_up", "targetname");
+  var_0 = getEnt("baker_hold_up", "targetname");
   var_0 waittill("trigger");
   level notify("going_to_start_convoy_section");
   level.allies[0] maps\_utility::smart_dialogue("flood_bkr_holdup");
@@ -2733,13 +2733,13 @@ streets_to_dam_2() {
   level thread fake_mantle_text();
   level notify("going_to_start_convoy_section");
   common_scripts\utility::flag_set("missile_launcher_destruction_done");
-  var_0 = getent("aim_missiles_2", "targetname");
+  var_0 = getEnt("aim_missiles_2", "targetname");
   var_0 waittill("trigger");
   level notify("end_of_streets_to_dam_2");
 }
 
 put_launcher_in_place() {
-  var_0 = getent("missile_launcher_2", "targetname");
+  var_0 = getEnt("missile_launcher_2", "targetname");
   var_0.origin = (-1643, -6966, -64);
   var_0.angles = (0, 66.5, 0);
   var_0 show();
@@ -2748,14 +2748,14 @@ put_launcher_in_place() {
 make_enemies_miss_player_at_first() {
   var_0 = level.player.gs.player_attacker_accuracy;
   level.player maps\_utility::set_player_attacker_accuracy(0.0);
-  var_1 = getent("streets_to_dam_first_retreat", "targetname");
+  var_1 = getEnt("streets_to_dam_first_retreat", "targetname");
 
   if(isDefined(var_1)) {
     var_1 common_scripts\utility::waittill_notify_or_timeout("trigger", 4.0);
   }
 
   level.player maps\_utility::set_player_attacker_accuracy(0.1);
-  var_1 = getent("streets_to_dam_wave_2_first_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_first_advance", "targetname");
 
   if(isDefined(var_1)) {
     var_1 common_scripts\utility::waittill_notify_or_timeout("trigger", 6.0);
@@ -2775,13 +2775,13 @@ streets_to_dam_wave_2_sequence() {
   var_0 = ["streets_to_dam_wave_2_1_trigger", "streets_to_dam_wave_2_first_advance", "streets_to_dam_wave_2_5_spawn", "streets_to_dam_wave_2_2_trigger", "streets_to_dam_wave_2_second_advance", "streets_to_dam_final_advance", "streets_to_dam_3_5_advance", "streets_to_dam_enemy_retreat"];
   level thread throw_grenade_if_player_behind_tank();
   level thread adjust_suppression_on_enemies();
-  var_1 = getent("crashed_tank", "targetname");
+  var_1 = getEnt("crashed_tank", "targetname");
 
   if(isDefined(var_1)) {
     var_1 hide();
   }
 
-  var_2 = getent("streets_to_dam_wave_2_start", "targetname");
+  var_2 = getEnt("streets_to_dam_wave_2_start", "targetname");
   var_2 notify("trigger");
   var_3 = getEntArray("streets_to_dam_wave_2_first", "targetname");
   common_scripts\utility::array_thread(var_3, maps\_utility::add_spawn_function, ::streets_to_dam_wave_2_first_spawn_func);
@@ -2813,7 +2813,7 @@ streets_to_dam_wave_2_sequence() {
   maps\flood_util::waittill_aigroupcount_or_trigger_targetname("streets_to_dam_wave_2", 1, "streets_to_dam_3_5_advance");
   streets_to_dam_2_staggered_retreat();
   maps\flood_util::waittill_aigroupcount_or_trigger_targetname("streets_to_dam_wave_2", 1, "streets_to_dam_final_advance");
-  var_2 = getent("streets_to_dam_final_advance", "targetname");
+  var_2 = getEnt("streets_to_dam_final_advance", "targetname");
 
   if(isDefined(var_2)) {
     var_2 notify("trigger");
@@ -2822,9 +2822,9 @@ streets_to_dam_wave_2_sequence() {
 
   maps\flood_util::waittill_aigroupcount_or_trigger_targetname("streets_to_dam_wave_2", 1, "streets_to_dam_enemy_retreat");
   trigger_named_and_turn_off_prior(var_0, "streets_to_dam_enemy_retreat");
-  var_8 = getent("final_advance_kill_volume", "targetname");
+  var_8 = getEnt("final_advance_kill_volume", "targetname");
   kill_deathflag_in_area("streets_to_dam_wave_2", var_8, 0);
-  var_9 = getent("dam_far_goal_volume", "targetname");
+  var_9 = getEnt("dam_far_goal_volume", "targetname");
   var_3 = maps\_utility::get_ai_group_ai("streets_to_dam_wave_2");
 
   if(var_3.size > 4) {
@@ -2842,7 +2842,7 @@ streets_to_dam_wave_2_sequence() {
 }
 
 throw_grenade_if_player_behind_tank() {
-  var_0 = getent("streets_to_dam_grenade_check", "targetname");
+  var_0 = getEnt("streets_to_dam_grenade_check", "targetname");
   var_0 waittill("trigger");
   wait 2.0;
 
@@ -2857,7 +2857,7 @@ throw_grenade_if_player_behind_tank() {
 
 adjust_suppression_on_enemies() {
   for(;;) {
-    var_0 = getent("streets_to_dam_3_5_advance", "targetname");
+    var_0 = getEnt("streets_to_dam_3_5_advance", "targetname");
 
     if(isDefined(var_0)) {
       var_1 = getaiarray("axis");
@@ -2892,10 +2892,10 @@ streets_to_dam_2_staggered_retreat() {
         var_0[var_1].favoriteenemy = level.player;
       }
 
-      var_2 = getent("streets_to_dam_goal_volume_3_5", "targetname");
+      var_2 = getEnt("streets_to_dam_goal_volume_3_5", "targetname");
     } else {
       var_0[var_1] ignore_everything();
-      var_2 = getent("dam_far_goal_volume", "targetname");
+      var_2 = getEnt("dam_far_goal_volume", "targetname");
     }
 
     var_0[var_1] setgoalvolumeauto(var_2);
@@ -2905,41 +2905,41 @@ streets_to_dam_2_staggered_retreat() {
 streets_to_dam_wave_2_spawn_func() {
   self endon("death");
   self.favoriteenemy = level.player;
-  var_0 = getent("streets_to_dam_goal_volume_2", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_2", "targetname");
   self setgoalvolumeauto(var_0);
-  var_1 = getent("streets_to_dam_wave_2_2_trigger", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_2_trigger", "targetname");
   var_1 waittill("trigger");
-  var_0 = getent("streets_to_dam_goal_volume_3", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3", "targetname");
   self setgoalvolumeauto(var_0);
-  var_1 = getent("streets_to_dam_wave_2_second_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_second_advance", "targetname");
   var_1 waittill("trigger");
-  var_0 = getent("streets_to_dam_goal_volume_3_mid", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3_mid", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
 streets_to_dam_wave_2_1_spawn_func() {
   self endon("death");
-  var_0 = getent("streets_to_dam_goal_volume_2_5", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_2_5", "targetname");
   self setgoalvolumeauto(var_0);
-  var_1 = getent("streets_to_dam_wave_2_second_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_second_advance", "targetname");
   var_1 waittill("trigger");
-  var_0 = getent("streets_to_dam_goal_volume_3_mid", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3_mid", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
 streets_to_dam_wave_2_5_spawn_func() {
   self endon("death");
-  var_0 = getent("streets_to_dam_goal_volume_3", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3", "targetname");
   self setgoalvolumeauto(var_0);
-  var_1 = getent("streets_to_dam_wave_2_second_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_second_advance", "targetname");
   var_1 waittill("trigger");
-  var_0 = getent("streets_to_dam_goal_volume_3_mid", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3_mid", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
 streets_to_dam_wave_2_first_spawn_func() {
   self endon("death");
-  var_0 = getent("streets_to_dam_goal_volume_2_first", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_2_first", "targetname");
   self setgoalvolumeauto(var_0);
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "exposed_guy") {
@@ -2948,22 +2948,22 @@ streets_to_dam_wave_2_first_spawn_func() {
     self.favoriteenemy = level.player;
     common_scripts\utility::flag_wait("missile_launcher_destruction_done");
     self.favoriteenemy = level.player;
-    var_1 = getent("streets_to_dam_wave_2_1_trigger", "targetname");
+    var_1 = getEnt("streets_to_dam_wave_2_1_trigger", "targetname");
     var_1 waittill("trigger");
-    var_1 = getent("streets_to_dam_wave_2_first_advance", "targetname");
+    var_1 = getEnt("streets_to_dam_wave_2_first_advance", "targetname");
     common_scripts\utility::waittill_notify_or_timeout_return("trigger", randomfloatrange(5.0, 7.0));
     wait(randomfloat(2.0));
-    var_0 = getent("streets_to_dam_goal_volume_2_5", "targetname");
+    var_0 = getEnt("streets_to_dam_goal_volume_2_5", "targetname");
     self setgoalvolumeauto(var_0);
   }
 
-  var_1 = getent("streets_to_dam_wave_2_second_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_second_advance", "targetname");
 
   if(isDefined(var_1)) {
     var_1 waittill("trigger");
   }
 
-  var_0 = getent("streets_to_dam_goal_volume_3_mid", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3_mid", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
@@ -2973,15 +2973,15 @@ streets_to_dam_wave_2_side_spawn_func() {
   ignore_everything(0.0);
   self waittill("stop_ignoring_player");
   clear_ignore_everything();
-  var_0 = getent("streets_to_dam_2_side_goal_volume", "targetname");
+  var_0 = getEnt("streets_to_dam_2_side_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
-  var_1 = getent("streets_to_dam_wave_2_first_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_first_advance", "targetname");
   var_1 waittill("trigger");
-  var_0 = getent("streets_to_dam_2_side_2_goal_volume", "targetname");
+  var_0 = getEnt("streets_to_dam_2_side_2_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
-  var_1 = getent("streets_to_dam_wave_2_5_spawn", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_5_spawn", "targetname");
   var_1 waittill("trigger");
-  var_2 = getent("force_retreat_volume", "targetname");
+  var_2 = getEnt("force_retreat_volume", "targetname");
 
   if(self istouching(var_2)) {
     thread ignore_everything(3.0);
@@ -2989,22 +2989,22 @@ streets_to_dam_wave_2_side_spawn_func() {
     self setgoalnode(var_3);
   }
 
-  var_1 = getent("streets_to_dam_wave_2_2_trigger", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_2_trigger", "targetname");
 
   if(isDefined(var_1)) {
     var_1 waittill("trigger");
   }
 
-  var_0 = getent("streets_to_dam_goal_volume_3", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3", "targetname");
   self setgoalvolumeauto(var_0);
-  var_1 = getent("streets_to_dam_wave_2_second_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_wave_2_second_advance", "targetname");
   var_1 waittill("trigger");
-  var_0 = getent("streets_to_dam_goal_volume_3_mid", "targetname");
+  var_0 = getEnt("streets_to_dam_goal_volume_3_mid", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
 spawn_dam_harrassers() {
-  var_0 = getent("streets_to_dam_final_advance", "targetname");
+  var_0 = getEnt("streets_to_dam_final_advance", "targetname");
   var_0 waittill("trigger");
   var_1 = getEntArray("dam_missile_harassers", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, ::streets_to_dam_2_harrassers_spawn_func);
@@ -3015,7 +3015,7 @@ spawn_dam_harrassers() {
 }
 
 spawn_dam_harrassers_fake() {
-  var_0 = getent("streets_to_dam_final_advance", "targetname");
+  var_0 = getEnt("streets_to_dam_final_advance", "targetname");
   var_0 waittill("trigger");
   var_1 = getEntArray("dam_missile_harassers_fake", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::add_spawn_function, ::streets_to_dam_2_harrassers_spawn_func);
@@ -3026,7 +3026,7 @@ spawn_dam_harrassers_fake() {
 }
 
 streets_to_dam_2_harrassers_spawn_func() {
-  var_0 = getent("dam_far_goal_volume", "targetname");
+  var_0 = getEnt("dam_far_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
   self.ignoresuppression = 1;
   wait 0.5;
@@ -3034,7 +3034,7 @@ streets_to_dam_2_harrassers_spawn_func() {
 }
 
 streets_to_dam_2_harrassers_close_spawn_func() {
-  var_0 = getent("dam_far_goal_volume_close", "targetname");
+  var_0 = getEnt("dam_far_goal_volume_close", "targetname");
   self setgoalvolumeauto(var_0);
   self.ignoresuppression = 1;
   wait 0.5;
@@ -3050,13 +3050,13 @@ exposed_guy_think() {
   self.goalradius = 16;
   self waittill("goal");
   self.goalradius = var_1;
-  var_2 = getent("streets_to_dam_wave_2_1_trigger", "targetname");
+  var_2 = getEnt("streets_to_dam_wave_2_1_trigger", "targetname");
 
   if(isDefined(var_2)) {
     var_2 common_scripts\utility::waittill_notify_or_timeout("trigger", 20.0);
   }
 
-  var_3 = getent("exposed_node_first", "targetname");
+  var_3 = getEnt("exposed_node_first", "targetname");
   self setgoalvolumeauto(var_3);
   var_0 = getnode("node_exposed", "targetname");
   self setgoalnode(var_0);
@@ -3065,18 +3065,18 @@ exposed_guy_think() {
   self waittill("goal");
   clear_ignore_everything();
   self.goalradius = var_1;
-  var_2 = getent("streets_to_dam_wave_2_5_spawn", "targetname");
+  var_2 = getEnt("streets_to_dam_wave_2_5_spawn", "targetname");
 
   if(isDefined(var_2)) {
     var_2 waittill("trigger");
   }
 
-  var_4 = getent("streets_to_dam_goal_volume_2_5", "targetname");
+  var_4 = getEnt("streets_to_dam_goal_volume_2_5", "targetname");
   self setgoalvolumeauto(var_4);
 }
 
 send_allies_to_nodes_and_play_anim() {
-  var_0 = getent("streets_to_dam_enemy_retreat", "targetname");
+  var_0 = getEnt("streets_to_dam_enemy_retreat", "targetname");
   var_0 waittill("trigger");
   var_1 = getnode("streets_to_dam_2_ally_0_node", "targetname");
   level.allies[0] setgoalnode(var_1);
@@ -3122,8 +3122,8 @@ delete_corpse_in_volume(var_0) {
 }
 
 fake_mantle_text() {
-  var_0 = getent("fake_mantle_trigger", "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt("fake_mantle_trigger", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = 1;
 
   while(!common_scripts\utility::flag("end_of_dam")) {
@@ -3163,7 +3163,7 @@ dialogue_streets_to_dam_2() {
   level.allies[0] maps\_utility::smart_dialogue("flood_bkr_blowthatonetoo");
   common_scripts\utility::flag_set("launcher_2_objective_given");
   maps\_utility::battlechatter_on("allies");
-  var_1 = getent("streets_to_dam_final_advance", "targetname");
+  var_1 = getEnt("streets_to_dam_final_advance", "targetname");
   wait 3.0;
 
   if(isDefined(var_1)) {
@@ -3204,7 +3204,7 @@ dialogue_streets_to_dam_2() {
 }
 
 streets_to_dam_heli_flyover() {
-  var_0 = getent("trig_dam_heli_flyover", "targetname");
+  var_0 = getEnt("trig_dam_heli_flyover", "targetname");
   var_0 waittill("trigger");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("streets_dam_flyover_1_blackhawk");
   var_1.path_gobbler = 1;
@@ -3221,7 +3221,7 @@ streets_to_dam_heli_flyover() {
 }
 
 streets_to_dam_heli_flyover_hover() {
-  var_0 = getent("trig_dam_heli_flyover_hover", "targetname");
+  var_0 = getEnt("trig_dam_heli_flyover_hover", "targetname");
   var_0 waittill("trigger");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("streets_dam_flyover_3_blackhawk");
   var_1.path_gobbler = 1;
@@ -3236,7 +3236,7 @@ streets_to_dam_heli_flyover_hover() {
 dam_heli_flyover_hover() {}
 
 streets_to_dam_heli_far_flyby() {
-  var_0 = getent("trig_dam_heli_far_flyby", "targetname");
+  var_0 = getEnt("trig_dam_heli_far_flyby", "targetname");
   var_0 waittill("trigger");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("streets_dam_far_flyby_1_blackhawk");
   var_1.path_gobbler = 1;
@@ -3251,7 +3251,7 @@ streets_to_dam_heli_far_flyby() {
   var_2 vehicle_setspeed(100);
   var_2 maps\_vehicle::gopath();
   var_2 vehicle_turnengineoff();
-  var_3 = common_scripts\utility::getstruct("streets_dam_far_flyby_1", "targetname");
+  var_3 = common_scripts\utility::getStruct("streets_dam_far_flyby_1", "targetname");
 
   while(distancesquared(var_3.origin, var_1.origin) > 100) {
     wait 0.05;
@@ -3387,7 +3387,7 @@ flood_shake_tree() {
   var_0[10] = "flood_shake_tree_right_6";
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2, "script_noteworthy");
+    var_3 = getEnt(var_2, "script_noteworthy");
     var_3 thread flood_shake_tree_internal();
   }
 }
@@ -3421,7 +3421,7 @@ dam_start() {
   level thread maps\flood_util::flood_battlechatter_on(1);
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
   wait 0.5;
-  var_0 = getent("streets_to_dam_final_advance", "targetname");
+  var_0 = getEnt("streets_to_dam_final_advance", "targetname");
   var_0 notify("trigger");
 }
 
@@ -3445,15 +3445,15 @@ trigger_missile_launcher_aim_flag() {
 }
 
 harassers_ignore_player() {
-  var_0 = getent("streets_to_dam_final_advance", "targetname");
+  var_0 = getEnt("streets_to_dam_final_advance", "targetname");
   var_0 waittill("trigger");
   var_1 = 1;
 
   while(var_1) {
-    var_2 = getent("streets_to_dam_goal_volume_3", "targetname");
+    var_2 = getEnt("streets_to_dam_goal_volume_3", "targetname");
     var_3 = var_2 maps\_utility::get_ai_touching_volume("axis");
     var_4 = var_3.size;
-    var_2 = getent("dam_remove_dead_bodies", "targetname");
+    var_2 = getEnt("dam_remove_dead_bodies", "targetname");
     var_3 = var_2 maps\_utility::get_ai_touching_volume("axis");
     var_4 = var_4 + var_3.size;
 
@@ -3495,7 +3495,7 @@ spawn_ml_drivers() {
 
 ml_driver_spawn_func() {
   ignore_everything();
-  var_0 = getent("missile_launcher_driver_kill_trigger", "targetname");
+  var_0 = getEnt("missile_launcher_driver_kill_trigger", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -3506,7 +3506,7 @@ ml_driver_spawn_func() {
   }
 
   clear_ignore_everything();
-  var_2 = getent("dam_far_goal_volume", "targetname");
+  var_2 = getEnt("dam_far_goal_volume", "targetname");
   set_goal_volume(var_2);
 }
 
@@ -3516,7 +3516,7 @@ fire_missiles() {
   level thread remove_live_grenades();
   level thread remove_stuff_for_animation();
   level thread remove_dyn_objects();
-  var_0 = getent("dam_remove_dead_bodies", "targetname");
+  var_0 = getEnt("dam_remove_dead_bodies", "targetname");
   common_scripts\utility::array_thread(getcorpsearray(), ::delete_corpse_in_volume, var_0);
   wait 0.1;
   level thread kill_enemies();
@@ -3561,7 +3561,7 @@ manage_mantles() {
 }
 
 show_hide_mantle() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = 0;
   var_0 movez(-1000, 0.1);
 
@@ -3672,7 +3672,7 @@ clear_ignore_everything() {
 }
 
 dialogue_dam() {
-  var_0 = getent("aim_missiles_2", "targetname");
+  var_0 = getEnt("aim_missiles_2", "targetname");
   var_0 waittill("trigger");
 
   if(isDefined(level.e3_demo)) {
@@ -3791,7 +3791,7 @@ create_hud_static_overlay(var_0, var_1, var_2) {
 }
 
 hide_spire() {
-  var_0 = getent("flood_church_spire", "targetname");
+  var_0 = getEnt("flood_church_spire", "targetname");
   var_0 hide();
 }
 

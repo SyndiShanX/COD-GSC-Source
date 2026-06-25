@@ -113,7 +113,7 @@ collectible_wait_for_pickup() {
     if(IsAlive(player) &&
       player_is_looking_at &&
       player Use_button_held()) {
-      playsoundatposition("uin_aar_unlock_loud", (0, 0, 0));
+      playSoundAtPosition("uin_aar_unlock_loud", (0, 0, 0));
       break;
     }
     wait(0.05);

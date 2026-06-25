@@ -50,8 +50,8 @@ createSpawnpoint(classname, origin, yaw) {
 }
 
 nuked_population_sign_think() {
-  tens_model = GetEnt("counter_tens", "targetname");
-  ones_model = GetEnt("counter_ones", "targetname");
+  tens_model = getEnt("counter_tens", "targetname");
+  ones_model = getEnt("counter_ones", "targetname");
 
   step = (360 / 10);
 
@@ -99,8 +99,8 @@ nuked_population_sign_think() {
 }
 
 nuked_doomsday_clock_init() {
-  min_hand_model = GetEnt("clock_min_hand", "targetname");
-  sec_hand_model = GetEnt("clock_sec_hand", "targetname");
+  min_hand_model = getEnt("clock_min_hand", "targetname");
+  sec_hand_model = getEnt("clock_sec_hand", "targetname");
   start_angle = 318;
   min_hand_model RotatePitch(start_angle, 0.05);
   min_hand_model waittill("rotatedone");

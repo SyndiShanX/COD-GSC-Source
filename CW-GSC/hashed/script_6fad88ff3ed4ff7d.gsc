@@ -451,7 +451,7 @@ function function_346d9c79() {
 function function_cfb0039f(var_c33719f5) {
   level endon(#"save_restore");
   level flag::wait_till("all_players_connected");
-  var_615bb7b5 = getent(var_c33719f5, "targetname");
+  var_615bb7b5 = getEnt(var_c33719f5, "targetname");
 
   if(isDefined(var_615bb7b5)) {
     if(collectibles::function_ab921f3d(5)) {

@@ -13,12 +13,12 @@ init_discoball_trap() {
   level.discotrapuses = 0;
   level.var_562E = scripts\engine\utility::getStructArray("discoball_switch_fx_spot", "script_noteworthy");
   var_0 = scripts\engine\utility::getStructArray("interaction_discoballtrap", "script_noteworthy");
-  level.var_562F = getent(var_0[0].target, "targetname");
-  level.var_562F enablelinkto();
-  level.var_5631 = scripts\engine\utility::getstruct(var_0[0].target, "targetname");
+  level.var_562F = getEnt(var_0[0].target, "targetname");
+  level.var_562F enablelinkTo();
+  level.var_5631 = scripts\engine\utility::getStruct(var_0[0].target, "targetname");
   level.var_5630 = spawn("script_model", level.var_5631.origin);
   level.var_5630 setModel("zmb_spaceland_discoball_scriptable");
-  level.dance_floor_volume = getent("dance_floor_volume", "targetname");
+  level.dance_floor_volume = getEnt("dance_floor_volume", "targetname");
   foreach(var_2 in var_0) {
     var_2 thread func_5632();
   }
@@ -43,8 +43,8 @@ func_5632() {
 
     if(var_1 != "power_off") {
       self.powered_on = 1;
-      level.var_562F linkto(level.var_5630);
-      getent("dance_floor", "targetname") setscriptablepartstate("dance_floor", "on");
+      level.var_562F linkTo(level.var_5630);
+      getEnt("dance_floor", "targetname") setscriptablepartstate("dance_floor", "on");
       level thread scripts\cp\cp_vo::add_to_nag_vo("dj_traps_use_nag", "zmb_dj_vo", 60, 15, 2, 1);
     } else {
       self.powered_on = 0;
@@ -73,8 +73,8 @@ use_discoball_trap(var_0, var_1) {
   scripts\engine\utility::waitframe();
   var_3 playSound("mus_zombies_trap_disco");
   level thread func_254E();
-  level.var_5630 rotateyaw(2880, 31);
-  getent("dance_floor", "targetname") setscriptablepartstate("dance_floor", "active");
+  level.var_5630 rotateYaw(2880, 31);
+  getEnt("dance_floor", "targetname") setscriptablepartstate("dance_floor", "active");
   wait(23.5);
   level.var_5630 playSound("trap_disco_laser_start");
   wait(1.5);
@@ -92,7 +92,7 @@ use_discoball_trap(var_0, var_1) {
     scripts\cp\zombies\arcade_game_utility::update_player_tickets_earned(var_1);
   }
 
-  getent("dance_floor", "targetname") setscriptablepartstate("dance_floor", "on");
+  getEnt("dance_floor", "targetname") setscriptablepartstate("dance_floor", "on");
   wait(3);
   var_3 delete();
   enablepaspeaker("astrocade");
@@ -173,7 +173,7 @@ visionsetthermalforplayer(var_0) {
   }
 
   if(!level.var_3BAA) {
-    var_3 = scripts\engine\utility::getstruct("dance_floor_attract_spot_center", "targetname");
+    var_3 = scripts\engine\utility::getStruct("dance_floor_attract_spot_center", "targetname");
     self ghostskulls_complete_status(var_3.origin);
     scripts\engine\utility::waittill_any("goal", "goal_reached");
     if(scripts\engine\utility::istrue(level.var_3BAA)) {

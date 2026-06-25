@@ -222,7 +222,7 @@ startmove() {
   var_4 = self getvelocity();
 
   if(length2dsquared(var_4) > 16) {
-    var_4 = vectornormalize(var_4);
+    var_4 = vectorNormalize(var_4);
 
     if(vectordot(var_4, var_2) > 0.707) {
       return;

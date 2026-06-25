@@ -118,7 +118,7 @@ VOLCANO_RUMBLE_RADIUS = 15000;
 volcanoWaitForUse(volcanoSourceName) {
   level endon("game_ended");
 
-  volcanoSource = getstruct(volcanoSourceName, "targetname");
+  volcanoSource = getStruct(volcanoSourceName, "targetname");
 
   while(true) {
     level waittill("mortar_killstreak_used", owner);
@@ -173,7 +173,7 @@ volcanoDoLargeChunks(numChunks, owner) {
 
   selectedChunks = [];
 
-  volcanoSource = getstruct(level.mortarConfig.sourceStructs, "targetname");
+  volcanoSource = getStruct(level.mortarConfig.sourceStructs, "targetname");
 
   for(i = 0; i < numChunks; i++) {
     index = RandomInt(level.volcanoLargeChunks.size);
@@ -217,9 +217,9 @@ volcano_activate_at_end_of_match() {
   level.ending_flourish = true;
 
   level.mortarConfig maps\mp\killstreaks\_mortarstrike::mortar_fire(0.1, 0.3, 2.5, 2.5, 6, level.players[0]);
-  volcanoSource = getstruct(level.mortarConfig.sourceStructs, "targetname");
+  volcanoSource = getStruct(level.mortarConfig.sourceStructs, "targetname");
 
-  effectFwd = anglesToForward(VectorNormalize(volcanoSource.origin - level.mapCenter));
+  effectFwd = anglesToForward(vectorNormalize(volcanoSource.origin - level.mapCenter));
   effectUp = AnglesToUp((0, 0, 0));
 
   playFX(getfx("volcano_explode_01"), volcanoSource.origin, effectUp, effectFwd);
@@ -327,7 +327,7 @@ templeCollapse() {
 
 playRumble(rumbleType) {
   foreach(player in level.players) {
-    player PlayRumbleOnEntity(rumbleType);
+    player playRumbleOnEntity(rumbleType);
   }
 }
 
@@ -336,7 +336,7 @@ clearPath() {
   self NotSolid();
 
   if(isDefined(self.target)) {
-    clip = GetEnt(self.target, "targetname");
+    clip = getEnt(self.target, "targetname");
     self.clip = clip;
 
     clip ConnectPaths();
@@ -352,7 +352,7 @@ blockPath() {
   if(isDefined(self.clip)) {
     self.clip Show();
     self.clip Solid();
-    self.clip DisconnectPaths();
+    self.clip disconnectPaths();
   }
 }
 
@@ -380,7 +380,7 @@ crushObjects(refPos, radiusSq, notifyStr, targets) {
 watersheet_trig_setup() {
   level endon("game_ended");
 
-  trig = GetEnt("watersheet", "targetname");
+  trig = getEnt("watersheet", "targetname");
 
   while(true) {
     trig waittill("trigger", player);

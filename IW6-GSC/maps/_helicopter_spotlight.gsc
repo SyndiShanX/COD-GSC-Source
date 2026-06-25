@@ -131,7 +131,7 @@ spotlight_heli_check_vision_set() {
       var_2 = self gettagangles("TAG_FLASH");
       var_3 = anglesToForward(var_2);
       var_4 = level.player getEye() - var_1;
-      var_4 = vectornormalize(var_4);
+      var_4 = vectorNormalize(var_4);
       var_5 = acos(vectordot(var_3, var_4));
 
       if(var_5 < 10) {} else {}

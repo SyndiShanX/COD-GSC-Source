@@ -81,11 +81,11 @@ function start_slow_vortex(w_weapon, v_pos, v_pos_final, n_radius, e_attacker, v
   self endon("disconnect");
   mdl_vortex = spawn("script_model", v_pos);
   mdl_vortex setModel("p7_fxanim_zm_stal_ray_gun_ball_mod");
-  playsoundatposition("wpn_mk3_orb_created", mdl_vortex.origin);
+  playSoundAtPosition("wpn_mk3_orb_created", mdl_vortex.origin);
   mdl_vortex.angles = vectorscale((1, 0, 0), 270);
   mdl_vortex clientfield::set("slow_vortex_fx", 1);
   util::wait_network_frame();
-  mdl_vortex moveto(v_pos_final, 0.1);
+  mdl_vortex moveTo(v_pos_final, 0.1);
   util::wait_network_frame();
   mdl_vortex.health = 100000;
   mdl_vortex.takedamage = 1;
@@ -99,7 +99,7 @@ function pulse_damage(e_owner, w_weapon) {
   self.n_end_time = gettime() + 3000;
   self.e_owner = e_owner;
   if(w_weapon == level.w_raygun_mark3lh) {} else {
-    playsoundatposition("wpn_mk3_orb_zark_far", self.origin);
+    playSoundAtPosition("wpn_mk3_orb_zark_far", self.origin);
   }
   while(gettime() <= self.n_end_time) {
     if(self.n_damage_type == 1) {
@@ -111,7 +111,7 @@ function pulse_damage(e_owner, w_weapon) {
       }
     } else {
       n_radius = 128;
-      playsoundatposition("wpn_mk3_orb_zark_far", self.origin);
+      playSoundAtPosition("wpn_mk3_orb_zark_far", self.origin);
       if(w_weapon == level.w_raygun_mark3lh) {
         n_pulse_damage = 1000;
       } else {
@@ -145,7 +145,7 @@ function pulse_damage(e_owner, w_weapon) {
     wait(0.5);
   }
   self clientfield::set("slow_vortex_fx", 0);
-  playsoundatposition("wpn_mk3_orb_disappear", self.origin);
+  playSoundAtPosition("wpn_mk3_orb_disappear", self.origin);
   self delete();
 }
 
@@ -174,7 +174,7 @@ function wait_for_beam_damage() {
       self clientfield::set("slow_vortex_fx", self.n_damage_type);
       self.n_end_time = gettime() + 3000;
       wait(3);
-      playsoundatposition("wpn_mk3_orb_disappear", self.origin);
+      playSoundAtPosition("wpn_mk3_orb_disappear", self.origin);
       self delete();
       return;
     }

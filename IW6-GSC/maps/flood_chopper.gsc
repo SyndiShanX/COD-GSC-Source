@@ -21,9 +21,9 @@ chopper_start() {
 chopper() {}
 
 breach_heli_door() {
-  var_0 = getent("kick_door_trigger", "targetname");
-  var_0 sethintstring(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
-  var_0 usetriggerrequirelookat();
+  var_0 = getEnt("kick_door_trigger", "targetname");
+  var_0 setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+  var_0 useTriggerRequireLookAt();
   var_0 waittill("trigger");
   var_0 common_scripts\utility::trigger_off();
   level thread breach_door("anim_node_breach_door", ::open_church_doors, ::church_weapon_pullout);
@@ -43,7 +43,7 @@ breach_door(var_0, var_1, var_2) {
   var_3["breach_player_legs"] = level.breach_player_legs;
   var_4 = "lowtech_breach";
   level.player playerlinktoblend(level.breach_player_rig, "tag_player", 0.2, 0.1, 0.1);
-  var_5 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_0, "targetname");
   var_5 thread maps\_anim::anim_single(var_3, var_4);
   var_5 waittill(var_4);
   level.player unlink();
@@ -56,11 +56,11 @@ breach_door(var_0, var_1, var_2) {
 }
 
 open_church_doors(var_0) {
-  var_1 = getent("embassy_door_main_left", "targetname");
-  var_2 = getent("embassy_door_main_right", "targetname");
-  var_1 rotateyaw(90, 0.2, 0.1, 0.1);
-  var_2 rotateyaw(-90, 0.2, 0.1, 0.1);
-  var_3 = getent("embassy_door_collision", "targetname");
+  var_1 = getEnt("embassy_door_main_left", "targetname");
+  var_2 = getEnt("embassy_door_main_right", "targetname");
+  var_1 rotateYaw(90, 0.2, 0.1, 0.1);
+  var_2 rotateYaw(-90, 0.2, 0.1, 0.1);
+  var_3 = getEnt("embassy_door_collision", "targetname");
   var_3 connectpaths();
   common_scripts\utility::flag_set("vignette_heli_crash");
 }
@@ -83,7 +83,7 @@ helicopter_jump() {
 end_jump() {
   level endon("heli_got_away");
   level endon("rorke_heli_end");
-  var_0 = getent("trig_heli_jump", "targetname");
+  var_0 = getEnt("trig_heli_jump", "targetname");
   notifyoncommand("jump", "+gostand");
   notifyoncommand("jump", "+moveup");
   var_0 thread end_jump_mantle();
@@ -106,7 +106,7 @@ end_mantle_angle() {
   level endon("rorke_heli_end");
   var_0 = level.player getplayerangles();
   var_1 = anglesToForward(var_0);
-  var_2 = vectornormalize(level.rorke_heli.origin - level.player.origin);
+  var_2 = vectorNormalize(level.rorke_heli.origin - level.player.origin);
 
   if(vectordot(var_1, var_2) > 0.75) {
     return 1;
@@ -142,7 +142,7 @@ end_jump_mantle() {
 end_nojump() {
   level endon("heli_got_away");
   level endon("rorke_heli_end");
-  var_0 = getent("trig_heli_nojump", "targetname");
+  var_0 = getEnt("trig_heli_nojump", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");

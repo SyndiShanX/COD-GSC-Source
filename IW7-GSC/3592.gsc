@@ -198,7 +198,7 @@ transponder_teleportplayer(var_0) {
   if(isDefined(var_1)) {
     thread activationeffects(self.origin, var_0.origin);
     self playlocalsound("ghost_use_transponder");
-    self setorigin(var_1.origin + (0, 0, 20));
+    self setOrigin(var_1.origin + (0, 0, 20));
     if(self.var_9FB0) {
       thread func_12694();
     }

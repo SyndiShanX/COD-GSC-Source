@@ -103,7 +103,7 @@ func_AC06(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(var_11.size > 0) {
     foreach(var_18 in var_11) {
       var_6.var_B8AC[var_6.var_B8AC.size] = var_18;
-      var_18 missile_settargetent(var_6);
+      var_18 missile_settargetEnt(var_6);
       thread func_AC15(var_6, var_18);
     }
 

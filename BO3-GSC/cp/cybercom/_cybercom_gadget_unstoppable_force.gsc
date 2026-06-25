@@ -97,7 +97,7 @@ function private function_98296a6a(slot, weapon) {
   self waittill("weapon_juke_end_requested", endreason);
   if(endreason == 2) {
     earthquake(1, 0.75, self.origin, 100);
-    self playrumbleonentity("riotshield_impact");
+    self playRumbleOnEntity("riotshield_impact");
     self playSound("gdt_unstoppable_hit_wall");
   }
 }
@@ -239,7 +239,7 @@ function watch_collisions(weapon) {
     }
     if(hit) {
       earthquake(1, 0.75, self.origin, 100);
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
     }
     wait(0.05);
   }

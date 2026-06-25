@@ -131,7 +131,7 @@ function_4ac25840(dead_team) {
   if(var_c503939b <= function_c816ea5b()) {
     foreach(team in level.teams) {
       if(teams::function_9dd75dad(team) && !teams::is_all_dead(team)) {
-        players = getplayers(team);
+        players = getPlayers(team);
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"nikolai_unlock")) {
@@ -149,7 +149,7 @@ function_587e512e() {
   self playsoundtoplayer(#"hash_1c4290ca92541819", self);
   self playSound(#"evt_metal_gate");
 
-  foreach(player in getplayers(self.team)) {
+  foreach(player in getPlayers(self.team)) {
     if(isDefined(player)) {
       player playsoundtoplayer(#"hash_41def4c864993224", player);
     }

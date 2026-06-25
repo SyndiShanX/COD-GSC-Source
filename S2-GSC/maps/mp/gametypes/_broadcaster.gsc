@@ -479,7 +479,7 @@ func_1C93() {
 
 func_1CA4() {
   var_00 = self;
-  var_01 = getent("mp_global_intermission", "classname");
+  var_01 = getEnt("mp_global_intermission", "classname");
   var_02 = var_01.var_0116;
   var_03 = var_01.var_001D;
   var_04 = spawn("script_model", var_02);
@@ -494,9 +494,9 @@ func_1CA4() {
   var_04.var_3DC2 = 0;
   var_04.var_77AC = 1;
   var_04.broadcasterballcamenabled = 1;
-  var_00 setorigin(var_04.var_0116);
+  var_00 setOrigin(var_04.var_0116);
   var_00 setangles(var_04.var_001D);
-  var_00 playerlinkto(var_04, "tag_player");
+  var_00 playerlinkTo(var_04, "tag_player");
   var_00 method_81E2(var_04, "tag_player");
   var_00 method_812B(0);
   var_00.var_1E99 = var_04;
@@ -804,7 +804,7 @@ broadcasterstartballcam() {
     self method_81E2(self.var_1E99, "tag_player", 1);
     self.var_1E99 method_8472();
     var_03 = broadcastermoveballcam(self.var_1E99.watchedball.var_0116, var_02);
-    self.var_1E99 moveto(var_03, 10.5, 5.25, 5.25);
+    self.var_1E99 moveTo(var_03, 10.5, 5.25, 5.25);
     self.var_1E99.var_001D = vectortoangles(var_02);
     self.var_1E99 thread updateballcam();
     thread broadcasterstopballcam();
@@ -856,12 +856,12 @@ updateballcam() {
     var_02 = distance2d(var_00, var_01);
     var_03 = var_00 - var_01;
     var_04 = (var_03[0], var_03[1], 0);
-    var_04 = vectornormalize(var_04);
+    var_04 = vectorNormalize(var_04);
     var_05 = broadcastermoveballcam(var_00, var_04);
     if(var_02 > 600) {
       self.var_0116 = var_05;
     } else {
-      self moveto(var_05, 0.5, 0, 0.2);
+      self moveTo(var_05, 0.5, 0, 0.2);
     }
 
     self.var_001D = vectortoangles(var_03);

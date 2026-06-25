@@ -185,7 +185,7 @@ function function_32137f1e(prompt) {
 function function_a459deb9() {
   level.player endon(#"death");
   level.player clientfield::set_to_player("stream_belikov_rv_assets", 1);
-  var_d21147d1 = getent("basement_door_clip_open", "targetname");
+  var_d21147d1 = getEnt("basement_door_clip_open", "targetname");
   var_d21147d1 notsolid();
   level thread scene::init("scene_kgb_acquire_disguises_player");
   level flag::wait_till("flag_allow_boiler_door");
@@ -202,7 +202,7 @@ function function_a459deb9() {
   level.adler.ignoreme = 1;
   level.adler.ignoreall = 1;
   level.adler namespace_e77bf565::function_5770c74("civ");
-  doorclip = getent("basement_door_clip", "targetname");
+  doorclip = getEnt("basement_door_clip", "targetname");
   doorclip notsolid();
   var_d21147d1 solid();
   level.player setmovespeedscale(0.5);
@@ -227,7 +227,7 @@ function function_a459deb9() {
   level thread scene::stop("scene_kgb_acquire_disguises_player");
   waitframe(1);
   level thread scene::init("scene_kgb_acquire_disguises_player");
-  doorclip = getent("basement_door_clip", "targetname");
+  doorclip = getEnt("basement_door_clip", "targetname");
   doorclip solid();
 
   if(isDefined(var_d21147d1)) {
@@ -238,7 +238,7 @@ function function_a459deb9() {
   level thread fade_back_in();
   level.adler namespace_e77bf565::function_5770c74();
   struct = struct::get("tag_align_security");
-  door = getent("kgb_boiler_room_door", "targetname");
+  door = getEnt("kgb_boiler_room_door", "targetname");
   door animation::first_frame("t9_kgb_walkup_boilerroom_door", struct.origin, struct.angles);
   level thread scene::play("scene_kgb_acquire_disguises_player", "Outro");
   level thread scene::play("scene_kgb_acquire_disguises_bag", "Outro");
@@ -382,7 +382,7 @@ function function_18aea9a4() {
 function function_b6b893f4() {
   level endon(#"takedown_logic_cleanup");
   level.player endon(#"death");
-  vol = getent("vol_takedown_hide", "targetname");
+  vol = getEnt("vol_takedown_hide", "targetname");
 
   while(true) {
     if(level.player istouching(vol)) {
@@ -455,7 +455,7 @@ function function_4a8d44b7() {
   level.player notifyonplayercommand("weapon_melee", "+melee_zoom");
   struct = struct::get("struct_takedown_prompt", "targetname");
   trig = spawn("trigger_radius", struct.origin, 0, 96, 96);
-  trig sethintstring(#"hash_56cec4baa5332ed0");
+  trig setHintString(#"hash_56cec4baa5332ed0");
   trig setteamfortrigger(level.player.team);
   trig thread function_b3dcc32f();
   level thread function_6cff03c4();
@@ -583,7 +583,7 @@ function function_7f7143e4(player, var_7b20e52b) {
   angles = self gettagangles("tag_eye");
   v_forward = anglesToForward(angles);
   v_loc = player getEye();
-  v_dir = vectornormalize(v_loc - self gettagorigin("tag_eye"));
+  v_dir = vectorNormalize(v_loc - self gettagorigin("tag_eye"));
   dp = vectordot(v_forward, v_dir);
 
   if(dp > 0.1) {
@@ -653,7 +653,7 @@ function function_ec6bb2ec(a_ents) {
 }
 
 function function_9b6d9815(off = 1) {
-  clip = getent("boiler_room_exit_clip", "targetname");
+  clip = getEnt("boiler_room_exit_clip", "targetname");
   level.player endon(#"death");
 
   if(off) {
@@ -670,12 +670,12 @@ function function_9b6d9815(off = 1) {
 }
 
 function function_98815e2e() {
-  var_c2958343 = getent("kgb_boiler_room_door_2", "targetname");
+  var_c2958343 = getEnt("kgb_boiler_room_door_2", "targetname");
   var_c2958343.origin += (0, 0, -256);
 }
 
 function function_44416c38() {
   wait 0.25;
-  var_c2958343 = getent("kgb_boiler_room_door_2", "targetname");
+  var_c2958343 = getEnt("kgb_boiler_room_door_2", "targetname");
   var_c2958343 delete();
 }

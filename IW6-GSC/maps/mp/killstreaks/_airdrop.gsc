@@ -153,7 +153,7 @@ setAirDropCrateCollision(carePackageName) {
     return;
   }
 
-  level.airDropCrateCollision = GetEnt(airDropCrates[0].target, "targetname");
+  level.airDropCrateCollision = getEnt(airDropCrates[0].target, "targetname");
 
   foreach(crate in airDropCrates) {
     crate deleteCrate();
@@ -696,7 +696,7 @@ createAirDropCrate(owner, dropType, crateType, startPos, dropPoint, crateColor) 
 
   dropCrate.killCamEnt = spawn("script_model", dropCrate.origin + CRATE_KILLCAM_OFFSET, 0, true);
   dropCrate.killCamEnt SetScriptMoverKillCam("explosive");
-  dropCrate.killCamEnt LinkTo(dropCrate);
+  dropCrate.killCamEnt linkTo(dropCrate);
 
   level.numDropCrates++;
   dropCrate thread dropCrateExistence(dropPoint);
@@ -866,14 +866,14 @@ dropTheCrate(dropPoint, dropType, lbHeight, dropImmediately, crateOverride, star
     case "airdrop_juggernaut":
     case "airdrop_juggernaut_recon":
     case "airdrop_juggernaut_maniac":
-      dropCrate LinkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
+      dropCrate linkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
       break;
     case "airdrop_escort":
     case "airdrop_osprey_gunner":
-      dropCrate LinkTo(self, tagName, (0, 0, 0), (0, 0, 0));
+      dropCrate linkTo(self, tagName, (0, 0, 0), (0, 0, 0));
       break;
     default:
-      dropCrate LinkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
+      dropCrate linkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
       break;
   }
 
@@ -989,7 +989,7 @@ waitForDropCrateMsg(dropCrate, dropImpulse, dropType, crateType, optionalVelocit
 
     travelTime = travelDistance / GRAVITY_UNITS_PER_SECOND;
 
-    dropCrate.killCamEnt MoveTo(groundTrace["position"] + CRATE_KILLCAM_OFFSET + (horizontal_offset, 0, 0), travelTime);
+    dropCrate.killCamEnt moveTo(groundTrace["position"] + CRATE_KILLCAM_OFFSET + (horizontal_offset, 0, 0), travelTime);
   }
 }
 
@@ -1107,7 +1107,7 @@ getPathEnd(coord, yaw) {
 getFlyHeightOffset(dropSite) {
   lbFlyHeight = 850;
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   if(!isDefined(heightEnt)) {
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
@@ -1225,7 +1225,7 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
 
   c130.angles = direction;
   forward = anglesToForward(direction);
-  c130 MoveTo(pathEnd, flyTime, 0, 0);
+  c130 moveTo(pathEnd, flyTime, 0, 0);
 
   minDist = Distance2D(c130.origin, dropSite);
   boomPlayed = false;
@@ -1263,7 +1263,7 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
   c130 notify("drop_crate");
 
   newPathEnd = dropSite + (anglesToForward(direction) * (planeHalfDistance * 1.5));
-  c130 MoveTo(newPathEnd, flyTime / 2, 0, 0);
+  c130 moveTo(newPathEnd, flyTime / 2, 0, 0);
 
   wait(6);
   c130 delete();
@@ -1298,7 +1298,7 @@ doMegaC130FlyBy(owner, dropSite, dropYaw, dropType, forwardOffset) {
 
   c130.angles = direction;
   forward = anglesToForward(direction);
-  c130 MoveTo(pathEnd, flyTime, 0, 0);
+  c130 moveTo(pathEnd, flyTime, 0, 0);
 
   minDist = Distance2D(c130.origin, dropSite);
   boomPlayed = false;
@@ -1375,7 +1375,7 @@ dropNuke(dropSite, owner, dropType) {
 
   c130.angles = direction;
   forward = anglesToForward(direction);
-  c130 MoveTo(pathEnd, flyTime, 0, 0);
+  c130 moveTo(pathEnd, flyTime, 0, 0);
 
   boomPlayed = false;
   minDist = Distance2D(c130.origin, dropSite);
@@ -1425,7 +1425,7 @@ playloopOnEnt(alias) {
 
   soundOrg.origin = self.origin;
   soundOrg.angles = self.angles;
-  soundOrg linkto(self);
+  soundOrg linkTo(self);
 
   soundOrg playLoopSound(alias);
 
@@ -2070,7 +2070,7 @@ createUseEnt() {
   useEnt.useRate = 3000;
   useEnt.inUse = false;
   useEnt.id = self.id;
-  useEnt linkto(self);
+  useEnt linkTo(self);
 
   useEnt thread deleteUseEnt(self);
 

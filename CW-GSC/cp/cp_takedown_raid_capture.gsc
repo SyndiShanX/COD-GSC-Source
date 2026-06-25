@@ -44,7 +44,7 @@
 
 function starting(str_skipto) {
   thread objectives::scripted("obj_takedown_capture", undefined, #"hash_49c1d860c97e3792");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   woods_spawner = getspawnerarray("raid_woods", "targetname");
   level.adler = var_8a3bb97c[0] spawner::spawn(1);
@@ -70,7 +70,7 @@ function starting(str_skipto) {
 }
 
 function function_daaa52d5() {
-  raid_capture_plant = getent("raid_capture_plant", "targetname");
+  raid_capture_plant = getEnt("raid_capture_plant", "targetname");
 
   if(isDefined(raid_capture_plant)) {
     level scene::init("scene_tkd_hit2_rooftop_props", [raid_capture_plant]);
@@ -88,7 +88,7 @@ function function_daaa52d5() {
 
       foreach(var_a8f6e856 in var_dcc87061) {
         if(isDefined(var_a8f6e856)) {
-          var_a8f6e856 linkto(boat);
+          var_a8f6e856 linkTo(boat);
 
           if(!isDefined(boat.var_dcc87061)) {
             boat.var_dcc87061 = [];
@@ -122,7 +122,7 @@ function function_d40d301c() {
 }
 
 function main(str_skipto, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     namespace_a052577e::function_724cb241();
@@ -147,7 +147,7 @@ function main(str_skipto, b_starting) {
   level thread function_ba74fe83();
   level waittill(#"hash_1971429b4a856253");
 
-  for(player = getplayers()[0]; !isPlayer(player); player = getplayers()[0]) {
+  for(player = getPlayers()[0]; !isPlayer(player); player = getPlayers()[0]) {
     waitframe(1);
   }
 
@@ -196,7 +196,7 @@ function main(str_skipto, b_starting) {
 
 function function_c0b643d5() {
   level waittill(#"hash_4fb9af0599362b26");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 function function_26e6230d() {
@@ -294,7 +294,7 @@ function function_86b6bafa() {
 
 function function_b47183fb() {
   if(!isDefined(level.raid_capture_street_vehicle)) {
-    level.raid_capture_street_vehicle = getent("raid_capture_street_vehicle", "targetname");
+    level.raid_capture_street_vehicle = getEnt("raid_capture_street_vehicle", "targetname");
   }
 
   if(!isDefined(level.raid_capture_street_vehicle)) {
@@ -407,16 +407,16 @@ function function_6321f3d1() {
 function function_80b14544() {
   level thread scene::play("scene_tkd_hit2_rooftop", "dt_end_1_throw");
   music::function_edda155f("3.2_kill_stinger");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player waittillmatch({
     #notetrack: "end"}, #"hash_b1f863e899edc77");
   player player_decision::function_a029a114(1);
-  getplayers()[0] stats::function_dad108fa(#"hash_66d228fbcd074f42", 1);
+  getPlayers()[0] stats::function_dad108fa(#"hash_66d228fbcd074f42", 1);
   player_decision::function_8c0836dd(1);
 }
 
 function slide_enemy2_clip() {
-  clip = getent("slide_enemy2_clip", "targetname");
+  clip = getEnt("slide_enemy2_clip", "targetname");
   clip delete();
 }
 
@@ -426,7 +426,7 @@ function function_c29f52ec() {
 }
 
 function function_1998b542() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player waittillmatch({
     #notetrack: "end"}, #"hash_40acbc898ee5e354");
   player player_decision::function_a029a114(0);
@@ -438,7 +438,7 @@ function function_4f4627e4() {
   level thread scene::play("scene_tkd_hit2_rooftop", "dt_5_res");
   self thread function_95707bc7();
   level.qasim thread function_f48f4f4f();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player util::delay(2, undefined, &util::function_749362d7, 0);
   player waittillmatch({
     #notetrack: "end"}, #"hash_576c5aac6ddaa60a");
@@ -453,7 +453,7 @@ function function_f48f4f4f() {
 }
 
 function function_95707bc7() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon(#"hash_19e8d79db3b9786a");
   level.qasim thread function_fa343ac7();
   aiutility::addaioverridedamagecallback(level.qasim, &function_c5881277);
@@ -521,7 +521,7 @@ function function_fa343ac7() {
 }
 
 function function_2ed341fb() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon(#"hash_2871e831466dfa03");
   wait 6;
   level notify(#"hash_19e8d79db3b9786a");
@@ -556,13 +556,13 @@ function cleanup(name, starting, direct, player) {
     level.raid_woods delete();
   }
 
-  raid_capture_street_vehicle = getent("raid_capture_street_vehicle", "targetname");
+  raid_capture_street_vehicle = getEnt("raid_capture_street_vehicle", "targetname");
 
   if(isDefined(raid_capture_street_vehicle)) {
     raid_capture_street_vehicle delete();
   }
 
-  raid_capture_plant = getent("raid_capture_plant", "targetname");
+  raid_capture_plant = getEnt("raid_capture_plant", "targetname");
 
   if(isDefined(raid_capture_plant)) {
     raid_capture_plant delete();
@@ -588,13 +588,13 @@ function cleanup(name, starting, direct, player) {
     }
   }
 
-  canal_house_boat = getent("canal_house_boat", "targetname");
+  canal_house_boat = getEnt("canal_house_boat", "targetname");
 
   if(isDefined(canal_house_boat)) {
     canal_house_boat delete();
   }
 
-  canal_small_boat = getent("canal_small_boat", "targetname");
+  canal_small_boat = getEnt("canal_small_boat", "targetname");
 
   if(isDefined(canal_small_boat)) {
     canal_small_boat delete();
@@ -618,7 +618,7 @@ function function_2d0aefe0(height, time = 3) {
   var_4449f5d0.angles = struct.angles;
   var_4449f5d0 setModel("tag_origin");
   self playerlinktoblend(var_4449f5d0, "tag_origin", 0.5, 0, 0, 0.5, 0, 0, 1);
-  var_4449f5d0 moveto(struct.origin, time, 0.5, time / 3);
+  var_4449f5d0 moveTo(struct.origin, time, 0.5, time / 3);
   wait time;
   var_4449f5d0 util::delay(2, undefined, &delete);
 }

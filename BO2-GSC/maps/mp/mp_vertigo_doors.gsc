@@ -12,9 +12,9 @@ init() {
   triggers = getEntArray("trigger_multiple", "classname");
 
   for(i = 0; i < 2; i++) {
-    door = getent("vertigo_door" + i, "targetname");
+    door = getEnt("vertigo_door" + i, "targetname");
     o = (i + 1) % 2;
-    otherdoor = getent("vertigo_door" + o, "targetname");
+    otherdoor = getEnt("vertigo_door" + o, "targetname");
 
     if(!isDefined(door)) {
       continue;
@@ -151,7 +151,7 @@ door_open() {
   dist = distance(self.origin_opened, self.origin);
   frac = dist / 54;
   time = clamp(frac * 0.3, 0.1, 0.3);
-  self moveto(self.origin_opened, time);
+  self moveTo(self.origin_opened, time);
   self playSound("mpl_drone_door_open");
   self.opened = 1;
 }
@@ -163,7 +163,7 @@ door_close() {
   dist = distance(self.origin_closed, self.origin);
   frac = dist / 54;
   time = clamp(frac * 0.3, 0.1, 0.3);
-  self moveto(self.origin_closed, time);
+  self moveTo(self.origin_closed, time);
   self playSound("mpl_drone_door_close");
   self.opened = 0;
 }

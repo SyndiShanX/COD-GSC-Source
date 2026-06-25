@@ -54,7 +54,7 @@ function start(var_1c513c79) {
 
 function main(str_objective, b_starting) {
   level endon(#"mission_failed");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   if(b_starting) {
@@ -121,7 +121,7 @@ function function_bb36c113() {
   scene::add_scene_func("cin_stakeout_wall_sewer", &function_ffe1ec0d, "sewer_exit");
   scene::add_scene_func("cin_stakeout_wall_sewer", &function_5010c6ad, "player_sewer_kill");
   scene::add_scene_func("cin_stakeout_wall_sewer", &function_5010c6ad, "sewer_kill");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   clientfield::set("force_stream_sewer_exit", 1);
   player forcestreambundle("cin_stakeout_wall_sewer");
   level scene::init("cin_stakeout_wall_sewer");
@@ -136,21 +136,21 @@ function function_bb36c113() {
 
 function function_78a49053(a_ents) {
   level.var_7f69cef1 = a_ents[#"hash_475ee55621b83ca0"];
-  ghost_station_exit_sewer_cover = getent("ghost_station_exit_sewer_cover", "targetname");
-  ghost_station_exit_sewer_cover linkto(level.var_7f69cef1, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  ghost_station_exit_sewer_cover = getEnt("ghost_station_exit_sewer_cover", "targetname");
+  ghost_station_exit_sewer_cover linkTo(level.var_7f69cef1, "j_prop_1", (0, 0, 0), (0, 0, 0));
   level.var_7f69cef1 ghost();
 }
 
 function function_ffe1ec0d(a_ents) {
   level.var_85b94361 = util::spawn_model(#"weapon_wm_m1911_composite", level.adler.origin);
   level.var_85b94361 hidepart("j_mag2", "weapon_wm_m1911_composite");
-  level.var_85b94361 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
+  level.var_85b94361 linkTo(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
   level.var_657b5876 = a_ents[#"hash_7e7c435b4c0eec16"];
   level.var_4c0e9fb8 = util::spawn_model(#"com_flashlight_on_xforward", level.adler.origin);
-  level.var_4c0e9fb8 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  level.var_4c0e9fb8 linkTo(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
   level.var_4c0e9fb8 thread function_c439c1a(a_ents[#"hash_7e7c435b4c0eec16"]);
   level.var_527ee575 = util::spawn_model(#"weapon_vm_ar_akilo47_brprop", level.adler.origin);
-  level.var_527ee575 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
+  level.var_527ee575 linkTo(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
   level.var_8d300d6a = a_ents[#"enemy1"];
   level.var_aff752f8 = a_ents[#"enemy2"];
   level.var_8d300d6a battlechatter::function_2ab9360b(0);
@@ -176,7 +176,7 @@ function function_ffe1ec0d(a_ents) {
 
 function function_d438a0a5() {
   level flag::wait_till("player_not_on_sewer");
-  getent("sewer_cover_clip", "targetname") delete();
+  getEnt("sewer_cover_clip", "targetname") delete();
 }
 
 function function_5010c6ad(a_ents) {
@@ -184,11 +184,11 @@ function function_5010c6ad(a_ents) {
 
   if(isDefined(a_ents[#"hash_7e7c435b4c0eec16"])) {
     if(isDefined(level.var_85b94361)) {
-      level.var_85b94361 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
+      level.var_85b94361 linkTo(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
     }
 
-    level.var_4c0e9fb8 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-    level.var_527ee575 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
+    level.var_4c0e9fb8 linkTo(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    level.var_527ee575 linkTo(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -247,7 +247,7 @@ function function_6d74acf3() {
 
 function function_8931e2a4() {
   level endon(#"save_restore");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   player util::blend_movespeedscale(0.33, 0.1);
   player util::delay(1.5, undefined, &function_6d74acf3);
@@ -290,11 +290,11 @@ function function_8931e2a4() {
     player enableweaponcycling();
     level flag::wait_till("player_put_hands_down");
     level thread function_b1bcf436("cin_stakeout_wall_sewer", "player_sewer_kill");
-    playsoundatposition("evt_gstationexit_player_grab_pistol_2d", (0, 0, 0));
+    playSoundAtPosition("evt_gstationexit_player_grab_pistol_2d", (0, 0, 0));
     player waittill(#"hash_44400b1acca183b8");
   } else {
     level.var_657b5876 util::remove_cursor_hint();
-    level.var_85b94361 linkto(level.adler, "tag_sync", (0, 0, 0), (0, 0, 0));
+    level.var_85b94361 linkTo(level.adler, "tag_sync", (0, 0, 0), (0, 0, 0));
     player enableweaponcycling();
     level thread function_b1bcf436("cin_stakeout_wall_sewer", "alt_sewer_kill");
   }
@@ -329,7 +329,7 @@ function function_8931e2a4() {
   level.adler val::reset("ghost_station_exit", "ignoreme");
 
   if(isDefined(s_waitresult._notify) && s_waitresult._notify == "grab_gun") {
-    vec = vectornormalize(level.var_aff752f8.origin - player.origin);
+    vec = vectorNormalize(level.var_aff752f8.origin - player.origin);
     org = util::spawn_model("tag_origin", player.origin, vectortoangles(vec));
     org.angles = (org.angles[0] + 6, org.angles[1], org.angles[2]);
     player playerlinktoblend(org, "tag_origin", 0.3, 0.1, 0.1);
@@ -365,7 +365,7 @@ function function_1bc1ba1b() {
 function function_32025022(adler, var_2f8a0c3a) {
   level endon(#"save_restore");
   self endon(#"death", #"takedown_begin");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isalive(player)) {
     return;
@@ -412,7 +412,7 @@ function function_32025022(adler, var_2f8a0c3a) {
 function function_a1bbfb0d() {
   level endon(#"alley_shootout");
   level flag::wait_till_clear("near_manhole");
-  trig = getent("sewer_area", "targetname");
+  trig = getEnt("sewer_area", "targetname");
   trig delete();
   level flag::clear("near_manhole");
   level flag::set("alley_shootout");
@@ -427,7 +427,7 @@ function function_89cc1ce9() {
 function function_e64b290f() {
   self endon(#"death");
   level endon(#"alley_shootout");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   while(distance(self.origin, player.origin) > 100) {
@@ -468,7 +468,7 @@ function function_eaa6ba4b() {
     self scene::play("cin_stakeout_wall_sewer_react", "shot 2", self);
   }
 
-  self.favoriteenemy = getplayers()[0];
+  self.favoriteenemy = getPlayers()[0];
 }
 
 function function_7d2c6c13() {
@@ -495,7 +495,7 @@ function function_edef7e4c() {
   }
 
   level flag::set("ghost_station_exit_done");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isPlayer(player)) {
     player function_66b6e720("cin_stakeout_wall_sewer");
@@ -517,8 +517,8 @@ function function_31306fa8() {
 }
 
 function function_d1bc79a0(door_name, var_2202211f) {
-  var_3707ab7 = getent(door_name, "targetname");
-  var_5d4c31a5 = getent(var_3707ab7.target, "targetname");
+  var_3707ab7 = getEnt(door_name, "targetname");
+  var_5d4c31a5 = getEnt(var_3707ab7.target, "targetname");
   var_3707ab7.original_origin = var_3707ab7.origin;
   var_3707ab7.original_angles = var_3707ab7.angles;
 
@@ -526,9 +526,9 @@ function function_d1bc79a0(door_name, var_2202211f) {
     var_2202211f.var_44732bb0 unlink();
   }
 
-  var_5d4c31a5 linkto(var_3707ab7);
+  var_5d4c31a5 linkTo(var_3707ab7);
   waitframe(1);
-  var_3707ab7 linkto(var_2202211f, "j_prop_1", (0, 0, 0), (0, 0, 0));
+  var_3707ab7 linkTo(var_2202211f, "j_prop_1", (0, 0, 0), (0, 0, 0));
   var_5d4c31a5 connectpaths();
   var_2202211f.var_44732bb0 = var_3707ab7;
   return var_2202211f;

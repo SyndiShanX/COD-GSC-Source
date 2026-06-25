@@ -324,7 +324,7 @@ do_gadget(slot, weapon) {
 }
 
 function_45fd00c6() {
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
 
   if(isDefined(level.var_52a2e58a)) {
     players = [[level.var_52a2e58a]](players);

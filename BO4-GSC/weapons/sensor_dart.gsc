@@ -268,7 +268,7 @@ function_4b3bc61d(attacker, weapon, target) {
   }
 
   if(validateorigin(self.origin)) {
-    playsoundatposition(#"hash_206452ff3953c686", self.origin);
+    playSoundAtPosition(#"hash_206452ff3953c686", self.origin);
   }
 
   if(isDefined(level.var_d2600afc)) {

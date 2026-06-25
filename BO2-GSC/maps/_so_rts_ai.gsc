@@ -303,7 +303,7 @@ prevent_long_death() {
   while(true) {
     safe_to_kill = 1;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player_too_close = distance2d(player.origin, self.origin) < 540;
 
       if(player_too_close) {
@@ -558,7 +558,7 @@ ai_claymore_plant() {
   self.a.deathforceragdoll = 1;
   self clearanim(%root, 0.2);
   claymore = spawn_model("weapon_claymore", self gettagorigin("tag_inhand"), self gettagangles("tag_inhand"));
-  claymore linkto(self, "tag_inhand", (0, 0, 0), vectorscale((1, 0, 0), 90.0));
+  claymore linkTo(self, "tag_inhand", (0, 0, 0), vectorscale((1, 0, 0), 90.0));
 
   recordent(claymore);
 
@@ -1055,7 +1055,7 @@ chopper_unload_cargo_quad(pkg_ref, team, squadid, cb) {
   assert(animhasnotetrack(%ai_crew_vtol_quad_launch, "quad_launch"));
 
   for(i = 0; i < pkg_ref.units.size; i = i + 2) {
-    guy animscripted("throw", tagorigin, tagangles, %ai_crew_vtol_quad_launch);
+    guy animScripted("throw", tagorigin, tagangles, %ai_crew_vtol_quad_launch);
     guy waittillmatch("throw", "quad_launch");
     quads = [];
 
@@ -1076,7 +1076,7 @@ chopper_unload_cargo_quad(pkg_ref, team, squadid, cb) {
       }
 
       quad = placevehicle(ai_ref.ref, origin, team);
-      quad linkto(guy, throwtag);
+      quad linkTo(guy, throwtag);
       quads[quads.size] = quad;
 
       if(isDefined(quad)) {
@@ -1109,7 +1109,7 @@ chopper_unload_cargo_metalstorm(pkg_ref, team, squadid) {
   tagangles = self gettagangles("tag_body");
   animrig = spawn("script_model", tagorigin);
   animrig.angles = tagangles;
-  animrig linkto(self, "tag_body");
+  animrig linkTo(self, "tag_body");
   animrig useanimtree(#animtree);
   animrig setModel("fxanim_gp_vtol_drop_asd_drone_mod");
   unit = pkg_ref.units[0];
@@ -1118,7 +1118,7 @@ chopper_unload_cargo_metalstorm(pkg_ref, team, squadid) {
   asd = placevehicle(ai_ref.ref, animrig gettagorigin("asd_attach_jnt"), team);
   asd.angles = animrig gettagangles("asd_attach_jnt");
   asd hide();
-  asd linkto(animrig, "asd_attach_jnt");
+  asd linkTo(animrig, "asd_attach_jnt");
   asd maps\_vehicle::godon();
   asd.ignoreme = 1;
   animrig setflaggedanimrestart("drop", %fxanim_gp_vtol_drop_asd_drone_anim, 1, 0.2, 1);
@@ -1156,12 +1156,12 @@ chopper_unload_cargo_claw(pkg_ref, team, squadid) {
     tagangles = self gettagangles("tag_body");
     animrig = spawn("script_model", tagorigin);
     animrig.angles = tagangles;
-    animrig linkto(self, "tag_body");
+    animrig linkTo(self, "tag_body");
     animrig useanimtree(#animtree);
     animrig setModel("fxanim_gp_vtol_drop_claw_mod");
     claw setteam(team);
     claw forceteleport(animrig gettagorigin("claw_attach_jnt"), animrig gettagangles("claw_attach_jnt"));
-    claw linkto(animrig, "claw_attach_jnt");
+    claw linkTo(animrig, "claw_attach_jnt");
     claw maps\_vehicle::godon();
     claw.ignoreme = 1;
     claw.animname = "dropoff_claw";
@@ -1451,7 +1451,7 @@ takeoverselectedinfantry(entity) {
   }
 
   level.player giveweapon("tazer_knuckles_sp");
-  level.rts.player setorigin(self.ally.origin);
+  level.rts.player setOrigin(self.ally.origin);
   level.rts.player setplayerangles(getbestinitialorientangles(entity));
   entity maps\_so_rts_support::flush_gpr();
 
@@ -1572,7 +1572,7 @@ takeoverselectedvehicle(entity) {
       vehicle makevehicleusable();
       self.ignoreme = 1;
       self enableinvulnerability();
-      self setorigin(vehicle.origin);
+      self setOrigin(vehicle.origin);
       self setplayerangles(vehicle.angles);
       vehicle usevehicle(self, entity.ai_ref.seat);
       self thread vehicledeathwatcher(vehicle);
@@ -1618,7 +1618,7 @@ takeoverselectedvehicle(entity) {
     self.ally.takeovernote = isDefined(entity.takeovernote) ? entity.takeovernote : undefined;
     self.health = 100;
     self.ally.vehicle notify("player_entering");
-    self setorigin(entity.origin);
+    self setOrigin(entity.origin);
     entity usevehicle(self, entity.ai_ref.seat);
     self thread vehicledeathwatcher(entity);
     entity makevehicleunusable();

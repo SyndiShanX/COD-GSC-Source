@@ -116,7 +116,7 @@ handlePlayerUse() {
 
   if(!isDefined(self.hvtTrigger)) {
     self.hvtTrigger = spawn("script_model", self.origin);
-    self.hvtTrigger LinkTo(self);
+    self.hvtTrigger linkTo(self);
   }
 
   self.hvtTrigger MakeUsable();

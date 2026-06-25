@@ -398,11 +398,11 @@ deployFlares(time) {
 
 vehicleModifyFlareVector(velocityVec) {
   if(self.vehicleType == "warbird") {
-    return (VectorNormalize(velocityVec + (0, 0, -0.2)) * 300);
+    return (vectorNormalize(velocityVec + (0, 0, -0.2)) * 300);
   } else if(self.vehicleType == "paladin") {
-    return (VectorNormalize(velocityVec + (0, 0, -0.5)) * 2000);
+    return (vectorNormalize(velocityVec + (0, 0, -0.5)) * 2000);
   } else {
-    return (VectorNormalize(velocityVec + (0, 0, -0.4)) * 1000);
+    return (vectorNormalize(velocityVec + (0, 0, -0.4)) * 1000);
   }
 }
 
@@ -460,8 +460,8 @@ doProximityAlarm(missile, heli) {
 }
 
 playerFakeShootPaintMissile(soundEnt) {
-  dir = VectorNormalize(anglesToForward(self GetPlayerAngles()));
-  right = VectorNormalize(AnglesToRight(self GetPlayerAngles()));
+  dir = vectorNormalize(anglesToForward(self GetPlayerAngles()));
+  right = vectorNormalize(AnglesToRight(self GetPlayerAngles()));
   start = self getEye() + (dir * 100);
   end = start + (dir * 20000);
   trace = bulletTrace(start, end, false);
@@ -486,7 +486,7 @@ playerFakeShootPaintGrenadeAtTarget(soundEnt, startPos, targetPos, stunPlayers, 
 
   Earthquake(0.2, 1, self GetViewOrigin(), 300);
 
-  grenadeForward = VectorNormalize(targetPos - startPos);
+  grenadeForward = vectorNormalize(targetPos - startPos);
   grenadeVelocity = grenadeForward * GRENADE_SPEED;
 
   grenade = MagicGrenadeManual("paint_grenade_killstreak_mp", startPos, grenadeVelocity, 2, self);
@@ -502,7 +502,7 @@ playerFakeShootEmpGrenadeAtTarget(soundEnt, startPos, targetPos) {
 
   Earthquake(0.2, 1, self GetViewOrigin(), 300);
 
-  grenadeForward = VectorNormalize(targetPos - startPos);
+  grenadeForward = vectorNormalize(targetPos - startPos);
   grenadeVelocity = grenadeForward * GRENADE_SPEED;
 
   grenade = MagicGrenadeManual("emp_grenade_killstreak_mp", startPos, grenadeVelocity, 2, self);
@@ -1080,11 +1080,11 @@ playerShowStreakStaticForRange(rangeIndex) {
 }
 
 getEntOrStruct(name, type) {
-  ent = GetEnt(name, type);
+  ent = getEnt(name, type);
   if(isDefined(ent)) {
     return ent;
   }
-  return getstruct(name, type);
+  return getStruct(name, type);
 }
 
 getEntOrStructArray(name, type) {

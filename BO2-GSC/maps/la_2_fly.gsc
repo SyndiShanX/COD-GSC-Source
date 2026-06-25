@@ -25,7 +25,7 @@ f35_dogfights() {
 
   while(!b_safe) {
     if(distance2d(level.player.origin, level.convoy.vh_potus.origin) < 10000) {
-      dir = vectornormalize(level.convoy.vh_potus.origin - level.player.origin);
+      dir = vectorNormalize(level.convoy.vh_potus.origin - level.player.origin);
       start = level.player.origin;
       end = start + dir * 2000;
 
@@ -61,7 +61,7 @@ f35_dogfights() {
   }
 
   level notify("end_ambient_drones");
-  playsoundatposition("evt_pack_flyby", (-2213, 5513, 2346));
+  playSoundAtPosition("evt_pack_flyby", (-2213, 5513, 2346));
   clientnotify("dfs_go");
   setculldist(0);
   level clientnotify("set_jet_fog_banks");
@@ -256,10 +256,10 @@ _shake_in_jetwash() {
       if(isDefined(level.player.missileturrettarget)) {
         if(distancesquared(level.player.missileturrettarget.origin, level.f35.origin) < 25000000) {
           earthquake(0.05, 0.15, level.player.origin, 10000, level.player);
-          level.player playrumbleonentity("damage_light");
+          level.player playRumbleOnEntity("damage_light");
         } else if(distancesquared(level.player.missileturrettarget.origin, level.f35.origin) < 6250000) {
           earthquake(0.15, 0.15, level.player.origin, 10000, level.player);
-          level.player playrumbleonentity("damage_light");
+          level.player playRumbleOnEntity("damage_light");
         }
       }
     }
@@ -498,7 +498,7 @@ _set_direction_on_nodes(str_node_targetname) {
     nd_node_c = getvehiclenode(nd_node_b.target, "targetname");
     v_b_to_c = nd_node_c.origin - nd_node_b.origin;
     temp_pos = nd_node_b.origin + v_b_to_c / 4;
-    nd_node_a.script_dir = vectornormalize(temp_pos - nd_node_a.origin);
+    nd_node_a.script_dir = vectorNormalize(temp_pos - nd_node_a.origin);
     nd_node_a = nd_node_b;
   }
 }
@@ -551,10 +551,10 @@ play_specialized_shot_audio() {
 waitfor_leadplane_death(plane, array) {
   plane waittill("death");
   origin = plane.origin;
-  playsoundatposition("exp_f35_missile_explo_green", origin);
+  playSoundAtPosition("exp_f35_missile_explo_green", origin);
 
   for(i = 0; i < 7; i++) {
-    playsoundatposition("wpn_death_blossom_fire_green", origin);
+    playSoundAtPosition("wpn_death_blossom_fire_green", origin);
     wait(randomfloatrange(0, 0.1));
   }
 }
@@ -1252,7 +1252,7 @@ dogfight_player_strafe(vh_lead_plane, n_follower) {
       return false;
     }
 
-    trig_dogfight = getent("trig_dogfight_spawn_control", "targetname");
+    trig_dogfight = getEnt("trig_dogfight_spawn_control", "targetname");
 
     if(level.player istouching(trig_dogfight)) {
       wait 1.0;
@@ -1505,9 +1505,9 @@ wave_speed_monitor(a_planes, n_ideal_dist, n_too_close) {
           should_speed_up = 1;
         } else if(n_distance_sq < n_ideal_dist_sq) {
           is_player_close = 1;
-          v_plane_to_player = vectornormalize(level.f35.origin - e_plane.origin);
-          v_plane_forward = vectornormalize(anglesToForward(e_plane.angles));
-          v_player_forward = vectornormalize(anglesToForward(level.f35.angles));
+          v_plane_to_player = vectorNormalize(level.f35.origin - e_plane.origin);
+          v_plane_forward = vectorNormalize(anglesToForward(e_plane.angles));
+          v_player_forward = vectorNormalize(anglesToForward(level.f35.angles));
 
           if(vectordot(v_plane_to_player, v_plane_forward) > 0.7) {
             if(vectordot(v_plane_forward, v_player_forward) > 0.7) {
@@ -1593,9 +1593,9 @@ _dogfight_ally_speed_monitor() {
         }
       }
 
-      v_player_to_enemy = vectornormalize(e_target.origin - level.f35.origin);
-      v_self_to_enemy = vectornormalize(e_target.origin - self.origin);
-      v_self_forward = vectornormalize(anglesToForward(self.angles));
+      v_player_to_enemy = vectorNormalize(e_target.origin - level.f35.origin);
+      v_self_to_enemy = vectorNormalize(e_target.origin - self.origin);
+      v_self_forward = vectorNormalize(anglesToForward(self.angles));
       n_speed = e_target getspeedmph();
       n_dot = vectordot(v_self_forward, v_self_to_enemy);
 
@@ -1724,7 +1724,7 @@ use_chaff(e_missile) {
     n_gravity = getdvarint(#"phys_gravity");
     v_gravity = getdvarvector(#"phys_gravity_dir");
     v_chaff_direction = self.origin + v_forward * n_speed;
-    v_chaff_dir = vectornormalize(vectorscale(v_forward, -0.2) + v_right);
+    v_chaff_dir = vectorNormalize(vectorscale(v_forward, -0.2) + v_right);
     v_velocity = vectorscale(v_chaff_dir, randomintrange(400, 600));
     v_velocity = (v_velocity[0], v_velocity[1], v_velocity[2] - randomintrange(10, 100));
     e_chaff = spawn("script_model", v_chaff_pos);
@@ -1894,7 +1894,7 @@ getbestmissileturrettarget_f38_deathblossom() {
     forward = anglesToForward(self getplayerangles());
 
     for(i = 0; i < targetsvalid.size; i++) {
-      vec_to_target = vectornormalize(targetsvalid[i].origin - self get_eye());
+      vec_to_target = vectorNormalize(targetsvalid[i].origin - self get_eye());
       dot = vectordot(vec_to_target, forward);
 
       if(dot > bestdot) {
@@ -2090,7 +2090,7 @@ dogfight_save_restore() {
   }
   avg_pos = avg_pos / count;
   avg_fwd = avg_fwd / count;
-  avg_fwd = vectornormalize(avg_fwd);
+  avg_fwd = vectorNormalize(avg_fwd);
   start_pos = avg_pos - avg_fwd * 1000;
 
   if(isDefined(level.f35)) {

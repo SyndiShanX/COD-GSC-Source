@@ -183,7 +183,7 @@ _fire(lifeId, player) {
 
   foreach(spawn in remote_missile_spawns) {
     if(isDefined(spawn.target)) {
-      spawn.targetent = getent(spawn.target, "targetname");
+      spawn.targetent = getEnt(spawn.target, "targetname");
     }
   }
 
@@ -242,8 +242,8 @@ _fire_noplayer(lifeId, player) {
   rocket.lifeId = lifeId;
   rocket.type = "remote";
 
-  player CameraLinkTo(rocket, "tag_origin");
-  player ControlsLinkTo(rocket);
+  player CameralinkTo(rocket, "tag_origin");
+  player ControlslinkTo(rocket);
 
   rocket thread Rocket_CleanupOnDeath();
 
@@ -276,7 +276,7 @@ monitor_rocket_boosting(rocket) {
 
   self waittill("firebuttonpressed");
 
-  self playrumbleonentity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
 
   rocket playsoundtoplayer("h2_remote_missile_fire_npc", self);
   earthquake(0.3, 1, rocket.origin, 1000);
@@ -300,8 +300,8 @@ missile_eyes(player, rocket) {
   player thread delayedFOFOverlay();
 
   player.missileboostused = false;
-  player CameraLinkTo(rocket, "tag_origin");
-  player ControlsLinkTo(rocket);
+  player CameralinkTo(rocket, "tag_origin");
+  player ControlslinkTo(rocket);
 
   if(getdvarint("camera_thirdPerson")) {
     player setthirdpersondof(false);

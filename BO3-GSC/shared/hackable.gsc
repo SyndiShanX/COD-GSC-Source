@@ -90,7 +90,7 @@ function is_object_hackable(obj, origin, forward) {
   if(distancesquared(origin, obj.origin) < obj.hackable_distance_sq) {
     to_obj = obj.origin - origin;
     to_obj = (to_obj[0], to_obj[1], 0);
-    to_obj = vectornormalize(to_obj);
+    to_obj = vectorNormalize(to_obj);
     dot = vectordot(to_obj, forward);
     if(dot >= obj.hackable_angledot) {
       if(isDefined(obj.hackable_test_callback)) {

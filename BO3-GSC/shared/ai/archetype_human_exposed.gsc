@@ -92,7 +92,7 @@ function private tryreacquireservice(behaviortreeentity) {
     behaviortreeentity.reacquire_state = 0;
     return false;
   }
-  dirtoenemy = vectornormalize(behaviortreeentity.enemy.origin - behaviortreeentity.origin);
+  dirtoenemy = vectorNormalize(behaviortreeentity.enemy.origin - behaviortreeentity.origin);
   forward = anglesToForward(behaviortreeentity.angles);
   if(vectordot(dirtoenemy, forward) < 0.5) {
     behaviortreeentity.reacquire_state = 0;

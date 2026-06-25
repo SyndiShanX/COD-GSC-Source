@@ -32,7 +32,7 @@ on_begin(var_dd1a18c9) {
   level.disable_firesale_drop = 1;
   zm_powerups::function_74b8ec6b("fire_sale");
   setgametypesetting(#"zmpowerupfiresale", 0);
-  array::thread_all(getplayers(), &function_a4bcce4e);
+  array::thread_all(getPlayers(), &function_a4bcce4e);
   zm_trial_util::function_2976fa44(level.var_dd1a18c9);
   zm_trial_util::function_dace284(0);
   level thread function_cfb0f4d();
@@ -46,7 +46,7 @@ on_end(round_reset) {
   level.disable_firesale_drop = 0;
   zm_powerups::function_41cedb05("fire_sale");
   setgametypesetting(#"zmpowerupfiresale", 1);
-  array::thread_all(getplayers(), &function_e8f640a5);
+  array::thread_all(getPlayers(), &function_e8f640a5);
 
   if(!level.var_b69d170f) {
     zm_trial::fail(#"hash_52e05a9ea3e881ea");

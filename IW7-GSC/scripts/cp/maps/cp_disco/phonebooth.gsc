@@ -577,7 +577,7 @@ use_phone_keypad(var_0, var_1, var_2) {
   wait(var_2);
   var_3 = var_1 getEye();
   foreach(var_5 in var_0.keypad_buttons) {
-    var_5.vdronestrikeheight = vectornormalize(var_5.keypos - var_3);
+    var_5.vdronestrikeheight = vectorNormalize(var_5.keypos - var_3);
   }
 
   var_1 thread phone_hilight_focused_button(var_0, var_1);

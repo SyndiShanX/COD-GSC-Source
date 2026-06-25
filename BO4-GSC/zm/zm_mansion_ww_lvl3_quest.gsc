@@ -134,7 +134,7 @@ function_e217ba73(v_pos, v_velocity) {
 
   if(isDefined(e_grenade)) {
     var_26420508.origin = e_grenade.origin;
-    var_26420508 linkto(e_grenade, "tag_fx");
+    var_26420508 linkTo(e_grenade, "tag_fx");
 
     while(true) {
       s_waitresult = e_grenade waittill(#"death", #"grenade_bounce", #"grenade_stuck");
@@ -426,7 +426,7 @@ function_4999f099(var_9427f9e7) {
 function_fd7c6bd1() {
   self endon(#"death");
   level waittill(#"hash_348748d248801d6b");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   self dodamage(self.health, e_player.origin, e_player, e_player, undefined, "<dev string:x49>", 0, level.var_6fe89212);
 }
 
@@ -461,7 +461,7 @@ function_58439640() {
     sphere(self.origin, 16, (1, 1, 0), 1, 1, 4, 480);
     line(self.origin, var_44a24b57, (1, 1, 1), 1, 1, 480);
 
-    var_e2d0a89 = vectornormalize(var_44a24b57 - self.origin);
+    var_e2d0a89 = vectorNormalize(var_44a24b57 - self.origin);
     var_e2d0a89 = (var_e2d0a89[0], var_e2d0a89[1], 0);
     var_e2d0a89 *= (self.origin[2] - var_44a24b57[2]) * 0.8;
     return var_e2d0a89;
@@ -824,7 +824,7 @@ function_2c0edc3d(a_ents) {
 }
 
 function_d2278936(e_player) {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   switch (a_players.size) {
     case 1:
@@ -919,7 +919,7 @@ function_6f3f4e18(s_loc) {
   level.var_8e7ee650[level.var_8e7ee650.size] = s_loc;
   util::wait_network_frame();
   s_loc.mdl_pickup clientfield::set("" + #"hash_62ee80337662b3cd", 1);
-  playsoundatposition(#"zmb_sq_souls_release", s_loc.mdl_pickup.origin);
+  playSoundAtPosition(#"zmb_sq_souls_release", s_loc.mdl_pickup.origin);
   s_loc.origin += (0, 0, 8);
   e_holder = s_loc zm_unitrigger::function_fac87205(&function_fdc93dd2, 64);
 
@@ -1191,11 +1191,11 @@ function_7aa50bb7(e_player) {
   can_use = self.stub zm_crafting::function_18f2be60(e_player);
 
   if(e_player zm_weapons::has_weapon_or_upgrade(level.var_7b9ca97a)) {
-    self sethintstring("");
+    self setHintString("");
   } else if(e_player zm_weapons::has_weapon_or_upgrade(level.var_6fe89212)) {
-    self sethintstring(self.stub.blueprint.craftingprompt);
+    self setHintString(self.stub.blueprint.craftingprompt);
   } else {
-    self sethintstring(#"hash_652c97821a6cf09d");
+    self setHintString(#"hash_652c97821a6cf09d");
   }
 
   return can_use;

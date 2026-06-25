@@ -147,7 +147,7 @@ preform_zombie_object_melee(param_00) {
 
   self scragentsetscripted(1);
   self scragentsetorientmode("face angle abs", self.var_9B61.var_1D);
-  self setorigin(param_00.var_116, 0);
+  self setOrigin(param_00.var_116, 0);
   for(;;) {
     var_06 = self method_83DB(var_02);
     var_07 = randomint(var_06);

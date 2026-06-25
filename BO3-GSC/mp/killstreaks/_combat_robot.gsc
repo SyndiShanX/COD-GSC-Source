@@ -203,7 +203,7 @@ function _watchmodeswap(robot, player) {
         player playsoundtoplayer("uin_mp_combat_bot_escort", player);
         robot thread _escort(robot);
         if(isDefined(robot.usetrigger)) {
-          robot.usetrigger sethintstring(&"KILLSTREAK_COMBAT_ROBOT_GUARD_HINT");
+          robot.usetrigger setHintString(&"KILLSTREAK_COMBAT_ROBOT_GUARD_HINT");
         }
         if(isDefined(robot.markerfxhandle)) {
           robot.markerfxhandle delete();
@@ -216,7 +216,7 @@ function _watchmodeswap(robot, player) {
           player playsoundtoplayer("uin_mp_combat_bot_guard", player);
           robot thread _guardposition(robot, navguardposition);
           if(isDefined(robot.usetrigger)) {
-            robot.usetrigger sethintstring(&"KILLSTREAK_COMBAT_ROBOT_ESCORT_HINT");
+            robot.usetrigger setHintString(&"KILLSTREAK_COMBAT_ROBOT_ESCORT_HINT");
           }
           if(isDefined(robot.markerfxhandle)) {
             robot.markerfxhandle delete();
@@ -466,11 +466,11 @@ function setupcombatrobothinttrigger(player) {
     robot.usetrigger delete();
   }
   robot.usetrigger = spawn("trigger_radius_use", player.origin, 32, 32);
-  robot.usetrigger enablelinkto();
-  robot.usetrigger linkto(player);
+  robot.usetrigger enablelinkTo();
+  robot.usetrigger linkTo(player);
   robot.usetrigger sethintlowpriority(1);
-  robot.usetrigger setcursorhint("HINT_NOICON");
-  robot.usetrigger sethintstring(&"KILLSTREAK_COMBAT_ROBOT_GUARD_HINT");
+  robot.usetrigger setCursorHint("HINT_NOICON");
+  robot.usetrigger setHintString(&"KILLSTREAK_COMBAT_ROBOT_GUARD_HINT");
   robot.usetrigger setteamfortrigger(player.team);
   robot.usetrigger.team = player.team;
   player clientclaimtrigger(robot.usetrigger);
@@ -539,7 +539,7 @@ function oncombatrobottimeout() {
   if(isDefined(combatrobot.owner)) {
     radiusdamage(combatrobot.origin, params.ksexplosionouterradius, params.ksexplosioninnerdamage, params.ksexplosionouterdamage, combatrobot.owner, "MOD_EXPLOSIVE", getweapon("combat_robot_marker"));
     if(isDefined(params.ksexplosionrumble)) {
-      combatrobot.owner playrumbleonentity(params.ksexplosionrumble);
+      combatrobot.owner playRumbleOnEntity(params.ksexplosionrumble);
     }
   }
   wait(0.2);

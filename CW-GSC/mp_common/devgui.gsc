@@ -75,7 +75,7 @@ function devgui_player_spawn() {
   wait 1;
   player_devgui_base_mp = "<dev string:x212>";
   waitframe(1);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player != self) {
@@ -96,7 +96,7 @@ function devgui_player_spawn_think() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player.playername != playername) {
@@ -179,7 +179,7 @@ function function_d08b7aef() {
 
     if(var_600cca03 != "<dev string:x4a>") {
       setDvar(#"hash_6aec7b5b37bd66cd", 0);
-      players = getplayers();
+      players = getPlayers();
 
       if(isDefined(level.calloutplayer) && isDefined(players[level.calloutplayer])) {
         callout = players[level.calloutplayer] gestures::function_c77349d4(var_600cca03);
@@ -254,7 +254,7 @@ function function_f9e5168a() {
 
     if(execution != "<dev string:x4a>") {
       setDvar(#"hash_61dac11dea7f8b8d", 1);
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         player clearexecution();
@@ -591,7 +591,7 @@ function devgui_attachment_cycling_think() {
     }
 
     if("<dev string:x560>" == state) {
-      array::thread_all(getplayers(), &devgui_attachment_cycling_update);
+      array::thread_all(getPlayers(), &devgui_attachment_cycling_update);
     }
 
     wait 0.5;
@@ -810,7 +810,7 @@ function devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) 
   pid = getdvarint(#"mp_weap_devgui", 0);
 
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
 
     if(isDefined(player)) {
       if(isDefined(pcb_param_2)) {
@@ -822,7 +822,7 @@ function devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) 
       }
     }
   } else {
-    array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
+    array::thread_all(getPlayers(), playercallback, pcb_param_1, pcb_param_2);
   }
 
   setDvar(#"mp_weap_devgui", "<dev string:x620>");
@@ -867,7 +867,7 @@ function debug_center_screen() {
 function add_vehicle_at_eye_trace(vehiclename) {
   host = util::gethostplayer();
   trace = host eye_trace();
-  veh_spawner = getent(vehiclename + "<dev string:x626>", "<dev string:x632>");
+  veh_spawner = getEnt(vehiclename + "<dev string:x626>", "<dev string:x632>");
   vehicle = veh_spawner spawnfromspawner(vehiclename, 1, 1, 1);
   vehicle asmrequestsubstate(#"locomotion@movement");
   waitframe(1);
@@ -1135,14 +1135,14 @@ function private function_57edec18() {
         continue;
       }
 
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(!isDefined(player)) {
         waitframe(1);
         continue;
       }
 
-      drone_camera = spawnvehicle("<dev string:xa99>", player.origin + (0, 0, 150), player.angles, "<dev string:xab0>");
+      drone_camera = spawnVehicle("<dev string:xa99>", player.origin + (0, 0, 150), player.angles, "<dev string:xab0>");
       drone_camera.ignoreme = 1;
       drone_camera usevehicle(player, 0);
       level.drone_camera = drone_camera;

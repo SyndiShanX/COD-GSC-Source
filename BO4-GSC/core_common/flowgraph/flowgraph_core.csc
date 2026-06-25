@@ -80,7 +80,7 @@ evaluate_constant(input_def) {
       if(isstruct(val)) {
         assert(isDefined(val.value));
         assert(isDefined(val.key));
-        return getent(self.owner.localclientnum, val.value, val.key);
+        return getEnt(self.owner.localclientnum, val.value, val.key);
       } else {
         assert(val == "<dev string:x5f>" || val == "<dev string:x66>");
 

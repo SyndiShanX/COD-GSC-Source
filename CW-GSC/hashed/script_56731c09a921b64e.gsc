@@ -2488,7 +2488,7 @@ function function_11110983(params) {
 
     if(!isDefined(self.var_8c1397c7)) {
       self.var_8c1397c7 = util::spawn_model(#"tag_origin", self.origin, self.angles);
-      self.var_8c1397c7 linkto(self);
+      self.var_8c1397c7 linkTo(self);
     }
 
     self thread mega_barrel_watch_multikill_vo();
@@ -2984,7 +2984,7 @@ function function_51b7e176() {
   self.var_accb4770 = var_accb4770;
   var_4d66ae56 = util::spawn_model(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_mod");
   var_4d66ae56 setinvisibletoplayer(self);
-  var_4d66ae56 linkto(self, "tag_origin");
+  var_4d66ae56 linkTo(self, "tag_origin");
   var_4d66ae56 linktoupdateoffset(self getplayercamerapos(), self.angles);
   var_4d66ae56 thread scene::play(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", var_4d66ae56);
   playFXOnTag(var_accb4770.var_515e20e6 ? #"hash_2eabcf6f328bb46b" : #"hash_2ac49f49b148a4fa", var_4d66ae56, "tag_flash");
@@ -3161,7 +3161,7 @@ function function_80fdbf85(player) {
   time = left_distance / 1200 + 0.1;
 
   if(time > 0) {
-    self moveto(v_target_pos, time);
+    self moveTo(v_target_pos, time);
     wait time;
   }
 
@@ -3263,7 +3263,7 @@ function cmd(cmd) {
 }
 
 function function_a7c4f468(weapon_name) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   direction = player getplayerangles();
   direction_vec = anglesToForward(direction);
   eye = player getplayercamerapos();

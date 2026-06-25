@@ -53,7 +53,7 @@ function spawnpoint_debug() {
         influencer_team = selectedplayer.pers[#"team"];
         vis_team_mask = util::getotherteamsmask(selectedplayer.pers[#"team"]);
         nextbestspawnpoint = getbestspawnpoint(point_team, influencer_team, vis_team_mask, selectedplayer, 0);
-        selectedplayer setorigin(nextbestspawnpoint[#"origin"]);
+        selectedplayer setOrigin(nextbestspawnpoint[#"origin"]);
         selectedplayer setplayerangles(nextbestspawnpoint[#"angles"]);
         break;
       case #"refresh":
@@ -197,7 +197,7 @@ function function_48a6b85() {
       origin = level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].origin;
       angles = level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].spawns[level.var_94f4ca81.currentspawnindex].angles;
       println("<dev string:x234>" + level.var_94f4ca81.dataset[level.var_94f4ca81.currentsetindex].name);
-      self setorigin(origin);
+      self setOrigin(origin);
       self setplayerangles(angles);
       var_f94a23 = 0;
     }

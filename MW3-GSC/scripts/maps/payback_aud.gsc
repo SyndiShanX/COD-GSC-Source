@@ -367,7 +367,7 @@ _id_55C8(var_0, var_1) {
       var_9 = (4032, 4784, 418);
       wait 0.8;
       var_8 playSound("pybk_gas_can", "sounddone");
-      var_8 moveto(var_9, 0.5);
+      var_8 moveTo(var_9, 0.5);
       var_8 waittill("sounddone");
       var_8 delete();
       break;
@@ -820,14 +820,14 @@ _id_55DF() {
     level._id_55DE stoploopsound();
   }
   level._id_55D8 = spawn("script_origin", level.player.origin);
-  level._id_55D8 linkto(level.player);
+  level._id_55D8 linkTo(level.player);
   level._id_55D9 = spawn("script_origin", level.player.origin);
-  level._id_55D9 linkto(level.player);
+  level._id_55D9 linkTo(level.player);
   var_0 = (72, 0, 48);
   level._id_55DC = spawn("script_origin", level._id_55DE.origin);
-  level._id_55DC linkto(level._id_55DE, "tag_origin", var_0, (0, 0, 0));
+  level._id_55DC linkTo(level._id_55DE, "tag_origin", var_0, (0, 0, 0));
   level._id_55DD = spawn("script_origin", level._id_55DE.origin);
-  level._id_55DD linkto(level._id_55DE, "tag_origin", var_0, (0, 0, 0));
+  level._id_55DD linkTo(level._id_55DE, "tag_origin", var_0, (0, 0, 0));
   level._id_55D8 thread _id_55D5();
   level._id_55DC thread _id_55DA();
 }
@@ -928,7 +928,7 @@ _id_55E8() {
 
     if(!isDefined(level._id_55EB)) {
       level._id_55EB = spawn("script_origin", level.player.origin);
-      level._id_55EB linkto(level.player);
+      level._id_55EB linkTo(level.player);
       maps\_audio::_id_1788(level._id_55EB, "pybk_chopper_interior", 1.0, 1.0, 1);
     }
 
@@ -1161,9 +1161,9 @@ _id_5600() {
 
 _id_5601(var_0) {
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_2 = spawn("script_origin", var_0.origin);
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   thread _id_562D("mix_streets_car", 0.5, 4, 0.5);
   var_0 playLoopSound("pybk_car_roll_down");
   wait 3.5;
@@ -1216,17 +1216,17 @@ _id_5606() {
     }
     level._id_55CA stoploopsound();
     level._id_5608 = spawn("script_origin", level._id_55CA.origin);
-    level._id_5608 linkto(level._id_55CA);
+    level._id_5608 linkTo(level._id_55CA);
     level._id_5609 = spawn("script_origin", level._id_55CA.origin);
-    level._id_5609 linkto(level._id_55CA);
+    level._id_5609 linkTo(level._id_55CA);
     level._id_560A = spawn("script_origin", level._id_55CA.origin);
-    level._id_560A linkto(level._id_55CA);
+    level._id_560A linkTo(level._id_55CA);
     level._id_560B = spawn("script_origin", level._id_55CA.origin);
-    level._id_560B linkto(level._id_55CA);
+    level._id_560B linkTo(level._id_55CA);
     level._id_560C = spawn("script_origin", level._id_55CA.origin);
-    level._id_560C linkto(level._id_55CA);
+    level._id_560C linkTo(level._id_55CA);
     level._id_560D = spawn("script_origin", level._id_55CA.origin);
-    level._id_560D linkto(level._id_55CA);
+    level._id_560D linkTo(level._id_55CA);
     maps\_audio_music::_id_15A8();
     level._id_5608 playSound("mortar_explosion_dirt");
     common_scripts\utility::flag_set("chopper_hit_primed_now_go");
@@ -1248,7 +1248,7 @@ _id_5606() {
 
 _id_560E() {
   level._id_560A = spawn("script_origin", level._id_55CA.origin);
-  level._id_560A linkto(level._id_55CA);
+  level._id_560A linkTo(level._id_55CA);
   level._id_560A maps\_audio::_id_170B("pybk_chopper_down");
   common_scripts\utility::flag_wait("chopper_hit_primed_now_go");
   level._id_560A playSound("pybk_chopper_down");
@@ -1298,7 +1298,7 @@ _id_5612() {
 _id_5613(var_0) {
   thread _id_562D("mix_sandstorm_market_tear", 1.0, 2.8, 1.0);
   var_1 = spawn("script_origin", var_0 gettagorigin("J_Default3_vtx_210_"));
-  var_1 linkto(var_0, "J_Default3_vtx_210_", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "J_Default3_vtx_210_", (0, 0, 0), (0, 0, 0));
   var_1 playSound("pybk_market_tear", "sounddone");
   var_1 waittill("sounddone");
   var_1 delete();
@@ -1446,7 +1446,7 @@ _id_5618(var_0) {
   wait 1;
   var_1 playSound("pybk_scaffolding_collapse", "sounddone");
   var_1 playSound("pybk_scaffolding_collapse");
-  var_1 moveto((1074, -4275, 550), 1.5);
+  var_1 moveTo((1074, -4275, 550), 1.5);
   var_1 waittill("sounddone");
   var_1 delete();
 }
@@ -1524,11 +1524,11 @@ _id_5623() {
   }
   if(!isDefined(level._id_55CA)) {
     level._id_55CA = spawn("script_origin", level.chopper.origin);
-    level._id_55CA linkto(level.chopper, "tag_origin", (0, 0, 64), (0, 0, 0));
+    level._id_55CA linkTo(level.chopper, "tag_origin", (0, 0, 64), (0, 0, 0));
   } else {
     level._id_55CA unlink();
-    level._id_55CA moveto(level.chopper.origin, 0.05);
-    level._id_55CA linkto(level.chopper, "tag_flare", (0, 0, 0), (0, 0, 0));
+    level._id_55CA moveTo(level.chopper.origin, 0.05);
+    level._id_55CA linkTo(level.chopper, "tag_flare", (0, 0, 0), (0, 0, 0));
   }
 
   if(!isDefined(level._id_55CA._id_5624)) {
@@ -1657,7 +1657,7 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       self._id_5607.velocity = (self.origin - self._id_5607._id_562C) / 2;
 
       if(isDefined(self) && isDefined(self._id_5607.velocity)) {
-        var_8 = vectornormalize(level.player.origin - self.origin);
+        var_8 = vectorNormalize(level.player.origin - self.origin);
         var_9 = vectordot(self._id_5607.velocity, var_8);
         var_10 = var_9;
 

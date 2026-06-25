@@ -25,11 +25,11 @@ aud_init_globals() {
   level.aud_weapon_strobe = spawn("script_origin", level.player.origin);
   level.aud_wind_state_last = "down";
   level.aud_wind_loop = spawn("script_origin", level.player.origin);
-  level.aud_wind_loop linkto(level.player);
+  level.aud_wind_loop linkTo(level.player);
   level.aud_flap_loop = spawn("script_origin", level.player.origin);
-  level.aud_flap_loop linkto(level.player);
+  level.aud_flap_loop linkTo(level.player);
   level.aud_slow_mo = spawn("script_origin", level.player.origin);
-  level.aud_slow_mo linkto(level.player);
+  level.aud_slow_mo linkTo(level.player);
   level.last_audio_bink_percentage = 1.0;
   level.last_audio_bink_beep_array_num = 0;
   level.audio_bink_percentage_beep_array[0] = 0.122;
@@ -349,7 +349,7 @@ zipline_mvmt_npc() {
   var_0 = spawn("script_origin", (-28957, -4495, 27315));
   var_1 = (-24549, 516, 26865);
   var_0 playSound("zipline_movement_npc", "sounddone");
-  var_0 moveto(var_1, 10.25);
+  var_0 moveTo(var_1, 10.25);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -478,8 +478,8 @@ aud_play_random_wind_gust(var_0, var_1, var_2) {
 }
 
 aud_start_pseudo_occlusion() {
-  var_0 = getent("aud_ai_trigger", "targetname");
-  var_1 = getent("aud_ai_trigger2", "targetname");
+  var_0 = getEnt("aud_ai_trigger", "targetname");
+  var_1 = getEnt("aud_ai_trigger2", "targetname");
   var_2 = 0;
   aud_filter_on();
   level.player seteqlerp(1, 1);
@@ -966,7 +966,7 @@ aud_hvt(var_0, var_1) {
     wait 4.5;
     var_2 = spawn("script_origin", (-22359, 3308, 21116));
     var_2 playSound("crnd_hvt_sliding_door");
-    var_2 moveto((-22348, 3251, 21116), 1);
+    var_2 moveTo((-22348, 3251, 21116), 1);
     wait 4;
     thread common_scripts\utility::play_sound_in_space("crnd_hvt_door_scuffle", (-22769, 3254, 21116));
     var_2 delete();
@@ -1010,7 +1010,7 @@ aud_hvt(var_0, var_1) {
       wait 1.3;
       var_3 = spawn("script_origin", (-22559, 3218, 21116));
       var_3 playSound("crnd_hvt_desk_debris_01");
-      var_3 moveto((-22382, 3195, 21082), 1.1);
+      var_3 moveTo((-22382, 3195, 21082), 1.1);
       wait 5;
       var_3 delete();
     } else if(var_0 == "chair") {
@@ -1178,8 +1178,8 @@ aud_collapse(var_0) {
     var_2 = spawn("script_origin", (-22164, 3617, 20457));
     var_1 playSound("cornered_saf1_panickyyellsasbuilding");
     var_2 playSound("cornered_saf2_panickyyellsasbuilding");
-    var_1 moveto((-22590, 1886, 20516), 9.8);
-    var_2 moveto((-22162, 1874, 20516), 9.8);
+    var_1 moveTo((-22590, 1886, 20516), 9.8);
+    var_2 moveTo((-22162, 1874, 20516), 9.8);
   } else if(var_0 == "short_scream") {
     wait 5;
     thread common_scripts\utility::play_sound_in_space("cornered_saf1_shortfallscream", (-22387, 3724, 20457));

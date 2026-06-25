@@ -106,7 +106,7 @@ dochargedamageoncontact(var_0, var_1) {
         var_3 = 1;
         break;
       } else {
-        var_8 = vectornormalize(var_5.origin - self.origin * (1, 1, 0));
+        var_8 = vectorNormalize(var_5.origin - self.origin * (1, 1, 0));
         var_9 = anglesToForward(self.angles);
         var_10 = vectordot(var_8, var_9);
         if(var_10 < var_2.charge_abort_dot) {

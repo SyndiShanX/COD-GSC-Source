@@ -40,7 +40,7 @@ function start(str_objective) {
   level hms_util::function_ee1d1df6("park", "Park", "park_floor_one_cctv_start");
   level hms_util::function_ee1d1df6("lazar", "Lazar", "lazar_floor_one_cctv_start");
   var_6704072a = doors::get_doors("cctv_entrance_door_01")[0];
-  cctv_entrance_door_clip = getent("cctv_entrance_door_clip", "targetname");
+  cctv_entrance_door_clip = getEnt("cctv_entrance_door_clip", "targetname");
   cctv_entrance_door_clip hide();
   cctv_entrance_door_clip notsolid();
   level thread namespace_a789f8ae::function_c9b603f3("floor_one_cctv");
@@ -83,8 +83,8 @@ function main(str_objective, b_starting) {
 function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x53>");
 
-  actors[#"door2"] = getent("cctv_exit_door_left", "targetname");
-  actors[#"door1"] = getent("cctv_exit_door_right", "targetname");
+  actors[#"door2"] = getEnt("cctv_exit_door_left", "targetname");
+  actors[#"door1"] = getEnt("cctv_exit_door_right", "targetname");
   scene::play_from_time("scene_rev_3040_fir_cctv_lazar", "exit", actors, 1, 1, 1, 0, 0);
 }
 
@@ -134,7 +134,7 @@ function function_b6624d37() {
   level.player endon(#"death");
   level endon(#"c4_planted");
   level endon(#"1st_floor_cctv");
-  var_3c3f5e50 = getent("c4_should_nag", "targetname");
+  var_3c3f5e50 = getEnt("c4_should_nag", "targetname");
 
   while(true) {
     if(isDefined(var_3c3f5e50)) {
@@ -206,7 +206,7 @@ function function_89cbd640(s_info) {
   self.e_user giveweapon(self.var_d6e3f4f1);
   self.e_user switchtoweaponimmediate(self.var_d6e3f4f1);
   self.e_user takeweapon(self.w_player_weapon);
-  level.player playrumbleonentity("key_press");
+  level.player playRumbleOnEntity("key_press");
   namespace_232ddc52::music("8.0_cctv");
   doors::close("cctv_entrance_door_01", "targetname");
   doors::function_f5dd4f8f("cctv_entrance_door_01", "targetname");
@@ -314,18 +314,18 @@ function function_2d03467(var_abfda0e9) {
   self val::set(#"cctv", "allow_prone", 0);
   self val::set(#"cctv", "hide", 2);
   level trigger::use("allies_cctv_stack_up_color_trig", "targetname");
-  cctv_entrance_door_clip = getent("cctv_entrance_door_clip", "targetname");
+  cctv_entrance_door_clip = getEnt("cctv_entrance_door_clip", "targetname");
   wait 2;
   self childthread namespace_61e6d095::block_kbm_pause_menu("exit_cctv");
 
   while(!var_abfda0e9.var_cec44276 || !self namespace_61e6d095::function_70217795()) {
     if(self function_ce2a13d7()) {
-      level.player playrumbleonentity("key_press");
+      level.player playRumbleOnEntity("key_press");
       var_abfda0e9 function_cc8891cc(1);
       self function_ff7f3030(var_abfda0e9);
       self hms_util::function_7051ec77(&function_ce2a13d7, 0);
     } else if(self function_521b9615()) {
-      level.player playrumbleonentity("key_press");
+      level.player playRumbleOnEntity("key_press");
       var_abfda0e9 function_cc8891cc(-1);
       self function_ff7f3030(var_abfda0e9);
       self hms_util::function_7051ec77(&function_521b9615, 0);
@@ -335,7 +335,7 @@ function function_2d03467(var_abfda0e9) {
   }
 
   self notify(#"exit_cctv");
-  level.player playrumbleonentity("key_press");
+  level.player playRumbleOnEntity("key_press");
   self cp_nic_revolucion_fx::function_383d3084();
   self util::hide_hint_text(0);
   level.player clientfield::set_to_player("cctv_postfx", 0);
@@ -441,14 +441,14 @@ function function_2d471b16() {
 }
 
 function function_1bcc08b8() {
-  var_a688c776 = getent("ready_to_plant_trig", "targetname");
-  var_bd11e136 = getent("second_floor_stairway_door", "targetname");
-  var_f103298 = getent("second_floor_stairway_door_clip", "targetname");
+  var_a688c776 = getEnt("ready_to_plant_trig", "targetname");
+  var_bd11e136 = getEnt("second_floor_stairway_door", "targetname");
+  var_f103298 = getEnt("second_floor_stairway_door_clip", "targetname");
   var_c6b0b733 = struct::get("door_breach_fx_pos", "targetname");
 
   if(isDefined(var_bd11e136)) {
-    var_f103298 linkto(var_bd11e136);
-    var_bd11e136 disconnectpaths();
+    var_f103298 linkTo(var_bd11e136);
+    var_bd11e136 disconnectPaths();
   }
 
   var_a688c776 waittill(#"trigger");
@@ -466,7 +466,7 @@ function function_1bcc08b8() {
   wait 1.5;
   level notify(#"hud_icon_c4_red");
   wait 1.5;
-  var_6becf11c = getent("bridge_gate_phys_impulse", "targetname");
+  var_6becf11c = getEnt("bridge_gate_phys_impulse", "targetname");
   level.lazar.allowpain = 0;
   level.park.allowpain = 0;
   radiusdamage(var_6becf11c.origin, 200, 50, 0);
@@ -539,15 +539,15 @@ function function_581e59c1() {
   var_35c66d32 waittill(#"trigger");
   objectives::scripted("obj_panic_room", undefined, #"hash_a04fb95d36cb44");
   objectives::function_572778b9("obj_panic_room");
-  var_7b2ec835 = getent("panic_room_door", "targetname");
+  var_7b2ec835 = getEnt("panic_room_door", "targetname");
   var_68de788c = struct::get("panic_room_door_moveto", "targetname");
-  var_7b2ec835 moveto(var_68de788c.origin, 5);
+  var_7b2ec835 moveTo(var_68de788c.origin, 5);
   namespace_307260b8::function_2b6287f4("panic_room_obj_complete");
   objectives::complete("obj_panic_room");
 }
 
 function function_40d6f2bd() {
-  t_spawn = getent("panic_room_encounter_trig", "targetname");
+  t_spawn = getEnt("panic_room_encounter_trig", "targetname");
   t_spawn waittill(#"trigger");
   var_7f176a87 = struct::get("panic_room_enemies_lookat", "targetname");
 

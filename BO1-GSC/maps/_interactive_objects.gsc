@@ -253,14 +253,14 @@ glass_logic() {
   cracked = undefined;
   glasshealth = 0;
   if(isDefined(self.target)) {
-    cracked = getent(self.target, "targetname");
+    cracked = getEnt(self.target, "targetname");
     assertex(isDefined(cracked), "Destructible glass at origin( " + self.origin + " ) has a target but the cracked version doesn't exist");
   }
   if(isDefined(self.script_linkTo)) {
     links = self get_links();
     assert(isDefined(links));
-    object = getent(links[0], "script_linkname");
-    self linkto(object);
+    object = getEnt(links[0], "script_linkname");
+    self linkTo(object);
   }
   assertex(isDefined(self.destructible_type), "Destructible glass at origin( " + self.origin + " ) doesnt have a destructible_type");
   switch (self.destructible_type) {
@@ -276,7 +276,7 @@ glass_logic() {
   }
   if(isDefined(cracked)) {
     glasshealth = 99;
-    cracked linkto(self);
+    cracked linkTo(self);
     cracked hide();
     crackedContents = cracked setContents(0);
   }
@@ -335,14 +335,14 @@ glass_play_break_fx(origin, info, direction_vec) {
   level notify("glass_shatter");
 }
 oil_spill_think() {
-  self.end = getstruct(self.target, "targetname");
-  self.start = getstruct(self.end.target, "targetname");
+  self.end = getStruct(self.target, "targetname");
+  self.start = getStruct(self.end.target, "targetname");
   self.barrel = getClosestEnt(self.start.origin, getEntArray("explodable_barrel", "targetname"));
   if(isDefined(self.barrel)) {
     self.barrel.oilspill = true;
     self thread oil_spill_burn_after();
   }
-  self.extra = getent(self.target, "targetname");
+  self.extra = getEnt(self.target, "targetname");
   self setCanDamage(true);
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, P, type);
@@ -391,7 +391,7 @@ oil_spill_burn_after() {
   self radiusdamage(self.start.origin, 4, 10, 10, self.damageOwner);
 }
 oil_spill_burn(P, dest) {
-  forward = vectornormalize(dest - P);
+  forward = vectorNormalize(dest - P);
   dist = distance(p, dest);
   range = 8;
   interval = vector_scale(forward, range);
@@ -1419,7 +1419,7 @@ tincan_think() {
   } else {
     direction_org = ent.origin;
   }
-  direction_vec = vectornormalize(self.origin - direction_org);
+  direction_vec = vectorNormalize(self.origin - direction_org);
   direction_vec = vector_scale(direction_vec, .5 + randomfloat(1));
   self notify("death");
   playFX(level.breakables_fx["tincan"], self.origin, direction_vec);
@@ -1440,7 +1440,7 @@ helmet_logic() {
   } else {
     direction_org = ent.origin;
   }
-  direction_vec = vectornormalize(self.origin - direction_org);
+  direction_vec = vectorNormalize(self.origin - direction_org);
   if(!isDefined(self.dontremove) && ent == level.player) {
     self thread call_overloaded_func("animscripts\death", "helmetLaunch", direction_vec);
     return;
@@ -1607,7 +1607,7 @@ breakable_think() {
     return;
   }
   if(isDefined(self.target)) {
-    trig = getent(self.target, "targetname");
+    trig = getEnt(self.target, "targetname");
     if((isDefined(trig)) && (trig.classname == "trigger_multiple")) {
       trig thread breakable_think_triggered(self);
     }
@@ -1741,7 +1741,7 @@ xenon_enable_auto_aim(wait_message) {
 }
 breakable_clip() {
   if(isDefined(self.target)) {
-    targ = getent(self.target, "targetname");
+    targ = getEnt(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
       self.remove = targ;
       return;
@@ -1954,7 +1954,7 @@ pieces_move(origin) {
     return;
   }
   org = spawn("script_origin", self.origin);
-  self linkto(org);
+  self linkTo(org);
   end = self.origin + (randomfloat(10) - 5, randomfloat(10) - 5, randomfloat(10) + 5);
   vec = undefined;
   if(isDefined(self.type) && self.type == "bottle_top") {
@@ -1973,7 +1973,7 @@ pieces_move(origin) {
     }
     org rotatevelocity((250 * x, 250 * y, randomfloat(100) * z), 2, 0, .5);
   } else if(isDefined(self.type) && self.type == "plate") {
-    vec = vectornormalize(end - origin);
+    vec = vectorNormalize(end - origin);
     vec = vector_scale(vec, 125 + randomfloat(25));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
@@ -1981,7 +1981,7 @@ pieces_move(origin) {
       org rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
-    vec = vectornormalize(end - origin);
+    vec = vectorNormalize(end - origin);
     vec = vector_scale(vec, 60 + randomfloat(50));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);

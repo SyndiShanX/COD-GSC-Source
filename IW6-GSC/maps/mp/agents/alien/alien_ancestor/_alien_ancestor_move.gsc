@@ -388,7 +388,7 @@ stucklerp() {
   self scragentsetorientmode("face angle abs", vectortoangles(var_5));
   self scragentdoanimlerp(self.origin, var_6, var_0);
   wait(var_0);
-  self setorigin(self.origin);
+  self setOrigin(self.origin);
 }
 
 dowalkstart() {
@@ -397,7 +397,7 @@ dowalkstart() {
   var_2 = self getlookaheaddir();
 
   if(isDefined(self.pathnode)) {
-    var_2 = vectornormalize(self.pathnode.origin - self.origin);
+    var_2 = vectorNormalize(self.pathnode.origin - self.origin);
   }
 
   maps\mp\agents\alien\_alien_anim_utils::turntowardsvector(var_2);

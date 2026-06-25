@@ -267,7 +267,7 @@ func_703E(param_00, param_01, param_02) {
   var_03 = self.var_0116;
   var_04 = (var_03[0] + param_01 * cos(param_00), var_03[1] + param_01 * sin(param_00), var_03[2]);
   var_05 = abs(param_01 / param_02);
-  self moveto(var_04, var_05);
+  self moveTo(var_04, var_05);
   return var_05;
 }
 
@@ -681,7 +681,7 @@ func_9083(param_00, param_01, param_02, param_03) {
   var_04 = spawnturret("misc_turret", self gettagorigin(param_02), param_00, 0);
   var_04 setModel(param_01);
   var_04 setdefaultdroppitchyaw(0, 0);
-  var_04 linkto(self, param_02, (0, 4, 4), (0, 0, 0));
+  var_04 linkTo(self, param_02, (0, 4, 4), (0, 0, 0));
   var_04.var_0117 = param_03;
   var_04.var_01A7 = param_03.var_01A7;
   var_04.var_00BC = 99999;
@@ -698,7 +698,7 @@ func_9083(param_00, param_01, param_02, param_03) {
   var_04.var_7C29 = 0;
   var_04.var_3981 = spawn("script_model", var_04.var_0116);
   var_04.var_3981 setModel("usa_bomber_b17_ballturret_vista");
-  var_04.var_3981 linkto(var_04, "TAG_ROLL", (-9, 0, 0), (0, 90, 0));
+  var_04.var_3981 linkTo(var_04, "TAG_ROLL", (-9, 0, 0), (0, 90, 0));
   var_04.var_3981 hidefromclient(param_03);
   return var_04;
 }
@@ -714,7 +714,7 @@ func_703A(param_00, param_01) {
 func_9082() {
   var_00 = spawn("script_model", (0, 0, 0));
   var_00 setModel("tag_origin");
-  var_00 linkto(self, "tag_bombardier", (0, 0, 0), (80, 180, 0));
+  var_00 linkTo(self, "tag_bombardier", (0, 0, 0), (80, 180, 0));
   var_00.var_7C29 = 0;
   return var_00;
 }
@@ -768,7 +768,7 @@ func_3C19(param_00, param_01) {
   param_01 notifyonplayercommand("FirePlaneGunnerBombsButtonUp", "-attack");
   param_00.var_18C8 = spawn("script_model", (0, 0, 0));
   param_00.var_18C8 setModel("tag_origin");
-  param_00.var_18C8 linkto(param_00, "tag_bombardier", (0, 0, 0), (0, 0, 0));
+  param_00.var_18C8 linkTo(param_00, "tag_bombardier", (0, 0, 0), (0, 0, 0));
   for(;;) {
     param_01 waittill("FirePlaneGunnerBombsButtonDown");
     if(param_00.var_9FA4 == "bomber") {

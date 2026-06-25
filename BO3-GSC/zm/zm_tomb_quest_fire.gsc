@@ -33,7 +33,7 @@ function main() {
   level thread zm_tomb_vo::watch_one_shot_line("puzzle", "try_puzzle", "vo_try_puzzle_fire2");
   level thread fire_puzzle_1_run();
   level flag::wait_till("fire_puzzle_1_complete");
-  playsoundatposition("zmb_squest_step1_finished", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_step1_finished", (0, 0, 0));
   level thread zm_tomb_utility::rumble_players_in_chamber(5, 3);
   level thread fire_puzzle_1_cleanup();
   level thread fire_puzzle_2_run();
@@ -213,7 +213,7 @@ function fire_sacrifice_death_clone(e_sacrifice_volume) {
   }
   e_sacrifice_volume flag::wait_till("flame_on");
   w_staff_fire = level.a_elemental_staffs["staff_fire"].w_weapon;
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(e_player in a_players) {
     if(e_player hasweapon(w_staff_fire)) {
       level notify("vo_puzzle_good", e_player);
@@ -303,7 +303,7 @@ function fire_puzzle_2_is_complete() {
     level.n_wrong_torches = 0;
   }
   level.n_torches_lit++;
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(e_player in a_players) {
     if(e_player hasweapon(level.a_elemental_staffs["staff_fire"].w_weapon)) {
       if((level.n_torches_lit % 12) == 0 && !level flag::get("fire_puzzle_2_complete")) {
@@ -374,7 +374,7 @@ function fire_puzzle_torch_run() {
     if(dist_sq > max_hit_distance_sq) {
       continue;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(e_player in a_players) {
       if(e_player hasweapon(w_staff_fire)) {
         level notify("vo_try_puzzle_fire2", e_player);

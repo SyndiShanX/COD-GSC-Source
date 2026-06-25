@@ -366,7 +366,7 @@ _id_113A(var_0, var_1, var_2) {
         if(var_7 == var_10) {
           continue;
         }
-        var_11 = vectornormalize(var_10.origin - var_7.origin);
+        var_11 = vectorNormalize(var_10.origin - var_7.origin);
         var_12 = vectordot(var_8, var_11);
 
         if(var_12 > 0.86) {

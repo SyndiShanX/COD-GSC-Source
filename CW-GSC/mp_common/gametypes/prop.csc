@@ -117,7 +117,7 @@ function setuppropplayernames(localclientnum) {
   while(true) {
     localplayer = function_5c10bd79(localclientnum);
     spectating = function_65b9eb0f(localclientnum);
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
 
     foreach(player in players) {
       if((player != localplayer || spectating) && player ishidden() && isDefined(player.team) && player.team == localplayer.team) {

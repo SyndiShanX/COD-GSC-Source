@@ -601,7 +601,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     if(charindexarray[0] == 2) {
@@ -895,7 +895,7 @@ function powerup_infinite_time() {}
 
 function function_726351cf() {
   self setCanDamage(1);
-  e_clip = getent(self.target, "targetname");
+  e_clip = getEnt(self.target, "targetname");
   self clientfield::set("set_heavy_web_fade_material", 1);
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, weapon, idflags);
@@ -992,7 +992,7 @@ function function_6ca6d73d() {
   while(true) {
     if(self util::attack_button_held() && self keeper_skull::function_97d08b97()) {
       self thread function_a9938318();
-      self playrumbleonentity("zm_island_skull_reveal");
+      self playRumbleOnEntity("zm_island_skull_reveal");
       wait(2);
     }
     wait(0.05);
@@ -1079,7 +1079,7 @@ function function_6c2447b1(var_df0dbc71) {
     }
   }
   self.var_32ad034f = 0;
-  self setorigin(v_moveto);
+  self setOrigin(v_moveto);
 }
 
 function function_8a2a48bb() {
@@ -1120,5 +1120,5 @@ function function_41c3dc27(var_771ec2b) {
     }
   }
   self.var_66064486 = 0;
-  self setorigin(v_moveto);
+  self setOrigin(v_moveto);
 }

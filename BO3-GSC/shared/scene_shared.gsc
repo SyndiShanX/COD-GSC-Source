@@ -103,7 +103,7 @@ class csceneobject: cscriptbundleobjectbase {
     if(!isDefined(entity)) {
       return;
     }
-    if(!entity isplayinganimscripted()) {
+    if(!entity isplayinganimScripted()) {
       return;
     }
     is_looping = isanimlooping(anim_name);
@@ -122,7 +122,7 @@ class csceneobject: cscriptbundleobjectbase {
     if(!isDefined(entity)) {
       return;
     }
-    if(!entity isplayinganimscripted()) {
+    if(!entity isplayinganimScripted()) {
       return;
     }
     is_looping = isanimlooping(anim_name);
@@ -313,7 +313,7 @@ class csceneobject: cscriptbundleobjectbase {
     n_time_frac = 1 - (n_time_left / player_animation_length);
     if(isDefined(_e) && player != _e) {
       player dontinterpolate();
-      player setorigin(_e.origin);
+      player setOrigin(_e.origin);
       player setplayerangles(_e getplayerangles());
     }
     n_lerp = get_lerp_time();
@@ -360,7 +360,7 @@ class csceneobject: cscriptbundleobjectbase {
       } else {
         player flagsys::clear(player_animation_notify + "_skip_init_clear");
       }
-      if(!player isplayinganimscripted()) {
+      if(!player isplayinganimScripted()) {
         current_playing_anim[player_num] = undefined;
       }
       if(getdvarint("") > 0) {
@@ -535,7 +535,7 @@ class csceneobject: cscriptbundleobjectbase {
           thread skip_scene(1);
         }
         _e animation::play(animation, align, tag, n_rate, n_blend, n_blend_out, n_lerp, n_time, _s.showweaponinfirstperson);
-        if(!isDefined(_e) || !_e isplayinganimscripted()) {
+        if(!isDefined(_e) || !_e isplayinganimScripted()) {
           self.current_playing_anim = undefined;
         }
         if(getdvarint("") > 0) {
@@ -614,7 +614,7 @@ class csceneobject: cscriptbundleobjectbase {
   function do_death_anims() {
     ent = _e;
     if(isai(ent) && !isDefined(_str_death_anim) && !isDefined(_str_death_anim_loop)) {
-      ent stopanimscripted();
+      ent stopanimScripted();
       if(isactor(ent)) {
         ent startragdoll();
       }
@@ -895,7 +895,7 @@ class csceneobject: cscriptbundleobjectbase {
       }
       set_objective();
       if(isDefined(_s.dynamicpaths) && _s.dynamicpaths) {
-        _e disconnectpaths(2, 0);
+        _e disconnectPaths(2, 0);
       }
     } else if(!is_shared_player()) {
       player = (isPlayer(_player) ? _player : _e);
@@ -1148,11 +1148,11 @@ class csceneobject: cscriptbundleobjectbase {
     if(isalive(_e)) {
       if(is_shared_player()) {
         foreach(player in level.players) {
-          player stopanimscripted(0.2);
+          player stopanimScripted(0.2);
         }
       } else if(!(isDefined(_s.diewhenfinished) && _s.diewhenfinished) || !b_finished) {
         if(!b_dont_clear_anim || isPlayer(_e)) {
-          _e stopanimscripted(0.2);
+          _e stopanimScripted(0.2);
         }
       }
     }
@@ -1193,7 +1193,7 @@ class csceneobject: cscriptbundleobjectbase {
       flagsys::set("main_done");
       if(isDefined(_e) && (isDefined(_s.dynamicpaths) && _s.dynamicpaths)) {
         if(distance2dsquared(_e.origin, _e.scene_orig_origin) > 4) {
-          _e disconnectpaths(2, 0);
+          _e disconnectPaths(2, 0);
         }
       }
       if(is_alive()) {
@@ -1940,23 +1940,23 @@ class cscene: cscriptbundlebase {
     if(isstring(_s.cameraswitcher)) {
       player endon("new_camera_switcher");
       player dontinterpolate();
-      endcamanimscripted(player);
+      endcamanimScripted(player);
       player thread scene::scene_enable_player_stuff();
       if(!(isDefined(_s.linkxcamtooneplayer) && _s.linkxcamtooneplayer)) {
         callback::remove_on_loadout(&_play_camera_anim_on_player_callback, self);
       }
     }
     if(isstring(_s.extracamswitcher1)) {
-      endextracamanimscripted(player, 0);
+      endextracamanimScripted(player, 0);
     }
     if(isstring(_s.extracamswitcher2)) {
-      endextracamanimscripted(player, 1);
+      endextracamanimScripted(player, 1);
     }
     if(isstring(_s.extracamswitcher3)) {
-      endextracamanimscripted(player, 2);
+      endextracamanimScripted(player, 2);
     }
     if(isstring(_s.extracamswitcher4)) {
-      endextracamanimscripted(player, 3);
+      endextracamanimScripted(player, 3);
     }
   }
 
@@ -1969,7 +1969,7 @@ class cscene: cscriptbundlebase {
     if(isDefined(a_xcam_players)) {
       xcam_players = a_xcam_players;
     } else {
-      xcam_players = getplayers();
+      xcam_players = getPlayers();
     }
     foreach(player in xcam_players) {
       if(isDefined(player)) {
@@ -1980,7 +1980,7 @@ class cscene: cscriptbundlebase {
 
   function _play_extracam_on_player(player, n_index, str_camera_anim, v_origin, v_angles) {
     played_camera_anims = 1;
-    extracamanimscripted(player, n_index, str_camera_anim, gettime(), v_origin, v_angles);
+    extracamanimScripted(player, n_index, str_camera_anim, gettime(), v_origin, v_angles);
   }
 
   function loop_camera_anim_to_set_up_for_capture() {
@@ -1998,9 +1998,9 @@ class cscene: cscriptbundlebase {
     played_camera_anims = 1;
     n_start_time = camera_start_time;
     if(!isDefined(_s.cameraswitchergraphiccontents) || ismature(player)) {
-      camanimscripted(player, _s.cameraswitcher, n_start_time, v_origin, v_angles);
+      camanimScripted(player, _s.cameraswitcher, n_start_time, v_origin, v_angles);
     } else {
-      camanimscripted(player, _s.cameraswitchergraphiccontents, n_start_time, v_origin, v_angles);
+      camanimScripted(player, _s.cameraswitchergraphiccontents, n_start_time, v_origin, v_angles);
     }
   }
 
@@ -2112,8 +2112,8 @@ class cscene: cscriptbundlebase {
       v_origin = get_align_ent().origin;
       if(!isDefined(capture_player.e_capture_link)) {
         capture_player.e_capture_link = util::spawn_model("tag_origin", v_origin);
-        capture_player setorigin(v_origin);
-        capture_player linkto(level.players[0].e_capture_link);
+        capture_player setOrigin(v_origin);
+        capture_player linkTo(level.players[0].e_capture_link);
       } else {
         capture_player.e_capture_link.origin = v_origin;
       }
@@ -2653,17 +2653,17 @@ function get_existing_ent(str_name, b_spawner_only = 0, b_nodes_and_structs = 0)
       }
     }
   } else {
-    e = getent(str_name, "animname", 0);
+    e = getEnt(str_name, "animname", 0);
     if(!is_valid_ent(e)) {
-      e = getent(str_name, "script_animname");
+      e = getEnt(str_name, "script_animname");
       if(!is_valid_ent(e)) {
-        e = getent(str_name + "_ai", "targetname", 1);
+        e = getEnt(str_name + "_ai", "targetname", 1);
         if(!is_valid_ent(e)) {
-          e = getent(str_name + "_vh", "targetname", 1);
+          e = getEnt(str_name + "_vh", "targetname", 1);
           if(!is_valid_ent(e)) {
-            e = getent(str_name, "targetname", 1);
+            e = getEnt(str_name, "targetname", 1);
             if(!is_valid_ent(e)) {
-              e = getent(str_name, "targetname");
+              e = getEnt(str_name, "targetname");
               if(!is_valid_ent(e) && b_nodes_and_structs) {
                 e = getnode(str_name, "targetname");
                 if(!is_valid_ent(e)) {
@@ -2700,7 +2700,7 @@ function synced_delete() {
   }
   if(!isPlayer(self)) {
     sethideonclientwhenscriptedanimcompleted(self);
-    self stopanimscripted();
+    self stopanimScripted();
   } else {
     wait(0.05);
     self ghost();
@@ -2857,8 +2857,8 @@ function __main__() {
 
 function private _scene_link() {
   self.e_scene_link = util::spawn_model("tag_origin", self.origin, self.angles);
-  e_linkto = getent(self.linkto, "linkname");
-  self.e_scene_link linkto(e_linkto);
+  e_linkto = getEnt(self.linkto, "linkname");
+  self.e_scene_link linkTo(e_linkto);
   util::waittill_any_ents_two(self, "death", e_linkto, "death");
   self.e_scene_link delete();
 }

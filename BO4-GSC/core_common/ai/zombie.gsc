@@ -451,7 +451,7 @@ zombieupdatezigzaggoal() {
 
         if(segmentlength + currentseglength > deviationdistance) {
           remaininglength = deviationdistance - segmentlength;
-          seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
+          seedposition = path[index - 1] + vectorNormalize(path[index] - path[index - 1]) * remaininglength;
 
           recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x64>", self);
 
@@ -1098,7 +1098,7 @@ zombieidgundeathupdate(entity, mocompanim, mocompanimblendouttime, mocompanimfla
       }
     }
 
-    flyingdir = vectornormalize(flyingdir);
+    flyingdir = vectorNormalize(flyingdir);
     entity forceteleport(entity.origin + flyingdir * entity.hole_pull_speed);
   }
 }
@@ -1301,7 +1301,7 @@ function_22762653() {
   self endon(#"death");
   var_159fa617 = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player laststand::player_is_in_laststand()) {
       if(distancesquared(self.origin, player.origin) < 14400) {
         var_159fa617 = 1;

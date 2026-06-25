@@ -66,7 +66,7 @@ _id_7D50(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0.1;
   var_0._id_0203 = magicgrenademanual("s4_mr_ptango41_mp", var_0.origin, (0, 0, 0), var_6);
   var_0._id_0203.angles = var_0.angles;
-  var_0._id_0203 linkto(var_0, "tag_origin");
+  var_0._id_0203 linkTo(var_0, "tag_origin");
   thread projectileimpactexplode(var_0, var_6, var_3);
 }
 
@@ -450,9 +450,9 @@ _id_9515(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_2)) {
-    var_0 linkto(var_1, var_2);
+    var_0 linkTo(var_1, var_2);
   } else {
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
   }
 
   if(cansticktoent(var_1)) {

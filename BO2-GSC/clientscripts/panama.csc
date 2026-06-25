@@ -53,7 +53,7 @@ put_on_hat(localclientnum, set, newent) {
     self.m_hat_linker = spawn(self getlocalclientnumber(), self gettagorigin("J_HEAD"), "script_model");
     self.m_hat_linker setModel("tag_origin");
     self.m_hat_linker.angles = self.angles;
-    self.m_hat linkto(self.m_hat_linker, "tag_origin", (0, 0, 0), vectorscale((0, 1, 0), 90.0));
+    self.m_hat linkTo(self.m_hat_linker, "tag_origin", (0, 0, 0), vectorscale((0, 1, 0), 90.0));
     self.m_hat_linker linktocamera(4, (12, 0, 1.8));
   } else if(isDefined(self.m_hat)) {
     self.m_hat unlinkfromcamera();

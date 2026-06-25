@@ -153,7 +153,7 @@ function water_trail_monitor(localclientnum, oldval, newval, bnewent, binitialsn
     for(i = 0; i < players.size; i++) {
       self.fx_ents[i] = spawn(i, (0, 0, 0), "script_model");
       self.fx_ents[i] setModel("tag_origin");
-      self.fx_ents[i] linkto(self, "tag_origin");
+      self.fx_ents[i] linkTo(self, "tag_origin");
       playFXOnTag(i, level._effect["fx_crystal_water_trail"], self.fx_ents[i], "tag_origin");
     }
   } else if(isDefined(self.fx_ents)) {
@@ -204,7 +204,7 @@ function crystal_trail_runner(localclientnum, fx_name, dest) {
   println((((("" + fx_name) + "") + self.origin) + "") + dest);
   playFXOnTag(localclientnum, level._effect[fx_name], self, "tag_origin");
   self playLoopSound("evt_sq_bag_crystal_bounce_loop", 0.05);
-  self moveto(dest, 0.5);
+  self moveTo(dest, 0.5);
   self waittill("movedone");
   self delete();
 }
@@ -316,7 +316,7 @@ function function_7b0ba395(localclientnum) {
 function start_generator_movement() {
   players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
-    ent = getent(i, "power_generator", "targetname");
+    ent = getEnt(i, "power_generator", "targetname");
     ent thread generator_move();
   }
 }
@@ -345,7 +345,7 @@ function player_legs_hide(localclientnum, oldval, newval, bnewent, binitialsnap,
 function water_wheel_right(clientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
-    wheel = getent(i, "water_wheel_right", "targetname");
+    wheel = getEnt(i, "water_wheel_right", "targetname");
     wheel thread rotatewheel(120, 2.2);
   }
 }
@@ -353,7 +353,7 @@ function water_wheel_right(clientnum, oldval, newval, bnewent, binitialsnap, fie
 function water_wheel_left(clientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   players = getlocalplayers();
   for(i = 0; i < players.size; i++) {
-    wheel = getent(i, "water_wheel_left", "targetname");
+    wheel = getEnt(i, "water_wheel_left", "targetname");
     wheel thread rotatewheel(120, 1.8);
   }
 }
@@ -702,13 +702,13 @@ function spear_move(localclientnum, active, playsound) {
     playFX(localclientnum, level._effect["punji_dust"], endpos);
     playSound(0, "evt_spiketrap", self.origin);
     movetime = randomfloatrange(0.08, 0.22);
-    self moveto(endpos, movetime);
+    self moveTo(endpos, movetime);
   } else {
     if(playsound) {
       playSound(0, "evt_spiketrap_retract", self.origin);
     }
     movetime = randomfloatrange(0.1, 0.2);
-    self moveto(self.start, movetime);
+    self moveTo(self.start, movetime);
   }
 }
 
@@ -748,7 +748,7 @@ function board_bob() {
 function board_rotate() {
   while(true) {
     yaw = randomfloatrange(-360, 360);
-    self rotateyaw(yaw, randomfloatrange(60, 90));
+    self rotateYaw(yaw, randomfloatrange(60, 90));
     self waittill("rotatedone");
   }
 }
@@ -805,10 +805,10 @@ function spin_forever() {
   self endon("stop_spinning");
   spintime = self spinner_get_spin_time();
   self start_spinner_sound();
-  self rotateyaw(360, spintime, 0.25);
+  self rotateYaw(360, spintime, 0.25);
   self waittill("rotatedone");
   while(true) {
-    self rotateyaw(360, spintime);
+    self rotateYaw(360, spintime);
     self waittill("rotatedone");
   }
 }
@@ -848,7 +848,7 @@ function spin_to_start() {
   spintime = self spinner_get_spin_time();
   spintime = spintime * (deltayaw / 360);
   if(spintime > 0) {
-    self rotateyaw(deltayaw, spintime, 0);
+    self rotateYaw(deltayaw, spintime, 0);
     self waittill("rotatedone");
   }
   self stop_spinner_sound();
@@ -913,7 +913,7 @@ function ragdoll_impact_watch(localclientnum) {
     vel = self.origin - prevorigin;
     speed = length(vel);
     if(speed < (prevspeed * 0.5) && prevspeed > (gibspeed * waittime)) {
-      dir = vectornormalize(prevvel);
+      dir = vectorNormalize(prevvel);
       self gib_ragdoll(localclientnum, dir);
       break;
     }
@@ -950,7 +950,7 @@ function maze_floor_controller_rumble(localclientnum, oldval, newval, bnewent, b
 function maze_rumble_while_floor_shakes(int_client_num) {
   self endon("stop_maze_rumble");
   while(isDefined(self)) {
-    self playrumbleonentity(int_client_num, "slide_rumble");
+    self playRumbleOnEntity(int_client_num, "slide_rumble");
     wait(0.05);
   }
 }

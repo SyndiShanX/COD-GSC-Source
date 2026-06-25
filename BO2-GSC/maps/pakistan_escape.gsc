@@ -218,7 +218,7 @@ escape_battle_checkpoints() {
 escape_battle_spawn_func() {
   a_h_drop_bad = getEntArray("h_drop_bad", "targetname");
   array_thread(a_h_drop_bad, ::add_spawn_function, ::run_over);
-  sp_heli_crash_shooter = getent("heli_crash_shooter", "targetname");
+  sp_heli_crash_shooter = getEnt("heli_crash_shooter", "targetname");
   sp_heli_crash_shooter add_spawn_function(::heli_crash_ai_spawn_func);
   add_spawn_function_veh("st_surprise_soct", ::enemy_soct_setup, undefined, undefined, undefined, undefined);
   add_spawn_function_veh("st_soct_0", ::temp_magic_bullet_shield);
@@ -252,7 +252,7 @@ hwy_drone_0_logic() {
 }
 
 escape_intro_left_turn_fway_trigger() {
-  e_trigger = getent("escape_intro_left_turn_fway_trigger", "targetname");
+  e_trigger = getEnt("escape_intro_left_turn_fway_trigger", "targetname");
   e_trigger waittill("trigger");
   e_chopper = maps\_vehicle::spawn_vehicle_from_targetname("hwy_heli_drop");
   e_chopper endon("death");
@@ -262,7 +262,7 @@ escape_intro_left_turn_fway_trigger() {
 }
 
 slanted_building_approach_trigger() {
-  e_trigger = getent("slanted_building_approach_trigger", "targetname");
+  e_trigger = getEnt("slanted_building_approach_trigger", "targetname");
   e_trigger waittill("trigger");
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
   vh_drone thread drone_follow_linked_structs("slanted_building_approach_drones1", 35, 1, 1, undefined, 1);
@@ -344,7 +344,7 @@ hwy_soct_3_logic() {
 
 heli_crash() {
   trigger_wait("heli_approach");
-  vh_soct_crashes_into_heli = getent("heli_crash_soct", "targetname");
+  vh_soct_crashes_into_heli = getEnt("heli_crash_soct", "targetname");
   level.vh_salazar_soct add_turret_priority_target(vh_soct_crashes_into_heli, 1);
   flag_wait("heli_crash_ready");
   level.vh_salazar_soct clear_turret_target_ent_array(1);
@@ -357,7 +357,7 @@ heli_crash_hind_logic() {
   self endon("death");
   self waittill("reached_end_node");
   self clearvehgoalpos();
-  s_goal = getstruct("soct_slant_bldg_jump", "targetname");
+  s_goal = getStruct("soct_slant_bldg_jump", "targetname");
   v_anim_start_pos = getstartorigin(s_goal.origin, (0, 0, 0), %v_pakistan_7_4_helo_crash_hind);
   self.origin = v_anim_start_pos - vectorscale((0, 0, 1), 512.0);
   self setphysangles(vectorscale((0, 1, 0), 180.0));
@@ -404,7 +404,7 @@ big_jump_check_1() {
 
 big_jump1_water_sheeting_trigger(str_level_endon) {
   level endon(str_level_endon);
-  e_trigger = getent("water_jump1_trigger", "targetname");
+  e_trigger = getEnt("water_jump1_trigger", "targetname");
   e_trigger waittill("trigger");
   level thread pak3_water_sheeting(0.9, 0, 6, 1);
 }
@@ -413,9 +413,9 @@ big_jump2_water_sheeting_trigger(str_level_endon) {
   level endon(str_level_endon);
   str_abort_big_jump2_notify = "abort_big_jump_notify";
   level endon(str_abort_big_jump2_notify);
-  e_disable_trigger = getent("water_jump2_disable_it_trigger", "targetname");
+  e_disable_trigger = getEnt("water_jump2_disable_it_trigger", "targetname");
   e_disable_trigger thread check_for_disable_big_jump2_trigger(str_level_endon, str_abort_big_jump2_notify);
-  e_trigger = getent("water_jump2_trigger", "targetname");
+  e_trigger = getEnt("water_jump2_trigger", "targetname");
   e_trigger waittill("trigger");
   level thread pak3_water_sheeting(0.8, 0, 6, 1);
 }
@@ -430,7 +430,7 @@ check_for_disable_big_jump2_trigger(str_level_endon, str_abort_big_jump2_notify)
 
 big_jump3_water_sheeting_trigger(str_level_endon) {
   level endon(str_level_endon);
-  e_trigger = getent("water_jump3_trigger", "targetname");
+  e_trigger = getEnt("water_jump3_trigger", "targetname");
   e_trigger waittill("trigger");
   level thread pak3_water_sheeting(0.8, 0, 6, 1);
 }
@@ -483,8 +483,8 @@ pakistan_escape_fx_triggers() {
 
 fx_exp_glass_market_exit_trigger() {
   level endon("escape_bosses_started");
-  e_trigger = getent("fx_exp_glass_market_exit_trigger", "targetname");
-  s_struct = getstruct(e_trigger.target, "targetname");
+  e_trigger = getEnt("fx_exp_glass_market_exit_trigger", "targetname");
+  s_struct = getStruct(e_trigger.target, "targetname");
   e_trigger waittill("trigger");
   exploder_id = undefined;
 
@@ -497,17 +497,17 @@ fx_exp_glass_market_exit_trigger() {
 
 fxanim_tree_trigger(str_trigger_name) {
   level endon("escape_bosses_started");
-  e_trigger = getent(str_trigger_name, "targetname");
+  e_trigger = getEnt(str_trigger_name, "targetname");
   e_trigger waittill("trigger");
   level notify(e_trigger.script_string);
   power = 0.5;
   time = 1;
   earthquake(power, time, level.vh_player_soct.origin, 800);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level.vh_player_soct dodamage(360, level.vh_player_soct.origin);
 
   for(i = 0; i < 5; i++) {
-    level.vh_player_soct launchvehicle(vectornormalize(level.vh_player_soct.velocity) * -30.0);
+    level.vh_player_soct launchvehicle(vectorNormalize(level.vh_player_soct.velocity) * -30.0);
     wait 0.01;
   }
 }
@@ -517,13 +517,13 @@ street_sign_damage_trigger(str_damage_trigger, str_level_endon, a_model_names, s
     level endon(str_level_endon);
   }
 
-  e_damage_trigger = getent(str_damage_trigger, "targetname");
+  e_damage_trigger = getEnt(str_damage_trigger, "targetname");
 
   while(true) {
     e_damage_trigger waittill("damage", amount, attacker, direction_vec, damage_ori, type);
 
     for(i = 0; i < a_model_names.size; i++) {
-      e_model = getent(a_model_names[i], "targetname");
+      e_model = getEnt(a_model_names[i], "targetname");
       e_model delete();
     }
 
@@ -535,10 +535,10 @@ street_sign_damage_trigger(str_damage_trigger, str_level_endon, a_model_names, s
 
 pak_scaffold_collapse_02_volume(str_soct_targetname) {
   level endon("escape_bosses_started");
-  info_volume = getent("pak_scaffold_collapse_02_volume", "targetname");
+  info_volume = getEnt("pak_scaffold_collapse_02_volume", "targetname");
 
   while(true) {
-    e_ent = getent(str_soct_targetname, "targetname");
+    e_ent = getEnt(str_soct_targetname, "targetname");
 
     if(isDefined(e_ent)) {
       if(e_ent istouching(info_volume)) {
@@ -558,7 +558,7 @@ pak_scaffold_collapse_02_volume(str_soct_targetname) {
 }
 
 suicide_tunnel_running_guys_trigger() {
-  e_trigger = getent("suicide_tunnel_trigger", "targetname");
+  e_trigger = getEnt("suicide_tunnel_trigger", "targetname");
   e_trigger waittill("trigger");
   a_spawners = getEntArray("end_suicide_tunnel_spawner", "targetname");
 
@@ -594,7 +594,7 @@ kill_fxanim_catwalk1(str_level_notify, str_endon_notify) {
   }
 
   wait 0.5;
-  e_ent = getent("catwalk1_floor_collision_model", "targetname");
+  e_ent = getEnt("catwalk1_floor_collision_model", "targetname");
   e_ent delete();
 }
 
@@ -616,7 +616,7 @@ dukes_of_hazzard_trigger() {
     screen_message_create(&"PAKISTAN_SHARED_CHOOSE_VEHICLE_TO_FINISH_LEVEL");
   }
 
-  e_can_switch_trigger = getent("vehicle_can_switch", "targetname");
+  e_can_switch_trigger = getEnt("vehicle_can_switch", "targetname");
   e_can_switch_trigger activate_trigger();
   wait 0.1;
   ts_start = 0.18;
@@ -723,7 +723,7 @@ drone_choice_helper_message(delay) {
 
 slanted_building_soct_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("slanted_building_soct_trigger", "targetname");
+  e_trigger = getEnt("slanted_building_soct_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("slanted_building_soct");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -735,7 +735,7 @@ slanted_building_soct_trigger(str_endon_notify) {
 
 soct_market_inside_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("soct_market_inside_trigger", "targetname");
+  e_trigger = getEnt("soct_market_inside_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("soct_market_inside");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -747,7 +747,7 @@ soct_market_inside_trigger(str_endon_notify) {
 
 soct_market_outside_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("soct_market_outside_trigger", "targetname");
+  e_trigger = getEnt("soct_market_outside_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("soct_market_outside");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -759,7 +759,7 @@ soct_market_outside_trigger(str_endon_notify) {
 
 soct_post_broken_freeway_trigger(str_endon_notify) {
   level endon(str_endon_notify);
-  e_trigger = getent("soct_post_broken_freeway_trigger", "targetname");
+  e_trigger = getEnt("soct_post_broken_freeway_trigger", "targetname");
   e_trigger waittill("trigger");
   e_soct = spawn_vehicle_from_targetname("soct_post_broken_freeway");
   e_soct.overridevehicledamage = ::soct_player_attacker_damage_callback;
@@ -770,7 +770,7 @@ soct_post_broken_freeway_trigger(str_endon_notify) {
 }
 
 drone_fire_at_market_walkway_trigger() {
-  e_trigger = getent("drone_fire_at_market_walkway_trigger", "targetname");
+  e_trigger = getEnt("drone_fire_at_market_walkway_trigger", "targetname");
   e_trigger waittill("trigger");
 
   if(maps\pakistan_s3_util::is_player_in_drone()) {
@@ -791,7 +791,7 @@ drone_fire_at_market_walkway_trigger() {
   }
 
   wait 0.5;
-  catwalk1_trigger = getent("catwalk1_trigger", "targetname");
+  catwalk1_trigger = getEnt("catwalk1_trigger", "targetname");
 
   if(isDefined(catwalk1_trigger)) {
     catwalk1_trigger activate_trigger();
@@ -800,7 +800,7 @@ drone_fire_at_market_walkway_trigger() {
 }
 
 start_market_inside_guys_trigger() {
-  e_trigger = getent("start_market_inside_guys_trigger", "targetname");
+  e_trigger = getEnt("start_market_inside_guys_trigger", "targetname");
   e_trigger waittill("trigger");
   a_spawners = getEntArray("start_market_inside_guys_spawner", "targetname");
 
@@ -811,7 +811,7 @@ start_market_inside_guys_trigger() {
 }
 
 hotel_crash_chopper_drone1() {
-  e_trigger = getent("hotel_crash_chopper_drone_trigger", "targetname");
+  e_trigger = getEnt("hotel_crash_chopper_drone_trigger", "targetname");
   e_trigger waittill("trigger");
   wait 12;
   vh_drone = spawn_vehicle_from_targetname("drone_respawner");
@@ -820,7 +820,7 @@ hotel_crash_chopper_drone1() {
 }
 
 market_fake_missile_breaks_window() {
-  e_model = getent("pak_mall_glass", "targetname");
+  e_model = getEnt("pak_mall_glass", "targetname");
   e_model delete();
 }
 

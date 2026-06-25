@@ -108,7 +108,7 @@ function_a8fc3bf1(s_info) {
     mdl_sound = util::spawn_model(#"tag_origin", e_player gettagorigin("tag_origin"), e_player gettagangles("tag_origin"));
 
     if(isDefined(mdl_sound)) {
-      mdl_sound linkto(e_player, "tag_origin");
+      mdl_sound linkTo(e_player, "tag_origin");
       mdl_sound playLoopSound("evt_ice_slide");
     }
 
@@ -177,7 +177,7 @@ function_2301b50d() {
 
 geyser_think() {
   self.scene_ents[#"prop 1"] endon(#"death");
-  self.t_geyser = getent(self.target, "targetname");
+  self.t_geyser = getEnt(self.target, "targetname");
   self.t_geyser.s_scene = self;
   self.t_geyser callback::on_trigger(&function_da3ef83b);
 

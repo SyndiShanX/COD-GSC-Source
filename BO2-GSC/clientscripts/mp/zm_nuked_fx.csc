@@ -135,7 +135,7 @@ fxanim_think(localclientnum) {
   self useanimtree(#animtree);
   sound_origin = self gettagorigin("dervish_jnt");
   ent = spawn(0, sound_origin, "script_origin");
-  ent linkto(self, "dervish_jnt");
+  ent linkTo(self, "dervish_jnt");
 
   for(;;) {
     wait_time = randomfloatrange(15, 30);

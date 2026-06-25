@@ -89,11 +89,11 @@ function function_e7aefb0(localclientnum, pos, surface, notetrack, bone) {
   }
 
   if(n_scale <= 1 && n_scale > 0.8) {
-    e_player playrumbleonentity(surface, "mechz_footstep_heavy");
+    e_player playRumbleOnEntity(surface, "mechz_footstep_heavy");
   } else if(n_scale <= 0.8 && n_scale > 0.4) {
-    e_player playrumbleonentity(surface, "mechz_footstep_medium");
+    e_player playRumbleOnEntity(surface, "mechz_footstep_medium");
   } else {
-    e_player playrumbleonentity(surface, "mechz_footstep_light");
+    e_player playRumbleOnEntity(surface, "mechz_footstep_light");
   }
 
   fx = util::playFXOnTag(surface, level._effect[#"fx9_mech_foot_step"], self, bone);

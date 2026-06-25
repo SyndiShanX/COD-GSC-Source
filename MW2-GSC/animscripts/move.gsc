@@ -449,7 +449,7 @@ pathChange_canDoTurnAnim(turnAnim) {
   moveDelta = getMoveDelta(turnAnim, 0, 1);
   endPoint = self localToWorldCoords(moveDelta);
 
-  endPoint = codeMovePoint + vectornormalize(endPoint - codeMovePoint) * 20;
+  endPoint = codeMovePoint + vectorNormalize(endPoint - codeMovePoint) * 20;
 
   animscripts\utility::drawDebugLine(codeMovePoint, endPoint, (1, 1, 0), 20);
 
@@ -793,7 +793,7 @@ moveCoverToCover() {
   if(lengthSquared(moveDir) < 1) {
     return;
   }
-  moveDir = vectornormalize(moveDir);
+  moveDir = vectorNormalize(moveDir);
   forward = anglesToForward(node.angles);
 
   shuffleLeft = ((forward[0] * moveDir[1]) - (forward[1] * moveDir[0])) > 0;
@@ -932,7 +932,7 @@ moveDoorSideToSide(shuffleLeft, startNode, endNode) {
 
   slideStartTime = self getAnimTime(sideToSideAnim);
   slideDir = endNode.origin - startNode.origin;
-  slideDir = vectornormalize((slideDir[0], slideDir[1], 0));
+  slideDir = vectorNormalize((slideDir[0], slideDir[1], 0));
 
   animDelta = getMoveDelta(sideToSideAnim, slideStartTime, 1);
   remainingVec = endNode.origin - self.origin;

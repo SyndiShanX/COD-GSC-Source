@@ -33,7 +33,7 @@ on_spawn(watcher, player) {
         isFriendly = true;
       }
       if(!isFriendly) {
-        retrievable_model LinkTo(prey, bone);
+        retrievable_model linkTo(prey, bone);
         retrievable_model thread force_drop_knives_to_ground_on_death(player, prey);
       } else if(isFriendly) {
         retrievable_model physicslaunch(normal, (randomint(10), randomint(10), randomint(10)));
@@ -59,7 +59,7 @@ wait_to_show_glowing_model(prey) {
   glowing_retrievable_model = spawn("script_model", self.origin);
   self.glowing_model = glowing_retrievable_model;
   glowing_retrievable_model.angles = self.angles;
-  glowing_retrievable_model LinkTo(self);
+  glowing_retrievable_model linkTo(self);
   if(isDefined(prey)) {
     wait(2);
   }
@@ -86,22 +86,22 @@ on_spawn_retrieve_trigger(watcher, player) {
     trigger_pos[2] = retrievable_model.origin[2] + (vec_scale * normal[2]);
   }
   pickup_trigger = spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
-  pickup_trigger SetCursorHint("HINT_NOICON");
+  pickup_trigger setCursorHint("HINT_NOICON");
   pickup_trigger.owner = player;
   retrievable_model.retrievableTrigger = pickup_trigger;
   hint_string = &"WEAPON_BALLISTIC_KNIFE_PICKUP";
   if(isDefined(hint_string)) {
-    pickup_trigger SetHintString(hint_string);
+    pickup_trigger setHintString(hint_string);
   } else {
-    pickup_trigger SetHintString(&"GENERIC_PICKUP");
+    pickup_trigger setHintString(&"GENERIC_PICKUP");
   }
   pickup_trigger SetTeamForTrigger(player.team);
   player ClientClaimTrigger(pickup_trigger);
-  pickup_trigger EnableLinkTo();
+  pickup_trigger EnablelinkTo();
   if(isDefined(prey)) {
-    pickup_trigger LinkTo(prey);
+    pickup_trigger linkTo(prey);
   } else {
-    pickup_trigger LinkTo(retrievable_model);
+    pickup_trigger linkTo(retrievable_model);
   }
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.weapon, watcher.pickUpSoundPlayer, watcher.pickUpSound);
   player thread watch_shutdown(pickup_trigger, retrievable_model);
@@ -198,5 +198,5 @@ update_retrieve_trigger(player) {
   self waittill("stationary");
   trigger = self.retrievableTrigger;
   trigger.origin = (self.origin[0], self.origin[1], self.origin[2] + 10);
-  trigger LinkTo(self);
+  trigger linkTo(self);
 }

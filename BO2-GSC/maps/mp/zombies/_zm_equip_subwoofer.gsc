@@ -578,20 +578,20 @@ subwoofer_expired(weapon) {
 
 hit_player(action, doshellshock) {
   if(action == "burst") {
-    self playrumbleonentity("subwoofer_heavy");
+    self playRumbleOnEntity("subwoofer_heavy");
 
     if(isDefined(doshellshock) && doshellshock) {
       self shellshock("frag_grenade_mp", 1.5);
     }
   } else if(action == "fling") {
-    self playrumbleonentity("subwoofer_medium");
+    self playRumbleOnEntity("subwoofer_medium");
 
     if(isDefined(doshellshock) && doshellshock) {
       self shellshock("frag_grenade_mp", 0.5);
     }
   } else if(action == "stumble") {
     if(isDefined(doshellshock) && doshellshock) {
-      self playrumbleonentity("subwoofer_light");
+      self playRumbleOnEntity("subwoofer_light");
       self shellshock("frag_grenade_mp", 0.13);
     }
   }

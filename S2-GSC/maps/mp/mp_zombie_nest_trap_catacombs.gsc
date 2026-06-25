@@ -30,8 +30,8 @@ func_6F70(param_00) {
   if(var_02 && !common_scripts\utility::func_3C77("underground_to_riverside1")) {
     return;
   } else if(var_02) {
-    var_03 = -4 * vectornormalize(anglesToForward(param_00.var_001D));
-    var_03 = var_03 + 96 * vectornormalize(anglestoright(param_00.var_001D));
+    var_03 = -4 * vectorNormalize(anglesToForward(param_00.var_001D));
+    var_03 = var_03 + 96 * vectorNormalize(anglestoright(param_00.var_001D));
     var_03 = var_03 + (0, 0, -2);
   }
 
@@ -76,8 +76,8 @@ func_902B(param_00) {
   playFXOnTag(level.var_0611["zmb_catacombs_saw_on"], var_04, "tag_origin");
   var_03 lib_0378::func_8D74("aud_saw_blade_sound");
   wait(0.5);
-  var_03 moveto(var_02.var_0116, 2.5, 0.25, 0.25);
-  var_04 moveto(var_02.var_0116, 2.5, 0.25, 0.25);
+  var_03 moveTo(var_02.var_0116, 2.5, 0.25, 0.25);
+  var_04 moveTo(var_02.var_0116, 2.5, 0.25, 0.25);
   var_03 func_8075(2.5, param_00);
   stopFXOnTag(level.var_0611["zmb_catacombs_saw_on"], var_04, "tag_origin");
   var_03 movez(-128, 1);
@@ -115,7 +115,7 @@ func_6F72(param_00) {
         var_03 dodamage(var_03.var_00BC * 0.25, self.var_0116, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
       } else {
         param_00 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_03);
-        var_04 = 500 * vectornormalize(var_03.var_0116 - self.var_0116);
+        var_04 = 500 * vectorNormalize(var_03.var_0116 - self.var_0116);
         var_03 lib_0547::func_5A85("torso_lower", (var_04[0], var_04[1], 1500), self, "trap_zm_mp");
       }
 
@@ -189,7 +189,7 @@ func_8075(param_00, param_01) {
         var_06 dodamage(var_06.var_00BC * 0.25, self.var_0116, self, self, "MOD_EXPLOSIVE", "trap_zm_mp");
       } else {
         param_01 maps\mp\mp_zombie_nest_ee_hc_raven_weapon_upgrades::func_6FEE(var_06);
-        var_07 = 500 * vectornormalize(var_06.var_0116 - self.var_0116);
+        var_07 = 500 * vectorNormalize(var_06.var_0116 - self.var_0116);
         var_06 lib_0547::func_5A85("torso_lower", (var_07[0], var_07[1], 1500), self, "trap_zm_mp");
         if(!isDefined(self.hitbytrap)) {
           foreach(var_09 in level.var_744A) {

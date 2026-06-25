@@ -168,7 +168,7 @@ SpawnMine(grenade) {
   TriDrone.IsUp = IsUp;
   TriDrone.IsForward = IsForward;
 
-  normal = vectornormalize(trace["normal"]);
+  normal = vectorNormalize(trace["normal"]);
   angles = vectortoangles(normal);
 
   angles += (90, 0, 0);
@@ -542,8 +542,8 @@ mineProximityTrigger(Owner) {
   forward = AnglesToUp(self.angles);
   explodePos = self.origin + (forward * 64);
 
-  self MoveTo(explodePos, 0.75, 0, .25);
-  self.killCamEnt MoveTo(explodePos + self.killCamOffset, 0.75, 0, .25);
+  self moveTo(explodePos, 0.75, 0, .25);
+  self.killCamEnt moveTo(explodePos + self.killCamOffset, 0.75, 0, .25);
 
   self RotateVelocity((0, 750, 32), 0.7, 0, .65);
   self thread playSpinnerFX();

@@ -63,7 +63,7 @@ rumble_fan_trap(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
     while(true) {
       if(isinarray(getlocalplayers(), self)) {
-        self playrumbleonentity(localclientnum, "damage_light");
+        self playRumbleOnEntity(localclientnum, "damage_light");
       }
 
       wait 0.25;
@@ -233,7 +233,7 @@ rumble_spinning_trap(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
     while(true) {
       if(isinarray(getlocalplayers(), self)) {
-        self playrumbleonentity(localclientnum, "damage_light");
+        self playRumbleOnEntity(localclientnum, "damage_light");
       }
 
       wait 0.25;

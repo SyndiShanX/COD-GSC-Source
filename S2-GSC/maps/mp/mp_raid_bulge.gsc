@@ -116,7 +116,7 @@ func_54D7() {
   for(var_07 = 0; var_07 < var_03.size; var_07++) {
     var_08 = spawn("script_model", var_00);
     var_08 setModel(var_03[var_07]);
-    var_08 linkto(var_05, var_04[var_07], (0, 0, 0), (0, 0, 0));
+    var_08 linkTo(var_05, var_04[var_07], (0, 0, 0), (0, 0, 0));
     var_06[var_06.size] = var_08;
   }
 
@@ -273,7 +273,7 @@ func_54E1() {
     var_0E = spawn("script_model", var_00);
     var_0E setModel("npc_ger_mg42_tigerii_bucket_mp_snow");
     var_0E thread lib_0502::func_8C21(game["attackers"], 0);
-    var_0E linkto(var_0D, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
+    var_0E linkTo(var_0D, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
     var_0B[var_0B.size] = var_0E;
   }
 
@@ -287,7 +287,7 @@ func_54E1() {
   for(var_13 = 0; var_13 < var_0F.size; var_13++) {
     var_14 = spawn("script_model", var_00);
     var_14 setModel(var_0F[var_13]);
-    var_14 linkto(var_11, var_10[var_13], (0, 0, 0), (0, 0, 0));
+    var_14 linkTo(var_11, var_10[var_13], (0, 0, 0), (0, 0, 0));
     var_12[var_12.size] = var_14;
   }
 
@@ -614,7 +614,7 @@ func_6C8D() {
     var_08 method_8495("mp_raids_bulge_allieswin_tiger01", var_01, var_02, var_00);
     var_09 = spawn("script_model", var_01);
     var_09 setModel("npc_ger_mg42_tigerii_bucket_mp_snow");
-    var_09 linkto(var_08, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
+    var_09 linkTo(var_08, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
     var_09 enableoutofbounds(0);
     var_0C = ["mp_raids_bulge_allieswin_axis01", "mp_raids_bulge_allieswin_axis02"];
     var_0D = [2, 1, 2, 2, 2, 0];
@@ -624,7 +624,7 @@ func_6C8D() {
       var_10 enableoutofbounds(0);
       var_10 method_8495(var_0F, var_01, var_02);
       var_11 = spawn("weapon_mp40_mp", var_01, 1);
-      var_11 linkto(var_10, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_11 linkTo(var_10, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_0A[var_0A.size] = var_10;
       var_0B[var_0B.size] = var_11;
     }
@@ -667,7 +667,7 @@ func_6C8D() {
     var_1A thread func_A46D(var_00);
     var_1B = spawn("script_model", var_04);
     var_1B setModel("npc_ger_mg42_tigerii_bucket_mp_snow");
-    var_1B linkto(var_1A, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
+    var_1B linkTo(var_1A, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
     var_1B enableoutofbounds(0);
   }
 
@@ -837,12 +837,12 @@ func_6C94() {
       if(var_0F != "none") {
         var_10 = "weapon_" + var_0F;
         var_11 = spawn(var_10, (0, 0, 0), 1);
-        var_11 linkto(var_0E, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+        var_11 linkTo(var_0E, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
         var_0D[var_0D.size] = var_11;
       }
     } else {
       var_11 = spawn("weapon_mp40_mp", (0, 0, 0), 1);
-      var_11 linkto(var_0E, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_11 linkTo(var_0E, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_0D[var_0D.size] = var_11;
     }
 
@@ -878,7 +878,7 @@ func_6C94() {
   var_16 method_8495("mp_raids_bulge_axiswin_tiger01", var_00, var_01);
   var_17 = spawn("script_model", var_00);
   var_17 setModel("npc_ger_mg42_tigerii_bucket_mp_snow");
-  var_17 linkto(var_16, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
+  var_17 linkTo(var_16, "TAG_TURRET_4", (0, 0, 0), (0, 0, 0));
   level notify("show_plunger");
   level.var_148C = spawnStruct();
   level.var_148C.var_148D = var_0C;
@@ -1152,7 +1152,7 @@ func_A483() {
 
 func_A489() {
   maps\mp\_utility::func_3FA5("prematch_done");
-  var_00 = getent("tree_fall_01", "targetname");
+  var_00 = getEnt("tree_fall_01", "targetname");
   if(isDefined(var_00)) {
     var_00 method_8278("mp_raids_bulge_obj01treefall_tree01_preidle");
     wait(35);
@@ -1165,7 +1165,7 @@ func_A489() {
 
 func_A48A() {
   maps\mp\_utility::func_3FA5("prematch_done");
-  var_00 = getent("tree_fall_02", "targetname");
+  var_00 = getEnt("tree_fall_02", "targetname");
   if(isDefined(var_00)) {
     var_00 method_8278("mp_raids_bulge_obj01treefall_tree01_preidle");
     level waittill("runObjectiveMultiEscortComplete");
@@ -1179,7 +1179,7 @@ func_A48A() {
 
 func_A48B() {
   maps\mp\_utility::func_3FA5("prematch_done");
-  var_00 = getent("tree_fall_03", "targetname");
+  var_00 = getEnt("tree_fall_03", "targetname");
   if(isDefined(var_00)) {
     var_00 method_8278("mp_raids_bulge_obj01treefall_tree01_preidle");
     level waittill("tree_03");
@@ -1454,7 +1454,7 @@ func_97EE() {
   var_0E = undefined;
   if(isDefined(var_0D)) {
     var_0F = level.var_9601 gettagorigin("tag_barrel");
-    var_10 = vectornormalize(var_0D.var_116 - var_0F);
+    var_10 = vectorNormalize(var_0D.var_116 - var_0F);
     var_0E = var_0F + var_10 * 1200;
     level.var_9601.var_9734 = 1;
     level.var_9601 method_825B(var_0E);
@@ -1589,8 +1589,8 @@ func_97EC(param_00) {
 }
 
 func_97EA() {
-  var_00 = getent("sherman_alive", "targetname");
-  var_01 = getent("sherman_destroyed", "targetname");
+  var_00 = getEnt("sherman_alive", "targetname");
+  var_01 = getEnt("sherman_destroyed", "targetname");
   if(!isDefined(var_01) || !isDefined(var_00)) {
     return;
   }
@@ -1620,7 +1620,7 @@ func_97EA() {
   for(;;) {
     var_04 = level.var_960A gettagorigin("tag_flash");
     var_05 = var_02.var_116 + var_03 - var_04;
-    var_05 = vectornormalize(var_05);
+    var_05 = vectorNormalize(var_05);
     var_06 = level.var_960A gettagangles("tag_flash");
     var_06 = anglesToForward(var_06);
     if(vectordot(var_05, var_06) > 0.99) {
@@ -1647,12 +1647,12 @@ func_97EA() {
 }
 
 func_97EF() {
-  var_00 = getent("truck_01", "targetname");
-  var_01 = getent("truck_clip_01", "targetname");
-  var_02 = getent("truck_clip_final_pos", "targetname");
+  var_00 = getEnt("truck_01", "targetname");
+  var_01 = getEnt("truck_clip_01", "targetname");
+  var_02 = getEnt("truck_clip_final_pos", "targetname");
   var_03 = getEntArray("truck_visblocker_01", "targetname");
   var_04 = 0;
-  var_01 linkto(var_00);
+  var_01 linkTo(var_00);
   if(isDefined(var_02)) {
     var_02 lib_0502::func_7997();
   }
@@ -1694,13 +1694,13 @@ func_A6D3(param_00, param_01) {
 }
 
 func_97E5() {
-  var_00 = getent("barrel_01a", "targetname");
-  var_01 = getent("barrel_01b", "targetname");
-  var_02 = getent("barrel_clip_01a", "targetname");
-  var_03 = getent("barrel_clip_01b", "targetname");
+  var_00 = getEnt("barrel_01a", "targetname");
+  var_01 = getEnt("barrel_01b", "targetname");
+  var_02 = getEnt("barrel_clip_01a", "targetname");
+  var_03 = getEnt("barrel_clip_01b", "targetname");
   var_04 = 0;
-  var_02 linkto(var_00);
-  var_03 linkto(var_01);
+  var_02 linkTo(var_00);
+  var_03 linkTo(var_01);
   if(!var_04) {
     level common_scripts\utility::func_A732("truck_push", "transition_1_finished");
   }
@@ -1710,8 +1710,8 @@ func_97E5() {
 }
 
 func_97ED() {
-  var_00 = getent("tent_crush_01", "targetname");
-  var_01 = getent("tent_crush_01_clip", "targetname");
+  var_00 = getEnt("tent_crush_01", "targetname");
+  var_01 = getEnt("tent_crush_01_clip", "targetname");
   var_02 = 0;
   if(!var_02) {
     level waittill("tent_crush_01");
@@ -1764,8 +1764,8 @@ func_7FC1() {
 }
 
 func_68F9() {
-  var_00 = getent("obj2_tank_cap_clip", "targetname");
-  var_01 = getent("obj2_tank_broken_clip", "targetname");
+  var_00 = getEnt("obj2_tank_cap_clip", "targetname");
+  var_01 = getEnt("obj2_tank_broken_clip", "targetname");
   if(isDefined(var_00) && isDefined(var_01)) {
     var_00 lib_0502::func_7997();
     var_01 lib_0502::func_7997();
@@ -1913,8 +1913,8 @@ func_2064() {
 
 func_A6D5() {
   var_00 = getEntArray("fuel_depot_truck_push_models", "targetname");
-  var_01 = getent("fuel_depot_truck_push_collision_volume", "targetname");
-  var_02 = getent("fuel_depot_truck_push_collision_final", "targetname");
+  var_01 = getEnt("fuel_depot_truck_push_collision_volume", "targetname");
+  var_02 = getEnt("fuel_depot_truck_push_collision_final", "targetname");
   var_03 = [];
   var_04 = undefined;
   var_05 = 0;
@@ -1933,8 +1933,8 @@ func_A6D5() {
     }
 
     if(isDefined(var_08.var_1A2)) {
-      var_09 = getent(var_08.var_1A2, "targetname");
-      var_09 linkto(var_08);
+      var_09 = getEnt(var_08.var_1A2, "targetname");
+      var_09 linkTo(var_08);
       var_09 thread lib_0502::func_2FC2();
     }
 
@@ -1979,7 +1979,7 @@ func_A6D5() {
   }
 
   foreach(var_0C in var_03) {
-    var_0C linkto(var_04);
+    var_0C linkTo(var_04);
   }
 
   if(isDefined(var_01)) {
@@ -1991,7 +1991,7 @@ func_A6D5() {
 }
 
 func_9E02() {
-  var_00 = getent("fuel_depot_truck_push_collision_final", "targetname");
+  var_00 = getEnt("fuel_depot_truck_push_collision_final", "targetname");
   if(isDefined(var_00)) {
     var_00 lib_0502::func_7997();
   }
@@ -2076,7 +2076,7 @@ func_A6B3() {
 }
 
 func_0898() {
-  var_00 = getent("m1919_bucket", "targetname");
+  var_00 = getEnt("m1919_bucket", "targetname");
   var_01 = [];
   if(isDefined(var_00)) {
     var_00 setdefaultdroppitch(-45);
@@ -2159,15 +2159,15 @@ func_A46C() {
 }
 
 func_97E0(param_00) {
-  var_01 = getent("bulge_multi_escort_watchtower", "targetname");
-  var_02 = getent("bulge_multi_escort_watchtower_tarp", "targetname");
+  var_01 = getEnt("bulge_multi_escort_watchtower", "targetname");
+  var_02 = getEnt("bulge_multi_escort_watchtower_tarp", "targetname");
   var_01 setModel("tkn_watchtower_01_destroyed");
   var_02 lib_0502::func_7997();
   func_08B5(65);
 }
 
 func_97E1(param_00) {
-  var_01 = getent("bulge_fuel_dump_watchtower", "targetname");
+  var_01 = getEnt("bulge_fuel_dump_watchtower", "targetname");
   var_01 setModel("tkn_watchtower_01_destroyed");
   func_08B5(60);
 }
@@ -2338,9 +2338,9 @@ func_7FA1() {
 func_3CD8() {
   thread func_3CD9();
   if(isDefined(self.var_1A2)) {
-    var_00 = getent(self.var_1A2, "targetname");
+    var_00 = getEnt(self.var_1A2, "targetname");
     if(isDefined(var_00)) {
-      var_00 linkto(self, "tag_yaw");
+      var_00 linkTo(self, "tag_yaw");
     }
   }
 

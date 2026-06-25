@@ -65,7 +65,7 @@ spikemore_add_spikes(local_client_num, int_set, ent_new) {
     jointPos = self GetTagOrigin(joint);
     e = spawn(local_client_num, jointPos, "script_model");
     e setModel("t5_weapon_bamboo_spear_spikemore_small");
-    e LinkTo(self, joint);
+    e linkTo(self, joint);
     self thread delayed_remove_or_ent_shutdown(e);
   }
 }

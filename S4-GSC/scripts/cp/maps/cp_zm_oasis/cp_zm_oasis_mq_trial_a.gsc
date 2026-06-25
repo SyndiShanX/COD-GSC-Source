@@ -44,7 +44,7 @@ trial_a_init() {
   level.a_totem_symbol = ["oasis_mq_trial_if_mindfulness_totem_symbol_a", "oasis_mq_trial_if_mindfulness_totem_symbol_b", "oasis_mq_trial_if_mindfulness_totem_symbol_c", "oasis_mq_trial_if_mindfulness_totem_symbol_d", "oasis_mq_trial_if_mindfulness_totem_symbol_e", "oasis_mq_trial_if_mindfulness_totem_symbol_f", "oasis_mq_trial_if_mindfulness_totem_symbol_g", "oasis_mq_trial_if_mindfulness_totem_symbol_h", "oasis_mq_trial_if_mindfulness_totem_symbol_i", "oasis_mq_trial_if_mindfulness_totem_symbol_j", "oasis_mq_trial_if_mindfulness_totem_symbol_k", "oasis_mq_trial_if_mindfulness_totem_symbol_l", "oasis_mq_trial_if_mindfulness_totem_symbol_m", "oasis_mq_trial_if_mindfulness_totem_symbol_n", "oasis_mq_trial_if_mindfulness_totem_symbol_o"];
   level.b_trial_of_mindfulness_obelisk_is_ready = 0;
   level.trial_gauntlet_out_of_area_hint = int(_func_0222("cp/cp_hints.csv", 1, "turn_back", 0));
-  level.trial_of_mindfulness_area_volume = getent("trial_a_challenge_volume", "script_noteworthy");
+  level.trial_of_mindfulness_area_volume = getEnt("trial_a_challenge_volume", "script_noteworthy");
   level thread trial_a_kick_off();
 }
 
@@ -56,7 +56,7 @@ trial_a_kick_off() {
 
 init_charging_obelisk() {
   level endon("game_ended");
-  level.trial_of_mindfulness_obelisk = scripts\engine\utility::getstruct("obelisk_trial_of_mindfulness", "script_noteworthy");
+  level.trial_of_mindfulness_obelisk = scripts\engine\utility::getStruct("obelisk_trial_of_mindfulness", "script_noteworthy");
 
   if(!isDefined(level.trial_of_mindfulness_obelisk)) {
     return;
@@ -67,13 +67,13 @@ init_charging_obelisk() {
   playFXOnTag(level._effect["oasis_mq_trial_of_mindfulness_obelisk_idle"], level.trial_of_mindfulness_obelisk.mdl, "tag_origin");
   level.trial_of_mindfulness_obelisk.mdl thread scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::obelisk_model_bob(6, 4, 0, 0, 1);
   trial_a_oblesik_clip(1);
-  level.trial_of_mindfulness_orb = scripts\engine\utility::getstruct("orb_trial_of_mindfulness_loc", "script_noteworthy");
+  level.trial_of_mindfulness_orb = scripts\engine\utility::getStruct("orb_trial_of_mindfulness_loc", "script_noteworthy");
 
   if(!isDefined(level.trial_of_mindfulness_orb)) {
     return;
   }
   level.trial_of_mindfulness_charging_phase = 0;
-  level.trial_of_mindfulness_orb._id_832C = scripts\engine\utility::getstruct("orb_trial_of_mindfulness_trigger", "script_noteworthy");
+  level.trial_of_mindfulness_orb._id_832C = scripts\engine\utility::getStruct("orb_trial_of_mindfulness_trigger", "script_noteworthy");
 
   if(!isDefined(level.trial_of_mindfulness_orb._id_832C)) {
     return;
@@ -134,7 +134,7 @@ play_script_mover(var_0) {
   level endon("game_ended");
 
   if(isDefined(var_0.mdl)) {
-    var_0.mdl moveto(var_0.mdl.origin - (0, 0, 30), 1);
+    var_0.mdl moveTo(var_0.mdl.origin - (0, 0, 30), 1);
   }
 
   var_0.mdl waittill("movedone");
@@ -149,7 +149,7 @@ dig_out_orb(var_0, var_1) {
   level.trial_of_mindfulness_orb._id_605B playSound("zmb_trail_orb_spawn");
   level.trial_of_mindfulness_orb._id_605B playLoopSound("zmb_trial_orb_lp");
   playFXOnTag(level._effect["oasis_mq_trial_of_mindfulness_glowing_orb_fx"], level.trial_of_mindfulness_orb._id_605B, "tag_origin");
-  level.trial_of_mindfulness_orb._id_605B moveto(level.trial_of_mindfulness_orb.origin, 3);
+  level.trial_of_mindfulness_orb._id_605B moveTo(level.trial_of_mindfulness_orb.origin, 3);
   level.trial_of_mindfulness_orb._id_605B waittill("movedone");
   wait 1;
 
@@ -603,7 +603,7 @@ clear_rune_symbols(var_0) {
 
 init_interact_orb(var_0) {
   foreach(var_2 in var_0) {
-    var_2.hint_image_location = scripts\engine\utility::getstruct("symbol_hint_trial_of_mindfulness_loc", "script_noteworthy");
+    var_2.hint_image_location = scripts\engine\utility::getStruct("symbol_hint_trial_of_mindfulness_loc", "script_noteworthy");
 
     if(!isDefined(var_2.hint_image_location)) {
       return;
@@ -860,7 +860,7 @@ do_charging_obelisk() {
   _id_0737::_id_C4AB(level.trial_of_mindfulness_orb._id_832C._id_039B);
   var_0 = 3;
   var_1 = (0, 0, 120);
-  level.trial_of_mindfulness_orb._id_605B moveto(level.trial_of_mindfulness_obelisk.origin + var_1, var_0);
+  level.trial_of_mindfulness_orb._id_605B moveTo(level.trial_of_mindfulness_obelisk.origin + var_1, var_0);
   wait(var_0);
   playFXOnTag(level._effect["oasis_mq_trial_of_mindfulness_orb_charge"], level.trial_of_mindfulness_orb._id_605B, "tag_origin");
   scripts\cp\utility::_id_B8ED(level.trial_of_mindfulness_obelisk.origin + var_1, "zmb_trial_obelisk_lit_up");
@@ -936,7 +936,7 @@ teleport_to_challenge_area(var_0, var_1) {
 }
 
 trial_a_oblesik_clip(var_0) {
-  var_1 = getent("mq_trial_of_mindfulness_obelisk_clip", "script_noteworthy");
+  var_1 = getEnt("mq_trial_of_mindfulness_obelisk_clip", "script_noteworthy");
 
   if(istrue(var_0)) {
     var_1 show();

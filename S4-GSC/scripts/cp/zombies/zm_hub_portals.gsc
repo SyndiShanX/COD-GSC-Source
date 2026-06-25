@@ -23,7 +23,7 @@ on_portal_interact(var_0, var_1) {}
 
 portal_set_hint(var_0, var_1) {
   var_2 = var_1 portal_hint_type(var_0, var_1);
-  var_1._id_8388 setcursorhint(var_2);
+  var_1._id_8388 setCursorHint(var_2);
 }
 
 get_portal_hint_func(var_0, var_1) {
@@ -202,7 +202,7 @@ _id_E206(var_0, var_1, var_2, var_3) {
   var_8.interact_struct = var_0;
   var_8._id_82FC = var_1;
   var_1._id_E5F6 = var_8;
-  var_8.portal_inactive_struct = scripts\engine\utility::getstruct(var_8.interact_struct._id_0481 + "_inactive", "targetname");
+  var_8.portal_inactive_struct = scripts\engine\utility::getStruct(var_8.interact_struct._id_0481 + "_inactive", "targetname");
 
   if(var_3) {
     var_8.hub_portal = var_0._id_0481;
@@ -899,7 +899,7 @@ hide_portal_clip_at_start() {
 }
 
 toggle_portal_clip(var_0) {
-  self.portal_clip_ent = getent(self.hub_portal + "_clip", "targetname");
+  self.portal_clip_ent = getEnt(self.hub_portal + "_clip", "targetname");
 
   if(!isDefined(self.portal_clip_ent)) {
     return;
@@ -914,7 +914,7 @@ toggle_portal_clip(var_0) {
 }
 
 toggle_portal_clip_by_name(var_0, var_1) {
-  var_2 = getent(var_1 + "_clip", "targetname");
+  var_2 = getEnt(var_1 + "_clip", "targetname");
 
   if(!isDefined(var_2)) {
     return;

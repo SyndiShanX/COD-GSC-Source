@@ -781,7 +781,7 @@ doLastMinuteExposedApproach() {
     approachtype = determineExposedApproachType(node);
   }
 
-  approachDir = VectorNormalize(self.pathGoalPos - self.origin);
+  approachDir = vectorNormalize(self.pathGoalPos - self.origin);
 
   desiredFacingYaw = vectorToYaw(approachDir);
 
@@ -1236,7 +1236,7 @@ calculateNodeTransitionAngles(angleDataObj, approachtype, isarrival, arrivalYaw,
 
     angles = (0, arrivalYaw + sign * anglearray[i] + offset, 0);
 
-    dir = vectornormalize(anglesToForward(angles));
+    dir = vectorNormalize(anglesToForward(angles));
     angleDataObj.transitions[i] = vectordot(approach_dir, dir);
   }
 }

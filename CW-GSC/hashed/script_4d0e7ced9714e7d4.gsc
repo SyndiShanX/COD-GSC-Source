@@ -113,10 +113,10 @@ function function_6f94ced5(a_ents, str_shot) {
 }
 
 function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, str_skipto = level.skipto_current_objective[0]) {
-  ai = getent(var_a7f24c3d, "targetname", 1);
+  ai = getEnt(var_a7f24c3d, "targetname", 1);
 
   if(!isalive(ai)) {
-    var_e582d78a = getent(var_a7f24c3d, "targetname");
+    var_e582d78a = getEnt(var_a7f24c3d, "targetname");
     ai = spawner::simple_spawn_single(var_e582d78a);
   }
 
@@ -184,7 +184,7 @@ function function_603d935(var_c5827a95, n_goalradius = 200, var_dd47e22 = 0.1, v
     }
   }
 
-  e_vol = getent(var_c5827a95, "targetname");
+  e_vol = getEnt(var_c5827a95, "targetname");
   wait randomfloatrange(var_dd47e22, var_27ff9e4);
   self notify(#"stop_going_to_node");
   self val::set(#"hash_4629ea2949a36bbb", "goalradius", n_goalradius);
@@ -214,7 +214,7 @@ function function_ae1eba32() {
   namespace_61e6d095::set_color(#"hash_26ccd69d3e6f3b56", 0, 0, 0);
   namespace_61e6d095::function_39710437(#"hash_26ccd69d3e6f3b56", "fullscreen");
   namespace_61e6d095::function_46df0bc7(#"hash_26ccd69d3e6f3b56", 999);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player val::set(#"hash_75e1db7c3af8ae06", "freezecontrols", 1);
   e_player val::set(#"hash_383e66ab943657f9", "disable_weapons", 1);
   e_player val::set(#"hash_fa9cf212730562d", "show_hud", 0);
@@ -224,7 +224,7 @@ function function_ae1eba32() {
   }
 
   e_player unlink();
-  e_player setorigin((14960, 9808, 355));
+  e_player setOrigin((14960, 9808, 355));
   e_player util::delay(0.1, undefined, &setplayerangles, (0, 90, 0));
 
   if(function_c9cc889()) {
@@ -254,5 +254,5 @@ function function_7c927add(var_ec670c03) {
 }
 
 function function_c9cc889() {
-  return is_true(getplayers()[0].var_fcd1efa7);
+  return is_true(getPlayers()[0].var_fcd1efa7);
 }

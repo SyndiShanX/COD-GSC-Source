@@ -164,7 +164,7 @@ zodcompanioncanpreemptivejuke(entity) {
       enemyangles = entity.enemy getgunangles();
       toenemy = entity.enemy.origin - entity.origin;
       forward = anglesToForward(enemyangles);
-      dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
+      dotproduct = abs(vectordot(vectorNormalize(toenemy), forward));
 
       record3dtext(acos(dotproduct), entity.origin + (0, 0, 10), (0, 1, 0), "<dev string:x48>");
 
@@ -217,7 +217,7 @@ zodcompaniontargetservice(entity) {
   aienemies = [];
   playerenemies = [];
   ai = getaiarray();
-  players = getplayers();
+  players = getPlayers();
   positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
 
   if(!isDefined(positiononnavmesh)) {
@@ -322,7 +322,7 @@ zodcompaniontryreacquireservice(entity) {
     return false;
   }
 
-  dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forward = anglesToForward(entity.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {
@@ -621,7 +621,7 @@ zod_companion_revive_player(player) {
   level.var_ee623e8 = 1;
   player.revivetrigger.beingrevived = 1;
   player.being_revived_by_robot = 1;
-  vector = vectornormalize(player.origin - self.origin);
+  vector = vectorNormalize(player.origin - self.origin);
   angles = vectortoangles(vector);
   self teleport(self.origin, angles);
 
@@ -653,7 +653,7 @@ zod_companion_revive_player(player) {
   player thread zm_laststand::revive_success(self, 0);
   player notify(#"stop_revive_trigger");
   level.var_ee623e8 = 0;
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1 && level flag::get("solo_game") && isDefined(player.waiting_to_revive) && player.waiting_to_revive) {
     level.solo_game_free_player_quickrevive = 1;

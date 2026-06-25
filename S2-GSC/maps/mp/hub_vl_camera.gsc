@@ -17,7 +17,7 @@ func_87B1() {
     var_04 = common_scripts\utility::func_46B5(var_03.var_01A2, "targetname");
   }
 
-  var_06 = getent("cao_spawnpoint", "targetname");
+  var_06 = getEnt("cao_spawnpoint", "targetname");
   var_07 = spawnStruct();
   var_07.var_9839 = 40;
   var_07.var_15F7 = 0.25;
@@ -413,7 +413,7 @@ func_A59C() {
     var_1D = maps\mp\_utility::func_4737(var_1C);
   }
 
-  var_1E = getent("cao_spawnpoint", "targetname");
+  var_1E = getEnt("cao_spawnpoint", "targetname");
   var_1F = 0;
   if(!var_09) {
     maps\mp\hub_vl_base::func_A59F("adding xuid " + var_08 + "from vlobby_player");
@@ -458,7 +458,7 @@ func_A59C() {
   var_24 = var_23.var_0116;
   var_25 = var_23.var_001D;
   var_26 = var_00.var_13B6.var_0116 - var_24;
-  var_26 = vectornormalize(var_26);
+  var_26 = vectorNormalize(var_26);
   var_27 = spawn("script_model", var_24);
   var_27.var_001D = var_25;
   var_27 setModel("tag_player");
@@ -708,7 +708,7 @@ func_A59C() {
           }
 
           var_2D.var_627E = var_2D.var_669A;
-          var_03 setorigin(var_0D.var_0116);
+          var_03 setOrigin(var_0D.var_0116);
         } else if(var_2D.var_669A == "prelobby_loot") {
           var_2A.var_2988 = 1;
         } else if(var_2D.var_669A == "transition") {
@@ -837,7 +837,7 @@ func_1E3F(param_00, param_01, param_02) {
   var_05 = var_04 / sqrt(1 + param_02.var_28C4 * param_02.var_28C4);
   var_06 = var_03[0] - param_02.var_28C4 * var_03[1];
   var_07 = param_02.var_28C4 * var_03[0] + var_03[1];
-  var_08 = var_05 * vectornormalize((var_06, var_07, 0));
+  var_08 = var_05 * vectorNormalize((var_06, var_07, 0));
   var_08 = var_08 + (0, 0, var_03[2]);
   return var_08;
 }
@@ -874,7 +874,7 @@ func_1EB8(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  self moveto(param_00, param_01, param_02, param_03);
+  self moveTo(param_00, param_01, param_02, param_03);
 }
 
 func_1F09(param_00, param_01, param_02, param_03) {
@@ -883,7 +883,7 @@ func_1F09(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  self rotateto(param_00, param_01, param_02, param_03);
+  self rotateTo(param_00, param_01, param_02, param_03);
 }
 
 func_7EED(param_00, param_01) {
@@ -1168,9 +1168,9 @@ func_1FA6(param_00, param_01, param_02) {
   var_06 = param_02.var_2096 + param_02.var_2095 - param_02.var_2096 * param_02.var_ACC5;
   var_07 = param_01.var_0116 + (0, 0, var_05);
   var_08 = var_07 - var_03 + param_02.var_6C41;
-  var_08 = param_02.var_3018 * vectornormalize(var_08);
+  var_08 = param_02.var_3018 * vectorNormalize(var_08);
   var_08 = (var_08[0], var_08[1], -1 * var_04);
-  var_08 = param_02.var_3018 * vectornormalize(var_08);
+  var_08 = param_02.var_3018 * vectorNormalize(var_08);
   var_09 = var_07 - var_08;
   if(isDefined(self.var_1FA8)) {
     var_07 = var_07 + self.var_1FA8;
@@ -2311,7 +2311,7 @@ func_631E() {
             function_02BA(level.var_A595[var_21], var_07.var_01D6);
             level.var_A595[var_21].var_5DEE = var_07;
             level.var_A595[var_21].var_6101 = gettime() + 4000;
-            var_23 = getent("cao_spawnpoint", "targetname");
+            var_23 = getEnt("cao_spawnpoint", "targetname");
             var_20.var_1FA3 = var_23;
             var_20.var_1F9D = var_1B;
             if(isDefined(level.var_A589)) {
@@ -3222,7 +3222,7 @@ func_3B65(param_00, param_01, param_02) {
 func_6485(param_00, param_01) {
   var_02 = param_01["center"];
   var_03 = param_01["radius"];
-  var_04 = vectornormalize((param_00[0] - var_02[0], param_00[1] - var_02[1], 0));
+  var_04 = vectorNormalize((param_00[0] - var_02[0], param_00[1] - var_02[1], 0));
   param_00 = (var_02[0] + var_03 * var_04[0], var_02[1] + var_03 * var_04[1], param_00[2]);
   return param_00;
 }
@@ -3233,7 +3233,7 @@ func_9B85(param_00, param_01, param_02) {
   var_05 = param_02["radius"];
   var_06 = var_05 + var_03;
   var_07 = (param_01[0] - param_00[0], param_01[1] - param_00[1], 0);
-  var_08 = vectornormalize(var_07);
+  var_08 = vectorNormalize(var_07);
   var_09 = length2d(var_07);
   var_0A = (var_04[0] - param_00[0], var_04[1] - param_00[1], 0);
   var_0B = vectordot(var_08, var_0A);
@@ -3251,7 +3251,7 @@ func_9B85(param_00, param_01, param_02) {
   var_10 = 1;
   if(var_09 < var_05) {
     var_0F = 1;
-    var_0E = vectornormalize(var_0E);
+    var_0E = vectorNormalize(var_0E);
     var_0C = (var_04[0] + var_06 * var_0E[0], var_04[1] + var_06 * var_0E[1], param_00[2] + var_0D * param_01[2] - param_00[2]);
     var_10 = var_09 / var_05;
   }
@@ -3267,7 +3267,7 @@ func_9B85(param_00, param_01, param_02) {
 func_1E3D(param_00, param_01, param_02) {
   var_03 = distance(param_00, param_02);
   if(var_03 > param_01) {
-    var_04 = vectornormalize(param_02 - param_00);
+    var_04 = vectorNormalize(param_02 - param_00);
     param_02 = param_00 + param_01 * var_04;
   }
 
@@ -3282,7 +3282,7 @@ func_5EBB(param_00, param_01, param_02, param_03, param_04) {
 
   var_06 = param_04[param_00 + 1];
   var_07 = distance(var_05, var_06);
-  var_08 = vectornormalize(var_06 - var_05);
+  var_08 = vectorNormalize(var_06 - var_05);
   var_09 = vectordot(var_08, param_01 - var_05);
   if(var_09 < 0) {
     var_09 = 0;
@@ -3403,7 +3403,7 @@ func_1D1A(param_00, param_01, param_02, param_03, param_04) {
   param_00.var_6EE5 = param_02;
   param_00.var_6EDF = param_03;
   param_00.var_6EEB = (0, 0, 0);
-  var_0A = vectornormalize(param_00.var_6EDF - param_00.var_6EE5);
+  var_0A = vectorNormalize(param_00.var_6EDF - param_00.var_6EE5);
   var_0B = vectordot(var_0A, param_00.var_6EE6);
   var_0C = vectordot(var_0A, param_00.var_6EE0);
   var_0D = 0;
@@ -3486,7 +3486,7 @@ func_A09E(param_00) {
     var_04 = var_03 - param_00.var_3041;
     if(var_04 > var_02) {
       param_00.var_3041 = param_00.var_3041 + var_02;
-      var_05 = param_00.var_6EB7[param_00.var_6EDD] + param_00.var_3041 * vectornormalize(param_00.var_6EB7[param_00.var_6EDD + 1] - param_00.var_6EB7[param_00.var_6EDD]);
+      var_05 = param_00.var_6EB7[param_00.var_6EDD] + param_00.var_3041 * vectorNormalize(param_00.var_6EB7[param_00.var_6EDD + 1] - param_00.var_6EB7[param_00.var_6EDD]);
       param_00.var_6EEB = var_05 - param_00.var_0116;
       param_00.var_0116 = var_05;
       param_00.var_3033 = param_00.var_3033 + var_02;
@@ -3557,8 +3557,8 @@ func_1E39(param_00, param_01, param_02) {
   var_04 = param_00;
   var_05 = param_02;
   var_06 = [];
-  var_07 = vectornormalize(vectorcross(var_03 - var_04, (0, 0, 1)));
-  var_08 = vectornormalize(vectorcross(var_07, var_03 - var_04));
+  var_07 = vectorNormalize(vectorcross(var_03 - var_04, (0, 0, 1)));
+  var_08 = vectorNormalize(vectorcross(var_07, var_03 - var_04));
   var_09 = var_05 - var_04;
   var_0A = var_05 - vectordot(var_08, var_09) * var_08;
   var_0B = var_05 - vectordot(var_07, var_09) * var_07;
@@ -3615,8 +3615,8 @@ func_1E37(param_00, param_01, param_02) {
   var_03 = param_01;
   var_04 = param_02;
   var_05 = var_04 - var_03;
-  var_06 = vectornormalize(vectorcross(var_05, (0, 0, 1)));
-  var_07 = vectornormalize(vectorcross(var_06, var_05));
+  var_06 = vectorNormalize(vectorcross(var_05, (0, 0, 1)));
+  var_07 = vectorNormalize(vectorcross(var_06, var_05));
   var_08 = var_05 - vectordot(var_05, var_07) * var_07;
   var_09 = length(var_08);
   var_0A = param_00["fx"];

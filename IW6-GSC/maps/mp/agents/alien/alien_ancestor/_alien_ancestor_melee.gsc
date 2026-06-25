@@ -113,7 +113,7 @@ fire_blast_projectile() {
     var_3 = (0, 0, 32);
   }
 
-  var_2 missile_settargetent(self.blast_target, var_3);
+  var_2 missile_settargetEnt(self.blast_target, var_3);
   var_2 missile_setflightmodedirect();
 
   if(isDefined(var_2)) {
@@ -161,7 +161,7 @@ blast_tracking_monitor(var_0) {
         if(distancesquared(self.origin, var_6.origin) > 160000) {
           continue;
         }
-        var_7 = vectornormalize(var_6.origin - self.origin);
+        var_7 = vectorNormalize(var_6.origin - self.origin);
 
         if(vectordot(var_4, var_7) > 0.5) {
           var_1 = var_6;
@@ -172,7 +172,7 @@ blast_tracking_monitor(var_0) {
             var_8 = (0, 0, 32);
           }
 
-          self missile_settargetent(var_1, var_8);
+          self missile_settargetEnt(var_1, var_8);
           var_3 = gettime();
         }
       }
@@ -386,7 +386,7 @@ get_possible_grab_victims(var_0) {
     if(isDefined(var_7.next_valid_grab_time) && var_7.next_valid_grab_time > var_5) {
       continue;
     }
-    var_8 = vectornormalize(var_7.origin - self.origin);
+    var_8 = vectorNormalize(var_7.origin - self.origin);
 
     if(vectordot(var_3, var_8) > var_1) {
       if(distancesquared(var_7.origin, self.origin) < var_2) {
@@ -615,7 +615,7 @@ grab_detect_stuck() {
   wait 0.1;
 
   if(var_1) {
-    self setorigin(var_0);
+    self setOrigin(var_0);
   }
 }
 
@@ -657,7 +657,7 @@ get_direct_minions_anim_index() {
   var_1 = 0.5;
   var_2 = anglesToForward(self.angles);
   var_3 = anglestoright(self.angles);
-  var_4 = vectornormalize(self.enemy.origin - self.origin);
+  var_4 = vectorNormalize(self.enemy.origin - self.origin);
   var_5 = vectordot(var_2, var_4);
 
   if(var_5 < var_1) {

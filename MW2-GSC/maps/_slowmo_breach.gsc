@@ -336,7 +336,7 @@ check_missing_animation() {
   }
   if(self will_be_manhandled() && self.script_noteworthy == "manhandled") {
     AssertEx(isDefined(self.target), "Manhandled spawner with export " + self.export+" has no target.");
-    spawner = GetEnt(self.target, "targetname");
+    spawner = getEnt(self.target, "targetname");
     AssertEx(isDefined(spawner) && IsSpawner(spawner), "Manhandled spawner with export " + self.export+" has no spawner.");
     level.manhandled_spawners[self.export] = spawner;
   }
@@ -744,11 +744,11 @@ dump_missing_anims() {
         breaches[index].lookat_triggers[breaches[index].lookat_triggers.size] = trigger;
         AssertEx(breaches[index].lookat_triggers.size < 2, "You have more than one trigger_multiple_breachIcon associated with script_slowmo_breach number " + index + ". Only one lookat trigger is allowed per breach door");
 
-        trigger_org = GetEnt(trigger.target, "targetname");
+        trigger_org = getEnt(trigger.target, "targetname");
         trigger.breach_origin = trigger_org.origin;
         AssertEx(isDefined(trigger_org), "Breach_lookat_trigger at " + trigger.origin + " needs to target a script_origin to be used for the breach icon.");
 
-        room_volume = GetEnt(trigger_org.target, "targetname");
+        room_volume = getEnt(trigger_org.target, "targetname");
         AssertEx(isDefined(room_volume), "The script origin targeted by the breach_lookat_trigger at " + trigger_org.origin + " needs to target an info_volume that encompasses the room being breached.");
         room_volume.breached = false;
         breaches[index].room_volume = room_volume;
@@ -761,7 +761,7 @@ dump_missing_anims() {
       }
 
       foreach(trigger in breach_start_triggers) {
-        trigger UseTriggerRequireLookAt();
+        trigger useTriggerRequireLookAt();
         index = trigger.script_slowmo_breach;
         AssertEx(isDefined(index), "Breach trigger at " + trigger.origin + " had no script_slowmo_breach");
         breaches[index].trigger = trigger;
@@ -1011,7 +1011,7 @@ dump_missing_anims() {
       array_thread(breach_coopenemy_spawners, ::add_spawn_function, ::breach_enemy_spawner_think);
       array_thread(breach_coophostage_spawners, ::add_spawn_function, ::breach_hostage_spawner_think);
 
-      trigger SetHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+      trigger setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
       if(!isDefined(level.breach_use_triggers)) {
         level.breach_use_triggers = [];
       }
@@ -1324,7 +1324,7 @@ dump_missing_anims() {
 
       foreach(trigger in level.breach_use_triggers) {
         if(isDefined(trigger)) {
-          trigger SetHintString("");
+          trigger setHintString("");
         }
       }
 
@@ -1333,7 +1333,7 @@ dump_missing_anims() {
 
       foreach(trigger in level.breach_use_triggers) {
         if(isDefined(trigger)) {
-          trigger SetHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+          trigger setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
         }
       }
     }
@@ -1647,7 +1647,7 @@ dump_missing_anims() {
       active = breach_players["active"];
 
       vec1 = anglestoright(self.angles);
-      vec2 = vectornormalize(active.origin - ent.trigger.origin);
+      vec2 = vectorNormalize(active.origin - ent.trigger.origin);
       dot = VectorDot(vec1, vec2);
       if(dot < 0) {
         breach_players["active"] = breach_players["passive"];
@@ -2659,7 +2659,7 @@ dump_missing_anims() {
     breach_rumble(org) {
       dummy = spawn("script_origin", org);
       dummy.origin = org;
-      dummy PlayRumbleOnEntity("grenade_rumble");
+      dummy playRumbleOnEntity("grenade_rumble");
       wait(4);
       dummy Delete();
     }
@@ -2795,7 +2795,7 @@ dump_missing_anims() {
       player = get_closest_player(self.origin);
       dist = Distance(player.origin, self.origin);
       if(dist <= 50) {
-        player PlayRumbleOnEntity("grenade_rumble");
+        player playRumbleOnEntity("grenade_rumble");
         player thread play_sound_on_entity("melee_knife_hit_body");
         player EnableHealthShield(false);
         player EnableDeathShield(false);
@@ -2970,7 +2970,7 @@ dump_missing_anims() {
       manhandlerSpawner = undefined;
 
       if(self.script_noteworthy == "manhandled") {
-        manhandlerSpawner = GetEnt(self.target, "targetname");
+        manhandlerSpawner = getEnt(self.target, "targetname");
         AssertEx(isDefined(manhandlerSpawner), "Hostage with export " + self.export+" is tagged with a script_noteworthy of 'manhandled', but is not targeting a friendly spawner that will do the manhandling.");
       }
 
@@ -3070,7 +3070,7 @@ dump_missing_anims() {
 
       time = 0.45;
 
-      tag_origin MoveTo(tag_origin.origin + forward * 32 + up * -14, time, time * 0.4, time * 0.4);
+      tag_origin moveTo(tag_origin.origin + forward * 32 + up * -14, time, time * 0.4, time * 0.4);
 
       wait(time);
       level.player SetMoveSpeedScale(0.5);
@@ -3092,7 +3092,7 @@ dump_missing_anims() {
       self endon("stop_following_player");
       wait(1.5);
       for(;;) {
-        self moveto(level.player.origin, 2, 0, 0);
+        self moveTo(level.player.origin, 2, 0, 0);
         wait(0.05);
       }
     }
@@ -3128,7 +3128,7 @@ dump_missing_anims() {
           ent addyaw(rotate * -1);
         }
 
-        self rotateto(ent.angles, 0.15);
+        self rotateTo(ent.angles, 0.15);
 
         wait(0.15);
       }

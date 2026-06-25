@@ -42,7 +42,7 @@ function on_localclient_connect(localclientnum) {
 }
 
 function on_player_spawned(localclientnum) {
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
   foreach(player in players) {
     if(player util::isenemyplayer(self)) {
       player duplicate_render::update_dr_flag(localclientnum, "ballcarrier", 0);

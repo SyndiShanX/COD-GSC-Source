@@ -87,7 +87,7 @@ createstingerstate(state, alias, prewait, interrupt) {
 sndboardmonitor() {
   while(true) {
     level waittill("last_board_torn", barrier_origin);
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(distancesquared(player.origin, barrier_origin) <= 22500) {
@@ -178,7 +178,7 @@ sndlocationshouldplay(array, activezone) {
   }
 
   playersinlocal = 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone)) {
@@ -220,7 +220,7 @@ sndlocationbetweenrounds() {
     if(isDefined(level.sndlastzone) && zone == level.sndlastzone) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(is_true(player.afterlife)) {
@@ -437,7 +437,7 @@ sndlastlife_multi() {
   while(true) {
     level waittill("bleed_out");
     sndplayersdead++;
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size - sndplayersdead <= 1) {
       last_alive = sndlastlife_multi_getlastplayer();
@@ -450,7 +450,7 @@ sndlastlife_multi() {
 sndlastlife_multi_getlastplayer() {
   level endon("end_of_round");
   wait 0.5;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(dude in players) {
     if(dude.sessionstate == "spectator") {
@@ -549,7 +549,7 @@ easter_egg_song_vo(player) {
 }
 
 sndendgamemusicredux(alias, length) {
-  m_endgame_machine = getstruct("sq_endgame_machine", "targetname");
+  m_endgame_machine = getStruct("sq_endgame_machine", "targetname");
   temp_ent = spawn("script_origin", m_endgame_machine.origin);
   temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::sndmusicegg_override);
   temp_ent playLoopSound("zmb_meteor_loop");

@@ -8,7 +8,7 @@
 #include maps\_perks_sp;
 
 perk_init(ref) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     perk = spawnStruct();
     perk.ref = ref;
     player.perk_refs[player.perk_refs.size] = perk;
@@ -56,7 +56,7 @@ perks_init(usehud) {
     level.player_perk_slots = 3;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.perk_slots = [];
     player.perk_refs = [];
 

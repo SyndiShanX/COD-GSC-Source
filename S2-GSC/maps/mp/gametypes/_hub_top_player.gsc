@@ -61,7 +61,7 @@ func_A17D() {
     var_02.var_01D7 = var_01.var_0116[1];
     var_02.var_01D9 = var_01.var_0116[2] + 90;
     var_02 setwaypoint(1, 0, 0);
-    var_02 settargetent(var_01);
+    var_02 settargetEnt(var_01);
     var_02.var_6E74 = level.var_A012;
     var_02.var_6E74 maps\mp\gametypes\_hud_util::func_09A6(var_02);
     var_02.var_0109 = "topPlayerElem";

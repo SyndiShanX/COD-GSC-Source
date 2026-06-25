@@ -29,7 +29,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     return;
   }
 
-  poster_trigger = getent("poster_ee_trigger", "targetname");
+  poster_trigger = getEnt("poster_ee_trigger", "targetname");
 
   if(!isDefined(poster_trigger)) {
     return;
@@ -81,7 +81,7 @@ function_3383b382(player, poster_trigger) {
   if(var_bd332bd5) {
     hidemiscmodels("poster_pristine");
     showmiscmodels("poster_damaged");
-    playsoundatposition(#"hash_102a20c25b442146", poster_trigger.origin);
+    playSoundAtPosition(#"hash_102a20c25b442146", poster_trigger.origin);
 
     if(isDefined(var_b721e8a9)) {
       poster_trigger function_79c8b708(var_b721e8a9);

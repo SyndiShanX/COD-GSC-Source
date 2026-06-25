@@ -44,16 +44,16 @@ metalstorm_update_rumble() {
     vr = abs(self getspeed() / self getmaxspeed());
 
     if(vr < 0.1) {
-      level.localplayers[0] playrumbleonentity(0, "pullout_small");
+      level.localplayers[0] playRumbleOnEntity(0, "pullout_small");
       wait 0.3;
     } else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
       level.localplayers[0] earthquake(0.1, 0.1, self.origin, 200);
-      level.localplayers[0] playrumbleonentity(0, "pullout_small");
+      level.localplayers[0] playRumbleOnEntity(0, "pullout_small");
       wait 0.1;
     } else if(vr > 0.8) {
       time = randomfloatrange(0.15, 0.2);
       level.localplayers[0] earthquake(randomfloatrange(0.1, 0.15), time, self.origin, 200);
-      level.localplayers[0] playrumbleonentity(0, "pullout_small");
+      level.localplayers[0] playRumbleOnEntity(0, "pullout_small");
       wait(time);
     } else
       wait 0.1;

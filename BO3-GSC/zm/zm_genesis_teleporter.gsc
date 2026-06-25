@@ -43,7 +43,7 @@ function __init__() {
 }
 
 function __main__() {
-  level.var_7d7ca0ea = getent("t_teleport_pad_ee", "targetname");
+  level.var_7d7ca0ea = getEnt("t_teleport_pad_ee", "targetname");
   level.var_7d7ca0ea thread teleport_pad_think();
   level.var_7d7ca0ea thread function_b6d07c17();
   level.teleport_ae_funcs = [];
@@ -76,12 +76,12 @@ function function_b6d07c17() {
 }
 
 function teleport_pad_think() {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"");
   level waittill("sophia_at_teleporter");
   self thread teleport_pad_active_think();
   while(true) {
-    self sethintstring(&"");
+    self setHintString(&"");
     level flag::wait_till("teleporter_on");
     exploder::exploder("ee_teleporter_on");
     exploder::exploder("lgt_teleporter_powered");
@@ -219,7 +219,7 @@ function teleport_pad_player_fx(var_7d7ca0ea, n_duration) {
   while(n_total_time < n_duration) {
     if(array::contains(var_7d7ca0ea.var_d0866ff4, self)) {
       visionset_mgr::activate("overlay", "zm_trap_electric", self, 1.25, 1.25);
-      self playrumbleonentity("zm_castle_pulsing_rumble");
+      self playRumbleOnEntity("zm_castle_pulsing_rumble");
       while(n_total_time < n_duration && array::contains(var_7d7ca0ea.var_d0866ff4, self)) {
         n_current_time = gettime();
         n_total_time = (n_current_time - n_start_time) / 1000;
@@ -289,7 +289,7 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
           }
           array::add(var_19ff0dfb, e_player, 0);
           e_player.var_601ebf01 = util::spawn_model("tag_origin", e_player.origin, e_player.angles);
-          e_player linkto(e_player.var_601ebf01);
+          e_player linkTo(e_player.var_601ebf01);
           e_player dontinterpolate();
           e_player.var_601ebf01 dontinterpolate();
           e_player.var_601ebf01.origin = var_e2a6e15f;
@@ -321,9 +321,9 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
       }
       e_player unlink();
       if(positionwouldtelefrag(a_s_pos[i].origin)) {
-        e_player setorigin(a_s_pos[i].origin + (randomfloatrange(-16, 16), randomfloatrange(-16, 16), 0));
+        e_player setOrigin(a_s_pos[i].origin + (randomfloatrange(-16, 16), randomfloatrange(-16, 16), 0));
       } else {
-        e_player setorigin(a_s_pos[i].origin);
+        e_player setOrigin(a_s_pos[i].origin);
       }
       e_player setplayerangles(a_s_pos[i].angles);
       if(var_6bd63d0d) {
@@ -350,7 +350,7 @@ function teleport_players(a_s_pos, var_1bac7e2b, var_e11d2975, var_6bd63d0d = 0)
       level.var_47f4765c++;
       level flag::set("spawn_zombies");
       if(level.var_47f4765c == 1 || (level.var_47f4765c % 3) == 0) {
-        playsoundatposition("vox_maxis_teleporter_pa_success_0", a_s_pos[0].origin);
+        playSoundAtPosition("vox_maxis_teleporter_pa_success_0", a_s_pos[0].origin);
       }
     }
     return true;
@@ -376,7 +376,7 @@ function teleport_nuke(n_max_zombies, n_range) {
       a_ai_zombies[i] zombie_utility::zombie_head_gib();
     }
     a_ai_zombies[i] dodamage(10000, a_ai_zombies[i].origin);
-    playsoundatposition("nuked", a_ai_zombies[i].origin);
+    playSoundAtPosition("nuked", a_ai_zombies[i].origin);
   }
 }
 

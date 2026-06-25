@@ -39,7 +39,7 @@ function_2ba5e3e6() {
 }
 
 function_582e5d7c() {
-  return isbot(self) && isDefined(self.botteam) && self.botteam != "autoassign" && (level.maxteamplayers == 0 || getplayers(self.botteam).size < level.maxteamplayers);
+  return isbot(self) && isDefined(self.botteam) && self.botteam != "autoassign" && (level.maxteamplayers == 0 || getPlayers(self.botteam).size < level.maxteamplayers);
 }
 
 function_ee150fcc(team, team_players) {
@@ -77,7 +77,7 @@ function_f18da875(platoon, player_counts) {
 }
 
 function_efe5a681(team) {
-  team_players = getplayers(team);
+  team_players = getPlayers(team);
 
   if(team_players.size >= level.maxteamplayers) {
     return false;
@@ -110,7 +110,7 @@ function_efe5a681(team) {
     return false;
   }
 
-  if(getdvarint(#"hash_2ffea48b89a9ff3f", 0) && self != getplayers()[0] && getplayers()[0].team == team && !isbot(self)) {
+  if(getdvarint(#"hash_2ffea48b89a9ff3f", 0) && self != getPlayers()[0] && getPlayers()[0].team == team && !isbot(self)) {
     return false;
   }
 
@@ -120,7 +120,7 @@ function_efe5a681(team) {
 function_ccb3bc7a() {
   foreach(team in level.teams) {
     if(self function_efe5a681(team)) {
-      println("<dev string:x38>" + "<dev string:x4c>" + self.name + "<dev string:x61>" + team + "<dev string:x71>" + getplayers(team).size);
+      println("<dev string:x38>" + "<dev string:x4c>" + self.name + "<dev string:x61>" + team + "<dev string:x71>" + getPlayers(team).size);
 
       function_d28f6fa0(team);
 
@@ -142,7 +142,7 @@ function_b919f6aa(status) {
     }
 
     if(self function_efe5a681(team)) {
-      println("<dev string:x38>" + "<dev string:x4c>" + self.name + "<dev string:x7b>" + team + "<dev string:x71>" + getplayers(team).size);
+      println("<dev string:x38>" + "<dev string:x4c>" + self.name + "<dev string:x7b>" + team + "<dev string:x71>" + getPlayers(team).size);
 
       function_d28f6fa0(team);
 
@@ -175,7 +175,7 @@ function_5d02dd86(party) {
     }
 
     if(member.team != "autoassign" && member.team != "spectate") {
-      team_players = getplayers(member.team);
+      team_players = getPlayers(member.team);
 
       if(team_players.size >= level.maxteamplayers) {
         break;
@@ -554,7 +554,7 @@ function_b25f48bf(for_team, var_a9ab69de, var_d9438b7, var_ed0a1ecc) {
 }
 
 function_78db0e06(old_team, new_team) {
-  players = getplayers(old_team);
+  players = getPlayers(old_team);
 
   foreach(player in players) {
     player function_dc7eaabd(new_team);
@@ -595,7 +595,7 @@ function_a9822793() {
             break;
           }
 
-          assert(getplayers(team).size + getplayers(var_6f782d8f).size <= level.maxteamplayers);
+          assert(getPlayers(team).size + getPlayers(var_6f782d8f).size <= level.maxteamplayers);
           println("<dev string:xe7>" + var_ed0a1ecc[platoon].size);
 
           foreach(var_aacd04cb in var_ed0a1ecc[platoon]) {
@@ -631,7 +631,7 @@ function_a9bfa6d6() {
 }
 
 function_6c66cc64(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
 
   if(players.size == 0) {
     return;
@@ -672,10 +672,10 @@ function_6c66cc64(team) {
 
 function_58b6d2c9() {
   if(level.multiteam && level.maxteamplayers > 0) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(team in level.teams) {
-      var_dcbb8617 = getplayers(team);
+      var_dcbb8617 = getPlayers(team);
 
       if(var_dcbb8617.size > level.maxteamplayers) {
         var_f554d31e = "<dev string:x197>";
@@ -714,7 +714,7 @@ function_58b6d2c9() {
 function_1aa0418f() {
   while(true) {
     wait 3;
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size > 0 && players[0] isstreamerready()) {
       setDvar(#"devgui_bot", "<dev string:x247>");

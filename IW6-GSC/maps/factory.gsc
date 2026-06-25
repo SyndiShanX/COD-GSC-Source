@@ -355,7 +355,7 @@ mission_objective_logic() {
       objective_add(maps\_utility::obj("OBJ_INVESTIGATE"), "active", &"FACTORY_OBJ_INVESTIGATE_RECORDS");
       objective_state(maps\_utility::obj("OBJ_INVESTIGATE"), "current");
       level waittill("show_ambush_use_hint");
-      var_1 = getent("ambush_console_node", "targetname");
+      var_1 = getEnt("ambush_console_node", "targetname");
       common_scripts\utility::flag_wait("player_used_computer");
       wait 1.0;
       objective_state(maps\_utility::obj("OBJ_INVESTIGATE"), "done");

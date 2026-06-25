@@ -45,7 +45,7 @@ main() {
   setsaveddvar("ragdoll_reactivation_cutoff", "0");
   setsaveddvar("disable_drone_footsteps", "1");
   drones_set_max_ragdolls(0);
-  riverbed_blocker = getent("riverbed_blocker", "targetname");
+  riverbed_blocker = getEnt("riverbed_blocker", "targetname");
   riverbed_blocker notsolid();
   level thread maps\angola_savannah::show_savannah_rocks();
 }

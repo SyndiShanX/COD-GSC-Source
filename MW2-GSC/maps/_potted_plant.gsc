@@ -22,7 +22,7 @@ potted_plant() {
 
   trig = undefined;
   if(isDefined(self.target)) {
-    trig = getent(self.target, "targetname");
+    trig = getEnt(self.target, "targetname");
   }
 
   self thread potted_plant_damage();

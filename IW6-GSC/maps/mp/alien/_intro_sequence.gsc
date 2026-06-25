@@ -50,7 +50,7 @@ alien_town_intro(player) {
   level waittill("introscreen_over");
   CHOPPER_START_POSITION = (2830.455, -398.027, 707.026);
 
-  helibrush = GetEnt("helicoptercoll", "targetname");
+  helibrush = getEnt("helicoptercoll", "targetname");
 
   heli = SpawnHelicopter(player, CHOPPER_START_POSITION, helibrush.angles + (0, 180, 0), "nh90_alien_intro", "tag_origin_vehicle");
   assert(isDefined(heli));
@@ -127,7 +127,7 @@ spawn_model(model_name, attach_to_entity, tag_name, spawn_angle_offset) {
   new_model setModel(model_name);
   new_model.origin = attach_to_entity GetTagOrigin(tag_name);
   new_model.angles = attach_to_entity GetTagAngles(tag_name) + spawn_angle_offset;
-  new_model LinkTo(attach_to_entity, tag_name);
+  new_model linkTo(attach_to_entity, tag_name);
 
   return new_model;
 }

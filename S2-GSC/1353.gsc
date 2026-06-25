@@ -859,7 +859,7 @@ lib_0549::func_563C(param_00) {
 }
 
 lib_0549::func_3468() {
-  self sethintstring(&"ZOMBIES_WALL_BUY_GENERIC");
+  self setHintString(&"ZOMBIES_WALL_BUY_GENERIC");
   for(;;) {
     self waittill("trigger", var_00);
     if(!common_scripts\utility::func_562E(self.var_15CC.var_17E9)) {
@@ -880,7 +880,7 @@ lib_0549::func_AA28() {
     self makeunusable();
   }
 
-  self sethintstring(&"ZOMBIES_REPAIR_BOARDS_HINT");
+  self setHintString(&"ZOMBIES_REPAIR_BOARDS_HINT");
   for(;;) {
     var_01 = 0;
     if(!common_scripts\utility::func_562E(self.var_9D9F)) {

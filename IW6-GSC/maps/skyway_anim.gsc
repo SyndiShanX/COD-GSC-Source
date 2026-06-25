@@ -1115,7 +1115,7 @@ breach_enemy_player_stab(var_0) {
 
 notetrack_player_kick_door(var_0) {
   earthquake(0.4, 0.5, level.player.origin, 3000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 notetrack_player_blast(var_0) {}
@@ -1151,7 +1151,7 @@ breach_enemy_death_anim_override() {
   }
 
   if(isDefined(self.deathanim)) {
-    self stopanimscripted();
+    self stopanimScripted();
     self setflaggedanimknoblimitedrestart("deathanim", self.deathanim, 1, 0.2);
     wait(getanimlength(self.deathanim));
     thread end_breach_swap_dead_opfor();
@@ -1192,7 +1192,7 @@ notetrack_headbutt(var_0) {
   level.player playSound("scn_sw_loco_standoff_02");
   level.player shellshock("default_nosound", 1.0);
   level.player maps\_hud_util::fade_out(0, "white");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.1;
   level.player maps\_hud_util::fade_in(0.5, "white");
 
@@ -1205,7 +1205,7 @@ notetrack_headbutt(var_0) {
 }
 
 notetrack_in_the_face(var_0) {
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player shellshock("default_nosound", 2.5);
   level.player maps\_hud_util::fade_out(0, "white");
   setblur(6, 0.05);
@@ -1225,7 +1225,7 @@ notetrack_in_the_face(var_0) {
 
 notetrack_hit_door(var_0) {
   maps\skyway_util::train_quake(0.6, 1.0, level.player.origin, 2048);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_ent, 0.8, 0.0, 0.2, 0.0, 0.5);
   thread maps\_art::dof_enable_script(0, 60, 6.08, 6623.4, 13099.2, 1.8, 3.2);
   level.player shellshock("default_nosound", 1.5);

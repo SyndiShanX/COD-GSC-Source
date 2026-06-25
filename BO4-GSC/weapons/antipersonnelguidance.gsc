@@ -220,7 +220,7 @@ aplockloop(weapon) {
 }
 
 getbesttarget(weapon) {
-  playertargets = getplayers();
+  playertargets = getPlayers();
   vehicletargets = target_getarray();
   targetsall = getaiteamarray();
   targetsall = arraycombine(targetsall, playertargets, 0, 0);
@@ -259,7 +259,7 @@ getbesttarget(weapon) {
   for(i = 0; i < targetsvalid.size; i++) {
     newitem = spawnStruct();
     newitem.index = i;
-    newitem.dot = vectordot(playerforward, vectornormalize(targetsvalid[i].origin - self.origin));
+    newitem.dot = vectordot(playerforward, vectorNormalize(targetsvalid[i].origin - self.origin));
     array::add_sorted(dots, newitem, 0, &targetinsertionsortcompare);
   }
 
@@ -339,7 +339,7 @@ seekersound(alias, looping, id) {
   self endon("stop_sound" + id, #"disconnect", #"death");
 
   if(isDefined(alias)) {
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     time = soundgetplaybacktime(alias) * 0.001;
 
     do {

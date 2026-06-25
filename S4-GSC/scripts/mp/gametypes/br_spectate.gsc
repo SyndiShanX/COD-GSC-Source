@@ -1055,7 +1055,7 @@ _id_48EE(var_0) {
 
     for(var_61 = var_1 getspectatingplayer(); !isDefined(var_61); var_61 = var_1 getspectatingplayer()) {
       var_62 = var_7.origin + var_59 * var_60;
-      var_7 setorigin(var_62);
+      var_7 setOrigin(var_62);
       waitframe();
     }
   }
@@ -1081,7 +1081,7 @@ _id_48EE(var_0) {
     var_65 = getarraykeys(level.vehicle._id_8300["little_bird"]);
     var_66 = level.vehicle._id_8300["little_bird"][var_65[0]];
     var_67 = var_66 _meth_86EB();
-    var_24 setorigin(var_66.origin);
+    var_24 setOrigin(var_66.origin);
     wait 1;
     _id_09E1::_id_10109(var_67, "single", "vehicle_use", var_24, 0);
 
@@ -1092,7 +1092,7 @@ _id_48EE(var_0) {
   }
 
   if(_id_1B10(var_0, "water")) {
-    var_1 setorigin((28252, -32627, -415));
+    var_1 setOrigin((28252, -32627, -415));
   }
 
   if(_id_1B10(var_0, "disconnectswitch1")) {
@@ -1237,7 +1237,7 @@ _id_B7F6(var_0, var_1) {
   var_3 = anglesToForward((0, 0, 0));
   var_4 = var_0.origin + var_3 * (var_1 * 50);
   var_5 = getgroundposition(var_4, 15, 100);
-  self setorigin(var_5);
+  self setOrigin(var_5);
   self setplayerangles((0, 0, 0));
 }
 

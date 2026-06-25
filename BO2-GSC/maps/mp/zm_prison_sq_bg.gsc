@@ -23,14 +23,14 @@ init() {
 }
 
 sq_bg_easy_cleanup() {
-  t_reward_pickup = getent("sq_bg_reward_pickup", "targetname");
+  t_reward_pickup = getEnt("sq_bg_reward_pickup", "targetname");
   t_reward_pickup delete();
 }
 
 wait_for_initial_conditions() {
-  t_reward_pickup = getent("sq_bg_reward_pickup", "targetname");
-  t_reward_pickup sethintstring("");
-  t_reward_pickup setcursorhint("HINT_NOICON");
+  t_reward_pickup = getEnt("sq_bg_reward_pickup", "targetname");
+  t_reward_pickup setHintString("");
+  t_reward_pickup setCursorHint("HINT_NOICON");
 
   level thread debug_sq_bg_quest_starter();
 
@@ -95,7 +95,7 @@ tomahawk_the_macguffin(grenade, n_grenade_charge_power) {
       m_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
       macguffin notify("caught_by_tomahawk");
       macguffin.origin = grenade.origin;
-      macguffin linkto(m_tomahawk);
+      macguffin linkTo(m_tomahawk);
       macguffin thread maps\mp\zombies\_zm_afterlife::disable_afterlife_prop();
       self thread maps\mp\zombies\_zm_weap_tomahawk::tomahawk_return_player(m_tomahawk);
       self thread give_player_macguffin_upon_receipt(m_tomahawk, macguffin);
@@ -146,7 +146,7 @@ play_sq_bg_collected_vo(player) {
 }
 
 give_sq_bg_reward() {
-  s_reward_origin = getstruct("sq_bg_reward", "targetname");
+  s_reward_origin = getStruct("sq_bg_reward", "targetname");
   t_near = spawn("trigger_radius", s_reward_origin.origin, 0, 196, 64);
 
   while(true) {
@@ -160,7 +160,7 @@ give_sq_bg_reward() {
     wait 0.1;
   }
 
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size == 1) {
     if(a_players[0] hasweapon("blundergat_zm")) {
@@ -176,9 +176,9 @@ give_sq_bg_reward() {
   }
 
   m_reward_model = spawn_weapon_model(str_reward_weapon, undefined, s_reward_origin.origin, s_reward_origin.angles);
-  m_reward_model moveto(m_reward_model.origin + vectorscale((0, 0, 1), 14.0), 5);
+  m_reward_model moveTo(m_reward_model.origin + vectorscale((0, 0, 1), 14.0), 5);
   level setclientfield("sq_bg_reward_portal", 1);
-  self sethintstring(str_loc);
+  self setHintString(str_loc);
 
   while(true) {
     self waittill("trigger", player);
@@ -203,7 +203,7 @@ give_sq_bg_reward() {
 }
 
 sq_bg_spawn_rumble() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player istouching(self)) {
@@ -235,7 +235,7 @@ take_old_weapon_and_give_reward(current_weapon, reward_weapon, weapon_limit_over
 
 debug_sq_bg_quest_starter() {
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(player hasweapon("bouncing_tomahawk_zm")) {

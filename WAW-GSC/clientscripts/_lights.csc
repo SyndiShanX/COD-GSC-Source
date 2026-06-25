@@ -258,7 +258,7 @@ power_lights_flicker_think(clientNum) {
   }
 
   if(isDefined(self.target)) {
-    self.light_model = GetEnt(clientNum, self.target, "targetname");
+    self.light_model = getEnt(clientNum, self.target, "targetname");
   }
 
   min_intensity = 0.25;

@@ -120,7 +120,7 @@ function jump_down_traversal(startnode, endnode) {
   level endon("game_ended");
   self thread watch_traversal_end();
   fwd = (endnode.origin[0] - startnode.origin[0], endnode.origin[1] - startnode.origin[1], 0);
-  fwd = vectornormalize(fwd) * 128;
+  fwd = vectorNormalize(fwd) * 128;
   start = startnode.origin + vectorscale((0, 0, 1), 16);
   end = (startnode.origin + fwd) + vectorscale((0, 0, 1), 16);
   result = bulletTrace(start, end, 0, self);
@@ -154,7 +154,7 @@ function wallrun_traversal(startnode, endnode, vector) {
   level endon("game_ended");
   self thread watch_traversal_end();
   wallnormal = getnavmeshfacenormal(endnode.origin, 30);
-  wallnormal = vectornormalize((wallnormal[0], wallnormal[1], 0));
+  wallnormal = vectorNormalize((wallnormal[0], wallnormal[1], 0));
   traversaldir = (startnode.origin[0] - endnode.origin[0], startnode.origin[1] - endnode.origin[1], 0);
   cross = vectorcross(wallnormal, traversaldir);
   rundir = vectorcross(wallnormal, cross);
@@ -178,7 +178,7 @@ function wait_wallrun_begin(startnode, endnode, wallnormal, rundir) {
   if(isDefined(exitstartnode)) {
     exitendnode = getothernodeinnegotiationpair(exitstartnode);
     if(isDefined(exitendnode)) {
-      self thread exit_wallrun(exitstartnode, exitendnode, wallnormal, vectornormalize(rundir));
+      self thread exit_wallrun(exitstartnode, exitendnode, wallnormal, vectorNormalize(rundir));
     }
   }
 }
@@ -233,14 +233,14 @@ function jump_to(target, vector) {
   level endon("game_ended");
   if(isDefined(vector)) {
     self botsetmoveangle(vector);
-    movedir = vectornormalize((vector[0], vector[1], 0));
+    movedir = vectorNormalize((vector[0], vector[1], 0));
   } else {
     self botsetmoveanglefrompoint(target);
     targetdelta = target - self.origin;
-    movedir = vectornormalize((targetdelta[0], targetdelta[1], 0));
+    movedir = vectorNormalize((targetdelta[0], targetdelta[1], 0));
   }
   velocity = self getvelocity();
-  velocitydir = vectornormalize((velocity[0], velocity[1], 0));
+  velocitydir = vectorNormalize((velocity[0], velocity[1], 0));
   if(vectordot(movedir, velocitydir) < 0.94) {
     wait(0.05);
   }

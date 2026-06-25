@@ -79,7 +79,7 @@ _id_828E(var_0, var_1, var_2) {
   var_1._id_523F = 1;
 
   if(isDefined(var_1._id_50B4)) {
-    var_4 linkto(var_1._id_50B4);
+    var_4 linkTo(var_1._id_50B4);
   } else if(isDefined(var_1.target)) {
     var_1._id_1A53 = getEntArray(var_1.target, "targetname");
   }
@@ -170,7 +170,7 @@ _id_CA75(var_0) {
   var_1.angles = self getplayerangles();
   self._id_ED17 = var_1;
   self._id_8AD7 = 1;
-  self cameralinkto(var_1, "tag_origin", 1);
+  self cameralinkTo(var_1, "tag_origin", 1);
   var_1 _id_A227(var_0._id_9AC3[self.team].origin, var_0._id_9AC3[self.team].angles, self);
   self setclientomnvar("ui_tac_ops_map_open", 1);
   _id_C1AB();
@@ -358,10 +358,10 @@ _id_CA72() {
   var_0 = self getEye();
   var_1 = self.angles;
   scripts\mp\utility\player::_id_FD26("spectator");
-  self cameralinkto(self._id_ED17, "tag_origin", 1);
+  self cameralinkTo(self._id_ED17, "tag_origin", 1);
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.2);
-  self._id_ED17 moveto(var_0, 0.5);
-  self._id_ED17 rotateto(var_1, 0.5, 0.5);
+  self._id_ED17 moveTo(var_0, 0.5);
+  self._id_ED17 rotateTo(var_1, 0.5, 0.5);
   wait 0.5;
   self visionsetnakedforplayer("", 0);
   thread _id_B8DB();
@@ -390,8 +390,8 @@ _id_B8DB() {
 _id_A227(var_0, var_1, var_2) {
   var_3 = 1.0;
   var_4 = 1.0;
-  self moveto(var_0, 1.0, 0.5, 0.5);
-  self rotateto(var_1, 1.0, 0.5, 0.5);
+  self moveTo(var_0, 1.0, 0.5, 0.5);
+  self rotateTo(var_1, 1.0, 0.5, 0.5);
   var_2 thread _id_E705();
   wait 1.1;
 }

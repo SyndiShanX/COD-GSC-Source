@@ -282,7 +282,7 @@ class class_9e71c1a2 {
   }
 
   function function_70a50147(str_team) {
-    foreach(e_player in getplayers(str_team)) {
+    foreach(e_player in getPlayers(str_team)) {
       self function_49c02476(e_player);
     }
   }
@@ -607,7 +607,7 @@ class class_9e71c1a2 {
   }
 
   function function_9e6bea30(str_team) {
-    foreach(e_player in getplayers(str_team)) {
+    foreach(e_player in getPlayers(str_team)) {
       self function_2e32e924(e_player);
     }
   }
@@ -651,7 +651,7 @@ class class_9e71c1a2 {
         }
       }
 
-      foreach(e_player in getplayers(var_2be76207)) {
+      foreach(e_player in getPlayers(var_2be76207)) {
         if(isinarray(var_884c51e, e_player)) {
           continue;
         }
@@ -735,7 +735,7 @@ class class_9e71c1a2 {
       var_d045c932 = var_2be76207;
     }
 
-    var_6678b09c = getplayers(var_d045c932);
+    var_6678b09c = getPlayers(var_d045c932);
     var_6678b09c = array::exclude(var_6678b09c, var_884c51e);
 
     foreach(e_player in var_6678b09c) {

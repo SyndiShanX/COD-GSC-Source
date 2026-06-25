@@ -125,7 +125,7 @@ player_within_pick_up_distance(var_0, var_1) {
 }
 
 delete_dirty_glass() {
-  var_0 = getent("sb_quest_dirty_glass", "targetname");
+  var_0 = getEnt("sb_quest_dirty_glass", "targetname");
   var_0 delete();
 }
 
@@ -147,7 +147,7 @@ delete_clean_arcade_cabinet_entities() {
 debug_clean_arcade_cabinet() {}
 
 make_winning_mahjong_hand() {
-  var_0 = scripts\engine\utility::getstruct("mahjong_set", "targetname");
+  var_0 = scripts\engine\utility::getStruct("mahjong_set", "targetname");
   level thread set_up_mahjong_set(var_0);
   level waittill("mahjong_won_sequence_complete");
 }
@@ -714,7 +714,7 @@ get_additional_num_of_missing_tiles() {
 }
 
 clean_up_all_mahjong() {
-  var_0 = scripts\engine\utility::getstruct("mahjong_set", "targetname");
+  var_0 = scripts\engine\utility::getStruct("mahjong_set", "targetname");
   if(isDefined(var_0.mahjong_set)) {
     for(var_1 = 1; var_1 <= 14; var_1++) {
       if(isDefined(var_0.mahjong_set[var_1].mahjong_tile)) {
@@ -759,7 +759,7 @@ write_1_9_7_2() {
 }
 
 wait_player_write_number(var_0) {
-  var_1 = scripts\engine\utility::getstruct("sb_writing_quest_" + var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct("sb_writing_quest_" + var_0, "targetname");
   set_up_controlling_struct(var_1);
   set_up_timer_candles(var_1);
   for(;;) {
@@ -1050,7 +1050,7 @@ debug_write_1_9_7_2() {}
 clean_up_1_9_7_2_setups() {
   var_0 = ["1", "9", "7", "2"];
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstruct("sb_writing_quest_" + var_2, "targetname");
+    var_3 = scripts\engine\utility::getStruct("sb_writing_quest_" + var_2, "targetname");
     clean_all_flame_vfx(var_3);
     clean_all_candles(var_3);
     clean_damage_monitor(var_3);
@@ -1062,7 +1062,7 @@ do_sky_steps() {
   wait_for_ghetto_rooftop_bridge_door_open();
   prepare_sky_steps();
   for(;;) {
-    var_0 = scripts\engine\utility::getstruct("sky_step_start", "targetname");
+    var_0 = scripts\engine\utility::getStruct("sky_step_start", "targetname");
     var_1 = activate_sky_step(var_0, 0);
     wait_for_player_to_jump_on_top(var_1);
     var_1 thread sky_step_timeout_monitor(var_1);
@@ -1133,7 +1133,7 @@ complete_sky_steps() {
 debug_do_sky_steps() {}
 
 activate_sky_step_goal() {
-  var_0 = scripts\engine\utility::getstruct("sky_step_goal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("sky_step_goal", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("sb_quest_origin");
   var_1 setscriptablepartstate("vfx", "train_skull");
@@ -1225,7 +1225,7 @@ prepare_sky_steps() {
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin + (0, 0, 2));
     var_3 setModel("sb_quest_origin");
-    var_3 linkto(var_2);
+    var_3 linkTo(var_2);
     var_2.activated = 0;
     var_2.sky_step_vfx = var_3;
     var_2.original_pos = var_2.origin;
@@ -1289,7 +1289,7 @@ try_set_up_skull_in_front_of_train(var_0) {
     var_2.angles = vectortoangles((0, 1, 0));
     var_2 setModel("sb_quest_origin");
     var_2 setscriptablepartstate("vfx", "train_skull");
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
     level.train_skull = var_2;
     var_2 thread player_jump_by_monitor(var_2);
   }

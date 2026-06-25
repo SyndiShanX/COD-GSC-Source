@@ -90,7 +90,7 @@ function on_menu_response() {
         self globallogic::gamehistoryplayerquit();
         self closeingamemenu();
         if(self ishost()) {
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             player givemissingunlocktokens();
             var_62f6e136 = player getdstat("unlocks", 0);
             var_7f6b97ce = player getdstat("PlayerStatsList", "CAREER_TOKENS", "statValue");
@@ -105,7 +105,7 @@ function on_menu_response() {
         self closeingamemenu();
         self iprintln(&"MP_HOST_ENDGAME_RESPONSE");
       }
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player.musicplaying === 1) {
           function_521a4b1f(player);
         }

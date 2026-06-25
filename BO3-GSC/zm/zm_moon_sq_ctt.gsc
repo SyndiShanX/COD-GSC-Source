@@ -62,7 +62,7 @@ function stage_logic() {
     s = struct::get("sq_vg_final", "targetname");
     r_close = 0;
     while(!r_close) {
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         ent_num = players[i].characterindex;
         if(isDefined(players[i].zm_random_char)) {
@@ -98,8 +98,8 @@ function stage_logic() {
   drain_tanks();
   for(i = 0; i < level._active_tanks.size; i++) {
     tank = level._active_tanks[i];
-    tank.capacitor moveto(tank.capacitor.origin + vectorscale((0, 0, 1), 12), 2);
-    tank.tank moveto(tank.tank.origin - vectorscale((0, 0, 1), 57.156), 2);
+    tank.capacitor moveTo(tank.capacitor.origin + vectorscale((0, 0, 1), 12), 2);
+    tank.tank moveTo(tank.tank.origin - vectorscale((0, 0, 1), 57.156), 2);
     tank.tank playSound("evt_tube_move_down");
     tank.tank util::delay(2, undefined, &exploder::stop_exploder, "canister_light_0" + tank.tank.script_int);
     tank.tank thread play_delayed_stop_sound(2);
@@ -166,7 +166,7 @@ function play_sam_vo(_line, origin, index) {
 function drain_tanks() {
   for(i = 0; i < level._active_tanks.size; i++) {
     tank = level._active_tanks[i];
-    tank.fill_model moveto(tank.fill_model.origin - vectorscale((0, 0, 1), 65), 1.5, 0.1, 0.1);
+    tank.fill_model moveTo(tank.fill_model.origin - vectorscale((0, 0, 1), 65), 1.5, 0.1, 0.1);
     tank.tank stoploopsound(1);
     tank.tank playSound("evt_souls_flush");
     tank.fill_model thread delay_hide();
@@ -208,7 +208,7 @@ function kill_tanks() {
 }
 
 function movetopos(pos) {
-  self moveto(pos, 1);
+  self moveTo(pos, 1);
 }
 
 function add_tank(tank_name, other_tank_name) {
@@ -234,7 +234,7 @@ function add_tank(tank_name, other_tank_name) {
     capacitor_model setModel(capacitor_struct.model);
     capacitor_model thread movetopos(capacitor_struct.origin);
     tank_trigger.capacitor = capacitor_model;
-    tank_model = getent(capacitor_struct.target, "targetname");
+    tank_model = getEnt(capacitor_struct.target, "targetname");
     tank_model thread movetopos(tank_model.origin + (0, 0, 57.156));
     tank_model playSound("evt_tube_move_up");
     tank_model util::delay(2, undefined, &exploder::exploder, "canister_light_0" + tank_model.script_int);
@@ -242,7 +242,7 @@ function add_tank(tank_name, other_tank_name) {
     tank_trigger.tank = tank_model;
     tank_trigger.fill = 0;
     scalar = 1;
-    scalar = scalar + ((getplayers().size - 1) * 0.33);
+    scalar = scalar + ((getPlayers().size - 1) * 0.33);
     tank_trigger.max_fill = int(25 * scalar);
     max_fill = struct::get(tank_model.target, "targetname");
     tank_trigger.tank.fill_step = (max_fill.origin[2] - (tank_model.origin[2] + 53)) / tank_trigger.max_fill;
@@ -313,13 +313,13 @@ function ctt1_fifty_percent_vox() {
   while(percent_full() < 0.5) {
     wait(0.5);
   }
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest4", 1);
 }
 
 function ctt1_full_vox() {
   level waittill("ctt_aud_note");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest4", 2);
 }
 
@@ -346,7 +346,7 @@ function setup_and_play_ctt2_vox() {
 
 function ctt2_full_vox() {
   level waittill("ctt_aud_note");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest6", 6);
 }
 

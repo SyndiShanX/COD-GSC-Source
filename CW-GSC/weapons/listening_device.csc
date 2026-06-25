@@ -133,7 +133,7 @@ function private function_cf419a0(localclientnum, icon, range) {
 
   var_a2774043 = spawn(localclientnum, self.origin, "script_model", self.owner getentitynumber(), self.team);
   var_a2774043 setModel(#"tag_origin");
-  var_a2774043 linkto(self);
+  var_a2774043 linkTo(self);
   var_a2774043 setcompassicon(icon);
   var_a2774043 function_5e00861(range * 2, 1);
   var_a2774043 function_a5edb367(#"neutral");
@@ -504,7 +504,7 @@ function private function_60b0e73f(device, params) {
 
   bundle = params.bundle;
   var_a8eeaacb = sixthsenseent.origin - device.origin;
-  var_9f639ea5 = vectornormalize((var_a8eeaacb[0], var_a8eeaacb[1], 0));
+  var_9f639ea5 = vectorNormalize((var_a8eeaacb[0], var_a8eeaacb[1], 0));
 
   if(!isDefined(device.var_2a5aebad)) {
     device.var_2a5aebad = anglesToForward((0, device.angles[1], 0));

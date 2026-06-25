@@ -109,7 +109,7 @@ disable_limp(var_0, var_1) {
   } else {
     var_2 = randomfloatrange(0.65, 1.25);
     var_3 = adjust_angles_to_player((0, 0, 0));
-    self.ground_ref_ent rotateto(var_3, var_2, 0, var_2 / 2);
+    self.ground_ref_ent rotateTo(var_3, var_2, 0, var_2 / 2);
     self.ground_ref_ent waittill("rotatedone");
   }
 
@@ -197,11 +197,11 @@ stumble(var_0, var_1, var_2, var_3) {
   var_0 = adjust_angles_to_player(var_0);
   self notify("stumble");
   create_ground_ref_ent();
-  self.ground_ref_ent rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  self.ground_ref_ent rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   self.ground_ref_ent waittill("rotatedone");
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = adjust_angles_to_player(var_4);
-  self.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
+  self.ground_ref_ent rotateTo(var_4, var_2, 0, var_2 / 2);
   self.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(var_3)) {
@@ -320,15 +320,15 @@ player_jump_punishment() {
 
 recover() {
   var_0 = adjust_angles_to_player((-5, -5, 0));
-  self.ground_ref_ent rotateto(var_0, 0.4, 0.4, 0);
+  self.ground_ref_ent rotateTo(var_0, 0.4, 0.4, 0);
   self.ground_ref_ent waittill("rotatedone");
   var_0 = adjust_angles_to_player((-15, -20, 0));
-  self.ground_ref_ent rotateto(var_0, 1, 0, 1);
+  self.ground_ref_ent rotateTo(var_0, 1, 0, 1);
   self.ground_ref_ent waittill("rotatedone");
   var_0 = adjust_angles_to_player((5, 5, 0));
-  self.ground_ref_ent rotateto(var_0, 0.9, 0.7, 0.1);
+  self.ground_ref_ent rotateTo(var_0, 0.9, 0.7, 0.1);
   self.ground_ref_ent waittill("rotatedone");
-  self.ground_ref_ent rotateto((0, 0, 0), 1, 0.2, 0.8);
+  self.ground_ref_ent rotateTo((0, 0, 0), 1, 0.2, 0.8);
 }
 
 adjust_angles_to_player(var_0) {

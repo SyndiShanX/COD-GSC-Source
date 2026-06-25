@@ -118,7 +118,7 @@ knockdown_zombies(var_0) {
       var_0.knockdownzombies = scripts\engine\utility::array_add(var_0.knockdownzombies, var_5);
 
       if(var_5 _id_06FE::is_zm_normal()) {
-        var_6 = vectornormalize(var_5.origin - var_2.origin);
+        var_6 = vectorNormalize(var_5.origin - var_2.origin);
         var_5 scripts\aitypes\zombie_common\push::knockdown(var_6);
         continue;
       }

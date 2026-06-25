@@ -23,7 +23,7 @@ default_playerlaststand(var_0) {
 
 forcebleedout(var_0) {
   if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
   }
 
   self.bleedoutspawnentityoverride = var_0;
@@ -382,7 +382,7 @@ wait_for_self_revive(var_0, var_1) {
   }
 
   if(is_killed_by_kill_trigger(var_0)) {
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
   } else {
     wait(5);
   }
@@ -538,8 +538,8 @@ makereviveentity(var_0, var_1, var_2, var_3, var_4) {
   var_5 = (0, 0, 20);
   var_1 = scripts\engine\utility::drop_to_ground(var_1 + var_5, 32, -64);
   var_6 = spawn("script_model", var_1);
-  var_6 setcursorhint("HINT_NOICON");
-  var_6 sethintstring(&"PLATFORM_REVIVE");
+  var_6 setCursorHint("HINT_NOICON");
+  var_6 setHintString(&"PLATFORM_REVIVE");
   var_6.owner = var_0;
   var_6.inuse = 0;
   var_6.var_336 = "revive_trigger";
@@ -552,7 +552,7 @@ makereviveentity(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(var_4) {
-    var_6 linkto(var_0, "tag_origin", var_5, (0, 0, 0));
+    var_6 linkTo(var_0, "tag_origin", var_5, (0, 0, 0));
   }
 
   var_6 thread cleanupreviveent(var_0);
@@ -788,8 +788,8 @@ camera_zoomout(var_0, var_1, var_2) {
   var_13 setModel("tag_origin");
   var_13.angles = vectortoangles((0, 0, -1));
   var_13 thread cleanupreviveent(var_0);
-  var_0 cameralinkto(var_13, "tag_origin");
-  var_13 moveto(var_12, var_6, var_7, var_8);
+  var_0 cameralinkTo(var_13, "tag_origin");
+  var_13 moveTo(var_12, var_6, var_7, var_8);
   var_13 waittill("movedone");
   var_13 delete();
   var_0 enter_bleed_out(var_0);
@@ -908,7 +908,7 @@ enter_revive_use_hold_think(var_0, var_1, var_2, var_3) {
   var_1 setclientomnvar("ui_securing", 3);
   var_0.being_revived = 1;
   if(isPlayer(var_1)) {
-    var_1 playerlinkto(var_2);
+    var_1 playerlinkTo(var_2);
     var_1 playerlinkedoffsetenable();
     var_1 scripts\cp\powers\coop_powers::power_disablepower();
     var_1 thread play_rescue_anim(var_1);
@@ -1054,7 +1054,7 @@ show_revive_icon_to_player(var_0, var_1) {
   var_2 = newclienthudelem(var_1);
   var_2 setshader("waypoint_alien_revive", 8, 8);
   var_2 setwaypoint(1, 1);
-  var_2 settargetent(var_0);
+  var_2 settargetEnt(var_0);
   var_2.alpha = get_revive_icon_initial_alpha(var_1);
   var_2.color = var_0.current_revive_icon_color;
   add_to_player_revive_icon_list(var_1, var_2);

@@ -126,7 +126,7 @@ function zombiefindflesh(behaviortreeentity) {
   }
   zombie_poi = behaviortreeentity zm_utility::get_zombie_point_of_interest(behaviortreeentity.origin);
   behaviortreeentity.zombie_poi = zombie_poi;
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(behaviortreeentity.ignore_player) || players.size == 1) {
     behaviortreeentity.ignore_player = [];
   } else if(!isDefined(level._should_skip_ignore_player_logic) || ![[level._should_skip_ignore_player_logic]]()) {
@@ -357,7 +357,7 @@ function zombieupdategoal() {
           currentseglength = distance(path[index - 1], path[index]);
           if((segmentlength + currentseglength) > deviationdistance) {
             remaininglength = deviationdistance - segmentlength;
-            seedposition = (path[index - 1]) + ((vectornormalize(path[index] - (path[index - 1]))) * remaininglength);
+            seedposition = (path[index - 1]) + ((vectorNormalize(path[index] - (path[index - 1]))) * remaininglength);
             recordcircle(seedposition, 2, (1, 0.5, 0), "", self);
             innerzigzagradius = level.inner_zigzag_radius;
             outerzigzagradius = level.outer_zigzag_radius;
@@ -419,7 +419,7 @@ function zombieupdategoalcode() {
           currentseglength = distance(path[index - 1], path[index]);
           if((segmentlength + currentseglength) > deviationdistance) {
             remaininglength = deviationdistance - segmentlength;
-            seedposition = (path[index - 1]) + ((vectornormalize(path[index] - (path[index - 1]))) * remaininglength);
+            seedposition = (path[index - 1]) + ((vectorNormalize(path[index] - (path[index - 1]))) * remaininglength);
             recordcircle(seedposition, 2, (1, 0.5, 0), "", self);
             innerzigzagradius = level.inner_zigzag_radius;
             outerzigzagradius = level.outer_zigzag_radius;
@@ -643,7 +643,7 @@ function zombieshouldattackthroughboardscondition(behaviortreeentity) {
     setDvar("zombie_reachin_freq", "50");
   }
   freq = getdvarint("zombie_reachin_freq");
-  players = getplayers();
+  players = getPlayers();
   attack = 0;
   behaviortreeentity.player_targets = [];
   for(i = 0; i < players.size; i++) {

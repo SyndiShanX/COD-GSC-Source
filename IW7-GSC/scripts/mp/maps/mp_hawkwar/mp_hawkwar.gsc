@@ -24,15 +24,15 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("player128x128x128", "targetname");
+  var_0 = getEnt("player128x128x128", "targetname");
   var_1 = spawn("script_model", (1152, 2256, -16));
   var_1.angles = (0, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("player64x64x256", "targetname");
+  var_2 = getEnt("player64x64x256", "targetname");
   var_3 = spawn("script_model", (960, 1052, 374));
   var_3.angles = (275, 90, -90);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("player64x64x256", "targetname");
+  var_4 = getEnt("player64x64x256", "targetname");
   var_5 = spawn("script_model", (1104, 1052, 374));
   var_5.angles = (275, 90, -90);
   var_5 clonebrushmodeltoscriptmodel(var_4);

@@ -457,7 +457,7 @@ function private function_d9c14343(team, deadteam) {
     return;
   }
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     if(isDefined(player.var_badeb470) && player.var_badeb470 >= var_fbd29ffa) {
       scoreevents::processscoreevent(#"hash_262e6fe6640db556", player);
     }
@@ -479,7 +479,7 @@ function bombs() {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  trigger = getent("sd_bomb_pickup_trig", "targetname");
+  trigger = getEnt("sd_bomb_pickup_trig", "targetname");
 
   if(!isDefined(trigger)) {
     util::error("<dev string:x38>");
@@ -487,7 +487,7 @@ function bombs() {
     return;
   }
 
-  visuals[0] = getent("sd_bomb", "targetname");
+  visuals[0] = getEnt("sd_bomb", "targetname");
 
   if(!isDefined(visuals[0])) {
     util::error("<dev string:x68>");
@@ -546,7 +546,7 @@ function bombs() {
     bombzone.angles = visuals[0].angles;
     bombzone gameobjects::allow_use(#"group_enemy");
     bombzone gameobjects::set_use_time(level.planttime);
-    trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+    trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
 
     if(!level.multibomb) {
       bombzone gameobjects::set_key_object(level.sdbomb);
@@ -597,7 +597,7 @@ function bombs() {
 
     level.bombzones[level.bombzones.size] = bombzone;
     level.var_b10236da[level.var_b10236da.size] = var_69bc8821;
-    bombzone.bombdefusetrig = getent(visuals[0].target, "targetname");
+    bombzone.bombdefusetrig = getEnt(visuals[0].target, "targetname");
     assert(isDefined(bombzone.bombdefusetrig));
     bombzone.bombdefusetrig.origin += (0, 0, -10000);
     bombzone.bombdefusetrig.label = label;
@@ -890,7 +890,7 @@ function onpickup(player) {
   player playSound(#"fly_bomb_pickup_plr");
 
   for(i = 0; i < level.bombzones.size; i++) {
-    foreach(p in getplayers()) {
+    foreach(p in getPlayers()) {
       if(p getentitynumber() != player getentitynumber()) {
         level.bombzones[i].trigger setinvisibletoplayer(p);
       }
@@ -956,7 +956,7 @@ function bombplanted(destroyedobj, player) {
     trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), 0, player);
     tempangle = randomfloat(360);
     forward = (cos(tempangle), sin(tempangle), 0);
-    forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
+    forward = vectorNormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
     dropangles = vectortoangles(forward);
     level.sdbombmodel = spawn("script_model", trace[#"position"] + (0, 0, 3));
     level.sdbombmodel.angles = dropangles;
@@ -971,7 +971,7 @@ function bombplanted(destroyedobj, player) {
   trigger usetriggerignoreuseholdtime();
   trigger function_268e4500();
   trigger.origin = level.sdbombmodel.origin;
-  trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   visuals = [];
   defuseobject = gameobjects::create_use_object(game.attackers, trigger, visuals, (0, 0, 0), #"sd_defuse_prompt", 1, 1);
   defuseobject gameobjects::allow_use(#"group_enemy");

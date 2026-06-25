@@ -121,7 +121,7 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
     homunculus.identifier_weapon = grenade.item;
     homunculus.player = grenade.thrower;
     grenade.homunculus = homunculus;
-    grenade.homunculus linkto(grenade);
+    grenade.homunculus linkTo(grenade);
     grenade.homunculus.team = grenade.team;
     grenade.homunculus clientfield::set("enemyequip", 1);
     var_66ae7054 = 0;
@@ -161,7 +161,7 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
         }
 
         mover = util::spawn_model("tag_origin", homunculus.origin, homunculus.angles);
-        homunculus linkto(mover);
+        homunculus linkTo(mover);
         homunculus.mover = mover;
         homunculus drop_to_ground(1);
         homunculus scene::stop();
@@ -243,7 +243,7 @@ function private drop_to_ground(b_immediate = 0) {
   var_a75fe4be = s_trace[#"position"];
 
   if(b_immediate) {
-    self.mover moveto(var_a75fe4be, 0.01);
+    self.mover moveTo(var_a75fe4be, 0.01);
     self.mover waittill(#"movedone");
     return;
   }
@@ -251,7 +251,7 @@ function private drop_to_ground(b_immediate = 0) {
   if(abs(self.origin[2] - var_a75fe4be[2]) > 1) {
     n_time = 0.25;
     self.mover scene::stop();
-    self.mover moveto(var_a75fe4be, 0.25);
+    self.mover moveTo(var_a75fe4be, 0.25);
     self.mover scene::play(#"aib_t8_zm_zod_homunculus_jump_down_01", self);
   }
 }
@@ -266,10 +266,10 @@ function private jump(scene_ents) {
 }
 
 function private face_target(target) {
-  v_dir = vectornormalize(target.origin - self.origin);
+  v_dir = vectorNormalize(target.origin - self.origin);
   v_dir = (v_dir[0], v_dir[1], 0);
   v_angles = vectortoangles(v_dir);
-  self.mover rotateto(v_angles, 0.15);
+  self.mover rotateTo(v_angles, 0.15);
 }
 
 function private function_c8f642f6(enemy, n_time) {
@@ -283,7 +283,7 @@ function private function_c8f642f6(enemy, n_time) {
       v_target = enemy getcentroid() + (0, 0, 16);
     }
 
-    self.mover moveto(v_target, n_time);
+    self.mover moveTo(v_target, n_time);
     self.mover waittill(#"movedone");
 
     if(isalive(enemy)) {

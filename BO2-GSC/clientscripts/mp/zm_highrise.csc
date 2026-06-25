@@ -48,7 +48,7 @@ main() {
 
   if(isDefined(claymores)) {
     foreach(struct in claymores) {
-      weapon_model = getstruct(struct.target, "targetname");
+      weapon_model = getStruct(struct.target, "targetname");
 
       if(isDefined(weapon_model)) {
         weapon_model.script_vector = vectorscale((0, -1, 0), 90.0);

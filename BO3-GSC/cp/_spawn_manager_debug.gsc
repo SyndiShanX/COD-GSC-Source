@@ -112,7 +112,7 @@ function spawn_manager_debug_spawn_manager() {
   level endon("spawn_manager_debug_spawn_manager");
   level.current_debug_spawn_manager = undefined;
   level.current_debug_spawn_manager_targetname = undefined;
-  level.test_player = getplayers()[0];
+  level.test_player = getPlayers()[0];
   current_spawn_manager_index = -1;
   old_spawn_manager_index = undefined;
   while(true) {

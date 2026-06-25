@@ -96,10 +96,10 @@ function player_shield_facing_attacker(vdir, limit) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = vdir * -1;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > limit;
 }
@@ -158,13 +158,13 @@ function player_damage_shield(idamage, bheld, fromcode = 0, smod = "MOD_UNKNOWN"
   shieldhealth = self damageriotshield(shielddamage);
   if(shieldhealth <= 0) {
     if(!rumbled) {
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       earthquake(1, 0.75, self.origin, 100);
     }
     self thread player_take_riotshield();
   } else {
     if(!rumbled) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
       earthquake(0.5, 0.5, self.origin, 100);
     }
     self playSound("fly_riotshield_zm_impact_zombies");
@@ -233,8 +233,8 @@ function zombie_knockdown(player, gib) {
 
 function riotshield_knockdown_zombie(player, gib) {
   self endon("death");
-  playsoundatposition("vox_riotshield_forcehit", self.origin);
-  playsoundatposition("wpn_riotshield_proj_impact", self.origin);
+  playSoundAtPosition("vox_riotshield_forcehit", self.origin);
+  playSoundAtPosition("wpn_riotshield_proj_impact", self.origin);
   if(!isDefined(self) || !isalive(self)) {
     return;
   }
@@ -279,7 +279,7 @@ function riotshield_get_enemies_in_range() {
     if(test_range_squared > knockdown_range_squared) {
       return;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(0 > dot) {
       continue;
@@ -294,9 +294,9 @@ function riotshield_get_enemies_in_range() {
     if(test_range_squared < fling_range_squared) {
       level.riotshield_fling_enemies[level.riotshield_fling_enemies.size] = zombies[i];
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-      fling_vec = vectornormalize(test_origin - view_pos);
+      fling_vec = vectorNormalize(test_origin - view_pos);
       if(5000 < test_range_squared) {
-        fling_vec = fling_vec + (vectornormalize(test_origin - radial_origin));
+        fling_vec = fling_vec + (vectorNormalize(test_origin - radial_origin));
       }
       fling_vec = (fling_vec[0], fling_vec[1], fling_force_v * abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, fling_force + (fling_force * dist_mult));

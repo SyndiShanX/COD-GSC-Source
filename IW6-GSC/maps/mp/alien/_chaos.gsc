@@ -543,7 +543,7 @@ create_alien_egg() {
   alien_egg setModel(CONST_ALIEN_EGG_MODEL);
 
   alien_egg_trigger = spawn("trigger_radius", spawn_loc, 0, EGG_TRIGGER_RADIUS, EGG_TRIGGER_HEIGHT);
-  alien_egg_trigger enableLinkTo();
+  alien_egg_trigger enablelinkTo();
   alien_egg_trigger linkTo(alien_egg);
   alien_egg.trigger = alien_egg_trigger;
 

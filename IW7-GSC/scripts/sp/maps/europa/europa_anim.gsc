@@ -178,7 +178,7 @@ func_C7BE(var_0) {
   var_5 = var_5 + var_4 * -5;
   playFX(var_1, var_5, var_2);
   var_6 = scripts\engine\utility::spawn_tag_origin(var_5, vectortoangles(var_2));
-  var_6 linkto(level.var_C7D2, "j_spineupper");
+  var_6 linkTo(level.var_C7D2, "j_spineupper");
   playFXOnTag(scripts\engine\utility::getfx("outro_gun_impact_leak"), var_6, "tag_origin");
   wait(3.75);
   stopFXOnTag(scripts\engine\utility::getfx("outro_gun_impact_leak"), var_6, "tag_origin");
@@ -411,7 +411,7 @@ func_8C5B(var_0) {
 func_12922(var_0) {
   var_1 = spawn("script_model", var_0 gettagorigin("tag_accessory_right"));
   var_1.angles = var_0 gettagangles("tag_accessory_right");
-  var_1 linkto(var_0, "tag_accessory_right");
+  var_1 linkTo(var_0, "tag_accessory_right");
   var_1 setModel("tactical_knife_iw7_wm");
   level waittill("scar_stab");
   playFX(scripts\engine\utility::getfx("player_stab"), var_1 gettagorigin("tag_knife_fx"));
@@ -448,7 +448,7 @@ func_D1B0(var_0) {
   level endon("scar_saved_player");
   level.var_4214 = spawn("script_model", level.player.origin);
   level.var_4214 setModel("tactical_knife_iw7_vm");
-  level.var_4214 linkto(level.player.var_D267, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
+  level.var_4214 linkTo(level.player.var_D267, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
   level.var_4214 hide();
   thread scripts\engine\utility::flag_set_delayed("teleport_scar1", 3);
   level waittill("stab");

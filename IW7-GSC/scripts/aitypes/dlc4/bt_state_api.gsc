@@ -119,7 +119,7 @@ chase_target_state_begin(var_0, var_1) {
   var_2 = btstate_getinstancedata(var_0);
   var_2.starttime = gettime();
   self scragentsetgoalentity(var_2.target);
-  self scragentsetgoalradius(var_2.goalradius * 0.9);
+  self scragentsetgoalRadius(var_2.goalradius * 0.9);
 }
 
 chase_target_state_done(var_0, var_1) {

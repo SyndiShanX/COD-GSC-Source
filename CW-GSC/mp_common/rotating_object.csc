@@ -60,7 +60,7 @@ function rotating_object_think() {
         break;
       case #"yaw":
       default:
-        self rotateyaw(direction * revolutions, rotate_time * revolutions);
+        self rotateYaw(direction * revolutions, rotate_time * revolutions);
         break;
     }
 

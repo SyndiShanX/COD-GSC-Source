@@ -483,7 +483,7 @@ function spawn_think_action(spawner) {
     return;
   }
   if(isDefined(self.target)) {
-    e_goal = getent(self.target, "targetname");
+    e_goal = getEnt(self.target, "targetname");
     if(isDefined(e_goal)) {
       self setgoal(e_goal);
     } else {
@@ -512,7 +512,7 @@ function set_goal_volume() {
   }
   if(isDefined(volume.target)) {
     node = getnode(volume.target, "targetname");
-    ent = getent(volume.target, "targetname");
+    ent = getEnt(volume.target, "targetname");
     struct = struct::get(volume.target, "targetname");
     pos = undefined;
     if(isDefined(node)) {
@@ -787,7 +787,7 @@ function go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, opti
 }
 
 function go_to_node_wait_for_player(node, get_target_func, dist) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(distancesquared(player.origin, node.origin) < distancesquared(self.origin, node.origin)) {
@@ -798,7 +798,7 @@ function go_to_node_wait_for_player(node, get_target_func, dist) {
   if(isDefined(node.target)) {
     temp = [[get_target_func]](node.target);
     if(temp.size == 1) {
-      vec = vectornormalize(temp[0].origin - node.origin);
+      vec = vectorNormalize(temp[0].origin - node.origin);
     } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
@@ -808,7 +808,7 @@ function go_to_node_wait_for_player(node, get_target_func, dist) {
   vec2 = [];
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    vec2[vec2.size] = vectornormalize(player.origin - self.origin);
+    vec2[vec2.size] = vectorNormalize(player.origin - self.origin);
   }
   for(i = 0; i < vec2.size; i++) {
     value = vec2[i];
@@ -1349,7 +1349,7 @@ function flood_spawner_think(trigger) {
       continue;
     }
     if(!util::script_wait(1)) {
-      players = getplayers();
+      players = getPlayers();
       if(players.size == 1) {
         wait(randomfloatrange(5, 9));
       } else {
@@ -1380,7 +1380,7 @@ function player_saw_kill(guy, attacker) {
     if(isPlayer(attacker)) {
       return 1;
     }
-    players = getplayers();
+    players = getPlayers();
     for(q = 0; q < players.size; q++) {
       if(distancesquared(attacker.origin, players[q].origin) < 40000) {
         return 1;

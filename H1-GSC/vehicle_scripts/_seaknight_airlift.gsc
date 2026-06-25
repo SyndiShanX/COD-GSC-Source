@@ -78,10 +78,10 @@ set_attached_models() {
   var_0 setModel("vehicle_ch46e_opened_door_interior_b");
   var_0.origin = level.seaknight gettagorigin("body_animate_jnt");
   var_0.angles = level.seaknight.angles;
-  var_0 linkto(level.seaknight, "body_animate_jnt");
+  var_0 linkTo(level.seaknight, "body_animate_jnt");
   var_0 = spawn("script_model", level.seaknight.origin);
   var_0 setModel("vehicle_ch46e_wires");
   var_0.origin = level.seaknight gettagorigin("body_animate_jnt");
   var_0.angles = level.seaknight.angles;
-  var_0 linkto(level.seaknight, "body_animate_jnt");
+  var_0 linkTo(level.seaknight, "body_animate_jnt");
 }

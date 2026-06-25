@@ -71,7 +71,7 @@ function mech_zombie_hole_search() {
     s_goal = struct::get("ee_mech_hole_goal_2", "targetname");
     self setvehgoalpos(s_goal.origin, 1, 0);
     self util::waittill_any("near_goal", "force_goal", "reached_end_node");
-    playsoundatposition("zmb_squest_maxis_folly", s_goal.origin);
+    playSoundAtPosition("zmb_squest_maxis_folly", s_goal.origin);
     zm_tomb_vo::maxissay("vox_maxi_drone_upgraded_3", self);
     level flag::set("ee_quadrotor_disabled");
     self dodamage(200, self.origin);
@@ -150,7 +150,7 @@ function ee_mechz_do_jump(s_spawn_pos) {
   }
   self.not_interruptable = 1;
   self setfreecameralockonallowed(0);
-  self animscripted("zm_fly_out", self.origin, self.angles, "ai_zombie_mech_exit");
+  self animScripted("zm_fly_out", self.origin, self.angles, "ai_zombie_mech_exit");
   self zombie_shared::donotetracks("zm_fly_out");
   self ghost();
   if(isDefined(self.m_claw)) {
@@ -158,13 +158,13 @@ function ee_mechz_do_jump(s_spawn_pos) {
   }
   old_fx = self.fx_field;
   self thread zombie_utility::zombie_eye_glow_stop();
-  self animscripted("zm_fly_hover_finished", self.origin, self.angles, "ai_zombie_mech_exit_hover");
+  self animScripted("zm_fly_hover_finished", self.origin, self.angles, "ai_zombie_mech_exit_hover");
   wait(level.mechz_jump_delay);
   s_landing_point = struct::get(s_spawn_pos.target, "targetname");
   if(!isDefined(s_landing_point.angles)) {
     s_landing_point.angles = (0, 0, 0);
   }
-  self animscripted("zm_fly_in", s_landing_point.origin, s_landing_point.angles, "ai_zombie_mech_arrive");
+  self animScripted("zm_fly_in", s_landing_point.origin, s_landing_point.angles, "ai_zombie_mech_arrive");
   self show();
   self.fx_field = old_fx;
   self clientfield::set("mechz_fx", self.fx_field);

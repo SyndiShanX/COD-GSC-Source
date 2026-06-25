@@ -67,13 +67,13 @@ main() {
 
 nicaragua_mason_donkeykong_objectives() {
   flag_wait("mason_truck_breadcrumbs_complete");
-  set_objective(level.obj_mason_up_hill, getstruct("donkeykong_objective_1"), "");
+  set_objective(level.obj_mason_up_hill, getStruct("donkeykong_objective_1"), "");
   flag_wait_any("donkeykong_truck_stopped", "donkeykong_top_of_hill");
-  set_objective(level.obj_mason_up_hill, getstruct("donkeykong_objective_2"), "");
+  set_objective(level.obj_mason_up_hill, getStruct("donkeykong_objective_2"), "");
   trigger_wait("player_near_donkeykong_house");
-  set_objective(level.obj_mason_up_hill, getstruct("donkeykong_objective_3"), "");
+  set_objective(level.obj_mason_up_hill, getStruct("donkeykong_objective_3"), "");
   trigger_wait("donkeykong_house_upstairs_trigger");
-  set_objective(level.obj_mason_up_hill, getstruct("donkeykong_objective_3"), "remove");
+  set_objective(level.obj_mason_up_hill, getStruct("donkeykong_objective_3"), "remove");
 }
 
 donkeykong_autosaves() {
@@ -95,7 +95,7 @@ donkeykong_setup() {
 
 begin_donkeykong() {
   trigger_wait("begin_donkeykong");
-  e_wagon_clip = getent("wagon_clip", "targetname");
+  e_wagon_clip = getEnt("wagon_clip", "targetname");
   e_wagon_clip trigger_on();
   level thread donkeykong_colortriggers();
   spawn_manager_enable("donkeykong_cartel_wave1_cart_sm");
@@ -110,7 +110,7 @@ begin_donkeykong() {
   spawn_manager_enable("donkeykong_cartel_balcony1_sm");
   level thread donkeykong_spawn_house_enemies();
   a_ai_cart = get_ai_array("donkeykong_cartel_wave1_cart_ai", "targetname");
-  e_goalvolume = getent("donkeykong_offpath_goalvolume", "targetname");
+  e_goalvolume = getEnt("donkeykong_offpath_goalvolume", "targetname");
 
   if(a_ai_cart.size > 2) {
     waittill_dead_or_dying(a_ai_cart, 2);
@@ -131,18 +131,18 @@ wagon_traversal() {
 }
 
 open_donkeykong_balcony_doors() {
-  e_door_left = getent("balcony_door_left", "targetname");
-  e_door_right = getent("balcony_door_right", "targetname");
+  e_door_left = getEnt("balcony_door_left", "targetname");
+  e_door_right = getEnt("balcony_door_right", "targetname");
   v_new_angles_left = e_door_left.angles + vectorscale((0, 1, 0), 90.0);
   v_new_angles_right = e_door_right.angles - vectorscale((0, 1, 0), 90.0);
-  e_door_left rotateto(v_new_angles_left, 0.5);
-  e_door_right rotateto(v_new_angles_right, 0.5);
+  e_door_left rotateTo(v_new_angles_left, 0.5);
+  e_door_right rotateTo(v_new_angles_right, 0.5);
 }
 
 donkeykong_truck() {
   trigger_wait("mason_donkeykong_truck_start");
   wait 0.1;
-  vh_truck = getent("mason_donkeykong_truck", "targetname");
+  vh_truck = getEnt("mason_donkeykong_truck", "targetname");
   vh_truck thread donkeykong_truck_spawn_occupants();
   vh_truck thread donkeykong_truck_shoot();
   vh_truck thread donkeykong_truck_disable_turret_on_gunner_death();
@@ -289,12 +289,12 @@ donkeykong_spawn_house_enemies() {
 }
 
 donkeykong_open_door() {
-  m_door_left = getent("house_front_door_left", "targetname");
-  m_door_right = getent("house_front_door_right", "targetname");
+  m_door_left = getEnt("house_front_door_left", "targetname");
+  m_door_right = getEnt("house_front_door_right", "targetname");
   v_new_angles_left = m_door_left.angles + vectorscale((0, 1, 0), 90.0);
   v_new_angles_right = m_door_right.angles - vectorscale((0, 1, 0), 90.0);
-  m_door_left rotateto(v_new_angles_left, 0.2);
-  m_door_right rotateto(v_new_angles_right, 0.2);
+  m_door_left rotateTo(v_new_angles_left, 0.2);
+  m_door_right rotateTo(v_new_angles_right, 0.2);
 }
 
 make_shotgunners_agressive() {

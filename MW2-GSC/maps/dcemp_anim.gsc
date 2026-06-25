@@ -606,7 +606,7 @@ mi28() {
 }
 
 lobby_door_kick(guy) {
-  door = getent("lobby_door_right", "targetname");
+  door = getEnt("lobby_door_right", "targetname");
   parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
   door connectpaths();
@@ -626,8 +626,8 @@ lobby_flash_throw(guy) {
   guy.grenadeweapon = "flash_grenade";
   guy.grenadeAmmo++;
 
-  ent = getstruct("office_magic_bullet_target", "targetname");
-  vec = vectornormalize(ent.origin - guy gettagorigin("TAG_INHAND") + (0, 0, 40));
+  ent = getStruct("office_magic_bullet_target", "targetname");
+  vec = vectorNormalize(ent.origin - guy gettagorigin("TAG_INHAND") + (0, 0, 40));
   vec = vector_multiply(vec, 800);
 
   time = 1;
@@ -636,14 +636,14 @@ lobby_flash_throw(guy) {
 }
 
 street_pickup_flare(guy) {
-  model = getent("street_flare", "targetname");
+  model = getEnt("street_flare", "targetname");
   newtag = spawn("script_model", model.fxtag.origin);
   newtag.angles = model.fxtag.angles;
   newtag setModel(model.fxtag.model);
-  newtag linkto(model);
+  newtag linkTo(model);
   model.fxtag delete();
   model.fxtag = newtag;
-  model.fxtag linkto(model);
+  model.fxtag linkTo(model);
 
   playFXOnTag(level._effect["handflare"], model.fxtag, "TAG_ORIGIN");
 
@@ -651,17 +651,17 @@ street_pickup_flare(guy) {
   vec = anglestoup(guy gettagangles("TAG_INHAND"));
   angles = vectortoangles(vec * -1);
   model.angles = angles;
-  model linkto(guy, "TAG_INHAND");
+  model linkTo(guy, "TAG_INHAND");
 }
 
 street_throw_flare(guy) {
-  model = getent("street_flare", "targetname");
+  model = getEnt("street_flare", "targetname");
   model unlink();
 
   vec = anglesToForward(guy.angles);
   end = guy.origin + vector_multiply(vec, 50);
   end = end + (0, 0, 18);
-  vec = vectornormalize(end - guy.origin);
+  vec = vectorNormalize(end - guy.origin);
   mag = vector_multiply(vec, 704);
 
   time = .85;
@@ -678,7 +678,7 @@ street_throw_flare(guy) {
   model setModel(old.model);
   model.fxtag = old.fxtag;
   model.targetname = "street_flare";
-  old.fxtag linkto(model);
+  old.fxtag linkTo(model);
   old delete();
 
   time = .4;
@@ -686,7 +686,7 @@ street_throw_flare(guy) {
   model movegravity(mag, time);
   model rotatevelocity((550, 0, 50), time);
 
-  light = getent("parking_throw_flare", "targetname");
+  light = getEnt("parking_throw_flare", "targetname");
   light setlightcolor((0.823529, 0.435294, 0.435294));
   light delaythread(0, maps\dcemp_code::lerp_lightintensity, 6, 1.2);
   thread battlechatter_on("axis");
@@ -699,25 +699,25 @@ street_throw_flare(guy) {
   model setModel(old.model);
   model.fxtag = old.fxtag;
   model.targetname = "street_flare";
-  old.fxtag linkto(model);
+  old.fxtag linkTo(model);
   old delete();
 
   time = 1;
   delta = vec * 95;
   origin = model.origin + (delta[0], delta[1], 0);
 
-  model moveto(origin, time, 0, time);
+  model moveTo(origin, time, 0, time);
 
   model waittill("movedone");
 
-  model = getent("street_flare", "targetname");
+  model = getEnt("street_flare", "targetname");
   newtag = spawn("script_model", model.fxtag.origin);
   newtag.angles = model.fxtag.angles;
   newtag setModel(model.fxtag.model);
-  newtag linkto(model);
+  newtag linkTo(model);
   model.fxtag delete();
   model.fxtag = newtag;
-  model.fxtag linkto(model);
+  model.fxtag linkTo(model);
 
   playFXOnTag(level._effect["groundflare"], model.fxtag, "TAG_ORIGIN");
 }

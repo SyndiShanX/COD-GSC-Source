@@ -87,7 +87,7 @@ function player_handle_black_hole_bomb() {
       }
       grenade hide();
       model = util::spawn_model("wpn_t7_zmb_hd_gersch_device_world", grenade.origin);
-      model linkto(grenade);
+      model linkTo(grenade);
       model.angles = grenade.angles;
       info = spawnStruct();
       info.sound_attractors = [];
@@ -461,7 +461,7 @@ function black_hole_teleport(struct_dest) {
   self disableoffhandweapons();
   self disableweapons();
   self dontinterpolate();
-  self setorigin(destination);
+  self setOrigin(destination);
   self setplayerangles(struct_dest.angles);
   self enableoffhandweapons();
   self enableweapons();
@@ -554,7 +554,7 @@ function black_hole_bomb_create_exit_portal(pos) {
 
 function black_hole_bomb_exit_clean_up() {
   wait(4);
-  playsoundatposition("wpn_bhbomb_portal_exit_pop", self.origin);
+  playSoundAtPosition("wpn_bhbomb_portal_exit_pop", self.origin);
   self delete();
 }
 
@@ -569,7 +569,7 @@ function black_hole_bomb_stolen_by_sam(ent_grenade, ent_model) {
   } else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isalive(players[i])) {
       players[i] playlocalsound(level.zmb_laugh_alias);

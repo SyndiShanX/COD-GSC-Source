@@ -279,7 +279,7 @@ function private on_dog_killed(params) {
     self clientfield::set("sr_dog_fx", 0);
     self ghost();
     self notsolid();
-    playsoundatposition(#"zmb_hellhound_explode", self.origin);
+    playSoundAtPosition(#"zmb_hellhound_explode", self.origin);
   }
 
   if(zm_ai_dog::function_a82712bc(self)) {
@@ -370,7 +370,7 @@ function function_648f6c9b(behaviortreeentity) {
   behaviortreeentity ghost();
   behaviortreeentity notsolid();
   behaviortreeentity pathmode("dont move", 1);
-  playsoundatposition(#"zmb_hellhound_explode", behaviortreeentity.origin);
+  playSoundAtPosition(#"zmb_hellhound_explode", behaviortreeentity.origin);
 }
 
 function function_a5c4f83b(behaviortreeentity) {

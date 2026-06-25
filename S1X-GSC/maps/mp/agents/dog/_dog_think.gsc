@@ -37,7 +37,7 @@ setupdogstate() {
   self.bhasbadpath = 0;
   self.timeoflastdamage = 0;
   self.allowcrouch = 1;
-  self scragentsetgoalradius(24);
+  self scragentsetgoalRadius(24);
 }
 
 init() {
@@ -423,7 +423,7 @@ wantstogrowlattarget() {
 
 getattackpoint(var_0) {
   var_1 = var_0.origin - self.origin;
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_2 = self getpathgoalpos();
   var_3 = self.attackoffset + 4;
 
@@ -455,10 +455,10 @@ cross2d(var_0, var_1) {
 }
 
 findpointnearowner() {
-  var_0 = vectornormalize(self.origin - self.owner.origin);
+  var_0 = vectorNormalize(self.origin - self.owner.origin);
   var_1 = anglesToForward(self.owner.angles);
   var_1 = (var_1[0], var_1[1], 0);
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_2 = cross2d(var_0, var_1);
   var_3 = getclosestnodeinsight(self.owner.origin);
 
@@ -549,7 +549,7 @@ findpointnearowner() {
     if(vectordot(var_25, var_23 / var_24) < 0) {
       var_26 = var_11.origin;
     } else {
-      var_27 = vectornormalize(var_11.origin - var_3.origin);
+      var_27 = vectorNormalize(var_11.origin - var_3.origin);
       var_26 = var_3.origin + var_27 * self.preferredoffsetfromowner;
     }
   } else {
@@ -778,7 +778,7 @@ ondamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   self.timeoflastdamage = gettime();
 
   if(isDefined(self.owner)) {
-    self.damagedownertome = vectornormalize(self.origin - self.owner.origin);
+    self.damagedownertome = vectorNormalize(self.origin - self.owner.origin);
   }
 
   if(shouldplayhitreaction(var_2, var_5, var_4)) {

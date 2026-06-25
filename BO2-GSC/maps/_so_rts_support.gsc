@@ -63,7 +63,7 @@ do_switch_transition(targetent) {
   wait 0.1;
 
   if(isDefined(targetent) && isDefined(level.rts.playerlinkobj)) {
-    level.rts.playerlinkobj moveto(targetent.origin + (0, 0, 0), 0.4, 0);
+    level.rts.playerlinkobj moveTo(targetent.origin + (0, 0, 0), 0.4, 0);
   }
 
   start = gettime();
@@ -129,7 +129,7 @@ hide_player_hud() {
   setsaveddvar("ammoCounterHide", "1");
   setsaveddvar("cg_drawCrosshair", 0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player cleardamageindicator();
     player setclientdvars("cg_drawfriendlynames", 0);
     player setclientuivisibilityflag("hud_visible", 0);
@@ -147,7 +147,7 @@ show_player_hud() {
   setsaveddvar("ammoCounterHide", "0");
   setsaveddvar("cg_drawCrosshair", 1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player setclientuivisibilityflag("hud_visible", 1);
     player setclientdvars("cg_drawfriendlynames", 1);
   }
@@ -555,7 +555,7 @@ fire_missile() {
     targeticon = spawn("script_model", level.rts.enemy_base.entity.origin);
     targeticon.angles = level.rts.enemy_base.entity.angles;
     targeticon setModel("tag_origin");
-    targeticon linkto(level.rts.enemy_base.entity);
+    targeticon linkTo(level.rts.enemy_base.entity);
     playFXOnTag(level._effect["missile_reticle"], targeticon, "tag_origin");
   }
 
@@ -1019,7 +1019,7 @@ get_ents_touching_trigger(total_ents) {
   touching = [];
 
   if(!isDefined(total_ents)) {
-    total_ents = arraycombine(getplayers(), getaiarray(), 1, 0);
+    total_ents = arraycombine(getPlayers(), getaiarray(), 1, 0);
   }
 
   foreach(ent in total_ents) {
@@ -1362,12 +1362,12 @@ chopper_unload_rope_cargo(cargo, pkg_ref, team, squadid) {
   self.cargo = undefined;
   cargo unlink();
   moverent = spawn("script_origin", cargo.origin);
-  cargo linkto(moverent);
+  cargo linkTo(moverent);
   traceresults = bulletTrace(cargo.origin, cargo.origin - vectorscale((0, 0, 1), 2000.0), 0, cargo);
   assert(traceresults["fraction"] != 0, "Ground trace didn't hit anything");
   groundpos = traceresults["position"];
   movetime = 3.0;
-  moverent moveto(groundpos, movetime, 0.25, 0.25);
+  moverent moveTo(groundpos, movetime, 0.25, 0.25);
   wait(movetime);
   cargo unlink();
 
@@ -1835,16 +1835,16 @@ player_plant_network_intruder(poi) {
   network_intruder setModel(level.rts.intrudermodel);
   network_intruder.origin = self.m_scene_model gettagorigin("tag_weapon");
   network_intruder.angles = self.m_scene_model gettagangles("tag_weapon");
-  network_intruder linkto(self.m_scene_model, "tag_weapon");
+  network_intruder linkTo(self.m_scene_model, "tag_weapon");
 
   recordent(network_intruder);
 
   flag_wait("plant_network_intruder_done");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   self disableinvulnerability();
   flag_clear("block_input");
   network_intruder unlink();
-  normal = vectornormalize(poi.entity.origin - self.origin);
+  normal = vectorNormalize(poi.entity.origin - self.origin);
   origin = self.origin + vectorscale(normal, 12);
   network_intruder.origin = origin;
   network_intruder.angles = self.angles;
@@ -1915,7 +1915,7 @@ setupnetworkintruder(poi) {
   if(self.team == "allies") {} else
     fakevehicle.threatbias = 6000;
 
-  fakevehicle linkto(self);
+  fakevehicle linkTo(self);
   entnum = self getentitynumber();
   luinotifyevent(&"rts_add_poi", 1, entnum);
 
@@ -1979,7 +1979,7 @@ setupnetworkintruder(poi) {
 
 sfxandfx(origin, sfx_alias, fx_alias) {
   playFX(level._effect[fx_alias], origin);
-  playsoundatposition(sfx_alias, origin);
+  playSoundAtPosition(sfx_alias, origin);
   return true;
 }
 
@@ -2207,7 +2207,7 @@ calcent2dscreen() {
 
   if(!isDefined(self.next2dcalc) || self.next2dcalc < time) {
     angles = get_player_angles();
-    normal = vectornormalize(self.origin - level.rts.player.origin);
+    normal = vectorNormalize(self.origin - level.rts.player.origin);
     forward = anglesToForward(angles);
     dot = vectordot(forward, normal);
 
@@ -2455,7 +2455,7 @@ get_selection_alias_from_targetname(guy, p2, p3) {
     alias = guy.ai_ref.select_alias;
   }
 
-  playsoundatposition(alias, (0, 0, 0));
+  playSoundAtPosition(alias, (0, 0, 0));
   return true;
 }
 
@@ -2475,7 +2475,7 @@ set_as_target(team, offset) {
   faketarget.vteam = team;
   faketarget.origin = self getcentroid();
   faketarget.threatbias = -1000;
-  faketarget linkto(self, "tag_origin", offset);
+  faketarget linkTo(self, "tag_origin", offset);
   self thread delete_ent_on_death(faketarget);
 }
 
@@ -2511,8 +2511,8 @@ isentbelowmap() {
 }
 
 setupmapboundary() {
-  ulxy = getstruct("rts_ulxy", "targetname");
-  lrxy = getstruct("rts_lrxy", "targetname");
+  ulxy = getStruct("rts_ulxy", "targetname");
+  lrxy = getStruct("rts_lrxy", "targetname");
 
   if(isDefined(ulxy) && isDefined(lrxy)) {
     ux = ulxy.origin[0] < lrxy.origin[0] ? ulxy.origin[0] : lrxy.origin[0];
@@ -2666,10 +2666,10 @@ custom_introscreen(level_prefix, number_of_lines, totaltime, text_color) {
 }
 
 trigger_hint(trigger, banner) {
-  trigger setcursorhint("HINT_NOICON");
+  trigger setCursorHint("HINT_NOICON");
 
   while(isDefined(trigger)) {
-    trigger sethintstring("");
+    trigger setHintString("");
     trigger waittill("trigger", who);
 
     if(!isPlayer(who)) {
@@ -2677,7 +2677,7 @@ trigger_hint(trigger, banner) {
       continue;
     }
 
-    trigger sethintstring(banner);
+    trigger setHintString(banner);
 
     while(isDefined(trigger) && who istouching(trigger)) {
       wait 0.05;
@@ -2686,7 +2686,7 @@ trigger_hint(trigger, banner) {
 }
 
 trigger_use(trigger, banner, usednote, altbutton, team) {
-  trigger setcursorhint("HINT_NOICON");
+  trigger setCursorHint("HINT_NOICON");
 
   while(isDefined(trigger)) {
     wait 0.05;
@@ -2694,7 +2694,7 @@ trigger_use(trigger, banner, usednote, altbutton, team) {
     if(!isDefined(trigger)) {
       return;
     }
-    trigger sethintstring("");
+    trigger setHintString("");
     trigger waittill("trigger", who);
 
     if(!isPlayer(who)) {
@@ -2723,11 +2723,11 @@ trigger_use(trigger, banner, usednote, altbutton, team) {
       }
 
       if(isDefined(trigger.disable_use) && trigger.disable_use) {
-        trigger sethintstring("");
+        trigger setHintString("");
         wait 0.05;
         continue;
       } else
-        trigger sethintstring(banner);
+        trigger setHintString(banner);
 
       time = gettime();
 
@@ -2978,7 +2978,7 @@ dropturretonnotify(note, turret) {
 
   self.carrying_turret = undefined;
   self allowjump(1);
-  turret disconnectpaths();
+  turret disconnectPaths();
   turret thread turret_createmovewatcher();
 }
 
@@ -2996,11 +2996,11 @@ turret_placementwatcher(turret) {
     turret.origin = turret.lastgoodspot;
     turret.angles = turret.lastgoodang;
     turret setModel(turret.model_base);
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     self.carrying_turret = undefined;
     self allowjump(1);
     level.rts.player showviewmodel();
-    turret disconnectpaths();
+    turret disconnectPaths();
     turret thread turret_createmovewatcher();
     return;
   }
@@ -3081,7 +3081,7 @@ turret_deathwatch(einflictor, eattacker, idamage, n_dflags, str_means_of_death, 
     self setclientflag(7);
 
     if(self.team == "allies") {
-      self disconnectpaths();
+      self disconnectPaths();
     }
   }
 
@@ -3118,15 +3118,15 @@ level_create_turrets(usable, hitpoints) {
     origin = turret gettagorigin("tag_player");
 
     if(!isDefined(origin)) {
-      turret.fakevehicle linkto(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
+      turret.fakevehicle linkTo(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
     } else {
-      turret.fakevehicle linkto(turret, "tag_player");
+      turret.fakevehicle linkTo(turret, "tag_player");
     }
 
     turret.fakevehicle.team = "axis";
     turret.fakevehicle.vteam = "axis";
     turret.fakevehicle.origin = origin;
-    turret disconnectpaths();
+    turret disconnectPaths();
 
     if(isDefined(turret.overridevehicledamage)) {
       turret.classvehicledamage = turret.overridevehicledamage;
@@ -3159,9 +3159,9 @@ level_create_turrets(usable, hitpoints) {
     origin = turret gettagorigin("tag_player");
 
     if(!isDefined(origin)) {
-      turret.fakevehicle linkto(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
+      turret.fakevehicle linkTo(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
     } else {
-      turret.fakevehicle linkto(turret, "tag_player");
+      turret.fakevehicle linkTo(turret, "tag_player");
     }
 
     turret.fakevehicle.team = "allies";
@@ -3177,7 +3177,7 @@ level_create_turrets(usable, hitpoints) {
     } else
       turret makeunusable();
 
-    turret disconnectpaths();
+    turret disconnectPaths();
 
     if(isDefined(turret.overridevehicledamage)) {
       turret.classvehicledamage = turret.overridevehicledamage;

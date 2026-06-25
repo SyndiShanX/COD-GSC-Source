@@ -592,8 +592,8 @@ assault_vehicle_ai_weapons(wait_till_in_air) {
           pitch_to_target = AngleClamp180(angles_to_target[0]);
           is_within_pitch_limitations = pitch_to_target < pitch_max && pitch_to_target > -1 * pitch_max;
 
-          vehicle_forward_2d = VectorNormalize(anglesToForward(self.angles) * (1, 1, 0));
-          vec_to_target_2d = VectorNormalize(vec_to_target * (1, 1, 0));
+          vehicle_forward_2d = vectorNormalize(anglesToForward(self.angles) * (1, 1, 0));
+          vec_to_target_2d = vectorNormalize(vec_to_target * (1, 1, 0));
           is_in_front_of_vehicle = VectorDot(vehicle_forward_2d, vec_to_target_2d) > 0.90;
 
           if(is_within_pitch_limitations && is_in_front_of_vehicle) {

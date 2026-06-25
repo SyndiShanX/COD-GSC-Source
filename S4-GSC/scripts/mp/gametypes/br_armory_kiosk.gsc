@@ -735,7 +735,7 @@ _id_0C1D(var_0, var_1) {
   var_23.angles = (0, randomintrange(0, 360), 0);
   var_23.owner = self;
   var_23.spawntype = "GAME_MODE";
-  var_24 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle(var_0._id_C189, var_23);
+  var_24 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle(var_0._id_C189, var_23);
 
   if(!isDefined(var_24)) {
     return 0;

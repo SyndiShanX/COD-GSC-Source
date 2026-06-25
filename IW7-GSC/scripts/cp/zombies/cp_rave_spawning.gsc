@@ -175,7 +175,7 @@ func_1071C(var_0) {
   if(var_0 > 0) {
     scripts\cp\zombies\zombies_spawning::func_93E6(var_0);
     var_3 = [];
-    var_4 = scripts\engine\utility::getstruct("brute_hide_org", "targetname");
+    var_4 = scripts\engine\utility::getStruct("brute_hide_org", "targetname");
     var_5 = 0;
     while(var_5 < var_0) {
       var_6 = func_10719(var_4);
@@ -226,7 +226,7 @@ func_1B99(var_0) {
 move_to_spot(var_0) {
   var_1 = getclosestpointonnavmesh(var_0.origin);
   self dontinterpolate();
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
   self ghostskulls_complete_status(var_0.origin);
   self.precacheleaderboards = 0;
 }

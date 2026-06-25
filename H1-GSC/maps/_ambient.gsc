@@ -182,7 +182,7 @@ start_ambient_event(var_0) {
 
     var_4 = var_5;
     var_1.origin = level.player.origin;
-    var_1 linkto(level.player);
+    var_1 linkTo(level.player);
     var_1 playSound(level.ambienteventent[var_0].event_alias[var_5], "sounddone");
     var_1.playingsound = 1;
     var_1 waittill("sounddone");
@@ -239,12 +239,12 @@ ambient_trigger() {
     }
   }
 
-  var_3 = getent(self.target, "targetname");
+  var_3 = getEnt(self.target, "targetname");
   var_4 = var_3.origin;
   var_5 = undefined;
 
   if(isDefined(var_3.target)) {
-    var_6 = getent(var_3.target, "targetname");
+    var_6 = getEnt(var_3.target, "targetname");
     var_5 = var_6.origin;
   } else
     var_5 = var_4;

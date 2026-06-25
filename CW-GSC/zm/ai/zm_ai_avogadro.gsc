@@ -179,7 +179,7 @@ function function_c9791011() {
   self endon(#"death");
 
   while(true) {
-    var_31f7011a = arraysortclosest(getplayers(), self.origin);
+    var_31f7011a = arraysortclosest(getPlayers(), self.origin);
 
     foreach(player in var_31f7011a) {
       if(zm_utility::is_player_valid(player)) {
@@ -299,7 +299,7 @@ function function_b7b928a7() {
 }
 
 function function_a8880196() {
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   switch (n_player_count) {
     case 1:
@@ -379,7 +379,7 @@ function function_f53b79b4(n_round_number) {
 
     if(zm_round_spawning::function_d0db51fc(#"avogadro")) {
       level.var_3fff25b4++;
-      n_player_count = zm_utility::function_a2541519(getplayers().size);
+      n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
       if(n_player_count == 1) {
         level.var_69f2520a = level.round_number + randomintrangeinclusive(2, 4);

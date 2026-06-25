@@ -282,14 +282,14 @@ function function_50565360(s_spot) {
   self endon("death");
   self.in_the_ground = 1;
   mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
-  self linkto(mdl_anchor);
+  self linkTo(mdl_anchor);
   self thread function_cd5d6101();
-  mdl_anchor moveto(s_spot.origin, 0.05);
+  mdl_anchor moveTo(s_spot.origin, 0.05);
   mdl_anchor waittill("movedone");
   var_ac82e424 = zombie_utility::get_desired_origin();
   if(isDefined(var_ac82e424)) {
     var_585cefca = vectortoangles(var_ac82e424 - self.origin);
-    mdl_anchor rotateto((0, var_585cefca[1], 0), 0.05);
+    mdl_anchor rotateTo((0, var_585cefca[1], 0), 0.05);
     mdl_anchor waittill("rotatedone");
   }
   self unlink();

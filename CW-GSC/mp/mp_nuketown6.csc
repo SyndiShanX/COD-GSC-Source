@@ -93,7 +93,7 @@ function function_a6101b7() {
 
 function function_6b8c4c36(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, #"hash_431e56f34a345079");
+    self playRumbleOnEntity(fieldname, #"hash_431e56f34a345079");
     self postfx::playpostfxbundle(#"hash_1c01122f6d0510cf");
     return;
   }

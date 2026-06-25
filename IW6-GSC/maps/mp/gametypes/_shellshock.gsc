@@ -68,9 +68,9 @@ dirtEffect(position) {
   if(!isReallyAlive(self)) {
     return;
   }
-  forwardVec = VectorNormalize(anglesToForward(self.angles));
-  rightVec = VectorNormalize(AnglesToRight(self.angles));
-  grenadeVec = VectorNormalize(position - self.origin);
+  forwardVec = vectorNormalize(anglesToForward(self.angles));
+  rightVec = vectorNormalize(AnglesToRight(self.angles));
+  grenadeVec = vectorNormalize(position - self.origin);
 
   fDot = VectorDot(grenadeVec, forwardVec);
   rDot = VectorDot(grenadeVec, rightVec);
@@ -99,9 +99,9 @@ bloodEffect(position) {
   if(!isReallyAlive(self)) {
     return;
   }
-  forwardVec = VectorNormalize(anglesToForward(self.angles));
-  rightVec = VectorNormalize(AnglesToRight(self.angles));
-  damageVec = VectorNormalize(position - self.origin);
+  forwardVec = vectorNormalize(anglesToForward(self.angles));
+  rightVec = vectorNormalize(AnglesToRight(self.angles));
+  damageVec = vectorNormalize(position - self.origin);
 
   fDot = VectorDot(damageVec, forwardVec);
   rDot = VectorDot(damageVec, rightVec);

@@ -89,8 +89,8 @@ function function_21aca219(cmd) {
 
 function function_546a7089(index) {
   if(isDefined(level.var_f015cfb9[index])) {
-    foreach(player in getplayers()) {
-      player setorigin(level.var_f015cfb9[index].origin);
+    foreach(player in getPlayers()) {
+      player setOrigin(level.var_f015cfb9[index].origin);
     }
   }
 }
@@ -163,7 +163,7 @@ function function_3b0cb5a4(struct) {
     }
 
     forward = anglesToForward(scriptmodel.angles);
-    forward = vectornormalize(forward);
+    forward = vectorNormalize(forward);
     forward = (forward[0] * 8, forward[1] * 8, forward[2] * 8);
     forward = (forward[0], forward[1], forward[2] + 32);
     trigger = content_manager::spawn_interact(spawn_struct, &function_fb2bc4ac, str_hint, undefined, isDefined(spawn_struct.radius) ? spawn_struct.radius : 64, isDefined(spawn_struct.height) ? spawn_struct.height : 64, undefined, forward);
@@ -173,7 +173,7 @@ function function_3b0cb5a4(struct) {
     scriptmodel.trigger = trigger;
     struct.trigger = trigger;
     struct.scriptmodel = scriptmodel;
-    playsoundatposition(#"hash_20c4f0485930af2a", struct.origin);
+    playSoundAtPosition(#"hash_20c4f0485930af2a", struct.origin);
   }
 }
 
@@ -231,7 +231,7 @@ function function_35eeef70(var_e57cfd4a) {
   assert(isDefined(var_e57cfd4a), "<dev string:x110>");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       currentweapon = player getcurrentweapon();
       itemweapon = player item_inventory::function_230ceec4(currentweapon);
 
@@ -360,7 +360,7 @@ function function_217a625a(a_ents) {
       break;
   }
 
-  var_2faa8624 linkto(var_bf71a40b, "tag_tank", (0, 0, 0), (-28, 0, 0));
+  var_2faa8624 linkTo(var_bf71a40b, "tag_tank", (0, 0, 0), (-28, 0, 0));
   waitresult = level waittill(#"silver_weapon_crate_closed", #"hash_685e9797cabb8ed", #"hash_142e9131e668557d");
   var_2faa8624 unlink();
 

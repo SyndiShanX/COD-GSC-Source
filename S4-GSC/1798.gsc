@@ -37,7 +37,7 @@ _id_F023(var_0, var_1) {
     self _meth_8439(var_0, var_1);
     self dontinterpolate();
   } else if(isPlayer(self)) {
-    self setorigin(var_0);
+    self setOrigin(var_0);
     self setplayerangles(var_1);
   } else {
     self.origin = var_0;

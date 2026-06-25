@@ -9,10 +9,10 @@ bot_get_nodes_in_cone(var_0, var_1, var_2, var_3) {
   var_5 = [];
   var_6 = self getnearestnode();
   var_7 = anglesToForward(self getplayerangles());
-  var_8 = vectornormalize(var_7 * (1, 1, 0));
+  var_8 = vectorNormalize(var_7 * (1, 1, 0));
 
   foreach(var_10 in var_4) {
-    var_11 = vectornormalize((var_10.origin - self.origin) * (1, 1, 0));
+    var_11 = vectorNormalize((var_10.origin - self.origin) * (1, 1, 0));
     var_12 = vectordot(var_11, var_8);
 
     if(var_12 > var_2) {
@@ -455,10 +455,10 @@ bot_find_node_to_guard_player(var_0, var_1, var_2) {
   if(lengthsquared(var_4) > 100) {
     var_5 = getnodesinradius(var_0, var_1 * 1.75, var_1 * 0.5, 500);
     var_6 = [];
-    var_7 = vectornormalize(var_4);
+    var_7 = vectorNormalize(var_4);
 
     for(var_8 = 0; var_8 < var_5.size; var_8++) {
-      var_9 = vectornormalize(var_5[var_8].origin - self.bot_defend_player_guarding.origin);
+      var_9 = vectorNormalize(var_5[var_8].origin - self.bot_defend_player_guarding.origin);
 
       if(vectordot(var_9, var_7) > 0.1) {
         var_6[var_6.size] = var_5[var_8];
@@ -468,12 +468,12 @@ bot_find_node_to_guard_player(var_0, var_1, var_2) {
     var_6 = getnodesinradius(var_0, var_1, 0, 500);
 
   if(isDefined(var_2) && var_2) {
-    var_10 = vectornormalize(self.bot_defend_player_guarding.origin - self.origin);
+    var_10 = vectorNormalize(self.bot_defend_player_guarding.origin - self.origin);
     var_11 = var_6;
     var_6 = [];
 
     foreach(var_13 in var_11) {
-      var_9 = vectornormalize(var_13.origin - self.bot_defend_player_guarding.origin);
+      var_9 = vectorNormalize(var_13.origin - self.bot_defend_player_guarding.origin);
 
       if(vectordot(var_10, var_9) > 0.2) {
         var_6[var_6.size] = var_13;
@@ -593,7 +593,7 @@ bot_pick_random_point_from_set(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     var_4 = common_scripts\utility::random(var_1);
     var_5 = var_4.origin - var_0;
-    var_3 = var_0 + vectornormalize(var_5) * length(var_5) * randomfloat(1.0);
+    var_3 = var_0 + vectorNormalize(var_5) * length(var_5) * randomfloat(1.0);
   }
 
   return var_3;
@@ -835,7 +835,7 @@ bot_watch_nodes(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   wait 1.0;
   var_8 = 1;
-  var_9 = squared(self botgetscriptgoalradius());
+  var_9 = squared(self botgetscriptgoalRadius());
 
   while(var_8) {
     if(self bothasscriptgoal() && self botpursuingscriptgoal()) {
@@ -865,7 +865,7 @@ bot_watch_nodes(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       var_15 = self getEye();
-      var_16 = vectordot((0, 0, 1), vectornormalize(var_13.origin + var_11 - var_15));
+      var_16 = vectordot((0, 0, 1), vectorNormalize(var_13.origin + var_11 - var_15));
 
       if(abs(var_16) > 0.92) {
         var_14 = 1;
@@ -930,11 +930,11 @@ bot_watch_nodes(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_30 = self lastknowntime(self.enemy);
 
         if(var_30 && var_26 - var_30 < 5000) {
-          var_31 = vectornormalize(var_29 - self.origin);
+          var_31 = vectorNormalize(var_29 - self.origin);
           var_32 = 0;
 
           for(var_33 = 0; var_33 < self.watch_nodes.size; var_33++) {
-            var_34 = vectornormalize(self.watch_nodes[var_33].origin - self.origin);
+            var_34 = vectorNormalize(self.watch_nodes[var_33].origin - self.origin);
             var_35 = vectordot(var_31, var_34);
 
             if(var_35 > var_32) {

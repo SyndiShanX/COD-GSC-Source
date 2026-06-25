@@ -6,6 +6,6 @@
 #namespace flowgraph_sound;
 
 playsoundaliasatposition(x, snd_name, v_position) {
-  playsoundatposition(snd_name, v_position);
+  playSoundAtPosition(snd_name, v_position);
   return true;
 }

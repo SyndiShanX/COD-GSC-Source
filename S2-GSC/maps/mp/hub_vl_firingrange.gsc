@@ -5,7 +5,7 @@
 
 func_51D0() {
   var_00 = spawnStruct();
-  var_00.var_3E6C = getent("firingrange_start", "targetname");
+  var_00.var_3E6C = getEnt("firingrange_start", "targetname");
   var_00.var_0C3A = func_3C36();
   var_00.var_0BDC = func_3C30();
   var_00.var_9C7C = [];
@@ -135,7 +135,7 @@ func_72DD(param_00) {
 
 func_72DE(param_00) {
   level endon("shutdown_hologram");
-  var_01 = getent("firing_range_round_trigger_end", "targetname");
+  var_01 = getEnt("firing_range_round_trigger_end", "targetname");
   var_01 waittill("trigger");
   level.var_3C3B.var_54F5 = 0;
   thread func_8C35(param_00, self);
@@ -249,7 +249,7 @@ func_63F6(param_00) {
     self waittill("toggled_up_released");
     var_01 = distance2d(level.var_3C3B.var_6095.var_0116, param_00.var_0116);
     if(var_01 <= 1) {
-      param_00 moveto(param_00.var_0116, 0.05);
+      param_00 moveTo(param_00.var_0116, 0.05);
     } else {
       var_02 = param_00.var_0116 + anglesToForward(level.var_3C3B.var_0C38[0].var_001D) * level.var_3C3B.var_4839 * -1;
       var_01 = distance2d(var_02, param_00.var_0116);
@@ -288,7 +288,7 @@ func_6384(param_00) {
     self waittill("toggled_down_released");
     var_01 = distance2d(level.var_3C3B.var_621F, param_00.var_0116);
     if(var_01 <= 1) {
-      param_00 moveto(param_00.var_0116, 0.05);
+      param_00 moveTo(param_00.var_0116, 0.05);
     } else {
       var_02 = param_00.var_0116 + anglesToForward(level.var_3C3B.var_0C38[0].var_001D) * level.var_3C3B.var_4839;
       var_01 = distance2d(var_02, param_00.var_0116);
@@ -318,7 +318,7 @@ func_64AF(param_00, param_01, param_02) {
     var_04 = 0.05;
   }
 
-  param_01 moveto(param_00, var_04);
+  param_01 moveTo(param_00, var_04);
 }
 
 func_64CF(param_00, param_01) {
@@ -332,7 +332,7 @@ func_64CF(param_00, param_01) {
         continue;
       }
 
-      param_00 moveto(param_00.var_0116, 0.05);
+      param_00 moveTo(param_00.var_0116, 0.05);
       level.var_3C3B.var_76AE = 0;
       level.var_3C3B.var_76AF = 0;
     }
@@ -814,7 +814,7 @@ func_64A8() {
   var_00 = randomfloatrange(0, 1);
   wait(var_00);
   self setModel("rec_holo_emitter_floor_on");
-  self moveto(self.var_A08D, 0.25, 0.1, 0.1);
+  self moveTo(self.var_A08D, 0.25, 0.1, 0.1);
 }
 
 func_64A7() {
@@ -822,7 +822,7 @@ func_64A7() {
   self setModel("rec_holo_emitter_floor_off");
   var_00 = randomfloatrange(0, 1);
   wait(var_00);
-  self moveto(self.var_6A23, 0.25, 0.1, 0.1);
+  self moveTo(self.var_6A23, 0.25, 0.1, 0.1);
 }
 
 func_8C35(param_00, param_01) {
@@ -946,7 +946,7 @@ func_A673(param_00, param_01) {
 
   var_02 = getgroundposition(level.var_3C3B.var_3E6C.var_0116, 20, 512, 120);
   param_01 method_808C();
-  param_01 setorigin(var_02);
+  param_01 setOrigin(var_02);
   param_01 setangles(level.var_3C3B.var_3E6C.var_001D);
   param_01 setclientdvar("3078", "1.0");
   level.var_3C3B.var_57CC = 0;
@@ -1217,16 +1217,16 @@ func_64D0() {
       }
 
       if(isDefined(self.var_28F5.var_0165) && self.var_28F5.var_0165 == "jump") {
-        self moveto(self.var_28F5.var_0116, var_03 * 0.5, 0, 0.1);
+        self moveTo(self.var_28F5.var_0116, var_03 * 0.5, 0, 0.1);
       } else if(isDefined(self.var_5B23.var_0165) && self.var_5B23.var_0165 == "jump") {
-        self moveto(self.var_28F5.var_0116, var_03 * 0.5, 0.1, 0);
+        self moveTo(self.var_28F5.var_0116, var_03 * 0.5, 0.1, 0);
       } else {
-        self moveto(self.var_28F5.var_0116, var_03);
+        self moveTo(self.var_28F5.var_0116, var_03);
       }
 
       self waittill("movedone");
       if(isDefined(self.var_28F5.var_01A2)) {
-        var_04 = getent(self.var_28F5.var_01A2, "targetname");
+        var_04 = getEnt(self.var_28F5.var_01A2, "targetname");
         self.var_5B23 = self.var_28F5;
         self.var_28F5 = var_04;
       } else {
@@ -1254,12 +1254,12 @@ func_7574() {
     if(isDefined(self)) {
       var_04 = distance(var_03, var_02);
       var_05 = var_04 / level.var_3C3B.var_7F0E;
-      self moveto(var_03, var_05);
+      self moveTo(var_03, var_05);
       self waittill("movedone");
       wait(var_01);
       var_04 = distance(var_03, var_02);
       var_05 = var_04 / level.var_3C3B.var_7F0E;
-      self moveto(var_02, var_05);
+      self moveTo(var_02, var_05);
       self waittill("movedone");
       wait(var_00);
     }
@@ -1274,7 +1274,7 @@ func_649E() {
   if(isDefined(self.var_5B23.var_0165) && self.var_5B23.var_0165 == "jump") {
     var_00 = self.var_5B23;
     var_01 = var_00.var_0116;
-    self.var_5B23 = getent(var_00.var_01A5, "target");
+    self.var_5B23 = getEnt(var_00.var_01A5, "target");
   }
 
   var_02 = self.var_28F5.var_0116;
@@ -1289,29 +1289,29 @@ func_649E() {
         wait(2);
         var_04 = distance(var_01, var_02);
         var_05 = var_04 / level.var_3C3B.var_7F0E;
-        self moveto(var_01, var_05 * 0.5, 0, 0.1);
+        self moveTo(var_01, var_05 * 0.5, 0, 0.1);
         self waittill("movedone");
         var_04 = distance(var_01, var_03);
         var_05 = var_04 / level.var_3C3B.var_7F0E;
-        self moveto(var_03, var_05 * 0.5, 0.1, 0);
+        self moveTo(var_03, var_05 * 0.5, 0.1, 0);
         self waittill("movedone");
         wait(2);
         var_04 = distance(var_01, var_03);
         var_05 = var_04 / level.var_3C3B.var_7F0E;
-        self moveto(var_01, var_05 * 0.5, 0, 0.1);
+        self moveTo(var_01, var_05 * 0.5, 0, 0.1);
         self waittill("movedone");
         var_04 = distance(var_01, var_02);
         var_05 = var_04 / level.var_3C3B.var_7F0E;
-        self moveto(var_02, var_05 * 0.5, 0.1, 0);
+        self moveTo(var_02, var_05 * 0.5, 0.1, 0);
         self waittill("movedone");
       } else {
         var_04 = distance(var_05, var_04);
         var_05 = var_05 / level.var_3C3B.var_7F0E;
-        self moveto(var_03, var_05);
+        self moveTo(var_03, var_05);
         self waittill("movedone");
         var_04 = distance(var_02, var_03);
         var_05 = var_04 / level.var_3C3B.var_7F0E;
-        self moveto(var_02, var_05);
+        self moveTo(var_02, var_05);
         self waittill("movedone");
       }
     }
@@ -1490,13 +1490,13 @@ func_3C36() {
     var_03.var_0BC0 = 0;
     var_03.var_012C["team"] = "axis";
     var_03.var_01A7 = "axis";
-    var_03.var_6C3E = getent(var_03.var_01A2, "targetname");
-    var_03.var_0B6E = getent(var_03.var_6C3E.var_01A2, "targetname");
+    var_03.var_6C3E = getEnt(var_03.var_01A2, "targetname");
+    var_03.var_0B6E = getEnt(var_03.var_6C3E.var_01A2, "targetname");
     var_03.var_0B6E method_8449(var_03);
     var_03.var_0B6E.var_012C["team"] = "axis";
     var_03.var_0B6E.var_01A7 = "axis";
     if(isDefined(var_03.var_0B6E.var_01A2)) {
-      var_03.var_A580 = getent(var_03.var_0B6E.var_01A2, "targetname");
+      var_03.var_A580 = getEnt(var_03.var_0B6E.var_01A2, "targetname");
       var_03.var_A580 method_8449(var_03);
     } else {
       var_03.var_A580 = var_03;

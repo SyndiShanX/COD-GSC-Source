@@ -91,7 +91,7 @@ function private function_37eab05b(instance) {
   level thread function_68aac628(instance, "monsterhouse_low");
   var_d56fdb6 = array::randomize(isDefined(instance.contentgroups[#"spawn_crystal"]) ? instance.contentgroups[#"spawn_crystal"] : []);
   instance.var_eb3bf4b1 = [];
-  var_90acdb64 = getplayers().size * 2 + 4;
+  var_90acdb64 = getPlayers().size * 2 + 4;
   n_spawned = 0;
   instance.var_5cbcc78a = var_90acdb64;
 
@@ -126,7 +126,7 @@ function private function_37eab05b(instance) {
 }
 
 function private function_6326cff8() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player)) {
       player zm_stats::increment_challenge_stat(#"hash_3e5ce5fa7934ca93");
     }
@@ -158,7 +158,7 @@ function private function_cdec3a88(s_result) {
     level thread function_68aac628(self.instance, "monsterhouse_success");
     level thread function_6326cff8();
     self fx::play(#"hash_124c673fd48c8a4", self.origin, self.angles);
-    playsoundatposition(#"hash_4359f21da1a5d177", self.origin + (0, 0, 25));
+    playSoundAtPosition(#"hash_4359f21da1a5d177", self.origin + (0, 0, 25));
     level scoreevents::doscoreeventcallback("scoreEventSR", {
       #scoreevent: "event_complete", #nearbyplayers: 1, #var_b0a57f8c: 2000, #location: self.origin
     });
@@ -186,7 +186,7 @@ function private function_a77f3600(instance) {
 
 function private function_2d2fade8(instance) {
   instance endon(#"cleanup");
-  n_wait_time = 90 + getplayers().size * -10;
+  n_wait_time = 90 + getPlayers().size * -10;
   level thread function_84ab63bd(instance, n_wait_time);
   wait n_wait_time;
 

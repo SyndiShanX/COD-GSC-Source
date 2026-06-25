@@ -340,7 +340,7 @@ func_DCFA() {
     var_2 = var_2 + var_3;
     var_6 = var_4.origin - self.origin;
     var_6 = (var_6[0], var_6[1], 0);
-    var_6 = vectornormalize(var_6);
+    var_6 = vectorNormalize(var_6);
     var_7 = anglesToForward(self.angles);
     var_8 = vectordot(var_6, var_7);
 
@@ -404,7 +404,7 @@ func_DCF8(var_0) {
       var_2 = scripts\engine\trace::create_default_contents(1);
 
       if(scripts\engine\trace::ray_trace_passed(self getEye(), var_0 getEye(), undefined, var_2)) {
-        var_3 = vectornormalize(var_0.origin - self getEye());
+        var_3 = vectorNormalize(var_0.origin - self getEye());
         var_4 = (0, 0, 1);
 
         if(vectordot(var_4, var_3) < 0.92) {
@@ -681,23 +681,23 @@ func_10D8D(var_0, var_1) {
   var_9.midairdamage setotherent(self);
   var_9.midairdamage setentityowner(self);
   var_9.midairdamage dontinterpolate();
-  var_9.midairdamage linkto(var_9, "tag_origin");
+  var_9.midairdamage linkTo(var_9, "tag_origin");
   var_9.midairdamage.weapon_name = "iw7_c8landing_mp";
   var_9.midairdamage.streakinfo = var_0;
   var_9.midairdamage.killcament = spawn("script_model", var_9.origin);
   var_9.midairdamage.killcament setModel("tag_origin");
-  var_9.midairdamage.killcament linkto(var_9, "tag_origin", (-10, 0, 250), (0, 0, 0));
+  var_9.midairdamage.killcament linkTo(var_9, "tag_origin", (-10, 0, 250), (0, 0, 0));
   thread func_13AE2(var_9);
   thread func_13998(var_9, var_1, var_6);
   thread watchgameover(var_9);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(3.5);
   var_10 = spawn("script_model", var_2);
   var_10 setModel("veh_mil_lnd_ca_droppod_c8_mp");
-  var_10 moveto(var_3, 2.65, 0, 0);
+  var_10 moveTo(var_3, 2.65, 0, 0);
   var_10 setscriptablepartstate("pod", "fall", 0);
   thread func_13A0B(var_10);
   var_10 thread watchreachpoddestination(var_3);
-  var_9 linkto(var_10, "tag_origin");
+  var_9 linkTo(var_10, "tag_origin");
   var_9.killstreaktype = var_0.streakname;
   var_9.var_165A = var_0.streakname;
   var_9.streakname = var_0.streakname;
@@ -775,12 +775,12 @@ func_10D8D(var_0, var_1) {
   var_9.origin = var_12;
   var_9 showallparts();
   var_9.midairdamage.killcament unlink();
-  var_9.midairdamage.killcament linkto(var_9, "j_helmet");
+  var_9.midairdamage.killcament linkTo(var_9, "j_helmet");
   thread updatekillcampos(5, var_9, var_9.midairdamage.killcament);
   var_9 attachshieldmodel("weapon_c8_shield_top_mp", "j_wristshield");
   var_9 attachshieldmodel("weapon_c8_shield_bottom_mp", "j_wristbtmshield");
   var_9.useobj = spawn("script_model", var_9 gettagorigin("tag_eye"));
-  var_9.useobj linkto(var_9, "tag_eye");
+  var_9.useobj linkTo(var_9, "tag_eye");
 
   if(isDefined(var_9.headmodel)) {
     var_9.headmodel = undefined;
@@ -822,7 +822,7 @@ updatekillcampos(var_0, var_1, var_2) {
   self endon("destroyed_rc8");
   wait(var_0);
   var_2 unlink();
-  var_2 linkto(var_1, "tag_origin", (0, 0, 150), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_origin", (0, 0, 150), (0, 0, 0));
 }
 
 watchgameover(var_0) {
@@ -1232,7 +1232,7 @@ func_D51B(var_0, var_1, var_2) {
         var_4.weapon_name = "dummy_spike_mp";
       }
 
-      var_4 linkto(self);
+      var_4 linkTo(self);
     }
 
     playFXOnTag(scripts\engine\utility::getfx("rc8_malfunction"), self, "j_mainroot");
@@ -1283,7 +1283,7 @@ func_13ACD(var_0) {
         var_12 = anglesToForward(var_0 getplayerangles());
         var_13 = var_0.origin;
         var_14 = var_0 gettagorigin("c8_shield_le") + (0, 0, 20) + var_12 * 200;
-        var_15 = vectornormalize(var_14 - var_13);
+        var_15 = vectorNormalize(var_14 - var_13);
         var_1 = var_2.health + 1;
         var_2 func_84DC(var_15, 700);
         var_2 playSound("rc8_melee_hit");

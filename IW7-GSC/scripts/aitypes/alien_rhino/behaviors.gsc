@@ -116,7 +116,7 @@ trycharge(var_0, var_1, var_2) {
   var_7 = anglesToForward(self.angles);
   var_8 = var_6 - self.origin;
   var_7 = (var_7[0], var_7[1], 0);
-  var_8 = vectornormalize((var_8[0], var_8[1], 0));
+  var_8 = vectorNormalize((var_8[0], var_8[1], 0));
   var_9 = vectordot(var_7, var_8);
 
   if(var_9 < 0.707) {

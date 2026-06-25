@@ -64,7 +64,7 @@ radarmover(var_0) {
   self endon("personal_uav_removed");
 
   for(;;) {
-    var_0 moveto(self.origin, 0.05);
+    var_0 moveTo(self.origin, 0.05);
     wait 0.05;
   }
 }

@@ -94,11 +94,11 @@ rotatePlane(toggle) {
 
   if(toggle == "on") {
     for(;;) {
-      level.ac130 rotateyaw(360, level.ac130_rotationSpeed);
+      level.ac130 rotateYaw(360, level.ac130_rotationSpeed);
       wait level.ac130_rotationSpeed;
     }
   } else if(toggle == "off") {
-    level.ac130 rotateyaw(level.ac130.angles[2], 0.05);
+    level.ac130 rotateYaw(level.ac130.angles[2], 0.05);
   }
 }
 

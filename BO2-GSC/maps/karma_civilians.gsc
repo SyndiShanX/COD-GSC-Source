@@ -365,7 +365,7 @@ civ_stop_callback() {
   n_pathing_fov = cos(45);
   n_dist = distancesquared(self.origin, level.player.origin);
   v_facing = anglesToForward(self.angles);
-  v_to_player = vectornormalize(level.player.origin - self.origin);
+  v_to_player = vectorNormalize(level.player.origin - self.origin);
   n_facing_offset = vectordot(v_facing, v_to_player);
 
   if(n_dist < n_player_near_dist && n_facing_offset > n_pathing_fov) {
@@ -388,7 +388,7 @@ civ_bumped() {
   while(gettime() < n_timeout) {
     n_dist = distancesquared(self.origin, level.player.origin);
     v_facing = anglesToForward(self.angles);
-    v_to_player = vectornormalize(level.player.origin - self.origin);
+    v_to_player = vectorNormalize(level.player.origin - self.origin);
     n_facing_offset = vectordot(v_facing, v_to_player);
 
     if(n_dist > n_player_far_dist || n_facing_offset < n_pathing_fov) {
@@ -805,7 +805,7 @@ civ_loop_anim(anim_loop) {
   self endon("death");
 
   while(isDefined(self)) {
-    self animscripted("drone_idle_anim", self.origin, self.angles, anim_loop);
+    self animScripted("drone_idle_anim", self.origin, self.angles, anim_loop);
     self waittillmatch("drone_idle_anim", "end");
   }
 }

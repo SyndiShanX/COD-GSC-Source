@@ -383,13 +383,13 @@ banzai_melee_ai_seq(attacker, defender) {
   attacker.disableArrivals = true;
   defender.disableArrivals = true;
 
-  attackerForward = VectorNormalize(anglesToForward(attacker.angles));
-  attackerRight = VectorNormalize(AnglesToRight(attacker.angles));
-  defenderForward = VectorNormalize(anglesToForward(defender.angles));
-  defenderRight = VectorNormalize(AnglesToRight(attacker.angles));
+  attackerForward = vectorNormalize(anglesToForward(attacker.angles));
+  attackerRight = vectorNormalize(AnglesToRight(attacker.angles));
+  defenderForward = vectorNormalize(anglesToForward(defender.angles));
+  defenderRight = vectorNormalize(AnglesToRight(attacker.angles));
 
-  attackerToDefender = VectorNormalize(defender.origin - attacker.origin);
-  defenderToAttacker = VectorNormalize(attacker.origin - defender.origin);
+  attackerToDefender = vectorNormalize(defender.origin - attacker.origin);
+  defenderToAttacker = vectorNormalize(attacker.origin - defender.origin);
 
   defenderForwardDotAttackVector = VectorDot(defenderForward, defenderToAttacker);
 
@@ -631,7 +631,7 @@ banzai_ai_defender_link(attacker, blendTime) {
   self endon("death");
 
   lerpTarget = spawn("script_origin", self.origin);
-  self linkto(lerpTarget);
+  self linkTo(lerpTarget);
 
   wait(level.banzai_link_time);
 
@@ -644,7 +644,7 @@ banzai_ai_defender_link(attacker, blendTime) {
   if(!isDefined(self) || !IsAlive(self) || !isDefined(attacker) || !IsAlive(attacker)) {
     return;
   }
-  self linkto(attacker, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self linkTo(attacker, "tag_sync", (0, 0, 0), (0, 0, 0));
 
   banzai_print(attacker, self, "Starting banzai_ai_defender_unlink threads.");
 
@@ -686,13 +686,13 @@ lerp_to_tag_sync(enemy, blendTime) {
     return;
   }
   lerpee = spawn("script_origin", self.origin);
-  self linkto(lerpee);
+  self linkTo(lerpee);
 
   enemyToSelf = self.origin - enemy.origin;
-  unitEnemyToSelf = VectorNormalize(enemyToSelf);
+  unitEnemyToSelf = vectorNormalize(enemyToSelf);
   targetPos = enemy.origin + unitEnemyToSelf * level.banzai_link_distance;
 
-  lerpee MoveTo(targetPos, level.banzai_link_time - 0.05, 0.05, 0);
+  lerpee moveTo(targetPos, level.banzai_link_time - 0.05, 0.05, 0);
 
   banzai_print(self, enemy, "Starting banzai_ai_attacker_unlink threads.");
 
@@ -1165,7 +1165,7 @@ time_scale_machine_restore() {
 }
 time_scale_machine() {
   self endon("timescale_off");
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size != 1 || IsSplitScreen()) {
     return;
   }
@@ -1344,7 +1344,7 @@ play_thrust_sound() {
 }
 
 play_banzai_rumble() {
-  self PlayRumbleOnEntity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 record_early_attacks(attacker, player) {
@@ -1428,7 +1428,7 @@ do_start_synchronized_melee(attacker, player) {
   player.player_view.origin = playerphysicstrace((playerpos[0], playerpos[1], playerpos[2] + 50), (playerpos[0], playerpos[1], playerpos[2] - 200));
 
   player playerLinkToAbsolute(player.player_view, "tag_player");
-  attacker linkto(player.player_view, "tag_sync", (0, 0, 0), (0, 0, 0));
+  attacker linkTo(player.player_view, "tag_sync", (0, 0, 0), (0, 0, 0));
 
   syncTagAngles = player.player_view gettagangles("tag_sync");
   attacker orientmode("face angle", syncTagAngles[1]);
@@ -1720,7 +1720,7 @@ PlayerView_spawn(player) {
   weapon = spawn("script_model", playerView gettagorigin("tag_weapon"));
 
   weapon setModel("weapon_usa_kbar_knife");
-  weapon linkto(playerView, "tag_weapon", (0, 0, 0), (0, 0, 0));
+  weapon linkTo(playerView, "tag_weapon", (0, 0, 0), (0, 0, 0));
 
   player.banzaiDefenseWeapon = weapon;
 

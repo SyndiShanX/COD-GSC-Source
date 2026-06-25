@@ -63,7 +63,7 @@ function function_daadc836(menu_name, local_client_num) {
     character = menu_data.custom_characters[local_client_num];
 
     if(!isDefined(character) && isDefined(menu_data.var_cf15815a)) {
-      model = getent(local_client_num, menu_data.var_cf15815a, "targetname");
+      model = getEnt(local_client_num, menu_data.var_cf15815a, "targetname");
 
       if(!isDefined(model)) {
         model = util::spawn_model(local_client_num, "tag_origin");

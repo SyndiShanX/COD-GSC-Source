@@ -133,7 +133,7 @@ _id_7477(var_0, var_1, var_2) {
 
               var_3 _id_B4E9(self.origin, var_11);
               var_3 earthquakeforplayer(0.45, 0.35, var_3.origin, 1000);
-              var_3 playrumbleonentity("damage_heavy");
+              var_3 playRumbleOnEntity("damage_heavy");
 
               if(!var_14) {
                 var_3 _meth_844C(30, self.origin);
@@ -165,7 +165,7 @@ _id_B4E9(var_0, var_1) {
     var_1 = var_1 * 0.1;
   }
 
-  var_2 = vectornormalize(self.origin + (0, 0, 45) - var_0);
+  var_2 = vectorNormalize(self.origin + (0, 0, 45) - var_0);
   var_3 = var_2 * var_1 * 10;
   self setvelocity(var_3);
 }
@@ -317,7 +317,7 @@ _id_567C(var_0, var_1) {
   }
 
   var_9 = self.origin - var_8;
-  var_10 = vectornormalize(var_2.origin - var_8);
+  var_10 = vectorNormalize(var_2.origin - var_8);
   var_11 = vectordot(var_10, var_9);
 
   if(var_11 > 12 || var_11 < -12) {

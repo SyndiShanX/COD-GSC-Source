@@ -31,7 +31,7 @@ init() {
   level.var_C6D7["orbital_deployment"].weapon["juggernaut"].var_D5E4 = "null";
   level.var_C6D7["orbital_deployment"].weapon["juggernaut"].var_D5DD = "odin_jugg_launch";
   if(!isDefined(level.heli_pilot_mesh)) {
-    level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
+    level.heli_pilot_mesh = getEnt("heli_pilot_mesh", "targetname");
     if(!isDefined(level.heli_pilot_mesh)) {} else {
       level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility::gethelipilotmeshoffset();
     }
@@ -332,7 +332,7 @@ func_108F5() {
   var_1 = var_0.origin;
   var_2 = var_0.angles;
   self.angles = var_2;
-  self setorigin(var_1, 1);
+  self setOrigin(var_1, 1);
   foreach(var_4 in level.players) {
     if(var_4 != self) {
       self showtoplayer(var_4);
@@ -398,13 +398,13 @@ func_1285(var_0, var_1, var_2, var_3) {
   var_4 = 0;
   var_5 = var_0;
   var_6 = var_1;
-  var_7 = vectornormalize(var_6 - var_5);
+  var_7 = vectorNormalize(var_6 - var_5);
   var_6 = var_7 * 14000 + var_5;
   var_8 = scripts\mp\utility::_magicbullet("drone_hive_projectile_mp", var_6 - (0, 0, 5000), var_5, var_2);
   var_8 give_player_next_weapon(1);
   var_9 = spawn("script_model", var_8.origin);
   var_9 setModel("jsp_drop_pod_top");
-  var_9 linkto(var_8, "tag_origin");
+  var_9 linkTo(var_8, "tag_origin");
   var_9 setotherent(var_8);
   var_9.team = var_2.team;
   var_9.owner = var_2;
@@ -419,7 +419,7 @@ func_1285(var_0, var_1, var_2, var_3) {
     var_4 = 1;
   }
 
-  var_2 setorigin(var_8.origin + (0, 0, 10), 1);
+  var_2 setOrigin(var_8.origin + (0, 0, 10), 1);
   var_8 thread func_13A22("large_rod");
   var_8.team = var_2.team;
   var_8.type = "remote";
@@ -467,8 +467,8 @@ monitorboost(var_0) {
 
 func_C6D6(var_0, var_1) {
   var_0 scripts\mp\utility::freezecontrolswrapper(1);
-  var_0 cameralinkto(var_1, "tag_origin");
-  var_0 controlslinkto(var_1);
+  var_0 cameralinkTo(var_1, "tag_origin");
+  var_0 controlslinkTo(var_1);
   var_0 visionsetmissilecamforplayer("default", 0);
   var_0 thread scripts\mp\utility::set_visionset_for_watching_players("default", 0, undefined, 1);
   var_0 visionsetmissilecamforplayer(game["thermal_vision"], 1);
@@ -611,7 +611,7 @@ func_10D89(var_0, var_1) {
   var_2.owner = self;
   var_2.team = self.team;
   self.var_98FF = 0;
-  self setorigin(var_0 + (0, 0, 15), 1);
+  self setOrigin(var_0 + (0, 0, 15), 1);
   foreach(var_4 in level.players) {
     if(var_4 != self) {
       self showtoplayer(var_4);

@@ -98,7 +98,7 @@ function function_f424a041(str_name, localclientnumber) {
     level.var_92a1717d[localclientnumber] = [];
   }
   if(!isDefined(level.var_92a1717d[localclientnumber][str_name])) {
-    level.var_92a1717d[localclientnumber][str_name] = getent(localclientnumber, str_name, "targetname");
+    level.var_92a1717d[localclientnumber][str_name] = getEnt(localclientnumber, str_name, "targetname");
   }
   assert(isDefined(level.var_92a1717d[localclientnumber][str_name]), ("" + str_name) + "");
   level.var_92a1717d[localclientnumber][str_name] util::waittill_dobj(localclientnumber);
@@ -290,7 +290,7 @@ function function_7c4c8c42(newval) {
   if(!isDefined(self.var_be886049)) {
     sndorigin = self gettagorigin("j_generator_pole");
     self.var_be886049 = spawn(0, sndorigin, "script_origin");
-    self.var_be886049 linkto(self, "j_generator_pole");
+    self.var_be886049 linkTo(self, "j_generator_pole");
     playSound(0, "zmb_capturezone_donut_start", self.origin);
     self.var_be886049 thread function_3a4d4e97();
   }
@@ -492,7 +492,7 @@ function function_24fcf23b(str_targetname, localclientnum) {
     level.var_4cb39fae[localclientnum] = [];
   }
   if(!isDefined(level.var_4cb39fae[localclientnum][str_targetname])) {
-    level.var_4cb39fae[localclientnum][str_targetname] = getent(localclientnum, str_targetname, "targetname");
+    level.var_4cb39fae[localclientnum][str_targetname] = getEnt(localclientnum, str_targetname, "targetname");
     level.var_4cb39fae[localclientnum][str_targetname].var_8d2380bb = [];
     level.var_4cb39fae[localclientnum][str_targetname].var_8d2380bb[localclientnum] = 0;
   }
@@ -608,7 +608,7 @@ function function_12a07195(localclientnumber) {
     level.var_9920ede0 = [];
   }
   if(!isDefined(level.var_9920ede0[localclientnumber])) {
-    level.var_9920ede0[localclientnumber] = getent(localclientnumber, "pap_monolith_ring", "targetname");
+    level.var_9920ede0[localclientnumber] = getEnt(localclientnumber, "pap_monolith_ring", "targetname");
   }
   level.var_9920ede0[localclientnumber] util::waittill_dobj(localclientnumber);
   if(!level.var_9920ede0[localclientnumber] hasanimtree()) {
@@ -763,7 +763,7 @@ function function_cd49ce76(localclientnumber) {
     level.var_6a68eb65 = [];
   }
   if(!isDefined(level.var_6a68eb65[localclientnumber])) {
-    level.var_6a68eb65[localclientnumber] = getent(localclientnumber, "pap_cs", "targetname");
+    level.var_6a68eb65[localclientnumber] = getEnt(localclientnumber, "pap_cs", "targetname");
   }
   level.var_6a68eb65[localclientnumber] util::waittill_dobj(localclientnumber);
   if(!level.var_6a68eb65[localclientnumber] hasanimtree()) {
@@ -797,7 +797,7 @@ function function_82ce76c3(localclientnumber) {
   self.var_3199f723[localclientnumber] = playFXOnTag(localclientnumber, level._effect["zone_capture_zombie_torso_fx"], self, "J_Spine4");
   if(!isDefined(self.sndent)) {
     self.sndent = spawn(0, self.origin, "script_origin");
-    self.sndent linkto(self);
+    self.sndent linkTo(self);
     self thread snddeleteent(self.sndent);
   }
   self.sndent playLoopSound("zmb_capturezone_zombie_loop", 1);

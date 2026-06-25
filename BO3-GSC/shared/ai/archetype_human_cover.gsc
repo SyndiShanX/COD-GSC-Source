@@ -57,9 +57,9 @@ function shouldthrowgrenadeatcovercondition(behaviortreeentity, throwifpossible 
     entityangles = behaviortreeentity.node.angles;
   }
   toenemy = behaviortreeentity.enemy.origin - behaviortreeentity.origin;
-  toenemy = vectornormalize((toenemy[0], toenemy[1], 0));
+  toenemy = vectorNormalize((toenemy[0], toenemy[1], 0));
   entityforward = anglesToForward(entityangles);
-  entityforward = vectornormalize((entityforward[0], entityforward[1], 0));
+  entityforward = vectorNormalize((entityforward[0], entityforward[1], 0));
   if(vectordot(toenemy, entityforward) < 0.5) {
     return false;
   }
@@ -110,7 +110,7 @@ function shouldthrowgrenadeatcovercondition(behaviortreeentity, throwifpossible 
 }
 
 function private sensenearbyplayers(entity) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     distancesq = distancesquared(player.origin, entity.origin);
     if(distancesq <= (360 * 360)) {

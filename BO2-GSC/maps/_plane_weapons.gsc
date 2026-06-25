@@ -122,7 +122,7 @@ attach_bombs() {
     self.bomb[i].dropped = 0;
 
     if(isDefined(bomb_tag[i])) {
-      self.bomb[i] linkto(self, bomb_tag[i], vectorscale((0, 0, -1), 4.0), vectorscale((-1, 0, 0), 10.0));
+      self.bomb[i] linkTo(self, bomb_tag[i], vectorscale((0, 0, -1), 4.0), vectorscale((-1, 0, 0), 10.0));
     }
   }
 }
@@ -205,10 +205,10 @@ bomb_wiggle() {
     time = 0.25 + randomfloat(0.25);
     time_in_half = time / 3;
     self bomb_pitch(time);
-    self rotateto((self.pitch, original_angles[1] + yaw * -2, roll * -2), time * 2, time_in_half * 2, time_in_half * 2);
+    self rotateTo((self.pitch, original_angles[1] + yaw * -2, roll * -2), time * 2, time_in_half * 2, time_in_half * 2);
     self waittill("rotatedone");
     self bomb_pitch(time);
-    self rotateto((self.pitch, original_angles[1] + yaw * 2, roll * 2), time * 2, time_in_half * 2, time_in_half * 2);
+    self rotateTo((self.pitch, original_angles[1] + yaw * 2, roll * 2), time * 2, time_in_half * 2, time_in_half * 2);
     self waittill("rotatedone");
   }
 }

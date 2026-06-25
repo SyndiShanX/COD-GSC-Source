@@ -100,8 +100,8 @@ heat() {
   common_scripts\utility::flag_clear("fx_kraken_water");
   var_0 = level.alien_types[self.alien_type].attributes[self.stage]["heated_phase_health_threshold"];
   var_1 = level.alien_types[self.alien_type].attributes[self.stage]["heated_phase_damage_per_second"];
-  var_2 = getent("heated_deck_01", "targetname");
-  var_3 = getent("heated_deck_vfx_01", "targetname");
+  var_2 = getEnt("heated_deck_01", "targetname");
+  var_3 = getEnt("heated_deck_vfx_01", "targetname");
   var_4 = "heat_complete";
   thread stop_kraken_charge_sfx();
   thread playheatanims(var_4);
@@ -171,8 +171,8 @@ reset_deck_fx(var_0, var_1) {
 
 heat_deck_fx(var_0) {
   self endon(var_0);
-  var_1 = getent("heated_deck_01", "targetname");
-  var_2 = getent("heated_deck_vfx_01", "targetname");
+  var_1 = getEnt("heated_deck_01", "targetname");
+  var_2 = getEnt("heated_deck_vfx_01", "targetname");
   var_1 setscriptablepartstate("deck", "heated_deck_anim_in");
   wait 1.0;
   thread heat_deck_sfx(var_0);
@@ -365,8 +365,8 @@ stopeyedeathfx() {
 emerge() {
   common_scripts\utility::flag_set("fx_kraken_water");
   var_0 = level.alien_types[self.alien_type].attributes[self.stage]["emerge_teleport_position"];
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
-  self setorigin(var_1.origin);
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
+  self setOrigin(var_1.origin);
   self setplayerangles(var_1.angles);
   self scragentsetorientmode("face angle abs", var_1.angles, var_1.angles);
   self show();
@@ -380,7 +380,7 @@ emerge() {
   }
 
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(4096);
+  self scragentsetgoalRadius(4096);
 }
 
 playintroanim() {
@@ -590,7 +590,7 @@ kraken_submerge_music() {
 performempdamage() {
   self endon("death");
   var_0 = level.alien_types[self.alien_type].attributes[self.stage]["emp_damage_location"];
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_2 = level.alien_types[self.alien_type].attributes[self.stage]["emp_damage"];
   var_3 = level.alien_types[self.alien_type].attributes[self.stage]["emp_shock_duration"];
   self.emp_traces_this_frame = 0;

@@ -50,7 +50,7 @@ init_quest() {
   level.var_595db1e1 = struct::get("fix_server", "targetname");
   level.s_fix_server_spark_fx = struct::get("fix_server_spark_fx", "targetname");
   level.var_a73534b7 = struct::get("punch_card_insert", "targetname");
-  level.var_af224340 = getent("punch_card_screen", "targetname");
+  level.var_af224340 = getEnt("punch_card_screen", "targetname");
   level.var_af224340 hide();
   level.var_9c0c4b0d = struct::get_array("aat_dmg_fx", "targetname");
   array::sort_by_script_int(level.var_9c0c4b0d, 1);
@@ -60,7 +60,7 @@ init_quest() {
     level.var_67599dfe[i] = 0;
   }
 
-  var_b3edfb92 = getent("server_part_placement", "targetname");
+  var_b3edfb92 = getEnt("server_part_placement", "targetname");
   var_b3edfb92 hide();
   var_240bceab = array(#"hash_1a4bbbe1a3b57e4f");
   var_e4158c30 = array(#"hash_7544aa4a3281de20");
@@ -98,7 +98,7 @@ init_quest() {
     var_453ce50f zm_item_pickup::item_pickup_init(&function_e8d6a81b, 1);
   }
 
-  var_453ce50f = getent("punch_card_anim", "targetname");
+  var_453ce50f = getEnt("punch_card_anim", "targetname");
   assert(isDefined(var_453ce50f), "<dev string:x38>");
   var_453ce50f hide();
   zm_sq::register(#"pernell_archive", #"step_1", #"pernell_archive_step1", &pernell_archive_step1_setup, &pernell_archive_step1_cleanup);
@@ -119,19 +119,19 @@ pernell_archive_step1_setup(var_5ea5c94d) {
     s_server_part_pickup = struct::get("server_part_pickup");
     s_server_part_pickup zm_unitrigger::create(#"", 64, &function_8703c1fe);
     level flag::wait_till(#"server_part_pickup_acquired");
-    var_185199a1 = getent(s_server_part_pickup.target, "targetname");
+    var_185199a1 = getEnt(s_server_part_pickup.target, "targetname");
     var_185199a1 playSound(#"hash_18f957b8000dd0c6");
     var_185199a1 delete();
     zm_unitrigger::unregister_unitrigger(s_server_part_pickup.s_unitrigger);
     s_server_part_pickup struct::delete();
     level.var_595db1e1 zm_unitrigger::create(#"", 64, &function_e4fcfb0a);
     level flag::wait_till(#"server_part_pickup_deposited");
-    playsoundatposition(#"hash_359664e44a2bb635", level.var_595db1e1.origin);
+    playSoundAtPosition(#"hash_359664e44a2bb635", level.var_595db1e1.origin);
     level clientfield::set("" + #"hash_3284b0cf34bfe44e", 0);
     level clientfield::increment("" + #"hash_b143d97bf92fc66", 1);
     level.var_67599dfe[0] = 1;
     zm_unitrigger::unregister_unitrigger(level.var_595db1e1.s_unitrigger);
-    var_ae88db53 = getent("server_damage_trigger", "targetname");
+    var_ae88db53 = getEnt("server_damage_trigger", "targetname");
     var_ae88db53 function_a546fd97();
     level flag::wait_till(#"server_fixed");
   }
@@ -244,9 +244,9 @@ function_814ee815(player) {
   }
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_28806e76718dea47");
+    self setHintString(#"hash_28806e76718dea47");
   } else {
-    self sethintstring(#"hash_4a380545b9102af9");
+    self setHintString(#"hash_4a380545b9102af9");
   }
 
   return true;
@@ -303,7 +303,7 @@ function_24510350() {
 }
 
 function_9f206255() {
-  var_453ce50f = getent("punch_card_anim", "targetname");
+  var_453ce50f = getEnt("punch_card_anim", "targetname");
   assert(isDefined(var_453ce50f), "<dev string:x38>");
   var_453ce50f show();
   v_starting_origin = var_453ce50f.origin;
@@ -311,7 +311,7 @@ function_9f206255() {
   v_forward = anglesToForward(var_453ce50f.angles);
   wait 0.5;
   var_453ce50f playSound("evt_ee_punchcard_insert");
-  var_453ce50f moveto(var_453ce50f.origin + v_forward * -14, 3);
+  var_453ce50f moveTo(var_453ce50f.origin + v_forward * -14, 3);
   wait 1;
   level flag::set(#"card_inserted");
   var_453ce50f waittill(#"movedone");

@@ -885,9 +885,9 @@ function respawn_vehicle(respawn_parameters) {
     iprintln("");
   } else {
     if(isDefined(respawn_parameters.destructibledef)) {
-      vehicle = spawnvehicle(respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.targetname, respawn_parameters.destructibledef);
+      vehicle = spawnVehicle(respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.targetname, respawn_parameters.destructibledef);
     } else {
-      vehicle = spawnvehicle(respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.targetname);
+      vehicle = spawnVehicle(respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.targetname);
     }
     vehicle.vehicletype = respawn_parameters.vehicletype;
     vehicle.destructibledef = respawn_parameters.destructibledef;
@@ -1014,7 +1014,7 @@ function vehicle_damage_t() {
   self endon("removed");
   for(;;) {
     self waittill("damage", damage, attacker);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(!isalive(players[i])) {
         continue;
@@ -1026,12 +1026,12 @@ function vehicle_damage_t() {
         }
         if(damage > 100) {
           println("");
-          players[i] playrumbleonentity("tank_damage_heavy_mp");
+          players[i] playRumbleOnEntity("tank_damage_heavy_mp");
           continue;
         }
         if(damage > 10) {
           println("");
-          players[i] playrumbleonentity("tank_damage_light_mp");
+          players[i] playRumbleOnEntity("tank_damage_light_mp");
         }
       }
     }
@@ -1208,7 +1208,7 @@ function vehiclemainthread() {
 
 function vehiclespawnthread(veh_spawner_id, veh_name, origin, angles, time_interval) {
   level endon("game_ended");
-  veh_spawner = getent(veh_name + "_spawner", "targetname");
+  veh_spawner = getEnt(veh_name + "_spawner", "targetname");
   kill_trigger = spawn("trigger_radius", origin, 0, 60, 180);
   level thread function_87e9a4ad(veh_name, origin, angles);
   var_45b6c208 = time_interval;

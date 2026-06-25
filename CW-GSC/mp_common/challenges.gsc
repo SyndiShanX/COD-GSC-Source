@@ -1916,7 +1916,7 @@ function challengekills(data) {
       if(isDefined(var_1452c652.lasttimedamaged) && var_1452c652.lasttimedamaged + 5000 > time && is_true(var_1452c652.weapon.issniperweapon)) {
         var_20bfb55b = 1;
       } else if(is_true(victimweapon.issniperweapon) && data.var_f0b3c772) {
-        var_3311cbe2 = vectordot(vectornormalize(attackerorigin - victimorigin), victimforward);
+        var_3311cbe2 = vectordot(vectorNormalize(attackerorigin - victimorigin), victimforward);
 
         if(var_3311cbe2 > 0.997) {
           var_20bfb55b = 1;
@@ -2230,7 +2230,7 @@ function challengekills(data) {
     if(victimwasonground && !var_8e5d0c71) {
       var_141c7081 = victimorigin + (0, 0, 31);
       var_a2d0af6e = attackerorigin + (0, 0, 31);
-      dirtoplayer = vectornormalize(var_a2d0af6e - victimorigin);
+      dirtoplayer = vectorNormalize(var_a2d0af6e - victimorigin);
 
       if(!isDefined(var_455d60a2)) {
         var_455d60a2 = distancesquared(attackerorigin, victimorigin);
@@ -2262,7 +2262,7 @@ function challengekills(data) {
     if(attackeronground && !attackerwassprinting) {
       var_b1cd76d4 = victimorigin + (0, 0, 31);
       var_a3a1ea2e = attackerorigin + (0, 0, 31);
-      var_88cb8e4 = vectornormalize(var_b1cd76d4 - var_a3a1ea2e);
+      var_88cb8e4 = vectorNormalize(var_b1cd76d4 - var_a3a1ea2e);
 
       if(!isDefined(var_455d60a2)) {
         var_455d60a2 = distancesquared(attackerorigin, victimorigin);
@@ -2281,7 +2281,7 @@ function challengekills(data) {
     }
 
     if(weapon.islethalgrenade && (!isDefined(var_2baca0fc) || var_2baca0fc)) {
-      dirtoattacker = vectornormalize(data.var_351dc5f - var_241836bd);
+      dirtoattacker = vectorNormalize(data.var_351dc5f - var_241836bd);
 
       if(!isDefined(var_455d60a2)) {
         var_455d60a2 = distancesquared(attackerorigin, victimorigin);
@@ -4623,7 +4623,7 @@ function private function_f9478088() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 0) {
       wait 1;

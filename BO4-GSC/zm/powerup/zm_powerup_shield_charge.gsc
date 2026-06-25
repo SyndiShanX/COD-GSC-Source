@@ -71,7 +71,7 @@ shield_on_hud(drop_item, player_team) {
 }
 
 full_ammo_move_hud(player_team) {
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
   players[0] playsoundtoteam("<dev string:x4a>", player_team);
   wait 0.5;
   move_fade_time = 1.5;
@@ -92,7 +92,7 @@ shield_devgui() {
 }
 
 shield_devgui_callback(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
 
   switch (cmd) {

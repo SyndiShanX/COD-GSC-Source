@@ -131,7 +131,7 @@ function private function_beee2d27(damage_data, var_11098775, forward, cone_angl
     if(issentient(target) && (!isDefined(self.var_b3bd4a36[target getentitynumber()]) || self.var_b3bd4a36[target getentitynumber()] < gettime())) {
       midpoint = (target getabsmaxs() + target getabsmins()) / 2;
       target_radius = length((target getmaxs() + target getmins()) / 2);
-      var_3cce00dd = vectornormalize(midpoint - var_11098775);
+      var_3cce00dd = vectorNormalize(midpoint - var_11098775);
       var_4514d6d9 = vectordot(forward, var_3cce00dd);
       var_f869e2a9 = var_4514d6d9 / var_560aca9f;
 

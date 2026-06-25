@@ -244,7 +244,7 @@ bot_oldschool_track_pickups_in_sight() {
 
       if(var_9) {
         if(var_8.sight_time < var_1) {
-          var_10 = vectornormalize(var_8.origin - self.origin);
+          var_10 = vectorNormalize(var_8.origin - self.origin);
           var_11 = anglesToForward(self getplayerangles());
           var_12 = vectordot(var_10, var_11);
           var_13 = clamp((var_12 - var_5) / (1.0 - var_5), 0.0, 1.0);
@@ -527,7 +527,7 @@ bot_oldschool_should_pursue_pickup(var_0, var_1) {
 
   if(var_2 && self bothasscriptgoal()) {
     var_3 = self botgetscriptgoal();
-    var_4 = self botgetscriptgoalradius();
+    var_4 = self botgetscriptgoalRadius();
 
     if(distancesquared(self.origin, var_3) < squared(var_4)) {
       var_5 = 0;

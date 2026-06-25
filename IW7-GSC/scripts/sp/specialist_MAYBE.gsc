@@ -19,7 +19,7 @@ unlockspecialist() {
       level.player func_84C7("unlockedRealism", 1);
       level.player func_84C7("beatRealism", 1);
       scripts\sp\endmission::func_725B(1);
-      level.player playrumbleonentity("light_2s");
+      level.player playRumbleOnEntity("light_2s");
       var_1 = newhudelem();
       var_1.horzalign = "center";
       var_1.vertalign = "fullscreen";
@@ -86,7 +86,7 @@ init() {
 
   thread unlockspecialist();
   level.var_10964.var_2610 = spawn("script_origin", level.player.origin);
-  level.var_10964.var_2610 linkto(level.player);
+  level.var_10964.var_2610 linkTo(level.player);
 }
 
 main() {
@@ -636,7 +636,7 @@ func_86CC(var_0, var_1) {
   scripts\sp\audio::func_F5A0();
   setslowmotion(1, 0.1, 0.05);
   var_6 = scripts\engine\utility::spawn_tag_origin(self.origin, (0, 0, 0));
-  var_6 linkto(self);
+  var_6 linkTo(self);
   playFXOnTag(level._effect["vfx_gun_sparks"], var_6, "tag_origin");
   scripts\engine\utility::noself_delaycall(0.1, ::playfxontag, level._effect["vfx_gun_sparks"], var_6, "tag_origin");
   var_6 scripts\engine\utility::delaycall(1, ::delete);
@@ -715,7 +715,7 @@ gun_drop_while_wallrunning() {
   level endon("player_grabbed_weapon");
   var_0 = anglesToForward(level.player getplayerangles());
   self.origin = self.origin + var_0 * 20;
-  var_1 = vectornormalize(level.player getvelocity() + (0, 0, 10));
+  var_1 = vectorNormalize(level.player getvelocity() + (0, 0, 10));
   self physicslaunchserveritem(self.origin, var_1 * 1700);
   wait(0.5);
   level notify("weapon_pickup_failed");
@@ -976,7 +976,7 @@ func_BE52(var_0) {
 }
 
 func_4CFB(var_0, var_1, var_2) {
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   if(var_1) {
     screenshake(level.player.origin, 50, 60, 10, 0.75);
     playworldsound("plr_helmet_glass_break", level.player getEye());
@@ -1058,7 +1058,7 @@ func_914F(var_0, var_1, var_2, var_3) {
 }
 
 func_9147(var_0) {
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   if(var_0) {
     screenshake(level.player.origin, 50, 60, 10, 0.75);
     playworldsound("plr_helmet_glass_break", level.player getEye());
@@ -1236,7 +1236,7 @@ func_4E1A(var_0) {
   setsaveddvar("hud_showstance", 0);
   setsaveddvar("actionSlotsHide", 1);
   level.player func_82C2("phstreets_building_hvt_breach", "reverb", "mix", "filter", "occlusion", "ambient", "ambient_events", "player_adsr", "weapon_reflection", "contexts", "full_occlusion");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   playFX(level.var_7649["human_gib_head"], level.player getEye(), anglesToForward(level.player.angles), anglestoleft(level.player.angles));
   playFX(level.var_7649["human_gib_fullbody"], level.player getEye() + (0, 0, 5));
   playworldsound("bullet_large_flesh_head_npc", level.player getEye());
@@ -1284,9 +1284,9 @@ func_4E10() {
   var_3 = anglesToForward(level.player.angles) * -30;
   self rotatepitch(-20, 0.25);
   if(var_1 == "crouch") {
-    self moveto(self.origin + (0, 0, 15) + anglesToForward(level.player.angles) * -10, 0.35);
+    self moveTo(self.origin + (0, 0, 15) + anglesToForward(level.player.angles) * -10, 0.35);
   } else if(var_1 == "stand") {
-    self moveto(self.origin + (0, 0, 25) + anglesToForward(level.player.angles) * -10, 0.35);
+    self moveTo(self.origin + (0, 0, 25) + anglesToForward(level.player.angles) * -10, 0.35);
   }
 
   wait(0.35);
@@ -1301,9 +1301,9 @@ func_4E10() {
     return;
   }
 
-  self moveto(self.origin + (0, 0, var_2) + var_3 / 15, 0.5);
+  self moveTo(self.origin + (0, 0, var_2) + var_3 / 15, 0.5);
   wait(0.5);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait(0.5);
   self rotatepitch(10, 0.5, 0.5);
   wait(0.5);
@@ -1311,10 +1311,10 @@ func_4E10() {
   self rotatepitch(92, var_4);
   var_5 = self.origin + var_3 + (0, 0, 11);
   level.player playSound("player_death_fall_back");
-  self moveto(var_5, var_4, 0, var_4);
+  self moveTo(var_5, var_4, 0, var_4);
   wait(var_4);
   earthquake(0.75, 0.75, level.player.origin, 200);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   playFX(level._effect["deathfx_bloodpool_generic"], level.player getEye() + (0, 0, -25) + anglesToForward(level.player.angles) * -4);
   wait(4);
   level.player func_80A1();
@@ -1847,7 +1847,7 @@ func_25E1(var_0) {
 
 func_25BD(var_0) {
   wait(var_0 * 0.5);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   if(randomint(100) > 50) {
     self playSound("breathing_heartbeat_fade1");
   } else {
@@ -2734,7 +2734,7 @@ spawn_nanoshot() {
   }
 
   level.last_nanoshot_drop = gettime();
-  var_0 = vectornormalize(level.player.origin - self.origin);
+  var_0 = vectorNormalize(level.player.origin - self.origin);
   var_0 = scripts\engine\utility::flatten_vector(var_0);
   var_1 = anglesToForward((randomintrange(-90, -75), 0, 0));
   var_2 = var_0 + var_1;
@@ -2750,7 +2750,7 @@ spawn_nanoshot() {
 
 nanoshot_pickup() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   self.var_9027 = var_0;
   var_0 lib_0E46::func_48C4(undefined, undefined, &"EQUIPMENT_PICKUP_NANOSHOT", 40, 300, undefined, undefined, undefined, 0, &"hud_interaction_prompt_center_equipment");
   var_0 makeunusable();
@@ -2795,7 +2795,7 @@ drop_equipment_crate(var_0, var_1) {
   var_2 thread lib_0B04::func_4842("equipment");
   var_2 thread lib_0B77::add_to_grenade_cache("axis");
   var_2 scripts\engine\utility::delaycall(0.05, ::physicslaunchserver, var_2.origin, anglesToForward(level.player.angles) * 250);
-  var_2.var_99F7 linkto(var_2);
+  var_2.var_99F7 linkTo(var_2);
   var_3 = var_2.var_99F7;
   crate_waittill_delete(var_3);
   if(isDefined(var_3)) {

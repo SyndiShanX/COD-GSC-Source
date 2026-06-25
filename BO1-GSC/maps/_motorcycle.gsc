@@ -153,7 +153,7 @@ ai_ride_and_shoot_linkto_bike() {
   tag_driver_origin = self.ridingvehicle GetTagOrigin("tag_driver");
   tag_driver_angles = self.ridingvehicle GetTagAngles("tag_driver");
   self ForceTeleport(tag_driver_origin, tag_driver_angles);
-  self LinkTo(self.ridingvehicle, "tag_driver");
+  self linkTo(self.ridingvehicle, "tag_driver");
   self ClearAnim(%root, 0);
 }
 ai_ride_and_shoot_aiming_on(sideAnimWeight) {

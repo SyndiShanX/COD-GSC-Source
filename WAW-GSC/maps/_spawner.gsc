@@ -2015,7 +2015,7 @@ friendly_mgTurret(trigger) {
     maps\_utility::error("No mg42 for friendly_mg42 trigger's node, origin: " + node.origin);
   }
 
-  mg42 = GetEnt(node.target, "targetname");
+  mg42 = getEnt(node.target, "targetname");
   mg42 SetMode("auto_ai");
   mg42 ClearTargetEntity();
 
@@ -2063,12 +2063,12 @@ friendly_mg42_death_notify(guy, mg42) {
 friendly_mg42_wait_for_use(mg42) {
   mg42 endon("friendly_finished_using_mg42");
   self.useable = true;
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self setHintString(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
   println("^a was used by player, stop using turret");
   self.useable = false;
-  self SetHintString("");
+  self setHintString("");
   self StopUSeturret();
   self notify("stopped_use_turret");
   mg42 notify("friendly_finished_using_mg42");
@@ -2163,7 +2163,7 @@ friendly_mg42_think(mg42, node) {
   self USeturret(mg42);
 
   if(isDefined(mg42.target)) {
-    stoptrigger = GetEnt(mg42.target, "targetname");
+    stoptrigger = getEnt(mg42.target, "targetname");
     if(isDefined(stoptrigger)) {
       stoptrigger thread friendly_mg42_endtrigger(mg42, self);
     }
@@ -2350,7 +2350,7 @@ friendlySpawnWave() {
     if(!isDefined(startPoint.target)) {
       continue;
     }
-    trigger = GetEnt(startPoint.target, "targetname");
+    trigger = getEnt(startPoint.target, "targetname");
     trigger thread spawnWaveStopTrigger(self);
   }
 }
@@ -2476,7 +2476,7 @@ flood_and_secure_spawner(instantRespawn) {
     possibleSpawners[i].targetname = targetname;
     newTarget = target;
     if(isDefined(possibleSpawners[i].target)) {
-      targetEnt = getent(possibleSpawners[i].target, "targetname");
+      targetEnt = getEnt(possibleSpawners[i].target, "targetname");
       if(!isDefined(targetEnt) || !issubstr(targetEnt.classname, "actor")) {
         newTarget = possibleSpawners[i].target;
       }
@@ -2716,7 +2716,7 @@ flood_and_secure_spawn_goal() {
   }
 
   if(isDefined(node.target)) {
-    turret = GetEnt(node.target, "targetname");
+    turret = getEnt(node.target, "targetname");
     if(isDefined(turret) && (turret.classname == "misc_mgturret" || turret.classname == "misc_turret")) {
       self SetGoalNode(node);
       self.goalradius = 4;
@@ -2747,7 +2747,7 @@ flood_and_secure_spawn_goal() {
 }
 
 furniturePushSound() {
-  org = GetEnt(self.target, "targetname").origin;
+  org = getEnt(self.target, "targetname").origin;
   play_sound_in_space("furniture_slide", org);
   wait(0.9);
   if(isDefined(level.whisper)) {
@@ -3017,7 +3017,7 @@ spawnWaveStopTrigger(startTrigger) {
 }
 
 friendlySpawnWave_triggerThink(startTrigger) {
-  org = GetEnt(self.target, "targetname");
+  org = getEnt(self.target, "targetname");
 
   for(;;) {
     self waittill("trigger");
@@ -3148,7 +3148,7 @@ camper_trigger_think(trigger) {
   nodes = [];
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
-    ai = getent(token, "script_linkname");
+    ai = getEnt(token, "script_linkname");
     if(isDefined(ai)) {
       spawners = add_to_array(spawners, ai);
       continue;
@@ -3301,7 +3301,7 @@ trigger_requires_player(trigger) {
 }
 
 two_stage_spawner_think(trigger) {
-  trigger_target = getent(trigger.target, "targetname");
+  trigger_target = getEnt(trigger.target, "targetname");
   assertEx(isDefined(trigger_target), "Trigger with targetname two_stage_spawner that doesnt target anything.");
   assertEx(issubstr(trigger_target.classname, "trigger"), "Triggers with targetname two_stage_spawner must target a trigger");
   assertEx(isDefined(trigger_target.target), "The second trigger of a two_stage_spawner must target at least one spawner");
@@ -3373,7 +3373,7 @@ flood_spawner_think(trigger) {
     level._numTriggerSpawned++;
 
     soldier thread reincrement_count_if_deleted(self);
-    soldier thread expand_goalradius(trigger);
+    soldier thread expand_goalRadius(trigger);
 
     soldier waittill("death", attacker);
 
@@ -3513,7 +3513,7 @@ pyramid_spawn(trigger) {
     spawner.spawn = soldier;
 
     soldier thread reincrement_count_if_deleted(self);
-    soldier thread expand_goalradius(trigger);
+    soldier thread expand_goalRadius(trigger);
     thread pyramid_death_report(spawner);
   }
 
@@ -3566,7 +3566,7 @@ pyramid_spawn(trigger) {
 
       assertex(isDefined(spawner), "Theoretically impossible.");
       soldier thread reincrement_count_if_deleted(self);
-      soldier thread expand_goalradius(trigger);
+      soldier thread expand_goalRadius(trigger);
       spawner.spawn = soldier;
       thread pyramid_death_report(spawner);
 
@@ -3587,7 +3587,7 @@ pyramid_spawner_reports_death(parent) {
   }
 }
 
-expand_goalradius(trigger) {
+expand_goalRadius(trigger) {
   if(isDefined(self.script_forcegoal)) {
     return;
   }
@@ -3676,7 +3676,7 @@ random_spawn(trigger) {
   if(isDefined(spawner.script_linkto)) {
     links = Strtok(spawner.script_linkto, " ");
     for(i = 0; i < links.size; i++) {
-      spawners[spawners.size] = GetEnt(links[i], "script_linkname");
+      spawners[spawners.size] = getEnt(links[i], "script_linkname");
     }
   }
 
@@ -3890,14 +3890,14 @@ hiding_door_spawner() {
   assertex(distance(door_org.origin, self.origin) < 256, "Hiding door guy with export " + self.export+" was not placed within 256 units of a hiding_door_org");
 
   door_org.targetname = undefined;
-  door_model = getent(door_org.target, "targetname");
+  door_model = getEnt(door_org.target, "targetname");
 
-  door_clip = getent(door_model.target, "targetname");
+  door_clip = getEnt(door_model.target, "targetname");
   assert(isDefined(door_model.target));
 
   pushPlayerClip = undefined;
   if(isDefined(door_clip.target)) {
-    pushPlayerClip = getent(door_clip.target, "targetname");
+    pushPlayerClip = getEnt(door_clip.target, "targetname");
   }
   if(isDefined(pushPlayerClip)) {
     door_org thread hiding_door_guy_pushplayer(pushPlayerClip);
@@ -3910,13 +3910,13 @@ hiding_door_spawner() {
   door_org thread anim_first_frame_solo(door, "fire_3");
 
   if(isDefined(door_clip)) {
-    door_clip linkto(door, "door_hinge_jnt");
+    door_clip linkTo(door, "door_hinge_jnt");
     door_clip disconnectPaths();
   }
 
   trigger = undefined;
   if(isDefined(self.target)) {
-    trigger = getent(self.target, "targetname");
+    trigger = getEnt(self.target, "targetname");
     if(!issubstr(trigger.classname, "trigger")) {
       trigger = undefined;
     }
@@ -4003,7 +4003,7 @@ hiding_door_guy_cleanup(door_org, guy, door, door_clip) {
 
 hiding_door_guy_pushplayer(pushPlayerClip) {
   self waittill("push_player");
-  pushPlayerClip moveto(self.origin, 1.5);
+  pushPlayerClip moveTo(self.origin, 1.5);
   wait 3.0;
   pushPlayerClip delete();
 }
@@ -4046,7 +4046,7 @@ hiding_door_death_door_connections(door_clip) {
   }
   door_clip connectpaths();
   wait 2;
-  door_clip disconnectpaths();
+  door_clip disconnectPaths();
 }
 
 hiding_door_starts_open(door_org) {

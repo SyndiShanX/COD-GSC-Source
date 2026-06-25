@@ -537,7 +537,7 @@ function play_hurt_vox() {
   if(isDefined(self.veryhurt)) {
     if(self.veryhurt == 0) {
       if(randomintrange(0, 1) == 1) {
-        playsoundatposition("chr_breathing_hurt_start", self.origin);
+        playSoundAtPosition("chr_breathing_hurt_start", self.origin);
       }
     }
   }
@@ -754,7 +754,7 @@ function update_skill_level(skill_override) {
         level.gameskillhighest = level.gameskill;
         matchrecordsetleveldifficultyforindex(3, level.gameskill);
       }
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_player_uimodel("serverDifficulty", level.gameskill);
       }
     }
@@ -766,7 +766,7 @@ function coop_enemy_accuracy_scalar_watcher() {
   level flagsys::wait_till("load_main_complete");
   level flag::wait_till("all_players_connected");
   while(level.players.size > 1) {
-    players = getplayers("allies");
+    players = getPlayers("allies");
     level.coop_enemy_accuracy_scalar = get_coop_enemy_accuracy_modifier();
     wait(0.5);
   }
@@ -776,7 +776,7 @@ function coop_friendly_accuracy_scalar_watcher() {
   level flagsys::wait_till("load_main_complete");
   level flag::wait_till("all_players_connected");
   while(level.players.size > 1) {
-    players = getplayers("allies");
+    players = getPlayers("allies");
     level.coop_friendly_accuracy_scalar = get_coop_friendly_accuracy_modifier();
     wait(0.5);
   }
@@ -806,7 +806,7 @@ function coop_player_threat_bias_adjuster() {
   while(true) {
     wait(5);
     if(level.auto_adjust_threatbias) {
-      players = getplayers("allies");
+      players = getPlayers("allies");
       for(i = 0; i < players.size; i++) {
         enable_auto_adjust_threatbias(players[i]);
       }
@@ -1349,7 +1349,7 @@ function adjust_melee_damage(player, eattacker, einflictor, idamage, weapon, shi
     idamage = idamage / 5;
     if(idamage > 40) {
       playerforward = anglesToForward(player.angles);
-      toattacker = vectornormalize(eattacker.origin - player.origin);
+      toattacker = vectorNormalize(eattacker.origin - player.origin);
       if(vectordot(playerforward, toattacker) < 0.342) {
         idamage = 40;
       }
@@ -1395,7 +1395,7 @@ function accuracy_buildup_before_fire(ai) {
           misstime = ai.miss_time_constant * 1000;
           accuracybuilduptime = misstime + (distance * ai.miss_time_distance_factor);
           targetfacingangle = anglesToForward(ai.enemy.angles);
-          anglefromtarget = vectornormalize(ai.origin - ai.enemy.origin);
+          anglefromtarget = vectorNormalize(ai.origin - ai.enemy.origin);
           if(vectordot(targetfacingangle, anglefromtarget) < 0.7) {
             accuracybuilduptime = accuracybuilduptime * 2;
           }

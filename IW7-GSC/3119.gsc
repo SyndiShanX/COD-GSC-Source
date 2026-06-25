@@ -248,7 +248,7 @@ func_CEB9(var_0, var_1, var_2, var_3) {
     var_7 = magicgrenademanual("frag_c6hug", self gettagorigin("tag_accessory_left"), (0, 0, 0), var_6);
     self.func_85C0 = var_7;
     var_7.angles = self gettagangles("tag_accessory_left");
-    var_7 linkto(self, "tag_accessory_left");
+    var_7 linkTo(self, "tag_accessory_left");
   }
 
   scripts\anim\battlechatter_ai::func_67CF("frag");

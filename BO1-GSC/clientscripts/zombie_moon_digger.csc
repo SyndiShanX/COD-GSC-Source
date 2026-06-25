@@ -43,7 +43,7 @@ wait_for_biodome_breach() {
     if(!isDefined(player)) {
       continue;
     }
-    piece = getent(i, "biodome_breached", "targetname");
+    piece = getEnt(i, "biodome_breached", "targetname");
     if(!isDefined(piece)) {
       continue;
     }
@@ -59,7 +59,7 @@ wait_for_biodome_breach() {
 bio_breach_rumble(LocalClientNum) {
   self endon("disconnect");
   for(i = 0; i < 10; i++) {
-    self PlayRumbleOnEntity(LocalClientNum, "damage_heavy");
+    self playRumbleOnEntity(LocalClientNum, "damage_heavy");
     wait(randomfloatrange(.1, .2));
   }
 }
@@ -94,7 +94,7 @@ do_digger_moving_earthquake_rumble(LocalClientNum, quake_ent) {
     }
     player earthquake(randomfloatrange(0.15, 0.25), 3.0, quake_ent.origin, 2500);
     if(distancesquared(quake_ent.origin, player.origin) < dist_sqd) {
-      player PlayRumbleOnEntity(LocalClientNum, "slide_rumble");
+      player playRumbleOnEntity(LocalClientNum, "slide_rumble");
     }
     wait(randomfloatrange(.05, .15));
   }
@@ -115,7 +115,7 @@ do_digger_digging_earthquake_rumble(LocalClientNum, quake_ent) {
     }
     player earthquake(randomfloatrange(0.12, 0.17), 3.0, quake_ent.origin, 1500);
     if((distancesquared(quake_ent.origin, player.origin) < dist) && abs(quake_ent.origin[2] - player.origin[2]) < 750) {
-      player PlayRumbleOnEntity(LocalClientNum, "grenade_rumble");
+      player playRumbleOnEntity(LocalClientNum, "grenade_rumble");
     }
     wait(randomfloatrange(.1, .25));
   }
@@ -171,9 +171,9 @@ digger_visibility_toggle(localclient, visible) {
         tracks[i] hide();
       }
       for(i = 0; i < diggers.size; i++) {
-        arm = GetEnt(localclient, diggers[i].target, "targetname");
-        blade_center = GetEnt(localclient, arm.target, "targetname");
-        blade = GetEnt(localclient, blade_center.target, "targetname");
+        arm = getEnt(localclient, diggers[i].target, "targetname");
+        blade_center = getEnt(localclient, arm.target, "targetname");
+        blade = getEnt(localclient, blade_center.target, "targetname");
         diggers[i] hide();
         arm hide();
         blade hide();
@@ -184,9 +184,9 @@ digger_visibility_toggle(localclient, visible) {
         tracks[i] show();
       }
       for(i = 0; i < diggers.size; i++) {
-        arm = GetEnt(localclient, diggers[i].target, "targetname");
-        blade_center = GetEnt(localclient, arm.target, "targetname");
-        blade = GetEnt(localclient, blade_center.target, "targetname");
+        arm = getEnt(localclient, diggers[i].target, "targetname");
+        blade_center = getEnt(localclient, arm.target, "targetname");
+        blade = getEnt(localclient, blade_center.target, "targetname");
         diggers[i] show();
         arm show();
         blade show();
@@ -208,7 +208,7 @@ excavator_console(LocalClientNum, name) {
   if(!isDefined(player)) {
     return;
   }
-  console = getent(LocalClientNum, name + "_console", "targetname");
+  console = getEnt(LocalClientNum, name + "_console", "targetname");
   str_wait = undefined;
   str_off = undefined;
   switch (name) {

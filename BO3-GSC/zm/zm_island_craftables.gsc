@@ -138,10 +138,10 @@ function function_3e3b2e02(player) {
 
 function function_4e02c665(player) {
   function_aa4f440c(self.origin, self.angles);
-  var_6796a7a4 = getent("mask_display", "targetname");
+  var_6796a7a4 = getEnt("mask_display", "targetname");
   var_6796a7a4 setscale(1.5);
-  var_6796a7a4 moveto((self.origin + anglesToForward(self.angles)) + (-5, 0, -105), 0.05);
-  var_6796a7a4 rotateto(self.angles + vectorscale((0, 1, 0), 90), 0.05);
+  var_6796a7a4 moveTo((self.origin + anglesToForward(self.angles)) + (-5, 0, -105), 0.05);
+  var_6796a7a4 rotateTo(self.angles + vectorscale((0, 1, 0), 90), 0.05);
   var_6796a7a4 waittill("movedone");
   return true;
 }
@@ -165,9 +165,9 @@ function function_aa4f440c(v_origin, v_angles) {
 
 function function_dbc8e9c0(player) {
   if(!player.var_df4182b1) {
-    self sethintstring(&"ZM_ISLAND_GASMASK_PICKUP");
+    self setHintString(&"ZM_ISLAND_GASMASK_PICKUP");
   } else {
-    self sethintstring(&"ZOMBIE_BUILD_PIECE_HAVE_ONE");
+    self setHintString(&"ZOMBIE_BUILD_PIECE_HAVE_ONE");
   }
   return true;
 }

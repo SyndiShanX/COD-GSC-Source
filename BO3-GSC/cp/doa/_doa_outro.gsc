@@ -43,7 +43,7 @@ function function_d4766377() {
     level.doa.var_260a85f3 = array("c_zom_zod_zombie_cin_fb1", "c_zom_zod_zombie_cin_fb2", "c_zom_zod_zombie_cin_fb3", "c_zom_zod_zombie_fem_cin_fb1");
   }
   if(!isDefined(level.doa.var_799853ee)) {
-    level.doa.var_799853ee = getent("podium_damage_trigger", "targetname");
+    level.doa.var_799853ee = getEnt("podium_damage_trigger", "targetname");
   }
   level.doa.var_799853ee triggerenable(0);
   if(!isDefined(level.doa.var_92721db3)) {
@@ -184,7 +184,7 @@ function function_5e04bf78() {
   org2 = spawn("script_origin", org.origin + vectorscale((0, 0, 1), 2500));
   org2 thread doa_utility::function_783519c1("podiumAllDone", 1);
   org2.angles = point1.angles;
-  playsoundatposition("zmb_ape_prespawn", org.origin);
+  playSoundAtPosition("zmb_ape_prespawn", org.origin);
   org thread namespace_eaa992c::function_285a2999("silverback_intro");
   wait(0.5);
   org thread namespace_eaa992c::function_285a2999("silverback_intro");
@@ -195,23 +195,23 @@ function function_5e04bf78() {
   wait(0.5);
   silverback = namespace_51bd792::function_36aa8b6c(org2);
   silverback thread doa_utility::function_783519c1("podiumAllDone", 1);
-  silverback linkto(org2);
+  silverback linkTo(org2);
   silverback thread namespace_eaa992c::function_285a2999("player_trail_red");
   silverback thread namespace_eaa992c::function_285a2999("silverback_intro_trail1");
   silverback thread namespace_eaa992c::function_285a2999("silverback_intro_trail2");
   silverback forceteleport(org2.origin, org2.angles);
-  org2 moveto(org.origin, 1);
+  org2 moveTo(org.origin, 1);
   org2 util::waittill_any_timeout(1.5, "movedone");
   silverback.takedamage = 0;
   silverback thread namespace_eaa992c::function_285a2999("silverback_intro_explo");
   silverback thread namespace_eaa992c::turnofffx("silverback_intro_trail1");
   silverback thread namespace_eaa992c::turnofffx("silverback_intro_trail2");
   playrumbleonposition("explosion_generic", org.origin);
-  playsoundatposition("zmb_ape_spawn", org.origin);
+  playSoundAtPosition("zmb_ape_spawn", org.origin);
   silverback unlink();
   org2 delete();
   silverback playSound("zmb_simianaut_roar");
-  silverback animscripted("pissedoff", silverback.origin, silverback.angles, "ai_zombie_doa_simianaut_ground_pound");
+  silverback animScripted("pissedoff", silverback.origin, silverback.angles, "ai_zombie_doa_simianaut_ground_pound");
   silverback waittillmatch("pissedoff");
   playFX(level._effect["ground_pound"], silverback.origin);
   silverback waittillmatch("pissedoff");
@@ -224,7 +224,7 @@ function function_5e04bf78() {
   timems = (height / 1000) * 3000;
   org.angles = silverback.angles;
   org.origin = silverback.origin;
-  silverback linkto(org);
+  silverback linkTo(org);
   org namespace_a3646565::move_to_position_over_time(point2.origin, timems, height);
   silverback thread namespace_eaa992c::function_285a2999("turret_impact");
   silverback playSound("zmb_simianaut_roar");
@@ -247,7 +247,7 @@ function function_5e04bf78() {
   org.angles = silverback.angles;
   org.origin = silverback.origin;
   level notify("hash_ff1ecf6");
-  org moveto(org.origin + vectorscale((0, 0, 1), 2000), 1.3);
+  org moveTo(org.origin + vectorscale((0, 0, 1), 2000), 1.3);
   org util::waittill_any_timeout(1.5, "movedone");
   org.origin = point3.origin + vectorscale((0, 0, 1), 2000);
   org.angles = point3.angles;
@@ -261,25 +261,25 @@ function function_5e04bf78() {
   mech.nojumping = 1;
   mech vehicle_ai::start_scripted();
   mech.team = "axis";
-  mech enablelinkto();
+  mech enablelinkTo();
   mech.driver = spawn("script_model", mech gettagorigin("tag_driver"));
   mech.driver ghost();
   mech.driver thread doa_utility::function_783519c1("podiumAllDone", 1);
   mech.driver.angles = org.angles;
   mech.driver setModel("c_rus_simianaut_body");
-  mech.driver linkto(mech, "tag_driver");
+  mech.driver linkTo(mech, "tag_driver");
   mech.driver thread function_fb3b78fe();
-  mech linkto(org);
+  mech linkTo(org);
   org thread namespace_eaa992c::function_285a2999("fire_trail");
   wait(0.05);
   mech show();
   mech.driver show();
-  org moveto(point3.origin, 2);
+  org moveTo(point3.origin, 2);
   mech playSound("evt_doa_monkeymech_land");
   org util::waittill_any_timeout(3, "movedone");
   org thread namespace_eaa992c::function_285a2999("def_explode");
-  mech setturrettargetent(level.doa.var_c12009c9);
-  mech setgunnertargetent(level.doa.var_c12009c9, (0, 0, 0), 1);
+  mech setturrettargetEnt(level.doa.var_c12009c9);
+  mech setgunnertargetEnt(level.doa.var_c12009c9, (0, 0, 0), 1);
   mech unlink();
   level notify("hash_e4be85d1");
   wait(10);
@@ -307,8 +307,8 @@ function function_5e04bf78() {
       faketarget setModel("tag_origin");
       faketarget makesentient();
       level.doa.var_c12009c9 = faketarget;
-      mech setturrettargetent(level.doa.var_c12009c9);
-      mech setgunnertargetent(level.doa.var_c12009c9);
+      mech setturrettargetEnt(level.doa.var_c12009c9);
+      mech setgunnertargetEnt(level.doa.var_c12009c9);
       msg = self util::waittill_any_timeout(1, "turret_on_target");
     }
   }
@@ -317,7 +317,7 @@ function function_5e04bf78() {
   }
   mech cleargunnertarget(1);
   mech.driver.taunt = 1;
-  mech.driver stopanimscripted();
+  mech.driver stopanimScripted();
   wait(1);
   level thread function_46882430(&"DOA_HAHAHA", mech.driver.origin + vectorscale((0, 0, 1), 145), 2);
   wait(2);
@@ -326,10 +326,10 @@ function function_5e04bf78() {
   wait(3);
   level thread function_46882430(&"DOA_BYE", mech.driver.origin + vectorscale((0, 0, 1), 145), 2);
   wait(2);
-  mech linkto(org);
+  mech linkTo(org);
   mech playSound("evt_doa_monkeymech_takeoff");
   org thread namespace_eaa992c::function_285a2999("def_explode");
-  org moveto(point3.origin + vectorscale((0, 0, 1), 2500), 2);
+  org moveTo(point3.origin + vectorscale((0, 0, 1), 2500), 2);
   org util::waittill_any_timeout(2.3, "movedone");
   if(isDefined(mech)) {
     if(isDefined(mech.driver)) {
@@ -368,7 +368,7 @@ function function_d834fdd0() {
       podium.var_53538eb0 thread function_f7e6e4b1();
     }
     if(isDefined(podium.playermodel)) {
-      podium.playermodel stopanimscripted();
+      podium.playermodel stopanimScripted();
       podium.playermodel notsolid();
       podium.playermodel startragdoll(1);
       podium.playermodel notify("hash_cc763d5f");
@@ -386,7 +386,7 @@ function function_d834fdd0() {
 function function_566de51a() {
   self endon("death");
   self thread namespace_eaa992c::function_285a2999("bomb");
-  self stopanimscripted();
+  self stopanimScripted();
   self startragdoll(1);
   util::wait_network_frame();
   var_4671be4e = vectorscale((0, 0, 1), 130);
@@ -498,10 +498,10 @@ function function_5e06cff2() {
     org = spawn("script_model", self.origin);
     org thread doa_utility::function_783519c1("podiumAllDone", 1);
     org setModel("tag_origin");
-    org enablelinkto();
+    org enablelinkTo();
     org notsolid();
     org.angles = self.angles;
-    self linkto(org);
+    self linkTo(org);
     self.org = org;
     self thread function_78713841();
   }
@@ -517,7 +517,7 @@ function function_7206982b() {
   self endon("hash_7206982b");
   while(true) {
     idleanim = self.animarray[randomint(self.animarray.size)];
-    self animscripted("zombieanim", self.origin, self.angles, idleanim, "normal", %generic::body, 1, 0.3, 0.3);
+    self animScripted("zombieanim", self.origin, self.angles, idleanim, "normal", %generic::body, 1, 0.3, 0.3);
     self waittillmatch("hash_24281fe0");
   }
 }
@@ -530,7 +530,7 @@ function function_78713841() {
       wait(randomfloatrange(0.1, 2));
     } else {
       anim_ang = vectortoangles(level.doa.var_63e2b87e.origin - self.origin);
-      self.org rotateto((0, anim_ang[1], 0), randomfloatrange(0.5, 2));
+      self.org rotateTo((0, anim_ang[1], 0), randomfloatrange(0.5, 2));
       self.org waittill("rotatedone");
     }
   }
@@ -587,10 +587,10 @@ function function_fb3b78fe() {
   self useanimtree($generic);
   while(true) {
     if(isDefined(self.taunt) && self.taunt) {
-      self animscripted("mech_taunt", self.origin, self.angles, "ai_zombie_doa_simianaut_mech_idle_taunt");
+      self animScripted("mech_taunt", self.origin, self.angles, "ai_zombie_doa_simianaut_mech_idle_taunt");
       self waittillmatch("hash_3b8ce577");
     } else {
-      self animscripted("mech_idle", self.origin, self.angles, "ai_zombie_doa_simianaut_mech_idle");
+      self animScripted("mech_idle", self.origin, self.angles, "ai_zombie_doa_simianaut_mech_idle");
       self waittillmatch("hash_4b135fff");
     }
   }
@@ -615,7 +615,7 @@ function function_e4d4b80(animation) {
   self endon("hash_e4d4b80");
   self useanimtree($generic);
   while(true) {
-    self animscripted("podium", self.origin, self.angles, animation, "normal", %generic::body, 1, 0.5, 0.5);
+    self animScripted("podium", self.origin, self.angles, animation, "normal", %generic::body, 1, 0.5, 0.5);
     self waittillmatch("podium");
     self notify("animation_loop", animation, "end");
   }
@@ -755,7 +755,7 @@ function function_b7bde10a(podium) {
 }
 
 function function_4d8b6e1e() {
-  var_5198fae9 = getplayers();
+  var_5198fae9 = getPlayers();
   players = [];
   foreach(player in var_5198fae9) {
     if(isDefined(player.doa)) {

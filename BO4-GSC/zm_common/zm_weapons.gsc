@@ -555,7 +555,7 @@ limited_weapon_below_quota(weapon, ignore_player) {
       upgradedweapon = level.zombie_weapons[weapon].upgrade;
     }
 
-    players = getplayers();
+    players = getPlayers();
     count = 0;
     limit = level.limited_weapons[weapon];
 
@@ -1052,7 +1052,7 @@ get_weapon_hint_ammo() {
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {
-  self sethintstring(get_weapon_hint_ammo());
+  self setHintString(get_weapon_hint_ammo());
 }
 
 get_pack_a_punch_weapon_options(weapon) {

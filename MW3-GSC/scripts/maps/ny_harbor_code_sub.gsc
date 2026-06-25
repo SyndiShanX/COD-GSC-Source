@@ -107,7 +107,7 @@ _id_4AFB(var_0, var_1) {
   level._id_4AFC delete();
   level._id_4AFC = undefined;
   level._id_4A49 hide();
-  var_2 = getent("burya2", "targetname");
+  var_2 = getEnt("burya2", "targetname");
   var_2 show();
 }
 
@@ -196,7 +196,7 @@ _id_4B06(var_0, var_1) {
     var_11 = var_9 * cos(var_8);
     var_12 = var_1 * randomfloatrange(var_4, var_5);
     var_13 = randomfloatrange(var_6, var_7);
-    var_0._id_4B04 moveto(var_0._id_4B07 + (var_10, var_11, var_12), var_13, var_13 / 4.0, var_13 / 4.0);
+    var_0._id_4B04 moveTo(var_0._id_4B07 + (var_10, var_11, var_12), var_13, var_13 / 4.0, var_13 / 4.0);
     wait(var_13);
   }
 }
@@ -264,14 +264,14 @@ _id_4B0B(var_0, var_1) {
 }
 
 _id_4B0C(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_2.origin - (0, 0, 48);
   var_3.origin = var_2.origin;
   var_3.angles = var_2.angles;
   var_0 show();
   var_0 forceteleport(var_3.origin, var_3.angles);
-  var_0 linkto(var_3, "tag_origin");
+  var_0 linkTo(var_3, "tag_origin");
   var_0 thread _id_4B0B(var_2, var_3, -6, 0.0);
 }
 
@@ -346,8 +346,8 @@ _id_4B0F(var_0, var_1) {
 }
 
 _id_4B10() {
-  var_0 = getent("ship2_squeeze", "targetname");
-  var_1 = getent("ship_squeeze_ship", "targetname");
+  var_0 = getEnt("ship2_squeeze", "targetname");
+  var_1 = getEnt("ship_squeeze_ship", "targetname");
   _id_4B3A([var_0], var_1._id_4B13, var_1._id_4B12, var_1._id_4B11);
   var_0 thread _id_4B37(0);
   common_scripts\utility::flag_wait("ladder_done");
@@ -415,10 +415,10 @@ _id_4B15(var_0) {
     if(common_scripts\utility::flag("outside_above_water") || self._id_4B11) {
       var_1 = (self._id_4B16[3], self._id_4B16[4], self._id_4B16[5]);
       var_2 = (self._id_4B16[0], self._id_4B16[1], self._id_4B16[2]);
-      self moveto(var_1, 0.1, 0.0, 0.0);
+      self moveTo(var_1, 0.1, 0.0, 0.0);
 
       if(!var_0) {
-        self rotateto(var_2, 0.1, 0.0, 0.0);
+        self rotateTo(var_2, 0.1, 0.0, 0.0);
       }
       wait 0.05;
       continue;
@@ -468,7 +468,7 @@ _id_4B17(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
             self rotatepitch(var_12, var_9, var_10, var_11);
             break;
           case 1:
-            self rotateyaw(var_12, var_9, var_10, var_11);
+            self rotateYaw(var_12, var_9, var_10, var_11);
             break;
           case 2:
             self rotateroll(var_12, var_9, var_10, var_11);
@@ -528,7 +528,7 @@ _id_4B18() {
       var_11 = calcrockingangles(self._id_4B19, var_6, 4.0, 3.0, 60.0);
       var_12 = var_11["angles"];
       var_6 = var_11["result"];
-      self rotateto(var_12, 0.4, 0, 0);
+      self rotateTo(var_12, 0.4, 0, 0);
     }
 
     wait 0.2;
@@ -747,8 +747,8 @@ _id_4B35() {
   self._id_4B36 = self.origin;
   self waittill("stop_bobbing");
   waittillframeend;
-  self rotateto(self._id_4B19, 1, 0, 0);
-  self moveto(self._id_4B36, 1, 0, 0);
+  self rotateTo(self._id_4B19, 1, 0, 0);
+  self moveTo(self._id_4B36, 1, 0, 0);
 }
 
 _id_4B37(var_0) {
@@ -959,7 +959,7 @@ _id_4B4C() {
 
 _id_4B4D() {
   level endon("stop_rocking");
-  var_0 = getent("rocking_reference", "targetname");
+  var_0 = getEnt("rocking_reference", "targetname");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_2 = undefined;
 
@@ -987,7 +987,7 @@ _id_4B4D() {
 
   if(isDefined(var_2)) {
     foreach(var_7 in var_4) {}
-    var_7 linkto(var_2, "tag_origin");
+    var_7 linkTo(var_2, "tag_origin");
   }
 
   thread _id_4B54();
@@ -1002,13 +1002,13 @@ _id_4B4D() {
     var_1._id_4B50 = var_15;
     var_1._id_4B51 = gettime() + 1000 * var_13;
     maps\_audio::aud_send_msg("if_the_sub_is_a_rocking_dont_come_a_knocking");
-    var_1 rotateto(var_15, var_13, var_13 / 3, var_13 / 3);
+    var_1 rotateTo(var_15, var_13, var_13 / 3, var_13 / 3);
     thread _id_4B58(var_3, var_13, var_13 / 3, var_13 / 3);
     thread _id_4B59(var_5, var_15, var_13, var_13 / 3, var_13 / 3);
 
     if(isDefined(var_2)) {
       var_15 = (0, 0, 0.5 * var_14);
-      var_2 rotateto(var_15, var_13, var_13 / 3, var_13 / 3);
+      var_2 rotateTo(var_15, var_13, var_13 / 3, var_13 / 3);
     }
 
     wait(var_13);
@@ -1019,14 +1019,14 @@ _id_4B52(var_0) {
   level endon("stop_rocking");
   thread _id_4B53();
   var_1 = 0;
-  var_2 = common_scripts\utility::getstruct("jolter", "targetname");
+  var_2 = common_scripts\utility::getStruct("jolter", "targetname");
   common_scripts\utility::flag_wait("hatch_player_using_ladder");
 
   for(;;) {
     var_3 = anglestoup(var_0.angles);
     var_4 = -1 * var_3;
     var_5 = var_4 * (1, 10, 0.75);
-    var_6 = vectornormalize(var_5);
+    var_6 = vectorNormalize(var_5);
     setphysicsgravitydir(var_6);
     var_1++;
 
@@ -1052,24 +1052,24 @@ _id_4B54() {
   var_0 = getEntArray("sub_pressuredoor_rocker", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
-    var_2 linkto(var_3);
+    var_3 = getEnt(var_2.target, "targetname");
+    var_2 linkTo(var_3);
     level._id_4B55[level._id_4B55.size] = var_3;
   }
 
   var_0 = getEntArray("sub_pressuredoor_rocker_opposite", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
-    var_2 linkto(var_3);
+    var_3 = getEnt(var_2.target, "targetname");
+    var_2 linkTo(var_3);
     level._id_4B56[level._id_4B56.size] = var_3;
   }
 
   var_7 = getEntArray("dyn_hanger", "targetname");
 
   foreach(var_9 in var_7) {
-    var_3 = getent(var_9.target, "targetname");
-    var_9 linkto(var_3);
+    var_3 = getEnt(var_9.target, "targetname");
+    var_9 linkTo(var_3);
     level._id_4B57[level._id_4B57.size] = var_3;
   }
 }
@@ -1078,30 +1078,30 @@ _id_4B58(var_0, var_1, var_2, var_3) {
   var_4 = 3 * (level._id_4B47[1] * var_0);
 
   foreach(var_6 in level._id_4B55) {}
-  var_6 rotateto((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
+  var_6 rotateTo((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
 
   foreach(var_6 in level._id_4B56) {}
-  var_6 rotateto((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
+  var_6 rotateTo((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
 
   foreach(var_6 in level._id_4B57) {
     switch (var_6.script_noteworthy) {
       case "x":
-        var_6 rotateto((var_6.angles[0] + var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0] + var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "x_neg":
-        var_6 rotateto((var_6.angles[0] + -1 * var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0] + -1 * var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "y":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "y_neg":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "z":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1], var_6.angles[0] + var_4), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1], var_6.angles[0] + var_4), var_1, var_2, var_3);
         break;
       case "z_neg":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1], var_6.angles[0] + -1 * var_4), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1], var_6.angles[0] + -1 * var_4), var_1, var_2, var_3);
         break;
       default:
         break;
@@ -1117,12 +1117,12 @@ _id_4B59(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_9 in var_0) {
     var_10 = randomfloatrange(4, 12);
     var_11 = var_9._id_4B07 + var_10 * var_7 * var_5;
-    var_9 moveto(var_11, var_2, var_3, var_4);
+    var_9 moveTo(var_11, var_2, var_3, var_4);
     var_12 = randomfloatrange(3 * level._id_4B47[0], 3 * level._id_4B47[1]);
     var_13 = var_12 * var_7;
     var_14 = (var_9._id_4B4F[0] * var_13, var_9._id_4B4F[1] * var_13, var_9._id_4B4F[2] * var_13);
     var_1 = var_9._id_4B4E + var_14;
-    var_9 rotateto(var_1, var_2, var_3, var_4);
+    var_9 rotateTo(var_1, var_2, var_3, var_4);
   }
 }
 
@@ -1196,7 +1196,7 @@ _id_4B5C(var_0, var_1) {
 
   var_4._id_1032 = "missile_door";
   var_4 maps\_anim::_id_1244();
-  var_8 linkto(var_4, "door");
+  var_8 linkTo(var_4, "door");
   maps\_audio::aud_send_msg("sub_missile_door_open", var_8);
 
   if(var_0 == "l") {
@@ -1371,7 +1371,7 @@ _id_4B69() {
 
 _id_4B6A() {
   common_scripts\utility::flag_wait("sub_entering");
-  var_0 = getent("sub_spawner_for_dead1", "targetname");
+  var_0 = getEnt("sub_spawner_for_dead1", "targetname");
   var_1 = getEntArray("sub_dead_and_dying_loops", "targetname");
 
   foreach(var_3 in var_1) {
@@ -1449,7 +1449,7 @@ _id_4B6D() {
   var_0 = 0;
 
   if(!common_scripts\utility::flag("hatch_player_using_ladder")) {
-    var_1 = getent("sub_exterior_hind_kill_player", "targetname");
+    var_1 = getEnt("sub_exterior_hind_kill_player", "targetname");
     var_2 = var_1 maps\_vehicle::_id_1F9E();
     maps\_audio::aud_send_msg("hind_player_killer", var_2);
     var_2 setmaxpitchroll(10, 50);
@@ -1515,7 +1515,7 @@ _id_4B72() {
   var_0 = self.script_noteworthy;
   self endon("death");
   common_scripts\utility::flag_wait(var_0 + "_fire");
-  var_1 = common_scripts\utility::getstruct(var_0 + "_target", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0 + "_target", "targetname");
   _id_4B73(var_1, 75, 0.1);
 }
 
@@ -1552,7 +1552,7 @@ _id_4B73(var_0, var_1, var_2) {
 
   if(isDefined(var_0.target)) {
     if(!isDefined(var_0.classname)) {
-      var_11 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_11 = common_scripts\utility::getStruct(var_0.target, "targetname");
       var_12 = distance(var_0.origin, var_11.origin);
       var_13 = vectortoangles(var_11.origin - var_0.origin);
       var_9 = anglesToForward(var_13);
@@ -1560,7 +1560,7 @@ _id_4B73(var_0, var_1, var_2) {
     }
   }
 
-  self setturrettargetent(var_7);
+  self setturrettargetEnt(var_7);
 
   for(var_14 = 0; var_14 < var_1; var_14++) {
     self fireweapon("tag_flash", var_7);
@@ -1608,7 +1608,7 @@ _id_4B78(var_0) {
 }
 
 _id_4B79(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_1, "targetname");
+  var_4 = getEnt(var_1, "targetname");
   var_5 = var_4 maps\_utility::_id_166F(1);
   maps\_utility::_id_13AF();
 
@@ -1653,45 +1653,45 @@ _id_4B7B() {
 }
 
 _id_4B7C() {
-  var_0 = getent("hatch_component1", "targetname");
-  var_1 = getent("hatch_component2", "targetname");
+  var_0 = getEnt("hatch_component1", "targetname");
+  var_1 = getEnt("hatch_component2", "targetname");
   var_2 = common_scripts\utility::spawn_tag_origin();
-  var_3 = getent("hatch_org", "targetname");
+  var_3 = getEnt("hatch_org", "targetname");
   var_2.origin = var_3.origin;
   var_2.angles = var_3.angles;
 
   if(isDefined(var_0)) {
     var_0 hide();
-    var_0 linkto(var_2, "tag_origin");
+    var_0 linkTo(var_2, "tag_origin");
   }
 
-  var_1 linkto(var_2, "tag_origin");
+  var_1 linkTo(var_2, "tag_origin");
   common_scripts\utility::flag_set("vo_hatch_open");
-  var_2 rotateto((154, 0, 180), 0.05);
+  var_2 rotateTo((154, 0, 180), 0.05);
 }
 
 _id_4B7D() {
-  var_0 = getent("rear_hatch_col", "targetname");
+  var_0 = getEnt("rear_hatch_col", "targetname");
   var_0 notsolid();
   common_scripts\utility::flag_wait("sub_control_room_sandman_exit");
-  var_1 = getent("rear_hatch_component1", "targetname");
-  var_2 = getent("rear_hatch_component2", "targetname");
+  var_1 = getEnt("rear_hatch_component1", "targetname");
+  var_2 = getEnt("rear_hatch_component2", "targetname");
   var_3 = common_scripts\utility::spawn_tag_origin();
-  var_4 = getent("rear_hatch_org", "targetname");
+  var_4 = getEnt("rear_hatch_org", "targetname");
   var_3.origin = var_4.origin;
   var_3.angles = var_4.angles;
 
   if(isDefined(var_1)) {
     var_1 hide();
-    var_1 linkto(var_3, "tag_origin");
+    var_1 linkTo(var_3, "tag_origin");
   }
 
-  var_2 linkto(var_3, "tag_origin");
-  var_3 rotateto((150, var_3.angles[1], var_3.angles[2]), 0.05);
+  var_2 linkTo(var_3, "tag_origin");
+  var_3 rotateTo((150, var_3.angles[1], var_3.angles[2]), 0.05);
   var_0 solid();
-  var_5 = getent("rear_hatch_col_interior", "targetname");
+  var_5 = getEnt("rear_hatch_col_interior", "targetname");
   var_5 notsolid();
-  var_6 = getent("rear_hatch_col_top", "targetname");
+  var_6 = getEnt("rear_hatch_col_top", "targetname");
   var_6 notsolid();
 }
 
@@ -1705,7 +1705,7 @@ _id_4B7E() {
   common_scripts\utility::flag_wait("hatch_enemies_dead");
   maps\_audio::aud_send_msg("aud_prime_sandman_grenade_anim");
   level._id_45C0 maps\_utility::_id_27B8();
-  var_0 = common_scripts\utility::getstruct("hatch_sandman_drop_frag_anim_ent", "targetname");
+  var_0 = common_scripts\utility::getStruct("hatch_sandman_drop_frag_anim_ent", "targetname");
   level._id_45C0 maps\_utility::_id_123B();
   var_0 maps\_anim::_id_124A(level._id_45C0, "ny_harbor_sandman_drops_frag_inhatch");
   maps\_audio::aud_send_msg("aud_start_sandman_grenade_anim");
@@ -1738,13 +1738,13 @@ _id_4B82(var_0) {
 }
 
 _id_4B83() {
-  level._id_4B81 = getent("frag_grenade", "targetname");
+  level._id_4B81 = getEnt("frag_grenade", "targetname");
   level._id_4B81 hide();
   var_0 = level._id_45C0 gettagorigin("tag_inhand");
   var_1 = level._id_45C0 gettagangles("tag_inhand");
   level._id_4B81.origin = var_0;
   level._id_4B81.angles = var_1;
-  level._id_4B81 linkto(level._id_45C0, "tag_inhand");
+  level._id_4B81 linkTo(level._id_45C0, "tag_inhand");
 }
 
 _id_4B84(var_0) {
@@ -1753,9 +1753,9 @@ _id_4B84(var_0) {
 
 _id_4B85() {
   maps\_audio::aud_send_msg("aud_prime_player_downladder");
-  var_0 = getent("hatch_player_slide", "targetname");
-  var_0 sethintstring(&"NY_HARBOR_HINT_USE_TO_ENTER");
-  var_0 usetriggerrequirelookat();
+  var_0 = getEnt("hatch_player_slide", "targetname");
+  var_0 setHintString(&"NY_HARBOR_HINT_USE_TO_ENTER");
+  var_0 useTriggerRequireLookAt();
   var_0 waittill("trigger");
   var_0 common_scripts\utility::trigger_off();
   level.player disableweapons();
@@ -1764,7 +1764,7 @@ _id_4B85() {
   level._id_49C1 hide();
   common_scripts\utility::flag_set("hatch_player_using_ladder");
   maps\_audio::aud_send_msg("aud_player_downladder");
-  var_1 = common_scripts\utility::getstruct("hatch_player_slide_anim_pos", "targetname");
+  var_1 = common_scripts\utility::getStruct("hatch_player_slide_anim_pos", "targetname");
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_1.origin;
   var_2.angles = var_1.angles;
@@ -1907,7 +1907,7 @@ _id_4B8E() {
 }
 
 _id_4B8F() {
-  var_0 = getent("barracks_door_open_anim_ent", "targetname");
+  var_0 = getEnt("barracks_door_open_anim_ent", "targetname");
   var_1 = maps\_utility::_id_1287("door", var_0.origin);
   level._id_4AF1[level._id_4AF1.size] = var_1;
   var_2 = "open_with_wheel";
@@ -1924,7 +1924,7 @@ _id_4B8F() {
   maps\_utility::delaythread(5, ::_id_4B91);
   var_0 maps\_anim::_id_11DD(var_3, var_2);
   level._id_45C0 maps\_utility::_id_2686();
-  var_4 = getent("barracks_sandman_after_door_open", "targetname");
+  var_4 = getEnt("barracks_sandman_after_door_open", "targetname");
   var_4 notify("trigger");
   level._id_45C0 thread _id_4B90();
   maps\_utility::_id_265B("allies");
@@ -1936,14 +1936,14 @@ _id_4B8F() {
 _id_4B90() {
   var_0 = 0;
 
-  for(var_1 = common_scripts\utility::getstruct("org_sandman_target", "targetname"); var_0 < 6; var_0++) {
+  for(var_1 = common_scripts\utility::getStruct("org_sandman_target", "targetname"); var_0 < 6; var_0++) {
     magicbullet("mp5_silencer_reflex_harbor", self getmuzzlepos(), var_1.origin);
     wait 0.05;
   }
 }
 
 _id_4B91() {
-  var_0 = getent("barracks_open_door_col", "targetname");
+  var_0 = getEnt("barracks_open_door_col", "targetname");
   var_0 connectpaths();
   var_0 delete();
 }
@@ -1963,7 +1963,7 @@ _id_4B93() {
 _id_4B94() {
   common_scripts\utility::flag_wait("trigger_barracks_entrance");
   wait 12;
-  var_0 = getent("barracks_spawn1", "targetname");
+  var_0 = getEnt("barracks_spawn1", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   var_1 _id_4BAB();
 }
@@ -1971,14 +1971,14 @@ _id_4B94() {
 _id_4B95() {
   thread _id_4B96();
   common_scripts\utility::flag_wait("trigger_barracks_entrance");
-  var_0 = getent("barracks_slam_door", "targetname");
+  var_0 = getEnt("barracks_slam_door", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   maps\_utility::_id_13AF();
   var_1._id_1032 = "barracks_2";
   var_1 thread maps\_utility::_id_0D04();
   var_1._id_4B64 = 1;
   var_1 _id_460E();
-  var_2 = common_scripts\utility::getstruct("barracks_slam_door_anim_pos", "targetname");
+  var_2 = common_scripts\utility::getStruct("barracks_slam_door_anim_pos", "targetname");
   var_3 = maps\_utility::_id_1287("door", var_2.origin);
   level._id_4AF1[level._id_4AF1.size] = var_3;
   var_4 = "slam_door";
@@ -1994,21 +1994,21 @@ _id_4B95() {
 }
 
 _id_4B96() {
-  var_0 = getent("barracks_slam_door_col", "targetname");
+  var_0 = getEnt("barracks_slam_door_col", "targetname");
   var_0 connectpaths();
   var_0 notsolid();
   common_scripts\utility::flag_wait("barracks_slam_door");
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_0 solid();
 }
 
 _id_4B97() {
   common_scripts\utility::flag_wait("trigger_barracks_entrance");
-  var_0 = getent("barracks_waver", "targetname");
+  var_0 = getEnt("barracks_waver", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   var_1.ignoreall = 1;
   var_1 thread maps\_utility::_id_0D04();
-  var_2 = common_scripts\utility::getstruct("barracks_waver_anim_pos", "targetname");
+  var_2 = common_scripts\utility::getStruct("barracks_waver_anim_pos", "targetname");
   var_2 maps\_anim::_id_11C0(var_1, "launchfacility_b_blast_door_seq_waveidle");
   common_scripts\utility::flag_wait("barracks_sandman_opening_door");
   wait 4;
@@ -2024,7 +2024,7 @@ _id_4B98() {
   common_scripts\utility::flag_wait("barracks_sandman_opening_door");
   thread _id_03C3::_id_4AA7();
   wait 7.5;
-  var_0 = getent("barracks_run_and_stumble", "targetname");
+  var_0 = getEnt("barracks_run_and_stumble", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   maps\_utility::_id_13AF();
   var_1._id_1032 = "barracks_1";
@@ -2042,8 +2042,8 @@ _id_4B99() {
 
 _id_4B9A() {
   level endon("sandman_paired_kill");
-  var_0 = common_scripts\utility::getstruct("barracks_sandman_exit_anim_pos", "targetname");
-  var_1 = common_scripts\utility::getstruct("barracks_sandman_exit_anim_pos_guy", "targetname");
+  var_0 = common_scripts\utility::getStruct("barracks_sandman_exit_anim_pos", "targetname");
+  var_1 = common_scripts\utility::getStruct("barracks_sandman_exit_anim_pos_guy", "targetname");
   var_2 = maps\_utility::_id_1287("door", var_0.origin);
   level._id_4AF1[level._id_4AF1.size] = var_2;
   var_3 = "barracks_sandman_exit";
@@ -2066,7 +2066,7 @@ _id_4B9B(var_0) {
 
   if(common_scripts\utility::flag("barracks_move_sandman")) {
     level._id_45C0 maps\_utility::_id_1414();
-    var_1 = getent("sandman_barracks_teleport", "targetname");
+    var_1 = getEnt("sandman_barracks_teleport", "targetname");
     level._id_45C0 maps\_utility::_id_279F(var_1);
     level._id_45C0 maps\_utility::_id_1237(level._id_45C0.origin);
   }
@@ -2132,8 +2132,8 @@ _id_4BA0() {
   maps\_anim::_id_1264(level._id_45C0._id_1032, "HEADSMASH", ::_id_4BAA, "ny_harbor_doorway_headsmash");
   common_scripts\utility::flag_wait("sandman_paired_kill");
   thread _id_4B4A();
-  var_0 = common_scripts\utility::getstruct("reactor_room_sandman_paired_kill_anim_pos", "targetname");
-  var_1 = getent("reactor_room_sandman_paired_killed_enemy", "targetname");
+  var_0 = common_scripts\utility::getStruct("reactor_room_sandman_paired_kill_anim_pos", "targetname");
+  var_1 = getEnt("reactor_room_sandman_paired_killed_enemy", "targetname");
   var_2 = var_1 maps\_utility::_id_166F(1);
   maps\_utility::_id_13AF();
   var_2._id_1032 = "generic";
@@ -2150,7 +2150,7 @@ _id_4BA0() {
   wait 5.5;
   var_2 thread _id_4BF0(var_0, "ny_harbor_doorway_headsmash_enemy_deadpose");
   level._id_45C0 maps\_utility::_id_2686();
-  var_4 = getent("reactor_room_sandman_color_after_paired", "targetname");
+  var_4 = getEnt("reactor_room_sandman_color_after_paired", "targetname");
   var_4 notify("trigger");
   common_scripts\utility::flag_set("sandman_paired_kill_complete");
   level notify("sandman_paired_kill_finished");
@@ -2192,7 +2192,7 @@ _id_4BA3() {
   level waittill("sandman_paired_kill_interrupted");
   maps\_utility::_id_1414();
   level._id_45C0 maps\_utility::_id_2686();
-  var_0 = getent("reactor_room_sandman_color_after_paired", "targetname");
+  var_0 = getEnt("reactor_room_sandman_color_after_paired", "targetname");
   var_0 notify("trigger");
   common_scripts\utility::flag_set("sandman_paired_kill_complete");
   level thread _id_4BA6(7);
@@ -2227,7 +2227,7 @@ _id_4BA5() {
   thread _id_4B68();
   thread _id_4B69();
   thread _id_4B7D();
-  var_0 = common_scripts\utility::getstruct("start_breach_player_loc", "targetname");
+  var_0 = common_scripts\utility::getStruct("start_breach_player_loc", "targetname");
   level.player maps\_utility::_id_1FDF(var_0);
   thread _id_4BED();
   common_scripts\utility::flag_set("obj_plantmine_given");
@@ -2239,7 +2239,7 @@ _id_4BA5() {
   common_scripts\utility::flag_set("sub_objective_breach");
   maps\_utility::_id_2797(75);
   _id_4B63();
-  var_1 = common_scripts\utility::getstruct("start_breach_sandman_loc", "targetname");
+  var_1 = common_scripts\utility::getStruct("start_breach_sandman_loc", "targetname");
   level._id_45C0 forceteleport(var_1.origin, var_1.angles);
   thread _id_4B4D();
   maps\_utility::vision_set_fog_changes("ny_harbor_sub_4", 0);
@@ -2250,8 +2250,8 @@ _id_4BA5() {
 
 _id_4BA6(var_0) {
   common_scripts\utility::flag_init("vo_extinguisher");
-  var_1 = getent("extinguisher_guy", "targetname");
-  var_2 = common_scripts\utility::getstruct("org_fire_extinguisher", "targetname");
+  var_1 = getEnt("extinguisher_guy", "targetname");
+  var_2 = common_scripts\utility::getStruct("org_fire_extinguisher", "targetname");
   var_3 = var_1 maps\_utility::_id_166F();
 
   if(isDefined(var_3)) {
@@ -2320,7 +2320,7 @@ _id_4BAC() {
   wait 0.3;
   common_scripts\utility::exploder(259);
   maps\_audio::aud_send_msg("aud_premissileroom_pipeburst");
-  var_0 = getent("pipe_valve", "script_noteworthy");
+  var_0 = getEnt("pipe_valve", "script_noteworthy");
   var_0 hide();
 }
 
@@ -2339,18 +2339,18 @@ _id_4BAF() {
   level._id_4BB0 = [];
   level._id_4BB1 = 0;
   level._id_4BB2 = 0;
-  var_0 = getent("mil_frame_charge", "targetname");
+  var_0 = getEnt("mil_frame_charge", "targetname");
   var_0 hide();
-  var_1 = getent("bridge_breach_loc", "targetname");
+  var_1 = getEnt("bridge_breach_loc", "targetname");
   level._id_4BB3 = maps\_utility::_id_1287("breach_door", var_1.origin);
   level._id_4BB3._id_1032 = "breach_door";
   level._id_4BB3 maps\_anim::_id_1244();
   var_1 maps\_anim::_id_11CF(level._id_4BB3, "ny_harbor_door_breach");
-  var_2 = getent("detonator_1", "targetname");
+  var_2 = getEnt("detonator_1", "targetname");
   var_2 hide();
-  var_3 = getent("detonator_2", "targetname");
+  var_3 = getEnt("detonator_2", "targetname");
   var_3 hide();
-  var_4 = getent("spawner_ambient_mis2_group2", "targetname");
+  var_4 = getEnt("spawner_ambient_mis2_group2", "targetname");
   common_scripts\utility::flag_wait("sub_breach_sandman_to_postion");
   var_5 = getaiarray("axis");
   var_6 = getdvarint("cg_fov");
@@ -2362,22 +2362,22 @@ _id_4BAF() {
   level._id_45C0 notify("disable_smart_laser");
   level._id_45C0 laserforceoff();
   level._id_45C0 maps\_utility::_id_123B();
-  var_8 = common_scripts\utility::getstruct("bridge_breach_sandman_idle", "targetname");
+  var_8 = common_scripts\utility::getStruct("bridge_breach_sandman_idle", "targetname");
   var_1 maps\_anim::_id_124A(level._id_45C0, "ny_harbor_door_breach_idle_trans");
   var_1 maps\_anim::_id_1246(level._id_45C0, "ny_harbor_door_breach_idle_trans");
   var_1 thread maps\_anim::_id_124E(level._id_45C0, "ny_harbor_door_breach_idle", "end_idle");
   level._id_45C0 setlookatentity(level.player);
   common_scripts\utility::flag_wait("ready_for_breach");
   common_scripts\utility::flag_set("vo_breach");
-  var_9 = getent("bridge_breach_trigger", "targetname");
-  var_9 usetriggerrequirelookat();
-  var_9 sethintstring(&"NY_HARBOR_HINT_USE_TO_BREACH");
+  var_9 = getEnt("bridge_breach_trigger", "targetname");
+  var_9 useTriggerRequireLookAt();
+  var_9 setHintString(&"NY_HARBOR_HINT_USE_TO_BREACH");
   var_9 waittill("trigger");
   maps\_audio::aud_send_msg("player_trigger_sub_door_breach");
   var_9 delete();
   level._id_49C1 hide();
   common_scripts\utility::flag_set("breach_started");
-  var_10 = getent("breach_door_col", "targetname");
+  var_10 = getEnt("breach_door_col", "targetname");
   level._id_4BB4 = maps\_utility::_id_1287("breach_charge1", var_1.origin);
   level._id_4BB4._id_1032 = "breach_charge1";
   level._id_4BB4 hide();
@@ -2406,7 +2406,7 @@ _id_4BAF() {
   var_2 maps\_anim::_id_1244();
   var_3._id_1032 = "breach_detonator2";
   var_3 maps\_anim::_id_1244();
-  var_11 = getent("bridge_breach_guy1", "targetname");
+  var_11 = getEnt("bridge_breach_guy1", "targetname");
   var_12 = var_11 maps\_utility::_id_166F(1);
   var_12 maps\_utility::_id_24F5();
   var_12 = maps\_vehicle_aianim::_id_25C1(var_12);
@@ -2432,7 +2432,7 @@ _id_4BAF() {
 
 _id_4BB6(var_0) {
   self endon("death");
-  var_1 = getent("vol_breach_enemies_retreat", "targetname");
+  var_1 = getEnt("vol_breach_enemies_retreat", "targetname");
   self._id_4B64 = 1;
   maps\_utility::_id_109E();
   self setgoalvolumeauto(var_1);
@@ -2445,7 +2445,7 @@ _id_4BB6(var_0) {
 
 _id_4BB7() {
   level._id_45C0 maps\_utility::_id_2686();
-  var_0 = getent("breach_sandman_enter_room", "targetname");
+  var_0 = getEnt("breach_sandman_enter_room", "targetname");
   var_0 notify("trigger");
 }
 
@@ -2485,14 +2485,14 @@ _id_4BBA(var_0) {
   level._id_4BBB = spawn("script_model", var_1);
   level._id_4BBB setModel("ny_harbor_sub_pressuredoor_bridge_destroyed_door");
   level._id_4BBB.angles = var_2;
-  level._id_4BBB linkto(level._id_4BB3, "hinge");
+  level._id_4BBB linkTo(level._id_4BB3, "hinge");
   level._id_4BB3 hidepart("hinge");
   level._id_4BB3 hidepart("handle");
-  var_7 = getent("detonator_1", "targetname");
+  var_7 = getEnt("detonator_1", "targetname");
   var_7 delete();
-  var_8 = getent("detonator_2", "targetname");
+  var_8 = getEnt("detonator_2", "targetname");
   var_8 delete();
-  var_9 = getent("mil_frame_charge", "targetname");
+  var_9 = getEnt("mil_frame_charge", "targetname");
   var_9 delete();
   level._id_4BB4 delete();
   level._id_4BB5 delete();
@@ -2729,7 +2729,7 @@ _id_4BD6() {
 _id_4BD7() {
   common_scripts\utility::flag_wait("bridge_breach_all_enemies_dead");
   common_scripts\utility::flag_wait("start_end_scene");
-  var_0 = getent("bridge_breach_loc", "targetname");
+  var_0 = getEnt("bridge_breach_loc", "targetname");
   var_0 maps\_anim::_id_11C4(level._id_45C0, "ny_harbor_paried_takedown_sandman_start");
   common_scripts\utility::flag_set("vo_sub_interior_6");
   var_0 maps\_anim::_id_11C1(level._id_45C0, "ny_harbor_paried_takedown_sandman_start");
@@ -2747,7 +2747,7 @@ _id_4BD7() {
 
 _id_4BD9() {
   level.player endon("death");
-  var_0 = getent("bridge_breach_loc", "targetname");
+  var_0 = getEnt("bridge_breach_loc", "targetname");
   var_1 = maps\_utility::_id_1287("missile_key_panel");
   level._id_4AB3 = var_1;
   var_0 maps\_anim::_id_11CF(level._id_4AB3, "sub_turn_key");
@@ -2760,13 +2760,13 @@ _id_4BD9() {
   var_0 thread maps\_anim::_id_11C8(level._id_45C0, "sub_turn_key_idle", "stop_loop");
   maps\_audio::aud_send_msg("aud_prime_missilekeytoss");
   common_scripts\utility::flag_wait("sub_control_room_player_to_controls");
-  var_3 = getent("sub_control_key_panel_main", "targetname");
+  var_3 = getEnt("sub_control_key_panel_main", "targetname");
   var_3 maps\_utility::_id_27B0();
   var_1 maps\_utility::_id_27B0();
   var_2 _id_4BDB();
-  var_4 = getent("sub_control_room_player_use", "targetname");
-  var_4 usetriggerrequirelookat();
-  var_4 sethintstring(&"NY_HARBOR_HINT_USE");
+  var_4 = getEnt("sub_control_room_player_use", "targetname");
+  var_4 useTriggerRequireLookAt();
+  var_4 setHintString(&"NY_HARBOR_HINT_USE");
   var_4 waittill("trigger");
   var_4 delete();
   thread _id_4BDA();
@@ -2844,14 +2844,14 @@ _id_4BDD() {
 }
 
 _id_4BDE() {
-  var_0 = getent("spawn_sub_captain", "targetname");
+  var_0 = getEnt("spawn_sub_captain", "targetname");
   level._id_4BD8 = var_0 maps\_utility::_id_166F(1);
   level._id_4BD8 maps\_utility::_id_24F5();
   thread _id_4BD0(level._id_4BD8, 1);
   level._id_4BD8.ignoreall = 1;
   level._id_4BD8 thread maps\_utility::_id_0D04();
   level._id_4BD8 thread _id_4BDF();
-  var_1 = getent("bridge_breach_loc", "targetname");
+  var_1 = getEnt("bridge_breach_loc", "targetname");
   var_1 thread maps\_anim::_id_11C1(level._id_4BD8, "ny_harbor_paried_takedown_captain_start");
   level._id_4BD8 waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
@@ -2878,10 +2878,10 @@ _id_4BDF() {
 }
 
 _id_4BE0() {
-  var_0 = getent("breach_enemy_1", "targetname");
+  var_0 = getEnt("breach_enemy_1", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   var_1 thread _id_4BE7();
-  var_2 = common_scripts\utility::getstruct("breach_enemy_loc1", "targetname");
+  var_2 = common_scripts\utility::getStruct("breach_enemy_loc1", "targetname");
   var_2 maps\_anim::_id_11C1(var_1, "breach_enemy_1");
 }
 
@@ -2892,21 +2892,21 @@ _id_4BE1(var_0) {
 }
 
 _id_4BE2() {
-  var_0 = getent("breach_enemy_2_1", "targetname");
+  var_0 = getEnt("breach_enemy_2_1", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   var_1 thread _id_4BE7();
   var_1._id_1032 = "breacher1";
-  var_0 = getent("breach_enemy_2_2", "targetname");
+  var_0 = getEnt("breach_enemy_2_2", "targetname");
   var_2 = var_0 maps\_utility::_id_166F(1);
   var_2 thread _id_4BE7();
   var_2._id_1032 = "breacher2";
   var_3 = maps\_utility::_id_2766(var_1, var_2);
-  var_4 = common_scripts\utility::getstruct("breach_enemy_loc2", "targetname");
+  var_4 = common_scripts\utility::getStruct("breach_enemy_loc2", "targetname");
   var_4 maps\_anim::_id_11DD(var_3, "breach_enemy_2");
 }
 
 _id_4BE3() {
-  var_0 = getent("breach_enemy_3", "targetname");
+  var_0 = getEnt("breach_enemy_3", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   var_1 thread _id_4BE4();
   var_1._id_1032 = "knife_guy";
@@ -2914,19 +2914,19 @@ _id_4BE3() {
   var_1 thread _id_4BE8();
   var_2 = [];
   var_2[0] = var_1;
-  var_3 = common_scripts\utility::getstruct("breach_enemy_loc3", "targetname");
+  var_3 = common_scripts\utility::getStruct("breach_enemy_loc3", "targetname");
   maps\_utility::delaythread(0.05, maps\_anim::_id_127F, var_2, "breach_react_knife_charge", 0.12);
   var_3 maps\_anim::_id_1246(var_1, "breach_react_knife_charge");
 }
 
 _id_4BE4() {
   level.player endon("death");
-  level._id_4BE5 = getent("weapon_knife", "targetname");
+  level._id_4BE5 = getEnt("weapon_knife", "targetname");
   var_0 = self gettagorigin("tag_inhand");
   var_1 = self gettagangles("tag_inhand");
   level._id_4BE5.origin = var_0;
   level._id_4BE5.angles = var_1;
-  level._id_4BE5 linkto(self, "tag_inhand");
+  level._id_4BE5 linkTo(self, "tag_inhand");
   self waittill("death");
   level._id_4BE5 unlink();
   level._id_4BE5 physicslaunchclient(level._id_4BE5.origin, (0, 0, 0));
@@ -2977,7 +2977,7 @@ _id_4BEA() {
   var_1 = distance(var_0.origin, self.origin);
 
   if(var_1 <= 50) {
-    var_0 playrumbleonentity("grenade_rumble");
+    var_0 playRumbleOnEntity("grenade_rumble");
     var_0 thread maps\_utility::play_sound_on_entity("melee_knife_hit_body");
     var_0 disableinvulnerability();
     waittillframeend;
@@ -3003,7 +3003,7 @@ _id_4BEC() {
 
 _id_4BED() {
   common_scripts\utility::flag_wait("sub_control_room_sandman_exit");
-  var_0 = common_scripts\utility::getstruct("sub_sandman_exit_jump", "targetname");
+  var_0 = common_scripts\utility::getStruct("sub_sandman_exit_jump", "targetname");
   var_0 maps\_anim::_id_11CF(level._id_45C0, "sub_exit_jump");
   level.player disableoffhandweapons();
   common_scripts\utility::flag_wait("sub_exit_player_going_out_hatch");

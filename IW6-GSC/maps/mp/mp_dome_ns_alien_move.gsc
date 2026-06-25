@@ -249,7 +249,7 @@ StartMove() {
 
   myVelocity = self GetVelocity();
   if(Length2DSquared(myVelocity) > 16) {
-    myVelocity = VectorNormalize(myVelocity);
+    myVelocity = vectorNormalize(myVelocity);
     if(VectorDot(myVelocity, lookaheadDir) > 0.707) {
       return;
     }

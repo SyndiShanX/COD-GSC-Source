@@ -278,7 +278,7 @@ _id_B54E(var_0, var_1, var_2) {
   }
 
   if(istrue(self isonladder())) {
-    self setorigin(getgroundposition(self.origin + anglesToForward(self.angles) * -50, 16));
+    self setOrigin(getgroundposition(self.origin + anglesToForward(self.angles) * -50, 16));
     wait 0.1;
   }
 
@@ -289,7 +289,7 @@ _id_B54E(var_0, var_1, var_2) {
     scripts\cp_mp\vehicles\vehicle_occupancy::_id_10182(var_6, var_7, self, undefined, 1);
   }
 
-  self setorigin(var_0[var_1].origin);
+  self setOrigin(var_0[var_1].origin);
   self setplayerangles(var_0[var_1].angles);
 }
 
@@ -486,7 +486,7 @@ _id_CAE0() {
 
           var_0._id_C67C = var_3.origin;
           var_0._id_C67B = var_3.angles;
-          var_0 setorigin(var_3.origin);
+          var_0 setOrigin(var_3.origin);
           var_0 setplayerangles(var_3.angles);
           var_0 dontinterpolate();
           var_0 _id_F2C8(1);

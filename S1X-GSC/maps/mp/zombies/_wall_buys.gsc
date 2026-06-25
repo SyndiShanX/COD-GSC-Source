@@ -53,24 +53,24 @@ wallbuyupdatehinstrings(var_0) {
       var_9 = maps\mp\zombies\_util::getzombieweaponlevel(var_0, self.weaponname);
     }
 
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
 
     if(maps\mp\zombies\_util::isrippedturretweapon(var_8) || maps\mp\zombies\_util::iszombiekillstreakweapon(var_8) || maps\mp\zombies\_util::arewallbuysdisabled()) {
-      self sethintstring("");
+      self setHintString("");
       self setsecondaryhintstring("");
       maps\mp\zombies\_util::tokenhintstring(0);
       continue;
     }
 
     if(var_1) {
-      self sethintstring(getammohintstring(self));
+      self setHintString(getammohintstring(self));
       self setsecondaryhintstring(getammohintcoststring(self, var_9));
       maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(self.currentammocost));
       maps\mp\zombies\_util::tokenhintstring(1);
       continue;
     }
 
-    self sethintstring(getweaponhintstring(self));
+    self setHintString(getweaponhintstring(self));
     self setsecondaryhintstring(getweaponhintcoststring(self, var_9));
     maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(self.currentweaponcost));
     maps\mp\zombies\_util::tokenhintstring(1);
@@ -192,11 +192,11 @@ wallbuythink(var_0) {
   var_0.weaponname = var_1;
 
   if(level.nextgen) {
-    var_0.modelent = getent(var_0.target, "targetname");
+    var_0.modelent = getEnt(var_0.target, "targetname");
     thread audio_wpnbox_attract_on(var_0.modelent);
 
     if(isDefined(var_0.modelent.target)) {
-      var_0.weaponent = getent(var_0.modelent.target, "targetname");
+      var_0.weaponent = getEnt(var_0.modelent.target, "targetname");
 
       if(maps\mp\zombies\_util::isusetriggerprimary(var_0) && !maps\mp\zombies\_util::iszombieequipment(var_1) && isDefined(var_0.weaponent)) {
         var_7 = level.wallbuyweapons.size;
@@ -288,7 +288,7 @@ wallbuythink(var_0) {
       thread audio_wpnbox_attract_in_use(var_0.modelent);
     } else {
       if(isDefined(var_0.target)) {
-        var_16 = common_scripts\utility::getstruct(var_0.target, "targetname");
+        var_16 = common_scripts\utility::getStruct(var_0.target, "targetname");
         playFX(common_scripts\utility::getfx("station_buy_weapon"), var_16.origin, anglesToForward(var_16.angles), anglestoup(var_16.angles));
       }
 
@@ -933,10 +933,10 @@ magicboxthink() {
   var_0 = undefined;
 
   foreach(var_2 in level.magicboxlocations) {
-    var_2.modelent = getent(var_2.target, "targetname");
+    var_2.modelent = getEnt(var_2.target, "targetname");
 
     if(isDefined(var_2.modelent) && isDefined(var_2.modelent.target)) {
-      var_3 = getent(var_2.modelent.target, "targetname");
+      var_3 = getEnt(var_2.modelent.target, "targetname");
 
       if(isDefined(var_3) && var_3.code_classname == "light") {
         var_2.light = var_3;
@@ -961,14 +961,14 @@ magicboxthink() {
       var_0 = var_2;
       var_0.active = 1;
       var_2 activatemagicboxeffects(var_2.modelent, var_2.light);
-      var_2 sethintstring(getmagicboxhintsting());
+      var_2 setHintString(getmagicboxhintsting());
       var_2 setsecondaryhintstring(var_2 getmagicboxhintstringcost());
       var_2 maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(var_2.cost));
       var_2 maps\mp\zombies\_util::tokenhintstring(1);
       continue;
     }
 
-    var_2 sethintstring(getmagicboxhintsting(1));
+    var_2 setHintString(getmagicboxhintsting(1));
     var_2 setsecondaryhintstring(var_2 getmagicboxhintstringcost(1));
     var_2 maps\mp\zombies\_util::tokenhintstring(0);
     var_2 deactivatemagicboxeffects(var_2.modelent, var_2.light);
@@ -1008,7 +1008,7 @@ magicboxthink() {
 
     if(var_7.size > 0) {
       var_0 deactivatemagicboxeffects(var_0.modelent, var_0.light);
-      var_0 sethintstring(getmagicboxhintsting(1));
+      var_0 setHintString(getmagicboxhintsting(1));
       var_0 setsecondaryhintstring(var_0 getmagicboxhintstringcost(1));
       var_0 maps\mp\zombies\_util::tokenhintstring(0);
       var_0.active = 0;
@@ -1019,7 +1019,7 @@ magicboxthink() {
 
       var_0 = var_7[randomint(var_7.size)];
       var_0 activatemagicboxeffects(var_0.modelent, var_0.light);
-      var_0 sethintstring(getmagicboxhintsting());
+      var_0 setHintString(getmagicboxhintsting());
       var_0 setsecondaryhintstring(var_0 getmagicboxhintstringcost());
       var_0 maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(var_0.cost));
       var_0 maps\mp\zombies\_util::tokenhintstring(1);
@@ -1215,7 +1215,7 @@ watchmagicboxtrigger(var_0, var_1) {
         var_19 = [[var_0.magicboxpickupstrfunc]]();
       }
 
-      var_0 sethintstring(var_19);
+      var_0 setHintString(var_19);
       var_0 setsecondaryhintstring("");
       var_0 maps\mp\zombies\_util::tokenhintstring(0);
 
@@ -1263,7 +1263,7 @@ watchmagicboxtrigger(var_0, var_1) {
       var_0.modelent.soundent playSound("interact_mystery_box_reset");
       var_0.modelent scriptmodelplayanim("dlc_weapon_mystery_box_01_close", "magicBox");
       var_0 common_scripts\utility::trigger_off();
-      var_0 sethintstring(getmagicboxhintsting());
+      var_0 setHintString(getmagicboxhintsting());
       var_0 setsecondaryhintstring(var_0 getmagicboxhintstringcost());
       var_0 maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(var_0.cost));
       var_0 maps\mp\zombies\_util::tokenhintstring(1);
@@ -1507,7 +1507,7 @@ weaponlevelboxsetupspecialbox() {
   if(!isDefined(self.modelent) || !isDefined(self.modelent.target) || isDefined(self.modelent.light)) {
     return;
   }
-  var_0 = getent(self.modelent.target, "targetname");
+  var_0 = getEnt(self.modelent.target, "targetname");
 
   if(isDefined(var_0) && var_0.code_classname == "light") {
     self.modelent.light = var_0;
@@ -1559,7 +1559,7 @@ weaponlevelboxupdatehintstrings(var_0) {
         var_3 = var_2[1];
         break;
       case "no_upgrades":
-        self sethintstring("");
+        self setHintString("");
         self setsecondaryhintstring("");
         maps\mp\zombies\_util::tokenhintstring(0);
         var_0 waittill("allow_upgrades");
@@ -1568,17 +1568,17 @@ weaponlevelboxupdatehintstrings(var_0) {
     }
 
     var_4 = getweaponbasename(var_3);
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
 
     if(!maps\mp\zombies\_util::haszombieweaponstate(var_0, var_4) || !weaponlevelboxisplayerweaponmaxed(var_0, var_4)) {
-      self sethintstring(&"ZOMBIES_WEAPON_LEVEL_BOX");
+      self setHintString(&"ZOMBIES_WEAPON_LEVEL_BOX");
       self setsecondaryhintstring(var_1);
       maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(2500));
       maps\mp\zombies\_util::tokenhintstring(1);
       continue;
     }
 
-    self sethintstring(&"ZOMBIES_WEAPON_LEVEL_MAX");
+    self setHintString(&"ZOMBIES_WEAPON_LEVEL_MAX");
     self setsecondaryhintstring("");
     maps\mp\zombies\_util::tokenhintstring(0);
   }
@@ -1661,7 +1661,7 @@ cg_levelboxtriggermonitor(var_0) {
 
 weaponlevelboxthink() {
   level endon("game_ended");
-  self.modelent = getent(self.target, "targetname");
+  self.modelent = getEnt(self.target, "targetname");
   self.allowupgrade = 1;
 
   if(isspecialweaponbox(self)) {

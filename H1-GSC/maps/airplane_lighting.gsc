@@ -28,9 +28,9 @@ toggle_breach_lightset_triggers() {
   if(getDvar("beautiful_corner") == "1") {
     return;
   }
-  var_0 = getent("breach_blowout_trig", "targetname");
-  var_1 = getent("breach_aftermath_trig", "targetname");
-  var_2 = getent("breach_aftermath2_trig", "targetname");
+  var_0 = getEnt("breach_blowout_trig", "targetname");
+  var_1 = getEnt("breach_aftermath_trig", "targetname");
+  var_2 = getEnt("breach_aftermath2_trig", "targetname");
   var_0 common_scripts\utility::trigger_off();
   var_1 common_scripts\utility::trigger_off();
   var_2 common_scripts\utility::trigger_off();
@@ -60,9 +60,9 @@ handle_jump_dof() {
   common_scripts\utility::flag_wait("exit_door_blown");
   maps\_cinematography::dyndof("main") maps\_cinematography::dyndof_values(2, 600, 5, 1) maps\_cinematography::dyndof_autofocus(1);
   thread maps\_cinematography::dyndof_system_start(1);
-  var_0 = getent("trig_exit_door", "targetname");
+  var_0 = getEnt("trig_exit_door", "targetname");
   var_0 waittill("trigger");
-  var_1 = getent("plane_shell", "targetname");
+  var_1 = getEnt("plane_shell", "targetname");
   var_2 = maps\_cinematography::cinematic_sequence("freefall");
   var_2 maps\_cinematography::cinseq_key("moving_out_door") maps\_cinematography::cinseq_key_time(0) maps\_cinematography::cinseq_key_dyndof_values("main", 1.6, 80, 10, 3);
   var_2 maps\_cinematography::cinseq_key("out_door") maps\_cinematography::cinseq_key_time(1) maps\_cinematography::cinseq_key_dyndof_values("main", 1.6, 200, 10, 3);
@@ -73,11 +73,11 @@ handle_jump_dof() {
 
 override_scriptmodel_lightorigins() {
   common_scripts\utility::run_thread_on_noteworthy("override_light_origin", ::set_new_lighting_origin);
-  var_0 = getent("door_light_origin_override", "script_noteworthy");
+  var_0 = getEnt("door_light_origin_override", "script_noteworthy");
 
   if(isDefined(var_0)) {
-    var_1 = getent("right_door_model", "script_noteworthy");
-    var_2 = getent("left_door_model", "script_noteworthy");
+    var_1 = getEnt("right_door_model", "script_noteworthy");
+    var_2 = getEnt("left_door_model", "script_noteworthy");
     var_3 = [var_1, var_2];
 
     foreach(var_5 in var_3) {
@@ -90,7 +90,7 @@ override_scriptmodel_lightorigins() {
 
 set_new_lighting_origin() {
   if(isDefined(self.target) && self.target != "") {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0)) {
       self overridelightingorigin(var_0.origin);

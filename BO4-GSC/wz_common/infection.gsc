@@ -369,7 +369,7 @@ function_cdd9b388() {
     }
 
     if(getdvarint(#"wz_respawn_points", 0)) {
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size <= 0) {
         continue;

@@ -191,9 +191,9 @@ get_alignment_object() {
   if(isDefined(level._contextual_melee_align_obj)) {
     return level._contextual_melee_align_obj;
   } else if(isDefined(self.target)) {
-    obj = GetEnt(self.target, "targetname");
+    obj = getEnt(self.target, "targetname");
     if(!isDefined(obj)) {
-      obj = getstruct(self.target, "targetname");
+      obj = getStruct(self.target, "targetname");
     }
     if(isDefined(obj)) {
       return obj;
@@ -235,7 +235,7 @@ do_idle(type, ai_context) {
       origin = self._contextual_melee_align_obj.origin;
       angles = self._contextual_melee_align_obj.angles;
       while(true) {
-        self AnimScripted("contextual_melee_idle_anim", origin, angles, ai_idle);
+        self animScripted("contextual_melee_idle_anim", origin, angles, ai_idle);
         self animscripts\shared::DoNoteTracks("contextual_melee_idle_anim");
       }
     }
@@ -271,7 +271,7 @@ do_contextual_melee(player) {
   player thread animate_player_hands(self, info);
   self waittill("contextual_melee_start_anim");
   self notify("stop_contextual_melee_idle");
-  self AnimScripted("contextual_melee_anim", self._contextual_melee_align_obj.origin, self._contextual_melee_align_obj.angles, info["ai"]);
+  self animScripted("contextual_melee_anim", self._contextual_melee_align_obj.origin, self._contextual_melee_align_obj.angles, info["ai"]);
   self thread do_fx();
   self animate_prop();
   self thread contextual_melee_watch_for_anim_end();
@@ -293,7 +293,7 @@ do_contextual_melee(player) {
       self.takedamage = false;
       self death_notify_wrapper();
       while(true) {
-        self AnimScripted("contextual_melee_deathpose", self._contextual_melee_align_obj.origin, self._contextual_melee_align_obj.angles, info["ai_deathpose"]);
+        self animScripted("contextual_melee_deathpose", self._contextual_melee_align_obj.origin, self._contextual_melee_align_obj.angles, info["ai_deathpose"]);
         self animscripts\shared::DoNoteTracks("contextual_melee_deathpose");
       }
     }
@@ -307,7 +307,7 @@ stop_everything() {
   self.goalradius = 0;
   self SetGoalPos(self.origin);
   self Unlink();
-  self anim_stopAnimScripted();
+  self anim_stopanimScripted();
 }
 contextual_melee_watch_for_anim_end() {
   self animscripts\shared::DoNoteTracks("contextual_melee_anim");
@@ -325,7 +325,7 @@ end_contextual_melee(victim) {
     trace_start = self.origin + (0, 0, 100);
     trace_end = self.origin + (0, 0, -100);
     player_trace = bulletTrace(trace_start, trace_end, false, victim);
-    self SetOrigin(player_trace["position"]);
+    self setOrigin(player_trace["position"]);
   }
   self FreezeControls(false);
   self enable_weapon();
@@ -487,7 +487,7 @@ animate_player_hands(victim, info) {
   self PlayerLinkToAbsolute(self.player_hands, "tag_player");
   wait(level._CONTEXTUAL_MELEE_LERP_TIME / 2);
   victim notify("contextual_melee_start_anim");
-  self.player_hands AnimScripted("contextual_melee_anim", victim._contextual_melee_align_obj.origin, victim._contextual_melee_align_obj.angles, info["player"]);
+  self.player_hands animScripted("contextual_melee_anim", victim._contextual_melee_align_obj.origin, victim._contextual_melee_align_obj.angles, info["player"]);
   if(isDefined(info["weapon_name"])) {
     weapon = info["weapon_name"];
     if(isDefined(info["weapon_anim"])) {
@@ -529,15 +529,15 @@ animate_weapon(weapon_name, animation) {
   weapon = spawn("script_model", weapon_org);
   weapon setModel(weapon_name);
   weapon UseAnimTree(#animtree);
-  weapon LinkTo(self.player_hands, "tag_weapon");
-  weapon AnimScripted("contextual_melee_weapon_anim", weapon_org, weapon_ang, animation);
+  weapon linkTo(self.player_hands, "tag_weapon");
+  weapon animScripted("contextual_melee_weapon_anim", weapon_org, weapon_ang, animation);
   weapon animscripts\shared::DoNoteTracks("contextual_melee_weapon_anim");
   weapon Delete();
 }
 animate_prop() {
   if(isDefined(self._melee.info["prop_anim"])) {
     self._contextual_melee_align_obj UseAnimTree(#animtree);
-    self._contextual_melee_align_obj AnimScripted("contextual_melee_prop_anim", self._contextual_melee_align_obj.origin, self._contextual_melee_align_obj.angles, self._melee.info["prop_anim"]);
+    self._contextual_melee_align_obj animScripted("contextual_melee_prop_anim", self._contextual_melee_align_obj.origin, self._contextual_melee_align_obj.angles, self._melee.info["prop_anim"]);
   }
 }
 contextual_melee_show_hintstring(string_on) {

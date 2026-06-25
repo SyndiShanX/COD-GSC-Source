@@ -683,7 +683,7 @@ updatemagicboxhint() {
     var_2 = _id_0737::_id_6521(var_1._id_8F31, var_1);
 
     if(isDefined(var_2)) {
-      var_1._id_8388 sethintstring(var_2);
+      var_1._id_8388 setHintString(var_2);
     }
   }
 }

@@ -9,7 +9,7 @@
 
 init() {
   level thread init_achievement_variable();
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i].trapped_used = [];
     players[i].trapped_used["north_east_tgt"] = -1;

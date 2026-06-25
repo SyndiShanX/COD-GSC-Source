@@ -1229,7 +1229,7 @@ vehicle_spawn(vspawner, from) {
   if(!vspawner.count) {
     return;
   }
-  vehicle = spawnvehicle(vspawner.spawnermodel, vspawner.spawnedtargetname, vspawner.vehicletype, vspawner.origin, vspawner.angles, vspawner.destructibledef);
+  vehicle = spawnVehicle(vspawner.spawnermodel, vspawner.spawnedtargetname, vspawner.vehicletype, vspawner.origin, vspawner.angles, vspawner.destructibledef);
 
   if(isDefined(vspawner.destructibledef)) {
     vehicle.destructibledef = vspawner.destructibledef;
@@ -1585,7 +1585,7 @@ vehicle_init(vehicle) {
   vehicle useanimtree(#animtree);
 
   if(isDefined(vehicle.e_dyn_path)) {
-    vehicle.e_dyn_path linkto(vehicle);
+    vehicle.e_dyn_path linkTo(vehicle);
   }
 
   vehicle ent_flag_init("waiting_for_flag");
@@ -1658,10 +1658,10 @@ vehicle_init(vehicle) {
       path_start = getvehiclenode(vehicle.target, "targetname");
 
       if(!isDefined(path_start)) {
-        path_start = getent(vehicle.target, "targetname");
+        path_start = getEnt(vehicle.target, "targetname");
 
         if(!isDefined(path_start)) {
-          path_start = getstruct(vehicle.target, "targetname");
+          path_start = getStruct(vehicle.target, "targetname");
         }
       }
     }
@@ -2089,7 +2089,7 @@ is_node_script_struct(node) {
     return 0;
   }
 
-  return isDefined(getstruct(node.targetname, "targetname"));
+  return isDefined(getStruct(node.targetname, "targetname"));
 }
 
 setup_vehicles(allvehiclesprespawn) {
@@ -2662,7 +2662,7 @@ friendlyfire_shield_callback(attacker, amount, type) {
 
 vehicle_dynamic_cover(s_spawner) {
   if(isDefined(self.targetname)) {
-    ent = getent(self.targetname, "target");
+    ent = getEnt(self.targetname, "target");
 
     if(isDefined(ent)) {
       if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "dynamic_cover") {
@@ -2767,7 +2767,7 @@ get_vehiclenode_any_dynamic(target) {
   path_start = getvehiclenode(target, "targetname");
 
   if(!isDefined(path_start)) {
-    path_start = getent(target, "targetname");
+    path_start = getEnt(target, "targetname");
   } else if(self.vehicleclass == "plane") {
     println("helicopter node targetname: " + path_start.targetname);
     println("vehicletype: " + self.vehicletype);
@@ -2776,7 +2776,7 @@ get_vehiclenode_any_dynamic(target) {
   }
 
   if(!isDefined(path_start)) {
-    path_start = getstruct(target, "targetname");
+    path_start = getStruct(target, "targetname");
   }
 
   return path_start;
@@ -3126,19 +3126,19 @@ build_unload_groups(unloadgroupsthread) {
 }
 
 get_from_spawnStruct(target) {
-  return getstruct(target, "targetname");
+  return getStruct(target, "targetname");
 }
 
 get_from_entity(target) {
-  return getent(target, "targetname");
+  return getEnt(target, "targetname");
 }
 
 get_from_spawnstruct_target(target) {
-  return getstruct(target, "target");
+  return getStruct(target, "target");
 }
 
 get_from_entity_target(target) {
-  return getent(target, "target");
+  return getEnt(target, "target");
 }
 
 isdestructible() {
@@ -3187,7 +3187,7 @@ attackgroup_think() {
         arrayremovevalue(valid_targets, current_target);
         continue;
       } else {
-        self setturrettargetent(current_target, vectorscale((0, 0, 1), 50.0));
+        self setturrettargetEnt(current_target, vectorscale((0, 0, 1), 50.0));
 
         if(isDefined(self.fire_delay_min) && isDefined(self.fire_delay_max)) {
           if(self.fire_delay_max < self.fire_delay_min) {
@@ -3547,7 +3547,7 @@ vehicle_disconnectpaths_wrapper() {
     self thread maps\_dynamic_nodes::entity_connect_dynamic_nodes_to_navigation_mesh();
   }
 
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 stop() {
@@ -3581,19 +3581,19 @@ vehicle_spawner_tool(allvehicles) {
   }
 
   if(isassetloaded("vehicle", "civ_pickup_mini")) {
-    veh = codespawnvehicle(1, "debug_spawn_vehicle", "civ_pickup_mini", vectorscale((0, 0, 1), 10000.0), (0, 0, 0));
+    veh = codespawnVehicle(1, "debug_spawn_vehicle", "civ_pickup_mini", vectorscale((0, 0, 1), 10000.0), (0, 0, 0));
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
 
   if(isassetloaded("vehicle", "apc_cougar_player")) {
-    veh = codespawnvehicle(1, "debug_spawn_vehicle", "apc_cougar_player", vectorscale((0, 0, 1), 10000.0), (0, 0, 0));
+    veh = codespawnVehicle(1, "debug_spawn_vehicle", "apc_cougar_player", vectorscale((0, 0, 1), 10000.0), (0, 0, 0));
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
 
   if(isassetloaded("vehicle", "rc_car_racer")) {
-    veh = codespawnvehicle(1, "debug_spawn_vehicle", "rc_car_racer", vectorscale((0, 0, 1), 10000.0), (0, 0, 0));
+    veh = codespawnVehicle(1, "debug_spawn_vehicle", "rc_car_racer", vectorscale((0, 0, 1), 10000.0), (0, 0, 0));
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
@@ -3617,7 +3617,7 @@ vehicle_spawner_tool(allvehicles) {
 
         if(player useButtonPressed()) {
           dynamic_spawn_dummy_model hide();
-          vehicle = codespawnvehicle(1, "debug_spawn_vehicle", types[type_index], origin, player.angles);
+          vehicle = codespawnVehicle(1, "debug_spawn_vehicle", types[type_index], origin, player.angles);
           vehicle_init(vehicle);
           vehicle makevehicleusable();
 

@@ -86,7 +86,7 @@ run_mason_vent() {
   level.ai_redshirt2 = init_hero("redshirt2", ::redshirt2_vent_think);
   level thread mason_exits_server_terminal();
   cctv_room_guys_toggle_headlook(1);
-  origin = getstruct("cctv_salazar_kill", "targetname");
+  origin = getStruct("cctv_salazar_kill", "targetname");
   sm_cam_ent = spawn_model("tag_origin", origin.origin, origin.angles);
   sm_cam_ent setclientflag(11);
   level.salazar = init_hero("salazar");
@@ -136,13 +136,13 @@ mason_exits_server_terminal() {
 
   wait 5;
   level.player queue_dialog("sect_attention_all_securi_0");
-  playsoundatposition("vox_bla_13_01_017b_sect", (2458, -328, -224));
-  playsoundatposition("vox_bla_13_01_017b_sect", (2879, -383, -210));
-  playsoundatposition("vox_bla_13_01_017b_sect", (2468, -611, -255));
+  playSoundAtPosition("vox_bla_13_01_017b_sect", (2458, -328, -224));
+  playSoundAtPosition("vox_bla_13_01_017b_sect", (2879, -383, -210));
+  playSoundAtPosition("vox_bla_13_01_017b_sect", (2468, -611, -255));
   level.player queue_dialog("sect_i_want_him_taken_him_0");
-  playsoundatposition("vox_bla_13_01_018b_sect", (2458, -328, -224));
-  playsoundatposition("vox_bla_13_01_018b_sect", (2879, -383, -210));
-  playsoundatposition("vox_bla_13_01_018b_sect", (2468, -611, -255));
+  playSoundAtPosition("vox_bla_13_01_018b_sect", (2458, -328, -224));
+  playSoundAtPosition("vox_bla_13_01_018b_sect", (2879, -383, -210));
+  playSoundAtPosition("vox_bla_13_01_018b_sect", (2468, -611, -255));
 }
 
 cctv_door_fix() {
@@ -213,7 +213,7 @@ computer_guy_goes_back_to_work() {
 }
 
 player_slow_speed_in_vent() {
-  t_in_vent = getent("trigger_crawl_space", "targetname");
+  t_in_vent = getEnt("trigger_crawl_space", "targetname");
 
   while(!flag("mason_vent_done")) {
     t_in_vent waittill("trigger");
@@ -300,7 +300,7 @@ notetrack_torch_guy_takes_cover(ai_torch_guy) {
 }
 
 remove_vent_collision(ai_torch_guy) {
-  m_wall = getent("crawl_space", "targetname");
+  m_wall = getEnt("crawl_space", "targetname");
   m_wall notsolid();
   m_wall connectpaths();
   m_wall delete();
@@ -310,7 +310,7 @@ player_kick_grate() {
   trigger_on("vent_kick_trig");
   trigger_wait("vent_kick_trig");
   autosave_by_name("server_room");
-  obj_struct = getstruct("server_room_objective_struct", "targetname");
+  obj_struct = getStruct("server_room_objective_struct", "targetname");
   set_objective(level.obj_server, obj_struct.origin, "breadcrumb");
   cctv_room_guys_toggle_headlook(0);
   level thread run_scene_and_delete("panel_knockdown");
@@ -319,7 +319,7 @@ player_kick_grate() {
   level.player thread say_dialog("sect_check_the_wounded_0", 1);
   level.player allowstand(1);
   level.player setstance("stand");
-  m_player_clip = getent("vent_clip_brushmodel", "targetname");
+  m_player_clip = getEnt("vent_clip_brushmodel", "targetname");
   m_player_clip delete();
   flag_set("mason_vent_done");
 }
@@ -357,7 +357,7 @@ run_mason_server_room() {
   level.ai_redshirt1 allowedstances("stand");
   level.ai_redshirt2 allowedstances("stand");
   level thread run_scene_then_loop("aftermath_redshirt_1_checks_room", "aftermath_redshirt_1_checks_room_loop");
-  obj_struct = getstruct("server_room_objective_struct", "targetname");
+  obj_struct = getStruct("server_room_objective_struct", "targetname");
   set_objective(level.obj_server, obj_struct.origin, "breadcrumb");
   level thread computer_server_use();
   level thread harper_alive_or_not();
@@ -366,8 +366,8 @@ run_mason_server_room() {
 }
 
 computer_server_use() {
-  computer_server_use = getent("computer_server_use", "targetname");
-  computer_server_use setcursorhint("HINT_NOICON");
+  computer_server_use = getEnt("computer_server_use", "targetname");
+  computer_server_use setCursorHint("HINT_NOICON");
   trigger_wait("computer_server_use");
   setmusicstate("BLACKOUT_ACTION_REALIZATION");
   wait 0.1;
@@ -379,7 +379,7 @@ harper_alive_or_not() {
     scene_wait("aftermath_harper_alive");
     level.harper = init_hero("harper");
     level.harper set_ignoreall(1);
-    level.harper set_goalradius(64);
+    level.harper set_goalRadius(64);
   }
 }
 

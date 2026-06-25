@@ -219,7 +219,7 @@ function check_stat_complete(s_stat) {
       s_team_stats = level._challenges.s_team;
       s_team_stats.n_completed++;
       s_team_stats.n_medals_held++;
-      a_players = getplayers();
+      a_players = getPlayers();
       foreach(player in a_players) {
         player clientfield::set_to_player(s_stat.s_parent.cf_complete, 1);
         player function_fbbc8608(s_stat.s_parent.str_hint, s_stat.s_parent.n_index);
@@ -242,7 +242,7 @@ function check_stat_complete(s_stat) {
         self notify("all_challenges_complete");
       }
     } else {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isDefined(player.characterindex)) {
           if((level._challenges.a_players[player.characterindex].n_completed + level._challenges.s_team.n_completed) == level._challenges.a_stats.size) {
             player notify("all_challenges_complete");
@@ -355,7 +355,7 @@ function box_init() {
     s_unitrigger_stub.str_location = self.script_string;
   }
   if(isDefined(s_unitrigger_stub.m_box.target)) {
-    s_unitrigger_stub.m_board = getent(s_unitrigger_stub.m_box.target, "targetname");
+    s_unitrigger_stub.m_board = getEnt(s_unitrigger_stub.m_box.target, "targetname");
     s_unitrigger_stub board_init(s_unitrigger_stub.m_board);
   }
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger_stub, 1);
@@ -380,7 +380,7 @@ function update_box_prompt(player) {
   str_hint = &"";
   str_old_hint = &"";
   m_board = self.stub.m_board;
-  self sethintstring(str_hint);
+  self setHintString(str_hint);
   s_hint_tag = undefined;
   b_showing_stat = 0;
   self.b_can_open = 0;
@@ -401,7 +401,7 @@ function update_box_prompt(player) {
         continue;
       }
       v_tag_origin = s_tag.v_origin;
-      v_eye_to_tag = vectornormalize(v_tag_origin - v_eye_origin);
+      v_eye_to_tag = vectorNormalize(v_tag_origin - v_eye_origin);
       n_dot = vectordot(v_eye_to_tag, v_eye_direction);
       if(n_dot > n_closest_dot) {
         n_closest_dot = n_dot;
@@ -440,7 +440,7 @@ function update_box_prompt(player) {
         s_player_stat = level._challenges.a_players[n_character_index].a_stats[str_name];
       }
     }
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
   }
 }
 
@@ -471,7 +471,7 @@ function box_think() {
     }
     if(self.b_can_open) {
       self.stub.hint_string = &"";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       level thread open_box(player, self.stub);
     }
   }
@@ -544,7 +544,7 @@ function spawn_reward(player, s_select_stat) {
       }
       if(s_stat.s_parent.b_team) {
         s_stat.a_b_player_rewarded[player.characterindex] = 1;
-        a_players = getplayers();
+        a_players = getPlayers();
         foreach(player in a_players) {
           if(!s_stat.a_b_player_rewarded[player.characterindex]) {
             return;
@@ -625,7 +625,7 @@ function devgui_award_challenge(n_index) {
     s_stat = level._challenges.s_team.a_stats[a_keys[0]];
     s_stat.b_medal_awarded = 1;
     s_stat.b_reward_claimed = 0;
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       s_stat.a_b_player_rewarded[player.characterindex] = 0;
       player clientfield::set_to_player(s_stat.s_parent.cf_complete, 1);
@@ -636,7 +636,7 @@ function devgui_award_challenge(n_index) {
     }
   } else {
     a_keys = getarraykeys(level._challenges.a_players[0].a_stats);
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       s_player_data = level._challenges.a_players[player.characterindex];
       s_player_data.n_completed++;

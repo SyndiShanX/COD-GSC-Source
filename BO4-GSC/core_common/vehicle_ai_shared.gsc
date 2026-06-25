@@ -151,7 +151,7 @@ owner_in_line_of_fire() {
   }
 
   gun_forward = anglesToForward(gun_angles);
-  dot = vectordot(gun_forward, vectornormalize(self.owner.origin - self.origin));
+  dot = vectordot(gun_forward, vectorNormalize(self.owner.origin - self.origin));
   return dot > line_of_fire_dot;
 }
 
@@ -379,7 +379,7 @@ waittill_asm_complete(substate_to_wait, timeout = 10) {
 
 throw_off_balance(damagetype, hitpoint, hitdirection, hitlocationinfo) {
   if(damagetype == "MOD_EXPLOSIVE" || damagetype == "MOD_GRENADE_SPLASH" || damagetype == "MOD_PROJECTILE_SPLASH") {
-    self setvehvelocity(self.velocity + vectornormalize(hitdirection) * 300);
+    self setvehvelocity(self.velocity + vectorNormalize(hitdirection) * 300);
     ang_vel = self getangularvelocity();
     ang_vel += (randomfloatrange(-300, 300), randomfloatrange(-300, 300), randomfloatrange(-300, 300));
     self setangularvelocity(ang_vel);
@@ -1511,7 +1511,7 @@ positionquery_filter_engagementdist(queryresult, enemy, engagementdistancemin, e
 
   half_engagement_width = abs(engagementdistancemax - engagementdistance);
   enemy_origin = (enemy.origin[0], enemy.origin[1], 0);
-  vec_enemy_to_self = vectornormalize((self.origin[0], self.origin[1], 0) - enemy_origin);
+  vec_enemy_to_self = vectorNormalize((self.origin[0], self.origin[1], 0) - enemy_origin);
 
   foreach(point in queryresult.data) {
     point.distawayfromengagementarea = 0;
@@ -1623,7 +1623,7 @@ positionquery_filter_engagementheight(queryresult, enemy, engagementheightmin, e
   }
 }
 
-positionquery_postprocess_removeoutofgoalradius(queryresult, tolerance = 1) {
+positionquery_postprocess_removeoutofgoalRadius(queryresult, tolerance = 1) {
   for(i = 0; i < queryresult.data.size; i++) {
     point = queryresult.data[i];
 

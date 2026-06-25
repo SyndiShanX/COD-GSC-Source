@@ -85,11 +85,11 @@ cornered_interior_pre_load() {
   precachestring(&"CORNERED_DISABLE_ELEVATORS_CONSOLE");
   maps\_utility::add_hint_string("turn_on_strobe", &"CORNERED_STROBE_ON", ::strobe_on_hide_hint);
   maps\_utility::add_hint_string("turn_off_strobe", &"CORNERED_STROBE_OFF", ::strobe_off_hide_hint);
-  level.combat_rappel_rope_coil_rorke = getent("combat_rappel_rope_coil_rorke", "targetname");
+  level.combat_rappel_rope_coil_rorke = getEnt("combat_rappel_rope_coil_rorke", "targetname");
   level.combat_rappel_rope_coil_rorke hide();
-  level.combat_rappel_rope_coil_player = getent("combat_rappel_rope_coil_player", "targetname");
+  level.combat_rappel_rope_coil_player = getEnt("combat_rappel_rope_coil_player", "targetname");
   level.combat_rappel_rope_coil_player hide();
-  level.combat_rappel_rope_coil_baker = getent("combat_rappel_rope_coil_baker", "targetname");
+  level.combat_rappel_rope_coil_baker = getEnt("combat_rappel_rope_coil_baker", "targetname");
   level.combat_rappel_rope_coil_baker hide();
 }
 
@@ -178,7 +178,7 @@ setup_junction() {
   level.allies[level.const_baker] maps\_utility::disable_ai_color();
   level.allies[level.const_baker] maps\_utility::enable_arrivals();
   level.allies[level.const_baker] maps\_utility::enable_exits();
-  var_0 = getent("junction_entrance_player_clip", "targetname");
+  var_0 = getEnt("junction_entrance_player_clip", "targetname");
   var_0 delete();
 }
 
@@ -269,7 +269,7 @@ courtyard_intro_rorke() {
   var_0 = getnode("cy_rorke_01", "targetname");
   self setgoalnode(var_0);
   common_scripts\utility::flag_wait("courtyard_intro_check_stairs");
-  var_1 = common_scripts\utility::getstruct("courtyard_entry_animnode", "targetname");
+  var_1 = common_scripts\utility::getStruct("courtyard_entry_animnode", "targetname");
   var_1 maps\_anim::anim_reach_solo(self, "cornered_courtyard_rail_check");
 
   if(!common_scripts\utility::flag("move_to_courtyard_new")) {
@@ -342,7 +342,7 @@ courtyard_intro_baker_exit() {
   self endon("death");
   var_0 = getnode("courtyard_baker_wait", "targetname");
   common_scripts\utility::flag_wait("inverted_baker_done");
-  var_1 = common_scripts\utility::getstruct("elevator_script_node", "targetname");
+  var_1 = common_scripts\utility::getStruct("elevator_script_node", "targetname");
   var_1.angles = (0, 0, 0);
   var_1 maps\_anim::anim_first_frame_solo(self, "baker_enter_junction");
   self setgoalpos(self.origin);
@@ -369,7 +369,7 @@ courtyard_intro_elevator_guy() {
   self endon("death");
   self endon("_stealth_spotted");
   self.animname = "generic";
-  var_1 = common_scripts\utility::getstruct("courtyard_lobby_elevator_door_r_dest", "targetname");
+  var_1 = common_scripts\utility::getStruct("courtyard_lobby_elevator_door_r_dest", "targetname");
 
   if(self.script_noteworthy == "courtyard_intro_guys_elevator") {
     var_1 thread maps\_anim::anim_single_solo(self, "cornered_courtyard_elevator_enter");
@@ -422,27 +422,27 @@ courtyard_intro_elevator_guy_fail() {
 
 courtyard_intro_elevator() {
   level endon("cy_elevator_closed");
-  var_0 = getent("courtyard_lobby_elevator_door_r", "targetname");
-  var_1 = getent("courtyard_lobby_elevator_door_l", "targetname");
-  var_2 = getent("courtyard_lobby_elevator_door_l_clip", "targetname");
-  var_3 = getent("courtyard_lobby_elevator_door_r_clip", "targetname");
+  var_0 = getEnt("courtyard_lobby_elevator_door_r", "targetname");
+  var_1 = getEnt("courtyard_lobby_elevator_door_l", "targetname");
+  var_2 = getEnt("courtyard_lobby_elevator_door_l_clip", "targetname");
+  var_3 = getEnt("courtyard_lobby_elevator_door_r_clip", "targetname");
   var_4 = var_0.origin;
   var_5 = var_1.origin;
-  var_6 = common_scripts\utility::getstruct("courtyard_lobby_elevator_door_r_dest", "targetname");
-  var_7 = common_scripts\utility::getstruct("courtyard_lobby_elevator_door_l_dest", "targetname");
-  var_2 linkto(var_1);
-  var_3 linkto(var_0);
-  var_8 = getent("courtyard_lobby_elevator_blocker", "targetname");
+  var_6 = common_scripts\utility::getStruct("courtyard_lobby_elevator_door_r_dest", "targetname");
+  var_7 = common_scripts\utility::getStruct("courtyard_lobby_elevator_door_l_dest", "targetname");
+  var_2 linkTo(var_1);
+  var_3 linkTo(var_0);
+  var_8 = getEnt("courtyard_lobby_elevator_blocker", "targetname");
   common_scripts\utility::flag_wait("courtyard_intro_elevator_button");
   wait 2.25;
   wait 3.55;
-  var_9 = getent("courtyard_lobby_elevator_door_r", "targetname");
+  var_9 = getEnt("courtyard_lobby_elevator_door_r", "targetname");
   thread common_scripts\utility::play_sound_in_space("crnd_elev_bell", var_9.origin);
   wait 1;
   common_scripts\utility::flag_set("courtyard_intro_elevator_opening");
   thread maps\cornered_audio::aud_door("elevator_open");
-  var_0 moveto(var_6.origin, 1.5, 0.25, 0.4);
-  var_1 moveto(var_7.origin, 1.5, 0.25, 0.4);
+  var_0 moveTo(var_6.origin, 1.5, 0.25, 0.4);
+  var_1 moveTo(var_7.origin, 1.5, 0.25, 0.4);
   wait 0.95;
   var_8 notsolid();
   var_8 connectpaths();
@@ -457,7 +457,7 @@ courtyard_rorke() {
   level.player endon("death");
   thread maps\_stealth_visibility_system::system_event_change("hidden");
   thread maps\cornered_code::custom_bar_stealth_setting();
-  var_0 = common_scripts\utility::getstruct("courtyard_office_entry_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("courtyard_office_entry_animnode", "targetname");
   thread add_magic_bullet_shield_if_off();
   thread courtyard_office_ally_vo();
   thread courtyard_office_a_doors();
@@ -492,7 +492,7 @@ courtyard_rorke() {
   if(!common_scripts\utility::flag("cy_office_stealth_broken")) {
     self waittillmatch("single anim", "end");
   } else {
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   if(!common_scripts\utility::flag("move_to_office_a_half_wall")) {
@@ -513,10 +513,10 @@ courtyard_rorke() {
   self.fixednode = 0;
 
   if(!common_scripts\utility::flag("cy_office_stealth_broken")) {
-    var_2 = getent("office_rorke_gundown_volume", "targetname");
+    var_2 = getEnt("office_rorke_gundown_volume", "targetname");
     self setgoalvolumeauto(var_2);
   } else {
-    var_2 = getent("player_in_office", "targetname");
+    var_2 = getEnt("player_in_office", "targetname");
     self setgoalvolumeauto(var_2);
   }
 
@@ -595,7 +595,7 @@ courtyard_rorke() {
     thread maps\_stealth_visibility_system::system_event_change("hidden");
     maps\_utility::delaythread(0.1, maps\cornered_code::custom_bar_stealth_setting);
     maps\_utility::delaythread(0.1, maps\_stealth_utility::stealth_corpse_reset_time_custom, 10);
-    var_0 = common_scripts\utility::getstruct("rorke_exit_office_approach", "targetname");
+    var_0 = common_scripts\utility::getStruct("rorke_exit_office_approach", "targetname");
     var_0 maps\_anim::anim_reach_solo(self, "corner_standL_trans_CQB_IN_2");
   }
 
@@ -604,7 +604,7 @@ courtyard_rorke() {
     common_scripts\utility::flag_set("at_cy_exit_door");
   }
 
-  var_0 = common_scripts\utility::getstruct("courtyard_office_exit_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("courtyard_office_exit_animnode", "targetname");
 
   if(!common_scripts\utility::flag("move_across_bridge") && !common_scripts\utility::flag("skipped_firework_office")) {
     var_1 = common_scripts\utility::spawn_tag_origin();
@@ -622,7 +622,7 @@ courtyard_rorke() {
 
   thread maps\cornered_audio::aud_bar("amb");
   thread maps\cornered_audio::aud_bar("stop");
-  var_0 = common_scripts\utility::getstruct("rorke_bridge_anim", "targetname");
+  var_0 = common_scripts\utility::getStruct("rorke_bridge_anim", "targetname");
 
   if(!common_scripts\utility::flag("skipped_firework_office")) {
     var_0 maps\_anim::anim_reach_solo(self, "cornered_courtyard_bridge_check");
@@ -678,7 +678,7 @@ courtyard_office_death() {
 courtyard_office_enemy_anim() {
   self endon("death");
   maps\_stealth_utility::stealth_pre_spotted_function_custom(::bar_spotted_func);
-  var_0 = common_scripts\utility::getstruct("courtyard_office_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("courtyard_office_animnode", "targetname");
   self.allowdeath = 1;
   self.animname = "generic";
   var_1 = [];
@@ -728,20 +728,20 @@ courtyard_office_enemy_anim() {
   common_scripts\utility::flag_wait_either("office_guy_killed", "_stealth_spotted");
   level notify("cy_office_spotted");
   self.fixednode = 0;
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_stealth_utility::disable_stealth_for_ai();
   self.dontevershoot = undefined;
   thread maps\_utility::set_battlechatter(1);
-  var_2 = getent("player_in_office", "targetname");
+  var_2 = getEnt("player_in_office", "targetname");
 
   if(self.script_parameters == "office_guy_d" || self.script_parameters == "office_guy_e") {
     if(level.player istouching(var_2)) {
-      var_3 = getent("cy_office_enemy_volume", "targetname");
+      var_3 = getEnt("cy_office_enemy_volume", "targetname");
       self setgoalvolumeauto(var_3);
     } else
       thread maps\_utility::player_seek_enable();
   } else if(level.player istouching(var_2)) {
-    var_3 = getent("cy_office_enemy_volume_2", "targetname");
+    var_3 = getEnt("cy_office_enemy_volume_2", "targetname");
     self setgoalvolumeauto(var_3);
   } else
     thread maps\_utility::player_seek_enable();
@@ -753,9 +753,9 @@ courtyard_office_props() {
 }
 
 courtyard_office_chair() {
-  var_0 = common_scripts\utility::getstruct("courtyard_office_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("courtyard_office_animnode", "targetname");
   var_1 = maps\_utility::spawn_anim_model("courtyard_office");
-  var_2 = getent("office_a_conf_chair", "targetname");
+  var_2 = getEnt("office_a_conf_chair", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "cornered_office_fireworks_crowd_chair");
   var_3 = var_1 gettagorigin("J_prop_1");
   var_4 = var_1 gettagangles("J_prop_1");
@@ -763,7 +763,7 @@ courtyard_office_chair() {
   var_2.origin = var_3;
   var_2.angles = var_4;
   common_scripts\utility::waitframe();
-  var_2 linkto(var_1, "J_prop_1");
+  var_2 linkTo(var_1, "J_prop_1");
   common_scripts\utility::flag_wait("rorke_open_office_a");
 
   if(isalive(level.office_guy_c) && !common_scripts\utility::flag("_stealth_spotted")) {
@@ -777,14 +777,14 @@ courtyard_office_chair() {
 
 courtyard_rig_kill(var_0) {
   var_0 waittill("death");
-  self stopanimscripted();
+  self stopanimScripted();
   self delete();
 }
 
 courtyard_office_glass() {
-  var_0 = common_scripts\utility::getstruct("courtyard_office_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("courtyard_office_animnode", "targetname");
   var_1 = maps\_utility::spawn_anim_model("courtyard_office");
-  var_2 = getent("office_a_conf_glass", "targetname");
+  var_2 = getEnt("office_a_conf_glass", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "cornered_office_fireworks_crowd_drink");
   var_3 = var_1 gettagorigin("J_prop_1");
   var_4 = var_1 gettagangles("J_prop_1");
@@ -792,7 +792,7 @@ courtyard_office_glass() {
   var_2.origin = var_3;
   var_2.angles = var_4;
   common_scripts\utility::waitframe();
-  var_2 linkto(var_1, "J_prop_1");
+  var_2 linkTo(var_1, "J_prop_1");
   common_scripts\utility::flag_wait("rorke_open_office_a");
 
   if(isalive(level.office_guy_a) && !common_scripts\utility::flag("_stealth_spotted")) {
@@ -802,7 +802,7 @@ courtyard_office_glass() {
     wait 11.15;
 
     if(isDefined(var_1) && common_scripts\utility::flag("_stealth_spotted")) {
-      var_1 stopanimscripted();
+      var_1 stopanimScripted();
     } else {
       wait 15.45;
       level notify("glass_on_table");
@@ -824,20 +824,20 @@ courtyard_glass_drop() {
 }
 
 courtyard_office_a_doors() {
-  var_0 = getent("office_a_door_right", "targetname");
-  var_1 = getent("office_a_door_left", "targetname");
+  var_0 = getEnt("office_a_door_right", "targetname");
+  var_1 = getEnt("office_a_door_left", "targetname");
   var_2 = getEntArray("office_a_door_right_hinges", "targetname");
   var_3 = getEntArray("office_a_door_left_hinges", "targetname");
 
   foreach(var_5 in var_2) {
-    var_5 linkto(var_0);
+    var_5 linkTo(var_0);
   }
 
   foreach(var_5 in var_3) {
-    var_5 linkto(var_1);
+    var_5 linkTo(var_1);
   }
 
-  var_9 = common_scripts\utility::getstruct("courtyard_office_entry_animnode", "targetname");
+  var_9 = common_scripts\utility::getStruct("courtyard_office_entry_animnode", "targetname");
   thread maps\cornered_code::generic_prop_raven_anim(var_9, "courtyard_office", "cornered_courtyard_office_door_door", "office_a_door_right", undefined, undefined, "rorke_open_office_a");
   common_scripts\utility::flag_wait("rorke_open_office_a");
   wait 0.65;
@@ -946,7 +946,7 @@ stop_vo_on_event() {
 
 courtyard_office_chopper() {
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("courtyard_reception_office_a_chopper");
-  var_1 = getent("courtyard_reception_office_a_chopper_spotlight_target", "targetname");
+  var_1 = getEnt("courtyard_reception_office_a_chopper_spotlight_target", "targetname");
   var_0 thread maps\cornered_code::littlebird_handle_spotlight(0.5, undefined, undefined, 50, var_1);
   common_scripts\utility::flag_wait("courtyard_reception_office_a_chopper_shine_spotlight");
   wait 4.0;
@@ -1013,7 +1013,7 @@ bar_rorke_shoot_tv() {
     var_0 = getnode("bar_strobe_rorke_failsafe", "targetname");
     self setgoalnode(var_0);
     self waittill("goal");
-    var_1 = getent("bar_light_origin", "targetname");
+    var_1 = getEnt("bar_light_origin", "targetname");
     self.baseaccuracy = 5000000;
     wait 0.4;
     self setlookatentity(var_1);
@@ -1041,7 +1041,7 @@ bar_rorke_warning_vo() {
       var_3 = 4096.0;
       var_4 = level.player getEye();
       var_5 = level.player getplayerangles();
-      var_6 = vectornormalize(anglesToForward(var_5));
+      var_6 = vectorNormalize(anglesToForward(var_5));
       var_7 = bulletTrace(var_4, var_4 + var_6 * var_3, 1, level.player, 1);
 
       if(isDefined(var_7["entity"]) && var_7["entity"] == var_2) {
@@ -1070,7 +1070,7 @@ bar_rorke_strobe_attack() {
 
   thread bar_strobe_ally();
   wait 0.4;
-  var_0 = getent("rorke_bar_volume", "targetname");
+  var_0 = getEnt("rorke_bar_volume", "targetname");
   self setgoalvolumeauto(var_0);
   add_magic_bullet_shield_if_off();
   self.maxsightdistsqrd = 64000000;
@@ -1204,11 +1204,11 @@ tv_stop(var_0) {
 }
 
 bar_light() {
-  var_0 = getent("bar_light_volume", "targetname");
-  var_1 = getent("bar_script_light", "targetname");
-  var_2 = getent("bar_light_origin", "targetname");
+  var_0 = getEnt("bar_light_volume", "targetname");
+  var_1 = getEnt("bar_script_light", "targetname");
+  var_2 = getEnt("bar_light_origin", "targetname");
   var_3 = var_2 common_scripts\utility::spawn_tag_origin();
-  var_4 = getent("bar_light_aim_assist", "targetname");
+  var_4 = getEnt("bar_light_aim_assist", "targetname");
   var_4 notsolid();
   thread tv_play(var_0);
   common_scripts\utility::exploder(1972);
@@ -1356,7 +1356,7 @@ bar_strobe_ally_force_off() {
 }
 
 bar_enemies() {
-  level.bar_animnode = common_scripts\utility::getstruct("courtyard_bar_animnode", "targetname");
+  level.bar_animnode = common_scripts\utility::getStruct("courtyard_bar_animnode", "targetname");
   maps\_utility::array_spawn_function_targetname("bar_guys", ::bar_enemy_setup);
   maps\_utility::array_spawn_function_targetname("bar_guys", ::bar_enemy_react);
   maps\_utility::array_spawn_function_targetname("bar_guys", ::bar_enemy_strobe_react);
@@ -1372,7 +1372,7 @@ bar_enemies() {
   thread bar_enemy_seek_player();
 
   if(!common_scripts\utility::flag("rorke_shoot_tv")) {
-    var_1 = getent("player_in_bar", "targetname");
+    var_1 = getEnt("player_in_bar", "targetname");
 
     while(!level.player istouching(var_1) && !level.allies[level.const_rorke] istouching(var_1)) {
       common_scripts\utility::waitframe();
@@ -1434,7 +1434,7 @@ bar_enemy_setup() {
     level.e01_glass.origin = self gettagorigin("tag_weapon_chest");
     level.e01_glass.angles = self gettagangles("tag_weapon_chest");
     level.e01_glass setModel("cnd_glass_01");
-    level.e01_glass linkto(self, "tag_weapon_chest");
+    level.e01_glass linkTo(self, "tag_weapon_chest");
     thread bar_enemy_glass_launch(level.e01_glass);
   }
 
@@ -1443,7 +1443,7 @@ bar_enemy_setup() {
     level.e02_glass.origin = self gettagorigin("tag_weapon_chest");
     level.e02_glass.angles = self gettagangles("tag_weapon_chest");
     level.e02_glass setModel("cnd_glass_01");
-    level.e02_glass linkto(self, "tag_weapon_chest");
+    level.e02_glass linkTo(self, "tag_weapon_chest");
     thread bar_enemy_glass_launch(level.e02_glass);
   }
 
@@ -1504,18 +1504,18 @@ bar_enemy_react() {
       self notify("end_patrol");
       self setgoalpos(self.origin);
       level.bar_animnode notify("stop_loop");
-      maps\_utility::anim_stopanimscripted();
+      maps\_utility::anim_stopanimScripted();
       common_scripts\utility::waitframe();
     }
   } else if(self.script_parameters == "e10") {
     self notify("end_patrol");
     self setgoalpos(self.origin);
     level.bar_animnode notify("stop_loop");
-    maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
   } else {
     self notify("end_patrol");
     level.bar_animnode notify("stop_loop");
-    maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
     common_scripts\utility::waitframe();
   }
 
@@ -1524,7 +1524,7 @@ bar_enemy_react() {
   self.ignoreall = 0;
   maps\_stealth_utility::disable_stealth_for_ai();
   self.dontevershoot = undefined;
-  var_0 = getent("enemy_bar_volume", "targetname");
+  var_0 = getEnt("enemy_bar_volume", "targetname");
 
   if(!common_scripts\utility::flag("player_broke_bar_combat")) {
     self setgoalvolumeauto(var_0);
@@ -1580,7 +1580,7 @@ bar_enemy_strobe_react() {
   }
 
   level.bar_animnode notify("stop_loop");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   common_scripts\utility::waitframe();
 
   for(;;) {
@@ -1588,7 +1588,7 @@ bar_enemy_strobe_react() {
       common_scripts\utility::flag_wait("strobe_on");
     }
 
-    var_1 = vectornormalize(level.player.origin - self.origin);
+    var_1 = vectorNormalize(level.player.origin - self.origin);
     var_2 = anglesToForward(self.angles);
     var_3 = vectordot(var_1, var_2);
     var_4 = vectorcross(var_1, var_2);
@@ -1609,7 +1609,7 @@ bar_enemy_strobe_react() {
     common_scripts\utility::flag_wait("strobe_off");
     wait(randomfloatrange(0.75, 1.25));
     self notify("stop_animmode");
-    self stopanimscripted();
+    self stopanimScripted();
     self.ignoreall = 0;
     self.dontevershoot = undefined;
     common_scripts\utility::waitframe();
@@ -1664,7 +1664,7 @@ bar_enemy_seek_player() {
   common_scripts\utility::flag_wait("bar_enemies_reacted");
   common_scripts\utility::flag_set("player_broke_bar_combat");
   thread bar_enemy_kill_rorke();
-  var_0 = getent("player_in_bar", "targetname");
+  var_0 = getEnt("player_in_bar", "targetname");
 
   for(;;) {
     if(!level.player istouching(var_0)) {
@@ -1689,8 +1689,8 @@ bar_enemy_kill_rorke() {
   level endon("bar_combat_done");
   level.player endon("death");
   level.allies[level.const_rorke] endon("death");
-  var_0 = getent("player_in_office", "targetname");
-  var_1 = getent("player_in_bar", "targetname");
+  var_0 = getEnt("player_in_office", "targetname");
+  var_1 = getEnt("player_in_bar", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0) && level.allies[level.const_rorke] istouching(var_1)) {
@@ -1711,7 +1711,7 @@ bar_props() {
 }
 
 bar_stool_anim(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct("courtyard_bar_animnode", "targetname");
+  var_3 = common_scripts\utility::getStruct("courtyard_bar_animnode", "targetname");
   var_4 = maps\_utility::spawn_anim_model("bar_chair");
   var_5 = undefined;
   var_6 = undefined;
@@ -1731,7 +1731,7 @@ bar_stool_anim(var_0, var_1, var_2) {
       }
     }
 
-    var_6 linkto(var_5);
+    var_6 linkTo(var_5);
   }
 
   if(isDefined(var_1)) {
@@ -1747,7 +1747,7 @@ bar_stool_anim(var_0, var_1, var_2) {
       }
     }
 
-    var_8 linkto(var_7);
+    var_8 linkTo(var_7);
   }
 
   var_3 maps\_anim::anim_first_frame_solo(var_4, var_2);
@@ -1760,13 +1760,13 @@ bar_stool_anim(var_0, var_1, var_2) {
   if(isDefined(var_5)) {
     var_5.origin = var_16;
     var_5.angles = var_17;
-    var_5 linkto(var_4, "J_prop_1");
+    var_5 linkTo(var_4, "J_prop_1");
   }
 
   if(isDefined(var_7)) {
     var_7.origin = var_18;
     var_7.angles = var_19;
-    var_7 linkto(var_4, "J_prop_2");
+    var_7 linkTo(var_4, "J_prop_2");
   }
 
   common_scripts\utility::flag_wait("starting_bar_reaction");
@@ -1891,11 +1891,11 @@ junction_handler() {
   thread junction_elevator_control_panel();
   thread junction_pip_init();
   thread junction_pip_scenario();
-  var_0 = getent("send_in_junction_enemies_trigger", "targetname");
+  var_0 = getEnt("send_in_junction_enemies_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("rorke_opening_junction_exit_door");
   maps\_stealth_utility::disable_stealth_system();
-  var_1 = getent("combat_rappel_fall_volume", "targetname");
+  var_1 = getEnt("combat_rappel_fall_volume", "targetname");
   var_1 thread maps\cornered_code::cornered_falling_death();
   maps\_utility::delaythread(1.5, ::junction_vo);
   level.allies[level.const_rorke] thread junction_rorke_window();
@@ -1991,10 +1991,10 @@ junction_cameras() {
 }
 
 junction_airlock_rorke() {
-  var_0 = common_scripts\utility::getstruct("junction_entry_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("junction_entry_animnode", "targetname");
 
   if(!isDefined(level.started_junction_from_startpoint)) {
-    var_1 = getent("junction_entrance_player_clip", "targetname");
+    var_1 = getEnt("junction_entrance_player_clip", "targetname");
     var_1 notsolid();
     var_0 maps\_anim::anim_reach_solo(self, "junction_door1_merrick_enter");
     thread maps\cornered_audio::aud_door("stealth1");
@@ -2025,17 +2025,17 @@ junction_airlock_rorke() {
 }
 
 junction_airlock_door_open(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   var_4 = getEntArray(var_1, "targetname");
 
   foreach(var_6 in var_4) {
-    var_6 linkto(var_3);
+    var_6 linkTo(var_3);
   }
 
-  var_8 = common_scripts\utility::getstruct("junction_entry_animnode", "targetname");
+  var_8 = common_scripts\utility::getStruct("junction_entry_animnode", "targetname");
   var_9 = maps\_utility::spawn_anim_model("junction_airlock_door");
   var_8 maps\_anim::anim_first_frame_solo(var_9, var_2 + "_enter");
-  var_3 linkto(var_9, "J_prop_1");
+  var_3 linkTo(var_9, "J_prop_1");
   var_8 thread maps\_anim::anim_single_solo(var_9, var_2 + "_enter");
   wait 2.5;
   var_3 connectpaths();
@@ -2048,7 +2048,7 @@ junction_airlock_door_open(var_0, var_1, var_2) {
 
     common_scripts\utility::flag_wait("junction_entrance_close");
     var_8 notify("stop_loop");
-    var_3 disconnectpaths();
+    var_3 disconnectPaths();
     var_8 maps\_anim::anim_single_solo(var_9, var_2 + "_exit");
   }
 
@@ -2066,7 +2066,7 @@ junction_airlock_door_open(var_0, var_1, var_2) {
 }
 
 junction_rorke_window() {
-  var_0 = common_scripts\utility::getstruct("elevator_script_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("elevator_script_node", "targetname");
   var_0.angles = (0, 0, 0);
   var_0 maps\_anim::anim_reach_solo(self, "rorke_enter_junction");
   common_scripts\utility::flag_set("rorke_starts_handoff_anim");
@@ -2104,9 +2104,9 @@ junction_vo() {
   common_scripts\utility::flag_wait("junction_enemies_dead");
   common_scripts\utility::flag_wait("c4_vo_over");
   wait 0.5;
-  var_1 = getent("hesh_junction_vo_volume", "targetname");
+  var_1 = getEnt("hesh_junction_vo_volume", "targetname");
   thread vo_by_volume(level.allies[level.const_baker], var_1, "cornered_hsh_gohookupadam");
-  var_1 = getent("merrick_junction_vo_volume", "targetname");
+  var_1 = getEnt("merrick_junction_vo_volume", "targetname");
   thread vo_by_volume(level.allies[level.const_rorke], var_1, "cornered_mrk_grabyourlinewe");
   common_scripts\utility::flag_set("junction_finished");
 }
@@ -2137,7 +2137,7 @@ vo_by_volume(var_0, var_1, var_2) {
 }
 
 junction_baker_open_elevator_control_room() {
-  var_0 = common_scripts\utility::getstruct("elevator_script_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("elevator_script_node", "targetname");
   var_0.angles = (0, 0, 0);
   var_0 maps\_anim::anim_first_frame_solo(self, "baker_enter_junction");
   thread baker_junction_door_open(var_0);
@@ -2156,7 +2156,7 @@ junction_baker_open_elevator_control_room() {
   var_0 thread maps\_anim::anim_loop_solo(self, "baker_elevator_loop", "stop_loop");
   common_scripts\utility::flag_wait("player_shutting_down_elevators");
   var_0 notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   waittillframeend;
   var_0 maps\_anim::anim_first_frame_solo(self, "baker_elevator_exit");
   common_scripts\utility::flag_wait("start_hesh_elevator_exit");
@@ -2180,12 +2180,12 @@ if_offhands_are_grabbed() {
 }
 
 baker_junction_door_open(var_0) {
-  var_1 = getent("baker_junction_hallway_door_brushes", "targetname");
-  var_2 = getent("baker_junction_hallway_door_model", "targetname");
-  var_2 linkto(var_1);
+  var_1 = getEnt("baker_junction_hallway_door_brushes", "targetname");
+  var_2 = getEnt("baker_junction_hallway_door_model", "targetname");
+  var_2 linkTo(var_1);
   var_3 = maps\_utility::spawn_anim_model("baker_junction_door");
   var_0 maps\_anim::anim_first_frame_solo(var_3, "baker_enter_junction");
-  var_1 linkto(var_3, "J_prop_1");
+  var_1 linkTo(var_3, "J_prop_1");
   common_scripts\utility::flag_wait("baker_enter_junction");
   thread maps\cornered_audio::aud_junction("hesh");
   var_0 maps\_anim::anim_single_solo(var_3, "baker_enter_junction");
@@ -2199,12 +2199,12 @@ baker_junction_door_open(var_0) {
 junction_elevator_control_doors_open(var_0) {
   var_1 = maps\_utility::spawn_anim_model("junction_keypad_door");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "cornered_junction_keypad_door");
-  var_2 = getent("elevator_control_room_door_left", "targetname");
-  var_3 = getent("elevator_control_room_door_right", "targetname");
-  var_4 = getent("elevator_control_room_door_clip", "targetname");
+  var_2 = getEnt("elevator_control_room_door_left", "targetname");
+  var_3 = getEnt("elevator_control_room_door_right", "targetname");
+  var_4 = getEnt("elevator_control_room_door_clip", "targetname");
   common_scripts\utility::waitframe();
-  var_3 linkto(var_1, "J_prop_1");
-  var_2 linkto(var_1, "J_prop_2");
+  var_3 linkTo(var_1, "J_prop_1");
+  var_2 linkTo(var_1, "J_prop_2");
   thread maps\cornered_audio::aud_door("elevator_room");
   var_0 thread maps\_anim::anim_single_solo(var_1, "cornered_junction_keypad_door");
   wait 3.5;
@@ -2214,18 +2214,18 @@ junction_elevator_control_doors_open(var_0) {
 }
 
 junction_elevator_control_panel() {
-  var_0 = getent("disable_elevators_trigger", "targetname");
+  var_0 = getEnt("disable_elevators_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
-  var_1 = getent("disable_elevators_trigger_old", "targetname");
+  var_1 = getEnt("disable_elevators_trigger_old", "targetname");
 
   if(isDefined(var_1)) {
     var_1 delete();
   }
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-    var_0 sethintstring(&"CORNERED_DISABLE_ELEVATORS_CONSOLE");
+    var_0 setHintString(&"CORNERED_DISABLE_ELEVATORS_CONSOLE");
   } else {
-    var_0 sethintstring(&"CORNERED_DISABLE_ELEVATORS");
+    var_0 setHintString(&"CORNERED_DISABLE_ELEVATORS");
   }
 
   var_2 = maps\_utility::spawn_anim_model("elevator_control_panel");
@@ -2233,7 +2233,7 @@ junction_elevator_control_panel() {
   var_4 = maps\_utility::spawn_anim_model("multi_tool");
   maps\cornered_code::hide_player_arms();
   var_4 hide();
-  var_5 = common_scripts\utility::getstruct("elevator_script_node", "targetname");
+  var_5 = common_scripts\utility::getStruct("elevator_script_node", "targetname");
   var_5.angles = (0, 0, 0);
   var_4 maps\_anim::anim_first_frame_solo(var_4, "cornered_elevator_junction_player_clippers");
   var_5 maps\_anim::anim_first_frame_solo(var_2, "cornered_elevator_junction_upper_panel");
@@ -2259,7 +2259,7 @@ junction_elevator_control_panel() {
   level.combat_rappel_rope_coil_baker show();
   level.combat_rappel_rope_rorke = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
   level.combat_rappel_rope_rorke.animname = "combat_rappel_exit_rope_rorke";
-  level.player_start_rappel_struct = common_scripts\utility::getstruct("player_start_rappel_struct", "targetname");
+  level.player_start_rappel_struct = common_scripts\utility::getStruct("player_start_rappel_struct", "targetname");
   level.player_start_rappel_struct maps\_anim::anim_first_frame_solo(level.combat_rappel_rope_rorke, "cornered_junction_c4_enter_rorke");
   var_2 setModel("cnd_server_control_panel_anim");
   level.player disableweapons();
@@ -2293,7 +2293,7 @@ junction_elevator_control_panel() {
   level.player allowcrouch(1);
   level.player allowprone(1);
   common_scripts\utility::flag_set("obj_disable_elevators_complete");
-  var_11 = getent("junction_elevator_light", "targetname");
+  var_11 = getEnt("junction_elevator_light", "targetname");
   var_11 setlightintensity(0);
   common_scripts\utility::flag_wait("c_rappel_player_on_rope");
 
@@ -2325,7 +2325,7 @@ waittill_control_panel_notetrack() {
 junction_pip_init() {
   common_scripts\utility::flag_wait("baker_open_elevator_control_room_doors");
   level.pip.rendertotexture = 1;
-  var_0 = common_scripts\utility::getstruct("pip_monitor_cam", "targetname");
+  var_0 = common_scripts\utility::getStruct("pip_monitor_cam", "targetname");
   level.pip.entity = spawn("script_model", var_0.origin);
   level.pip.entity setModel("tag_origin");
   level.pip.entity.angles = var_0.angles;
@@ -2439,20 +2439,20 @@ junction_pip_waver_drone() {
 
   if(common_scripts\utility::cointoss()) {
     var_0 = "left";
-    var_1 = getent("junction_pip_scenario_drone_left_waver", "targetname");
+    var_1 = getEnt("junction_pip_scenario_drone_left_waver", "targetname");
     var_2 = var_1 maps\_utility::dronespawn();
   } else {
     var_0 = "right";
-    var_1 = getent("junction_pip_scenario_drone_right_waver", "targetname");
+    var_1 = getEnt("junction_pip_scenario_drone_right_waver", "targetname");
     var_2 = var_1 maps\_utility::dronespawn();
   }
 
   var_2.animname = "generic";
   wait 1;
-  var_3 = common_scripts\utility::getstruct(var_0 + "_wave_struct", "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0 + "_wave_struct", "targetname");
   var_2 waittill("goal");
   var_3 maps\_anim::anim_generic_run(var_2, "wave_" + var_0);
-  var_4 = common_scripts\utility::getstruct("after_" + var_0 + "_wave_struct", "targetname");
+  var_4 = common_scripts\utility::getStruct("after_" + var_0 + "_wave_struct", "targetname");
   var_2.target = var_4.targetname;
   var_2 thread maps\_drone::drone_move();
   var_2 waittill("goal");
@@ -2540,7 +2540,7 @@ magicbullet_spray() {
     var_0 = level.allies[level.const_rorke];
     var_1 = var_0 gettagorigin("j_head") + (0, 0, 20);
     var_2 = self gettagorigin("j_head");
-    var_3 = vectornormalize(var_1 - var_2);
+    var_3 = vectorNormalize(var_1 - var_2);
     var_4 = var_2 + var_3 * (distance(var_1, var_2) - 10);
 
     if(self.weapon != "none") {
@@ -2566,7 +2566,7 @@ junction_last_stand(var_0) {
     wait 0.05;
   }
 
-  var_5 = getent("junction_backup_guys_last_stand_volume", "targetname");
+  var_5 = getEnt("junction_backup_guys_last_stand_volume", "targetname");
 
   for(;;) {
     var_1 = maps\_utility::remove_dead_from_array(var_1);
@@ -2598,7 +2598,7 @@ junction_ally_combat_state() {
   self.lastweapon = self.weapon;
 
   if(self.animname == "rorke") {
-    self stopanimscripted();
+    self stopanimScripted();
     self.dontavoidplayer = 0;
   }
 
@@ -2607,7 +2607,7 @@ junction_ally_combat_state() {
 }
 
 junction_banners() {
-  var_0 = common_scripts\utility::getstruct("banner_org", "targetname");
+  var_0 = common_scripts\utility::getStruct("banner_org", "targetname");
   var_1 = maps\_utility::spawn_anim_model("elevator_junction_banner");
   var_2 = maps\_utility::spawn_anim_model("elevator_junction_banner_3");
   var_0 thread maps\_anim::anim_loop_solo(var_1, "banner_1_loop", "stop_banner_loop");

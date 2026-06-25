@@ -54,8 +54,8 @@ function skipto_done(str_objective, b_starting, b_direct, player) {
   umbragate_set("hq_exit_umbra_gate", 0);
   umbragate_set("garage_umbra_gate", 0);
   var_fb9735b9 = [];
-  var_fb9735b9[0] = getent("plaza_battle_blast_door_left", "targetname");
-  var_fb9735b9[1] = getent("plaza_battle_blast_door_right", "targetname");
+  var_fb9735b9[0] = getEnt("plaza_battle_blast_door_left", "targetname");
+  var_fb9735b9[1] = getEnt("plaza_battle_blast_door_right", "targetname");
   array::delete_all(var_fb9735b9);
 }
 
@@ -512,7 +512,7 @@ function function_4ef4b654(a_ents) {
 function function_da30164f() {
   level endon("hash_e0d14dc8");
   var_6a6344b5 = struct::get("street_choke_throw_look_point");
-  var_1a20be33 = getent("street_balcony_choke_throw_trig", "targetname");
+  var_1a20be33 = getEnt("street_balcony_choke_throw_trig", "targetname");
   var_1a20be33 endon("death");
   if(!isDefined(var_1a20be33)) {
     return;

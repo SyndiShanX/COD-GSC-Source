@@ -186,7 +186,7 @@ monitor_tracker_existing_players(local_client_num) {
   self endon(#"death");
   self endon(#"monitor_tracker_existing_players");
   self notify(#"monitor_tracker_existing_players");
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(isDefined(player) && player != self) {
@@ -532,7 +532,7 @@ monitor_detectnearbyenemies(local_client_num) {
     }
 
     localplayeranglestoforward = anglesToForward(playerangles);
-    players = getplayers(local_client_num);
+    players = getPlayers(local_client_num);
     clones = getclones(local_client_num);
     sixthsenseents = arraycombine(players, clones, 0, 0);
 
@@ -637,7 +637,7 @@ monitor_detectnearbyenemies(local_client_num) {
 
       if(detected) {
         vector = sixthsenseent.origin - localplayer.origin;
-        vectorflat = vectornormalize((vector[0], vector[1], 0));
+        vectorflat = vectorNormalize((vector[0], vector[1], 0));
         cosangle = vectordot(vectorflat, localplayeranglestoforward);
 
         if(distcurrentsq < range * bundle.var_7c9cab4f * range * bundle.var_7c9cab4f) {

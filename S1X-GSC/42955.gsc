@@ -444,7 +444,7 @@ spawnorbitalsupportturret(var_0, var_1, var_2, var_3) {
   var_4.angles = level.orbitalsupport_planemodel gettagangles(var_2);
   var_4 setModel(var_1);
   var_4 setdefaultdroppitch(45);
-  var_4 linkto(level.orbitalsupport_planemodel, var_2, (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(level.orbitalsupport_planemodel, var_2, (0, 0, 0), (0, 0, 0));
   var_4.owner = undefined;
   var_4.health = 99999;
   var_4.maxhealth = 1000;
@@ -466,7 +466,7 @@ turretspawnsoundent(var_0) {
   waitframe();
   self.soundent = spawn("script_model", self.origin);
   self.soundent setModel("tag_origin");
-  self.soundent linkto(level.orbitalsupport_planemodel, var_0, (0, 0, 0), (0, 0, 0));
+  self.soundent linkTo(level.orbitalsupport_planemodel, var_0, (0, 0, 0), (0, 0, 0));
 }
 
 pulseorbitalsupportreloadtext() {
@@ -679,7 +679,7 @@ firebigorbitalsupportgun() {
       var_3.vehicle_fired_from = level.orbitalsupport_planemodel;
       level.orbitalsupport_planemodel playSound("paladin_cannon_snap");
       var_3 playSound("orbitalsupport_105mm_proj_travel");
-      self playrumbleonentity("ac130_105mm_fire");
+      self playRumbleOnEntity("ac130_105mm_fire");
       self playlocalsound("paladin_cannon_reload");
       earthquake(0.3, 1, level.orbitalsupport_planemodel.origin, 1000, self);
       self.reloading_big_orbitalsupport_gun = 1;
@@ -786,21 +786,21 @@ firemediumorbitalsupportvolley(var_0, var_1) {
   var_4 = randomfloat(400) - 200;
   var_5 = magicbullet(var_1, var_2, (var_0[0] + var_3, var_0[1] + var_4, var_0[2]), self, 1);
   var_5.vehicle_fired_from = level.orbitalsupport_planemodel;
-  self playrumbleonentity("ac130_25mm_fire");
+  self playRumbleOnEntity("ac130_25mm_fire");
   wait 0.05;
   var_2 = level.orbitalsupport_planemodel gettagorigin("tag_orbitalsupport_mediumgun0");
   var_3 = randomfloat(400) - 200;
   var_4 = randomfloat(400) - 200;
   var_5 = magicbullet(var_1, var_2, (var_0[0] + var_3, var_0[1] + var_4, var_0[2]), self, 1);
   var_5.vehicle_fired_from = level.orbitalsupport_planemodel;
-  self playrumbleonentity("ac130_25mm_fire");
+  self playRumbleOnEntity("ac130_25mm_fire");
   wait 0.05;
   var_2 = level.orbitalsupport_planemodel gettagorigin("tag_orbitalsupport_mediumgun3");
   var_3 = randomfloat(400) - 200;
   var_4 = randomfloat(400) - 200;
   var_5 = magicbullet(var_1, var_2, (var_0[0] + var_3, var_0[1] + var_4, var_0[2]), self, 1);
   var_5.vehicle_fired_from = level.orbitalsupport_planemodel;
-  self playrumbleonentity("ac130_25mm_fire");
+  self playRumbleOnEntity("ac130_25mm_fire");
   wait 0.05;
 }
 
@@ -832,16 +832,16 @@ firerocketorbitalsupportgun() {
     if(self.controlled_orbitalsupport_turret == "rocket" && self attackButtonPressed() && !isDefined(level.hostmigrationtimer)) {
       earthquake(0.3, 1, level.orbitalsupport_planemodel.origin, 1000, self);
       var_3 = level.orbitalsupport_big_turret gettagorigin("tag_missile1");
-      var_4 = vectornormalize(anglesToForward(self getplayerangles()));
-      var_5 = vectornormalize(anglesToForward(level.orbitalsupport_planemodel gettagangles("tag_origin")));
+      var_4 = vectorNormalize(anglesToForward(self getplayerangles()));
+      var_5 = vectorNormalize(anglesToForward(level.orbitalsupport_planemodel gettagangles("tag_origin")));
 
       for(var_6 = 0; var_6 < 3; var_6++) {
         var_7 = var_4 + (0, 0, 0.4) + random_vector(1);
         var_8 = magicbullet("orbitalsupport_missile_mp", var_3, var_3 + var_7, self);
         var_8.vehicle_fired_from = level.orbitalsupport_planemodel;
         self playlocalsound("paladin_missile_shot_2d");
-        self playrumbleonentity("ac130_40mm_fire");
-        var_8 missile_settargetent(level.orbitalsupport_targetent);
+        self playRumbleOnEntity("ac130_40mm_fire");
+        var_8 missile_settargetEnt(level.orbitalsupport_targetent);
         var_8 missile_setflightmodedirect();
         wait 0.1;
       }
@@ -1210,7 +1210,7 @@ setrandomorbitalsupportstartposition() {
   }
 
   level.orbitalsupport_planemodel.angles = var_2;
-  level.orbitalsupport_planemodel.origin = level.orbitalsupport_planemodel.origin - vectornormalize(-1 * anglestoright(level.orbitalsupport_planemodel gettagangles("tag_origin"))) * var_1;
+  level.orbitalsupport_planemodel.origin = level.orbitalsupport_planemodel.origin - vectorNormalize(-1 * anglestoright(level.orbitalsupport_planemodel gettagangles("tag_origin"))) * var_1;
   level.orbitalsupport_planemodel.origin = level.orbitalsupport_planemodel.origin + (0, 0, var_0);
   level.orbitalsupport_planemodel.destination2 = spawnStruct();
   level.orbitalsupport_planemodel.destination2.origin = level.orbitalsupport_planemodel.origin;
@@ -1242,7 +1242,7 @@ moveorbitalsupporttodestination(var_0) {
 
   if(isDefined(level.orbitalsupport_planemodel.owner)) {
     level.orbitalsupport_planemodel.owner stoprumble("orbital_laser_charge");
-    level.orbitalsupport_planemodel.owner playrumbleonentity("ac130_105mm_fire");
+    level.orbitalsupport_planemodel.owner playRumbleOnEntity("ac130_105mm_fire");
     earthquake(0.2, 2, level.orbitalsupport_planemodel.destination2.origin, 1000);
   }
 
@@ -1305,7 +1305,7 @@ playerdelayrumble(var_0) {
   self endon("disconnect");
   self endon("orbitalsupport_player_removed");
   wait(var_0);
-  self playrumbleonentity("orbital_laser_charge");
+  self playRumbleOnEntity("orbital_laser_charge");
 }
 
 playjetfx() {
@@ -1488,24 +1488,24 @@ rotateplane(var_0, var_1) {
   }
 
   if(var_1 == "on") {
-    level.osprig rotateyaw(360, var_0, 0.5);
+    level.osprig rotateYaw(360, var_0, 0.5);
     wait(var_0);
 
     for(;;) {
-      level.osprig rotateyaw(360, var_0);
+      level.osprig rotateYaw(360, var_0);
       wait(var_0);
     }
   } else if(var_1 == "off") {
     var_2 = 10;
     var_3 = var_0 / 360 * var_2;
-    level.osprig rotateyaw(level.osprig.angles[2] + var_2, var_3, 0, var_3);
+    level.osprig rotateYaw(level.osprig.angles[2] + var_2, var_3, 0, var_3);
   }
 }
 
 spawnmuzzleflashent(var_0, var_1, var_2) {
   var_3 = spawn("script_model", (0, 0, 0));
   var_3 setModel("tag_origin");
-  var_3 linkto(var_0, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_0, var_1, (0, 0, 0), (0, 0, 0));
   var_3 hide();
 
   foreach(var_5 in level.players) {

@@ -50,7 +50,7 @@ function start_vortex(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 function vortex_shake_and_rumble(localclientnum, v_vortex_origin) {
   self endon("vortex_stop");
   while(true) {
-    self playrumbleonentity(localclientnum, "zod_idgun_vortex_interior");
+    self playRumbleOnEntity(localclientnum, "zod_idgun_vortex_interior");
     wait(0.075);
   }
 }
@@ -84,7 +84,7 @@ function function_69096485(localclientnum, vortex_fx_handle, var_3ea33288, var_8
   playSound(0, "wpn_idgun_portal_explode", var_3ea33288);
   wait(0.05);
   if(isDefined(self)) {
-    self playrumbleonentity(localclientnum, "zod_idgun_vortex_shockwave");
+    self playRumbleOnEntity(localclientnum, "zod_idgun_vortex_shockwave");
   }
   vision_blur(localclientnum, undefined, 1);
   wait(0.1);

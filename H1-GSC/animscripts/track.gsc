@@ -174,10 +174,10 @@ trackloop_cqbshootpos(var_0) {
     }
 
     if(isDefined(self.cqb_wide_target_track)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643)
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
 
@@ -185,10 +185,10 @@ trackloop_cqbshootpos(var_0) {
     var_1 = self.cqb_point_of_interest;
 
     if(isDefined(self.cqb_wide_poi_track)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643)
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643)
       var_1 = undefined;
   }
 

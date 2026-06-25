@@ -68,12 +68,12 @@ container_update(c_container) {
 create_locker_trigger(v_pos, n_radius, str_message) {
   v_pos = (v_pos[0], v_pos[1], v_pos[2] + 50);
   e_trig = spawn("trigger_radius_use", v_pos, 0, n_radius, 100);
-  e_trig triggerignoreteam();
+  e_trig triggerIgnoreTeam();
   e_trig setvisibletoall();
   e_trig setteamfortrigger(#"none");
-  e_trig usetriggerrequirelookat();
-  e_trig setcursorhint("HINT_NOICON");
-  e_trig sethintstring(str_message);
+  e_trig useTriggerRequireLookAt();
+  e_trig setCursorHint("HINT_NOICON");
+  e_trig setHintString(str_message);
   return e_trig;
 }
 
@@ -181,8 +181,8 @@ create_locker_doors(e_left_door, e_right_door, door_open_angle, door_open_time) 
   e_trigger waittill(#"trigger");
   e_left_door playSound(#"evt_cabinet_open");
   v_angle = (e_left_door.angles[0], e_left_door.angles[1] - door_open_angle, e_left_door.angles[2]);
-  e_left_door rotateto(v_angle, door_open_time);
+  e_left_door rotateTo(v_angle, door_open_time);
   v_angle = (e_right_door.angles[0], e_right_door.angles[1] + door_open_angle, e_right_door.angles[2]);
-  e_right_door rotateto(v_angle, door_open_time);
+  e_right_door rotateTo(v_angle, door_open_time);
   e_trigger delete();
 }

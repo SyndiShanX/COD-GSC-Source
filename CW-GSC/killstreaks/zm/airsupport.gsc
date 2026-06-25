@@ -40,7 +40,7 @@ function private function_469dabd0(killstreaktype) {
     return 0;
   }
 
-  var_6cecb00 = getent("enable_artillery_remotemissile", "targetname");
+  var_6cecb00 = getEnt("enable_artillery_remotemissile", "targetname");
 
   if(isDefined(var_6cecb00)) {
     return e_target istouching(var_6cecb00);
@@ -164,12 +164,12 @@ function private function_b66d4fac(killstreaktype, maxrange, var_f6825ff2, var_c
     v_end = v_start + v_forward * maxrange;
     a_trace = bulletTrace(v_start, v_end, 0, self.mdl_target[killstreaktype], 1, 0);
     self.var_5acfe25f = a_trace[#"position"];
-    self.mdl_target[killstreaktype] moveto(self.var_5acfe25f + var_4ad3bc13, 0.05);
+    self.mdl_target[killstreaktype] moveTo(self.var_5acfe25f + var_4ad3bc13, 0.05);
 
     if(var_d89073fc) {
       var_94c47885 = self.mdl_target[killstreaktype].angles;
       var_94c47885 = (var_94c47885[0], self.angles[1], var_94c47885[2]);
-      self.mdl_target[killstreaktype] rotateto(var_94c47885, 0.05);
+      self.mdl_target[killstreaktype] rotateTo(var_94c47885, 0.05);
     }
 
     if(isDefined(var_d3deec73)) {

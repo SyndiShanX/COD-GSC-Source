@@ -124,7 +124,7 @@ blinkknife_detonatesuccess(var_0, var_1, var_2, var_3) {
     var_0 setworldupreferenceangles((0, 0, 0), 0);
   }
 
-  var_0 setorigin(var_2.origin, 1, 1);
+  var_0 setOrigin(var_2.origin, 1, 1);
   var_0 setplayerangles(var_2.playerangles);
   var_0 setstance(var_2.var_10B53);
   thread blinkknife_endfx(var_0);

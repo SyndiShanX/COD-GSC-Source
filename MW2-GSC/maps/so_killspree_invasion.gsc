@@ -134,9 +134,9 @@ so_killspree_init() {
 
   door_diner_open();
 
-  ladder_clip = getent("nates_kitchen_ladder_clip", "targetname");
+  ladder_clip = getEnt("nates_kitchen_ladder_clip", "targetname");
   ladder_clip Delete();
-  ladder_clip = getent("bt_ktichen_ladder_clip", "targetname");
+  ladder_clip = getEnt("bt_ktichen_ladder_clip", "targetname");
   ladder_clip Delete();
 
   ladder_ents = getEntArray("inv_ladders", "script_noteworthy");
@@ -145,10 +145,10 @@ so_killspree_init() {
   }
   ladder_ents = getEntArray("inv_ladders_pathblocker", "script_noteworthy");
   foreach(ent in ladder_ents) {
-    ent disconnectpaths();
+    ent disconnectPaths();
   }
 
-  ent = GetEnt("predator_drone_control", "targetname");
+  ent = getEnt("predator_drone_control", "targetname");
   ent Delete();
 
   level.custom_eog_no_kills = true;
@@ -214,9 +214,9 @@ foreach(player in level.players) {
 
 array_thread(level.players, ::hud_create_kill_counter);
 }
-thread fire_off_exploder(getent("north_side_low", "targetname"));
-thread fire_off_exploder(getent("north_side_high", "targetname"));
-thread fire_off_exploder(getent("west_side", "targetname"));
+thread fire_off_exploder(getEnt("north_side_low", "targetname"));
+thread fire_off_exploder(getEnt("north_side_high", "targetname"));
+thread fire_off_exploder(getEnt("west_side", "targetname"));
 }
 create_smoke_wave("magic_smoke_grenade_north", flag_start, dialog_wait);
 }

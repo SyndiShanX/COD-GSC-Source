@@ -100,10 +100,10 @@ zombieExtractionGates() {
     gate.originalPos = gate.origin;
     gate_struct.gate = gate;
 
-    moveToOrg = getstruct(gate.target, "targetname");
+    moveToOrg = getStruct(gate.target, "targetname");
     gate_struct.dest = moveToOrg;
 
-    col = getent(moveToOrg.target, "targetname");
+    col = getEnt(moveToOrg.target, "targetname");
     col.originalPos = col.origin;
     gate_struct.collision = col;
 
@@ -111,8 +111,8 @@ zombieExtractionGates() {
   }
 
   foreach(gate in level.zombieMovingGates) {
-    gate.gate moveto(gate.dest.origin, moveTime, .1, .2);
-    gate.collision moveto(gate.dest.origin, moveTime, .1, .2);
+    gate.gate moveTo(gate.dest.origin, moveTime, .1, .2);
+    gate.collision moveTo(gate.dest.origin, moveTime, .1, .2);
   }
 
   wait 1.0;
@@ -126,8 +126,8 @@ zombieExtractionGates() {
   }
 
   foreach(gate in level.zombieMovingGates) {
-    gate.gate moveto(gate.gate.originalPos, moveTime, .1, .2);
-    gate.collision moveto(gate.gate.originalPos, moveTime, .1, .2);
+    gate.gate moveTo(gate.gate.originalPos, moveTime, .1, .2);
+    gate.collision moveTo(gate.gate.originalPos, moveTime, .1, .2);
   }
 }
 
@@ -139,7 +139,7 @@ disconnectGatePaths() {
   wait 5;
 
   foreach(gate in level.zombieMovingGates) {
-    gate.collision disconnectpaths();
+    gate.collision disconnectPaths();
   }
 }
 
@@ -159,11 +159,11 @@ bounceGate(delaytime) {
     bounceBackTime = RandomfloatRange(.1, .5);
 
     thread gateFxOn();
-    self.gate moveto(self.gate.origin + bounceDistForward, bounceForwardTime, .05, .05);
+    self.gate moveTo(self.gate.origin + bounceDistForward, bounceForwardTime, .05, .05);
 
     wait bounceForwardTime;
 
-    self.gate moveto(self.dest.origin, bounceBackTime, .05, .05);
+    self.gate moveTo(self.dest.origin, bounceBackTime, .05, .05);
 
     wait bounceBackTime;
 

@@ -66,26 +66,26 @@ init() {
 }
 
 set_up_mq_models() {
-  var_0 = scripts\engine\utility::getstruct("mq_zombie_blood_fountain", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_zombie_blood_fountain", "script_noteworthy");
   level.e_zombie_blood_fountain = scripts\cp\utility::_id_E190("s4_zm_broken_demonic_fountain", var_0.origin, var_0.angles);
   var_1 = scripts\engine\utility::getStructArray("mq_step_three_small_stele_loc", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    var_0 = scripts\engine\utility::getstruct(var_3.target, "script_noteworthy");
+    var_0 = scripts\engine\utility::getStruct(var_3.target, "script_noteworthy");
     var_4 = scripts\cp\utility::_id_E190("s4_zm_stone_stele", var_0.origin, var_0.angles);
   }
 
-  var_0 = scripts\engine\utility::getstruct("mq_center_stele_mdl", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_center_stele_mdl", "script_noteworthy");
   level.mdl_center_stele = scripts\cp\utility::_id_E190("s4_zm_central_stone_stele", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_stele_cover_01", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_stele_cover_01", "script_noteworthy");
   level.mdl_cover_01 = scripts\cp\utility::_id_E190("s4_zm_central_stone_stele_vines_c", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_stele_cover_02", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_stele_cover_02", "script_noteworthy");
   level.mdl_cover_02 = scripts\cp\utility::_id_E190("s4_zm_central_stone_stele_vines_b", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_stele_cover_03", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_stele_cover_03", "script_noteworthy");
   level.mdl_cover_03 = scripts\cp\utility::_id_E190("s4_zm_central_stone_stele_vines_a", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_cypher_wheel_base", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_cypher_wheel_base", "script_noteworthy");
   scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_e", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_blood_altar", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_blood_altar", "script_noteworthy");
   scripts\cp\utility::_id_E190("s4_zm_blood_altar", var_0.origin, var_0.angles);
   var_6 = scripts\engine\utility::getStructArray("mq_lost_monolith", "script_noteworthy");
 
@@ -103,11 +103,11 @@ init_mq_blockers() {
   level.a_mdl_stp7_door_blocks = getEntArray("mq_step_seven_door_block", "script_noteworthy");
   set_lock_down_clips(0, level.a_lock_down_clips, level.a_lock_down_clip_fxs);
   set_lock_down_clips(0, level.a_mdl_stp7_door_blocks, level.a_mdl_stp7_door_block_fxs);
-  level.mdl_altar_blocker = getent("mq_step_seven_altar_block", "script_noteworthy");
+  level.mdl_altar_blocker = getEnt("mq_step_seven_altar_block", "script_noteworthy");
   level.mdl_altar_blocker notsolid();
 
   if(!getdvarint("#x33ad41eaa5a9a3eec", 0)) {
-    level.mdl_mq_blocker = getent("mq_mdl_blocker", "script_noteworthy");
+    level.mdl_mq_blocker = getEnt("mq_mdl_blocker", "script_noteworthy");
 
     if(isDefined(level.mdl_mq_blocker)) {
       level.mdl_mq_blocker notsolid();
@@ -135,7 +135,7 @@ set_up_symbol_mdls() {
 }
 
 init_step_one_reveal_stele() {
-  level.s_stele_loc = scripts\engine\utility::getstruct("mq_step_one_stele_loc", "targetname");
+  level.s_stele_loc = scripts\engine\utility::getStruct("mq_step_one_stele_loc", "targetname");
   level.s_stele_loc.search_2d_dist = 72;
   level.mdl_center_stele.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", level.mdl_center_stele.origin, level.mdl_center_stele.angles);
   level.mdl_center_stele playLoopSound("zmb_stele_spell_lp");
@@ -144,19 +144,19 @@ init_step_one_reveal_stele() {
   _id_06CB::_id_AA4A(::on_zombie_killed_step_one);
   level thread init_step_one_interactions();
   level.mdl_returned_cypher_wheels = [];
-  var_0 = scripts\engine\utility::getstruct("mq_returned_stele_frag_01", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_returned_stele_frag_01", "script_noteworthy");
   level.mdl_returned_cypher_wheels[0] = ::scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_a", var_0.origin + (0, 10, 0), var_0.angles);
   level.mdl_returned_cypher_wheels[0].v_base_loc = var_0.origin;
-  var_1 = scripts\engine\utility::getstruct("mq_returned_stele_frag_02", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("mq_returned_stele_frag_02", "script_noteworthy");
   level.mdl_returned_cypher_wheels[1] = ::scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_b", var_1.origin + (0, 10, 0), var_1.angles);
   level.mdl_returned_cypher_wheels[1].v_base_loc = var_1.origin;
-  var_2 = scripts\engine\utility::getstruct("mq_returned_stele_frag_03", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct("mq_returned_stele_frag_03", "script_noteworthy");
   level.mdl_returned_cypher_wheels[2] = ::scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_c", var_2.origin + (0, 10, 0), var_2.angles);
   level.mdl_returned_cypher_wheels[2].v_base_loc = var_2.origin;
-  var_3 = scripts\engine\utility::getstruct("mq_returned_stele_center_arrow", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStruct("mq_returned_stele_center_arrow", "script_noteworthy");
   level.mdl_cypher_wheel_arrow = scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_d", var_3.origin + (0, 10, 0), var_3.angles);
   level.mdl_cypher_wheel_arrow.v_base_loc = var_3.origin;
-  var_4 = scripts\engine\utility::getstruct("mq_cypher_key_loc", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStruct("mq_cypher_key_loc", "script_noteworthy");
   level.mdl_cypher_key = scripts\cp\utility::_id_E190("s4_zm_rune_cypher_key_off", var_4.origin, var_4.angles);
   level thread check_players_get_close_to_cypher_key();
   level thread molotov_use_check();
@@ -202,13 +202,13 @@ debug_step_one_reveal_stele() {
   }
 
   level.mdl_returned_cypher_wheels = [];
-  var_0 = scripts\engine\utility::getstruct("mq_returned_stele_frag_01", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_returned_stele_frag_01", "script_noteworthy");
   level.mdl_returned_cypher_wheels[0] = ::scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_a", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_returned_stele_frag_02", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_returned_stele_frag_02", "script_noteworthy");
   level.mdl_returned_cypher_wheels[1] = ::scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_b", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_returned_stele_frag_03", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_returned_stele_frag_03", "script_noteworthy");
   level.mdl_returned_cypher_wheels[2] = ::scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_c", var_0.origin, var_0.angles);
-  var_0 = scripts\engine\utility::getstruct("mq_returned_stele_center_arrow", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_returned_stele_center_arrow", "script_noteworthy");
   scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_d", var_0.origin, var_0.angles);
   wait 1.5;
   level notify("step_one_is_done");
@@ -364,7 +364,7 @@ on_interact_fragment(var_0, var_1) {
 
 init_interact_fragment(var_0) {
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
     if(!isDefined(var_2.mdl_frag)) {
       var_2.mdl_frag = scripts\cp\utility::_id_E190(var_3._id_CE18, var_3.origin, var_3.angles);
@@ -415,9 +415,9 @@ do_bob(var_0) {
   var_2 = self.origin + (0, 0, -4);
 
   for(;;) {
-    self moveto(var_1, 1, 0, 0);
+    self moveTo(var_1, 1, 0, 0);
     self waittill("movedone");
-    self moveto(var_2, 1, 0, 0);
+    self moveTo(var_2, 1, 0, 0);
     self waittill("movedone");
   }
 }
@@ -592,16 +592,16 @@ cypher_wheels_get_hint_type(var_0, var_1) {
 
 init_cypher_wheels(var_0) {
   var_1 = var_0[0];
-  level.cypher_wheels_link = getent("cypher_wheels_link", "targetname");
+  level.cypher_wheels_link = getEnt("cypher_wheels_link", "targetname");
   level.cypher_wheels_hint = scripts\cp\utility::_id_E190("tag_origin", level.cypher_wheels_link.origin + (0, 10, 40), level.cypher_wheels_link.angles);
   level.cypher_wheels_hint makeunusable();
-  level.cypher_wheels_hint sethintstring(&"CP_SUMPF/MQ_CYPHER_WHEELS_DECIPHER");
-  level.cypher_wheels_hint setcursorhint("HINT_NOBUTTON");
-  var_2 = scripts\engine\utility::getstruct("mq_returned_stele_frag_03", "script_noteworthy");
+  level.cypher_wheels_hint setHintString(&"CP_SUMPF/MQ_CYPHER_WHEELS_DECIPHER");
+  level.cypher_wheels_hint setCursorHint("HINT_NOBUTTON");
+  var_2 = scripts\engine\utility::getStruct("mq_returned_stele_frag_03", "script_noteworthy");
   level.cypher_wheel_center = scripts\cp\utility::_id_E190("tag_origin", var_2.origin, var_2.angles);
 
   foreach(var_4 in level.mdl_returned_cypher_wheels) {
-    var_4 linkto(level.cypher_wheel_center);
+    var_4 linkTo(level.cypher_wheel_center);
   }
 
   var_6 = [];
@@ -853,7 +853,7 @@ try_decipher_wheel_symbols() {
 
 decipher_wheels(var_0) {
   self endon("death_or_disconnect");
-  self playerlinkto(level.cypher_wheels_link, "tag_origin", 0, 45, 45, 45, 45);
+  self playerlinkTo(level.cypher_wheels_link, "tag_origin", 0, 45, 45, 45, 45);
   self disableoffhandweapons();
   self allowmelee(0);
   scripts\cp\utility::_id_1566(1);
@@ -1023,7 +1023,7 @@ awake_small_steles() {
 
 play_ambient_fx_on_awaken_small_steles() {
   foreach(var_1 in level.a_s_small_stele_interacts) {
-    var_1.mdl_stele = scripts\engine\utility::getstruct(var_1.target, "script_noteworthy");
+    var_1.mdl_stele = scripts\engine\utility::getStruct(var_1.target, "script_noteworthy");
 
     if(istrue(var_1.is_awaken)) {
       var_1.mdl_stele.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", var_1.mdl_stele.origin, var_1.mdl_stele.angles);
@@ -1295,7 +1295,7 @@ send_fx_trail(var_0, var_1, var_2, var_3) {
   if(isDefined(var_5)) {
     playFXOnTag(level._effect[var_2], var_5, "tag_origin");
     wait 0.2;
-    var_5 moveto(var_1, var_4);
+    var_5 moveTo(var_1, var_4);
     var_5 waittill("movedone");
     wait 2;
   }
@@ -1628,7 +1628,7 @@ debug_step_four_saraxis_echo() {
 saraxis_echo_vignette_watcher() {
   level endon("game_ended");
   level endon("step_four_is_done");
-  var_0 = scripts\engine\utility::getstruct("mq_step_four_saraxis_movement_start_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_step_four_saraxis_movement_start_loc", "script_noteworthy");
 
   if(!isDefined(var_0)) {
     return;
@@ -1653,10 +1653,10 @@ saraxis_echo_vignette_watcher() {
   if(!isDefined(level.sara_echo)) {
     return;
   }
-  var_1 = scripts\engine\utility::getstruct("mq_step_four_saraxis_spawn_loc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("mq_step_four_saraxis_spawn_loc", "script_noteworthy");
 
   if(isDefined(var_1)) {
-    level.sara_echo moveto(var_1.origin, 4);
+    level.sara_echo moveTo(var_1.origin, 4);
   }
 
   level.sara_echo play_sound_and_wait("zm_cpm4_mqs4_deco_qgdd");
@@ -1682,7 +1682,7 @@ saraxis_echo_vignette_watcher() {
     if(!isDefined(level.sara_echo)) {
       return;
     }
-    level.sara_echo moveto(var_2 + (0, 0, 61), 0.1);
+    level.sara_echo moveTo(var_2 + (0, 0, 61), 0.1);
     playFX(scripts\engine\utility::getfx("mq_sara_echo_turn_to_angry"), level.sara_echo.origin);
     playFXOnTag(scripts\engine\utility::getfx("mq_sara_echo_angry_loop"), level.sara_echo, "tag_origin");
   }
@@ -1702,7 +1702,7 @@ saraxis_echo_vignette_watcher() {
     if(!isDefined(level.sara_echo)) {
       return;
     }
-    level.sara_echo moveto(var_2 + (0, 0, 61), 0.1);
+    level.sara_echo moveTo(var_2 + (0, 0, 61), 0.1);
     playFX(scripts\engine\utility::getfx("mq_sara_echo_turn_to_calm"), level.sara_echo.origin);
     playFXOnTag(scripts\engine\utility::getfx("mq_sara_echo_calm_loop"), level.sara_echo, "tag_origin");
   }
@@ -1724,7 +1724,7 @@ saraxis_echo_vignette_watcher() {
     if(!isDefined(level.sara_echo)) {
       return;
     }
-    level.sara_echo moveto(var_2 + (0, 0, 61), 0.1);
+    level.sara_echo moveTo(var_2 + (0, 0, 61), 0.1);
     playFX(scripts\engine\utility::getfx("mq_sara_echo_turn_to_angry"), level.sara_echo.origin);
     playFXOnTag(scripts\engine\utility::getfx("mq_sara_echo_angry_loop"), level.sara_echo, "tag_origin");
   }
@@ -1798,7 +1798,7 @@ play_sound_and_wait(var_0) {
 
 init_step_five_mirror() {
   level.n_zombie_blood_collected = 0;
-  level.s_fountain_fx_loc = scripts\engine\utility::getstruct("mq_blood_fountain_fx_loc", "script_noteworthy");
+  level.s_fountain_fx_loc = scripts\engine\utility::getStruct("mq_blood_fountain_fx_loc", "script_noteworthy");
   level.a_mdl_mirror_parts = [];
   level.e_blood_surface = scripts\cp\utility::_id_E190("tag_origin", level.e_zombie_blood_fountain.origin, level.e_zombie_blood_fountain.angles);
   level.e_blood_surface.n_max_height = level.e_blood_surface.origin[2];
@@ -1854,13 +1854,13 @@ set_up_mirror_part_one() {
   level.a_mdl_mirror_parts = scripts\engine\utility::array_add(level.a_mdl_mirror_parts, var_2.mdl_mirror_part);
   wait 0.5;
   playFXOnTag(level._effect["mq_mirror_part_ambient_fx"], var_2.mdl_mirror_part, "j_mirror_left");
-  var_2.s_destination = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_2.s_destination = scripts\engine\utility::getStruct(var_2.target, "targetname");
   var_2.s_destination.s_my_parent = var_2;
-  var_2.t_dmg = getent(var_2.target, "targetname");
+  var_2.t_dmg = getEnt(var_2.target, "targetname");
   var_2 thread mirror_part_dmg_watcher();
   var_2.mdl_mirror_part thread zombie_blood_visable_watcher();
   var_2.mdl_mirror_part thread play_mirror_or_orb_sound_watcher();
-  var_3 = scripts\engine\utility::getstruct(var_2.target, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "script_noteworthy");
   var_4 = scripts\cp\utility::_id_E190("s4_zm_kanji_symbols_x", var_3.origin, var_3.angles);
   var_4 thread zombie_blood_visable_watcher();
   var_4 thread x_marker_remove_watcher();
@@ -2067,7 +2067,7 @@ blood_surface_move() {
   var_0 = distance(self.origin, self.v_dest) / 10;
 
   if(var_0 > 0) {
-    self moveto(self.v_dest, var_0, 0, 0);
+    self moveTo(self.v_dest, var_0, 0, 0);
   }
 }
 
@@ -2096,7 +2096,7 @@ mirror_part_dmg_watcher() {
 
       self.mdl_mirror_part _meth_82CB("s4_zm_bronze_mirror_pain_01");
       wait 2.6;
-      self.mdl_mirror_part moveto(self.s_destination.origin, 2, 0, 0);
+      self.mdl_mirror_part moveTo(self.s_destination.origin, 2, 0, 0);
       self.mdl_mirror_part waittill("movedone");
       self.mdl_mirror_part _meth_82CB("s4_zm_bronze_mirror_idle_l_01");
       self.mdl_mirror_part thread show_hide_outline();
@@ -2221,7 +2221,7 @@ mirror_part_finder_move() {
   level endon("game_ended");
   level endon("step_five_is_done");
   var_0 = self;
-  var_1 = scripts\engine\utility::getstruct(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(self.target, "targetname");
   var_2 = scripts\engine\utility::getStructArray(var_1._id_039B, "script_noteworthy");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
@@ -2229,13 +2229,13 @@ mirror_part_finder_move() {
       path_finder_spawn_zombie(var_2[var_3 + 1].origin);
     }
 
-    var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
     if(isDefined(var_1)) {
       var_4 = distance(var_0.origin, var_1.origin) / 150;
 
       if(isDefined(self.mdl_fx)) {
-        self.mdl_fx moveto(var_1.origin, var_4, 0, 0);
+        self.mdl_fx moveTo(var_1.origin, var_4, 0, 0);
         self.mdl_fx waittill("movedone");
         var_0 = var_1;
       }
@@ -2316,7 +2316,7 @@ path_finder_spawn_zombie(var_0) {
 reveal_mirror_part_two(var_0) {
   level endon("game_ended");
   level endon("step_five_is_done");
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_1.mdl_mirror_part = scripts\cp\utility::_id_E190("s4_zm_bronze_mirror_full_break", var_1.origin, var_1.angles);
   var_1.mdl_mirror_part.b_mirror_show = 0;
   var_1.mdl_mirror_part thread show_hide_outline();
@@ -2414,7 +2414,7 @@ hint_type_central_altar(var_0, var_1) {
 
 try_to_spawn_mirror_on_altar() {
   if(!isDefined(level.mdl_altar_mirror)) {
-    var_0 = scripts\engine\utility::getstruct("mq_altar_mirror_loc", "script_noteworthy");
+    var_0 = scripts\engine\utility::getStruct("mq_altar_mirror_loc", "script_noteworthy");
     level.mdl_altar_mirror = scripts\cp\utility::_id_E190("s4_zm_bronze_mirror_full_break", var_0.origin, var_0.angles);
   }
 }
@@ -2557,7 +2557,7 @@ init_step_six_altar() {
   level.a_s_monolith_locs = scripts\engine\utility::getStructArray("mq_monolith_loc", "targetname");
   level.n_players_interacted_with_monolith = 0;
   level.n_players_completed_orb_chasing = 0;
-  level.s_mirror_loc = scripts\engine\utility::getstruct("mq_central_altar_fx_sender_loc", "script_noteworthy");
+  level.s_mirror_loc = scripts\engine\utility::getStruct("mq_central_altar_fx_sender_loc", "script_noteworthy");
   level.s_mirror_loc.mdl_mirror_fx = scripts\cp\utility::_id_E190("tag_origin", level.s_mirror_loc.origin, level.s_mirror_loc.angles);
   playFXOnTag(level._effect["mq_mirror_ambient_uncharged_fx"], level.s_mirror_loc.mdl_mirror_fx, "tag_origin");
 }
@@ -2596,7 +2596,7 @@ debug_step_six_altar() {
 send_monolith_trails() {
   level endon("game_ended");
   level endon("step_six_is_done");
-  var_0 = scripts\engine\utility::getstruct("mq_central_altar_fx_sender_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_central_altar_fx_sender_loc", "script_noteworthy");
 
   if(isDefined(level.a_s_monolith_locs)) {
     var_1 = scripts\engine\utility::array_randomize(level.a_s_monolith_locs);
@@ -2606,7 +2606,7 @@ send_monolith_trails() {
       waitframe();
       playFXOnTag(level._effect["mq_zombie_stele_charge_trail"], var_3, "tag_origin");
       var_4 = distance(var_0.origin, var_1[var_2].origin) / 100;
-      var_3 moveto(var_1[var_2].origin, var_4, 0, 0);
+      var_3 moveTo(var_1[var_2].origin, var_4, 0, 0);
       var_3 thread altar_trail_move_watcher(var_1[var_2]);
       var_1[var_2].b_is_awaken = 1;
     }
@@ -2725,18 +2725,18 @@ monolith_orb_move_and_dmg_watcher(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
     return;
   }
-  var_3 = scripts\engine\utility::getstruct(self.target, "targetname");
+  var_3 = scripts\engine\utility::getStruct(self.target, "targetname");
 
   if(isDefined(var_3)) {
     var_4 = distance(self.origin, var_3.origin) / var_0;
-    var_1 moveto(var_3.origin, var_4, 0, 1);
+    var_1 moveTo(var_3.origin, var_4, 0, 1);
     var_1 waittill("movedone");
     wait(var_2);
 
     if(scripts\engine\utility::is_equal(var_3._id_039B, "mq_no_t_dmg")) {
       var_3 thread monolith_orb_move_and_dmg_watcher(800, var_1, 0);
     } else {
-      var_3.t_dmg = getent(var_3._id_0481, "targetname");
+      var_3.t_dmg = getEnt(var_3._id_0481, "targetname");
 
       if(isDefined(var_3.t_dmg)) {
         var_3.t_dmg waittill("damage", var_5, var_6);
@@ -2987,7 +2987,7 @@ saraxis_intro() {
   level endon("game_ended");
   level endon("step_seven_is_done");
   wait 5;
-  var_0 = scripts\engine\utility::getstruct("mq_saraxis_echo_spawn_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_saraxis_echo_spawn_loc", "script_noteworthy");
   level thread scripts\cp\maps\cp_sumpf\cp_sumpf_wwq::fadetowhite(0.3);
   level.sara_echo = _func_03C5("shinomq_saraxis_echo", var_0.origin, var_0.angles);
   level.sara_echo ff_saraxis_echo_vignette_watcher();
@@ -3361,7 +3361,7 @@ set_mirror_fx(var_0) {
     }
 
     waitframe();
-    var_1 = scripts\engine\utility::getstruct("mq_altar_mirror_loc", "script_noteworthy");
+    var_1 = scripts\engine\utility::getStruct("mq_altar_mirror_loc", "script_noteworthy");
 
     if(isDefined(var_1)) {
       if(!istrue(level.b_mq_stop_spawn_max_ammo_after_wave)) {
@@ -3469,7 +3469,7 @@ send_electricity_ball_to_sara() {
   waitframe();
   playFXOnTag(level._effect["mq_mirror_atk"], var_0, "tag_origin");
   var_1 = distance(var_0.origin, level.ai_saraxis_echo gettagorigin("j_spine4")) / 600;
-  var_0 moveto(level.ai_saraxis_echo gettagorigin("j_spine4"), var_1, 0, 0);
+  var_0 moveTo(level.ai_saraxis_echo gettagorigin("j_spine4"), var_1, 0, 0);
   var_0 waittill("movedone");
   playFX(level._effect["mq_mirror_atk_exp"], var_0.origin);
   waitframe();
@@ -3720,7 +3720,7 @@ complete_hidden_quest_challenge() {
 
 give_reward_fountain() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("mq_altar_mirror_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_altar_mirror_loc", "script_noteworthy");
 
   if(isDefined(var_0)) {
     var_1 = _id_0990::_id_E3DD("full_ammo", var_0.origin + (0, 60, -50));
@@ -3732,7 +3732,7 @@ give_reward_fountain() {
   drop_final_loot(level.s_mirror_loc);
   wait 1;
   drop_final_loot(level.s_mirror_loc);
-  var_2 = scripts\engine\utility::getstruct("mq_final_reward_dg2_loc", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct("mq_final_reward_dg2_loc", "script_noteworthy");
   var_3 = scripts\cp\cp_weapon::buildweapon("s4_pi_raygun_mp");
   _id_092E::_id_E24D(var_3, var_2.origin, var_2.angles, undefined);
   level notify("step_seven_is_done");

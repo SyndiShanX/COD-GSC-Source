@@ -250,12 +250,12 @@ function sentinel_spawn_broken_arm(localclientnum, arm, arm_tag, claw_tag) {
     return false;
   }
   velocity = self getvelocity();
-  velocity_normal = vectornormalize(velocity);
+  velocity_normal = vectorNormalize(velocity);
   velocity_length = length(velocity);
   if(arm == 3) {
     launch_dir = anglesToForward(self.angles) * -1;
     launch_dir = launch_dir + (0, 0, 1);
-    launch_dir = vectornormalize(launch_dir);
+    launch_dir = vectorNormalize(launch_dir);
   } else {
     if(arm == 1) {
       launch_dir = anglestoright(self.angles);
@@ -386,7 +386,7 @@ function sentinel_drone_face_cut(localclientnum, oldval, newval, bnewent, biniti
   face_pos = self gettagorigin("tag_faceplate_d0");
   face_ang = self gettagangles("tag_faceplate_d0");
   velocity = self getvelocity();
-  velocity_normal = vectornormalize(velocity);
+  velocity_normal = vectorNormalize(velocity);
   velocity_length = length(velocity);
   launch_dir = anglesToForward(self.angles);
   velocity_length = velocity_length * 0.1;

@@ -91,7 +91,7 @@ function_28990311() {
 }
 
 function_78d5fb9b() {
-  playsoundatposition(#"evt_spawn_horn", (-1638, -2162, 2673));
+  playSoundAtPosition(#"evt_spawn_horn", (-1638, -2162, 2673));
 }
 
 init_devgui() {
@@ -784,7 +784,7 @@ devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
   pid = getdvarint(#"scr_give_wz_item", 0);
 
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
 
     if(isDefined(player)) {
       if(isDefined(pcb_param_2)) {
@@ -796,7 +796,7 @@ devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
       }
     }
   } else {
-    array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
+    array::thread_all(getPlayers(), playercallback, pcb_param_1, pcb_param_2);
   }
 
   setDvar(#"scr_give_wz_item", -1);

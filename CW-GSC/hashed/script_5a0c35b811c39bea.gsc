@@ -237,7 +237,7 @@ function onallcracks(entity) {
   entity.is_digging = 1;
   entity pathmode("dont move", 1);
   timeout = getanimlength("ai_t9_zm_avogadro_exit");
-  entity animscripted("avogadro_exit_finished", self.origin, self.angles, "ai_t9_zm_avogadro_exit", "normal", "root", 1, 0);
+  entity animScripted("avogadro_exit_finished", self.origin, self.angles, "ai_t9_zm_avogadro_exit", "normal", "root", 1, 0);
   waitresult = entity waittilltimeout(timeout, #"avogadro_exit_finished");
   entity ghost();
   entity notsolid();

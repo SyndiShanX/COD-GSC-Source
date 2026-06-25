@@ -35,7 +35,7 @@ on_local_player_spawned(localclientnum) {
     return;
   }
 
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
 
   foreach(player in players) {
     if(!isDefined(player) || !player isPlayer() || !isalive(player)) {

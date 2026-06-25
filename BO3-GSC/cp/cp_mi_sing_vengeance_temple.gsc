@@ -108,7 +108,7 @@ function temple_main(str_objective) {
   level thread function_68be9dc2();
   clips = getEntArray("temple_spawn_closet_door_pathing_clip", "targetname");
   foreach(clip in clips) {
-    clip disconnectpaths();
+    clip disconnectPaths();
   }
 }
 
@@ -157,7 +157,7 @@ function function_558af5fd(var_7131db57, var_1f486a3b, react_scene, drop_object)
     level thread function_54c1902c(drop_object);
   }
   if(isDefined(react_scene)) {
-    self stopanimscripted();
+    self stopanimScripted();
     level thread scene::play(react_scene);
   }
 }
@@ -178,8 +178,8 @@ function function_e0d6af75() {
   self thread function_64cea510();
   self util::waittill_any("alert", "fake_alert");
   self animation::fire_weapon();
-  self stopanimscripted();
-  civ = getent("gunpoint_civilian_ai", "targetname");
+  self stopanimScripted();
+  civ = getEnt("gunpoint_civilian_ai", "targetname");
   if(isDefined(civ) && isalive(civ)) {
     civ notify("fake_death");
   }
@@ -189,7 +189,7 @@ function function_e0d6af75() {
 
 function function_64cea510() {
   self waittill("death");
-  civ = getent("gunpoint_civilian_ai", "targetname");
+  civ = getEnt("gunpoint_civilian_ai", "targetname");
   if(isDefined(civ) && isalive(civ)) {
     civ notify("fake_death");
   }
@@ -213,7 +213,7 @@ function function_bddcb39c() {
   self ai::set_behavior_attribute("panic", 0);
   self.health = 1;
   self util::waittill_any("damage", "alert", "fake_death");
-  guy = getent("gunpoint_enemy_ai", "targetname");
+  guy = getEnt("gunpoint_enemy_ai", "targetname");
   if(isDefined(guy) && isalive(guy)) {
     guy notify("hash_da6a4775");
   }
@@ -228,9 +228,9 @@ function function_bddcb39c() {
 
 function function_54c1902c(e_obj) {
   if(isDefined(e_obj)) {
-    e_obj = getent(e_obj, "targetname");
+    e_obj = getEnt(e_obj, "targetname");
     if(isDefined(e_obj)) {
-      e_obj stopanimscripted();
+      e_obj stopanimScripted();
       e_obj physicslaunch(e_obj.origin, vectorscale((0, 0, 1), 0.1));
     }
   }
@@ -257,7 +257,7 @@ function function_47dc557f() {
 }
 
 function function_a044ee0() {
-  var_850a4b14 = getent("temple_wasp_gv", "targetname");
+  var_850a4b14 = getEnt("temple_wasp_gv", "targetname");
   if(isDefined(var_850a4b14)) {
     self clearforcedgoal();
     self cleargoalvolume();
@@ -345,7 +345,7 @@ function function_578145a3() {
   var_1044cded = 0;
   i = 3;
   for(i = 3; i >= 2; i--) {
-    var_26b3981a = getent("temple_axis_gv_0" + i, "targetname");
+    var_26b3981a = getEnt("temple_axis_gv_0" + i, "targetname");
     var_42cc32ad = function_f1c7b73f(var_26b3981a);
     if(isDefined(var_42cc32ad) && var_42cc32ad) {
       var_1044cded = 1;
@@ -354,13 +354,13 @@ function function_578145a3() {
   }
   var_17994622 = getaiteamarray("axis");
   if(isDefined(var_1044cded) && var_1044cded) {
-    ally_volume = getent("temple_ally_gv_0" + i, "targetname");
-    var_a2d2b3b = getent("temple_axis_gv_0" + i, "targetname");
-    var_fcf2483c = getent("temple_axis_cleanup_volume_0" + i, "targetname");
+    ally_volume = getEnt("temple_ally_gv_0" + i, "targetname");
+    var_a2d2b3b = getEnt("temple_axis_gv_0" + i, "targetname");
+    var_fcf2483c = getEnt("temple_axis_cleanup_volume_0" + i, "targetname");
     level thread function_620fbb8a(var_17994622, var_fcf2483c);
   } else {
-    ally_volume = getent("temple_ally_gv_01", "targetname");
-    var_a2d2b3b = getent("temple_axis_gv_01", "targetname");
+    ally_volume = getEnt("temple_ally_gv_01", "targetname");
+    var_a2d2b3b = getEnt("temple_axis_gv_01", "targetname");
   }
   foreach(guy in var_17994622) {
     if(isalive(guy)) {
@@ -378,8 +378,8 @@ function function_578145a3() {
   level.ai_hendricks clearforcedgoal();
   level.ai_hendricks cleargoalvolume();
   level.ai_hendricks setgoal(ally_volume);
-  ally_volume = getent("temple_ally_gv_02", "targetname");
-  var_a2d2b3b = getent("temple_axis_gv_02", "targetname");
+  ally_volume = getEnt("temple_ally_gv_02", "targetname");
+  var_a2d2b3b = getEnt("temple_axis_gv_02", "targetname");
   while(true) {
     if(isDefined(var_1044cded) && var_1044cded && i >= 2) {
       break;
@@ -400,8 +400,8 @@ function function_578145a3() {
     }
     wait(0.1);
   }
-  ally_volume = getent("temple_ally_gv_03", "targetname");
-  var_a2d2b3b = getent("temple_axis_gv_03", "targetname");
+  ally_volume = getEnt("temple_ally_gv_03", "targetname");
+  var_a2d2b3b = getEnt("temple_axis_gv_03", "targetname");
   while(true) {
     if(isDefined(var_1044cded) && var_1044cded && i >= 3) {
       break;
@@ -422,8 +422,8 @@ function function_578145a3() {
     }
     wait(0.1);
   }
-  ally_volume = getent("temple_ally_gv_04", "targetname");
-  var_a2d2b3b = getent("temple_axis_gv_04", "targetname");
+  ally_volume = getEnt("temple_ally_gv_04", "targetname");
+  var_a2d2b3b = getEnt("temple_axis_gv_04", "targetname");
   while(true) {
     guys_left = getaiteamarray("axis");
     if(isDefined(guys_left) && guys_left.size <= (var_17994622.size * 0.4)) {
@@ -472,7 +472,7 @@ function function_578145a3() {
 }
 
 function function_f1c7b73f(trigger) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!player istouching(trigger)) {
       return false;
     }
@@ -551,7 +551,7 @@ function function_dd797045() {
       wait(2);
       continue;
     }
-    volume = getent(self.target + "_volume", "targetname");
+    volume = getEnt(self.target + "_volume", "targetname");
     if(isDefined(volume)) {
       robots = getEntArray(self.target, "targetname");
       foreach(robot in robots) {
@@ -583,10 +583,10 @@ function function_dd797045() {
         }
       }
       if(isDefined(var_8b006810) && isDefined(var_17c44fc9)) {
-        var_17c44fc9 linkto(var_8b006810);
+        var_17c44fc9 linkTo(var_8b006810);
       }
       if(isDefined(var_8b006810)) {
-        var_8b006810 rotateto(var_8b006810.angles + vectorscale((0, 1, 0), 90), 1);
+        var_8b006810 rotateTo(var_8b006810.angles + vectorscale((0, 1, 0), 90), 1);
       }
       wait(0.5);
       if(isDefined(var_3cdd15e3)) {
@@ -673,7 +673,7 @@ function function_f8f4e73e() {
   objectives::hide("cp_level_vengeance_goto_dogleg_2");
   level flag::wait_till_any(array("show_temple_gather", "stealth_discovered"));
   objectives::show("cp_level_vengeance_goto_dogleg_2");
-  var_f8f4e73e = getent("dogleg_2_intro_trigger", "script_noteworthy");
+  var_f8f4e73e = getEnt("dogleg_2_intro_trigger", "script_noteworthy");
   if(isDefined(var_f8f4e73e)) {
     level thread vengeance_util::stealth_combat_toggle_trigger_and_objective(var_f8f4e73e, "cp_level_vengeance_goto_dogleg_2", undefined, "all_players_at_temple_exit", "cp_level_vengeance_clear_area");
   }
@@ -714,46 +714,46 @@ function function_29e96a35() {
 }
 
 function function_38bcd0() {
-  e_trigger = getent("dogleg_2_door_entry_trigger", "targetname");
+  e_trigger = getEnt("dogleg_2_door_entry_trigger", "targetname");
   e_trigger triggerenable(0);
-  var_71678477 = getent("dogleg_2_entry_door_lf", "targetname");
-  var_1d746940 = getent(var_71678477.target, "targetname");
-  var_1d746940 disconnectpaths();
-  var_b8e4988b = getent("dogleg_2_entry_door_rt", "targetname");
-  var_4a669fbc = getent(var_b8e4988b.target, "targetname");
-  var_4a669fbc disconnectpaths();
+  var_71678477 = getEnt("dogleg_2_entry_door_lf", "targetname");
+  var_1d746940 = getEnt(var_71678477.target, "targetname");
+  var_1d746940 disconnectPaths();
+  var_b8e4988b = getEnt("dogleg_2_entry_door_rt", "targetname");
+  var_4a669fbc = getEnt(var_b8e4988b.target, "targetname");
+  var_4a669fbc disconnectPaths();
   var_35a1e4f8 = struct::get("tag_align_dogleg_2_door", "targetname");
   var_35a1e4f8 thread scene::init("cin_ven_05_60_officedoor_1st");
 }
 
 function function_cf782b84() {
-  e_trigger = getent("dogleg_2_door_entry_trigger", "targetname");
+  e_trigger = getEnt("dogleg_2_door_entry_trigger", "targetname");
   e_trigger triggerenable(1);
   e_door_use_object = util::init_interactive_gameobject(e_trigger, &"cp_prompt_enter_ven_doors", &"CP_MI_SING_VENGEANCE_HINT_OPEN", &function_863781f2);
   objectives::set("cp_level_vengeance_open_dogleg_2_menu");
   level notify("hash_479fadce");
-  var_71678477 = getent("dogleg_2_entry_door_lf", "targetname");
-  var_1d746940 = getent(var_71678477.target, "targetname");
+  var_71678477 = getEnt("dogleg_2_entry_door_lf", "targetname");
+  var_1d746940 = getEnt(var_71678477.target, "targetname");
   var_71678477.animname = "dogleg_2_entry_door_lf";
   var_71678477.old_angles = var_71678477.angles;
   var_71678477.old_origin = var_71678477.origin;
-  var_b8e4988b = getent("dogleg_2_entry_door_rt", "targetname");
-  var_4a669fbc = getent(var_b8e4988b.target, "targetname");
+  var_b8e4988b = getEnt("dogleg_2_entry_door_rt", "targetname");
+  var_4a669fbc = getEnt(var_b8e4988b.target, "targetname");
   var_b8e4988b.animname = "dogleg_2_entry_door_rt";
   var_b8e4988b.old_angles = var_b8e4988b.angles;
   var_b8e4988b.old_origin = var_b8e4988b.origin;
-  var_1d746940 linkto(var_71678477);
-  var_4a669fbc linkto(var_b8e4988b);
+  var_1d746940 linkTo(var_71678477);
+  var_4a669fbc linkTo(var_b8e4988b);
   level thread vengeance_util::stealth_combat_toggle_trigger_and_objective(e_trigger, undefined, "cp_level_vengeance_open_dogleg_2_menu", "dogleg_2_entry_door_opening", "cp_level_vengeance_clear_area", e_door_use_object);
   level waittill("hash_ad75a4f1");
   e_door_use_object gameobjects::disable_object();
   objectives::hide("cp_level_vengeance_open_dogleg_2_menu");
   level waittill("hash_c4bb0520");
   if(!level flag::get("temple_stealth_broken")) {
-    var_71678477 stopanimscripted();
+    var_71678477 stopanimScripted();
     var_71678477.angles = var_71678477.old_angles;
     var_71678477.origin = var_71678477.old_origin;
-    var_b8e4988b stopanimscripted();
+    var_b8e4988b stopanimScripted();
     var_b8e4988b.angles = var_b8e4988b.old_angles;
     var_b8e4988b.origin = var_b8e4988b.old_origin;
   } else {

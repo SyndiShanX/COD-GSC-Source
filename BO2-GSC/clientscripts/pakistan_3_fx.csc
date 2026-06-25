@@ -202,7 +202,7 @@ rumble_if_player_collision(v_collision_point) {
   dist = distance(player.origin, v_collision_point);
 
   if(dist < 336) {
-    player playrumbleonentity(0, "damage_light");
+    player playRumbleOnEntity(0, "damage_light");
     intensity = 0.5;
     time = 0.8;
     player earthquake(intensity, time, player.origin, 500);

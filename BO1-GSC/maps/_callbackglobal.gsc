@@ -189,7 +189,7 @@ SetPlayerSpawnPos() {
   } else if(dist_squared < too_close * too_close) {
     spawn_pos = level._player_breadcrumbs[0][1].pos;
   }
-  spawn_angles = vectornormalize(player.origin - spawn_pos);
+  spawn_angles = vectorNormalize(player.origin - spawn_pos);
   spawn_angles = vectorToAngles(spawn_angles);
   if(!playerpositionvalid(spawn_pos)) {
     spawn_pos = player.origin;

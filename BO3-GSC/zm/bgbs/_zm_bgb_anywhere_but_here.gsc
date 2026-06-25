@@ -32,7 +32,7 @@ function __init__() {
 
 function activation() {
   zm_utility::increment_ignoreme();
-  playsoundatposition("zmb_bgb_abh_teleport_out", self.origin);
+  playSoundAtPosition("zmb_bgb_abh_teleport_out", self.origin);
   if(isDefined(level.var_2c12d9a6)) {
     s_respawn_point = self[[level.var_2c12d9a6]]();
   } else {
@@ -40,7 +40,7 @@ function activation() {
   }
   self cleargroundent();
   self setvelocity((0, 0, 0));
-  self setorigin(s_respawn_point.origin);
+  self setOrigin(s_respawn_point.origin);
   self freezecontrols(1);
   v_return_pos = self.origin + vectorscale((0, 0, 1), 60);
   a_ai = getaiteamarray(level.zombie_team);

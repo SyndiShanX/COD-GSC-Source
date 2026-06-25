@@ -125,7 +125,7 @@ function function_a0a37968(var_db0ac3dc) {
 }
 
 function transport_pavlovs_to_fountain() {
-  var_63979061 = getent("transport_pavlovs_to_fountain", "targetname");
+  var_63979061 = getEnt("transport_pavlovs_to_fountain", "targetname");
   while(true) {
     var_63979061 waittill("trigger", e_who);
     if(!(isDefined(e_who.var_a0a9409e) && e_who.var_a0a9409e)) {
@@ -136,7 +136,7 @@ function transport_pavlovs_to_fountain() {
 }
 
 function function_f3cc536() {
-  var_47ee7db6 = getent("veh_sewer_cam", "targetname");
+  var_47ee7db6 = getEnt("veh_sewer_cam", "targetname");
   nd_path_start = getvehiclenode("sewer_ride_start", "targetname");
   var_f08b56c6 = getvehiclenode("sewer_ride_exit_start", "targetname");
   self notify("hash_4cea57aa");
@@ -426,7 +426,7 @@ function function_6236d848(var_e57afa84, var_7741a4b8, var_ed686791, var_2a448c9
     level flag::clear(str_notify_end);
   } else {
     level thread zm_stalingrad_vo::function_d2ea8c30();
-    playsoundatposition("mus_stalingrad_underscore_pavlov_defend_end", (0, 0, 0));
+    playSoundAtPosition("mus_stalingrad_underscore_pavlov_defend_end", (0, 0, 0));
   }
   if(isDefined(var_93eb638b)) {
     var_93eb638b thread zm_powerups::powerup_timeout();
@@ -436,25 +436,25 @@ function function_6236d848(var_e57afa84, var_7741a4b8, var_ed686791, var_2a448c9
 function function_a71517e1(var_256a0099) {
   switch (var_256a0099) {
     case 0: {
-      var_bf34b7c4 = getent("lockdown_shutter_1", "targetname");
+      var_bf34b7c4 = getEnt("lockdown_shutter_1", "targetname");
       var_143e45c3 = "p7_fxanim_zm_stal_pavlov_lockdown_wall_01_reset_bundle";
       var_a48df19e = "east";
       break;
     }
     case 1: {
-      var_bf34b7c4 = getent("lockdown_shutter_2", "targetname");
+      var_bf34b7c4 = getEnt("lockdown_shutter_2", "targetname");
       var_143e45c3 = "p7_fxanim_zm_stal_pavlov_lockdown_wall_02_reset_bundle";
       var_a48df19e = "north";
       break;
     }
     case 2: {
-      var_bf34b7c4 = getent("lockdown_shutter_3", "targetname");
+      var_bf34b7c4 = getEnt("lockdown_shutter_3", "targetname");
       var_143e45c3 = "p7_fxanim_zm_stal_pavlov_lockdown_wall_03_reset_bundle";
       var_a48df19e = "west";
       break;
     }
   }
-  var_3d086912 = getent("lockdown_transitionblocker_" + var_a48df19e, "targetname");
+  var_3d086912 = getEnt("lockdown_transitionblocker_" + var_a48df19e, "targetname");
   var_3d086912 connectpaths();
   var_3d086912 movez(-1000, 0.1);
   var_bf34b7c4 thread scene::play(var_143e45c3, var_bf34b7c4);
@@ -471,27 +471,27 @@ function function_f10ea3a8() {
 function function_187a933f(var_256a0099) {
   switch (var_256a0099) {
     case 0: {
-      var_bf34b7c4 = getent("lockdown_shutter_1", "targetname");
+      var_bf34b7c4 = getEnt("lockdown_shutter_1", "targetname");
       var_f08953ca = "p7_fxanim_zm_stal_pavlov_lockdown_wall_01_lock_bundle";
       var_a48df19e = "east";
       break;
     }
     case 1: {
-      var_bf34b7c4 = getent("lockdown_shutter_2", "targetname");
+      var_bf34b7c4 = getEnt("lockdown_shutter_2", "targetname");
       var_f08953ca = "p7_fxanim_zm_stal_pavlov_lockdown_wall_02_lock_bundle";
       var_a48df19e = "north";
       break;
     }
     case 2: {
-      var_bf34b7c4 = getent("lockdown_shutter_3", "targetname");
+      var_bf34b7c4 = getEnt("lockdown_shutter_3", "targetname");
       var_f08953ca = "p7_fxanim_zm_stal_pavlov_lockdown_wall_03_lock_bundle";
       var_a48df19e = "west";
       break;
     }
   }
-  var_3d086912 = getent("lockdown_transitionblocker_" + var_a48df19e, "targetname");
+  var_3d086912 = getEnt("lockdown_transitionblocker_" + var_a48df19e, "targetname");
   var_3d086912 movez(1000, 0.1);
-  var_3d086912 disconnectpaths();
+  var_3d086912 disconnectPaths();
   var_bf34b7c4 thread scene::play(var_f08953ca, var_bf34b7c4);
 }
 
@@ -515,7 +515,7 @@ function function_d6ced80(b_locked) {
   if(b_locked) {
     foreach(e_collision in a_e_collision) {
       e_collision solid();
-      e_collision disconnectpaths();
+      e_collision disconnectPaths();
       var_63b437d6 = function_77f195ef(var_63b437d6);
     }
     foreach(e_gate in var_50e0150f) {
@@ -568,9 +568,9 @@ function function_451531f2() {
   level.var_1dfcc9b2.var_1865827a = [];
   level.var_1dfcc9b2.var_3ec9c2c0 = [];
   level.var_1dfcc9b2.var_6c74b6c8 = [];
-  var_8800d843 = getent("lockdown_western_front", "targetname");
-  var_32f65c5d = getent("lockdown_eastern_front", "targetname");
-  var_b9ebade5 = getent("lockdown_northern_front", "targetname");
+  var_8800d843 = getEnt("lockdown_western_front", "targetname");
+  var_32f65c5d = getEnt("lockdown_eastern_front", "targetname");
+  var_b9ebade5 = getEnt("lockdown_northern_front", "targetname");
   var_93a53b37 = struct::get_array("pavlovs_B_spawn", "targetname");
   foreach(s_spawner in var_93a53b37) {
     if(!isDefined(s_spawner.script_string) || s_spawner.script_noteworthy == "raz_location") {
@@ -638,7 +638,7 @@ function function_f4ceb3f8() {
   while(n_time_elapsed <= 3) {
     n_time_current = gettime() / 1000;
     n_time_elapsed = n_time_current - var_fa54dca5;
-    playsoundatposition("evt_lockdown_alarm", (-159, 1959, 793));
+    playSoundAtPosition("evt_lockdown_alarm", (-159, 1959, 793));
     wait(1 - 0.1);
   }
 }

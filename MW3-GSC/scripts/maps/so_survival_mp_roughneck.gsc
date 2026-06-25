@@ -25,15 +25,15 @@ main() {
 
 bridge_blocker() {
   level endon("special_op_terminated");
-  var_0 = getent("trigger_bridge_blocker", "targetname");
-  var_1 = getent("bridge_blocker", "targetname");
+  var_0 = getEnt("trigger_bridge_blocker", "targetname");
+  var_1 = getEnt("bridge_blocker", "targetname");
   var_1 maps\_utility::_id_27C5();
   var_1 connectpaths();
 
   for(;;) {
     if(maps\_utility::_id_277B(var_0)) {
       var_1 maps\_utility::_id_27C6();
-      var_1 disconnectpaths();
+      var_1 disconnectPaths();
     } else {
       var_1 maps\_utility::_id_27C5();
       var_1 connectpaths();

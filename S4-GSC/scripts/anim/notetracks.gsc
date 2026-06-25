@@ -522,7 +522,7 @@ _id_A627(var_0, var_1) {
   var_6 = 0;
 
   if(isalive(self._id_0192) && _func_011D(self._id_0192) && self _meth_8069()) {
-    var_7 = vectornormalize(self._id_0192 getEye() - var_3);
+    var_7 = vectorNormalize(self._id_0192 getEye() - var_3);
 
     if(vectordot(var_4, var_7) > cos(var_5)) {
       var_6 = 1;

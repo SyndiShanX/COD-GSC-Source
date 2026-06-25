@@ -2082,11 +2082,11 @@ _id_E3A7(var_0, var_1, var_2) {
     var_10.equipment = var_3;
     var_10 makeuseable();
     var_10 _meth_84D7("tag_origin");
-    var_10 setcursorhint("HINT_BUTTON");
+    var_10 setCursorHint("HINT_BUTTON");
     var_10 _meth_84DA(var_14);
     var_10 setuseholdduration("duration_short");
     var_10 _meth_84D1(1);
-    var_10 sethintstring(var_13);
+    var_10 setHintString(var_13);
     var_10 _meth_83A1(0);
     var_10 _meth_84D4(var_12);
     var_10 sethintdisplayfov(120);
@@ -2126,7 +2126,7 @@ _id_E3A7(var_0, var_1, var_2) {
 
     if(isDefined(var_0._id_039B) && var_0._id_039B == "wall") {
       var_20 = anglestoright(var_0.angles);
-      var_21 = vectornormalize(var_20) * 30;
+      var_21 = vectorNormalize(var_20) * 30;
       var_5 = var_0.origin + var_21 + (0, 0, 16);
       var_6 = var_0.origin + var_21 + (0, 0, -100);
       var_7 = scripts\engine\trace::ray_trace(var_5, var_6, undefined, scripts\engine\trace::_id_3EF6(1));
@@ -2513,7 +2513,7 @@ _id_E2F3(var_0) {
   var_2 = var_1[0];
 
   if(isDefined(var_2.target)) {
-    var_3[0] = getent(var_2.target, "targetname");
+    var_3[0] = getEnt(var_2.target, "targetname");
   } else {
     var_3[0] = spawn("script_model", var_2.origin);
     var_3[0].angles = var_2.angles;
@@ -2737,7 +2737,7 @@ _id_D868() {
 
 _id_3FC6(var_0) {
   if(isDefined(self.target)) {
-    var_1[0] = getent(self.target, "targetname");
+    var_1[0] = getEnt(self.target, "targetname");
   } else {
     var_1[0] = spawn("script_model", self.origin);
     var_1[0].angles = self.angles;

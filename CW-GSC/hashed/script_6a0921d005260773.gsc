@@ -172,7 +172,7 @@ function function_196c351c(note, animname, kill = 0, attacker, weapon) {
   self waittill(note, #"death");
 
   if(isDefined(self) && self isinscriptedstate()) {
-    self stopanimscripted(0.3);
+    self stopanimScripted(0.3);
   }
 
   if(isalive(self) && is_true(kill)) {

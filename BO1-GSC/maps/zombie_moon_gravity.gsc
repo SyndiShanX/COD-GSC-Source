@@ -301,7 +301,7 @@ zombie_moon_update_player_gravity() {
   LOW_G = 136;
   player_zones = getEntArray("player_volume", "script_noteworthy");
   while(1) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < player_zones.size; i++) {
       volume = player_zones[i];
       zone = undefined;
@@ -331,7 +331,7 @@ zombie_moon_update_player_gravity() {
 }
 zombie_moon_update_player_float() {
   flag_wait("all_players_connected");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread zombie_moon_player_float();
   }
@@ -347,7 +347,7 @@ zombie_moon_player_float() {
         time = RandomFloatRange(0.75, 1.25);
         wait(time);
         if(is_true(self.in_low_gravity) && self IsOnGround() && self IsSprinting()) {
-          self SetOrigin(self.origin + (0, 0, 1));
+          self setOrigin(self.origin + (0, 0, 1));
           player_velocity = self GetVelocity();
           boost_velocity = player_velocity + (0, 0, 100);
           self SetVelocity(boost_velocity);
@@ -368,7 +368,7 @@ zombie_moon_player_float() {
 }
 check_player_gravity() {
   flag_wait("all_players_connected");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread low_gravity_watch();
   }
@@ -534,7 +534,7 @@ update_low_gravity_fx() {
 }
 watch_player_grenades() {
   flag_wait("all_players_connected");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread player_throw_grenade();
   }

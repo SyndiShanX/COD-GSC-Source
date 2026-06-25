@@ -319,15 +319,15 @@ chopper_boss_fire_weapon(var_0) {
   var_1 = get_chopperboss_data("shot_count");
 
   if(isai(var_0)) {
-    self setturrettargetent(var_0, var_0 getEye() - var_0.origin);
+    self setturrettargetEnt(var_0, var_0 getEye() - var_0.origin);
   } else if(isPlayer(var_0)) {
     if(maps\_utility::is_player_down(var_0)) {
       var_1 = get_chopperboss_data("shot_count_long");
-      self setturrettargetent(var_0);
+      self setturrettargetEnt(var_0);
     } else
-      self setturrettargetent(var_0, var_0 getEye() - var_0.origin);
+      self setturrettargetEnt(var_0, var_0 getEye() - var_0.origin);
   } else
-    self setturrettargetent(var_0, (0, 0, 32));
+    self setturrettargetEnt(var_0, (0, 0, 32));
 
   wait(get_chopperboss_data("windup_time"));
   var_2 = 0;

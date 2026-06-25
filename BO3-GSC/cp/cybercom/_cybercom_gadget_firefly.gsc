@@ -87,7 +87,7 @@ function ai_activatefireflyswarm(target, var_9bc2efcb = 1, upgraded = 1) {
   if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
-    self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
+    self animScripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self playSound("gdt_firefly_activate_npc");
     self waittillmatch("ai_cybercom_anim");
   }
@@ -195,7 +195,7 @@ function spawn_firefly_swarm(upgraded, targetent, swarms = getdvarint("scr_firef
     angles = self.angles;
   }
   while(swarms) {
-    swarm = spawnvehicle("spawner_bo3_cybercom_firefly", origin, angles, "firefly_swarm");
+    swarm = spawnVehicle("spawner_bo3_cybercom_firefly", origin, angles, "firefly_swarm");
     swarms--;
     if(isDefined(swarm)) {
       if(sessionmodeiscampaignzombiesgame()) {
@@ -590,7 +590,7 @@ function private _firebombtarget(swarm, reactionanims, weapon) {
     var_c318824b = 1;
   }
   if(!(isDefined(var_c318824b) && var_c318824b) && isDefined(reactionanims["intro"])) {
-    self animscripted("swarm_intro_anim", self.origin, self.angles, reactionanims["intro"]);
+    self animScripted("swarm_intro_anim", self.origin, self.angles, reactionanims["intro"]);
     self waittillmatch("swarm_intro_anim");
   }
   self clientfield::set("arch_actor_fire_fx", 1);
@@ -673,7 +673,7 @@ function private _reacttoswarm(swarm, reactionanims, weapon) {
     return;
   }
   if(isDefined(reactionanims["intro"])) {
-    self animscripted("swarm_intro_anim", self.origin, self.angles, reactionanims["intro"]);
+    self animScripted("swarm_intro_anim", self.origin, self.angles, reactionanims["intro"]);
     self thread cybercom::stopanimscriptedonnotify("damage", "swarm_intro_anim");
     self waittillmatch("swarm_intro_anim");
   }
@@ -691,7 +691,7 @@ function private _reacttoswarm(swarm, reactionanims, weapon) {
     self.swarm = undefined;
     self orientmode("face default");
     if(isDefined(reactionanims["outro"])) {
-      self animscripted("swarm_outro_anim", self.origin, self.angles, reactionanims["outro"]);
+      self animScripted("swarm_outro_anim", self.origin, self.angles, reactionanims["outro"]);
       self thread cybercom::stopanimscriptedonnotify("damage", "swarm_outro_anim");
       self waittillmatch("swarm_outro_anim");
     }

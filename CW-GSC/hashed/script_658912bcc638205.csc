@@ -915,7 +915,7 @@ function function_a2188d1a(snd, loc) {
     level waittill(#"bunker_door_used");
 
     if(isDefined(snd)) {
-      snd linkto(player);
+      snd linkTo(player);
     }
 
     waitframe(10);
@@ -924,7 +924,7 @@ function function_a2188d1a(snd, loc) {
       snd unlink();
     }
 
-    snd moveto(loc, 0.5);
+    snd moveTo(loc, 0.5);
   }
 }
 
@@ -992,7 +992,7 @@ function function_500b7ed1(vol, pitch) {
   players = snd::function_da785aa8();
   player = players[0];
   var_16f8cca9 = player getlocalclientnumber();
-  player playrumbleonentity(var_16f8cca9, "heartbeat_low");
+  player playRumbleOnEntity(var_16f8cca9, "heartbeat_low");
 }
 
 function function_3a0734a4(heartbeat) {

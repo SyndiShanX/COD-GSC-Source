@@ -57,6 +57,6 @@ function fullscreen_fx(localclientnum) {
   parent = self getparententity();
 
   if(isDefined(parent) && parent function_21c0fa55()) {
-    parent playrumbleonentity(localclientnum, "buzz_high");
+    parent playRumbleOnEntity(localclientnum, "buzz_high");
   }
 }

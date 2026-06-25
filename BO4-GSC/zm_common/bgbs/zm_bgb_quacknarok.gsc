@@ -39,7 +39,7 @@ on_ai_spawned() {
   if(self.archetype === #"zombie") {
     var_85574d7a = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player bgb::is_enabled(#"zm_bgb_quacknarok")) {
         var_85574d7a = 1;
       }

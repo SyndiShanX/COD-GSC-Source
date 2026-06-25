@@ -35,7 +35,7 @@ function init_transformers() {
   level flag::wait_till("zones_initialized");
   var_38d937f = getEntArray("use_elec_switch", "targetname");
   foreach(var_b46b59df in var_38d937f) {
-    var_677edb82 = getent(var_b46b59df.target, "targetname");
+    var_677edb82 = getEnt(var_b46b59df.target, "targetname");
     var_677edb82 thread transformer_think(var_b46b59df);
     wait(0.05);
   }

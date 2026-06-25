@@ -187,8 +187,8 @@ shouldplanarrivalintocover(behaviortreeentity) {
         return true;
       } else if(behaviortreeentity.ai.replannedcoverarrival === 0 && isDefined(behaviortreeentity.exitpos) && isDefined(behaviortreeentity.predictedexitpos)) {
         behaviortreeentity.ai.replannedcoverarrival = 1;
-        exitdir = vectornormalize(behaviortreeentity.predictedexitpos - behaviortreeentity.exitpos);
-        currentdir = vectornormalize(behaviortreeentity.origin - behaviortreeentity.exitpos);
+        exitdir = vectorNormalize(behaviortreeentity.predictedexitpos - behaviortreeentity.exitpos);
+        currentdir = vectorNormalize(behaviortreeentity.origin - behaviortreeentity.exitpos);
 
         if(vectordot(exitdir, currentdir) < cos(30)) {
           behaviortreeentity.predictedarrivaldirectionvalid = 0;

@@ -30,7 +30,7 @@ main() {
 
 blackhawk_hides_away() {
   var_0 = maps\oilrocks_apache_code::get_blackhawk_ally();
-  var_1 = common_scripts\utility::getstruct("blackhawk_ally_finale", "targetname");
+  var_1 = common_scripts\utility::getStruct("blackhawk_ally_finale", "targetname");
   var_0 thread maps\_vehicle::vehicle_paths(var_1);
 }
 
@@ -87,7 +87,7 @@ apache_chopper_hind_spawn(var_0) {
 }
 
 hind_warp_ship() {
-  var_0 = vectornormalize(common_scripts\utility::flat_origin(self.origin) - common_scripts\utility::flat_origin(level.player getEye()));
+  var_0 = vectorNormalize(common_scripts\utility::flat_origin(self.origin) - common_scripts\utility::flat_origin(level.player getEye()));
   var_0 = var_0 * 50000;
   self hide();
   self.mgturret[0] hide();
@@ -97,16 +97,16 @@ hind_warp_ship() {
   var_1.origin = self.origin + var_0;
   var_2 = 2.5;
   wait 0.1;
-  var_1 lerpy_moveto(self, "tag_origin", var_2);
+  var_1 lerpy_moveTo(self, "tag_origin", var_2);
   self show();
   self.mgturret[0] show();
   var_1 delete();
 }
 
-lerpy_moveto(var_0, var_1, var_2) {
+lerpy_moveTo(var_0, var_1, var_2) {
   for(var_3 = var_2; var_3 > 0; var_3 = var_3 - 0.05) {
-    self moveto(var_0 gettagorigin(var_1), var_3, 0, 0);
-    self rotateto(var_0 gettagangles(var_1), var_3, 0, 0);
+    self moveTo(var_0 gettagorigin(var_1), var_3, 0, 0);
+    self rotateTo(var_0 gettagangles(var_1), var_3, 0, 0);
     wait 0.05;
   }
 }

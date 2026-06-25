@@ -252,7 +252,7 @@ function function_19e12558(var_3af54106, origin, angles, var_563080be = undefine
     var_a8539bf6.mdl_gameobject gameobjects::set_use_hint_text(var_3af54106.var_656cbe2d);
   }
 
-  var_a8539bf6.mdl_gameobject.trigger usetriggerrequirelookat();
+  var_a8539bf6.mdl_gameobject.trigger useTriggerRequireLookAt();
 
   if(isDefined(var_563080be)) {
     var_a8539bf6.mdl_gameobject.b_reusable = 0;
@@ -842,7 +842,7 @@ function turret_activate(var_3af54106, owner, team, vehicle, origin, angles, par
       vehicle vehicle_ai::set_state("unaware");
     }
   } else {
-    vehicle = spawnvehicle(var_3af54106.m_vehicle, origin, angles, "dynamic_spawn_ai");
+    vehicle = spawnVehicle(var_3af54106.m_vehicle, origin, angles, "dynamic_spawn_ai");
 
     if(isDefined(owner)) {
       ownerteam = owner.team;
@@ -903,7 +903,7 @@ function function_69efb3b0(placeable) {
       placeable.vehicle vehicle_ai::set_state("off");
     }
 
-    placeable.vehicle linkto(placeable);
+    placeable.vehicle linkTo(placeable);
     target_remove(placeable.vehicle);
 
     if(is_true(placeable.vehicle.has_bad_place)) {
@@ -953,7 +953,7 @@ function vehicle_activate(var_3af54106, owner, team, vehicle, origin, angles, pa
     vehicle.origin = origin;
     vehicle.angles = angles;
   } else {
-    vehicle = spawnvehicle(var_3af54106.m_vehicle, origin, angles, "dynamic_spawn_ai");
+    vehicle = spawnVehicle(var_3af54106.m_vehicle, origin, angles, "dynamic_spawn_ai");
 
     if(isDefined(owner)) {
       ownerteam = owner.team;
@@ -1035,7 +1035,7 @@ function clean_traps(all, skipto = undefined, flag = undefined) {
   }
 
   if(isDefined(skipto)) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(isDefined(player._traps_deployable)) {

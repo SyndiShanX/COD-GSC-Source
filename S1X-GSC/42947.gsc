@@ -636,7 +636,7 @@ createthreaticon(var_0, var_1) {
   var_0.waypoint[var_2].y = var_0.origin[1];
   var_0.waypoint[var_2].z = var_0.origin[2];
   var_0.waypoint[var_2] setwaypoint(1, 1, 1);
-  var_0.waypoint[var_2] settargetent(var_0);
+  var_0.waypoint[var_2] settargetEnt(var_0);
   var_0.waypoint[var_2].showinkillcam = 0;
   var_0.waypoint[var_2].archived = 0;
   level thread removethreaticon(self, var_0, var_0.waypoint[var_2]);

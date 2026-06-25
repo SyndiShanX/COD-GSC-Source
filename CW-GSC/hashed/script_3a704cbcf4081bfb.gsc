@@ -368,7 +368,7 @@ function spawn_prop(spawn_loc, var_75f9ae2d, var_18840a20, var_1690a7c1 = 0) {
   model.var_c39008ae = var_4d71cea4.var_c39008ae;
 
   if(is_true(model.var_99ae5a60)) {
-    model disconnectpaths();
+    model disconnectPaths();
   } else {
     model notsolid();
     model.var_c9826077 = spawn("script_model", model getcentroid());
@@ -573,7 +573,7 @@ function function_55657fb4(mimic, trap_prop, &prop_array, var_d56229a9) {
 
 function function_708fe162() {
   prop_height = (0, 0, 64);
-  players = arraysortclosest(getplayers(undefined, self.origin, 400), self.origin);
+  players = arraysortclosest(getPlayers(undefined, self.origin, 400), self.origin);
 
   if(players.size) {
     foreach(player in players) {
@@ -656,7 +656,7 @@ function trap_thread(&prop_array, condition_func) {
       activators = [activator];
 
       if(waitresult._notify === #"hash_7fd40fb3202e52db") {
-        activators = getplayers();
+        activators = getPlayers();
       }
 
       if(isDefined(self.health) && self.health > 0) {
@@ -701,7 +701,7 @@ function function_14bad487(trap_prop, total_time, iteration_time, angle) {
   self clientfield::increment("mimic_prop_rattle_cf");
 
   if(isDefined(self.rattle_sound)) {
-    playsoundatposition(self.rattle_sound, self.origin);
+    playSoundAtPosition(self.rattle_sound, self.origin);
   }
 
   for(i = 0; i < iterations; i++) {
@@ -719,7 +719,7 @@ function function_8be6cc92() {
   self endon("3b6d68b63c3dc423");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isalive(player)) {
         continue;
       }

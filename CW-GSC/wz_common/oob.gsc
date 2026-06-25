@@ -32,7 +32,7 @@ function private function_2a3d483d(start) {
   jumpdistance = 600;
   tomapcenter = mapcenter - start;
   var_d80c8cde = length(tomapcenter);
-  var_fa57b4b3 = vectornormalize(tomapcenter);
+  var_fa57b4b3 = vectorNormalize(tomapcenter);
   steps = int(var_d80c8cde / jumpdistance);
 
   for(index = 1; index <= steps; index++) {
@@ -67,7 +67,7 @@ function private _teleport_player(origin, angles, var_9914886a) {
   wait fadetime;
   self.var_63b63c2 = 1;
   self unlink();
-  self setorigin(angles);
+  self setOrigin(angles);
   self setplayerangles((0, var_9914886a[1], 0));
   self.oobdisabled = 0;
   self.var_63b63c2 = 0;

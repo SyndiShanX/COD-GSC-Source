@@ -128,13 +128,13 @@ function_43084f6c(player) {
   if(level.teambased) {
     otherteam = util::getotherteam(player.team);
 
-    foreach(var_f53fe24c in getplayers(otherteam)) {
+    foreach(var_f53fe24c in getPlayers(otherteam)) {
       if(var_f53fe24c function_d210981e(player.origin)) {
         return true;
       }
     }
   } else {
-    enemies = getplayers();
+    enemies = getPlayers();
     playereye = player geteyeapprox();
 
     foreach(enemy in enemies) {
@@ -197,13 +197,13 @@ function_eddea888(player) {
   if(level.teambased) {
     otherteam = util::getotherteam(player.team);
 
-    foreach(attacking_player in getplayers(otherteam)) {
+    foreach(attacking_player in getPlayers(otherteam)) {
       if(function_9f942458(player, attacking_player)) {
         return true;
       }
     }
   } else {
-    enemies = getplayers();
+    enemies = getPlayers();
 
     foreach(enemy in enemies) {
       if(enemy == player) {
@@ -231,7 +231,7 @@ function_ce33e204(player) {
       return true;
     }
   } else {
-    enemies = getplayers();
+    enemies = getPlayers();
 
     foreach(enemy in enemies) {
       if(enemy == player) {
@@ -263,7 +263,7 @@ function_5af0c53c(player) {
       return true;
     }
   } else {
-    enemies = getplayers();
+    enemies = getPlayers();
 
     foreach(enemy in enemies) {
       if(enemy == player) {

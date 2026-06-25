@@ -52,7 +52,7 @@ function finalize() {
 
 function function_4c6228cd() {
   usetrigger = spawn("trigger_radius_use", self.origin, 0, 96, 32);
-  usetrigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  usetrigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   usetrigger function_dae4ab9b(0);
   useobject = gameobjects::create_use_object(#"any", usetrigger, [], undefined, #"weapon_cache", 1, 1, 1, self.angles);
   useobject gameobjects::set_visible(#"group_all");
@@ -63,7 +63,7 @@ function function_4c6228cd() {
   useobject.dontlinkplayertotrigger = 1;
   useobject.keepweapon = 1;
   useobject clientfield::set("register_weapon_cache", 1);
-  useobject disconnectpaths();
+  useobject disconnectPaths();
   self.entity = util::spawn_model(#"p9_usa_large_ammo_crate_01", self.origin, self.angles);
   self.mdl_gameobject = useobject;
   useobject.var_73b9e48e = self;

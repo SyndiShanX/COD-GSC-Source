@@ -103,7 +103,7 @@ function watch_player_looking() {
     foreach(mannequin in mannequins) {
       mannequin.can_player_see_me = 1;
     }
-    players = getplayers();
+    players = getPlayers();
     unseenmannequins = mannequins;
     foreach(player in players) {
       unseenmannequins = player cantseeentities(unseenmannequins, 0.67, 0);

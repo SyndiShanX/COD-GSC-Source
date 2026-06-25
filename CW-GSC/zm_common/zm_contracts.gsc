@@ -72,7 +72,7 @@ function function_8968a076(einflictor, eattacker, idamage, idflags, smeansofdeat
 
 function function_74872db6() {
   if(level.round_number == 20) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(!is_true(e_player.var_bd1368a8)) {
         e_player increment_zm_contract(#"contract_zm_no_pap", 1, #"zstandard");
       }
@@ -82,7 +82,7 @@ function function_74872db6() {
   }
 
   if(level.round_number == 30) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       e_player increment_zm_contract(#"contract_zm_rounds", 1, #"zstandard");
     }
 
@@ -121,7 +121,7 @@ function on_round_end() {
       break;
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(isDefined(var_c5440c34)) {
       e_player increment_zm_contract(var_c5440c34, 1, #"zstandard");
     }
@@ -243,7 +243,7 @@ function private function_df42ef94() {
 }
 
 function private function_feafa020() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     for(slot = 0; slot < 3; slot++) {
       var_b973083d = player registerpower_grid_displaycontrolrobotmelee(slot);
       n_progress = isDefined(player.pers[#"contracts"][var_b973083d.var_38280f2f].current_value) ? player.pers[#"contracts"][var_b973083d.var_38280f2f].current_value : player.pers[#"contracts"][var_b973083d.var_38280f2f].var_59cb904f;

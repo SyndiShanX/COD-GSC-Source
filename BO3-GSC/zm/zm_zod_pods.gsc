@@ -208,7 +208,7 @@ function private pod_sprayer_think() {
       e_who thread zm_zod_util::show_infotext_for_duration("ZM_ZOD_UI_POD_SPRAYER_PICKUP", 3.5);
       e_who.var_abe77dc0 = 1;
       self.model delete();
-      playsoundatposition("zmb_zod_sprayer_pickup", self.origin);
+      playSoundAtPosition("zmb_zod_sprayer_pickup", self.origin);
       zm_unitrigger::unregister_unitrigger(self.trigger);
       self.trigger = undefined;
       level flag::set("any_player_has_pod_sprayer");
@@ -232,7 +232,7 @@ function private fungus_pod_think() {
     }
     if(isDefined(level.bzm_worldpaused) && level.bzm_worldpaused) {}
     if(e_who clientfield::get_to_player("pod_sprayer_held") == 0) {}
-    playsoundatposition("zmb_zod_sprayer_use", self.origin);
+    playSoundAtPosition("zmb_zod_sprayer_use", self.origin);
     e_who thread function_8d53a342(1);
     self harvest_fungus_pod(e_who);
     return;
@@ -400,7 +400,7 @@ function harvest_fungus_pod(e_harvester) {
         case "craftable": {
           s_reward.do_not_consider = 1;
           normalize_reward_chances();
-          playsoundatposition("evt_zod_pod_open_craftable", self.origin);
+          playSoundAtPosition("evt_zod_pod_open_craftable", self.origin);
           drop_point = self.origin + vectorscale((0, 0, 1), 36);
           zm_zod_idgun_quest::special_craftable_spawn(drop_point, "part_skeleton");
           if(level flag::get("part_skeleton" + "_found")) {
@@ -419,7 +419,7 @@ function harvest_fungus_pod(e_harvester) {
           grenade = getweapon("frag_grenade");
           n_rand = randomintrange(0, 4);
           e_harvester magicgrenadetype(grenade, v_spawnpt, vectorscale((0, 0, 1), 300), 3);
-          playsoundatposition("evt_zod_pod_open_grenade", self.origin);
+          playSoundAtPosition("evt_zod_pod_open_grenade", self.origin);
           if(n_rand) {
             wait(0.3);
             if(math::cointoss()) {
@@ -455,7 +455,7 @@ function harvest_fungus_pod(e_harvester) {
           break;
         }
         case "weapon": {
-          playsoundatposition("evt_zod_pod_open_weapon", self.origin);
+          playSoundAtPosition("evt_zod_pod_open_weapon", self.origin);
           self thread dig_up_weapon(e_harvester, s_reward.item);
           break;
         }
@@ -561,7 +561,7 @@ function spawn_fungus_pods(n_pods) {
       }
     }
     b_skip_pod = 0;
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       if(distance(player.origin, e_pod.origin) < 200) {
         b_skip_pod = 1;
@@ -616,17 +616,17 @@ function function_e1065706() {
 
 function weapon_trigger_update_prompt(player) {
   if(!zm_utility::is_player_valid(player) || player.is_drinking > 0 || !player zm_magicbox::can_buy_weapon() || player bgb::is_enabled("zm_bgb_disorderly_combat")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self setcursorhint("HINT_WEAPON", self.stub.wpn);
-  self sethintstring(&"ZOMBIE_TRADE_WEAPON_FILL");
+  self setCursorHint("HINT_WEAPON", self.stub.wpn);
+  self setHintString(&"ZOMBIE_TRADE_WEAPON_FILL");
   return true;
 }
 
 function function_b0138b1(w_weapon) {
   var_272e7943 = zm_weapons::get_base_weapon(w_weapon);
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!isDefined(player) || !isalive(player)) {
       continue;

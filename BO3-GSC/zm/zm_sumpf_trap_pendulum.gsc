@@ -20,21 +20,21 @@
 function initpendulumtrap() {
   penbuytrigger = getEntArray("pendulum_buy_trigger", "targetname");
   for(i = 0; i < penbuytrigger.size; i++) {
-    penbuytrigger[i].lever = getent(penbuytrigger[i].target, "targetname");
-    penbuytrigger[i].pendamagetrig = getent(penbuytrigger[i].lever.target, "targetname");
-    penbuytrigger[i].pen = getent(penbuytrigger[i].pendamagetrig.target, "targetname");
-    penbuytrigger[i].pulley = getent(penbuytrigger[i].pen.target, "targetname");
+    penbuytrigger[i].lever = getEnt(penbuytrigger[i].target, "targetname");
+    penbuytrigger[i].pendamagetrig = getEnt(penbuytrigger[i].lever.target, "targetname");
+    penbuytrigger[i].pen = getEnt(penbuytrigger[i].pendamagetrig.target, "targetname");
+    penbuytrigger[i].pulley = getEnt(penbuytrigger[i].pen.target, "targetname");
     penbuytrigger[i]._trap_type = "flogger";
   }
-  penbuytrigger[0].pendamagetrig enablelinkto();
-  penbuytrigger[0].pendamagetrig linkto(penbuytrigger[0].pen);
+  penbuytrigger[0].pendamagetrig enablelinkTo();
+  penbuytrigger[0].pendamagetrig linkTo(penbuytrigger[0].pen);
   level thread zm_sumpf::turnlightgreen("pendulum_light");
   level.var_99432870 = 0;
 }
 
 function moveleverdown() {
-  soundent_left = getent("switch_left", "targetname");
-  soundent_right = getent("switch_right", "targetname");
+  soundent_left = getEnt("switch_left", "targetname");
+  soundent_right = getEnt("switch_right", "targetname");
   self.lever rotatepitch(180, 0.5);
   soundent_left playSound("zmb_switch_on");
   soundent_right playSound("zmb_switch_on");
@@ -43,8 +43,8 @@ function moveleverdown() {
 }
 
 function moveleverup() {
-  soundent_left = getent("switch_left", "targetname");
-  soundent_right = getent("switch_right", "targetname");
+  soundent_left = getEnt("switch_left", "targetname");
+  soundent_right = getEnt("switch_right", "targetname");
   self.lever rotatepitch(-180, 0.5);
   soundent_left playSound("zmb_switch_off");
   soundent_right playSound("zmb_switch_off");
@@ -57,21 +57,21 @@ function hint_string(string) {
     self.is_available = 1;
     self.zombie_cost = 750;
     self.in_use = 0;
-    self sethintstring(string, self.zombie_cost);
+    self setHintString(string, self.zombie_cost);
   } else {
-    self sethintstring(string);
+    self setHintString(string);
   }
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 }
 
 function penthink() {
-  self sethintstring("");
-  pa_system = getent("speaker_by_log", "targetname");
+  self setHintString("");
+  pa_system = getEnt("speaker_by_log", "targetname");
   wait(0.5);
   self.is_available = 1;
   self.zombie_cost = 750;
-  self sethintstring(&"ZOMBIE_BUTTON_BUY_TRAP", self.zombie_cost);
-  self setcursorhint("HINT_NOICON");
+  self setHintString(&"ZOMBIE_BUTTON_BUY_TRAP", self.zombie_cost);
+  self setCursorHint("HINT_NOICON");
   triggers = getEntArray("pendulum_buy_trigger", "targetname");
   array::thread_all(triggers, &hint_string, &"ZOMBIE_BUTTON_BUY_TRAP");
   while(true) {
@@ -91,10 +91,10 @@ function penthink() {
           who zm_score::minus_to_player_score(self.zombie_cost);
           self thread moveleverdown();
           self waittill("leverdown");
-          motor_left = getent("engine_loop_left", "targetname");
-          motor_right = getent("engine_loop_right", "targetname");
-          playsoundatposition("zmb_motor_start_left", motor_left.origin);
-          playsoundatposition("zmb_motor_start_right", motor_right.origin);
+          motor_left = getEnt("engine_loop_left", "targetname");
+          motor_right = getEnt("engine_loop_right", "targetname");
+          playSoundAtPosition("zmb_motor_start_left", motor_left.origin);
+          playSoundAtPosition("zmb_motor_start_right", motor_right.origin);
           wait(0.5);
           self thread activatepen(motor_left, motor_right, who);
           self waittill("pendown");
@@ -148,8 +148,8 @@ function activatepen(motor_left, motor_right, who) {
 
 function blade_sounds() {
   self endon("rotatedone");
-  blade_left = getent("blade_left", "targetname");
-  blade_right = getent("blade_right", "targetname");
+  blade_left = getEnt("blade_left", "targetname");
+  blade_right = getEnt("blade_right", "targetname");
   lastangle = self.angles[0];
   for(;;) {
     wooshangle = 90;
@@ -210,7 +210,7 @@ function customtimer() {
 function playerpendamage() {
   self endon("death");
   self endon("disconnect");
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     self dodamage(80, self.origin + vectorscale((0, 0, 1), 20));
     self setstance("crouch");

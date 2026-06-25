@@ -96,7 +96,7 @@ createstingerstate(state, alias, prewait, interrupt) {
 sndboardmonitor() {
   while(true) {
     level waittill("last_board_torn", barrier_origin);
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(distancesquared(player.origin, barrier_origin) <= 22500) {
@@ -184,7 +184,7 @@ sndlocationshouldplay(array, activezone) {
   }
 
   playersinlocal = 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone)) {
@@ -226,7 +226,7 @@ sndlocationbetweenrounds() {
     if(isDefined(level.sndlastzone) && zone == level.sndlastzone) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(is_true(player.afterlife)) {
@@ -492,7 +492,7 @@ snddoormusic() {
   }
 
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     ent notify("sndDoorMusic_Triggered");
   }
 
@@ -500,7 +500,7 @@ snddoormusic() {
 }
 
 sndmaelstrom() {
-  trig = getent("sndMaelstrom", "targetname");
+  trig = getEnt("sndMaelstrom", "targetname");
 
   if(!isDefined(trig)) {
     return;

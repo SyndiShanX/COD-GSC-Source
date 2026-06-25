@@ -162,7 +162,7 @@ function function_e71942eb() {
   level endon(#"end_game");
   waittillframeend();
   level flag::wait_till("all_players_spawned");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread function_6f65e552();
@@ -202,7 +202,7 @@ function function_a05df3a7() {
     tree.angles = location.angles;
     tree setModel("p9_zm_silver_foliage_tree_christmas_full");
     tree solid();
-    tree disconnectpaths();
+    tree disconnectPaths();
   }
 }
 
@@ -225,8 +225,8 @@ function function_bf79a643() {
         }
 
         var_e779ff3c = 0;
-        players_in_range = getplayers(undefined, zone.var_45d884e6[index].origin, 910);
-        players = getplayers();
+        players_in_range = getPlayers(undefined, zone.var_45d884e6[index].origin, 910);
+        players = getPlayers();
 
         foreach(player in players) {
           if(player util::is_looking_at(zone.var_45d884e6[index], 0.8, 1, (0, 0, 16))) {
@@ -262,8 +262,8 @@ function function_bf79a643() {
         }
 
         var_e779ff3c = 0;
-        players_in_range = getplayers(undefined, zone.var_6284d1b2[index].origin, 910);
-        players = getplayers();
+        players_in_range = getPlayers(undefined, zone.var_6284d1b2[index].origin, 910);
+        players = getPlayers();
 
         foreach(player in players) {
           if(player util::is_looking_at(zone.var_6284d1b2[index], 0.8, 1, (0, 0, 32))) {
@@ -291,7 +291,7 @@ function function_128f3b6b() {
 
 function private function_dd028fcb(e_player) {
   var_d49d10b0 = e_player zm_loadout::get_player_lethal_grenade();
-  self sethintstring(#"hash_302511d2e9a9429b");
+  self setHintString(#"hash_302511d2e9a9429b");
   return true;
 }
 
@@ -466,7 +466,7 @@ function function_4d68903d(zone) {
   snowman.spawn_time = gettime();
   snowman.var_5d6eb0f1 = 1;
   snowman.rattle_sound = #"hash_52c65a6a82b13cfd";
-  snowman disconnectpaths();
+  snowman disconnectPaths();
   snowman solid();
   snowman setCanDamage(1);
   self.var_38409c6 = "snowman";
@@ -563,7 +563,7 @@ function function_a9114898(origin, angles) {
   fwd = anglesToForward(angles);
   up = anglestoup(angles);
   playFX("maps/ltm/fx9_winter_snowman_dest", origin, fwd, up);
-  playsoundatposition(#"hash_a00a48925a72e55", origin + (0, 0, 30));
+  playSoundAtPosition(#"hash_a00a48925a72e55", origin + (0, 0, 30));
 }
 
 function function_dc8f034(snowman) {

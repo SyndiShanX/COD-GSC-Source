@@ -148,6 +148,6 @@ function private function_d5fc8564(s_info) {
 function private function_990bc6e() {
   self playgestureviewmodel(#"ges_drophand");
   wait 0.3;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   snd::play("fly_grenade_ammo_crate_pickup");
 }

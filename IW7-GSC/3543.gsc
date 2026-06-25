@@ -74,11 +74,11 @@ func_284F() {
   var_1 = undefined;
   var_2 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 64));
   var_3 = spawn("script_model", var_2.origin);
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   scripts\engine\utility::waitframe();
   var_4 = func_68D8(var_2);
   playFXOnTag(level.var_2850["shot"], var_2, "tag_origin");
-  var_2 moveto(var_4["position"], var_0);
+  var_2 moveTo(var_4["position"], var_0);
   wait(var_0);
   if(isDefined(var_4["entity"]) && isPlayer(var_4["entity"]) && !isDefined(var_4["entity"].var_8BD3) && var_4["entity"].team == self.team) {
     var_5 = self worldpointinreticle_circle(var_4["entity"] gettagorigin("tag_eye"), 65, 25);

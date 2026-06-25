@@ -55,7 +55,7 @@ function function_1d5c7052(a_ents) {
   do {
     util::wait_network_frame();
   }
-  while(!e_wormhole isplayinganimscripted());
+  while(!e_wormhole isplayinganimScripted());
 
   e_wormhole clientfield::set("" + #"hash_7948e032082fdac", 1);
 }
@@ -114,7 +114,7 @@ function function_a78584c0(var_6c365dbf, var_7ccf65c7, var_1f8fbe0b = 0) {
 function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
   util::wait_network_frame();
   self dontinterpolate();
-  self setorigin(s_teleport_room.origin);
+  self setOrigin(s_teleport_room.origin);
   self setplayerangles(s_teleport_room.angles);
   self childthread function_e4af83af(s_teleport_room);
   waittillframeend();
@@ -126,7 +126,7 @@ function private function_e4af83af(s_teleport_room) {
   util::wait_network_frame();
   self.var_805b8325 = spawn("script_origin", s_teleport_room.origin);
   self.var_805b8325.angles = s_teleport_room.angles;
-  self linkto(self.var_805b8325);
+  self linkTo(self.var_805b8325);
 }
 
 function function_82c1415f(var_291fc0f7, var_1f8fbe0b = 0) {
@@ -157,7 +157,7 @@ function function_82c1415f(var_291fc0f7, var_1f8fbe0b = 0) {
 
 function function_d4fbc062(var_6a4c362c, var_7ccf65c7) {
   n_index = function_4fb1c2d2(var_7ccf65c7);
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(self function_60d91d03(var_6a4c362c[n_index], a_e_players)) {
     return var_6a4c362c[n_index];
@@ -224,9 +224,9 @@ function function_32bd90e0(var_7c48c7c3) {
 }
 
 function function_4e050b78(str_volume) {
-  e_volume = getent(str_volume, "targetname");
+  e_volume = getEnt(str_volume, "targetname");
   var_6a4c362c = struct::get_array(str_volume + level.var_7c48c7c3, "script_noteworthy");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   var_bfeb630c = [];
 
   foreach(e_player in a_e_players) {
@@ -295,7 +295,7 @@ function function_3ec6cff6(var_bfeb630c, var_ab8445e, var_879ad2b9) {
 
     foreach(var_f0bbde5 in var_ab8445e) {
       var_342fe9d7 = undefined;
-      var_e52d5d9c = vectornormalize(var_f0bbde5.origin - e_enemy.origin);
+      var_e52d5d9c = vectorNormalize(var_f0bbde5.origin - e_enemy.origin);
       n_dot = vectordot(var_f27c0c46, var_e52d5d9c);
 
       if(n_dot > 0.16) {
@@ -345,7 +345,7 @@ function function_26eb27e2(e_enemy, var_f0bbde5) {
 
 function function_2aed1d83(var_f0bbde5, var_b3733073 = 1) {
   self dontinterpolate();
-  self setorigin(var_f0bbde5.origin);
+  self setOrigin(var_f0bbde5.origin);
   self setvelocity((0, 0, 0));
 
   if(var_b3733073 && !isDefined(var_f0bbde5.angles)) {
@@ -402,7 +402,7 @@ function function_f86439bc() {
   do {
     util::wait_network_frame();
     var_e9a9a32a = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(e_player in players) {
       if(!isDefined(e_player)) {
@@ -579,7 +579,7 @@ function function_a6dcc63f(s_door) {
 
   t_door = spawn("trigger_radius", s_door.door_interact.origin + (0, 0, s_door.door_interact.z_offset), 0, s_door.door_interact.radius, s_door.door_interact.height);
   t_door.s_door = s_door;
-  t_door triggerignoreteam();
+  t_door triggerIgnoreTeam();
   t_door setvisibletoall();
   t_door setteamfortrigger(#"none");
   t_door callback::on_trigger(&function_e1544483);
@@ -725,6 +725,6 @@ function function_8d419972(b_play_once) {
     }
   }
 
-  player setorigin(var_78e5d9d1);
+  player setOrigin(var_78e5d9d1);
   player setplayerangles(v_start_angles);
 }

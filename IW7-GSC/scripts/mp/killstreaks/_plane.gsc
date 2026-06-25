@@ -84,7 +84,7 @@ planespawn(var_0, var_1, var_2, var_3, var_4) {
 
 planemove(var_0, var_1, var_2, var_3) {
   var_4 = level.planeconfigs[var_3];
-  self moveto(var_0, var_1, 0, 0);
+  self moveTo(var_0, var_1, 0, 0);
   if(isDefined(var_4.onattackdelegate)) {
     self thread[[var_4.onattackdelegate]](var_0, var_1, var_2, self.owner, var_3);
   }
@@ -182,7 +182,7 @@ playplanefx() {
 }
 
 func_806A() {
-  var_0 = getent("airstrikeheight", "targetname");
+  var_0 = getEnt("airstrikeheight", "targetname");
   if(isDefined(var_0)) {
     return var_0.origin[2];
   }
@@ -198,7 +198,7 @@ func_806A() {
 func_8069(var_0) {
   var_1 = spawnStruct();
   var_1.height = func_806A();
-  var_2 = getent("airstrikeheight", "targetname");
+  var_2 = getEnt("airstrikeheight", "targetname");
   if(isDefined(var_2) && isDefined(var_2.script_noteworthy) && var_2.script_noteworthy == "fixedposition") {
     var_1.targetpos = var_2.origin;
     var_1.var_6F25 = anglesToForward(var_2.angles);
@@ -311,7 +311,7 @@ createkillcam(var_0) {
     var_3 = spawn("script_model", self.origin + (0, 0, 100) - var_2 * 200);
     var_3.starttime = gettime();
     var_3 setscriptmoverkillcam("airstrike");
-    var_3 linkto(self, "tag_origin", var_1.killcamoffset, (0, 0, 0));
+    var_3 linkTo(self, "tag_origin", var_1.killcamoffset, (0, 0, 0));
     self.killcament = var_3;
   }
 }

@@ -37,9 +37,9 @@ pentagon_packapunch_init() {
 }
 
 defcon_sign_setup() {
-  self setcursorhint("HINT_NOICON");
-  self usetriggerrequirelookat();
-  self sethintstring(#"zombie/need_power");
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setHintString(#"zombie/need_power");
   level waittill(#"hash_2124984d1ece329c");
   self.lights = getEntArray(self.target, "targetname");
 
@@ -56,14 +56,14 @@ defcon_sign_setup() {
 
   while(true) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_2c6e2897c388e68");
+      self setHintString(#"hash_2c6e2897c388e68");
     } else {
-      self sethintstring(#"hash_734fe766ffad1d04");
+      self setHintString(#"hash_734fe766ffad1d04");
     }
 
     waitresult = self waittill(#"trigger");
     user = waitresult.activator;
-    self sethintstring("");
+    self setHintString("");
 
     if(isDefined(self.lights)) {
       for(j = 0; j < self.lights.size; j++) {
@@ -247,9 +247,9 @@ special_pack_time_spawning() {
 
 defcon_pack_poi() {
   zone_name = "conference_level2";
-  players = getplayers();
-  poi1 = getent("pack_room_poi1", "targetname");
-  poi2 = getent("pack_room_poi2", "targetname");
+  players = getPlayers();
+  poi1 = getEnt("pack_room_poi1", "targetname");
+  poi2 = getEnt("pack_room_poi2", "targetname");
   wait 0.5;
   num_players = zm_zonemgr::get_players_in_zone(zone_name);
 
@@ -295,34 +295,34 @@ pentagon_ignore_spawner(spawner) {
 }
 
 pack_door_init() {
-  trigger = getent("pack_room_door", "targetname");
+  trigger = getEnt("pack_room_door", "targetname");
 
   if(util::get_game_type() === #"zstandard") {
     trigger hide();
   }
 
   doors = getEntArray(trigger.target, "targetname");
-  pack_door_slam = getent("slam_pack_door", "targetname");
+  pack_door_slam = getEnt("slam_pack_door", "targetname");
   var_ae0ee842 = 0;
 
   foreach(door in doors) {
-    door disconnectpaths();
+    door disconnectPaths();
   }
 
   while(true) {
-    trigger setcursorhint("HINT_NOICON");
-    trigger sethintstring(#"zm_office/pack_room_door");
+    trigger setCursorHint("HINT_NOICON");
+    trigger setHintString(#"zm_office/pack_room_door");
     level waittill(#"defcon_activated", #"player_in_pack");
-    players = getplayers();
-    trigger sethintstring("");
+    players = getPlayers();
+    trigger setHintString("");
 
     for(i = 0; i < doors.size; i++) {
       doors[i].start_angles = doors[i].angles;
 
       if(isDefined(doors[i].script_angles)) {
         doors[i] notsolid();
-        doors[i] rotateto(doors[i].script_angles, 1);
-        playsoundatposition("zmb_office_wood_door", doors[i].origin);
+        doors[i] rotateTo(doors[i].script_angles, 1);
+        playSoundAtPosition("zmb_office_wood_door", doors[i].origin);
         doors[i] thread pack_door_solid_thread();
       }
     }
@@ -339,8 +339,8 @@ pack_door_init() {
       for(i = 0; i < doors.size; i++) {
         if(isDefined(doors[i].script_angles)) {
           doors[i] notsolid();
-          doors[i] rotateto(doors[i].start_angles, 0.25);
-          playsoundatposition("zmb_office_wood_door_close", doors[i].origin);
+          doors[i] rotateTo(doors[i].start_angles, 0.25);
+          playSoundAtPosition("zmb_office_wood_door_close", doors[i].origin);
           doors[i] thread pack_door_solid_thread();
         }
       }
@@ -353,13 +353,13 @@ pack_door_init() {
 }
 
 pack_hideaway_init() {
-  hideaway = getent("pack_hideaway", "targetname");
+  hideaway = getEnt("pack_hideaway", "targetname");
   parts = getEntArray("pack_hideaway_part", "targetname");
-  pack_machine = getent("vending_packapunch", "targetname");
+  pack_machine = getEnt("vending_packapunch", "targetname");
 
   if(isDefined(parts)) {
     for(i = 0; i < parts.size; i++) {
-      parts[i] linkto(hideaway);
+      parts[i] linkTo(hideaway);
     }
   }
 
@@ -385,7 +385,7 @@ pack_hideaway_init() {
 }
 
 is_packroom_clear() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     if(e_player istouching(level.pack_door_slam)) {
@@ -405,7 +405,7 @@ pack_door_solid_thread() {
   self.door_moving = undefined;
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     player_touching = 0;
 
     for(i = 0; i < players.size; i++) {
@@ -423,7 +423,7 @@ pack_door_solid_thread() {
         return;
       }
 
-      self disconnectpaths();
+      self disconnectPaths();
       return;
     }
 

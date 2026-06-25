@@ -132,5 +132,5 @@ monitorfx(var_0) {
 
 dog_link() {
   wait 0.15;
-  self.syncedmeleetarget2 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedmeleetarget2 linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
 }

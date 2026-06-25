@@ -45,8 +45,8 @@ function init_clientfields() {
 }
 
 function function_f4db46d4(str_skipto) {
-  level thread scene::init_streamer(#"scene_hub_post_prisoner_brainwash_find_bell", getplayers());
-  cargo_plane = getent("cargo_plane", "targetname");
+  level thread scene::init_streamer(#"scene_hub_post_prisoner_brainwash_find_bell", getPlayers());
+  cargo_plane = getEnt("cargo_plane", "targetname");
 
   if(isDefined(cargo_plane)) {
     cargo_plane delete();

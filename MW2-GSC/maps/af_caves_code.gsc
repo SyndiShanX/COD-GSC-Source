@@ -24,9 +24,9 @@ teleport_to_origin(origin, angles) {
     self SetGoalPos(self.origin);
   } else {
     org = level.player spawn_tag_origin();
-    level.player PlayerLinkTo(org, "tag_origin", 1);
-    org MoveTo(origin, 0.05);
-    org RotateTo(angles, 0.05);
+    level.player PlayerlinkTo(org, "tag_origin", 1);
+    org moveTo(origin, 0.05);
+    org rotateTo(angles, 0.05);
     wait(0.1);
     level.player Unlink();
     org Delete();
@@ -515,7 +515,7 @@ af_caves_rappel_behavior() {
   level.player GiveWeapon(weapon);
   level.player SwitchToWeapon(weapon);
 
-  ent = GetEnt("rappel_animent", "targetname");
+  ent = getEnt("rappel_animent", "targetname");
 
   player_rig = spawn_anim_model("player_rig");
   player_rig Hide();
@@ -524,7 +524,7 @@ af_caves_rappel_behavior() {
   ending_player_rig Hide();
   ending_player_rig DontCastShadows();
 
-  node = GetEnt("guard_assassinate", "script_noteworthy");
+  node = getEnt("guard_assassinate", "script_noteworthy");
   node anim_first_frame_solo(ending_player_rig, "rappel_kill");
 
   player_rope = spawn_anim_model("rope");
@@ -537,7 +537,7 @@ af_caves_rappel_behavior() {
 
   level.player_rig = player_rig;
   tag_origin = spawn_tag_origin();
-  tag_origin LinkTo(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
 
   time = 0.5;
 
@@ -545,7 +545,7 @@ af_caves_rappel_behavior() {
   tag_origin_start.angles = level.player GetPlayerAngles();
   tag_origin_start.origin = level.player.origin;
 
-  level.player PlayerLinkTo(tag_origin_start);
+  level.player PlayerlinkTo(tag_origin_start);
   wait(0.05);
   level.player PlayerLinkToBlend(tag_origin, "tag_origin", time, 0.2, 0.2);
   delayThread(time, ::player_gets_groundref_and_opens_fov, tag_origin);
@@ -641,7 +641,7 @@ af_caves_rappel_behavior() {
   last_time_braked = 0;
   speaker = spawn("script_origin", (0, 0, 0));
   speaker.origin = level.player.origin;
-  speaker LinkTo(level.player);
+  speaker linkTo(level.player);
   death_fall_timer = undefined;
   speaker playSound("scn_afcaves_rappel_start_plr");
 
@@ -826,11 +826,11 @@ af_caves_rappel_behavior() {
     knife setModel("weapon_parabolic_knife");
     knife Hide();
     knife DontCastShadows();
-    knife LinkTo(ending_player_rig, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+    knife linkTo(ending_player_rig, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
     thread hint_fade();
 
-    node = GetEnt("guard_assassinate", "script_noteworthy");
+    node = getEnt("guard_assassinate", "script_noteworthy");
     Assert(isDefined(node));
 
     guard_1 = get_living_ai_array("rappel_guard_1", "script_noteworthy");
@@ -861,7 +861,7 @@ af_caves_rappel_behavior() {
     flag_clear("descending");
     ending_player_rig waittillmatch("single anim", "end");
 
-    ending_player_rig MoveTo(ending_player_rig.origin + (0, 0, 12), 0.4, .2, .2);
+    ending_player_rig moveTo(ending_player_rig.origin + (0, 0, 12), 0.4, .2, .2);
 
     if(old_weapon != level.secondaryweapon) {
       weaps = level.player GetWeaponsListAll();
@@ -897,7 +897,7 @@ af_caves_rappel_behavior() {
 }
 rappel_guard1_deathgurgle(guard1) {
   speaker = spawn("script_origin", guard1 getEye());
-  speaker LinkTo(guard1);
+  speaker linkTo(guard1);
 
   speaker playSound("scn_afcaves_rappel_kill_npc_dx", "sounddone");
   speaker waittill("sounddone");
@@ -987,13 +987,13 @@ yawclose = yawopen * -1;
 rotateTime = 0.25;
 
 door playSound("door_cargo_container_push_open");
-door RotateTo(door.angles + (0, yawopen, 0), rotateTime);
+door rotateTo(door.angles + (0, yawopen, 0), rotateTime);
 door waittill("rotatedone");
 
 flag_wait("steamroom_flash_out");
 wait(1);
 
-door RotateTo(door.angles + (0, yawclose, 0), rotateTime);
+door rotateTo(door.angles + (0, yawclose, 0), rotateTime);
 door waittill("rotatedone");
 }
 
@@ -1006,10 +1006,10 @@ steamroom_door_full_open() {
   door ConnectPaths();
 
   door playSound("door_cargo_container_burst_open");
-  door RotateTo(door.angles + (0, yawopen, 0), rotateTime);
+  door rotateTo(door.angles + (0, yawopen, 0), rotateTime);
   door waittill("rotatedone");
 
-  door DisconnectPaths();
+  door disconnectPaths();
 }
 array_thread(getEntArray("explodable_barrel", "targetname"), ::barrel_earthquake_notify);
 
@@ -1096,7 +1096,7 @@ explosion_earthquake() {
 fx = getfx("gulag_cafe_spotlight");
 tag_origin = spawn_tag_origin();
 
-tag_origin LinkTo(self.lamp, "j_hanging_light_04", (0, 0, -64), (0, 0, 0));
+tag_origin linkTo(self.lamp, "j_hanging_light_04", (0, 0, -64), (0, 0, 0));
 playFXOnTag(fx, tag_origin, "tag_origin");
 
 flag_wait("sheppard_southwest");
@@ -1142,7 +1142,7 @@ lamp_rotates_yaw() {
     yaw = RandomFloatRange(-30, 30);
     ent AddYaw(yaw);
     time = RandomFloatRange(0.5, 1.5);
-    self RotateTo(ent.angles, time, time * 0.4, time * 0.4);
+    self rotateTo(ent.angles, time, time * 0.4, time * 0.4);
     wait(time);
   }
 }
@@ -1227,7 +1227,7 @@ tv_movie() {
 }
 
 barracks_tv_light() {
-  light = GetEnt("tv_light", "targetname");
+  light = getEnt("tv_light", "targetname");
 
   wait_for_targetname_trigger("tv_trigger");
   light SetLightIntensity(0);
@@ -1239,7 +1239,7 @@ barracks_destroy_tv() {
   wait(RandomIntRange(2, 4));
   exploder("stealth_broken");
 
-  light = GetEnt("tv_light", "targetname");
+  light = getEnt("tv_light", "targetname");
   light SetLightIntensity(0);
 }
 canyon_convoy = getEntArray(vehicleTN, "targetname");
@@ -1308,14 +1308,14 @@ hide_triggers(trigger_name) {
 }
 
 delete_by_targetname_safe(entTN) {
-  ent = GetEnt(entTN, "targetname");
+  ent = getEnt(entTN, "targetname");
   if(isDefined(ent)) {
     ent Delete();
   }
 }
 
 delete_and_kill_targeted_spawners_by_targetname_safe(entTN) {
-  ent = GetEnt(entTN, "targetname");
+  ent = getEnt(entTN, "targetname");
   if(!isDefined(ent)) {
     return;
   }

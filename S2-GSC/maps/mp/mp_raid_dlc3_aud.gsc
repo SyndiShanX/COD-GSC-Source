@@ -235,7 +235,7 @@ train_start_moving() {
   wait(3);
   lib_0380::func_6844("train_move", undefined, var_01);
   wait(4);
-  var_01 moveto((246, 1450, 1217), 14);
+  var_01 moveTo((246, 1450, 1217), 14);
 }
 
 bridge_bomb_a_exp(param_00) {

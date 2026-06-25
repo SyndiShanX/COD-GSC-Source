@@ -767,35 +767,35 @@ scene_server_room_super_kill() {
 }
 
 play_stinger_a(guy) {
-  playsoundatposition("evt_superkill_over", (0, 0, 0));
+  playSoundAtPosition("evt_superkill_over", (0, 0, 0));
 }
 
 play_stinger_b(guy) {
-  playsoundatposition("evt_superkill_over", (0, 0, 0));
+  playSoundAtPosition("evt_superkill_over", (0, 0, 0));
 }
 
 play_stinger_c(guy) {
-  playsoundatposition("evt_superkill_over_c", (0, 0, 0));
+  playSoundAtPosition("evt_superkill_over_c", (0, 0, 0));
 }
 
 play_knife_stinger(guy) {
-  playsoundatposition("evt_defalco_theme", (0, 0, 0));
+  playSoundAtPosition("evt_defalco_theme", (0, 0, 0));
 }
 
 play_stinger_dead_a(guy) {
-  playsoundatposition("evt_superkill_over", (0, 0, 0));
+  playSoundAtPosition("evt_superkill_over", (0, 0, 0));
 }
 
 play_stinger_dead_b(guy) {
-  playsoundatposition("evt_superkill_over", (0, 0, 0));
+  playSoundAtPosition("evt_superkill_over", (0, 0, 0));
 }
 
 play_stinger_dead_c(guy) {
-  playsoundatposition("evt_superkill_over", (0, 0, 0));
+  playSoundAtPosition("evt_superkill_over", (0, 0, 0));
 }
 
 play_stinger_dead_d(guy) {
-  playsoundatposition("evt_superkill_over", (0, 0, 0));
+  playSoundAtPosition("evt_superkill_over", (0, 0, 0));
 }
 
 spawn_karma_with_cut_throat(ai_karma) {
@@ -1030,7 +1030,7 @@ player_kick_anim() {
 }
 
 kick_open_vent() {
-  vent = getent("crawl_space_exit", "targetname");
+  vent = getEnt("crawl_space_exit", "targetname");
   vent notsolid();
   vent connectpaths();
   vent delete();
@@ -1066,7 +1066,7 @@ mason_arrives_at_cctv_room() {
 attach_torch_to_character(ai_guy) {
   scene_wait("cctv_security_room_door_closes");
   m_torch = get_ent("cctv_door_torch", "targetname");
-  m_torch linkto(ai_guy, "J_Hip_LE");
+  m_torch linkTo(ai_guy, "J_Hip_LE");
   m_torch setforcenocull();
   flag_wait("mason_watches_menendez_in_server_room_started");
   m_torch unlink();
@@ -1312,8 +1312,8 @@ f38_crash_into_bridge() {
 }
 
 f38_crash_rocket_notetrack() {
-  rocket_start = getstruct("f38_rocket_struct", "targetname");
-  fa38 = getent("fa38_flyover", "targetname");
+  rocket_start = getStruct("f38_rocket_struct", "targetname");
+  fa38 = getEnt("fa38_flyover", "targetname");
   fa38 veh_magic_bullet_shield();
   wait 0.7;
   magicbullet("usrpg_magic_bullet_cmd_sp", rocket_start.origin, fa38.origin, undefined, fa38);
@@ -1321,7 +1321,7 @@ f38_crash_rocket_notetrack() {
 
 f38_fire_guns() {
   level endon("f38_stop_firing");
-  fa38 = getent("fa38_flyover", "targetname");
+  fa38 = getEnt("fa38_flyover", "targetname");
 
   while(true) {
     fa38 fire_turret(1);
@@ -1345,9 +1345,9 @@ aftermath_vo2(guy) {
 detatch_f38_parts(guy) {
   level.f35 detachall();
   level notify("f38_ready");
-  m_elevator = getent("menendez_elevator", "targetname");
+  m_elevator = getEnt("menendez_elevator", "targetname");
   m_elevator setmovingplatformenabled(1);
-  m_elevator linkto(level.f35, "origin_animate_jnt");
+  m_elevator linkTo(level.f35, "origin_animate_jnt");
   m_elevator elevator_think();
 }
 
@@ -1388,9 +1388,9 @@ deck_hide_no_mason_rpgs_think() {
 
 vent_kick_rumble(player_body) {
   wait 0.5;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.5;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 sndstartalarms(player) {

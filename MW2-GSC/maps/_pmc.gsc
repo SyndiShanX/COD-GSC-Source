@@ -779,7 +779,7 @@ enemy_set_goal_when_player_spotted_loop() {
   }
 }
 
-enemy_set_goalradius() {
+enemy_set_goalRadius() {
   if(!isAI(self)) {
     return;
   }
@@ -919,7 +919,7 @@ setup_objective_entities() {
     objectiveLocations[i] = spawnStruct();
     objectiveLocations[i].laptop = ent;
     assert(isDefined(ent.target));
-    objectiveLocations[i].trigger = getent(ent.target, "targetname");
+    objectiveLocations[i].trigger = getEnt(ent.target, "targetname");
     assert(isDefined(objectiveLocations[i].trigger));
     assert(objectiveLocations[i].trigger.classname == "trigger_use");
     objectiveLocations[i].laptop hide();
@@ -1143,7 +1143,7 @@ player_use_objective_think() {
   level.pmc.objective.trigger trigger_on();
   level.pmc.objective.laptop show();
   level.pmc.objective.trigger.active = true;
-  level.pmc.objective.trigger sethintstring(&"PMC_HINT_USELAPTOP");
+  level.pmc.objective.trigger setHintString(&"PMC_HINT_USELAPTOP");
 
   for(;;) {
     wait 0.05;
@@ -1255,7 +1255,7 @@ get_extraction_location() {
   extraction_info.script_origin = extraction_origins[extraction_origins.size - 1];
   assert(isDefined(extraction_info.script_origin));
 
-  extraction_info.trigger = getent(extraction_info.script_origin.target, "targetname");
+  extraction_info.trigger = getEnt(extraction_info.script_origin.target, "targetname");
   assert(isDefined(extraction_info.trigger));
 
   return extraction_info;

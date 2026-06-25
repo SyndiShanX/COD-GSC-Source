@@ -860,7 +860,7 @@ create_reflection_object() {
   level.debug_reflectionobject = spawn("script_model", player getEye() + (vector_multiply(anglesToForward(player.angles), 100)));
   level.debug_reflectionobject setModel("test_sphere_silver");
   level.debug_reflectionobject.origin = player getEye() + (vector_multiply(anglesToForward(player getplayerangles()), 100));
-  level.debug_reflectionobject linkto(player);
+  level.debug_reflectionobject linkTo(player);
   thread debug_reflection_buttons();
 }
 
@@ -919,7 +919,7 @@ debug_reflection_buttons() {
     line(level.debug_reflectionobject.origin, getreflectionorigin(level.debug_reflectionobject.origin), (1, 0, 0), true, 1);
 
     wait .05;
-    level.debug_reflectionobject linkto(players[0]);
+    level.debug_reflectionobject linkTo(players[0]);
   }
 }
 
@@ -1103,7 +1103,7 @@ camera() {
   wait(0.05);
   cameras = getEntArray("camera", "targetname");
   for(i = 0; i < cameras.size; i++) {
-    ent = getent(cameras[i].target, "targetname");
+    ent = getEnt(cameras[i].target, "targetname");
     cameras[i].origin2 = ent.origin;
     cameras[i].angles = vectortoangles(ent.origin - cameras[i].origin);
   }
@@ -1149,7 +1149,7 @@ camera() {
       forward = anglesToForward(angles);
 
       players = get_players();
-      difference = vectornormalize(end - players[0].origin);
+      difference = vectorNormalize(end - players[0].origin);
       dot = vectordot(forward, difference);
       if(dot < 0.85) {
         continue;
@@ -1252,10 +1252,10 @@ dollyGo() {
 
       org = spawn("script_origin", (0, 0, 0));
       org.origin = level.dollystart;
-      players[0] setorigin(org.origin);
-      players[0] linkto(org);
+      players[0] setOrigin(org.origin);
+      players[0] linkTo(org);
 
-      org moveto(level.dollyend, level.dollyTime);
+      org moveTo(level.dollyend, level.dollyTime);
       wait(level.dollyTime);
       org delete();
     }
@@ -1501,7 +1501,7 @@ getchain() {
     if(!isDefined(ent) || !isDefined(ent.target)) {
       break;
     }
-    ent = getent(ent.target, "targetname");
+    ent = getEnt(ent.target, "targetname");
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
       break;
@@ -1526,10 +1526,10 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   diaglen = length(mincorner - maxcorner);
 
   mincorneroffset = (mincorner - viewpos);
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800 * 0);
   maxcorneroffset = (maxcorner - viewpos);
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800 * 0);
 
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
@@ -2087,7 +2087,7 @@ debug_animSound() {
       animSound = level.animSounds_thisframe[i];
       animSound.animsound_color = (0.25, 1.0, 0.5);
 
-      difference = vectornormalize((animSound.origin + (0, 0, 40)) - (players[0].origin + (0, 0, 55)));
+      difference = vectorNormalize((animSound.origin + (0, 0, 40)) - (players[0].origin + (0, 0, 55)));
       newdot = vectordot(forward, difference);
       if(newdot < dot) {
         continue;

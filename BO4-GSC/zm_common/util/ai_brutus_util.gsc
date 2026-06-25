@@ -170,7 +170,7 @@ function_f332f2b7(n_spawn, str_zone_name, var_dde9ff11, var_68ffecfb) {
       }
 
       if(!(isDefined(var_dde9ff11) && var_dde9ff11)) {
-        playsoundatposition(#"zmb_ai_brutus_spawn_2d", (0, 0, 0));
+        playSoundAtPosition(#"zmb_ai_brutus_spawn_2d", (0, 0, 0));
       }
 
       var_33882d9b++;
@@ -369,7 +369,7 @@ get_brutus_spawn_pos_val(brutus_pos) {
 }
 
 brutus_spawn_prologue(spawn_pos) {
-  playsoundatposition(#"zmb_ai_brutus_prespawn", spawn_pos.origin);
+  playSoundAtPosition(#"zmb_ai_brutus_prespawn", spawn_pos.origin);
   wait 3;
 }
 
@@ -396,7 +396,7 @@ brutus_round_tracker() {
 
   while(true) {
     level waittill(#"between_round_over");
-    players = getplayers();
+    players = getPlayers();
 
     if(isDefined(level.next_dog_round) && level.next_dog_round == level.next_brutus_round) {
       level.next_brutus_round += 2;
@@ -537,12 +537,12 @@ brutus_death() {
     if(level.brutus_in_grief) {
       team_points = level.brutus_team_points_for_death;
       player_points = level.brutus_player_points_for_death;
-      a_players = getplayers(self.team);
+      a_players = getPlayers(self.team);
     } else {
       multiplier = zm_score::get_points_multiplier(self.attacker);
       team_points = multiplier * zm_utility::round_up_score(level.brutus_team_points_for_death, 5);
       player_points = multiplier * zm_utility::round_up_score(level.brutus_player_points_for_death, 5);
-      a_players = getplayers();
+      a_players = getPlayers();
     }
 
     foreach(player in a_players) {
@@ -592,7 +592,7 @@ function_f57a7d55(w_item) {
     yaw = math::clamp(randomint(360), 60, 300);
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }
@@ -727,7 +727,7 @@ check_craftable_table_valid(player) {
       self.stub.is_locked = 0;
       self.stub.locked_cost = undefined;
       self.stub.lock_fx delete();
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
 
     return false;

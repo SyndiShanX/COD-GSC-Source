@@ -133,14 +133,14 @@ function function_4ab898f4(nd_start) {
   var_116e109f = struct::get(nd_start.target);
   var_f28a4a19 = var_116e109f function_fc804fdd();
   self playerlinktodelta(var_413ea50f);
-  self playrumbleonentity("zm_castle_flinger_launch");
+  self playRumbleOnEntity("zm_castle_flinger_launch");
   self clientfield::set_to_player("apothicon_entry_postfx", 1);
   self thread zm_genesis_flingers::function_c1f1756a();
   var_6a7beeb2 = zm_genesis_flingers::function_cbac68fe(self);
-  var_6a7beeb2 linkto(var_413ea50f);
+  var_6a7beeb2 linkTo(var_413ea50f);
   w_current = self.currentweapon;
   var_f5434f17 = zm_utility::spawn_buildkit_weapon_model(self, w_current, undefined, var_6a7beeb2 gettagorigin("tag_weapon_right"), var_6a7beeb2 gettagangles("tag_weapon_right"));
-  var_f5434f17 linkto(var_6a7beeb2, "tag_weapon_right");
+  var_f5434f17 linkTo(var_6a7beeb2, "tag_weapon_right");
   var_f5434f17 setowner(self);
   var_6a7beeb2 thread scene::play("cin_zm_dlc1_jump_pad_air_loop", var_6a7beeb2);
   var_6a7beeb2 clientfield::set("player_visibility", 1);
@@ -154,7 +154,7 @@ function function_4ab898f4(nd_start) {
   var_413ea50f vehicle::get_on_and_go_path(var_f28a4a19);
   self thread function_3298b25f();
   self thread zm_genesis_flingers::function_29c06608();
-  self playrumbleonentity("zm_castle_flinger_land");
+  self playRumbleOnEntity("zm_castle_flinger_land");
   self clientfield::set_to_player("apothicon_entry_postfx", 0);
   var_6a7beeb2 clientfield::set("player_visibility", 0);
   var_f5434f17 clientfield::set("player_visibility", 0);
@@ -211,7 +211,7 @@ function function_3298b25f() {
     var_16f5c370 = var_6b138e28 + (randomfloatrange(-96, 96), randomfloatrange(-96, 96), 0);
   }
   self unlink();
-  self setorigin(var_16f5c370);
+  self setOrigin(var_16f5c370);
   self clientfield::increment_to_player("flinger_land_smash");
   self thread zm_genesis_vo::function_e1bf753b();
   self.var_3298b25f = 1;
@@ -227,7 +227,7 @@ function function_e488a6a8() {
     level waittill("hash_80f97945");
   }
   level scene::play("p7_fxanim_zm_gen_apoth_pap_sac_bundle");
-  playsoundatposition("evt_pap_freed", (873, 110, -3239));
+  playSoundAtPosition("evt_pap_freed", (873, 110, -3239));
   self.pap_machine.origin = self.pap_machine.origin + vectorscale((0, 0, 1), 500);
   level flag::set("apotho_pack_freed");
   self.origin = self.origin - vectorscale((0, 0, 1), 500);
@@ -244,7 +244,7 @@ function function_9278bc8a(var_181e2689) {
     self.n_damage = self.n_damage - damage;
     self.health = self.health + damage;
     if(self.n_damage <= 1000) {
-      playsoundatposition("evt_pap_cord_burst", self.origin);
+      playSoundAtPosition("evt_pap_cord_burst", self.origin);
       self setCanDamage(0);
       break;
     }

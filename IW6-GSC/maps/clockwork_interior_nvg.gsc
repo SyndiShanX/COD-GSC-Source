@@ -49,7 +49,7 @@ clockwork_interior_nvg_pre_load() {
   precachemodel("weapon_p226");
   precachemodel("machinery_xray_scanner_bin_single");
   precachemodel("clk_metal_detector_wand");
-  level.vault_damage_trigger = getent("kill_player_vaultdoor", "targetname");
+  level.vault_damage_trigger = getEnt("kill_player_vaultdoor", "targetname");
   level.vault_damage_trigger common_scripts\utility::trigger_off();
 }
 
@@ -64,7 +64,7 @@ setup_interior() {
   level.jeep hidepart("back_door_left_jnt");
   wait 0.25;
   level.player_door = maps\_utility::spawn_anim_model("jeep_left_door");
-  level.player_door linkto(level.jeep, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
+  level.player_door linkTo(level.jeep, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
   level.allies[0].script_startingposition = 1;
   level.allies[1].script_startingposition = 0;
   level.allies[2].script_startingposition = 3;
@@ -92,11 +92,11 @@ setup_interior() {
 }
 
 init_tunnel() {
-  level.tunnel_door_scene = getent("lights_out_scene", "targetname");
+  level.tunnel_door_scene = getEnt("lights_out_scene", "targetname");
   level.tunnel_door = maps\_utility::spawn_anim_model("vault_door");
   level.tunnel_door_scene thread maps\_anim::anim_first_frame_solo(level.tunnel_door, "tunnel_vault");
-  level.tunnel_door_clip = getent("entrance_door_clip", "targetname");
-  level.tunnel_door_clip linkto(level.tunnel_door);
+  level.tunnel_door_clip = getEnt("entrance_door_clip", "targetname");
+  level.tunnel_door_clip linkTo(level.tunnel_door);
   common_scripts\utility::flag_wait("start_closing_vault_door");
   thread turn_on_vault_damage();
   thread maps\clockwork_audio::entry_door_close();
@@ -171,7 +171,7 @@ turn_on_vault_damage() {
 
 disconnect_paths_at_end_anim(var_0) {
   self waittillmatch("single anim", "end");
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   level notify("vault_closed");
   common_scripts\utility::flag_set("vault_closed");
   thread cleanup_garage_guys();
@@ -299,7 +299,7 @@ tunnel_idle_guys() {
 
 wave_anim() {
   level endon("garage_enemies_provoked");
-  var_0 = common_scripts\utility::getstruct("tunnel_wave", "targetname");
+  var_0 = common_scripts\utility::getStruct("tunnel_wave", "targetname");
   self.animname = "generic";
   var_0 maps\_anim::anim_reach_solo(self, "tunnel_wave");
   self.scene = var_0;
@@ -313,25 +313,25 @@ wave_anim() {
 
 camera_track_player() {
   var_0 = 0.5;
-  var_1 = getent("sec_cam_track", "targetname");
+  var_1 = getEnt("sec_cam_track", "targetname");
   var_1.angles = (var_1.angles[0], var_1.angles[1], 0);
 
   while(common_scripts\utility::flag("camera_track_player")) {
     wait 0.1;
     var_2 = vectortoangles(level.player.origin - var_1.origin) + (0, -90, 0);
     var_2 = (0, var_2[1], var_2[2]);
-    var_1 rotateto(var_2, var_0, var_0 * 0.5, var_0 * 0.5);
+    var_1 rotateTo(var_2, var_0, var_0 * 0.5, var_0 * 0.5);
   }
 }
 
 handle_nvg_guards() {
   level.nvg_recover_anim = [];
   level.nvg_recover_anim[0] = "nvg_recover_anim1";
-  var_0 = getent("nvg_guy1", "targetname");
-  var_1 = getent("nvg_guy2", "targetname");
-  var_2 = getent("nvg_guy3", "targetname");
-  var_3 = getent("nvg_guy4", "targetname");
-  var_4 = getent("nvg_guy5", "targetname");
+  var_0 = getEnt("nvg_guy1", "targetname");
+  var_1 = getEnt("nvg_guy2", "targetname");
+  var_2 = getEnt("nvg_guy3", "targetname");
+  var_3 = getEnt("nvg_guy4", "targetname");
+  var_4 = getEnt("nvg_guy5", "targetname");
   var_5 = var_0 maps\_utility::spawn_ai();
   var_6 = var_1 maps\_utility::spawn_ai();
   var_7 = var_2 maps\_utility::spawn_ai();
@@ -454,7 +454,7 @@ handle_lower_flashlight_guys() {
 handle_lights_out_approach() {
   level endon("blackout_early");
   level endon("garage_enemies_provoked");
-  var_0 = getent("lights_out_scene", "targetname");
+  var_0 = getEnt("lights_out_scene", "targetname");
   level.allies[0].animname = "baker";
   level.allies[1].animname = "keegan";
   level.allies[2].animname = "cipher";
@@ -471,7 +471,7 @@ handle_lights_out_approach() {
 reach_and_play_anim(var_0, var_1, var_2) {
   level endon("blackout_early");
   level endon("garage_enemies_provoked");
-  var_3 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(isDefined(var_3)) {
     maps\_utility::follow_path(var_3);
@@ -491,7 +491,7 @@ reach_and_play_anim(var_0, var_1, var_2) {
 }
 
 nvg_animted_scene(var_0) {
-  var_1 = getent("lights_out_scene", "targetname");
+  var_1 = getEnt("lights_out_scene", "targetname");
   level.override_dog_enemy = var_0[1];
 
   foreach(var_3 in var_0) {
@@ -502,14 +502,14 @@ nvg_animted_scene(var_0) {
   var_5 = maps\_utility::spawn_anim_model("nvg_bin_joint", var_1.origin);
   var_6 = maps\_utility::spawn_anim_model("nvg_bin", var_1.origin);
   var_7 = maps\_utility::spawn_anim_model("weapon_p226", var_1.origin);
-  var_6 linkto(var_5, "J_prop_1");
-  var_7 linkto(var_5, "J_prop_2");
+  var_6 linkTo(var_5, "J_prop_1");
+  var_7 linkTo(var_5, "J_prop_2");
   var_5 thread bin_failsafe(var_6, var_7);
   var_0[0] maps\_utility::gun_remove();
   var_0[2] maps\_utility::gun_remove();
   var_8 = spawn("script_model", (0, 0, 0));
   var_8 setModel("clk_metal_detector_wand");
-  var_8 linkto(var_0[3], "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  var_8 linkTo(var_0[3], "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   var_1 thread maps\_anim::anim_first_frame(var_0, "lights_out");
   var_1 thread maps\_anim::anim_first_frame_solo(var_5, "bin_joint");
   common_scripts\utility::flag_wait("start_nvg_guy_anims");
@@ -538,12 +538,12 @@ delete_wand_at_lights_out(var_0) {
 
 bin_failsafe(var_0, var_1) {
   level common_scripts\utility::waittill_any("blackout_early", "garage_enemies_provoked");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   var_2 = randomfloatrange(10, 100);
-  var_3 = vectornormalize(var_0.origin - 1 - var_0.origin);
+  var_3 = vectorNormalize(var_0.origin - 1 - var_0.origin);
   var_0 unlink();
   var_0 physicslaunchclient(var_0.origin, var_3 * var_2);
-  var_4 = vectornormalize(var_1.origin - 1 - var_1.origin);
+  var_4 = vectorNormalize(var_1.origin - 1 - var_1.origin);
   var_1 unlink();
   var_1 physicslaunchclient(var_1.origin, var_3 * var_2);
 }
@@ -582,7 +582,7 @@ blackout_loop_anims(var_0) {
 }
 
 nvg_blackout_anims(var_0) {
-  var_1 = getent("lights_out_scene", "targetname");
+  var_1 = getEnt("lights_out_scene", "targetname");
   self endon("death");
 
   if(isDefined(self) && isalive(self)) {
@@ -633,10 +633,10 @@ guy_setup_for_blackout() {
 
 blackout_enemy1and2_react_anims(var_0, var_1) {
   common_scripts\utility::flag_wait("lights_out");
-  var_2 = getent("lights_out_scene", "targetname");
+  var_2 = getEnt("lights_out_scene", "targetname");
   var_3 = maps\_utility::spawn_anim_model("bo_alerted_door_jt", var_2.origin);
   level.bo_alerted_door = maps\_utility::spawn_anim_model("bo_alerted_door", var_2.origin);
-  level.bo_alerted_door linkto(var_3, "J_prop_1");
+  level.bo_alerted_door linkTo(var_3, "J_prop_1");
   thread delete_during_chaos(level.bo_alerted_door);
   var_2 thread maps\_anim::anim_first_frame_solo(var_3, "alerted_door_joint");
   var_0 guy_setup_for_blackout();
@@ -678,20 +678,20 @@ nvg_wait_for_flags_or_timeout(var_0, var_1, var_2) {
 }
 
 blackout_enemy3() {
-  var_0 = getent("lights_out_scene", "targetname");
+  var_0 = getEnt("lights_out_scene", "targetname");
   common_scripts\utility::flag_wait("FLAG_blackout_enemy3");
-  var_1 = getent("nvg_security_room_enemy3", "targetname");
+  var_1 = getEnt("nvg_security_room_enemy3", "targetname");
   level.bo_enemy3 = var_1 maps\_utility::spawn_ai(1);
   level.bo_enemy3.animname = "generic";
   level.bo_enemy3.allowdeath = 1;
   var_2 = maps\_utility::spawn_anim_model("bo_grope_door_jt", var_0.origin);
   var_3 = maps\_utility::spawn_anim_model("bo_grope_door", var_0.origin);
-  var_3 linkto(var_2, "J_prop_1");
+  var_3 linkTo(var_2, "J_prop_1");
   var_0 thread maps\_anim::anim_single_solo(var_2, "bo_grope_door_joint");
   var_0 thread maps\_anim::anim_single_solo(level.bo_enemy3, "clockwork_nvg_hallway_grope_enemy3");
   wait 0.1;
-  var_4 = getent("door3_enemy_clip", "targetname");
-  var_4 linkto(var_3);
+  var_4 = getEnt("door3_enemy_clip", "targetname");
+  var_4 linkTo(var_3);
   common_scripts\utility::flag_wait_or_timeout("bo_buddies3_dead", 3);
 
   if(isDefined(level.bo_enemy3) && isalive(level.bo_enemy3)) {
@@ -700,14 +700,14 @@ blackout_enemy3() {
 }
 
 blackout_enemy45() {
-  var_0 = getent("lights_out_scene", "targetname");
+  var_0 = getEnt("lights_out_scene", "targetname");
   common_scripts\utility::flag_wait("FLAG_blackout_enemy45");
-  var_1 = getent("nvg_security_room_enemy4", "targetname");
+  var_1 = getEnt("nvg_security_room_enemy4", "targetname");
   level.bo_enemy4 = var_1 maps\_utility::spawn_ai(1);
   level.bo_enemy4.animname = "generic";
   level.bo_enemy4.allowdeath = 1;
   var_0 thread maps\_anim::anim_single_solo(level.bo_enemy4, "clockwork_nvg_hallway_buddies_enemy4");
-  var_1 = getent("nvg_security_room_enemy5", "targetname");
+  var_1 = getEnt("nvg_security_room_enemy5", "targetname");
   level.bo_enemy5 = var_1 maps\_utility::spawn_ai(1);
   level.bo_enemy5.allowdeath = 1;
   level.bo_enemy5.animname = "generic";
@@ -796,8 +796,8 @@ nvg_ally_vo() {
 }
 
 hacking_eyes_and_ears() {
-  var_0 = common_scripts\utility::getstruct("scn_eyes_and_ears", "targetname");
-  var_1 = getent("security_cipher_hack", "targetname");
+  var_0 = common_scripts\utility::getStruct("scn_eyes_and_ears", "targetname");
+  var_1 = getEnt("security_cipher_hack", "targetname");
   var_1.animname = "server";
   var_1 maps\_anim::setanimtree();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "eyes_and_ears");
@@ -812,11 +812,11 @@ hacking_eyes_and_ears() {
   thread maps\_utility::autosave_by_name("eyes_and_ears");
   var_6 = maps\_utility::spawn_anim_model("bug_device_joint", var_0.origin);
   var_7 = maps\_utility::spawn_anim_model("bug_device", var_0.origin);
-  var_7 linkto(var_6, "J_prop_1");
+  var_7 linkTo(var_6, "J_prop_1");
   var_7 hide();
   var_8 = maps\_utility::spawn_anim_model("bug_glowstick_joint", var_0.origin);
   var_9 = maps\_utility::spawn_anim_model("bug_glowstick", var_0.origin);
-  var_9 linkto(var_8, "J_prop_1");
+  var_9 linkTo(var_8, "J_prop_1");
   var_9 hide();
   var_10 = [];
   var_10[0] = level.allies[2];
@@ -877,7 +877,7 @@ handle_blackout() {
   thread nvg_ally_vo();
   thread nvgs_on_blackout();
   thread lights_out_soldier_vo(level.nvg_moment_guardsb[1], level.nvg_moment_guardsb[0]);
-  var_0 = getent("lights_out_scene", "targetname");
+  var_0 = getEnt("lights_out_scene", "targetname");
   common_scripts\utility::flag_wait("nvgs_on");
   maps\_utility::battlechatter_on("axis");
   maps\_utility::battlechatter_on("allies");
@@ -972,7 +972,7 @@ nvg_alert_handle() {
   common_scripts\utility::waittill_any("ai_event", "flashbang");
   common_scripts\utility::flag_set("nvg_enemies_provoked");
   maps\_utility::clear_run_anim();
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   self.ignoreme = 0;
   self.ignoreall = 0;
   self notify("stop_going_to_node");
@@ -1025,7 +1025,7 @@ failcase_blackout_early() {
   foreach(var_1 in level.nvg_moment_guardsa) {
     if(isDefined(var_1)) {
       var_1 maps\_utility::clear_run_anim();
-      var_1 maps\_utility::anim_stopanimscripted();
+      var_1 maps\_utility::anim_stopanimScripted();
       var_1.ignoreme = 0;
       var_1.ignoreall = 0;
       var_1 notify("stop_going_to_node");
@@ -1037,7 +1037,7 @@ failcase_blackout_early() {
   foreach(var_1 in level.nvg_moment_guardsb) {
     if(isDefined(var_1)) {
       var_1 maps\_utility::clear_run_anim();
-      var_1 maps\_utility::anim_stopanimscripted();
+      var_1 maps\_utility::anim_stopanimScripted();
       var_1.ignoreme = 0;
       var_1.ignoreall = 0;
       var_1 notify("stop_going_to_node");
@@ -1049,7 +1049,7 @@ failcase_blackout_early() {
   foreach(var_1 in level.allies) {
     var_1 notify("stop_going_to_node");
     var_1 maps\_utility::clear_run_anim();
-    var_1 maps\_utility::anim_stopanimscripted();
+    var_1 maps\_utility::anim_stopanimScripted();
     var_1 maps\_utility::enable_cqbwalk();
     var_1 setgoalpos(var_1.origin);
     var_1 maps\_utility::enable_ai_color();
@@ -1077,7 +1077,7 @@ failcase_garage(var_0) {
   foreach(var_2 in level.allies) {
     var_2 notify("stop_going_to_node");
     var_2 maps\_utility::clear_run_anim();
-    var_2 maps\_utility::anim_stopanimscripted();
+    var_2 maps\_utility::anim_stopanimScripted();
     var_2 maps\_utility::enable_cqbwalk();
     var_2.ignoreall = 0;
     var_2.ignoreme = 0;
@@ -1099,7 +1099,7 @@ failcase_garage(var_0) {
       }
 
       var_2 notify("stop_loop");
-      var_2 maps\_utility::anim_stopanimscripted();
+      var_2 maps\_utility::anim_stopanimScripted();
       var_2 notify("end_generic_loop");
       var_2 maps\_utility::gun_recall();
     }
@@ -1167,8 +1167,8 @@ control_nvg_lightmodels() {
 control_nvg_staticscreens_off() {
   var_0 = getEntArray("nvg_monitors", "targetname");
   var_1 = getEntArray("nvg_mainscreens", "targetname");
-  var_2 = getent("nvg_mapscreen", "targetname");
-  var_3 = getent("nvg_mapscreen_light_accents", "targetname");
+  var_2 = getEnt("nvg_mapscreen", "targetname");
+  var_3 = getEnt("nvg_mapscreen_light_accents", "targetname");
 
   foreach(var_5 in var_0) {
     var_5 hide();
@@ -1185,8 +1185,8 @@ control_nvg_staticscreens_off() {
 control_nvg_staticscreens_on() {
   var_0 = getEntArray("nvg_monitors", "targetname");
   var_1 = getEntArray("nvg_mainscreens", "targetname");
-  var_2 = getent("nvg_mapscreen", "targetname");
-  var_3 = getent("nvg_mapscreen_light_accents", "targetname");
+  var_2 = getEnt("nvg_mapscreen", "targetname");
+  var_3 = getEnt("nvg_mapscreen_light_accents", "targetname");
 
   foreach(var_5 in var_0) {
     var_5 show();

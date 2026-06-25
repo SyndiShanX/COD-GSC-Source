@@ -9,7 +9,7 @@ _id_B445(var_0, var_1) {
   self endon("player_free_spot");
   thread _id_0736::_id_7E51(var_1, "viewhands_base_iw8");
   self._id_B5A4._id_10D19 = _id_0A94::_id_74B4;
-  self._id_B5A4 linkto(var_0, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
+  self._id_B5A4 linkTo(var_0, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
   self _meth_8577("80_instant");
   self _meth_84AC("safe", "iw8_ges_demeanor_safe_heli");
   var_0 _id_0706::_id_17FD(self, self._id_B5A4, "exfil", "body_animate_jnt");
@@ -33,7 +33,7 @@ _id_E0CE(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_3)) {
     var_7 = spawn("script_model", (0, 0, 0));
     var_7 setModel(var_3);
-    var_7 linkto(var_6, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_7 linkTo(var_6, "j_spine4", (0, 0, 0), (0, 0, 0));
     var_6._id_75DA = var_7;
     var_6 thread scripts\engine\utility::_id_472E(var_7);
   }
@@ -41,7 +41,7 @@ _id_E0CE(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_5)) {
     var_8 = spawn("script_model", (0, 0, 0));
     var_8 setModel(var_5);
-    var_8 linkto(var_6._id_75DA, "j_spine4", (0, 0, 0), (0, 0, 0));
+    var_8 linkTo(var_6._id_75DA, "j_spine4", (0, 0, 0), (0, 0, 0));
     var_6._id_75C5 = var_8;
     var_6 thread scripts\engine\utility::_id_472E(var_8);
   }
@@ -51,7 +51,7 @@ _id_E0CE(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_1)) {
     thread scripts\engine\utility::_id_472E(var_6);
-    var_6 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_6 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   }
 
   return var_6;
@@ -148,7 +148,7 @@ _id_915A() {
     var_1 = scripts\engine\utility::getStructArray(self._id_5716.target, "targetname");
     var_2 = var_1[0];
     var_3 = (var_2.origin[0], var_2.origin[1], self.origin[2]);
-    var_4 = vectornormalize(var_3 - self.origin);
+    var_4 = vectorNormalize(var_3 - self.origin);
     var_4 = var_4 * 20000;
     self setvehgoalpos(var_0 + var_4);
   } else
@@ -232,8 +232,8 @@ _id_7FC0() {
 _id_3F88(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_model", var_0);
   var_4 setModel("tag_origin");
-  var_4 sethintstring(var_1);
-  var_4 setcursorhint("HINT_BUTTON");
+  var_4 setHintString(var_1);
+  var_4 setCursorHint("HINT_BUTTON");
   var_4 _meth_84D4(200);
   var_4 sethintdisplayfov(90);
   var_4 setuserange(72);
@@ -332,7 +332,7 @@ _id_953C(var_0, var_1, var_2) {
   }
 
   level waittill("call_exfil", var_3, var_4);
-  var_5 = scripts\engine\utility::getstruct("player_exfil", "targetname");
+  var_5 = scripts\engine\utility::getStruct("player_exfil", "targetname");
 
   if(isDefined(level._id_B444)) {
     var_5 = level._id_B444;
@@ -583,15 +583,15 @@ _id_8D4C(var_0) {
 
 _id_A1F1(var_0) {
   var_1 = var_0.origin - self.origin;
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_1 = var_1 * 200;
   var_1 = (var_1[0], var_1[1], 0);
-  var_0 setorigin(var_0.origin + var_1, 1);
+  var_0 setOrigin(var_0.origin + var_1, 1);
 }
 
 _id_A1DD(var_0) {
   var_1 = var_0.origin - self.origin;
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_1 = var_1 * 200;
   var_1 = (var_1[0], var_1[1], 0);
   var_0.origin = var_0.origin + var_1;
@@ -636,7 +636,7 @@ _id_76EF(var_0, var_1) {
     self._id_9F00 setModel("veh8_mil_air_ahotel64_turret_wm");
   }
 
-  self._id_9F00 linkto(self, var_2, var_3, (0, 0, 0));
+  self._id_9F00 linkTo(self, var_2, var_3, (0, 0, 0));
   self._id_9F00 _meth_83A0("axis");
   self._id_9F00 setmode("auto_nonai");
   self._id_9F00 setdefaultdroppitch(0);
@@ -671,10 +671,10 @@ _id_42D7() {
   self endon("death");
   var_0 = spawn("trigger_radius", self.origin, 0, 350, 64);
   var_0 _meth_80DB();
-  var_0 linkto(self, "tag_origin");
+  var_0 linkTo(self, "tag_origin");
   var_1 = spawn("trigger_radius", self gettagorigin("tail_rotor_jnt"), 0, 64, 64);
   var_1 _meth_80DB();
-  var_1 linkto(self, "tail_rotor_jnt");
+  var_1 linkTo(self, "tail_rotor_jnt");
   var_0 thread _id_253A(self);
   var_1 thread _id_253A(self);
 }

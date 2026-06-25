@@ -98,7 +98,7 @@ dragon_shuriken_throw_listener(var_0) {
     var_8 = var_3.origin;
     var_9 = self getplayerangles();
     var_10 = anglesToForward(var_3.angles);
-    var_11 = vectornormalize(var_10) * 100 + var_8;
+    var_11 = vectorNormalize(var_10) * 100 + var_8;
     var_12 = 10;
     var_13 = var_12 * -1;
     var_13 = var_13 + var_12;
@@ -199,7 +199,7 @@ throw_charged_shuriken(var_0, var_1, var_2) {
   if(var_4.size == 0) {
     var_9 = self getplayerangles();
     var_10 = anglesToForward(var_1.angles);
-    var_11 = vectornormalize(var_10) * 100 + var_5;
+    var_11 = vectorNormalize(var_10) * 100 + var_5;
     var_12 = 10;
     var_13 = var_12 * -1;
     for(var_14 = 0; var_14 < 3; var_14++) {
@@ -244,8 +244,8 @@ dragon_super_use(var_0) {
   var_3 = self.origin + (0, 0, 60);
   var_4 = self getplayerangles();
   var_5 = anglesToForward(var_4);
-  var_6 = vectornormalize(var_5) * 100 + self.origin;
-  var_5 = vectornormalize(var_5) * 3000 + var_3;
+  var_6 = vectorNormalize(var_5) * 100 + self.origin;
+  var_5 = vectorNormalize(var_5) * 3000 + var_3;
   var_7 = spawn("script_model", var_6);
   var_7.angles = var_4 + (0, -90, 0);
   var_7 setModel("tag_origin_dragon_super");
@@ -279,7 +279,7 @@ play_dragon_hand_fx() {
 }
 
 move_dragon(var_0, var_1, var_2) {
-  self moveto(self.origin + (0, 0, 50), 0.25);
+  self moveTo(self.origin + (0, 0, 50), 0.25);
   self waittill("movedone");
   thread dragon_time_out(10);
   follow_dragon_path(var_1, var_2);
@@ -293,9 +293,9 @@ move_dragon_forward() {
   var_0 = 100;
   for(;;) {
     var_1 = anglesToForward(self.angles);
-    var_1 = vectornormalize(var_1);
+    var_1 = vectorNormalize(var_1);
     var_1 = var_1 * var_0;
-    self moveto(self.origin + var_1, 0.1);
+    self moveTo(self.origin + var_1, 0.1);
     self waittill("movedone");
   }
 }
@@ -312,7 +312,7 @@ aim_dragon() {
         level thread debug_show_path(var_3);
         var_4 = var_1[0].origin + (0, 0, 60) - self.origin + (0, 0, 60);
         var_5 = vectortoangles(var_4);
-        self rotateto(var_5, 0.1);
+        self rotateTo(var_5, 0.1);
         wait(0.1);
       }
     }
@@ -347,10 +347,10 @@ follow_dragon_path(var_0, var_1) {
           if(var_11 < var_2) {
             var_12 = var_10.origin + (0, 0, 60) - self.origin + (0, 0, 60);
             var_13 = vectortoangles(var_12);
-            self rotateto(var_13, 0.1);
+            self rotateTo(var_13, 0.1);
             var_14 = length(var_12);
-            var_12 = vectornormalize(var_12) * var_14 + 100;
-            self moveto(self.origin + var_12 + (0, 0, 60), 0.25);
+            var_12 = vectorNormalize(var_12) * var_14 + 100;
+            self moveTo(self.origin + var_12 + (0, 0, 60), 0.25);
             self waittill("movedone");
             if(isalive(var_10)) {
               dragon_kill_guy(var_10, self.owner, var_1);
@@ -407,8 +407,8 @@ spin_linked_ent() {
   var_0 = self.spiral_center;
   self.on_spiral_path = 1;
   self.spin_org = spawn("script_origin", var_0);
-  self linkto(self.spin_org);
-  self.spin_org rotateyaw(-100000, 300);
+  self linkTo(self.spin_org);
+  self.spin_org rotateYaw(-100000, 300);
   for(;;) {
     self.spin_org movez(75, 2);
     self.spin_org waittill("movedone");
@@ -451,10 +451,10 @@ move_along_path_new(var_0, var_1) {
 move_forward() {
   var_0 = 500;
   var_1 = anglesToForward(self.angles);
-  var_1 = vectornormalize(var_1) * var_0;
+  var_1 = vectorNormalize(var_1) * var_0;
   var_2 = self.origin + var_1;
   var_2 = getclosestpointonnavmesh(var_2);
-  self moveto(var_2 + (0, 0, 60), 1);
+  self moveTo(var_2 + (0, 0, 60), 1);
 }
 
 turn_towards_target(var_0) {
@@ -468,9 +468,9 @@ turn_towards_target(var_0) {
 
   var_5 = var_4 / var_1;
   var_5 = abs(var_5);
-  self rotateto(var_3, var_5);
+  self rotateTo(var_3, var_5);
   var_6 = anglesToForward(var_3);
-  var_6 = vectornormalize(var_6) * 100;
+  var_6 = vectorNormalize(var_6) * 100;
   var_7 = self.origin + var_6;
 }
 

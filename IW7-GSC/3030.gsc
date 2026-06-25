@@ -148,7 +148,7 @@ func_5D07(var_0, var_1) {
   var_8 = (0, 0, 1);
   var_9 = var_6 * var_3[0] + var_6 * var_3[1] + var_8 * var_3[2];
   var_10 = func_106AC(var_4.origin + var_9);
-  var_1 linkto(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(scripts\engine\utility::getfx("weapon_drone_pod_trail"), var_10, "tag_origin");
   var_11 = 0;
   thread func_5D04(var_2);
@@ -304,8 +304,8 @@ func_5BFD(var_0, var_1) {
     var_36 = var_4 - var_16;
     var_37 = scripts\sp\math::func_C097(0, var_7, length(var_4));
     var_38 = scripts\sp\math::func_C097(0, var_8, length(var_36));
-    var_39 = vectornormalize(var_4) * var_37;
-    var_40 = vectornormalize(var_36) * var_38;
+    var_39 = vectorNormalize(var_4) * var_37;
+    var_40 = vectorNormalize(var_36) * var_38;
     var_5 = var_1 func_5C4D(var_39, var_5, 1, var_9, var_35);
     var_6 = var_1 func_5C4D(var_40, var_6, 1, var_10, var_35);
     var_4 = var_4 * (1 - var_30);
@@ -430,8 +430,8 @@ func_5BFC(var_0) {
     var_42 = var_5 - var_17;
     var_43 = scripts\sp\math::func_C097(0, var_8, length(var_5));
     var_44 = scripts\sp\math::func_C097(0, var_9, length(var_42));
-    var_45 = vectornormalize(var_5) * var_43;
-    var_46 = vectornormalize(var_42) * var_44;
+    var_45 = vectorNormalize(var_5) * var_43;
+    var_46 = vectorNormalize(var_42) * var_44;
     var_6 = var_1 func_5C4D(var_45, var_6, 1, var_10, var_19);
     var_7 = var_1 func_5C4D(var_46, var_7, 1, var_11, var_19);
     var_47 = scripts\sp\math::func_C097(0, var_12, var_21);
@@ -452,7 +452,7 @@ func_5BFC(var_0) {
 
 func_5BE2(var_0) {
   earthquake(0.25, 0.8, level.var_D127.origin, 5000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player playSound("landing_drone_attach");
   self.var_102D1 stoploopsound("landing_drone_sled_lp");
   self.var_102D1.var_5BD7 setanimknob(%landing_drone_fly_docked, 1, 0.2);
@@ -464,7 +464,7 @@ func_5BE2(var_0) {
     func_0BDC::func_D16C(self.var_102D1.var_20F1, 0.0, 0, 0.0);
   } else {
     self.var_102D1.var_5BD7 func_8291(0.1, 0.1, 0.1, 0.5);
-    self.var_102D1.var_5BD7 linkto(level.var_D127, "tag_body", (325.491, 0, 14.494), (0, -180, 0));
+    self.var_102D1.var_5BD7 linkTo(level.var_D127, "tag_body", (325.491, 0, 14.494), (0, -180, 0));
   }
 }
 
@@ -506,14 +506,14 @@ func_68A0(var_0, var_1) {
 
   wait(var_0);
   earthquake(0.3, 0.8, level.var_D127.origin, 5000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player playSound("drone_attach");
   self setanimknob(%weapon_drone_fly_docked, 1, 0);
 }
 
 func_685E() {
   var_0 = spawn("script_origin", self.var_102D1.origin);
-  var_0 linkto(self.var_102D1.var_5BD7);
+  var_0 linkTo(self.var_102D1.var_5BD7);
   var_0 playSound("landing_drone_launch", "sounddone");
   var_0 waittill("sounddone");
   var_0 delete();
@@ -522,21 +522,21 @@ func_685E() {
 func_685F(var_0) {
   self setanimknob(%landing_drone_recovery);
   wait(var_0);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.12, 0.35, level.var_D127.origin, 5000);
 }
 
 func_67ED(var_0, var_1) {
   wait 1.23;
   earthquake(0.2, 0.65, level.var_D127.origin, 5000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   var_1 playSound("drone_grab_missiles");
 }
 
 func_6817(var_0, var_1) {
   wait 2.53;
   earthquake(0.26, 0.6, level.var_D127.origin, 5000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 3;
   func_0BDC::func_A161(0);
   func_0BDC::func_A153(0);
@@ -551,7 +551,7 @@ func_687C(var_0) {
 
 func_6815() {
   earthquake(0.2, 0.6, level.var_D127.origin, 50000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   func_5C91();
   func_5C8D();
 }
@@ -559,7 +559,7 @@ func_6815() {
 func_680F(var_0) {
   wait(var_0);
   earthquake(0.3, 0.7, level.var_D127.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   func_5C8F();
   func_5C90();
 }
@@ -568,7 +568,7 @@ func_685D() {
   earthquake(0.25, 0.7, level.var_D127.origin, 3000);
   level.player playSound("jackal_landed");
   level.player playSound("landing_drone_stop");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   func_5C8E();
   scripts\sp\utility::func_75A0("landing_drone_light_top", "j_mainroot");
   scripts\sp\utility::func_75C4("landing_drone_light_top_off", "j_mainroot");
@@ -875,10 +875,10 @@ func_5C40(var_0) {
     self.var_102D1.var_5BD7 thread func_685F(var_1);
     self.var_5C6B func_82B1(%machinery_landing_drone_recovery, 1.0);
     wait(var_1);
-    self.var_102D1.var_5BD7 linkto(self.var_5C6B, "j_arm_L");
+    self.var_102D1.var_5BD7 linkTo(self.var_5C6B, "j_arm_L");
   } else {
     wait 1.1;
-    self.var_102D1.var_5BD7 linkto(self);
+    self.var_102D1.var_5BD7 linkTo(self);
   }
 
   wait 1;

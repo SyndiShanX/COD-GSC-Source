@@ -105,9 +105,9 @@ swing_lanterns() {
   org_angles = self.angles;
   org_pos = self.origin;
   while(1) {
-    self rotateto(self.angles + (randomintrange(-5, 5), randomintrange(-5, 5), 0), randomfloatrange(.5, 1));
+    self rotateTo(self.angles + (randomintrange(-5, 5), randomintrange(-5, 5), 0), randomfloatrange(.5, 1));
     self waittill("rotatedone");
-    self rotateto(org_angles, randomfloatrange(.5, 1));
+    self rotateTo(org_angles, randomfloatrange(.5, 1));
     self waittill("rotatedone");
   }
 }

@@ -347,7 +347,7 @@ func_6D6D(var_0, var_1, var_2) {
 }
 
 func_10033(var_0, var_1, var_2, var_3) {
-  if(scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(scripts\asm\asm_bb::bb_isanimScripted()) {
     return 0;
   }
 

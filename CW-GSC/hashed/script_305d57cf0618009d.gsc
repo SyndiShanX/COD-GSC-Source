@@ -144,7 +144,7 @@ function private function_9ddb4115(var_1d83d08d) {
   if(isDefined(level.deathcircles) && level.deathcircles.size > 0) {
     initcircle = level.deathcircles[0];
     newstart = var_1d83d08d.start;
-    toend = vectornormalize(var_1d83d08d.end - var_1d83d08d.start);
+    toend = vectorNormalize(var_1d83d08d.end - var_1d83d08d.start);
 
     for(var_164fe5c9 = distance2dsquared(newstart, initcircle.origin); var_164fe5c9 > sqr(initcircle.radius); var_164fe5c9 = var_c820832) {
       newstart += toend * 1000;
@@ -177,7 +177,7 @@ function private function_ea1ad421(insertion, start, end) {
   assert(isvec(start));
   assert(isvec(end));
   direction = end - start;
-  direction = vectornormalize(direction);
+  direction = vectorNormalize(direction);
   step = isDefined(level.var_427d6976.("insertionOOBCheckStepSize")) ? level.var_427d6976.("insertionOOBCheckStepSize") : 1000;
   assert(!oob::chr_party(start));
   point = function_f31cf3bb(start, direction, step, 0);
@@ -234,7 +234,7 @@ function function_d53a8c5b(insertion, fly_over_point, var_59526dd5, offset) {
   insertion.var_59526dd5 = var_59526dd5;
   var_872f085f = (0, var_59526dd5, 0);
   direction = anglesToForward(var_872f085f);
-  direction = vectornormalize(direction);
+  direction = vectorNormalize(direction);
   var_7c712437 = fly_over_point + anglestoright(var_872f085f) * offset;
   var_1d83d08d = {
     #start: var_7c712437 + direction * -150000, #end: var_7c712437 + direction * 150000
@@ -281,7 +281,7 @@ function private fly_path(insertion, var_1d83d08d, fly_over_point, var_59526dd5)
   assert(isstruct(insertion));
   var_872f085f = (0, var_59526dd5, 0);
   direction = anglesToForward(var_872f085f);
-  direction = vectornormalize(direction);
+  direction = vectorNormalize(direction);
   var_b828343b = isDefined(level.var_427d6976.("insertionDropStartOffset")) ? level.var_427d6976.("insertionDropStartOffset") : 5000;
   var_59141f3d = isDefined(level.var_427d6976.("insertionDropEndOffset")) ? level.var_427d6976.("insertionDropEndOffset") : 15000;
   var_82b0af47 = var_1d83d08d.start + var_b828343b * direction;
@@ -485,7 +485,7 @@ function function_da0c552e() {
 
       if(circleindex > 0) {
         firstcenter = level.deathcircles[0].origin;
-        tocenter = vectornormalize(center - firstcenter);
+        tocenter = vectorNormalize(center - firstcenter);
         var_6e3e0ad7 = vectortoangles(tocenter);
 
         if(math::cointoss()) {

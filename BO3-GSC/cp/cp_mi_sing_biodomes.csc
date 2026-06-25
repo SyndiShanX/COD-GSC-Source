@@ -177,10 +177,10 @@ function function_be7ae167(a_ents) {
 }
 
 function server_extra_cam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  e_xcam1 = getent(localclientnum, "server_camera1", "targetname");
-  e_xcam2 = getent(localclientnum, "server_camera2", "targetname");
-  e_xcam3 = getent(localclientnum, "server_camera3", "targetname");
-  e_xcam4 = getent(localclientnum, "server_camera4", "targetname");
+  e_xcam1 = getEnt(localclientnum, "server_camera1", "targetname");
+  e_xcam2 = getEnt(localclientnum, "server_camera2", "targetname");
+  e_xcam3 = getEnt(localclientnum, "server_camera3", "targetname");
+  e_xcam4 = getEnt(localclientnum, "server_camera4", "targetname");
   switch (newval) {
     case 0: {
       break;
@@ -195,7 +195,7 @@ function server_extra_cam(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
     case 3: {
       e_xcam3 setextracam(0);
-      e_xcam3 rotateyaw(35, 2);
+      e_xcam3 rotateYaw(35, 2);
       break;
     }
     case 4: {
@@ -204,7 +204,7 @@ function server_extra_cam(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
     case 5: {
       e_xcam3 setextracam(0);
-      e_xcam3 rotateyaw(-35, 2);
+      e_xcam3 rotateYaw(-35, 2);
       break;
     }
   }

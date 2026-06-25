@@ -146,7 +146,7 @@ addStartSpawnPoints(spawnPointName) {
         continue;
       }
 
-      vectorToAdjacent = VectorNormalize(adjacentSpawn.origin - spawnPoint.origin);
+      vectorToAdjacent = vectorNormalize(adjacentSpawn.origin - spawnPoint.origin);
       dotToAdjacent = VectorDot(forwardDir, vectorToAdjacent);
 
       if(dotToAdjacent > 0.86) {

@@ -227,8 +227,8 @@ function function_b1132160() {
   var_90150bee = "tag_throat_fx";
   origin = self gettagorigin(var_90150bee);
   angles = self gettagangles(var_90150bee);
-  turret = spawnvehicle("veh_bo3_dlc3_dragon_flame", origin, angles);
-  turret linkto(self, var_90150bee);
+  turret = spawnVehicle("veh_bo3_dlc3_dragon_flame", origin, angles);
+  turret linkTo(self, var_90150bee);
   turret.b_ignore_cleanup = 1;
   turret.ignoreme = 1;
   turret.ignore_nuke = 1;
@@ -506,7 +506,7 @@ function function_3d1f7c2e(var_2e1f54d4, var_777ffc66, var_90929db6 = 0, var_c30
     level waittill("arrival");
     level thread function_3b45d6c2(var_90f8d95e);
   }
-  var_12bd8497 = getent(var_777ffc66 + "_1_damage", "targetname");
+  var_12bd8497 = getEnt(var_777ffc66 + "_1_damage", "targetname");
   var_12bd8497.var_37ba64ca = 0;
   var_12bd8497 thread function_2d3f510e(var_c3052a58);
 }
@@ -593,7 +593,7 @@ function function_d4556285(var_2e1f54d4, var_777ffc66) {
   } else {
     n_duration = 10;
   }
-  var_12bd8497 = getent(var_777ffc66 + "_1_damage", "targetname");
+  var_12bd8497 = getEnt(var_777ffc66 + "_1_damage", "targetname");
   var_12bd8497 thread function_2dcfeeb9(var_777ffc66, n_duration);
 }
 
@@ -873,12 +873,12 @@ function function_71776fa5(var_19b50ade) {
 }
 
 function function_5bafaddd(var_5f982950, var_b1c60ae7) {
-  var_cc373138 = getent("mdl_dragon_console_" + var_5f982950, "targetname");
+  var_cc373138 = getEnt("mdl_dragon_console_" + var_5f982950, "targetname");
   while(true) {
     level.var_67881099[var_5f982950] waittill("hash_9c0a67f3");
     foreach(var_fbb61447 in var_b1c60ae7) {
       if(!level flag::get(var_fbb61447 + "_console_cooldown")) {
-        var_3db2a27f = getent("mdl_dragon_console_" + var_fbb61447, "targetname");
+        var_3db2a27f = getEnt("mdl_dragon_console_" + var_fbb61447, "targetname");
         var_3db2a27f showpart("tag_screen_red_animate");
         var_3db2a27f hidepart("tag_screen_green_animate");
         var_3db2a27f playSound("zmb_stalingrad_unavailable");
@@ -897,7 +897,7 @@ function function_5bafaddd(var_5f982950, var_b1c60ae7) {
     var_cc373138 hidepart("tag_screen_green_animate");
     var_cc373138 playSound("zmb_stalingrad_buttons");
     var_cc373138.var_a3338832 = 0;
-    var_5503da8a = getent("dragon_console_antenna_" + var_5f982950, "targetname");
+    var_5503da8a = getEnt("dragon_console_antenna_" + var_5f982950, "targetname");
     var_5503da8a thread scene::play("p7_fxanim_zm_stal_dragon_console_antenna_bundle", var_5503da8a);
     level thread zm_stalingrad_vo::function_4311e03d();
     level flag::set("dragon_console_triggered");
@@ -906,7 +906,7 @@ function function_5bafaddd(var_5f982950, var_b1c60ae7) {
     if(!level flag::get("dragon_console_global_disable")) {
       foreach(var_fbb61447 in var_b1c60ae7) {
         if(!level flag::get(var_fbb61447 + "_console_cooldown")) {
-          var_3db2a27f = getent("mdl_dragon_console_" + var_fbb61447, "targetname");
+          var_3db2a27f = getEnt("mdl_dragon_console_" + var_fbb61447, "targetname");
           var_3db2a27f hidepart("tag_screen_red_animate");
           var_3db2a27f showpart("tag_screen_green_animate");
           var_3db2a27f playSound("zmb_stalingrad_available");
@@ -934,7 +934,7 @@ function function_5bafaddd(var_5f982950, var_b1c60ae7) {
       } else {
         foreach(var_fbb61447 in var_b1c60ae7) {
           if(!level flag::get(var_fbb61447 + "_console_cooldown")) {
-            var_3db2a27f = getent("mdl_dragon_console_" + var_fbb61447, "targetname");
+            var_3db2a27f = getEnt("mdl_dragon_console_" + var_fbb61447, "targetname");
             var_3db2a27f showpart("tag_screen_red_animate");
             var_3db2a27f hidepart("tag_screen_green_animate");
             var_3db2a27f playSound("zmb_stalingrad_unavailable");
@@ -969,7 +969,7 @@ function function_5bafaddd(var_5f982950, var_b1c60ae7) {
 
 function function_4a78ee23(var_c7b41a30) {
   foreach(var_5f982950 in var_c7b41a30) {
-    var_cc373138 = getent("mdl_dragon_console_" + var_5f982950, "targetname");
+    var_cc373138 = getEnt("mdl_dragon_console_" + var_5f982950, "targetname");
     if(!(isDefined(var_cc373138.var_a3338832) && var_cc373138.var_a3338832)) {
       return true;
     }
@@ -983,7 +983,7 @@ function function_66a21ca(var_5f982950) {
 }
 
 function function_7ee20edb(var_5f982950) {
-  var_cc373138 = getent("mdl_dragon_console_" + var_5f982950, "targetname");
+  var_cc373138 = getEnt("mdl_dragon_console_" + var_5f982950, "targetname");
   var_cc373138 hidepart("tag_screen_green_animate");
   var_cc373138 hidepart("tag_screen_red_animate");
   var_cc373138.var_a3338832 = 0;
@@ -996,7 +996,7 @@ function function_7ee20edb(var_5f982950) {
 }
 
 function function_9fa4f2a3(var_5f982950, var_68860b9a = 1) {
-  var_cc373138 = getent("mdl_dragon_console_" + var_5f982950, "targetname");
+  var_cc373138 = getEnt("mdl_dragon_console_" + var_5f982950, "targetname");
   var_cc373138 hidepart("tag_screen_green_animate");
   var_cc373138 showpart("tag_screen_red_animate");
   var_cc373138.var_a3338832 = 0;
@@ -1006,7 +1006,7 @@ function function_9fa4f2a3(var_5f982950, var_68860b9a = 1) {
 }
 
 function function_496d5723(var_5f982950) {
-  var_cc373138 = getent("mdl_dragon_console_" + var_5f982950, "targetname");
+  var_cc373138 = getEnt("mdl_dragon_console_" + var_5f982950, "targetname");
   var_cc373138 hidepart("tag_screen_red_animate");
   var_cc373138 showpart("tag_screen_green_animate");
   var_cc373138 playSound("zmb_stalingrad_available");
@@ -1035,20 +1035,20 @@ function function_eb1965f1(var_ffc320da) {
 
 function function_bd21006c(player) {
   if(!player zm_utility::is_player_looking_at(self.origin, 0.1, 0)) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZM_STALINGRAD_POWER_REQUIRED");
+    self setHintString(&"ZM_STALINGRAD_POWER_REQUIRED");
     return false;
   }
   switch (level.var_f5464041[self.targetname]) {
     case 1: {
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_DISABLED");
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_DISABLED");
       break;
     }
     case 2: {
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_COOLDOWN");
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_COOLDOWN");
       break;
     }
     case 3: {
@@ -1057,31 +1057,31 @@ function function_bd21006c(player) {
       } else {
         var_d2b5a43f = 500;
       }
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_DRAGON_SUMMON", var_d2b5a43f);
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_DRAGON_SUMMON", var_d2b5a43f);
       break;
     }
     case 4: {
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_DRAGON_BUSY");
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_DRAGON_BUSY");
       break;
     }
     case 5: {
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_DRAGON_ON_THE_WAY");
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_DRAGON_ON_THE_WAY");
       break;
     }
     case 6: {
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_DRAGON_ARRIVED");
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_DRAGON_ARRIVED");
       break;
     }
     case 7: {
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_DRAGON_TAKE_OFF_COUNTDOWN");
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_DRAGON_TAKE_OFF_COUNTDOWN");
       break;
     }
     case 8: {
-      self sethintstring(&"ZM_STALINGRAD_CONSOLE_DRAGON_ENROUTE_PAVLOVS");
+      self setHintString(&"ZM_STALINGRAD_CONSOLE_DRAGON_ENROUTE_PAVLOVS");
       break;
     }
     default: {
-      self sethintstring("");
+      self setHintString("");
       break;
     }
   }
@@ -1400,14 +1400,14 @@ function function_cd9b4bf3(player) {
   var_422cea21 = level.var_f5464041[self.targetname];
   w_current = player getcurrentweapon();
   if(player zm_utility::has_hero_weapon() || w_current == getweapon("launcher_dragon_strike") || w_current == getweapon("launcher_dragon_strike_upgraded") || w_current == getweapon("minigun")) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(var_422cea21 == 6 || var_422cea21 == 7 && !array::contains(level.var_163a43e4, player)) {
-    self sethintstring(&"ZM_STALINGRAD_RIDE_DRAGON");
+    self setHintString(&"ZM_STALINGRAD_RIDE_DRAGON");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -1642,7 +1642,7 @@ function function_17b7a6a() {
   var_41b8920e = struct::get_array("s_dragon_boss_debug_player", "targetname");
   n_player = 0;
   foreach(player in level.activeplayers) {
-    player setorigin(var_41b8920e[n_player].origin);
+    player setOrigin(var_41b8920e[n_player].origin);
     player setplayerangles(var_41b8920e[n_player].angles);
     n_player++;
   }
@@ -1851,7 +1851,7 @@ function function_109151c2(a_ents) {
   level.var_ef9c43d7.targetname = "nikolai_siegebot";
   level.var_ef9c43d7 setteam("allies");
   level.var_ef9c43d7.takedamage = 0;
-  level.var_ef9c43d7 enablelinkto();
+  level.var_ef9c43d7 enablelinkTo();
   level.var_ef9c43d7 sethighdetail(0);
   level.var_ef9c43d7 vehicle_ai::set_state("special_attack");
   level.var_ef9c43d7 hidepart("tag_heat_vent_01_d1");
@@ -2018,7 +2018,7 @@ function function_3a34c204() {
   v_facing = anglesToForward(e_player getplayerangles());
   v_velocity = e_player getvelocity() + v_facing;
   v_velocity = (v_velocity[0], v_velocity[1], 0);
-  var_f840b1a7 = vectornormalize(v_velocity);
+  var_f840b1a7 = vectorNormalize(v_velocity);
   var_4cc0e23c = e_player.origin;
   for(i = 0; i < 3; i++) {
     var_270cdd14 = anglesToForward((0, randomintrange(-180, 180), 0));
@@ -2671,10 +2671,10 @@ function attack_thread_gun() {
           if(self getspeed() > 5) {
             forward = self getvelocity();
             forward = (forward[0], forward[1], 0);
-            forward = vectornormalize(forward);
+            forward = vectorNormalize(forward);
             var_2a039b93 = zombie.origin - self.origin;
             var_2a039b93 = (var_2a039b93[0], var_2a039b93[1], 0);
-            var_2a039b93 = vectornormalize(var_2a039b93);
+            var_2a039b93 = vectorNormalize(var_2a039b93);
             if(vectordot(forward, var_2a039b93) < 0.17) {
               continue;
             }
@@ -2928,7 +2928,7 @@ function function_c4fdcc57(harpoon) {
   while(isDefined(harpoon)) {
     debugstar(harpoon.origin, 1000000, (0, 1, 0));
     line(oldorigin, harpoon.origin, (1, 0, 0), 1, 0, 1000000);
-    randvec = vectornormalize(math::random_vector(1)) * 100;
+    randvec = vectorNormalize(math::random_vector(1)) * 100;
     oldorigin = harpoon.origin;
     wait(0.05);
   }

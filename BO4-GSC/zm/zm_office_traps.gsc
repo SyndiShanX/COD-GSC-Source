@@ -29,11 +29,11 @@ function_a28f0b21(e_holder, w_item) {
   level.var_e2103f01 += 1;
 
   if(function_8b1a219a()) {
-    level.fix_trigger_array[0] sethintstring(#"hash_323a35945e51c09a");
-    level.fix_trigger_array[1] sethintstring(#"hash_323a35945e51c09a");
+    level.fix_trigger_array[0] setHintString(#"hash_323a35945e51c09a");
+    level.fix_trigger_array[1] setHintString(#"hash_323a35945e51c09a");
   } else {
-    level.fix_trigger_array[0] sethintstring(#"hash_595a7e6ce85abd6e");
-    level.fix_trigger_array[1] sethintstring(#"hash_595a7e6ce85abd6e");
+    level.fix_trigger_array[0] setHintString(#"hash_595a7e6ce85abd6e");
+    level.fix_trigger_array[1] setHintString(#"hash_595a7e6ce85abd6e");
   }
 
   level flag::set(#"hash_7b57f5f8bfe10b93");
@@ -44,13 +44,13 @@ function_af5c24bb(e_holder, w_item) {
   level.var_e2103f01 += 1;
 
   if(function_8b1a219a()) {
-    level.fix_trigger_array[0] sethintstring(#"hash_323a35945e51c09a");
-    level.fix_trigger_array[1] sethintstring(#"hash_323a35945e51c09a");
+    level.fix_trigger_array[0] setHintString(#"hash_323a35945e51c09a");
+    level.fix_trigger_array[1] setHintString(#"hash_323a35945e51c09a");
     return;
   }
 
-  level.fix_trigger_array[0] sethintstring(#"hash_595a7e6ce85abd6e");
-  level.fix_trigger_array[1] sethintstring(#"hash_595a7e6ce85abd6e");
+  level.fix_trigger_array[0] setHintString(#"hash_595a7e6ce85abd6e");
+  level.fix_trigger_array[1] setHintString(#"hash_595a7e6ce85abd6e");
 }
 
 function_e021562c() {
@@ -70,12 +70,12 @@ fix_electric_trap() {
     return;
   }
 
-  self sethintstring(#"hash_100d349fbdcacb2b");
-  self setcursorhint("HINT_NOICON");
-  self usetriggerrequirelookat();
+  self setHintString(#"hash_100d349fbdcacb2b");
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
   trap_trigger = getEntArray(self.script_flag_wait, "targetname");
   array::thread_all(trap_trigger, &electric_hallway_trap_piece_hide, self.script_flag_wait);
-  trap_cover = getent(self.script_string, "targetname");
+  trap_cover = getEnt(self.script_string, "targetname");
   level thread function_5bd53e9b(trap_cover, self.script_flag_wait);
 
   if(zm_utility::is_standard()) {
@@ -97,8 +97,8 @@ fix_electric_trap() {
           level.var_e2103f01 -= 1;
 
           if(level.var_e2103f01 == 0) {
-            level.fix_trigger_array[0] sethintstring(#"hash_100d349fbdcacb2b");
-            level.fix_trigger_array[1] sethintstring(#"hash_100d349fbdcacb2b");
+            level.fix_trigger_array[0] setHintString(#"hash_100d349fbdcacb2b");
+            level.fix_trigger_array[1] setHintString(#"hash_100d349fbdcacb2b");
           }
 
           if(level flag::get(#"hash_7b57f5f8bfe10b93")) {
@@ -115,7 +115,7 @@ fix_electric_trap() {
     }
   }
 
-  self sethintstring("");
+  self setHintString("");
   self triggerenable(0);
 }
 
@@ -125,7 +125,7 @@ electric_hallway_trap_piece_hide(str_flag) {
   }
 
   if(self.classname == "trigger_use_new") {
-    self sethintstring(#"zombie/need_power");
+    self setHintString(#"zombie/need_power");
     self thread electric_hallway_trap_piece_show(str_flag);
     self triggerenable(0);
   }

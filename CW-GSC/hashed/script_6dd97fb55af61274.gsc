@@ -116,7 +116,7 @@ function private function_333a7b23(entity) {
 
       if(entity isatgoal()) {
         var_bf3a521d = entity.attackable.origin - entity.origin;
-        var_bf3a521d = vectornormalize(var_bf3a521d);
+        var_bf3a521d = vectorNormalize(var_bf3a521d);
 
         if(vectordot(var_bf3a521d, anglesToForward(entity.angles)) < 0.99) {
           var_ae7100d7 = vectortoangles(var_bf3a521d);
@@ -152,7 +152,7 @@ function private function_333a7b23(entity) {
 
         to_enemy = target_point - entity.origin;
         to_enemy = (to_enemy[0], to_enemy[1], 0);
-        to_enemy = vectornormalize(to_enemy);
+        to_enemy = vectorNormalize(to_enemy);
 
         if(is_false(var_136a3202)) {
           dist = distance2d(target_point, entity.origin);

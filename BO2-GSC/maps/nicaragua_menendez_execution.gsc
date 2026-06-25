@@ -141,19 +141,19 @@ event_cleanup() {
 
 close_shed_door() {
   trigger_wait("trig_execution");
-  s_door = getstruct("can_see_shed_door", "targetname");
+  s_door = getStruct("can_see_shed_door", "targetname");
 
   while(is_player_looking_at(s_door.origin, 0) || self.origin[1] > 6272) {
     wait 0.05;
   }
 
-  m_door = getent("shed_door", "targetname");
+  m_door = getEnt("shed_door", "targetname");
   m_door ignorecheapentityflag(1);
   m_door setscale(1.145);
   m_door.angles = vectorscale((0, 1, 0), 90.0);
   m_door.origin = (-5408, 6344, 1018);
   wait 0.15;
-  m_door disconnectpaths();
+  m_door disconnectPaths();
   load_gump("nicaragua_gump_menendez");
   a_menendez_hill_ents = getEntArray("menendez_hill", "script_noteworthy");
 
@@ -181,8 +181,8 @@ connect_roof_watcher_path() {
   level thread connect_roof_watcher_path_by_ai_group_count();
   flag_wait_either("execution_start", "end_execution");
   level waittill_either("one_execution_pdf_left", "rage_off");
-  m_path_clip = getent("roof_watcher_path_clip", "targetname");
-  m_path_clip disconnectpaths();
+  m_path_clip = getEnt("roof_watcher_path_clip", "targetname");
+  m_path_clip disconnectPaths();
   m_path_clip delete();
   level notify("execution_about_done");
   wait 0.15;
@@ -226,9 +226,9 @@ execution_scene() {
 
 execution_non_mature_objective() {
   trigger_wait("objective_middle_village_trigger", "script_noteworthy");
-  s_obj_execution = getstruct("obj_execution", "targetname");
+  s_obj_execution = getStruct("obj_execution", "targetname");
   set_objective(level.obj_menendez_axe, s_obj_execution, "");
-  t_axe = getent("trig_axe", "targetname");
+  t_axe = getEnt("trig_axe", "targetname");
   t_axe delete();
   flag_wait_either("execution_start", "end_execution");
   set_objective(level.obj_menendez_axe, undefined, "delete");
@@ -285,7 +285,7 @@ run_away(str_node) {
 
 execution_escape() {
   self endon("death");
-  self set_goalradius(128);
+  self set_goalRadius(128);
   self set_ignoreme(0);
   self.enemyaccuracy = 0.6;
   v_execution_civ_goal = get_ent("vol_execution_civ", "targetname", 1);
@@ -337,10 +337,10 @@ wait_axe_grab() {
   level endon("end_execution");
   run_scene_first_frame("axe_attack_prop");
   trigger_wait("objective_middle_village_trigger", "script_noteworthy");
-  s_axe_obj = getstruct("obj_axe", "targetname");
+  s_axe_obj = getStruct("obj_axe", "targetname");
   set_objective(level.obj_menendez_axe, s_axe_obj, "use");
-  t_axe = getent("trig_axe", "targetname");
-  t_axe sethintstring(&"NICARAGUA_RAGE_MELEE_PROMPT");
+  t_axe = getEnt("trig_axe", "targetname");
+  t_axe setHintString(&"NICARAGUA_RAGE_MELEE_PROMPT");
   t_axe thread axe_cleanup();
   trigger_wait("trig_axe");
   level thread axe_scene();
@@ -436,9 +436,9 @@ delete_molotov_when_dead() {
 
 nicaragua_execution_objectives() {
   level waittill("execution_about_done");
-  e_trigger = getent("objective_stables_gate_trigger", "targetname");
+  e_trigger = getEnt("objective_stables_gate_trigger", "targetname");
   str_struct_name = e_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_menendez_save_josefina, s_struct, "");
   e_trigger waittill("trigger");
   set_objective(level.obj_menendez_save_josefina, undefined, "remove");
@@ -450,11 +450,11 @@ func_spawn_pdf_execution_grounds(e_volume) {
   self set_pacifist(1);
   self set_ignoreall(1);
   n_old_radius = self.goalradius;
-  self set_goalradius(2);
+  self set_goalRadius(2);
   flag_wait("villagers_executed");
   wait 6;
   self set_ignoreall(0);
-  self set_goalradius(n_old_radius);
+  self set_goalRadius(n_old_radius);
   self setgoalvolumeauto(e_volume);
   self waittill("goal");
   self set_pacifist(0);

@@ -231,7 +231,7 @@ _id_E68E(var_0, var_1, var_2) {
         var_4 = (0, 0, var_12.origin[2] + 200);
         var_13 = var_11.origin * (1, 1, 0) + var_4;
         var_14 = var_12.origin * (1, 1, 0) + var_4;
-        var_15 = vectornormalize(var_14 - var_13);
+        var_15 = vectorNormalize(var_14 - var_13);
         var_16 = 9000;
 
         if(level.mapname == "mp_shipment") {
@@ -259,7 +259,7 @@ _id_E68E(var_0, var_1, var_2) {
 
     var_20 = scripts\engine\utility::_id_6969(var_19, level._id_A886);
     var_21 = (var_20.origin[0], var_20.origin[1], 1750);
-    var_22 = vectornormalize(var_19 - var_21);
+    var_22 = vectorNormalize(var_19 - var_21);
     var_7 = var_21 - var_22 * 11000;
     var_8 = var_21 - var_22 * 1000;
     var_9 = vectortoangles(var_22);
@@ -370,7 +370,7 @@ _id_E68E(var_0, var_1, var_2) {
   var_24._id_F81F.team = var_0.team;
   var_24._id_F81F.angles = var_24.angles;
   var_24._id_F81F.streakinfo = var_1;
-  var_24._id_F81F linkto(var_24, "tag_turret");
+  var_24._id_F81F linkTo(var_24, "tag_turret");
   var_24._id_F81F _meth_83A0(var_0.team);
   var_24._id_F81F _meth_839D(0);
   var_24._id_F81F setmode("manual");
@@ -381,7 +381,7 @@ _id_E68E(var_0, var_1, var_2) {
   var_24._id_A2B3.angles = var_24.angles;
   var_24._id_A2B3.owner = var_24.owner;
   var_24._id_A2B3.team = var_24.team;
-  var_24._id_A2B3 linkto(var_24, "tag_gun_l");
+  var_24._id_A2B3 linkTo(var_24, "tag_gun_l");
   var_24._id_A2B3 setentityowner(var_0);
   var_24._id_A2B3 setotherent(var_0);
   var_24._id_A2B4 = spawn("script_model", var_24 gettagorigin("tag_gun_r"));
@@ -389,18 +389,18 @@ _id_E68E(var_0, var_1, var_2) {
   var_24._id_A2B4.angles = var_24.angles;
   var_24._id_A2B4.owner = var_24.owner;
   var_24._id_A2B4.team = var_24.team;
-  var_24._id_A2B4 linkto(var_24, "tag_gun_r");
+  var_24._id_A2B4 linkTo(var_24, "tag_gun_r");
   var_24._id_A2B4 setentityowner(var_0);
   var_24._id_A2B4 setotherent(var_0);
   var_24._id_F880 = spawn("script_model", var_24._id_F81F.origin);
   var_24._id_F880 setModel("ks_apache_turret_mp");
   var_24._id_F880.angles = var_24.angles;
-  var_24._id_F880 linkto(var_24._id_F81F, "tag_player");
+  var_24._id_F880 linkTo(var_24._id_F81F, "tag_player");
   var_24._id_F880 setotherent(var_0);
   var_24._id_B0CB = spawn("script_model", var_24 gettagorigin("tag_origin"));
   var_24._id_B0CB setModel("pilot_viewmodel_arms");
   var_24._id_B0CB.angles = var_24.angles;
-  var_24._id_B0CB linkto(var_24, "tag_origin");
+  var_24._id_B0CB linkTo(var_24, "tag_origin");
   var_24._id_B0CB._id_18AF = "ks_chopper_gunner_pilot";
   var_24._id_B0CB _id_06C6::_id_D47B();
   level notify("matchrecording_chopper", var_24);
@@ -538,8 +538,8 @@ _id_3694(var_0, var_1, var_2, var_3, var_4) {
   self _meth_826E(var_7, "tag_player", 1, 0, 0, 0, 0, 1);
   self _meth_8266(0);
   self visionsetkillstreakforplayer("tac_ops_slamzoom", 0.2);
-  var_7 moveto(var_8, 0.5);
-  var_7 rotateto(var_9, 0.5);
+  var_7 moveTo(var_8, 0.5);
+  var_7 rotateTo(var_9, 0.5);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.5);
   self visionsetkillstreakforplayer("", 0.2);
   self unlink();
@@ -611,7 +611,7 @@ _id_369B(var_0) {
 
   if(!isDefined(self._id_B7AB)) {
     self._id_B7AB = spawn("script_origin", self.origin);
-    self._id_B7AB linkto(self);
+    self._id_B7AB linkTo(self);
   }
 
   scripts\cp_mp\utility\weapon_utility::_id_D5E7(self, ::_id_368E);
@@ -840,7 +840,7 @@ _id_368A(var_0) {
     }
 
     self.owner earthquakeforplayer(0.25, 0.4, self._id_F81F.origin, 150);
-    self.owner playrumbleonentity("damage_heavy");
+    self.owner playRumbleOnEntity("damage_heavy");
     var_5 = self._id_A2B3;
 
     if(!isDefined(self._id_9F6F) || self._id_9F6F == "right") {
@@ -1101,11 +1101,11 @@ _id_3690(var_0) {
     if(_func_010F(var_3)) {
       if(_func_0037(var_4 / self.maxhealth) >= 0.33) {
         self.owner earthquakeforplayer(0.25, 0.2, self._id_F81F.origin, 150);
-        self.owner playrumbleonentity("damage_heavy");
+        self.owner playRumbleOnEntity("damage_heavy");
         var_6 = "heavy";
       } else {
         self.owner earthquakeforplayer(0.15, 0.15, self._id_F81F.origin, 150);
-        self.owner playrumbleonentity("damage_light");
+        self.owner playRumbleOnEntity("damage_light");
       }
     }
 
@@ -1427,7 +1427,7 @@ _id_3689(var_0, var_1, var_2, var_3) {
         var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var_0);
       }
 
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }

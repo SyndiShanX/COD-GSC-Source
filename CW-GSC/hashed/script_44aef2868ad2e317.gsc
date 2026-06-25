@@ -66,9 +66,9 @@ function starting(str_skipto) {
   level thread scene::init("scene_kgb_poison_tea");
   level thread scene::init("scene_kgb_elevator_holdup");
   level thread scene::init("scene_kgb_walkup_adler");
-  level.checkpoint_clip = getent("checkpoint_clip", "targetname");
+  level.checkpoint_clip = getEnt("checkpoint_clip", "targetname");
   level.checkpoint_clip notsolid();
-  level.checkpoint_clip_right = getent("checkpoint_clip_right", "targetname");
+  level.checkpoint_clip_right = getEnt("checkpoint_clip_right", "targetname");
   level.checkpoint_clip_right notsolid();
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
@@ -143,7 +143,7 @@ function function_6cbe4283() {
 }
 
 function function_a58aee07() {
-  blocker = getent("frisk_blocker", "targetname");
+  blocker = getEnt("frisk_blocker", "targetname");
   blocker notsolid();
   level thread function_e7fcf8ef();
   level thread function_ada5392f();
@@ -1403,7 +1403,7 @@ function function_2d2c7319(anim) {
   self endon(#"delete");
 
   if(isDefined(self)) {
-    self stopanimscripted(0.5);
+    self stopanimScripted(0.5);
   }
 
   wait 0.25;
@@ -1529,7 +1529,7 @@ function function_f632133() {
   self thread function_3cf5b786();
   self thread function_7d7d8fd0();
   self actions::function_df6077("body_shield", 0);
-  chair = getent("armory_chair", "targetname");
+  chair = getEnt("armory_chair", "targetname");
   self.var_a08ba405 = chair;
   struct = struct::get("armory_takedown_struct");
   self.var_1f1bd6ed = struct.origin;
@@ -1961,7 +1961,7 @@ function function_94385b7e() {
   self waittill(#"takedown_begin");
   self.var_a6ac27c = 1;
   victimfwd = anglesToForward(self.angles);
-  playerdelta = vectornormalize(level.player.origin - self.origin);
+  playerdelta = vectorNormalize(level.player.origin - self.origin);
   dot = vectordot(playerdelta, victimfwd);
 
   if(dot < 0) {
@@ -2081,7 +2081,7 @@ function function_490a8713() {
   self endon(#"death");
   tag = spawn("script_model", self.origin);
   tag setModel("tag_origin");
-  tag linkto(self, "tag_origin", (0, 0, 44));
+  tag linkTo(self, "tag_origin", (0, 0, 44));
   tag util::create_cursor_hint("tag_origin", (0, 0, 0), #"hash_12aeefa638922fae", 72, undefined, &function_519cff6f, undefined, 128, undefined, undefined, undefined, 1, &function_3b01cf47);
   self function_bf9a3b8d();
   tag util::remove_cursor_hint();
@@ -2172,7 +2172,7 @@ function function_61fd8024() {
   level.player endon(#"death");
   doors::unlock("general_door", "targetname", 1, level.player);
   level flag::set("flag_poi_office_meeting");
-  charkov_office_restricted_area_trigger = getent("charkov_office_restricted_area_trigger", "targetname");
+  charkov_office_restricted_area_trigger = getEnt("charkov_office_restricted_area_trigger", "targetname");
 
   if(isDefined(charkov_office_restricted_area_trigger)) {
     charkov_office_restricted_area_trigger delete();
@@ -2445,7 +2445,7 @@ function function_c1fe873f() {
   level scene::stop("scene_kgb_influence_prisoner");
   level scene::play("scene_kgb_influence_prisoner", "General_Kill_Enter", [level.prisoner, level.guard, level.general]);
   level thread scene::play("scene_kgb_influence_prisoner", "General_Kill_Wait", [level.prisoner, level.guard, level.general]);
-  vol = getent("prisoner_volume", "targetname");
+  vol = getEnt("prisoner_volume", "targetname");
   level.player endon(#"death");
 
   while(level.player istouching(vol)) {
@@ -2459,11 +2459,11 @@ function function_c1fe873f() {
 }
 
 function interrogation_door_clip() {
-  door = getent("interrogation_door_clip", "targetname");
+  door = getEnt("interrogation_door_clip", "targetname");
   door.origin += (0, 0, -128);
   wait 10;
   door delete();
-  var_13cf2787 = getent("prisoner_pencil", "targetname");
+  var_13cf2787 = getEnt("prisoner_pencil", "targetname");
   var_13cf2787 setModel("un_office_pencil_01_bloody");
   wait 5;
 
@@ -2835,7 +2835,7 @@ function function_185dfc80() {
 
   if(level flag::get("flag_checkpoint_moment_done")) {
     level thread function_f0b5ab76(12);
-    blocker = getent("frisk_blocker", "targetname");
+    blocker = getEnt("frisk_blocker", "targetname");
     blocker solid();
     level flag::set("flag_charkov_in_scene");
     level scene::stop("scene_kgb_generals_office");
@@ -2875,7 +2875,7 @@ function function_f9f3811c() {
 
 function function_d41f091c() {
   level endon(#"flag_player_swap");
-  blocker = getent("frisk_blocker", "targetname");
+  blocker = getEnt("frisk_blocker", "targetname");
   blocker solid();
   struct = struct::get("obj_checkpoint", "targetname");
   wait 9;
@@ -3027,12 +3027,12 @@ function function_3fb458b8() {
   level.general.ignoreall = 1;
   level flag::set("flag_charkov_in_scene");
   level scene::stop("scene_kgb_generals_office");
-  hat = getent("charkov_hat", "targetname");
+  hat = getEnt("charkov_hat", "targetname");
   hat.origin = level.general gettagorigin("j_helmet");
   hat.angles = level.general gettagangles("j_helmet");
-  hat linkto(level.general, "j_helmet");
+  hat linkTo(level.general, "j_helmet");
   hat hide();
-  chair = getent("charkov_chair", "targetname");
+  chair = getEnt("charkov_chair", "targetname");
   chair delete();
   waitframe(1);
   level thread scene::play("scene_kgb_poison_tea", "Intro_Loop");
@@ -3209,8 +3209,8 @@ function function_bc457fe3(prompt) {
 }
 
 function function_8839afce(pick) {
-  level.var_18430051 = getent("cup_left", "targetname");
-  level.var_e471caeb = getent("cup_right", "targetname");
+  level.var_18430051 = getEnt("cup_left", "targetname");
+  level.var_e471caeb = getEnt("cup_right", "targetname");
   level.var_18430051.poison = 0;
   level.var_e471caeb.poison = 0;
 
@@ -3322,7 +3322,7 @@ function function_2aa3292b(var_bddef49) {
   var_bddef49 dialog_tree::function_bfcc8f29();
   level flag::set("flag_poi_office_charkov_dead");
   level scene::stop("scene_kgb_secretary_dt");
-  pen = getent("secretary_pen", "targetname");
+  pen = getEnt("secretary_pen", "targetname");
 
   if(isDefined(pen)) {
     pen delete();
@@ -3341,7 +3341,7 @@ function function_2aa3292b(var_bddef49) {
   namespace_e77bf565::function_e90c279f();
   snd::client_msg(#"hash_1d5a01df795ac3d2");
   level thread scene::play("scene_kgb_poison_tea", "Player_Standup");
-  chair_clip = getent("poison_chair_blocker", "targetname");
+  chair_clip = getEnt("poison_chair_blocker", "targetname");
   chair_clip.origin += (0, 0, -256);
   level scene::play("scene_kgb_poison_tea_player", "Player_Standup");
   namespace_e77bf565::function_f6eb250d();
@@ -3355,7 +3355,7 @@ function function_2aa3292b(var_bddef49) {
 }
 
 function function_ce588e51() {
-  hat = getent("charkov_hat", "targetname");
+  hat = getEnt("charkov_hat", "targetname");
   hat unlink();
   wait 6;
 
@@ -3446,7 +3446,7 @@ function function_5b602e4f(player, var_7b20e52b) {
   angles = self gettagangles("tag_eye");
   v_forward = anglesToForward(angles);
   v_loc = player getEye();
-  v_dir = vectornormalize(v_loc - self getEye());
+  v_dir = vectorNormalize(v_loc - self getEye());
   dp = vectordot(v_forward, v_dir);
 
   if(dp > -0.1) {
@@ -3760,7 +3760,7 @@ function function_875438fc() {
 }
 
 function spare_card() {
-  tag = getent("armory_spare_card", "targetname");
+  tag = getEnt("armory_spare_card", "targetname");
   level scene::init("scene_kgb_armory_keycard");
   tag util::create_cursor_hint("tag_origin", (0, 0, 0), #"hash_460325cda2b5dc30", 48, undefined, &function_c7de39b1, undefined, undefined, undefined, 0, 0);
   tag thread function_1416f12d();
@@ -3853,7 +3853,7 @@ function function_c1a40cd6() {
   guy flashlight::function_7c2f623b();
   guy flashlight::function_65e5c8c8(1);
   level scene::play("war_room_flashlight_look", guy);
-  guy stopanimscripted();
+  guy stopanimScripted();
   guy namespace_979752dc::function_bc54026c("investigate");
   guy namespace_979752dc::function_bc54026c("cover_blown");
   guy namespace_979752dc::function_bc54026c("combat");
@@ -3959,7 +3959,7 @@ function function_799b3854() {
   wait 1;
   level dialogue::function_96171f6d("vox_cp_rkgb_02000_blkv_thisisbelikovin_a4");
   wait 0.5;
-  level.player playrumbleonentity("anim_light");
+  level.player playRumbleOnEntity("anim_light");
   level flag::set("flag_allow_boiler_door");
 }
 
@@ -3974,7 +3974,7 @@ function function_ebf2af84() {
   level hint_tutorial::function_9f427d88();
   level.player giveweapon(weapon);
   level.player switchtoweaponimmediate(weapon, 1);
-  level.player playrumbleonentity("anim_light");
+  level.player playRumbleOnEntity("anim_light");
   level.player gestures::function_b6cc48ed("ges_t9_radio_call_kgb", undefined, 1, 0, undefined, 0, 1);
 }
 
@@ -4327,7 +4327,7 @@ function function_ca7fd487(origin) {
 
     if(s_result._notify == #"combination_correct") {
       origin util::remove_cursor_hint();
-      lock = getent("ins_restricted_area_locker_lock", "targetname");
+      lock = getEnt("ins_restricted_area_locker_lock", "targetname");
 
       if(isDefined(lock)) {
         lock delete();
@@ -4336,8 +4336,8 @@ function function_ca7fd487(origin) {
       lock_pieces = getEntArray("lock_pieces", "targetname");
 
       foreach(piece in lock_pieces) {
-        door = getent(piece.target, "targetname");
-        piece linkto(door);
+        door = getEnt(piece.target, "targetname");
+        piece linkTo(door);
       }
 
       wait 1;
@@ -4423,11 +4423,11 @@ function function_a1af304b() {
 function function_a6dc6fea() {
   level flag::wait_till("translate_table");
   level.player dialogue::queue("vox_cp_rkgb_01650_blkv_maybetheresaclu_f6");
-  var_f3b47ae = getent("periodic_translate_1", "targetname");
+  var_f3b47ae = getEnt("periodic_translate_1", "targetname");
   namespace_93648050::register_trigger(hash("krav_clue_1"), var_f3b47ae, #"hash_617f7cd3a1666c29", 256, undefined, 4);
-  var_20f66b24 = getent("periodic_translate_2", "targetname");
+  var_20f66b24 = getEnt("periodic_translate_2", "targetname");
   namespace_93648050::register_trigger(hash("krav_clue_2"), var_20f66b24, #"hash_617f79d3a1666710", 256, undefined, 4);
-  var_a5167306 = getent("periodic_translate_3", "targetname");
+  var_a5167306 = getEnt("periodic_translate_3", "targetname");
   namespace_93648050::register_trigger(hash("krav_clue_3"), var_a5167306, #"hash_617f7ad3a16668c3", 256, undefined, 4);
 }
 
@@ -5281,9 +5281,9 @@ function function_a79c8909(str_skipto) {
   level thread scene::init("scene_kgb_poison_tea");
   level thread scene::init("scene_kgb_elevator_holdup");
   level thread scene::init("scene_kgb_walkup_adler");
-  level.checkpoint_clip = getent("checkpoint_clip", "targetname");
+  level.checkpoint_clip = getEnt("checkpoint_clip", "targetname");
   level.checkpoint_clip notsolid();
-  level.checkpoint_clip_right = getent("checkpoint_clip_right", "targetname");
+  level.checkpoint_clip_right = getEnt("checkpoint_clip_right", "targetname");
   level.checkpoint_clip_right notsolid();
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
@@ -5435,7 +5435,7 @@ function function_5b0a20a7() {
   level thread scene::play("scene_kgb_tutorial_camera_guard", "Forward_Loop");
   level flag::wait_till("flag_tutorial_2");
   self thread function_6f070100();
-  chair = getent("tutorial_chair", "targetname");
+  chair = getEnt("tutorial_chair", "targetname");
   self.var_a08ba405 = chair;
   self.var_d3f0031c = "td_scene_nonlethal_behind_b";
   self.var_4f8ed4b2 = #"hash_2f16f66c7d8ae1de";
@@ -5514,7 +5514,7 @@ function function_46b46212() {
 }
 
 function function_d76e3cea() {
-  chair = getent("tutorial_chair", "targetname");
+  chair = getEnt("tutorial_chair", "targetname");
   self.var_d3f0031c = "td_scene_nonlethal_behind_b";
   self.var_4f8ed4b2 = #"hash_2f16f66c7d8ae1de";
   self.var_59212ad0 = "td_scene_nonlethal_behind_b";
@@ -5602,7 +5602,7 @@ function function_dbfe9c06(s_targetname) {
 
 function function_6c5203f5() {
   level.player endon(#"death");
-  var_5f75397b = vectornormalize(level.player.origin - self.origin);
+  var_5f75397b = vectorNormalize(level.player.origin - self.origin);
   v_forward = anglesToForward(self.angles);
   var_3f9826ab = vectordot(var_5f75397b, v_forward);
   v_right = anglestoright(self.angles);

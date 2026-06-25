@@ -11,7 +11,7 @@ friendly_bubbles() {
   thread friendly_bubbles_cleanup_on_death();
   var_0 = "TAG_EYE";
   self.scuba_org = common_scripts\utility::spawn_tag_origin();
-  self.scuba_org linkto(self, "tag_eye", (5, 0, -6), (-90, 0, 0));
+  self.scuba_org linkTo(self, "tag_eye", (5, 0, -6), (-90, 0, 0));
 
   for(;;) {
     wait(3.5 + randomfloat(3));

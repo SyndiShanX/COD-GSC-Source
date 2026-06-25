@@ -41,13 +41,13 @@ on_begin(var_e84d35d1) {
 
   level.var_64e17761 = var_64e17761;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_68b149a2(level.var_64e17761);
   }
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"hash_576884b397154a7d");
   }
 }
@@ -141,8 +141,8 @@ function_202ee8fa() {
   self clientfield::set("" + #"water_player_freeze_fx", 1);
   self clientfield::set_to_player("" + #"water_player_freeze_sfx", 1);
   t_ice = spawn("trigger_damage", self.origin, 0, 15, 72);
-  t_ice enablelinkto();
-  t_ice linkto(self);
+  t_ice enablelinkTo();
+  t_ice linkTo(self);
   self.t_ice = t_ice;
   self thread zm_orange_water::function_872ec0b2(t_ice);
 

@@ -24,7 +24,7 @@ function private function_bc948200() {
 
 function private function_83c9fd20(params) {
   var_21a143e = params.countdowntime;
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(var_21a143e > 0) {
     level notify(#"hash_722cff0020f34cd4");
@@ -36,7 +36,7 @@ function private function_83c9fd20(params) {
 }
 
 function private set(var_5b36f17f, var_6a374e41) {
-  level.player = isDefined(level.player) ? level.player : getplayers()[0];
+  level.player = isDefined(level.player) ? level.player : getPlayers()[0];
 
   if(!namespace_61e6d095::exists(#"hash_1a9d78f69978a1f3")) {
     namespace_61e6d095::create(#"hash_1a9d78f69978a1f3", #"hash_41ca08e341520d88");

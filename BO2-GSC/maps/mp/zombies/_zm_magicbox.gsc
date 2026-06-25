@@ -151,7 +151,7 @@ set_treasure_chest_cost(cost) {
 }
 
 get_chest_pieces() {
-  self.chest_box = getent(self.script_noteworthy + "_zbarrier", "script_noteworthy");
+  self.chest_box = getEnt(self.script_noteworthy + "_zbarrier", "script_noteworthy");
   self.chest_rubble = [];
   rubble = getEntArray(self.script_noteworthy + "_rubble", "script_noteworthy");
 
@@ -161,7 +161,7 @@ get_chest_pieces() {
     }
   }
 
-  self.zbarrier = getent(self.script_noteworthy + "_zbarrier", "script_noteworthy");
+  self.zbarrier = getEnt(self.script_noteworthy + "_zbarrier", "script_noteworthy");
 
   if(isDefined(self.zbarrier)) {
     self.zbarrier zbarrierpieceuseboxriselogic(3);
@@ -186,9 +186,9 @@ boxtrigger_update_prompt(player) {
 
   if(isDefined(self.hint_string)) {
     if(isDefined(self.hint_parm1)) {
-      self sethintstring(self.hint_string, self.hint_parm1);
+      self setHintString(self.hint_string, self.hint_parm1);
     } else {
-      self sethintstring(self.hint_string);
+      self setHintString(self.hint_string);
     }
   }
 
@@ -196,7 +196,7 @@ boxtrigger_update_prompt(player) {
 }
 
 boxstub_update_prompt(player) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   if(!self trigger_visible_to_player(player)) {
     return false;
@@ -303,7 +303,7 @@ hide_chest(doboxleave) {
       self.zbarrier thread magic_box_zbarrier_leave();
       self.zbarrier waittill("left");
       playFX(level._effect["poltergeist"], self.zbarrier.origin, anglestoup(self.angles), anglesToForward(self.angles));
-      playsoundatposition("zmb_box_poof", self.zbarrier.origin);
+      playSoundAtPosition("zmb_box_poof", self.zbarrier.origin);
     } else
       self.zbarrier thread set_magic_box_zbarrier_state("away");
   }
@@ -1152,12 +1152,12 @@ treasure_chest_weapon_spawn(chest, player, respin) {
 
       if(isDefined(self.weapon_model)) {
         v_fly_away = self.origin + anglestoup(self.angles) * 500;
-        self.weapon_model moveto(v_fly_away, 4, 3);
+        self.weapon_model moveTo(v_fly_away, 4, 3);
       }
 
       if(isDefined(self.weapon_model_dw)) {
         v_fly_away = self.origin + anglestoup(self.angles) * 500;
-        self.weapon_model_dw moveto(v_fly_away, 4, 3);
+        self.weapon_model_dw moveTo(v_fly_away, 4, 3);
       }
 
       self.weapon_model waittill("movedone");
@@ -1258,7 +1258,7 @@ chest_get_max_usage() {
 timer_til_despawn(v_float) {
   self endon("kill_weapon_movement");
   putbacktime = 12;
-  self moveto(self.origin - v_float * 0.85, putbacktime, putbacktime * 0.5);
+  self moveTo(self.origin - v_float * 0.85, putbacktime, putbacktime * 0.5);
   wait(putbacktime);
 
   if(isDefined(self)) {

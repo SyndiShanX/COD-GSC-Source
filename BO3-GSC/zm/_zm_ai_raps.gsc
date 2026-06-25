@@ -108,7 +108,7 @@ function raps_round_tracker() {
       } else {
         level.n_next_raps_round = (10 + (level.raps_round_count * 10)) + (randomintrange(-1, 1));
       }
-      getplayers()[0] iprintln("" + level.n_next_raps_round);
+      getPlayers()[0] iprintln("" + level.n_next_raps_round);
     } else if(level flag::get("raps_round")) {
       raps_round_stop();
       level.round_spawn_func = old_spawn_func;
@@ -150,7 +150,7 @@ function raps_round_stop() {
 function raps_round_spawning() {
   level endon("intermission");
   level endon("raps_round");
-  level.raps_targets = getplayers();
+  level.raps_targets = getPlayers();
   for(i = 0; i < level.raps_targets.size; i++) {
     level.raps_targets[i].hunted_by = 0;
   }
@@ -173,7 +173,7 @@ function raps_round_spawning() {
   wait(1);
   elemental_round_fx();
   visionset_mgr::activate("visionset", "zm_elemental_round_visionset", undefined, 1.5, 1.5, 2);
-  playsoundatposition("vox_zmba_event_rapsstart_0", (0, 0, 0));
+  playSoundAtPosition("vox_zmba_event_rapsstart_0", (0, 0, 0));
   wait(6);
   n_raps_alive = 0;
   level flag::set("raps_round_in_progress");
@@ -368,7 +368,7 @@ function raps_spawn_fx(ai, ent) {
   ground_tell_location setModel("tag_origin");
   playFXOnTag(level._effect["raps_ground_spawn"], ground_tell_location, "tag_origin");
   ground_tell_location playSound("zmb_meatball_spawn_tell");
-  playsoundatposition("zmb_meatball_spawn_rise", pos);
+  playSoundAtPosition("zmb_meatball_spawn_rise", pos);
   ai thread cleanup_meteor_fx(portal_fx_location, ground_tell_location);
   wait(0.5);
   raps_meteor = spawn("script_model", pos);
@@ -379,7 +379,7 @@ function raps_spawn_fx(ai, ent) {
   playFXOnTag(level._effect["raps_meteor_fire"], raps_meteor, "tag_origin");
   fall_dist = sqrt(distancesquared(pos, raps_impact_location));
   fall_time = fall_dist / 720;
-  raps_meteor moveto(raps_impact_location, fall_time);
+  raps_meteor moveTo(raps_impact_location, fall_time);
   raps_meteor.ai = ai;
   raps_meteor thread cleanup_meteor();
   wait(fall_time);
@@ -395,7 +395,7 @@ function raps_spawn_fx(ai, ent) {
   ai.angles = angles;
   ai show();
   playFX(level._effect["raps_impact"], raps_impact_location);
-  playsoundatposition("zmb_meatball_spawn_impact", raps_impact_location);
+  playSoundAtPosition("zmb_meatball_spawn_impact", raps_impact_location);
   earthquake(0.3, 0.75, raps_impact_location, 512);
   assert(isDefined(ai), "");
   assert(isalive(ai), "");
@@ -492,7 +492,7 @@ function calculate_spawn_position(favorite_enemy) {
 }
 
 function get_favorite_enemy() {
-  raps_targets = getplayers();
+  raps_targets = getPlayers();
   e_least_hunted = undefined;
   for(i = 0; i < raps_targets.size; i++) {
     e_target = raps_targets[i];
@@ -517,7 +517,7 @@ function get_favorite_enemy() {
 }
 
 function raps_health_increase() {
-  players = getplayers();
+  players = getPlayers();
   level.n_raps_health = level.round_number * 50;
   if(level.n_raps_health > 1600) {
     level.n_raps_health = 1600;
@@ -528,7 +528,7 @@ function play_raps_round() {
   self playlocalsound("zmb_raps_round_start");
   variation_count = 5;
   wait(4.5);
-  players = getplayers();
+  players = getPlayers();
   num = randomintrange(0, players.size);
   players[num] zm_audio::create_and_play_dialog("general", "raps_spawn");
 }
@@ -672,7 +672,7 @@ function special_raps_spawn(n_to_spawn = 1, s_spawn_loc, fn_on_spawned) {
   }
   count = 0;
   while(count < n_to_spawn) {
-    players = getplayers();
+    players = getPlayers();
     favorite_enemy = get_favorite_enemy();
     if(!isDefined(favorite_enemy)) {
       wait(randomfloatrange(0.6666666, 1.333333));

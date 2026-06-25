@@ -89,7 +89,7 @@ function private function_dbeb7b0f(eventstruct) {
   }
 
   self.b_activated = 1;
-  self sethintstring("");
+  self setHintString("");
   var_b976eb20 = randomint(9);
   str_vox = #"hash_51f7b50d9cc1fe6" + var_b976eb20 + 1 + "_" + var_b976eb20;
   var_9bb8ce1a = util::spawn_model("tag_origin", self.origin);
@@ -109,7 +109,7 @@ function private function_dbeb7b0f(eventstruct) {
 
 function function_6400a64d(instance) {
   instance waittill(#"hash_68607fe956734fee", #"cleanup");
-  playsoundatposition(#"hash_1231779900d59421", self.origin);
+  playSoundAtPosition(#"hash_1231779900d59421", self.origin);
   self delete();
 }
 
@@ -631,7 +631,7 @@ function private function_ca912561(instance) {
   level scoreevents::doscoreeventcallback("scoreEventSR", {
     #scoreevent: "event_complete", #nearbyplayers: 1, #var_b0a57f8c: 5000, #location: self.origin
   });
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player zm_stats::function_945c7ce2(#"hash_165462f560a0538c", 1);
@@ -700,7 +700,7 @@ function private function_f0abbc8b() {
   self val::set(#"hash_59345e23ee60c2dd", "ignoreall", 1);
   spawn = self.spawn;
   var_55e11aa9 = util::spawn_model("tag_origin", self.origin, spawn.angles);
-  self linkto(var_55e11aa9);
+  self linkTo(var_55e11aa9);
   var_55e11aa9.origin = self.origin + (0, 0, 5000);
   level fx::play(#"hash_2520b0c56a09da9d", spawn.origin, undefined, 6);
   wait 0.25;
@@ -711,7 +711,7 @@ function private function_f0abbc8b() {
   }
 
   self show();
-  var_55e11aa9 moveto(spawn.origin, 6);
+  var_55e11aa9 moveTo(spawn.origin, 6);
   var_55e11aa9 rotatevelocity((0, 360 / 6, 0), 6);
   var_55e11aa9 waittill(#"movedone");
   var_55e11aa9 delete();

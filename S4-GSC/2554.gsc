@@ -8,10 +8,10 @@ _id_27CA(var_0, var_1, var_2, var_3) {
   var_5 = [];
   var_6 = self _meth_815E();
   var_7 = anglesToForward(self getplayerangles());
-  var_8 = vectornormalize(var_7 * (1, 1, 0));
+  var_8 = vectorNormalize(var_7 * (1, 1, 0));
 
   foreach(var_10 in var_4) {
-    var_11 = vectornormalize((var_10.origin - self.origin) * (1, 1, 0));
+    var_11 = vectorNormalize((var_10.origin - self.origin) * (1, 1, 0));
     var_12 = vectordot(var_11, var_8);
 
     if(var_12 > var_2) {
@@ -453,10 +453,10 @@ _id_2793(var_0, var_1, var_2) {
   if(_func_0135(var_4) > 100) {
     var_5 = _func_00B4(var_0, var_1 * 1.75, var_1 * 0.5, 500);
     var_6 = [];
-    var_7 = vectornormalize(var_4);
+    var_7 = vectorNormalize(var_4);
 
     for(var_8 = 0; var_8 < var_5.size; var_8++) {
-      var_9 = vectornormalize(var_5[var_8].origin - self._id_2764.origin);
+      var_9 = vectorNormalize(var_5[var_8].origin - self._id_2764.origin);
 
       if(vectordot(var_9, var_7) > 0.1) {
         var_6[var_6.size] = var_5[var_8];
@@ -466,12 +466,12 @@ _id_2793(var_0, var_1, var_2) {
     var_6 = _func_00B4(var_0, var_1, 0, 500);
 
   if(isDefined(var_2) && var_2) {
-    var_10 = vectornormalize(self._id_2764.origin - self.origin);
+    var_10 = vectorNormalize(self._id_2764.origin - self.origin);
     var_11 = var_6;
     var_6 = [];
 
     foreach(var_13 in var_11) {
-      var_9 = vectornormalize(var_13.origin - self._id_2764.origin);
+      var_9 = vectorNormalize(var_13.origin - self._id_2764.origin);
 
       if(vectordot(var_10, var_9) > 0.2) {
         var_6[var_6.size] = var_13;
@@ -601,7 +601,7 @@ _id_288A(var_0, var_1, var_2) {
   if(!isDefined(var_3)) {
     var_4 = scripts\engine\utility::random(var_1);
     var_5 = var_4.origin - var_0;
-    var_3 = var_0 + vectornormalize(var_5) * length(var_5) * randomfloat(1.0);
+    var_3 = var_0 + vectorNormalize(var_5) * length(var_5) * randomfloat(1.0);
   }
 
   return var_3;
@@ -909,7 +909,7 @@ _id_2925(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       }
 
       var_15 = self getEye();
-      var_16 = vectordot((0, 0, 1), vectornormalize(var_13.origin + var_11 - var_15));
+      var_16 = vectordot((0, 0, 1), vectorNormalize(var_13.origin + var_11 - var_15));
 
       if(abs(var_16) > 0.92) {
         var_14 = 1;
@@ -936,13 +936,13 @@ _id_2925(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   for(var_21 = 0; var_21 < self._id_10A77.size; var_21++) {
     var_20[var_21] = [];
-    var_22 = vectornormalize(self._id_10A77[var_21].origin - self.origin);
+    var_22 = vectorNormalize(self._id_10A77[var_21].origin - self.origin);
 
     for(var_23 = 0; var_23 < self._id_10A77.size; var_23++) {
       if(var_21 == var_23) {
         continue;
       }
-      var_24 = vectornormalize(self._id_10A77[var_23].origin - self.origin);
+      var_24 = vectorNormalize(self._id_10A77[var_23].origin - self.origin);
       var_25 = vectordot(var_22, var_24);
 
       if(var_25 > 0.94) {
@@ -1022,11 +1022,11 @@ _id_2925(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
         var_39 = self _meth_8205(self._id_0192);
 
         if(var_39 && var_35 - var_39 < 5000) {
-          var_40 = vectornormalize(var_38 - self.origin);
+          var_40 = vectorNormalize(var_38 - self.origin);
           var_41 = 0;
 
           for(var_21 = 0; var_21 < self._id_10A77.size; var_21++) {
-            var_42 = vectornormalize(self._id_10A77[var_21].origin - self.origin);
+            var_42 = vectorNormalize(self._id_10A77[var_21].origin - self.origin);
             var_25 = vectordot(var_40, var_42);
 
             if(var_25 > var_41) {

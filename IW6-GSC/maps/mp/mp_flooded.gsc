@@ -57,21 +57,21 @@ main() {
 }
 
 initExtraCollision() {
-  collision1 = GetEnt("clip128x128x8", "targetname");
+  collision1 = getEnt("clip128x128x8", "targetname");
   collision1Ent = spawn("script_model", (1392, -584, 386));
   collision1Ent.angles = (336, 0, 90);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
 }
 
 sinkingPlatform_Create(triggerEnt, sinkTime, riseTime) {
-  clip = GetEnt(triggerEnt.target, "targetname");
+  clip = getEnt(triggerEnt.target, "targetname");
   if(!isDefined(clip)) {
     print("Could not find clip named " + triggerEnt.target + "\n");
     return;
   }
 
   entName = clip.target;
-  ent = GetEnt(entName, "targetname");
+  ent = getEnt(entName, "targetname");
   if(!isDefined(ent)) {
     print("Could not find entity named " + entName + "\n");
     return;
@@ -81,13 +81,13 @@ sinkingPlatform_Create(triggerEnt, sinkTime, riseTime) {
   ent.trigger = triggerEnt;
   ent.clip.unresolved_collision_func = ::handleUnreslovedCollision;
 
-  clip LinkTo(ent);
+  clip linkTo(ent);
 
-  pathBlock = GetEnt(ent.script_noteworthy, "targetname");
+  pathBlock = getEnt(ent.script_noteworthy, "targetname");
   ent.pathBlock = pathBlock;
   ent thread sinkingPlatformEnablePathsOnStart();
 
-  endStruct = getstruct(ent.target, "targetname");
+  endStruct = getStruct(ent.target, "targetname");
   if(!isDefined(endStruct)) {
     print("Could not find target struct named " + ent.target + "\n");
     return;
@@ -145,8 +145,8 @@ sinkingPlatform_Start() {
 
   minAccel = min(0.5 * t, kMIN_ACCEL);
 
-  self MoveTo(self.endPos, t, minAccel, minAccel);
-  self RotateTo(self.endRot, t, minAccel, minAccel);
+  self moveTo(self.endPos, t, minAccel, minAccel);
+  self rotateTo(self.endRot, t, minAccel, minAccel);
 
   self thread sinkingPlatformPlaySfxSequence("scn_car_sinking_down_start", "scn_car_sinking_down_loop", "scn_car_sinking_down_end", 1, 0.25, t);
 
@@ -203,8 +203,8 @@ sinkingPlatform_Return() {
 
   minAccel = min(0.5 * t, kMIN_ACCEL);
 
-  self MoveTo(self.startPos, t, minAccel, minAccel);
-  self RotateTo(self.startRot, t, minAccel, minAccel);
+  self moveTo(self.startPos, t, minAccel, minAccel);
+  self rotateTo(self.startRot, t, minAccel, minAccel);
 
   self thread sinkingPlatformPlaySfxSequence("scn_car_floating_up_start", "scn_car_floating_up_loop", "scn_car_floating_up_end", .5, 0.25, t);
 
@@ -222,8 +222,8 @@ updateSinkRate(numBodies) {
   if(t > 0) {
     minAccel = min(0.5 * t, kMIN_ACCEL);
 
-    self.clip MoveTo(self.endPos, t, minAccel, minAccel);
-    self.clip RotateTo(self.endRot, t, minAccel, minAccel);
+    self.clip moveTo(self.endPos, t, minAccel, minAccel);
+    self.clip rotateTo(self.endRot, t, minAccel, minAccel);
   } else {
     print("Error! t = " + t * numBodies + " bodies: " + numBodies + "\n");
   }
@@ -265,24 +265,24 @@ sinkingPlatformEnablePaths() {
 sinkingPlatformDisablePaths() {
   if(isDefined(self.pathBlock)) {
     self.pathBlock Show();
-    self.pathBlock DisconnectPaths();
+    self.pathBlock disconnectPaths();
   }
 }
 
 moverCreate(triggerName) {
-  trigger = GetEnt(triggerName, "targetname");
+  trigger = getEnt(triggerName, "targetname");
   if(!isDefined(trigger)) {
     print("Could not find trigger named " + triggerName + "\n");
     return;
   }
 
-  clip = GetEnt(trigger.target, "targetname");
+  clip = getEnt(trigger.target, "targetname");
   if(!isDefined(clip)) {
     print("Could not find brush named " + trigger.target + "\n");
     return;
   }
 
-  ent = GetEnt(clip.target, "targetname");
+  ent = getEnt(clip.target, "targetname");
   if(!isDefined(ent)) {
     print("Could not find entity named " + clip.target + "\n");
     return;
@@ -290,13 +290,13 @@ moverCreate(triggerName) {
   ent.trigger = trigger;
   ent.clip = clip;
 
-  clip LinkTo(ent);
+  clip linkTo(ent);
 
   ent.keyframes = [];
   keyframeName = ent.target;
   i = 0;
   while(isDefined(keyframeName)) {
-    struct = getstruct(keyframeName, "targetname");
+    struct = getStruct(keyframeName, "targetname");
     if(isDefined(struct)) {
       if(!isDefined(struct.script_duration)) {
         print("Keyframe " + keyframeName + " is missing a script_duration value!\n");
@@ -322,7 +322,7 @@ moverCreate(triggerName) {
     }
   }
 
-  ent.trigger SetHintString(&"PLATFORM_HOLD_TO_USE");
+  ent.trigger setHintString(&"PLATFORM_HOLD_TO_USE");
   ent.trigger MakeUsable();
   ent thread moverWaitForUse();
 
@@ -345,8 +345,8 @@ moverDoMove() {
   for(i = 0; i < self.keyframes.size; i++) {
     kf = self.keyframes[i];
 
-    self MoveTo(kf.origin, kf.script_duration, kf.script_accel, kf.script_decel);
-    self RotateTo(kf.angles, kf.script_duration, kf.script_accel, kf.script_decel);
+    self moveTo(kf.origin, kf.script_duration, kf.script_accel, kf.script_decel);
+    self rotateTo(kf.angles, kf.script_duration, kf.script_accel, kf.script_decel);
 
     self waittill("movedone");
 

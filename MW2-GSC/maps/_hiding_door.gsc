@@ -39,12 +39,12 @@ hiding_door_spawner() {
     assertex(isDefined(door_model), "Hiding door org at " + door_org.origin + " targets multiple entities, but not a script_model door");
   }
 
-  door_clip = getent(door_model.target, "targetname");
+  door_clip = getEnt(door_model.target, "targetname");
   assert(isDefined(door_model.target));
 
   pushPlayerClip = undefined;
   if(isDefined(door_clip.target)) {
-    pushPlayerClip = getent(door_clip.target, "targetname");
+    pushPlayerClip = getEnt(door_clip.target, "targetname");
   }
   if(isDefined(pushPlayerClip)) {
     door_org thread hiding_door_guy_pushplayer(pushPlayerClip);
@@ -65,13 +65,13 @@ hiding_door_spawner() {
   }
 
   if(isDefined(door_clip)) {
-    door_clip linkto(door, "door_hinge_jnt");
+    door_clip linkTo(door, "door_hinge_jnt");
     door_clip disconnectPaths();
   }
 
   trigger = undefined;
   if(isDefined(self.target)) {
-    trigger = getent(self.target, "targetname");
+    trigger = getEnt(self.target, "targetname");
     if(!issubstr(trigger.classname, "trigger")) {
       trigger = undefined;
     }
@@ -220,7 +220,7 @@ quit_door_behavior(sightTraceRequired, door_org) {
   self.goalradius = 512;
   self setGoalPos(self.origin);
   self notify("quit_door_behavior");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("killanimscript");
   return true;
 }
@@ -326,7 +326,7 @@ hiding_door_guy_cleanup(door_org, guy, door, door_clip, badplaceBrush) {
 
 hiding_door_guy_pushplayer(pushPlayerClip) {
   self waittill("push_player");
-  pushPlayerClip moveto(self.origin, 1.5);
+  pushPlayerClip moveTo(self.origin, 1.5);
   wait 1.5;
   pushPlayerClip delete();
 }
@@ -374,7 +374,7 @@ hiding_door_death_door_connections(door_clip, badplaceBrush) {
   wait 2;
 
   if(isDefined(door_clip)) {
-    door_clip disconnectpaths();
+    door_clip disconnectPaths();
   }
 
   if(isDefined(badplaceBrush)) {

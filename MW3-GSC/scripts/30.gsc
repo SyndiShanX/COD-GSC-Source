@@ -697,7 +697,7 @@ init_trigger_flags() {
   level.trigger_func[0] = ::trigger_off;
 }
 
-getstruct(var_0, var_1) {
+getStruct(var_0, var_1) {
   var_2 = level.struct_class_names[var_1][var_0];
 
   if(!isDefined(var_2)) {
@@ -1621,7 +1621,7 @@ get_target_ent(var_0) {
   if(!isDefined(var_0)) {
     var_0 = self.target;
   }
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -1634,7 +1634,7 @@ get_target_ent(var_0) {
     }
   }
 
-  var_1 = getstruct(var_0, "targetname");
+  var_1 = getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
     return var_1;
@@ -1703,7 +1703,7 @@ exploder_rumble() {
     return;
   }
   exploder_delay();
-  level.player playrumbleonentity(self.v["rumble"]);
+  level.player playRumbleOnEntity(self.v["rumble"]);
 }
 
 exploder_delay() {
@@ -2119,11 +2119,11 @@ play_loop_sound_on_entity(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2.origin = self.origin + var_1;
     var_2.angles = self.angles;
-    var_2 linkto(self);
+    var_2 linkTo(self);
   } else {
     var_2.origin = self.origin;
     var_2.angles = self.angles;
-    var_2 linkto(self);
+    var_2 linkTo(self);
   }
 
   var_2 playLoopSound(var_0);
@@ -2163,7 +2163,7 @@ tag_project(var_0, var_1) {
   var_2 = self gettagorigin(var_0);
   var_3 = self gettagangles(var_0);
   var_4 = anglesToForward(var_3);
-  var_4 = vectornormalize(var_4) * var_1;
+  var_4 = vectorNormalize(var_4) * var_1;
   return var_2 + var_4;
 }
 

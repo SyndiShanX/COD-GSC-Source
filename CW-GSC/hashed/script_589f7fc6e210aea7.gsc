@@ -45,21 +45,21 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function private function_28dee3ce() {
   level waittill(#"hash_3a698db448edb3a");
-  var_76c72752 = getent("vol_courtyard_allies_left", "targetname");
-  var_539b881 = getent("vol_courtyard_allied_start_left", "targetname");
+  var_76c72752 = getEnt("vol_courtyard_allies_left", "targetname");
+  var_539b881 = getEnt("vol_courtyard_allied_start_left", "targetname");
   level.var_7b278a4f val::set(#"hash_4d691b627200194f", "ignoreme", 1);
   level.var_7b278a4f vehicle::unload("all");
 }
 
 function private function_1cac512e() {
   level flag::wait_till("flg_left_path_objective_completed");
-  var_a902a17d = getent("vol_courtyard_allied_fallback_left", "targetname");
+  var_a902a17d = getEnt("vol_courtyard_allied_fallback_left", "targetname");
 }
 
 function private function_cdd46403() {
   level waittill(#"hash_3f545ab5dd4237c9");
-  var_f137a62d = getent("vol_courtyard_allies_right", "targetname");
-  var_539b881 = getent("vol_courtyard_allied_start_right", "targetname");
+  var_f137a62d = getEnt("vol_courtyard_allies_right", "targetname");
+  var_539b881 = getEnt("vol_courtyard_allied_start_right", "targetname");
   level.var_5d798cf2 val::set(#"hash_5ba8a98bf94ed750", "ignoreme", 1);
   level.var_5d798cf2 vehicle::unload("all");
 }

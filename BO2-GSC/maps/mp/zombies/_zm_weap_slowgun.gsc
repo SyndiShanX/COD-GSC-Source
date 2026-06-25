@@ -160,7 +160,7 @@ slowgun_get_enemies_in_range(upgraded, position, forward, possible_targets) {
       continue;
     }
 
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
 
     if(0 > dot) {
@@ -541,7 +541,7 @@ get_ahead_ent() {
 }
 
 bump() {
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.5, 0.15, self.origin, 1000, self);
 }
 

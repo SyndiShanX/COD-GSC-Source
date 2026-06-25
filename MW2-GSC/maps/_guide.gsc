@@ -40,7 +40,7 @@ leadshowstuff() {
 leadshowstuff_path(position, arrowtime) {
   level endon("newtrigger");
   if(isDefined(position.target)) {
-    targ = getent(position.target, "targetname");
+    targ = getEnt(position.target, "targetname");
   } else {
     targ = undefined;
   }
@@ -48,7 +48,7 @@ leadshowstuff_path(position, arrowtime) {
   while(isDefined(targ)) {
     waitforrecentfire();
     if(isDefined(targ.target)) {
-      targ = getent(targ.target, "targetname");
+      targ = getEnt(targ.target, "targetname");
     } else {
       return;
     }

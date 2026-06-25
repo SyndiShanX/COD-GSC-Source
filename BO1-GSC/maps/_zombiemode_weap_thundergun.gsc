@@ -97,7 +97,7 @@ thundergun_get_enemies_in_range() {
       zombies[i] thundergun_debug_print("range", (1, 0, 0));
       return;
     }
-    normal = VectorNormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = VectorDot(forward_view_angles, normal);
     if(0 > dot) {
       zombies[i] thundergun_debug_print("dot", (1, 0, 0));
@@ -115,9 +115,9 @@ thundergun_get_enemies_in_range() {
     if(test_range_squared < fling_range_squared) {
       level.thundergun_fling_enemies[level.thundergun_fling_enemies.size] = zombies[i];
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-      fling_vec = VectorNormalize(test_origin - view_pos);
+      fling_vec = vectorNormalize(test_origin - view_pos);
       if(5000 < test_range_squared) {
-        fling_vec = fling_vec + VectorNormalize(test_origin - radial_origin);
+        fling_vec = fling_vec + vectorNormalize(test_origin - radial_origin);
       }
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vector_scale(fling_vec, 100 + 100 * dist_mult);
@@ -159,7 +159,7 @@ thundergun_fling_zombie(player, fling_vec, index) {
 }
 thundergun_knockdown_zombie(player, gib) {
   self endon("death");
-  playsoundatposition("vox_thundergun_forcehit", self.origin);
+  playSoundAtPosition("vox_thundergun_forcehit", self.origin);
   if(!isDefined(self) || !IsAlive(self)) {
     return;
   }

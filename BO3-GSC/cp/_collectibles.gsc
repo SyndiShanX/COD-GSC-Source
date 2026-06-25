@@ -147,12 +147,12 @@ function private function_b963f25(mdl_collectible) {
 function function_8765a33c(mdl_collectible) {
   mdl_collectible = function_b963f25(mdl_collectible);
   trigger_use = spawn("trigger_radius_use", mdl_collectible.origin + mdl_collectible.offset, 0, mdl_collectible.radius, mdl_collectible.radius);
-  trigger_use triggerignoreteam();
+  trigger_use triggerIgnoreTeam();
   trigger_use setvisibletoall();
-  trigger_use usetriggerrequirelookat();
+  trigger_use useTriggerRequireLookAt();
   trigger_use setteamfortrigger("none");
-  trigger_use setcursorhint("HINT_INTERACTIVE_PROMPT");
-  trigger_use sethintstring(&"COLLECTIBLE_PICK_UP");
+  trigger_use setCursorHint("HINT_INTERACTIVE_PROMPT");
+  trigger_use setHintString(&"COLLECTIBLE_PICK_UP");
   istring = istring(mdl_collectible.model);
   var_837a6185 = gameobjects::create_use_object("any", trigger_use, array(mdl_collectible), (0, 0, 0), istring);
   var_837a6185 gameobjects::allow_use("any");

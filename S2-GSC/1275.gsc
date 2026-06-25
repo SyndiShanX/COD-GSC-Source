@@ -370,7 +370,7 @@ func_28B6(param_00) {
   var_01 = lib_04FF::func_45D0("flagTriggerRadius");
   var_02 = lib_04FF::func_45D0("flagTriggerHeight");
   var_03 = spawn("trigger_radius", param_00.var_116, 0, var_01, var_02);
-  var_03 enablelinkto();
+  var_03 enablelinkTo();
   var_03.var_66F0 = 1;
   var_04 = [param_00];
   var_05 = maps\mp\gametypes\_gameobjects::func_27D6(game["attackers"], var_03, var_04, (0, 0, 0), 0, 1);
@@ -460,7 +460,7 @@ func_1F6B(param_00, param_01) {
 
   var_09 = param_00.var_116 - self.var_9D65.var_116;
   var_0A = common_scripts\utility::func_3D5D(var_09);
-  var_0B = vectornormalize(var_0A);
+  var_0B = vectorNormalize(var_0A);
   var_0C = var_0B * 5;
   foreach(var_0E in var_04) {
     var_0F = param_00.var_116 + (0, 0, 10);
@@ -477,7 +477,7 @@ func_1F6B(param_00, param_01) {
 func_28B8() {
   maps\mp\gametypes\_gameobjects::func_365D();
   self.var_9D65.var_116 = self.var_A582[0].var_116;
-  self.var_9D65 linkto(self.var_A582[0]);
+  self.var_9D65 linkTo(self.var_A582[0]);
   maps\mp\gametypes\_gameobjects::func_8A60("any");
   thread func_28A4();
 }
@@ -615,8 +615,8 @@ func_99AF(param_00, param_01) {
   var_06 = (clamp(var_06[0], -85, 85), var_06[1], var_06[2]);
   var_07 = anglesToForward(var_06);
   var_08 = param_00 getvelocity();
-  var_09 = vectornormalize((var_07[0], var_07[1], 0));
-  var_0A = vectornormalize((var_08[0], var_08[1], 0));
+  var_09 = vectorNormalize((var_07[0], var_07[1], 0));
+  var_0A = vectorNormalize((var_08[0], var_08[1], 0));
   var_0B = 0;
   if(vectordot(var_09, var_0A) >= 0.42 && length(var_08) > 120) {
     var_0C = var_02.var_79AD lib_04FF::func_45D0("flagThrowMovementForce");
@@ -646,7 +646,7 @@ func_5C2A(param_00, param_01) {
   param_00.var_A879 = 1;
   param_00.var_5DB5 = param_01;
   param_00 thread func_6ADA(1);
-  param_00.var_A582[0] linkto(param_01, "tag_origin", (0, 0, 0), (0, 0, 0));
+  param_00.var_A582[0] linkTo(param_01, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_02 = param_00.var_A582[0] method_80B1();
   param_01 waittill("missile_stuck", var_03);
   param_00.var_A582[0] unlink();

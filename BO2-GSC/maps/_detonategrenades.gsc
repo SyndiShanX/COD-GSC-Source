@@ -420,7 +420,7 @@ weapondamagetracepassed(from, to, startradius, ignore) {
     midpos = to;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
 
@@ -584,7 +584,7 @@ proximity_grenade_player_effect(v_origin) {
     if(toggle) {
       self visionsetnaked("taser_mine_shock", 0);
       self dodamage(5, v_origin, level.player);
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     } else
       self visionsetnaked(saved_vision, 0);
 

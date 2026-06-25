@@ -312,7 +312,7 @@ function on_player_disconnect() {
 }
 
 function on_end_game() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_fb689837();

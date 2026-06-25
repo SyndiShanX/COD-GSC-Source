@@ -333,7 +333,7 @@ func_18FD() {
     }
 
     level.var_1913[level.var_1913.size] = var_0B;
-    var_0B.var_18D5 = getent(var_03[0].var_01A2, "targetname");
+    var_0B.var_18D5 = getEnt(var_03[0].var_01A2, "targetname");
     var_0B.var_18D5.var_0116 = var_0B.var_18D5.var_0116 + (0, 0, -10000);
     var_0B.var_18D5.var_00E5 = var_0C;
     var_0B.var_18D5 usetriggertouchcheckstance(1);
@@ -386,7 +386,7 @@ func_93D6(param_00) {
 func_8A29(param_00) {
   var_01 = spawn("script_origin", self.var_0116);
   var_01.var_001D = self.var_001D;
-  var_01 rotateyaw(-45, 0.05);
+  var_01 rotateYaw(-45, 0.05);
   wait 0.05;
   var_02 = self.var_0116 + (0, 0, 5);
   var_03 = self.var_0116 + anglesToForward(var_01.var_001D) * 100 + (0, 0, 128);
@@ -452,7 +452,7 @@ func_6AFC(param_00, param_01, param_02) {
 func_18FA(param_00, param_01) {
   param_00 endon("death");
   param_00 endon("disconnect");
-  param_00 playerlinkto(param_01);
+  param_00 playerlinkTo(param_01);
   while(param_00 getcurrentweapon() == self.var_A248) {
     wait 0.05;
   }

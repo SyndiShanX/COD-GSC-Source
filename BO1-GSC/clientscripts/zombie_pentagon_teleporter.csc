@@ -22,7 +22,7 @@ teleporter_fx_setup(ClientNum) {
   teleporters = getEntArray(ClientNum, "pentagon_teleport_fx", "targetname");
   level.fxents[ClientNum] = [];
   level.packtime[ClientNum] = true;
-  teleporter_pack = GetEnt(ClientNum, "pentagon_teleport_fx_pack", "targetname");
+  teleporter_pack = getEnt(ClientNum, "pentagon_teleport_fx_pack", "targetname");
   teleporter_pack.fx_ent = spawn(ClientNum, teleporter_pack.origin, "script_model");
   teleporter_pack.fx_ent setModel("tag_origin");
   teleporter_pack.fx_ent.angles = teleporter_pack.angles;

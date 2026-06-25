@@ -91,7 +91,7 @@ function function_160e40a2() {
   var_2c51fa57 = sqr(64);
 
   while(true) {
-    foreach(i, player in getplayers()) {
+    foreach(i, player in getPlayers()) {
       time = gettime();
 
       if(i % 2 == updatepass) {
@@ -125,7 +125,7 @@ function function_160e40a2() {
             v_offset = rotatepoint(v_offset, dynent.angles);
             var_dea242aa = dynent.origin + v_offset;
             playerdir = var_dea242aa - playerorigin;
-            playerdir = vectornormalize((playerdir[0], playerdir[1], 0));
+            playerdir = vectorNormalize((playerdir[0], playerdir[1], 0));
             var_f8682cca = vectordot(anglesToForward(player.angles), playerdir);
             var_772fc240 = distance2dsquared(playerorigin, var_dea242aa);
             isnear = var_772fc240 <= var_2c51fa57;
@@ -193,7 +193,7 @@ function function_160e40a2() {
                 interpolationsec = var_bb075e98 dynent_use::use_dynent(dynent, player, overridestate, 1, 1);
                 player gestures::play_gesture("ges_t9_door_shove", undefined, 0);
                 player function_bc82f900("door_shove");
-                playsoundatposition("evt_door_bash", dynent.origin);
+                playSoundAtPosition("evt_door_bash", dynent.origin);
                 playFX("debris/fx9_door_bash", dynent.origin, anglesToForward(dynent.angles), anglestoup(dynent.angles));
                 var_a548ec11 = 1;
                 dynent.var_a548ec11 = gettime() + int(interpolationsec * 1000) + int(var_a548ec11 * 1000);
@@ -228,7 +228,7 @@ function function_c743094d(eventstruct) {
     stateindex = function_ffdbe8c2(dynent);
     var_b4b3af4c = anglesToForward(dynent.angles);
     playerdir = activator.var_8a022726.origin - activator.origin;
-    playerdir = vectornormalize((playerdir[0], playerdir[1], 0));
+    playerdir = vectorNormalize((playerdir[0], playerdir[1], 0));
     dot = vectordot(var_b4b3af4c, playerdir);
 
     if(stateindex == 1 || stateindex == 2 || stateindex == 4 || stateindex == 5) {
@@ -253,7 +253,7 @@ function function_c743094d(eventstruct) {
       }
 
       interpolationsec = eventstruct.attacker.var_8a022726 dynent_use::use_dynent(dynent, eventstruct.attacker, overridestate, 1, 1);
-      playsoundatposition("evt_door_bash", dynent.origin);
+      playSoundAtPosition("evt_door_bash", dynent.origin);
       playFX("debris/fx9_door_bash", dynent.origin, anglesToForward(dynent.angles), anglestoup(dynent.angles));
       dynent.var_a548ec11 = gettime() + interpolationsec * 1000;
     }

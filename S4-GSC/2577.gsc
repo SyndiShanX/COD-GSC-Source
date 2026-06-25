@@ -161,7 +161,7 @@ _id_A098(var_0) {
 
 _id_A08E(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
-  var_5 = vectornormalize(var_3);
+  var_5 = vectorNormalize(var_3);
   var_6 = anglestoup(var_0.angles);
   var_7 = anglestoright(var_2);
 
@@ -245,7 +245,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_14 thread _id_A03E();
   var_15 = _id_A066();
   var_16 = 0;
-  var_17 = vectordot(vectornormalize(var_4), -1 * var_8);
+  var_17 = vectordot(vectorNormalize(var_4), -1 * var_8);
 
   if(var_17 < 0.96593) {
     var_16 = 1;
@@ -294,7 +294,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, var_24);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -308,7 +308,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, -1 * var_24);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -322,7 +322,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, var_25);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -336,7 +336,7 @@ _id_A087(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_20 = _id_A061(var_19);
   var_21 = _id_A067(var_19);
   var_31 = _func_01C6(var_30, var_28, -1 * var_25);
-  var_32 = vectornormalize(_func_025B(var_31, var_30));
+  var_32 = vectorNormalize(_func_025B(var_31, var_30));
   var_33 = _func_025B(var_32, var_28);
   var_34 = _func_0017(var_31, var_32, var_33);
   var_27 = ::_id_A034;
@@ -983,7 +983,7 @@ _id_A04A(var_0, var_1, var_2) {
 
   if(isDefined(self._id_EA93)) {
     var_4 _meth_80DB();
-    var_4 linkto(self._id_EA93);
+    var_4 linkTo(self._id_EA93);
   }
 
   var_4 hide();
@@ -1158,7 +1158,7 @@ _id_A082(var_0, var_1) {
   var_3 = anglestoup(var_0);
   var_4 = undefined;
   var_2 = _func_01C6(var_3, var_2, var_1);
-  var_4 = vectornormalize(_func_025B(var_2, var_3));
+  var_4 = vectorNormalize(_func_025B(var_2, var_3));
   var_3 = _func_025B(var_4, var_2);
   return _func_0017(var_2, var_4, var_3);
 }
@@ -1286,13 +1286,13 @@ _id_A060() {
 }
 
 _id_A07B(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_0, var_1));
+  var_2 = vectorNormalize(_func_025B(var_0, var_1));
   var_1 = _func_025B(var_2, var_0);
   return _func_0017(var_2, var_1, var_0);
 }
 
 _id_A07A(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_1, var_0));
+  var_2 = vectorNormalize(_func_025B(var_1, var_0));
   var_1 = _func_025B(var_0, var_2);
   return _func_0017(var_1, var_2, var_0);
 }

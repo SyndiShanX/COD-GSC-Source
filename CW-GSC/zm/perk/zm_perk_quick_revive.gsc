@@ -71,7 +71,7 @@ function function_8f059827(radius) {
   self.var_ec8703d1 = [];
 
   while(self namespace_e86ffa8::function_8923370c(4)) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(self != player && distance2d(self.origin, player.origin) < radius && player laststand::player_is_in_laststand() && !self laststand::player_is_in_laststand() && !is_true(player.var_b895a3ff)) {
@@ -281,7 +281,7 @@ function unhide_quickrevive() {
 
   if(isDefined(level.quick_revive_machine_clip)) {
     level.quick_revive_machine_clip show();
-    level.quick_revive_machine_clip disconnectpaths();
+    level.quick_revive_machine_clip disconnectPaths();
   }
 
   if(isDefined(level.quick_revive_final_pos)) {
@@ -322,7 +322,7 @@ function unhide_quickrevive() {
   }
 
   if(!is_true(level.quick_revive_linked_ent_moves) && level.quick_revive_machine.origin != org) {
-    level.quick_revive_machine moveto(org, 3);
+    level.quick_revive_machine moveTo(org, 3);
     level.quick_revive_machine vibrate(direction, 10, 0.5, 2.9);
     level.quick_revive_machine waittill(#"movedone");
     level.quick_revive_machine.angles = level.quick_revive_default_angles;
@@ -341,7 +341,7 @@ function unhide_quickrevive() {
   }
 
   if(isDefined(level.quick_revive_linked_ent)) {
-    level.quick_revive_machine linkto(level.quick_revive_linked_ent);
+    level.quick_revive_machine linkTo(level.quick_revive_linked_ent);
   }
 
   level.quick_revive_machine.ishidden = 0;

@@ -55,7 +55,7 @@ function function_c6de5d3d(b_skipped) {
     return;
   }
 
-  var_be8a80d6 = getent("black_light_locker", "targetname");
+  var_be8a80d6 = getEnt("black_light_locker", "targetname");
   var_be8a80d6 val::set("locker", "takedamage", 1);
   var_da02bd54 = struct::get(var_be8a80d6.target, "targetname");
   slots = [];
@@ -85,7 +85,7 @@ function function_c6de5d3d(b_skipped) {
 
 function function_863fc0f1(b_skipped, var_19e802fa) {
   if(b_skipped || var_19e802fa) {
-    var_be8a80d6 = getent("black_light_locker", "targetname");
+    var_be8a80d6 = getEnt("black_light_locker", "targetname");
     level thread function_3eafd069(var_be8a80d6);
     var_be8a80d6 thread scene::play("p9_fxanim_platinum_lockers_metal_tall_bundle", var_be8a80d6);
     var_be8a80d6 notify(#"locker_opened");
@@ -97,7 +97,7 @@ function function_ce3b7324() {
   level endon(#"end_game", #"hash_2304a1d24bb8597f");
   self notify("31f8a60a0dc24d9d");
   self endon("31f8a60a0dc24d9d");
-  var_be8a80d6 = getent("black_light_locker", "targetname");
+  var_be8a80d6 = getEnt("black_light_locker", "targetname");
   dis = distance(self.origin, var_be8a80d6.origin);
 
   if(dis <= 200) {
@@ -188,7 +188,7 @@ function function_bb30710d() {
 }
 
 function function_743996c0() {
-  level.var_6a086277 = getent("ww_safe", "targetname");
+  level.var_6a086277 = getEnt("ww_safe", "targetname");
   level.safe_trigger = struct::get(level.var_6a086277.target, "targetname");
   level.var_2a616939 = level.safe_trigger zm_unitrigger::create(&function_fb9b5ce9, 40, &function_46c3c6ea);
   zm_unitrigger::unitrigger_force_per_player_triggers(level.var_2a616939);
@@ -231,7 +231,7 @@ function function_58b582cc() {
     wait 1;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_54ddcd0c = undefined;
   }
 }
@@ -244,7 +244,7 @@ function function_1168e497(b_skipped) {
   result = level waittill(#"ww_pickup");
   who = result.player;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_19f4406e = 0;
     player flag::set(#"hash_2d6980738132f263");
     player thread zm_equipment::show_hint_text(#"hash_77929503066a286b", 10);
@@ -279,7 +279,7 @@ function function_1168e497(b_skipped) {
 
 function function_4320379c(b_skipped, var_19e802fa) {
   if(b_skipped || var_19e802fa) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player.var_19f4406e = 0;
       player flag::set(#"hash_2d6980738132f263");
     }
@@ -372,7 +372,7 @@ function function_b0952594(params) {
 
           iprintlnbold("<dev string:x7f>");
 
-          array::thread_all(getplayers(), &zm_intel::collect_intel, #"zmintel_platinum_requiem_artifact_02");
+          array::thread_all(getPlayers(), &zm_intel::collect_intel, #"zmintel_platinum_requiem_artifact_02");
           level notify(#"ww_pickup", {
             #player: self
           });

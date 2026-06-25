@@ -79,7 +79,7 @@ function function_19a410e2(var_a370eede) {
 }
 
 function function_faf723a() {
-  e_safe = getent("ww_safe", "targetname");
+  e_safe = getEnt("ww_safe", "targetname");
   self.safe = e_safe;
 
   for(i = 0; i < 3; i++) {
@@ -88,8 +88,8 @@ function function_faf723a() {
     v_angles = e_safe gettagangles(var_9a00bf02);
     e_lock = util::spawn_model(#"hash_4f1e10f734edcd48" + i, v_origin, v_angles);
     var_2cc651d5 = util::spawn_model(#"hash_32784def46e0e975" + i, v_origin, v_angles);
-    e_lock linkto(e_safe, var_9a00bf02);
-    var_2cc651d5 linkto(e_safe, var_9a00bf02);
+    e_lock linkTo(e_safe, var_9a00bf02);
+    var_2cc651d5 linkTo(e_safe, var_9a00bf02);
     e_lock.n_index = i;
     e_lock.var_2cc651d5 = var_2cc651d5;
 
@@ -146,7 +146,7 @@ function function_8b40c670(e_trigger) {
   }
 
   if(isDefined(e_trigger)) {
-    self playerlinkto(e_trigger, undefined, 0, 30, 30, 0, 16);
+    self playerlinkTo(e_trigger, undefined, 0, 30, 30, 0, 16);
   }
 
   self.var_9e8e7b78 = undefined;
@@ -193,7 +193,7 @@ function function_8b40c670(e_trigger) {
       if(input != 0) {
         n_index = self.var_9e8e7b78.n_index;
         level.var_ea51eeb9.input[n_index] = (level.var_ea51eeb9.input[n_index] + input + 40) % 40;
-        playsoundatposition(#"hash_16474e80e8a1f9d", self.var_9e8e7b78.origin);
+        playSoundAtPosition(#"hash_16474e80e8a1f9d", self.var_9e8e7b78.origin);
 
         iprintlnbold("<dev string:x38>" + n_index + "<dev string:x40>" + level.var_ea51eeb9.input[n_index] + "<dev string:x4f>" + level.var_ea51eeb9.numbers[n_index]);
 
@@ -261,7 +261,7 @@ function cmd(cmd) {
 }
 
 function function_9fa3d0d(index) {
-  player = getplayers()[index];
+  player = getPlayers()[index];
 
   if(!isDefined(player)) {
     return;

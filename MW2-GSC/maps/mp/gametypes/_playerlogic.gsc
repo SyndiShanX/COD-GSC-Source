@@ -843,7 +843,7 @@ spawnEndOfGame() {
 
   spawnPoint setModel("tag_origin");
 
-  self playerLinkTo(spawnPoint);
+  self playerlinkTo(spawnPoint);
 
   self PlayerHide();
   self freezeControlsWrapper(true);

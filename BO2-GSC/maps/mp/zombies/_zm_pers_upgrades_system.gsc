@@ -54,7 +54,7 @@ pers_upgrades_monitor() {
 
   while(true) {
     waittillframeend;
-    players = getplayers();
+    players = getPlayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
       player = players[player_index];
@@ -140,7 +140,7 @@ wait_for_game_end() {
     return;
   }
   level waittill("end_game");
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     player = players[player_index];

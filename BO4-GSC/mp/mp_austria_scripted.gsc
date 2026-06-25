@@ -67,7 +67,7 @@ prematch_init() {
     exploder::kill_exploder("fxexp_teleport_start");
 
     if(getdvarint(#"hash_2dc42400fe4ca7ed", 0)) {
-      var_cc166ca7 = getent("zombies_eating_to_ai_vignette_trig", "targetname");
+      var_cc166ca7 = getEnt("zombies_eating_to_ai_vignette_trig", "targetname");
       var_cc166ca7 callback::on_trigger(&zombies_eating_to_ai_vignette_trig);
       scene::add_scene_func(#"hash_7bdba6315b440b7c", &function_bf7a2005, "loop");
       level thread scene::play(#"hash_7bdba6315b440b7c", "loop");
@@ -111,8 +111,8 @@ function_dc12d0bd(activator) {
 }
 
 function_d63cfc37(a_ents) {
-  self.t_kill = getent("finger_trap_trig", "targetname");
-  self.clip = getent("finger_trap_clip", "targetname");
+  self.t_kill = getEnt("finger_trap_trig", "targetname");
+  self.clip = getEnt("finger_trap_clip", "targetname");
   self.clip connectpaths();
   self.clip notsolid();
   self.t_kill triggerenable(0);
@@ -135,7 +135,7 @@ function_7ea86b26(a_ents) {
   finger waittill(#"stop_damage");
   t_kill triggerenable(0);
   clip solid();
-  clip disconnectpaths();
+  clip disconnectPaths();
   finger waittill(#"connect_paths");
   clip connectpaths();
   clip notsolid();

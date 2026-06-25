@@ -66,13 +66,13 @@ event1_mortars() {
     dust_points[i].is_struct = true;
   }
 
-  struct = getstruct("event1_mortar1", "targetname");
+  struct = getStruct("event1_mortar1", "targetname");
   struct.is_struct = true;
   struct thread clientscripts\_mortar::explosion_activate("dirt_mortar", undefined, undefined, undefined, undefined, undefined, undefined, dust_points);
 
   level thread clientscripts\_mortar::mortar_loop("dirt_mortar", 1);
 
-  struct = getstruct("event1_mortar2", "targetname");
+  struct = getStruct("event1_mortar2", "targetname");
   struct.is_struct = true;
   struct thread clientscripts\_mortar::explosion_activate("dirt_mortar", undefined, undefined, undefined, undefined, undefined, undefined, dust_points);
 }

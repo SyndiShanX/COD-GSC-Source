@@ -98,13 +98,13 @@ heli_path_graph() {
 }
 
 getentorstruct(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;
   }
 
-  return common_scripts\utility::getstruct(var_0, var_1);
+  return common_scripts\utility::getStruct(var_0, var_1);
 }
 
 getentorstructarray(var_0, var_1) {
@@ -801,9 +801,9 @@ attack_secondary() {
 }
 
 missile_target_sight_check(var_0) {
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(var_2);
+  var_3 = vectorNormalize(var_2);
   var_4 = vectordot(var_1, var_3);
 
   if(var_4 >= level.heli_missile_target_cone) {
@@ -879,7 +879,7 @@ attack_primary() {
       var_1 = undefined;
 
       while(isDefined(self.turrettarget) && isalive(self.turrettarget)) {
-        self setturrettargetent(self.turrettarget, (0, 0, 40));
+        self setturrettargetEnt(self.turrettarget, (0, 0, 40));
 
         if(missile_target_sight_check(self.turrettarget)) {
           thread missile_support(self.turrettarget, 10 / level.heli_rage_missile, 0, "turret on target");
@@ -895,7 +895,7 @@ attack_primary() {
         for(var_3 = 0; var_3 < level.heli_turretclipsize; var_3++) {
           if(isDefined(self.turrettarget) && isDefined(self.primarytarget)) {
             if(self.primarytarget != self.turrettarget) {
-              self setturrettargetent(self.primarytarget, (0, 0, 40));
+              self setturrettargetEnt(self.primarytarget, (0, 0, 40));
             }
           } else if(isDefined(self.targetlost) && self.targetlost && isDefined(self.turret_last_pos))
             self setturrettargetvec(self.turret_last_pos);

@@ -98,7 +98,7 @@ function init_1() {
   zm_sidequests::declare_sidequest_stage("sq", "ss1", &init_stage_1, &stage_logic, &exit_stage_1);
   buttons = getEntArray("sq_ss_button", "targetname");
   for(i = 0; i < buttons.size; i++) {
-    ent = getent(buttons[i].target, "targetname");
+    ent = getEnt(buttons[i].target, "targetname");
     buttons[i].terminal_model = ent;
   }
   level._ss_buttons = buttons;
@@ -587,7 +587,7 @@ function do_ss_success_vox(stage) {
 }
 
 function is_player_close_enough(org) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(distancesquared(org.origin, players[i].origin) <= 5625) {
       return players[i];

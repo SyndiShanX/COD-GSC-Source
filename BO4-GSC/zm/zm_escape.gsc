@@ -755,10 +755,10 @@ sndfunctions() {
 
   level.var_45b0f2f3 = &function_45b0f2f3;
   level flag::wait_till("power_on2");
-  playsoundatposition(#"hash_6d80127a29f6f4e0", (0, 0, 0));
+  playSoundAtPosition(#"hash_6d80127a29f6f4e0", (0, 0, 0));
   util::clientnotify("amb_power_on");
   level flag::wait_till("power_on1");
-  playsoundatposition(#"hash_6d80157a29f6f9f9", (0, 0, 0));
+  playSoundAtPosition(#"hash_6d80157a29f6f9f9", (0, 0, 0));
   util::clientnotify("amb_power_on_2");
 }
 
@@ -766,7 +766,7 @@ function_217196d7() {
   level waittill(#"end_game");
 
   if(!isDefined(level.var_b1312d49) || level.var_b1312d49 == "players_lose") {
-    playsoundatposition(#"hash_670bdb4d23be75bf", (0, 0, 0));
+    playSoundAtPosition(#"hash_670bdb4d23be75bf", (0, 0, 0));
   }
 }
 
@@ -926,7 +926,7 @@ function_e6797b71() {
   level flag::wait_till("start_zombie_round_logic");
 
   while(true) {
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
 
     foreach(e_player in level.players) {
       if(isalive(e_player)) {
@@ -1023,7 +1023,7 @@ super_open_sesame() {
   zm_devgui::zombie_devgui_open_sesame();
   level thread zm_escape_catwalk_event::catwalk_event_cleanup();
   zm_escape_weap_quest_spoon::function_7101d54f();
-  var_ccc575d7 = getent("<dev string:x3be>", "<dev string:x3ce>");
+  var_ccc575d7 = getEnt("<dev string:x3be>", "<dev string:x3ce>");
   var_ccc575d7 notify(#"blast_attack");
   level.var_af325495 = 1;
 }

@@ -182,7 +182,7 @@ function function_eb5051f4(spawner, targetname, var_f9ebd43e, s_location) {
     ai.var_e1dbd63 = &zm_ai_margwa::function_94fd1710;
     e_player = zm_utility::get_closest_player(s_location.origin);
     v_dir = e_player.origin - s_location.origin;
-    v_dir = vectornormalize(v_dir);
+    v_dir = vectorNormalize(v_dir);
     v_angles = vectortoangles(v_dir);
     ai forceteleport(s_location.origin, v_angles);
     ai function_551e32b4();
@@ -412,8 +412,8 @@ function private function_4f4a272(right_offset) {
   enemy_vec = self.favoriteenemy.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0.5) {
     return false;
@@ -754,7 +754,7 @@ function private function_90ec324d() {
   }
   if(isDefined(self.favoriteenemy)) {
     var_70b6278d = self.favoriteenemy.origin - self.origin;
-    var_68149ff9 = vectornormalize(var_70b6278d);
+    var_68149ff9 = vectorNormalize(var_70b6278d);
     target_entity = self.favoriteenemy;
   } else {
     var_68149ff9 = anglesToForward(self.angles);
@@ -773,9 +773,9 @@ function private function_90ec324d() {
     if(isDefined(target_entity)) {
       torpedo_target_point = target_entity.origin;
       vector_to_target = torpedo_target_point - position;
-      normal_vector = vectornormalize(vector_to_target);
-      flat_mapped_normal_vector = vectornormalize((normal_vector[0], normal_vector[1], 0));
-      flat_mapped_old_normal_vector = vectornormalize((var_1642db30[0], var_1642db30[1], 0));
+      normal_vector = vectorNormalize(vector_to_target);
+      flat_mapped_normal_vector = vectorNormalize((normal_vector[0], normal_vector[1], 0));
+      flat_mapped_old_normal_vector = vectorNormalize((var_1642db30[0], var_1642db30[1], 0));
       dot = vectordot(flat_mapped_normal_vector, flat_mapped_old_normal_vector);
       if(dot >= 1) {
         dot = 1;
@@ -798,7 +798,7 @@ function private function_90ec324d() {
         }
         new_vector = new_vector * ratio;
         new_vector = new_vector + var_1642db30;
-        normal_vector = vectornormalize(new_vector);
+        normal_vector = vectorNormalize(new_vector);
       } else {
         normal_vector = var_1642db30;
       }
@@ -815,7 +815,7 @@ function private function_90ec324d() {
         continue;
       }
       position = trace["position"];
-      var_898f5d33 moveto(position, 0.15);
+      var_898f5d33 moveTo(position, 0.15);
       var_898f5d33 waittill("movedone");
       var_898f5d33 clientfield::increment("play_margwa_fire_attack_fx");
       var_898f5d33 thread function_396590c8(position, 48);
@@ -923,7 +923,7 @@ function private function_3c8bea36(entity) {
   entity ghost();
   entity pathmode("dont move");
   if(isDefined(entity.traveler)) {
-    entity linkto(entity.traveler);
+    entity linkTo(entity.traveler);
   }
   entity thread function_aa4e7619();
 }
@@ -943,7 +943,7 @@ function private function_aa4e7619() {
     var_cabd9641 = distance(path[index - 1], path[index]);
     if((segment_length + var_cabd9641) > var_2fd16fa4) {
       var_bee1a4a2 = var_2fd16fa4 - segment_length;
-      var_5a78f4fc = (path[index - 1]) + ((vectornormalize(path[index] - (path[index - 1]))) * var_bee1a4a2);
+      var_5a78f4fc = (path[index - 1]) + ((vectorNormalize(path[index] - (path[index - 1]))) * var_bee1a4a2);
       query_result = positionquery_source_navigation(var_5a78f4fc, 64, 128, 36, 16, self, 16);
       if(query_result.data.size > 0) {
         point = query_result.data[randomint(query_result.data.size)];
@@ -963,7 +963,7 @@ function private function_aa4e7619() {
       time = 0.1;
     }
     if(isDefined(self.traveler)) {
-      self.traveler moveto(var_bd23de7b, time);
+      self.traveler moveTo(var_bd23de7b, time);
       self.traveler util::waittill_any_timeout(time, "movedone");
     }
   }
@@ -1073,12 +1073,12 @@ function private function_9a821f95() {
     if(distancesquared(self.origin, eye_position) <= 10000) {
       if(!(isDefined(self.var_d7c0356e) && self.var_d7c0356e)) {
         self.origin = eye_position;
-        self linkto(self.var_8002cc8a, "tag_eye");
+        self linkTo(self.var_8002cc8a, "tag_eye");
         self.var_d7c0356e = 1;
       }
     } else {
       var_2dca088d = eye_position - self.origin;
-      var_6c4cc94d = vectornormalize(var_2dca088d);
+      var_6c4cc94d = vectorNormalize(var_2dca088d);
       var_4037a81b = var_6c4cc94d * 50;
       var_5ae4b928 = self.origin + var_4037a81b;
       var_81e4178f = eye_position[2] - self.origin[2];
@@ -1086,7 +1086,7 @@ function private function_9a821f95() {
       if(isDefined(bullet_trace["position"])) {
         var_5ae4b928 = bullet_trace["position"] + (0, 0, var_81e4178f);
       }
-      self moveto(var_5ae4b928, 0.2);
+      self moveTo(var_5ae4b928, 0.2);
     }
     wait(0.2);
   }
@@ -1206,7 +1206,7 @@ function private function_34067c01() {
 
 function private function_308ca6aa(position, range, damage, damage_mod) {
   margwa = self;
-  players = getplayers();
+  players = getPlayers();
   range_sq = range * range;
   foreach(player in players) {
     if(player laststand::player_is_in_laststand()) {
@@ -1379,7 +1379,7 @@ function function_15492d9b() {
 }
 
 function function_a06aa49e() {
-  players = getplayers();
+  players = getPlayers();
   var_fda751f9 = getspawnerarray("", "");
   if(var_fda751f9.size <= 0) {
     iprintln("");
@@ -1396,7 +1396,7 @@ function function_a06aa49e() {
 }
 
 function function_156bbea2() {
-  players = getplayers();
+  players = getPlayers();
   var_5e8312fd = getspawnerarray("", "");
   if(var_5e8312fd.size <= 0) {
     iprintln("");
@@ -1413,7 +1413,7 @@ function function_156bbea2() {
 }
 
 function function_f6720b6e() {
-  players = getplayers();
+  players = getPlayers();
   var_1977e3bb = getspawnerarray("", "");
   if(var_1977e3bb.size <= 0) {
     iprintln("");
@@ -1430,7 +1430,7 @@ function function_f6720b6e() {
 }
 
 function function_812b0245() {
-  players = getplayers();
+  players = getPlayers();
   var_9ceb03c8 = getspawnerarray("", "");
   if(var_9ceb03c8.size <= 0) {
     iprintln("");

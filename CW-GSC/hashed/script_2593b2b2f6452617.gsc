@@ -107,7 +107,7 @@ function function_4065a0e0() {
   var_35dfb407 = 0;
 
   while(!var_35dfb407) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(distance2dsquared(player.origin, self.var_43123efe.origin) <= 1000000) {
@@ -287,7 +287,7 @@ function function_e1ea43c1(params) {
         objective_setvisibletoall(level.var_11af7d74);
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_4546417366cc7a50");
         level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
       }
@@ -356,7 +356,7 @@ function function_98957f5b() {
     level.e_head thread function_beaa3f66();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_64bcb1aa0613610d");
     level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
   }
@@ -410,15 +410,15 @@ function function_1b438ea2() {
   self thread function_a56e1736();
   wait 1;
   level namespace_7589cf5c::play_vo("objectiveDefendStart");
-  playsoundatposition(#"hash_1fe69eb0d3391a76", self.mdl_console.origin);
+  playSoundAtPosition(#"hash_1fe69eb0d3391a76", self.mdl_console.origin);
   wait 1;
   level namespace_7589cf5c::play_vo("objectiveDefendStartResponse");
   self flag::set(#"start_vo_done");
   self waittill(#"wave_start");
-  playsoundatposition(#"hash_1fe69eb0d3391a76", self.mdl_console.origin);
+  playSoundAtPosition(#"hash_1fe69eb0d3391a76", self.mdl_console.origin);
   level namespace_7589cf5c::play_vo("objectiveDefendWave2");
   self waittill(#"wave_start");
-  playsoundatposition(#"hash_1fe69eb0d3391a76", self.mdl_console.origin);
+  playSoundAtPosition(#"hash_1fe69eb0d3391a76", self.mdl_console.origin);
   level namespace_7589cf5c::play_vo("objectiveDefendWave3");
 }
 
@@ -449,7 +449,7 @@ function function_15f3c92() {
 
   wait 0.5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player) && player hasweapon(level.var_e4731251)) {
       player takeweapon(level.var_e4731251);
     }
@@ -465,7 +465,7 @@ function function_3a6b15fd() {
     }
 
     foreach(mdl_blocker in self.a_mdl_blockers) {
-      mdl_blocker disconnectpaths();
+      mdl_blocker disconnectPaths();
       mdl_blocker ghost();
     }
   }
@@ -489,7 +489,7 @@ function function_f5087df2() {
   s_result = self waittill(#"objective_ended", #"players_dead");
   objective_manager::stop_timer();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::function_817e4d10(player, 0);
   }
 
@@ -501,7 +501,7 @@ function function_f5087df2() {
   if(is_true(self.success)) {
     level thread namespace_cda50904::function_a92a93e9(self.mdl_console.mdl_reward.origin, self.mdl_console.mdl_reward.angles);
     self.mdl_console clientfield::increment("" + #"console_kill");
-    self.mdl_console playrumbleonentity("sr_prototype_generator_explosion");
+    self.mdl_console playRumbleOnEntity("sr_prototype_generator_explosion");
     waitframe(1);
     namespace_7589cf5c::function_3899cfea();
     wait 2;
@@ -537,7 +537,7 @@ function defend_start(instance, activator) {
       level.var_97e461d4 = var_cdce8e6f.script_noteworthy;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_237b8c297f7c5730");
       level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
     }
@@ -594,7 +594,7 @@ function function_7cf83691() {
   b_proximity = 0;
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(level.e_obj.origin, player.origin) <= sqr(3000)) {
         b_proximity = 1;
       }
@@ -607,7 +607,7 @@ function function_7cf83691() {
     wait 1;
   }
 
-  level.e_obj moveto(var_43123efe.origin, 0.05);
+  level.e_obj moveTo(var_43123efe.origin, 0.05);
   zm_utility::function_bc5a54a8(n_objective_id);
   level.e_obj.n_objective_id = zm_utility::function_f5a222a8(#"hash_a7e9aa24c3b886d", level.e_obj);
   level.e_obj zm_utility::function_747180ea(level.e_obj.n_objective_id, 96);
@@ -629,7 +629,7 @@ function function_7cf83691() {
 function function_beaa3f66() {
   level endon(#"defend_start", #"head_pickup");
   self endon(#"death");
-  level.e_obj moveto(self.origin, 0.05);
+  level.e_obj moveTo(self.origin, 0.05);
   level.e_obj waittill(#"movedone");
   level.e_obj zm_utility::function_747180ea(level.e_obj.n_objective_id, 96);
   objective_setvisibletoall(level.e_obj.n_objective_id);
@@ -641,10 +641,10 @@ function function_57cc3128() {
   mdl_console = self.mdl_console;
   level.var_11af7d74 = zm_utility::function_f5a222a8(#"hash_39f360c41bb85464", mdl_console.origin + (0, 0, 30));
   var_7631cbaa = spawn("trigger_radius_use", mdl_console.origin + (0, 0, 24), 0, 96, 96, 1);
-  var_7631cbaa triggerignoreteam();
-  var_7631cbaa setcursorhint("HINT_NOICON");
-  var_7631cbaa sethintstring(#"hash_6442cecaf6cfb0dc");
-  var_7631cbaa usetriggerrequirelookat(1);
+  var_7631cbaa triggerIgnoreTeam();
+  var_7631cbaa setCursorHint("HINT_NOICON");
+  var_7631cbaa setHintString(#"hash_6442cecaf6cfb0dc");
+  var_7631cbaa useTriggerRequireLookAt(1);
   var_7631cbaa thread function_c4712107();
   mdl_console zm_utility::function_747180ea(level.var_11af7d74, undefined, var_7631cbaa);
 
@@ -665,7 +665,7 @@ function function_57cc3128() {
       mdl_console zm_utility::function_48d9a9c9();
       zm_utility::function_bc5a54a8(level.var_11af7d74);
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         level.var_31028c5d prototype_hud::function_817e4d10(player, 0);
       }
 
@@ -680,7 +680,7 @@ function function_c4712107() {
   self endon(#"death");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player hasweapon(level.var_e4731251)) {
         self setvisibletoplayer(player);
 
@@ -752,7 +752,7 @@ function function_677356aa(instance) {
   level flag::set("obj_defend_start");
   self thread function_763876af(instance);
   self thread function_5f91d0c7(instance);
-  a_players = getplayers();
+  a_players = getPlayers();
   n_players = a_players.size;
 
   switch (n_players) {
@@ -991,7 +991,7 @@ function function_b3791df9(instance) {
 function function_22281e97(instance) {
   instance endon(#"objective_ended", #"wave_over");
   self endon(#"death");
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
   n_total = function_b37294d5(n_players);
   a_s_pts = array::randomize(self.var_a74eba1b);
   i = 0;
@@ -1027,7 +1027,7 @@ function function_22281e97(instance) {
 }
 
 function on_dog_killed(params) {
-  mdl_console = getent("defend_object", "targetname");
+  mdl_console = getEnt("defend_object", "targetname");
 
   if(self.aitype === #"hash_7a8b592728eec95d" && isDefined(mdl_console)) {
     if(isDefined(self) && isDefined(mdl_console) && distance2dsquared(self.origin, mdl_console.origin) <= sqr(200)) {
@@ -1179,7 +1179,7 @@ function function_763876af(instance) {
 
 function function_b11358ce() {
   self clientfield::increment("" + #"console_kill");
-  self playrumbleonentity("sr_prototype_generator_explosion");
+  self playRumbleOnEntity("sr_prototype_generator_explosion");
 }
 
 function cleanup_attackable(instance) {
@@ -1190,7 +1190,7 @@ function cleanup_attackable(instance) {
 function function_b9fb6c3a(instance) {
   instance endon(#"objective_ended");
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       self.health = 2500;
       self.max_health = 2500;
@@ -1361,7 +1361,7 @@ function cleanup_zombie() {
 
   while(true) {
     wait 0.1;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(distance2dsquared(self.origin, player.origin) <= sqr(1000)) {}
@@ -1513,7 +1513,7 @@ function private function_df9979de(instance) {
 function function_cd1515dc() {
   if(self.targetname === "objective_ski_defend_garage" || self.targetname === "objective_duga_defend") {
     if(isDefined(self.mdl_blocker)) {
-      self.mdl_blocker disconnectpaths();
+      self.mdl_blocker disconnectPaths();
       self.mdl_blocker ghost();
     }
 

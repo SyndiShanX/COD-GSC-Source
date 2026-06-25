@@ -73,7 +73,7 @@ function main() {
   level.var_8b418269 = &"ZM_ISLAND_SKULL_START";
   level.var_452c59e0 = 0;
   level.var_3846d9a8 = 0;
-  level.var_55c48492 = getent("mdl_skullgun", "targetname");
+  level.var_55c48492 = getEnt("mdl_skullgun", "targetname");
   level.var_55c48492.var_5cd7e450 = level.var_55c48492.origin;
   level.var_55c48492.var_d7778aba = level.var_55c48492.angles;
   level.var_b2152df5 = struct::get("s_utrig_get_skullgun", "targetname");
@@ -152,11 +152,11 @@ function main() {
   level.var_9046e7b0 = level.var_e534ade[0];
   if(isDefined(level.var_9046e7b0)) {
     for(i = 1; i < level.var_e534ade.size; i++) {
-      level.var_e534ade[i] linkto(level.var_9046e7b0);
+      level.var_e534ade[i] linkTo(level.var_9046e7b0);
     }
   }
   level scene::init("p7_fxanim_zm_island_alter_stairs_bundle");
-  level.var_1a9b1b91 = getent("dais_altar", "targetname");
+  level.var_1a9b1b91 = getEnt("dais_altar", "targetname");
   level.var_9046e7b0.var_9c93e17 = level.var_9046e7b0.origin;
   level.var_1a9b1b91.var_9c93e17 = level.var_1a9b1b91.origin;
   level.var_9046e7b0.v_open_pos = level.var_9046e7b0.origin - vectorscale((0, 0, 1), 256);
@@ -197,9 +197,9 @@ function main() {
   level flag::init("skullquest_ritual_complete3");
   level flag::init("skullquest_ritual_complete4");
   var_93999912 = [];
-  var_93999912[1] = getent("reveal_keeper_mural_01", "targetname");
-  var_93999912[2] = getent("reveal_keeper_mural_02", "targetname");
-  var_93999912[3] = getent("reveal_keeper_mural_03", "targetname");
+  var_93999912[1] = getEnt("reveal_keeper_mural_01", "targetname");
+  var_93999912[2] = getEnt("reveal_keeper_mural_02", "targetname");
+  var_93999912[3] = getEnt("reveal_keeper_mural_03", "targetname");
   foreach(var_d9516038 in var_93999912) {
     if(isDefined(var_d9516038)) {
       var_d9516038 clientfield::set("do_emissive_material", 0);
@@ -271,7 +271,7 @@ function function_b00b433f(a_ents, var_f2e38849) {
   var_affd5bec.origin = var_86045b9a gettagorigin("skull_link_jnt");
   var_affd5bec.angles = var_86045b9a gettagangles("skull_link_jnt");
   var_affd5bec show();
-  var_affd5bec linkto(var_86045b9a, "skull_link_jnt");
+  var_affd5bec linkTo(var_86045b9a, "skull_link_jnt");
   level.var_a576e0b9[var_f2e38849].var_226d2560 = var_86045b9a;
 }
 
@@ -347,7 +347,7 @@ function function_afdb341(ai) {
   while(level flag::get("skullquest_ritual_inprogress" + self.script_special) && isalive(ai) && (!(isDefined(ai.var_3f6ea790) && ai.var_3f6ea790))) {
     self thread function_f20126b2();
     if(!(isDefined(ai.var_3f6ea790) && ai.var_3f6ea790)) {
-      ai animscripted("melee", ai.origin, ai.angles, var_872d00dd, "normal", undefined, undefined, 0.5, 0.5);
+      ai animScripted("melee", ai.origin, ai.angles, var_872d00dd, "normal", undefined, undefined, 0.5, 0.5);
       self.mdl_skull_s playSound("zmb_skull_ritual_hit");
       wait(var_430b638 + 1);
     }
@@ -548,7 +548,7 @@ function function_a050863e(var_964af2de, v_dest) {
     var_b6f3d7c3 = spawn("script_model", var_964af2de);
     var_b6f3d7c3 setModel("p7_sky_vista_light_flare_blue");
     var_b6f3d7c3 playSound("zmb_skull_soul_feed");
-    var_b6f3d7c3 moveto(v_dest, 0.5);
+    var_b6f3d7c3 moveTo(v_dest, 0.5);
     var_b6f3d7c3 waittill("movedone");
     var_b6f3d7c3 delete();
   }
@@ -966,17 +966,17 @@ function function_f20b6331() {
 
 function function_9839b367() {
   level.var_9046e7b0 playSound("zmb_skull_door_close");
-  level.var_9046e7b0 moveto(level.var_9046e7b0.var_9c93e17, 3);
+  level.var_9046e7b0 moveTo(level.var_9046e7b0.var_9c93e17, 3);
   exploder::exploder("fxexp_501");
 }
 
 function function_e20f6c97(b_on = 1) {
-  mdl_skullroom_seal = getent("mdl_skullroom_seal", "targetname");
+  mdl_skullroom_seal = getEnt("mdl_skullroom_seal", "targetname");
   if(isDefined(b_on) && b_on) {
     mdl_skullroom_seal show();
     mdl_skullroom_seal solid();
     exploder::exploder("fxexp_501");
-    mdl_skullroom_seal disconnectpaths();
+    mdl_skullroom_seal disconnectPaths();
     level.var_a5db31a9 = 1;
   } else {
     mdl_skullroom_seal ghost();
@@ -1001,14 +1001,14 @@ function function_97106262() {
 
 function function_d3554921(player) {
   if(isDefined(level.var_b10ab148) && level.var_b10ab148 && player bgb::is_enabled("zm_bgb_disorderly_combat")) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(level flag::get("skullroom_defend_inprogress") || player hasweapon(level.var_c003f5b, 1)) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
-  self sethintstring(&"ZM_ISLAND_SKULLQUEST_GET_SKULLGUN");
+  self setHintString(&"ZM_ISLAND_SKULLQUEST_GET_SKULLGUN");
   return true;
 }
 
@@ -1060,7 +1060,7 @@ function function_ef5b1df5() {
   level.disable_nuke_delay_spawning = 1;
   level.var_92914699 = 0;
   level.var_9bc0cd6e = 0;
-  var_bc3b3f4c = getent("skullroom_keeper_spawner", "targetname");
+  var_bc3b3f4c = getEnt("skullroom_keeper_spawner", "targetname");
   level.var_55c48492 clientfield::set("skullquest_finish_start_fx", 1);
   level.var_55c48492 clientfield::set("skullquest_finish_trail_fx", 1);
   level thread function_41b94a87();
@@ -1104,7 +1104,7 @@ function function_ef5b1df5() {
   level.var_b10ab148 = level.var_9bc0cd6e >= level.var_49c6fb1c;
   level flag::set("skull_quest_complete");
   if(isDefined(level.var_b10ab148) && level.var_b10ab148) {
-    var_363b7d39 = getent("volume_thrasher_non_teleport_ruins_underground", "targetname");
+    var_363b7d39 = getEnt("volume_thrasher_non_teleport_ruins_underground", "targetname");
     var_363b7d39 delete();
     level.var_55c48492 thread function_85a2a491();
   }
@@ -1116,14 +1116,14 @@ function function_ef5b1df5() {
   }
   level.var_55c48492 playSound("evt_keeper_quest_done");
   wait(1.5);
-  level.var_55c48492 moveto(level.var_55c48492.var_5cd7e450, 0.5);
+  level.var_55c48492 moveTo(level.var_55c48492.var_5cd7e450, 0.5);
   level.zombie_ai_limit = level.zombie_ai_limit + level.var_d15b7db3;
   level flag::set("spawn_zombies");
   level.disable_nuke_delay_spawning = 0;
 }
 
 function function_d91adba6() {
-  t_inside_skullroom = getent("t_inside_skullroom", "targetname");
+  t_inside_skullroom = getEnt("t_inside_skullroom", "targetname");
   level.var_d9d19dae = 0;
   while(level flag::get("skullroom_defend_inprogress")) {
     var_f66cf9d4 = [];
@@ -1153,7 +1153,7 @@ function function_41b94a87() {
   }
   var_3de76631 = level.var_55c48492.var_5cd7e450[2] + (10 * (1 - var_e312b793));
   var_ba7b8d86 = (level.var_55c48492.origin[0], level.var_55c48492.origin[1], var_3de76631);
-  level.var_55c48492 moveto(var_ba7b8d86, 0.2);
+  level.var_55c48492 moveTo(var_ba7b8d86, 0.2);
 }
 
 function function_b820cada() {}
@@ -1255,7 +1255,7 @@ function function_458f50f2() {
 function function_940267cd() {
   self endon("disconnect");
   level flag::wait_till("a_player_got_skullgun");
-  var_d9516038 = getent("reveal_keeper_mural_01", "targetname");
+  var_d9516038 = getEnt("reveal_keeper_mural_01", "targetname");
   if(isDefined(var_d9516038) && !isDefined(var_d9516038.b_shown)) {
     self thread function_f293f820(var_d9516038, "mural1_revealed");
   } else {
@@ -1266,7 +1266,7 @@ function function_940267cd() {
 function function_ba04e236() {
   self endon("disconnect");
   level flag::wait_till("a_player_got_skullgun");
-  var_d9516038 = getent("reveal_keeper_mural_02", "targetname");
+  var_d9516038 = getEnt("reveal_keeper_mural_02", "targetname");
   if(isDefined(var_d9516038) && !isDefined(var_d9516038.b_shown)) {
     self thread function_f293f820(var_d9516038, "mural2_revealed");
   } else {
@@ -1277,7 +1277,7 @@ function function_ba04e236() {
 function function_e0075c9f() {
   self endon("disconnect");
   level flag::wait_till("a_player_got_skullgun");
-  var_d9516038 = getent("reveal_keeper_mural_03", "targetname");
+  var_d9516038 = getEnt("reveal_keeper_mural_03", "targetname");
   if(isDefined(var_d9516038) && !isDefined(var_d9516038.b_shown)) {
     self thread function_f293f820(var_d9516038, "mural3_revealed");
   } else {
@@ -1368,10 +1368,10 @@ function function_b6c35b21(var_f2e38849) {
     var_c274e933 = array("", "altar_skull_battle", "altar_skull_blood", "altar_skull_chaos", "altar_skull_doom");
     var_9d012998 = array("", "skull_battle_jnt", "skull_blood_jnt", "skull_chaos_jnt", "skull_doom_jnt");
     var_c9260a5 = array("", "p7_fxanim_zm_island_altar_skull_battle_bundle", "p7_fxanim_zm_island_altar_skull_blood_bundle", "p7_fxanim_zm_island_altar_skull_chaos_bundle", "p7_fxanim_zm_island_altar_skull_doom_bundle");
-    var_e36aa077 = getent(var_c274e933[var_f7d3c273], "targetname");
+    var_e36aa077 = getEnt(var_c274e933[var_f7d3c273], "targetname");
     var_e36aa077 clientfield::set("do_emissive_material", 1);
     var_e36aa077 thread scene::play(var_c9260a5[var_f7d3c273], var_e36aa077);
-    mdl_skull_p linkto(var_e36aa077, var_9d012998[var_f7d3c273]);
+    mdl_skull_p linkTo(var_e36aa077, var_9d012998[var_f7d3c273]);
     var_e36aa077 waittill("scene_done");
     level notify("skull_p_returned" + var_1a3afb94);
   }
@@ -1716,7 +1716,7 @@ function function_dc9fe8fe() {
           if(!player function_76e79e0e()) {
             level thread function_fae0aa01(self.stub.script_special, "skull_s_picked_up", player);
             player playSound("zmb_skull_pickup");
-            self sethintstring("");
+            self setHintString("");
           }
           break;
         }
@@ -1725,14 +1725,14 @@ function function_dc9fe8fe() {
             player thread function_8302a101(self.stub.script_special);
             player playSound("zmb_skull_place");
             level thread function_fae0aa01(self.stub.script_special, "start");
-            self sethintstring("");
+            self setHintString("");
           }
           break;
         }
         case "skull_p_picked_up": {
           if(player.var_4849e523 === self.stub.script_special) {
             level thread function_fae0aa01(self.stub.script_special, "completed", player);
-            self sethintstring("");
+            self setHintString("");
           }
           break;
         }
@@ -1766,7 +1766,7 @@ function function_3cd83908(player) {
       if(player function_76e79e0e()) {
         return false;
       } else {
-        self sethintstring(level.var_8b0a8fa9);
+        self setHintString(level.var_8b0a8fa9);
         return true;
       }
     }
@@ -1787,21 +1787,21 @@ function function_d757eab6() {
         case "start": {
           if(player.var_d64275e8 === self.stub.script_special) {
             level thread function_fae0aa01(self.stub.script_special, "inritual", player);
-            self sethintstring("");
+            self setHintString("");
           }
           break;
         }
         case "retry": {
           level.var_a576e0b9[self.stub.script_special] thread function_80794095();
           level thread function_fae0aa01(self.stub.script_special, "inritual");
-          self sethintstring("");
+          self setHintString("");
           break;
         }
         case "postritual": {
           if(!player function_76e79e0e()) {
             level thread function_fae0aa01(self.stub.script_special, "skull_p_picked_up", player);
             player playSound("zmb_skull_pickup");
-            self sethintstring("");
+            self setHintString("");
           }
           break;
         }

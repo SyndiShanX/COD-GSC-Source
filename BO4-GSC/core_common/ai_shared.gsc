@@ -279,7 +279,7 @@ set_goal(value, key = "targetname", b_force = 0) {
   if(isDefined(goal)) {
     self setgoal(goal, b_force);
   } else {
-    goal = getent(value, key);
+    goal = getEnt(value, key);
 
     if(isDefined(goal)) {
       self setgoal(goal, b_force);
@@ -518,7 +518,7 @@ end_patrol_on_enemy_targetting() {
 
 end_and_clean_patrol_behaviors() {
   if(isDefined(self.currentgoal) && isDefined(self.currentgoal.scriptbundlename)) {
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   if(self has_behavior_attribute("patrol")) {
@@ -599,7 +599,7 @@ set_group_protect_ent(e_ent_to_protect, defend_volume_name_or_ent) {
   }
 
   if(isstring(defend_volume_name_or_ent)) {
-    vol_defend = getent(defend_volume_name_or_ent, "targetname");
+    vol_defend = getEnt(defend_volume_name_or_ent, "targetname");
   } else if(isentity(defend_volume_name_or_ent)) {
     vol_defend = defend_volume_name_or_ent;
   }
@@ -716,7 +716,7 @@ function_31a31a25(var_9a21f98d = 1) {
 }
 
 function_41b04632() {
-  return isDefined(self.targetname) && self.targetname == "destructible" && !isDefined(getent(self.target, "targetname"));
+  return isDefined(self.targetname) && self.targetname == "destructible" && !isDefined(getEnt(self.target, "targetname"));
 }
 
 function_63734291(enemy) {

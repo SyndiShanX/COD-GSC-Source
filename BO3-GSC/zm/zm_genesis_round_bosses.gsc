@@ -90,7 +90,7 @@ function function_c68599fd() {
     }
   }
   wait(1);
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size == 1) {
     return;
   }

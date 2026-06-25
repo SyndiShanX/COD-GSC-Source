@@ -84,7 +84,7 @@ set_objective_perk(n_objective, ent_or_pos, n_fade_radius, e_volume) {
 remove_objective_perk(n_objective) {
   level notify("stop_obj_" + n_objective);
   objective_delete(n_objective);
-  t_radius = getent("perk_obj_trigger_" + n_objective, "targetname");
+  t_radius = getEnt("perk_obj_trigger_" + n_objective, "targetname");
 
   if(isDefined(t_radius)) {
     t_radius delete();
@@ -362,11 +362,11 @@ is_objective_pos_the_same(pos1, pos2) {
 
 objective_breadcrumb(n_obj_index, str_trig_targetname) {
   do {
-    t_current = getent(str_trig_targetname, "targetname");
+    t_current = getEnt(str_trig_targetname, "targetname");
 
     if(isDefined(t_current)) {
       if(isDefined(t_current.target)) {
-        s_current = getstruct(t_current.target, "targetname");
+        s_current = getStruct(t_current.target, "targetname");
 
         if(isDefined(s_current)) {
           set_objective(n_obj_index, s_current, "breadcrumb");
@@ -425,12 +425,12 @@ objective_breadcrumb_area(n_obj_index, str_area_name, str_endon) {
 
     if(b_area_updated) {
       b_area_updated = 0;
-      s_dest = getstruct(e_curr_area.target, "targetname");
+      s_dest = getStruct(e_curr_area.target, "targetname");
 
       if(isDefined(s_dest)) {
         set_objective(n_obj_index, s_dest, "breadcrumb");
       } else {
-        e_dest = getent(e_curr_area.target, "targetname");
+        e_dest = getEnt(e_curr_area.target, "targetname");
 
         if(isDefined(e_dest)) {
           set_objective(n_obj_index, e_dest, "breadcrumb");

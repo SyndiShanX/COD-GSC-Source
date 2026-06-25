@@ -266,7 +266,7 @@ get_leap_end_pos(timeUntilAttack, offset, enemy, tracking_amount) {
   enemy_to_self = self.origin - enemy.origin;
 
   enemy_to_self *= (1, 1, 0);
-  enemy_to_self = VectorNormalize(enemy_to_self) * offset;
+  enemy_to_self = vectorNormalize(enemy_to_self) * offset;
 
   if(!isDefined(tracking_amount)) {
     tracking_amount = 1.0;
@@ -276,7 +276,7 @@ get_leap_end_pos(timeUntilAttack, offset, enemy, tracking_amount) {
     velocity = enemy GetVelocity();
     TRACKING_VELOCITY_CAP = 200.0;
     if(LengthSquared(velocity) > TRACKING_VELOCITY_CAP * TRACKING_VELOCITY_CAP) {
-      velocity = VectorNormalize(velocity);
+      velocity = vectorNormalize(velocity);
       velocity *= TRACKING_VELOCITY_CAP;
     }
     velocity *= tracking_amount;
@@ -404,7 +404,7 @@ melee_ChooseJumpArrival(jumpInfo, jumpAnimStates) {
   if(isAlive(self.enemy)) {
     assert(isDefined(jumpInfo.landOrigin));
     assert(isDefined(jumpInfo.endAngles));
-    landToEnemy = VectorNormalize(self.enemy.origin - jumpInfo.landOrigin);
+    landToEnemy = vectorNormalize(self.enemy.origin - jumpInfo.landOrigin);
     landForward = anglesToForward(jumpInfo.endAngles);
     forward_dot = VectorDot(landToEnemy, landForward);
 
@@ -441,7 +441,7 @@ melee_synch_attack(enemy) {
   synchList = enemy get_synch_direction_list(self);
 
   up = AnglesToUp(enemy.angles);
-  forward = VectorNormalize(enemy.origin - self.synch_attack_pos);
+  forward = vectorNormalize(enemy.origin - self.synch_attack_pos);
   right = VectorCross(forward, up);
   attackAngles = AxisToAngles(forward, right, up);
 
@@ -899,7 +899,7 @@ getMeleePainAnimIndex(animState, damageDirection, hitLocation) {
 
 check_for_player_meleeing(player) {
   playerForwardVector = anglesToForward(player.angles);
-  playerToEnemyVector = VectorNormalize(self.origin - player.origin);
+  playerToEnemyVector = vectorNormalize(self.origin - player.origin);
   dotProduct = VectorDot(playerToEnemyVector, playerForwardVector);
 
   if(player meleeButtonPressed() && isDefined(player.meleeStrength) && player.meleeStrength == 1 && dotProduct > 0.5) {
@@ -931,7 +931,7 @@ check_for_block(player) {
   shield_weapon_health = player GetWeaponAmmoClip(riot_shield);
 
   playerForwardVector = anglesToForward(player.angles);
-  playerToEnemyVector = VectorNormalize(self.origin - player.origin);
+  playerToEnemyVector = vectorNormalize(self.origin - player.origin);
   dotProduct = VectorDot(playerToEnemyVector, playerForwardVector);
 
   if(dotProduct > 0.5) {

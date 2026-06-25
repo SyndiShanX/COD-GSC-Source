@@ -156,7 +156,7 @@ function private function_57d4a011(insertion) {
         portal_vehicle.angle_step = angle;
         angle += step_size;
         target = var_8a2c40d0.origin - portal_vehicle.origin;
-        target = vectornormalize(target);
+        target = vectorNormalize(target);
         angles = vectortoangles(target);
         portal_vehicle.angles = angles;
       }
@@ -166,7 +166,7 @@ function private function_57d4a011(insertion) {
 
     foreach(team in level.teams) {
       if(is_true(level.everexisted[team])) {
-        players = getplayers(team);
+        players = getPlayers(team);
 
         foreach(player in players) {
           if(isalive(player)) {
@@ -240,11 +240,11 @@ function private function_7bf9c38f(reinserting) {
   assert(isDefined(portal), "<dev string:x78>");
 
   if(isDefined(portal)) {
-    self setorigin(portal.origin);
+    self setOrigin(portal.origin);
   } else {
     center = level.mapcenter;
     center = (center[0], center[1], getdvarint(#"hash_3602c5d9aaca933c", 20000));
-    self setorigin(center);
+    self setOrigin(center);
   }
 
   velocity = anglesToForward(self getplayerangles()) * speed;
@@ -264,7 +264,7 @@ function private function_a25e421c() {
     self thread status_effect::function_6519f95f();
     self death_circle::function_b57e3cde(1);
     self val::set(#"player_insertion", "disable_oob", 1);
-    self stopanimscripted();
+    self stopanimScripted();
     self unlink();
     self setstance("stand");
     var_180a7b48 = self function_ec7cfdb();
@@ -277,7 +277,7 @@ function private function_a25e421c() {
       portal = level.warp_portal_vehicles[var_180a7b48];
 
       if(isDefined(portal)) {
-        self setorigin(level.warp_portal_vehicles[var_180a7b48].origin);
+        self setOrigin(level.warp_portal_vehicles[var_180a7b48].origin);
         self function_648c1f6(level.warp_portal_vehicles[var_180a7b48], undefined, 0, 180, 180, 180, 180, 0);
 
         if(death_circle::is_active()) {
@@ -287,7 +287,7 @@ function private function_a25e421c() {
           target = var_8a2c40d0.origin - self.origin;
         }
 
-        target = vectornormalize(target);
+        target = vectorNormalize(target);
         angles = vectortoangles(target);
         self setplayerangles(angles);
       }
@@ -398,6 +398,6 @@ function function_4910c182(insertion) {
   }
 
   wait var_990e3011;
-  players = getplayers();
+  players = getPlayers();
   players[0] function_adc8cff4();
 }

@@ -66,7 +66,7 @@ function double_points_powerup(drop_item, player) {
   level endon("powerup points scaled_" + player.team);
   team = player.team;
   level thread zm_powerups::show_on_hud(team, "double_points");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     if(isDefined(e_player) && isPlayer(e_player) && isDefined(drop_item.hint)) {
@@ -85,7 +85,7 @@ function double_points_powerup(drop_item, player) {
   }
 
   zombie_utility::set_zombie_var_team(#"zombie_point_scalar", team, 2);
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     if(team == players[player_index].team) {
@@ -102,7 +102,7 @@ function double_points_powerup(drop_item, player) {
   wait n_wait;
   zombie_utility::set_zombie_var_team(#"zombie_point_scalar", team, 1);
   level._race_team_double_points = undefined;
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     if(team == players[player_index].team) {

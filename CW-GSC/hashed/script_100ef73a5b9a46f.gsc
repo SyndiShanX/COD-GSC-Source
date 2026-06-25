@@ -125,7 +125,7 @@ function function_59d9033e(var_eb0c09b, corpse_client_num, var_d47b6a0b) {
   }
 
   level clientfield::set("corpse_observer_client_num", 31);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player)) {
@@ -140,7 +140,7 @@ function function_59d9033e(var_eb0c09b, corpse_client_num, var_d47b6a0b) {
   level clientfield::set("body_identity", var_d47b6a0b);
   level clientfield::set("corpse_observer_role", var_9b867835);
   util::wait_network_frame();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player) && !isbot(player)) {

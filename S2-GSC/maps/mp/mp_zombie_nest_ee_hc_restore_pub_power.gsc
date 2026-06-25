@@ -16,14 +16,14 @@ func_8B28(param_00, param_01) {
   var_02 = common_scripts\utility::func_7A33(self["switch_scriptables"]);
   var_03 = getanimlength(%zmb_obj_glass_fuse_open);
   while(!func_3B8F(self["weather_vane"], var_02, 30, 1)) {
-    self["weather_vane"] rotateyaw(15, 0.1);
+    self["weather_vane"] rotateYaw(15, 0.1);
     lib_0378::func_8D74("aud_weathervane_rotate", "short");
     wait(0.3);
   }
 
   var_04 = vectortoangles(var_02.var_0116 - self["weather_vane"].var_0116);
   var_05 = common_scripts\utility::func_98E7(var_04[1] + 180 > 360, var_04[1] - 180, var_04[1] + 180);
-  self["weather_vane"] rotateto((self["weather_vane"].var_001D[0], var_05, self["weather_vane"].var_001D[2]), 0.15);
+  self["weather_vane"] rotateTo((self["weather_vane"].var_001D[0], var_05, self["weather_vane"].var_001D[2]), 0.15);
   lib_0378::func_8D74("aud_weathervane_rotate", "short");
   wait(0.15);
   var_02 setscriptablepartstate("fuse", "open");
@@ -47,8 +47,8 @@ func_3B8F(param_00, param_01, param_02, param_03) {
 
   var_06 = var_06 * (1, 1, 0);
   var_07 = var_07 * (1, 1, 0);
-  var_07 = vectornormalize(var_07);
-  var_06 = vectornormalize(var_06);
+  var_07 = vectorNormalize(var_07);
+  var_06 = vectorNormalize(var_06);
   var_08 = vectordot(var_07, var_06);
   if(var_08 >= var_04) {
     return 1;
@@ -114,7 +114,7 @@ func_7EF1() {
   }
 
   self["weather_vane"] notify("stop struggling");
-  self["weather_vane"] rotateyaw(360, 0.7);
+  self["weather_vane"] rotateYaw(360, 0.7);
   lib_0378::func_8D74("aud_weathervane_rotate", "long");
   wait(0.75);
   thread func_8B28();
@@ -123,10 +123,10 @@ func_7EF1() {
 func_9485() {
   self endon("stop struggling");
   for(;;) {
-    self rotateyaw(-15, 0.6);
+    self rotateYaw(-15, 0.6);
     lib_0378::func_8D74("aud_weathervane_rotate", "struggle");
     wait(0.65);
-    self rotateyaw(15, 0.1);
+    self rotateYaw(15, 0.1);
     lib_0378::func_8D74("aud_weathervane_rotate", "struggle");
     wait(0.155);
   }
@@ -148,14 +148,14 @@ func_A787(param_00) {
 
 func_52E7() {
   var_00 = common_scripts\utility::func_46B5("hc_objective_weather_vane_hint_struct", "targetname");
-  var_01 = getent(var_00.var_01A2, "targetname");
+  var_01 = getEnt(var_00.var_01A2, "targetname");
   var_01.var_693D = common_scripts\utility::func_46B5(var_01.var_01A2, "targetname");
   var_02 = common_scripts\utility::func_46B5("objective_2_possible_locations_struct", "targetname");
   var_03 = function_021F(var_02.var_01A2, "targetname");
   var_04 = common_scripts\utility::func_44BD("objective_2_waterwheel_struct", "targetname");
   var_05 = common_scripts\utility::func_44BD(var_04.var_01A2, "targetname");
   var_06 = common_scripts\utility::func_46B5("objective_2_pub_panel", "targetname");
-  var_07 = getent(var_06.var_01A2, "targetname");
+  var_07 = getEnt(var_06.var_01A2, "targetname");
   var_08 = common_scripts\utility::func_46B5("objective_2_pub_record_player", "targetname");
   var_09 = function_021F("zmb_phonograph_model", "targetname");
   var_0A = var_09[0];

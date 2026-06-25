@@ -250,11 +250,11 @@ shark_heartbeat() {
 }
 
 heartbeat_rumble() {
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   wait 0.1;
   stopallrumbles();
   wait 0.05;
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 0.1;
   stopallrumbles();
 }
@@ -348,7 +348,7 @@ salvage_cargo_setup() {
   self hide();
 
   foreach(var_1 in self.linked_ents) {
-    var_1 linkto(self);
+    var_1 linkTo(self);
     var_1 hide();
   }
 }
@@ -416,7 +416,7 @@ salvage_cargo_rise(var_0) {
   }
 
   var_16 = var_15 / var_0;
-  self moveto(var_13, var_16, var_16 * 0.15, var_16 * 0.1);
+  self moveTo(var_13, var_16, var_16 * 0.15, var_16 * 0.1);
   self.damage_detect setCanDamage(1);
   self.damage_detect.health = 1;
 
@@ -436,7 +436,7 @@ salvage_cargo_rise(var_0) {
 
   foreach(var_11 in self.path_clip) {
     var_11 solid();
-    var_11 disconnectpaths();
+    var_11 disconnectPaths();
   }
 
   var_26 = getaiarray("axis");
@@ -491,7 +491,7 @@ sdv_run_over_player() {
   var_0 = self gettagorigin("tag_body");
   var_1 = self gettagangles("tag_body");
   var_2 = anglesToForward(var_1);
-  var_3 = vectornormalize(level.player.origin - var_0);
+  var_3 = vectorNormalize(level.player.origin - var_0);
   var_4 = vectordot(var_3, var_2);
   return var_4 > 0.8 && distance(level.player.origin, var_0) < 128;
 }
@@ -505,16 +505,16 @@ zodiac_setup(var_0) {
     if(var_0) {
       var_1 = common_scripts\utility::spawn_tag_origin();
       self.fx_tag_prop_wash = var_1;
-      self.fx_tag_prop_wash linkto(self, "TAG_PROPELLER_FX", (0, 0, 0), (0, 0, 0));
+      self.fx_tag_prop_wash linkTo(self, "TAG_PROPELLER_FX", (0, 0, 0), (0, 0, 0));
       playFXOnTag(common_scripts\utility::getfx("prop_wash"), self.fx_tag_prop_wash, "tag_origin");
     } else {
       var_1 = common_scripts\utility::spawn_tag_origin();
       self.fx_tag_prop_wash1 = var_1;
-      self.fx_tag_prop_wash1 linkto(self, "TAG_PROPELLER_FX_LEFT", (0, 0, 0), (0, 0, 0));
+      self.fx_tag_prop_wash1 linkTo(self, "TAG_PROPELLER_FX_LEFT", (0, 0, 0), (0, 0, 0));
       playFXOnTag(common_scripts\utility::getfx("prop_wash"), self.fx_tag_prop_wash1, "tag_origin");
       var_1 = common_scripts\utility::spawn_tag_origin();
       self.fx_tag_prop_wash2 = var_1;
-      self.fx_tag_prop_wash2 linkto(self, "TAG_PROPELLER_FX_RIGHT", (0, 0, 0), (0, 0, 0));
+      self.fx_tag_prop_wash2 linkTo(self, "TAG_PROPELLER_FX_RIGHT", (0, 0, 0), (0, 0, 0));
       playFXOnTag(common_scripts\utility::getfx("prop_wash"), self.fx_tag_prop_wash2, "tag_origin");
     }
   }
@@ -522,15 +522,15 @@ zodiac_setup(var_0) {
   maps\_vehicle::godon();
   var_1 = common_scripts\utility::spawn_tag_origin();
   self.fx_tag = var_1;
-  self.fx_tag linkto(self, "tag_fx_water_splash2", (0, 0, 10), (0, 0, 180));
+  self.fx_tag linkTo(self, "tag_fx_water_splash2", (0, 0, 10), (0, 0, 180));
   playFXOnTag(common_scripts\utility::getfx("boat_trail"), self.fx_tag, "tag_origin");
   var_1 = common_scripts\utility::spawn_tag_origin();
   self.fx_tag2 = var_1;
-  self.fx_tag2 linkto(self, "tag_fx_water_splash1", (90, 0, 10), (0, 0, 180));
+  self.fx_tag2 linkTo(self, "tag_fx_water_splash1", (90, 0, 10), (0, 0, 180));
   playFXOnTag(common_scripts\utility::getfx("boat_trail"), self.fx_tag2, "tag_origin");
   var_1 = common_scripts\utility::spawn_tag_origin();
   self.wake_org = var_1;
-  self.wake_org linkto(self, "tag_fx_water_splash2", (0, 0, 10), (90, -90, 180));
+  self.wake_org linkTo(self, "tag_fx_water_splash2", (0, 0, 10), (90, -90, 180));
   thread zodiac_wake(self.wake_org);
   common_scripts\utility::waittill_any("death", "reached_end_node");
   self.fx_tag delete();
@@ -560,7 +560,7 @@ zodiac_wake(var_0) {
 lcs_setup() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   self.wake_org = var_0;
-  self.wake_org linkto(self, "TAG_SPLASH_BACK", (0, 0, 10), (90, -90, 180));
+  self.wake_org linkTo(self, "TAG_SPLASH_BACK", (0, 0, 10), (90, -90, 180));
   thread lcs_wake(self.wake_org);
   self waittill("death");
 
@@ -572,7 +572,7 @@ lcs_setup() {
 lcs_intro_setup() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   self.wake_org = var_0;
-  self.wake_org linkto(self, "TAG_SPLASH_BACK", (0, 0, 10), (90, -90, 180));
+  self.wake_org linkTo(self, "TAG_SPLASH_BACK", (0, 0, 10), (90, -90, 180));
   thread lcs_wake_intro(self.wake_org);
   common_scripts\utility::waittill_any("start_swim", "reached_end_node", "death");
 
@@ -623,7 +623,7 @@ lcs_lights_back() {
 add_lcs_target(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
   self.target_points = common_scripts\utility::array_add(self.target_points, var_1);
-  var_1 linkto(self, "tag_origin", var_0, (0, 0, 0));
+  var_1 linkTo(self, "tag_origin", var_0, (0, 0, 0));
   self waittill("death");
   var_1 delete();
 }
@@ -636,7 +636,7 @@ add_headlamp() {
 
 spawn_tag_fx(var_0, var_1, var_2, var_3) {
   var_4 = common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(self, var_1, var_2, var_3);
+  var_4 linkTo(self, var_1, var_2, var_3);
   playFXOnTag(common_scripts\utility::getfx(var_0), var_4, "tag_origin");
   self waittill("death");
 
@@ -698,7 +698,7 @@ set_start_positions(var_0) {
 
     switch (var_3.script_noteworthy) {
       case "player":
-        level.player setorigin(var_3.origin);
+        level.player setOrigin(var_3.origin);
         level.player setplayerangles(var_3.angles);
         break;
       case "baker":
@@ -722,12 +722,12 @@ spawn_baker() {
 baker_glint() {
   level.baker.glint_org = common_scripts\utility::spawn_tag_origin();
   level.baker.glint_org.origin = level.baker gettagorigin("tag_stowed_back");
-  level.baker.glint_org linkto(level.baker, "tag_stowed_back", (7, 3, 3), (0, 0, 0));
+  level.baker.glint_org linkTo(level.baker, "tag_stowed_back", (7, 3, 3), (0, 0, 0));
   level.baker.icon = newhudelem();
   level.baker.icon setshader("blank", 1, 1);
   level.baker.icon setwaypoint(0, 1, 1);
   level.baker.icon setwaypointiconoffscreenonly();
-  level.baker.icon settargetent(level.baker);
+  level.baker.icon settargetEnt(level.baker);
   level.baker.icon.alpha = 0.6;
   setsaveddvar("r_hudOutlineAlpha0", 0.35);
   level.baker endon("death");
@@ -938,7 +938,7 @@ moveto_speed(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  self moveto(var_0, var_6, var_6 * var_2, var_6 * var_3);
+  self moveTo(var_0, var_6, var_6 * var_2, var_6 * var_3);
   self waittill("movedone");
 }
 
@@ -956,8 +956,8 @@ moveto_rotateto_speed(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  self rotateto(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
-  self moveto(var_4, var_7, var_7 * var_2, var_7 * var_3);
+  self rotateTo(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
+  self moveTo(var_4, var_7, var_7 * var_2, var_7 * var_3);
   self waittill("movedone");
 }
 
@@ -1104,7 +1104,7 @@ drop_depth_charge(var_0, var_1, var_2) {
   var_6.origin = var_0 + (0, 0, 22);
   var_7 = spawn("script_model", var_0);
   var_7 setModel("com_barrel_benzin2");
-  var_7 linkto(var_6);
+  var_7 linkTo(var_6);
   var_8 = 200;
   var_9 = var_4 - var_1[2];
   var_6 thread barrel_roll();
@@ -1165,7 +1165,7 @@ thrash_player(var_0, var_1, var_2) {
   var_4 = max(var_3 / var_0, var_1);
   level.player viewkick(int(var_4 * 120), var_2);
   var_5 = level.player getvelocity();
-  var_6 = vectornormalize(level.player.origin - var_2);
+  var_6 = vectorNormalize(level.player.origin - var_2);
   level.player setvelocity(var_5 * 0.75 + var_6 * var_4 * 100);
 }
 
@@ -1184,7 +1184,7 @@ barrel_roll() {
 
   for(;;) {
     var_1 = (self.angles[0] + 20, self.angles[1] + 30, self.angles[2] + 40);
-    self rotateto(var_1, var_0);
+    self rotateTo(var_1, var_0);
     wait(var_0);
   }
 }
@@ -1253,7 +1253,7 @@ player_is_behind_me(var_0) {
   var_2 = anglesToForward(var_1);
   var_3 = self.origin - (0, 0, self.origin[2]);
   var_4 = level.player.origin - (0, 0, level.player.origin[2]);
-  var_5 = vectornormalize(var_4 - var_3);
+  var_5 = vectorNormalize(var_4 - var_3);
   var_6 = vectordot(var_5, var_2);
   return var_6 < var_0;
 }
@@ -1406,7 +1406,7 @@ new_dyn_balloon_think() {
 
   foreach(var_9 in self.path_clip) {
     var_9 solid();
-    var_9 disconnectpaths();
+    var_9 disconnectPaths();
   }
 
   var_25 = getaiarray("axis");
@@ -1427,8 +1427,8 @@ new_dyn_balloon_think() {
   var_29 = self.origin[2] - self.orig_org[2];
   var_30 = spawn("trigger_radius", self.bottom.origin - (0, 0, 32), 0, 32, 64);
   var_30 thread trigger_hurt();
-  var_30 enablelinkto();
-  var_30 linkto(self);
+  var_30 enablelinkTo();
+  var_30 linkTo(self);
   self.trigger = var_30;
   moveto_speed(self.origin - (0, 0, self.bottom.origin[2] - self.bottom_target.origin[2] + var_29), 50, 0.3, 0.0);
   playFX(common_scripts\utility::getfx("underwater_impact_vehicle_cheap"), self.bottom_target.origin, (0, 0, 1), (1, 0, 0));
@@ -1482,13 +1482,13 @@ dyn_balloon_think() {
   var_13 = common_scripts\utility::spawn_tag_origin();
   var_13.origin = var_11;
   var_13.angles = var_10;
-  var_13 linkto(self);
+  var_13 linkTo(self);
   playFXOnTag(common_scripts\utility::getfx("water_bubbles_longlife_lp"), var_13, "tag_origin");
   badplace_cylinder("balloon" + self.balloon_count, 5, self.bottom.origin, 128, 128);
 
   foreach(var_6 in self.path_clip) {
     var_6 solid();
-    var_6 disconnectpaths();
+    var_6 disconnectPaths();
   }
 
   var_16 = getaiarray("axis");
@@ -1515,10 +1515,10 @@ dyn_balloon_bob() {
 
   for(;;) {
     var_1 = randomfloatrange(3, 5);
-    self moveto(self.orig_org + (0, 0, var_0), var_1, var_1 * 0.5, var_1 * 0.5);
+    self moveTo(self.orig_org + (0, 0, var_0), var_1, var_1 * 0.5, var_1 * 0.5);
     self waittill("movedone");
     common_scripts\utility::waitframe();
-    self moveto(self.orig_org - (0, 0, var_0), var_1, var_1 * 0.5, var_1 * 0.5);
+    self moveTo(self.orig_org - (0, 0, var_0), var_1, var_1 * 0.5, var_1 * 0.5);
     self waittill("movedone");
   }
 }
@@ -1562,7 +1562,7 @@ shark_think() {
 
   for(;;) {
     var_2 = var_1.origin - self.origin;
-    self rotateto(vectortoangles(var_2), 1);
+    self rotateTo(vectortoangles(var_2), 1);
     moveto_speed(var_1.origin, 60 * var_0);
 
     if(isDefined(var_1.target)) {
@@ -1581,7 +1581,7 @@ shark_think_real() {
   self.shark_collision_model waittill("damage");
   common_scripts\utility::flag_waitopen("shark_eating_player");
   return_collision_model();
-  var_0 = getent("generic_shark_spawner", "targetname");
+  var_0 = getEnt("generic_shark_spawner", "targetname");
   var_1 = var_0 stalingradspawn();
 
   if(maps\_utility::spawn_failed(var_1)) {
@@ -1610,7 +1610,7 @@ dead_body_spawner() {
 
     var_3 setCanDamage(0);
     var_3 notsolid();
-    var_3 animscripted("endanim", var_2.origin, var_2.angles, var_4);
+    var_3 animScripted("endanim", var_2.origin, var_2.angles, var_4);
     common_scripts\utility::waitframe();
   }
 }
@@ -1668,7 +1668,7 @@ shark_kill_front(var_0, var_1, var_2) {
   var_10 = common_scripts\utility::spawn_tag_origin();
   var_10.origin = var_9.origin;
   var_10.angles = var_9.angles;
-  var_10 linkto(var_9, "tag_player", var_8, (0, 0, 0));
+  var_10 linkTo(var_9, "tag_player", var_8, (0, 0, 0));
   var_6 thread maps\_anim::anim_single([var_9, var_0], var_1);
   level.player takeallweapons();
   var_11 = 0.2;
@@ -1679,14 +1679,14 @@ shark_kill_front(var_0, var_1, var_2) {
   wait(var_2[0]);
   var_12 = common_scripts\utility::spawn_tag_origin();
   var_12.origin = level.player getEye();
-  var_12 linkto(level.player);
+  var_12 linkTo(level.player);
   playFX(common_scripts\utility::getfx("swim_ai_blood_impact"), var_12.origin);
   playFXOnTag(common_scripts\utility::getfx("swim_ai_death_blood"), var_12, "tag_origin");
   level.player thread maps\_gameskill::blood_splat_on_screen("bottom");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait(var_2[1]);
   level.player thread maps\_gameskill::blood_splat_on_screen("left");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait(var_2[2]);
   var_13 = getdvarint("shpg_killed_by_shark", 0);
   setDvar("shpg_killed_by_shark", var_13 + 1);
@@ -1721,7 +1721,7 @@ shark_vehicle(var_0) {
   var_1.animname = "shark";
   var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(self.target);
   var_1 forceteleport(var_2.origin, var_2.angles);
-  var_1 linkto(var_2, "tag_origin");
+  var_1 linkTo(var_2, "tag_origin");
   wait(randomfloatrange(0, 1));
   var_1.anim_node = var_2;
   var_2 thread maps\_anim::anim_loop_solo(var_1, var_1.animation, "stop_loop", "tag_origin");
@@ -1864,7 +1864,7 @@ shark_kill_player(var_0) {
       self notify("stop_first_frame");
     }
 
-    self stopanimscripted();
+    self stopanimScripted();
     self unlink();
     var_2 = 250;
     self.moveplaybackrate = level.shark_attack_playbackrate;
@@ -1894,7 +1894,7 @@ shark_kill_player(var_0) {
 
 getdirectionfacing(var_0, var_1, var_2) {
   var_3 = anglesToForward(var_0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - var_1);
   var_7 = var_5[1] - var_6[1];
@@ -1988,9 +1988,9 @@ baker_noncombat() {
   level.baker.a.combatendtime = gettime() - 10000;
 }
 
-moveto_rotateto(var_0, var_1, var_2, var_3) {
-  self moveto(var_0.origin, var_1, var_2, var_3);
-  self rotateto(var_0.angles, var_1, var_2, var_3);
+moveto_rotateTo(var_0, var_1, var_2, var_3) {
+  self moveTo(var_0.origin, var_1, var_2, var_3);
+  self rotateTo(var_0.angles, var_1, var_2, var_3);
   self waittill("movedone");
 }
 
@@ -2055,7 +2055,7 @@ sardines_path_sound(var_0, var_1) {
 
   var_2 = common_scripts\utility::get_target_ent(var_0);
   var_2 waittill("trigger");
-  var_3 = getent(var_0, "target");
+  var_3 = getEnt(var_0, "target");
   common_scripts\utility::waitframe();
   var_3.pieces[0] thread maps\_utility::play_sound_on_entity(var_1);
 }
@@ -2065,7 +2065,7 @@ sardines_path_sound_no_trigger(var_0, var_1) {
     var_1 = "scn_fish_swim_away";
   }
 
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   common_scripts\utility::waitframe();
   var_2.pieces[0] thread maps\_utility::play_sound_on_entity(var_1);
 }
@@ -2221,7 +2221,7 @@ enemy_melee_front(var_0, var_1) {
   var_8 = common_scripts\utility::spawn_tag_origin();
   var_8.origin = var_7.origin;
   var_8.angles = var_7.angles;
-  var_8 linkto(var_7, "tag_player", var_6, (0, 0, 0));
+  var_8 linkTo(var_7, "tag_player", var_6, (0, 0, 0));
   var_9 = var_0 gettagorigin("tag_inhand");
   var_10 = var_0 gettagangles("tag_inhand");
   var_0 attach("weapon_parabolic_knife", "tag_inhand", 1);
@@ -2261,7 +2261,7 @@ melee_damage(var_0, var_1, var_2, var_3) {
   level waittill("stab");
   var_4 = var_0 gettagorigin("tag_knife_fx");
   level.player dodamage(200, var_4);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player thread maps\_utility::play_sound_on_entity("generic_death_enemy_1");
   wait 0.1;
   var_4 = var_0 gettagorigin("tag_knife_fx");
@@ -2523,7 +2523,7 @@ find_available_collision_model() {
       level.shark_collsions[var_0].is_available = 0;
       level.shark_collsions[var_0].origin = self.origin;
       level.shark_collsions[var_0].angles = self.angles;
-      level.shark_collsions[var_0] linkto(self);
+      level.shark_collsions[var_0] linkTo(self);
       self.shark_collision_model = level.shark_collsions[var_0];
       break;
     }

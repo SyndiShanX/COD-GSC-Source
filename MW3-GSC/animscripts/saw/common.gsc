@@ -172,7 +172,7 @@ _id_6479(var_0) {
 }
 
 within_fov(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_2 - var_0);
+  var_4 = vectorNormalize(var_2 - var_0);
   var_5 = anglesToForward(var_1);
   var_6 = vectordot(var_5, var_4);
   return var_6 >= var_3;

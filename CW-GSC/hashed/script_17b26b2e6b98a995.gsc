@@ -16,10 +16,10 @@ function function_b68e2d37() {
 }
 
 function function_f84e1e7() {
-  var_dd67799c = getent("heli", "targetname");
-  var_dd67799c.probe = getent("probe_script_introHeli", "targetname");
+  var_dd67799c = getEnt("heli", "targetname");
+  var_dd67799c.probe = getEnt("probe_script_introHeli", "targetname");
 
   if(isDefined(var_dd67799c.probe)) {
-    var_dd67799c.probe linkto(var_dd67799c, "tag_origin_animate", (50, 0, -50), (0, 89.981, 2.4999));
+    var_dd67799c.probe linkTo(var_dd67799c, "tag_origin_animate", (50, 0, -50), (0, 89.981, 2.4999));
   }
 }

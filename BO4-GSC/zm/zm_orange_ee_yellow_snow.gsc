@@ -124,8 +124,8 @@ function_19f2a68d() {
   for(i = 0; i < a_s_campfires.size; i++) {
     a_s_campfires[i].var_7944be4a = 0;
     a_s_campfires[i].var_b9989e12 = hash(a_s_campfires[i].script_noteworthy);
-    a_s_campfires[i].e_vol = getent(a_s_campfires[i].target, "targetname");
-    a_s_campfires[i].e_fire = getent(a_s_campfires[i].script_noteworthy, "targetname");
+    a_s_campfires[i].e_vol = getEnt(a_s_campfires[i].target, "targetname");
+    a_s_campfires[i].e_fire = getEnt(a_s_campfires[i].script_noteworthy, "targetname");
   }
 
   level.var_d41eca77 = a_s_campfires;
@@ -134,8 +134,8 @@ function_19f2a68d() {
 function_698e6ba() {
   level flag::init(#"hash_164603e43ce39588");
   level flag::init(#"hash_3ff453a959b4445b");
-  level.var_292feb3b = getent("coozie", "targetname");
-  level.var_3af3c634 = getent("warm_soda", "targetname");
+  level.var_292feb3b = getEnt("coozie", "targetname");
+  level.var_3af3c634 = getEnt("warm_soda", "targetname");
   level exploder::exploder("fxexp_spleen_idle");
   level.var_3af3c634 hide();
   level.var_733d6b98 = undefined;
@@ -368,7 +368,7 @@ function_c0ee8171() {
     level.var_27f2245a = 1;
   }
 
-  playsoundatposition(#"hash_16a225866d646305", level.var_3af3c634.origin);
+  playSoundAtPosition(#"hash_16a225866d646305", level.var_3af3c634.origin);
   level.var_3af3c634 hide();
   level.var_733d6b98 = e_who;
   level zm_ui_inventory::function_7df6bb60("zm_orange_spleen", 1, level.var_733d6b98);

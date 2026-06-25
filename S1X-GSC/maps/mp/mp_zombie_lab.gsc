@@ -159,7 +159,7 @@ zombielabpatchshove(var_0, var_1) {
   } else if(var_1) {
     if(self.currentzone == "roundabout") {
       var_3 = (112, 1543, 272);
-      var_4 = vectornormalize((self.origin - var_3) * (1, 1, 0));
+      var_4 = vectorNormalize((self.origin - var_3) * (1, 1, 0));
 
       if(abs(self.origin[2] - 200) < 14) {
         var_2 = self getnearestnode();
@@ -188,7 +188,7 @@ zombielabpatchshove(var_0, var_1) {
       var_2 = self getnearestnode();
 
       if(isDefined(var_2)) {
-        var_5 = vectornormalize((var_2.origin - self.origin) * (1, 1, 0));
+        var_5 = vectorNormalize((var_2.origin - self.origin) * (1, 1, 0));
         self setvelocity(var_5 * 100);
         return;
       }
@@ -338,8 +338,8 @@ biochamber() {
     var_6 linktargetedents();
   }
 
-  var_8 = common_scripts\utility::getstruct("exo_cage_animnode", "targetname");
-  var_9 = getent("exo_cage", "targetname");
+  var_8 = common_scripts\utility::getStruct("exo_cage_animnode", "targetname");
+  var_9 = getEnt("exo_cage", "targetname");
 
   if(isDefined(var_9) && isDefined(var_8)) {
     var_9 scriptmodelplayanimdeltamotionfrompos("dlc_lab_exo_cage_closed_idle", var_8.origin, var_8.angles);
@@ -359,7 +359,7 @@ biochamber() {
       var_2 connectpaths();
     }
 
-    var_2 moveto(var_2.origin + (0, 0, 132), 2);
+    var_2 moveTo(var_2.origin + (0, 0, 132), 2);
   }
 
   foreach(var_6 in var_4) {
@@ -367,7 +367,7 @@ biochamber() {
       var_6 connectpaths();
     }
 
-    var_6 moveto(var_6.origin - (0, 0, 132), 2);
+    var_6 moveTo(var_6.origin - (0, 0, 132), 2);
   }
 
   wait 3.5;
@@ -424,13 +424,13 @@ linktargetedents() {
   var_0 = getEntArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-    var_2 linkto(self);
+    var_2 linkTo(self);
   }
 }
 
 deleteexoterminallargetriggeronpower() {
   waitframe();
-  var_0 = getent("exo_terminal_large_power_off", "targetname");
+  var_0 = getEnt("exo_terminal_large_power_off", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -562,8 +562,8 @@ endgamedialog(var_0, var_1, var_2, var_3) {
 crashhelianim() {
   var_0 = "dlc_heli_blade_loop";
   precachempanim(var_0);
-  var_1 = getent("crashed_heli_blades", "targetname");
-  var_2 = common_scripts\utility::getstruct("crashed_heli_node", "targetname");
+  var_1 = getEnt("crashed_heli_blades", "targetname");
+  var_2 = common_scripts\utility::getStruct("crashed_heli_node", "targetname");
 
   if(isDefined(var_1) && isDefined(var_2)) {
     var_1 scriptmodelplayanim(var_0);
@@ -583,10 +583,10 @@ cg_exploittriggermonitor() {
         var_4 = distance(var_0.origin, var_3.origin);
 
         if(var_4 < 100) {
-          var_5 = common_scripts\utility::getstruct(self.target, "targetname");
+          var_5 = common_scripts\utility::getStruct(self.target, "targetname");
 
           if(isDefined(var_5)) {
-            var_6 = vectornormalize((var_5.origin - var_0.origin) * (1, 1, 0));
+            var_6 = vectorNormalize((var_5.origin - var_0.origin) * (1, 1, 0));
             var_0 setvelocity(var_6 * 100);
           }
 
@@ -603,7 +603,7 @@ cg_exploittriggermonitor() {
 
 cg_breakglasstriggermonitor() {
   level endon("game_ended");
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   self waittill("trigger", var_1);
   glassradiusdamage(var_0.origin, var_0.radius, 100, 100);
 }

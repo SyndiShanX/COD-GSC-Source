@@ -211,11 +211,11 @@ function function_3170191d(a_ents) {
 function bridge_frozen_battle_heli() {
   level endon(#"flag_in_end_path");
   wait 1;
-  bridge_frozen_battle_heli = getent("bridge_frozen_battle_heli", "targetname");
+  bridge_frozen_battle_heli = getEnt("bridge_frozen_battle_heli", "targetname");
 
   if(!isDefined(bridge_frozen_battle_heli)) {
     while(!isDefined(bridge_frozen_battle_heli)) {
-      bridge_frozen_battle_heli = getent("bridge_frozen_battle_heli", "targetname");
+      bridge_frozen_battle_heli = getEnt("bridge_frozen_battle_heli", "targetname");
       wait 0.5;
     }
   }

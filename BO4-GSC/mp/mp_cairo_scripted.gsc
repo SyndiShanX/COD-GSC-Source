@@ -119,7 +119,7 @@ function_69cdac99() {
       }
 
       foreach(line_pos in line_locs) {
-        playsoundatposition(var_c7ecf728[next_line], line_pos);
+        playSoundAtPosition(var_c7ecf728[next_line], line_pos);
       }
 
       wait randomfloatrange(34, 65);

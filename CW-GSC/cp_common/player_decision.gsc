@@ -79,7 +79,7 @@ function function_ff7e19cb(var_6aeabb95) {
   function_4f0f89(#"living_ally", var_6aeabb95);
 
   if(var_6aeabb95 == 2) {
-    getplayers()[0] stats::function_dad108fa(#"hash_2fe1208e904dc380", 1);
+    getPlayers()[0] stats::function_dad108fa(#"hash_2fe1208e904dc380", 1);
   }
 }
 
@@ -141,7 +141,7 @@ function function_a029a114(iskilled) {
   function_4f0f89(#"hash_2209b7d4d5e867da", iskilled);
 
   if(!iskilled) {
-    getplayers()[0] stats::function_dad108fa(#"hash_397cbd8ba6842423", 1);
+    getPlayers()[0] stats::function_dad108fa(#"hash_397cbd8ba6842423", 1);
   }
 }
 
@@ -157,11 +157,11 @@ function function_5d2eb7fa(iskilled) {
   function_4f0f89(#"volkov_killed", iskilled);
 
   if(!iskilled) {
-    getplayers()[0] stats::function_dad108fa(#"hash_a8df4bf1b167949", 1);
+    getPlayers()[0] stats::function_dad108fa(#"hash_a8df4bf1b167949", 1);
     return;
   }
 
-  getplayers()[0] stats::function_dad108fa(#"hash_3449b16b901d6430", 1);
+  getPlayers()[0] stats::function_dad108fa(#"hash_3449b16b901d6430", 1);
 }
 
 function function_5584c739() {
@@ -211,7 +211,7 @@ function function_e40c7d56() {
 
 function function_557c31b1() {
   savegame::set_player_data(#"hash_1353a738ffed49d7", 1);
-  getplayers()[0] stats::function_dad108fa(#"hash_40fb0ec1661625f4", 1);
+  getPlayers()[0] stats::function_dad108fa(#"hash_40fb0ec1661625f4", 1);
 }
 
 function function_ee124ba3() {
@@ -269,7 +269,7 @@ function function_6efc0ff8(var_3740aa91, var_2b7725a) {
     }
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   return player stats::get_stat(#"mapdata", var_3740aa91, #"hash_43a738b893199779", var_2b7725a);
 }
 
@@ -280,7 +280,7 @@ function function_ef22e409() {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   current_mission = savegame::function_8136eb5a();
 
   for(var_2b7725a = 0; var_2b7725a < 10; var_2b7725a++) {

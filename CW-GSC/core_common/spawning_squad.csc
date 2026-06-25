@@ -173,7 +173,7 @@ function private function_58710bd2(localclientnum) {
   self endon(#"game_ended", #"disconnect", #"hash_6843c6f6d0e53fd");
 
   while(true) {
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
 
     for(index = 0; index < players.size; index++) {
       player = players[index];
@@ -223,7 +223,7 @@ function private function_58710bd2(localclientnum) {
 
 function private function_c97b609d(localclientnum) {
   level notify(#"hash_6843c6f6d0e53fd");
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
 
   foreach(player in players) {
     if(!isDefined(player)) {

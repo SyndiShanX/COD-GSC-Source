@@ -98,7 +98,7 @@ function fullscreen_fx(localclientnum) {
   }
   parent = self getparententity();
   if(isDefined(parent) && parent == player) {
-    parent playrumbleonentity(localclientnum, "buzz_high");
+    parent playRumbleOnEntity(localclientnum, "buzz_high");
     if(getdvarint("ui_hud_hardcore") == 0) {
       self thread sticky_indicator(player, localclientnum);
     }

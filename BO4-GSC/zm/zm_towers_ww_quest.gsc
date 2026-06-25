@@ -91,7 +91,7 @@ function_73808ab9(a_ents) {
   s_fx = struct::get(#"hash_495fb43788e05676");
   mdl_fx = util::spawn_model("tag_origin", s_fx.origin, s_fx.angles);
   s_fx struct::delete();
-  mdl_fx linkto(mdl_brazier, "tag_fx_jnt");
+  mdl_fx linkTo(mdl_brazier, "tag_fx_jnt");
   mdl_fx clientfield::set("" + #"ww_quest_brazier_fire", 1);
   level.var_1285519 = mdl_fx;
   level scene::remove_scene_func("p8_fxanim_zm_towers_ww_quest_bowl_bundle", &function_73808ab9, "init");
@@ -147,7 +147,7 @@ knock_brazier_cleanup(b_skipped, var_19e802fa) {
 
 function_be25f239() {
   level endon(#"hash_70b6094c8cd39890", #"rough_statue_picked_up", #"end_game");
-  var_7ccafcfd = getent("t_l_t_w_w_q", "targetname");
+  var_7ccafcfd = getEnt("t_l_t_w_w_q", "targetname");
   level flag::wait_till(#"hash_17f15c9242ddea6f");
   s_info = var_7ccafcfd waittill(#"trigger");
   e_player = s_info.activator;
@@ -602,7 +602,7 @@ function_8c32234c(b_skipped, var_19e802fa) {
   s_spile struct::delete();
   var_7b371ada = util::spawn_model(#"p8_zm_gla_spile_serket_01", v_origin, v_angles);
   var_7b371ada thread function_336ee69f();
-  t_trigger = getent("t_ww_quest_spile_damage_trigger", "targetname");
+  t_trigger = getEnt("t_ww_quest_spile_damage_trigger", "targetname");
   t_trigger delete();
   level zm_ui_inventory::function_7df6bb60(#"hash_46e7cf2b7aa7c22", 0);
 }
@@ -690,7 +690,7 @@ function_869d271a(b_skipped) {
   level.var_b7ef852e = [];
 
   foreach(str_chest in a_str_chests) {
-    e_chest = getent(str_chest, "targetname");
+    e_chest = getEnt(str_chest, "targetname");
     s_chest = struct::get(str_chest, "script_noteworthy");
 
     if(!isDefined(level.var_13fc0c88)) {
@@ -880,7 +880,7 @@ function_9da58e50() {
   level endon(#"end_game");
   level flag::wait_till(#"hash_77ff9a8101ea687b");
   var_2002b43f = level.chests[level.chest_index].zbarrier;
-  playsoundatposition(#"hash_f481d0cba05eda5", var_2002b43f.origin);
+  playSoundAtPosition(#"hash_f481d0cba05eda5", var_2002b43f.origin);
   var_2002b43f clientfield::set("" + #"hash_3974bea828fbf7f7", 1);
   var_2002b43f clientfield::set("" + #"hash_3a51c9895d4afcf7", 1);
 

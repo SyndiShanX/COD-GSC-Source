@@ -135,7 +135,7 @@ sndx_play_alias_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
       var_15 = "";
     }
 
-    var_5 linkto(var_13, var_15, var_10, (0, 0, 0));
+    var_5 linkTo(var_13, var_15, var_10, (0, 0, 0));
     var_5 thread sndx_play_alias_monitor_linkdeath(var_8, var_14, var_13);
   }
 

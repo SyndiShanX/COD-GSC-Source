@@ -347,7 +347,7 @@ updateBFlagObjIcon() {
   tag_origin = spawn_tag_origin();
   tag_origin show();
   tag_origin.origin = bFlag.origin + (0, 0, 100);
-  tag_origin LinkTo(bFlag);
+  tag_origin linkTo(bFlag);
   bFlag.useObj.objIconEnt = tag_origin;
   bFlag.useObj maps\mp\gametypes\_gameobjects::updateWorldIcons();
 }
@@ -355,25 +355,25 @@ updateBFlagObjIcon() {
 setupObelisk(stopTrigger) {
   level endon("game_ended");
 
-  level.obeliskBefore = GetEnt("obelisk_before", "targetname");
-  level.obeliskAnimated = GetEnt("obelisk_anim", "targetname");
-  level.obeliskAnimated2 = GetEnt("obelisk_anim_2", "targetname");
-  level.obeliskAfter = GetEnt("obelisk_after", "targetname");
+  level.obeliskBefore = getEnt("obelisk_before", "targetname");
+  level.obeliskAnimated = getEnt("obelisk_anim", "targetname");
+  level.obeliskAnimated2 = getEnt("obelisk_anim_2", "targetname");
+  level.obeliskAfter = getEnt("obelisk_after", "targetname");
 
-  level.obeliskFloor = GetEnt("obelisk_floor", "targetname");
+  level.obeliskFloor = getEnt("obelisk_floor", "targetname");
 
-  level.obeliskBeforeClip = GetEnt("obelisk_before_clip", "targetname");
-  level.obeliskAfterClip = GetEnt("obelisk_after_clip", "targetname");
+  level.obeliskBeforeClip = getEnt("obelisk_before_clip", "targetname");
+  level.obeliskAfterClip = getEnt("obelisk_after_clip", "targetname");
 
-  level.obeliskPathBlocker = GetEnt("obelisk_path_blocker", "targetname");
+  level.obeliskPathBlocker = getEnt("obelisk_path_blocker", "targetname");
 
-  level.obeliskPathHolder = GetEnt("obelisk_path_holder", "targetname");
+  level.obeliskPathHolder = getEnt("obelisk_path_holder", "targetname");
 
-  level.obeliskDamage = GetEnt("obelisk_damage_trigger", "targetname");
+  level.obeliskDamage = getEnt("obelisk_damage_trigger", "targetname");
 
-  level.obeliskKillTrigger_Ground = GetEnt("obelisk_kill_trigger", "targetname");
+  level.obeliskKillTrigger_Ground = getEnt("obelisk_kill_trigger", "targetname");
 
-  level.obeliskKillTrigger_Air = GetEnt("obelisk_kill_trigger_2", "targetname");
+  level.obeliskKillTrigger_Air = getEnt("obelisk_kill_trigger_2", "targetname");
 
   if(isDefined(level.obeliskAnimated)) {
     hideEnt(level.obeliskAnimated);
@@ -406,7 +406,7 @@ setupObelisk(stopTrigger) {
 
   if(isDefined(level.obeliskPathBlocker)) {
     showEnt(level.obeliskPathBlocker);
-    level.obeliskPathBlocker DisconnectPaths();
+    level.obeliskPathBlocker disconnectPaths();
     level thread delayHide(level.obeliskPathBlocker, 0.05);
   }
 
@@ -517,8 +517,8 @@ obeliskSounds() {
   level.obeliskSoundMidObj setModel("tag_origin");
   level.obeliskSoundTopObj setModel("tag_origin");
 
-  level.obeliskSoundMidObj Linkto(level.obeliskAnimated, "tag_mp_dig_obelisk_dyn_08");
-  level.obeliskSoundTopObj Linkto(level.obeliskAnimated, "tag_mp_dig_obelisk_dyn_04");
+  level.obeliskSoundMidObj linkTo(level.obeliskAnimated, "tag_mp_dig_obelisk_dyn_08");
+  level.obeliskSoundTopObj linkTo(level.obeliskAnimated, "tag_mp_dig_obelisk_dyn_04");
 
   waitframe();
 
@@ -537,7 +537,7 @@ obeliskImpact() {
   Earthquake(0.4, 3, earthquakeOrigin, 2000);
 
   showEnt(level.obeliskAfterClip);
-  level.obeliskAfterClip DisconnectPaths();
+  level.obeliskAfterClip disconnectPaths();
 
   showEnt(level.obeliskPathBlocker);
   level.obeliskPathBlocker ConnectPaths();
@@ -793,7 +793,7 @@ killNearbyVictim(victim) {
 
   if(isDefined(victim) && IsAlive(victim)) {
     stopFXOnTag(level.breakables_fx["scarab"]["flyers"], self, "tag_origin");
-    self MoveTo(victim.origin, 0.8);
+    self moveTo(victim.origin, 0.8);
   }
 }
 
@@ -839,7 +839,7 @@ playDeathAnimScarabs() {
   deathAnimModel setModel("scarab_fullbody_bone_fx");
   deathAnimModel.origin = self.body.origin;
   deathAnimModel.angles = self.body.angles;
-  deathAnimModel LinkTo(self.body, "tag_origin", (0, 50, 0), deathAnimModel.angles);
+  deathAnimModel linkTo(self.body, "tag_origin", (0, 50, 0), deathAnimModel.angles);
 
   if(deathAnim == % mp_scarab_death_stand_1) {
     deathAnimModel ScriptModelPlayAnim("scarab_fullbody_bone_fx_stand_anim");
@@ -935,14 +935,14 @@ jackpotTimeout(jackpotLength) {
 setupTreasureRoom() {
   level.treasure_room_open = false;
 
-  level.treasureDoor = GetEnt("secret_room_door_model", "targetname");
-  level.treasureDoorClip = GetEnt("secret_room_door", "targetname");
+  level.treasureDoor = getEnt("secret_room_door_model", "targetname");
+  level.treasureDoorClip = getEnt("secret_room_door", "targetname");
 
   if(isDefined(level.treasureDoor) && isDefined(level.treasureDoorClip)) {
-    level.treasureDoorClip LinkTo(level.treasureDoor);
+    level.treasureDoorClip linkTo(level.treasureDoor);
   }
 
-  level.flameDeathZone = GetEnt("secret_room_kill", "targetname");
+  level.flameDeathZone = getEnt("secret_room_kill", "targetname");
 
   if(isDefined(level.flameDeathZone)) {
     level.flameDeathZone.dmg = 0;
@@ -955,7 +955,7 @@ setupTreasureRoom() {
   level.key_torches = getEntArray("torch_trigs", "targetname");
 
   foreach(torch in level.key_torches) {
-    torch SetHintString(&"MP_DIG_ACTIVATE_TORCH");
+    torch setHintString(&"MP_DIG_ACTIVATE_TORCH");
     torch thread watchTorchUse();
     torch.used = false;
   }
@@ -972,7 +972,7 @@ watchTorchUse() {
 activateTorch(player) {
   self MakeUnusable();
 
-  torch = GetEnt(self.target, "targetname");
+  torch = getEnt(self.target, "targetname");
   torch RotatePitch(-45, 4);
 
   torch playSound("mp_dig_torch_rotate");
@@ -1010,12 +1010,12 @@ openTreasureRoom() {
   if(!isDefined(level.doorSoundObj)) {
     level.doorSoundObj = spawn("script_model", level.treasureDoor.origin + offset);
     level.doorSoundObj setModel("tag_origin");
-    level.doorSoundObj LinkTo(level.treasureDoor);
+    level.doorSoundObj linkTo(level.treasureDoor);
   }
 
   level thread doorSounds();
 
-  level.treasureDoor RotateYaw(75, CONST_DOOR_MOVE_TIME);
+  level.treasureDoor rotateYaw(75, CONST_DOOR_MOVE_TIME);
 
   Earthquake(0.1, CONST_DOOR_MOVE_TIME, level.treasureDoor.origin, 500);
 
@@ -1050,7 +1050,7 @@ spawnKillstreakChest() {
   level.chest_rewardHint = game["strings"][level.chest_rewardType + "_hint"];
 
   if(!isDefined(level.chest_trigger)) {
-    level.chest_trigger = GetEnt("secret_room_chest", "targetname");
+    level.chest_trigger = getEnt("secret_room_chest", "targetname");
   }
 
   if(isDefined(level.chest_trigger)) {
@@ -1133,11 +1133,11 @@ resetTreasureRoom() {
 
   foreach(torch in level.key_torches) {
     if(torch.used) {
-      torchModel = GetEnt(torch.target, "targetname");
+      torchModel = getEnt(torch.target, "targetname");
       torchModel RotatePitch(45, 0.1);
 
       torch MakeUsable();
-      torch SetHintString(&"MP_DIG_ACTIVATE_TORCH");
+      torch setHintString(&"MP_DIG_ACTIVATE_TORCH");
       torch thread watchTorchUse();
       torch.used = false;
     }
@@ -1167,13 +1167,13 @@ closeTreasureRoom() {
     level.doorSoundObj PlaySoundOnMovingEnt("mp_dig_treasure_door_close");
   }
 
-  level.treasureDoor RotateYaw(-75, CONST_DOOR_MOVE_TIME);
+  level.treasureDoor rotateYaw(-75, CONST_DOOR_MOVE_TIME);
 
   Earthquake(0.1, CONST_DOOR_MOVE_TIME, level.treasureDoor.origin, 500);
 
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(CONST_DOOR_MOVE_TIME);
 
-  level.treasureDoorClip DisconnectPaths();
+  level.treasureDoorClip disconnectPaths();
 
   level.treasure_room_open = false;
 
@@ -1280,8 +1280,7 @@ digCrateThink(dropType) {
 
   if(isDefined(game["strings"][self.crateType + "_hint"])) {
     crateHint = game["strings"][self.crateType + "_hint"];
-  } else {
-  }
+  } else {}
   crateHint = &"PLATFORM_GET_KILLSTREAK";
 
   maps\mp\killstreaks\_airdrop::crateSetupForUse(crateHint, getKillstreakOverheadIcon(self.crateType));

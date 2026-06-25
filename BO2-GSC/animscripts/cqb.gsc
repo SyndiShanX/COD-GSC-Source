@@ -78,7 +78,7 @@ findcqbpointsofinterest() {
               if(distancesquared(point, shootatpos) < 4096) {
                 continue;
               }
-              dot = vectordot(vectornormalize(point - shootatpos), forward);
+              dot = vectordot(vectorNormalize(point - shootatpos), forward);
 
               if(dot < 0.643 || dot > 0.966) {
                 continue;

@@ -108,10 +108,10 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_15[1] = var_10["success_light_2"];
   var_15[2] = var_10["success_light_3"];
   var_10["hint_light"] thread func_9870(param_02, param_03, var_0C.var_9CD6);
-  var_16 = getent(var_10["raven_uber_trap_deposit"].var_3E3C.var_01A2, "targetname");
-  var_17 = getent(var_10["raven_uber_trap_deposit"].var_3E3C.var_01A2, "targetname");
-  var_18 = getent(param_05, "targetname");
-  var_19 = getent(var_17.var_01A2, "targetname");
+  var_16 = getEnt(var_10["raven_uber_trap_deposit"].var_3E3C.var_01A2, "targetname");
+  var_17 = getEnt(var_10["raven_uber_trap_deposit"].var_3E3C.var_01A2, "targetname");
+  var_18 = getEnt(param_05, "targetname");
+  var_19 = getEnt(var_17.var_01A2, "targetname");
   var_19 method_805C();
   if(!isDefined(level.var_7A86)) {
     level.var_7A86 = [];
@@ -143,7 +143,7 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0C.var_9C92.var_9FE5 method_805C();
   var_1D = lib_0585::func_8F7E(var_0C.var_9C92.var_9FE5.var_0116, func_4703(param_00), func_4702(param_00), var_10["raven_trap_pickup_trig_offset"].var_0116, param_00);
   var_10["raven_uber_trap_deposit_trig"] common_scripts\utility::func_9D9F();
-  var_17 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
+  var_17 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   var_17 usetouchtriggerrequirefacingposition(1, var_10["raven_uber_trap_deposit"].var_3E3C.var_0116);
   var_0C.var_9C92.var_9FE5.var_65E3 delete();
   var_0C.var_9C92.var_9FE5.var_0116 = var_10["raven_uber_trap_deposit"].var_3E3C.var_0116;
@@ -153,7 +153,7 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   var_0C.var_9C92.var_9FE5 method_805B();
-  var_17 sethintstring(&"ZOMBIE_NEST_UBER_TRANSFER");
+  var_17 setHintString(&"ZOMBIE_NEST_UBER_TRANSFER");
   var_10["main_trigger"] = var_17;
   var_1E["battleID"] = 3;
   var_1E["event_origin"] = var_10["main_trigger"].var_0116;
@@ -161,7 +161,7 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_1E["notifications"].var_94D4 = "hc_raven_" + param_00 + "_success";
   var_1E["notifications"].var_39D1 = "hc_raven_" + param_00 + "_fail";
   var_10["activation_triggers"] = [var_17];
-  var_10["attack_positions"] = getent(var_19.var_01A2, "targetname");
+  var_10["attack_positions"] = getEnt(var_19.var_01A2, "targetname");
   var_1F = spawnStruct();
   var_1F.var_7B8C = var_10["main_trigger"];
   var_1F.var_38C3 = "zombie_" + param_00 + "_rumble";
@@ -172,7 +172,7 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_1F.var_38C4["zombieObjectiveMax"] = 3;
   var_1F.var_38C4["objectiveHealthSolo"] = 125;
   var_10["main_trigger"].var_1170 = var_10["attack_positions"];
-  var_20 = getent("rnd_forge_machine_parts", "targetname");
+  var_20 = getEnt("rnd_forge_machine_parts", "targetname");
   var_10["main_trigger"].var_65E8 = [var_20];
   if(param_00 == "moon_raven_hc_ee" || param_00 == "storm_raven_hc_ee") {
     var_21 = "rnd_attack_on_deck_positions_struct";
@@ -216,7 +216,7 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   maps\mp\mp_zombie_nest_ee_workbench::func_AA7A(level.var_AACA[param_04]);
   common_scripts\utility::func_9DA3();
-  self sethintstring(maps\mp\mp_zombie_nest_ee_workbench::func_AA71(param_04));
+  self setHintString(maps\mp\mp_zombie_nest_ee_workbench::func_AA71(param_04));
   var_24 = "";
   var_0B = undefined;
   while(!issubstr(var_24, "teslagun_zm")) {
@@ -233,9 +233,9 @@ func_7B96(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     var_0B switchtoweapon(var_25[0]);
   }
 
-  self sethintstring(&"ZOMBIE_NEST_ASSEMBLING_WW");
+  self setHintString(&"ZOMBIE_NEST_ASSEMBLING_WW");
   level.var_AACA[param_04] maps\mp\mp_zombie_nest_ee_workbench::func_AA73();
-  self sethintstring(maps\mp\mp_zombie_nest_ee_workbench::func_AA72(param_04));
+  self setHintString(maps\mp\mp_zombie_nest_ee_workbench::func_AA72(param_04));
   level.var_AACA[param_04] thread maps\mp\mp_zombie_nest_ee_workbench::func_AA76();
   lib_0557::func_4BC8(param_09);
   lib_0557::func_4BC8("tesla gun upgraded");
@@ -266,7 +266,7 @@ func_8F6E(param_00, param_01, param_02, param_03, param_04) {
   var_09 = 1 / var_08;
   var_0A = var_07 * (var_09, var_09, 0);
   var_06 gravitymove(var_0A, var_08);
-  var_06 rotateto(param_01.var_001D, var_08);
+  var_06 rotateTo(param_01.var_001D, var_08);
   wait(var_08);
   var_06.var_0116 = param_01.var_0116;
 }
@@ -518,12 +518,12 @@ func_44EB(param_00) {
       break;
   }
 
-  var_02 = getent(var_01, "targetname");
+  var_02 = getEnt(var_01, "targetname");
   return var_02.var_7AC4;
 }
 
 func_9FE9(param_00, param_01, param_02, param_03, param_04) {
-  param_02 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
+  param_02 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   var_05 = undefined;
   while(!isDefined(var_05) || !var_05 lib_0585::func_9E12(param_04)) {
     param_02 waittill("trigger", var_05);
@@ -569,7 +569,7 @@ func_7A8A(param_00) {
     var_01 = 0;
     while(!var_01) {
       level waittill("objective_zombie_exploder_detonation", var_02, var_03);
-      var_04 = getent(param_00["fuse_pickup"].var_01A2, "targetname");
+      var_04 = getEnt(param_00["fuse_pickup"].var_01A2, "targetname");
       if(distance(var_04.var_0116, var_02) <= 150) {
         var_01 = 1;
       }
@@ -577,7 +577,7 @@ func_7A8A(param_00) {
   }
 
   param_00["cover_model"] thread func_1806();
-  var_05 = getent(param_00["fuse_pickup"].var_01A2, "targetname");
+  var_05 = getEnt(param_00["fuse_pickup"].var_01A2, "targetname");
   var_06 = param_00["fuse_pickup"];
   return [var_05, var_06];
 }
@@ -594,7 +594,7 @@ func_7A87(param_00) {
   param_00["fuse_pickup"] method_805C();
   func_A6A2(param_00["cover_model"]);
   param_00["cover_model"] thread func_1806();
-  var_01 = getent(param_00["fuse_pickup"].var_01A2, "targetname");
+  var_01 = getEnt(param_00["fuse_pickup"].var_01A2, "targetname");
   var_02 = param_00["fuse_pickup"];
   return [var_01, var_02];
 }
@@ -604,7 +604,7 @@ func_1806() {
   level thread common_scripts\_exploder::func_088E(239);
   self setModel("zmb_objective_panel_door_dmg_01");
   self.var_0116 = self.var_0116 + (0, 0, 64);
-  self gravitymove(-200 * vectornormalize(common_scripts\utility::func_3D5C(anglesToForward(self.var_001D))) + (0, 0, 50), 1);
+  self gravitymove(-200 * vectorNormalize(common_scripts\utility::func_3D5C(anglesToForward(self.var_001D))) + (0, 0, 50), 1);
   self rotateby((360, 360, 360), 1);
 }
 
@@ -638,7 +638,7 @@ func_7A88(param_00) {
 func_7A89(param_00) {
   level endon("raven up skip");
   var_01 = 0;
-  var_02 = getent("raven_blood_challenge_lights_start", "targetname");
+  var_02 = getEnt("raven_blood_challenge_lights_start", "targetname");
   var_03 = spawn("script_model", var_02.var_0116);
   var_03 setModel("tag_origin");
   var_02 setCanDamage(1);
@@ -663,9 +663,9 @@ func_7A89(param_00) {
 
   lib_0378::func_8D74("tesla_hc_energy_lamp_loop_off", var_02.var_0116);
   stopFXOnTag(common_scripts\utility::func_44F5("temp_hc_challenge_indicator_lights"), var_03, "tag_origin");
-  var_06 = getent(param_00["fuse_pickup"].var_01A2, "targetname");
+  var_06 = getEnt(param_00["fuse_pickup"].var_01A2, "targetname");
   var_02.var_0116 = var_06.var_0116;
-  var_07 = getent(param_00["fuse_pickup"].var_01A2, "targetname");
+  var_07 = getEnt(param_00["fuse_pickup"].var_01A2, "targetname");
   var_08 = param_00["fuse_pickup"];
   return [var_07, var_08];
 }

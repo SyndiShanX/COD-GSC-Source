@@ -7,7 +7,7 @@ init() {
   level._id_4FC6 = getEntArray("remoteMissileSpawn", "targetname");
 
   foreach(var_1 in level._id_4FC6) {
-    var_1._id_EEA2 = getent(var_1.target, "targetname");
+    var_1._id_EEA2 = getEnt(var_1.target, "targetname");
   }
 }
 
@@ -259,7 +259,7 @@ _id_E38A(var_0, var_1, var_2, var_3) {
   var_13 = var_0 _id_6975(var_0.owner, var_11);
 
   if(isDefined(var_13)) {
-    var_12 missile_settargetent(var_13);
+    var_12 missile_settargetEnt(var_13);
   }
 
   var_12 setCanDamage(1);
@@ -417,7 +417,7 @@ _id_690F(var_0, var_1) {
 _id_9F6D(var_0, var_1) {
   var_2 = 0.5;
   var_0 scripts\mp\utility\player::_freezecontrols(1);
-  var_0 cameralinkto(var_1, "tag_origin");
+  var_0 cameralinkTo(var_1, "tag_origin");
   var_0 _meth_8094(var_1);
   var_0 _meth_840B();
   var_0 setclientomnvar("ui_killstreak_health", 1);

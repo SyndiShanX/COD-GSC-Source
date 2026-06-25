@@ -86,7 +86,7 @@ _id_884A(var_0) {
   }
 
   var_1 = anglesToForward(self.angles);
-  var_2 = vectornormalize(self._id_0192.origin - self.origin);
+  var_2 = vectorNormalize(self._id_0192.origin - self.origin);
   var_3 = vectordot(var_1, var_2);
 
   if(var_3 < var_0) {

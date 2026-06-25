@@ -88,7 +88,7 @@ board_hack(hacker) {
 
     if(isDefined(self.clip)) {
       self.window.clip enable_trigger();
-      self.window.clip disconnectpaths();
+      self.window.clip disconnectPaths();
     } else
       blocker_disconnect_paths(self.window.neg_start, self.window.neg_end);
 

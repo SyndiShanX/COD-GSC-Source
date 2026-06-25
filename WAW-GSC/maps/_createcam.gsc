@@ -1773,7 +1773,7 @@ draw_scene_node_info(scene_name, end_on) {
         alpha = 0.3;
       }
 
-      difference = VectorNormalize(pos - players[0] getEye());
+      difference = vectorNormalize(pos - players[0] getEye());
       newdot = VectorDot(forward, difference);
       if(newdot < dot) {
         scale = 0.25;

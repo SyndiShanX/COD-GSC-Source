@@ -140,7 +140,7 @@ func_869E(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     var_0F.var_01D3 = param_06[0];
     var_0F.var_01D7 = param_06[1];
     var_0F.var_01D9 = param_06[2];
-    var_0F settargetent(self, var_11);
+    var_0F settargetEnt(self, var_11);
   }
 
   thread func_2DCF();
@@ -257,7 +257,7 @@ func_873C(param_00, param_01, param_02, param_03) {
       var_07.var_01D3 = self.var_37D4[0];
       var_07.var_01D7 = self.var_37D4[1];
       var_07.var_01D9 = self.var_37D4[2];
-      var_07 settargetent(self, param_02);
+      var_07 settargetEnt(self, param_02);
     }
   } else {
     var_08 = anglestoup(self.var_001D);
@@ -271,7 +271,7 @@ func_873C(param_00, param_01, param_02, param_03) {
       var_07.var_01D3 = var_09[0];
       var_07.var_01D7 = var_09[1];
       var_07.var_01D9 = var_09[2];
-      var_07 settargetent(self, param_02);
+      var_07 settargetEnt(self, param_02);
     }
   }
 
@@ -330,7 +330,7 @@ func_86FC(param_00, param_01, param_02) {
     var_05.var_01D3 = self.var_37D4[0];
     var_05.var_01D7 = self.var_37D4[1];
     var_05.var_01D9 = self.var_37D4[2];
-    var_05 settargetent(self, param_02);
+    var_05 settargetEnt(self, param_02);
   }
 
   thread func_2DCE();

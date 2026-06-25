@@ -266,19 +266,19 @@ LinkCollisionToTurret(turret, ShouldLink) {
     }
   } else if(ShouldLink == true) {
     if(isDefined(turret.collision.col_body)) {
-      turret.collision.col_body linkto(self, "tag_origin");
+      turret.collision.col_body linkTo(self, "tag_origin");
     }
     if(isDefined(turret.collision.col_head)) {
-      turret.collision.col_head linkto(self, "tag_aim_animated");
+      turret.collision.col_head linkTo(self, "tag_aim_animated");
     }
     if(isDefined(turret.collision.col_leg_r)) {
-      turret.collision.col_leg_r linkto(self, "arm_r");
+      turret.collision.col_leg_r linkTo(self, "arm_r");
     }
     if(isDefined(turret.collision.col_leg_l)) {
-      turret.collision.col_leg_l linkto(self, "arm_l");
+      turret.collision.col_leg_l linkTo(self, "arm_l");
     }
     if(isDefined(turret.collision.col_gun)) {
-      turret.collision.col_gun linkto(self, "tag_barrel");
+      turret.collision.col_gun linkTo(self, "tag_barrel");
     }
   }
 }
@@ -291,7 +291,7 @@ sentry_laserMark() {
   self.laser_tag LaserOn();
   self.laser_tag.origin = self GetTagOrigin("tag_flash");
   self.laser_tag.angles = self GetTagAngles("tag_flash");
-  self.laser_tag LinkTo(self, "tag_flash");
+  self.laser_tag linkTo(self, "tag_flash");
 
   self waittill("fake_refraction_death");
 

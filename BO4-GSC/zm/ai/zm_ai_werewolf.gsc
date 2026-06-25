@@ -560,8 +560,8 @@ function_3d752709(enemy, target) {
   enemyvec = enemy.origin - target.origin;
   var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
   var_c2ee8451 = (facingvec[0], facingvec[1], 0);
-  var_3e3c8075 = vectornormalize(var_3e3c8075);
-  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  var_3e3c8075 = vectorNormalize(var_3e3c8075);
+  var_c2ee8451 = vectorNormalize(var_c2ee8451);
   enemydot = vectordot(var_c2ee8451, var_3e3c8075);
 
   if(enemydot < 0) {
@@ -785,8 +785,8 @@ function_6cde7a8b(entity, predictedenemypos) {
     enemypos = predictedenemypos;
   }
 
-  dirtoenemy = vectornormalize(enemypos - entity.origin);
-  dirtoenemy = vectornormalize(dirtoenemy);
+  dirtoenemy = vectorNormalize(enemypos - entity.origin);
+  dirtoenemy = vectorNormalize(dirtoenemy);
   return enemypos + dirtoenemy * -1 * 45;
 }
 
@@ -926,7 +926,7 @@ function_7ad7aa7d(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   entity.var_b736fc8b = 1;
 
   if(isDefined(entity.enemy)) {
-    dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+    dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
     entity forceteleport(entity.origin, vectortoangles(dirtoenemy));
   }
 
@@ -970,7 +970,7 @@ function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     predictedenemypos = entity.enemy.origin;
     var_856465ed = function_6cde7a8b(entity, predictedenemypos);
     entity.meleeinfo.adjustedendpos = var_856465ed;
-    var_cc075bd0 = vectornormalize(entity.origin - entity.meleeinfo.adjustedendpos);
+    var_cc075bd0 = vectorNormalize(entity.origin - entity.meleeinfo.adjustedendpos);
     var_cf699df5 = distancesquared(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.var_cb28f380);
     var_776ddabf = distancesquared(entity.meleeinfo.var_cb28f380, entity.meleeinfo.adjustedendpos);
     var_65cbfb52 = distancesquared(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos);
@@ -1008,7 +1008,7 @@ function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       var_776ddabf = distancesquared(entity.meleeinfo.var_cb28f380, entity.meleeinfo.adjustedendpos);
       myforward = anglesToForward(entity.angles);
       var_1c3641f2 = (var_856465ed[0], var_856465ed[1], entity.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - entity.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - entity.origin);
       zdiff = entity.meleeinfo.var_cb28f380[2] - var_856465ed[2];
       withinzrange = abs(zdiff) <= entity ai::function_9139c839().var_3c41cb92;
       withinfov = vectordot(myforward, dirtoenemy) > entity ai::function_9139c839().var_e2b09972;
@@ -1032,7 +1032,7 @@ function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
         starttime = floor(starttime / timestep);
         stoptime = floor(stoptime / timestep);
         adjustduration = stoptime - starttime;
-        entity.meleeinfo.var_10b8b6d1 = vectornormalize(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
+        entity.meleeinfo.var_10b8b6d1 = vectorNormalize(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
         entity.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
         entity.meleeinfo.var_425c4c8b = 1;
         entity.meleeinfo.adjustmentstarted = 1;
@@ -1277,7 +1277,7 @@ function_8fa45bb0() {
   if(!isDefined(self.var_db792001)) {
     tag_origin = self gettagorigin("tag_eye");
     self.var_db792001 = spawn("script_origin", tag_origin);
-    self.var_db792001 linkto(self);
+    self.var_db792001 linkTo(self);
     self.var_db792001 playLoopSound(#"hash_6875b34c441a8695");
     self thread function_dfe1236();
     self thread function_10ac98a8();

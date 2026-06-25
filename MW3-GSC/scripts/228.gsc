@@ -192,8 +192,8 @@ _id_1A67() {
   foreach(var_1 in level.players) {
     var_2 = spawn("script_model", var_1.origin + (0, 0, 28));
     var_2 setModel("tag_origin");
-    var_2 linkto(var_1, "tag_origin", (0, 0, 28), (0, 0, 0));
-    var_2 sethintstring(&"SCRIPT_COOP_REVIVE");
+    var_2 linkTo(var_1, "tag_origin", (0, 0, 28), (0, 0, 0));
+    var_2 setHintString(&"SCRIPT_COOP_REVIVE");
     level._id_1A69[var_1.unique_id] = var_2;
     var_1 thread _id_1A6E();
   }

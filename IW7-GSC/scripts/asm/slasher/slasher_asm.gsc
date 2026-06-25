@@ -464,7 +464,7 @@ doramattackdamage(var_0) {
     return;
   }
 
-  var_1 = vectornormalize(self getvelocity());
+  var_1 = vectorNormalize(self getvelocity());
   var_2 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
   self.bramattackdamageoccured = 1;
   var_0 func_84DC(var_1, var_2.ram_attack_push);
@@ -503,7 +503,7 @@ handleramattackprocessing(var_0, var_1, var_2) {
       var_7 = var_1.origin + var_6 * 0.15;
       var_8 = var_7 - self.origin;
       var_8 = (var_8[0], var_8[1], 0);
-      var_8 = vectornormalize(var_8);
+      var_8 = vectorNormalize(var_8);
       self orientmode("face angle abs", vectortoangles(var_8));
     } else if(var_3) {
       var_3 = 0;
@@ -588,7 +588,7 @@ startspinattackdamage(var_0) {
       }
 
       var_10 = var_6.origin - self.origin * (1, 1, 0);
-      var_11 = vectornormalize(var_10);
+      var_11 = vectorNormalize(var_10);
       var_12 = vectordot(var_11, var_4);
       if(var_12 < 0.966) {
         continue;
@@ -662,7 +662,7 @@ playteleportout(var_0, var_1, var_2, var_3) {
 
   wait(0.1);
   self hide();
-  self setorigin(self.teleportpos, 0);
+  self setOrigin(self.teleportpos, 0);
   if(isDefined(var_5)) {
     self.angles = vectortoangles(var_5.origin - self.origin);
   }

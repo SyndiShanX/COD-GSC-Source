@@ -117,8 +117,8 @@ init_location() {
       var_11.var_1FBD = var_11 scripts\engine\utility::spawn_tag_origin();
       var_11.physics_setgravitydynentscalar = var_6;
       self.var_4D94.parts["straps"][self.var_4D94.parts["straps"].size] = var_11;
-      var_11.var_1FBD linkto(self, var_6, (0, 0, 0), (0, 0, 0));
-      var_11 linkto(var_11.var_1FBD, "tag_origin", (0, 0, 0), (0, 0, 0));
+      var_11.var_1FBD linkTo(self, var_6, (0, 0, 0), (0, 0, 0));
+      var_11 linkTo(var_11.var_1FBD, "tag_origin", (0, 0, 0), (0, 0, 0));
     }
   } else {
     self attach("veh_mil_air_un_dropship_periph_interior");
@@ -197,7 +197,7 @@ func_5ECA() {
         }
 
         self.var_5ECA ghostattack(var_1, 0.1);
-        self.var_5ECA moveto(var_4, 0.1);
+        self.var_5ECA moveTo(var_4, 0.1);
         wait(0.2);
       }
     } else if(var_5 > var_2) {

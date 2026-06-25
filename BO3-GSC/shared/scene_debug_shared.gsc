@@ -490,7 +490,7 @@ function set_origin(v_origin) {
   if(!self isinmovemode("", "")) {
     adddebugcommand("");
   }
-  self setorigin(v_origin);
+  self setOrigin(v_origin);
 }
 
 function toggle_postfx_igc_loop() {

@@ -23,7 +23,7 @@ teleport_actor(node_targetname) {
   }
 
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(teleport_points[i].origin);
+    players[i] setOrigin(teleport_points[i].origin);
   }
 
   self teleport(node.origin, node.angles);
@@ -39,7 +39,7 @@ teleport_actor_to_node(node) {
   }
 
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(teleport_points[i].origin);
+    players[i] setOrigin(teleport_points[i].origin);
   }
 
   self teleport(node.origin, node.angles);
@@ -55,7 +55,7 @@ teleport_players(start_nodes_targetname) {
 
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(nodes[i].origin + (0, 0, 4));
+    players[i] setOrigin(nodes[i].origin + (0, 0, 4));
     players[i] setplayerangles(nodes[i].angles);
   }
 }
@@ -202,7 +202,7 @@ spawn_friendlies() {
 }
 
 force_spawn_ai(spawner_name) {
-  spawner = getent(spawner_name, "targetname");
+  spawner = getEnt(spawner_name, "targetname");
   spawned = spawner stalingradspawn(true);
   if(spawn_failed(spawned)) {
     return;
@@ -349,7 +349,7 @@ find_cover(msg) {
 }
 
 t34_move_and_blow_up(spawn_trigger_name, start_node_name, open_fire, death_node_name, artillery_origin_struct_name, initial_wait_delay, stop_wait_delay) {
-  spawn_trigger = getent(spawn_trigger_name, "targetname");
+  spawn_trigger = getEnt(spawn_trigger_name, "targetname");
   if(!isDefined(spawn_trigger)) {
     return;
   }
@@ -361,7 +361,7 @@ t34_move_and_blow_up(spawn_trigger_name, start_node_name, open_fire, death_node_
 
   spawn_trigger waittill("trigger");
 
-  tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
+  tank = spawnVehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
 
   tank attachPath(start_node);
 
@@ -406,9 +406,9 @@ spawn_tigers() {
 
   wait(2);
 
-  level.ev2_tank1 = getent("ev2_tank1", "targetname");
-  level.ev2_tank2 = getent("ev2_tank2", "targetname");
-  level.ev2_tank3 = getent("ev2_tank3", "targetname");
+  level.ev2_tank1 = getEnt("ev2_tank1", "targetname");
+  level.ev2_tank2 = getEnt("ev2_tank2", "targetname");
+  level.ev2_tank3 = getEnt("ev2_tank3", "targetname");
 
   level.ev2_tank1.health = 10000;
   level.ev2_tank2.health = 10000;
@@ -464,17 +464,17 @@ check_for_panzershreck_hit(num_hits_to_kill) {
   }
 }
 script_trigger(trigger_name) {
-  trigger = getent(trigger_name, "targetname");
+  trigger = getEnt(trigger_name, "targetname");
   trigger notify("trigger");
 }
 
 script_trigger2(trigger_name, key) {
-  trigger = getent(trigger_name, key);
+  trigger = getEnt(trigger_name, key);
   trigger notify("trigger");
 }
 
 script_notify_trigger(trigger_name, key, msg) {
-  trigger = getent(trigger_name, key);
+  trigger = getEnt(trigger_name, key);
   trigger notify(msg);
 }
 
@@ -513,7 +513,7 @@ wait_time(time, msg) {
   level notify(msg);
 }
 objective_add_new(num, obj_string, struct_name) {
-  obj_position = getstruct(struct_name, "targetname");
+  obj_position = getStruct(struct_name, "targetname");
   if(isDefined(obj_position)) {
     objective_add(num, "current", obj_string, obj_position.origin);
   } else {}
@@ -529,14 +529,14 @@ objective_triggered_complete(num, trigger_name) {
 objective_triggered_update_position(num, trigger_name, next_struct_name) {
   trigger_wait(trigger_name, "targetname");
 
-  obj_position = getstruct(next_struct_name, "targetname");
+  obj_position = getStruct(next_struct_name, "targetname");
   if(isDefined(obj_position)) {
     objective_position(num, obj_position.origin);
   } else {}
 }
 #using_animtree("generic_human");
 spawn_fake_guy_to_anim(struct_name, side, animname, name, assign_default_weapon) {
-  org = getstruct(struct_name, "targetname");
+  org = getStruct(struct_name, "targetname");
   if(!isDefined(org)) {
     org = getnode(struct_name, "targetname");
   }
@@ -656,8 +656,8 @@ get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) {
     return "up";
   }
 
-  p1 = self_pos - vectornormalize(anglesToForward(self_angle)) * 10000;
-  p2 = self_pos + vectornormalize(anglesToForward(self_angle)) * 10000;
+  p1 = self_pos - vectorNormalize(anglesToForward(self_angle)) * 10000;
+  p2 = self_pos + vectorNormalize(anglesToForward(self_angle)) * 10000;
   p_intersect = PointOnSegmentNearestToPoint(p1, p2, explosion_pos);
 
   side_away_dist = Distance2D(p_intersect, explosion_pos);
@@ -666,7 +666,7 @@ get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) {
   if(side_close_dist != 0) {
     angle = ATan(side_away_dist / side_close_dist);
 
-    dot_product = vectordot(anglesToForward(self_angle), vectornormalize(explosion_pos - self_pos));
+    dot_product = vectordot(anglesToForward(self_angle), vectorNormalize(explosion_pos - self_pos));
     if(dot_product < 0) {
       angle = 180 - angle;
     }
@@ -678,7 +678,7 @@ get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) {
     }
   }
 
-  self_right_angle = vectornormalize(AnglesToRight(self_angle));
+  self_right_angle = vectorNormalize(AnglesToRight(self_angle));
   right_point = self_pos + self_right_angle * (up_distance * 0.5);
 
   if(Distance2D(right_point, explosion_pos) < Distance2D(self_pos, explosion_pos)) {
@@ -805,7 +805,7 @@ triggered_explosions_single(trigger) {
   trigger waittill("trigger");
 
   target_name = trigger.target;
-  target_struct = getstruct(target_name, "targetname");
+  target_struct = getStruct(target_name, "targetname");
 
   playFX(level._effect["dirt_blow_up"], target_struct.origin);
 }
@@ -909,7 +909,7 @@ scripted_molotov_throw(node_noteworthy, end_msg) {
   self thread delete_molotov_immediately(end_msg);
 
   node = getnode(node_noteworthy, "script_noteworthy");
-  molotov_target = getstruct(node_noteworthy, "targetname");
+  molotov_target = getStruct(node_noteworthy, "targetname");
 
   node anim_reach_solo(self, "molotov_generic_toss");
   node thread anim_single_solo(self, "molotov_generic_toss");
@@ -918,7 +918,7 @@ scripted_molotov_throw(node_noteworthy, end_msg) {
   molotov = spawn("script_model", self gettagorigin("tag_weapon_left"));
   level thread delete_molotov_later(molotov);
   molotov setModel("weapon_rus_molotov_grenade");
-  molotov linkto(self, "tag_weapon_left");
+  molotov linkTo(self, "tag_weapon_left");
   self.fake_molotov = molotov;
   self.fake_molotov_tossed = false;
   playFXOnTag(level._effect["molotov_trail_fire"], molotov, "tag_flash");
@@ -957,7 +957,7 @@ see1_molotov_detach(guy) {
 
 let_go_molotov(molotov, molotov_target) {
   molotov unlink();
-  forward = VectorNormalize((molotov_target.origin + (0, 0, 300)) - molotov.origin);
+  forward = vectorNormalize((molotov_target.origin + (0, 0, 300)) - molotov.origin);
   velocities = forward * 12000;
   molotov physicslaunch((molotov.origin), velocities);
 
@@ -969,7 +969,7 @@ let_go_molotov(molotov, molotov_target) {
   radiusdamage(molotov_target.origin, 400, 100, 10);
 
   if(isDefined(molotov)) {
-    playsoundatposition("weap_molotov_impact", molotov.origin);
+    playSoundAtPosition("weap_molotov_impact", molotov.origin);
     molotov delete();
   }
 
@@ -1002,7 +1002,7 @@ scripted_molotov_throw_triggered(trigger_value, trigger_key, node_noteworthy, st
   if(isDefined(stop_msg)) {
     level endon(stop_msg);
   }
-  trigger = getent(trigger_value, trigger_key);
+  trigger = getEnt(trigger_value, trigger_key);
   trigger waittill("trigger");
   self thread scripted_molotov_throw(node_noteworthy, stop_msg);
 }

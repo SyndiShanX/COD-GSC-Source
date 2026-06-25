@@ -329,9 +329,9 @@ removefromplayerkillstreaklistondeath(var_0) {
 
 func_F774(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self makeusable();
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self func_84A9("show");
-  self sethintstring(var_1);
+  self setHintString(var_1);
   self func_84A6(var_2);
   self setusefov(var_3);
   self func_84A4(var_4);
@@ -762,7 +762,7 @@ func_CF1D(var_0, var_1) {
 
   self.var_7625 = spawn("script_model", self.origin);
   self.var_7625 setModel("tag_origin");
-  self.var_7625 linkto(self, "tag_origin", var_0, var_1);
+  self.var_7625 linkTo(self, "tag_origin", var_0, var_1);
   self.var_7625 thread deleteonparentdeath(self);
   wait(0.1);
   playFXOnTag(var_2, self.var_7625, "tag_origin");

@@ -169,7 +169,7 @@ delayed_notify(n, time, end) {
   }
 }
 nearestPlayer() {
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 0) {
     return undefined;
   }
@@ -627,7 +627,7 @@ bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
 filter(potentialThreats, isThreat) {
   threats = [];
   for(i = 0; i < potentialThreats.size; i++) {
-    players = GetPlayers();
+    players = getPlayers();
     for(p = 0; p < players.size; p++) {
       if(potentialThreats[i][[isThreat]](players[p])) {
         threats[threats.size] = potentialThreats[i];
@@ -638,7 +638,7 @@ filter(potentialThreats, isThreat) {
   return threats;
 }
 getThreat(team, threats, threatDistance, callCount) {
-  players = GetPlayers();
+  players = getPlayers();
   closest = threatDistance;
   threat = undefined;
   for(i = 0; i < threats.size; i++) {
@@ -659,7 +659,7 @@ getThreat(team, threats, threatDistance, callCount) {
   return threat;
 }
 getClosestToPlayer(list) {
-  players = GetPlayers();
+  players = getPlayers();
   closest = 0;
   obj = undefined;
   for(i = 0; i < list.size; i++) {
@@ -840,7 +840,7 @@ isSurpressed(player) {
   return valid;
 }
 trySurpressed(team) {
-  players = GetPlayers();
+  players = getPlayers();
   sp = filter(team, ::isSurpressed);
   talker = getNearestTalker(players[0], undefined, sp, "inform", "supressed");
   if(!isDefined(talker)) {

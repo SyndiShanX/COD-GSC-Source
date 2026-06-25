@@ -187,7 +187,7 @@ function private _play_player_dialogue(alias, sounddelay, gestures, gesturedelay
   org endon(#"death");
   org.origin = self.origin;
   org.angles = self.angles;
-  org linkto(self);
+  org linkTo(self);
   player = self function_bbd6c05b();
   player_dialogue_emitter = self function_7ddb5aa3();
 
@@ -267,7 +267,7 @@ function private function_bbd6c05b() {
     return self;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size > 0) {
     return players[0];
@@ -282,7 +282,7 @@ function private function_7ddb5aa3() {
   if(isDefined(player)) {
     if(!isDefined(player.player_dialogue_emitter)) {
       ent = spawn("script_origin", player.origin);
-      ent linkto(player, "", (0, 0, 0), (0, 0, 0));
+      ent linkTo(player, "", (0, 0, 0), (0, 0, 0));
       player.player_dialogue_emitter = ent;
     }
 
@@ -298,7 +298,7 @@ function private function_dc8dd8fa() {
   if(isDefined(player)) {
     if(!isDefined(player.player_radio_emitter)) {
       ent = spawn("script_origin", player getplayercamerapos());
-      ent linkto(player, "", (0, 0, 0), (0, 0, 0));
+      ent linkTo(player, "", (0, 0, 0), (0, 0, 0));
       player.player_radio_emitter = ent;
     }
 

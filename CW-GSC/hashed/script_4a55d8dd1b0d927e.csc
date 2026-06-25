@@ -291,7 +291,7 @@ function private function_bb229046(var_d27e5654) {
 }
 
 function private function_8565908c(local_client_num, client_num) {
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(isDefined(player) && player getentitynumber() == client_num) {

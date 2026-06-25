@@ -48,12 +48,12 @@ main() {
   arrayremovevalue(a_t_pap_rock_damage, level.t_pap_rock_damage);
 
   foreach(t_pap_rock_damage in a_t_pap_rock_damage) {
-    var_5d8f658e = getent(t_pap_rock_damage.target, "targetname");
+    var_5d8f658e = getEnt(t_pap_rock_damage.target, "targetname");
     var_5d8f658e delete();
     t_pap_rock_damage delete();
   }
 
-  level.t_pap_rock_damage.var_5d8f658e = getent(level.t_pap_rock_damage.target, "targetname");
+  level.t_pap_rock_damage.var_5d8f658e = getEnt(level.t_pap_rock_damage.target, "targetname");
   zm_sq::register(#"pap_rock", #"step_1", #"pap_rock_step1", &pap_rock_step1_setup, &pap_rock_step1_cleanup);
   zm_sq::register(#"pap_rock", #"step_2", #"pap_rock_step2", &pap_rock_step2_setup, &pap_rock_step2_cleanup);
   zm_sq::start(#"pap_rock", !zm_utility::is_standard());
@@ -84,8 +84,8 @@ function_f415e4d5() {
 
   foreach(var_143bf55a in level.var_9f657597) {
     if(isDefined(var_143bf55a.target)) {
-      clip_brush = getent(var_143bf55a.target, "targetname");
-      clip_brush disconnectpaths();
+      clip_brush = getEnt(var_143bf55a.target, "targetname");
+      clip_brush disconnectPaths();
     }
   }
 
@@ -182,8 +182,8 @@ function_5c189332() {
 
   exploder::stop_exploder("fxexp_fire_fx_ship_stage_1");
   exploder::stop_exploder("fxexp_fire_fx_ship_stage_2");
-  level.var_9cc989a5 = getent("ship_fore_fire_clip", "targetname");
-  level.var_a385f14 = getent("water_pipe_damage_trigger", "targetname");
+  level.var_9cc989a5 = getEnt("ship_fore_fire_clip", "targetname");
+  level.var_a385f14 = getEnt("water_pipe_damage_trigger", "targetname");
   level.var_a385f14 thread function_3f5218e3();
 }
 
@@ -222,7 +222,7 @@ function_56db9cdc() {
   }
 
   while(true) {
-    playsoundatposition("zmb_pap_lightning_2", (0, 0, 0));
+    playSoundAtPosition("zmb_pap_lightning_2", (0, 0, 0));
     function_1556161f();
     zm_orange_lighthouse::function_da304f6e(2);
     level.var_7d8bf93f function_e3921120(1);
@@ -234,7 +234,7 @@ function_56db9cdc() {
       level flag::set(#"golden_pap_active");
       level thread function_50779c1f();
       level.var_ab11c23d playSound(#"hash_6a8b750c09391a81");
-      playsoundatposition(#"hash_1172b7ba38df5cd4", (-105, -3451, 607));
+      playSoundAtPosition(#"hash_1172b7ba38df5cd4", (-105, -3451, 607));
       s_notify = level waittilltimeout(120, #"hash_39b6629ce957cce9");
 
       if(level flag::get(#"island_event_active")) {
@@ -296,7 +296,7 @@ function_e3921120(b_show, var_35c3faab = 0) {
         var_611e46b7 function_69a4b74b(0);
 
         if(isDefined(var_611e46b7.target)) {
-          clip_brush = getent(var_611e46b7.target, "targetname");
+          clip_brush = getEnt(var_611e46b7.target, "targetname");
           clip_brush thread function_4d7320f5(0);
         }
       }
@@ -321,7 +321,7 @@ function_e3921120(b_show, var_35c3faab = 0) {
       var_611e46b7 thread function_69a4b74b(1);
 
       if(isDefined(var_611e46b7.target)) {
-        clip_brush = getent(var_611e46b7.target, "targetname");
+        clip_brush = getEnt(var_611e46b7.target, "targetname");
         clip_brush thread function_4d7320f5(1);
       }
     }
@@ -342,7 +342,7 @@ function_69a4b74b(var_16c2b0ed) {
 function_4d7320f5(var_5ba3fe65) {
   if(var_5ba3fe65) {
     self solid();
-    self disconnectpaths();
+    self disconnectPaths();
     return;
   }
 
@@ -405,7 +405,7 @@ function_80a40c1c() {
 
   while(true) {
     if(level.zones[#"ice_floe"].is_enabled === 0) {
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         if(e_player istouching(level.var_f7c50c66)) {
           e_player zm_orange_fasttravel_flinger::fling_player(level.var_f7c50c66);
         }
@@ -524,7 +524,7 @@ function_451e442e() {
   self endon(#"death");
   self playSound(#"hash_2dcb0b4d2e7a146f");
   var_a374dafc = struct::get(self.target);
-  self moveto(var_a374dafc.origin, 0.2);
+  self moveTo(var_a374dafc.origin, 0.2);
   self waittill(#"movedone");
   self zm_unitrigger::create(zm_utility::function_d6046228(#"hash_20aa96975beb9059", #"hash_55802e320dc6f767"), 100);
   self thread function_feee6e66();

@@ -107,14 +107,14 @@ class class_66e46dd {
       } else {
         var_5ae81506 = 1;
       }
-      var_c86771bb rotateyaw((var_b548cd69 * var_f35c15fb) * var_5ae81506, 0.5);
-      var_d6478e9 rotateyaw(((var_b548cd69 * var_9abb59c4) * var_90e84049) * var_5ae81506, 0.5);
+      var_c86771bb rotateYaw((var_b548cd69 * var_f35c15fb) * var_5ae81506, 0.5);
+      var_d6478e9 rotateYaw(((var_b548cd69 * var_9abb59c4) * var_90e84049) * var_5ae81506, 0.5);
       if(var_11a8191e) {
-        var_d502c153 rotateyaw((var_b548cd69 * var_9abb59c4) * var_5ae81506, 0.5);
-        var_2eb50ca2 rotateyaw((var_b548cd69 * var_9abb59c4) * var_5ae81506, 0.5);
+        var_d502c153 rotateYaw((var_b548cd69 * var_9abb59c4) * var_5ae81506, 0.5);
+        var_2eb50ca2 rotateYaw((var_b548cd69 * var_9abb59c4) * var_5ae81506, 0.5);
       }
       if(var_a802d3d9) {
-        var_16cc14d0 rotateyaw(((var_b548cd69 * var_f35c15fb) * var_95126c9c) * var_5ae81506, 0.5);
+        var_16cc14d0 rotateYaw(((var_b548cd69 * var_f35c15fb) * var_95126c9c) * var_5ae81506, 0.5);
       }
       if(!var_11a8191e && !var_a802d3d9) {
         var_d536dea5 = var_d502c153.angles;
@@ -151,13 +151,13 @@ class class_66e46dd {
     var_41660b94 = 1;
     var_11a8191e = 1;
     var_a802d3d9 = 1;
-    var_c86771bb = getent("ee_disco_earth", "targetname");
-    var_d502c153 = getent("ee_disco_arm_moon", "targetname");
-    var_16cc14d0 = getent("ee_disco_arm_rocket", "targetname");
-    var_2eb50ca2 = getent("ee_disco_moon", "targetname");
-    var_d6478e9 = getent("ee_disco_moon_rocket", "targetname");
-    var_2eb50ca2 linkto(var_d502c153, "tag_moon");
-    var_d6478e9 linkto(var_d502c153, "tag_moon");
+    var_c86771bb = getEnt("ee_disco_earth", "targetname");
+    var_d502c153 = getEnt("ee_disco_arm_moon", "targetname");
+    var_16cc14d0 = getEnt("ee_disco_arm_rocket", "targetname");
+    var_2eb50ca2 = getEnt("ee_disco_moon", "targetname");
+    var_d6478e9 = getEnt("ee_disco_moon_rocket", "targetname");
+    var_2eb50ca2 linkTo(var_d502c153, "tag_moon");
+    var_d6478e9 linkTo(var_d502c153, "tag_moon");
     var_b548cd69 = 5;
     var_f35c15fb = 1;
     var_95126c9c = -3;
@@ -299,9 +299,9 @@ class class_d7100ae3 {
   }
 
   function init() {
-    var_5c546253 = getent("ee_clocktower_minute_hand", "targetname");
-    var_1ed02f45 = getent("ee_clocktower_hour_hand", "targetname");
-    m_mdl_switch = getent("ee_clocktower_activation_switch", "targetname");
+    var_5c546253 = getEnt("ee_clocktower_minute_hand", "targetname");
+    var_1ed02f45 = getEnt("ee_clocktower_hour_hand", "targetname");
+    m_mdl_switch = getEnt("ee_clocktower_activation_switch", "targetname");
     m_b_active = 0;
     var_246b41b3 = 0;
     var_a117a15d = 0;
@@ -543,7 +543,7 @@ function function_44ea752c() {
   }
   function_dbc1fb93(level.var_a0554b26);
   level.var_a0554b26++;
-  playsoundatposition("zmb_ee_skpower_" + level.var_a0554b26, (0, 0, 0));
+  playSoundAtPosition("zmb_ee_skpower_" + level.var_a0554b26, (0, 0, 0));
   if(level.var_a0554b26 == 3) {
     level.var_9bf9e084 = 1;
   }
@@ -568,7 +568,7 @@ function function_67a47b1c() {
   }
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   level.var_9bf9e084 = 0;
-  playsoundatposition("zmb_ee_skpower_deactivate", (0, 0, 0));
+  playSoundAtPosition("zmb_ee_skpower_deactivate", (0, 0, 0));
   for(i = 0; i < 3; i++) {
     if(isDefined(level.var_478986c0[i])) {
       playFX(level._effect["def_explode"], level.var_478986c0[i].origin);
@@ -644,7 +644,7 @@ function function_e249cd7(n_index) {
   self flag::set("mechz_claw_revealed");
   self setvisibletoall();
   var_7ddcf23 = struct::get(("ee_claw_" + n_index) + "_fell");
-  self moveto(var_7ddcf23.origin, 0.333);
+  self moveTo(var_7ddcf23.origin, 0.333);
   self thread function_4767e6ca();
   wait(0.333);
   self setCanDamage(1);
@@ -662,7 +662,7 @@ function function_e249cd7(n_index) {
   s_end_point = struct::get(("ee_claw_" + n_index) + "_shot");
   self thread function_d23efff2();
   playFXOnTag(level._effect["mechz_rocket_punch"], self, "fx_rocket");
-  self moveto(s_end_point.origin, 1);
+  self moveTo(s_end_point.origin, 1);
   wait(1);
   self playSound("zmb_ee_mechz_explode");
   playFX(level._effect["def_explode"], self.origin);
@@ -840,7 +840,7 @@ function function_7c237ecb(var_f00386ff = 0) {
 
 function gravity_trap_spike_watcher(mdl_spike) {
   if(isDefined(level.var_714fae39) && level.var_714fae39 && level flag::get("ee_power_clocktower") == 0) {
-    var_3d98ac09 = getent("clocktower_power_trig", "targetname");
+    var_3d98ac09 = getEnt("clocktower_power_trig", "targetname");
     if(mdl_spike istouching(var_3d98ac09)) {
       level flag::set("ee_power_clocktower");
     }
@@ -849,10 +849,10 @@ function gravity_trap_spike_watcher(mdl_spike) {
 
 function function_9e325d85() {
   for(i = 0; i < 4; i++) {
-    t_wallrun = getent("ee_undercroft_wallrun_" + i, "targetname");
+    t_wallrun = getEnt("ee_undercroft_wallrun_" + i, "targetname");
     t_wallrun thread function_81d41eb8(i);
   }
-  var_3294f1d9 = getent("ee_undercroft_wallrun_reset", "targetname");
+  var_3294f1d9 = getEnt("ee_undercroft_wallrun_reset", "targetname");
   var_3294f1d9 thread function_8d508e48();
 }
 
@@ -933,7 +933,7 @@ function function_aaacffb2(player, s_dest) {
   var_daad3c3c = vectorscale((0, 0, 1), 49);
   var_6b55b1c4 = vectorscale((0, 0, 1), 20);
   var_3abe10e2 = (0, 0, 0);
-  var_d3263bfe = getent("teleport_room_" + player.characterindex, "targetname");
+  var_d3263bfe = getEnt("teleport_room_" + player.characterindex, "targetname");
   player zm_utility::create_streamer_hint(s_dest.origin, s_dest.angles, 0.25);
   if(isDefined(var_d3263bfe)) {
     visionset_mgr::deactivate("overlay", "zm_trap_electric", player);
@@ -951,7 +951,7 @@ function function_aaacffb2(player, s_dest) {
     }
     player.var_39386de = spawn("script_origin", player.origin);
     player.var_39386de.angles = player.angles;
-    player linkto(player.var_39386de);
+    player linkTo(player.var_39386de);
     player.var_39386de.origin = desired_origin;
     player freezecontrols(1);
     util::wait_network_frame();
@@ -977,7 +977,7 @@ function function_aaacffb2(player, s_dest) {
   visionset_mgr::deactivate("overlay", "zm_factory_teleport", player);
   player enableweapons();
   player enableoffhandweapons();
-  player setorigin(s_dest.origin);
+  player setOrigin(s_dest.origin);
   player setplayerangles(s_dest.angles);
   player freezecontrols(0);
   player thread zm_castle_teleporter::teleport_aftereffects();

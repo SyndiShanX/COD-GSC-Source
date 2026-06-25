@@ -120,8 +120,8 @@ trophyuselistener(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("death");
-  self.trigger setcursorhint("HINT_NOICON");
-  self.trigger sethintstring(&"MP_PICKUP_TROPHY");
+  self.trigger setCursorHint("HINT_NOICON");
+  self.trigger setHintString(&"MP_PICKUP_TROPHY");
   self.trigger maps\mp\_utility::setselfusable(var_0);
   self.trigger thread maps\mp\_utility::notusableforjoiningplayers(var_0);
 
@@ -291,7 +291,7 @@ trophywithinmindot(var_0) {
   }
 
   var_1 = anglesToForward(self.angles + self.trophyangleoffset);
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
   var_3 = vectordot(var_1, var_2);
   return var_3 > self.mindot;
 }

@@ -226,7 +226,7 @@ wait_for_required_zombie_kills(param_00, param_01, param_02, param_03, param_04,
 
 wait_for_gekocht_stage_challenge(param_00) {
   var_01 = common_scripts\utility::func_46B5("stage_check_struct", "targetname");
-  var_02 = getent(var_01.var_1A2, "targetname");
+  var_02 = getEnt(var_01.var_1A2, "targetname");
   var_03 = 0;
   var_04 = 0.5;
   for(;;) {
@@ -411,7 +411,7 @@ get_players_to_reset(param_00, param_01) {
 reset_progress_when_off_stage(param_00) {
   var_01 = self;
   var_02 = common_scripts\utility::func_46B5("stage_check_struct", "targetname");
-  var_03 = getent(var_02.var_1A2, "targetname");
+  var_03 = getEnt(var_02.var_1A2, "targetname");
   for(;;) {
     lib_0547::func_A6F6();
     if(!var_01 is_agent_on_stage(var_03)) {

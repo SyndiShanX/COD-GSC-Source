@@ -146,10 +146,10 @@ init_door_mover(var_0) {
       case "link_blood":
         var_0.blood[var_0.blood.size] = var_3;
         var_3 ghost();
-        var_3 linkto(var_0);
+        var_3 linkTo(var_0);
         break;
       case "link":
-        var_3 linkto(var_0);
+        var_3 linkTo(var_0);
         break;
       default:
         door_error("Unknown door target ent type '" + var_4 + "' on ent at " + var_3.origin + ".");
@@ -248,7 +248,7 @@ run_door_trap() {
     return;
   }
   if(isDefined(self.traptrigger.target)) {
-    var_0 = common_scripts\utility::getstruct(self.traptrigger.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(self.traptrigger.target, "targetname");
 
     if(isDefined(var_0)) {
       self.trapdir = anglesToForward(var_0.angles);
@@ -312,7 +312,7 @@ run_door_trap_trigger() {
     }
 
     foreach(var_8 in self.movers) {
-      var_8 moveto(var_8.closed_pos, var_0, var_0);
+      var_8 moveTo(var_8.closed_pos, var_0, var_0);
       var_8 playSound("trap_security_door_slam");
     }
 
@@ -322,7 +322,7 @@ run_door_trap_trigger() {
     var_10 = 1.0;
 
     foreach(var_8 in self.movers) {
-      var_8 moveto(var_8.open_pos, var_10);
+      var_8 moveTo(var_8.open_pos, var_10);
       var_8 playSound("trap_security_door_reset");
     }
 
@@ -371,13 +371,13 @@ run_door_hint(var_0) {
   if(door_requires_power()) {
     for(;;) {
       if(!door_has_power()) {
-        var_0 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+        var_0 setHintString(&"ZOMBIES_REQUIRES_POWER");
         var_0 setsecondaryhintstring("");
         var_0 maps\mp\zombies\_util::tokenhintstring(0);
         common_scripts\utility::flag_wait(self.script_flag_true);
       }
 
-      var_0 sethintstring(gethintstring(var_0));
+      var_0 setHintString(gethintstring(var_0));
       var_0 setsecondaryhintstring(maps\mp\zombies\_util::getcoststring(self.cost));
       var_0 maps\mp\zombies\_util::tokenhintstring(1);
 
@@ -386,7 +386,7 @@ run_door_hint(var_0) {
       }
     }
   } else {
-    var_0 sethintstring(gethintstring(var_0));
+    var_0 setHintString(gethintstring(var_0));
     var_0 setsecondaryhintstring(maps\mp\zombies\_util::getcoststring(self.cost));
     var_0 maps\mp\zombies\_util::tokenhintstring(1);
   }
@@ -405,7 +405,7 @@ door_has_power() {
 }
 
 end_door_trigger(var_0) {
-  var_0 sethintstring("");
+  var_0 setHintString("");
   var_0 setsecondaryhintstring("");
   var_0 maps\mp\zombies\_util::tokenhintstring(0);
 
@@ -416,7 +416,7 @@ end_door_trigger(var_0) {
 
 run_door_mover(var_0) {
   var_1 = common_scripts\utility::random(var_0.movegoals);
-  var_0 moveto(var_1.origin, 1.0);
+  var_0 moveTo(var_1.origin, 1.0);
   var_0.open_pos = var_1.origin;
   var_2 = "interact_door";
 

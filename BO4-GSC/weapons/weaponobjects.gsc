@@ -1048,7 +1048,7 @@ proximityalarmloop(watcher, owner) {
     alarmstatus = "off";
     var_af12fba0 = undefined;
     actors = getactorarray();
-    players = getplayers();
+    players = getPlayers();
     detectentities = arraycombine(players, actors, 0, 0);
 
     foreach(entity in detectentities) {
@@ -1380,11 +1380,11 @@ hackernotmoving() {
 
 set_hint_string(hint_string, default_string) {
   if(isDefined(hint_string) && hint_string != "") {
-    self sethintstring(hint_string);
+    self setHintString(hint_string);
     return;
   }
 
-  self sethintstring(default_string);
+  self setHintString(default_string);
 }
 
 hackerinit(watcher) {
@@ -1676,8 +1676,8 @@ hackerremoveweapon(weapon_instance) {
 
 proximityweaponobject_createdamagearea(watcher) {
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - watcher.detonateradius), 4096 | 16384 | level.aitriggerspawnflags | level.vehicletriggerspawnflags, watcher.detonateradius, watcher.detonateradius * 2);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self thread deleteondeath(damagearea);
   return damagearea;
 }
@@ -1883,7 +1883,7 @@ shouldaffectweaponobject(object, watcher) {
     return false;
   }
 
-  dirtopos = vectornormalize(dirtopos);
+  dirtopos = vectorNormalize(dirtopos);
   dot = vectordot(dirtopos, objectforward);
   return dot > watcher.detectiondot;
 }
@@ -2184,11 +2184,11 @@ spawn_interact_trigger(type, origin, width, height, var_c16194e2) {
 
   if(var_c16194e2 !== 1) {
     trigger sethintlowpriority(1);
-    trigger setcursorhint("HINT_NOICON", self);
+    trigger setCursorHint("HINT_NOICON", self);
   }
 
-  trigger enablelinkto();
-  trigger linkto(self);
+  trigger enablelinkTo();
+  trigger linkTo(self);
   return trigger;
 }
 
@@ -2262,7 +2262,7 @@ function_23b0aea9(watcher, player) {
     }
 
     if(isDefined(triggerparentent)) {
-      self.pickuptrigger linkto(triggerparentent);
+      self.pickuptrigger linkTo(triggerparentent);
     }
   }
 

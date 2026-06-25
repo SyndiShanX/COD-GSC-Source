@@ -147,7 +147,7 @@ function function_d00289ef(localclientnum, oldval, newval, bnewent, binitialsnap
   if(binitialsnap) {
     return;
   }
-  struct = getent(localclientnum, "igc_kane_khalil_1", "targetname");
+  struct = getEnt(localclientnum, "igc_kane_khalil_1", "targetname");
   struct thread scene::play("cin_aqu_03_20_water_room_body_loop");
 }
 
@@ -771,7 +771,7 @@ function function_21e63f39(localclientnum) {
         offset = (self.missile_target.screenproj[0] - width, self.missile_target.screenproj[1] - height, 0);
         dist = length(offset);
         if(dist > (max_radius - ((var_428be7c0 * 0.5) * scale))) {
-          dir = vectornormalize(offset);
+          dir = vectorNormalize(offset);
           offset = dir * (max_radius - ((var_428be7c0 * 0.5) * scale));
         }
         setluimenudata(localclientnum, self.var_58eaeac1, "missileLockTargetLerpTime", 50);

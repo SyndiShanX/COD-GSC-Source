@@ -41,9 +41,9 @@ assembly_line_animate() {
 
   level.next_destructible_tank = RandomIntRange(4, 6);
   for(i = 0; i < num_tanks; i++) {
-    collision_brush_bottom = GetEnt("tank_chassis_collision" + (i + 1), "targetname");
-    collision_brush_top = GetEnt("tank_chassis_collision_top" + (i + 1), "targetname");
-    collision_brush_center = GetEnt("tank_chassis_collision_center" + (i + 1), "targetname");
+    collision_brush_bottom = getEnt("tank_chassis_collision" + (i + 1), "targetname");
+    collision_brush_top = getEnt("tank_chassis_collision_top" + (i + 1), "targetname");
+    collision_brush_center = getEnt("tank_chassis_collision_center" + (i + 1), "targetname");
     if(!isDefined(collision_brush_bottom) || !isDefined(collision_brush_top) || !isDefined(collision_brush_center)) {
       continue;
     }
@@ -58,32 +58,32 @@ assembly_line_animate() {
 }
 
 assembly_line_piece(collision_brush_bottom, collision_brush_top, collision_brush_center) {
-  assembly_line_start_pos = getstruct("assembly_start_point", "targetname");
+  assembly_line_start_pos = getStruct("assembly_start_point", "targetname");
 
   assembly_piece = spawn("script_model", assembly_line_start_pos.origin);
   assembly_piece.angles = assembly_line_start_pos.angles;
   assembly_piece setModel("mp_sovereign_assembly_moving_front_piece");
 
   collision_brush_center.origin = assembly_piece.origin;
-  collision_brush_center LinkTo(assembly_piece, "tag_origin");
+  collision_brush_center linkTo(assembly_piece, "tag_origin");
 
-  assembly_line_start_pos_collision = getstruct("assembly_start_point_collision", "targetname");
+  assembly_line_start_pos_collision = getStruct("assembly_start_point_collision", "targetname");
 
   assembly_piece_collision = spawn("script_model", assembly_line_start_pos_collision.origin);
   assembly_piece_collision.angles = assembly_line_start_pos_collision.angles;
   assembly_piece_collision setModel("generic_prop_raven");
 
   collision_brush_bottom.origin = assembly_line_start_pos_collision.origin;
-  collision_brush_bottom LinkTo(assembly_piece_collision, "tag_origin");
+  collision_brush_bottom linkTo(assembly_piece_collision, "tag_origin");
 
-  assembly_line_start_pos_collision_top = getstruct("assembly_start_point_collision_top", "targetname");
+  assembly_line_start_pos_collision_top = getStruct("assembly_start_point_collision_top", "targetname");
 
   assembly_piece_collision_top = spawn("script_model", assembly_line_start_pos_collision_top.origin);
   assembly_piece_collision_top.angles = assembly_line_start_pos_collision_top.angles;
   assembly_piece_collision_top setModel("generic_prop_raven");
 
   collision_brush_top.origin = assembly_line_start_pos_collision_top.origin;
-  collision_brush_top LinkTo(assembly_piece_collision_top, "tag_origin");
+  collision_brush_top linkTo(assembly_piece_collision_top, "tag_origin");
 
   assembly_piece.parts = [];
   if(isDefined(assembly_line_start_pos.target)) {
@@ -94,11 +94,11 @@ assembly_line_piece(collision_brush_bottom, collision_brush_top, collision_brush
       part_copy setModel(part.model);
 
       if(isDefined(part.target)) {
-        collision = GetEnt(part.target, "targetname");
+        collision = getEnt(part.target, "targetname");
         if(isDefined(collision)) {}
       }
 
-      part_copy LinkTo(assembly_piece, "tag_tank_chassis");
+      part_copy linkTo(assembly_piece, "tag_tank_chassis");
       part_copy assembly_line_tank_part_visible(false);
       part_copy.parent = assembly_piece;
       assembly_piece.parts[assembly_piece.parts.size] = part_copy;
@@ -352,7 +352,7 @@ halon_system_killstreak() {
     level waittill("sovereign_gas_killstreak", player);
     wait 2;
 
-    start = getstruct("killstreak_explosive", "targetname");
+    start = getStruct("killstreak_explosive", "targetname");
     if(!isDefined(start)) {
       return;
     }
@@ -491,7 +491,7 @@ halon_system_spawn_watch() {
 bot_clear_of_gas() {
   if(!flag("walkway_collasped")) {
     if(!isDefined(level.halon_dangerzone)) {
-      level.halon_dangerzone = GetEnt("halon_dangerzone", "targetname");
+      level.halon_dangerzone = getEnt("halon_dangerzone", "targetname");
     }
 
     if(isDefined(level.halon_dangerzone)) {
@@ -502,7 +502,7 @@ bot_clear_of_gas() {
   }
 
   if(!isDefined(level.explosives_dangerzone)) {
-    level.explosives_dangerzone = GetEnt("explosives_dangerzone", "targetname");
+    level.explosives_dangerzone = getEnt("explosives_dangerzone", "targetname");
   }
 
   if(isDefined(level.explosives_dangerzone)) {

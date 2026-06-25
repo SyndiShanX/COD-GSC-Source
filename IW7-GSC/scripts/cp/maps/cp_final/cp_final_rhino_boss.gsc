@@ -133,7 +133,7 @@ move_players_to_rhino_fight() {
   for(var_4 = 0; var_4 < level.players.size; var_4++) {
     var_5 = (var_0[0] + var_2[var_4], var_0[1] + var_3[var_4], var_0[2]);
     if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
-      level.players[var_4] setorigin(var_5);
+      level.players[var_4] setOrigin(var_5);
       level.players[var_4] setplayerangles(var_1);
     }
 
@@ -355,7 +355,7 @@ func_10B44() {
   level thread open_stage_2_area();
   turn_off_spawners("spawner_1");
   turn_on_spawners("spawner_2");
-  var_0 = scripts\engine\utility::getstruct("rhino_turret_idle", "targetname");
+  var_0 = scripts\engine\utility::getStruct("rhino_turret_idle", "targetname");
   aim_at_target(var_0);
   spawn_phantoms();
   wait(5);
@@ -411,7 +411,7 @@ stage_6() {
   turn_off_lights();
   turn_off_monitors();
   turn_off_spawners("spawner_1", "spawner_2");
-  var_0 = scripts\engine\utility::getstruct("rhino_turret_broken", "targetname");
+  var_0 = scripts\engine\utility::getStruct("rhino_turret_broken", "targetname");
   aim_at_target(var_0);
   scripts\engine\utility::flag_set("rhino_stage_5");
   level notify("create_perk_boxes");
@@ -538,12 +538,12 @@ spawn_initial_rhino() {
   spawn_starting_rhino(var_5[var_2], var_6[var_2]);
   scripts\cp\maps\cp_final\cp_final_mpq::playneilvo("final_n31l_evil_release_rhino");
   scripts\engine\utility::flag_set("init_rhinos_spawned");
-  var_7 = scripts\engine\utility::getstruct("rhino_turret_idle", "targetname");
+  var_7 = scripts\engine\utility::getStruct("rhino_turret_idle", "targetname");
   aim_at_target(var_7);
 }
 
 spawn_starting_rhino(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_3 = var_2.origin;
   var_4 = var_2.angles;
   var_5 = "axis";
@@ -660,7 +660,7 @@ update_spawn_portals() {
       continue;
     }
 
-    var_2 = scripts\engine\utility::getstruct(var_0[var_1].target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0[var_1].target, "targetname");
     if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
     }
@@ -683,7 +683,7 @@ update_spawn_portals() {
       continue;
     }
 
-    var_2 = scripts\engine\utility::getstruct(var_0[var_1].target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0[var_1].target, "targetname");
     if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
     }
@@ -839,11 +839,11 @@ move_laser() {
   }
 
   scripts\engine\utility::flag_wait("start_rhino_sequence");
-  level.portal_gun rotateto(level.portal_gun.var_10B9F, 3, 0.1, 0.1);
+  level.portal_gun rotateTo(level.portal_gun.var_10B9F, 3, 0.1, 0.1);
   level.portal_gun waittill("rotatedone");
   level.portal_gun_crane thread scripts\cp\maps\cp_final\cp_final_fast_travel::play_move_sounds(5);
-  level.portal_gun moveto(level.portal_gun.start_pos, 5, 0.1, 0.1);
-  level.portal_gun_crane moveto(level.portal_gun_crane.start_pos, 5, 0.1, 0.1);
+  level.portal_gun moveTo(level.portal_gun.start_pos, 5, 0.1, 0.1);
+  level.portal_gun_crane moveTo(level.portal_gun_crane.start_pos, 5, 0.1, 0.1);
   level.portal_gun waittill("movedone");
   scripts\engine\utility::flag_set("laser_in_place");
   scripts\cp\maps\cp_final\cp_final_mpq::playneilvo("final_n31l_evil_taunt_misc");
@@ -852,10 +852,10 @@ move_laser() {
 }
 
 debug_laser_move() {
-  level.portal_gun moveto(level.portal_gun.var_62EE, 5, 0.1, 0.1);
-  level.portal_gun_crane moveto(level.portal_gun_crane.var_62EE, 5, 0.1, 0.1);
+  level.portal_gun moveTo(level.portal_gun.var_62EE, 5, 0.1, 0.1);
+  level.portal_gun_crane moveTo(level.portal_gun_crane.var_62EE, 5, 0.1, 0.1);
   level.portal_gun waittill("movedone");
-  level.portal_gun rotateto(level.portal_gun.end_ang, 3, 0.1, 0.1);
+  level.portal_gun rotateTo(level.portal_gun.end_ang, 3, 0.1, 0.1);
   level.portal_gun waittill("rotatedone");
   wait(1);
 }
@@ -864,7 +864,7 @@ setup_tracking_laser_ents() {
   level.portal_gun.laser_node_start = spawn("script_model", level.portal_gun.origin);
   scripts\engine\utility::waitframe();
   level.portal_gun.laser_node_start setModel("tag_origin");
-  level.portal_gun.laser_node_start linkto(level.portal_gun);
+  level.portal_gun.laser_node_start linkTo(level.portal_gun);
   level.portal_gun.laser_node_end = spawn("script_model", level.portal_gun.origin);
   scripts\engine\utility::waitframe();
   level.portal_gun.laser_node_end setModel("tag_origin");
@@ -880,7 +880,7 @@ run_tracking_laser() {
     var_4 = var_1[0];
     var_5 = level.portal_gun.angles;
     var_6 = anglesToForward(var_5);
-    var_6 = vectornormalize(var_6);
+    var_6 = vectorNormalize(var_6);
     var_7 = var_4.origin + var_6 * 2000;
     var_8 = scripts\engine\utility::array_add(level.players, level.portal_gun);
     var_3 = physics_raycast(var_4.origin, var_7, var_2, var_8, 0, "physicsquery_closest");
@@ -951,7 +951,7 @@ aim_at_target(var_0) {
   var_1 = 3;
   var_2 = var_0.origin;
   if(isDefined(var_0.target)) {
-    var_0 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_2 = var_0.origin;
   }
 
@@ -960,7 +960,7 @@ aim_at_target(var_0) {
   var_5 = scripts\engine\utility::anglebetweenvectors(level.portal_gun.origin, var_3);
   var_6 = var_5 / 180;
   var_7 = var_1 * var_6;
-  level.portal_gun rotateto(var_4, var_7);
+  level.portal_gun rotateTo(var_4, var_7);
   level.portal_gun waittill("rotatedone");
   playsoundatpos(level.portal_gun.origin, "zmb_cannon_charge_up");
   var_2 = level.portal_gun.laser_node_end.origin;
@@ -1001,7 +1001,7 @@ func_6D02(var_0) {
 
 spawn_ammo_crate() {
   wait(1);
-  var_0 = scripts\engine\utility::getstruct("ammo_crate_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ammo_crate_spawn", "targetname");
   var_0 = scripts\engine\utility::drop_to_ground(var_0.origin, 12, -100) + (0, 0, 1);
   var_1 = spawn("script_model", var_0);
   wait(1);
@@ -1249,8 +1249,8 @@ emp_defend() {
 }
 
 emp_charge(var_0) {
-  level.emp_console = getent("emp_console", "targetname");
-  level.emp_console_clip = getent("emp_console_clip", "targetname");
+  level.emp_console = getEnt("emp_console", "targetname");
+  level.emp_console_clip = getEnt("emp_console_clip", "targetname");
   level.emp_console_clip solid();
   level.emp_console_clip makeentitysentient("allies", 0);
   level thread damage_monitor(level.emp_console, level.emp_console_clip);
@@ -1448,7 +1448,7 @@ mammothwave() {
 }
 
 spawn_mammoth(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_3 = spawn_rhino(var_2);
   if(isDefined(var_1)) {
     var_3.origin = var_3.origin + var_1;
@@ -1904,7 +1904,7 @@ resume_cp_final() {
   var_3 = [50, 50, -50, -50];
   for(var_4 = 0; var_4 < level.players.size; var_4++) {
     var_5 = (var_0[0] + var_2[var_4], var_0[1] + var_3[var_4], var_0[2]);
-    level.players[var_4] setorigin(var_5);
+    level.players[var_4] setOrigin(var_5);
     level.players[var_4] setplayerangles(var_1);
     level.players[var_4] thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(level.players[var_4]);
   }

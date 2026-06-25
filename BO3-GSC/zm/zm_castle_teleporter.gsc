@@ -71,7 +71,7 @@ function __main__() {
 
 function pad_manager() {
   foreach(t_trig in level.var_27b3c884) {
-    t_trig sethintstring(&"ZOMBIE_TELEPORT_COOLDOWN");
+    t_trig setHintString(&"ZOMBIE_TELEPORT_COOLDOWN");
     t_trig teleport_trigger_invisible(0);
   }
   level.is_cooldown = 1;
@@ -80,14 +80,14 @@ function pad_manager() {
   level.is_cooldown = 0;
   foreach(t_trig in level.var_27b3c884) {
     if(level flag::get("rocket_firing")) {
-      t_trig sethintstring(&"ZM_CASTLE_TELEPORT_LOCKED");
+      t_trig setHintString(&"ZM_CASTLE_TELEPORT_LOCKED");
       continue;
     }
     if(isDefined(t_trig.var_1c5080fe) && t_trig.var_1c5080fe) {
-      t_trig sethintstring(&"ZM_CASTLE_TELEPORT_USE", 500);
+      t_trig setHintString(&"ZM_CASTLE_TELEPORT_USE", 500);
       continue;
     }
-    t_trig sethintstring(&"ZOMBIE_LINK_TPAD");
+    t_trig setHintString(&"ZOMBIE_LINK_TPAD");
   }
 }
 
@@ -111,13 +111,13 @@ function function_68ebacd3() {
 
 function function_798f36c() {
   self.var_eb37ce09 = gettime();
-  playsoundatposition("vox_maxis_teleporter_pa_recharging_0", self.origin);
+  playSoundAtPosition("vox_maxis_teleporter_pa_recharging_0", self.origin);
   while(level.is_cooldown) {
     if((gettime() - self.var_eb37ce09) > 16000) {
       foreach(e_player in level.activeplayers) {
         if(e_player istouching(self)) {
           self.var_eb37ce09 = gettime();
-          playsoundatposition("vox_maxis_teleporter_pa_recharging_0", self.origin);
+          playSoundAtPosition("vox_maxis_teleporter_pa_recharging_0", self.origin);
           continue;
         }
       }
@@ -126,20 +126,20 @@ function function_798f36c() {
   }
   self.var_eb37ce09 = undefined;
   wait(3);
-  playsoundatposition("vox_maxis_teleporter_pa_available_0", self.origin);
+  playSoundAtPosition("vox_maxis_teleporter_pa_available_0", self.origin);
 }
 
 function function_ee24bc2e() {
   foreach(t_trig in level.var_27b3c884) {
     if(level flag::get("rocket_firing")) {
-      t_trig sethintstring(&"ZM_CASTLE_TELEPORT_LOCKED");
+      t_trig setHintString(&"ZM_CASTLE_TELEPORT_LOCKED");
       continue;
     }
     if(level.is_cooldown == 1) {
-      t_trig sethintstring(&"ZOMBIE_TELEPORT_COOLDOWN");
+      t_trig setHintString(&"ZOMBIE_TELEPORT_COOLDOWN");
       continue;
     }
-    t_trig sethintstring(&"ZM_CASTLE_TELEPORT_USE", 500);
+    t_trig setHintString(&"ZM_CASTLE_TELEPORT_USE", 500);
   }
 }
 
@@ -160,18 +160,18 @@ function private update_trigger_visibility() {
 }
 
 function teleport_pad_think() {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"ZOMBIE_NEED_POWER");
   level flag::wait_till("power_on");
   self thread teleport_pad_active_think();
   self thread update_trigger_visibility();
 }
 
 function teleport_pad_active_think() {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self.var_1c5080fe = 1;
   e_player = undefined;
-  self sethintstring(&"ZM_CASTLE_TELEPORT_USE", 500);
+  self setHintString(&"ZM_CASTLE_TELEPORT_USE", 500);
   exploder::exploder("fxexp_100");
   while(true) {
     self waittill("trigger", e_player);
@@ -305,7 +305,7 @@ function function_264f93ff(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
 function function_e421dd3f() {
   level notify("hash_bff04a2b");
   level endon("hash_bff04a2b");
-  var_9e5ac8d1 = getent("trig_mechz_ee_a10", "targetname");
+  var_9e5ac8d1 = getEnt("trig_mechz_ee_a10", "targetname");
   var_9e5ac8d1 waittill("trigger", e_who);
   s_spawn_pos = arraygetclosest(e_who.origin, level.zm_loc_types["mechz_location"]);
   if(isPlayer(e_who) && isDefined(s_spawn_pos)) {
@@ -317,7 +317,7 @@ function function_e421dd3f() {
 }
 
 function teleport_trigger_invisible(enable) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     self setinvisibletoplayer(player, enable);
   }
@@ -342,7 +342,7 @@ function teleport_pad_player_fx(var_7d7ca0ea, n_duration) {
   while(n_total_time < n_duration) {
     if(var_7d7ca0ea player_is_near_pad(self)) {
       visionset_mgr::activate("overlay", "zm_factory_teleport", self, n_duration, n_duration);
-      self playrumbleonentity("zm_castle_pulsing_rumble");
+      self playRumbleOnEntity("zm_castle_pulsing_rumble");
       while(n_total_time < n_duration && var_7d7ca0ea player_is_near_pad(self)) {
         n_current_time = gettime();
         n_total_time = (n_current_time - n_start_time) / 1000;
@@ -410,7 +410,7 @@ function teleport_players(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
         }
         array::add(var_19ff0dfb, player, 0);
         player.var_601ebf01 = util::spawn_model("tag_origin", player.origin, player.angles);
-        player linkto(player.var_601ebf01);
+        player linkTo(player.var_601ebf01);
         player dontinterpolate();
         player.var_601ebf01 dontinterpolate();
         player.var_601ebf01.origin = desired_origin;
@@ -439,9 +439,9 @@ function teleport_players(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
     }
     player unlink();
     if(positionwouldtelefrag(var_764d9cb[i].origin)) {
-      player setorigin(var_764d9cb[i].origin + (randomfloatrange(-16, 16), randomfloatrange(-16, 16), 0));
+      player setOrigin(var_764d9cb[i].origin + (randomfloatrange(-16, 16), randomfloatrange(-16, 16), 0));
     } else {
-      player setorigin(var_764d9cb[i].origin);
+      player setOrigin(var_764d9cb[i].origin);
     }
     player setplayerangles(var_764d9cb[i].angles);
     if(var_edc2ee2a) {
@@ -461,7 +461,7 @@ function teleport_players(var_edc2ee2a = 0, var_66f7e6b9 = 0) {
   }
   level.var_47f4765c++;
   if(level.var_47f4765c == 1 || (level.var_47f4765c % 3) == 0) {
-    playsoundatposition("vox_maxis_teleporter_pa_success_0", var_764d9cb[0].origin);
+    playSoundAtPosition("vox_maxis_teleporter_pa_success_0", var_764d9cb[0].origin);
   }
   exploder::exploder("fxexp_102");
 }
@@ -477,7 +477,7 @@ function function_4a0d1595() {
 function teleport_2d_audio() {
   self endon("fx_done");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     wait(1.7);
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
@@ -507,7 +507,7 @@ function teleport_nuke(max_zombies, range) {
       zombies[i] zombie_utility::zombie_head_gib();
     }
     zombies[i] dodamage(10000, zombies[i].origin);
-    playsoundatposition("nuked", zombies[i].origin);
+    playSoundAtPosition("nuked", zombies[i].origin);
   }
 }
 

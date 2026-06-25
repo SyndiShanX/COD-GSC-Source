@@ -161,7 +161,7 @@ function monitor_tracker_existing_players(local_client_num) {
   self endon("death");
   self endon("monitor_tracker_existing_players");
   self notify("monitor_tracker_existing_players");
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
   foreach(player in players) {
     if(isDefined(player) && player != self) {
       player thread monitor_tracker_perk(local_client_num);
@@ -401,7 +401,7 @@ function monitor_detectnearbyenemies(local_client_num) {
     outerdetect = getdvarint("specialty_detectnearbyenemies_outer", 1);
     zdetect = getdvarint("specialty_detectnearbyenemies_zthreshold", 1);
     localplayeranglestoforward = anglesToForward(localplayer.angles);
-    players = getplayers(local_client_num);
+    players = getPlayers(local_client_num);
     clones = getclones(local_client_num);
     sixthsenseents = arraycombine(players, clones, 0, 0);
     foreach(sixthsenseent in sixthsenseents) {
@@ -441,7 +441,7 @@ function monitor_detectnearbyenemies(local_client_num) {
         }
         vector = sixthsenseent.origin - localplayer.origin;
         vector = (vector[0], vector[1], 0);
-        vectorflat = vectornormalize(vector);
+        vectorflat = vectorNormalize(vector);
         cosangle = vectordot(vectorflat, localplayeranglestoforward);
         if(cosangle > 0.7071) {
           enemydetectedbitfield = enemydetectedbitfield | (1 * distancemask);

@@ -189,7 +189,7 @@ veh_see_player_logic() {
         var_0 = 0.5;
         var_1 = self.origin;
         var_2 = level.player.origin;
-        var_3 = vectornormalize(var_2 - var_1);
+        var_3 = vectorNormalize(var_2 - var_1);
         var_4 = anglesToForward(self.angles);
         var_5 = vectordot(var_3, var_4);
 
@@ -213,7 +213,7 @@ dlight_on_me(var_0) {
   self.dlight_org.tag = var_0;
   var_2 = anglesToForward(var_1.angles);
   var_1.origin = var_1.origin + var_2 * 350;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   playFXOnTag(common_scripts\utility::getfx("btr_light_fadein"), var_1, "tag_origin");
   wait 3;
   stopFXOnTag(common_scripts\utility::getfx("btr_light_fadein"), var_1, "tag_origin");
@@ -331,7 +331,7 @@ moving_light(var_0, var_1) {
 
   for(;;) {
     var_3 = 0.05 + randomint(4) / 10;
-    var_0 moveto(var_2 - (randomint(var_1), randomint(var_1), randomint(var_1)), var_3);
+    var_0 moveTo(var_2 - (randomint(var_1), randomint(var_1), randomint(var_1)), var_3);
     wait(var_3);
   }
 }

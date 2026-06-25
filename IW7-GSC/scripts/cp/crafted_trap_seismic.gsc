@@ -314,8 +314,8 @@ func_9371(var_0) {
 
 seismic_trap_setactive() {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.seismic_trap_settings[self.seismic_trap_type].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.seismic_trap_settings[self.seismic_trap_type].hintstring);
   scripts\cp\utility::addtotraplist();
   var_0 = self.owner;
   var_0 getrigindexfromarchetyperef();
@@ -409,7 +409,7 @@ fling_zombie(var_0, var_1) {
   var_1.customdeath = 1;
   var_1.ragdollhitloc = "torso_lower";
   var_2 = var_0.origin - var_1.origin;
-  var_2 = vectornormalize((var_2[0], var_2[1], 0));
+  var_2 = vectorNormalize((var_2[0], var_2[1], 0));
   var_1.ragdollimpactvector = var_2 * 3500;
   var_3 = undefined;
   if(isDefined(var_0.owner) && var_0.owner scripts\cp\utility::is_valid_player()) {

@@ -96,7 +96,7 @@ function footsteps() {
 function setup_traversals() {}
 
 function start_intro_screen_zm() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] lui::screen_fade_out(0, undefined);
     players[i] freezecontrols(1);

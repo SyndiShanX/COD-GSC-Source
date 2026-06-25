@@ -177,7 +177,7 @@ function private thrashergetclosestlaststandplayer(entity) {
     return;
   }
   maxconsumedistancesq = 2400 * 2400;
-  targets = getplayers();
+  targets = getPlayers();
   if(targets.size == 1) {
     return;
   }
@@ -223,7 +223,7 @@ function private thrashertargetservice(entity) {
     return true;
   }
   entity.ignore_player = [];
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player isnotarget() || player.ignoreme || player laststand::player_is_in_laststand() || (isDefined(player.thrasherconsumed) && player.thrasherconsumed)) {
       entity.ignore_player[entity.ignore_player.size] = player;
@@ -299,8 +299,8 @@ function private thrasherzombieeligibleforknockdown(zombie, thrasher, predicted_
   enemy_vec = zombie.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0) {
     return false;
@@ -356,7 +356,7 @@ function private thrashershouldconsumeplayer(entity) {
   if(!isDefined(entity.favoriteenemy)) {
     return false;
   }
-  targets = getplayers();
+  targets = getPlayers();
   if(targets.size == 1) {
     return false;
   }
@@ -427,11 +427,11 @@ function thrasherknockdownzombie(entity, zombie) {
   zombie.knockdown = 1;
   zombie.knockdown_type = "knockdown_shoved";
   zombie_to_thrasher = entity.origin - zombie.origin;
-  zombie_to_thrasher_2d = vectornormalize((zombie_to_thrasher[0], zombie_to_thrasher[1], 0));
+  zombie_to_thrasher_2d = vectorNormalize((zombie_to_thrasher[0], zombie_to_thrasher[1], 0));
   zombie_forward = anglesToForward(zombie.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(zombie.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_thrasher_2d, zombie_forward_2d);
   if(dot >= 0.5) {
     zombie.knockdown_direction = "front";
@@ -610,7 +610,7 @@ function thrasherteleport(entity) {
   teleport_point = sortedpoints[0];
   if(isDefined(teleport_point)) {
     v_dir = entity.favoriteenemy.origin - teleport_point;
-    v_dir = vectornormalize(v_dir);
+    v_dir = vectorNormalize(v_dir);
     v_angles = vectortoangles(v_dir);
     entity forceteleport(teleport_point, v_angles);
   }
@@ -768,7 +768,7 @@ function thrasherconsumeplayerutil(thrasher, player) {
   player setclientuivisibilityflag("weapon_hud_visible", 0);
   player.thrasherconsumed = 1;
   player.thrasher = thrasher;
-  player setplayercollision(0);
+  player setPlayerCollision(0);
   player walkunderwater(1);
   player.ignoreme = 1;
   player hideviewmodel();
@@ -780,8 +780,8 @@ function thrasherconsumeplayerutil(thrasher, player) {
   player thread thrasherkillthrasheronautorevive(thrasher, player);
   eyeposition = player gettagorigin("tag_eye");
   eyeoffset = (abs(eyeposition[2] - player.origin[2])) + 10;
-  thrasher.offsetmodel linkto(thrasher, "tag_camera_thrasher", (0, 0, (eyeoffset * -1) + 27));
-  player playerlinkto(thrasher.offsetmodel, undefined, 1, 0, 0, 0, 0, 1);
+  thrasher.offsetmodel linkTo(thrasher, "tag_camera_thrasher", (0, 0, (eyeoffset * -1) + 27));
+  player playerlinkTo(thrasher.offsetmodel, undefined, 1, 0, 0, 0, 0, 1);
   thrasher thread thrasherplayerdeath(thrasher, player);
   thrasher.thrasherconsumedplayer = 1;
   thrasher.thrasherplayer = player;
@@ -831,7 +831,7 @@ function thrasherreleaseplayer(thrasher, player) {
   player.thrasher = undefined;
   player walkunderwater(0);
   player unlink();
-  player setplayercollision(1);
+  player setPlayerCollision(1);
   player show();
   player.ignoreme = 0;
   player showviewmodel();

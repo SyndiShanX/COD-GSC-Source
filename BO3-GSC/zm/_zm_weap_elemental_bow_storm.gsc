@@ -167,11 +167,11 @@ function function_2d3e3c1b(e_player, var_337b3336, var_6e7a59eb, var_94d13bd0) {
   var_6e7a59eb.origin = var_9b78d768;
   var_27dc1e70 = var_9b78d768;
   var_75332e4 = self getcentroid();
-  var_21c86fc5 = vectornormalize(var_75332e4 - var_27dc1e70);
+  var_21c86fc5 = vectorNormalize(var_75332e4 - var_27dc1e70);
   var_ad60dac2 = vectortoangles(var_21c86fc5);
   var_ad60dac2 = (var_ad60dac2[0], var_ad60dac2[1], randomint(360));
   var_6e7a59eb.angles = var_ad60dac2;
-  var_6e7a59eb linkto(var_337b3336);
+  var_6e7a59eb linkTo(var_337b3336);
   wait(0.05);
   var_6e7a59eb clientfield::set("elem_storm_bolt_fx", 1);
   wait(0.2);
@@ -225,7 +225,7 @@ function function_b6e08804(e_player, var_94d13bd0) {
   if(var_94d13bd0) {
     if(self.archetype === "zombie") {
       if(zm_weap_elemental_bow::function_5aec3adc(self)) {
-        self setplayercollision(0);
+        self setPlayerCollision(0);
         self.var_98056717 = 1;
         self clientfield::set("elem_storm_shock_fx", 2);
         self scene::play("cin_zm_dlc1_zombie_dth_deathray_0" + randomintrange(1, 5), self);
@@ -249,7 +249,7 @@ function function_b6e08804(e_player, var_94d13bd0) {
   var_2f7fd5db = (var_94d13bd0 ? level.var_5d4538da : level.var_16e90d5f);
   self dodamage(n_damage, self.origin, e_player, e_player, undefined, str_damage_mod, 0, var_2f7fd5db);
   self.var_789ebfb2 = 0;
-  self setplayercollision(1);
+  self setPlayerCollision(1);
 }
 
 function function_8a5627f3(e_player, var_126c274b, var_337b3336) {
@@ -388,7 +388,7 @@ function function_50d5f4ab(e_player) {
     n_z_diff = abs(self.origin[2] - v_ground_pos[2]);
     if(n_z_diff > 0) {
       n_time = n_z_diff / 256;
-      self moveto(v_ground_pos, n_time, n_time * 0.5);
+      self moveTo(v_ground_pos, n_time, n_time * 0.5);
       wait(n_time);
     }
     v_away_from_source = undefined;
@@ -397,7 +397,7 @@ function function_50d5f4ab(e_player) {
     if(a_ai_enemies.size) {
       foreach(ai_enemy in a_ai_enemies) {
         if(bullettracepassed(ai_enemy getcentroid(), self.origin + vectorscale((0, 0, 1), 12), 0, self)) {
-          var_25cdb267 = vectornormalize(ai_enemy.origin - self.origin);
+          var_25cdb267 = vectorNormalize(ai_enemy.origin - self.origin);
           var_25cdb267 = (var_25cdb267[0], var_25cdb267[1], 0);
           v_away_from_source = var_25cdb267 * 128;
           break;
@@ -426,7 +426,7 @@ function function_50d5f4ab(e_player) {
     } else {
       v_on_navmesh = v_on_navmesh + vectorscale((0, 0, 1), 16);
     }
-    self moveto(v_on_navmesh, n_time, n_time * 0.5);
+    self moveTo(v_on_navmesh, n_time, n_time * 0.5);
     wait(n_time);
   }
 }
@@ -459,7 +459,7 @@ function function_c9b501b8(var_34137522) {
 
 function function_88b53a11(var_80242169, v_hit_origin, var_3fee16b8) {
   var_bba6e664 = anglesToForward(var_3fee16b8.angles);
-  var_3e878400 = vectornormalize(var_bba6e664 * -1);
+  var_3e878400 = vectorNormalize(var_bba6e664 * -1);
   var_75181c09 = v_hit_origin + (var_3e878400 * var_80242169);
   return var_75181c09;
 }

@@ -32,19 +32,19 @@ oafc_switch() {
   level._player_who_pressed_the_switch = entity_num;
   self.trigger trigger_off();
   self playSound("evt_sq_gen_button");
-  self moveto(self.off_pos, 0.25);
+  self moveTo(self.off_pos, 0.25);
   self waittill("movedone");
   flag_set("oafc_switch_pressed");
   level thread oafc_story_vox();
 }
 knocking_audio() {
   level endon("sq_OaFC_over");
-  struct = getstruct("sq_location_oafc", "targetname");
+  struct = getStruct("sq_location_oafc", "targetname");
   if(!isDefined(struct)) {
     return;
   }
   while(!flag("oafc_switch_pressed")) {
-    playsoundatposition("evt_sq_oafc_knock", struct.origin);
+    playSoundAtPosition("evt_sq_oafc_knock", struct.origin);
     wait(randomfloatrange(1.5, 4));
   }
 }
@@ -185,7 +185,7 @@ tile_moves_up(delay) {
   for(i = 0; i < delay; i++) {
     wait_network_frame();
   }
-  self moveto(self.original_origin, 0.25);
+  self moveTo(self.original_origin, 0.25);
 }
 set_tile_models(tiles, models) {
   for(i = 0; i < tiles.size; i++) {
@@ -239,8 +239,8 @@ oafc_trigger_thread(tiles, set) {
                   matched = true;
                   level._picked_tile1.matched = true;
                   level._picked_tile2.matched = true;
-                  level._picked_tile1 moveto(level._picked_tile1.origin - (0, 0, 24), 0.5);
-                  level._picked_tile2 moveto(level._picked_tile2.origin - (0, 0, 24), 0.5);
+                  level._picked_tile1 moveTo(level._picked_tile1.origin - (0, 0, 24), 0.5);
+                  level._picked_tile2 moveTo(level._picked_tile2.origin - (0, 0, 24), 0.5);
                   level._picked_tile1 waittill("movedone");
                   level._picked_tile1 = undefined;
                   level._picked_tile2 = undefined;
@@ -254,10 +254,10 @@ oafc_trigger_thread(tiles, set) {
                     }
                   }
                   if(level._num_matched_tiles == level._num_tiles_to_match) {
-                    struct = getstruct("sq_location_oafc", "targetname");
+                    struct = getStruct("sq_location_oafc", "targetname");
                     if(isDefined(struct)) {
-                      playsoundatposition("evt_sq_oafc_glyph_complete", struct.origin);
-                      playsoundatposition("evt_sq_oafc_kachunk", struct.origin);
+                      playSoundAtPosition("evt_sq_oafc_glyph_complete", struct.origin);
+                      playSoundAtPosition("evt_sq_oafc_kachunk", struct.origin);
                     }
                     if(isDefined(touched_player)) {}
                     level notify("suspend_timer");
@@ -372,7 +372,7 @@ exit_stage(success) {
 }
 oafc_story_vox() {
   level endon("sq_OaFC_over");
-  struct = getstruct("sq_location_oafc", "targetname");
+  struct = getStruct("sq_location_oafc", "targetname");
   if(!isDefined(struct)) {
     return;
   }

@@ -1679,7 +1679,7 @@ _id_D471() {
 
 _id_8D8B(var_0) {
   var_1 = 128;
-  var_2 = vectornormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglesToForward(self.angles));
   var_3 = var_2 * var_1;
   var_4 = self.origin + var_3;
   physicsexplosionsphere(var_4, var_1, 1, 2.5);
@@ -1698,8 +1698,8 @@ _id_8D8B(var_0) {
     var_10 = var_8.origin;
     var_11 = var_8.maxhealth;
     var_2 = anglesToForward(self.angles);
-    var_12 = vectornormalize(var_2) * -100;
-    var_8 setvelocity(vectornormalize(var_8.origin - (self.origin + var_12)) * 800 + (0, 0, 300));
+    var_12 = vectorNormalize(var_2) * -100;
+    var_8 setvelocity(vectorNormalize(var_8.origin - (self.origin + var_12)) * 800 + (0, 0, 300));
     var_8 _id_8D97(self, var_11, var_10, self.origin);
   }
 }
@@ -1951,7 +1951,7 @@ _id_10BAB() {
     var_1 = self.origin + var_0;
     var_2 = anglesToForward(self.angles);
     var_3 = anglestoright(self.angles);
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     earthquake(0.2, 0.1, self.origin, 32);
     var_4 = _id_2EB9();
     var_4 = var_4 + var_0;
@@ -2535,7 +2535,7 @@ _id_0EDF(var_0, var_1) {
   self._id_F5CD = spawn("script_model", var_0, 0, 512, 128);
   self._id_F5CD setModel("tag_origin");
   level._id_F5CE = spawn("script_model", var_0, 0, 512, 128);
-  level._id_F5CE linkto(self._id_F5CD);
+  level._id_F5CE linkTo(self._id_F5CD);
   wait 0.5;
   level._id_F5CE thread _id_F8DA();
   playFXOnTag(level._effect["twister"], self._id_F5CD, "tag_origin");
@@ -2629,7 +2629,7 @@ _id_5CFC(var_0, var_1, var_2, var_3) {
   }
   var_4 = var_1.origin - var_3.origin;
   var_5 = anglestoup(self.angles);
-  self setvelocity(vectornormalize((var_3.origin - self.origin) * 400) + (0, 0, 800));
+  self setvelocity(vectorNormalize((var_3.origin - self.origin) * 400) + (0, 0, 800));
   wait 0.16;
 
   if(isDefined(var_2)) {
@@ -2661,10 +2661,10 @@ _id_A1D7(var_0, var_1) {
       if(self._id_F8D9.size > 0) {
         if(isDefined(self._id_F8D9[0])) {
           if([[level._id_0F34]](self._id_F8D9[0])) {
-            var_0 moveto(self._id_F8D9[0], 0.5, 0.25, 0);
+            var_0 moveTo(self._id_F8D9[0], 0.5, 0.25, 0);
           } else {
             var_3 = _func_02AB(self._id_F8D9[0]) + (0, 10, 0);
-            var_0 moveto(var_3, 0.5, 0.25, 0);
+            var_0 moveTo(var_3, 0.5, 0.25, 0);
           }
 
           var_2--;
@@ -2675,7 +2675,7 @@ _id_A1D7(var_0, var_1) {
       waitframe();
       continue;
     } else
-      var_0 moveto(self._id_F8D9[var_2], 0.5, 0, 0);
+      var_0 moveTo(self._id_F8D9[var_2], 0.5, 0, 0);
 
     var_2 = var_2 + 1;
     waitframe();
@@ -3101,7 +3101,7 @@ _id_FDBF(var_0) {
   _id_0737::_id_C1A2();
   _id_0753::_id_BAA4();
   self _meth_80FC();
-  self setorigin(var_9.origin);
+  self setOrigin(var_9.origin);
   self setplayerangles(var_9.angles);
   self notify("left_hidden_room_early");
   scripts\cp\utility::_id_A689("anywhere_but_here");
@@ -3118,7 +3118,7 @@ _id_8CA6(var_0) {
     level.players[0] _id_0737::_id_C1A2();
     level.players[0] _id_0753::_id_BAA4();
     level.players[0] _meth_80FC();
-    level.players[0] setorigin(var_2.origin);
+    level.players[0] setOrigin(var_2.origin);
     level.players[0] setplayerangles(var_2.angles);
     wait 2;
   }

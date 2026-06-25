@@ -124,7 +124,7 @@ main(var_0) {
   var_8 = getallnodes();
 
   if(var_8.size) {
-    level.player setorigin(maps\_utility::_id_0AE9(level.player.origin, var_8).origin);
+    level.player setOrigin(maps\_utility::_id_0AE9(level.player.origin, var_8).origin);
   }
   for(;;) {
     wait 0.05;
@@ -503,7 +503,7 @@ _id_1B72() {
 _id_1B73(var_0) {
   var_1 = level._id_1B57;
   var_2 = var_1["position"];
-  var_3 = 16 * vectornormalize(var_1["normal"]);
+  var_3 = 16 * vectorNormalize(var_1["normal"]);
   var_4 = var_2 + var_3;
   var_5 = _id_1B74(var_4, var_0);
 
@@ -523,12 +523,12 @@ _id_1B74(var_0, var_1) {
   var_4 = var_0;
   var_5 = var_4;
   var_6 = 32;
-  var_7 = 16 * var_3 * vectornormalize(anglestoright(var_1));
+  var_7 = 16 * var_3 * vectorNormalize(anglestoright(var_1));
 
   for(var_8 = 1; var_8 < 15; var_8++) {
     var_4 = var_5;
     var_0 = var_4;
-    var_9 = var_8 * var_6 * var_3 * vectornormalize(anglestoright(var_1));
+    var_9 = var_8 * var_6 * var_3 * vectorNormalize(anglestoright(var_1));
     var_10 = _id_1B80(var_0, var_0 + var_9, 0);
     var_0 = var_0 + var_10["fraction"] * var_9;
 
@@ -537,7 +537,7 @@ _id_1B74(var_0, var_1) {
     } else {}
 
     var_4 = var_0;
-    var_11 = 32 * vectornormalize(anglesToForward(var_1));
+    var_11 = 32 * vectorNormalize(anglesToForward(var_1));
     var_10 = _id_1B80(var_0, var_0 + var_11, 0);
     var_12 = var_10["fraction"];
 

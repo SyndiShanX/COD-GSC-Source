@@ -1039,7 +1039,7 @@ _id_1951(var_0, var_1, var_2, var_3) {
     var_4 = distance(var_0, var_1);
   }
   var_4 = max(0.01, var_4);
-  var_5 = vectornormalize(var_1 - var_0);
+  var_5 = vectorNormalize(var_1 - var_0);
   var_6 = var_2 - var_0;
   var_7 = vectordot(var_6, var_5);
   var_7 = var_7 / var_4;
@@ -1062,7 +1062,7 @@ _id_260A(var_0, var_1) {
 
 _id_260B(var_0) {
   var_1 = anglesToForward(self.angles);
-  var_2 = vectornormalize(var_0 - self.origin);
+  var_2 = vectorNormalize(var_0 - self.origin);
   var_3 = vectordot(var_1, var_2);
   return var_3 > 0.766;
 }
@@ -1498,11 +1498,11 @@ play_sound_on_tag(var_0, var_1, var_2, var_3, var_4) {
   thread _id_2624(var_5, "sounddone");
 
   if(isDefined(var_1)) {
-    var_5 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_5 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   } else {
     var_5.origin = self.origin;
     var_5.angles = self.angles;
-    var_5 linkto(self);
+    var_5 linkTo(self);
   }
 
   var_5 playSound(var_0, "sounddone");
@@ -1540,11 +1540,11 @@ _id_258E(var_0, var_1, var_2) {
     thread common_scripts\utility::delete_on_death(var_3);
   }
   if(isDefined(var_1)) {
-    var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   } else {
     var_3.origin = self.origin;
     var_3.angles = self.angles;
-    var_3 linkto(self);
+    var_3 linkTo(self);
   }
 
   var_3 playLoopSound(var_0);
@@ -1633,7 +1633,7 @@ _id_1287(var_0, var_1) {
 }
 
 _id_262B(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return;
@@ -1644,7 +1644,7 @@ _id_262B(var_0, var_1) {
 }
 
 _id_262C(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -1708,7 +1708,7 @@ _id_2634(var_0) {
   if(common_scripts\utility::flag(var_0)) {
     return;
   }
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
   common_scripts\utility::flag_set(var_0);
 }
@@ -2520,7 +2520,7 @@ _id_2051() {
     var_1 = common_scripts\utility::get_links();
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_3 = common_scripts\utility::getstruct(var_1[var_2], "script_linkname");
+      var_3 = common_scripts\utility::getStruct(var_1[var_2], "script_linkname");
 
       if(isDefined(var_3)) {
         var_0[var_0.size] = var_3;
@@ -2546,10 +2546,10 @@ _id_266B(var_0) {
           var_1 = getnode(var_1.target, "targetname");
           break;
         case "ent":
-          var_1 = getent(var_1.target, "targetname");
+          var_1 = getEnt(var_1.target, "targetname");
           break;
         case "struct":
-          var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
+          var_1 = common_scripts\utility::getStruct(var_1.target, "targetname");
           break;
         default:
       }
@@ -2566,7 +2566,7 @@ _id_266B(var_0) {
 
 _id_266C(var_0) {
   var_1 = spawn("script_origin", level.player.origin);
-  var_1 linkto(level.player);
+  var_1 linkTo(level.player);
 
   if(isDefined(var_0)) {
     thread timeout(var_0);
@@ -3164,7 +3164,7 @@ flashrumbleloop(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -3534,7 +3534,7 @@ _id_26AA(var_0, var_1, var_2, var_3) {
 }
 
 within_fov(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_2 - var_0);
+  var_4 = vectorNormalize(var_2 - var_0);
   var_5 = anglesToForward(var_1);
   var_6 = vectordot(var_5, var_4);
   return var_6 >= var_3;
@@ -3544,14 +3544,14 @@ _id_26AB(var_0, var_1, var_2, var_3) {
   var_0 = _id_27A7(var_0, 0);
   var_2 = _id_27A7(var_2, 0);
   var_1 = (0, var_1[1], 0);
-  var_4 = vectornormalize(var_2 - var_0);
+  var_4 = vectorNormalize(var_2 - var_0);
   var_5 = anglesToForward(var_1);
   var_6 = vectordot(var_5, var_4);
   return var_6 >= var_3;
 }
 
 _id_26AC(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = anglesToForward(var_1);
   var_5 = vectordot(var_4, var_3);
   return var_5;
@@ -3627,7 +3627,7 @@ _id_26AF(var_0, var_1) {
 _id_11F4(var_0, var_1) {
   if(!isDefined(level._id_26B0)) {
     var_2 = spawn("script_origin", (0, 0, 0));
-    var_2 linkto(level.player, "", (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level._id_26B0 = var_2;
   }
 
@@ -3663,7 +3663,7 @@ _id_26B2() {
 _id_26B3(var_0) {
   if(!isDefined(level._id_26B0)) {
     var_1 = spawn("script_origin", (0, 0, 0));
-    var_1 linkto(level.player, "", (0, 0, 0), (0, 0, 0));
+    var_1 linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level._id_26B0 = var_1;
   }
 
@@ -3836,32 +3836,32 @@ _id_211C(var_0) {
 }
 
 _id_26BF(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 _id_2703();
 }
 
 _id_26C0(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 _id_2703();
 }
 
 _id_26C1(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 common_scripts\utility::trigger_off();
 }
 
 _id_26C2(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 common_scripts\utility::trigger_off();
 }
 
 _id_26C3(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 common_scripts\utility::trigger_on();
 }
 
 _id_26C4(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 common_scripts\utility::trigger_on();
 }
 
@@ -4795,16 +4795,16 @@ _id_13E2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_10.angles = var_9 getplayerangles();
 
   if(isDefined(var_8) && var_8) {
-    var_9 playerlinkto(var_10, "", var_3, var_4, var_5, var_6, var_7, var_8);
+    var_9 playerlinkTo(var_10, "", var_3, var_4, var_5, var_6, var_7, var_8);
   } else if(isDefined(var_4)) {
-    var_9 playerlinkto(var_10, "", var_3, var_4, var_5, var_6, var_7);
+    var_9 playerlinkTo(var_10, "", var_3, var_4, var_5, var_6, var_7);
   } else if(isDefined(var_3)) {
-    var_9 playerlinkto(var_10, "", var_3);
+    var_9 playerlinkTo(var_10, "", var_3);
   } else {
-    var_9 playerlinkto(var_10);
+    var_9 playerlinkTo(var_10);
   }
-  var_10 moveto(var_0, var_2, var_2 * 0.25);
-  var_10 rotateto(var_1, var_2, var_2 * 0.25);
+  var_10 moveTo(var_0, var_2, var_2 * 0.25);
+  var_10 rotateTo(var_1, var_2, var_2 * 0.25);
   wait(var_2);
   var_10 delete();
 }
@@ -4828,8 +4828,8 @@ _id_13E4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   } else {
     var_9 playerlinktodelta(var_10);
   }
-  var_10 moveto(var_0, var_2, var_2 * 0.25);
-  var_10 rotateto(var_1, var_2, var_2 * 0.25);
+  var_10 moveTo(var_0, var_2, var_2 * 0.25);
+  var_10 rotateTo(var_1, var_2, var_2 * 0.25);
   wait(var_2);
   var_10 delete();
 }
@@ -4998,7 +4998,7 @@ _id_271D() {
     return;
   }
   self.realorigin = self getorigin();
-  self moveto(self.realorigin + (0, 0, -10000), 0.2);
+  self moveTo(self.realorigin + (0, 0, -10000), 0.2);
   self._id_271D = 1;
 }
 
@@ -5006,7 +5006,7 @@ _id_271E() {
   if(!isDefined(self._id_271D)) {
     return;
   }
-  self moveto(self.realorigin, 0.2);
+  self moveTo(self.realorigin, 0.2);
   self waittill("movedone");
   self._id_271D = undefined;
 }
@@ -5184,13 +5184,13 @@ _id_272D(var_0, var_1, var_2, var_3) {
 }
 
 _id_272E(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   var_3 = var_2 _id_166F(var_1);
   return var_3;
 }
 
 _id_272F(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 _id_166F(var_1);
   return var_3;
 }
@@ -5349,10 +5349,10 @@ _id_273A(var_0) {
   } else {
     self playSound("door_wood_slow_open");
   }
-  self rotateto(self.angles + (0, 70, 0), 2, 0.5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, 0.5, 0);
   self connectpaths();
   self waittill("rotatedone");
-  self rotateto(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 _id_273B(var_0) {
@@ -5363,10 +5363,10 @@ _id_273B(var_0) {
   } else {
     self playSound("door_wood_slow_open");
   }
-  self rotateto(self.angles + (0, 70, 0), 2, 0.5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, 0.5, 0);
   self connectpaths();
   self waittill("rotatedone");
-  self rotateto(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 _id_273C(var_0, var_1) {
@@ -5405,7 +5405,7 @@ _id_2740() {
 }
 
 _id_1414() {
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("stop_loop");
   self notify("single anim", "end");
   self notify("looping anim", "end");
@@ -5471,21 +5471,21 @@ _id_2747(var_0) {
 
 _id_2533(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
-    self linkto(var_0, var_1, var_2, var_3);
+    self linkTo(var_0, var_1, var_2, var_3);
     return;
   }
 
   if(isDefined(var_2)) {
-    self linkto(var_0, var_1, var_2);
+    self linkTo(var_0, var_1, var_2);
     return;
   }
 
   if(isDefined(var_1)) {
-    self linkto(var_0, var_1);
+    self linkTo(var_0, var_1);
     return;
   }
 
-  self linkto(var_0);
+  self linkTo(var_0);
 }
 
 _id_2748(var_0, var_1, var_2) {
@@ -6551,13 +6551,13 @@ _id_2784(var_0) {
     } else if(var_8 == level._id_1337) {
       var_3 = var_2;
     }
-    var_8 setorigin(var_3.origin);
+    var_8 setOrigin(var_3.origin);
     var_8 setplayerangles(var_3.angles);
   }
 }
 
 _id_1FDF(var_0) {
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
 
   if(isDefined(var_0.angles)) {
     level.player setplayerangles(var_0.angles);
@@ -6971,7 +6971,7 @@ _id_2281(var_0, var_1, var_2) {
 
 _id_279F(var_0) {
   if(isPlayer(self)) {
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
     self setplayerangles(var_0.angles);
   } else {
     self forceteleport(var_0.origin, var_0.angles);
@@ -6984,7 +6984,7 @@ _id_27A0(var_0, var_1) {
   self dontinterpolate();
 
   if(isPlayer(self)) {
-    self setorigin(var_2);
+    self setOrigin(var_2);
     self setplayerangles(var_3);
   } else if(isai(self)) {
     self forceteleport(var_2, var_3);
@@ -7032,7 +7032,7 @@ _id_1EC5(var_0, var_1, var_2) {
   if(var_4) {
     var_3 playerlinktoblend(var_5, undefined, 1);
   } else {
-    var_3 playerlinkto(var_5);
+    var_3 playerlinkTo(var_5);
   }
   var_3 disableweapons();
   var_3 allowprone(0);
@@ -7321,7 +7321,7 @@ _id_27B7(var_0, var_1, var_2, var_3) {
   }
   if(isDefined(var_7["rumble"])) {
     var_11 = _id_09A9();
-    var_11 playrumbleonentity(var_7["rumble"]);
+    var_11 playRumbleOnEntity(var_7["rumble"]);
   }
 }
 
@@ -7435,7 +7435,7 @@ _id_27BF(var_0, var_1, var_2, var_3) {
   var_5 = spawnturret("misc_turret", var_4, var_3);
   var_5.angles = var_0 gettagangles(var_1);
   var_5 setModel("tag_turret");
-  var_5 linkto(var_0, var_1, var_2, (0, 0, 0));
+  var_5 linkTo(var_0, var_1, var_2, (0, 0, 0));
   var_5 makeunusable();
   var_5 hide();
   var_5 setmode("manual");
@@ -7541,7 +7541,7 @@ _id_27C6() {
       self solid();
 
       if(self.spawnflags & 1) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
       break;
     case "trigger_multiple_flag_looking":
@@ -7560,11 +7560,11 @@ _id_27C6() {
 
 _id_27C7(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
-    self rotateyaw(var_0, var_1, var_2, var_3);
+    self rotateYaw(var_0, var_1, var_2, var_3);
   } else if(isDefined(var_2)) {
-    self rotateyaw(var_0, var_1, var_2);
+    self rotateYaw(var_0, var_1, var_2);
   } else {
-    self rotateyaw(var_0, var_1);
+    self rotateYaw(var_0, var_1);
   }
 }
 
@@ -8142,7 +8142,7 @@ _id_27E5(var_0) {
 }
 
 _id_27E6(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2 _id_27E5(var_1);
 }
 
@@ -8200,9 +8200,9 @@ _id_27ED(var_0) {
   if(isDefined(var_0)) {
     self._id_1DC9 = var_0;
   } else {
-    self._id_1DC9 = getent(self.target, "targetname");
+    self._id_1DC9 = getEnt(self.target, "targetname");
   }
-  self linkto(self._id_1DC9);
+  self linkTo(self._id_1DC9);
 }
 
 _id_27EE() {
@@ -8241,12 +8241,12 @@ _id_27F0() {
 }
 
 _id_27F1(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;
   }
-  return common_scripts\utility::getstruct(var_0, var_1);
+  return common_scripts\utility::getStruct(var_0, var_1);
 }
 
 grenade_earthquake() {
@@ -8288,9 +8288,9 @@ _id_27F4(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_1 allowprone(0);
   var_1 disableweapons();
   var_6 = common_scripts\utility::spawn_tag_origin();
-  var_6 linkto(self, "tag_passenger", _id_27F7(var_0), (0, 0, 0));
+  var_6 linkTo(self, "tag_passenger", _id_27F7(var_0), (0, 0, 0));
   var_6._id_27F5 = common_scripts\utility::spawn_tag_origin();
-  var_6._id_27F5 linkto(self, "tag_body", _id_27F8(var_0), (0, 0, 0));
+  var_6._id_27F5 linkTo(self, "tag_body", _id_27F8(var_0), (0, 0, 0));
 
   if(!isDefined(var_2)) {
     var_2 = 90;
@@ -8305,7 +8305,7 @@ _id_27F4(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_5 = 40;
   }
   var_1 disableweapons();
-  var_1 playerlinkto(var_6, "tag_origin", 0.8, var_2, var_3, var_4, var_5);
+  var_1 playerlinkTo(var_6, "tag_origin", 0.8, var_2, var_3, var_4, var_5);
   var_1._id_27F6 = var_6;
   return var_6;
 }
@@ -8348,7 +8348,7 @@ _id_27F9(var_0) {
 
   if(!var_0) {
     var_3 = 0.6;
-    var_1 moveto(var_1._id_27F5.origin, var_3, var_3 * 0.5, var_3 * 0.5);
+    var_1 moveTo(var_1._id_27F5.origin, var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
   }
 
@@ -8379,9 +8379,9 @@ _id_2327(var_0) {
 }
 
 _id_27FB(var_0) {
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = [];
@@ -8774,7 +8774,7 @@ _id_2822(var_0, var_1) {
 }
 
 _id_2823(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   var_2 notify("new_volume_command");
   var_2 endon("new_volume_command");
   wait 0.05;
@@ -8820,7 +8820,7 @@ _id_2826(var_0) {
 }
 
 _id_2827(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 notify("new_volume_command");
   var_1 endon("new_volume_command");
   wait 0.05;
@@ -8944,9 +8944,9 @@ _id_2833(var_0, var_1, var_2) {
   }
   var_3 = distance(self.origin, var_0);
   var_4 = var_3 / var_2;
-  var_5 = vectornormalize(var_0 - self.origin);
-  self moveto(var_0, var_4, 0, 0);
-  self rotateto(var_1, var_4, 0, 0);
+  var_5 = vectorNormalize(var_0 - self.origin);
+  self moveTo(var_0, var_4, 0, 0);
+  self rotateTo(var_1, var_4, 0, 0);
   wait(var_4);
 
   if(!isDefined(self)) {
@@ -9081,7 +9081,7 @@ _id_2122(var_0, var_1) {
 }
 
 _id_283B(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, var_1);
+  var_2 = common_scripts\utility::getStruct(var_0, var_1);
   _id_283A(var_2);
   return var_2;
 }

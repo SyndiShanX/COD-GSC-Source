@@ -60,7 +60,7 @@ init_minigun_ring() {
   if(isDefined(level._minigun_ring)) {
     return;
   }
-  ring_pos = getstruct(level._meat_location + "_meat_minigun", "script_noteworthy");
+  ring_pos = getStruct(level._meat_location + "_meat_minigun", "script_noteworthy");
 
   if(!isDefined(ring_pos)) {
     return;
@@ -68,22 +68,22 @@ init_minigun_ring() {
   level._minigun_ring = spawn("script_model", ring_pos.origin);
   level._minigun_ring.angles = ring_pos.angles;
   level._minigun_ring setModel(ring_pos.script_parameters);
-  level._minigun_ring_clip = getent(level._meat_location + "_meat_minigun_clip", "script_noteworthy");
+  level._minigun_ring_clip = getEnt(level._meat_location + "_meat_minigun_clip", "script_noteworthy");
 
   if(isDefined(level._minigun_ring_clip)) {
-    level._minigun_ring_clip linkto(level._minigun_ring);
+    level._minigun_ring_clip linkTo(level._minigun_ring);
   } else {
     iprintlnbold("BUG: no level._minigun_ring_clip");
   }
 
-  level._minigun_ring_trig = getent(level._meat_location + "_meat_minigun_trig", "targetname");
+  level._minigun_ring_trig = getEnt(level._meat_location + "_meat_minigun_trig", "targetname");
 
   if(isDefined(level._minigun_ring_trig)) {
-    level._minigun_ring_trig enablelinkto();
-    level._minigun_ring_trig linkto(level._minigun_ring);
+    level._minigun_ring_trig enablelinkTo();
+    level._minigun_ring_trig linkTo(level._minigun_ring);
     level._minigun_icon = spawn("script_model", level._minigun_ring_trig.origin);
     level._minigun_icon setModel(getweaponmodel("minigun_zm"));
-    level._minigun_icon linkto(level._minigun_ring);
+    level._minigun_icon linkTo(level._minigun_ring);
     level._minigun_icon setclientfield("ring_glowfx", 1);
     level thread ring_toss(level._minigun_ring_trig, "minigun");
   } else
@@ -98,7 +98,7 @@ init_ammo_ring() {
     return;
   }
   name = level._meat_location + "_meat_ammo";
-  ring_pos = getstruct(name, "script_noteworthy");
+  ring_pos = getStruct(name, "script_noteworthy");
 
   if(!isDefined(ring_pos)) {
     return;
@@ -107,23 +107,23 @@ init_ammo_ring() {
   level._ammo_ring.angles = ring_pos.angles;
   level._ammo_ring setModel(ring_pos.script_parameters);
   name = level._meat_location + "_meat_ammo_clip";
-  level._ammo_ring_clip = getent(name, "script_noteworthy");
+  level._ammo_ring_clip = getEnt(name, "script_noteworthy");
 
   if(isDefined(level._ammo_ring_clip)) {
-    level._ammo_ring_clip linkto(level._ammo_ring);
+    level._ammo_ring_clip linkTo(level._ammo_ring);
   } else {
     iprintlnbold("BUG: no level._ammo_ring_clip");
   }
 
   name = level._meat_location + "_meat_ammo_trig";
-  level._ammo_ring_trig = getent(name, "targetname");
+  level._ammo_ring_trig = getEnt(name, "targetname");
 
   if(isDefined(level._ammo_ring_clip)) {
-    level._ammo_ring_trig enablelinkto();
-    level._ammo_ring_trig linkto(level._ammo_ring);
+    level._ammo_ring_trig enablelinkTo();
+    level._ammo_ring_trig linkTo(level._ammo_ring);
     level._ammo_icon = spawn("script_model", level._ammo_ring_trig.origin);
     level._ammo_icon setModel("zombie_ammocan");
-    level._ammo_icon linkto(level._ammo_ring);
+    level._ammo_icon linkTo(level._ammo_ring);
     level._ammo_icon setclientfield("ring_glowfx", 1);
     level thread ring_toss(level._ammo_ring_trig, "ammo");
   } else
@@ -137,7 +137,7 @@ init_splitter_ring() {
   if(isDefined(level._splitter_ring)) {
     return;
   }
-  ring_pos = getstruct(level._meat_location + "_meat_splitter", "script_noteworthy");
+  ring_pos = getStruct(level._meat_location + "_meat_splitter", "script_noteworthy");
 
   if(!isDefined(ring_pos)) {
     return;
@@ -145,24 +145,24 @@ init_splitter_ring() {
   level._splitter_ring = spawn("script_model", ring_pos.origin);
   level._splitter_ring.angles = ring_pos.angles;
   level._splitter_ring setModel(ring_pos.script_parameters);
-  level._splitter_ring_trig1 = getent(level._meat_location + "_meat_splitter_trig_1", "targetname");
-  level._splitter_ring_trig2 = getent(level._meat_location + "_meat_splitter_trig_2", "targetname");
+  level._splitter_ring_trig1 = getEnt(level._meat_location + "_meat_splitter_trig_1", "targetname");
+  level._splitter_ring_trig2 = getEnt(level._meat_location + "_meat_splitter_trig_2", "targetname");
 
   if(isDefined(level._splitter_ring_trig1) && isDefined(level._splitter_ring_trig2)) {
-    level._splitter_ring_trig1 enablelinkto();
-    level._splitter_ring_trig2 enablelinkto();
+    level._splitter_ring_trig1 enablelinkTo();
+    level._splitter_ring_trig2 enablelinkTo();
   } else
     iprintlnbold("BUG: missing at least one level._splitter_ring_trig");
 
   level._splitter_ring notsolid();
   level._meat_icon = spawn("script_model", level._splitter_ring.origin);
   level._meat_icon setModel(getweaponmodel(get_gamemode_var("item_meat_name")));
-  level._meat_icon linkto(level._splitter_ring);
+  level._meat_icon linkTo(level._splitter_ring);
   level._meat_icon setclientfield("ring_glow_meatfx", 1);
 
   if(isDefined(level._splitter_ring_trig1) && isDefined(level._splitter_ring_trig2)) {
-    level._splitter_ring_trig1 linkto(level._splitter_ring);
-    level._splitter_ring_trig2 linkto(level._splitter_ring);
+    level._splitter_ring_trig1 linkTo(level._splitter_ring);
+    level._splitter_ring_trig2 linkTo(level._splitter_ring);
     level thread ring_toss(level._splitter_ring_trig1, "splitter");
     level thread ring_toss(level._splitter_ring_trig2, "splitter");
   }
@@ -218,8 +218,8 @@ meat_splitter(trig) {
     wait 0.05;
   }
 
-  exit_trig = getent(trig.target, "targetname");
-  exit_struct = getstruct(trig.target, "targetname");
+  exit_trig = getEnt(trig.target, "targetname");
+  exit_struct = getStruct(trig.target, "targetname");
 
   while(isDefined(level.item_meat) && !level.item_meat istouching(exit_trig)) {
     wait 0.05;
@@ -233,7 +233,7 @@ meat_splitter(trig) {
     return;
   }
   playFX(level._effect["fw_burst"], exit_trig.origin);
-  flare_dir = vectornormalize(anglesToForward(exit_struct.angles));
+  flare_dir = vectorNormalize(anglesToForward(exit_struct.angles));
   velocity = vectorscale(flare_dir, randomintrange(400, 600));
   velocity1 = (velocity[0] + 75, velocity[1] + 75, randomintrange(75, 125));
   velocity2 = (velocity[0] - 75, velocity[1] - 75, randomintrange(75, 125));
@@ -330,7 +330,7 @@ minigun_toss_cooldown() {
   playFX(level._effect["poltergeist"], level._minigun_ring_trig.origin);
   level._minigun_icon = spawn("script_model", level._minigun_ring_trig.origin);
   level._minigun_icon setModel(getweaponmodel("minigun_zm"));
-  level._minigun_icon linkto(level._minigun_ring);
+  level._minigun_icon linkTo(level._minigun_ring);
   level._minigun_icon setclientfield("ring_glowfx", 1);
   level._minigun_toss_cooldown = 0;
 }
@@ -346,7 +346,7 @@ ammo_toss_cooldown() {
   playFX(level._effect["poltergeist"], level._ammo_ring_trig.origin);
   level._ammo_icon = spawn("script_model", level._ammo_ring_trig.origin);
   level._ammo_icon setModel("zombie_ammocan");
-  level._ammo_icon linkto(level._ammo_ring);
+  level._ammo_icon linkTo(level._ammo_ring);
   level._ammo_icon setclientfield("ring_glowfx", 1);
   level._ammo_toss_cooldown = 0;
 }
@@ -471,7 +471,7 @@ revive_saved_player(player) {
   player playSound(level.zmb_laugh_alias);
   wait 0.25;
   playFX(level._effect["poltergeist"], player.origin);
-  playsoundatposition("zmb_bolt", player.origin);
+  playSoundAtPosition("zmb_bolt", player.origin);
   earthquake(0.5, 0.75, player.origin, 1000);
   player thread maps\mp\zombies\_zm_laststand::auto_revive(player);
   player._saved_by_throw++;
@@ -487,7 +487,7 @@ item_meat_spawn(origin) {
   player = get_players()[0];
   player._spawning_meat = 1;
   player magicgrenadetype(get_gamemode_var("item_meat_name"), org, (0, 0, 0));
-  playsoundatposition("zmb_spawn_powerup", org);
+  playSoundAtPosition("zmb_spawn_powerup", org);
   wait 0.1;
   player._spawning_meat = undefined;
 }
@@ -531,11 +531,11 @@ launch_meat(launch_spot) {
     dest = spot;
 
     while(isDefined(dest) && isDefined(dest.target)) {
-      new_dest = getstruct(dest.target, "targetname");
+      new_dest = getStruct(dest.target, "targetname");
       dest = new_dest;
       dist = distance(new_dest.origin, meat.origin);
       time = dist / 700;
-      meat moveto(new_dest.origin, time);
+      meat moveTo(new_dest.origin, time);
       meat waittill("movedone");
     }
 
@@ -588,11 +588,11 @@ fake_launch(launch_spot, delay) {
 
   while(isDefined(dest) && isDefined(dest.target)) {
     random_offset = (randomintrange(-60, 60), randomintrange(-60, 60), 0);
-    new_dest = getstruct(dest.target, "targetname");
+    new_dest = getStruct(dest.target, "targetname");
     dest = new_dest;
     dist = distance(new_dest.origin + random_offset, meat.origin);
     time = dist / 700;
-    meat moveto(new_dest.origin + random_offset, time);
+    meat moveTo(new_dest.origin + random_offset, time);
     meat waittill("movedone");
   }
 
@@ -607,7 +607,7 @@ drop_meat(drop_spot) {
   dist = distance(meat.origin, drop_spot);
   time = dist / 400;
   wait 2;
-  meat moveto(drop_spot, time);
+  meat moveTo(drop_spot, time);
   wait_network_frame();
   playFXOnTag(level._effect["fw_drop"], meat, "tag_origin");
   meat waittill("movedone");

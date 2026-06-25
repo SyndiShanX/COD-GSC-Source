@@ -53,14 +53,14 @@ function_f6048ee(e_player) {
   if(isDefined(e_player)) {
     if(!isDefined(level.var_ae5fb719.e_player)) {
       if(isDefined(e_player.var_9c20e2c9)) {
-        self sethintstring(#"hash_744b68f010abb05");
+        self setHintString(#"hash_744b68f010abb05");
       } else {
-        self sethintstring(#"hash_12346bdab086516e");
+        self setHintString(#"hash_12346bdab086516e");
       }
     } else if(level.var_ae5fb719.e_player == e_player) {
-      self sethintstring(#"hash_74fc96e8d58ff646");
+      self setHintString(#"hash_74fc96e8d58ff646");
     } else {
-      self sethintstring(#"hash_2054e8fdb6521566");
+      self setHintString(#"hash_2054e8fdb6521566");
     }
 
     return true;
@@ -91,7 +91,7 @@ start_step_1() {
   }
 
   level.var_ae5fb719.var_fead3ae9 = util::spawn_model("p8_zm_whi_fuse_pickup_empty", level.var_ae5fb719.s_start.origin, level.var_ae5fb719.s_start.angles);
-  e_drawer = getent(level.var_ae5fb719.s_start.target, "targetname");
+  e_drawer = getEnt(level.var_ae5fb719.s_start.target, "targetname");
 
   if(!isDefined(e_drawer.b_open)) {
     e_drawer setCanDamage(1);
@@ -128,9 +128,9 @@ function_c0fc92d2() {
   self endon(#"death");
   exploder::stop_exploder("fxexp_mk2_x_smoke_emit_" + level.var_ae5fb719.s_start.exploder_id);
   v_dest = self.origin + 8 * self.open_dir;
-  level.var_ae5fb719.var_fead3ae9 linkto(self);
+  level.var_ae5fb719.var_fead3ae9 linkTo(self);
   self playSound("zmb_ee_drawer_open");
-  self moveto(v_dest, 0.1);
+  self moveTo(v_dest, 0.1);
   self waittill(#"movedone");
   level.var_ae5fb719.var_fead3ae9 unlink();
   level.var_ae5fb719.s_start.origin = level.var_ae5fb719.var_fead3ae9.origin;
@@ -331,7 +331,7 @@ function_473f437() {
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");
-    playsoundatposition("evt_rgun_frame_putback", (-223, -1658, -178));
+    playSoundAtPosition("evt_rgun_frame_putback", (-223, -1658, -178));
 
     if(function_18a1849f(s_notify.e_who)) {
       level.var_ae5fb719.var_fead3ae9 = util::spawn_model("p8_zm_whi_fuse_pickup_fluid_purple_half", self.origin, self.angles);
@@ -381,9 +381,9 @@ function_17f3e9e2() {
 function_7015dc35(e_player) {
   if(isDefined(e_player)) {
     if(level.var_ae5fb719.e_player === e_player) {
-      self sethintstring(#"hash_14eae7c162ebb8d2");
+      self setHintString(#"hash_14eae7c162ebb8d2");
     } else {
-      self sethintstring(#"hash_2054e8fdb6521566");
+      self setHintString(#"hash_2054e8fdb6521566");
     }
 
     return true;

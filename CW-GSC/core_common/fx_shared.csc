@@ -494,7 +494,7 @@ function trace_distance() {
     playerangles = var_a6cb20ff;
   }
 
-  playerforward = vectornormalize(anglesToForward(playerangles));
+  playerforward = vectorNormalize(anglesToForward(playerangles));
   trace = bulletTrace(playereye, playereye + playerforward * tracedist, 1, self);
   dist = distance(playereye, trace[#"position"]);
 

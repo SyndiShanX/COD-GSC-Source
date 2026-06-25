@@ -19,11 +19,11 @@
 setup_nixie_tubes_puzzle() {
   level.a_nixie_tube_code = [];
   level.a_nixie_tube_solution = [];
-  t_elevator_door = getent("nixie_elevator_door", "targetname");
+  t_elevator_door = getEnt("nixie_elevator_door", "targetname");
   t_elevator_door trigger_off();
   m_rigging = get_craftable_piece_model("plane", "rigging");
-  m_citadel_elevator = getent("citadel_elevator", "targetname");
-  m_rigging linkto(m_citadel_elevator);
+  m_citadel_elevator = getEnt("citadel_elevator", "targetname");
+  m_rigging linkTo(m_citadel_elevator);
   level thread nixie_tube_notifier();
   level thread nixie_tube_elevator_door();
 
@@ -32,15 +32,15 @@ setup_nixie_tubes_puzzle() {
     n_code = nixie_tube_add_code(level.a_nixie_tube_solution[1], level.a_nixie_tube_solution[2], level.a_nixie_tube_solution[3]);
 
     for(i = 1; i < 4; i++) {
-      m_nixie_tube = getent("nixie_tube_" + i, "targetname");
+      m_nixie_tube = getEnt("nixie_tube_" + i, "targetname");
       m_nixie_tube thread nixie_tube_thread(i);
-      m_nixie_clue = getent("nixie_clue_" + i, "script_noteworthy");
+      m_nixie_clue = getEnt("nixie_clue_" + i, "script_noteworthy");
 
       for(j = 0; j < 10; j++) {
         m_nixie_clue hidepart("J_" + j);
       }
 
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         if(isDefined(player) && (isDefined(player.afterlife) && player.afterlife)) {
@@ -56,11 +56,11 @@ setup_nixie_tubes_puzzle() {
     nixie_tube_remove_code(n_code);
 
     for(i = 1; i < 4; i++) {
-      m_nixie_clue = getent("nixie_clue_" + i, "script_noteworthy");
+      m_nixie_clue = getEnt("nixie_clue_" + i, "script_noteworthy");
       m_nixie_clue setinvisibletoall();
     }
 
-    nixie_tube_2 = getent("nixie_tube_2", "targetname");
+    nixie_tube_2 = getEnt("nixie_tube_2", "targetname");
     nixie_tube_2 playSound("zmb_quest_nixie_success");
     level thread nixie_tube_elevator_drops();
     nixie_tube_win_effects_all_tubes(0, 6, 0);
@@ -69,7 +69,7 @@ setup_nixie_tubes_puzzle() {
     level thread sndnixietubecountdown(n_countdown);
 
     for(i = 1; i < 4; i++) {
-      m_nixie_tube = getent("nixie_tube_" + i, "targetname");
+      m_nixie_tube = getEnt("nixie_tube_" + i, "targetname");
       level notify("nixie_tube_trigger_" + i);
       m_nixie_tube thread nixie_tube_thread_play_countdown(i, n_countdown);
     }
@@ -78,7 +78,7 @@ setup_nixie_tubes_puzzle() {
     flag_wait("nixie_countdown_expired");
 
     if(!flag("nixie_puzzle_completed")) {
-      t_elevator_door = getent("nixie_elevator_door", "targetname");
+      t_elevator_door = getEnt("nixie_elevator_door", "targetname");
       t_elevator_door trigger_off();
       flag_clear("nixie_countdown_started");
       flag_clear("nixie_countdown_expired");
@@ -87,7 +87,7 @@ setup_nixie_tubes_puzzle() {
     }
   }
 
-  m_nixie_tube = getent("nixie_tube_2", "targetname");
+  m_nixie_tube = getEnt("nixie_tube_2", "targetname");
   m_nixie_tube playSound("zmb_quest_nixie_success");
 
   iprintlnbold("nixie puzzle solved!");
@@ -99,7 +99,7 @@ setup_nixie_tubes_puzzle() {
   stop_exploder(3600);
 
   for(i = 1; i < 4; i++) {
-    m_nixie_tube = getent("nixie_tube_" + i, "targetname");
+    m_nixie_tube = getEnt("nixie_tube_" + i, "targetname");
     m_nixie_tube thread afterlife_interact_object_think();
     m_nixie_tube thread nixie_tube_thread(i);
   }
@@ -195,7 +195,7 @@ nixie_tube_remove_code(a, b, c) {
 
 sndnixietubecountdown(num) {
   level endon("sndEndNixieCount");
-  ent = getent("nixie_tube_2", "targetname");
+  ent = getEnt("nixie_tube_2", "targetname");
 
   for(i = num; i > 0; i--) {
     if(i <= 10) {
@@ -282,9 +282,9 @@ nixie_tube_win_effects_all_tubes(goal_num_1, goal_num_2, goal_num_3) {
   }
 
   a_nixie_tube = [];
-  a_nixie_tube[1] = getent("nixie_tube_1", "targetname");
-  a_nixie_tube[2] = getent("nixie_tube_2", "targetname");
-  a_nixie_tube[3] = getent("nixie_tube_3", "targetname");
+  a_nixie_tube[1] = getEnt("nixie_tube_1", "targetname");
+  a_nixie_tube[2] = getEnt("nixie_tube_2", "targetname");
+  a_nixie_tube[3] = getEnt("nixie_tube_3", "targetname");
   n_off_tube = 1;
 
   for(start_time = 0; start_time < 3; start_time = start_time + 0.15) {
@@ -420,7 +420,7 @@ nixie_tube_elevator_drops() {
   exploder(3400);
   exploder(3500);
   exploder(3600);
-  m_citadel_elevator = getent("citadel_elevator", "targetname");
+  m_citadel_elevator = getEnt("citadel_elevator", "targetname");
   a_m_script_models = [];
   a_m_script_models = getEntArray("script_model", "classname");
 
@@ -431,9 +431,9 @@ nixie_tube_elevator_drops() {
   }
 
   m_citadel_elevator playSound("zmb_quest_elevator_move");
-  m_citadel_elevator moveto(m_citadel_elevator.origin + vectorscale((0, 0, -1), 768.0), n_elevator_drop_duration, 1, 1);
+  m_citadel_elevator moveTo(m_citadel_elevator.origin + vectorscale((0, 0, -1), 768.0), n_elevator_drop_duration, 1, 1);
   wait(n_elevator_drop_duration);
-  t_elevator_door = getent("nixie_elevator_door", "targetname");
+  t_elevator_door = getEnt("nixie_elevator_door", "targetname");
   t_elevator_door trigger_on();
 }
 
@@ -443,21 +443,21 @@ nixie_tube_elevator_rises() {
   stop_exploder(3400);
   stop_exploder(3500);
   stop_exploder(3600);
-  m_citadel_elevator = getent("citadel_elevator", "targetname");
-  m_citadel_elevator moveto(m_citadel_elevator.origin + vectorscale((0, 0, 1), 768.0), elevator_rise_duration, 1, 1);
+  m_citadel_elevator = getEnt("citadel_elevator", "targetname");
+  m_citadel_elevator moveTo(m_citadel_elevator.origin + vectorscale((0, 0, 1), 768.0), elevator_rise_duration, 1, 1);
   m_citadel_elevator playSound("zmb_quest_elevator_move");
   wait(elevator_rise_duration);
 }
 
 nixie_tube_elevator_door() {
-  t_elevator_door = getent("nixie_elevator_door", "targetname");
-  t_elevator_door sethintstring(&"ZM_PRISON_KEY_DOOR");
+  t_elevator_door = getEnt("nixie_elevator_door", "targetname");
+  t_elevator_door setHintString(&"ZM_PRISON_KEY_DOOR");
   t_elevator_door waittill("trigger", e_triggerer);
-  m_elevator_bottom_gate_l = getent("elevator_bottom_gate_l", "targetname");
-  m_elevator_bottom_gate_r = getent("elevator_bottom_gate_r", "targetname");
-  m_elevator_bottom_gate_l rotateyaw(-90, 0.5);
-  m_elevator_bottom_gate_r rotateyaw(90, 0.5);
-  elevator_door_playerclip = getent("elevator_door_playerclip", "targetname");
+  m_elevator_bottom_gate_l = getEnt("elevator_bottom_gate_l", "targetname");
+  m_elevator_bottom_gate_r = getEnt("elevator_bottom_gate_r", "targetname");
+  m_elevator_bottom_gate_l rotateYaw(-90, 0.5);
+  m_elevator_bottom_gate_r rotateYaw(90, 0.5);
+  elevator_door_playerclip = getEnt("elevator_door_playerclip", "targetname");
   elevator_door_playerclip delete();
   flag_set("nixie_puzzle_completed");
   level notify("sndEndNixieCount");
@@ -494,7 +494,7 @@ nixie_115() {
 }
 
 nixie_115_audio() {
-  m_nixie_tube = getent("nixie_tube_1", "targetname");
+  m_nixie_tube = getEnt("nixie_tube_1", "targetname");
   n_random_line = randomint(3);
   m_nixie_tube playsoundwithnotify("vox_brutus_scary_voice_" + n_random_line, "scary_voice");
   m_nixie_tube waittill("scary_voice");
@@ -515,11 +515,11 @@ nixie_935() {
 nixie_935_audio() {
   if(!(isDefined(level.music_override) && level.music_override)) {
     level.music_override = 1;
-    playsoundatposition("mus_zmb_secret_song_2", (0, 0, 0));
+    playSoundAtPosition("mus_zmb_secret_song_2", (0, 0, 0));
     wait 140;
     level.music_override = 0;
   } else {
-    m_nixie_tube = getent("nixie_tube_1", "targetname");
+    m_nixie_tube = getEnt("nixie_tube_1", "targetname");
     n_random_line = randomint(3);
     m_nixie_tube playsoundwithnotify("vox_brutus_scary_voice_" + n_random_line, "scary_voice");
     m_nixie_tube waittill("scary_voice");
@@ -528,7 +528,7 @@ nixie_935_audio() {
 
 nixie_reset_control(b_reset_control) {
   for(i = 1; i < 4; i++) {
-    m_nixie_tube = getent("nixie_tube_" + i, "targetname");
+    m_nixie_tube = getEnt("nixie_tube_" + i, "targetname");
     m_nixie_tube thread afterlife_interact_object_think();
     m_nixie_tube thread nixie_tube_thread(i, b_reset_control);
   }

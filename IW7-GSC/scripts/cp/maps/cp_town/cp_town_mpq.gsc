@@ -149,7 +149,7 @@ debug_deathray_step_1() {
   }
 
   level.leg_knocked_down = 1;
-  var_3 = getent("mpq_zom_l_leg_part_ground", "targetname");
+  var_3 = getEnt("mpq_zom_l_leg_part_ground", "targetname");
   if(isDefined(var_3)) {
     var_3 hide();
   }
@@ -173,30 +173,30 @@ debug_deathray_step_1() {
 }
 
 debug_deathray_step_2() {
-  var_0 = getent("mpq_punch_card", "targetname");
+  var_0 = getEnt("mpq_punch_card", "targetname");
   var_0 hide();
   set_quest_omnvar_by_targetname(var_0);
   level.punch_card_acquired = 1;
 }
 
 debug_deathray_step_3() {
-  var_0 = getent("elvira_mirror", "targetname");
+  var_0 = getEnt("elvira_mirror", "targetname");
   var_0 hide();
   level.mirrors_picked_up["elvira_mirror"] = 1;
   set_quest_omnvar_by_targetname(var_0);
-  var_0 = getent("car_mirror", "targetname");
+  var_0 = getEnt("car_mirror", "targetname");
   var_0 hide();
-  var_0 = getent("car_mirror_ground", "targetname");
+  var_0 = getEnt("car_mirror_ground", "targetname");
   var_0 hide();
   level.mirrors_picked_up["car_mirror_ground"] = 1;
   set_quest_omnvar_by_targetname(var_0);
-  var_0 = getent("bathroom_mirror_piece", "targetname");
+  var_0 = getEnt("bathroom_mirror_piece", "targetname");
   var_0 hide();
   level.mirrors_picked_up["bathroom_mirror_piece"] = 1;
   set_quest_omnvar_by_targetname(var_0);
   var_1 = scripts\engine\utility::getStructArray("mirror_placement", "script_noteworthy");
   foreach(var_3 in var_1) {
-    var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+    var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     var_0 = spawn("script_model", var_4.origin);
     var_0.angles = var_4.angles;
     var_0 setModel(var_4.script_noteworthy);
@@ -295,7 +295,7 @@ init_launchcode_step_1() {
   scripts\engine\utility::flag_init("teleporter_charging");
   level.teleporter_pieces_found = 0;
   level.teleporter_pieces_placed = 0;
-  level.safe = getent("town_safe", "targetname");
+  level.safe = getEnt("town_safe", "targetname");
   level.gauge_trigs = getEntArray("mpq_gauge_trig", "targetname");
   level thread phase3_launchcode_interaction();
 }
@@ -451,12 +451,12 @@ glow_bed_part(var_0, var_1) {
 zom_body_bed_init_func(var_0, var_1) {
   level.mpq_zom_parts_index = 0;
   level.mpq_zom_parts = [];
-  level.mpq_zom_parts["head"] = getent("mpq_zom_head", "targetname");
-  level.mpq_zom_parts["torso"] = getent("mpq_zom_torso", "targetname");
-  level.mpq_zom_parts["left_arm"] = getent("mpq_zom_l_arm", "targetname");
-  level.mpq_zom_parts["right_arm"] = getent("mpq_zom_r_arm", "targetname");
-  level.mpq_zom_parts["left_leg"] = getent("mpq_zom_l_leg", "targetname");
-  level.mpq_zom_parts["right_leg"] = getent("mpq_zom_r_leg", "targetname");
+  level.mpq_zom_parts["head"] = getEnt("mpq_zom_head", "targetname");
+  level.mpq_zom_parts["torso"] = getEnt("mpq_zom_torso", "targetname");
+  level.mpq_zom_parts["left_arm"] = getEnt("mpq_zom_l_arm", "targetname");
+  level.mpq_zom_parts["right_arm"] = getEnt("mpq_zom_r_arm", "targetname");
+  level.mpq_zom_parts["left_leg"] = getEnt("mpq_zom_l_leg", "targetname");
+  level.mpq_zom_parts["right_leg"] = getEnt("mpq_zom_r_leg", "targetname");
   level.mpq_zom_parts_picked_up = [];
   foreach(var_3 in level.mpq_zom_parts) {
     var_3 hide();
@@ -479,13 +479,13 @@ zom_body_part_init_func(var_0, var_1) {
     level.mpq_zom_body_parts = [];
   }
 
-  level.mpq_zom_body_parts["head"] = getent("mpq_zom_head_part", "targetname");
-  level.mpq_zom_body_parts["torso"] = getent("mpq_zom_torso_part", "targetname");
-  level.mpq_zom_body_parts["left_arm"] = getent("mpq_zom_l_arm_part", "targetname");
-  level.mpq_zom_body_parts["right_arm"] = getent("mpq_zom_r_arm_part", "targetname");
-  level.mpq_zom_body_parts["left_leg"] = getent("mpq_zom_l_leg_part", "targetname");
-  level.mpq_zom_body_parts["right_leg"] = getent("mpq_zom_r_leg_part", "targetname");
-  var_2 = getent("mpq_zom_l_leg_part_ground", "targetname");
+  level.mpq_zom_body_parts["head"] = getEnt("mpq_zom_head_part", "targetname");
+  level.mpq_zom_body_parts["torso"] = getEnt("mpq_zom_torso_part", "targetname");
+  level.mpq_zom_body_parts["left_arm"] = getEnt("mpq_zom_l_arm_part", "targetname");
+  level.mpq_zom_body_parts["right_arm"] = getEnt("mpq_zom_r_arm_part", "targetname");
+  level.mpq_zom_body_parts["left_leg"] = getEnt("mpq_zom_l_leg_part", "targetname");
+  level.mpq_zom_body_parts["right_leg"] = getEnt("mpq_zom_r_leg_part", "targetname");
+  var_2 = getEnt("mpq_zom_l_leg_part_ground", "targetname");
   if(isDefined(var_2)) {
     var_2 hide();
   }
@@ -579,7 +579,7 @@ zom_body_part_activation_func(var_0, var_1) {
       return;
     }
 
-    var_7 = getent("mpq_zom_l_leg_part_ground", "targetname");
+    var_7 = getEnt("mpq_zom_l_leg_part_ground", "targetname");
     var_7 hide();
   }
 
@@ -706,10 +706,10 @@ listen_for_leg_damage() {
 }
 
 knock_leg_down(var_0) {
-  var_1 = getent("mpq_zom_l_leg_part_ground", "targetname");
+  var_1 = getEnt("mpq_zom_l_leg_part_ground", "targetname");
   if(isDefined(var_1)) {
-    var_0 moveto(var_1.origin, 1);
-    var_0 rotateto(var_1.angles, 1);
+    var_0 moveTo(var_1.origin, 1);
+    var_0 rotateTo(var_1.angles, 1);
     wait(1);
     var_1.fx_ent = var_0.fx_ent;
     var_1 show();
@@ -775,7 +775,7 @@ mirror_activation_func(var_0, var_1) {
 
   if(var_2 == "car_mirror") {
     if(level.car_mirror_hit) {
-      var_3 = getent("car_mirror_ground", "targetname");
+      var_3 = getEnt("car_mirror_ground", "targetname");
       set_quest_omnvar_by_targetname(var_3);
       var_1 playlocalsound("part_pickup");
       playFX(level._effect["generic_pickup"], var_3.origin);
@@ -790,7 +790,7 @@ mirror_activation_func(var_0, var_1) {
 
   if(var_3 == "bathroom_mirror") {
     if(level.bathroom_mirror_hit) {
-      var_3 = getent("bathroom_mirror_piece", "targetname");
+      var_3 = getEnt("bathroom_mirror_piece", "targetname");
       set_quest_omnvar_by_targetname(var_3);
       var_1 playlocalsound("part_pickup");
       playFX(level._effect["generic_pickup"], var_3.origin);
@@ -833,7 +833,7 @@ mirror_placement_activation_func(var_0, var_1) {
     return;
   }
 
-  var_3 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_4 = spawn("script_model", var_3.origin);
   var_4.angles = var_3.angles;
   var_4 setModel(var_3.script_noteworthy);
@@ -863,27 +863,27 @@ get_model_for_mirror(var_0) {
 }
 
 listen_for_mirror_damage() {
-  var_0 = getent("mirror_car", "targetname");
+  var_0 = getEnt("mirror_car", "targetname");
   var_0 hidepart("tag_mirror_right");
-  var_1 = getent("car_mirror", "targetname");
+  var_1 = getEnt("car_mirror", "targetname");
   var_1 thread hide_on_damage();
-  var_2 = getent("bathroom_mirror", "targetname");
+  var_2 = getEnt("bathroom_mirror", "targetname");
   var_2 thread break_mirror_in_bathroom();
-  var_3 = getent("frozen_meat", "targetname");
+  var_3 = getEnt("frozen_meat", "targetname");
   var_3 thread freeze_meat_in_locker();
 }
 
 hide_on_damage() {
   level.car_mirror_hit = 0;
   self setCanDamage(1);
-  var_0 = getent("car_mirror_ground", "targetname");
+  var_0 = getEnt("car_mirror_ground", "targetname");
   var_0 hide();
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(isDefined(var_2) && isPlayer(var_2) && var_5 == "MOD_MELEE" && var_2.currentmeleeweapon == "iw7_knife_zm_crowbar") {
       self hide();
       level.car_mirror_hit = 1;
-      var_0 = getent("car_mirror_ground", "targetname");
+      var_0 = getEnt("car_mirror_ground", "targetname");
       var_0 show();
       break;
     }
@@ -896,9 +896,9 @@ hide_on_damage() {
 break_mirror_in_bathroom() {
   level.bathroom_mirror_hit = 0;
   self setCanDamage(1);
-  var_0 = getent("bathroom_mirror_broken", "targetname");
+  var_0 = getEnt("bathroom_mirror_broken", "targetname");
   var_0 hide();
-  var_1 = getent("bathroom_mirror_piece", "targetname");
+  var_1 = getEnt("bathroom_mirror_piece", "targetname");
   var_1 hide();
   for(;;) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
@@ -907,9 +907,9 @@ break_mirror_in_bathroom() {
       playsoundatpos((-1060, 3661, 463), "mpq_mirror_shatter");
       self hide();
       level.bathroom_mirror_hit = 1;
-      var_0 = getent("bathroom_mirror_broken", "targetname");
+      var_0 = getEnt("bathroom_mirror_broken", "targetname");
       var_0 show();
-      var_12 = getent("bathroom_mirror_piece", "targetname");
+      var_12 = getEnt("bathroom_mirror_piece", "targetname");
       var_12 show();
       break;
     }
@@ -939,7 +939,7 @@ punch_card_hint_func(var_0, var_1) {
 }
 
 punch_card_activation_func(var_0, var_1) {
-  var_2 = getent("mpq_punch_card", "targetname");
+  var_2 = getEnt("mpq_punch_card", "targetname");
   var_2 hide();
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("key_phase_1_collect_punchcard_pc", "town_comment_vo");
   set_quest_omnvar_by_targetname(var_2);
@@ -948,7 +948,7 @@ punch_card_activation_func(var_0, var_1) {
 
 garage_door_init_func() {
   wait(5);
-  var_0 = getent("garage_door", "targetname");
+  var_0 = getEnt("garage_door", "targetname");
   var_0 movez(-96, 3, 0.5, 0.1);
 }
 
@@ -965,11 +965,11 @@ garage_door_activation_func(var_0, var_1) {
     return;
   }
 
-  var_2 = getent("garage_door", "targetname");
+  var_2 = getEnt("garage_door", "targetname");
   var_2 movez(96, 3, 0.5, 0.1);
   playsoundatpos((4767, 1233, 431), "town_roll_up_garage_door");
   wait(1);
-  var_3 = getent("garage_door_clip", "targetname");
+  var_3 = getEnt("garage_door_clip", "targetname");
   var_3 notsolid();
   level.garage_door_open = 1;
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("key_phase_1_success_garage", "town_comment_vo");
@@ -1014,9 +1014,9 @@ ray_gun_activation_func(var_0, var_1) {
 
   if(!isDefined(level.punch_card_added)) {
     if(isDefined(level.punch_card_acquired)) {
-      var_2 = getent("mpq_punch_card", "targetname");
+      var_2 = getEnt("mpq_punch_card", "targetname");
       var_2 show();
-      var_3 = scripts\engine\utility::getstruct("punch_card_slot", "targetname");
+      var_3 = scripts\engine\utility::getStruct("punch_card_slot", "targetname");
       var_2.origin = var_3.origin;
       var_2.angles = var_3.angles;
       level.punch_card_added = 1;
@@ -1042,7 +1042,7 @@ ray_gun_activation_func(var_0, var_1) {
   }
 
   if(!isDefined(level.body_made)) {
-    var_4 = scripts\engine\utility::getstruct("mirror_laser_start", "targetname");
+    var_4 = scripts\engine\utility::getStruct("mirror_laser_start", "targetname");
     playsoundatpos(var_4.origin, "cp_town_life_death_ray");
     wait(1);
     wait(1);
@@ -1111,7 +1111,7 @@ ray_gun_activation_func(var_0, var_1) {
     var_11 = 1;
     if(var_11) {
       level.key_spawned = 1;
-      var_4 = scripts\engine\utility::getstruct("mirror_laser_start", "targetname");
+      var_4 = scripts\engine\utility::getStruct("mirror_laser_start", "targetname");
       playsoundatpos(var_11.origin, "cp_town_life_death_ray");
       wait(1);
       wait(1);
@@ -1158,14 +1158,14 @@ ray_fail_vo(var_0) {
 }
 
 bounce_laser(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstruct("mirror_laser_start", "targetname");
+  var_3 = scripts\engine\utility::getStruct("mirror_laser_start", "targetname");
   var_4 = spawn("script_model", var_3.origin);
   var_4.angles = var_3.angles;
   var_4 setModel(var_0);
   wait(1);
-  var_5 = scripts\engine\utility::getstruct("mirror_spot_1", "targetname");
+  var_5 = scripts\engine\utility::getStruct("mirror_spot_1", "targetname");
   if(!scripts\engine\utility::istrue(level.mirrors_placed["bathroom_mirror"])) {
-    var_5 = scripts\engine\utility::getstruct("mirror_spot_1", "targetname");
+    var_5 = scripts\engine\utility::getStruct("mirror_spot_1", "targetname");
     if(!isDefined(var_3.angles)) {
       var_3.angles = (0, 0, 0);
     }
@@ -1183,9 +1183,9 @@ bounce_laser(var_0, var_1, var_2) {
   playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
   wait(0.1);
   var_3 = var_5;
-  var_5 = scripts\engine\utility::getstruct("mirror_spot_2", "targetname");
+  var_5 = scripts\engine\utility::getStruct("mirror_spot_2", "targetname");
   if(!scripts\engine\utility::istrue(level.mirrors_placed["elvira_mirror"])) {
-    var_5 = scripts\engine\utility::getstruct("mirror_spot_2", "targetname");
+    var_5 = scripts\engine\utility::getStruct("mirror_spot_2", "targetname");
     if(!isDefined(var_3.angles)) {
       var_3.angles = (0, 0, 0);
     }
@@ -1203,9 +1203,9 @@ bounce_laser(var_0, var_1, var_2) {
   playfxbetweenpoints(level._effect[var_1], var_3.origin, var_3.angles, var_5.origin);
   wait(0.1);
   var_3 = var_5;
-  var_5 = scripts\engine\utility::getstruct("mirror_spot_3", "targetname");
+  var_5 = scripts\engine\utility::getStruct("mirror_spot_3", "targetname");
   if(!scripts\engine\utility::istrue(level.mirrors_placed["car_mirror"])) {
-    var_5 = scripts\engine\utility::getstruct("mirror_spot_3", "targetname");
+    var_5 = scripts\engine\utility::getStruct("mirror_spot_3", "targetname");
     if(!isDefined(var_3.angles)) {
       var_3.angles = (0, 0, 0);
     }
@@ -1318,13 +1318,13 @@ listen_for_toilet_head() {
     wait(0.1);
   }
 
-  var_0 = scripts\engine\utility::getstruct("toilet_head", "targetname");
+  var_0 = scripts\engine\utility::getStruct("toilet_head", "targetname");
   var_1 = var_0.origin;
   var_2 = var_0.angles;
   level.toilet_head = spawn("script_model", var_1);
   level.toilet_head setModel("zmb_male_head_01");
   level.toilet_head.angles = var_2;
-  var_3 = scripts\engine\utility::getstruct("toilet_head_spot", "targetname");
+  var_3 = scripts\engine\utility::getStruct("toilet_head_spot", "targetname");
   var_4 = 0;
   var_5 = 1600;
   while(!var_4) {
@@ -1386,7 +1386,7 @@ shuffle_film_reels() {
   var_0 = [3, 4, 5, 6, 8];
   var_1 = scripts\engine\utility::array_randomize(var_0);
   for(var_2 = 1; var_2 < 6; var_2++) {
-    var_3 = getent("film_reel_" + var_2, "targetname");
+    var_3 = getEnt("film_reel_" + var_2, "targetname");
     var_3 setModel("cp_town_film_reel_case_" + var_1[var_2 - 1]);
     wait(0.1);
   }
@@ -1612,7 +1612,7 @@ turn_on_other_hud(var_0) {
 }
 
 listen_for_turnstile_damage() {
-  var_0 = getent("turnstile", "targetname");
+  var_0 = getEnt("turnstile", "targetname");
   if(isDefined(var_0)) {
     var_0 setCanDamage(1);
     for(;;) {
@@ -1631,13 +1631,13 @@ listen_for_turnstile_damage() {
 
 listen_for_photo_change() {
   level waittill("crab_boss_beaten");
-  var_0 = getent("hero_photo", "targetname");
+  var_0 = getEnt("hero_photo", "targetname");
   var_0 setModel("cp_town_space_hero_photos_01");
 }
 
 phase3_watch_gauge_trigs() {
   level endon("deathray_step1");
-  self.gauge = getent(self.target, "targetname");
+  self.gauge = getEnt(self.target, "targetname");
   self.gauge thread phase3_gauge_movement_logic();
   if(!isDefined(level.gauges)) {
     level.gauges = [];
@@ -1677,7 +1677,7 @@ phase3_open_safe() {
   earthquake(0.45, 1, level.safe.origin, 256);
   playsoundatpos(level.safe.origin, "mpq_safe_open");
   level.safe setModel("cp_town_safe_open");
-  var_0 = scripts\engine\utility::getstruct("take_launchcodes", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("take_launchcodes", "script_noteworthy");
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
   var_1 = scripts\engine\utility::random(level.players);
   if(isDefined(var_1.vo_prefix)) {
@@ -1706,7 +1706,7 @@ phase3_open_safe() {
 
 phase3_take_launch_codes(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   playFX(level._effect["generic_pickup"], var_2.origin);
   var_1 playlocalsound("zmb_item_pickup");
   var_2 delete();
@@ -1714,7 +1714,7 @@ phase3_take_launch_codes(var_0, var_1) {
 }
 
 phase3_take_bomb_part(var_0, var_1) {
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   if(!isDefined(var_2)) {
     return;
   }
@@ -1829,15 +1829,15 @@ phase3_gauge_movement_logic() {
     self.og_angles = self.angles;
   }
 
-  self rotateto((self.angles[0], self.angles[1], -75), randomfloatrange(0.15, 0.4));
+  self rotateTo((self.angles[0], self.angles[1], -75), randomfloatrange(0.15, 0.4));
   self waittill("rotatedone");
   wait(0.1);
   for(;;) {
     wait(randomfloatrange(0.25, 1.6));
-    self rotateto((self.angles[0], self.angles[1], 75), randomfloatrange(3, 4));
+    self rotateTo((self.angles[0], self.angles[1], 75), randomfloatrange(3, 4));
     self waittill("rotatedone");
     wait(randomfloatrange(0.25, 1.6));
-    self rotateto((self.angles[0], self.angles[1], -75), randomfloatrange(3, 4));
+    self rotateTo((self.angles[0], self.angles[1], -75), randomfloatrange(3, 4));
     self waittill("rotatedone");
   }
 }
@@ -1927,7 +1927,7 @@ phase3_place_bomb_parts(var_0, var_1) {
       var_1 thread scripts\cp\cp_vo::try_to_play_vo("key_phase_3_success_bomb_const", "town_comment_vo");
       scripts\engine\utility::flag_set("chemistry_step4");
       scripts\cp\maps\cp_town\cp_town_chemistry::set_chemical_carried_by_player_after_beaker_deposit(var_1, "");
-      var_2 = getent("hero_photo", "targetname");
+      var_2 = getEnt("hero_photo", "targetname");
       var_2 setModel("cp_town_space_hero_photos_02");
       var_1 scripts\cp\cp_interaction::refresh_interaction();
       return;
@@ -1948,8 +1948,8 @@ phase3_place_bomb_parts(var_0, var_1) {
       }
     }
 
-    var_6 = scripts\engine\utility::getstruct("place_bomb_parts", "script_noteworthy");
-    var_7 = getent(var_6.target, "targetname");
+    var_6 = scripts\engine\utility::getStruct("place_bomb_parts", "script_noteworthy");
+    var_7 = getEnt(var_6.target, "targetname");
     var_7 stoploopsound();
     scripts\cp\utility::playsoundinspace("cp_town_bomb_charge_stop", var_7.origin);
     level notify("bomb_teleported");
@@ -2002,8 +2002,8 @@ play_teleporter_vo(var_0) {
 phase3_charge_bomb_teleporter(var_0) {
   level endon("bomb_teleported");
   level endon("game_ended");
-  var_1 = scripts\engine\utility::getstruct("place_bomb_parts", "script_noteworthy");
-  var_2 = getent(var_1.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct("place_bomb_parts", "script_noteworthy");
+  var_2 = getEnt(var_1.target, "targetname");
   playFXOnTag(level._effect["vfx_bomb_portal_chargeup"], var_2, "tag_bomb");
   var_2 playSound("cp_town_bomb_charge_start");
   var_2 playLoopSound("cp_town_bomb_charge_lp");
@@ -2031,8 +2031,8 @@ phase3_charge_bomb_teleporter(var_0) {
 }
 
 phase3_teleport_bomb() {
-  var_0 = scripts\engine\utility::getstruct("place_bomb_parts", "script_noteworthy");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct("place_bomb_parts", "script_noteworthy");
+  var_1 = getEnt(var_0.target, "targetname");
   playFX(level._effect["vfx_bomb_portal_out"], var_1.origin);
   var_1 delete();
   scripts\engine\utility::flag_set("launchcode_step4");
@@ -2041,7 +2041,7 @@ phase3_teleport_bomb() {
 
 phase3_launchcode_interaction() {
   wait(5);
-  var_0 = scripts\engine\utility::getstruct("take_launchcodes", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("take_launchcodes", "script_noteworthy");
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
 }
 

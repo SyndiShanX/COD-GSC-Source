@@ -37,7 +37,7 @@ func_32B7() {
   var_00 = self method_8198();
   var_01 = func_4392(var_00, self.var_014F);
   var_02 = self method_857F();
-  self setorigin(var_01, 0);
+  self setOrigin(var_01, 0);
   self.var_001D = var_00.var_001D;
   var_03 = level.var_AC6C[self.var_90DC][var_00.var_001E];
   var_04 = self[[maps\mp\agents\_agent_utility::func_0A59("get_action_params")]]();
@@ -66,7 +66,7 @@ func_32B7() {
     var_0D = var_0B["origin"];
   }
 
-  self.var_9D07 = vectornormalize(var_0D - var_01);
+  self.var_9D07 = vectorNormalize(var_0D - var_01);
   if(animhasnotetrack(var_08, "traverse_jump_start")) {
     var_0E = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_08, "traverse_jump_start");
     var_0F = maps\mp\agents\_scripted_agent_anim_util::func_45B9(var_08, "traverse_jump_end");
@@ -106,10 +106,10 @@ func_32B7() {
   var_1B = self method_857F();
   if(distance2d(var_1A, self.var_0116) > 4 || abs(var_1A[2] - self.var_0116[2]) > 16) {
     var_1C = getgroundposition(var_1B, self.var_014F, 32, 32, 1);
-    self setorigin(var_1C, 0);
+    self setOrigin(var_1C, 0);
   } else if(distance2d(self.var_0116, var_1B) > 96 || abs(self.var_0116[2] - var_1B[2]) > 16) {
     var_1C = getgroundposition(getclosestpointonnavmesh(var_1B, self), self.var_014F, 32, 32, 1);
-    self setorigin(var_1C, 0);
+    self setOrigin(var_1C, 0);
   }
 
   self.var_9D0C = gettime();
@@ -158,7 +158,7 @@ func_9D0A(param_00, param_01, param_02) {
     }
 
     var_06 = lerp(param_00, param_01, var_05);
-    self setorigin((self.var_0116[0], self.var_0116[1], var_06), 0);
+    self setOrigin((self.var_0116[0], self.var_0116[1], var_06), 0);
     wait 0.05;
   }
 }

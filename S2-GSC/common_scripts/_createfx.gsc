@@ -497,7 +497,7 @@ func_2808() {
     for(var_12 = 0; var_12 < level.var_2804.size; var_12++) {
       var_03 = level.var_2804[var_12];
       var_13 = level.var_721C getvieworigin();
-      var_14 = vectornormalize(var_03.var_A265["origin"] - var_13);
+      var_14 = vectorNormalize(var_03.var_A265["origin"] - var_13);
       var_15 = vectordot(var_08, var_14);
       if(var_15 < var_0A) {
         continue;
@@ -2591,7 +2591,7 @@ func_AAB8(param_00, param_01, param_02, param_03, param_04) {
       var_03 = var_02 * -1 * var_01;
       var_04 = level.var_721C getEye();
       var_05 = var_04 - level.var_721C.var_0116;
-      level.var_721C setorigin(var_00 + var_03 - var_05);
+      level.var_721C setOrigin(var_00 + var_03 - var_05);
     }
 
     func_5984(param_00) {

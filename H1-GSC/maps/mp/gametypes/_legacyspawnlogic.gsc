@@ -282,7 +282,7 @@ ispointvulnerable(var_0) {
   var_4 = anglesToForward(self.angles);
 
   if(var_3 < level.claymoredetectionradius * level.claymoredetectionradius) {
-    var_5 = vectornormalize(var_2 - var_1);
+    var_5 = vectorNormalize(var_2 - var_1);
     var_6 = acos(vectordot(var_5, var_4));
 
     if(var_6 < level.claymoredetectionconeangle) {

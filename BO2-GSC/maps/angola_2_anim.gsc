@@ -128,16 +128,16 @@ enemy_boat_ramming() {
 }
 
 play_signature_boat_fx_launch() {
-  boat = getent("small_sig_gunboat", "targetname");
+  boat = getEnt("small_sig_gunboat", "targetname");
   smoke_tag = spawn_model("tag_origin", boat.origin, boat.angles);
-  smoke_tag linkto(boat);
+  smoke_tag linkTo(boat);
   smoke_tag play_fx("small_boat_smoke_trail", smoke_tag.origin, smoke_tag.angles, undefined, 1, "tag_origin");
   wait 5;
   smoke_tag delete();
 }
 
 play_sig_splash_effect(guy) {
-  boat = getent("small_sig_gunboat", "targetname");
+  boat = getEnt("small_sig_gunboat", "targetname");
 
   if(isDefined(boat)) {
     boat play_fx("splash_fx", boat.origin, boat.angles);
@@ -145,7 +145,7 @@ play_sig_splash_effect(guy) {
 }
 
 play_splash_effect(guy) {
-  boat = getent("small_gunboat_anim", "targetname");
+  boat = getEnt("small_gunboat_anim", "targetname");
 
   if(isDefined(boat)) {
     boat play_fx("splash_fx", boat.origin, boat.angles);
@@ -163,7 +163,7 @@ gunboat_right_ram_fx(gunboat) {
   level notify("gunboat_ram_right");
   gunboat play_fx("gunboat_ram_right_splash", gunboat.origin, gunboat.angles, undefined, 1, "tag_origin");
   earthquake(0.5, 3, level.player.origin, 256, level.player);
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   level.main_barge play_fx("barge_water_right", level.main_barge.origin, level.main_barge.angles, undefined, 1, "tag_origin");
 
   if(isDefined(gunboat)) {
@@ -175,7 +175,7 @@ gunboat_left_ram_fx(gunboat) {
   level notify("gunboat_ram_left");
   gunboat play_fx("gunboat_ram_left_splash", gunboat.origin, gunboat.angles, undefined, 1, "tag_origin");
   earthquake(0.5, 3, level.player.origin, 256, level.player);
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   level.main_barge play_fx("barge_water_left", level.main_barge.origin, level.main_barge.angles, undefined, 1, "tag_origin");
 
   if(isDefined(gunboat)) {
@@ -231,7 +231,7 @@ machete_blackscreen_end(guy) {
 machete_punch(guy) {
   ai_guy = get_ais_from_scene("machete_jump", "machete_dude");
   playFXOnTag(getfx("punch_sweat"), ai_guy, "j_head");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 #using_animtree("player");
@@ -280,10 +280,10 @@ river_heli_attack_animation() {
 }
 
 hind_hit_run_scene(guy) {
-  vh_heli = getent("river_player_heli", "targetname");
-  vh_heli linkto(level.main_barge);
+  vh_heli = getEnt("river_player_heli", "targetname");
+  vh_heli linkTo(level.main_barge);
   level.player shellshock("default", 3);
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   level.player takeallweapons();
   level.player playersetgroundreferenceent(undefined);
   level thread run_scene("heli_hit_by_missile");
@@ -518,7 +518,7 @@ idle_swim_fx(guy) {
 backstroke_swim_fx(guy) {
   player_model = get_model_or_models_from_scene("player_backstroke_swim", "player_body_river");
   player_model play_fx("player_wake_hand", player_model.origin, player_model.angles, undefined, 1, "J_Wrist_LE");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 start_barge_sinking(guy) {
@@ -527,7 +527,7 @@ start_barge_sinking(guy) {
   a_cover = getEntArray("barge_cover_back", "targetname");
   array_delete(a_cover);
   m_barrel_parent = spawn_model("fxanim_angola_barge_barrels_side_mod", level.main_barge.origin, level.main_barge.angles);
-  m_barrel_parent linkto(level.main_barge);
+  m_barrel_parent linkTo(level.main_barge);
   m_barrel_parent.animname = "sinking_barge_barrels";
   m_barrel_parent useanimtree(level.scr_animtree["barge_sink_fxanims"]);
 
@@ -537,7 +537,7 @@ start_barge_sinking(guy) {
   }
 
   m_tarp_parent = spawn_model("fxanim_angola_barge_tarp_rpg_mod", level.main_barge.origin, level.main_barge.angles);
-  m_tarp_parent linkto(level.main_barge);
+  m_tarp_parent linkTo(level.main_barge);
   m_tarp_parent.animname = "sinking_barge_tarp";
   m_tarp_parent useanimtree(level.scr_animtree["barge_sink_fxanims"]);
   a_actors = array(m_barrel_parent, m_tarp_parent);
@@ -554,10 +554,10 @@ start_barge_sinking(guy) {
   level thread run_scene("crane_side_fall");
   wait(n_time - 2);
   array_delete(a_actors);
-  s_align = getstruct("swim_to_shore", "targetname");
+  s_align = getStruct("swim_to_shore", "targetname");
   m_linker = spawn_model("tag_origin", s_align.origin, s_align.angles);
   scene_wait("barge_sinking");
-  level.main_barge linkto(m_linker);
+  level.main_barge linkTo(m_linker);
 }
 
 #using_animtree("generic_human");
@@ -573,7 +573,7 @@ play_woods_water_fx(guy) {
 
 play_blood_on_machete_dude(guy) {
   playFXOnTag(level._effect["head_blood"], guy, "J_neck");
-  level.player playrumbleonentity("angola_hind_ride");
+  level.player playRumbleOnEntity("angola_hind_ride");
   wait 8;
   level notify("machete_guy_dead");
 }
@@ -984,7 +984,7 @@ soldier_shoots_hudson(guy) {
 }
 
 woods_shoots_pistol_effect(guy) {
-  ai = getent("hind_dummy_pilot_ai", "targetname");
+  ai = getEnt("hind_dummy_pilot_ai", "targetname");
   playFXOnTag(level._effect["fx_ango_blood_outro"], ai, "J_spineUpper");
   tag_origin = ai gettagorigin("J_spineUpper");
   tag_angles = ai gettagangles("J_spineUpper");

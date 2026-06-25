@@ -78,7 +78,7 @@ function trig_enter_waterfall(localplayer) {
   localplayer thread postfx::playpostfxbundle("pstfx_waterfall");
   playSound(0, "amb_waterfall_hit", (0, 0, 0));
   while(trigger istouching(localplayer)) {
-    localplayer playrumbleonentity(localclientnum, "waterfall_rumble");
+    localplayer playRumbleOnEntity(localclientnum, "waterfall_rumble");
     wait(0.1);
   }
 }

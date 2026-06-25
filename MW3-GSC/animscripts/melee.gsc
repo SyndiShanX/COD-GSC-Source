@@ -81,7 +81,7 @@ _id_1013() {
   var_1 = distance2d(self._id_100C.startpos, self._id_100C.target.origin);
 
   if(var_1 < 32) {
-    var_2 = vectornormalize((self._id_100C.startpos[0] - self._id_100C.target.origin[0], self._id_100C.startpos[1] - self._id_100C.target.origin[1], 0));
+    var_2 = vectorNormalize((self._id_100C.startpos[0] - self._id_100C.target.origin[0], self._id_100C.startpos[1] - self._id_100C.target.origin[1], 0));
     self._id_100C.startpos = self._id_100C.startpos + var_2 * (32 - var_1);
     var_0 = 0;
   }
@@ -114,7 +114,7 @@ _id_1013() {
       var_7 = var_7 - var_8 * ((32 - var_9) / 32);
     }
   } else {
-    var_2 = vectornormalize((self._id_100C.startpos[0] - self._id_100C.target.origin[0], self._id_100C.startpos[1] - self._id_100C.target.origin[1], 0));
+    var_2 = vectorNormalize((self._id_100C.startpos[0] - self._id_100C.target.origin[0], self._id_100C.startpos[1] - self._id_100C.target.origin[1], 0));
     var_7 = self._id_100C.target.origin + var_2 * 32;
   }
 
@@ -360,7 +360,7 @@ _id_102B() {
   if(!_id_1016()) {
     return 0;
   }
-  var_0 = vectornormalize(self._id_100C.target.origin - self.origin);
+  var_0 = vectorNormalize(self._id_100C.target.origin - self.origin);
   self._id_100C.startpos = self._id_100C.target.origin - 40.0 * var_0;
   return _id_1013();
 }

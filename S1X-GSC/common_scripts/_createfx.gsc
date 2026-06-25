@@ -498,7 +498,7 @@ createFxLogic() {
     for(i = 0; i < level.createFXent.size; i++) {
       ent = level.createFXent[i];
 
-      difference = VectorNormalize(ent.v["origin"] - (level.player.origin + (0, 0, 55)));
+      difference = vectorNormalize(ent.v["origin"] - (level.player.origin + (0, 0, 55)));
       newdot = vectordot(forward, difference);
       if(newdot < dot) {
         continue;
@@ -2562,7 +2562,7 @@ write_log(array, type, autosave, radiant_exploder_add_string, secondArray) {
       camOffset = forward * (-1 * camradius);
       eyePos = level.player getEye();
       eyeOffset = eyePos - level.player.origin;
-      level.player SetOrigin(center + camOffset - eyeOffset);
+      level.player setOrigin(center + camOffset - eyeOffset);
     }
 
     clear_all_loopers() {

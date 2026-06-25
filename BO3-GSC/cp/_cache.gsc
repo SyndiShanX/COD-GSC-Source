@@ -44,8 +44,8 @@ function _ammo_refill_think() {
   if(isDefined(t_ammo_cache.script_string) && t_ammo_cache.script_string == "no_grenade") {
     t_ammo_cache.no_grenade = 1;
   }
-  t_ammo_cache sethintstring(&"SCRIPT_AMMO_REFILL");
-  t_ammo_cache setcursorhint("HINT_NOICON");
+  t_ammo_cache setHintString(&"SCRIPT_AMMO_REFILL");
+  t_ammo_cache setCursorHint("HINT_NOICON");
   while(true) {
     t_ammo_cache waittill("trigger", e_player);
     e_player disableweapons();

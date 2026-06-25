@@ -50,7 +50,7 @@ function is_demo() {
 function function_22e1a261() {
   exploder::exploder("transition");
   level set_lighting_state_time_shift_2();
-  getent("lgt_shadow_block_trans", "targetname") show();
+  getEnt("lgt_shadow_block_trans", "targetname") show();
   level clientfield::set("alley_fog_banks", 1);
 }
 
@@ -128,17 +128,17 @@ function function_a0a9f927() {
 function rotate_fan(var_5dbde88f) {
   self endon("hash_fb28e86c");
   while(true) {
-    self rotateyaw(180, var_5dbde88f / 2);
+    self rotateYaw(180, var_5dbde88f / 2);
     wait(var_5dbde88f / 2);
   }
 }
 
 function function_f81a38c8() {
-  t_damage = getent(self.target, "targetname");
+  t_damage = getEnt(self.target, "targetname");
   t_damage waittill("trigger");
   self notify("hash_fb28e86c");
   self waittill("rotatedone");
-  self rotateto(self.angles + vectorscale((0, 1, 0), 15), 1.25, 0.05, 0.75);
+  self rotateTo(self.angles + vectorscale((0, 1, 0), 15), 1.25, 0.05, 0.75);
 }
 
 function function_e7ebe596(b_on = 1) {}
@@ -225,7 +225,7 @@ function show_ents(b_disconnect = 0) {
         if(isDefined(e.script_noteworthy) && e.script_noteworthy == "connect_paths") {
           e connectpaths();
         } else if(e.classname === "script_brushmodel" && e.script_noteworthy !== "do_not_disconnect" || (e.classname === "script_model" && (e.model == "p7_cai_stacking_cargo_crate" || e.model == "veh_t7_mil_vtol_dropship_troopcarrier"))) {
-          e disconnectpaths();
+          e disconnectPaths();
         }
       }
       wait(0.05);
@@ -804,7 +804,7 @@ function light_shift_think(str_trigger_targetname, str_level_endon, func_on_trig
   assert(isDefined(str_level_endon), "");
   assert(isDefined(func_on_trigger), "");
   level endon(str_level_endon);
-  t_light_shift = getent(str_trigger_targetname, "targetname");
+  t_light_shift = getEnt(str_trigger_targetname, "targetname");
   assert(isDefined(t_light_shift), ("" + str_trigger_targetname) + "");
   while(true) {
     t_light_shift waittill("trigger", e_player);
@@ -834,7 +834,7 @@ function turret_pickup_think(s_obj) {
   t_pickup = spawn("trigger_radius", self.origin + vectorscale((0, 0, 1), 24), 0, s_obj.radius, 128);
   t_pickup.targetname = "turret_pickup_trig";
   t_pickup.script_objective = "vtol_ride";
-  t_pickup triggerignoreteam();
+  t_pickup triggerIgnoreTeam();
   self thread turret_pickup_hint(t_pickup, w_hero);
   while(true) {
     t_pickup waittill("trigger", e_player);
@@ -1037,7 +1037,7 @@ function player_walk_speed_adjustment(e_rubber_band_to, str_endon, n_dist_min, n
     var_3e7026da = 0;
     foreach(entity in var_2328c0bb) {
       var_e71cd44d = distance2d(self.origin, entity.origin);
-      var_671d9784 = vectordot(vectornormalize(var_5db32273), vectornormalize(self.origin - entity.origin));
+      var_671d9784 = vectordot(vectorNormalize(var_5db32273), vectorNormalize(self.origin - entity.origin));
       if(var_e71cd44d <= 24 && var_671d9784 <= -0.25) {
         var_3e7026da = 1;
         continue;
@@ -1064,7 +1064,7 @@ function player_walk_speed_adjustment(e_rubber_band_to, str_endon, n_dist_min, n
       continue;
     }
     var_c0a77ece = var_8c034a31;
-    var_16d9beb6 = vectordot(vectornormalize(var_5db32273), self.origin - var_2328c0bb[0].origin);
+    var_16d9beb6 = vectordot(vectorNormalize(var_5db32273), self.origin - var_2328c0bb[0].origin);
     if(var_16d9beb6 <= 0) {
       var_d3fe8f49 = math::linear_map(var_8b261109, var_d04843e1, 190, 0, 1);
       n_height_diff = abs(var_856fe6c6[2] - self.origin[2]);
@@ -1194,18 +1194,18 @@ function function_7255e66(b_enable = 1, str_script_string) {
 }
 
 function function_f2f98cfc() {
-  var_3354e659 = getent("hotel_gate", "targetname");
+  var_3354e659 = getEnt("hotel_gate", "targetname");
   var_3354e659 ghost();
   var_3354e659 notsolid();
   umbragate_set("hotel", 1);
 }
 
 function function_1aeb2873() {
-  getent("defend_street_gate", "targetname") delete();
+  getEnt("defend_street_gate", "targetname") delete();
   umbragate_set("defend_street", 1);
 }
 
 function function_fb967724() {
-  getent("hotel_gate", "targetname") show();
+  getEnt("hotel_gate", "targetname") show();
   umbragate_set("hotel", 0);
 }

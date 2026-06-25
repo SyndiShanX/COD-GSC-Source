@@ -27,7 +27,7 @@
 #namespace zm_moon_teleporter;
 
 function teleporter_function(name) {
-  teleporter = getent(name, "targetname");
+  teleporter = getEnt(name, "targetname");
   teleport_time = 0;
   str = name + "_bottom_name";
   fx_bottom = struct::get(str, "targetname");
@@ -35,7 +35,7 @@ function teleporter_function(name) {
   fx_top = struct::get(str, "targetname");
   teleport_state = "Waiting for Players";
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isgodmode(players[i])) {
         level.devcheater = 1;
@@ -122,21 +122,21 @@ function teleporter_function(name) {
 }
 
 function function_78f5cb79() {
-  var_509912e9 = getent("nml_teleporter", "targetname");
+  var_509912e9 = getEnt("nml_teleporter", "targetname");
   var_5021a61d = get_teleporter_target_positions(var_509912e9, "nml_teleporter");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   foreach(e_player in a_e_players) {
     e_player zm_utility::create_streamer_hint(var_5021a61d[0].origin, var_5021a61d[0].angles, 1);
   }
   level waittill("hash_5b75f7cb");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   foreach(e_player in a_e_players) {
     e_player zm_utility::clear_streamer_hint();
   }
 }
 
 function function_6454df1b() {
-  var_c35f7190 = getent("t_stream_hint_nml_player", "targetname");
+  var_c35f7190 = getEnt("t_stream_hint_nml_player", "targetname");
   while(true) {
     var_c35f7190 waittill("trigger", e_player);
     if(!(isDefined(e_player.var_a31e4590) && e_player.var_a31e4590)) {
@@ -148,7 +148,7 @@ function function_6454df1b() {
 
 function function_7305cc9b(var_34ef544f) {
   self endon("disconnect");
-  var_f657052b = getent("generator_teleporter", "targetname");
+  var_f657052b = getEnt("generator_teleporter", "targetname");
   var_5021a61d = get_teleporter_target_positions(var_f657052b, "generator_teleporter");
   self zm_utility::create_streamer_hint(var_5021a61d[0].origin, var_5021a61d[0].angles, 1);
   while(self istouching(var_34ef544f)) {
@@ -162,7 +162,7 @@ function function_7305cc9b(var_34ef544f) {
 }
 
 function valid_players_teleport() {
-  players = getplayers();
+  players = getPlayers();
   valid_players = 0;
   for(i = 0; i < players.size; i++) {
     if(is_player_teleport_valid(players[i])) {
@@ -232,7 +232,7 @@ function teleport_player_to_target(player, target_positions) {
   if(player getstance() == "prone") {
     player setstance("crouch");
   }
-  player setorigin(target_ent.origin + (randomfloat(24), randomfloat(24), 0));
+  player setOrigin(target_ent.origin + (randomfloat(24), randomfloat(24), 0));
   if(isDefined(target_ent.angles)) {
     player setplayerangles(target_ent.angles);
   }
@@ -251,7 +251,7 @@ function turn_override_off() {
 }
 
 function teleporter_starting(teleporter_ent) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(zombie_utility::is_player_valid(player)) {
@@ -267,7 +267,7 @@ function teleporter_check_for_endgame() {
   }
   level util::waittill_any("end_game", "track_nml_time");
   level.nml_best_time = gettime() - level.nml_start_time;
-  players = getplayers();
+  players = getPlayers();
   level.nml_kills = players[0].kills;
   level.nml_score = players[0].score_total;
   level.nml_pap = 0;
@@ -301,7 +301,7 @@ function function_2f6b6897() {
 }
 
 function display_time_survived() {
-  players = getplayers();
+  players = getPlayers();
   level.nml_best_time = gettime() - level.nml_start_time;
   level.nml_kills = players[0].kills;
   level.nml_score = players[0].score_total;
@@ -350,7 +350,7 @@ function display_time_survived() {
 }
 
 function teleporter_ending(teleporter_ent, was_aborted) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(zombie_utility::is_player_valid(player)) {
@@ -398,7 +398,7 @@ function teleporter_ending(teleporter_ent, was_aborted) {
         level flag::set("zombie_drop_powerups");
         level.ignore_distance_tracking = 0;
         if(!(isDefined(level.first_round) && level.first_round)) {
-          players = getplayers();
+          players = getPlayers();
           players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("general", "teleporter");
         }
       }
@@ -408,18 +408,18 @@ function teleporter_ending(teleporter_ent, was_aborted) {
 
 function teleporter_to_nml_init() {
   level.teleporter_to_nml_gate_height = 140;
-  level.teleporter_to_nml_gate_ent = getent("teleporter_gate", "targetname");
-  level.var_8243881a = getent(level.teleporter_to_nml_gate_ent.target, "targetname");
-  level.var_8243881a linkto(level.teleporter_to_nml_gate_ent);
+  level.teleporter_to_nml_gate_ent = getEnt("teleporter_gate", "targetname");
+  level.var_8243881a = getEnt(level.teleporter_to_nml_gate_ent.target, "targetname");
+  level.var_8243881a linkTo(level.teleporter_to_nml_gate_ent);
   level.teleporter_to_nml_gate_open = 0;
   level.teleporter_to_nml_powerdown_time = 120;
-  level.teleporter_to_nml_gate2_ent = getent("teleporter_gate_top", "targetname");
+  level.teleporter_to_nml_gate2_ent = getEnt("teleporter_gate_top", "targetname");
   level.teleporter_to_nml_gate2_height = 256;
-  level.teleporter_exit_nml_gate_ent = getent("bunker_gate", "targetname");
+  level.teleporter_exit_nml_gate_ent = getEnt("bunker_gate", "targetname");
   level.teleporter_exit_nml_gate_height = -213;
   level.teleporter_exit_nml_gate_open = 1;
   level.teleporter_exit_nml_powerdown_time = 75;
-  level.teleporter_exit_nml_gate2_ent = getent("bunker_gate_2", "targetname");
+  level.teleporter_exit_nml_gate2_ent = getEnt("bunker_gate_2", "targetname");
   level.teleporter_exit_nml_gate2_height = -106;
   level.teleporter_gate_move_time = 3;
   init_teleporter_lights();
@@ -450,14 +450,14 @@ function teleporter_to_nml_gate_move(open_it) {
   ent playSound("amb_teleporter_gate_start");
   ent playLoopSound("amb_teleporter_gate_loop", 0.5);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   ent thread play_stopmoving_sounds();
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] + gate_height);
-  ent2 moveto(pos2, time, accel, accel);
+  ent2 moveTo(pos2, time, accel, accel);
   if(open_it) {
     ent connectpaths();
   } else {
-    ent disconnectpaths();
+    ent disconnectPaths();
   }
   if(open_it) {
     teleporter_lights_green();
@@ -582,15 +582,15 @@ function teleporter_exit_nml_gate_move(open_it) {
   ent playLoopSound("amb_teleporter_gate_loop", 0.5);
   ent2 = level.teleporter_exit_nml_gate2_ent;
   pos2 = (ent2.origin[0], ent2.origin[1], ent2.origin[2] - gate2_height);
-  ent2 moveto(pos2, time, accel, accel);
+  ent2 moveTo(pos2, time, accel, accel);
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] - gate_height);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   ent thread play_stopmoving_sounds();
   if(open_it) {
     ent connectpaths();
   } else {
     wait(level.teleporter_gate_move_time);
-    ent disconnectpaths();
+    ent disconnectPaths();
   }
 }
 

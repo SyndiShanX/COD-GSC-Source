@@ -110,7 +110,7 @@ function private play_critical_health_rumble(localclientnum) {
 
   while(true) {
     self waittill(#"pulse_blood");
-    self playrumbleonentity(localclientnum, var_cf155b98);
+    self playRumbleOnEntity(localclientnum, var_cf155b98);
     name = self getmpdialogname();
 
     if(!isDefined(name)) {
@@ -648,7 +648,7 @@ function private play_new_stage_rumble(localclientnum) {
   self endon(#"death", #"death_gesture", #"disconnect");
 
   for(i = 0; i < 2; i++) {
-    self playrumbleonentity(localclientnum, "new_health_stage_cp");
+    self playRumbleOnEntity(localclientnum, "new_health_stage_cp");
     wait 0.4;
   }
 }

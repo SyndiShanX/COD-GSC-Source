@@ -219,7 +219,7 @@ function array_spawn(name, key) {
 }
 
 function function_53531f27(key, val = "targetname") {
-  trig = getent(key, val);
+  trig = getEnt(key, val);
 
   if(isDefined(trig) && trig istriggerenabled()) {
     trig trigger::use();
@@ -227,15 +227,15 @@ function function_53531f27(key, val = "targetname") {
 }
 
 function function_5431431d() {
-  plane = getent("cargo_plane", "targetname");
+  plane = getEnt("cargo_plane", "targetname");
   plane notsolid();
   var_853687bd = getEntArray("af_plane_triggers", "targetname");
   var_853687bd = arraycombine(var_853687bd, getEntArray("plane_floor_clip", "targetname"));
   var_853687bd = arraycombine(var_853687bd, getEntArray("plane_cargo", "targetname"));
 
   foreach(thing in var_853687bd) {
-    thing enablelinkto();
-    thing linkto(plane, "tag_body_animate");
+    thing enablelinkTo();
+    thing linkTo(plane, "tag_body_animate");
   }
 
   snd::client_targetname(plane, "cargo_plane");
@@ -247,7 +247,7 @@ function function_5431431d() {
   level.af_plane = plane;
   thread scene::init("scene_tkd_hit3_intro_overlook_arash", [level.af_plane]);
   level.var_c7b3a621 = util::spawn_model("tag_origin", plane.origin - (200, 0, 175), plane.angles);
-  level.var_c7b3a621 linkto(plane);
+  level.var_c7b3a621 linkTo(plane);
   return plane;
 }
 
@@ -256,61 +256,61 @@ function function_d804fc99(a_ents) {
 
   foreach(prop in var_936fb5e7) {
     if(isDefined(a_ents[prop]) && !isDefined(a_ents[prop].clip)) {
-      clip = getent(prop, "script_noteworthy");
+      clip = getEnt(prop, "script_noteworthy");
       a_ents[prop].clip = clip;
-      clip linkto(a_ents[prop], undefined, (0, 0, 0), (0, 0, 0));
+      clip linkTo(a_ents[prop], undefined, (0, 0, 0), (0, 0, 0));
     }
   }
 }
 
 function function_c8381339(plane, var_857b0901) {
-  probe = getent("cargo_probe_1", "targetname");
+  probe = getEnt("cargo_probe_1", "targetname");
 
   if(isDefined(probe)) {
-    probe linkto(plane, "tag_body_animate", (-24, 0, 24), (0, 0, 0));
+    probe linkTo(plane, "tag_body_animate", (-24, 0, 24), (0, 0, 0));
   }
 
-  probe = getent("cargo_probe_2", "targetname");
+  probe = getEnt("cargo_probe_2", "targetname");
 
   if(isDefined(probe)) {
-    probe linkto(plane, "tag_body_animate", (-152, 0, 24), (0, 0, 0));
+    probe linkTo(plane, "tag_body_animate", (-152, 0, 24), (0, 0, 0));
   }
 
-  probe = getent("cargo_probe_3", "targetname");
+  probe = getEnt("cargo_probe_3", "targetname");
 
   if(isDefined(probe)) {
-    probe linkto(plane, "tag_body_animate", (-288, 0, 24), (0, 0, 0));
+    probe linkTo(plane, "tag_body_animate", (-288, 0, 24), (0, 0, 0));
   }
 
-  probe = getent("cargo_probe_4", "targetname");
+  probe = getEnt("cargo_probe_4", "targetname");
 
   if(isDefined(probe)) {
-    probe linkto(plane, "tag_body_animate", (-408, 0, -40), (0, 0, 0));
+    probe linkTo(plane, "tag_body_animate", (-408, 0, -40), (0, 0, 0));
   }
 
   if(var_857b0901) {
-    probe = getent("cargo_probe_5", "targetname");
+    probe = getEnt("cargo_probe_5", "targetname");
 
     if(isDefined(probe)) {
-      probe linkto(plane, "tag_body_animate", (-72, 0, -88), (0, 0, 0));
+      probe linkTo(plane, "tag_body_animate", (-72, 0, -88), (0, 0, 0));
     }
 
-    probe = getent("cargo_probe_6", "targetname");
+    probe = getEnt("cargo_probe_6", "targetname");
 
     if(isDefined(probe)) {
-      probe linkto(plane, "tag_body_animate", (72, 280, -48), (0, 0, 0));
+      probe linkTo(plane, "tag_body_animate", (72, 280, -48), (0, 0, 0));
     }
 
-    probe = getent("cargo_probe_7", "targetname");
+    probe = getEnt("cargo_probe_7", "targetname");
 
     if(isDefined(probe)) {
-      probe linkto(plane, "tag_body_animate", (72, -280, -48), (0, 0, 0));
+      probe linkTo(plane, "tag_body_animate", (72, -280, -48), (0, 0, 0));
     }
 
-    probe = getent("cargo_probe_8", "targetname");
+    probe = getEnt("cargo_probe_8", "targetname");
 
     if(isDefined(probe)) {
-      probe linkto(plane, "tag_body_animate", (-664, 0, -40), (0, 0, 0));
+      probe linkTo(plane, "tag_body_animate", (-664, 0, -40), (0, 0, 0));
     }
   }
 }
@@ -325,14 +325,14 @@ function function_1c77193b(plane) {
 function function_d60a1c78(plane) {
   wait 0.2;
   level.plane_mover = util::spawn_model("tag_origin", plane.origin, plane.angles);
-  plane linkto(level.plane_mover, undefined, (0, 0, 0), (0, 0, 0));
+  plane linkTo(level.plane_mover, undefined, (0, 0, 0), (0, 0, 0));
 }
 
 function function_19919872() {
   level.var_2e151cca = spawner::simple_spawn("af_plane_guy");
 
   foreach(guy in level.var_2e151cca) {
-    guy linkto(level.af_plane, "tag_body_animate");
+    guy linkTo(level.af_plane, "tag_body_animate");
   }
 }
 

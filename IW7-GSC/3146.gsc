@@ -87,7 +87,7 @@ func_125C4(var_0, var_1, var_2, var_3) {
 }
 
 func_11B75(var_0, var_1, var_2, var_3) {
-  return !scripts\asm\asm_bb::bb_isanimscripted();
+  return !scripts\asm\asm_bb::bb_isanimScripted();
 }
 
 func_122AA(var_0, var_1, var_2, var_3) {

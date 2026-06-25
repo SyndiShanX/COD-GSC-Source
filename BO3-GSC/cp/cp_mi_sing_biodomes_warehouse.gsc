@@ -96,7 +96,7 @@ function objective_warehouse_init(str_objective, b_starting) {
     level thread namespace_f1b4cbbc::function_fa2e45b8();
     level thread cp_mi_sing_biodomes_util::function_cc20e187("markets2");
     level thread cp_mi_sing_biodomes_util::function_cc20e187("warehouse", 1);
-    var_6ecc8f2b = getent("markets2_bridge_collision", "targetname");
+    var_6ecc8f2b = getEnt("markets2_bridge_collision", "targetname");
     var_6ecc8f2b delete();
     load::function_a2995f22();
   }
@@ -132,7 +132,7 @@ function dev_warehouse_door_func(str_objective, n_squad) {
   spawner::simple_spawn("warehouse_enemy_warlord", &warehouse_warlord_dev);
   level flag::set("warehouse_warlord");
   level thread clientfield::set("warehouse_window_break", 1);
-  getent("warehouse_overwatch_window", "targetname") delete();
+  getEnt("warehouse_overwatch_window", "targetname") delete();
   s_container = struct::get("warehouse_surprise");
   earthquake(0.25, 0.5, s_container.origin, 1200);
   cp_mi_sing_biodomes_util::enable_traversals(0, "warehouse_robot_exit_traversal", "targetname");
@@ -266,9 +266,9 @@ function wasps_warehouse_spawn() {
   }
   e_volume = undefined;
   if(self.script_aigroup == "wasps_warehouse_left") {
-    e_volume = getent("volume_warehouse_wasps_left", "targetname");
+    e_volume = getEnt("volume_warehouse_wasps_left", "targetname");
   } else if(self.script_aigroup == "wasps_warehouse_right") {
-    e_volume = getent("volume_warehouse_wasps_right", "targetname");
+    e_volume = getEnt("volume_warehouse_wasps_right", "targetname");
   }
   self vehicle_ai::stop_scripted("combat");
   if(isDefined(e_volume)) {
@@ -369,7 +369,7 @@ function squad_control_final_orders() {
       ai_robot util::stop_magic_bullet_shield();
       ai_robot ai::set_behavior_attribute("move_mode", "normal");
       ai_robot ai::set_behavior_attribute("sprint", 1);
-      ai_robot setgoal(getent("back_door_goal_volume", "targetname"));
+      ai_robot setgoal(getEnt("back_door_goal_volume", "targetname"));
     }
   }
 }
@@ -379,10 +379,10 @@ function shoot_container() {
   self ai::set_ignoreme(1);
   self ai::set_ignoreall(1);
   self.upaimlimit = 80;
-  self setgoal(getent("volume_wasps_warehouse_crate_shooters", "targetname"), 1);
+  self setgoal(getEnt("volume_wasps_warehouse_crate_shooters", "targetname"), 1);
   util::magic_bullet_shield(self);
   self util::waittill_notify_or_timeout("goal", 2);
-  e_target = getent("container_target", "targetname");
+  e_target = getEnt("container_target", "targetname");
   self ai::set_ignoreall(0);
   self thread ai::shoot_at_target("normal", e_target, "tag_origin", 2);
   level flag::wait_till_timeout(3, "container_drop");
@@ -392,12 +392,12 @@ function shoot_container() {
   self ai::set_ignoreme(0);
   self ai::set_ignoreall(0);
   if(level flag::get("left_path")) {
-    self setgoal(getent("warehouse_goal_volume_back_left", "targetname"));
+    self setgoal(getEnt("warehouse_goal_volume_back_left", "targetname"));
   } else {
     if(level flag::get("right_path")) {
-      self setgoal(getent("warehouse_goal_volume_back_right", "targetname"));
+      self setgoal(getEnt("warehouse_goal_volume_back_right", "targetname"));
     } else if(level flag::get("center_path")) {
-      self setgoal(getent("warehouse_crate_shooters_center_goal", "targetname"));
+      self setgoal(getEnt("warehouse_crate_shooters_center_goal", "targetname"));
     }
   }
 }
@@ -408,8 +408,8 @@ function container_done() {
 }
 
 function container_crash() {
-  e_container_clip = getent("container_drop_clip", "targetname");
-  var_d76c34c9 = getent("container_pre_drop_clip", "targetname");
+  e_container_clip = getEnt("container_drop_clip", "targetname");
+  var_d76c34c9 = getEnt("container_pre_drop_clip", "targetname");
   e_container_clip connectpaths();
   level flag::wait_till("container_drop");
   spawn_manager::enable("sm_warehouse_robot_jumpdown");
@@ -418,10 +418,10 @@ function container_crash() {
   level waittill("container_hit_01");
   var_d76c34c9 delete();
   level thread container_crushes_robots();
-  e_container_clip disconnectpaths();
+  e_container_clip disconnectPaths();
   wait(0.25);
   s_container = struct::get("container_crash");
-  playsoundatposition("evt_warlord_door_smash", s_container.origin);
+  playSoundAtPosition("evt_warlord_door_smash", s_container.origin);
   playrumbleonposition("cp_biodomes_warehouse_container_rumble", s_container.origin);
 }
 
@@ -436,7 +436,7 @@ function vo_warehouse_container() {
 
 function container_crushes_robots() {
   a_robots = getaiteamarray("allies");
-  e_container_clip = getent("container_drop_clip", "targetname");
+  e_container_clip = getEnt("container_drop_clip", "targetname");
   arrayremovevalue(a_robots, level.ai_hendricks);
   for(i = 0; i < a_robots.size; i++) {
     if(a_robots[i] istouching(e_container_clip)) {
@@ -461,7 +461,7 @@ function container_ambusher() {
 }
 
 function glass_break(str_trigger_name) {
-  t_glass = getent(str_trigger_name, "targetname");
+  t_glass = getEnt(str_trigger_name, "targetname");
   if(isDefined(t_glass)) {
     t_glass flag::init("glass_broken");
     while(isDefined(t_glass) && t_glass flag::get("glass_broken") == 0) {
@@ -495,12 +495,12 @@ function wait_for_objective_complete() {
 function back_door_shooters() {
   trigger::wait_till("trig_back_door_group");
   spawner::simple_spawn(getEntArray("back_door_enemy", "script_aigroup"));
-  getent("back_door_look_trigger", "script_noteworthy") triggerenable(1);
+  getEnt("back_door_look_trigger", "script_noteworthy") triggerenable(1);
 }
 
 function back_door_close() {
-  level.mdl_door_upper = getent("cloudmountain_door_upper", "targetname");
-  level.mdl_door_lower = getent("cloudmountain_door_lower", "targetname");
+  level.mdl_door_upper = getEnt("cloudmountain_door_upper", "targetname");
+  level.mdl_door_lower = getEnt("cloudmountain_door_lower", "targetname");
   level.mdl_door_upper.v_open_pos = level.mdl_door_upper.origin;
   level.mdl_door_lower.v_open_pos = level.mdl_door_lower.origin;
   level.mdl_door_upper movez(-40, 2);
@@ -511,9 +511,9 @@ function back_door_close() {
   level.mdl_door_upper playSound("evt_warehouse_door_close_stop");
   level.mdl_door_upper stoploopsound(0.5);
   level flag::set("back_door_closed");
-  var_60f8f46f = getent("back_door_full_clip", "targetname");
+  var_60f8f46f = getEnt("back_door_full_clip", "targetname");
   var_60f8f46f movez(128, 0.05);
-  var_bee08349 = getent("back_door_no_pen_clip", "targetname");
+  var_bee08349 = getEnt("back_door_no_pen_clip", "targetname");
   var_bee08349 movez(128, 0.05);
   spawner::add_spawn_function_group("cloud_mountain_siegebot", "targetname", &function_c001cefd);
   spawn_manager::enable("cloud_mountain_siegebot_manager");
@@ -528,11 +528,11 @@ function back_door_close() {
 
 function warehouse_door_open() {
   if(!isDefined(level.mdl_door_upper) || !isDefined(level.mdl_door_lower)) {
-    level.mdl_door_upper = getent("cloudmountain_door_upper", "targetname");
-    level.mdl_door_lower = getent("cloudmountain_door_lower", "targetname");
+    level.mdl_door_upper = getEnt("cloudmountain_door_upper", "targetname");
+    level.mdl_door_lower = getEnt("cloudmountain_door_lower", "targetname");
   }
-  level.mdl_door_upper moveto(level.mdl_door_upper.v_open_pos, 2);
-  level.mdl_door_lower moveto(level.mdl_door_lower.v_open_pos, 2);
+  level.mdl_door_upper moveTo(level.mdl_door_upper.v_open_pos, 2);
+  level.mdl_door_lower moveTo(level.mdl_door_lower.v_open_pos, 2);
   level.mdl_door_upper playSound("evt_warehouse_door_close_start");
   level.mdl_door_upper playLoopSound("evt_warehouse_door_close_loop", 1);
   level.mdl_door_lower waittill("movedone");
@@ -540,15 +540,15 @@ function warehouse_door_open() {
   level.mdl_door_upper stoploopsound(0.5);
   wait(3);
   level flag::set("back_door_opened");
-  var_ec935bdb = getent("back_door_player_clip", "targetname");
+  var_ec935bdb = getEnt("back_door_player_clip", "targetname");
   if(isDefined(var_ec935bdb)) {
     var_ec935bdb delete();
   }
-  var_3dffb84b = getent("back_door_full_clip", "targetname");
+  var_3dffb84b = getEnt("back_door_full_clip", "targetname");
   if(isDefined(var_3dffb84b)) {
     var_3dffb84b delete();
   }
-  var_6f9ff65c = getent("back_door_no_pen_clip", "targetname");
+  var_6f9ff65c = getEnt("back_door_no_pen_clip", "targetname");
   if(isDefined(var_6f9ff65c)) {
     var_6f9ff65c delete();
   }
@@ -599,7 +599,7 @@ function back_door_ai_side() {
     }
   }
   level util::waittill_either("start_back_door_retreat", "siegebot_damage_enabled");
-  e_retreat_goal = getent("back_door_goal_volume", "targetname");
+  e_retreat_goal = getEnt("back_door_goal_volume", "targetname");
   foreach(ai_back_door_enemy in a_back_door_ai) {
     if(isalive(ai_back_door_enemy)) {
       ai_back_door_enemy.ignoreme = 0;
@@ -621,7 +621,7 @@ function wait_for_sight_to_engage() {
   while(isDefined(self.enemy) && !self cansee(self.enemy)) {
     wait(0.5);
   }
-  self setgoal(getent("entire_warehouse_setgoal_volume", "targetname"));
+  self setgoal(getEnt("entire_warehouse_setgoal_volume", "targetname"));
 }
 
 function warehouse_warlord_surprise() {
@@ -635,7 +635,7 @@ function warehouse_warlord_surprise() {
   level flag::set("warehouse_warlord");
   objectives::hide("cp_waypoint_breadcrumb");
   spawner::simple_spawn("warehouse_enemy_group3", &warehouse_surprise_spawns);
-  getent("warehouse_overwatch_window", "targetname") delete();
+  getEnt("warehouse_overwatch_window", "targetname") delete();
   s_landing = struct::get("warehouse_warlord_surprise_landing");
   playrumbleonposition("cp_biodomes_warehouse_warlord_rumble", s_landing.origin);
   level thread function_62523f1d();
@@ -646,7 +646,7 @@ function warehouse_warlord_surprise() {
 function function_652f488c() {
   level flag::wait_till("warehouse_warlord_friendly_goal");
   level.var_996e05eb = "friendly_spawns_warehouse_door";
-  e_goal_volume = getent("warehouse_warlord_friendly_volume", "targetname");
+  e_goal_volume = getEnt("warehouse_warlord_friendly_volume", "targetname");
   foreach(ai_robot in level.a_ai_squad) {
     ai_robot setgoal(e_goal_volume, 1);
   }
@@ -688,7 +688,7 @@ function function_62523f1d() {
 }
 
 function function_5ecd2f63() {
-  var_7c2eb0ca = getent("warehouse_warlord_retreat_check_volume", "targetname");
+  var_7c2eb0ca = getEnt("warehouse_warlord_retreat_check_volume", "targetname");
   var_bb2f0c05 = spawn_manager::get_ai("warehouse_enemy_warlord_manager");
   foreach(e_warlord in var_bb2f0c05) {
     if(e_warlord istouching(var_7c2eb0ca)) {
@@ -699,7 +699,7 @@ function function_5ecd2f63() {
 }
 
 function add_open_door_action() {
-  e_robot_task = getent("pry_door", "script_noteworthy");
+  e_robot_task = getEnt("pry_door", "script_noteworthy");
   level thread squad_control::squad_control_task(e_robot_task);
 }
 
@@ -708,7 +708,7 @@ function player_hijack_watcher() {
   level endon("hash_43a6ada4");
   while(true) {
     self waittill("clonedentity", e_clone);
-    self cybercom_gadget_security_breach::setanchorvolume(getent("hijacked_vehicle_range", "targetname"));
+    self cybercom_gadget_security_breach::setanchorvolume(getEnt("hijacked_vehicle_range", "targetname"));
   }
 }
 

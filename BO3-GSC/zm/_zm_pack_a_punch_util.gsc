@@ -87,14 +87,14 @@ function can_swap_attachments() {
 
 function update_hint_string(player) {
   if(self flag::get("pap_offering_gun")) {
-    self sethintstring(&"ZOMBIE_GET_UPGRADED_FILL");
+    self setHintString(&"ZOMBIE_GET_UPGRADED_FILL");
     return;
   }
   w_curr_player_weapon = player getcurrentweapon();
   if(zm_weapons::is_weapon_upgraded(w_curr_player_weapon)) {
-    self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH_AAT", self.aat_cost);
+    self setHintString(&"ZOMBIE_PERK_PACKAPUNCH_AAT", self.aat_cost);
   } else {
-    self sethintstring(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
+    self setHintString(&"ZOMBIE_PERK_PACKAPUNCH", self.cost);
   }
 }
 

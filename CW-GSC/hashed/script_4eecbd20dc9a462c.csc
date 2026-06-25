@@ -108,7 +108,7 @@ function function_1da732e(localclientnum, oldval, newval, bnewent, binitialsnap,
 
     if(isDefined(level.var_bb4264e3)) {
       if(isDefined(level.var_f7dac9d2.var_c6eb2a1d)) {
-        level.var_bb4264e3 playrumbleonentity(fieldname, level.var_f7dac9d2.var_c6eb2a1d);
+        level.var_bb4264e3 playRumbleOnEntity(fieldname, level.var_f7dac9d2.var_c6eb2a1d);
       }
 
       level.var_bb4264e3 playSound(fieldname, #"hash_7b6b109a826f44cf");
@@ -130,7 +130,7 @@ function function_1da732e(localclientnum, oldval, newval, bnewent, binitialsnap,
 
     if(isDefined(level.var_bb4264e3)) {
       if(isDefined(level.var_f7dac9d2.var_c6eb2a1d)) {
-        level.var_bb4264e3 playrumbleonentity(fieldname, level.var_f7dac9d2.var_bf7c296c);
+        level.var_bb4264e3 playRumbleOnEntity(fieldname, level.var_f7dac9d2.var_bf7c296c);
       }
 
       level.var_bb4264e3 playSound(fieldname, #"hash_7b6b119a826f4682");
@@ -154,7 +154,7 @@ function function_d6f6757c(localclientnum, oldval, newval, bnewent, binitialsnap
       level.var_bb4264e3 playSound(fieldname, #"hash_7b6b129a826f4835");
 
       if(isDefined(level.var_f7dac9d2.var_a97fd8e0)) {
-        level.var_bb4264e3 playrumbleonentity(fieldname, level.var_f7dac9d2.var_a97fd8e0);
+        level.var_bb4264e3 playRumbleOnEntity(fieldname, level.var_f7dac9d2.var_a97fd8e0);
       }
 
       if(isDefined(level.var_f7dac9d2.var_917dc7d4)) {

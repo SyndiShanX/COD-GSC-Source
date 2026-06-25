@@ -71,7 +71,7 @@ wingsuit_main() {
 
 wingsuit_breadcrumb_objective() {
   level.player setclientdvar("cg_objectiveIndicatorFarFadeDist", 80000);
-  s_crumb_pos = getstruct("squirrel_breadcrumb_start", "targetname");
+  s_crumb_pos = getStruct("squirrel_breadcrumb_start", "targetname");
 
   while(true) {
     n_radius = int(s_crumb_pos.script_noteworthy);
@@ -83,7 +83,7 @@ wingsuit_breadcrumb_objective() {
     }
 
     if(isDefined(s_crumb_pos.target)) {
-      s_crumb_pos = getstruct(s_crumb_pos.target, "targetname");
+      s_crumb_pos = getStruct(s_crumb_pos.target, "targetname");
     } else {
       break;
     }
@@ -120,7 +120,7 @@ trigger_tree_top_think() {
   while(true) {
     self waittill("trigger");
     earthquake(2.0, 0.75, level.player.origin, 500, level.player);
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     level.player startfadingblur(3, 1);
     level.player playSound("fly_bump_foliage");
     wait(randomfloatrange(0.5, 0.8));
@@ -142,7 +142,7 @@ trigger_off_course_think() {
 
 jet_stream_launch() {
   level clientnotify("wng_st");
-  playsoundatposition("evt_wingsuit_swoop", (0, 0, 0));
+  playSoundAtPosition("evt_wingsuit_swoop", (0, 0, 0));
   flag_set("jet_stream_launch_obj_complete");
   level.player thread do_fall_feedback();
   level.player startcameratween(2);
@@ -163,7 +163,7 @@ jet_stream_launch() {
   level thread wingsuit_breadcrumb_objective();
   luinotifyevent(&"hud_update_vehicle_entity", 1, level.player.vh_wingsuit getentitynumber());
   flag_wait("wingsuit_landing_started");
-  m_cliff_clip = getent("landing_clip", "targetname");
+  m_cliff_clip = getEnt("landing_clip", "targetname");
   m_cliff_clip notsolid();
   wait 0.3;
   level.harper thread say_dialog("harp_deploying_chute_0");
@@ -203,7 +203,7 @@ wingsuit_deploy_chute() {
   wait 0.5;
   add_visor_text("MONSOON_CHUTE_DEPLOYED", 0, "orange", "bright", 1);
   self playSound("evt_chute_deploy");
-  self playrumbleonentity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
   earthquake(1, 0.5, self.origin, 500, self);
   self thread do_chute_feedback();
   chute_ent = spawn("script_origin", self.origin);
@@ -275,7 +275,7 @@ land_wingsuit(str_node) {
   anchor.angles = (0, level.player.angles[1], level.player.angles[2]);
   anchor.targetname = "land_suit";
   self playSound("evt_chute_landing");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.7, 0.5, level.player.origin, 245, level.player);
   run_scene("player_land_suit");
   level.player freezecontrols(0);
@@ -283,7 +283,7 @@ land_wingsuit(str_node) {
   trace_end = level.player.origin + vectorscale((0, 0, -1), 100.0);
   player_trace = bulletTrace(trace_start, trace_end, 0, level.player);
   level.player startcameratween(0.2);
-  level.player setorigin(player_trace["position"]);
+  level.player setOrigin(player_trace["position"]);
   level thread maps\createart\monsoon_art::exterior_vision();
   flag_set("wingsuit_player_landed");
   self delete();
@@ -293,7 +293,7 @@ land_wingsuit(str_node) {
     m_grass delete();
   }
 
-  m_chute = getent("fxanim_parachute", "targetname");
+  m_chute = getEnt("fxanim_parachute", "targetname");
   m_chute show();
   setcellinvisibleatpos((15464, -36008, 22000));
 }
@@ -330,7 +330,7 @@ player_wingsuit_tutorial() {
 spawn_wingsuit_and_drive_on_path(str_node, n_ideal, n_min, v_offset) {
   self.vh_wingsuit = spawn_vehicle_from_targetname("vh_wingsuit_spawner");
   self.vh_wingsuit hide();
-  self linkto(self.vh_wingsuit, "tag_driver");
+  self linkTo(self.vh_wingsuit, "tag_driver");
   self thread do_flight_anims("fwd_idle");
   restore_ik_headtracking_limits();
   self.lookat_set_in_anim = 0;
@@ -366,12 +366,12 @@ camo_intro_main() {
   level thread camo_intro_squad();
   level thread camo_intro_landing_vo();
   delay_thread(5, ::autosave_by_name, "player_landed");
-  getent("lz_patroller_2", "targetname") add_spawn_function(::camo_intro_camo_ai);
+  getEnt("lz_patroller_2", "targetname") add_spawn_function(::camo_intro_camo_ai);
   trigger_wait("trigger_start_camo_intro");
   level thread camo_intro_threaded();
   trigger_use("camo_intro_squad_color");
   array_thread(get_heroes(), ::reset_movemode);
-  t_lookat = getent("lookat_other_landing", "targetname");
+  t_lookat = getEnt("lookat_other_landing", "targetname");
   t_lookat delete();
   a_vh_wingsuits = getEntArray("vh_wingsuit_spawner", "targetname");
   array_delete(a_vh_wingsuits);
@@ -410,7 +410,7 @@ camo_intro_squad() {
 camo_intro_harper() {
   level endon("wingsuit_landing_done");
   level.harper unlink();
-  s_pos = getstruct("harper_land_position", "targetname");
+  s_pos = getStruct("harper_land_position", "targetname");
   level.harper unlink();
   end_scene("harper_fwd_idle");
   level.harper forceteleport(s_pos.origin, s_pos.angles);
@@ -420,7 +420,7 @@ camo_intro_harper() {
   level.harper force_goal(getnode("harper_landing_wait", "targetname"), 32);
   level notify("harper_in_position");
   level.harper lookatentity(level.player);
-  set_objective(level.obj_reach_lab, getent("trigger_start_camo_intro", "targetname"), "breadcrumb");
+  set_objective(level.obj_reach_lab, getEnt("trigger_start_camo_intro", "targetname"), "breadcrumb");
 }
 
 camo_intro_camo_ai() {
@@ -457,7 +457,7 @@ camo_intro_threaded() {
 
 camo_intro_narrow_view(m_player_body) {
   level.player startcameratween(0.3);
-  level.player playerlinktodelta(getent("player_body", "targetname"), "tag_player", 1, 0, 20, 30, 0);
+  level.player playerlinktodelta(getEnt("player_body", "targetname"), "tag_player", 1, 0, 20, 30, 0);
 }
 
 ignore_squad(b_ignore) {
@@ -527,7 +527,7 @@ wingsuit_collision_check() {
       level.player dodamage(1000, level.player.origin);
 
       if(soundplayed == 0) {
-        playsoundatposition("evt_wingsuit_death", (0, 0, 0));
+        playSoundAtPosition("evt_wingsuit_death", (0, 0, 0));
         soundplayed = 1;
       }
 
@@ -545,7 +545,7 @@ wingsuit_collision_check() {
       level.player dodamage(1000, level.player.origin);
 
       if(soundplayed == 0) {
-        playsoundatposition("evt_wingsuit_death", (0, 0, 0));
+        playSoundAtPosition("evt_wingsuit_death", (0, 0, 0));
         soundplayed = 1;
       }
 
@@ -570,7 +570,7 @@ do_flight_feedback() {
       rumble = 0.3;
     }
 
-    self playrumbleonentity("tank_rumble");
+    self playRumbleOnEntity("tank_rumble");
     earthquake(0.15, 0.05, self.origin, 1000, self);
     wait 0.05;
   }
@@ -589,7 +589,7 @@ do_fall_feedback() {
       rumble = 0.3;
     }
 
-    self playrumbleonentity("tank_rumble");
+    self playRumbleOnEntity("tank_rumble");
     earthquake(0.15, 0.05, self.origin, 1000, self);
     wait 0.05;
   }
@@ -609,7 +609,7 @@ do_chute_feedback() {
       rumble = 0.3;
     }
 
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     earthquake(0.25, 0.05, self.origin, 1000, self);
     wait 0.05;
   }
@@ -688,7 +688,7 @@ ai_wingsuit_think(v_offset, n_speed, n_acceleration, v_variable_offset, n_variab
     }
 
     v_desired_vel = x * v_fwd + y * v_right + z * v_up;
-    v = vectornormalize(v_desired_vel);
+    v = vectorNormalize(v_desired_vel);
     d = vectordot(v, (0, 0, 1));
 
     if(d != 0 && abs(d) < 0.9) {

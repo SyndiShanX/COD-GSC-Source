@@ -83,7 +83,7 @@ _id_B90B(var_0, var_1, var_2) {
   thread scripts\engine\utility::_id_472E(var_10);
   self _meth_8251("face angle", var_4.angles[1]);
   var_11 = 1.63;
-  self linkto(var_10);
+  self linkTo(var_10);
   var_12 = _id_0009::_id_1C5C(var_0, var_1);
   _id_0009::_id_1C8E(var_0, var_1, _id_0009::_id_1C6E(var_12));
   self _meth_85ED(var_1, var_12);
@@ -91,7 +91,7 @@ _id_B90B(var_0, var_1, var_2) {
 
   foreach(var_14 in var_6) {
     var_15 = var_11 / var_6.size;
-    var_10 moveto(var_14, var_15);
+    var_10 moveTo(var_14, var_15);
     var_10 waittill("movedone");
   }
 
@@ -377,8 +377,8 @@ _id_DC10(var_0, var_1, var_2, var_3) {
   var_7 = _id_6E4E(var_5, self._id_109A3 + 1);
   var_7 = (var_7[0], var_7[1], var_6[2]);
   var_4 = (var_4[0], var_4[1], var_6[2]);
-  var_8 = vectornormalize(var_7 - var_6);
-  var_9 = vectornormalize(var_4 - var_6);
+  var_8 = vectorNormalize(var_7 - var_6);
+  var_9 = vectorNormalize(var_4 - var_6);
   var_10 = vectordot(var_8, var_9);
 
   if(var_10 < 0.2588) {
@@ -842,7 +842,7 @@ _id_B924(var_0, var_1, var_2) {
   var_17 = _func_0079(var_5);
   var_18 = var_17 * var_16;
   thread _id_D0BD(var_0, var_1, var_18, "wall_run_loop_done", 1);
-  var_19 = vectornormalize(var_14);
+  var_19 = vectorNormalize(var_14);
   self _meth_8251("face direction", var_19);
   thread _id_B921(var_1);
   self _meth_8019("noclip");
@@ -889,7 +889,7 @@ _id_3640(var_0, var_1, var_2) {
   var_8 = self._id_F4C9;
   var_9 = self._id_F4C7 - _id_6E4E(var_8, var_8._id_109A0._id_A576.size - 1);
   var_9 = (var_9[0], var_9[1], 0);
-  var_9 = vectornormalize(var_9);
+  var_9 = vectorNormalize(var_9);
   var_10 = vectortoangles(var_9);
   var_11 = _func_000B(var_10[1] - self.angles[1]);
   var_11 = abs(var_11);
@@ -1103,7 +1103,7 @@ _id_DB48(var_0, var_1, var_2, var_3) {
     }
 
     var_4 = self._id_F4C9;
-    var_5 = vectornormalize(_id_6E4E(var_4, 0) - self.origin);
+    var_5 = vectorNormalize(_id_6E4E(var_4, 0) - self.origin);
     var_6 = _id_08FC::_id_2EF9(var_0, var_1, var_2, var_5, 0, 1);
 
     if(!isDefined(var_6)) {
@@ -1161,7 +1161,7 @@ _id_DB47(var_0, var_1, var_2, var_3) {
   } else {
     var_5 = self._id_F4C7 - self._id_F4C9.origin;
     var_5 = (var_5[0], var_5[1], 0);
-    var_4 = vectornormalize(var_5);
+    var_4 = vectorNormalize(var_5);
     var_6 = vectortoangles(var_4);
   }
 

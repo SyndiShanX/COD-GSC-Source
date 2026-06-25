@@ -486,7 +486,7 @@ lerp_player_view_to_tag_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   if(var_8) {
     return;
   }
-  var_0 playerlinkto(self, var_1, var_3, var_4, var_5, var_6, var_7, 0);
+  var_0 playerlinkTo(self, var_1, var_3, var_4, var_5, var_6, var_7, 0);
 }
 
 lerp_player_view_to_tag_oldstyle_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -799,7 +799,7 @@ dynamic_run_speed_proc(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_13 = anglesToForward(self.angles);
-    var_14 = vectornormalize(var_9.origin - self.origin);
+    var_14 = vectorNormalize(var_9.origin - self.origin);
     var_15 = vectordot(var_13, var_14);
     var_16 = distancesquared(self.origin, var_9.origin);
     var_17 = var_16;
@@ -906,7 +906,7 @@ dynamic_run_set(var_0) {
       }
 
       self notify("stop_loop");
-      maps\_utility::anim_stopanimscripted();
+      maps\_utility::anim_stopanimScripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
     case "run":
@@ -924,7 +924,7 @@ dynamic_run_set(var_0) {
         maps\_utility::clear_run_anim();
 
       self notify("stop_loop");
-      maps\_utility::anim_stopanimscripted();
+      maps\_utility::anim_stopanimScripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
     case "stop":
@@ -945,7 +945,7 @@ dynamic_run_set(var_0) {
         maps\_utility::clear_run_anim();
 
       self notify("stop_loop");
-      maps\_utility::anim_stopanimscripted();
+      maps\_utility::anim_stopanimScripted();
       maps\_utility::ent_flag_clear("dynamic_run_speed_stopped");
       break;
     case "crouch":

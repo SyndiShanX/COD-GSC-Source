@@ -45,9 +45,9 @@
 
 function starting(str_objective) {
   spawner::simple_spawn("spawner_perseus_forces", &function_c50c5a2a);
-  level thread scene::init_streamer(#"scene_duga_loose_ends", getplayers());
-  level thread scene::init_streamer(#"scene_duga_loose_ends_adler", getplayers());
-  level thread scene::init_streamer(#"scene_duga_loose_ends_tappy", getplayers());
+  level thread scene::init_streamer(#"scene_duga_loose_ends", getPlayers());
+  level thread scene::init_streamer(#"scene_duga_loose_ends_adler", getPlayers());
+  level thread scene::init_streamer(#"scene_duga_loose_ends_tappy", getPlayers());
   level.perseus = spawner::simple_spawn_single("perseus_starting");
   level.perseus.animname = "perseus";
   level.perseus setteam(#"allies");
@@ -65,22 +65,22 @@ function starting(str_objective) {
 
 function main(str_objective, b_skipto) {
   level battlechatter::function_2ab9360b(0);
-  box02 = getent("box02", "targetname");
+  box02 = getEnt("box02", "targetname");
   box02.animname = "box02";
-  box03 = getent("box03", "targetname");
+  box03 = getEnt("box03", "targetname");
   box03.animname = "box03";
-  box04 = getent("box04", "targetname");
+  box04 = getEnt("box04", "targetname");
   box04.animname = "box04";
-  extinguisher = getent("extinguisher", "targetname");
+  extinguisher = getEnt("extinguisher", "targetname");
   extinguisher.animname = "extinguisher";
-  level.cig = getent("cigarette", "targetname");
+  level.cig = getEnt("cigarette", "targetname");
   level.cig.animname = "cigarette";
   level scene::add_scene_func("scene_duga_loose_ends_tappy", &function_cc592b59, "init");
   level scene::init("scene_duga_loose_ends_tappy");
   namespace_e1ccb37b::music("deactivate_2.0_ambush");
   animation::add_notetrack_func("duga_loose_ends::perseus_swap_to_nomask", &function_648dc3bf);
   animation::add_notetrack_func("duga_loose_ends::handle_japanese_sku_for_ending", &function_bf27d987);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   frag = getweapon(#"frag_grenade");
 
   if(e_player hasweapon(frag)) {
@@ -100,9 +100,9 @@ function main(str_objective, b_skipto) {
   s_org = struct::get("tag_align_loose_ends", "targetname");
   level.adler thread animation::first_frame("t9_duga_loose_ends_adler", s_org);
   level thread scene::init("scene_duga_loose_ends");
-  var_b9335c1c = getent("roof_door_clip", "targetname");
-  door_left = getent("door_left", "targetname");
-  door_right = getent("door_right", "targetname");
+  var_b9335c1c = getEnt("roof_door_clip", "targetname");
+  door_left = getEnt("door_left", "targetname");
+  door_right = getEnt("door_right", "targetname");
   door_left.animname = "door_left";
   door_right.animname = "door_right";
   level thread function_f7d3abcf();
@@ -206,7 +206,7 @@ function objectives() {
 }
 
 function function_45405080() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
   level flag::set("flag_loose_ends_obj");
   str_scene = "scene_duga_loose_ends";
@@ -229,7 +229,7 @@ function function_45405080() {
     level.adler stopsounds();
     globallogic_ui::function_68bb2f48();
     level scene::stop(str_scene + "_adler");
-    level scene::play("scene_duga_loose_ends_tappy", "enter", [getplayers()[0], level.adler]);
+    level scene::play("scene_duga_loose_ends_tappy", "enter", [getPlayers()[0], level.adler]);
 
     if(isDefined(level.cig)) {
       level.cig delete();
@@ -330,7 +330,7 @@ function function_fc788704() {
 function function_d2a61d5e() {
   level endon(#"flag_adler_killed_no_tappy");
   str_scene = "scene_duga_loose_ends";
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player setstance("stand");
   level.player thread util::function_749362d7(1);
   a_actors = [e_player, level.perseus];
@@ -517,7 +517,7 @@ function function_597bc742() {
   level endon(#"hash_4a089c22c924242b");
   level.player.var_5588383e = 0;
   e_tag = util::spawn_model("tag_origin", level.adler gettagorigin("j_neck"), level.adler gettagangles("j_neck"));
-  e_tag linkto(level.adler, "j_neck");
+  e_tag linkTo(level.adler, "j_neck");
   level.adler.var_5fedded0 = e_tag;
   e_tag prompts::function_c97a48c7(#"use_tap", {
     #var_de6f0004: 0, #var_4ac77177: 0, #var_5e83875a: 270, #var_87c991f3: 128, #requires_line_of_sight: 0, #var_be77841a: 0
@@ -607,9 +607,9 @@ function function_ea8ca6bb() {
 
 function function_f5d9adcd(str_objective) {
   spawner::simple_spawn("spawner_perseus_forces", &function_c50c5a2a);
-  level thread scene::init_streamer(#"scene_duga_loose_ends", getplayers());
-  level thread scene::init_streamer(#"scene_duga_loose_ends_adler", getplayers());
-  level thread scene::init_streamer(#"scene_duga_loose_ends_tappy", getplayers());
+  level thread scene::init_streamer(#"scene_duga_loose_ends", getPlayers());
+  level thread scene::init_streamer(#"scene_duga_loose_ends_adler", getPlayers());
+  level thread scene::init_streamer(#"scene_duga_loose_ends_tappy", getPlayers());
   level.perseus = spawner::simple_spawn_single("perseus");
   level.perseus setteam(#"allies");
   level.perseus setgoal(level.perseus.origin);
@@ -622,24 +622,24 @@ function function_f5d9adcd(str_objective) {
 
 function function_dbe8c8f4(str_objective, b_skipto) {
   level thread function_f7d3abcf();
-  var_b9335c1c = getent("roof_door_clip", "targetname");
-  door_left = getent("door_left", "targetname");
-  door_right = getent("door_right", "targetname");
+  var_b9335c1c = getEnt("roof_door_clip", "targetname");
+  door_left = getEnt("door_left", "targetname");
+  door_right = getEnt("door_right", "targetname");
   door_left.animname = "door_left";
   door_right.animname = "door_right";
-  box02 = getent("box02", "targetname");
+  box02 = getEnt("box02", "targetname");
   box02.animname = "box02";
-  box03 = getent("box03", "targetname");
+  box03 = getEnt("box03", "targetname");
   box03.animname = "box03";
-  box04 = getent("box04", "targetname");
+  box04 = getEnt("box04", "targetname");
   box04.animname = "box04";
-  extinguisher = getent("extinguisher", "targetname");
+  extinguisher = getEnt("extinguisher", "targetname");
   extinguisher.animname = "extinguisher";
-  level.cig = getent("cigarette", "targetname");
+  level.cig = getEnt("cigarette", "targetname");
   level.cig.animname = "cigarette";
   namespace_e1ccb37b::music("deactivate_2.0_ambush");
   animation::add_notetrack_func("duga_loose_ends::perseus_swap_to_nomask", &function_648dc3bf);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   frag = getweapon(#"frag_grenade");
 
   if(e_player hasweapon(frag)) {
@@ -647,7 +647,7 @@ function function_dbe8c8f4(str_objective, b_skipto) {
     e_player setweaponammostock(frag, 0);
   }
 
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   namespace_82bfe441::fade(1, "FadeSlow");
   e_player showcrosshair(0);
   level flag::set(#"hash_62d033072bf4254b");
@@ -674,7 +674,7 @@ function function_dbe8c8f4(str_objective, b_skipto) {
     namespace_e1ccb37b::music("4.1_adler_attack");
     level.adler stopsounds();
     level scene::stop(str_scene + "_adler");
-    level scene::play("scene_duga_loose_ends_tappy", "enter", [getplayers()[0], level.adler]);
+    level scene::play("scene_duga_loose_ends_tappy", "enter", [getPlayers()[0], level.adler]);
     level thread function_3babb313();
     level flag::wait_till("flag_stab_finished");
     str_shot = "tappy_response";

@@ -209,11 +209,11 @@ function function_525f8122(localclientnum, pos, surface, notetrack, bone) {
   }
 
   if(n_scale <= 1 && n_scale > 0.8) {
-    e_player playrumbleonentity(surface, "damage_heavy");
+    e_player playRumbleOnEntity(surface, "damage_heavy");
   } else if(n_scale <= 0.8 && n_scale > 0.4) {
-    e_player playrumbleonentity(surface, "damage_light");
+    e_player playRumbleOnEntity(surface, "damage_light");
   } else {
-    e_player playrumbleonentity(surface, "reload_small");
+    e_player playRumbleOnEntity(surface, "reload_small");
   }
 
   fx = util::playFXOnTag(surface, level._effect[#"fx_mech_foot_step"], self, bone);
@@ -244,7 +244,7 @@ function private function_16686fd4(localclientnum, model, pos, angles, hitpos, v
   }
 
   velocity = self getvelocity();
-  var_9ec7627b = vectornormalize(velocity);
+  var_9ec7627b = vectorNormalize(velocity);
   var_bab6cdb7 = length(velocity);
 
   if(isDefined(direction) && direction == "back") {

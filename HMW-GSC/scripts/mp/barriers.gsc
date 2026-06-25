@@ -40,7 +40,7 @@ create_barrier(model, model_origin, model_angles) {
 }
 
 remove_barrier(entity) {
-  ent = getent(entity, "targetname");
+  ent = getEnt(entity, "targetname");
   if(isDefined(ent)) {
     ent delete();
   }

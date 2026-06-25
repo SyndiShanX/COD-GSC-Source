@@ -73,7 +73,7 @@ func_1288B(var_0) {
     var_6 = "veh_venom_mp_slow";
   }
 
-  var_9 = spawnvehicle(var_3, var_0.streakname, var_6, var_2, self.angles, self);
+  var_9 = spawnVehicle(var_3, var_0.streakname, var_6, var_2, self.angles, self);
   var_9.team = self.team;
   var_9.owner = self;
   var_9.health = 99999;

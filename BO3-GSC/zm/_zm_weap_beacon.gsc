@@ -188,8 +188,8 @@ function proximity_detonate(owner) {
   explosionradius = detonateradius * 2;
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateradius), 4, detonateradius, detonateradius * 1.5);
   damagearea setexcludeteamfortrigger(owner.team);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self.damagearea = damagearea;
   while(isDefined(self)) {
     damagearea waittill("trigger", ent);
@@ -232,7 +232,7 @@ function player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_
     model endon("weapon_beacon_timeout");
     model setModel("wpn_t7_zmb_hd_g_strike_world");
     model useanimtree($zombie_beacon);
-    model linkto(grenade, "", var_65f5946c);
+    model linkTo(grenade, "", var_65f5946c);
     model.angles = grenade.angles;
     model thread beacon_cleanup(grenade);
     model.owner = self;
@@ -307,10 +307,10 @@ function player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_
 
 function weapon_beacon_anims() {
   n_time = getanimlength(%zombie_beacon::o_zm_dlc5_zombie_homing_deploy);
-  self animscripted("beacon_deploy", self.origin, self.angles, %zombie_beacon::o_zm_dlc5_zombie_homing_deploy);
+  self animScripted("beacon_deploy", self.origin, self.angles, %zombie_beacon::o_zm_dlc5_zombie_homing_deploy);
   wait(n_time);
   if(isDefined(self)) {
-    self animscripted("beacon_spin", self.origin, self.angles, %zombie_beacon::o_zm_dlc5_zombie_homing_spin);
+    self animScripted("beacon_spin", self.origin, self.angles, %zombie_beacon::o_zm_dlc5_zombie_homing_spin);
   }
 }
 
@@ -655,7 +655,7 @@ function wait_and_do_weapon_beacon_damage(index) {
   if(index == 0) {
     radiusdamage(self.origin + vectorscale((0, 0, 1), 12), 10, 1, 1, self.owner, "MOD_GRENADE_SPLASH", level.w_beacon);
     self ghost();
-    self stopanimscripted(0);
+    self stopanimScripted(0);
   }
   level thread weap_beacon_zombie_death(self, a_zombies_to_kill);
   self thread weap_beacon_rumble();
@@ -714,7 +714,7 @@ function weap_beacon_gib(ai_zombie) {
 }
 
 function weap_beacon_rumble() {
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(isalive(player) && isDefined(player)) {
       if(distance2dsquared(player.origin, self.origin) < 250000) {
@@ -757,7 +757,7 @@ function private setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_b
 }
 
 function function_eeb65596(n_player_index) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     player takeweapon(level.w_beacon);
     player zm_weapons::weapon_give(level.w_beacon);

@@ -47,9 +47,9 @@ init_equipment_upgrade() {
   equipment_spawns = getEntArray("zombie_equipment_upgrade", "targetname");
   for(i = 0; i < equipment_spawns.size; i++) {
     hint_string = get_equipment_hint(equipment_spawns[i].zombie_equipment_upgrade);
-    equipment_spawns[i] SetHintString(hint_string);
+    equipment_spawns[i] setHintString(hint_string);
     equipment_spawns[i] setCursorHint("HINT_NOICON");
-    equipment_spawns[i] UseTriggerRequireLookAt();
+    equipment_spawns[i] useTriggerRequireLookAt();
     equipment_spawns[i] add_to_equipment_trigger_list(equipment_spawns[i].zombie_equipment_upgrade);
     equipment_spawns[i] thread equipment_spawn_think();
   }
@@ -65,7 +65,7 @@ get_equipment_howto_hint(equipment_name) {
 add_to_equipment_trigger_list(equipment_name) {
   AssertEx(isDefined(level.zombie_equipment[equipment_name]), equipment_name + " was not included or is not registered with the equipment system.");
   level.zombie_equipment[equipment_name].triggers[level.zombie_equipment[equipment_name].triggers.size] = self;
-  level.zombie_equipment[equipment_name].models[level.zombie_equipment[equipment_name].models.size] = GetEnt(self.target, "targetname");
+  level.zombie_equipment[equipment_name].models[level.zombie_equipment[equipment_name].models.size] = getEnt(self.target, "targetname");
 }
 equipment_spawn_think() {
   for(;;) {
@@ -79,7 +79,7 @@ equipment_spawn_think() {
       if(isDefined(level.hacker_tool_positions)) {
         new_pos = random(level.hacker_tool_positions);
         self.origin = new_pos.trigger_org;
-        model = getent(self.target, "targetname");
+        model = getEnt(self.target, "targetname");
         model.origin = new_pos.model_org;
         model.angles = new_pos.model_ang;
       }

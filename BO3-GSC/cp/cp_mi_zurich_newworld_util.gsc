@@ -840,7 +840,7 @@ function function_520255e3(str_trigger, time) {
 
 function function_901793d(str_trigger, str_notify) {
   level endon(str_notify);
-  e_trigger = getent(str_trigger, "targetname");
+  e_trigger = getEnt(str_trigger, "targetname");
   if(isDefined(e_trigger)) {
     e_trigger waittill("trigger");
   }
@@ -892,11 +892,11 @@ function function_68b8f4af(e_volume) {
 
 function function_c478189b(str_trigger, var_390543cc, var_9d774f5d, var_43a68d40) {
   if(isDefined(str_trigger)) {
-    e_trigger = getent(str_trigger, "targetname");
+    e_trigger = getEnt(str_trigger, "targetname");
     e_trigger waittill("trigger");
   }
-  var_441bd962 = getent(var_390543cc, "targetname");
-  var_ee2fd889 = getent(var_9d774f5d, "targetname");
+  var_441bd962 = getEnt(var_390543cc, "targetname");
+  var_ee2fd889 = getEnt(var_9d774f5d, "targetname");
   a_ai = getaiteamarray("axis");
   if(!isDefined(var_43a68d40)) {
     var_43a68d40 = a_ai.size;
@@ -928,7 +928,7 @@ function function_7eb8a7ab(e_trigger, str_notify) {
 }
 
 function num_players_touching_volume(e_volume) {
-  a_players = getplayers();
+  a_players = getPlayers();
   num_touching = 0;
   for(i = 0; i < a_players.size; i++) {
     if(a_players[i] istouching(e_volume)) {
@@ -939,19 +939,19 @@ function num_players_touching_volume(e_volume) {
 }
 
 function function_e0fb6da9(str_struct, close_dist, wait_time_min, wait_time_max, var_d1b83750, max_ai, var_a70db4af, var_1813646e, var_98e9bc46) {
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size > 1) {
     return;
   }
   s_struct = struct::get(str_struct, "targetname");
-  var_37124366 = getent(var_1813646e, "targetname");
-  var_7d22b48e = getent(var_98e9bc46, "targetname");
+  var_37124366 = getEnt(var_1813646e, "targetname");
+  var_7d22b48e = getEnt(var_98e9bc46, "targetname");
   v_forward = anglesToForward(s_struct.angles);
   s_struct.start_time = undefined;
   var_cc06a93d = 0;
   wait_time = randomintrange(wait_time_min, wait_time_max);
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     v_dir = s_struct.origin - e_player.origin;
     var_989d1f7c = vectordot(v_dir, v_forward);
     if(var_989d1f7c < -100) {
@@ -1001,11 +1001,11 @@ function function_e0fb6da9(str_struct, close_dist, wait_time_min, wait_time_max,
 
 function function_8f7b1e06(str_trigger, var_390543cc, var_9d774f5d) {
   if(isDefined(str_trigger)) {
-    e_trigger = getent(str_trigger, "targetname");
+    e_trigger = getEnt(str_trigger, "targetname");
     e_trigger waittill("trigger");
   }
-  var_441bd962 = getent(var_390543cc, "targetname");
-  var_ee2fd889 = getent(var_9d774f5d, "targetname");
+  var_441bd962 = getEnt(var_390543cc, "targetname");
+  var_ee2fd889 = getEnt(var_9d774f5d, "targetname");
   a_ai = getaiteamarray("axis");
   for(i = 0; i < a_ai.size; i++) {
     e_ent = a_ai[i];
@@ -1085,7 +1085,7 @@ function lock_player_controls(var_a5efd39d = 1) {
 }
 
 function function_16dd8c5f(str_triggername, str_type = &"cp_level_newworld_access_door", str_hint = &"CP_MI_ZURICH_NEWWORLD_HACK", var_8baec92b, var_2df3d133, var_d78830f5 = 0) {
-  t_interact = getent(str_triggername, "targetname");
+  t_interact = getEnt(str_triggername, "targetname");
   t_interact triggerenable(1);
   if(isDefined(var_8baec92b)) {
     var_69f96d87 = getEntArray(var_8baec92b, "targetname");
@@ -1149,7 +1149,7 @@ function function_95132241() {
 
 function function_c1c980d8(str_trigger) {
   a_enemies = getaiteamarray("axis");
-  t_trigger = getent(str_trigger, "targetname");
+  t_trigger = getEnt(str_trigger, "targetname");
   assert(isDefined(t_trigger), "");
   foreach(enemy in a_enemies) {
     if(isalive(enemy) && enemy istouching(t_trigger)) {

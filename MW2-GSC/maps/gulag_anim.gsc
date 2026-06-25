@@ -50,8 +50,8 @@ gulag_anims() {
 }
 
 throw_flash(guy) {
-  flash_start = getstruct("flash_org", "targetname");
-  flash_end = getstruct(flash_start.target, "targetname");
+  flash_start = getStruct("flash_org", "targetname");
+  flash_end = getStruct(flash_start.target, "targetname");
   start = flash_start.origin;
   end = flash_end.origin;
 

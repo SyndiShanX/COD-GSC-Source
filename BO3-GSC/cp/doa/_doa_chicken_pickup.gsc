@@ -52,7 +52,7 @@ function function_cdfa9ce8(bird) {
         }
       }
     }
-    bird animscripted("chicken_anim", bird.origin, bird.angles, curanim);
+    bird animScripted("chicken_anim", bird.origin, bird.angles, curanim);
     animlength = getanimlength(curanim);
     wait(animlength);
     lastanim = curanim;
@@ -83,12 +83,12 @@ function add_a_chicken(model, scale, fated, var_5c667593) {
   orb = spawn("script_model", self.origin + (0, 0, getdvarint("scr_doa_chickenZ", 50)));
   orb.targetname = "add_a_chicken";
   orb setModel("tag_origin");
-  orb enablelinkto();
+  orb enablelinkTo();
   orb notsolid();
   bird = spawn("script_model", orb.origin);
   bird.targetname = "chicken";
   bird setModel(model);
-  bird linkto(orb, "tag_origin");
+  bird linkTo(orb, "tag_origin");
   bird notsolid();
   orb.var_6e0abf98 = scale;
   bird setscale(scale);
@@ -101,7 +101,7 @@ function add_a_chicken(model, scale, fated, var_5c667593) {
   orb.var_cdf31c46 = 0;
   orb.var_fe6ede28 = 0;
   orb.var_947e1f34 = (self.doa.var_3cdd8203.size == 0 ? self : self.doa.var_3cdd8203[self.doa.var_3cdd8203.size - 1]);
-  orb enablelinkto();
+  orb enablelinkTo();
   orb thread function_cdfa9ce8(bird);
   if(isDefined(orb.special) && orb.special && self.doa.var_3cdd8203.size > 0) {
     arrayinsert(self.doa.var_3cdd8203, orb, 0);
@@ -182,7 +182,7 @@ function function_3118ca4d(player) {
     firetime = 0.15;
     while(self.spinouttime > 0) {
       rotate180time = 1;
-      self rotateto(self.angles + vectorscale((0, 1, 0), 180), rotate180time);
+      self rotateTo(self.angles + vectorscale((0, 1, 0), 180), rotate180time);
       localrotatetime = rotate180time;
       while(localrotatetime > 0) {
         self function_cea0c915(player, weapon);
@@ -273,7 +273,7 @@ function function_44ff9baa(player) {
         next_index++;
         next_index = next_index % num_follow_points;
         self.is_moving = 1;
-        self moveto(follow_points[next_index], getdvarfloat("scr_doa_chicken_speed", 0.15), 0, 0);
+        self moveTo(follow_points[next_index], getdvarfloat("scr_doa_chicken_speed", 0.15), 0, 0);
       }
     }
   }
@@ -562,7 +562,7 @@ function function_2d0f96ef(player) {
       offset = 48 + (var_ff37339 * (floor(i / 4)));
       chicken thread function_5af02c44(self, i, offset);
     }
-    self rotateto(self.angles + vectorscale((0, 1, 0), 180), 1);
+    self rotateTo(self.angles + vectorscale((0, 1, 0), 180), 1);
     wait(1);
   }
   self thread namespace_1a381543::function_90118d8c("zmb_golden_chicken_pop");
@@ -599,7 +599,7 @@ function private function_5af02c44(target, num, offset) {
   self.var_efa2b784 = 1;
   self.var_18845184 = 1;
   anim_ang = vectortoangles(target.origin - self.origin);
-  self rotateto((0, anim_ang[1], 0), 0.5);
+  self rotateTo((0, anim_ang[1], 0), 0.5);
   pos = num % 4;
   switch (pos) {
     case 0: {
@@ -619,9 +619,9 @@ function private function_5af02c44(target, num, offset) {
       break;
     }
   }
-  self moveto(target.origin, 1);
+  self moveTo(target.origin, 1);
   self util::waittill_any_timeout(2, "movedone");
-  self linkto(target, "tag_origin", spot);
+  self linkTo(target, "tag_origin", spot);
   self waittill("hash_e6885d7c");
   self unlink();
 }
@@ -666,7 +666,7 @@ function function_4c41e6af() {
         continue;
       }
       zombie setentitytarget(self);
-      dir = (vectornormalize(self.origin - zombie.origin)) * 30;
+      dir = (vectorNormalize(self.origin - zombie.origin)) * 30;
       self physicslaunch(self.origin, (dir[0], dir[1], dir[2] + 10));
       self.health = self.health - 40;
       if(self.health < 0) {

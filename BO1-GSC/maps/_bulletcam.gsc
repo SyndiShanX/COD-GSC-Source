@@ -41,7 +41,7 @@ try_bulletcam(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, v
           fx_player = spawn("script_model", vPoint);
           fx_player setModel("tag_origin");
           fx_player.angles = VectorToAngles(vector_scale(vDir, -1));
-          fx_player LinkTo(self, target_tag);
+          fx_player linkTo(self, target_tag);
           playFXOnTag(level._effect["_bulletcam_impact"], fx_player, "tag_origin");
           fx_player thread delete_me_in_a_bit();
         } else if(is_mature()) {
@@ -94,7 +94,7 @@ do_bulletcam(player, end_point) {
   bullet UseAnimTree(#animtree);
   bullet SetAnim(BULLET_ANIM_SPIN, 1, 0, 3);
   fake_bullet = spawn("script_model", start);
-  vec_to_player_end = VectorNormalize(vec_to_end) * (Length(vec_to_end) - HOLD_DIST);
+  vec_to_player_end = vectorNormalize(vec_to_end) * (Length(vec_to_end) - HOLD_DIST);
   player_end_point = pos + vec_to_player_end;
   fake_bullet.angles = ang_to_end;
   fake_bullet setModel(BULLET_MODEL);
@@ -113,7 +113,7 @@ move_bullet(bullet, end_point, player) {
   MOVE_TIME = .4;
   MOVE_ACCEL = .3;
   MOVE_DECEL = 0;
-  bullet MoveTo(end_point, MOVE_TIME, MOVE_ACCEL, MOVE_DECEL);
+  bullet moveTo(end_point, MOVE_TIME, MOVE_ACCEL, MOVE_DECEL);
   bullet waittill("movedone");
   bullet Delete();
   player notify("_bulletcam:impact");
@@ -128,7 +128,7 @@ move_player(bullet, fake_bullet, end_point, player_ang, victim) {
   player_org = self.origin;
   self set_near_plane(1);
   self StartCameraTween(.1);
-  fake_bullet LinkTo(bullet);
+  fake_bullet linkTo(bullet);
   self PlayerLinkToAbsolute(fake_bullet);
   self HideViewModel();
   self DisableWeapons();
@@ -139,7 +139,7 @@ move_player(bullet, fake_bullet, end_point, player_ang, victim) {
   level thread timescale_tween(.06, 1, MOVE_TIME, .1, .1);
   wait .3;
   fake_bullet Unlink();
-  fake_bullet MoveTo(end_point, MOVE_TIME, MOVE_ACCEL, MOVE_DECEL);
+  fake_bullet moveTo(end_point, MOVE_TIME, MOVE_ACCEL, MOVE_DECEL);
   self thread adjust_view(fake_bullet, victim);
   if(isDefined(self.bulletcam_timeontargdeath)) {
     HOLD_TIME = self.bulletcam_timeontargetdeath;
@@ -151,7 +151,7 @@ move_player(bullet, fake_bullet, end_point, player_ang, victim) {
   fake_bullet Delete();
   self ent_flag_set("_bulletcam:end");
   self StartCameraTween(.5);
-  self SetOrigin(player_org);
+  self setOrigin(player_org);
   self SetPlayerAngles(player_ang);
   wait .5;
   self ShowViewModel();

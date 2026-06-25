@@ -553,7 +553,7 @@ function function_72c3294(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function function_43b0a4e2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    var_b5eeda48 = getent(fieldname, "pizza_parlor_sign", "targetname");
+    var_b5eeda48 = getEnt(fieldname, "pizza_parlor_sign", "targetname");
     var_b5eeda48 setModel(#"p9_usa_neon_open_sign_on");
   }
 }

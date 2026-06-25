@@ -118,9 +118,9 @@ perk_random_machine_trigger_update_prompt(player) {
 
   if(isDefined(self.hint_string)) {
     if(isDefined(self.hint_parm1)) {
-      self sethintstring(self.hint_string, self.hint_parm1);
+      self setHintString(self.hint_string, self.hint_parm1);
     } else {
-      self sethintstring(self.hint_string);
+      self setHintString(self.hint_string);
     }
   }
 
@@ -128,7 +128,7 @@ perk_random_machine_trigger_update_prompt(player) {
 }
 
 perk_random_machine_stub_update_prompt(player) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   if(!self trigger_visible_to_player(player)) {
     return 0;
@@ -483,13 +483,13 @@ perk_bottle_motion() {
   level.bottle_spawn_location.origin = self.origin + (0, 0, 53);
   level.bottle_spawn_location.angles = self.angles;
   level.bottle_spawn_location.origin -= v_float;
-  level.bottle_spawn_location moveto(level.bottle_spawn_location.origin + v_float, putouttime, putouttime * 0.5);
+  level.bottle_spawn_location moveTo(level.bottle_spawn_location.origin + v_float, putouttime, putouttime * 0.5);
   level.bottle_spawn_location.angles += (0, 0, 10);
-  level.bottle_spawn_location rotateyaw(720, putouttime, putouttime * 0.5);
+  level.bottle_spawn_location rotateYaw(720, putouttime, putouttime * 0.5);
   self waittill(#"done_cycling");
   level.bottle_spawn_location.angles = self.angles;
-  level.bottle_spawn_location moveto(level.bottle_spawn_location.origin - v_float, putbacktime, putbacktime * 0.5);
-  level.bottle_spawn_location rotateyaw(90, putbacktime, putbacktime * 0.5);
+  level.bottle_spawn_location moveTo(level.bottle_spawn_location.origin - v_float, putbacktime, putbacktime * 0.5);
+  level.bottle_spawn_location rotateYaw(90, putbacktime, putbacktime * 0.5);
 }
 
 start_perk_bottle_cycling() {
@@ -699,9 +699,9 @@ setup_devgui() {
 }
 
 wunderfizz_devgui_callback(cmd) {
-  players = getplayers();
+  players = getPlayers();
   a_e_wunderfizzes = getEntArray("<dev string:x3b>", "<dev string:x51>");
-  e_wunderfizz = arraygetclosest(getplayers()[0].origin, a_e_wunderfizzes);
+  e_wunderfizz = arraygetclosest(getPlayers()[0].origin, a_e_wunderfizzes);
 
   switch (cmd) {
     case #"wunderfizz_leaving":

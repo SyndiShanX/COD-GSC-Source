@@ -27,7 +27,7 @@ function init_shared() {
 function on_local_player_spawned(local_client_num) {
   thread function_e69d0e4d(local_client_num);
   thread track_grenades(local_client_num);
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(isDefined(player) && isalive(player)) {
@@ -75,7 +75,7 @@ function monitor_smoke(local_client_num) {
 
   while(isDefined(var_d3f60df1)) {
     waitresult = var_d3f60df1 waittilltimeout(0.25, #"death");
-    players = getplayers(local_client_num);
+    players = getPlayers(local_client_num);
 
     foreach(player in players) {
       dist = distance2d(player.origin, var_d3f60df1.origin);
@@ -108,7 +108,7 @@ function function_ffbaa2ce(local_client_num, oldval, newval, bnewent, binitialsn
   }
 
   self notify(#"monitor_smoke");
-  players = getplayers(fieldname);
+  players = getPlayers(fieldname);
 
   foreach(player in players) {
     if(isDefined(player) && isalive(player)) {
@@ -130,7 +130,7 @@ function function_e69d0e4d(local_client_num) {
       var_85098191 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");
 
       if(var_85098191) {
-        players = getplayers(local_client_num);
+        players = getPlayers(local_client_num);
 
         foreach(player in players) {
           if(isDefined(player) && isalive(player)) {
@@ -232,7 +232,7 @@ function function_28db726(local_client_num, bundle) {
 }
 
 function vehicle_transition(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  players = getplayers(bwastimejump);
+  players = getPlayers(bwastimejump);
 
   foreach(player in players) {
     if(isalive(player)) {

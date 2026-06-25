@@ -193,7 +193,7 @@ setairdropcratecollision(var_0) {
   if(!isDefined(var_1) || var_1.size == 0) {
     return;
   }
-  level.airdropcratecollision = getent(var_1[0].target, "targetname");
+  level.airdropcratecollision = getEnt(var_1[0].target, "targetname");
 
   foreach(var_3 in var_1) {
     var_3 deletecrate();
@@ -312,7 +312,7 @@ getcratetypefordroptype(var_0, var_1) {
 }
 
 deleteonownerdeath(var_0) {
-  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 waittill("death");
   self delete();
 }
@@ -514,7 +514,7 @@ createairdropcrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7.killcament = spawn("script_model", var_7.origin + (0, 0, -200));
   var_7.killcament setscriptmoverkillcam("explosive");
   var_7.killcament setcontents(0);
-  var_7.killcament linkto(var_7);
+  var_7.killcament linkTo(var_7);
   level.numdropcrates++;
   return var_7;
 }
@@ -525,7 +525,7 @@ trap_createbombsquadmodel() {
   var_0 hide();
   var_0 thread maps\mp\gametypes\_weapons::bombsquadvisibilityupdater(self.owner);
   var_0 setModel("orbital_carepackage_pod_01_ai_bombsquad");
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 setcontents(0);
   self waittill("death");
   var_0 delete();
@@ -534,15 +534,15 @@ trap_createbombsquadmodel() {
 cratesetuphintstrings(var_0, var_1) {
   if(isDefined(var_1) && isDefined(self.owner)) {
     self.ownerstringent = spawn("script_model", self.origin + (0, 0, 60));
-    self.ownerstringent setcursorhint("HINT_NOICON");
-    self.ownerstringent sethintstring(var_0);
+    self.ownerstringent setCursorHint("HINT_NOICON");
+    self.ownerstringent setHintString(var_0);
     self.ownerstringent setsecondaryhintstring(var_1);
     self.otherstringent = spawn("script_model", self.origin + (0, 0, 60));
-    self.otherstringent setcursorhint("HINT_NOICON");
-    self.otherstringent sethintstring(var_0);
+    self.otherstringent setCursorHint("HINT_NOICON");
+    self.otherstringent setHintString(var_0);
   } else {
-    self setcursorhint("HINT_NOICON");
-    self sethintstring(var_0);
+    self setCursorHint("HINT_NOICON");
+    self setHintString(var_0);
   }
 }
 
@@ -743,9 +743,9 @@ physicswaiter(var_0, var_1) {
   }
 
   if(isDefined(level.iszombiegame) && level.iszombiegame) {
-    self disconnectpaths();
+    self disconnectPaths();
   } else if(isDefined(level.ishorde) && level.ishorde) {
-    self disconnectpaths();
+    self disconnectPaths();
   }
 
   var_6 = spawnStruct();
@@ -1136,9 +1136,9 @@ deletecrate(var_0, var_1) {
 
 useholdthink(var_0, var_1, var_2) {
   if(isPlayer(var_0)) {
-    var_0 playerlinkto(self);
+    var_0 playerlinkTo(self);
   } else {
-    var_0 linkto(self);
+    var_0 linkTo(self);
   }
 
   var_0 playerlinkedoffsetenable();
@@ -1315,11 +1315,11 @@ crateownerdoubletapthink() {
             }
 
             if(isDefined(self.ownerstringent)) {
-              self.ownerstringent sethintstring(var_4);
-              self.otherstringent sethintstring(var_4);
+              self.ownerstringent setHintString(var_4);
+              self.otherstringent setHintString(var_4);
               self.ownerstringent setsecondaryhintstring("");
             } else {
-              self sethintstring(var_4);
+              self setHintString(var_4);
               self setsecondaryhintstring("");
             }
 

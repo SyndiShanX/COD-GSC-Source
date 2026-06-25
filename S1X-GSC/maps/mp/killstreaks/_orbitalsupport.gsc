@@ -608,7 +608,7 @@ spawnOrbitalSupportTurret(turretweaponinfo, modelname, linktotag, isBuddy) {
   spawned_turret.angles = level.orbitalsupport_planeModel GetTagAngles(linktotag);
   spawned_turret setModel(modelname);
   spawned_turret SetDefaultDropPitch(45);
-  spawned_turret LinkTo(level.orbitalsupport_planeModel, linktotag, (0, 0, 0), (0, 0, 0));
+  spawned_turret linkTo(level.orbitalsupport_planeModel, linktotag, (0, 0, 0), (0, 0, 0));
   spawned_turret.owner = undefined;
   spawned_turret.health = 99999;
   spawned_turret.maxHealth = 1000;
@@ -633,7 +633,7 @@ turretSpawnSoundEnts(num, linktotag) {
     waitframe();
     soundEnt = spawn("script_model", self.origin);
     soundEnt setModel("tag_origin");
-    soundEnt LinkTo(level.orbitalsupport_planeModel, linktotag, (0, 0, 0), (0, 0, 0));
+    soundEnt linkTo(level.orbitalsupport_planeModel, linktotag, (0, 0, 0), (0, 0, 0));
     self.soundEnts[self.soundEnts.size] = soundEnt;
   }
 }
@@ -1103,8 +1103,8 @@ fireRocketOrbitalSupportGun() {
       playFXOnTag(level.chopper_fx["rocketlaunch"]["warbird"], level.orbitalsupport_big_turret, "tag_missile1");
 
       missile_tag_origin = level.orbitalsupport_big_turret GetTagOrigin("tag_missile1");
-      player_forward = VectorNormalize(anglesToForward(self GetPlayerAngles()));
-      osp_velocity = VectorNormalize(anglesToForward(level.orbitalsupport_planeModel GetTagAngles("tag_origin")));
+      player_forward = vectorNormalize(anglesToForward(self GetPlayerAngles()));
+      osp_velocity = vectorNormalize(anglesToForward(level.orbitalsupport_planeModel GetTagAngles("tag_origin")));
 
       for(i = 0; i < 4; i++) {
         fire_direction = player_forward + (0, 0, .4) + random_vector(1);
@@ -1113,7 +1113,7 @@ fireRocketOrbitalSupportGun() {
         missile.vehicle_fired_from = level.orbitalsupport_planeModel;
 
         self thread playerFireSounds("paladin_missile_shot_2d", "paladin_missile_shot_3d", false, i);
-        self PlayRumbleOnEntity("ac130_40mm_fire");
+        self playRumbleOnEntity("ac130_40mm_fire");
 
         missile Missile_SetTargetEnt(level.orbitalsupport_targetEnt);
         missile Missile_SetFlightmodeDirect();
@@ -1602,7 +1602,7 @@ setRandomOrbitalSupportStartPosition() {
 
   level.orbitalsupport_planeModel.angles = angle_modifier;
 
-  level.orbitalsupport_planeModel.origin -= VectorNormalize(-1 * AnglesToRight(level.orbitalsupport_planeModel GetTagAngles("tag_origin"))) * radius_modifier;
+  level.orbitalsupport_planeModel.origin -= vectorNormalize(-1 * AnglesToRight(level.orbitalsupport_planeModel GetTagAngles("tag_origin"))) * radius_modifier;
   level.orbitalsupport_planemodel.origin += (0, 0, height_modifier);
 
   if(getDvar("scr_paladin_center", "0") != "0") {
@@ -1640,7 +1640,7 @@ moveOrbitalSupportToDestination(shouldRotate) {
   level.orbitalsupport_planeModel waittillmatch("paladin_notetrack", "downward_stop");
   if(isDefined(level.orbitalsupport_planemodel.owner)) {
     level.orbitalsupport_planemodel.owner StopRumble("orbital_laser_charge");
-    level.orbitalsupport_planemodel.owner PlayRumbleOnEntity("ac130_105mm_fire");
+    level.orbitalsupport_planemodel.owner playRumbleOnEntity("ac130_105mm_fire");
     Earthquake(0.2, 2, level.orbitalsupport_planeModel.destination2.origin, 1000);
   }
 
@@ -1708,7 +1708,7 @@ playerDelayRumble(time) {
   self endon("disconnect");
   self endon("orbitalsupport_player_removed");
   wait time;
-  self PlayRumbleOnEntity("orbital_laser_charge");
+  self playRumbleOnEntity("orbital_laser_charge");
 }
 
 playJetFX() {
@@ -1928,24 +1928,24 @@ rotatePlane(speed, toggle) {
   }
 
   if(toggle == "on") {
-    level.ospRig rotateyaw(360, speed, 0.5);
+    level.ospRig rotateYaw(360, speed, 0.5);
     wait speed;
 
     for(;;) {
-      level.ospRig rotateyaw(360, speed);
+      level.ospRig rotateYaw(360, speed);
       wait speed;
     }
   } else if(toggle == "off") {
     slowdownDegrees = 10;
     rotateTime = (speed / 360) * slowdownDegrees;
-    level.ospRig rotateyaw(level.ospRig.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
+    level.ospRig rotateYaw(level.ospRig.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
   }
 }
 
 spawnMuzzleFlashEnt(parent, tagname, hideFromPlayer) {
   muzzleEnt = spawn("script_model", (0, 0, 0));
   muzzleEnt setModel("tag_origin");
-  muzzleEnt LinkTo(parent, tagname, (0, 0, 0), (0, 0, 0));
+  muzzleEnt linkTo(parent, tagname, (0, 0, 0), (0, 0, 0));
   muzzleEnt Hide();
   foreach(player in level.players) {
     if(player != hideFromPlayer) {

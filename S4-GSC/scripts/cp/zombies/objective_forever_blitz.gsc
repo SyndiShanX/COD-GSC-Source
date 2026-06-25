@@ -32,7 +32,7 @@ disable_pap_clips() {
   var_0 = ["sumpf_forever_blitz_pap_clip"];
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2, "targetname");
+    var_3 = getEnt(var_2, "targetname");
 
     if(isDefined(var_3)) {
       var_3 hide();
@@ -211,7 +211,7 @@ _id_8CE4(var_0) {
     return;
   }
   if(isDefined(var_0) && _func_0121(var_0)) {
-    var_0 = scripts\engine\utility::getstruct(var_0, "targetname");
+    var_0 = scripts\engine\utility::getStruct(var_0, "targetname");
   }
 
   if(!isDefined(var_0) || !_func_02DE(var_0)) {
@@ -707,7 +707,7 @@ zones_init(var_0) {
 
   foreach(var_4 in var_1) {
     if(isDefined(var_4._id_0481)) {
-      var_4.vol_zone = getent(var_4._id_0481, "target");
+      var_4.vol_zone = getEnt(var_4._id_0481, "target");
     }
 
     var_5 = _id_06EF::_id_6412(var_4, "spawn");
@@ -1161,14 +1161,14 @@ tome_page_think(var_0, var_1) {
   foreach(var_3 in _id_06EF::_id_6412(var_0, "anchor")) {
     var_3.mdl_fx_src = scripts\cp\utility::_id_E190("tag_origin", var_1.origin, vectortoangles(var_3.origin - var_1.origin));
     var_3.mdl_fx_src.n_fx = playFXOnTag(level._effect["forever_blitz_page_src"], var_3.mdl_fx_src, "tag_origin");
-    var_3.mdl_fx_src linkto(var_1.mdl_page);
+    var_3.mdl_fx_src linkTo(var_1.mdl_page);
   }
 
   var_1.mdl_page playLoopSound("zmb_dem_page_orb_lp");
   level thread tome_page_bobbing(var_0, var_1.mdl_page);
 
   if(isDefined(var_1._id_0481)) {
-    var_5 = getent(var_1._id_0481, "target");
+    var_5 = getEnt(var_1._id_0481, "target");
 
     if(isDefined(var_5)) {
       if(!isDefined(var_5.v_default_origin)) {
@@ -1413,7 +1413,7 @@ send_anchor_energy(var_0, var_1, var_2) {
 
   if(isDefined(var_0)) {
     var_7 = playFXOnTag(level._effect["forever_blitz_anchor_trail"], var_6, "tag_origin");
-    var_6 moveto(var_4, var_5);
+    var_6 moveTo(var_4, var_5);
     var_6 waittill("movedone");
 
     if(isDefined(var_7)) {
@@ -1517,7 +1517,7 @@ tome_page_float_down_watcher() {
       var_2 = distance2dsquared(self.origin, var_1.origin);
 
       if(var_2 <= _func_0219(500)) {
-        self moveto(self.origin + (0, 0, -200), 4, 0, 0);
+        self moveTo(self.origin + (0, 0, -200), 4, 0, 0);
         self waittill("movedone");
         self playLoopSound("zmb_paperdoor_lp");
         self.mdl_key_line_page = _func_03C5("cploot_item_lost_page", self.origin, self.angles);
@@ -1578,7 +1578,7 @@ show_pack_a_punch(var_0) {
   var_2 = undefined;
 
   if(isDefined(var_1._id_0481)) {
-    var_2 = getent(var_1._id_0481, "target");
+    var_2 = getEnt(var_1._id_0481, "target");
   }
 
   var_0.mdl_pap = _id_0774::spawn_weapon_upgrade_machine(var_1.origin, var_1.angles, var_2);
@@ -1905,7 +1905,7 @@ cp_zod_portal_c_completed_override() {
 play_vo_when_players_approach_portal_to_vlo() {
   level endon("game_ended");
   level endon("portal_c_1_completed");
-  var_0 = scripts\engine\utility::getstruct("portal_c_1", "targetname");
+  var_0 = scripts\engine\utility::getStruct("portal_c_1", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1940,7 +1940,7 @@ cp_zod_portal_c_1_completed_override() {
 }
 
 cp_zod_enter_office_vo() {
-  var_0 = getent("forever_blitz_vo_office_1st_floor", "targetname");
+  var_0 = getEnt("forever_blitz_vo_office_1st_floor", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1985,7 +1985,7 @@ cp_zod_forever_blitz_portal_completed_override() {
 }
 
 cp_zod_enter_office_after_forever_blitz() {
-  var_0 = getent("forever_blitz_vo_office_1st_floor", "targetname");
+  var_0 = getEnt("forever_blitz_vo_office_1st_floor", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2023,7 +2023,7 @@ krafts_door_nag_on_portal_completed() {
 }
 
 krafts_door_objective_marker() {
-  var_0 = scripts\engine\utility::getstruct("krafts_door_vo_interact", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("krafts_door_vo_interact", "script_noteworthy");
   var_1 = spawnStruct();
   var_1._id_E747 = "current";
   var_1._id_96CF = var_0.origin;
@@ -2119,7 +2119,7 @@ cp_zod_krafts_office_exit_vo() {
   level endon("portal_activated");
   level endon("start_exfil");
   level endon("set_runestone_vo_play");
-  var_0 = scripts\engine\utility::getstruct("forever_blitz_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("forever_blitz_portal", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -2158,7 +2158,7 @@ cp_zod_runestone_activate() {
 }
 
 cp_zod_runestone_interact() {
-  var_0 = scripts\engine\utility::getstruct("forever_blitz_vo_runestone", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("forever_blitz_vo_runestone", "script_noteworthy");
   level waittill("forever_blitz_portal_completed");
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
@@ -2233,7 +2233,7 @@ cp_zod_forever_blitz_portal_vo() {
   level endon("portal_countdown_started");
   level endon("portal_activated");
   level endon("start_exfil");
-  var_0 = getent("forever_blitz_vo_atrium", "targetname");
+  var_0 = getEnt("forever_blitz_vo_atrium", "targetname");
   var_0 waittill("trigger");
   level scripts\engine\utility::_id_5C24("forever_blitz_runestone_vo_done");
   level thread disable_nags_think("portal_countdown_started", "portal_activated", "start_exfil", "cp_zod_forever_blitz_portal_vo_done");
@@ -2272,7 +2272,7 @@ cp_zod_forever_blitz_portal_vo() {
 }
 
 cp_zod_forever_blitz_portal_spawn_teaser_portal() {
-  var_0 = scripts\engine\utility::getstruct("teaser_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("teaser_portal", "targetname");
   var_1 = anglesToForward(var_0.angles);
   var_2 = anglestoup(var_0.angles);
   playFX(level._effect["forever_blitz_green_portal"], var_0.origin, var_1, var_2);

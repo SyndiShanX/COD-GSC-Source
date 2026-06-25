@@ -364,7 +364,7 @@ _id_317F(var_0, var_1, var_2) {
 
   var_5 = _func_00B0(var_0, 0, 1);
   var_9 = self _meth_8216(var_5);
-  var_9 = var_6 + vectornormalize(var_9 - var_6) * 20;
+  var_9 = var_6 + vectorNormalize(var_9 - var_6) * 20;
   var_10 = _func_02A6(var_6, var_9, self);
 
   if(var_10) {

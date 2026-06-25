@@ -127,7 +127,7 @@ function private function_7814c6ed(player, playerview, playerangles, cosfov, max
   }
 
   deltapos = origin - playerview;
-  normal = vectornormalize(deltapos);
+  normal = vectorNormalize(deltapos);
   playerforward = anglesToForward(playerangles);
   dot = vectordot(playerforward, normal);
   iswithinfov = dot >= cosfov;
@@ -282,7 +282,7 @@ function private function_17547f34(player, var_22a4e6a0, var_977d0bf3) {
   if(isDefined(visiblesndent)) {
     origin = visiblesndent function_43c85ce2();
     deltapos = origin - playerview;
-    normal = vectornormalize(deltapos);
+    normal = vectorNormalize(deltapos);
     dot = vectordot(playerforward, normal);
 
     if(dot > highlightdot && dot > var_f45e7cd0) {

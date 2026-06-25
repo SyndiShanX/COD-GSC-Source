@@ -258,7 +258,7 @@ function_938d798a() {
       }
 
       var_543a44a5 = vectortoangles(var_7099d03[level.var_eedfa327].origin - v_player_pos + (0, 0, 36));
-      player setorigin(v_player_pos);
+      player setOrigin(v_player_pos);
       player setplayerangles(var_543a44a5);
       prev_index = level.var_eedfa327;
       iprintlnbold("<dev string:x738>" + level.var_eedfa327);
@@ -301,7 +301,7 @@ function_f9efe895() {
     if(n_index != prev_index) {
       v_player_pos = var_7f0b4b6b[n_index].origin + anglesToForward(var_7f0b4b6b[n_index].angles) * 96;
       var_543a44a5 = vectortoangles(var_7f0b4b6b[n_index].origin - v_player_pos + (0, 0, 36));
-      player setorigin(v_player_pos);
+      player setOrigin(v_player_pos);
       player setplayerangles(var_543a44a5);
       prev_index = n_index;
       iprintlnbold("<dev string:x7ea>" + n_index);
@@ -349,7 +349,7 @@ function_f0d72128() {
       v_player_pos = var_df1e5fef[level.var_99026891].origin - anglestoright(var_df1e5fef[level.var_99026891].angles) * 128;
       var_543a44a5 = vectortoangles(var_df1e5fef[level.var_99026891].origin - v_player_pos);
       v_player_pos -= v_offset;
-      player setorigin(v_player_pos);
+      player setOrigin(v_player_pos);
       player setplayerangles(var_543a44a5);
       prev_index = level.var_99026891;
       iprintlnbold("<dev string:x86d>" + level.var_99026891);
@@ -598,7 +598,7 @@ function_cdd9b388() {
     }
 
     if(getdvarint(#"wz_item_world_items", 0) > 0) {
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size <= 0) {
         continue;
@@ -614,7 +614,7 @@ function_cdd9b388() {
 
     if(getdvarint(#"hash_326974dd9b8c3414", 0)) {
       itemtype = getdvarint(#"hash_326974dd9b8c3414", 1);
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size <= 0) {
         continue;
@@ -1038,7 +1038,7 @@ function_cdd9b388() {
         foreach(info in level.var_8819644a) {
           vehicle = info.vehicle;
           spawnpoint = info.origin;
-          players = getplayers();
+          players = getPlayers();
 
           if(players.size <= 0) {
             continue;
@@ -1118,7 +1118,7 @@ function_c07eae4e() {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
   var_9db8ea1b = 0;
 
   foreach(player in players) {

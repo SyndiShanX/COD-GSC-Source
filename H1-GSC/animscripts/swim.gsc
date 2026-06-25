@@ -504,7 +504,7 @@ swim_choosestart() {
       var_10 = rotatepointaroundvector(var_8, var_9 - self.origin, var_7[2] * -1);
       var_11 = var_10 + self.origin;
       var_12 = var_11 - self.origin;
-      var_12 = vectornormalize(var_12);
+      var_12 = vectorNormalize(var_12);
       var_6 = vectortoangles(var_12);
       var_5 = 1;
     }
@@ -733,7 +733,7 @@ swim_doposarrival() {
     var_2 = vectortoangles(self.enemy.origin - var_1);
   }
 
-  var_3 = vectornormalize(var_1 - self.origin);
+  var_3 = vectorNormalize(var_1 - self.origin);
 
   if(isDefined(var_0) && swim_isapproachablenode(var_0)) {
     var_4 = swim_getapproachtype(var_0);
@@ -756,7 +756,7 @@ swim_determineapproachanim3d(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_6 = (0, 0, 0);
     var_7 = (0, 0, 0);
     var_8 = combineangles(invertangles(var_4), var_5);
-    var_9 = rotatevectorinverted(vectornormalize(self.origin - var_2), var_4) * -1.0;
+    var_9 = rotatevectorinverted(vectorNormalize(self.origin - var_2), var_4) * -1.0;
     var_10 = swim_determineapproachanim(var_0, var_1, var_6, var_9, var_7, var_8, 1, var_2, var_4);
 
     if(var_10) {
@@ -820,7 +820,7 @@ swim_dofinalarrival(var_0, var_1, var_2, var_3, var_4) {
   }
 
   self notify("swim_killrestartlistener");
-  var_14 = vectornormalize(var_1 - self.origin);
+  var_14 = vectorNormalize(var_1 - self.origin);
 
   if(!swim_determineapproachanim3d(var_5, var_0, var_1, var_14, var_3, var_4)) {
     return;

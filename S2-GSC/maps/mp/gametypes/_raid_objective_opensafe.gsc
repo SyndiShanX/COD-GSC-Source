@@ -267,10 +267,10 @@ safecontainertrigger(param_00) {
 safe_open_logic(param_00, param_01, param_02) {
   level endon("game_ended");
   param_01 method_8278("mp_raids_dlc4_gun_locker_closed");
-  param_00 sethintstring(&"RAIDS_DLC4_OPEN_SAFE");
+  param_00 setHintString(&"RAIDS_DLC4_OPEN_SAFE");
   param_00 thread maps\mp\_utility::func_73A(game["attackers"]);
   param_00 waittill("trigger");
-  param_00 sethintstring(&"RAIDS_TRIPWIRE_BLANK");
+  param_00 setHintString(&"RAIDS_TRIPWIRE_BLANK");
   param_00 method_805C();
   param_01 method_8278(param_02, "open_safe_anim");
 }
@@ -475,7 +475,7 @@ saferelayitem(param_00) {
   var_01 = lib_04FF::func_45D0("flagTriggerRadius");
   var_02 = lib_04FF::func_45D0("flagTriggerHeight");
   var_03 = spawn("trigger_radius", param_00.var_116, 0, var_01, var_02);
-  var_03 enablelinkto();
+  var_03 enablelinkTo();
   var_03.var_66F0 = 1;
   var_04 = [param_00];
   var_05 = maps\mp\gametypes\_gameobjects::func_27D6(game["attackers"], var_03, var_04, (0, 0, 0), 0, 1);
@@ -565,7 +565,7 @@ safe_canseerelayitem(param_00, param_01) {
 
   var_09 = param_00.var_116 - self.var_9D65.var_116;
   var_0A = common_scripts\utility::func_3D5D(var_09);
-  var_0B = vectornormalize(var_0A);
+  var_0B = vectorNormalize(var_0A);
   var_0C = var_0B * 5;
   foreach(var_0E in var_04) {
     var_0F = param_00.var_116 + (0, 0, 10);
@@ -582,7 +582,7 @@ safe_canseerelayitem(param_00, param_01) {
 saferelayitemenable() {
   maps\mp\gametypes\_gameobjects::func_365D();
   self.var_9D65.var_116 = self.var_A582[0].var_116;
-  self.var_9D65 linkto(self.var_A582[0]);
+  self.var_9D65 linkTo(self.var_A582[0]);
   maps\mp\gametypes\_gameobjects::func_8A60("any");
   thread safeitemovertimereturntimer();
 }
@@ -720,8 +720,8 @@ safe_throwphysicsflag(param_00, param_01) {
   var_06 = (clamp(var_06[0], -85, 85), var_06[1], var_06[2]);
   var_07 = anglesToForward(var_06);
   var_08 = param_00 getvelocity();
-  var_09 = vectornormalize((var_07[0], var_07[1], 0));
-  var_0A = vectornormalize((var_08[0], var_08[1], 0));
+  var_09 = vectorNormalize((var_07[0], var_07[1], 0));
+  var_0A = vectorNormalize((var_08[0], var_08[1], 0));
   var_0B = 0;
   var_02.var_A879 = 1;
   var_02 thread onsafesetdropped(1);
@@ -746,7 +746,7 @@ safe_launchflagonstick(param_00, param_01) {
   param_00.var_A879 = 1;
   param_00.var_5DB5 = param_01;
   param_00 thread onsafesetdropped(1);
-  param_00.var_A582[0] linkto(param_01, "tag_origin", (0, 0, 0), (0, 0, 0));
+  param_00.var_A582[0] linkTo(param_01, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_02 = param_00.var_A582[0] method_80B1();
   param_01 waittill("missile_stuck", var_03);
   param_00.var_A582[0] unlink();

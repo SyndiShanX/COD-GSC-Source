@@ -61,7 +61,7 @@ lib_057D::func_737D(param_00, param_01, param_02) {
     param_00 method_805C();
     var_03 = spawn("script_model", param_00.var_0116);
     var_03 setModel("vm_zom_jack_in_the_box");
-    var_03 linkto(param_00, "tag_weapon", (0, 0, 0), (0, 90, 0));
+    var_03 linkTo(param_00, "tag_weapon", (0, 0, 0), (0, 90, 0));
     var_03 scriptmodelplayanim("va_jackinbox_box_close_idle");
     var_03 notsolid();
     var_03.var_0116 = param_00.var_0116;

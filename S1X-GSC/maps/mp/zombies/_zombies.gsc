@@ -507,7 +507,7 @@ monitorstuckintraversal() {
       }
 
       if(isDefined(var_0)) {
-        self setorigin(var_0, 0);
+        self setOrigin(var_0, 0);
       }
     }
 
@@ -651,7 +651,7 @@ givetrickshotachievement(var_0, var_1, var_2) {
   }
   var_4 = self.origin;
   var_5 = var_0.origin;
-  var_6 = vectornormalize(var_4 - var_5);
+  var_6 = vectorNormalize(var_4 - var_5);
   var_7 = anglesToForward(var_0 getplayerangles());
 
   if(vectordot(var_6, var_7) >= 0) {

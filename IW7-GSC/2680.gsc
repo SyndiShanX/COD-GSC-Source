@@ -23,8 +23,8 @@ camera_move_helper(var_0, var_1, var_2) {
   }
 
   level.camera_anchor.move_target = var_0;
-  level.camera_anchor moveto(var_0.origin, var_4, var_5, var_5);
-  level.camera_anchor rotateto(var_0.angles, var_4, var_5, var_5);
+  level.camera_anchor moveTo(var_0.origin, var_4, var_5, var_5);
+  level.camera_anchor rotateTo(var_0.angles, var_4, var_5, var_5);
   wait(var_4);
 }
 
@@ -55,7 +55,7 @@ frontend_camera_move(var_0, var_1, var_2, var_3, var_4) {
       return;
     }
 
-    var_5 = getent(var_5.target, "targetname");
+    var_5 = getEnt(var_5.target, "targetname");
     camera_move_helper(var_5, var_1, var_3);
   }
 
@@ -95,7 +95,7 @@ frontend_camera_teleport(var_0, var_1, var_2, var_3, var_4, var_5) {
 frontend_camera_watcher(var_0) {
   level endon("game_ended");
   self endon("disconnect");
-  self cameralinkto(level.camera_anchor, "tag_origin");
+  self cameralinkTo(level.camera_anchor, "tag_origin");
   level.active_section = frontendscenegetactivesection();
   [[var_0]](level.active_section);
   scripts\engine\utility::waitframe();

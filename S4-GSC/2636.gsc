@@ -244,7 +244,7 @@ _id_E6BB(var_0, var_1, var_2) {
   var_19._id_F81F.team = var_19.team;
   var_19._id_F81F.angles = var_19.angles;
   var_19._id_F81F.streakinfo = var_1;
-  var_19._id_F81F linkto(var_19, "tag_turret", (0, 0, 5), (0, 0, 0));
+  var_19._id_F81F linkTo(var_19, "tag_turret", (0, 0, 5), (0, 0, 0));
   var_19._id_F81F _meth_83A0(var_19.team);
   var_19._id_F81F _meth_839D(0);
   var_19._id_F81F setmode("manual_target");
@@ -259,7 +259,7 @@ _id_E6BB(var_0, var_1, var_2) {
   var_19._id_F81F _meth_8302(0.5, "yaw");
   var_19._id_F81F _meth_8301(0.65);
   var_19.killcament = spawn("script_model", var_19._id_F81F gettagorigin("bi_center"));
-  var_19.killcament linkto(var_19, "tag_origin", (-500, 0, 500), (0, 0, 0));
+  var_19.killcament linkTo(var_19, "tag_origin", (-500, 0, 500), (0, 0, 0));
   var_19._id_F81F._id_71F1 = spawn("script_model", var_19.origin);
   var_19._id_F81F._id_71F1 setModel("tag_origin");
   var_19._id_F81F._id_71F1 dontinterpolate();
@@ -349,7 +349,7 @@ _id_7AEB(var_0) {
     var_19 = self gettagorigin(var_9[var_10]) + anglesToForward(self gettagangles(var_9[var_10])) * 300;
     var_20 = scripts\cp_mp\utility\weapon_utility::_magicbullet(makeweapon("hover_jet_proj_mp"), var_19, var_16["position"], self.owner);
     var_20.killcament = spawn("script_model", var_20.origin);
-    var_20.killcament linkto(var_20, "tag_origin", (-100, 0, 500), (0, 0, 0));
+    var_20.killcament linkTo(var_20, "tag_origin", (-100, 0, 500), (0, 0, 0));
     var_20.killcament thread _id_7AF6(var_16["position"], var_20.angles);
     var_20.streakinfo = self.streakinfo;
     self.streakinfo._id_DA63++;
@@ -376,7 +376,7 @@ _id_7AF6(var_0, var_1) {
   self endon("death");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(2);
   self unlink();
-  self moveto(var_0 - anglesToForward(var_1) * 750, 6);
+  self moveTo(var_0 - anglesToForward(var_1) * 750, 6);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(7);
   self delete();
 }
@@ -416,7 +416,7 @@ _id_7AE0(var_0, var_1, var_2) {
   self endon("death");
   level endon("game_ended");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_1);
-  var_0 missile_settargetent(var_2, (0, 0, 10));
+  var_0 missile_settargetEnt(var_2, (0, 0, 10));
 }
 
 _id_7AE1(var_0) {
@@ -460,7 +460,7 @@ _id_7AF2(var_0, var_1, var_2, var_3) {
       _id_0A44::_id_5C84(var_2);
       var_2 thread _id_0A44::_id_5C82("jet_flares", var_3);
       var_6 = var_2 _id_0A44::_id_5C76();
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -701,7 +701,7 @@ _id_7AEA(var_0) {
 _id_7B04() {
   var_0 = 0.996;
   var_1 = anglesToForward(self gettagangles("tag_flash"));
-  var_2 = vectornormalize(self._id_71F1.origin - self.origin);
+  var_2 = vectorNormalize(self._id_71F1.origin - self.origin);
   var_3 = vectordot(var_1, var_2);
 
   if(isDefined(self _meth_817F(1)) && var_3 >= var_0) {
@@ -767,7 +767,7 @@ _id_7AE9() {
       var_6 = var_5 + anglesToForward(self.angles) * 100;
       var_7 = scripts\cp_mp\utility\weapon_utility::_magicbullet(var_1, var_5, var_6, self.owner);
       var_8 = _id_7B00(self._id_24CF);
-      var_7 missile_settargetent(self._id_24CF, var_8);
+      var_7 missile_settargetEnt(self._id_24CF, var_8);
       var_7.streakinfo = self.streakinfo;
 
       if(var_0 == "right") {
@@ -814,7 +814,7 @@ _id_7B00(var_0) {
 _id_7ADB(var_0) {
   var_1 = 0.866;
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(var_0.origin - self.origin);
+  var_3 = vectorNormalize(var_0.origin - self.origin);
   var_4 = vectordot(var_2, var_3);
   return scripts\engine\utility::ter_op(var_4 >= var_1, 1, 0);
 }
@@ -858,7 +858,7 @@ _id_7B08() {
   self._id_FE90 = spawn("script_model", self.origin);
   self._id_FE90 setModel("tag_origin");
   self._id_FE90 scripts\mp\utility\killstreak::_id_D5D2(self.owner, &"KILLSTREAKS_HINTS/HOVER_JET_GUARD", 360, 360, 30000, 30000, 2);
-  self._id_FE90 linkto(self);
+  self._id_FE90 linkTo(self);
 
   while(isDefined(self._id_FE90)) {
     self._id_FE90 waittill("trigger", var_0);

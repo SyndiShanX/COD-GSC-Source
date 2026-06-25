@@ -53,7 +53,7 @@ function soul_capture_leave(localclientnum, oldval, newval, bnewent, binitialsna
       var_70609425 = self.origin + (0, 0, 5000);
       self.b_success = 1;
       self.var_c2310a57 = playFX(fieldname, #"zm_ai/fx9_orda_spawn_portal_c", var_70609425, (1, 0, 0), (0, 0, 1));
-      self playrumbleonentity(fieldname, "sr_world_event_soul_capture_crystal_leave_rumble");
+      self playRumbleOnEntity(fieldname, "sr_world_event_soul_capture_crystal_leave_rumble");
     }
 
     if(!isDefined(self.soundorigin)) {

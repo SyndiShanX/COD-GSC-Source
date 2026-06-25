@@ -259,7 +259,7 @@ emitter_thunder(thunderDistant, thunderClose, flashType) {
 player_thunder(thunderDistant, thunderClose, flashType) {
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = self.origin + (0, 0, 60);
-  ent LinkTo(self);
+  ent linkTo(self);
   ent thread thunder_playSound(thunderDistant, thunderClose, flashType);
 }
 thunder_playSound(thunderDistant, thunderClose, flashType) {
@@ -297,7 +297,7 @@ thunder_rumble() {
   duration = 0.5;
   stopTime = GetTime() + (duration * 1000);
   while(GetTime() <= stopTime) {
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }

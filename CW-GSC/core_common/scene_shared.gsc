@@ -428,8 +428,8 @@ function function_d4c74ab3() {
 
 function _scene_link() {
   self.e_scene_link = util::spawn_model("tag_origin", self.origin, self.angles);
-  e_linkto = getent(self.linkto, "linkname");
-  self.e_scene_link linkto(e_linkto);
+  e_linkto = getEnt(self.linkto, "linkname");
+  self.e_scene_link linkTo(e_linkto);
   util::waittill_any_ents_two(self, "death", e_linkto, "death");
   self.e_scene_link delete();
 }
@@ -571,7 +571,7 @@ function private function_f61e64e8(a_ents, var_4ebc26aa, var_822d3bf5, var_7e21e
 
   if(isDefined(a_ents[var_4ebc26aa]) && var_ebf8b537.size) {
     foreach(ent in var_ebf8b537) {
-      ent linkto(a_ents[var_4ebc26aa], var_822d3bf5, (0, 0, 0), (0, 0, 0));
+      ent linkTo(a_ents[var_4ebc26aa], var_822d3bf5, (0, 0, 0), (0, 0, 0));
     }
 
     if(var_ebf8b537.size) {
@@ -850,13 +850,13 @@ function init_streamer(str_scenedef, var_1b38cf1d, var_b6213032 = 0, b_invulnera
       }
     }
   } else if(var_1b38cf1d == var_2924e369 && isDefined(s_scenedef.streamerhintsidea)) {
-    a_players = getplayers(var_2924e369);
+    a_players = getPlayers(var_2924e369);
     array::thread_all(a_players, &function_1f9e783e, s_scenedef.streamerhintsidea, str_scenedef);
   } else if(var_1b38cf1d == var_3b6e87fc && isDefined(s_scenedef.var_991a84ba)) {
-    a_players = getplayers(var_3b6e87fc);
+    a_players = getPlayers(var_3b6e87fc);
     array::thread_all(a_players, &function_1f9e783e, s_scenedef.var_991a84ba, str_scenedef);
   } else if((isstring(var_1b38cf1d) || ishash(var_1b38cf1d)) && isDefined(s_scenedef.streamerhintsidea)) {
-    a_players = getplayers(var_1b38cf1d);
+    a_players = getPlayers(var_1b38cf1d);
     array::thread_all(a_players, &function_1f9e783e, s_scenedef.streamerhintsidea, str_scenedef);
   } else {
     return;
@@ -1243,7 +1243,7 @@ function function_7c6c9843(str_scene, str_shot, a_ents, n_rate = 1) {
       }
 
       if(isDefined(str_anim)) {
-        a_ents[index] animscripted(str_anim, var_de0ccf29, var_514ca983, str_anim, "normal", "root", n_rate, 0);
+        a_ents[index] animScripted(str_anim, var_de0ccf29, var_514ca983, str_anim, "normal", "root", n_rate, 0);
         n_anim_length = getanimlength(str_anim);
 
         if(n_anim_length > var_773f6e2a) {
@@ -1326,7 +1326,7 @@ function function_845e67f0(var_b93683c = 0, var_3667c53d = 4, var_f7d56e76 = arr
 function breach_slow_time(var_3667c53d) {
   setslowmotion(1, 0.3, 0.3);
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player setmovespeedscale(0.3);
   }
 
@@ -1341,7 +1341,7 @@ function breach_slow_time(var_3667c53d) {
 
   setslowmotion(0.3, 1, 0.3);
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player setmovespeedscale(1);
   }
 
@@ -1387,7 +1387,7 @@ function function_1e327c20(a_str_scenes, var_b6213032 = 0, var_d8b95786 = 0, var
     s_scenedef = getscriptbundle(str_scene);
     str_team = util::get_team_mapping(s_scenedef.team);
 
-    if(getplayers(str_team).size || var_964a6420) {
+    if(getPlayers(str_team).size || var_964a6420) {
       self thread play(str_scene);
 
       if(!isDefined(a_flags)) {
@@ -1414,7 +1414,7 @@ function function_1e327c20(a_str_scenes, var_b6213032 = 0, var_d8b95786 = 0, var
       remove_scene_func(str_scene, &function_cae579da, "done");
     }
 
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player val::reset(#"hash_65d8adb275cb2ece", "freezecontrols");
@@ -1427,7 +1427,7 @@ function function_1e327c20(a_str_scenes, var_b6213032 = 0, var_d8b95786 = 0, var
 }
 
 function function_cae579da(str_team) {
-  a_players = getplayers(str_team);
+  a_players = getPlayers(str_team);
 
   foreach(player in a_players) {
     player val::set(#"hash_65d8adb275cb2ece", "freezecontrols", 1);
@@ -2145,7 +2145,7 @@ function updateigcviewtime(b_in_igc) {
     igcviewtimesec = gettime() - level.igcstarttime;
     level.igcstarttime = undefined;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player.totaligcviewtime)) {
         player.totaligcviewtime = 0;
       }
@@ -2319,7 +2319,7 @@ function function_a4ad0308(o_scene) {
         self.scene_skip_start_time = gettime();
 
         if(self ishost()) {
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             if(isDefined(player.skip_scene_menu_handle) && !player ishost()) {
               player.skip_scene_menu_handle cp_skip_scene_menu::set_hostisskipping(player, 1);
             }
@@ -2333,7 +2333,7 @@ function function_a4ad0308(o_scene) {
           self.var_fc92900f = 1;
           var_4ca048a2 = 0;
 
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             if(is_true(player.var_fc92900f)) {
               var_4ca048a2++;
             }
@@ -2350,7 +2350,7 @@ function function_a4ad0308(o_scene) {
       self.scene_skip_start_time = undefined;
 
       if(self ishost()) {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           if(isDefined(player.skip_scene_menu_handle) && !player ishost()) {
             player.skip_scene_menu_handle cp_skip_scene_menu::set_hostisskipping(player, 0);
           }
@@ -2376,7 +2376,7 @@ function function_a4ad0308(o_scene) {
     music::setmusicstatebyteam("death", self.team);
     start_scene_skip(o_scene);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player._scene_object) && isDefined(player._scene_object._o_scene) && player._scene_object._o_scene != o_scene) {
         var_bf6b1ad2 = player._scene_object._o_scene;
 
@@ -2428,7 +2428,7 @@ function clear_scene_skipping_ui() {
 
 function function_63033fc3(str_notify) {
   if(isclass(self) || self == level) {
-    array::thread_all(getplayers(), &clear_scene_skipping_ui);
+    array::thread_all(getPlayers(), &clear_scene_skipping_ui);
     return;
   }
 
@@ -2801,7 +2801,7 @@ function function_61635c87(b_enable) {
 
 function function_3d35d3ca(str_team) {
   var_36db66e0 = [];
-  a_players = getplayers(str_team);
+  a_players = getPlayers(str_team);
 
   foreach(player in a_players) {
     if(isarray(player.registerlodscalerigid_init) && isDefined(self._o_scene) && isinarray(player.registerlodscalerigid_init, hash(self._o_scene._str_name))) {
@@ -3010,10 +3010,10 @@ function private function_ac41a9e4(var_db087283, ent) {
   self endon(#"sequence_event");
 
   while(isalive(ent)) {
-    a_players = getplayers("all", ent.origin, 300);
+    a_players = getPlayers("all", ent.origin, 300);
 
     foreach(player in a_players) {
-      var_2231bfef = vectornormalize(player.origin - ent.origin);
+      var_2231bfef = vectorNormalize(player.origin - ent.origin);
       v_forward = anglesToForward(ent.angles);
       var_3f9826ab = vectordot(var_2231bfef, v_forward);
       v_right = anglestoright(ent.angles);

@@ -69,7 +69,7 @@ function function_3652dc9c(weapon) {
 
 function function_c004c2bd() {
   playFX("dlc4/genesis/fx_weapon_key_throw_impact", self.origin);
-  playsoundatposition("wpn_summoning_key_impact", self.origin);
+  playSoundAtPosition("wpn_summoning_key_impact", self.origin);
   zombies = array::get_all_closest(self.origin, getaiteamarray(level.zombie_team), undefined, undefined, 150);
   if(!isDefined(zombies)) {
     return;
@@ -414,8 +414,8 @@ function spawn_ball(trigger) {
   visuals[0] = spawn("script_model", trigger.origin);
   visuals[0] setModel("wpn_t7_zmb_dlc4_summoning_key_world");
   visuals[0] notsolid();
-  trigger enablelinkto();
-  trigger linkto(visuals[0]);
+  trigger enablelinkTo();
+  trigger linkTo(visuals[0]);
   trigger.no_moving_platfrom_unlink = 1;
   ballobj = gameobjects::create_carry_object("neutral", trigger, visuals, (0, 0, 0), istring("ball_ball"), "mpl_hit_alert_ballholder");
   ballobj gameobjects::allow_carry("any");
@@ -760,7 +760,7 @@ function upload_ball(goal) {
   in_enemygoal_time = move_to_center_time + rotate_time;
   total_time = in_enemygoal_time + move_up_time;
   visual = self.visuals[0];
-  visual moveto(self.trigger.origin, move_to_center_time, 0, move_to_center_time);
+  visual moveTo(self.trigger.origin, move_to_center_time, 0, move_to_center_time);
   visual rotatevelocity(vectorscale((1, 1, 0), 1080), total_time, total_time, 0);
   wait(in_enemygoal_time);
   goal.ball_in_goal = 0;
@@ -782,7 +782,7 @@ function download_ball(var_fd894ecd, var_6f3d4b2e = 0) {
     visual.origin = visual.baseorigin + vectorscale((0, 0, 1), 4000);
     visual dontinterpolate();
     fall_time = 3;
-    visual moveto(visual.baseorigin, fall_time, 0, fall_time);
+    visual moveTo(visual.baseorigin, fall_time, 0, fall_time);
     visual rotatevelocity(vectorscale((0, 1, 0), 720), fall_time, 0, fall_time);
     visual thread function_c2bef09f();
   }
@@ -865,7 +865,7 @@ function ball_shoot_watch() {
   self endon("drop_object");
   extra_pitch = getdvarfloat("scr_ball_shoot_extra_pitch", -6);
   force = getdvarfloat("scr_ball_shoot_force", 1200);
-  playsoundatposition("wpn_ball_pickup", self.origin);
+  playSoundAtPosition("wpn_ball_pickup", self.origin);
   self playLoopSound("prj_ball_loop_idle");
   while(true) {
     self waittill("weapon_fired", weapon);
@@ -1034,12 +1034,12 @@ function ball_pass_projectile(passer, target, last_target_origin) {
   } else {
     self function_8f5b30b3(trace["position"], self.visuals[0].angles);
   }
-  pass_dir = vectornormalize((last_target_origin + offset) - self.visuals[0].origin);
+  pass_dir = vectorNormalize((last_target_origin + offset) - self.visuals[0].origin);
   pass_vel = pass_dir * 850;
   passer flag::clear("has_ball");
   self.projectile = passer magicmissile(level.passingballweapon, self.visuals[0].origin, pass_vel);
   target thread adjust_for_stance(self.projectile);
-  self.visuals[0] linkto(self.projectile);
+  self.visuals[0] linkTo(self.projectile);
   self gameobjects::ghost_visuals();
   self ball_create_killcam_ent();
   self ball_clear_contents();
@@ -1085,7 +1085,7 @@ function ball_create_killcam_ent() {
     self.killcament delete();
   }
   self.killcament = spawn("script_model", self.visuals[0].origin);
-  self.killcament linkto(self.visuals[0]);
+  self.killcament linkTo(self.visuals[0]);
   self.killcament setcontents(0);
 }
 
@@ -1130,7 +1130,7 @@ function ball_physics_launch(force, droppingplayer) {
     right = anglestoright(force);
     origin = origin + ((right[0], right[1], 0) * 7);
     startpos = origin;
-    delta = vectornormalize(force) * 80;
+    delta = vectorNormalize(force) * 80;
     size = 5;
     trace = physicstrace(startpos, startpos + delta, (size * -1, size * -1, size * -1), (size, size, size), droppingplayer, 1);
     if(trace["fraction"] < 1) {
@@ -1142,7 +1142,7 @@ function ball_physics_launch(force, droppingplayer) {
   }
   grenade = owner magicmissile(level.ballworldweapon, visuals.origin, force);
   grenade playLoopSound("prj_ball_loop");
-  visuals linkto(grenade);
+  visuals linkTo(grenade);
   self gameobjects::ghost_visuals();
   self.projectile = grenade;
   visuals dontinterpolate();
@@ -1174,7 +1174,7 @@ function function_fed77788(var_bdc0f958, v_force) {
     self.projectile delete();
   }
   grenade = visuals magicmissile(level.ballworldweapon, var_bdc0f958, v_force);
-  visuals linkto(grenade);
+  visuals linkTo(grenade);
   self gameobjects::ghost_visuals();
   self.projectile = grenade;
   visuals dontinterpolate();
@@ -1228,13 +1228,13 @@ function ball_physics_fake_bounce() {
   ball = self.visuals[0];
   vel = ball getvelocity();
   bounceforce = length(vel) / 10;
-  bouncedir = -1 * vectornormalize(vel);
+  bouncedir = -1 * vectorNormalize(vel);
 }
 
 function ball_watch_touch_enemy_goal() {}
 
 function line_intersect_sphere(line_start, line_end, sphere_center, sphere_radius) {
-  dir = vectornormalize(line_end - line_start);
+  dir = vectorNormalize(line_end - line_start);
   a = vectordot(dir, line_start - sphere_center);
   a = a * a;
   b = line_start - sphere_center;
@@ -1361,7 +1361,7 @@ function player_update_pass_target(ballobj) {
         if(distsq > 1000000) {
           continue;
         }
-        dirtotarget = vectornormalize(targeteye - playereye);
+        dirtotarget = vectorNormalize(targeteye - playereye);
         dot = vectordot(playerdir, dirtotarget);
         if(dot > test_dot) {
           target.pass_dot = dot;

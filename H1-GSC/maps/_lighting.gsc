@@ -45,7 +45,7 @@ scriptable_primary_light_think(var_0, var_1) {
   while(var_0.active) {
     var_6 = var_0.pos["curr"];
     var_7 = var_0.dir["curr"];
-    var_8 = vectornormalize(anglesToForward(var_0.dir["curr"]));
+    var_8 = vectorNormalize(anglesToForward(var_0.dir["curr"]));
     var_9 = var_0.pos["curr"];
     var_10 = var_0.intensity["curr"];
     var_11 = var_0.color["curr"];
@@ -56,10 +56,10 @@ scriptable_primary_light_think(var_0, var_1) {
 
     if(isDefined(var_0.attach_ent)) {
       var_19 = var_0.attach_tag.origin;
-      var_20 = vectornormalize(anglesToForward(var_0.attach_tag.angles));
-      var_21 = vectornormalize(anglestoup(var_0.attach_tag.angles));
-      var_22 = vectornormalize(anglestoright(var_0.attach_tag.angles));
-      var_23 = vectornormalize(var_20 * var_8[0] + var_21 * var_8[2] - var_22 * var_8[1]);
+      var_20 = vectorNormalize(anglesToForward(var_0.attach_tag.angles));
+      var_21 = vectorNormalize(anglestoup(var_0.attach_tag.angles));
+      var_22 = vectorNormalize(anglestoright(var_0.attach_tag.angles));
+      var_23 = vectorNormalize(var_20 * var_8[0] + var_21 * var_8[2] - var_22 * var_8[1]);
       var_24 = var_20 * var_6[0] + var_21 * var_6[2] - var_22 * var_6[1];
       var_0.primary_light unlink();
       var_0.primary_light.angles = vectortoangles(var_23);
@@ -67,24 +67,24 @@ scriptable_primary_light_think(var_0, var_1) {
 
       if(isDefined(var_0.coi_ent)) {
         var_25 = var_0.coi_ent gettagorigin(var_0.coi_bone);
-        var_0.primary_light.angles = vectortoangles(vectornormalize(var_25 - var_0.primary_light.origin));
+        var_0.primary_light.angles = vectortoangles(vectorNormalize(var_25 - var_0.primary_light.origin));
       }
 
       if(isDefined(var_0.coi_pos)) {
-        var_0.primary_light.angles = vectortoangles(vectornormalize(var_0.coi_pos - var_0.primary_light.origin));
+        var_0.primary_light.angles = vectortoangles(vectorNormalize(var_0.coi_pos - var_0.primary_light.origin));
       }
 
-      var_0.primary_light linkto(var_0.attach_tag);
+      var_0.primary_light linkTo(var_0.attach_tag);
     } else {
       var_0.primary_light.angles = var_7;
 
       if(isDefined(var_0.coi_ent)) {
         var_25 = var_0.coi_ent gettagorigin(var_0.coi_bone);
-        var_0.primary_light.angles = vectortoangles(vectornormalize(var_25 - var_0.primary_light.origin));
+        var_0.primary_light.angles = vectortoangles(vectorNormalize(var_25 - var_0.primary_light.origin));
       }
 
       if(isDefined(var_0.coi_pos)) {
-        var_0.primary_light.angles = vectortoangles(vectornormalize(var_0.coi_pos - var_0.primary_light.origin));
+        var_0.primary_light.angles = vectortoangles(vectorNormalize(var_0.coi_pos - var_0.primary_light.origin));
       }
 
       var_0.primary_light.origin = var_6;
@@ -185,14 +185,14 @@ setup_scriptable_primary_light(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
   var_11.radius["curr"] = var_10;
   var_11.intensity["curr"] = 0.1;
   var_11.state = -1;
-  var_11.primary_light = getent(var_0, "targetname");
+  var_11.primary_light = getEnt(var_0, "targetname");
   var_11.attach_ent = undefined;
   var_11.attach_bone = undefined;
   var_12 = undefined;
 
   if(isstring(var_8)) {
     if(isstring(var_8)) {
-      var_12 = getent(var_8, "targetname");
+      var_12 = getEnt(var_8, "targetname");
       var_11.attach_ent = var_12;
     }
   } else
@@ -215,27 +215,27 @@ setup_scriptable_primary_light(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
     if(isDefined(var_9)) {
       var_11.attach_tag.origin = var_12 gettagorigin(var_9);
-      var_11.attach_tag linkto(var_12, var_9, (0, 0, 0), (0, 0, 0));
+      var_11.attach_tag linkTo(var_12, var_9, (0, 0, 0), (0, 0, 0));
     } else {
       var_11.attach_tag.origin = var_12.origin;
-      var_11.attach_tag linkto(var_12);
+      var_11.attach_tag linkTo(var_12);
     }
 
     var_13 = var_11.attach_tag.origin;
-    var_14 = vectornormalize(anglesToForward(var_11.attach_tag.angles));
-    var_15 = vectornormalize(anglestoup(var_11.attach_tag.angles));
-    var_16 = vectornormalize(anglestoright(var_11.attach_tag.angles));
-    var_17 = vectornormalize(var_14 * var_3[0] + var_15 * var_3[2] - var_16 * var_3[1]);
+    var_14 = vectorNormalize(anglesToForward(var_11.attach_tag.angles));
+    var_15 = vectorNormalize(anglestoup(var_11.attach_tag.angles));
+    var_16 = vectorNormalize(anglestoright(var_11.attach_tag.angles));
+    var_17 = vectorNormalize(var_14 * var_3[0] + var_15 * var_3[2] - var_16 * var_3[1]);
     var_18 = var_14 * var_2[0] + var_15 * var_2[2] - var_16 * var_2[1];
     var_11.primary_light.angles = vectortoangles(var_17);
     var_11.primary_light.origin = var_13 + var_18;
 
     if(!isDefined(var_11.primary_light.linkedtotag)) {
       var_11.primary_light.linkedtotag = 1;
-      var_11.primary_light enablelinkto();
+      var_11.primary_light enablelinkTo();
     }
 
-    var_11.primary_light linkto(var_11.attach_tag);
+    var_11.primary_light linkTo(var_11.attach_tag);
   } else {
     var_11.attach_ent = undefined;
     var_11.attach_bone = undefined;
@@ -381,10 +381,10 @@ model_animation_light(var_0) {
     var_14.animname = var_2;
     var_14 maps\_anim::setanimtree();
     var_14 thread maps\_anim::anim_loop_solo(var_14, var_3, var_4);
-    var_15 = getent(var_14.target, "targetname");
+    var_15 = getEnt(var_14.target, "targetname");
     var_16 = common_scripts\utility::spawn_tag_origin();
-    var_16 linkto(var_14, var_5, var_6, var_7);
-    var_15 thread maps\_utility::manual_linkto(var_16);
+    var_16 linkTo(var_14, var_5, var_6, var_7);
+    var_15 thread maps\_utility::manual_linkTo(var_16);
 
     if(isDefined(var_8)) {
       foreach(var_18 in var_8) {
@@ -699,7 +699,7 @@ gasmask_breathing() {
 gasmask_on_npc() {
   self.gasmask = spawn("script_model", (0, 0, 0));
   self.gasmask setModel("prop_sas_gasmask");
-  self.gasmask linkto(self, "tag_eye", (-4, 0, 2), (120, 0, 0));
+  self.gasmask linkTo(self, "tag_eye", (-4, 0, 2), (120, 0, 0));
 }
 
 gasmask_off_npc() {
@@ -787,7 +787,7 @@ get_flickerlight_preset(var_0) {
 }
 
 play_flickerlight_preset(var_0, var_1, var_2) {
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_3)) {
     return;
@@ -813,7 +813,7 @@ play_flickerlight_preset(var_0, var_1, var_2) {
 }
 
 stop_flickerlight(var_0, var_1, var_2) {
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_3)) {
     return;
@@ -833,7 +833,7 @@ stop_flickerlight(var_0, var_1, var_2) {
 }
 
 pause_flickerlight(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -845,7 +845,7 @@ pause_flickerlight(var_0, var_1) {
 }
 
 unpause_flickerlight(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -905,7 +905,7 @@ dyn_motion_flickerlight(var_0, var_1, var_2, var_3, var_4) {
     var_13 = var_7 * randomfloatrange(0.1, 1);
     var_14 = var_8 * randomfloatrange(0.1, 1);
     var_15 = var_5 + (var_12, var_13, var_14);
-    self moveto(var_15, var_11);
+    self moveTo(var_15, var_11);
     wait(var_11);
 
     while(self.islightflickerpaused) {
@@ -1029,7 +1029,7 @@ perlin_flickering_light(var_0, var_1, var_2, var_3, var_4) {
 }
 
 lerp_spot_intensity(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(level.currentgen && isDefined(var_3) == 0) {
     return;
@@ -1068,7 +1068,7 @@ lerp_spot_intensity_array(var_0, var_1, var_2) {
 }
 
 lerp_spot_radius(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(level.currentgen && isDefined(var_3) == 0) {
     return;
@@ -1088,7 +1088,7 @@ lerp_spot_radius(var_0, var_1, var_2) {
 }
 
 set_spot_intensity(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(level.currentgen && isDefined(var_2) == 0) {
     return;
@@ -1097,7 +1097,7 @@ set_spot_intensity(var_0, var_1) {
 }
 
 lerp_spot_color(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(level.currentgen && isDefined(var_3) == 0) {
     return;
@@ -1117,7 +1117,7 @@ lerp_spot_color(var_0, var_1, var_2) {
 }
 
 set_spot_color(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2 setlightcolor(var_1);
 }
 
@@ -1155,7 +1155,7 @@ play_pulse_preset(var_0, var_1, var_2, var_3) {
   var_4 = var_0 + var_1 + "_pulse";
   level notify(var_4);
   level endon(var_4);
-  var_5 = getent(var_1, "targetname");
+  var_5 = getEnt(var_1, "targetname");
 
   if(!isDefined(var_5)) {
     return;

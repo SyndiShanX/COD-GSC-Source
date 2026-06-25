@@ -40,7 +40,7 @@ function init() {
 }
 
 function main() {
-  level.vh_tank = getent("tank", "targetname");
+  level.vh_tank = getEnt("tank", "targetname");
   level.vh_tank tank_setup();
   level.vh_tank thread tank_discovery_vo();
   level thread zm_tomb_vo::watch_occasional_line("tank", "tank_flame_zombie", "vo_tank_flame_zombie");
@@ -57,7 +57,7 @@ function tank_discovery_vo() {
   max_dist_sq = 640000;
   level flag::wait_till("activate_zone_village_0");
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(e_player in a_players) {
       dist_sq = distance2dsquared(level.vh_tank.origin, e_player.origin);
       height_diff = abs(level.vh_tank.origin[2] - e_player.origin[2]);
@@ -194,37 +194,37 @@ function tank_setup() {
   self.chase_pos_time = 0;
   self hidepart("tag_flamethrower");
   self setmovingplatformenabled(1);
-  self.e_roof = getent("vol_on_tank_watch", "targetname");
-  self.e_roof enablelinkto();
-  self.e_roof linkto(self);
+  self.e_roof = getEnt("vol_on_tank_watch", "targetname");
+  self.e_roof enablelinkTo();
+  self.e_roof linkTo(self);
   self.var_4da798ac = spawn("trigger_box", (-8192, -3955.5, 144), 0, 96, 41.5, 52.5);
-  self.var_4da798ac enablelinkto();
-  self.var_4da798ac linkto(self);
-  self.t_use = getent("trig_use_tank", "targetname");
-  self.t_use enablelinkto();
-  self.t_use linkto(self);
-  self.t_use sethintstring(&"ZM_TOMB_X2AT", 500);
-  self.t_use setcursorhint("HINT_NOICON");
-  self.var_5c499e37 = getent("tank_navmesh_cutter", "targetname");
-  self.var_5c499e37 enablelinkto();
-  self.var_5c499e37 linkto(self);
+  self.var_4da798ac enablelinkTo();
+  self.var_4da798ac linkTo(self);
+  self.t_use = getEnt("trig_use_tank", "targetname");
+  self.t_use enablelinkTo();
+  self.t_use linkTo(self);
+  self.t_use setHintString(&"ZM_TOMB_X2AT", 500);
+  self.t_use setCursorHint("HINT_NOICON");
+  self.var_5c499e37 = getEnt("tank_navmesh_cutter", "targetname");
+  self.var_5c499e37 enablelinkTo();
+  self.var_5c499e37 linkTo(self);
   self.var_5c499e37 notsolid();
-  self.t_hurt = getent("trig_hurt_tank", "targetname");
-  self.t_hurt enablelinkto();
-  self.t_hurt linkto(self);
+  self.t_hurt = getEnt("trig_hurt_tank", "targetname");
+  self.t_hurt enablelinkTo();
+  self.t_hurt linkTo(self);
   self.t_kill = spawn("trigger_box", (-8192, -4300, 36), 0, 200, 150, 80);
-  self.t_kill enablelinkto();
-  self.t_kill linkto(self);
+  self.t_kill enablelinkTo();
+  self.t_kill linkTo(self);
   self.var_e444d47d[0] = spawn("trigger_box", (-8280, -3960, 112), 0, 64, 60, 96);
   self.var_e444d47d[0].angles = vectorscale((0, 1, 0), 90);
-  self.var_e444d47d[0] enablelinkto();
-  self.var_e444d47d[0] linkto(self);
+  self.var_e444d47d[0] enablelinkTo();
+  self.var_e444d47d[0] linkTo(self);
   self.var_e444d47d[1] = spawn("trigger_box", (-8104, -3960, 112), 0, 64, 60, 96);
   self.var_e444d47d[1].angles = vectorscale((0, 1, 0), 90);
-  self.var_e444d47d[1] enablelinkto();
-  self.var_e444d47d[1] linkto(self);
+  self.var_e444d47d[1] enablelinkTo();
+  self.var_e444d47d[1] linkTo(self);
   self.var_8f5473ed = getweapon("zombie_markiv_flamethrower");
-  m_tank_path_blocker = getent("tank_path_blocker", "targetname");
+  m_tank_path_blocker = getEnt("tank_path_blocker", "targetname");
   m_tank_path_blocker delete();
   a_tank_jump_down_spots = struct::get_array("tank_jump_down_spots", "script_noteworthy");
   foreach(s_spot in a_tank_jump_down_spots) {
@@ -335,7 +335,7 @@ function function_118e38b5() {
 function disconnect_reconnect_paths(vh_tank) {
   self endon("death");
   while(true) {
-    self disconnectpaths();
+    self disconnectPaths();
     wait(1);
     while(vh_tank getspeedmph() < 1) {
       wait(0.05);
@@ -361,7 +361,7 @@ function players_on_tank_update() {
   level flag::wait_till("start_zombie_round_logic");
   self thread tank_disconnect_paths();
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(e_player in a_players) {
       if(zombie_utility::is_player_valid(e_player)) {
         if(isDefined(e_player.b_already_on_tank) && !e_player.b_already_on_tank && e_player entity_on_tank()) {
@@ -459,7 +459,7 @@ function tank_left_behind() {
     return;
   }
   e_rider = array::random(a_riders);
-  a_players = getplayers();
+  a_players = getPlayers();
   a_victims = [];
   v_tank_fwd = anglesToForward(self.angles);
   foreach(e_player in a_players) {
@@ -470,7 +470,7 @@ function tank_left_behind() {
       continue;
     }
     v_to_tank = self.origin - e_player.origin;
-    v_to_tank = vectornormalize(v_to_tank);
+    v_to_tank = vectorNormalize(v_to_tank);
     if(vectordot(v_to_tank, v_tank_fwd) < 0) {
       continue;
     }
@@ -526,7 +526,7 @@ function tank_call_box() {
     if(!level.vh_tank flag::get("tank_activated") && e_player.score >= 500 && !cooling_down) {
       level.vh_tank notify("call_box_used");
       level.vh_tank.b_call_box_used = 1;
-      e_switch = getent(self.target, "targetname");
+      e_switch = getEnt(self.target, "targetname");
       self setinvisibletoall();
       wait(0.05);
       e_switch rotatepitch(-180, 0.5);
@@ -545,10 +545,10 @@ function tank_call_boxes_update() {
   cooling = level.vh_tank flag::get("tank_cooldown");
   foreach(trig in a_trigs) {
     at_this_station = trig.script_noteworthy == ("call_box_" + str_loc);
-    trig setcursorhint("HINT_NOICON");
+    trig setCursorHint("HINT_NOICON");
     if(moving) {
       trig setvisibletoall();
-      trig sethintstring(&"ZM_TOMB_TNKM");
+      trig setHintString(&"ZM_TOMB_TNKM");
       continue;
     }
     if(!level.tank_boxes_enabled || at_this_station) {
@@ -557,11 +557,11 @@ function tank_call_boxes_update() {
     }
     if(cooling) {
       trig setvisibletoall();
-      trig sethintstring(&"ZM_TOMB_TNKC");
+      trig setHintString(&"ZM_TOMB_TNKC");
       continue;
     }
     trig setvisibletoall();
-    trig sethintstring(&"ZM_TOMB_X2CT", 500);
+    trig setHintString(&"ZM_TOMB_X2CT", 500);
   }
 }
 
@@ -594,7 +594,7 @@ function tank_movement() {
     self waittill("tank_stop");
     self flag::set("tank_cooldown");
     self.t_use setvisibletoall();
-    self.t_use sethintstring(&"ZM_TOMB_TNKC");
+    self.t_use setHintString(&"ZM_TOMB_TNKC");
     self flag::clear("tank_moving");
     self thread tank_disconnect_paths();
     self setspeedimmediate(0);
@@ -607,11 +607,11 @@ function tank_movement() {
     self wait_for_tank_cooldown();
     self flag::clear("tank_cooldown");
     if(isDefined(self.b_no_cost) && self.b_no_cost) {
-      self.t_use sethintstring(&"ZM_TOMB_X2ATF");
+      self.t_use setHintString(&"ZM_TOMB_X2ATF");
     } else {
-      self.t_use sethintstring(&"ZM_TOMB_X2AT", 500);
+      self.t_use setHintString(&"ZM_TOMB_X2AT", 500);
     }
-    self.t_use setcursorhint("HINT_NOICON");
+    self.t_use setCursorHint("HINT_NOICON");
     self flag::clear("tank_activated");
     tank_call_boxes_update();
   }
@@ -622,7 +622,7 @@ function tank_disconnect_paths() {
   while(self getspeedmph() > 0) {
     wait(0.05);
   }
-  self.var_5c499e37 disconnectpaths();
+  self.var_5c499e37 disconnectPaths();
 }
 
 function tank_connect_paths() {
@@ -669,8 +669,8 @@ function tank_ran_me_over() {
       self thread hud::fade_to_black_for_x_sec(start_wait, black_screen_wait, fade_in_time, fade_out_time, "black");
       node.b_player_downed_here = 1;
       e_linker = spawn("script_origin", self.origin);
-      self playerlinkto(e_linker);
-      e_linker moveto(node.origin + vectorscale((0, 0, 1), 8), 1);
+      self playerlinkTo(e_linker);
+      e_linker moveTo(node.origin + vectorscale((0, 0, 1), 8), 1);
       e_linker wait_to_unlink(self);
       node.b_player_downed_here = undefined;
       e_linker delete();
@@ -715,7 +715,7 @@ function wait_for_tank_cooldown() {
 
 function snd_fuel() {
   snd_cd_ent = spawn("script_origin", self.origin);
-  snd_cd_ent linkto(self);
+  snd_cd_ent linkTo(self);
   wait(4);
   snd_cd_ent playSound("zmb_tank_fuel_start");
   wait(0.5);
@@ -796,7 +796,7 @@ function tank_tag_array_setup() {
 
 function get_players_on_tank(valid_targets_only = 0) {
   a_players_on_tank = [];
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(e_player in a_players) {
     if(zombie_utility::is_player_valid(e_player) && (isDefined(e_player.b_already_on_tank) && e_player.b_already_on_tank)) {
       if(!valid_targets_only || (!(isDefined(e_player.ignoreme) && e_player.ignoreme) && zombie_utility::is_player_valid(e_player))) {
@@ -967,7 +967,7 @@ function climb_tag() {
   self.b_on_tank = 1;
   str_tag = self.str_tank_tag;
   str_anim_base = self.var_69140779;
-  self linkto(level.vh_tank, str_tag);
+  self linkTo(level.vh_tank, str_tag);
   v_tag_origin = level.vh_tank gettagorigin(str_tag);
   v_tag_angles = level.vh_tank gettagangles(str_tag);
   str_anim_alias = "_jump_up" + str_anim_base;
@@ -978,7 +978,7 @@ function climb_tag() {
     str_anim_alias = "_crawl" + str_anim_alias;
   }
   self.b_climbing_tank = 1;
-  self animscripted("climb_up_tank_anim", v_tag_origin, v_tag_angles, "ai_zm_dlc5_zombie" + str_anim_alias);
+  self animScripted("climb_up_tank_anim", v_tag_origin, v_tag_angles, "ai_zm_dlc5_zombie" + str_anim_alias);
   self zombie_shared::donotetracks("climb_up_tank_anim");
   self unlink();
   self.b_climbing_tank = 0;
@@ -996,7 +996,7 @@ function jump_down_tag() {
   self.tank_state = "jumping_down";
   str_tag = self.str_tank_tag;
   str_anim_base = self.var_69140779;
-  self linkto(level.vh_tank, str_tag);
+  self linkTo(level.vh_tank, str_tag);
   v_tag_origin = level.vh_tank gettagorigin(str_tag);
   v_tag_angles = level.vh_tank gettagangles(str_tag);
   self setgoalpos(v_tag_origin);
@@ -1005,7 +1005,7 @@ function jump_down_tag() {
     str_anim_alias = "_crawl" + str_anim_alias;
   }
   self.b_climbing_tank = 1;
-  self animscripted("climb_down_tank_anim", v_tag_origin, v_tag_angles, "ai_zm_dlc5_zombie" + str_anim_alias);
+  self animScripted("climb_down_tank_anim", v_tag_origin, v_tag_angles, "ai_zm_dlc5_zombie" + str_anim_alias);
   self zombie_shared::donotetracks("climb_down_tank_anim");
   self unlink();
   self.b_climbing_tank = 0;
@@ -1063,7 +1063,7 @@ function tank_zombie_think() {
             self start_chasing_tank();
           }
         } else {
-          a_players = getplayers();
+          a_players = getPlayers();
           a_eligible_players = [];
           foreach(e_player in a_players) {
             if(!(isDefined(e_player.ignoreme) && e_player.ignoreme) && zombie_utility::is_player_valid(e_player)) {
@@ -1311,7 +1311,7 @@ function tank_flamethrower_get_targets(str_tag, n_flamethrower_id) {
         continue;
       }
     }
-    v_to_zombie = vectornormalize(ai_zombie.origin - v_tag_pos);
+    v_to_zombie = vectorNormalize(ai_zombie.origin - v_tag_pos);
     n_dot = vectordot(v_tag_fwd, ai_zombie.origin);
     if(n_dot < 0.95) {
       continue;
@@ -1332,7 +1332,7 @@ function tank_flamethrower_cycle_targets(str_tag, n_flamethrower_id) {
     a_targets = tank_flamethrower_get_targets(str_tag, n_flamethrower_id);
     foreach(ai in a_targets) {
       if(isalive(ai)) {
-        self setturrettargetent(ai);
+        self setturrettargetEnt(ai);
         wait(1);
       }
     }
@@ -1434,8 +1434,8 @@ function enemy_location_override() {
           if(gettime() != tank.chase_pos_time) {
             tank.chase_pos_time = gettime();
             tank.chase_pos_index = 0;
-            tank_forward = vectornormalize(anglesToForward(level.vh_tank.angles));
-            tank_right = vectornormalize(anglestoright(level.vh_tank.angles));
+            tank_forward = vectorNormalize(anglesToForward(level.vh_tank.angles));
+            tank_right = vectorNormalize(anglestoright(level.vh_tank.angles));
             tank.chase_pos = [];
             tank.chase_pos[0] = level.vh_tank.origin + (vectorscale(tank_forward, -164));
             tank.chase_pos[1] = tank_front;

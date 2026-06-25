@@ -98,7 +98,7 @@ function private function_7bed52a(killstreaktype, team, killstreakid) {
 
   foreach(currentteam, _ in level.teams) {
     if(currentteam != team) {
-      players = getplayers(currentteam, self.origin, scriptbundle.var_e23aed46);
+      players = getPlayers(currentteam, self.origin, scriptbundle.var_e23aed46);
       globallogic_audio::function_61e17de0(dialogkey, players, undefined, killstreakid);
     }
   }

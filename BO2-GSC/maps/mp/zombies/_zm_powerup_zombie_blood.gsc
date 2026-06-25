@@ -84,7 +84,7 @@ zombie_blood_powerup(m_powerup, e_player) {
     m_fx = spawn("script_model", v_origin);
     m_fx setModel("tag_origin");
     m_fx.angles = v_angles;
-    m_fx linkto(e_player, "J_Eyeball_LE", (0, 0, 0), (0, 0, 0));
+    m_fx linkTo(e_player, "J_Eyeball_LE", (0, 0, 0), (0, 0, 0));
     m_fx thread fx_disconnect_watch(e_player);
     playFXOnTag(level._effect["zombie_blood"], m_fx, "tag_origin");
     e_player.m_fx = m_fx;
@@ -169,7 +169,7 @@ make_zombie_blood_entity() {
   level.a_zombie_blood_entities[level.a_zombie_blood_entities.size] = self;
   self setinvisibletoall();
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
       if(isDefined(self.e_unique_player)) {
         if(self.e_unique_player == e_player) {

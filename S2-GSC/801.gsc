@@ -720,7 +720,7 @@ lib_0321::func_42CF(param_00, param_01, param_02, param_03) {
   }
 
   param_03 = max(0.01, param_03);
-  var_04 = vectornormalize(param_01 - param_00);
+  var_04 = vectorNormalize(param_01 - param_00);
   var_05 = param_02 - param_00;
   var_06 = vectordot(var_05, var_04);
   var_06 = var_06 / param_03;
@@ -750,9 +750,9 @@ lib_0321::func_5577(param_00, param_01) {
   }
 
   var_02 = anglesToForward(self.var_001D);
-  var_02 = vectornormalize((var_02[0], var_02[1], 0));
-  var_03 = vectornormalize(param_00 - self.var_0116);
-  var_03 = vectornormalize((var_03[0], var_03[1], 0));
+  var_02 = vectorNormalize((var_02[0], var_02[1], 0));
+  var_03 = vectorNormalize(param_00 - self.var_0116);
+  var_03 = vectorNormalize((var_03[0], var_03[1], 0));
   var_04 = vectordot(var_02, var_03);
   var_05 = cos(param_01 / 2);
   return var_04 > var_05;
@@ -760,7 +760,7 @@ lib_0321::func_5577(param_00, param_01) {
 
 lib_0321::func_753A(param_00) {
   var_01 = anglesToForward(self.var_001D);
-  var_02 = vectornormalize(param_00 - self.var_0116);
+  var_02 = vectorNormalize(param_00 - self.var_0116);
   var_03 = vectordot(var_01, var_02);
   return var_03 > 0.766;
 }
@@ -1018,7 +1018,7 @@ lib_0321::func_2BBE() {
   if(var_00.size) {
     self method_843C();
     self method_808C();
-    self setorigin(var_00[0].var_0116);
+    self setOrigin(var_00[0].var_0116);
     lib_0321::func_7D48();
     return;
   }
@@ -1118,11 +1118,11 @@ lib_0321::func_7154(param_00, param_01, param_02, param_03) {
   }
 
   if(isDefined(param_01)) {
-    var_04 linkto(self, param_01, (0, 0, 0), (0, 0, 0));
+    var_04 linkTo(self, param_01, (0, 0, 0), (0, 0, 0));
   } else {
     var_04.var_0116 = self.var_0116;
     var_04.var_001D = self.var_001D;
-    var_04 linkto(self);
+    var_04 linkTo(self);
   }
 
   var_04 method_861D(param_00);
@@ -1231,7 +1231,7 @@ lib_0321::func_8F82(param_00, param_01, param_02) {
 }
 
 lib_0321::func_9DB8(param_00, param_01) {
-  var_02 = getent(param_00, param_01);
+  var_02 = getEnt(param_00, param_01);
   if(!isDefined(var_02)) {
     return;
   }
@@ -1331,7 +1331,7 @@ lib_0321::func_8499(param_00) {
     return;
   }
 
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   var_01 waittill("trigger");
   common_scripts\utility::func_3C8F(param_00);
 }
@@ -1970,7 +1970,7 @@ lib_0321::func_41E3(param_00) {
           break;
 
         case "ent":
-          var_01 = getent(var_01.var_01A2, "targetname");
+          var_01 = getEnt(var_01.var_01A2, "targetname");
           break;
 
         case "struct":
@@ -2522,7 +2522,7 @@ lib_0321::func_4110() {
 lib_0321::func_3D58(param_00) {
   var_01 = gettime() + param_00 * 1000;
   while(gettime() < var_01) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -2968,13 +2968,13 @@ lib_0321::func_5D9B(param_00, param_01, param_02, param_03) {
 }
 
 lib_0321::func_AA4B(param_00, param_01, param_02, param_03) {
-  var_04 = vectornormalize((param_02[0], param_02[1], 0) - (param_00[0], param_00[1], 0));
+  var_04 = vectorNormalize((param_02[0], param_02[1], 0) - (param_00[0], param_00[1], 0));
   var_05 = anglesToForward((0, param_01[1], 0));
   return vectordot(var_05, var_04) >= param_03;
 }
 
 lib_0321::func_415F(param_00, param_01, param_02) {
-  var_03 = vectornormalize(param_02 - param_00);
+  var_03 = vectorNormalize(param_02 - param_00);
   var_04 = anglesToForward(param_01);
   var_05 = vectordot(var_04, var_03);
   return var_05;
@@ -3076,7 +3076,7 @@ lib_0321::func_4020(param_00, param_01) {
 lib_0321::func_78B4(param_00, param_01, param_02) {
   if(!isDefined(level.var_7306)) {
     var_03 = spawn("script_origin", (0, 0, 0));
-    var_03 linkto(level.var_721C, "", (0, 0, 0), (0, 0, 0));
+    var_03 linkTo(level.var_721C, "", (0, 0, 0), (0, 0, 0));
     level.var_7306 = var_03;
   }
 
@@ -3124,7 +3124,7 @@ lib_0321::func_78B7(param_00) {
   thread lib_0321::func_2D1A(var_01, "sounddone");
   var_01.var_0116 = level.var_7306.var_0116;
   var_01.var_001D = level.var_7306.var_001D;
-  var_01 linkto(level.var_7306);
+  var_01 linkTo(level.var_7306);
   var_01 method_8617(level.var_80D1[param_00], "sounddone");
   if(!isDefined(lib_0322::func_A65C(var_01))) {
     var_01 method_8614();
@@ -3203,7 +3203,7 @@ lib_0321::func_78BC(param_00) {
 lib_0321::func_78B6(param_00) {
   if(!isDefined(level.var_7306)) {
     var_01 = spawn("script_origin", (0, 0, 0));
-    var_01 linkto(level.var_721C, "", (0, 0, 0), (0, 0, 0));
+    var_01 linkTo(level.var_721C, "", (0, 0, 0), (0, 0, 0));
     level.var_7306 = var_01;
   }
 
@@ -3458,36 +3458,36 @@ lib_0321::func_5093(param_00) {
 }
 
 lib_0321::func_08A3(param_00) {
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   if(isDefined(var_01)) {
     var_01 lib_0321::func_089F();
   }
 }
 
 lib_0321::func_08A2(param_00) {
-  var_01 = getent(param_00, "script_noteworthy");
+  var_01 = getEnt(param_00, "script_noteworthy");
   if(isDefined(var_01)) {
     var_01 lib_0321::func_089F();
   }
 }
 
 lib_0321::func_2F68(param_00) {
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   var_01 common_scripts\utility::func_9D9F();
 }
 
 lib_0321::func_2F67(param_00) {
-  var_01 = getent(param_00, "script_noteworthy");
+  var_01 = getEnt(param_00, "script_noteworthy");
   var_01 common_scripts\utility::func_9D9F();
 }
 
 lib_0321::func_364F(param_00) {
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   var_01 common_scripts\utility::func_9DA3();
 }
 
 lib_0321::func_364E(param_00) {
-  var_01 = getent(param_00, "script_noteworthy");
+  var_01 = getEnt(param_00, "script_noteworthy");
   var_01 common_scripts\utility::func_9DA3();
 }
 
@@ -4427,17 +4427,17 @@ lib_0321::func_5C8B(param_00, param_01, param_02, param_03, param_04, param_05, 
   var_0A.var_0116 = param_09.var_0116;
   var_0A.var_001D = param_09 getangles();
   if(isDefined(param_08) && param_08) {
-    param_09 playerlinkto(var_0A, "", param_03, param_04, param_05, param_06, param_07, param_08);
+    param_09 playerlinkTo(var_0A, "", param_03, param_04, param_05, param_06, param_07, param_08);
   } else if(isDefined(param_04)) {
-    param_09 playerlinkto(var_0A, "", param_03, param_04, param_05, param_06, param_07);
+    param_09 playerlinkTo(var_0A, "", param_03, param_04, param_05, param_06, param_07);
   } else if(isDefined(param_03)) {
-    param_09 playerlinkto(var_0A, "", param_03);
+    param_09 playerlinkTo(var_0A, "", param_03);
   } else {
-    param_09 playerlinkto(var_0A);
+    param_09 playerlinkTo(var_0A);
   }
 
-  var_0A moveto(param_00, param_02, param_02 * 0.25);
-  var_0A rotateto(param_01, param_02, param_02 * 0.25);
+  var_0A moveTo(param_00, param_02, param_02 * 0.25);
+  var_0A rotateTo(param_01, param_02, param_02 * 0.25);
   wait(param_02);
   var_0A delete();
 }
@@ -4461,8 +4461,8 @@ lib_0321::func_5C8C(param_00, param_01, param_02, param_03, param_04, param_05, 
     var_09 playerlinktodelta(var_0A);
   }
 
-  var_0A moveto(param_00, param_02, param_02 * 0.25);
-  var_0A rotateto(param_01, param_02, param_02 * 0.25);
+  var_0A moveTo(param_00, param_02, param_02 * 0.25);
+  var_0A rotateTo(param_01, param_02, param_02 * 0.25);
   wait(param_02);
   var_0A delete();
 }
@@ -4515,7 +4515,7 @@ lib_0321::func_5C93(param_00, param_01, param_02, param_03, param_04) {
   }
 
   if(isDefined(param_04)) {
-    self linkto(param_03, param_04, (0, 0, 0), (0, 0, 0));
+    self linkTo(param_03, param_04, (0, 0, 0), (0, 0, 0));
     return;
   }
 
@@ -4619,11 +4619,11 @@ lib_0321::func_4B01() {
     if(isDefined(level.var_4DB7) && isDefined(level.var_721C)) {
       foreach(var_01 in level.var_4DB7) {
         if(level.var_721C common_scripts\utility::func_55E0()) {
-          var_01 sethintstring(var_01.var_4822);
+          var_01 setHintString(var_01.var_4822);
           continue;
         }
 
-        var_01 sethintstring(var_01.var_6F2C);
+        var_01 setHintString(var_01.var_6F2C);
       }
     }
 
@@ -4821,8 +4821,8 @@ lib_0321::func_8C45(param_00, param_01, param_02) {
         return [0, undefined];
       }
 
-      var_12 = vectornormalize(var_08.var_0116 - var_0C);
-      var_13 = vectornormalize(var_08.var_0116 - var_0B);
+      var_12 = vectorNormalize(var_08.var_0116 - var_0C);
+      var_13 = vectorNormalize(var_08.var_0116 - var_0B);
       if(vectordot(var_12, var_13) < 0 || distancesquared(var_0C, var_08.var_0116) < animscripts\shg_asm\soldier\common\shared::func_4338()) {
         var_05[var_05.size] = var_07;
       }
@@ -4930,7 +4930,7 @@ lib_0321::func_4034() {
   }
 
   self.var_7AC4 = self getorigin();
-  self moveto(self.var_7AC4 + (0, 0, -10000), 0.2);
+  self moveTo(self.var_7AC4 + (0, 0, -10000), 0.2);
   self.var_4034 = 1;
 }
 
@@ -4939,7 +4939,7 @@ lib_0321::func_4035() {
     return;
   }
 
-  self moveto(self.var_7AC4, 0.2);
+  self moveTo(self.var_7AC4, 0.2);
   self waittill("movedone");
   self.var_4034 = undefined;
 }
@@ -5195,13 +5195,13 @@ lib_0321::func_0FAE(param_00, param_01, param_02, param_03, param_04) {
 }
 
 lib_0321::func_8FF0(param_00, param_01) {
-  var_02 = getent(param_00, "script_noteworthy");
+  var_02 = getEnt(param_00, "script_noteworthy");
   var_03 = var_02 lib_0321::func_8F71(param_01);
   return var_03;
 }
 
 lib_0321::func_9001(param_00, param_01) {
-  var_02 = getent(param_00, "targetname");
+  var_02 = getEnt(param_00, "targetname");
   var_03 = var_02 lib_0321::func_8F71(param_01);
   return var_03;
 }
@@ -5393,10 +5393,10 @@ lib_0321::func_4FA3(param_00) {
     self method_8617("door_wood_slow_open");
   }
 
-  self rotateto(self.var_001D + (0, 70, 0), 2, 0.5, 0);
+  self rotateTo(self.var_001D + (0, 70, 0), 2, 0.5, 0);
   self method_8060();
   self waittill("rotatedone");
-  self rotateto(self.var_001D + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.var_001D + (0, 40, 0), 2, 0, 2);
 }
 
 lib_0321::func_6E17(param_00) {
@@ -5407,10 +5407,10 @@ lib_0321::func_6E17(param_00) {
     self method_8617("door_wood_slow_open");
   }
 
-  self rotateto(self.var_001D + (0, 70, 0), 2, 0.5, 0);
+  self rotateTo(self.var_001D + (0, 70, 0), 2, 0.5, 0);
   self method_8060();
   self waittill("rotatedone");
-  self rotateto(self.var_001D + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.var_001D + (0, 40, 0), 2, 0, 2);
 }
 
 lib_0321::func_5C83(param_00, param_01) {
@@ -5515,21 +5515,21 @@ lib_0321::func_06D3(param_00) {
 
 lib_0321::func_0673(param_00, param_01, param_02, param_03) {
   if(isDefined(param_03)) {
-    self linkto(param_00, param_01, param_02, param_03);
+    self linkTo(param_00, param_01, param_02, param_03);
     return;
   }
 
   if(isDefined(param_02)) {
-    self linkto(param_00, param_01, param_02);
+    self linkTo(param_00, param_01, param_02);
     return;
   }
 
   if(isDefined(param_01)) {
-    self linkto(param_00, param_01);
+    self linkTo(param_00, param_01);
     return;
   }
 
-  self linkto(param_00);
+  self linkTo(param_00);
 }
 
 lib_0321::func_0FBA(param_00, param_01, param_02) {
@@ -6512,13 +6512,13 @@ lib_0321::func_98A6(param_00) {
       var_03 = var_02;
     }
 
-    var_08 setorigin(var_03.var_0116);
+    var_08 setOrigin(var_03.var_0116);
     var_08 setangles(var_03.var_001D);
   }
 }
 
 lib_0321::func_98A3(param_00) {
-  level.var_721C setorigin(param_00.var_0116);
+  level.var_721C setOrigin(param_00.var_0116);
   if(isDefined(param_00.var_001D)) {
     level.var_721C setangles(param_00.var_001D);
   }
@@ -6914,7 +6914,7 @@ lib_0321::func_1792(param_00) {
 
 lib_0321::func_987D(param_00) {
   if(isPlayer(self)) {
-    self setorigin(param_00.var_0116);
+    self setOrigin(param_00.var_0116);
     self setangles(param_00.var_001D);
     return;
   }
@@ -6927,7 +6927,7 @@ lib_0321::func_98B5(param_00, param_01) {
   var_03 = param_00 gettagangles(param_01);
   self method_808C();
   if(isPlayer(self)) {
-    self setorigin(var_02);
+    self setOrigin(var_02);
     self setangles(var_03);
     return;
   }
@@ -6988,7 +6988,7 @@ lib_0321::func_171A(param_00, param_01, param_02) {
   if(var_04) {
     var_03 playerlinktoblend(var_05, undefined, 1);
   } else {
-    var_03 playerlinkto(var_05);
+    var_03 playerlinkTo(var_05);
   }
 
   var_03 method_8322();
@@ -7280,7 +7280,7 @@ lib_0321::func_9B86(param_00, param_01, param_02, param_03) {
 
   if(isDefined(var_07["rumble"])) {
     var_0B = lib_0321::func_429A();
-    var_0B playrumbleonentity(var_07["rumble"]);
+    var_0B playRumbleOnEntity(var_07["rumble"]);
   }
 }
 
@@ -7392,7 +7392,7 @@ lib_0321::func_42AE(param_00, param_01, param_02, param_03) {
   var_05 = spawnturret("misc_turret", var_04, param_03);
   var_05.var_001D = param_00 gettagangles(param_01);
   var_05 setModel("tag_turret");
-  var_05 linkto(param_00, param_01, param_02, (0, 0, 0));
+  var_05 linkTo(param_00, param_01, param_02, (0, 0, 0));
   var_05 makeunusable();
   var_05 method_805C();
   var_05 setmode("manual");
@@ -7622,16 +7622,16 @@ lib_0321::func_8BC7() {
 
 lib_0321::func_06B0(param_00, param_01, param_02, param_03) {
   if(isDefined(param_03)) {
-    self rotateyaw(param_00, param_01, param_02, param_03);
+    self rotateYaw(param_00, param_01, param_02, param_03);
     return;
   }
 
   if(isDefined(param_02)) {
-    self rotateyaw(param_00, param_01, param_02);
+    self rotateYaw(param_00, param_01, param_02);
     return;
   }
 
-  self rotateyaw(param_00, param_01);
+  self rotateYaw(param_00, param_01);
 }
 
 lib_0321::func_8530(param_00, param_01, param_02) {
@@ -8301,7 +8301,7 @@ lib_0321::func_A76E(param_00) {
 }
 
 lib_0321::func_A762(param_00, param_01) {
-  var_02 = getent(param_00, "targetname");
+  var_02 = getEnt(param_00, "targetname");
   var_02 lib_0321::func_A76E(param_01);
 }
 
@@ -8357,10 +8357,10 @@ lib_0321::func_096D(param_00) {
   if(isDefined(param_00)) {
     self.var_7001 = param_00;
   } else {
-    self.var_7001 = getent(self.var_01A2, "targetname");
+    self.var_7001 = getEnt(self.var_01A2, "targetname");
   }
 
-  self linkto(self.var_7001);
+  self linkTo(self.var_7001);
 }
 
 lib_0321::func_3D45() {
@@ -8408,9 +8408,9 @@ lib_0321::func_7313(param_00, param_01, param_02, param_03, param_04, param_05) 
   param_01 method_8114(0);
   param_01 method_8322();
   var_06 = common_scripts\utility::func_8FFC();
-  var_06 linkto(self, "tag_passenger", lib_0321::func_7314(param_00), (0, 0, 0));
+  var_06 linkTo(self, "tag_passenger", lib_0321::func_7314(param_00), (0, 0, 0));
   var_06.var_725D = common_scripts\utility::func_8FFC();
-  var_06.var_725D linkto(self, "tag_body", lib_0321::func_7312(param_00), (0, 0, 0));
+  var_06.var_725D linkTo(self, "tag_body", lib_0321::func_7312(param_00), (0, 0, 0));
   if(!isDefined(param_02)) {
     param_02 = 90;
   }
@@ -8428,7 +8428,7 @@ lib_0321::func_7313(param_00, param_01, param_02, param_03, param_04, param_05) 
   }
 
   param_01 method_8322();
-  param_01 playerlinkto(var_06, "tag_origin", 0.8, param_02, param_03, param_04, param_05);
+  param_01 playerlinkTo(var_06, "tag_origin", 0.8, param_02, param_03, param_04, param_05);
   param_01.var_4FA0 = var_06;
   return var_06;
 }
@@ -8474,7 +8474,7 @@ lib_0321::func_72DF(param_00) {
   var_01 unlink();
   if(!param_00) {
     var_03 = 0.6;
-    var_01 moveto(var_01.var_725D.var_0116, var_03, var_03 * 0.5, var_03 * 0.5);
+    var_01 moveTo(var_01.var_725D.var_0116, var_03, var_03 * 0.5, var_03 * 0.5);
     wait(var_03);
   }
 
@@ -8506,9 +8506,9 @@ lib_0321::func_1800(param_00) {
 }
 
 lib_0321::func_80E8(param_00) {
-  var_01 = vectornormalize(anglesToForward(self.var_001D));
-  var_02 = vectornormalize(anglestoright(self.var_001D));
-  var_03 = vectornormalize(param_00 - self.var_0116);
+  var_01 = vectorNormalize(anglesToForward(self.var_001D));
+  var_02 = vectorNormalize(anglestoright(self.var_001D));
+  var_03 = vectorNormalize(param_00 - self.var_0116);
   var_04 = vectordot(var_03, var_01);
   var_05 = vectordot(var_03, var_02);
   var_06 = [];
@@ -8854,7 +8854,7 @@ lib_0321::func_3F57(param_00, param_01) {
 }
 
 lib_0321::func_3F58(param_00, param_01) {
-  var_02 = getent(param_00, "script_noteworthy");
+  var_02 = getEnt(param_00, "script_noteworthy");
   var_02 notify("new_volume_command");
   var_02 endon("new_volume_command");
   wait 0.05;
@@ -8899,7 +8899,7 @@ lib_0321::func_3F5A(param_00) {
 }
 
 lib_0321::func_3F5B(param_00) {
-  var_01 = getent(param_00, "script_noteworthy");
+  var_01 = getEnt(param_00, "script_noteworthy");
   var_01 notify("new_volume_command");
   var_01 endon("new_volume_command");
   wait 0.05;
@@ -9033,9 +9033,9 @@ lib_0321::func_649A(param_00, param_01, param_02) {
 
   var_03 = distance(self.var_0116, param_00);
   var_04 = var_03 / param_02;
-  var_05 = vectornormalize(param_00 - self.var_0116);
-  self moveto(param_00, var_04, 0, 0);
-  self rotateto(param_01, var_04, 0, 0);
+  var_05 = vectorNormalize(param_00 - self.var_0116);
+  self moveTo(param_00, var_04, 0, 0);
+  self rotateTo(param_01, var_04, 0, 0);
   wait(var_04);
   if(!isDefined(self)) {
     return;
@@ -9395,7 +9395,7 @@ lib_0321::func_8B30(param_00, param_01, param_02) {
   var_04 = var_03 - param_00;
   var_05 = length(var_04);
   var_06 = asin(clamp(param_02 / var_05, 0, 1));
-  if(vectordot(vectornormalize(var_04), vectornormalize(param_01 - param_00)) > cos(var_06)) {
+  if(vectordot(vectorNormalize(var_04), vectorNormalize(param_01 - param_00)) > cos(var_06)) {
     return 1;
   }
 
@@ -9783,10 +9783,10 @@ lib_0321::func_3DC9(param_00, param_01) {
 
   var_02 = undefined;
   var_02 = anglesToForward(self.var_001D);
-  var_03 = vectornormalize(level.var_721C.var_0116 - self.var_0116);
+  var_03 = vectorNormalize(level.var_721C.var_0116 - self.var_0116);
   if(isDefined(param_00.var_01A2)) {
     var_04 = common_scripts\utility::func_4375(param_00.var_01A2);
-    var_02 = vectornormalize(var_04.var_0116 - param_00.var_0116);
+    var_02 = vectorNormalize(var_04.var_0116 - param_00.var_0116);
   } else if(isDefined(param_00.var_001D)) {
     var_02 = anglesToForward(param_00.var_001D);
   } else {
@@ -10176,7 +10176,7 @@ lib_0321::func_44C6(param_00) {
     return undefined;
   }
 
-  return getent(param_00, "targetname");
+  return getEnt(param_00, "targetname");
 }
 
 lib_0321::func_45B3(param_00) {
@@ -10208,7 +10208,7 @@ lib_0321::func_44C5(param_00) {
     return undefined;
   }
 
-  return getent(param_00, "script_noteworthy");
+  return getEnt(param_00, "script_noteworthy");
 }
 
 lib_0321::func_44C2(param_00) {
@@ -10394,11 +10394,11 @@ lib_0321::func_9438(param_00, param_01, param_02, param_03, param_04, param_05) 
     }
 
     if(level.var_3DD0 || level.var_3DD1 || level.var_3DCF) {
-      var_0C = vectornormalize(anglesToForward(function_01AC(level.var_3DD2, param_00.var_00AD)[0].var_001D) + vectornormalize(param_00.var_0116 - level.var_721C.var_0116));
+      var_0C = vectorNormalize(anglesToForward(function_01AC(level.var_3DD2, param_00.var_00AD)[0].var_001D) + vectorNormalize(param_00.var_0116 - level.var_721C.var_0116));
       var_0D = 0 - lib_0321::func_8C51(param_00.var_0116, var_0C, level.var_721C.var_0116);
       wait(0.1);
     } else {
-      var_0C = vectornormalize(anglesToForward(param_00.var_001D) + vectornormalize(param_00.var_0116 - level.var_721C.var_0116));
+      var_0C = vectorNormalize(anglesToForward(param_00.var_001D) + vectorNormalize(param_00.var_0116 - level.var_721C.var_0116));
       var_0D = 0 - lib_0321::func_8C51(param_00.var_0116, var_0C, level.var_721C.var_0116);
     }
 
@@ -10493,20 +10493,20 @@ lib_0321::func_2311(param_00, param_01, param_02, param_03) {
   if(abs(var_04[2]) <= param_03 - param_02) {
     var_05 = (var_04[0], var_04[1], 0);
     if(lengthsquared(var_05) > param_02 * param_02) {
-      param_00 = param_01 + vectornormalize(var_05) * param_02;
+      param_00 = param_01 + vectorNormalize(var_05) * param_02;
       param_00 = (param_00[0], param_00[1], param_01[2] + var_04[2]);
     }
   } else if(var_04[2] > 0) {
     var_06 = param_01 + (0, 0, param_03 - param_02);
     var_04 = param_00 - var_06;
     if(lengthsquared(var_04) > param_02 * param_02) {
-      param_00 = var_06 + vectornormalize(var_04) * param_02;
+      param_00 = var_06 + vectorNormalize(var_04) * param_02;
     }
   } else {
     var_06 = param_02 - (0, 0, var_04 - param_03);
     var_04 = param_00 - var_06;
     if(lengthsquared(var_04) > param_02 * param_02) {
-      param_00 = var_06 + vectornormalize(var_04) * param_02;
+      param_00 = var_06 + vectorNormalize(var_04) * param_02;
     }
   }
 

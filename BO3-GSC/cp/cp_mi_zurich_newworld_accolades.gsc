@@ -366,7 +366,7 @@ function function_ee166ee8() {
 }
 
 function function_80820e19() {
-  var_4fa896d4 = getent("newworld_accolade_15", "targetname");
+  var_4fa896d4 = getEnt("newworld_accolade_15", "targetname");
   var_4fa896d4 thread function_14316bd1();
 }
 

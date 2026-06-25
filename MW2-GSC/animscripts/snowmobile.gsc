@@ -703,12 +703,12 @@ snowmobile_death_launchslide() {
   velocity = (velocity[0], velocity[1], randomfloatrange(200, 400)) * .75;
 
   if(lengthSquared(velocity) > 1000 * 1000) {
-    velocity = vectornormalize(velocity) * 1000;
+    velocity = vectorNormalize(velocity) * 1000;
   }
 
   model = spawn("script_origin", self.origin);
   model moveSlide((0, 0, 40), 15, velocity);
-  self linkto(model);
+  self linkTo(model);
 
   model thread deleteShortly();
 }

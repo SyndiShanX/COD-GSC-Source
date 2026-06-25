@@ -74,7 +74,7 @@ explosiveDroneLink() {
     self.explosiveDrone.targetname = "explosive_drone_head_model";
     self.explosiveDrone setModel(level.explosiveDroneSettings.modelBase);
     self.explosiveDrone.oldContents = self.explosiveDrone SetContents(0);
-    self.explosiveDrone LinkTo(self, "tag_spike", (0, 0, 0), (0, 0, 0));
+    self.explosiveDrone linkTo(self, "tag_spike", (0, 0, 0), (0, 0, 0));
     self.explosiveDrone.owner = self.owner;
 
     explosive_drone_model = self.explosiveDrone;
@@ -334,7 +334,7 @@ idleTargetMoverExplosive(ent) {
     if(isReallyAlive(self) && !self isUsingRemote() && anglesToForward(self.angles) != forward) {
       forward = anglesToForward(self.angles);
       pos = self.origin + (forward * -100) + (0, 0, 40);
-      ent MoveTo(pos, 0.5);
+      ent moveTo(pos, 0.5);
     }
     wait(0.5);
   }
@@ -1385,7 +1385,7 @@ createKillCamEntity() {
 
   self.killCamEnt = spawn("script_model", self.origin);
   self.killCamEnt SetScriptMoverKillCam("explosive");
-  self.killCamEnt LinkTo(self, "TAG_THRUSTER_BTM", killCamOffset, (0, 0, 0));
+  self.killCamEnt linkTo(self, "TAG_THRUSTER_BTM", killCamOffset, (0, 0, 0));
   self.killCamEnt SetContents(0);
   self.killCamEnt.startTime = getTime();
 }
@@ -1404,7 +1404,7 @@ watchForPickup(trigger) {
   self.owner endon("death");
 
   self.explosiveDrone MakeUsable();
-  self.explosiveDrone SetHintString(explosive_drone_pickup_string);
+  self.explosiveDrone setHintString(explosive_drone_pickup_string);
   self.explosiveDrone SetHintStringVisibleOnlyToOwner(true);
 
   pickupRadiusSq = GetDvarFloat("player_useRadius", 128);

@@ -547,14 +547,14 @@ play_scene_flare_guy_killed(guy) {
 }
 
 mason_knife_blood(guy) {
-  guard = getent("mason_kill_guard_ai", "targetname");
+  guard = getEnt("mason_kill_guard_ai", "targetname");
   tag_origin = guard gettagorigin("J_neck");
   tag_angles = guard gettagangles("J_neck");
   guard play_fx("blood_knife_throw", tag_origin, tag_angles, undefined, 1, "J_neck");
 }
 
 knife_throw_blood(guy) {
-  flare_guy = getent("flare_guy_ai", "targetname");
+  flare_guy = getEnt("flare_guy_ai", "targetname");
   tag_origin = flare_guy gettagorigin("J_spine4");
   tag_angles = flare_guy gettagangles("J_spine4");
   flare_guy play_fx("blood_knife_throw", tag_origin, tag_angles, undefined, 1, "J_spine4");
@@ -576,7 +576,7 @@ flashlight_seal(seal) {
 
 lockbreak_mason(mason) {
   exploder(251);
-  lock = getent("pad_lock_mason", "targetname");
+  lock = getEnt("pad_lock_mason", "targetname");
   lock delete();
 }
 
@@ -660,7 +660,7 @@ motel_anims() {
 
 thug_3_blood(guy) {
   settimescale(0.4);
-  thug_3 = getent("thug_3_ai", "targetname");
+  thug_3 = getEnt("thug_3_ai", "targetname");
   tag_origin = thug_3 gettagorigin("J_Head");
   tag_angles = thug_3 gettagangles("J_Head");
   thug_3 play_fx("motel_blood_punch", tag_origin, tag_angles, undefined, 1, "J_Head");
@@ -669,14 +669,14 @@ thug_3_blood(guy) {
 }
 
 noriega_blood(guy) {
-  noriega = getent("noriega_ai", "targetname");
+  noriega = getEnt("noriega_ai", "targetname");
   tag_origin = noriega gettagorigin("J_head");
   tag_angles = noriega gettagangles("J_head");
   noriega play_fx("noriega_punched_blood", tag_origin, tag_angles, undefined, 1, "J_head");
 }
 
 attach_masons_hat() {
-  mason = getent("ai_mason_casual_ai", "targetname");
+  mason = getEnt("ai_mason_casual_ai", "targetname");
   mason attach("c_usa_milcas_mason_cap");
   hat = get_model_or_models_from_scene("mason_greets_mcknight", "mason_hat");
   hat delete();

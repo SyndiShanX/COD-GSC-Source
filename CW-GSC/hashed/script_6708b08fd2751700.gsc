@@ -48,7 +48,7 @@ function private preinit() {
 }
 
 function function_d50abf44(params) {
-  return getplayers().size;
+  return getPlayers().size;
 }
 
 function function_7eabbc02(params) {
@@ -60,17 +60,17 @@ function function_7eabbc02(params) {
     remaining = int(params.remaining);
   }
 
-  if(isDefined(getplayers())) {
-    for(i = 0; i < getplayers().size; i++) {
-      if(getplayers().size <= remaining) {
+  if(isDefined(getPlayers())) {
+    for(i = 0; i < getPlayers().size; i++) {
+      if(getPlayers().size <= remaining) {
         break;
       }
 
-      if(!isDefined(getplayers()[i].bot) || getplayers()[i].team == hostteam || getplayers()[i].team == "<dev string:x246>") {
+      if(!isDefined(getPlayers()[i].bot) || getPlayers()[i].team == hostteam || getPlayers()[i].team == "<dev string:x246>") {
         continue;
       }
 
-      bot::remove_bot(getplayers()[i]);
+      bot::remove_bot(getPlayers()[i]);
     }
   }
 }
@@ -78,8 +78,8 @@ function function_7eabbc02(params) {
 function function_684893c8(params) {
   count = 0;
 
-  if(isDefined(getplayers())) {
-    foreach(player in getplayers()) {
+  if(isDefined(getPlayers())) {
+    foreach(player in getPlayers()) {
       if(player laststand::player_is_in_laststand()) {
         count++;
       }

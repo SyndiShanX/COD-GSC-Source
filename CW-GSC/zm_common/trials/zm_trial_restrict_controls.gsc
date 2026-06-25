@@ -34,13 +34,13 @@ function private on_begin(var_bd9d962 = #"invert") {
 
   switch (level.var_2439365b) {
     case #"invert":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_to_player("" + #"hash_6536ca4fb2858a9f", 1);
       }
 
       break;
     case #"turret":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player bgb_pack::function_59004002(#"zm_bgb_anywhere_but_here", 1);
         player bgb_pack::function_59004002(#"zm_bgb_nowhere_but_there", 1);
         player thread function_3d8fa20a();
@@ -50,7 +50,7 @@ function private on_begin(var_bd9d962 = #"invert") {
       callback::on_spawned(&function_eaba7c6f);
       break;
     case #"half_speed":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player setmovespeedscale(0.5);
         player allowsprint(0);
         player allowslide(0);
@@ -63,13 +63,13 @@ function private on_begin(var_bd9d962 = #"invert") {
 function private on_end(round_reset) {
   switch (level.var_2439365b) {
     case #"invert":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_to_player("" + #"hash_6536ca4fb2858a9f", 0);
       }
 
       break;
     case #"turret":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player bgb_pack::function_59004002(#"zm_bgb_anywhere_but_here", 0);
         player bgb_pack::function_59004002(#"zm_bgb_nowhere_but_there", 0);
         player setmovespeedscale(1);
@@ -82,7 +82,7 @@ function private on_end(round_reset) {
       callback::remove_on_spawned(&function_eaba7c6f);
       break;
     case #"half_speed":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player setmovespeedscale(1);
         player allowsprint(1);
         player allowslide(1);
@@ -143,7 +143,7 @@ function private function_dc856fd8() {
 function private function_a5b02a07() {
   self endon(#"death");
   wait 0.5;
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:

@@ -26,14 +26,14 @@ function private preinit() {
 function private on_begin(kill_count) {
   self.kill_count = zm_trial::function_5769f26a(kill_count);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_c957540c = 0;
   }
 
   zm_spawner::register_zombie_death_event_callback(&function_138aec8e);
   zm_trial_util::function_c2cd0cba(self.kill_count);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_7f62f098(self);
   }
 
@@ -41,14 +41,14 @@ function private on_begin(kill_count) {
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 
   if(!round_reset) {
     var_57807cdc = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_c957540c < self.kill_count) {
         array::add(var_57807cdc, player, 0);
       }
@@ -61,7 +61,7 @@ function private on_end(round_reset) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_c957540c = undefined;
   }
 
@@ -93,7 +93,7 @@ function private function_69c5df45(challenge) {
     assert(isDefined(challenge));
     end_round = 1;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_c957540c < challenge.kill_count) {
         end_round = 0;
       }
@@ -118,7 +118,7 @@ function private function_69c5df45(challenge) {
 
 function private function_138aec8e(attacker) {
   if(is_true(self.nuked)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player.var_c957540c++;
     }
 

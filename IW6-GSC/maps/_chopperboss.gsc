@@ -10,7 +10,7 @@ init() {
 }
 
 chopper_boss_locs_populate(var_0, var_1) {
-  var_2 = getent("heli_nav_optimizer", "targetname");
+  var_2 = getEnt("heli_nav_optimizer", "targetname");
 
   if(isDefined(var_2)) {
     thread chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2);
@@ -56,7 +56,7 @@ chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2) {
   level.chopper_boss_locs = common_scripts\utility::getStructArray(var_1, var_0);
   var_3 = [];
 
-  for(var_4 = var_2; isDefined(var_4); var_4 = getent(var_4.target, "targetname")) {
+  for(var_4 = var_2; isDefined(var_4); var_4 = getEnt(var_4.target, "targetname")) {
     var_3[var_3.size] = var_4;
     var_4.boss_locs = [];
 
@@ -76,11 +76,11 @@ chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2) {
   }
 
   var_4 = var_2;
-  var_10 = getent(var_4.target, "targetname");
+  var_10 = getEnt(var_4.target, "targetname");
 
   for(var_11 = undefined; isDefined(var_4); var_4 = var_10) {
     if(isDefined(var_4.target)) {
-      var_10 = getent(var_4.target, "targetname");
+      var_10 = getEnt(var_4.target, "targetname");
     } else {
       var_10 = undefined;
     }
@@ -551,7 +551,7 @@ chopper_boss_get_best_location_and_target_proc(var_0, var_1) {
 
 get_trace_loc_for_target(var_0, var_1) {
   var_2 = var_0 maps\_chopperboss_utility::get_boundry_radius();
-  var_3 = vectornormalize(self getcentroid() - var_0.origin) * var_2;
+  var_3 = vectorNormalize(self getcentroid() - var_0.origin) * var_2;
   return var_0.origin + var_3;
 }
 

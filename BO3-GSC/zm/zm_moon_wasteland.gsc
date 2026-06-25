@@ -45,7 +45,7 @@ function init_no_mans_land() {
   init_teleporter_message();
   zm_zonemgr::zone_init("nml_zone");
   zm_moon_teleporter::teleporter_to_nml_init();
-  ent = getent("nml_dogs_volume", "targetname");
+  ent = getEnt("nml_dogs_volume", "targetname");
   ent thread check_players_in_nml_dogs_volume();
   level.num_nml_dog_targets = 0;
   get_perk_machine_ents();
@@ -61,7 +61,7 @@ function zombie_moon_start_init() {
   level flag::wait_till("begin_spawning");
   level thread nml_dogs_init();
   level thread zm_moon_teleporter::function_78f5cb79();
-  teleporter = getent("generator_teleporter", "targetname");
+  teleporter = getEnt("generator_teleporter", "targetname");
   zm_moon_teleporter::teleporter_ending(teleporter, 0);
 }
 
@@ -87,7 +87,7 @@ function nml_setup_round_spawner() {
 }
 
 function num_players_touching_volume(volume) {
-  players = getplayers();
+  players = getPlayers();
   num_players_inside = 0;
   for(i = 0; i < players.size; i++) {
     ent = players[i];
@@ -119,7 +119,7 @@ function init_hint_hudelem(x, y, alignx, aligny, fontscale, alpha) {
 }
 
 function init_teleporter_message() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     player.teleporter_message = function_25deb972(player);
@@ -201,7 +201,7 @@ function resume_moon_rounds(target_round) {
 
 function nml_round_manager() {
   level endon("restart_round");
-  level.dog_targets = getplayers();
+  level.dog_targets = getPlayers();
   for(i = 0; i < level.dog_targets.size; i++) {
     level.dog_targets[i].hunted_by = 0;
   }
@@ -318,7 +318,7 @@ function nml_round_manager() {
     num_dog_targets = 0;
     if((current_time - level.nml_start_time) > dog_round_start_time) {
       skip_dogs = 0;
-      players = getplayers();
+      players = getPlayers();
       if(players.size <= 1) {
         dt = current_time - dog_can_spawn_time;
         if(dt < 0) {
@@ -430,7 +430,7 @@ function screen_shake_manager(next_round_time) {
 
 function attack_wave_screen_shake() {
   num_valid = 0;
-  players = getplayers();
+  players = getPlayers();
   pos = (0, 0, 0);
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -450,17 +450,17 @@ function attack_wave_screen_shake() {
 }
 
 function rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playrumbleonentity(high_rumble_string);
+        players[i] playRumbleOnEntity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playrumbleonentity(low_rumble_string);
+        players[i] playRumbleOnEntity(low_rumble_string);
       }
       continue;
     }
-    players[i] playrumbleonentity(high_rumble_string);
+    players[i] playRumbleOnEntity(high_rumble_string);
   }
 }
 
@@ -493,11 +493,11 @@ function get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius)
 function move_perk(dist, time, accel) {
   ent = level.speed_cola_ents[0];
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] + dist);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   level.speed_cola_ents[1] triggerenable(0);
   ent = level.jugg_ents[0];
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] + dist);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   level.jugg_ents[1] triggerenable(0);
 }
 
@@ -582,10 +582,10 @@ function perk_machine_arrival_update() {
 function perk_arrive_fx(pos) {
   wait(0.15);
   playFX(level._effect["lightning_dog_spawn"], pos);
-  playsoundatposition("zmb_hellhound_bolt", pos);
+  playSoundAtPosition("zmb_hellhound_bolt", pos);
   wait(1.1);
   playFX(level._effect["lightning_dog_spawn"], pos);
-  playsoundatposition("zmb_hellhound_bolt", pos);
+  playSoundAtPosition("zmb_hellhound_bolt", pos);
 }
 
 function nml_round_never_ends() {

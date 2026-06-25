@@ -38,7 +38,7 @@ init_flags() {
 }
 
 init_spawn_funcs() {
-  getent("asd_runner_vocal", "script_noteworthy") add_spawn_function(::pmc_asd_alert);
+  getEnt("asd_runner_vocal", "script_noteworthy") add_spawn_function(::pmc_asd_alert);
   add_spawn_function_ai_group("vol_sundeck_mall", ::fighting_withdrawl);
   add_spawn_function_ai_group("vol_sundeck_west_1f", ::fighting_withdrawl);
   add_spawn_function_ai_group("vol_sundeck_west_2f", ::fighting_withdrawl);
@@ -105,7 +105,7 @@ skipto_sundeck() {
   trigger_use("e8_color_11");
   level.vh_friendly_asd = spawn_vehicle_from_targetname("specialty_asd");
   flag_set("friendly_asd_activated");
-  s_teleport = getstruct("skipto_sundeck_asd", "targetname");
+  s_teleport = getStruct("skipto_sundeck_asd", "targetname");
   level.vh_friendly_asd.origin = s_teleport.origin;
   level.vh_friendly_asd thread friendly_asd_think();
   flag_set("scene_event8_door_breach_done");
@@ -155,7 +155,7 @@ sundeck_save() {
 }
 
 spawn_floating_bodies() {
-  sp = getent("rich_male_shot", "targetname");
+  sp = getEnt("rich_male_shot", "targetname");
   a_pos = getStructArray("floating_body", "targetname");
 
   foreach(s_pos in a_pos) {
@@ -222,12 +222,12 @@ intro_asd_think() {
   self endon("death");
   self thread maps\_metal_storm::metalstorm_set_team("team3");
   self setthreatbiasgroup("ship_drones");
-  s_dest = getstruct("asd_intro_start", "targetname");
+  s_dest = getStruct("asd_intro_start", "targetname");
   self thread maps\_vehicle::defend(s_dest.origin, 64);
   wait 2.5;
   flag_wait("do_asd_intro");
-  s_shot_start = getstruct("asd_missile_hit", "targetname");
-  s_shot_dest = getstruct(s_shot_start.target, "targetname");
+  s_shot_start = getStruct("asd_missile_hit", "targetname");
+  s_shot_dest = getStruct(s_shot_start.target, "targetname");
   magicbullet("metalstorm_launcher", s_shot_start.origin, s_shot_dest.origin, self);
   wait 0.4;
   level notify("fxanim_column_explode_start");
@@ -237,7 +237,7 @@ intro_asd_think() {
   wait 4.0;
   self waittill_any("near_goal");
   flag_set("asd_intro_done");
-  s_dest = getstruct(s_dest.target, "targetname");
+  s_dest = getStruct(s_dest.target, "targetname");
   self thread maps\_vehicle::defend(s_dest.origin);
   self waittill_any("goal", "near_goal", "damage");
   self thread maps\_vehicle::defend(s_dest.origin, s_dest.radius);
@@ -322,7 +322,7 @@ setup_squad_member(str_color, str_threat_bias_group) {
 }
 
 e9_bunker_right_begin_trigger(str_category) {
-  t_trigger = getent("e9_bunker_right_begin_trigger", "targetname");
+  t_trigger = getEnt("e9_bunker_right_begin_trigger", "targetname");
   t_trigger waittill("trigger");
   a_ents = getEntArray("e9_bunker_rpg_spawner", "targetname");
 
@@ -379,7 +379,7 @@ setup_bunker_enemy_params() {
 
 wait_for_linker_bunker_trigger(str_trigger_name, str_spawner_flag, str_level_notify) {
   level endon(str_level_notify);
-  t_trigger = getent(str_trigger_name, "targetname");
+  t_trigger = getEnt(str_trigger_name, "targetname");
   t_trigger waittill("trigger");
   flag_set(str_spawner_flag);
   level notify(str_level_notify);
@@ -387,7 +387,7 @@ wait_for_linker_bunker_trigger(str_trigger_name, str_spawner_flag, str_level_not
 
 e9_cliffs_trigger(str_category) {
   level endon("metal_storm_cleanup");
-  e_trigger = getent("e9_cliffs_trigger", "targetname");
+  e_trigger = getEnt("e9_cliffs_trigger", "targetname");
   e_trigger waittill("trigger");
   level thread civ_run_from_node_to_node(0.3, "rich_female", "e9_civ_rocks_mid_start");
   level thread civ_run_from_node_to_node(0.1, "rich_male", "e9_civ_rocks_mid_2_start");
@@ -399,7 +399,7 @@ e9_start_player_rushers(str_category) {
   level endon("e9_player_in_pool_area");
   player_wait = 10.0;
   wait(player_wait);
-  sp_rusher = getent("e9_start_player_hurryup_1", "targetname");
+  sp_rusher = getEnt("e9_start_player_hurryup_1", "targetname");
   e_ai = simple_spawn_single(sp_rusher);
 
   if(isDefined(e_ai)) {
@@ -407,7 +407,7 @@ e9_start_player_rushers(str_category) {
   }
 
   wait 12;
-  sp_rusher = getent("e9_start_player_hurryup_2", "targetname");
+  sp_rusher = getEnt("e9_start_player_hurryup_2", "targetname");
   e_ai = simple_spawn_single(sp_rusher);
 
   if(isDefined(e_ai)) {
@@ -542,7 +542,7 @@ e9_keep_player_busy_at_start_trigger(delay, str_category) {
   last_ai_spawn_time = start_time;
   min_axis_alive = 3;
   min_spawn_wait_time = 20;
-  volume = getent("vol_sundeck_mall", "targetname");
+  volume = getEnt("vol_sundeck_mall", "targetname");
 
   if(isDefined(volume)) {
     while(true) {
@@ -597,7 +597,7 @@ e9_keep_player_busy_at_start_trigger(delay, str_category) {
 e9_left_staircase_climbing_trigger(delay, str_category_startup) {
   level endon("metal_storm_cleanup");
   wait(delay);
-  t_trigger = getent("e9_stairs_start_left_climbing_trigger", "targetname");
+  t_trigger = getEnt("e9_stairs_start_left_climbing_trigger", "targetname");
   t_trigger waittill("trigger");
   a_ents = getEntArray("e9_stairs_start_left_climbing_spawner", "targetname");
 
@@ -609,7 +609,7 @@ e9_left_staircase_climbing_trigger(delay, str_category_startup) {
 e9_sundeck_west_rpg(delay, str_category) {
   level endon("metal_storm_cleanup");
   wait(delay);
-  t_trigger = getent("e9_player_enters_sundeck", "targetname");
+  t_trigger = getEnt("e9_player_enters_sundeck", "targetname");
   t_trigger waittill("trigger");
   a_spawners = getEntArray("e9_left_stairs_rpg_spawner", "targetname");
 
@@ -632,7 +632,7 @@ e9_manager_upper_left_stairs(str_category) {
   str_spawn_manager = "e9_manager_upper_left_stairs";
   level.stairs_spawn_manager = str_spawn_manager;
   spawn_manager_enable(str_spawn_manager);
-  e_spawner = getent("e9_bridge_rusher_spawner", "targetname");
+  e_spawner = getEnt("e9_bridge_rusher_spawner", "targetname");
   e_ai = simple_spawn_single(e_spawner, ::aggressive_runner, str_category);
   a_spawners = getEntArray("e9_start_staircase_sniper_spawner", "targetname");
   simple_spawn_script_delay(a_spawners, ::spawn_fn_ai_run_to_target, 1, str_category, 0, 1, 0);
@@ -640,7 +640,7 @@ e9_manager_upper_left_stairs(str_category) {
 
 e9_left_upper_tunnel_spawner(str_category) {
   level endon("metal_storm_cleanup");
-  t_trigger = getent("e9_left_stairs_enter_tunnel_trigger", "targetname");
+  t_trigger = getEnt("e9_left_stairs_enter_tunnel_trigger", "targetname");
   t_trigger waittill("trigger");
   a_runners = getEntArray("e9_left_stairs_enter_tunnel_spawner", "targetname");
 
@@ -658,7 +658,7 @@ entity_fake_tracers(ent_target) {
     target_height = base_height + randomintrange(15, 40);
     start_pos = (self.origin[0], self.origin[1], self.origin[2] + base_height);
     end_pos = (ent_target.origin[0], ent_target.origin[1], ent_target.origin[2] + target_height);
-    dir = vectornormalize(end_pos - start_pos);
+    dir = vectorNormalize(end_pos - start_pos);
     end_pos = end_pos - dir * 84;
     right = anglestoright(ent_target.angles);
     adj = randomfloatrange(63.0 * -1, 63.0);
@@ -674,10 +674,10 @@ karma_fake_tracer(start_pos, end_pos, alive_time) {
   e_mover = spawn("script_model", start_pos);
   e_mover setModel("tag_origin");
   dir = end_pos - start_pos;
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   e_mover.angles = vectortoangles(dir);
   playFXOnTag(level._effect["fake_tracer"], e_mover, "tag_origin");
-  e_mover moveto(end_pos, alive_time);
+  e_mover moveTo(end_pos, alive_time);
   wait(alive_time);
   e_mover delete();
 }
@@ -687,7 +687,7 @@ make_ent_ignore_battle(str_targetname, use_magic_shield, delay) {
     wait(delay);
   }
 
-  e_ent = getent(str_targetname, "targetname");
+  e_ent = getEnt(str_targetname, "targetname");
 
   if(isDefined(e_ent)) {
     e_ent.takedamage = 0;
@@ -707,7 +707,7 @@ make_ent_a_battle_target(str_targetname, magic_bullet_shield, delay) {
     wait(delay);
   }
 
-  e_ent = getent(str_targetname, "targetname");
+  e_ent = getEnt(str_targetname, "targetname");
   e_ent.takedamage = 1;
   e_ent.allowdeath = 1;
   e_ent.ignoreme = 0;
@@ -721,9 +721,9 @@ little_bird_attack_drinks_area() {
   maps\_anim::addnotetrack_customfunction("fxanim_props", "pillar_01_explode", ::bar_exploder1, "circle_bar");
   maps\_anim::addnotetrack_customfunction("fxanim_props", "pillar_02_explode", ::bar_exploder2, "circle_bar");
   maps\_anim::addnotetrack_customfunction("fxanim_props", "rotunda_impact", ::bar_exploder3, "circle_bar");
-  playsoundatposition("evt_dome_explo_main", (501, 609, -2979));
+  playSoundAtPosition("evt_dome_explo_main", (501, 609, -2979));
   level notify("fxanim_circle_bar_start");
-  getent("circle_bar_dome", "targetname") delete();
+  getEnt("circle_bar_dome", "targetname") delete();
   level.ai_redshirt1 queue_dialog("sec0_it_s_coming_down_0");
 }
 
@@ -734,12 +734,12 @@ lb_missile(target_pos, move_time) {
   e_mover.angles = self.angles;
   playFXOnTag(level._effect["heli_missile_tracer"], e_mover, "tag_origin");
   e_mover playSound("wpn_little_bird_rocket_fire_npc");
-  e_mover moveto(target_pos, move_time);
+  e_mover moveTo(target_pos, move_time);
   wait(move_time);
   v_dir = anglesToForward(e_mover.angles);
   v_pos = e_mover.origin + v_dir * 126;
   playFX(level._effect["def_explosion"], v_pos);
-  playsoundatposition("exp_little_bird_missile_explo", v_pos);
+  playSoundAtPosition("exp_little_bird_missile_explo", v_pos);
   e_mover delete();
 }
 
@@ -782,7 +782,7 @@ e9_balcony_blocker_trigger() {
 e9_player_reaches_bottom_left_stairs_trigger(delay, str_category) {
   level endon("metal_storm_cleanup");
   wait(delay);
-  e_trigger = getent("e9_player_reaches_bottom_left_stairs_trigger", "targetname");
+  e_trigger = getEnt("e9_player_reaches_bottom_left_stairs_trigger", "targetname");
   e_trigger waittill("trigger");
 
   if(isDefined(level.stairs_spawn_manager)) {
@@ -795,7 +795,7 @@ e9_player_reaches_bottom_left_stairs_trigger(delay, str_category) {
 e9_stairs_by_blockage_trigger(delay, str_category) {
   level endon("metal_storm_cleanup");
   wait(delay);
-  e_trigger = getent("e9_stairs_by_blockage_trigger", "targetname");
+  e_trigger = getEnt("e9_stairs_by_blockage_trigger", "targetname");
   e_trigger waittill("trigger");
   event9_save("e9_upper_left_stairs");
   a_spawners = getEntArray("e9_north_cliff_west_spawner", "targetname");
@@ -811,7 +811,7 @@ defalco_blows_up_building(delay) {
   level thread e9_balcony_blowup_stairs_stumble_anim();
   level notify("fxanim_balcony_block_start");
   level thread balcony_blowup_effects();
-  m_pristine = getent("sundeck_deck_explosion", "targetname");
+  m_pristine = getEnt("sundeck_deck_explosion", "targetname");
 
   if(isDefined(m_pristine)) {
     m_pristine delete();
@@ -828,7 +828,7 @@ defalco_blows_up_building(delay) {
 balcony_blowup_effects() {
   exploder(844);
   exploder(845);
-  playsoundatposition("exp_veh_large", (-990, 1601, -2872));
+  playSoundAtPosition("exp_veh_large", (-990, 1601, -2872));
   exploder(846);
 }
 
@@ -852,7 +852,7 @@ ai_rappel_run_away(str_exit_node, delete_at_goal) {
 }
 
 e9_post_ms_left_begin_trigger(str_category) {
-  t_trigger = getent("e9_post_ms_left_begin_trigger", "targetname");
+  t_trigger = getEnt("e9_post_ms_left_begin_trigger", "targetname");
   t_trigger waittill("trigger");
   level notify("metal_storm_cleanup");
   event9_save("e9_post_metal_storm");
@@ -885,7 +885,7 @@ e9_post_ms_left_begin_trigger(str_category) {
 }
 
 e9_post_ms_right_begin_trigger(str_category) {
-  t_trigger = getent("e9_post_ms_right_begin_trigger", "targetname");
+  t_trigger = getEnt("e9_post_ms_right_begin_trigger", "targetname");
   t_trigger waittill("trigger");
   level notify("metal_storm_cleanup");
   event9_save("e9_post_metal_storm");
@@ -1027,14 +1027,14 @@ civilian_rocks_execution_anim(delay, str_category_snipers) {
   str_executioner_targetname = "guard_rocks_executioner_ai";
   level thread make_ent_ignore_battle(str_executioner_targetname, undefined, 0.1);
   run_scene("sundeck_rocks_execution");
-  e_dead_civ = getent(str_civilian_killed_targetname, "targetname");
+  e_dead_civ = getEnt(str_civilian_killed_targetname, "targetname");
 
   if(isalive(e_dead_civ)) {
     e_dead_civ ragdoll_death();
   }
 
   nd_node = getnode("executioner_cover_node", "targetname");
-  e_executioner = getent("guard_rocks_executioner_ai", "targetname");
+  e_executioner = getEnt("guard_rocks_executioner_ai", "targetname");
 
   if(isalive(e_executioner)) {
     e_executioner endon("death");
@@ -1270,20 +1270,20 @@ pmc_defalco_extract_vocal() {
 show_geo_models_trigger() {
   maps\karma_exit_club::karma2_hide_tower_and_shell();
   flag_wait("close_sundeck_door");
-  m_door = getent("security_gate", "targetname");
+  m_door = getEnt("security_gate", "targetname");
   m_door useanimtree(#animtree);
   m_door clearanim(%root, 0);
   stop_exploder(666);
   stop_exploder(10700);
   stop_exploder(10710);
   stop_exploder(10711);
-  door_collision = getent("e7_door_clip", "targetname");
-  door_collision disconnectpaths();
+  door_collision = getEnt("e7_door_clip", "targetname");
+  door_collision disconnectPaths();
   maps\karma_exit_club::karma2_show_tower_and_shell();
 }
 
 mall_cleanup_trigger() {
-  t_cleanup = getent("clean_up_mall", "targetname");
+  t_cleanup = getEnt("clean_up_mall", "targetname");
 
   while(true) {
     t_cleanup trigger_wait();

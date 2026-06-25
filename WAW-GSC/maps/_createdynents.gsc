@@ -865,7 +865,7 @@ move_selected_object(with_trace) {
     }
 
     if(vector != self.origin) {
-      self MoveTo(vector, 0.1);
+      self moveTo(vector, 0.1);
       self waittill("movedone");
     } else {
       wait(0.05);
@@ -1572,7 +1572,7 @@ temp_radius_damage(origin, radius, max_dmg, min_dmg) {
       continue;
     }
 
-    forward = VectorNormalize(ents[i].origin - origin);
+    forward = vectorNormalize(ents[i].origin - origin);
     power = min_dmg + ((max_dmg - min_dmg) * (1.0 - dist / radius));
 
     forward = VectorScale(forward, power);
@@ -1592,7 +1592,7 @@ draw_trajectory() {
     if(dist < level.plant_bomb_radius) {
       max_dmg = level.plant_bomb_power;
       min_dmg = level.plant_bomb_power * 0.1;
-      forward = VectorNormalize(self.origin - level.planted_bomb.origin);
+      forward = vectorNormalize(self.origin - level.planted_bomb.origin);
 
       power = min_dmg + ((max_dmg - min_dmg) * (1.0 - dist / level.plant_bomb_radius));
 
@@ -1783,7 +1783,7 @@ object_highlight(objects) {
 
     ent = objects[i];
 
-    difference = VectorNormalize(ent.origin - (level.debug_player.origin + (0, 0, 55)));
+    difference = vectorNormalize(ent.origin - (level.debug_player.origin + (0, 0, 55)));
     newdot = VectorDot(forward, difference);
     if(newdot < dot) {
       continue;

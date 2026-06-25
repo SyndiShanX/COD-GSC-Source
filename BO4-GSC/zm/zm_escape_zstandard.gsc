@@ -146,10 +146,10 @@ defend_areas() {
   level endon(#"end_game");
   function_84139b27();
   level flag::wait_till("start_zombie_round_logic");
-  var_40762d8a = getent("t_catwalk_door_open", "targetname");
-  var_40762d8a sethintstring(#"hash_1228aacbdf256d7e");
-  t_door_catwalk = getent("door_model_west_side_exterior_to_catwalk", "target");
-  t_door_catwalk sethintstring(#"hash_1228aacbdf256d7e");
+  var_40762d8a = getEnt("t_catwalk_door_open", "targetname");
+  var_40762d8a setHintString(#"hash_1228aacbdf256d7e");
+  t_door_catwalk = getEnt("door_model_west_side_exterior_to_catwalk", "target");
+  t_door_catwalk setHintString(#"hash_1228aacbdf256d7e");
   var_40762d8a setinvisibletoall();
   t_door_catwalk setinvisibletoall();
   zm_utility::enable_power_switch(0, 0, "power_house_power_switch", "script_noteworthy", #"hash_58ad53dcf0f18a1");
@@ -218,7 +218,7 @@ defend_areas() {
   if(isDefined(var_40762d8a)) {
     var_40762d8a setvisibletoall();
     t_door_catwalk setvisibletoall();
-    var_40762d8a sethintstring(#"hash_52803ee9fe3f2ea5");
+    var_40762d8a setHintString(#"hash_52803ee9fe3f2ea5");
     var_40762d8a notify(#"trigger");
   }
 

@@ -37,7 +37,7 @@ function grab_free_perk(player) {
 }
 
 function free_perk_powerup(item) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!players[i] laststand::player_is_in_laststand() && !players[i].sessionstate == "spectator") {
       player = players[i];
@@ -62,7 +62,7 @@ function disable_perk_before_power(perk) {
   if(isDefined(perk)) {
     wait(0.1);
     if(!level flag::get("power_on")) {
-      a_players = getplayers();
+      a_players = getPlayers();
       if(isDefined(a_players) && a_players.size == 1 && perk == "specialty_quickrevive") {
         return;
       }

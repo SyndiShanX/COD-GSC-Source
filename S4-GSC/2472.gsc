@@ -56,7 +56,7 @@ _id_F1A7() {
   var_0 = spawn("trigger_radius", self.origin, 0, 64, 64);
   var_0._id_0481 = "dropped_star";
   var_0 _meth_80DB();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   self._id_E599 = var_0;
 
   if(!isDefined(level._id_F1C4)) {

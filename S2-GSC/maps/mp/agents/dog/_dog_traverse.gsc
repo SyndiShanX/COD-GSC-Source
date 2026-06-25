@@ -163,7 +163,7 @@ func_46BF() {
     return self.var_9829;
   }
 
-  var_00 = getent(self.var_01A2, "targetname");
+  var_00 = getEnt(self.var_01A2, "targetname");
   if(!isDefined(var_00)) {
     return undefined;
   }

@@ -27,11 +27,11 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("player128x128x256", "targetname");
+  var_0 = getEnt("player128x128x256", "targetname");
   var_1 = spawn("script_model", (-560, -2752, 384));
   var_1.angles = (0, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("player32x32x256", "targetname");
+  var_2 = getEnt("player32x32x256", "targetname");
   var_3 = spawn("script_model", (-512, -1536, 464));
   var_3.angles = (0, 45, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
@@ -41,7 +41,7 @@ fix_collision() {
   var_5 = spawn("script_model", (-1088, -510, 0));
   var_5.angles = (0, 0, 0);
   var_5 setModel("mp_geneva_wallrun_clip_brick_01");
-  var_6 = getent("player32x32x8", "targetname");
+  var_6 = getEnt("player32x32x8", "targetname");
   var_7 = spawn("script_model", (-512, -2416, 284));
   var_7.angles = (75, 0, 0);
   var_7 clonebrushmodeltoscriptmodel(var_6);
@@ -55,7 +55,7 @@ fix_collision() {
 
 apex_not_outofbounds() {
   level.outofboundstriggerpatches = [];
-  var_0 = getent("apex_unoutofbounds", "targetname");
+  var_0 = getEnt("apex_unoutofbounds", "targetname");
   level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
 
@@ -95,12 +95,12 @@ boatbob(var_0) {
   for(;;) {
     var_1 = randomfloatrange(4, 7);
     var_0.goalpos = var_0.startpos + (randomintrange(-2, 2), randomintrange(-2, 2), randomintrange(-3, 3));
-    var_0 moveto(var_0.goalpos, var_1, var_1 * 0.25, var_1 * 0.25);
+    var_0 moveTo(var_0.goalpos, var_1, var_1 * 0.25, var_1 * 0.25);
 
     if(isDefined(var_0.target)) {
       foreach(var_3 in var_0.var_BE10) {
         var_3.goalpos = var_0.goalpos + var_3.deltapos;
-        var_3 moveto(var_3.goalpos, var_1, var_1 * 0.25, var_1 * 0.25);
+        var_3 moveTo(var_3.goalpos, var_1, var_1 * 0.25, var_1 * 0.25);
       }
     }
 
@@ -128,13 +128,13 @@ setup_vista_driving_boats() {
 
 vista_boat_drive(var_0, var_1) {
   level endon("game_ended");
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
   for(;;) {
     var_3 = abs(distance(var_0.origin, var_2.origin) * var_1);
-    var_0 moveto(var_2.origin, var_3, 0, 0);
-    var_0 rotateto(var_2.angles, var_3, 0, 0);
-    var_2 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_0 moveTo(var_2.origin, var_3, 0, 0);
+    var_0 rotateTo(var_2.angles, var_3, 0, 0);
+    var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     wait(var_3);
   }
 }

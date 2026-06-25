@@ -61,7 +61,7 @@ spawn_line_sound(sound) {
     return;
   }
   self.soundmover = [];
-  endOfLineEntity = getstruct(startOfLine.target, "targetname");
+  endOfLineEntity = getStruct(startOfLine.target, "targetname");
   if(isDefined(endOfLineEntity)) {
     start = startOfLine.origin;
     end = endOfLineEntity.origin;
@@ -147,7 +147,7 @@ get_number_variants(aliasPrefix) {
   }
 }
 create_2D_sound_list(sound_alias) {
-  player = getplayers();
+  player = getPlayers();
   if(!isDefined(sound_alias)) {
     return;
   }

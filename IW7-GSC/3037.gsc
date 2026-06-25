@@ -233,7 +233,7 @@ func_A2CC(var_0) {
 
   playfxontagsbetweenclients(scripts\engine\utility::getfx("jackal_primary_energy"), level.var_D127, "tag_flash", var_2, "tag_origin");
   playfxontagsbetweenclients(scripts\engine\utility::getfx("jackal_primary_energy"), level.var_D127, "tag_flash_2", var_2, "tag_origin");
-  var_3 = vectornormalize(level.var_D127.origin - var_2.origin);
+  var_3 = vectorNormalize(level.var_D127.origin - var_2.origin);
   var_4 = var_2.origin + 100 * var_3;
   var_2 getrandomarmkillstreak(150, var_4, level.var_D127, undefined, "MOD_PROJECTILE", "spaceship_primary_energy_projectile");
   earthquake(0.09, 0.76, level.var_D127.origin, 10000);
@@ -451,7 +451,7 @@ func_A39B() {}
 
 func_A395() {
   level.var_D127.var_76F8 = spawn("script_origin", level.var_D127.origin);
-  level.var_D127.var_76F8 linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
+  level.var_D127.var_76F8 linkTo(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
 }
 
 func_A394() {
@@ -461,8 +461,8 @@ func_A394() {
 func_A39E() {
   level.var_D127.var_6D2D = spawn("script_origin", level.var_D127.origin);
   level.var_D127.var_6D2E = spawn("script_origin", level.var_D127.origin);
-  level.var_D127.var_6D2D linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
-  level.var_D127.var_6D2E linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
+  level.var_D127.var_6D2D linkTo(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
+  level.var_D127.var_6D2E linkTo(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
 }
 
 func_A39D() {
@@ -474,9 +474,9 @@ func_A39A() {
   level.var_D127.var_76F8 = spawn("script_origin", level.var_D127.origin);
   level.var_D127.var_76FA = spawn("script_origin", level.var_D127.origin);
   level.var_D127.var_76F9 = spawn("script_origin", level.var_D127.origin);
-  level.var_D127.var_76F8 linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
-  level.var_D127.var_76FA linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
-  level.var_D127.var_76F9 linkto(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
+  level.var_D127.var_76F8 linkTo(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
+  level.var_D127.var_76FA linkTo(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
+  level.var_D127.var_76F9 linkTo(level.var_D127, "tag_body", (0, 0, 0), (0, 0, 0));
   level.var_D127.var_76FA ghostattack(0, 0);
   level.var_D127.var_76FA func_8277(0.5, 0);
 }
@@ -670,7 +670,7 @@ func_A274(var_0, var_1, var_2) {
   var_5 = self gettagorigin("j_mainroot_ship");
   var_6 = self gettagangles("j_mainroot_ship");
   var_7 = var_5 + anglesToForward(var_6) * var_3 + anglestoright(var_6) * var_1 + anglestoup(var_6) * var_4;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.235, 0.9, level.var_D127.origin, 5000);
 
   if(isDefined(self.var_727D)) {
@@ -681,7 +681,7 @@ func_A274(var_0, var_1, var_2) {
   var_8.origin = var_7;
 
   if(isDefined(var_0)) {
-    var_9 = vectornormalize(var_0.origin - var_5);
+    var_9 = vectorNormalize(var_0.origin - var_5);
     var_8.angles = vectortoangles(var_9);
   } else {
     var_8.angles = self.angles;
@@ -749,7 +749,7 @@ func_B838(var_0) {
   wait(var_3);
 
   if(isDefined(var_0) && isvalidmissile(self) && isDefined(self)) {
-    self missile_settargetent(var_0);
+    self missile_settargetEnt(var_0);
   }
 }
 

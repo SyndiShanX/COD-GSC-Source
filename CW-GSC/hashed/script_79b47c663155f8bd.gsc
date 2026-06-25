@@ -51,13 +51,13 @@ function private function_8958c312() {
 
   if(level.teambased) {
     foreach(team in level.teams) {
-      level.var_f5c1fb9d[team] = is_true(level.var_8a530af5[team]) ? getplayers(team).size : function_b16926ea(team).size;
+      level.var_f5c1fb9d[team] = is_true(level.var_8a530af5[team]) ? getPlayers(team).size : function_b16926ea(team).size;
     }
 
     return;
   }
 
-  level.var_f5c1fb9d[#"allies"] = is_true(level.var_8a530af5[#"allies"]) ? getplayers().size : function_b16926ea().size;
+  level.var_f5c1fb9d[#"allies"] = is_true(level.var_8a530af5[#"allies"]) ? getPlayers().size : function_b16926ea().size;
 }
 
 function private function_ba1ef25b(maxplayers) {
@@ -123,7 +123,7 @@ function private function_bbeb8bbe(maxplayers) {
   level endon(#"game_ended");
 
   while(true) {
-    playercount = getplayers().size;
+    playercount = getPlayers().size;
 
     if(playercount > maxplayers) {
       level function_e88d0cf4();
@@ -139,7 +139,7 @@ function private function_9bead880(var_8a291590, maxplayers) {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     bots = function_b16926ea();
 
     if(players.size > maxplayers) {
@@ -161,7 +161,7 @@ function private function_38a06234() {
       continue;
     }
 
-    players = getplayers(team);
+    players = getPlayers(team);
 
     if(isDefined(var_dd1b756e) && players.size >= var_dd1b756e) {
       continue;
@@ -201,7 +201,7 @@ function private function_e88d0cf4() {
       continue;
     }
 
-    players = getplayers(team);
+    players = getPlayers(team);
 
     if(!isDefined(largestcount) || players.size > largestcount) {
       var_e019b1bb = team;

@@ -112,7 +112,7 @@ function function_b968c4a9() {
   self endon("e69adfe87a2f27d");
   self endon(#"death");
   result = level waittill(#"hash_c1cceae4479f2e5");
-  var_831e477b = vectorscale(vectornormalize(self.origin - result.origin + (0, 0, 1000)), 80);
+  var_831e477b = vectorscale(vectorNormalize(self.origin - result.origin + (0, 0, 1000)), 80);
   self physicslaunch(self.origin, var_831e477b);
   self thread function_b968c4a9();
 }
@@ -131,7 +131,7 @@ function function_5160690e() {
       }
 
       zombie setentitytarget(self);
-      dir = vectornormalize(self.origin - zombie.origin) * 30;
+      dir = vectorNormalize(self.origin - zombie.origin) * 30;
       self physicslaunch(self.origin, (dir[0], dir[1], dir[2] + 10));
       self.health -= 40;
 

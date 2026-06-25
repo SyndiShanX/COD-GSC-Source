@@ -256,7 +256,7 @@ function get_sentinel_nearest_zombie(b_ignore_elemental = 1, b_outside_playable_
 }
 
 function get_sentinel_drone_enemy() {
-  sentinel_drone_targets = getplayers();
+  sentinel_drone_targets = getPlayers();
   least_hunted = sentinel_drone_targets[0];
   search_distance_sq = 2000 * 2000;
   for(i = 0; i < sentinel_drone_targets.size; i++) {
@@ -314,7 +314,7 @@ function set_sentinel_drone_enemy(enemy) {
   }
   self.sentinel_droneenemy.hunted_by_sentinel++;
   self setlookatent(self.sentinel_droneenemy);
-  self setturrettargetent(self.sentinel_droneenemy);
+  self setturrettargetEnt(self.sentinel_droneenemy);
 }
 
 function private sentinel_drone_target_selection() {
@@ -399,7 +399,7 @@ function sentinel_dodgeroll() {
   self endon("change_state");
   self endon("death");
   roll_dir = anglestoright(self.angles);
-  roll_dir = vectornormalize(roll_dir);
+  roll_dir = vectorNormalize(roll_dir);
   juke_initial_pause = getdvarfloat("sentinel_drone_juke_initial_pause_dvar", 0.2);
   juke_speed = getdvarint("sentinel_drone_juke_speed_dvar", 300);
   juke_offset = getdvarint("sentinel_drone_juke_offset_dvar", 20);
@@ -834,7 +834,7 @@ function sentinel_chargeatplayernavigation(b_charge_at_player, time_out, charge_
       charge_at_position = (charge_at_position[0], charge_at_position[1], self.sentinel_droneenemy.origin[2]);
     }
   }
-  charge_at_dir = vectornormalize(charge_at_position - self.origin);
+  charge_at_dir = vectorNormalize(charge_at_position - self.origin);
   charge_at_position = self.origin + (charge_at_dir * 1200);
   self clearlookatent();
   self setvehgoalpos(charge_at_position, 1, 0);
@@ -846,7 +846,7 @@ function sentinel_chargeatplayernavigation(b_charge_at_player, time_out, charge_
       velocitymag = 1;
     }
     predicted_pos = self.origin + velocity;
-    offset = (vectornormalize(predicted_pos - self.origin)) * 35;
+    offset = (vectorNormalize(predicted_pos - self.origin)) * 35;
     trace = sentinel_trace(self.origin + offset, predicted_pos + offset, self, 1);
     if(trace["fraction"] < 1) {
       if(!(isDefined(trace["entity"]) && trace["entity"].archetype === "zombie" && isDefined(trace["entity"].health) && trace["entity"].health == 0)) {
@@ -893,7 +893,7 @@ function sentine_rumblewhennearplayer() {
   self endon("change_state");
   while(true) {
     while(sentinel_isnearanotherplayer(self.origin, 120)) {
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       wait(0.1);
     }
     wait(0.5);
@@ -940,7 +940,7 @@ function sentinel_canseeenemy(sentinel_origin, prev_enemy_position) {
   if(b_still_enemy_in_pos_check) {
     beam_to_enemy_length = distance(target_point, origin_point);
     beam_to_enemy_dir = target_point - origin_point;
-    beam_to_enemy_dir = vectornormalize(beam_to_enemy_dir);
+    beam_to_enemy_dir = vectorNormalize(beam_to_enemy_dir);
     target_point = origin_point + vectorscale(beam_to_enemy_dir, 1200);
   }
   trace = sentinel_trace(origin_point, target_point, self.sentinel_droneenemy, 0);
@@ -1000,7 +1000,7 @@ function sentinel_firelogic() {
         self clearlookatent();
         self.angles = vectortoangles(beam_dir);
         self setlookatent(self.beam_fire_target);
-        self setturrettargetent(self.beam_fire_target);
+        self setturrettargetEnt(self.beam_fire_target);
         self waittill("fire_beam");
         self clientfield::set("sentinel_drone_beam_charge", 0);
         result = sentinel_canseeenemy(self.beam_start_position, result.hit_position);
@@ -1015,7 +1015,7 @@ function sentinel_firelogic() {
         self vehicle_ai::waittill_asm_complete(fire_state_name, 5);
         if(isDefined(self.sentinel_droneenemy)) {
           self setlookatent(self.sentinel_droneenemy);
-          self setturrettargetent(self.sentinel_droneenemy);
+          self setturrettargetEnt(self.sentinel_droneenemy);
         }
         self asmrequestsubstate("locomotion@movement");
         if(randomint(100) < 40) {
@@ -1041,7 +1041,7 @@ function sentinel_firebeam(target_position, b_succession) {
   self.beam_fire_target.origin = target_position;
   self.beam_fire_target.angles = vectortoangles(beam_dir * -1);
   self.angles = vectortoangles(beam_dir);
-  self setturrettargetent(self.beam_fire_target);
+  self setturrettargetEnt(self.beam_fire_target);
   self.is_firing_beam = 1;
   if(!(isDefined(b_succession) && b_succession)) {
     sentinel_firebeamburst(target_position);
@@ -1393,7 +1393,7 @@ function state_death_update(params) {
   self thread vehicle_death::death_fx();
   self.beam_fire_target thread sentinel_deletedronedeathfx(self.origin);
   min_distance = 110;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!is_target_valid(players[i])) {
       continue;
@@ -1430,7 +1430,7 @@ function sentinel_forcegoandstayinposition(b_enable, position) {
 
 function sentinel_isenemyindoors() {
   if(!isDefined(self.v_compact_mode)) {
-    v_compact_mode = getent("sentinel_compact", "targetname");
+    v_compact_mode = getEnt("sentinel_compact", "targetname");
   }
   if(isDefined(v_compact_mode)) {
     if(self.sentinel_droneenemy istouching(v_compact_mode)) {
@@ -1445,7 +1445,7 @@ function sentinel_isenemyinnarrowplace() {
     return false;
   }
   if(!isDefined(self.v_narrow_volume)) {
-    self.v_narrow_volume = getent("sentinel_narrow_nav", "targetname");
+    self.v_narrow_volume = getEnt("sentinel_narrow_nav", "targetname");
   }
   if(isDefined(self.v_narrow_volume) && isDefined(self.sentinel_droneenemy)) {
     if(self.sentinel_droneenemy istouching(self.v_narrow_volume)) {
@@ -1557,9 +1557,9 @@ function sentinel_damageplayer(damage, eattacker, b_light_damage = 0) {
   eattacker endon("disconnect");
   self dodamage(damage, eattacker.origin, eattacker, eattacker);
   if(b_light_damage) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   } else {
-    self playrumbleonentity("proximity_grenade");
+    self playRumbleOnEntity("proximity_grenade");
   }
   if(self util::mayapplyscreeneffect()) {
     self clientfield::increment_to_player("sentinel_drone_damage_player_fx");
@@ -1605,7 +1605,7 @@ function sentinel_isnearanothersentinel(point, min_distance) {
 }
 
 function sentinel_isnearanotherplayer(origin, min_distance) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!is_target_valid(players[i])) {
       continue;

@@ -65,7 +65,7 @@ radarmover(var_0) {
   self endon("personal_uav_removed");
 
   for(;;) {
-    var_0 moveto(self.origin, 0.05);
+    var_0 moveTo(self.origin, 0.05);
     wait 0.05;
   }
 }
@@ -725,8 +725,8 @@ glowstickuselistener(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_PATCH_PICKUP_TI");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_PATCH_PICKUP_TI");
   thread updateenemyuse(var_0);
 
   for(;;) {
@@ -759,8 +759,8 @@ glowstickenemyuselistener(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self.enemytrigger setcursorhint("HINT_NOICON");
-  self.enemytrigger sethintstring(&"MP_PATCH_DESTROY_TI");
+  self.enemytrigger setCursorHint("HINT_NOICON");
+  self.enemytrigger setHintString(&"MP_PATCH_DESTROY_TI");
   self.enemytrigger maps\mp\_utility::makeenemyusable(var_0);
 
   for(;;) {

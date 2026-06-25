@@ -37,7 +37,7 @@ strength_test_start(align_node_targetname, enemy_spawner_targetname, button_prom
   }
 
   level thread maps\_strength_test::strength_test_update(self, button_prompt_text);
-  align_node = getent(align_node_targetname, "targetname");
+  align_node = getEnt(align_node_targetname, "targetname");
   self disableweapons();
   self hideviewmodel();
   self.body = spawn_anim_model("player_body");
@@ -150,7 +150,7 @@ strength_test_fail_timer() {
 
         if(!isDefined(self.strengthtest_custom_fail)) {
           for(i = 0; i < 6; i++) {
-            self playrumbleonentity("damage_heavy");
+            self playRumbleOnEntity("damage_heavy");
             wait 0.5;
           }
 
@@ -180,12 +180,12 @@ strength_test_fighting_rumble() {
   while(true) {
     if(self.strengthtest_button_presses >= 0 && self.strengthtest_button_presses <= 1) {
       if(self.strengthtest_button_presses >= 0 && self.strengthtest_button_presses < rumble_range) {
-        self playrumbleonentity("damage_light");
+        self playRumbleOnEntity("damage_light");
         wait 0.22;
       }
 
       if(self.strengthtest_button_presses >= rumble_range && self.strengthtest_button_presses <= 1) {
-        self playrumbleonentity("damage_heavy");
+        self playRumbleOnEntity("damage_heavy");
         wait 0.02;
       }
     }
@@ -195,11 +195,11 @@ strength_test_fighting_rumble() {
 }
 
 punch_out_rumble() {
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   wait 1.3;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 2.5;
-  self playrumbleonentity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
 }
 
 attacking_enemy_dof() {

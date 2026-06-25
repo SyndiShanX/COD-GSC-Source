@@ -290,7 +290,7 @@ zone_init(zone_name) {
     }
 
     for(i = 0; i < box_locs.size; i++) {
-      chest_ent = getent(box_locs[i].script_noteworthy + "_zbarrier", "script_noteworthy");
+      chest_ent = getEnt(box_locs[i].script_noteworthy + "_zbarrier", "script_noteworthy");
 
       if(chest_ent entity_in_zone(zone_name, 1)) {
         zone.magic_boxes[zone.magic_boxes.size] = box_locs[i];

@@ -60,8 +60,8 @@ function function_107f09b() {
 function function_49ddbbf1(player, var_f587343a) {
   var_f587343a.var_e6eca916 = player getlightingstate();
   level function_9b006527(var_f587343a);
-  var_f587343a.mdl_bulb_left = getent("mdl_bulb_left", "script_noteworthy");
-  var_f587343a.mdl_bulb_right = getent("mdl_bulb_right", "script_noteworthy");
+  var_f587343a.mdl_bulb_left = getEnt("mdl_bulb_left", "script_noteworthy");
+  var_f587343a.mdl_bulb_right = getEnt("mdl_bulb_right", "script_noteworthy");
   var_f587343a.var_82d1fb6b = getEntArray("hub_hidden_mdl", "targetname");
   s_pos = struct::get("evidence_board_player_pos", "targetname");
 
@@ -254,12 +254,12 @@ function function_be29d21d(var_f587343a) {
   level endon(#"evidence_board_mission_selected");
   level endon(#"evidence_board_closed");
   n_offset = -2;
-  e_parent = getent(level.var_8d26dee2 + "_parent", "targetname");
+  e_parent = getEnt(level.var_8d26dee2 + "_parent", "targetname");
   var_4c91fb99 = e_parent.origin;
 
   foreach(mdl in var_f587343a.var_82d1fb6b) {
     if(isDefined(mdl.groupname) && mdl.groupname == "eboard_" + level.var_8d26dee2) {
-      mdl linkto(e_parent);
+      mdl linkTo(e_parent);
     }
   }
 
@@ -270,7 +270,7 @@ function function_be29d21d(var_f587343a) {
   }
 
   var_eaea54da = (e_parent.origin[0], e_parent.origin[1] + n_offset, e_parent.origin[2]);
-  e_parent moveto((var_eaea54da[0], var_eaea54da[1], var_eaea54da[2]), 0.01);
+  e_parent moveTo((var_eaea54da[0], var_eaea54da[1], var_eaea54da[2]), 0.01);
 }
 
 function function_8ce19d62(e_parent, var_4c91fb99) {
@@ -491,12 +491,12 @@ function private function_f2dbcc31(index, var_f587343a) {
   if(isDefined(evidence.var_dade7c7f)) {
     if(isDefined(var_f587343a.currentindex)) {
       data = evidence.var_dade7c7f[var_f587343a.currentindex];
-      var_e55e330a = getent(data.tagname, "script_noteworthy");
+      var_e55e330a = getEnt(data.tagname, "script_noteworthy");
       var_e55e330a show();
     }
 
     data = evidence.var_dade7c7f[index];
-    var_f587343a.var_101ef952 = getent(data.tagname, "script_noteworthy");
+    var_f587343a.var_101ef952 = getEnt(data.tagname, "script_noteworthy");
     var_f587343a.var_9c56f5af = data.uimodel;
     var_f587343a.currentindex = index;
 
@@ -524,7 +524,7 @@ function private function_72c0d712(var_75c8057d) {
   selected = 0;
   old_selected = undefined;
   var_ac545d74 = 0;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   namespace_61e6d095::function_9ade1d9b(#"hash_afc09dfd34bcde0", "count", 0);
 
   while(true) {
@@ -670,7 +670,7 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
 
   switch (var_bdf4b952) {
     case #"cp_takedown":
-      t = getent("cp_takedown", "script_noteworthy");
+      t = getEnt("cp_takedown", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
       if(n_state == 0) {
@@ -678,126 +678,126 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       }
 
       if(n_state != 0) {
-        e = getent("mdl_" + "cp_takedown" + "_cluster", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_takedown" + "_cluster", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_01", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_01", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_02", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_02", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_03", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_03", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_04", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_04", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_05", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_05", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_06", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_06", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_07", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_07", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_08", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_08", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_takedown_item_09", "script_noteworthy");
+        e = getEnt("mdl_cp_takedown_item_09", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       } else {
         break;
       }
     case #"cp_nam_armada":
-      t = getent("cp_nam_armada", "script_noteworthy");
+      t = getEnt("cp_nam_armada", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
       if(n_state == 0) {
-        e = getent("mdl_" + "cp_nam_armada" + "_string_red", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_string_red", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_label_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_label_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_label_next_bottom", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_label_next_bottom", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_bg_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_bg_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_1", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_1", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_2", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_2", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_3", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_3", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_5", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_5", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       }
 
       if(n_state != 0) {
-        e = getent("mdl_" + "cp_nam_armada" + "_1", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_1", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_2", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_2", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_3", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_3", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_4", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_4", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_5", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_5", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_string_white", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_string_white", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_label", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_label", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_armada" + "_bg", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_armada" + "_bg", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       } else {
         break;
       }
     case #"cp_ger_stakeout":
-      t = getent("cp_ger_stakeout", "script_noteworthy");
+      t = getEnt("cp_ger_stakeout", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
       if(n_state == 0) {
-        e = getent("mdl_" + "cp_ger_stakeout" + "_cluster", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_ger_stakeout" + "_cluster", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_01", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_01", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_02", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_02", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_03", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_03", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_04", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_04", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_05", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_05", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_06", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_06", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_07", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_07", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_08", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_08", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       }
 
       if(n_state != 0) {
-        e = getent("mdl_" + "cp_ger_stakeout" + "_cluster", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_ger_stakeout" + "_cluster", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_01", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_01", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_02", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_02", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_03", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_03", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_04", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_04", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_05", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_05", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_06", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_06", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_07", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_07", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_ger_stakeout_item_08", "script_noteworthy");
+        e = getEnt("mdl_cp_ger_stakeout_item_08", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       } else {
         break;
       }
     case #"cp_rus_amerika":
-      t = getent("cp_rus_amerika", "script_noteworthy");
+      t = getEnt("cp_rus_amerika", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
       if(n_state == 0) {
@@ -805,100 +805,100 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       }
 
       if(n_state != 0) {
-        e = getent("mdl_" + "cp_rus_amerika" + "_cluster", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_amerika" + "_cluster", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_01", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_01", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_02", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_02", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_03", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_03", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_04", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_04", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_05", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_05", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_06", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_06", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_07", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_07", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_08", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_08", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_09", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_09", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_10", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_10", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_amerika_item_11", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_amerika_item_11", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       } else {
         break;
       }
     case #"cp_rus_yamantau":
-      t = getent("cp_rus_yamantau", "script_noteworthy");
+      t = getEnt("cp_rus_yamantau", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
       if(n_state == 0) {
-        e = getent("mdl_" + "cp_rus_yamantau" + "_string_red", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_string_red", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_label_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_label_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_label_next_bottom", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_label_next_bottom", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_bg_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_bg_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
       }
 
       if(n_state != 0) {
-        e = getent("mdl_" + "cp_rus_yamantau" + "_1", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_1", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_3", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_3", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_string_white", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_string_white", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_label", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_label", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_bg", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_bg", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_string_extra_white", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_string_extra_white", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_nail_extra_01", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_nail_extra_01", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_rus_yamantau" + "_nail_extra_02", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_yamantau" + "_nail_extra_02", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       } else {
         break;
       }
     case #"cp_rus_kgb":
-      t = getent("cp_rus_kgb", "script_noteworthy");
+      t = getEnt("cp_rus_kgb", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
       if(n_state == 0) {
-        e = getent("mdl_" + "cp_rus_kgb" + "_cluster", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_rus_kgb" + "_cluster", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_01", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_01", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_02", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_02", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_03", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_03", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_04", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_04", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_05", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_05", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_06", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_06", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_07", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_07", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_08", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_08", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_09", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_09", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_10", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_10", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_11", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_11", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_cp_rus_kgb_item_12", "script_noteworthy");
+        e = getEnt("mdl_cp_rus_kgb_item_12", "script_noteworthy");
         a_ents[a_ents.size] = e;
       }
 
@@ -909,63 +909,63 @@ function function_e0cf12d6(a_ents, var_bdf4b952, n_state) {
       }
     case #"cp_nic_revolucion":
       if((isDefined(level.var_f5552371) ? level.var_f5552371 : "") == "post_kgb") {
-        t = getent("cp_nic_revolucion", "script_noteworthy");
+        t = getEnt("cp_nic_revolucion", "script_noteworthy");
         a_ents[a_ents.size] = t;
       }
 
       if(n_state == 0) {
-        e = getent("mdl_" + "cp_nic_revolucion" + "_string_red", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_string_red", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nic_revolucion" + "_label_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_label_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nic_revolucion" + "_label_next_bottom", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_label_next_bottom", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nic_revolucion" + "_bg_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_bg_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
       }
 
       if(n_state != 0) {
-        e = getent("mdl_" + "cp_nic_revolucion" + "_2", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_2", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nic_revolucion" + "_4", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_4", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nic_revolucion" + "_string_white", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_string_white", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nic_revolucion" + "_label", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_label", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nic_revolucion" + "_bg", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nic_revolucion" + "_bg", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       } else {
         break;
       }
     case #"cp_nam_prisoner":
-      t = getent("cp_nam_prisoner", "script_noteworthy");
+      t = getEnt("cp_nam_prisoner", "script_noteworthy");
       a_ents[a_ents.size] = t;
 
       if(n_state == 0) {
-        e = getent("mdl_" + "cp_nam_prisoner" + "_string_red", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_string_red", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_label_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_label_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_label_next_bottom", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_label_next_bottom", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_bg_next", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_bg_next", "script_noteworthy");
         a_ents[a_ents.size] = e;
       }
 
       if(n_state != 0) {
-        e = getent("mdl_" + "cp_nam_prisoner" + "_1", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_1", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_2", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_2", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_3", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_3", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_string_white", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_string_white", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_label", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_label", "script_noteworthy");
         a_ents[a_ents.size] = e;
-        e = getent("mdl_" + "cp_nam_prisoner" + "_bg", "script_noteworthy");
+        e = getEnt("mdl_" + "cp_nam_prisoner" + "_bg", "script_noteworthy");
         a_ents[a_ents.size] = e;
         break;
       } else {

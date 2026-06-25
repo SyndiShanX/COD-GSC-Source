@@ -161,7 +161,7 @@ function private play_static() {
   if(!level.parabolic_mic.static islinkedto(self)) {
     level.parabolic_mic.static dontinterpolate();
     level.parabolic_mic.static.origin = self getEye();
-    level.parabolic_mic.static linkto(self);
+    level.parabolic_mic.static linkTo(self);
   }
 
   level.parabolic_mic.static playLoopSound(level.parabolic_mic.static_alias);
@@ -241,7 +241,7 @@ function private trace() {
     }
 
     delta = item.origin - eye;
-    dir = vectornormalize(delta);
+    dir = vectorNormalize(delta);
     vector_dot = vectordot(dir, fwd);
     dist = distance2dsquared(item.origin, eye);
 
@@ -271,7 +271,7 @@ function private trace() {
   foreach(item in level.parabolic_mic.ai) {
     offset = item.origin + (0, 0, 64);
     delta = offset - eye;
-    dir = vectornormalize(delta);
+    dir = vectorNormalize(delta);
     vector_dot = vectordot(dir, fwd);
     dist = distance2dsquared(offset, eye);
 
@@ -344,7 +344,7 @@ function private function_c5979d91() {
       delta = level.parabolic_mic.var_55e793a5 - eye;
     }
 
-    dir = vectornormalize(delta);
+    dir = vectorNormalize(delta);
     vector_dot = vectordot(dir, fwd);
 
     if(is_true(ent.traceent.is_volume) && isDefined(level.parabolic_mic.trace)) {
@@ -469,7 +469,7 @@ function private function_3ed9a402() {
       delta = level.parabolic_mic.var_55e793a5 - eye;
     }
 
-    dir = vectornormalize(delta);
+    dir = vectorNormalize(delta);
     vectordot = vectordot(dir, fwd);
 
     if(is_true(ent.traceent.is_volume) && isDefined(level.parabolic_mic.trace)) {
@@ -594,7 +594,7 @@ function private function_bcd711ec(ent) {
   ent endon(#"entitydeleted");
   ent endon(#"death");
   soundent = util::spawn_model("tag_origin", self getEye());
-  soundent linkto(self);
+  soundent linkTo(self);
   soundent.volumescale = 0;
   soundent.traceent = ent;
   soundent clientfield::set("parabolic_mic_volume_scale", soundent.volumescale);

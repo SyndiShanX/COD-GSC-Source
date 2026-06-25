@@ -887,7 +887,7 @@ _id_B198(var_0, var_1) {
   }
 
   if(isDefined(var_5)) {
-    var_0 linkto(var_5);
+    var_0 linkTo(var_5);
   }
 
   return 1;
@@ -958,7 +958,7 @@ _id_99EF(var_0, var_1) {
   if(var_1) {
     self enablemissilehint(1);
   } else {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 
   self _meth_84D7(var_0);
@@ -1001,19 +1001,19 @@ _id_D549(var_0) {
   }
   switch (var_0) {
     case "s4_c4_zm":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_C4");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_C4");
       break;
     case "s4_mine_ger_s44_zm":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_AT_MINE");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_AT_MINE");
       break;
     case "claymore_zm":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_CLAYMORE");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_CLAYMORE");
       break;
     case "gas_grenade_zm":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_GAS_GRENADE");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_GAS_GRENADE");
       break;
     case "trophy_zm":
-      self sethintstring(&"EQUIPMENT_HINTS/PICKUP_TROPHY");
+      self setHintString(&"EQUIPMENT_HINTS/PICKUP_TROPHY");
       break;
   }
 }

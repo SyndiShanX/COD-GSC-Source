@@ -25,13 +25,13 @@ CONST_ISS_INPUT_DEC_Y = .05;
 CONST_ISS_INPUT_ACC_Y_MIN = 1;
 
 iss_get_satellite_model() {
-  node = getent("iss_player_link", "targetname");
+  node = getEnt("iss_player_link", "targetname");
   model = spawn_anim_model("iss_satellite", node.origin);
   model.angles = node.angles;
-  model linkto(node);
+  model linkTo(node);
 
   foreach(part in level.iss_ents["satellite"]) {
-    part linkto(model);
+    part linkTo(model);
   }
 
   return model;
@@ -39,8 +39,8 @@ iss_get_satellite_model() {
 
 iss_satellite_update_model(veh) {
   while(1) {
-    self moveto(veh.origin, .1);
-    self rotateto(veh.angles, .1);
+    self moveTo(veh.origin, .1);
+    self rotateTo(veh.angles, .1);
     wait .05;
   }
 }
@@ -54,12 +54,12 @@ iss_camera_setup() {
   level.player allowprone(false);
   level.player freezecontrols(true);
 
-  node = getent("iss_player_link2", "targetname");
+  node = getEnt("iss_player_link2", "targetname");
 
   camera = spawn_anim_model("iss_rig", node.origin);
 
   camera.angles = node.angles;
-  camera linkto(node);
+  camera linkTo(node);
   camera.node = node;
 
   level.player playerlinktodelta(camera, "tag_origin", 1, 0, 0, 0, 0);
@@ -110,11 +110,11 @@ iss_satellite() {
   model = iss_get_satellite_model();
 
   diff = (5092, 4344, 3438) - (5440, 4634, 3470);
-  node = getent("iss_player_link", "targetname");
+  node = getEnt("iss_player_link", "targetname");
   node2 = spawn("script_origin", node.origin);
   node2.angles = node.angles;
   node2.targetname = "iss_player_link2";
-  node2 linkto(model);
+  node2 linkTo(model);
 
   camera = iss_camera_setup();
 
@@ -139,7 +139,7 @@ iss_organize_ents() {
 iss_organize_ents_by_node() {
   ents = getEntArray("iss_entity", "targetname");
   level.iss_ents[self.script_noteworthy] = [];
-  node = getstruct("iss_blast_node", "targetname");
+  node = getStruct("iss_blast_node", "targetname");
 
   num = 0;
   foreach(obj in ents) {
@@ -217,16 +217,16 @@ iss_destroy_iss_parts() {
     signr = -1;
   }
 
-  blaststart = getstruct("iss_blast_node", "targetname");
-  blastend = getstruct(blaststart.target, "targetname");
+  blaststart = getStruct("iss_blast_node", "targetname");
+  blastend = getStruct(blaststart.target, "targetname");
 
   time = 30;
   rotation = (randomfloatrange(.75, 1) * signp, 0, randomfloatrange(.75, 1) * signr);
-  vector = vectornormalize(blastend.origin - blaststart.origin);
+  vector = vectorNormalize(blastend.origin - blaststart.origin);
   origin = self getorigin() + (vector * dist[self.script_type] * randomfloatrange(.8, 1.2));
   angles = rotation * rot[self.script_type] * randomfloatrange(.8, 1.2);
 
-  self moveto(origin, time);
+  self moveTo(origin, time);
   self rotatevelocity(angles, time);
 }
 
@@ -268,16 +268,16 @@ iss_destroy_sat_parts() {
     signr = -1;
   }
 
-  blaststart = getstruct("iss_blast_node", "targetname");
-  blastend = getstruct(blaststart.target, "targetname");
+  blaststart = getStruct("iss_blast_node", "targetname");
+  blastend = getStruct(blaststart.target, "targetname");
 
   time = 30;
   rotation = (randomfloatrange(.75, 1) * signp, 0, randomfloatrange(.75, 1) * signr);
-  vector = vectornormalize(blastend.origin - blaststart.origin);
+  vector = vectorNormalize(blastend.origin - blaststart.origin);
   origin = self getorigin() + (vector * dist[self.script_type] * randomfloatrange(.8, 1.2));
   angles = rotation * rot[self.script_type] * randomfloatrange(.8, 1.2);
 
-  self moveto(origin, time);
+  self moveTo(origin, time);
   self rotatevelocity(angles, time);
 }
 
@@ -285,15 +285,15 @@ iss_kill_player() {
   cam = level.iss_sat["camera"];
   cam.node unlink();
 
-  blaststart = getstruct("iss_blast_node", "targetname");
-  blastend = getstruct(blaststart.target, "targetname");
+  blaststart = getStruct("iss_blast_node", "targetname");
+  blastend = getStruct(blaststart.target, "targetname");
 
   time = 30;
-  vector = vectornormalize(blastend.origin - blaststart.origin);
+  vector = vectorNormalize(blastend.origin - blaststart.origin);
   origin = cam.origin + (vector * 25000);
   angles = (0, 0, 80);
 
-  cam.node moveto(origin, time);
+  cam.node moveTo(origin, time);
   cam.node rotatevelocity(angles, time);
 
   time = 4;
@@ -302,7 +302,7 @@ iss_kill_player() {
   plate rotatevelocity((195, 0, -215), time);
 
   while(time > 0) {
-    plate moveto(level.player getEye() + (vector * 256), time);
+    plate moveTo(level.player getEye() + (vector * 256), time);
     time -= .05;
     wait .05;
   }
@@ -318,7 +318,7 @@ iss_player_quake() {
 }
 
 iss_lights_out() {
-  node = getent("earth_model", "targetname");
+  node = getEnt("earth_model", "targetname");
 
   model = spawn("script_model", node.origin + (0, 0, 300));
   model.angles = node.angles;
@@ -375,7 +375,7 @@ intro_enemy_reaction() {
 
   flag_wait("emp_back_from_whiteout");
 
-  center = getstruct("emp_center", "targetname");
+  center = getStruct("emp_center", "targetname");
 
   node = spawnStruct();
   node.origin = self.origin;
@@ -390,7 +390,7 @@ intro_enemy_reaction() {
   animes[animes.size] = "cqb_stand_react_E";
 
   self notify("stop_loop");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   node anim_generic_gravity(self, random(animes));
 
   self setgoalnode(getnode("intro_enemy_node", "targetname"));
@@ -424,7 +424,7 @@ emp_entities() {
 
     case "emp_swap":
       if(isDefined(self.target)) {
-        after = getent(self.target, "targetname");
+        after = getEnt(self.target, "targetname");
         after hide();
         self emp_ents_wait();
         after show();
@@ -464,7 +464,7 @@ emp_ents_wait(type) {
 
   wait 2;
 
-  center = getstruct("emp_center", "targetname");
+  center = getStruct("emp_center", "targetname");
   dist = 0;
   magicnumber = 1 / 2500;
 
@@ -508,7 +508,7 @@ emp_stop_start_heli() {
   node = undefined;
 
   if(level.start_point != "emp") {
-    node = getstruct(self.currentNode.target, "targetname");
+    node = getStruct(self.currentNode.target, "targetname");
   }
 
   flag_wait("iss_done");
@@ -534,7 +534,7 @@ emp_heli_spotlight() {
 
   flag_wait("iss_done");
 
-  node = getstruct("emp_anim_heli_spot", "targetname");
+  node = getStruct("emp_anim_heli_spot", "targetname");
   heli = spawn_anim_model("emp_mi28", self.origin);
   heli maps\_vehicle::vehicle_lights_on("running");
 
@@ -624,7 +624,7 @@ emp_heli_rappel() {
 
   node = spawn("script_origin", heli.origin);
   node.angles = (0, heli.angles[1], 0);
-  heli linkto(node);
+  heli linkTo(node);
   node thread anim_single_solo(heli, "crash");
   time = 6.5;
   node movez(-400, time, time, 0);
@@ -714,7 +714,7 @@ emp_jet_crash() {
 
 #using_animtree("vehicles");
 emp_heli_crash() {
-  heli = getent("emp_heli_crash_last", "targetname");
+  heli = getEnt("emp_heli_crash_last", "targetname");
   heli hide();
 
   flag_wait("iss_done");
@@ -772,7 +772,7 @@ emp_heli_crash_guys_link(heli, tag) {
 
   heli anim_generic_first_frame(self, "fastrope_fall", tag);
   wait .1;
-  self linkto(heli);
+  self linkTo(heli);
 }
 
 emp_heli_crash_guys_fallout() {
@@ -781,7 +781,7 @@ emp_heli_crash_guys_fallout() {
   node = spawn("script_origin", self.origin);
   node.angles = self.angles;
 
-  self linkto(node);
+  self linkTo(node);
 
   grndpos = GetGroundPosition(node.origin, 0, 1000, 64);
   delta = getmovedelta(getanim_generic("fastrope_fall"), 0, 1);
@@ -838,8 +838,8 @@ street_hide_moment() {
 
   exploder("hide_heli_crash");
 
-  clip = getent("hide_clip", "targetname");
-  clip disconnectpaths();
+  clip = getEnt("hide_clip", "targetname");
+  clip disconnectPaths();
   clip solid();
 
   if(isalive(level.player) && level.player istouching(clip)) {
@@ -962,12 +962,12 @@ street_heli_player_kill() {
   while(!flag("street_safe") && count > 0) {
     if(!flag("street_insta_death")) {
       org = (model.origin[0] + (level.player.origin[0] - model.origin[0]) * .25, model.origin[1] + (level.player.origin[1] - model.origin[1]) * .25, model.origin[2] + frac);
-      model moveto(org, interval);
+      model moveTo(org, interval);
       wait interval;
       count--;
     } else {
       org = (model.origin[0] + (level.player.origin[0] - model.origin[0]) * .25, model.origin[1] + (level.player.origin[1] - model.origin[1]) * .25, level.player.origin[2] + 50);
-      model moveto(org, time);
+      model moveTo(org, time);
       wait interval;
       time -= interval;
       if(time <= 0) {
@@ -998,7 +998,7 @@ street_heli_player_kill() {
 
 #using_animtree("generic_human");
 street_guy_fall_guy() {
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   self playSound("generic_death_falling_scream");
 
@@ -1011,10 +1011,10 @@ street_guy_fall_guy() {
 }
 
 street_btr_scene() {
-  heli = getent("street_heli", "targetname");
-  target = getent("street_heli_target", "targetname");
-  slide1 = getent("street_btr_slide_1", "targetname");
-  slide2 = getent("street_btr_slide_2", "targetname");
+  heli = getEnt("street_heli", "targetname");
+  target = getEnt("street_heli_target", "targetname");
+  slide1 = getEnt("street_btr_slide_1", "targetname");
+  slide2 = getEnt("street_btr_slide_2", "targetname");
 
   heli hide();
   target hide();
@@ -1024,9 +1024,9 @@ street_btr_scene() {
   slide1 notsolid();
   slide2 notsolid();
 
-  dmg_trig = getent("btr_dmg_trig", "targetname");
+  dmg_trig = getEnt("btr_dmg_trig", "targetname");
   dmg_trig trigger_off();
-  clip = getent("street_btr80_d_clip", "targetname");
+  clip = getEnt("street_btr80_d_clip", "targetname");
   clip notsolid();
   clip connectpaths();
 
@@ -1063,7 +1063,7 @@ street_btr_scene() {
   }
 
   clip solid();
-  clip disconnectpaths();
+  clip disconnectPaths();
 
   flag_set("street_btr_scene_done");
 }
@@ -1112,8 +1112,8 @@ street_crash_cars() {
     if(isDefined(self.endorg)) {
       magicnumber = .005;
       time = distance(self.origin, self.endorg) * magicnumber;
-      self moveto(self.endorg, time);
-      self rotateto(self.endang, time);
+      self moveTo(self.endorg, time);
+      self rotateTo(self.endang, time);
       wait time;
     }
   }
@@ -1179,8 +1179,8 @@ street_crash_helis() {
       self delaycall(sndtime, ::playsound, "scn_dcemp_heli_shutdown");
     }
 
-    self moveto(endorg, time, time);
-    self rotateto(endang, time);
+    self moveTo(endorg, time, time);
+    self rotateTo(endang, time);
 
     if(isDefined(self.script_flag_set)) {
       thread flag_set_delayed(self.script_flag_set, time - CONST_STREET_CAR_WAIT);
@@ -1261,9 +1261,9 @@ street_crash_helis_anim() {
 
     switch (self.script_flag_set) {
       case "street_crash_left":
-        car = getent("street_cars_blackhawk_bounce", "targetname");
-        clipcar = getent("street_blackhawk_car_clip", "targetname");
-        clipcar linkto(car);
+        car = getEnt("street_cars_blackhawk_bounce", "targetname");
+        clipcar = getEnt("street_blackhawk_car_clip", "targetname");
+        clipcar linkTo(car);
 
         car.animname = "street_car";
         car UseAnimTree(#animtree);
@@ -1386,8 +1386,8 @@ street_trees() {
   centers = [];
 
   foreach(part in parts) {
-    org = getent(part.target, "targetname");;
-    part linkto(org);
+    org = getEnt(part.target, "targetname");;
+    part linkTo(org);
     centers[centers.size] = org;
   }
 
@@ -1432,12 +1432,12 @@ street_cars_bounce() {
   origin = self.origin;
 
   self movez(height, time, 0, time * .5);
-  self rotateto(self.angles + rotation, time, 0, time);
+  self rotateTo(self.angles + rotation, time, 0, time);
 
   wait time * .6;
 
   self delaycall(time * .5, ::rotateto, angles, time * .5);
-  self moveto(origin, time, time, 0);
+  self moveTo(origin, time, time, 0);
 
   wait time;
 
@@ -1446,17 +1446,17 @@ street_cars_bounce() {
   rotation = rotation * .1;
 
   self movez(height, time, 0, time);
-  self rotateto(self.angles + rotation, time, 0, time);
+  self rotateTo(self.angles + rotation, time, 0, time);
 
   wait time * .85;
 
   self delaycall(time * .5, ::rotateto, angles, time * .5);
-  self moveto(origin, time, time, 0);
+  self moveTo(origin, time, time, 0);
 }
 
 street_crash_motorcycle() {
   forward = anglesToForward(self.angles);
-  target = getent(self.target, "targetname");
+  target = getEnt(self.target, "targetname");
   endorg = target.origin;
   endang = target.angles;
   target delete();
@@ -1480,14 +1480,14 @@ street_crash_motorcycle() {
 
   time = 1.5;
 
-  self moveto(origin, time);
-  self rotateto(angles, time);
+  self moveTo(origin, time);
+  self rotateTo(angles, time);
 
   wait time;
 
   time = 1;
-  self moveto(endorg, time, 0, time);
-  self rotateto(endang, time, 0, time);
+  self moveTo(endorg, time, 0, time);
+  self rotateTo(endang, time, 0, time);
 
   wait time;
 
@@ -1511,15 +1511,15 @@ street_btr_make_destroyed_heli() {
 }
 
 street_btr_scene_drop_heli() {
-  heli = getent("street_heli", "targetname");
-  target = getent("street_heli_target", "targetname");
+  heli = getEnt("street_heli", "targetname");
+  target = getEnt("street_heli_target", "targetname");
   heli show();
 
   dist = distance(heli.origin, target.origin);
   magicnumber = .001;
   time = dist * magicnumber;
 
-  heli moveto(target.origin, time, time);
+  heli moveTo(target.origin, time, time);
   heli rotatevelocity((0, 105, 0), time);
 
   wait time;
@@ -1564,21 +1564,21 @@ street_kill_vehicle() {
 }
 
 street_btr_animate_btr() {
-  slide1 = getent("street_btr_slide_1", "targetname");
-  slide2 = getent("street_btr_slide_2", "targetname");
+  slide1 = getEnt("street_btr_slide_1", "targetname");
+  slide2 = getEnt("street_btr_slide_2", "targetname");
 
-  dmg_trig = getent("btr_dmg_trig", "targetname");
+  dmg_trig = getEnt("btr_dmg_trig", "targetname");
   dmg_trig thread street_btr_move_dmg_trig(self);
 
   time = CONST_BTR_SLIDE_TIME_1;
-  self moveto(slide1.origin, time, 0, time);
-  self rotateto(slide1.angles, time, 0, time);
+  self moveTo(slide1.origin, time, 0, time);
+  self rotateTo(slide1.angles, time, 0, time);
 
   wait time;
 
   time = CONST_BTR_SLIDE_TIME_2;
-  self moveto(slide2.origin, time, time, 0);
-  self rotateto(slide2.angles, time, time, 0);
+  self moveTo(slide2.origin, time, time, 0);
+  self rotateTo(slide2.angles, time, time, 0);
 
   wait time;
   earthquake(.2, .5, level.player.origin, 2048);
@@ -1610,10 +1610,10 @@ street_btr_move_dmg_trig(btr) {
 }
 
 street_btr_animate_heli() {
-  struct = getstruct("street_physics_launch_point", "targetname");
+  struct = getStruct("street_physics_launch_point", "targetname");
   parts = self.parts;
   foreach(part in parts) {
-    vec = vectornormalize((part.origin + (0, 0, 32)) - struct.origin);
+    vec = vectorNormalize((part.origin + (0, 0, 32)) - struct.origin);
     vec = vec * randomfloatrange(800, 900);
 
     part movegravity(vec, 5);
@@ -1695,9 +1695,9 @@ corner_palm_style_door_open(soundalias) {
 
   self ConnectPaths();
 
-  self RotateTo(self.angles + (0, 70, 0), 2, .5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, 29, 0), 1.5, 0, 1.5);
+  self rotateTo(self.angles + (0, 29, 0), 1.5, 0, 1.5);
 }
 
 corner_plane_launch() {
@@ -1742,14 +1742,14 @@ corner_plane_launch() {
 
   fxmod = spawn("script_model", model.origin);
   fxmod setModel("tag_origin");
-  fxmod linkto(model);
+  fxmod linkTo(model);
   playFXOnTag(level._effect["firelp_med_pm_nolight"], fxmod, "TAG_ORIGIN");
 
   time = 1.0;
   model movegravity(vec, time);
   model rotatevelocity((randomfloatrange(50, 100) * neg1, randomfloatrange(50, 100) * neg2, randomfloatrange(50, 100) * neg3), time);
 
-  node = getstruct("corner_anim1", "targetname");
+  node = getStruct("corner_anim1", "targetname");
 
   wait time - .05;
 
@@ -1774,14 +1774,14 @@ corner_truck_engine_crash() {
 
   flag_wait("corner_engine_hit");
 
-  level.corner_engine linkto(self);
+  level.corner_engine linkTo(self);
   self delaythread(.25, ::corner_vehicle_engine_crash_move);
 
-  node = getstruct("corner_engine_fx_sparks", "targetname");
+  node = getStruct("corner_engine_fx_sparks", "targetname");
   centerfx = spawn("script_model", node.origin);
   centerfx.angles = node.angles;
   centerfx setModel("tag_origin");
-  centerfx linkto(self);
+  centerfx linkTo(self);
 
   wait .2 + .25;
 
@@ -1815,8 +1815,8 @@ corner_vehicle_engine_crash_setup() {
     array[ent.script_noteworthy] = ent;
   }
 
-  array["clip"] linkto(self);
-  array["clip"] disconnectpaths();
+  array["clip"] linkTo(self);
+  array["clip"] disconnectPaths();
 
   self.clip = array["clip"];
   self.endorg = array["target"].origin;
@@ -1827,8 +1827,8 @@ corner_vehicle_engine_crash_setup() {
 
 corner_engine_crash() {
   self hide();
-  target1 = getent(self.target, "targetname");
-  target2 = getent(target1.target, "targetname");
+  target1 = getEnt(self.target, "targetname");
+  target2 = getEnt(target1.target, "targetname");
   midorg = target1.origin;
   midang = target1.angles;
   endorg = target2.origin;
@@ -1840,19 +1840,19 @@ corner_engine_crash() {
   flag_wait("corner_engine_crash");
 
   self show();
-  node = getstruct("corner_engine_fx_fire", "targetname");
+  node = getStruct("corner_engine_fx_fire", "targetname");
   fx = spawn("script_model", node.origin);
   fx.angles = node.angles;
   fx setModel("tag_origin");
-  fx linkto(self);
+  fx linkTo(self);
 
   playFXOnTag(level._effect["window_fire_large"], fx, "TAG_ORIGIN");
   self playLoopSound("fire_dumpster_medium");
 
   magicnumber = .001;
   time = distance(self.origin, midorg) * magicnumber;
-  self moveto(midorg, time);
-  self rotateto(midang, time);
+  self moveTo(midorg, time);
+  self rotateTo(midang, time);
   wait time;
 
   self playSound("exp_armor_vehicle");
@@ -1866,8 +1866,8 @@ corner_engine_crash() {
   magicnumber = .001;
   time = distance(self.origin, endorg) * magicnumber;
 
-  self moveto(endorg, time);
-  self rotateto(endang, time);
+  self moveTo(endorg, time);
+  self rotateTo(endang, time);
   wait time;
 
   level.corner_engine = self;
@@ -1892,22 +1892,22 @@ corner_vehicle_engine_crash_move() {
 
   time = distance(self.origin, self.endorg) * magicnumber;
 
-  self moveto(self.endorg, time, 0, time);
-  self rotateto(self.endang, time, 0, time);
+  self moveTo(self.endorg, time, 0, time);
+  self rotateTo(self.endang, time, 0, time);
   wait time + .2;
 
-  self.clip disconnectpaths();
+  self.clip disconnectPaths();
 }
 
 corner_dead_check() {
-  spawner = getent("meepup_dead_guy", "targetname");
+  spawner = getEnt("meepup_dead_guy", "targetname");
   guy = dronespawn_bodyonly(spawner);
   level.corner_dead_check_guy = guy;
   guy.animname = "dead_guy";
 
   wait .05;
   guy gun_remove();
-  node = getstruct(spawner.target, "targetname");
+  node = getStruct(spawner.target, "targetname");
   node thread anim_loop_solo(guy, "hunted_woundedhostage_idle_start");
 
   flag_wait("parking_main");
@@ -1924,7 +1924,7 @@ meetup_runner_threads() {
 }
 
 meetup_runner_dunn() {
-  node = getstruct("meetup_runner_anim_node", "targetname");
+  node = getStruct("meetup_runner_anim_node", "targetname");
   node.origin = self.origin;
 
   self disable_exits();
@@ -1954,15 +1954,15 @@ meetup_runner_dunn() {
 meetup_runner_jog(name) {
   meetup_runner_start();
 
-  node = getstruct(name, "targetname");
+  node = getStruct(name, "targetname");
 
   ent = spawn("script_origin", self.origin);
   ent.angles = self.angles;
 
-  self linkto(ent);
+  self linkTo(ent);
 
   time = .75;
-  ent rotateto(vectortoangles(node.origin - ent.origin), time, time);
+  ent rotateTo(vectortoangles(node.origin - ent.origin), time, time);
   ent thread anim_generic_run(self, "casual_killer_jog_start");
 
   ent waittill("rotatedone");
@@ -1982,15 +1982,15 @@ meetup_runner_jog(name) {
 meetup_runner_walk(name) {
   meetup_runner_start();
 
-  node = getstruct(name, "targetname");
+  node = getStruct(name, "targetname");
 
   ent = spawn("script_origin", self.origin);
   ent.angles = self.angles;
 
-  self linkto(ent);
+  self linkTo(ent);
 
   time = .5;
-  ent rotateto(vectortoangles(node.origin - ent.origin) + (0, 10, 0), time, time);
+  ent rotateTo(vectortoangles(node.origin - ent.origin) + (0, 10, 0), time, time);
   ent thread anim_generic_run(self, "patrol_bored_2_walk");
 
   ent waittill("rotatedone");
@@ -2070,7 +2070,7 @@ lobby_enemy_suppressive_fire() {
   level endon("office_enemy_suppressive_fire");
   level thread notify_delay("office_enemy_suppressive_fire", 5);
 
-  node = getstruct("office_magic_bullet_target2", "targetname");
+  node = getStruct("office_magic_bullet_target2", "targetname");
   target = spawnStruct();
   target.origin = self getEye();
 
@@ -2122,21 +2122,21 @@ office_enemies_wave1_runner() {
 }
 
 parking_drone() {
-  spawner = getent("parkinglot_drone", "targetname");
+  spawner = getEnt("parkinglot_drone", "targetname");
   guy = dronespawn_bodyonly(spawner);
   guy gun_remove();
   spawner anim_generic(guy, "death_pose_on_desk");
 }
 
 parking_dead_check() {
-  spawner = getent("parking_dead_check_guy", "targetname");
+  spawner = getEnt("parking_dead_check_guy", "targetname");
   guy = dronespawn_bodyonly(spawner);
   level.parking_dead_check_guy = guy;
   guy.animname = "dead_guy";
 
   wait .05;
   guy gun_remove();
-  node = getstruct(spawner.target, "targetname");
+  node = getStruct(spawner.target, "targetname");
   node thread anim_loop_solo(guy, "hunted_woundedhostage_idle_start");
 
   flag_wait("tunnels_main");
@@ -2163,11 +2163,11 @@ parking_btr_extra_wait() {
   }
 
   self notify("stop_loop");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 }
 
 parking_traverse_from_office() {
-  node = getent("office_to_parking_jump_down", "targetname");
+  node = getEnt("office_to_parking_jump_down", "targetname");
   link = spawn("script_origin", node.origin);
   link.angles = node.angles;
 
@@ -2177,9 +2177,9 @@ parking_traverse_from_office() {
   length = getanimlength(getanim_generic("traverse_jumpdown_96"));
   wait length * .66;
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  node = getent("office_to_parking_hop", "targetname");
+  node = getEnt("office_to_parking_hop", "targetname");
   length = getanimlength(getanim_generic("traverse40"));
 
   height1 = 25;
@@ -2191,7 +2191,7 @@ parking_traverse_from_office() {
   link.origin = node.origin + (0, 0, height1);
   link.angles = node.angles;
 
-  self linkto(link);
+  self linkTo(link);
   link thread anim_generic_run(self, "traverse40");
   link movez(height1 * -1, time1);
 
@@ -2205,9 +2205,9 @@ parking_traverse_from_office() {
 }
 
 plaza_flare_fx() {
-  model = getent("street_flare", "targetname");
-  model.fxtag = getent(model.target, "targetname");
-  model.fxtag linkto(model);
+  model = getEnt("street_flare", "targetname");
+  model.fxtag = getEnt(model.target, "targetname");
+  model.fxtag linkTo(model);
 
   playFXOnTag(level._effect["groundflare"], model.fxtag, "TAG_ORIGIN");
 }
@@ -2236,12 +2236,12 @@ plaza_enemies() {
   level endon("plaza_throw_react");
   flag_wait("plaza_show_enemies");
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   node script_delay();
 
   self notify("stop_loop");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   node anim_generic_reach(self, node.script_animation);
   node anim_generic_gravity_run(self, node.script_animation);
 
@@ -2294,7 +2294,7 @@ plaza_enemies_wakeup() {
 
   wait(delays[self.reactnum]);
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self.ignoreall = false;
   self walkdist_reset();
   self pathrandompercent_reset();
@@ -2365,11 +2365,11 @@ emp_teleport_team_specific(team, nodes) {
 teleport_actor(node) {
   link = spawn("script_origin", self.origin);
   link.angles = self.angles;
-  self linkto(link);
+  self linkTo(link);
 
-  link moveto(node.origin, .05);
+  link moveTo(node.origin, .05);
   if(isDefined(node.angles)) {
-    link rotateto(node.angles, .05);
+    link rotateTo(node.angles, .05);
   }
 
   link waittill("movedone");
@@ -2415,7 +2415,7 @@ light_street_fire_dance(color, intensity, origin, x) {
   time = randomfloatrange(.05, .1);
   self setlightintensity(intensity * randomfloatrange(.90, 1.1));
   self setlightcolor((color[0] + randomfloatrange(-.05, .05), color[1], color[2]));
-  self moveto(origin + (randomfloatrange(x * -1, x), randomfloatrange(x * -1, x), randomfloatrange(x * -1, x)), time);
+  self moveTo(origin + (randomfloatrange(x * -1, x), randomfloatrange(x * -1, x), randomfloatrange(x * -1, x)), time);
 
   wait time;
 }
@@ -2424,7 +2424,7 @@ handle_color_advance(sname, start, end) {
   for(i = start; i <= end; i++) {
     name = sname + i;
 
-    color_trig = getent(name, "targetname");
+    color_trig = getEnt(name, "targetname");
 
     flag_wait(name);
 
@@ -2439,7 +2439,7 @@ handle_node_advance(sname, start, end) {
   for(i = start; i <= end; i++) {
     name = sname + i;
 
-    color_trig = getent(name, "targetname");
+    color_trig = getEnt(name, "targetname");
 
     flag_wait(name);
 
@@ -2650,7 +2650,7 @@ setup_sun() {
   level.suncolor["office"][2] = 1.0;
 
   level.suncolor_cur = level.suncolor["intro"];
-  level.sky = getent("sky_dcburning", "targetname");
+  level.sky = getEnt("sky_dcburning", "targetname");
 }
 
 vision_set_intro(time) {
@@ -2666,7 +2666,7 @@ vision_set_intro(time) {
 vision_set_emp(time) {
   time = 2;
 
-  fx = getstruct("emp_sun_fx", "targetname");
+  fx = getStruct("emp_sun_fx", "targetname");
   model = spawn("script_model", fx.origin);
   model.angles = vectortoangles(level.player.origin - fx.origin);
   model setModel("tag_origin");
@@ -2719,11 +2719,11 @@ fake_motion() {
 
   while(1) {
     delta = (randomfloatrange(min, max), randomfloatrange(min, max), randomfloatrange(min, max));
-    self moveto(origin + delta, time, time * .5, time * .5);
+    self moveTo(origin + delta, time, time * .5, time * .5);
 
     wait time;
 
-    self moveto(origin, time, time * .5, time * .5);
+    self moveTo(origin, time, time * .5, time * .5);
 
     wait time;
   }
@@ -2889,7 +2889,7 @@ ai_turn(angle) {
 }
 
 fx_rain_pause() {
-  node = getstruct("rainfxnode", "targetname");
+  node = getStruct("rainfxnode", "targetname");
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
@@ -2900,7 +2900,7 @@ fx_rain_pause() {
 }
 
 fx_rain_pause2() {
-  node = getstruct("rainfxnode2", "targetname");
+  node = getStruct("rainfxnode2", "targetname");
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
@@ -2911,7 +2911,7 @@ fx_rain_pause2() {
 }
 
 fx_rain_restart() {
-  node = getstruct("rainfxnode", "targetname");
+  node = getStruct("rainfxnode", "targetname");
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
@@ -2922,7 +2922,7 @@ fx_rain_restart() {
 }
 
 fx_end_pause() {
-  node = getstruct("whitehousefxnode", "targetname");
+  node = getStruct("whitehousefxnode", "targetname");
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
@@ -2933,7 +2933,7 @@ fx_end_pause() {
 }
 
 fx_end_restart() {
-  node = getstruct("whitehousefxnode", "targetname");
+  node = getStruct("whitehousefxnode", "targetname");
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
@@ -2949,7 +2949,7 @@ fx_intro_pause() {
   }
   pauseExploder("plane_crash_aftermath");
 
-  node = getstruct("introfxnode", "targetname");
+  node = getStruct("introfxnode", "targetname");
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
@@ -2967,7 +2967,7 @@ fx_intro_restart() {
   }
   restartExploder("plane_crash_aftermath");
 
-  node = getstruct("introfxnode", "targetname");
+  node = getStruct("introfxnode", "targetname");
   radius = squared(node.radius);
 
   foreach(EntFx in level.createfxent) {
@@ -2994,19 +2994,19 @@ fx_iss_pause() {
 
 dcemp_create_triggerfx() {
   intro = spawnStruct();
-  intro.node = getstruct("introfxnode", "targetname");
+  intro.node = getStruct("introfxnode", "targetname");
   intro.radius = squared(intro.node.radius);
 
   rain = spawnStruct();
-  rain.node = getstruct("rainfxnode", "targetname");
+  rain.node = getStruct("rainfxnode", "targetname");
   rain.radius = squared(rain.node.radius);
 
   rain = spawnStruct();
-  rain.node = getstruct("rainfxnode2", "targetname");
+  rain.node = getStruct("rainfxnode2", "targetname");
   rain.radius = squared(rain.node.radius);
 
   end = spawnStruct();
-  end.node = getstruct("whitehousefxnode", "targetname");
+  end.node = getStruct("whitehousefxnode", "targetname");
   end.radius = squared(end.node.radius);
 
   isissfx = false;
@@ -3097,7 +3097,7 @@ CornerCrR_aim() {
 bodyshot(fx) {
   origin = self gettagorigin("J_SpineUpper");
   enemy = random(level.team);
-  vec = vectornormalize(enemy.origin - origin);
+  vec = vectorNormalize(enemy.origin - origin);
   vec = vector_multiply(vec, 10);
 
   playFX(getfx(fx), origin + vec);
@@ -3106,7 +3106,7 @@ bodyshot(fx) {
 script2model_precache() {
   precachelist = [];
   data = getStructArray("script_to_model_swap_intro", "script_noteworthy");
-  data = array_add(data, getstruct("earth_model", "targetname"));
+  data = array_add(data, getStruct("earth_model", "targetname"));
   data = array_combine(data, getStructArray("crash_cars", "targetname"));
   data = array_combine(data, getStructArray("street_cars_bounce", "targetname"));
   data = array_combine(data, getStructArray("iss_entity", "targetname"));
@@ -3146,7 +3146,7 @@ script2model_iss() {
   if(flag("script2model_iss")) {
     return;
   }
-  earthdata = getstruct("earth_model", "targetname");
+  earthdata = getStruct("earth_model", "targetname");
   earth = spawn("script_model", earthdata.origin);
   earth.angles = (0, 0, 0);
   earth.targetname = earthdata.targetname;
@@ -3194,7 +3194,7 @@ script2model_del_iss() {
   models = array_combine(models, getEntArray("iss_lights", "targetname"));
   array_call(models, ::delete);
 
-  earth = getent("earth_model", "targetname");
+  earth = getEnt("earth_model", "targetname");
   earth delete();
 
   flag_clear("script2model_iss");

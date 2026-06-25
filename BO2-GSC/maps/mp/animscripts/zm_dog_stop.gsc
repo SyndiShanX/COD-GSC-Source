@@ -37,7 +37,7 @@ dogidlenotetracks(note) {
       self.breath_fx = spawn("script_model", self gettagorigin("TAG_MOUTH_FX"));
       self.breath_fx.angles = self gettagangles("TAG_MOUTH_FX");
       self.breath_fx setModel("tag_origin");
-      self.breath_fx linkto(self, "TAG_MOUTH_FX");
+      self.breath_fx linkTo(self, "TAG_MOUTH_FX");
       playFXOnTag(level._effect["dog_breath"], self.breath_fx, "tag_origin");
     }
   }

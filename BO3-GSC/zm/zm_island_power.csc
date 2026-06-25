@@ -45,7 +45,7 @@ function power_switch_1_fx(localclientnum, oldval, newval, bnewent, binitialsnap
     }
   }
   if(newval == 1) {
-    var_92ee343f = getent(localclientnum, "power_wires_lab_a", "targetname");
+    var_92ee343f = getEnt(localclientnum, "power_wires_lab_a", "targetname");
     var_92ee343f thread function_5ae9f178(localclientnum, 0);
     foreach(s_fx in a_s_fx) {
       if(!isDefined(s_fx.a_fx_id)) {
@@ -54,7 +54,7 @@ function power_switch_1_fx(localclientnum, oldval, newval, bnewent, binitialsnap
       s_fx.a_fx_id[localclientnum] = playFX(localclientnum, level._effect["tower_light_red"], s_fx.origin);
     }
   } else {
-    var_92ee343f = getent(localclientnum, "power_wires_lab_a", "targetname");
+    var_92ee343f = getEnt(localclientnum, "power_wires_lab_a", "targetname");
     var_92ee343f thread function_5ae9f178(localclientnum, 1);
     foreach(s_fx in a_s_fx) {
       if(!isDefined(s_fx.a_fx_id)) {
@@ -76,7 +76,7 @@ function power_switch_2_fx(localclientnum, oldval, newval, bnewent, binitialsnap
     }
   }
   if(newval == 1) {
-    var_92ee343f = getent(localclientnum, "power_wires_lab_b", "targetname");
+    var_92ee343f = getEnt(localclientnum, "power_wires_lab_b", "targetname");
     var_92ee343f thread function_5ae9f178(localclientnum, 0);
     foreach(s_fx in a_s_fx) {
       if(!isDefined(s_fx.a_fx_id)) {
@@ -85,7 +85,7 @@ function power_switch_2_fx(localclientnum, oldval, newval, bnewent, binitialsnap
       s_fx.a_fx_id[localclientnum] = playFX(localclientnum, level._effect["tower_light_red"], s_fx.origin);
     }
   } else {
-    var_92ee343f = getent(localclientnum, "power_wires_lab_b", "targetname");
+    var_92ee343f = getEnt(localclientnum, "power_wires_lab_b", "targetname");
     var_92ee343f thread function_5ae9f178(localclientnum, 1);
     foreach(s_fx in a_s_fx) {
       if(!isDefined(s_fx.a_fx_id)) {

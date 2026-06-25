@@ -1346,7 +1346,7 @@ attachsupermodel() {
       var_3.origin = self gettagorigin("tag_shield_back");
       var_3.angles = self gettagangles("tag_shield_back");
       var_3 _meth_82CB(var_1);
-      var_3 linkto(self, "tag_shield_back");
+      var_3 linkTo(self, "tag_shield_back");
       self._id_EB09.animatedmodel = var_3;
     }
   } else if(!isDefined(self._id_EB09.modelname)) {

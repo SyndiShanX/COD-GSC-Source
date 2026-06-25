@@ -168,7 +168,7 @@ function function_1e72a624(music) {
       level flag::set("flag_stop_timer_audio");
       break;
     case #"stinger_betrayal":
-      getplayers()[0] waittill(#"hash_1c40b84cb7816a58", #"death");
+      getPlayers()[0] waittill(#"hash_1c40b84cb7816a58", #"death");
       break;
   }
 }
@@ -187,7 +187,7 @@ function function_3a85df46() {
 }
 
 function function_4c8d0d5d(time, limit) {
-  getplayers()[0] endon(#"death");
+  getPlayers()[0] endon(#"death");
   level.var_87fd218c = time;
   level.var_1ab56aba = limit;
   level.var_8c3480d2 = 1;
@@ -195,12 +195,12 @@ function function_4c8d0d5d(time, limit) {
   while(!level flag::get("flag_stop_timer_audio")) {
     if(level.var_8c3480d2 < 0.1) {}
 
-    getplayers()[0] notify(#"hash_424d09b390df49ba");
+    getPlayers()[0] notify(#"hash_424d09b390df49ba");
     function_e53faedd();
 
     if(level.var_8c3480d2 < 0.1) {}
 
-    getplayers()[0] notify(#"hash_4a573d79afe442ff");
+    getPlayers()[0] notify(#"hash_4a573d79afe442ff");
     function_e53faedd();
   }
 }

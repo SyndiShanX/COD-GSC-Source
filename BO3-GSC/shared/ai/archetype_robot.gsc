@@ -383,7 +383,7 @@ function private mocomprobotstartwallrunupdate(entity, mocompanim, mocompanimble
   direction = blackboard::getblackboardattribute(entity, "_robot_wallrun_direction");
   if(isDefined(facenormal) && isDefined(positiononwall)) {
     facenormal = (facenormal[0], facenormal[1], 0);
-    facenormal = vectornormalize(facenormal);
+    facenormal = vectorNormalize(facenormal);
     movedirection = vectorcross(facenormal, (0, 0, 1));
     if(direction == "right") {
       movedirection = movedirection * -1;
@@ -808,7 +808,7 @@ function robotcanpreemptivejuke(entity) {
       enemyangles = entity.enemy getgunangles();
       toenemy = entity.enemy.origin - entity.origin;
       forward = anglesToForward(enemyangles);
-      dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
+      dotproduct = abs(vectordot(vectorNormalize(toenemy), forward));
       record3dtext(acos(dotproduct), entity.origin + vectorscale((0, 0, 1), 10), (0, 1, 0), "");
       if(dotproduct > 0.9848) {
         return robotcanjuke(entity);
@@ -985,7 +985,7 @@ function private robottargetservice(entity) {
   aienemies = [];
   playerenemies = [];
   ai = getaiarray();
-  players = getplayers();
+  players = getPlayers();
   foreach(value in ai) {
     if(issentient(value) && entity getignoreent(value)) {
       continue;
@@ -1254,7 +1254,7 @@ function private movetoplayerupdate(entity, asmstatename) {
           currentseglength = distance(path[index - 1], path[index]);
           if((segmentlength + currentseglength) > deviationdistance) {
             remaininglength = deviationdistance - segmentlength;
-            seedposition = (path[index - 1]) + ((vectornormalize(path[index] - (path[index - 1]))) * remaininglength);
+            seedposition = (path[index - 1]) + ((vectorNormalize(path[index] - (path[index - 1]))) * remaininglength);
             recordcircle(seedposition, 2, (1, 0.5, 0), "", entity);
             innerzigzagradius = 0;
             outerzigzagradius = 64;
@@ -1736,7 +1736,7 @@ function private robottryreacquireservice(entity) {
     entity.reacquire_state = 0;
     return false;
   }
-  dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forward = anglesToForward(entity.angles);
   if(vectordot(dirtoenemy, forward) < 0.5) {
     entity.reacquire_state = 0;
@@ -1859,7 +1859,7 @@ function private robotdeployminiraps() {
   entity = self;
   if(isDefined(entity) && isDefined(entity.miniraps)) {
     positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
-    raps = spawnvehicle("spawner_bo3_mini_raps", positiononnavmesh, (0, 0, 0));
+    raps = spawnVehicle("spawner_bo3_mini_raps", positiononnavmesh, (0, 0, 0));
     raps.team = entity.team;
     raps thread robotsoldierserverutils::rapsdetonatecountdown(raps);
     entity.miniraps = undefined;
@@ -2167,7 +2167,7 @@ function private robotgivewasp(entity) {
     wasp = spawn("script_model", (0, 0, 0));
     wasp setModel("veh_t7_drone_attack_red");
     wasp setscale(0.75);
-    wasp linkto(entity, "j_spine4", (5, -15, 0), vectorscale((0, 0, 1), 90));
+    wasp linkTo(entity, "j_spine4", (5, -15, 0), vectorscale((0, 0, 1), 90));
     entity.wasp = wasp;
   }
 }
@@ -2181,7 +2181,7 @@ function private robotdeploywasp(entity) {
       wait(1);
     }
     entity.wasp unlink();
-    wasp = spawnvehicle("spawner_bo3_wasp_enemy", entity.wasp.origin + spawnoffset, (0, 0, 0));
+    wasp = spawnVehicle("spawner_bo3_wasp_enemy", entity.wasp.origin + spawnoffset, (0, 0, 0));
     entity.wasp delete();
   }
   entity.wasp = undefined;

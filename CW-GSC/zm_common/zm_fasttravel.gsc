@@ -88,7 +88,7 @@ function private postinit() {
   var_a3101e2f = getEntArray("fasttravel_dropout", "targetname");
 
   foreach(var_d70a9989 in var_a3101e2f) {
-    var_d70a9989 sethintstring(#"hash_499c3242364f1755");
+    var_d70a9989 setHintString(#"hash_499c3242364f1755");
     var_d70a9989 thread function_5165d69();
   }
 
@@ -117,7 +117,7 @@ function wormhole_fx(a_ents) {
   do {
     util::wait_network_frame();
   }
-  while(!e_wormhole isplayinganimscripted());
+  while(!e_wormhole isplayinganimScripted());
 
   e_wormhole clientfield::set("" + #"wormhole_fx", zm_utility::get_story());
 }
@@ -128,7 +128,7 @@ function function_ac7928bd(a_ents) {
   do {
     util::wait_network_frame();
   }
-  while(!e_wormhole isplayinganimscripted());
+  while(!e_wormhole isplayinganimScripted());
 
   e_wormhole clientfield::set("" + #"wormhole_fx", 2);
 }
@@ -391,7 +391,7 @@ function function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
         str_notify = str_start_loc + "_end";
       }
 
-      var_5314bd63 = getent("veh_fasttravel_cam", "targetname");
+      var_5314bd63 = getEnt("veh_fasttravel_cam", "targetname");
       self function_66d020b0(var_5314bd63, nd_path_start, undefined, str_notify, undefined, var_12230d08, undefined, undefined);
       break;
     case #"flinger":
@@ -465,7 +465,7 @@ function function_c78572ab(str_start_loc) {
 
 function function_2aed1d83(var_f0bbde5, var_b3733073 = 1) {
   self dontinterpolate();
-  self setorigin(var_f0bbde5.origin);
+  self setOrigin(var_f0bbde5.origin);
   self setvelocity((0, 0, 0));
 
   if(var_b3733073 && !isDefined(var_f0bbde5.angles)) {
@@ -489,7 +489,7 @@ function function_f86439bc() {
   do {
     util::wait_network_frame();
     var_e9a9a32a = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(e_player in players) {
       if(!isDefined(e_player)) {
@@ -527,7 +527,7 @@ function function_de173abb(str_loc) {
 }
 
 function get_player_index(e_player) {
-  a_players = getplayers(e_player.team);
+  a_players = getPlayers(e_player.team);
 
   for(i = 0; i < a_players.size; i++) {
     if(e_player == a_players[i]) {
@@ -602,7 +602,7 @@ function function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, 
     level thread function_78e3c2ba(var_5817f611);
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player clientfield::set_player_uimodel("WorldSpaceIndicators.bleedOutModel" + self getentitynumber() + ".hide", 1);
   }
 
@@ -709,7 +709,7 @@ function function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, 
     #var_9fa6220c: var_12230d08
   });
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player clientfield::set_player_uimodel("WorldSpaceIndicators.bleedOutModel" + self getentitynumber() + ".hide", 0);
   }
 
@@ -825,7 +825,7 @@ function fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
   self.vh_rail.origin = nd_path_start.origin;
   self.vh_rail.angles = nd_path_start.angles;
   self dontinterpolate();
-  self setorigin(nd_path_start.origin);
+  self setOrigin(nd_path_start.origin);
 
   if(!is_true(level.var_9d19ea6d) && !is_true(level.var_7ac95f85)) {
     self setplayerangles(nd_path_start.angles);
@@ -855,7 +855,7 @@ function fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
 
 function function_62686dda(var_6c365dbf) {
   var_a16f5b07 = self.origin;
-  self playrumbleonentity(#"hash_5d8a1a68b12dfb24");
+  self playRumbleOnEntity(#"hash_5d8a1a68b12dfb24");
   wait 0.5;
   self clientfield::set_to_player("player_stargate_fx", 1);
 
@@ -881,7 +881,7 @@ function function_62686dda(var_6c365dbf) {
     str_alias += self.var_1bfa91a;
   }
 
-  playsoundatposition(str_alias, var_a16f5b07);
+  playSoundAtPosition(str_alias, var_a16f5b07);
   wait 0.5;
   self clientfield::set_to_player("player_stargate_fx", 0);
 
@@ -1022,7 +1022,7 @@ function function_ab80021(var_384528) {
     }
 
     self dontinterpolate();
-    self setorigin(var_384528.origin);
+    self setOrigin(var_384528.origin);
     self setplayerangles(var_384528.angles);
 
     if(isDefined(self.vh_rail)) {
@@ -1051,13 +1051,13 @@ function private function_e4af83af(s_teleport_room) {
     var_d271f921 = self.var_e1fd941b;
   }
 
-  var_d271f921 linkto(self.var_805b8325);
+  var_d271f921 linkTo(self.var_805b8325);
 }
 
 function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
   util::wait_network_frame();
   self dontinterpolate();
-  self setorigin(s_teleport_room.origin);
+  self setOrigin(s_teleport_room.origin);
   self setplayerangles(s_teleport_room.angles);
 
   if(isDefined(self.var_3487fff6)) {
@@ -1072,7 +1072,7 @@ function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
     str_alias += self.var_1bfa91a;
   }
 
-  playsoundatposition(str_alias, var_a16f5b07);
+  playSoundAtPosition(str_alias, var_a16f5b07);
   println("<dev string:x2cd>" + self getplayercamerapos());
   self childthread function_e4af83af(s_teleport_room);
   waittillframeend();
@@ -1213,7 +1213,7 @@ function function_82c1415f(var_291fc0f7, var_1f8fbe0b = 0) {
 
 function function_d4fbc062(var_6a4c362c) {
   n_index = get_player_index(self);
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(self function_60d91d03(var_6a4c362c[n_index], a_e_players)) {
     return var_6a4c362c[n_index];
@@ -1268,7 +1268,7 @@ function fasttravel_flinger(var_6c365dbf, var_12230d08) {
   level endon(#"end_game");
   self endoncallback(&function_672d56c7, #"death");
   self.var_46e13a5f = util::spawn_model("tag_origin", self.origin, self.angles);
-  self playerlinkto(self.var_46e13a5f);
+  self playerlinkTo(self.var_46e13a5f);
 
   if(isDefined(var_6c365dbf)) {
     if(isarray(var_6c365dbf)) {
@@ -1338,6 +1338,6 @@ function function_8d419972(b_play_once) {
     }
   }
 
-  player setorigin(var_78e5d9d1);
+  player setOrigin(var_78e5d9d1);
   player setplayerangles(v_start_angles);
 }

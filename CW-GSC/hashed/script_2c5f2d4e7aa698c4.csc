@@ -138,7 +138,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  var_e915a27 = getent(fieldname, "trial_terminal_screen", "targetname");
+  var_e915a27 = getEnt(fieldname, "trial_terminal_screen", "targetname");
 
   if(!isDefined(var_e915a27)) {
     return;

@@ -3,7 +3,7 @@
  * Script: 2533.gsc
 *************************************************/
 
-_spawnvehicle(var_0, var_1) {
+_spawnVehicle(var_0, var_1) {
   if(!istrue(var_0._id_E728)) {
     if(!_id_31E1()) {
       if(isDefined(var_1)) {

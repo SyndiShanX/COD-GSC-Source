@@ -548,7 +548,7 @@ function private function_4885ce1(params) {
   }
 
   if(isDefined(params.entity) && isvehicle(params.entity) && params.entity function_dcef0ba1(0) && !params.entity isvehicleseatoccupied(0)) {
-    force = vectornormalize(params.entity.origin - self.origin) * 1.2;
+    force = vectorNormalize(params.entity.origin - self.origin) * 1.2;
     params.entity launchvehicle(force);
   }
 
@@ -667,9 +667,9 @@ function function_6c8cff7e(normal, origin = self.origin, offset = 0) {
     self.rotatemover thread player_vehicle::deletemeonnotify(self, "death");
     self.rotatemover.angles = self.angles;
     targetangles = function_c1fa62a2(self.rotatemover.angles, normal);
-    self linkto(self.rotatemover);
-    self.rotatemover rotateto(targetangles, 0.5, 0, 0.5);
-    self.rotatemover moveto(origin + (0, 0, offset), 0.5, 0, 0.5);
+    self linkTo(self.rotatemover);
+    self.rotatemover rotateTo(targetangles, 0.5, 0, 0.5);
+    self.rotatemover moveTo(origin + (0, 0, offset), 0.5, 0, 0.5);
     self.rotatemover waittill(#"rotatedone");
     self.rotatemover delete();
     self.rotatemover = undefined;

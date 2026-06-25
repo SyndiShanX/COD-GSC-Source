@@ -50,7 +50,7 @@ init() {
 
   level thread onPlayerConnect();
 
-  civilian_jet = GetEnt("civilian_jet_origin", "targetname");
+  civilian_jet = getEnt("civilian_jet_origin", "targetname");
   if(isDefined(civilian_jet)) {
     civilian_jet thread civilian_jet_flyby();
   }
@@ -99,7 +99,7 @@ civilian_jet_flyby() {
 
 jet_init() {
   self.jet_parts = getEntArray(self.target, "targetname");
-  self.jet_flyto = GetEnt("civilian_jet_flyto", "targetname");
+  self.jet_flyto = getEnt("civilian_jet_flyto", "targetname");
   self.engine_fxs = getEntArray("engine_fx", "targetname");
   self.flash_fxs = getEntArray("flash_fx", "targetname");
 
@@ -115,7 +115,7 @@ jet_init() {
   AssertEx(isDefined(self.engine_fxs), "Missing cilivian jet engine fxs script_origins: engine_fx");
   AssertEx(isDefined(self.flash_fxs), "Missing cilivian jet signal light script_origins: flash_fxs");
 
-  negative_vec = (VectorNormalize(self.origin - self.jet_flyto.origin) * CONST_jet_extend);
+  negative_vec = (vectorNormalize(self.origin - self.jet_flyto.origin) * CONST_jet_extend);
 
   self.jet_flyto.origin -= negative_vec;
 
@@ -242,14 +242,14 @@ jet_flyby() {
   }
 
   foreach(part in self.jet_parts) {
-    part MoveTo(part.origin + self.jet_fly_vec, self.jet_flight_time);
+    part moveTo(part.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(engine_fx_ent in engine_fx_array) {
-    engine_fx_ent MoveTo(engine_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
+    engine_fx_ent moveTo(engine_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
   }
   foreach(flash_fx_ent in flash_fx_array) {
-    flash_fx_ent MoveTo(flash_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
+    flash_fx_ent moveTo(flash_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   wait(self.jet_flight_time + 1);
@@ -311,11 +311,11 @@ playsound_loop_on_ent(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -327,7 +327,7 @@ playsound_loop_on_ent(alias, offset) {
 
 targetisinfront(other, target) {
   forwardvec = anglesToForward(flat_angle(other.angles));
-  normalvec = VectorNormalize(flat_origin(target) - other.origin);
+  normalvec = vectorNormalize(flat_origin(target) - other.origin);
   dot = VectorDot(forwardvec, normalvec);
 
   if(dot > 0) {
@@ -362,23 +362,23 @@ vending_machine() {
   level endon("game_ended");
   self endon("death");
 
-  self SetCursorHint("HINT_ACTIVATE");
+  self setCursorHint("HINT_ACTIVATE");
 
-  self.vm_normal = GetEnt(self.target, "targetname");
+  self.vm_normal = getEnt(self.target, "targetname");
   AssertEx(isDefined(self.vm_normal), "Vending machine use trigger is missing target to the normal vending machine script_model");
-  vm_soda_start = GetEnt(self.vm_normal.target, "targetname");
+  vm_soda_start = getEnt(self.vm_normal.target, "targetname");
   AssertEx(isDefined(vm_soda_start), "Vending machine normal script_model is missing target to the start-soda can script_model");
-  vm_soda_stop = GetEnt(vm_soda_start.target, "targetname");
+  vm_soda_stop = getEnt(vm_soda_start.target, "targetname");
   AssertEx(isDefined(vm_soda_start), "Start-soda can script_model is missing target to the end-soda can script_model");
-  vm_launch_from = GetEnt(vm_soda_stop.target, "targetname");
+  vm_launch_from = getEnt(vm_soda_stop.target, "targetname");
   AssertEx(isDefined(vm_launch_from), "End-soda can script_model is missing target to the physics launch-from script_origin");
   self.vm_launch_from = vm_launch_from.origin;
-  vm_launch_to = GetEnt(vm_launch_from.target, "targetname");
+  vm_launch_to = getEnt(vm_launch_from.target, "targetname");
   AssertEx(isDefined(vm_launch_to), "launch-from can script_origin is missing target to the physics launch-to script_origin");
   self.vm_launch_to = vm_launch_to.origin;
 
   if(isDefined(vm_launch_to.target)) {
-    self.vm_fx_loc = GetEnt(vm_launch_to.target, "targetname").origin;
+    self.vm_fx_loc = getEnt(vm_launch_to.target, "targetname").origin;
   }
 
   self.vm_normal setCanDamage(true);
@@ -482,7 +482,7 @@ spawn_soda() {
 }
 
 soda_can_drop(soda) {
-  soda MoveTo(self.vm_soda_stop_pos, CONST_soda_pop_time);
+  soda moveTo(self.vm_soda_stop_pos, CONST_soda_pop_time);
   soda playSound("vending_machine_soda_drop");
   wait CONST_soda_pop_time;
 
@@ -502,7 +502,7 @@ soda_can_eject() {
   random_offset = Int(40 * CONST_soda_launch_force);
   random_launch_offset = (Int(random_offset / 2), Int(random_offset / 2), 0) - (RandomInt(random_offset), RandomInt(random_offset), 0);
 
-  launch_vec = VectorNormalize(self.vm_launch_to - self.vm_launch_from + random_launch_offset);
+  launch_vec = vectorNormalize(self.vm_launch_to - self.vm_launch_from + random_launch_offset);
   launch_force_vec = (launch_vec * RandomFloatRange(force_min, force_max));
 
   self.soda_slot PhysicsLaunchClient(self.vm_launch_from, launch_force_vec);
@@ -533,16 +533,16 @@ metal_detector() {
   level endon("game_ended");
   AssertEx(isDefined(self.target), "trigger_multiple_dyn_metal_detector is missing target damage trigger used for detecting entities other than players");
 
-  damage_trig = GetEnt(self.target, "targetname");
+  damage_trig = getEnt(self.target, "targetname");
   damage_trig EnableGrenadeTouchDamage();
 
-  bound_org_1 = GetEnt(damage_trig.target, "targetname");
-  bound_org_2 = GetEnt(bound_org_1.target, "targetname");
+  bound_org_1 = getEnt(damage_trig.target, "targetname");
+  bound_org_2 = getEnt(bound_org_1.target, "targetname");
 
   AssertEx(isDefined(bound_org_1) && isDefined(bound_org_2), "Metal detector missing bound origins for claymore test");
 
-  detector_1 = GetEnt(bound_org_2.target, "targetname");
-  detector_2 = GetEnt(detector_1.target, "targetname");
+  detector_1 = getEnt(bound_org_2.target, "targetname");
+  detector_2 = getEnt(detector_1.target, "targetname");
 
   AssertEx(isDefined(detector_1) && isDefined(detector_2), "Recompile the bsp to fix this, metal detector prefab changed.");
 
@@ -775,7 +775,7 @@ motion_light() {
 
   foreach(light in lights) {
     light.lightRigs = [];
-    infoNull = GetEnt(light.target, "targetname");
+    infoNull = getEnt(light.target, "targetname");
     if(!isDefined(infoNull.target)) {
       continue;
     }
@@ -845,7 +845,7 @@ outdoor_motion_dlight() {
   self.moveTracker = true;
 
   self.lightsOn = false;
-  lightRig = GetEnt(self.target, "targetname");
+  lightRig = getEnt(self.target, "targetname");
   AssertEx(lightRig.size, "ERROR: trigger_ * _motion_light with no targets at " + self.origin);
   lights = getEntArray(lightRig.target, "targetname");
   AssertEx(lights.size, "ERROR: trigger_ * _motion_light model target with no light targets at " + lightRig.origin);
@@ -903,7 +903,7 @@ dog_bark() {
   level endon("game_ended");
   self.moveTracker = true;
 
-  dogOrigin = GetEnt(self.target, "targetname");
+  dogOrigin = getEnt(self.target, "targetname");
   AssertEx(isDefined(dogOrigin), "ERROR: trigger_multiple_dog_bark with no target at " + self.origin);
 
   for(;;) {
@@ -928,11 +928,11 @@ dog_bark() {
 }
 
 trigger_door() {
-  doorEnt = GetEnt(self.target, "targetname");
+  doorEnt = getEnt(self.target, "targetname");
   AssertEx(isDefined(doorEnt), "ERROR: trigger_multiple_dyn_door with no door brush at " + self.origin);
 
   self.doorEnt = doorEnt;
-  self.doorAngle = getVectorRightAngle(VectorNormalize(self GetOrigin() - doorEnt GetOrigin()));
+  self.doorAngle = getVectorRightAngle(vectorNormalize(self GetOrigin() - doorEnt GetOrigin()));
   doorEnt.baseYaw = doorEnt.angles[1];
   openTime = 1.0;
 
@@ -957,9 +957,9 @@ trigger_door() {
 
 doorOpen(openTime, doorSide) {
   if(doorSide) {
-    self RotateTo((0, self.baseYaw + 90, 1), openTime, 0.1, 0.75);
+    self rotateTo((0, self.baseYaw + 90, 1), openTime, 0.1, 0.75);
   } else {
-    self RotateTo((0, self.baseYaw - 90, 1), openTime, 0.1, 0.75);
+    self rotateTo((0, self.baseYaw - 90, 1), openTime, 0.1, 0.75);
   }
 
   self playSound("door_generic_house_open");
@@ -968,14 +968,14 @@ doorOpen(openTime, doorSide) {
 }
 
 doorClose(openTime) {
-  self RotateTo((0, self.baseYaw, 1), openTime);
+  self rotateTo((0, self.baseYaw, 1), openTime);
   self playSound("door_generic_house_close");
 
   wait(openTime + 0.05);
 }
 
 getDoorSide(player) {
-  return (VectorDot(self.doorAngle, VectorNormalize(player.origin - self.doorEnt GetOrigin())) > 0);
+  return (VectorDot(self.doorAngle, vectorNormalize(player.origin - self.doorEnt GetOrigin())) > 0);
 }
 
 getVectorRightAngle(vDir) {
@@ -1020,10 +1020,10 @@ photo_copier_init(trigger) {
   self.copier = get_photo_copier(trigger);
   AssertEx(self.copier.classname == "script_model", "Photocopier at " + trigger.origin + " doesn't target a photo copier");
 
-  copy_bar = GetEnt(self.copier.target, "targetname");
+  copy_bar = getEnt(self.copier.target, "targetname");
   AssertEx(copy_bar.classname == "script_brushmodel", "Photocopier at " + trigger.origin + " doesn't target a photo copier");
 
-  light = GetEnt(copy_bar.target, "targetname");
+  light = getEnt(copy_bar.target, "targetname");
   AssertEx(light.classname == "light_spot" || light.classname == "light", "Photocopier at " + trigger.origin + " doesn't have a light");
 
   light.intensity = light GetLightIntensity();
@@ -1050,7 +1050,7 @@ get_photo_copier(trigger) {
     }
     AssertEx(Distance(trigger.origin, copier.origin) < 128, "Photocopier at " + trigger.origin + " doesn't contain a photo copier");
   } else {
-    copier = GetEnt(trigger.target, "targetname");
+    copier = getEnt(trigger.target, "targetname");
     AssertEx(isDefined(copier), "Photocopier at " + trigger.origin + " doesn't target a photo copier");
     copier setCanDamage(true);
   }
@@ -1107,7 +1107,7 @@ photo_copier_no_light() {
 }
 
 reset_copier(trigger) {
-  trigger.copy_bar MoveTo(trigger.start_pos, 0.2);
+  trigger.copy_bar moveTo(trigger.start_pos, 0.2);
   trigger.light SetLightIntensity(0);
 }
 
@@ -1119,9 +1119,9 @@ photo_copier_copy_bar_goes() {
 
   copy_bar = self.copy_bar;
   wait(2.0);
-  copy_bar MoveTo(self.end_pos, 1.6);
+  copy_bar moveTo(self.end_pos, 1.6);
   wait(1.8);
-  copy_bar MoveTo(self.start_pos, 1.6);
+  copy_bar moveTo(self.start_pos, 1.6);
   wait(1.6);
 
   light = self.light;
@@ -1211,7 +1211,7 @@ fan_blade_rotate(type) {
 
   fan_angles = self.angles;
   fan_vec = (AnglesToRight(self.angles) * 100);
-  fan_vec = VectorNormalize(fan_vec);
+  fan_vec = vectorNormalize(fan_vec);
 
   while(true) {
     dot_x = abs(VectorDot(fan_vec, (1, 0, 0)));
@@ -1366,14 +1366,14 @@ tv_logic() {
 
   if(isDefined(self.target)) {
     if(isDefined(level.disable_interactive_tv_use_triggers)) {
-      usetrig = GetEnt(self.target, "targetname");
+      usetrig = getEnt(self.target, "targetname");
       if(isDefined(usetrig)) {
         usetrig Delete();
       }
     } else {
-      self.usetrig = GetEnt(self.target, "targetname");
-      self.usetrig UseTriggerRequireLookAt();
-      self.usetrig SetCursorHint("HINT_NOICON");
+      self.usetrig = getEnt(self.target, "targetname");
+      self.usetrig useTriggerRequireLookAt();
+      self.usetrig setCursorHint("HINT_NOICON");
     }
   }
 

@@ -97,7 +97,7 @@ function function_c1a7ac51(n_time) {
 function function_1898210c() {
   level.player endon(#"death");
   level flag::wait_till("flg_obj_start_photo");
-  e_photo = getent("e_obj_nuke_photo", "targetname");
+  e_photo = getEnt("e_obj_nuke_photo", "targetname");
   var_d74dc916 = 0;
   level.player spy_camera::function_f785d9e9(e_photo);
   level thread function_cc099c85();
@@ -166,7 +166,7 @@ function function_ec0c77eb() {
 function function_980acf2() {
   level.player endon(#"death");
   level endon(#"vip_room", #"obj_photo_done");
-  var_7f3c998e = getent("trig_park_nag_intel", "targetname");
+  var_7f3c998e = getEnt("trig_park_nag_intel", "targetname");
   var_7f3c998e waittill(#"trigger");
   wait 15;
   var_ffbbfc35 = [];

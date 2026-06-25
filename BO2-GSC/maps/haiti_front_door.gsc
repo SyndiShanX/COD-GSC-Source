@@ -161,7 +161,7 @@ sam_cougar_think() {
     n_pitch_delta = randomfloatrange(-35, -20);
     v_direction = self.angles + (n_pitch_delta, n_yaw_delta, 0);
     v_origin = self.origin + anglesToForward(v_direction) * randomintrange(40000, 60000);
-    e_target moveto(v_origin, 4.0);
+    e_target moveTo(v_origin, 4.0);
 
     if(randomint(100) < 25) {
       self maps\_turret::fire_turret_for_time(2, 2);
@@ -211,7 +211,7 @@ laser_turret_challenge() {
 main_entrance_shutters() {
   a_m_outermost_doors = getEntArray("sec_gate_side_01", "targetname");
   a_m_middle_doors = getEntArray("sec_gate_side_02", "targetname");
-  m_center_door = getent("sec_gate_mid", "targetname");
+  m_center_door = getEnt("sec_gate_mid", "targetname");
 
   foreach(m_door in a_m_outermost_doors) {
     m_door movez(400, 0.05);
@@ -239,7 +239,7 @@ main_entrance_shutters() {
   m_center_door movez(-1 * 253, 6.5);
   wait 6.6;
   flag_wait("close_outer_doors");
-  m_center_door disconnectpaths();
+  m_center_door disconnectPaths();
   m_center_door movez(-147, 3.5);
 }
 
@@ -274,7 +274,7 @@ battle_start() {
   setmusicstate("HAITI_GROUND_FIGHT_1");
   simple_spawn("sp_battle_start_allies", ::ally_battle_think);
   simple_spawn("sp_battle_start_enemies", ::enemy_battle_think);
-  s_defend_spot = getstruct("s_ramp_defend", "targetname");
+  s_defend_spot = getStruct("s_ramp_defend", "targetname");
   a_vh_qr_allies = spawn_vehicles_from_targetname("sp_battle_start_qr_allies");
   array_thread(a_vh_qr_allies, ::defend, s_defend_spot.origin, s_defend_spot.radius);
   a_vh_qr_axis = spawn_vehicles_from_targetname("sp_battle_start_qr_axis");
@@ -332,20 +332,20 @@ cougar_wall_smash() {
   flag_wait("wall_smash");
   level notify("fxanim_apc_wall_divider_start");
   wait 2.0;
-  m_wall = getent("fxanim_apc_wall_divider", "targetname");
+  m_wall = getEnt("fxanim_apc_wall_divider", "targetname");
   earthquake(1.0, 1.0, m_wall.origin, 512);
   playrumbleonposition("anim_heavy", m_wall.origin);
 }
 
 sco_east_walkway_support_wait() {
   level endon("start_sco_east_walkway");
-  s_lookat = getstruct("launcher_lookat", "targetname");
+  s_lookat = getStruct("launcher_lookat", "targetname");
   level.player waittill_player_looking_at(s_lookat.origin, 10, 1);
 }
 
 sco_east_walkway_support() {
   sco_east_walkway_support_wait();
-  s_loc = getstruct("s_sco_east_walkway_smoke", "targetname");
+  s_loc = getStruct("s_sco_east_walkway_smoke", "targetname");
   level thread play_fx("sco_smoke", s_loc.origin, s_loc.angles, 30);
   level thread sco_east_walkway_support_dialog();
   a_s_jetwings = getStructArray("s_sco_east_walkway", "targetname");
@@ -376,11 +376,11 @@ walkway_collapse() {
   level thread kill_and_cleanup_ents("cleanup_front_door_lot");
   level notify("fxanim_catwalk_vtol_start");
   wait 0.05;
-  m_vtol = getent("fxanim_catwalk_vtol", "targetname");
+  m_vtol = getEnt("fxanim_catwalk_vtol", "targetname");
   playFXOnTag(level._effect["crash_vtol_trail"], m_vtol, "engine_l_left_flap_anim_jnt");
   wait 3.0;
   level notify("fxanim_catwalk_collapse_start");
-  m_walkway = getent("fxanim_catwalk_collapse", "targetname");
+  m_walkway = getEnt("fxanim_catwalk_collapse", "targetname");
   m_walkway waittillmatch("single anim", "end");
   flag_set("fxanim_catwalk_collapse_delete");
   clientnotify("unhide_debris");
@@ -396,7 +396,7 @@ garage() {
   flag_wait("tigr_attack_start");
   level thread tigr_attack_dialog();
   wait 0.1;
-  vh_tigr = getent("vn_tigr_attack1", "target");
+  vh_tigr = getEnt("vn_tigr_attack1", "target");
   vh_tigr playSound("evt_pickup_drive_in");
   flag_wait("garage_start");
   level thread kill_and_cleanup_ents("cleanup_launchers");
@@ -477,13 +477,13 @@ sco_west_walkway_support_wait() {
   level endon("west_walkway_support_north");
   level endon("west_walkway_support_northeast");
   level endon("west_walkway_support_east");
-  s_lookat = getstruct("sniper_lookat", "targetname");
+  s_lookat = getStruct("sniper_lookat", "targetname");
   level.player waittill_player_looking_at(s_lookat.origin, 30, 0);
 }
 
 sco_west_walkway_support() {
   sco_west_walkway_support_wait();
-  s_loc = getstruct("s_sco_west_walkway_smoke", "targetname");
+  s_loc = getStruct("s_sco_west_walkway_smoke", "targetname");
   level thread play_fx("sco_smoke", s_loc.origin, s_loc.angles, 30);
   a_s_jetwings = getStructArray("s_sco_west_walkway", "targetname");
 
@@ -517,7 +517,7 @@ main_entrance_claw_think() {
 }
 
 sco_main_entrance_support() {
-  s_loc = getstruct("s_sco_main_entrance_smoke", "targetname");
+  s_loc = getStruct("s_sco_main_entrance_smoke", "targetname");
   level thread play_fx("sco_smoke", s_loc.origin, s_loc.angles, 30);
   a_s_jetwings = getStructArray("s_sco_main_entrance", "targetname");
 
@@ -552,7 +552,7 @@ spin_turbine() {
 }
 
 falling_debris() {
-  m_debris = getent(self.target, "targetname");
+  m_debris = getEnt(self.target, "targetname");
   m_debris hide();
   v_dest_origin = m_debris.origin;
   v_dest_angles = m_debris.angles;
@@ -560,8 +560,8 @@ falling_debris() {
   m_debris.angles = (randomfloatrange(-175, 175), randomfloatrange(-175, 175), randomfloatrange(-175, 175));
   flag_wait("vtol_debris_start");
   m_debris show();
-  m_debris moveto(v_dest_origin, 5, 4.5, 0);
-  m_debris rotateto(v_dest_angles, 5);
+  m_debris moveTo(v_dest_origin, 5, 4.5, 0);
+  m_debris rotateTo(v_dest_angles, 5);
 }
 
 ambient_jetwing_init() {
@@ -659,12 +659,12 @@ front_door_cleanup() {
 
 bruteforce_perk() {
   level endon("at_foyer_entrance");
-  t_perk = getent("t_bruteforce", "targetname");
+  t_perk = getEnt("t_bruteforce", "targetname");
   t_perk trigger_off();
   level.player waittill_player_has_brute_force_perk();
   flag_wait("fxanim_catwalk_collapse_delete");
-  s_align = getstruct("align_bruteforce", "targetname");
-  m_vtol = getent("fxanim_catwalk_vtol", "targetname");
+  s_align = getStruct("align_bruteforce", "targetname");
+  m_vtol = getEnt("fxanim_catwalk_vtol", "targetname");
   s_align thread maps\_anim::anim_first_frame(m_vtol, "bruteforce_vtol", undefined, "fxanim_props");
   t_perk trigger_on();
   set_objective_perk(level.obj_perk_brute_force, t_perk);
@@ -679,7 +679,7 @@ bruteforce_perk() {
 
 intruder_perk() {
   level endon("at_foyer_entrance");
-  t_perk = getent("t_intruder", "targetname");
+  t_perk = getEnt("t_intruder", "targetname");
   t_perk trigger_off();
   level.player waittill_player_has_intruder_perk();
   t_perk trigger_on();
@@ -802,7 +802,7 @@ top_of_ramp_dialog() {
   harper_dialog("harp_take_out_that_gunner_0", 1);
   flag_wait("ramp_turret_start");
   level endon("ghost_storage_start");
-  vh_turret = getent("ramp_turret", "targetname");
+  vh_turret = getEnt("ramp_turret", "targetname");
 
   if(isDefined(vh_turret)) {
     vh_turret turret_dialog();

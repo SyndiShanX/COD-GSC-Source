@@ -147,7 +147,7 @@ introscreen(var_0, var_1) {
   level.chyron.text_incoming = 0;
   level.chyron.strips_disabled = 0;
   level.chyron.sound_org = spawn("script_origin", level.player.origin);
-  level.chyron.sound_org linkto(level.player);
+  level.chyron.sound_org linkTo(level.player);
   level.chyron.no_bg = var_0;
 
   if(!var_0) {
@@ -909,7 +909,7 @@ game_messages_startup() {
   level.game_messages.last_strips = [];
   level.game_messages.artifacts = [];
   level.game_messages.sound_org = spawn("script_origin", level.player.origin);
-  level.game_messages.sound_org linkto(level.player);
+  level.game_messages.sound_org linkTo(level.player);
 }
 
 game_messages_shutdown() {

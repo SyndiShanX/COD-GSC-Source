@@ -31,7 +31,7 @@ init() {
   common_scripts\utility::array_thread(getEntArray("toggle", "targetname"), ::use_toggle);
   common_scripts\utility::array_thread(getEntArray("sliding_door", "targetname"), ::sliding_door);
   level thread onplayerconnect();
-  var_5 = getent("civilian_jet_origin", "targetname");
+  var_5 = getEnt("civilian_jet_origin", "targetname");
 
   if(isDefined(var_5)) {
     var_5 thread civilian_jet_flyby();
@@ -77,7 +77,7 @@ civilian_jet_flyby() {
 
 jet_init() {
   self.jet_parts = getEntArray(self.target, "targetname");
-  self.jet_flyto = getent("civilian_jet_flyto", "targetname");
+  self.jet_flyto = getEnt("civilian_jet_flyto", "targetname");
   self.engine_fxs = getEntArray("engine_fx", "targetname");
   self.flash_fxs = getEntArray("flash_fx", "targetname");
   self.jet_engine_fx = loadfx("fx\fire\jet_afterburner");
@@ -85,7 +85,7 @@ jet_init() {
   self.jet_flash_fx_green = loadfx("vfx\lights\aircraft_light_wingtip_green");
   self.jet_flash_fx_blink = loadfx("vfx\lights\aircraft_light_red_blink");
   level.civilianjetflyby = undefined;
-  var_0 = vectornormalize(self.origin - self.jet_flyto.origin) * 20000;
+  var_0 = vectorNormalize(self.origin - self.jet_flyto.origin) * 20000;
   self.jet_flyto.origin = self.jet_flyto.origin - var_0;
   self.origin = self.origin + var_0;
 
@@ -209,15 +209,15 @@ jet_flyby() {
   }
 
   foreach(var_1 in self.jet_parts) {
-    var_1 moveto(var_1.origin + self.jet_fly_vec, self.jet_flight_time);
+    var_1 moveTo(var_1.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(var_7 in var_3) {
-    var_7 moveto(var_7.origin + self.jet_fly_vec, self.jet_flight_time);
+    var_7 moveTo(var_7.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(var_11 in var_4) {
-    var_11 moveto(var_11.origin + self.jet_fly_vec, self.jet_flight_time);
+    var_11 moveTo(var_11.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   wait(self.jet_flight_time + 1);
@@ -287,11 +287,11 @@ playsound_loop_on_ent(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2.origin = self.origin + var_1;
     var_2.angles = self.angles;
-    var_2 linkto(self);
+    var_2 linkTo(self);
   } else {
     var_2.origin = self.origin;
     var_2.angles = self.angles;
-    var_2 linkto(self);
+    var_2 linkTo(self);
   }
 
   var_2 playLoopSound(var_0);
@@ -302,7 +302,7 @@ playsound_loop_on_ent(var_0, var_1) {
 
 targetisinfront(var_0, var_1) {
   var_2 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
-  var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {
@@ -336,17 +336,17 @@ targetisclose(var_0, var_1) {
 vending_machine() {
   level endon("game_ended");
   self endon("death");
-  self setcursorhint("HINT_ACTIVATE");
-  self.vm_normal = getent(self.target, "targetname");
-  var_0 = getent(self.vm_normal.target, "targetname");
-  var_1 = getent(var_0.target, "targetname");
-  var_2 = getent(var_1.target, "targetname");
+  self setCursorHint("HINT_ACTIVATE");
+  self.vm_normal = getEnt(self.target, "targetname");
+  var_0 = getEnt(self.vm_normal.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   self.vm_launch_from = var_2.origin;
-  var_3 = getent(var_2.target, "targetname");
+  var_3 = getEnt(var_2.target, "targetname");
   self.vm_launch_to = var_3.origin;
 
   if(isDefined(var_3.target)) {
-    self.vm_fx_loc = getent(var_3.target, "targetname").origin;
+    self.vm_fx_loc = getEnt(var_3.target, "targetname").origin;
   }
 
   self.vm_normal setCanDamage(1);
@@ -444,7 +444,7 @@ spawn_soda() {
 }
 
 soda_can_drop(var_0) {
-  var_0 moveto(self.vm_soda_stop_pos, 0.2);
+  var_0 moveTo(self.vm_soda_stop_pos, 0.2);
   var_0 playSound("vending_machine_soda_drop");
   wait 0.2;
   self.soda_slot = var_0;
@@ -461,7 +461,7 @@ soda_can_eject() {
   var_1 = var_0 * -999;
   var_2 = int(40000);
   var_3 = (int(var_2 / 2), int(var_2 / 2), 0) - (randomint(var_2), randomint(var_2), 0);
-  var_4 = vectornormalize(self.vm_launch_to - self.vm_launch_from + var_3);
+  var_4 = vectorNormalize(self.vm_launch_to - self.vm_launch_from + var_3);
   var_5 = var_4 * randomfloatrange(var_1, var_0);
   self.soda_slot physicslaunchclient(self.vm_launch_from, var_5);
   self.soda_slot.ejected = 1;
@@ -487,12 +487,12 @@ freefall() {
 
 metal_detector() {
   level endon("game_ended");
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 enablegrenadetouchdamage();
-  var_1 = getent(var_0.target, "targetname");
-  var_2 = getent(var_1.target, "targetname");
-  var_3 = getent(var_2.target, "targetname");
-  var_4 = getent(var_3.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
+  var_3 = getEnt(var_2.target, "targetname");
+  var_4 = getEnt(var_3.target, "targetname");
   var_5 = [];
   var_6 = min(var_1.origin[0], var_2.origin[0]);
   var_5[0] = var_6;
@@ -721,7 +721,7 @@ motion_light() {
 
   foreach(var_2 in var_0) {
     var_2.lightrigs = [];
-    var_3 = getent(var_2.target, "targetname");
+    var_3 = getEnt(var_2.target, "targetname");
 
     if(!isDefined(var_3.target)) {
       continue;
@@ -792,7 +792,7 @@ outdoor_motion_dlight() {
   level endon("game_ended");
   self.movetracker = 1;
   self.lightson = 0;
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::noself_array_call(["com_two_light_fixture_off", "com_two_light_fixture_on"], ::precachemodel);
 
@@ -846,7 +846,7 @@ outdoor_motion_dlight_timeout(var_0, var_1, var_2) {
 dog_bark() {
   level endon("game_ended");
   self.movetracker = 1;
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   for(;;) {
     self waittill("trigger_enter", var_1);
@@ -872,9 +872,9 @@ dog_bark() {
 }
 
 trigger_door() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self.doorent = var_0;
-  self.doorangle = getvectorrightangle(vectornormalize(self getorigin() - var_0 getorigin()));
+  self.doorangle = getvectorrightangle(vectorNormalize(self getorigin() - var_0 getorigin()));
   var_0.baseyaw = var_0.angles[1];
   var_1 = 1.0;
 
@@ -898,9 +898,9 @@ trigger_door() {
 
 dooropen(var_0, var_1) {
   if(var_1) {
-    self rotateto((0, self.baseyaw + 90, 1), var_0, 0.1, 0.75);
+    self rotateTo((0, self.baseyaw + 90, 1), var_0, 0.1, 0.75);
   } else {
-    self rotateto((0, self.baseyaw - 90, 1), var_0, 0.1, 0.75);
+    self rotateTo((0, self.baseyaw - 90, 1), var_0, 0.1, 0.75);
   }
 
   self playSound("door_generic_house_open");
@@ -908,13 +908,13 @@ dooropen(var_0, var_1) {
 }
 
 doorclose(var_0) {
-  self rotateto((0, self.baseyaw, 1), var_0);
+  self rotateTo((0, self.baseyaw, 1), var_0);
   self playSound("door_generic_house_close");
   wait(var_0 + 0.05);
 }
 
 getdoorside(var_0) {
-  return vectordot(self.doorangle, vectornormalize(var_0.origin - self.doorent getorigin())) > 0;
+  return vectordot(self.doorangle, vectorNormalize(var_0.origin - self.doorent getorigin())) > 0;
 }
 
 getvectorrightangle(var_0) {
@@ -959,10 +959,10 @@ photo_copier_init(var_0) {
   self.copier = get_photo_copier(var_0);
 
   if(isDefined(self.copier)) {
-    var_1 = getent(self.copier.target, "targetname");
+    var_1 = getEnt(self.copier.target, "targetname");
 
     if(isDefined(var_1)) {
-      var_2 = getent(var_1.target, "targetname");
+      var_2 = getEnt(var_1.target, "targetname");
 
       if(isDefined(var_2)) {
         var_2.intensity = var_2 getlightintensity();
@@ -991,7 +991,7 @@ get_photo_copier(var_0) {
       }
     }
   } else {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
 
     if(isDefined(var_2)) {
       var_2 setCanDamage(1);
@@ -1056,7 +1056,7 @@ photo_copier_no_light() {
 }
 
 reset_copier(var_0) {
-  var_0.copy_bar moveto(var_0.start_pos, 0.2);
+  var_0.copy_bar moveTo(var_0.start_pos, 0.2);
   var_0.light setlightintensity(0);
 }
 
@@ -1067,9 +1067,9 @@ photo_copier_copy_bar_goes() {
   self.copier endon("death");
   var_0 = self.copy_bar;
   wait 2.0;
-  var_0 moveto(self.end_pos, 1.6);
+  var_0 moveTo(self.end_pos, 1.6);
   wait 1.8;
-  var_0 moveto(self.start_pos, 1.6);
+  var_0 moveTo(self.start_pos, 1.6);
   wait 1.6;
   var_1 = self.light;
   var_2 = 0.2;
@@ -1157,7 +1157,7 @@ fan_blade_rotate(var_0) {
   }
   var_4 = self.angles;
   var_5 = anglestoright(self.angles) * 100;
-  var_5 = vectornormalize(var_5);
+  var_5 = vectorNormalize(var_5);
 
   for(;;) {
     var_6 = abs(vectordot(var_5, (1, 0, 0)));
@@ -1322,15 +1322,15 @@ tv_logic() {
 
   if(isDefined(self.target)) {
     if(isDefined(level.disable_interactive_tv_use_triggers)) {
-      var_0 = getent(self.target, "targetname");
+      var_0 = getEnt(self.target, "targetname");
 
       if(isDefined(var_0)) {
         var_0 delete();
       }
     } else {
-      self.usetrig = getent(self.target, "targetname");
-      self.usetrig usetriggerrequirelookat();
-      self.usetrig setcursorhint("HINT_NOICON");
+      self.usetrig = getEnt(self.target, "targetname");
+      self.usetrig useTriggerRequireLookAt();
+      self.usetrig setCursorHint("HINT_NOICON");
     }
   }
 
@@ -1447,7 +1447,7 @@ sliding_door() {
 door_init(var_0) {
   self.start_position = self.origin;
   self.sliding_door_state = "closed";
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
   self.open_position = var_1.origin;
   self.open_velocity = distance(self.open_position, self.origin) / var_0;
 }
@@ -1469,7 +1469,7 @@ open_door() {
     var_0 = 0.05;
   }
 
-  self moveto(self.open_position, var_0);
+  self moveTo(self.open_position, var_0);
   self playSound("glass_door_open");
   wait(var_0);
   self.sliding_door_state = "open";
@@ -1480,7 +1480,7 @@ close_all_doors(var_0, var_1) {
     if(var_3.sliding_door_state == "closed" || var_3.sliding_door_state == "opening") {
       continue;
     }
-    var_3 moveto(var_3.start_position, var_1);
+    var_3 moveTo(var_3.start_position, var_1);
     self playSound("glass_door_close");
     var_3.sliding_door_state = "closed";
   }

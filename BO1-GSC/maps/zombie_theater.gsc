@@ -68,7 +68,7 @@ main() {
   level thread maps\_zombiemode_zone_manager::manage_zones(init_zones);
   level thread maps\_zombiemode_auto_turret::init();
   level thread set_rope_collision();
-  level.extracam_screen = GetEnt("theater_extracam_screen", "targetname");
+  level.extracam_screen = getEnt("theater_extracam_screen", "targetname");
   level.extracam_screen Hide();
   clientnotify("camera_stop");
   init_sounds();
@@ -89,7 +89,7 @@ curtain_anim_init() {
 }
 theater_playanim(animname) {
   self UseAnimTree(#animtree);
-  self animscripted(animname + "_done", self.origin, self.angles, level.scr_anim[animname], "normal", undefined, 2.0);
+  self animScripted(animname + "_done", self.origin, self.angles, level.scr_anim[animname], "normal", undefined, 2.0);
 }
 include_weapons() {
   include_weapon("frag_grenade_zm", false, true);
@@ -208,13 +208,13 @@ teleporter_intro() {
   for(i = 0; i < players.size; i++) {
     players[i] SetTransported(2);
   }
-  playsoundatposition("evt_beam_fx_2d", (0, 0, 0));
-  playsoundatposition("evt_pad_cooldown_2d", (0, 0, 0));
+  playSoundAtPosition("evt_beam_fx_2d", (0, 0, 0));
+  playSoundAtPosition("evt_pad_cooldown_2d", (0, 0, 0));
 }
 electric_switch() {
-  trig = getent("use_elec_switch", "targetname");
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  trig setcursorhint("HINT_NOICON");
+  trig = getEnt("use_elec_switch", "targetname");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setCursorHint("HINT_NOICON");
   level thread wait_for_power();
   trig waittill("trigger", user);
   trig delete();
@@ -222,14 +222,14 @@ electric_switch() {
   Objective_State(8, "done");
 }
 wait_for_power() {
-  master_switch = getent("elec_switch", "targetname");
+  master_switch = getEnt("elec_switch", "targetname");
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
   master_switch playSound("zmb_switch_flip");
   clientnotify("ZPO");
   master_switch waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  playFX(level._effect["switch_sparks"], getStruct("elec_switch_fx", "targetname").origin);
   master_switch playSound("zmb_turn_on");
   maps\zombie_theater_teleporter::teleporter_init();
   wait_network_frame();
@@ -365,11 +365,11 @@ theater_exit_level() {
 }
 theater_find_exit_point() {
   self endon("death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = VectorNormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {

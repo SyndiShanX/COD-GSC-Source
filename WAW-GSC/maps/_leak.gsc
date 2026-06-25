@@ -138,7 +138,7 @@ leak_calc_ballistic(P, type) {
 }
 
 leak_calc_splash(P, type) {
-  vec = vectornormalize(vectorFromLineToPoint(self.A, self.B, P));
+  vec = vectorNormalize(vectorFromLineToPoint(self.A, self.B, P));
   P = pointOnSegmentNearestToPoint(self.A, self.B, P);
   return (P + vector_multiply(vec, 4));
 }

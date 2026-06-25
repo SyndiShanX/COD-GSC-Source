@@ -157,9 +157,9 @@ function function_9d8b22d8(entity, throwifpossible = 0, var_f06df42 = 1) {
   }
 
   totarget = var_4748f6aa - entity.origin;
-  totarget = vectornormalize((totarget[0], totarget[1], 0));
+  totarget = vectorNormalize((totarget[0], totarget[1], 0));
   entityforward = anglesToForward(entityangles);
-  entityforward = vectornormalize((entityforward[0], entityforward[1], 0));
+  entityforward = vectorNormalize((entityforward[0], entityforward[1], 0));
   var_bdfbce20 = vectordot(totarget, entityforward);
   var_8de1b8f1 = 25;
   var_eb57f968 = cos(var_8de1b8f1);
@@ -190,8 +190,8 @@ function function_9d8b22d8(entity, throwifpossible = 0, var_f06df42 = 1) {
   }
 
   if(!throwifpossible) {
-    friendlyplayers = getplayers(entity.team);
-    allplayers = getplayers();
+    friendlyplayers = getPlayers(entity.team);
+    allplayers = getPlayers();
 
     if(isDefined(friendlyplayers) && friendlyplayers.size) {
       foreach(player in friendlyplayers) {
@@ -260,7 +260,7 @@ function function_9d8b22d8(entity, throwifpossible = 0, var_f06df42 = 1) {
     return false;
   }
 
-  var_376e55ae = vectordot(vectornormalize(throw_vel), (0, 0, 1));
+  var_376e55ae = vectordot(vectorNormalize(throw_vel), (0, 0, 1));
 
   if(var_376e55ae > 0.8192) {
     return false;

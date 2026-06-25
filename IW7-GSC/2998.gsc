@@ -500,7 +500,7 @@ func_107FC(var_0, var_1, var_2, var_3, var_4) {
     var_6.var_ACFF = var_7;
   }
 
-  var_6 linkto(self, var_2, (0, 0, 0), var_7);
+  var_6 linkTo(self, var_2, (0, 0, 0), var_7);
   var_6 setModel(var_0.model);
   var_6 setturretteam(var_0.team);
   var_6.team = var_0.team;
@@ -635,7 +635,7 @@ func_1072D(var_0, var_1, var_2) {
     var_3 = spawn("script_model", self gettagorigin(var_2));
     var_3.angles = self gettagangles(var_2);
     var_3 setModel(var_0.model);
-    var_3 linkto(self);
+    var_3 linkTo(self);
     var_3.var_C841 = self;
     var_3.team = var_0.team;
     var_3.script_team = var_0.team;
@@ -783,7 +783,7 @@ func_107FD(var_0, var_1, var_2) {
   var_3 = spawn("script_model", self gettagorigin(var_2));
   var_3.class = var_1;
   var_3.type = var_0.type;
-  var_3 linkto(self, var_2, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_2, (0, 0, 0), (0, 0, 0));
   var_3 setModel(var_0.model);
   var_3 notsolid();
   var_3.script_team = var_0.team;
@@ -1065,7 +1065,7 @@ func_6D4D(var_0, var_1, var_2, var_3) {
     if(!isDefined(self.var_B04A)) {
       self.var_B04A = spawn("script_origin", self gettagorigin("TAG_FLASH"));
       self.var_B04A.angles = self gettagangles("TAG_FLASH");
-      self.var_B04A linkto(self);
+      self.var_B04A linkTo(self);
       self.var_B04A playLoopSound(self.var_10241.var_6D34);
     }
 
@@ -1117,7 +1117,7 @@ func_39A5() {
     var_1 = distance(self.origin, level.var_D127.origin);
     var_2 = anglestoright(self.angles);
     var_3 = anglestoup(self.angles);
-    var_4 = vectornormalize(level.var_D127.origin - self.origin);
+    var_4 = vectorNormalize(level.var_D127.origin - self.origin);
     var_5 = vectordot(var_2, var_4);
     var_6 = vectordot(var_3, var_4);
 
@@ -1263,7 +1263,7 @@ func_399E(var_0, var_1, var_2, var_3) {
   var_7 = scripts\sp\math::func_6A8E(800, var_7, var_4);
   var_8 = scripts\sp\math::func_6A8E(1500, var_8, var_4);
   var_10 = vectortoangles(var_5);
-  var_11 = vectornormalize(var_5);
+  var_11 = vectorNormalize(var_5);
   var_12 = -1 * var_5;
   var_13 = randomfloatrange(var_7, var_8);
   var_14 = var_11 * var_13 * var_1;
@@ -1275,7 +1275,7 @@ func_399E(var_0, var_1, var_2, var_3) {
   var_20 = level.var_D127.spaceship_vel * var_19;
   var_21 = level.var_D127.origin + var_14 + var_15 + var_16 + var_20;
   playFXOnTag(scripts\engine\utility::getfx("miniflak_muzzle"), self, var_0);
-  var_22 = vectornormalize(var_21 - self.origin);
+  var_22 = vectorNormalize(var_21 - self.origin);
   var_23 = scripts\engine\utility::spawn_tag_origin();
 
   if(var_3) {
@@ -1286,7 +1286,7 @@ func_399E(var_0, var_1, var_2, var_3) {
   playFXOnTag(scripts\engine\utility::getfx("miniflak_trace"), var_23, "tag_origin");
   var_24 = scripts\sp\math::func_C097(1000, 35000, var_6);
   var_24 = scripts\sp\math::func_6A8E(0.1, 0.75, var_24);
-  var_23 moveto(var_21, var_24);
+  var_23 moveTo(var_21, var_24);
   wait(var_24);
   wait 0.05;
   var_23 thread func_11A7D();
@@ -1971,7 +1971,7 @@ func_39E3(var_0, var_1) {
         if(isDefined(self.var_10241.var_6D35)) {
           if(!isDefined(self.var_B04A)) {
             self.var_B04A = spawn("script_origin", self.origin);
-            self.var_B04A linkto(self, "tag_flash", (0, 0, 0), (0, 0, 0));
+            self.var_B04A linkTo(self, "tag_flash", (0, 0, 0), (0, 0, 0));
           }
 
           if(!isDefined(self.var_B04C)) {
@@ -1997,7 +1997,7 @@ func_39E3(var_0, var_1) {
 
           var_14 = func_12A36(var_10);
           var_15 = self gettagangles(var_10);
-          var_15 = vectornormalize(anglesToForward(var_15));
+          var_15 = vectorNormalize(anglesToForward(var_15));
           var_16 = func_12A37(var_10, var_14) + var_15 * 75;
           self thread[[var_5.var_AF57]](var_16, var_14, var_10);
         }
@@ -2057,7 +2057,7 @@ func_12A3E(var_0) {
     var_2 = self.var_C841 gettagorigin(self.var_AD42);
     var_3 = var_0.origin - var_2;
     var_4 = rotatevectorinverted(var_3, var_1);
-    var_5 = vectornormalize((var_4[0], var_4[1], 0));
+    var_5 = vectorNormalize((var_4[0], var_4[1], 0));
     var_6 = vectordot(var_5, (1, 0, 0));
 
     if(var_5[1] >= 0 && var_6 < self.var_2104) {
@@ -2069,7 +2069,7 @@ func_12A3E(var_0) {
     }
 
     var_7 = vectortoangles(var_4);
-    var_8 = vectornormalize(rotatevector(var_4, (0, var_7[1] * -1.0, 0)));
+    var_8 = vectorNormalize(rotatevector(var_4, (0, var_7[1] * -1.0, 0)));
     var_9 = vectordot(var_8, (1, 0, 0));
 
     if(var_8[2] <= 0 && var_9 < self.var_2101) {
@@ -2351,8 +2351,8 @@ func_6D4F(var_0, var_1, var_2, var_3) {
   var_8 = randomfloatrange(-1 * var_4, var_4);
   var_9 = var_0 + self.var_4D1E.var_DCCA * anglesToForward(var_1);
   var_10 = var_0 + (self.var_4D1E.var_DCCA * anglesToForward(var_1) + (var_6, var_7, var_8));
-  var_11 = vectortoangles(vectornormalize(var_9 - var_0));
-  var_12 = vectortoangles(vectornormalize(var_10 - var_0));
+  var_11 = vectortoangles(vectorNormalize(var_9 - var_0));
+  var_12 = vectortoangles(vectorNormalize(var_10 - var_0));
   func_129CA(var_0, var_9, var_11, 1500, undefined, var_2, undefined, "capital_ship_turret_fire", var_3);
 }
 
@@ -2361,7 +2361,7 @@ func_6D4E(var_0, var_1, var_2, var_3) {
   var_5 = self.var_4D1E.fx.var_6D02;
   var_6 = self.var_4D1E.fx.var_11A7B;
   var_7 = var_0 + self.var_4D1E.var_DCCA * anglesToForward(var_1);
-  var_8 = vectortoangles(vectornormalize(var_7 - var_0));
+  var_8 = vectortoangles(vectorNormalize(var_7 - var_0));
   func_129CA(var_0, var_7, var_8, 1500, self.var_4D1E.fx.var_BDFF, var_2, undefined, "capital_ship_turret_fire");
 }
 
@@ -2461,11 +2461,11 @@ func_1A8A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(var_8 < squared(1000)) {
-    level.player playrumbleonentity("grenade_rumble");
+    level.player playRumbleOnEntity("grenade_rumble");
   } else if(var_8 < squared(3000)) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   } else if(var_8 < squared(6000)) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   } else {
     return;
   }
@@ -2504,7 +2504,7 @@ func_88BC(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = var_0;
   var_9 = self.team;
   var_10 = 0;
-  var_11 = vectornormalize(var_1 - var_8);
+  var_11 = vectorNormalize(var_1 - var_8);
 
   if(isDefined(var_4.var_32BA)) {
     if(var_4.var_32BA - var_4.var_DCCC < var_4.var_DCCB) {
@@ -2650,7 +2650,7 @@ func_3DA7(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(var_7.team != var_4) {
-      var_8 = vectornormalize(var_1 - var_7.origin);
+      var_8 = vectorNormalize(var_1 - var_7.origin);
       var_9 = vectordot(var_3, var_8);
 
       if(var_9 > 0) {
@@ -3228,7 +3228,7 @@ func_6D51(var_0, var_1, var_2, var_3) {
     wait(randomfloatrange(0.25, 1));
 
     if(isDefined(var_6) && isvalidmissile(var_6) && isDefined(var_4) && isDefined(var_4.var_114FB)) {
-      var_6 missile_settargetent(var_4.var_114FB);
+      var_6 missile_settargetEnt(var_4.var_114FB);
       return;
     }
   } else {
@@ -3243,14 +3243,14 @@ func_6D51(var_0, var_1, var_2, var_3) {
       level.player thread func_11AA8(var_6);
     }
 
-    var_7 = getent("missile_trigger", "targetname");
+    var_7 = getEnt("missile_trigger", "targetname");
     var_8 = spawn("script_model", var_0);
     var_6.var_438D = var_8;
     var_6.var_438D clonebrushmodeltoscriptmodel(var_7);
     var_6.var_438D.origin = var_0;
     var_6.var_438D.angles = var_1;
     var_6.var_438D setCanDamage(1);
-    var_6.var_438D linkto(var_6);
+    var_6.var_438D linkTo(var_6);
     var_6.var_438D.owner = var_6;
     thread func_B887(var_6.var_438D);
     thread func_51BB(var_6.var_438D);
@@ -3457,7 +3457,7 @@ func_129DF(var_0) {
 
   var_2 = scripts\engine\utility::spawn_tag_origin();
   thread func_129C5(var_2);
-  var_2 linkto(var_1, self.var_AD42, (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_1, self.var_AD42, (0, 0, 0), (0, 0, 0));
   var_2.var_AD42 = self.var_AD42;
   var_1.var_10381 = scripts\engine\utility::array_add(var_1.var_10381, var_2);
   self delete();
@@ -3513,7 +3513,7 @@ func_129C5(var_0) {
   var_2 = scripts\engine\utility::random(var_1);
   var_0 setModel(var_2);
   var_0 show();
-  var_0 rotateyaw(randomintrange(0, 360), 0.05);
+  var_0 rotateYaw(randomintrange(0, 360), 0.05);
 }
 
 func_12A06() {
@@ -3570,7 +3570,7 @@ func_11509(var_0) {
 }
 
 func_8935(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   level.var_12A90 = [];
 
   foreach(var_3 in self.turrets) {
@@ -3758,13 +3758,13 @@ func_11AA8(var_0) {
   var_0.icon.color = (1, 0, 0);
   var_0.icon.alpha = 1.0;
   var_0.icon setwaypoint(0, 0, 1);
-  var_0.icon settargetent(var_0);
+  var_0.icon settargetEnt(var_0);
   var_0.var_928C = newclienthudelem(self);
   var_0.var_928C setshader("heli_warning_missile_red", 1, 2);
   var_0.var_928C.color = (1, 0, 0);
   var_0.var_928C.alpha = 0.5;
   var_0.var_928C setwaypoint(0, 1, 1);
-  var_0.var_928C settargetent(var_0);
+  var_0.var_928C settargetEnt(var_0);
   var_0.var_928C thread func_9141(0.1, 0.1, 0.9, "death");
   self.var_AEEF = scripts\engine\utility::array_add(self.var_AEEF, var_0);
   var_0 scripts\engine\utility::waittill_any("death", "guided_missile_fire", "target_lost");
@@ -4014,7 +4014,7 @@ func_529F(var_0) {
 func_433B(var_0) {
   thread func_4337();
   self endon("death");
-  self missile_settargetent(level.var_D127, scripts\engine\utility::randomvectorrange(200, 400));
+  self missile_settargetEnt(level.var_D127, scripts\engine\utility::randomvectorrange(200, 400));
   childthread func_4336(level.var_D127, var_0);
   childthread func_4338();
   childthread func_4339();
@@ -4033,7 +4033,7 @@ func_4336(var_0, var_1) {
 
   if(isDefined(var_1) && var_1.class == "cannon_missileboat_small") {
     var_4 = self.anglelerprate;
-    self missile_settargetent(var_0);
+    self missile_settargetEnt(var_0);
 
     for(var_5 = 0; var_5 < 40; var_5++) {
       if(distancesquared(self.origin, var_0.origin) < squared(1000) || var_2.size > 0) {
@@ -4061,7 +4061,7 @@ func_4336(var_0, var_1) {
     wait 2.0;
     self.anglelerprate = var_4;
   } else {
-    self missile_settargetent(var_0, (600, 0, 0));
+    self missile_settargetEnt(var_0, (600, 0, 0));
   }
 }
 

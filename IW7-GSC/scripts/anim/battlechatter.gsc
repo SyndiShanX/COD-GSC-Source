@@ -1874,14 +1874,14 @@ func_D4F8(var_0, var_1, var_2) {
         var_9 = gettime();
         if(self == level.player) {
           var_10 = spawn("script_origin", level.player getEye());
-          var_10 linkto(self);
+          var_10 linkTo(self);
         } else if(scripts\engine\utility::player_is_in_jackal()) {
           var_11 = level.player gettagorigin("tag_cockpit_light_monitor2");
           var_10 = spawn("script_origin", var_11);
-          var_10 linkto(level.player);
+          var_10 linkTo(level.player);
         } else {
           var_10 = spawn("script_origin", self gettagorigin("j_head"));
-          var_10 linkto(var_1);
+          var_10 linkTo(var_1);
         }
 
         thread func_11047(var_0.var_10476[var_8], var_10);
@@ -2748,7 +2748,7 @@ func_7EC9(var_0) {
 
 func_7E75(var_0, var_1, var_2) {
   var_3 = anglesToForward(var_0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - var_1);
   var_7 = var_5[1] - var_6[1];
@@ -3749,7 +3749,7 @@ playflavorburstline(var_0, var_1) {
     if(!scripts\engine\utility::player_is_in_jackal()) {
       if(isDefined(level.var_C52F) && level.var_C52F) {
         var_2 = spawn("script_origin", level.player getEye());
-        var_2 linkto(level.player);
+        var_2 linkTo(level.player);
       } else if(isDefined(self)) {
         self notify("burst_line_done");
         return;
@@ -3759,11 +3759,11 @@ playflavorburstline(var_0, var_1) {
     } else {
       var_3 = level.player gettagorigin("tag_cockpit_light_monitor2");
       var_2 = spawn("script_origin", var_3);
-      var_2 linkto(level.player);
+      var_2 linkTo(level.player);
     }
   } else {
     var_2 = spawn("script_origin", var_0 gettagorigin("j_head"));
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
   }
 
   var_2 playSound(var_1, var_1, 1);

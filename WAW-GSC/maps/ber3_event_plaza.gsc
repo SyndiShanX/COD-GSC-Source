@@ -16,9 +16,9 @@ event_plaza_start() {
   warp_players_underworld();
 
   warp_friendlies("struct_plaza_start_friends", "targetname");
-  GetEnt("trig_spawn_basement_friendlies", "script_noteworthy") notify("trigger");
-  GetEnt("trig_e2_friendlies_start", "script_noteworthy") notify("trigger");
-  getent("e2_trig_spawn_plaza_mgs", "script_noteworthy") notify("trigger");
+  getEnt("trig_spawn_basement_friendlies", "script_noteworthy") notify("trigger");
+  getEnt("trig_e2_friendlies_start", "script_noteworthy") notify("trigger");
+  getEnt("e2_trig_spawn_plaza_mgs", "script_noteworthy") notify("trigger");
 
   for(i = 0; i < 4; i++) {
     if(i != 1) {
@@ -44,13 +44,13 @@ event_plaza_start() {
 
   thread maps\ber3_event_intro::delete_street_allies();
   wait(1);
-  getent("trig_left_street", "targetname") notify("trigger");
+  getEnt("trig_left_street", "targetname") notify("trigger");
 
   level thread e2_init_charge();
 
   wait(1);
 
-  getent("trig_entering_basement", "targetname") notify("trigger");
+  getEnt("trig_entering_basement", "targetname") notify("trigger");
 }
 
 e2_init_charge() {
@@ -58,7 +58,7 @@ e2_init_charge() {
 
   thread move_tank_2();
 
-  getent("trig_entering_basement", "targetname") waittill("trigger");
+  getEnt("trig_entering_basement", "targetname") waittill("trigger");
 
   level.e1_rez_10_done = false;
   thread reznov_cellar_vo();
@@ -70,7 +70,7 @@ e2_init_charge() {
   thread e2_tank_plaza_logic();
   thread destroy_mg();
 
-  getent("trig_leaving_basement", "targetname") waittill("trigger");
+  getEnt("trig_leaving_basement", "targetname") waittill("trigger");
 
   thread first_mortar();
 
@@ -87,15 +87,15 @@ e2_init_charge() {
 
   thread e2_charge_destroy_flaks_vo();
 
-  pClip = getent("e2_charge_player_clip", "targetname");
+  pClip = getEnt("e2_charge_player_clip", "targetname");
   pClip delete();
 
   level notify("stop katyusha");
 
   setmusicstate("LAST_FIGHT");
 
-  getent("e2_start_charge", "targetname") notify("trigger");
-  getent("e2_friendlies_charge", "targetname") notify("trigger");
+  getEnt("e2_start_charge", "targetname") notify("trigger");
+  getEnt("e2_friendlies_charge", "targetname") notify("trigger");
 
   thread e2_objectives();
   thread e2_friendly_fodder();
@@ -146,7 +146,7 @@ reznov_cellar_vo() {
 e2_charge_destroy_flaks_vo() {
   level.sarge thread anim_single_solo(level.sarge, "e1_rez_11");
 
-  getent("trig_vo_destroy_flaks", "targetname") waittill("trigger");
+  getEnt("trig_vo_destroy_flaks", "targetname") waittill("trigger");
 
   level.sarge anim_single_solo(level.sarge, "e2_rez_01");
   level.sarge anim_single_solo(level.sarge, "e2_rez_02");
@@ -156,7 +156,7 @@ e2_charge_destroy_flaks_vo() {
 }
 
 e2_init_friendly_spawners() {
-  base_guy_spawner = getent("e2_basement_guy", "script_noteworthy");
+  base_guy_spawner = getEnt("e2_basement_guy", "script_noteworthy");
   base_guy_spawner thread add_spawn_function(::init_basement_guy);
 }
 
@@ -166,8 +166,8 @@ init_basement_guy() {
 }
 
 move_street_tanks() {
-  tank2 = getent("e1_tank2", "targetname");
-  tank3 = getent("e1_tank3", "targetname");
+  tank2 = getEnt("e1_tank2", "targetname");
+  tank3 = getEnt("e1_tank3", "targetname");
 
   if(NumRemoteClients()) {
     tank2 delete();
@@ -179,7 +179,7 @@ move_street_tanks() {
 }
 
 move_charging_tanks() {
-  getent("e2_start_charge", "targetname") waittill("trigger");
+  getEnt("e2_start_charge", "targetname") waittill("trigger");
 
   tank_nodes = getvehiclenodearray("e2_charge_tanks", "targetname");
 
@@ -216,7 +216,7 @@ remove_e1_friendlies() {
 }
 
 blow_whistle() {
-  tank2 = getent("e2_tank1", "targetname");
+  tank2 = getEnt("e2_tank1", "targetname");
   tank2 playSound("whistle_blow");
 
   level.comm notify("stop_comm_idle");
@@ -235,10 +235,10 @@ e2_friendly_fodder() {
 }
 e2_objectives() {
   wait(3);
-  obj_struct0 = getstruct("obj_flak88_0", "targetname");
-  obj_struct1 = getstruct("obj_flak88_1", "targetname");
-  obj_struct2 = getstruct("obj_flak88_2", "targetname");
-  obj_struct3 = getstruct("obj_flak88_3", "targetname");
+  obj_struct0 = getStruct("obj_flak88_0", "targetname");
+  obj_struct1 = getStruct("obj_flak88_1", "targetname");
+  obj_struct2 = getStruct("obj_flak88_2", "targetname");
+  obj_struct3 = getStruct("obj_flak88_3", "targetname");
 
   level.flaks_alive = 4;
   level.flak0_destroyed = false;
@@ -282,28 +282,28 @@ e2_objectives_update_flak88() {
     obj_index = 1;
 
     if(!level.flak0_destroyed) {
-      obj_struct0 = getstruct("obj_flak88_0", "targetname");
+      obj_struct0 = getStruct("obj_flak88_0", "targetname");
 
       objective_additionalPosition(3, obj_index, obj_struct0.origin);
       obj_index++;
     }
 
     if(!level.flak1_destroyed) {
-      obj_struct1 = getstruct("obj_flak88_1", "targetname");
+      obj_struct1 = getStruct("obj_flak88_1", "targetname");
 
       objective_AdditionalPosition(3, obj_index, obj_struct1.origin);
       obj_index++;
     }
 
     if(!level.flak2_destroyed) {
-      obj_struct2 = getstruct("obj_flak88_2", "targetname");
+      obj_struct2 = getStruct("obj_flak88_2", "targetname");
 
       objective_AdditionalPosition(3, obj_index, obj_struct2.origin);
       obj_index++;
     }
 
     if(!level.flak3_destroyed) {
-      obj_struct3 = getstruct("obj_flak88_3", "targetname");
+      obj_struct3 = getStruct("obj_flak88_3", "targetname");
 
       objective_AdditionalPosition(3, obj_index, obj_struct3.origin);
       obj_index++;
@@ -337,19 +337,19 @@ e2_flak88_vo(flaks_left) {
   }
 }
 move_tank_2() {
-  tank2 = getent("e2_tank1", "targetname");
+  tank2 = getEnt("e2_tank1", "targetname");
   tank2 move_tank_on_trigger("e2_tank1_start_node", "trig_entering_basement");
 
-  tank_targ = getstruct("e2_tank1_target1", "targetname");
+  tank_targ = getStruct("e2_tank1_target1", "targetname");
 
   tank2 setturrettargetvec(tank_targ.origin);
   tank2 waittill("turret_on_target");
   wait(1);
   tank2 fireWeapon();
 
-  getent("e2_tank1_destroy", "targetname") waittill("trigger");
+  getEnt("e2_tank1_destroy", "targetname") waittill("trigger");
 
-  flak = getent("flak88_11", "targetname");
+  flak = getEnt("flak88_11", "targetname");
   aim_org = (tank2.origin + (0, 0, 40));
 
   flak setTurretTargetVec(aim_org);
@@ -364,10 +364,10 @@ move_tank_2() {
 }
 
 e2_tank_plaza_logic() {
-  getent("e2_start_charge", "targetname") waittill("trigger");
+  getEnt("e2_start_charge", "targetname") waittill("trigger");
 
   start_node = getvehiclenode("e2_plaza_tank", "targetname");
-  tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
+  tank = spawnVehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
   tank.vehicletype = "t34";
   maps\_vehicle::vehicle_init(tank);
 
@@ -402,7 +402,7 @@ e2_tank_plaza_shoot() {
   self endon("death");
 
   tank_targs = getStructArray("e2_plaza_tank_targ", "targetname");
-  statue_targ = getstruct("e2_tank1_target2", "targetname");
+  statue_targ = getStruct("e2_tank1_target2", "targetname");
 
   wait(7);
 
@@ -414,7 +414,7 @@ e2_tank_plaza_shoot() {
 
   playFX(level._effect["e2_statue_explode"], statue_targ.origin);
 
-  statue = getent("ber3_plaza_statue", "targetname");
+  statue = getEnt("ber3_plaza_statue", "targetname");
   statue delete();
 
   while(true) {
@@ -430,7 +430,7 @@ e2_tank_plaza_shoot() {
 }
 
 e2_tank_plaza_wait_move() {
-  getent("e2_plaza_tank_move", "targetname") waittill("trigger");
+  getEnt("e2_plaza_tank_move", "targetname") waittill("trigger");
 
   level.plaza_tank_move = true;
 }
@@ -445,11 +445,11 @@ destroy_mg() {
 }
 
 watch_flak(trigName, flakName, destVar, specNotify) {
-  flak = getent(flakName, "targetname");
+  flak = getEnt(flakName, "targetname");
   flak thread wait_stop_flak_firing();
   flak thread watch_flak_death(destVar, specNotify);
 
-  getent(trigName, "targetname") waittill("damage", amount, attacker);
+  getEnt(trigName, "targetname") waittill("damage", amount, attacker);
 
   if(isDefined(attacker) && isPlayer(attacker)) {
     if(isDefined(attacker.damageWeapon) && attacker.damageWeapon == "panzerschrek") {
@@ -494,20 +494,20 @@ wait_stop_flak_firing() {
 e2_satchel_init() {
   trigs = getEntArray("trig_flak_objective", "script_noteworthy");
   for(i = 0; i < trigs.size; i++) {
-    trigs[i] SetHintString(&"BER3_HINT_PLANT_CHARGE");
+    trigs[i] setHintString(&"BER3_HINT_PLANT_CHARGE");
   }
 
-  flak0 = getent("flak88_10", "targetname");
-  flak0_satchel_trig = getent("objective_flak0", "targetname");
+  flak0 = getEnt("flak88_10", "targetname");
+  flak0_satchel_trig = getEnt("objective_flak0", "targetname");
 
-  flak1 = getent("flak88_11", "targetname");
-  flak1_satchel_trig = getent("objective_flak1", "targetname");
+  flak1 = getEnt("flak88_11", "targetname");
+  flak1_satchel_trig = getEnt("objective_flak1", "targetname");
 
-  flak2 = getent("flak88_12", "targetname");
-  flak2_satchel_trig = getent("objective_flak2", "targetname");
+  flak2 = getEnt("flak88_12", "targetname");
+  flak2_satchel_trig = getEnt("objective_flak2", "targetname");
 
-  flak3 = getent("flak88_13", "targetname");
-  flak3_satchel_trig = getent("objective_flak3", "targetname");
+  flak3 = getEnt("flak88_13", "targetname");
+  flak3_satchel_trig = getEnt("objective_flak3", "targetname");
 
   flak0 thread satchel_setup(flak0_satchel_trig, flak0);
   flak1 thread satchel_setup(flak1_satchel_trig, flak1);
@@ -519,7 +519,7 @@ wait_repopulate_flak(spawn_group) {
 
   wait(1);
 
-  flak = getent("flak88_" + spawn_group, "targetname");
+  flak = getEnt("flak88_" + spawn_group, "targetname");
   flak repopulate_flak();
 }
 repopulate_flak() {
@@ -553,7 +553,7 @@ reich_fake_mg_fire() {
 
 first_mortar() {
   launchers = getStructArray("e2_mortar_start", "targetname");
-  targ = getstruct("e2_mortar_targ_first", "targetname");
+  targ = getStruct("e2_mortar_targ_first", "targetname");
 
   launchers[0] thread fire_mortar(targ);
 
@@ -575,7 +575,7 @@ e2_mortar_looping() {
 }
 
 e2_mortar_looping2() {
-  getent("trig_vo_destroy_flaks", "targetname") waittill("trigger");
+  getEnt("trig_vo_destroy_flaks", "targetname") waittill("trigger");
 
   level notify("stop first mortar set");
 
@@ -591,12 +591,12 @@ fake_launch(org) {
 }
 
 fire_mortar(targ_struct) {
-  playsoundatposition(level.scr_sound["mortar_flash"], self.origin);
+  playSoundAtPosition(level.scr_sound["mortar_flash"], self.origin);
   playFX(level._effect["mortar_flash"], self.origin, anglesToForward(self.angles));
 
   wait(randomintrange(4, 7));
 
-  playsoundatposition("mortar_dirt", targ_struct.origin);
+  playSoundAtPosition("mortar_dirt", targ_struct.origin);
   playFX(level._effect["dirt_mortar"], targ_struct.origin);
   earthquake(0.5, 2.5, targ_struct.origin, 512);
 
@@ -630,11 +630,11 @@ e2_plaza_amb_left() {
 }
 
 e2_plaza_amb_left_panzer() {
-  trig = getent("trig_e2_amb_building_schreck", "targetname");
+  trig = getEnt("trig_e2_amb_building_schreck", "targetname");
   trig waittill("trigger");
 
-  schreck_start = getstruct("e2_amb_building_shreck", "targetname");
-  schreck_end = getstruct(schreck_start.target, "targetname");
+  schreck_start = getStruct("e2_amb_building_shreck", "targetname");
+  schreck_end = getStruct(schreck_start.target, "targetname");
   thread maps\ber3_event_intro::fire_shrecks(schreck_start, schreck_end, 1);
 }
 e2_drone_battle_right_init() {
@@ -642,14 +642,14 @@ e2_drone_battle_right_init() {
 }
 e2_dbattle_right_tanks() {
   if(!NumRemoteClients()) {
-    getent("e2_spawn_right_tanks", "targetname") waittill("trigger");
+    getEnt("e2_spawn_right_tanks", "targetname") waittill("trigger");
 
     wait(2);
-    tank1 = getent("e2_db_tank1", "targetname");
-    tank2 = getent("e2_db_tank2", "targetname");
-    tank3 = getent("e2_db_tank3", "targetname");
-    tank4 = getent("e2_db_tank4", "targetname");
-    tank5 = getent("e2_db_tank5", "targetname");
+    tank1 = getEnt("e2_db_tank1", "targetname");
+    tank2 = getEnt("e2_db_tank2", "targetname");
+    tank3 = getEnt("e2_db_tank3", "targetname");
+    tank4 = getEnt("e2_db_tank4", "targetname");
+    tank5 = getEnt("e2_db_tank5", "targetname");
 
     tank1 thread veh_stop_at_node("e2_db_tank1_stop1");
     tank2 thread veh_stop_at_node("e2_db_tank2_stop1");
@@ -657,7 +657,7 @@ e2_dbattle_right_tanks() {
     tank4 thread veh_stop_at_node("e2_db_tank4_stop1");
     tank5 thread veh_stop_at_node("e2_db_tank5_stop1");
 
-    getent("e2_setup_back_flaks", "targetname") waittill("trigger");
+    getEnt("e2_setup_back_flaks", "targetname") waittill("trigger");
 
     tank1 resumespeed(8);
     tank2 resumespeed(8);

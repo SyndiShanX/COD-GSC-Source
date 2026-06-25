@@ -48,14 +48,14 @@ _anim() {
 }
 
 _init(var_0, var_1) {
-  var_2 = getent("apache_pilot", "targetname");
+  var_2 = getEnt("apache_pilot", "targetname");
   var_2.origin = var_0 gettagorigin("tag_passenger");
   var_2.angles = var_0 gettagangles("tag_passenger");
   var_3 = var_2 spawndrone();
   var_3 dontcastshadows();
   var_3.animname = "generic";
   var_3 maps\_anim::setanimtree();
-  var_3 linkto(var_0, "tag_passenger");
+  var_3 linkTo(var_0, "tag_passenger");
   var_3 thread pilot_ai_start(var_1, self, "tag_passenger");
   var_4 = spawnStruct();
   var_4.owner = var_1;

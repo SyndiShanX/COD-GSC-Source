@@ -643,7 +643,7 @@ camera_zoomout(downedPlayer, spawnLoc, reviveEnt) {
   mover.angles = VectorToAngles((0, 0, -1));
   mover thread cleanUpReviveEnt(downedPlayer);
 
-  downedPlayer CameraLinkTo(mover, "tag_origin");
+  downedPlayer CameralinkTo(mover, "tag_origin");
 
   mover moveTo(camera_fly_end_pos, CAMERA_ZOOM_OUT_TIME, CAMERA_ACCE_TIME, CAMERA_DECE_TIME);
   mover waittill("movedone");
@@ -693,7 +693,7 @@ enter_revive_use_hold_think(downed_player, reviver, use_ent, use_time) {
 
   downed_player.being_revived = true;
 
-  reviver playerLinkTo(use_ent);
+  reviver playerlinkTo(use_ent);
   reviver PlayerLinkedOffsetEnable();
 
   reviver disable_weapon_timeout((use_time + 0.05), "revive_weapon_management");

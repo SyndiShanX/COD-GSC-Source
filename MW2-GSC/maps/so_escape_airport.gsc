@@ -66,7 +66,7 @@ disable_elevator_internal() {
       return;
     }
 
-    ent = GetEnt(ent.target, "targetname");
+    ent = getEnt(ent.target, "targetname");
     switch (num) {
       case 2:
       case 3:

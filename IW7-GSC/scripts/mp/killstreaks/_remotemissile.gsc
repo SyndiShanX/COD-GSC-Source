@@ -90,7 +90,7 @@ _fire(var_0, var_1) {
   var_2 = getEntArray("remoteMissileSpawn", "targetname");
   foreach(var_4 in var_2) {
     if(isDefined(var_4.target)) {
-      var_4.var_1155F = getent(var_4.target, "targetname");
+      var_4.var_1155F = getEnt(var_4.target, "targetname");
     }
   }
 
@@ -103,7 +103,7 @@ _fire(var_0, var_1) {
   if(isDefined(var_6)) {
     var_7 = var_6.origin;
     var_8 = var_6.var_1155F.origin;
-    var_9 = vectornormalize(var_7 - var_8);
+    var_9 = vectorNormalize(var_7 - var_8);
     var_7 = var_9 * 14000 + var_8;
     var_10 = scripts\mp\utility::_magicbullet("remotemissile_projectile_mp", var_7, var_8, var_1);
   } else {
@@ -148,8 +148,8 @@ missileeyes(var_0, var_1) {
     var_0 visionsetmissilecamforplayer(game["thermal_vision"], 1);
     var_0 thermalvisionon();
     var_0 thread delayedfofoverlay();
-    var_0 cameralinkto(var_1, "tag_origin");
-    var_0 controlslinkto(var_1);
+    var_0 cameralinkTo(var_1, "tag_origin");
+    var_0 controlslinkTo(var_1);
     if(getdvarint("camera_thirdPerson")) {
       var_0 scripts\mp\utility::setthirdpersondof(0);
     }

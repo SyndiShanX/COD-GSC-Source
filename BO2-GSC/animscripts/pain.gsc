@@ -230,7 +230,7 @@ shouldcrawlingpain() {
 crawlingpistol() {
   self endon("kill_long_death");
   self endon("death");
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self thread preventpainforashorttime("crawling");
   self.a.special = "none";
   self thread paindeathnotify();
@@ -507,7 +507,7 @@ enemyisingeneraldirection(dir) {
     return false;
   }
 
-  toenemy = vectornormalize(self.enemy getshootatpos() - self getEye());
+  toenemy = vectorNormalize(self.enemy getshootatpos() - self getEye());
   return vectordot(toenemy, dir) > 0.5;
 }
 
@@ -1252,7 +1252,7 @@ additive_pain() {
 }
 
 isanyplayernearby(dist) {
-  players = getplayers();
+  players = getPlayers();
   anybody_nearby = 0;
 
   for(i = 0; i < players.size; i++) {

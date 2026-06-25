@@ -41,9 +41,9 @@ function function_d89f08d3() {
 }
 
 function power_switch(trigger_name, var_1e1fc126) {
-  switch_trigger = getent(trigger_name, "targetname");
-  switch_trigger sethintstring(&"ZM_TEMPLE_RELEASE_WATER");
-  switch_trigger setcursorhint("HINT_NOICON");
+  switch_trigger = getEnt(trigger_name, "targetname");
+  switch_trigger setHintString(&"ZM_TEMPLE_RELEASE_WATER");
+  switch_trigger setCursorHint("HINT_NOICON");
   while(true) {
     switch_trigger waittill("trigger", player);
     if(isPlayer(player)) {
@@ -66,7 +66,7 @@ function function_4ebc92cc(player) {
 
 function function_3046fbc7(var_1e1fc126, var_91c79b1d) {
   level flag::wait_till(var_1e1fc126);
-  playsoundatposition("zmb_switch_flip_temple", self.origin);
+  playSoundAtPosition("zmb_switch_flip_temple", self.origin);
   if(issubstr(self.targetname, "left")) {
     var_1e69bd24 = "elec_switch_fx_left";
   } else {
@@ -74,7 +74,7 @@ function function_3046fbc7(var_1e1fc126, var_91c79b1d) {
   }
   playFX(level._effect["switch_sparks"], struct::get(var_1e69bd24, "targetname").origin);
   level scene::play(self.targetname, "targetname");
-  playsoundatposition("zmb_turn_on", self.origin);
+  playSoundAtPosition("zmb_turn_on", self.origin);
   level flag::set(var_91c79b1d);
 }
 
@@ -96,8 +96,8 @@ function function_7ea2ce8() {
     level.var_c43f63de[i] connectpaths();
   }
   array::delete_all(level.var_c43f63de);
-  playsoundatposition("zmb_poweron_front", (0, 0, 0));
-  playsoundatposition("zmb_poweron_rear", (0, 0, 0));
+  playSoundAtPosition("zmb_poweron_front", (0, 0, 0));
+  playSoundAtPosition("zmb_poweron_rear", (0, 0, 0));
   wait(4.5);
   exploder::exploder("fxexp_15");
 }
@@ -137,7 +137,7 @@ function water_start(var_91c79b1d, var_57b77c66, var_b8c57a38, isright, sound) {
   exploder::exploder("fxexp_" + var_57b77c66);
   exploder::stop_exploder("fxexp_" + var_b8c57a38);
   wait(1.2);
-  soundent = getent(sound + "_origin", "targetname");
+  soundent = getEnt(sound + "_origin", "targetname");
   if(isDefined(soundent)) {
     soundent playLoopSound(sound, 1);
   }

@@ -36,7 +36,7 @@ function devgui_test_chart_think() {
       }
 
       if(val) {
-        player = getplayers()[0];
+        player = getPlayers()[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward((0, direction[1], 0));
         direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
@@ -47,7 +47,7 @@ function devgui_test_chart_think() {
     }
 
     if(val) {
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(val == 1) {
         level.test_chart_model setModel(#"test_chart_model");
@@ -96,7 +96,7 @@ function updateminimapsetting() {
 
     if(minimapheight > 0) {
       level.minimapheight = minimapheight;
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size > 0) {
         player = util::gethostplayer();
@@ -227,10 +227,10 @@ function drawminimapbounds(viewpos, mincorner, maxcorner) {
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   diaglen = length(mincorner - maxcorner);
   mincorneroffset = mincorner - viewpos;
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner += vecscale(mincorneroffset, diaglen * 1 / 800);
   maxcorneroffset = maxcorner - viewpos;
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner += vecscale(maxcorneroffset, diaglen * 1 / 800);
   diagonal = maxcorner - mincorner;
   side = vecscale(north, vectordot(diagonal, north));
@@ -256,7 +256,7 @@ function minimapwarn(corners) {}
 
 function function_e5746ec1() {
   host = util::gethostplayer();
-  all_players = getplayers();
+  all_players = getPlayers();
   var_1645eaac = isDefined(host) && host getstance() == "<dev string:xc4>";
 
   if(!isDefined(host) || var_1645eaac) {
@@ -441,7 +441,7 @@ function function_986c93f0() {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size <= 0) {
     return;
@@ -481,7 +481,7 @@ function function_986c93f0() {
 }
 
 function function_6d793eb9(hornindex) {
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size <= 0) {
     return;
@@ -545,7 +545,7 @@ function body_customization_devgui(mode) {
     var_32e0e50a = getdvarint(#"hash_4976075f146e1fa2", 0);
 
     if(var_35383820 != var_32e0e50a) {
-      players = getplayers();
+      players = getPlayers();
       iprintln("<dev string:x3dc>" + var_32e0e50a + "<dev string:x386>");
 
       foreach(player in players) {

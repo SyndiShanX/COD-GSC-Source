@@ -121,7 +121,7 @@ stealth_shot(var_0) {
   self setflaggedanimknobrestart("fire_notify", var_5, 1, 0.05, 1.0);
   wait 0.1;
   var_7 = var_0 getEye();
-  var_8 = vectornormalize(var_7 - self gettagorigin("tag_flash"));
+  var_8 = vectorNormalize(var_7 - self gettagorigin("tag_flash"));
   var_8 = var_8 * 20;
   var_9 = var_7 - var_8;
   magicbullet(self.weapon, var_9, var_7);
@@ -132,7 +132,7 @@ stealth_shot(var_0) {
 magic_stealth_shot(var_0, var_1) {
   var_2 = self gettagorigin("tag_flash");
   var_3 = var_0 getEye();
-  var_4 = vectornormalize(var_3 - var_2);
+  var_4 = vectorNormalize(var_3 - var_2);
   var_4 = var_4 * 64;
   var_5 = var_3 + var_4;
   var_0.health = 1;

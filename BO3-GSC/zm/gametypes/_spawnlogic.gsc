@@ -734,7 +734,7 @@ function spawnpointupdate_zm(spawnpoint) {
     spawnpoint.distsum[team] = 0;
     spawnpoint.enemydistsum[team] = 0;
   }
-  players = getplayers();
+  players = getPlayers();
   spawnpoint.numplayersatlastupdate = players.size;
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -1318,7 +1318,7 @@ function ispointvulnerable(playerorigin) {
   distsqrd = distancesquared(pos, playerpos);
   forward = anglesToForward(self.angles);
   if(distsqrd < (level.bettydetectionradius * level.bettydetectionradius)) {
-    playerdir = vectornormalize(playerpos - pos);
+    playerdir = vectorNormalize(playerpos - pos);
     angle = acos(vectordot(playerdir, forward));
     if(angle < level.bettydetectionconeangle) {
       return true;

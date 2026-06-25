@@ -205,7 +205,7 @@ function_b6f15bda() {
   tacpoints = undefined;
 
   if(lengthsquared(var_9d59ceab) > 20 && isDefined(velocity) && !(isDefined(self.ai.var_82cafa78) && self.ai.var_82cafa78)) {
-    var_84e7232 = var_56bd1bef + vectorscale(vectornormalize(velocity), 100);
+    var_84e7232 = var_56bd1bef + vectorscale(vectorNormalize(velocity), 100);
     var_84e7232 = getclosestpointonnavmesh(var_84e7232, 100);
 
     if(isDefined(var_84e7232) && isDefined(self.ai.escort.var_db083d2c)) {

@@ -741,7 +741,7 @@ _id_6EA6(var_0) {
       }
     }
 
-    var_5 = getent("control_zone", "targetname");
+    var_5 = getEnt("control_zone", "targetname");
 
     if(isDefined(var_5)) {
       var_5._id_0481 = "hardpoint_zone";

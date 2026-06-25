@@ -78,15 +78,15 @@ class cinteractobj {
           m_t_interact.angles = e_object.angles;
         }
 
-        m_t_interact usetriggerrequirelookat(is_true(e_object.require_look_at));
+        m_t_interact useTriggerRequireLookAt(is_true(e_object.require_look_at));
         m_t_interact usetriggerrequirelooktoward(is_true(e_object.require_look_toward));
       }
     }
 
     m_t_interact.trigger_offset = m_n_trigger_offset;
-    m_t_interact triggerignoreteam();
+    m_t_interact triggerIgnoreTeam();
     m_t_interact setvisibletoall();
-    m_t_interact setcursorhint("HINT_INTERACTIVE_PROMPT");
+    m_t_interact setCursorHint("HINT_INTERACTIVE_PROMPT");
     m_t_interact.var_a865c2cd = isDefined(m_s_bundle.var_a865c2cd) ? m_s_bundle.var_a865c2cd : 0;
     m_t_interact.str_hint = m_str_hint;
 
@@ -179,14 +179,14 @@ class cinteractobj {
     }
 
     mdl_gameobject.t_interact = m_t_interact;
-    mdl_gameobject.t_interact enablelinkto();
+    mdl_gameobject.t_interact enablelinkTo();
     mdl_gameobject.e_object = e_object;
 
     if(isentity(mdl_gameobject.e_object)) {
       if(isDefined(m_str_tag)) {
-        mdl_gameobject.t_interact linkto(mdl_gameobject.e_object, m_str_tag);
+        mdl_gameobject.t_interact linkTo(mdl_gameobject.e_object, m_str_tag);
       } else {
-        mdl_gameobject.t_interact linkto(mdl_gameobject.e_object);
+        mdl_gameobject.t_interact linkTo(mdl_gameobject.e_object);
       }
     }
 
@@ -340,7 +340,7 @@ class cinteractobj {
 
     str_side_team = var_15547ed4 || isDefined(e_object.var_f66cebb1) ? m_str_team : #"group_none";
 
-    for(var_fb20e730 = getplayers(m_str_team); var_fb20e730.size; var_fb20e730 = getplayers(m_str_team)) {
+    for(var_fb20e730 = getPlayers(m_str_team); var_fb20e730.size; var_fb20e730 = getPlayers(m_str_team)) {
       foreach(e_player in var_fb20e730) {
         if(function_aa070e6f(e_player) && !isinarray(var_2854e7f7, e_player.team) && !e_player isinvehicle()) {
           voiceparams = {
@@ -775,7 +775,7 @@ function private function_d85d429b(var_7d01398c) {
   var_7d01398c endon(#"death");
   self.trigger unlink();
   self.trigger.origin = var_7d01398c.curorigin;
-  self.trigger linkto(var_7d01398c);
+  self.trigger linkTo(var_7d01398c);
   self.e_object.origin = var_7d01398c.curorigin;
   self.e_object.angles = var_7d01398c.e_object.angles;
   self.var_68d8f95e = var_7d01398c;
@@ -797,7 +797,7 @@ function private function_d85d429b(var_7d01398c) {
         self set_flags(1);
         self.trigger unlink();
         self.trigger.origin = var_7d01398c.carrier.origin + (0, 0, 64);
-        self.trigger linkto(var_7d01398c.carrier);
+        self.trigger linkTo(var_7d01398c.carrier);
         var_7d01398c waittill(#"dropped", #"reset", #"death");
         self set_flags(0);
         self.interrupted = undefined;
@@ -806,7 +806,7 @@ function private function_d85d429b(var_7d01398c) {
         self.e_object.origin = var_7d01398c.curorigin;
         self.e_object.angles = var_7d01398c.angles;
         waitframe(2);
-        self.trigger linkto(var_7d01398c);
+        self.trigger linkTo(var_7d01398c);
         self allow_use(var_f857ad18);
       }
     }
@@ -828,7 +828,7 @@ function function_e19c7c52(var_7537f028, var_1511a953 = 0) {
   }
 
   if(isentity(var_7537f028) && var_1511a953) {
-    mdl_gameobject.trigger linkto(var_7537f028);
+    mdl_gameobject.trigger linkTo(var_7537f028);
   }
 }
 
@@ -1008,8 +1008,8 @@ function create_carry_object(ownerteam, trigger, visuals, offset, objectivename,
 
   trigger.baseorigin = trigger.origin;
   carryobject.trigger = trigger;
-  trigger enablelinkto();
-  carryobject linkto(trigger);
+  trigger enablelinkTo();
+  carryobject linkTo(trigger);
   carryobject.useweapon = undefined;
 
   if(!isDefined(offset)) {
@@ -1061,13 +1061,13 @@ function create_carry_object(ownerteam, trigger, visuals, offset, objectivename,
   carryobject clear_progress();
 
   if(carryobject.triggertype == "use") {
-    carryobject.trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+    carryobject.trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
     carryobject.userate = 1;
     carryobject thread use_object_use_think(!allowinitialholddelay, !allowweaponcyclingduringhold);
 
     if(!carryobject function_4ea98a09() && isDefined(carryobject.trigger.str_hint)) {
-      carryobject.trigger setcursorhint("HINT_NOICON");
-      carryobject.trigger sethintstring(carryobject.trigger.str_hint);
+      carryobject.trigger setCursorHint("HINT_NOICON");
+      carryobject.trigger setHintString(carryobject.trigger.str_hint);
     }
   } else {
     carryobject function_e553e480();
@@ -1308,11 +1308,11 @@ function return_home() {
       }
 
       self.ignore_use_time[self.carrier getentitynumber()] = level.time + 500;
-      self.carrier sethintstring("");
+      self.carrier setHintString("");
 
       if(isDefined(self.trigger) && !self function_4ea98a09() && isDefined(self.trigger.str_hint)) {
-        self.trigger setcursorhint("HINT_NOICON");
-        self.trigger sethintstring(self.trigger.str_hint);
+        self.trigger setCursorHint("HINT_NOICON");
+        self.trigger setHintString(self.trigger.str_hint);
       }
     }
 
@@ -1452,7 +1452,7 @@ function set_dropped(var_e329a2fa) {
 
     if(trace[#"fraction"] < 1) {
       forward = (cos(tempangle), sin(tempangle), 0);
-      forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
+      forward = vectorNormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
 
       if(isDefined(trace[#"walkable"])) {
         if(trace[#"walkable"] == 0) {
@@ -1464,7 +1464,7 @@ function set_dropped(var_e329a2fa) {
 
             if(reflect_trace[#"fraction"] < 1) {
               forward = (cos(tempangle), sin(tempangle), 0);
-              forward = vectornormalize(forward - vectorscale(reflect_trace[#"normal"], vectordot(forward, reflect_trace[#"normal"])));
+              forward = vectorNormalize(forward - vectorscale(reflect_trace[#"normal"], vectordot(forward, reflect_trace[#"normal"])));
             }
           }
         }
@@ -1848,11 +1848,11 @@ function watchholdusedrop() {
         }
 
         self.carryobject.ignore_use_time[self getentitynumber()] = level.time + 500;
-        self sethintstring("");
+        self setHintString("");
 
         if(!self.carryobject function_4ea98a09() && isDefined(self.carryobject.trigger.str_hint)) {
-          self.carryobject.trigger setcursorhint("HINT_NOICON");
-          self.carryobject.trigger sethintstring(self.carryobject.trigger.str_hint);
+          self.carryobject.trigger setCursorHint("HINT_NOICON");
+          self.carryobject.trigger setHintString(self.carryobject.trigger.str_hint);
         }
 
         self.carryobject thread set_dropped();
@@ -1883,10 +1883,10 @@ function droponholdusebutton() {
   }
 
   self.carryobject.droptrigger sethintlowpriority(1);
-  self.carryobject.droptrigger sethintstring(#"hash_7944e4820b9c7227");
-  self.carryobject.droptrigger setcursorhint("HINT_NOICON", self.carryobject);
-  self.carryobject.droptrigger enablelinkto();
-  self.carryobject.droptrigger linkto(self, "tag_origin", (0, 0, 15));
+  self.carryobject.droptrigger setHintString(#"hash_7944e4820b9c7227");
+  self.carryobject.droptrigger setCursorHint("HINT_NOICON", self.carryobject);
+  self.carryobject.droptrigger enablelinkTo();
+  self.carryobject.droptrigger linkTo(self, "tag_origin", (0, 0, 15));
   self.carryobject.droptrigger setteamfortrigger(self.team);
   self.carryobject.droptrigger setinvisibletoall();
   self.carryobject.droptrigger setvisibletoplayer(self);
@@ -1928,11 +1928,11 @@ function function_2544bab6() {
       }
 
       self.carryobject.ignore_use_time[self getentitynumber()] = level.time + 500;
-      self sethintstring("");
+      self setHintString("");
 
       if(!self.carryobject function_4ea98a09() && isDefined(self.carryobject.trigger.str_hint)) {
-        self.carryobject.trigger setcursorhint("HINT_NOICON");
-        self.carryobject.trigger sethintstring(self.carryobject.trigger.str_hint);
+        self.carryobject.trigger setCursorHint("HINT_NOICON");
+        self.carryobject.trigger setHintString(self.carryobject.trigger.str_hint);
       }
 
       self.carryobject thread set_dropped();
@@ -1956,10 +1956,10 @@ function function_bee2a129() {
   }
 
   self.carryobject.droptrigger sethintlowpriority(1);
-  self.carryobject.droptrigger sethintstring(#"hash_50dd3fca372feb35");
-  self.carryobject.droptrigger setcursorhint("HINT_NOICON", self.carryobject);
-  self.carryobject.droptrigger enablelinkto();
-  self.carryobject.droptrigger linkto(self, "tag_origin", (0, 0, 15));
+  self.carryobject.droptrigger setHintString(#"hash_50dd3fca372feb35");
+  self.carryobject.droptrigger setCursorHint("HINT_NOICON", self.carryobject);
+  self.carryobject.droptrigger enablelinkTo();
+  self.carryobject.droptrigger linkTo(self, "tag_origin", (0, 0, 15));
   self.carryobject.droptrigger setteamfortrigger(self.team);
   self.carryobject.droptrigger setinvisibletoall();
   self.carryobject.droptrigger setvisibletoplayer(self);
@@ -1975,7 +1975,7 @@ function create_generic_object(ownerteam, trigger, visuals, offset) {
   generic_object.keyobject = undefined;
   generic_object.triggertype = "proximity";
   generic_object.trigger = trigger;
-  generic_object linkto(trigger);
+  generic_object linkTo(trigger);
 
   for(index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
@@ -2033,7 +2033,7 @@ function create_use_object(ownerteam, trigger, visuals, var_da26a41 = (0, 0, 0),
   }
 
   useobject.trigger = trigger;
-  useobject linkto(trigger);
+  useobject linkTo(trigger);
 
   for(index = 0; index < visuals.size; index++) {
     visuals[index].baseorigin = visuals[index].origin;
@@ -2059,10 +2059,10 @@ function create_use_object(ownerteam, trigger, visuals, var_da26a41 = (0, 0, 0),
       useobject enable_object();
     }
   } else {
-    useobject.trigger setcursorhint("HINT_NOICON");
+    useobject.trigger setCursorHint("HINT_NOICON");
 
     if(isDefined(useobject.trigger.str_hint)) {
-      useobject.trigger sethintstring(useobject.trigger.str_hint);
+      useobject.trigger setHintString(useobject.trigger.str_hint);
     }
 
     if(is_true(self.m_b_reusable)) {
@@ -3085,10 +3085,10 @@ function use_hold_think(player, disableweaponcyclingduringhold) {
       if(is_true(self.var_2e39d9ef)) {
         player playerlinktodelta(gameobject_link, "tag_origin", 1, 0, 0, 0, 0);
       } else {
-        player playerlinkto(gameobject_link);
+        player playerlinkTo(gameobject_link);
       }
     } else {
-      player playerlinkto(self.trigger);
+      player playerlinkTo(self.trigger);
       player playerlinkedoffsetenable();
     }
   }
@@ -3675,7 +3675,7 @@ function set_use_text(text) {
 }
 
 function set_use_hint_text(text) {
-  self.trigger sethintstring(text);
+  self.trigger setHintString(text);
 }
 
 function allow_carry(relativeteam) {
@@ -4324,8 +4324,8 @@ function create_pack_object(ownerteam, trigger, visuals, offset, objectivename, 
 
   trigger.baseorigin = trigger.origin;
   packobject.trigger = trigger;
-  trigger enablelinkto();
-  packobject linkto(trigger);
+  trigger enablelinkTo();
+  packobject linkTo(trigger);
   packobject.useweapon = undefined;
 
   for(index = 0; index < visuals.size; index++) {
@@ -4374,7 +4374,7 @@ function create_pack_object(ownerteam, trigger, visuals, offset, objectivename, 
   packobject.var_5c196da4 = 0;
 
   if(packobject.triggertype == "use") {
-    packobject.trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+    packobject.trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
     packobject.userate = 1;
     packobject thread use_object_use_think(!allowinitialholddelay, !allowweaponcyclingduringhold);
   } else {

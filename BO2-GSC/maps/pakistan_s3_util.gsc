@@ -120,9 +120,9 @@ player_soct_driving_rumble() {
       rval = randomint(1000);
 
       if(rval < 800) {
-        level.player playrumbleonentity("pullout_small");
+        level.player playRumbleOnEntity("pullout_small");
       } else {
-        level.player playrumbleonentity("anim_light");
+        level.player playRumbleOnEntity("anim_light");
       }
 
       speed_frac = (max_speed - speed) / max_speed;
@@ -140,15 +140,15 @@ player_soct_driving_rumble() {
 }
 
 move_friendly_into_position(is_not_intro) {
-  s_skipto = getstruct("skipto_" + level.skipto_point, "targetname");
+  s_skipto = getStruct("skipto_" + level.skipto_point, "targetname");
   level.vh_player_soct.origin = s_skipto.origin;
   level.vh_player_soct.angles = s_skipto.angles;
-  s_skipto = getstruct("skipto_" + level.skipto_point + "_salazar", "targetname");
+  s_skipto = getStruct("skipto_" + level.skipto_point + "_salazar", "targetname");
   level.vh_salazar_soct.origin = s_skipto.origin;
   level.vh_salazar_soct.angles = s_skipto.angles;
   nd_start = getvehiclenode(level.skipto_point + "_salazar_start", "script_noteworthy");
   level.vh_salazar_soct thread go_path(nd_start);
-  s_skipto = getstruct("skipto_" + level.skipto_point + "_drone", "targetname");
+  s_skipto = getStruct("skipto_" + level.skipto_point + "_drone", "targetname");
   level.vh_player_drone.origin = s_skipto.origin;
   level.vh_player_drone.angles = s_skipto.angles;
   nd_start = getvehiclenode(level.skipto_point + "_drone_start", "script_noteworthy");
@@ -156,7 +156,7 @@ move_friendly_into_position(is_not_intro) {
 }
 
 get_player_on_soc_t() {
-  s_skipto = getstruct("skipto_" + level.skipto_point, "targetname");
+  s_skipto = getStruct("skipto_" + level.skipto_point, "targetname");
   self.origin = s_skipto.origin;
   self.angles = s_skipto.angles;
   self useby(level.player);
@@ -344,7 +344,7 @@ salazar_soct_speed_control() {
   while(true) {
     v_player_forward = anglesToForward(level.vh_player_soct.angles);
     v_salazar_pos = (self.origin[0], self.origin[1], level.vh_player_soct.origin[2]);
-    n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_salazar_pos - level.vh_player_soct.origin));
+    n_dot_to_player = vectordot(v_player_forward, vectorNormalize(v_salazar_pos - level.vh_player_soct.origin));
 
     if(n_dot_to_player > 0.25) {
       n_speed_new = level.vh_player_soct getspeedmph();
@@ -396,7 +396,7 @@ player_in_soct() {
   }
   v_player_forward = anglesToForward(level.vh_player_soct.angles);
   v_heli_pos = (self.origin[0], self.origin[1], level.vh_player_soct.origin[2]);
-  n_dot_to_heli = vectordot(v_player_forward, vectornormalize(v_heli_pos - level.vh_player_soct.origin));
+  n_dot_to_heli = vectordot(v_player_forward, vectorNormalize(v_heli_pos - level.vh_player_soct.origin));
 
   if(n_dot_to_heli > 0.4) {
     n_speed_new = self _normal_speed_control();
@@ -449,7 +449,7 @@ _drone_dot_to_player() {
   self endon("death");
   v_drone_forward = anglesToForward(self.angles);
   v_heli_pos = (self.origin[0], self.origin[1], level.vh_player_soct.origin[2]);
-  n_dot_to_player = vectordot(v_drone_forward, vectornormalize(level.vh_player_soct.origin - v_heli_pos));
+  n_dot_to_player = vectordot(v_drone_forward, vectorNormalize(level.vh_player_soct.origin - v_heli_pos));
   return n_dot_to_player;
 }
 
@@ -586,7 +586,7 @@ boost_rumble(time_left) {
   dt = 0.2;
 
   while(time_left > 0) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait(dt);
     time_left = time_left - dt;
   }
@@ -723,7 +723,7 @@ enemy_soct_attach_wheel() {
   v_origin = self gettagorigin("tag_steeringwheel");
   v_angles = self gettagangles("tag_steeringwheel");
   e_wheel = spawn_model("veh_t6_mil_soc_t_steeringwheel", v_origin, v_angles);
-  e_wheel linkto(self, "tag_steeringwheel");
+  e_wheel linkTo(self, "tag_steeringwheel");
   self.steering_wheel = e_wheel;
 }
 
@@ -799,10 +799,10 @@ enemy_respawn_listener() {
       vh_soct = spawn_vehicle_from_targetname("soct_respawner");
       nd_start = getvehiclenode(self.target, "targetname");
       vh_soct thread go_path(nd_start);
-      sp_driver = getent("driver_respawner", "targetname");
+      sp_driver = getEnt("driver_respawner", "targetname");
       ai_driver = sp_driver spawn_drone();
       ai_driver enter_vehicle(vh_soct, "tag_driver");
-      sp_shooter = getent("driver_respawner", "targetname");
+      sp_shooter = getEnt("driver_respawner", "targetname");
       ai_shooter = sp_shooter spawn_drone();
       ai_shooter enter_vehicle(vh_soct);
       vh_soct thread enemy_soct_setup();
@@ -853,7 +853,7 @@ vehicle_collision_watcher() {
           self clearvehgoalpos();
           self.dontfreeme = 1;
           level.vh_player_soct dodamage(200, level.vh_player_soct.origin);
-          self launchvehicle(vectornormalize(level.vh_player_soct.velocity) * 75, location, 0, 1);
+          self launchvehicle(vectorNormalize(level.vh_player_soct.velocity) * 75, location, 0, 1);
           earthquake(0.75, 1.0, self.origin, 512, level.player);
           self playSound("evt_soct_vehicle_hit");
 
@@ -879,7 +879,7 @@ vehicle_collision_slows_down_player(mag_scale) {
   level notify("player_soct_slowdown_collision");
 
   for(i = 0; i < 5; i++) {
-    level.vh_player_soct launchvehicle(vectornormalize(level.vh_player_soct.velocity) * -30.0);
+    level.vh_player_soct launchvehicle(vectorNormalize(level.vh_player_soct.velocity) * -30.0);
     wait 0.01;
   }
 }
@@ -943,7 +943,7 @@ soct_death_launch() {
   if(isDefined(attacker)) {
     self.dontfreeme = 1;
     self getoffpath();
-    self launchvehicle(vectornormalize(self.velocity) * 100 + vectorscale((0, 0, 1), 50.0), point, 0, 1);
+    self launchvehicle(vectorNormalize(self.velocity) * 100 + vectorscale((0, 0, 1), 50.0), point, 0, 1);
     self playSound("evt_enemy_soct_flip");
     wait 1.5;
     self.dontfreeme = 0;
@@ -965,8 +965,8 @@ firescout_fire_missiles() {
 
   while(isalive(self)) {
     if(isDefined(level.player.missileturrettarget)) {
-      self setgunnertargetent(level.player.missileturrettarget, (0, 0, 0), 0);
-      self setgunnertargetent(level.player.missileturrettarget, (0, 0, 0), 1);
+      self setgunnertargetEnt(level.player.missileturrettarget, (0, 0, 0), 0);
+      self setgunnertargetEnt(level.player.missileturrettarget, (0, 0, 0), 1);
     } else {
       v_aim_pos = self get_player_aim_pos(20000);
       self setgunnertargetvec(v_aim_pos, 0);
@@ -1213,7 +1213,7 @@ apache_setup() {
 }
 
 purple_smoke() {
-  s_purple_smoke = getstruct("purple_smoke", "targetname");
+  s_purple_smoke = getStruct("purple_smoke", "targetname");
   play_fx("fx_pak_smk_signal_dist", s_purple_smoke.origin, s_purple_smoke.angles);
 }
 
@@ -1310,7 +1310,7 @@ can_intersect_player(vh_enemy) {
 is_soct_in_front_of_player() {
   v_player_forward = anglesToForward(level.player.angles);
   v_enemy_pos = (self.origin[0], self.origin[1], level.player.origin[2]);
-  n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_enemy_pos - level.player.origin));
+  n_dot_to_player = vectordot(v_player_forward, vectorNormalize(v_enemy_pos - level.player.origin));
 
   if(n_dot_to_player > 0.15) {
     return true;
@@ -1322,7 +1322,7 @@ is_soct_in_front_of_player() {
 is_soct_behind_the_player() {
   v_player_forward = anglesToForward(level.player.angles);
   v_enemy_pos = (self.origin[0], self.origin[1], level.player.origin[2]);
-  n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_enemy_pos - level.player.origin));
+  n_dot_to_player = vectordot(v_player_forward, vectorNormalize(v_enemy_pos - level.player.origin));
 
   if(n_dot_to_player < 0) {
     return true;
@@ -1401,7 +1401,7 @@ enemy_soct_speed_control(override_max_speed_ahead) {
 
     if(level.player.vehicle_state != 2) {
       dist = distance(level.player.origin, self.origin);
-      v_dir = vectornormalize(level.player.origin - self.origin);
+      v_dir = vectorNormalize(level.player.origin - self.origin);
       v_forward = anglesToForward(self.angles);
       dp = vectordot(v_dir, v_forward);
     }
@@ -1452,7 +1452,7 @@ enemy_soct_speed_control(override_max_speed_ahead) {
     if(level.player.vehicle_state == 2 || isDefined(override_max_speed_ahead)) {
       v_player_forward = anglesToForward(level.player.angles);
       v_enemy_pos = (self.origin[0], self.origin[1], level.player.origin[2]);
-      n_dot_to_player = vectordot(v_player_forward, vectornormalize(v_enemy_pos - level.player.origin));
+      n_dot_to_player = vectordot(v_player_forward, vectorNormalize(v_enemy_pos - level.player.origin));
 
       if(isDefined(self.wait_for_the_player_speed)) {
         n_speed_new = self.wait_for_the_player_speed;
@@ -1484,9 +1484,9 @@ npc_soct_rams_player_soct(player_soct) {
   up = (0, 0, 1);
 
   for(i = 0; i < 3; i++) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     level.player playSound("exp_veh_large");
-    player_soct launchvehicle(vectornormalize(player_soct.velocity) * 30.0);
+    player_soct launchvehicle(vectorNormalize(player_soct.velocity) * 30.0);
     player_soct launchvehicle(up * 100.0);
     wait 0.1;
   }
@@ -1972,16 +1972,16 @@ update_vehicle_damage_timer() {
 
     if(self.vehicle_health <= 0) {
       self notify("vehicle_destroyed");
-      playsoundatposition("evt_soct_explo", (0, 0, 0));
+      playSoundAtPosition("evt_soct_explo", (0, 0, 0));
 
       if(is_player_in_drone()) {
-        playsoundatposition("evt_drone_plr_explo", (0, 0, 0));
+        playSoundAtPosition("evt_drone_plr_explo", (0, 0, 0));
         wait 1;
         missionfailedwrapper();
       } else {
         soct_swap_to_dead_version();
         playFXOnTag(level._effect["soct_player_exp"], level.vh_player_soct, "body_animate_jnt");
-        playsoundatposition("evt_soct_explo_long", (0, 0, 0));
+        playSoundAtPosition("evt_soct_explo_long", (0, 0, 0));
         wait 2.0;
         missionfailedwrapper();
       }
@@ -2040,7 +2040,7 @@ fx_exp_model_triggered(str_model_name, v_origin, fx_name, fx_dir, player_collisi
   }
 
   if(!isDefined(fx_dir)) {
-    fx_dir = vectornormalize(v_origin - level.player.origin);
+    fx_dir = vectorNormalize(v_origin - level.player.origin);
   }
 
   if(isDefined(exploder_id) && exploder_id != -1) {
@@ -2060,7 +2060,7 @@ fx_exp_model_triggered(str_model_name, v_origin, fx_name, fx_dir, player_collisi
     str_play_sound = "evt_soct_window_explode_2";
   }
 
-  playsoundatposition(str_play_sound, v_origin);
+  playSoundAtPosition(str_play_sound, v_origin);
 
   if(isDefined(player_collision)) {
     earthquake(0.65, 1.0, level.player.origin, 512);
@@ -2069,7 +2069,7 @@ fx_exp_model_triggered(str_model_name, v_origin, fx_name, fx_dir, player_collisi
 
   if(isDefined(a_str_more_models_to_delete)) {
     for(i = 0; i < a_str_more_models_to_delete.size; i++) {
-      e_ent = getent(a_str_more_models_to_delete[i], "targetname");
+      e_ent = getEnt(a_str_more_models_to_delete[i], "targetname");
       e_ent delete();
     }
   }
@@ -2106,11 +2106,11 @@ shoot_or_collide_triggers_creates_fx(str_collide_trigger, str_damage_trigger, st
   level endon(str_model_to_delete);
 
   if(isDefined(str_collide_trigger)) {
-    e_collide_trigger = getent(str_collide_trigger, "targetname");
+    e_collide_trigger = getEnt(str_collide_trigger, "targetname");
   }
 
-  e_damage_trigger = getent(str_damage_trigger, "targetname");
-  s_struct = getstruct(e_damage_trigger.target, "targetname");
+  e_damage_trigger = getEnt(str_damage_trigger, "targetname");
+  s_struct = getStruct(e_damage_trigger.target, "targetname");
   v_position = s_struct.origin;
   exploder_id = -1;
 
@@ -2122,7 +2122,7 @@ shoot_or_collide_triggers_creates_fx(str_collide_trigger, str_damage_trigger, st
   e_damage_trigger thread damage_trigger_shoot_or_collide(str_model_to_delete, v_position, str_fx_name, a_str_more_models_to_delete, exploder_id);
 
   if(isDefined(str_vehicle_info_volume)) {
-    e_info_volume = getent(str_vehicle_info_volume, "targetname");
+    e_info_volume = getEnt(str_vehicle_info_volume, "targetname");
     e_info_volume thread info_volume_vehicle_collide(str_model_to_delete, v_position, str_fx_name, a_str_more_models_to_delete, exploder_id);
   }
 
@@ -2181,10 +2181,10 @@ shoot_or_collide_triggers_calls_fxanim_notify(str_collide_trigger, str_damage_tr
   level endon(str_fxanim_notify);
 
   if(isDefined(str_collide_trigger)) {
-    e_collide_trigger = getent(str_collide_trigger, "targetname");
+    e_collide_trigger = getEnt(str_collide_trigger, "targetname");
   }
 
-  e_damage_trigger = getent(str_damage_trigger, "targetname");
+  e_damage_trigger = getEnt(str_damage_trigger, "targetname");
   e_damage_trigger thread fxanim_damage_trigger_shoot(str_fxanim_notify);
 
   if(isDefined(str_collide_trigger)) {
@@ -2234,7 +2234,7 @@ ai_explosive_death(height, radius, delay) {
     x = randomintrange(radius * -1, radius);
     y = randomintrange(radius * -1, radius);
     v_launch = (x, y, height);
-    vectornormalize(v_launch);
+    vectorNormalize(v_launch);
     v_launch = v_launch * 1.5;
     self launchragdoll(v_launch, "J_SpineUpper");
     wait 2;
@@ -2251,7 +2251,7 @@ cleanup_ai_on_level_notify(str_level_notify) {
 drone_follow_linked_structs(str_struct, start_speed, use_near_goal, only_use_turret, look_at_ent, target_player) {
   self endon("death");
   self thread enemy_drone_setup(only_use_turret);
-  s_struct = getstruct(str_struct, "targetname");
+  s_struct = getStruct(str_struct, "targetname");
 
   if(isDefined(s_struct.script_delay) && s_struct.script_delay > 0) {
     wait(s_struct.script_delay);
@@ -2273,7 +2273,7 @@ drone_follow_linked_structs(str_struct, start_speed, use_near_goal, only_use_tur
   self setneargoalnotifydist(512);
 
   while(true) {
-    s_next = getstruct(s_struct.target, "targetname");
+    s_next = getStruct(s_struct.target, "targetname");
     self setvehgoalpos(s_next.origin);
 
     if(isDefined(use_near_goal)) {
@@ -2501,10 +2501,10 @@ pak3_kill_vehicle(e_vehicle) {
 ai_run_to_goal_wait_kill_flag(str_killoff_flag) {
   self endon("death");
   self thread run_over();
-  self set_goalradius(48);
+  self set_goalRadius(48);
   self set_ignoreme(1);
   self waittill("goal");
-  self set_goalradius(2048);
+  self set_goalRadius(2048);
   self set_ignoreme(0);
 
   while(true) {
@@ -2526,7 +2526,7 @@ kill_vehicle_on_flag(str_flag) {
 }
 
 force_trigger(str_trigger_name) {
-  e_trigger = getent(str_trigger_name, "targetname");
+  e_trigger = getEnt(str_trigger_name, "targetname");
 
   if(isDefined(e_trigger)) {
     e_trigger activate_trigger();
@@ -2589,7 +2589,7 @@ water_sheeting_rumble() {
   earthquake(0.65, 1.0, level.player.origin, 512);
 
   for(i = 0; i < 4; i++) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     wait 0.1;
   }
 }
@@ -2599,7 +2599,7 @@ bounce_player_after_water_sheeting(bounce_scale) {
     bounce_scale = 1.0;
   }
 
-  v_dir = vectornormalize(anglesToForward(level.vh_player_soct.angles));
+  v_dir = vectorNormalize(anglesToForward(level.vh_player_soct.angles));
   v_down = (0, 0, -1);
   dp = vectordot(v_dir, v_down);
 
@@ -2616,7 +2616,7 @@ bounce_player_after_water_sheeting(bounce_scale) {
   bounce_scale = bounce_scale * directional_impact_scale;
 
   for(i = 0; i < 10; i++) {
-    dir_size = vectornormalize(level.vh_player_soct.velocity);
+    dir_size = vectorNormalize(level.vh_player_soct.velocity);
     up_size = (0, 0, 1);
     r0 = 40;
     r1 = 150;
@@ -2924,7 +2924,7 @@ player_soct_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
       reject_dist = 336;
     }
 
-    v_dir = vectornormalize(eattacker.origin - self.origin);
+    v_dir = vectorNormalize(eattacker.origin - self.origin);
     v_forward = anglesToForward(self.angles);
     dot = vectordot(v_dir, v_forward);
 
@@ -2992,7 +2992,7 @@ player_drone_damage_override(einflictor, eattacker, idamage, idflags, smeansofde
         reject_dist = 336;
       }
 
-      v_dir = vectornormalize(eattacker.origin - self.origin);
+      v_dir = vectorNormalize(eattacker.origin - self.origin);
       v_forward = anglesToForward(self.angles);
       dot = vectordot(v_dir, v_forward);
 
@@ -3123,7 +3123,7 @@ damage_player_vehicle(n_damage, str_rumble) {
   }
 
   if(isDefined(str_rumble)) {
-    level.player playrumbleonentity(str_rumble);
+    level.player playRumbleOnEntity(str_rumble);
   }
 }
 

@@ -75,7 +75,7 @@ function function_fc04a299(party) {
 }
 
 function function_c98289a5(team) {
-  teammates = getplayers(team);
+  teammates = getPlayers(team);
 
   foreach(player in teammates) {
     if(self == player) {
@@ -312,7 +312,7 @@ function function_a4c9eb05() {
   if(self.squad != #"invalid") {
     squadmates = function_c65231e2(self.squad);
   } else {
-    squadmates = getplayers(self.team);
+    squadmates = getPlayers(self.team);
   }
 
   self.teammateindex = self function_80d5f55(squadmates, self getparty());

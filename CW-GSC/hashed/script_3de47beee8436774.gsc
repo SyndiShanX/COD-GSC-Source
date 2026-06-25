@@ -37,7 +37,7 @@
 function function_6ad1ac64(str_skipto, b_starting) {
   util::function_3e65fe0b(0);
   level namespace_b7cfe907::function_d777fe61();
-  level.player setorigin(struct::get("mortar_obj_landing_spot").origin);
+  level.player setOrigin(struct::get("mortar_obj_landing_spot").origin);
   level.player val::set(#"hash_ed07d10944e0fd5", "freezecontrols", 1);
   level.player val::set(#"hash_680eb654d9e9d2ad", "show_hud", 0);
   level.player setnosunshadow();
@@ -177,7 +177,7 @@ function function_b0db9d0f() {
   self val::set(#"landing_vc", "takedamage", 0);
   self val::set(#"landing_vc", "allowdeath", 0);
   self.var_af613220 = util::spawn_model(#"tag_origin", self.origin, self.angles);
-  self linkto(self.var_af613220);
+  self linkTo(self.var_af613220);
   self thread util::delete_on_death_or_notify(self.var_af613220, #"hash_3d8430a495ffefcc");
   self clearforcedgoal();
   self cleargoalvolume();
@@ -333,21 +333,21 @@ function function_234b1ce() {
 function function_e1c02ad2() {
   level endon(#"hash_85243554b3f96e1");
   s_target = struct::get("mortar_courtyard_sign_target");
-  var_d231fd39 = getent("mortar_courtyard_sign_model", "targetname");
+  var_d231fd39 = getEnt("mortar_courtyard_sign_model", "targetname");
   level scene::init(#"hash_3e6782ff3f9727c5");
   var_d231fd39 hide();
   level waittill(#"destory_courtyard_sign");
   level thread scene::play(#"hash_3e6782ff3f9727c5");
   radiusdamage(s_target.origin - (0, 0, 200), 512, 500, 500);
   earthquake(0.25, 1, s_target.origin, 2500);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level waittill(#"hash_f8089be6fd4f682");
   var_d231fd39 show();
 }
 
 function function_9ca7e163() {
   level endon(#"flag_mortar_orbit_complete", #"flag_bell_tower_destroyed");
-  trigger = getent("trigger_bell_tower_damage", "targetname");
+  trigger = getEnt("trigger_bell_tower_damage", "targetname");
   hidemiscmodels("bell_tower_final");
   var_4e227252 = 0;
   level clientfield::set("" + #"hash_147afd2c82d374fe", 1);
@@ -383,7 +383,7 @@ function function_2c4d7184() {
   s_tower = struct::get("mortar_orbit_bell_tower_target");
   radiusdamage(s_tower.origin, 128, 300, 100);
   earthquake(0.25, 1, s_tower.origin, 10000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level thread scene::play(#"hash_45aea7646e25ef1f");
   level waittill(#"hash_3057933f3c7c3d18");
   showmiscmodels("bell_tower_final");
@@ -478,9 +478,9 @@ function function_6acbfbb1(b_starting = 0) {
     n_time = n_dist / n_speed;
     self thread function_27b92aed(n_time);
     var_67ae4496 = util::spawn_model(#"tag_origin", level.var_7466d419.origin, level.var_7466d419.angles);
-    level.var_7466d419 linkto(var_67ae4496);
-    var_67ae4496 moveto(var_8720c122.origin, n_time);
-    var_67ae4496 rotateto(var_8720c122.angles, n_time, 1);
+    level.var_7466d419 linkTo(var_67ae4496);
+    var_67ae4496 moveTo(var_8720c122.origin, n_time);
+    var_67ae4496 rotateTo(var_8720c122.angles, n_time, 1);
     var_67ae4496 waittill(#"movedone", #"rotatedone");
     var_67ae4496 delete();
   }
@@ -683,7 +683,7 @@ function function_6610ecb5() {
   var_33d2e98f = struct::get("mortar_orbit_tower_upper");
   s_target = struct::get("mortar_orbit_rpg_end_1");
   var_98997b7 = getweapon(#"hash_513c26c6a751d20e");
-  v_velocity = vectornormalize(s_target.origin - var_33d2e98f.origin) * 2000;
+  v_velocity = vectorNormalize(s_target.origin - var_33d2e98f.origin) * 2000;
 
   for(i = 0; i < 3; i++) {
     missle = ai_enemy magicmissile(var_98997b7, var_33d2e98f.origin, v_velocity);
@@ -1010,7 +1010,7 @@ function function_382a326a() {
   s_target = struct::get("mortar_courtyard_sign_target");
   var_98997b7 = getweapon(#"hash_513c26c6a751d20e");
   rocketorigin = self gettagorigin("tag_flash");
-  v_velocity = vectornormalize(s_target.origin - rocketorigin) * 2000;
+  v_velocity = vectorNormalize(s_target.origin - rocketorigin) * 2000;
 
   for(i = 0; i < 3; i++) {
     self magicmissile(var_98997b7, rocketorigin, v_velocity);
@@ -1413,7 +1413,7 @@ function function_b6a33802(a_ents) {
 
   if(isalive(enemy)) {
     enemy.script_objective = "armada_mortar_start";
-    enemy thread ai::force_goal(getent("mortar_courtyard_vol", "targetname"));
+    enemy thread ai::force_goal(getEnt("mortar_courtyard_vol", "targetname"));
   }
 
   level scene::remove_scene_func(#"hash_4e497ef04688df0e", &function_b6a33802, "play");
@@ -1473,7 +1473,7 @@ function function_ce14c867() {
   self scene::play(#"hash_667342d5ad8c3596", "react", self);
 
   if(isalive(self)) {
-    self thread ai::set_goal_ent(getent("mortar_alley_defend_vol", "targetname"));
+    self thread ai::set_goal_ent(getEnt("mortar_alley_defend_vol", "targetname"));
   }
 }
 
@@ -1500,7 +1500,7 @@ function function_6dfe5db1() {
 }
 
 function function_41c74d6e(ents) {
-  var_adfb6bb7 = getent("mortar_landing_defend_vol", "targetname");
+  var_adfb6bb7 = getEnt("mortar_landing_defend_vol", "targetname");
 
   foreach(ent in ents) {
     if(isalive(ent)) {
@@ -1521,7 +1521,7 @@ function function_4a54e325() {
 }
 
 function function_67118793(ents) {
-  var_adfb6bb7 = getent("mortar_landing_defend_vol", "targetname");
+  var_adfb6bb7 = getEnt("mortar_landing_defend_vol", "targetname");
 
   foreach(ent in ents) {
     if(isalive(ent)) {
@@ -1570,12 +1570,12 @@ function function_aaf84792() {
 function function_c25d3a03() {
   self endon(#"death");
   self thread scene::play(#"hash_23d756fc375caf0b", "break_glass", self);
-  var_cc8a06e0 = getent("windowbash_shutter_left", "targetname");
-  var_706eb820 = getent("windowbash_shutter_right", "targetname");
-  var_9914920b = getent("windowbash_shutter_collision", "targetname");
+  var_cc8a06e0 = getEnt("windowbash_shutter_left", "targetname");
+  var_706eb820 = getEnt("windowbash_shutter_right", "targetname");
+  var_9914920b = getEnt("windowbash_shutter_collision", "targetname");
   self waittill(#"hash_55c9dfd739723702");
-  var_cc8a06e0 rotateto((0, 290, 0), 0.1);
-  var_706eb820 rotateto((0, 170, 0), 0.1);
+  var_cc8a06e0 rotateTo((0, 290, 0), 0.1);
+  var_706eb820 rotateTo((0, 170, 0), 0.1);
   var_9914920b delete();
 
   if(isDefined(level.var_52874eb2)) {
@@ -1694,7 +1694,7 @@ function function_28a8f735(ents) {
 
 function function_e9a58f7a(ents) {
   level endon(#"flag_mortar_reached_red_door");
-  var_adfb6bb7 = getent("red_door_defend_vol", "targetname");
+  var_adfb6bb7 = getEnt("red_door_defend_vol", "targetname");
 
   foreach(ent in ents) {
     if(isalive(ent)) {
@@ -1859,7 +1859,7 @@ function function_dcf0253() {
 function function_2f56897b() {
   level endon(#"flag_mortar_upper_mortar_building_reached");
   level flag::wait_till_any(array("flag_mortar_cleanup_mortar_alley", "flag_spawn_mortar_upper_spawner_wave_3"));
-  e_volume = getent("vol_cleanup_mortar_alley", "targetname");
+  e_volume = getEnt("vol_cleanup_mortar_alley", "targetname");
   var_e8643004 = array::get_touching(level.player getenemies(), e_volume);
 
   foreach(enemy in var_e8643004) {
@@ -1872,12 +1872,12 @@ function function_696dc659() {
   level endon(#"flag_mortar_upper_mortar_building_reached");
   level flag::wait_till("flag_mortar_left_path");
 
-  if(isDefined(getent("mortar_center_alley_spawn_trig", "targetname"))) {
-    getent("mortar_center_alley_spawn_trig", "targetname") delete();
+  if(isDefined(getEnt("mortar_center_alley_spawn_trig", "targetname"))) {
+    getEnt("mortar_center_alley_spawn_trig", "targetname") delete();
   }
 
-  if(isDefined(getent("mortar_upper_center_alley_spawn_trig", "targetname"))) {
-    getent("mortar_upper_center_alley_spawn_trig", "targetname") delete();
+  if(isDefined(getEnt("mortar_upper_center_alley_spawn_trig", "targetname"))) {
+    getEnt("mortar_upper_center_alley_spawn_trig", "targetname") delete();
   }
 }
 
@@ -1922,8 +1922,8 @@ function function_cbca12b3(a_ents) {
 
 function function_9f638ce0(str_trigger, var_d1f6ccc2, str_flag) {
   level flag::wait_till_any(array("flag_mortar_upper_mortar_building_reached", str_flag));
-  e_trigger = getent(str_trigger, "targetname");
-  var_5122a7f4 = getent(var_d1f6ccc2, "targetname");
+  e_trigger = getEnt(str_trigger, "targetname");
+  var_5122a7f4 = getEnt(var_d1f6ccc2, "targetname");
 
   if(isDefined(e_trigger)) {
     e_trigger delete();
@@ -2148,13 +2148,13 @@ function function_3d691322() {
   var_e361d345 util::create_cursor_hint(undefined, (0, 0, 3), #"hash_725b894f542049b0", 64, undefined, undefined, undefined, 128);
   var_e361d345 prompts::set_objective("armada_obj_mortar_open_red_door");
   var_e361d345 waittill(#"trigger");
-  playsoundatposition(#"hash_122a651ea798052a", (0, 0, 0));
+  playSoundAtPosition(#"hash_122a651ea798052a", (0, 0, 0));
   namespace_72b0499b::music("7.0_intel");
   level notify(#"hash_1c61fc6e80974e9");
   level function_315508be();
 
-  if(isDefined(getent("mortar_brush_main_door_closed", "targetname"))) {
-    getent("mortar_brush_main_door_closed", "targetname") delete();
+  if(isDefined(getEnt("mortar_brush_main_door_closed", "targetname"))) {
+    getEnt("mortar_brush_main_door_closed", "targetname") delete();
   }
 
   level objectives::complete("armada_obj_mortar_open_red_door");
@@ -2173,8 +2173,8 @@ function function_3d691322() {
   level waittill(#"hash_5084b114ffe7e4aa");
   namespace_72b0499b::music("8.0_landing");
 
-  if(isDefined(getent("mortar_brush_exfil_door_closed", "targetname"))) {
-    getent("mortar_brush_exfil_door_closed", "targetname") delete();
+  if(isDefined(getEnt("mortar_brush_exfil_door_closed", "targetname"))) {
+    getEnt("mortar_brush_exfil_door_closed", "targetname") delete();
   }
 
   level flag::set("obj_flag_mortar_site_a");
@@ -2239,7 +2239,7 @@ function function_110866d(b_init = 0) {
   level.player endon(#"death");
   a_ents = [];
   a_ents[#"player"] = level.player;
-  a_ents[#"maindoor"] = getent("mortar_bunker_door", "targetname");
+  a_ents[#"maindoor"] = getEnt("mortar_bunker_door", "targetname");
 
   if(b_init) {
     level scene::init(#"hash_604c13090504ecb1", a_ents);
@@ -2275,8 +2275,8 @@ function function_a1de7ea2(b_init = 0) {
   a_ents = [];
   a_ents[#"player"] = level.player;
   a_ents[#"buddy"] = level.buddy;
-  a_ents[#"hash_43d8e88908e5b103"] = getent("mortar_door_exfil_right", "targetname");
-  a_ents[#"hash_123dc66ffa6dca8e"] = getent("mortar_door_exfil_left", "targetname");
+  a_ents[#"hash_43d8e88908e5b103"] = getEnt("mortar_door_exfil_right", "targetname");
+  a_ents[#"hash_123dc66ffa6dca8e"] = getEnt("mortar_door_exfil_left", "targetname");
 
   if(b_init) {
     level scene::add_scene_func(#"hash_7d15d57d22684df", &function_cd1dcfed, "sims_exit");
@@ -2394,30 +2394,30 @@ function function_997dda5e(str_skipto, b_starting) {
 }
 
 function function_a4b20ce7() {
-  if(isDefined(getent("mortar_door_exfil_right", "targetname"))) {
-    getent("mortar_door_exfil_right", "targetname") delete();
+  if(isDefined(getEnt("mortar_door_exfil_right", "targetname"))) {
+    getEnt("mortar_door_exfil_right", "targetname") delete();
   }
 
-  if(isDefined(getent("mortar_door_exfil_left", "targetname"))) {
-    getent("mortar_door_exfil_left", "targetname") delete();
+  if(isDefined(getEnt("mortar_door_exfil_left", "targetname"))) {
+    getEnt("mortar_door_exfil_left", "targetname") delete();
   }
 
-  if(isDefined(getent("mortar_brush_exfil_door_closed", "targetname"))) {
-    getent("mortar_brush_exfil_door_closed", "targetname") delete();
+  if(isDefined(getEnt("mortar_brush_exfil_door_closed", "targetname"))) {
+    getEnt("mortar_brush_exfil_door_closed", "targetname") delete();
   }
 
-  if(isDefined(getent("mortar_brush_main_door_closed", "targetname"))) {
-    getent("mortar_brush_main_door_closed", "targetname") delete();
+  if(isDefined(getEnt("mortar_brush_main_door_closed", "targetname"))) {
+    getEnt("mortar_brush_main_door_closed", "targetname") delete();
   }
 
-  if(isDefined(getent("mortar_brush_main_door_open", "targetname"))) {
-    getent("mortar_brush_main_door_open", "targetname") delete();
+  if(isDefined(getEnt("mortar_brush_main_door_open", "targetname"))) {
+    getEnt("mortar_brush_main_door_open", "targetname") delete();
   }
 }
 
 function function_b74e1deb() {
-  mdl_door_right = getent("mortar_door_exfil_right", "targetname");
-  mdl_door_left = getent("mortar_door_exfil_left", "targetname");
+  mdl_door_right = getEnt("mortar_door_exfil_right", "targetname");
+  mdl_door_left = getEnt("mortar_door_exfil_left", "targetname");
   var_717add76 = struct::get("mortar_door_exfil_right_open");
   var_669027f4 = struct::get("mortar_door_exfil_left_open");
   mdl_door_right.origin = var_717add76.origin;
@@ -2425,12 +2425,12 @@ function function_b74e1deb() {
   mdl_door_left.origin = var_669027f4.origin;
   mdl_door_left.angles = var_669027f4.angles;
 
-  if(isDefined(getent("mortar_brush_main_door_open", "targetname"))) {
-    getent("mortar_brush_main_door_open", "targetname") delete();
+  if(isDefined(getEnt("mortar_brush_main_door_open", "targetname"))) {
+    getEnt("mortar_brush_main_door_open", "targetname") delete();
   }
 
-  if(isDefined(getent("mortar_brush_exfil_door_closed", "targetname"))) {
-    getent("mortar_brush_exfil_door_closed", "targetname") delete();
+  if(isDefined(getEnt("mortar_brush_exfil_door_closed", "targetname"))) {
+    getEnt("mortar_brush_exfil_door_closed", "targetname") delete();
   }
 }
 
@@ -2439,8 +2439,8 @@ function function_a11d0dcc(name, starting, direct, player) {
   level flag::set("flag_bamboo_end_end");
   level thread function_a4b20ce7();
 
-  if(isDefined(getent("mortar_courtyard_sign_model", "targetname"))) {
-    getent("mortar_courtyard_sign_model", "targetname") delete();
+  if(isDefined(getEnt("mortar_courtyard_sign_model", "targetname"))) {
+    getEnt("mortar_courtyard_sign_model", "targetname") delete();
   }
 
   if(isDefined(level.var_52874eb2)) {
@@ -2794,7 +2794,7 @@ function function_1df2273d(destructible_event, attacker, weapon, piece_index, po
   }
 
   earthquake(0.25, 1, self.origin, 10000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 
   switch (self.script_noteworthy) {
     case #"hash_ca1398592862981":

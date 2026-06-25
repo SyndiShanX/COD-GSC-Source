@@ -10,7 +10,7 @@
 
 hack_packapunch() {
   vending_weapon_upgrade_trigger = getEntArray("specialty_weapupgrade", "script_noteworthy");
-  perk = getent(vending_weapon_upgrade_trigger[0].target, "targetname");
+  perk = getEnt(vending_weapon_upgrade_trigger[0].target, "targetname");
 
   if(isDefined(perk)) {
     struct = spawnStruct();

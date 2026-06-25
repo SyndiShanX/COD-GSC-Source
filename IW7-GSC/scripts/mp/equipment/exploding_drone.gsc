@@ -198,7 +198,7 @@ func_69D1() {
   thread scripts\mp\weapons::outlineequipmentforowner(self, var_0);
   var_9 = scripts\engine\utility::spawn_tag_origin();
   var_9 thread func_69C1(self);
-  self linkto(var_9);
+  self linkTo(var_9);
   var_10 = 4;
   if(self.issmokeversion) {
     if(issubstr(var_0 getcurrentweapon(), "iw7_unsalmg_mpl")) {
@@ -208,7 +208,7 @@ func_69D1() {
     }
   }
 
-  var_9 moveto(var_2, var_10, 3, 0);
+  var_9 moveTo(var_2, var_10, 3, 0);
   wait(var_10);
   thread func_69C8();
 }
@@ -216,7 +216,7 @@ func_69D1() {
 func_69C9(var_0) {
   self endon("death");
   self.owner endon("disconnect");
-  var_1 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(var_0 - self.origin);
   var_2 = scripts\common\trace::create_contents(1, 1, 1, 0, 1, 1, 0);
   for(;;) {
     if(physics_spherecast(self.origin, self.origin + var_1 * 12, 6, var_2, [self, self.owner], "physicsquery_any")) {

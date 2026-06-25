@@ -47,7 +47,7 @@ function function_27ecd662(localclientnum) {
   player endon(#"disconnect");
 
   while(true) {
-    enemies = getplayers(localclientnum);
+    enemies = getPlayers(localclientnum);
     player = function_27673a7(localclientnum);
     var_3b68ee3f = undefined;
 

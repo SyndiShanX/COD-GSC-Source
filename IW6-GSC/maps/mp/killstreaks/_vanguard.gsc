@@ -59,7 +59,7 @@ setupFx() {
 
 setupHeliRange() {
   level.vanguardRangeTriggers = getEntArray("remote_heli_range", "targetname");
-  level.vanguardMaxHeightEnt = GetEnt("airstrikeheight", "targetname");
+  level.vanguardMaxHeightEnt = getEnt("airstrikeheight", "targetname");
 
   if(isDefined(level.vanguardMaxHeightEnt)) {
     level.vanguardMaxHeight = level.vanguardMaxHeightEnt.origin[2];
@@ -250,7 +250,7 @@ startVanguard(vanguard, streakName, lifeId) {
 
   vanguard.playerLinked = true;
 
-  self CameraLinkTo(vanguard, "tag_origin");
+  self CameralinkTo(vanguard, "tag_origin");
   self RemoteControlVehicle(vanguard);
   vanguard.ammoCount = VANGUARD_AMMO_COUNT;
 
@@ -289,7 +289,7 @@ createVanguard(lifeId, owner, streakName, origin, angles, duration) {
   vanguard.attackArrow.offset = 4;
 
   missileTurret = SpawnTurret("misc_turret", vanguard.origin, "ball_drone_gun_mp", false);
-  missileTurret LinkTo(vanguard, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
+  missileTurret linkTo(vanguard, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
   missileTurret setModel("vehicle_drone_vanguard_gun");
   missileTurret makeTurretInoperable();
   vanguard.turret = missileTurret;
@@ -334,7 +334,7 @@ createVanguard(lifeId, owner, streakName, origin, angles, duration) {
 
   killCamEnt = spawn("script_model", vanguard.origin);
   killCamEnt SetScriptMoverKillCam("explosive");
-  killCamEnt LinkTo(vanguard, "tag_player", (-10, 0, 20), (0, 0, 0));
+  killCamEnt linkTo(vanguard, "tag_player", (-10, 0, 20), (0, 0, 0));
   vanguard.killCamEnt = killCamEnt;
 
   vanguard.spawnGracePeriod = GetTime() + VANGUARD_SPAWN_GRACE_PERIOD;
@@ -625,7 +625,7 @@ updateWeaponUI(vanguard, reloadTime) {
 
 getStartPosition(vanguard, targetPoint) {
   traceLength = (3000, 3000, 3000);
-  dir = VectorNormalize(vanguard.origin - (targetPoint + (0, 0, -400)));
+  dir = vectorNormalize(vanguard.origin - (targetPoint + (0, 0, -400)));
 
   dirRotated = RotateVector(dir, (0, 25, 0));
   startPos = targetPoint + (dirRotated * traceLength);

@@ -98,8 +98,8 @@ unload_bunker_gump() {
 
 close_bunker_hatch() {
   flag_wait("backbreaker_player_anim_complete");
-  e_hatch = getent("bunker_exit_hatch", "targetname");
-  s_hinge = getstruct("bunker_hatch_exit_hinge", "targetname");
+  e_hatch = getEnt("bunker_exit_hatch", "targetname");
+  s_hinge = getStruct("bunker_hatch_exit_hinge", "targetname");
   e_hatch.origin = s_hinge.origin;
   e_hatch.angles = s_hinge.angles;
   level thread mason_final_push_point_of_no_return_cleanup();
@@ -149,13 +149,13 @@ woods_backbreaker() {
   level thread final_push_start_vo();
   run_scene("woods_bunker_exit_approach");
   level thread run_scene("woods_bunker_exit_wait");
-  s_struct = getstruct("bunker_exit_struct", "targetname");
+  s_struct = getStruct("bunker_exit_struct", "targetname");
   set_objective(level.obj_mason_bunker_exit, s_struct, "");
   trigger_wait("begin_woods_backbreaker");
   level thread bunker_exit_vo();
   set_objective(level.obj_mason_bunker_exit, undefined, "delete");
-  e_clip = getent("woods_backbreaker_clip", "targetname");
-  e_clip linkto(level.woods, "tag_origin", (0, 0, 0), (0, 0, 0));
+  e_clip = getEnt("woods_backbreaker_clip", "targetname");
+  e_clip linkTo(level.woods, "tag_origin", (0, 0, 0), (0, 0, 0));
   level thread run_scene("woods_bunker_exit");
   level.woods playSound("evt_mtl_door_kick");
   level.woods thread woods_backbreaker_idle();
@@ -206,7 +206,7 @@ woods_backbreaker_door_kick(e_woods) {
 }
 
 woods_backbreaker_door_fully_open(e_woods) {
-  e_clip = getent("bunker_exit_door_clip", "targetname");
+  e_clip = getEnt("bunker_exit_door_clip", "targetname");
   e_clip delete();
 }
 

@@ -32,8 +32,8 @@
 #namespace namespace_9c42e5f3;
 
 function starting(str_skipto) {
-  level thread scene::init_streamer("scene_tkd_hit1_intro_fly_in", getplayers());
-  level thread scene::init_streamer("scene_tkd_hit1_intro_fly_in_trucks", getplayers());
+  level thread scene::init_streamer("scene_tkd_hit1_intro_fly_in", getPlayers());
+  level thread scene::init_streamer("scene_tkd_hit1_intro_fly_in_trucks", getPlayers());
   level.var_aece851d = [];
   flag::set("heli_door_opening");
   namespace_42da7c51::function_ed760ecb("woods");
@@ -57,7 +57,7 @@ function cleanup(name, starting, direct, player) {
 }
 
 function function_46693791() {
-  driver = getent("driver_woods_kills", "script_parameters", 1);
+  driver = getEnt("driver_woods_kills", "script_parameters", 1);
   level flag::wait_till("heli_intro_path_ally");
   level flag::set("truck_middle_unload");
   level.woods colors::enable();
@@ -89,7 +89,7 @@ function function_46693791() {
 }
 
 function function_67924661(aiarray) {
-  driver = getent("driver_woods_kills", "script_parameters", 1);
+  driver = getEnt("driver_woods_kills", "script_parameters", 1);
 
   foreach(guy in aiarray) {
     guy.ignoreall = 1;

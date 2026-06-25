@@ -50,8 +50,8 @@ function private function_bf06b7aa(victim, attacker, on_use_function, var_f75dca
 
   if(is_true(var_f75dca66)) {
     trigger = spawn("trigger_radius_use", (0, 0, 0), 0, 80, 80);
-    trigger usetriggerrequirelookat();
-    trigger setcursorhint("HINT_ACTIVATE");
+    trigger useTriggerRequireLookAt();
+    trigger setCursorHint("HINT_ACTIVATE");
   } else {
     trigger = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
   }

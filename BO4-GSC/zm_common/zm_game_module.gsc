@@ -99,7 +99,7 @@ game_module_post_zombie_spawn_init() {
 }
 
 respawn_spectators_and_freeze_players() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.sessionstate == "spectator") {
       player[[level.spawnplayer]]();
     }
@@ -125,7 +125,7 @@ damage_callback_no_pvp_damage(einflictor, eattacker, idamage, idflags, smeansofd
 }
 
 respawn_players() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player[[level.spawnplayer]]();
@@ -204,7 +204,7 @@ fireworks_launch(launch_spot) {
     dest = new_dest;
     dist = distance(new_dest.origin + random_offset, firework.origin);
     time = dist / 700;
-    firework moveto(new_dest.origin + random_offset, time);
+    firework moveTo(new_dest.origin + random_offset, time);
     firework waittill(#"movedone");
   }
 

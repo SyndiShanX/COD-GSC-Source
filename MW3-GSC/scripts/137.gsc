@@ -202,7 +202,7 @@ _id_17EB() {
 
 _id_17EE(var_0) {
   level endon("challenge_timer_expired");
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 waittill("trigger");
   common_scripts\utility::flag_set(var_0);
 }
@@ -214,7 +214,7 @@ _id_17EF(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
     var_2 = "freeze";
   }
-  var_3 = getent(var_0, "script_noteworthy");
+  var_3 = getEnt(var_0, "script_noteworthy");
   thread maps\_specialops_code::_id_17F0(var_3);
 
   switch (var_2) {

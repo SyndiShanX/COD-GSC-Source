@@ -96,9 +96,9 @@ setupmedicpatienttrigger() {
   var_00.var_9D65 = spawn("script_origin", var_00.var_0116);
   var_00.var_9D65.var_68FB = var_00;
   var_00.var_9D65 makeusable();
-  var_00.var_9D65 sethintstring(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
+  var_00.var_9D65 setHintString(&"DIVISIONS_DLC3_MEDIC_PATIENT_TRIGGER");
   var_00.var_0106 = spawn("script_model", var_00.var_0116);
-  var_00.var_0106 linkto(self, "tag_origin");
+  var_00.var_0106 linkTo(self, "tag_origin");
   var_00.var_0106 setModel("tag_origin");
   level.medictriggers = common_scripts\utility::func_0F6F(level.medictriggers, var_00);
   thread medic_trigger_enable_use_watcher(var_00);

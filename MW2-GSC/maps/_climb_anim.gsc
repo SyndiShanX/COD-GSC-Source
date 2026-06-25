@@ -56,7 +56,7 @@ price_catches_player(price) {
     level.rumble_ent delete();
   }
 
-  level.player PlayRumbleOnEntity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   flag_set("player_was_caught");
 }
 
@@ -180,7 +180,7 @@ price_puffs(price) {
 }
 
 right_stab_fx(player_model) {
-  level.player PlayRumbleOnEntity("icepick_climb");
+  level.player playRumbleOnEntity("icepick_climb");
   fx_tag_name = get_icepick_tag_name("right");
   fx_tag = spawn_icepick_fx_tag(player_model, fx_tag_name);
   fx_tag traceFX_on_tag("player_ice_pick", "tag_origin", 10);
@@ -188,7 +188,7 @@ right_stab_fx(player_model) {
 }
 
 stab_fx(arm_model, arm) {
-  level.player PlayRumbleOnEntity("icepick_climb");
+  level.player playRumbleOnEntity("icepick_climb");
   fx_tag_name = get_icepick_tag_name(arm);
   fx_tag = spawn_icepick_fx_tag(arm_model, fx_tag_name);
   fx_tag traceFX_on_tag("player_ice_pick", "tag_origin", 10);

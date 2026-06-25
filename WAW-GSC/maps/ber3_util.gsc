@@ -77,7 +77,7 @@ generic_rumble_explosion() {
   self endon("death");
   self endon("disconnect");
 
-  self PlayRumbleOnEntity("explosion_generic_no_broadcast");
+  self playRumbleOnEntity("explosion_generic_no_broadcast");
 }
 grab_starting_friends() {
   startguys = getEntArray("starting_allies", "targetname");
@@ -93,7 +93,7 @@ rename_friendly(newName, doWait) {
   self.name = newName;
 }
 set_color_chain(trigTN) {
-  color_trigger = GetEnt(trigTN, "targetname");
+  color_trigger = getEnt(trigTN, "targetname");
   ASSERTEX(isDefined(color_trigger), "color_trigger " + trigTN + " is not defined!");
 
   color_trigger notify("trigger");
@@ -308,7 +308,7 @@ get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
 
   if(!isDefined(closest)) {
     if(isDefined(backup_spawner)) {
-      spawner = getent(backup_spawner, "targetname");
+      spawner = getEnt(backup_spawner, "targetname");
       spawnedGuy = spawner Stalingradspawn();
       spawn_failed(spawnedGuy);
       return spawnedGuy;
@@ -489,7 +489,7 @@ scr_ignoreall(b) {
   }
 }
 
-scr_reset_goalradius() {
+scr_reset_goalRadius() {
   if(isDefined(self) && isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
   }
@@ -528,7 +528,7 @@ trigger_floodspawn_think() {
       wait(0.1);
       self Delete();
     } else {
-      otherTrig = GetEnt("self.script_noteworthy", "targetname");
+      otherTrig = getEnt("self.script_noteworthy", "targetname");
 
       if(isDefined(otherTrig)) {
         self waittill("trigger");
@@ -1006,7 +1006,7 @@ stringToFloat(string) {
   return GetDvarFloat("stringToFloat");
 }
 getent_safe(value, key, debugName) {
-  ent = GetEnt(value, key);
+  ent = getEnt(value, key);
 
   if(isDefined(debugName)) {
     debugString = "Couldn't GetEnt for: " + debugName;
@@ -1021,7 +1021,7 @@ getent_safe(value, key, debugName) {
   }
 }
 getstruct_safe(value, key, debugName) {
-  sstruct = GetStruct(value, key);
+  sstruct = getStruct(value, key);
 
   if(isDefined(debugName)) {
     debugString = "Couldn't GetStruct for: " + debugName;

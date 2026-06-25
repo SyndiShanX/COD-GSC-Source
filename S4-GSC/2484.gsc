@@ -183,7 +183,7 @@ _id_72FD(var_0, var_1) {
   var_4 = cos(var_2) * var_3;
   var_5 = sin(var_2) * var_3;
   var_6 = 8000;
-  var_7 = vectornormalize((var_4, var_5, var_6));
+  var_7 = vectorNormalize((var_4, var_5, var_6));
   var_7 = var_7 * var_6;
   level._id_731B = 1;
   thread _id_731A();
@@ -319,7 +319,7 @@ _id_72EF(var_0, var_1, var_2, var_3) {
       break;
   }
 
-  level._id_72E0 linkto(level._id_72C7, "tag_origin", var_3 - (0, 0, var_13), (0, var_2 + 90, 0));
+  level._id_72E0 linkTo(level._id_72C7, "tag_origin", var_3 - (0, 0, var_13), (0, var_2 + 90, 0));
   level._id_72E0 thread _id_730D("disconnect", var_1);
   level._id_72E0 thread _id_730D("joined_team", var_1);
   level._id_72E0 thread _id_730D("joined_spectators", var_1);
@@ -335,7 +335,7 @@ _id_72EF(var_0, var_1, var_2, var_3) {
   level._id_72E0._id_CBD0 setModel("tag_origin");
 
   if(!var_4) {
-    var_0 cameralinkto(level._id_72E0, "tag_player", 0, 1);
+    var_0 cameralinkTo(level._id_72E0, "tag_player", 0, 1);
     var_0 painvisionoff();
     var_0 scripts\cp_mp\utility\killstreak_utility::_id_8DBE();
     level._id_72E0 setscriptablepartstate("clouds_intro", "on", 0);
@@ -561,11 +561,11 @@ _id_730A(var_0) {
       if(_func_010F(var_5)) {
         if(_func_0037(var_1 / self.maxhealth) >= 0.33) {
           self.owner earthquakeforplayer(0.25, 0.2, self._id_2FF8.origin, 150);
-          self.owner playrumbleonentity("damage_heavy");
+          self.owner playRumbleOnEntity("damage_heavy");
           var_12 = "heavy";
         } else {
           self.owner earthquakeforplayer(0.15, 0.15, self._id_2FF8.origin, 150);
-          self.owner playrumbleonentity("damage_light");
+          self.owner playRumbleOnEntity("damage_light");
         }
       }
 
@@ -697,7 +697,7 @@ _id_72E3(var_0) {
   }
 
   _id_72F4(var_0);
-  self moveto(self.origin + var_2 * 50000, 10, 5);
+  self moveTo(self.origin + var_2 * 50000, 10, 5);
   _id_7307(self.origin + var_2 * 50000);
   _id_72F2(0);
 }
@@ -778,7 +778,7 @@ _id_72F7(var_0, var_1, var_2, var_3) {
   }
 
   var_5._id_9F26 = var_8;
-  var_5 linkto(level._id_72C7, "tag_origin", var_3, (0, var_2 + 90, -30));
+  var_5 linkTo(level._id_72C7, "tag_origin", var_3, (0, var_2 + 90, -30));
   level notify("matchrecording_plane", var_5);
   return var_5;
 }
@@ -847,23 +847,23 @@ _id_C923(var_0) {
   if(var_0 == "on") {
     var_1 = 10;
     var_2 = level._id_72F9["rotate"] / 360 * var_1;
-    level._id_72C7 rotateyaw(level._id_72C7.angles[2] + var_1, var_2, var_2, 0);
+    level._id_72C7 rotateYaw(level._id_72C7.angles[2] + var_1, var_2, var_2, 0);
     var_3 = 360 / level._id_72F9["rotate"];
     var_4 = var_3 * 0.0174533;
     level._id_72E8 = var_4 * 9000;
 
     for(;;) {
-      level._id_72C7 rotateyaw(360, level._id_72F9["rotate"]);
+      level._id_72C7 rotateYaw(360, level._id_72F9["rotate"]);
       wait(level._id_72F9["rotate"]);
     }
   } else if(var_0 == "off") {
     var_5 = 10;
     var_2 = level._id_72F9["rotate"] / 360 * var_5;
-    level._id_72C7 rotateyaw(level._id_72C7.angles[2] + var_5, var_2, 0, var_2);
+    level._id_72C7 rotateYaw(level._id_72C7.angles[2] + var_5, var_2, 0, var_2);
   } else if(var_0 == "crash") {
     var_1 = 50;
     var_2 = level._id_72F9["rotate"] / 360 * var_1;
-    level._id_72C7 rotateyaw(level._id_72C7.angles[2] + var_1, var_2, var_2, 0);
+    level._id_72C7 rotateYaw(level._id_72C7.angles[2] + var_1, var_2, var_2, 0);
   }
 }
 
@@ -894,10 +894,10 @@ _id_72CB(var_0) {
   self._id_2FF8 = spawn("script_model", self.origin - (0, 0, 20));
   self._id_2FF8 setModel("tag_player");
   self._id_2FF8.angles = vectortoangles(level._id_72C7.origin - self._id_2FF8.origin);
-  self._id_2FF8 linkto(self);
+  self._id_2FF8 linkTo(self);
 
   if(isbot(var_0)) {
-    var_0 cameralinkto(self._id_2FF8, "tag_player");
+    var_0 cameralinkTo(self._id_2FF8, "tag_player");
   } else {
     var_0 scripts\cp_mp\utility\killstreak_utility::_id_B86F("gunship_engage");
     var_0._id_FF0D = 1;
@@ -1043,7 +1043,7 @@ _id_7318(var_0, var_1) {
   var_11 = spawn("script_model", var_0.origin);
   var_11 setModel("ks_ac130_target_mp");
   var_11.angles = vectortoangles(var_8);
-  var_11 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_11 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_11 setotherent(self);
   var_12 = "on";
 
@@ -1380,7 +1380,7 @@ _id_72F0(var_0) {
   level endon("game_ended");
   var_0._id_72CC = spawn("script_model", var_0 getEye());
   var_0._id_72CC setModel("tag_origin");
-  var_0._id_72CC linkto(var_0, "tag_eye");
+  var_0._id_72CC linkTo(var_0, "tag_eye");
   waitframe();
   _func_019D(scripts\engine\utility::getfx("clouds"), var_0._id_72CC, "tag_origin", var_0);
 }
@@ -1422,7 +1422,7 @@ _id_72EA(var_0) {
   var_2 = spawn("script_model", self.origin);
   var_2 setModel("ks_ac130_mp");
   var_2.angles = self.angles;
-  var_2 linkto(var_1, "tag_body", (0, 0, -10), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_body", (0, 0, -10), (0, 0, 0));
   var_3 = "crash_air";
   var_2 setscriptablepartstate(var_3, "on", 0);
 
@@ -1609,7 +1609,7 @@ _id_72DD(var_0, var_1, var_2, var_3) {
         var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var_0);
       }
 
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     } else if(var_5 < 300 && var_2._id_5C8A <= 0) {
@@ -1678,13 +1678,13 @@ _id_72E5() {
   self._id_91A2 setModel("ks_ac130_mp");
   self._id_91A2.angles = self.angles;
   self._id_91A2 setotherent(self.owner);
-  self._id_91A2 linkto(self, "tag_left_outer_prop", (0, 0, 0), (0, 0, 0));
+  self._id_91A2 linkTo(self, "tag_left_outer_prop", (0, 0, 0), (0, 0, 0));
   var_1 = self gettagorigin("tag_right_outer_prop");
   self._id_C868 = spawn("script_model", var_1);
   self._id_C868 setModel("ks_ac130_mp");
   self._id_C868.angles = self.angles;
   self._id_C868 setotherent(self.owner);
-  self._id_C868 linkto(self, "tag_right_outer_prop", (0, 0, 0), (0, 0, 0));
+  self._id_C868 linkTo(self, "tag_right_outer_prop", (0, 0, 0), (0, 0, 0));
   self setscriptablepartstate("contrails", "on");
 }
 

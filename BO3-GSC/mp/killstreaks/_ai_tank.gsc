@@ -139,7 +139,7 @@ function crateland(crate, category, owner, team, context) {
     origin = cratebottom["position"] + (0, 0, 1);
   }
   playFX(level.ai_tank_crate_explode_fx, origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition("veh_talon_crate_exp", crate.origin);
+  playSoundAtPosition("veh_talon_crate_exp", crate.origin);
   level thread ai_tank_killstreak_start(owner, origin, crate.package_contents_id, category);
   crate delete();
 }
@@ -195,7 +195,7 @@ function ai_tank_killstreak_start(owner, origin, killstreak_id, category) {
   if(level.gameended) {
     return;
   }
-  drone = spawnvehicle("spawner_bo3_ai_tank_mp", origin, (0, 0, 0), "talon");
+  drone = spawnVehicle("spawner_bo3_ai_tank_mp", origin, (0, 0, 0), "talon");
   if(!isDefined(drone)) {
     killstreak_stop_and_assert(category, team, killstreak_id, "Failed to spawn ai tank vehicle.");
     return;
@@ -512,7 +512,7 @@ function tank_low_health_fx() {
     return;
   }
   self.damage_fx setModel("tag_origin");
-  self.damage_fx linkto(self, "tag_turret", vectorscale((0, 0, -1), 14), (0, 0, 0));
+  self.damage_fx linkTo(self, "tag_turret", vectorscale((0, 0, -1), 14), (0, 0, 0));
   wait(0.1);
   playFXOnTag(level.ai_tank_damage_fx, self.damage_fx, "tag_origin");
 }
@@ -588,7 +588,7 @@ function emp_crazy_death() {
   }
   self clientfield::set("ai_tank_death", 1);
   playFX(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
-  playsoundatposition("wpn_agr_explode", self.origin);
+  playSoundAtPosition("wpn_agr_explode", self.origin);
   wait(0.05);
   self hide();
 }
@@ -616,10 +616,10 @@ function tank_death_think(hardpointname) {
     fx_origin = self gettagorigin((isDefined(settings.timed_out_death_tag_1) ? settings.timed_out_death_tag_1 : "tag_origin"));
     loc_00003A04:
       playFX((isDefined(settings.timed_out_death_fx_1) ? settings.timed_out_death_fx_1 : level.ai_tank_explode_fx), (isDefined(fx_origin) ? fx_origin : self.origin), (0, 0, 1));
-    playsoundatposition((isDefined(settings.timed_out_death_sound_1) ? settings.timed_out_death_sound_1 : "wpn_agr_explode"), self.origin);
+    playSoundAtPosition((isDefined(settings.timed_out_death_sound_1) ? settings.timed_out_death_sound_1 : "wpn_agr_explode"), self.origin);
   } else {
     playFX(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
-    playsoundatposition("wpn_agr_explode", self.origin);
+    playSoundAtPosition("wpn_agr_explode", self.origin);
   }
   if(not_abandoned) {
     util::wait_network_frame();
@@ -841,7 +841,7 @@ function perform_recoil_missile_turret(player) {
   earthquake(0.4, 0.5, self.origin, 200);
   self perform_recoil("tag_barrel", isDefined(self.controlled) && (self.controlled ? bundle.ksmainturretrecoilforcecontrolled : bundle.ksmainturretrecoilforce), bundle.ksmainturretrecoilforcezoffset);
   if(self.controlled && isDefined(player)) {
-    player playrumbleonentity("sniper_fire");
+    player playRumbleOnEntity("sniper_fire");
   }
 }
 

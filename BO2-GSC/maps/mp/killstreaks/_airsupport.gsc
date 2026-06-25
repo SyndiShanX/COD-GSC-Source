@@ -105,7 +105,7 @@ calculatereleasetime(flytime, flyheight, flyspeed, bombspeedscale) {
 }
 
 getminimumflyheight() {
-  airsupport_height = getstruct("air_support_height", "targetname");
+  airsupport_height = getStruct("air_support_height", "targetname");
 
   if(isDefined(airsupport_height)) {
     planeflyheight = airsupport_height.origin[2];
@@ -166,7 +166,7 @@ planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, flytime, fl
   }
   plane = spawnplane(owner, "script_model", pathstart);
   plane.angles = direction;
-  plane moveto(pathend, flytime, 0, 0);
+  plane moveTo(pathend, flytime, 0, 0);
   thread debug_plane_line(flytime, flyspeed, pathstart, pathend);
 
   if(isDefined(planespawnedfunction)) {
@@ -572,7 +572,7 @@ debug_no_fly_zones() {
 
 debug_plane_line(flytime, flyspeed, pathstart, pathend) {
   thread debug_line(pathstart, pathend, (1, 1, 1));
-  delta = vectornormalize(pathend - pathstart);
+  delta = vectorNormalize(pathend - pathstart);
 
   for(i = 0; i < flytime; i++) {
     thread debug_star(pathstart + vectorscale(delta, i * flyspeed), (1, 0, 0));

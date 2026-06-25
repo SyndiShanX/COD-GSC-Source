@@ -176,8 +176,8 @@ so_forest_init() {
       break;
   }
 
-  escape_trig = getent("escaped_trigger", "script_noteworthy");
-  escape_obj_origin = getent(escape_trig.target, "targetname").origin;
+  escape_trig = getEnt("escaped_trigger", "script_noteworthy");
+  escape_obj_origin = getEnt(escape_trig.target, "targetname").origin;
   Objective_Add(1, "current", level.challenge_objective, escape_obj_origin);
   playFX(getfx("extraction_smoke"), escape_obj_origin);
 

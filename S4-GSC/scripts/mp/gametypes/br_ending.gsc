@@ -45,7 +45,7 @@ _id_B21F(var_0, var_1) {
   var_2 _id_06C6::_id_17C2(var_2._id_2FE0, var_2._id_ADCD[0]._id_18A3);
 
   foreach(var_5 in level.players) {
-    var_5 cameralinkto(var_2._id_2FE0, "tag_player", 1, 1);
+    var_5 cameralinkTo(var_2._id_2FE0, "tag_player", 1, 1);
   }
 
   foreach(var_8 in var_2._id_ADCD) {
@@ -128,7 +128,7 @@ _id_B21F(var_0, var_1) {
       if(isDefined(var_5.sessionstate) && var_5.sessionstate == "spectator") {
         var_5 _meth_8380(var_2.origin, var_2.angles);
       } else {
-        var_5 setorigin(var_2.origin);
+        var_5 setOrigin(var_2.origin);
       }
 
       var_5._id_B5A4 delete();
@@ -171,7 +171,7 @@ _id_531F(var_0) {
         continue;
       }
 
-      var_2 setorigin(var_0.origin + (0, 0, 100));
+      var_2 setOrigin(var_0.origin + (0, 0, 100));
     }
   }
 }
@@ -239,7 +239,7 @@ _id_3EFC(var_0) {
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
   var_1 _id_3F5D(var_1._id_2BB4, "viewhands_base_iw8", var_0.origin);
-  var_1 linkto(var_1._id_B5A4, "tag_player", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_1._id_B5A4, "tag_player", (0, 0, 0), (0, 0, 0));
   level thread _id_5311(var_1, 1);
   var_0._id_10E5A[0] = var_1;
 }
@@ -718,11 +718,11 @@ _id_63C4() {
 
 _id_3665(var_0, var_1) {
   var_2 = self.origin + (0, 0, 1000);
-  var_3 = vectornormalize(var_2 - var_1);
+  var_3 = vectorNormalize(var_2 - var_1);
   var_4 = var_2 + var_3 * 3000;
   var_5 = spawn("script_model", var_4);
   var_5 playSound("br_exfil_incoming_heli_lr");
-  var_5 moveto(var_2, var_0);
+  var_5 moveTo(var_2, var_0);
   wait(var_0);
   var_5 delete();
 }
@@ -866,7 +866,7 @@ _id_366D(var_0) {
     if(!isDefined(var_8)) {
       continue;
     }
-    var_8._id_B5A4 linkto(level._id_2A3D._id_571F, var_6[var_8._id_10E51], (0, 0, 0), (0, 0, 0));
+    var_8._id_B5A4 linkTo(level._id_2A3D._id_571F, var_6[var_8._id_10E51], (0, 0, 0), (0, 0, 0));
     var_8._id_950B = level._id_2A3D._id_571F;
     var_8._id_950C = var_6[var_8._id_10E51];
   }
@@ -875,7 +875,7 @@ _id_366D(var_0) {
     if(isDefined(var_11.player)) {
       continue;
     }
-    var_11 linkto(level._id_2A3D._id_571F, var_6[var_11._id_10E51], (0, 0, 0), (0, 0, 0));
+    var_11 linkTo(level._id_2A3D._id_571F, var_6[var_11._id_10E51], (0, 0, 0), (0, 0, 0));
     var_11._id_950B = level._id_2A3D._id_571F;
     var_11._id_950C = var_6[var_11._id_10E51];
   }
@@ -1142,7 +1142,7 @@ _id_E1E5(var_0, var_1, var_2) {
     foreach(var_5 in var_2) {
       var_6 = spawn("script_model", self.origin);
       var_6 setModel(var_5[0]);
-      var_6 linkto(var_3, var_5[1], (0, 0, 0), (0, 0, 0));
+      var_6 linkTo(var_3, var_5[1], (0, 0, 0), (0, 0, 0));
       var_3._id_9505[var_3._id_9505.size] = var_6;
     }
   }
@@ -1174,7 +1174,7 @@ _id_1003(var_0, var_1, var_2, var_3, var_4) {
     foreach(var_8 in var_1) {
       var_9 = spawn("script_model", self.origin);
       var_9 setModel(var_8[0]);
-      var_9 linkto(var_5, var_8[1], (0, 0, 0), (0, 0, 0));
+      var_9 linkTo(var_5, var_8[1], (0, 0, 0), (0, 0, 0));
       var_5._id_9505[var_5._id_9505.size] = var_9;
     }
   }

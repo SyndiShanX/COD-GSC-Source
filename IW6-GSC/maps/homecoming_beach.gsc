@@ -12,10 +12,10 @@ beach_spawn_functions() {
   maps\_utility::array_spawn_function_noteworthy("bunker_minigun_guy", ::bunker_mg_guy);
   maps\_utility::array_spawn_function_targetname("beach_frontline_abrams", ::beach_frontline_abrams);
   maps\_utility::array_spawn_function_targetname("beach_lander", maps\homecoming_util::heli_beach_lander_init);
-  getent("bunker_wave3_hovercraft_tank", "targetname") maps\_utility::add_spawn_function(::beach_wave3_tank_setup);
+  getEnt("bunker_wave3_hovercraft_tank", "targetname") maps\_utility::add_spawn_function(::beach_wave3_tank_setup);
   maps\_utility::array_spawn_function_noteworthy("hovercraft_tanks", ::beach_hovercraft_tanks_default);
   maps\_utility::array_spawn_function_targetname("hovercraft_unloader", maps\homecoming_util::hovercraft_init);
-  getent("bunker_player_attacker_hind", "targetname") maps\_utility::add_spawn_function(::playerhind_destory_balcony_mg);
+  getEnt("bunker_player_attacker_hind", "targetname") maps\_utility::add_spawn_function(::playerhind_destory_balcony_mg);
   common_scripts\utility::array_thread(getEntArray("beach_mg_spawners", "targetname"), maps\_mgturret::mg42_think);
 }
 
@@ -102,7 +102,7 @@ player_fall_off_balcony() {
   }
 
   var_1 = maps\_hud_util::create_client_overlay("black", 0, level.player);
-  var_2 = common_scripts\utility::getstruct("bunker_balcony_fall_spot", "targetname");
+  var_2 = common_scripts\utility::getStruct("bunker_balcony_fall_spot", "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("tag_origin");
   var_3.angles = (0, 180, 0);
@@ -138,10 +138,10 @@ player_fall_off_balcony() {
   level.hesh thread maps\_utility::dialogue_queue("homcom_hsh_holdon");
   wait 0.5;
   var_6["right"] unlink();
-  var_6["right"] rotateto(var_6["right"].angles + (-30, 0, 0), 2);
+  var_6["right"] rotateTo(var_6["right"].angles + (-30, 0, 0), 2);
   wait 0.5;
-  var_6["mid"] rotateto(var_6["mid"].angles + (-30, 0, 0), 1, 0.5);
-  var_3 rotateto(var_3.angles + (105, 0, 0), 1, 0.5);
+  var_6["mid"] rotateTo(var_6["mid"].angles + (-30, 0, 0), 1, 0.5);
+  var_3 rotateTo(var_3.angles + (105, 0, 0), 1, 0.5);
   wait 0.5;
   var_7 = anglesToForward((0, 180, 0));
   var_3 moveslide((0, 0, 0), 15, var_7 * 100);
@@ -162,8 +162,8 @@ player_fall_off_balcony() {
   wait 1.55;
   var_1 thread maps\_hud_util::fade_over_time(1, 0);
   level.player thread maps\_utility::play_sound_on_entity("post_balcony_collapse_fall");
-  level.player playrumbleonentity("artillery_rumble");
-  var_9 stopanimscripted();
+  level.player playRumbleOnEntity("artillery_rumble");
+  var_9 stopanimScripted();
   maps\_utility::transient_switch("homecoming_transient_intro_tr", "homecoming_transient_beach_tr");
   common_scripts\utility::flag_set("FLAG_balcony_fall_done");
   thread maps\homecoming_util::player_kill_quad((-2056, 3952, -20), (-1652, 4132, 88), "tower_garage_door_closed");
@@ -177,19 +177,19 @@ player_fall_off_balcony() {
 
   level.player unlink();
   var_9 delete();
-  var_10 = common_scripts\utility::getstruct(var_2.target, "targetname");
+  var_10 = common_scripts\utility::getStruct(var_2.target, "targetname");
   var_11 = common_scripts\utility::spawn_tag_origin();
   var_11.origin = var_10.origin;
   var_11.angles = var_10.angles;
   level.player unlink();
-  level.player setorigin(var_10.origin);
+  level.player setOrigin(var_10.origin);
   level.player setplayerangles(var_10.angles);
   level.player allowprone(1);
   level.player allowcrouch(0);
   level.player allowstand(0);
   wait 1.5;
   var_12 = 0;
-  level.player playerlinkto(var_11, "tag_origin", 1, var_12, var_12, var_12, var_12);
+  level.player playerlinkTo(var_11, "tag_origin", 1, var_12, var_12, var_12, var_12);
   level.player setplayerangles(var_10.angles);
   thread hesh_balcony_logic();
   thread bunker_balcony_enemies();
@@ -213,7 +213,7 @@ player_fall_off_balcony() {
   level.player thread maps\_utility::play_sound_on_entity("post_balcony_collapse_pickup");
   wait 0.1;
   maps\homecoming_util::hud_show();
-  getent("post_balcony_collapse_models", "targetname") maps\_utility::show_entity();
+  getEnt("post_balcony_collapse_models", "targetname") maps\_utility::show_entity();
   maps\_utility::array_delete(getEntArray("beach_balcony_intact", "targetname"));
   maps\_utility::array_delete(getEntArray("beach_balcony_intact_models", "targetname"));
   level.player shellshock("homecoming_balcony_fall", 4);
@@ -245,14 +245,14 @@ hesh_balcony_logic() {
   level.hesh maps\homecoming_util::ignore_everything();
   level.hesh maps\_utility::walkdist_zero();
   level.hesh maps\_utility::delaythread(2, maps\_utility::dialogue_queue, "homcom_hsh_coughing");
-  var_0 = common_scripts\utility::getstruct("hesh_balcony_getup", "targetname");
+  var_0 = common_scripts\utility::getStruct("hesh_balcony_getup", "targetname");
   var_0 thread maps\_anim::anim_generic(level.hesh, "teargas_recover_2");
   common_scripts\utility::waitframe();
   level.hesh setanimtime(maps\_utility::getanim_generic("teargas_recover_2"), 0.65);
   level.hesh.anim_blend_time_override = 0.5;
   wait 4;
-  level.hesh maps\_utility::anim_stopanimscripted();
-  var_1 = common_scripts\utility::getstruct("balcony_hesh_wave", "targetname");
+  level.hesh maps\_utility::anim_stopanimScripted();
+  var_1 = common_scripts\utility::getStruct("balcony_hesh_wave", "targetname");
   var_1 maps\_anim::anim_reach_solo(level.hesh, "balcony_hesh_wave");
   common_scripts\utility::flag_set("FLAG_hesh_balcony_wave");
   var_1 maps\_anim::anim_single_solo_run(level.hesh, "balcony_hesh_wave");
@@ -273,15 +273,15 @@ balcony_collapse_stumble(var_0) {
       continue;
     }
     var_5 = var_4.balconyent;
-    var_5 linkto(var_0[var_5.script_noteworthy]);
-    var_4 linkto(var_5);
+    var_5 linkTo(var_0[var_5.script_noteworthy]);
+    var_4 linkTo(var_5);
     var_5 thread maps\_anim::anim_single_solo(var_4, "balcony_stumble");
     var_2[var_2.size] = var_5;
   }
 
   common_scripts\utility::flag_wait("FLAG_balcony_fall_done");
   level.hesh unlink();
-  level.hesh stopanimscripted();
+  level.hesh stopanimScripted();
   maps\_utility::array_delete(var_2);
 }
 
@@ -299,7 +299,7 @@ bunker_final_strafe(var_0) {
 
   foreach(var_4 in var_2) {
     var_5 = common_scripts\utility::random(var_1);
-    var_6 = vectornormalize(var_0 gettagorigin(var_4) - var_5.origin);
+    var_6 = vectorNormalize(var_0 gettagorigin(var_4) - var_5.origin);
     playFX(common_scripts\utility::getfx("a10_tracer"), var_5.origin, var_6);
     playFXOnTag(common_scripts\utility::getfx("a10_impact"), var_0, var_4);
     wait(randomfloatrange(0.05, 0.1));
@@ -324,14 +324,14 @@ bunker_final_strafe_hind_missiles() {
 
 bunker_final_strafe_think() {
   var_0 = self;
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 = var_1.radius;
   var_3 = 1000;
   var_4 = gettime();
 
   while(gettime() - var_4 < var_3) {
     var_5 = maps\homecoming_util::return_point_in_circle(var_1.origin, var_2);
-    var_6 = vectornormalize(var_5 - var_0.origin);
+    var_6 = vectorNormalize(var_5 - var_0.origin);
     var_7 = var_5 + var_6 * 999999;
     var_8 = bulletTrace(var_5, var_7, 0);
     var_5 = var_8["position"];
@@ -405,12 +405,12 @@ bunker_balcony_setup() {
   var_3 = ["left", "mid", "right"];
 
   foreach(var_5 in var_3) {
-    var_6 = getent("balcony_broken_piece_" + var_5, "targetname");
+    var_6 = getEnt("balcony_broken_piece_" + var_5, "targetname");
     var_6.alreadyrotating = 0;
-    var_7 = getent("support_" + var_5, "targetname");
+    var_7 = getEnt("support_" + var_5, "targetname");
 
     if(isDefined(var_7)) {
-      var_7 linkto(var_6);
+      var_7 linkTo(var_6);
       var_1["supports"] = common_scripts\utility::array_add(var_1["supports"], var_7);
     }
 
@@ -418,7 +418,7 @@ bunker_balcony_setup() {
       var_8 = getEntArray(var_6.target, "targetname");
 
       foreach(var_10 in var_8) {
-        var_10 linkto(var_6);
+        var_10 linkTo(var_6);
         var_1["models"] = common_scripts\utility::array_add(var_1["models"], var_10);
       }
     }
@@ -433,13 +433,13 @@ bunker_balcony_setup() {
 
   foreach(var_6 in var_0) {
     if(var_6 != var_2) {
-      var_6 linkto(var_2);
+      var_6 linkTo(var_2);
     }
   }
 
-  var_15 = getent("balcony_player_clip", "targetname");
-  var_15 linkto(var_2);
-  level.balcony_turret linkto(var_2);
+  var_15 = getEnt("balcony_player_clip", "targetname");
+  var_15 linkTo(var_2);
+  level.balcony_turret linkTo(var_2);
   var_1["turret"] = level.balcony_turret;
   level.balcony = var_1;
   return var_1;
@@ -447,7 +447,7 @@ bunker_balcony_setup() {
 
 bunker_balcony_damage_state(var_0) {
   maps\_utility::array_delete(getEntArray("balcony_intact", "targetname"));
-  getent("balcony_broken_back", "targetname") maps\_utility::show_entity();
+  getEnt("balcony_broken_back", "targetname") maps\_utility::show_entity();
   var_1 = ["left", "mid", "right"];
 
   foreach(var_3 in var_1) {
@@ -464,7 +464,7 @@ bunker_balcony_damage_state(var_0) {
 }
 
 bunker_balcony_enemies() {
-  var_0 = common_scripts\utility::getstruct("balcony_fall_enemy_target", "targetname");
+  var_0 = common_scripts\utility::getStruct("balcony_fall_enemy_target", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
   var_2 = getEntArray("fall_off_balcony_enemies", "targetname");
   var_3 = [];
@@ -517,7 +517,7 @@ bunker_balcony_cleanup() {
 
 a10_balcony_strafe_physics() {
   self waittill("strafe_end");
-  var_0 = common_scripts\utility::getstruct("balcony_strafe_end", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("balcony_strafe_end", "script_noteworthy");
   physicsexplosionsphere(var_0.origin, 200, 100, 6);
 }
 
@@ -533,7 +533,7 @@ beach_wave1_logic() {
   }
 
   common_scripts\utility::array_thread(getnodearray("beach_front_nodes", "script_noteworthy"), ::beach_front_nodes_think);
-  var_5 = getent("bunker_starting_heli_lander", "script_noteworthy");
+  var_5 = getEnt("bunker_starting_heli_lander", "script_noteworthy");
   var_6 = var_5 maps\_vehicle::spawn_vehicle_and_gopath();
   var_6.perferred_crash_location = maps\homecoming_util::get_helicopter_crash_location("beach_heli_crash_loc_left");
   var_6 thread maps\homecoming_util::vehicle_allow_player_death(::beach_nh90_damagestate);
@@ -583,13 +583,13 @@ beach_wave1_logic() {
   common_scripts\utility::flag_set("FLAG_stop_intro_drone_runners");
   maps\homecoming_util::delete_ai_array("intro_drone_runners");
   common_scripts\utility::flag_set("FLAG_wave1_right_helicopter");
-  var_5 = getent("bunker_second_heli_lander", "script_noteworthy");
+  var_5 = getEnt("bunker_second_heli_lander", "script_noteworthy");
   var_16 = var_5 maps\_vehicle::spawn_vehicle_and_gopath();
   var_16.perferred_crash_location = maps\homecoming_util::get_helicopter_crash_location("beach_heli_crash_loc_right");
   var_16 thread maps\homecoming_util::vehicle_allow_player_death(::beach_nh90_damagestate);
   level.secondbunkerheli = var_16;
   thread beach_wave1_enemy_ai(var_16, "bunker_wave1_second_nh90_guys", "wave1_right_heli_goalvolume");
-  var_5 = getent("bunker_third_heli_lander", "script_noteworthy");
+  var_5 = getEnt("bunker_third_heli_lander", "script_noteworthy");
   var_17 = var_5 maps\_vehicle::spawn_vehicle_and_gopath();
   var_17.perferred_crash_location = maps\homecoming_util::get_helicopter_crash_location("beach_heli_crash_loc_right");
   var_17 thread maps\homecoming_util::vehicle_allow_player_death(::beach_nh90_damagestate);
@@ -634,7 +634,7 @@ beach_nh90_damagestate(var_0) {
 }
 
 beach_bunker_backtrack_blocker() {
-  var_0 = getent("player_at_balcony_flagTrig", "targetname");
+  var_0 = getEnt("player_at_balcony_flagTrig", "targetname");
   common_scripts\utility::flag_wait_all("FLAG_hesh_in_bunker_house", "FLAG_ranger1_in_bunker_house", "FLAG_ranger2_in_bunker_house");
 
   for(;;) {
@@ -821,14 +821,14 @@ hovercraft_missile_barrage(var_0) {
 }
 
 hovercraft_artillery_incoming_missile(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0.target, "targetname");
-  var_3 = vectortoangles(vectornormalize(var_2.origin - var_0.origin));
+  var_2 = common_scripts\utility::getStruct(var_0.target, "targetname");
+  var_3 = vectortoangles(vectorNormalize(var_2.origin - var_0.origin));
   var_4 = spawn("script_model", var_0.origin);
   var_4.angles = var_3;
   var_4 setModel("projectile_slamraam_missile");
   playFXOnTag(common_scripts\utility::getfx("hovercraft_missile_trail"), var_4, "tag_fx");
   var_4 thread maps\_utility::play_sound_on_entity("artillery_incoming");
-  var_4 moveto(var_2.origin, 1, 0.5, 0);
+  var_4 moveTo(var_2.origin, 1, 0.5, 0);
   var_4 waittill("movedone");
   var_4 delete();
 
@@ -847,7 +847,7 @@ hovercraft_artillery_incoming_missile(var_0, var_1) {
   var_4 thread common_scripts\utility::play_sound_in_space("artillery_explosion", var_2.origin);
   earthquake(0.45, 1.5, var_2.origin, 5000);
   level.player viewkick(20, var_2.origin);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   thread maps\_utility::set_blur(randomintrange(3, 5), 0.05);
   thread maps\_utility::set_blur(0, 0.25);
 
@@ -890,7 +890,7 @@ hesco_tower_explosion(var_0) {
 
 metal_tower_collapse() {
   level waittill("beach_metal_tower_destroyed");
-  var_0 = getent("artillery_metal_tower_top_nondest", "targetname");
+  var_0 = getEnt("artillery_metal_tower_top_nondest", "targetname");
   var_1 = getEntArray("artillery_metal_tower_top_dest", "targetname");
   var_2 = undefined;
   var_3 = [];
@@ -906,7 +906,7 @@ metal_tower_collapse() {
   }
 
   foreach(var_8 in var_3) {
-    var_8 linkto(var_2);
+    var_8 linkTo(var_2);
   }
 
   var_0 delete();
@@ -940,9 +940,9 @@ beach_artillery_balcony_logic() {
 
   while(!common_scripts\utility::flag("FLAG_artillery_sequence_done")) {
     var_7 = randomfloatrange(0.4, 0.8);
-    var_1 rotateto(var_1.angles + (-2.5, 0, 0), var_7, var_7 / 2, var_7 / 2);
+    var_1 rotateTo(var_1.angles + (-2.5, 0, 0), var_7, var_7 / 2, var_7 / 2);
     var_1 waittill("rotatedone");
-    var_1 rotateto(var_1.angles + (2.5, 0, 0), var_7, var_7 / 2, var_7 / 2);
+    var_1 rotateTo(var_1.angles + (2.5, 0, 0), var_7, var_7 / 2, var_7 / 2);
     var_1 waittill("rotatedone");
   }
 
@@ -959,7 +959,7 @@ artillery_balcony_stumble(var_0) {
       continue;
     }
     var_3 = var_2.balconyent;
-    var_2 linkto(var_3);
+    var_2 linkTo(var_3);
     var_3 thread maps\_anim::anim_single_solo(var_2, "balcony_stumble");
     var_2 thread artillery_balcony_stumble_skip();
   }
@@ -981,7 +981,7 @@ artillery_balcony_stumblers_setup(var_0) {
     var_5 = spawn("script_origin", var_4.origin);
     var_5.angles = var_4.angles;
     var_5.script_noteworthy = var_4.script_noteworthy;
-    var_5 linkto(var_0[var_4.script_noteworthy]);
+    var_5 linkTo(var_0[var_4.script_noteworthy]);
     var_3.balconyent = var_5;
   }
 
@@ -989,7 +989,7 @@ artillery_balcony_stumblers_setup(var_0) {
 }
 
 artillery_disable_player_mg() {
-  var_0 = getent("bunker_turret", "targetname");
+  var_0 = getEnt("bunker_turret", "targetname");
   level.player maps\_chaingun_player::chaingun_turret_disable(var_0);
   common_scripts\utility::flag_wait("FLAG_artillery_sequence_done");
   var_0 thread maps\_chaingun_player::chaingun_turret_init(1);
@@ -1012,10 +1012,10 @@ beach_wave1_artillery_drones() {
 
   foreach(var_12, var_8 in var_0) {
     var_8 notify("stop_drone_fighting");
-    var_8 maps\_utility::anim_stopanimscripted();
+    var_8 maps\_utility::anim_stopanimScripted();
     var_8.animname = "generic";
     var_9 = common_scripts\utility::random(var_6);
-    var_10 = common_scripts\utility::getstruct(var_8.target, "targetname");
+    var_10 = common_scripts\utility::getStruct(var_8.target, "targetname");
     var_10 thread maps\_anim::anim_generic(var_8, var_9);
     var_11 = getanimlength(maps\_utility::getanim_generic(var_9));
     var_8 common_scripts\utility::delaycall(var_11, ::startragdoll);
@@ -1025,11 +1025,11 @@ beach_wave1_artillery_drones() {
 }
 
 artillery_smoke_grenade() {
-  var_0 = common_scripts\utility::getstruct("beach_red_smoke_throwspot", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct("beach_red_smoke_throwspot", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 = magicgrenade("smoke_grenade_signal", var_0.origin, var_1.origin, 9999);
   var_3 = var_2 common_scripts\utility::spawn_tag_origin();
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_3 thread maps\homecoming_util::playloopingfx("smoke_red_trail", 0.05, undefined, "tag_origin");
   wait 2;
   var_3 notify("stop_looping_fx");
@@ -1368,8 +1368,8 @@ beach_wave2_playerhind_strafe(var_0) {
   thread beach_playerhind_strafe_attack(self.targetent, var_1);
   self vehicle_helisetai(var_1.origin, 40, 40, 10, var_1.script_goalyaw, var_1.angles, var_1.angles[1], 0, 0, 0, 0, 0, 1);
   self waittill("near_goal");
-  var_2 = common_scripts\utility::getstruct("beachhind_strafe_mid", "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1.script_linkto, "script_linkname");
+  var_2 = common_scripts\utility::getStruct("beachhind_strafe_mid", "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1.script_linkto, "script_linkname");
   var_4 = [var_2, var_3, var_2, var_1];
   var_5 = 22;
 
@@ -1400,10 +1400,10 @@ beach_wave2_playerhind_strafe(var_0) {
 
 beach_playerhind_strafe_attack(var_0, var_1) {
   self endon("death");
-  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
   var_0.origin = var_2.origin;
   var_3 = var_2 maps\homecoming_util::get_linked_struct();
-  self setturrettargetent(var_0);
+  self setturrettargetEnt(var_0);
   self waittill("near_goal");
   var_4 = spawn("script_origin", var_2.origin);
   thread beach_playerhind_strafe_turret(var_0, var_4);
@@ -1531,7 +1531,7 @@ beach_playerhind_attack_target_player(var_0) {
   var_3 = 80;
   self.helifirecheap = undefined;
   self setlookatent(level.player);
-  var_4 = getent("player_at_balcony_flagTrig", "targetname");
+  var_4 = getEnt("player_at_balcony_flagTrig", "targetname");
 
   for(;;) {
     var_5 = level.player.origin;
@@ -1737,7 +1737,7 @@ balcony_allies_playerhind_logic(var_0) {
   var_0 maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
   maps\_utility::add_wait(common_scripts\utility::flag_waitopen, "FLAG_hind_is_targeting_player");
   maps\_utility::do_wait_any();
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   var_2 notify("stop_loop");
 }
 
@@ -1807,7 +1807,7 @@ beach_tank_balcony_stumble(var_0) {
   var_3 = getanimlength(maps\_utility::getanim_generic(var_2));
   thread beach_tank_balcony_stumbler_notetrack(var_3);
   wait(var_3 - 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
   self.alreadystumbling = 0;
 }
 
@@ -1913,11 +1913,11 @@ beach_tank_balcony_logic(var_0) {
   for(var_7 = 3; var_7 != 0; var_7--) {
     var_8 = randomfloatrange(0.4, 0.8);
     common_scripts\utility::exploder("bust_" + var_1);
-    var_2 rotateto(var_2.rotateangles, var_8, var_8 / 2, var_8 / 2);
+    var_2 rotateTo(var_2.rotateangles, var_8, var_8 / 2, var_8 / 2);
     var_2 waittill("rotatedone");
     var_8 = randomfloatrange(0.4, 0.8);
     common_scripts\utility::exploder("bust_" + var_1);
-    var_2 rotateto(var_2.originalangles, var_8, var_8 / 2, var_8 / 2);
+    var_2 rotateTo(var_2.originalangles, var_8, var_8 / 2, var_8 / 2);
     var_2 waittill("rotatedone");
   }
 
@@ -2105,7 +2105,7 @@ bunker_enemy_cover_drones(var_0, var_1) {
 
 bunker_beach_attackers() {
   level endon("beach_attacker_logic_off");
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
 
   if(!isDefined(var_0.aiamount)) {
     var_0.aiamount = 0;
@@ -2145,7 +2145,7 @@ bunker_beach_attackers_think(var_0) {
   self endon("death");
 
   if(!isDefined(var_0)) {
-    var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   }
 
   if(!isDefined(var_0)) {
@@ -2184,7 +2184,7 @@ bunker_beach_attackers_death(var_0) {
 beach_bunker_stumble_event() {
   var_0 = self.spawner;
   common_scripts\utility::flag_set("FLAG_bunker_hallway_explosion");
-  var_1 = common_scripts\utility::getstruct("house_stairs_explosion_spot", "targetname");
+  var_1 = common_scripts\utility::getStruct("house_stairs_explosion_spot", "targetname");
   var_2 = var_0 maps\homecoming_util::get_linked_struct();
   self.animname = "generic";
   maps\_utility::gun_remove();
@@ -2201,10 +2201,10 @@ beach_bunker_stumble_event() {
 
   common_scripts\utility::exploder("hallway_exp");
   earthquake(0.35, 0.8, var_1.origin, 5000);
-  var_7 = common_scripts\utility::getstruct("bunker_hallway_explosion_phys_struct", "targetname");
+  var_7 = common_scripts\utility::getStruct("bunker_hallway_explosion_phys_struct", "targetname");
   physicsexplosionsphere(var_7.origin, 50, 25, 1.5);
   level.player shellshock("homecoming_bunker", 2.5);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   var_2 thread maps\_anim::anim_single_solo(self, "wall_stumble");
   common_scripts\utility::waitframe();
   self setanimtime(maps\_utility::getanim_generic("wall_stumble"), 0.13);
@@ -2226,11 +2226,11 @@ bunker_mg_guy() {
   self notsolid();
   self.name = "";
   self setlookattext("", &"");
-  level.secondarygunner = getent("balcony_secondary_gunner", "targetname") maps\_utility::spawn_ai();
+  level.secondarygunner = getEnt("balcony_secondary_gunner", "targetname") maps\_utility::spawn_ai();
   level.secondarygunner.animname = "secondary_gunner";
   level.secondarygunner.name = "SGT. Harmer";
   var_0 = [self, level.secondarygunner];
-  var_1 = common_scripts\utility::getstruct("balcony_mg_scene", "targetname");
+  var_1 = common_scripts\utility::getStruct("balcony_mg_scene", "targetname");
   var_1 thread maps\_anim::anim_single(var_0, "bunker_mg_scene");
   common_scripts\utility::waitframe();
   var_1 maps\_anim::anim_set_rate(var_0, "bunker_mg_scene", 0);
@@ -2240,7 +2240,7 @@ bunker_mg_guy() {
   common_scripts\utility::flag_wait("FLAG_balcony_gunner_hit");
   var_2 = anglesToForward(self gettagangles("j_head"));
   playFX(common_scripts\utility::getfx("headshot_blood"), self gettagorigin("j_head"), var_2 * -1);
-  self linkto(level.balcony["mid"]);
+  self linkTo(level.balcony["mid"]);
 }
 
 beach_front_nodes_think() {

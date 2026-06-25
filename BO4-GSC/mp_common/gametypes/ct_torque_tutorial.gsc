@@ -71,7 +71,7 @@ function_7036ef4() {
   wait 1;
 
   foreach(var_29bfcd7c in a_col_torque_tut_fin_ground) {
-    var_29bfcd7c disconnectpaths();
+    var_29bfcd7c disconnectPaths();
   }
 }
 
@@ -790,7 +790,7 @@ function_c0bc3c1c() {
   self ghost();
   self.var_ef59b90 = 6;
   s_loc = struct::get("s_torque_tut_5_enemy_razorwire", "targetname");
-  self setorigin(s_loc.origin);
+  self setOrigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
   self val::set("torque_tut_ignore", "ignoreall", 1);
 
@@ -842,7 +842,7 @@ function_c0bc3c1c() {
 function_159532aa() {
   self endoncallback(&function_9c64562d, #"hash_505598c7196ba834");
   s_escape = struct::get("s_torque_tut_5_razorwire_owner_hide", "targetname");
-  self setorigin(s_escape.origin);
+  self setOrigin(s_escape.origin);
 
   while(true) {
     self setgoal(s_escape.origin, 1, 1);
@@ -1782,7 +1782,7 @@ function_8749da79(_hash) {
 
 function_e96cc63f(n_count = 3, spawnpts, var_810b40e6 = 1, var_4837ee77 = 1, var_32df2a60 = 1, b_randomize = 0, str_targetname = "fillspawn_enemies") {
   level endon(#"combattraining_logic_finished", #"hash_3ce5abc259d8b041");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
 
   if(!isDefined(level.var_b6e6a025)) {
@@ -2165,7 +2165,7 @@ function_44776cd(var_f3aa6dfe, s_loc, n_range = 24) {
 
   v_pos = s_loc.origin;
   v_fwd = anglesToForward(s_loc.angles);
-  var_6c267b3 = vectornormalize((v_fwd[0], v_fwd[1], 0));
+  var_6c267b3 = vectorNormalize((v_fwd[0], v_fwd[1], 0));
   self.mdl_hint = util::spawn_model(var_4633cf09[var_f3aa6dfe], v_pos, s_loc.angles);
   self.mdl_hint notsolid();
   self.mdl_hint clientfield::set("objective_glow", 1);
@@ -2223,11 +2223,11 @@ function_9326b2b2(var_f3aa6dfe, s_loc, n_range = 20) {
   n_range_sq = n_range * n_range;
   v_pos = s_loc.origin;
   v_fwd = anglesToForward(s_loc.angles);
-  var_6c267b3 = vectornormalize((v_fwd[0], v_fwd[1], 0));
+  var_6c267b3 = vectorNormalize((v_fwd[0], v_fwd[1], 0));
   n_dist_sq = distancesquared(self.origin, v_pos);
   b_in_range = n_dist_sq <= n_range_sq;
   var_afb005ee = anglesToForward(self.angles);
-  var_bc976a18 = vectornormalize((var_afb005ee[0], var_afb005ee[1], 0));
+  var_bc976a18 = vectorNormalize((var_afb005ee[0], var_afb005ee[1], 0));
   n_dot = vectordot(var_bc976a18, var_6c267b3);
 
   if(var_f3aa6dfe == 1) {
@@ -2506,13 +2506,13 @@ function_907568bb(str_volume = "trig_torque_tut_finale_area") {
   level notify(#"hash_1496d0fbb526a24a");
   waitframe(1);
   level endoncallback(&function_a9832377, #"combattraining_logic_finished", #"hash_1496d0fbb526a24a");
-  e_player = getplayers()[0];
-  e_volume = getent(str_volume, "targetname");
+  e_player = getPlayers()[0];
+  e_volume = getEnt(str_volume, "targetname");
   n_total = 0;
   n_mode = -1;
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     var_443af604 = 0;
     a_bots = e_player ct_bots::function_dde6edbd();
 

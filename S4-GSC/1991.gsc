@@ -37,9 +37,9 @@ _id_C436(var_0) {
   var_1 = var_0 _meth_812D(var_0.origin);
 
   if(isDefined(var_1)) {
-    var_0 setorigin(var_1);
+    var_0 setOrigin(var_1);
   } else {
-    var_0 setorigin(var_0.origin + (0, 0, 100));
+    var_0 setOrigin(var_0.origin + (0, 0, 100));
   }
 
   var_0._id_B5A4 delete();
@@ -308,7 +308,7 @@ _id_261B(var_0, var_1) {
 
   if(self._id_463E) {
     foreach(var_7 in self._id_FE96) {
-      var_7 sethintstring(&"MP/BREACH");
+      var_7 setHintString(&"MP/BREACH");
     }
 
     _id_1D1E(level._id_EF89);
@@ -328,7 +328,7 @@ _id_260A(var_0) {
   self endon("defused");
 
   foreach(var_2 in self._id_FE96) {
-    var_2 sethintstring(&"MP/BREACH_DEFUSE");
+    var_2 setHintString(&"MP/BREACH_DEFUSE");
   }
 
   self._id_F25D = spawn("script_model", self._id_B1CB.origin);
@@ -401,8 +401,8 @@ _id_B1C7(var_0, var_1) {
   thread _id_10BD6(var_1);
   var_1._id_9515 = var_1 scripts\engine\utility::spawn_tag_origin();
   var_1 playerlinktodelta(var_1._id_9515, "tag_origin", 1, 0, 0, 0, 0, 0);
-  var_1._id_9515 moveto(self._id_CBD3[var_0._id_CBD1].origin, 0.25, 0.1, 0.1);
-  var_1._id_9515 rotateto(self._id_CBD3[var_0._id_CBD1].angles, 0.25, 0.1, 0.1);
+  var_1._id_9515 moveTo(self._id_CBD3[var_0._id_CBD1].origin, 0.25, 0.1, 0.1);
+  var_1._id_9515 rotateTo(self._id_CBD3[var_0._id_CBD1].angles, 0.25, 0.1, 0.1);
   var_1 setstance("stand");
 
   if(!var_1 _id_6FA0()) {
@@ -419,7 +419,7 @@ _id_B1C7(var_0, var_1) {
   var_1 unlink();
   var_1._id_9515 delete();
   var_1._id_9515 = undefined;
-  var_1 setorigin(self._id_CBD3[var_0._id_CBD1].origin);
+  var_1 setOrigin(self._id_CBD3[var_0._id_CBD1].origin);
   var_1 setplayerangles(self._id_CBD3[var_0._id_CBD1].angles);
 
   foreach(var_3 in self._id_FE96) {

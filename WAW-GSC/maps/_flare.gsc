@@ -153,7 +153,7 @@ flare_path() {
 flare_initial_fx() {
   model = spawn("script_model", (0, 0, 0));
   model setModel("tag_origin");
-  model linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  model linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   model playSound("flare_launch");
   playFXOnTag(level._effect["flare_runner_intro"], model, "tag_origin");
   self waittill("flare_intro_node");
@@ -176,7 +176,7 @@ flare_explodes(starting_brightness, ending_brightness, flicker, color) {
 
   model2 = spawn("script_model", (0, 0, 0));
   model2 setModel("tag_origin");
-  model2 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  model2 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner"], model2, "tag_origin");
 
   model2 playLoopSound("flare_loop");
@@ -191,7 +191,7 @@ flare_explodes(starting_brightness, ending_brightness, flicker, color) {
 flare_burns_out() {
   model3 = spawn("script_model", (0, 0, 0));
   model3 setModel("tag_origin");
-  model3 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  model3 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   playFXOnTag(level._effect["flare_runner_fizzout"], model3, "tag_origin");
   wait(0.3);
@@ -261,7 +261,7 @@ flare_from_targetname(targetname, starting_brightness, ending_brightness, flicke
 
   flag_wait("flare_start_setting_sundir");
 
-  sunPointsTo = getent(flare.script_linkto, "script_linkname").origin;
+  sunPointsTo = getEnt(flare.script_linkto, "script_linkname").origin;
 
   angles = vectortoangles(flare.origin - sunPointsTo);
   oldForward = anglesToForward(angles);

@@ -70,9 +70,9 @@ force_panels_powered_on() {
     var_2.powered_on = 1;
   }
 
-  var_10 = scripts\engine\utility::getstruct("fridge_trap", "script_noteworthy");
+  var_10 = scripts\engine\utility::getStruct("fridge_trap", "script_noteworthy");
   var_10.powered_on = 1;
-  var_11 = scripts\engine\utility::getstruct("electric_trap", "script_noteworthy");
+  var_11 = scripts\engine\utility::getStruct("electric_trap", "script_noteworthy");
   var_11.powered_on = 1;
 }
 
@@ -92,7 +92,7 @@ lasers_trap_init() {
         continue;
       }
 
-      var_9 = getent(var_6.target, "targetname");
+      var_9 = getEnt(var_6.target, "targetname");
       if(scripts\engine\utility::array_contains(level.lasertriggers, var_9)) {
         continue;
       }
@@ -121,7 +121,7 @@ lasers_trap_init() {
 }
 
 power_on_lasers(var_0) {
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
   if(!isDefined(self.activated)) {
     var_1.activated = 1;
   } else if(scripts\engine\utility::istrue(self.activated)) {
@@ -142,7 +142,7 @@ laser_sound_individual() {
 create_laser_beam_fx(var_0, var_1, var_2) {
   var_3 = var_0;
   var_4 = var_1;
-  var_3 linkto(var_4);
+  var_3 linkTo(var_4);
   scripts\engine\utility::waitframe();
   if(!isDefined(self)) {
     var_3 delete();
@@ -189,17 +189,17 @@ create_laser_beam_fx(var_0, var_1, var_2) {
 movelaser(var_0, var_1) {
   level endon("lasers_end");
   if(isDefined(var_1)) {
-    var_1 enablelinkto();
-    var_1 linkto(var_0);
+    var_1 enablelinkTo();
+    var_1 linkTo(var_0);
   }
 
   for(;;) {
     if(var_0.origin[2] < 100) {
-      var_0 moveto(var_0.origin + (0, 0, 60), 1, 0.15, 0.15);
+      var_0 moveTo(var_0.origin + (0, 0, 60), 1, 0.15, 0.15);
       var_0 waittill("movedone");
     }
 
-    var_0 moveto(var_0.origin - (0, 0, 60), 1, 0.15, 0.15);
+    var_0 moveTo(var_0.origin - (0, 0, 60), 1, 0.15, 0.15);
     var_0 waittill("movedone");
   }
 }
@@ -321,7 +321,7 @@ use_lasers_trap(var_0, var_1) {
   var_2 = isDefined(var_1) && isPlayer(var_1);
   var_3 = scripts\engine\utility::getStructArray("laser_trap", "script_noteworthy");
   foreach(var_5 in var_3) {
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on");
   }
 
@@ -359,7 +359,7 @@ use_lasers_trap(var_0, var_1) {
 
   wait(var_14);
   foreach(var_5 in var_3) {
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on_green");
   }
 }
@@ -373,7 +373,7 @@ init_blackhole_trap() {
   foreach(var_5 in var_3) {
     var_5.powered_on = 0;
     var_5 thread listen_for_power();
-    var_5.body = getent(var_5.target, "targetname");
+    var_5.body = getEnt(var_5.target, "targetname");
     var_6 = scripts\engine\utility::getStructArray(var_5.target, "targetname");
     foreach(var_8 in var_6) {
       if(isDefined(var_8.fgetarg)) {
@@ -413,7 +413,7 @@ func_2B36() {
 }
 
 watch_for_obtain_helmet() {
-  var_0 = getent("movie_screen_hole", "targetname");
+  var_0 = getEnt("movie_screen_hole", "targetname");
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4);
     if(!scripts\engine\utility::flag("screen_trap_active")) {
@@ -491,7 +491,7 @@ use_blackhole_trap(var_0, var_1) {
   }
 
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
-  var_3 = getent("theater_button", "targetname");
+  var_3 = getEnt("theater_button", "targetname");
   var_3 setModel("mp_frag_button_on");
   var_0 thread kill_zombies(var_1);
   earthquake(0.28, int(21), var_0.origin, 500);
@@ -563,15 +563,15 @@ suck_zombie(var_0, var_1) {
   self.precacheleaderboards = 1;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
-  self.anchor rotateto((-90, 0, 0), 0.2);
+  self linkTo(self.anchor);
+  self.anchor rotateTo((-90, 0, 0), 0.2);
   var_6 = 360;
   if(randomint(100) > 50) {
     var_6 = -360;
   }
 
   self.anchor rotateroll(var_6, 1.5);
-  self.anchor moveto(var_2.origin, 1.5);
+  self.anchor moveTo(var_2.origin, 1.5);
   thread scripts\engine\utility::delete_on_death(self.anchor);
   wait(1.5);
   playFX(level._effect["blackhole_trap_death"], self.origin, anglesToForward((-90, 0, 0)), anglestoup((-90, 0, 0)));
@@ -598,7 +598,7 @@ suck_zombie(var_0, var_1) {
 
 fridge_trap_init() {
   level.trapcooldownarray["fridge_trap"] = 0;
-  var_0 = scripts\engine\utility::getstruct("fridge_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("fridge_trap", "script_noteworthy");
   var_0.powered_on = 0;
   var_0 thread listen_for_power();
 }
@@ -638,14 +638,14 @@ chill_scrnfx(var_0) {
 }
 
 fridge_door_open() {
-  var_0 = getent("swinging_fridge_door", "script_noteworthy");
-  var_0 rotateto((0, 120, 0), 0.5);
+  var_0 = getEnt("swinging_fridge_door", "script_noteworthy");
+  var_0 rotateTo((0, 120, 0), 0.5);
 }
 
 fridge_door_close() {
   wait(1);
-  var_0 = getent("swinging_fridge_door", "script_noteworthy");
-  var_0 rotateto((0, 0, 0), 0.5);
+  var_0 = getEnt("swinging_fridge_door", "script_noteworthy");
+  var_0 rotateTo((0, 0, 0), 0.5);
 }
 
 use_fridge_trap(var_0, var_1) {
@@ -662,7 +662,7 @@ use_fridge_trap(var_0, var_1) {
     }
   }
 
-  var_3 = getent(var_0.target, "targetname");
+  var_3 = getEnt(var_0.target, "targetname");
   var_3 thread fridge_door_open();
   wait(1);
   var_3 create_attract_positions((1, 1, 0), -115, 4, 32);
@@ -763,7 +763,7 @@ fridge_explode(var_0) {
   var_2 = 16384;
   foreach(var_4 in var_1) {
     if(distancesquared(var_4.origin, self.origin)) {
-      var_4 setvelocity(vectornormalize(var_4.origin - self.origin) * 100 + (0, 0, 50));
+      var_4 setvelocity(vectorNormalize(var_4.origin - self.origin) * 100 + (0, 0, 50));
       var_4 thread fridge_frozen_damage(self, var_0);
     }
   }
@@ -930,7 +930,7 @@ electric_trap_use(var_0, var_1) {
   var_3 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on");
   }
 
@@ -964,7 +964,7 @@ electric_trap_use(var_0, var_1) {
 
   wait(var_10);
   foreach(var_5 in var_3) {
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on_green");
   }
 }
@@ -972,7 +972,7 @@ electric_trap_use(var_0, var_1) {
 electric_trap_damage(var_0, var_1) {
   level endon("stop_electric_trap");
   var_2 = gettime();
-  var_3 = getent("electric_trap_trig", "targetname");
+  var_3 = getEnt("electric_trap_trig", "targetname");
   for(;;) {
     var_3 waittill("trigger", var_4);
     if(isPlayer(var_4) && isalive(var_4) && !scripts\cp\cp_laststand::player_in_laststand(var_4) && !isDefined(var_4.padding_damage)) {
@@ -1072,7 +1072,7 @@ electrocute_zombie(var_0, var_1) {
 
 electric_trap_rumble() {
   level endon("stop_electric_trap");
-  var_0 = getent("electric_trap_trig", "targetname");
+  var_0 = getEnt("electric_trap_trig", "targetname");
   for(;;) {
     wait(0.2);
     earthquake(0.18, 1, var_0.origin, 784);
@@ -1105,7 +1105,7 @@ use_rain_trap(var_0, var_1) {
   var_3 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_5 in var_3) {
     level thread scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on");
   }
 
@@ -1159,7 +1159,7 @@ use_rain_trap(var_0, var_1) {
 
   wait(var_11);
   foreach(var_5 in var_3) {
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on_green");
   }
 }
@@ -1174,7 +1174,7 @@ remove_padding_damage_and_rain() {
 rain_trap_damage(var_0, var_1) {
   level endon("stop_acid_trap");
   var_2 = gettime();
-  var_3 = getent("acid_trap_trig", "targetname");
+  var_3 = getEnt("acid_trap_trig", "targetname");
   for(;;) {
     var_3 waittill("trigger", var_4);
     if(scripts\engine\utility::istrue(var_4.applyacidraindamage)) {
@@ -1253,7 +1253,7 @@ listen_for_power() {
   if(scripts\engine\utility::istrue(self.requires_power)) {
     level scripts\engine\utility::waittill_any("power_on", "traps_on");
     if(isDefined(self.target)) {
-      var_0 = getent(self.target, "targetname");
+      var_0 = getEnt(self.target, "targetname");
       if(isDefined(var_0)) {
         if(var_0.model == "mp_frag_button_on") {
           var_0 setModel("mp_frag_button_on_green");
@@ -1262,7 +1262,7 @@ listen_for_power() {
     }
 
     if(isDefined(self.target_secondary)) {
-      var_0 = getent(self.target_secondary, "targetname");
+      var_0 = getEnt(self.target_secondary, "targetname");
       if(isDefined(var_0)) {
         if(var_0.model == "mp_frag_button_on") {
           var_0 setModel("mp_frag_button_on_green");

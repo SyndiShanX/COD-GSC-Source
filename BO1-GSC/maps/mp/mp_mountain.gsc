@@ -51,14 +51,14 @@ devgui_mountain(cmd) {
 }
 gondola_sway() {
   level endon("gondola_triggered");
-  gondola_cab = GetEnt("gondola_cab", "targetname");
+  gondola_cab = getEnt("gondola_cab", "targetname");
   while(1) {
     randomSwingAngle = RandomFloatRange(2, 5);
     randomSwingTime = RandomFloatRange(2, 3);
-    gondola_cab RotateTo((randomSwingAngle * 0.5, (randomSwingAngle * 0.6) + 90, randomSwingAngle * .8), randomSwingTime, randomSwingTime * 0.3, randomSwingTime * 0.3);
+    gondola_cab rotateTo((randomSwingAngle * 0.5, (randomSwingAngle * 0.6) + 90, randomSwingAngle * .8), randomSwingTime, randomSwingTime * 0.3, randomSwingTime * 0.3);
     gondola_cab playSound("amb_gondola_swing");
     wait(randomSwingTime);
-    gondola_cab RotateTo(((randomSwingAngle * 0.5) * -1, (randomSwingAngle * -1 * 0.6) + 90, randomSwingAngle * .8 * -1), randomSwingTime, randomSwingTime * 0.3, randomSwingTime * 0.3);
+    gondola_cab rotateTo(((randomSwingAngle * 0.5) * -1, (randomSwingAngle * -1 * 0.6) + 90, randomSwingAngle * .8 * -1), randomSwingTime, randomSwingTime * 0.3, randomSwingTime * 0.3);
     gondola_cab playSound("amb_gondola_swing_back");
     wait(randomSwingTime);
   }

@@ -6,13 +6,13 @@
 trench_spawn_functions() {
   maps\_utility::array_spawn_function_noteworthy("trench_main_friendlies", ::trench_main_friendlies);
   maps\_utility::array_spawn_function_noteworthy("trench_friendly_orange_guy", ::trench_friendly_orange_guy);
-  getent("trench_artemis_guy", "script_noteworthy") maps\_utility::add_spawn_function(::trench_artemis_guy);
+  getEnt("trench_artemis_guy", "script_noteworthy") maps\_utility::add_spawn_function(::trench_artemis_guy);
   maps\_utility::array_spawn_function_noteworthy("trench_artemis_friendlies", ::trench_artemis_friendlies);
-  getent("trench_first_nh90_lander", "script_noteworthy") maps\_utility::add_spawn_function(::trench_first_nh90_lander);
-  getent("trench_artemis", "targetname") maps\_utility::add_spawn_function(::trench_artemis);
-  getent("trench_hovercraft_a10", "script_noteworthy") maps\_utility::add_spawn_function(::trench_hovercraft_a10);
+  getEnt("trench_first_nh90_lander", "script_noteworthy") maps\_utility::add_spawn_function(::trench_first_nh90_lander);
+  getEnt("trench_artemis", "targetname") maps\_utility::add_spawn_function(::trench_artemis);
+  getEnt("trench_hovercraft_a10", "script_noteworthy") maps\_utility::add_spawn_function(::trench_hovercraft_a10);
   maps\_utility::array_spawn_function_targetname("trench_hovercraft", ::trench_hovercraft_over_moment);
-  getent("trench_hovercraft_passer", "targetname") maps\_utility::add_spawn_function(::trench_hovercraft_side_sand);
+  getEnt("trench_hovercraft_passer", "targetname") maps\_utility::add_spawn_function(::trench_hovercraft_side_sand);
   var_0 = getEntArray("tower_post_explosion_trigs", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, common_scripts\utility::trigger_off);
 }
@@ -159,7 +159,7 @@ beach_trenches_combat() {
   maps\_utility::activate_trigger("trench_start_friendlies", "targetname");
   level endon("TRIGFLAG_player_entering_nest");
   maps\homecoming_util::waittill_trigger("trench_start_combat");
-  var_5 = getent("trenches_bridge_runner", "targetname");
+  var_5 = getEnt("trenches_bridge_runner", "targetname");
   var_5.randomdeath = [7, 15];
   var_5.drone_lookahead_value = 128;
   var_5 maps\_utility::add_spawn_function(maps\homecoming_drones::set_noragdoll);
@@ -179,7 +179,7 @@ beach_trenches_combat() {
   var_10 = getEntArray("trench_chargers_1", "targetname");
 
   if(isDefined(var_10[0])) {
-    var_11 = common_scripts\utility::getstruct(var_10[0].target, "targetname");
+    var_11 = common_scripts\utility::getStruct(var_10[0].target, "targetname");
     thread trench_chargers(var_10, var_11, 1.8, 3.5);
   }
 
@@ -313,7 +313,7 @@ beach_tower_killplayer_off() {
 
 trenches_combat_right_path() {
   common_scripts\utility::flag_wait("TRIGFLAG_player_entering_nest");
-  var_0 = getent("trenches_moveup_trig3", "targetname");
+  var_0 = getEnt("trenches_moveup_trig3", "targetname");
 
   if(isDefined(var_0)) {
     var_0 notify("trigger");
@@ -394,9 +394,9 @@ trench_main_friendlies() {
   var_1 = var_0;
 
   if(common_scripts\utility::flag("FLAG_trench_respawner_2")) {
-    var_1 = getent("trench_main_friendlies_respawner_2", "targetname");
+    var_1 = getEnt("trench_main_friendlies_respawner_2", "targetname");
   } else if(common_scripts\utility::flag("FLAG_trench_respawner_1")) {
-    var_1 = getent("trench_main_friendlies_respawner_1", "targetname");
+    var_1 = getEnt("trench_main_friendlies_respawner_1", "targetname");
   }
 
   for(;;) {
@@ -468,7 +468,7 @@ trench_artemis() {
   var_0 thread maps\homecoming_util::artemis_think();
   common_scripts\utility::flag_wait("FLAG_start_trenches");
   var_0 notify("stop_firing_for_good");
-  var_1 = common_scripts\utility::getstruct("trench_artemis_default_target", "targetname");
+  var_1 = common_scripts\utility::getStruct("trench_artemis_default_target", "targetname");
   var_0 setturrettargetvec(var_1.origin);
   common_scripts\utility::flag_wait("TRIGFLAG_player_leaving_tower_parking_area");
   level.trench_artemis.gunner maps\homecoming_util::delete_safe();
@@ -478,13 +478,13 @@ trench_artemis() {
 trench_artemis_guy() {
   thread maps\_utility::magic_bullet_shield();
   maps\homecoming_util::set_ai_array("trench_artemis_frendlies");
-  maps\homecoming_util::waittill_trigger(getent("trench_artemis_start_trig", "script_noteworthy"));
+  maps\homecoming_util::waittill_trigger(getEnt("trench_artemis_start_trig", "script_noteworthy"));
   maps\homecoming_util::ignore_everything();
   var_0 = level.trench_artemis;
   var_0.artemisnofiresound = undefined;
   level.trench_artemis.gunner = self;
   var_0 maps\_anim::anim_generic_reach(self, "artemis_getin", "tag_gunner");
-  self linkto(var_0, "tag_gunner", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_gunner", (0, 0, 0), (0, 0, 0));
   var_0 maps\_anim::anim_generic(self, "artemis_getin", "tag_gunner");
   var_0 thread maps\_anim::anim_generic_loop(self, "artemis_loop", "stop_anim", "tag_gunner");
   var_0 thread maps\homecoming_util::artemis_think();
@@ -734,7 +734,7 @@ trench_hovercraft_over_moment() {
 
 trench_hovercraft_over_moment_stumblers() {
   self endon("death");
-  var_0 = getent("trench_hovercraft_stumblers_trig", "targetname");
+  var_0 = getEnt("trench_hovercraft_stumblers_trig", "targetname");
 
   if(!isDefined(self.magic_bullet_shield)) {
     maps\_utility::magic_bullet_shield();
@@ -872,8 +872,8 @@ trench_tower_explode_missiles() {
   var_2 = 1;
 
   foreach(var_10, var_4 in var_0) {
-    var_5 = common_scripts\utility::getstruct(var_4.target, "targetname");
-    var_6 = vectornormalize(var_5.origin - var_4.origin);
+    var_5 = common_scripts\utility::getStruct(var_4.target, "targetname");
+    var_6 = vectorNormalize(var_5.origin - var_4.origin);
     var_7 = vectortoangles(var_6);
     var_8 = spawn("script_model", var_4.origin);
     var_8 setModel("projectile_slamraam_missile");
@@ -881,7 +881,7 @@ trench_tower_explode_missiles() {
     playFXOnTag(common_scripts\utility::getfx("tower_missile_trails"), var_8, "tag_fx");
     var_9 = var_10 + 1;
     var_8 thread maps\_utility::play_sound_on_entity("missile_incoming_0" + var_9);
-    var_8 moveto(var_5.origin, var_1);
+    var_8 moveTo(var_5.origin, var_1);
     var_8 common_scripts\utility::delaycall(var_1, ::delete);
 
     if(var_2) {
@@ -895,11 +895,11 @@ trench_tower_explode_missiles() {
 }
 
 warthog_player_tower_crash() {
-  var_0 = common_scripts\utility::getstruct("a10_crash_start", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct("a10_crash_start", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 = spawn("script_model", var_0.origin);
   var_2 setModel("vehicle_a10_warthog_iw6");
-  var_3 = vectornormalize(var_1.origin - var_0.origin);
+  var_3 = vectorNormalize(var_1.origin - var_0.origin);
   var_4 = vectortoangles(var_3);
   var_2.angles = var_4;
   var_5 = anglesToForward(var_4);
@@ -910,7 +910,7 @@ warthog_player_tower_crash() {
   var_2 thread maps\homecoming_util::playloopingfx("airplane_smoke_trail", 0.05, undefined, "tag_engine_right");
   var_2 thread maps\homecoming_util::playloopingfx("airplane_smoke_trail", 0.05, undefined, "tag_left_wingtip");
   var_2 thread maps\_utility::play_sound_on_entity("scn_home_a10_incoming_crash");
-  var_2 moveto(var_1.origin, 1.8, 1, 0);
+  var_2 moveTo(var_1.origin, 1.8, 1, 0);
   var_2 waittill("movedone");
   var_2 delete();
 }
@@ -1009,7 +1009,7 @@ a10_squadron_tower_crash_missile(var_0, var_1) {
   wait(var_1 - 0.5);
   var_2 = var_0.origin + (0, -500, -1000);
   var_3 = magicbullet("sparrow_missile", var_2, var_0.origin);
-  var_3 missile_settargetent(var_0);
+  var_3 missile_settargetEnt(var_0);
   var_3 hudoutlineenable(4, 0);
 }
 
@@ -1040,9 +1040,9 @@ trench_tower_hind() {
   }
 }
 
-trench_tower_hind_targetent() {
+trench_tower_hind_targetEnt() {
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self, "tag_origin", (0, 0, -125), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, -125), (0, 0, 0));
   target_set(var_0, (0, 0, 0));
   target_hidefromplayer(var_0, level.player);
   self waittill("death");
@@ -1138,7 +1138,7 @@ trench_tower_hind_leave() {
   self notify("stop_firing");
   self clearlookatent();
   self vehicle_setspeed(60, 40, 10);
-  var_0 = common_scripts\utility::getstruct("tower_hind_leave_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("tower_hind_leave_start", "targetname");
   thread maps\_vehicle_code::vehicle_paths_helicopter(var_0);
   self waittill("reached_dynamic_path_end");
   self delete();
@@ -1149,7 +1149,7 @@ tower_hind_targetplayer() {
   self endon("tower_hind_stop_logic");
   var_0 = spawn("script_origin", level.player.origin);
   thread maps\homecoming_util::heli_fire_turret(var_0, 1);
-  var_1 = common_scripts\utility::getstruct("tower_hind_back_target", "targetname");
+  var_1 = common_scripts\utility::getStruct("tower_hind_back_target", "targetname");
   var_2 = var_1;
 
   for(;;) {
@@ -1280,7 +1280,7 @@ bottom_tower_enemies() {
     var_5 setgoalnode(var_3[var_6]);
   }
 
-  var_7 = getent("tower_bottom_enemies_volume", "targetname");
+  var_7 = getEnt("tower_bottom_enemies_volume", "targetname");
 
   while(var_1.size > 0) {
     wait 0.1;
@@ -1310,7 +1310,7 @@ top_tower_enemies() {
   level maps\_utility::add_wait(maps\_utility::waittill_msg, "stealth_event_notify");
   maps\_utility::do_wait_any();
   wait(randomfloatrange(0.4, 0.8));
-  self stopanimscripted();
+  self stopanimScripted();
   self.animspot notify("stop_loop");
   self notify("stop_loop");
   self notify("stop_fake_behavior");

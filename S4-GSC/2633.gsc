@@ -427,7 +427,7 @@ _id_77C9(var_0) {
     var_1 = var_0 scripts\engine\utility::_id_6562();
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_3 = scripts\engine\utility::getstruct(var_1[var_2], "script_linkname");
+      var_3 = scripts\engine\utility::getStruct(var_1[var_2], "script_linkname");
 
       if(isDefined(var_3)) {
         return var_3;

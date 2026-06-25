@@ -103,7 +103,7 @@ func_C6AE(var_0) {
   var_1 setotherent(self);
   var_1 setscriptablepartstate("effects", "active", 0);
   var_2 = var_1.origin + anglesToForward(var_1.angles) * 1750;
-  var_1 moveto(var_2, var_0);
+  var_1 moveTo(var_2, var_0);
   wait(var_0);
   self visionsetnakedforplayer("", 0.5);
   var_1 delete();

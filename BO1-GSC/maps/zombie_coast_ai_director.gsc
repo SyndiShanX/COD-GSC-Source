@@ -113,7 +113,7 @@ coast_director_water_rise_fx(angles, fx_pos, anim_time) {
   ENTER_DIST = 295;
   offset = fx_pos[2];
   if(isDefined(self.water_trigger)) {
-    point = getstruct(self.water_trigger.target, "targetname");
+    point = getStruct(self.water_trigger.target, "targetname");
     offset = point.origin[2];
   }
   org = (fx_pos[0], fx_pos[1], offset);
@@ -123,15 +123,15 @@ coast_director_water_rise_fx(angles, fx_pos, anim_time) {
   trail.angles = angles;
   trail setModel("tag_origin");
   playFXOnTag(level._effect["director_water_trail"], trail, "tag_origin");
-  forward = VectorNormalize(anglesToForward(angles));
+  forward = vectorNormalize(anglesToForward(angles));
   end = org + vector_scale(forward, ENTER_DIST);
-  trail moveto(end, anim_time);
+  trail moveTo(end, anim_time);
   trail waittill("movedone");
   trail delete();
 }
 coast_director_water_on_screen() {
   wait(0.5);
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(is_true(players[i]._in_coast_water)) {
       players[i] SetWaterSheeting(1, 7.0);
@@ -153,38 +153,38 @@ coast_director_water_rise(angles, origin) {
   ENTER_DIST = 295;
   emerge_anim = % ai_zombie_boss_emerge_from_water;
   time = getAnimLength(emerge_anim);
-  forward = VectorNormalize(anglesToForward(angles));
+  forward = vectorNormalize(anglesToForward(angles));
   fx_pos = origin - vector_scale(forward, ENTER_DIST);
   offset = fx_pos[2];
   if(isDefined(self.water_trigger)) {
-    point = getstruct(self.water_trigger.target, "targetname");
+    point = getStruct(self.water_trigger.target, "targetname");
     offset = point.origin[2];
   }
   org = (fx_pos[0], fx_pos[1], offset);
   playFX(level._effect["director_glow_docile"], org);
   wait(1);
-  playsoundatposition("zmb_director_bubble_effect", fx_pos);
-  players = getplayers();
+  playSoundAtPosition("zmb_director_bubble_effect", fx_pos);
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
-    players[i] PlayRumbleOnEntity("explosion_generic");
+    players[i] playRumbleOnEntity("explosion_generic");
   }
   water_pos = origin - (0, 0, ENTER_HEIGHT);
   water_pos -= vector_scale(forward, ENTER_DIST);
   so = spawn("script_origin", self.origin);
   so.angles = self.angles;
-  self linkto(so);
+  self linkTo(so);
   so.origin = water_pos;
-  so rotateto(angles, 0.1);
+  so rotateTo(angles, 0.1);
   so waittill("rotatedone");
   self unlink();
   so delete();
   self thread coast_director_water_rise_fx(self.angles, fx_pos, time);
   self Show();
   self thread coast_director_delay_weapon();
-  self SetPlayerCollision(1);
+  self setPlayerCollision(1);
   self playSound("zmb_director_exit_water");
   level notify("director_emerging_audio");
-  self animscripted("emerge_anim", self.origin, self.angles, emerge_anim, "normal", %body, 1, 0.1);
+  self animScripted("emerge_anim", self.origin, self.angles, emerge_anim, "normal", %body, 1, 0.1);
   wait(time);
   self.goalradius = 90;
   self.on_break = undefined;
@@ -203,7 +203,7 @@ coast_director_get_reentry_point() {
   location = [];
   for(i = 0; i < level.water.size; i++) {
     if(isDefined(level.water[i].target)) {
-      point = getstruct(level.water[i].target, "targetname");
+      point = getStruct(level.water[i].target, "targetname");
       zone_enabled = check_point_in_active_zone(point.origin);
       if(zone_enabled) {
         location = array_add(location, point);
@@ -252,20 +252,20 @@ coast_director_exit_level(exit, calm) {
   }
   return_anim = % ai_zombie_boss_return_to_water;
   time = getAnimLength(return_anim);
-  playsoundatposition("zmb_director_bubble_effect", exit.origin);
+  playSoundAtPosition("zmb_director_bubble_effect", exit.origin);
   self thread coast_director_exit_fx(time);
   self playSound("zmb_director_enter_water");
-  self animscripted("return_anim", self.origin, self.angles, return_anim, "normal", %body, 1, 0.1);
+  self animScripted("return_anim", self.origin, self.angles, return_anim, "normal", %body, 1, 0.1);
   wait(time);
   self OrientMode("face default");
-  self SetPlayerCollision(0);
+  self setPlayerCollision(0);
   self clearclientflag(level._ZOMBIE_ACTOR_FLAG_DIRECTOR_DEATH);
-  players = getplayers();
+  players = getPlayers();
   rand = RandomIntRange(0, players.size);
   players[rand] thread maps\_zombiemode_audio::create_and_play_dialog("director", "exit");
   so = spawn("script_origin", self.origin);
   so.angles = self.angles;
-  self linkto(so);
+  self linkTo(so);
   so.origin = self.origin - (0, 0, 120);
   wait_network_frame();
   self unlink();
@@ -285,9 +285,9 @@ coast_director_exit_fx(anim_time) {
   trail.angles = self.angles;
   trail setModel("tag_origin");
   playFXOnTag(level._effect["director_water_trail"], trail, "tag_origin");
-  forward = VectorNormalize(anglesToForward(self.angles));
+  forward = vectorNormalize(anglesToForward(self.angles));
   end = self.origin + vector_scale(forward, EXIT_DIST);
-  trail moveto(end, anim_time);
+  trail moveTo(end, anim_time);
   trail waittill("movedone");
   trail delete();
 }
@@ -296,7 +296,7 @@ coast_director_find_exit() {
   dist = 1000000;
   for(i = 0; i < level.water.size; i++) {
     if(isDefined(level.water[i].target)) {
-      point = getstruct(level.water[i].target, "targetname");
+      point = getStruct(level.water[i].target, "targetname");
       zone_enabled = check_point_in_active_zone(point.origin);
       if(zone_enabled) {
         exit_dist = Distance(self.origin, point.origin);
@@ -361,7 +361,7 @@ coast_director_choose_run() {
   return false;
 }
 check_for_close_players() {
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(DistanceSquared(self.origin, players[i].origin) <= 600 * 600) {
       players[i] thread maps\_zombiemode_audio::create_and_play_dialog("director", "water");
@@ -377,11 +377,11 @@ coast_director_find_exit_point() {
   }
   maps\_zombiemode_ai_director::director_print("going to exit point");
   self.solo_last_stand = true;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = VectorNormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {
@@ -437,14 +437,14 @@ coast_director_failsafe() {
     if(self.failsafe >= 10) {
       so = spawn("script_origin", self.origin);
       so.angles = self.angles;
-      self linkto(so);
+      self linkTo(so);
       point = coast_director_get_reentry_point();
       so.origin = point.origin;
       wait_network_frame();
       self unlink();
       so delete();
       self.failsafe = 0;
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         players[i] playlocalsound("zmb_laugh_child");
       }

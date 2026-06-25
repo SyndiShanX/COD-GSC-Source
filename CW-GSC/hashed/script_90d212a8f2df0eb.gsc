@@ -91,7 +91,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   village_bridge_and_gate_clip = getEntArray("village_bridge_and_gate_clip", "targetname");
   array::thread_all(village_bridge_and_gate_clip, &namespace_d9b153b9::ent_cleanup);
   level flag::clear("flag_village_heli_bridge_explosion_smart_models");
-  var_fc3729bf = getent("village_barrel", "targetname");
+  var_fc3729bf = getEnt("village_barrel", "targetname");
 
   if(isDefined(var_fc3729bf)) {
     var_233809e = getEntArray(var_fc3729bf.target, "targetname");
@@ -113,7 +113,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   array::thread_all(village_barrels_clip, &namespace_d9b153b9::ent_cleanup);
   gates = getEntArray("village_gates_whole", "targetname");
   array::thread_all(gates, &namespace_d9b153b9::ent_cleanup);
-  var_e2c87cc0 = getent("village_left_tower_roof", "targetname");
+  var_e2c87cc0 = getEnt("village_left_tower_roof", "targetname");
 
   if(isDefined(var_e2c87cc0)) {
     var_e2c87cc0 thread namespace_d9b153b9::ent_cleanup();
@@ -310,7 +310,7 @@ function function_a484ebe4() {
   level endon(#"start_outro");
   level thread function_b88d43ca();
   guys = spawner::get_ai_group_ai("village_enemies");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(guys.size > 0) {
     guys = spawner::get_ai_group_ai("village_enemies");
@@ -428,7 +428,7 @@ function village_heli() {
   village_heli_riders = spawner::simple_spawn("village_heli_riders", &function_755ddd07);
   var_d8bef009 = util::spawn_model("p7_generic_prop_x3");
   level.var_88166dcc = util::spawn_model("tag_origin", var_d8bef009 gettagorigin("j_prop_1"), var_d8bef009 gettagangles("j_prop_1"));
-  level.var_88166dcc linkto(var_d8bef009, "j_prop_1");
+  level.var_88166dcc linkTo(var_d8bef009, "j_prop_1");
   a_ents = [];
   a_ents[#"village_heli"] = level.var_a1414070;
   a_ents[#"hash_26400e73546a78c8"] = var_d8bef009;
@@ -474,10 +474,10 @@ function function_755ddd07() {
 function function_94850755() {
   level waittill(#"village_heli_missile");
   level thread scene::play("scene_pri_tower_left_tower");
-  screenshake(getent("camshake_tower_l_missile", "targetname").origin, 1.5, 1, 1, 0.3, 0, 0.1, 2239, 10, 0, 1, 1.5);
+  screenshake(getEnt("camshake_tower_l_missile", "targetname").origin, 1.5, 1, 1, 0.3, 0, 0.1, 2239, 10, 0, 1, 1.5);
   level thread exploder::exploder("village_missile_strike_01");
-  level.player playrumbleonentity("damage_heavy");
-  var_e2c87cc0 = getent("village_left_tower_roof", "targetname");
+  level.player playRumbleOnEntity("damage_heavy");
+  var_e2c87cc0 = getEnt("village_left_tower_roof", "targetname");
   var_e2c87cc0 delete();
   level flag::set("village_missile_strike_explo_1");
   var_2dd62fba = getEntArray("village_end_spotlight_model", "targetname");
@@ -488,32 +488,32 @@ function function_94850755() {
     }
   }
 
-  var_16d40914 = getent("brushmodel_tower_left", "targetname");
+  var_16d40914 = getEnt("brushmodel_tower_left", "targetname");
   var_16d40914 delete();
   level thread exploder::stop_exploder("lgt_village_explosion_left");
   level waittill(#"hash_851da51ba378f2d");
   level thread function_a484ebe4();
   level thread function_e05f6671();
   level flag::set("village_missile_strike_explo_3");
-  var_a4394835 = getent("vol_village_heli_kill_zone", "targetname");
+  var_a4394835 = getEnt("vol_village_heli_kill_zone", "targetname");
   a_targets = var_a4394835 ai::function_18c4ff86("axis");
   level.var_a1414070 turretsettarget(1, level.var_88166dcc);
   level.var_a1414070 thread function_66311af9();
   level.var_a1414070 thread function_8ce745a6(level.var_88166dcc);
   level waittill(#"hash_3db629f9bf3c2182");
   level thread scene::play("scene_pri_tower_right_tower");
-  var_10f7891b = getent("village_end_spotlight_model_r", "targetname");
+  var_10f7891b = getEnt("village_end_spotlight_model_r", "targetname");
 
   if(isDefined(var_10f7891b)) {
     var_10f7891b delete();
   }
 
-  var_f84681a7 = getent("brushmodel_tower_right", "targetname");
+  var_f84681a7 = getEnt("brushmodel_tower_right", "targetname");
   var_f84681a7 delete();
   level thread exploder::stop_exploder("lgt_village_explosion_right");
   wait 2.49;
-  screenshake(getent("camshake_tower_r_collapse", "targetname").origin, 1, 1, 1, 0.2, 0, 0.1, 2239, 8, 0, 1, 2.5);
-  level.player playrumbleonentity("damage_heavy");
+  screenshake(getEnt("camshake_tower_r_collapse", "targetname").origin, 1, 1, 1, 0.2, 0, 0.1, 2239, 8, 0, 1, 2.5);
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 function function_d559f227(wait_till) {
@@ -543,7 +543,7 @@ function function_83e9c57d() {
 
   level flag::wait_till("village_missile_strike_explo_barrel");
   wait 3;
-  vol = getent("village_siege_anim_volume", "targetname");
+  vol = getEnt("village_siege_anim_volume", "targetname");
 
   if(!isDefined(vol)) {
     return;
@@ -579,7 +579,7 @@ function function_66311af9() {
   level scene::play("scene_pri_village_bridge");
   level thread exploder::exploder("village_missile_strike_02_bridge");
   level flag::set("village_missile_strike_explo_barrel");
-  screenshake(getent("camshake_bridge_ammo_exp", "targetname").origin, 1.5, 1, 1, 0.3, 0, 0.1, 2239, 11, 0, 1, 1.5);
+  screenshake(getEnt("camshake_bridge_ammo_exp", "targetname").origin, 1.5, 1, 1, 0.3, 0, 0.1, 2239, 11, 0, 1, 1.5);
   wait 0.3;
   level thread exploder::exploder("village_missile_strike_02_gate");
   level thread function_181a46f();
@@ -587,12 +587,12 @@ function function_66311af9() {
   array::thread_all(village_bridge_and_gate_clip, &namespace_d9b153b9::ent_cleanup);
   level clientfield::set("dmg_models_and_vol_decals_village", 1);
   level flag::set("flag_village_heli_bridge_explosion_smart_models");
-  screenshake(getent("camshake_barrel_l_exp", "targetname").origin, 3.5, 1, 3, 0.5, 0, 0.3, 2239, 10, 0, 1, 1.2);
+  screenshake(getEnt("camshake_barrel_l_exp", "targetname").origin, 3.5, 1, 3, 0.5, 0, 0.3, 2239, 10, 0, 1, 1.2);
   wait 0.35;
-  screenshake(getent("camshake_barrel_r_exp", "targetname").origin, 2.5, 0.8, 0.5, 1.5, 0, 1.5, 2239, 10, 0, 1, 1.2);
+  screenshake(getEnt("camshake_barrel_r_exp", "targetname").origin, 2.5, 0.8, 0.5, 1.5, 0, 1.5, 2239, 10, 0, 1, 1.2);
   level flag::set("village_missile_strike_explo_2");
   wait 0.3;
-  var_fc3729bf = getent("village_barrel", "targetname");
+  var_fc3729bf = getEnt("village_barrel", "targetname");
   var_233809e = getEntArray(var_fc3729bf.target, "targetname");
   array::delete_all(var_233809e);
   var_fc3729bf delete();
@@ -620,7 +620,7 @@ function function_181a46f() {
     level.village_bridge_enemy_03 delete();
   }
 
-  village_bridge_volume = getent("village_bridge_volume", "targetname");
+  village_bridge_volume = getEnt("village_bridge_volume", "targetname");
   corpses = getcorpsearray();
 
   foreach(corpse in corpses) {
@@ -904,16 +904,16 @@ function function_10575162() {
   }
 
   level waittill(#"hash_77a198ac8c44bc25");
-  village_observe_adler_door = getent("village_observe_adler_door", "targetname");
+  village_observe_adler_door = getEnt("village_observe_adler_door", "targetname");
 
   if(isDefined(village_observe_adler_door)) {
-    village_observe_adler_door rotateyaw(90, 0.75);
+    village_observe_adler_door rotateYaw(90, 0.75);
   }
 
   level waittill(#"hash_9dc03befc6c3e71");
 
   if(isDefined(village_observe_adler_door)) {
-    village_observe_adler_door rotateyaw(-90, 0.75);
+    village_observe_adler_door rotateYaw(-90, 0.75);
   }
 }
 
@@ -979,7 +979,7 @@ function function_b94d034f(var_c79d614f) {
 function function_a099daab(var_9c878bb5) {
   wait 3;
 
-  if(isDefined(getent(var_9c878bb5, "targetname"))) {
+  if(isDefined(getEnt(var_9c878bb5, "targetname"))) {
     trigger::use(var_9c878bb5);
   }
 }

@@ -369,13 +369,13 @@ function function_b78161a2(str_objective, b_starting, var_aa1a6455, player) {
 
   if(player == "middle_paths_3") {
     level thread namespace_c6aa31df::function_c8f499c5("rice_paddies_3");
-    var_c64a655c = getent("flag_waterfall_path_player_right_trigger", "targetname");
+    var_c64a655c = getEnt("flag_waterfall_path_player_right_trigger", "targetname");
 
     if(isDefined(var_c64a655c)) {
       var_c64a655c triggerenable(0);
     }
 
-    var_cd34e60a = getent("flag_waterfall_path_player_left_trigger", "targetname");
+    var_cd34e60a = getEnt("flag_waterfall_path_player_left_trigger", "targetname");
 
     if(isDefined(var_cd34e60a)) {
       var_cd34e60a triggerenable(0);
@@ -588,7 +588,7 @@ function function_6890cc65() {
 
 function function_d56266e4() {
   level flag::wait_till("all_players_spawned");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   a_vols = getEntArray("vol_waterfall", "targetname");
 
@@ -721,7 +721,7 @@ function function_48737ebb() {
 }
 
 function on_player_spawned() {
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
 
   if(isDefined(level.skipto_current_objective)) {
     level thread namespace_d9b153b9::force_weapon_loadout(level.skipto_current_objective[0]);
@@ -1541,7 +1541,7 @@ function function_e14708f(str_objective, b_starting) {
   level thread scene::stop("<dev string:x67d>", "<dev string:x696>");
   level scene::delete_scene_spawned_ents("<dev string:x67d>");
   struct = struct::get("<dev string:x854>", "<dev string:x696>");
-  level.player setorigin(struct.origin);
+  level.player setOrigin(struct.origin);
   level.player setplayerangles(struct.angles);
   a_ai = getactorarray();
 

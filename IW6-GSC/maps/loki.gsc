@@ -86,7 +86,7 @@ space_sprinting_adjustments() {
     maps\loki_util::jkuprint("sprinting");
     earthquake(0.05, 1, level.player.origin, 200);
     var_4 = maps\loki_util::create_rumble_ent(925, "blaa", 1.5);
-    var_4 playrumbleonentity("light_2s");
+    var_4 playRumbleOnEntity("light_2s");
 
     while(self issprinting()) {
       common_scripts\utility::waitframe();
@@ -239,7 +239,7 @@ mission_objectives() {
       }
 
       objective_add(maps\_utility::obj("obj_locate_entrance"), "current", &"LOKI_OBJ_LOCATE_ENTRANCE");
-      var_0 = getent("combat_one_trig_wave3", "targetname");
+      var_0 = getEnt("combat_one_trig_wave3", "targetname");
       var_0 waittill("trigger");
       wait 3.0;
       objective_state(maps\_utility::obj("obj_locate_entrance"), "done");
@@ -384,7 +384,7 @@ mission_object_control_global() {
 
 loki_intro_lod_hide() {
   wait 0.05;
-  var_0 = getent("loki_combat1_lod", "targetname");
+  var_0 = getEnt("loki_combat1_lod", "targetname");
   var_1 = 10000;
 
   if(level.start_point == "infil") {
@@ -406,7 +406,7 @@ loki_control_room_boundaries() {
 }
 
 loki_earth_control(var_0) {
-  var_1 = getent("earth_model", "targetname");
+  var_1 = getEnt("earth_model", "targetname");
 
   if(!isDefined(level.earth_origin_start)) {
     level.earth_origin_start = var_1.origin;

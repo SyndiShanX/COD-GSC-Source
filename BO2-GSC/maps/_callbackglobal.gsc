@@ -230,7 +230,7 @@ setplayerspawnpos() {
   } else if(dist_squared < 30 * 30)
     spawn_pos = level._player_breadcrumbs[0][1].pos;
 
-  spawn_angles = vectornormalize(player.origin - spawn_pos);
+  spawn_angles = vectorNormalize(player.origin - spawn_pos);
   spawn_angles = vectortoangles(spawn_angles);
 
   if(!playerpositionvalid(spawn_pos)) {
@@ -238,7 +238,7 @@ setplayerspawnpos() {
     spawn_angles = player.angles;
   }
 
-  self setorigin(spawn_pos);
+  self setOrigin(spawn_pos);
   self setplayerangles(spawn_angles);
 }
 
@@ -261,7 +261,7 @@ callback_playerconnect() {
       if(players[0] == self) {
         println("2:Setting player origin to info_player_start " + info_player_spawn[0].origin);
 
-        self setorigin(info_player_spawn[0].origin);
+        self setOrigin(info_player_spawn[0].origin);
         self setplayerangles(info_player_spawn[0].angles);
         self thread player_breadcrumb_update();
       } else {
@@ -273,7 +273,7 @@ callback_playerconnect() {
     } else {
       println("Callback_PlayerConnect:Setting player origin to info_player_start " + info_player_spawn[0].origin);
 
-      self setorigin(info_player_spawn[0].origin);
+      self setOrigin(info_player_spawn[0].origin);
       self setplayerangles(info_player_spawn[0].angles);
       self thread player_breadcrumb_update();
     }

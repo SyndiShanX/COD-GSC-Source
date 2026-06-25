@@ -782,7 +782,7 @@ _id_F72B(var_0) {
       _id_0995::_id_973F(1, self, var_0.type, self._id_8B35, " None ", level._id_F464);
       var_0._id_B0C4 setModel(getweaponmodel(var_5));
       var_7 = _id_64E8(var_6);
-      var_0._id_B0C4 sethintstring(var_7);
+      var_0._id_B0C4 setHintString(var_7);
       var_0._id_B0C4 makeuseable();
       var_0._id_B0C9 = spawnStruct();
       var_0._id_B0C9.type = "explosive";

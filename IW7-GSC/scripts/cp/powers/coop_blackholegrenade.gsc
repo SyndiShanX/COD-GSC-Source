@@ -52,7 +52,7 @@ func_2B3E(var_0) {
   var_1 setotherent(var_0.owner);
   var_1 setModel("prop_mp_black_hole_grenade_scr");
   var_1 give_player_tickets(1);
-  var_1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_1 thread func_4116(var_0);
   var_0.physics_capsulecast = var_1;
   var_2 = getblackholecenter(var_0);
@@ -82,7 +82,7 @@ func_12EB1(var_0, var_1, var_2) {
     var_1 unlink();
     var_1.origin = var_5;
     var_1.angles = var_0.angles;
-    var_1 linkto(var_0);
+    var_1 linkTo(var_0);
     var_1 thread cleanuponparentdeath(var_6, 10);
     var_0 notify("blackhole_grenade_stuck");
     return;
@@ -157,8 +157,8 @@ grabclosestzombies(var_0, var_1) {
   var_2 = anglestoup(var_0.angles);
   var_3 = spawn("trigger_rotatable_radius", getblackholecenter(var_0) - var_2 * 64 * 0.5, 0, 200, 64);
   var_3.angles = var_0.angles;
-  var_3 enablelinkto();
-  var_3 linkto(var_0);
+  var_3 enablelinkTo();
+  var_3 linkTo(var_0);
   var_3 thread cleanuponparentdeath(var_0);
   while(isDefined(var_3)) {
     var_3 waittill("trigger", var_4);
@@ -217,7 +217,7 @@ suck_zombie(var_0, var_1, var_2) {
   wait(randomfloatrange(0, 1));
   var_4 = 22500;
   while(distancesquared(self.origin, var_1.origin) > var_4) {
-    self setvelocity(vectornormalize(var_1.origin - self.origin) * 150 + (0, 0, 30));
+    self setvelocity(vectorNormalize(var_1.origin - self.origin) * 150 + (0, 0, 30));
     wait(0.05);
   }
 
@@ -226,8 +226,8 @@ suck_zombie(var_0, var_1, var_2) {
   self.precacheleaderboards = 1;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
-  self.anchor moveto(var_3, 0.5);
+  self linkTo(self.anchor);
+  self.anchor moveTo(var_3, 0.5);
   wait(0.5);
   if(soundexists("trap_blackhole_body_gore")) {
     playsoundatpos(self.origin, "trap_blackhole_body_gore");
@@ -259,8 +259,8 @@ func_13A58(var_0) {
   var_1 = anglestoup(var_0.angles);
   var_2 = spawn("trigger_rotatable_radius", getblackholecenter(var_0) - var_1 * 64 * 0.5, 0, 64, 64);
   var_2.angles = var_0.angles;
-  var_2 enablelinkto();
-  var_2 linkto(var_0);
+  var_2 enablelinkTo();
+  var_2 linkTo(var_0);
   var_2 thread cleanuponparentdeath(var_0);
   while(isDefined(var_2)) {
     var_2 waittill("trigger", var_3);
@@ -296,7 +296,7 @@ func_10834(var_0, var_1, var_2) {
   var_3 setotherent(var_0.owner);
   var_3 setentityowner(var_0.owner);
   var_3 setModel("black_hole_projector_wm");
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   var_3.objective_position = var_0;
   var_3.owner = var_0.owner;
   var_3 thread cleanuponparentdeath(var_0);
@@ -310,7 +310,7 @@ func_10835(var_0, var_1, var_2) {
   var_3 setotherent(var_0.owner);
   var_3 setentityowner(var_0);
   var_3 setModel("prop_mp_black_hole_grenade_scr");
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   var_3 thread func_4116(var_0);
   return var_3;
 }
@@ -350,7 +350,7 @@ func_4116(var_0) {
 spawnblackholephysicsvolume(var_0, var_1, var_2, var_3) {
   var_4 = physics_volumecreate(var_1, 200);
   var_4.angles = var_2;
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   var_4 physics_volumesetasfocalforce(1, var_1, var_3);
   var_4 physics_volumeenable(1);
   var_4 physics_volumesetactivator(1);
@@ -395,7 +395,7 @@ func_139AD() {
 func_10831(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnimpulsefield(var_3, var_4, var_1);
   var_5.angles = var_2;
-  var_5 linkto(var_0);
+  var_5 linkTo(var_0);
   var_5 thread cleanuponparentdeath(var_0);
 }
 
@@ -403,7 +403,7 @@ createkillcam(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
   var_1 setscriptmoverkillcam("explosive");
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 thread cleanuponparentdeath(var_0);
   return var_1;
 }

@@ -528,7 +528,7 @@ start_insertion() {
     return;
   }
 
-  while(getplayers().size == 0) {
+  while(getPlayers().size == 0) {
     wait 0.5;
   }
 
@@ -579,7 +579,7 @@ start_warzone() {
   level.var_bde3d03 = undefined;
   survey_id = function_70171add();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player spawn::function_8cef1872();
     player val::reset(#"warzonestaging", "takedamage");
 
@@ -628,7 +628,7 @@ function_ec2c9808(response, intpayload) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.team === self.team) {
       if(response == "placed") {
         xcoord = int(intpayload / 1000);
@@ -814,7 +814,7 @@ function_f1394038() {
 
   foreach(team, _ in level.teams) {
     if(teams::function_9dd75dad(team) && !(isDefined(level.var_606becce[team]) && level.var_606becce[team]) && !isDefined(level.var_eed7c027[team])) {
-      players = getplayers(team);
+      players = getPlayers(team);
       team_score = [[level._getteamscore]](team);
       team_kills = function_7e309c84(team, players);
       damage_done = function_3915e148(team, players);
@@ -919,7 +919,7 @@ function_c7eae573() {
 
   foreach(team, _ in level.teams) {
     if(teams::function_9dd75dad(team) && !(isDefined(level.var_606becce[team]) && level.var_606becce[team]) && teams::is_all_dead(team)) {
-      players = getplayers(team);
+      players = getPlayers(team);
       last_alive = function_94203702(team, players);
       team_kills = function_7e309c84(team, players);
       damage_done = function_3915e148(team, players);
@@ -954,7 +954,7 @@ function_5fed3908(team) {
   level thread wz_contracts::function_5648f82(team);
 
   if(function_8b1a219a()) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     foreach(player in players) {
       player clientfield::set_to_player("RGB_keyboard_manager", 1);
@@ -967,7 +967,7 @@ team_eliminated(team, var_293493b) {
   wz_progression::team_eliminated(team, var_293493b);
   level function_22df4165();
   level thread function_9498e451(team);
-  deadteam = getplayers(team);
+  deadteam = getPlayers(team);
 
   foreach(teammember in deadteam) {
     teammember notify(#"end_respawn");
@@ -1035,7 +1035,7 @@ function_a40b79b1(team) {
     return true;
   }
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     if(isalive(player) && !player laststand::player_is_in_laststand()) {
       return false;
     }
@@ -1073,7 +1073,7 @@ infection_end_game(params) {
     music::setmusicstate("pan_timeout_01");
     flagsys::set(#"hash_402b08cbe8f533d2");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player luinotifyevent(#"create_prematch_timer", 3, gettime() + 60000, 1, 1);
     }
 
@@ -1186,7 +1186,7 @@ function_3832a0d2(team) {
 
 function_b5f4c9d8(team) {
   winner = undefined;
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -1224,7 +1224,7 @@ on_one_left_event(team) {
     return;
   }
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     if(isalive(player) && !player laststand::player_is_in_laststand()) {
       player globallogic_audio::leader_dialog_on_player("warLastManStanding");
       return;
@@ -1294,7 +1294,7 @@ function_c1a417ee(params) {
 
 function_75134917() {
   if(infection::function_74650d7() && !self infection::is_infected()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.team === self.team) {
         player luinotifyevent(#"teammate_waypoint_removed", 1, self getentitynumber());
         self luinotifyevent(#"teammate_waypoint_removed", 1, player getentitynumber());
@@ -1374,7 +1374,7 @@ player_killed(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitlo
     if(params.var_dfa2cc2c.size == 1) {
       survivors = 0;
 
-      foreach(player in getplayers(params.var_dfa2cc2c[0])) {
+      foreach(player in getPlayers(params.var_dfa2cc2c[0])) {
         if(isalive(player) && !player laststand::player_is_in_laststand()) {
           survivors++;
         }
@@ -1456,7 +1456,7 @@ function_de15dc32(killed_player, disconnected_player) {
   var_77cfc33d = game.state == "pregame" || function_47851c07();
 
   foreach(team in level.teams) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     if(players.size == 0) {
       continue;
@@ -1523,7 +1523,7 @@ function_e91890a7() {
 
   util::waittillslowprocessallowed();
   player_counts = function_de15dc32();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     aliveplayercount = player_counts.alive;
@@ -1548,7 +1548,7 @@ function_e91890a7() {
     }
 
     aliveteammates = 0;
-    teammembers = getplayers(player.team);
+    teammembers = getPlayers(player.team);
 
     foreach(member in teammembers) {
       if(isalive(member) && member != player) {
@@ -1585,7 +1585,7 @@ function_c14f7557() {
   count = 0;
 
   foreach(team in level.teams) {
-    players = getplayers(team);
+    players = getPlayers(team);
     var_40073db2 = 0;
     var_ead60f69 = 0;
 
@@ -1733,7 +1733,7 @@ function_a3e209ba() {
 }
 
 function_aaa24662() {
-  belowworldtrigger = getent("below_world_trigger", "targetname");
+  belowworldtrigger = getEnt("below_world_trigger", "targetname");
 
   if(!isentity(belowworldtrigger)) {
     return;
@@ -1762,7 +1762,7 @@ function_1e150a0b(player) {
     var_708a2754 = physicstrace(startpos, endpos, (0, 0, 0), (0, 0, 0), player, 32);
 
     if(var_708a2754[#"fraction"] < 1) {
-      player setorigin(var_708a2754[#"position"]);
+      player setOrigin(var_708a2754[#"position"]);
       return;
     }
 
@@ -1842,7 +1842,7 @@ function_2a3d483d(start) {
   jumpdistance = 600;
   tomapcenter = mapcenter - start;
   var_d80c8cde = length(tomapcenter);
-  var_fa57b4b3 = vectornormalize(tomapcenter);
+  var_fa57b4b3 = vectorNormalize(tomapcenter);
   steps = int(var_d80c8cde / jumpdistance);
 
   for(index = 1; index <= steps; index++) {
@@ -1877,7 +1877,7 @@ _teleport_player(origin, angles, var_9914886a = 0) {
   wait fadetime;
   self.var_63b63c2 = 1;
   self unlink();
-  self setorigin(origin);
+  self setOrigin(origin);
   self setplayerangles((0, angles[1], 0));
   self.oobdisabled = 0;
   self.var_63b63c2 = 0;
@@ -1931,7 +1931,7 @@ function_6ee52dd0(damage, damageinterval) {
   while(!(isDefined(level.gameended) && level.gameended)) {
     time = gettime();
 
-    foreach(i, player in getplayers()) {
+    foreach(i, player in getPlayers()) {
       if(!isalive(player)) {
         continue;
       }

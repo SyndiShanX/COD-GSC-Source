@@ -229,7 +229,7 @@ function vehicle_keyline_toggle(localclientnum, oldval, newval, bnewent, binitia
   vh_player = getplayervehicle(e_player);
 
   if(bwastimejump == 1) {
-    foreach(var_ac85c33a in getplayers(fieldname)) {
+    foreach(var_ac85c33a in getPlayers(fieldname)) {
       if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && vh_player === self && (self.archetype === "fighter" || self.scriptvehicletype === "player_fav")) {
         var_ac85c33a thread function_39273849(1);
       }
@@ -242,7 +242,7 @@ function vehicle_keyline_toggle(localclientnum, oldval, newval, bnewent, binitia
     return;
   }
 
-  foreach(var_ac85c33a in getplayers(fieldname)) {
+  foreach(var_ac85c33a in getPlayers(fieldname)) {
     if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && !isDefined(vh_player)) {
       var_ac85c33a thread function_39273849(0);
     }

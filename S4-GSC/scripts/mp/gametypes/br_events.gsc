@@ -86,7 +86,7 @@ _id_2BAB() {
     var_21 thread _id_2BAC(var_3, var_18);
   }
 
-  var_14 moveto(var_13, var_17);
+  var_14 moveTo(var_13, var_17);
   wait(var_17);
   var_14 delete();
 }

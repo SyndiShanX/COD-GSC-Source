@@ -438,7 +438,7 @@ func_C963(var_0) {
 
   var_3 = getmovedelta(var_0, 0, 1);
   var_5 = self gettweakablevalue(var_3);
-  var_5 = var_4 + vectornormalize(var_5 - var_4) * 20;
+  var_5 = var_4 + vectorNormalize(var_5 - var_4) * 20;
   var_6 = !scripts\engine\utility::actor_is3d();
   return self maymovefrompointtopoint(var_4, var_5, var_6, 1);
 }
@@ -546,7 +546,7 @@ func_1FAE() {
       continue;
     }
 
-    var_2 = vectornormalize(var_1 - self.origin);
+    var_2 = vectorNormalize(var_1 - self.origin);
     if(self.setocclusionpreset[0] * var_2[1] - var_2[0] * self.setocclusionpreset[1] > 0) {
       if(!func_12898(self.var_580F, self.var_5810)) {
         func_12898(self.var_580B, self.var_580C);
@@ -729,7 +729,7 @@ func_BCAD() {
     return;
   }
 
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = anglesToForward(var_2.angles);
   var_5 = var_4[0] * var_3[1] - var_4[1] * var_3[0] > 0;
   if(func_BCB5(var_5, var_1, var_2)) {
@@ -841,7 +841,7 @@ func_BCB5(var_0, var_1, var_2) {
   scripts\anim\shared::donotetracks("sideToSide", ::func_89E3);
   var_4 = self getscoreinfocategory(var_3);
   var_5 = var_2.origin - var_1.origin;
-  var_5 = vectornormalize((var_5[0], var_5[1], 0));
+  var_5 = vectorNormalize((var_5[0], var_5[1], 0));
   var_6 = getmovedelta(var_3, var_4, 1);
   var_7 = var_2.origin - self.origin;
   var_7 = (var_7[0], var_7[1], 0);

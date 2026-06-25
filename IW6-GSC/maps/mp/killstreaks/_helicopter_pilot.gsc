@@ -24,7 +24,7 @@ init() {
 
   heliPilot_setAirStartNodes();
 
-  level.heli_pilot_mesh = GetEnt("heli_pilot_mesh", "targetname");
+  level.heli_pilot_mesh = getEnt("heli_pilot_mesh", "targetname");
   if(!isDefined(level.heli_pilot_mesh)) {
     PrintLn("heli_pilot_mesh doesn't exist in this level: " + level.script);
   } else {
@@ -504,7 +504,7 @@ heliPilot_getLinkedStruct(struct) {
   if(isDefined(struct.script_linkTo)) {
     linknames = struct get_links();
     for(i = 0; i < linknames.size; i++) {
-      ent = getstruct(linknames[i], "script_linkname");
+      ent = getStruct(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         return ent;
       }

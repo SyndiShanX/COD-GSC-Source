@@ -350,7 +350,7 @@ function function_8675d6ed(n_challenge) {
     }
   }
   level flag::set("flag_player_initialized_reward");
-  var_a6a1ecf9 = getent("altar_lid", "targetname");
+  var_a6a1ecf9 = getEnt("altar_lid", "targetname");
   self function_d655a4ce(var_a6a1ecf9);
   self thread function_26abcbe0();
   self thread function_994b4784(var_a6a1ecf9);

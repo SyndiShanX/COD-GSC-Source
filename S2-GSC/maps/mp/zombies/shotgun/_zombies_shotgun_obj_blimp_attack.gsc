@@ -49,7 +49,7 @@ blimp_set_new_obj() {
 }
 
 blimp_init() {
-  level.var_179A = getent("obj_blimp", "targetname");
+  level.var_179A = getEnt("obj_blimp", "targetname");
   level.var_179A.var_9255 = level.var_179A.var_116;
   level.var_179A.var_9189 = level.var_179A.var_1D;
   level.var_179A method_8511();
@@ -223,7 +223,7 @@ blimp_set_can_rocket_players(param_00) {
 blimp_attach_weakpoints(param_00) {
   var_01 = getEntArray(param_00, "targetname");
   foreach(var_03 in var_01) {
-    var_03.var_65D8 = getent(var_03.var_1A2, "targetname");
+    var_03.var_65D8 = getEnt(var_03.var_1A2, "targetname");
     var_04 = common_scripts\utility::func_46B5(var_03.var_65D8.var_1A2, "targetname");
     var_05 = spawn("script_model", var_04.var_116);
     var_05 setModel("tag_origin");
@@ -231,7 +231,7 @@ blimp_attach_weakpoints(param_00) {
   }
 
   foreach(var_08 in var_01) {
-    var_08 enablelinkto();
+    var_08 enablelinkTo();
     var_08 method_8449(self);
     var_08.var_65D8 method_8449(self);
     var_08.var_65D9 method_8449(self);
@@ -263,7 +263,7 @@ blimp_attach_turret(param_00, param_01) {
 }
 
 blimp_attach_battery(param_00) {
-  self.battery = getent(param_00, "targetname");
+  self.battery = getEnt(param_00, "targetname");
   self.battery method_8449(self);
 }
 
@@ -281,7 +281,7 @@ blimp_display_state(param_00) {}
 blimp_retreat(param_00, param_01) {
   blimp_execute_leave(param_00);
   if(common_scripts\utility::func_562E(param_01)) {
-    var_02 = getent("overcharge_trig", "targetname");
+    var_02 = getEnt("overcharge_trig", "targetname");
     var_03 = 0;
     if(isDefined(var_02)) {
       var_03 = var_02.var_17A9;
@@ -816,7 +816,7 @@ turret_set_target(param_00) {
 }
 
 turret_get_target() {
-  return level.var_179A.blimp_turret getturrettargetent();
+  return level.var_179A.blimp_turret getturrettargetEnt();
 }
 
 turret_clear_target() {
@@ -901,11 +901,11 @@ turret_zap_players() {
         var_06 = level.var_179A.blimp_turret gettagorigin("TAG_AIM");
         var_07 = level.var_179A.blimp_turret gettagangles("TAG_AIM");
         var_08 = anglesToForward(var_07);
-        var_09 = vectornormalize(var_02.var_116 - var_06);
+        var_09 = vectorNormalize(var_02.var_116 - var_06);
         var_0A = vectordot(var_08, var_09);
         level.var_8C4C = level.var_179A.blimp_turret gettagorigin("TAG_AIM");
         var_0B = (var_02.var_1D[0], var_02.var_1D[1], var_02.var_1D[0]);
-        var_0C = 128 + randomint(128) * vectornormalize(anglesToForward(var_0B));
+        var_0C = 128 + randomint(128) * vectorNormalize(anglesToForward(var_0B));
         level.var_8C46 = var_02.var_116 + var_0C;
         level.var_8C4B = spawnsighttrace(level.var_8C4C, level.var_8C4C, level.var_8C46, 0);
         var_0D = bulletTrace(level.var_179A.blimp_turret gettagorigin("TAG_AIM"), level.var_8C46, 0, level.var_179A.blimp_turret);
@@ -1121,7 +1121,7 @@ battery_spawn_drop(param_00, param_01) {
   var_0A = var_08 * (var_09, var_09, 0);
   var_02 gravitymove(var_0A, var_05);
   if(isDefined(var_07.var_4DEA.var_1D)) {
-    var_02 rotateto(var_07.var_4DEA.var_1D, var_05);
+    var_02 rotateTo(var_07.var_4DEA.var_1D, var_05);
   }
 
   wait(var_05);
@@ -1185,11 +1185,11 @@ battery_set_drop_point_active() {
       if(isPlayer(var_03)) {
         var_04 = self.var_116;
         if(canspawn(var_04)) {
-          var_03 setorigin(var_04);
+          var_03 setOrigin(var_04);
         } else {
           var_05 = getclosestpointonnavmesh(var_04);
           if(canspawn(var_05)) {
-            var_03 setorigin(var_05);
+            var_03 setOrigin(var_05);
           } else {
             maps\mp\_movers::func_A047(var_03, 0);
           }
@@ -1231,11 +1231,11 @@ battery_clip_exploit_listener() {
       if(isDefined(var_02) && var_02 == self.var_241F) {
         var_03 = self.var_116;
         if(canspawn(var_03)) {
-          var_01 setorigin(var_03);
+          var_01 setOrigin(var_03);
         } else {
           var_04 = getclosestpointonnavmesh(var_03);
           if(canspawn(var_04)) {
-            var_01 setorigin(var_04);
+            var_01 setOrigin(var_04);
           } else {
             maps\mp\_movers::func_A047(var_01, 0);
           }
@@ -1330,7 +1330,7 @@ rocket_get_pos_offset() {
     return (0, 0, 0);
   }
 
-  return 64 * vectornormalize(anglesToForward(self.var_1D)) + (0, 0, 16);
+  return 64 * vectorNormalize(anglesToForward(self.var_1D)) + (0, 0, 16);
 }
 
 rocket_fire(param_00) {
@@ -1520,7 +1520,7 @@ aud_play_pa_dialog_qsort_compare_func(param_00, param_01) {
 aud_zombie_soul_suck(param_00, param_01) {
   var_02 = spawn("script_origin", param_00);
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02);
-  var_02 moveto(param_01, 1.9);
+  var_02 moveTo(param_01, 1.9);
   wait(2);
   var_02 delete();
 }
@@ -1537,7 +1537,7 @@ aud_blimp_start() {
   var_04 = 5;
   wait(1);
   var_05 = spawn("script_origin", var_00.var_116);
-  var_05 linkto(var_00, "tag_origin", (0, 0, -720), (0, 0, 0));
+  var_05 linkTo(var_00, "tag_origin", (0, 0, -720), (0, 0, 0));
   var_06 = lib_0380::func_6846("zmb_blimp_engine_lp", var_01, var_05, var_04, var_03, var_04);
   var_06 = lib_0380::func_6846("zmb_blimp_engine_lfe_lp", var_01, var_05, var_04, var_03, var_04);
   var_00 thread aud_blimp_cleanup_on_death(var_05);

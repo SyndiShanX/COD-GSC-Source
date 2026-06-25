@@ -810,7 +810,7 @@ teleport_player(origin, angles) {
   }
 
   self CancelMantle();
-  self SetOrigin(origin);
+  self setOrigin(origin);
   self SetPlayerAngles(angles);
   self SetStance("stand");
 

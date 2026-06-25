@@ -202,7 +202,7 @@ test_all() {
   wait 0.05;
   level.player maps\_utility::set_ignoreme(1);
   level.proxytestent = common_scripts\utility::spawn_tag_origin();
-  level.player playerlinkto(level.proxytestent, "tag_origin");
+  level.player playerlinkTo(level.proxytestent, "tag_origin");
 
   foreach(var_1 in level.proximity_spawn_ai.locations) {
     level.proximity_spawn_ai test_location(var_1);

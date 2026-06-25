@@ -206,7 +206,7 @@ snd_play_linked_notify_on_ent(var_0, var_1, var_2) {
 
 snd_play_linked_notify_on_ent_thread(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", self.origin);
-  var_3 linkto(self);
+  var_3 linkTo(self);
   var_3 playSound(var_0);
   self waittill(var_1);
   var_3 scalevolume(0, var_2);

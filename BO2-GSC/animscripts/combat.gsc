@@ -396,7 +396,7 @@ exposedcombatneedtoturn() {
 
 exposedcombatconsiderthrowgrenade() {
   self.a.throwinggrenade = 1;
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(players[0]) && isDefined(anim.throwgrenadeatplayerasap) && isalive(players[0])) {
     self.grenadeammo++;
@@ -711,7 +711,7 @@ tryexposedreacquire() {
     return;
   }
 
-  dirtoenemy = vectornormalize(self.enemy.origin - self.origin);
+  dirtoenemy = vectorNormalize(self.enemy.origin - self.origin);
   forward = anglesToForward(self.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {

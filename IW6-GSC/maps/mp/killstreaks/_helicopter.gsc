@@ -1086,8 +1086,8 @@ checkIsFacing(tolerance, currentTarget) {
   heliForwardVector *= (1, 1, 0);
   heliToTarget *= (1, 1, 0);
 
-  heliToTarget = VectorNormalize(heliToTarget);
-  heliForwardVector = VectorNormalize(heliForwardVector);
+  heliToTarget = vectorNormalize(heliToTarget);
+  heliForwardVector = vectorNormalize(heliForwardVector);
 
   targetCosine = VectorDot(heliToTarget, heliForwardVector);
   facingCosine = Cos(tolerance);
@@ -1113,8 +1113,8 @@ isFacing(tolerance, currentTarget) {
     heliForwardVector *= (1, 1, 0);
     heliToTarget *= (1, 1, 0);
 
-    heliToTarget = VectorNormalize(heliToTarget);
-    heliForwardVector = VectorNormalize(heliForwardVector);
+    heliToTarget = vectorNormalize(heliToTarget);
+    heliForwardVector = vectorNormalize(heliForwardVector);
 
     targetCosine = VectorDot(heliToTarget, heliForwardVector);
     facingCosine = Cos(tolerance);

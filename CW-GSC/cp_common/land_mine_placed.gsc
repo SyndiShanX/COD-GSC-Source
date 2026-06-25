@@ -50,12 +50,12 @@ function function_fbf401a1(b_shot = 0) {
 
   if(b_shot) {
     self function_9a72f627(level.var_577c9750.var_f46e77d2.var_4699084d);
-    playsoundatposition(level.var_577c9750.weapon.projexplosionsound, self.origin);
+    playSoundAtPosition(level.var_577c9750.weapon.projexplosionsound, self.origin);
     radiusdamage(self.origin, 50, 100, 50, self, "MOD_EXPLOSIVE", level.var_577c9750.weapon);
     playrumbleonposition(#"tactical_rumble", self.origin);
   } else {
     self function_9a72f627(level.var_577c9750.var_f46e77d2.var_d9aa8220);
-    playsoundatposition(level.var_577c9750.var_f46e77d2.var_df4a92e4, self.origin);
+    playSoundAtPosition(level.var_577c9750.var_f46e77d2.var_df4a92e4, self.origin);
     radiusdamage(self.origin, 200, 200, 100, self, "MOD_EXPLOSIVE", level.var_577c9750.weapon);
     physicsexplosionsphere(self.origin, 200, 50, 1);
     playrumbleonposition(#"hash_718ba886b3205e3f", self.origin);
@@ -85,7 +85,7 @@ function function_8108fc93() {
   self endoncallback(&function_dc857fe9, #"death", #"disarmed");
   self.t_proximity waittill(#"trigger");
   self util::remove_cursor_hint(#"use");
-  playsoundatposition(level.var_577c9750.var_f46e77d2.var_9a29cecd, self.origin);
+  playSoundAtPosition(level.var_577c9750.var_f46e77d2.var_9a29cecd, self.origin);
   self clientfield::set("show_blink_fx", 0);
   wait 0.5;
   self function_3a68b759();
@@ -94,10 +94,10 @@ function function_8108fc93() {
 function function_3a68b759() {
   self endon(#"death");
   self function_9a72f627(level.var_577c9750.var_f46e77d2.var_5afd2a1d);
-  playsoundatposition(level.var_577c9750.var_f46e77d2.var_69029368, self.origin);
-  self moveto(self.origin + (0, 0, level.var_577c9750.var_f46e77d2.var_1065654c), level.var_577c9750.var_f46e77d2.var_564c2203, 0, level.var_577c9750.var_f46e77d2.var_564c2203);
+  playSoundAtPosition(level.var_577c9750.var_f46e77d2.var_69029368, self.origin);
+  self moveTo(self.origin + (0, 0, level.var_577c9750.var_f46e77d2.var_1065654c), level.var_577c9750.var_f46e77d2.var_564c2203, 0, level.var_577c9750.var_f46e77d2.var_564c2203);
   self waittilltimeout(level.var_577c9750.var_f46e77d2.var_564c2203, #"movedone");
-  self moveto(self.origin - (0, 0, level.var_577c9750.var_f46e77d2.var_b140445d), level.var_577c9750.var_f46e77d2.var_dfc89b2a, level.var_577c9750.var_f46e77d2.var_dfc89b2a, 0);
+  self moveTo(self.origin - (0, 0, level.var_577c9750.var_f46e77d2.var_b140445d), level.var_577c9750.var_f46e77d2.var_dfc89b2a, level.var_577c9750.var_f46e77d2.var_dfc89b2a, 0);
   self waittilltimeout(level.var_577c9750.var_f46e77d2.var_dfc89b2a, #"movedone");
   self function_fbf401a1();
 }
@@ -105,8 +105,8 @@ function function_3a68b759() {
 function function_2371350(s_info) {
   self notify(#"disarmed");
   self clientfield::set("show_blink_fx", 0);
-  playsoundatposition(#"wpn_semtex_alert", self.origin);
-  s_info.player playrumbleonentity("gadget_deploy_small");
+  playSoundAtPosition(#"wpn_semtex_alert", self.origin);
+  s_info.player playRumbleOnEntity("gadget_deploy_small");
   level notify(#"hash_16165b3f25c881f4");
 }
 

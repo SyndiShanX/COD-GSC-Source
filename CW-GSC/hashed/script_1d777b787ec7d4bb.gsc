@@ -106,7 +106,7 @@ function function_3a3787ec() {
 }
 
 function function_e199d168() {
-  self.var_af9beb09 = getent(self.target, "targetname");
+  self.var_af9beb09 = getEnt(self.target, "targetname");
   self.var_af9beb09 function_619a5c20();
   self.var_af9beb09 clientfield::set("set_compass_icon", 1);
   self.var_af9beb09.control_point = self;
@@ -254,7 +254,7 @@ function function_b7c45db1(control_point, e_player) {
   if(level.var_2912d8c5 < 3) {
     control_point.mdl_tag zm_vo::function_d6f8bbd9(#"hash_15658e0da81868ac", 0, undefined, 1);
   } else {
-    playsoundatposition(#"hash_7b48ab684f546cde", (0, 0, 0));
+    playSoundAtPosition(#"hash_7b48ab684f546cde", (0, 0, 0));
 
     foreach(player in function_a1ef346b()) {
       earthquake(0.5, 4, player.origin, 2000);
@@ -283,7 +283,7 @@ function function_6ed4e713() {
 
 function function_7df47abd() {
   level endon(#"end_game", #"hash_3e765c26047c9f54");
-  playsoundatposition(#"hash_2ea7b4a593646089", self.origin);
+  playSoundAtPosition(#"hash_2ea7b4a593646089", self.origin);
   level flag::set(#"hash_1c70d74ceb5e9aa2");
   level flag::set(#"hash_5dce120a8e013b48");
   thread namespace_4ce4e65e::function_4f292ffc();
@@ -305,7 +305,7 @@ function function_7df47abd() {
     n_round = 10;
   }
 
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   if(!isDefined(n_players)) {
     return;
@@ -442,9 +442,9 @@ function function_1ef4bcd6(var_14a22ccd = 0) {
   level.available_slots = [];
 
   if(!var_14a22ccd) {
-    if(getplayers().size == 1) {
+    if(getPlayers().size == 1) {
       var_8c10e30b = 2;
-    } else if(getplayers().size == 2) {
+    } else if(getPlayers().size == 2) {
       var_8c10e30b = 3;
     } else {
       var_8c10e30b = 3;
@@ -527,7 +527,7 @@ function function_8ab36f01() {
   self.var_af9beb09 clientfield::set("" + #"hash_11d9c3835adcaece", 1);
   wait 3;
   playrumbleonposition(#"hash_605684c23d123c36", self.origin);
-  playsoundatposition(#"hash_302f5ee824b9e9eb", self.origin);
+  playSoundAtPosition(#"hash_302f5ee824b9e9eb", self.origin);
   self.var_af9beb09 scene::play(#"hash_5ee79d3fbd128d25", "explosion", self.var_af9beb09);
   self.var_af9beb09 thread scene::play(#"hash_5ee79d3fbd128d25", "explosion_idle", self.var_af9beb09);
   wait 3;
@@ -630,7 +630,7 @@ function function_30f8cfb4(satellite, zone_index, var_14a22ccd = 0) {
       satellite thread function_49401276(e_objective);
 
       if(isDefined(result.attacker)) {
-        playsoundatposition(#"hash_2b4962dfa0b1e01", self.origin);
+        playSoundAtPosition(#"hash_2b4962dfa0b1e01", self.origin);
       }
 
       if(!var_14a22ccd && isDefined(satellite.mdl)) {
@@ -744,7 +744,7 @@ function function_bc369205(var_14a22ccd = 0, var_17f8efd5 = 0, var_d219813c = 0)
       }
     }
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(!level.var_7dbadc8c zm_control_point_hud::is_open(e_player)) {
         level.var_7dbadc8c zm_control_point_hud::open(e_player, 1);
       }
@@ -828,7 +828,7 @@ function sndonoverride_eye_(var_c8d0baba, max_points, var_a80d5874) {
     progress = 1;
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(level.var_7dbadc8c zm_control_point_hud::is_open(e_player)) {
       if(is_true(var_a80d5874)) {
         level.var_7dbadc8c zm_control_point_hud::function_a04ff29a(e_player, progress);
@@ -874,7 +874,7 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
   zm_sq::objective_complete(#"hash_8602209567f541c");
   zm_sq::objective_complete(#"hash_3e7926c5aefe4406");
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(isDefined(level.var_7dbadc8c) && level.var_7dbadc8c zm_control_point_hud::is_open(e_player)) {
       level.var_7dbadc8c zm_control_point_hud::close(e_player);
       level.var_7dbadc8c zm_control_point_hud::function_a95c34f3(e_player, 0);
@@ -953,7 +953,7 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
       self thread function_afa5893c();
       level thread zm_gold_vo::function_df0c6e4e();
 
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         level.var_31028c5d prototype_hud::set_active_objective_string(e_player, #"");
         level.var_31028c5d prototype_hud::function_817e4d10(e_player, 0);
         level.var_31028c5d prototype_hud::function_1b05e380(e_player, 0);
@@ -968,7 +968,7 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
     level flag::set("failed_control_point" + self.script_int);
     level flag::clear("captured_control_point" + self.script_int);
     level notify(#"failed_control_point");
-    playsoundatposition(#"hash_1e81b38b571878ba", self.origin);
+    playSoundAtPosition(#"hash_1e81b38b571878ba", self.origin);
   }
 
   if(!level flag::get(#"pap_quest_completed")) {
@@ -1028,7 +1028,7 @@ function function_e8799ac6(var_32f76af8) {
 
       n_random_x = randomfloatrange(-3, 3);
       n_random_y = randomfloatrange(-3, 3);
-      v_fling = 150 * vectornormalize(var_ccea7dbf.origin - var_32f76af8.origin + (n_random_x, n_random_y, 500));
+      v_fling = 150 * vectorNormalize(var_ccea7dbf.origin - var_32f76af8.origin + (n_random_x, n_random_y, 500));
       var_ccea7dbf.var_d45ca662 = 1;
       var_ccea7dbf.var_98f1f37c = 1;
       var_ccea7dbf thread zm_utility::function_ffc279(v_fling, var_ccea7dbf);
@@ -1046,7 +1046,7 @@ function function_bf606a73() {
   self callback::function_d8abfc3d(#"hash_4afe635f36531659", &function_fd68cae4);
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     player = array::get_all_closest(self.origin, a_players)[0];
     namespace_85745671::function_744beb04(self);
 
@@ -1069,7 +1069,7 @@ function function_fd68cae4() {
 
 function function_ef08f824() {
   if(isDefined(self.var_cc514373)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isinarray(self.var_cc514373, player)) {
         if(player === self.activator) {
           scoreevents::processscoreevent(#"hash_338f0007dcc1d9df", player);

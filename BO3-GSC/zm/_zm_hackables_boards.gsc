@@ -76,7 +76,7 @@ function board_hack(hacker) {
     last_repaired_chunk = chunk;
     if(isDefined(self.clip)) {
       self.window.clip triggerenable(1);
-      self.window.clip disconnectpaths();
+      self.window.clip disconnectPaths();
     } else {
       zm_blockers::blocker_disconnect_paths(self.window.neg_start, self.window.neg_end);
     }

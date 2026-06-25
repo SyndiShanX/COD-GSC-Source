@@ -84,7 +84,7 @@ func_54D7() {
   var_00 = level.var_54D0["allies"].var_116;
   var_01 = level.var_54D0["allies"].var_1D;
   var_02 = level.var_54D0["allies"].var_8097;
-  var_03 = getent("allies_intro_blocker", "targetname");
+  var_03 = getEnt("allies_intro_blocker", "targetname");
   if(isDefined(var_03)) {
     var_03 method_805C();
   }
@@ -386,7 +386,7 @@ func_7FB3() {
   var_06 method_8495("mp_raids_cobra_church_plane_start", var_04, var_05, var_02);
   var_06 thread func_7FB1(var_02);
   var_06 thread func_7FB2();
-  var_07 = getent("church_collapse_steeple", "targetname");
+  var_07 = getEnt("church_collapse_steeple", "targetname");
   if(isDefined(var_07)) {
     var_07 delete();
   }
@@ -403,7 +403,7 @@ func_7FB3() {
 func_7FB2() {
   self method_808C();
   var_00 = spawn("script_origin", self.var_116);
-  var_00 linkto(self, "tag_origin");
+  var_00 linkTo(self, "tag_origin");
   wait 0.05;
   self method_808C();
   lib_04F3::func_79CF("b17_mid_air_expl_close", self);
@@ -540,7 +540,7 @@ func_6C8D() {
     }
 
     var_1A = spawn("weapon_" + var_19, (0, 0, 0), 1);
-    var_1A linkto(var_18, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_1A linkTo(var_18, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_13[var_13.size] = var_1A;
     var_18 method_8495(var_14[var_17], var_06, var_07);
     var_12[var_12.size] = var_18;
@@ -550,7 +550,7 @@ func_6C8D() {
     var_1B = spawn("script_model", var_06);
     var_1B setcostumemodels([2, 1, 2, 2, 2, 0], "axis");
     var_1A = spawn("weapon_mp40_mp", (0, 0, 0), 1);
-    var_1A linkto(var_1B, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_1A linkTo(var_1B, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_13[var_13.size] = var_1A;
     var_1B method_8495(var_15[var_17], var_06, var_07);
     var_11[var_11.size] = var_1B;
@@ -695,7 +695,7 @@ func_6C94() {
     var_15 setModel("mp_raid_cobra_ger_soldier");
     var_15 method_8495(var_14, var_05, var_06);
     var_16 = spawn("weapon_mp40_mp", (0, 0, 0), 1);
-    var_16 linkto(var_15, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_16 linkTo(var_15, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_11[var_11.size] = var_16;
     var_10[var_10.size] = var_15;
   }
@@ -712,12 +712,12 @@ func_6C94() {
       var_1E = var_18[var_1C] lib_0505::func_470D("m1garand_mp");
       var_1F = "weapon_" + var_1E;
       var_20 = spawn(var_1F, (0, 0, 0), 1);
-      var_20 linkto(var_1D, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_20 linkTo(var_1D, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_1B[var_1B.size] = var_20;
     } else {
       var_1D setcostumemodels([2, 1, 2, 2, 2, 0], "axis");
       var_20 = spawn("weapon_mp40_mp", (0, 0, 0), 1);
-      var_20 linkto(var_1D, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_20 linkTo(var_1D, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_1B[var_1B.size] = var_20;
     }
 
@@ -961,9 +961,9 @@ func_7FA1() {
 func_3CD8() {
   thread func_3CD9();
   if(isDefined(self.var_1A2)) {
-    var_00 = getent(self.var_1A2, "targetname");
+    var_00 = getEnt(self.var_1A2, "targetname");
     if(isDefined(var_00)) {
-      var_00 linkto(self, "tag_yaw");
+      var_00 linkTo(self, "tag_yaw");
     }
   }
 
@@ -1140,7 +1140,7 @@ func_6BB7(param_00, param_01) {
 }
 
 func_9B78() {
-  var_00 = getent("town_bombplant_tarp", "targetname");
+  var_00 = getEnt("town_bombplant_tarp", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -1365,7 +1365,7 @@ func_7F9C() {
 func_7FB0() {
   level endon("runFarmObjectiveComplete");
   level endon("game_ended");
-  var_00 = getent("manor_damage_trigger", "targetname");
+  var_00 = getEnt("manor_damage_trigger", "targetname");
   if(!isDefined(var_00)) {
     return;
   }

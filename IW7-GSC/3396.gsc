@@ -26,7 +26,7 @@ enter_afterlife_arcade(var_0) {
   var_0.health = var_0.maxhealth;
   var_0 clearclienttriggeraudiozone(0.02);
   var_0 scripts\cp\utility::stoplocalsound_safe("zmb_laststand_music");
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
   var_0 laststandrevive();
   var_0 setstance("stand");
   var_0 takeallweapons();
@@ -539,8 +539,8 @@ update_player_revives_every_ten_waves(var_0) {
 }
 
 move_through_tube(var_0, var_1, var_2) {
-  var_3 = getent(var_1, "targetname");
-  var_4 = getent(var_2, "targetname");
+  var_3 = getEnt(var_1, "targetname");
+  var_4 = getEnt(var_2, "targetname");
 
   if(!isDefined(var_3) || !isDefined(var_4)) {
     return;
@@ -554,13 +554,13 @@ move_through_tube(var_0, var_1, var_2) {
   var_0.is_fast_traveling = 1;
   var_0 scripts\cp\utility::allow_player_ignore_me(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_5);
+  var_0 setOrigin(var_5);
   var_0 setplayerangles(var_3.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_7 = spawn("script_origin", var_5);
   var_0 getweaponvariantattachments(var_7);
   wait 0.1;
-  var_7 moveto(var_6, 1);
+  var_7 moveTo(var_6, 1);
   var_0 thread remove_white_screen(0.1);
   wait 1;
   var_0.is_fast_traveling = undefined;
@@ -661,8 +661,8 @@ give_solo_self_revive_token(var_0) {
 
 open_afterlife_door_for_player(var_0, var_1) {
   if(!isDefined(level.ala_portal_org)) {
-    level.ala_revive_door = getent("ala_revive_door", "targetname");
-    var_2 = scripts\engine\utility::getstruct("selfrevive_portal", "targetname");
+    level.ala_revive_door = getEnt("ala_revive_door", "targetname");
+    var_2 = scripts\engine\utility::getStruct("selfrevive_portal", "targetname");
     level.ala_portal_org = spawn("script_model", var_2.origin);
     level.ala_portal_org setModel("tag_origin");
     level.ala_portal_org.angles = var_2.angles;
@@ -686,7 +686,7 @@ open_afterlife_door_for_player(var_0, var_1) {
     level.ala_revive_door hidefromplayer(var_0);
   }
 
-  var_0.revive_door rotateyaw(var_1, 0.2);
+  var_0.revive_door rotateYaw(var_1, 0.2);
   var_6 = level._effect["vfx_zmb_portal_centhub"];
 
   if(isDefined(level.centhub_portal_fx)) {

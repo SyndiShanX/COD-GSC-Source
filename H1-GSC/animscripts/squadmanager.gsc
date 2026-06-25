@@ -351,7 +351,7 @@ membercombatwaiter() {
 
 updateheading() {
   if(isDefined(self.enemy)) {
-    self.forward = vectornormalize(self.enemy.origin - self.origin);
+    self.forward = vectorNormalize(self.enemy.origin - self.origin);
   } else {
     var_0 = (0, 0, 0);
     var_1 = 0;

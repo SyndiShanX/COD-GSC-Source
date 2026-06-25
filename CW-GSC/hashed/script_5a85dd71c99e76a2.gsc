@@ -375,11 +375,11 @@ function function_11648e12(str_objective, b_starting) {
   level.ai_woods.perfectaim = 1;
   level.ai_woods pushplayer(1);
   level.ai_woods.pushable = 0;
-  var_75c2d324 = getent("zipline_mountain_tutorial", "targetname");
+  var_75c2d324 = getEnt("zipline_mountain_tutorial", "targetname");
   var_75c2d324.var_dc6e66ea = 0.7;
   level.player.is_ziplining = 1;
   var_7f7daf16 = struct::get("zipline_mountain_tutorial_prompt", "targetname");
-  tr_mountain_zipline_woods_color = getent("tr_mountain_zipline_woods_color", "targetname");
+  tr_mountain_zipline_woods_color = getEnt("tr_mountain_zipline_woods_color", "targetname");
   level thread function_f4cb6831();
   level thread function_4fa3dab1();
   level thread function_de42d9ad();
@@ -465,7 +465,7 @@ function function_de42d9ad() {
 }
 
 function function_f4cb6831() {
-  tr_mountain_zipline_overlook = getent("tr_mountain_zipline_overlook", "targetname");
+  tr_mountain_zipline_overlook = getEnt("tr_mountain_zipline_overlook", "targetname");
   var_9cdc6574 = getEntArray("tr_mountain_zipline_approach", "targetname");
 
   if(!isDefined(var_9cdc6574)) {
@@ -474,7 +474,7 @@ function function_f4cb6831() {
     var_9cdc6574 = array(var_9cdc6574);
   }
 
-  var_9cdc6574[var_9cdc6574.size] = getent("t_advance_woods_to_zip_intro", "targetname");
+  var_9cdc6574[var_9cdc6574.size] = getEnt("t_advance_woods_to_zip_intro", "targetname");
   level.var_3369117 = 0;
   var_9d28dc20 = [];
   level.var_e814fac2 = 0;
@@ -557,7 +557,7 @@ function function_f4cb6831() {
 
     if(!level flag::get("stealth_override_goal")) {
       level flag::wait_till("flg_zipline_intro_engaging");
-      level.ai_woods setgoal(getent("vol_stealth_intro_zipline", "targetname"));
+      level.ai_woods setgoal(getEnt("vol_stealth_intro_zipline", "targetname"));
     }
 
     level flag::wait_till("flg_zipline_intro_cleared");
@@ -603,9 +603,9 @@ function function_94354bd7() {
     self val::reset_all("zipline_patrol");
 
     if(level flag::get("flg_zipline_intro_approached")) {
-      vol_goal = getent("vol_stealth_intro_zipline", "targetname");
+      vol_goal = getEnt("vol_stealth_intro_zipline", "targetname");
     } else {
-      vol_goal = getent("vol_mountain_summit_stealth", "targetname");
+      vol_goal = getEnt("vol_mountain_summit_stealth", "targetname");
     }
 
     self setgoal(vol_goal, 1);
@@ -676,7 +676,7 @@ function function_77b06f5c(var_8aa20ba2 = 0) {
 
   if(!level flag::get("flg_zipline_intro_approached")) {
     self flag::set("stealth_override_goal");
-    vol_mountain_summit_stealth = getent("vol_mountain_summit_stealth", "targetname");
+    vol_mountain_summit_stealth = getEnt("vol_mountain_summit_stealth", "targetname");
     self setgoal(vol_mountain_summit_stealth, 1);
   }
 

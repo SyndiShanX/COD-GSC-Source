@@ -320,7 +320,7 @@ function private _electrodischargearcdmg(target, player, upgraded) {
   fxorg setModel("tag_origin");
   fx = playFXOnTag(level._effect["es_arc"], fxorg, "tag_origin");
   fxorg playSound("gdt_electro_bounce");
-  fxorg moveto(target_origin, 0.25);
+  fxorg moveTo(target_origin, 0.25);
   fxorg util::waittill_any_timeout(1, "movedone");
   fxorg delete();
   target thread electrostaticcontact(player, self, upgraded, undefined, 1);

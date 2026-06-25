@@ -482,7 +482,7 @@ function on_player_spawned() {
 }
 
 function on_player_corpse(params) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(is_true(player.var_2e8665de) && self === player.body) {
       self hide();
       return;
@@ -1486,8 +1486,8 @@ function function_e8e41bbb() {
 
             if(isDefined(fxorg)) {
               fxorg setModel(#"tag_origin");
-              fxorg enablelinkto();
-              fxorg linkto(self, self.settings.var_95861ca4, (0, 0, 0), (0, 0, 0));
+              fxorg enablelinkTo();
+              fxorg linkTo(self, self.settings.var_95861ca4, (0, 0, 0), (0, 0, 0));
               playFXOnTag(self.settings.var_b5c8e89a, fxorg, "tag_origin");
               fxorg thread deletemeonnotify(self, "death");
             }

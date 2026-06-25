@@ -160,7 +160,7 @@ findpamteleporttarget(var_0) {
       }
       var_10 = var_8 getposonpath(var_1.teleport_attack_dist_to_target);
     } else {
-      var_11 = vectornormalize(var_8.origin - self.origin);
+      var_11 = vectorNormalize(var_8.origin - self.origin);
       var_10 = var_8.origin - var_11 * var_1.teleport_attack_dist_to_target;
     }
 

@@ -45,10 +45,10 @@ function_250232f4(localclientnum) {
   level.var_49f26c00.var_9af0d684 = 1;
   level.var_49f26c00.var_f538d7d4 = array(#"hash_a87603ded4882b1", #"hash_2c6105fec300cac", #"hash_165b9b0cd81e08af", #"hash_4f161447e88af8b9", #"hash_712426d0934a5cd4");
   level.var_49f26c00.var_7a5c68f2 = array(#"fx_bottle_common", #"hash_38d4f59cb78344b9", #"hash_78f0379f9bdc006", #"fx_bottle_epic", #"hash_256e8ac9ea9c8ad9");
-  level.var_49f26c00.var_b273f2b6 = getent(localclientnum, "tube_liquid_01", "targetname");
-  level.var_49f26c00.var_c6761aa2 = getent(localclientnum, "tube_liquid_02", "targetname");
-  level.var_49f26c00.var_dcbe4732 = getent(localclientnum, "tube_liquid_03", "targetname");
-  level.var_49f26c00.var_f48ac46 = getent(localclientnum, "tube_liquid_04", "targetname");
+  level.var_49f26c00.var_b273f2b6 = getEnt(localclientnum, "tube_liquid_01", "targetname");
+  level.var_49f26c00.var_c6761aa2 = getEnt(localclientnum, "tube_liquid_02", "targetname");
+  level.var_49f26c00.var_dcbe4732 = getEnt(localclientnum, "tube_liquid_03", "targetname");
+  level.var_49f26c00.var_f48ac46 = getEnt(localclientnum, "tube_liquid_04", "targetname");
   level.var_49f26c00.var_c6761aa2 setModel(#"p8_zm_lab_tube_02_script");
   level.var_49f26c00.var_dcbe4732 setModel(#"p8_zm_lab_tube_03_script");
   level.var_49f26c00.var_f48ac46 setModel(#"p8_zm_lab_tube_04_script");
@@ -834,7 +834,7 @@ function_d160164e(str_notify) {
 function_a1547af3(localclientnum, var_4379f16, var_34c8df6b, var_d5a65f15) {
   self notify("8ada09c39754eed");
   self endon("8ada09c39754eed");
-  mdl_wheel = getent(localclientnum, "alchemy_wheel", "targetname");
+  mdl_wheel = getEnt(localclientnum, "alchemy_wheel", "targetname");
 
   if(var_4379f16 > var_34c8df6b) {
     playSound(localclientnum, #"hash_44c48638340201d2", mdl_wheel.origin);
@@ -857,7 +857,7 @@ function_a1547af3(localclientnum, var_4379f16, var_34c8df6b, var_d5a65f15) {
 
   if(var_4379f16 > var_34c8df6b) {
     for(var_5d4a7cdb = var_34c8df6b; var_5d4a7cdb < var_4379f16; var_5d4a7cdb++) {
-      mdl_wheel rotateto(var_10291968[var_5d4a7cdb + 1], 0.2);
+      mdl_wheel rotateTo(var_10291968[var_5d4a7cdb + 1], 0.2);
       mdl_wheel waittill(#"rotatedone");
     }
 
@@ -865,7 +865,7 @@ function_a1547af3(localclientnum, var_4379f16, var_34c8df6b, var_d5a65f15) {
   }
 
   for(var_5d4a7cdb = var_34c8df6b; var_5d4a7cdb > var_4379f16; var_5d4a7cdb--) {
-    mdl_wheel rotateto(var_10291968[var_5d4a7cdb - 1], 0.1);
+    mdl_wheel rotateTo(var_10291968[var_5d4a7cdb - 1], 0.1);
     mdl_wheel waittill(#"rotatedone");
   }
 }
@@ -1525,7 +1525,7 @@ function_f8d486f8(localclientnum, a_ents) {
     a_ents[#"talisman"].var_850f1956 = util::spawn_model(localclientnum, #"p8_zm_lab_talisman_press_mould_lid_common", a_ents[#"talisman"] gettagorigin("mould_jnt"), a_ents[#"talisman"] gettagangles("mould_jnt"));
 
     if(isDefined(a_ents[#"talisman"].var_850f1956)) {
-      a_ents[#"talisman"].var_850f1956 linkto(a_ents[#"talisman"], "mould_jnt");
+      a_ents[#"talisman"].var_850f1956 linkTo(a_ents[#"talisman"], "mould_jnt");
     }
   }
 }
@@ -1550,12 +1550,12 @@ function_d4f9b895(localclientnum, a_ents) {
 
   if(isDefined(a_ents[#"talisman"].var_a27a4e60)) {
     a_ents[#"talisman"].var_a27a4e60 setscale(0.8);
-    a_ents[#"talisman"].var_a27a4e60 linkto(a_ents[#"talisman"], "link_talisman_ui_large_jnt");
+    a_ents[#"talisman"].var_a27a4e60 linkTo(a_ents[#"talisman"], "link_talisman_ui_large_jnt");
   }
 
   if(isDefined(a_ents[#"talisman"].var_26cb3da7)) {
     a_ents[#"talisman"].var_26cb3da7 setscale(0.5);
-    a_ents[#"talisman"].var_26cb3da7 linkto(a_ents[#"talisman"], "link_talisman_ui_small_jnt");
+    a_ents[#"talisman"].var_26cb3da7 linkTo(a_ents[#"talisman"], "link_talisman_ui_small_jnt");
   }
 
   if(isDefined(level.var_49f26c00.var_f6e518bb)) {
@@ -1684,15 +1684,15 @@ setup_bottles(localclientnum, var_56448842, var_cf59fa73, var_bb17d1ef) {
   var_bb17d1ef.mdl_bottle = util::spawn_model(localclientnum, "tag_origin", var_bb17d1ef gettagorigin("bottle_03_link_jnt"), var_bb17d1ef gettagangles("bottle_03_link_jnt"));
   var_bb17d1ef.mdl_tube = util::spawn_model(localclientnum, level.var_49f26c00.var_13123ed2, var_bb17d1ef gettagorigin("bottle_03_link_jnt"), var_bb17d1ef gettagangles("bottle_03_link_jnt"));
   var_bb17d1ef.mdl_lid = util::spawn_model(localclientnum, #"hash_cbaf587ef8564b8", var_bb17d1ef gettagorigin("bottlecap_03_link_jnt"), var_bb17d1ef gettagangles("bottlecap_03_link_jnt"));
-  var_56448842.mdl_bottle linkto(var_56448842, "bottle_01_link_jnt");
-  var_cf59fa73.mdl_bottle linkto(var_cf59fa73, "bottle_02_link_jnt");
-  var_bb17d1ef.mdl_bottle linkto(var_bb17d1ef, "bottle_03_link_jnt");
-  var_56448842.mdl_tube linkto(var_56448842, "bottle_01_link_jnt");
-  var_cf59fa73.mdl_tube linkto(var_cf59fa73, "bottle_02_link_jnt");
-  var_bb17d1ef.mdl_tube linkto(var_bb17d1ef, "bottle_03_link_jnt");
-  var_56448842.mdl_lid linkto(var_56448842, "bottlecap_01_link_jnt");
-  var_cf59fa73.mdl_lid linkto(var_cf59fa73, "bottlecap_02_link_jnt");
-  var_bb17d1ef.mdl_lid linkto(var_bb17d1ef, "bottlecap_03_link_jnt");
+  var_56448842.mdl_bottle linkTo(var_56448842, "bottle_01_link_jnt");
+  var_cf59fa73.mdl_bottle linkTo(var_cf59fa73, "bottle_02_link_jnt");
+  var_bb17d1ef.mdl_bottle linkTo(var_bb17d1ef, "bottle_03_link_jnt");
+  var_56448842.mdl_tube linkTo(var_56448842, "bottle_01_link_jnt");
+  var_cf59fa73.mdl_tube linkTo(var_cf59fa73, "bottle_02_link_jnt");
+  var_bb17d1ef.mdl_tube linkTo(var_bb17d1ef, "bottle_03_link_jnt");
+  var_56448842.mdl_lid linkTo(var_56448842, "bottlecap_01_link_jnt");
+  var_cf59fa73.mdl_lid linkTo(var_cf59fa73, "bottlecap_02_link_jnt");
+  var_bb17d1ef.mdl_lid linkTo(var_bb17d1ef, "bottlecap_03_link_jnt");
   var_56448842.mdl_bottle setModel(level.var_49f26c00.var_6138b381);
   var_cf59fa73.mdl_bottle setModel(level.var_49f26c00.var_887781fe);
   var_bb17d1ef.mdl_bottle setModel(level.var_49f26c00.var_84c77a9e);

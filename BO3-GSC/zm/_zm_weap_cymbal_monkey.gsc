@@ -219,8 +219,8 @@ function proximity_detonate(owner) {
   explosionradius = detonateradius * 2;
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateradius), 4, detonateradius, detonateradius * 1.5);
   damagearea setexcludeteamfortrigger(owner.team);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self.damagearea = damagearea;
   while(isDefined(self)) {
     damagearea waittill("trigger", ent);
@@ -245,7 +245,7 @@ function proximity_detonate(owner) {
   }
 }
 
-function fakelinkto(linkee) {
+function fakelinkTo(linkee) {
   self notify("fakelinkto");
   self endon("fakelinkto");
   self.backlinked = 1;
@@ -272,7 +272,7 @@ function player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, a
     model = spawn("script_model", grenade.origin);
     model setModel(level.cymbal_monkey_model);
     model useanimtree($zombie_cymbal_monkey);
-    model linkto(grenade);
+    model linkTo(grenade);
     model.angles = grenade.angles;
     model thread monkey_cleanup(grenade);
     clone = undefined;
@@ -298,15 +298,15 @@ function player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, a
       if(isDefined(model)) {
         if(isDefined(grenade.ground_ent) && !grenade.ground_ent.classname === "worldspawn") {
           model setmovingplatformenabled(1);
-          model linkto(grenade.ground_ent);
-          grenade thread fakelinkto(model);
+          model linkTo(grenade.ground_ent);
+          grenade thread fakelinkTo(model);
         } else if(!(isDefined(grenade.backlinked) && grenade.backlinked)) {
           model unlink();
           model.origin = grenade.origin;
           model.angles = grenade.angles;
         }
         wait(0.1);
-        model animscripted("cymbal_monkey_anim", grenade.origin, grenade.angles, %zombie_cymbal_monkey::o_monkey_bomb);
+        model animScripted("cymbal_monkey_anim", grenade.origin, grenade.angles, %zombie_cymbal_monkey::o_monkey_bomb);
       }
       if(isDefined(clone)) {
         clone forceteleport(grenade.origin, grenade.angles);
@@ -381,14 +381,14 @@ function grenade_stolen_by_sam(ent_grenade, ent_model, ent_actor) {
   } else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isalive(players[i])) {
       players[i] playlocalsound(level.zmb_laugh_alias);
     }
   }
   playFXOnTag(level._effect["grenade_samantha_steal"], ent_model, "tag_origin");
-  ent_model stopanimscripted();
+  ent_model stopanimScripted();
   ent_model movez(60, 1, 0.25, 0.25);
   ent_model vibrate(direction, 1.5, 2.5, 1);
   ent_model waittill("movedone");

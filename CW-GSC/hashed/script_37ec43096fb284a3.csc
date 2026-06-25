@@ -70,7 +70,7 @@ function function_ec0b7087(localclientnum, oldval, newval, bnewent, binitialsnap
   var_ac22a760 = struct::get_array(#"hash_3460aae6bb799a99", "content_key");
 
   foreach(var_ea0ed69c in var_ac22a760) {
-    var_f6b2bc6f = getent(fieldname, var_ea0ed69c.targetname, "target");
+    var_f6b2bc6f = getEnt(fieldname, var_ea0ed69c.targetname, "target");
 
     if(isDefined(var_f6b2bc6f)) {
       if(var_ea0ed69c.id == bwastimejump) {

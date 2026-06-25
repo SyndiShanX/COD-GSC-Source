@@ -206,7 +206,7 @@ function private function_523961e2(startpos, normal, var_4997e17c, fxindex, fxco
 }
 
 function private function_371c2ab4(startpos, normal) {
-  normal = vectornormalize(normal);
+  normal = vectorNormalize(normal);
 
   if(normal[2] < 0.3) {
     normal = (0, 0, 1);
@@ -324,7 +324,7 @@ function function_8a3fc4ac(localclientnum, oldvalue, newvalue, bnewent, binitial
     return;
   }
 
-  normal = vectornormalize(self.angles);
+  normal = vectorNormalize(self.angles);
   forward = (1, 0, 0);
 
   if(abs(vectordot(forward, normal)) > 0.999) {

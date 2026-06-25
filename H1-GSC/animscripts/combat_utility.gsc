@@ -7,7 +7,7 @@
 gettargetangleoffset(var_0) {
   var_1 = self getshootatpos() + (0, 0, -3);
   var_2 = (var_1[0] - var_0[0], var_1[1] - var_0[1], var_1[2] - var_0[2]);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_2[2] * -1;
   return var_3;
 }
@@ -697,7 +697,7 @@ h1_grenade_attach_detach_listener(var_0) {
     self.h1_scripted_grenade = spawn("script_model", self gettagorigin("tag_inhand"));
     var_1 = animscripts\utility::getgrenademodel();
     self.h1_scripted_grenade setModel(var_1);
-    self.h1_scripted_grenade linkto(self, "tag_inhand", (0, 0, 3), (0, 0, 0));
+    self.h1_scripted_grenade linkTo(self, "tag_inhand", (0, 0, 3), (0, 0, 0));
   } else if(var_0 == "grenade_throw") {
     self.h1_scripted_grenade delete();
     self.h1_scripted_grenade = undefined;
@@ -1536,7 +1536,7 @@ getpitchtoenemy() {
   }
 
   var_1 = var_0 - self getshootatpos();
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_2 = 360 - vectortoangles(var_1)[0];
   return angleclamp180(var_2);
 }
@@ -1547,7 +1547,7 @@ getpitchtospot(var_0) {
   }
 
   var_1 = var_0 - self getshootatpos();
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_2 = 360 - vectortoangles(var_1)[0];
   return angleclamp180(var_2);
 }
@@ -1564,7 +1564,7 @@ getpitchtoorgfromorg(var_0, var_1) {
   }
 
   var_4 = var_0 - var_1;
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_5 = 360 - vectortoangles(var_4)[0];
   return angleclamp180(var_5);
 }
@@ -1672,7 +1672,7 @@ monitorflash() {
     self.flashingteam = var_4;
 
     if(isDefined(self.flashbangstopsscriptedanim) && self.flashbangstopsscriptedanim) {
-      self stopanimscripted();
+      self stopanimScripted();
     }
 
     maps\_utility::flashbangstart(var_6);

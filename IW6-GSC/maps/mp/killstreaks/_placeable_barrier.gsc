@@ -112,10 +112,10 @@ disableCollision(streakName) {
 }
 
 setupBrushModel() {
-  scriptModel = GetEnt("barrier_collision", "targetname");
+  scriptModel = getEnt("barrier_collision", "targetname");
 
   if(isDefined(scriptmodel)) {
-    level.barrierCollision = GetEnt(scriptModel.target, "targetname");
+    level.barrierCollision = getEnt(scriptModel.target, "targetname");
     scriptModel Delete();
   }
 

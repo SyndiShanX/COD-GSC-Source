@@ -834,7 +834,7 @@ start_screenshake(param_00) {
   while(param_00 > 0) {
     var_02 = 0.55 + randomfloat(0.55);
     param_00 = param_00 - var_02;
-    var_01 playrumbleonentity("damage_heavy");
+    var_01 playRumbleOnEntity("damage_heavy");
     earthquake(0.4, var_02, self.var_116, 96);
     wait(var_02);
   }

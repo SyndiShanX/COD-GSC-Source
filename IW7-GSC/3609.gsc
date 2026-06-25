@@ -268,7 +268,7 @@ func_1126F(var_0) {
   var_1.angles = var_0.angles;
   var_1 setModel("tag_origin");
   var_1 setscriptmoverkillcam("explosive");
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 thread supertrophy_cleanuponparentdeath(var_0, 5);
   return var_1;
 }
@@ -764,7 +764,7 @@ supertrophy_getbesttag(var_0) {
     var_6 = self gettagorigin(var_5);
     var_7 = self gettagangles(var_5);
     var_8 = anglesToForward(var_7);
-    var_9 = vectordot(vectornormalize(var_0 - var_6), var_8);
+    var_9 = vectordot(vectorNormalize(var_0 - var_6), var_8);
     if(var_10 == 0 || var_9 > var_2) {
       var_2 = var_9;
       var_3 = var_5;

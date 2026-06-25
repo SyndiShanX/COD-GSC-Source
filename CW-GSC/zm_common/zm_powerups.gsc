@@ -171,7 +171,7 @@ function powerup_hud_monitor() {
 
   while(true) {
     waittillframeend();
-    players = getplayers();
+    players = getPlayers();
     var_eb020d2 = 0;
 
     for(playerindex = 0; playerindex < players.size; playerindex++) {
@@ -321,7 +321,7 @@ function function_70bd1ec9() {
 }
 
 function minigun_no_drop() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i].zombie_vars[#"zombie_powerup_minigun_on"] == 1) {
@@ -371,7 +371,7 @@ function watch_for_drop() {
 }
 
 function function_2ff352cc() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(!isDefined(a_e_players) || !a_e_players.size) {
     n_players = 1;
@@ -459,7 +459,7 @@ function function_b753385f(weapon) {
 
     if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
       var_d13d4980 = spawn("script_model", origin + (0, 0, 40));
-      var_d13d4980 linkto(hit_ent);
+      var_d13d4980 linkTo(hit_ent);
     }
 
     level thread powerup_drop(origin, var_d13d4980, var_4e31704a);
@@ -810,7 +810,7 @@ function function_27437dae() {
     n_accel = 0.25;
   }
 
-  self moveto(var_f55f0704, n_travel_time, n_accel, n_accel);
+  self moveTo(var_f55f0704, n_travel_time, n_accel, n_accel);
 }
 
 function specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pickup_delay = 0.1, powerup_player, b_stay_forever, var_6f4cb533 = 0, var_a6d11a96, var_73b4ca3f = 1, var_45eaa114) {
@@ -876,7 +876,7 @@ function specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pick
 
   if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
     powerup = spawn("script_model", powerup_location + (0, 0, 40));
-    powerup linkto(hit_ent);
+    powerup linkTo(hit_ent);
   } else {
     powerup = zm_net::network_safe_spawn("powerup", 1, "script_model", powerup_location + (0, 0, 40));
   }
@@ -1026,8 +1026,8 @@ function powerup_zombie_grab_trigger_cleanup(trigger) {
 function powerup_zombie_grab(powerup_team) {
   self endon(#"powerup_timedout", #"powerup_grabbed", #"hacked");
   zombie_grab_trigger = spawn("trigger_radius", self.origin - (0, 0, 40), (512 | 1) + 8, 32, 72);
-  zombie_grab_trigger enablelinkto();
-  zombie_grab_trigger linkto(self);
+  zombie_grab_trigger enablelinkTo();
+  zombie_grab_trigger linkTo(self);
   zombie_grab_trigger setteamfortrigger(level.zombie_team);
   self thread powerup_zombie_grab_trigger_cleanup(zombie_grab_trigger);
   poi_dist = 300;
@@ -1101,7 +1101,7 @@ function powerup_grab(powerup_team) {
     } else if(isDefined(level.powerup_grab_get_players_override)) {
       grabbers = [[level.powerup_grab_get_players_override]]();
     } else {
-      grabbers = getplayers();
+      grabbers = getPlayers();
     }
 
     for(i = 0; i < grabbers.size; i++) {
@@ -1448,10 +1448,10 @@ function powerup_wobble() {
 
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
 
     if(isDefined(self.worldgundw)) {
-      self.worldgundw rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+      self.worldgundw rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     }
 
     wait randomfloat(waittime - 0.1);
@@ -1668,7 +1668,7 @@ function time_remaining_on_point_doubler_powerup(player_team) {
   }
 
   zombie_utility::set_zombie_var_team(#"zombie_powerup_double_points_on", player_team, 0);
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
 
   for(i = 0; i < players.size; i++) {
     players[i] playSound(#"zmb_points_loop_off");
@@ -1692,7 +1692,7 @@ function check_for_rare_drop_override(pos) {
 }
 
 function tesla_powerup_active() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i].zombie_vars[#"zombie_powerup_tesla_on"]) {
@@ -1878,7 +1878,7 @@ function time_remaining_on_powerup(player_team, str_powerup, time = 30) {
   }
 
   zombie_utility::set_zombie_var_team(str_index_on, player_team, 0);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   if(isPlayer(e_player)) {
     e_player playsoundtoteam(str_sound_off, player_team);

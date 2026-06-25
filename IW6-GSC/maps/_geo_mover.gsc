@@ -3,7 +3,7 @@
  * Script: maps\_geo_mover.gsc
 *****************************************************/
 
-trigger_moveto(var_0) {
+trigger_moveTo(var_0) {
   if(!isDefined(level.mover_candidates)) {
     level.mover_candidates = getEntArray("script_brushmodel", "classname");
     level.mover_candidates = common_scripts\utility::array_combine(level.mover_candidates, getEntArray("script_model", "classname"));
@@ -38,7 +38,7 @@ moveto_volume_think(var_0) {
 
   foreach(var_4 in var_1) {
     if(var_6 != var_4) {
-      var_4 linkto(var_6);
+      var_4 linkTo(var_6);
     }
   }
 
@@ -92,7 +92,7 @@ moveto_volume_think(var_0) {
       var_11.angles = (0, 0, 0);
     }
 
-    var_6 moveto_rotateto(var_11, var_13, var_14, var_15);
+    var_6 moveto_rotateTo(var_11, var_13, var_14, var_15);
     var_6 notify("stop_constant_quake");
     var_13 = 5;
     var_14 = 0;
@@ -158,14 +158,14 @@ moveto_rotateto_speed(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  self rotateto(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
-  self moveto(var_4, var_7, var_7 * var_2, var_7 * var_3);
+  self rotateTo(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
+  self moveTo(var_4, var_7, var_7 * var_2, var_7 * var_3);
   self waittill("movedone");
 }
 
-moveto_rotateto(var_0, var_1, var_2, var_3) {
-  self moveto(var_0.origin, var_1, var_2, var_3);
-  self rotateto(var_0.angles, var_1, var_2, var_3);
+moveto_rotateTo(var_0, var_1, var_2, var_3) {
+  self moveTo(var_0.origin, var_1, var_2, var_3);
+  self rotateTo(var_0.angles, var_1, var_2, var_3);
   self waittill("movedone");
 }
 
@@ -175,7 +175,7 @@ set_start_positions(var_0) {
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":
-        level.player setorigin(var_3.origin);
+        level.player setOrigin(var_3.origin);
         level.player setplayerangles(var_3.angles);
         break;
     }

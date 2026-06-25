@@ -131,42 +131,42 @@ train_build(var_0, var_1) {
     }
 
     if(isDefined(var_6.sus_fd)) {
-      var_6.sus_fd linkto(var_6.sus_f, "j_mainroot");
+      var_6.sus_fd linkTo(var_6.sus_f, "j_mainroot");
     }
 
     if(isDefined(var_6.sus_fl)) {
-      var_6.sus_fl linkto(var_6.sus_f, "j_elbow_le");
+      var_6.sus_fl linkTo(var_6.sus_f, "j_elbow_le");
     }
 
     if(isDefined(var_6.sus_fr)) {
-      var_6.sus_fr linkto(var_6.sus_f, "j_elbow_ri");
+      var_6.sus_fr linkTo(var_6.sus_f, "j_elbow_ri");
     }
 
     if(isDefined(var_6.sus_flink)) {
-      var_6.sus_flink linkto(var_6.sus_f, "j_mainroot");
+      var_6.sus_flink linkTo(var_6.sus_f, "j_mainroot");
     }
 
     if(isDefined(var_6.sus_bd)) {
-      var_6.sus_bd linkto(var_6.sus_b, "j_mainroot");
+      var_6.sus_bd linkTo(var_6.sus_b, "j_mainroot");
     }
 
     if(isDefined(var_6.sus_bl)) {
-      var_6.sus_bl linkto(var_6.sus_b, "j_elbow_le");
+      var_6.sus_bl linkTo(var_6.sus_b, "j_elbow_le");
     }
 
     if(isDefined(var_6.sus_br)) {
-      var_6.sus_br linkto(var_6.sus_b, "j_elbow_ri");
+      var_6.sus_br linkTo(var_6.sus_b, "j_elbow_ri");
     }
 
     if(isDefined(var_6.sus_blink)) {
-      var_6.sus_blink linkto(var_6.sus_b, "j_mainroot");
+      var_6.sus_blink linkTo(var_6.sus_b, "j_mainroot");
     }
 
     var_6.ref_start = common_scripts\utility::spawn_tag_origin();
     var_6.ref_start.origin = var_6.body gettagorigin("j_spineupper");
     var_6.ref_start.angles = var_6.body gettagangles("j_spineupper");
     var_6.ref_end = common_scripts\utility::spawn_tag_origin();
-    var_6.ref_end linkto(var_6.body, "j_spineupper", (0, 0, 0), (0, 0, 0));
+    var_6.ref_end linkTo(var_6.body, "j_spineupper", (0, 0, 0), (0, 0, 0));
     var_5 = common_scripts\utility::array_remove(var_5, var_6.body);
     var_6.other_linked_parts = [];
     var_6.other_linked_parts_count = 0;
@@ -176,7 +176,7 @@ train_build(var_0, var_1) {
         continue;
       }
       if(issubstr(var_8.classname, "trigger_")) {
-        var_8 enablelinkto();
+        var_8 enablelinkTo();
 
         if(isDefined(var_8.script_flag) && var_8.script_flag == "flag_force_mantle") {
           var_2.force_mantle_trigs[var_2.force_mantle_trigs.size] = var_8;
@@ -204,10 +204,10 @@ train_build(var_0, var_1) {
         continue;
       }
       if(issubstr(var_8.classname, "_volume")) {
-        var_8 enablelinkto();
+        var_8 enablelinkTo();
       }
 
-      var_8 linkto(var_6.body, "j_spineupper");
+      var_8 linkTo(var_6.body, "j_spineupper");
 
       if(!isDefined(var_8._essential_part) && !issubstr(var_8.classname, "trigger_")) {
         if(!isDefined(var_6.other_linked_parts[var_8.classname])) {
@@ -251,8 +251,8 @@ train_queue_path_anim(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_6 = spawnStruct();
   var_6.anime = var_0;
-  var_6.start = common_scripts\utility::getstruct(var_1, "targetname");
-  var_6.end = common_scripts\utility::getstruct(var_2, "targetname");
+  var_6.start = common_scripts\utility::getStruct(var_1, "targetname");
+  var_6.end = common_scripts\utility::getStruct(var_2, "targetname");
   var_6.a_rel = var_5;
 
   if(var_3 == "none") {
@@ -325,10 +325,10 @@ train_path() {
     train_get_next_path();
 
     foreach(var_1 in self.cars) {
-      self.path.anim_org maps\_utility::anim_stopanimscripted();
-      var_1.body maps\_utility::anim_stopanimscripted();
-      var_1.sus_f maps\_utility::anim_stopanimscripted();
-      var_1.sus_b maps\_utility::anim_stopanimscripted();
+      self.path.anim_org maps\_utility::anim_stopanimScripted();
+      var_1.body maps\_utility::anim_stopanimScripted();
+      var_1.sus_f maps\_utility::anim_stopanimScripted();
+      var_1.sus_b maps\_utility::anim_stopanimScripted();
       self.path.anim_org thread maps\_anim::anim_single_solo(var_1.body, self.path.anime);
       var_1.sus_f thread maps\_anim::anim_single_solo(var_1.sus_f, self.path.anime);
       var_1.sus_b thread maps\_anim::anim_single_solo(var_1.sus_b, self.path.anime);
@@ -401,8 +401,8 @@ train_new_sus_path_anims(var_0, var_1) {
     return;
   }
   maps\skyway_anim::update_train_path_anims(var_1);
-  self.cars[var_0].sus_f maps\_utility::anim_stopanimscripted();
-  self.cars[var_0].sus_b maps\_utility::anim_stopanimscripted();
+  self.cars[var_0].sus_f maps\_utility::anim_stopanimScripted();
+  self.cars[var_0].sus_b maps\_utility::anim_stopanimScripted();
   self.cars[var_0].sus_f thread maps\_anim::anim_single_solo(self.cars[var_0].sus_f, self.path.anime);
   self.cars[var_0].sus_b thread maps\_anim::anim_single_solo(self.cars[var_0].sus_b, self.path.anime);
   var_2 = self.cars[var_0].body getanimtime(level.scr_anim[self.cars[var_0].body.animname][self.path.anime]);
@@ -424,7 +424,7 @@ train_teleport() {
     if(!isDefined(var_1.body)) {
       continue;
     }
-    var_1.body linkto(self.path.anim_org);
+    var_1.body linkTo(self.path.anim_org);
   }
 
   wait 0.05;
@@ -476,7 +476,7 @@ player_sway() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = level.player_ground_ref_mover gettagorigin("tag_player");
   var_0.angles = level.player_ground_ref_mover gettagangles("tag_player");
-  var_0 linkto(level.player_ground_ref_mover, "tag_player");
+  var_0 linkTo(level.player_ground_ref_mover, "tag_player");
   level.player playersetgroundreferenceent(var_0);
   wait 0.5;
 
@@ -502,7 +502,7 @@ player_view_roll_with_traincar(var_0, var_1) {
   var_2 = maps\_utility::spawn_anim_model("view_roll");
   var_2.origin = level.player_ground_ref_mover.origin;
   var_2.angles = level._train.cars[level.player.car].body.angles;
-  level.player_ground_ref_mover linkto(var_2, "origin_animate_jnt");
+  level.player_ground_ref_mover linkTo(var_2, "origin_animate_jnt");
   var_2 setanimrestart(level.scr_anim["view_roll"]["nosway"], 1 - var_1);
   var_2 setanimrestart(level.scr_anim["view_roll"][var_0], var_1);
   wait(getanimlength(level.scr_anim["view_roll"][var_0]));
@@ -670,14 +670,14 @@ player_train_rythme_rumble_quake() {
   for(;;) {
     if(level.player_do_rythme_rumble == 1) {
       earthquake(0.17, 0.2, level.player.origin, 5000);
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
     }
 
     wait 0.1;
 
     if(level.player_do_rythme_rumble == 1) {
       earthquake(0.12, 0.2, level.player.origin, 5000);
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
     }
 
     wait 0.8;
@@ -731,16 +731,16 @@ blend_link_over_time(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_18 = var_17 * var_7 + var_16 * (1 - var_7);
 
     if(var_7 < 0.5) {
-      self linkto(var_0, var_4, rotatevectorinverted(var_18 - var_16, var_8), var_15 - var_8);
+      self linkTo(var_0, var_4, rotatevectorinverted(var_18 - var_16, var_8), var_15 - var_8);
     } else {
-      self linkto(var_1, var_5, rotatevectorinverted(var_18 - var_17, var_9), var_15 - var_9);
+      self linkTo(var_1, var_5, rotatevectorinverted(var_18 - var_17, var_9), var_15 - var_9);
     }
 
     wait 0.05;
     var_6 = var_6 + 0.05;
   }
 
-  self linkto(var_1, var_5, (0, 0, 0), (0, 0, 0));
+  self linkTo(var_1, var_5, (0, 0, 0), (0, 0, 0));
 }
 
 blended_link(var_0, var_1, var_2, var_3, var_4) {
@@ -756,7 +756,7 @@ blended_link(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_2) && var_2) {
-    self linkto(var_0, var_3, (0, 0, 0), (0, 0, 0));
+    self linkTo(var_0, var_3, (0, 0, 0), (0, 0, 0));
   }
 
   for(;;) {
@@ -771,7 +771,7 @@ blended_link(var_0, var_1, var_2, var_3, var_4) {
     var_13 = var_0 gettagorigin(var_3);
     var_14 = var_1 gettagorigin(var_4);
     var_15 = 0.5 * (var_14 + var_13);
-    self linkto(var_0, var_3, rotatevectorinverted(var_15 - var_13, var_5), var_12 - var_5);
+    self linkTo(var_0, var_3, rotatevectorinverted(var_15 - var_13, var_5), var_12 - var_5);
     wait 0.05;
   }
 }
@@ -1052,7 +1052,7 @@ test_func_on_button() {
   }
   for(;;) {
     if(level.player buttonPressed("DPAD_DOWN")) {
-      var_0 = getent("sea_floor_animated", "targetname");
+      var_0 = getEnt("sea_floor_animated", "targetname");
       var_1 = 0;
 
       for(;;) {
@@ -1099,8 +1099,8 @@ jet_flyover(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 thread teleport_ent_generic();
   var_7 = common_scripts\utility::spawn_tag_origin();
   var_8 = common_scripts\utility::spawn_tag_origin();
-  var_7 linkto(var_6, "tag_jet_1", (0, 0, 0), (9, 0, 0));
-  var_8 linkto(var_6, "tag_jet_1", (0, 0, 0), (0, 0, 0));
+  var_7 linkTo(var_6, "tag_jet_1", (0, 0, 0), (9, 0, 0));
+  var_8 linkTo(var_6, "tag_jet_1", (0, 0, 0), (0, 0, 0));
   var_7 playLoopSound("sw_jet_flyby_mid_loop");
   var_8 playLoopSound("sw_jet_flyby_close_loop");
 
@@ -1120,9 +1120,9 @@ jet_flyover(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_9 = maps\_utility::spawn_anim_model("sw_mig");
     var_10 = maps\_utility::spawn_anim_model("sw_mig");
     var_11 = maps\_utility::spawn_anim_model("sw_mig");
-    var_9 linkto(var_6, "tag_jet_1", (0, 0, 0), (0, 0, 90));
-    var_10 linkto(var_6, "tag_jet_2", (0, 0, 0), (0, 0, 90));
-    var_11 linkto(var_6, "tag_jet_3", (0, 0, 0), (0, 0, 90));
+    var_9 linkTo(var_6, "tag_jet_1", (0, 0, 0), (0, 0, 90));
+    var_10 linkTo(var_6, "tag_jet_2", (0, 0, 0), (0, 0, 90));
+    var_11 linkTo(var_6, "tag_jet_3", (0, 0, 0), (0, 0, 90));
   }
 
   var_6 setanim(level.scr_anim["sw_jet"][var_1]);
@@ -1249,7 +1249,7 @@ ambient_rog_strike(var_0) {
 }
 
 ambient_rog_strike_intro() {
-  var_0 = getent("model_rog_hit_ref_4", "targetname");
+  var_0 = getEnt("model_rog_hit_ref_4", "targetname");
   playFXOnTag(common_scripts\utility::getfx("rog_maintrail_01"), var_0, "tag_explode_base");
   var_0 thread maps\skyway_audio::sfx_rog_sat_impact("tag_explode");
   wait 2.3;
@@ -1392,7 +1392,7 @@ hero_train_impact(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8)
   var_10.angles = var_0 gettagangles("tag_missile_source");
   var_10 thread teleport_ent_generic();
   var_11 = common_scripts\utility::spawn_tag_origin();
-  var_11 linkto(var_0, var_1, (0, 0, 0), (0, 0, 0));
+  var_11 linkTo(var_0, var_1, (0, 0, 0), (0, 0, 0));
   var_12 = common_scripts\utility::spawn_tag_origin();
   var_12 thread teleport_ent_generic();
   var_12 thread blend_link_over_time(var_10, var_11, var_9);
@@ -1593,7 +1593,7 @@ rt_helo_crashed_fx_setup(var_0) {
 
 rt_spawn_and_link_helo_glass(var_0, var_1) {
   var_2 = maps\_utility::spawn_anim_model(var_0);
-  var_2 linkto(self, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(self, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
 
   if(isDefined(var_1)) {
     thread rt_helo_break_glass(var_2, var_1);
@@ -1737,7 +1737,7 @@ rt_helo_bullethits() {
 
 helo_bullethit_fx(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(self, "tag_origin", var_0, (0, 0, 0));
+  var_1 linkTo(self, "tag_origin", var_0, (0, 0, 0));
   wait 0.05;
   playFXOnTag(common_scripts\utility::getfx("sw_helo_bullet_hit"), var_1, "tag_origin");
   wait 3;
@@ -1811,7 +1811,7 @@ spawn_boss(var_0) {
   } else
     var_0 = "actor_boss";
 
-  var_2 = getent(var_0, "targetname") maps\_utility::spawn_ai(1);
+  var_2 = getEnt(var_0, "targetname") maps\_utility::spawn_ai(1);
   var_2.animname = "boss";
   var_2 maps\_utility::magic_bullet_shield();
   level._boss = var_2;
@@ -1867,7 +1867,7 @@ retreat_proc(var_0, var_1, var_2, var_3) {
     var_4 = [];
 
     foreach(var_6 in var_1) {
-      var_6 = getent(var_6, "targetname");
+      var_6 = getEnt(var_6, "targetname");
 
       if(isDefined(var_6)) {
         var_4[var_4.size] = var_6;
@@ -1953,10 +1953,10 @@ player_start(var_0) {
   var_1 = var_0;
 
   if(isstring(var_0)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   }
 
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
 }
 
@@ -2237,7 +2237,7 @@ create_view_particle_source() {
     var_0 = common_scripts\utility::spawn_tag_origin();
     var_0.origin = self getEye();
     var_1 = var_0 common_scripts\utility::spawn_tag_origin();
-    var_1 linkto(self);
+    var_1 linkTo(self);
     self._source = var_0;
     self._source_base = var_1;
     thread start_current_car_watcher();
@@ -2302,7 +2302,7 @@ getcurrenttraincar() {
 }
 
 linktotrain(var_0) {
-  self linkto(level._train.cars[var_0].body, "j_spineupper");
+  self linkTo(level._train.cars[var_0].body, "j_spineupper");
 }
 
 trig_watcher(var_0, var_1, var_2, var_3) {
@@ -2396,7 +2396,7 @@ spawn_tag_origin_from_tag(var_0, var_1) {
   var_2.angles = self gettagangles(var_0);
 
   if(isDefined(var_1)) {
-    var_2 linkto(var_1);
+    var_2 linkTo(var_1);
   }
 
   return var_2;
@@ -2529,7 +2529,7 @@ setup_player_for_animated_sequence(var_0, var_1, var_2, var_3, var_4, var_5, var
   level.player_mover = var_10;
   var_10.origin = var_2;
   var_10.angles = var_3;
-  var_9 linkto(var_10);
+  var_9 linkTo(var_10);
 
   if(var_0) {
     if(isarray(var_1)) {
@@ -2604,7 +2604,7 @@ dynamic_sun_sample_size() {
     var_3 = level.player getplayerangles();
     var_4 = combineangles((0, -90, 0), var_3);
     var_4 = anglesToForward(var_4);
-    var_5 = vectordot(vectornormalize(var_4), (0, 0, -1));
+    var_5 = vectordot(vectorNormalize(var_4), (0, 0, -1));
     var_5 = clamp(var_5, 0, 1);
     var_6 = var_1 - var_0;
     var_2 = var_6 * var_5 + var_0;
@@ -2742,7 +2742,7 @@ setup_door(var_0, var_1, var_2) {
   var_3 = undefined;
 
   if(isstring(var_0)) {
-    var_3 = getent(var_0, "targetname");
+    var_3 = getEnt(var_0, "targetname");
   } else {
     var_3 = var_0;
   }
@@ -2764,7 +2764,7 @@ setup_door(var_0, var_1, var_2) {
         if(!isDefined(var_2)) {
           var_3.hinge = var_7;
           var_3.hinge.tag_name = var_2;
-          var_3 linkto(var_3.hinge);
+          var_3 linkTo(var_3.hinge);
         }
       }
     }
@@ -2776,7 +2776,7 @@ setup_door(var_0, var_1, var_2) {
     var_3.hinge.angles = var_3 gettagangles(var_2);
 
     if(!isDefined(var_1)) {
-      var_3 linkto(var_3.hinge);
+      var_3 linkTo(var_3.hinge);
     }
   }
 
@@ -2784,9 +2784,9 @@ setup_door(var_0, var_1, var_2) {
     var_3.col_brush = var_4;
 
     if(isDefined(var_2)) {
-      var_3.col_brush linkto(var_3, var_2);
+      var_3.col_brush linkTo(var_3, var_2);
     } else {
-      var_3.col_brush linkto(var_3);
+      var_3.col_brush linkTo(var_3);
     }
   } else if(var_3.classname == "script_brushmodel")
     var_3.col_brush = var_3;
@@ -3004,7 +3004,7 @@ skyway_introscreen(var_0, var_1) {
   level.chyron.text_incoming = 0;
   level.chyron.strips_disabled = 0;
   level.chyron.sound_org = spawn("script_origin", level.player.origin);
-  level.chyron.sound_org linkto(level.player);
+  level.chyron.sound_org linkTo(level.player);
   level.chyron.no_bg = 0;
   maps\_introscreen::chyron_sound(0, "ui_chyron_on");
   thread maps\_introscreen::strips(0);
@@ -3053,7 +3053,7 @@ skyway_introscreen_15_mins(var_0, var_1) {
   level.chyron.text_incoming = 0;
   level.chyron.strips_disabled = 0;
   level.chyron.sound_org = spawn("script_origin", level.player.origin);
-  level.chyron.sound_org linkto(level.player);
+  level.chyron.sound_org linkTo(level.player);
   wait 1;
   maps\_introscreen::chyron_sound(0, "ui_chyron_on");
   var_3 = 0.4;
@@ -3241,7 +3241,7 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
 
   if(isDefined(var_4)) {
     var_9 = var_0 common_scripts\utility::spawn_tag_origin();
-    var_9 linkto(var_0, var_4, (0, 0, 0), (0, 0, 0));
+    var_9 linkTo(var_0, var_4, (0, 0, 0), (0, 0, 0));
   }
 
   if(!isDefined(var_5)) {
@@ -3560,7 +3560,7 @@ start_nt_rumbles() {
 
   for(;;) {
     level waittill("rumble_medium");
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 }
 

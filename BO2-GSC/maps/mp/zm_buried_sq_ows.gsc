@@ -28,7 +28,7 @@ init_stage() {
 }
 
 stage_vo_max() {
-  m_lightboard = getent("sq_bp_board", "targetname");
+  m_lightboard = getEnt("sq_bp_board", "targetname");
   maxissay("vox_maxi_sidequest_ip_4", m_lightboard);
 }
 
@@ -55,12 +55,12 @@ exit_stage(success) {}
 
 ows_fountain_wait() {
   level endon("sq_ows_start");
-  s_fountain_spot = getstruct("sq_ows_fountain", "targetname");
+  s_fountain_spot = getStruct("sq_ows_fountain", "targetname");
   t_fountain = spawn("trigger_radius_use", s_fountain_spot.origin, 0, 55, 64);
-  t_fountain setcursorhint("HINT_NOICON");
-  t_fountain sethintstring(&"ZM_BURIED_SQ_FOUNT_U");
-  t_fountain triggerignoreteam();
-  t_fountain usetriggerrequirelookat();
+  t_fountain setCursorHint("HINT_NOICON");
+  t_fountain setHintString(&"ZM_BURIED_SQ_FOUNT_U");
+  t_fountain triggerIgnoreTeam();
+  t_fountain useTriggerRequireLookAt();
   t_fountain waittill("trigger");
   t_fountain playSound("zmb_sq_coin_toss");
   t_fountain delete();
@@ -86,9 +86,9 @@ ows_targets_start() {
 
   if(!flag("sq_ows_target_missed")) {
     flag_set("sq_ows_success");
-    playsoundatposition("zmb_sq_target_success", (0, 0, 0));
+    playSoundAtPosition("zmb_sq_target_success", (0, 0, 0));
   } else
-    playsoundatposition("zmb_sq_target_fail", (0, 0, 0));
+    playSoundAtPosition("zmb_sq_target_fail", (0, 0, 0));
 
   level notify("sndEndOWSMusic");
 }
@@ -148,11 +148,11 @@ ows_target_think() {
 }
 
 ows_target_move(str_target) {
-  s_target = getstruct(str_target, "targetname");
+  s_target = getStruct(str_target, "targetname");
   self.m_linker = spawn("script_model", self.origin);
   self.m_linker.angles = self.angles;
-  self linkto(self.m_linker);
-  self.m_linker moveto(s_target.origin, 4, 0.05, 0.05);
+  self linkTo(self.m_linker);
+  self.m_linker moveTo(s_target.origin, 4, 0.05, 0.05);
 }
 
 ows_target_delete_timer() {

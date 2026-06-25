@@ -100,7 +100,7 @@ function become_corpse() {
     self function_b82cae8f(0);
   }
 
-  if(!iscorpse(self) && !is_true(getplayers()[0].var_9ebbaa46.var_7e5a6cf9)) {
+  if(!iscorpse(self) && !is_true(getPlayers()[0].var_9ebbaa46.var_7e5a6cf9)) {
     aitype = self.ai_type;
 
     if(!isDefined(aitype)) {
@@ -111,7 +111,7 @@ function become_corpse() {
 
     if(!isactor(self)) {
       var_b9c0ade5 = self.var_b9c0ade5;
-      corpse = self function_f5408e2c(aitype, getplayers()[0].velocity);
+      corpse = self function_f5408e2c(aitype, getPlayers()[0].velocity);
       corpse.var_b9c0ade5 = var_b9c0ade5;
     }
   }
@@ -333,7 +333,7 @@ function function_eef2dca9(guys) {
 
 function function_b82cae8f(linktype, var_5596253c = 1) {
   offset = (0, 0, -60);
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(self.var_47f0a724 === 2) {
     offset = (0, 0, 0);
@@ -487,7 +487,7 @@ function function_aee5f6a6(var_b56433f8) {
   self notify("55dd956a145bde6");
   self endon("55dd956a145bde6");
   index = randomintrange(1, 4);
-  self playrumbleonentity(#"reload_small");
+  self playRumbleOnEntity(#"reload_small");
   pain_anim = var_b56433f8 + "_pain_" + index;
 
   if(is_true(self.var_de5476af)) {
@@ -1030,7 +1030,7 @@ function function_71180c30(isolated) {
 
     victim.var_419b4b2 = undefined;
     victim flag::clear("in_action");
-    getplayers()[0] actions::function_942d9213();
+    getPlayers()[0] actions::function_942d9213();
   }
 }
 
@@ -1113,7 +1113,7 @@ function function_1fac6486(weapon) {
 
 function function_396e2076(var_860605de = 1, var_4170b151 = 1, do_wait = 0) {
   result = 0;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   if(is_true(var_860605de) && e_player flag::get("body_shield_active")) {
     result = 1;
@@ -1173,7 +1173,7 @@ function function_d76eed10(action) {
     trace_pos = playerphysicstrace(self.takedown.start_origin + (0, 0, step), self.origin + (0, 0, step));
 
     if(trace_pos[0] != self.origin[0] || trace_pos[1] != self.origin[1]) {
-      trace_pos += vectornormalize(self.takedown.start_origin - self.origin);
+      trace_pos += vectorNormalize(self.takedown.start_origin - self.origin);
     }
 
     trace_pos = playerphysicstrace(trace_pos, trace_pos - (0, 0, step));
@@ -1187,7 +1187,7 @@ function function_d76eed10(action) {
       trace_pos = self.takedown.start_origin;
     }
 
-    self setorigin(trace_pos);
+    self setOrigin(trace_pos);
   }
 }
 

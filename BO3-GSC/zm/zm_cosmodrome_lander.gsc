@@ -32,11 +32,11 @@ function init() {
   level.zone_connected = 0;
   level.lander_in_use = 0;
   level.lander_ridden = 0;
-  lander = getent("lander", "targetname");
-  lander.console = getent("lander_console", "targetname");
-  lander.console linkto(lander);
-  lander.door_north = getent("zipline_door_n", "script_noteworthy");
-  lander.door_south = getent("zipline_door_s", "script_noteworthy");
+  lander = getEnt("lander", "targetname");
+  lander.console = getEnt("lander_console", "targetname");
+  lander.console linkTo(lander);
+  lander.door_north = getEnt("zipline_door_n", "script_noteworthy");
+  lander.door_south = getEnt("zipline_door_s", "script_noteworthy");
   lander setforcenocull();
   lander.door_north setforcenocull();
   lander.door_south setforcenocull();
@@ -45,7 +45,7 @@ function init() {
   lander.called = 0;
   lander.anchor = spawn("script_origin", lander.origin);
   lander.anchor.angles = lander.angles;
-  lander linkto(lander.anchor);
+  lander linkTo(lander.anchor);
   lander link_pieces(undefined, 1);
   lander.door_north link_pieces(undefined, 1);
   lander.door_south link_pieces(undefined, 1);
@@ -114,12 +114,12 @@ function link_pieces(piece, no_cull) {
   pieces = getEntArray(self.target, "targetname");
   for(i = 0; i < pieces.size; i++) {
     if(isDefined(pieces[i].script_noteworthy) && pieces[i].script_noteworthy == "zip_buy") {
-      pieces[i] enablelinkto();
+      pieces[i] enablelinkTo();
     }
     if(isDefined(piece)) {
-      pieces[i] linkto(piece);
+      pieces[i] linkTo(piece);
     } else {
-      pieces[i] linkto(self);
+      pieces[i] linkTo(self);
     }
     if(isDefined(no_cull) && no_cull) {
       pieces[i] setforcenocull();
@@ -143,32 +143,32 @@ function open_lander_door(time) {
 }
 
 function open_lander_gate() {
-  lander = getent("lander", "targetname");
-  north_pos = getent("zipline_door_n_pos", "script_noteworthy");
-  south_pos = getent("zipline_door_s_pos", "script_noteworthy");
+  lander = getEnt("lander", "targetname");
+  north_pos = getEnt("zipline_door_n_pos", "script_noteworthy");
+  south_pos = getEnt("zipline_door_s_pos", "script_noteworthy");
   lander.door_north thread move_gate(north_pos, 1);
   lander.door_south thread move_gate(south_pos, 1);
 }
 
 function close_lander_gate(time) {
-  lander = getent("lander", "targetname");
-  north_pos = getent("zipline_door_n_pos", "script_noteworthy");
-  south_pos = getent("zipline_door_s_pos", "script_noteworthy");
-  center_pos = getent("zipline_center", "script_noteworthy");
+  lander = getEnt("lander", "targetname");
+  north_pos = getEnt("zipline_door_n_pos", "script_noteworthy");
+  south_pos = getEnt("zipline_door_s_pos", "script_noteworthy");
+  center_pos = getEnt("zipline_center", "script_noteworthy");
   lander.door_north thread move_gate(north_pos, 0, time);
   lander.door_south thread move_gate(south_pos, 0, time);
 }
 
 function move_gate(pos, lower, time = 1) {
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   self unlink();
   if(lower) {
     self notsolid();
     if(self.classname == "script_brushmodel") {
-      self moveto(pos.origin + (vectorscale((0, 0, -1), 132)), time);
+      self moveTo(pos.origin + (vectorscale((0, 0, -1), 132)), time);
     } else {
       self playSound("zmb_lander_gate");
-      self moveto(pos.origin + (vectorscale((0, 0, -1), 44)), time);
+      self moveTo(pos.origin + (vectorscale((0, 0, -1), 44)), time);
     }
     self waittill("movedone");
     if(self.classname == "script_brushmodel") {
@@ -179,17 +179,17 @@ function move_gate(pos, lower, time = 1) {
       self playSound("zmb_lander_gate");
     }
     self notsolid();
-    self moveto(pos.origin, time);
+    self moveTo(pos.origin, time);
     self waittill("movedone");
     if(self.classname == "script_brushmodel") {
       self solid();
     }
   }
-  self linkto(lander.anchor);
+  self linkTo(lander.anchor);
 }
 
 function init_buy() {
-  trigger = getent("zip_buy", "script_noteworthy");
+  trigger = getEnt("zip_buy", "script_noteworthy");
   trigger thread lander_buy_think();
 }
 
@@ -204,16 +204,16 @@ function init_call_boxes() {
 
 function call_box_think() {
   level endon("fake_death");
-  lander = getent("lander", "targetname");
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self setcursorhint("HINT_NOICON");
+  lander = getEnt("lander", "targetname");
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
   level flag::wait_till("power_on");
   self.activated_station = 0;
   if(lander.station != self.script_noteworthy) {
-    self sethintstring(&"ZM_COSMODROME_LANDER_CALL");
+    self setHintString(&"ZM_COSMODROME_LANDER_CALL");
   } else {
-    self sethintstring(&"ZM_COSMODROME_LANDER_AT_STATION");
-    self setcursorhint("HINT_NOICON");
+    self setHintString(&"ZM_COSMODROME_LANDER_AT_STATION");
+    self setCursorHint("HINT_NOICON");
   }
   while(true) {
     who = undefined;
@@ -259,11 +259,11 @@ function call_box_think() {
 
 function lander_buy_think() {
   level endon("fake_death");
-  self sethintstring(&"ZOMBIE_NEED_POWER");
+  self setHintString(&"ZOMBIE_NEED_POWER");
   level flag::wait_till("power_on");
-  lander = getent("lander", "targetname");
-  panel = getent("rocket_launch_panel", "targetname");
-  self sethintstring(&"ZM_COSMODROME_LANDER_NO_CONNECTIONS");
+  lander = getEnt("lander", "targetname");
+  panel = getEnt("rocket_launch_panel", "targetname");
+  self setHintString(&"ZM_COSMODROME_LANDER_NO_CONNECTIONS");
   level clientfield::set("COSMO_LANDER_STATUS_LIGHTS", 1);
   level clientfield::set("COSMO_LANDER_STATION", 4);
   while(!lander.called) {
@@ -271,7 +271,7 @@ function lander_buy_think() {
   }
   level.zone_connected = 1;
   level flag::set("lander_connected");
-  self sethintstring(&"ZM_COSMODROME_LANDER", 250);
+  self setHintString(&"ZM_COSMODROME_LANDER", 250);
   node = getnode("goto_centrifuge", "targetname");
   while(true) {
     who = undefined;
@@ -284,9 +284,9 @@ function lander_buy_think() {
       zm_utility::play_sound_at_pos("no_purchase", self.origin);
       continue;
     }
-    rider_trigger = getent(lander.station + "_riders", "targetname");
+    rider_trigger = getEnt(lander.station + "_riders", "targetname");
     touching = 0;
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(rider_trigger istouching(players[i])) {
         touching = 1;
@@ -305,7 +305,7 @@ function lander_buy_think() {
       if(lander.station != "lander_station5") {
         lander thread function_bd6e70fe();
       }
-      call_box = getent(lander.station, "script_noteworthy");
+      call_box = getEnt(lander.station, "script_noteworthy");
       if(lander.station == "lander_station5") {
         dest = [];
         azkeys = getarraykeys(lander.zone);
@@ -383,25 +383,25 @@ function function_bd6e70fe() {
 
 function enable_callboxes() {
   call_boxes = getEntArray("zip_call_box", "targetname");
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   for(j = 0; j < call_boxes.size; j++) {
     if(call_boxes[j].script_noteworthy != lander.station) {
       call_boxes[j] triggerenable(1);
-      call_boxes[j] sethintstring(&"ZM_COSMODROME_LANDER_CALL");
+      call_boxes[j] setHintString(&"ZM_COSMODROME_LANDER_CALL");
       continue;
     }
     call_boxes[j] triggerenable(1);
-    call_boxes[j] sethintstring("");
-    call_boxes[j] setcursorhint("HINT_NOICON");
+    call_boxes[j] setHintString("");
+    call_boxes[j] setCursorHint("HINT_NOICON");
   }
 }
 
 function new_lander_intro() {
   level.intro_lander = 1;
   level thread lander_intro_think();
-  lander = getent("lander", "targetname");
-  north_pos = getent("zipline_door_n_pos", "script_noteworthy");
-  south_pos = getent("zipline_door_s_pos", "script_noteworthy");
+  lander = getEnt("lander", "targetname");
+  north_pos = getEnt("zipline_door_n_pos", "script_noteworthy");
+  south_pos = getEnt("zipline_door_s_pos", "script_noteworthy");
   lander.og_angles = lander.angles;
   north_pos.og_angles = north_pos.angles;
   south_pos.og_angles = south_pos.angles;
@@ -411,18 +411,18 @@ function new_lander_intro() {
     wait(0.05);
   }
   wait(3.5);
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   lander lock_players_intro();
   lander playLoopSound("zmb_lander_exhaust_loop");
   lander.sound_ent = spawn("script_origin", lander.origin);
-  lander.sound_ent linkto(lander);
+  lander.sound_ent linkTo(lander);
   lander.sound_ent playSound("zmb_lander_launch");
   lander.sound_ent playLoopSound("zmb_lander_flying_low_loop");
   lander_struct = struct::get("lander_station5", "targetname");
   spot1 = lander_struct.origin;
   wait(1.5);
   level thread lander_engine_fx();
-  lander.anchor moveto(spot1, 8, 0.1, 7.9);
+  lander.anchor moveTo(spot1, 8, 0.1, 7.9);
   level notify("lander_launched");
   util::delay(6, undefined, &flag::set, "lander_intro_done");
   lander.anchor waittill("movedone");
@@ -431,15 +431,15 @@ function new_lander_intro() {
   level thread zm_cosmodrome_amb::play_cosmo_announcer_vox("vox_ann_startup");
   lander.sound_ent stoploopsound(3);
   lander stoploopsound(3);
-  playsoundatposition("zmb_lander_land", lander.sound_ent.origin);
+  playSoundAtPosition("zmb_lander_land", lander.sound_ent.origin);
   open_lander_gate();
   unlock_players();
   level thread force_wait_for_gersh_line();
 }
 
 function lander_intro_think() {
-  trigger = getent("zip_buy", "script_noteworthy");
-  trigger setcursorhint("HINT_NOICON");
+  trigger = getEnt("zip_buy", "script_noteworthy");
+  trigger setCursorHint("HINT_NOICON");
   level flag::wait_till("lander_grounded");
   wait(15);
   init_buy();
@@ -448,12 +448,12 @@ function lander_intro_think() {
 function lander_take_off(dest) {
   level flag::clear("lander_grounded");
   level flag::set("lander_takeoff");
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   level clientfield::set("COSMO_LANDER_STATUS_LIGHTS", 1);
   lander thread lock_players(dest);
   level notify("lu", lander.riders, self);
   lander.depart_station = lander.station;
-  depart = getent(lander.station, "script_noteworthy");
+  depart = getEnt(lander.station, "script_noteworthy");
   if(depart.target == "catwalk_zip_door") {
     level clientfield::set("COSMO_LANDER_CATWALK_BAY", 3);
   } else {
@@ -482,7 +482,7 @@ function lander_take_off(dest) {
   } else {
     lander.station = dest;
   }
-  arrive = getent(lander.station, "script_noteworthy");
+  arrive = getEnt(lander.station, "script_noteworthy");
   if(isDefined(arrive.target)) {
     if(arrive.target == "catwalk_zip_door") {
       level clientfield::set("COSMO_LANDER_CATWALK_BAY", 2);
@@ -504,7 +504,7 @@ function lander_take_off(dest) {
   }
   lander.sound_ent playSound("zmb_lander_launch");
   lander.sound_ent playLoopSound("zmb_lander_flying_low_loop");
-  lander.anchor moveto(hub.origin, 3, 2, 1);
+  lander.anchor moveTo(hub.origin, 3, 2, 1);
   lander.anchor thread lander_takeoff_wobble();
   level notify("lander_launched");
   level flag::clear("lander_takeoff");
@@ -513,10 +513,10 @@ function lander_take_off(dest) {
   lander.anchor lander_hover_idle();
   if(isDefined(hub.target)) {
     extra_dest = struct::get(hub.target, "targetname");
-    lander.anchor moveto(extra_dest.origin, 2);
+    lander.anchor moveTo(extra_dest.origin, 2);
     lander.anchor waittill("movedone");
   }
-  call_box = getent(lander.station, "script_noteworthy");
+  call_box = getEnt(lander.station, "script_noteworthy");
   call_box playSound("vox_ann_lander_current_1");
   lander clientfield::set("COSMO_LANDER_MOVE_FX", 0);
   lander_goto_dest();
@@ -542,19 +542,19 @@ function function_5f5d494f() {
 function lander_hover_idle() {
   num = self.angles[0] + (randomintrange(-3, 3));
   num1 = self.angles[1] + (randomintrange(-3, 3));
-  self rotateto((num, num1, randomfloatrange(0, 5)), 0.5);
-  self moveto((self.origin[0], self.origin[1], self.origin[2] + 20), 0.5, 0.1);
+  self rotateTo((num, num1, randomfloatrange(0, 5)), 0.5);
+  self moveTo((self.origin[0], self.origin[1], self.origin[2] + 20), 0.5, 0.1);
   wait(0.5);
 }
 
 function player_blocking_lander() {
-  players = getplayers();
-  lander = getent("lander", "targetname");
-  rider_trigger = getent(lander.station + "_riders", "targetname");
+  players = getPlayers();
+  lander = getEnt("lander", "targetname");
+  rider_trigger = getEnt(lander.station + "_riders", "targetname");
   crumb = struct::get(rider_trigger.target, "targetname");
   for(i = 0; i < players.size; i++) {
     if(rider_trigger istouching(players[i])) {
-      players[i] setorigin(crumb.origin + (randomintrange(-20, 20), randomintrange(-20, 20), 0));
+      players[i] setOrigin(crumb.origin + (randomintrange(-20, 20), randomintrange(-20, 20), 0));
       players[i] dodamage(players[i].health + 10000, players[i].origin);
     }
   }
@@ -563,7 +563,7 @@ function player_blocking_lander() {
     if(isDefined(zombies[i])) {
       if(rider_trigger istouching(zombies[i])) {
         level.zombie_total++;
-        playsoundatposition("nuked", zombies[i].origin);
+        playSoundAtPosition("nuked", zombies[i].origin);
         playFX(level._effect["zomb_gib"], zombies[i].origin);
         if(isDefined(zombies[i].lander_death)) {
           zombies[i][[zombies[i].lander_death]]();
@@ -576,23 +576,23 @@ function player_blocking_lander() {
 }
 
 function lock_players(destination) {
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   lander.riders = 0;
   spots = getEntArray("zipline_spots", "script_noteworthy");
   taken = [];
-  zipline_door1 = getent("zipline_door_n", "script_noteworthy");
-  zipline_door2 = getent("zipline_door_s", "script_noteworthy");
-  base = getent("lander_base", "script_noteworthy");
+  zipline_door1 = getEnt("zipline_door_n", "script_noteworthy");
+  zipline_door2 = getEnt("zipline_door_s", "script_noteworthy");
+  base = getEnt("lander_base", "script_noteworthy");
   ls_taken = [];
-  rider_trigger = getent(lander.station + "_riders", "targetname");
+  rider_trigger = getEnt(lander.station + "_riders", "targetname");
   crumb = struct::get(rider_trigger.target, "targetname");
   lander thread takeoff_nuke(undefined, 80, 1, rider_trigger);
   lander thread takeoff_knockdown(81, 250);
-  players = getplayers();
-  lander_trig = getent("zip_buy", "script_noteworthy");
+  players = getPlayers();
+  lander_trig = getEnt("zip_buy", "script_noteworthy");
   x = 0;
   while(!level flag::get("lander_grounded")) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(!rider_trigger istouching(players[i]) && !players[i] istouching(zipline_door1) && !players[i] istouching(zipline_door2) && !players[i] istouching(base) && x < 8) {
         continue;
@@ -653,12 +653,12 @@ function function_e323fa97() {
 }
 
 function lock_players_intro() {
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   lander.riders = 0;
   spots = getEntArray("zipline_spots", "script_noteworthy");
-  players = getplayers();
+  players = getPlayers();
   taken = [];
-  rider_trigger = getent("lander_in_sky_riders", "targetname");
+  rider_trigger = getEnt("lander_in_sky_riders", "targetname");
   crumb = struct::get(rider_trigger.target, "targetname");
   for(i = 0; i < players.size; i++) {
     grab = -1;
@@ -669,7 +669,7 @@ function lock_players_intro() {
       grab = j;
     }
     taken[grab] = 1;
-    players[i] playerlinkto(spots[grab], undefined, 0, 180, 180, 180, 180, 1);
+    players[i] playerlinkTo(spots[grab], undefined, 0, 180, 180, 180, 180, 1);
     players[i] enableinvulnerability();
     players[i].lander = 1;
     lander.riders++;
@@ -677,7 +677,7 @@ function lock_players_intro() {
 }
 
 function unlock_players() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] unlink();
     players[i] disableinvulnerability();
@@ -688,7 +688,7 @@ function unlock_players() {
     players[i] thread zm::store_crumb(players[i].origin);
     players[i].lander = 0;
   }
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   if(isDefined(lander.driver) && lander.driver zombie_utility::is_zombie()) {
     lander.driver unlink();
     lander.driver = undefined;
@@ -697,22 +697,22 @@ function unlock_players() {
 
 function lander_goto_dest() {
   level endon("intermission");
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   final_dest = struct::get(lander.station, "targetname");
-  arrive = getent(lander.station, "script_noteworthy");
+  arrive = getEnt(lander.station, "script_noteworthy");
   if(isDefined(final_dest.target)) {
     current_dest = struct::get(final_dest.target, "targetname");
     if(isDefined(current_dest.target)) {
       lander.anchor thread lander_flight_wobble(lander, final_dest);
       extra_dest = struct::get(current_dest.target, "targetname");
-      lander.anchor moveto(extra_dest.origin, 5, 1);
+      lander.anchor moveTo(extra_dest.origin, 5, 1);
       lander.anchor waittill("movedone");
       lander_clean_up_corpses(lander.anchor.origin, 150);
-      lander.anchor moveto(current_dest.origin, 2, 0, 2);
+      lander.anchor moveTo(current_dest.origin, 2, 0, 2);
       lander.anchor waittill("movedone");
     } else {
       lander.anchor thread lander_flight_wobble(lander, final_dest);
-      lander.anchor moveto(current_dest.origin, 7, 1, 2.75);
+      lander.anchor moveTo(current_dest.origin, 7, 1, 2.75);
       lander.anchor waittill("movedone");
     }
   }
@@ -757,8 +757,8 @@ function lander_goto_dest() {
   for(i = 0; i < arrive_door.size; i++) {
     arrive_door[i] thread close_lander_door(1);
   }
-  lander.anchor moveto(final_dest.origin, movetime, acceltime, deceltime);
-  players = getplayers();
+  lander.anchor moveTo(final_dest.origin, movetime, acceltime, deceltime);
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i].lander) {
       players[i] clientfield::set("COSMO_PLAYER_LANDER_FOG", 0);
@@ -769,7 +769,7 @@ function lander_goto_dest() {
   lander.anchor waittill("movedone");
   lander.sound_ent stoploopsound(1);
   lander stoploopsound(3);
-  playsoundatposition("zmb_lander_land", lander.origin);
+  playSoundAtPosition("zmb_lander_land", lander.origin);
   put_players_back_on_lander();
   level flag::set("lander_grounded");
   level flag::clear("lander_landing");
@@ -812,7 +812,7 @@ function lander_goto_dest() {
 }
 
 function lander_engine_fx() {
-  lander_base = getent("lander_base", "script_noteworthy");
+  lander_base = getEnt("lander_base", "script_noteworthy");
   lander_base clientfield::set("COSMO_LANDER_ENGINE_FX", 1);
   lander_base clientfield::set("COSMO_LANDER_RUMBLE_AND_QUAKE", 1);
   level flag::wait_till("lander_grounded");
@@ -843,7 +843,7 @@ function zombie_burst() {
   self endon("death");
   wait(randomfloatrange(0.2, 0.3));
   level.zombie_total++;
-  playsoundatposition("nuked", self.origin);
+  playSoundAtPosition("nuked", self.origin);
   playFX(level._effect["zomb_gib"], self.origin);
   if(isDefined(self.lander_death)) {
     self[[self.lander_death]]();
@@ -903,24 +903,24 @@ function lander_flight_wobble(lander, final_dest) {
       rot_time = 1.75;
     }
     if(lander.depart_station == "lander_station5" && final_dest.targetname == "lander_station1") {
-      self rotateto((randomfloatrange(345, 355), 0, randomfloatrange(0, 5)), rot_time);
+      self rotateTo((randomfloatrange(345, 355), 0, randomfloatrange(0, 5)), rot_time);
     } else {
       if(lander.depart_station == "lander_station1" && final_dest.targetname == "lander_station5") {
-        self rotateto((randomfloatrange(370, 380), 0, randomfloatrange(-5, 0)), rot_time);
+        self rotateTo((randomfloatrange(370, 380), 0, randomfloatrange(-5, 0)), rot_time);
       } else {
         if(lander.depart_station == "lander_station5" && final_dest.targetname == "lander_station4") {
-          self rotateto((randomfloatrange(370, 380), 0, randomfloatrange(-5, 0)), rot_time);
+          self rotateTo((randomfloatrange(370, 380), 0, randomfloatrange(-5, 0)), rot_time);
         } else {
           if(lander.depart_station == "lander_station4" && final_dest.targetname == "lander_station5") {
-            self rotateto((randomfloatrange(345, 355), 0, randomfloatrange(0, 5)), rot_time);
+            self rotateTo((randomfloatrange(345, 355), 0, randomfloatrange(0, 5)), rot_time);
           } else {
             if(lander.depart_station == "lander_station5" && final_dest.targetname == "lander_station3") {
-              self rotateto((randomfloatrange(5, 10), 0, randomfloatrange(-15, -10)), rot_time);
+              self rotateTo((randomfloatrange(5, 10), 0, randomfloatrange(-15, -10)), rot_time);
             } else {
               if(lander.depart_station == "lander_station3" && final_dest.targetname == "lander_station5") {
-                self rotateto((randomfloatrange(-10, -5), 0, randomfloatrange(10, 15)), rot_time);
+                self rotateTo((randomfloatrange(-10, -5), 0, randomfloatrange(10, 15)), rot_time);
               } else {
-                self rotateto((randomfloatrange(-5, 5), 0, randomfloatrange(-5, 5)), rot_time);
+                self rotateTo((randomfloatrange(-5, 5), 0, randomfloatrange(-5, 5)), rot_time);
               }
             }
           }
@@ -937,7 +937,7 @@ function lander_flight_wobble(lander, final_dest) {
 function lander_takeoff_wobble() {
   level endon("lander_launched");
   while(true) {
-    self rotateto((randomfloatrange(-10, 10), 0, randomfloatrange(-10, 10)), 0.5);
+    self rotateTo((randomfloatrange(-10, 10), 0, randomfloatrange(-10, 10)), 0.5);
     wait(0.5);
   }
 }
@@ -946,41 +946,41 @@ function lander_landing_wobble(movetime) {
   time = movetime - 1;
   timer = gettime() + (time * 1000);
   while(gettime() < timer) {
-    self rotateto((randomfloatrange(-5, 5), 0, randomfloatrange(-5, 5)), 0.75);
+    self rotateTo((randomfloatrange(-5, 5), 0, randomfloatrange(-5, 5)), 0.75);
     wait(0.75);
   }
-  self rotateto((0, 0, 0), 0.75);
+  self rotateTo((0, 0, 0), 0.75);
 }
 
 function lander_flight_stop_wobble() {
   wait(3);
   self notify("start_approach");
   self.old_angles = self.angles;
-  self rotateto((self.angles[0] * -1, self.angles[1] * -1, self.angles[2] * -1), 2.75);
+  self rotateTo((self.angles[0] * -1, self.angles[1] * -1, self.angles[2] * -1), 2.75);
   wait(3);
-  self rotateto(self.old_angles, 2);
+  self rotateTo(self.old_angles, 2);
   level flag::set("lander_landing");
 }
 
 function lander_cooldown_think() {
-  lander_use_trig = getent("zip_buy", "script_noteworthy");
+  lander_use_trig = getEnt("zip_buy", "script_noteworthy");
   lander_callboxes = getEntArray("zip_call_box", "targetname");
-  lander = getent("lander", "targetname");
+  lander = getEnt("lander", "targetname");
   while(true) {
     level waittill("lu", riders, trig);
     level flag::set("lander_inuse");
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       lander_use_trig setinvisibletoplayer(players[i], 1);
     }
     for(i = 0; i < lander_callboxes.size; i++) {
       if(lander_callboxes[i] == trig) {
-        lander_callboxes[i] sethintstring(&"ZM_COSMODROME_LANDER_ON_WAY");
-        lander_callboxes[i] setcursorhint("HINT_NOICON");
+        lander_callboxes[i] setHintString(&"ZM_COSMODROME_LANDER_ON_WAY");
+        lander_callboxes[i] setCursorHint("HINT_NOICON");
         continue;
       }
-      lander_callboxes[i] sethintstring(&"ZM_COSMODROME_LANDER_IN_USE");
-      lander_callboxes[i] setcursorhint("HINT_NOICON");
+      lander_callboxes[i] setHintString(&"ZM_COSMODROME_LANDER_IN_USE");
+      lander_callboxes[i] setCursorHint("HINT_NOICON");
     }
     while(level.lander_in_use) {
       wait(0.1);
@@ -998,18 +998,18 @@ function lander_cooldown_think() {
       lander playSound("zmb_lander_pump_start");
       lander playLoopSound("zmb_lander_pump_loop", 1);
     }
-    lander_use_trig sethintstring(str);
-    players = getplayers();
+    lander_use_trig setHintString(str);
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       lander_use_trig setinvisibletoplayer(players[i], 0);
     }
     for(i = 0; i < lander_callboxes.size; i++) {
       if(lander_callboxes[i].script_noteworthy != lander.station) {
-        lander_callboxes[i] sethintstring(str);
+        lander_callboxes[i] setHintString(str);
         continue;
       }
-      lander_callboxes[i] sethintstring(&"ZM_COSMODROME_LANDER_AT_STATION");
-      lander_callboxes[i] setcursorhint("HINT_NOICON");
+      lander_callboxes[i] setHintString(&"ZM_COSMODROME_LANDER_AT_STATION");
+      lander_callboxes[i] setCursorHint("HINT_NOICON");
     }
     if(!isDefined(level.var_a1879e28) || level.var_a1879e28) {
       wait(cooldown);
@@ -1024,18 +1024,18 @@ function lander_cooldown_think() {
       }
     }
     level clientfield::set("COSMO_LANDER_STATUS_LIGHTS", 2);
-    lander_use_trig sethintstring(&"ZM_COSMODROME_LANDER", 250);
-    players = getplayers();
+    lander_use_trig setHintString(&"ZM_COSMODROME_LANDER", 250);
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       lander_use_trig setinvisibletoplayer(players[i], 0);
     }
     for(i = 0; i < lander_callboxes.size; i++) {
       if(lander_callboxes[i].script_noteworthy != lander.station) {
-        lander_callboxes[i] sethintstring(&"ZM_COSMODROME_LANDER_CALL");
+        lander_callboxes[i] setHintString(&"ZM_COSMODROME_LANDER_CALL");
         continue;
       }
-      lander_callboxes[i] sethintstring(&"ZM_COSMODROME_LANDER_AT_STATION");
-      lander_callboxes[i] setcursorhint("HINT_NOICON");
+      lander_callboxes[i] setHintString(&"ZM_COSMODROME_LANDER_AT_STATION");
+      lander_callboxes[i] setCursorHint("HINT_NOICON");
     }
     level flag::clear("lander_cooldown");
   }
@@ -1058,14 +1058,14 @@ function force_wait_for_gersh_line() {
 }
 
 function put_players_back_on_lander() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!(isDefined(players[i].lander) && players[i].lander) && (!(isDefined(players[i].on_lander_last_stand) && players[i].on_lander_last_stand))) {
       continue;
     }
     if(!players[i] is_player_on_lander()) {
       if(isDefined(players[i].lander_link_spot)) {
-        players[i] setorigin(players[i].lander_link_spot.origin);
+        players[i] setOrigin(players[i].lander_link_spot.origin);
         players[i] playSound("zmb_laugh_child");
       }
     }
@@ -1073,10 +1073,10 @@ function put_players_back_on_lander() {
 }
 
 function is_player_on_lander() {
-  lander = getent("lander", "targetname");
-  rider_trigger = getent(lander.station + "_riders", "targetname");
-  lander_trig = getent("zip_buy", "script_noteworthy");
-  base = getent("lander_base", "script_noteworthy");
+  lander = getEnt("lander", "targetname");
+  rider_trigger = getEnt(lander.station + "_riders", "targetname");
+  lander_trig = getEnt("zip_buy", "script_noteworthy");
+  base = getEnt("lander_base", "script_noteworthy");
   if(rider_trigger istouching(self) || self istouching(lander_trig) || distance(self.origin, base.origin) < 200) {
     return true;
   }

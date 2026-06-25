@@ -671,7 +671,7 @@ beginlocationselection(var_0) {
     }
 
     if(!isDefined(var_1)) {
-      var_1 = scripts\engine\utility::getstruct(self.target, "targetname");
+      var_1 = scripts\engine\utility::getStruct(self.target, "targetname");
     }
   }
 

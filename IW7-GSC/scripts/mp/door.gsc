@@ -37,9 +37,9 @@ door_setup() {
       }
 
       if(isDefined(var_3.script_linkto)) {
-        var_4 = getent(var_3.script_linkto, "script_linkname");
-        var_3 enablelinkto();
-        var_3 linkto(var_4);
+        var_4 = getEnt(var_3.script_linkto, "script_linkname");
+        var_3 enablelinkTo();
+        var_3 linkTo(var_4);
       }
 
       var_0.var_12720[var_0.var_12720.size] = var_3;
@@ -90,7 +90,7 @@ door_setup() {
 
   foreach(var_7 in var_0.doors) {
     var_7.var_D6A4 = var_7.origin;
-    var_7.var_D6AE = scripts\engine\utility::getstruct(var_7.target, "targetname").origin;
+    var_7.var_D6AE = scripts\engine\utility::getStruct(var_7.target, "targetname").origin;
     var_7.var_5717 = distance(var_7.var_D6AE, var_7.var_D6A4);
     var_7.origin = var_7.var_D6AE;
     var_7.var_C001 = 0;
@@ -168,7 +168,7 @@ door_state_update(var_0) {
         }
 
         if(var_3.spawnimpulsefield & 1) {
-          var_3 disconnectpaths();
+          var_3 disconnectPaths();
         }
       } else {
         if(isDefined(var_1.var_19E5)) {
@@ -180,7 +180,7 @@ door_state_update(var_0) {
 
         if(var_3.spawnimpulsefield & 1) {
           if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "always_disconnect") {
-            var_3 disconnectpaths();
+            var_3 disconnectPaths();
           } else {
             var_3 connectpaths();
           }
@@ -199,7 +199,7 @@ door_state_update(var_0) {
     }
 
     var_15 = scripts\engine\utility::ter_op(var_1.statecurr == 0, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
-    var_1 sethintstring(var_15);
+    var_1 setHintString(var_15);
     var_1 makeusable();
     var_1 waittill("trigger");
     if(isDefined(var_1.button_smash_count)) {
@@ -261,7 +261,7 @@ door_state_update(var_0) {
       if(var_3.origin != var_14) {
         var_16 = max(0.1, distance(var_3.origin, var_14) / var_3.var_5717 * var_13);
         var_17 = max(var_16 * 0.25, 0.05);
-        var_3 moveto(var_14, var_16, var_17, var_17);
+        var_3 moveTo(var_14, var_16, var_17, var_17);
         var_3 scripts\mp\movers::notify_moving_platform_invalid();
         if(var_3.var_C001) {
           var_3.unresolved_collision_func = scripts\mp\movers::func_12BEE;
@@ -278,7 +278,7 @@ door_state_update(var_0) {
     }
   } else if(var_1.statecurr == 4) {
     foreach(var_3 in var_1.doors) {
-      var_3 moveto(var_3.origin, 0.05, 0, 0);
+      var_3 moveTo(var_3.origin, 0.05, 0, 0);
       var_3 scripts\mp\movers::notify_moving_platform_invalid();
       if(var_3.var_C001) {
         var_3.unresolved_collision_func = undefined;
@@ -449,8 +449,8 @@ return_triggerer(var_0) {
         if(var_3 != "prone") {
           continue;
         } else {
-          var_4 = vectornormalize(anglesToForward(var_2.angles));
-          var_5 = vectornormalize(var_0.origin - var_2.origin);
+          var_4 = vectorNormalize(anglesToForward(var_2.angles));
+          var_5 = vectorNormalize(var_0.origin - var_2.origin);
           var_6 = vectordot(var_4, var_5);
           if(var_6 > 0) {
             continue;

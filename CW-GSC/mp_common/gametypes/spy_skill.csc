@@ -100,7 +100,7 @@ function function_cc526382(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  players = getplayers(fieldname);
+  players = getPlayers(fieldname);
 
   foreach(player in players) {
     if(isDefined(player.var_54d9d1ec) && isDefined(player.var_27a6fded)) {

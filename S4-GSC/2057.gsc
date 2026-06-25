@@ -88,7 +88,7 @@ _id_10E9(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 setModel("mw_dist_soldier");
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 thread _id_10BF0();
 }
 

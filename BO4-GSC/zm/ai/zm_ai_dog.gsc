@@ -222,10 +222,10 @@ get_favorite_enemy(dog) {
     if(self.team == #"allies") {
       dog_targets = getaiteamarray(level.zombie_team);
     } else {
-      dog_targets = getplayers();
+      dog_targets = getPlayers();
     }
   } else {
-    dog_targets = arraycombine(getplayers(), getaiarray(), 0, 0);
+    dog_targets = arraycombine(getPlayers(), getaiarray(), 0, 0);
   }
 
   least_hunted = dog_targets[0];
@@ -287,7 +287,7 @@ get_locomotion_target(behaviortreeentity) {
     spacing_horz_dist = ai::get_behavior_attribute("spacing_horz_dist");
     spacing_value = ai::get_behavior_attribute("spacing_value");
     to_enemy = behaviortreeentity.favoriteenemy.origin - behaviortreeentity.origin;
-    perp = vectornormalize((to_enemy[1] * -1, to_enemy[0], 0));
+    perp = vectorNormalize((to_enemy[1] * -1, to_enemy[0], 0));
     offset = perp * spacing_horz_dist * spacing_value;
     spacing_dist = math::clamp(length(to_enemy), spacing_near_dist, spacing_far_dist);
     lerp_amount = math::clamp((spacing_dist - spacing_near_dist) / (spacing_far_dist - spacing_near_dist), 0, 1);

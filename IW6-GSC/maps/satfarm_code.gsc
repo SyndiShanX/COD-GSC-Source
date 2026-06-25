@@ -4,7 +4,7 @@
 *****************************************************/
 
 init_system() {
-  level.death_model_col = getent("death_collision_map", "targetname");
+  level.death_model_col = getEnt("death_collision_map", "targetname");
   level.scr_model["vehicle_t90ms_tank_destroyed_iw6"] = "vehicle_t90ms_tank_destroyed_iw6";
   level.friendly_thermal_reflector_effect = loadfx("fx/misc/thermal_tapereflect_inv_lrg");
   level.numberofhitstaken = 0;
@@ -153,7 +153,7 @@ player_view_clamp() {
   level.player endon("missile_tank_dismount");
 
   for(;;) {
-    var_0 = vectornormalize(self gettagorigin("tag_barrel") - self.origin);
+    var_0 = vectorNormalize(self gettagorigin("tag_barrel") - self.origin);
     var_1 = anglesToForward(self.angles);
     var_2 = vectordot(var_1, var_0);
 
@@ -174,7 +174,7 @@ mark_friendly_vehicles() {
     foreach(var_1 in vehicle_getarray()) {
       if(var_1.script_team == "allies" && var_1 != level.playertank && var_1 istank() && !isDefined(var_1.chevron_tag)) {
         var_1.chevron_tag = var_1 common_scripts\utility::spawn_tag_origin();
-        var_1.chevron_tag linkto(var_1, "tag_origin", (0, 0, 150), (0, 0, 0));
+        var_1.chevron_tag linkTo(var_1, "tag_origin", (0, 0, 150), (0, 0, 0));
         playFXOnTag(common_scripts\utility::getfx("friendly_tank_chevron"), var_1.chevron_tag, "tag_origin");
         var_1 thread remove_tag_on_death();
       }
@@ -225,7 +225,7 @@ tank_rumble() {
     var_4 = clamp(1 - var_3 / 50, 0.0, 1.0);
     var_5 = 400 + 100 * var_4;
     var_1 unlink();
-    var_1 linkto(level.player, "", (0.0, 0.0, var_5), (0, 0, 0));
+    var_1 linkTo(level.player, "", (0.0, 0.0, var_5), (0, 0, 0));
     wait 0.1;
   }
 }
@@ -314,7 +314,7 @@ tank_health_monitor() {
 
     level.numberofhitstaken++;
     earthquake(0.5, 1.0, self.origin, 512);
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     level.player viewkick(1, var_3);
     var_5 = 1 / self.max_hit_count * (self.current_hit_count * 0.5);
     level.player digitaldistortsetparams(var_5, var_5);
@@ -536,7 +536,7 @@ detectkill() {
       thread common_scripts\utility::play_sound_in_space("satf_body_crush_plr", self.origin);
       thread common_scripts\utility::play_sound_in_space("satfarm_crush_scream_plr", self.origin);
       level.player screenshakeonentity(4.0, 1.0, 1.0, 0.5, 0, 0.25, 0, 2.0, 0.5, 0.5);
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
     }
   }
 }
@@ -2481,7 +2481,7 @@ handle_mg_firing() {
       var_10 = magicbullet("minigun_m1a1", var_7 + var_5 * 32, var_9, level.player);
       level.player playSound("satfarm_turret_temp_plr");
       playFXOnTag(common_scripts\utility::getfx("grenade_muzzleflash"), self.mgturret[0], "tag_flash");
-      level.player playrumbleonentity("minigun_rumble");
+      level.player playRumbleOnEntity("minigun_rumble");
       var_2 = gettime() + var_1 * 1000;
 
       if(!level.player fragButtonPressed()) {
@@ -2542,7 +2542,7 @@ pop_smoke_hud() {
 launch_smoke(var_0) {
   if(common_scripts\utility::flag("player_in_tank")) {
     thread smoke_launcher_sound_player();
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   } else
     thread smoke_launcher_sound_3d();
 
@@ -2552,7 +2552,7 @@ launch_smoke(var_0) {
 
   var_1 = [["tag_canister_left", 1000], ["tag_canister_left", 0], ["tag_canister_right", -1000]];
   var_2 = vectortoangles(var_0 - self getcentroid());
-  var_2 = vectornormalize(anglestoright(var_2));
+  var_2 = vectorNormalize(anglestoright(var_2));
 
   foreach(var_4 in var_1) {
     thread launch_smoke_from_tag(var_4[0], var_0 + var_2 * var_4[1]);
@@ -2569,7 +2569,7 @@ launch_smoke_from_tag(var_0, var_1) {
   var_4 = spawn("script_model", var_2);
   var_4 setModel("projectile_m203grenade");
   var_4.origin = var_2;
-  var_4.angles = vectortoangles(vectornormalize(var_1 - var_2));
+  var_4.angles = vectortoangles(vectorNormalize(var_1 - var_2));
   playFXOnTag(level._effect["rpg_trail"], var_4, "tag_origin");
   var_4 maps\_utility::move_with_rate(var_1, var_4.angles, 12000);
   stopFXOnTag(level._effect["rpg_trail"], var_4, "tag_origin");
@@ -2610,7 +2610,7 @@ trace_to_forward(var_0) {
 smoke_screen_vis_blocker(var_0) {
   var_1 = spawn("script_model", var_0);
   var_1.angles = (var_1.angles[0], self.angles[1] + 90, var_1.angles[2]);
-  var_1 clonebrushmodeltoscriptmodel(getent("smoke_screen_vis_blocker", "targetname"));
+  var_1 clonebrushmodeltoscriptmodel(getEnt("smoke_screen_vis_blocker", "targetname"));
   wait 6.0;
   var_1 delete();
 }
@@ -2773,12 +2773,12 @@ manage_target_loc(var_0) {
       continue;
     }
 
-    self setturrettargetent(self.tank_target, self.targetingoffset);
+    self setturrettargetEnt(self.tank_target, self.targetingoffset);
     wait(randomfloatrange(0.25, 0.5));
 
     if(!isDefined(self.disable_turret_fire)) {
       if(isDefined(self.override_target) && self.override_target.classname != "script_vehicle_corpse") {
-        self setturrettargetent(self.override_target, self.targetingoffset);
+        self setturrettargetEnt(self.override_target, self.targetingoffset);
         var_1 = self.override_target common_scripts\utility::waittill_any_timeout(1, "death");
 
         if(var_1 == "death" || isDefined(self.override_target) && self.override_target.classname == "script_vehcile_corpse") {
@@ -2787,7 +2787,7 @@ manage_target_loc(var_0) {
         } else
           attempt_fire_loc();
       } else if(isDefined(self.tank_target) && self.tank_target.classname != "script_vehicle_corpse") {
-        self setturrettargetent(self.tank_target, self.targetingoffset);
+        self setturrettargetEnt(self.tank_target, self.targetingoffset);
         var_1 = self.tank_target common_scripts\utility::waittill_any_timeout(1, "death");
 
         if(var_1 == "death" || isDefined(self.tank_target) && self.tank_target.classname == "script_vehcile_corpse") {
@@ -2835,9 +2835,9 @@ check_fire_angle() {
     }
 
     var_1 = self gettagangles("tag_flash");
-    var_1 = vectornormalize(var_1);
+    var_1 = vectorNormalize(var_1);
     var_2 = self.origin - self.tank_target.origin;
-    var_2 = vectornormalize(var_2);
+    var_2 = vectorNormalize(var_2);
     var_3 = vectordot(var_1, var_2);
 
     if(var_3 > 0.7) {
@@ -2959,7 +2959,7 @@ set_one_hit_kill() {
 fire_on_non_vehicle(var_0, var_1) {
   self endon("death");
   self.disable_turret_fire = 1;
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -2968,7 +2968,7 @@ fire_on_non_vehicle(var_0, var_1) {
     var_1 = (0, 0, 0);
   }
 
-  self setturrettargetent(var_2, var_1);
+  self setturrettargetEnt(var_2, var_1);
   wait 1;
 
   if(isDefined(var_2)) {
@@ -2993,7 +2993,7 @@ fire_now_on_vehicle(var_0, var_1) {
     var_1 = (0, 0, 0);
   }
 
-  self setturrettargetent(var_0, var_1);
+  self setturrettargetEnt(var_0, var_1);
   wait 1;
 
   if(isDefined(var_0)) {
@@ -3062,7 +3062,7 @@ handle_damage(var_0) {
   }
 
   var_9 = anglesToForward(self.angles);
-  var_10 = vectornormalize(var_5);
+  var_10 = vectorNormalize(var_5);
   var_11 = abs(vectordot(var_9, var_10));
 
   if(var_11 < 0.9 && var_3 > 250) {
@@ -3215,7 +3215,7 @@ spawn_death_collision_phys(var_0) {
       var_3 common_scripts\utility::waittill_any_timeout(10, "trigger");
 
       if(isDefined(var_1)) {
-        var_1 moveto(var_1.origin - (0, 0, 16), 0.25);
+        var_1 moveTo(var_1.origin - (0, 0, 16), 0.25);
         var_2 delete();
         var_3 delete();
       }
@@ -3287,7 +3287,7 @@ handle_tank_death(var_0) {
       var_4 common_scripts\utility::waittill_any_timeout(10, "trigger");
 
       if(isDefined(var_2)) {
-        var_2 moveto(var_2.origin - (0, 0, 16), 0.25);
+        var_2 moveTo(var_2.origin - (0, 0, 16), 0.25);
         var_3 delete();
         var_4 delete();
       }
@@ -3978,7 +3978,7 @@ nav_mesh_exit_recursive(var_0) {
     var_2 = var_0[var_0.size - 1];
 
     foreach(var_4 in var_2.pos_info.nodes_start) {
-      if(!array_contains_script_linkto(var_0, var_4.path_end)) {
+      if(!array_contains_script_linkTo(var_0, var_4.path_end)) {
         var_5 = var_0;
         var_5[var_5.size] = var_4.path_end;
         var_6 = nav_mesh_exit_recursive(var_5);
@@ -3993,7 +3993,7 @@ nav_mesh_exit_recursive(var_0) {
   return var_1;
 }
 
-array_contains_script_linkto(var_0, var_1) {
+array_contains_script_linkTo(var_0, var_1) {
   if(var_0.size <= 0) {
     return 0;
   }
@@ -4167,7 +4167,7 @@ get_optimal_next_path_recursive(var_0) {
     var_2 = var_0[var_0.size - 1];
 
     foreach(var_4 in var_2.pos_info.nodes_start) {
-      if(!array_contains_script_linkto(var_0, var_4.path_end)) {
+      if(!array_contains_script_linkTo(var_0, var_4.path_end)) {
         var_5 = var_0;
         var_5[var_5.size] = var_4.path_end;
         var_6 = get_optimal_next_path_recursive(var_5);
@@ -4413,7 +4413,7 @@ tank_relative_speed(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_0) || var_0 == "") {
     level.alliedtanktarget = level.playertank;
   } else {
-    var_6 = common_scripts\utility::getstruct(var_0, "targetname");
+    var_6 = common_scripts\utility::getStruct(var_0, "targetname");
     level.alliedtanktarget = var_6;
   }
 
@@ -4638,14 +4638,14 @@ proxmity_check_stop_loop(var_0, var_1, var_2) {
     if(var_8 == (0, 0, 0)) {
       var_9 = anglesToForward(self.angles);
     } else {
-      var_9 = vectornormalize(var_8);
+      var_9 = vectorNormalize(var_8);
     }
 
     if(!isDefined(var_3)) {
       common_scripts\utility::waitframe();
       continue;
     } else
-      var_10 = vectornormalize(var_3.origin - self.origin);
+      var_10 = vectorNormalize(var_3.origin - self.origin);
 
     var_11 = vectordot(var_9, var_10);
     var_12 = self vehicle_getspeed();
@@ -4703,9 +4703,9 @@ proxmity_check_stop_relative(var_0, var_1) {
     var_3 = self.angles;
     var_4 = anglesToForward(self.angles);
   } else
-    var_4 = vectornormalize(var_3);
+    var_4 = vectorNormalize(var_3);
 
-  var_5 = vectornormalize(level.playertank.origin - self.origin);
+  var_5 = vectorNormalize(level.playertank.origin - self.origin);
   var_6 = vectordot(var_4, var_5);
   var_2 = self vehicle_getspeed();
 
@@ -4788,7 +4788,7 @@ gaz_relative_speed(var_0, var_1) {
   if(!isDefined(var_0) || var_0 == "") {
     level.alliedtanktarget = level.player;
   } else {
-    var_3 = common_scripts\utility::getstruct(var_0, "targetname");
+    var_3 = common_scripts\utility::getStruct(var_0, "targetname");
     level.alliedtanktarget = var_3;
   }
 
@@ -4956,7 +4956,7 @@ gaz_crushable_setup() {
 }
 
 gaz_crush_trigger_wait() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
   var_2 = undefined;
 
@@ -5005,7 +5005,7 @@ crush_mobile_gaz() {
     }
   }
 
-  var_3 = getent("gaz_crush_clip", "targetname");
+  var_3 = getEnt("gaz_crush_clip", "targetname");
   var_4 = maps\_utility::spawn_anim_model("gaz_crush", self.origin);
   var_4.angles = self.angles;
   var_5 = spawn("script_model", self.origin);
@@ -5079,7 +5079,7 @@ setup_satfarm_chainlink_fence_triggers() {
 }
 
 satfarm_chainlink_fence_trigger_animate() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 setcontents(0);
   self waittill("trigger", var_1);
   var_2 = 64.0;
@@ -5109,8 +5109,8 @@ spawn_player_checkpoint(var_0, var_1) {
   level.enemygazs = [];
 
   if(var_0 == "air_strip_secured" || var_0 == "tower" || var_0 == "post_missile_launch" || var_0 == "warehouse") {
-    var_2 = common_scripts\utility::getstruct(var_0 + "_player", "targetname");
-    level.player setorigin(var_2.origin);
+    var_2 = common_scripts\utility::getStruct(var_0 + "_player", "targetname");
+    level.player setOrigin(var_2.origin);
     level.player setplayerangles(var_2.angles);
   } else {
     if(var_0 == "bridge_deploy" || var_0 == "ride_") {
@@ -5479,7 +5479,7 @@ ally_strobe() {
 
   if(!isDefined(self.reflector_tag)) {
     self.reflector_tag = common_scripts\utility::spawn_tag_origin();
-    self.reflector_tag linkto(self, "tag_origin", (0, 0, 150), (0, 0, 0));
+    self.reflector_tag linkTo(self, "tag_origin", (0, 0, 150), (0, 0, 0));
   }
 
   while(isDefined(self) && isDefined(self.reflector_tag) && self.model != "vehicle_t90ms_tank_d_noturret_iw6") {
@@ -5660,7 +5660,7 @@ mortar_fire_on_struct(var_0, var_1) {
 }
 
 get_a10_player_start() {
-  var_0 = common_scripts\utility::getstruct("a10_player_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("a10_player_start", "targetname");
   return var_0;
 }
 
@@ -5762,7 +5762,7 @@ give_player_missile_control() {
   setsaveddvar("actionSlotsHide", "1");
   setsaveddvar("hud_showStance", "0");
   self disableweapons();
-  self setorigin(level.missile.origin);
+  self setOrigin(level.missile.origin);
   self setplayerangles(level.missile.angles);
   self playerlinktodelta(level.missile, "tag_origin", 1, 0, 0, 0, 0, 1);
   self playerlinkedoffsetenable();
@@ -6095,7 +6095,7 @@ player_missile_control(var_0) {
       level.missile.missile_hud_item["sabot_reticle_red"].alpha = 0;
     }
 
-    self moveto(var_6, 0.05, 0, 0);
+    self moveTo(var_6, 0.05, 0, 0);
 
     foreach(var_16 in target_getarray()) {
       if(var_16.script_team == "axis" && distancesquared(var_6, var_16.origin) < common_scripts\utility::ter_op(var_16 maps\_vehicle::ishelicopter(), 250000, 40000) && vectordot(var_16.origin - var_6, anglesToForward(self.angles)) <= 0.0) {
@@ -6328,8 +6328,8 @@ spawn_ally(var_0, var_1) {
 }
 
 spawn_targetname_at_struct_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2.origin = var_3.origin;
@@ -6453,7 +6453,7 @@ enemy_rpg_unlimited_ammo(var_0) {
 }
 
 rotate_big_sat() {
-  var_0 = getent("big_dish", "targetname");
+  var_0 = getEnt("big_dish", "targetname");
   var_0 rotateroll(50, 0.05);
   common_scripts\utility::flag_wait("spawn_front");
   var_0 rotateroll(-50, 20);
@@ -6523,7 +6523,7 @@ saf_streetlight_dynamic_func(var_0) {
       if(var_3 == level.playertank) {
         thread common_scripts\utility::play_sound_in_space("satf_tank_collision_post_plr", level.player.origin);
         level.player screenshakeonentity(4.0, 1.0, 1.0, 0.5, 0, 0.25, 0, 2.0, 0.5, 0.5);
-        level.player playrumbleonentity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
       } else
         thread common_scripts\utility::play_sound_in_space("satf_tank_collision_npc", var_7.origin);
 
@@ -6578,7 +6578,7 @@ saf_concrete_barrier_dynamic_func(var_0) {
     if(var_3 == level.playertank) {
       thread maps\satfarm_audio::player_post_collision();
       level.player screenshakeonentity(4.0, 1.0, 1.0, 0.5, 0, 0.25, 0, 2.0, 0.5, 0.5);
-      level.player playrumbleonentity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
     } else
       thread maps\satfarm_audio::npc_post_collision(var_1.origin);
 
@@ -6630,7 +6630,7 @@ saf_large_sign_01_dynamic_func(var_0) {
       if(var_3 == level.playertank) {
         thread maps\satfarm_audio::player_post_collision();
         level.player screenshakeonentity(4.0, 1.0, 1.0, 0.5, 0, 0.25, 0, 2.0, 0.5, 0.5);
-        level.player playrumbleonentity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
       } else
         thread maps\satfarm_audio::npc_post_collision(var_1.origin);
 
@@ -6714,7 +6714,7 @@ disable_all_triggers() {
 }
 
 setup_ambient_tank_drop(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_0, "targetname");
   var_6 = [];
   var_7 = undefined;
   var_8 = undefined;
@@ -6791,7 +6791,7 @@ tank_ambient_deploy_chutes(var_0, var_1, var_2) {
   var_4 hide();
 
   if(isDefined(var_1) && var_1 == 1) {
-    var_4 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_4 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
   var_5 = [];
@@ -6802,7 +6802,7 @@ tank_ambient_deploy_chutes(var_0, var_1, var_2) {
     var_5[var_6] hide();
 
     if(isDefined(var_1) && var_1 == 1) {
-      var_5[var_6] linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+      var_5[var_6] linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     }
   }
 
@@ -6856,7 +6856,7 @@ create_missile_attractor() {
   level.playertank endon("death");
   level.missilefire = common_scripts\utility::spawn_tag_origin();
   level.missilehit = common_scripts\utility::spawn_tag_origin();
-  level.missilehit linkto(level.playertank, "tag_flash", (0, 0, 0), (0, 0, 0));
+  level.missilehit linkTo(level.playertank, "tag_flash", (0, 0, 0), (0, 0, 0));
 }
 
 play_sparks() {
@@ -7075,7 +7075,7 @@ play_rumble_seconds(var_0, var_1) {
   level.player endon("missile_tank_dismount");
 
   for(var_2 = 0; var_2 < var_1 / 0.3; var_2++) {
-    level.player playrumbleonentity(var_0);
+    level.player playRumbleOnEntity(var_0);
     wait 0.3;
   }
 }
@@ -7344,7 +7344,7 @@ play_mig_anim(var_0) {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = level.player.origin + (0, 0, 1200);
   var_2.angles = level.player.angles;
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_2 maps\_anim::anim_single_solo(var_1, "flyby");
   var_1 delete();
   var_2 delete();
@@ -7370,7 +7370,7 @@ track_player_direction_mig(var_0, var_1) {
 
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_3 = 0;
-  var_0 missile_settargetent(var_2);
+  var_0 missile_settargetEnt(var_2);
 
   while(isDefined(var_0) && isDefined(var_1) && isalive(var_1)) {
     var_4 = var_1 gettagorigin("tag_barrel");

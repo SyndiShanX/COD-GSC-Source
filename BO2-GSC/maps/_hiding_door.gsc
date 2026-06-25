@@ -180,14 +180,14 @@ hiding_door_spawner() {
   }
 
   door_org.targetname = undefined;
-  door_model = getent(door_org.target, "targetname");
+  door_model = getEnt(door_org.target, "targetname");
 
-  door_clip = getent(door_model.target, "targetname");
+  door_clip = getEnt(door_model.target, "targetname");
   assert(isDefined(door_model.target));
 
   pushPlayerClip = undefined;
   if(isDefined(door_clip.target)) {
-    pushPlayerClip = getent(door_clip.target, "targetname");
+    pushPlayerClip = getEnt(door_clip.target, "targetname");
   }
   if(isDefined(pushPlayerClip)) {
     door_org thread hiding_door_guy_pushplayer(pushPlayerClip);
@@ -206,7 +206,7 @@ hiding_door_spawner() {
   door_org thread anim_first_frame(door, "fire_3");
 
   if(isDefined(door_clip)) {
-    door_clip linkto(door, "door_hinge_jnt");
+    door_clip linkTo(door, "door_hinge_jnt");
     door_clip disconnectPaths();
   }
 
@@ -404,7 +404,7 @@ hiding_door_guy_cleanup() {
 
 hiding_door_guy_pushplayer(pushPlayerClip) {
   self waittill("push_player");
-  pushPlayerClip moveto(self.origin, 1.5);
+  pushPlayerClip moveTo(self.origin, 1.5);
   wait 3.0;
   pushPlayerClip delete();
 }
@@ -462,7 +462,7 @@ hiding_door_death_door_connections(door_clip) {
 
   door_clip connectpaths();
   wait 2;
-  door_clip disconnectpaths();
+  door_clip disconnectPaths();
 }
 
 hiding_door_stop_threads() {

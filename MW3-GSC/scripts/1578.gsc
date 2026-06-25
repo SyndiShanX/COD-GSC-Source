@@ -121,13 +121,13 @@ _id_444A(var_0, var_1) {
 
 _id_444B(var_0, var_1, var_2) {
   var_3 = spawnStruct();
-  var_3._id_444C[0] = vectornormalize(var_0);
-  var_3._id_444C[1] = vectornormalize(var_1);
-  var_3._id_444C[2] = vectornormalize(var_2);
+  var_3._id_444C[0] = vectorNormalize(var_0);
+  var_3._id_444C[1] = vectorNormalize(var_1);
+  var_3._id_444C[2] = vectorNormalize(var_2);
 }
 
 _id_444D(var_0, var_1) {
-  var_0 = vectornormalize(var_0);
+  var_0 = vectorNormalize(var_0);
   var_2 = vectordot(var_0, var_1._id_444C[0]);
   var_3 = vectordot(var_0, var_1._id_444C[0]);
   var_4 = vectordot(var_0, var_1._id_444C[0]);
@@ -203,7 +203,7 @@ _id_444F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
   if(var_11 < 300) {
     if(isDefined(var_1)) {
-      level.player playrumbleonentity(var_1);
+      level.player playRumbleOnEntity(var_1);
     }
     level thread _id_444E(var_12, var_13, var_14, var_15);
 
@@ -213,10 +213,10 @@ _id_444F(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     if(isDefined(var_0)) {
       for(var_16 = 0; var_16 < 6; var_16++) {
         wait 0.1;
-        var_17 = vectornormalize(anglesToForward(level.player getplayerangles()) + (randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0.5)) * 1000;
+        var_17 = vectorNormalize(anglesToForward(level.player getplayerangles()) + (randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0.5)) * 1000;
         var_18 = bulletTrace(level.player.origin + (0, 0, 12), level.player.origin + (0, 0, 12) + var_17, 0, undefined);
         var_19 = distance(level.player.origin, var_18["position"]);
-        var_20 = vectordot((0, 0, -1), vectornormalize(var_10["normal"]));
+        var_20 = vectordot((0, 0, -1), vectorNormalize(var_10["normal"]));
 
         if(var_19 < 450 && var_20 > 0.75) {
           playFX(common_scripts\utility::getfx(var_0), var_18["position"]);
@@ -246,12 +246,12 @@ _id_4451(var_0, var_1, var_2) {
   var_5 = 500 + randomfloat(1500);
   var_6 = 10 + randomint(20);
   var_7 = 200;
-  var_8 = vectornormalize(anglesToForward(var_1));
-  var_9 = vectornormalize(common_scripts\utility::randomvector(2));
+  var_8 = vectorNormalize(anglesToForward(var_1));
+  var_9 = vectorNormalize(common_scripts\utility::randomvector(2));
   var_3.origin = var_3.origin + var_7 * (var_9[0], var_9[1], 0);
   var_10 = randomfloat(75);
   var_11 = min(1.0, max(0.0, var_10 / 90.0));
-  var_12 = vectornormalize(var_8 * (1 - var_11) + (var_9[0], var_9[1], 0) * var_11);
+  var_12 = vectorNormalize(var_8 * (1 - var_11) + (var_9[0], var_9[1], 0) * var_11);
   var_13 = var_12 * var_5 * 0.05;
   var_14 = (0, 0, -3);
 
@@ -273,12 +273,12 @@ _id_4452(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
   var_12 = var_3 + randomfloat(var_4 - var_3);
   var_13 = var_5 + randomint(var_6 - var_5);
   var_14 = var_7;
-  var_15 = vectornormalize(anglesToForward(var_1));
-  var_16 = vectornormalize(common_scripts\utility::randomvector(2));
+  var_15 = vectorNormalize(anglesToForward(var_1));
+  var_16 = vectorNormalize(common_scripts\utility::randomvector(2));
   var_10.origin = var_10.origin + var_14 * (var_16[0], var_16[1], 0);
   var_17 = randomfloat(var_8);
   var_18 = min(1.0, max(0.0, var_17 / 90.0));
-  var_19 = vectornormalize(var_15 * (1 - var_18) + (var_16[0], var_16[1], 0) * var_18);
+  var_19 = vectorNormalize(var_15 * (1 - var_18) + (var_16[0], var_16[1], 0) * var_18);
   var_20 = var_19 * var_12 * 0.05;
   var_21 = (0, 0, var_9 * -1) * 0.05 * 0.05;
 
@@ -631,7 +631,7 @@ _id_446B(var_0) {
 
 _id_446C(var_0) {
   var_1 = level.player getplayerangles();
-  var_2 = vectornormalize(anglesToForward(var_1));
+  var_2 = vectorNormalize(anglesToForward(var_1));
 }
 
 _id_446D(var_0, var_1, var_2) {
@@ -647,31 +647,31 @@ _id_446D(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_4 = level.player.origin;
   var_5 = level.player getplayerangles();
-  var_6 = vectornormalize(anglesToForward(var_1 * -1));
+  var_6 = vectorNormalize(anglesToForward(var_1 * -1));
   var_7 = var_6 * -1 * var_2 + var_4;
   var_3.origin = var_7;
-  var_8 = vectornormalize(anglesToForward(var_5));
+  var_8 = vectorNormalize(anglesToForward(var_5));
   var_9 = min(1, max(0.001, vectordot(var_8, var_6 * -1)));
   var_9 = var_9 / var_9;
-  var_10 = vectornormalize(var_8 * var_9 + var_6 * 2);
-  var_11 = vectornormalize(var_10 - var_6) * var_9;
-  var_12 = vectortoangles(vectornormalize(var_10 + var_11));
+  var_10 = vectorNormalize(var_8 * var_9 + var_6 * 2);
+  var_11 = vectorNormalize(var_10 - var_6) * var_9;
+  var_12 = vectortoangles(vectorNormalize(var_10 + var_11));
   var_3.angles = var_12;
   playFXOnTag(common_scripts\utility::getfx(var_0), var_3, "tag_origin");
 
   while(!common_scripts\utility::flag("fx_spot_flare_kill")) {
     var_4 = level.player.origin;
     var_5 = level.player getplayerangles();
-    var_6 = vectornormalize(anglesToForward(var_1));
+    var_6 = vectorNormalize(anglesToForward(var_1));
     var_7 = var_6 * var_2 + var_4;
     var_3.origin = var_7;
-    var_8 = vectornormalize(anglesToForward(var_5));
+    var_8 = vectorNormalize(anglesToForward(var_5));
     var_9 = min(1.0, max(0.001, vectordot(var_8, var_6)));
     var_9 = var_9 * var_9 * var_9 * var_9;
     var_9 = 1.0 - var_9;
-    var_10 = vectornormalize(var_8 * var_9 + var_6 * 2);
-    var_11 = vectornormalize(var_10 - var_6) * var_9;
-    var_12 = vectortoangles(vectornormalize(var_10 + var_11 * 2));
+    var_10 = vectorNormalize(var_8 * var_9 + var_6 * 2);
+    var_11 = vectorNormalize(var_10 - var_6) * var_9;
+    var_12 = vectortoangles(vectorNormalize(var_10 + var_11 * 2));
     var_3.angles = var_12;
     level common_scripts\utility::waitframe();
   }
@@ -739,7 +739,7 @@ _id_4471(var_0) {
       var_7 = common_scripts\utility::spawn_tag_origin();
       var_7.origin = var_2;
       var_7.angles = vectortoangles(var_5);
-      var_7 linkto(var_0.v["ent"], var_0.v["bones"][var_1]);
+      var_7 linkTo(var_0.v["ent"], var_0.v["bones"][var_1]);
       var_0.v["tags"][var_0.v["tags"].size] = var_7;
       var_0.v["tag_lens"][var_0.v["tag_lens"].size] = var_6;
     }

@@ -71,7 +71,7 @@ _id_3B76(var_0, var_1) {
   var_3 = [];
 
   foreach(var_5 in var_2) {}
-  var_3[var_3.size] = getent(var_5, "script_linkname");
+  var_3[var_3.size] = getEnt(var_5, "script_linkname");
 
   var_0 thread _id_3B95();
   var_0 waittill("trigger");
@@ -658,7 +658,7 @@ _id_3B8F(var_0, var_1) {
   self._id_3B82["right"] = 0;
   self._id_3B90 = 1;
   self._id_3B7D = var_0;
-  var_2 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(self.target, "targetname");
   _id_3B94(var_1, var_2.origin);
   var_1 waittill("trigger");
   wait 5;
@@ -724,7 +724,7 @@ _id_3B93(var_0, var_1) {
   } else {
     var_3 = (var_2[0], var_2[1] + 145, var_2[2]);
   }
-  var_4 = vectornormalize(anglesToForward(var_3)) * 45;
+  var_4 = vectorNormalize(anglesToForward(var_3)) * 45;
   return self.origin + var_4;
 }
 
@@ -742,7 +742,7 @@ _id_3B94(var_0, var_1) {
 
 _id_3B95() {
   self endon("trigger");
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::trigger_off();
 }

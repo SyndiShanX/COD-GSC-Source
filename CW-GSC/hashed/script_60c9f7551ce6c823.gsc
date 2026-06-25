@@ -386,9 +386,9 @@ function function_a971a62f(origin, var_5c526bd9 = origin, var_c705f304 = 85) {
 
       if(dist_squared < min_dist_squared) {
         dir = origin - hazard.origin;
-        dir = vectornormalize(dir);
+        dir = vectorNormalize(dir);
         var_d8176d62 = origin - var_5c526bd9;
-        var_d8176d62 = vectornormalize(dir);
+        var_d8176d62 = vectorNormalize(dir);
 
         if(vectordot(dir, var_d8176d62) < 0) {
           dir *= -1;

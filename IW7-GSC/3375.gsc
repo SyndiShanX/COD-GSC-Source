@@ -31,8 +31,8 @@ use_beam_trap(var_0, var_1) {
   level.hctraptrigger = var_3[0];
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
-  var_4 = getent(var_0.target, "targetname");
-  var_5 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_4 = getEnt(var_0.target, "targetname");
+  var_5 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   playsoundatpos((-946, -3528, 456), "trap_beam_build");
   wait(2);
   var_4 playSound("trap_beam_start");

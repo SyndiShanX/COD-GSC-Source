@@ -53,8 +53,8 @@ fade_from_black() {
 }
 
 vl_ground_setup() {
-  fromEnt = GetEnt("teleport_from", "targetname");
-  toEnt = GetEnt("teleport_to", "targetname");
+  fromEnt = getEnt("teleport_from", "targetname");
+  toEnt = getEnt("teleport_to", "targetname");
 
   ground_b_bsps = getEntArray("vlobby_floor_b", "targetname");
   foreach(ground_b_bsp in ground_b_bsps) {

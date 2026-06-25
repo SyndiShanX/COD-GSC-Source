@@ -89,18 +89,18 @@ function init_clientfields() {}
 function function_22b7fffd() {}
 
 function function_272c06e0() {
-  getent("guard_behind_counter", "targetname") spawner::add_spawn_function(&function_f073a9ac);
-  getent("guard_metal_detector_left", "targetname") spawner::add_spawn_function(&function_7f349869);
-  getent("guard_side_counter", "targetname") spawner::add_spawn_function(&function_8a02be13);
+  getEnt("guard_behind_counter", "targetname") spawner::add_spawn_function(&function_f073a9ac);
+  getEnt("guard_metal_detector_left", "targetname") spawner::add_spawn_function(&function_7f349869);
+  getEnt("guard_side_counter", "targetname") spawner::add_spawn_function(&function_8a02be13);
   level.var_aaa7acce = spawner::simple_spawn_single("checkpoint_guy", &function_e1286843);
   level.var_aaa7acce thread kgb_ins_prepare::function_3cf5b786();
   level thread scene::play("scene_kgb_security_checkpoint", "Intro_Loop");
   level thread scene::play("scene_kgb_security_intro_guard", "Intro");
   level thread scene::play("scene_kgb_security_checkpoint_ambient_right");
   level thread scene::play("scene_kgb_security_checkpoint_ambient");
-  level.checkpoint_clip = getent("checkpoint_clip", "targetname");
+  level.checkpoint_clip = getEnt("checkpoint_clip", "targetname");
   level.checkpoint_clip solid();
-  level.checkpoint_clip_right = getent("checkpoint_clip_right", "targetname");
+  level.checkpoint_clip_right = getEnt("checkpoint_clip_right", "targetname");
   level.checkpoint_clip_right solid();
   doors::function_f35467ac("checkpoint_door", "targetname");
 }
@@ -278,7 +278,7 @@ function function_9e8ed6b4() {
     var_fc1d94f8 = getEntArray("bodybag_scenes_collision", "targetname");
 
     foreach(location in level.var_594e55d7) {
-      var_1b008e47 = getent(location + "_collision", "script_noteworthy");
+      var_1b008e47 = getEnt(location + "_collision", "script_noteworthy");
       var_1b008e47.origin -= (0, 0, 128);
       arrayremovevalue(var_fc1d94f8, var_1b008e47);
 
@@ -311,7 +311,7 @@ function function_8c2ff160(scene_name, var_515424a3) {
 
   level flag::wait_till("team_in_elevator");
   level scene::stop(scene_name, 1);
-  var_1b008e47 = getent(scene_name + "_collision", "script_noteworthy");
+  var_1b008e47 = getEnt(scene_name + "_collision", "script_noteworthy");
   var_1b008e47 delete();
 }
 

@@ -129,7 +129,7 @@ bot_capture_hill() {
     self lookat(origin + (0, 0, z));
 
     if(distancesquared(origin, self.origin) > 65536) {
-      dir = vectornormalize(self.origin - origin);
+      dir = vectorNormalize(self.origin - origin);
       dir = vectorscale(dir, 256);
       origin = origin + dir;
     }
@@ -223,7 +223,7 @@ bot_hill_grenade() {
     origin = level.zone.gameobject.curorigin;
   }
 
-  dir = vectornormalize(self.origin - origin);
+  dir = vectorNormalize(self.origin - origin);
   dir = (0, dir[1], 0);
   origin = origin + vectorscale(dir, 128);
 

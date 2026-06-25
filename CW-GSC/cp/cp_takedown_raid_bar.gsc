@@ -43,14 +43,14 @@
 
 function starting(str_skipto) {
   level.var_c0c469ea = 1.75;
-  level thread scene::init_streamer(#"scene_tkd_hit2_intro_bar_v2", getplayers());
+  level thread scene::init_streamer(#"scene_tkd_hit2_intro_bar_v2", getPlayers());
   namespace_a052577e::function_b9b9189c();
 }
 
 function main(str_skipto, b_starting) {
   setDvar(#"r_lightingsunshadowdisabledynamicdraw", 1);
   setsaveddvar(#"hash_6b57212fd4fcdd3a", 0);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_4f2ba130 = player getweaponslistprimaries();
 
   foreach(e_w in var_4f2ba130) {
@@ -62,8 +62,8 @@ function main(str_skipto, b_starting) {
   player endon(#"death");
   player val::set(#"chyron", "freezecontrols", 1);
   scene::add_scene_func("scene_tkd_hit2_intro_bar_v2", &function_e2d2754d, "Shot 1");
-  level.var_efac709f = getent("player_breach_clip", "targetname");
-  level.var_efac709f disconnectpaths();
+  level.var_efac709f = getEnt("player_breach_clip", "targetname");
+  level.var_efac709f disconnectPaths();
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
   woods_spawner = getspawnerarray("raid_woods", "targetname");
@@ -79,7 +79,7 @@ function main(str_skipto, b_starting) {
   player dialogue::function_96171f6d("vox_cp_tdwn_03100_adlr_thisguyhasdonem_9f");
   namespace_a052577e::function_82bfce7c();
   wait 2;
-  player playrumbleonentity("damage_light");
+  player playRumbleOnEntity("damage_light");
   level thread lui::play_movie(#"hash_11485d82e61a7b51", "fullscreen", 1, 0, 0);
   wait 0.5;
   level scene::init("scene_tkd_hit2_intro_bar_v2");
@@ -105,7 +105,7 @@ function main(str_skipto, b_starting) {
 
 function function_2c918915() {
   level waittill(#"hash_7f0782cc9884e068");
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
 }
 
 function function_1df134ab() {
@@ -120,10 +120,10 @@ function function_9153c019(a_ents) {
     return;
   }
 
-  var_b7ec8c4b = getent("bar_door_clip", "targetname");
-  org = getent("bar_door_org", "targetname");
-  var_b7ec8c4b linkto(org);
-  org linkto(door, "tag_door_animate");
+  var_b7ec8c4b = getEnt("bar_door_clip", "targetname");
+  org = getEnt("bar_door_org", "targetname");
+  var_b7ec8c4b linkTo(org);
+  org linkTo(door, "tag_door_animate");
 }
 
 function function_e9102587() {
@@ -157,7 +157,7 @@ function function_513e85fe(a_ents) {
 }
 
 function function_ac208f44() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level util::delay(1, undefined, &function_f0ba2044, player);
   level thread scene::play("scene_tkd_hit2_intro_bar_v2", "Shot 1");
@@ -179,7 +179,7 @@ function function_ac208f44() {
   }
 
   level waittill(#"hash_5ec30593efaaa279");
-  level.raid_car = getent("raid_car", "targetname");
+  level.raid_car = getEnt("raid_car", "targetname");
   level thread scene::play("scene_tkd_hit2_intro_bar_v2", "Adler_part_3", [level.raid_car]);
   videostop("cp_shared_1981_dutch_soccer_game");
   level flag::set("raid_bar_complete");
@@ -518,7 +518,7 @@ function function_f0ba2044(player) {
 }
 
 function function_68461db2() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   weapon = spawnStruct();
   weapon.var_15803bcb = getweapon(#"smg_standard_t9", "steadyaim", "elo2");
   weapon.var_c5932593 = getweapon(#"smg_handling_t9", "steadyaim", "reflex", "grip");
@@ -529,9 +529,9 @@ function function_68461db2() {
   weapon.var_4bb56827 = #"hash_354b11b88d53b149";
   weapon.var_895ad5bc = #"hash_354b0eb88d53ac30";
   weapon.var_d7c6490d = #"hash_354b0fb88d53ade3";
-  weapon.var_5a3a522d = getent("smg_use", "targetname");
-  weapon.var_ba0f1686 = getent("shg_use", "targetname");
-  weapon.var_e9482014 = getent("ar_use", "targetname");
+  weapon.var_5a3a522d = getEnt("smg_use", "targetname");
+  weapon.var_ba0f1686 = getEnt("shg_use", "targetname");
+  weapon.var_e9482014 = getEnt("ar_use", "targetname");
   level thread function_3f2fe2a4(weapon.var_15803bcb, weapon.var_e035b3c3, weapon.var_4bb56827, weapon.var_5a3a522d);
   level thread function_3f2fe2a4(weapon.var_c5932593, weapon.var_5dc45345, weapon.var_895ad5bc, weapon.var_ba0f1686);
   level thread function_3f2fe2a4(weapon.var_50cb17be, weapon.var_ccbb5ad1, weapon.var_d7c6490d, weapon.var_e9482014);
@@ -543,7 +543,7 @@ function function_68461db2() {
 
 function function_3f2fe2a4(var_9f43fd46, var_5526621d, use_string, use_ent) {
   level endon(#"hash_5c41a54cd623966e");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(true) {
     if(!player hasweapon(var_9f43fd46)) {
@@ -612,7 +612,7 @@ function function_76052005(var_68f1c314) {
 
 function function_a6d1922d() {
   level endon(#"hash_77cacf3b22ba7d5c");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player setlowready(0);
 
   while(true) {
@@ -630,11 +630,11 @@ function function_a6d1922d() {
 
 function function_8f134086() {
   level waittill(#"hash_742020afbebe9132");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 }
 
 function function_d8e3ce93() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   namespace_82bfe441::fade(1, "FadeImmediate");
   level waittill(#"hash_4aade1e09ed49814");
   wait 1;

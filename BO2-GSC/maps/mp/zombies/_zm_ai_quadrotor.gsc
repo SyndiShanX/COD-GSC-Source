@@ -135,7 +135,7 @@ quadrotor_fireupdate() {
       dist_squared = distancesquared(self.enemy.origin, self.origin);
 
       if(dist_squared < 384 * 384 && dist_squared > 96 * 96) {
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
         current_time = gettime();
 
         if(current_time - self.time_last_spoke_attack_line > current_attack_line_cooldown) {
@@ -159,7 +159,7 @@ quadrotor_fireupdate() {
           do_thank_maxis = randomintrange(0, 2);
 
           if(do_thank_maxis > 0) {
-            players = getplayers();
+            players = getPlayers();
             player = players[randomintrange(0, players.size)];
             player thread do_player_general_vox("quadrotor", "kill_drone", undefined, 100);
           }
@@ -431,7 +431,7 @@ quadrotor_movementupdate() {
         self setneargoalnotifydist(4);
 
         if(isDefined(e_special_item.target)) {
-          s_start_pos = getstruct(e_special_item.target, "targetname");
+          s_start_pos = getStruct(e_special_item.target, "targetname");
           self setvehgoalpos(s_start_pos.origin, 1, 0, 1);
           self waittill_any("near_goal", "force_goal", "reached_end_node");
         }
@@ -445,13 +445,13 @@ quadrotor_movementupdate() {
         level notify("quadrotor_medallion_found", self);
 
         if(isDefined(e_special_item.target)) {
-          s_start_pos = getstruct(e_special_item.target, "targetname");
+          s_start_pos = getStruct(e_special_item.target, "targetname");
           self setvehgoalpos(s_start_pos.origin, 1, 0, 1);
           self waittill_any("near_goal", "force_goal", "reached_end_node");
         }
 
         if(level.n_ee_medallions == 0) {
-          s_mg_spawn = getstruct("mgspawn", "targetname");
+          s_mg_spawn = getStruct("mgspawn", "targetname");
           self setvehgoalpos(s_mg_spawn.origin + vectorscale((0, 0, 1), 30.0), 1, 0, 1);
           self waittill_any("near_goal", "force_goal", "reached_end_node");
           wait 1;
@@ -638,7 +638,7 @@ quadrotor_damage() {
       continue;
     }
     if(type == "MOD_EXPLOSIVE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") {
-      self setvehvelocity(self.velocity + vectornormalize(dir) * 300);
+      self setvehvelocity(self.velocity + vectorNormalize(dir) * 300);
       ang_vel = self getangularvelocity();
       ang_vel = ang_vel + (randomfloatrange(-300, 300), randomfloatrange(-300, 300), randomfloatrange(-300, 300));
       self setangularvelocity(ang_vel);
@@ -727,7 +727,7 @@ quadrotor_crash_movement(attacker, hitdir) {
   side_dir_mag = randomfloatrange(-100, 100);
   side_dir_mag = side_dir_mag + sign(side_dir_mag) * 80;
   side_dir = side_dir * side_dir_mag;
-  self setvehvelocity(self.velocity + vectorscale((0, 0, 1), 100.0) + vectornormalize(side_dir));
+  self setvehvelocity(self.velocity + vectorscale((0, 0, 1), 100.0) + vectorNormalize(side_dir));
   ang_vel = self getangularvelocity();
   ang_vel = (ang_vel[0] * 0.3, ang_vel[1], ang_vel[2] * 0.3);
   yaw_vel = randomfloatrange(0, 210) * sign(ang_vel[1]);
@@ -759,7 +759,7 @@ quadrotor_crash_movement(attacker, hitdir) {
 
 qrotor_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
-  dmg_ent linkto(self);
+  dmg_ent linkTo(self);
   dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
   self waittill_any("crash_done", "death");
   dmg_ent stoploopsound(1);
@@ -848,7 +848,7 @@ quadrotor_collision_player() {
 
     if(isDefined(driver) && lengthsquared(velocity) > 4900) {
       earthquake(0.25, 0.25, driver.origin, 50);
-      driver playrumbleonentity("damage_heavy");
+      driver playRumbleOnEntity("damage_heavy");
     }
   }
 }
@@ -1070,7 +1070,7 @@ set_death_model(smodel, fdelay) {
 }
 
 player_in_last_stand_within_range(range) {
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1) {
     return;
@@ -1104,7 +1104,7 @@ kill_fx_if_target_revive(quadrotor, revive_target) {
   e_fx playSound("zmb_drone_revive_fire");
   e_fx playLoopSound("zmb_drone_revive_loop", 0.2);
   playFXOnTag(level._effect["qd_revive"], e_fx, "tag_origin");
-  e_fx moveto(revive_target.origin, 1);
+  e_fx moveTo(revive_target.origin, 1);
   timer = 0;
 
   while(true) {

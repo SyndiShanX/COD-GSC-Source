@@ -167,7 +167,7 @@ function_23089de2() {
     teams = self function_2b77bc35();
 
     foreach(team in teams) {
-      friendlies = getplayers(team);
+      friendlies = getPlayers(team);
 
       foreach(player in friendlies) {
         if(player != self && isalive(player) && player laststand::player_is_in_laststand()) {
@@ -273,7 +273,7 @@ function_fb02bdd4(friendly_teams) {
 
 function_16d5deba() {
   revive_count = 0;
-  friendlies = getplayers(self.team);
+  friendlies = getPlayers(self.team);
 
   foreach(player in friendlies) {
     if(player thread function_5de626dc(self)) {
@@ -375,7 +375,7 @@ function function_90f43127(attacker) {
   count = 0;
 
   foreach(team in teams) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     foreach(player in players) {
       if(player == self) {
@@ -395,7 +395,7 @@ function_ed72859e() {
   teams = self function_2b77bc35();
 
   foreach(team in teams) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     foreach(player in players) {
       if(player == self) {
@@ -889,7 +889,7 @@ bleed_out(var_40d90c02) {
 
 respawn_player_after_time(n_time_seconds) {
   self endon(#"death", #"disconnect");
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1) {
     return;
@@ -912,13 +912,13 @@ function_2907ce7a() {
 revive_trigger_spawn() {
   radius = getdvarint(#"revive_trigger_radius", 100);
   self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-  self.revivetrigger sethintstring("");
-  self.revivetrigger setcursorhint("HINT_NOICON");
+  self.revivetrigger setHintString("");
+  self.revivetrigger setCursorHint("HINT_NOICON");
   self.revivetrigger setmovingplatformenabled(1);
-  self.revivetrigger enablelinkto();
+  self.revivetrigger enablelinkTo();
   self.revivetrigger.origin = self.origin;
   self.revivetrigger.radius = radius;
-  self.revivetrigger linkto(self);
+  self.revivetrigger linkTo(self);
   self.revivetrigger.beingrevived = 0;
   self.revivetrigger.beingfinished = 0;
   self.revivetrigger.createtime = gettime();
@@ -950,7 +950,7 @@ revive_trigger_think() {
       continue;
     }
 
-    self.revivetrigger sethintstring("");
+    self.revivetrigger setHintString("");
 
     if(getdvarint(#"lastand_selfrevive", 0) && self attackButtonPressed() && self throwbuttonPressed() && self fragButtonPressed()) {
       self thread revive_success(self);
@@ -993,7 +993,7 @@ function_356caede(team) {
     return false;
   }
 
-  players = getplayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
+  players = getPlayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
   height = getdvarint(#"finisher_trigger_height", 15);
 
   foreach(player in players) {
@@ -1065,7 +1065,7 @@ function_356caede(team) {
           scoreevents::processscoreevent(#"finishers", finisher, self, weapon);
           self function_516a3bef(0);
           self setplayerangles(kill_angles);
-          self setorigin(kill_origin);
+          self setOrigin(kill_origin);
           self dodamage(self.var_969fabf4, self.origin, finisher, undefined, "none", "MOD_MELEE_ASSASSINATE", 8192);
           self function_2907ce7a();
           return true;
@@ -1115,7 +1115,7 @@ function_fab0e07e(finisher) {
       self.laststandparams.savedangles = self.angles;
     }
 
-    self playerlinkto(finisher, "tag_sync");
+    self playerlinkTo(finisher, "tag_sync");
   }
 }
 
@@ -1124,7 +1124,7 @@ function_516a3bef(replace) {
     self unlink();
 
     if(isDefined(replace) && replace && isDefined(self.laststandparams) && isDefined(self.laststandparams.savedorigin)) {
-      self setorigin(self.laststandparams.savedorigin);
+      self setOrigin(self.laststandparams.savedorigin);
     }
   }
 }
@@ -1142,7 +1142,7 @@ function_55f6978f(team) {
     return false;
   }
 
-  players = getplayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
+  players = getPlayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
 
   foreach(player in players) {
     if(player can_revive(self, 1)) {
@@ -1280,7 +1280,7 @@ revive_do_revive(playerbeingrevived) {
   revived = 0;
   playerbeingrevived clientfield::set_player_uimodel("hudItems.laststand.beingRevived", 1);
   playerbeingrevived.revivetrigger.beingrevived = 1;
-  playerbeingrevived.revivetrigger sethintstring("");
+  playerbeingrevived.revivetrigger setHintString("");
 
   if(isPlayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);

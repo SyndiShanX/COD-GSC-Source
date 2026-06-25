@@ -35,7 +35,7 @@ function private on_begin(var_e84d35d1, var_16e6b8ea) {
 
   var_16e6b8ea = zm_trial::function_5769f26a(var_16e6b8ea);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_68b149a2(var_64e17761, var_16e6b8ea);
   }
 }

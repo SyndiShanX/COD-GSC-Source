@@ -882,11 +882,11 @@ func_7418(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       param_03.var_18A8 = param_03 method_826D(param_0A);
       param_03.var_18A8.var_2685 = param_03.var_2685;
       if(isDefined(param_03.var_5DA9)) {
-        param_03.var_18A8 enablelinkto();
+        param_03.var_18A8 enablelinkTo();
         if(isDefined(param_03.var_5DAA)) {
-          param_03.var_18A8 linkto(param_03.var_5DA9, param_03.var_5DAA);
+          param_03.var_18A8 linkTo(param_03.var_5DA9, param_03.var_5DAA);
         } else {
-          param_03.var_18A8 linkto(param_03.var_5DA9);
+          param_03.var_18A8 linkTo(param_03.var_5DA9);
         }
       }
 
@@ -1592,13 +1592,13 @@ func_1E69(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     if(function_0367() && isDefined(param_02) && isDefined(param_01) && isDefined(param_02.var_5692) && param_02.var_5692 && isDefined(param_01.var_5692) && param_01.var_5692 && isDefined(param_02.var_34D2) && isDefined(param_01.var_34D2) && param_02.var_34D2 == param_01 && param_01.var_34D2 == param_02) {
       if(param_02.var_00BC - param_03 <= 0) {
         param_02 shellshock("frag_grenade_mp", 2.5);
-        param_02 playrumbleonentity("artillery_rumble");
+        param_02 playRumbleOnEntity("artillery_rumble");
       } else if(param_03 > 30) {
         param_02 shellshock("frag_grenade_mp", 1.25);
-        param_02 playrumbleonentity("heavygun_fire");
+        param_02 playRumbleOnEntity("heavygun_fire");
       } else {
         param_02 shellshock("frag_grenade_mp", 0.75);
-        param_02 playrumbleonentity("damage_heavy");
+        param_02 playRumbleOnEntity("damage_heavy");
       }
     }
   }
@@ -2228,7 +2228,7 @@ func_099A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_00.var_1189[param_01.var_48CA].var_4DD6 = [];
     var_0A = anglesToForward((0, param_00.var_001D[1], 0));
     var_0B = param_00.var_0116 - param_01.var_0116;
-    var_0B = vectornormalize((var_0B[0], var_0B[1], 0));
+    var_0B = vectorNormalize((var_0B[0], var_0B[1], 0));
     var_0C = vectordot(var_0A, var_0B);
     var_0D = var_0C * -1;
     var_0E = 0;
@@ -2623,14 +2623,14 @@ func_5BF5(param_00, param_01, param_02) {
   if(level.var_2EF3 == 1 && level.var_2EF3 != 2 && !isDefined(param_02) || !param_02) {
     var_03 = spawn("script_model", self.var_0116);
     var_03 setModel("tag_origin");
-    var_03 setcursorhint("HINT_NOICON");
-    var_03 sethintstring(&"PLATFORM_REVIVE");
+    var_03 setCursorHint("HINT_NOICON");
+    var_03 setHintString(&"PLATFORM_REVIVE");
     var_03 func_7E61(self);
     var_03 endon("death");
     var_04 = newteamhudelem(self.var_01A7);
     var_04 setshader("waypoint_revive", 8, 8);
     var_04 setwaypoint(1, 1);
-    var_04 settargetent(self);
+    var_04 settargetEnt(self);
     var_04 thread func_2DD6(var_03);
     var_04.var_0056 = (0.33, 0.75, 0.24);
     maps\mp\_utility::func_7210();
@@ -2646,14 +2646,14 @@ func_5BF5(param_00, param_01, param_02) {
     thread func_5BEC();
     var_03 = spawn("script_model", self.var_0116);
     var_04 setModel("tag_origin");
-    var_04 setcursorhint("HINT_NOICON");
-    var_04 sethintstring(&"PLATFORM_REVIVE");
+    var_04 setCursorHint("HINT_NOICON");
+    var_04 setHintString(&"PLATFORM_REVIVE");
     var_04 func_7E61(self);
     var_04 endon("death");
     var_04 = newteamhudelem(self.var_01A7);
     var_04 setshader("waypoint_revive", 8, 8);
     var_04 setwaypoint(1, 1);
-    var_04 settargetent(self);
+    var_04 settargetEnt(self);
     var_04 thread func_2DD6(var_03);
     var_04.var_0056 = (0.33, 0.75, 0.24);
     maps\mp\_utility::func_7210();
@@ -2995,13 +2995,13 @@ func_29DC(param_00, param_01, param_02, param_03, param_04, param_05) {
   var_06 = gettime();
   if(!isDefined(self.var_5B8C) || var_06 > self.var_5B8C) {
     self.var_5B8C = var_06;
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
 func_7E61(param_00) {
   var_01 = param_00.var_01A7;
-  self linkto(param_00, "tag_origin");
+  self linkTo(param_00, "tag_origin");
   self.var_0117 = param_00;
   self.var_54F5 = 0;
   self makeusable();
@@ -3093,9 +3093,9 @@ func_7E5A(param_00, param_01, param_02, param_03) {
   }
 
   if(isPlayer(param_00)) {
-    param_00 playerlinkto(var_05);
+    param_00 playerlinkTo(var_05);
   } else {
-    param_00 linkto(var_05);
+    param_00 linkTo(var_05);
   }
 
   if(!isDefined(param_02)) {
@@ -3411,7 +3411,7 @@ func_7753(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  param_01 playrumbleonentity("damage_light");
+  param_01 playRumbleOnEntity("damage_light");
   if(isDefined(self.var_56BB) && self.var_56BB) {
     return;
   }
@@ -3738,7 +3738,7 @@ func_4CAB(param_00) {
   }
 
   self.var_4BA9 = undefined;
-  var_01 linkto(var_02);
+  var_01 linkTo(var_02);
   var_02.var_6292 = var_01;
   var_02 thread func_4CA9(param_00);
   var_02 hideallparts();

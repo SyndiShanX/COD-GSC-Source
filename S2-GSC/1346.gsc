@@ -16,7 +16,7 @@ lib_0542::func_5329() {
         switch (var_05.var_0165) {
           case "clip_old":
             var_05 notsolid();
-            var_05 linkto(var_02);
+            var_05 linkTo(var_02);
             var_05 method_805C();
             break;
 
@@ -24,12 +24,12 @@ lib_0542::func_5329() {
             var_05 notsolid();
             var_02.var_A55B = var_05;
             var_05 method_805C();
-            var_05 linkto(var_02);
+            var_05 linkTo(var_02);
             break;
 
           case "clip":
             var_02.var_4033 = var_05;
-            var_05 linkto(var_02);
+            var_05 linkTo(var_02);
             break;
         }
       }
@@ -180,7 +180,7 @@ lib_0542::func_4ADD(param_00, param_01, param_02, param_03, param_04, param_05, 
   var_18 = anglesToForward(param_05.var_001D) * var_14[0] + anglestoright(param_05.var_001D) * var_14[1];
   var_19 = param_05.var_001D + (0, 180, 0);
   var_1A = getgroundposition(param_05.var_0116 + var_18, 16);
-  var_1B = vectornormalize(var_1A - param_05.var_0116);
+  var_1B = vectorNormalize(var_1A - param_05.var_0116);
   var_1C = param_05.var_0116 + var_1B * var_15;
   var_1D = gettime() * 0.001 + param_03;
   var_1E = 0.2;
@@ -290,7 +290,7 @@ lib_0542::func_4AB1(param_00, param_01, param_02, param_03) {
       wait 0.05;
       var_0C = function_02E3(var_0A.var_4033);
     } else {
-      var_0D = param_03 + vectornormalize(var_08) * var_05;
+      var_0D = param_03 + vectorNormalize(var_08) * var_05;
       var_0C = function_02E2(var_0D, (var_06, var_07, 100), var_09);
     }
 

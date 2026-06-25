@@ -114,7 +114,7 @@ get_generator_entity(str_name, localclientnumber) {
   }
 
   if(!isDefined(level.zone_capture_generators[localclientnumber][str_name])) {
-    level.zone_capture_generators[localclientnumber][str_name] = getent(localclientnumber, str_name, "targetname");
+    level.zone_capture_generators[localclientnumber][str_name] = getEnt(localclientnumber, str_name, "targetname");
   }
 
   assert(isDefined(level.zone_capture_generators[localclientnumber][str_name]), "generator with name " + str_name + " is missing in level.zone_capture_generators array!");
@@ -271,7 +271,7 @@ generator_sound_enable(newval) {
   if(!isDefined(self.snddonutent)) {
     sndorigin = self gettagorigin("j_generator_pole");
     self.snddonutent = spawn(0, sndorigin, "script_origin");
-    self.snddonutent linkto(self, "j_generator_pole");
+    self.snddonutent linkTo(self, "j_generator_pole");
     playSound(0, "zmb_capturezone_donut_start", self.origin);
     self.snddonutent thread snddemojumpmonitor();
   }
@@ -459,7 +459,7 @@ get_monolith_crystal_model(str_targetname, localclientnum) {
   }
 
   if(!isDefined(level.zone_capture_crystals[localclientnum][str_targetname])) {
-    level.zone_capture_crystals[localclientnum][str_targetname] = getent(localclientnum, str_targetname, "targetname");
+    level.zone_capture_crystals[localclientnum][str_targetname] = getEnt(localclientnum, str_targetname, "targetname");
     level.zone_capture_crystals[localclientnum][str_targetname].mapped_shader_constant = [];
     level.zone_capture_crystals[localclientnum][str_targetname].mapped_shader_constant[localclientnum] = 0;
   }
@@ -572,7 +572,7 @@ get_monolith_ring_model(localclientnumber) {
   }
 
   if(!isDefined(level.zone_capture_monolith_ring[localclientnumber])) {
-    level.zone_capture_monolith_ring[localclientnumber] = getent(localclientnumber, "pap_monolith_ring", "targetname");
+    level.zone_capture_monolith_ring[localclientnumber] = getEnt(localclientnumber, "pap_monolith_ring", "targetname");
   }
 
   level.zone_capture_monolith_ring[localclientnumber] waittill_dobj(localclientnumber);
@@ -766,7 +766,7 @@ get_pack_a_punch_model(localclientnumber) {
   }
 
   if(!isDefined(level.pack_a_punch_model[localclientnumber])) {
-    level.pack_a_punch_model[localclientnumber] = getent(localclientnumber, "pap_cs", "targetname");
+    level.pack_a_punch_model[localclientnumber] = getEnt(localclientnumber, "pap_cs", "targetname");
   }
 
   level.pack_a_punch_model[localclientnumber] waittill_dobj(localclientnumber);
@@ -803,7 +803,7 @@ capture_zombie_torso_fx_enable(localclientnumber) {
 
   if(!isDefined(self.sndent)) {
     self.sndent = spawn(0, self.origin, "script_origin");
-    self.sndent linkto(self);
+    self.sndent linkTo(self);
     self thread snddeleteent(self.sndent);
   }
 
@@ -866,7 +866,7 @@ register_perk_machine_smoke_struct_with_field_name(str_field_name, str_perk_mach
 
 perk_machine_smoke_fx_always_on_callback(localclientnumber, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    s_pipes_mule_kick = getstruct("mulekick_pipes", "targetname");
+    s_pipes_mule_kick = getStruct("mulekick_pipes", "targetname");
     s_pipes_mule_kick perk_pipe_smoke_fx_enable(localclientnumber);
   }
 }
@@ -892,7 +892,7 @@ get_perk_machine_smoke_fx_struct_from_field_name(str_field_name) {
     }
 
     if(!isDefined(level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]])) {
-      level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]] = getstruct(level.perk_machine_smoke_struct_references[str_field_name], "targetname");
+      level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]] = getStruct(level.perk_machine_smoke_struct_references[str_field_name], "targetname");
     }
 
     s_fx = level.perk_machine_smoke_structs[level.perk_machine_smoke_struct_references[str_field_name]];

@@ -201,8 +201,8 @@ orientmeleevictim() {
   if(self.damagemod == "MOD_MELEE" && isDefined(self.attacker)) {
     var_0 = self.origin - self.attacker.origin;
     var_1 = anglesToForward(self.angles);
-    var_2 = vectornormalize((var_0[0], var_0[1], 0));
-    var_3 = vectornormalize((var_1[0], var_1[1], 0));
+    var_2 = vectorNormalize((var_0[0], var_0[1], 0));
+    var_3 = vectorNormalize((var_1[0], var_1[1], 0));
     var_4 = meleegetattackercardinaldirection(var_3, var_2);
     var_5 = var_4 * 90;
     var_6 = (-1 * var_2[0], -1 * var_2[1], 0);

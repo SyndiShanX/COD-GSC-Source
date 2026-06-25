@@ -58,9 +58,9 @@ wunderfizztrigger_update_prompt(player) {
 
   if(isDefined(self.hint_string)) {
     if(isDefined(self.hint_parm1)) {
-      self sethintstring(self.hint_string, self.hint_parm1);
+      self setHintString(self.hint_string, self.hint_parm1);
     } else {
-      self sethintstring(self.hint_string);
+      self setHintString(self.hint_string);
     }
   }
 
@@ -68,7 +68,7 @@ wunderfizztrigger_update_prompt(player) {
 }
 
 wunderfizzstub_update_prompt(player) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   if(!self trigger_visible_to_player(player)) {
     return false;
@@ -478,13 +478,13 @@ perk_bottle_motion() {
   self.bottle_spawn_location.origin = self.origin + (0, 0, 53);
   self.bottle_spawn_location.angles = self.angles;
   self.bottle_spawn_location.origin = self.bottle_spawn_location.origin - v_float;
-  self.bottle_spawn_location moveto(self.bottle_spawn_location.origin + v_float, putouttime, putouttime * 0.5);
+  self.bottle_spawn_location moveTo(self.bottle_spawn_location.origin + v_float, putouttime, putouttime * 0.5);
   self.bottle_spawn_location.angles = self.bottle_spawn_location.angles + (0, 0, 10);
-  self.bottle_spawn_location rotateyaw(720, putouttime, putouttime * 0.5);
+  self.bottle_spawn_location rotateYaw(720, putouttime, putouttime * 0.5);
   self waittill("done_cycling");
   self.bottle_spawn_location.angles = self.angles;
-  self.bottle_spawn_location moveto(self.bottle_spawn_location.origin - v_float, putbacktime, putbacktime * 0.5);
-  self.bottle_spawn_location rotateyaw(90, putbacktime, putbacktime * 0.5);
+  self.bottle_spawn_location moveTo(self.bottle_spawn_location.origin - v_float, putbacktime, putbacktime * 0.5);
+  self.bottle_spawn_location rotateYaw(90, putbacktime, putbacktime * 0.5);
 }
 
 start_perk_bottle_cycling() {

@@ -202,7 +202,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
     return undefined;
   }
 
-  plane = spawnvehicle(level.straferunvehicle, startnode.origin, (0, 0, 0), "straferun");
+  plane = spawnVehicle(level.straferunvehicle, startnode.origin, (0, 0, 0), "straferun");
 
   if(!isDefined(plane)) {
     println("<dev string:x67>");
@@ -235,7 +235,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
   plane thread function_d4896942();
   target_set(plane, (0, 0, 0));
   plane.gunsoundentity = spawn("script_model", plane gettagorigin("tag_flash"));
-  plane.gunsoundentity linkto(plane, "tag_flash", (0, 0, 0), (0, 0, 0));
+  plane.gunsoundentity linkTo(plane, "tag_flash", (0, 0, 0), (0, 0, 0));
 
   if(!issentient(plane)) {
     plane util::make_sentient();
@@ -250,7 +250,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
   offset_y = getdvarint(#"hash_6354a181bacd5d25", 0);
   offset_z = getdvarint(#"hash_63549e81bacd580c", 200);
   offset_pitch = getdvarint(#"hash_53fdb5b01cf6f7dc", 8);
-  plane.killcament linkto(plane, "tag_origin", (offset_x, offset_y, offset_z), (offset_pitch, 0, 0));
+  plane.killcament linkTo(plane, "tag_origin", (offset_x, offset_y, offset_z), (offset_pitch, 0, 0));
   plane.killcament setweapon(level.straferungunweapon);
   plane resetkillcams();
   plane thread watchforotherkillstreaks();
@@ -584,7 +584,7 @@ function startstrafe() {
     gunorigin = self gettagorigin("tag_flash");
     gunorigin += (0, 0, self.straferungunoffset);
     forward = anglesToForward(self.angles);
-    forwardnoz = vectornormalize((forward[0], forward[1], 0));
+    forwardnoz = vectorNormalize((forward[0], forward[1], 0));
     right = vectorcross(forwardnoz, (0, 0, 1));
     perfectattackstartvector = gunorigin + vectorscale(forwardnoz, self.straferungunlookahead);
     attackstartvector = perfectattackstartvector + vectorscale(right, randomfloatrange(0 - self.straferungunradius, self.straferungunradius));
@@ -800,7 +800,7 @@ function leavemap(hardpointtype) {
   self setyawspeed(5, 999, 999);
   self setgoal(exitorigin, 1);
   fakemodel = util::spawn_model(self.model, self.origin, self.angles);
-  fakemodel linkto(self);
+  fakemodel linkTo(self);
 
   if(isDefined(level.var_fda44f3d[self.killstreakid])) {
     killstreakrules::killstreakstop(hardpointtype, self.team, self.killstreakid);
@@ -957,7 +957,7 @@ function cantargetactor(actor) {
 
 function targetinfrontofplane(target) {
   forward_dir = anglesToForward(self.angles);
-  target_delta = vectornormalize(target.origin - self.origin);
+  target_delta = vectorNormalize(target.origin - self.origin);
   dot = vectordot(forward_dir, target_delta);
 
   if(dot < 0.5) {
@@ -1096,7 +1096,7 @@ function resetkillcament(parent) {
   offset_x = getdvarint(#"scr_killcamplaneoffsetx", -3000);
   offset_y = getdvarint(#"scr_killcamplaneoffsety", 0);
   offset_z = getdvarint(#"scr_killcamplaneoffsetz", 740);
-  self linkto(parent, "tag_origin", (offset_x, offset_y, offset_z), (10, 0, 0));
+  self linkTo(parent, "tag_origin", (offset_x, offset_y, offset_z), (10, 0, 0));
   self thread unlinkwhenparentdies(parent);
 }
 
@@ -1107,7 +1107,7 @@ function resetrocketkillcament(parent, rocketindex) {
   offset_y = getdvarint(#"scr_killcamplaneoffsety", 0);
   offset_z = getdvarint(#"scr_killcamplaneoffsetz", 740);
   rockettag = level.straferunrockettags[rocketindex % level.straferunrockettags.size];
-  self linkto(parent, rockettag, (offset_x, offset_y, offset_z), (10, 0, 0));
+  self linkTo(parent, rockettag, (offset_x, offset_y, offset_z), (10, 0, 0));
   self thread unlinkwhenparentdies(parent);
 }
 
@@ -1133,7 +1133,7 @@ function attachkillcamtorocket(killcament, selectedtarget, targetorigin) {
   killcament unlink();
   killcament.angles = (0, 0, 0);
   killcament.origin = self.origin;
-  killcament linkto(self, "", (offset_x, offset_y, offset_z), (9, 0, 0));
+  killcament linkTo(self, "", (offset_x, offset_y, offset_z), (9, 0, 0));
   killcament thread unlinkwhenclose(selectedtarget, targetorigin, self);
 }
 

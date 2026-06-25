@@ -9,7 +9,7 @@ func_44EE(var_0) {
 
 func_13A20() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   self.killcament = var_0;
   thread func_A639(var_0);
   thread scripts\mp\utility::notifyafterframeend("death", "end_explode");

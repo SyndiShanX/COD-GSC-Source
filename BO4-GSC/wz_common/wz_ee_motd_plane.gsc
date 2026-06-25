@@ -78,7 +78,7 @@ function_f3dbfe8d(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 }
 
 function_9dc0fa01() {
-  var_7206c0ef = getent("motd_plane_ee", "targetname");
+  var_7206c0ef = getEnt("motd_plane_ee", "targetname");
   zombie_plane_flight_goal = struct::get("zombie_plane_flight_goal", "targetname");
 
   if(isDefined(level.deathcircle) && isDefined(var_7206c0ef) && isDefined(zombie_plane_flight_goal)) {
@@ -91,7 +91,7 @@ function_9dc0fa01() {
     var_e3b87be8 = center[0] + radius * cos(angle + 180);
     var_8e6c495b = center[1] + radius * sin(angle + 180);
     zombie_plane_flight_goal.origin = (var_e3b87be8, var_8e6c495b, 10000);
-    zombie_plane = spawnvehicle("vehicle_zmb_air_alcatraz_plane", var_7206c0ef.origin, vectortoangles(vectornormalize(zombie_plane_flight_goal.origin - var_7206c0ef.origin)));
+    zombie_plane = spawnVehicle("vehicle_zmb_air_alcatraz_plane", var_7206c0ef.origin, vectortoangles(vectorNormalize(zombie_plane_flight_goal.origin - var_7206c0ef.origin)));
 
     if(!isDefined(zombie_plane)) {
       return;
@@ -142,7 +142,7 @@ function_37401a52() {
 }
 
 function_de4b0705() {
-  var_7206c0ef = getent("<dev string:xc6>", "<dev string:xb9>");
+  var_7206c0ef = getEnt("<dev string:xc6>", "<dev string:xb9>");
   zombie_plane_flight_goal = struct::get("<dev string:x9e>", "<dev string:xb9>");
 
   if(!isDefined(level.deathcircle) && isDefined(var_7206c0ef) && isDefined(zombie_plane_flight_goal)) {
@@ -158,7 +158,7 @@ function_de4b0705() {
       var_e3b87be8 = center[0] + radius * cos(angle + 180);
       var_8e6c495b = center[1] + radius * sin(angle + 180);
       zombie_plane_flight_goal.origin = (var_e3b87be8, var_8e6c495b, 10000);
-      zombie_plane = spawnvehicle("<dev string:xea>", var_7206c0ef.origin, vectortoangles(vectornormalize(zombie_plane_flight_goal.origin - var_7206c0ef.origin)));
+      zombie_plane = spawnVehicle("<dev string:xea>", var_7206c0ef.origin, vectortoangles(vectorNormalize(zombie_plane_flight_goal.origin - var_7206c0ef.origin)));
 
       if(!isDefined(zombie_plane)) {
         return;

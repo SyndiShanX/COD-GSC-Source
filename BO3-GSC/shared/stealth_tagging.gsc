@@ -47,7 +47,7 @@ function tagging_thread() {
         bbroadaiming = 0;
         if(!bdirectaiming) {
           distsq = distancesquared(enemy.origin, vec_eye_pos);
-          vec_enemy_dir = vectornormalize((enemy.origin + vectorscale((0, 0, 1), 30)) - vec_eye_pos);
+          vec_enemy_dir = vectorNormalize((enemy.origin + vectorscale((0, 0, 1), 30)) - vec_eye_pos);
           if(distsq < rangesq && vectordot(vec_enemy_dir, vec_eye_dir) > self.stealth.tagging.tag_fovcos) {
             bbroadaiming = self tagging_sight_trace(vec_eye_pos, enemy);
           }

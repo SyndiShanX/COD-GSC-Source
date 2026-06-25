@@ -79,7 +79,7 @@ fire_trap_setup(barrel) {
 
   fire_trap.barrel = barrel;
 
-  fire_trap.burn_trig = getent(fire_trap.barrel.target, "targetname");
+  fire_trap.burn_trig = getEnt(fire_trap.barrel.target, "targetname");
 
   fire_trap.burn_trig.script_noteworthy = "fire_trap";
 
@@ -87,7 +87,7 @@ fire_trap_setup(barrel) {
   cur_loc = fire_trap.burn_trig;
 
   while(isDefined(cur_loc) && isDefined(cur_loc.target)) {
-    fire_loc = getstruct(cur_loc.target, "targetname");
+    fire_loc = getStruct(cur_loc.target, "targetname");
 
     if(!isDefined(fire_loc)) {
       break;
@@ -139,8 +139,8 @@ fire_trap_setup(barrel) {
 
   fire_trap fire_trap_setup_sizes();
 
-  fire_trap.barrel SetCursorHint("HINT_NOICON");
-  fire_trap.barrel SetHintString(fire_trap.hintString);
+  fire_trap.barrel setCursorHint("HINT_NOICON");
+  fire_trap.barrel setHintString(fire_trap.hintString);
   fire_trap.barrel MakeUsable();
 
   if(alien_mode_has("outline")) {
@@ -246,7 +246,7 @@ fire_trap_think() {
 
         self.owner = owner;
 
-        self.barrel SetHintString("");
+        self.barrel setHintString("");
         self.barrel MakeUnUsable();
 
         price = int(self.cost * (owner perk_GetTrapCostScalar()));
@@ -279,7 +279,7 @@ fire_trap_think() {
 
     MarkDangerousNodesInTrigger(self.burn_trig, false);
     self.burning = false;
-    self.barrel SetHintString(self.hintString);
+    self.barrel setHintString(self.hintString);
     self.barrel MakeUsable();
 
     if(alien_mode_has("outline")) {
@@ -502,7 +502,7 @@ run_generator() {
 
   self.running = true;
   self.capacity = self.max_capacity;
-  self.generator SetHintString("");
+  self.generator setHintString("");
   self.generator MakeUnUsable();
 }
 
@@ -693,7 +693,7 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
 
     self.owner = undefined;
     self.running = false;
-    self.generator SetHintString(self.hintString);
+    self.generator setHintString(self.hintString);
     self.generator MakeUsable();
     self.generator stopLoopSound("alien_fence_gen_lp");
     self.generator playSound("alien_fence_gen_off");
@@ -792,13 +792,13 @@ setup_electric_puddle(generator) {
 
   puddle.generator = generator;
 
-  puddle.shock_trig = getent(generator.target, "targetname");
+  puddle.shock_trig = getEnt(generator.target, "targetname");
 
   puddle.contact_points = [];
-  cur_contact_point = getstruct(puddle.shock_trig.target, "targetname");
+  cur_contact_point = getStruct(puddle.shock_trig.target, "targetname");
   puddle.contact_points[0] = cur_contact_point;
   while(isDefined(cur_contact_point.target)) {
-    contact_point = getstruct(cur_contact_point.target, "targetname");
+    contact_point = getStruct(cur_contact_point.target, "targetname");
     puddle.contact_points[puddle.contact_points.size] = contact_point;
     cur_contact_point = contact_point;
   }
@@ -815,8 +815,8 @@ setup_electric_puddle(generator) {
   puddle.player_damage = CONST_PUDDLE_PLAYER_DAMAGE;
   puddle puddle_trap_setup_sizes();
 
-  puddle.generator SetCursorHint("HINT_NOICON");
-  puddle.generator SetHintString(puddle.hintString);
+  puddle.generator setCursorHint("HINT_NOICON");
+  puddle.generator setHintString(puddle.hintString);
   puddle.generator MakeUsable();
 
   if(alien_mode_has("outline")) {
@@ -1002,9 +1002,9 @@ setup_electric_fence(generator) {
       top_left = generator_target;
     }
   }
-  bottom_left = getstruct(top_left.target, "targetname");
-  bottom_right = getstruct(bottom_left.target, "targetname");
-  top_right = getstruct(bottom_right.target, "targetname");
+  bottom_left = getStruct(top_left.target, "targetname");
+  bottom_right = getStruct(bottom_left.target, "targetname");
+  top_right = getStruct(bottom_right.target, "targetname");
 
   fence.fence_top_left_angles = top_left.angles;
   fence.fence_top_left = top_left.origin;
@@ -1015,7 +1015,7 @@ setup_electric_fence(generator) {
   fence.fence_center = get_center(top_left.origin, top_right.origin, bottom_left.origin, bottom_right.origin);
   fence.fence_sparks = fence_sparks;
 
-  fence.shock_trig = getent(top_right.target, "targetname");
+  fence.shock_trig = getEnt(top_right.target, "targetname");
   fence.optimal_height = 100;
 
   fence.shock_fx["ambient"] = LoadFX("vfx/moments/alien/fence_lightning_ambient");
@@ -1035,8 +1035,8 @@ setup_electric_fence(generator) {
   fence.player_damage = CONST_FENCE_PLAYER_DAMAGE;
   fence fence_trap_setup_sizes();
 
-  fence.generator SetCursorHint("HINT_NOICON");
-  fence.generator SetHintString(fence.hintString);
+  fence.generator setCursorHint("HINT_NOICON");
+  fence.generator setHintString(fence.hintString);
   fence.generator MakeUsable();
 
   if(alien_mode_has("outline")) {
@@ -1203,7 +1203,7 @@ CONST_TURRET_BULLET_LIMIT = 300;
 turret_monitorUse() {
   level endon("game_ended");
 
-  self SetCursorHint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self MakeUsable();
 
   wait 0.05;
@@ -1284,14 +1284,14 @@ is_turret_enabled() {
 
 disable_turret() {
   self.enabled = false;
-  self SetHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
+  self setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
   self TurretFireDisable();
   self makeTurretInoperable();
 }
 
 enable_turret() {
   self.enabled = true;
-  self SetHintString("");
+  self setHintString("");
   self TurretFireEnable();
   self makeTurretOperable();
 }
@@ -1500,7 +1500,7 @@ sticky_flare(player) {
   if(isDefined(stuckto) && stuckto is_alien_agent()) {
     stuckto enable_alien_scripted();
     stuckto.stuck_by_flare = true;
-    stuckto SetOrigin(stuckto.origin);
+    stuckto setOrigin(stuckto.origin);
     level thread wait_for_flare_finished(stuckto, self);
   } else {
     alien = undefined;
@@ -1718,9 +1718,9 @@ easter_egg_lodge_sign() {
   level notify("easter_egg_lodge_sign_reset");
   level endon("easter_egg_lodge_sign_reset");
 
-  letter_l = getent("easter_egg_letter_l", "targetname");
-  letter_o = getent("easter_egg_letter_o", "targetname");
-  letter_reset = getent("easter_egg_letter_reset", "targetname");
+  letter_l = getEnt("easter_egg_letter_l", "targetname");
+  letter_o = getEnt("easter_egg_letter_o", "targetname");
+  letter_reset = getEnt("easter_egg_letter_reset", "targetname");
 
   if(!isDefined(letter_l) || !isDefined(letter_o) || !isDefined(letter_reset)) {
     return;

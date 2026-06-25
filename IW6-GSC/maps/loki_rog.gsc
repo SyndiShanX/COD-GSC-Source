@@ -183,12 +183,12 @@ rog_init() {
   level.space_breathing_enabled = 0;
   thread checking_for_hits();
   level.player_mover = (0, 0, 0);
-  level.rog_aoe_reticle = getent("AOE", "targetname");
+  level.rog_aoe_reticle = getEnt("AOE", "targetname");
   level.rog_aoe_reticle hide();
   level.rog_aoe_reticle notsolid();
 
   for(var_0 = 0; var_0 < 8; var_0++) {
-    level.rog_blast_markers[var_0] = getent("blast_marker_" + var_0, "targetname");
+    level.rog_blast_markers[var_0] = getEnt("blast_marker_" + var_0, "targetname");
     level.rog_blast_markers[var_0] notsolid();
     level.rog_blast_markers[var_0] hide();
     level.rog_blast_markers[var_0].time = undefined;
@@ -210,7 +210,7 @@ rog_init() {
   level.uav_model = spawn("script_model", level.player.origin);
   level.uav_model setModel("vehicle_uav");
   level.uav_model.angles = level.player.angles;
-  level.player playerlinkto(level.uav_model, "TAG_PLAYER");
+  level.player playerlinkTo(level.uav_model, "TAG_PLAYER");
   setsaveddvar("compass", 0);
   setsaveddvar("ammoCounterHide", 1);
   setsaveddvar("actionSlotsHide", 1);
@@ -312,9 +312,9 @@ script_train_stuff_02() {
   var_1 = [1.0, 0.75, 0.85, 0.85, 0.85, 1.0, 1.15, 1.0];
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_3 = getent("script_model_train_0" + (var_2 + 1), "targetname");
-    var_4 = getent("vehicle_target_mover_train_0" + (var_2 + 1), "targetname");
-    var_3 linkto(var_4);
+    var_3 = getEnt("script_model_train_0" + (var_2 + 1), "targetname");
+    var_4 = getEnt("vehicle_target_mover_train_0" + (var_2 + 1), "targetname");
+    var_3 linkTo(var_4);
     var_4 attachpath(var_0);
     level.rog_train[var_2] = var_3;
     level.rog_train_veh[var_2] = var_4;
@@ -819,7 +819,7 @@ wait_till_player_uses_terminal() {
   }
 
   var_0 = 50;
-  var_1 = getent("rog_terminal", "targetname");
+  var_1 = getEnt("rog_terminal", "targetname");
   var_1 wait_for_player_to_use_chair();
   thread maps\loki_audio::sfx_loki_control_room_start();
   maps\loki_util::player_boundaries_off();
@@ -897,8 +897,8 @@ wait_till_player_uses_terminal() {
   setsaveddvar("cg_cinematicFullScreen", "1");
   wait 0.5;
   level.player unlink();
-  level.allies[0] stopanimscripted();
-  level.allies[1] stopanimscripted();
+  level.allies[0] stopanimScripted();
+  level.allies[1] stopanimScripted();
   maps\_utility::delaythread(1.5, ::enable_weapons);
   level notify("switching_to_rog");
 }
@@ -908,7 +908,7 @@ wait_for_player_to_use_chair() {
     wait 0.1;
   }
 
-  var_0 = getent("rog_controls_use_trigger", "targetname");
+  var_0 = getEnt("rog_controls_use_trigger", "targetname");
 
   if(level.console || level.player usinggamepad()) {
     maps\loki_util::waittill_trigger_activate_looking_at(self, "activate_console_hint", 100, 0.5, undefined, 1, var_0);
@@ -925,8 +925,8 @@ manage_player_linked_view(var_0) {
 
 manage_use_region() {
   self endon("trigger");
-  var_0 = getent("rog_controls_use_trigger", "targetname");
-  self sethintstring(&"SCRIPT_HOLD_TO_USE");
+  var_0 = getEnt("rog_controls_use_trigger", "targetname");
+  self setHintString(&"SCRIPT_HOLD_TO_USE");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -1105,7 +1105,7 @@ start_rog_fail_timer(var_0) {
 }
 
 delete_all_ents() {
-  var_0 = getent("intelligence_item", "targetname");
+  var_0 = getEnt("intelligence_item", "targetname");
 
   if(isDefined(var_0)) {
     var_0 notify("end_loop_thread");
@@ -1389,7 +1389,7 @@ rog_target_handle_explosions() {
 
         if(var_4 < var_5) {
           self notify("newpath");
-          var_6 = vectornormalize(self.origin - var_0);
+          var_6 = vectorNormalize(self.origin - var_0);
           var_7 = self.origin + 2045 * var_6;
           self vehicle_helisetai(var_7, 65, 10, 15, 0, (0, 0, 0), 0, 0.0, 0, 0, 0, 0, 0);
         }
@@ -1486,7 +1486,7 @@ rog_target_move_along_path() {
   while(isDefined(var_0)) {
     var_3 = distance(self.origin, var_0.origin);
     var_4 = var_3 / var_2;
-    self moveto(var_0.origin, var_4);
+    self moveTo(var_0.origin, var_4);
 
     if("allies" != self.script_team) {
       thread rog_target_interupt_path(var_0.origin);
@@ -1494,7 +1494,7 @@ rog_target_move_along_path() {
 
     if(isDefined(var_1)) {
       wait(var_4 * 0.8);
-      self rotateto(vectortoangles(var_1.origin - var_0.origin), var_4 * 0.4);
+      self rotateTo(vectortoangles(var_1.origin - var_0.origin), var_4 * 0.4);
       wait(var_4 * 0.2);
     } else
       wait(var_4);
@@ -1525,8 +1525,8 @@ rog_target_interupt_path(var_0) {
     level waittill("rog_explosion", var_1, var_2);
 
     if(var_2 == "rod") {
-      var_3 = vectornormalize(var_0 - self.origin);
-      var_4 = vectornormalize(var_1 - self.origin);
+      var_3 = vectorNormalize(var_0 - self.origin);
+      var_4 = vectorNormalize(var_1 - self.origin);
       var_5 = vectordot(var_3, var_4);
 
       if(var_5 > 0.5) {
@@ -1542,10 +1542,10 @@ rog_target_interupt_path(var_0) {
   self notify("stop_pathing");
 
   if(self.model == "vehicle_battle_hind_low" && var_6 < level.rog_explosion_radius["danger_close"]) {
-    var_7 = vectornormalize(var_1 - self.origin);
-    self moveto(self.origin + var_7 * 2048, 10, 4, 3);
+    var_7 = vectorNormalize(var_1 - self.origin);
+    self moveTo(self.origin + var_7 * 2048, 10, 4, 3);
   } else
-    self moveto(self.origin, 0.05);
+    self moveTo(self.origin, 0.05);
 
   self notify("stop_pathing");
 }
@@ -1564,7 +1564,7 @@ rog_target_firing_logic(var_0) {
           wait(randomfloatrange(7, 15));
 
           if(isDefined(self.firing_position)) {
-            var_1 = vectornormalize(self.firing_position - self.origin);
+            var_1 = vectorNormalize(self.firing_position - self.origin);
             playFX(level._effect["abrams_flash_wv_no_tracer"], self.origin + (0, 0, 68) + 246 * var_1, var_1, (0, 0, 1));
             var_2 = self.firing_position + (randomfloatrange(-1024, 1024), randomfloatrange(-1024, 1024), 0);
             playFX(level._effect["tank_blast_sand"], var_2);
@@ -1577,7 +1577,7 @@ rog_target_firing_logic(var_0) {
 
           if(isDefined(self.firing_position)) {
             var_2 = self.firing_position + (randomfloatrange(-3072, 3072), randomfloatrange(-3072, 3072), 0);
-            var_1 = vectornormalize(self.firing_position - self.origin);
+            var_1 = vectorNormalize(self.firing_position - self.origin);
             playFX(level._effect["abrams_flash_wv_no_tracer"], self.origin + (0, 0, 68) + 246 * var_1, var_1, (0, 0, 1));
             thread missile_truck_fire_missile(var_2);
             self.firing_position = undefined;
@@ -1619,7 +1619,7 @@ rog_target_launch_missile(var_0) {
   var_1 setModel("projectile_sidewinder_missile");
   playFXOnTag(level._effect["missile_trail"], var_1, "tag_fx");
   var_2 = length(var_0 - var_1.origin) / 2500;
-  var_1 moveto(var_0, var_2, var_2 * 0.2);
+  var_1 moveTo(var_0, var_2, var_2 * 0.2);
   wait(var_2);
   level notify("rog_explosion", var_0, "missile");
   var_1 delete();
@@ -1637,7 +1637,7 @@ rog_target_normal_death(var_0, var_1) {
   }
 
   self notify("stop_pathing");
-  self moveto(self.origin, 0.05);
+  self moveTo(self.origin, 0.05);
 
   if(!var_0) {
     thread rog_target_get_thrown(var_1);
@@ -1699,9 +1699,9 @@ rog_target_get_thrown(var_0) {
 
   var_1 = self.origin - level.rog_fired_targ;
   var_1 = (var_1[0], var_1[1], 0);
-  var_2 = vectornormalize(var_1) * randomfloatrange(500, 900) * randomintrange(1, 3) + self.origin;
+  var_2 = vectorNormalize(var_1) * randomfloatrange(500, 900) * randomintrange(1, 3) + self.origin;
   var_3 = (0, randomintrange(-179, 179) * randomintrange(1, 3), 0);
-  self moveto(var_2, 3.0, 0.0, 1.5);
+  self moveTo(var_2, 3.0, 0.0, 1.5);
   self rotateby(var_3, 3.0, 0.0, 1.0);
 }
 
@@ -1774,7 +1774,7 @@ rog_target_add_hud_element(var_0) {
 
   if(level.current_target_hud_count >= level.rog_max_waypoints) {}
 
-  var_2 settargetent(self);
+  var_2 settargetEnt(self);
   var_2 setwaypoint(1);
   level notify("target_reveal");
 
@@ -1805,7 +1805,7 @@ rog_target_remove_hud_element(var_0) {
 
 rog_target_vehicle_tracking() {
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0.script_team = self.script_team;
   thread rog_target_hud_logic(var_0, "ROG_reveal_allies");
   self waittill("death");
@@ -1915,7 +1915,7 @@ rog_fire_single_new(var_0) {
 
     var_9 = lengthsquared(var_0 - var_1.origin);
     var_10 = 1.0 - var_9 / var_8;
-    var_11 = vectornormalize(var_0 - var_1.origin);
+    var_11 = vectorNormalize(var_0 - var_1.origin);
     var_11 = (var_11[0] * var_10, var_11[1] * var_10, var_11[2]);
     var_12 = var_11[0] * var_5 * level.timestep;
     var_13 = var_11[1] * var_6 * level.timestep;
@@ -1984,7 +1984,7 @@ rog_impact_danger_close_check(var_0) {
 
 preimpactsmoke(var_0) {
   if(self.targetname == "destroy_spaceport") {
-    playFX(level._effect["loki_rog_spaceport_center_explosion"], self.origin + (0, 0, 8000), vectornormalize(self.origin - var_0), (0, 0, 1));
+    playFX(level._effect["loki_rog_spaceport_center_explosion"], self.origin + (0, 0, 8000), vectorNormalize(self.origin - var_0), (0, 0, 1));
     wait 0.5;
     self delete();
   } else {
@@ -1992,7 +1992,7 @@ preimpactsmoke(var_0) {
 
     for(var_2 = 0; var_2 < 2; var_2++) {
       var_3 = (randomintrange(-1 * var_1, var_1), randomintrange(-1 * var_1, var_1), randomintrange(-1 * var_1, var_1));
-      playFX(level._effect["building_crumble_directional"], self.origin + var_3, vectornormalize(self.origin - var_0), (0, 0, 1));
+      playFX(level._effect["building_crumble_directional"], self.origin + var_3, vectorNormalize(self.origin - var_0), (0, 0, 1));
       wait 0.5;
     }
   }
@@ -2031,7 +2031,7 @@ rog_show_target_marker() {
     wait 0.05;
     self solid();
     self show();
-    self rotateyaw(720, 14);
+    self rotateYaw(720, 14);
   }
 }
 
@@ -2212,7 +2212,7 @@ rog_uav_explosion_effects(var_0) {
     var_4 = 0.0;
     level thread rog_uav_initial_blur(4 * var_3);
     wait(var_3);
-    level.player playrumbleonentity("grenade_rumble");
+    level.player playRumbleOnEntity("grenade_rumble");
 
     if(var_3 < 1.5) {
       for(var_5 = 0; var_5 < 6; var_5++) {
@@ -2310,7 +2310,7 @@ rog_tag_train() {
 
 rog_uav_update_lookat(var_0) {
   level.rog_current_lookat_node_index++;
-  level.uav.target_ent moveto(level.rog_uav_lookat_pos[level.rog_current_lookat_node_index], var_0, 0.5 * var_0, 0.5 * var_0);
+  level.uav.target_ent moveTo(level.rog_uav_lookat_pos[level.rog_current_lookat_node_index], var_0, 0.5 * var_0, 0.5 * var_0);
 }
 
 rog_attach_to_firing_position() {
@@ -2321,7 +2321,7 @@ rog_attach_to_firing_position() {
   level.uav = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("uav_camera_spawner_new");
   level.uav_model.origin = level.uav.origin;
   level.uav_model.angles = level.uav.angles;
-  level.uav_model linkto(level.uav);
+  level.uav_model linkTo(level.uav);
   level.uav uav_useby(level.player, level.rog_uav_lookat_pos[level.rog_current_lookat_node_index]);
   level thread maps\loki_rog_hud::uav_static_lines(0);
   level.uav thread rog_uav_camera_logic();
@@ -2401,7 +2401,7 @@ uav_rig_controller(var_0, var_1) {
   var_5 = spawnturret("misc_turret", var_3, var_1);
   var_5.angles = var_4;
   var_5 setModel("tag_turret");
-  var_5 linkto(var_0, var_2, (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_0, var_2, (0, 0, 0), (0, 0, 0));
   var_5 makeunusable();
   var_5 hide();
   var_5 setmode("manual");
@@ -2414,7 +2414,7 @@ uav_cam_lookat(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     level.uav.target_ent.origin = var_0.origin;
-    level.uav.target_ent linkto(var_0);
+    level.uav.target_ent linkTo(var_0);
   } else
     level.uav.target_ent.origin = var_0.origin;
 
@@ -2481,7 +2481,7 @@ rog_shockwave() {
     var_11 = rog_getcirclepoints(var_10, var_7 * var_6, var_3);
 
     foreach(var_13 in var_11) {
-      var_14 = vectornormalize(var_13 - var_3);
+      var_14 = vectorNormalize(var_13 - var_3);
       var_15 = randomfloatrange(var_4 * -1.0, var_4 * 1.0);
     }
 
@@ -2641,13 +2641,13 @@ rog_scriptable_radius_damage(var_0) {
   foreach(var_6 in var_3) {
     switch (var_6.targetname) {
       case "destroy_spaceport":
-        playFX(level._effect["loki_rog_spaceport_center_explosion"], var_6.origin + (0, 0, 0), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_spaceport_center_explosion"], var_6.origin + (0, 0, 0), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
       case "destroy_base":
-        playFX(level._effect["loki_rog_satellite_dish_explosion"], var_6.origin + (0, 0, 1000), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_satellite_dish_explosion"], var_6.origin + (0, 0, 1000), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
       case "destroy_scaffolding":
-        playFX(level._effect["loki_rog_rocket_scaffolding_explosion"], var_6.origin + (0, 0, 0), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_rocket_scaffolding_explosion"], var_6.origin + (0, 0, 0), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
     }
   }
@@ -2668,23 +2668,23 @@ rog_scriptable_radius_damage(var_0) {
   foreach(var_6 in var_11) {
     switch (var_6.targetname) {
       case "destroy_spaceport":
-        playFX(level._effect["loki_rog_spaceport_center_perimeter_hit"], var_6.origin + (0, 0, 2500), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_spaceport_center_perimeter_hit"], var_6.origin + (0, 0, 2500), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
       case "destroy_base":
-        playFX(level._effect["loki_rog_satellite_dish_perimeter_hit"], var_6.origin + (0, 0, 1000), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_satellite_dish_perimeter_hit"], var_6.origin + (0, 0, 1000), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
       case "destroy_scaffolding":
-        playFX(level._effect["loki_rog_rocket_scaffolding_perimeter_hit"], var_6.origin + (0, 0, 2500), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_rocket_scaffolding_perimeter_hit"], var_6.origin + (0, 0, 2500), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
       case "destroy_rocket":
-        playFX(level._effect["loki_rog_satellite_dish_perimeter_hit"], var_6.origin + (0, 0, 2000), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_satellite_dish_perimeter_hit"], var_6.origin + (0, 0, 2000), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
       case "destroy_small":
         radiusdamage(var_6.origin, 10, 10000, 9000);
         var_6 delete();
         break;
       default:
-        playFX(level._effect["loki_rog_satellite_dish_perimeter_hit"], var_6.origin + (0, 0, 500), vectornormalize(var_6.origin - var_0), (0, 0, 1));
+        playFX(level._effect["loki_rog_satellite_dish_perimeter_hit"], var_6.origin + (0, 0, 500), vectorNormalize(var_6.origin - var_0), (0, 0, 1));
         break;
     }
   }
@@ -2771,7 +2771,7 @@ throw_rog_destruction(var_0, var_1, var_2, var_3) {
   var_6 = randomfloatrange(0.1, 0.5);
   var_7 = var_0.origin[2];
   var_8 = var_0.origin;
-  var_9 = vectornormalize(var_0.origin - var_1);
+  var_9 = vectorNormalize(var_0.origin - var_1);
   var_10 = randomfloatrange(5000, 7500);
   var_11 = (randomfloatrange(5, 30), randomfloatrange(5, 30), randomfloatrange(5, 30));
 
@@ -2781,27 +2781,27 @@ throw_rog_destruction(var_0, var_1, var_2, var_3) {
   }
 
   var_12 = var_8 + var_9 * var_10 * 0.2;
-  var_0 moveto(var_12 + (0, 0, 200), var_6, 0, 0);
+  var_0 moveTo(var_12 + (0, 0, 200), var_6, 0, 0);
   var_0 rotateby(var_11, var_6, 0, 0);
   wait(var_6 - 0.05);
   var_12 = var_8 + var_9 * var_10 * 0.4;
-  var_0 moveto(var_12 + (0, 0, 350), var_6, 0, 0);
+  var_0 moveTo(var_12 + (0, 0, 350), var_6, 0, 0);
   var_0 rotateby(var_11, var_6, 0, 0);
   wait(var_6 - 0.05);
   var_12 = var_8 + var_9 * var_10 * 0.6;
-  var_0 moveto(var_12 + (0, 0, 200), var_6, 0, 0);
+  var_0 moveTo(var_12 + (0, 0, 200), var_6, 0, 0);
   var_0 rotateby(var_11, var_6, 0, 0);
   wait(var_6 - 0.05);
   var_12 = var_8 + var_9 * var_10 * 0.8;
-  var_0 moveto(var_12, var_6, 0, 0);
+  var_0 moveTo(var_12, var_6, 0, 0);
   var_0 rotateby(var_11, var_6, 0, 0);
   wait(var_6 - 0.05);
   var_12 = var_8 + var_9 * var_10 * 1.4;
   var_6 = var_6 + 0.5;
-  var_0 moveto((var_12[0], var_12[1], getgroundposition(var_0.origin, 5)[2] - 1000), var_6, 0, 0);
+  var_0 moveTo((var_12[0], var_12[1], getgroundposition(var_0.origin, 5)[2] - 1000), var_6, 0, 0);
   var_0 rotateby(var_11, var_6, 0, 0);
   wait(var_6 - 0.05);
-  playFX(level._effect["building_crumble_directional"], var_0.origin, vectornormalize(var_0.origin - var_1), (0, 0, 1));
+  playFX(level._effect["building_crumble_directional"], var_0.origin, vectorNormalize(var_0.origin - var_1), (0, 0, 1));
   wait(var_6 * 0.2);
   var_0.origin = var_0.origin + (0, 0, -3000);
 
@@ -2827,12 +2827,12 @@ rog_building_collapse() {
       playFX(common_scripts\utility::getfx("building_blast"), var_0.origin);
 
       if(isDefined(var_0.target)) {
-        var_5 = getent(var_0.target, "targetname");
-        var_5 moveto(var_5.origin + (0, 0, 380), var_3, 3);
+        var_5 = getEnt(var_0.target, "targetname");
+        var_5 moveTo(var_5.origin + (0, 0, 380), var_3, 3);
       }
 
-      var_0 moveto(var_1.origin, var_3, 3, 0);
-      var_0 rotateto(var_1.angles, var_4, 4, 0);
+      var_0 moveTo(var_1.origin, var_3, 3, 0);
+      var_0 rotateTo(var_1.angles, var_4, 4, 0);
       wait 2.0;
       playFX(common_scripts\utility::getfx("building_collapse_01"), var_0.origin);
     }
@@ -2911,7 +2911,7 @@ rog_add_hud_element_on_target() {
   var_0.vertalign = "middle";
   var_0.alpha = 1.0;
   var_0 setshader("hud_rog_target_building_g", 8, 8);
-  var_0 settargetent(self);
+  var_0 settargetEnt(self);
   var_0 setwaypoint(1, 0, 0, 0);
   return var_0;
 }
@@ -3157,11 +3157,11 @@ missile_truck_fire_missile(var_0) {
       break;
     }
 
-    var_1 moveto((var_11[var_14 - 1], var_12[var_14 - 1], var_13[var_14]), var_8);
+    var_1 moveTo((var_11[var_14 - 1], var_12[var_14 - 1], var_13[var_14]), var_8);
     wait(var_8 - 0.05);
   }
 
-  var_1 moveto(var_0, var_8);
+  var_1 moveTo(var_0, var_8);
   wait(var_8 - 0.05);
   playFX(common_scripts\utility::getfx("loki_m880_missile_impact"), var_0, (0, 0, 1), anglesToForward(var_1.angles));
   stopFXOnTag(common_scripts\utility::getfx("smoke_geotrail_missile_large"), var_1, "tag_origin");
@@ -3316,7 +3316,7 @@ spawn_single_ground_vehicle(var_0, var_1, var_2, var_3, var_4) {
   var_5 thread check_for_rog_death(var_5, var_4);
   var_6 = randomfloatrange(55, 65);
   var_7 = var_1 - var_0;
-  var_5 rotateto(vectortoangles(var_7), 0.1);
+  var_5 rotateTo(vectortoangles(var_7), 0.1);
 
   if(isDefined(var_4)) {
     common_scripts\utility::flag_wait(var_4);
@@ -3324,17 +3324,17 @@ spawn_single_ground_vehicle(var_0, var_1, var_2, var_3, var_4) {
     wait(randomfloatrange(0, 2));
   }
 
-  var_5 moveto(var_1, var_6, var_6 * 0.3, var_6 * 0.3);
+  var_5 moveTo(var_1, var_6, var_6 * 0.3, var_6 * 0.3);
   var_5 waittill("movedone");
   var_6 = randomfloatrange(25, 35);
   var_7 = var_2 - var_1;
-  var_5 rotateto(vectortoangles(var_7), 5, 2, 2);
-  var_5 moveto(var_2, var_6, var_6 * 0.3, var_6 * 0.3);
+  var_5 rotateTo(vectortoangles(var_7), 5, 2, 2);
+  var_5 moveTo(var_2, var_6, var_6 * 0.3, var_6 * 0.3);
   var_5 waittill("movedone");
   var_6 = randomfloatrange(15, 25);
   var_7 = var_3 - var_2;
-  var_5 rotateto(vectortoangles(var_7), 5, 2, 2);
-  var_5 moveto(var_3, var_6, var_6 * 0.3, var_6 * 0.3);
+  var_5 rotateTo(vectortoangles(var_7), 5, 2, 2);
+  var_5 moveTo(var_3, var_6, var_6 * 0.3, var_6 * 0.3);
   var_5 waittill("movedone");
 }
 
@@ -3385,11 +3385,11 @@ spawn_single_helo() {
     var_4 = (randomfloatrange(-30000, -4000), randomfloatrange(-45000, -5000), randomfloatrange(-126500, -124000));
     var_5 = randomfloatrange(15, 35);
     var_6 = var_4 - var_0;
-    var_1 rotateto(vectortoangles(var_6), 5, 2, 2);
-    var_1 moveto(var_4, var_5, var_5 * 0.3, var_5 * 0.3);
+    var_1 rotateTo(vectortoangles(var_6), 5, 2, 2);
+    var_1 moveTo(var_4, var_5, var_5 * 0.3, var_5 * 0.3);
     var_1 waittill("movedone");
     var_6 = var_3 - var_1.origin;
-    var_1 rotateto(vectortoangles(var_6), 5, 2, 2);
+    var_1 rotateTo(vectortoangles(var_6), 5, 2, 2);
     var_2.origin = var_1.origin;
     var_2.angles = vectortoangles(var_6);
     playFXOnTag(level._effect["antiair_runner_flak"], var_2, "tag_origin");
@@ -3440,7 +3440,7 @@ single_bomb_run_script(var_0, var_1, var_2, var_3) {
   var_4 endon("vehicle_ROG_death");
   var_5 = common_scripts\utility::spawn_tag_origin();
   var_5.origin = var_4.origin + (0, -300, 0);
-  var_5 linkto(var_4);
+  var_5 linkTo(var_4);
   var_6 = common_scripts\utility::spawn_tag_origin();
   var_6.origin = var_1;
   var_7 = var_1 - var_0;
@@ -3448,16 +3448,16 @@ single_bomb_run_script(var_0, var_1, var_2, var_3) {
   var_5 unlink();
   var_8 = var_0 - var_1;
   var_5.angles = vectortoangles(var_8);
-  var_5 linkto(var_4);
+  var_5 linkTo(var_4);
   var_4 thread check_for_rog_death(var_4);
   playFXOnTag(level._effect["battle_contrail"], var_5, "tag_origin");
   playFXOnTag(level._effect["engineeffect"], var_5, "tag_origin");
-  var_4 moveto(var_1, var_2);
+  var_4 moveTo(var_1, var_2);
 
   if(randomintrange(0, 10) > 3) {
     var_9 = var_2 * randomfloatrange(0.4, 0.75);
     wait(var_9);
-    var_4 moveto(var_1 + (0, 0, randomfloatrange(5000, 16000)), var_2 - var_9);
+    var_4 moveTo(var_1 + (0, 0, randomfloatrange(5000, 16000)), var_2 - var_9);
 
     if(var_3 == "large") {
       for(var_10 = 0; var_10 < randomintrange(1, 3); var_10++) {
@@ -3477,8 +3477,8 @@ single_bomb_run_script(var_0, var_1, var_2, var_3) {
     playFXOnTag(level._effect["vfx_fire_burning_zerog"], var_4, "tag_origin");
     wait(var_2 * randomfloatrange(0.1, 0.2));
     playFXOnTag(level._effect["building_blast"], var_4, "tag_origin");
-    var_4 moveto((var_4.origin[0] + randomfloatrange(1000, 2000), var_4.origin[1] + randomfloatrange(3000, 6000), var_4.origin[2] - 3000), 3);
-    var_4 rotateto((randomintrange(100, 1350), randomintrange(100, 1350), randomintrange(100, 1350)), 3);
+    var_4 moveTo((var_4.origin[0] + randomfloatrange(1000, 2000), var_4.origin[1] + randomfloatrange(3000, 6000), var_4.origin[2] - 3000), 3);
+    var_4 rotateTo((randomintrange(100, 1350), randomintrange(100, 1350), randomintrange(100, 1350)), 3);
     wait 2.9;
     playFXOnTag(level._effect["building_blast"], var_4, "tag_origin");
     wait 0.1;
@@ -3498,13 +3498,13 @@ rog_update_visibility_volume() {
   level notify("visibility_update");
   level.rog_pass_fail["axis"]["targets"] = 0;
   level thread rog_check_done();
-  level.rog_active_visibilty_volume = getent("ROG_visibility_vol_" + level.rog_visibility_volume_index, "targetname");
+  level.rog_active_visibilty_volume = getEnt("ROG_visibility_vol_" + level.rog_visibility_volume_index, "targetname");
   level.rog_visibility_volume_index++;
 }
 
 rog_update_visibility_volume_empty() {
   level notify("visibility_update");
-  level.rog_active_visibilty_volume = getent("ROG_visibility_vol_3", "targetname");
+  level.rog_active_visibilty_volume = getEnt("ROG_visibility_vol_3", "targetname");
 }
 
 rog_update_visibility_volume_on_notify(var_0) {
@@ -3695,7 +3695,7 @@ rog_ambiant_battle_chatter() {
 
 rog_kill_jet() {
   var_0 = distance(self vehicle_getvelocity(), (0, 0, 0));
-  var_1 = vectornormalize(anglesToForward(self.angles));
+  var_1 = vectorNormalize(anglesToForward(self.angles));
   playFX(level._effect["loki_rog_jet_explosion_death"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
   self delete();
 }
@@ -3718,7 +3718,7 @@ rog_card_swap() {
   common_scripts\utility::flag_wait("ROG_look_at_airfield");
 
   for(var_0 = 0; var_0 < 4; var_0++) {
-    var_1 = getent("ROG_air_strip_card_" + var_0, "targetname");
+    var_1 = getEnt("ROG_air_strip_card_" + var_0, "targetname");
     var_1 delete();
   }
 }
@@ -3728,7 +3728,7 @@ rog_running_cleanup() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     wait(var_0[var_1]);
-    var_2 = getent("ROG_cleanup_vol_" + var_1, "targetname");
+    var_2 = getEnt("ROG_cleanup_vol_" + var_1, "targetname");
 
     foreach(var_4 in level.rog_target_models) {
       if(isDefined(var_4) && var_4 istouching(var_2)) {

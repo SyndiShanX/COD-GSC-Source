@@ -85,7 +85,7 @@ func_6393(param_00, param_01, param_02, param_03, param_04) {
   var_06 = 0;
   var_07 = anglesToForward(param_01);
   var_07 = (var_07[0], var_07[1], 0);
-  var_07 = vectornormalize(var_07);
+  var_07 = vectorNormalize(var_07);
   if(param_04) {
     var_08 = 16;
   } else {

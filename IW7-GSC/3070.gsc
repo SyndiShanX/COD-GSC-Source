@@ -45,7 +45,7 @@ func_EF29(var_0) {
 }
 
 func_EF2B(var_0) {
-  if(scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(scripts\asm\asm_bb::bb_isanimScripted()) {
     return;
   }
 
@@ -525,7 +525,7 @@ func_F202(var_0) {
 
       if(var_6.size > 0) {
         var_10 = var_6[randomint(var_6.size)];
-        var_11 = vectornormalize(self.origin - var_10.origin);
+        var_11 = vectorNormalize(self.origin - var_10.origin);
         var_4 = var_10.origin + var_11 * var_3;
         var_4 = getclosestpointonnavmesh(var_4, self);
       }
@@ -864,7 +864,7 @@ func_F1F5(var_0) {
   }
 
   self.bt.var_F1F7 = spawn("script_origin", self.origin + (0, 0, 30));
-  self.bt.var_F1F7 linkto(self);
+  self.bt.var_F1F7 linkTo(self);
   self.bt.var_F1F7 thread func_F1F6(self, var_0);
 }
 

@@ -61,7 +61,7 @@ main() {
 on_player_connect() {
   level.player = get_players()[0];
   level.player thread setup_challenge();
-  clip = getent("mason_elevator_clip", "targetname");
+  clip = getEnt("mason_elevator_clip", "targetname");
   clip notsolid();
   retrieve_story_stats();
 }
@@ -74,7 +74,7 @@ setup_level() {
   setDvar("r_waterwaveamplitude", "25 6 5 0");
   setDvar("r_waterwavespeed", "0.72 1.21 1.14 1");
   setsaveddvar("phys_disableEntsAndDynEntsCollision", 1);
-  t_kick_trig = getent("vent_kick_trig", "targetname");
+  t_kick_trig = getEnt("vent_kick_trig", "targetname");
   t_kick_trig trigger_off();
   trigger_off("downstairs_light_trig", "script_noteworthy");
   sp_menendez = get_ent("menendez", "targetname", 1);
@@ -159,10 +159,10 @@ init_doors() {
   doors = getEntArray("rotating_door", "script_noteworthy");
 
   for(i = 0; i < doors.size; i++) {
-    model = getent(doors[i].target, "targetname");
+    model = getEnt(doors[i].target, "targetname");
 
     if(isDefined(model)) {
-      model linkto(doors[i]);
+      model linkTo(doors[i]);
     }
   }
 }

@@ -575,7 +575,7 @@ crowd_throw_item(var_2bd26cff) {
   str_powerup = array::random(var_a714ee15);
 
   if(!isDefined(level.zombie_powerups[str_powerup])) {
-    playsoundatposition(#"hash_339b376fb02738f5", var_4d611aa2.origin);
+    playSoundAtPosition(#"hash_339b376fb02738f5", var_4d611aa2.origin);
 
     if(str_powerup === "rock") {
       e_item = util::spawn_model(#"hash_5a78e7591a2e5e39", var_4d611aa2.origin, var_4d611aa2.angles);
@@ -587,7 +587,7 @@ crowd_throw_item(var_2bd26cff) {
       if(isalive(self)) {
         v_player_angles = self getplayerangles();
         v_pos = self getEye() + anglesToForward(v_player_angles) * 100;
-        e_item moveto(v_pos, 0.05);
+        e_item moveTo(v_pos, 0.05);
         self dodamage(5, v_pos);
         self shellshock(#"pain_zm", 3);
         self playSound(#"hash_270c80055a8d296c");
@@ -603,7 +603,7 @@ crowd_throw_item(var_2bd26cff) {
       }
     }
   } else {
-    playsoundatposition(#"hash_339b376fb02738f5", var_4d611aa2.origin);
+    playSoundAtPosition(#"hash_339b376fb02738f5", var_4d611aa2.origin);
     var_354ec191 = array::random(array(#"p8_fxanim_zm_towers_crowd_jar_01_mod", #"p8_fxanim_zm_towers_crowd_jar_02_mod", #"p8_fxanim_zm_towers_crowd_jar_03_mod"));
     e_item = util::spawn_model(var_354ec191, var_4d611aa2.origin, var_4d611aa2.angles);
     e_item fx::play(#"hash_4c4f96aa02c32a2a", e_item.origin, e_item.angles, "crowd_item_fly_fx_stop", 1);
@@ -632,7 +632,7 @@ crowd_throw_item(var_2bd26cff) {
 
       if(isDefined(e_powerup)) {
         if(str_powerup === "dung") {
-          e_powerup moveto(groundtrace(e_powerup.origin + (0, 0, 8), e_powerup.origin + (0, 0, -100000), 0, e_powerup)[#"position"] + (0, 0, 0), 0.25);
+          e_powerup moveTo(groundtrace(e_powerup.origin + (0, 0, 8), e_powerup.origin + (0, 0, -100000), 0, e_powerup)[#"position"] + (0, 0, 0), 0.25);
           e_powerup setscale(3);
           e_powerup playLoopSound("zmb_dung_lp");
         }

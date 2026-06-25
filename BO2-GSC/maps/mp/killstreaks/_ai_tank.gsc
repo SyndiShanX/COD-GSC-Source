@@ -121,7 +121,7 @@ crateland(crate, weaponname, owner, team) {
   }
 
   playFX(level.ai_tank_crate_explode_fx, origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition("veh_talon_crate_exp", crate.origin);
+  playSoundAtPosition("veh_talon_crate_exp", crate.origin);
   level thread ai_tank_killstreak_start(owner, origin, crate.package_contents_id, weaponname);
   crate delete();
 }
@@ -156,7 +156,7 @@ valid_location() {
 
 ai_tank_killstreak_start(owner, origin, killstreak_id, weaponname) {
   waittillframeend;
-  drone = spawnvehicle("veh_t6_drone_tank", "talon", "ai_tank_drone_mp", origin, (0, 0, 0));
+  drone = spawnVehicle("veh_t6_drone_tank", "talon", "ai_tank_drone_mp", origin, (0, 0, 0));
   drone setenemymodel("veh_t6_drone_tank_alt");
   drone playLoopSound("veh_talon_idle_npc", 0.2);
   drone setvehicleavoidance(1);
@@ -318,7 +318,7 @@ tank_low_health_fx() {
   self endon("death");
   self.damage_fx = spawn("script_model", self gettagorigin("tag_origin") + vectorscale((0, 0, -1), 14.0));
   self.damage_fx setModel("tag_origin");
-  self.damage_fx linkto(self, "tag_turret", vectorscale((0, 0, -1), 14.0), (0, 0, 0));
+  self.damage_fx linkTo(self, "tag_turret", vectorscale((0, 0, -1), 14.0), (0, 0, 0));
   wait 0.1;
   playFXOnTag(level.ai_tank_damage_fx, self.damage_fx, "tag_origin");
 }
@@ -409,7 +409,7 @@ emp_crazy_death() {
 
   self setclientfield("ai_tank_death", 1);
   playFX(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
-  playsoundatposition("wpn_agr_explode", self.origin);
+  playSoundAtPosition("wpn_agr_explode", self.origin);
   wait 0.05;
   self hide();
 }
@@ -434,7 +434,7 @@ tank_death_think(hardpointname) {
     self setclientfield("ai_tank_death", 1);
     stunned = 0;
     playFX(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
-    playsoundatposition("wpn_agr_explode", self.origin);
+    playSoundAtPosition("wpn_agr_explode", self.origin);
     wait 0.05;
     self hide();
 
@@ -620,7 +620,7 @@ tank_combat_think() {
     wait 0.5;
     self laseroff();
     origin = self.origin + vectorscale((0, 0, 1), 32.0);
-    forward = vectornormalize(self.target_entity.origin - self.origin);
+    forward = vectorNormalize(self.target_entity.origin - self.origin);
     players = tank_get_player_enemies(0);
     self tank_target_evaluate(players, origin, forward);
 
@@ -645,7 +645,7 @@ tank_target_evaluate(targets, origin, forward) {
       continue;
     }
     delta = target.origin - origin;
-    delta = vectornormalize(delta);
+    delta = vectorNormalize(delta);
     dot = vectordot(forward, delta);
 
     if(dot < level.ai_tank_fov) {
@@ -814,9 +814,9 @@ tank_set_target(entity, use_rocket) {
     speed = length(velocity);
     forward = anglesToForward(entity.angles);
     origin = offset + vectorscale(forward, speed);
-    self setturrettargetent(entity, origin);
+    self setturrettargetEnt(entity, origin);
   } else
-    self setturrettargetent(entity);
+    self setturrettargetEnt(entity);
 }
 
 tank_get_target() {
@@ -1069,7 +1069,7 @@ tank_rocket_watch(player) {
       self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 50.0), 0);
     } else {
       self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 50.0), 0);
-      player playrumbleonentity("sniper_fire");
+      player playRumbleOnEntity("sniper_fire");
     }
 
     earthquake(0.4, 0.5, self.origin, 200);

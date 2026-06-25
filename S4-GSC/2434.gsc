@@ -18,7 +18,7 @@ _id_80EE() {
     level scripts\engine\utility::waittill_any_2("power_on", self._id_BA97 + " power_on");
   }
 
-  var_0 = getent("pap_machine", "targetname");
+  var_0 = getEnt("pap_machine", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -80,8 +80,8 @@ _id_10D20(var_0, var_1) {
   }
 
   if(var_4 < level._id_AE11) {
-    var_10 = scripts\engine\utility::getstruct(var_0.target, "targetname");
-    var_11 = vectornormalize(anglesToForward(var_1.angles)) * 16;
+    var_10 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+    var_11 = vectorNormalize(anglesToForward(var_1.angles)) * 16;
     _id_0737::_id_C3C5(var_0);
     var_12 = var_1 getweaponslistprimaries();
     var_1 _id_0741::_id_BD77("mt_upgrade_weapons");
@@ -215,17 +215,17 @@ _id_10D20(var_0, var_1) {
 
     var_26.angles = var_0.angles;
     var_27 = _id_6BC9(var_25);
-    var_28 = getent("pap_machine", "targetname");
+    var_28 = getEnt("pap_machine", "targetname");
     level thread _id_C301(var_1, var_26, var_0, var_28);
     level notify("pap_used", var_1, var_4, var_25);
     var_26 makeunusable();
     var_1 thread _id_B8B6(var_1, var_1._id_AE0F, var_5, var_2, var_16);
     var_1._id_AE15 = var_2;
     var_29 = _id_6C78(var_3);
-    var_26 moveto(var_10.origin + var_29, 0.75);
-    var_26 rotateto(var_10.angles, 0.75);
+    var_26 moveTo(var_10.origin + var_29, 0.75);
+    var_26 rotateTo(var_10.angles, 0.75);
     var_26 waittill("movedone");
-    var_26 moveto(var_10.origin + var_27, 0.25);
+    var_26 moveTo(var_10.origin + var_27, 0.25);
     var_26 waittill("movedone");
     var_28 playSound("zmb_packapunch_machine_on");
     var_28 setscriptablepartstate("door", "close");

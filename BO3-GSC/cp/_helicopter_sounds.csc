@@ -203,11 +203,11 @@ function init_heli_sounds_heli_guard() {
   self.warning_tag = undefined;
 }
 
-function sound_linkto(parent, tag) {
+function sound_linkTo(parent, tag) {
   if(isDefined(tag)) {
-    self linkto(parent, tag);
+    self linkTo(parent, tag);
   } else {
-    self linkto(parent, "tag_body");
+    self linkTo(parent, "tag_body");
   }
 }
 
@@ -215,24 +215,24 @@ function setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3) {
   self.heli[bone_location] = spawnStruct();
   self.heli[bone_location].sound_type = type;
   self.heli[bone_location].run = spawn(0, self.origin, "script_origin");
-  self.heli[bone_location].run sound_linkto(self, tag);
+  self.heli[bone_location].run sound_linkTo(self, tag);
   self.heli[bone_location].run.alias = run;
   self thread heli_loop_sound_delete(self.heli[bone_location].run);
   if(isDefined(dmg1)) {
     self.heli[bone_location].idle = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].idle sound_linkto(self, tag);
+    self.heli[bone_location].idle sound_linkTo(self, tag);
     self.heli[bone_location].idle.alias = dmg1;
     self thread heli_loop_sound_delete(self.heli[bone_location].dmg1);
   }
   if(isDefined(dmg2)) {
     self.heli[bone_location].idle = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].idle sound_linkto(self, tag);
+    self.heli[bone_location].idle sound_linkTo(self, tag);
     self.heli[bone_location].idle.alias = dmg2;
     self thread heli_loop_sound_delete(self.heli[bone_location].dmg2);
   }
   if(isDefined(dmg3)) {
     self.heli[bone_location].idle = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].idle sound_linkto(self, tag);
+    self.heli[bone_location].idle sound_linkTo(self, tag);
     self.heli[bone_location].idle.alias = dmg3;
     self thread heli_loop_sound_delete(self.heli[bone_location].dmg3);
   }
@@ -636,7 +636,7 @@ function get_heli_sound_ent(sound_ent) {
       tag = self.warning_tag;
     }
     sound_ent = spawn(0, self gettagorigin(tag), "script_origin");
-    sound_ent linkto(self, tag);
+    sound_ent linkTo(self, tag);
     self thread heli_sound_ent_delete(sound_ent);
   }
   return sound_ent;
@@ -675,9 +675,9 @@ function drone_up_down_transition() {
   either = qr_ent_either playLoopSound("veh_qrdrone_vertical");
   qr_ent_either setloopstate("veh_qrdrone_vertical", 0, 0);
   tag = "tag_body";
-  qr_ent_up linkto(self, tag);
-  qr_ent_down linkto(self, tag);
-  qr_ent_either linkto(self, tag);
+  qr_ent_up linkTo(self, tag);
+  qr_ent_down linkTo(self, tag);
+  qr_ent_either linkTo(self, tag);
   self thread drone_button_watch();
   while(true) {
     last_pos = self.origin[2];
@@ -717,7 +717,7 @@ function drone_rotate_angle(heli_type, heli_part) {
   angle = qr_ent_angle playLoopSound("veh_qrdrone_idle_rotate");
   setsoundvolume(angle, 0);
   tag = "tag_body";
-  qr_ent_angle linkto(self, tag);
+  qr_ent_angle linkTo(self, tag);
   while(true) {
     last_angle = abs(self.angles[1]);
     wait(0.1);

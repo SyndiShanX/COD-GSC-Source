@@ -222,10 +222,10 @@ slums_anims() {
 }
 
 rotate_the_clinic_door(guy) {
-  e_door = getent("clinic_frontdoor", "targetname");
-  e_rotator = getent("clinic_door_rotator", "targetname");
-  e_door linkto(e_rotator);
-  e_rotator rotateyaw(-110, 0.8, 0.05, 0.75);
+  e_door = getEnt("clinic_frontdoor", "targetname");
+  e_rotator = getEnt("clinic_door_rotator", "targetname");
+  e_door linkTo(e_rotator);
+  e_rotator rotateYaw(-110, 0.8, 0.05, 0.75);
 }
 
 switch_sack(guy) {

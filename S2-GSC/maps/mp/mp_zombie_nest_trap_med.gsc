@@ -4,7 +4,7 @@
 ***********************************************/
 
 func_9CB8(param_00) {
-  param_00.var_9CB9 = getent("electric_trap_origin", "targetname");
+  param_00.var_9CB9 = getEnt("electric_trap_origin", "targetname");
   level.var_9CB8 = param_00.var_9CB9;
   level.var_9CB8.var_9C92 = param_00;
   level.var_9CB8.var_9CBB = param_00.var_0165;
@@ -35,7 +35,7 @@ func_2FF4() {
       self.var_16F7.var_0116 = self.var_0116;
       self.var_16F2.var_0116 = self gettagorigin("TAG_Chains_0" + var_00 + 1);
       var_01 = launchbeam("zmb_electricity_reg_beam_med", self.var_16F7, "tag_origin", self.var_16F2, "tag_origin");
-      self.var_16F7 moveto(self.var_16F2.var_0116, 1);
+      self.var_16F7 moveTo(self.var_16F2.var_0116, 1);
       wait(1);
       var_01 delete();
     }

@@ -41,10 +41,10 @@ init_quests() {
 }
 
 init_objects() {
-  level.ls_door = getent("ls_door", "targetname");
-  level.ls_door disconnectpaths();
-  level.var_ff3d8977 = getent(level.ls_door.target, "targetname");
-  level.var_ff3d8977 disconnectpaths();
+  level.ls_door = getEnt("ls_door", "targetname");
+  level.ls_door disconnectPaths();
+  level.var_ff3d8977 = getEnt(level.ls_door.target, "targetname");
+  level.var_ff3d8977 disconnectPaths();
 }
 
 on_player_connect() {
@@ -111,11 +111,11 @@ narrative_room_hidden(var_a276c861) {
 function_13c87ace(var_a276c861, var_19e802fa) {}
 
 narrative_room(var_a276c861) {
-  spawn_instant_revive = getent("ls_blocker", "targetname");
+  spawn_instant_revive = getEnt("ls_blocker", "targetname");
   spawn_instant_revive delete();
   level.var_ff3d8977 connectpaths();
   level.var_ff3d8977 delete();
-  level.ls_door rotateyaw(90, 1.6);
+  level.ls_door rotateYaw(90, 1.6);
   level.ls_door connectpaths();
   level clientfield::set("" + #"narrative_room", 1);
 }

@@ -525,7 +525,7 @@ getcurrent_groupstruct() {
 get_wall_offset(angles) {
   trace = level.player_view_trace;
   point = trace["position"];
-  offset = 16 * vectornormalize(trace["normal"]);
+  offset = 16 * vectorNormalize(trace["normal"]);
 
   dest_point = point + offset;
 
@@ -548,12 +548,12 @@ find_corner_snap(dest_point, angles) {
 
   sidevecinc = 32;
 
-  half_right_vec = 16 * dir * vectornormalize(anglestoright(angles));
+  half_right_vec = 16 * dir * vectorNormalize(anglestoright(angles));
 
   for(i = 1; i < 15; i++) {
     start_dest = org_start_dest;
     dest_point = start_dest;
-    rightvec = i * sidevecinc * dir * vectornormalize(anglestoright(angles));
+    rightvec = i * sidevecinc * dir * vectorNormalize(anglestoright(angles));
     trace = bullettrace_but_not_nodes(dest_point, dest_point + (rightvec), 0);
     dest_point = dest_point + (trace["fraction"] * rightvec);
     if(trace["fraction"] < 1) {
@@ -563,7 +563,7 @@ find_corner_snap(dest_point, angles) {
       line(start_dest, dest_point, (0, 1, 0));
 
     start_dest = dest_point;
-    forwardvec = 32 * vectornormalize(anglesToForward(angles));
+    forwardvec = 32 * vectorNormalize(anglesToForward(angles));
     trace = bullettrace_but_not_nodes(dest_point, dest_point + (forwardvec), 0);
 
     back_frac = trace["fraction"];

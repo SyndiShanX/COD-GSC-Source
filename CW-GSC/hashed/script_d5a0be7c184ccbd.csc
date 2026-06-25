@@ -28,7 +28,7 @@ function event_handler[event_cc819519] function_686b88aa(eventstruct) {
   var_d4b173d0 = undefined;
 
   while(!isDefined(var_d4b173d0)) {
-    var_d4b173d0 = getent(0, "audio_cricket_trigger", "targetname");
+    var_d4b173d0 = getEnt(0, "audio_cricket_trigger", "targetname");
     waitframe(1);
   }
 

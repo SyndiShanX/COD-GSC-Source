@@ -18,7 +18,7 @@ watchForLaserMovement(normal) {
 
   last_vec = self GetPlayerAngles();
   sound_ent = spawn("script_origin", level.solar_reflector_cam_tag.origin);
-  sound_ent LinkTo(level.solar_reflector_cam_tag);
+  sound_ent linkTo(level.solar_reflector_cam_tag);
   self thread wait_for_laser_end(sound_ent);
 
   while(1) {

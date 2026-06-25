@@ -80,7 +80,7 @@ addmodeltoplayer(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 setModel("mw_rangefinder_soldier");
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 thread watchrangefinderend();
 }
 

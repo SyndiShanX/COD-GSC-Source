@@ -153,7 +153,7 @@ function_69f309b(n_to_spawn = 1, str_type, func_on_spawned, b_force_spawn = 0, v
       return n_spawned;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     if(isDefined(var_eb3a8721)) {
       s_spawn_loc = var_eb3a8721;
@@ -191,7 +191,7 @@ function_2efc00db(b_force_spawn = 0, var_eb3a8721) {
     return undefined;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(var_eb3a8721)) {
     s_spawn_loc = var_eb3a8721;
@@ -227,7 +227,7 @@ function_c9cd31(b_force_spawn = 0, var_eb3a8721) {
     return undefined;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(var_eb3a8721)) {
     s_spawn_loc = var_eb3a8721;

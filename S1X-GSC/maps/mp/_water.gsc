@@ -79,7 +79,7 @@ OnPlayerConnectFunctions() {
 }
 
 create_clientside_water_ents() {
-  water_ent_struct = getstruct(self.target, "targetname");
+  water_ent_struct = getStruct(self.target, "targetname");
   AssertEx(isDefined(water_ent_struct), "waterline needs to be defined. Place a script_struct at the height of the waterline and link your underwater trigger to it.");
 
   water_ent_struct.origin = water_ent_struct.origin + (0, 0, level.waterline_offset);
@@ -319,7 +319,7 @@ inWaterWake(underwater) {
     }
 
     if(speed > 5) {
-      movementDir = VectorNormalize((velocity[0], velocity[1], 0));
+      movementDir = vectorNormalize((velocity[0], velocity[1], 0));
       forwardVec = anglesToForward(VectorToAngles(movementDir) + (270, 180, 0));
       point = (self.origin[0], self.origin[1], getWaterLine(underwater)) + ((speed / 4) * movementDir);
       playFX(level._effect["water_wake"], point, forwardVec);
@@ -395,7 +395,7 @@ GetPlayerEyeHeight() {
 }
 
 GetWaterLine(trig) {
-  water_line_struct = getstruct(trig.target, "targetname");
+  water_line_struct = getStruct(trig.target, "targetname");
   water_line = water_line_struct.origin[2];
 
   return water_line;

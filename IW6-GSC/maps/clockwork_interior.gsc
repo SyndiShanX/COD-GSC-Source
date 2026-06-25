@@ -128,7 +128,7 @@ handle_dog_interior_attack() {
 setup_vault_props() {
   level.tablet_prop = maps\_utility::spawn_anim_model("vault_tablet_prop");
   level.tablet = maps\_utility::spawn_anim_model("vault_tablet");
-  level.tablet linkto(level.tablet_prop, "J_prop_1");
+  level.tablet linkTo(level.tablet_prop, "J_prop_1");
   level.tablet hide();
   playFXOnTag(level._effect["vfx/moments/clockwork/vfx_vault_tablet_screen"], level.tablet_prop, "J_prop_1");
   level.thermite1 = maps\_utility::spawn_anim_model("vault_thermite1");
@@ -145,21 +145,21 @@ setup_vault_props() {
   maps\clockwork_code::setup_drill(0);
 
   foreach(var_1 in level.drill_pickup) {
-    var_1 linkto(level.drill_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
+    var_1 linkTo(level.drill_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
   level.vault_props = maps\_utility::make_array(level.thermite1, level.thermite2, level.charge1, level.charge2);
   level.spool_prop = maps\_utility::spawn_anim_model("vault_spool_prop");
   level.spool = maps\_utility::spawn_anim_model("vault_spool");
-  level.spool linkto(level.spool_prop, "J_prop_1");
+  level.spool linkTo(level.spool_prop, "J_prop_1");
   level.spool hide();
   level.glowstick1_prop = maps\_utility::spawn_anim_model("vault_glowstick1_prop");
   level.glowstick1 = maps\_utility::spawn_anim_model("vault_glowstick1");
-  level.glowstick1 linkto(level.glowstick1_prop, "J_prop_1");
+  level.glowstick1 linkTo(level.glowstick1_prop, "J_prop_1");
   level.glowstick1 hide();
   level.glowstick2_prop = maps\_utility::spawn_anim_model("vault_glowstick2_prop");
   level.glowstick2 = maps\_utility::spawn_anim_model("vault_glowstick2");
-  level.glowstick2 linkto(level.glowstick2_prop, "J_prop_1");
+  level.glowstick2 linkTo(level.glowstick2_prop, "J_prop_1");
   level.glowstick2 hide();
 }
 
@@ -181,7 +181,7 @@ new_vault_scene() {
   common_scripts\utility::flag_wait("FLAG_eyes_and_ears_complete");
   thread vault_vo();
   common_scripts\utility::array_thread(level.allies, maps\_utility::disable_ai_color);
-  var_0 = getent("vault_door_scene", "targetname");
+  var_0 = getEnt("vault_door_scene", "targetname");
   level.allies[0].animname = "baker";
   level.allies[1].animname = "keegan";
   level.allies[2].animname = "cypher";
@@ -231,7 +231,7 @@ new_vault_scene() {
   common_scripts\utility::array_thread(level.allies, maps\_utility::enable_ai_color);
 
   if(common_scripts\utility::flag("vault_blast_area")) {
-    var_3 = getent("smoke_spot", "targetname");
+    var_3 = getEnt("smoke_spot", "targetname");
     level.player dodamage(level.player.health - 5, var_3.origin);
     level.player shellshock("default", 5);
     level.player setstance("prone");
@@ -240,7 +240,7 @@ new_vault_scene() {
     level.player pushplayervector((0, 0, 0), 1);
   }
 
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   maps\_utility::battlechatter_on("axis");
   maps\_utility::battlechatter_on("allies");
   maps\_utility::set_team_bcvoice("allies", "taskforce");
@@ -280,10 +280,10 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
   var_9 = 1;
   var_10 = undefined;
   var_11 = undefined;
-  var_12 = getent("vault_door_scene", "targetname");
+  var_12 = getEnt("vault_door_scene", "targetname");
   var_13 = spawn("script_origin", (0, 0, 0));
   var_14 = spawn("script_origin", (0, 0, 0));
-  var_15 = getent("pip_xray_cam", "targetname");
+  var_15 = getEnt("pip_xray_cam", "targetname");
   maps\_utility::enable_trigger_with_targetname(var_0);
 
   while(!common_scripts\utility::flag(var_2)) {
@@ -482,15 +482,15 @@ restore_grenade_weapons() {
 
 drill_fail_animation() {
   var_0 = [];
-  var_0[0] = getent("piston_01", "targetname");
-  var_0[1] = getent("piston_02", "targetname");
-  var_0[2] = getent("piston_03", "targetname");
-  var_0[3] = getent("piston_04", "targetname");
+  var_0[0] = getEnt("piston_01", "targetname");
+  var_0[1] = getEnt("piston_02", "targetname");
+  var_0[2] = getEnt("piston_03", "targetname");
+  var_0[3] = getEnt("piston_04", "targetname");
   var_1 = [];
-  var_1[0] = getent("cog_01", "targetname");
-  var_1[1] = getent("cog_02", "targetname");
-  var_1[2] = getent("cog_03", "targetname");
-  var_1[3] = getent("cog_04", "targetname");
+  var_1[0] = getEnt("cog_01", "targetname");
+  var_1[1] = getEnt("cog_02", "targetname");
+  var_1[2] = getEnt("cog_03", "targetname");
+  var_1[3] = getEnt("cog_04", "targetname");
   var_1[0] rotatepitch(90, 1);
   var_1[1] rotatepitch(90, 1.5);
   var_1[2] rotatepitch(-90, 1);
@@ -543,7 +543,7 @@ handle_drilling(var_0, var_1) {
   var_8 = (0, 4, 0);
   var_9 = 0;
   var_10 = 1;
-  var_11 = getent("pip_drill", "targetname");
+  var_11 = getEnt("pip_drill", "targetname");
   var_12 = var_11.angles;
 
   if(isDefined(level.drill_reset_pos)) {
@@ -578,7 +578,7 @@ handle_drilling(var_0, var_1) {
         if(var_15 > var_16) {
           if(!var_7) {
             thread drilled_good_vo(var_0);
-            level.player playrumbleonentity("drill_through");
+            level.player playRumbleOnEntity("drill_through");
             var_7 = 1;
             level.player thread maps\_utility::play_sound_on_entity("clkw_scn_vault_drill_safezone_beep");
           }
@@ -606,8 +606,8 @@ handle_drilling(var_0, var_1) {
           level.player maps\_utility::play_sound_on_entity("clkw_scn_vault_drill_gears");
           thread vault_fail_vo();
           thread maps\clockwork_code::screenshakefade(1, 0.5);
-          level.player playrumbleonentity("drill_through");
-          level.player playrumbleonentity("drill_through");
+          level.player playRumbleOnEntity("drill_through");
+          level.player playRumbleOnEntity("drill_through");
 
           if(level.drill_bink) {
             setDvar("ui_deadquote", &"CLOCKWORK_QUOTE_BACKPLATE");
@@ -744,10 +744,10 @@ handle_misc_drill_details() {
       if(level.player attackButtonPressed()) {
         if((common_scripts\utility::flag("drill1_start") || common_scripts\utility::flag("drill2_start")) && (level.player adsButtonPressed() || level.player attackButtonPressed())) {
           thread maps\clockwork_code::screenshakefade(0.15, 0.5);
-          level.player playrumbleonentity("drill_vault");
+          level.player playRumbleOnEntity("drill_vault");
         } else if(!level.aiming_at_ally) {
           thread maps\clockwork_code::screenshakefade(0.1, 0.5);
-          level.player playrumbleonentity("drill_normal");
+          level.player playRumbleOnEntity("drill_normal");
         }
       }
 
@@ -781,7 +781,7 @@ get_animating_actors(var_0, var_1) {
 }
 
 ally_animate_vault_scene() {
-  var_0 = getent("vault_door_scene", "targetname");
+  var_0 = getEnt("vault_door_scene", "targetname");
   var_1 = ally_vault_props();
   var_2 = common_scripts\utility::array_add(var_1, self);
   self waittill("anim_reach_complete");
@@ -805,7 +805,7 @@ ally_animate_vault_scene() {
   }
 
   if(self.animname == "cypher") {
-    level.tablet linkto(level.tablet_prop, "J_prop_1");
+    level.tablet linkTo(level.tablet_prop, "J_prop_1");
   }
 
   var_3 = get_animating_actors(var_2, "vault_betweener");
@@ -841,7 +841,7 @@ ally_animate_vault_scene() {
 }
 
 animate_vault_door() {
-  var_0 = getent("vault_door_scene", "targetname");
+  var_0 = getEnt("vault_door_scene", "targetname");
   var_1 = maps\_utility::make_array(level.vault_door);
   common_scripts\utility::flag_wait("drill2_complete");
   var_0 notify("animate_vault");
@@ -918,7 +918,7 @@ animate_vault_door() {
   }
 
   thread maps\clockwork_code::screenshakefade(0.45, 1.25, 0.25, 0.8);
-  var_8 = getent("smoke_spot", "targetname");
+  var_8 = getEnt("smoke_spot", "targetname");
   playFX(level._effect["vault_smoke"], var_8.origin);
   common_scripts\utility::exploder(1001);
   common_scripts\utility::exploder(1005);
@@ -979,8 +979,8 @@ stop_scan(var_0) {
 }
 
 vault_ceiling_lights(var_0) {
-  var_1 = getent("vault_ceiling_light_right", "targetname");
-  var_2 = getent("vault_ceiling_light_left", "targetname");
+  var_1 = getEnt("vault_ceiling_light_right", "targetname");
+  var_2 = getEnt("vault_ceiling_light_left", "targetname");
   var_1.animname = "vault_light_r";
   var_1 maps\_utility::assign_animtree();
   var_2.animname = "vault_light_l";
@@ -997,14 +997,14 @@ animate_vault_light(var_0) {
 
 setup_vault_door(var_0) {
   level.drill_bink = 1;
-  level.world_vault_door = getent("model_vault_door", "targetname");
+  level.world_vault_door = getEnt("model_vault_door", "targetname");
   level.world_vault_door delete();
-  level.world_vault_clip = getent("vault_door_clip", "targetname");
+  level.world_vault_clip = getEnt("vault_door_clip", "targetname");
   level.vault_door = maps\_utility::spawn_anim_model("vault_door");
   level.vault_door.animname = "vault_door";
 
   if(isDefined(var_0) && var_0 == 1) {
-    var_1 = getent("vault_door_scene", "targetname");
+    var_1 = getEnt("vault_door_scene", "targetname");
     var_1 thread maps\_anim::anim_loop_solo(level.vault_door, "vault_closed", "animate_vault");
     maps\clockwork_code::toggle_visibility("vault_ceiling_structure_damaged", 0);
     maps\clockwork_code::toggle_visibility("vault_frame_damage", 0);
@@ -1013,10 +1013,10 @@ setup_vault_door(var_0) {
   }
 
   level.chalk_mark = [];
-  level.chalk_mark[0] = getent("chalk_swipe_1a", "targetname");
-  level.chalk_mark[1] = getent("chalk_swipe_1b", "targetname");
-  level.chalk_mark[2] = getent("chalk_swipe_2a", "targetname");
-  level.chalk_mark[3] = getent("chalk_swipe_2b", "targetname");
+  level.chalk_mark[0] = getEnt("chalk_swipe_1a", "targetname");
+  level.chalk_mark[1] = getEnt("chalk_swipe_1b", "targetname");
+  level.chalk_mark[2] = getEnt("chalk_swipe_2a", "targetname");
+  level.chalk_mark[3] = getEnt("chalk_swipe_2b", "targetname");
   common_scripts\utility::array_thread(level.chalk_mark, maps\clockwork_code::safe_hide);
   thread align_chalk_marks();
 }
@@ -1037,10 +1037,10 @@ align_chalk_marks() {
 
 showdrillhole(var_0) {
   var_1 = level.vault_door gettagorigin(var_0);
-  var_2 = getent("drill_hole_01", "targetname");
+  var_2 = getEnt("drill_hole_01", "targetname");
 
   if(var_0 != "TAG_FX_XMark_RI") {
-    var_2 = getent("drill_hole_02", "targetname");
+    var_2 = getEnt("drill_hole_02", "targetname");
   }
 
   var_2.origin = var_1;
@@ -1174,7 +1174,7 @@ breach_charge_fx_activate() {
 
 open_vault(var_0, var_1) {
   if(!isDefined(var_1)) {
-    var_1 = getent("vault_door_scene", "targetname");
+    var_1 = getEnt("vault_door_scene", "targetname");
   }
 
   if(isDefined(var_0) && var_0 == 1) {
@@ -1284,7 +1284,7 @@ setup_interior_combat() {
   maps\clockwork_code::setup_player();
   maps\clockwork_code::spawn_allies();
   level.player switchtoweapon("cz805bren+reflex_sp+silencer_sp");
-  var_0 = getent("vault_door_scene", "targetname");
+  var_0 = getEnt("vault_door_scene", "targetname");
   maps\_utility::disable_trigger_with_targetname("drill_spot1");
   maps\_utility::disable_trigger_with_targetname("drill_spot2");
   setup_vault_door();
@@ -1293,7 +1293,7 @@ setup_interior_combat() {
   common_scripts\utility::flag_set("interior_finished");
   thread handle_pip_cams();
   maps\_utility::vision_set_changes("clockwork_indoor", 0);
-  var_1 = getent("smoke_spot", "targetname");
+  var_1 = getEnt("smoke_spot", "targetname");
   playFX(level._effect["vault_smoke"], var_1.origin);
   maps\_utility::battlechatter_off("allies");
   maps\_utility::battlechatter_off("axis");
@@ -1369,7 +1369,7 @@ spawn_discovery_guys() {
   level.discovery_guys = maps\clockwork_code::array_spawn_targetname_allow_fail("discovery_grunt", 1);
   level.override_dog_enemy = level.discovery_guys[0];
   thread maps\clockwork_code::ai_array_killcount_flag_set(level.discovery_guys, 2, "end_discovery");
-  var_0 = common_scripts\utility::getstruct("discovery_scene", "targetname");
+  var_0 = common_scripts\utility::getStruct("discovery_scene", "targetname");
   var_1 = 1;
 
   foreach(var_3 in level.discovery_guys) {
@@ -1395,7 +1395,7 @@ discovery_guys_wakeup() {
   level.discovery_guys = maps\_utility::array_removedead_or_dying(level.discovery_guys);
 
   foreach(var_1 in level.discovery_guys) {
-    var_1 maps\_utility::anim_stopanimscripted();
+    var_1 maps\_utility::anim_stopanimScripted();
     var_1 maps\_utility::set_ignoreall(0);
     var_1 getenemyinfo(level.player);
   }
@@ -1541,7 +1541,7 @@ setup_interior_cqb() {
 
 begin_interior_cqb() {
   common_scripts\utility::flag_set("aud_stop_interior_combat_pa");
-  var_0 = getent("ai_closet_clip", "targetname");
+  var_0 = getEnt("ai_closet_clip", "targetname");
   var_0 notsolid();
   var_0 connectpaths();
   maps\_utility::battlechatter_on("axis");
@@ -1550,22 +1550,22 @@ begin_interior_cqb() {
   thread handle_cqb_enemies();
   thread handle_cqb_allies();
   thread spin_fans("interior_cqb_finished");
-  var_1 = getent("cqb_exit_clip", "targetname");
+  var_1 = getEnt("cqb_exit_clip", "targetname");
   var_1 notsolid();
-  var_2 = getent("cqb_exterior_door", "targetname");
+  var_2 = getEnt("cqb_exterior_door", "targetname");
   var_2.animname = "cqb_ext_door";
   var_2 maps\_utility::assign_animtree();
-  var_3 = getent("combat_exit_door_clip2", "targetname");
-  var_3 linkto(var_2);
-  var_4 = common_scripts\utility::getstruct("cqb_door_kick1", "targetname");
+  var_3 = getEnt("combat_exit_door_clip2", "targetname");
+  var_3 linkTo(var_2);
+  var_4 = common_scripts\utility::getStruct("cqb_door_kick1", "targetname");
   var_4 maps\_anim::anim_first_frame_solo(var_2, "slow_open_door");
   var_5 = maps\_utility::spawn_anim_model("cqb_int_door");
-  var_6 = getent("combat_exit_door_clip1", "targetname");
-  var_7 = getent("combat_exit_inside_door", "targetname");
+  var_6 = getEnt("combat_exit_door_clip1", "targetname");
+  var_7 = getEnt("combat_exit_inside_door", "targetname");
   var_4 maps\_anim::anim_first_frame_solo(var_5, "bust_door");
   wait 0.01;
-  var_7 linkto(var_5, "J_prop_1");
-  var_6 linkto(var_5, "J_prop_1");
+  var_7 linkTo(var_5, "J_prop_1");
+  var_6 linkTo(var_5, "J_prop_1");
   var_8 = level.allies[1];
   var_4 maps\_anim::anim_generic_reach(var_8, "bust_door");
   thread maps\clockwork_audio::cqb_door_shove();
@@ -1607,9 +1607,9 @@ handle_closet_clip(var_0) {
   common_scripts\utility::flag_set("hesh_ready_for_catwalks");
   var_0.goalradius = var_0.oldgoalradius;
   common_scripts\utility::flag_wait("at_slow_door");
-  var_2 = getent("ai_closet_clip", "targetname");
+  var_2 = getEnt("ai_closet_clip", "targetname");
   var_2 solid();
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
 }
 
 spin_fans(var_0) {
@@ -1634,7 +1634,7 @@ ambient_road_vehicles() {
 }
 
 wait_at_slow_door() {
-  var_0 = getent("cqb_door_kick2", "targetname");
+  var_0 = getEnt("cqb_door_kick2", "targetname");
   self.animname = "generic";
   var_0 maps\_anim::anim_reach_and_approach_solo(self, "slow_open_door_idle", undefined, "Cover Right");
   common_scripts\utility::flag_set("at_slow_door");
@@ -1642,8 +1642,8 @@ wait_at_slow_door() {
   common_scripts\utility::flag_wait("shut_catwalk_door");
   thread maps\clockwork_audio::cqb_door_open_slow();
   var_0 notify("stop_waiting");
-  var_0 = common_scripts\utility::getstruct("cqb_door_kick1", "targetname");
-  var_1 = getent("cqb_exterior_door", "targetname");
+  var_0 = common_scripts\utility::getStruct("cqb_door_kick1", "targetname");
+  var_1 = getEnt("cqb_exterior_door", "targetname");
   var_1.animname = "cqb_ext_door";
   var_1 maps\_utility::assign_animtree();
   thread maps\clockwork_fx::turn_effects_on("ch_industrial_light_02_on_red", "fx/lights/bulb_single_offset_red");
@@ -1651,7 +1651,7 @@ wait_at_slow_door() {
   common_scripts\utility::exploder(200);
   common_scripts\utility::exploder(850);
   common_scripts\utility::exploder(6400);
-  var_2 = getent("combat_exit_door_clip2", "targetname");
+  var_2 = getEnt("combat_exit_door_clip2", "targetname");
   common_scripts\utility::exploder(40);
   var_2 notsolid();
   var_2 connectpaths();
@@ -1665,7 +1665,7 @@ wait_at_slow_door() {
 }
 
 door_closer_guy(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("cqb_door_kick1", "targetname");
+  var_2 = common_scripts\utility::getStruct("cqb_door_kick1", "targetname");
   var_2 maps\_anim::anim_generic_reach(self, "shut_door_start");
   var_2 maps\_anim::anim_generic(self, "shut_door_start");
   var_3 = maps\_utility::make_array(self, var_0);
@@ -1679,14 +1679,14 @@ door_closer_guy(var_0, var_1) {
 
   common_scripts\utility::flag_set("shut_catwalk_door");
   thread maps\clockwork_audio::cqb_door_close_behind();
-  var_4 = getent("cqb_exit_clip", "targetname");
+  var_4 = getEnt("cqb_exit_clip", "targetname");
   var_4 notsolid();
   thread turn_off_safety_clip();
   self.animname = "generic";
   var_2 maps\_anim::anim_single(var_3, "shut_door_end");
-  var_4 = getent("cqb_exit_clip", "targetname");
+  var_4 = getEnt("cqb_exit_clip", "targetname");
   var_4 notsolid();
-  var_1 disconnectpaths();
+  var_1 disconnectPaths();
   maps\_utility::enable_ai_color();
   thread maps\clockwork_code::transient_switch_to_end();
   var_5 = getaiarray("axis");
@@ -1702,13 +1702,13 @@ door_closer_guy(var_0, var_1) {
 
 turn_off_safety_clip() {
   wait 2;
-  var_0 = getent("player_door_guy_clip", "targetname");
+  var_0 = getEnt("player_door_guy_clip", "targetname");
   var_0 notsolid();
 }
 
 catwalk_melee() {
   var_0 = level.allies[1];
-  var_1 = getent("cqb_guys5", "targetname");
+  var_1 = getEnt("cqb_guys5", "targetname");
   var_2 = var_1 maps\_utility::spawn_ai(1);
   var_2.ignoreme = 1;
   var_2.no_dog_target = 1;
@@ -1717,7 +1717,7 @@ catwalk_melee() {
   var_0.animname = "winner";
   var_2.animname = "loser";
   var_4 = maps\_utility::make_array(var_0, var_2);
-  var_5 = common_scripts\utility::getstruct("catwalk_melee_org", "targetname");
+  var_5 = common_scripts\utility::getStruct("catwalk_melee_org", "targetname");
   var_5 thread maps\_anim::anim_first_frame_solo(var_2, "catwalk_melee");
   var_2 maps\_utility::magic_bullet_shield();
   var_2 thread catwalk_melee_abort();
@@ -1755,7 +1755,7 @@ catwalk_melee_abort() {
   self endon("ambushing");
   common_scripts\utility::flag_wait("catwalk_melee_abort");
   common_scripts\utility::waitframe();
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   maps\_utility::stop_magic_bullet_shield();
   thread maps\_anim::anim_generic(self, "surprise_stop");
   self.ignoreall = 0;
@@ -1766,7 +1766,7 @@ catwalk_melee_abort() {
 
 rotunda_kill() {
   var_0 = level.allies[1];
-  var_1 = common_scripts\utility::getstruct("melee_moment", "targetname");
+  var_1 = common_scripts\utility::getStruct("melee_moment", "targetname");
   common_scripts\utility::flag_wait("rotunda_runners");
   maps\_utility::autosave_by_name("pre_rotunda");
   var_2 = maps\clockwork_code::array_spawn_targetname_allow_fail("run_squad2", 1);
@@ -1775,7 +1775,7 @@ rotunda_kill() {
   wait 1;
   level.rotunda_knife = spawn("script_model", (0, 0, 0));
   level.rotunda_knife setModel("weapon_commando_knife");
-  level.rotunda_knife linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  level.rotunda_knife linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
   level.rotunda_knife hide();
   common_scripts\utility::flag_wait("hold_fire");
 
@@ -1876,7 +1876,7 @@ handle_troll_player(var_0) {
 
 troll_stairs_trigger() {
   level endon("cqb_guys7");
-  var_0 = getent("rotunda_stairs", "targetname");
+  var_0 = getEnt("rotunda_stairs", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1957,7 +1957,7 @@ interrupt_rotunda_kill() {
   }
   self.player_interrupted = 1;
   self.noragdoll = 0;
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 
   if(isDefined(self.stabbed)) {
     return;
@@ -1977,7 +1977,7 @@ rotunda_kill_gun_sync() {
   maps\_utility::gun_remove();
   var_0 = spawn("script_model", self.origin);
   var_0 setModel("weapon_sc2010");
-  var_0 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   thread unlink_gun(var_0);
   common_scripts\utility::waittill_any("death", "damage", "cancel");
 
@@ -2001,7 +2001,7 @@ unlink_gun(var_0) {
 
 interrupt_ally_rotunda_kill(var_0) {
   level waittill("rotunda_kill_interrupted");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   self.ignoreme = 0;
   self.ignoreall = 0;
   maps\_utility::enable_ai_color();

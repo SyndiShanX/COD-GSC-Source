@@ -726,7 +726,7 @@ registerhud_message_electricity_(entity, mocompanim, mocompanimblendouttime, moc
   entity collidewithactors(0);
 
   if(isDefined(entity.favoriteenemy)) {
-    dirtoenemy = vectornormalize(entity.favoriteenemy.origin - entity.origin);
+    dirtoenemy = vectorNormalize(entity.favoriteenemy.origin - entity.origin);
     entity forceteleport(entity.origin, vectortoangles(dirtoenemy));
   }
 
@@ -761,7 +761,7 @@ function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       }
     }
 
-    var_83fd29ee = vectornormalize(predictedenemypos - entity.origin);
+    var_83fd29ee = vectorNormalize(predictedenemypos - entity.origin);
     var_1efb2395 = predictedenemypos - var_83fd29ee * entity getpathfindingradius();
     self.meleeinfo.adjustedendpos = var_1efb2395;
     var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
@@ -785,7 +785,7 @@ function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
       myforward = anglesToForward(self.angles);
       var_1c3641f2 = (entity.favoriteenemy.origin[0], entity.favoriteenemy.origin[1], entity.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - entity.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - entity.origin);
       zdiff = self.meleeinfo.var_cb28f380[2] - entity.favoriteenemy.origin[2];
       withinzrange = abs(zdiff) <= 45;
       withinfov = vectordot(myforward, dirtoenemy) > cos(30);
@@ -810,7 +810,7 @@ function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
         starttime = floor(starttime / timestep);
         stoptime = floor(stoptime / timestep);
         adjustduration = stoptime - starttime;
-        self.meleeinfo.var_10b8b6d1 = vectornormalize(self.meleeinfo.adjustedendpos - self.meleeinfo.var_cb28f380);
+        self.meleeinfo.var_10b8b6d1 = vectorNormalize(self.meleeinfo.adjustedendpos - self.meleeinfo.var_cb28f380);
         self.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
         self.meleeinfo.var_425c4c8b = 1;
         self.meleeinfo.adjustmentstarted = 1;
@@ -844,7 +844,7 @@ mocompgladiatorleapend(entity, mocompanim, mocompanimblendouttime, mocompanimfla
 
 function_3137174f(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(entity.favoriteenemy)) {
-    to_enemy = vectornormalize(entity.favoriteenemy.origin - entity.origin);
+    to_enemy = vectorNormalize(entity.favoriteenemy.origin - entity.origin);
     angles_to_enemy = vectortoangles(to_enemy);
     entity orientmode("face angle", angles_to_enemy[1]);
   }
@@ -853,7 +853,7 @@ function_3137174f(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
 function_64cd870(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   if(isDefined(entity.favoriteenemy)) {
     if(!(isDefined(entity.var_ba481973) && entity.var_ba481973)) {
-      to_enemy = vectornormalize(entity.favoriteenemy.origin - entity.origin);
+      to_enemy = vectorNormalize(entity.favoriteenemy.origin - entity.origin);
       angles_to_enemy = vectortoangles(to_enemy);
       entity orientmode("face angle", angles_to_enemy[1]);
     }
@@ -1052,7 +1052,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 
         if(isDefined(level.var_36fff581) && !var_a7d0fdac) {
           self[[level.var_36fff581]](attacker);
-          playsoundatposition(#"hash_10711c56d7aa52d5", self.origin + (0, 0, 30));
+          playSoundAtPosition(#"hash_10711c56d7aa52d5", self.origin + (0, 0, 30));
         }
 
         if(var_dd54fdb1.hitloc == "helmet") {
@@ -1173,7 +1173,7 @@ function_fbc2806e(var_a4388d06, spin_dir) {
   time_to_target = dist_to_target / var_bb95ea0c;
   total_dist = 0;
   max_dist = 500;
-  var_7900b267 = vectornormalize(var_6a774ef - var_23f0c5b3);
+  var_7900b267 = vectorNormalize(var_6a774ef - var_23f0c5b3);
   axe playLoopSound(#"zmb_ai_gladiator_axe_lp");
   var_6b72740e = undefined;
   var_1fed6c4e = undefined;
@@ -1213,7 +1213,7 @@ function_fbc2806e(var_a4388d06, spin_dir) {
       break;
     }
 
-    axe moveto(move_pos, 0.1);
+    axe moveTo(move_pos, 0.1);
     wait 0.1;
     total_dist += interval_dist;
 
@@ -1223,12 +1223,12 @@ function_fbc2806e(var_a4388d06, spin_dir) {
 
     if(isDefined(enemy)) {
       enemy_eye_pos = enemy getEye();
-      var_8a2a3f91 = vectornormalize(enemy_eye_pos - var_23f0c5b3);
+      var_8a2a3f91 = vectorNormalize(enemy_eye_pos - var_23f0c5b3);
       var_61443c36 = vectortoangles(var_8a2a3f91);
       yaw_diff = abs(angleclamp180(var_285f5e05[1] - var_61443c36[1]));
 
       if(yaw_diff <= 10) {
-        var_7900b267 = vectornormalize(enemy_eye_pos - axe.origin);
+        var_7900b267 = vectorNormalize(enemy_eye_pos - axe.origin);
       }
     }
   }
@@ -1241,7 +1241,7 @@ function_78b33d6c(spin_dir = 1) {
 
   while(true) {
     spin_rate = 0.2;
-    self rotateyaw(360 * spin_dir, spin_rate);
+    self rotateYaw(360 * spin_dir, spin_rate);
     wait spin_rate;
   }
 }
@@ -1318,17 +1318,17 @@ function_137ed431(axe, var_a4388d06, spin_dir) {
   var_6cdcefc1 = interval_dist * interval_dist;
   total_dist = 0;
   max_dist = 500;
-  var_7900b267 = vectornormalize(tag_pos - axe.origin);
+  var_7900b267 = vectorNormalize(tag_pos - axe.origin);
   new_yaw = absangleclamp360(axe.angles[1] + 180);
   axe.angles = (0, new_yaw, 0);
   self thread function_c3712093(axe, var_a4388d06, var_bb95ea0c);
 
   while(true) {
     tag_pos = self gettagorigin(var_a4388d06);
-    var_7900b267 = vectornormalize(tag_pos - axe.origin);
+    var_7900b267 = vectorNormalize(tag_pos - axe.origin);
     move_pos = axe.origin + var_7900b267 * interval_dist;
     self function_88d65504(axe, var_7900b267, move_pos);
-    axe moveto(move_pos, 0.1);
+    axe moveTo(move_pos, 0.1);
     wait 0.1;
     var_8abea022 = distancesquared(axe.origin, tag_pos);
 
@@ -1546,7 +1546,7 @@ function_831dd6bd() {
 
           if(var_570a7c72 || var_eb1c6f1c) {
             remaininglength = deviationdistance - segmentlength;
-            seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
+            seedposition = path[index - 1] + vectorNormalize(path[index] - path[index - 1]) * remaininglength;
 
             recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:xc7>", self);
 

@@ -180,7 +180,7 @@ planefuelable() {
 
 planefuelable_think() {
   flag_wait("spawn_fuel_tanks");
-  t_plane_fuelable = getent("plane_fuelable_trigger", "targetname");
+  t_plane_fuelable = getEnt("plane_fuelable_trigger", "targetname");
   t_plane_fuelable trigger_on();
 
   for(i = 1; i <= 5; i++) {
@@ -427,7 +427,7 @@ play_plane_piece_call_and_response_vo(player, vo_alias_call) {
   player endon("death");
   player endon("disconnect");
   n_response_range = 1500;
-  players = getplayers();
+  players = getPlayers();
 
   if(!flag("story_vo_playing")) {
     flag_set("story_vo_playing");
@@ -460,15 +460,15 @@ play_plane_piece_call_and_response_vo(player, vo_alias_call) {
 roof_nag_vo() {
   level notify("roof_nag_vo");
   level endon("roof_nag_vo");
-  zone_roof = getent("zone_roof", "targetname");
-  zone_roof_infirmary = getent("zone_roof_infirmary", "targetname");
+  zone_roof = getEnt("zone_roof", "targetname");
+  zone_roof_infirmary = getEnt("zone_roof_infirmary", "targetname");
   n_roof_nag_wait = 60;
   n_roof_nag_max_times = 3;
 
   while(!flag("plane_built") && n_roof_nag_max_times > 0) {
     wait(n_roof_nag_wait);
     b_is_a_player_on_the_roof = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player istouching(zone_roof) || player istouching(zone_roof_infirmary)) {
@@ -492,11 +492,11 @@ roof_nag_vo() {
 
 oncrafted_plane(player) {
   level notify("crafted_" + self.piecename);
-  m_plane_hideable_engine = getent("plane_hideable_engine", "targetname");
-  m_plane_hideable_clothes_pile = getent("plane_hideable_clothes_pile", "targetname");
+  m_plane_hideable_engine = getEnt("plane_hideable_engine", "targetname");
+  m_plane_hideable_clothes_pile = getEnt("plane_hideable_clothes_pile", "targetname");
   m_plane_hideable_engine ghost();
   m_plane_hideable_clothes_pile ghost();
-  plane_craftable = getent("plane_craftable", "targetname");
+  plane_craftable = getEnt("plane_craftable", "targetname");
   plane_craftable hidepart("tag_support_upper");
   plane_craftable hidepart("tag_wings_down");
   plane_craftable hidepart("tag_wing_skins_down");
@@ -691,7 +691,7 @@ onfullycrafted_plane(player) {
 }
 
 onfullycrafted_packasplat(player) {
-  t_upgrade = getent("blundergat_upgrade", "targetname");
+  t_upgrade = getEnt("blundergat_upgrade", "targetname");
   t_upgrade.target = self.target;
   t_upgrade.origin = self.origin;
   t_upgrade.angles = self.angles;
@@ -820,7 +820,7 @@ alcatraz_craftable_trigger_think(trigger_targetname, equipname, weaponname, trig
 }
 
 alcatraz_setup_unitrigger_craftable(trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
-  trig = getent(trigger_targetname, "targetname");
+  trig = getEnt(trigger_targetname, "targetname");
 
   if(!isDefined(trig)) {
     return;
@@ -903,7 +903,7 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
   unitrigger_stub.zombie_weapon_upgrade = trig.zombie_weapon_upgrade;
 
   if(isDefined(unitrigger_stub.target)) {
-    unitrigger_stub.model = getent(unitrigger_stub.target, "targetname");
+    unitrigger_stub.model = getEnt(unitrigger_stub.target, "targetname");
 
     if(isDefined(unitrigger_stub.model)) {
       if(isDefined(unitrigger_stub.zombie_weapon_upgrade)) {

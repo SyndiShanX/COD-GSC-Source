@@ -14,9 +14,9 @@ scene_phase_2_end_models() {
   level waittill("globe_up");
   show_globe(1, 0, 0);
   holo_table_exploder_switch(112);
-  globe = getent("world_globe", "targetname");
-  globe rotateto(level.m_rts_map_angle["so_rts_afghanistan"], 1.0, 0.2, 0.2);
-  afghanistan = getent("afghanistan", "script_noteworthy");
+  globe = getEnt("world_globe", "targetname");
+  globe rotateTo(level.m_rts_map_angle["so_rts_afghanistan"], 1.0, 0.2, 0.2);
+  afghanistan = getEnt("afghanistan", "script_noteworthy");
   afghanistan show();
   afghanistan thread holo_table_prop_blink_on();
   level waittill("kabul_up");
@@ -48,14 +48,14 @@ scene_pre_briefing() {
   player_body attach_data_glove();
 
   if(scene_name == "sf_b_both_safe") {
-    briggs = getent("briggs_ai", "targetname");
+    briggs = getEnt("briggs_ai", "targetname");
     briggs attach("p6_anim_resume", "tag_weapon_left", 1);
   }
 
   scene_wait(scene_name);
 
   if(scene_name == "sf_b_both_safe") {
-    briggs = getent("briggs_ai", "targetname");
+    briggs = getEnt("briggs_ai", "targetname");
     briggs detach("p6_anim_resume", "tag_weapon_left");
   }
 
@@ -75,16 +75,16 @@ scene_afghanistan_briefing() {
 
 afghanistan_prop_scene(str_scene_name, raise_height) {
   original_pos = self.origin;
-  self moveto(self.origin + (0, 0, raise_height), 0.5, 0.2, 0.2);
+  self moveTo(self.origin + (0, 0, raise_height), 0.5, 0.2, 0.2);
   self waittill("movedone");
   run_scene(str_scene_name);
   wait_network_frame();
-  self moveto(original_pos, 0.5, 0.2, 0.2);
+  self moveTo(original_pos, 0.5, 0.2, 0.2);
 }
 
 scene_afghanistan_models() {
-  e_surface = getent("holo_table_surface", "targetname");
-  e_angled = getent("holo_table_angled", "targetname");
+  e_surface = getEnt("holo_table_surface", "targetname");
+  e_angled = getEnt("holo_table_angled", "targetname");
 
   if(isDefined(level.e_surface_default_origin)) {
     e_surface.origin = level.e_surface_default_origin;
@@ -119,7 +119,7 @@ scene_afghanistan_models() {
   arrow.origin = base.origin;
   arrow.angles = base.angles;
   arrow setclientflag(15);
-  arrow linkto(base);
+  arrow linkTo(base);
   level waittill("cougar_up");
   level thread holo_table_feature_prop("p6_hologram_cougar_combined", "cougar_down", 1, undefined, vectorscale((0, 0, -1), 24.0));
   level waittill("cougar_down");
@@ -129,21 +129,21 @@ scene_afghanistan_models() {
   level thread holo_table_feature_prop("p6_hologram_asd_combined", "asd_down", 1, undefined, (-48, 0, -26), "asd", 0);
   prop_raise_amount = 16;
   level waittill("q_rotor_up");
-  quad = getent("q_rotor", "targetname");
+  quad = getEnt("q_rotor", "targetname");
   afghani_models[afghani_models.size] = quad;
   quad thread afghanistan_prop_scene("quad_explode", prop_raise_amount);
   level waittill("vtol_up");
-  vtol = getent("vtol", "targetname");
+  vtol = getEnt("vtol", "targetname");
   afghani_models[afghani_models.size] = vtol;
   vtol thread afghanistan_prop_scene("vtol_explode", prop_raise_amount);
   level waittill("asd_up");
-  asd = getent("asd", "targetname");
+  asd = getEnt("asd", "targetname");
   afghani_models[afghani_models.size] = asd;
   asd thread afghanistan_prop_scene("asd_explode", prop_raise_amount);
   scene_wait("asd_explode");
   wait 2.0;
   base notify("stop_geo_fx");
-  asd moveto(asd.origin - (0, 0, prop_raise_amount), 1.0, 0.2, 0.2);
+  asd moveTo(asd.origin - (0, 0, prop_raise_amount), 1.0, 0.2, 0.2);
   holo_table_exploder_switch(undefined);
 
   foreach(prop in afghani_models) {

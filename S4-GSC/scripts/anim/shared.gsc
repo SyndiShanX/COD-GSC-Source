@@ -296,7 +296,7 @@ _id_5077(var_0, var_1) {
     var_9 = spawn("weapon_" + var_8, var_6);
     var_9.angles = var_7;
     var_10 = var_6 - var_5;
-    var_11 = vectornormalize(var_10);
+    var_11 = vectorNormalize(var_10);
     var_12 = 20;
     var_13 = 50;
     var_14 = min(length(var_10) * var_12, var_13);
@@ -669,7 +669,7 @@ _id_A273(var_0, var_1) {
   for(var_6 = 0; var_6 < var_5; var_6++) {
     var_2 = var_0.origin;
     var_7 = self.origin - var_2;
-    var_7 = vectornormalize(var_7);
+    var_7 = vectorNormalize(var_7);
     var_8 = var_2 + var_7 * var_4;
     var_9 = var_8 + (var_2 - var_8) * ((var_6 + 1) / var_5);
     self _meth_82AA(var_9);

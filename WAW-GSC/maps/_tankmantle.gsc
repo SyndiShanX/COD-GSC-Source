@@ -114,13 +114,13 @@ tank_mantle(tank, side) {
   ground_trace = false;
 
   {
-    hands LinkTo(tank);
+    hands linkTo(tank);
     self lerp_player_view_to_tag(hands, "tag_player", lerp_time, fraction, right_arc, left_arc, top_arc, bottom_arc);
   }
 
   hands Show();
 
-  hands AnimScripted("mantle_anim", tank.origin, tank.angles, mantle_anim);
+  hands animScripted("mantle_anim", tank.origin, tank.angles, mantle_anim);
   tank open_hatch(side);
   hands do_notetracks(tank, "mantle_anim", side);
 
@@ -156,7 +156,7 @@ recenter_turret() {
   origin = self.origin + (0, 0, z_offset) + vectorscale(forward, 500);
 
   temp.origin = origin;
-  temp LinkTo(self);
+  temp linkTo(self);
 
   self SetTurretTargetEnt(temp);
   self.turretlocked = true;

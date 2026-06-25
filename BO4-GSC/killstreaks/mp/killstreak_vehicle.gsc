@@ -153,7 +153,7 @@ activate_vehicle(type) {
     return false;
   }
 
-  vehicle = spawnvehicle(bundle.ksvehicle, player.var_b8878ba9, player.var_ddc03e10, type);
+  vehicle = spawnVehicle(bundle.ksvehicle, player.var_b8878ba9, player.var_ddc03e10, type);
   vehicle deployable::function_dd266e08(player);
   vehicle killstreaks::configure_team(type, killstreak_id, player, "small_vehicle", undefined, &function_5e2ea3ef);
   vehicle killstreak_hacking::enable_hacking(type, &function_aba709c3, &function_2df6e3bf);

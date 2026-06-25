@@ -370,13 +370,13 @@ function_d589391f() {
 
   level endon(#"game_ended");
 
-  for(players = getplayers(); players.size == 0 || gamestate::is_state("pregame"); players = getplayers()) {
+  for(players = getPlayers(); players.size == 0 || gamestate::is_state("pregame"); players = getPlayers()) {
     wait 1;
   }
 
   while(true) {
     wait 0.1;
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 0) {
       continue;
@@ -433,7 +433,7 @@ function_d589391f() {
 }
 
 function_d3fba20e() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_78083139();

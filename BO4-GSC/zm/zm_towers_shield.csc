@@ -337,8 +337,8 @@ function_103be84b(localclientnum, str_piece, s_start) {
 
   if(str_piece != #"katar") {
     s_end = struct::get(s_start.target);
-    mdl_piece moveto(s_end.origin, n_drop_time);
-    mdl_piece rotateto(s_end.angles, n_drop_time);
+    mdl_piece moveTo(s_end.origin, n_drop_time);
+    mdl_piece rotateTo(s_end.angles, n_drop_time);
   }
 
   if(isDefined(self)) {

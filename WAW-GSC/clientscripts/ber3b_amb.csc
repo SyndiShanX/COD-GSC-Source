@@ -125,7 +125,7 @@ main() {
 plane_machine_gun1() {
   for(;;) {
     level waittill("start_firing_il2_1_gun");
-    plane_gun1 = getent(0, "il2_1", "targetname");
+    plane_gun1 = getEnt(0, "il2_1", "targetname");
     thread plane_gun(17, plane_gun1);
     wait 1;
     thread plane_gun(35, plane_gun1);
@@ -142,7 +142,7 @@ plane_machine_gun1() {
 plane_machine_gun2() {
   for(;;) {
     level waittill("start_firing_il2_2_gun");
-    plane_gun2 = getent(0, "il2_2", "targetname");
+    plane_gun2 = getEnt(0, "il2_2", "targetname");
     thread plane_gun(17, plane_gun2);
     wait 1;
     thread plane_gun(35, plane_gun2);
@@ -159,7 +159,7 @@ plane_machine_gun2() {
 plane_machine_gun3() {
   for(;;) {
     level waittill("start_firing_il2_3_gun");
-    plane_gun3 = getent(0, "il2_4", "targetname");
+    plane_gun3 = getEnt(0, "il2_4", "targetname");
     thread plane_gun(17, plane_gun3);
     wait .5;
     thread plane_gun(17, plane_gun3);
@@ -180,7 +180,7 @@ plane_machine_gun3() {
 plane_machine_gun4() {
   for(;;) {
     level waittill("start_firing_il2_4_gun");
-    plane_gun4 = getent(0, "il2_3", "targetname");
+    plane_gun4 = getEnt(0, "il2_3", "targetname");
     thread plane_gun(17, plane_gun4);
     wait .5;
     thread plane_gun(17, plane_gun4);

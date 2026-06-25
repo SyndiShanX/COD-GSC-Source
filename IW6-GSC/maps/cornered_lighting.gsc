@@ -71,7 +71,7 @@ sun_lerp_value(var_0, var_1, var_2) {
 }
 
 cnd_reception_elevator() {
-  var_0 = getent("rec_elevator_light", "targetname");
+  var_0 = getEnt("rec_elevator_light", "targetname");
   var_1 = var_0 getlightintensity();
   var_0 setlightintensity(0.01);
   var_2 = var_0 getlightintensity();
@@ -199,9 +199,9 @@ cnd_shaft_flickering() {
       }
 
       if(!isDefined(self.unlit_models)) {
-        self.unlit_models[0] = getent(var_1.target, "targetname");
+        self.unlit_models[0] = getEnt(var_1.target, "targetname");
       } else {
-        self.unlit_models[self.unlit_models.size] = getent(var_1.target, "targetname");
+        self.unlit_models[self.unlit_models.size] = getEnt(var_1.target, "targetname");
       }
 
       self.linked_models = 1;

@@ -192,7 +192,7 @@ function function_58ef8b05(str_objective, b_starting) {
   level.player val::reset(#"player_vehicle", "ignoreme");
   level.var_d3e0f34c val::set(#"last_stand", "allowdeath", 0);
   level.vip val::reset(#"gunner", "ignoreme");
-  var_cbfab426 = getent("trig_gunner_player_damage", "targetname");
+  var_cbfab426 = getEnt("trig_gunner_player_damage", "targetname");
   var_cbfab426 thread function_5477c29();
   level thread savegame::function_7790f03(1);
   function_9283a7e2();
@@ -460,7 +460,7 @@ function function_7081d8a6() {
   var_5c241fe8 = [];
 
   foreach(s_dest in a_dest) {
-    v_delta = vectornormalize(s_dest.origin - level.player.origin);
+    v_delta = vectorNormalize(s_dest.origin - level.player.origin);
     v_facing = anglesToForward(level.player.angles);
 
     if(vectordot(v_delta, v_facing) > 0) {
@@ -498,7 +498,7 @@ function function_7081d8a6() {
 
 function safe_trigger() {
   self endon(#"death");
-  var_73f57f25 = getent("last_stand_safe_trigger", "targetname", 1);
+  var_73f57f25 = getEnt("last_stand_safe_trigger", "targetname", 1);
 
   while(true) {
     if(self istouching(var_73f57f25)) {

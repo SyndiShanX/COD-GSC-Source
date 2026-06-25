@@ -16,7 +16,7 @@ dotraverse() {
   maps\mp\agents\_scripted_agent_anim_util::setstatelocked(1, "DoTraverse");
   var_0 = self getnegotiationstartnode();
   var_1 = self getnegotiationendnode();
-  self.traversalvector = vectornormalize(var_1.origin - var_0.origin);
+  self.traversalvector = vectorNormalize(var_1.origin - var_0.origin);
 
   if(var_0.animscript == "bot_walk_forward") {
     var_2 = var_1.origin - var_0.origin;
@@ -240,7 +240,7 @@ traverse_lerp_z_over_time(var_0, var_1, var_2) {
     }
 
     var_6 = maps\mp\zombies\_util::lerp(var_5, var_0, var_1);
-    self setorigin((self.origin[0], self.origin[1], var_6), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_6), 0);
     wait 0.05;
   }
 }

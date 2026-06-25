@@ -220,14 +220,14 @@ get_zombie_blood_hint_generic_vox() {
 
 complete_sidequest() {
   level.sndgameovermusicoverride = "game_over_ee";
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player freezecontrols(1);
     player thread fadetoblackforxsec(0, 5, 0.5, 0, "white");
   }
 
-  playsoundatposition("zmb_squest_whiteout", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_whiteout", (0, 0, 0));
   delay_thread(0.5, ::remove_portal_beam);
   level.custom_intermission = ::player_intermission_ee;
   level setclientfield("ee_ending", 1);
@@ -351,7 +351,7 @@ player_intermission_ee() {
           speed = points[i].speed;
         }
 
-        target_point = getstruct(points[i].target, "targetname");
+        target_point = getStruct(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
@@ -362,8 +362,8 @@ player_intermission_ee() {
 
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
-        org moveto(target_point.origin, time, q_time, q_time);
-        org rotateto(target_point.angles, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait(time - q_time);
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 1;
@@ -384,7 +384,7 @@ setup_ee_main_devgui() {
   b_activated = 0;
 
   while(!b_activated) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2d(player.origin, (2904, 5040, -336)) < 100 && player useButtonPressed()) {
         wait 2;
 
@@ -428,7 +428,7 @@ watch_devgui_ee_main() {
           break;
         case "step_3":
           flag_set("ee_mech_zombie_hole_opened");
-          m_floor = getent("easter_mechzombie_spawn", "targetname");
+          m_floor = getEnt("easter_mechzombie_spawn", "targetname");
 
           if(isDefined(m_floor)) {
             m_floor delete();

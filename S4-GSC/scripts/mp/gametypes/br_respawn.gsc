@@ -21,7 +21,7 @@ _id_C473() {
   var_0 = scripts\engine\utility::getStructArray("br_respawn_station", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_2 = getent(var_0[var_1].target, "targetname");
+    var_2 = getEnt(var_0[var_1].target, "targetname");
 
     if(isDefined(var_2)) {
       var_2 delete();
@@ -52,7 +52,7 @@ _id_E264(var_0) {
 
 _id_168A(var_0) {
   thread _id_1685();
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
   if(!isDefined(self._id_462B)) {
     var_2 = spawn("script_model", var_1.origin);
@@ -63,12 +63,12 @@ _id_168A(var_0) {
 
     var_2 setModel("medical_defibrillator_wall_01");
     var_2 makeuseable();
-    var_2 setcursorhint("HINT_NOICON");
+    var_2 setCursorHint("HINT_NOICON");
     var_2 setuseholdduration("duration_medium");
     var_2 sethintdisplayfov(120);
     var_2 setusefov(120);
     var_2 setuserange(80);
-    var_2 sethintstring(&"MP/BR_RESPAWN_TAKE");
+    var_2 setHintString(&"MP/BR_RESPAWN_TAKE");
     var_2 _meth_81B0("outline_depth_red");
     var_2 _meth_83A1(-1);
     var_2 setasgametypeobjective();
@@ -222,12 +222,12 @@ _id_1680() {
 }
 
 _id_1686() {
-  self._id_462B sethintstring(&"MP/BR_RESPAWN_CHARGING");
+  self._id_462B setHintString(&"MP/BR_RESPAWN_CHARGING");
   self._id_462B setuseholdduration("duration_none");
 }
 
 _id_1688() {
-  self._id_462B sethintstring(&"MP/BR_RESPAWN_TAKE");
+  self._id_462B setHintString(&"MP/BR_RESPAWN_TAKE");
   self._id_462B setuseholdduration("duration_medium");
   var_0 = _id_68AB();
 
@@ -610,7 +610,7 @@ _id_B73D(var_0, var_1) {
   }
 
   var_0 _meth_82CB("sdr_cp_hostage_walk_hostage");
-  var_0 linkto(self, "j_clavicle_le", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "j_clavicle_le", (0, 0, 0), (0, 0, 0));
   var_0 thread _id_FE5F(self, var_2, var_1);
   var_0 thread _id_FE60(self, var_2, var_1);
   var_0 thread _id_FE62(var_1);
@@ -714,10 +714,10 @@ _id_402D(var_0, var_1) {
   var_2 _meth_82CB("sdr_cp_hostage_dropoff_ground_idle_pilot");
   var_2 _meth_8642(1);
   var_2 makeuseable();
-  var_2 setcursorhint("HINT_NOICON");
+  var_2 setCursorHint("HINT_NOICON");
   var_2 setuseholdduration("duration_medium");
   var_2 setuserange(120);
-  var_2 sethintstring(&"MP/BR_PICKUP_PLAYER");
+  var_2 setHintString(&"MP/BR_PICKUP_PLAYER");
   var_2 _meth_83A1(0);
   var_2 _meth_81B0("outlinefill_nodepth_red");
 
@@ -987,7 +987,7 @@ _id_B697(var_0) {
         }
         var_6 = 1;
         var_9 = var_8._id_C6A0.origin + (0, 0, 40);
-        var_10 = vectornormalize(var_9 - var_3);
+        var_10 = vectorNormalize(var_9 - var_3);
         var_11 = vectordot(var_10, var_4);
 
         if(var_11 < 0.5) {

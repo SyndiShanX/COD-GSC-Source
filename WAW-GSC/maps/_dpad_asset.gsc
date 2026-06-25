@@ -669,11 +669,11 @@ populate_and_fire_lci_rockets(fire_point) {
   }
 
   if(level.script == "pel1") {
-    pa_fire = getent("pa_fire_right", "targetname");
-    playsoundatposition("pa_fire", pa_fire.origin);
+    pa_fire = getEnt("pa_fire_right", "targetname");
+    playSoundAtPosition("pa_fire", pa_fire.origin);
 
     wait(0.4);
-    pa_fire_b = getent("pa_fire_left", "targetname");
+    pa_fire_b = getEnt("pa_fire_left", "targetname");
     pa_fire_b playSound("pa_fire");
   }
 
@@ -689,7 +689,7 @@ lci_player_rocket_fly_think(destination_pos, which_player) {
       damageradius = 300;
 
       playFX(level._effect["lci_rocket_impact"], self.origin);
-      playsoundatposition("rocket_impact", self.origin);
+      playSoundAtPosition("rocket_impact", self.origin);
 
       earthquake(0.5, 3, self.origin, 2050);
 
@@ -840,12 +840,12 @@ rocket_rumble_on_all_players(high_rumble_string, low_rumble_string, rumble_org, 
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playrumbleonentity(high_rumble_string);
+        players[i] playRumbleOnEntity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playrumbleonentity(low_rumble_string);
+        players[i] playRumbleOnEntity(low_rumble_string);
       }
     } else {
-      players[i] playrumbleonentity(high_rumble_string);
+      players[i] playRumbleOnEntity(high_rumble_string);
     }
   }
 }

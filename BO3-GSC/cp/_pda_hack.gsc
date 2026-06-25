@@ -55,12 +55,12 @@ class chackableobject {
     assert(isDefined(n_radius), "");
     assert(isDefined(n_height), "");
     e_trigger = spawn("trigger_radius", v_origin, 0, n_radius, n_height);
-    e_trigger triggerignoreteam();
+    e_trigger triggerIgnoreTeam();
     e_trigger setvisibletoall();
     e_trigger setteamfortrigger("none");
-    e_trigger setcursorhint("HINT_NOICON");
+    e_trigger setCursorHint("HINT_NOICON");
     if(isDefined(str_hint)) {
-      e_trigger sethintstring(str_hint);
+      e_trigger setHintString(str_hint);
     }
     return e_trigger;
   }
@@ -79,12 +79,12 @@ class chackableobject {
   }
 
   function temp_player_lock_in_place(trigger) {
-    v_lock_position = trigger.origin + (vectornormalize(anglesToForward(trigger.angles)) * 50);
+    v_lock_position = trigger.origin + (vectorNormalize(anglesToForward(trigger.angles)) * 50);
     v_lock_position_ground = bulletTrace(v_lock_position, v_lock_position - vectorscale((0, 0, 1), 100), 0, undefined)["position"];
     v_lock_angles = (0, vectortoangles(vectorscale(anglesToForward(trigger.angles), -1))[1], 0);
     circuit_breaker_lock_ent = spawn("script_origin", v_lock_position_ground);
     circuit_breaker_lock_ent.angles = v_lock_angles;
-    self playerlinkto(circuit_breaker_lock_ent, undefined, 0, 0, 0, 0, 0);
+    self playerlinkTo(circuit_breaker_lock_ent, undefined, 0, 0, 0, 0, 0);
     self disableweapons();
   }
 
@@ -93,7 +93,7 @@ class chackableobject {
     self endon("hacking_disabled");
     m_e_hack_trigger endon("death");
     m_is_trigger_thread_active = 1;
-    m_e_hack_trigger sethintstring("");
+    m_e_hack_trigger setHintString("");
     m_e_hack_trigger sethintlowpriority(1);
     while(true) {
       m_e_hack_trigger waittill("trigger", e_triggerer);
@@ -101,11 +101,11 @@ class chackableobject {
         continue;
       }
       if(!e_triggerer util::is_player_looking_at(m_e_hack_trigger.origin, 0.75, 0)) {
-        m_e_hack_trigger sethintstring("");
+        m_e_hack_trigger setHintString("");
         m_e_hack_trigger sethintlowpriority(1);
         continue;
       }
-      m_e_hack_trigger sethintstring(m_str_hackable_hint);
+      m_e_hack_trigger setHintString(m_str_hackable_hint);
       m_e_hack_trigger sethintlowpriority(1);
       if(!e_triggerer useButtonPressed()) {
         continue;
@@ -172,7 +172,7 @@ class chackableobject {
   function hacking_completed(e_triggerer) {
     self notify("hacking_completed");
     m_str_team = "allies";
-    m_e_hack_trigger sethintstring("");
+    m_e_hack_trigger setHintString("");
     m_e_hack_trigger sethintlowpriority(1);
     if(isDefined(m_e_reference)) {
       e_reference = m_e_reference;
@@ -187,7 +187,7 @@ class chackableobject {
   function disable_hacking() {
     if(m_is_hackable) {
       self notify("hacking_disabled");
-      m_e_hack_trigger sethintstring("");
+      m_e_hack_trigger setHintString("");
       m_e_hack_trigger sethintlowpriority(1);
       m_is_trigger_thread_active = 0;
     }
@@ -196,13 +196,13 @@ class chackableobject {
   function enable_hacking() {
     if(m_is_hackable) {
       if(m_str_team != "allies") {
-        m_e_hack_trigger sethintstring(m_str_hackable_hint);
+        m_e_hack_trigger setHintString(m_str_hackable_hint);
         m_e_hack_trigger sethintlowpriority(1);
         if(!m_is_trigger_thread_active) {
           self thread thread_hacking_progress();
         }
       } else {
-        m_e_hack_trigger sethintstring("");
+        m_e_hack_trigger setHintString("");
         m_e_hack_trigger sethintlowpriority(1);
       }
     }

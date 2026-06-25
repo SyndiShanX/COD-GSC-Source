@@ -74,7 +74,7 @@ function function_1e0fa475(localclientnum, oldval, newval, bnewent, binitialsnap
     }
 
     if(is_true(self.var_23fa23a9)) {
-      a_players = getplayers(binitialsnap, self.team, self.origin, 400);
+      a_players = getPlayers(binitialsnap, self.team, self.origin, 400);
 
       foreach(player_source in a_players) {
         if(player_source === self) {
@@ -105,7 +105,7 @@ function function_1e0fa475(localclientnum, oldval, newval, bnewent, binitialsnap
                 self.var_a2820ebf linktocamera(4, (16, 0, -10), (0, 0, 0), 1);
                 self.var_a2820ebf.var_a6939bee = 1;
               } else {
-                self.var_a2820ebf linkto(self, var_98dfaf9d);
+                self.var_a2820ebf linkTo(self, var_98dfaf9d);
               }
             }
 

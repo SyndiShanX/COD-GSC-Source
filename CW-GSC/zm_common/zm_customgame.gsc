@@ -1000,7 +1000,7 @@ function function_318d417b(e_player) {
   e_player zm_score::minus_to_player_score(n_cost);
   e_player.var_ec426a71 = 1;
   sound = "evt_bottle_dispense";
-  playsoundatposition(sound, self.origin);
+  playSoundAtPosition(sound, self.origin);
   var_cc1db3c1 = array::exclude(level.a_str_vapors, e_player.perks_active);
   e_player.var_62fef0f1 = array::random(var_cc1db3c1);
 
@@ -1060,7 +1060,7 @@ function private function_74b79f63() {
     default:
       break;
     case 2:
-      players = getplayers();
+      players = getPlayers();
       a_zombie_doors = getEntArray("zombie_door", "targetname");
 
       foreach(door in arraycopy(a_zombie_doors)) {

@@ -187,7 +187,7 @@ quad_vox() {
   wait(5);
   quad_wait = 5;
   while(1) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(DistanceSquared(self.origin, players[i].origin) > 1200 * 1200) {
         self playSound("zmb_quad_amb");
@@ -205,7 +205,7 @@ quad_vox() {
 quad_close() {
   self endon("death");
   while(1) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(is_player_valid(players[i], true)) {
         if(DistanceSquared(self.origin, players[i].origin) < 150 * 150) {

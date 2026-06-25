@@ -50,7 +50,7 @@ run_retreat_trigger(trigger_name, retreat_group_name) {
   end_msg = retreat_group_name + "_retreated";
   level endon(end_msg);
 
-  trigger = getent(trigger_name, "targetname");
+  trigger = getEnt(trigger_name, "targetname");
   if(isDefined(trigger)) {
     trigger waittill("trigger");
     retreat_group(retreat_group_name);

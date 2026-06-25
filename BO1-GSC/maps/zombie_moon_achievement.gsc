@@ -28,7 +28,7 @@ achievement_set_interim_sidequest_stat_for_all_players(stat_name) {
   if(level.systemLink) {
     return;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return;
   }
   players = get_players();

@@ -63,7 +63,7 @@ play_nicaragua_outro() {
   level thread run_scene("mason_outro");
   flag_wait("mason_outro_started");
   level thread outro_wind_snd();
-  ai_hudson = getent("hudson_ai", "targetname");
+  ai_hudson = getEnt("hudson_ai", "targetname");
   ai_hudson detach("c_usa_nicaragua_hudson_glasses");
   flag_wait("begin_outro_fade_out");
   clientnotify("outro_fade_white");
@@ -89,7 +89,7 @@ start_outro_fade(m_player_body) {
 }
 
 mason_outro_white_screen_vo() {
-  e_org = getent("mason_outro_pa_voice", "targetname");
+  e_org = getEnt("mason_outro_pa_voice", "targetname");
   e_org queue_dialog("pa_attention_0", 0.5);
   e_org queue_dialog("pa_this_area_is_now_und_0", 0.5);
   e_org queue_dialog("pa_any_members_of_the_c_0", 0.5);

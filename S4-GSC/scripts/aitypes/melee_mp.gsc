@@ -156,7 +156,7 @@ meleecharge_updatemp(var_0) {
   }
 
   var_17 = max(_func_0218(var_3) - 24, 0);
-  var_18 = vectornormalize(self.origin - var_4.origin);
+  var_18 = vectorNormalize(self.origin - var_4.origin);
   var_19 = scripts\engine\utility::ter_op(isPlayer(var_4) && istrue(self._id_9DAA), var_4.origin, var_4.origin + var_18 * var_17);
   var_20 = 36;
 

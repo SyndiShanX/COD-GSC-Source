@@ -73,7 +73,7 @@ class cdoor {
   function function_3e0853d(v_angle, var_1b13d203) {
     physicsexplosionsphere(m_e_door.origin, 64, 0, 0);
     m_e_door setforcenocull();
-    m_e_door rotateto(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
+    m_e_door rotateTo(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
     m_e_door waittill(#"rotatedone");
     m_e_door removeforcenocull();
     physicsexplosionsphere(m_e_door.origin, 64, 0, 0);
@@ -165,7 +165,7 @@ class cdoor {
     m_e_door.func_custom_gameobject_position = &function_4fe7d9d5;
     m_e_door.v_trigger_offset = m_s_bundle.v_trigger_offset;
     m_e_door gameobjects::init_game_objects(m_s_bundle.door_interact);
-    m_e_door.mdl_gameobject.t_interact usetriggerrequirelookat();
+    m_e_door.mdl_gameobject.t_interact useTriggerRequireLookAt();
     m_e_door.mdl_gameobject.trigger.c_door = self;
   }
 
@@ -277,7 +277,7 @@ class cdoor {
   function function_5abbe871(var_ce02fcb7, var_1b13d203) {
     physicsexplosionsphere(m_e_door.origin, 64, 0, 0);
     m_e_door setforcenocull();
-    m_e_door moveto(var_ce02fcb7, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
+    m_e_door moveTo(var_ce02fcb7, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
     m_e_door waittill(#"movedone");
     m_e_door removeforcenocull();
     physicsexplosionsphere(m_e_door.origin, 64, 0, 0);
@@ -292,7 +292,7 @@ class cdoor {
 
     if(sessionmodeiscampaigngame()) {
       if(!isDefined(opener)) {
-        opener = getplayers()[0];
+        opener = getPlayers()[0];
       }
     }
 
@@ -306,7 +306,7 @@ class cdoor {
         if(length2dsquared(v_velocity) == 0) {
           v_player_forward = anglesToForward(opener.angles);
         } else {
-          v_player_forward = vectornormalize(v_velocity);
+          v_player_forward = vectorNormalize(v_velocity);
         }
       } else {
         v_player_angles = opener getplayerangles();
@@ -439,7 +439,7 @@ class cdoor {
 
       if(is_true(m_s_bundle.b_loop_sound)) {
         sndent = spawn("script_origin", m_e_door.origin);
-        sndent linkto(m_e_door);
+        sndent linkTo(m_e_door);
         sndent playLoopSound(m_s_bundle.door_loop_sound, 1);
       }
     }
@@ -451,7 +451,7 @@ class cdoor {
 
       var_7256682e = function_f1a2a15f(b_malfunction, 1);
       m_e_door setforcenocull();
-      m_e_door moveto(var_7256682e, var_1b13d203);
+      m_e_door moveTo(var_7256682e, var_1b13d203);
       m_e_door waittill(#"movedone");
       m_e_door removeforcenocull();
     } else if(m_s_bundle.door_open_method == "swing_away_from_player") {
@@ -482,14 +482,14 @@ class cdoor {
       if(var_cd167873 > 0) {
         v_angle = function_d36318ad(b_malfunction, 1, 0, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b, var_b7e6de19);
         m_e_door setforcenocull();
-        m_e_door rotateto(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
+        m_e_door rotateTo(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
         m_e_door waittill(#"rotatedone");
         m_e_door removeforcenocull();
       } else {
         var_32c4021e = 1;
         v_angle = function_d36318ad(b_malfunction, 1, 1, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b, var_b7e6de19);
         m_e_door setforcenocull();
-        m_e_door rotateto(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
+        m_e_door rotateTo(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
         m_e_door waittill(#"rotatedone");
         m_e_door removeforcenocull();
       }
@@ -502,7 +502,7 @@ class cdoor {
 
       v_angle = function_d36318ad(b_malfunction, 1, 0, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b, var_b7e6de19);
       m_e_door setforcenocull();
-      m_e_door rotateto(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
+      m_e_door rotateTo(v_angle, var_1b13d203, var_1b13d203 * 0.1, var_1b13d203 * 0.3);
       m_e_door waittill(#"rotatedone");
       m_e_door removeforcenocull();
     } else if(m_s_bundle.door_open_method == "animated") {
@@ -684,7 +684,7 @@ class cdoor {
     if(is_true(m_s_bundle.b_loop_sound)) {
       m_e_door playSound(m_s_bundle.door_start_sound);
       sndent = spawn("script_origin", m_e_door.origin);
-      sndent linkto(m_e_door);
+      sndent linkTo(m_e_door);
       sndent playLoopSound(m_s_bundle.door_loop_sound, 1);
     } else if(isDefined(m_s_bundle.door_stop_sound) && m_s_bundle.door_stop_sound != "") {
       m_e_door playSound(m_s_bundle.door_stop_sound);
@@ -854,7 +854,7 @@ class cdoor {
     v_angles = m_e_door.angles;
 
     if(isDefined(var_a2f96f78.target)) {
-      e_target = getent(var_a2f96f78.target, "targetname");
+      e_target = getEnt(var_a2f96f78.target, "targetname");
 
       if(isDefined(e_target)) {
         return e_target.angles;
@@ -985,7 +985,7 @@ class cdoor {
     v_pos = (v_pos[0], v_pos[1], v_pos[2] + 50);
 
     if(isDefined(var_a2f96f78.target)) {
-      e_target = getent(var_a2f96f78.target, "targetname");
+      e_target = getEnt(var_a2f96f78.target, "targetname");
 
       if(isDefined(e_target)) {
         return e_target.origin;
@@ -1062,16 +1062,16 @@ class cdoor {
             m_e_trigger = spawn("trigger_radius_use", v_pos, 16384 | 4096, n_radius, m_n_trigger_height);
           }
 
-          m_e_trigger triggerignoreteam();
+          m_e_trigger triggerIgnoreTeam();
           m_e_trigger setvisibletoall();
           m_e_trigger setteamfortrigger(#"none");
-          m_e_trigger usetriggerrequirelookat();
-          m_e_trigger setcursorhint("HINT_NOICON");
+          m_e_trigger useTriggerRequireLookAt();
+          m_e_trigger setCursorHint("HINT_NOICON");
 
           if(is_true(m_s_bundle.door_closes) && !is_true(m_e_trigger.var_2dbb0ac1)) {
             var_80778410 = coordtransformtranspose(m_e_trigger.origin, m_e_door.origin, m_e_door.angles);
-            m_e_trigger enablelinkto();
-            m_e_trigger linkto(m_e_door, undefined, var_80778410);
+            m_e_trigger enablelinkTo();
+            m_e_trigger linkTo(m_e_door, undefined, var_80778410);
           }
         } else if(isDefined(t_radius_or_multiple)) {
           m_e_trigger = t_radius_or_multiple;
@@ -2910,7 +2910,7 @@ function private function_7fe6d007(e_or_str_model) {
   extents = function_c440d28e(modelname, 1);
   dimensions = extents.maxs - extents.mins;
   var_9542dc61 = (dimensions[0], dimensions[1], 0);
-  var_9542dc61 = vectornormalize(var_9542dc61);
+  var_9542dc61 = vectorNormalize(var_9542dc61);
 
   if(abs(dimensions[0]) > abs(dimensions[1])) {
     if(abs(extents.maxs[0]) > abs(extents.mins[0])) {
@@ -3102,7 +3102,7 @@ function private should_bash_open(player) {
       return false;
     }
 
-    vec = vectornormalize(player getplayercamerapos() - self get_door_center());
+    vec = vectorNormalize(player getplayercamerapos() - self get_door_center());
     var_ed80ebc4 = self function_fb354714();
     doordot = vectordot(vec, var_ed80ebc4);
 
@@ -3134,7 +3134,7 @@ function private bash_debug(duration) {
     for(i = 0; i < var_1a23fa7.size; i++) {
       var_6dcc5f28 = var_1a23fa7[i] - player.origin;
       var_6dcc5f28 = (var_6dcc5f28[0], var_6dcc5f28[1], 0);
-      normal = vectornormalize(var_6dcc5f28);
+      normal = vectorNormalize(var_6dcc5f28);
       forward = anglesToForward(player getplayerangles());
       dot = vectordot(forward, normal);
       color = dot >= var_c03beac5[i] ? (0, 1, 0) : (1, 0, 0);
@@ -3142,7 +3142,7 @@ function private bash_debug(duration) {
       line(player.origin, var_1a23fa7[i], color, 1, 0, duration);
     }
 
-    vec = vectornormalize(player getplayercamerapos() - center);
+    vec = vectorNormalize(player getplayercamerapos() - center);
     var_ed80ebc4 = self function_fb354714();
     dot = vectordot(vec, var_ed80ebc4);
     color = abs(dot) >= 0.4 ? (0, 1, 0) : (1, 0, 0);
@@ -3164,7 +3164,7 @@ function private bashed_locked_door(velocity) {
   self notify(#"hash_55f12a31ee0b246e");
   player viewkick(10, self get_door_center());
   earthquake(1, 0.3, player.origin, 75);
-  player playrumbleonentity("damage_heavy");
+  player playRumbleOnEntity("damage_heavy");
 
   while(player ismeleeing()) {
     waitframe(1);
@@ -3283,7 +3283,7 @@ function private door_bash_presentation(player) {
   }
 
   screenshake(player.origin, 16, 0, 0, 0.45);
-  player playrumbleonentity("grenade_rumble");
+  player playRumbleOnEntity("grenade_rumble");
   earthquake(0.6, 0.75, player.origin, 200);
 }
 
@@ -3409,10 +3409,10 @@ function function_191c5a63() {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(!isDefined(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     waitframe(1);
   }
 

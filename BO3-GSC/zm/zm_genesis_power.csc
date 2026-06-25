@@ -53,7 +53,7 @@ function power_cables_shader(localclientnum, oldval, newval, bnewent, binitialsn
 }
 
 function corruption_tower(n_local_client, n_old, n_new, b_new_ent, b_initial_snap, str_field, b_was_time_jump) {
-  var_6bf7783a = getent(n_local_client, str_field, "targetname");
+  var_6bf7783a = getEnt(n_local_client, str_field, "targetname");
   var_6bf7783a util::waittill_dobj(n_local_client);
   if(!isDefined(var_6bf7783a.a_fx)) {
     var_6bf7783a.a_fx = [];

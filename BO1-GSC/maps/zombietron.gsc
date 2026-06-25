@@ -58,7 +58,7 @@ onPlayerSpawned() {
     self waittill("spawned_player");
     wait 1;
     self SetDepthOfField(0, 0, 512, 4000, 4, 0);
-    self SetPlayerCollision(1);
+    self setPlayerCollision(1);
     self maps\_zombietron_main::player_reset_score();
     self.default_movespeed = 1;
     self.score_total = self.score;
@@ -377,7 +377,7 @@ init_animscripts() {
 force_game_controller_bindings() {
   level.dogshit++;
   level.dogshit = level.dogshit & 7;
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] setclientflagasval(level.dogshit);
   }

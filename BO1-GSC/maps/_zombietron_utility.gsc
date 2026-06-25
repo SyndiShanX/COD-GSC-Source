@@ -8,9 +8,9 @@
 
 get_camera_launch_direction() {
   pos = GetDvarVector("player_topDownCamCenterPos") + GetDvarVector("player_topDownCamOffset");
-  return VectorNormalize(pos - self.origin);
+  return vectorNormalize(pos - self.origin);
 }
-fake_linkto(entity, offset) {
+fake_linkTo(entity, offset) {
   while(isDefined(self) && isDefined(entity)) {
     self.origin = entity.origin;
     if(isDefined(offset)) {
@@ -181,7 +181,7 @@ destroy_me_on_player_notify(player, note) {
     self Delete();
   }
 }
-ghetto_linkto(ent) {
+ghetto_linkTo(ent) {
   self endon("ghetto_unlink");
   while(1) {
     self.origin = ent.origin;

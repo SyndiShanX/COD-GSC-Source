@@ -164,7 +164,7 @@ warp_players(startValue, startKey) {
 }
 
 warp_players_underworld() {
-  underworld = GetStruct("struct_player_teleport_underworld", "targetname");
+  underworld = getStruct("struct_player_teleport_underworld", "targetname");
   if(!isDefined(underworld)) {
     ASSERTMSG("warp_players_underworld(): can't find the underworld warp spot! aborting.");
     return;
@@ -173,7 +173,7 @@ warp_players_underworld() {
   players = get_players();
 
   for(i = 0; i < players.size; i++) {
-    players[i] SetOrigin(underworld.origin);
+    players[i] setOrigin(underworld.origin);
   }
 }
 
@@ -196,7 +196,7 @@ warp_player(pos) {
   self.warpblack.alpha = 1;
 
   wait(.75);
-  self setorigin(pos);
+  self setOrigin(pos);
   self.warpblack FadeOverTime(.75);
   self.warpblack.alpha = 0;
 }
@@ -204,11 +204,11 @@ warp_player(pos) {
 setup_friendlies() {
   level.friends = grab_starting_friends();
 
-  level.sarge = getent("sarge", "script_noteworthy");
+  level.sarge = getEnt("sarge", "script_noteworthy");
   level.sarge thread magic_bullet_shield();
   level.sarge.animname = "reznov";
 
-  level.chernov = getent("chernov", "script_noteworthy");
+  level.chernov = getEnt("chernov", "script_noteworthy");
   level.chernov thread magic_bullet_shield();
   level.chernov.animname = "reznov";
 }
@@ -233,7 +233,7 @@ hangguy_with_ragdoll(bonename, length) {
   sign = spawn("script_model", self getTagOrigin("J_SpineUpper"));
   sign.angles = self getTagAngles("J_SpineUpper");
   sign setModel("char_ger_traitorsign");
-  sign linkto(self, "J_SpineUpper", (3, 7, 0), (-90, 0, 180));
+  sign linkTo(self, "J_SpineUpper", (3, 7, 0), (-90, 0, 180));
 
   start = self.origin + (0, 0, length + 22);
   end = (0, 0, 0);
@@ -244,7 +244,7 @@ hangguy_with_ragdoll(bonename, length) {
 move_tank_on_trigger(pathname, trigname) {
   tank_startnode = getvehiclenode(pathname, "targetname");
 
-  getent(trigname, "targetname") waittill("trigger");
+  getEnt(trigname, "targetname") waittill("trigger");
 
   self attachPath(tank_startnode);
   wait(.2);
@@ -256,7 +256,7 @@ spawn_tank(tank_type, start_node, kill_tank) {
     wait_network_frame();
   }
 
-  tank = spawnvehicle(tank_type, "tank", "t34", start_node.origin, start_node.angles);
+  tank = spawnVehicle(tank_type, "tank", "t34", start_node.origin, start_node.angles);
   tank.vehicletype = "t34";
   maps\_vehicle::vehicle_init(tank);
 
@@ -278,7 +278,7 @@ spawn_plane(plane_type, start_node) {
     wait_network_frame();
   }
 
-  plane = spawnvehicle(plane_type, "plane", "stuka", start_node.origin, start_node.angles);
+  plane = spawnVehicle(plane_type, "plane", "stuka", start_node.origin, start_node.angles);
 
   plane attachPath(start_node);
   plane startpath();
@@ -309,7 +309,7 @@ satchel_setup(charge_trig, target_ent) {
   self endon("death");
   wait(2);
 
-  charge = getent(charge_trig.target, "targetname");
+  charge = getEnt(charge_trig.target, "targetname");
 
   ASSERTEX(isDefined(charge), "Charge trigger should be pointing to a sachel charge");
   ASSERTEX(isDefined(charge.script_noteworthy), "Charge should have a swap model specified as script_noteworthy");
@@ -336,7 +336,7 @@ remove_satchel_on_death(charge_trig) {
   self waittill("death");
 
   if(isDefined(charge_trig)) {
-    charge = getent(charge_trig.target, "targetname");
+    charge = getEnt(charge_trig.target, "targetname");
 
     charge_trig delete();
 
@@ -495,12 +495,12 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
 
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]), (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]), (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
 
-    target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
+    target_org moveTo(targ_point, randomfloatrange(0.5, 6.0));
 
     for(i = 0; i < burst; i++) {
       target = target_org.origin;
 
-      fx_angles = VectorNormalize(target - self.origin);
+      fx_angles = vectorNormalize(target - self.origin);
       playFX(muzzleFlash, self.origin, fx_angles);
 
       if(i % 4 == 0) {
@@ -520,12 +520,12 @@ rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumbl
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playrumbleonentity(high_rumble_string);
+        players[i] playRumbleOnEntity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playrumbleonentity(low_rumble_string);
+        players[i] playRumbleOnEntity(low_rumble_string);
       }
     } else {
-      players[i] playrumbleonentity(high_rumble_string);
+      players[i] playRumbleOnEntity(high_rumble_string);
     }
   }
 }

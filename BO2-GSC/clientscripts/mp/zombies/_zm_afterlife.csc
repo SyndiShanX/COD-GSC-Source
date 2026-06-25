@@ -116,13 +116,13 @@ afterlife_mana_rumble() {
     if(isDefined(localclientnum)) {
       if(self.mana > 0 && self.mana < 0.4) {
         if(self.mana < 0.1) {
-          self playrumbleonentity(localclientnum, "damage_heavy");
+          self playRumbleOnEntity(localclientnum, "damage_heavy");
           wait 0.25;
         } else if(self.mana < 0.2) {
-          self playrumbleonentity(localclientnum, "damage_light");
+          self playRumbleOnEntity(localclientnum, "damage_light");
           wait 0.5;
         } else {
-          self playrumbleonentity(localclientnum, "damage_light");
+          self playRumbleOnEntity(localclientnum, "damage_light");
           wait 0.75;
         }
 
@@ -195,7 +195,7 @@ player_afterlife_third_fx(localclientnum) {
   }
   self waittill_dobj(localclientnum);
   ent = spawn(localclientnum, self.origin, "script_origin");
-  ent linkto(self, "tag_origin");
+  ent linkTo(self, "tag_origin");
   ent playLoopSound("zmb_afterlife_ghost_loop");
   self thread snddeleteent(ent);
 
@@ -217,7 +217,7 @@ player_afterlife_spectator_fx(localclientnum) {
   self endon("entityshutdown");
   self waittill_dobj(localclientnum);
   ent = spawn(localclientnum, self.origin, "script_origin");
-  ent linkto(self, "tag_origin");
+  ent linkTo(self, "tag_origin");
   ent playLoopSound("zmb_afterlife_ghost_loop");
   self thread snddeleteent(ent);
 

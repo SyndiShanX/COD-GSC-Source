@@ -100,7 +100,7 @@ function function_fefe581c(localclientnum, oldval, newval, bnewent, binitialsnap
   function_b6e8ef46();
 
   if(level.doa.world_state == 2) {
-    player = getplayers(binitialsnap)[0];
+    player = getPlayers(binitialsnap)[0];
     player thread namespace_7f5aeb59::function_4d692cc4(binitialsnap, "default");
   }
 

@@ -116,12 +116,12 @@ rotateuavrig(clockwise) {
 
   for(;;) {
     if(!clockwise) {
-      self rotateyaw(turn, 40);
+      self rotateYaw(turn, 40);
       wait 40;
       continue;
     }
 
-    self rotateyaw(turn, 60);
+    self rotateYaw(turn, 60);
     wait 60;
   }
 }
@@ -132,11 +132,11 @@ swayuavrig() {
   for(;;) {
     z = randomintrange(-200, -100);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait(time);
     z = randomintrange(100, 200);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait(time);
   }
 }
@@ -193,7 +193,7 @@ callsatellite(type, displaymessage, killstreak_id) {
   timeinair = self maps\mp\killstreaks\_radar::useradaritem(type, self.team, displaymessage);
   satellite = spawn("script_model", level.mapcenter + (0 - level.satelliteflydistance, 0, level.satelliteheight));
   satellite setModel("tag_origin");
-  satellite moveto(level.mapcenter + (level.satelliteflydistance, 0, level.satelliteheight), timeinair);
+  satellite moveTo(level.mapcenter + (level.satelliteflydistance, 0, level.satelliteheight), timeinair);
   satellite.owner = self;
   satellite.team = self.team;
   satellite setteam(self.team);
@@ -513,13 +513,13 @@ generateplane(owner, timeinair, iscounter) {
 
   xoffset = cos(angle) * radiusoffset;
   yoffset = sin(angle) * radiusoffset;
-  anglevector = vectornormalize((xoffset, yoffset, zoffset));
+  anglevector = vectorNormalize((xoffset, yoffset, zoffset));
   anglevector = anglevector * randomintrange(4000, 5000);
 
   if(iscounter) {
-    plane linkto(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, -10));
+    plane linkTo(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, -10));
   } else {
-    plane linkto(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, 0));
+    plane linkTo(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, 0));
   }
 
   return plane;
@@ -877,7 +877,7 @@ plane_leave() {
     self thread flattenroll();
   }
 
-  self moveto(exitpoint, level.spyplaneexittime, 0, 0);
+  self moveTo(exitpoint, level.spyplaneexittime, 0, 0);
   self notify("leaving");
 }
 

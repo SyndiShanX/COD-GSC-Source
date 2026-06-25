@@ -86,7 +86,7 @@ handle_glass_pathing() {
 handle_pathing_on_glass() {
   level endon("game_ended");
 
-  pathing_blocker = GetEnt(self.target, "targetname");
+  pathing_blocker = getEnt(self.target, "targetname");
   if(!isDefined(pathing_blocker)) {
     return false;
   }
@@ -97,7 +97,7 @@ handle_pathing_on_glass() {
   waittill_glass_break(self.glass_id);
 
   pathing_blocker trigger_on();
-  pathing_blocker DisconnectPaths();
+  pathing_blocker disconnectPaths();
   pathing_blocker trigger_off();
 }
 

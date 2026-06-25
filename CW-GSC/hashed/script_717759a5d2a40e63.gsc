@@ -56,8 +56,8 @@ function function_eeb092f5(entity) {
     }
 
     level.doa.active_attractors[level.doa.active_attractors.size] = var_c980e593;
-    var_c980e593 enablelinkto();
-    var_c980e593 linkto(entity, undefined, (0, 0, 60));
+    var_c980e593 enablelinkTo();
+    var_c980e593 linkTo(entity, undefined, (0, 0, 60));
     var_c980e593 namespace_83eb6304::function_3ecfde67("magnet_on");
     var_c980e593 namespace_e32bb68::function_3a59ec34("evt_doa_pickup_magnet_active_lp");
     var_c980e593 thread function_85cdc313(entity);
@@ -170,7 +170,7 @@ function private function_68126677(var_624b8d02 = getdvarint(#"hash_5f8a3b48d8eb
       if(self.origin[0] != self.var_76d7c415[0] || self.origin[1] != self.var_76d7c415[1]) {
         trace = bulletTrace(self.origin, self.origin + (0, 0, -500), 0, undefined);
         self.groundpos = namespace_ec06fe4a::function_65ee50ba(self.origin) + (0, 0, 32);
-        self moveto(self.groundpos, 1);
+        self moveTo(self.groundpos, 1);
         self waittilltimeout(1.1, #"movedone", #"picked_up", #"hash_2d37cb44b7f0c612", #"death");
         self.var_76d7c415 = self.origin;
         self.var_e48718a6 = undefined;
@@ -198,7 +198,7 @@ function private function_68126677(var_624b8d02 = getdvarint(#"hash_5f8a3b48d8eb
         origin = force.origin;
       }
 
-      var_58b1f132 = vectornormalize(origin - self.origin);
+      var_58b1f132 = vectorNormalize(origin - self.origin);
       scale = (var_624b8d02 - distsq) / var_624b8d02;
       movevec = vectorscale(var_58b1f132, forcemag * scale);
       self.origin += movevec;

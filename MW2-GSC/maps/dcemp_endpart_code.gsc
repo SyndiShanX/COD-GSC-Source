@@ -12,7 +12,7 @@
 
 whitehouse_spotlight() {
   level endon("kill_spotlight");
-  spotlight_origin = getstruct("whitehouse_spotlight", "targetname");
+  spotlight_origin = getStruct("whitehouse_spotlight", "targetname");
 
   spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight");
   spotlight setModel("cod3mg42");
@@ -23,7 +23,7 @@ whitehouse_spotlight() {
 
   spotlight endon("death");
 
-  target_struct = getstruct(spotlight_origin.target, "targetname");
+  target_struct = getStruct(spotlight_origin.target, "targetname");
   target_struct.ent = spawn("script_origin", target_struct.origin);
 
   spotlight settargetentity(target_struct.ent);
@@ -70,13 +70,13 @@ whitehouse_spotlight_pathing(target_struct) {
       break;
     }
 
-    target_struct = getstruct(target_struct.target, "targetname");
+    target_struct = getStruct(target_struct.target, "targetname");
   }
 }
 
 whitehouse_spotlight_targeting() {
   self endon("death");
-  volume = getent("entrance_stage_area", "targetname");
+  volume = getEnt("entrance_stage_area", "targetname");
 
   self SetConvergenceTime(5, "yaw");
   self SetConvergenceTime(5, "pitch");
@@ -123,7 +123,7 @@ whitehouse_spotlight_flicker() {
 whitehouse_spotlight_damage() {
   self endon("death");
 
-  trigger = getent("spotlight_damage_trigger", "targetname");
+  trigger = getEnt("spotlight_damage_trigger", "targetname");
 
   total_damage = 0;
 
@@ -197,7 +197,7 @@ manual_mg_path(start_target, noloop) {
   if(isDefined(start_target)) {
     self.current_target = start_target;
   } else {
-    self.current_target = getstruct(self.target, "targetname");
+    self.current_target = getStruct(self.target, "targetname");
   }
 
   target_ent = spawn("script_origin", self.current_target.origin);
@@ -217,9 +217,9 @@ manual_mg_path(start_target, noloop) {
     self turret_on_target(self.current_target);
 
     if(isDefined(self.current_target.target)) {
-      self.current_target = getstruct(self.current_target.target, "targetname");
+      self.current_target = getStruct(self.current_target.target, "targetname");
     } else if(isDefined(self.target)) {
-      self.current_target = getstruct(self.target, "targetname");
+      self.current_target = getStruct(self.target, "targetname");
     } else {
       break;
     }
@@ -257,7 +257,7 @@ manual_mg_threat_trigger(turret) {
   turret SetConvergenceTime(0.25, "pitch");
 
   flag_set("mg_threat");
-  start_target = getstruct(self.target, "targetname");
+  start_target = getStruct(self.target, "targetname");
   target_ent = spawn("script_origin", start_target.origin);
 
   turret settargetentity(target_ent);
@@ -412,7 +412,7 @@ whitehouse_cleanup_approach() {
   flag_wait("whitehouse_breached");
 
   mg_array = getEntArray("manual_mg", "script_noteworthy");
-  mg_array = array_add(mg_array, getent("west_side_mg", "script_noteworthy"));
+  mg_array = array_add(mg_array, getEnt("west_side_mg", "script_noteworthy"));
 
   for(i = 0; i < mg_array.size; i++) {
     mg_array[i] thread manual_mg_stop(i + 1);
@@ -434,7 +434,7 @@ whitehouse_mg_setup() {
   mg_array = getEntArray("manual_mg", "script_noteworthy");
   array_thread(mg_array, ::manual_mg_init, true);
 
-  turret = getent("threat_mg", "targetname");
+  turret = getEnt("threat_mg", "targetname");
   trigger_array = getEntArray("mg_threat_trigger", "targetname");
   array_thread(trigger_array, ::manual_mg_threat_trigger, turret);
 }
@@ -463,7 +463,7 @@ whitehouse_rappel_setup() {
 
 whitehouse_rappel(data_struct) {
   self endon("death");
-  anim_ent = getent(self.target, "targetname");
+  anim_ent = getEnt(self.target, "targetname");
 
   rope = spawn_anim_model("rope", anim_ent.origin);
 
@@ -481,13 +481,13 @@ whitehouse_rappel(data_struct) {
   flag_wait("whitehouse_rappel");
   anim_ent script_delay();
 
-  anim_ent anim_stopanimscripted();
+  anim_ent anim_stopanimScripted();
 
   rope delayCall(9, ::delete);
 
   anim_ent anim_single(ents, "rappel_drop", undefined, 4.3);
 
-  ent = getent("rappel_goal", "targetname");
+  ent = getEnt("rappel_goal", "targetname");
   self setgoalpos(ent.origin);
   self.goalradius = 1024;
   self.goalheight = 128;
@@ -498,7 +498,7 @@ fake_flare(delay, tag, origin_offset, angles_offset) {
 
   flare = spawn("script_model", (0, 0, 0));
   flare setModel("mil_emergency_flare");
-  flare LinkTo(self, tag, origin_offset, angles_offset);
+  flare linkTo(self, tag, origin_offset, angles_offset);
   playFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
   wait 12;
   stopFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
@@ -509,7 +509,7 @@ fake_flare(delay, tag, origin_offset, angles_offset) {
 foley_flare_fx_start(guy) {
   flare = spawn("script_model", (0, 0, 0));
   flare setModel("mil_emergency_flare");
-  flare LinkTo(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  flare linkTo(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
   flare_fx = getfx("green_flare");
 
@@ -529,7 +529,7 @@ foley_flare_fx_start(guy) {
 player_flare() {
   level.player.flare = spawn("script_model", (0, 0, 0));
   level.player.flare setModel("mil_emergency_flare");
-  level.player.flare LinkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  level.player.flare linkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   level.player.flare endon("death");
 
   flag_wait("flare_start_fx");
@@ -553,11 +553,11 @@ door_open_kick() {
   self playSound("door_wood_double_kick");
 
   self ConnectPaths();
-  self RotateTo(self.angles + (0, 90, 0), .5, .1, 0);
+  self rotateTo(self.angles + (0, 90, 0), .5, .1, 0);
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, -10, 0), .3, 0, .3);
+  self rotateTo(self.angles + (0, -10, 0), .3, 0, .3);
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, 5, 0), .3, 0.15, 0.15);
+  self rotateTo(self.angles + (0, 5, 0), .3, 0.15, 0.15);
 }
 
 waittill_player_damage(damage_limit) {
@@ -585,7 +585,7 @@ turret_on_target(target_ent) {
   self waittill("turret_on_target");
   while(true) {
     aim_vector = anglesToForward(self gettagangles("tag_flash"));
-    target_vector = vectornormalize(target_ent.origin - self.origin);
+    target_vector = vectorNormalize(target_ent.origin - self.origin);
 
     dot = vectordot(aim_vector, target_vector);
     if(dot > 0.9999) {
@@ -632,7 +632,7 @@ chandelier() {
   }
 
   if(isDefined(self.wire.target)) {
-    ceiling_struct = getstruct(self.wire.target, "targetname");
+    ceiling_struct = getStruct(self.wire.target, "targetname");
     ceiling = ceiling_struct.origin;
   } else
     ceiling = PhysicsTrace(self.origin, self.origin + (0, 0, 80));
@@ -640,8 +640,8 @@ chandelier() {
   self.swing_origin = spawn("script_origin", ceiling);
   self.swing = false;
 
-  self linkto(self.swing_origin);
-  self.wire linkto(self.swing_origin);
+  self linkTo(self.swing_origin);
+  self.wire linkTo(self.swing_origin);
   self thread chandelier_link_light();
 
   self.light SetLightIntensity(1.5);
@@ -679,22 +679,22 @@ chandelier_swing(damage, direction_vec) {
   angle = 75 * multiplier;
   swing_speed = 0.4;
 
-  weight_vector = vectornormalize((direction_vec[0] * -1, direction_vec[1], 0));
+  weight_vector = vectorNormalize((direction_vec[0] * -1, direction_vec[1], 0));
   rotation = (angle * weight_vector[0], 0, angle * weight_vector[1]);
 
-  self.swing_origin rotateto(rotation, swing_speed, 0, swing_speed);
+  self.swing_origin rotateTo(rotation, swing_speed, 0, swing_speed);
   self.swing_origin waittill("rotatedone");
 
   while(abs(angle) > 2) {
     angle *= -0.75;
     rotation = (angle * weight_vector[0], 0, angle * weight_vector[1]);
 
-    self.swing_origin rotateto(rotation, swing_speed * 2, swing_speed, swing_speed);
+    self.swing_origin rotateTo(rotation, swing_speed * 2, swing_speed, swing_speed);
     self.swing_origin waittill("rotatedone");
     self notify("chandelier_turn");
   }
 
-  self.swing_origin rotateto((0, 0, 0), swing_speed * 2, swing_speed, swing_speed);
+  self.swing_origin rotateTo((0, 0, 0), swing_speed * 2, swing_speed, swing_speed);
   self.swing_origin waittill("rotatedone");
   self.swing = false;
   self notify("chandelier_turn");
@@ -746,7 +746,7 @@ chandelier_link_light() {
   self endon("chandelier_fall");
 
   self.light_origin = spawn("script_origin", self.light.origin);
-  self.light_origin linkto(self);
+  self.light_origin linkTo(self);
 
   while(true) {
     self waittill("chandelier_swing");
@@ -779,8 +779,8 @@ chandelier_force_swing(damage, direction_vec) {
 player_attached_use(hintstring) {
   ent = spawn("script_origin", level.player.origin + (0, 0, 32));
   ent makeusable();
-  ent sethintstring(hintstring);
-  ent linkto(level.player);
+  ent setHintString(hintstring);
+  ent linkTo(level.player);
 
   level thread set_flag_on_trigger(ent, "remove_use_hint");
   flag_wait("remove_use_hint");
@@ -806,7 +806,7 @@ simple_drone_init() {
 }
 
 tunnels_teleport() {
-  trigger = getent("tunnels_teleport_trigger", "targetname");
+  trigger = getEnt("tunnels_teleport_trigger", "targetname");
   trigger waittill("trigger");
 
   flag_set("tunnels_teleport");
@@ -820,8 +820,8 @@ tunnels_teleport() {
 
   flag_set("end_fx");
 
-  start_ent = getent(trigger.target, "targetname");
-  target_ent = getent(start_ent.target, "targetname");
+  start_ent = getEnt(trigger.target, "targetname");
+  target_ent = getEnt(start_ent.target, "targetname");
 
   angles_rotation = target_ent.angles - start_ent.angles;
   origin_offset = level.player.origin - start_ent.origin;
@@ -831,12 +831,12 @@ tunnels_teleport() {
   destination_origin = target_ent.origin + origin_offset;
   destination_angles = target_ent.angles + player_angles_offset;
 
-  level.player SetOrigin(destination_origin);
+  level.player setOrigin(destination_origin);
   level.player setplayerangles(destination_angles);
 
   SetNorthYaw(0.0);
 
-  volume = getent("tunnels_teleport_volume", "targetname");
+  volume = getEnt("tunnels_teleport_volume", "targetname");
   dest_arr = getStructArray("tunnels_teleport_struct", "targetname");
   index = 0;
 

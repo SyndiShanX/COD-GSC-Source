@@ -84,9 +84,9 @@ function airlock_hack_init() {
       targets[i] triggerenable(0);
     }
   }
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self.script_noteworthy = "default";
-  self sethintstring(&"ZOMBIE_EQUIP_HACKER");
+  self setHintString(&"ZOMBIE_EQUIP_HACKER");
 }
 
 function airlock_buy_init() {
@@ -112,9 +112,9 @@ function airlock_buy_init() {
       targets[i] triggerenable(0);
     }
   }
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "electric_door" || self.script_noteworthy == "electric_buyable_door")) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
   } else {
     self.script_noteworthy = "default";
   }
@@ -301,16 +301,16 @@ function airlock_activate(time = 1, open = 1) {
         vector = vectorscale(self.script_vector, scale);
         if(open) {
           if(isDefined(self.startpos)) {
-            self moveto(self.startpos + vector, time);
+            self moveTo(self.startpos + vector, time);
           } else {
-            self moveto(self.origin + vector, time);
+            self moveTo(self.origin + vector, time);
           }
           self._door_open = 1;
         } else {
           if(isDefined(self.startpos)) {
-            self moveto(self.startpos, time);
+            self moveTo(self.startpos, time);
           } else {
-            self moveto(self.origin - vector, time);
+            self moveTo(self.origin - vector, time);
           }
           self._door_open = 0;
         }
@@ -329,7 +329,7 @@ function moon_airlock_occupied() {
       is_occupied++;
     }
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] istouching(self)) {
       is_occupied++;
@@ -433,8 +433,8 @@ function moon_intermission() {
         }
         org.origin = points[i].origin;
         org.angles = points[i].angles;
-        for(j = 0; j < getplayers().size; j++) {
-          player = getplayers()[j];
+        for(j = 0; j < getPlayers().size; j++) {
+          player = getPlayers()[j];
           player camerasetposition(org);
           player camerasetlookat();
           player cameraactivate(1);
@@ -452,8 +452,8 @@ function moon_intermission() {
         }
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
-        org moveto(target_point.origin, time, q_time, q_time);
-        org rotateto(target_point.angles, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait(time - q_time);
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 1;
@@ -483,8 +483,8 @@ function hacker_location_random_init() {
       hacker_tool_array[hacker_tool_array.size] = hacker[i];
       struct = spawnStruct();
       struct.trigger_org = hacker[i].origin;
-      struct.model_org = getent(hacker[i].target, "targetname").origin;
-      struct.model_ang = getent(hacker[i].target, "targetname").angles;
+      struct.model_org = getEnt(hacker[i].target, "targetname").origin;
+      struct.model_ang = getEnt(hacker[i].target, "targetname").angles;
       level.hacker_tool_positions[level.hacker_tool_positions.size] = struct;
     }
   }
@@ -496,7 +496,7 @@ function hacker_location_random_init() {
 }
 
 function hacker_position_cleanup() {
-  model = getent(self.target, "targetname");
+  model = getEnt(self.target, "targetname");
   if(isDefined(model)) {
     model delete();
   }
@@ -513,7 +513,7 @@ function moon_glass_breach_init() {
   level.var_4fd08591["generator_exit_east_zone"] = 1;
   level.var_4fd08591["enter_forest_east_zone"] = 1;
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread check_for_grenade_throw();
   }
@@ -678,7 +678,7 @@ function zombie_moon_hatch() {
   self playSound("evt_loading_door_start");
   if(isDefined(self.script_vector)) {
     vector = vectorscale(self.script_vector, scale);
-    self moveto(self.origin + vector, 1);
+    self moveTo(self.origin + vector, 1);
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "hatch_clip") {
       self thread zm_blockers::disconnect_paths_when_done();
     } else {
@@ -703,7 +703,7 @@ function function_8ceda02() {
 }
 
 function sky_transition_fog_settings() {
-  players = getplayers();
+  players = getPlayers();
   if(level flag::get("enter_nml")) {
     for(i = 0; i < players.size; i++) {
       players[i] clientfield::set_to_player("player_sky_transition", 1);

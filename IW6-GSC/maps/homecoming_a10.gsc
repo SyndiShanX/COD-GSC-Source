@@ -565,7 +565,7 @@ a10_player_init(var_0, var_1) {
   var_8 = "tag_camera2";
   var_7.linker = var_7 common_scripts\utility::spawn_tag_origin();
   var_7.linker.angles = var_7 gettagangles(var_8);
-  var_7.linker linkto(var_7, var_8, (0, 0, -55), (0, 0, 0));
+  var_7.linker linkTo(var_7, var_8, (0, 0, -55), (0, 0, 0));
   var_7.hud = a10_player_init_hud();
   var_7 dontcastshadows();
   level.player.warthog = var_7;
@@ -591,7 +591,7 @@ a10_player_init(var_0, var_1) {
       var_9 = maps\homecoming_util::return_point_in_circle(var_2.origin, var_2.radius);
     }
 
-    var_10 = vectornormalize(var_9 - var_7 gettagorigin(var_8));
+    var_10 = vectorNormalize(var_9 - var_7 gettagorigin(var_8));
     var_11 = vectortoangles(var_10);
     level.player setplayerangles(var_11);
   } else
@@ -659,7 +659,7 @@ a10_inital_fire_check() {
 a10_player_30mm_fire(var_0, var_1) {
   self endon("a10_stop_fire_30mm");
   var_0.firing_sound_ent = spawn("script_origin", (0, 0, 0));
-  var_0.firing_sound_ent linkto(var_0, "tag_gun", (0, 0, 0), (0, 0, 0));
+  var_0.firing_sound_ent linkTo(var_0, "tag_gun", (0, 0, 0), (0, 0, 0));
   var_0.firing_sound_ent thread common_scripts\utility::play_loop_sound_on_entity("a10p_gatling_loop");
   var_2 = self.storeshots.size;
   self.storeshots[var_2] = [];
@@ -678,14 +678,14 @@ a10_player_30mm_fire(var_0, var_1) {
     var_9 = bulletTrace(var_5, var_6, 0);
     var_10 = maps\homecoming_util::return_point_in_circle(var_9["position"], 128);
     var_9 = bulletTrace(var_5, var_10, 0);
-    var_4 = vectornormalize(var_9["position"] - var_7);
+    var_4 = vectorNormalize(var_9["position"] - var_7);
     playFX(common_scripts\utility::getfx("a10_player_tracer"), var_7, var_4);
     var_0 thread a10_player_shot_think(var_9, var_7, var_4);
     var_11 = self.storeshots[var_2]["origins"].size;
     self.storeshots[var_2]["origins"][var_11] = var_9["position"];
     playFXOnTag(common_scripts\utility::getfx("a10_muzzle_flash"), var_0, "tag_gun");
     earthquake(0.22, 0.05, self.origin, 999999);
-    self playrumbleonentity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
     wait 0.05;
   }
 }
@@ -755,7 +755,7 @@ a10_get_player_end_position() {
 }
 
 a10_create_fake_player() {
-  var_0 = getent("a10_player_spawner", "targetname");
+  var_0 = getEnt("a10_player_spawner", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
   var_1 maps\_utility::magic_bullet_shield();
   var_1.origin = level.player.origin;
@@ -851,7 +851,7 @@ a10_squadron_shoot(var_0) {
   var_1 = self gettagorigin("tag_gun");
   var_2 = return_random_spot_in_circle(var_0);
   var_3 = bulletTrace(var_1, var_2, 0);
-  var_4 = vectornormalize(var_2 - var_1);
+  var_4 = vectorNormalize(var_2 - var_1);
   playFX(common_scripts\utility::getfx("a10_player_tracer"), var_1, var_4);
   wait 0.2;
   playFX(common_scripts\utility::getfx("a10_impact"), var_3["position"]);
@@ -885,7 +885,7 @@ a10_endrun_shooting(var_0) {
     var_1 = self gettagorigin("tag_gun");
     var_8 = maps\homecoming_util::return_point_in_circle(var_4, var_3);
     var_6 = bulletTrace(var_1, var_8, 0);
-    var_9 = vectornormalize(var_6["position"] - var_1);
+    var_9 = vectorNormalize(var_6["position"] - var_1);
     playFX(common_scripts\utility::getfx("a10_player_tracer"), var_1, var_9);
     common_scripts\utility::noself_delaycall(0.4, ::playfx, common_scripts\utility::getfx("a10_impact"), var_6["position"]);
 
@@ -1331,7 +1331,7 @@ a10_kill_notification(var_0) {
   var_7.width = 0.1;
   var_7.height = 0.1;
   var_7 setwaypoint(1, 0, 1);
-  var_7 settargetent(var_6);
+  var_7 settargetEnt(var_6);
   var_8 = 0.75;
   var_7.alpha = 0.5;
   var_7 fadeovertime(var_8);

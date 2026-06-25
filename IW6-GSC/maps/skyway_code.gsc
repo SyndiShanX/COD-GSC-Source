@@ -9,7 +9,7 @@ random_wait_and_kill(var_0, var_1) {
 }
 
 get_a10_player_start() {
-  var_0 = common_scripts\utility::getstruct("a10_player_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("a10_player_start", "targetname");
   return var_0;
 }
 

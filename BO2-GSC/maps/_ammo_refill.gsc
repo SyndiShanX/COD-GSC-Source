@@ -17,8 +17,8 @@ main() {
 }
 
 _ammo_refill_think_old() {
-  self sethintstring(&"SCRIPT_AMMO_REFILL");
-  self setcursorhint("HINT_NOICON");
+  self setHintString(&"SCRIPT_AMMO_REFILL");
+  self setCursorHint("HINT_NOICON");
 
   while(true) {
     self waittill("trigger", e_player);
@@ -101,8 +101,8 @@ _setup_weapon_cache() {
 _ammo_refill_think() {
   self endon("disable_ammo_cache");
   t_ammo_cache = self _get_closest_ammo_trigger();
-  t_ammo_cache sethintstring(&"SCRIPT_AMMO_REFILL");
-  t_ammo_cache setcursorhint("HINT_NOICON");
+  t_ammo_cache setHintString(&"SCRIPT_AMMO_REFILL");
+  t_ammo_cache setCursorHint("HINT_NOICON");
 
   while(true) {
     t_ammo_cache waittill("trigger", e_player);

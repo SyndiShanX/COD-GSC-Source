@@ -165,7 +165,7 @@ zombie_make_sizzler(param_00, param_01) {
   var_15.posoffset = var_13;
   var_15.anglesoffset = var_14;
   var_15.var_5DBE = var_04;
-  var_15 linkto(self, var_04, var_13, var_14);
+  var_15 linkTo(self, var_04, var_13, var_14);
   playFXOnTag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
   var_15 scriptmodelplayanim("s2_zom_ww_bolt_extend");
   var_15 thread monitor_sizzler_bolt(self);
@@ -189,7 +189,7 @@ zombie_make_sizzler(param_00, param_01) {
   level notify("spawn_sizzler_complete");
   var_15 unlink();
   if(isDefined(var_19)) {
-    var_15 linkto(var_19, var_04, var_13, var_14);
+    var_15 linkTo(var_19, var_04, var_13, var_14);
     playFXOnTag(level.var_611["zmb_ber_bolt_rod_gk_attach"], var_15, "TAG_ORIGIN");
     var_15 thread monitor_sizzler_bolt(var_19);
     thread maps\mp\agents\humanoid\_humanoid_util::func_8318(self.var_116, self.var_1D, var_03, var_06.optional_script_anim_index, 0, undefined, 1, 0, undefined, undefined, var_17);

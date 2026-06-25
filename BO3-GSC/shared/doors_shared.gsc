@@ -103,18 +103,18 @@ class cdoor {
     v_pos = calculate_offset_position(m_e_door.origin, m_e_door.angles, v_offset);
     v_pos = (v_pos[0], v_pos[1], v_pos[2] + 50);
     if(isDefined(m_s_bundle.door_trigger_at_target) && m_s_bundle.door_trigger_at_target) {
-      e_target = getent(m_str_target, "targetname");
+      e_target = getEnt(m_str_target, "targetname");
       if(isDefined(e_target)) {
         v_pos = e_target.origin;
       }
     }
     if(isDefined(m_s_bundle.door_use_trigger) && m_s_bundle.door_use_trigger) {
       m_e_trigger = spawn("trigger_radius_use", v_pos, 0, n_radius, m_n_trigger_height);
-      m_e_trigger triggerignoreteam();
+      m_e_trigger triggerIgnoreTeam();
       m_e_trigger setvisibletoall();
       m_e_trigger setteamfortrigger("none");
-      m_e_trigger usetriggerrequirelookat();
-      m_e_trigger setcursorhint("HINT_NOICON");
+      m_e_trigger useTriggerRequireLookAt();
+      m_e_trigger setCursorHint("HINT_NOICON");
     } else {
       m_e_trigger = spawn("trigger_radius", v_pos, 0, n_radius, m_n_trigger_height);
     }
@@ -128,13 +128,13 @@ class cdoor {
       str_hint = "This door is electronically locked";
     }
     while(true) {
-      m_e_hint_trigger sethintstring(str_hint);
+      m_e_hint_trigger setHintString(str_hint);
       if(isDefined(m_s_bundle.door_trigger_at_target) && m_s_bundle.door_trigger_at_target) {
         self flag::wait_till("open");
       } else {
         self flag::wait_till_clear("locked");
       }
-      m_e_hint_trigger sethintstring("");
+      m_e_hint_trigger setHintString("");
       if(isDefined(m_s_bundle.door_trigger_at_target) && m_s_bundle.door_trigger_at_target) {
         self flag::wait_till_clear("open");
       } else {
@@ -199,15 +199,15 @@ class cdoor {
     }
     if(isDefined(m_s_bundle.b_loop_sound) && m_s_bundle.b_loop_sound) {
       sndent = spawn("script_origin", m_e_door.origin);
-      sndent linkto(m_e_door);
+      sndent linkTo(m_e_door);
       sndent playLoopSound(m_s_bundle.door_loop_sound, 1);
     }
     if(m_s_bundle.door_open_method == "slide") {
-      m_e_door moveto(m_v_open_pos, m_s_bundle.door_open_time);
+      m_e_door moveTo(m_v_open_pos, m_s_bundle.door_open_time);
     } else if(m_s_bundle.door_open_method == "swing") {
       angle = getswingangle();
       v_angle = (m_e_door.angles[0], m_e_door.angles[1] + angle, m_e_door.angles[2]);
-      m_e_door rotateto(v_angle, m_s_bundle.door_open_time);
+      m_e_door rotateTo(v_angle, m_s_bundle.door_open_time);
     }
     if(isDefined(m_n_door_connect_paths) && m_n_door_connect_paths) {
       m_e_door connectpaths();
@@ -235,21 +235,21 @@ class cdoor {
     if(isDefined(m_s_bundle.b_loop_sound) && m_s_bundle.b_loop_sound) {
       m_e_door playSound(m_s_bundle.door_start_sound);
       sndent = spawn("script_origin", m_e_door.origin);
-      sndent linkto(m_e_door);
+      sndent linkTo(m_e_door);
       sndent playLoopSound(m_s_bundle.door_loop_sound, 1);
     } else if(isDefined(m_s_bundle.door_stop_sound) && m_s_bundle.door_stop_sound != "") {
       m_e_door playSound(m_s_bundle.door_stop_sound);
     }
     if(m_s_bundle.door_open_method == "slide") {
-      m_e_door moveto(m_v_close_pos, m_s_bundle.door_open_time);
+      m_e_door moveTo(m_v_close_pos, m_s_bundle.door_open_time);
     } else if(m_s_bundle.door_open_method == "swing") {
       angle = getswingangle();
       v_angle = (m_e_door.angles[0], m_e_door.angles[1] - angle, m_e_door.angles[2]);
-      m_e_door rotateto(v_angle, m_s_bundle.door_open_time);
+      m_e_door rotateTo(v_angle, m_s_bundle.door_open_time);
     }
     wait(m_s_bundle.door_open_time);
     if(isDefined(m_n_door_connect_paths) && m_n_door_connect_paths) {
-      m_e_door disconnectpaths();
+      m_e_door disconnectPaths();
     }
     if(isDefined(m_s_bundle.b_loop_sound) && m_s_bundle.b_loop_sound) {
       sndent delete();
@@ -293,11 +293,11 @@ class cdoor {
     v_pos = calculate_offset_position(m_e_door.origin, m_e_door.angles, v_offset);
     v_pos = (v_pos[0], v_pos[1], v_pos[2] + 50);
     e_trig = spawn("trigger_radius_use", v_pos, 0, n_radius, m_n_trigger_height);
-    e_trig triggerignoreteam();
+    e_trig triggerIgnoreTeam();
     e_trig setvisibletoall();
     e_trig setteamfortrigger("none");
-    e_trig usetriggerrequirelookat();
-    e_trig setcursorhint("HINT_NOICON");
+    e_trig useTriggerRequireLookAt();
+    e_trig setCursorHint("HINT_NOICON");
     m_e_hint_trigger = e_trig;
     thread process_hint_trigger_message();
   }
@@ -305,7 +305,7 @@ class cdoor {
   function get_hack_angles() {
     v_angles = m_e_door.angles;
     if(isDefined(m_str_target)) {
-      e_target = getent(m_str_target, "targetname");
+      e_target = getEnt(m_str_target, "targetname");
       if(isDefined(e_target)) {
         return e_target.angles;
       }
@@ -318,7 +318,7 @@ class cdoor {
     v_pos = calculate_offset_position(m_e_door.origin, m_e_door.angles, v_trigger_offset);
     v_pos = (v_pos[0], v_pos[1], v_pos[2] + 50);
     if(isDefined(m_str_target)) {
-      e_target = getent(m_str_target, "targetname");
+      e_target = getEnt(m_str_target, "targetname");
       if(isDefined(e_target)) {
         return e_target.origin;
       }
@@ -331,7 +331,7 @@ class cdoor {
     m_e_door setModel(str_xmodel);
     m_e_door.angles = v_angles;
     if(connect_paths) {
-      m_e_door disconnectpaths();
+      m_e_door disconnectPaths();
     }
   }
 
@@ -654,7 +654,7 @@ function player_take_key(str_key_type) {
 function rotate_key_forever() {
   self endon("death");
   while(true) {
-    self rotateyaw(180, 3);
+    self rotateYaw(180, 3);
     wait(2.5);
   }
 }
@@ -695,8 +695,8 @@ function give_ai_key_internal(n_timeout_sec, str_key_type) {
     playFXOnTag(level.door_key_fx, e_model, "tag_origin");
   }
   while(isalive(self)) {
-    e_model moveto(self.origin + vectorscale((0, 0, 1), 80), 0.2);
-    e_model rotateyaw(30, 0.2);
+    e_model moveTo(self.origin + vectorscale((0, 0, 1), 80), 0.2);
+    e_model rotateYaw(30, 0.2);
     wait(0.1);
   }
   e_model movez(-60, 1);

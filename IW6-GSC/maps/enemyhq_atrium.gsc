@@ -84,14 +84,14 @@ spawn_truck_setup_riders() {
   level.player_truck = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("vehicle_breakthru");
   level.player_truck.dontunloadonend = 1;
   var_0 = level.player_truck;
-  level.allies[1] linkto(level.player_truck, "tag_driver");
+  level.allies[1] linkTo(level.player_truck, "tag_driver");
   level.allies[1] maps\_utility::gun_remove();
   var_0 thread maps\_anim::anim_loop_solo(level.allies[1], "enter_truck_loop", "stop_keegan_loop", "tag_driver");
-  level.allies[0] linkto(level.player_truck, "tag_detach");
+  level.allies[0] linkTo(level.player_truck, "tag_detach");
   var_0 thread maps\_anim::anim_loop_solo(level.allies[0], "enter_truck_loop", "stop_baker_loop", "tag_detach");
-  level.allies[2] linkto(level.player_truck, "tag_detach");
+  level.allies[2] linkTo(level.player_truck, "tag_detach");
   var_0 thread maps\_anim::anim_loop_solo(level.allies[2], "enter_truck_loop", "stop_hesh_loop", "tag_detach");
-  level.dog linkto(level.player_truck, "tag_dog");
+  level.dog linkTo(level.player_truck, "tag_dog");
   level.player_truck thread maps\_anim::anim_loop_solo(level.dog, "veh_idle", "stop_dog_loop", "tag_dog");
   thread maps\enemyhq_code::player_enter_truck_atrium_startpoint(level.player_truck);
 }
@@ -125,7 +125,7 @@ bust_thru_prep_dog() {
 
 bust_thru() {
   common_scripts\utility::flag_wait("kick_off_atrium_combat");
-  var_0 = common_scripts\utility::getstruct("player_teleport_atrium", "targetname");
+  var_0 = common_scripts\utility::getStruct("player_teleport_atrium", "targetname");
   level notify("bust_thru");
   common_scripts\utility::flag_clear("FLAG_VO_hang_on_again");
   thread mk32_badassery(level.allies[0], var_0);
@@ -169,19 +169,19 @@ mk32_badassery(var_0, var_1) {
   var_1 thread maps\_anim::anim_single_solo(var_0, "bust_thru");
   var_2 = spawn("script_model", var_0 gettagorigin("tag_inhand"));
   var_2.angles = var_0 gettagangles("tag_inhand");
-  var_2 linkto(var_0, "tag_inhand");
+  var_2 linkTo(var_0, "tag_inhand");
   var_2 setModel("weapon_mk14_iw6");
   var_2 thread unlink_gun_on_flag("FLAG_mk32_detach");
-  var_3 = common_scripts\utility::getstruct("gren1pos_tossalt", "targetname");
-  var_4 = common_scripts\utility::getstruct("gren2pos_tossalt", "targetname");
-  var_5 = common_scripts\utility::getstruct("gren3pos_tossalt", "targetname");
-  var_6 = common_scripts\utility::getstruct("gren2pos", "targetname");
-  var_7 = common_scripts\utility::getstruct("gren1pos", "targetname");
-  var_8 = common_scripts\utility::getstruct("gren2posalt", "targetname");
-  var_9 = common_scripts\utility::getstruct("gren1pos_tossalt", "targetname");
-  var_10 = common_scripts\utility::getstruct("gren2pos_tossalt", "targetname");
-  var_11 = common_scripts\utility::getstruct("gren3pos_tossalt", "targetname");
-  var_12 = common_scripts\utility::getstruct("gren2posalt", "targetname");
+  var_3 = common_scripts\utility::getStruct("gren1pos_tossalt", "targetname");
+  var_4 = common_scripts\utility::getStruct("gren2pos_tossalt", "targetname");
+  var_5 = common_scripts\utility::getStruct("gren3pos_tossalt", "targetname");
+  var_6 = common_scripts\utility::getStruct("gren2pos", "targetname");
+  var_7 = common_scripts\utility::getStruct("gren1pos", "targetname");
+  var_8 = common_scripts\utility::getStruct("gren2posalt", "targetname");
+  var_9 = common_scripts\utility::getStruct("gren1pos_tossalt", "targetname");
+  var_10 = common_scripts\utility::getStruct("gren2pos_tossalt", "targetname");
+  var_11 = common_scripts\utility::getStruct("gren3pos_tossalt", "targetname");
+  var_12 = common_scripts\utility::getStruct("gren2posalt", "targetname");
   thread gren_explosion_sphere(var_6, 1.1);
   thread gren_explosion_sphere(var_7, 0.1);
   level.rpgfx = "rpg_geotrail8";
@@ -230,7 +230,7 @@ track_gren(var_0, var_1, var_2, var_3) {
   var_4 = var_1 gettagorigin("tag_flash");
   var_5 = magicbullet("mk32_dud_rocket", var_4, var_2.origin);
   var_6 = var_5 common_scripts\utility::spawn_tag_origin();
-  var_6 linkto(var_5);
+  var_6 linkTo(var_5);
   thread common_scripts\utility::play_sound_in_space("weap_mk32_fire_npc_special", var_2.origin);
   playFXOnTag(common_scripts\utility::getfx("rpg_geotrail4"), var_5, "tag_origin");
   thread gren_explosion_sphere(var_0, var_3);
@@ -250,7 +250,7 @@ gren_explosion_sphere(var_0, var_1) {
 }
 
 spawn_dog_jump_guy() {
-  var_0 = getent("enemy1_bust_thru", "targetname");
+  var_0 = getEnt("enemy1_bust_thru", "targetname");
   level.dog_jump_guy = var_0 maps\_utility::spawn_ai(1);
   level.dog_jump_guy setcontents(0);
   level.dog_jump_guy.nocorpsedelete = 1;
@@ -263,9 +263,9 @@ spawn_dog_jump_guy() {
 }
 
 wall_chunks_show() {
-  var_0 = getent("bust_thru_brushes", "targetname");
+  var_0 = getEnt("bust_thru_brushes", "targetname");
   var_1 = getEntArray("bust_thru_models", "targetname");
-  var_2 = getent("security_gate_crash_pieces2", "targetname");
+  var_2 = getEnt("security_gate_crash_pieces2", "targetname");
   var_2 delete();
   var_0 show();
 
@@ -273,13 +273,13 @@ wall_chunks_show() {
     var_4 show();
   }
 
-  var_6 = getent("bust_wall_clip", "targetname");
+  var_6 = getEnt("bust_wall_clip", "targetname");
   var_6 solid();
   var_6 show();
 }
 
 wall_chunks_hide() {
-  var_0 = getent("bust_thru_brushes", "targetname");
+  var_0 = getEnt("bust_thru_brushes", "targetname");
   var_1 = getEntArray("bust_thru_models", "targetname");
   var_0 hide();
 
@@ -287,7 +287,7 @@ wall_chunks_hide() {
     var_3 hide();
   }
 
-  var_5 = getent("bust_wall_clip", "targetname");
+  var_5 = getEnt("bust_wall_clip", "targetname");
   var_5 notsolid();
   var_5 hide();
 }
@@ -467,7 +467,7 @@ set_flag_in_trigger() {
 }
 
 check_trigger_flagset(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
 
   if(isDefined(var_1.script_flag_set)) {
@@ -495,7 +495,7 @@ array_spawn_targetname_allow_fail_setthreat_insideaware(var_0) {
 }
 
 watch_inside_trigger() {
-  var_0 = getent("atrium_inside_border", "targetname");
+  var_0 = getEnt("atrium_inside_border", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -528,7 +528,7 @@ watch_inside_trigger() {
 }
 
 watch_outside_trigger() {
-  var_0 = getent("atrium_outside_border", "targetname");
+  var_0 = getEnt("atrium_outside_border", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);

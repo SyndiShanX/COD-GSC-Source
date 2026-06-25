@@ -49,9 +49,9 @@ skipto_jungle_stealth_log() {
   level.ai_hudson setgoalpos(level.ai_hudson.origin);
   level.ai_hudson set_force_color("r");
   level.ai_hudson change_movemode("cqb_sprint");
-  s_struct = getstruct("hudson_skipto_jungle_stealth_log", "targetname");
+  s_struct = getStruct("hudson_skipto_jungle_stealth_log", "targetname");
   level.ai_hudson forceteleport(s_struct.origin, s_struct.angles);
-  m_radio_tower = getent("radio_tower", "targetname");
+  m_radio_tower = getEnt("radio_tower", "targetname");
   m_radio_tower ignorecheapentityflag(1);
   m_radio_tower setscale(2);
   level thread maps\angola_jungle_stealth_carry::mason_carry_woods("player_prone_watches_1st_child_soldier_encounter");
@@ -124,7 +124,7 @@ main() {
   level.ai_hudson setgoalpos(level.ai_hudson.origin);
   level.ai_hudson set_force_color("r");
   level.ai_hudson change_movemode("cqb_sprint");
-  m_radio_tower = getent("radio_tower", "targetname");
+  m_radio_tower = getEnt("radio_tower", "targetname");
   m_radio_tower ignorecheapentityflag(1);
   m_radio_tower setscale(2);
   m_radio_tower set_force_no_cull();
@@ -180,7 +180,7 @@ set_force_no_cull() {
 }
 
 hudson_jungle_stealth_logic() {
-  t_climb_help = getent("hudson_rock_bockage_trigger", "targetname");
+  t_climb_help = getEnt("hudson_rock_bockage_trigger", "targetname");
   t_climb_help trigger_off();
   self hudson_exits_water_and_climb();
   self thread check_out_poi_in_valley();
@@ -218,10 +218,10 @@ angola_stealth_objectives() {
   autosave_by_name("mason_carrying_woods");
   flag_wait("js_hudson_executes_hind_pilot");
   wait 0.5;
-  s_obj_escape_jungle_1 = getstruct("into_jungle_1", "targetname");
+  s_obj_escape_jungle_1 = getStruct("into_jungle_1", "targetname");
   set_objective(level.obj_escape_jungle, s_obj_escape_jungle_1, "breadcrumb");
   flag_wait("js_hudson_mason_rock_climb_start");
-  s_obj_escape_jungle_2 = getstruct("into_jungle_2", "targetname");
+  s_obj_escape_jungle_2 = getStruct("into_jungle_2", "targetname");
   set_objective(level.obj_escape_jungle, s_obj_escape_jungle_2, "breadcrumb");
   maps\angola_jungle_stealth_carry::set_carry_crouch_speed(level.default_mason_carry_crouch_speed * 0.9);
 }
@@ -230,9 +230,9 @@ angola_jungle_stealth_log_objectives() {
   flag_wait("js_hudson_mason_rock_climb_complete");
   autosave_by_name("js_hudson_mason_rock_climb_complete");
   wait 0.1;
-  t_trigger = getent("objective_mason_hudson_see_child_soldiers_trigger", "targetname");
+  t_trigger = getEnt("objective_mason_hudson_see_child_soldiers_trigger", "targetname");
   str_struct_name = t_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   flag_wait("village_antenna_spotted");
   set_objective(level.obj_escape_jungle, undefined, "delete");
   set_objective(level.obj_radio_for_extraction, s_struct, "");
@@ -248,11 +248,11 @@ angola_jungle_stealth_log_objectives() {
   level notify("hudson_under_log");
   set_objective(level.obj_radio_for_extraction, undefined, "done");
   set_objective(level.obj_dont_get_discovered);
-  t_trigger = getent("objective_mason_hide_under_log_cover_trigger", "targetname");
+  t_trigger = getEnt("objective_mason_hide_under_log_cover_trigger", "targetname");
 
   if(isDefined(t_trigger)) {
     str_struct_name = t_trigger.target;
-    s_struct = getstruct(str_struct_name, "targetname");
+    s_struct = getStruct(str_struct_name, "targetname");
     set_objective(level.obj_dont_get_discovered, s_struct, "");
     t_trigger waittill("trigger");
     flag_set("js_mason_in_cover_behind_log");
@@ -262,9 +262,9 @@ angola_jungle_stealth_log_objectives() {
   set_objective(level.obj_dont_get_discovered);
   flag_wait("js_moving_to_stealth_house_enter");
   wait 0.1;
-  t_trigger = getent("objective_mason_goto_stealth_building_trigger", "targetname");
+  t_trigger = getEnt("objective_mason_goto_stealth_building_trigger", "targetname");
   str_struct_name = t_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_dont_get_discovered, s_struct, "");
   t_trigger waittill("trigger");
   set_objective(level.obj_dont_get_discovered, undefined);
@@ -284,23 +284,23 @@ chopper_dead_bodies() {
   level thread run_scene_and_delete("chopper_dead_body3");
   level thread run_scene_first_frame("pilot_execution_pilot");
   flag_wait("chopper_dead_body3_started");
-  m_dead_body_1 = getent("chopper_dead_body1_drone", "targetname");
-  m_dead_body_2 = getent("chopper_dead_body2_drone", "targetname");
-  m_dead_body_3 = getent("chopper_dead_body3_drone", "targetname");
+  m_dead_body_1 = getEnt("chopper_dead_body1_drone", "targetname");
+  m_dead_body_2 = getEnt("chopper_dead_body2_drone", "targetname");
+  m_dead_body_3 = getEnt("chopper_dead_body3_drone", "targetname");
   flag_wait("js_mason_in_cover_behind_log");
   m_dead_body_1 delete();
   m_dead_body_2 delete();
   m_dead_body_3 delete();
-  m_dead_pilot = getent("crashed_hind_pilot_drone", "targetname");
+  m_dead_pilot = getEnt("crashed_hind_pilot_drone", "targetname");
   m_dead_pilot delete();
   delete_scene("pilot_execution_pilot", 1);
-  sp_enemy = getent("chopper_dead_body1", "targetname");
+  sp_enemy = getEnt("chopper_dead_body1", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("chopper_dead_body2", "targetname");
+  sp_enemy = getEnt("chopper_dead_body2", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("chopper_dead_body3", "targetname");
+  sp_enemy = getEnt("chopper_dead_body3", "targetname");
   sp_enemy delete();
-  sp_enemy = getent("crashed_hind_pilot", "targetname");
+  sp_enemy = getEnt("crashed_hind_pilot", "targetname");
   sp_enemy delete();
 }
 
@@ -311,7 +311,7 @@ hudson_exits_water_and_climb() {
   flag_set("js_hudson_executes_hind_pilot");
   level thread play_hudson_rock_climb_anims();
   flag_set("js_hudson_waiting_at_log_blockage");
-  t_climb_help = getent("hudson_rock_bockage_trigger", "targetname");
+  t_climb_help = getEnt("hudson_rock_bockage_trigger", "targetname");
   t_climb_help trigger_on();
   t_climb_help waittill("trigger");
   flag_set("js_hudson_mason_rock_climb_start");
@@ -335,7 +335,7 @@ play_hudson_rock_climb_anims() {
 }
 
 hudson_get_into_position_after_rock_blockage() {
-  t_trigger = getent("color_hudson_1st_child_reveal_trigger", "targetname");
+  t_trigger = getEnt("color_hudson_1st_child_reveal_trigger", "targetname");
   t_trigger activate_trigger();
   wait 0.1;
   level.ai_hudson waittill("goal");
@@ -368,9 +368,9 @@ hudsun_approaches_child_solider_encounter() {
 enemy_activity_before_log_scene() {
   level thread hault_enemy_before_log_scene();
   trigger_wait("trig_log_started");
-  s_bird_fx_org = getstruct("birds_fx_log", "targetname");
+  s_bird_fx_org = getStruct("birds_fx_log", "targetname");
   level notify("fxanim_crow_up_start");
-  playsoundatposition("evt_birds_fly_off_2", s_bird_fx_org.origin);
+  playSoundAtPosition("evt_birds_fly_off_2", s_bird_fx_org.origin);
   ai_enemy = simple_spawn_single("stair_enemy");
   ai_enemy thread stair_enemy_for_log_scene_logic();
   scene_wait("going_down_stairs_8x16_2");
@@ -391,7 +391,7 @@ stair_enemy_for_log_scene_logic() {
   add_generic_ai_to_scene(self, "going_down_stairs_8x16_2");
   run_scene("going_down_stairs_8x16_2");
   self.goalradius = 16;
-  s_dest = getstruct("stair_done_dest", "targetname");
+  s_dest = getStruct("stair_done_dest", "targetname");
   self setgoalpos(s_dest.origin);
   self waittill("goal");
   self delete();
@@ -464,7 +464,7 @@ waiting_for_stealth_move_to_house() {
   flag_wait("js_moving_to_stealth_house_enter");
   level notify(str_area_safe);
   str_trigger = "player_enters_stealth_house_trigger";
-  e_trigger = getent(str_trigger, "targetname");
+  e_trigger = getEnt(str_trigger, "targetname");
   e_trigger waittill("trigger");
   flag_set("js_player_enters_stealth_house");
 }
@@ -489,7 +489,7 @@ patrol_director() {
   level delay_notify("patrol_director_vo", 1.0);
   level thread run_scene_and_delete("direct_patrol");
   flag_wait("direct_patrol_started");
-  ai_director = getent("patrol_director_ai", "targetname");
+  ai_director = getEnt("patrol_director_ai", "targetname");
   ai_director endon("death");
   ai_director.ignoreall = 1;
   ai_director thread patroller_logic("director_start", 1);
@@ -509,7 +509,7 @@ child_guards_after_log_scene(str_scene, str_trigger) {
 
   if(str_scene == "child_guards_c") {
     flag_wait("child_guards_c_started");
-    ai_guard = getent("child_guard_c_2_ai", "targetname");
+    ai_guard = getEnt("child_guard_c_2_ai", "targetname");
     ai_guard thread guard_c_logic(str_scene);
   }
 
@@ -624,9 +624,9 @@ fail_player_if_not_in_house(delay) {
   if(!flag("js_player_enters_stealth_house")) {
     spawners = getEntArray("fail_player_outside_house_spawners", "targetname");
     array_thread(spawners, ::add_spawn_function, ::chase_after_target, level.player);
-    trigger = getent("sm_fail_not_in_house", "targetname");
+    trigger = getEnt("sm_fail_not_in_house", "targetname");
     trigger activate_trigger();
-    trigger = getent("sm_fail_valley", "targetname");
+    trigger = getEnt("sm_fail_valley", "targetname");
     trigger activate_trigger();
     flag_set("_stealth_spotted");
     level.player s3_player_fail("outside_house", 6);
@@ -701,7 +701,7 @@ begin_monitoring_stealth_house_failure(str_area_safe) {
   level waittill("begin_monitoring_stealth_house_failure");
   a_triggers = getEntArray("trig_fail_stealth_in_house_if_running_around", "targetname");
   array_thread(a_triggers, ::house_fail_stealth_if_running_around, str_area_safe);
-  child_spawner = getent("spawner_child_house_fail", "script_noteworthy");
+  child_spawner = getEnt("spawner_child_house_fail", "script_noteworthy");
   child_spawner add_spawn_function(::house_fail_retreat_after_reveal);
   level thread fail_mission_if_not_in_crouch_cover(str_area_safe, 0, 1.5, 3.5);
   level thread mission_fail_if_not_inside_info_volumes("stealth_containment_area_b", str_area_safe, 4, "js_player_fails_stealth", "player_failed_stealth_in_house", 1);
@@ -785,7 +785,7 @@ missionary_patroller() {
   wait 0.05;
   patroller = get_ais_from_scene(str_scene, "house_follow_path_and_die_spawner");
   level thread missionary_patroller_vo(patroller, str_scene);
-  e_ent = getent("house_follow_path_and_die_spawner_ai", "targetname");
+  e_ent = getEnt("house_follow_path_and_die_spawner_ai", "targetname");
   scene_done_flag = str_scene + "_done";
 
   while(true) {
@@ -850,14 +850,14 @@ stealth2_bad_dudes_wave2(delay) {
 
 lock_breaker_perk() {
   run_scene_first_frame("lockbreaker_door");
-  e_trigger = getent("open_toolshed_trigger", "targetname");
+  e_trigger = getEnt("open_toolshed_trigger", "targetname");
   e_trigger trigger_off();
   level.player waittill_player_has_lock_breaker_perk();
-  s_lock_breaker = getstruct("intruder_use_pos", "targetname");
+  s_lock_breaker = getStruct("intruder_use_pos", "targetname");
   set_objective(level.obj_interact, s_lock_breaker.origin, "interact");
   e_trigger trigger_on();
-  e_trigger setcursorhint("HINT_NOICON");
-  e_trigger sethintstring(&"SCRIPT_HINT_LOCK_BREAKER");
+  e_trigger setCursorHint("HINT_NOICON");
+  e_trigger setHintString(&"SCRIPT_HINT_LOCK_BREAKER");
   e_trigger waittill("trigger");
   e_trigger delete();
   set_objective(level.obj_interact, s_lock_breaker, "remove");
@@ -877,9 +877,9 @@ give_beartraps_to_player_wrapper() {
 
 switch_off_angola_escape_triggers() {
   level.a_angola_escape_triggers = [];
-  e_trigger = getent("je_battle1_start_trigger", "targetname");
+  e_trigger = getEnt("je_battle1_start_trigger", "targetname");
   level.a_angola_escape_triggers[level.a_angola_escape_triggers.size] = e_trigger;
-  e_trigger = getent("objective_mason_exit_villiage_into_forest_trigger", "targetname");
+  e_trigger = getEnt("objective_mason_exit_villiage_into_forest_trigger", "targetname");
   level.a_angola_escape_triggers[level.a_angola_escape_triggers.size] = e_trigger;
 
   for(i = 0; i < level.a_angola_escape_triggers.size; i++) {
@@ -983,7 +983,7 @@ fail_before_log_action() {
   flag_set("fail_before_log");
   end_scene("hault_guy");
   end_scene("wait_guy");
-  t_log_scene = getent("objective_mason_hide_under_log_cover_trigger", "targetname");
+  t_log_scene = getEnt("objective_mason_hide_under_log_cover_trigger", "targetname");
   t_log_scene delete();
   trigger_use("sm_fail_beach");
   level.player s3_player_fail(undefined, 4);
@@ -1001,7 +1001,7 @@ fail_child_guards() {
 
 fail_after_log(str_volume) {
   level endon("js_moving_to_stealth_house_enter");
-  e_volume = getent(str_volume, "targetname");
+  e_volume = getEnt(str_volume, "targetname");
 
   while(level.player istouching(e_volume) && !flag("js_player_fails_stealth")) {
     wait 0.05;
@@ -1026,7 +1026,7 @@ fail_player_for_moving_to_escape_early() {
 }
 
 clean_up_fail_valley() {
-  t_fail_valley = getent("sm_fail_valley", "targetname");
+  t_fail_valley = getEnt("sm_fail_valley", "targetname");
   t_fail_valley delete();
   a_spawners = getEntArray("enemy_fail_valley", "targetname");
 
@@ -1037,22 +1037,22 @@ clean_up_fail_valley() {
 
 clean_up_in_house() {
   for(i = 1; i <= 4; i++) {
-    ai_enemy = getent("go_house_ambient_child" + i + "_spawner_ai", "targetname");
+    ai_enemy = getEnt("go_house_ambient_child" + i + "_spawner_ai", "targetname");
     ai_enemy delete();
-    sp_enemy = getent("go_house_ambient_child" + i + "_spawner", "targetname");
+    sp_enemy = getEnt("go_house_ambient_child" + i + "_spawner", "targetname");
     sp_enemy delete();
   }
 
-  t_child_guards = getent("trig_child_guards_a", "targetname");
+  t_child_guards = getEnt("trig_child_guards_a", "targetname");
   t_child_guards delete();
-  t_child_guards = getent("trig_child_guards_b", "targetname");
+  t_child_guards = getEnt("trig_child_guards_b", "targetname");
   t_child_guards delete();
-  t_child_guards = getent("trig_child_guards_c", "targetname");
+  t_child_guards = getEnt("trig_child_guards_c", "targetname");
   t_child_guards delete();
-  e_to_be_deleted = getent("clip_house_for_hudson", "targetname");
+  e_to_be_deleted = getEnt("clip_house_for_hudson", "targetname");
   e_to_be_deleted connectpaths();
   e_to_be_deleted delete();
-  t_fail_before_log = getent("trig_fail_before_log", "targetname");
+  t_fail_before_log = getEnt("trig_fail_before_log", "targetname");
   t_fail_before_log delete();
   a_spawners = getEntArray("enemy_fail_before_log", "targetname");
 
@@ -1116,7 +1116,7 @@ child_soldier_do_not_shoot_player() {
 
   if(self.targetname != "player_failed_stealth_in_house_ai") {
     self set_goal_pos(self.origin);
-    volume = getent("child_retreat_volume", "targetname");
+    volume = getEnt("child_retreat_volume", "targetname");
     self force_goal(volume.origin, 64, 0);
 
     while(true) {
@@ -1144,7 +1144,7 @@ house_fail_retreat_after_reveal() {
   self endon("death");
   level endon("missionfailed");
   self.goalradius = 8;
-  org = getstruct("org_child_retreat_and_delete", "targetname");
+  org = getStruct("org_child_retreat_and_delete", "targetname");
   self waittill("goal");
   self thread force_goal(org.origin);
   self waittill("goal");
@@ -1154,7 +1154,7 @@ house_fail_retreat_after_reveal() {
 end_dialogue_when_stealth_breaks() {
   wait_for_stealth_to_break();
   level notify("end_dialogue_broken_stealth");
-  level.ai_hudson anim_stopanimscripted();
+  level.ai_hudson anim_stopanimScripted();
 
   if(!flag("fail_beach")) {
     level.ai_hudson stopsounds();

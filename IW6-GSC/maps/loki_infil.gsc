@@ -59,8 +59,8 @@ infil() {
 }
 
 infil_vignette() {
-  var_0 = getent("infil_vignette", "targetname");
-  var_1 = getent("infil_vignette_shuttle", "targetname");
+  var_0 = getEnt("infil_vignette", "targetname");
+  var_1 = getEnt("infil_vignette_shuttle", "targetname");
   level.player freezecontrols(1);
   level.player disableweapons();
   level.player hideviewmodel();
@@ -72,7 +72,7 @@ infil_vignette() {
   var_4 = maps\_utility::spawn_anim_model("infil_shuttle_interior");
   var_5 = common_scripts\utility::spawn_tag_origin();
   var_5.angles = (0, -90, 0);
-  var_5 linkto(var_3);
+  var_5 linkTo(var_3);
   playFXOnTag(level._effect["interior_shuttle_light"], var_4, "tag_fx_001");
   playFXOnTag(level._effect["interior_shuttle_light"], var_4, "tag_fx_002");
   common_scripts\utility::waitframe();
@@ -82,15 +82,15 @@ infil_vignette() {
   common_scripts\utility::waitframe();
   playFXOnTag(level._effect["interior_shuttle_light"], var_4, "tag_fx_006");
   level.infil_grenade = maps\_utility::spawn_anim_model("infil_grenade");
-  level.infil_grenade linkto(var_3);
+  level.infil_grenade linkTo(var_3);
   var_6 = maps\_utility::spawn_anim_model("infil_arx");
-  var_6 linkto(var_3);
+  var_6 linkTo(var_3);
   var_6 attach("viewmodel_acog_iw6", "TAG_ACOG_2", 1);
   var_6 attach("viewmodel_reticle_acog", "TAG_RETICLE_ATTACH", 1);
   var_6 attach("viewmodel_grenade_launcher", "TAG_GRENADE_LAUNCHER", 1);
   var_6 hidepart("TAG_SIGHT_ON", "viewmodel_arx_160");
-  var_2 linkto(var_3);
-  var_4 linkto(var_3);
+  var_2 linkTo(var_3);
+  var_4 linkTo(var_3);
   var_7 = [];
   var_7["player_rig"] = var_2;
   var_7["infil_arx"] = var_6;
@@ -253,7 +253,7 @@ infil_blend_push_out() {
 infil_ally(var_0, var_1, var_2, var_3) {
   var_1 endon("death");
   var_1 forceteleport(var_3.origin, var_3.angles);
-  var_1 linkto(var_3);
+  var_1 linkTo(var_3);
   var_1 maps\_utility::ent_flag_clear("lights_on");
   var_2 = getnode(var_2, "targetname");
   var_1 setgoalnode(var_2);
@@ -313,7 +313,7 @@ infil_redshirt(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self forceteleport(var_1.origin, var_1.angles);
-    self linkto(var_1);
+    self linkTo(var_1);
     maps\_anim::anim_single_solo(self, "infil_still");
     self unlink();
 
@@ -439,7 +439,7 @@ infil_cleanup() {
 first_move(var_0) {
   maps\loki_util::loki_autosave_by_name_silent("combat_one");
   var_1 = maps\loki_util::create_rumble_ent(-800, "infil_cleanup", 8);
-  var_1 playrumbleonentity("light_2s");
+  var_1 playRumbleOnEntity("light_2s");
 }
 
 ally_through_sat_panel(var_0) {
@@ -447,7 +447,7 @@ ally_through_sat_panel(var_0) {
 }
 
 headshot_redshirt(var_0) {
-  var_1 = common_scripts\utility::getstruct("combat_one_ally_2", "targetname");
+  var_1 = common_scripts\utility::getStruct("combat_one_ally_2", "targetname");
   wait 0.5;
   magicbullet("arx160_space", var_1.origin, var_0 gettagorigin("J_Head"));
   common_scripts\utility::noself_delaycall(0.1, ::magicbullet, "arx160_space", var_1.origin, var_0 gettagorigin("J_Head"));

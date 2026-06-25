@@ -99,8 +99,8 @@ _id_5AF2(var_0, var_1, var_2) {
   var_5 = var_1.origin - var_0.origin;
   var_4 = var_4 * (1, 1, 0);
   var_5 = var_5 * (1, 1, 0);
-  var_5 = vectornormalize(var_5);
-  var_4 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_5);
+  var_4 = vectorNormalize(var_4);
   var_6 = vectordot(var_5, var_4);
 
   if(var_6 >= var_3) {

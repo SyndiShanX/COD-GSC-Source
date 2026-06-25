@@ -266,7 +266,7 @@ func_D55E(var_0, var_1, var_2, var_3) {
   thread scripts\engine\utility::delete_on_death(var_11);
   self orientmode("face angle", var_5.angles[1]);
   var_12 = 1.63;
-  self linkto(var_11);
+  self linkTo(var_11);
   var_13 = lib_0A1E::asm_getallanimsforstate(var_0, var_1);
   self clearanim(lib_0A1E::asm_getbodyknob(), 0.2);
   lib_0A1E::func_2369(var_0, var_1, var_13);
@@ -274,7 +274,7 @@ func_D55E(var_0, var_1, var_2, var_3) {
   thread func_126D1(var_0, var_1);
   foreach(var_15 in var_7) {
     var_10 = var_12 / var_7.size;
-    var_11 moveto(var_15, var_10);
+    var_11 moveTo(var_15, var_10);
     var_11 waittill("movedone");
   }
 
@@ -548,8 +548,8 @@ func_100BF(var_0, var_1, var_2, var_3) {
   var_7 = moveshieldmodel(var_5, self.var_138BA + 1);
   var_7 = (var_7[0], var_7[1], var_6[2]);
   var_4 = (var_4[0], var_4[1], var_6[2]);
-  var_8 = vectornormalize(var_7 - var_6);
-  var_9 = vectornormalize(var_4 - var_6);
+  var_8 = vectorNormalize(var_7 - var_6);
+  var_9 = vectorNormalize(var_4 - var_6);
   var_10 = vectordot(var_8, var_9);
   if(var_10 < 0.2588) {
     return 0;
@@ -680,7 +680,7 @@ func_8213(var_0) {
   return var_2[1];
 }
 
-moveto(var_0) {
+moveTo(var_0) {
   self.var_138BA = 0;
   var_1 = moveshieldmodel(var_0, 1) - moveshieldmodel(var_0, 0);
   var_2 = vectortoangles(var_1);
@@ -707,7 +707,7 @@ func_FAF8() {
   }
 
   var_0 = self.var_126C5;
-  self.var_138BC = moveto(var_0);
+  self.var_138BC = moveTo(var_0);
 }
 
 moveslide() {
@@ -991,7 +991,7 @@ func_D5D4(var_0, var_1, var_2, var_3) {
   var_10 = getanimlength(var_5);
   var_11 = var_10 * var_15;
   thread func_F22D(var_1, var_11, "wall_run_loop_done", 1);
-  var_12 = vectornormalize(var_13);
+  var_12 = vectorNormalize(var_13);
   self orientmode("face direction", var_12);
   thread func_D5D1(var_1);
   self animmode("noclip");
@@ -1036,7 +1036,7 @@ func_3F10(var_0, var_1, var_2) {
   var_8 = self.var_126C5;
   var_9 = self.var_126C3 - moveshieldmodel(var_8, var_8.var_138A6.var_C050.size - 1);
   var_9 = (var_9[0], var_9[1], 0);
-  var_9 = vectornormalize(var_9);
+  var_9 = vectorNormalize(var_9);
   var_10 = vectortoangles(var_9);
   var_11 = angleclamp180(var_10[1] - self.angles[1]);
   var_11 = abs(var_11);
@@ -1256,14 +1256,14 @@ func_FFFD(var_0, var_1, var_2, var_3) {
     }
 
     var_4 = self.var_126C5;
-    var_5 = vectornormalize(moveshieldmodel(var_4, 0) - self.origin);
+    var_5 = vectorNormalize(moveshieldmodel(var_4, 0) - self.origin);
     var_6 = lib_0C65::func_371C(var_1, var_2, var_5, 0, 1);
     if(!isDefined(var_6)) {
       return 0;
     }
 
     self.a.var_FC61 = var_6;
-    self.var_138BC = moveto(self.var_126C5);
+    self.var_138BC = moveTo(self.var_126C5);
     return 1;
   }
 
@@ -1306,13 +1306,13 @@ func_FFFC(var_0, var_1, var_2, var_3) {
 
   var_4 = undefined;
   if(self.var_126C5.var_48 == "wall_run") {
-    var_4 = moveto(self.var_126C5);
+    var_4 = moveTo(self.var_126C5);
     var_5 = moveshieldmodel(self.var_126C5, 0) - self.origin;
     var_6 = vectortoangles(var_5);
   } else {
     var_5 = self.var_126C3 - self.var_126C5.origin;
     var_6 = (var_6[0], var_6[1], 0);
-    var_5 = vectornormalize(var_6);
+    var_5 = vectorNormalize(var_6);
     var_6 = vectortoangles(var_5);
   }
 

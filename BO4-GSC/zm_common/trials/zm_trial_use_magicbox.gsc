@@ -31,20 +31,20 @@ on_begin(var_519131bc = 1) {
     level.var_519131bc = var_519131bc;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_1685cc9b();
   }
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 
   if(!round_reset) {
     var_57807cdc = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_8f30dd57 < level.var_519131bc) {
         array::add(var_57807cdc, player, 0);
       }

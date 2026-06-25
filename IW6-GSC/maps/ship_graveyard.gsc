@@ -157,7 +157,7 @@ main() {
   if(getDvar("createfx", "") == "on") {
     level.struct_class_names = undefined;
     common_scripts\utility::struct_class_init();
-    var_3 = common_scripts\utility::getstruct("lighthouse_node", "targetname");
+    var_3 = common_scripts\utility::getStruct("lighthouse_node", "targetname");
     var_4 = spawn("script_model", (0, 0, 0));
     var_4 setModel("vehicle_lcs_destroyed_front");
     var_4.animname = "lcs_front";
@@ -287,7 +287,7 @@ main() {
   level.player notifyonplayercommand("melee_button_pressed", "+melee_zoom");
   level.shark_attack_playbackrate = 6;
   level.player.gs.custombreathingtime = 0.85;
-  var_6 = getent("grab_torpedo", "targetname");
+  var_6 = getEnt("grab_torpedo", "targetname");
   var_6 common_scripts\utility::trigger_off();
   setsaveddvar("r_hudOutlineWidth", 2);
   setsaveddvar("r_hudOutlineEnable", 1);
@@ -622,7 +622,7 @@ tutorial_setup() {
   thread common_scripts\utility::play_sound_in_space("scn_player_dive_in_e3", level.player.origin);
   level.player unlink();
   level.baker unlink();
-  level.baker maps\_utility::anim_stopanimscripted();
+  level.baker maps\_utility::anim_stopanimScripted();
   level.baker notify("kill surface unlink");
 
   if(isDefined(level.player_rig)) {

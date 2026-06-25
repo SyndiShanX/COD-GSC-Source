@@ -21,7 +21,7 @@ init_lighthouse_light() {
 }
 lighthouse_light(index) {
   level waittill("LHL");
-  self.light_start_point = getstruct("pack_light", "targetname");
+  self.light_start_point = getStruct("pack_light", "targetname");
   self.lighthouse_fx_model = spawn(index, self.light_start_point.origin, "script_model");
   self.lighthouse_fx_model setModel("tag_origin");
   playFXOnTag(index, level._effect["fx_zmb_coast_spotlight_main"], self.lighthouse_fx_model, "tag_origin");
@@ -34,7 +34,7 @@ lighthouse_light(index) {
     if(level.packapunch_active) {
       self wait_for_packapunch_to_finish();
     }
-    self.lighthouse_fx_model rotateto((self.lighthouse_fx_model.angles[0], self.lighthouse_fx_model.angles[1] + 5, self.lighthouse_fx_model.angles[2]), .2);
+    self.lighthouse_fx_model rotateTo((self.lighthouse_fx_model.angles[0], self.lighthouse_fx_model.angles[1] + 5, self.lighthouse_fx_model.angles[2]), .2);
     wait(.1);
   }
 }
@@ -42,7 +42,7 @@ wait_for_packapunch_to_finish() {
   while(level.packapunch_active) {
     wait .05;
   }
-  self.lighthouse_fx_model rotateto((0, self.lighthouse_fx_model.angles[1], 0), 1);
+  self.lighthouse_fx_model rotateTo((0, self.lighthouse_fx_model.angles[1], 0), 1);
   self.lighthouse_fx_model waittill("rotatedone");
 }
 lighthouse_search_toggle() {
@@ -61,7 +61,7 @@ lighthouse_search_logic() {
     self.pre_pap_angles = self.lighthouse_fx_model.angles;
     level.packapunch_active = true;
     wait(.2);
-    self.lighthouse_fx_model rotateto(angles, 1);
+    self.lighthouse_fx_model rotateTo(angles, 1);
   }
 }
 lighthouse_freak_out(index) {
@@ -78,7 +78,7 @@ lighthouse_freak_out(index) {
     level.packapunch_active = true;
     while(level.lighthouse_freakout) {
       time = randomfloatrange(.5, 1);
-      self.lighthouse_fx_model rotateto((randomintrange(-90, 90), randomintrange(-180, 180), randomintrange(-90, 90)), time);
+      self.lighthouse_fx_model rotateTo((randomintrange(-90, 90), randomintrange(-180, 180), randomintrange(-90, 90)), time);
       wait(time);
     }
   }

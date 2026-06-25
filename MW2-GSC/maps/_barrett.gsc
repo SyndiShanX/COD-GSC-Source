@@ -31,12 +31,12 @@ barrett_init() {
 }
 
 exchange_barrett_trigger() {
-  barrett_trigger = getent("barrett_trigger", "targetname");
+  barrett_trigger = getEnt("barrett_trigger", "targetname");
 
-  barrett_trigger sethintstring(&"WEAPON_BARRETT_USE");
-  turret = getent("turret2", "targetname");
+  barrett_trigger setHintString(&"WEAPON_BARRETT_USE");
+  turret = getEnt("turret2", "targetname");
 
-  targ = getent(turret.target, "targetname");
+  targ = getEnt(turret.target, "targetname");
   turret makeUnusable();
   turret hide();
   turret.origin = targ.origin;
@@ -57,7 +57,7 @@ exchange_barrett_trigger() {
     level.player_can_fire_turret_time = gettime() + 1000;
     setsaveddvar("sv_znear", "100");
 
-    setsaveddvar("sm_sunShadowCenter", getent(turret.target, "targetname").origin);
+    setsaveddvar("sm_sunShadowCenter", getEnt(turret.target, "targetname").origin);
     flag_set("player_is_on_turret");
     level.player disableWeapons();
     if(level.script == "dcburning") {
@@ -98,7 +98,7 @@ exchange_barrett_trigger() {
 
     setblur(0, 0.05);
 
-    level.player setorigin(level.player.original_org + (0, 0, 10));
+    level.player setOrigin(level.player.original_org + (0, 0, 10));
   }
 }
 

@@ -206,7 +206,7 @@ radiotower_roofguy_spawnfunc() {
 }
 
 radiotower_runup_scout() {
-  spawner = GetEnt("radiotower_path_scout", "targetname");
+  spawner = getEnt("radiotower_path_scout", "targetname");
   anime = spawner.animation;
   endgoal = GetNode(spawner.target, "targetname");
 
@@ -258,30 +258,30 @@ radiotower_friendly_colors() {
 radiotower_doorkick_1() {
   trigger_wait_targetname("trig_radiotower_doorkick_1");
 
-  tracer = GetStruct("struct_radiotower_doorkick_1_sighttracer", "targetname");
+  tracer = getStruct("struct_radiotower_doorkick_1_sighttracer", "targetname");
 
   tracer waittill_player_lookat_for_time(1, 0.7);
 
   spawners = getEntArray("spawner_radiotower_doorkick_1", "targetname");
-  door = GetEnt("sbmodel_radiotower_doorkick_1", "targetname");
-  kickRef = GetStruct("struct_radiotower_doorkick_1_animref", "targetname");
+  door = getEnt("sbmodel_radiotower_doorkick_1", "targetname");
+  kickRef = getStruct("struct_radiotower_doorkick_1_animref", "targetname");
 
   thread door_kick_housespawn(spawners, door, kickRef);
 
   if(flag("radiotower_runpath_dialogue_done")) {}
 
   wait(5);
-  backdoorBlocker = GetEnt("sbmodel_radiotower_doorkick_1_backdoor_blocker", "targetname");
+  backdoorBlocker = getEnt("sbmodel_radiotower_doorkick_1_backdoor_blocker", "targetname");
   backdoorBlocker Delete();
 }
 
 radiotower_curtainpull_1() {
-  node = GetEnt("radiotower_curtainpull1_animref", "targetname");
+  node = getEnt("radiotower_curtainpull1_animref", "targetname");
   curtain_pulldown_spawnmodel(node);
 
-  node.traceSpot = GetStruct("radiotower_curtainpull1_sighttracer", "targetname");
+  node.traceSpot = getStruct("radiotower_curtainpull1_sighttracer", "targetname");
 
-  spawner = GetEnt("spawner_radiotower_curtainpull_1", "targetname");
+  spawner = getEnt("spawner_radiotower_curtainpull_1", "targetname");
   spawner thread curtain_pulldown(true, ::distant_curtainpull_waitfunc);
 
   level endon("radiotower_exit");
@@ -300,7 +300,7 @@ distant_curtainpull_waitfunc(guy, node) {
 }
 
 radiotower_hiding_door_guy_cleanup() {
-  killtrig = GetEnt("trig_killspawner_radiotower_hiding_door_guy", "targetname");
+  killtrig = getEnt("trig_killspawner_radiotower_hiding_door_guy", "targetname");
   spawner = undefined;
   door_org = undefined;
 
@@ -332,8 +332,8 @@ radiotower_gate_open(doFx) {
     doFx = true;
   }
 
-  gateLeft = GetEnt("sbmodel_radiotower_gate_left", "targetname");
-  gateRight = GetEnt("sbmodel_radiotower_gate_right", "targetname");
+  gateLeft = getEnt("sbmodel_radiotower_gate_left", "targetname");
+  gateRight = getEnt("sbmodel_radiotower_gate_right", "targetname");
 
   openTime = 0.75;
 
@@ -384,7 +384,7 @@ radiotower_enemy_vehicles_badplaces() {
 
   refs = [];
   refs = getStructArray("struct_radiotower_vehicle1_road_badplaceRef", "targetname");
-  refs[refs.size] = GetStruct("struct_radiotower_vehicle1_donut_badplaceRef", "targetname");
+  refs[refs.size] = getStruct("struct_radiotower_vehicle1_donut_badplaceRef", "targetname");
 
   names = [];
 
@@ -585,7 +585,7 @@ gunner_scripted_death() {
 }
 
 radiotower_remove_vehicleclip() {
-  clip = GetEnt("sbmodel_technical_jump_helper", "targetname");
+  clip = getEnt("sbmodel_technical_jump_helper", "targetname");
   clip trigger_off();
 }
 
@@ -652,7 +652,7 @@ radiotower_enemies_retreat() {
   }
   wait(0.05);
 
-  retreatVolume = GetEnt("goalvolume_52", "targetname");
+  retreatVolume = getEnt("goalvolume_52", "targetname");
   enemies = array_removeundefined(enemies);
   enemies = array_removedead(enemies);
   thread array_call(enemies, ::SetGoalVolumeAuto, retreatVolume);
@@ -664,7 +664,7 @@ radiotower_enemies_retreat() {
 
   trigger_activate_targetname_safe("trig_radiotower_forcecolor_change_1");
 
-  trig = GetEnt("trig_script_color_allies_b5", "targetname");
+  trig = getEnt("trig_script_color_allies_b5", "targetname");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -692,11 +692,11 @@ street_dialogue_leftalley() {
 vista1_door1_kick() {
   trigger_wait_targetname("trig_vista1_doorkick1");
 
-  tracer = GetStruct("struct_vista1_doorkick1_sighttracer", "targetname");
+  tracer = getStruct("struct_vista1_doorkick1_sighttracer", "targetname");
   tracer waittill_player_lookat_for_time(1.5, 0.7);
 
-  door = GetEnt("sbmodel_vista1_door1", "targetname");
-  animref = GetStruct("struct_vista1_door1_animref", "targetname");
+  door = getEnt("sbmodel_vista1_door1", "targetname");
+  animref = getStruct("struct_vista1_door1_animref", "targetname");
   spawners = getEntArray("spawner_vista1_door1_houseguy", "targetname");
 
   thread door_kick_housespawn(spawners, door, animref);
@@ -706,8 +706,8 @@ vista1_wavingguy() {
   level endon("multipath_dialogue_start");
   flag_wait("street_advance_1");
 
-  animref = GetStruct("struct_vista1_wavingguy_animref", "targetname");
-  spawner = GetEnt(animref.target, "targetname");
+  animref = getStruct("struct_vista1_wavingguy_animref", "targetname");
+  spawner = getEnt(animref.target, "targetname");
   anime = "favela_run_and_wave";
 
   guy = spawner spawn_ai();
@@ -751,8 +751,8 @@ street_roof1_doorkick() {
   trigger_wait_targetname_multiple("trig_street_roof1_doorkick");
 
   spawners = getEntArray("spawner_street_roof1_doorkick", "targetname");
-  door = GetEnt("sbmodel_street_roof1_doorkick", "targetname");
-  kickRef = GetStruct("struct_street_roof1_doorkick_animref", "targetname");
+  door = getEnt("sbmodel_street_roof1_doorkick", "targetname");
+  kickRef = getStruct("struct_street_roof1_doorkick_animref", "targetname");
 
   thread door_kick_housespawn(spawners, door, kickRef);
 }
@@ -833,7 +833,7 @@ vista2_technical() {
 vista2_endhouse_jumpthru() {
   trigger_wait_targetname("trig_vista2_endhouse_clearout");
 
-  vol = GetEnt("vista2_endhouse_goalvolume", "targetname");
+  vol = getEnt("vista2_endhouse_goalvolume", "targetname");
   ais = GetAiArray("axis");
   guys = [];
   foreach(guy in ais) {
@@ -851,8 +851,8 @@ vista2_endhouse_jumpthru() {
   houseguy = guys[0];
 
   firespot = GetNode("node_vista2_endhouse_firespot", "targetname");
-  nadetarget = GetEnt("org_vista2_endhouse_nadetarget", "targetname");
-  animref = GetStruct("street_vista2_jumpthru_animref", "targetname");
+  nadetarget = getEnt("org_vista2_endhouse_nadetarget", "targetname");
+  animref = getStruct("street_vista2_jumpthru_animref", "targetname");
   jumperNode = GetNode("node_vista2_endhouse_windowjumper_target", "targetname");
 
   nader = level.hero1;
@@ -862,7 +862,7 @@ vista2_endhouse_jumpthru() {
 
   og_color = nader get_force_color();
 
-  nader set_temp_goalradius(64);
+  nader set_temp_goalRadius(64);
   nader ignore_everything();
   nader clear_force_color();
   nader AllowedStances("stand");
@@ -873,7 +873,7 @@ vista2_endhouse_jumpthru() {
   if(IsAlive(houseguy)) {
     houseguy magic_bullet_shield();
 
-    animref = GetStruct("street_vista2_jumpthru_animref", "targetname");
+    animref = getStruct("street_vista2_jumpthru_animref", "targetname");
     anime = "traverse_window_M_2_dive";
 
     houseguy.animname = "generic";
@@ -903,13 +903,13 @@ vista2_endhouse_jumpthru() {
   nader AllowedStances("stand", "crouch", "prone");
   nader set_force_color(og_color);
   nader clear_ignore_everything();
-  nader restore_goalradius();
+  nader restore_goalRadius();
 
   nader delaythread(5, ::forceUseWeapon, og_weapon, "primary");
 }
 
 vista2_firsthalf_enemies_retreat() {
-  moveToVol = GetEnt("volume_vista2_retreat", "targetname");
+  moveToVol = getEnt("volume_vista2_retreat", "targetname");
 
   trigger_wait_targetname("trig_vista2_truckstart");
 
@@ -992,9 +992,9 @@ market_door1() {
   trigger_wait_targetname("trig_market_door1");
 
   door1_spawners = getEntArray("spawner_market_door_1", "targetname");
-  door1 = GetEnt("sbmodel_market_door_1", "targetname");
-  door1_physicsRef = GetStruct("struct_physicsref_market_door1", "targetname");
-  door1_animRef = GetStruct("struct_animref_market_door1_kick", "targetname");
+  door1 = getEnt("sbmodel_market_door_1", "targetname");
+  door1_physicsRef = getStruct("struct_physicsref_market_door1", "targetname");
+  door1_animRef = getStruct("struct_animref_market_door1_kick", "targetname");
 
   door_kick_housespawn(door1_spawners, door1, door1_animRef, door1_physicsRef);
 }
@@ -1045,7 +1045,7 @@ market_evac_chopper() {
 
   flag_set("market_evac_chopper_spawned");
 
-  path2start = GetStruct("struct_market_evac_chopper_path2", "targetname");
+  path2start = getStruct("struct_market_evac_chopper_path2", "targetname");
   chopper thread market_evac_chopper_bugout_path(path2start);
 }
 market_evac_chopper_bugout_path(start) {
@@ -1053,11 +1053,11 @@ market_evac_chopper_bugout_path(start) {
 
   flag_set("market_evac_chopper_incoming");
 
-  spot2 = GetStruct(start.target, "targetname");
-  spot3 = GetStruct(spot2.target, "targetname");
+  spot2 = getStruct(start.target, "targetname");
+  spot3 = getStruct(spot2.target, "targetname");
 
-  spot4 = GetStruct(spot3.target, "targetname");
-  spot5 = GetStruct(spot4.target, "targetname");
+  spot4 = getStruct(spot3.target, "targetname");
+  spot5 = getStruct(spot4.target, "targetname");
 
   self Vehicle_SetSpeedImmediate(30);
   self Vehicle_SetSpeed(30, 15, 5);
@@ -1241,7 +1241,7 @@ market_evac_fakefire_rpgs() {
   }
 
   foreach(spot in fireSpots) {
-    target = GetStruct(spot.target, "targetname");
+    target = getStruct(spot.target, "targetname");
     MagicBullet("rpg_straight", spot.origin, target.origin);
 
     wait(RandomFloatRange(0.8, 1.5));
@@ -1270,7 +1270,7 @@ market_evac_fakefire_rpgs() {
 market_evac_remove_helperclip() {
   clips = level.market_evac_helperClips;
   foreach(clip in clips) {
-    clip DisconnectPaths();
+    clip disconnectPaths();
     clip Delete();
   }
 }
@@ -1346,12 +1346,12 @@ market_evac_housespawners() {
   door1_spawners = getEntArray("spawner_market_evac_door1", "targetname");
   door2_spawners = getEntArray("spawner_market_evac_door2", "targetname");
   door3_spawners = getEntArray("spawner_market_evac_door3", "targetname");
-  door1 = GetEnt("sbmodel_market_evac_door1", "targetname");
-  door2 = GetEnt("sbmodel_market_evac_door2", "targetname");
-  door3 = GetEnt("sbmodel_market_evac_door3", "targetname");
-  kickRef1 = GetStruct("struct_animref_market_evac_kick_door1", "targetname");
-  kickRef2 = GetStruct("struct_animref_market_evac_kick_door2", "targetname");
-  kickRef3 = GetStruct("struct_animref_market_evac_kick_door3", "targetname");
+  door1 = getEnt("sbmodel_market_evac_door1", "targetname");
+  door2 = getEnt("sbmodel_market_evac_door2", "targetname");
+  door3 = getEnt("sbmodel_market_evac_door3", "targetname");
+  kickRef1 = getStruct("struct_animref_market_evac_kick_door1", "targetname");
+  kickRef2 = getStruct("struct_animref_market_evac_kick_door2", "targetname");
+  kickRef3 = getStruct("struct_animref_market_evac_kick_door3", "targetname");
 
   thread door_kick_housespawn(door3_spawners, door3, kickRef3);
   delaythread(2, ::door_kick_housespawn, door1_spawners, door1, kickRef1);
@@ -1392,7 +1392,7 @@ market_evac_playermantle_watch(zTest) {
 }
 
 market_evac_playermantle_helper(zTest) {
-  trig = GetEnt("trig_market_evac_mantlehelper", "targetname");
+  trig = getEnt("trig_market_evac_mantlehelper", "targetname");
 
   NotifyOnCommand("mantle", "+gostand");
   NotifyOnCommand("mantle", "+moveup");
@@ -1493,9 +1493,9 @@ roofrun_waitfor_finish() {
 roofrun_player_bigjump() {
   player = level.player;
 
-  jumpstart_trig = GetEnt("trig_roofrun_player_bigjump_start", "targetname");
-  edgeref = GetStruct("struct_player_bigjump_edge_reference", "targetname");
-  groundref = GetStruct("struct_player_recovery_animref", "targetname");
+  jumpstart_trig = getEnt("trig_roofrun_player_bigjump_start", "targetname");
+  edgeref = getStruct("struct_player_bigjump_edge_reference", "targetname");
+  groundref = getStruct("struct_player_recovery_animref", "targetname");
 
   jumpForward = anglesToForward(edgeref.angles);
   thread player_jump_watcher();
@@ -1525,7 +1525,7 @@ roofrun_player_bigjump() {
 
   thread favesc_falling_music();
 
-  falltrig = GetEnt("trig_roofrun_playerjump_falltrig", "targetname");
+  falltrig = getEnt("trig_roofrun_playerjump_falltrig", "targetname");
   falltrig Delete();
 
   flag_set("roofrun_player_bigjump_start");
@@ -1588,17 +1588,17 @@ roofrun_player_bigjump() {
 
 roofrun_player_bigjump_rumble() {
   wait(1.25);
-  level.player PlayRumbleOnEntity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait(0.25);
   endTime = GetTime() + milliseconds(0.4);
   while(GetTime() < endTime) {
-    level.player PlayRumbleOnEntity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     wait(0.115);
   }
 
   wait(0.1);
 
-  level.player PlayRumbleOnEntity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }
 
 bigjump_slowmo_controls() {
@@ -1618,7 +1618,7 @@ bigjump_slowmo_controls() {
 player_normalfall_watcher() {
   level endon("player_jump_watcher_stop");
 
-  trig = GetEnt("trig_roofrun_playerjump_falltrig", "targetname");
+  trig = getEnt("trig_roofrun_playerjump_falltrig", "targetname");
   trig waittill("trigger");
   trig Delete();
 
@@ -1656,7 +1656,7 @@ roofrun_player_recovery(player_rig, groundref) {
   level.player Shellshock(shockfile, blacktime + 0.1);
 
   if(!isDefined(groundref)) {
-    groundref = GetStruct("struct_player_recovery_animref", "targetname");
+    groundref = getStruct("struct_player_recovery_animref", "targetname");
   }
 
   SetSavedDvar("objectiveHide", 1);
@@ -1862,14 +1862,14 @@ roofrun_sarge(skipToBigJump) {
   self set_generic_run_anim("freerunnerA_run");
 
   if(!skipToBigJump) {
-    animref = GetStruct("roofrun_jump1", "targetname");
+    animref = getStruct("roofrun_jump1", "targetname");
     anime = "freerunnerA_right";
     animref anim_reach_solo(self, anime);
     animref anim_single_run_solo(self, anime);
 
     self roofrun_friendly_setup();
 
-    struct = GetStruct("roofrun_sarge_waitforplayer", "targetname");
+    struct = getStruct("roofrun_sarge_waitforplayer", "targetname");
     self SetGoalPos(struct.origin);
     self waittill("goal");
   } else {
@@ -1878,7 +1878,7 @@ roofrun_sarge(skipToBigJump) {
 
   flag_wait("player_near_bigjump");
 
-  animref = GetStruct("roofrun_bigjump3", "targetname");
+  animref = getStruct("roofrun_bigjump3", "targetname");
   temp = spawn("script_origin", animref.origin);
   temp.angles = animref.angles;
   animref = temp;
@@ -1907,9 +1907,9 @@ roofrun_sarge(skipToBigJump) {
 roofrun_hero1(skipToBigJump) {
   self endon("death");
 
-  animref = GetStruct("roofrun_jump2", "targetname");
+  animref = getStruct("roofrun_jump2", "targetname");
   anime = "roofrun_laundry_2";
-  sheet = GetEnt("smodel_roofrun_sheet_right", "targetname");
+  sheet = getEnt("smodel_roofrun_sheet_right", "targetname");
   self thread sheet_roofrun_animate(animref, sheet, anime);
 
   self ent_flag_wait("roofrun_start");
@@ -1928,7 +1928,7 @@ roofrun_hero1(skipToBigJump) {
 
   self roofrun_friendly_setup();
 
-  animref = GetStruct("roofrun_bigjump1", "targetname");
+  animref = getStruct("roofrun_bigjump1", "targetname");
   anime = "favela_escape_bigjump_ghost";
   if(!skipToBigJump) {
     animref anim_reach_solo(self, anime);
@@ -1947,9 +1947,9 @@ roofrun_hero1(skipToBigJump) {
 roofrun_redshirt(skipToBigJump) {
   self endon("death");
 
-  animref = GetStruct("roofrun_jump2", "targetname");
+  animref = getStruct("roofrun_jump2", "targetname");
   anime = "roofrun_laundry_1";
-  sheet = GetEnt("smodel_roofrun_sheet_left", "targetname");
+  sheet = getEnt("smodel_roofrun_sheet_left", "targetname");
 
   self thread sheet_roofrun_animate(animref, sheet, anime);
 
@@ -1969,7 +1969,7 @@ roofrun_redshirt(skipToBigJump) {
 
   self roofrun_friendly_setup();
 
-  animref = GetStruct("roofrun_bigjump2", "targetname");
+  animref = getStruct("roofrun_bigjump2", "targetname");
   anime = "favela_escape_bigjump_faust";
   if(!skipToBigJump) {
     animref anim_reach_solo(self, anime);
@@ -1998,7 +1998,7 @@ roofrun_friendly_generic() {
   self roofrun_friendly_setup();
 
   self waittill("roofrun_reset");
-  self restore_goalradius();
+  self restore_goalRadius();
 
   self SetGoalPos(self.origin);
 
@@ -2014,7 +2014,7 @@ roofrun_friendly_setup() {
   self.usechokepoints = false;
 
   self ignore_everything();
-  self set_temp_goalradius(32);
+  self set_temp_goalRadius(32);
 
   self scr_moveplaybackrate(1);
 
@@ -2057,7 +2057,7 @@ roofrun_friendly_cleanup() {
   self.walkDistFacingMotion = self.og_walkDistFacingMotion;
 
   self clear_ignore_everything();
-  self restore_goalradius();
+  self restore_goalRadius();
 
   self.maxsightdistsqrd = self.og_maxsightdistsqrd;
   self.pathRandomPercent = self.og_pathRandomPercent;
@@ -2113,7 +2113,7 @@ bigjump_roof_anim(player_rig, animref) {
   roofanim = level.scr_anim[roof_rig.animname][scene];
   roof_rig.origin = GetStartOrigin(animref.origin, animref.angles, roofanim);
   roof_rig.angles = GetStartAngles(animref.origin, animref.angles, roofanim);
-  roof LinkTo(roof_rig, "J_Roof_01");
+  roof linkTo(roof_rig, "J_Roof_01");
 
   player_rig waittillmatch("single anim", "start_roof_collapse");
   animref anim_single_solo(roof_rig, scene);
@@ -2136,7 +2136,7 @@ bigjump_roof_setup() {
   ents = array_remove(ents, sbmodel);
 
   foreach(ent in ents) {
-    ent LinkTo(sbmodel);
+    ent linkTo(sbmodel);
   }
 
   return sbmodel;
@@ -2224,9 +2224,9 @@ bigjump_angrymob(waitTime) {
 bigjump_angrymob_left_roof() {
   wait(1);
 
-  animref_center = GetStruct("struct_mob_roof_2", "targetname");
-  animref_left = GetStruct("struct_mob_roof_1", "targetname");
-  animref_right = GetStruct("struct_mob_roof_3", "targetname");
+  animref_center = getStruct("struct_mob_roof_2", "targetname");
+  animref_left = getStruct("struct_mob_roof_1", "targetname");
+  animref_right = getStruct("struct_mob_roof_3", "targetname");
   roofspawners = getEntArray("spawner_mob_left_roof", "targetname");
 
   roofguys = spawn_group(roofspawners, true, false);
@@ -2245,7 +2245,7 @@ bigjump_angrymob_left_roof() {
 }
 
 bigjump_angrymob_left_ground() {
-  animref = GetEnt("animref_mob_left", "targetname");
+  animref = getEnt("animref_mob_left", "targetname");
   spawners = getEntArray("spawner_mob_left", "targetname");
 
   anims = [];
@@ -2270,7 +2270,7 @@ bigjump_angrymob_left_ground() {
 }
 
 bigjump_angrymob_right_ground() {
-  animref = GetEnt("animref_mob_right", "targetname");
+  animref = getEnt("animref_mob_right", "targetname");
   spawners = getEntArray("spawner_mob_right", "targetname");
 
   anims = [];
@@ -2313,7 +2313,7 @@ angrymob_animdone_think(anime, animref) {
   level waittill_any_timeout(animtime, "solorun_mob_start_shooting");
 
   if(GetTime() < endTime) {
-    self StopAnimScripted();
+    self StopanimScripted();
   }
 
   if(!flag("solorun_mob_start_shooting")) {
@@ -2361,7 +2361,7 @@ dont_shoot_player_in_back() {
   while(1) {
     playerangles = level.player GetPlayerAngles();
     player_forward = anglesToForward(playerangles);
-    vec = VectorNormalize(self.origin - level.player getEye());
+    vec = vectorNormalize(self.origin - level.player getEye());
     anglesFromPlayer = VectorToAngles(vec);
     forward_to_self = anglesToForward(anglesFromPlayer);
 
@@ -2487,7 +2487,7 @@ solorun_start_playerfail(timeout) {
 
   xTest = -6074;
   zTest = 900;
-  trig = GetEnt("trig_solorun_start_playersafezone", "targetname");
+  trig = getEnt("trig_solorun_start_playersafezone", "targetname");
   maxhealth = level.player.maxhealth;
 
   thread solorun_start_playerfail_timeout(timeout);
@@ -2550,9 +2550,9 @@ solorun_player_leaves_trigger(trig) {
 }
 
 solorun_civilian_doorshut() {
-  trig = GetEnt("trig_solorun_civilian_doorshut", "targetname");
-  spawner = GetEnt(trig.target, "targetname");
-  animref = GetStruct("struct_solorun_civilian_doorshut_animref", "targetname");
+  trig = getEnt("trig_solorun_civilian_doorshut", "targetname");
+  spawner = getEnt(trig.target, "targetname");
+  animref = getStruct("struct_solorun_civilian_doorshut_animref", "targetname");
 
   door = spawn_anim_model("civ_door");
   guy = spawner spawn_ai();
@@ -2593,7 +2593,7 @@ rooftop_slide_glassbreak() {
   trigger_wait_targetname("trig_end_glass_break");
   level notify("glass_break", level.player);
 
-  level.player PlayRumbleOnEntity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   thread play_sound_in_space("scn_favela_escape_player_window", level.player.origin);
 }
 
@@ -2609,7 +2609,7 @@ solorun_player_difficulty_adjustment() {
 
   earlySuperHardSettings = false;
 
-  safeZoneTrig = GetEnt("trig_solorun_start_playersafezone", "targetname");
+  safeZoneTrig = getEnt("trig_solorun_start_playersafezone", "targetname");
 
   while(1) {
     if(flag("solorun_player_outside_first_house") && !level.player IsTouching(safeZoneTrig) && !earlySuperHardSettings) {
@@ -2964,9 +2964,9 @@ get_targeted_line_array(start) {
   point = start;
 
   while(isDefined(point.target)) {
-    nextpoint = GetStruct(point.target, "targetname");
+    nextpoint = getStruct(point.target, "targetname");
     if(!isDefined(nextpoint)) {
-      nextpoint = GetEnt(point.target, "targetname");
+      nextpoint = getEnt(point.target, "targetname");
     }
     if(!isDefined(nextpoint)) {
       nextpoint = GetNode(point.target, "targetname");
@@ -3129,7 +3129,7 @@ solorun_rooftop_chopper_fakefire_spot() {
     wait(RandomFloatRange(0.5, 1.2));
   }
 
-  target = GetStruct(self.target, "targetname");
+  target = getStruct(self.target, "targetname");
 
   MagicBullet("rpg_straight_short_life", self.origin, target.origin);
 }
@@ -3186,11 +3186,11 @@ solorun_chopperjump(waitBeforeJump) {
     flag_wait("trig_solorun_player_on_slide");
   }
 
-  slidetrig = GetEnt("trig_slide_chopperjump_ledge", "targetname");
-  killtrig = GetEnt("killtrig_chopperjump", "script_noteworthy");
+  slidetrig = getEnt("trig_slide_chopperjump_ledge", "targetname");
+  killtrig = getEnt("killtrig_chopperjump", "script_noteworthy");
   killtrig thread solorun_chopperjump_killtrig();
 
-  animref = GetStruct("solorun_chopperjump_animref", "targetname");
+  animref = getStruct("solorun_chopperjump_animref", "targetname");
 
   animname_player = "player";
   animname_chopper = "chopper";
@@ -3214,19 +3214,19 @@ solorun_chopperjump(waitBeforeJump) {
   chopper thread solorun_chopper_sfx();
   level.chopper = chopper;
 
-  spawner = GetEnt("chopperjump_sarge", "targetname");
+  spawner = getEnt("chopperjump_sarge", "targetname");
   sarge = spawner spawn_ai();
   sarge.animname = animname_doorguy;
   level.sarge = sarge;
-  sarge LinkTo(chopper, doorguyTag);
+  sarge linkTo(chopper, doorguyTag);
 
   thread chopperjump_dialogue();
 
   ladder = spawn_anim_model(animname_ladder, (0, 0, 0));
   level.chopperladder = ladder;
 
-  player_rig LinkTo(chopper, propsTag);
-  ladder LinkTo(chopper, propsTag);
+  player_rig linkTo(chopper, propsTag);
+  ladder linkTo(chopper, propsTag);
 
   player_and_ladder = [];
   player_and_ladder[0] = player_rig;
@@ -3236,7 +3236,7 @@ solorun_chopperjump(waitBeforeJump) {
 
   thread solorun_chopperjump_chopper_fly_in_and_idle(animref, chopper, ladder, sarge, fly_in_scene, propsTag, loop_scene, doorguyTag);
 
-  jumpstart_vol = GetEnt("trig_player_chopperjump", "script_noteworthy");
+  jumpstart_vol = getEnt("trig_player_chopperjump", "script_noteworthy");
   jumpForward = anglesToForward((0, 90, 0));
   thread player_jump_watcher();
 
@@ -3291,10 +3291,10 @@ solorun_chopperjump(waitBeforeJump) {
 }
 
 solorun_chopperjump_rumble() {
-  level.player PlayRumbleOnEntity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait(0.5);
   while(!flag("level_faded_to_black")) {
-    level.player PlayRumbleOnEntity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     wait(0.115);
   }
 }
@@ -3645,13 +3645,13 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
       if(isDefined(kickerSpawner.target)) {
         node = GetNode(kickerSpawner.target, "targetname");
         if(isDefined(node)) {
-          kicker set_temp_goalradius(96);
+          kicker set_temp_goalRadius(96);
           kicker SetGoalNode(node);
 
           kicker waittill_notify_or_timeout("goal", 5);
 
           if(IsAlive(kicker)) {
-            kicker restore_goalradius();
+            kicker restore_goalRadius();
           }
         }
       }
@@ -3660,7 +3660,7 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
 }
 self endon("death");
 
-animref = GetStruct(self.target, "targetname");
+animref = getStruct(self.target, "targetname");
 anime = "favela_chaotic_above_through";
 if(isDefined(animref.script_noteworthy)) {
   anime = animref.script_noteworthy;
@@ -3689,7 +3689,7 @@ window_smash(smashAnime) {
 
   errorstr = "window smash guy at origin " + self.origin + " needs to be targeting a script_struct that he can use as his animref.";
   ASSERTEX(isDefined(self.target), errorstr);
-  animref = GetStruct(self.target, "targetname");
+  animref = getStruct(self.target, "targetname");
   ASSERTEX(isDefined(animref), errorstr);
 
   animref anim_generic_reach(self, smashAnime);
@@ -3930,7 +3930,7 @@ scr_walkDistFacingMotion(dist) {
   self.walkDistFacingMotion = dist;
 }
 
-set_temp_goalradius(newRadius) {
+set_temp_goalRadius(newRadius) {
   if(!isDefined(self.og_goalradius)) {
     self.og_goalradius = self.goalradius;
   }
@@ -3938,7 +3938,7 @@ set_temp_goalradius(newRadius) {
   self.goalradius = newRadius;
 }
 
-restore_goalradius() {
+restore_goalRadius() {
   if(isDefined(self.og_goalradius)) {
     self.goalradius = self.og_goalradius;
   }
@@ -4016,7 +4016,7 @@ group_clear_atScriptedGoal(arr) {
 goto_scripted_goalnode(node) {
   self ignore_everything();
 
-  self set_temp_goalradius(32);
+  self set_temp_goalRadius(32);
   self SetGoalNode(node);
   self waittill("goal");
   self.atScriptedGoal = true;
@@ -4134,7 +4134,7 @@ warp_friends_and_player(str) {
   level.friends = array_removedead(level.friends);
 
   friendSpots = getStructArray(str, "targetname");
-  playerSpot = GetStruct(str + "_player", "targetname");
+  playerSpot = getStruct(str + "_player", "targetname");
 
   ASSERT(friendSpots.size >= level.friends.size);
   ASSERT(isDefined(playerSpot));
@@ -4162,9 +4162,9 @@ teleport_to_origin(origin, angles) {
     self SetGoalPos(self.origin);
   } else {
     org = level.player spawn_tag_origin();
-    level.player PlayerLinkTo(org, "tag_origin", 1);
-    org MoveTo(origin, 0.05);
-    org RotateTo(angles, 0.05);
+    level.player PlayerlinkTo(org, "tag_origin", 1);
+    org moveTo(origin, 0.05);
+    org rotateTo(angles, 0.05);
     wait(0.1);
     level.player Unlink();
     org Delete();
@@ -4247,8 +4247,8 @@ color_flags_advance(baseName, numTotalFlags, startFlagNum) {
 
   for(i = startFlagNum; i <= numTotalFlags; i++) {
     name = baseName + "_" + i;
-    flagtrig = GetEnt(name, "targetname");
-    colortrig = GetEnt(flagtrig.target, "targetname");
+    flagtrig = getEnt(name, "targetname");
+    colortrig = getEnt(flagtrig.target, "targetname");
 
     flag_wait(name);
 
@@ -4425,7 +4425,7 @@ airliner_setup() {
   otherents = array_combine(otherents, engine_exhausts);
 
   foreach(ent in otherents) {
-    ent LinkTo(org);
+    ent linkTo(org);
   }
 
   org.og_angles = org.angles;
@@ -4476,8 +4476,8 @@ airliner_show() {
 }
 
 airliner_flyby(lockflag) {
-  pathStart = GetStruct(self.target, "targetname");
-  pathEnd = GetStruct(pathStart.target, "targetname");
+  pathStart = getStruct(self.target, "targetname");
+  pathEnd = getStruct(pathStart.target, "targetname");
   ASSERT(isDefined(pathStart), isDefined(pathEnd));
 
   self waittill("trigger");
@@ -4507,7 +4507,7 @@ airliner_flyby(lockflag) {
 
   dist = Distance(pathStart.origin, pathEnd.origin);
   time = dist / speed;
-  level.airliner MoveTo(pathEnd.origin, time);
+  level.airliner moveTo(pathEnd.origin, time);
   level.airliner waittill("movedone");
 
   airliner_hide();
@@ -4547,10 +4547,10 @@ if(!isDefined(makeNotSolid)) {
   makeNotSolid = false;
 }
 
-linker = GetEnt(self.target, "targetname");
+linker = getEnt(self.target, "targetname");
 ASSERTEX(isDefined(linker), "sbmodel_rotate(): sbmodel at origin " + self.origin + " doesn't have a linker entity targeted. Did you make it a script_struct instead of a script_origin by mistake?");
 
-self LinkTo(linker);
+self linkTo(linker);
 
 self ConnectPaths();
 
@@ -4558,10 +4558,10 @@ ASSERTEX(isDefined(linker.script_angles), "sbmodel rotate linker script_origin a
 
 linker.og_angles = linker.angles;
 
-linker RotateTo(linker.script_angles, rotateTime);
+linker rotateTo(linker.script_angles, rotateTime);
 linker waittill("rotatedone");
 
-self DisconnectPaths();
+self disconnectPaths();
 
 self Unlink();
 
@@ -4582,19 +4582,19 @@ make_solid_again_when_player_isnt_touching() {
 }
 
 sbmodel_rotate_back(rotateTime) {
-  linker = GetEnt(self.target, "targetname");
+  linker = getEnt(self.target, "targetname");
   ASSERTEX(isDefined(linker.og_angles));
 
-  self LinkTo(linker);
+  self linkTo(linker);
 
   self ConnectPaths();
 
   ASSERTEX(isDefined(linker.script_angles), "sbmodel rotate linker script_origin at origin " + linker.origin + " needs script_angles set.");
 
-  linker RotateTo(linker.og_angles, rotateTime);
+  linker rotateTo(linker.og_angles, rotateTime);
   linker waittill("rotatedone");
 
-  self DisconnectPaths();
+  self disconnectPaths();
 
   self Unlink();
 
@@ -4604,8 +4604,8 @@ sbmodel_rotate_back(rotateTime) {
 minigun_squib_line(lineTime, fireInterval, weaponType) {
   turret = self.scriptedTurret;
 
-  lineStart = GetStruct("hind_fakefire_impactLine_start", "targetname");
-  lineEnd = GetStruct(lineStart.target, "targetname");
+  lineStart = getStruct("hind_fakefire_impactLine_start", "targetname");
+  lineEnd = getStruct(lineStart.target, "targetname");
 
   numSquibs = lineTime / fireInterval;
 
@@ -4614,7 +4614,7 @@ minigun_squib_line(lineTime, fireInterval, weaponType) {
 
   targetOrigin = lineStart.origin;
 
-  vec = VectorNormalize(lineEnd.origin - lineStart.origin);
+  vec = vectorNormalize(lineEnd.origin - lineStart.origin);
   angles = VectorToAngles(vec);
   forward = anglesToForward(angles);
 
@@ -4750,14 +4750,14 @@ trigger_wait_multiple_think(trigTN) {
   level notify(trigTN, other);
 }
 trigger_activate_targetname_safe(trigTN) {
-  trig = GetEnt(trigTN, "targetname");
+  trig = getEnt(trigTN, "targetname");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
 }
 
 trigger_activate_targetname(trigTN) {
-  trig = GetEnt(trigTN, "targetname");
+  trig = getEnt(trigTN, "targetname");
   ASSERT(isDefined(trig));
 
   trig notify("trigger");

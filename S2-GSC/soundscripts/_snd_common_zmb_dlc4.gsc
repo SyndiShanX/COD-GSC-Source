@@ -373,7 +373,7 @@ corpse_eater_soul_suck(param_00, param_01) {
   var_03 = 0;
   var_04 = 0.875;
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02, 0, var_04);
-  var_02 moveto(param_01, 1.9);
+  var_02 moveTo(param_01, 1.9);
   wait(2);
   var_02 delete();
 }
@@ -609,7 +609,7 @@ god_king_detonate_throw(param_00) {
   var_01 = self;
   var_01.drain_ent = spawn("script_origin", var_01.var_116);
   var_01.beam_snd = lib_0380::func_288B("zmb_gdkng_drain", undefined, var_01.drain_ent);
-  var_01.drain_ent moveto(param_00.var_116, 1.5);
+  var_01.drain_ent moveTo(param_00.var_116, 1.5);
   wait(1.6);
   var_01.drain_ent delete();
 }

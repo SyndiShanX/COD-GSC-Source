@@ -418,14 +418,14 @@ trigger_flag_set_specialops_clear(var_0) {
 
 trigger_friendly_respawn(var_0) {
   var_0 endon("death");
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = undefined;
 
   if(isDefined(var_1)) {
     var_2 = var_1.origin;
     var_1 delete();
   } else {
-    var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
     var_2 = var_1.origin;
   }
 
@@ -754,7 +754,7 @@ trigger_lookat_think(var_0, var_1) {
         continue;
       }
 
-      var_11 = vectornormalize(var_5 - var_9.origin);
+      var_11 = vectorNormalize(var_5 - var_9.origin);
       var_12 = var_9 getplayerangles();
       var_13 = anglesToForward(var_12);
       var_14 = vectordot(var_13, var_11);
@@ -978,7 +978,7 @@ trigger_dooropen(var_0) {
   foreach(var_4 in var_1) {
     var_5 = var_2[var_4.script_noteworthy];
     var_4 connectpaths();
-    var_4 rotateyaw(var_5, 1, 0, 0.5);
+    var_4 rotateYaw(var_5, 1, 0, 0.5);
   }
 }
 
@@ -1037,7 +1037,7 @@ get_script_linkto_targets() {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
-    var_4 = getent(var_3, "script_linkname");
+    var_4 = getEnt(var_3, "script_linkname");
 
     if(isDefined(var_4)) {
       var_0[var_0.size] = var_4;
@@ -1180,16 +1180,16 @@ trigger_multiple_visionset(var_0) {
 
   if(isDefined(var_0.script_visionset_start) && isDefined(var_0.script_visionset_end)) {
     var_1 = 1;
-    var_3 = getent(var_0.target, "targetname");
+    var_3 = getEnt(var_0.target, "targetname");
 
     if(!isDefined(var_3)) {
-      var_3 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_3 = common_scripts\utility::getStruct(var_0.target, "targetname");
     }
 
-    var_4 = getent(var_3.target, "targetname");
+    var_4 = getEnt(var_3.target, "targetname");
 
     if(!isDefined(var_4)) {
-      var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+      var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
     }
 
     var_3 = var_3.origin;
@@ -1465,12 +1465,12 @@ trigger_fog(var_0) {
     }
   }
 
-  var_5 = getent(var_0.target, "targetname");
+  var_5 = getEnt(var_0.target, "targetname");
   var_6 = var_5.origin;
   var_7 = undefined;
 
   if(isDefined(var_5.target)) {
-    var_8 = getent(var_5.target, "targetname");
+    var_8 = getEnt(var_5.target, "targetname");
     var_7 = var_8.origin;
   } else
     var_7 = var_6 + (var_0.origin - var_6) * 2;

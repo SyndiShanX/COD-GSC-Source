@@ -13,7 +13,7 @@ function preinit() {
 }
 
 function private function_45ed4ebd(eventstruct) {
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     return;
   }
 
@@ -87,7 +87,7 @@ function private function_c8aebd21(eventstruct) {
   eventstruct.var_15dca465 = var_15dca465;
   var_492af6a = physicstrace(startpos, var_883d42a7, (-15, -15, 18), (15, 15, 72), self, 32);
   eventstruct.var_75f5c2cb = var_492af6a[#"position"];
-  normal = vectornormalize((var_695ff8a6[0], var_695ff8a6[1], 0));
+  normal = vectorNormalize((var_695ff8a6[0], var_695ff8a6[1], 0));
   eventstruct.normal = normal;
   eventstruct.var_d9db209e = vectordot(normal, var_883d42a7 - var_15dca465);
   eventstruct.deltaz = eventstruct.var_15dca465[2] - eventstruct.var_883d42a7[2];
@@ -111,7 +111,7 @@ function private function_38db71f(eventstruct) {
   }
 
   var_1582cba2 = var_e74d8d10[#"position"];
-  dir = vectornormalize(end - start);
+  dir = vectorNormalize(end - start);
   var_74433575 = var_1582cba2 + dir * 5 + (0, 0, 60);
 
   eventstruct.var_87d52c5 = var_74433575;

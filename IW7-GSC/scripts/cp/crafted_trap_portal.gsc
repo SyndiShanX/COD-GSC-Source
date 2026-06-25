@@ -268,8 +268,8 @@ portal_setcarried(var_0, var_1) {
 
 portal_setactive(var_0) {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.crafted_portal_settings["crafted_portal"].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.crafted_portal_settings["crafted_portal"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);
@@ -363,7 +363,7 @@ teleport_owner(var_0) {
       scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
       thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.5);
       playFX(level._effect["portal_player_world"], var_0.origin + (0, 0, 10));
-      self setorigin(var_3.origin + (0, 0, 1));
+      self setOrigin(var_3.origin + (0, 0, 1));
     }
   }
 }

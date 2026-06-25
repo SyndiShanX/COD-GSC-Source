@@ -169,7 +169,7 @@ door_breach(var_0, var_1, var_2, var_3) {
 
   if(var_3 == "kick") {
     wait 0.2;
-    var_1 stopanimscripted();
+    var_1 stopanimScripted();
   } else
     var_1 waittillmatch("single anim", "end");
 
@@ -220,10 +220,10 @@ door_breach_door() {
 
   var_3 = 0.4;
   var_4 = self.angles + (var_0, var_1, var_2);
-  self rotateto(var_4, var_3, 0.05, 0.05);
+  self rotateTo(var_4, var_3, 0.05, 0.05);
   wait(var_3);
   self solid();
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 floodspawner_switch(var_0, var_1) {
@@ -278,7 +278,7 @@ player_fastrope_go(var_0) {
   var_1.angles = var_0.angles;
   var_2 = spawn("script_origin", var_0.origin);
   var_2.angles = level.player.angles;
-  var_1 linkto(var_2);
+  var_1 linkTo(var_2);
   var_1.animname = "playerfastrope";
   var_1 useanimtree(#animtree);
   level.player allowlean(0);

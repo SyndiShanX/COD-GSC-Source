@@ -454,13 +454,13 @@ _id_B407(var_0) {
 }
 
 _id_6A43(var_0) {
-  var_1 = getent("ctf_flag_" + var_0, "targetname");
+  var_1 = getEnt("ctf_flag_" + var_0, "targetname");
   return var_1.origin;
 }
 
 _id_405E(var_0, var_1) {
   var_2 = 0;
-  var_3 = getent("ctf_zone_" + var_1, "targetname");
+  var_3 = getEnt("ctf_zone_" + var_1, "targetname");
 
   if(!isDefined(var_3)) {
     var_4 = _id_5C07(var_0);
@@ -473,7 +473,7 @@ _id_405E(var_0, var_1) {
     var_5[0] setasgametypeobjective();
     var_5[0] _id_D713(var_1);
   } else
-    var_5[0] = getent("ctf_flag_" + var_1, "targetname");
+    var_5[0] = getEnt("ctf_flag_" + var_1, "targetname");
 
   if(!isDefined(var_5[0])) {}
 
@@ -599,7 +599,7 @@ _id_405F(var_0, var_1) {
 
 _id_3FA6(var_0, var_1) {
   var_2 = _id_5C07(var_0);
-  var_3 = getent("ctf_zone_" + var_1, "targetname");
+  var_3 = getEnt("ctf_zone_" + var_1, "targetname");
 
   if(!isDefined(var_3)) {
     var_3 = spawn("trigger_radius", var_2.origin - (0, 0, var_2._id_0359 / 2), 0, var_2._id_0359, 80);

@@ -60,7 +60,7 @@ initzmeventassets() {
   }
 
   if(getdvarint("spv_hub_war_machine_event_enabled", 0) == 1) {
-    var_07 = getent("zmb_hub_cannon", "script_noteworthy");
+    var_07 = getEnt("zmb_hub_cannon", "script_noteworthy");
     playFXOnTag(level.var_0611["zmb_hub_canon_env_fx"], var_07, "tag_origin");
   }
 }

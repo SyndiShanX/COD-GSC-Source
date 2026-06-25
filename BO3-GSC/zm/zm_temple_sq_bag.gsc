@@ -134,8 +134,8 @@ function bag_debug() {
 function init_stage() {
   zm_temple_sq_brock::delete_radio();
   level notify("bag_start");
-  if(getplayers().size == 1 || getdvarint("") == 2) {
-    getplayers()[0] giveweapon(level.w_shrink_ray_upgraded);
+  if(getPlayers().size == 1 || getdvarint("") == 2) {
+    getPlayers()[0] giveweapon(level.w_shrink_ray_upgraded);
     level notify("raise_crystal_1");
     level notify("raise_crystal_2");
     level notify("raise_crystal_3");
@@ -171,17 +171,17 @@ function fire_in_the_hole() {
   self unlink();
   dest = struct::get(self.target, "targetname");
   level.catch_trig = spawn("trigger_radius", self.origin, 0, 24, 10);
-  level.catch_trig enablelinkto();
-  level.catch_trig linkto(self);
+  level.catch_trig enablelinkTo();
+  level.catch_trig linkTo(self);
   level.catch_trig.owner_ent = self;
   level.catch_trig thread butter_fingers();
   self thread dynamite_debug();
   self notsolid();
-  self moveto(dest.origin, 1.4, 0.2, 0);
+  self moveTo(dest.origin, 1.4, 0.2, 0);
   self waittill("movedone");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 5);
-  playsoundatposition("evt_sq_bag_dynamite_explosion", dest.origin);
+  playSoundAtPosition("evt_sq_bag_dynamite_explosion", dest.origin);
   level.catch_trig notify("boom");
   level.catch_trig delete();
   level.catch_trig = undefined;
@@ -208,13 +208,13 @@ function butter_fingers() {
 
 function give_me_the_boom_stick() {
   level endon("sq_bag_over");
-  wall = getent("sq_wall", "targetname");
+  wall = getEnt("sq_wall", "targetname");
   wall solid();
   level flag::wait_till("meteorite_shrunk");
   player_close = 0;
   player = undefined;
   while(!player_close) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(distance2dsquared(players[i].origin, wall.origin) < 57600) {
         player_close = 1;
@@ -227,8 +227,8 @@ function give_me_the_boom_stick() {
   level function_43e26f4d(player);
   level flag::set("dynamite_chat");
   level._give_trig = spawn("trigger_radius_use", wall.origin, 0, 56, 72);
-  level._give_trig triggerignoreteam();
-  level._give_trig setcursorhint("HINT_NOICON");
+  level._give_trig triggerIgnoreTeam();
+  level._give_trig setCursorHint("HINT_NOICON");
   level._give_trig.radius = 48;
   level._give_trig.height = 72;
   not_given = 1;
@@ -245,7 +245,7 @@ function give_me_the_boom_stick() {
   level._give_trig = undefined;
   level function_69e4e9b6();
   players_far = 0;
-  players = getplayers();
+  players = getPlayers();
   while(players_far < players.size) {
     players_far = 0;
     for(i = 0; i < players.size; i++) {
@@ -254,7 +254,7 @@ function give_me_the_boom_stick() {
       }
     }
     wait(0.1);
-    players = getplayers();
+    players = getPlayers();
   }
   level flag::set("given_dynamite");
 }
@@ -275,7 +275,7 @@ function exit_stage(success) {
   } else {
     zm_temple_sq_brock::create_radio(8);
     level flag::clear("meteorite_shrunk");
-    ent = getent("sq_meteorite", "targetname");
+    ent = getEnt("sq_meteorite", "targetname");
     ent.origin = ent.original_origin;
     ent.angles = ent.original_angles;
     ent setModel("p7_zm_sha_meteorite");
@@ -287,7 +287,7 @@ function exit_stage(success) {
     level.catch_trig delete();
     level.catch_trig = undefined;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]._has_dynamite)) {
       players[i]._has_dynamite = undefined;

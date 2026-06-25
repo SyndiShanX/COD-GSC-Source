@@ -55,7 +55,7 @@ function scramblerdetonate(attacker, weapon, target) {
   if(self.owner util::isenemyplayer(attacker)) {
     attacker challenges::destroyedequipment(weapon);
   }
-  playsoundatposition("dst_equipment_destroy", self.origin);
+  playSoundAtPosition("dst_equipment_destroy", self.origin);
   self delete();
 }
 

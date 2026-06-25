@@ -125,7 +125,7 @@ empRumbleLoop(duration) {
   goalTime = GetTime() + duration * 1000;
 
   while(GetTime() < goalTime) {
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }

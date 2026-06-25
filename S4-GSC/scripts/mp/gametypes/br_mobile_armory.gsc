@@ -27,7 +27,7 @@ _id_E328(var_0) {
   }
 
   var_1 setModel("veh8_mil_lnd_stango_static");
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
   if(!isDefined(var_1._id_83A8)) {
     var_3 = (0, 0, 3);
@@ -38,7 +38,7 @@ _id_E328(var_0) {
     }
 
     var_4 setModel("military_crate_large_stackable_01");
-    var_4 setcursorhint("HINT_NOICON");
+    var_4 setCursorHint("HINT_NOICON");
     var_4 setuseholdduration("duration_medium");
     var_4 sethintdisplayfov(120);
     var_4 setusefov(120);
@@ -196,7 +196,7 @@ _id_0C7D(var_0) {
   var_1 = scripts\mp\gametypes\br_functional_poi::_id_6AC4();
   var_0._id_83A8 _meth_81B0(var_1);
   var_0._id_83A8 makeuseable();
-  var_0._id_83A8 sethintstring(&"MP/BR_ACTIVATE_MOBILE_ARMORY");
+  var_0._id_83A8 setHintString(&"MP/BR_ACTIVATE_MOBILE_ARMORY");
   var_0 thread _id_0C69();
   var_2 = scripts\engine\utility::getfx("poi_mobile_armory_available");
   playFXOnTag(var_2, var_0, "tag_origin");
@@ -230,7 +230,7 @@ _id_0C7A(var_0) {
   var_0._id_83A8 _meth_81B0(var_1);
   level thread scripts\mp\gametypes\br::_id_EFAD("br_mobile_armory_activate", var_0.player, var_0._id_ADAE);
   var_0._id_83A8 makeuseable();
-  var_0._id_83A8 sethintstring(&"MP/BR_USE_MOBILE_ARMORY");
+  var_0._id_83A8 setHintString(&"MP/BR_USE_MOBILE_ARMORY");
   var_0 thread _id_0C69();
   var_2 = getdvarfloat("#x3ebeaebe3246d43c6", 15.0);
   var_0 thread scripts\mp\gametypes\br_functional_poi::_id_7104("mobile_armory", 3, var_2);

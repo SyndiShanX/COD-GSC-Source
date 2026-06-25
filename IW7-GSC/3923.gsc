@@ -543,7 +543,7 @@ func_129B7(var_0) {
       self ghostlaunched("anim deltas");
     }
 
-    var_2 = linkto();
+    var_2 = linkTo();
     scripts\anim\notetracks_mp::func_CED5(var_2, var_1, "turn_in_place", "code_move");
 
     if(!func_0A49::func_9C09()) {
@@ -556,7 +556,7 @@ func_129B7(var_0) {
   return 0;
 }
 
-linkto() {
+linkTo() {
   if(isDefined(level.var_5750)) {
     var_0 = [[level.var_5750]]();
 
@@ -600,10 +600,10 @@ func_81E1(var_0, var_1, var_2) {
 
 disableforcethirdpersonwhenfollowing(var_0, var_1, var_2) {
   var_3 = spawnStruct();
-  var_4 = vectornormalize(func_DA68(var_0, var_2));
-  var_5 = vectornormalize(func_DA68(var_1, var_2));
+  var_4 = vectorNormalize(func_DA68(var_0, var_2));
+  var_5 = vectorNormalize(func_DA68(var_1, var_2));
   var_6 = vectorcross(var_5, var_2);
-  var_7 = vectornormalize(func_DA68(var_6, var_2));
+  var_7 = vectorNormalize(func_DA68(var_6, var_2));
   var_8 = vectordot(var_4 * -1, var_7);
   var_9 = vectordot(var_5, var_4);
   var_9 = clamp(var_9, -1, 1);
@@ -696,12 +696,12 @@ func_8146(var_0) {
 }
 
 func_E26A(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2 setscriptablepartstate("animpart", 0);
 }
 
 func_CED8(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_3)) {
     return;

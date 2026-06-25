@@ -29,7 +29,7 @@ setup_camparams() {
 spawncamera(var_0) {
   var_1 = (-70.7675, -691.293, 507.472);
   var_2 = (0, 87, 0);
-  var_3 = common_scripts\utility::getstruct("camera", "targetname");
+  var_3 = common_scripts\utility::getStruct("camera", "targetname");
 
   if(isDefined(var_3)) {
     var_1 = var_3.origin;
@@ -48,9 +48,9 @@ spawncamera(var_0) {
 }
 
 cameralink(var_0, var_1) {
-  var_1 setorigin(var_0.origin);
-  var_1 playerlinkto(var_0, "tag_player");
-  var_1 cameralinkto(var_0, "tag_player");
+  var_1 setOrigin(var_0.origin);
+  var_1 playerlinkTo(var_0, "tag_player");
+  var_1 cameralinkTo(var_0, "tag_player");
 }
 
 playerupdatecamera() {
@@ -225,7 +225,7 @@ cammove(var_0, var_1, var_2, var_3) {
   if(isDefined(self.cut)) {
     self.origin = var_0;
   } else {
-    self moveto(var_0, var_1, var_2, var_3);
+    self moveTo(var_0, var_1, var_2, var_3);
   }
 }
 
@@ -233,7 +233,7 @@ camrotate(var_0, var_1, var_2, var_3) {
   if(isDefined(self.cut)) {
     self.angles = var_0;
   } else {
-    self rotateto(var_0, var_1, var_2, var_3);
+    self rotateTo(var_0, var_1, var_2, var_3);
   }
 }
 
@@ -265,7 +265,7 @@ updatecamerafinish(var_0) {
 }
 
 updatecameracacweap(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("cameraWeapon", "targetname");
+  var_2 = common_scripts\utility::getStruct("cameraWeapon", "targetname");
   var_0.cut = 1;
   var_0 cammove(var_2.origin);
   var_0 camrotate(var_2.angles);
@@ -284,7 +284,7 @@ updatecameracac(var_0, var_1, var_2, var_3) {
 }
 
 updatecameracao(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("cameraWeapon", "targetname");
+  var_4 = common_scripts\utility::getStruct("cameraWeapon", "targetname");
   var_0.cut = 1;
   var_0 cammove(var_4.origin);
   var_0 camrotate(var_4.angles);
@@ -293,7 +293,7 @@ updatecameracao(var_0, var_1, var_2, var_3) {
 }
 
 updatecameracollections(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("cameraWeapon", "targetname");
+  var_4 = common_scripts\utility::getStruct("cameraWeapon", "targetname");
   var_0.cut = 1;
   var_0 cammove(var_4.origin);
   var_0 camrotate(var_4.angles);
@@ -302,7 +302,7 @@ updatecameracollections(var_0, var_1, var_2, var_3) {
 }
 
 updatecameraarmory(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("cameraWeapon", "targetname");
+  var_4 = common_scripts\utility::getStruct("cameraWeapon", "targetname");
   var_0.cut = 1;
   var_0 cammove(var_4.origin);
   var_0 camrotate(var_4.angles);
@@ -324,10 +324,10 @@ updatecameraequip(var_0, var_1, var_2, var_3) {
 updatecameralobby(var_0, var_1, var_2) {
   var_3 = maps\mp\_vl_base::getweaponroomstring(var_2.primaryweapon);
   var_4 = "camera" + var_3;
-  var_5 = common_scripts\utility::getstruct(var_4, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_4, "targetname");
 
   if(!isDefined(var_5.angles)) {
-    var_6 = common_scripts\utility::getstruct(var_5.target, "targetname");
+    var_6 = common_scripts\utility::getStruct(var_5.target, "targetname");
     var_7 = var_6.origin - var_5.origin;
     var_5.angles = vectortoangles(var_7);
   }
@@ -339,7 +339,7 @@ updatecameralobby(var_0, var_1, var_2) {
 }
 
 updatecameradepot(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("characterBM", "targetname");
+  var_2 = common_scripts\utility::getStruct("characterBM", "targetname");
   var_0.cut = 1;
   maps\mp\_vl_avatar::cameralinktoscenenode(var_0, var_0.depotsceneent, "tag_origin_animated");
   var_0.location = "depot";

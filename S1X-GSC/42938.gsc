@@ -220,7 +220,7 @@ sentry_initsentry(var_0, var_1) {
       self setdefaultdroppitch(-89.0);
       self.laser_on = 0;
       var_2 = spawn("script_model", self gettagorigin("tag_laser"));
-      var_2 linkto(self);
+      var_2 linkTo(self);
       self.killcament = var_2;
       self.killcament setscriptmoverkillcam("explosive");
       break;
@@ -461,7 +461,7 @@ turret_handleuse() {
         var_3.turret_overheat_bar maps\mp\gametypes\_hud_util::destroyelem();
         var_3 restoreperks();
         var_3 restoreweapons();
-        self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
+        self setHintString(level.sentrysettings[self.sentrytype].hintstring);
         self setmode(level.sentrysettings[self.sentrytype].sentrymodeoff);
         sentry_setowner(self.originalowner);
         self setmode(level.sentrysettings[self.sentrytype].sentrymodeon);
@@ -632,8 +632,8 @@ sentry_ongameended(var_0) {
 
 sentry_setactive() {
   self setmode(level.sentrysettings[self.sentrytype].sentrymodeon);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.sentrysettings[self.sentrytype].hintstring);
 
   if(level.sentrysettings[self.sentrytype].headicon) {
     if(level.teambased) {
@@ -1138,7 +1138,7 @@ sam_fireontarget() {
       }
       self shootturret();
       var_3 = magicbullet("sam_projectile_mp", var_0[var_2], self.samtargetent.origin, self.owner);
-      var_3 missile_settargetent(self.samtargetent);
+      var_3 missile_settargetEnt(self.samtargetent);
       var_3 missile_setflightmodedirect();
       var_3.samturret = self;
       var_3.sammissilegroup = var_1;

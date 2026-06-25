@@ -76,7 +76,7 @@ function function_3c872f01() {
   time = randomfloatrange(3, 7);
 
   while(isDefined(self)) {
-    self rotateto(self.angles + (0, dir, 0), time);
+    self rotateTo(self.angles + (0, dir, 0), time);
     wait time;
   }
 }
@@ -97,7 +97,7 @@ function pickupsettype(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     self.fakemodel setModel(def.modelname);
     self.fakemodel notsolid();
     self.fakemodel setscale(isDefined(self.scale) ? self.scale : 1);
-    self.fakemodel linkto(self);
+    self.fakemodel linkTo(self);
     self.fakemodel.angles = self.angles;
     self.fakemodel.pickup = self;
     self.fakemodel thread namespace_ec06fe4a::function_d55f042c(self, "death");
@@ -193,7 +193,7 @@ function function_3577c445(localclientnum, oldval, newval, bnewent, binitialsnap
       player = undefined;
     } else {
       entnum = (bwastimejump >> 1) - 1;
-      players = getplayers(fieldname);
+      players = getPlayers(fieldname);
 
       foreach(guy in players) {
         if(guy getentitynumber() == entnum) {
@@ -250,5 +250,5 @@ function function_4ecd84a8(player, flipped = 0) {
   }
 
   waitframe(1);
-  self moveto(var_a3046af4, 2, 0, 0);
+  self moveTo(var_a3046af4, 2, 0, 0);
 }

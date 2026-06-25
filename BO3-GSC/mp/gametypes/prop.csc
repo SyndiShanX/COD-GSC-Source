@@ -77,7 +77,7 @@ function function_2bb59404(localclientnum) {
   while(true) {
     localplayer = getlocalplayer(localclientnum);
     spectating = isspectating(localclientnum, 0);
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     foreach(player in players) {
       if(player != localplayer || spectating && player ishidden() && isDefined(player.team) && player.team == localplayer.team) {
         player.prop = function_8ef128e8(localclientnum, player);

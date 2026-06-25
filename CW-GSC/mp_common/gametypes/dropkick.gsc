@@ -91,7 +91,7 @@ function end_round() {
   level childthread function_311e397d();
   level childthread function_68f13f40();
   music::setmusicstate("dropkick_round_end");
-  playsoundatposition(#"hash_31f07589beb0a02e", (0, 0, 0));
+  playSoundAtPosition(#"hash_31f07589beb0a02e", (0, 0, 0));
   wait 11;
   globallogic_defaults::default_onscorelimit();
 }
@@ -270,7 +270,7 @@ function function_4e92a5e8() {
 
   var_791ffffd = var_35c5fae0[randomint(var_35c5fae0.size)];
   trigger = spawn("trigger_radius_use", var_791ffffd.origin, 0, 110, 110);
-  trigger triggerignoreteam();
+  trigger triggerIgnoreTeam();
   trigger setvisibletoall();
   trigger setteamfortrigger(#"none");
   trigger function_682f34cf(-800);
@@ -382,7 +382,7 @@ function function_279b8022(player) {
   if(level.waverespawndelay) {
     level.wavedelay[carrier.team] = 0;
   } else {
-    foreach(person in getplayers(carrier.team)) {
+    foreach(person in getPlayers(carrier.team)) {
       if(person === carrier) {
         continue;
       }
@@ -423,7 +423,7 @@ function function_279b8022(player) {
 
   self thread function_aa074770();
 
-  foreach(person in getplayers()) {
+  foreach(person in getPlayers()) {
     person playlocalsound(#"hash_2e71f0773ee8286a");
   }
 }
@@ -637,7 +637,7 @@ function private function_311e397d() {
   origin = var_a996ef6.origin;
   forward = anglesToForward(var_a996ef6.angles);
   up = anglestoup(var_a996ef6.angles);
-  playsoundatposition(#"hash_36412d3d8dabf70e", (0, 0, 0));
+  playSoundAtPosition(#"hash_36412d3d8dabf70e", (0, 0, 0));
   playFX(#"hash_76b02047787f0357", origin, forward, up, 1);
 }
 
@@ -656,14 +656,14 @@ function private function_ec196fb0() {
 function private function_f7c2fc80() {
   wait 2;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_66337ef1(#"dropkick_nuke_rumble_first");
   }
 
   var_3b3fc42b = 4;
   wait var_3b3fc42b;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player stoprumble(#"dropkick_nuke_rumble_first");
     player function_66337ef1(#"dropkick_nuke_rumble_second");
   }
@@ -671,7 +671,7 @@ function private function_f7c2fc80() {
   var_6972a090 = 3.4;
   wait var_6972a090;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player stoprumble(#"dropkick_nuke_rumble_second");
   }
 }
@@ -679,14 +679,14 @@ function private function_f7c2fc80() {
 function private function_68f13f40() {
   wait 2.1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player gestures::play_gesture(#"hash_6c5354e57d5054f6", undefined, 1);
   }
 
   duration = 6.9;
   wait duration;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player isgestureplaying(#"hash_6c5354e57d5054f6")) {
       player stopgestureviewmodel(#"hash_6c5354e57d5054f6");
     }
@@ -696,7 +696,7 @@ function private function_68f13f40() {
 function private function_86ca9275() {
   wait 2;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::set(#"hash_31a56c396d195997", "show_hud", 0);
   }
 }

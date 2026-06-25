@@ -95,7 +95,7 @@ function function_9230ac9a() {
 }
 
 function function_62f1faf9() {
-  n_player_count = zm_utility::function_a2541519(getplayers().size);
+  n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
   if(!isDefined(n_player_count) || n_player_count < 1) {
     n_player_count = 1;
@@ -159,7 +159,7 @@ function function_f1355240(n_round_number) {
 
     if(zm_round_spawning::function_d0db51fc(#"raz")) {
       level.var_2f45d799++;
-      n_player_count = zm_utility::function_a2541519(getplayers().size);
+      n_player_count = zm_utility::function_a2541519(getPlayers().size);
 
       if(n_player_count == 1) {
         level.var_2f45d799 = level.round_number + randomintrangeinclusive(2, 4);
@@ -199,7 +199,7 @@ function function_54993e2() {
 function function_1f9940b8() {
   self endon(#"death");
   playFX(#"zombie/fx9_onslaught_spawn_sm", self.origin);
-  playsoundatposition(#"hash_14247392847093a6", self.origin + (0, 0, 75));
+  playSoundAtPosition(#"hash_14247392847093a6", self.origin + (0, 0, 75));
   self.in_the_ground = 1;
   self ghost();
   self pathmode("dont move", 1);
@@ -213,7 +213,7 @@ function function_1f9940b8() {
 
   if(!self isragdoll()) {
     self playSound(#"hash_4b49f05e8c054fd9");
-    self animscripted("rise_anim", self.origin, self.angles, #"ai_t9_zm_zombie_base_traverse_ground_dugup", "normal");
+    self animScripted("rise_anim", self.origin, self.angles, #"ai_t9_zm_zombie_base_traverse_ground_dugup", "normal");
     waitframe(1);
   }
 

@@ -171,7 +171,7 @@ lib_0540::func_ABA4(param_00, param_01, param_02, param_03, param_04, param_05) 
     param_04 thread lib_0540::func_17EE(self);
   }
 
-  self setorigin(var_0B["origin"], 1);
+  self setOrigin(var_0B["origin"], 1);
   self method_839C("anim deltas");
   self scragentsetorientmode("face angle abs", var_0B["angles"]);
   self method_839D("noclip");

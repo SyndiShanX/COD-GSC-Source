@@ -48,7 +48,7 @@ function function_9ed7339b(struct) {
     scriptmodel = content_manager::spawn_script_model(spawn_struct, #"hash_94b3a8b935248d0", 1);
     scriptmodel clientfield::set("set_compass_icon", 1);
     forward = anglesToForward(scriptmodel.angles);
-    forward = vectornormalize(forward);
+    forward = vectorNormalize(forward);
     forward = (forward[0] * 16, forward[1] * 16, forward[2] * 16);
     forward = (forward[0], forward[1], forward[2] + 48);
     trigger = content_manager::spawn_interact(spawn_struct, &function_e4ff673, #"hash_47f37dccf2dfd164", 250, isDefined(spawn_struct.radius) ? spawn_struct.radius : 80, isDefined(spawn_struct.height) ? spawn_struct.height : 48, undefined, forward);
@@ -58,7 +58,7 @@ function function_9ed7339b(struct) {
     struct.trigger = trigger;
     struct.scriptmodel = scriptmodel;
     playFX(#"sr/fx9_safehouse_mchn_upgrades_spawn", struct.origin);
-    playsoundatposition(#"hash_20c4f0485930af2a", struct.origin);
+    playSoundAtPosition(#"hash_20c4f0485930af2a", struct.origin);
   }
 }
 
@@ -122,7 +122,7 @@ function function_5eeaa168() {
   var_f945fa92 = getweapon(#"bare_hands");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player.var_b8783de6)) {
         player.var_b8783de6 = 0;
       }
@@ -433,7 +433,7 @@ function function_7c1cc13c(player, weapon, model) {
   currentclip = player getweaponammoclip(weapon);
   maxammo = weapon.maxammo;
   maxclip = weapon.clipsize;
-  player playrumbleonentity(#"zm_interact_rumble");
+  player playRumbleOnEntity(#"zm_interact_rumble");
 
   if(currentclip < weapon.clipsize && (maxammo == 0 || is_true(weapon.cliponly)) && var_3069fe3) {
     if(player hasweapon(weapon)) {

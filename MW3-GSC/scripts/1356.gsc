@@ -49,7 +49,7 @@ _id_409D(var_0, var_1, var_2, var_3, var_4) {
     self._id_298F = -1 * self._id_298F;
   }
   var_10 = spawn("script_origin", var_5);
-  self linkto(var_10);
+  self linkTo(var_10);
   var_11 = vectortoangles(var_5 - var_4);
   self._id_409F = var_10.angles;
   var_10.angles = var_10.angles + (var_3, var_3 * 0.25, var_11[2]);
@@ -65,7 +65,7 @@ _id_40A1(var_0, var_1) {
 
   for(;;) {
     self._id_40A0 = self._id_40A0 * -1;
-    var_1 rotateto(self._id_40A0, self.time, self._id_409E, self._id_409E);
+    var_1 rotateTo(self._id_40A0, self.time, self._id_409E, self._id_409E);
     var_1 waittill("rotatedone");
   }
 }

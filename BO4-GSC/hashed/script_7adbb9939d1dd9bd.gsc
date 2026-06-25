@@ -42,7 +42,7 @@ zombie_open_sesame() {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
   zombie_doors = getEntArray("zombie_door", "targetname");
 
   for(i = 0; i < zombie_doors.size; i++) {
@@ -90,7 +90,7 @@ function_97346595() {
 
   while(true) {
     new_value = getdvarint(#"zm_bot_soak_test", 0);
-    players = getplayers();
+    players = getPlayers();
 
     if(new_value) {
       foreach(player in players) {
@@ -118,7 +118,7 @@ function_97346595() {
       } else {
         adddebugcommand("<dev string:x156>");
 
-        players = getplayers();
+        players = getPlayers();
 
         foreach(player in players) {
           player disableinvulnerability();

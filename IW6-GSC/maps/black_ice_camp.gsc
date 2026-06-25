@@ -46,13 +46,13 @@ start() {
   }
 
   thread maps\black_ice_anim::swim_truck_surface_anim();
-  level.breach_anim_node = common_scripts\utility::getstruct("breach_anim_node", "script_noteworthy");
+  level.breach_anim_node = common_scripts\utility::getStruct("breach_anim_node", "script_noteworthy");
   thread maps\black_ice_swim::create_persistent_ice_breach_props(1);
   thread maps\black_ice_swim::handle_ice_plugs();
   level.const_expected_num_swim_allies = 2;
   level._allies_swim = maps\black_ice_util::spawn_allies_swim();
   common_scripts\utility::array_call(level._allies_swim, ::attach, level.scr_model["ascend_launcher_non_anim"], "TAG_STOWED_BACK");
-  level.allies_breach_anim_node = common_scripts\utility::getstruct("vignette_introbreach_allies", "script_noteworthy");
+  level.allies_breach_anim_node = common_scripts\utility::getStruct("vignette_introbreach_allies", "script_noteworthy");
 
   for(var_0 = 0; var_0 < level._allies_swim.size; var_0++) {
     level._allies_swim[var_0].animname = "scuba_ally";
@@ -153,7 +153,7 @@ bc_mid() {
   common_scripts\utility::flag_wait("flag_camp_building_open");
   setthreatbias("axis", "player", 250);
   thread bc_rolling_door_open();
-  var_0 = getent("trig_left_flank", "script_noteworthy");
+  var_0 = getEnt("trig_left_flank", "script_noteworthy");
   var_0 thread left_flank_spawn_proc();
   wait 1;
   maps\black_ice_util::delay_retreat("bc_opfor", 180, 4, "flag_camp_mid_retreat", "bc_color_back", 1);
@@ -170,11 +170,11 @@ bc_back() {
 
 bc_helo_reinforce() {
   thread bc_helo_fic();
-  var_0 = getent("bc_veh_reinforce_helo", "targetname");
+  var_0 = getEnt("bc_veh_reinforce_helo", "targetname");
   level.op_helo = var_0 maps\_utility::spawn_vehicle();
   level.op_helo.animname = "bc_reinforce_helo";
   var_1 = maps\_utility::array_spawn(getEntArray("bc_opfor_helo_rein", "targetname"), 1);
-  var_2 = common_scripts\utility::getstruct("vignette_basecamp_heli", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("vignette_basecamp_heli", "script_noteworthy");
   level.op_helo thread maps\black_ice_audio::sfx_blackice_helo_flyby();
   var_2 maps\_anim::anim_first_frame_solo(level.op_helo, "arrive");
 
@@ -266,8 +266,8 @@ bc_end() {
   common_scripts\utility::array_thread(var_0, maps\_utility_code::kill_deathflag_proc, 2.5);
   thread maps\_utility::clearthreatbias("player", "bc_lmg");
   thread maps\_utility::clearthreatbias("player", "axis");
-  level.ascend_anim_node = getent("vignette_alpha_team_rigascend", "script_noteworthy");
-  var_1 = getent("vignette_rigascend_runin_node", "script_noteworthy");
+  level.ascend_anim_node = getEnt("vignette_alpha_team_rigascend", "script_noteworthy");
+  var_1 = getEnt("vignette_rigascend_runin_node", "script_noteworthy");
   level.ally1_ascend_launcher = maps\_utility::spawn_anim_model("ally1_ascend_launcher");
   level.ally1_ascend_launcher hide();
   level._allies[0].launcher = level.ally1_ascend_launcher;
@@ -376,17 +376,17 @@ heli_spawn_and_path(var_0) {
 }
 
 bc_rolling_door_open() {
-  var_0 = getent("bc_rolling_door", "targetname");
-  var_1 = getent("bc_rolling_door_close", "targetname");
-  var_0 linkto(var_1);
-  var_2 = getent("cw_clip_inside_building", "targetname");
-  var_3 = getent("bc_rolling_door_clip", "targetname");
+  var_0 = getEnt("bc_rolling_door", "targetname");
+  var_1 = getEnt("bc_rolling_door_close", "targetname");
+  var_0 linkTo(var_1);
+  var_2 = getEnt("cw_clip_inside_building", "targetname");
+  var_3 = getEnt("bc_rolling_door_clip", "targetname");
   var_3 delete_path_clip();
   thread maps\black_ice_audio::sfx_blackice_door_rollup(var_0);
   var_4 = 1.25;
-  var_5 = getent("bc_rolling_door_open", "targetname");
-  var_1 moveto(var_5.origin, var_4, 0.5, 0.25);
-  var_1 rotateto(var_5.angles, var_4, 0.5, 0.25);
+  var_5 = getEnt("bc_rolling_door_open", "targetname");
+  var_1 moveTo(var_5.origin, var_4, 0.5, 0.25);
+  var_1 rotateTo(var_5.angles, var_4, 0.5, 0.25);
   level notify("bc_opening_rolling_door");
   wait(var_4);
   level notify("bc_rolling_door_open");
@@ -402,7 +402,7 @@ left_flank_spawn_proc() {
     wait 0.1;
   }
 
-  var_0 = getent("bc_opfor_flank_left", "targetname");
+  var_0 = getEnt("bc_opfor_flank_left", "targetname");
 
   if(isDefined(var_0) && var_0.count > 0) {
     var_0 maps\_utility::spawn_ai();
@@ -452,7 +452,7 @@ opfor_run() {
   self.animname = "generic";
 
   if(isDefined(self.script_parameters)) {
-    var_0 = getent(self.script_parameters, "targetname");
+    var_0 = getEnt(self.script_parameters, "targetname");
     var_1 = 0.1;
 
     if(self.script_parameters == "camp_pain_short_1") {
@@ -483,7 +483,7 @@ opfor_runback() {
   maps\_utility::gun_remove();
   maps\_utility::set_ignoreall(1);
   maps\_utility::set_generic_run_anim("unarmed_run", 1);
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 maps\_anim::anim_generic_reach(self, self.script_parameters);
 
   if(isDefined(self.script_noteworthy)) {
@@ -565,7 +565,7 @@ opfor_left_flank_run() {
   self endon("death");
   thread maps\_utility::follow_path(getnode("bc_node_windows", "targetname"));
   maps\_utility::set_ignoreall(1);
-  var_0 = common_scripts\utility::getstruct("bc_left_flank_runaway", "targetname");
+  var_0 = common_scripts\utility::getStruct("bc_left_flank_runaway", "targetname");
 
   while(distance2d(self.origin, var_0.origin) > 70) {
     wait 0.05;
@@ -594,17 +594,17 @@ opfor_helo_rein() {
 }
 
 main_spot() {
-  var_0 = getent("cw_spotlight_1", "targetname");
+  var_0 = getEnt("cw_spotlight_1", "targetname");
   var_1 = getEntArray("cw_spot_1_org", "targetname");
-  var_2 = getent("cw_spot_1_start", "targetname");
+  var_2 = getEnt("cw_spot_1_start", "targetname");
   var_0.angles = vectortoangles(var_2.origin - var_0.origin);
   playFXOnTag(level._effect["catwalk_spot"], var_0, "spotlight_main");
   var_3 = var_2 common_scripts\utility::spawn_tag_origin();
   var_4 = (0, 0, 0);
 
   if(!common_scripts\utility::flag("bc_flag_spots_close")) {
-    var_2 = getent("cw_spot_1_end", "targetname");
-    var_5 = vectornormalize(var_2.origin - var_3.origin);
+    var_2 = getEnt("cw_spot_1_end", "targetname");
+    var_5 = vectorNormalize(var_2.origin - var_3.origin);
     var_4 = var_5;
     var_0.near_dist_sq = 100.0;
     var_0.lerp_rate = 0.065;
@@ -621,7 +621,7 @@ main_spot() {
   var_1[3] = level._bravo[0];
   var_1[4] = level._bravo[1];
   var_2 = var_1[randomint(var_1.size)];
-  var_5 = vectornormalize(var_2.origin - var_3.origin);
+  var_5 = vectorNormalize(var_2.origin - var_3.origin);
   var_4 = var_5;
   var_0.near_dist_sq = 32.0;
   var_0.lerp_rate = 0.2;
@@ -632,7 +632,7 @@ main_spot() {
   while(!common_scripts\utility::flag("bc_flag_spots_off")) {
     var_6 = (randomfloatrange(-2, 2), randomfloatrange(-2, 2), 0);
     var_7 = vectortoangles(level.player.origin + var_6 - var_0.origin);
-    var_0 rotateto(var_7, 0.3);
+    var_0 rotateTo(var_7, 0.3);
     wait 0.1;
   }
 
@@ -645,7 +645,7 @@ fake_spot(var_0, var_1) {
     wait(randomfloatrange(0.6, 1.8));
   }
 
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = getEntArray(var_1, "targetname");
   var_4 = var_3[randomint(var_3.size)];
   var_2.angles = vectortoangles(var_4.origin - var_2.origin);
@@ -653,7 +653,7 @@ fake_spot(var_0, var_1) {
   playFXOnTag(level._effect["catwalk_spot_cheap"], var_2, "spotlight_main");
   var_5 = var_4 common_scripts\utility::spawn_tag_origin();
   var_4 = var_3[randomint(var_3.size)];
-  var_6 = vectornormalize(var_4.origin - var_5.origin);
+  var_6 = vectorNormalize(var_4.origin - var_5.origin);
   var_7 = var_6;
   var_2.near_dist_sq = 100.0;
   var_2.lerp_rate = 0.065;
@@ -667,7 +667,7 @@ fake_spot(var_0, var_1) {
 spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   while(!common_scripts\utility::flag(var_5)) {
     while(distancesquared(var_0.origin, var_1.origin) > var_3.near_dist_sq) {
-      var_7 = vectornormalize(var_1.origin - var_0.origin);
+      var_7 = vectorNormalize(var_1.origin - var_0.origin);
       var_2 = var_2 + (var_7 - var_2) * var_3.lerp_rate;
       var_0.origin = var_0.origin + var_2 * var_3.velocity_factor * level.timestep;
 
@@ -698,7 +698,7 @@ spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_12 = 1;
 
       foreach(var_14 in var_4) {
-        var_15 = vectordot(vectornormalize(var_2), vectornormalize(var_14.origin - var_0.origin));
+        var_15 = vectordot(vectorNormalize(var_2), vectorNormalize(var_14.origin - var_0.origin));
 
         if(var_15 < 0.25) {
           var_11[var_11.size] = var_14;
@@ -755,7 +755,7 @@ spot_noise() {
 
   for(;;) {
     var_0 = (randomfloatrange(-0.25, 0.25), randomfloatrange(-0.25, 0.25), randomfloatrange(-0.25, 0.25));
-    self rotateto(self.angles + var_0, 0.1);
+    self rotateTo(self.angles + var_0, 0.1);
     wait 0.1;
   }
 }
@@ -794,9 +794,9 @@ camp_primary_light_switch() {
   var_0 = getEntArray("light_infil_omni1", "targetname");
 
   if(maps\_utility::is_gen4()) {
-    var_0[var_0.size] = getent("light_infil_script_top", "targetname");
-    var_0[var_0.size] = getent("light_infil_script_top2", "targetname");
-    var_0[var_0.size] = getent("light_infil_script_top3", "targetname");
+    var_0[var_0.size] = getEnt("light_infil_script_top", "targetname");
+    var_0[var_0.size] = getEnt("light_infil_script_top2", "targetname");
+    var_0[var_0.size] = getEnt("light_infil_script_top3", "targetname");
   }
 
   foreach(var_2 in var_0) {

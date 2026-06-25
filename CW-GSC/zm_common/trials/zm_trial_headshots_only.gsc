@@ -30,7 +30,7 @@ function private on_begin(weapon_name) {
   level.var_ef0aada0 = 1;
   zm_traps::disable_all_traps();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     foreach(var_5a1e3e5b in level.hero_weapon) {
       foreach(w_hero in var_5a1e3e5b) {
         player lockweapon(w_hero, 1, 1);
@@ -51,7 +51,7 @@ function private on_end(round_reset) {
   level.var_ef0aada0 = 0;
   zm_traps::function_9d0c9706();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     foreach(var_5a1e3e5b in level.hero_weapon) {
       foreach(w_hero in var_5a1e3e5b) {
         player unlockweapon(w_hero);

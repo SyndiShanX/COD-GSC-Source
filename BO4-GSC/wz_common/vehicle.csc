@@ -93,7 +93,7 @@ function_54e9d3c4(localclientnum) {
 
   if(isDefined(self.var_e29b96d2)) {
     self.var_e29b96d2 setModel(#"tag_origin");
-    self.var_e29b96d2 linkto(vehicle);
+    self.var_e29b96d2 linkTo(vehicle);
     self.var_e29b96d2 setcompassicon("minimap_sensor_dart");
     self.var_e29b96d2 function_811196d1(0);
     self.var_e29b96d2 function_a5edb367(#"neutral");

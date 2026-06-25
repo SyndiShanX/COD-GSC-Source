@@ -17,7 +17,7 @@ init() {
   PrecacheModel("t5_weapon_bamboo_spear_spikemore_small");
   trigs = getEntArray("spikemore_purchase", "targetname");
   for(i = 0; i < trigs.size; i++) {
-    model = getent(trigs[i].target, "targetname");
+    model = getEnt(trigs[i].target, "targetname");
     model hide();
   }
   array_thread(trigs, ::buy_spikemores);
@@ -46,7 +46,7 @@ remove_spikeable_object(ent) {
 }
 buy_spikemores() {
   self.zombie_cost = 1000;
-  self sethintstring(&"ZOMBIE_TEMPLE_SPIKEMORE_PURCHASE");
+  self setHintString(&"ZOMBIE_TEMPLE_SPIKEMORE_PURCHASE");
   self setCursorHint("HINT_NOICON");
   level thread set_spikemore_visible();
   self.spikemores_triggered = false;
@@ -69,7 +69,7 @@ buy_spikemores() {
           who thread show_spikemore_hint("spikemore_purchased");
           who thread maps\_zombiemode_audio::create_and_play_dialog("weapon_pickup", "spikemore");
           if(self.spikemores_triggered == false) {
-            model = getent(self.target, "targetname");
+            model = getEnt(self.target, "targetname");
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.spikemores_triggered = true;
           }
@@ -87,7 +87,7 @@ buy_spikemores() {
   }
 }
 set_spikemore_visible() {
-  players = getplayers();
+  players = getPlayers();
   trigs = getEntArray("spikemore_purchase", "targetname");
   while(1) {
     for(j = 0; j < players.size; j++) {
@@ -98,7 +98,7 @@ set_spikemore_visible() {
       }
     }
     wait(1);
-    players = getplayers();
+    players = getPlayers();
   }
 }
 spikemore_watch() {
@@ -160,7 +160,7 @@ pickup_spikemores_trigger_listener_enable(trigger, player) {
       return;
     }
     trigger trigger_on();
-    trigger linkto(self);
+    trigger linkTo(self);
   }
 }
 pickup_spikemores_trigger_listener_disable(trigger, player) {
@@ -183,7 +183,7 @@ shouldAffectWeaponObject(object) {
   if(dist < level.spikemore_detectionMinDist) {
     return false;
   }
-  dirToPos = vectornormalize(dirToPos);
+  dirToPos = vectorNormalize(dirToPos);
   dot = vectorDot(dirToPos, objectForward);
   return (dot > level.spikemore_detectionDot);
 }
@@ -198,8 +198,8 @@ spikemore_detonation() {
     playerTeamToAllow = "allies";
   }
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateRadius), spawnFlag, detonateRadius, detonateRadius * 2);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self thread delete_spikemores_on_death(damagearea);
   if(!isDefined(level.spikemores)) {
     level.spikemores = [];
@@ -299,7 +299,7 @@ _getZombiesInRange(range) {
 _spikemore_TargetInFOV(target) {
   toTarget = target.origin - self.origin;
   toTarget = (toTarget[0], toTarget[1], 0.0);
-  toTarget = VectorNormalize(toTarget);
+  toTarget = vectorNormalize(toTarget);
   forward = anglesToForward((0.0, self.angles[1], 0.0));
   dot = VectorDot(toTarget, forward);
   return dot >= level.spikemore_detectionDot;

@@ -625,14 +625,14 @@ event2_mortarhut_explode() {
 
 tunnel_shake(guy) {
   earthquake(randomfloatrange(.45, .55), randomfloatrange(1.5, 3), (3462.5, 2579.5, -822.3), 1024);
-  playsoundatposition("mortar_dirt", (3462.5, 2579.5, -822.3));
+  playSoundAtPosition("mortar_dirt", (3462.5, 2579.5, -822.3));
   level notify("explosion", "fake");
   exploder(15);
   exploder(16);
   exploder(17);
   exploder(18);
 
-  lantern = getent("lantern", "script_noteworthy");
+  lantern = getEnt("lantern", "script_noteworthy");
   lantern physicslaunch(lantern.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
 }
 
@@ -780,7 +780,7 @@ play_outro_on_player(anime, node) {
   } else {
     guy = level.sarge;
   }
-  self PlayerLinkTo(viewhands, "tag_player", 1, 20, 20, 15, 0);
+  self PlayerlinkTo(viewhands, "tag_player", 1, 20, 20, 15, 0);
 
   node anim_single_solo(viewhands, anime);
 }
@@ -791,7 +791,7 @@ staber_canbe_killed(guy) {
   guy.allowdeath = true;
   guy waittill("death");
 
-  level.stabee stopanimscripted();
+  level.stabee stopanimScripted();
   level.stabee.allowdeath = true;
   level.stabee.pacifist = false;
   level.stabee.ignoreall = false;
@@ -804,21 +804,21 @@ staber_cantbe_killed(guy) {
 }
 
 attach_tunnel_lid(guy) {
-  lid = getent("tunnel_lid", "targetname");
-  lid linkto(guy, "tag_weapon_left");
+  lid = getEnt("tunnel_lid", "targetname");
+  lid linkTo(guy, "tag_weapon_left");
   lid notsolid();
   level.polonsky.lid = lid;
   wait(1);
-  getent("trap_door_clip", "targetname") delete();
+  getEnt("trap_door_clip", "targetname") delete();
   level.sarge do_dialogue("clear_out");
 
-  tunnel = getent("tunnel_entered", "targetname");
+  tunnel = getEnt("tunnel_entered", "targetname");
   objective_state(2, "done");
   objective_add(4, "current", &"OKI3_OBJ4_A", tunnel.origin);
 }
 
 detach_tunnel_lid(guy) {
-  lid = getent("tunnel_lid", "targetname");
+  lid = getEnt("tunnel_lid", "targetname");
   lid unlink();
 }
 
@@ -826,7 +826,7 @@ attach_satchel(guy) {
   if(!isDefined(guy.satchel_attached)) {
     guy.satchel = spawn("script_model", guy gettagorigin("tag_weapon_left"));
     guy.satchel setModel("weapon_satchel_charge");
-    guy.satchel linkto(guy, "tag_weapon_left");
+    guy.satchel linkTo(guy, "tag_weapon_left");
     guy.satchel_attached = true;
   }
 }

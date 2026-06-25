@@ -29,12 +29,12 @@ _init_() {
     dynent.onuse = &function_d7b6ee00;
   }
 
-  gondola_button = getent("gondola_button", "targetname");
-  gondola = getent("gondola", "targetname");
-  gondola_button linkto(gondola);
-  gondola_kill_trig = getent("gondola_kill_trig_player", "targetname");
-  gondola_kill_trig enablelinkto();
-  gondola_kill_trig linkto(gondola);
+  gondola_button = getEnt("gondola_button", "targetname");
+  gondola = getEnt("gondola", "targetname");
+  gondola_button linkTo(gondola);
+  gondola_kill_trig = getEnt("gondola_kill_trig_player", "targetname");
+  gondola_kill_trig enablelinkTo();
+  gondola_kill_trig linkTo(gondola);
   level thread init_elevator("dynent_gondola_button_top");
   level thread init_elevator("dynent_gondola_button_bottom");
 }
@@ -46,7 +46,7 @@ init_elevator(var_fd98a47c) {
     dynent.onuse = &function_31042f91;
     dynent.buttons = dynents;
     position = struct::get(dynent.target, "targetname");
-    elevator = getent(position.target, "targetname");
+    elevator = getEnt(position.target, "targetname");
     elevator.buttons = dynents;
 
     if(position.script_noteworthy === "start") {
@@ -56,18 +56,18 @@ init_elevator(var_fd98a47c) {
         continue;
       }
 
-      button = getent(elevator.target, "targetname");
+      button = getEnt(elevator.target, "targetname");
 
       if(!isDefined(button)) {
         continue;
       }
 
-      button triggerignoreteam();
+      button triggerIgnoreTeam();
       button setvisibletoall();
-      button usetriggerrequirelookat();
+      button useTriggerRequireLookAt();
       button setteamfortrigger(#"none");
-      button setcursorhint("HINT_NOICON");
-      button sethintstring(#"hash_29965b65bca9cd7b");
+      button setCursorHint("HINT_NOICON");
+      button setHintString(#"hash_29965b65bca9cd7b");
       button usetriggerignoreuseholdtime();
       button callback::on_trigger(&function_af088c90);
       button.elevator = elevator;
@@ -112,7 +112,7 @@ function_ad26976() {
 }
 
 function_211e7277(point, var_8bd17d7d) {
-  nearby_players = getplayers(undefined, point.origin, 256);
+  nearby_players = getPlayers(undefined, point.origin, 256);
   move_pos = point.origin;
   var_93a4284 = 0;
   check_count = 0;
@@ -137,7 +137,7 @@ function_211e7277(point, var_8bd17d7d) {
     check_count++;
   }
 
-  self setorigin(move_pos);
+  self setOrigin(move_pos);
 }
 
 is_equipment(entity) {
@@ -203,12 +203,12 @@ elevator_kill_player(t_damage) {
     return;
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player istouching(t_damage) && isalive(e_player) && isDefined(e_player)) {
       if(level.inprematchperiod) {
         point = struct::get(t_damage.target);
         var_8bd17d7d = anglesToForward(point.angles);
-        var_8bd17d7d = vectornormalize(var_8bd17d7d);
+        var_8bd17d7d = vectorNormalize(var_8bd17d7d);
 
         if(isDefined(point)) {
           e_player function_211e7277(point, var_8bd17d7d);
@@ -269,7 +269,7 @@ function_26ab1b5e(t_damage) {
 
               point = struct::get("elevator_teleport_" + var_96c44bd9, "targetname");
               var_8bd17d7d = anglesToForward(point.angles);
-              var_8bd17d7d = vectornormalize(var_8bd17d7d);
+              var_8bd17d7d = vectorNormalize(var_8bd17d7d);
 
               if(isDefined(point)) {
                 player function_211e7277(point, var_8bd17d7d);
@@ -298,9 +298,9 @@ function_76ad6828(position, is_end_position = 0) {
     var_a91da4b7 = self.script_noteworthy + "_player";
     var_bda7a712 = self.script_noteworthy + "_vehicle";
     var_5a7b0b8 = self.script_noteworthy + "_player_top";
-    var_68dc3bdf = getent(var_a91da4b7, "targetname");
-    t_damage_vehicle = getent(var_bda7a712, "targetname");
-    var_caa01373 = getent(var_5a7b0b8, "targetname");
+    var_68dc3bdf = getEnt(var_a91da4b7, "targetname");
+    t_damage_vehicle = getEnt(var_bda7a712, "targetname");
+    var_caa01373 = getEnt(var_5a7b0b8, "targetname");
 
     if(isDefined(var_68dc3bdf) && isDefined(t_damage_vehicle) && isDefined(var_caa01373)) {
       var_d011282b = distancesquared(self.origin, position.origin);
@@ -344,7 +344,7 @@ elevator_move(elevator) {
   elevator thread function_ad26976();
   elevator playSound("evt_elevator_start");
   elevator playLoopSound("evt_elevator_move", 0);
-  elevator moveto(position.origin, 10, 0.5, 0.5);
+  elevator moveTo(position.origin, 10, 0.5, 0.5);
   setdynentstate(elevator.var_d98394f7, 1);
   setdynentstate(elevator.currentfloor, 1);
   var_d98394f7 = elevator.currentfloor;
@@ -357,9 +357,9 @@ elevator_move(elevator) {
   elevator.button.origin = elevator.origin + elevator.var_e87f4c9;
 
   if(elevator.var_d98394f7 == elevator.var_8273f574) {
-    elevator.button sethintstring(#"hash_310ad55f171e194e");
+    elevator.button setHintString(#"hash_310ad55f171e194e");
   } else {
-    elevator.button sethintstring(#"hash_29965b65bca9cd7b");
+    elevator.button setHintString(#"hash_29965b65bca9cd7b");
   }
 
   setdynentstate(elevator.var_d98394f7, 0);
@@ -377,7 +377,7 @@ function_af088c90(trigger_struct) {
 function_31042f91(activator, laststate, state) {
   if(isDefined(self.target)) {
     position = struct::get(self.target, "targetname");
-    elevator = getent(position.target, "targetname");
+    elevator = getEnt(position.target, "targetname");
 
     if(isDefined(elevator.moving) && elevator.moving) {
       elevator waittill(#"movedone");

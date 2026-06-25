@@ -1150,7 +1150,7 @@ function bb_getlocomotionexityaw(blackboard, yaw) {
         return exityaw;
       }
 
-      exityaw = getangleusingdirection(vectornormalize(self.pathgoalpos - self.origin));
+      exityaw = getangleusingdirection(vectorNormalize(self.pathgoalpos - self.origin));
 
       record3dtext("<dev string:x1a1>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x181>", undefined, 0.4);
 
@@ -1586,7 +1586,7 @@ function trygoingtoclosestnodetoenemybehavior(entity) {
         }
 
         var_c86d779 = anglesToForward(node.angles);
-        dirtoenemy = vectornormalize((lastknownpositionofenemy - node.origin) * (1, 1, 0));
+        dirtoenemy = vectorNormalize((lastknownpositionofenemy - node.origin) * (1, 1, 0));
         dot = vectordot(var_c86d779, dirtoenemy);
 
         if(dot > 0.5) {
@@ -1981,7 +1981,7 @@ function private sensenearbyplayers(entity) {
     return 0;
   }
 
-  var_821a7a87 = getplayers();
+  var_821a7a87 = getPlayers();
 
   if(entity.team === #"allies") {
     allai = getaiarray();
@@ -2833,7 +2833,7 @@ function private generictryreacquireservice(entity) {
     return false;
   }
 
-  dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forward = anglesToForward(entity.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {
@@ -2920,7 +2920,7 @@ function private function_bcbf3f38(entity) {
       return true;
     }
 
-    toenemy = vectornormalize(self.enemy.origin - self.origin);
+    toenemy = vectorNormalize(self.enemy.origin - self.origin);
     dot = vectordot(toenemy, self getweaponforwarddir());
     dot = math::clamp(dot, -1, 1);
 

@@ -35,7 +35,7 @@ main(painter_spmp) {
 
 painter_clean_me() {
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     ent delete();
   }
   self delete();
@@ -120,7 +120,7 @@ get_angle_offset(obj) {
     return undefined;
   }
 
-  targent = getent(obj.target, "targetname");
+  targent = getEnt(obj.target, "targetname");
   assert(isDefined(targent));
   return targent.angles - obj.angles;
 }
@@ -130,7 +130,7 @@ get_height_offset(obj) {
     return undefined;
   }
 
-  targent = getent(obj.target, "targetname");
+  targent = getEnt(obj.target, "targetname");
   assert(isDefined(targent));
   origin = targent.origin[2] - obj.origin[2];
   targent delete();
@@ -779,8 +779,8 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
   if(bRandomrotation) {
     angles += (0, randomfloat(360), 0);
   }
-  xvect = vectornormalize(anglestoright(angles));
-  yvect = vectornormalize(anglestoup(angles));
+  xvect = vectorNormalize(anglestoright(angles));
+  yvect = vectorNormalize(anglestoup(angles));
   startpos = traceorg;
   startpos -= (xvect * radius);
   startpos -= (yvect * radius);

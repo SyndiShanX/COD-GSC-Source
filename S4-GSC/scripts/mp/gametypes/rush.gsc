@@ -555,7 +555,7 @@ _id_E727() {
   var_3.angles = var_2;
   self._id_E3E9 = var_3;
   self._id_8AD7 = 1;
-  self cameralinkto(var_3, "tag_origin", 1);
+  self cameralinkTo(var_3, "tag_origin", 1);
   thread _id_4CF1();
   var_3 _id_A227(self, var_1, var_2);
 }
@@ -596,16 +596,16 @@ _id_A227(var_0, var_1, var_2) {
   var_0 endon("spawned_player");
   var_3 = 1.0;
   var_4 = 1.0;
-  self moveto(var_1, 1.0, 0.5, 0.5);
+  self moveTo(var_1, 1.0, 0.5, 0.5);
   var_0 _meth_82FD("spawn_cam", 0.5, "mix");
-  self rotateto(var_2, 1.0, 0.5, 0.5);
+  self rotateTo(var_2, 1.0, 0.5, 0.5);
   var_0 thread _id_E705();
   wait 1.1;
   var_5 = anglesToForward(var_2) * 300;
   var_5 = var_5 * (1, 1, 0);
 
   if(isDefined(var_0) && isDefined(var_0._id_E3E9)) {
-    self moveto(var_1 + var_5, 15.0, 1.0, 1.0);
+    self moveTo(var_1 + var_5, 15.0, 1.0, 1.0);
     var_0 earthquakeforplayer(0.03, 15.0, var_1 + var_5, 1000);
   }
 }
@@ -615,11 +615,11 @@ _id_CA72() {
   var_0 = self getEye();
   var_1 = self.angles;
   scripts\mp\utility\player::_id_FD26("spectator");
-  self cameralinkto(self._id_E3E9, "tag_origin", 1);
+  self cameralinkTo(self._id_E3E9, "tag_origin", 1);
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.2);
-  self._id_E3E9 moveto(var_0, 0.5);
+  self._id_E3E9 moveTo(var_0, 0.5);
   self _meth_8078(0.5);
-  self._id_E3E9 rotateto(var_1, 0.5, 0.5);
+  self._id_E3E9 rotateTo(var_1, 0.5, 0.5);
   wait 0.5;
   self visionsetnakedforplayer("", 0);
   thread _id_B8DB();

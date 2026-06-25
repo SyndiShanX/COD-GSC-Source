@@ -88,7 +88,7 @@ chugabud_laststand() {
 
   self perk_abort_drinking(0.1);
   self maps\mp\zombies\_zm_perks::perk_set_max_health_if_jugg("health_reboot", 1, 0);
-  self setorigin(corpse.origin);
+  self setOrigin(corpse.origin);
   self setplayerangles(corpse.angles);
 
   if(self player_is_in_laststand()) {
@@ -142,10 +142,10 @@ chugabud_corpse_cleanup(corpse, was_revived) {
   self notify("chugabud_effects_cleanup");
 
   if(was_revived) {
-    playsoundatposition("evt_ww_appear", corpse.origin);
+    playSoundAtPosition("evt_ww_appear", corpse.origin);
     playFX(level._effect["chugabud_revive_fx"], corpse.origin);
   } else {
-    playsoundatposition("evt_ww_disappear", corpse.origin);
+    playSoundAtPosition("evt_ww_disappear", corpse.origin);
     playFX(level._effect["chugabud_bleedout_fx"], corpse.origin);
     self notify("chugabud_bleedout");
   }
@@ -356,7 +356,7 @@ chugabud_fake_death() {
 chugabud_fake_revive() {
   level notify("fake_revive");
   self notify("fake_revive");
-  playsoundatposition("evt_ww_disappear", self.origin);
+  playSoundAtPosition("evt_ww_disappear", self.origin);
   playFX(level._effect["chugabud_revive_fx"], self.origin);
   spawnpoint = chugabud_get_spawnpoint();
 
@@ -377,9 +377,9 @@ chugabud_fake_revive() {
     level.chugabud_force_player_position = undefined;
   }
 
-  self setorigin(spawnpoint.origin);
+  self setOrigin(spawnpoint.origin);
   self setplayerangles(spawnpoint.angles);
-  playsoundatposition("evt_ww_appear", spawnpoint.origin);
+  playSoundAtPosition("evt_ww_appear", spawnpoint.origin);
   playFX(level._effect["chugabud_revive_fx"], spawnpoint.origin);
   self allowstand(1);
   self allowcrouch(1);
@@ -504,7 +504,7 @@ get_chugabug_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height
 
   if(isDefined(found_node)) {
     level.chugabud_spawn_struct.origin = found_node.origin;
-    v_dir = vectornormalize(v_origin - level.chugabud_spawn_struct.origin);
+    v_dir = vectorNormalize(v_origin - level.chugabud_spawn_struct.origin);
     level.chugabud_spawn_struct.angles = vectortoangles(v_dir);
     return true;
   }
@@ -614,7 +614,7 @@ is_weapon_available_in_chugabud_corpse(weapon, player_to_check) {
     upgradedweapon = level.zombie_weapons[weapon].upgrade_name;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(players)) {
     for(player_index = 0; player_index < players.size; player_index++) {

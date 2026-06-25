@@ -327,10 +327,10 @@ function watchplacement(placeable) {
     if(placeable.canbeplaced != lastattempt) {
       if(placeable.canbeplaced) {
         placeable setModel(placeable.validmodel);
-        player sethintstring(placeable.placehintstring);
+        player setHintString(placeable.placehintstring);
       } else {
         placeable setModel(placeable.invalidmodel);
-        player sethintstring(placeable.invalidlocationhintstring);
+        player setHintString(placeable.invalidlocationhintstring);
       }
 
       lastattempt = placeable.canbeplaced;
@@ -344,12 +344,12 @@ function watchplacement(placeable) {
       buildallowed = 1;
 
       if(isDefined(placeable.buildtime) && placeable.buildtime > 0) {
-        player sethintstring(placeable.buildinghintstring);
+        player setHintString(placeable.buildinghintstring);
         finishedbuilding = placeable waitforplaceabletobebuilt(player);
 
         if(!finishedbuilding) {
           buildallowed = 0;
-          player sethintstring(placeable.placehintstring);
+          player setHintString(placeable.placehintstring);
         }
       }
 
@@ -360,7 +360,7 @@ function watchplacement(placeable) {
       if(placement[#"result"] && buildallowed) {
         placeable.origin = placement[#"origin"];
         placeable.angles = placement[#"angles"];
-        player sethintstring("");
+        player setHintString("");
         player stopcarryturret(placeable);
         player val::reset(#"placeable", "disable_weapons");
         placeable.held = 0;
@@ -538,8 +538,8 @@ function cancelongameend(placeable) {
 function spawnmovetrigger(placeable, player) {
   pos = placeable.origin + (0, 0, 15);
   placeable.pickuptrigger = spawn("trigger_radius_use", pos);
-  placeable.pickuptrigger setcursorhint("HINT_NOICON", placeable);
-  placeable.pickuptrigger sethintstring(placeable.pickupstring);
+  placeable.pickuptrigger setCursorHint("HINT_NOICON", placeable);
+  placeable.pickuptrigger setHintString(placeable.pickupstring);
   placeable.pickuptrigger setteamfortrigger(player.team);
   player clientclaimtrigger(placeable.pickuptrigger);
   placeable thread watchpickup(player);
@@ -651,7 +651,7 @@ function shutdownoncancelevent(placeable) {
   }
 
   if(isDefined(player) && isDefined(placeable) && placeable.held === 1) {
-    player sethintstring("");
+    player setHintString("");
     player stopcarryturret(placeable);
     player val::reset(#"placeable", "disable_weapons");
   }

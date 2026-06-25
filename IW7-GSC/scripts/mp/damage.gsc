@@ -140,7 +140,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
       var_1C = (var_8[0], var_8[1], var_8[2]);
       if(var_1C[2] > -0.3 && var_1C[2] < 0.1) {
         var_1C = (var_1C[0], var_1C[1], 0.1);
-        vectornormalize(var_1C);
+        vectorNormalize(var_1C);
       }
 
       var_2 func_84DC(var_1C, 650);
@@ -209,8 +209,8 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
       }
 
       var_0 thread scripts\mp\shellshock::func_2BC3(var_6);
-      var_2 playrumbleonentity("defaultweapon_melee");
-      var_0 playrumbleonentity("defaultweapon_melee");
+      var_2 playRumbleOnEntity("defaultweapon_melee");
+      var_0 playRumbleOnEntity("defaultweapon_melee");
     }
   }
 
@@ -689,13 +689,13 @@ func_B4CA(var_0, var_1, var_2) {
 }
 
 isbehindmeleevictim(var_0, var_1) {
-  var_2 = vectornormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
+  var_2 = vectorNormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
   var_3 = anglesToForward((0, var_1.angles[1], 0));
   return vectordot(var_2, var_3) > 0.4;
 }
 
 func_9D68(var_0, var_1) {
-  var_2 = vectornormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
+  var_2 = vectorNormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
   var_3 = anglesToForward((0, var_1.angles[1], 0));
   return vectordot(var_2, var_3) > 0.2;
 }
@@ -1532,8 +1532,8 @@ playerkilled_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
       var_1B = "heavy_2s";
     }
 
-    var_2 playrumbleonentity(var_1B);
-    var_1 playrumbleonentity(var_1B);
+    var_2 playRumbleOnEntity(var_1B);
+    var_1 playRumbleOnEntity(var_1B);
   }
 
   var_1C = isfriendlyfire(var_2, var_1);
@@ -1874,9 +1874,9 @@ playerkilled_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 
   if(isDefined(level.matchrecording_logeventmsg) && isDefined(var_0) && isPlayer(var_0) && scripts\engine\utility::isbulletdamage(var_5)) {
     var_33 = var_0.origin - self.origin;
-    var_34 = vectornormalize((var_33[0], var_33[1], 0));
+    var_34 = vectorNormalize((var_33[0], var_33[1], 0));
     var_35 = anglesToForward(self.angles);
-    var_36 = vectornormalize((var_35[0], var_35[1], 0));
+    var_36 = vectorNormalize((var_35[0], var_35[1], 0));
     var_37 = clamp(var_36[0] * var_34[0] + var_36[1] * var_34[1], -1, 1);
     var_38 = acos(var_37);
     if(!isDefined(self.var_D37E)) {
@@ -2257,8 +2257,8 @@ handlenormaldeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(gettime() - self.var_A940 < 2500) {
       self.var_A93F thread scripts\mp\gamescore::processshieldassist(self);
     } else if(isalive(self.var_A93F) && gettime() - self.var_A940 < 5000) {
-      var_12 = vectornormalize(anglesToForward(self.angles));
-      var_13 = vectornormalize(self.var_A93F.origin - self.origin);
+      var_12 = vectorNormalize(anglesToForward(self.angles));
+      var_13 = vectorNormalize(self.var_A93F.origin - self.origin);
       if(vectordot(var_13, var_12) > 0.925) {
         self.var_A93F thread scripts\mp\gamescore::processshieldassist(self);
       }
@@ -2967,14 +2967,14 @@ func_AA11(var_0, var_1) {
   if(level.diehardmode == 1 && level.diehardmode != 2) {
     var_2 = spawn("script_model", self.origin);
     var_2 setModel("tag_origin");
-    var_2 setcursorhint("HINT_NOICON");
-    var_2 sethintstring(&"PLATFORM_REVIVE");
+    var_2 setCursorHint("HINT_NOICON");
+    var_2 setHintString(&"PLATFORM_REVIVE");
     var_2 revivesetup(self);
     var_2 endon("death");
     var_3 = newteamhudelem(self.team);
     var_3 setshader("waypoint_revive", 8, 8);
     var_3 setwaypoint(1, 1);
-    var_3 settargetent(self);
+    var_3 settargetEnt(self);
     var_3 thread func_5321(var_2);
     var_3.color = (0.33, 0.75, 0.24);
     scripts\mp\utility::playdeathsound();
@@ -2990,14 +2990,14 @@ func_AA11(var_0, var_1) {
     thread func_AA09();
     var_2 = spawn("script_model", self.origin);
     var_3 setModel("tag_origin");
-    var_3 setcursorhint("HINT_NOICON");
-    var_3 sethintstring(&"PLATFORM_REVIVE");
+    var_3 setCursorHint("HINT_NOICON");
+    var_3 setHintString(&"PLATFORM_REVIVE");
     var_3 revivesetup(self);
     var_3 endon("death");
     var_3 = newteamhudelem(self.team);
     var_3 setshader("waypoint_revive", 8, 8);
     var_3 setwaypoint(1, 1);
-    var_3 settargetent(self);
+    var_3 settargetEnt(self);
     var_3 thread func_5321(var_2);
     var_3.color = (0.33, 0.75, 0.24);
     scripts\mp\utility::playdeathsound();
@@ -3269,13 +3269,13 @@ func_7FC9() {
 damageshellshockandrumble(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread scripts\mp\weapons::onweapondamage(var_0, var_1, var_2, var_3, var_5);
   if(!isai(self) && scripts\engine\utility::getdamagetype(var_2) != "bullet") {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
 revivesetup(var_0) {
   var_1 = var_0.team;
-  self linkto(var_0, "tag_origin");
+  self linkTo(var_0, "tag_origin");
   self.owner = var_0;
   self.inuse = 0;
   self makeusable();
@@ -3368,7 +3368,7 @@ useholdthink(var_0, var_1) {
   var_2 = 3000;
   var_3 = spawn("script_origin", self.origin);
   var_3 hide();
-  var_0 playerlinkto(var_3);
+  var_0 playerlinkTo(var_3);
   var_0 playerlinkedoffsetenable();
   var_0 scripts\engine\utility::allow_weapon(0);
   self.curprogress = 0;
@@ -3456,10 +3456,10 @@ func_612A(var_0) {
 func_9DF9(var_0, var_1) {
   var_2 = anglesToForward(var_0.angles);
   var_2 = (var_2[0], var_2[1], 0);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_0.origin - var_1.origin;
   var_3 = (var_3[0], var_3[1], 0);
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = vectordot(var_2, var_3);
   if(var_4 > 0) {
     return 1;
@@ -3580,7 +3580,7 @@ monitordamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(var_5) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
 
     if(var_4) {

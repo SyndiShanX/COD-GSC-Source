@@ -56,9 +56,9 @@ update_ammo_cache_hint() {
 
   for(;;) {
     var_0 = get_ammo_cache_hint_string();
-    self._id_8388 sethintstring(var_0);
+    self._id_8388 setHintString(var_0);
     var_1 = get_ammo_cache_hint_type();
-    self._id_8388 setcursorhint(var_1);
+    self._id_8388 setCursorHint(var_1);
     wait 1.0;
   }
 }

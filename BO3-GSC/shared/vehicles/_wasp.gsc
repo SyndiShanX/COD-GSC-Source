@@ -559,9 +559,9 @@ function turretfireupdate() {
       if(distancesquared(self.enemy.origin, self.origin) < ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3) * ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3)) {
         self setlookatent(self.enemy);
         if(isrockettype) {
-          self setturrettargetent(self.enemy, (self.enemy getvelocity() * 0.3) - (vehicle_ai::gettargeteyeoffset(self.enemy) * 0.3));
+          self setturrettargetEnt(self.enemy, (self.enemy getvelocity() * 0.3) - (vehicle_ai::gettargeteyeoffset(self.enemy) * 0.3));
         } else {
-          self setturrettargetent(self.enemy, (vehicle_ai::gettargeteyeoffset(self.enemy) * -1) * 0.3);
+          self setturrettargetEnt(self.enemy, (vehicle_ai::gettargeteyeoffset(self.enemy) * -1) * 0.3);
         }
         startaim = gettime();
         while(!self.turretontarget && vehicle_ai::timesince(startaim) < 3) {
@@ -623,7 +623,7 @@ function path_update_interrupt() {
     }
     if(isDefined(self.enemy)) {
       if(self.noshoot !== 1 && self vehcansee(self.enemy)) {
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
         self setlookatent(self.enemy);
       }
       if(!isDefined(old_enemy)) {
@@ -739,8 +739,8 @@ function should_fly_forward(distancetogoalsq) {
     return 0;
   }
   if(isDefined(self.enemy)) {
-    to_goal = vectornormalize(self.current_pathto_pos - self.origin);
-    to_enemy = vectornormalize(self.enemy.origin - self.origin);
+    to_goal = vectorNormalize(self.current_pathto_pos - self.origin);
+    to_enemy = vectorNormalize(self.enemy.origin - self.origin);
     dot = vectordot(to_goal, to_enemy);
     if(abs(dot) > 0.7) {
       return 0;
@@ -768,7 +768,7 @@ function state_combat_update(params) {
       self vehicle_ai::evaluate_connections();
     }
     if(isDefined(self.enemy)) {
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
       self setlookatent(self.enemy);
       self wait_till_something_happens(randomfloatrange(2, 5));
     }
@@ -778,7 +778,7 @@ function state_combat_update(params) {
       foreach(ai in aiarray) {
         self getperfectinfo(ai);
       }
-      players = getplayers("all");
+      players = getPlayers("all");
       foreach(player in players) {
         self getperfectinfo(player);
       }

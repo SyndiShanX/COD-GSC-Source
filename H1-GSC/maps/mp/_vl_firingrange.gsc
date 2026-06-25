@@ -7,7 +7,7 @@
 init_firingrange() {
   var_0 = spawnStruct();
   var_0.lanespawns = getlanespawnarray();
-  var_0.firingrange_start = getent("firingrange_start", "targetname");
+  var_0.firingrange_start = getEnt("firingrange_start", "targetname");
   var_0.round_triggers = getEntArray("firing_range_round_trigger", "targetname");
   var_0.aim_up_targets = gettargetarray("aim_up_target");
   var_0.aim_left_targets = gettargetarray("aim_left_target");
@@ -39,7 +39,7 @@ init_firingrange() {
   var_1 = 100;
 
   for(var_2 = 0; var_2 < 6; var_2++) {
-    var_0.lanelights[var_2] = getent("light_0" + (var_2 + 1), "targetname");
+    var_0.lanelights[var_2] = getEnt("light_0" + (var_2 + 1), "targetname");
     var_0.lanelights[var_2] setlightintensity(0);
     var_0.lanelightsgreen[var_2] = getEntArray("green_light_0" + (var_2 + 1), "targetname");
 
@@ -47,9 +47,9 @@ init_firingrange() {
       var_4 setlightintensity(0);
     }
 
-    var_0.lanelamps[var_2] = getent("lane_lamp_" + (var_2 + 1), "targetname");
+    var_0.lanelamps[var_2] = getEnt("lane_lamp_" + (var_2 + 1), "targetname");
     var_0.lanelamps[var_2] setModel("h1_fng_industrial_lamp_off_sml");
-    var_0.lanelightshellpositions[var_2] = common_scripts\utility::getstruct("lamp_green_light_" + (var_2 + 1), "targetname");
+    var_0.lanelightshellpositions[var_2] = common_scripts\utility::getStruct("lamp_green_light_" + (var_2 + 1), "targetname");
     var_0.lanelightexploders[var_2] = var_1 + var_2;
   }
 
@@ -81,14 +81,14 @@ gettargetarray(var_0, var_1, var_2, var_3) {
 
     if(maps\mp\_utility::is_true(var_2)) {
       var_9 = var_7;
-      var_7 = getent(var_9.target, "targetname");
+      var_7 = getEnt(var_9.target, "targetname");
       var_7.mover = var_9;
       var_9.startpos = var_9.origin;
-      var_10 = common_scripts\utility::getstruct(var_9.target, "targetname");
+      var_10 = common_scripts\utility::getStruct(var_9.target, "targetname");
       var_9.endpos = var_10.origin;
     } else if(maps\mp\_utility::is_true(var_3)) {
       var_7.startpos = var_7.origin;
-      var_10 = common_scripts\utility::getstruct(var_7.target, "targetname");
+      var_10 = common_scripts\utility::getStruct(var_7.target, "targetname");
       var_7.endpos = var_10.origin;
       var_7.dist = distance(var_7.startpos, var_7.endpos);
     }
@@ -135,7 +135,7 @@ wait_start_firingrange(var_0) {
   var_1 = var_0 playergetspawnposbylane();
   var_2 = getgroundposition(var_1.origin, 20, 512, 120);
   var_0 dontinterpolate();
-  var_0 setorigin(var_2);
+  var_0 setOrigin(var_2);
   var_0 setplayerangles(var_1.angles);
   var_0 maps\mp\_vl_base::playersetfovscale(1.0);
   var_0 thread playermonitorweaponforlane();
@@ -579,7 +579,7 @@ targetpopup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self.damagecallback = ::targetdamagecallback;
   self thermaldrawenable();
   self unlink();
-  self rotateto(var_0, 0.4);
+  self rotateTo(var_0, 0.4);
   self playSound("killhouse_target_up");
 
   if(maps\mp\_utility::is_true(var_5)) {
@@ -604,7 +604,7 @@ targetpopup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   self thermaldrawdisable();
   targetdamageoff();
   self unlink();
-  self rotateto(var_1, 0.2);
+  self rotateTo(var_1, 0.2);
   self playSound("killhouse_target_up");
 
   if(maps\mp\_utility::is_true(var_5)) {
@@ -631,7 +631,7 @@ targetdamageoff() {
 targetattachedmoveonce() {
   self endon("death");
   self endon("reset");
-  self.mover moveto(self.mover.origin, 0.1);
+  self.mover moveTo(self.mover.origin, 0.1);
   self waittill("rotatedone");
 
   if(!maps\mp\_utility::is_true(self.active)) {
@@ -649,7 +649,7 @@ targetattachedmoveonce() {
   }
 
   self.mover playLoopSound("target_move_lp");
-  self.mover moveto(self.mover.endpos, var_1, var_2, var_3);
+  self.mover moveTo(self.mover.endpos, var_1, var_2, var_3);
   self.mover waittill("movedone");
   self.mover stoploopsound();
   self.mover playSound("target_stop");
@@ -658,7 +658,7 @@ targetattachedmoveonce() {
 targetattachedmoveback() {
   self endon("death");
   self endon("reset");
-  self.mover moveto(self.mover.origin, 0.1);
+  self.mover moveTo(self.mover.origin, 0.1);
   self waittill("rotatedone");
 
   if(maps\mp\_utility::is_true(self.active)) {
@@ -681,7 +681,7 @@ targetattachedmoveback() {
   }
 
   self.mover playLoopSound("target_move_lp");
-  self.mover moveto(self.mover.startpos, var_1, var_2, var_3);
+  self.mover moveTo(self.mover.startpos, var_1, var_2, var_3);
   self.mover waittill("movedone");
   self.mover stoploopsound();
   self.mover playSound("target_stop");
@@ -702,9 +702,9 @@ targetmoveloop() {
   self playLoopSound("target_move_lp");
 
   for(;;) {
-    self moveto(self.endpos, var_0, var_1, var_2);
+    self moveTo(self.endpos, var_0, var_1, var_2);
     self waittill("movedone");
-    self moveto(self.startpos, var_0, var_1, var_2);
+    self moveTo(self.startpos, var_0, var_1, var_2);
     self waittill("movedone");
   }
 }
@@ -725,7 +725,7 @@ targetmoveback() {
     var_3 = 0.0;
   }
 
-  self moveto(self.startpos, var_1, var_2, var_3);
+  self moveTo(self.startpos, var_1, var_2, var_3);
   self waittill("movedone");
   self stoploopsound();
 }
@@ -790,12 +790,12 @@ targetdamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 popupplywood(var_0) {
   var_1 = level.firingrange.plywood_blockers[var_0];
   var_1.active = 1;
-  var_1 rotateto((0, 180, 0), 0.4);
+  var_1 rotateTo((0, 180, 0), 0.4);
   var_1 playSound("killhouse_target_up_wood");
   thread targethandlestop();
   common_scripts\utility::waittill_either("plywood_" + var_0 + "_down", "reset");
   var_1.active = undefined;
-  var_1 rotateto((0, 180, 90), 0.2);
+  var_1 rotateTo((0, 180, 90), 0.2);
 }
 
 popdownplywood(var_0) {
@@ -1145,15 +1145,15 @@ firingrangecleanup() {
 watermelonthink() {
   level notify("watermelonThink");
   level endon("watermelonThink");
-  var_0 = getent("scr_watermelon", "targetname");
+  var_0 = getEnt("scr_watermelon", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1 show();
   var_1 solid();
-  var_2 = getent(var_1.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   var_2 enableaimassist();
 
   if(!isDefined(var_2.startorigin)) {

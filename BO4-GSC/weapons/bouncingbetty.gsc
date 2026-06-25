@@ -162,8 +162,8 @@ spawnminemover() {
   minemover.owner = self.owner;
   mineup = anglestoup(minemover.angles);
   z_offset = getdvarfloat(#"scr_bouncing_betty_killcam_offset", 18);
-  minemover enablelinkto();
-  minemover linkto(self);
+  minemover enablelinkTo();
+  minemover linkTo(self);
   minemover.killcamoffset = vectorscale(mineup, z_offset);
   minemover.weapon = self.weapon;
   minemover playSound(#"wpn_betty_arm");
@@ -220,7 +220,7 @@ bouncingbettydetonate(attacker, weapon, target) {
 
 bouncingbettydestroyed() {
   playFX(level.bettydestroyedfx, self.origin);
-  playsoundatposition(#"dst_equipment_destroy", self.origin);
+  playSoundAtPosition(#"dst_equipment_destroy", self.origin);
 
   if(isDefined(self.trigger)) {
     self.trigger delete();
@@ -232,7 +232,7 @@ bouncingbettydestroyed() {
 }
 
 bouncingbettyjumpandexplode() {
-  jumpdir = vectornormalize(anglestoup(self.angles));
+  jumpdir = vectorNormalize(anglestoup(self.angles));
 
   if(jumpdir[2] > level.bettyjumpheightwallanglecos) {
     jumpheight = level.bettyjumpheight;
@@ -241,7 +241,7 @@ bouncingbettyjumpandexplode() {
   }
 
   explodepos = self.origin + jumpdir * jumpheight;
-  self.killcament moveto(explodepos + self.killcamoffset, level.bettyjumptime, 0, level.bettyjumptime);
+  self.killcament moveTo(explodepos + self.killcamoffset, level.bettyjumptime, 0, level.bettyjumptime);
   self clientfield::set("bouncingbetty_state", 1);
   wait level.bettyjumptime;
   self thread mineexplode(jumpdir, explodepos);

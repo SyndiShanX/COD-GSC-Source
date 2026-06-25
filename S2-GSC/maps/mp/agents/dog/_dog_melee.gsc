@@ -73,7 +73,7 @@ func_8B8E(param_00) {
     return undefined;
   }
 
-  var_03 = vectornormalize((var_02[0], var_02[1], 0));
+  var_03 = vectorNormalize((var_02[0], var_02[1], 0));
   var_04 = anglesToForward(param_00.var_001D);
   var_05 = vectordot(var_04, var_03);
   if(var_05 > 0.707) {
@@ -142,7 +142,7 @@ func_397B(param_00, param_01, param_02) {
     return;
   }
 
-  self linkto(var_03);
+  self linkTo(var_03);
   self method_8625(param_00, param_01, param_02);
 }
 
@@ -253,7 +253,7 @@ func_4707(param_00, param_01) {
 func_5797(param_00) {
   if(param_00 maps\mp\_riotshield::func_4B8C()) {
     var_01 = self.var_0116 - param_00.var_0116;
-    var_02 = vectornormalize((var_01[0], var_01[1], 0));
+    var_02 = vectorNormalize((var_01[0], var_01[1], 0));
     var_03 = anglesToForward(param_00.var_001D);
     var_04 = vectordot(var_03, var_01);
     if(param_00 maps\mp\_riotshield::func_4B8D()) {

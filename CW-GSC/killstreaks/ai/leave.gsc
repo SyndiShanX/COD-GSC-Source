@@ -45,7 +45,7 @@ function function_e35eee4d() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     canbeseen = 0;
 
     foreach(player in players) {

@@ -133,9 +133,9 @@ drone_animation(localclientnum) {
   self useanimtree(#animtree);
 
   if(getgametypesetting("allowMapScripting")) {
-    self animscripted(level.drone_anims[self.script_animation], 1.0, 0.0, 1.0);
+    self animScripted(level.drone_anims[self.script_animation], 1.0, 0.0, 1.0);
   } else {
-    self animscripted(level.drone_anims[self.script_animation + "_off"], 1.0, 0.0, 1.0);
+    self animScripted(level.drone_anims[self.script_animation + "_off"], 1.0, 0.0, 1.0);
   }
 }
 
@@ -145,7 +145,7 @@ drone_link(localclientnum) {
 
   foreach(model in models) {
     model waittill_dobj(localclientnum);
-    model linkto(self, model.script_noteworthy);
+    model linkTo(self, model.script_noteworthy);
   }
 }
 

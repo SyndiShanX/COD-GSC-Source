@@ -74,7 +74,7 @@ function function_a3f52108(str_objective) {
 
 function function_a1a182e() {
   self.var_5e7a3967 = 1;
-  self setgoalvolume(getent("clearing_start_defend_volume", "targetname"));
+  self setgoalvolume(getEnt("clearing_start_defend_volume", "targetname"));
 }
 
 function function_6a2abd6d() {
@@ -203,7 +203,7 @@ function skipto_waterfall_done(str_objective, b_starting, b_direct, player) {}
 
 function function_83fcefa6() {
   array::run_all(level.activeplayers, &playrumbleonentity, "cp_infection_hideout_stretch");
-  playsoundatposition("evt_waterfall_rumble", (0, 0, 0));
+  playSoundAtPosition("evt_waterfall_rumble", (0, 0, 0));
   objectives::breadcrumb("trig_clearing_waterfall_breadcrumb");
   trigger::wait_till("trig_clearing_waterfall_breadcrumb");
   if(isDefined(level.bzm_zurichdialogue6callback)) {
@@ -224,7 +224,7 @@ function function_cd8360f3() {
 }
 
 function function_2afd205d() {
-  self setgoalvolume(getent("waterfall_defend_volume", "targetname"));
+  self setgoalvolume(getEnt("waterfall_defend_volume", "targetname"));
 }
 
 function skipto_path_choice(str_objective, b_starting) {
@@ -308,8 +308,8 @@ function function_bf68487(a_ents) {
 
 function function_eae5713() {
   scene::add_scene_func("cin_zur_09_01_standoff_vign_far_as_i_go", &function_4ac14422, "play");
-  var_ce37baf2 = getent("trig_waterfall_burn", "targetname");
-  var_9d50b546 = getent("clip_burn_vine_01", "targetname");
+  var_ce37baf2 = getEnt("trig_waterfall_burn", "targetname");
+  var_9d50b546 = getEnt("clip_burn_vine_01", "targetname");
   var_ce37baf2 setinvisibletoall();
   level flag::wait_till("flag_enable_waterfall_vine_burn");
   var_ce37baf2 setvisibletoall();
@@ -331,8 +331,8 @@ function function_51277233() {
 }
 
 function function_6c92c263(b_hide) {
-  var_ecf05dd0 = getent("waterfall_vine_path_blocker", "targetname");
-  var_9d50b546 = getent("clip_burn_vine_01", "targetname");
+  var_ecf05dd0 = getEnt("waterfall_vine_path_blocker", "targetname");
+  var_9d50b546 = getEnt("clip_burn_vine_01", "targetname");
   if(b_hide) {
     var_ecf05dd0 hide();
   } else {
@@ -499,10 +499,10 @@ function function_c998741b(str_objective) {
       break;
     }
   }
-  var_7edb74a6 = getent("unburnable_vine_" + var_3e0e2df1, "targetname");
-  var_9d50b546 = getent("clip_burn_vine_" + var_3e0e2df1, "targetname");
+  var_7edb74a6 = getEnt("unburnable_vine_" + var_3e0e2df1, "targetname");
+  var_9d50b546 = getEnt("clip_burn_vine_" + var_3e0e2df1, "targetname");
   var_7edb74a6 hide();
-  var_ce37baf2 = getent("trig_vine_damage_" + var_3e0e2df1, "targetname");
+  var_ce37baf2 = getEnt("trig_vine_damage_" + var_3e0e2df1, "targetname");
   var_ce37baf2 setvisibletoall();
   var_ce37baf2.var_afacae68 = 0;
   var_ce37baf2 function_860aaa8a(var_9d50b546);
@@ -510,7 +510,7 @@ function function_c998741b(str_objective) {
   level clientfield::set("clearing_vinewall_open", n_fxanim);
   wait(0.5);
   array::thread_all(level.players, &clientfield::increment_to_player, "postfx_transition");
-  playsoundatposition("evt_clearing_trans_out", (0, 0, 0));
+  playSoundAtPosition("evt_clearing_trans_out", (0, 0, 0));
   wait(1);
   level util::screen_fade_out(1, "black");
   foreach(player in level.players) {

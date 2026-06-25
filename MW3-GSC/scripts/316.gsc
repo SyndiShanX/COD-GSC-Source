@@ -487,17 +487,17 @@ _id_1DAE() {
   } else {
     var_9.angles = level.player.angles;
   }
-  level.player playerlinkto(var_9, undefined, 1, 0, 0, 0, 0);
+  level.player playerlinkTo(var_9, undefined, 1, 0, 0, 0, 0);
   var_9.angles = (var_9.angles[0] + 89, var_9.angles[1], 0);
   wait(var_5);
-  var_9 moveto(var_8 + (0, 0, 0), 2, 0, 2);
+  var_9 moveTo(var_8 + (0, 0, 0), 2, 0, 2);
   wait 1.0;
   wait 0.5;
 
   if(var_1) {
-    var_9 rotateto(level._id_1DAF, 0.5, 0.3, 0.2);
+    var_9 rotateTo(level._id_1DAF, 0.5, 0.3, 0.2);
   } else {
-    var_9 rotateto((var_9.angles[0] - 89, var_9.angles[1], 0), 0.5, 0.3, 0.2);
+    var_9 rotateTo((var_9.angles[0] - 89, var_9.angles[1], 0), 0.5, 0.3, 0.2);
   }
   if(!var_6) {
     savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);

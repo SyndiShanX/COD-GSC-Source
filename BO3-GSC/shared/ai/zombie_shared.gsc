@@ -385,7 +385,7 @@ function returntrue() {
 }
 
 function trackloop() {
-  players = getplayers();
+  players = getPlayers();
   deltachangeperframe = 5;
   aimblendtime = 0.05;
   prevyawdelta = 0;

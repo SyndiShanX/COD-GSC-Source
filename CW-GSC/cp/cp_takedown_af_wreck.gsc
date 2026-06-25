@@ -50,7 +50,7 @@ function main(str_skipto, b_starting) {
     level.arash.ignoreall = 1;
   }
 
-  plane = getent("cargo_plane", "targetname");
+  plane = getEnt("cargo_plane", "targetname");
   var_853687bd = getEntArray("af_plane_triggers", "targetname");
   var_853687bd = arraycombine(var_853687bd, getEntArray("plane_floor_clip", "targetname"));
   var_853687bd = arraycombine(var_853687bd, getEntArray("plane_cargo", "targetname"));
@@ -62,7 +62,7 @@ function main(str_skipto, b_starting) {
   probes = ["cargo_probe_1", "cargo_probe_2", "cargo_probe_3", "cargo_probe_4", "cargo_probe_5", "cargo_probe_6", "cargo_probe_7", "cargo_probe_8", "cargo_probe_9"];
 
   foreach(probe in probes) {
-    probe = getent(probe, "targetname");
+    probe = getEnt(probe, "targetname");
 
     if(isDefined(probe)) {
       probe unlink();
@@ -70,7 +70,7 @@ function main(str_skipto, b_starting) {
     }
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player setmovespeedscale(0.4);
   player util::function_749362d7(1);
   exploder::exploder("hit3_pcrash_end_embers");
@@ -169,7 +169,7 @@ function function_70dd6f0e() {
 function function_ea2f2e25(b_starting) {
   adler = getactorarray("af_adler", "targetname")[0];
   adler hide();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   setDvar(#"hash_252e699c41531f1a", 0);
   player clientfield::set_to_player("wreck_vision", 1);
 

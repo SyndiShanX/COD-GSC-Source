@@ -85,7 +85,7 @@ function setup_vignettes() {
     a_str_scenes = array(a_str_scenes);
   }
   a_str_scenes[a_str_scenes.size] = "cin_saf_bla_armory_vign_repair_3dprinter";
-  e_spawner = getent("worker_spawner", "targetname");
+  e_spawner = getEnt("worker_spawner", "targetname");
   a_str_scenes = array::randomize(a_str_scenes);
   n_vign_total = randomintrange(3, 4);
   for(n_vign_index = 0; n_vign_index < n_vign_total; n_vign_index++) {

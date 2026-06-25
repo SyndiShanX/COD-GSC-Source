@@ -66,7 +66,7 @@ skipto_endings() {
   maps\haiti_anim::endings_anims();
   level thread maps\haiti::fxanim_construct_hangar();
   level thread model_restore_area("convert_after_trap");
-  ending_ceiling = getent("ending_ceiling", "targetname");
+  ending_ceiling = getEnt("ending_ceiling", "targetname");
   ending_ceiling hide();
   setup_harper();
   skipto_teleport("skipto_endings");
@@ -106,7 +106,7 @@ setup_endscene_characters() {
   level.ai_menendez set_blend_in_out_times(0.2);
   level.m_fnp45 = spawn("script_model", level.ai_menendez.origin);
   level.m_fnp45 setModel("t6_wpn_pistol_fnp45_view");
-  level.m_fnp45 linkto(level.ai_menendez, "tag_weapon_right", (0, 0, 0));
+  level.m_fnp45 linkTo(level.ai_menendez, "tag_weapon_right", (0, 0, 0));
 
   if(level.is_defalco_alive) {
     level.ai_defalco = simple_spawn_single("defalco");
@@ -370,7 +370,7 @@ fail_watcher_notetrack(scene_name, entity, fail_scene, fail_notetrack) {
   entity shoot();
   level.player dodamage(50, level.player.origin);
   earthquake(0.5, 0.6, level.player.origin, 128);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player shellshock("default", 10);
   scene_wait(scene_name);
   screen_message_delete();
@@ -391,7 +391,7 @@ moral_choice_scene() {
 
   level.m_knife = spawn("script_model", level.player.body.origin);
   level.m_knife setModel("t6_wpn_knife_base_prop");
-  level.m_knife linkto(level.player.body, "tag_weapon1", (0, 0, 0));
+  level.m_knife linkTo(level.player.body, "tag_weapon1", (0, 0, 0));
   level thread run_scene_and_delete("moral_choice");
   scene_wait("moral_choice");
 }
@@ -530,12 +530,12 @@ killed_menendez() {
 open_end05_gate(player) {
   wait 1.5;
   level thread left_front_prisoners();
-  hangar_door_left_1 = getent("hangar_door_left_1", "targetname");
+  hangar_door_left_1 = getEnt("hangar_door_left_1", "targetname");
   hangar_door_left_1 movey(-80, 10);
-  playsoundatposition("evt_endout04_door_left", (-21146, 4180, -35));
-  hangar_door_right_1 = getent("hangar_door_right_1", "targetname");
+  playSoundAtPosition("evt_endout04_door_left", (-21146, 4180, -35));
+  hangar_door_right_1 = getEnt("hangar_door_right_1", "targetname");
   hangar_door_right_1 movey(150, 10);
-  playsoundatposition("evt_endout04_door_right", (-21135, 4350, -58));
+  playSoundAtPosition("evt_endout04_door_right", (-21135, 4350, -58));
 }
 
 end05_start_drag(player) {
@@ -578,12 +578,12 @@ end06_fade_out_black(player) {
 
 open_gate(player) {
   wait 3;
-  hangar_door_left_1 = getent("hangar_door_left_1", "targetname");
+  hangar_door_left_1 = getEnt("hangar_door_left_1", "targetname");
   hangar_door_left_1 movey(-80, 10);
-  playsoundatposition("evt_endout04_door_left", (-21146, 4180, -35));
-  hangar_door_right_1 = getent("hangar_door_right_1", "targetname");
+  playSoundAtPosition("evt_endout04_door_left", (-21146, 4180, -35));
+  hangar_door_right_1 = getEnt("hangar_door_right_1", "targetname");
   hangar_door_right_1 movey(150, 10);
-  playsoundatposition("evt_endout04_door_right", (-21135, 4350, -58));
+  playSoundAtPosition("evt_endout04_door_right", (-21135, 4350, -58));
 }
 
 notetrack_eye_candy01(player) {
@@ -706,7 +706,7 @@ menendez_vtol_engines_on_final(menendez_vtol) {
 
 claw_spawning() {
   a_vh_claws = simple_spawn("sp_ending_claw_allies", ::claw_think);
-  s_defend_spot = getstruct("s_end_defend", "targetname");
+  s_defend_spot = getStruct("s_end_defend", "targetname");
   a_vh_qr_allies = spawn_vehicles_from_targetname("ending_quadrotor");
   array_thread(a_vh_qr_allies, ::defend, s_defend_spot.origin, s_defend_spot.radius);
 }
@@ -894,7 +894,7 @@ ending_cowbell(time) {
   array_thread(vehicles, ::ending_f35_think, "start_ending_fa38_group_3");
   vehicles[0] playSound("evt_fake_f35_flyby");
   wait 2.1;
-  playsoundatposition("mus_end_hit", (0, 0, 0));
+  playSoundAtPosition("mus_end_hit", (0, 0, 0));
 }
 
 ending_vtol_think(path_start) {
@@ -950,7 +950,7 @@ notetrack_flash_on_camera_cut(m_player_body) {
 }
 
 grab_gun(player) {
-  m_kard = getent("deadguy_kard", "targetname");
+  m_kard = getEnt("deadguy_kard", "targetname");
   m_kard hide();
   level.player.body attach("t6_wpn_pistol_kard_world", "tag_weapon");
   level.player playerlinktodelta(level.player.body, "tag_player", 1, 30, 12, 15, 15, 1, 1);
@@ -964,7 +964,7 @@ scene_0_v1_rebar(harper) {
   ai_harper = get_ais_from_scene("scene_0_v1", "harper");
   m_rebar = spawn("script_model", ai_harper.origin);
   m_rebar setModel("rebar_anim_haiti");
-  m_rebar linkto(ai_harper, "tag_weapon_left", (0, 0, 0));
+  m_rebar linkTo(ai_harper, "tag_weapon_left", (0, 0, 0));
   exploder(667);
   flag_wait("scene_2_complete");
   m_rebar delete();
@@ -975,7 +975,7 @@ scene_0_v3_rebar(harper) {
   ai_harper = get_ais_from_scene("scene_0_v3", "harper");
   m_rebar = spawn("script_model", ai_harper.origin);
   m_rebar setModel("rebar_anim_haiti");
-  m_rebar linkto(ai_harper, "tag_weapon_left", (0, 0, 0));
+  m_rebar linkTo(ai_harper, "tag_weapon_left", (0, 0, 0));
   exploder(667);
   flag_wait("scene_2_complete");
   m_rebar delete();
@@ -1089,7 +1089,7 @@ turn_off_spot_light(player) {
 explosions_go_off(player) {
   earthquake(0.8, 2, level.player.origin, 500);
   level.player shellshock("default", 1);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   playFXOnTag(getfx("camo_transition"), level.ai_camo, "J_SpineLower");
   exploder(650);
   level thread radial_damage_from_spot("destroy_paper_spot");
@@ -1104,7 +1104,7 @@ explosions_go_off(player) {
 
 show_ceiling(player) {
   wait 4;
-  ending_ceiling = getent("ending_ceiling", "targetname");
+  ending_ceiling = getEnt("ending_ceiling", "targetname");
   ending_ceiling show();
 }
 
@@ -1119,7 +1119,7 @@ delete_floor(player) {
 }
 
 stab_event_start(player) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.7, 2, level.player.origin, 500);
   level.player shellshock("default", 2);
 }
@@ -1146,7 +1146,7 @@ radial_damage_from_spot(str_spot, n_delay) {
   }
 
   if(isDefined(str_spot)) {
-    center = getstruct(str_spot, "targetname");
+    center = getStruct(str_spot, "targetname");
     n_radius = center.radius;
   }
 

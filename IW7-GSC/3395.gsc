@@ -82,7 +82,7 @@ func_9B93() {
 }
 
 func_CC08(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_3 = var_2.angles;
   level thread func_A86F(var_0, var_2, var_1);
   var_1 notify("window_trap_placed");

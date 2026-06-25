@@ -137,7 +137,7 @@ spawnmine(var_0) {
   var_9 = spawn("script_model", var_8);
   var_9.isup = var_6;
   var_9.isforward = var_7;
-  var_10 = vectornormalize(var_5["normal"]);
+  var_10 = vectorNormalize(var_5["normal"]);
   var_11 = vectortoangles(var_10);
   var_11 = var_11 + (90, 0, 0);
   var_9.angles = var_11;
@@ -186,7 +186,7 @@ createbombsquadmodel(var_0, var_1, var_2) {
   wait 0.05;
   var_3 thread maps\mp\gametypes\_weapons::bombsquadvisibilityupdater(var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   var_3 setcontents(0);
   self waittill("death");
 
@@ -377,7 +377,7 @@ equipmentwatchuse() {
   self endon("spawned_player");
   self endon("disconnect");
   self endon("change_owner");
-  self.pickuptrigger setcursorhint("HINT_NOICON");
+  self.pickuptrigger setCursorHint("HINT_NOICON");
   var_0 = self.pickuptrigger.owner;
   equipmentenableuse(var_0);
 
@@ -406,13 +406,13 @@ equipmentenableuse(var_0) {
   self endon("disconnect");
   self endon("equipmentWatchUse");
   self endon("change_owner");
-  self.pickuptrigger setcursorhint("HINT_NOICON");
-  self.pickuptrigger sethintstring(&"MP_PICKUP_TRI_DRONE");
+  self.pickuptrigger setCursorHint("HINT_NOICON");
+  self.pickuptrigger setHintString(&"MP_PICKUP_TRI_DRONE");
   self.pickuptrigger maps\mp\_utility::setselfusable(var_0);
 }
 
 equipmentdisableuse(var_0) {
-  self.trigger sethintstring("");
+  self.trigger setHintString("");
   self.trigger maps\mp\_utility::setselfunusuable();
 }
 
@@ -467,8 +467,8 @@ mineproximitytrigger(var_0) {
   playFX(level.mine_launch, self.origin);
   var_3 = anglestoup(self.angles);
   var_4 = self.origin + var_3 * 64;
-  self moveto(var_4, 0.75, 0, 0.25);
-  self.killcament moveto(var_4 + self.killcamoffset, 0.75, 0, 0.25);
+  self moveTo(var_4, 0.75, 0, 0.25);
+  self.killcament moveTo(var_4 + self.killcamoffset, 0.75, 0, 0.25);
   self rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   thread playspinnerfx();
 

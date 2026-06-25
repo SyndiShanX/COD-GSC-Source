@@ -82,7 +82,7 @@ on_player_spawned(localclientnum) {
 }
 
 function_5d6c2a78(localclientnum) {
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     if(player function_21c0fa55()) {
       player function_3752300d(localclientnum);
       continue;

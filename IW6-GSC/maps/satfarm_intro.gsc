@@ -65,7 +65,7 @@ intro_begin() {
   thread saf_c17_lower_backdoor_setup();
   thread intro_red_flickering_light();
   var_0 = [];
-  var_1 = common_scripts\utility::getstruct("playertank_fake_org", "targetname");
+  var_1 = common_scripts\utility::getStruct("playertank_fake_org", "targetname");
   var_2 = maps\_utility::spawn_anim_model("playertank_fake", var_1.origin);
   var_0 = common_scripts\utility::add_to_array(var_0, var_2);
   var_3 = [];
@@ -73,12 +73,12 @@ intro_begin() {
   var_3[0] = var_4;
   var_5 = maps\_utility::spawn_anim_model("player_rig_legs");
   var_3[1] = var_5;
-  var_6 = getent("cargobay_tankdriver", "targetname");
+  var_6 = getEnt("cargobay_tankdriver", "targetname");
   var_7 = var_6 maps\_utility::spawn_ai(1);
   var_7 maps\_utility::magic_bullet_shield(1);
   var_7.animname = "cargobay_tankdriver";
   var_3[2] = var_7;
-  var_8 = getent("cargobay_tankcopilot", "targetname");
+  var_8 = getEnt("cargobay_tankcopilot", "targetname");
   var_9 = var_8 maps\_utility::spawn_ai(1);
   var_9 maps\_utility::magic_bullet_shield(1);
   var_9.animname = "cargobay_tankcopilot";
@@ -86,39 +86,39 @@ intro_begin() {
   var_1 maps\_anim::anim_first_frame(var_3, "c17_tank_scene");
   level.player playerlinktodelta(var_4, "tag_player", 1, 0, 0, 0, 0, 1);
   thread black_screen_vo(var_7, var_9);
-  var_10 = getent("intro_tankman", "targetname");
+  var_10 = getEnt("intro_tankman", "targetname");
   var_11 = var_10 maps\_utility::spawn_ai(1, 1);
   var_11.animname = "intro_tankman";
   var_0 = common_scripts\utility::add_to_array(var_0, var_11);
-  var_12 = getent("intro_commander", "targetname");
+  var_12 = getEnt("intro_commander", "targetname");
   var_13 = var_12 maps\_utility::spawn_ai(1, 1);
   var_13.animname = "intro_commander";
   var_0 = common_scripts\utility::add_to_array(var_0, var_13);
-  var_14 = getent("intro_crateman", "targetname");
+  var_14 = getEnt("intro_crateman", "targetname");
   var_15 = var_14 maps\_utility::spawn_ai(1, 1);
   var_15.animname = "intro_crateman";
   var_0 = common_scripts\utility::add_to_array(var_0, var_15);
-  var_16 = getent("intro_crewmaster", "targetname");
+  var_16 = getEnt("intro_crewmaster", "targetname");
   var_17 = var_16 maps\_utility::spawn_ai(1, 1);
   var_17.animname = "intro_crewmaster";
   var_0 = common_scripts\utility::add_to_array(var_0, var_17);
-  var_18 = getent("intro_helper", "targetname");
+  var_18 = getEnt("intro_helper", "targetname");
   var_19 = var_18 maps\_utility::spawn_ai(1, 1);
   var_19.animname = "intro_helper";
   var_0 = common_scripts\utility::add_to_array(var_0, var_19);
-  var_20 = getent("intro_lieutenant", "targetname");
+  var_20 = getEnt("intro_lieutenant", "targetname");
   var_21 = var_20 maps\_utility::spawn_ai(1, 1);
   var_21.animname = "intro_lieutenant";
   var_0 = common_scripts\utility::add_to_array(var_0, var_21);
-  var_22 = getent("intro_soldier1", "targetname");
+  var_22 = getEnt("intro_soldier1", "targetname");
   var_23 = var_22 maps\_utility::spawn_ai(1, 1);
   var_23.animname = "intro_soldier1";
   var_0 = common_scripts\utility::add_to_array(var_0, var_23);
-  var_24 = getent("intro_soldier2", "targetname");
+  var_24 = getEnt("intro_soldier2", "targetname");
   var_25 = var_24 maps\_utility::spawn_ai(1, 1);
   var_25.animname = "intro_soldier2";
   var_0 = common_scripts\utility::add_to_array(var_0, var_25);
-  var_26 = getent("intro_turretman", "targetname");
+  var_26 = getEnt("intro_turretman", "targetname");
   var_27 = var_26 maps\_utility::spawn_ai(1, 1);
   var_27.animname = "intro_turretman";
   var_0 = common_scripts\utility::add_to_array(var_0, var_27);
@@ -132,31 +132,31 @@ intro_begin() {
   var_0 = common_scripts\utility::add_to_array(var_0, var_31);
   var_32 = spawn("script_model", (0, 0, 0));
   var_32 setModel("saf_federation_crate");
-  var_32 linkto(var_28, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  var_32 linkTo(var_28, "J_prop_1", (0, 0, 0), (0, 0, 0));
   var_33 = spawn("script_model", (0, 0, 0));
   var_33 setModel("saf_federation_crate");
-  var_33 linkto(var_28, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  var_33 linkTo(var_28, "J_prop_2", (0, 0, 0), (0, 0, 0));
   var_34 = maps\_utility::spawn_anim_model("satfarm_cargobay_topcrate_and_toolbox_gpr");
   var_0 = common_scripts\utility::add_to_array(var_0, var_34);
   var_35 = spawn("script_model", (0, 0, 0));
   var_35 setModel("saf_federation_crate");
-  var_35 linkto(var_34, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  var_35 linkTo(var_34, "J_prop_1", (0, 0, 0), (0, 0, 0));
   var_36 = spawn("script_model", (0, 0, 0));
   var_36 setModel("carrier_red_toolbox");
-  var_36 linkto(var_34, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  var_36 linkTo(var_34, "J_prop_2", (0, 0, 0), (0, 0, 0));
   var_37 = maps\_utility::spawn_anim_model("satfarm_cargobay_humveecargo_gpr");
   var_0 = common_scripts\utility::add_to_array(var_0, var_37);
   var_38 = spawn("script_model", (0, 0, 0));
   var_38 setModel("saf_federation_crate");
-  var_38 linkto(var_37, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  var_38 linkTo(var_37, "J_prop_1", (0, 0, 0), (0, 0, 0));
   var_39 = maps\_utility::spawn_anim_model("satfarm_cargo_crates_in_back_gpr");
   var_0 = common_scripts\utility::add_to_array(var_0, var_39);
   var_40 = spawn("script_model", (0, 0, 0));
   var_40 setModel("saf_federation_crate");
-  var_40 linkto(var_39, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  var_40 linkTo(var_39, "J_prop_1", (0, 0, 0), (0, 0, 0));
   var_41 = spawn("script_model", (0, 0, 0));
   var_41 setModel("saf_federation_crate_small");
-  var_41 linkto(var_39, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  var_41 linkTo(var_39, "J_prop_2", (0, 0, 0), (0, 0, 0));
   thread setup_camera_roll(var_37);
   var_13 thread intro_commander_waits();
   var_1 maps\_anim::anim_first_frame(var_0, "intro");
@@ -170,7 +170,7 @@ intro_begin() {
   level.player lerpviewangleclamp(1.0, 0.5, 0, 0, 0, 0, 0);
   wait 1.0;
   thread setup_intro_allies();
-  var_42 = common_scripts\utility::getstruct("sat_farm_intro_org", "targetname");
+  var_42 = common_scripts\utility::getStruct("sat_farm_intro_org", "targetname");
   level.herotanks[0] = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("crash_site_hero0");
   level.bobcat = level.herotanks[0];
   level.allytanks = common_scripts\utility::array_combine(level.allytanks, level.herotanks);
@@ -188,10 +188,10 @@ intro_begin() {
   var_46 = maps\_utility::spawn_anim_model("crashedc17");
   var_43 = common_scripts\utility::add_to_array(var_43, var_46);
   level.crashedc17_missile_org = common_scripts\utility::spawn_tag_origin();
-  level.crashedc17_missile_org linkto(var_46, "tag_origin", (-800, -256, 0), (0, 0, 0));
+  level.crashedc17_missile_org linkTo(var_46, "tag_origin", (-800, -256, 0), (0, 0, 0));
   var_47 = maps\_utility::spawn_anim_model("allyc17_right");
   var_43 = common_scripts\utility::add_to_array(var_43, var_47);
-  var_48 = getent("intro_crewmember1", "targetname");
+  var_48 = getEnt("intro_crewmember1", "targetname");
   var_49 = var_48 maps\_utility::spawn_ai(1);
   var_49 maps\_utility::magic_bullet_shield(1);
   var_49 setCanDamage(0);
@@ -201,15 +201,15 @@ intro_begin() {
   var_43 = common_scripts\utility::add_to_array(var_43, var_50);
   var_51 = spawn("script_model", (0, 0, 0));
   var_51 setModel("saf_federation_crate");
-  var_51 linkto(var_50, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  var_51 linkTo(var_50, "J_prop_1", (0, 0, 0), (0, 0, 0));
   var_52 = spawn("script_model", (0, 0, 0));
   var_52 setModel("saf_federation_crate");
-  var_52 linkto(var_50, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  var_52 linkTo(var_50, "J_prop_2", (0, 0, 0), (0, 0, 0));
   var_53 = maps\_utility::spawn_anim_model("satfarm_infil_falling_crates2");
   var_43 = common_scripts\utility::add_to_array(var_43, var_53);
   var_54 = spawn("script_model", (0, 0, 0));
   var_54 setModel("saf_federation_crate");
-  var_54 linkto(var_53, "J_prop_1", (0, 0, 0), (0, 0, 0));
+  var_54 linkTo(var_53, "J_prop_1", (0, 0, 0), (0, 0, 0));
   var_42 thread maps\_anim::anim_single(var_43, "intro");
   thread intro_background_c17();
   common_scripts\utility::flag_set("aud_tank_drop");
@@ -346,14 +346,14 @@ intro_commander_waits() {
   self waittillmatch("single anim", "turbulence_shift");
   level notify("turbulence_shift");
   thread turbulence(0.5);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread maps\satfarm_audio::intro_rumble();
   thread common_scripts\utility::play_sound_in_space("satf_intro_shake_1", level.player.origin);
   self waittillmatch("single anim", "strafe_attack1");
   level notify("strafe_attack1");
   thread start_strafe_1();
   thread turbulence(0.5);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread maps\satfarm_audio::bullet_holes1();
   common_scripts\utility::exploder(1001);
   common_scripts\utility::exploder(1005);
@@ -364,27 +364,27 @@ intro_commander_waits() {
   level notify("cargo_bay_doors_open");
   common_scripts\utility::flag_set("cargo_doors_opened");
   thread maps\satfarm_audio::aud_intro_cargo_doors();
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   self waittillmatch("single anim", "strafe_attack2");
   level notify("strafe_attack2");
   thread start_strafe_2();
   thread turbulence(0.5);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread common_scripts\utility::play_sound_in_space("satf_intro_shake_2", level.player.origin);
   thread maps\satfarm_audio::bullet_holes3();
   common_scripts\utility::exploder(1002);
   self waittillmatch("single anim", "humvee_minor_explosion");
   level notify("humvee_minor_explosion");
   thread turbulence(0.5);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   self waittillmatch("single anim", "deploy_button_pressed");
   level notify("deploy_button_pressed");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   self waittillmatch("single anim", "humvee_explode");
   thread teleport_mask();
   level notify("humvee_explode");
   thread turbulence(0.5);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player shellshock("satfarm_explosion", 4.0);
   common_scripts\utility::exploder(2002);
   common_scripts\utility::exploder(2001);
@@ -412,10 +412,10 @@ playertank_waits() {
   playFXOnTag(level._effect["vfx_tank_landing_dust"], self, "tag_origin");
   level.player thread maps\_gameskill::display_screen_effect("dirt", "bottom", "fullscreen_dirt_bottom", "fullscreen_dirt_bottom_b", randomfloatrange(0.55, 0.66));
   level.player screenshakeonentity(2.0, 2.0, 2.0, 2.666, 0, 2.666, 128, 3, 3, 3);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player playrumblelooponentity("subtle_tank_rumble");
   wait 2.666;
-  level.playertank maps\_utility::anim_stopanimscripted();
+  level.playertank maps\_utility::anim_stopanimScripted();
   level.player stoprumble("subtle_tank_rumble");
   level.playertank useanimtree(#animtree);
   level.playertank setanim(%abrams_movement, 1, 0);
@@ -494,7 +494,7 @@ playerc17_waits() {
   level notify("stop_camera_roll");
   playFXOnTag(level._effect["vfx_smoke_jetfire_geotrail"], self, "tag_engine_left_1");
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(self, "tag_origin", (-400, 0, 120), (180, 0, 0));
+  var_0 linkTo(self, "tag_origin", (-400, 0, 120), (180, 0, 0));
   playFXOnTag(level._effect["vfx_smk_black_outside"], var_0, "tag_origin");
   wait 0.05;
   playFXOnTag(level._effect["vfx_smk_jetfumes_geotrail"], self, "tag_engine_left_1");
@@ -560,7 +560,7 @@ mig_fires_at_c17_scene() {
 }
 
 tank_deploy_chutes(var_0) {
-  var_1 = common_scripts\utility::getstruct("sat_farm_intro_org", "targetname");
+  var_1 = common_scripts\utility::getStruct("sat_farm_intro_org", "targetname");
   var_2 = "pilot_chute" + var_0;
   var_3 = maps\_utility::spawn_anim_model(var_2);
   var_3 hide();
@@ -601,7 +601,7 @@ setup_camera_roll(var_0) {
   level endon("stop_camera_roll");
   level.view_rollers = [];
   level.org_view_roll = spawn("script_origin", (0, 0, 0));
-  level.org_view_roll linkto(var_0, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  level.org_view_roll linkTo(var_0, "J_prop_2", (0, 0, 0), (0, 0, 0));
   level.org_view_roll thread stop_camera_roll();
   setup_bullet_pinholes();
   var_1 = 1;
@@ -619,7 +619,7 @@ setup_camera_roll(var_0) {
 }
 
 rotate_rollers_to(var_0, var_1, var_2, var_3) {
-  self rotateto(var_0, var_1, var_2, var_3);
+  self rotateTo(var_0, var_1, var_2, var_3);
 }
 
 stop_camera_roll() {
@@ -634,7 +634,7 @@ turbulence(var_0) {
   wait(var_1);
   common_scripts\utility::flag_set("stop_turbulence");
   var_2 = abs(level.turbangles[0]) / 8;
-  level.org_view_roll rotateto((0, 0, 0), var_2, 0, 0);
+  level.org_view_roll rotateTo((0, 0, 0), var_2, 0, 0);
   wait(var_2);
 }
 
@@ -654,7 +654,7 @@ turbulence_loop() {
     var_0 = -1 * var_0;
     level.turbangles = (var_2, var_3, var_4);
     earthquake(0.1, var_1, level.player.origin, 80000);
-    level.org_view_roll rotateto(level.turbangles, var_1, var_1 / 3, var_1 / 3);
+    level.org_view_roll rotateTo(level.turbangles, var_1, var_1 / 3, var_1 / 3);
     wait(var_1);
   }
 }
@@ -673,9 +673,9 @@ setup_bullet_pinholes() {
     var_2.fx_org = common_scripts\utility::spawn_tag_origin();
     level.bullet_pinhole_tag_fx_orgs = common_scripts\utility::array_add(level.bullet_pinhole_tag_fx_orgs, var_2.fx_org);
     var_2.fx_org.origin = var_2.origin;
-    var_4 = common_scripts\utility::getstruct(var_2.target, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_2.target, "targetname");
     var_2.fx_org.angles = vectortoangles(var_4.origin - var_2.origin);
-    var_2.fx_org linkto(var_3);
+    var_2.fx_org linkTo(var_3);
 
     if(isDefined(var_2.script_parameters)) {
       if(var_2.script_parameters == "strafe_1_bullet_tags") {
@@ -693,10 +693,10 @@ setup_bullet_pinholes() {
 bullet_strafe_start() {
   wait(randomfloatrange(0.1, 0.75));
   self show();
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   magicbullet("minigun_m1a1", self.origin, var_0.origin);
   playFXOnTag(level._effect["large_metal_painted_hull_exit"], self.fx_org, "tag_origin");
-  level.player playrumbleonentity("minigun_rumble");
+  level.player playRumbleOnEntity("minigun_rumble");
   level waittill("stop_camera_roll");
   stopFXOnTag(level._effect["large_metal_painted_hull_exit"], self.fx_org, "tag_origin");
 }
@@ -726,11 +726,11 @@ cleanup_bullet_pinhole_stuff() {
 }
 
 saf_c17_lower_backdoor_top_setup(var_0) {
-  var_1 = getent("saf_c17_lower_backdoor_top", "script_noteworthy");
+  var_1 = getEnt("saf_c17_lower_backdoor_top", "script_noteworthy");
   var_2 = getEntArray("saf_c17_lower_backdoor_top_script_model", "script_noteworthy");
 
   foreach(var_4 in var_2) {
-    var_4 linkto(var_1);
+    var_4 linkTo(var_1);
   }
 
   common_scripts\utility::flag_wait("cargo_doors_opened");
@@ -747,11 +747,11 @@ saf_c17_lower_backdoor_top_setup(var_0) {
 }
 
 saf_c17_lower_backdoor_setup(var_0) {
-  var_1 = getent("saf_c17_lower_backdoor", "script_noteworthy");
+  var_1 = getEnt("saf_c17_lower_backdoor", "script_noteworthy");
   var_2 = getEntArray("saf_c17_lower_backdoor_script_model", "script_noteworthy");
 
   foreach(var_4 in var_2) {
-    var_4 linkto(var_1);
+    var_4 linkTo(var_1);
   }
 
   common_scripts\utility::flag_wait("cargo_doors_opened");
@@ -767,7 +767,7 @@ saf_c17_lower_backdoor_setup(var_0) {
 }
 
 intro_red_flickering_light() {
-  var_0 = getent("red_flash", "targetname");
+  var_0 = getEnt("red_flash", "targetname");
 
   if(!isDefined(var_0)) {
     return;

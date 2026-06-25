@@ -373,7 +373,7 @@ _id_429B() {
   }
 
   var_2 _meth_80DB();
-  var_2 linkto(var_4[0]);
+  var_2 linkTo(var_4[0]);
   var_2._id_A51C = 1;
   var_2._id_9514 = 1;
   var_2._id_2323 = var_2.origin;
@@ -393,8 +393,8 @@ _id_429B() {
     level._id_429C._id_DDC9 = 1;
     level._id_429C._id_DDB5 = 1;
     level._id_429C._id_ABCB = ::_id_51C3;
-    level._id_429C.trigger setcursorhint("HINT_NOICON");
-    level._id_429C.trigger sethintstring(&"MP/EMP_PICKUP_USE");
+    level._id_429C.trigger setCursorHint("HINT_NOICON");
+    level._id_429C.trigger setHintString(&"MP/EMP_PICKUP_USE");
     level._id_429C.trigger _meth_83A1(-300);
     level._id_429C _id_07D6::_id_D8D2(level._id_429C._id_FEE7);
     level._id_429C _id_07D6::_id_D8E3(0);
@@ -411,32 +411,32 @@ _id_429B() {
     var_4[0] delete();
   }
 
-  if(!isDefined(getent("cyber_empzone_axis", "targetname"))) {
+  if(!isDefined(getEnt("cyber_empzone_axis", "targetname"))) {
     scripts\engine\utility::_id_5598("No cyber_empzone_axis trigger found in map. Please bug this to the level designer.");
     return;
   }
 
-  if(!isDefined(getent("cyber_empzone_allies", "targetname"))) {
+  if(!isDefined(getEnt("cyber_empzone_allies", "targetname"))) {
     scripts\engine\utility::_id_5598("No cyber_empzone_allies trigger found in map. Please bug this to the level designer.");
     return;
   }
 
-  if(!isDefined(getent("cyber_emp_defuse_axis", "targetname"))) {
+  if(!isDefined(getEnt("cyber_emp_defuse_axis", "targetname"))) {
     scripts\engine\utility::_id_5598("No cyber_emp_defuse_axis trigger found in map. Please bug this to the level designer.");
     return;
   }
 
-  if(!isDefined(getent("cyber_emp_defuse_allies", "targetname"))) {
+  if(!isDefined(getEnt("cyber_emp_defuse_allies", "targetname"))) {
     scripts\engine\utility::_id_5598("No cyber_emp_defuse_allies trigger found in map. Please bug this to the level designer.");
     return;
   }
 
   if(game["switchedsides"]) {
-    level._id_A8E8["allies"] = _id_3F9A("allies", getent("cyber_empzone_axis", "targetname"), getent("cyber_emp_defuse_axis", "targetname"));
-    level._id_A8E8["axis"] = _id_3F9A("axis", getent("cyber_empzone_allies", "targetname"), getent("cyber_emp_defuse_allies", "targetname"));
+    level._id_A8E8["allies"] = _id_3F9A("allies", getEnt("cyber_empzone_axis", "targetname"), getEnt("cyber_emp_defuse_axis", "targetname"));
+    level._id_A8E8["axis"] = _id_3F9A("axis", getEnt("cyber_empzone_allies", "targetname"), getEnt("cyber_emp_defuse_allies", "targetname"));
   } else {
-    level._id_A8E8["allies"] = _id_3F9A("allies", getent("cyber_empzone_allies", "targetname"), getent("cyber_emp_defuse_allies", "targetname"));
-    level._id_A8E8["axis"] = _id_3F9A("axis", getent("cyber_empzone_axis", "targetname"), getent("cyber_emp_defuse_axis", "targetname"));
+    level._id_A8E8["allies"] = _id_3F9A("allies", getEnt("cyber_empzone_allies", "targetname"), getEnt("cyber_emp_defuse_allies", "targetname"));
+    level._id_A8E8["axis"] = _id_3F9A("axis", getEnt("cyber_empzone_axis", "targetname"), getEnt("cyber_emp_defuse_axis", "targetname"));
   }
 
   level notify("enable_player_usability");
@@ -537,7 +537,7 @@ _id_3F9A(var_0, var_1, var_2) {
 _id_D886(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 rotateyaw(-45, 0.05);
+  var_1 rotateYaw(-45, 0.05);
   waitframe();
   var_2 = undefined;
   var_3 = self.origin + (0, 0, 45);

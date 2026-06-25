@@ -20,25 +20,25 @@
 
 autoexec init_la() {
   onplayerconnect_callback(::on_player_connect);
-  sp = getent("harper", "targetname");
+  sp = getEnt("harper", "targetname");
 
   if(isDefined(sp)) {
     sp add_spawn_function(::spawn_func_harper);
   }
 
-  sp = getent("hillary", "targetname");
+  sp = getEnt("hillary", "targetname");
 
   if(isDefined(sp)) {
     sp add_spawn_function(::spawn_func_hillary);
   }
 
-  sp = getent("sam", "targetname");
+  sp = getEnt("sam", "targetname");
 
   if(isDefined(sp)) {
     sp add_spawn_function(::spawn_func_sam);
   }
 
-  sp = getent("jones", "targetname");
+  sp = getEnt("jones", "targetname");
 
   if(isDefined(sp)) {
     sp add_spawn_function(::spawn_func_jones);
@@ -757,7 +757,7 @@ get_f35_vtol() {
 }
 
 get_specific_vehicle(targetname) {
-  veh = getent(targetname, "targetname");
+  veh = getEnt(targetname, "targetname");
 
   if(!isDefined(veh)) {
     veh = spawn_vehicle_from_targetname(targetname);
@@ -1024,12 +1024,12 @@ vehicle_explosion_launch(v_hit_point, n_force) {
     v_world_force = v_forward * v_force[0] + v_right * v_force[1] + v_up * v_force[2];
 
     if(isDefined(n_force)) {
-      v_world_force = vectornormalize(v_world_force) * n_force;
+      v_world_force = vectorNormalize(v_world_force) * n_force;
     }
   }
 
   e_fx = spawn_model("tag_origin", self.origin, self.angles);
-  e_fx linkto(self);
+  e_fx linkTo(self);
   playFXOnTag(getfx("vehicle_launch_trail"), e_fx, "tag_origin");
 
   level thread draw_line_for_time(v_impact_point, v_impact_point + v_world_force, 1, 0, 0, 2);
@@ -1063,7 +1063,7 @@ get_launch_params_from_structs() {
 
       s_return = spawnStruct();
       s_return.v_impact = v_hit_pos;
-      s_return.v_force = vectornormalize(v_dir) * n_intensity;
+      s_return.v_force = vectorNormalize(v_dir) * n_intensity;
       return s_return;
     }
   }
@@ -1380,7 +1380,7 @@ sam_drone_death() {
     n_dist = distance2d(self.origin, level.player.origin);
     n_quake_scale = clamp(1.0 - n_dist / 25000, 0.25, 1.0);
     n_quake_time = clamp(1.0 - n_dist / 25000, 0.25, 0.5);
-    playsoundatposition("evt_turret_shake", (0, 0, 0));
+    playSoundAtPosition("evt_turret_shake", (0, 0, 0));
     earthquake(n_quake_scale, n_quake_time, level.player.origin, 1024, level.player);
   }
 
@@ -1410,7 +1410,7 @@ sam_drone_death() {
     n_dist = distance2d(self.origin, level.player.origin);
     n_quake_scale = clamp(1.0 - n_dist / 25000, 0.25, 1.0);
     n_quake_time = clamp(1.0 - n_dist / 25000, 0.25, 0.5);
-    playsoundatposition("evt_turret_shake", (0, 0, 0));
+    playSoundAtPosition("evt_turret_shake", (0, 0, 0));
     earthquake(n_quake_scale, n_quake_time, level.player.origin, 1024, level.player);
   }
 }
@@ -1442,7 +1442,7 @@ strafe_player(b_missiles, e_target, e_target_tag) {
     self waittill("near_goal");
 
     if(isDefined(level.n_drone_wave) && level.n_drone_wave == 2) {
-      v_forward = vectornormalize(e_target.origin - self.origin);
+      v_forward = vectorNormalize(e_target.origin - self.origin);
       v_right = vectorcross(v_forward, (0, 0, 1));
       v_goal = e_target.origin - v_right * randomintrange(8000, 10000) + (0, 0, randomintrange(1500, 2500));
     } else {
@@ -1496,7 +1496,7 @@ strafe_player_plane_fire_guns(b_missles) {
     if(b_missles) {
       wait(randomfloatrange(1, 2));
       level notify("drone_wave_" + level.n_drone_wave);
-      yaw = angleclamp180(vectortoangles(vectornormalize(self.origin - level.player.origin))[1]);
+      yaw = angleclamp180(vectortoangles(vectorNormalize(self.origin - level.player.origin))[1]);
       yaw = yaw + randomintrange(-3, 3);
       shoot_point = level.player.origin + anglesToForward((0, yaw, 0)) * randomintrange(50, 100);
       self settargetorigin(shoot_point, 0);
@@ -1557,7 +1557,7 @@ sam_cougar_player_damage_watcher() {
   while(true) {
     self waittill("damage", damage, attacker, direction, point, type, tagname, modelname, partname, weaponname);
     self cleardamageindicator();
-    playsoundatposition("evt_turret_shake", (0, 0, 0));
+    playSoundAtPosition("evt_turret_shake", (0, 0, 0));
   }
 }
 
@@ -1663,7 +1663,7 @@ trigger_timeout(n_time, str_value, str_key, ent) {
     ent = get_players()[0];
   }
 
-  trig = getent(str_value, str_key);
+  trig = getEnt(str_value, str_key);
 
   if(isDefined(trig)) {
     trig endon("death");
@@ -1675,7 +1675,7 @@ trigger_timeout(n_time, str_value, str_key, ent) {
 }
 
 spawn_func_scripted_flyby() {
-  self playrumbleonentity("flyby");
+  self playRumbleOnEntity("flyby");
   earthquake(0.2, 3, level.player.origin, 500);
 }
 
@@ -1872,7 +1872,7 @@ spawn_ambient_drones(trig_name, kill_trig_name, str_targetname, str_targetname_a
 play_fake_flyby() {
   wait 0.1;
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent linkto(self, "tag_origin");
+  sound_ent linkTo(self, "tag_origin");
   wait(randomfloatrange(1, 3));
   sound_ent playSound("evt_fake_flyby");
   self waittill("reached_end_node");
@@ -1903,7 +1903,7 @@ ambient_drone_die() {
   }
   if(!isDefined(self.delete_on_death) && isDefined(level._effect["fireball_trail_lg"])) {
     playFXOnTag(level._effect["fireball_trail_lg"], self, "tag_origin");
-    playsoundatposition("evt_pegasus_explo", self.origin);
+    playSoundAtPosition("evt_pegasus_explo", self.origin);
     wait 5;
 
     if(isDefined(self)) {
@@ -1949,7 +1949,7 @@ play_pip(str_bik_name) {
 
 link_model_to_tag(str_model, str_tag) {
   m_model = spawn_model(str_model);
-  m_model linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
+  m_model linkTo(self, str_tag, (0, 0, 0), (0, 0, 0));
 }
 
 #using_animtree("vehicles");

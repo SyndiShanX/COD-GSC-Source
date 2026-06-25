@@ -252,7 +252,7 @@ mechz_setup_snd() {
 
   if(!isDefined(self.sndloopent)) {
     self.sndloopent = spawn("script_origin", self.origin);
-    self.sndloopent linkto(self, "tag_origin");
+    self.sndloopent linkTo(self, "tag_origin");
     self thread snddeleteentondeath(self.sndloopent);
   }
 
@@ -423,7 +423,7 @@ mechz_attach_objects() {
   self.m_claw = spawn("script_model", org);
   self.m_claw setModel("c_zom_mech_claw");
   self.m_claw.angles = ang;
-  self.m_claw linkto(self, "tag_claw");
+  self.m_claw linkTo(self, "tag_claw");
   self.m_claw useanimtree(#animtree);
 
   if(isDefined(self.m_claw_damage_trigger)) {
@@ -437,8 +437,8 @@ mechz_attach_objects() {
   trigger_height = 15;
   self.m_claw_damage_trigger = spawn("trigger_damage", org, trigger_spawnflags, trigger_radius, trigger_height);
   self.m_claw_damage_trigger.angles = ang;
-  self.m_claw_damage_trigger enablelinkto();
-  self.m_claw_damage_trigger linkto(self, "tag_claw");
+  self.m_claw_damage_trigger enablelinkTo();
+  self.m_claw_damage_trigger linkTo(self, "tag_claw");
   self thread mechz_claw_damage_trigger_thread();
   self attach("c_zom_mech_faceplate", "J_Helmet", 0);
   self.has_helmet = 1;
@@ -540,7 +540,7 @@ mechz_spawn() {
     spawn_pos.angles = (0, 0, 0);
   }
 
-  self animscripted(spawn_pos.origin, spawn_pos.angles, "zm_spawn");
+  self animScripted(spawn_pos.origin, spawn_pos.angles, "zm_spawn");
   self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
   self setfreecameralockonallowed(1);
   self solid();
@@ -634,7 +634,7 @@ jump_pos_used_cooldown() {
 
 mechz_health_increases() {
   if(!isDefined(level.mechz_last_spawn_round) || level.round_number > level.mechz_last_spawn_round) {
-    a_players = getplayers();
+    a_players = getPlayers();
     n_player_modifier = 1;
 
     if(a_players.size > 1) {
@@ -712,7 +712,7 @@ mechz_explode(str_tag, death_origin) {
   wait 2.0;
   v_origin = self gettagorigin(str_tag);
   level notify("mechz_exploded", v_origin);
-  playsoundatposition("zmb_ai_mechz_death_explode", v_origin);
+  playSoundAtPosition("zmb_ai_mechz_death_explode", v_origin);
   playFX(level._effect["mechz_death"], v_origin);
   radiusdamage(v_origin, 128, 100, 25, undefined, "MOD_GRENADE_SPLASH");
   earthquake(0.5, 1.0, v_origin, 256);
@@ -761,7 +761,7 @@ mechz_stun(time) {
   }
 
   while(curr_time < time) {
-    self animscripted(self.origin, self.angles, "zm_stun");
+    self animScripted(self.origin, self.angles, "zm_stun");
     self maps\mp\animscripts\zm_shared::donotetracks("stun_anim");
     self clearanim(%root, 0);
     curr_time = curr_time + anim_time;
@@ -792,17 +792,17 @@ mechz_tank_hit_callback() {
   v_trace = physicstrace(self.origin, v_trace_end, (-15, -15, -5), (15, 15, 5), self);
   self.origin = v_trace["position"];
   timer = 0;
-  self animscripted(self.origin, self.angles, "zm_tank_hit_in");
+  self animScripted(self.origin, self.angles, "zm_tank_hit_in");
   self maps\mp\animscripts\zm_shared::donotetracks("pain_anim");
   anim_length = self getanimlengthfromasd("zm_tank_hit_loop", 0);
 
   while(timer < level.mechz_tank_knockdown_time) {
     timer = timer + anim_length;
-    self animscripted(self.origin, self.angles, "zm_tank_hit_loop");
+    self animScripted(self.origin, self.angles, "zm_tank_hit_loop");
     self maps\mp\animscripts\zm_shared::donotetracks("pain_anim");
   }
 
-  self animscripted(self.origin, self.angles, "zm_tank_hit_out");
+  self animScripted(self.origin, self.angles, "zm_tank_hit_out");
   self maps\mp\animscripts\zm_shared::donotetracks("pain_anim");
 
   if(getdvarint(#"_id_E7121222") > 1) {
@@ -850,17 +850,17 @@ mechz_robot_stomp_callback() {
   v_trace = physicstrace(self.origin, v_trace_end, (-15, -15, -5), (15, 15, 5), self);
   self.origin = v_trace["position"];
   timer = 0;
-  self animscripted(self.origin, self.angles, "zm_robot_hit_in");
+  self animScripted(self.origin, self.angles, "zm_robot_hit_in");
   self maps\mp\animscripts\zm_shared::donotetracks("pain_anim");
   anim_length = self getanimlengthfromasd("zm_robot_hit_loop", 0);
 
   while(timer < level.mechz_robot_knockdown_time) {
     timer = timer + anim_length;
-    self animscripted(self.origin, self.angles, "zm_robot_hit_loop");
+    self animScripted(self.origin, self.angles, "zm_robot_hit_loop");
     self maps\mp\animscripts\zm_shared::donotetracks("pain_anim");
   }
 
-  self animscripted(self.origin, self.angles, "zm_robot_hit_out");
+  self animScripted(self.origin, self.angles, "zm_robot_hit_out");
   self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
 
   if(getdvarint(#"_id_E7121222") > 1) {
@@ -915,7 +915,7 @@ mechz_get_closest_valid_player() {
 }
 
 get_favorite_enemy(origin, players) {
-  mechz_targets = getplayers();
+  mechz_targets = getPlayers();
   least_hunted = undefined;
   best_hunted_val = -1;
   best_dist = -1;
@@ -1012,8 +1012,8 @@ mechz_check_in_arc(right_offset) {
   enemy_vec = self.favoriteenemy.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
 
   if(enemy_dot < cos(level.mechz_aim_max_yaw)) {
@@ -1304,7 +1304,7 @@ mechz_find_flesh() {
 
 damage_prone_players() {
   self endon("death");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(self.favoriteenemy) && self.favoriteenemy == player) {
@@ -1475,7 +1475,7 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
 
     if(!(isDefined(self.not_interruptable) && self.not_interruptable) && !(isDefined(self.is_traversing) && self.is_traversing)) {
       self mechz_interrupt();
-      self animscripted(self.origin, self.angles, "zm_pain_faceplate");
+      self animScripted(self.origin, self.angles, "zm_pain_faceplate");
       self maps\mp\animscripts\zm_shared::donotetracks("pain_anim_faceplate");
     }
 
@@ -1497,7 +1497,7 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
 
     if(!(isDefined(self.not_interruptable) && self.not_interruptable) && !(isDefined(self.is_traversing) && self.is_traversing)) {
       self mechz_interrupt();
-      self animscripted(self.origin, self.angles, "zm_pain_powercore");
+      self animScripted(self.origin, self.angles, "zm_pain_powercore");
       self maps\mp\animscripts\zm_shared::donotetracks("pain_anim_powercore");
     }
   } else if(!(isDefined(self.powerplant_covered) && self.powerplant_covered) && (isDefined(self.has_powerplant) && self.has_powerplant) && self.powerplant_dmg >= self.powerplant_dmg_for_destroy) {
@@ -1559,10 +1559,10 @@ mechz_set_locomotion_speed() {
 
   if(self.zombie_move_speed == "sprint" && self.prev_move_speed != "sprint") {
     self mechz_interrupt();
-    self animscripted(self.origin, self.angles, "zm_sprint_intro");
+    self animScripted(self.origin, self.angles, "zm_sprint_intro");
     self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
   } else if(self.zombie_move_speed != "sprint" && self.prev_move_speed == "sprint") {
-    self animscripted(self.origin, self.angles, "zm_sprint_outro");
+    self animScripted(self.origin, self.angles, "zm_sprint_outro");
     self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
   }
 
@@ -1571,7 +1571,7 @@ mechz_set_locomotion_speed() {
 
 response_to_air_raid_siren_vo() {
   wait 3.0;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size == 0) {
     return;
@@ -1613,7 +1613,7 @@ start_see_mech_zombie_vo() {
     }
   }
 
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size == 0) {
     return;
@@ -1667,7 +1667,7 @@ play_shoot_arm_hint_vo() {
     if(!isDefined(self.e_grabbed)) {
       return;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(player == self.e_grabbed) {
@@ -1702,7 +1702,7 @@ mechz_hint_vo() {
       continue;
     }
 
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(isDefined(self.e_grabbed) && self.e_grabbed == player) {
@@ -1724,7 +1724,7 @@ mechz_hint_vo() {
 
 shoot_mechz_head_vo() {
   self endon("death");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(self.e_grabbed) && self.e_grabbed == player) {
@@ -1742,7 +1742,7 @@ shoot_mechz_head_vo() {
 }
 
 mechz_jump_vo() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(distancesquared(self.origin, player.origin) < 1000000) {
@@ -1759,7 +1759,7 @@ mechz_jump_vo() {
 mechz_stomped_by_giant_robot_vo() {
   self endon("death");
   wait 5.0;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(distancesquared(self.origin, player.origin) < 1000000) {

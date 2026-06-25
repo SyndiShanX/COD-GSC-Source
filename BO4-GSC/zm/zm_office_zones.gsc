@@ -94,7 +94,7 @@ get_location_string(e_player) {
 
   switch (str_zone) {
     case #"conference_level1":
-      var_dd0ed16d = getent("file_hallway_zone", "targetname");
+      var_dd0ed16d = getEnt("file_hallway_zone", "targetname");
 
       if(e_player istouching(var_dd0ed16d)) {
         str_display = #"hash_38aec412b15daa7f";

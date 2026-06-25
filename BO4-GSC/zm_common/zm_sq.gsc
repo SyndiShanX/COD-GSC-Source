@@ -213,7 +213,7 @@ run_step(ee, step, var_5ea5c94d) {
   level flag::set(step.var_e788cdd7 + "_completed");
 
   if(ee.current_step === 0 && isDefined(ee.record_stat) && ee.record_stat) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       player.var_897fa11b = 1;
@@ -245,7 +245,7 @@ run_step(ee, step, var_5ea5c94d) {
   level flag::set(ee.name + "_completed");
 
   if(sessionmodeisonlinegame() && isDefined(ee.record_stat) && ee.record_stat) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(isDefined(player.var_897fa11b) && player.var_897fa11b) {

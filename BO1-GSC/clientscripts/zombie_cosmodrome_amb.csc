@@ -134,7 +134,7 @@ samantha_is_angry_earthquake_and_rumbles() {
 do_that_sam_rumble() {
   count = 0;
   while(count <= 4) {
-    self PlayRumbleOnEntity(0, "damage_heavy");
+    self playRumbleOnEntity(0, "damage_heavy");
     wait(.1);
     count = count + .1;
   }

@@ -330,7 +330,7 @@ _id_4D2B() {
     var_10.origin = _id_6A43(var_10._id_CD99, var_10.origin);
 
     if(isDefined(var_10.target)) {
-      var_12[0] = getent(var_10.target, "targetname");
+      var_12[0] = getEnt(var_10.target, "targetname");
     } else {
       var_12[0] = spawn("script_model", var_10.origin);
       var_12[0].angles = var_10.angles;

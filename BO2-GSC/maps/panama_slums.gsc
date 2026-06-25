@@ -235,7 +235,7 @@ intro_civ() {
   level thread run_scene("slums_intro_civ_3_fight");
   flag_wait("slums_intro_civ_4_loop_started");
   wait 0.65;
-  ai_doctor = getent("amb_doctor_4_ai", "targetname");
+  ai_doctor = getEnt("amb_doctor_4_ai", "targetname");
   ai_doctor ragdoll_death();
 }
 
@@ -246,7 +246,7 @@ intro_bat_digbat() {
 
 ambulance_van() {
   run_scene("slums_ambulance");
-  v_ambulance = getent("ambulence", "targetname");
+  v_ambulance = getEnt("ambulence", "targetname");
   light_left = spawn("script_model", v_ambulance gettagorigin("tag_light_left") + vectorscale((0, 0, 1), 6.0));
   light_left setModel("tag_origin");
   light_left.angles = v_ambulance gettagangles("tag_light_left");
@@ -432,10 +432,10 @@ intro_mason() {
 #using_animtree("generic_human");
 
 player_door_kick() {
-  e_clip = getent("player_blocker_door_clip", "targetname");
-  e_door = getent("player_blocker_door", "targetname");
-  e_clip_linkto = getent("player_blocker_door_clip_2", "targetname");
-  e_clip_linkto linkto(e_door);
+  e_clip = getEnt("player_blocker_door_clip", "targetname");
+  e_door = getEnt("player_blocker_door", "targetname");
+  e_clip_linkto = getEnt("player_blocker_door_clip_2", "targetname");
+  e_clip_linkto linkTo(e_door);
   level waittill("slums_noriega_pistol_started");
   anim_length = getanimlength(%ch_pan_05_01_noriega_pistol_mason);
   wait(anim_length - 4);
@@ -457,8 +457,8 @@ player_door_kick() {
 
 door_breach_wait() {
   wait 0.5;
-  playsoundatposition("evt_door_kick", (0, 0, 0));
-  level.player playrumbleonentity("damage_heavy");
+  playSoundAtPosition("evt_door_kick", (0, 0, 0));
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.4, 0.4, level.player.origin, 256, level.player);
   level clientnotify("drkck");
   level notify("kill_radio");
@@ -531,7 +531,7 @@ notetrack_function_end_mission(guy) {
 }
 
 building_player_breach() {
-  trig_building_player_breach = getent("trig_building_player_breach", "targetname");
+  trig_building_player_breach = getEnt("trig_building_player_breach", "targetname");
   trig_building_player_breach waittill("trigger");
   flag_set("slums_done");
   wait 0.05;
@@ -558,13 +558,13 @@ slums_nag_check() {
 }
 
 slums_drones_setup() {
-  sp_drone_ally = getent("slums_ally_drone", "targetname");
+  sp_drone_ally = getEnt("slums_ally_drone", "targetname");
   maps\_drones::drones_assign_spawner("slums_ally_drone_trigger", sp_drone_ally);
-  sp_drone_axis = getent("slums_axis_drone", "targetname");
+  sp_drone_axis = getEnt("slums_axis_drone", "targetname");
   maps\_drones::drones_assign_spawner("slums_axis_drone_trigger", sp_drone_axis);
   maps\_drones::drones_assign_spawner("slums_apache_drones", sp_drone_axis);
   maps\_drones::drones_assign_spawner("slums_howitzer_drones", sp_drone_axis);
-  sp_digbat_axis = getent("slums_digbat_drone", "targetname");
+  sp_digbat_axis = getEnt("slums_digbat_drone", "targetname");
   maps\_drones::drones_assign_spawner("slums_digbat_drone_trigger", sp_digbat_axis);
 }
 
@@ -575,15 +575,15 @@ slums_magic_rpg_setup() {
 
 slums_magic_rpg_think() {
   self waittill("trigger");
-  s_rpg_start = getstruct(self.target, "targetname");
-  s_rpg_end = getstruct(s_rpg_start.target, "targetname");
+  s_rpg_start = getStruct(self.target, "targetname");
+  s_rpg_end = getStruct(s_rpg_start.target, "targetname");
   magicbullet("rpg_magic_bullet_sp", s_rpg_start.origin, s_rpg_end.origin);
   self delete();
 }
 
 slums_heroes_watch() {
   level endon("slums_done");
-  t_position = getent("building_enter_front_door", "targetname");
+  t_position = getEnt("building_enter_front_door", "targetname");
 
   while(true) {
     if(level.mason istouching(t_position) && level.noriega istouching(t_position)) {
@@ -693,7 +693,7 @@ e_01_overlook() {
   level thread park_movement_vo();
   level thread magic_alley_movement();
   level thread dialog_church();
-  v_hydrant_pos = getstruct("slums_hydrant", "targetname").origin;
+  v_hydrant_pos = getStruct("slums_hydrant", "targetname").origin;
   radiusdamage(v_hydrant_pos, 36, 350, 349);
   trigger_wait("trig_lookat_burning_building");
 
@@ -711,7 +711,7 @@ e_01_apc_digbat_alley() {
   level endon("kill_e_01_apc_digbat_alley");
   a_apc_alley_army = getEntArray("apc_alley_army", "targetname");
   array_thread(a_apc_alley_army, ::add_spawn_function, ::magic_bullet_shield);
-  ai_alley_apc_gunner = getent("alley_apc_gunner", "targetname");
+  ai_alley_apc_gunner = getEnt("alley_apc_gunner", "targetname");
   ai_alley_apc_gunner add_spawn_function(::magic_bullet_shield);
   spawn_vehicle_from_targetname_and_drive("slums_overlook_apc");
   flag_wait("spawn_balcony_digbat");
@@ -750,7 +750,7 @@ e_01_overlook_attach_strobe(e_thrower) {
   e_thrower attach("t5_weapon_tactical_insertion_world", "tag_weapon_left");
   e_thrower.e_strobe = spawn("script_model", e_thrower.origin);
   e_thrower.e_strobe setModel("tag_origin");
-  e_thrower.e_strobe linkto(e_thrower, "tag_weapon_left");
+  e_thrower.e_strobe linkTo(e_thrower, "tag_weapon_left");
   playFXOnTag(getfx("ir_strobe"), e_thrower.e_strobe, "tag_origin");
   e_thrower.e_strobe playLoopSound("fly_irstrobe_beep", 0.1);
 }
@@ -794,8 +794,8 @@ e_02_apache_attack() {
   spawn_manager_enable("sm_slums_apache_critical_guys");
   flag_wait("fxanim_gazebo_start");
   wait 2;
-  s_rpg_start = getstruct("apache_rpg_start", "targetname");
-  s_rpg_end = getstruct(s_rpg_start.target, "targetname");
+  s_rpg_start = getStruct("apache_rpg_start", "targetname");
+  s_rpg_end = getStruct(s_rpg_start.target, "targetname");
   magicbullet("rpg_magic_bullet_sp", s_rpg_start.origin, s_rpg_end.origin);
   wait 2;
   flag_set("slums_apache_retreat");
@@ -833,10 +833,10 @@ e_02_heli_think() {
   self stop_turret(2);
   e_target delete();
   stop_exploder(5201);
-  s_retreat = getstruct("slums_apache_retreat", "targetname");
+  s_retreat = getStruct("slums_apache_retreat", "targetname");
   self setvehgoalpos(s_retreat.origin);
   wait 4;
-  s_retreat = getstruct("slums_apache_retreat_end", "targetname");
+  s_retreat = getStruct("slums_apache_retreat_end", "targetname");
   self setvehgoalpos(s_retreat.origin);
   wait 10;
   self.delete_on_death = 1;
@@ -851,7 +851,7 @@ move_gazebo_target(e_target) {
   a_target_pos = getStructArray("capitol_hill_target", "targetname");
 
   while(!flag("slums_apache_retreat")) {
-    e_target moveto(a_target_pos[randomint(a_target_pos.size)].origin, 3.0);
+    e_target moveTo(a_target_pos[randomint(a_target_pos.size)].origin, 3.0);
     e_target waittill("movedone");
   }
 }
@@ -899,8 +899,8 @@ e_03_building_destroy() {
   maps\_drones::drones_start("slums_howitzer_drones");
   trigger_wait("trigger_slums_building_destroy");
   autosave_by_name("slums_building");
-  s_start = getstruct("slums_howitzer_start", "targetname");
-  s_end = getstruct(s_start.target, "targetname");
+  s_start = getStruct("slums_howitzer_start", "targetname");
+  s_end = getStruct(s_start.target, "targetname");
   magicbullet("ac130_howitzer_minigun", s_start.origin, s_end.origin);
   a_pdf = getEntArray("howitzer_target", "script_noteworthy");
 
@@ -924,20 +924,20 @@ e_04_apc_wall_crash() {
   trigger_wait("slums_e4_start");
   autosave_by_name("slums_crash");
   level notify("remove_drone_corpses");
-  s_pos = getstruct("APC_StoreCrash", "targetname");
+  s_pos = getStruct("APC_StoreCrash", "targetname");
   e_sound = spawn("script_origin", s_pos.origin);
   level notify("fxanim_laundromat_wall_start");
   e_sound playSound("evt_apc_wall_crash");
   run_scene("slums_apc_wall_crash");
   e_sound delete();
-  wall_clip = getent("apc_marine_guard_clip", "targetname");
+  wall_clip = getEnt("apc_marine_guard_clip", "targetname");
   wall_clip connectpaths();
   wall_clip delete();
   level thread spawn_manager_enable("apc_marine_guard");
 }
 
 e_07_mg_nest() {
-  e_turret = getent("slums_mg_nest_turret", "targetname");
+  e_turret = getEnt("slums_mg_nest_turret", "targetname");
   n_fire_min = 1.5;
   n_fire_max = 4.1;
   n_wait_min = 1.3;
@@ -946,7 +946,7 @@ e_07_mg_nest() {
 }
 
 basketball_courtmg() {
-  e_turret = getent("basketcourt_mg", "targetname");
+  e_turret = getEnt("basketcourt_mg", "targetname");
   n_fire_min = 1.5;
   n_fire_max = 4.1;
   n_wait_min = 1.3;
@@ -955,7 +955,7 @@ basketball_courtmg() {
 }
 
 church_left_mg() {
-  e_turret = getent("church_left_mg", "targetname");
+  e_turret = getEnt("church_left_mg", "targetname");
   n_fire_min = 1.5;
   n_fire_max = 4.1;
   n_wait_min = 1.3;
@@ -964,7 +964,7 @@ church_left_mg() {
 }
 
 church_right_mg() {
-  e_turret = getent("church_right_mg", "targetname");
+  e_turret = getEnt("church_right_mg", "targetname");
   n_fire_min = 1.5;
   n_fire_max = 4.1;
   n_wait_min = 1.3;
@@ -982,13 +982,13 @@ e_10_zpu_think() {
   self endon("death");
   a_target_pos = getStructArray("slums_zpu_target", "targetname");
   e_target = spawn("script_origin", a_target_pos[0].origin);
-  self setturrettargetent(e_target);
+  self setturrettargetEnt(e_target);
   self thread e_10_zpu_burst_fire();
   self thread e_10_zpu_challenge_watch();
 
   while(self.riders.size) {
     wait 5;
-    e_target moveto(a_target_pos[randomint(a_target_pos.size)].origin, 3.0);
+    e_target moveTo(a_target_pos[randomint(a_target_pos.size)].origin, 3.0);
   }
 }
 
@@ -1017,7 +1017,7 @@ e_11_sniper_think() {
   self set_ignoreme(1);
   self set_ignoreall(1);
   self thread e_11_sniper_shot();
-  s_target = getstruct(self.script_noteworthy, "targetname");
+  s_target = getStruct(self.script_noteworthy, "targetname");
   e_focus_target = spawn("script_origin", s_target.origin);
 
   while(!flag("slums_shot_at_snipers")) {
@@ -1038,7 +1038,7 @@ e_11_sniper_shot() {
 e_13_apc_passenger_think() {
   self endon("death");
   self thread magic_bullet_shield();
-  e_goal_volume = getent("slums_apc_drop_goal", "targetname");
+  e_goal_volume = getEnt("slums_apc_drop_goal", "targetname");
   self.fixednode = 0;
   self setgoalvolumeauto(e_goal_volume);
   self waittill("exit_vehicle");
@@ -1064,26 +1064,26 @@ apc_announcements(vehicle) {
 }
 
 e_13_apc_trigger_watch() {
-  t_left_apc = getent("trigger_slums_apc_left", "script_noteworthy");
-  t_right_apc = getent("trigger_slums_apc_right", "script_noteworthy");
+  t_left_apc = getEnt("trigger_slums_apc_left", "script_noteworthy");
+  t_right_apc = getEnt("trigger_slums_apc_right", "script_noteworthy");
   waittill_any_ents(t_left_apc, "trigger", t_right_apc, "trigger");
 }
 
 e_15_dumpster_push() {
-  m_clip = getent("slums_dumpster_clip", "targetname");
-  m_dumpster = getent("slums_dumpster", "targetname");
-  m_clip linkto(m_dumpster);
+  m_clip = getEnt("slums_dumpster_clip", "targetname");
+  m_dumpster = getEnt("slums_dumpster", "targetname");
+  m_clip linkTo(m_dumpster);
   trigger_wait("slums_e_15_start");
-  playsoundatposition("evt_dumpster", (22976, 27216, 452));
+  playSoundAtPosition("evt_dumpster", (22976, 27216, 452));
   run_scene("dumpster_push");
-  e_volume = getent("slums_gv_5_15_axis", "targetname");
+  e_volume = getEnt("slums_gv_5_15_axis", "targetname");
   a_pushers = get_ai_group_ai("slums_dumpster_pushers");
 
   foreach(e_pusher in a_pushers) {
     e_pusher setgoalvolumeauto(e_volume);
   }
 
-  m_clip disconnectpaths();
+  m_clip disconnectPaths();
 }
 
 e_16_claymore_alley() {
@@ -1133,9 +1133,9 @@ e_16_detonate() {
 
 e_17_brute_force() {
   level endon("slums_done");
-  t_start = getent("slums_brute_force", "targetname");
-  t_start sethintstring(&"PANAMA_OPEN_GRATE");
-  t_start setcursorhint("HINT_NOICON");
+  t_start = getEnt("slums_brute_force", "targetname");
+  t_start setHintString(&"PANAMA_OPEN_GRATE");
+  t_start setCursorHint("HINT_NOICON");
   t_start trigger_off();
   level.player waittill_player_has_brute_force_perk();
   wait 0.5;
@@ -1145,7 +1145,7 @@ e_17_brute_force() {
   t_start waittill("trigger");
   set_objective(level.obj_interact, t_start, "remove");
   t_start delete();
-  clip = getent("brute_force_player_clip", "targetname");
+  clip = getEnt("brute_force_player_clip", "targetname");
   clip delete();
   level.player set_ignoreme(1);
   level thread run_scene("brute_force");
@@ -1174,8 +1174,8 @@ e_19_molotov_digbat() {
   level thread e_19_left_side();
   level thread e_19_right_side();
   flag_wait("slums_molotov_triggered");
-  t_left = getent("e_19_trigger_molotov_left", "targetname");
-  t_right = getent("e_19_trigger_molotov_right", "targetname");
+  t_left = getEnt("e_19_trigger_molotov_left", "targetname");
+  t_right = getEnt("e_19_trigger_molotov_right", "targetname");
   t_left delete();
   t_right delete();
 }
@@ -1224,8 +1224,8 @@ e_22_woman_beating() {
 e_23_parking_lot() {
   trigger_wait("slums_e_23_start");
   level thread run_scene("parking_jump");
-  s_window_start = getstruct("e_23_window_damage", "targetname");
-  s_window_end = getstruct(s_window_start.target, "targetname");
+  s_window_start = getStruct("e_23_window_damage", "targetname");
+  s_window_end = getStruct(s_window_start.target, "targetname");
   level thread run_scene("parking_window");
   level thread mn_moveup_after_digbat_parking();
   wait 0.5;
@@ -1245,7 +1245,7 @@ ambience_right_alley_truck() {
   self endon("death");
   self waittill("exit_vehicle");
   self.goalradius = 32;
-  s_goal = getstruct("slums_right_alley_1", "targetname");
+  s_goal = getStruct("slums_right_alley_1", "targetname");
   self setgoalpos(s_goal.origin);
   self waittill("goal");
   self delete();
@@ -1270,7 +1270,7 @@ ambient_alley_fire_think(flag_ender) {
 
 ambient_alley_fire_burst(s_start) {
   v_start = s_start.origin;
-  v_end = getstruct(s_start.target, "targetname").origin;
+  v_end = getStruct(s_start.target, "targetname").origin;
   str_weapon = "ak47_sp";
 
   if(isDefined(s_start.script_noteworthy) && s_start.script_noteworthy == "ally") {
@@ -1309,8 +1309,8 @@ ambient_alley_dog_retreat(nd_delete) {
 
 dog_that_runs_on_slum_entrance() {
   trigger_wait("trig_slums_start_dog", "targetname");
-  start_struct = getstruct("dog_starting_struct", "targetname");
-  e_dog_spawner = getent("dog_random_spawner", "targetname");
+  start_struct = getStruct("dog_starting_struct", "targetname");
+  e_dog_spawner = getEnt("dog_random_spawner", "targetname");
   e_dog_spawner.origin = start_struct.origin;
   e_dog_spawner.angles = start_struct.angles;
   e_dog_spawner.count = 100;
@@ -1319,7 +1319,7 @@ dog_that_runs_on_slum_entrance() {
   e_dog.ignoreall = 1;
   e_dog.goalradius = 64;
   e_dog endon("death");
-  end_struct = getstruct(start_struct.target, "targetname");
+  end_struct = getStruct(start_struct.target, "targetname");
   e_dog setgoalpos(end_struct.origin);
   e_dog waittill("goal");
   e_dog delete();
@@ -1332,9 +1332,9 @@ ambient_slums_dog_init() {
 
 ambient_slums_dog() {
   self waittill("trigger");
-  start_struct = getstruct(self.target, "targetname");
-  end_struct = getstruct(start_struct.target, "targetname");
-  e_dog_spawner = getent("dog_random_spawner", "targetname");
+  start_struct = getStruct(self.target, "targetname");
+  end_struct = getStruct(start_struct.target, "targetname");
+  e_dog_spawner = getEnt("dog_random_spawner", "targetname");
   e_dog_spawner.origin = start_struct.origin;
   e_dog_spawner.angles = start_struct.angles;
   e_dog_spawner.count = 100;
@@ -1348,7 +1348,7 @@ ambient_slums_dog() {
     e_dog waittill("goal");
 
     if(isDefined(end_struct.target)) {
-      end_struct = getstruct(end_struct.target, "targetname");
+      end_struct = getStruct(end_struct.target, "targetname");
     } else {
       end_struct = undefined;
     }
@@ -1373,7 +1373,7 @@ cleanup_slums_ai_by_targetname(str_targetname) {
 cleanup_progression_passed_digbat_parking_lot() {
   flag_wait("cleanup_before_digbat_parking_lot");
   level notify("cleanup_warp_around_parking_lot");
-  t_for_warp = getent("trig_player_moving_around_parking_lot", "targetname");
+  t_for_warp = getEnt("trig_player_moving_around_parking_lot", "targetname");
   t_for_warp delete();
   flag_set("spawn_balcony_digbat");
   trigger_use("send_apc_rpg", "targetname");
@@ -1389,7 +1389,7 @@ cleanup_progression_passed_digbat_parking_lot() {
 
 cleanup_initial_mgnest_through_digbat_parking_lot() {
   trigger_wait("trig_warp_passed_apc", "targetname");
-  t_for_warp = getent("trig_player_moving_around_parking_lot", "targetname");
+  t_for_warp = getEnt("trig_player_moving_around_parking_lot", "targetname");
 
   if(isDefined(t_for_warp)) {
     t_for_warp delete();
@@ -1398,7 +1398,7 @@ cleanup_initial_mgnest_through_digbat_parking_lot() {
   level endon("cleanup_warp_around_parking_lot");
   level notify("kill_e_01_apc_digbat_alley");
   cleanup_slums_ai_by_targetname("apc_alley_army_ai");
-  trig_digbat_parking_lot = getent("slums_e_23_start", "targetname");
+  trig_digbat_parking_lot = getEnt("slums_e_23_start", "targetname");
 
   if(isDefined(trig_digbat_parking_lot)) {
     trig_digbat_parking_lot delete();
@@ -1691,7 +1691,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
 get_animation_endings() {}
 
 print_out_end_location_of_animation(_anim, str_align_node, animname) {
-  align_node = getstruct(str_align_node, "targetname");
+  align_node = getStruct(str_align_node, "targetname");
   start_org = getstartorigin(align_node.origin, (0, 0, 0), _anim);
   start_ang = getstartangles(align_node.origin, (0, 0, 0), _anim);
   endpoint = start_org;
@@ -1757,7 +1757,7 @@ mn_moveup_church() {
 
 mn_moveup_from_dumpster_to_wall() {
   level endon("cleanup_player_committed_left");
-  trig = getent("trig_mv_noriega_to_wall_alley", "targetname");
+  trig = getEnt("trig_mv_noriega_to_wall_alley", "targetname");
   trig endon("trigger");
   waittill_spawn_manager_complete("sm_slums_initial_retreat");
   wait 4;
@@ -1774,7 +1774,7 @@ mn_moveup_to_digbat_parking() {
 mn_moveup_after_digbat_parking() {
   level endon("cleanup_player_committed_left");
   wait 0.15;
-  trig_next_color = getent("trig_color_after_db_park", "targetname");
+  trig_next_color = getEnt("trig_color_after_db_park", "targetname");
   trig_next_color endon("trigger");
   e_digbat_1 = get_ais_from_scene("parking_jump", "slums_park_digbat_01");
   e_digbat_2 = get_ais_from_scene("parking_window", "slums_park_digbat_02");
@@ -1932,19 +1932,19 @@ veh_animate_pickup_cars() {
 }
 
 rotate_the_clinic_door() {
-  e_door = getent("clinic_frontdoor", "targetname");
-  e_rotator = getent("clinic_door_rotator", "targetname");
-  level.player playrumbleonentity("damage_heavy");
+  e_door = getEnt("clinic_frontdoor", "targetname");
+  e_rotator = getEnt("clinic_door_rotator", "targetname");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.4, 0.4, level.player.origin, 256, level.player);
-  e_door linkto(e_rotator);
-  e_rotator rotateyaw(-110, 0.8, 0.05, 0.75);
+  e_door linkTo(e_rotator);
+  e_rotator rotateYaw(-110, 0.8, 0.05, 0.75);
 }
 
 clear_slum_southeast_ai() {
   trigger_wait("delete_ai_from_southeast_slum");
   level notify("delete_ai_from_southeast_slum");
   spawn_manager_disable("sm_rooftop_and_windows_alley");
-  trigger = getent("southeast_pdf_delete_volume", "targetname");
+  trigger = getEnt("southeast_pdf_delete_volume", "targetname");
   a_ai = getaiarray("axis", "allies");
 
   for(i = 0; i < a_ai.size; i++) {
@@ -1977,7 +1977,7 @@ clear_central_ai() {
   spawn_manager_disable("sm_bottleneck_right_rear");
   spawn_manager_disable("sm_slums_left_narrow");
   spawn_manager_disable("sm_slums_standoff");
-  trigger = getent("central_pdf_delete_volume", "targetname");
+  trigger = getEnt("central_pdf_delete_volume", "targetname");
   a_ai = getaiarray("axis", "allies");
 
   for(i = 0; i < a_ai.size; i++) {
@@ -2003,9 +2003,9 @@ clear_central_ai() {
 }
 
 slum_edge_vo() {
-  section_1_trigger = getent("slum_section_1", "targetname");
-  section_2_trigger = getent("slum_section_2", "targetname");
-  section_3_trigger = getent("slum_section_3", "targetname");
+  section_1_trigger = getEnt("slum_section_1", "targetname");
+  section_2_trigger = getEnt("slum_section_2", "targetname");
+  section_3_trigger = getEnt("slum_section_3", "targetname");
   level.current_edge_vo = " ";
   vo_string_1 = [];
   vo_string_1[vo_string_1.size] = "pdf_we_need_more_firepow_0";
@@ -2085,7 +2085,7 @@ play_vo_in_section(trigger_name) {
     break;
   }
 
-  section_trigger = getent(trigger_name, "targetname");
+  section_trigger = getEnt(trigger_name, "targetname");
   random_dude = get_random_ai_no_closer_than(1000, 2000, section_trigger);
 
   if(isDefined(random_dude)) {
@@ -2134,8 +2134,8 @@ get_random_ai_no_closer_than(min_distance, max_distance, trigger) {
 molotov_intro_van() {
   level endon("delete_ai_from_southeast_slum");
   trigger_wait("molotov_flame_car_trigger");
-  start_struct = getent("molotov_flame_car_start", "targetname");
-  end_struct = getstruct("molotov_flame_car_target", "targetname");
+  start_struct = getEnt("molotov_flame_car_start", "targetname");
+  end_struct = getStruct("molotov_flame_car_target", "targetname");
   level.player magicgrenadetype("molotov_sp", start_struct.origin, (-600, -1000, 330), 3);
 }
 

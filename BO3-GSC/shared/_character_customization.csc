@@ -780,7 +780,7 @@ function set_character_align(localclientnum, data_struct, align_target) {
 }
 
 function setup_live_character_customization_target(localclientnum) {
-  characterent = getent(localclientnum, "character_customization", "targetname");
+  characterent = getEnt(localclientnum, "character_customization", "targetname");
   if(isDefined(characterent)) {
     customization_data_struct = create_character_data_struct(characterent, localclientnum, 1);
     customization_data_struct.default_exploder = "char_customization";
@@ -933,7 +933,7 @@ function update_model_rotation_for_right_stick(localclientnum, data_struct, endo
 }
 
 function setup_static_character_customization_target(localclientnum) {
-  characterent = getent(localclientnum, "character_customization_staging", "targetname");
+  characterent = getEnt(localclientnum, "character_customization_staging", "targetname");
   level.extra_cam_hero_data[localclientnum] = setup_character_extracam_struct("ui_cam_character_customization", "cam_menu_unfocus", "pb_cac_main_lobby_idle", 0);
   level.extra_cam_lobby_client_hero_data[localclientnum] = setup_character_extracam_struct("ui_cam_char_identity", "cam_bust", "pb_cac_vs_screen_idle_1", 1);
   level.extra_cam_headshot_hero_data[localclientnum] = setup_character_extracam_struct("ui_cam_char_identity", "cam_bust", "pb_cac_vs_screen_idle_1", 0);

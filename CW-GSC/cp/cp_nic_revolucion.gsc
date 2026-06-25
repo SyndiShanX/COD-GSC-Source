@@ -50,8 +50,8 @@ function event_handler[level_init] main(eventstruct) {
   level.var_cd2635a5 = 1;
 
   while(!isDefined(level.player)) {
-    if(getplayers().size > 0) {
-      level.player = getplayers()[0];
+    if(getPlayers().size > 0) {
+      level.player = getPlayers()[0];
     }
 
     waitframe(1);

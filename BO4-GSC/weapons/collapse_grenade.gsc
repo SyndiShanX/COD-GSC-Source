@@ -42,7 +42,7 @@ function_5df80e43(watcher, player) {
   var_5ff47c38 = spawn("script_model", grenade.origin);
   var_5ff47c38 setModel(#"p8_big_sphere");
   var_5ff47c38 setscale(0.0225);
-  var_5ff47c38 linkto(grenade);
+  var_5ff47c38 linkTo(grenade);
   var_5ff47c38 clientfield::set("collapsesphereflag", 1);
   grenade thread function_adc9aab9(var_5ff47c38);
   var_80994c8c = 225 * 225;
@@ -51,7 +51,7 @@ function_5df80e43(watcher, player) {
 
   while(true) {
     time = gettime();
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       eye_pos = player gettagorigin("tag_eye");
@@ -86,7 +86,7 @@ function_5df80e43(watcher, player) {
 
 function_adc9aab9(var_5ff47c38) {
   self waittill(#"explode", #"death");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player.var_fd6d6c7b) && player.var_fd6d6c7b == var_5ff47c38) {

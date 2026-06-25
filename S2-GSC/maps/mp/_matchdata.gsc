@@ -564,7 +564,7 @@ func_5EA5(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
       var_20 = anglesToForward((0, self.var_001D[1], 0));
       var_21 = self.var_0116 - param_02.var_0116;
-      var_21 = vectornormalize((var_21[0], var_21[1], 0));
+      var_21 = vectorNormalize((var_21[0], var_21[1], 0));
       var_15 = vectordot(var_20, var_21);
       var_22 = var_15 * -1;
       if(var_22 >= cos(getdvarint("cg_fov", 65))) {

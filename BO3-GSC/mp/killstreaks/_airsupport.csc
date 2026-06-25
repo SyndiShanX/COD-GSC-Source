@@ -82,8 +82,8 @@ function planeturn(localclientnum, plane, yaw, halflife, starttime, isturningrig
     if(waitformovedone) {
       plane waittill("movedone");
     }
-    waitformovedone = plane rewindobjects::servertimedmoveto(localclientnum, plane.origin, endpoint, starttime, waitamount);
-    plane rewindobjects::servertimedrotateto(localclientnum, angles, starttime, waitamount);
+    waitformovedone = plane rewindobjects::servertimedmoveTo(localclientnum, plane.origin, endpoint, starttime, waitamount);
+    plane rewindobjects::servertimedrotateTo(localclientnum, angles, starttime, waitamount);
     looptime = looptime + waitamount;
     starttime = starttime + (waitamount * 1000);
   }
@@ -119,8 +119,8 @@ function planeturn(localclientnum, plane, yaw, halflife, starttime, isturningrig
     if(waitformovedone) {
       plane waittill("movedone");
     }
-    waitformovedone = plane rewindobjects::servertimedmoveto(localclientnum, plane.origin, endpoint, starttime, waitamount);
-    plane rewindobjects::servertimedrotateto(localclientnum, angles, starttime, waitamount);
+    waitformovedone = plane rewindobjects::servertimedmoveTo(localclientnum, plane.origin, endpoint, starttime, waitamount);
+    plane rewindobjects::servertimedrotateTo(localclientnum, angles, starttime, waitamount);
     looptime = looptime + waitamount;
     starttime = starttime + (waitamount * 1000);
   }
@@ -167,8 +167,8 @@ function doabarrelroll(localclientnum, plane, endpoint, flytime, starttime) {
     if(waitformovedone) {
       plane waittill("movedone");
     }
-    waitformovedone = plane rewindobjects::servertimedmoveto(localclientnum, plane.origin, nextpoint, starttime, waitamount);
-    plane rewindobjects::servertimedrotateto(localclientnum, angles, starttime, waitamount);
+    waitformovedone = plane rewindobjects::servertimedmoveTo(localclientnum, plane.origin, nextpoint, starttime, waitamount);
+    plane rewindobjects::servertimedrotateTo(localclientnum, angles, starttime, waitamount);
     starttime = starttime + (waitamount * 1000);
   }
 }
@@ -178,7 +178,7 @@ function planegostraight(localclientnum, plane, startpoint, endpoint, movetime, 
   level endon("demo_jump");
   distanceincreaseratio = 2;
   destpoint = rewindobjects::getpointonline(startpoint, endpoint, distanceincreaseratio);
-  if(plane rewindobjects::servertimedmoveto(localclientnum, startpoint, destpoint, starttime, movetime)) {
+  if(plane rewindobjects::servertimedmoveTo(localclientnum, startpoint, destpoint, starttime, movetime)) {
     plane waittill("movedone");
   }
 }

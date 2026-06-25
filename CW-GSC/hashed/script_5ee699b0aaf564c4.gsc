@@ -388,7 +388,7 @@ function function_1e077098() {
         continue;
       }
 
-      var_7ec01616 = getplayers(undefined, trace[#"position"], 3000);
+      var_7ec01616 = getPlayers(undefined, trace[#"position"], 3000);
       var_c3d4dc49 = isDefined(level.var_a349ea8[var_ab9478c7 getentitynumber()]) ? level.var_a349ea8[var_ab9478c7 getentitynumber()] : [];
 
       foreach(var_ba607277 in var_7ec01616) {

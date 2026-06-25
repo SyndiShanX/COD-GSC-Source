@@ -91,7 +91,7 @@ function init() {
 }
 
 function function_76322483(player) {
-  foreach(guy in getplayers()) {
+  foreach(guy in getPlayers()) {
     guy closeingamemenu();
   }
 
@@ -265,7 +265,7 @@ function function_e22d3978(number = level.doa.roundnumber) {
   level clientfield::set("roundNumber", level.doa.roundnumber);
   level clientfield::set_world_uimodel("DOA_GLOBALUIMODEL_ROUNDNUMBER", level.doa.roundnumber);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.doa)) {
       continue;
     }
@@ -364,7 +364,7 @@ function main() {
     }
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(player) && level.var_43cd3fe5 doa_keytrade::is_open(player)) {
     level.var_43cd3fe5 doa_keytrade::close();
@@ -376,7 +376,7 @@ function main() {
   function_21cd3890(1);
   util::wait_network_frame();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"hash_7893364bd228d63e", {
       #var_cff8d1e: 1
     });

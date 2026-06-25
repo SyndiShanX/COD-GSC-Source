@@ -162,7 +162,7 @@ emprumbleloop(duration) {
   goaltime = gettime() + int(duration * 1000);
 
   while(gettime() < goaltime) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     waitframe(1);
   }
 }

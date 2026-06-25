@@ -407,9 +407,9 @@ function function_7040e7b1() {
 }
 
 function function_4dde8d1b() {
-  var_9057efea = getent("volume_adler_check_back_corner", "targetname");
+  var_9057efea = getEnt("volume_adler_check_back_corner", "targetname");
   var_e698e973 = struct::get("struct_adler_check_back_corner", "targetname");
-  var_d3a1e64d = getent("volume_adler_check_front_hall", "targetname");
+  var_d3a1e64d = getEnt("volume_adler_check_front_hall", "targetname");
   var_f9dcfdfc = struct::get("struct_adler_check_front_hall", "targetname");
 
   while(true) {

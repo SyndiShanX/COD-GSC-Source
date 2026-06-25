@@ -209,7 +209,7 @@ perks_behind_door() {
   door_perk_drop_list[3] = "fire_sale";
   door_perk_drop_list[4] = "full_ammo";
   index = 0;
-  ammodrop = getstruct("zm_nuked_ammo_drop", "script_noteworthy");
+  ammodrop = getStruct("zm_nuked_ammo_drop", "script_noteworthy");
   perk_type = door_perk_drop_list[index];
   index++;
   door_powerup_drop(perk_type, ammodrop.origin);
@@ -228,7 +228,7 @@ perks_behind_door() {
 }
 
 nuked_doomsday_clock_think() {
-  min_hand_model = getent("clock_min_hand", "targetname");
+  min_hand_model = getEnt("clock_min_hand", "targetname");
   min_hand_model.position = 0;
 
   while(true) {
@@ -272,14 +272,14 @@ fall_down(vdir, stance) {
 
   if(isDefined(vdir) && length(vdir) > 0) {
     xyspeedmag = 40 + randomint(12) + randomint(12);
-    xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+    xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
   }
 
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = origin;
   linker.angles = angles;
   self._fall_down_anchor = linker;
-  self playerlinkto(linker);
+  self playerlinkTo(linker);
   self playsoundtoplayer("zmb_player_death_fall", self);
   falling = stance != "prone";
 
@@ -289,8 +289,8 @@ fall_down(vdir, stance) {
     floor_height = 10 + origin[2] - eye[2];
     origin = origin + (0, 0, floor_height);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
   }
 
   self freezecontrols(1);
@@ -306,13 +306,13 @@ fall_down(vdir, stance) {
     bounce = randomint(4) + 8;
     origin = origin + (0, 0, bounce) - xyspeed * 0.1;
     lerptime = bounce / 50.0;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = origin + (0, 0, bounce * -1) + xyspeed * 0.1;
     lerptime = lerptime / 2.0;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
   }
 
   wait 15;
@@ -552,7 +552,7 @@ house_clip(clips, connect) {
     }
 
     clips[i] solid();
-    clips[i] disconnectpaths();
+    clips[i] disconnectPaths();
   }
 }
 
@@ -812,8 +812,8 @@ custom_add_weapons() {
 }
 
 nuked_population_sign_think() {
-  tens_model = getent("counter_tens", "targetname");
-  ones_model = getent("counter_ones", "targetname");
+  tens_model = getEnt("counter_tens", "targetname");
+  ones_model = getEnt("counter_ones", "targetname");
   step = 36.0;
   ones = 0;
   tens = 0;
@@ -912,7 +912,7 @@ nuked_mannequin_init() {
 
   for(i = 0; i < remove_count; i++) {
     assert(isDefined(mannequins[i].target));
-    collision = getent(mannequins[i].target, "targetname");
+    collision = getEnt(mannequins[i].target, "targetname");
     assert(isDefined(collision));
     collision delete();
     mannequins[i] delete();
@@ -948,7 +948,7 @@ custom_debris_function() {
   while(true) {
     if(isDefined(self.script_noteworthy)) {
       if(self.script_noteworthy == "electric_door" || self.script_noteworthy == "electric_buyable_door") {
-        self sethintstring(&"ZOMBIE_NEED_POWER");
+        self setHintString(&"ZOMBIE_NEED_POWER");
         flag_wait("power_on");
       }
     }
@@ -1005,7 +1005,7 @@ custom_debris_function() {
         struct = undefined;
 
         if(isDefined(junk[i].script_linkto)) {
-          struct = getstruct(junk[i].script_linkto, "script_linkname");
+          struct = getStruct(junk[i].script_linkto, "script_linkname");
 
           if(isDefined(struct)) {
             move_ent = junk[i];
@@ -1040,7 +1040,7 @@ custom_debris_function() {
 
 sndgameend() {
   level waittill("intermission");
-  playsoundatposition("zmb_endgame", (0, 0, 0));
+  playSoundAtPosition("zmb_endgame", (0, 0, 0));
 }
 
 sndmusiceastereggs() {
@@ -1052,7 +1052,7 @@ sndmusiceastereggs() {
 sndmusegg1() {
   level waittill("nuke_clock_moved");
   level waittill("magic_door_power_up_grabbed");
-  min_hand_model = getent("clock_min_hand", "targetname");
+  min_hand_model = getEnt("clock_min_hand", "targetname");
 
   if(level.population_count == 15 && level.music_override == 0) {
     level thread sndmuseggplay(spawn("script_origin", (0, 0, 0)), "zmb_nuked_song_1", 88);
@@ -1166,13 +1166,13 @@ nuked_standard_intermission() {
 }
 
 moon_rocket_follow_path() {
-  rocket_start_struct = getstruct("inertmission_rocket_start", "targetname");
-  rocket_end_struct = getstruct("inertmission_rocket_end", "targetname");
-  rocket_cam_start_struct = getstruct("intermission_rocket_cam_start", "targetname");
-  rocket_cam_end_struct = getstruct("intermission_rocket_cam_end", "targetname");
+  rocket_start_struct = getStruct("inertmission_rocket_start", "targetname");
+  rocket_end_struct = getStruct("inertmission_rocket_end", "targetname");
+  rocket_cam_start_struct = getStruct("intermission_rocket_cam_start", "targetname");
+  rocket_cam_end_struct = getStruct("intermission_rocket_cam_end", "targetname");
   rocket_camera_ent = spawn("script_model", rocket_cam_start_struct.origin);
   rocket_camera_ent.angles = rocket_cam_start_struct.angles;
-  rocket = getent("intermission_rocket", "targetname");
+  rocket = getEnt("intermission_rocket", "targetname");
   rocket show();
   rocket.origin = rocket_start_struct.origin;
   camera = spawn("script_model", rocket_cam_start_struct.origin);
@@ -1191,10 +1191,10 @@ moon_rocket_follow_path() {
     player cameraactivate(1);
   }
 
-  rocket moveto(rocket_end_struct.origin, 9);
-  rocket rotateto(rocket_end_struct.angles, 11);
-  camera moveto(rocket_cam_end_struct.origin, 9);
-  camera rotateto(rocket_cam_end_struct.angles, 8);
+  rocket moveTo(rocket_end_struct.origin, 9);
+  rocket rotateTo(rocket_end_struct.angles, 11);
+  camera moveTo(rocket_cam_end_struct.origin, 9);
+  camera rotateTo(rocket_cam_end_struct.angles, 8);
   playFXOnTag(level._effect["rocket_entry"], rocket, "tag_fx");
   playFXOnTag(level._effect["rocket_entry_light"], rocket, "tag_fx");
   wait 7.5;
@@ -1210,22 +1210,22 @@ intermission_rocket_blur() {
 }
 
 inermission_rocket_init() {
-  rocket = getent("intermission_rocket", "targetname");
+  rocket = getEnt("intermission_rocket", "targetname");
   rocket hide();
 }
 
 player_rocket_rumble() {
   while(!flag("rocket_hit_nuketown")) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait 1;
   }
 }
 
 bus_taser_blocker() {
-  trig = getent("bus_taser_trigger", "targetname");
+  trig = getEnt("bus_taser_trigger", "targetname");
 
   if(isDefined(trig)) {
-    clip = getent(trig.target, "targetname");
+    clip = getEnt(trig.target, "targetname");
   }
 
   trig waittill("trigger");
@@ -1236,7 +1236,7 @@ bus_taser_blocker() {
 }
 
 marlton_vo_inside_bunker() {
-  marlton_bunker_trig = getent("marlton_bunker_trig", "targetname");
+  marlton_bunker_trig = getEnt("marlton_bunker_trig", "targetname");
   marlton_sound_pos = marlton_bunker_trig.origin;
   marlton_vo = [];
   marlton_vo[marlton_vo.size] = "vox_plr_3_pap_wait_0";
@@ -1256,7 +1256,7 @@ marlton_vo_inside_bunker() {
 
   while(true) {
     marlton_bunker_trig waittill("trigger");
-    playsoundatposition(marlton_vo[randomintrange(0, marlton_vo.size)], marlton_sound_pos);
+    playSoundAtPosition(marlton_vo[randomintrange(0, marlton_vo.size)], marlton_sound_pos);
     wait_for_next_round(level.round_number);
   }
 }
@@ -1270,17 +1270,17 @@ wait_for_next_round(current_round) {
 moon_transmission_vo() {
   start_round = 3;
   end_round = 25;
-  moon_transmission_struct = getstruct("moon_transmission_struct", "targetname");
+  moon_transmission_struct = getStruct("moon_transmission_struct", "targetname");
   wait_for_round_range(3);
-  playsoundatposition("vox_nuked_tbase_transmission_0", moon_transmission_struct.origin);
+  playSoundAtPosition("vox_nuked_tbase_transmission_0", moon_transmission_struct.origin);
   wait_for_round_range(randomintrange(4, 9));
-  playsoundatposition("vox_nuked_tbase_transmission_1", moon_transmission_struct.origin);
+  playSoundAtPosition("vox_nuked_tbase_transmission_1", moon_transmission_struct.origin);
   wait_for_round_range(randomintrange(10, 17));
-  playsoundatposition("vox_nuked_tbase_transmission_2", moon_transmission_struct.origin);
+  playSoundAtPosition("vox_nuked_tbase_transmission_2", moon_transmission_struct.origin);
   wait_for_round_range(randomintrange(18, 22));
-  playsoundatposition("vox_nuked_tbase_transmission_3", moon_transmission_struct.origin);
+  playSoundAtPosition("vox_nuked_tbase_transmission_3", moon_transmission_struct.origin);
   wait_for_round_range(25);
-  playsoundatposition("vox_nuked_tbase_transmission_4", moon_transmission_struct.origin);
+  playSoundAtPosition("vox_nuked_tbase_transmission_4", moon_transmission_struct.origin);
   flag_set("moon_transmission_over");
 }
 
@@ -1327,13 +1327,13 @@ switch_announcer_to_richtofen() {
 }
 
 bus_random_horn() {
-  horn_struct = getstruct("bus_horn_struct", "targetname");
+  horn_struct = getStruct("bus_horn_struct", "targetname");
   wait_for_round_range(randomintrange(5, 10));
-  playsoundatposition("zmb_bus_horn_leave", horn_struct.origin);
+  playSoundAtPosition("zmb_bus_horn_leave", horn_struct.origin);
 }
 
 fake_lighting_cleanup() {
-  ent = getent("nuke_reflection", "targetname");
+  ent = getEnt("nuke_reflection", "targetname");
 
   if(isDefined(ent)) {
     ent delete();

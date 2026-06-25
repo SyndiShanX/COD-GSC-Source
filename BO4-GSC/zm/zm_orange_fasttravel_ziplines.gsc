@@ -71,7 +71,7 @@ function_53b616a4() {
   foreach(s_zipline_crank in level.a_s_zipline_cranks) {
     s_zipline_crank.var_2e77da49 = 0;
     s_zipline_crank.var_68a09be4 = 0;
-    s_zipline_crank.e_crank = getent(s_zipline_crank.var_c299d92a, "targetname");
+    s_zipline_crank.e_crank = getEnt(s_zipline_crank.var_c299d92a, "targetname");
     s_zipline_crank.e_crank hide();
     s_zipline_crank.var_f316eff6 = getnode(s_zipline_crank.var_2da0be6c, "targetname");
     unlinktraversal(s_zipline_crank.var_f316eff6);
@@ -128,10 +128,10 @@ function_29c3aabf(e_player) {
 
   if(isDefined(s_zipline_crank.var_2e77da49) && s_zipline_crank.var_2e77da49) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_1c728bc5a555de5b");
+      self setHintString(#"hash_1c728bc5a555de5b");
       return 1;
     } else {
-      self sethintstring(#"hash_3d93f7957f6855e5");
+      self setHintString(#"hash_3d93f7957f6855e5");
       return 1;
     }
 
@@ -139,16 +139,16 @@ function_29c3aabf(e_player) {
   }
 
   if(level.var_1537d233 <= 0) {
-    self sethintstring(#"hash_63c5fccb2c10781b");
+    self setHintString(#"hash_63c5fccb2c10781b");
     return 1;
   }
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_2e2afc1b8f8fa0eb");
+    self setHintString(#"hash_2e2afc1b8f8fa0eb");
     return 1;
   }
 
-  self sethintstring(#"hash_46db6b04cc24e375");
+  self setHintString(#"hash_46db6b04cc24e375");
   return 1;
 }
 
@@ -162,7 +162,7 @@ function_2713a96a() {
 
     if(level.var_1537d233 > 0) {
       self.e_crank show();
-      playsoundatposition(#"hash_264544adc5386596", self.origin);
+      playSoundAtPosition(#"hash_264544adc5386596", self.origin);
 
       if(level flag::get(#"hash_7d230fa8f283c105")) {
         level zm_ui_inventory::function_7df6bb60("zm_orange_zipquest_crank_1", 0);
@@ -216,7 +216,7 @@ function_665b4fa6() {
       if(b_using) {
         self.e_crank rotateroll(-36, 0.1);
         wait 0.1;
-        playsoundatposition(#"hash_12cbe85436ddc720", self.origin);
+        playSoundAtPosition(#"hash_12cbe85436ddc720", self.origin);
         self.var_191e6b71 -= 0.1;
         var_ba7236d5++;
 
@@ -310,36 +310,36 @@ function_e82679f8(e_player) {
   s_zipline_use = self.stub.related_parent;
 
   if(level flag::get(#"hell_on_earth") && s_zipline_use.str_location !== "lighthouse_to_facility") {
-    self sethintstring(#"hash_2940c8be9ff1b294");
+    self setHintString(#"hash_2940c8be9ff1b294");
     return 1;
   }
 
   if(s_zipline_use.str_location === "aft_to_beach") {
     if(!level flag::get(#"hash_7def3e555eba842c")) {
-      self sethintstring(#"hash_376f1740578b8a2e");
+      self setHintString(#"hash_376f1740578b8a2e");
       return 1;
     }
   } else if(s_zipline_use.str_location === "lighthouse_to_fore") {
     if(!level flag::get(#"hash_e29d662bb90e4bc")) {
-      self sethintstring(#"hash_376f1740578b8a2e");
+      self setHintString(#"hash_376f1740578b8a2e");
       return 1;
     }
   }
 
   if(s_zipline_use.str_location === "station_to_sun_deck" || s_zipline_use.str_location === "dock" || s_zipline_use.str_location === "fore" || s_zipline_use.str_location === "lighthouse_to_facility") {
     if(!level flag::get(#"zipline_handle_picked_up")) {
-      self sethintstring(#"hash_57d47aca62536932");
+      self setHintString(#"hash_57d47aca62536932");
       return 1;
     }
   }
 
   if(!s_zipline_use.var_58f28f90) {
-    self sethintstring(#"hash_3d7f4136a3c462c8");
+    self setHintString(#"hash_3d7f4136a3c462c8");
     return 1;
   }
 
   if(isDefined(e_player.var_7b2ac934) && e_player.var_7b2ac934) {
-    self sethintstring(#"hash_44fe179e1e8f80ad");
+    self setHintString(#"hash_44fe179e1e8f80ad");
     return 1;
   }
 
@@ -349,12 +349,12 @@ function_e82679f8(e_player) {
 
   if(function_8b1a219a()) {
     zone = zm_orange_zones::get_location_string(undefined, s_zipline_use.str_destination);
-    self sethintstring(#"hash_1c90be4081261de3", zone);
+    self setHintString(#"hash_1c90be4081261de3", zone);
     return 1;
   }
 
   zone = zm_orange_zones::get_location_string(undefined, s_zipline_use.str_destination);
-  self sethintstring(#"hash_498ce6b1275c33fd", zone);
+  self setHintString(#"hash_498ce6b1275c33fd", zone);
   return 1;
 }
 
@@ -456,7 +456,7 @@ function_5dbd6a40(s_zipline_use) {
   }
 
   vnd_start = getvehiclenode(s_zipline_use.target, "targetname");
-  self.var_b20b0960 = spawner::simple_spawn_single(getent("veh_fasttravel", "targetname"));
+  self.var_b20b0960 = spawner::simple_spawn_single(getEnt("veh_fasttravel", "targetname"));
 
   while(!isDefined(self.var_b20b0960)) {
     waitframe(1);
@@ -471,15 +471,15 @@ function_5dbd6a40(s_zipline_use) {
   level notify(#"zipline_used", {
     #str_location: s_zipline_use.str_location
   });
-  self playrumbleonentity(#"jump_rumble_start");
+  self playRumbleOnEntity(#"jump_rumble_start");
   self function_fc9707f4(vnd_start, s_zipline_use);
   m_player_fake = util::spawn_player_clone(self);
-  m_player_fake linkto(self.var_b20b0960, "tag_origin");
+  m_player_fake linkTo(self.var_b20b0960, "tag_origin");
   current_weapon = self getcurrentweapon();
 
   if(isDefined(current_weapon.name) && current_weapon.name != #"none") {
     m_weapon_fake = util::spawn_model(current_weapon.worldmodel, m_player_fake gettagorigin("tag_weapon_right"), m_player_fake gettagangles("tag_weapon_right"));
-    m_weapon_fake linkto(m_player_fake, "tag_weapon_right");
+    m_weapon_fake linkTo(m_player_fake, "tag_weapon_right");
     m_weapon_fake setowner(self);
     m_weapon_fake clientfield::set("clone_control", 1);
   }
@@ -535,7 +535,7 @@ function_5dbd6a40(s_zipline_use) {
   }
 
   var_63259c33 = 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(self == player || abs(self.origin[2] - player.origin[2]) > 60) {
@@ -553,10 +553,10 @@ function_5dbd6a40(s_zipline_use) {
   if(var_63259c33) {
     s_landing_point = self thread zm_fasttravel::function_d4fbc062(s_zipline_use.var_508d5a11);
     self dontinterpolate();
-    self setorigin(s_landing_point.origin);
+    self setOrigin(s_landing_point.origin);
   }
 
-  self playrumbleonentity("jump_rumble_end");
+  self playRumbleOnEntity("jump_rumble_end");
 }
 
 function_fc9707f4(vnd_start, s_zipline_use) {
@@ -616,7 +616,7 @@ function_fc9707f4(vnd_start, s_zipline_use) {
   }
 
   self playerlinktodelta(self.var_b20b0960, "tag_origin", 0.5, 180, 180, 180, 180);
-  self setorigin(vnd_start.origin);
+  self setOrigin(vnd_start.origin);
   self setplayerangles(vnd_start.angles);
 }
 

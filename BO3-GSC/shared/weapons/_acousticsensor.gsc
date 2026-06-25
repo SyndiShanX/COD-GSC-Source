@@ -53,7 +53,7 @@ function acousticsensordetonate(attacker, weapon, target) {
       scoreevents::processscoreevent("destroyed_motion_sensor", attacker, self.owner, weapon);
     }
   }
-  playsoundatposition("dst_equipment_destroy", self.origin);
+  playSoundAtPosition("dst_equipment_destroy", self.origin);
   self destroyent();
 }
 

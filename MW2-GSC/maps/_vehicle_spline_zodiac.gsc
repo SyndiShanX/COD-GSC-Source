@@ -22,7 +22,7 @@ init_vehicle_splines() {
   level.SPLINE_MIN_PROGRESS = -2000;
   level.enemy_snowmobiles_max = 6;
   level.player_ent = spawn("script_origin", level.player.origin + (0, 0, 88));
-  level.player_ent linkto(level.player);
+  level.player_ent linkTo(level.player);
   level.snowmobile_path = make_road_path();
   flag_init("ai_snowmobiles_ram_player");
   flag_set("ai_snowmobiles_ram_player");
@@ -57,7 +57,7 @@ bike_death_score() {
 }
 
 get_guy_from_spawner() {
-  spawner = getent("spawner", "targetname");
+  spawner = getEnt("spawner", "targetname");
   spawner.count = 1;
   spawner.origin = self.origin;
   spawner.angles = (0, self.angles[1], 0);
@@ -163,7 +163,7 @@ draw_col_vol_offset(Z, vol, offset, forward, right) {
 }
 
 create_path() {
-  targ = getstruct("road_path_left", "targetname");
+  targ = getStruct("road_path_left", "targetname");
   assert(isDefined(targ));
 
   path = [];
@@ -177,7 +177,7 @@ create_path() {
   for(;;) {
     next_targ = targ;
     if(isDefined(targ.target)) {
-      next_targ = getstruct(targ.target, "targetname");
+      next_targ = getStruct(targ.target, "targetname");
     }
 
     if(!isDefined(next_targ.z)) {
@@ -207,7 +207,7 @@ create_path() {
     targ = next_targ;
   }
 
-  targ = getstruct("road_path_right", "targetname");
+  targ = getStruct("road_path_right", "targetname");
 
   targ.z = targ.origin[2];
 
@@ -217,7 +217,7 @@ create_path() {
   for(;;) {
     next_targ = targ;
     if(isDefined(targ.target)) {
-      next_targ = getstruct(targ.target, "targetname");
+      next_targ = getStruct(targ.target, "targetname");
     }
 
     if(!isDefined(next_targ.z)) {
@@ -284,7 +284,7 @@ add_collision_to_path(path) {
   collision_lines = getStructArray("moto_line", "targetname");
   foreach(collision_line in collision_lines) {
     collision_line.origin = (collision_line.origin[0], collision_line.origin[1], 0);
-    next_line = getstruct(collision_line.target, "targetname");
+    next_line = getStruct(collision_line.target, "targetname");
 
     collision_line.other_col_point = next_line;
     next_line.other_col_point = collision_line;
@@ -345,7 +345,7 @@ add_collision_to_path_ent(targ, col_org) {
   if(distance(col_org.origin, targ.next_node.midpoint) > max_dist * 1.5) {
     return;
   }
-  next_org = getstruct(col_org.target, "targetname");
+  next_org = getStruct(col_org.target, "targetname");
 
   prog1 = get_progression_between_points(col_org.origin, targ.midpoint, targ.next_node.midpoint);
   progress1 = prog1["progress"];
@@ -480,7 +480,7 @@ get_progression_between_points(start, first_point, second_point) {
   forward = anglesToForward(angles);
 
   end = first_point;
-  difference = vectornormalize(end - start);
+  difference = vectorNormalize(end - start);
   dot = vectordot(forward, difference);
 
   normal = vectorNormalize(second_point - first_point);
@@ -493,7 +493,7 @@ get_progression_between_points(start, first_point, second_point) {
   prog["offset"] = distance(offset_org, start);
 
   right = anglestoright(angles);
-  difference = vectornormalize(offset_org - start);
+  difference = vectorNormalize(offset_org - start);
   dot = vectordot(right, difference);
   prog["dot"] = dot;
   if(dot > 0) {
@@ -625,7 +625,7 @@ spawn_enemy_bike() {
 
   spawn_pos = drop_to_ground(spawn_pos);
 
-  snowmobile_spawner = getent("snowmobile_spawner", "targetname");
+  snowmobile_spawner = getEnt("snowmobile_spawner", "targetname");
   assertEx(isDefined(snowmobile_spawner), "Need a snowmobile spawner with targetname snowmobile_spawner in the level");
   targ = spawn_array["targ"];
 
@@ -1074,7 +1074,7 @@ match_player_speed(maxaccell, maxdecel) {
 track_player_progress(org) {
   self.targ = get_my_spline_node(org);
   self.progress = 0;
-  player_sweep_trigger = getent("player_sweep_trigger", "targetname");
+  player_sweep_trigger = getEnt("player_sweep_trigger", "targetname");
   sweep_trigger = isDefined(player_sweep_trigger);
   if(sweep_trigger) {
     player_sweep_trigger thread sweep_tells_vehicles_to_get_off_path();
@@ -1368,7 +1368,7 @@ track_progress() {
     end = (self.targ.midpoint[0], self.targ.midpoint[1], 0);
     next_targ = (self.next_targ.midpoint[0], self.next_targ.midpoint[1], 0);
 
-    difference = vectornormalize(end - start);
+    difference = vectorNormalize(end - start);
     forward = anglesToForward(self.angles);
     dot = vectordot(forward, difference);
 

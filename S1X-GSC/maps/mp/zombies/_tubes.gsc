@@ -29,9 +29,9 @@ init() {
           break;
         case "start":
           var_2.start = var_7;
-          var_2.startend = common_scripts\utility::getstruct(var_2.start.target, "targetname");
-          var_2.endstart = common_scripts\utility::getstruct(var_2.startend.target, "targetname");
-          var_2.end = common_scripts\utility::getstruct(var_2.endstart.target, "targetname");
+          var_2.startend = common_scripts\utility::getStruct(var_2.start.target, "targetname");
+          var_2.endstart = common_scripts\utility::getStruct(var_2.startend.target, "targetname");
+          var_2.end = common_scripts\utility::getStruct(var_2.endstart.target, "targetname");
           break;
         default:
           break;
@@ -49,7 +49,7 @@ linktargets() {
   var_0 = getEntArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-    var_2 linkto(self);
+    var_2 linkTo(self);
   }
 }
 
@@ -63,42 +63,42 @@ runtube() {
 
   if(isDefined(self.door)) {
     var_2 = 0.5;
-    self.door rotateto(self.door.openangles, var_2);
+    self.door rotateTo(self.door.openangles, var_2);
     wait(var_2);
   }
 
   for(;;) {
-    self.trigger sethintstring(&"ZOMBIE_H2O_USE_TUBE");
-    self.trigger setcursorhint("HINT_NOICON");
+    self.trigger setHintString(&"ZOMBIE_H2O_USE_TUBE");
+    self.trigger setCursorHint("HINT_NOICON");
     self.trigger waittill("trigger", var_3);
-    self.trigger sethintstring("");
+    self.trigger setHintString("");
     var_3 setstance("stand");
     var_3.inteleport = 1;
 
     if(isDefined(self.door)) {
-      self.door rotateto(self.door.closeangles, var_0);
+      self.door rotateTo(self.door.closeangles, var_0);
     }
 
     var_4 = spawn("script_model", var_3.origin);
     var_4.angles = (0, var_3.angles[1], 0);
     var_4 setModel("tag_origin");
-    var_3 playerlinkto(var_4, "tag_origin", var_0);
+    var_3 playerlinkTo(var_4, "tag_origin", var_0);
     thread maps\mp\mp_zombie_h2o_aud::sndtubestart(var_4, var_3);
-    var_4 moveto(self.start.origin, var_0);
+    var_4 moveTo(self.start.origin, var_0);
     wait(var_0);
     var_5 = distance(var_4.origin, self.startend.origin) / var_1;
-    var_4 moveto(self.startend.origin, var_5, var_5, 0);
+    var_4 moveTo(self.startend.origin, var_5, var_5, 0);
     var_6 = anglesdelta(var_4.angles, self.startend.angles);
 
     if(var_6 > 0) {
-      var_4 rotateto(self.startend.angles, var_5);
+      var_4 rotateTo(self.startend.angles, var_5);
     }
 
     var_3 thread playertubevo();
     wait(var_5);
 
     if(isDefined(self.door)) {
-      self.door rotateto(self.door.openangles, var_0);
+      self.door rotateTo(self.door.openangles, var_0);
     }
 
     thread endtube(var_4, var_3, var_1);
@@ -114,12 +114,12 @@ endtube(var_0, var_1, var_2) {
   var_0.origin = self.endstart.origin;
   var_0.angles = self.endstart.angles;
   var_3 = distance(var_0.origin, self.end.origin) / var_2;
-  var_0 moveto(self.end.origin, var_3, var_3, 0);
+  var_0 moveTo(self.end.origin, var_3, var_3, 0);
   thread maps\mp\mp_zombie_h2o_aud::sndtubeend(self.end.origin, var_1);
   var_4 = anglesdelta(var_0.angles, self.end.angles);
 
   if(var_4 > 0) {
-    var_0 rotateto(self.end.angles, var_3);
+    var_0 rotateTo(self.end.angles, var_3);
   }
 
   wait(var_3);

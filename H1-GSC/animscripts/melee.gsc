@@ -122,7 +122,7 @@ melee_updateandvalidatestartpos() {
   var_1 = distance2d(self.melee.startpos, self.melee.target.origin);
 
   if(var_1 < 32) {
-    var_2 = vectornormalize((self.melee.startpos[0] - self.melee.target.origin[0], self.melee.startpos[1] - self.melee.target.origin[1], 0));
+    var_2 = vectorNormalize((self.melee.startpos[0] - self.melee.target.origin[0], self.melee.startpos[1] - self.melee.target.origin[1], 0));
     self.melee.startpos = self.melee.startpos + var_2 * (32 - var_1);
 
     if(distance(self.melee.startpos, self.melee.target.origin) < 31.9) {
@@ -164,7 +164,7 @@ melee_updateandvalidatestartpos() {
       var_7 = var_7 - var_8 * ((32 - var_9) / 32);
     }
   } else {
-    var_2 = vectornormalize((self.melee.startpos[0] - self.melee.target.origin[0], self.melee.startpos[1] - self.melee.target.origin[1], 0));
+    var_2 = vectorNormalize((self.melee.startpos[0] - self.melee.target.origin[0], self.melee.startpos[1] - self.melee.target.origin[1], 0));
     var_7 = self.melee.target.origin + var_2 * 32;
   }
 
@@ -449,7 +449,7 @@ melee_standard_updateandvalidatetarget() {
     return 0;
   }
 
-  var_0 = vectornormalize(self.melee.target.origin - self.origin);
+  var_0 = vectorNormalize(self.melee.target.origin - self.origin);
   self.melee.startpos = self.melee.target.origin - 40.0 * var_0;
   return melee_updateandvalidatestartpos();
 }

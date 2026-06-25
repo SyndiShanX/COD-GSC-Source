@@ -640,7 +640,7 @@ function private function_660c618b(prompt, immediate) {
   if(isDefined(self.var_3e95b88f) && isDefined(self.var_3e95b88f.prompts[prompt])) {
     arrayremoveindex(self.var_3e95b88f.prompts, prompt, 1);
     arrayremoveindex(self.var_3e95b88f.var_294a441e, prompt, 1);
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     if(player.var_b3c804a4[prompt] === self) {
       player.var_b3c804a4[prompt] = undefined;
@@ -816,7 +816,7 @@ function private function_12186571(prompt, var_62bce5b6, player, dist, var_393b6
     var_b0cb5e43 = undefined;
 
     if(!var_45913153 && var_693a4fcf < 180) {
-      var_b0cb5e43 = vectornormalize(var_393b6e18 - player getplayercamerapos());
+      var_b0cb5e43 = vectorNormalize(var_393b6e18 - player getplayercamerapos());
       angle_delta = acos(math::clamp(vectordot(anglesToForward(player getplayerangles()), var_b0cb5e43), -1, 1));
 
       if(level.var_a48f9f79[#"hash_4415d97cf206beca"] > 0) {
@@ -842,7 +842,7 @@ function private function_12186571(prompt, var_62bce5b6, player, dist, var_393b6
 
       if(var_9c89c587 > 0 || var_f17a78a7 < 180) {
         if(!isDefined(var_b0cb5e43)) {
-          var_b0cb5e43 = vectornormalize(var_393b6e18 - player getplayercamerapos());
+          var_b0cb5e43 = vectorNormalize(var_393b6e18 - player getplayercamerapos());
         }
 
         angle_delta = acos(vectordot(anglesToForward(self.angles), var_b0cb5e43));
@@ -948,7 +948,7 @@ function private _think() {
   self endon(#"death", #"all_prompts_removed");
   level endon(#"level_restarting");
 
-  for(player = getplayers()[0]; !isDefined(player); player = getplayers()[0]) {
+  for(player = getPlayers()[0]; !isDefined(player); player = getPlayers()[0]) {
     waitframe(1);
   }
 
@@ -1002,7 +1002,7 @@ function private _think() {
 function private function_e8006b47() {
   self endon(#"death", #"all_prompts_removed", #"hash_17cbfac9e551855a");
   level endon(#"level_restarting");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(self != player) {
     player endon(#"death");
@@ -1358,7 +1358,7 @@ function private function_9309081b(uid, prompt) {
 
 function private function_ab46a161(prompt, var_62bce5b6) {
   self endon(#"death", "prompt_removed_" + prompt);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   gamepad = player gamepadusedlast();
   var_1ea21098 = undefined;
@@ -1428,7 +1428,7 @@ function private function_6d9e6b7d(player, prompt, uid) {
 }
 
 function private function_f619081c(prompt, var_62bce5b6) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   switch (prompt) {
     case #"use":
@@ -1490,7 +1490,7 @@ function private function_f619081c(prompt, var_62bce5b6) {
 }
 
 function private function_17578ab7(prompt, var_62bce5b6, uid = var_62bce5b6.uid) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(uid) && isDefined(player)) {
     if(!isDefined(prompt)) {
@@ -1722,7 +1722,7 @@ function private function_8de9a77a() {
 
   if(self flag::get(#"hash_305ce4d5b74a637a")) {
     self flag::clear(#"hash_305ce4d5b74a637a");
-    player = getplayers()[0];
+    player = getPlayers()[0];
     player flag::clear(#"hash_599ec0eee77657ef");
     player val::reset_all(#"hash_599ec0eee77657ef");
   }
@@ -1733,7 +1733,7 @@ function private function_8de9a77a() {
 
 function private function_93551c9a(uid, prompt) {
   self endon(#"death", "prompt_removed_" + prompt, #"hash_7d3af7cbbc793b23");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   gamepad = player gamepadusedlast();
   button_text[0] = level.prompts[prompt].var_e4c7b05f;

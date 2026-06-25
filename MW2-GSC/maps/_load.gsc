@@ -1190,7 +1190,7 @@ playerDamageRumble() {
     if(isDefined(self.specialDamage)) {
       continue;
     }
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -1480,7 +1480,7 @@ triggered_playerseek(trig) {
 }
 
 traverseThink() {
-  ent = GetEnt(self.target, "targetname");
+  ent = getEnt(self.target, "targetname");
   self.traverse_height = ent.origin[2];
   ent Delete();
 }
@@ -1511,7 +1511,7 @@ pianoThink() {
   org = self GetOrigin();
   note = "piano_" + self.script_noteworthy;
 
-  self SetHintString(&"SCRIPT_PLATFORM_PIANO");
+  self setHintString(&"SCRIPT_PLATFORM_PIANO");
   for(;;) {
     self waittill("trigger");
     thread play_sound_in_space(note, org);
@@ -1593,7 +1593,7 @@ bcTrigger_validate_distance(speakerOrigin) {
 
 waterThink() {
   Assert(isDefined(self.target));
-  targeted = GetEnt(self.target, "targetname");
+  targeted = getEnt(self.target, "targetname");
   Assert(isDefined(targeted));
   waterHeight = targeted.origin[2];
   targeted = undefined;
@@ -1855,7 +1855,7 @@ trigger_lookat_think(trigger, endOnFlag) {
         continue;
       }
 
-      normal = VectorNormalize(target_origin - other.origin);
+      normal = vectorNormalize(target_origin - other.origin);
       player_angles = other GetPlayerAngles();
       player_forward = anglesToForward(player_angles);
 
@@ -2474,7 +2474,7 @@ flag_unset_trigger(trigger) {
 eq_trigger(trigger) {
   level.set_eq_func[true] = ::set_eq_on;
   level.set_eq_func[false] = ::set_eq_off;
-  targ = GetEnt(trigger.target, "targetname");
+  targ = getEnt(trigger.target, "targetname");
   for(;;) {
     trigger waittill("trigger");
     ai = GetAIArray("allies");
@@ -2725,13 +2725,13 @@ trigger_multiple_friendly_stop_respawn(trigger) {
 }
 
 trigger_multiple_friendly_respawn(trigger) {
-  org = GetEnt(trigger.target, "targetname");
+  org = getEnt(trigger.target, "targetname");
   origin = undefined;
   if(isDefined(org)) {
     origin = org.origin;
     org Delete();
   } else {
-    org = getstruct(trigger.target, "targetname");
+    org = getStruct(trigger.target, "targetname");
     AssertEx(isDefined(org), "trigger_multiple_friendly_respawn doesn't target an origin.");
     origin = org.origin;
   }
@@ -3188,7 +3188,7 @@ get_script_linkto_targets() {
   tokens = StrTok(self.script_linkto, " ");
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
-    target = GetEnt(token, "script_linkname");
+    target = getEnt(token, "script_linkname");
     if(isDefined(target)) {
       targets[targets.size] = target;
     }
@@ -3294,14 +3294,14 @@ trigger_fog(trigger) {
   AssertEx(isDefined(trigger.end_fardist), "trigger_fog lacks end_fardist");
 
   AssertEx(isDefined(trigger.target), "trigger_fog doesnt target an origin to set the start plane");
-  ent = GetEnt(trigger.target, "targetname");
+  ent = getEnt(trigger.target, "targetname");
   AssertEx(isDefined(ent), "trigger_fog doesnt target an origin to set the start plane");
 
   start = ent.origin;
   end = undefined;
 
   if(isDefined(ent.target)) {
-    target_ent = GetEnt(ent.target, "targetname");
+    target_ent = getEnt(ent.target, "targetname");
     end = target_ent.origin;
   } else {
     end = start + vector_multiply(trigger.origin - start, 2);
@@ -3687,7 +3687,7 @@ trigger_dooropen(trigger) {
     AssertEx(isDefined(door.script_noteworthy), "Door had no script_noteworthy to indicate which door it is. Must be left_door or right_door.");
     rotation = rotations[door.script_noteworthy];
     door ConnectPaths();
-    door RotateYaw(rotation, 1, 0, 0.5);
+    door rotateYaw(rotation, 1, 0, 0.5);
   }
 }
 
@@ -3922,9 +3922,9 @@ loop_friendly_thermal_Reflector_Effect(player_id, onlyForThisPlayer) {
 claymore_pickup_think_global() {
   PreCacheItem("claymore");
   self endon("deleted");
-  self SetCursorHint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
-  self SetHintString(&"WEAPON_CLAYMORE_PICKUP");
+  self setHintString(&"WEAPON_CLAYMORE_PICKUP");
   self MakeUsable();
 
   ammo_count = WeaponMaxAmmo("claymore") + WeaponClipSize("claymore");
@@ -3992,7 +3992,7 @@ ammo_cache_think_global() {
   self.use_trigger = spawn("script_model", self.origin + (0, 0, 28));
   self.use_trigger setModel("tag_origin");
   self.use_trigger makeUsable();
-  self.use_trigger SetCursorHint("HINT_NOICON");
+  self.use_trigger setCursorHint("HINT_NOICON");
 
   self.use_trigger setHintString(&"WEAPON_CACHE_USE_HINT");
 

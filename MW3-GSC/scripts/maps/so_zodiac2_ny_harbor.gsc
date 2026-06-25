@@ -174,7 +174,7 @@ _id_479C() {
 }
 
 _id_4C01() {
-  var_0 = getent("obj_get_in_sub", "targetname");
+  var_0 = getEnt("obj_get_in_sub", "targetname");
   _id_4BFF(1, &"SO_ZODIAC2_NY_HARBOR_OBJ_GET_IN_SUB", var_0);
   objective_setpointertextoverride(1, &"SO_ZODIAC2_NY_HARBOR_HINT_DISARM");
   common_scripts\utility::flag_wait("hatch_open");
@@ -185,7 +185,7 @@ _id_4C01() {
 _id_4C02() {
   objective_add(maps\_utility::_id_2816(2), "active", &"SO_ZODIAC2_NY_HARBOR_OBJ_REACTOR");
   objective_current(maps\_utility::_id_2816(2));
-  var_0 = getent("obj_reactor2", "targetname");
+  var_0 = getEnt("obj_reactor2", "targetname");
   objective_position(maps\_utility::_id_2816(2), var_0.origin);
   common_scripts\utility::flag_wait("bombs_defused_missile_room");
   wait 5.5;
@@ -219,7 +219,7 @@ _id_4C02() {
 
   wait 0.5;
   objective_setpointertextoverride(2, "");
-  var_0 = getent("obj_reactor2", "targetname");
+  var_0 = getEnt("obj_reactor2", "targetname");
   objective_position(maps\_utility::_id_2816(2), var_0.origin);
   common_scripts\utility::flag_wait("reactor_saved");
   objective_position(maps\_utility::_id_2816(2), (0, 0, 0));
@@ -244,7 +244,7 @@ _id_4C05(var_0, var_1) {
 }
 
 _id_4C06(var_0, var_1, var_2) {
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
   objective_position(maps\_utility::_id_2816(var_0), var_3.origin);
 
   if(isDefined(var_2)) {
@@ -259,7 +259,7 @@ _id_4C07() {
   objective_add(maps\_utility::_id_2816(4), "active", &"SO_ZODIAC2_NY_HARBOR_OBJ_AWAIT_CHOPPER");
   objective_current(maps\_utility::_id_2816(4));
   wait 2;
-  var_0 = getent("obj_extraction", "targetname");
+  var_0 = getEnt("obj_extraction", "targetname");
   objective_position(maps\_utility::_id_2816(4), var_0.origin);
   common_scripts\utility::flag_wait("so_zodiac2_ny_harbor_complete");
   maps\_utility::_id_2727(maps\_utility::_id_2816(4));
@@ -291,7 +291,7 @@ _id_4C09() {
   thread _id_4C2A();
   thread _id_4C1F();
   thread _id_4C1D();
-  level._id_45C0 = getent("sandman", "targetname");
+  level._id_45C0 = getEnt("sandman", "targetname");
   wait 0.05;
   level._id_45C0 kill();
 }
@@ -400,18 +400,18 @@ _id_4C13() {
 }
 
 _id_4C14() {
-  var_0 = common_scripts\utility::getstruct("fx_oil_fire", "targetname");
+  var_0 = common_scripts\utility::getStruct("fx_oil_fire", "targetname");
   playFX(common_scripts\utility::getfx("burning_oil_slick_1"), var_0.origin);
-  var_1 = getent("sinking_ship", "targetname");
+  var_1 = getEnt("sinking_ship", "targetname");
   var_1 delete();
   common_scripts\utility::flag_wait("turn_off_fire");
   common_scripts\utility::flag_clear("msg_vfx_sub_interior_a");
-  var_2 = getent("for_fire", "targetname");
+  var_2 = getEnt("for_fire", "targetname");
   playFX(common_scripts\utility::getfx("fire_gen"), var_2.origin);
-  var_3 = getent("for_fire_steam", "targetname");
+  var_3 = getEnt("for_fire_steam", "targetname");
   var_4 = _id_4C9A(var_3);
   playFXOnTag(common_scripts\utility::getfx("steam_jet1"), var_4, "tag_origin");
-  var_5 = getent("for_fire_jet", "targetname");
+  var_5 = getEnt("for_fire_jet", "targetname");
   var_6 = _id_4C9A(var_5);
   playFXOnTag(common_scripts\utility::getfx("fire_steam"), var_6, "tag_origin");
 }
@@ -437,8 +437,8 @@ _id_4C16(var_0, var_1) {
 }
 
 _id_4C17() {
-  var_0 = getent("bridge_breach_loc", "targetname");
-  var_1 = getent("captain_dead", "targetname");
+  var_0 = getEnt("bridge_breach_loc", "targetname");
+  var_1 = getEnt("captain_dead", "targetname");
   var_2 = var_1 maps\_utility::_id_166F(1);
   var_2._id_1032 = "generic";
   var_0 maps\_anim::_id_11C1(var_2, "ny_harbor_paried_takedown_captain_die");
@@ -447,7 +447,7 @@ _id_4C17() {
 }
 
 _id_4C18() {
-  var_0 = getent("no_prone_vol", "targetname");
+  var_0 = getEnt("no_prone_vol", "targetname");
 
   for(;;) {
     if(var_0 istouching(self)) {
@@ -554,7 +554,7 @@ _id_02B0() {
 }
 
 _id_4C21() {
-  var_0 = getent("sight_trigger_front_hatch", "targetname");
+  var_0 = getEnt("sight_trigger_front_hatch", "targetname");
   var_1 = var_0.origin;
   var_0.origin = (50, 50, 50);
   var_0._id_4C22 = 1;
@@ -567,11 +567,11 @@ _id_4C21() {
 }
 
 _id_4C23() {
-  var_0 = getent("ladder_brush", "targetname");
+  var_0 = getEnt("ladder_brush", "targetname");
   var_1 = var_0.origin;
   var_0.origin = (50, 50, 50);
-  var_2 = getent("rear_hatch_cap", "targetname");
-  var_3 = getent("downed_vol_deck", "targetname");
+  var_2 = getEnt("rear_hatch_cap", "targetname");
+  var_3 = getEnt("downed_vol_deck", "targetname");
 
   for(;;) {
     common_scripts\utility::flag_wait("laststand_downed");
@@ -580,9 +580,9 @@ _id_4C23() {
       if(_id_4C24(var_3)) {
         var_0.origin = var_1;
         var_2 notsolid();
-        var_4 = getent("rear_hatch_col", "targetname");
+        var_4 = getEnt("rear_hatch_col", "targetname");
         var_4 notsolid();
-        var_5 = getent("rear_cap_coll_2", "targetname");
+        var_5 = getEnt("rear_cap_coll_2", "targetname");
         var_5 notsolid();
       }
 
@@ -674,7 +674,7 @@ _id_4C2C() {
   level waittill("spawn_exit_chopper");
   var_0 = maps\_vehicle::_id_2881("end_enemy_chopper");
   maps\_audio::aud_send_msg("so_harbor_enemy_chopper_flyover", var_0);
-  var_1 = getent("exit_ladder_pos1", "targetname");
+  var_1 = getEnt("exit_ladder_pos1", "targetname");
   wait 20;
   var_2 = _id_4C2D("f15_enemy_intro");
   wait 1;
@@ -966,7 +966,7 @@ _id_4C48() {
 
 _id_4C49() {
   level waittill("in_missile_room2");
-  var_0 = getent("camera_reactor", "targetname");
+  var_0 = getEnt("camera_reactor", "targetname");
   var_0 playLoopSound("sub_emt_alarm_01");
   level._id_4C4A _id_4C54();
   common_scripts\utility::flag_wait("reactor_saved");
@@ -991,7 +991,7 @@ _id_4C4D(var_0) {
 }
 
 _id_4C4E() {
-  level._id_4C4A = getent("reactor_valve", "targetname");
+  level._id_4C4A = getEnt("reactor_valve", "targetname");
   var_0 = _id_4C59(level._id_4C4A);
   var_0 thread _id_4C4D(level._id_4C4A);
   level._id_4C4F = 0;
@@ -1042,7 +1042,7 @@ _id_4C53(var_0) {
   while(var_0 useButtonPressed()) {
     level._id_4C4F = 1;
     var_2 = self.angles;
-    self rotateto((var_2[0], var_2[1], var_2[2] - var_1), 0.1);
+    self rotateTo((var_2[0], var_2[1], var_2[2] - var_1), 0.1);
     self._id_41B4 = self._id_41B4 + var_1;
     level._id_4BFA = level._id_4BFA - 0.1;
     wait 0.1;
@@ -1077,7 +1077,7 @@ _id_4C55(var_0) {
 
   while(!_id_4C56() && !self._id_41B4 <= 0 && !common_scripts\utility::flag("reactor_saved")) {
     var_2 = self.angles;
-    self rotateto((var_2[0], var_2[1], var_2[2] + var_1), 0.1);
+    self rotateTo((var_2[0], var_2[1], var_2[2] + var_1), 0.1);
     self._id_41B4 = self._id_41B4 - var_1;
     level._id_4BFA = level._id_4BFA + 0.05;
     wait 0.1;
@@ -1126,7 +1126,7 @@ _id_4C59(var_0) {
   var_2 = spawn("script_model", var_0.origin);
   var_2 setModel(var_1);
   var_2 _id_4C9B(var_0);
-  var_2 sethintstring(&"SO_ZODIAC2_NY_HARBOR_HINT_VALVE");
+  var_2 setHintString(&"SO_ZODIAC2_NY_HARBOR_HINT_VALVE");
   return var_2;
 }
 
@@ -1230,14 +1230,14 @@ _id_4C5F(var_0) {
 }
 
 _id_4C60(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger", var_2);
   return var_2;
 }
 
 _id_4C61() {
-  var_0 = getent("camera1", "targetname");
-  var_1 = getent("camera2", "targetname");
+  var_0 = getEnt("camera1", "targetname");
+  var_1 = getEnt("camera2", "targetname");
   var_1 playLoopSound("sub_emt_alarm_01");
   var_0 playLoopSound("sub_emt_alarm_01");
   wait 1;
@@ -1247,17 +1247,17 @@ _id_4C61() {
 _id_4C62() {
   thread _id_4C66();
   common_scripts\utility::flag_wait("bombs_defused_missile_room");
-  var_0 = getent("spawners_door_guys", "targetname");
+  var_0 = getEnt("spawners_door_guys", "targetname");
 
   if(level._id_4BFB) {
-    var_1 = getent("upper_vol", "targetname");
-    var_2 = getent("big_coll_block1_b", "targetname");
+    var_1 = getEnt("upper_vol", "targetname");
+    var_2 = getEnt("big_coll_block1_b", "targetname");
     var_2 notsolid();
-    var_3 = getent("big_coll_block2_b", "targetname");
+    var_3 = getEnt("big_coll_block2_b", "targetname");
     var_3 notsolid();
-    var_4 = getent("big_coll_block1", "targetname");
+    var_4 = getEnt("big_coll_block1", "targetname");
     var_4 notsolid();
-    var_5 = getent("big_coll_block2", "targetname");
+    var_5 = getEnt("big_coll_block2", "targetname");
     var_5 notsolid();
 
     if(var_1 istouching(level.players[0])) {
@@ -1276,8 +1276,8 @@ _id_4C62() {
 }
 
 _id_4C63(var_0) {
-  var_1 = getent(var_0, "targetname");
-  var_2 = getent("vol_for_door_coll_issue", "targetname");
+  var_1 = getEnt(var_0, "targetname");
+  var_2 = getEnt("vol_for_door_coll_issue", "targetname");
 
   for(;;) {
     wait 0.05;
@@ -1305,23 +1305,23 @@ _id_4C64(var_0) {
 }
 
 _id_4C65(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = getent(var_1, "targetname");
-  var_7 = getent(var_3, "targetname");
-  var_8 = getent(var_2, "targetname");
-  var_9 = getent(var_5, "targetname");
-  var_10 = getent("path_blocker", "targetname");
+  var_6 = getEnt(var_1, "targetname");
+  var_7 = getEnt(var_3, "targetname");
+  var_8 = getEnt(var_2, "targetname");
+  var_9 = getEnt(var_5, "targetname");
+  var_10 = getEnt("path_blocker", "targetname");
   var_9 notsolid();
   var_10 notsolid();
-  var_11 = getent("vol_for_door_coll_issue", "targetname");
+  var_11 = getEnt("vol_for_door_coll_issue", "targetname");
   var_6 _id_4C67(var_0);
   wait 6.83333;
-  var_12 = getent(var_4, "targetname");
+  var_12 = getEnt(var_4, "targetname");
   var_13 = _id_4C9A(var_12);
-  var_9 linkto(var_13, "tag_origin");
-  var_8 linkto(var_13, "tag_origin");
-  var_13 rotateto((0, 80, 0), 1);
+  var_9 linkTo(var_13, "tag_origin");
+  var_8 linkTo(var_13, "tag_origin");
+  var_13 rotateTo((0, 80, 0), 1);
   wait 1;
-  var_13 rotateto((0, 120, 0), 1.1);
+  var_13 rotateTo((0, 120, 0), 1.1);
   wait 1;
   var_7.origin = (0, 0, 0);
   wait 5.83333;
@@ -1333,19 +1333,19 @@ _id_4C65(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 _id_4C66() {
-  var_0 = getent("big_coll_block2", "targetname");
-  var_1 = getent("big_coll_block1", "targetname");
+  var_0 = getEnt("big_coll_block2", "targetname");
+  var_1 = getEnt("big_coll_block1", "targetname");
   var_1 notsolid();
-  var_2 = getent("big_coll_block2_b", "targetname");
-  var_3 = getent("big_coll_block1_b", "targetname");
+  var_2 = getEnt("big_coll_block2_b", "targetname");
+  var_3 = getEnt("big_coll_block1_b", "targetname");
   var_3 notsolid();
   var_4 = var_0.origin;
   var_5 = var_1.origin;
   var_6 = var_3.origin;
   common_scripts\utility::flag_wait("bombs_defused_missile_room");
   wait 6.83333;
-  var_0 moveto(var_5, 1.5);
-  var_2 moveto(var_6, 1.5);
+  var_0 moveTo(var_5, 1.5);
+  var_2 moveTo(var_6, 1.5);
   wait 1.5;
   var_0 connectpaths();
   var_2 connectpaths();
@@ -1367,9 +1367,9 @@ _id_4C67(var_0) {
 }
 
 _id_4C68(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = getent(var_1, "targetname");
-  var_6 = getent(var_3, "targetname");
-  var_7 = getent(var_2, "targetname");
+  var_5 = getEnt(var_1, "targetname");
+  var_6 = getEnt(var_3, "targetname");
+  var_7 = getEnt(var_2, "targetname");
   var_7.origin = (0, 0, 0);
   var_8 = maps\_utility::_id_1287("door", var_5.origin);
   var_9 = "open_with_wheel";
@@ -1388,7 +1388,7 @@ _id_4C69() {
     wait 0.05;
   }
   if(isDefined(self)) {
-    self stopanimscripted();
+    self stopanimScripted();
   }
 }
 
@@ -1490,15 +1490,15 @@ _id_4C70(var_0, var_1) {
 
 _id_4C71(var_0, var_1, var_2, var_3) {
   var_4 = 3;
-  var_5 = getent(var_0, "targetname");
-  var_6 = getent(var_1, "targetname");
+  var_5 = getEnt(var_0, "targetname");
+  var_6 = getEnt(var_1, "targetname");
   var_7 = _id_4C9A(var_6);
-  var_5 linkto(var_7, "tag_origin");
-  var_7 rotateto((0, var_2, 0), var_4);
+  var_5 linkTo(var_7, "tag_origin");
+  var_7 rotateTo((0, var_2, 0), var_4);
   wait(var_4 / 2);
 
   if(isDefined(var_3)) {
-    var_8 = getent(var_3, "targetname");
+    var_8 = getEnt(var_3, "targetname");
     var_8.origin = (0, 0, 0);
     var_8 connectpaths();
   }
@@ -1578,7 +1578,7 @@ _id_4C79(var_0) {
 }
 
 _id_4C7A(var_0) {
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
 
   if(isDefined(var_0.angles)) {
     self setplayerangles(var_0.angles);
@@ -1586,7 +1586,7 @@ _id_4C7A(var_0) {
 }
 
 _id_4C7B() {
-  var_0 = getent("exit_missile_room_1", "targetname");
+  var_0 = getEnt("exit_missile_room_1", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1636,12 +1636,12 @@ _id_4C7E() {
   _id_4C7F("barracks_open_door_col", 1);
   _id_4C7F("barracks_open_door_right_col", 1);
   _id_4C7F("sub_graph_blocker", 1);
-  level._id_4B81 = getent("frag_grenade", "targetname");
+  level._id_4B81 = getEnt("frag_grenade", "targetname");
   level._id_4B81 hide();
 }
 
 _id_4C7F(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(isDefined(var_2)) {
     var_2.origin = (0, 0, 0);
@@ -1660,13 +1660,13 @@ _id_4B7C() {
   maps\_compass::setupminimap("compass_map_ny_harbor");
   var_3 = getEntArray("rear_hatch_collision", "targetname");
   common_scripts\utility::array_call(var_3, ::delete);
-  var_4 = getent("hatch_component1", "targetname");
-  var_5 = getent("hatch_component2", "targetname");
-  var_6 = getent("hatch_org", "targetname");
+  var_4 = getEnt("hatch_component1", "targetname");
+  var_5 = getEnt("hatch_component2", "targetname");
+  var_6 = getEnt("hatch_org", "targetname");
   var_7 = _id_4C9A(var_6);
-  var_4 linkto(var_7, "tag_origin");
-  var_5 linkto(var_7, "tag_origin");
-  var_7 rotateto((154, 0, 180), 1.35);
+  var_4 linkTo(var_7, "tag_origin");
+  var_5 linkTo(var_7, "tag_origin");
+  var_7 rotateTo((154, 0, 180), 1.35);
   level notify("spawn_exit_chopper");
 }
 
@@ -1677,10 +1677,10 @@ _id_4C81() {
 
 _id_4C82(var_0, var_1, var_2) {
   thread _id_4B85(var_0, "exit_ladder_pos1", "exit_ladder_pos0");
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   var_3._id_4C22 = 0;
   common_scripts\utility::array_thread(level.players, ::_id_4C83, var_3, var_2);
-  var_4 = getent(var_1, "targetname");
+  var_4 = getEnt(var_1, "targetname");
 
   for(;;) {
     var_4 waittill("trigger", var_5);
@@ -1689,7 +1689,7 @@ _id_4C82(var_0, var_1, var_2) {
 }
 
 _id_4C83(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_3 = var_0.origin;
 
   for(;;) {
@@ -1709,7 +1709,7 @@ _id_4C83(var_0, var_1) {
 }
 
 _id_4C84(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_3 = var_0.origin;
 
   for(;;) {
@@ -1729,7 +1729,7 @@ _id_4C84(var_0, var_1) {
 }
 
 _id_4C85(var_0) {
-  var_1 = getent("ladder_safety_clip_vol", "targetname");
+  var_1 = getEnt("ladder_safety_clip_vol", "targetname");
 
   if(!level._id_4BFB) {
     foreach(var_3 in level.players) {
@@ -1745,12 +1745,12 @@ _id_4C85(var_0) {
 }
 
 _id_4B85(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
-  var_4 = getent("dont_allow_ladder", "targetname");
+  var_3 = getEnt(var_0, "targetname");
+  var_4 = getEnt("dont_allow_ladder", "targetname");
 
   for(;;) {
-    var_3 sethintstring(&"NY_HARBOR_HINT_USE_TO_ENTER");
-    var_3 usetriggerrequirelookat();
+    var_3 setHintString(&"NY_HARBOR_HINT_USE_TO_ENTER");
+    var_3 useTriggerRequireLookAt();
     var_3 waittill("trigger", var_5);
 
     if(!var_4 istouching(var_5)) {
@@ -1760,7 +1760,7 @@ _id_4B85(var_0, var_1, var_2) {
 }
 
 _id_4C86() {
-  var_0 = getent("check_for_player_using_ladder", "targetname");
+  var_0 = getEnt("check_for_player_using_ladder", "targetname");
 
   foreach(var_2 in level.players) {
     if(var_0 istouching(var_2)) {
@@ -1772,17 +1772,17 @@ _id_4C86() {
 }
 
 _id_4C87(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = getent(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = getEnt(var_1, "targetname");
 
   if(!self._id_4C80 && !_id_4C86()) {
     var_4 = _id_4C9A(self);
     self._id_4C80 = 1;
-    self playerlinkto(var_4, "tag_origin", 1);
-    var_4 moveto(var_2.origin, 0.25);
+    self playerlinkTo(var_4, "tag_origin", 1);
+    var_4 moveTo(var_2.origin, 0.25);
     wait 0.25;
-    var_4 moveto(var_3.origin, 0.75);
-    var_4 rotateto(var_3.angles, 0.75);
+    var_4 moveTo(var_3.origin, 0.75);
+    var_4 rotateTo(var_3.angles, 0.75);
     wait 0.8;
     self unlink();
     self._id_4C80 = 0;
@@ -1791,23 +1791,23 @@ _id_4C87(var_0, var_1) {
 }
 
 _id_4C88() {
-  var_0 = getent("exit_ladder_pos1", "targetname");
-  var_1 = getent("exit_ladder_pos2_p0", "targetname");
-  var_2 = getent("exit_ladder_pos2_p1", "targetname");
+  var_0 = getEnt("exit_ladder_pos1", "targetname");
+  var_1 = getEnt("exit_ladder_pos2_p0", "targetname");
+  var_2 = getEnt("exit_ladder_pos2_p1", "targetname");
 
   if(!self._id_4C80) {
     var_3 = _id_4C9A(self);
     self._id_4C80 = 1;
-    self playerlinkto(var_3, "tag_origin", 1);
-    var_3 moveto(var_0.origin, 1);
+    self playerlinkTo(var_3, "tag_origin", 1);
+    var_3 moveTo(var_0.origin, 1);
     wait 1;
 
     if(self == level.players[0]) {
-      var_3 moveto(var_1.origin, 1);
-      var_3 rotateto(var_1.angles, 1);
+      var_3 moveTo(var_1.origin, 1);
+      var_3 rotateTo(var_1.angles, 1);
     } else {
-      var_3 moveto(var_2.origin, 1);
-      var_3 rotateto(var_2.angles, 1);
+      var_3 moveTo(var_2.origin, 1);
+      var_3 rotateTo(var_2.angles, 1);
     }
 
     wait 1;
@@ -1845,7 +1845,7 @@ _id_4C8B() {
 
 _id_4C8C() {
   common_scripts\utility::flag_wait("spawn_exit_chopper");
-  var_0 = getent("so_exit_volume", "script_noteworthy");
+  var_0 = getEnt("so_exit_volume", "script_noteworthy");
   maps\_audio::aud_send_msg("so_start_harbor_exit_hind", level._id_4483);
   var_0 thread _id_4C90(level._id_4483);
 }
@@ -1883,33 +1883,33 @@ _id_4C90(var_0) {
 }
 
 _id_4B7D() {
-  var_0 = getent("rear_hatch_col", "targetname");
+  var_0 = getEnt("rear_hatch_col", "targetname");
   var_0 notsolid();
   common_scripts\utility::flag_wait("hatch_open");
   var_1 = _id_4C94();
   maps\_compass::setupminimap("compass_map_ny_harbor_sub", "sub_minimap_corner");
   setsaveddvar("compassmaxrange", 1000);
-  var_1 rotateto((89, var_1.angles[1], var_1.angles[2]), 3);
+  var_1 rotateTo((89, var_1.angles[1], var_1.angles[2]), 3);
 }
 
 _id_4C91() {
-  var_0 = getent("exit_missile_room_1", "targetname");
+  var_0 = getEnt("exit_missile_room_1", "targetname");
   common_scripts\utility::array_thread(level.players, ::_id_4C92, var_0);
-  var_1 = getent("ladder_brush_bridge", "targetname");
+  var_1 = getEnt("ladder_brush_bridge", "targetname");
   var_2 = var_1.origin;
   var_1.origin = (50, 50, 50);
   common_scripts\utility::flag_wait("spawn_enemy_chopper2");
-  var_3 = getent("sight_trigger_front_hatch", "targetname");
+  var_3 = getEnt("sight_trigger_front_hatch", "targetname");
   var_3.origin = (50, 50, 50);
 
   if(common_scripts\utility::flag("close_hatch")) {
     var_4 = _id_4C94();
-    var_4 rotateto((-89, var_4.angles[1], var_4.angles[2]), 3);
-    var_5 = getent("rear_hatch_col", "targetname");
+    var_4 rotateTo((-89, var_4.angles[1], var_4.angles[2]), 3);
+    var_5 = getEnt("rear_hatch_col", "targetname");
     var_5 solid();
-    var_6 = getent("rear_hatch_cap", "targetname");
+    var_6 = getEnt("rear_hatch_cap", "targetname");
     var_6 solid();
-    var_7 = getent("rear_cap_coll_2", "targetname");
+    var_7 = getEnt("rear_cap_coll_2", "targetname");
     var_7 solid();
   } else {
     var_1.origin = var_2;
@@ -1934,16 +1934,16 @@ _id_4C92(var_0) {
 }
 
 _id_4C94() {
-  var_0 = getent("rear_hatch_component1", "targetname");
-  var_1 = getent("rear_hatch_component2", "targetname");
-  var_2 = getent("rear_hatch_col_top", "targetname");
+  var_0 = getEnt("rear_hatch_component1", "targetname");
+  var_1 = getEnt("rear_hatch_component2", "targetname");
+  var_2 = getEnt("rear_hatch_col_top", "targetname");
   var_2 notsolid();
-  var_3 = getent("rear_hatch_org", "targetname");
+  var_3 = getEnt("rear_hatch_org", "targetname");
   var_4 = _id_4C9A(var_3);
-  var_0 linkto(var_4, "tag_origin");
-  var_1 linkto(var_4, "tag_origin");
-  var_2 linkto(var_4, "tag_origin");
-  var_5 = getent("rear_hatch_col_interior", "targetname");
+  var_0 linkTo(var_4, "tag_origin");
+  var_1 linkTo(var_4, "tag_origin");
+  var_2 linkTo(var_4, "tag_origin");
+  var_5 = getEnt("rear_hatch_col_interior", "targetname");
   var_5 notsolid();
   return var_4;
 }
@@ -1961,13 +1961,13 @@ _id_4C95(var_0, var_1) {
 }
 
 _id_4C96(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
   var_3 = _id_4C99(var_2, var_1);
   return var_3;
 }
 
 _id_4C97(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = _id_4C99(var_2, var_1);
   return var_3;
 }
@@ -1979,7 +1979,7 @@ _id_4C98(var_0, var_1) {
 
 _id_4C99(var_0, var_1) {
   var_2 = _id_4C9A(var_0);
-  var_2 linkto(var_1, "tag_origin");
+  var_2 linkTo(var_1, "tag_origin");
   return var_2;
 }
 
@@ -2115,7 +2115,7 @@ _id_4B5C(var_0, var_1) {
 
   var_3._id_1032 = "missile_door";
   var_3 maps\_anim::_id_1244();
-  var_7 linkto(var_3, "door");
+  var_7 linkTo(var_3, "door");
   maps\_audio::aud_send_msg("sub_missile_door_open", var_7);
   var_7 playSound("russian_sub_missile_door");
   var_3 maps\_anim::_id_1246(var_3, "open");
@@ -2182,7 +2182,7 @@ _id_4B48() {
 
 _id_4B4D() {
   level endon("stop_rocking");
-  var_0 = getent("rocking_reference", "targetname");
+  var_0 = getEnt("rocking_reference", "targetname");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_2 = undefined;
 
@@ -2210,7 +2210,7 @@ _id_4B4D() {
 
   if(isDefined(var_2)) {
     foreach(var_7 in var_4) {}
-    var_7 linkto(var_2, "tag_origin");
+    var_7 linkTo(var_2, "tag_origin");
   }
 
   thread _id_4B54();
@@ -2225,11 +2225,11 @@ _id_4B4D() {
     var_1._id_4B50 = var_15;
     var_1._id_4B51 = gettime() + 1000 * var_13;
     maps\_audio::aud_send_msg("if_the_sub_is_a_rocking_dont_come_a_knocking");
-    var_1 rotateto(var_15, var_13, var_13 / 3, var_13 / 3);
+    var_1 rotateTo(var_15, var_13, var_13 / 3, var_13 / 3);
 
     if(isDefined(var_2)) {
       var_15 = (0, 0, 0.5 * var_14);
-      var_2 rotateto(var_15, var_13, var_13 / 3, var_13 / 3);
+      var_2 rotateTo(var_15, var_13, var_13 / 3, var_13 / 3);
     }
 
     wait(var_13);
@@ -2243,24 +2243,24 @@ _id_4B54() {
   var_0 = getEntArray("sub_pressuredoor_rocker", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
-    var_2 linkto(var_3);
+    var_3 = getEnt(var_2.target, "targetname");
+    var_2 linkTo(var_3);
     level._id_4B55[level._id_4B55.size] = var_3;
   }
 
   var_0 = getEntArray("sub_pressuredoor_rocker_opposite", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
-    var_2 linkto(var_3);
+    var_3 = getEnt(var_2.target, "targetname");
+    var_2 linkTo(var_3);
     level._id_4B56[level._id_4B56.size] = var_3;
   }
 
   var_7 = getEntArray("dyn_hanger", "targetname");
 
   foreach(var_9 in var_7) {
-    var_3 = getent(var_9.target, "targetname");
-    var_9 linkto(var_3);
+    var_3 = getEnt(var_9.target, "targetname");
+    var_9 linkTo(var_3);
     level._id_4B57[level._id_4B57.size] = var_3;
   }
 }
@@ -2269,30 +2269,30 @@ _id_4B58(var_0, var_1, var_2, var_3) {
   var_4 = 3 * (level._id_4B47[1] * var_0);
 
   foreach(var_6 in level._id_4B55) {}
-  var_6 rotateto((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
+  var_6 rotateTo((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
 
   foreach(var_6 in level._id_4B56) {}
-  var_6 rotateto((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
+  var_6 rotateTo((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
 
   foreach(var_6 in level._id_4B57) {
     switch (var_6.script_noteworthy) {
       case "x":
-        var_6 rotateto((var_6.angles[0] + var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0] + var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "x_neg":
-        var_6 rotateto((var_6.angles[0] + -1 * var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0] + -1 * var_4, var_6.angles[1], var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "y":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1] + var_4, var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "y_neg":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1] + -1 * var_4, var_6.angles[0]), var_1, var_2, var_3);
         break;
       case "z":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1], var_6.angles[0] + var_4), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1], var_6.angles[0] + var_4), var_1, var_2, var_3);
         break;
       case "z_neg":
-        var_6 rotateto((var_6.angles[0], var_6.angles[1], var_6.angles[0] + -1 * var_4), var_1, var_2, var_3);
+        var_6 rotateTo((var_6.angles[0], var_6.angles[1], var_6.angles[0] + -1 * var_4), var_1, var_2, var_3);
         break;
       default:
         break;
@@ -2308,12 +2308,12 @@ _id_4B59(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_9 in var_0) {
     var_10 = randomfloatrange(4, 12);
     var_11 = var_9._id_4B07 + var_10 * var_7 * var_5;
-    var_9 moveto(var_11, var_2, var_3, var_4);
+    var_9 moveTo(var_11, var_2, var_3, var_4);
     var_12 = randomfloatrange(3 * level._id_4B47[0], 3 * level._id_4B47[1]);
     var_13 = var_12 * var_7;
     var_14 = (var_9._id_4B4F[0] * var_13, var_9._id_4B4F[1] * var_13, var_9._id_4B4F[2] * var_13);
     var_1 = var_9._id_4B4E + var_14;
-    var_9 rotateto(var_1, var_2, var_3, var_4);
+    var_9 rotateTo(var_1, var_2, var_3, var_4);
   }
 }
 
@@ -2321,14 +2321,14 @@ _id_4B52(var_0) {
   level endon("stop_rocking");
   thread _id_4B53();
   var_1 = 0;
-  var_2 = common_scripts\utility::getstruct("jolter", "targetname");
+  var_2 = common_scripts\utility::getStruct("jolter", "targetname");
   common_scripts\utility::flag_wait("hatch_player_using_ladder");
 
   for(;;) {
     var_3 = anglestoup(var_0.angles);
     var_4 = -1 * var_3;
     var_5 = var_4 * (1, 10, 0.75);
-    var_6 = vectornormalize(var_5);
+    var_6 = vectorNormalize(var_5);
     setphysicsgravitydir(var_6);
     var_1++;
 
@@ -2692,7 +2692,7 @@ _id_4CB1() {
 }
 
 _id_4CB2() {
-  var_0 = getent("smoke_kills_vol", "targetname");
+  var_0 = getEnt("smoke_kills_vol", "targetname");
   self waittill("death", var_1, var_2, var_3);
 
   if(isPlayer(var_1) && var_0 istouching(self)) {

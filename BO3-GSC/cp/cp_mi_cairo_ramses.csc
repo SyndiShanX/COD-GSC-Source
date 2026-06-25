@@ -109,7 +109,7 @@ function attach_camera_to_train(localclientnum, oldval, newval, bnewent, binitia
     s_org = struct::get("train_extra_cam", "targetname");
     self.e_extracam = spawn(localclientnum, s_org.origin, "script_origin");
     self.e_extracam.angles = s_org.angles;
-    self.e_extracam linkto(self);
+    self.e_extracam linkTo(self);
     level.e_train_extra_cam = self.e_extracam;
   } else if(isDefined(self.e_extracam)) {
     self.e_extracam delete();
@@ -130,7 +130,7 @@ function intro_reflection_extracam(localclientnum, oldval, newval, bnewent, bini
 }
 
 function function_6aab1d81(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  e_extra_cam = getent(localclientnum, "interview_extra_cam", "targetname");
+  e_extra_cam = getEnt(localclientnum, "interview_extra_cam", "targetname");
   if(newval == 1) {
     if(isDefined(e_extra_cam)) {
       e_extra_cam setextracam(0);

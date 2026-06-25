@@ -779,8 +779,8 @@ UAVRemoteLauncherSequence(player, weap) {
   player Unlink();
 
   player DisableWeapons();
-  player CameraLinkTo(missile, "tag_origin");
-  player ControlsLinkTo(missile);
+  player CameralinkTo(missile, "tag_origin");
+  player ControlslinkTo(missile);
 
   noDamage = WaitWithAbortOnDamage(0.2);
   if(!noDamage) {

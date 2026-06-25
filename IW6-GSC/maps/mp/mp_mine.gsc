@@ -81,14 +81,14 @@ setupGameTypeFlags(elevator) {
     level thread updateBFlagObjIcon();
 
     domFlag = getDomFlagB();
-    domflag EnableLinkTo();
-    domflag LinkTo(ELEVATOR);
+    domflag EnablelinkTo();
+    domflag linkTo(ELEVATOR);
 
     while(!isDefined(domflag.useObj)) {
       waitframe();
     }
     foreach(vis in domflag.useObj.visuals) {
-      vis LinkTo(ELEVATOR);
+      vis linkTo(ELEVATOR);
     }
   }
 }
@@ -141,34 +141,34 @@ updateBFlagObjIcon() {
   tag_origin = spawn_tag_origin();
   tag_origin show();
   tag_origin.origin = bFlag.origin + (0, 0, 100);
-  tag_origin LinkTo(bFlag);
+  tag_origin linkTo(bFlag);
   bFlag.useObj.objIconEnt = tag_origin;
   bFlag.useObj maps\mp\gametypes\_gameobjects::updateWorldIcons();
 }
 
 setupElevator() {
-  ELEVATOR = GetEnt("elevator", "targetname");
-  GEARS = GetEnt("elevatorGears", "targetname");
-  BLOCKER = GetEnt("elevatorPathNodeHolders", "targetname");
-  BLOCKERTOP = GetEnt("elevatorPathNodeTop", "targetname");
-  BLOCKERMID = GetEnt("elevatorPathNodeMid", "targetname");
-  BLOCKERBOT = GetEnt("elevatorPathNodeBot", "targetname");
+  ELEVATOR = getEnt("elevator", "targetname");
+  GEARS = getEnt("elevatorGears", "targetname");
+  BLOCKER = getEnt("elevatorPathNodeHolders", "targetname");
+  BLOCKERTOP = getEnt("elevatorPathNodeTop", "targetname");
+  BLOCKERMID = getEnt("elevatorPathNodeMid", "targetname");
+  BLOCKERBOT = getEnt("elevatorPathNodeBot", "targetname");
   MOVETIME = 6;
   WAITTIME = 20;
-  STRUCTTOP = getstruct("elevatorTop", "targetname");
-  STRUCTBOT = getstruct("elevatorBot", "targetname");
+  STRUCTTOP = getStruct("elevatorTop", "targetname");
+  STRUCTBOT = getStruct("elevatorBot", "targetname");
 
   ELEVATORMODELS = getEntArray("elevatorAttachedModels", "targetname");
   foreach(detail in ELEVATORMODELS) {
-    detail LinkTo(ELEVATOR);
+    detail linkTo(ELEVATOR);
   }
-  ELEVATORKILL = GetEnt("elevatorDamage", "targetname");
-  ELEVATORKILL EnableLinkTo();
-  ELEVATORKILL LinkTo(ELEVATOR);
+  ELEVATORKILL = getEnt("elevatorDamage", "targetname");
+  ELEVATORKILL EnablelinkTo();
+  ELEVATORKILL linkTo(ELEVATOR);
 
   GEARKILL = ELEVATOR linkTrigger("elevatorGearCrushTrigger");
 
-  BEAMKILL = GetEnt("elevatorSquish", "targetname");
+  BEAMKILL = getEnt("elevatorSquish", "targetname");
   BEAMKILL.dmg = 0;
 
   ELEVATOR ConnectPaths();
@@ -181,18 +181,18 @@ setupElevator() {
 
   blockerConnect(BLOCKERTOP);
 
-  leftSoundEnt = GetEnt("elevatorWheelLeft", "targetname");
-  leftSoundEnt LinkTo(GEARS);
+  leftSoundEnt = getEnt("elevatorWheelLeft", "targetname");
+  leftSoundEnt linkTo(GEARS);
 
-  rightSoundEnt = GetEnt("elevatorWheelRight", "targetname");
-  rightSoundEnt LinkTo(GEARS);
+  rightSoundEnt = getEnt("elevatorWheelRight", "targetname");
+  rightSoundEnt linkTo(GEARS);
 
   wait 10;
 
   while(true) {
     GEARS RotatePitch(-1 * 256.1, MOVETIME, 1, 1);
-    GEARS MoveTo((-59, 256, 287), MOVETIME, 1, 1);
-    ELEVATOR MoveTo(STRUCTBOT.origin, MOVETIME, 1, 1);
+    GEARS moveTo((-59, 256, 287), MOVETIME, 1, 1);
+    ELEVATOR moveTo(STRUCTBOT.origin, MOVETIME, 1, 1);
     ELEVATORKILL.dmg = 1000;
     ELEVATOR.destroyDroneOnCollision = true;
     ELEVATOR.destroyAirdropOnCollision = true;
@@ -216,8 +216,8 @@ setupElevator() {
     wait WAITTIME;
 
     GEARS RotatePitch(1 * 256.1, MOVETIME, 1, 1);
-    GEARS MoveTo((-59, 256, 543), MOVETIME, 1, 1);
-    ELEVATOR MoveTo(STRUCTTOP.origin, MOVETIME, 1, 1);
+    GEARS moveTo((-59, 256, 543), MOVETIME, 1, 1);
+    ELEVATOR moveTo(STRUCTTOP.origin, MOVETIME, 1, 1);
     ELEVATORKILL.dmg = 0;
     ELEVATOR.destroyDroneOnCollision = false;
     ELEVATOR.destroyAirdropOnCollision = false;
@@ -260,7 +260,7 @@ blockerConnect(BLOCKENT) {
 blockerDisconnect(BLOCKENT) {
   BLOCKENT Show();
   BLOCKENT Solid();
-  BLOCKENT DisconnectPaths();
+  BLOCKENT disconnectPaths();
 }
 
 elevatorStartGears(floorName) {
@@ -268,7 +268,7 @@ elevatorStartGears(floorName) {
   if(floorName == self.destinationNames[0]) {
     foreach(gear in gears) {
       gear RotatePitch(1 * 360, self.moveTime, 0, 0);
-      gear MoveTo((-59, 256, 543), self.moveTime, 0, 0);
+      gear moveTo((-59, 256, 543), self.moveTime, 0, 0);
     }
 
     self maps\mp\_elevator_v2::elevatorClearPath("elevatorMid");
@@ -279,7 +279,7 @@ elevatorStartGears(floorName) {
   } else {
     foreach(gear in gears) {
       gear RotatePitch(-1 * 360, self.moveTime, 0, 0);
-      gear MoveTo((-59, 256, 287), self.moveTime, 0, 0);
+      gear moveTo((-59, 256, 287), self.moveTime, 0, 0);
     }
 
     self maps\mp\_elevator_v2::elevatorClearPath("elevatorMid");
@@ -292,9 +292,9 @@ elevatorStartGears(floorName) {
 
 MINE_CART_SLOW_SPEED_LIMIT = 250;
 MineCartSetup(CartName, FirstNode, LinkedModels, DamageTrigger, insideTriggerName, frontTriggerName) {
-  MINE_CART = GetEnt(CartName, "targetname");
+  MINE_CART = getEnt(CartName, "targetname");
   MINE_CART_SPEED = 1.0 / MINE_CART_SLOW_SPEED_LIMIT;
-  MINE_CART_DESTINATION = getstruct(FirstNode, "targetname");
+  MINE_CART_DESTINATION = getStruct(FirstNode, "targetname");
 
   insideTrigger = MINE_CART linkTrigger(insideTriggerName);
   MINE_CART thread setupMineCartInsideTrigger(insideTrigger);
@@ -304,7 +304,7 @@ MineCartSetup(CartName, FirstNode, LinkedModels, DamageTrigger, insideTriggerNam
 
   CartModels = getEntArray(LinkedModels, "targetname");
   foreach(detail in CartModels) {
-    detail LinkTo(MINE_CART);
+    detail linkTo(MINE_CART);
     detail.destroyDroneOnCollision = false;
     detail.destroyAirdropOnCollision = true;
   }
@@ -312,7 +312,7 @@ MineCartSetup(CartName, FirstNode, LinkedModels, DamageTrigger, insideTriggerNam
   MINE_CART.destroyAirdropOnCollision = true;
 
   killCamEnt = spawn("script_model", MINE_CART.origin + (0, 0, 60));
-  killCamEnt LinkTo(MINE_CART);
+  killCamEnt linkTo(MINE_CART);
   MINE_CART.killCamEnt = killCamEnt;
   MINE_CART.killCamEnt SetScriptMoverKillCam("explosive");
 
@@ -354,10 +354,10 @@ MineCartSetup(CartName, FirstNode, LinkedModels, DamageTrigger, insideTriggerNam
 MineCartMove(Cart, CurrentNode, CartSpeed) {
   Cart endon("death");
 
-  NEXT_NODE = getstruct(CurrentNode.target, "targetname");
+  NEXT_NODE = getStruct(CurrentNode.target, "targetname");
   MOVE_TIME = abs(Distance(Cart.origin, NEXT_NODE.origin) * CartSpeed);
-  Cart MoveTo(NEXT_NODE.origin, MOVE_TIME, 0, 0);
-  Cart RotateTo(NEXT_NODE.angles, MOVE_TIME, 0, 0);
+  Cart moveTo(NEXT_NODE.origin, MOVE_TIME, 0, 0);
+  Cart rotateTo(NEXT_NODE.angles, MOVE_TIME, 0, 0);
   wait(MOVE_TIME);
 
   Cart mineCartHandleEvents(NEXT_NODE.script_noteworthy);
@@ -366,18 +366,18 @@ MineCartMove(Cart, CurrentNode, CartSpeed) {
 }
 
 MineCartElevatorMove(ElevatorSpeed) {
-  CARTELEVATE = GetEnt("cart2Elevator", "targetname");
-  ELEVATENODEBOT = getstruct("cart2TrackStart", "targetname");
-  ELEVATENODETOP = getstruct("cart2ElevatorTop", "targetname");
-  BLOCKERTOP = GetEnt("cartElevatorPathNodeTop", "targetname");
-  BLOCKERBOT = GetEnt("cartElevatorPathNodeBot", "targetname");
+  CARTELEVATE = getEnt("cart2Elevator", "targetname");
+  ELEVATENODEBOT = getStruct("cart2TrackStart", "targetname");
+  ELEVATENODETOP = getStruct("cart2ElevatorTop", "targetname");
+  BLOCKERTOP = getEnt("cartElevatorPathNodeTop", "targetname");
+  BLOCKERBOT = getEnt("cartElevatorPathNodeBot", "targetname");
   ELEVATEMOVETIME = abs(Distance(ELEVATENODEBOT.origin, ELEVATENODETOP.origin) * ElevatorSpeed);
 
   CARTELEVATE.unresolved_collision_kill = true;
 
   CARTELEVATE.destroyDroneOnCollision = false;
   CARTELEVATE PlaySoundOnMovingEnt("minecart2_elevator_up");
-  CARTELEVATE MoveTo(ELEVATENODETOP.origin, ELEVATEMOVETIME, 0, 0);
+  CARTELEVATE moveTo(ELEVATENODETOP.origin, ELEVATEMOVETIME, 0, 0);
   blockerDisconnect(BLOCKERBOT);
   wait(ELEVATEMOVETIME);
   blockerConnect(BLOCKERTOP);
@@ -386,7 +386,7 @@ MineCartElevatorMove(ElevatorSpeed) {
 
   CARTELEVATE.destroyDroneOnCollision = true;
   CARTELEVATE PlaySoundOnMovingEnt("minecart2_elevator_down");
-  CARTELEVATE MoveTo(ELEVATENODEBOT.origin, ELEVATEMOVETIME, 0, 0);
+  CARTELEVATE moveTo(ELEVATENODEBOT.origin, ELEVATEMOVETIME, 0, 0);
   wait(ELEVATEMOVETIME - 2);
   trigger_on("cart2ElevatorKill", "targetname");
   wait(2);
@@ -399,10 +399,10 @@ setupElevatorKillTrigger() {
 }
 
 linkTrigger(triggerName) {
-  trigger = GetEnt(triggerName, "targetname");
+  trigger = getEnt(triggerName, "targetname");
   if(isDefined(trigger)) {
-    trigger EnableLinkTo();
-    trigger LinkTo(self);
+    trigger EnablelinkTo();
+    trigger linkTo(self);
   }
 
   return trigger;
@@ -634,7 +634,7 @@ customBotKillstreakFunc() {
 ambientAnimations() {
   wait(3);
 
-  wheels = GetEnt("spinny_wheels", "targetname");
+  wheels = getEnt("spinny_wheels", "targetname");
   if(isDefined(wheels)) {
     wheels ScriptModelPlayAnim("mp_mine_spinning_wheels");
   }
@@ -690,7 +690,7 @@ cart_unresolved_collision_func(player, bAllowSuicide) {
 
 setupPushTrigger(triggerName, pushAngles) {
   level endon("game_ended");
-  trigger = GetEnt(triggerName, "targetname");
+  trigger = getEnt(triggerName, "targetname");
 
   if(!isDefined(trigger)) {
     return;

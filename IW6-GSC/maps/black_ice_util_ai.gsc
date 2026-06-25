@@ -23,10 +23,10 @@ ally_advance_watcher(var_0, var_1, var_2, var_3) {
     common_scripts\utility::flag_init("flag_allies_player_near");
   }
 
-  var_5 = getent(var_0, "script_noteworthy");
+  var_5 = getEnt(var_0, "script_noteworthy");
 
   if(!isDefined(var_5)) {
-    var_5 = getent(var_0, "targetname");
+    var_5 = getEnt(var_0, "targetname");
   }
 
   var_6 = 1;

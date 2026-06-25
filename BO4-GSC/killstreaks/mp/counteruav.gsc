@@ -137,7 +137,7 @@ initrotatingrig() {
 
 rotaterig() {
   for(;;) {
-    self rotateyaw(360, 60);
+    self rotateYaw(360, 60);
     wait 60;
   }
 }
@@ -148,11 +148,11 @@ swayrig() {
   for(;;) {
     z = randomintrange(-200, -100);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
     z = randomintrange(100, 200);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
   }
 }
@@ -324,10 +324,10 @@ function_7c61ce31() {
   radiusoffset = (isDefined(level.uav_rotation_radius) ? level.uav_rotation_radius : 4000) + randomint(isDefined(level.uav_rotation_random_offset) ? level.uav_rotation_random_offset : 1000);
   xoffset = cos(angle) * radiusoffset;
   yoffset = sin(angle) * radiusoffset;
-  anglevector = vectornormalize((xoffset, yoffset, zoffset));
+  anglevector = vectorNormalize((xoffset, yoffset, zoffset));
   anglevector *= zoffset;
   anglevector = (anglevector[0], anglevector[1], zoffset - level.var_f6bf445b.origin[2]);
-  self linkto(level.var_f6bf445b, "tag_origin", anglevector, (0, angle + 90, 0));
+  self linkTo(level.var_f6bf445b, "tag_origin", anglevector, (0, angle + 90, 0));
 }
 
 hackedprefunction(hacker) {
@@ -338,7 +338,7 @@ hackedprefunction(hacker) {
 spawncounteruav(owner, killstreak_id) {
   minflyheight = airsupport::getminimumflyheight();
   bundle = struct::get_script_bundle("killstreak", "killstreak_counteruav");
-  cuav = spawnvehicle(bundle.ksvehicle, airsupport::getmapcenter() + (0, 0, minflyheight + (isDefined(level.counter_uav_position_z_offset) ? level.counter_uav_position_z_offset : 1000)), (0, 0, 0), "counteruav");
+  cuav = spawnVehicle(bundle.ksvehicle, airsupport::getmapcenter() + (0, 0, minflyheight + (isDefined(level.counter_uav_position_z_offset) ? level.counter_uav_position_z_offset : 1000)), (0, 0, 0), "counteruav");
   cuav assignfirstavailableoffsetindex();
   cuav killstreaks::configure_team("counteruav", killstreak_id, owner, undefined, undefined, &configureteampost);
   cuav killstreak_hacking::enable_hacking("counteruav", &hackedprefunction, undefined);

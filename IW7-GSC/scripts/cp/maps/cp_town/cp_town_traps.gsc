@@ -68,22 +68,22 @@ trap_debug_devgui() {
       var_0 = getDvar("scr_craft_pickup");
       switch (var_0) {
         case "freeze":
-          var_1 = scripts\engine\utility::getstruct("trap_freeze_part", "script_noteworthy");
+          var_1 = scripts\engine\utility::getStruct("trap_freeze_part", "script_noteworthy");
           freeze_trap_take_part(var_1, level.players[0]);
           break;
 
         case "pool":
-          var_1 = scripts\engine\utility::getstruct("trap_pool_part", "script_noteworthy");
+          var_1 = scripts\engine\utility::getStruct("trap_pool_part", "script_noteworthy");
           pool_trap_take_part(var_1, level.players[0]);
           break;
 
         case "electric":
-          var_1 = scripts\engine\utility::getstruct("trap_electric_part", "script_noteworthy");
+          var_1 = scripts\engine\utility::getStruct("trap_electric_part", "script_noteworthy");
           electric_trap_take_part(var_1, level.players[0]);
           break;
 
         case "propane":
-          var_1 = scripts\engine\utility::getstruct("trap_propane_part", "script_noteworthy");
+          var_1 = scripts\engine\utility::getStruct("trap_propane_part", "script_noteworthy");
           propane_trap_take_part(var_1, level.players[0]);
           break;
       }
@@ -111,7 +111,7 @@ electric_trap_init() {
     }
   }
 
-  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   if(isDefined(var_10.angles)) {
     var_11 = (322.4, 26, -6.6);
   } else {
@@ -121,7 +121,7 @@ electric_trap_init() {
   var_2.part = spawn("script_model", (5561, -2903, 119));
   var_2.part.angles = var_11;
   var_2.part setModel("container_electrical_box_01_components");
-  var_12 = scripts\engine\utility::getstruct("fix_electric_trap", "script_noteworthy");
+  var_12 = scripts\engine\utility::getStruct("fix_electric_trap", "script_noteworthy");
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_12);
   level waittill("power_active");
   level.interactions["fix_electric_trap"].disable_guided_interactions = undefined;
@@ -154,14 +154,14 @@ electric_trap_fix(var_0, var_1) {
   }
 
   scripts\engine\utility::flag_set("electric_trap_part_added");
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_3 = spawn("script_model", var_2.origin);
   var_3.angles = var_2.angles;
   var_3 setModel("container_electrical_box_01_components");
   var_4 = scripts\engine\utility::getStructArray("trap_electric", "script_noteworthy");
   foreach(var_6 in var_4) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_6);
-    var_7 = getent(var_6.target, "targetname");
+    var_7 = getEnt(var_6.target, "targetname");
     var_7 setModel("mp_frag_button_on");
   }
 
@@ -170,8 +170,8 @@ electric_trap_fix(var_0, var_1) {
   playFX(level._effect["elec_trap_sparks"], var_2.origin);
   wait(0.5);
   playsoundatpos(var_2.origin, "tesla_shock");
-  var_9 = getent("elec_trap_door", "script_noteworthy");
-  var_9 rotateto((0, 20, 0), 0.25);
+  var_9 = getEnt("elec_trap_door", "script_noteworthy");
+  var_9 rotateTo((0, 20, 0), 0.25);
   level.traps_fixed_electric = 1;
   check_traps_fixed_merit();
   taketrapparticon("electric");
@@ -213,7 +213,7 @@ electric_trap_use(var_0, var_1) {
   var_2 = scripts\engine\utility::getStructArray("trap_electric", "script_noteworthy");
   foreach(var_4 in var_2) {
     level thread scripts\cp\cp_interaction::interaction_cooldown(var_4, 325);
-    var_5 = getent(var_4.target, "targetname");
+    var_5 = getEnt(var_4.target, "targetname");
     var_5 setModel("mp_frag_button_on");
   }
 
@@ -223,7 +223,7 @@ electric_trap_use(var_0, var_1) {
   level thread electric_trap_damage(var_0, var_1);
   level thread electric_trap_rumble();
   scripts\engine\utility::exploder(105);
-  var_7 = getent("electric_trap_trig", "targetname");
+  var_7 = getEnt("electric_trap_trig", "targetname");
   var_7 playLoopSound("town_electric_trap_electricity_on_lp");
   wait(0.1);
   var_8 = spawn("script_origin", var_7.origin + (0, 0, 60));
@@ -235,7 +235,7 @@ electric_trap_use(var_0, var_1) {
   var_8 delete();
   wait(300);
   foreach(var_4 in var_2) {
-    var_5 = getent(var_4.target, "targetname");
+    var_5 = getEnt(var_4.target, "targetname");
     var_5 setModel("mp_frag_button_on_green");
   }
 }
@@ -243,7 +243,7 @@ electric_trap_use(var_0, var_1) {
 electric_trap_damage(var_0, var_1) {
   level endon("stop_electric_trap");
   var_2 = gettime();
-  var_3 = getent("electric_trap_trig", "targetname");
+  var_3 = getEnt("electric_trap_trig", "targetname");
   for(;;) {
     var_3 waittill("trigger", var_4);
     if(isDefined(level.elvira_ai) && var_4 == level.elvira_ai) {
@@ -311,7 +311,7 @@ remove_padding_damage() {
 
 electric_trap_rumble() {
   level endon("stop_electric_trap");
-  var_0 = getent("electric_trap_trig", "targetname");
+  var_0 = getEnt("electric_trap_trig", "targetname");
   for(;;) {
     wait(0.2);
     earthquake(0.18, 1, var_0.origin, 784);
@@ -337,7 +337,7 @@ freeze_trap_init() {
     }
   }
 
-  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   if(isDefined(var_10.angles)) {
     var_11 = var_10.angles;
   } else {
@@ -359,7 +359,7 @@ freeze_trap_init() {
   scripts\engine\utility::exploder(75);
   var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
   foreach(var_5 in var_3) {
-    var_15 = getent(var_5.target, "targetname");
+    var_15 = getEnt(var_5.target, "targetname");
     var_15 setModel("mp_frag_button_on_green");
   }
 }
@@ -396,8 +396,8 @@ check_traps_fixed_merit() {
 
 freeze_trap_panel_fx() {
   level endon("freeze_trap_fixed");
-  var_0 = scripts\engine\utility::getstruct("fix_freeze_trap", "script_noteworthy");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct("fix_freeze_trap", "script_noteworthy");
+  var_1 = getEnt(var_0.target, "targetname");
   for(;;) {
     playFX(level._effect["elec_trap_sparks"], var_1.origin);
     wait(randomintrange(2, 6));
@@ -419,7 +419,7 @@ freeze_trap_fix(var_0, var_1) {
 
   level notify("freeze_trap_fixed");
   scripts\engine\utility::flag_set("freeze_trap_part_added");
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2 setModel("ship_hallway_fuse_box");
   playFX(level._effect["elec_trap_sparks"], var_2.origin);
   var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
@@ -449,7 +449,7 @@ freeze_trap_use(var_0, var_1) {
   var_2 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
   foreach(var_4 in var_2) {
     var_4.cooling_down = 1;
-    var_5 = getent(var_4.target, "targetname");
+    var_5 = getEnt(var_4.target, "targetname");
     var_5 setModel("mp_frag_button_on");
   }
 
@@ -458,14 +458,14 @@ freeze_trap_use(var_0, var_1) {
   scripts\engine\utility::exploder(85);
   level thread freeze_trap_sfx();
   level notify("start_freeze_trap");
-  var_7 = getent("freeze_trig", "targetname");
+  var_7 = getEnt("freeze_trig", "targetname");
   var_7 thread freeze_players();
   wait(25);
   level notify("end_freeze_trap");
   wait(300);
   foreach(var_4 in var_2) {
     var_4.cooling_down = undefined;
-    var_5 = getent(var_4.target, "targetname");
+    var_5 = getEnt(var_4.target, "targetname");
     var_5 setModel("mp_frag_button_on_green");
   }
 }
@@ -558,7 +558,7 @@ pool_trap_init() {
     }
   }
 
-  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   if(isDefined(var_10.angles)) {
     var_11 = var_10.angles;
   } else {
@@ -614,7 +614,7 @@ pool_trap_use(var_0, var_1) {
   }
 
   level.using_pool_trap = 1;
-  var_2 = getent("pool_dmg", "targetname");
+  var_2 = getEnt("pool_dmg", "targetname");
   var_1 thread ww_activate_trap_vo("pool");
   var_1 check_for_trap_master_achievement("pool");
   scripts\engine\utility::exploder(50);
@@ -647,7 +647,7 @@ generator_sfx() {
 pool_dmg_players(var_0) {
   level endon("end_pool_trap");
   var_1 = gettime();
-  var_2 = getent("pool_dmg", "targetname");
+  var_2 = getEnt("pool_dmg", "targetname");
   for(;;) {
     var_2 waittill("trigger", var_3);
     if(isDefined(level.elvira_ai) && var_3 == level.elvira_ai) {
@@ -715,7 +715,7 @@ propane_trap_init() {
     }
   }
 
-  var_10 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_10 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   if(isDefined(var_10.angles)) {
     var_11 = var_10.angles;
   } else {
@@ -749,8 +749,8 @@ propane_trap_fix(var_0, var_1) {
 
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   var_1 playlocalsound("zmb_coin_sounvenir_place");
-  var_6 = scripts\engine\utility::getstruct(var_0.target, "targetname");
-  var_7 = scripts\engine\utility::getstruct("trap_propane", "script_noteworthy");
+  var_6 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_7 = scripts\engine\utility::getStruct("trap_propane", "script_noteworthy");
   var_7.valve = spawn("script_model", var_6.origin);
   var_7.valve.angles = var_6.angles;
   var_7.valve setModel("cp_town_pipe_t_valve");
@@ -770,7 +770,7 @@ propane_trap_take_part(var_0, var_1) {
 
 propane_trap_use(var_0, var_1) {
   var_0.cooling_down = 1;
-  var_2 = scripts\engine\utility::getstruct("propane_tank_fx", "targetname");
+  var_2 = scripts\engine\utility::getStruct("propane_tank_fx", "targetname");
   if(!isDefined(var_2)) {
     var_2 = spawnStruct();
     var_2.origin = (831.5, 3601, 440);
@@ -813,7 +813,7 @@ propane_trap_sfx() {
 
 propane_dmg_players(var_0, var_1) {
   level endon("end_propane_trap");
-  var_2 = getent("propane_dmg_trig", "targetname");
+  var_2 = getEnt("propane_dmg_trig", "targetname");
   for(;;) {
     var_2 waittill("trigger", var_3);
     if(isDefined(level.elvira_ai) && var_3 == level.elvira_ai) {
@@ -862,7 +862,7 @@ propane_damage_zombie(var_0, var_1) {
 elvira_trap_use(var_0, var_1) {
   var_0.cooling_down = 1;
   var_1 check_for_trap_master_achievement("elvira");
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2 setModel("mp_frag_button_on");
   scripts\engine\utility::exploder(60);
   level thread elvira_trap_dmg(var_1);
@@ -887,7 +887,7 @@ elvira_trap_sound(var_0) {
 
 elvira_trap_dmg(var_0) {
   level endon("end_elvira_trap");
-  var_1 = getent("elvira_trap_trig", "targetname");
+  var_1 = getEnt("elvira_trap_trig", "targetname");
   for(;;) {
     var_1 waittill("trigger", var_2);
     if(isDefined(level.elvira_ai) && var_2 == level.elvira_ai) {
@@ -932,7 +932,7 @@ elvira_trap_damage_zombie(var_0, var_1) {
 }
 
 init_elvira_trap() {
-  var_0 = scripts\engine\utility::getstruct("elvira_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("elvira_trap", "script_noteworthy");
   var_1 = undefined;
   if(isDefined(var_0.script_area)) {
     var_1 = var_0.script_area;
@@ -945,7 +945,7 @@ init_elvira_trap() {
   }
 
   var_0.powered_on = 1;
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2 setModel("mp_frag_button_on_green");
 }
 

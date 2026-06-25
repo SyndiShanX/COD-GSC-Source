@@ -61,7 +61,7 @@ create_array_of_intel_items() {
   var_0 = getEntArray("intelligence_item", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_0[var_1].item = getent(var_0[var_1].target, "targetname");
+    var_0[var_1].item = getEnt(var_0[var_1].target, "targetname");
     var_0[var_1].found = 0;
   }
 
@@ -92,8 +92,8 @@ create_array_of_origins_from_table() {
 }
 
 wait_for_pickup() {
-  self sethintstring(&"SCRIPT_INTELLIGENCE_PICKUP");
-  self usetriggerrequirelookat();
+  self setHintString(&"SCRIPT_INTELLIGENCE_PICKUP");
+  self useTriggerRequireLookAt();
   self endon("end_trigger_thread");
   self waittill("trigger");
   self.found = 1;

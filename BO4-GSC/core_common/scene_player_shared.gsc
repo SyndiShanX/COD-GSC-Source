@@ -151,7 +151,7 @@ class csceneplayer: csceneobject {
   }
 
   function stop_camera(player) {
-    endcamanimscripted(player);
+    endcamanimScripted(player);
   }
 
   function get_extracam_index(player) {
@@ -164,7 +164,7 @@ class csceneplayer: csceneobject {
     return var_e5489dff;
   }
 
-  function _camanimscripted(player, str_camera, v_origin, v_angles, n_start_time = 0) {
+  function _camanimScripted(player, str_camera, v_origin, v_angles, n_start_time = 0) {
     player notify(#"camanimscripted");
     player endon(#"camanimscripted", #"disconnect");
 
@@ -175,7 +175,7 @@ class csceneplayer: csceneobject {
     var_57949b2d = getcamanimtime(str_camera) * n_start_time;
     var_41193b94 = int(gettime() - var_57949b2d);
     player dontinterpolate();
-    camanimscripted(player, str_camera, var_41193b94, v_origin, v_angles);
+    camanimScripted(player, str_camera, var_41193b94, v_origin, v_angles);
     wait_for_camera(str_camera, n_start_time);
     player dontinterpolate();
   }
@@ -188,7 +188,7 @@ class csceneplayer: csceneobject {
     e_align = csceneobject::get_align_ent();
     v_origin = isDefined(e_align.origin) ? e_align.origin : (0, 0, 0);
     v_angles = isDefined(e_align.angles) ? e_align.angles : (0, 0, 0);
-    self thread _camanimscripted(player, isDefined(player.var_36fa161e) ? player.var_36fa161e : _str_camera, v_origin, v_angles, n_start_time);
+    self thread _camanimScripted(player, isDefined(player.var_36fa161e) ? player.var_36fa161e : _str_camera, v_origin, v_angles, n_start_time);
     player.var_36fa161e = undefined;
     on_play_anim(player);
   }
@@ -463,7 +463,7 @@ class csceneplayer: csceneobject {
 
     if(b_enable) {
       while(isalive(player)) {
-        player playrumbleonentity("damage_heavy");
+        player playRumbleOnEntity("damage_heavy");
         wait 0.1;
       }
 
@@ -480,7 +480,7 @@ class csceneplayer: csceneobject {
 
     if(b_enable) {
       while(isalive(player)) {
-        player playrumbleonentity("damage_light");
+        player playRumbleOnEntity("damage_light");
         wait 0.3;
       }
 
@@ -688,7 +688,7 @@ class csceneplayer: csceneobject {
 
         var_b52c361d = 0;
         var_55d77e67 = 0;
-        var_9d0b2a04 = vectordot(anglestoright(player.angles), vectornormalize(player.origin - player_other.origin));
+        var_9d0b2a04 = vectordot(anglestoright(player.angles), vectorNormalize(player.origin - player_other.origin));
 
         if(var_9d0b2a04 > 0) {
           var_b52c361d = 1;
@@ -829,7 +829,7 @@ class csceneplayer: csceneobject {
         if(isarray(player.var_8826a030) && player.var_8826a030.size) {
           var_c09527fe = arraygetclosest(player.origin, player.var_8826a030);
           v_to_target = var_c09527fe.origin - player.origin;
-          v_to_target = vectornormalize(v_to_target);
+          v_to_target = vectorNormalize(v_to_target);
           var_59c304d1 = vectortoangles(v_to_target);
         } else {
           var_59c304d1 = player getplayerangles();
@@ -1440,7 +1440,7 @@ class cscenesharedplayer: csceneplayer, csceneobject {
 
     if(isDefined(_e) && player != _e) {
       player dontinterpolate();
-      player setorigin(_e.origin);
+      player setOrigin(_e.origin);
 
       if(!isbot(player)) {
         player setplayerangles(_e getplayerangles());
@@ -1493,7 +1493,7 @@ class cscenesharedplayer: csceneplayer, csceneobject {
         player flagsys::clear(player_animation_notify + "_skip_init_clear");
       }
 
-      if(!player isplayinganimscripted()) {
+      if(!player isplayinganimScripted()) {
         current_playing_anim[player_num] = undefined;
       }
 

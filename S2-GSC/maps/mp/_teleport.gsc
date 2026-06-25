@@ -403,11 +403,11 @@ func_9885(param_00, param_01) {
 
 func_989A(param_00) {
   if(game["switchedsides"]) {
-    level.var_289D["axis"] = getent("post_event_capzone_allies", "targetname");
-    level.var_289D["allies"] = getent("post_event_capzone_axis", "targetname");
+    level.var_289D["axis"] = getEnt("post_event_capzone_allies", "targetname");
+    level.var_289D["allies"] = getEnt("post_event_capzone_axis", "targetname");
   } else {
-    level.var_289D["allies"] = getent("post_event_capzone_allies", "targetname");
-    level.var_289D["axis"] = getent("post_event_capzone_axis", "targetname");
+    level.var_289D["allies"] = getEnt("post_event_capzone_allies", "targetname");
+    level.var_289D["axis"] = getEnt("post_event_capzone_axis", "targetname");
   }
 
   var_01 = [];
@@ -725,7 +725,7 @@ func_98BA(param_00, param_01) {
     var_05 = func_987E(var_05, param_00);
     var_06 = var_05[0];
     param_01 method_808C();
-    param_01 setorigin(var_06.var_0116);
+    param_01 setOrigin(var_06.var_0116);
     param_01 setangles(var_06.var_001D);
     return;
   }
@@ -793,7 +793,7 @@ func_98BA(param_00, param_01) {
 
   param_01 method_843C();
   param_01 method_808C();
-  param_01 setorigin(var_07);
+  param_01 setOrigin(var_07);
   param_01 setangles(var_08);
   thread func_98BD(param_01);
 }

@@ -57,8 +57,8 @@ function barrelupdate(model_name = "zombietron_barrel") {
 
   if(isDefined(barrel)) {
     barrel.targetname = "barrel1";
-    barrel setplayercollision(0);
-    barrel linkto(org, "tag_origin", (0, 90, 0));
+    barrel setPlayerCollision(0);
+    barrel linkTo(org, "tag_origin", (0, 90, 0));
 
     if(isPlayer(self)) {
       barrel thread namespace_ec06fe4a::function_ae010bb4(self);
@@ -72,8 +72,8 @@ function barrelupdate(model_name = "zombietron_barrel") {
       }
 
       trigger.targetname = "barrel1";
-      trigger enablelinkto();
-      trigger linkto(barrel);
+      trigger enablelinkTo();
+      trigger linkTo(barrel);
       trigger thread function_7c757878(self);
     }
   }
@@ -89,8 +89,8 @@ function barrelupdate(model_name = "zombietron_barrel") {
 
     barrel.targetname = "barrel2";
     barrel setModel(model_name);
-    barrel setplayercollision(0);
-    barrel linkto(org, "tag_origin", (0, -90, 0));
+    barrel setPlayerCollision(0);
+    barrel linkTo(org, "tag_origin", (0, -90, 0));
     trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", barrel.origin, 1 | 512 | 8, 40, 50);
 
     if(isDefined(trigger)) {
@@ -99,15 +99,15 @@ function barrelupdate(model_name = "zombietron_barrel") {
       }
 
       trigger.targetname = "barrel2";
-      trigger enablelinkto();
-      trigger linkto(barrel);
+      trigger enablelinkTo();
+      trigger linkTo(barrel);
       trigger thread function_7c757878(self);
     }
   }
 
   org.barrel2 = barrel;
   org.trigger2 = trigger;
-  org linkto(self, "", (0, 0, 10), (0, 0, 0));
+  org linkTo(self, "", (0, 0, 10), (0, 0, 0));
   self namespace_e32bb68::function_3a59ec34("evt_doa_pickup_barrel_active_lp");
   self thread function_61888137(org);
   self thread function_f0855523(org);
@@ -115,7 +115,7 @@ function barrelupdate(model_name = "zombietron_barrel") {
 
   while(isDefined(org) && isDefined(self)) {
     org.origin = self.origin;
-    org rotateto(org.angles + (0, 180, 0), 1.2);
+    org rotateTo(org.angles + (0, 180, 0), 1.2);
     wait 1.2;
   }
 }
@@ -173,7 +173,7 @@ function private function_7c757878(player, mod = "MOD_UNKNOWN", var_70c63791) {
       guy dodamage(guy.health + 1, guy.origin, player, player, "none", mod, 0, level.doa.default_weapon);
     }
 
-    player playrumbleonentity("damage_light");
+    player playRumbleOnEntity("damage_light");
   }
 }
 

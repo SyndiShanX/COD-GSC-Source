@@ -60,7 +60,7 @@ function function_e3e4c03c(action, body) {
       [[body._scene_object._o_scene]] - > stop();
     }
 
-    body stopanimscripted();
+    body stopanimScripted();
   }
 
   if(!isalive(body)) {
@@ -186,7 +186,7 @@ function function_a8501d78(action) {
   self action_utility::function_2795d678(1, 1, 0, 0, ["cinematicmotion_body_shield", "cinematicmotion_body_shield_ads"]);
   self.takedown.body_shield.actor action_utility::function_35d0bd11(1);
   self.takedown.body show();
-  self.takedown.body linkto(self, "tag_origin", (-1000, 0, 0), (0, 0, 0));
+  self.takedown.body linkTo(self, "tag_origin", (-1000, 0, 0), (0, 0, 0));
   self.takedown.body action_utility::function_b82cae8f(1);
   self thread function_756e29bb(action, isDefined(override.anim_name) ? override.anim_name : action.anim_name);
   self.takedown.scene_root = undefined;
@@ -201,7 +201,7 @@ function function_a8501d78(action) {
 }
 
 function function_89295627() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 }
 
 function function_756e29bb(action, anim_name, var_c09e9b1c, var_d60fb210, var_2e7da7fb, var_7369af2b) {

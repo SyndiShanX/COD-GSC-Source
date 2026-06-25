@@ -26,13 +26,13 @@ __init__() {
 }
 
 on_begin() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread movement_watcher();
   }
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"stop_movement_watch");
   }
 }

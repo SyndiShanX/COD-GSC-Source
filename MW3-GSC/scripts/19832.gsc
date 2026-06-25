@@ -329,7 +329,7 @@ _id_4CC2() {
     return;
   }
   if(_id_4D51() && self.script_noteworthy == "manhandled") {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
     level._id_4CC3[self.export] = var_0;
   }
 
@@ -677,9 +677,9 @@ _id_4CCF() {
   foreach(var_39 in var_13) {
     var_18 = var_39._id_4CCE;
     var_0[var_18]._id_4CD3[var_0[var_18]._id_4CD3.size] = var_39;
-    var_40 = getent(var_39.target, "targetname");
+    var_40 = getEnt(var_39.target, "targetname");
     var_39._id_4CDA = var_40.origin;
-    var_41 = getent(var_40.target, "targetname");
+    var_41 = getEnt(var_40.target, "targetname");
     var_41._id_4014 = 0;
     var_0[var_18]._id_4CD6 = var_41;
     var_40 thread _id_4CE2(var_39, var_18, var_41);
@@ -688,7 +688,7 @@ _id_4CCF() {
   }
 
   foreach(var_39 in var_14) {
-    var_39 usetriggerrequirelookat();
+    var_39 useTriggerRequireLookAt();
     var_18 = var_39._id_4CCE;
     var_0[var_18].trigger = var_39;
 
@@ -930,7 +930,7 @@ _id_4CE5(var_0, var_1) {
   common_scripts\utility::array_thread(var_11, maps\_utility::add_spawn_function, ::_id_4D2A);
   common_scripts\utility::array_thread(var_12, maps\_utility::add_spawn_function, ::_id_4D25);
   common_scripts\utility::array_thread(var_13, maps\_utility::add_spawn_function, ::_id_4D2A);
-  var_6 sethintstring(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+  var_6 setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
 
   if(!isDefined(level._id_4CE6)) {
     level._id_4CE6 = [];
@@ -1232,7 +1232,7 @@ _id_4CFB() {
 
   foreach(var_1 in level._id_4CE6) {
     if(isDefined(var_1)) {
-      var_1 sethintstring("");
+      var_1 setHintString("");
     }
   }
 
@@ -1241,7 +1241,7 @@ _id_4CFB() {
 
   foreach(var_1 in level._id_4CE6) {
     if(isDefined(var_1)) {
-      var_1 sethintstring(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+      var_1 setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
     }
   }
 }
@@ -1522,7 +1522,7 @@ _id_4D0D(var_0) {
 _id_4D0E(var_0, var_1) {
   var_2 = var_1["active"];
   var_3 = anglestoright(self.angles);
-  var_4 = vectornormalize(var_2.origin - var_0.trigger.origin);
+  var_4 = vectorNormalize(var_2.origin - var_0.trigger.origin);
   var_5 = vectordot(var_3, var_4);
 
   if(var_5 < 0) {
@@ -2092,7 +2092,7 @@ _id_4D25() {
   level thread _id_4BD0(self);
 
   if(isDefined(self._id_164F) && common_scripts\utility::string_starts_with(self._id_164F, "reference")) {
-    var_0 = getent(self._id_164F, "targetname");
+    var_0 = getEnt(self._id_164F, "targetname");
   }
   self._id_4D26 = var_0;
   var_0 maps\_anim::_id_11C0(self, self.animation);
@@ -2467,7 +2467,7 @@ _id_4D38(var_0) {
 _id_4D39(var_0) {
   var_1 = spawn("script_origin", var_0);
   var_1.origin = var_0;
-  var_1 playrumbleonentity("grenade_rumble");
+  var_1 playRumbleOnEntity("grenade_rumble");
   wait 4;
   var_1 delete();
 }
@@ -2600,7 +2600,7 @@ _id_4BEA() {
   var_1 = distance(var_0.origin, self.origin);
 
   if(var_1 <= 50) {
-    var_0 playrumbleonentity("grenade_rumble");
+    var_0 playRumbleOnEntity("grenade_rumble");
     var_0 thread maps\_utility::play_sound_on_entity("melee_knife_hit_body");
     var_0 enablehealthshield(0);
     var_0 enabledeathshield(0);
@@ -2767,7 +2767,7 @@ _id_4D55() {
   var_0 = undefined;
 
   if(self.script_noteworthy == "manhandled") {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
   }
   var_1 = undefined;
   var_2 = undefined;
@@ -2854,7 +2854,7 @@ _id_4D59() {
   var_3.angles = var_0;
   level.player playerlinktodelta(var_3, "tag_origin", 1, 45, 45, 90, 45, 1);
   var_4 = 0.45;
-  var_3 moveto(var_3.origin + var_1 * 32 + var_2 * -14, var_4, var_4 * 0.4, var_4 * 0.4);
+  var_3 moveTo(var_3.origin + var_1 * 32 + var_2 * -14, var_4, var_4 * 0.4, var_4 * 0.4);
   wait(var_4);
   level.player setmovespeedscale(0.5);
   thread _id_4D5B();
@@ -2874,7 +2874,7 @@ _id_4D5C() {
   wait 1.5;
 
   for(;;) {
-    self moveto(level.player.origin, 2, 0, 0);
+    self moveTo(level.player.origin, 2, 0, 0);
     wait 0.05;
   }
 }
@@ -2905,7 +2905,7 @@ _id_4D5D() {
     } else {
       var_0 addyaw(var_9 * -1);
     }
-    self rotateto(var_0.angles, 0.15);
+    self rotateTo(var_0.angles, 0.15);
     wait 0.15;
   }
 }

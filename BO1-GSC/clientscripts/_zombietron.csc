@@ -45,9 +45,9 @@ collisionHandler(localClientNum) {
       player = getlocalplayer(driver_local_client);
       if(isDefined(player)) {
         if(hit_intensity > 15) {
-          player PlayRumbleOnEntity(driver_local_client, "damage_heavy");
+          player playRumbleOnEntity(driver_local_client, "damage_heavy");
         } else {
-          player PlayRumbleOnEntity(driver_local_client, "damage_light");
+          player playRumbleOnEntity(driver_local_client, "damage_light");
         }
       }
     }
@@ -61,7 +61,7 @@ jump_landing_thread(localClientNum) {
     if(isDefined(driver_local_client)) {
       player = getlocalplayer(driver_local_client);
       if(isDefined(player)) {
-        player PlayRumbleOnEntity(driver_local_client, "damage_heavy");
+        player playRumbleOnEntity(driver_local_client, "damage_heavy");
       }
     }
   }
@@ -126,9 +126,9 @@ zombie_helicopter_kill(localClientNum, set, newEnt) {
     if(isDefined(level._heli_pilot_ent)) {
       temp = self.origin - level._heli_pilot_ent.origin;
     }
-    temp = VectorNormalize(temp);
+    temp = vectorNormalize(temp);
     launch_dir = VectorCross(temp, (0, 0, 1));
-    launch_dir = VectorNormalize(launch_dir);
+    launch_dir = vectorNormalize(launch_dir);
     launch_dir *= 100;
     self LaunchRagdoll(launch_dir);
     playSound(0, "zmb_ragdoll_launched", self.origin);
@@ -227,7 +227,7 @@ zombie_launch_and_burn(localClientNum, set, newEnt) {
   if(dist_squared < 130 * 130) {
     self LaunchRagdoll((0, 0, 270));
   } else if(dist_squared < 360 * 360) {
-    dir = VectorNormalize(self.origin - level._nukepoint);
+    dir = vectorNormalize(self.origin - level._nukepoint);
     dir = dir * 100;
     dir = dir + (0, 0, 120);
     self LaunchRagdoll(dir);
@@ -250,7 +250,7 @@ smartbomb_handler(localClientNum, set, newEnt) {
   bomb = spawn(0, origin, "script_model");
   bomb setModel(level.bomb_model);
   bomb.angles = (90, 0, 0);
-  bomb MoveTo(self.origin, 0.3, 0, 0);
+  bomb moveTo(self.origin, 0.3, 0, 0);
   playSound(0, "zmb_nuke_incoming", self.origin);
   bomb waittill("movedone");
   playSound(0, "zmb_nuke_impact", self.origin);
@@ -296,7 +296,7 @@ electrap_loop_sound(parent) {
 }
 get_camera_launch_direction() {
   pos = GetDvarVector("player_topDownCamCenterPos") + GetDvarVector("player_topDownCamOffset");
-  return VectorNormalize(pos - self.origin);
+  return vectorNormalize(pos - self.origin);
 }
 gib_handler(type, locations) {
   if(type == "up") {
@@ -674,7 +674,7 @@ do_gib(model, tag) {
     forward = self._gib_vel;
     self._gib_vel = undefined;
   } else {
-    forward = VectorNormalize(end_pos - start_pos);
+    forward = vectorNormalize(end_pos - start_pos);
     forward *= RandomIntRange(600, 1000);
     forward += (0, 0, RandomIntRange(400, 700));
   }

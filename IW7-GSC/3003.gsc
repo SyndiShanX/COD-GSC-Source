@@ -122,7 +122,7 @@ func_FA1E() {
   scripts\sp\anim::func_1EC1(self.var_226D, "pod_exit");
 
   foreach(var_3 in self.var_226D) {
-    var_3 linkto(self);
+    var_3 linkTo(self);
   }
 
   self attach("veh_mil_air_ca_drop_pod_large_static_rail_c6", "tag_origin");
@@ -140,7 +140,7 @@ func_FB98() {
     return;
   }
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
 
   if(!isDefined(self.var_4D94.droptime)) {
     self.var_4D94.droptime = 1.41;
@@ -211,9 +211,9 @@ func_D60C() {
   self.var_4D94.var_AD34 = scripts\engine\utility::spawn_tag_origin();
   self.var_4D94.var_AD34.origin = self.origin;
   self.var_4D94.var_AD34.angles = self.angles;
-  self linkto(self.var_4D94.var_AD34);
+  self linkTo(self.var_4D94.var_AD34);
   self notify("dropping");
-  self.var_4D94.var_AD34 moveto(self.var_4D94.var_A843, self.var_4D94.droptime, self.var_4D94.droptime * 0.3, 0);
+  self.var_4D94.var_AD34 moveTo(self.var_4D94.var_A843, self.var_4D94.droptime, self.var_4D94.droptime * 0.3, 0);
   self.var_4D94.var_AD34 waittill("movedone");
   self.var_4D94.var_AD34 delete();
 }
@@ -232,9 +232,9 @@ func_D614() {
   stopFXOnTag(scripts\engine\utility::getfx("drop_pod_trail"), self, "tag_fx");
   playFX(scripts\engine\utility::getfx("drop_pod_impact"), self.origin);
   earthquake(0.5, 1, self.origin, 2500);
-  playrumbleonentity("droppod_impact", self.origin);
+  playRumbleOnEntity("droppod_impact", self.origin);
   self setModel(self.model + "_landed");
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 func_D62B() {
@@ -326,7 +326,7 @@ func_BC59() {
 
   if(isDefined(var_1)) {
     if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "drop_angle") {
-      self.var_4D94.var_5EF2 = vectornormalize(var_1.origin - self.origin);
+      self.var_4D94.var_5EF2 = vectorNormalize(var_1.origin - self.origin);
       var_0 = vectortoangles(self.var_4D94.var_5EF2) + (90, 0, 0);
     }
   }
@@ -343,5 +343,5 @@ func_BC59() {
 func_2477() {
   self.var_4D94.doors = scripts\sp\utility::func_10639("droppod_door");
   scripts\sp\anim::func_1EC3(self.var_4D94.doors, "door_pop");
-  self.var_4D94.doors linkto(self);
+  self.var_4D94.doors linkTo(self);
 }

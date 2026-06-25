@@ -536,8 +536,8 @@ function private function_6cde7a8b(entity, predictedenemypos) {
     enemypos = predictedenemypos;
   }
 
-  dirtoenemy = vectornormalize(enemypos - entity.origin);
-  dirtoenemy = vectornormalize(dirtoenemy);
+  dirtoenemy = vectorNormalize(enemypos - entity.origin);
+  dirtoenemy = vectorNormalize(dirtoenemy);
   return enemypos + dirtoenemy * -1 * 45;
 }
 
@@ -668,7 +668,7 @@ function private function_7ad7aa7d(entity, mocompanim, mocompanimblendouttime, m
   mocompanimflag.var_b736fc8b = 1;
 
   if(isDefined(mocompanimflag.enemy)) {
-    dirtoenemy = vectornormalize(mocompanimflag.enemy.origin - mocompanimflag.origin);
+    dirtoenemy = vectorNormalize(mocompanimflag.enemy.origin - mocompanimflag.origin);
     mocompanimflag forceteleport(mocompanimflag.origin, vectortoangles(dirtoenemy));
   }
 
@@ -710,7 +710,7 @@ function function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompani
     predictedenemypos = mocompanimflag.enemy.origin;
     var_856465ed = function_6cde7a8b(mocompanimflag, predictedenemypos);
     mocompanimflag.meleeinfo.adjustedendpos = var_856465ed;
-    var_cc075bd0 = vectornormalize(mocompanimflag.origin - mocompanimflag.meleeinfo.adjustedendpos);
+    var_cc075bd0 = vectorNormalize(mocompanimflag.origin - mocompanimflag.meleeinfo.adjustedendpos);
     var_cf699df5 = distancesquared(mocompanimflag.meleeinfo.var_9bfa8497, mocompanimflag.meleeinfo.var_cb28f380);
     var_776ddabf = distancesquared(mocompanimflag.meleeinfo.var_cb28f380, mocompanimflag.meleeinfo.adjustedendpos);
     var_65cbfb52 = distancesquared(mocompanimflag.meleeinfo.var_9bfa8497, mocompanimflag.meleeinfo.adjustedendpos);
@@ -740,7 +740,7 @@ function function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompani
       var_776ddabf = distancesquared(mocompanimflag.meleeinfo.var_cb28f380, mocompanimflag.meleeinfo.adjustedendpos);
       myforward = anglesToForward(mocompanimflag.angles);
       var_1c3641f2 = (var_856465ed[0], var_856465ed[1], mocompanimflag.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - mocompanimflag.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - mocompanimflag.origin);
       zdiff = mocompanimflag.meleeinfo.var_cb28f380[2] - var_856465ed[2];
       withinzrange = abs(zdiff) <= mocompanimflag ai::function_9139c839().var_3c41cb92;
       withinfov = vectordot(myforward, dirtoenemy) > mocompanimflag ai::function_9139c839().var_e2b09972;
@@ -756,7 +756,7 @@ function function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompani
         starttime = floor(starttime / timestep);
         stoptime = floor(stoptime / timestep);
         adjustduration = stoptime - starttime;
-        mocompanimflag.meleeinfo.var_10b8b6d1 = vectornormalize(mocompanimflag.meleeinfo.adjustedendpos - mocompanimflag.meleeinfo.var_cb28f380);
+        mocompanimflag.meleeinfo.var_10b8b6d1 = vectorNormalize(mocompanimflag.meleeinfo.adjustedendpos - mocompanimflag.meleeinfo.var_cb28f380);
         mocompanimflag.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
         mocompanimflag.meleeinfo.var_425c4c8b = 1;
         mocompanimflag.meleeinfo.adjustmentstarted = 1;
@@ -802,7 +802,7 @@ function function_e1743aa(entity) {
     doa_enemy::function_a6b807ea(entity.var_c6213c58, 1, point, 0, undefined, entity.enemy);
   }
 
-  if(getplayers().size > 1) {
+  if(getPlayers().size > 1) {
     if(isDefined(point)) {
       doa_enemy::function_a6b807ea(entity.var_c6213c58, 1, point, 0, undefined, entity.enemy);
       point = getclosestpointonnavmesh(entity.origin - right, 80);

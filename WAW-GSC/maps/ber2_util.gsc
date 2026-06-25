@@ -76,7 +76,7 @@ generic_rumble_explosion() {
   self endon("death");
   self endon("disconnect");
 
-  self PlayRumbleOnEntity("explosion_generic_no_broadcast");
+  self playRumbleOnEntity("explosion_generic_no_broadcast");
 }
 
 generic_rumble_loop(duration, intensity) {
@@ -85,7 +85,7 @@ generic_rumble_loop(duration, intensity) {
 
   firstWait = 0.2;
 
-  self PlayRumbleOnEntity("explosion_generic_no_broadcast");
+  self playRumbleOnEntity("explosion_generic_no_broadcast");
   wait(firstWait);
 
   loopingRumble = "damage_heavy";
@@ -106,7 +106,7 @@ grab_starting_friends() {
   return startguys;
 }
 set_color_chain(trigTN) {
-  color_trigger = GetEnt(trigTN, "targetname");
+  color_trigger = getEnt(trigTN, "targetname");
   ASSERTEX(isDefined(color_trigger), "color_trigger " + trigTN + " is not defined!");
 
   color_trigger notify("trigger");
@@ -348,7 +348,7 @@ get_closest_from_group(testOrg, group, excludeMe, backup_spawner) {
 
   if(!isDefined(closest)) {
     if(isDefined(backup_spawner)) {
-      spawner = getent(backup_spawner, "targetname");
+      spawner = getEnt(backup_spawner, "targetname");
       spawnedGuy = spawner Stalingradspawn();
       spawn_failed(spawnedGuy);
       return spawnedGuy;
@@ -1382,7 +1382,7 @@ draw_sphere_axis(radius, segments, axis) {
   }
 }
 getent_safe(value, key, debugName) {
-  ent = GetEnt(value, key);
+  ent = getEnt(value, key);
 
   if(isDefined(debugName)) {
     debugString = "Couldn't GetEnt for: " + debugName;
@@ -1397,7 +1397,7 @@ getent_safe(value, key, debugName) {
   }
 }
 getstruct_safe(value, key, debugName) {
-  sstruct = GetStruct(value, key);
+  sstruct = getStruct(value, key);
 
   if(isDefined(debugName)) {
     debugString = "Couldn't GetStruct for: " + debugName;
@@ -1531,7 +1531,7 @@ trigger_think() {
       wait(0.1);
       self Delete();
     } else {
-      otherTrig = GetEnt("self.script_noteworthy", "targetname");
+      otherTrig = getEnt("self.script_noteworthy", "targetname");
 
       if(isDefined(otherTrig)) {
         self waittill("trigger");
@@ -1721,7 +1721,7 @@ tank_fire_at_ent(ent_name) {
   self endon("death");
   self endon("end_tank_fire_at");
 
-  spot = getent(ent_name, "targetname");
+  spot = getEnt(ent_name, "targetname");
 
   self SetTurretTargetEnt(spot);
   self waittill("turret_on_target");

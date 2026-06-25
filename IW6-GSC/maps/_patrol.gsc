@@ -398,7 +398,7 @@ waittill_combat() {
     self allowedstances("stand", "crouch", "prone");
     self.disablearrivals = 0;
     self.disableexits = 0;
-    self stopanimscripted();
+    self stopanimScripted();
     self notify("stop_animmode");
     self.script_nobark = undefined;
     self.goalradius = level.default_goalradius;
@@ -524,7 +524,7 @@ pet_patrol() {
   self.goalradius = 4;
   self.allowdeath = 1;
   var_0 = pet_patrol_create_positions();
-  var_1 = vectornormalize(self.origin - self.patrol_master.origin);
+  var_1 = vectorNormalize(self.origin - self.patrol_master.origin);
   var_2 = anglestoright(self.patrol_master.angles);
   var_3 = "left";
 

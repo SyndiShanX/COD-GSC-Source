@@ -15,7 +15,7 @@ function main() {
 }
 
 function function_9f9f219() {
-  trigger = getent(0, "security_det", "targetname");
+  trigger = getEnt(0, "security_det", "targetname");
   if(!isDefined(trigger)) {
     return;
   }
@@ -29,7 +29,7 @@ function function_9f9f219() {
 }
 
 function function_cfd80c1b() {
-  trigger = getent(0, "horn", "targetname");
+  trigger = getEnt(0, "horn", "targetname");
   if(!isDefined(trigger)) {
     return;
   }
@@ -43,7 +43,7 @@ function function_cfd80c1b() {
 }
 
 function function_166fca02() {
-  trigger = getent(0, "train_horn_dist", "targetname");
+  trigger = getEnt(0, "train_horn_dist", "targetname");
   if(!isDefined(trigger)) {
     return;
   }

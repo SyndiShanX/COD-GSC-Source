@@ -6,7 +6,7 @@
 _id_D896(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0.target)) {
     if(!isDefined(var_0._id_10430)) {
-      var_5[0] = getent(var_0.target, "targetname");
+      var_5[0] = getEnt(var_0.target, "targetname");
     } else {
       var_5 = var_0._id_10430;
     }

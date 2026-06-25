@@ -351,7 +351,7 @@ domflags() {
     var_6 = level.flags[var_5];
 
     if(isDefined(var_6.target)) {
-      var_7[0] = getent(var_6.target, "targetname");
+      var_7[0] = getEnt(var_6.target, "targetname");
     } else {
       var_7[0] = spawn("script_model", var_6.origin);
       var_7[0].angles = var_6.angles;

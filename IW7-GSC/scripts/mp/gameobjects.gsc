@@ -169,7 +169,7 @@ createcarryobject(var_0, var_1, var_2, var_3) {
   var_4.trigger = var_1;
   if(!isDefined(var_1.linktoenabledflag)) {
     var_1.linktoenabledflag = 1;
-    var_1 enablelinkto();
+    var_1 enablelinkTo();
   }
 
   var_4.useweapon = undefined;
@@ -748,7 +748,7 @@ setposition(var_0, var_1) {
 
   self.trigger.origin = var_0;
   if(level.gametype == "ball" || level.gametype == "tdef") {
-    self.trigger linkto(self.visuals[0]);
+    self.trigger linkTo(self.visuals[0]);
   }
 
   self.curorigin = self.trigger.origin;
@@ -845,7 +845,7 @@ setdropped(var_0) {
     }
 
     var_14 = (cos(var_12), sin(var_12), 0);
-    var_14 = vectornormalize(var_14 - var_13["normal"] * vectordot(var_14, var_13["normal"]));
+    var_14 = vectorNormalize(var_14 - var_13["normal"] * vectordot(var_14, var_13["normal"]));
     var_15 = 0;
     if(level.gametype == "ctf" || isbombmode()) {
       if(self.carrier touchingarbitraryuptrigger() && var_7[2] < 0) {
@@ -893,10 +893,10 @@ setdropped(var_0) {
         self.var_E25D = 1;
       } else {
         for(var_17 = 0; var_17 < self.visuals.size; var_17++) {
-          self.visuals[var_17] linkto(var_18);
+          self.visuals[var_17] linkTo(var_18);
         }
 
-        self.trigger linkto(var_18);
+        self.trigger linkTo(var_18);
         var_1A = spawnStruct();
         var_1A.carryobject = self;
         var_1A.deathoverridecallback = ::carryobject_overridemovingplatformdeath;
@@ -2024,9 +2024,9 @@ func_12F57() {
 useholdthink(var_0) {
   var_0 notify("use_hold");
   if(isPlayer(var_0)) {
-    var_0 playerlinkto(self.trigger);
+    var_0 playerlinkTo(self.trigger);
   } else {
-    var_0 linkto(self.trigger);
+    var_0 linkTo(self.trigger);
   }
 
   var_0 playerlinkedoffsetenable();
@@ -2376,20 +2376,20 @@ updateworldicon(var_0, var_1) {
       if(self.type == "carryObject") {
         var_7 = var_2[var_4] == "mlg_allies" || var_2[var_4] == "mlg_axis";
         if(isDefined(self.carrier) && !shouldpingobject(var_0) || var_7) {
-          var_6 settargetent(self.carrier);
+          var_6 settargetEnt(self.carrier);
         } else if(!isDefined(self.carrier) && isDefined(self.objectiveonvisuals) && self.objectiveonvisuals) {
-          var_6 settargetent(self.visuals[0]);
+          var_6 settargetEnt(self.visuals[0]);
         } else {
-          var_6 cleartargetent();
+          var_6 cleartargetEnt();
         }
       } else if(isDefined(self.var_C2B4)) {
-        var_6 settargetent(self.var_C2B4);
+        var_6 settargetEnt(self.var_C2B4);
       }
     } else {
       var_6 fadeovertime(0.05);
       var_6.alpha = 0;
       var_6.var_9F51 = 0;
-      var_6 cleartargetent();
+      var_6 cleartargetEnt();
     }
 
     var_6 thread hideworldiconongameend();
@@ -2584,7 +2584,7 @@ setteamusetext(var_0, var_1) {
 }
 
 setusehinttext(var_0) {
-  self.trigger sethintstring(var_0);
+  self.trigger setHintString(var_0);
 }
 
 allowcarry(var_0) {

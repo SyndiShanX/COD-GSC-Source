@@ -427,9 +427,9 @@ civiliancanthrowmolotovgrenade(behaviortreeentity, throwifpossible = 0) {
 
   entityangles = behaviortreeentity.angles;
   toenemy = behaviortreeentity.enemy.origin - behaviortreeentity.origin;
-  toenemy = vectornormalize((toenemy[0], toenemy[1], 0));
+  toenemy = vectorNormalize((toenemy[0], toenemy[1], 0));
   entityforward = anglesToForward(entityangles);
-  entityforward = vectornormalize((entityforward[0], entityforward[1], 0));
+  entityforward = vectorNormalize((entityforward[0], entityforward[1], 0));
 
   if(vectordot(toenemy, entityforward) < 0.5) {
     return false;
@@ -548,7 +548,7 @@ rioterreaquireservice(entity) {
     return false;
   }
 
-  dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forward = anglesToForward(entity.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {

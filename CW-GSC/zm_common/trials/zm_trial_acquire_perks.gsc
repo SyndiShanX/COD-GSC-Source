@@ -26,13 +26,13 @@ function private on_begin(perk_count) {
   assert(isDefined(level.a_str_vapors));
   self.var_851a4ca6 = zm_trial::function_5769f26a(perk_count);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_2a5b280f(self);
   }
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 
@@ -40,7 +40,7 @@ function private on_end(round_reset) {
     assert(isDefined(level.a_str_vapors));
     var_57807cdc = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       assert(isDefined(player.var_a53b9221));
 
       if(player.var_a53b9221 < self.var_851a4ca6) {
@@ -55,7 +55,7 @@ function private on_end(round_reset) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_a53b9221 = undefined;
   }
 }

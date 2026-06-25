@@ -139,17 +139,17 @@ function function_7fdc1c82(e_who, var_ff0e60dd) {
 
 function function_1388fe2d(player) {
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZM_ISLAND_MAIN_POWER_OFF");
+    self setHintString(&"ZM_ISLAND_MAIN_POWER_OFF");
     return false;
   }
   if(level flag::get("flag_zipline_in_use")) {
-    self sethintstring(&"ZM_ISLAND_ZIPLINE_IN_USE");
+    self setHintString(&"ZM_ISLAND_ZIPLINE_IN_USE");
     return false;
   }
   if(level flag::get("zipline_lightning_charge")) {
-    self sethintstring(&"ZM_ISLAND_BUY_ZIPLINE", int(self.stub.hint_parm1 * 0.5));
+    self setHintString(&"ZM_ISLAND_BUY_ZIPLINE", int(self.stub.hint_parm1 * 0.5));
   } else {
-    self sethintstring(&"ZM_ISLAND_BUY_ZIPLINE", self.stub.hint_parm1);
+    self setHintString(&"ZM_ISLAND_BUY_ZIPLINE", self.stub.hint_parm1);
   }
   return true;
 }
@@ -214,7 +214,7 @@ function function_51885f3b(e_who, var_f7516332) {
 }
 
 function player_rail_sequence_init(s_start, var_b4b1932b) {
-  var_47ee7db6 = getent(s_start.target, "targetname");
+  var_47ee7db6 = getEnt(s_start.target, "targetname");
   nd_path_start = getvehiclenode(var_47ee7db6.target, "targetname");
   self.var_53539670 = spawner::simple_spawn_single(var_47ee7db6);
   self.var_53539670 setignorepauseworld(1);
@@ -228,7 +228,7 @@ function player_rail_sequence_init(s_start, var_b4b1932b) {
     self.var_5eb06498 = self.origin;
   }
   wait(0.35);
-  self setorigin(nd_path_start.origin);
+  self setOrigin(nd_path_start.origin);
   self setplayerangles(nd_path_start.angles);
   self.var_53539670.origin = self.origin;
   self.var_53539670.angles = self.angles;
@@ -297,7 +297,7 @@ function player_rail_sequence(var_b4b1932b) {
 
 function function_f027bda7() {
   self endon("disconnect");
-  self playrumbleonentity("zm_island_rumble_zipline");
+  self playRumbleOnEntity("zm_island_rumble_zipline");
   self waittill("hash_329f91e1");
   self stoprumble("zm_island_rumble_zipline");
 }
@@ -311,24 +311,24 @@ function play_current_fx() {
 function function_8fda04e6(s_start, var_b4b1932b) {
   if(var_b4b1932b) {
     if(s_start.script_noteworthy === "exterior") {
-      var_9c4f4858 = getent("hatch_04", "targetname");
-      var_fcf7bffb = getent("hatch_02", "targetname");
-      var_99552fbd = getent("sewer_interior_door_open", "targetname");
+      var_9c4f4858 = getEnt("hatch_04", "targetname");
+      var_fcf7bffb = getEnt("hatch_02", "targetname");
+      var_99552fbd = getEnt("sewer_interior_door_open", "targetname");
     } else {
-      var_9c4f4858 = getent("hatch_01", "targetname");
-      var_fcf7bffb = getent("hatch_03", "targetname");
-      var_99552fbd = getent("sewer_exterior_door_open", "targetname");
+      var_9c4f4858 = getEnt("hatch_01", "targetname");
+      var_fcf7bffb = getEnt("hatch_03", "targetname");
+      var_99552fbd = getEnt("sewer_exterior_door_open", "targetname");
     }
     var_f70ad1d7 = "p7_fxanim_zm_island_pipe_hatch_open_bundle";
     var_240b3589 = "p7_fxanim_zm_island_pipe_hatch_close_bundle";
   } else {
     if(s_start.script_noteworthy === "jungle") {
-      var_9c4f4858 = getent("zipline_gate_upper", "targetname");
-      var_fcf7bffb = getent("zipline_gate_lower", "targetname");
+      var_9c4f4858 = getEnt("zipline_gate_upper", "targetname");
+      var_fcf7bffb = getEnt("zipline_gate_lower", "targetname");
       var_99552fbd = undefined;
     } else {
-      var_9c4f4858 = getent("zipline_gate_lower", "targetname");
-      var_fcf7bffb = getent("zipline_gate_upper", "targetname");
+      var_9c4f4858 = getEnt("zipline_gate_lower", "targetname");
+      var_fcf7bffb = getEnt("zipline_gate_upper", "targetname");
       var_99552fbd = undefined;
     }
     var_f70ad1d7 = "p7_fxanim_zm_island_zipline_gate_open_bundle";
@@ -349,20 +349,20 @@ function function_8fda04e6(s_start, var_b4b1932b) {
 
 function function_da8a0706(player) {
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZM_ISLAND_MAIN_POWER_OFF");
+    self setHintString(&"ZM_ISLAND_MAIN_POWER_OFF");
     return false;
   }
   if(level flag::get("flag_sewer_in_use_" + self.script_noteworthy) || level flag::get("flag_sewer_on_cooldown_" + self.script_noteworthy)) {
-    self sethintstring(&"ZM_ISLAND_SEWER_IN_USE");
+    self setHintString(&"ZM_ISLAND_SEWER_IN_USE");
     return false;
   }
   if(level flag::get("flag_sewer_active_" + self.script_noteworthy)) {
-    self sethintstring(&"ZM_ISLAND_USE_SEWER");
+    self setHintString(&"ZM_ISLAND_USE_SEWER");
   } else {
     if(level flag::get("sewer_lightning_charge_" + self.script_noteworthy)) {
-      self sethintstring(&"ZM_ISLAND_BUY_SEWER", int(self.stub.hint_parm1 * 0.5));
+      self setHintString(&"ZM_ISLAND_BUY_SEWER", int(self.stub.hint_parm1 * 0.5));
     } else {
-      self sethintstring(&"ZM_ISLAND_BUY_SEWER", self.stub.hint_parm1);
+      self setHintString(&"ZM_ISLAND_BUY_SEWER", self.stub.hint_parm1);
     }
   }
   return true;

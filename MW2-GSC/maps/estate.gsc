@@ -208,7 +208,7 @@ startAmbush() {
 
   friendly_sniper_spawn();
 
-  player_ambush_start = getent("player_ambush_start", "targetname");
+  player_ambush_start = getEnt("player_ambush_start", "targetname");
   level.player teleport_ent(player_ambush_start);
 
   ghost_init();
@@ -246,7 +246,7 @@ startForestFight() {
 
   thread start_common_estate();
 
-  player_forestfight_start = getent("player_forestfight_start", "targetname");
+  player_forestfight_start = getEnt("player_forestfight_start", "targetname");
   level.player teleport_ent(player_forestfight_start);
 
   ghost_init();
@@ -298,7 +298,7 @@ startHouseApproach() {
 
   thread start_common_estate();
 
-  player_houseapproach_start = getent("player_houseapproach_start", "targetname");
+  player_houseapproach_start = getEnt("player_houseapproach_start", "targetname");
   level.player teleport_ent(player_houseapproach_start);
 
   ghost_init();
@@ -324,7 +324,7 @@ startHouseBreach() {
 
   thread start_common_estate();
 
-  player_houseapproach_start = getent("breach_tweak_start", "targetname");
+  player_houseapproach_start = getEnt("breach_tweak_start", "targetname");
   level.player teleport_ent(player_houseapproach_start);
 
   ghost_init();
@@ -333,7 +333,7 @@ startHouseBreach() {
 
   redshirtStartSpawnTeleport("breachhouse");
 
-  houseAttackTrig = getent("house_approach_friendlytrigger", "targetname");
+  houseAttackTrig = getEnt("house_approach_friendlytrigger", "targetname");
   houseAttackTrig notify("trigger");
 }
 
@@ -361,7 +361,7 @@ startHouseBriefing() {
 
   level.playerZone = "zone_house";
 
-  player_houseapproach_start = getent("briefing_tweak_start", "targetname");
+  player_houseapproach_start = getEnt("briefing_tweak_start", "targetname");
   level.player teleport_ent(player_houseapproach_start);
 
   ghost_init();
@@ -371,7 +371,7 @@ startHouseBriefing() {
 
   redshirtStartSpawnTeleport("housebriefing");
 
-  houseAttackTrig = getent("house_approach_friendlytrigger", "targetname");
+  houseAttackTrig = getEnt("house_approach_friendlytrigger", "targetname");
   houseAttackTrig notify("trigger");
 
   flag_set("all_enemies_killed_up_to_house_capture");
@@ -408,7 +408,7 @@ startHouseDefense() {
 
   thread start_common_estate();
 
-  player_houseapproach_start = getent("briefing_tweak_start", "targetname");
+  player_houseapproach_start = getEnt("briefing_tweak_start", "targetname");
   level.player teleport_ent(player_houseapproach_start);
 
   ghost_init();
@@ -418,7 +418,7 @@ startHouseDefense() {
 
   redshirtStartSpawnTeleport("housebriefing");
 
-  houseAttackTrig = getent("house_approach_friendlytrigger", "targetname");
+  houseAttackTrig = getEnt("house_approach_friendlytrigger", "targetname");
   houseAttackTrig notify("trigger");
 
   flag_set("scarecrow_to_earlydefense_start");
@@ -436,11 +436,11 @@ startHouseDefense() {
 }
 
 startEscape() {
-  fence = getent("final_area_fence", "targetname");
+  fence = getEnt("final_area_fence", "targetname");
   fence delete();
 
-  dsm_real = getent("dsm", "targetname");
-  dsm_obj = getent("dsm_obj", "targetname");
+  dsm_real = getEnt("dsm", "targetname");
+  dsm_obj = getEnt("dsm_obj", "targetname");
 
   dsm_real hide();
   dsm_obj hide();
@@ -479,7 +479,7 @@ startEscape() {
 
   thread start_common_estate();
 
-  player_houseapproach_start = getent("briefing_tweak_start", "targetname");
+  player_houseapproach_start = getEnt("briefing_tweak_start", "targetname");
   level.player teleport_ent(player_houseapproach_start);
 
   ghost_init();
@@ -489,7 +489,7 @@ startEscape() {
 
   redshirtStartSpawnTeleport("housebriefing");
 
-  houseAttackTrig = getent("house_approach_friendlytrigger", "targetname");
+  houseAttackTrig = getEnt("house_approach_friendlytrigger", "targetname");
   houseAttackTrig notify("trigger");
 
   flag_set("scarecrow_to_earlydefense_start");
@@ -504,7 +504,7 @@ startEscape() {
 }
 
 startAltEnding() {
-  fence = getent("final_area_fence", "targetname");
+  fence = getEnt("final_area_fence", "targetname");
   fence delete();
 
   flag_set("test_whole_ending");
@@ -526,7 +526,7 @@ startAltEnding() {
 }
 
 startEnding() {
-  fence = getent("final_area_fence", "targetname");
+  fence = getEnt("final_area_fence", "targetname");
   fence delete();
 
   flag_set("test_whole_ending");
@@ -558,7 +558,7 @@ startEndingBodyTossOnly() {
 }
 
 startEndingMeh() {
-  fence = getent("final_area_fence", "targetname");
+  fence = getEnt("final_area_fence", "targetname");
   fence delete();
 
   flag_set("test_whole_ending");
@@ -603,7 +603,7 @@ startHeliTweakPavelowEnd() {
   flag_set("skip_intro");
   flag_set("point_of_no_return");
 
-  node = getstruct("ending_chopper_node", "targetname");
+  node = getStruct("ending_chopper_node", "targetname");
   level.player teleport_player(node);
 
   thread ending_pavelow_fakearrival();
@@ -613,7 +613,7 @@ startHeliTweakShadowBirdsEnd() {
   flag_set("skip_intro");
   flag_set("enter_the_littlebirds");
 
-  node = getstruct("ending_chopper_node", "targetname");
+  node = getStruct("ending_chopper_node", "targetname");
   level.player teleport_player(node);
 
   thread ending_shadowops_heli_sequence();
@@ -651,7 +651,7 @@ intro_dialogue() {
 objectives() {
   flag_wait("print_first_objective");
 
-  objective_location_makarov = getent("objective_location_makarov", "targetname");
+  objective_location_makarov = getEnt("objective_location_makarov", "targetname");
   objective_add(1, "current", &"ESTATE_OBJ_ASSASSINATE", objective_location_makarov.origin);
 
   flag_wait("deploy_house_defense_jeeps");
@@ -706,14 +706,14 @@ objectives() {
 
   objective_delete(1);
 
-  node = getstruct("ghost_talknode", "targetname");
+  node = getStruct("ghost_talknode", "targetname");
   objective_add(1, "current", &"ESTATE_OBJ_REGROUP", node.origin);
 
   flag_wait("house_briefing_is_over");
 
   objective_state(1, "done");
 
-  dsm_real = getent("dsm", "targetname");
+  dsm_real = getEnt("dsm", "targetname");
   objective_add(3, "current", &"ESTATE_OBJ_INTEL", dsm_real.origin);
 
   flag_wait("download_started");
@@ -734,7 +734,7 @@ objectives() {
 
   flag_wait("dsm_recovered");
 
-  marker = getstruct("ending_chopper_node", "targetname");
+  marker = getStruct("ending_chopper_node", "targetname");
 
   objective_state(5, "done");
 
@@ -843,7 +843,7 @@ forest_ambush_mortars() {
 }
 
 forest_friendly_initial_advance() {
-  trig = getent("forest_friendly_colortrig", "targetname");
+  trig = getEnt("forest_friendly_colortrig", "targetname");
   trig notify("trigger");
 
   friendlies = getaiarray("allies");
@@ -877,7 +877,7 @@ forest_ambush_rpg_guys() {
 
   flag_wait("deploy_rpg_ambush");
 
-  trig = getent("forest_defender_rpg_ambush_activator", "targetname");
+  trig = getEnt("forest_defender_rpg_ambush_activator", "targetname");
   trig notify("trigger");
 }
 
@@ -888,7 +888,7 @@ forest_ambush_rpg_guys_init() {
 
   wait randomfloatrange(2, 4.25);
 
-  ent = getent("futilejeep_javelin_sourcepoint1", "targetname");
+  ent = getEnt("futilejeep_javelin_sourcepoint1", "targetname");
 
   ent thread play_sound_on_entity("weap_cheytac_fire_special");
 
@@ -902,7 +902,7 @@ forest_attackers() {
     wait 10;
   }
 
-  trig = getent("forest_spawn_activator", "targetname");
+  trig = getEnt("forest_spawn_activator", "targetname");
   trig notify("trigger");
 }
 
@@ -953,7 +953,7 @@ forest_smoke_screens() {
 }
 
 heli_tweak(heliName) {
-  player_heli_tweak_observe = getent("heli_tweak", "targetname");
+  player_heli_tweak_observe = getEnt("heli_tweak", "targetname");
   level.player teleport_ent(player_heli_tweak_observe);
 
   heli = spawn_vehicle_from_targetname_and_drive(heliName);
@@ -1069,7 +1069,7 @@ house_approach_futilejeep() {
 }
 
 house_approach_futilejeep_javelin(launchEntName) {
-  fakeJavLauncher = getent(launchEntName, "targetname");
+  fakeJavLauncher = getEnt(launchEntName, "targetname");
 
   newMissile = MagicBullet("javelin", fakeJavLauncher.origin, self.origin);
   newMissile thread javelin_earthquake(self);
@@ -1079,7 +1079,7 @@ house_approach_futilejeep_javelin(launchEntName) {
 
 javelin_earthquake(targetObj) {
   dummy = spawn("script_origin", self.origin);
-  dummy linkto(self);
+  dummy linkTo(self);
   self waittill("death");
   earthquake(1.2, 1.5, dummy.origin, 1600);
   radiusdamage(targetObj.origin, 128, 25000, 25000);
@@ -1098,7 +1098,7 @@ house_friendly_rush() {
     level.fixednodesaferadius_default = 1040;
   }
 
-  houseAttackTrig = getent("house_approach_friendlytrigger", "targetname");
+  houseAttackTrig = getEnt("house_approach_friendlytrigger", "targetname");
   houseAttackTrig notify("trigger");
 
   wait 1;
@@ -1123,7 +1123,7 @@ house_enemy_cleanup_tracker() {
 
   level.enemyPop = enemies.size;
 
-  volume = getent("enemy_presence_volume", "targetname");
+  volume = getEnt("enemy_presence_volume", "targetname");
 
   if(level.enemyPop) {
     foreach(enemy in enemies) {
@@ -1166,8 +1166,8 @@ house_clearing_save_basement() {
 }
 
 house_backwards_door_handling() {
-  fakedoor = getent("fake_backwards_door", "targetname");
-  fakedoor_clip = getent("fake_backwards_door_clip", "targetname");
+  fakedoor = getEnt("fake_backwards_door", "targetname");
+  fakedoor_clip = getEnt("fake_backwards_door_clip", "targetname");
 
   if(!flag("skip_breachandclear")) {
     level waittill_any("breaching_number_0", "breaching_number_1", "breaching_number_2");
@@ -1190,7 +1190,7 @@ house_briefing_scarecrow() {
   level.scarecrow.goalradius = 16;
 
   if(!flag("skip_house_defense_dialogue")) {
-    animStartPoint = getstruct("scarecrow_photonode", "targetname");
+    animStartPoint = getStruct("scarecrow_photonode", "targetname");
     animStartPoint anim_generic_reach(level.scarecrow, "estate_house_photoshoot");
     animStartPoint thread anim_generic_run(level.scarecrow, "estate_house_photoshoot");
 
@@ -1198,7 +1198,7 @@ house_briefing_scarecrow() {
 
     camera = spawn("script_model", (0, 0, 0));
     camera setModel("electronics_camera_pointandshoot_animated");
-    camera linkto(level.scarecrow, "tag_inhand", (0, 0, 0), (0, 0, 0));
+    camera linkTo(level.scarecrow, "tag_inhand", (0, 0, 0), (0, 0, 0));
 
     delaythread(10, ::flag_set, "photographs_done");
 
@@ -1293,7 +1293,7 @@ house_briefing_ozone() {
 }
 
 house_briefing_ghosttalk() {
-  animStartPoint = getstruct("ghost_talknode", "targetname");
+  animStartPoint = getStruct("ghost_talknode", "targetname");
   animStartPoint anim_generic_reach(level.ghost, "estate_ghost_radio");
   animStartPoint thread anim_generic_run(level.ghost, "estate_ghost_radio");
 }
@@ -1684,7 +1684,7 @@ ending_moments() {
     SetSavedDvar("hud_showStance", "0");
     level.player setstance("stand");
 
-    node = getstruct("ghost_dragnode", "targetname");
+    node = getStruct("ghost_dragnode", "targetname");
 
     playerview = spawn_anim_model("playerview");
     playerview.angles = (0, 0, 0);
@@ -1708,7 +1708,7 @@ ending_moments() {
     node anim_first_frame_solo(level.ghost, "estate_ending_drag");
 
     tag_origin = spawn_tag_origin();
-    tag_origin linkto(playerview, "tag_player", (0, 0, 0), (0, 0, 0));
+    tag_origin linkTo(playerview, "tag_player", (0, 0, 0), (0, 0, 0));
     level.player playersetgroundreferenceent(tag_origin);
 
     wait 1;
@@ -1798,7 +1798,7 @@ ending_moments() {
   gasolineGuy = undefined;
   deadGhost = undefined;
 
-  node = getstruct("ending_chopper_node", "targetname");
+  node = getStruct("ending_chopper_node", "targetname");
   guys = [];
   foreach(member in level.ending_actors) {
     if(member.script_noteworthy == "gasolineGuy") {
@@ -1860,7 +1860,7 @@ ending_moments() {
   node anim_first_frame_solo(pavelow, "estate_ending_part1");
 
   tag_origin = spawn_tag_origin();
-  tag_origin linkto(playerview, "tag_player", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(playerview, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player playersetgroundreferenceent(tag_origin);
 
   ghost = level.ending_actors["ghost_ending"];
@@ -1906,7 +1906,7 @@ ending_moments() {
     shepherd waittill_notetrack_or_damage("pistol_pullout");
     pistol = spawn("script_model", (0, 0, 0));
     pistol setModel("weapon_colt_anaconda");
-    pistol linkto(shepherd, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    pistol linkTo(shepherd, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
 
     level.player LerpViewAngleClamp(1, 1, 1, 20, 20, 10, 2);
 
@@ -1917,7 +1917,7 @@ ending_moments() {
     pistol playSound("weap_deserteagle_fire_plr");
     playFXOnTag(getfx("anaconda_muzzle_flash"), pistol, "tag_flash");
 
-    level.player PlayRumbleOnEntity("shepherd_pistol");
+    level.player playRumbleOnEntity("shepherd_pistol");
 
     level.player delaycall(1.3, ::PlayRumbleOnEntity, "shot_collapse");
 
@@ -1947,7 +1947,7 @@ ending_moments() {
     shepherd waittill_notetrack_or_damage("dsm_pullout");
     dsm = spawn("script_model", (0, 0, 0));
     dsm setModel("mil_wireless_dsm_small");
-    dsm linkto(shepherd, "tag_inhand", (0, 0, 0), (0, 0, 0));
+    dsm linkTo(shepherd, "tag_inhand", (0, 0, 0), (0, 0, 0));
 
     shepherd waittill_notetrack_or_damage("dsm_putaway");
     dsm delete();
@@ -1960,7 +1960,7 @@ ending_moments() {
   throwingGuy = level.ending_actors["guy1_ending"];
   throwingHelperGuy = level.ending_actors["guy2_ending"];
 
-  node = getstruct("ending_chopper_node2", "targetname");
+  node = getStruct("ending_chopper_node2", "targetname");
 
   guys = [];
   guys[guys.size] = throwingGuy;
@@ -1989,7 +1989,7 @@ ending_moments() {
 
   wait 1.8;
 
-  level.player PlayRumbleOnEntity("bodytoss_impact");
+  level.player playRumbleOnEntity("bodytoss_impact");
 
   wait 1.3;
 
@@ -2046,17 +2046,17 @@ ending_pavelow_fakearrival() {
 
   level.pavelow vehicle_setspeed(15);
 
-  node1 = getstruct(level.pavelow.target, "targetname");
+  node1 = getStruct(level.pavelow.target, "targetname");
   level.pavelow setvehgoalpos(node1.origin, 0);
 
   level.pavelow waittill_any("goal", "near_goal");
 
-  node2 = getstruct(node1.target, "targetname");
+  node2 = getStruct(node1.target, "targetname");
   level.pavelow setvehgoalpos(node2.origin, 0);
 
   level.pavelow waittill_any("goal", "near_goal");
 
-  node3 = getstruct(node2.target, "targetname");
+  node3 = getStruct(node2.target, "targetname");
   level.pavelow setvehgoalpos(node3.origin, 1);
 
   level.pavelow waittill_any("goal", "near_goal");
@@ -2073,7 +2073,7 @@ ending_thunderone_heli_sequence() {
 
   heli vehicle_setspeed(12);
 
-  node1 = getstruct(heli.target, "targetname");
+  node1 = getStruct(heli.target, "targetname");
   heli setvehgoalpos(node1.origin, 0);
 
   heli setTargetYaw(195);
@@ -2086,14 +2086,14 @@ ending_thunderone_heli_sequence() {
 
   heli setTargetYaw(210);
 
-  node2 = getstruct(node1.target, "targetname");
+  node2 = getStruct(node1.target, "targetname");
   heli setvehgoalpos(node2.origin, 1);
 
   heli waittill_any("goal", "near_goal");
 
   wait 1;
 
-  node3 = getstruct(node2.target, "targetname");
+  node3 = getStruct(node2.target, "targetname");
   heli setvehgoalpos(node3.origin, 0);
 
   wait 0.5;
@@ -2104,7 +2104,7 @@ ending_thunderone_heli_sequence() {
 
   wait 2;
 
-  node4 = getstruct(node3.target, "targetname");
+  node4 = getStruct(node3.target, "targetname");
   heli setvehgoalpos(node4.origin);
 
   heli vehicle_setspeed(50);
@@ -2141,7 +2141,7 @@ ending_shadow_fader_mover(setting, fadeTime, accelTime, decelTime) {
     decelTime = 1;
   }
 
-  level.shadowfader MoveTo((setting, 0, 0), fadeTime, accelTime, decelTime);
+  level.shadowfader moveTo((setting, 0, 0), fadeTime, accelTime, decelTime);
 }
 
 ending_shadowops_heli_sequence() {
@@ -2152,7 +2152,7 @@ ending_shadowops_heli_sequence() {
   heli3 = delayThread(4, ::spawn_vehicle_from_targetname_and_drive, "ending_shadowops_heli_3");
   heli4 = delayThread(2, ::spawn_vehicle_from_targetname_and_drive, "ending_shadowops_heli_4");
 
-  trig = getent("ending_shouter_trig", "targetname");
+  trig = getEnt("ending_shouter_trig", "targetname");
   trig waittill("trigger");
 
   speakers = getEntArray("ending_shouter", "targetname");
@@ -2209,7 +2209,7 @@ temp_shepherd_dialogue(shepherd, ghost) {
 }
 
 ending_redsmoke_sequence() {
-  smokepot = getstruct("redsmoke", "targetname");
+  smokepot = getStruct("redsmoke", "targetname");
   playFX(getfx("redsmoke"), smokepot.origin);
 
   radio_dialogue("est_gst_gotyouroach");
@@ -2269,7 +2269,7 @@ ending_mortarhit_ghost_sequence() {
 }
 
 ending_mortarhit(mortarname) {
-  hit = getstruct(mortarname, "targetname");
+  hit = getStruct(mortarname, "targetname");
   hit play_sound_in_space(level.scr_sound["mortar"]["incomming"]);
 
   earthquake(0.5, 1.4, level.player.origin, 2000);
@@ -2295,7 +2295,7 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
 
   thread ending_gasoline_price_radio();
 
-  node = getstruct("ending_chopper_node2", "targetname");
+  node = getStruct("ending_chopper_node2", "targetname");
 
   guys = [];
   guys[guys.size] = gasolineGuy;
@@ -2303,7 +2303,7 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
 
   shepherd thread ending_smoking_fx();
 
-  node = getstruct("ending_chopper_node2", "targetname");
+  node = getStruct("ending_chopper_node2", "targetname");
   node thread anim_single(guys, "estate_ending_part3");
 
   gasolineGuy waittill_notetrack_or_damage("pour_on_player");
@@ -2319,7 +2319,7 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
   flag_set("cigar_flareup");
 
   flyOverHeli = spawn_vehicles_from_targetname("final_pavelow_liftoff_2");
-  flyOverHeliNode = getent("final_pavelow_flyover", "targetname");
+  flyOverHeliNode = getEnt("final_pavelow_flyover", "targetname");
   flyOverHeli[0] thread set_heli_goal(flyOverHeliNode);
 
   wait 0.1;
@@ -2340,7 +2340,7 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
 
   wait 1.2;
 
-  heliNode = getent("final_heli_goal_1", "targetname");
+  heliNode = getEnt("final_heli_goal_1", "targetname");
 
   level.pavelow thread set_heli_goal(heliNode);
 
@@ -2348,7 +2348,7 @@ ending_gasoline_sequence(gasolineGuy, shepherd, overlay) {
 
   wait 1;
 
-  heliNode = getent("final_pavelow_liftoff_exit", "targetname");
+  heliNode = getEnt("final_pavelow_liftoff_exit", "targetname");
   level.pavelow thread set_heli_goal(heliNode);
 
   overlay thread blackOut(2, 6);
@@ -2372,13 +2372,13 @@ ending_smoking_fx() {
   self waittill_notetrack_or_damage("cigar_box_pullout");
   cigarBox = spawn("script_model", (0, 0, 0));
   cigarBox setModel("prop_cigarette_pack");
-  cigarBox linkto(self, "j_thumb_le_3", (0, 0, 0), (0, 0, 0));
+  cigarBox linkTo(self, "j_thumb_le_3", (0, 0, 0), (0, 0, 0));
 
   wait 0.25;
 
   cigar = spawn("script_model", (0, 0, 0));
   cigar setModel("prop_price_cigar");
-  cigar linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  cigar linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
 
   self waittill_notetrack_or_damage("lighter_pullout");
   cigarBox delete();

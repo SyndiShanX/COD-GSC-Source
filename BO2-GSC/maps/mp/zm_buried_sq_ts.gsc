@@ -65,7 +65,7 @@ ts_sign_activate() {
 
   if(!isDefined(self.fx_ent)) {
     v_forward = anglesToForward(self.angles);
-    v_offset = vectornormalize(v_forward) * 2;
+    v_offset = vectorNormalize(v_forward) * 2;
     self.fx_ent = spawn("script_model", self.origin - vectorscale((0, 0, 1), 20.0) + v_offset);
     self.fx_ent.angles = anglesToForward(self.angles);
     self.fx_ent setModel("tag_origin");

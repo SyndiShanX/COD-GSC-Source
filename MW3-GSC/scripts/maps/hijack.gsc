@@ -77,11 +77,11 @@ _id_1109() {
   maps\_utility::_id_265A("axis");
   maps\_utility::_id_265A("allies");
   thread maps\_utility::set_vision_set("hijack_airplane", 1);
-  level._id_5A65 = getent("player_debate_trigger", "script_noteworthy");
+  level._id_5A65 = getEnt("player_debate_trigger", "script_noteworthy");
   level._id_5A65 common_scripts\utility::trigger_off();
-  level._id_5A66 = getent("player_debate_trigger_b", "script_noteworthy");
+  level._id_5A66 = getEnt("player_debate_trigger_b", "script_noteworthy");
   level._id_5A66 common_scripts\utility::trigger_off();
-  level._id_5A67 = getent("debate_laptop_off", "targetname");
+  level._id_5A67 = getEnt("debate_laptop_off", "targetname");
   level._id_5A67 hide();
 
   if(getDvar("airmasks") == "") {
@@ -97,7 +97,7 @@ _id_1109() {
   level._id_5A6A = getDvar("phys_gravityChangeWakeupRadius");
   level._id_5A6B = getDvar("ragdoll_max_life");
   level._id_5A6C = (-14, 114, 0);
-  level._id_5960 = getent("org_view_roll", "targetname");
+  level._id_5960 = getEnt("org_view_roll", "targetname");
   level.player playersetgroundreferenceent(level._id_5960);
   level._id_5961 = [];
   level._id_5961 = maps\_utility::_id_0BC3(level._id_5961, level._id_5960);
@@ -111,27 +111,27 @@ _id_1109() {
   maps\_treadfx::_id_28EF("script_vehicle_mi17_woodland_landing", "snow");
   maps\_treadfx::_id_28EF("script_vehicle_mi17_woodland_landing", "ice");
   maps\_treadfx::_id_28EF("script_vehicle_mi17_woodland_landing", "slush");
-  var_1 = getent("commander", "script_noteworthy");
+  var_1 = getEnt("commander", "script_noteworthy");
   var_1 maps\_utility::add_spawn_function(::_id_5A80);
-  var_2 = getent("commander_tarmac", "script_noteworthy");
+  var_2 = getEnt("commander_tarmac", "script_noteworthy");
   var_2 maps\_utility::add_spawn_function(::_id_5A80);
-  var_3 = getent("advisor", "script_noteworthy");
+  var_3 = getEnt("advisor", "script_noteworthy");
   var_3 maps\_utility::add_spawn_function(::_id_5A81);
-  var_4 = getent("advisor_tarmac", "script_noteworthy");
+  var_4 = getEnt("advisor_tarmac", "script_noteworthy");
   var_4 maps\_utility::add_spawn_function(::_id_5A81);
-  var_5 = getent("president", "script_noteworthy");
+  var_5 = getEnt("president", "script_noteworthy");
   var_5 maps\_utility::add_spawn_function(::_id_5A82);
-  var_6 = getent("president_tarmac", "script_noteworthy");
+  var_6 = getEnt("president_tarmac", "script_noteworthy");
   var_6 maps\_utility::add_spawn_function(::_id_5A82);
-  var_7 = getent("find_daughter_pre_crash", "targetname");
+  var_7 = getEnt("find_daughter_pre_crash", "targetname");
   var_7 maps\_utility::add_spawn_function(::_id_59E1);
-  var_8 = getent("hero_agent_01", "script_noteworthy");
+  var_8 = getEnt("hero_agent_01", "script_noteworthy");
   var_8 maps\_utility::add_spawn_function(::_id_5A85);
-  var_9 = getent("zerog_agent_01", "script_noteworthy");
+  var_9 = getEnt("zerog_agent_01", "script_noteworthy");
   var_9 maps\_utility::add_spawn_function(::_id_5A86);
-  var_10 = getent("zerog_agent_02", "script_noteworthy");
+  var_10 = getEnt("zerog_agent_02", "script_noteworthy");
   var_10 maps\_utility::add_spawn_function(::_id_5A88);
-  var_11 = getent("crash_agent_1", "script_noteworthy");
+  var_11 = getEnt("crash_agent_1", "script_noteworthy");
   var_11 maps\_utility::add_spawn_function(::_id_5A8A);
   maps\_utility::_id_27CA("pre_zerog_terrorists", ::_id_5A8C);
   maps\_utility::_id_27CB("terrorists", maps\hijack_code::_id_45E4);
@@ -153,10 +153,10 @@ _id_1109() {
 }
 
 _id_5A6F() {
-  var_0 = getent("hjk_red_light_pulsing0", "targetname");
-  var_1 = getent("hjk_red_light_pulsing1", "targetname");
-  var_2 = getent("hjk_red_light_pulsing2", "targetname");
-  var_3 = getent("hjk_red_light_pulsing3", "targetname");
+  var_0 = getEnt("hjk_red_light_pulsing0", "targetname");
+  var_1 = getEnt("hjk_red_light_pulsing1", "targetname");
+  var_2 = getEnt("hjk_red_light_pulsing2", "targetname");
+  var_3 = getEnt("hjk_red_light_pulsing3", "targetname");
   var_0 thread maps\hijack_code::_id_5970(0);
   var_1 thread maps\hijack_code::_id_5970(1);
   var_2 thread maps\hijack_code::_id_5970(2);
@@ -164,7 +164,7 @@ _id_5A6F() {
 }
 
 _id_5A17() {
-  var_0 = getent("cloud_tunnel", "targetname");
+  var_0 = getEnt("cloud_tunnel", "targetname");
   var_1 = common_scripts\utility::getfx("cloud_tunnel");
   var_2 = spawn("script_model", var_0.origin);
   var_2 setModel("generic_prop_raven");
@@ -330,7 +330,7 @@ _id_5A75() {
 
 _id_5A76() {
   var_0 = getEntArray("disable_during_crash", "script_noteworthy");
-  var_1 = getent("tarmac_backtrack_trigger", "script_noteworthy");
+  var_1 = getEnt("tarmac_backtrack_trigger", "script_noteworthy");
 
   foreach(var_3 in var_0) {}
   var_3 common_scripts\utility::trigger_off();
@@ -363,7 +363,7 @@ _id_5A77() {
     }
     var_3 = common_scripts\utility::spawn_tag_origin();
     var_3.origin = var_2.origin;
-    var_2 linkto(var_3);
+    var_2 linkTo(var_3);
     level._id_5A71[level._id_5A71.size] = var_2;
     level._id_5A78[level._id_5A78.size] = var_3;
   }
@@ -522,7 +522,7 @@ _id_5A8F() {
   common_scripts\utility::array_call(level._id_5976, ::show);
 
   if(!isDefined(level._id_5A90)) {
-    var_0 = common_scripts\utility::getstruct("hijack_plane_crash_model_origin", "targetname");
+    var_0 = common_scripts\utility::getStruct("hijack_plane_crash_model_origin", "targetname");
 
     foreach(var_2 in level._id_5976) {}
     var_2.origin = var_0.origin;
@@ -545,7 +545,7 @@ _id_5A92() {
   var_0.origin = self.origin;
   var_0.angles = self.angles;
   var_0 maps\_anim::_id_11CF(var_0, "engine_turbine_spin");
-  self linkto(var_0, "J_prop_1");
+  self linkTo(var_0, "J_prop_1");
   var_0 thread maps\_anim::_id_124E(var_0, "engine_turbine_spin_loop", "kill_turbines");
   common_scripts\utility::flag_wait("stop_phones");
   var_0 notify("kill_turbines");
@@ -555,7 +555,7 @@ _id_5A92() {
 }
 
 _id_5A93() {
-  var_0 = common_scripts\utility::getstruct("heli_end_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("heli_end_node", "targetname");
   level._id_59A4 = getEntArray("heli_interior", "targetname");
 
   foreach(var_2 in level._id_59A4) {

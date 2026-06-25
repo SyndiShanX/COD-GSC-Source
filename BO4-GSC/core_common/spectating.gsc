@@ -179,7 +179,7 @@ function_4c37bb21(var_2b7584f0) {
   }
 
   spectator_team = undefined;
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
 
   foreach(player in players) {
     if(player == self) {
@@ -266,7 +266,7 @@ function_493d2e03(team) {
 }
 
 function_34460764(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     player allowspectateallteams(1);
@@ -281,7 +281,7 @@ function_ef775048(team, spectate_team) {
     return;
   }
 
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     player function_493d2e03(spectate_team);

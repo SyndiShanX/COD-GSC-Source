@@ -151,8 +151,8 @@ objectives() {
 
       flag_wait("obj_rallypoint");
       objective_number = 0;
-      end_position = getent("rallypoint", "targetname");
-      obj_position = getent(end_position.target, "targetname");
+      end_position = getEnt("rallypoint", "targetname");
+      obj_position = getEnt(end_position.target, "targetname");
       objective_add(objective_number, "current", &"BONEYARD_OBJ_RALLYPOINT", obj_position.origin);
       level thread lerp_objective_pos(objective_number, obj_position, end_position);
     case "flyby":
@@ -162,7 +162,7 @@ objectives() {
 
       Objective_State(objective_number, "done");
       objective_number = 1;
-      obj_position = getent("rallypoint", "targetname");
+      obj_position = getEnt("rallypoint", "targetname");
       objective_add(objective_number, "current", &"BONEYARD_OBJ_RIDE", obj_position.origin);
       Objective_SetPointerTextOverride(objective_number, &"BONEYARD_OBJ_RIDE_ICON");
 
@@ -199,7 +199,7 @@ objectives() {
 lerp_objective_pos(objective_number, obj_position, end_position) {
   flag_wait("objective_lerp");
 
-  obj_position moveto(end_position.origin, 60);
+  obj_position moveTo(end_position.origin, 60);
 
   for(i = 0; i < 6; i++) {
     wait 10;
@@ -234,13 +234,13 @@ start_default() {
 }
 
 intro() {
-  getent("littlebird", "targetname") add_spawn_function(::littlebird_init);
-  getent("intro_littlebird", "script_noteworthy") add_spawn_function(::littlebird_init, true);
-  getent("intro_littlebird_2", "script_noteworthy") add_spawn_function(::littlebird_init, true);
-  getent("intro_littlebird_2", "script_noteworthy") add_spawn_function(::intro_littlebird_strafe);
-  getent("intro_hummer", "script_noteworthy") add_spawn_function(::intro_hummer);
-  getent("intro_btr80", "script_noteworthy") add_spawn_function(::intro_btr80);
-  getent("scene_a_suburban", "script_noteworthy") add_spawn_function(::scene_a_suburban);
+  getEnt("littlebird", "targetname") add_spawn_function(::littlebird_init);
+  getEnt("intro_littlebird", "script_noteworthy") add_spawn_function(::littlebird_init, true);
+  getEnt("intro_littlebird_2", "script_noteworthy") add_spawn_function(::littlebird_init, true);
+  getEnt("intro_littlebird_2", "script_noteworthy") add_spawn_function(::intro_littlebird_strafe);
+  getEnt("intro_hummer", "script_noteworthy") add_spawn_function(::intro_hummer);
+  getEnt("intro_btr80", "script_noteworthy") add_spawn_function(::intro_btr80);
+  getEnt("scene_a_suburban", "script_noteworthy") add_spawn_function(::scene_a_suburban);
 
   level thread intro_player();
   level thread intro_rockets();
@@ -456,7 +456,7 @@ road_target(heli) {
 
   target_ent = spawn("script_origin", target_origin);
 
-  target_ent linkto(self);
+  target_ent linkTo(self);
 
   old_mode = self getmode();
   self setmode("manual");
@@ -482,7 +482,7 @@ scene_a_suburban() {
 
   mg_guy thread set_flag_on_player_damage("scene_a_wave2");
 
-  main_target = getent("mg_target", "targetname");
+  main_target = getEnt("mg_target", "targetname");
   turret thread animscripts\hummer_turret\common::set_manual_target(main_target, 3, 6);
 
   flag_wait("scene_a_wave2");
@@ -502,15 +502,15 @@ scene_a_suburban() {
 
 scene_a_rpg_guy(vehicle) {
   sight_ent = spawn("script_origin", vehicle.origin + (0, 0, 150));
-  sight_ent linkto(vehicle);
+  sight_ent linkTo(vehicle);
 
   sight_ent waittill_player_lookat(undefined, undefined, undefined, 5, vehicle);
 
-  guy = getent("scene_a_rpg_guy", "targetname") spawn_ai(true);
+  guy = getEnt("scene_a_rpg_guy", "targetname") spawn_ai(true);
   guy endon("death");
   vehicle.rpg_guy = guy;
 
-  anim_ent = getent("scene_a_rpg_spot", "targetname");
+  anim_ent = getEnt("scene_a_rpg_spot", "targetname");
   guy set_allowdeath(true);
   guy.ignoreall = true;
   guy.ignoreme = true;
@@ -547,7 +547,7 @@ littlebird_init(no_repulsor) {
 
   self.fake_target = spawn("script_model", (0, 0, 0));
 
-  self.fake_target linkto(self, "tag_origin", (100, 0, 150), (0, 0, 0));
+  self.fake_target linkTo(self, "tag_origin", (100, 0, 150), (0, 0, 0));
   self thread fake_target_delete(self.fake_target);
 
   self thread drawpath();
@@ -601,9 +601,9 @@ littlebird_trigger() {
 
 littlebird_spawn() {
   level waittill("spawn_littlebird", ent_str);
-  ent = getent(ent_str, "targetname");
+  ent = getEnt(ent_str, "targetname");
 
-  heli_spawner = getent("littlebird", "targetname");
+  heli_spawner = getEnt("littlebird", "targetname");
   level.heli = heli_spawner move_spawn_and_go(ent);
 
   flag_clear("littlebird_react");
@@ -614,8 +614,8 @@ flyby_littlebird() {
   flag_wait("flyby_c130");
 
   if(!littlebird_alive()) {
-    path_ent = getent("littlebird_flyby_start", "targetname");
-    heli_spawner = getent("littlebird", "targetname");
+    path_ent = getEnt("littlebird_flyby_start", "targetname");
+    heli_spawner = getEnt("littlebird", "targetname");
     level.heli = heli_spawner move_spawn_and_go(path_ent);
   }
 
@@ -624,13 +624,13 @@ flyby_littlebird() {
   heli maps\_vehicle::godon();
   heli notify("reaction_end");
 
-  path = getent("littlebird_flyby_standby", "targetname");
+  path = getEnt("littlebird_flyby_standby", "targetname");
   heli maps\_vehicle::set_heli_move("faster");
   heli Vehicle_SetSpeed(65, 25, 25);
   heli thread maps\_vehicle::vehicle_paths(path);
 
   flag_wait("flyby_c130");
-  path = getent("flyby_chase_path", "targetname");
+  path = getEnt("flyby_chase_path", "targetname");
   heli maps\_vehicle::set_heli_move("faster");
   heli Vehicle_SetSpeed(60, 25, 25);
   heli thread maps\_vehicle::vehicle_paths(path);
@@ -640,10 +640,10 @@ flyby_littlebird() {
 }
 
 start_road() {
-  level.player start_at(GetEnt("start_road_player", "targetname"));
+  level.player start_at(getEnt("start_road_player", "targetname"));
   activate_trigger_with_targetname("middle_road_start_trigger");
 
-  heli_spawner = getent("littlebird", "targetname");
+  heli_spawner = getEnt("littlebird", "targetname");
   heli_spawner add_spawn_function(::littlebird_init);
   array_thread(getEntArray("littlebird_trigger", "targetname"), ::littlebird_trigger);
   level thread littlebird_spawn();
@@ -660,7 +660,7 @@ road() {
   level thread road_rocket_guys();
   level thread flyby_c130();
   level thread road_crash();
-  getent("road_hummer", "script_noteworthy") add_spawn_function(::road_hummer);
+  getEnt("road_hummer", "script_noteworthy") add_spawn_function(::road_hummer);
 
   triggers = getEntArray("middle_road", "targetname");
   foreach(trigger in triggers) {
@@ -759,7 +759,7 @@ flyby_c130() {
   array_thread(getEntArray("rocket_start", "targetname"), ::flyby_magic_rocket, 2);
 
   flag_wait("flyby_c130");
-  spawner = getent("flyby_c130_spawner", "targetname");
+  spawner = getEnt("flyby_c130_spawner", "targetname");
   c130 = spawner spawn_vehicle();
   c130 thread maps\_vehicle::gopath();
 
@@ -775,10 +775,10 @@ flyby_c130() {
 }
 
 start_flyby() {
-  level.player start_at(GetEnt("start_flyby_player", "targetname"));
+  level.player start_at(getEnt("start_flyby_player", "targetname"));
 
-  path_ent = getent("littlebird_flyby_start", "targetname");
-  heli_spawner = getent("littlebird", "targetname");
+  path_ent = getEnt("littlebird_flyby_start", "targetname");
+  heli_spawner = getEnt("littlebird", "targetname");
   level.heli = heli_spawner move_spawn_and_go(path_ent);
 }
 
@@ -788,7 +788,7 @@ flyby() {
   level.ai_cap["axis"] = 10;
   level.ai_cap["team3"] = 10;
 
-  getent("flyby_suburban", "script_noteworthy") add_spawn_function(::flyby_suburban);
+  getEnt("flyby_suburban", "script_noteworthy") add_spawn_function(::flyby_suburban);
 
   flag_wait("flyby_rockets");
   level thread flyby_littlebird();
@@ -859,24 +859,24 @@ start_higround() {
   flag_set("music_boneyard_flyby");
 
   objective_number = 0;
-  obj_position = getent("rallypoint", "targetname");
+  obj_position = getEnt("rallypoint", "targetname");
   objective_add(objective_number, "current", &"BONEYARD_OBJ_RALLYPOINT", obj_position.origin);
 
-  level.player start_at(GetEnt("start_higround_player", "targetname"));
+  level.player start_at(getEnt("start_higround_player", "targetname"));
 
   vnode = getvehiclenode("higround_minigun_suburban_start", "script_noteworthy");
-  suburban_spawner = getent("higround_minigun_suburban", "script_noteworthy");
+  suburban_spawner = getEnt("higround_minigun_suburban", "script_noteworthy");
   vehicle = suburban_spawner move_spawn_and_go(vnode);
 
   vnode = getvehiclenode("higround_btr80_start", "script_noteworthy");
-  btr80_spawner = getent("higround_btr80", "script_noteworthy");
+  btr80_spawner = getEnt("higround_btr80", "script_noteworthy");
   vehicle = btr80_spawner move_spawn_and_go(vnode);
   flag_set("flyby_suburban_go");
 
-  ent = getent("higround_heli_path", "script_noteworthy");
+  ent = getEnt("higround_heli_path", "script_noteworthy");
   thread mark_heli_path(ent);
 
-  trigger = getent("higround_start_trigger_off", "script_noteworthy");
+  trigger = getEnt("higround_start_trigger_off", "script_noteworthy");
   trigger trigger_off();
 
   activate_trigger_with_targetname("higround_start_color_trigger");
@@ -887,10 +887,10 @@ start_higround() {
 }
 
 higround() {
-  getent("higround_btr80", "script_noteworthy") add_spawn_function(::higround_btr80);
-  getent("higround_minigun_suburban", "script_noteworthy") add_spawn_function(::higround_minigun_suburban);
-  getent("higround_littlebird", "targetname") add_spawn_function(::littlebird_init);
-  getent("higround_littlebird", "targetname") add_spawn_function(::higround_littlebird);
+  getEnt("higround_btr80", "script_noteworthy") add_spawn_function(::higround_btr80);
+  getEnt("higround_minigun_suburban", "script_noteworthy") add_spawn_function(::higround_minigun_suburban);
+  getEnt("higround_littlebird", "targetname") add_spawn_function(::littlebird_init);
+  getEnt("higround_littlebird", "targetname") add_spawn_function(::higround_littlebird);
   array_spawn_function_noteworthy("higround_guy", ::higround_guy);
 
   level thread higround_dialogue();
@@ -1012,7 +1012,7 @@ higround_littlebird() {
   self ClearLookAtEnt();
   self ClearTurretTarget();
 
-  start_path = getent("higround_strafe_path_first", "targetname");
+  start_path = getEnt("higround_strafe_path_first", "targetname");
   level.heli thread maps\_vehicle::vehicle_paths(start_path);
 
   flag_clear("littlebird_react");
@@ -1029,7 +1029,7 @@ higround_littlebird_onkill() {
   self ClearLookAtEnt();
   self ClearTurretTarget();
 
-  start_path = getent("higround_strafe_path_first", "targetname");
+  start_path = getEnt("higround_strafe_path_first", "targetname");
   level.heli thread maps\_vehicle::vehicle_paths(start_path);
 
   flag_clear("littlebird_react");
@@ -1136,18 +1136,18 @@ start_ride() {
   flag_set("music_boneyard_intro");
   flag_set("music_boneyard_flyby");
 
-  level.player start_at(GetEnt("start_ride_player", "targetname"));
+  level.player start_at(getEnt("start_ride_player", "targetname"));
 
-  heli_spawner = getent("littlebird", "targetname");
+  heli_spawner = getEnt("littlebird", "targetname");
   heli_spawner add_spawn_function(::littlebird_init);
 }
 
 ride() {
   ride_vehicle_spawners = getEntArray("ride_vehicle", "script_noteworthy");
   array_thread(ride_vehicle_spawners, ::add_spawn_function, ::ride_vehicle);
-  getent("ride_uaz", "script_noteworthy") add_spawn_function(::ride_uaz);
+  getEnt("ride_uaz", "script_noteworthy") add_spawn_function(::ride_uaz);
 
-  spawner = getent("runway_suburban", "targetname");
+  spawner = getEnt("runway_suburban", "targetname");
   spawner add_spawn_function(::ride_runway_suburban);
 
   array_spawn_function_noteworthy("price", ::ride_uaz_price);
@@ -1375,13 +1375,13 @@ ride_c130() {
   flag_set("can_save");
   autosave_by_name("ride");
 
-  spawner = getent("ride_c130_spawner", "targetname");
+  spawner = getEnt("ride_c130_spawner", "targetname");
   c130_ent = spawner spawn_vehicle();
   c130_ent hide();
   wait 1;
   c130_ent maps\_vehicle::lights_off("running");
 
-  level.c130 linkto(c130_ent, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.c130 linkTo(c130_ent, "tag_origin", (0, 0, 0), (0, 0, 0));
   flag_set("obj_ride_c130");
 
   c130_ent thread maps\_vehicle::gopath();
@@ -1399,7 +1399,7 @@ ride_c130() {
   flag_set("uaz_park");
   wait(0.15);
   Earthquake(0.35, 0.50, level.player.origin, 5000);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   SetBlur(4, 0);
   wait(0.15);
   setblur(0, 0.4);
@@ -1433,9 +1433,9 @@ add_player_tractor_beam() {
 ride_c130_sound() {
   flag_wait("c130_takeoff");
 
-  left = getent("sound_engine_left", "script_noteworthy");
-  right = getent("sound_engine_right", "script_noteworthy");
-  center = getent("sound_c130_center", "script_noteworthy");
+  left = getEnt("sound_engine_left", "script_noteworthy");
+  right = getEnt("sound_engine_right", "script_noteworthy");
+  center = getEnt("sound_c130_center", "script_noteworthy");
 
   left playLoopSound("veh_c130_left_engine_loop");
   right playLoopSound("veh_c130_right_engine_loop");
@@ -1452,15 +1452,15 @@ ride_littlebird() {
     level.heli ClearLookAtEnt();
     level.heli ClearTurretTarget();
 
-    path = getent("littlebird_ride_start", "targetname");
+    path = getEnt("littlebird_ride_start", "targetname");
     level.heli Vehicle_SetSpeed(40, 25, 25);
     level.heli thread maps\_vehicle::vehicle_paths(path);
   }
 
   flag_wait("littlebird_stage1");
   if(!littlebird_alive()) {
-    path_ent = getent("littlebird_ride_respawn", "targetname");
-    heli_spawner = getent("littlebird", "targetname");
+    path_ent = getEnt("littlebird_ride_respawn", "targetname");
+    heli_spawner = getEnt("littlebird", "targetname");
     level.heli = heli_spawner move_spawn_and_go(path_ent);
   }
 
@@ -1468,7 +1468,7 @@ ride_littlebird() {
 
   repulsor = Missile_CreateRepulsorEnt(level.heli, 5000, 1000);
 
-  path = getent("littlebird_ride_stage1", "targetname");
+  path = getEnt("littlebird_ride_stage1", "targetname");
   level.heli Vehicle_SetSpeed(65, 25, 25);
   level.heli SetMaxPitchRoll(25, 25);
   level.heli thread new_vehicle_path(path);
@@ -1646,7 +1646,7 @@ ride_uaz_driver() {
 
 ride_uaz_driver_death() {
   self notify("newanim");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   level.uaz.riders = array_remove(level.uaz.riders, self);
 
@@ -1669,7 +1669,7 @@ ride_uaz_driver_attack() {
 
   if(isDefined(level.btr80) && isalive(level.btr80)) {
     etarget = spawn("script_origin", level.btr80.origin + (0, 0, 128));
-    etarget linkto(level.btr80);
+    etarget linkTo(level.btr80);
 
     self SetEntityTarget(etarget, 1);
 
@@ -1683,7 +1683,7 @@ ride_uaz_driver_attack() {
 
   if(littlebird_alive()) {
     etarget = spawn("script_origin", level.heli.origin + (0, 0, -128));
-    etarget linkto(level.heli);
+    etarget linkTo(level.heli);
 
     self SetEntityTarget(etarget, 1);
 
@@ -1701,8 +1701,8 @@ ride_tanker_blow() {
 
   flag_wait("blow_tanker_first");
   wait 0.4;
-  rocket_source = getent("blow_tanker_first_rocket", "targetname");
-  rocket_target = getent(rocket_source.target, "targetname");
+  rocket_source = getEnt("blow_tanker_first_rocket", "targetname");
+  rocket_target = getEnt(rocket_source.target, "targetname");
   rocket = MagicBullet("rpg_straight", rocket_source.origin, rocket_target.origin);
 
   damage_types = [];
@@ -1740,16 +1740,16 @@ start_ride_end() {
   array_thread(ride_vehicle_spawners, ::add_spawn_function, ::ride_vehicle);
 
   vnode = getvehiclenode("ride_end_start", "script_noteworthy");
-  spawner = getent("ride_uaz", "script_noteworthy");
+  spawner = getEnt("ride_uaz", "script_noteworthy");
 
   level.uaz = spawner move_spawn_and_go(vnode);
 
   vnode = getvehiclenode("ride_end_pickup_start", "targetname");
-  spawner = getent("runway_pickup", "targetname");
+  spawner = getEnt("runway_pickup", "targetname");
   spawner move_spawn_and_go(vnode);
 
   vnode = getvehiclenode("ride_end_suburban_start", "script_noteworthy");
-  spawner = getent("runway_suburban", "targetname");
+  spawner = getEnt("runway_suburban", "targetname");
   spawner move_spawn_and_go(vnode);
 
   flag_set("uaz_mounted");

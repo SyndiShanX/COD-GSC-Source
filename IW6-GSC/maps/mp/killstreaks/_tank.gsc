@@ -470,8 +470,8 @@ relativeAngle(ent1) {
   tankForwardVector *= (1, 1, 0);
   tankToEnt *= (1, 1, 0);
 
-  tankToEnt = VectorNormalize(tankToEnt);
-  TankForwardVector = VectorNormalize(tankForwardVector);
+  tankToEnt = vectorNormalize(tankToEnt);
+  TankForwardVector = vectorNormalize(tankForwardVector);
 
   targetCosine = VectorDot(tankToEnt, tankForwardVector);
 

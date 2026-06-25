@@ -18,7 +18,7 @@ african_set_0() {
   common_scripts\utility::func_3C9F(lib_0557::func_7838("quest_deathraven", "quest_deathraven_activate_rush"));
   level thread maps\mp\zquests\zmb_secret_challenges_util::register_on_player_dmg_func(::maps\mp\zquests\zmb_secret_challenges_util::kill_hidden_challenge, var_01, ::maps\mp\zquests\zmb_secret_challenges_util::agent_is_zombie);
   common_scripts\utility::func_3C9F(lib_0557::func_7838("quest_deathraven", "quest_deathraven_pickup_weap"));
-  if(self istouching(getent("zone_gallery_deathravent_event", "targetname"))) {
+  if(self istouching(getEnt("zone_gallery_deathravent_event", "targetname"))) {
     return 1;
   }
 

@@ -496,10 +496,10 @@ class careadefend {
     b_is_visible = [[stub.o_defend_area]] - > ritual_start_visible_internal(player);
     if(b_is_visible) {
       str_msg = [[stub.o_defend_area]] - > ritual_start_message_internal(player);
-      self sethintstring(str_msg);
+      self setHintString(str_msg);
       thread function_4e035595(player);
     } else {
-      self sethintstring(&"");
+      self setHintString(&"");
     }
     return b_is_visible;
   }
@@ -567,8 +567,8 @@ class careadefend {
   }
 
   function set_volumes(str_defend_volume, str_rumble_volume) {
-    m_e_defend_volume = getent(str_defend_volume, "targetname");
-    m_e_rumble_volume = getent(str_rumble_volume, "targetname");
+    m_e_defend_volume = getEnt(str_defend_volume, "targetname");
+    m_e_rumble_volume = getEnt(str_rumble_volume, "targetname");
     assert(isDefined(m_e_defend_volume), "");
     assert(isDefined(m_e_rumble_volume), "");
   }

@@ -69,7 +69,7 @@ function __init__() {
 }
 
 function function_541cb3c4() {
-  s_initial = getent("initial_egg_statue", "script_noteworthy");
+  s_initial = getEnt("initial_egg_statue", "script_noteworthy");
   level.sword_quest.eggs[self.characterindex] setModel(level.sword_quest.egg_models[0]);
   self function_abf3df35(s_initial.statue_id);
   self clientfield::set_player_uimodel("zmInventory.player_sword_quest_egg_state", 0);
@@ -197,7 +197,7 @@ function function_ed28cc7() {
 }
 
 function function_6c2f52e5(n_char_index) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player.characterindex === n_char_index) {
       return player;
@@ -236,7 +236,7 @@ function function_ac03c228(player) {
   }
   var_a3338832 = self function_4a703d7c(player);
   if(isDefined(self.hint_string)) {
-    self sethintstring(self.hint_string);
+    self setHintString(self.hint_string);
   }
   return var_a3338832;
 }
@@ -319,7 +319,7 @@ function magic_circle_trigger_visibility(player) {
   }
   var_a3338832 = self function_74e5c19(player);
   if(isDefined(self.hint_string)) {
-    self sethintstring(self.hint_string);
+    self setHintString(self.hint_string);
   }
   return var_a3338832;
 }
@@ -631,7 +631,7 @@ function function_8ca48fdc(player) {
   self setinvisibletoplayer(player);
   var_a3338832 = self function_c722bbbb(player);
   if(isDefined(self.hint_string)) {
-    self sethintstring(self.hint_string);
+    self setHintString(self.hint_string);
   }
   if(var_a3338832) {
     self setvisibletoplayer(player);
@@ -825,7 +825,7 @@ function on_player_spawned() {
 
 function on_player_disconnect() {
   var_d95a0cf3 = self.characterindex;
-  s_initial = getent("initial_egg_statue", "script_noteworthy");
+  s_initial = getEnt("initial_egg_statue", "script_noteworthy");
   level.sword_quest.eggs[var_d95a0cf3] setModel(level.sword_quest.egg_models[0]);
   level.sword_quest.swords[var_d95a0cf3] show();
 }
@@ -915,7 +915,7 @@ function private zombie_blood_soul_streak_fx(e_statue, e_killer) {
   e_fx clientfield::set("zod_egg_soul", 1);
   e_fx playSound("zmb_zod_soul_release");
   v_endpos = e_statue gettagorigin(e_statue.egg_tags[e_killer.characterindex]);
-  e_fx moveto(v_endpos, 1);
+  e_fx moveTo(v_endpos, 1);
   e_fx waittill("movedone");
   e_fx playSound("zmb_zod_soul_impact");
   wait(0.25);
@@ -1210,7 +1210,7 @@ function sword_devgui() {
   level thread zm_zod_util::setup_devgui_func("", "", 4, &function_b3babd8c);
   n_sword_level = 0;
   var_47719d0d = 0;
-  s_sword_rock = getent("", "");
+  s_sword_rock = getEnt("", "");
   while(true) {
     n_level = getdvarint("");
     if(n_level == 1) {

@@ -81,7 +81,7 @@ init() {
 afterlife_gameover_cleanup() {
   level waittill("end_game");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.afterlife = 0;
     player clientnotify("end_game");
     player notify("end_game");
@@ -93,7 +93,7 @@ afterlife_gameover_cleanup() {
 
   wait 5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(level.optimise_for_splitscreen) && !level.optimise_for_splitscreen) {
       maps\mp\_visionset_mgr::vsmgr_deactivate("overlay", "zm_afterlife_filter", player);
     }
@@ -127,7 +127,7 @@ afterlife_start_zombie_logic() {
 
   while(isDefined(b_everyone_alive) && !b_everyone_alive) {
     b_everyone_alive = 1;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(isDefined(player.afterlife) && player.afterlife) {
@@ -146,7 +146,7 @@ afterlife_start_zombie_logic() {
 
   flag_set("afterlife_start_over");
   wait 2;
-  array_func(getplayers(), ::afterlife_add);
+  array_func(getPlayers(), ::afterlife_add);
 }
 
 is_player_valid_afterlife(player) {
@@ -419,9 +419,9 @@ afterlife_leave(b_revived) {
   self setviewmodel(self.str_living_view);
 
   if(self.e_afterlife_corpse.revivetrigger.origin != self.e_afterlife_corpse.origin) {
-    self setorigin(self.e_afterlife_corpse.revivetrigger.origin);
+    self setOrigin(self.e_afterlife_corpse.revivetrigger.origin);
   } else {
-    self setorigin(self.e_afterlife_corpse.origin);
+    self setOrigin(self.e_afterlife_corpse.origin);
   }
 
   if(isDefined(level.e_gondola)) {
@@ -439,7 +439,7 @@ afterlife_leave(b_revived) {
 
         foreach(struct in a_s_orgs) {
           if(!positionwouldtelefrag(struct.origin)) {
-            self setorigin(struct.origin);
+            self setOrigin(struct.origin);
             break;
           }
         }
@@ -528,7 +528,7 @@ afterlife_laststand(b_electric_chair) {
   self seteverhadweaponall(1);
   self enableinvulnerability();
   self.afterlife_revived = 1;
-  playsoundatposition("zmb_afterlife_spawn_leave", self.e_afterlife_corpse.origin);
+  playSoundAtPosition("zmb_afterlife_spawn_leave", self.e_afterlife_corpse.origin);
   self afterlife_leave();
   self thread afterlife_revive_invincible();
   self playSound("zmb_afterlife_revived_gasp");
@@ -715,7 +715,7 @@ afterlife_doors_close() {
 }
 
 afterlife_corpse_cleanup(corpse) {
-  playsoundatposition("zmb_afterlife_revived", corpse.origin);
+  playSoundAtPosition("zmb_afterlife_revived", corpse.origin);
 
   if(isDefined(corpse.revivetrigger)) {
     corpse notify("stop_revive_trigger");
@@ -742,7 +742,7 @@ is_weapon_available_in_afterlife_corpse(weapon, player_to_check) {
     upgradedweapon = level.zombie_weapons[weapon].upgrade_name;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(players)) {
     for(player_index = 0; player_index < players.size; player_index++) {
@@ -864,12 +864,12 @@ afterlife_revive_hud_create() {
 afterlife_revive_trigger_spawn() {
   radius = getdvarint(#"_id_A17166B0");
   self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-  self.revivetrigger sethintstring("");
-  self.revivetrigger setcursorhint("HINT_NOICON");
+  self.revivetrigger setHintString("");
+  self.revivetrigger setCursorHint("HINT_NOICON");
   self.revivetrigger setmovingplatformenabled(1);
-  self.revivetrigger enablelinkto();
+  self.revivetrigger enablelinkTo();
   self.revivetrigger.origin = self.origin;
-  self.revivetrigger linkto(self);
+  self.revivetrigger linkTo(self);
   self.revivetrigger.beingrevived = 0;
   self.revivetrigger.createtime = gettime();
   self thread afterlife_revive_trigger_think();
@@ -883,7 +883,7 @@ afterlife_revive_trigger_think() {
 
   while(true) {
     wait 0.1;
-    self.revivetrigger sethintstring("");
+    self.revivetrigger setHintString("");
     players = get_players();
 
     for(i = 0; i < players.size; i++) {
@@ -1003,7 +1003,7 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived.revivetrigger.beingrevived = 1;
   playerbeingrevived.revive_hud settext(&"GAME_PLAYER_IS_REVIVING_YOU", self);
   playerbeingrevived revive_hud_show_n_fade(3.0);
-  playerbeingrevived.revivetrigger sethintstring("");
+  playerbeingrevived.revivetrigger setHintString("");
 
   if(isPlayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
@@ -1093,7 +1093,7 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
     }
   }
 
-  playerbeingrevived.revivetrigger sethintstring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
+  playerbeingrevived.revivetrigger setHintString(&"GAME_BUTTON_TO_REVIVE_PLAYER");
   playerbeingrevived.revivetrigger.beingrevived = 0;
   self notify("do_revive_ended_normally");
   self.is_reviving_any--;
@@ -1326,18 +1326,18 @@ afterlife_fake_death() {
 afterlife_fake_revive() {
   level notify("fake_revive");
   self notify("fake_revive");
-  playsoundatposition("zmb_afterlife_spawn_leave", self.origin);
+  playSoundAtPosition("zmb_afterlife_spawn_leave", self.origin);
 
   if(flag("afterlife_start_over")) {
     spawnpoint = [[level.afterlife_get_spawnpoint]]();
     trace_start = spawnpoint.origin;
     trace_end = spawnpoint.origin + vectorscale((0, 0, -1), 200.0);
     respawn_trace = playerphysicstrace(trace_start, trace_end);
-    self setorigin(respawn_trace);
+    self setOrigin(respawn_trace);
     self setplayerangles(spawnpoint.angles);
-    playsoundatposition("zmb_afterlife_spawn_enter", spawnpoint.origin);
+    playSoundAtPosition("zmb_afterlife_spawn_enter", spawnpoint.origin);
   } else
-    playsoundatposition("zmb_afterlife_spawn_enter", self.origin);
+    playSoundAtPosition("zmb_afterlife_spawn_enter", self.origin);
 
   self allowstand(1);
   self allowcrouch(0);
@@ -1463,7 +1463,7 @@ afterlife_hostmigration() {
   while(true) {
     level waittill("host_migration_end");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player setclientfieldtoplayer("player_lives", player.lives);
 
       if(isDefined(player.e_afterlife_corpse)) {
@@ -1474,7 +1474,7 @@ afterlife_hostmigration() {
     wait_network_frame();
     wait_network_frame();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player.e_afterlife_corpse)) {
         player.e_afterlife_corpse setclientfield("player_corpse_id", player getentitynumber() + 1);
       }
@@ -1558,9 +1558,9 @@ afterlife_trigger_visibility(player) {
   self setinvisibletoplayer(player, b_is_invis);
 
   if(player.lives == 0) {
-    self sethintstring(&"ZM_PRISON_OUT_OF_LIVES");
+    self setHintString(&"ZM_PRISON_OUT_OF_LIVES");
   } else {
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
 
     if(!isDefined(player.has_played_afterlife_trigger_hint) && player is_player_looking_at(self.stub.origin, 0.25)) {
       if(!(isDefined(player.dontspeak) && player.dontspeak)) {
@@ -1595,7 +1595,7 @@ afterlife_trigger_think() {
       self playSound("zmb_afterlife_trigger_activate");
       player playsoundtoplayer("zmb_afterlife_trigger_electrocute", player);
       player thread afterlife_trigger_used_vo();
-      self sethintstring("");
+      self setHintString("");
       player.keep_perks = 1;
       player afterlife_remove();
       player.afterlife = 1;
@@ -1606,7 +1606,7 @@ afterlife_trigger_think() {
       playFXOnTag(level._effect["afterlife_kill_point_fx"], e_fx, "tag_origin");
       wait 2;
       e_fx delete();
-      self sethintstring(&"ZM_PRISON_AFTERLIFE_KILL");
+      self setHintString(&"ZM_PRISON_AFTERLIFE_KILL");
     }
   }
 }
@@ -1655,8 +1655,8 @@ afterlife_interact_object_think() {
     if(isDefined(self.unitrigger_stub)) {
       self.unitrigger_stub.is_activated_in_afterlife = 0;
     } else if(isDefined(self.t_bump)) {
-      self.t_bump setcursorhint("HINT_NOICON");
-      self.t_bump sethintstring(&"ZM_PRISON_AFTERLIFE_INTERACT");
+      self.t_bump setCursorHint("HINT_NOICON");
+      self.t_bump setHintString(&"ZM_PRISON_AFTERLIFE_INTERACT");
     }
 
     self waittill("damage", amount, attacker);
@@ -1671,7 +1671,7 @@ afterlife_interact_object_think() {
               self.unitrigger_stub.is_activated_in_afterlife = 1;
               self.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
             } else if(isDefined(self.t_bump))
-              self.t_bump sethintstring("");
+              self.t_bump setHintString("");
 
             self playLoopSound("zmb_afterlife_shockbox_on", 1);
 
@@ -1733,7 +1733,7 @@ afterlife_interact_hint_trigger_create(m_interact, v_trig_offset, str_hint) {
 afterlife_trigger_visible_in_afterlife(player) {
   b_is_invis = isDefined(self.stub.is_activated_in_afterlife) && self.stub.is_activated_in_afterlife;
   self setinvisibletoplayer(player, b_is_invis);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
 
   if(!b_is_invis) {
     if(player is_player_looking_at(self.origin, 0.25)) {
@@ -1823,24 +1823,24 @@ afterlife_zapped() {
     if(isDefined(nd_target)) {
       v_fx_offset = vectorscale((0, 0, 1), 40.0);
       playFX(level._effect["afterlife_teleport"], self.origin);
-      playsoundatposition("zmb_afterlife_zombie_warp_out", self.origin);
+      playSoundAtPosition("zmb_afterlife_zombie_warp_out", self.origin);
       self hide();
       linker = spawn("script_model", self.origin + v_fx_offset);
       linker setModel("tag_origin");
       playFXOnTag(level._effect["teleport_ball"], linker, "tag_origin");
       linker thread linker_delete_watch(self);
-      self linkto(linker);
-      linker moveto(nd_target.origin + v_fx_offset, 1);
+      self linkTo(linker);
+      linker moveTo(nd_target.origin + v_fx_offset, 1);
       linker waittill("movedone");
       linker delete();
       playFX(level._effect["afterlife_teleport"], self.origin);
-      playsoundatposition("zmb_afterlife_zombie_warp_in", self.origin);
+      playSoundAtPosition("zmb_afterlife_zombie_warp_in", self.origin);
       self show();
     } else {
       iprintln("Could not teleport");
 
       playFX(level._effect["afterlife_teleport"], self.origin);
-      playsoundatposition("zmb_afterlife_zombie_warp_out", self.origin);
+      playSoundAtPosition("zmb_afterlife_zombie_warp_out", self.origin);
       level.zombie_total++;
       self delete();
       return;
@@ -1852,7 +1852,7 @@ afterlife_zapped() {
     self thread afterlife_zapped_fx();
 
     for(i = 0; i < 3; i++) {
-      self animscripted(self.origin, self.angles, "zm_afterlife_stun");
+      self animScripted(self.origin, self.angles, "zm_afterlife_stun");
       self maps\mp\animscripts\shared::donotetracks("stunned");
     }
 
@@ -1918,7 +1918,7 @@ afterlife_zapped_fx() {
 enable_afterlife_prop() {
   self show();
   self.script_noteworthy = "afterlife_prop";
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player.afterlife) && player.afterlife) {
@@ -1952,7 +1952,7 @@ last_stand_conscience_vo() {
 
   if(isDefined(convo)) {
     wait 5;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     if(a_players.size > 1) {
       foreach(player in a_players) {

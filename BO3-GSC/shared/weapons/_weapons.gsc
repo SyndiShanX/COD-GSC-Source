@@ -843,7 +843,7 @@ function damage_trace(from, to, startradius, ignore) {
   if(lengthsquared(diff) < (startradius * startradius)) {
     midpos = to;
   }
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
   if(getdvarint("scr_damage_debug") != 0) {
@@ -933,7 +933,7 @@ function play_concussion_sound(duration) {
   self endon("disconnect");
   concussionsound = spawn("script_origin", (0, 0, 1));
   concussionsound.origin = self.origin;
-  concussionsound linkto(self);
+  concussionsound linkTo(self);
   concussionsound thread delete_ent_on_owner_death(self);
   concussionsound playSound("");
   concussionsound playLoopSound("");
@@ -1249,7 +1249,7 @@ function ninebang_doninebang(attacker, weapon, pos, cooktime) {
   wait(randomfloatrange(mindelay, maxdelay));
   for(i = 1; i < detonations; i++) {
     newpos = level ninebang_getsubexplosionpos(pos, maxradius);
-    playsoundatposition("wpn_flash_grenade_explode", newpos);
+    playSoundAtPosition("wpn_flash_grenade_explode", newpos);
     playFX(level._effect["flashNineBang"], newpos);
     closestplayers = arraysort(level.players, newpos, 1);
     foreach(player in closestplayers) {
@@ -1274,7 +1274,7 @@ function ninebang_doninebang(attacker, weapon, pos, cooktime) {
       }
       forward = anglesToForward(player getplayerangles());
       toblast = pos - vieworigin;
-      toblast = vectornormalize(toblast);
+      toblast = vectorNormalize(toblast);
       percent_angle = 0.5 * (1 + vectordot(forward, toblast));
       player notify("flashbang", percent_distance, percent_angle, attacker);
     }
@@ -1294,7 +1294,7 @@ function ninebang_getsubexplosionpos(startpos, range) {
 function ninebang_doempdamage(player, weapon, position) {
   kninebangempradius = 512;
   radiussq = kninebangempradius * kninebangempradius;
-  playsoundatposition("wpn_emp_explode", position);
+  playSoundAtPosition("wpn_emp_explode", position);
   level empgrenade::empexplosiondamageents(player, weapon, position, kninebangempradius, 0);
   foreach(targetent in level.players) {
     if(ninebang_empcandamage(targetent, position, radiussq, 0, 0)) {

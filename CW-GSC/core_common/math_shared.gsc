@@ -196,7 +196,7 @@ function get_dot_direction(v_point, b_ignore_z, b_normalize, str_direction, b_us
   v_to_point = v_point - v_origin;
 
   if(b_normalize) {
-    v_to_point = vectornormalize(v_to_point);
+    v_to_point = vectorNormalize(v_to_point);
   }
 
   n_dot = vectordot(v_direction, v_to_point);

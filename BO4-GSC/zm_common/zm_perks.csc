@@ -281,7 +281,7 @@ init_perk_altar_icon(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     }
 
     str_targetname = "altar_icon_" + n_slot;
-    mdl_icon = getent(localclientnum, str_targetname, "targetname");
+    mdl_icon = getEnt(localclientnum, str_targetname, "targetname");
 
     if(isDefined(mdl_icon)) {
       mdl_icon delete();
@@ -309,7 +309,7 @@ init_perk_altar_icon(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     forcestreamxmodel(self.model, 1, 1);
     forcestreamxmodel(var_c1cbeea5, 1, -1);
     mdl_icon = util::spawn_model(localclientnum, var_c1cbeea5, self gettagorigin("tag_icon_link"), self.angles);
-    mdl_icon linkto(self, "tag_icon_link");
+    mdl_icon linkTo(self, "tag_icon_link");
     mdl_icon playrenderoverridebundle(#"hash_16b8b568a95931e7");
     mdl_icon.targetname = str_targetname;
     mdl_icon.mdl_altar = self;
@@ -384,7 +384,7 @@ function_30bf6142(localclientnum, newval, oldval, n_slot) {
   }
 
   e_player = function_5c10bd79(localclientnum);
-  mdl_icon = getent(localclientnum, "altar_icon_" + n_slot, "targetname");
+  mdl_icon = getEnt(localclientnum, "altar_icon_" + n_slot, "targetname");
 
   if(!isDefined(mdl_icon)) {
     if(function_be3ae9c5(newval)) {
@@ -431,7 +431,7 @@ function_bde5bc78(localclientnum, var_fe0b737a, newval, oldval) {
 
     if(!isDefined(self getlinkedent())) {
       self.origin = self.mdl_altar gettagorigin("tag_icon_link");
-      self linkto(self.mdl_altar, "tag_icon_link");
+      self linkTo(self.mdl_altar, "tag_icon_link");
     }
 
     if(level.var_c3e5c4cd == 2) {
@@ -492,7 +492,7 @@ function_bde5bc78(localclientnum, var_fe0b737a, newval, oldval) {
   v_forward = anglesToForward(self.angles) * 5;
   v_fx_origin = self.origin + (v_forward[0], v_forward[1], 3);
   playFX(localclientnum, level._effect[#"hash_57c8c9eff08ddf44"], v_fx_origin);
-  self moveto(self.origin - anglesToForward(self.angles) * 2, 0.5);
+  self moveTo(self.origin - anglesToForward(self.angles) * 2, 0.5);
 
   while(isDefined(self)) {
     n_time = gettime();
@@ -551,7 +551,7 @@ zeus_bird_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   if(newval) {
     while(!isDefined(level.var_aaf8da70)) {
       waitframe(1);
-      level.var_aaf8da70 = getent(localclientnum, "zeus_bird_head", "targetname");
+      level.var_aaf8da70 = getEnt(localclientnum, "zeus_bird_head", "targetname");
     }
 
     util::playFXOnTag(localclientnum, level._effect[#"zeus_bird_fx"], level.var_aaf8da70, "bird_follow_jnt");
@@ -582,7 +582,7 @@ function_ab7cd429(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   level endon(#"demo_jump");
 
   if(!isDefined(level.var_aaf8da70)) {
-    level.var_aaf8da70 = getent(localclientnum, "zeus_bird_head", "targetname");
+    level.var_aaf8da70 = getEnt(localclientnum, "zeus_bird_head", "targetname");
   }
 
   var_aaf8da70 = level.var_aaf8da70;
@@ -606,14 +606,14 @@ function_ab7cd429(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 0) {
     var_6d877f48 = array::random(array((7, 7, 7), (-7, -7, -7), (-7, 7, 7), (7, -7, -7)));
-    var_aaf8da70 rotateto(level.var_245eb09f + var_6d877f48, 0.2);
+    var_aaf8da70 rotateTo(level.var_245eb09f + var_6d877f48, 0.2);
     wait 0.8;
-    var_aaf8da70 rotateto(level.var_245eb09f, 0.1);
+    var_aaf8da70 rotateTo(level.var_245eb09f, 0.1);
     return;
   }
 
   var_165f12bb = array::random(array((17, 30, 25), (-10, -30, -25), (-10, 30, 25), (17, -30, -25)));
-  var_aaf8da70 rotateto(level.var_245eb09f + var_165f12bb, 0.15);
+  var_aaf8da70 rotateTo(level.var_245eb09f + var_165f12bb, 0.15);
   var_aaf8da70 thread function_1625e105(self);
 }
 
@@ -634,9 +634,9 @@ function_1625e105(e_player) {
       var_d1d1cc92 = e_player.origin;
     }
 
-    if(vectordot(vectornormalize(var_d1d1cc92 - self.origin), anglesToForward(level.var_245eb09f)) > 0.5) {
+    if(vectordot(vectorNormalize(var_d1d1cc92 - self.origin), anglesToForward(level.var_245eb09f)) > 0.5) {
       var_a8dcfa = vectortoangles(var_d1d1cc92 - self.origin);
-      self rotateto(var_a8dcfa, 0.15);
+      self rotateTo(var_a8dcfa, 0.15);
     }
 
     wait 0.15;

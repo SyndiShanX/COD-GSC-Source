@@ -76,7 +76,7 @@ hvt_handoff_dof_scripts() {
 
 func_6DCB() {
   wait 0.5;
-  var_0 = scripts\engine\utility::getstruct("jackal_callin_launch_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("jackal_callin_launch_animnode", "targetname");
   var_0 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_0 scripts\sp\anim::func_1EC3(level.var_12B67, "jackal_callin");
   level.var_EA99 vehicle_teleport(level.var_12B67.origin, level.var_12B67.angles);
@@ -110,13 +110,13 @@ func_DAF0() {
     var_3.var_1FBB = var_3.script_noteworthy;
     var_3 scripts\sp\anim::func_F64A();
     var_3.clip = var_3 scripts\engine\utility::get_target_ent();
-    var_3.clip linkto(var_3);
+    var_3.clip linkTo(var_3);
     var_3.clip connectpaths();
   }
 
   foreach(var_3 in var_1) {
     var_0 scripts\sp\anim::func_1EE0(var_3, "crate_explode");
-    var_3.clip disconnectpaths();
+    var_3.clip disconnectPaths();
   }
 
   wait 0.1;
@@ -124,11 +124,11 @@ func_DAF0() {
 }
 
 func_436B(var_0) {
-  var_1 = getent("lot_jackal_statue", "targetname");
+  var_1 = getEnt("lot_jackal_statue", "targetname");
   var_1.var_1FBB = "lot_statue";
   var_1 setModel("decor_aatis_tower_globe_01");
-  var_2 = getent("tower_statue_clip", "targetname");
-  var_2 linkto(var_1, "j_base");
+  var_2 = getEnt("tower_statue_clip", "targetname");
+  var_2 linkTo(var_1, "j_base");
   var_1 scripts\sp\anim::func_F64A();
 
   if(scripts\engine\utility::is_true(var_0)) {
@@ -138,7 +138,7 @@ func_436B(var_0) {
   }
 
   _createnavrepulsor("statue", 0, var_1, 384);
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
 }
 
 func_8A01() {
@@ -200,9 +200,9 @@ func_1C1A() {
 #using_animtree("generic_human");
 
 func_89FE() {
-  var_0 = getent("hvt_soldier01", "targetname");
-  var_1 = getent("hvt_soldier02", "targetname");
-  var_2 = getent("hvt_soldier03", "targetname");
+  var_0 = getEnt("hvt_soldier01", "targetname");
+  var_1 = getEnt("hvt_soldier02", "targetname");
+  var_2 = getEnt("hvt_soldier03", "targetname");
   var_3 = var_0 scripts\sp\utility::func_10619(1, 1);
   var_4 = var_1 scripts\sp\utility::func_10619(1, 1);
   var_5 = var_2 scripts\sp\utility::func_10619(1, 1);
@@ -215,7 +215,7 @@ func_89FE() {
   level.var_9231[1] = var_3;
   level.var_9231[2] = var_4;
   level.var_9231[3] = var_5;
-  var_7 = scripts\engine\utility::getstruct("hvt_handoff_animnode", "targetname");
+  var_7 = scripts\engine\utility::getStruct("hvt_handoff_animnode", "targetname");
 
   if(!isDefined(var_7)) {
     return;
@@ -267,7 +267,7 @@ func_8A05() {
 
 func_1073B(var_0) {
   if(!isDefined(level.var_920F)) {
-    var_1 = getent("hvt", "targetname");
+    var_1 = getEnt("hvt", "targetname");
     level.var_920F = var_1 scripts\sp\utility::func_10619(1, 1);
     level.var_920F.var_1FBB = "hvt";
     level.var_920F.name = "Riah";
@@ -369,7 +369,7 @@ func_A417() {
   level.var_D127 func_0BDC::func_F420(500, 135, -30, 1, 1);
   level.var_D127 func_0BDC::func_A19F();
   level.var_D127 func_0BDC::func_A07D();
-  var_0 = scripts\engine\utility::getstruct("jackal_callin_launch_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("jackal_callin_launch_animnode", "targetname");
   var_0 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_1 = "jackal_callin";
   wait 0.1;
@@ -459,11 +459,11 @@ func_D166() {
   var_1 setModel("tag_origin");
   var_1.angles = self.angles;
   var_2 = self gettagangles("TAG_ORIGIN");
-  var_3 = vectornormalize(anglesToForward(var_2));
-  var_4 = vectornormalize(anglestoup(var_2));
-  var_5 = vectornormalize(anglestoright(var_2));
+  var_3 = vectorNormalize(anglesToForward(var_2));
+  var_4 = vectorNormalize(anglestoup(var_2));
+  var_5 = vectorNormalize(anglestoright(var_2));
   var_1.origin = self.origin + var_3 * 226 + var_4 * 20;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   wait 0.1;
   objective_onentity(var_0, var_1);
   scripts\engine\utility::flag_wait("jackals_landed");
@@ -515,7 +515,7 @@ func_376D(var_0, var_1) {
 }
 
 func_1130D(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -593,8 +593,8 @@ func_A413() {
 }
 
 func_A414() {
-  var_0 = getent("jackal_callin_player_clip", "targetname");
-  var_1 = getent("jackal_callin_salter_clip", "targetname");
+  var_0 = getEnt("jackal_callin_player_clip", "targetname");
+  var_1 = getEnt("jackal_callin_salter_clip", "targetname");
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_EA01(var_0);
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_EA01(var_1);
 }
@@ -618,7 +618,7 @@ func_A41A() {
 
   if(getdvarint("e3", 0) == 1) {
     scripts\sp\maps\phspace\phspace_dps::func_A0F0();
-    var_0 = scripts\engine\utility::getstruct("jackal_callin_launch_animnode", "targetname");
+    var_0 = scripts\engine\utility::getStruct("jackal_callin_launch_animnode", "targetname");
     var_0 thread scripts\sp\anim::func_1EC3(level.var_D2A1, "space_launch");
     func_0BDC::func_D164(level.var_D2A1.var_BD0D, 0);
     level.player getroundswon(1);
@@ -670,12 +670,12 @@ func_104F6() {
   level.var_AA61.var_1FBB = "launch_ca_destroyer_1";
   level.var_AA62.var_1FBB = "launch_ca_destroyer_2";
   level.var_AA63.var_1FBB = "launch_ca_destroyer_3";
-  var_0 = scripts\engine\utility::getstruct("jackal_callin_launch_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("jackal_callin_launch_animnode", "targetname");
   var_0 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   level.var_1EF0 = scripts\engine\utility::spawn_tag_origin();
   level.var_1EF0.origin = var_0.origin;
   level.var_1EF0.angles = var_0.angles;
-  level.var_1EF0 linkto(var_0);
+  level.var_1EF0 linkTo(var_0);
   level.var_1EF0.parent = var_0;
   var_1 = [];
   var_1["retribution"] = level.var_12B67;
@@ -698,11 +698,11 @@ func_104F6() {
   var_0 thread scripts\sp\anim::func_1F2C(var_1, var_2);
   level.var_1EF0 thread scripts\sp\anim::func_1F35(level.var_EA99, var_2);
   level.var_1EF0 thread scripts\sp\anim::func_1F35(level.var_1CB9, var_2);
-  level.var_EA99 linkto(level.var_1EF0);
-  level.var_1CB9 linkto(level.var_1EF0);
+  level.var_EA99 linkTo(level.var_1EF0);
+  level.var_1CB9 linkTo(level.var_1EF0);
   var_0 thread func_CFDE(var_2);
   level.var_EA99 func_0BDC::func_19A2();
-  var_3 = scripts\engine\utility::getstruct("jackal_launch_animnode_clone", "targetname");
+  var_3 = scripts\engine\utility::getStruct("jackal_launch_animnode_clone", "targetname");
   var_3 = scripts\engine\utility::spawn_tag_origin(var_3.origin, var_3.angles);
   thread func_AA9D();
   scripts\sp\maps\pearlharbor\pearlharbor_util::func_13801(45);
@@ -719,7 +719,7 @@ func_104F6() {
   level waittill("player_allow_teleport");
   var_4 = spawn("script_origin", var_0.origin);
   var_4.angles = var_0.angles;
-  level.var_D2A1 linkto(var_0);
+  level.var_D2A1 linkTo(var_0);
   scripts\engine\utility::flag_set("flag_pause_sun_fx_updates");
   wait 0.05;
   level.var_1161E = abs(var_4.origin[2] - var_3.origin[2]);
@@ -1008,11 +1008,11 @@ func_CFDE(var_0) {
     level.var_D2A1.var_BD0D.origin = level.var_D2A1.origin + (var_20 + var_8.var_BC49) * var_21;
     level.var_D2A1.var_B025.origin = level.var_D2A1.var_AFEB.origin + (var_20 + var_8.var_AFF8) * var_21;
     level.var_1EF0.origin = level.var_1EF0.parent.origin + var_8.var_1D11 * var_21;
-    var_22 = vectornormalize(level.var_D2A1.var_B025.origin - level.var_D2A1.var_BD0D.origin);
+    var_22 = vectorNormalize(level.var_D2A1.var_B025.origin - level.var_D2A1.var_BD0D.origin);
     level.var_D2A1.var_BD0D.angles = _axistoangles(var_22, var_18, var_19) + (0, 0, var_8.var_E67D) * var_21;
-    level.var_D2A1.var_BD0D linkto(level.var_D2A1);
-    level.var_D2A1.var_B025 linkto(level.var_D2A1.var_AFEB);
-    level.var_1EF0 linkto(level.var_1EF0.parent);
+    level.var_D2A1.var_BD0D linkTo(level.var_D2A1);
+    level.var_D2A1.var_B025 linkTo(level.var_D2A1.var_AFEB);
+    level.var_1EF0 linkTo(level.var_1EF0.parent);
     wait 0.05;
 
     if(var_7 <= 0.0) {
@@ -1025,7 +1025,7 @@ hack_launch_visionsets() {
   visionsetnaked("phspace_ground", 0);
   wait 4;
   visionsetnaked("", 4);
-  var_0 = getent("trigger_sunfx_fadein", "targetname");
+  var_0 = getEnt("trigger_sunfx_fadein", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   wait 4.6;
   visionsetnaked("phspace_sky_upper", 0);
@@ -1248,7 +1248,7 @@ func_D2D8() {
   thread func_0BDC::func_A2B0(%jackal_pilot_launch_button, %jackal_vehicle_launch_button, 1.1, 0.5);
   wait 2.1;
   earthquake(0.25, 0.75, level.var_D127.origin, 5000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   thread func_104EB();
   level.var_D127 notify("notify_player_can_launch");
 }
@@ -1332,7 +1332,7 @@ func_424D(var_0) {
   }
 
   wait(var_1);
-  var_2 = scripts\engine\utility::getstruct("jackal_launch_animnode_clone", "targetname");
+  var_2 = scripts\engine\utility::getStruct("jackal_launch_animnode_clone", "targetname");
   var_2 = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
   var_2 scripts\sp\anim::func_1F35(level.var_D299, "space_launch_boost");
 }
@@ -1467,18 +1467,18 @@ func_1186B() {
 }
 
 func_D2A6(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = scripts\sp\vehicle::func_13237(var_2);
   var_3.var_4074 = [];
 
   if(isDefined(var_1) && var_1) {
     var_3.var_AFEB = scripts\engine\utility::spawn_tag_origin();
     var_3.var_AFEB.origin = var_3.origin + anglesToForward(var_3.angles) * 2500;
-    var_3.var_AFEB linkto(var_3);
+    var_3.var_AFEB linkTo(var_3);
     var_3.var_BD0D = scripts\engine\utility::spawn_tag_origin();
-    var_3.var_BD0D linkto(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_3.var_BD0D linkTo(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_3.var_B025 = scripts\engine\utility::spawn_tag_origin();
-    var_3.var_B025 linkto(var_3.var_AFEB, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_3.var_B025 linkTo(var_3.var_AFEB, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_3.var_4074 = scripts\engine\utility::array_add(var_3.var_4074, var_3.var_AFEB);
     var_3.var_4074 = scripts\engine\utility::array_add(var_3.var_4074, var_3.var_BD0D);
     var_3.var_4074 = scripts\engine\utility::array_add(var_3.var_4074, var_3.var_B025);
@@ -1492,17 +1492,17 @@ func_D2A6(var_0, var_1) {
 
 func_104F9() {
   level.var_1028D show();
-  var_0 = getent("trigger_show_upper_skybox_blend", "targetname");
+  var_0 = getEnt("trigger_show_upper_skybox_blend", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   level.var_1028B show();
   level.var_1028D hide();
 }
 
 func_104F5() {
-  var_0 = getent("trigger_local_cloudfx_thick", "targetname");
+  var_0 = getEnt("trigger_local_cloudfx_thick", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   func_104F7("vfx_ph_launch_player_local_clouds_thick");
-  var_0 = getent("trigger_local_cloudfx_thin", "targetname");
+  var_0 = getEnt("trigger_local_cloudfx_thin", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   func_104F7("vfx_ph_launch_player_local_clouds_thin", "vfx_ph_launch_player_local_clouds_thick");
 }
@@ -1524,9 +1524,9 @@ func_104F7(var_0, var_1) {
 }
 
 func_104FC() {
-  var_0 = getent("trigger_local_cloudfx_thick", "targetname");
+  var_0 = getEnt("trigger_local_cloudfx_thick", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
-  var_1 = scripts\engine\utility::getstruct("clouds_mid_fx_struct", "targetname");
+  var_1 = scripts\engine\utility::getStruct("clouds_mid_fx_struct", "targetname");
   var_2 = scripts\engine\utility::spawn_tag_origin(var_1.origin);
   wait 0.05;
   playFXOnTag(scripts\engine\utility::getfx("vfx_ph_launch_clouds_scattered_mid_02"), var_2, "tag_origin");
@@ -1540,7 +1540,7 @@ space_launch_bounce_light() {
   level.space_launch_bounce_light = scripts\engine\utility::spawn_tag_origin();
   level.space_launch_bounce_light.color = (0, 0, 0);
   level.space_launch_bounce_light thread space_launch_bounce_light_origin();
-  var_0 = getent("trigger_sunfx_fadeout", "targetname");
+  var_0 = getEnt("trigger_sunfx_fadeout", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   playFXOnTag(scripts\engine\utility::getfx("launch_sky_bounce_light"), level.space_launch_bounce_light, "tag_origin");
   level.space_launch_bounce_light.color = (1, 0, 0);
@@ -1573,7 +1573,7 @@ func_104EA(var_0, var_1, var_2) {
     var_2 = 0;
   }
 
-  var_3 = getent("trigger_local_cloudfx_thick", "targetname");
+  var_3 = getEnt("trigger_local_cloudfx_thick", "targetname");
   var_3 func_0BDC::func_136A6(self);
 
   foreach(var_5 in var_0) {
@@ -1582,7 +1582,7 @@ func_104EA(var_0, var_1, var_2) {
 }
 
 func_104E9() {
-  var_0 = scripts\engine\utility::getstruct("cloudbank_fx_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("cloudbank_fx_struct", "targetname");
   var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   scripts\engine\utility::waitframe();
   level waittill("space_launch_cleanup");
@@ -1611,11 +1611,11 @@ func_104F3() {
 }
 
 func_104F8() {
-  var_0 = getent("trigger_sunfx_fadeout", "targetname");
+  var_0 = getEnt("trigger_sunfx_fadeout", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   wait 5;
   thread func_D27C(0.22, 5);
-  var_0 = getent("trigger_sunfx_fadein", "targetname");
+  var_0 = getEnt("trigger_sunfx_fadein", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   thread func_D27C(0.17, 3);
   wait 8;
@@ -1623,18 +1623,18 @@ func_104F8() {
 }
 
 func_104E6() {
-  var_0 = getent("trigger_sunfx_fadeout", "targetname");
+  var_0 = getEnt("trigger_sunfx_fadeout", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   wait 3;
   level.var_D127 thread scripts\sp\utility::func_75C4("vfx_ph_jackal_canopy_drops", "j_mainroot_ship");
 }
 
 func_104FB() {
-  var_0 = getent("trigger_sunfx_fadeout", "targetname");
+  var_0 = getEnt("trigger_sunfx_fadeout", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   _killfxontag(scripts\engine\utility::getfx("vfx_sunflare"), level.var_111D0, "tag_origin");
   playFXOnTag(scripts\engine\utility::getfx("vfx_sunflare_fadeout"), level.var_111D0, "tag_origin");
-  var_0 = getent("trigger_sunfx_fadein", "targetname");
+  var_0 = getEnt("trigger_sunfx_fadein", "targetname");
   var_0 func_0BDC::func_136A6(level.var_D127);
   _killfxontag(scripts\engine\utility::getfx("vfx_sunflare_fadeout"), level.var_111D0, "tag_origin");
   wait 0.5;

@@ -63,7 +63,7 @@ main() {
     array_call(getEntArray("so_gate", "targetname"), ::Delete);
 
     default_start(::start_default);
-    pit = getent("pit", "targetname");
+    pit = getEnt("pit", "targetname");
   }
   init_precache();
 
@@ -143,7 +143,7 @@ main() {
   level.grenade_targets = [];
   level.hip_targets = [];
   level.pit_enemies = [];
-  level.plywood = getent("plywood", "script_noteworthy");
+  level.plywood = getEnt("plywood", "script_noteworthy");
   level.plywood rotateRoll(-90, 0.25, 0.1, 0.1);
   level.lastTimePlywoodWasHit = gettime();
   level.target_rail_start_points = getEntArray("target_rail_start_point", "targetname");
@@ -180,7 +180,7 @@ main() {
 
   level.foley = spawn_targetname("foley", true);
   level.foley.animname = "foley";
-  level.foley.animnode = getent("node_foley", "targetname");
+  level.foley.animnode = getEnt("node_foley", "targetname");
   level.foley forceUseWeapon("m4_grunt", "primary");
   level.traineeanimnode = spawn("script_origin", (0, 0, 0));
   level.traineeanimnode.origin = level.foley.animnode.origin;
@@ -189,8 +189,8 @@ main() {
   level.translatoranimnode.origin = level.foley.animnode.origin;
   level.translatoranimnode.angles = level.foley.animnode.angles;
   spawn_pitguy();
-  level.pit_case_01 = getent("pit_case_01", "targetname");
-  level.pit_case_02 = getent("pit_case_02", "targetname");
+  level.pit_case_01 = getEnt("pit_case_01", "targetname");
+  level.pit_case_02 = getEnt("pit_case_02", "targetname");
   level.pit_case_01.animname = "training_case_01";
   level.pit_case_02.animname = "training_case_02";
   level.pit_case_01 assign_animtree();
@@ -241,17 +241,17 @@ main() {
 
   thread music();
 
-  hummer_end_main = getent("hummer_end_main", "targetname");
-  hummer_end_01 = getent("hummer_end_01", "targetname");
+  hummer_end_main = getEnt("hummer_end_main", "targetname");
+  hummer_end_01 = getEnt("hummer_end_01", "targetname");
   hummer_end_main hide();
   hummer_end_01 hide();
-  end_blockers = getent("end_blockers", "targetname");
+  end_blockers = getEnt("end_blockers", "targetname");
   end_blockers hide_entity();
 
   dummies = getEntArray("dummies", "targetname");
   array_call(dummies, ::delete);
 
-  level.firing_range_area = getent("firing_range_area", "targetname");
+  level.firing_range_area = getEnt("firing_range_area", "targetname");
 
   thread vars_for_after_main();
 
@@ -318,8 +318,8 @@ start_pit() {
   flag_set("firing_range_frags_done");
   level.player giveWeapon(level.gunPrimary);
   level.player switchToWeapon(level.gunPrimary);
-  org = getent("pit_start", "targetname");
-  level.player SetOrigin(org.origin);
+  org = getEnt("pit_start", "targetname");
+  level.player setOrigin(org.origin);
   level.player SetPlayerAngles(org.angles);
   thread AA_find_pit_init();
 }
@@ -329,8 +329,8 @@ start_course() {
   level.player giveWeapon(level.gunSidearm);
   level.player giveWeapon(level.gunPrimary);
   level.player switchToWeapon(level.gunPrimary);
-  org = getent("course_start_pit", "targetname");
-  level.player SetOrigin(org.origin);
+  org = getEnt("course_start_pit", "targetname");
+  level.player setOrigin(org.origin);
   level.player SetPlayerAngles(org.angles);
   thread AA_pit_init();
   maps\_utility::vision_set_fog_changes("trainer_pit", 0);
@@ -340,17 +340,17 @@ start_ending() {
   level.player giveWeapon(level.gunSidearm);
   level.player giveWeapon(level.gunPrimary);
   level.player switchToWeapon(level.gunPrimary);
-  org = getent("course_leave", "targetname");
-  level.player SetOrigin(org.origin);
+  org = getEnt("course_leave", "targetname");
+  level.player setOrigin(org.origin);
   level.player SetPlayerAngles(org.angles);
-  registerObjective("obj_course", &"TRAINER_OBJ_EXIT_THE_PIT", getent("course_start", "targetname"));
+  registerObjective("obj_course", &"TRAINER_OBJ_EXIT_THE_PIT", getEnt("course_start", "targetname"));
   setObjectiveState("obj_course", "current");
   thread AA_ending_init();
   maps\_utility::vision_set_fog_changes("trainer_pit", 0);
 }
 
 music() {
-  radio_org = getent("radio_org", "targetname");
+  radio_org = getEnt("radio_org", "targetname");
 
   while(true) {
     radio_org playSound("training_radio_music_01", "done");
@@ -392,13 +392,13 @@ firing_range_init() {
   setsaveddvar("g_friendlyNameDist", 196);
   setSavedDvar("objectiveAlpha", 0.4);
   level.player takeallweapons();
-  player_start_range = getent("player_start_range", "targetname");
-  level.player SetOrigin(player_start_range.origin);
+  player_start_range = getEnt("player_start_range", "targetname");
+  level.player setOrigin(player_start_range.origin);
   level.player SetPlayerAngles(player_start_range.angles);
-  ads_target_trigger_middle = getent("ads_target_trigger_middle", "targetname");
-  ads_target_trigger_front = getent("ads_target_trigger_front", "targetname");
-  ads_target_trigger_rear = getent("ads_target_trigger_rear", "targetname");
-  timed_ads_target_trigger = getent("timed_ads_target_trigger", "targetname");
+  ads_target_trigger_middle = getEnt("ads_target_trigger_middle", "targetname");
+  ads_target_trigger_front = getEnt("ads_target_trigger_front", "targetname");
+  ads_target_trigger_rear = getEnt("ads_target_trigger_rear", "targetname");
+  timed_ads_target_trigger = getEnt("timed_ads_target_trigger", "targetname");
   ads_target_trigger_middle thread target_triggers_think();
   ads_target_trigger_front thread target_triggers_think();
   ads_target_trigger_rear thread target_triggers_think();
@@ -471,7 +471,7 @@ firing_range_hip_and_ads() {
     registerObjective("obj_rifle", &"TRAINER_PICK_UP_A_RIFLE_FROM", getEnt("range_rifle", "script_noteworthy"));
     setObjectiveState("obj_rifle", "current");
 
-    pickup_rifle = getent("pickup_rifle", "targetname");
+    pickup_rifle = getEnt("pickup_rifle", "targetname");
     if(isDefined(pickup_rifle)) {
       pickup_rifle glow();
       pickup_rifle HidePart("TAG_THERMAL_SCOPE");
@@ -1135,11 +1135,11 @@ firing_range_frags() {
   if(alreadyHadFrags) {
     registerObjective("obj_frags", &"TRAINER_THROW_A_GRENADE_INTO", getEnt("firing_range", "targetname"));
     setObjectiveState("obj_frags", "current");
-    setObjectiveLocation("obj_frags", getent("firing_range", "targetname"));
+    setObjectiveLocation("obj_frags", getEnt("firing_range", "targetname"));
   } else {
     thread setObjectiveString("obj_frags", &"TRAINER_THROW_A_GRENADE_INTO");
     setObjectiveState("obj_frags", "current");
-    setObjectiveLocation("obj_frags", getent("firing_range", "targetname"));
+    setObjectiveLocation("obj_frags", getEnt("firing_range", "targetname"));
   }
 
   flag_set("foley_turns_for_frag_demo");
@@ -1264,8 +1264,8 @@ frags_glow_stop() {
 spawn_frags() {
   flag_set("frags_have_been_spawned");
 
-  frag_trigger = getent("frag_trigger", "script_noteworthy");
-  grenade_box = getent("grenade_box", "targetname");
+  frag_trigger = getEnt("frag_trigger", "script_noteworthy");
+  grenade_box = getEnt("grenade_box", "targetname");
   grenade_box setModel("mil_grenade_box_opened");
   level.frags = getEntArray("frags", "script_noteworthy");
   level.fragsPickups = getEntArray("frags_pickup", "targetname");
@@ -1387,7 +1387,7 @@ AA_find_the_pit_sequence() {
   level.translator delaythread(level.translatordelay, ::dialogue_execute, "train_fly_fragstendtoroll");
   level.foley dialogue_execute("train_fly_fragstendtoroll");
 
-  blocker_range = getent("blocker_range", "targetname");
+  blocker_range = getEnt("blocker_range", "targetname");
   blocker_range hide_entity();
   thread go_to_pit_anims();
 
@@ -1412,7 +1412,7 @@ AA_find_the_pit_sequence() {
   flag_wait("player_passing_barracks");
 
   flag_wait("player_at_pit_stairs");
-  setObjectiveLocation("obj_course_locate", getent("origin_sidearm_table", "targetname"));
+  setObjectiveLocation("obj_course_locate", getEnt("origin_sidearm_table", "targetname"));
 
   flag_wait("player_entering_course");
   flag_set("obj_go_to_the_pit_done");
@@ -1452,7 +1452,7 @@ sideArm_Training() {
     setObjectiveState("obj_sidearm", "current");
 
     level.pitguy dialogue_execute("train_cpd_grabapistol");
-    pickup_sidearm = getent("pickup_sidearm", "targetname");
+    pickup_sidearm = getEnt("pickup_sidearm", "targetname");
     if(isDefined(pickup_sidearm)) {
       pickup_sidearm glow();
     }
@@ -1469,7 +1469,7 @@ sideArm_Training() {
     wait(1);
   }
 
-  setObjectiveLocation("obj_sidearm", getent("origin_course_01", "targetname"));
+  setObjectiveLocation("obj_sidearm", getEnt("origin_course_01", "targetname"));
   setObjectiveString("obj_sidearm", &"TRAINER_SWITCH_TO_YOUR_RIFLE");
 
   currentWeapon = level.player getCurrentWeapon();
@@ -1549,7 +1549,7 @@ AA_pit_sequence() {
 
   flag_wait("player_course_stairs2");
   level.pitguy.animnode notify("stop_idle");
-  level.pitguy.animnode = getent("node_dunn_training_exit", "targetname");
+  level.pitguy.animnode = getEnt("node_dunn_training_exit", "targetname");
   level.pitguy.animnode thread anim_loop(level.pitActors, "training_pit_stand_idle", "stop_idle");
 }
 
@@ -1570,7 +1570,7 @@ spawn_pitguy() {
   level.pitguygun hide();
   level.pitguygun.animname = "pit_gun";
   level.pitguygun assign_animtree();
-  level.pitguy.animnode = getent("node_dunn_training", "targetname");
+  level.pitguy.animnode = getEnt("node_dunn_training", "targetname");
   level.pitActors = [];
   level.pitActors[0] = level.pitguy;
   level.pitActors[1] = level.pitguygun;
@@ -1627,7 +1627,7 @@ course_loop_think() {
     flag_wait("player_has_started_course");
     flag_clear("dunn_finished_with_difficulty_selection_dialogue");
 
-    setObjectiveLocation("obj_course", getent("origin_course_01", "targetname"));
+    setObjectiveLocation("obj_course", getEnt("origin_course_01", "targetname"));
     if(level.objectiveRegroup != 0) {
       setObjectiveString("obj_course", &"TRAINER_OBJ_COURSE");
     }
@@ -1691,7 +1691,7 @@ course_loop_think() {
     level.gate_cqb_enter thread door_close();
     level.gate_cqb_exit thread door_open();
     flag_clear("player_inside_course");
-    course_end_blocker = getent("course_end_blocker", "targetname");
+    course_end_blocker = getEnt("course_end_blocker", "targetname");
     course_end_blocker hide_entity();
     setObjectiveLocation("obj_course", getEnt("origin_course_03a", "targetname"));
 
@@ -1757,7 +1757,7 @@ course_loop_think() {
     }
 
     flag_wait("player_course_end");
-    course_end_blocker = getent("course_end_blocker", "targetname");
+    course_end_blocker = getEnt("course_end_blocker", "targetname");
     course_end_blocker show_entity();
 
     numberOfTimesRun++;
@@ -1812,12 +1812,12 @@ course_loop_think() {
     if(level.recommendedDifficulty != 1000) {
       if(!flag("player_has_started_course")) {
         level.pitguy thread dialogue_execute("train_cpd_runagain", "dunn_finished_with_difficulty_selection_dialogue");
-        setObjectiveLocation("obj_course", getent("course_start", "targetname"));
+        setObjectiveLocation("obj_course", getEnt("course_start", "targetname"));
         setObjectiveString("obj_course", &"TRAINER_OBJ_EXIT_THE_PIT");
         level.objectiveRegroup = 1;
       }
     } else {
-      setObjectiveLocation("obj_course", getent("origin_course_01", "targetname"));
+      setObjectiveLocation("obj_course", getEnt("origin_course_01", "targetname"));
     }
 
     flag_wait_either("player_inside_course", "player_done_with_course");
@@ -1836,7 +1836,7 @@ player_sprint_monitor() {
   level endon("sprinted");
   level endon("player_course_end");
 
-  sprint_volume = getent("sprint_volume", "targetname");
+  sprint_volume = getEnt("sprint_volume", "targetname");
   while(true) {
     wait(0.05);
     vel = level.player GetVelocity();
@@ -1849,7 +1849,7 @@ player_sprint_monitor() {
 }
 
 exit_light_on() {
-  redlight_fx_org = GetStruct("light_exit", "targetname");
+  redlight_fx_org = getStruct("light_exit", "targetname");
   level.exitDoorLightEffect = PlayLoopedFX(getfx("redlight_fx"), 50, redlight_fx_org.origin, 2500);
   level.exitDoorLightEffect.dummy = spawn_tag_origin();
   level.exitDoorLightEffect.dummy.origin = redlight_fx_org.origin;
@@ -1895,7 +1895,7 @@ try_again() {
 
   if(response == "tryagain") {
     level.pitguy thread dialogue_execute("train_cpd_anothergo");
-    setObjectiveLocation("obj_course", getent("origin_course_01", "targetname"));
+    setObjectiveLocation("obj_course", getEnt("origin_course_01", "targetname"));
     setObjectiveString("obj_course", &"TRAINER_OBJ_COURSE");
     level.objectiveRegroup = 0;
   } else {
@@ -2287,9 +2287,9 @@ door_open(sFlagToWaitFor, bFast) {
   iTime = 4;
   if(isDefined(bFast)) {
     iTime = 1.5;
-    self rotateto(self.angles + (0, angles, 0), 1.5, .25, .25);
+    self rotateTo(self.angles + (0, angles, 0), 1.5, .25, .25);
   } else {
-    self rotateto(self.angles + (0, angles, 0), 4, 1.5, 1.5);
+    self rotateTo(self.angles + (0, angles, 0), 4, 1.5, 1.5);
   }
 
   if(isDefined(self.blocker)) {
@@ -2321,9 +2321,9 @@ door_close(sFlagToWaitFor, bFast) {
   iTime = 2;
   if(isDefined(bFast)) {
     iTime = 1;
-    self rotateto(self.angles + (0, angles, 0), 1, .25, .25);
+    self rotateTo(self.angles + (0, angles, 0), 1, .25, .25);
   } else {
-    self rotateto(self.angles + (0, angles, 0), 2, .5, .5);
+    self rotateTo(self.angles + (0, angles, 0), 2, .5, .5);
   }
 
   if(isDefined(self.blocker)) {
@@ -2356,25 +2356,25 @@ end_sequence() {
   }
 
   array_thread(guys_to_delete, ::AI_delete);
-  basketball = getent("basketball", "targetname");
+  basketball = getEnt("basketball", "targetname");
   basketball delete();
   array_thread(drones_to_delete, ::AI_delete);
 
   friendlies_end_sequence = array_spawn(getEntArray("friendlies_end_sequence", "targetname"), true);
 
-  gate_left = getent("gate_left", "targetname");
-  gate_right = getent("gate_right", "targetname");
+  gate_left = getEnt("gate_left", "targetname");
+  gate_right = getEnt("gate_right", "targetname");
   gate_left rotateYaw(90, 0.5);
   gate_right rotateYaw(-90, 0.5);
 
-  gate_left02 = getent("gate_left02", "targetname");
-  gate_right02 = getent("gate_right02", "targetname");
+  gate_left02 = getEnt("gate_left02", "targetname");
+  gate_right02 = getEnt("gate_right02", "targetname");
   gate_left02 rotateYaw(90, 0.5);
   gate_right02 rotateYaw(-90, 0.5);
 
-  hummer_end_01 = getent("hummer_end_01", "targetname");
+  hummer_end_01 = getEnt("hummer_end_01", "targetname");
 
-  hummer_end_main = getent("hummer_end_main", "targetname");
+  hummer_end_main = getEnt("hummer_end_main", "targetname");
   hummer_actors_main = array_spawn(getEntArray("hummer_actors_main", "targetname"), true);
   if(hummer_actors_main[0].animation == "training_humvee_wounded") {
     hummer_actors_main[0].animname = "soldier_wounded";
@@ -2407,7 +2407,7 @@ end_sequence() {
   flag_set("end_sequence_starting");
 
   hummer_end_01 show();
-  end_blockers = getent("end_blockers", "targetname");
+  end_blockers = getEnt("end_blockers", "targetname");
   end_blockers show_entity();
 
   clear_timer_elems();
@@ -2553,7 +2553,7 @@ target_think(targetType) {
   self.orgEnt = getEnt(self.target, "targetname");
 
   assert(isDefined(self.orgEnt));
-  self linkto(self.orgEnt);
+  self linkTo(self.orgEnt);
   aim_assist_target = getEnt(self.orgEnt.target, "targetname");
 
   aim_assist_target hide();
@@ -2590,7 +2590,7 @@ target_think(targetType) {
     aim_assist_target linkTo(self);
     self.lateralStartPosition = getclosest(self.orgEnt.origin, level.target_rail_start_points, 10);
     assertex(isDefined(self.lateralStartPosition), "Pop up target at " + self.origin + " has its script_parameters set to 'use_rail' but there is no valid rail start org within 10 units ");
-    self.lateralEndPosition = getent(self.lateralStartPosition.target, "targetname");
+    self.lateralEndPosition = getEnt(self.lateralStartPosition.target, "targetname");
     assertex(isDefined(self.lateralEndPosition), "Pop up target at " + self.origin + " has a rail start position that is not targeting an end rail position");
 
     self.lateralMovementOrgs = [];
@@ -2614,7 +2614,7 @@ target_think(targetType) {
 
     if((isDefined(self.script_parameters)) && (self.script_parameters == "melee")) {
       self.meleeonly = true;
-      melee_clip = getent("melee_clip", "targetname");
+      melee_clip = getEnt("melee_clip", "targetname");
       melee_clip show_entity();
     }
 
@@ -2719,7 +2719,7 @@ target_think(targetType) {
 
     if(isDefined(self.meleeonly)) {
       self.meleeonly = true;
-      melee_clip = getent("melee_clip", "targetname");
+      melee_clip = getEnt("melee_clip", "targetname");
       melee_clip thread hide_entity();
       flag_set("melee_target_hit");
     } else if((targetType != "friendly") && (!level.player isADS())) {
@@ -3854,10 +3854,10 @@ make_door_from_prefab(sTargetname) {
   }
 
   foreach(model in door_models) {
-    model linkto(door_org);
+    model linkTo(door_org);
   }
   foreach(brush in door_brushes) {
-    brush linkto(door_org);
+    brush linkTo(door_org);
   }
 
   door = door_org;
@@ -3937,7 +3937,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     looping = true;
 
     if(sAnim == "training_basketball_guy2") {
-      basketball = getent("basketball", "targetname");
+      basketball = getEnt("basketball", "targetname");
       basketball.animname = "basketball";
       basketball assign_animtree();
       self.eAnimEnt thread anim_loop_solo(basketball, "training_basketball_loop", "stop_idle");
@@ -4070,7 +4070,7 @@ ai_ambient_noprop_think() {
       self.m4 HidePart("TAG_SILENCER");
       self.m4.origin = self gettagorigin("tag_inhand");
       self.m4.angles = self gettagangles("tag_inhand");
-      self.m4 linkto(self, "tag_inhand");
+      self.m4 linkTo(self, "tag_inhand");
       self thread delete_on_death(self.m4);
       break;
     case "training_locals_groupA_guy1":
@@ -4088,7 +4088,7 @@ ai_ambient_noprop_think() {
       break;
     case "training_sleeping_in_chair":
       self gun_remove();
-      self.eAnimEnt = getent(self.target, "targetname");
+      self.eAnimEnt = getEnt(self.target, "targetname");
       break;
     case "death_explosion_run_F_v1":
     case "civilian_run_2_crawldeath":
@@ -4119,14 +4119,14 @@ ai_ambient_noprop_think() {
       bSpecial = true;
       return;
     case "wounded_carry_fastwalk_carrier":
-      spawner = getent(self.target, "targetname");
+      spawner = getEnt(self.target, "targetname");
       eBuddy = spawner spawn_ai();
       self.eAnimEnt anim_generic_first_frame(self, sAnim);
       self.eAnimEnt anim_generic_first_frame(eBuddy, "wounded_carry_fastwalk_wounded");
       self gun_remove();
       eBuddy gun_remove();
       bSpecial = true;
-      eEndOrg = getent(self.script_Linkto, "script_linkname");
+      eEndOrg = getEnt(self.script_Linkto, "script_linkname");
       if(isDefined(self.script_flag)) {
         flag_wait(self.script_flag);
       }
@@ -4294,8 +4294,8 @@ auto_aim() {
 }
 
 bridge_layer_think() {
-  bridge_layer = getent("bridge_layer", "targetname");
-  bridge_layer_bridge = getent("bridge_layer_bridge", "targetname");
+  bridge_layer = getEnt("bridge_layer", "targetname");
+  bridge_layer_bridge = getEnt("bridge_layer_bridge", "targetname");
 
   bridge_layer.animname = "bridge_layer";
   bridge_layer assign_animtree();

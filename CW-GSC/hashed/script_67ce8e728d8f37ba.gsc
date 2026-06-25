@@ -308,21 +308,21 @@ function function_fcfa3b98() {
 }
 
 function function_266bf421(team) {
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     player val::reset_all(#"scene_system");
     player setvisibletoall();
     spawn = player spawning::function_f53e594f();
 
     if(isDefined(spawn) && !spawning::function_daa5852f()) {
       player dontinterpolate();
-      player setorigin(spawn.origin);
+      player setOrigin(spawn.origin);
       player setplayerangles(spawn.angles);
     }
   }
 }
 
 function function_27c20de5() {
-  util::function_21678f2c(getplayers());
+  util::function_21678f2c(getPlayers());
 }
 
 function function_5a8e7587() {
@@ -338,7 +338,7 @@ function function_5a8e7587() {
       continue;
     }
 
-    if(getplayers(team).size) {
+    if(getPlayers(team).size) {
       self thread scene::init(var_e70596ed);
     }
   }
@@ -369,7 +369,7 @@ function function_b906539e() {
   level.var_fb99ff98 = 0;
   level.disableclassselection = 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_77d6602a)) {
       continue;
     }
@@ -413,7 +413,7 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857) {
       var_a0579d1a = 1;
 
       foreach(str_team in level.teams) {
-        if(getplayers(str_team).size < 1) {
+        if(getPlayers(str_team).size < 1) {
           var_a0579d1a = 0;
           break;
         }
@@ -429,7 +429,7 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857) {
     wait 4;
   }
 
-  players = getplayers();
+  players = getPlayers();
   util::function_21678f2c(players);
   pixbeginevent(#"");
   level util::delay(float(function_60d95f53()) / 1000 * 4, undefined, &function_c403d032, players);
@@ -458,7 +458,7 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857) {
       continue;
     }
 
-    if(getplayers(team).size) {
+    if(getPlayers(team).size) {
       if(!isDefined(scenes)) {
         scenes = [];
       } else if(!isarray(scenes)) {
@@ -486,14 +486,14 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857) {
   thread function_2259ff3c(var_2a832857, delaytime, 5);
 
   if(level.var_6e9fbf44.size > 0) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       foreach(postfxbundle in level.var_6e9fbf44) {
         player clientfield::set_to_player(postfxbundle.uniqueid, 1);
       }
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_8ec328e1(0);
 
     if(!spawning::function_daa5852f()) {
@@ -514,7 +514,7 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857) {
   function_db62d086();
   player::function_80e763a4();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_8ec328e1(1);
     player setvisibletoall();
 
@@ -530,7 +530,7 @@ function function_e94b8e1a(var_66cbfaf2, var_2a832857) {
   level callback::callback(#"hash_255b4626805810f5");
 
   if(level.var_6e9fbf44.size > 0) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       foreach(postfxbundle in level.var_6e9fbf44) {
         player clientfield::set_to_player(postfxbundle.uniqueid, 0);
       }
@@ -604,7 +604,7 @@ function function_2aaeab97(var_66cbfaf2) {
 
   player_insertion::function_d28162a2(isDefined(level.var_2efdea7.blackscreentime) ? level.var_2efdea7.blackscreentime : 0);
   player_insertion::function_1a50e8a5(isDefined(level.var_2efdea7.var_73a4076) ? level.var_2efdea7.var_73a4076 : 0);
-  players = getplayers();
+  players = getPlayers();
   util::function_21678f2c(players);
   level util::delay(float(function_60d95f53()) / 1000 * 4, undefined, &function_c403d032, players);
 
@@ -624,8 +624,8 @@ function function_2aaeab97(var_66cbfaf2) {
   function_f5692e0c("intro_cinematic");
   scene::function_1e327c20(level.var_2efdea7.var_d74b6b9c);
   level thread util::delay(6, "game_ended", &function_75125d25, 0);
-  array::thread_all(getplayers(), &function_8ec328e1, 1);
-  array::run_all(getplayers(), &setvisibletoall);
+  array::thread_all(getPlayers(), &function_8ec328e1, 1);
+  array::run_all(getPlayers(), &setvisibletoall);
 }
 
 function function_a03c3a00(time, timeout) {
@@ -659,7 +659,7 @@ function function_e3dbd71b() {
   var_94fab29 = player::function_51b57f72();
   time = gettime();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_a03c3a00(time, var_94fab29);
   }
 }
@@ -705,7 +705,7 @@ function private function_57fd50e9() {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player == self) {
       continue;
     }

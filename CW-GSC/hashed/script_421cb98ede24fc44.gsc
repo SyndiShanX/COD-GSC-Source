@@ -40,7 +40,7 @@ function function_a8fc3bf1(s_info) {
     e_player setmovespeedscale(0);
 
     if(!is_true(self.var_859762f6)) {
-      e_player playrumbleonentity(#"jump_rumble_start");
+      e_player playRumbleOnEntity(#"jump_rumble_start");
       snd::play("evt_slide_downhill_start_lr", e_player);
       var_24559b62 = snd::play("evt_slide_downhill_loop_lr", e_player);
       e_player playrumblelooponentity(#"hash_6e6bf5e1aede5efd");
@@ -75,7 +75,7 @@ function function_a8fc3bf1(s_info) {
           break;
       }
     } else {
-      e_player playrumbleonentity(#"jump_rumble_start");
+      e_player playRumbleOnEntity(#"jump_rumble_start");
       snd::play("evt_slide_downhill_start_lr", e_player);
     }
 
@@ -84,7 +84,7 @@ function function_a8fc3bf1(s_info) {
     }
 
     if(isDefined(e_player)) {
-      e_player playrumbleonentity("jump_rumble_end");
+      e_player playRumbleOnEntity("jump_rumble_end");
       earthquake(0.4, 1, e_player.origin, 64);
 
       if(!is_true(self.var_859762f6)) {
@@ -135,7 +135,7 @@ function function_a8fc3bf1(s_info) {
       e_player.var_6a81e560 = 0;
       e_player val::reset_all(#"ice_slide");
       e_player setmovespeedscale(1);
-      e_player playrumbleonentity("jump_rumble_end");
+      e_player playRumbleOnEntity("jump_rumble_end");
 
       if(isalive(e_player)) {
         e_player setstance("stand");

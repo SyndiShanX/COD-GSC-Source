@@ -32,7 +32,7 @@ on_begin(var_899c6d17) {
 
   wait 6;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread reset_points(var_899c6d17);
   }
 }

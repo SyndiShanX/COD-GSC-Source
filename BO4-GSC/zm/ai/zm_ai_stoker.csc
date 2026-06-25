@@ -226,7 +226,7 @@ function_d58cd2d5(localclientnum) {
     var_2d81ef5f = array(var_2d81ef5f);
   }
 
-  var_2d81ef5f[var_2d81ef5f.size] = vectornormalize(anglesToForward(self.angles));
+  var_2d81ef5f[var_2d81ef5f.size] = vectorNormalize(anglesToForward(self.angles));
 
   if(!isDefined(var_2d81ef5f)) {
     var_2d81ef5f = [];
@@ -234,7 +234,7 @@ function_d58cd2d5(localclientnum) {
     var_2d81ef5f = array(var_2d81ef5f);
   }
 
-  var_2d81ef5f[var_2d81ef5f.size] = vectornormalize(anglestoright(self.angles));
+  var_2d81ef5f[var_2d81ef5f.size] = vectorNormalize(anglestoright(self.angles));
 
   if(!isDefined(var_2d81ef5f)) {
     var_2d81ef5f = [];

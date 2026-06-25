@@ -68,9 +68,9 @@ func_10906(var_0, var_1) {
   var_5 = 6100;
   var_6 = cos(var_4) * var_5;
   var_7 = sin(var_4) * var_5;
-  var_8 = vectornormalize((var_6, var_7, var_3));
+  var_8 = vectorNormalize((var_6, var_7, var_3));
   var_8 = var_8 * 6100;
-  var_2 linkto(level.var_12AF5, "tag_origin", var_8, (0, var_4 - 90, 10));
+  var_2 linkTo(level.var_12AF5, "tag_origin", var_8, (0, var_4 - 90, 10));
   var_1 setclientdvar("ui_reaper_targetDistance", -1);
   var_1 setclientdvar("ui_reaper_ammoCount", 14);
   var_2 thread handledeath(var_1);
@@ -154,7 +154,7 @@ remotedetonateonset(var_0) {
       var_2 = var_1;
       self.var_6DB6 = 1;
       self playlocalsound("reaper_fire");
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       var_4 = self getEye();
       var_5 = anglesToForward(self getplayerangles());
       var_6 = anglestoright(self getplayerangles());
@@ -162,7 +162,7 @@ remotedetonateonset(var_0) {
       var_8 = scripts\mp\utility::_magicbullet("remote_mortar_missile_mp", var_7, var_0.var_1155F.origin, self);
       var_8.type = "remote_mortar";
       earthquake(0.3, 0.5, var_4, 256);
-      var_8 missile_settargetent(var_0.var_1155F);
+      var_8 missile_settargetEnt(var_0.var_1155F);
       var_8 missile_setflightmodedirect();
       var_8 thread remotemissile_fx(var_0);
       var_8 thread func_DF81(var_0);
@@ -368,10 +368,10 @@ remoteinfo() {
   self notify("remote_done");
   self unlink();
   var_0 = self.origin + anglesToForward(self.angles) * 20000;
-  self moveto(var_0, 30);
+  self moveTo(var_0, 30);
   playFXOnTag(level._effect["ac130_engineeffect"], self, "tag_origin");
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(3);
-  self moveto(var_0, 4, 4, 0);
+  self moveTo(var_0, 4, 4, 0);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(4);
   level thread func_E161(self, 0);
 }
@@ -478,7 +478,7 @@ func_10FA8(var_0, var_1) {
     var_0.owner playlocalsound("missile_incoming");
   }
 
-  self missile_settargetent(var_0);
+  self missile_settargetEnt(var_0);
   var_2 = distance(self.origin, var_0 getpointinbounds(0, 0, 0));
   var_3 = var_0 getpointinbounds(0, 0, 0);
   for(;;) {
@@ -494,7 +494,7 @@ func_10FA8(var_0, var_1) {
       var_0.numflares--;
       var_0 thread scripts\mp\killstreaks\_flares::func_6EAE();
       var_6 = var_0 scripts\mp\killstreaks\_flares::func_6EA0();
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       var_0 = var_6;
       if(isDefined(var_0.owner)) {
         var_0.owner stoplocalsound("missile_incoming");
@@ -582,7 +582,7 @@ func_EB18(var_0, var_1, var_2) {
           var_9 = var_0 scripts\mp\killstreaks\_flares::func_6EA0();
           for(var_10 = 0; var_10 < var_2.size; var_10++) {
             if(isDefined(var_2[var_10])) {
-              var_2[var_10] missile_settargetent(var_9);
+              var_2[var_10] missile_settargetEnt(var_9);
             }
           }
 

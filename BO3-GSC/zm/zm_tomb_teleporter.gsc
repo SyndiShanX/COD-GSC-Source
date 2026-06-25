@@ -73,7 +73,7 @@ function teleporter_samantha_chamber_line() {
   level.sam_chamber_line_played = 0;
   level flag::wait_till("samantha_intro_done");
   while(!level.sam_chamber_line_played) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(e_player in a_players) {
       dist_sq = distance2dsquared(self.origin, e_player.origin);
       height_diff = abs(self.origin[2] - e_player.origin[2]);
@@ -264,12 +264,12 @@ function teleporter_radius_think(radius = 120) {
   self endon("teleporter_radius_stop");
   radius_sq = radius * radius;
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(e_player in a_players) {
       dist_sq = distancesquared(e_player.origin, self.origin);
       if(dist_sq < radius_sq && e_player getstance() != "prone" && (!(isDefined(e_player.teleporting) && e_player.teleporting))) {
         playFX(level._effect["teleport_3p"], self.origin, (1, 0, 0), (0, 0, 1));
-        playsoundatposition("zmb_teleporter_tele_3d", self.origin);
+        playSoundAtPosition("zmb_teleporter_tele_3d", self.origin);
         level thread stargate_teleport_player(self.target, e_player, 5);
       }
     }
@@ -285,7 +285,7 @@ function stargate_teleport_think() {
     self.trigger_stub waittill("trigger", e_player);
     if(e_player getstance() != "prone" && (!(isDefined(e_player.teleporting) && e_player.teleporting))) {
       playFX(level._effect["teleport_3p"], self.origin, (1, 0, 0), (0, 0, 1));
-      playsoundatposition("zmb_teleporter_tele_3d", self.origin);
+      playSoundAtPosition("zmb_teleporter_tele_3d", self.origin);
       level notify("player_teleported", e_player, self.script_int);
       level thread stargate_teleport_player(self.target, e_player);
     }
@@ -373,7 +373,7 @@ function stargate_teleport_player(str_teleport_to, player, n_teleport_time_sec =
     player.teleport_origin delete();
     player.teleport_origin = undefined;
   }
-  player setorigin(s_pos.origin);
+  player setOrigin(s_pos.origin);
   player setplayerangles(s_pos.angles);
   player enableweapons();
   player enableoffhandweapons();
@@ -389,7 +389,7 @@ function stargate_teleport_player(str_teleport_to, player, n_teleport_time_sec =
 
 function is_teleport_landing_valid(s_pos, n_radius) {
   n_radius_sq = n_radius * n_radius;
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(e_player in a_players) {
     if(distance2dsquared(s_pos.origin, e_player.origin) < n_radius_sq) {
       return false;
@@ -401,7 +401,7 @@ function is_teleport_landing_valid(s_pos, n_radius) {
 function get_free_teleport_pos(player, a_structs) {
   n_player_radius = 64;
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(s_pos in a_structs) {
       if(is_teleport_landing_valid(s_pos, n_player_radius)) {
         return s_pos;

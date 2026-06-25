@@ -37,7 +37,7 @@ function_34fc666e() {
     return;
   }
 
-  mdl_apc = getent("spawn_flavor_apc_explode", "targetname");
+  mdl_apc = getEnt("spawn_flavor_apc_explode", "targetname");
   mdl_apc setModel("veh_t8_mil_apc_macv_dead_no_turret_no_armor_mp_grey");
   scene::skipto_end(#"p8_fxanim_mp_emb_apc_arrive_bundle");
   level flag::wait_till("first_player_spawned");
@@ -54,7 +54,7 @@ prematch_init() {
     exploder::exploder("fxexp_embassy_explosion");
     level util::delay(4, "game_ended", &scene::play, #"p8_fxanim_mp_emb_apc_arrive_bundle");
     level thread scene::play(#"p8_fxanim_mp_emb_balloons_fly_bundle");
-    mdl_apc = getent("spawn_flavor_apc_explode", "targetname");
+    mdl_apc = getEnt("spawn_flavor_apc_explode", "targetname");
     mdl_apc setModel("veh_t8_mil_apc_macv_dead_no_turret_no_armor_mp_grey");
     mdl_apc clientfield::increment("spawn_flavor_apc_explosion");
     return;

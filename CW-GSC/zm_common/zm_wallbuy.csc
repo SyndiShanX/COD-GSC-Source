@@ -600,7 +600,7 @@ function wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap,
 
         struct.models[bnewent].origin = struct.models[bnewent].parent_struct.origin + anglestoright(struct.models[bnewent].angles + vec_offset) * 8;
         struct.models[bnewent] show();
-        struct.models[bnewent] moveto(struct.models[bnewent].parent_struct.origin, 1);
+        struct.models[bnewent] moveTo(struct.models[bnewent].parent_struct.origin, 1);
       }
 
       break;

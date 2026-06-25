@@ -23,7 +23,7 @@ function debug_draw_tuning_sphere() {
   while(true) {
     n_sphere_radius = getdvarfloat("", 0);
     while(n_sphere_radius >= 1) {
-      players = getplayers();
+      players = getPlayers();
       if(isDefined(players[0])) {
         n_sphere_radius = getdvarfloat("", 0);
         circle(players[0].origin, n_sphere_radius, (1, 0, 0), 0, 1, 16);

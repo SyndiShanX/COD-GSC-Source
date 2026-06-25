@@ -44,7 +44,7 @@ func_5AD2() {
   thread scripts\anim\shared::donotetracks("traverseAnim", scripts\anim\traverse\shared::func_89F8);
   foreach(var_8 in var_2) {
     var_9 = var_6 / var_2.size;
-    var_5 moveto(var_8, var_9);
+    var_5 moveTo(var_8, var_9);
     var_5 waittill("movedone");
   }
 

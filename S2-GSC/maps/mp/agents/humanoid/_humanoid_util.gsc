@@ -246,7 +246,7 @@ func_4583(param_00, param_01) {
       if(!isDefined(var_0C) && isDefined(var_09.var_0116)) {
         var_14 = 0;
         if(isDefined(var_09.var_230B) && var_09.var_230B != self) {
-          var_15 = vectornormalize(var_04 - var_09.var_230B.var_0116) * self.var_014F * 2;
+          var_15 = vectorNormalize(var_04 - var_09.var_230B.var_0116) * self.var_014F * 2;
           var_14 = distancesquared(var_09.var_230B.var_0116 + var_15, var_04);
         }
 
@@ -671,7 +671,7 @@ func_29CB(param_00, param_01) {
   if(isDefined(param_00)) {
     var_03 = param_00 - self gettagorigin("J_SpineLower");
     var_03 = (var_03[0], var_03[1], 0);
-    var_04 = vectortoangles(vectornormalize(var_03));
+    var_04 = vectortoangles(vectorNormalize(var_03));
     var_02 = var_04[1];
   } else if(isDefined(param_01)) {
     var_04 = vectortoangles(param_01);

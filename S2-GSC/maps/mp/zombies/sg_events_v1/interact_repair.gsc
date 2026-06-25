@@ -162,7 +162,7 @@ basic_keypoint_interact_trigger_hints() {
     level.keypointinteracthint = "ZOMBIE_DLC3_KEYPOINT_INTERACT_BUILD";
   }
 
-  self sethintstring(level.keypointinteracthint);
+  self setHintString(level.keypointinteracthint);
 }
 
 basic_keypoint_interact_trigger_use() {
@@ -184,7 +184,7 @@ basic_keypoint_interact_trigger_use() {
       var_02 basic_keypoint_interact_stop_tool(var_03);
       if(common_scripts\utility::func_562E(var_04)) {
         self makeunusable();
-        self sethintstring(&"ZOMBIES_EMPTY_STRING");
+        self setHintString(&"ZOMBIES_EMPTY_STRING");
         if(isDefined(self.scriptableinitfunc)) {
           self thread[[self.scriptablerepairedfunc]]();
         }

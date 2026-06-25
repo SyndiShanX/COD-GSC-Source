@@ -37,14 +37,14 @@ function_4989fd7e() {
   level flag::init(#"catwalk_event_in_progress");
   level flag::init(#"catwalk_event_completed");
   level flag::init(#"catwalk_door_open");
-  var_40762d8a = getent("t_catwalk_door_open", "targetname");
-  var_40762d8a sethintstring(#"zombie/need_power");
-  level.var_2ea46461 = getent("mdl_ca_l", "targetname");
+  var_40762d8a = getEnt("t_catwalk_door_open", "targetname");
+  var_40762d8a setHintString(#"zombie/need_power");
+  level.var_2ea46461 = getEnt("mdl_ca_l", "targetname");
   a_e_door = getEntArray("door_model_west_side_exterior_to_catwalk", "targetname");
 
   foreach(e_door in a_e_door) {
     if(e_door.classname == "script_model") {
-      level.var_2ea46461 linkto(e_door);
+      level.var_2ea46461 linkTo(e_door);
       break;
     }
   }
@@ -53,8 +53,8 @@ function_4989fd7e() {
   scene::add_scene_func(#"aib_vign_zm_mob_brutus_summon_hellhounds", &function_e7c9f15b, "Shot 1");
   scene::add_scene_func(#"aib_vign_zm_mob_brutus_summon_hellhounds", &play_brutus_scene_done, "done");
   scene::add_scene_func(#"aib_vign_zm_mob_brutus_summon_hellhounds", &function_e16c819a, "Shot 1");
-  var_47463bbe = getent("t_rocks_b_bundle_play_scene", "targetname");
-  var_1b4c13ea = getent("t_rocks_c_bundle_play_scene", "targetname");
+  var_47463bbe = getEnt("t_rocks_b_bundle_play_scene", "targetname");
+  var_1b4c13ea = getEnt("t_rocks_c_bundle_play_scene", "targetname");
   var_47463bbe thread function_f184754();
   var_1b4c13ea thread function_fd3fa3a3();
   level thread function_84f1c310();
@@ -72,8 +72,8 @@ function_84f1c310() {
     }
   }
 
-  var_40762d8a = getent("t_catwalk_door_open", "targetname");
-  t_catwalk_door = getent("door_model_west_side_exterior_to_catwalk", "target");
+  var_40762d8a = getEnt("t_catwalk_door_open", "targetname");
+  t_catwalk_door = getEnt("door_model_west_side_exterior_to_catwalk", "target");
   var_f7076542 = getEntArray("catwalk_event_triggers", "script_noteworthy");
 
   foreach(t_catwalk_event in var_f7076542) {
@@ -82,21 +82,21 @@ function_84f1c310() {
 
   if(zm_custom::function_901b751c(#"zmpowerstate") == 1 && zm_custom::function_901b751c(#"zmpowerdoorstate") != 2) {
     if(function_8b1a219a()) {
-      var_40762d8a sethintstring(#"hash_6c7c18e3ce28c91b");
+      var_40762d8a setHintString(#"hash_6c7c18e3ce28c91b");
     } else {
-      var_40762d8a sethintstring(#"hash_52803ee9fe3f2ea5");
+      var_40762d8a setHintString(#"hash_52803ee9fe3f2ea5");
     }
 
-    t_catwalk_door sethintstring(#"");
+    t_catwalk_door setHintString(#"");
     level.var_2ea46461 setModel(#"p8_zm_esc_catwalk_door_light_green");
 
     if(function_8b1a219a()) {
-      var_40762d8a sethintstring(#"hash_6c7c18e3ce28c91b");
+      var_40762d8a setHintString(#"hash_6c7c18e3ce28c91b");
     } else {
-      var_40762d8a sethintstring(#"hash_52803ee9fe3f2ea5");
+      var_40762d8a setHintString(#"hash_52803ee9fe3f2ea5");
     }
 
-    t_catwalk_door sethintstring(#"");
+    t_catwalk_door setHintString(#"");
     waitresult = var_40762d8a waittill(#"trigger");
     level flag::set(#"catwalk_door_open");
     level thread scene::init_streamer(#"aib_vign_zm_mob_brutus_summon_hellhounds", #"allies", 0, 0);
@@ -105,9 +105,9 @@ function_84f1c310() {
       waitresult.activator thread zm_audio::create_and_play_dialog(#"catwalk", #"open", undefined, 1);
     }
 
-    var_40762d8a sethintstring(#"");
+    var_40762d8a setHintString(#"");
     t_catwalk_door notify(#"power_on");
-    playsoundatposition(#"hash_97aff7905795396", (8223, 10111, 817));
+    playSoundAtPosition(#"hash_97aff7905795396", (8223, 10111, 817));
     level.musicsystemoverride = 1;
     music::setmusicstate("escape_catwalk");
     s_sparks = struct::get("catwalk_door_spark");
@@ -129,8 +129,8 @@ function_84f1c310() {
     level.var_2ea46461 clientfield::increment("" + #"hash_48f1f50c412d80c7");
     level.var_b2b15659 = 1;
   } else if(zm_custom::function_901b751c("zmPowerState") == 2 || zm_custom::function_901b751c(#"zmpowerdoorstate") == 2) {
-    var_40762d8a sethintstring(#"");
-    t_catwalk_door sethintstring(#"");
+    var_40762d8a setHintString(#"");
+    t_catwalk_door setHintString(#"");
     var_40762d8a setinvisibletoall();
     t_catwalk_door setinvisibletoall();
 
@@ -165,7 +165,7 @@ function_1646f141(var_e8ba54a2 = 0) {
     level thread function_da824de8();
   }
 
-  t_catwalk_event_10 = getent("t_catwalk_event_10", "targetname");
+  t_catwalk_event_10 = getEnt("t_catwalk_event_10", "targetname");
 
   if(isDefined(t_catwalk_event_10) && !var_e8ba54a2) {
     t_catwalk_event_10 waittill(#"enemies_spawned");
@@ -184,7 +184,7 @@ function_1646f141(var_e8ba54a2 = 0) {
 }
 
 function_dc212e9f() {
-  mdl_wire = getent("catwalk_wires", "targetname");
+  mdl_wire = getEnt("catwalk_wires", "targetname");
   bundle = #"p8_fxanim_zm_esc_wires_catwalk_bundle";
   mdl_wire thread scene::play(bundle, "LOOP", mdl_wire);
   level flag::wait_till(#"catwalk_door_open");
@@ -216,13 +216,13 @@ function_fd3fa3a3() {
   }
 
   var_4bdae8cd = struct::get("p8_fxanim_zm_esc_recreationyard_rocks_c_bundle", "scriptbundlename");
-  playsoundatposition(#"evt_fxa_rocks_recyard_c", var_4bdae8cd.origin);
+  playSoundAtPosition(#"evt_fxa_rocks_recyard_c", var_4bdae8cd.origin);
   var_4bdae8cd thread scene::play("Main&Idle Loop Out");
 }
 
 function_40312eda(mdl_sparks, mdl_gate) {
   v_new_position = mdl_sparks.origin + mdl_gate.script_vector;
-  mdl_sparks moveto(v_new_position, 1, 0.25, 0.25);
+  mdl_sparks moveTo(v_new_position, 1, 0.25, 0.25);
   wait 1.25;
   mdl_sparks delete();
 }
@@ -465,12 +465,12 @@ function_7ab912f2(s_loc) {
   self forceteleport(s_loc.origin, s_loc.angles);
   self hide();
   playFX(level._effect[#"lightning_dog_spawn"], s_loc.origin);
-  playsoundatposition(#"zmb_hellhound_prespawn", s_loc.origin);
+  playSoundAtPosition(#"zmb_hellhound_prespawn", s_loc.origin);
   wait 1.5;
-  playsoundatposition(#"zmb_hellhound_bolt", s_loc.origin);
+  playSoundAtPosition(#"zmb_hellhound_bolt", s_loc.origin);
   earthquake(0.5, 0.75, s_loc.origin, 1000);
-  playsoundatposition(#"hash_42894a8e6bfacf66", (5085, 10424, 1102));
-  playsoundatposition(#"zmb_hellhound_spawn", s_loc.origin);
+  playSoundAtPosition(#"hash_42894a8e6bfacf66", (5085, 10424, 1102));
+  playSoundAtPosition(#"zmb_hellhound_spawn", s_loc.origin);
   assert(isDefined(self), "<dev string:x38>");
   assert(isalive(self), "<dev string:x53>");
   assert(zm_utility::is_magic_bullet_shield_enabled(self), "<dev string:x68>");
@@ -526,7 +526,7 @@ function_e7c9f15b(a_ents) {
   var_4bdae8cd = struct::get("p8_fxanim_zm_esc_recreationyard_rocks_a_bundle", "scriptbundlename");
   var_4bdae8cd thread scene::play("Main&Idle Loop Out");
   e_brutus = a_ents[#"brutus"];
-  playsoundatposition(#"hash_66ef8de59c96e8d1", e_brutus gettagorigin("tag_eye"));
+  playSoundAtPosition(#"hash_66ef8de59c96e8d1", e_brutus gettagorigin("tag_eye"));
   e_brutus waittill(#"start_teleport");
   level thread function_21ccdb36();
   e_brutus waittill(#"teleport");

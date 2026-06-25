@@ -59,7 +59,7 @@ function function_cb1b5203(trap, var_7c56394 = 0) {
     hazard.targetname = "hazard";
     hazard.var_fd5301f9 = "logdrop";
     hazard.angles = trap.angles;
-    hazard enablelinkto();
+    hazard enablelinkTo();
   }
 
   trap.script_model = hazard;
@@ -260,7 +260,7 @@ function function_62ba9be4() {
   var_3493b9e = getanimlength(#"p8_fxanim_zm_towers_trap_blade_01_end_anim");
 
   while(true) {
-    self.script_model stopanimscripted();
+    self.script_model stopanimScripted();
     self.state = 0;
     wait 8 + randomint(5);
     self.script_model namespace_268747c0::play_anim(#"p8_fxanim_zm_towers_trap_blade_01_start_anim", 1);

@@ -226,7 +226,7 @@ getitemtype() {
 getterminaltrigger() {
   switch (self.itemtype) {
     case "atm":
-      return getent(self.target, "targetname");
+      return getEnt(self.target, "targetname");
     default:
       return self;
   }
@@ -243,7 +243,7 @@ getterminalmodel() {
     case "specialty_fastreload":
     case "exo_suit":
     case "exo_health":
-      return getent(self.target, "targetname");
+      return getEnt(self.target, "targetname");
     default:
       return self;
   }
@@ -258,10 +258,10 @@ getterminallight() {
     case "specialty_fastreload":
     case "exo_suit":
     case "exo_health":
-      var_0 = getent(self.target, "targetname");
+      var_0 = getEnt(self.target, "targetname");
 
       if(isDefined(var_0) && isDefined(var_0.target)) {
-        return getent(var_0.target, "targetname");
+        return getEnt(var_0.target, "targetname");
       }
     default:
       break;
@@ -453,12 +453,12 @@ terminalhintstringupdate(var_0) {
   for(;;) {
     waittillframeend;
     var_1 = getterminalhintstring(var_0);
-    self sethintstring(var_1);
+    self setHintString(var_1);
     var_2 = getterminalsecondaryhintstring(var_0);
     self setsecondaryhintstring(var_2);
     maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(getitemcost(self.itemtype)));
     maps\mp\zombies\_util::tokenhintstring(self.showtokenstring);
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
     var_0 common_scripts\utility::waittill_any("terminal_activated", "terminalPlayerConnected", "terminalPlayerDisconnected", "terminalPowerActivated", "player_infected", "take_perk");
   }
 }
@@ -515,9 +515,9 @@ terminalupdatehintstringsmulticlient() {
 
   for(;;) {
     waittillframeend;
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
     var_0 = getterminalhintstring();
-    self sethintstring(var_0);
+    self setHintString(var_0);
     var_1 = getterminalsecondaryhintstring();
     self setsecondaryhintstring(var_1);
     maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(getitemcost(self.itemtype)));
@@ -688,18 +688,18 @@ atmterminalthink() {
 
   for(;;) {
     self.active = 0;
-    self sethintstring(&"ZOMBIES_EMPTY_STRING");
+    self setHintString(&"ZOMBIES_EMPTY_STRING");
     self waittill("atm_on");
     self.activationcount++;
     self.active = 1;
-    self sethintstring(getitemlocbuy(self.itemtype));
+    self setHintString(getitemlocbuy(self.itemtype));
     self waittill("trigger", var_1);
     self.usedcount++;
     var_2 = randomfloat(1) < var_0 || self.forcejackpot;
 
     if(var_2) {
       self.forcejackpot = 0;
-      self sethintstring(&"ZOMBIES_EMPTY_STRING");
+      self setHintString(&"ZOMBIES_EMPTY_STRING");
       atmjackpot();
     } else {
       var_1 maps\mp\gametypes\zombies::givepointsforevent("atm", undefined, 1);
@@ -731,7 +731,7 @@ atmjackpot() {
       }
       var_9 = var_7.origin - self.modelent.origin;
       var_9 = (var_9[0], var_9[1], 0);
-      var_9 = vectornormalize(var_9);
+      var_9 = vectorNormalize(var_9);
       var_10 = vectordot(var_9, var_4);
 
       if(var_10 < var_3) {
@@ -775,7 +775,7 @@ perkterminalhas(var_0) {
 
 perkterminalset(var_0, var_1) {
   maps\mp\_utility::giveperk(var_0, 0);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 perkterminaltake(var_0) {
@@ -1011,7 +1011,7 @@ perkterminalsethostcure(var_0, var_1) {
   if(var_2.size) {
     var_3 = common_scripts\utility::random(var_2);
     self dontinterpolate();
-    self setorigin(var_3.origin);
+    self setOrigin(var_3.origin);
     self setplayerangles(var_3.angles);
   }
 }
@@ -1324,10 +1324,10 @@ perkterminalupdate() {
 }
 
 perkterminalupdatehostcure() {
-  self.curetrigger = getent(self.target, "targetname");
+  self.curetrigger = getEnt(self.target, "targetname");
 
   if(isDefined(self.curetrigger.target)) {
-    self.curemodel = getent(self.curetrigger.target, "targetname");
+    self.curemodel = getEnt(self.curetrigger.target, "targetname");
 
     if(isDefined(self.curemodel)) {
       self.curemodel.terminal = self;
@@ -1336,7 +1336,7 @@ perkterminalupdatehostcure() {
   }
 
   if(isDefined(self.curemodel) && isDefined(self.curemodel.target)) {
-    var_0 = getent(self.curemodel.target, "targetname");
+    var_0 = getEnt(self.curemodel.target, "targetname");
 
     if(isDefined(var_0) && var_0.code_classname == "light") {
       self.curemodel.light = var_0;

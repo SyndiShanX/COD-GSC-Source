@@ -146,7 +146,7 @@ function skeletonnotetrackmeleefire(animationentity) {
 }
 
 function is_within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -223,7 +223,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
 
 function get_closest_valid_player(origin, ignore_player) {
   valid_player_found = 0;
-  players = getplayers();
+  players = getPlayers();
   if(isDefined(ignore_player)) {
     for(i = 0; i < ignore_player.size; i++) {
       arrayremovevalue(players, ignore_player[i]);

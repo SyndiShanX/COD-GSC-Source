@@ -274,7 +274,7 @@ gunfireloopfxvecthread(fxid, fxpos, fxpos2, shotsmin, shotsmax, shotdelaymin, sh
 
   shotsbase = shotsmin;
   shotsrange = shotsmax - shotsmin;
-  fxpos2 = vectornormalize(fxpos2 - fxpos);
+  fxpos2 = vectorNormalize(fxpos2 - fxpos);
   fxent = spawnfx(level._effect[fxid], fxpos, fxpos2);
 
   for(;;) {
@@ -307,7 +307,7 @@ setup_fx() {
   org = undefined;
 
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
 
     if(isDefined(ent)) {
       org = ent.origin;
@@ -349,7 +349,7 @@ script_print_fx() {
   }
 
   if(isDefined(self.target)) {
-    org = getent(self.target, "targetname").origin;
+    org = getEnt(self.target, "targetname").origin;
   } else {
     org = "undefined";
   }

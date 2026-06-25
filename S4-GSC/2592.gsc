@@ -24,7 +24,7 @@ _id_10FB9(var_0) {
   var_1._id_0203 = var_0;
   var_0 = scripts\mp\utility\weapon::_id_0C48("pop_rocket_mp", self.origin, (0, 0, 0), 100, 1, var_0);
   var_0 _meth_85A3(1);
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   var_0 thread _id_10FA7(var_1);
   var_0 thread _id_10FA6(self);
   var_1 setscriptablepartstate("launch", "active", 0);

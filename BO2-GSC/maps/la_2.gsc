@@ -332,7 +332,7 @@ bigrig_add_trailer() {
   }
   self.trailer_model = spawn("script_model", self.origin);
   self.trailer_model.angles = self.angles;
-  self.trailer_model linkto(self);
+  self.trailer_model linkTo(self);
   self.trailer_model setModel("veh_t6_civ_18wheeler_trailer");
 
   if(isDefined(self.script_int)) {

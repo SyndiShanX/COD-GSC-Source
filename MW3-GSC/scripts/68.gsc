@@ -242,7 +242,7 @@ _id_11D2(var_0, var_1, var_2, var_3, var_4) {
     var_0._id_0C58 = var_5;
     var_0 animcustom(animscripts\first_frame::main);
   } else {
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
     var_0 setanimknob(level._id_0C59[var_5][var_1], 1, 0, 0);
   }
 }
@@ -376,7 +376,7 @@ _id_11D8(var_0, var_1, var_2, var_3) {
       }
       if(var_23) {
         var_6 _id_1282();
-        var_6 animscripted(var_9, var_19, var_20, level._id_0C59[var_27][var_1][var_11]);
+        var_6 animScripted(var_9, var_19, var_20, level._id_0C59[var_27][var_1][var_11]);
         var_28 = getanimlength(level._id_0C59[var_27][var_1][var_11]);
 
         if(var_28 < var_14) {
@@ -506,7 +506,7 @@ _id_11DF(var_0, var_1, var_2, var_3, var_4) {
         var_27 = level._id_0C59[var_25][var_1];
         var_7 setflaggedanim(var_17, var_27, 1, 0.2);
       } else {
-        var_7 animscripted(var_17, var_10, var_11, level._id_0C59[var_25][var_1]);
+        var_7 animScripted(var_17, var_10, var_11, level._id_0C59[var_25][var_1]);
       }
       var_28 = getanimlength(level._id_0C59[var_25][var_1]);
 
@@ -610,7 +610,7 @@ _id_11E3(var_0, var_1, var_2, var_3) {
 
   if(var_3 > 0 && var_2 > 0) {
     var_0 maps\_utility::_id_11E4("single anim", "end", var_2);
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
   } else {
     var_0 waittillmatch("single anim", "end");
   }
@@ -1194,8 +1194,8 @@ _id_122E(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isai(var_10)) {
       continue;
     }
-    var_10 moveto(var_11, var_3, var_4, var_5);
-    var_10 rotateto(var_12, var_3, var_4, var_5);
+    var_10 moveTo(var_11, var_3, var_4, var_5);
+    var_10 rotateTo(var_12, var_3, var_4, var_5);
   }
 }
 
@@ -1238,7 +1238,7 @@ _id_1233(var_0, var_1) {
   var_2 = self gettagorigin(var_1);
   var_3 = spawn("script_model", var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   return var_3;
 }
 

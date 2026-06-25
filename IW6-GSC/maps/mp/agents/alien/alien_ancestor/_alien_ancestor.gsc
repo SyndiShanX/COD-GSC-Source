@@ -121,7 +121,7 @@ ancestor_shield() {
   self.shield_radius_sq = 50176;
   self.shield = spawn("script_model", self.origin + (0, 0, 100));
   self.shield setModel("alien_shield_bubble_ancestor_col");
-  self.shield linkto(self, "tag_origin", (0, 0, 100), (-90, 0, 0));
+  self.shield linkTo(self, "tag_origin", (0, 0, 100), (-90, 0, 0));
   thread listen_for_shield_damage();
   wait 1.0;
   self.shield_down_time_end = gettime();
@@ -646,7 +646,7 @@ ancestor_death_nuke_fx() {
       var_1 shellshock("alien_spitter_gas_cloud", 0.5);
     }
 
-    var_1 playrumbleonentity("grenade_rumble");
+    var_1 playRumbleOnEntity("grenade_rumble");
   }
 }
 

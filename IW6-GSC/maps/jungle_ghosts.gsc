@@ -44,7 +44,7 @@ main() {
     setsaveddvar("sm_sunshadowscale", 0.55);
   }
 
-  level.rain_skybox = getent("jungle_overcast_sky", "targetname");
+  level.rain_skybox = getEnt("jungle_overcast_sky", "targetname");
   level.rain_skybox hide();
   level.player takeallweapons();
   maps\jungle_ghosts_audio::main();
@@ -62,11 +62,11 @@ main() {
   var_0 = ["to_grassy_field", "field_entrance"];
 
   foreach(var_2 in var_0) {
-    var_2 = getent(var_2, "targetname");
+    var_2 = getEnt(var_2, "targetname");
     var_2 thread maps\jungle_ghosts_util::play_hand_signal_for_player();
   }
 
-  var_4 = getent("stream", "targetname");
+  var_4 = getEnt("stream", "targetname");
   var_4 thread maps\jungle_ghosts_util::stream_trig_logic();
   level.laser_count = 0;
   level.impact_tree = 0;
@@ -628,19 +628,19 @@ jungle_corridor_start() {
 }
 
 crash_test_start() {
-  level.player setorigin((673, 5084, 564.411));
-  var_0 = getent("crash_final_collision", "targetname");
+  level.player setOrigin((673, 5084, 564.411));
+  var_0 = getEnt("crash_final_collision", "targetname");
   var_0 notsolid();
-  var_1 = getent("dest_crate", "targetname");
+  var_1 = getEnt("dest_crate", "targetname");
   var_1 notsolid();
-  var_2 = common_scripts\utility::getstruct("new_crash", "targetname");
+  var_2 = common_scripts\utility::getStruct("new_crash", "targetname");
   var_2.chopper = maps\_utility::spawn_anim_model("aas");
   var_2.chopper thread maps\jungle_ghosts_stream::chopper_sound();
   thread maps\jungle_ghosts_stream::chopper_rumble_earthquake();
-  var_2.crate_clip = getent("chopper_clip", "targetname");
+  var_2.crate_clip = getEnt("chopper_clip", "targetname");
   var_2.crate_clip.origin = var_2.chopper.origin;
   var_2.crate_clip.angles = var_2.chopper.angles;
-  var_2.crate_clip linkto(var_2.chopper, "tag_origin");
+  var_2.crate_clip linkTo(var_2.chopper, "tag_origin");
   var_2.pristine_crate = maps\_utility::spawn_anim_model("pristine_crate");
   var_2.damaged_crate = maps\_utility::spawn_anim_model("damaged_crate");
   var_2.pilot = maps\_utility::spawn_targetname("chopper_pilot", 1);
@@ -651,7 +651,7 @@ crash_test_start() {
   var_2.pilot_corpse useanimtree(#animtree);
   var_2.pilot_corpse.origin = var_2.chopper gettagorigin("tag_driver");
   var_2.pilot_corpse.angles = var_2.chopper gettagangles("tag_driver");
-  var_2.pilot_corpse linkto(var_2.chopper);
+  var_2.pilot_corpse linkTo(var_2.chopper);
   var_2.pilot_corpse setanimknob(%jungle_ghost_helicrash_pilot, 1, 0, 0);
   var_2.pilot_corpse setanimtime(%jungle_ghost_helicrash_pilot, 1);
   var_2.actors = [var_2.pilot, var_2.pristine_crate, var_2.damaged_crate, var_2.chopper];
@@ -660,21 +660,21 @@ crash_test_start() {
   common_scripts\utility::flag_set("smaw_target_detroyed");
   var_2 maps\_anim::anim_single(var_2.actors, "new_crash");
   var_0 solid();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_2.crate_clip delete();
 }
 
 dest_tree_test() {
   maps\jungle_ghosts_runway::escape_setup_trees();
-  level.player setorigin((246, 11798, 755.036));
+  level.player setOrigin((246, 11798, 755.036));
   level.player setplayerangles((0, 180, 0));
   maps\jungle_ghosts_util::arm_player(["honeybadger+acog_sp"]);
   common_scripts\utility::flag_set("choppers_saw_player");
 }
 
 underwater_test() {
-  var_0 = common_scripts\utility::getstruct("struct_player_bigjump_edge_reference", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = common_scripts\utility::getStruct("struct_player_bigjump_edge_reference", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   level.player enableinvulnerability();
   level.mover = level.player common_scripts\utility::spawn_tag_origin();
@@ -853,7 +853,7 @@ tall_grass_start() {
   common_scripts\utility::flag_set("obj_get_to_river");
   thread objectives("tall_grass");
   common_scripts\utility::flag_set("ambush_open_fire");
-  var_0 = getent("stream_backend_moveup_stealth", "targetname");
+  var_0 = getEnt("stream_backend_moveup_stealth", "targetname");
   var_0 delete();
   maps\jungle_ghosts_util::move_player_to_start("tall_grass_player");
   var_1 = ["p226_tactical+silencerpistol_sp+tactical_sp", "honeybadger+acog_sp"];
@@ -915,7 +915,7 @@ tall_grass_start_cold() {
     var_3[var_6] forceteleport(var_5.origin, var_5.angles);
   }
 
-  var_7 = getent("stream_backend_moveup", "targetname");
+  var_7 = getEnt("stream_backend_moveup", "targetname");
   var_7 delete();
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
   common_scripts\utility::array_thread(level.squad, maps\_utility::enable_ai_color);
@@ -1052,7 +1052,7 @@ escape_runway_start() {
   thread objectives("escape_runway");
   thread maps\jungle_ghosts_runway::escape_globals("runway");
   var_6 = maps\_utility::getent_or_struct("apache1_start_point", "script_noteworthy");
-  var_7 = getent("runway_apache", "script_noteworthy");
+  var_7 = getEnt("runway_apache", "script_noteworthy");
   level.apache1 = maps\_vehicle::vehicle_spawn(var_7);
   level.apache1 thread maps\jungle_ghosts_runway::runway_apache_logic("runway");
   level.apache1 vehicle_teleport(var_6.origin, var_6.angles);
@@ -1090,7 +1090,7 @@ escape_jungle_start() {
   thread objectives("escape_runway");
   thread maps\jungle_ghosts_runway::escape_globals("jungle");
   var_6 = maps\_utility::getent_or_struct("chopper_over_tallgrass", "script_noteworthy");
-  var_7 = getent("runway_apache", "script_noteworthy");
+  var_7 = getEnt("runway_apache", "script_noteworthy");
   level.apache1 = maps\_vehicle::vehicle_spawn(var_7);
   level.apache1 vehicle_teleport(var_6.origin, (0, 130, 0));
   level.apache1 thread maps\jungle_ghosts_runway::runway_apache_logic("jungle");
@@ -1134,7 +1134,7 @@ escape_river_start() {
   common_scripts\utility::array_thread(level.squad, maps\_utility::magic_bullet_shield);
   setup_squad_stealth();
   var_6 = maps\_utility::getent_or_struct("attack_river_jump", "targetname");
-  var_7 = getent("runway_apache", "script_noteworthy");
+  var_7 = getEnt("runway_apache", "script_noteworthy");
   level.apache1 = maps\_vehicle::vehicle_spawn(var_7);
   level.apache1 vehicle_teleport(var_6.origin, var_6.angles);
   level.apache1 thread maps\jungle_ghosts_runway::runway_apache_logic("river");

@@ -130,11 +130,11 @@ obj_switch_text(dist, obj_id) {
 }
 
 open_door(door_name) {
-  door = getent(door_name, "targetname");
-  linker = GetEnt(door.target, "targetname");
-  door LinkTo(linker);
+  door = getEnt(door_name, "targetname");
+  linker = getEnt(door.target, "targetname");
+  door linkTo(linker);
   door ConnectPaths();
-  linker RotateTo(linker.script_angles, .5);
+  linker rotateTo(linker.script_angles, .5);
   linker waittill("rotatedone");
   door Unlink();
 }
@@ -149,7 +149,7 @@ defuse_location_handler() {
 
   while(!self ent_flag("briefcase_bomb_defused")) {
     self makeusable();
-    self sethintstring(&"SO_DEFUSE_FAVELA_ESCAPE_DEFUSE_HINT");
+    self setHintString(&"SO_DEFUSE_FAVELA_ESCAPE_DEFUSE_HINT");
 
     self waittill("trigger", player);
     self MakeUnusable();
@@ -175,7 +175,7 @@ change_combatmode_setup() {
 }
 
 change_combatmode_trigger() {
-  origin_ent = getent(self.target, "targetname");
+  origin_ent = getEnt(self.target, "targetname");
 
   dist_sqrd = origin_ent.radius * origin_ent.radius;
 
@@ -364,7 +364,7 @@ player_defuse_kill_clear() {
 }
 
 briefcase_defuse(briefcase) {
-  self playerLinkTo(briefcase);
+  self playerlinkTo(briefcase);
   self PlayerLinkedOffsetEnable();
 
   lastWeapon = self getCurrentWeapon();

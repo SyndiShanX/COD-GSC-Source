@@ -44,9 +44,9 @@ transfer_primer_to_corpse(var_0, var_1) {
 
   if(isDefined(var_2)) {
     if(isDefined(var_1)) {
-      self.primer linkto(var_2, var_1);
+      self.primer linkTo(var_2, var_1);
     } else {
-      self.primer linkto(var_2);
+      self.primer linkTo(var_2);
     }
 
     self.primer thread show_primer_fx(self);
@@ -98,9 +98,9 @@ m990_hit(var_0, var_1, var_2, var_3, var_4, var_5) {
       }
 
       if(isDefined(var_5)) {
-        self.primer linkto(var_7, var_5);
+        self.primer linkTo(var_7, var_5);
       } else {
-        self.primer linkto(var_7);
+        self.primer linkTo(var_7);
       }
     }
 

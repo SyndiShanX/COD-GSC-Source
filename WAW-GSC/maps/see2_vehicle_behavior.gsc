@@ -22,7 +22,7 @@ retreat_truck_behavior() {
   self thread retreat_truck_behavior_node_kill();
   self thread retreat_truck_player_hit_me();
 
-  movetrigger = GetEnt(self.script_noteworthy + " move trigger", "script_noteworthy");
+  movetrigger = getEnt(self.script_noteworthy + " move trigger", "script_noteworthy");
 
   movetrigger waittill("trigger");
   level notify("retreaters", self);
@@ -82,7 +82,7 @@ do_death_fx() {
   }
 }
 wait_for_global_trigger(area) {
-  all_trigger = GetEnt("area " + area + " trigger all", "script_noteworthy");
+  all_trigger = getEnt("area " + area + " trigger all", "script_noteworthy");
   trigger_array = getEntArray("area " + area + " trigger");
   all_trigger waittill("trigger");
   for(i = 0; i < trigger_array.size; i++) {
@@ -128,7 +128,7 @@ do_tarp_flap() {
   targetEnt = undefined;
   while(1) {
     while(!isDefined(targetEnt)) {
-      targetEnt = GetEnt(self.target, "targetname");
+      targetEnt = getEnt(self.target, "targetname");
       wait(0.05);
     }
     targetEnt waittill("turret_fire");
@@ -140,7 +140,7 @@ cleanup_tarp() {
   targetEnt = undefined;
 
   while(!isDefined(targetEnt)) {
-    targetEnt = GetEnt(self.target, "targetname");
+    targetEnt = getEnt(self.target, "targetname");
     wait(0.05);
   }
   targetEnt waittill("death");
@@ -225,7 +225,7 @@ setup_spawngroup_generics(groupnum) {
   wait(1);
 
   for(i = 0; i < max_group_tanks; i++) {
-    tank = GetEnt("loopveh " + i + " group" + groupNum, "script_noteworthy");
+    tank = getEnt("loopveh " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       approach = tank check_for_approach(i, groupnum);
       if(!approach) {
@@ -255,7 +255,7 @@ setup_spawngroup_generics(groupnum) {
   }
 
   for(i = 0; i < max_group_tanks; i++) {
-    tank = GetEnt("lineveh " + i + " group" + groupNum, "script_noteworthy");
+    tank = getEnt("lineveh " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       tank thread linear_movement_behavior(undefined, undefined, i, groupNum);
       tank thread moving_firing_behavior();
@@ -268,7 +268,7 @@ setup_spawngroup_generics(groupnum) {
   }
 
   for(i = 0; i < max_group_tanks; i++) {
-    tank = GetEnt("lineveh_with_backup " + i + " group" + groupNum, "script_noteworthy");
+    tank = getEnt("lineveh_with_backup " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       tank thread linear_movement_behavior_adjusted(undefined, undefined, i, groupNum);
       tank thread moving_firing_behavior();
@@ -281,7 +281,7 @@ setup_spawngroup_generics(groupnum) {
   }
 
   for(i = 0; i < max_group_tanks; i++) {
-    tank = GetEnt("staticveh " + i + " group" + groupNum, "script_noteworthy");
+    tank = getEnt("staticveh " + i + " group" + groupNum, "script_noteworthy");
     if(isDefined(tank)) {
       tank thread static_firing_behavior();
       tank thread do_intermediate_damage_states();
@@ -609,7 +609,7 @@ wait_for_vehicle_retreat() {
     return;
   }
 
-  GetEnt(self.target, "targetname") notify("trigger");
+  getEnt(self.target, "targetname") notify("trigger");
 }
 custom_array_remove(array, element) {
   new_array = [];
@@ -659,7 +659,7 @@ lerp_to_stop() {
   }
 }
 set_path_wait_points(lineOrLoop, identifier, groupNum, partNum) {
-  nextNode = GetEnt(lineOrLoop + " " + identifier + " group" + groupNum + " part" + partNum + " start", "targetname");
+  nextNode = getEnt(lineOrLoop + " " + identifier + " group" + groupNum + " part" + partNum + " start", "targetname");
   while(1) {
     if(isDefined(nextNode)) {
       if(isDefined(nextNode.script_string)) {
@@ -668,7 +668,7 @@ set_path_wait_points(lineOrLoop, identifier, groupNum, partNum) {
         self waittill(nextNode.script_string);
       }
       if(isDefined(nextNode.target)) {
-        nextNode = GetEnt(nextNode.target, "targetname");
+        nextNode = getEnt(nextNode.target, "targetname");
       } else {
         nextNode = undefined;
       }
@@ -725,8 +725,8 @@ wait_for_switch_then_update(node, part) {
   self.currPart = part + 1;
 }
 arty_behavior() {
-  trigger = GetEnt(self.targetname + " trigger", "script_noteworthy");
-  damage_trigger = GetEnt(self.targetname + " damage trigger", "script_noteworthy");
+  trigger = getEnt(self.targetname + " trigger", "script_noteworthy");
+  damage_trigger = getEnt(self.targetname + " damage trigger", "script_noteworthy");
   damage_trigger thread maps\see2::inform_on_damage_trigger(damage_trigger.script_noteworthy);
   trigger thread maps\see2::inform_on_touch_trigger(trigger.script_noteworthy);
   while(1) {
@@ -742,7 +742,7 @@ arty_custom_targeting() {
     level waittill("target this", ent);
     self.customTarget = level.customTarget;
     level waittill("stop target this");
-    self.customTarget = GetStruct(self.target, "targetname");
+    self.customTarget = getStruct(self.target, "targetname");
   }
 }
 moving_firing_behavior() {

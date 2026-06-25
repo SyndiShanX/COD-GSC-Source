@@ -172,7 +172,7 @@ function function_eb7b7382() {
 }
 
 function function_c9740807() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isPlayer(player) && player util::function_a1d6293()) {
     return;
@@ -182,7 +182,7 @@ function function_c9740807() {
   checkpointcommit();
   flag::wait_till("all_players_spawned");
   wait 0.5;
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isPlayer(player) && player util::function_a1d6293()) {
     return;
@@ -210,7 +210,7 @@ function player_fake_death() {
 }
 
 function init_traverse() {
-  point = getent(self.target, "targetname");
+  point = getEnt(self.target, "targetname");
 
   if(isDefined(point)) {
     self.traverse_height = point.origin[2];
@@ -347,8 +347,8 @@ function player_intermission(var_1ed3b46b = 1) {
         org.origin = points[i].origin;
         org.angles = points[i].angles;
 
-        for(j = 0; j < getplayers().size; j++) {
-          player = getplayers()[j];
+        for(j = 0; j < getPlayers().size; j++) {
+          player = getPlayers()[j];
           player camerasetposition(org);
           player camerasetlookat();
           player cameraactivate(1);
@@ -360,7 +360,7 @@ function player_intermission(var_1ed3b46b = 1) {
           speed = points[i].speed;
         }
 
-        target_point = isDefined(struct::get(points[i].target, "targetname")) ? struct::get(points[i].target, "targetname") : getent(points[i].target, "targetname");
+        target_point = isDefined(struct::get(points[i].target, "targetname")) ? struct::get(points[i].target, "targetname") : getEnt(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         var_91c3f3c4 = time * 0.25;
@@ -369,8 +369,8 @@ function player_intermission(var_1ed3b46b = 1) {
           var_91c3f3c4 = 1;
         }
 
-        org moveto(target_point.origin, time, var_91c3f3c4, var_91c3f3c4);
-        org rotateto(target_point.angles, time, var_91c3f3c4, var_91c3f3c4);
+        org moveTo(target_point.origin, time, var_91c3f3c4, var_91c3f3c4);
+        org rotateTo(target_point.angles, time, var_91c3f3c4, var_91c3f3c4);
         wait time;
         continue;
       }

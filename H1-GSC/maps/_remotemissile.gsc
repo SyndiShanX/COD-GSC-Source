@@ -865,12 +865,12 @@ uavremotelaunchersequence(var_0, var_1) {
     var_0 disableweapons();
 
     if(isDefined(level.uav_missile_tag_for_camera)) {
-      var_0 cameralinkto(var_10, level.uav_missile_tag_for_camera);
+      var_0 cameralinkTo(var_10, level.uav_missile_tag_for_camera);
     } else {
-      var_0 cameralinkto(var_10, "tag_origin");
+      var_0 cameralinkTo(var_10, "tag_origin");
     }
 
-    var_0 controlslinkto(var_10);
+    var_0 controlslinkTo(var_10);
     var_4 = waitwithabortondamage(0.2);
 
     if(!var_4) {

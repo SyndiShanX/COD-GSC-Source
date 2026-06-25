@@ -194,7 +194,7 @@ function corpse_sight() {
     }
 
     sight = anglesToForward(self gettagangles("tag_eye"));
-    var_b455e74a = vectornormalize(corpseorigin + (0, 0, 30) - self getEye());
+    var_b455e74a = vectorNormalize(corpseorigin + (0, 0, 30) - self getEye());
 
     if(vectordot(sight, var_b455e74a) > 0.55) {
       if(!isDefined(corpse.seen) && self cansee(corpse)) {
@@ -354,17 +354,17 @@ function suspicious_door_sighting() {
     }
 
     if(distsq < var_3ff1021a) {
-      if(!isDefined(door.seen) && self cansee(door) && util::can_see_ai(door.origin, self, 250, getplayers()[0])) {
+      if(!isDefined(door.seen) && self cansee(door) && util::can_see_ai(door.origin, self, 250, getPlayers()[0])) {
         saw_door = door;
         break;
       }
     }
 
     sight = anglesToForward(self gettagangles("tag_eye"));
-    var_385f9620 = vectornormalize(doororigin + (0, 0, 30) - self getEye());
+    var_385f9620 = vectorNormalize(doororigin + (0, 0, 30) - self getEye());
 
     if(vectordot(sight, var_385f9620) > 0.55) {
-      if(!isDefined(door.seen) && self cansee(door) && util::can_see_ai(door.origin, self, 250, getplayers()[0])) {
+      if(!isDefined(door.seen) && self cansee(door) && util::can_see_ai(door.origin, self, 250, getPlayers()[0])) {
         saw_door = door;
         break;
       }

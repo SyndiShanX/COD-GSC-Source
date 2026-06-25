@@ -21,7 +21,7 @@ init_level_lighting_flags() {}
 setup_dof_presets() {}
 
 set_level_lighting_values() {
-  var_0 = getent("day_skydome", "targetname");
+  var_0 = getEnt("day_skydome", "targetname");
   var_0 hide();
 }
 
@@ -130,8 +130,8 @@ setup_daytime_lights() {
   maps\_utility::vision_set_fog_changes("ambush", 0);
   level.player setclutforplayer("clut_ambush_chase01", 1.0);
   level.player maps\_utility::set_light_set_player("ambush");
-  var_0 = getent("dawn_skydome", "targetname");
-  var_1 = getent("day_skydome", "targetname");
+  var_0 = getEnt("dawn_skydome", "targetname");
+  var_1 = getEnt("day_skydome", "targetname");
   var_0 delete();
   var_1 show();
   var_2 = getEntArray("bright_fixtures", "targetname");

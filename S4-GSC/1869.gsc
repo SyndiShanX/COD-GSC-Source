@@ -57,7 +57,7 @@ shake_random_perk_machine() {
     wait 0.4;
   }
 
-  self rotateto(var_1, 0.2);
+  self rotateTo(var_1, 0.2);
   wait 0.25;
   self.angles = var_1;
 }
@@ -65,7 +65,7 @@ shake_random_perk_machine() {
 init_random_perk_machine() {
   level endon("game_ended");
   self._id_4A88 = 1;
-  self.model = getent(self._id_0481, "target");
+  self.model = getEnt(self._id_0481, "target");
   self.model setModel("s4_zm_broken_demonic_fountain_revive");
   scripts\engine\utility::_id_5C24(self._id_CD4B);
   var_0 = 0;
@@ -74,7 +74,7 @@ init_random_perk_machine() {
   var_3 = self.model.origin;
   playFXOnTag(scripts\engine\utility::getfx("random_perk_start"), self.model, "tag_origin");
   self.model playSound("zmb_fountain_randomize");
-  self.model moveto(var_3 + (0, 0, 16), var_2);
+  self.model moveTo(var_3 + (0, 0, 16), var_2);
   self.model childthread shake_random_perk_machine();
 
   while(var_2 > 0) {
@@ -92,7 +92,7 @@ init_random_perk_machine() {
   self._id_039B = var_1;
   level.random_perks = scripts\engine\utility::array_remove_index(level.random_perks, var_0);
   self.model setModel(level.perk_machine_model[var_1]);
-  self.model moveto(var_3, 0.2);
+  self.model moveTo(var_3, 0.2);
   playFXOnTag(scripts\engine\utility::getfx(var_1), self.model, "tag_origin");
   wait 0.25;
   self.model.origin = var_3;

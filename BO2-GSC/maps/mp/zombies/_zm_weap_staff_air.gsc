@@ -137,7 +137,7 @@ staff_air_position_source(v_detonate, str_weapon) {
   e_whirlwind setModel("tag_origin");
   e_whirlwind.angles = vectorscale((-1, 0, 0), 90.0);
   e_whirlwind thread puzzle_debug_position("X", vectorscale((1, 1, 0), 255.0));
-  e_whirlwind moveto(groundpos_ignore_water_new(e_whirlwind.origin), 0.05);
+  e_whirlwind moveTo(groundpos_ignore_water_new(e_whirlwind.origin), 0.05);
   e_whirlwind waittill("movedone");
   e_whirlwind setclientfield("whirlwind_play_fx", 1);
   e_whirlwind thread whirlwind_rumble_nearby_players("whirlwind_active");
@@ -177,10 +177,10 @@ whirlwind_timeout(n_time) {
 }
 
 move_along_ground_position(v_position, n_time) {
-  v_diff = vectornormalize(v_position - self.origin);
+  v_diff = vectorNormalize(v_position - self.origin);
   v_newpos = self.origin + v_diff * 50 + vectorscale((0, 0, 1), 50.0);
   v_ground = groundpos_ignore_water_new(v_newpos);
-  self moveto(v_ground, n_time);
+  self moveTo(v_ground, n_time);
 }
 
 whirlwind_kill_zombies(n_level, str_weapon) {
@@ -249,7 +249,7 @@ whirlwind_move_zombie(e_whirlwind) {
   self.e_linker = spawn("script_origin", (0, 0, 0));
   self.e_linker.origin = self.origin;
   self.e_linker.angles = self.angles;
-  self linkto(self.e_linker);
+  self linkTo(self.e_linker);
   self thread whirlwind_unlink(e_whirlwind);
 
   if(isDefined(e_whirlwind)) {
@@ -385,7 +385,7 @@ zombie_launch(e_attacker, str_weapon) {
 }
 
 determine_launch_vector(e_attacker, ai_target) {
-  v_launch = vectornormalize(ai_target.origin - e_attacker.origin) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
+  v_launch = vectorNormalize(ai_target.origin - e_attacker.origin) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
   return v_launch;
 }
 
@@ -475,7 +475,7 @@ stun_zombie() {
     tag = "J_Spine1";
   }
 
-  self animscripted(self.origin, self.angles, "zm_electric_stun");
+  self animScripted(self.origin, self.angles, "zm_electric_stun");
   self maps\mp\animscripts\shared::donotetracks("stunned");
   self.forcemovementscriptstate = 0;
   self.ignoreall = 0;
@@ -490,7 +490,7 @@ whirlwind_attract_anim_watch_cancel() {
   }
 
   self.deathanim = undefined;
-  self stopanimscripted();
+  self stopanimScripted();
   self._whirlwind_attract_anim = 0;
 }
 
@@ -514,18 +514,18 @@ whirlwind_attract_anim(v_attract_point, b_move_fast) {
     self._had_legs = 1;
 
     if(b_move_fast) {
-      self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast");
+      self animScripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast");
     } else {
-      self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind");
+      self animScripted(self.origin, v_source_to_target, "zm_move_whirlwind");
     }
   } else {
     self.needs_run_update = 1;
     self._had_legs = 0;
 
     if(b_move_fast) {
-      self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_crawl");
+      self animScripted(self.origin, v_source_to_target, "zm_move_whirlwind_crawl");
     } else {
-      self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast_crawl");
+      self animScripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast_crawl");
     }
   }
 

@@ -71,7 +71,7 @@ _id_4BCB() {
       }
       if(common_scripts\utility::flag("player_heartbeat_sound")) {
         wait 0.05;
-        level.player playrumbleonentity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
       }
 
       wait(level._id_5984);
@@ -141,7 +141,7 @@ _id_598C(var_0) {
       var_6 = 0.05;
     }
     var_7 = gettime();
-    var_0 moveto((var_4, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
+    var_0 moveTo((var_4, 0, 0), var_6, var_6 * 0.5, var_6 * 0.5);
     wait(var_6);
     maps\_utility::_id_1254(var_7, 0.6);
 
@@ -160,7 +160,7 @@ _id_598C(var_0) {
 _id_598E() {
   level waittill("stop_drunk_walk");
   var_0 = 0.8;
-  level._id_5258 rotateto((0, 0, 0), var_0, var_0 * 0.5, var_0 * 0.5);
+  level._id_5258 rotateTo((0, 0, 0), var_0, var_0 * 0.5, var_0 * 0.5);
   wait(var_0);
   level._id_5258 delete();
   level.player playersetgroundreferenceent(undefined);
@@ -200,7 +200,7 @@ _id_598F() {
     var_7 = sin(var_1) * 1.8 * level._id_598D;
 
     if(!common_scripts\utility::flag("player_limping")) {
-      level._id_5258 rotateto((var_5, var_7, var_6), var_2, var_2 * 0.5, var_2 * 0.5);
+      level._id_5258 rotateTo((var_5, var_7, var_6), var_2, var_2 * 0.5, var_2 * 0.5);
     }
     wait 0.05;
   }
@@ -235,8 +235,8 @@ _id_5992(var_0) {
   level endon("stop_drunk_walk");
   var_1 = 0;
   var_2 = 140;
-  var_3 = common_scripts\utility::getstruct("limp_yaw_ent", "targetname");
-  var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+  var_3 = common_scripts\utility::getStruct("limp_yaw_ent", "targetname");
+  var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
   var_5 = vectortoangles(var_4.origin - var_3.origin);
   var_6 = anglesToForward(var_5);
   var_7 = 0;
@@ -268,7 +268,7 @@ _id_5992(var_0) {
       var_13 = 2;
       var_14 = common_scripts\utility::spawn_tag_origin();
       var_14.origin = (level._id_598D, 0, 0);
-      var_14 moveto((1, 0, 0), var_13, var_13 * 0.5, var_13 * 0.5);
+      var_14 moveTo((1, 0, 0), var_13, var_13 * 0.5, var_13 * 0.5);
 
       for(;;) {
         level._id_598D = var_14.origin[0];
@@ -287,11 +287,11 @@ _id_5992(var_0) {
     var_2 = randomintrange(70, 125);
     var_13 = 0.45;
     var_15 = randomfloatrange(-16, -11);
-    var_0 moveto((var_15, 0, 0), var_13, 0, var_13);
+    var_0 moveTo((var_15, 0, 0), var_13, 0, var_13);
     wait(var_13);
     var_13 = var_13 * 0.8;
     var_16 = randomfloatrange(-2, 2);
-    var_0 moveto((var_16, 0, 0), var_13, var_13 * 0.5, var_13 * 0.5);
+    var_0 moveTo((var_16, 0, 0), var_13, var_13 * 0.5, var_13 * 0.5);
     wait(var_13);
   }
 }
@@ -314,7 +314,7 @@ _id_5993() {
     common_scripts\utility::noself_delaycall(0.5, ::setblur, 4, 0.25);
     common_scripts\utility::noself_delaycall(1.2, ::setblur, 0, 1);
     maps\_utility::delaythread(var_1, ::_id_51E6);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     level.player maps\_utility::_id_279B(0.35, 0.3);
     level.player maps\_utility::delaythread(var_1 * 0.5, maps\_utility::_id_279B, 0.7, var_1);
     common_scripts\utility::flag_clear("force_limp");
@@ -431,11 +431,11 @@ _id_51E4(var_0, var_1, var_2, var_3) {
     return;
   }
   var_0 = _id_51E5(var_0);
-  level._id_5258 rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  level._id_5258 rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   level._id_5258 waittill("rotatedone");
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = _id_51E5(var_4);
-  level._id_5258 rotateto(var_4, var_2, 0, var_2 / 2);
+  level._id_5258 rotateTo(var_4, var_2, 0, var_2 / 2);
   level._id_5258 waittill("rotatedone");
 
   if(!isDefined(var_3)) {
@@ -445,15 +445,15 @@ _id_51E4(var_0, var_1, var_2, var_3) {
 
 _id_5997() {
   var_0 = _id_51E5((-5, -5, 0));
-  level._id_5258 rotateto(var_0, 0.6, 0.6, 0);
+  level._id_5258 rotateTo(var_0, 0.6, 0.6, 0);
   level._id_5258 waittill("rotatedone");
   var_0 = _id_51E5((-15, -20, 0));
-  level._id_5258 rotateto(var_0, 2.5, 0, 2.5);
+  level._id_5258 rotateTo(var_0, 2.5, 0, 2.5);
   level._id_5258 waittill("rotatedone");
   var_0 = _id_51E5((5, 5, 0));
-  level._id_5258 rotateto(var_0, 2.5, 2, 0.5);
+  level._id_5258 rotateTo(var_0, 2.5, 2, 0.5);
   level._id_5258 waittill("rotatedone");
-  level._id_5258 rotateto((0, 0, 0), 1, 0.2, 0.8);
+  level._id_5258 rotateTo((0, 0, 0), 1, 0.2, 0.8);
 }
 
 _id_4595(var_0) {

@@ -26,8 +26,8 @@ main() {
   level flag::init(#"hash_43c116bdb3a96e16");
   exploder::exploder("fxexp_narr_campfire");
   level.var_f1907c72 = struct::get("mq_narrative_campfire_loc", "targetname");
-  level.var_f1907c72.vessel = getent(level.var_f1907c72.target2, "targetname");
-  level.var_f1907c72.fire = getent(level.var_f1907c72.target3, "targetname");
+  level.var_f1907c72.vessel = getEnt(level.var_f1907c72.target2, "targetname");
+  level.var_f1907c72.fire = getEnt(level.var_f1907c72.target3, "targetname");
   level.var_f1907c72.vessel hide();
   level.var_f1907c72 zm_unitrigger::create("", 64);
   level.var_96eedc2a = 1;
@@ -213,9 +213,9 @@ function_af39e9d5() {
 
   for(var_4814cac6 = 1; !level flag::get(#"hash_43c116bdb3a96e16"); var_4814cac6 = !var_4814cac6) {
     if(var_4814cac6) {
-      self moveto(var_a28e7c1f, 2, 1, 1);
+      self moveTo(var_a28e7c1f, 2, 1, 1);
     } else {
-      self moveto(var_ae661658, 2, 1, 1);
+      self moveTo(var_ae661658, 2, 1, 1);
     }
 
     self rotatevelocity((0, 8, 0), 4);

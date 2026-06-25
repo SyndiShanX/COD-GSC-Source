@@ -56,7 +56,7 @@ function event_handler[level_init] main(eventstruct) {
   init_callbacks();
   thread function_7ea0ce5f();
   level thread tkdn_af_wreck::function_70dd6f0e();
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   level flag::set("no_corpse_pickup");
   setDvar(#"hash_76c0d7e6385ee6de", 0.3);
   setDvar(#"hash_4466b01c6d8d7307", 4);
@@ -162,7 +162,7 @@ function function_8106e2e1() {
 
   thread namespace_b100dd86::setup_objectives(level.skipto_current_objective[0]);
   knife = getweapon(#"knife_held");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(player hasweapon(knife, 1)) {
     player takeweapon(knife, 1);
@@ -251,7 +251,7 @@ function function_13f6e85() {
 }
 
 function function_43593d7d() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_4f2ba130 = self getweaponslist();
 
   foreach(e_w in var_4f2ba130) {
@@ -273,7 +273,7 @@ function function_43593d7d() {
 }
 
 function function_acddd8f1() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_4f2ba130 = self getweaponslist();
 
   foreach(e_w in var_4f2ba130) {

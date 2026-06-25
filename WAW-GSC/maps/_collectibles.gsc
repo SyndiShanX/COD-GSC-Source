@@ -108,7 +108,7 @@ collectible_init() {
   map_collectibles = getEntArray("collectible", "targetname");
 
   for(i = 0; i < map_collectibles.size; i++) {
-    map_collectibles[i].item = getent(map_collectibles[i].target, "targetname");
+    map_collectibles[i].item = getEnt(map_collectibles[i].target, "targetname");
     map_collectibles[i].unlock = collectible_get_unlock(map_collectibles[i].item);
 
     if(collectible_has_been_found(map_collectibles[i].unlock)) {
@@ -293,7 +293,7 @@ collectible_wait_for_pickup() {
   level endon("collectible_save_restored");
 
   self setHintString(&"SCRIPT_COLLECTIBLE_PICKUP");
-  self usetriggerrequirelookat();
+  self useTriggerRequireLookAt();
 
   self waittill("trigger", player);
 

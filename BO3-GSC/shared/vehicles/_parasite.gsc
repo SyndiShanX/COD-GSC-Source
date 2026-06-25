@@ -73,7 +73,7 @@ function private is_target_valid(target) {
 }
 
 function get_parasite_enemy() {
-  parasite_targets = getplayers();
+  parasite_targets = getPlayers();
   least_hunted = parasite_targets[0];
   for(i = 0; i < parasite_targets.size; i++) {
     if(!isDefined(parasite_targets[i].hunted_by)) {
@@ -113,7 +113,7 @@ function set_parasite_enemy(enemy) {
   }
   self.parasiteenemy.hunted_by++;
   self setlookatent(self.parasiteenemy);
-  self setturrettargetent(self.parasiteenemy);
+  self setturrettargetEnt(self.parasiteenemy);
 }
 
 function private parasite_target_selection() {
@@ -135,7 +135,7 @@ function private parasite_target_selection() {
       self.parasiteenemy = target;
       self.parasiteenemy.hunted_by = self.parasiteenemy.hunted_by + 1;
       self setlookatent(self.parasiteenemy);
-      self setturrettargetent(self.parasiteenemy);
+      self setturrettargetEnt(self.parasiteenemy);
     }
     wait(0.5);
   }
@@ -284,7 +284,7 @@ function fire_pod_logic(chosetojuke) {
     self clientfield::set("parasite_tell_fx", 1);
     self waittill("pre_fire");
     if(isDefined(self.parasiteenemy) && self vehcansee(self.parasiteenemy) && distance2dsquared(self.parasiteenemy.origin, self.origin) < ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3) * ((0.5 * (self.settings.engagementdistmin + self.settings.engagementdistmax)) * 3)) {
-      self setturrettargetent(self.parasiteenemy, self.parasiteenemy getvelocity() * 0.3);
+      self setturrettargetEnt(self.parasiteenemy, self.parasiteenemy getvelocity() * 0.3);
     }
     self vehicle_ai::waittill_asm_complete("fire@stationary", 5);
     self asmrequestsubstate("locomotion@movement");
@@ -477,7 +477,7 @@ function drone_pain_for_time(time, stablizeparam, restorelookpoint) {
       restorelookent setModel("tag_origin");
       self clearlookatent();
       self setlookatent(restorelookent);
-      self setturrettargetent(restorelookent);
+      self setturrettargetEnt(restorelookent);
       wait(1.5);
       self clearlookatent();
       self clearturrettarget();

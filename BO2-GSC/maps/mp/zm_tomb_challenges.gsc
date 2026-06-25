@@ -109,7 +109,7 @@ box_footprint_think() {
 
   self notify("box_finished");
   level.n_soul_boxes_completed++;
-  e_volume = getent(self.target, "targetname");
+  e_volume = getEnt(self.target, "targetname");
   e_volume delete();
   self delay_thread(0.5, ::setclientfield, "foot_print_box_glow", 0);
   wait 1;
@@ -121,18 +121,18 @@ box_footprint_think() {
   for(i = 0; i < n_rotations; i++) {
     v_rotate_angles = v_start_angles + (randomfloatrange(-10, 10), randomfloatrange(-10, 10), randomfloatrange(-10, 10));
     n_rotate_time = randomfloatrange(0.2, 0.4);
-    self rotateto(v_rotate_angles, n_rotate_time);
+    self rotateTo(v_rotate_angles, n_rotate_time);
     self waittill("rotatedone");
   }
 
-  self rotateto(v_start_angles, 0.3);
+  self rotateTo(v_start_angles, 0.3);
   self movez(-60, 0.5, 0.5);
   self waittill("rotatedone");
   trace_start = self.origin + vectorscale((0, 0, 1), 200.0);
   trace_end = self.origin;
   fx_trace = bulletTrace(trace_start, trace_end, 0, self);
   playFX(level._effect["mech_booster_landing"], fx_trace["position"], anglesToForward(self.angles), anglestoup(self.angles));
-  playsoundatposition("zmb_footprintbox_disappear", self.origin);
+  playSoundAtPosition("zmb_footprintbox_disappear", self.origin);
   self waittill("movedone");
   level maps\mp\zombies\_zm_challenges::increment_stat("zc_boxes_filled");
 
@@ -166,7 +166,7 @@ footprint_zombie_killed(attacker) {
   foreach(e_volume in a_volumes) {
     if(self istouching(e_volume) && isDefined(attacker) && isPlayer(attacker)) {
       self setclientfield("foot_print_box_fx", 1);
-      m_box = getent(e_volume.target, "targetname");
+      m_box = getEnt(e_volume.target, "targetname");
       m_box notify("soul_absorbed", attacker);
       return true;
     }

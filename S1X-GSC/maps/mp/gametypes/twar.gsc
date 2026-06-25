@@ -1306,7 +1306,7 @@ get_zone_dir(zone_index) {
     team_spawn_center = get_start_spawn_centers(false);
     dir = team_spawn_center["axis"] - team_spawn_center["allies"];
     dir = (dir[0], dir[1], 0);
-    return VectorNormalize(dir);
+    return vectorNormalize(dir);
   }
 }
 
@@ -1319,7 +1319,7 @@ assign_spawns_version_3() {
 
     zone.dir = get_zone_dir(i);
     foreach(spawnPoint in zone.nearSpawns["all"]) {
-      spawn_dir = VectorNormalize(zone.origin - spawnPoint.origin);
+      spawn_dir = vectorNormalize(zone.origin - spawnPoint.origin);
       spawnPoint.dot = VectorDot(spawn_dir, zone.dir);
     }
 
@@ -1404,7 +1404,7 @@ getNearestSpawns(zone, max_spawns, min_dist, min_dot) {
 
     if(isDefined(min_dot)) {
       spawn_dir = anglesToForward(twar_spawn.angles);
-      twar_dir = VectorNormalize(zone.origin - twar_spawn.origin);
+      twar_dir = vectorNormalize(zone.origin - twar_spawn.origin);
 
       dot = VectorDot(spawn_dir, twar_dir);
       if(dot < min_dot) {

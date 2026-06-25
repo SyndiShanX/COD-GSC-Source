@@ -52,7 +52,7 @@ skipto_metal_storms() {
   skipto_teleport("skipto_metal_storms_player");
   setmusicstate("YEMEN_DOOR_OPENED");
   level.friendlyfiredisabled = 1;
-  s_metal_storms_meet = getstruct("obj_metalstorm_meet_manendez", "targetname");
+  s_metal_storms_meet = getStruct("obj_metalstorm_meet_manendez", "targetname");
   set_objective(level.obj_market_meet_menendez, s_metal_storms_meet, "breadcrumb");
 }
 
@@ -76,10 +76,10 @@ main() {
 }
 
 metal_storms_setup() {
-  sp_left_guys = getent("left_courtyard_terrorists", "targetname");
-  sp_right_guys = getent("right_courtyard_terrorists", "targetname");
-  sp_center_guys = getent("right_courtyard_terrorists", "targetname");
-  sp_center_enemy = getent("street_entrance_guy", "targetname");
+  sp_left_guys = getEnt("left_courtyard_terrorists", "targetname");
+  sp_right_guys = getEnt("right_courtyard_terrorists", "targetname");
+  sp_center_guys = getEnt("right_courtyard_terrorists", "targetname");
+  sp_center_enemy = getEnt("street_entrance_guy", "targetname");
   sp_left_guys thread streets_spawn_full_count(1);
   sp_right_guys thread streets_spawn_full_count(1);
   sp_center_guys thread streets_spawn_full_count(1);
@@ -174,7 +174,7 @@ courtyard_fire_fake_rocket() {
   level thread courtyard_explosion_fx();
   playrumbleonposition("artillery_rumble", level.player.origin);
   level notify("fxanim_balcony_courtyard_start");
-  playsoundatposition("fxa_balcony_courtyard", (-2544, -5521, 327));
+  playSoundAtPosition("fxa_balcony_courtyard", (-2544, -5521, 327));
   earthquake(0.3, 3, e_target.origin, 2000);
   level.player rumble_loop(3, 1, "crash_heli_rumble");
   level run_scene("courtyard_balcony_deaths");
@@ -193,23 +193,23 @@ courtyard_fire_fake_rocket() {
 }
 
 courtyard_explosion_fx() {
-  s_explosion_point = getstruct("courtyard_building_fx", "targetname");
-  s_drama_struct = getstruct("courtyard_fx_at_player", "targetname");
+  s_explosion_point = getStruct("courtyard_building_fx", "targetname");
+  s_drama_struct = getStruct("courtyard_fx_at_player", "targetname");
   exploder(410);
   v_eye_pos = level.player getEye();
   v_player_eye = level.player getplayerangles();
-  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
+  v_player_eye = vectorNormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 256;
   a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
-  v_drama_fx = vectornormalize(a_trace["position"] - s_drama_struct.origin);
+  v_drama_fx = vectorNormalize(a_trace["position"] - s_drama_struct.origin);
   v_drama_fx = vectortoangles(v_drama_fx);
   m_drama_spot = spawn_model("tag_origin", s_drama_struct.origin, v_drama_fx);
 }
 
 street_balcony_runners() {
   trigger_wait("street_balcony_runner_start");
-  sp_runners = getent("street_balcony_runner", "targetname");
-  s_run_spot = getstruct("street_balcony_runner_goal", "targetname");
+  sp_runners = getEnt("street_balcony_runner", "targetname");
+  s_run_spot = getStruct("street_balcony_runner_goal", "targetname");
   level thread street_balcony_take_position();
 
   for(i = 0; i < sp_runners.count; i++) {
@@ -249,9 +249,9 @@ street_balcony_take_position() {
 
 street_yemeni_enter_building() {
   self endon("death");
-  s_runto_spot = getstruct("street_yemeni_runto_bldg_spot", "targetname");
+  s_runto_spot = getStruct("street_yemeni_runto_bldg_spot", "targetname");
   wait(randomfloatrange(0.05, 2));
-  self set_goalradius(256);
+  self set_goalRadius(256);
   self setgoalpos(s_runto_spot.origin);
   self waittill("goal");
   self delete();
@@ -286,10 +286,10 @@ street_safety() {
 street_end() {
   trigger_wait("street_end");
   level thread vo_pre_morals();
-  door_l = getent("end_door_left", "targetname");
-  door_r = getent("end_door_right", "targetname");
-  door_l rotateyaw(-100, 0.3);
-  door_r rotateyaw(100, 0.3);
+  door_l = getEnt("end_door_left", "targetname");
+  door_r = getEnt("end_door_right", "targetname");
+  door_l rotateYaw(-100, 0.3);
+  door_r rotateYaw(100, 0.3);
   door_l connectpaths();
   door_r connectpaths();
   wait 0.2;
@@ -360,15 +360,15 @@ courtyard_metalstorm_think() {
   self waittill("reached_end_node");
   flag_wait("yemen_gump_morals");
   flag_wait_or_timeout("metal_storms_fire_building_rocket", 6);
-  e_target = getent("metalstorm_courtyard_balcony_target", "targetname");
+  e_target = getEnt("metalstorm_courtyard_balcony_target", "targetname");
   self notify("change_state");
-  self setturrettargetent(e_target);
+  self setturrettargetEnt(e_target);
   self waittill("turret_on_target");
   self thread courtyard_fire_fake_rocket();
   self vehclearentitytarget(e_target);
   self maps\_metal_storm::metalstorm_start_ai();
   self.takedamage = 1;
-  s_courtyard_defend = getstruct("courtyard_metalstorm_defend", "targetname");
+  s_courtyard_defend = getStruct("courtyard_metalstorm_defend", "targetname");
   self thread maps\_vehicle::defend(s_courtyard_defend.origin, s_courtyard_defend.radius);
 }
 
@@ -378,7 +378,7 @@ street_metalstorm_think(id) {
   self waittill("reached_end_node");
   self notify("scripted_done");
   wait 0.05;
-  s_defend_area = getstruct("street_metalstorm_" + id + "_defend", "targetname");
+  s_defend_area = getStruct("street_metalstorm_" + id + "_defend", "targetname");
   self thread maps\_vehicle::defend(s_defend_area.origin, s_defend_area.radius);
 }
 
@@ -393,11 +393,11 @@ metal_storms_intruder() {
   trigger_off("trig_intruder", "targetname");
   level.player waittill_player_has_intruder_perk();
   trigger_on("trig_intruder", "targetname");
-  s_intruder_pos = getent("trig_intruder", "targetname");
+  s_intruder_pos = getEnt("trig_intruder", "targetname");
   set_objective_perk(level.obj_interact, s_intruder_pos.origin);
   trigger_wait("trig_intruder");
   remove_objective_perk(level.obj_interact);
-  m_clip = getent("intruder_gate_clip", "targetname");
+  m_clip = getEnt("intruder_gate_clip", "targetname");
   m_clip delete();
   run_scene("intruder");
 }
@@ -438,8 +438,8 @@ intruder_turret_move_qrdrones() {
   autosave_by_name("yemen_balcony");
   queue_dialog_ally("cd3_fire_on_the_drones_0");
   a_qrs = getEntArray("street_drone", "script_noteworthy");
-  s_goal = getstruct("streets_qr_moveto", "targetname");
-  s_goalfar = getstruct("streets_qr_moveto_far", "targetname");
+  s_goal = getStruct("streets_qr_moveto", "targetname");
+  s_goalfar = getStruct("streets_qr_moveto_far", "targetname");
 
   foreach(vh_qr in a_qrs) {
     vh_qr.goalpos = s_goal.origin;

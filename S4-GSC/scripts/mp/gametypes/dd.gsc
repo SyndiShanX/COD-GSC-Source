@@ -480,7 +480,7 @@ _id_ABD2(var_0) {
 _id_D886() {
   var_0 = spawn("script_origin", self.origin);
   var_0.angles = self.angles;
-  var_0 rotateyaw(-45, 0.05);
+  var_0 rotateYaw(-45, 0.05);
   waitframe();
   var_1 = self.origin + (0, 0, 5);
   var_2 = self.origin + anglesToForward(var_0.angles) * 100 + (0, 0, 128);
@@ -598,7 +598,7 @@ _id_5011(var_0, var_1) {
   var_2 = scripts\engine\trace::ray_trace(var_0.origin + (0, 0, 20), var_0.origin - (0, 0, 2000), var_0, scripts\engine\trace::_id_3EF6(1));
   var_3 = randomfloat(360);
   var_4 = (cos(var_3), sin(var_3), 0);
-  var_4 = vectornormalize(var_4 - var_2["normal"] * vectordot(var_4, var_2["normal"]));
+  var_4 = vectorNormalize(var_4 - var_2["normal"] * vectordot(var_4, var_2["normal"]));
   var_5 = vectortoangles(var_4);
   level._id_436B[var_1] = spawn("script_model", var_2["position"]);
   level._id_436B[var_1].angles = var_5;

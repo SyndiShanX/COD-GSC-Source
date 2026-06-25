@@ -49,7 +49,7 @@ function_b7bc0616() {
 }
 
 function_f5ad51bd() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player bgb::is_enabled(#"zm_bgb_newtonian_negation")) {
       player.var_30ee603f = 1;
       player.var_4b0fb2fb = 1;
@@ -63,7 +63,7 @@ function_f5ad51bd() {
 }
 
 enable_newtonian_negation() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.var_30ee603f) && player.var_30ee603f) {
       zm_bgb_newtonian_negation::function_8622e664(1);
       player.var_30ee603f = undefined;

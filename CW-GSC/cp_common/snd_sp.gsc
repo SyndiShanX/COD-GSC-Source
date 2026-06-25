@@ -341,7 +341,7 @@ function private function_6134380c(alias, islooping, org_start, org_end, fadein,
 
   while(true) {
     org = function_68dbcf23(org_start, org_end);
-    self moveto(org, waittime, 0, 0);
+    self moveTo(org, waittime, 0, 0);
     wait waittime;
   }
 }
@@ -392,7 +392,7 @@ function function_ab26d4b7(label, point1, point2) {
   }
 
   assert(!isDefined(level.var_77a389b2[label]), "<dev string:x15f>" + label + "<dev string:x16d>");
-  level.var_77a389b2[label] = [point1, vectornormalize(point2 - point1), distance(point1, point2), point2];
+  level.var_77a389b2[label] = [point1, vectorNormalize(point2 - point1), distance(point1, point2), point2];
   self thread function_17b9cb33(label);
   self thread function_a0414d75(label);
 }
@@ -408,7 +408,7 @@ function private function_17b9cb33(label) {
     var_7bfe4890 = vectordot(var_874f5aad, level.var_77a389b2[label][1]);
     var_7bfe4890 = math::clamp(var_7bfe4890, 0, level.var_77a389b2[label][2]);
     sound_origin = level.var_77a389b2[label][0] + level.var_77a389b2[label][1] * var_7bfe4890;
-    self moveto(sound_origin, update_rate);
+    self moveTo(sound_origin, update_rate);
 
     if(function_95c9af4b() > 1) {
       p1 = level.var_77a389b2[label][0];
@@ -446,7 +446,7 @@ function private function_6cec2fa9(label, point1, point2, time) {
     fraction = (i + 1) / var_8113b1f4;
     var_c9b2005f = vectorlerp(var_7e80dee7, point1, fraction);
     var_9d4813f0 = vectorlerp(var_7b2f5268, point2, fraction);
-    level.var_77a389b2[label] = [var_c9b2005f, vectornormalize(var_9d4813f0 - var_c9b2005f), distance(var_c9b2005f, var_9d4813f0), var_9d4813f0];
+    level.var_77a389b2[label] = [var_c9b2005f, vectorNormalize(var_9d4813f0 - var_c9b2005f), distance(var_c9b2005f, var_9d4813f0), var_9d4813f0];
     wait tick;
   }
 }
@@ -532,7 +532,7 @@ function private function_4f2eaeca(range, view, scale) {
     start_origin = level.player getEye();
     start_angles = level.player getplayerangles();
     end_origin = self.origin;
-    normal = vectornormalize(end_origin - start_origin);
+    normal = vectorNormalize(end_origin - start_origin);
     forward = anglesToForward(start_angles);
     vol = vectordot(forward, normal);
     vol = mapfloat(0, 1, 1 - scale, 1, vol);
@@ -1051,7 +1051,7 @@ function snd_timer(totaltime, tickalias, tockalias, endalias, pitchlo, pitchhi, 
     self.var_3ce724aa.endtime = starttime + tickalias;
     self.var_3ce724aa.soundticktock = 0;
     self.var_3ce724aa.soundent = spawn("script_origin", self.origin);
-    self.var_3ce724aa.soundent linkto(self);
+    self.var_3ce724aa.soundent linkTo(self);
   }
 
   self thread function_250787e2(tickalias, tockalias, endalias, pitchlo, pitchhi, pitchcurve, endcallback);

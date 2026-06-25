@@ -378,7 +378,7 @@ playteleportin(var_0, var_1, var_2, var_3) {
   self endon(var_1 + "_finished");
   var_4 = self.teleportpos - self.origin;
   var_4 = (var_4[0], var_4[1], 0);
-  var_5 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_4);
   var_6 = vectortoangles(var_5);
   playanimwithplaybackrate(var_0, var_1, var_2, var_3);
 }
@@ -456,13 +456,13 @@ playteleportout(var_0, var_1, var_2, var_3) {
     var_7 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
     var_8 = var_6 getvelocity();
     var_9 = length2d(var_8);
-    var_10 = vectornormalize(var_6.origin - self.origin);
+    var_10 = vectorNormalize(var_6.origin - self.origin);
     self.teleportpos = var_6.origin - var_10 * var_7.teleport_attack_dist_to_target;
     if(!isvalidteleportpos(var_6.origin)) {
       if(var_9 == 0) {
         var_11 = anglesToForward(var_6.angles);
       } else {
-        var_11 = vectornormalize(var_9) * -1;
+        var_11 = vectorNormalize(var_9) * -1;
       }
 
       self.teleportpos = var_6.origin + var_11 * var_7.teleport_behind_target_dist;
@@ -476,7 +476,7 @@ playteleportout(var_0, var_1, var_2, var_3) {
   }
 
   self dontinterpolate();
-  self setorigin(self.teleportpos, 0);
+  self setOrigin(self.teleportpos, 0);
   if(isDefined(self.teleportangles)) {
     self.angles = (0, self.teleportangles[1], 0);
   }

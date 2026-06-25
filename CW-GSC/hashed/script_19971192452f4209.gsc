@@ -215,7 +215,7 @@ function function_d73061db() {
   self notify("14c9c0035a10d0ab");
   self endon("14c9c0035a10d0ab");
   level flag::wait_till("all_players_connected");
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   level.player takeallweapons();
   level.player setclientuivisibilityflag("weapon_hud_visible", 0);
   level.player setclientuivisibilityflag("radar_client", 0);
@@ -386,7 +386,7 @@ function function_58f8a0d8(str_skipto, b_starting) {
   tag = spawn("script_model", level.player.origin);
   tag.angles = level.player.angles;
   tag setModel("tag_origin");
-  level.player playerlinkto(tag);
+  level.player playerlinkTo(tag);
 
   if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
@@ -428,7 +428,7 @@ function function_6194f34a(var_8ced85ea, var_3223cb64, var_ef49aa65 = 0) {
   s_player_start = struct::get("s_default_player_start", "targetname");
 
   if(isDefined(s_player_start)) {
-    level.player setorigin(s_player_start.origin);
+    level.player setOrigin(s_player_start.origin);
     level.player setplayerangles(s_player_start.angles);
   }
 
@@ -488,35 +488,35 @@ function function_91c383b1(chapter) {
 
       if(level.var_ea95c1e7 != "sims") {
         var_959954b3 = ["adler_alt_" + level.var_ea95c1e7, "sims_alt_survivor", level.var_ea95c1e7 + "_hub"];
-        var_ac85c33a = getent("sims_hub", "targetname");
+        var_ac85c33a = getEnt("sims_hub", "targetname");
         var_ac85c33a delete();
-        var_ac85c33a = getent("adler_hub", "targetname");
+        var_ac85c33a = getEnt("adler_hub", "targetname");
         var_ac85c33a delete();
 
         if(level.var_ea95c1e7 == "lazar") {
-          var_ac85c33a = getent("park_hub", "targetname");
+          var_ac85c33a = getEnt("park_hub", "targetname");
           var_ac85c33a delete();
-          var_ac85c33a = getent("adler_alt_park", "targetname");
+          var_ac85c33a = getEnt("adler_alt_park", "targetname");
           var_ac85c33a delete();
         }
 
         if(level.var_ea95c1e7 == "park") {
-          var_ac85c33a = getent("lazar_hub", "targetname");
+          var_ac85c33a = getEnt("lazar_hub", "targetname");
           var_ac85c33a delete();
-          var_ac85c33a = getent("adler_alt_lazar", "targetname");
+          var_ac85c33a = getEnt("adler_alt_lazar", "targetname");
           var_ac85c33a delete();
         }
       } else {
         var_959954b3 = ["adler_hub", "sims_hub"];
-        var_ac85c33a = getent("adler_alt_park", "targetname");
+        var_ac85c33a = getEnt("adler_alt_park", "targetname");
         var_ac85c33a delete();
-        var_ac85c33a = getent("adler_alt_lazar", "targetname");
+        var_ac85c33a = getEnt("adler_alt_lazar", "targetname");
         var_ac85c33a delete();
-        var_ac85c33a = getent("sims_alt_survivor", "targetname");
+        var_ac85c33a = getEnt("sims_alt_survivor", "targetname");
         var_ac85c33a delete();
-        var_ac85c33a = getent("park_hub", "targetname");
+        var_ac85c33a = getEnt("park_hub", "targetname");
         var_ac85c33a delete();
-        var_ac85c33a = getent("lazar_hub", "targetname");
+        var_ac85c33a = getEnt("lazar_hub", "targetname");
         var_ac85c33a delete();
       }
 
@@ -554,7 +554,7 @@ function function_1f4ed1b4(var_8ced85ea) {
   hidemiscmodels("hub_mdl_sims_bag_01");
   hidemiscmodels("boxing_scene_switch");
   waitframe(1);
-  var_a2279767 = getent("map_table", "targetname");
+  var_a2279767 = getEnt("map_table", "targetname");
   level thread scene::play("scene_hub_env_fan_box");
 
   switch (var_8ced85ea) {
@@ -567,50 +567,50 @@ function function_1f4ed1b4(var_8ced85ea) {
         arrayremovevalue(level.var_8cbfb0bf, mdl);
       }
 
-      mdl = getent("hub_mdl_computer_tarp_01", "script_noteworthy");
+      mdl = getEnt("hub_mdl_computer_tarp_01", "script_noteworthy");
       function_5370f168(level.var_b8e8fb10, mdl);
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_td_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_td_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_am", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_am", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_on_post_td", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_on_post_td", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_dabb347b();
-      mdl = getent("hub_mdl_office_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_office_light_on_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_on_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_side_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_side_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_park_chair_clip_takedown", "script_noteworthy");
+      mdl = getEnt("hub_mdl_park_chair_clip_takedown", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_switch");
-      mdl = getent("hub_mdl_fan_clip", "script_noteworthy");
+      mdl = getEnt("hub_mdl_fan_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
-      mdl = getent("hub_mdl_sims_bag_02", "script_noteworthy");
+      mdl = getEnt("hub_mdl_sims_bag_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       break;
     case #"post_armada":
       function_23128418();
-      var_491e6125 = getent("mdl_cp_ger_stakeout_item_01", "script_noteworthy");
+      var_491e6125 = getEnt("mdl_cp_ger_stakeout_item_01", "script_noteworthy");
       var_491e6125 delete();
-      mdl = getent("hub_mdl_puddle_01", "script_noteworthy");
+      mdl = getEnt("hub_mdl_puddle_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_puddle_02", "script_noteworthy");
+      mdl = getEnt("hub_mdl_puddle_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_puddle_03", "script_noteworthy");
+      mdl = getEnt("hub_mdl_puddle_03", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_puddle_04", "script_noteworthy");
+      mdl = getEnt("hub_mdl_puddle_04", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_bucket_01", "script_noteworthy");
+      mdl = getEnt("hub_mdl_bucket_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       var_23917641 = getEntArray("post_armada_desk_set", "script_noteworthy");
 
@@ -618,29 +618,29 @@ function function_1f4ed1b4(var_8ced85ea) {
         arrayremovevalue(level.var_8cbfb0bf, mdl);
       }
 
-      mdl = getent("mdl_hub_dark_room_photo_line_post_td_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_td_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_on_post_am", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_on_post_am", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_td", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_td", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_dabb347b();
-      mdl = getent("hub_mdl_office_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_office_light_off_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_sims_chair_clip", "script_noteworthy");
+      mdl = getEnt("hub_mdl_sims_chair_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_back_room_table");
-      mdl = getent("hub_mdl_sims_bag_02", "script_noteworthy");
+      mdl = getEnt("hub_mdl_sims_bag_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_park_chair_clip_armada", "script_noteworthy");
+      mdl = getEnt("hub_mdl_park_chair_clip_armada", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
       break;
@@ -660,42 +660,42 @@ function function_1f4ed1b4(var_8ced85ea) {
       }
 
       showmiscmodels("post_yamantau_work_cart_mdl");
-      mdl = getent("hub_mdl_car_01_clip", "script_noteworthy");
+      mdl = getEnt("hub_mdl_car_01_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_cart_01_clip", "script_noteworthy");
+      mdl = getEnt("hub_mdl_cart_01_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_am", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_am", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_td", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_td", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_dabb347b();
-      mdl = getent("hub_mdl_office_light_off_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_office_light_off_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_off_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_off_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_off_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_off_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_side_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_side_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_floodlight_01", "script_noteworthy");
+      mdl = getEnt("hub_mdl_floodlight_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_sims_bag_02", "script_noteworthy");
+      mdl = getEnt("hub_mdl_sims_bag_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_red_tooldbox_clip", "script_noteworthy");
+      mdl = getEnt("hub_mdl_red_tooldbox_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
       hidemiscmodels("park_photo_tray");
-      mdl = getent("hub_mdl_post_yamantau_table_clip", "script_noteworthy");
+      mdl = getEnt("hub_mdl_post_yamantau_table_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       break;
     case #"post_kgb":
@@ -706,68 +706,68 @@ function function_1f4ed1b4(var_8ced85ea) {
         arrayremovevalue(level.var_8cbfb0bf, mdl);
       }
 
-      mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_am", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_am", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_td", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_td", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      hub_mdl_projector_in_use = getent("hub_mdl_projector_in_use", "script_noteworthy");
+      hub_mdl_projector_in_use = getEnt("hub_mdl_projector_in_use", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, hub_mdl_projector_in_use);
-      mdl = getent("hub_mdl_projector_in_use_cart", "script_noteworthy");
+      mdl = getEnt("hub_mdl_projector_in_use_cart", "script_noteworthy");
       function_5370f168(hub_mdl_projector_in_use, mdl);
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_projector_in_use_clip", "script_noteworthy");
+      mdl = getEnt("hub_mdl_projector_in_use_clip", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_projector_in_use_nosight", "script_noteworthy");
+      mdl = getEnt("hub_mdl_projector_in_use_nosight", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_office_light_off_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_office_light_off_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_25b8909();
-      mdl = getent("hub_mdl_side_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_side_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       hidemiscmodels("hub_office_blinds");
       break;
     case #"post_cuba":
       level thread scene::play("scene_hub_env_desk_fan");
       function_31d12195();
-      mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_am", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_am", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_td", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_td", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_dabb347b();
-      mdl = getent("hub_mdl_hallway_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_25b8909();
-      mdl = getent("hub_mdl_side_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_side_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_floodlight_01", "script_noteworthy");
+      mdl = getEnt("hub_mdl_floodlight_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_sims_bag_02", "script_noteworthy");
+      mdl = getEnt("hub_mdl_sims_bag_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
       break;
@@ -775,52 +775,52 @@ function function_1f4ed1b4(var_8ced85ea) {
       level thread scene::play("scene_hub_env_desk_fan");
       hidemiscmodels("sr_office_chair_02");
       function_31d12195();
-      mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_am", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_am", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_td", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_td", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_dabb347b();
-      mdl = getent("hub_mdl_office_light_off_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_office_light_off_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       function_25b8909();
-      mdl = getent("hub_mdl_side_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_side_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_floodlight_01", "script_noteworthy");
+      mdl = getEnt("hub_mdl_floodlight_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_sims_bag_02", "script_noteworthy");
+      mdl = getEnt("hub_mdl_sims_bag_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       showmiscmodels("hub_mdl_sims_bag_01");
       break;
     case #"dev_burn_safehouse":
       hidemiscmodels("hub_mdl_gun_rack");
       function_31d12195();
-      mdl = getent("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_stk_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_at_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_ymt_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
+      mdl = getEnt("mdl_hub_dark_room_photo_line_post_kgb_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_am", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_am", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_lamp_off_post_td", "script_noteworthy");
+      mdl = getEnt("hub_mdl_lamp_off_post_td", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
       burn_models = getEntArray("burn_models", "script_noteworthy");
 
@@ -830,23 +830,23 @@ function function_1f4ed1b4(var_8ced85ea) {
 
       clientfield::set("dmg_models_and_vol_decals_burning", 1);
       function_dabb347b();
-      mdl = getent("hub_mdl_office_light_off_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_office_light_off_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_office_light_off_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_1", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_1", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_light_on_2", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_light_on_2", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_hallway_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_hallway_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_side_door", "script_noteworthy");
+      mdl = getEnt("hub_mdl_side_door", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_floodlight_01", "script_noteworthy");
+      mdl = getEnt("hub_mdl_floodlight_01", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("hub_mdl_sims_bag_02", "script_noteworthy");
+      mdl = getEnt("hub_mdl_sims_bag_02", "script_noteworthy");
       arrayremovevalue(level.var_8cbfb0bf, mdl);
-      mdl = getent("mdl_bulb_right", "targetname");
+      mdl = getEnt("mdl_bulb_right", "targetname");
 
       if(!isDefined(level.var_8cbfb0bf)) {
         level.var_8cbfb0bf = [];
@@ -855,7 +855,7 @@ function function_1f4ed1b4(var_8ced85ea) {
       }
 
       level.var_8cbfb0bf[level.var_8cbfb0bf.size] = mdl;
-      mdl = getent("mdl_bulb_left", "targetname");
+      mdl = getEnt("mdl_bulb_left", "targetname");
 
       if(!isDefined(level.var_8cbfb0bf)) {
         level.var_8cbfb0bf = [];
@@ -874,61 +874,61 @@ function function_1f4ed1b4(var_8ced85ea) {
 
 function function_5370f168(var_4ace790, var_57af221a) {
   if(isDefined(var_4ace790) && isDefined(var_57af221a)) {
-    var_4ace790 linkto(var_57af221a);
+    var_4ace790 linkTo(var_57af221a);
   }
 }
 
 function function_23128418() {
-  mdl = getent("hub_mdl_tarp_01", "script_noteworthy");
+  mdl = getEnt("hub_mdl_tarp_01", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_tarp_02", "script_noteworthy");
+  mdl = getEnt("hub_mdl_tarp_02", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_sheet_01", "script_noteworthy");
+  mdl = getEnt("hub_mdl_sheet_01", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_boxing_worklight", "script_noteworthy");
+  mdl = getEnt("hub_mdl_boxing_worklight", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_computer_01", "script_noteworthy");
+  mdl = getEnt("hub_mdl_computer_01", "script_noteworthy");
   level.var_b8e8fb10 = mdl;
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_tv1", "script_noteworthy");
+  mdl = getEnt("hub_tv1", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
   showmiscmodels("boxing_scene_switch");
 }
 
 function function_31d12195(a_mdls) {
-  mdl = getent("hub_mdl_lounge_chair", "script_noteworthy");
+  mdl = getEnt("hub_mdl_lounge_chair", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_lounge_chair_clip", "script_noteworthy");
+  mdl = getEnt("hub_mdl_lounge_chair_clip", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_evidence_box_01", "script_noteworthy");
+  mdl = getEnt("hub_mdl_evidence_box_01", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_evidence_box_02", "script_noteworthy");
+  mdl = getEnt("hub_mdl_evidence_box_02", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_evidence_box_03", "script_noteworthy");
+  mdl = getEnt("hub_mdl_evidence_box_03", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_liquor_01", "script_noteworthy");
+  mdl = getEnt("hub_mdl_liquor_01", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_station_chair_01", "script_noteworthy");
+  mdl = getEnt("hub_mdl_station_chair_01", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_station_chair_02", "script_noteworthy");
+  mdl = getEnt("hub_mdl_station_chair_02", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_station_chair_02_clip", "script_noteworthy");
+  mdl = getEnt("hub_mdl_station_chair_02_clip", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_computer_01", "script_noteworthy");
+  mdl = getEnt("hub_mdl_computer_01", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_floodlight_02", "script_noteworthy");
+  mdl = getEnt("hub_mdl_floodlight_02", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
   showmiscmodels("hub_mdl_lazar_trash");
   showmiscmodels("hub_mdl_backroom");
 }
 
 function function_dabb347b() {
-  hub_mdl_projector_away = getent("hub_mdl_projector_away", "script_noteworthy");
+  hub_mdl_projector_away = getEnt("hub_mdl_projector_away", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, hub_mdl_projector_away);
-  mdl = getent("hub_mdl_projector_away_cart", "script_noteworthy");
+  mdl = getEnt("hub_mdl_projector_away_cart", "script_noteworthy");
   function_5370f168(hub_mdl_projector_away, mdl);
   arrayremovevalue(level.var_8cbfb0bf, mdl);
-  mdl = getent("hub_mdl_projector_away_clip", "script_noteworthy");
+  mdl = getEnt("hub_mdl_projector_away_clip", "script_noteworthy");
   arrayremovevalue(level.var_8cbfb0bf, mdl);
 }
 
@@ -1028,11 +1028,11 @@ function function_7fd3a4d8(var_7784a8ae = 0, var_a8627b29 = undefined, n_wait_ti
     level notify(#"eboard_ready");
   } else {
     if((isDefined(level.var_f5552371) ? level.var_f5552371 : "") == "post_yamantau" || (isDefined(level.var_f5552371) ? level.var_f5552371 : "") == "post_kgb") {
-      level thread scene::init_streamer("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_briefing_props", getplayers());
+      level thread scene::init_streamer("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_briefing_props", getPlayers());
       level thread scene::init("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_briefing_props");
     }
 
-    level thread scene::init_streamer("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_briefing", getplayers(), 1);
+    level thread scene::init_streamer("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_briefing", getPlayers(), 1);
     level thread scene::init("scene_hub_" + (isDefined(level.var_f5552371) ? level.var_f5552371 : "") + "_briefing");
     level flag::wait_till("level_is_go");
 
@@ -1083,7 +1083,7 @@ function function_81bb9b99() {
 
 function function_183bf598() {
   level waittill(#"hash_6b714d5d8d203c49");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 function function_ac8d8290(var_5d4b50a7, var_750bd08, var_e0db02bb) {
@@ -1245,7 +1245,7 @@ function function_208b416c() {
 function function_bd82b8ad() {
   level.player playgestureviewmodel("dem_lowreadyup", undefined, 1);
   level.var_4d1402c5 = undefined;
-  var_5f75397b = vectornormalize(level.player.origin - self.origin);
+  var_5f75397b = vectorNormalize(level.player.origin - self.origin);
   v_forward = anglesToForward(self.angles);
   var_3f9826ab = vectordot(var_5f75397b, v_forward);
   v_right = anglestoright(self.angles);
@@ -2361,7 +2361,7 @@ function function_29279de1(var_8ced85ea) {
   }
 
   level.var_8391b06c = 1;
-  var_4026a1a6 = getent("flashback_tv_screen", "script_noteworthy");
+  var_4026a1a6 = getEnt("flashback_tv_screen", "script_noteworthy");
 
   if(isDefined(var_4026a1a6)) {
     var_4026a1a6 hide();
@@ -2382,7 +2382,7 @@ function function_5e5685af(var_ec670c03) {
   level waittill(#"eboard_ready");
 
   while(true) {
-    level.var_7be68bc6 = getent("tv_player_control", "targetName");
+    level.var_7be68bc6 = getEnt("tv_player_control", "targetName");
 
     if(isDefined(var_ec670c03)) {
       videostart(var_ec670c03, 1);
@@ -2473,7 +2473,7 @@ function function_b1cad6c7(var_bc1142fa) {
   self waittill(#"trigger");
 
   if(level.var_616f2ca4 != 1) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 
   self util::remove_cursor_hint();
@@ -2482,9 +2482,9 @@ function function_b1cad6c7(var_bc1142fa) {
 }
 
 function function_b0558ba2(var_690057e6) {
-  var_c8d10663 = getent("model_clock1", "targetname");
-  var_fa9a69f5 = getent("model_clock2", "targetname");
-  var_581b24f5 = getent("model_clock3", "targetname");
+  var_c8d10663 = getEnt("model_clock1", "targetname");
+  var_fa9a69f5 = getEnt("model_clock2", "targetname");
+  var_581b24f5 = getEnt("model_clock3", "targetname");
   var_c8d10663 useanimtree("generic");
   var_fa9a69f5 useanimtree("generic");
   var_581b24f5 useanimtree("generic");
@@ -2549,7 +2549,7 @@ function function_f9ee9c54() {
 
   if(var_9f1c267e == 1) {
     level thread scene::play("scene_hub_env_chain_link_gate");
-    gate_clip = getent("chain_link_gate_clip", "targetname");
+    gate_clip = getEnt("chain_link_gate_clip", "targetname");
 
     if(isDefined(gate_clip)) {
       gate_clip delete();
@@ -2607,7 +2607,7 @@ function function_f5ee087c() {
       combination_correct = 1;
       self notify(#"combination_correct");
       player savegame::set_player_data(#"hash_37af8f0dcf0b9dda", 1);
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
       level thread scene::play("scene_hub_env_chain_link_gate");
       level thread function_1d953816();
       savegame::save();
@@ -2625,7 +2625,7 @@ function function_f5ee087c() {
 
 function function_1d953816() {
   wait 3.8;
-  gate_clip = getent("chain_link_gate_clip", "targetname");
+  gate_clip = getEnt("chain_link_gate_clip", "targetname");
   gate_clip delete();
 }
 
@@ -2671,7 +2671,7 @@ function function_58eff8e() {
 }
 
 function function_32d36a25() {
-  level.park_paper = getent("park_paper", "script_noteworthy");
+  level.park_paper = getEnt("park_paper", "script_noteworthy");
   level thread function_3a845769();
 }
 
@@ -2685,9 +2685,9 @@ function function_d0d0e1ff() {
 
   if(var_7a191936 == "cp_ger_hub_post_kgb") {
     scene::init("scene_hub_env_slide_projector");
-    level.var_6bc678cc = [getent("mdl_projector_slide_01", "targetname"), getent("mdl_projector_slide_02", "targetname"), getent("mdl_projector_slide_03", "targetname"), getent("mdl_projector_slide_04", "targetname"), getent("mdl_projector_slide_05", "targetname")];
-    level.projector_background = getent("projector_background", "targetname");
-    level.var_1f5313aa = getent("mdl_projector_slide_01", "targetname");
+    level.var_6bc678cc = [getEnt("mdl_projector_slide_01", "targetname"), getEnt("mdl_projector_slide_02", "targetname"), getEnt("mdl_projector_slide_03", "targetname"), getEnt("mdl_projector_slide_04", "targetname"), getEnt("mdl_projector_slide_05", "targetname")];
+    level.projector_background = getEnt("projector_background", "targetname");
+    level.var_1f5313aa = getEnt("mdl_projector_slide_01", "targetname");
     level function_4fc0917f(level.var_1f5313aa, 1);
     level function_4fc0917f(level.projector_background, 1);
     level function_4fc0917f(level.var_6bc678cc, 1);
@@ -2737,7 +2737,7 @@ function function_713ca190() {
   var_e12cd9e4 = 6;
   var_38d7c7b5 = struct::get("projector_interact", "targetname");
   var_38d7c7b5.str = "projector_interact";
-  var_38d7c7b5.slide_projector = getent("hub_mdl_projector_in_use", "script_noteworthy");
+  var_38d7c7b5.slide_projector = getEnt("hub_mdl_projector_in_use", "script_noteworthy");
   var_38d7c7b5.slides = level.var_6bc678cc;
 
   if(var_38d7c7b5.slides.size != var_e12cd9e4) {
@@ -2914,10 +2914,10 @@ function function_77a7721() {
 
     switch (var_c564fe97._notify) {
       case #"hash_24aefb38c6bd8236":
-        level.player playrumbleonentity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
         break;
       case #"hash_10d521d9edbeb091":
-        level.player playrumbleonentity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
         break;
       case #"hash_7730e9e72bc8c4b2":
         level.player playrumblelooponentity("damage_light");

@@ -322,14 +322,14 @@ function function_89d3faf4(var_f4a4fc64, objectivename) {
   if(true) {
     trigger = spawn("trigger_radius_use", triggerorigin, 0, 80, 100);
     trigger setinvisibletoall();
-    trigger setcursorhint("HINT_NOICON");
-    trigger sethintstring(#"hash_1ed278859e55fb7b");
+    trigger setCursorHint("HINT_NOICON");
+    trigger setHintString(#"hash_1ed278859e55fb7b");
     trigger function_268e4500();
   } else {
     trigger = spawn("trigger_radius", triggerorigin, 0, 90, 100);
   }
 
-  trigger triggerignoreteam();
+  trigger triggerIgnoreTeam();
   trigger function_682f34cf(-800);
   trigger usetriggerignoreuseholdtime();
   var_8e875f24 = gameobjects::create_use_object(game.defenders, trigger, [], (0, 0, 0), objectivename, 1);
@@ -380,7 +380,7 @@ function onbeginuse(player) {
 
   player.var_e6c45375 = 1;
   player setclientuivisibilityflag("weapon_hud_visible", 0);
-  self.trigger sethintstring("");
+  self.trigger setHintString("");
   pause_time();
 
   if(!isDefined(level.var_a5030fa0)) {
@@ -391,7 +391,7 @@ function onbeginuse(player) {
   level.var_a5030fa0 dontinterpolate();
   level.var_a5030fa0.origin = player.origin;
   level.var_a5030fa0.angles = playerangles;
-  player playerlinkto(level.var_a5030fa0, undefined, 0, 0, 0, 0, 0);
+  player playerlinkTo(level.var_a5030fa0, undefined, 0, 0, 0, 0, 0);
   player function_66f3a713();
   var_a35cd71 = min(-14, playerangles[0]);
   lookat = isDefined(self.helicopter.rope) ? self.helicopter.rope gettagorigin("carabiner_jnt") : self.origin;
@@ -402,7 +402,7 @@ function onbeginuse(player) {
   var_bd70ec3f = 0.75;
   var_d9a208ec = math::clamp(max(var_8eef4f81, var_9756b1d4) / 180, 0, 1);
   var_7e42472f = var_f4f58cca + var_d9a208ec * (var_bd70ec3f - var_f4f58cca);
-  level.var_a5030fa0 rotateto((var_a35cd71, goalyaw, 0), var_7e42472f, var_7e42472f * 0.25, var_7e42472f * 0.25);
+  level.var_a5030fa0 rotateTo((var_a35cd71, goalyaw, 0), var_7e42472f, var_7e42472f * 0.25, var_7e42472f * 0.25);
   thread globallogic_audio::function_6fbfba95("vip_high", 0.25);
 
   if(false) {
@@ -419,7 +419,7 @@ function onenduse(team, player, success) {
     player setclientuivisibilityflag("weapon_hud_visible", 1);
   }
 
-  self.trigger sethintstring(#"hash_1ed278859e55fb7b");
+  self.trigger setHintString(#"hash_1ed278859e55fb7b");
 
   if(!success) {
     if(isDefined(player) && player getcurrentweapon() === self.useweapon) {
@@ -517,7 +517,7 @@ function private function_ca777d9a() {
   playFX(#"hash_39f9530da901280", fx.origin);
   fx playSound(#"hash_7e287e6b6da3c9cd");
   fx.sndent = spawn("script_origin", fx.origin);
-  fx.sndent linkto(fx);
+  fx.sndent linkTo(fx);
   fx.sndent playLoopSound(#"hash_686d0823355faccd");
   self.var_13c60627 = fx;
 
@@ -555,7 +555,7 @@ function private function_83eb584e() {
 
   while(!isDefined(level.vip) && attempts < 20) {
     attackingteam = game.attackers;
-    attackingplayers = getplayers(attackingteam);
+    attackingplayers = getPlayers(attackingteam);
     var_6a44aacb = [];
 
     foreach(player in attackingplayers) {
@@ -1125,7 +1125,7 @@ function private function_3bdfa078() {
 }
 
 function private function_9bbc1c91(origin, angles) {
-  helicopter = spawnvehicle(#"hash_58cc8ce25d32031f", origin, angles, "vip_exfil_site_helicopter");
+  helicopter = spawnVehicle(#"hash_58cc8ce25d32031f", origin, angles, "vip_exfil_site_helicopter");
   helicopter setdrawinfrared(1);
   helicopter.soundmod = "heli";
   helicopter.takedamage = 0;
@@ -1151,8 +1151,8 @@ function function_1c85a66(helicopter) {
   if(isDefined(helicopter.var_2dd14343)) {
     helicopter.var_2dd14343 useanimtree("all_player");
     var_88f9d3ba = spawn("script_model", helicopter.origin);
-    var_88f9d3ba linkto(helicopter);
-    helicopter.var_2dd14343 linkto(var_88f9d3ba);
+    var_88f9d3ba linkTo(helicopter);
+    helicopter.var_2dd14343 linkTo(var_88f9d3ba);
     var_a3476af7 = helicopter gettagorigin("tag_passenger3");
     var_eb72be15 = helicopter gettagangles("tag_passenger3");
     helicopter.var_2dd14343 thread animation::play(#"hash_445ae049e19a8062", var_a3476af7, var_eb72be15, 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -1207,11 +1207,11 @@ function function_77192ec(helicopter, destination) {
   helicopter endon(#"death", #"hash_362285e59eb2f9e4");
   var_f1705e15 = spawn("script_model", helicopter.origin);
   var_f1705e15.angles = helicopter.angles;
-  helicopter linkto(var_f1705e15);
+  helicopter linkTo(var_f1705e15);
   helicopter.var_f1705e15 = var_f1705e15;
   movetime = 0.5;
-  var_f1705e15 rotateto((0, helicopter.angles[1], 0), movetime, 0.15, 0.15);
-  var_f1705e15 moveto(destination, movetime, 0, 0);
+  var_f1705e15 rotateTo((0, helicopter.angles[1], 0), movetime, 0.15, 0.15);
+  var_f1705e15 moveTo(destination, movetime, 0, 0);
   wait movetime;
   var_3d6ff184 = helicopter.origin;
   var_736a6d8f = 10;
@@ -1222,7 +1222,7 @@ function function_77192ec(helicopter, destination) {
   right = anglestoright(helicopter.angles);
   right = (right[0], right[1], 0);
   var_3d6ff184 += right * var_4cc352d9;
-  var_f1705e15 moveto(var_3d6ff184, movetime, 0, 0.2);
+  var_f1705e15 moveTo(var_3d6ff184, movetime, 0, 0.2);
   wait movetime;
   helicopter notify(#"hash_2dc51722de7dcdb5");
 }
@@ -1241,9 +1241,9 @@ function private function_5b606db8(helicopter) {
   movetime = 2;
 
   while(true) {
-    var_f1705e15 moveto(bottompos, movetime, 0.15, 0.15);
+    var_f1705e15 moveTo(bottompos, movetime, 0.15, 0.15);
     var_f1705e15 waittill(#"movedone");
-    var_f1705e15 moveto(toppos, movetime, 0.15, 0.15);
+    var_f1705e15 moveTo(toppos, movetime, 0.15, 0.15);
     var_f1705e15 waittill(#"movedone");
   }
 }
@@ -1255,7 +1255,7 @@ function private function_3eef60e4(helicopter) {
   helicopter.rope useanimtree("generic");
   helicopter.rope setModel(#"p9_fxanim_gp_vehicle_heli_lrg_vip_rope_mod");
   helicopter.rope notsolid();
-  helicopter.rope linkto(helicopter, "tag_origin_animate");
+  helicopter.rope linkTo(helicopter, "tag_origin_animate");
   helicopter.rope hide();
 }
 
@@ -1326,7 +1326,7 @@ function function_93ef48b(vip, helicopter) {
   var_867f5d0 = spawn("script_model", vip.origin);
   var_867f5d0.angles = vip getplayerangles();
   var_867f5d0 dontinterpolate();
-  vip playerlinkto(var_867f5d0, undefined, 0, 0, 0, 0, 0);
+  vip playerlinkTo(var_867f5d0, undefined, 0, 0, 0, 0, 0);
   var_2bf4050a = 0.6;
   var_d892ba80 = helicopter.rope gettagorigin("carabiner_jnt");
   var_de324c05 = 12;
@@ -1396,7 +1396,7 @@ function function_d914539a(goalyaw) {
   var_44cf825 = math::clamp(var_64165cee / var_ecaa456b, 0, 1);
   var_bc4bc17d = anglelerp(self.angles[1], goalyaw, var_44cf825);
   var_fc27b3e3 = (var_9546359, var_bc4bc17d, 0);
-  self rotateto(var_fc27b3e3, var_64165cee, 0.2, 0.1);
+  self rotateTo(var_fc27b3e3, var_64165cee, 0.2, 0.1);
   wait var_64165cee;
 
   if(!isDefined(self)) {
@@ -1406,7 +1406,7 @@ function function_d914539a(goalyaw) {
   var_3c4cc94a = -60;
   var_f0d8f62c = math::clamp(var_ecaa456b - var_64165cee, 0, var_ecaa456b);
   var_cbb558d8 = (var_3c4cc94a, goalyaw, 0);
-  self rotateto(var_cbb558d8, var_f0d8f62c, 0, min(var_f0d8f62c, 0.5));
+  self rotateTo(var_cbb558d8, var_f0d8f62c, 0, min(var_f0d8f62c, 0.5));
 }
 
 function function_3b897a2(vip, var_d892ba80, var_10890b28, movetime) {
@@ -1418,7 +1418,7 @@ function function_3b897a2(vip, var_d892ba80, var_10890b28, movetime) {
     var_443bf2ea = vip gettagorigin("j_spineupper");
     var_70f8d8e1 = vip.origin - var_443bf2ea + var_10890b28 * anglesToForward(vip.angles);
     goalpos = var_d892ba80 + var_70f8d8e1;
-    self moveto(goalpos, movetime);
+    self moveTo(goalpos, movetime);
     waitframe(1);
   }
 }

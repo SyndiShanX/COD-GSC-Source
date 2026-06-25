@@ -438,7 +438,7 @@ func_A7F7() {
 
 func_442A(param_00) {
   var_01 = param_00.var_0116 - self.var_0116;
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   var_02 = self method_83E7();
   var_03 = self.var_11AB + 4;
   if(isDefined(var_02) && distance2dsquared(var_02, param_00.var_0116) < var_03 * var_03 && maps\mp\agents\_scriptedagents::func_1F5B(param_00.var_0116, var_02)) {
@@ -467,10 +467,10 @@ func_285C(param_00, param_01) {
 }
 
 func_3B95() {
-  var_00 = vectornormalize(self.var_0116 - self.var_0117.var_0116);
+  var_00 = vectorNormalize(self.var_0116 - self.var_0117.var_0116);
   var_01 = anglesToForward(self.var_0117.var_001D);
   var_01 = (var_01[0], var_01[1], 0);
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   var_02 = func_285C(var_00, var_01);
   var_03 = function_00BA(self.var_0117.var_0116);
   if(!isDefined(var_03)) {
@@ -553,7 +553,7 @@ func_3B95() {
     if(vectordot(var_19, var_17 / var_18) < 0) {
       var_1A = var_0B.var_0116;
     } else {
-      var_1B = vectornormalize(var_0B.var_0116 - var_03.var_0116);
+      var_1B = vectorNormalize(var_0B.var_0116 - var_03.var_0116);
       var_1A = var_03.var_0116 + var_1B * self.var_7673;
     }
   } else {
@@ -780,7 +780,7 @@ func_A909() {
 func_6ADB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
   self.var_99FC = gettime();
   if(isDefined(self.var_0117)) {
-    self.var_29BC = vectornormalize(self.var_0116 - self.var_0117.var_0116);
+    self.var_29BC = vectorNormalize(self.var_0116 - self.var_0117.var_0116);
   }
 
   if(func_8B9B(param_02, param_05, param_04)) {

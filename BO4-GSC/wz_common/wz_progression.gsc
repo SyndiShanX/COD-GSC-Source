@@ -327,7 +327,7 @@ team_eliminated(team, team_placement) {
     return;
   }
 
-  a_players = getplayers(team);
+  a_players = getPlayers(team);
 
   if(isDefined(level.var_29ab88df)) {
     level[[level.var_29ab88df]](a_players, team_placement);
@@ -366,7 +366,7 @@ function_5648f82(team) {
   println("<dev string:x16c>" + (isDefined(team) ? team : "<dev string:x145>"));
 
   if(isDefined(team)) {
-    foreach(player in getplayers(team)) {
+    foreach(player in getPlayers(team)) {
       if(!player stats::function_f94325d3()) {
         continue;
       }
@@ -1060,7 +1060,7 @@ on_game_playing(params) {
   level.prematchduration = gettime();
 
   foreach(team, _ in level.teams) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     foreach(player in players) {
       if(isbot(player)) {
@@ -1085,7 +1085,7 @@ on_game_playing(params) {
 }
 
 on_game_shutdown() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_2c8aac6();

@@ -142,11 +142,11 @@ func_4D35(param_00) {
   playFXOnTag(common_scripts\utility::func_44F5("water_higgins_boat_splash_rnr"), self, "body_animate_jnt");
   playFXOnTag(common_scripts\utility::func_44F5("water_higgins_boat_splash_geo"), self, "body_animate_jnt");
   var_01 = common_scripts\utility::func_8FFC();
-  var_01 linkto(self, "body_animate_jnt", (200, 75, 50), (-90, 0, 0));
+  var_01 linkTo(self, "body_animate_jnt", (200, 75, 50), (-90, 0, 0));
   playFXOnTag(common_scripts\utility::func_44F5("ndy_whipping_wind_boat_ride"), var_01, "tag_origin");
   playFXOnTag(common_scripts\utility::func_44F5("ndy_intro_wind_gusts"), self, "tag_wheel_back_left");
   var_02 = common_scripts\utility::func_8FFC();
-  var_02 linkto(self, "doorcable", (0, 0, 0), (125, 180, 0));
+  var_02 linkTo(self, "doorcable", (0, 0, 0), (125, 180, 0));
   wait 0.05;
   playFXOnTag(common_scripts\utility::func_44F5("r_dday_higgins_water_falling_in_boat"), self, "doorcable");
   self waittill(param_00, var_03);

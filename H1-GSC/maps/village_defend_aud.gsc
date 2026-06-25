@@ -226,7 +226,7 @@ aud_open_door_meeting() {
     common_scripts\utility::array_thread(level.aud.javelin_barn_door_open_trigger, common_scripts\utility::trigger_on);
   }
 
-  var_0 = getent("javelin_barn_transition_emitter_01", "targetname");
+  var_0 = getEnt("javelin_barn_transition_emitter_01", "targetname");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("emt_village_defend_ambient_transition");
 }
 

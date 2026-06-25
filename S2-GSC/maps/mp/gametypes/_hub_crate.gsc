@@ -249,7 +249,7 @@ func_63CC(param_00, param_01) {
 func_2D6C(param_00) {
   self endon("disconnect");
   self endon("death");
-  var_01 = vectornormalize(self.var_4DEF.var_0116 - self.var_0116);
+  var_01 = vectorNormalize(self.var_4DEF.var_0116 - self.var_0116);
   var_01 = vectortoangles(var_01);
   var_01 = self.var_0116 + anglesToForward(var_01) * 70;
   var_02 = self.var_4DEF.var_001D;
@@ -963,7 +963,7 @@ func_743E() {
 }
 
 func_24E2(param_00) {
-  var_01 = getent("psd_collision", "targetname");
+  var_01 = getEnt("psd_collision", "targetname");
   if(!isDefined(var_01)) {
     return undefined;
   }
@@ -980,14 +980,14 @@ func_7005(param_00, param_01) {
   self endon("death");
   self endon("disconnect");
   self method_85CB();
-  var_02 = vectornormalize(param_00 - self.var_0116);
+  var_02 = vectorNormalize(param_00 - self.var_0116);
   var_02 = vectortoangles(var_02);
   var_02 = var_02 * (0, 1, 0);
   var_03 = self.var_0116 + anglestoright(var_02) * 55 + anglesToForward(var_02) * -60 + (0, 0, 73);
   var_04 = self.var_0116 + anglestoright(var_02) * 15 + anglesToForward(var_02) * 3 + (0, 0, 64);
   var_05 = (param_00[0], param_00[1], self.var_0116[2] + 55);
   var_05 = var_05 + anglestoright(var_02) * 5;
-  var_06 = vectornormalize(var_05 - var_03);
+  var_06 = vectorNormalize(var_05 - var_03);
   var_06 = vectortoangles(var_06);
   self.var_0E9D = spawn("script_model", self.var_76A5);
   self.var_0E9D.var_01A5 = "animatedPSDCamera";
@@ -998,8 +998,8 @@ func_7005(param_00, param_01) {
   self method_85C9(1);
   func_743D(1);
   self method_81E2(self.var_0E9D, "tag_player", 500);
-  self.var_0E9D moveto(var_03, 0.5);
-  self.var_0E9D rotateto(var_06, 0.5);
+  self.var_0E9D moveTo(var_03, 0.5);
+  self.var_0E9D rotateTo(var_06, 0.5);
   self waittill("beginReactionAnims");
   self.var_0E9D.var_0116 = self.var_0116;
   self.var_0E9D.var_001D = var_02;
@@ -1107,7 +1107,7 @@ func_A85E() {
   var_00 = common_scripts\utility::func_7A33(level.var_77A6);
   self.warpingtosupplydrop = 1;
   self method_85C9(1);
-  self setorigin(function_0236(var_00.var_0116), 1);
+  self setOrigin(function_0236(var_00.var_0116), 1);
   self setangles(var_00.var_001D);
 }
 

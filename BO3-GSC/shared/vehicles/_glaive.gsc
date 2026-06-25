@@ -187,7 +187,7 @@ function state_combat_update(params) {
   while(!isDefined(self.owner)) {
     wait(0.1);
     if(!isDefined(self.owner)) {
-      self.owner = getplayers(self.team)[0];
+      self.owner = getPlayers(self.team)[0];
     }
   }
   for(;;) {
@@ -332,7 +332,7 @@ function state_slash_update(params) {
   enemy = self.glaiveenemy;
   should_reevaluate_target = 0;
   sword_anim = self chooseswordanim(enemy);
-  self animscripted("anim_notify", enemy gettagorigin(self._glaive_linktotag), enemy gettagangles(self._glaive_linktotag), sword_anim, "normal", undefined, undefined, 0.3, 0.3);
+  self animScripted("anim_notify", enemy gettagorigin(self._glaive_linktotag), enemy gettagangles(self._glaive_linktotag), sword_anim, "normal", undefined, undefined, 0.3, 0.3);
   self clientfield::set("glaive_blood_fx", 1);
   self waittill("anim_notify");
   if(isalive(enemy) && isDefined(enemy.archetype) && enemy.archetype == "margwa") {
@@ -354,7 +354,7 @@ function state_slash_update(params) {
         if(isactor(target)) {
           target zombie_utility::gib_random_parts();
           target startragdoll();
-          target launchragdoll(100 * (vectornormalize(target.origin - self.origin)));
+          target launchragdoll(100 * (vectorNormalize(target.origin - self.origin)));
         }
       }
     }

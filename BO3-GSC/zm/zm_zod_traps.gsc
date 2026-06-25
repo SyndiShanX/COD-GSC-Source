@@ -104,11 +104,11 @@ class ctrap {
 
   function hint_string(string, cost) {
     if(isDefined(cost)) {
-      self sethintstring(string, cost);
+      self setHintString(string, cost);
     } else {
-      self sethintstring(string);
+      self setHintString(string);
     }
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 
   function update_chain_animation() {
@@ -246,7 +246,7 @@ class ctrap {
   function switch_cooldown(t_use) {
     function_7e393675(undefined);
     foreach(e_heart in m_a_e_heart) {
-      e_heart moveto(e_heart.origin - (vectorscale((0, 0, -1), 32)), 0.25);
+      e_heart moveTo(e_heart.origin - (vectorscale((0, 0, -1), 32)), 0.25);
     }
     wait(0.25);
     self thread update_chain_animation();

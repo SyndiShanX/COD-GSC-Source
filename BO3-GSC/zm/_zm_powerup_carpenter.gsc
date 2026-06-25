@@ -67,7 +67,7 @@ function start_carpenter(origin) {
       windows thread zm_blockers::replace_chunk(windows, chunk, undefined, zm_powerups::is_carpenter_boards_upgraded(), 1);
       if(isDefined(windows.clip)) {
         windows.clip triggerenable(1);
-        windows.clip disconnectpaths();
+        windows.clip disconnectPaths();
       } else {
         zm_blockers::blocker_disconnect_paths(windows.neg_start, windows.neg_end);
       }
@@ -76,7 +76,7 @@ function start_carpenter(origin) {
     }
     util::wait_network_frame();
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] zm_score::player_add_points("carpenter_powerup", 200);
   }
@@ -130,7 +130,7 @@ function start_carpenter_new(origin) {
       last_repaired_chunk = chunk;
       if(isDefined(window.clip)) {
         window.clip triggerenable(1);
-        window.clip disconnectpaths();
+        window.clip disconnectPaths();
       } else {
         zm_blockers::blocker_disconnect_paths(window.neg_start, window.neg_end);
       }
@@ -158,7 +158,7 @@ function start_carpenter_new(origin) {
   carp_ent stoploopsound(1);
   carp_ent playsoundwithnotify("evt_carpenter_end", "sound_done");
   carp_ent waittill("sound_done");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] zm_score::player_add_points("carpenter_powerup", 200);
   }
@@ -168,7 +168,7 @@ function start_carpenter_new(origin) {
 }
 
 function get_near_boards(windows) {
-  players = getplayers();
+  players = getPlayers();
   boards_near_players = [];
   for(j = 0; j < windows.size; j++) {
     close = 0;
@@ -192,7 +192,7 @@ function get_near_boards(windows) {
 }
 
 function get_far_boards(windows) {
-  players = getplayers();
+  players = getPlayers();
   boards_far_from_players = [];
   for(j = 0; j < windows.size; j++) {
     close = 0;
@@ -242,7 +242,7 @@ function repair_far_boards(barriers, upgrade) {
     }
     if(isDefined(barrier.clip)) {
       barrier.clip triggerenable(1);
-      barrier.clip disconnectpaths();
+      barrier.clip disconnectPaths();
     } else {
       zm_blockers::blocker_disconnect_paths(barrier.neg_start, barrier.neg_end);
     }

@@ -19,7 +19,7 @@ sam_give_control() {
   self endon("remove_sam_control");
   self endon("death");
   level.sam_launchers = [];
-  level.sam_launchers = common_scripts\utility::array_add(level.sam_launchers, getent("sparrow_launcher", "targetname"));
+  level.sam_launchers = common_scripts\utility::array_add(level.sam_launchers, getEnt("sparrow_launcher", "targetname"));
   level.sam_launchers[0] hide();
   level.sam_launchers[0].old_contents = level.sam_launchers[0] setcontents(0);
   level.sam_launcher_index = level.sam_launchers.size;
@@ -66,7 +66,7 @@ sam_give_control() {
     setsaveddvar("actionSlotsHide", "1");
     setsaveddvar("hud_showstance", 0);
     setsaveddvar("cg_fov", 90);
-    self setorigin(level.sam_launchers[level.sam_launcher_index].origin + anglestoup(level.sam_launchers[level.sam_launcher_index] gettagangles("tag_origin")) * 95 + anglesToForward(level.sam_launchers[level.sam_launcher_index] gettagangles("tag_origin")) * -20);
+    self setOrigin(level.sam_launchers[level.sam_launcher_index].origin + anglestoup(level.sam_launchers[level.sam_launcher_index] gettagangles("tag_origin")) * 95 + anglesToForward(level.sam_launchers[level.sam_launcher_index] gettagangles("tag_origin")) * -20);
     self setplayerangles(level.sam_launchers[level.sam_launcher_index] gettagangles("tag_origin") + (5, 0, 0));
     self playerlinktodelta(level.sam_launchers[level.sam_launcher_index], "tag_origin", 1, 0, 0, 0, 0);
     self playerlinkedoffsetenable();
@@ -87,7 +87,7 @@ sam_give_control() {
     level.sam_damage_dummy.angles = self getplayerangles() + (90, 0, 0);
     level.sam_damage_dummy hide();
     level.sam_damage_dummy setModel("com_barrel_black_h");
-    level.sam_damage_dummy linkto(self);
+    level.sam_damage_dummy linkTo(self);
     level.sam_damage_dummy thread sam_monitor_damage();
 
     foreach(var_1 in getaiarray("allies")) {
@@ -129,7 +129,7 @@ sam_exit() {
   level.black_overlay.alpha = 0;
   level.sam_damage_dummy unlink();
   self unlink();
-  self setorigin(self.prev_origin);
+  self setOrigin(self.prev_origin);
   self setplayerangles(self.prev_angles);
   self setstance(self.prev_stance);
   self allowprone(1);
@@ -466,7 +466,7 @@ sam_update_radar() {
     foreach(var_5 in vehicle_getarray()) {
       if((var_5 maps\_vehicle::ishelicopter() || var_5.classname == "script_vehicle_y_8_gunship") && var_5.health > 0) {
         var_6 = var_5.origin - self getEye();
-        var_6 = vectornormalize((var_6[0], var_6[1], 0));
+        var_6 = vectorNormalize((var_6[0], var_6[1], 0));
         var_7 = vectordot(var_6, var_2);
 
         if(var_7 < 0) {
@@ -608,7 +608,7 @@ sam_monitor_damage() {
     if(var_5 == "MOD_PROJECTILE_SPLASH") {
       level.player setplayerangles((level.player getplayerangles()[0] - 5, level.player getplayerangles()[1], level.player getplayerangles()[2] - 5));
       earthquake(0.7, 1.5, level.player getEye(), 800);
-      level.player playrumbleonentity("heavy_2s");
+      level.player playRumbleOnEntity("heavy_2s");
       var_0++;
 
       if(var_0 == 1) {
@@ -954,7 +954,7 @@ sam_fire_missiles() {
           }
 
           earthquake(0.4, 0.15, self.origin, 999999999);
-          self playrumbleonentity("ac130_40mm_fire");
+          self playRumbleOnEntity("ac130_40mm_fire");
           wait(randomfloatrange(0.05, 0.15));
         }
       } else {
@@ -963,7 +963,7 @@ sam_fire_missiles() {
           var_2 notify("sam_targeted", var_5);
           var_5 thread sam_missile_lockon(var_2);
           earthquake(0.4, 0.15, self.origin, 999999999);
-          self playrumbleonentity("ac130_40mm_fire");
+          self playRumbleOnEntity("ac130_40mm_fire");
           wait(randomfloatrange(0.05, 0.15));
         }
       }
@@ -1016,7 +1016,7 @@ load_sam_missiles() {
     level.sam_missiles[var_1] = spawn("script_model", var_2);
     level.sam_missiles[var_1] setModel("tag_origin");
     level.sam_missiles[var_1].angles = var_3;
-    level.sam_missiles[var_1] linkto(get_current_sam());
+    level.sam_missiles[var_1] linkTo(get_current_sam());
     level.sam_missiles[var_1].missile_index = var_0;
     level.sam_missiles[var_1] setcontents(0);
 
@@ -1108,7 +1108,7 @@ sam_missile_lockon(var_0) {
     }
 
     if(isDefined(self) && isvalidmissile(self)) {
-      self missile_settargetent(var_0, var_1);
+      self missile_settargetEnt(var_0, var_1);
     }
   }
 
@@ -1126,9 +1126,9 @@ sam_update_missile_targets() {
 
   while(var_3 > 0 && isDefined(self)) {
     var_4 = self.origin + anglesToForward(self.angles) * 256 + (0, 0, 64);
-    self.left_missile_target.origin = var_4 + vectornormalize(self.left_missile_target.origin - var_4) * var_0 * var_3 / var_2;
-    self.right_missile_target.origin = var_4 + vectornormalize(self.right_missile_target.origin - var_4) * var_0 * var_3 / var_2;
-    self.bottom_missile_target.origin = var_4 + vectornormalize(self.bottom_missile_target.origin - var_4) * var_1 * var_3 / var_2;
+    self.left_missile_target.origin = var_4 + vectorNormalize(self.left_missile_target.origin - var_4) * var_0 * var_3 / var_2;
+    self.right_missile_target.origin = var_4 + vectorNormalize(self.right_missile_target.origin - var_4) * var_0 * var_3 / var_2;
+    self.bottom_missile_target.origin = var_4 + vectorNormalize(self.bottom_missile_target.origin - var_4) * var_1 * var_3 / var_2;
     wait 0.05;
     var_3 = var_3 - 0.05;
   }

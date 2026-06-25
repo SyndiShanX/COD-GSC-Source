@@ -32,7 +32,7 @@ bigdog_feet(localclientnum, note, ground_type) {
 
   if(self islocalclientdriver(localclientnum)) {
     player = getlocalplayer(localclientnum);
-    player playrumbleonentity(localclientnum, "pullout_small");
+    player playRumbleOnEntity(localclientnum, "pullout_small");
     speed = self getspeed() / 17.6;
     speed = abs(speed) / 9.0;
     intensity = 0.065 + 0.065 * speed;

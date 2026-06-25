@@ -255,7 +255,7 @@ function function_9da58a6f(entity, mocompanim, mocompanimblendouttime, mocompani
 
 function mechz_health_increases() {
   if(!isDefined(level.mechz_last_spawn_round) || level.round_number > level.mechz_last_spawn_round) {
-    a_players = getplayers();
+    a_players = getPlayers();
     n_player_modifier = 1;
     switch (a_players.size) {
       case 0:
@@ -344,7 +344,7 @@ function function_2a26e636() {
     }
     var_225b5e15 = 1;
     var_e01c8f74 = 1;
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(isDefined(player.var_5aef0317) && player.var_5aef0317 || (isDefined(player.var_a393601c) && player.var_a393601c)) {
         var_225b5e15 = 0;

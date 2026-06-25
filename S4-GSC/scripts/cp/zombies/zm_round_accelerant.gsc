@@ -7,7 +7,7 @@ init_round_accelerant() {
   level._effect["vfx_stone_glow_ambient"] = loadfx("vfx/s4/level/cp_sumpf/vfx_stone_glow_ambient.vfx");
   level._effect["vfx_stone_glow_ambient_weak"] = loadfx("vfx/s4/level/cp_sumpf/vfx_stone_glow_ambient_weak.vfx");
   level._effect["vfx_stone_spawn"] = loadfx("vfx/s4/level/cp_sumpf/vfx_stone_spawn.vfx");
-  var_0 = scripts\engine\utility::getstruct("round_accelerant", "targetname");
+  var_0 = scripts\engine\utility::getStruct("round_accelerant", "targetname");
   var_0.b_activate = 0;
   var_0.b_cool_down = 1;
   var_0.mdl = scripts\cp\utility::_id_E190("s4_zm_soul_capture_runestone_02", var_0.origin, var_0.angles);
@@ -200,7 +200,7 @@ round_accelerant_adjust_check() {
 
     if(level._id_11049 >= 56) {
       level thread cleanup_round_accelerant();
-      var_0 = scripts\engine\utility::getstruct("round_accelerant", "targetname");
+      var_0 = scripts\engine\utility::getStruct("round_accelerant", "targetname");
 
       if(isDefined(var_0.mdl)) {
         var_0.mdl delete();

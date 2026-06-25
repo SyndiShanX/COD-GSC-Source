@@ -170,10 +170,10 @@ function function_295c9975() {
   self.proximitykill = namespace_ec06fe4a::spawntrigger("trigger_radius", self.origin, 2, 90, 60);
 
   if(isDefined(self.proximitykill)) {
-    self.proximitykill enablelinkto();
+    self.proximitykill enablelinkTo();
     self.proximitykill thread namespace_ec06fe4a::function_d55f042c(self, "death");
     self.proximitykill thread function_538a00bb(self);
-    self.proximitykill linkto(self, "tag_origin", (0, 0, 30));
+    self.proximitykill linkTo(self, "tag_origin", (0, 0, 30));
   }
 }
 
@@ -292,7 +292,7 @@ function function_106b6b29() {
   wait 4.5;
 
   if(namespace_ec06fe4a::function_a8975c67()) {
-    playsoundatposition(#"hash_4cf49c7c9533b539", (0, 0, 0));
+    playSoundAtPosition(#"hash_4cf49c7c9533b539", (0, 0, 0));
   }
 }
 
@@ -310,7 +310,7 @@ function function_4b28fc8c(entity) {
   }
 
   headproj = namespace_ec06fe4a::spawnmodel(launchpos, "tag_origin");
-  vectorfromenemy = vectornormalize(entity.origin - landpos);
+  vectorfromenemy = vectorNormalize(entity.origin - landpos);
   vectorfromenemy = vectorscale(vectorfromenemy, 250);
   targetpos = landpos + vectorfromenemy + (0, 0, 200);
   headproj clientfield::set("towers_boss_head_proj_fx_cf", 1);
@@ -325,7 +325,7 @@ function function_4b28fc8c(entity) {
   var_10b732dc = 0.3;
 
   foreach(point in trajectory) {
-    headproj moveto(point, var_10b732dc);
+    headproj moveTo(point, var_10b732dc);
     headproj waittill(#"movedone");
   }
 
@@ -470,8 +470,8 @@ function private function_1d65bc12(enemy, elephant, var_60e4c6b7 = 1) {
   enemyvec = enemy.origin - elephant.origin;
   var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
   var_c2ee8451 = (facingvec[0], facingvec[1], 0);
-  var_3e3c8075 = vectornormalize(var_3e3c8075);
-  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  var_3e3c8075 = vectorNormalize(var_3e3c8075);
+  var_c2ee8451 = vectorNormalize(var_c2ee8451);
 
   if(var_60e4c6b7) {
     enemydot = vectordot(var_c2ee8451, var_3e3c8075);
@@ -537,7 +537,7 @@ function function_cd472d5(entity) {
 
 function function_ce8fe2b0(entity, splitorigin) {
   self endon(#"death");
-  forwardvec = vectornormalize(anglesToForward(entity.angles));
+  forwardvec = vectorNormalize(anglesToForward(entity.angles));
   forwarddist = 200;
 
   if(isDefined(splitorigin)) {
@@ -557,7 +557,7 @@ function function_ce8fe2b0(entity, splitorigin) {
 
     recordsphere(newpos, 15, (1, 0.5, 0), "<dev string:x38>");
 
-    dustball = spawnvehicle(#"hash_6be593a62b8b87a5", newpos, entity.angles, "dynamic_spawn_ai");
+    dustball = spawnVehicle(#"hash_6be593a62b8b87a5", newpos, entity.angles, "dynamic_spawn_ai");
     dustball thread namespace_ec06fe4a::function_52afe5df(15);
 
     if(isDefined(dustball)) {
@@ -573,7 +573,7 @@ function function_ce8fe2b0(entity, splitorigin) {
   }
 
   wait 0.5;
-  targets = getplayers();
+  targets = getPlayers();
 
   for(i = 0; i < targets.size; i++) {
     target = targets[i];
@@ -822,7 +822,7 @@ function private function_f8145b00(entity) {
         if(isDefined(targetpos)) {
           recordsphere(targetpos, 8, (0, 1, 1), "<dev string:x38>");
 
-          dirtoenemy = vectornormalize(targetpos - self.origin);
+          dirtoenemy = vectorNormalize(targetpos - self.origin);
           targetpos += vectorscale(dirtoenemy * -1, 170);
           targetpos = getclosestpointonnavmesh(targetpos, 400, entity getpathfindingradius() * 1.2);
 

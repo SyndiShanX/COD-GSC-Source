@@ -152,8 +152,8 @@ _id_EB77() {
   self makeuseable();
   self _meth_83A1(-1);
   self enablemissilehint(1);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"EQUIPMENT_HINTS/SUPPORT_BOX_USE");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"EQUIPMENT_HINTS/SUPPORT_BOX_USE");
   self setuserange(128);
   self setuseholdduration("duration_short");
   self sethintrequiresholding(0);

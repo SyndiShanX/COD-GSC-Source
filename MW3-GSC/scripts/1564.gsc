@@ -635,7 +635,7 @@ _id_3D7F(var_0, var_1, var_2) {
   }
   var_3 = spawn("script_model", self gettagorigin(var_0) + var_1);
   var_3 setModel("weapon_c4");
-  var_3 linkto(self, var_0, var_1, var_2);
+  var_3 linkTo(self, var_0, var_1, var_2);
 
   if(!isDefined(self._id_3D80)) {
     self._id_3D80 = [];
@@ -1013,7 +1013,7 @@ _id_3D96(var_0) {
   if(var_4 < 20) {
     return 0;
   }
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_5 = vectordot(var_2, var_3);
 
   if(!isDefined(level._id_3D97)) {
@@ -1153,7 +1153,7 @@ _id_3DA2(var_0, var_1, var_2) {
   var_3 setModel("gas_canisters_backpack");
   var_3.health = 99999;
   var_3 setCanDamage(1);
-  var_3 linkto(self, var_0, var_1, var_2);
+  var_3 linkTo(self, var_0, var_1, var_2);
   return var_3;
 }
 
@@ -1286,7 +1286,7 @@ _id_3DAF(var_0, var_1, var_2) {
   }
   var_3.angles = (0, var_1[1], 0);
   var_3._id_3DB0 = var_3 common_scripts\utility::spawn_tag_origin();
-  var_3._id_3DB0 linkto(var_3, "tag_explosive1", (0, 0, 6), (-90, 0, 0));
+  var_3._id_3DB0 linkTo(var_3, "tag_explosive1", (0, 0, 6), (-90, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("chemical_mine_spew"), var_3._id_3DB0, "tag_origin");
 
   if(isDefined(self) && isalive(self)) {
@@ -1369,7 +1369,7 @@ _id_3DB5() {
     return;
   }
   foreach(var_1 in level._id_3DB6) {
-    var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+    var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
     var_1._id_3DB7 = var_2.origin;
     var_1 thread _id_3DB8();
   }
@@ -1894,7 +1894,7 @@ _id_3DDF() {
       }
 
       if(isDefined(var_3.target)) {
-        var_3 = common_scripts\utility::getstruct(var_3.target, "targetname");
+        var_3 = common_scripts\utility::getStruct(var_3.target, "targetname");
         continue;
       }
 

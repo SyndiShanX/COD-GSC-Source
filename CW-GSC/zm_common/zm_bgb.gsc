@@ -280,7 +280,7 @@ function private bgb_devgui_think() {
 function private bgb_devgui_acquire(bgb_name) {
   bgb_name = hash(bgb_name);
   playerid = getdvarint(#"hash_7877ee182ba11433", 0);
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(playerid != -1 && playerid != i) {
@@ -1075,7 +1075,7 @@ function any_enabled() {
 }
 
 function is_team_enabled(bgb_name) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     assert(isDefined(player.bgb));
 
     if(player.bgb === bgb_name) {

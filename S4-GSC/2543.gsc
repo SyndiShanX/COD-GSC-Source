@@ -254,7 +254,7 @@ _id_6DF2(var_0, var_1, var_2) {
     if(isDefined(level._id_20EC) && scripts\engine\utility::array_contains(level._id_20EC, var_15)) {
       continue;
     }
-    var_16 = vectornormalize(var_15.origin - self.origin);
+    var_16 = vectorNormalize(var_15.origin - self.origin);
     var_17 = vectordot(var_8, var_16);
 
     for(var_18 = 0; var_18 < var_13.size; var_18++) {

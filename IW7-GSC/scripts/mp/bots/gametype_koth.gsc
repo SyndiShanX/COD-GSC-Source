@@ -448,7 +448,7 @@ bot_headquarters_think() {
       var_1 = 1;
       if(self botgetscriptgoaltype() != "none") {
         var_2 = distancesquared(self botgetscriptgoal(), self.origin);
-        var_3 = self botgetscriptgoalradius();
+        var_3 = self botgetscriptgoalRadius();
         if(var_2 > var_3 * var_3) {
           var_1 = 0;
         }

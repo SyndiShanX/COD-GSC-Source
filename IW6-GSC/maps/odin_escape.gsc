@@ -96,16 +96,16 @@ escape_combat_door() {
   thread escape_no_push_zone();
   var_0 = maps\_utility::spawn_anim_model("space_square_hatch");
   var_0.targetname = "escape_door_to_open";
-  var_1 = getent("player_escape_door_blocker", "targetname");
-  var_2 = getent("player_escape_door_blocker_origin", "targetname");
-  var_3 = common_scripts\utility::getstruct("kyra_move_node01", "targetname");
+  var_1 = getEnt("player_escape_door_blocker", "targetname");
+  var_2 = getEnt("player_escape_door_blocker_origin", "targetname");
+  var_3 = common_scripts\utility::getStruct("kyra_move_node01", "targetname");
   var_3 maps\_anim::anim_first_frame_solo(var_0, "odin_escape_open_door_player");
-  var_2 linkto(var_0, "tag_origin");
-  var_1 linkto(var_2);
+  var_2 linkTo(var_0, "tag_origin");
+  var_1 linkTo(var_2);
   common_scripts\utility::flag_wait("esc_combat_done");
   common_scripts\utility::flag_clear("clear_to_tweak_player");
   var_0 makeusable();
-  var_0 sethintstring(&"ODIN_ESCAPE_DOOR_PROMPT");
+  var_0 setHintString(&"ODIN_ESCAPE_DOOR_PROMPT");
   var_0 waittill("trigger");
   thread player_escape_door_open(var_3, var_0);
   var_0 makeunusable();
@@ -133,7 +133,7 @@ escape_no_push_zone() {
 
 escape_ally_movement_start() {
   level endon("player_opened_escape_door");
-  var_0 = common_scripts\utility::getstruct("kyra_move_node01", "targetname");
+  var_0 = common_scripts\utility::getStruct("kyra_move_node01", "targetname");
   thread kyra_escape_move_bags(var_0);
   var_0 notify("stop_loop");
   thread kyra_grabs_escape_gun(var_0);
@@ -144,7 +144,7 @@ escape_ally_movement_start() {
   common_scripts\utility::flag_waitopen("player_at_escape_door");
   level notify("kyra_got_impatient");
   var_0 notify("stop_loop");
-  var_1 = getent("escape_door_to_open", "targetname");
+  var_1 = getEnt("escape_door_to_open", "targetname");
   var_1 makeunusable();
   level.ally.escape_bag_push = "odin_escape_zigzag_bag_02";
   common_scripts\utility::flag_set("kyra_push_bag_anim");
@@ -164,7 +164,7 @@ escape_ally_movement_start_part_2(var_0) {
   thread maps\odin_util::finale_anim_loop_killer(var_0, "stop_loop");
   common_scripts\utility::flag_wait("escape_blocker_door_trig");
   var_0 notify("stop_loop");
-  var_0 = common_scripts\utility::getstruct("kyra_move_node02", "targetname");
+  var_0 = common_scripts\utility::getStruct("kyra_move_node02", "targetname");
   var_0 maps\_anim::anim_single_solo(self, "odin_escape_zigzag_second_ally01");
   var_0 maps\_anim::anim_single_solo(self, "odin_escape_zigzag_to_spin_ally01");
   var_0 thread maps\_anim::anim_loop_solo(self, "odin_escape_zigzag_to_spin_loop_ally01", "stop_loop");
@@ -227,7 +227,7 @@ escape_door_anim_player(var_0, var_1) {
   var_2 = maps\_utility::spawn_anim_model("finale_gun");
   var_2.origin = var_1 gettagorigin("tag_weapon");
   var_2.angles = var_1 gettagangles("tag_weapon");
-  var_2 linkto(var_1, "tag_weapon");
+  var_2 linkTo(var_1, "tag_weapon");
   var_1 show();
   var_0 maps\_anim::anim_single_solo(var_1, "odin_escape_open_door_player");
   common_scripts\utility::flag_clear("no_push_zone");
@@ -239,7 +239,7 @@ escape_door_anim_player(var_0, var_1) {
 }
 
 escape_door_open_rumble(var_0) {
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
 }
 
 escape_door_open_flag(var_0) {
@@ -258,9 +258,9 @@ escape_setup() {
   common_scripts\utility::flag_set("unlock_spin_door_blocker");
   thread manage_earth("show");
   var_0 = maps\odin_util::satellite_get_script_mover();
-  var_1 = getent("escape_sat_orientation", "targetname");
-  var_0 moveto(var_1.origin, 0.1, 0, 0);
-  var_0 rotateto(var_1.angles, 0.1, 0, 0);
+  var_1 = getEnt("escape_sat_orientation", "targetname");
+  var_0 moveTo(var_1.origin, 0.1, 0, 0);
+  var_0 rotateTo(var_1.angles, 0.1, 0, 0);
   wait 0.15;
   thread prepare_odin_for_window_scene();
   level.decomp_door = thread maps\odin_util::create_sliding_space_door("spin_decomp_door", 0.3, 0.1, 0, 0, "lock_decomp_room", "open_decomp_room_door");
@@ -293,14 +293,14 @@ prepare_odin_for_window_scene() {
 }
 
 escape_blocker_door_lens_cap() {
-  var_0 = getent("escape_door_blocker_lens_cap", "targetname");
-  var_1 = getent("escape_door_blocker_lens_cap_origin", "targetname");
+  var_0 = getEnt("escape_door_blocker_lens_cap", "targetname");
+  var_1 = getEnt("escape_door_blocker_lens_cap_origin", "targetname");
   var_2 = var_1.origin;
-  var_0 linkto(var_1);
-  var_1 moveto((0, 0, 0), 0.1, 0, 0);
+  var_0 linkTo(var_1);
+  var_1 moveTo((0, 0, 0), 0.1, 0, 0);
   var_0 hide();
   common_scripts\utility::flag_wait("lock_escape_door_blocker");
-  var_1 moveto(var_2, 0.1, 0, 0);
+  var_1 moveTo(var_2, 0.1, 0, 0);
   wait 1;
   var_0 show();
 }
@@ -325,18 +325,18 @@ create_escape_doors() {}
 move_ally_into_cq() {
   maps\_utility::delaythread(3.0, maps\_utility::smart_radio_dialogue, "odin_kyr_budlookouttheres");
   common_scripts\utility::flag_wait("ally_out_of_z");
-  var_0 = common_scripts\utility::getstruct("kyra_move_node01", "targetname");
+  var_0 = common_scripts\utility::getStruct("kyra_move_node01", "targetname");
   var_0 maps\_anim::anim_single_solo(self, "odin_escape_first_encounter_ally01");
   var_0 thread maps\_anim::anim_loop_solo(self, "odin_escape_first_encounter_loop_ally01", "stop_loop");
   thread maps\odin_util::finale_anim_loop_killer(var_0, "stop_loop");
 }
 
 crew_quarters_crew_killed() {
-  var_0 = getent("cq_enc_enemy_killer", "script_noteworthy");
+  var_0 = getEnt("cq_enc_enemy_killer", "script_noteworthy");
   var_1 = var_0 maps\odin_util::spawn_odin_actor_internal(1);
   var_1 maps\_utility::forceuseweapon(level.player.weapon_interior, "primary");
   var_1 hidepart("tag_silencer");
-  var_2 = getent("cq_killed_crew", "targetname");
+  var_2 = getEnt("cq_killed_crew", "targetname");
   var_3 = var_2 maps\odin_util::spawn_odin_actor_internal(1);
   var_3.team = "neutral";
   var_1.ignoreall = 1;
@@ -347,7 +347,7 @@ crew_quarters_crew_killed() {
   var_3.nodeathimpulse = 1;
   var_3.animname = "odin_redshirt";
   var_3 maps\_utility::gun_remove();
-  var_4 = common_scripts\utility::getstruct("kyra_move_node01", "targetname");
+  var_4 = common_scripts\utility::getStruct("kyra_move_node01", "targetname");
   var_4 thread maps\_anim::anim_single_solo(var_1, "odin_escape_first_encounter_opfor");
   thread redshirt_cq_enc_handles(var_3, var_4);
   var_4 = getnode("node_cq_enc_middle_middle", "targetname");
@@ -422,7 +422,7 @@ crew_quarters_combat_setup() {
 cq_room_destruction() {
   level endon("enter_window_scene");
   common_scripts\utility::flag_wait("escape_enc_activated");
-  var_0 = getent("escape_crates_damage_check", "targetname");
+  var_0 = getEnt("escape_crates_damage_check", "targetname");
   var_0 setCanDamage(1);
   var_0 waittill("damage");
   var_1 = getEntArray("cq_dyn_cargo_01_static", "targetname");
@@ -521,7 +521,7 @@ escape_enemy_02_think() {
   maps\_utility::gun_remove();
   maps\_utility::forceuseweapon(level.player.weapon_interior, "primary");
   thread maps\odin_util::npc_physics_pulse();
-  var_0 = getent("cq_killed_crew2", "targetname");
+  var_0 = getEnt("cq_killed_crew2", "targetname");
   var_1 = var_0 maps\odin_util::spawn_odin_actor_internal(1);
   var_1.team = "neutral";
   self.ignoreall = 1;
@@ -531,7 +531,7 @@ escape_enemy_02_think() {
   var_1.nodeathimpulse = 1;
   var_1.animname = "odin_redshirt";
   var_1 maps\_utility::gun_remove();
-  var_2 = common_scripts\utility::getstruct("kyra_move_node01", "targetname");
+  var_2 = common_scripts\utility::getStruct("kyra_move_node01", "targetname");
   var_2 thread maps\_anim::anim_single_solo(self, "odin_escape_first_encounter_opfor02");
   thread redshirt_cq_enc_handles2(var_1, var_2);
   var_2 = getnode("node_cq_enc_middle_right", "targetname");
@@ -578,7 +578,7 @@ escape_enemy_03_think() {
   maps\_utility::forceuseweapon(level.player.weapon_interior, "primary");
   var_0 = level.player.threatbias;
   var_1 = level.ally.threatbias;
-  var_2 = getent("thirdGuyTarget", "targetname");
+  var_2 = getEnt("thirdGuyTarget", "targetname");
   maps\_utility::set_goal_radius(2);
   self setgoalpos(var_2.origin);
   self.fixednode = 1;
@@ -636,7 +636,7 @@ firing_into_bunks() {
   self.goalradius = 16;
   self waittill("goal");
   maps\_utility::disable_pain();
-  var_0 = getent(self.script_noteworthy + "_aim", "targetname");
+  var_0 = getEnt(self.script_noteworthy + "_aim", "targetname");
 
   for(var_1 = 0; var_1 < 5; var_1++) {
     magicbullet(self.weapon, self gettagorigin("tag_flash"), var_0.origin);
@@ -831,9 +831,9 @@ prepare_odin_to_fire() {
     var_1 = getEntArray("odin_pod_panels_0" + var_0, "targetname");
 
     foreach(var_3 in var_1) {
-      var_4 = getent(var_3.target, "targetname");
-      var_3 moveto(var_4.origin, randomfloatrange(10, 14), 0.5, 5);
-      var_3 rotateto((var_3.angles[0] + randomint(4), var_3.angles[1] + randomint(4), var_3.angles[2] + randomint(4)), 12, 0.5, 10);
+      var_4 = getEnt(var_3.target, "targetname");
+      var_3 moveTo(var_4.origin, randomfloatrange(10, 14), 0.5, 5);
+      var_3 rotateTo((var_3.angles[0] + randomint(4), var_3.angles[1] + randomint(4), var_3.angles[2] + randomint(4)), 12, 0.5, 10);
     }
 
     common_scripts\utility::flag_clear("ready_to_fire_next_salvo");
@@ -848,7 +848,7 @@ add_dialogue_line_timed(var_0, var_1, var_2, var_3) {
 }
 
 console_scene_player_blocker() {
-  var_0 = getent("console_player_blocker", "targetname");
+  var_0 = getEnt("console_player_blocker", "targetname");
   common_scripts\utility::flag_wait("remove_window_blocker");
   var_0 delete();
 }
@@ -880,9 +880,9 @@ ramping_explosions() {
     earthquake(randomfloatrange(var_0, var_1), 1.0, level.player.origin, 500);
 
     if(common_scripts\utility::cointoss()) {
-      level.player playrumbleonentity("light_3s");
+      level.player playRumbleOnEntity("light_3s");
     } else {
-      level.player playrumbleonentity("heavy_1s");
+      level.player playRumbleOnEntity("heavy_1s");
     }
 
     common_scripts\utility::exploder("escape_destruction_random");
@@ -962,7 +962,7 @@ escape_cleanup(var_0) {
 }
 
 manage_earth(var_0) {
-  var_1 = getent("fake_earth", "targetname");
+  var_1 = getEnt("fake_earth", "targetname");
 
   if(!isDefined(var_1)) {
     return;

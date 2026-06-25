@@ -749,7 +749,7 @@ function function_c8f96d23(trigger) {
 
 function function_bd61e5e5(target, view_pos, forward_view_angles) {
   test_origin = target getcentroid();
-  normal = vectornormalize(test_origin - view_pos);
+  normal = vectorNormalize(test_origin - view_pos);
   dot = vectordot(forward_view_angles, normal);
 
   if(0 > dot) {
@@ -872,11 +872,11 @@ function function_f0c18475(weapon, var_d3c8f6cd = 1) {
         if(isactor(target.ai)) {
           target.ai function_6dd73f34(self);
           var_a11964c[var_a11964c.size] = target.ai;
-          damage_location = target.ai.origin + vectornormalize(self.origin - target.ai.origin) * 10 + (0, 0, 60);
+          damage_location = target.ai.origin + vectorNormalize(self.origin - target.ai.origin) * 10 + (0, 0, 60);
           target.ai dodamage(function_a712364b(target.distance, target.ai) * var_d3c8f6cd, damage_location, self, undefined, "none", "MOD_DOT", 0, weapon);
           target.ai thread function_6dbf1bb3(self, 2);
         } else {
-          damage_location = target.ai.origin + vectornormalize(self.origin - target.ai.origin) * 10 + (0, 0, 60);
+          damage_location = target.ai.origin + vectorNormalize(self.origin - target.ai.origin) * 10 + (0, 0, 60);
           target.ai dodamage(function_a712364b(target.distance, target.ai) * var_d3c8f6cd, damage_location, self, undefined, "none", "MOD_DOT", 0, weapon);
         }
 
@@ -1004,7 +1004,7 @@ function function_6dbf1bb3(player, var_77c89bbd = 1, start_pos = undefined) {
 
   var_d58aca35 = spawn("script_model", start_pos);
   var_d58aca35 setModel(#"tag_origin");
-  var_d58aca35 linkto(player);
+  var_d58aca35 linkTo(player);
   var_d58aca35 clientfield::set("" + #"hash_4061bf5adf6ebd2", var_77c89bbd);
   wait 2;
   var_d58aca35 clientfield::set("" + #"hash_4061bf5adf6ebd2", 0);
@@ -1151,7 +1151,7 @@ function function_f2262f33(params) {
 
   if(self.health <= params.idamage) {
     v_z_offset = (0, 0, randomfloatrange(0.6, 1)) * randomintrange(150, 300);
-    v_launch = vectornormalize(params.vdir) * randomintrange(100, 175) + v_z_offset;
+    v_launch = vectorNormalize(params.vdir) * randomintrange(100, 175) + v_z_offset;
     self zm_utility::start_ragdoll(1);
     zm_utility::function_ffc279(v_launch, params.eattacker, self.health, level.var_652bc5ed);
     self thread function_1475944a();
@@ -1206,14 +1206,14 @@ function function_caac60f2() {
   flag = function_27f2ef17(shatter_trigger);
   function_4e3bb793(shatter_trigger, flag &~512);
   shatter_trigger.var_af6e27ba = 0;
-  shatter_trigger enablelinkto();
-  shatter_trigger linkto(self);
+  shatter_trigger enablelinkTo();
+  shatter_trigger linkTo(self);
   shatter_trigger thread function_e31780b1();
   shatter_trigger thread function_ff9195ba();
   spawnflags = 512 | 1 | 512 | 2 | 512 | 4 | 16;
   crumple_trigger = spawn("trigger_radius", self.origin, spawnflags, 0, 0);
-  crumple_trigger enablelinkto();
-  crumple_trigger linkto(self);
+  crumple_trigger enablelinkTo();
+  crumple_trigger linkTo(self);
   crumple_trigger thread function_e31780b1();
   self thread function_ee76afdc(self.var_39184114, shatter_trigger, crumple_trigger);
   self thread function_2e74e3c2(self.var_39184114, shatter_trigger, crumple_trigger);

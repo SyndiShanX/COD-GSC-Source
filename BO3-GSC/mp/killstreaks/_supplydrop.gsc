@@ -847,11 +847,11 @@ function geticonforcrate() {
 
 function crateactivate(hacker) {
   self makeusable();
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   if(!isDefined(self.cratetype)) {
     return;
   }
-  self sethintstring(self.cratetype.hint);
+  self setHintString(self.cratetype.hint);
   if(isDefined(self.cratetype.hint_gambler)) {
     self sethintstringforperk("specialty_showenemyequipment", self.cratetype.hint_gambler);
   }
@@ -1031,7 +1031,7 @@ function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_ang
     crate setModel(level.cratemodelfriendly);
     crate setenemymodel(level.cratemodelenemy);
   }
-  crate disconnectpaths();
+  crate disconnectPaths();
   switch (killstreak) {
     case "turret_drop": {
       crate.cratetype = level.cratetypes[killstreak]["autoturret"];
@@ -1163,7 +1163,7 @@ function cratecontrolleddrop(killstreak, v_target_location) {
   deceltime = params.kstotaldroptime - acceltime;
   target = (v_target_location[0], v_target_location[1], v_target_location[2] + params.ksthrustersoffheight);
   hostmigration::waittillhostmigrationdone();
-  crate moveto(target, params.kstotaldroptime, acceltime, deceltime);
+  crate moveTo(target, params.kstotaldroptime, acceltime, deceltime);
   crate thread watchforcratekill(v_target_location[2] + (isDefined(params.ksstartcratekillheightfromground) ? params.ksstartcratekillheightfromground : 200));
   wait(acceltime - 0.05);
   if(supplydrop) {
@@ -1285,7 +1285,7 @@ function dropcrate(origin, angle, killstreak, owner, team, killcament, killstrea
   }
   crate = cratespawn(killstreak, killstreak_id, owner, team, origin, angle);
   killcament unlink();
-  killcament linkto(crate);
+  killcament linkTo(crate);
   crate.killcament = killcament;
   crate.killstreak_id = killstreak_id;
   crate.package_contents_id = package_contents_id;
@@ -1323,11 +1323,11 @@ function unlinkonrotation(crate) {
   wait(waitbeforerotationcheck);
   mincos = getdvarfloat("scr_supplydrop_killcam_max_rot", 0.999);
   cosine = 1;
-  currentdirection = vectornormalize(anglesToForward(crate.angles));
+  currentdirection = vectorNormalize(anglesToForward(crate.angles));
   while(cosine > mincos) {
     olddirection = currentdirection;
     wait(0.05);
-    currentdirection = vectornormalize(anglesToForward(crate.angles));
+    currentdirection = vectorNormalize(anglesToForward(crate.angles));
     cosine = vectordot(olddirection, currentdirection);
   }
   self unlink();
@@ -1387,9 +1387,9 @@ function watch_explosive_crate() {
     }
     self radiusdamage(self.origin, 256, 300, 75, self.hacker, "MOD_EXPLOSIVE", getweapon("supplydrop"));
     playFX(level._supply_drop_explosion_fx, self.origin);
-    playsoundatposition("wpn_grenade_explode", self.origin);
+    playSoundAtPosition("wpn_grenade_explode", self.origin);
   } else {
-    playsoundatposition("mpl_turret_alert", self.origin);
+    playSoundAtPosition("mpl_turret_alert", self.origin);
     scoreevents::processscoreevent("disarm_hacked_care_package", player);
     player challenges::disarmedhackedcarepackage();
   }
@@ -1401,7 +1401,7 @@ function watch_explosive_crate() {
 function loop_sound(alias, interval) {
   self endon("death");
   while(true) {
-    playsoundatposition(alias, self.origin);
+    playSoundAtPosition(alias, self.origin);
     wait(interval);
     interval = interval / 1.2;
     if(interval < 0.08) {
@@ -1473,7 +1473,7 @@ function cratedroptogroundkill() {
   self endon("death");
   self endon("stationary");
   for(;;) {
-    players = getplayers();
+    players = getPlayers();
     dotrace = 0;
     for(i = 0; i < players.size; i++) {
       if(players[i].sessionstate != "playing") {
@@ -1545,7 +1545,7 @@ function is_touching_crate() {
   }
   crate = self;
   extraboundary = vectorscale((1, 1, 1), 10);
-  players = getplayers();
+  players = getPlayers();
   crate_bottom_point = self.origin;
   foreach(player in level.players) {
     if(isDefined(player) && isalive(player)) {
@@ -1788,7 +1788,7 @@ function crategamblerthink() {
 }
 
 function cratereactivate() {
-  self sethintstring(self.cratetype.hint);
+  self setHintString(self.cratetype.hint);
   icon = self geticonforcrate();
   self thread entityheadicons::setentityheadicon(self.team, self, level.crate_headicon_offset, icon, 1);
 }
@@ -1902,7 +1902,7 @@ function gethelistart(drop_origin, drop_direction) {
       index = randomintrange(0, level.noflyzones.size);
       delta = drop_origin - level.noflyzones[index].origin;
       delta = (delta[0] + randomint(10), delta[1] + randomint(10), 0);
-      delta = vectornormalize(delta);
+      delta = vectorNormalize(delta);
       start_origin = drop_origin + (delta * dist);
     }
   }
@@ -2150,7 +2150,7 @@ function helidelivercrate(origin, weapon, owner, team, killstreak_id, package_co
   killcament = spawn("script_model", chopper.origin + vectorscale((0, 0, 1), 800));
   killcament.angles = (100, chopper.angles[1], chopper.angles[2]);
   killcament.starttime = gettime();
-  killcament linkto(chopper);
+  killcament linkTo(chopper);
   if(isPlayer(owner)) {
     target_setturretaquire(self, 0);
     chopper thread samturretwatcher(drop_origin);
@@ -2262,11 +2262,11 @@ function helidropcrate(killstreak, originalowner, offset, killcament, killstreak
   originalowner endon("disconnect");
   crate = cratespawn(killstreak, killstreak_id, originalowner, self.team, self.origin, self.angles);
   if(killstreak == "inventory_supply_drop" || killstreak == "supply_drop") {
-    loc_0000C9A0: crate linkto(helicopter, (isDefined(context.droptag) ? context.droptag : "tag_origin"), (isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0)));
+    loc_0000C9A0: crate linkTo(helicopter, (isDefined(context.droptag) ? context.droptag : "tag_origin"), (isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0)));
     helicopter clientfield::set("supplydrop_care_package_state", 1);
   }
   else if(killstreak == "inventory_ai_tank_drop" || killstreak == "ai_tank_drop" || killstreak == "ai_tank_marker") {
-    loc_0000CA60: crate linkto(helicopter, (isDefined(context.droptag) ? context.droptag : "tag_origin"), (isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0)));
+    loc_0000CA60: crate linkTo(helicopter, (isDefined(context.droptag) ? context.droptag : "tag_origin"), (isDefined(context.droptagoffset) ? context.droptagoffset : (0, 0, 0)));
     helicopter clientfield::set("supplydrop_ai_tank_state", 1);
   }
   team = self.team;

@@ -16,8 +16,8 @@ init_bouncing_betties() {
 
 betty_think(trigger) {
   trigger waittill("trigger");
-  tripwire = getent(trigger.target, "targetname");
-  betty = getent(tripwire.target, "targetname");
+  tripwire = getEnt(trigger.target, "targetname");
+  betty = getEnt(tripwire.target, "targetname");
   jumpheight = randomintrange(68, 80);
   dropheight = randomintrange(10, 20);
 
@@ -26,9 +26,9 @@ betty_think(trigger) {
   wait 0.05;
   playFX(level._effect["betty_groundPop"], betty.origin + vectorscale((0, 0, 1), 10.0));
   betty thread betty_rotate();
-  betty moveto(betty.origin + (0, 0, jumpheight), 0.15, 0, 0.15 * 0.5);
+  betty moveTo(betty.origin + (0, 0, jumpheight), 0.15, 0, 0.15 * 0.5);
   betty waittill("movedone");
-  betty moveto(betty.origin - (0, 0, dropheight), 0.1, 0.1 * 0.5);
+  betty moveTo(betty.origin - (0, 0, dropheight), 0.1, 0.1 * 0.5);
   betty waittill("movedone");
   betty notify("stop_rotate_thread");
   playFX(level._effect["betty_explosion"], betty.origin);
@@ -71,7 +71,7 @@ betty_rotate() {
   self thread betty_rotate_fx();
 
   while(true) {
-    self rotateyaw(360, 0.125);
+    self rotateYaw(360, 0.125);
     self waittill("rotatedone");
   }
 }
@@ -80,7 +80,7 @@ betty_rotate_fx() {
   self endon("stop_rotate_thread");
   fxorg = spawn("script_model", self.origin);
   fxorg setModel("tag_origin");
-  fxorg linkto(self);
+  fxorg linkTo(self);
   wait 0.75;
   assert(isDefined(level._effect["betty_smoketrail"]), "level._effect['betty_smoketrail'] needs to be defined");
   fx = playFXOnTag(level._effect["betty_smoketrail"], fxorg, "tag_origin");
@@ -108,9 +108,9 @@ betty_think_no_wires(trigger) {
   fake_betty = spawn("script_model", self.origin);
   fake_betty setModel("viewmodel_usa_bbetty_mine");
   fake_betty thread betty_rotate();
-  fake_betty moveto(fake_betty.origin + (0, 0, jumpheight), 0.15, 0, 0.15 * 0.5);
+  fake_betty moveTo(fake_betty.origin + (0, 0, jumpheight), 0.15, 0, 0.15 * 0.5);
   fake_betty waittill("movedone");
-  fake_betty moveto(fake_betty.origin - (0, 0, dropheight), 0.1, 0.1 * 0.5);
+  fake_betty moveTo(fake_betty.origin - (0, 0, dropheight), 0.1, 0.1 * 0.5);
   fake_betty waittill("movedone");
   self detonate();
   fake_betty notify("stop_rotate_thread");

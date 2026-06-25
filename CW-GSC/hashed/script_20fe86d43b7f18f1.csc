@@ -38,7 +38,7 @@ function private function_b439ef43(localclientnum, model, tag, animname) {
   tag_origin = self gettagorigin(tag);
   tag_angles = self gettagangles(tag);
   zombie = util::spawn_model(localclientnum, model, tag_origin, tag_angles);
-  zombie linkto(self, tag);
+  zombie linkTo(self, tag);
   zombie useanimtree("zm_ai_hulk");
   zombie setanim(animname, 1, 0, 1);
   return zombie;

@@ -56,18 +56,18 @@ gump_test() {
   players = get_players();
 
   if(isDefined(players[0])) {
-    players[0] setorigin(pos1);
+    players[0] setOrigin(pos1);
   }
 
   wait 0.05;
 
   if(isDefined(players[1])) {
-    players[1] setorigin(pos2);
+    players[1] setOrigin(pos2);
   }
 
   wait 0.05;
 
   if(isDefined(players[2])) {
-    players[2] setorigin(pos3);
+    players[2] setOrigin(pos3);
   }
 }

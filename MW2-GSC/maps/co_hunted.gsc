@@ -309,16 +309,16 @@ checkpoint_system(gametype) {
 
     checkpoint_logic(60, "checkpoint_d", "waypoint_checkpoint_neutral_d", &"CO_HUNTED_TIME_TILL_CHECKPOINT_D", &"CO_HUNTED_MISSED_CHECKPOINT_D");
 
-    escape = getent("escape_obj", "targetname");
+    escape = getEnt("escape_obj", "targetname");
     escape thread threeD_objective_hint("waypoint_targetneutral");
   } else {
-    specop_obj = getent("checkpoint_b", "targetname");
+    specop_obj = getEnt("checkpoint_b", "targetname");
     specop_obj thread threeD_objective_hint("waypoint_targetneutral");
   }
 }
 
 checkpoint_logic(time, flag_name, shader, timer_string, timer_expired_string) {
-  checkpoint_origin = getent(flag_name, "targetname");
+  checkpoint_origin = getEnt(flag_name, "targetname");
   checkpoint_origin thread threeD_objective_hint(shader, "kill_3d_checkpoint_icon");
 
   if(level.timed) {
@@ -363,17 +363,17 @@ checkpoint_timer_logic(iSeconds, sLabel, timer_expired_string) {
 move_ac130_think() {
   self waittill("trigger");
 
-  point = (getent(self.target, "targetname")).origin;
+  point = (getEnt(self.target, "targetname")).origin;
 
   thread movePlaneToPoint(point);
 }
 
 open_all_doors() {
-  door = getent("farmer_front_door", "targetname");
-  door rotateyaw(95, 0.7, 0.5, 0.2);
+  door = getEnt("farmer_front_door", "targetname");
+  door rotateYaw(95, 0.7, 0.5, 0.2);
   door connectpaths();
 
-  gate = getent("creek_gate", "targetname");
+  gate = getEnt("creek_gate", "targetname");
   gate hunted_style_door_open("door_gate_chainlink_slow_open");
 }
 
@@ -689,7 +689,7 @@ player_death_effect() {
 
 objective(gametype) {
   if(gametype == "default") {
-    escape = getent("escape_obj", "targetname");
+    escape = getEnt("escape_obj", "targetname");
 
     objective_add(1, "active", &"CO_HUNTED_OBJ_CROSS_BRIDGE", escape.origin);
     objective_current(1);
@@ -700,7 +700,7 @@ objective(gametype) {
   }
 
   if(gametype == "specop") {
-    specop_barn = getent("checkpoint_b", "targetname");
+    specop_barn = getEnt("checkpoint_b", "targetname");
 
     objective_add(1, "active", &"CO_HUNTED_OBJ_REACH_BARN", specop_barn.origin);
     objective_current(1);

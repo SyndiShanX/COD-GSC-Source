@@ -36,10 +36,10 @@ setup_common() {
 
 setup_player() {
   var_0 = level.start_point + "_start";
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
-    level.player setorigin(var_1.origin);
+    level.player setOrigin(var_1.origin);
 
     if(isDefined(var_1.angles)) {
       level.player setplayerangles(var_1.angles);
@@ -304,8 +304,8 @@ show_dufflebag(var_0) {
 }
 
 spawn_targetname_at_struct_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2.origin = var_3.origin;
@@ -361,7 +361,7 @@ reassign_goal_volume(var_0, var_1) {
   }
 
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   foreach(var_4 in var_0) {
     var_4 setgoalvolumeauto(var_2);
@@ -369,7 +369,7 @@ reassign_goal_volume(var_0, var_1) {
 }
 
 safe_activate_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1) && !isDefined(var_1.trigger_off)) {
     var_1 maps\_utility::activate_trigger();
@@ -377,7 +377,7 @@ safe_activate_trigger_with_targetname(var_0) {
 }
 
 safe_disable_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 common_scripts\utility::trigger_off();
@@ -385,7 +385,7 @@ safe_disable_trigger_with_targetname(var_0) {
 }
 
 safe_delete_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 delete();
@@ -624,7 +624,7 @@ fire_grenade() {
 
         var_15 = magicbullet("xm25_fast", var_13 + var_10 * 32 + (0, 0, 5), var_12, level.player);
         playFXOnTag(common_scripts\utility::getfx("grenade_muzzleflash"), self.mgturret[0], "TAG_LAUNCHER");
-        level.player playrumbleonentity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
         thread screenshakefade(0.03, 0.5, 0.01, 0.2);
         thread maps\clockwork_audio::chase_concussion();
         var_2 = gettime() + var_0 * 1000;
@@ -716,8 +716,8 @@ add_ice_radius(var_0, var_1) {
     }
 
     var_6 = "icehole_" + level.icehole_to_move;
-    var_7 = getent(var_6, "targetname");
-    var_7 moveto(var_2, 0.01);
+    var_7 = getEnt(var_6, "targetname");
+    var_7 moveTo(var_2, 0.01);
 
     if(level.icehole_to_move == 1) {
       var_8 = maps\_utility::spawn_anim_model("cw_icehole", var_2);
@@ -854,9 +854,9 @@ play_crash_anim(var_0) {
 
     thread icehole_achievement();
     var_2 = self vehicle_getvelocity();
-    var_3 = vectornormalize(var_2);
+    var_3 = vectorNormalize(var_2);
     var_4 = anglesToForward(self.angles);
-    var_5 = vectornormalize(var_4);
+    var_5 = vectorNormalize(var_4);
     var_6 = vectordot(var_5, var_3);
 
     if(var_6 > 0.9) {
@@ -874,7 +874,7 @@ play_crash_anim(var_0) {
     } else {
       var_8 = vectortoangles(var_0 - self.origin);
       var_9 = anglestoright(var_8);
-      var_10 = vectornormalize(var_9);
+      var_10 = vectorNormalize(var_9);
       var_11 = vectordot(var_10, var_3);
 
       if(var_11 > 0) {
@@ -909,11 +909,11 @@ play_icehole_anim(var_0) {
     wait 0.01;
     thread icehole_achievement();
     var_2 = self vehicle_getvelocity();
-    var_3 = vectornormalize(var_2);
+    var_3 = vectorNormalize(var_2);
     var_4 = anglesToForward(self.angles);
-    var_5 = vectornormalize(var_4);
+    var_5 = vectorNormalize(var_4);
     var_6 = vectordot(var_5, var_3);
-    var_7 = vectornormalize(var_0.origin - self.origin);
+    var_7 = vectorNormalize(var_0.origin - self.origin);
     var_8 = vectordot(var_3, var_7);
     var_9 = randomint(2);
 
@@ -932,7 +932,7 @@ play_icehole_anim(var_0) {
     } else if(var_8 < 0.9) {
       var_11 = vectortoangles(var_0.origin - self.origin);
       var_12 = anglestoright(var_11);
-      var_13 = vectornormalize(var_12);
+      var_13 = vectorNormalize(var_12);
       var_14 = vectordot(var_13, var_3);
 
       if(var_14 > 0) {
@@ -1067,7 +1067,7 @@ dynamic_player_crash(var_0, var_1, var_2) {
 
   if(level.player islinked()) {
     level.player unlink();
-    level.player setorigin(level.player.origin + (0, 0, 60));
+    level.player setOrigin(level.player.origin + (0, 0, 60));
   }
 
   foreach(var_6 in level.allies) {
@@ -1075,7 +1075,7 @@ dynamic_player_crash(var_0, var_1, var_2) {
       var_6 maps\_utility::stop_magic_bullet_shield();
     }
 
-    var_6 stopanimscripted();
+    var_6 stopanimScripted();
     var_6.ragdoll_immediate = 1;
     var_6 kill();
   }
@@ -1108,7 +1108,7 @@ spawn_enemy_bike_at_spawer(var_0) {
   var_2 = maps\_vehicle_spline_zodiac::get_player_progress();
   var_3 = maps\_vehicle_spline_zodiac::get_spawn_position(var_1, var_2 - 1000 - level.pos_lookahead_dist);
   var_4 = var_3["targ"];
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
   var_6 = maps\_vehicle::vehicle_spawn(var_5);
   var_6.offset_percent = var_3["offset"];
   var_6 vehphys_setspeed(90);
@@ -1479,22 +1479,22 @@ listen_vehicle_roof() {
   var_0.angles = self gettagangles("tag_turret");
   var_0.origin = self gettagorigin("tag_turret");
   var_0.origin = var_0.origin + (32, 32, 0);
-  var_0 linkto(self, "tag_turret");
+  var_0 linkTo(self, "tag_turret");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.angles = self gettagangles("tag_turret");
   var_1.origin = self gettagorigin("tag_turret");
   var_1.origin = var_1.origin + (-32, 32, 0);
-  var_1 linkto(self, "tag_turret");
+  var_1 linkTo(self, "tag_turret");
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.angles = self gettagangles("tag_turret");
   var_2.origin = self gettagorigin("tag_turret");
   var_2.origin = var_2.origin + (32, -32, 0);
-  var_2 linkto(self, "tag_turret");
+  var_2 linkTo(self, "tag_turret");
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.angles = self gettagangles("tag_turret");
   var_3.origin = self gettagorigin("tag_turret");
   var_3.origin = var_3.origin + (-32, -32, 0);
-  var_3 linkto(self, "tag_turret");
+  var_3 linkTo(self, "tag_turret");
   wait 5;
 
   while(isalive(self) && isDefined(self) && self.veh_speed > 5) {
@@ -1666,7 +1666,7 @@ screen_shake_exfil() {
 
 play_rumble_seconds(var_0, var_1) {
   for(var_2 = 0; var_2 < var_1 * 20; var_2++) {
-    level.player playrumbleonentity(var_0);
+    level.player playRumbleOnEntity(var_0);
     wait 0.05;
   }
 }
@@ -1965,7 +1965,7 @@ ambient_animate(var_0, var_1, var_2, var_3) {
       }
 
       if(isDefined(var_6)) {
-        var_4 = common_scripts\utility::getstruct(var_6, "targetname");
+        var_4 = common_scripts\utility::getStruct(var_6, "targetname");
 
         if(!isDefined(var_4)) {
           var_5 = getnode(var_6, "targetname");
@@ -2024,7 +2024,7 @@ prepare_to_be_shot(var_0, var_1) {
   level waittill(var_0);
   self.ignoreme = 0;
   self.ignoreall = 0;
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 
   if(var_1 == 1) {
     maps\_utility::set_generic_idle_anim("scientist_idle");
@@ -2197,7 +2197,7 @@ overheard_radio_chatter(var_0, var_1, var_2) {
   }
   if(!isDefined(level.background_radio_emitter)) {
     var_3 = spawn("script_origin", (0, 0, 0));
-    var_3 linkto(level.player, "", (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level.background_radio_emitter = var_3;
   }
 
@@ -2374,7 +2374,7 @@ dog_setup() {
 }
 
 link_dog_to_jeep(var_0) {
-  level.dog linkto(var_0, "tag_body");
+  level.dog linkTo(var_0, "tag_body");
   var_0 thread maps\_anim::anim_loop_solo(level.dog, "veh_idle", "stop_dog_loop", "tag_body", (-55, -10, -10));
 }
 
@@ -2443,7 +2443,7 @@ transition_start_anim(var_0) {
   thread maps\_anim::anim_single_solo(self, var_0);
   wait(var_1 - 0.05);
   maps\_utility::clear_generic_idle_anim();
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 merrick_script_delay_post(var_0) {
@@ -2454,7 +2454,7 @@ merrick_script_delay_post(var_0) {
 }
 
 enemy_stop_stealth() {
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(self.type != "dog") {
     maps\_utility::gun_recall();

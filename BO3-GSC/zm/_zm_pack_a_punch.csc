@@ -50,6 +50,6 @@ function private pap_play_fx(localclientnum, n_piece_index, str_tag) {
     self.n_pap_fx = undefined;
   }
   self.mdl_fx = util::spawn_model(localclientnum, "tag_origin", mdl_piece gettagorigin(str_tag), mdl_piece gettagangles(str_tag));
-  self.mdl_fx linkto(mdl_piece, str_tag);
+  self.mdl_fx linkTo(mdl_piece, str_tag);
   self.n_pap_fx = playFXOnTag(localclientnum, level._effect["pap_working_fx"], self.mdl_fx, "tag_origin");
 }

@@ -453,9 +453,9 @@ ambient_aaa_fx_rotate(endonString) {
   }
 
   while(1) {
-    self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
+    self rotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
-    self RotateTo((307.4, 1.7, 90), RandomFloatRange(3.5, 6));
+    self rotateTo((307.4, 1.7, 90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
   }
 }

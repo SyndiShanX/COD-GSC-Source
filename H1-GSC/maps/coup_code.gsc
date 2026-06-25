@@ -74,7 +74,7 @@ scripted_array_spawn(var_0, var_1, var_2) {
 
 scripted_spawn2(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
-    var_3 = getent(var_0, var_1);
+    var_3 = getEnt(var_0, var_1);
   }
 
   if(isDefined(var_3.script_drone)) {
@@ -352,7 +352,7 @@ playlinkedsound(var_0) {
   var_1 = spawn("script_origin", (0, 0, 0));
   var_1.origin = self.origin;
   var_1.angles = self.angles;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 thread maps\_utility::play_sound_on_tag(var_0, undefined, 1);
   return var_1;
 }
@@ -369,7 +369,7 @@ fake_tag(var_0, var_1, var_2) {
   var_3 = spawn("script_model", self.origin);
   var_3 setModel("tag_origin");
   var_3 hide();
-  var_3 linkto(self, var_0, var_1, var_2);
+  var_3 linkTo(self, var_0, var_1, var_2);
   thread fake_tag_destroy(var_3);
   return var_3;
 }
@@ -405,7 +405,7 @@ play_anim_on_ropehands(var_0, var_1) {
   level.handsrope show();
 
   if(var_1) {
-    level.handsrope linkto(level.playerview);
+    level.handsrope linkTo(level.playerview);
   }
 
   maps\_anim::anim_single_solo(level.handsrope, var_2);

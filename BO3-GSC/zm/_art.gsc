@@ -147,8 +147,8 @@ function tweakart() {
     if(getdvarint("")) {
       setDvar("", "");
       println("");
-      players = getplayers();
-      dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
+      players = getPlayers();
+      dir = vectorNormalize(anglesToForward(players[0] getplayerangles()));
       level.fogsundir = [];
       level.fogsundir[0] = dir[0];
       level.fogsundir[1] = dir[1];

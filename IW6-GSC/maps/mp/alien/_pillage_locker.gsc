@@ -81,7 +81,7 @@ debug_locker_weapons() {
 
 set_locker_hint_strings(var_0) {
   foreach(var_3, var_2 in var_0) {
-    var_2.pillage_trigger sethintstring(&"ALIEN_PILLAGE_LOCKER_OPEN_LOCKER");
+    var_2.pillage_trigger setHintString(&"ALIEN_PILLAGE_LOCKER_OPEN_LOCKER");
   }
 }
 
@@ -95,7 +95,7 @@ default_level_specific_pillage_show_func(var_0, var_1, var_2) {
             var_0 thread maps\mp\alien\_pillage::show_pillage_text(var_3);
             self.pillage_trigger setModel(level.pillageinfo.locker_key_model);
             var_3 = maps\mp\alien\_pillage::get_hintstring_for_item_pickup(var_2.type);
-            self.pillage_trigger sethintstring(var_3);
+            self.pillage_trigger setHintString(var_3);
             self.pillage_trigger makeusable();
             self.pillageinfo.type = "locker_key";
             self.pillageinfo.ammo = 1;
@@ -126,7 +126,7 @@ default_level_specific_pillage_show_func(var_0, var_1, var_2) {
             var_0.last_locker_weapon = var_5.model;
             self.pillage_trigger setModel(var_5.model);
             var_3 = maps\mp\alien\_pillage::get_hintstring_for_item_pickup(var_5.model);
-            self.pillage_trigger sethintstring(var_3);
+            self.pillage_trigger setHintString(var_3);
             self.pillage_trigger makeusable();
             self.pillageinfo.type = "locker_weapon";
             self.pillageinfo.ammo = 1;

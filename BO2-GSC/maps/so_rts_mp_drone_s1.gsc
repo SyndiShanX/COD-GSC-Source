@@ -293,7 +293,7 @@ outofenemy_watch() {
 }
 
 floor_watch() {
-  level.rts_floor = getent("overwatch_floor", "targetname");
+  level.rts_floor = getEnt("overwatch_floor", "targetname");
   level.rts.trace_ents[level.rts.trace_ents.size] = level.rts_floor;
 
   while(isDefined(level.rts_floor)) {
@@ -690,7 +690,7 @@ setup_scenes() {
 }
 
 drone_level_player_startfps() {
-  playerstart = getent("rts_player_start", "targetname");
+  playerstart = getEnt("rts_player_start", "targetname");
   assert(isDefined(playerstart));
   nextsquad = maps\_so_rts_squad::getnextvalidsquad(undefined);
   assert(nextsquad != -1, "should not be -1, player squad should be created");
@@ -712,7 +712,7 @@ drone_level_player_startfps() {
   level.rts.targetteammate forceteleport(playerstart.origin, playerstart.angles);
   level thread maps\_so_rts_main::player_in_control();
   level waittill("switch_complete");
-  level.rts.player setorigin(playerstart.origin);
+  level.rts.player setOrigin(playerstart.origin);
   level.rts.player setplayerangles(playerstart.angles);
   flag_set("block_input");
   level.rts.player freezecontrols(1);
@@ -724,8 +724,8 @@ drone_level_player_startfps() {
   poi = maps\_so_rts_poi::getpoibyref("rts_obj_silo");
   maps\_so_rts_squad::ordersquaddefend(poi.entity.origin, nextsquad.id, 1);
   nextsquad = maps\_so_rts_squad::getsquadbypkg("bigdog_pkg", "allies");
-  start = getstruct("bigdog_unit_start_point", "targetname");
-  spot = getstruct("bigdog_unit_defend_point", "targetname");
+  start = getStruct("bigdog_unit_start_point", "targetname");
+  spot = getStruct("bigdog_unit_defend_point", "targetname");
   bigdog = nextsquad.members[0];
   maps\_so_rts_squad::ordersquaddefend(spot.origin, nextsquad.id, 1);
   flag_wait("intro_done");
@@ -795,7 +795,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
         }
       }
 
-      spot = getstruct("infantry_ally_inf_pkg_spawn_loc", "targetname");
+      spot = getStruct("infantry_ally_inf_pkg_spawn_loc", "targetname");
       squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin, undefined, 1);
       newguys = [];
 
@@ -816,7 +816,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       maps\_so_rts_squad::reissuesquadlastorders(squadid);
       pkg_ref.incodespawn = undefined;
     } else if(pkg_ref.ref == "infantry_ally_reg2_pkg") {
-      spot = getstruct("infantry_ally_inf2_pkg_spawn_loc", "targetname");
+      spot = getStruct("infantry_ally_inf2_pkg_spawn_loc", "targetname");
       squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin, undefined, 1);
       maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
@@ -948,7 +948,7 @@ jetpack_deploy_chute_guy0(ai_jetpack) {
 
   recordent(m_chute);
 
-  align_struct = getstruct("intro_loc", "targetname");
+  align_struct = getStruct("intro_loc", "targetname");
   align_struct.angles = (0, 0, 0);
   align_struct maps\_anim::anim_single_aligned(m_chute, "chute_guy0", undefined, "chute", 0.0);
   m_chute delete();
@@ -962,7 +962,7 @@ jetpack_deploy_chute_guy1(ai_jetpack) {
 
   recordent(m_chute);
 
-  align_struct = getstruct("intro_loc", "targetname");
+  align_struct = getStruct("intro_loc", "targetname");
   align_struct.angles = (0, 0, 0);
   align_struct maps\_anim::anim_single_aligned(m_chute, "chute_guy1", undefined, "chute", 0.0);
   m_chute delete();
@@ -1074,7 +1074,7 @@ drone_outro_fail() {
 
 outro_emp_explosion() {
   emp_bomb = get_model_or_models_from_scene("drone_outro_fail", "briefcase_bomb");
-  playsoundatposition("wpn_emp_explode_rts", emp_bomb.origin);
+  playSoundAtPosition("wpn_emp_explode_rts", emp_bomb.origin);
   playFXOnTag(level._effect["rts_suitcase_bomb_emp"], emp_bomb, "tag_origin");
   level notify("cctv_futz_stop");
 }
@@ -1084,7 +1084,7 @@ outro_emp_lights() {
 
   while(!flag("drone_emp_explosion")) {
     playFXOnTag(level._effect["outro_emp_blink"], emp_bomb, "tag_origin");
-    playsoundatposition("evt_outro_emp_alert", emp_bomb.origin);
+    playSoundAtPosition("evt_outro_emp_alert", emp_bomb.origin);
     wait 0.1;
   }
 }
@@ -1157,16 +1157,16 @@ drone_geo_changes() {
   level.laser_doors = getEntArray("laser_door", "targetname");
 
   foreach(ent in level.laser_doors) {
-    ent disconnectpaths();
+    ent disconnectPaths();
   }
 
-  roof = getent("rts_factory_roof", "targetname");
+  roof = getEnt("rts_factory_roof", "targetname");
 
   if(isDefined(roof)) {
-    targetloc = getstruct("rts_factory_roof_pos", "targetname");
+    targetloc = getStruct("rts_factory_roof_pos", "targetname");
 
     if(isDefined(targetloc)) {
-      roof moveto(targetloc.origin, 0.1);
+      roof moveTo(targetloc.origin, 0.1);
     }
   }
 
@@ -1285,16 +1285,16 @@ watch_sentry_death() {
 }
 
 setupmissileboundary() {
-  ulxy = getstruct("rts_ulxy_missile", "targetname");
+  ulxy = getStruct("rts_ulxy_missile", "targetname");
 
   if(!isDefined(ulxy)) {
-    ulxy = getstruct("rts_ulxy", "targetname");
+    ulxy = getStruct("rts_ulxy", "targetname");
   }
 
-  lrxy = getstruct("rts_lrxy_missile", "targetname");
+  lrxy = getStruct("rts_lrxy_missile", "targetname");
 
   if(!isDefined(lrxy)) {
-    lrxy = getstruct("rts_lrxy", "targetname");
+    lrxy = getStruct("rts_lrxy", "targetname");
   }
 
   ux = ulxy.origin[0] < lrxy.origin[0] ? ulxy.origin[0] : lrxy.origin[0];

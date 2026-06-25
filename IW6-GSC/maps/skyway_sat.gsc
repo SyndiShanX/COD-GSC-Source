@@ -25,10 +25,10 @@ hint_bridge_2() {
 
 section_post_inits() {
   level._sat = spawnStruct();
-  level._sat.ally_start_1 = getent("ally1_start_sat1", "targetname");
-  level._sat.player_start_1 = getent("player_start_sat1", "targetname");
-  level._sat.ally_start_2 = getent("ally1_start_sat2", "targetname");
-  level._sat.player_start_2 = getent("player_start_sat2", "targetname");
+  level._sat.ally_start_1 = getEnt("ally1_start_sat1", "targetname");
+  level._sat.player_start_1 = getEnt("player_start_sat1", "targetname");
+  level._sat.ally_start_2 = getEnt("ally1_start_sat2", "targetname");
+  level._sat.player_start_2 = getEnt("player_start_sat2", "targetname");
   thread base_array_ambient_dogfight_1();
   thread base_array_ambient_dogfight_3();
   thread base_array_ambient_dogfight_1b();
@@ -66,7 +66,7 @@ section_post_inits() {
 
           foreach(var_10 in var_8) {
             if(issubstr(var_10.classname, "trigger")) {
-              var_10 enablelinkto();
+              var_10 enablelinkTo();
               var_10 setmovingplatformtrigger();
             }
 
@@ -82,14 +82,14 @@ section_post_inits() {
                   var_5._traverses["out"] = [];
 
                   for(var_11 = 0; var_11 < 2; var_11++) {
-                    var_5._traverses["in"] = common_scripts\utility::array_add(var_5._traverses["in"], getent(var_5.target + "_traverse_in_" + (var_11 + 1), "targetname"));
-                    var_5._traverses["out"] = common_scripts\utility::array_add(var_5._traverses["out"], getent(var_5.target + "_traverse_out_" + (var_11 + 1), "targetname"));
+                    var_5._traverses["in"] = common_scripts\utility::array_add(var_5._traverses["in"], getEnt(var_5.target + "_traverse_in_" + (var_11 + 1), "targetname"));
+                    var_5._traverses["out"] = common_scripts\utility::array_add(var_5._traverses["out"], getEnt(var_5.target + "_traverse_out_" + (var_11 + 1), "targetname"));
                   }
 
                   foreach(var_13 in var_5._traverses) {
                     foreach(var_15 in var_13) {
                       if(isDefined(var_15.script_parameters) && var_15.script_parameters == "linkto_cargo") {
-                        var_15 linkto(var_10);
+                        var_15 linkTo(var_10);
                       }
                     }
                   }
@@ -98,19 +98,19 @@ section_post_inits() {
                     common_scripts\utility::array_call(getEntArray(var_10.target, "targetname"), ::linkto, var_10);
                   }
 
-                  var_10 linkto(var_5, "tag_sat1", (0, 0, 0), (0, resolve_link_yaw(var_5, var_10), 0));
+                  var_10 linkTo(var_5, "tag_sat1", (0, 0, 0), (0, resolve_link_yaw(var_5, var_10), 0));
                 } else
-                  var_10 linkto(var_5, "j_spine4");
+                  var_10 linkTo(var_5, "j_spine4");
               } else if(issubstr(var_10.script_parameters, "lower")) {
                 if(var_10.classname == "script_model") {
-                  var_10 linkto(var_5, "tag_sat2", (0, 0, 0), (0, resolve_link_yaw(var_5, var_10), 0));
+                  var_10 linkTo(var_5, "tag_sat2", (0, 0, 0), (0, resolve_link_yaw(var_5, var_10), 0));
                 } else {
-                  var_10 linkto(var_5, "j_elbow_le");
+                  var_10 linkTo(var_5, "j_elbow_le");
                 }
               } else if(issubstr(var_10.script_parameters, "weapon")) {
                 var_18 = spawn(var_10.script_parameters, var_10.origin);
                 var_18.angles = var_10.angles;
-                var_18 linkto(var_5, "tag_sat1");
+                var_18 linkTo(var_5, "tag_sat1");
               }
 
               continue;
@@ -123,7 +123,7 @@ section_post_inits() {
               continue;
             }
 
-            var_10 linkto(var_5, "j_spine4");
+            var_10 linkTo(var_5, "j_spine4");
           }
         }
 
@@ -150,9 +150,9 @@ section_post_inits() {
     for(var_11 = 0; var_11 < 2; var_11++) {
       var_23 = var_11 + 1;
       var_24 = maps\skyway_util::setup_door("model_sat1_bridge_" + var_23, "bridge", "jnt_bridge");
-      var_24._anim_node = getent("origin_sat1_bridge_" + var_23, "targetname");
+      var_24._anim_node = getEnt("origin_sat1_bridge_" + var_23, "targetname");
       var_24._anim_node maps\_anim::anim_last_frame_solo(var_24, "bridge_push");
-      var_24 linkto(var_24._anim_node);
+      var_24 linkTo(var_24._anim_node);
     }
   }
 
@@ -174,23 +174,23 @@ section_post_inits() {
           var_24._main_col = var_27;
         }
 
-        var_27 linkto(var_24);
+        var_27 linkTo(var_24);
       }
 
-      var_24._walkway_brush = getent("brush_sat2_bridge_" + var_23, "targetname");
+      var_24._walkway_brush = getEnt("brush_sat2_bridge_" + var_23, "targetname");
       var_24._walkway_brush_node = var_24._walkway_brush common_scripts\utility::spawn_tag_origin();
       var_24._hint = "hint_sat_bridge_" + var_23;
       var_24._up = 1;
-      var_24._anim_node = getent("origin_sat2_bridge_" + var_23, "targetname");
+      var_24._anim_node = getEnt("origin_sat2_bridge_" + var_23, "targetname");
       var_24._anim_node maps\_anim::anim_first_frame_solo(var_24, "bridge_push");
-      var_24 linkto(var_24._anim_node);
-      var_24._walkway_brush_node linkto(var_24._anim_node);
+      var_24 linkTo(var_24._anim_node);
+      var_24._walkway_brush_node linkTo(var_24._anim_node);
       level._sat.bridges = common_scripts\utility::array_add(level._sat.bridges, var_24);
     }
   }
 
   level.player thread maps\skyway_util::flag_watcher("flag_force_mantle", ::enableforcemantle);
-  getent("flag_sat2_jump", "targetname") setmovingplatformtrigger();
+  getEnt("flag_sat2_jump", "targetname") setmovingplatformtrigger();
 }
 
 enableforcemantle() {
@@ -463,15 +463,15 @@ spawnfunc_enemies_rog(var_0) {
   if(issubstr(self.script_parameters, "stumble")) {
     var_2 = level._train.cars["train_sat_2"].body;
     var_3 = common_scripts\utility::spawn_tag_origin();
-    var_3 linkto(var_2, "j_spineupper");
-    self linkto(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_2, "j_spineupper");
+    self linkTo(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_3 maps\skyway_vignette::vignette_single_solo(self, var_1, undefined, undefined, undefined, 0.3);
     thread proximity_player_seek();
     self unlink();
     var_3 delete();
   } else {
-    var_3 = getent("origin_" + var_1, "targetname");
-    self linkto(var_3);
+    var_3 = getEnt("origin_" + var_1, "targetname");
+    self linkTo(var_3);
 
     if(issubstr(self.script_parameters, "fall")) {
       var_3 maps\_anim::anim_first_frame_solo(self, var_1);
@@ -537,11 +537,11 @@ event_noticket() {
   common_scripts\utility::flag_wait("flag_sat1_noticket");
 
   if(common_scripts\utility::flag("flag_ally_at_sat1")) {
-    var_0 = getent("origin_sat1_noticket", "targetname");
+    var_0 = getEnt("origin_sat1_noticket", "targetname");
     var_0 maps\_anim::anim_reach_solo(self, "noticket");
 
     if(!common_scripts\utility::flag("flag_sat1_noticket_stop")) {
-      var_1 = getent("actor_sat1_noticket", "targetname") maps\_utility::spawn_ai();
+      var_1 = getEnt("actor_sat1_noticket", "targetname") maps\_utility::spawn_ai();
       thread maps\skyway_audio::sfx_noticket(var_1);
       common_scripts\utility::array_call([self, var_1], ::linkto, var_0);
       var_0 thread maps\skyway_vignette::vignette_single([self, var_1], "noticket");
@@ -562,7 +562,7 @@ event_player_bridge_push() {
   maps\skyway_util::setup_player_for_animated_sequence(0, 0);
   level.player_rig hide();
   self._anim_node maps\_anim::anim_first_frame_solo(level.player_rig, "bridge_push_player");
-  level.player_rig linkto(self._anim_node);
+  level.player_rig linkTo(self._anim_node);
 
   if(issubstr(level.player getcurrentweapon(), "svu")) {
     wait 1;
@@ -577,7 +577,7 @@ event_player_bridge_push() {
   self._anim_node thread maps\_anim::anim_single([self, level.player_rig], "bridge_push_player");
   level waittill("notify_draw_weapon");
   level.player enableweapons();
-  self._walkway_brush linkto(self._walkway_brush_node, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self._walkway_brush linkTo(self._walkway_brush_node, "tag_origin", (0, 0, 0), (0, 0, 0));
   self._anim_node waittill("bridge_push_player");
   maps\skyway_util::player_animated_sequence_cleanup();
 
@@ -603,7 +603,7 @@ event_ally_bridge_push(var_0) {
 
   if(var_0._up) {
     maps\skyway_util_ai::ignore_everything();
-    self linkto(var_0._anim_node);
+    self linkTo(var_0._anim_node);
     var_0 notify("notify_bridge_down");
     var_0._up = 0;
     var_0._main_col connectpaths();
@@ -613,7 +613,7 @@ event_ally_bridge_push(var_0) {
     var_0._player_col common_scripts\utility::delaycall(4, ::delete);
     thread maps\skyway_audio::sfx_bridge_down_npc();
     var_0._anim_node maps\_anim::anim_single([self, var_0], "bridge_push");
-    var_0._walkway_brush linkto(var_0._walkway_brush_node, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_0._walkway_brush linkTo(var_0._walkway_brush_node, "tag_origin", (0, 0, 0), (0, 0, 0));
     self unlink();
     maps\skyway_util_ai::unignore_everything();
     common_scripts\utility::flag_set("flag_left_bridge_down");
@@ -647,8 +647,8 @@ event_rog_impact(var_0) {
     var_12 = level._train.cars[var_11].body;
     var_13 = var_1 common_scripts\utility::spawn_tag_origin();
     var_13.angles = var_12 gettagangles("j_spineupper");
-    var_13 linkto(var_12, "j_spineupper");
-    var_1 linkto(var_13, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_13 linkTo(var_12, "j_spineupper");
+    var_1 linkTo(var_13, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_13 maps\_anim::anim_single_solo(var_1, "sat_rog_hit", undefined, 0.1);
     var_1 unlink();
     var_1 maps\_utility::enable_ai_color();

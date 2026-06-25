@@ -37,8 +37,8 @@ deck_transition_pre_load() {
   precachemodel("weapon_remote_tablet");
   precachemodel("viewmodel_remote_tablet_crr");
   thread maps\carrier_code::setup_rear_elevator();
-  level.deck_transition_cleanup_vol = getent("deck_transition_cleanup_vol", "targetname");
-  var_0 = getent("heli_elevator_fake", "script_noteworthy");
+  level.deck_transition_cleanup_vol = getEnt("deck_transition_cleanup_vol", "targetname");
+  var_0 = getEnt("heli_elevator_fake", "script_noteworthy");
   var_0 maps\_utility::hide_entity();
 }
 
@@ -56,16 +56,16 @@ setup_deck_transition() {
   common_scripts\utility::flag_set("enemy_running");
   thread carried_grape();
   thread carrier_grape();
-  var_0 = getent("heli_elevator_fake", "script_noteworthy");
+  var_0 = getEnt("heli_elevator_fake", "script_noteworthy");
   var_0 maps\_utility::show_entity();
   thread checkpoint_osprey();
   thread taxing_osprey_cart_drone_anims();
   thread trans_talker();
-  var_1 = getent("water_wake_intro", "targetname");
+  var_1 = getEnt("water_wake_intro", "targetname");
   var_1 delete();
-  var_2 = getent("blast_shield1_clip", "targetname");
+  var_2 = getEnt("blast_shield1_clip", "targetname");
   var_2 maps\_utility::show_entity();
-  var_3 = getent("blast_shield2_clip", "targetname");
+  var_3 = getEnt("blast_shield2_clip", "targetname");
   var_3 maps\_utility::show_entity();
   var_4 = maps\carrier_code::array_spawn_targetname_allow_fail("trans_orange_allies", 1);
 
@@ -122,16 +122,16 @@ begin_deck_transition() {
 
 enemies_final_move() {
   common_scripts\utility::flag_wait("wave3_heli2_unloaded");
-  var_0 = getent("final_enemy_vol", "targetname");
+  var_0 = getEnt("final_enemy_vol", "targetname");
   var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
   thread maps\carrier_code::ai_array_killcount_flag_set(var_1, var_1.size - 3, "player_rush");
 }
 
 enemy_final_wave_run() {
   common_scripts\utility::flag_wait("player_rush");
-  var_0 = getent("final_enemy_vol", "targetname");
+  var_0 = getEnt("final_enemy_vol", "targetname");
   var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
-  var_2 = getent("run_to_vol", "targetname");
+  var_2 = getEnt("run_to_vol", "targetname");
 
   foreach(var_4 in var_1) {
     if(issubstr(var_4.model, "shotgun")) {
@@ -147,7 +147,7 @@ enemy_final_wave_run() {
 
 random_enemy_kill() {
   common_scripts\utility::flag_wait("enemy_running");
-  var_0 = getent("final_enemy_vol", "targetname");
+  var_0 = getEnt("final_enemy_vol", "targetname");
   var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
 
   foreach(var_3 in var_1) {
@@ -161,9 +161,9 @@ random_enemy_kill() {
 catchup_deck_transition() {
   thread deck_combat_cleanup();
   thread deck_transition_cleanup();
-  var_0 = getent("heli_elevator_fake", "script_noteworthy");
+  var_0 = getEnt("heli_elevator_fake", "script_noteworthy");
   var_0 delete();
-  var_1 = getent("osrpey_control_pad", "targetname");
+  var_1 = getEnt("osrpey_control_pad", "targetname");
   var_1 delete();
 }
 
@@ -216,7 +216,7 @@ deck_combat_cleanup() {
     }
   }
 
-  getent("low_flyby_ally", "targetname") delete();
+  getEnt("low_flyby_ally", "targetname") delete();
   maps\_utility::array_delete(getEntArray("jet_dogfighters_flyby", "targetname"));
 }
 
@@ -232,7 +232,7 @@ deck_transition_cleanup() {
   var_0 = ["flyby_missile_attack1", "flyby_missile_attack2", "trans_gun_run_heli1", "trans_attack_heli1", "trans_attack_heli2", "trans_attack_heli3"];
 
   foreach(var_2 in var_0) {
-    getent(var_2, "targetname") delete();
+    getEnt(var_2, "targetname") delete();
   }
 
   maps\_utility::array_delete(getEntArray("trans_attack_heli_riders", "script_noteworthy"));
@@ -276,7 +276,7 @@ bring_up_osprey() {
   }
 
   common_scripts\utility::flag_wait("rear_elevator_raised");
-  level.elevator_osprey_clip disconnectpaths();
+  level.elevator_osprey_clip disconnectPaths();
   thread taxing_osprey();
   common_scripts\utility::flag_wait("dc_wave2_start");
 
@@ -290,8 +290,8 @@ bring_up_osprey() {
 }
 
 setup_taxing_osprey() {
-  var_0 = common_scripts\utility::getstruct("taxing_osprey_ref", "targetname");
-  var_1 = getent("heli_elevator_fake", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("taxing_osprey_ref", "targetname");
+  var_1 = getEnt("heli_elevator_fake", "script_noteworthy");
   var_1 maps\_utility::show_entity();
   var_1.animname = "taxing_osprey";
   var_1 maps\_anim::setanimtree();
@@ -303,19 +303,19 @@ setup_taxing_osprey() {
 
   common_scripts\utility::waitframe();
   common_scripts\utility::waitframe();
-  var_1 linkto(level.rear_elevator);
+  var_1 linkTo(level.rear_elevator);
 }
 
 taxing_osprey() {
   common_scripts\utility::flag_set("cannon_fodder");
-  var_0 = common_scripts\utility::getstruct("taxing_osprey_ref", "targetname");
-  var_1 = getent("heli_elevator_fake", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("taxing_osprey_ref", "targetname");
+  var_1 = getEnt("heli_elevator_fake", "script_noteworthy");
   var_1.animname = "taxing_osprey";
   var_1 maps\_anim::setanimtree();
-  var_2 = getent("taxing_osprey_clip", "targetname");
+  var_2 = getEnt("taxing_osprey_clip", "targetname");
   var_2.origin = var_1.origin;
   var_2.angles = var_1.angles;
-  var_2 linkto(var_1, "tag_body", (-75, 0, -125), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_body", (-75, 0, -125), (0, 0, 0));
   level.elevator_osprey_clip = var_2;
   var_0 maps\_anim::anim_single_solo(var_1, "taxing_osprey_move_start");
   common_scripts\utility::flag_set("aud_osprey_taxi");
@@ -363,13 +363,13 @@ taxing_osprey_cart_drone_anims() {
   var_0.animname = "taxi_grape_2";
   var_0 thread maps\_utility::magic_bullet_shield(1);
   var_0 maps\_utility::gun_remove();
-  var_1 = common_scripts\utility::getstruct("taxing_osprey_ref", "targetname");
-  var_2 = getent("depth_charge_cart", "targetname");
-  var_3 = getent("depth_charge_cart_clip", "targetname");
-  var_4 = getent("taxing_depth_charge_barrels", "targetname");
-  var_5 = getent("taxing_depth_charge_barrels_clip", "targetname");
-  var_5 linkto(var_4);
-  var_3 linkto(var_2);
+  var_1 = common_scripts\utility::getStruct("taxing_osprey_ref", "targetname");
+  var_2 = getEnt("depth_charge_cart", "targetname");
+  var_3 = getEnt("depth_charge_cart_clip", "targetname");
+  var_4 = getEnt("taxing_depth_charge_barrels", "targetname");
+  var_5 = getEnt("taxing_depth_charge_barrels_clip", "targetname");
+  var_5 linkTo(var_4);
+  var_3 linkTo(var_2);
   var_6 = maps\_utility::spawn_anim_model("taxing_cart");
   var_7 = var_6 gettagorigin("j_prop_1");
   var_8 = var_6 gettagangles("j_prop_1");
@@ -379,8 +379,8 @@ taxing_osprey_cart_drone_anims() {
   var_10 = var_6 gettagangles("j_prop_2");
   var_4.origin = var_9;
   var_4.angles = var_10;
-  var_2 linkto(var_6, "j_prop_1");
-  var_4 linkto(var_6, "j_prop_2");
+  var_2 linkTo(var_6, "j_prop_1");
+  var_4 linkTo(var_6, "j_prop_2");
   var_11 = [var_6];
   var_1 thread maps\_anim::anim_loop_solo(var_0, "taxing_cart_move_loop", "stop_grape_loop");
   var_1 thread maps\_anim::anim_first_frame(var_11, "taxing_cart_move");
@@ -393,7 +393,7 @@ taxing_osprey_cart_drone_anims() {
   var_1 thread maps\_anim::anim_single(var_11, "taxing_cart_move");
   thread cart_player_kill_volume();
   var_6 waittillmatch("single anim", "end");
-  var_3 disconnectpaths();
+  var_3 disconnectPaths();
   var_0.animname = "generic";
   var_0.runanim = maps\_utility::getgenericanim("unarmed_run");
   var_0.target = "taxing_cart_driver_path";
@@ -403,15 +403,15 @@ taxing_osprey_cart_drone_anims() {
 }
 
 osprey_control_pad() {
-  var_0 = getent("osrpey_control_pad", "targetname");
+  var_0 = getEnt("osrpey_control_pad", "targetname");
   var_0 maps\_utility::glow();
-  var_1 = getent("osprey_pad_player_trigger", "targetname");
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 = getEnt("osprey_pad_player_trigger", "targetname");
+  var_1 setCursorHint("HINT_NOICON");
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-    var_1 sethintstring(&"CARRIER_TAKE_DATAPAD_CONSOLE");
+    var_1 setHintString(&"CARRIER_TAKE_DATAPAD_CONSOLE");
   } else {
-    var_1 sethintstring(&"CARRIER_TAKE_DATAPAD");
+    var_1 setHintString(&"CARRIER_TAKE_DATAPAD");
   }
 
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_1, var_0, cos(25), 0, 1);
@@ -447,7 +447,7 @@ run_osprey_takeoff() {
   level.heli_elevator.godmode = 1;
   level.heli_elevator hide();
   level.heli_elevator thread osprey_delete_watcher();
-  var_0 = getent("heli_elevator_fake", "script_noteworthy");
+  var_0 = getEnt("heli_elevator_fake", "script_noteworthy");
   common_scripts\utility::flag_wait("dt_osprey_go");
 
   if(isDefined(level.heli_elevator)) {
@@ -461,8 +461,8 @@ run_osprey_takeoff() {
     thread maps\_vehicle::gopath(level.heli_elevator);
   }
 
-  var_1 = getent("taxing_depth_charge_barrels", "targetname");
-  var_2 = getent("taxing_depth_charge_barrels_clip", "targetname");
+  var_1 = getEnt("taxing_depth_charge_barrels", "targetname");
+  var_2 = getEnt("taxing_depth_charge_barrels_clip", "targetname");
   var_1 delete();
   var_2 delete();
   common_scripts\utility::flag_set("aud_osprey_takeoff");
@@ -473,7 +473,7 @@ run_osprey_takeoff() {
 
   var_0 delete();
   wait 0.5;
-  var_3 = getent("taxing_osprey_clip", "targetname");
+  var_3 = getEnt("taxing_osprey_clip", "targetname");
   var_3 unlink();
   var_3 delete();
 }
@@ -496,7 +496,7 @@ osprey_delete_watcher() {
 }
 
 trans_talker() {
-  var_0 = common_scripts\utility::getstruct("taxing_osprey_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("taxing_osprey_ref", "targetname");
   level.trans_talker = maps\_utility::spawn_targetname("transtion_talker", 1);
   level.trans_talker maps\_utility::set_archetype("unarmed_grape");
   level.trans_talker.animname = "trans_grape";
@@ -535,7 +535,7 @@ trans_talker_runoff() {
 }
 
 hesh_talking_to_grape() {
-  var_0 = common_scripts\utility::getstruct("taxing_osprey_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("taxing_osprey_ref", "targetname");
   var_1 = getnode("trans_hesh_run_node", "targetname");
   level.hesh maps\_utility::set_forcegoal();
   level.hesh setgoalnode(var_1);
@@ -605,7 +605,7 @@ hesh_dialogue_pacing() {
 }
 
 explosion_during_hesh_talk() {
-  var_0 = common_scripts\utility::getstruct("trans_deck_explosion", "targetname");
+  var_0 = common_scripts\utility::getStruct("trans_deck_explosion", "targetname");
   playFX(common_scripts\utility::getfx("vfx_missile_death_deck"), var_0.origin);
   radiusdamage(var_0.origin, var_0.radius, 800, 600, undefined, "MOD_EXPLOSIVE");
   physicsexplosionsphere(var_0.origin, var_0.radius * 2, var_0.radius, 100);
@@ -643,13 +643,13 @@ cart_runner_behavior() {
   maps\_utility::set_ignoreall(1);
 
   if(isalive(self)) {
-    var_0 = common_scripts\utility::getstruct("ally_wave_cart_runner2", "targetname");
+    var_0 = common_scripts\utility::getStruct("ally_wave_cart_runner2", "targetname");
     var_0 maps\_anim::anim_reach_solo(self, "forward_wave_back");
     var_0 maps\_anim::anim_single_solo(self, "forward_wave_back");
   }
 
   if(isalive(self)) {
-    var_0 = common_scripts\utility::getstruct("ally_wave_cart_runner3", "targetname");
+    var_0 = common_scripts\utility::getStruct("ally_wave_cart_runner3", "targetname");
     var_0 maps\_anim::anim_reach_solo(self, "forward_wave_back");
     var_0 maps\_anim::anim_single_solo(self, "forward_wave_back");
     maps\_utility::set_ignoreall(0);
@@ -663,7 +663,7 @@ cart_runner_behavior() {
 }
 
 carrier_grape() {
-  var_0 = common_scripts\utility::getstruct("pickup_wounded_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("pickup_wounded_ref", "targetname");
   var_1 = maps\_utility::spawn_targetname("trans_grape_carrier_wounded", 1);
   var_1.animname = "generic";
   var_1.runanim = maps\_utility::getgenericanim("unarmed_run");
@@ -689,9 +689,9 @@ carrier_grape() {
 }
 
 carried_grape() {
-  var_0 = common_scripts\utility::getstruct("trans_redshirt_injured_ref", "targetname");
-  var_1 = common_scripts\utility::getstruct("pickup_wounded_ref", "targetname");
-  var_2 = getent("trans_grape_carried_wounded", "targetname");
+  var_0 = common_scripts\utility::getStruct("trans_redshirt_injured_ref", "targetname");
+  var_1 = common_scripts\utility::getStruct("pickup_wounded_ref", "targetname");
+  var_2 = getEnt("trans_grape_carried_wounded", "targetname");
   var_3 = var_2 maps\_utility::spawn_ai(1, 0);
   var_3.animname = "generic";
   var_3.damageshield = 1;
@@ -878,7 +878,7 @@ kill_heli_engine_sounds() {
 cart_player_kill_volume() {
   wait 21.5;
   var_0 = gettime() + 500;
-  var_1 = getent("cart_player_push_vol", "targetname");
+  var_1 = getEnt("cart_player_push_vol", "targetname");
 
   while(gettime() < var_0) {
     if(var_1 istouching(level.player)) {
@@ -892,14 +892,14 @@ cart_player_kill_volume() {
 }
 
 checkpoint_osprey() {
-  var_0 = common_scripts\utility::getstruct("taxing_osprey_ref", "targetname");
-  var_1 = getent("heli_elevator_fake", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("taxing_osprey_ref", "targetname");
+  var_1 = getEnt("heli_elevator_fake", "script_noteworthy");
   var_1.animname = "taxing_osprey";
   var_1 maps\_anim::setanimtree();
-  var_2 = getent("taxing_osprey_clip", "targetname");
+  var_2 = getEnt("taxing_osprey_clip", "targetname");
   var_2.origin = var_1.origin;
   var_2.angles = var_1.angles;
-  var_2 linkto(var_1, "tag_body", (-75, 0, -125), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_body", (-75, 0, -125), (0, 0, 0));
   level.elevator_osprey_clip = var_2;
   common_scripts\utility::flag_set("aud_osprey_taxi");
   thread jet_attack();

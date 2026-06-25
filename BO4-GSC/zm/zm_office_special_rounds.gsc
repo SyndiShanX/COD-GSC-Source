@@ -176,7 +176,7 @@ function_13f107c4(ai, ent) {
   wait 1;
   ai clientfield::increment("crawler_portal_spawn_fx");
   wait 1.5;
-  playsoundatposition(#"evt_teleporter_go", ent.origin);
+  playSoundAtPosition(#"evt_teleporter_go", ent.origin);
 
   if(isDefined(ai.favoriteenemy)) {
     angle = vectortoangles(ai.favoriteenemy.origin - ent.origin);

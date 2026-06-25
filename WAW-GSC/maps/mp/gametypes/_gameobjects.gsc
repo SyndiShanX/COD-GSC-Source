@@ -533,7 +533,7 @@ setDropped() {
     dropOrigin = trace;
     if(angleTrace["fraction"] < 1 && distance(angleTrace["position"], trace) < 10.0) {
       forward = (cos(tempAngle), sin(tempAngle), 0);
-      forward = vectornormalize(forward - vector_scale(angleTrace["normal"], vectordot(forward, angleTrace["normal"])));
+      forward = vectorNormalize(forward - vector_scale(angleTrace["normal"], vectordot(forward, angleTrace["normal"])));
       dropAngles = vectortoangles(forward);
     } else {
       dropAngles = (0, tempAngle, 0);

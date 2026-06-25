@@ -5,7 +5,7 @@
 
 init() {}
 
-setturrettargetent() {
+setturrettargetEnt() {
   self endon("death");
   self endon("disconnect");
   thread func_C799();

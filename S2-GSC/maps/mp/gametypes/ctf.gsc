@@ -378,13 +378,13 @@ func_4D0B(param_00) {
 }
 
 func_282E(param_00, param_01) {
-  var_02 = getent("ctf_zone_" + param_01, "targetname");
+  var_02 = getEnt("ctf_zone_" + param_01, "targetname");
   if(!isDefined(var_02)) {
     common_scripts\utility::func_3809("No ctf_zone_" + param_01 + " trigger found in map.");
     return;
   }
 
-  var_03[0] = getent("ctf_flag_" + param_01, "targetname");
+  var_03[0] = getEnt("ctf_flag_" + param_01, "targetname");
   if(!isDefined(var_03[0])) {
     common_scripts\utility::func_3809("No ctf_flag_" + param_01 + " script_model found in map.");
     return;
@@ -465,7 +465,7 @@ func_282E(param_00, param_01) {
 }
 
 func_27D2(param_00, param_01) {
-  var_02 = getent("ctf_zone_" + param_01, "targetname");
+  var_02 = getEnt("ctf_zone_" + param_01, "targetname");
   var_03 = (0, 0, 0);
   if(param_01 == "allies") {
     if(isDefined(level.allies_ctf_flag_offset)) {

@@ -38,9 +38,9 @@ endgame_vox() {
       num = winner.zm_random_char;
     }
     if(num == 3) {
-      playsoundatposition("vox_plr_3_gameover_1", (0, 0, 0));
+      playSoundAtPosition("vox_plr_3_gameover_1", (0, 0, 0));
     } else {
-      playsoundatposition("vox_plr_3_gameover_0", (0, 0, 0));
+      playSoundAtPosition("vox_plr_3_gameover_0", (0, 0, 0));
     }
   }
 }
@@ -140,7 +140,7 @@ play_music_egg(player) {
   }
 }
 intro_vox_or_skit() {
-  playsoundatposition("evt_warp_in", (0, 0, 0));
+  playSoundAtPosition("evt_warp_in", (0, 0, 0));
   wait(3);
   players = get_players();
   if(players.size == 4 && randomintrange(0, 101) <= 10) {
@@ -156,7 +156,7 @@ intro_vox_or_skit() {
 }
 visual_trigger_vox(place) {
   wait(3);
-  struct = getstruct("vox_" + place, "targetname");
+  struct = getStruct("vox_" + place, "targetname");
   if(!isDefined(struct)) {
     return;
   }

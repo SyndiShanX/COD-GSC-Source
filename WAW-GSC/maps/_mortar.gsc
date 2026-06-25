@@ -556,9 +556,9 @@ setup_mortar_terrain() {
 
   if(isDefined(self.script_hidden)) {
     if(isDefined(self.script_hidden)) {
-      self.hidden_terrain = GetEnt(self.script_hidden, "targetname");
+      self.hidden_terrain = getEnt(self.script_hidden, "targetname");
     } else if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
-      self.hidden_terrain = GetEnt(self.terrain[0].target, "targetname");
+      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
     }
 
     if(isDefined(self.hidden_terrain)) {
@@ -566,7 +566,7 @@ setup_mortar_terrain() {
     }
   } else if(isDefined(self.has_terrain)) {
     if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
-      self.hidden_terrain = GetEnt(self.terrain[0].target, "targetname");
+      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
     }
 
     if(isDefined(self.hidden_terrain)) {
@@ -723,12 +723,12 @@ mortar_rumble_on_all_players(high_rumble_string, low_rumble_string, rumble_org, 
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playrumbleonentity(high_rumble_string);
+        players[i] playRumbleOnEntity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playrumbleonentity(low_rumble_string);
+        players[i] playRumbleOnEntity(low_rumble_string);
       }
     } else {
-      players[i] playrumbleonentity(high_rumble_string);
+      players[i] playRumbleOnEntity(high_rumble_string);
     }
   }
 }

@@ -711,7 +711,7 @@ func_13775(var_0) {
   for(;;) {
     if(func_9EED(var_0) && func_38F2(var_0)) {
       var_2 = scripts\engine\utility::flatten_vector(anglestoright(self gettagangles("j_head")));
-      var_3 = scripts\engine\utility::flatten_vector(vectornormalize(level.player getEye() - self gettagorigin("j_head")));
+      var_3 = scripts\engine\utility::flatten_vector(vectorNormalize(level.player getEye() - self gettagorigin("j_head")));
       var_4 = vectordot(var_2, var_3);
       if(var_4 >= 0.8) {
         break;

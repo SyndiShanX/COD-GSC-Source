@@ -26,7 +26,7 @@ mortarteam(spawners, node, mortar_targets, delay_base, delay_range) {
 }
 
 mortartrigger() {
-  spawner = getent(self.target, "targetname");
+  spawner = getEnt(self.target, "targetname");
   spawner endon("death");
   self waittill("trigger");
   spawner mortarspawner(self);
@@ -222,7 +222,7 @@ stop_mortar_if_player_nearby(node) {
         wait 0.1;
         self notify("stop_mortar");
         node notify("stop_mortar");
-        self anim_stopanimscripted();
+        self anim_stopanimScripted();
         self animcustom(::player_nearby_reaction_animcustom);
         break;
       }

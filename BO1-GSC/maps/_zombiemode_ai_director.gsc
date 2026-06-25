@@ -350,7 +350,7 @@ director_zombie_spawn() {
   }
 }
 director_zombie_manager() {
-  start_boss = getent("start_boss_spawner", "script_noteworthy");
+  start_boss = getEnt("start_boss_spawner", "script_noteworthy");
   if(isDefined(start_boss)) {
     while(true) {
       if(level.num_director_zombies < level.max_director_zombies) {
@@ -406,7 +406,7 @@ director_devgui_health() {
   }
 }
 director_reset_health(easy) {
-  players = getplayers();
+  players = getPlayers();
   num_players = players.size;
   self.max_damage_taken = level.director_max_damage_taken * num_players;
   if(is_true(easy)) {
@@ -532,7 +532,7 @@ director_watch_damage() {
   } else {
     level thread maps\_zombiemode_powerups::specific_powerup_drop("minigun", self.origin);
   }
-  forward = VectorNormalize(anglesToForward(self.angles));
+  forward = vectorNormalize(anglesToForward(self.angles));
   end_pos = self.origin - vector_scale(forward, 32);
   level thread maps\_zombiemode_powerups::specific_powerup_drop("free_perk", end_pos);
   level notify("quiet_on_the_set_achieved");
@@ -570,7 +570,7 @@ director_scream_in_water() {
     scream_anim = % ai_zombie_boss_nuke_react_coast;
     self thread director_scream_delay();
     self thread director_zombie_sprint_watcher("scream_anim");
-    self director_animscripted(scream_anim, "scream_anim");
+    self director_animScripted(scream_anim, "scream_anim");
     wait(3);
     self.water_scream = undefined;
   }
@@ -582,7 +582,7 @@ director_scream_delay() {
 }
 director_blur() {
   self endon("death");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     player ShellShock("electrocution", 1.7, true);
@@ -646,7 +646,7 @@ director_add_weapon() {
   self.light playLoopSound("zmb_director_light_docile_loop", 2);
   self.light.angles = self GetTagAngles("tag_light");
   self.light setModel("tag_origin");
-  self.light LinkTo(self, "tag_light");
+  self.light linkTo(self, "tag_light");
   wait_network_frame();
   wait_network_frame();
   self director_flip_light_flag();
@@ -812,7 +812,7 @@ director_zombie_check_player_proximity() {
     if(isDefined(self.performing_activation) && self.performing_activation) {
       break;
     }
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       dist = DistanceSquared(self.origin, players[i].origin);
       if(dist < level.director_zombie_proximity_wake) {
@@ -888,7 +888,7 @@ director_zombie_check_for_activation() {
   if(isDefined(level._audio_director_vox_play)) {
     self thread[[level._audio_director_vox_play]]("vox_director_slam", .25, true);
   }
-  self director_animscripted(aggro_anim, "aggro_anim", true);
+  self director_animScripted(aggro_anim, "aggro_anim", true);
   self.performing_activation = false;
   self.ground_hit = false;
   self.delay_time = undefined;
@@ -1008,8 +1008,8 @@ director_zombie_can_buff(zombie) {
   if(dist > range) {
     return false;
   }
-  forward = VectorNormalize(anglesToForward(self.angles));
-  zombie_dir = VectorNormalize(zombie.origin - self.origin);
+  forward = vectorNormalize(anglesToForward(self.angles));
+  zombie_dir = vectorNormalize(zombie.origin - self.origin);
   dot = VectorDot(forward, zombie_dir);
   if(dot < 0.5) {
     return false;
@@ -1033,7 +1033,7 @@ director_zombie_speed_buff(zombies, enrage_anim) {
     self thread[[level._audio_director_vox_play]]("vox_director_speed_buff", .25, true);
   }
   if(isDefined(enrage_anim)) {
-    self director_animscripted(enrage_anim, "enrage_anim");
+    self director_animScripted(enrage_anim, "enrage_anim");
   }
   level.director_speed_buff = director_zombie_get_num_speed_buff();
   speed_count = level.director_max_speed_buff - level.director_speed_buff;
@@ -1046,7 +1046,7 @@ director_zombie_speed_buff(zombies, enrage_anim) {
       zombies[i] thread zombie_speed_buff();
     }
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(DistanceSquared(self.origin, players[i].origin) <= 600 * 600) {
       players[i] thread maps\_zombiemode_audio::create_and_play_dialog("general", "react_sprinters");
@@ -1116,7 +1116,7 @@ director_zombie_electric_buff(zombies) {
   }
   hit_anim = % ai_zombie_boss_enrage_start_slamground_coast;
   self thread groundhit_fx_watcher("hit_anim");
-  self director_animscripted(hit_anim, "hit_anim");
+  self director_animScripted(hit_anim, "hit_anim");
   if(isDefined(level._audio_director_vox_play)) {
     self thread[[level._audio_director_vox_play]]("vox_director_electric_buff", .25, true);
   }
@@ -1125,7 +1125,7 @@ director_zombie_electric_buff(zombies) {
       zombies[i] thread zombie_set_electric_buff();
     }
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(DistanceSquared(self.origin, players[i].origin) <= 600 * 600) {
       players[i] thread maps\_zombiemode_audio::create_and_play_dialog("general", "react_sparkers");
@@ -1182,7 +1182,7 @@ director_zombie_ground_hit_think() {
       continue;
     }
     if(!self.ground_hit && GetTime() >= self.nextGroundHit) {
-      players = GetPlayers();
+      players = getPlayers();
       closeEnough = false;
       origin = self getEye();
       for(i = 0; i < players.size; i++) {
@@ -1250,8 +1250,8 @@ director_zombie_sprint_watcher(animname) {
       if(zombies[i] == self) {
         continue;
       }
-      forward = VectorNormalize(anglesToForward(self.angles));
-      zombie_dir = VectorNormalize(zombies[i].origin - self.origin);
+      forward = vectorNormalize(anglesToForward(self.angles));
+      zombie_dir = vectorNormalize(zombies[i].origin - self.origin);
       dot = VectorDot(forward, zombie_dir);
       if(dot < 0.5) {
         continue;
@@ -1352,7 +1352,7 @@ director_nuke_damage() {
   if(!isDefined(self.nuke_react)) {
     self.nuke_react = true;
     nuke_anim = % ai_zombie_boss_nuke_react_coast;
-    self director_animscripted(nuke_anim, "nuke_anim");
+    self director_animScripted(nuke_anim, "nuke_anim");
     self.nuke_react = undefined;
   }
 }
@@ -1391,12 +1391,12 @@ director_full_damage(inflictor, attacker, damage, flags, meansofdeath, weapon, v
 }
 director_zombie_default_enter_level() {
   playFX(level._effect["director_spawn"], self.origin);
-  playsoundatposition("zmb_bolt", self.origin);
+  playSoundAtPosition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
 }
 setup_player_damage_watchers() {
   flag_wait("all_players_connected");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i].player_damage_override = ::player_damage_watcher;
   }
@@ -1510,7 +1510,7 @@ director_humangun_hit_response(upgraded) {
       self notify("humangun_leave");
       self.ignoreall = true;
       self setclientflag(level._ZOMBIE_ACTOR_FLAG_DIRECTOR_DEATH);
-      exit = getstruct(self.water_trigger.target, "targetname");
+      exit = getStruct(self.water_trigger.target, "targetname");
       self thread director_leave_map(exit, true);
     } else {
       self director_humangun_react();
@@ -1698,14 +1698,14 @@ director_non_attacker(damage, weapon) {
   }
   return damage;
 }
-director_animscripted(director_anim, director_notify, finish_anim) {
+director_animScripted(director_anim, director_notify, finish_anim) {
   if(!is_true(self.finish_anim)) {
     if(is_true(finish_anim)) {
       self.finish_anim = true;
     }
     self.is_animscripted = true;
     time = getAnimLength(director_anim);
-    self animscripted(director_notify, self.origin, self.angles, director_anim, "normal", %body, 1, 0.1);
+    self animScripted(director_notify, self.origin, self.angles, director_anim, "normal", %body, 1, 0.1);
     wait(time);
     self.is_animscripted = undefined;
     self.finish_anim = undefined;

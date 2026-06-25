@@ -47,7 +47,7 @@
 #namespace tkdn_af_chase;
 
 function starting(str_skipto) {
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   tkdn_af_hill::function_a2015343(str_skipto);
   plane = namespace_b100dd86::function_5431431d();
   namespace_b100dd86::function_c8381339(plane, 1);
@@ -67,7 +67,7 @@ function starting(str_skipto) {
 function function_614083bb(str_skipto) {
   thread namespace_a052577e::function_79270d32();
   namespace_b100dd86::function_5aabc3fb();
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   thread namespace_a052577e::function_79270d32();
   tkdn_af_hill::function_a2015343(str_skipto);
   plane = namespace_b100dd86::function_5431431d();
@@ -125,7 +125,7 @@ function ri_door_en2_death_fallout_server(params) {
 }
 
 function main(str_skipto, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   if(b_starting) {
@@ -210,12 +210,12 @@ function function_269adc62(var_d36613f6) {
 function function_2ccc781e(str_skipto, b_starting) {
   vehicle::add_spawn_function_group("challenge_truck", "script_noteworthy", &function_2016824f);
   spawner::add_spawn_function_group("af_vh_rc_enemy", "targetname", &function_db378ce0);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   setDvar(#"hash_3d9a09e7ecea2271", 0);
   util::function_323d3227();
   player endon(#"death");
   level.player val::set(#"chase", "allowdeath", 0);
-  player linkto(level.chase_truck);
+  player linkTo(level.chase_truck);
   level.chase_truck vehicle::get_off_path();
   pathnode = getvehiclenode("rc_chase_start", "targetname");
   level.chase_truck thread vehicle::get_on_and_go_path(pathnode);
@@ -227,9 +227,9 @@ function function_2ccc781e(str_skipto, b_starting) {
   thread function_bc4a48ea();
   thread function_31c124f2();
   waitframe(1);
-  org = getent("rpg_guy_plane_spot", "script_noteworthy");
+  org = getEnt("rpg_guy_plane_spot", "script_noteworthy");
   level.plane_rpg_guy = spawner::simple_spawn_single("plane_rpg_guy");
-  level.plane_rpg_guy linkto(org, undefined, (0, 0, 0), (0, 180, 0));
+  level.plane_rpg_guy linkTo(org, undefined, (0, 0, 0), (0, 180, 0));
   level.plane_rpg_guy val::set(#"af_chase", "ignoreall", 1);
   level waittill(#"car_on_ground");
   level thread dialogue::radio("vox_cp_tdwn_07400_masn_ontheground_ee", undefined, 1);
@@ -273,7 +273,7 @@ function function_2ccc781e(str_skipto, b_starting) {
   level.rc_car makevehicleusable();
   level.rc_car useby(player);
   level.rc_car makevehicleunusable();
-  level.rc_car linkto(level.af_plane);
+  level.rc_car linkTo(level.af_plane);
   setDvar(#"hash_252e699c41531f1a", 2);
   array::add(level.var_2e151cca, level.plane_rpg_guy);
 
@@ -369,7 +369,7 @@ function function_9509c87f() {
 function function_761593b3() {
   level endon(#"hash_1177fa275536c828");
   level waittill(#"show_rc_hint");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread util::show_hint_text(#"hash_102900bc26caa616", undefined, "rcxd_stop_hint_controller", -1);
 
   while(true) {
@@ -398,7 +398,7 @@ function function_761593b3() {
 function function_7766538b() {
   level endon(#"rc_detonate");
   level flag::wait_till("af_start_crash");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player prompts::create(#"vehicle_attack", #"hash_6e490c4cf7210a63");
 
   while(true) {
@@ -454,7 +454,7 @@ function function_9555ada1() {
   if(isDefined(truck)) {
     debugaxis(truck.origin, truck.angles, 36);
 
-    var_d5843701 = vectornormalize(truck.origin + (0, 0, 200) - org);
+    var_d5843701 = vectorNormalize(truck.origin + (0, 0, 200) - org);
     var_9441d79a = anglesToForward(truck.angles);
     missile = level.player magicmissile(weapon, org, var_d5843701);
     missile missile_settarget(truck, (0, 0, 30));
@@ -464,7 +464,7 @@ function function_9555ada1() {
 
   while(!flag::get("af_start_crash")) {
     org = level.af_plane gettagorigin("tag_body_ramp_rear_lower_animate") + (0, 0, 60);
-    var_d5843701 = vectornormalize(level.player.origin + (0, 0, 100) - org);
+    var_d5843701 = vectorNormalize(level.player.origin + (0, 0, 100) - org);
     missile = level.player magicmissile(weapon, org, var_d5843701);
     wait randomfloatrange(3, 5);
   }
@@ -525,8 +525,8 @@ function function_f8223b2e() {
 function function_9d8f5cd3() {
   level endon(#"skip_grenade");
   level flag::wait_till("af_grenade_toss");
-  player = getplayers()[0];
-  var_12ded760 = level.player.origin + vectornormalize(anglesToForward(level.player.angles)) * 12;
+  player = getPlayers()[0];
+  var_12ded760 = level.player.origin + vectorNormalize(anglesToForward(level.player.angles)) * 12;
   var_99c3222f = getaiteamarray("axis");
 
   if(var_99c3222f.size > 0) {
@@ -535,7 +535,7 @@ function function_9d8f5cd3() {
 
   player dodamage(player.health * 0.8, player.origin);
   player setstance("prone");
-  player playrumbleonentity("damage_heavy");
+  player playRumbleOnEntity("damage_heavy");
   screenshake(player.origin, 4, 2, 3, 2.5, 0, -1, 0, 5, 3, 5, 2);
   player freezecontrolsallowlook(1);
   player val::set(#"af_knockdown", "allowdeath", 0);
@@ -562,22 +562,22 @@ function function_4c87c5cf(starting) {
     accel_time = 3;
   }
 
-  org moveto(start_pos.origin, 20, accel_time, 0);
-  org rotateto(start_pos.angles, 20, accel_time, 0);
+  org moveTo(start_pos.origin, 20, accel_time, 0);
+  org rotateTo(start_pos.angles, 20, accel_time, 0);
   thread function_b46ef638(20, "af_player_start_ride");
   snd::client_targetname(level.chase_truck, "af_truck_plr");
   snd::client_targetname(level.af_plane, "cargo_plane");
   snd::client_targetname(level.plane_mover, "cargo_plane_mover");
   level waittill(#"hash_6d8d592b136c4266");
-  org moveto(start_pos.origin, 3.5, 0, 1);
-  org rotateto(start_pos.angles, 3.5, 0, 1);
+  org moveTo(start_pos.origin, 3.5, 0, 1);
+  org rotateTo(start_pos.angles, 3.5, 0, 1);
   flag::wait_till("af_start_ride");
   level notify(#"skip_grenade");
   end_pos = struct::get("plane_chase_end_pos", "targetname");
   var_bf626e36 = 53.5;
   var_e973bd14 = 6.5;
-  org moveto(end_pos.origin, var_bf626e36 + var_e973bd14, 10, 0);
-  org rotateto(end_pos.angles, var_bf626e36 + var_e973bd14, 10, 0);
+  org moveTo(end_pos.origin, var_bf626e36 + var_e973bd14, 10, 0);
+  org rotateTo(end_pos.angles, var_bf626e36 + var_e973bd14, 10, 0);
   level endon(#"hash_2c1821278dd7ecb1");
   wait var_bf626e36;
 
@@ -599,13 +599,13 @@ function function_e585ec0d() {
   org = level.plane_mover;
   end_pos = struct::get("plane_chase_end_pos", "targetname");
   start_pos = struct::get("rc_car_plane_start_pos", "targetname");
-  org moveto(start_pos.origin, 0.01);
-  org rotateto(start_pos.angles, 0.01);
+  org moveTo(start_pos.origin, 0.01);
+  org rotateTo(start_pos.angles, 0.01);
   org waittilltimeout(0.2, #"movedone");
   var_bf626e36 = 30;
   var_e973bd14 = 12;
-  org moveto(end_pos.origin, var_bf626e36 + var_e973bd14, 1);
-  org rotateto(end_pos.angles, var_bf626e36 + var_e973bd14, 1);
+  org moveTo(end_pos.origin, var_bf626e36 + var_e973bd14, 1);
+  org rotateTo(end_pos.angles, var_bf626e36 + var_e973bd14, 1);
   wait var_bf626e36;
   level flag::set("af_plane_raise_gate");
   level flag::set("af_plane_takeoff");
@@ -650,7 +650,7 @@ function function_3bbaf145() {
 }
 
 function function_3a97edf() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level waittill(#"rc_detonate");
   function_41c091de(player.origin);
   self waittill(#"hash_474a6dde316a444d");
@@ -718,24 +718,24 @@ function function_d9fae56b() {
   trigs = getEntArray("get_in_truck_trig", "targetname");
 
   foreach(trig in trigs) {
-    trig enablelinkto();
-    trig linkto(chase_truck);
+    trig enablelinkTo();
+    trig linkTo(chase_truck);
   }
 
   level.chase_truck = chase_truck;
   level.chase_truck val::set(#"chase", "allowdeath", 0);
   snd::client_targetname(level.chase_truck, "af_truck_plr");
   waitframe(1);
-  var_87816bd7 = getent("bronco_probe", "targetname");
+  var_87816bd7 = getEnt("bronco_probe", "targetname");
 
   if(isDefined(var_87816bd7)) {
-    var_87816bd7 linkto(level.chase_truck, "tag_body_animate", (0, 0, 44), (0, 0, 0));
+    var_87816bd7 linkTo(level.chase_truck, "tag_body_animate", (0, 0, 44), (0, 0, 0));
   }
 
-  var_c4042c90 = getent("bronco_bed_probe", "targetname");
+  var_c4042c90 = getEnt("bronco_bed_probe", "targetname");
 
   if(isDefined(var_c4042c90)) {
-    var_c4042c90 linkto(level.chase_truck, "tag_body_animate", (-48, 0, 56), (0, 0, 0));
+    var_c4042c90 linkTo(level.chase_truck, "tag_body_animate", (-48, 0, 56), (0, 0, 0));
   }
 
   level.chase_truck vehicle::lights_on();
@@ -826,7 +826,7 @@ function function_b90ebd9a() {
   objectives::function_67f87f80("af_chase_plane", [level.af_plane], #"hash_2b84cc72687b168a");
   level.player thread function_f8223b2e();
   level waittill(#"hash_7dd48b5765cd3020");
-  level.woods stopanimscripted();
+  level.woods stopanimScripted();
   level.chase_truck thread scene::play("scene_tkd_hit3_chase");
   level.chase_truck thread function_8d9f9fd7();
   waitframe(1);
@@ -1057,7 +1057,7 @@ function function_40c45b6() {
   self thread monitor_death();
   driver = self.var_761c973.riders[#"driver"];
   self thread function_b5d668a4(driver);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self thread function_367b3229(player);
   waitframe(1);
   self vehicle::lights_on();
@@ -1095,7 +1095,7 @@ function function_ba23e9b(player, var_b8ef2e) {
     var_5fb21670 = right_vec;
   }
 
-  var_5fb21670 = vectornormalize(var_5fb21670);
+  var_5fb21670 = vectorNormalize(var_5fb21670);
   var_5fb21670 += (0, 0, 1);
   var_5fb21670 *= 100;
   self launchvehicle(var_5fb21670, var_43939108, 1, 1);
@@ -1145,7 +1145,7 @@ function function_b5d668a4(passenger) {
 
   level.player playhitmarker(undefined, 5, undefined, 1);
   passenger notify(#"fake_death");
-  passenger stopanimscripted();
+  passenger stopanimScripted();
 
   if(isalive(self)) {
     self thread scene::play("scene_tkd_hit3_chase_jeep_driver", "death", [passenger]);
@@ -1186,12 +1186,12 @@ function delete_riders(launch = 0) {
         rider notify(#"fake_death");
 
         if(launch) {
-          rider stopanimscripted();
+          rider stopanimScripted();
           rider val::set("chase_enemy", "allowdeath", 1);
           rider unlink();
           rider startragdoll(1);
           launch_force = rider.origin - self.origin;
-          launch_force = (vectornormalize(launch_force) + anglestoup(self.angles)) * 50;
+          launch_force = (vectorNormalize(launch_force) + anglestoup(self.angles)) * 50;
           rider launchragdoll(launch_force);
           continue;
         }
@@ -1289,10 +1289,10 @@ function function_3c7a908d(b_starting) {
   level.chase_truck thread scene::play("scene_tkd_hit3_chase", "loop");
   waitframe(1);
   level.player enableweapons();
-  level.player stopanimscripted(0, 1);
+  level.player stopanimScripted(0, 1);
   level.rc_car solid();
   level.rc_car unlink();
-  level.rc_car stopanimscripted(0, 1);
+  level.rc_car stopanimScripted(0, 1);
   level.player setplayerangles((0, 0, 0));
   level.rc_car makevehicleusable();
   waitframe(1);
@@ -1305,7 +1305,7 @@ function function_3c7a908d(b_starting) {
     push = 36;
   }
 
-  level.rc_car launchvehicle(vectornormalize(anglesToForward(var_a00e7b18)) * push);
+  level.rc_car launchvehicle(vectorNormalize(anglesToForward(var_a00e7b18)) * push);
   wait 0.5;
   waitframe(1);
 
@@ -1339,7 +1339,7 @@ function function_53e16f01(params) {
 
   var_d1148f2f = 1000;
   screenshake(self.origin, 2, 2, 6, 1, 0, -1, 0, 8, 4, 2, 2);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 
   if(isDefined(params.entity) && !(isDefined(params.entity.targetname) && params.entity.targetname == "crater_clip")) {
     fwd_vec = anglesToForward(self.angles);
@@ -1347,7 +1347,7 @@ function function_53e16f01(params) {
     var_9602c3bf = params.normal;
 
     if(dot < 0) {
-      var_9602c3bf = vectornormalize(params.normal + fwd_vec);
+      var_9602c3bf = vectorNormalize(params.normal + fwd_vec);
     }
 
     knockback = -5;
@@ -1368,14 +1368,14 @@ function function_bc4a48ea() {
 
   while(!level flag::get("af_plane_raise_gate") && isalive(level.plane_rpg_guy)) {
     org = level.plane_rpg_guy gettagorigin("tag_flash");
-    var_b26e76e3 = level.rc_car.origin + (vectornormalize(anglesToForward(level.rc_car.angles)) + vectornormalize(org - level.rc_car.origin) * 0.5) * 750;
+    var_b26e76e3 = level.rc_car.origin + (vectorNormalize(anglesToForward(level.rc_car.angles)) + vectorNormalize(org - level.rc_car.origin) * 0.5) * 750;
     var_b26e76e3 = (var_b26e76e3[0], var_b26e76e3[1], level.rc_car.origin[2]);
 
     if(distancesquared(var_b26e76e3, org) < 40000) {
       var_b26e76e3 = level.rc_car.origin;
     }
 
-    var_d5843701 = vectornormalize(var_b26e76e3 - org);
+    var_d5843701 = vectorNormalize(var_b26e76e3 - org);
     missile = level.player magicmissile(weapon, org, var_d5843701);
     playFXOnTag(#"hash_338c0ef8c7e88199", level.plane_rpg_guy, "tag_flash");
     missile thread function_e652a247();
@@ -1386,7 +1386,7 @@ function function_bc4a48ea() {
 function function_e652a247() {
   level endon(#"death");
   level endon(#"af_plane_raise_gate");
-  getplayers()[0] endon(#"death");
+  getPlayers()[0] endon(#"death");
   var_74fc3359 = struct::get("runway_center", "targetname");
   self waittill(#"death");
 
@@ -1397,7 +1397,7 @@ function function_e652a247() {
   snd::play("wpn_tkd_chase_rpg_imp", self);
   crater setscale(0.15);
   crater show();
-  clip = getent("crater_clip", "targetname");
+  clip = getEnt("crater_clip", "targetname");
 
   if(isDefined(clip) && isDefined(crater)) {
     clip.origin = crater.origin;
@@ -1430,7 +1430,7 @@ function function_c6a4d54b() {
   }
 
   org = util::spawn_model("tag_origin", level.af_plane.origin, (0, 0, 0));
-  org linkto(level.af_plane, undefined, (500, y_offset, -15), (0, 0, 0));
+  org linkTo(level.af_plane, undefined, (500, y_offset, -15), (0, 0, 0));
   veh = vehicle::simple_spawn_single_and_drive("skid_veh");
   snd::client_targetname(veh, "skid_veh");
   thread namespace_a052577e::function_32f20d13(veh);
@@ -1573,7 +1573,7 @@ function function_db378ce0() {
 
     self.vehicle thread scene::play(anim_scene, "idle", [self]);
     org = util::spawn_model("tag_origin", self.vehicle.origin, self.vehicle.angles);
-    org linkto(self.vehicle, var_fa4b90bc, (0, 0, 0), (0, 0, 0));
+    org linkTo(self.vehicle, var_fa4b90bc, (0, 0, 0), (0, 0, 0));
     self thread function_f6fcf011(org, anim_scene);
   }
 
@@ -1599,7 +1599,7 @@ function function_db378ce0() {
         }
       }
 
-      self stopanimscripted();
+      self stopanimScripted();
       org scene::play(anim_scene, var_6eeb49c8, [self]);
 
       if(self.health > 1) {
@@ -1678,7 +1678,7 @@ function function_f6fcf011(org, scene) {
     org scene::play(scene, var_f1fd7a1c, [self]);
 
     if(isalive(self)) {
-      self stopanimscripted();
+      self stopanimScripted();
       self val::set("chase_enemy", "allowdeath", 1);
       self deletedelay();
     }
@@ -1875,7 +1875,7 @@ function function_6e899b0e() {
         level.player setstance("stand");
         waitframe(1);
         level.player dontinterpolate();
-        level.player playerlinkto(level.chase_truck, "tag_bed");
+        level.player playerlinkTo(level.chase_truck, "tag_bed");
         level.player allowcrouch(1);
         return;
       }
@@ -1912,7 +1912,7 @@ function function_a75da416() {
   level endon(#"hash_2c1821278dd7ecb1");
   self endon(#"death");
   var_f4ba5757 = getweapon("ar_standard_t9_noballistics");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(!isDefined(level.var_89cb0a79)) {
     waitframe(1);
@@ -1945,11 +1945,11 @@ function function_ab88cc4() {
 }
 
 function function_2016824f() {
-  trig = getent(self.linkto, "linkname");
+  trig = getEnt(self.linkto, "linkname");
 
   if(isDefined(trig)) {
-    trig enablelinkto();
-    trig linkto(self);
+    trig enablelinkTo();
+    trig linkTo(self);
   }
 }
 

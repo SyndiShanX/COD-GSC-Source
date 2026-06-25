@@ -95,12 +95,12 @@ chaseenemydlc(var_0) {
       var_13 = 1;
     }
 
-    self scragentsetgoalradius(self.defaultgoalradius);
+    self scragentsetgoalRadius(self.defaultgoalradius);
   } else if(!scripts\mp\agents\zombie\zombie_util::func_8C39(var_3, self.var_B640)) {
-    self scragentsetgoalradius(self.defaultgoalradius);
+    self scragentsetgoalRadius(self.defaultgoalradius);
     var_13 = 1;
   } else {
-    self scragentsetgoalradius(var_5);
+    self scragentsetgoalRadius(var_5);
 
     if(var_12 <= var_6) {
       var_9.origin = self.origin;

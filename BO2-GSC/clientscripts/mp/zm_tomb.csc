@@ -431,7 +431,7 @@ player_staff_charge_rumble(localclientnum, str_rumble) {
   n_max_time = 10.0;
 
   while(true) {
-    self playrumbleonentity(localclientnum, str_rumble);
+    self playRumbleOnEntity(localclientnum, str_rumble);
     wait 0.1;
   }
 }
@@ -517,7 +517,7 @@ zombie_soul_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   e_fx setModel("tag_origin");
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(v_dest + vectorscale((0, 0, 1), 5.0), 0.5);
+  e_fx moveTo(v_dest + vectorscale((0, 0, 1), 5.0), 0.5);
   e_fx waittill("movedone");
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_impact");
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
@@ -638,11 +638,11 @@ switch_cooldown_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   level notify("stop_cooldown_fx");
 
   if(newval == 1) {
-    cooldown_struct = getstruct("cooldown_steam_1", "targetname");
+    cooldown_struct = getStruct("cooldown_steam_1", "targetname");
   } else if(newval == 2) {
-    cooldown_struct = getstruct("cooldown_steam_2", "targetname");
+    cooldown_struct = getStruct("cooldown_steam_2", "targetname");
   } else if(newval == 3) {
-    cooldown_struct = getstruct("cooldown_steam_3", "targetname");
+    cooldown_struct = getStruct("cooldown_steam_3", "targetname");
   }
 
   if(isDefined(cooldown_struct)) {
@@ -771,15 +771,15 @@ player_rumble_and_shake(localclientnum, oldval, newval, bnewent, binitialsnap, f
     self thread player_continuous_rumble(localclientnum, 2);
   } else if(newval == 3) {
     self earthquake(0.6, 1.5, self.origin, 100);
-    self playrumbleonentity(localclientnum, "artillery_rumble");
+    self playRumbleOnEntity(localclientnum, "artillery_rumble");
     level thread clientscripts\mp\zm_tomb_amb::snd_shake_hvy();
   } else if(newval == 2) {
     self earthquake(0.3, 1.5, self.origin, 100);
-    self playrumbleonentity(localclientnum, "shotgun_fire");
+    self playRumbleOnEntity(localclientnum, "shotgun_fire");
     level thread clientscripts\mp\zm_tomb_amb::snd_shake_med();
   } else if(newval == 1) {
     self earthquake(0.1, 1.0, self.origin, 100);
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
     level thread clientscripts\mp\zm_tomb_amb::snd_shake_lgt();
   } else if(newval == 6)
     self thread player_continuous_rumble(localclientnum, 1, 0);
@@ -804,14 +804,14 @@ player_continuous_rumble(localclientnum, rumble_level, shake_camera) {
           self earthquake(0.2, 1.0, self.origin, 100);
         }
 
-        self playrumbleonentity(localclientnum, "reload_small");
+        self playRumbleOnEntity(localclientnum, "reload_small");
         wait 0.05;
       } else {
         if(shake_camera) {
           self earthquake(0.3, 1.0, self.origin, 100);
         }
 
-        self playrumbleonentity(localclientnum, "damage_light");
+        self playRumbleOnEntity(localclientnum, "damage_light");
       }
     }
 
@@ -1122,7 +1122,7 @@ foot_print_box_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   e_fx setModel("tag_origin");
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(s_box.origin, 1);
+  e_fx moveTo(s_box.origin, 1);
   e_fx waittill("movedone");
   playSound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");

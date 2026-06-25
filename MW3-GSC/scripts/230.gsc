@@ -464,7 +464,7 @@ _id_1B23() {
   var_0 = self playerads();
 
   if(var_0 == 1 && getdvarint("scr_cinematic_autofocus")) {
-    var_1 = vectornormalize(anglesToForward(self getplayerangles()));
+    var_1 = vectorNormalize(anglesToForward(self getplayerangles()));
     var_2 = bulletTrace(self getEye(), self getEye() + var_1 * 100000, 1, self);
     var_3 = getaiarray();
     var_4 = 10000;
@@ -476,7 +476,7 @@ _id_1B23() {
 
     for(var_10 = 0; var_10 < var_3.size; var_10++) {
       var_11 = var_3[var_10].origin;
-      var_12 = vectornormalize(var_11 - var_6);
+      var_12 = vectorNormalize(var_11 - var_6);
       var_13 = anglesToForward(var_7);
       var_14 = vectordot(var_13, var_12);
 
@@ -524,7 +524,7 @@ _id_1B24() {
 
   var_1 = self getEye();
   var_2 = self getplayerangles();
-  var_3 = vectornormalize(anglesToForward(var_2));
+  var_3 = vectorNormalize(anglesToForward(var_2));
   var_4 = bulletTrace(var_1, var_1 + var_3 * 8192, 1, self, 1);
   var_5 = getaiarray("axis");
   var_6 = self getcurrentweapon();
@@ -538,7 +538,7 @@ _id_1B24() {
   var_8 = -1;
 
   for(var_9 = 0; var_9 < var_5.size; var_9++) {
-    var_10 = vectornormalize(var_5[var_9].origin - var_1);
+    var_10 = vectorNormalize(var_5[var_9].origin - var_1);
     var_11 = vectordot(var_3, var_10);
 
     if(var_11 < 0.923) {
@@ -596,7 +596,7 @@ _id_1B25(var_0, var_1, var_2, var_3, var_4) {
   var_7 = 2400;
 
   for(var_8 = 0; var_8 < var_1.size; var_8++) {
-    var_9 = vectornormalize(var_1[var_8].origin - var_2);
+    var_9 = vectorNormalize(var_1[var_8].origin - var_2);
     var_10 = vectordot(var_3, var_9);
 
     if(var_10 < 0.923) {

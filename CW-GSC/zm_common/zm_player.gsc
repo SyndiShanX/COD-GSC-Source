@@ -273,7 +273,7 @@ function player_track_ammo_count() {
 
 function spawn_vo() {
   wait 1;
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size > 1) {
     player = array::random(players);
@@ -553,7 +553,7 @@ function function_8ef51109(var_fb6fa3e1, var_bbbf9a69) {
   if(!function_3799b373(var_fb6fa3e1, var_bbbf9a69) && !zm_utility::function_91403f47()) {
     if(zm_trial::is_trial_mode()) {
       var_57807cdc = [];
-      a_e_players = getplayers();
+      a_e_players = getPlayers();
 
       foreach(e_player in a_e_players) {
         if(var_fb6fa3e1 === e_player) {
@@ -584,7 +584,7 @@ function function_3799b373(var_fb6fa3e1, var_bbbf9a69 = 0) {
     return true;
   }
 
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   var_7ff2e79a = 0;
   var_2af2f14d = 0;
 
@@ -1245,7 +1245,7 @@ function set_third_person(value) {
 
 function last_stand_revive() {
   level endon(#"between_round_over");
-  players = getplayers();
+  players = getPlayers();
   laststand_count = 0;
 
   foreach(player in players) {
@@ -1271,7 +1271,7 @@ function spectators_respawn() {
   }
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       e_player = players[i];
@@ -1385,7 +1385,7 @@ function check_for_valid_spawn_near_team(revivee, return_struct) {
     return spawn_location;
   }
 
-  players = getplayers();
+  players = getPlayers();
   spawn_points = zm_gametype::get_player_spawns_for_gametype();
   closest_group = undefined;
   closest_distance = 100000000;
@@ -1586,7 +1586,7 @@ function check_for_valid_spawn_within_range(revivee, v_position, return_struct, 
 
 function get_players_on_team(exclude) {
   teammates = [];
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i].spawn_side == self.spawn_side && !isDefined(players[i].revivetrigger) && players[i] != exclude) {
@@ -1598,7 +1598,7 @@ function get_players_on_team(exclude) {
 }
 
 function get_safe_breadcrumb_pos(player) {
-  players = getplayers();
+  players = getPlayers();
   valid_players = [];
 
   for(i = 0; i < players.size; i++) {
@@ -1634,7 +1634,7 @@ function play_door_dialog() {
 
   while(true) {
     waitframe(1);
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       dist = distancesquared(players[i].origin, self.origin);
@@ -1776,7 +1776,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
 
     if(smeansofdeath != "MOD_FALLING") {
       if(is_true(eattacker.is_zombie) || isPlayer(eattacker)) {
-        self playrumbleonentity("damage_heavy");
+        self playRumbleOnEntity("damage_heavy");
       }
 
       if(eattacker.archetype === #"zombie") {
@@ -1948,7 +1948,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
     return finaldamage;
   }
 
-  if(getplayers().size == 1 && level flag::get("solo_game")) {
+  if(getPlayers().size == 1 && level flag::get("solo_game")) {
     if(isDefined(level.check_end_solo_game_override) && [[level.check_end_solo_game_override]]()) {
       return finaldamage;
     } else {
@@ -2133,7 +2133,7 @@ function player_intermission() {
     for(i = 0; i < points.size; i++) {
       point = points[i];
       nextpoint = points[i + 1];
-      self setorigin(point.origin);
+      self setOrigin(point.origin);
       self setplayerangles(point.angles);
       wait 0.15;
       self notify(#"player_intermission_spawned");

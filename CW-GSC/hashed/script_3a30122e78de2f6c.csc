@@ -78,7 +78,7 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(e_fx) && isDefined(capture_point)) {
     n_time = distance(e_fx.origin, capture_point.origin) / 400;
-    e_fx moveto(capture_point.origin, n_time);
+    e_fx moveTo(capture_point.origin, n_time);
     e_fx waittill(#"movedone");
   }
 

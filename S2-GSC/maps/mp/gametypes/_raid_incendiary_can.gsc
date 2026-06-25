@@ -29,7 +29,7 @@ spawnandattachcan() {
   var_00 = spawn("script_model", self.var_116);
   var_00 setModel("ger_jerry_can_01_gas_raid_projectile");
   var_01 = spawn("trigger_radius", var_00.var_116, 0, 48, 20);
-  var_01 enablelinkto();
+  var_01 enablelinkTo();
   var_01.var_66F0 = 1;
   var_02 = [var_00];
   var_03 = maps\mp\gametypes\_gameobjects::func_27D6(game["attackers"], var_01, var_02, (0, 0, 0), 1, 1);
@@ -374,8 +374,8 @@ throwphysicscan(param_00, param_01) {
   var_06 = (clamp(var_06[0], -85, 85), var_06[1], var_06[2]);
   var_07 = anglesToForward(var_06);
   var_08 = param_00 getvelocity();
-  var_09 = vectornormalize((var_07[0], var_07[1], 0));
-  var_0A = vectornormalize((var_08[0], var_08[1], 0));
+  var_09 = vectorNormalize((var_07[0], var_07[1], 0));
+  var_0A = vectorNormalize((var_08[0], var_08[1], 0));
   var_0B = 0;
   if(vectordot(var_09, var_0A) >= 0.42 && length(var_08) > 120) {
     var_0C = 1;
@@ -468,7 +468,7 @@ canseeincendiarycan(param_00, param_01) {
 
   var_09 = param_00.var_116 - self.var_9D65.var_116;
   var_0A = common_scripts\utility::func_3D5D(var_09);
-  var_0B = vectornormalize(var_0A);
+  var_0B = vectorNormalize(var_0A);
   var_0C = var_0B * 5;
   foreach(var_0E in var_04) {
     var_0F = param_00.var_116 + (0, 0, 10);
@@ -494,7 +494,7 @@ incendiarycandisable() {
 incendiarycanitemenable() {
   maps\mp\gametypes\_gameobjects::func_365D();
   self.var_9D65.var_116 = self.var_A582[0].var_116;
-  self.var_9D65 linkto(self.var_A582[0]);
+  self.var_9D65 linkTo(self.var_A582[0]);
   maps\mp\gametypes\_gameobjects::func_8A60("any");
 }
 
@@ -538,7 +538,7 @@ monitorfiredamage(param_00, param_01, param_02, param_03, param_04) {
   var_06 = 0;
   var_07 = anglesToForward(param_01);
   var_07 = (var_07[0], var_07[1], 0);
-  var_07 = vectornormalize(var_07);
+  var_07 = vectorNormalize(var_07);
   while(var_06 < 12) {
     foreach(var_09 in level.var_744A) {
       if(function_0279(var_09)) {

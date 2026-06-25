@@ -215,7 +215,7 @@ function player_hud_update(names, scores) {
 }
 
 function bubblesort_players() {
-  players = getplayers();
+  players = getPlayers();
   while(true) {
     swapped = 0;
     for(i = 1; i < players.size; i++) {
@@ -337,7 +337,7 @@ function player_world_icon_update() {
 }
 
 function world_icon_update() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     player player_world_icon_update();
   }
@@ -435,7 +435,7 @@ function bwars_update_scores() {
       }
     }
     level bwars_scoreboard_update();
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       player globallogic::checkscorelimit();
     }

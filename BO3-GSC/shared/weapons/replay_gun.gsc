@@ -84,7 +84,7 @@ function get_a_target(weapon) {
     if(test_range > weapon.lockonmaxrange || test_range < weapon.lockonminrange) {
       continue;
     }
-    normal = vectornormalize(testorigin - origin);
+    normal = vectorNormalize(testorigin - origin);
     dot = vectordot(forward, normal);
     if(0 > dot) {
       continue;

@@ -10,7 +10,7 @@ func_8274() {
   }
 
   if(isDefined(self.var_01A2)) {
-    var_00 = getent(self.var_01A2).var_0116;
+    var_00 = getEnt(self.var_01A2).var_0116;
   } else {
     var_00 = "undefined";
   }

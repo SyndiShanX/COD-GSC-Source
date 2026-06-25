@@ -34,7 +34,7 @@ fix_sab_bomb() {
 
 delete_botconnect_clip() {
   for(;;) {
-    var_0 = getent("ambush_botconnect_delete_on_load", "targetname");
+    var_0 = getEnt("ambush_botconnect_delete_on_load", "targetname");
 
     if(isDefined(var_0)) {
       var_0 delete();

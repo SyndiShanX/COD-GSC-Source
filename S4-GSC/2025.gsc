@@ -107,7 +107,7 @@ _id_EEC0() {
     var_0 = _id_EEBB(self._id_EEB5.target);
 
     if(isDefined(var_0)) {
-      self._id_EEB5._id_9144 moveto(var_0, 0.05);
+      self._id_EEB5._id_9144 moveTo(var_0, 0.05);
     }
   }
 

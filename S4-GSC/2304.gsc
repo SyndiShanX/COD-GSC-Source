@@ -1417,7 +1417,7 @@ _id_35C9(var_0, var_1, var_2) {
 
 _id_35B6(var_0, var_1, var_2) {
   var_3 = _id_0009::_id_1C63("player_pushed", "player_pushed");
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = _func_000B(var_5[1] - self.angles[1]);
   var_7 = _id_08FC::_id_10FE8(var_6);

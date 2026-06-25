@@ -244,7 +244,7 @@ sentry_initSentry(sentryType, owner) {
       self.laser_on = false;
 
       killCamEnt = spawn("script_model", self GetTagOrigin("tag_laser"));
-      killCamEnt LinkTo(self);
+      killCamEnt linkTo(self);
       self.killCamEnt = killCamEnt;
       self.killCamEnt SetScriptMoverKillCam("explosive");
       break;

@@ -61,13 +61,13 @@ function function_9de162de(str_objective) {
   level flag::set("flag_apt_near_front_door");
   level thread function_1610ce5e();
   level thread function_be8d91b2();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player setmovespeedscale(0.5);
   player val::set("apartment", "allow_sprint", 0);
   windows::lock("apt_bedroom_window", "script_noteworthy");
   doors::close("tgt_apt_front_door");
   doors::lock("tgt_apt_front_door");
-  getent("tgt_apt_front_door", "targetname").var_aff33935 = 0;
+  getEnt("tgt_apt_front_door", "targetname").var_aff33935 = 0;
 }
 
 function function_b3837ddc(str_objective, b_starting) {
@@ -84,7 +84,7 @@ function function_b3837ddc(str_objective, b_starting) {
   level thread namespace_11998b8f::function_25120710();
   level thread function_d62ceccf();
   level thread function_c0a7c66();
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     level thread namespace_afd0968c::function_36a9bec7(b_starting);
@@ -222,9 +222,9 @@ function function_1610ce5e() {
   }
 
   level.var_3559e9e animation::first_frame("z_stk_apt_front_door_entry_wife_answers_phone", level.var_54b83d35);
-  kitchen_window_right_closed = getent("kitchen_window_right_closed", "targetname");
+  kitchen_window_right_closed = getEnt("kitchen_window_right_closed", "targetname");
   kitchen_window_right_closed hide();
-  kitchen_window_left_closed = getent("kitchen_window_left_closed", "targetname");
+  kitchen_window_left_closed = getEnt("kitchen_window_left_closed", "targetname");
   kitchen_window_left_closed hide();
   level.var_49a292bb animation::last_frame("z_stk_surveillance_desk_kraus_exit", level.var_bd5c9b86);
 }
@@ -233,21 +233,21 @@ function function_a6a7797f(a_ents) {
   level.var_7d6bf2d4 = a_ents[#"hash_475ee55621b83ca0"];
   level.var_6a64a507 = util::spawn_model("weapon_wm_m1911_composite");
   level.var_6a64a507 hidepart("j_mag2", "weapon_wm_m1911_composite");
-  level.var_6a64a507 linkto(level.var_7d6bf2d4, "j_prop_1", (0, 0, 0), (0, 0, 270));
+  level.var_6a64a507 linkTo(level.var_7d6bf2d4, "j_prop_1", (0, 0, 0), (0, 0, 270));
 }
 
 function function_fb12384e() {
   level.var_54b83d35 = struct::get("tag_align_target_apt_first_floor", "targetname");
   level.var_bd5c9b86 = struct::get("tag_align_target_apt_second_floor", "targetname");
-  level.apt_couch_pillow = getent("apt_couch_pillow", "targetname");
+  level.apt_couch_pillow = getEnt("apt_couch_pillow", "targetname");
   level.apt_couch_pillow.animname = "apt_pillow";
-  level.apt_phone = getent("apt_phone", "targetname");
+  level.apt_phone = getEnt("apt_phone", "targetname");
   level.apt_phone.animname = "apt_phone";
-  level.apt_nightstand = getent("apt_nightstand", "targetname");
+  level.apt_nightstand = getEnt("apt_nightstand", "targetname");
   level.apt_nightstand.animname = "apt_nightstand";
-  level.apt_kettle = getent("apt_kettle", "targetname");
+  level.apt_kettle = getEnt("apt_kettle", "targetname");
   level.apt_kettle.animname = "apt_kettle";
-  level.apt_umbrella = getent("apt_umbrella", "targetname");
+  level.apt_umbrella = getEnt("apt_umbrella", "targetname");
   level.apt_umbrella.animname = "apt_umbrella";
   scene::add_scene_func("aib_vign_stakeout_apt_kraus", &function_a6a7797f, "init");
   scene::add_scene_func("cin_stakeout_apt_bodycarry_pickup_apt_gl_exit", &function_7adcc91a, "done");
@@ -259,12 +259,12 @@ function function_fb12384e() {
   level.var_89f4e16c = doors::function_73f09315("tgt_apt_master_bedroom_door");
   level.var_3cb475ae = doors::function_73f09315("tgt_apt_child_bedroom_door");
   level.var_78cfbe5a = doors::function_73f09315("apt_door_lower_bedroom");
-  level.var_bb05e8f5 = getent("darkroom_hidden_door", "targetname");
+  level.var_bb05e8f5 = getEnt("darkroom_hidden_door", "targetname");
   var_598a701b = struct::get("secret_door_pos", "targetname");
-  level.var_bb05e8f5 moveto(var_598a701b.origin, 0.05, 0, 0);
-  var_617f3755 = getent("secret_wall_panel", "targetname");
+  level.var_bb05e8f5 moveTo(var_598a701b.origin, 0.05, 0, 0);
+  var_617f3755 = getEnt("secret_wall_panel", "targetname");
   var_ee7f9f95 = struct::get("secret_wall_panel_pos_01", "targetname");
-  var_617f3755 moveto(var_ee7f9f95.origin, 0.05, 0, 0);
+  var_617f3755 moveTo(var_ee7f9f95.origin, 0.05, 0, 0);
   level flag::wait_till("apartment_2_done");
   waitframe(1);
 
@@ -312,13 +312,13 @@ function function_fb12384e() {
 }
 
 function function_7fc4cb95() {
-  kitchen_window_right_closed = getent("kitchen_window_right_closed", "targetname");
+  kitchen_window_right_closed = getEnt("kitchen_window_right_closed", "targetname");
   kitchen_window_right_closed show();
-  kitchen_window_left_closed = getent("kitchen_window_left_closed", "targetname");
+  kitchen_window_left_closed = getEnt("kitchen_window_left_closed", "targetname");
   kitchen_window_left_closed show();
-  kitchen_window_right_open = getent("kitchen_window_right_open", "targetname");
+  kitchen_window_right_open = getEnt("kitchen_window_right_open", "targetname");
   kitchen_window_right_open delete();
-  kitchen_window_left_open = getent("kitchen_window_left_open", "targetname");
+  kitchen_window_left_open = getEnt("kitchen_window_left_open", "targetname");
   kitchen_window_left_open delete();
 }
 
@@ -334,7 +334,7 @@ function function_7adcc91a(a_ents) {
 
 function function_328da7d3() {
   videoprime("cp_ger_stakeout_apt_tv");
-  e_vol = getent("vol_apt_upper_level", "targetname");
+  e_vol = getEnt("vol_apt_upper_level", "targetname");
   returned = level flag::wait_till_any(array("flag_start_apt_tv", "flag_start_apt_tv_upper"));
   level.player thread namespace_78e9b80::function_15eaa2db(undefined, undefined, "flag_player_approached_flashback_TV", "flag_player_not_near_living_room", "flashback_tv_lookat", undefined, "lgt_exp_flashback_tv", #"hash_58df9478d677bb38", struct::get("flashback_tv_lookat"));
 
@@ -423,8 +423,8 @@ function function_3cbcb275() {
   self dialogue::function_47b06180();
   self thread function_c243a96a();
   self thread function_bd346448();
-  player = getplayers()[0];
-  dirtoenemy = vectornormalize(player.origin - self.origin);
+  player = getPlayers()[0];
+  dirtoenemy = vectorNormalize(player.origin - self.origin);
   forward = anglesToForward(self.angles);
   dot_fwd = vectordot(dirtoenemy, forward);
   right = anglestoright(self.angles);
@@ -464,7 +464,7 @@ function function_3cbcb275() {
       level thread scene::stop("aib_vign_stakeout_safehouse_surveillance_wife");
 
       if(level flag::get("flag_wife_on_phone")) {
-        var_3dd2d06b = getent("apt_phone", "targetname");
+        var_3dd2d06b = getEnt("apt_phone", "targetname");
         level thread scene::play("aib_vign_stakeout_apt_wife", "react_phone_drop");
 
         if(reaction == "standing_behind") {
@@ -602,7 +602,7 @@ function function_8be5093c() {
 }
 
 function function_a8ad2bdb() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   if(level flag::get("flag_wife_is_darted")) {
@@ -642,9 +642,9 @@ function function_a8ad2bdb() {
   }
 
   if(level flag::get("flag_wife_on_phone")) {
-    var_3dd2d06b = getent("apt_phone", "targetname");
+    var_3dd2d06b = getEnt("apt_phone", "targetname");
     self.a.nodeath = 1;
-    getplayers()[0] namespace_5f6e61d9::function_694887dc("cin_stakeout_apt_bodycarry_pickup_apt_gl_start");
+    getPlayers()[0] namespace_5f6e61d9::function_694887dc("cin_stakeout_apt_bodycarry_pickup_apt_gl_start");
     self thread scene::play("aib_vign_stakeout_apt_wife", "wife_phone_tranq", self);
     self waittill(#"death");
     self ai::set_corpse_entity(undefined);
@@ -654,7 +654,7 @@ function function_a8ad2bdb() {
     self waittill(#"death");
     self ai::set_corpse_entity(undefined);
   } else {
-    vol = getent("vol_kitchen_doorway", "targetname");
+    vol = getEnt("vol_kitchen_doorway", "targetname");
     reaction = undefined;
 
     if(self istouching(vol)) {
@@ -665,7 +665,7 @@ function function_a8ad2bdb() {
       }
 
       if(level flag::get("edda_reacting")) {
-        vol = getent("vol_kitchen_table", "targetname");
+        vol = getEnt("vol_kitchen_table", "targetname");
 
         if(player istouching(vol)) {
           reaction = self function_cd1af5d1();
@@ -693,8 +693,8 @@ function function_a8ad2bdb() {
 }
 
 function function_cd1af5d1() {
-  player = getplayers()[0];
-  dirtoenemy = vectornormalize(player.origin - self.origin);
+  player = getPlayers()[0];
+  dirtoenemy = vectorNormalize(player.origin - self.origin);
   forward = anglesToForward(self.angles);
   dot_fwd = vectordot(dirtoenemy, forward);
   right = anglestoright(self.angles);
@@ -815,7 +815,7 @@ function function_92d5be3e(params) {
 
 function function_811c81e6() {
   level endon(#"apartment_2_done");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   player flag::wait_till("body_pickup");
   waitframe(1);
@@ -830,7 +830,7 @@ function function_811c81e6() {
 }
 
 function function_c4139f80() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level endon(#"apartment_2_done");
   self notify("529bd23744ff8c89");
@@ -851,7 +851,7 @@ function function_c4139f80() {
 }
 
 function function_97be6108() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon(#"flag_wife_placed_on_couch", #"apartment_2_done");
   player endon(#"death");
 
@@ -878,10 +878,10 @@ function function_97be6108() {
 }
 
 function function_d131ba5d() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level endon(#"flag_wife_placed_on_couch", #"apartment_2_done");
-  vol = getent("couch_vol", "targetname");
+  vol = getEnt("couch_vol", "targetname");
 
   while(true) {
     while(!player istouching(vol)) {
@@ -899,7 +899,7 @@ function function_d131ba5d() {
 }
 
 function function_c0bfecc7() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   while(!player namespace_5f6e61d9::function_cad84e26()) {
@@ -1055,14 +1055,14 @@ function function_4b86eb01() {
   }
 
   level flag::set("flag_kraus_umbrella_done");
-  trigger = getent("guest_room_failsafe_trigger", "targetname");
+  trigger = getEnt("guest_room_failsafe_trigger", "targetname");
   self thread function_41ff2f97(trigger, "lower");
   level thread scene::play("aib_vign_stakeout_apt_kraus", "guest_room_enter", self);
   self waittill(#"hash_3fb228a70ee2ba7e");
-  vol = getent("apt_downstairs_bedroom_vol", "targetname");
+  vol = getEnt("apt_downstairs_bedroom_vol", "targetname");
 
-  if(getplayers()[0] istouching(vol)) {
-    trig = getent("near_lower_bedroom_trigger", "targetname");
+  if(getPlayers()[0] istouching(vol)) {
+    trig = getEnt("near_lower_bedroom_trigger", "targetname");
     trig delete();
   }
 
@@ -1071,11 +1071,11 @@ function function_4b86eb01() {
 
 function function_edf2504c() {
   level.var_49a292bb endon(#"death", #"kraus_spotted_player", #"hash_774b3e0c443d80dd");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   time = 0;
   max_time = 7;
-  vol = getent("apt_downstairs_bedroom_vol", "targetname");
+  vol = getEnt("apt_downstairs_bedroom_vol", "targetname");
 
   while(time < max_time) {
     if(player istouching(vol)) {
@@ -1114,7 +1114,7 @@ function function_1f314257() {
   level thread scene::play("aib_vign_stakeout_apt_kraus", "master_bedroom_enter", self);
   self waittill(#"hash_5b9dfc1ea7e895c7");
   level flag::set("flag_kraus_on_bed");
-  trigger = getent("master_bedroom_failsafe_trigger", "targetname");
+  trigger = getEnt("master_bedroom_failsafe_trigger", "targetname");
   self thread function_41ff2f97(trigger, "upper");
 }
 
@@ -1161,7 +1161,7 @@ function function_73f8fadd() {
       foreach(corpse in var_5fff2a1e) {
         corpse_origin = corpse namespace_979752dc::getcorpseorigin();
         delta = corpse_origin - eye;
-        dir = vectornormalize(delta);
+        dir = vectorNormalize(delta);
         vector_dot = vectordot(dir, fwd);
         dist = distance2dsquared(corpse_origin, eye);
 
@@ -1247,13 +1247,13 @@ function function_aa4ca19c(corpse_origin) {
   self val::set("apartment", "ignoreall", 1);
   self val::set("apartment", "ignoreme", 1);
   self notify(#"kraus_spotted_player");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self thread function_125f4d72();
 
   if(isDefined(corpse_origin)) {
-    dirtoenemy = vectornormalize(corpse_origin - self.origin);
+    dirtoenemy = vectorNormalize(corpse_origin - self.origin);
   } else {
-    dirtoenemy = vectornormalize(getplayers()[0].origin - self.origin);
+    dirtoenemy = vectorNormalize(getPlayers()[0].origin - self.origin);
   }
 
   forward = anglesToForward(self.angles);
@@ -1409,7 +1409,7 @@ function function_33e6dffe() {
 function function_af031d54() {
   if(!isDefined(objectives::function_285e460(#"hash_6cee2d43ad1f55e6"))) {
     objectives::scripted(#"hash_6cee2d43ad1f55e6", undefined, #"hash_1133bb730a6dcbf0");
-    apt_search_area = getent("apt_search_area", "targetname");
+    apt_search_area = getEnt("apt_search_area", "targetname");
     objectives::area(#"hash_7ef23308971af956", apt_search_area, undefined, undefined, 0, 0, undefined, #"hash_b1305ea2f0825bd");
   }
 
@@ -1502,12 +1502,12 @@ function function_d07f9e90() {
 
 function function_db844d6d() {
   level endon(#"hash_66dd1fb05a674d8f", #"hash_39a52174f2055f52");
-  door = getent(self.script_parameters, "targetname");
+  door = getEnt(self.script_parameters, "targetname");
   var_af01916d = struct::get(door.target, "targetname");
   namespace_5ceacc03::function_c32bc34f();
-  door moveto(var_af01916d.origin, 1, 0.5, 0.5);
-  player = getplayers()[0];
-  player playrumbleonentity(#"anim_med");
+  door moveTo(var_af01916d.origin, 1, 0.5, 0.5);
+  player = getPlayers()[0];
+  player playRumbleOnEntity(#"anim_med");
   wait 1.5;
   var_4ad0d08d = getEntArray("ledger", "targetname");
 
@@ -1532,12 +1532,12 @@ function function_db844d6d() {
 
 function function_a971060e() {
   level endon(#"hash_66dd1fb05a674d8f", #"hash_39a52174f2055f52");
-  drawer = getent("desk_office_drawer_01", "targetname");
+  drawer = getEnt("desk_office_drawer_01", "targetname");
   fwd = anglesToForward(drawer.angles);
   namespace_5ceacc03::function_a3c35c97();
-  drawer moveto(drawer.origin + fwd * 10, 1, 0.5, 0.5);
-  player = getplayers()[0];
-  player playrumbleonentity(#"anim_med");
+  drawer moveTo(drawer.origin + fwd * 10, 1, 0.5, 0.5);
+  player = getPlayers()[0];
+  player playRumbleOnEntity(#"anim_med");
   wait 1.5;
   var_4ad0d08d = getEntArray("ledger", "targetname");
 
@@ -1562,12 +1562,12 @@ function function_a971060e() {
 
 function function_a3233bf5() {
   level endon(#"hash_66dd1fb05a674d8f", #"hash_39a52174f2055f52");
-  drawer = getent("2f_bedroom_drawer", "targetname");
+  drawer = getEnt("2f_bedroom_drawer", "targetname");
   fwd = anglestoright(drawer.angles);
   namespace_5ceacc03::bedroom_drawer();
-  drawer moveto(drawer.origin + fwd * 10, 1, 0.5, 0.5);
-  player = getplayers()[0];
-  player playrumbleonentity(#"anim_med");
+  drawer moveTo(drawer.origin + fwd * 10, 1, 0.5, 0.5);
+  player = getPlayers()[0];
+  player playRumbleOnEntity(#"anim_med");
   wait 1.5;
   var_4ad0d08d = getEntArray("ledger", "targetname");
 
@@ -1607,7 +1607,7 @@ function function_2d6c81be(str_objective) {
   level thread namespace_11998b8f::function_91a7f501("apt_street_ambient_harass_loop", "apartment_2_done");
   level.var_54b83d35 = struct::get("tag_align_target_apt_first_floor", "targetname");
   level.var_bd5c9b86 = struct::get("tag_align_target_apt_second_floor", "targetname");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player setmovespeedscale(0.5);
   player val::set("apartment", "allow_sprint", 0);
   level thread namespace_11998b8f::function_25120710();
@@ -1616,7 +1616,7 @@ function function_2d6c81be(str_objective) {
   level thread function_33e6dffe();
   doors::close("tgt_apt_front_door");
   doors::lock("tgt_apt_front_door");
-  getent("tgt_apt_front_door", "targetname").var_aff33935 = 0;
+  getEnt("tgt_apt_front_door", "targetname").var_aff33935 = 0;
 }
 
 function function_34ee80b8(str_objective, b_starting) {
@@ -1641,7 +1641,7 @@ function function_34ee80b8(str_objective, b_starting) {
   level thread scene::init("scene_z_stk_darkroom_knockout");
   level flag::wait_till("flag_give_blacklight");
 
-  for(player = getplayers()[0]; !isPlayer(player); player = getplayers()[0]) {
+  for(player = getPlayers()[0]; !isPlayer(player); player = getPlayers()[0]) {
     waitframe(1);
   }
 
@@ -1665,7 +1665,7 @@ function function_34ee80b8(str_objective, b_starting) {
   level thread util::screen_fade_out(2);
   clientfield::set("force_stream_warehouse", 1);
   level.var_dca3174b flag::wait_till_clear(#"scriptedanim");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::set("apartment_to_warehouse", "freezecontrols", 1);
   level flag::set("apartment_2_done");
   level callback::function_95ba5345(&function_92d5be3e);
@@ -1675,7 +1675,7 @@ function function_34ee80b8(str_objective, b_starting) {
   level.var_375ea1c1 = spawner::simple_spawn_single("warehouse_volkov");
   wait 0.5;
   s_teleport = struct::get("warehouse_intro_player_start", "targetname");
-  player setorigin(s_teleport.origin);
+  player setOrigin(s_teleport.origin);
   player setplayerangles(s_teleport.angles);
   level.player val::set("knock_out", "show_crosshair", 0);
   wait 5;
@@ -1684,8 +1684,8 @@ function function_34ee80b8(str_objective, b_starting) {
 
 function function_8b571528() {
   level waittill(#"hash_2e3d4f4ea7cb4eb8");
-  player = getplayers()[0];
-  player playrumbleonentity(#"hash_391d88e62e3bfab3");
+  player = getPlayers()[0];
+  player playRumbleOnEntity(#"hash_391d88e62e3bfab3");
 }
 
 function function_1a702184() {
@@ -1696,14 +1696,14 @@ function function_1a702184() {
   level flag::wait_till_all(array("button_interact_pressed", "picture_interact_pressed"));
   level flag::set("darkroom_door_open");
   wait 0.5;
-  level.var_bb05e8f5 rotateyaw(-79, 2.5, 0.75, 0.75);
+  level.var_bb05e8f5 rotateYaw(-79, 2.5, 0.75, 0.75);
 }
 
 function function_85fbc73e(wait_notify, flagname) {
   level waittill(wait_notify);
   timer = 6;
-  var_617f3755 = getent("secret_wall_panel", "targetname");
-  var_b227bb98 = getent("secret_picture", "targetname");
+  var_617f3755 = getEnt("secret_wall_panel", "targetname");
+  var_b227bb98 = getEnt("secret_picture", "targetname");
 
   while(!level flag::get("darkroom_door_open")) {
     self util::create_cursor_hint(undefined, undefined, #"hash_6c7bb285599937ba");
@@ -1727,16 +1727,16 @@ function function_85fbc73e(wait_notify, flagname) {
 function function_c9d1be0e(timer) {
   var_ee7f9f95 = struct::get("secret_wall_panel_pos_01", "targetname");
   var_cfa661e3 = struct::get("secret_wall_panel_pos_02", "targetname");
-  self moveto(var_cfa661e3.origin, 0.5, 0.1, 0.1);
-  level.player playrumbleonentity(#"anim_med");
+  self moveTo(var_cfa661e3.origin, 0.5, 0.1, 0.1);
+  level.player playRumbleOnEntity(#"anim_med");
   snd::play("evt_stk_apt_puzzle_panel_open", self);
   wait 0.5;
-  self moveto(var_ee7f9f95.origin, timer - 0.5, 0.1, 0.1);
+  self moveTo(var_ee7f9f95.origin, timer - 0.5, 0.1, 0.1);
 }
 
 function function_3ce22f0b(timer) {
   self rotateroll(-12, 0.5, 0.1, 0.1);
-  level.player playrumbleonentity(#"anim_med");
+  level.player playRumbleOnEntity(#"anim_med");
   snd::play("evt_stk_apt_puzzle_picture_open", self);
   wait 0.5;
   var_13ad4669 = (timer - 0.5) / 6;
@@ -1749,12 +1749,12 @@ function function_3ce22f0b(timer) {
 
 function darkroom_light_interact() {
   level thread scene::init("cin_stakeout_apt_darkroom_light");
-  level.var_482950bb = getent("stk_apartment_light_red_helper", "targetname");
+  level.var_482950bb = getEnt("stk_apartment_light_red_helper", "targetname");
   level.var_482950bb.original_intensity = level.var_482950bb getlightintensity();
   level.var_482950bb setlightintensity(0);
 
   if(!isDefined(level.var_7a8f8e9)) {
-    level.var_7a8f8e9 = getent("darkroom_light", "targetname");
+    level.var_7a8f8e9 = getEnt("darkroom_light", "targetname");
     level.var_7a8f8e9.animname = "darkroom_light";
   }
 
@@ -1780,10 +1780,10 @@ function function_2fd06e9c(state) {
   level.var_2bf3ee79 = struct::get("darkroom_light_interact", "targetname");
   level.var_2bf3ee79 util::create_cursor_hint(undefined, undefined, #"hash_4c7c3b0a076e33d2", 64);
   s_waitresult = level.var_2bf3ee79 waittill(#"trigger", #"hash_7f21624bd71e55db");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_51a34a03 = player.origin - level.var_2bf3ee79.origin;
   var_51a34a03 = (var_51a34a03[0], var_51a34a03[1], 0);
-  var_51a34a03 = vectornormalize(var_51a34a03);
+  var_51a34a03 = vectorNormalize(var_51a34a03);
   forward = anglesToForward(level.var_2bf3ee79.angles);
   dot_fwd = vectordot(var_51a34a03, forward);
   right = anglestoright(level.var_2bf3ee79.angles);
@@ -1803,7 +1803,7 @@ function function_2fd06e9c(state) {
   if(s_waitresult._notify === "trigger") {
     level thread scene::play("cin_stakeout_apt_darkroom_light", "apt_darkroom_light_" + direction);
     player waittill(#"hash_5626dd1a7ff2dfaf");
-    player playrumbleonentity(#"anim_light");
+    player playRumbleOnEntity(#"anim_light");
   }
 
   if(state == "on") {
@@ -1855,9 +1855,9 @@ function function_c8ac96b3() {
   if(isDefined(var_cbe1de3)) {
     var_cbe1de3 util::create_cursor_hint(undefined, undefined, #"hash_24b92cc9c8f3144e", 64, undefined, undefined, undefined, undefined, undefined, undefined, 1);
     var_cbe1de3 waittill(#"trigger");
-    player = getplayers()[0];
+    player = getPlayers()[0];
     namespace_5ceacc03::music("deactivate_14.0_find_briefcase");
-    level.var_bb05e8f5 rotateyaw(79, 0.25);
+    level.var_bb05e8f5 rotateYaw(79, 0.25);
 
     if(!level flag::get("flag_wife_is_darted")) {
       level.player stats::function_dad108fa(#"hash_1b921321a962d6a6", 1);
@@ -1912,19 +1912,19 @@ function function_6b7988be() {
     level.var_752c558a delete();
   }
 
-  var_617f3755 = getent("secret_wall_panel", "targetname");
+  var_617f3755 = getEnt("secret_wall_panel", "targetname");
 
   if(isDefined(var_617f3755)) {
     var_617f3755 delete();
   }
 
-  var_b227bb98 = getent("secret_picture", "targetname");
+  var_b227bb98 = getEnt("secret_picture", "targetname");
 
   if(isDefined(var_b227bb98)) {
     var_b227bb98 delete();
   }
 
-  drawer = getent("desk_office_drawer_01", "targetname");
+  drawer = getEnt("desk_office_drawer_01", "targetname");
   var_8f7963a2 = getEntArray(drawer.linkname, "linkto");
 
   if(isDefined(drawer)) {
@@ -1932,7 +1932,7 @@ function function_6b7988be() {
   }
 
   array::delete_all(var_8f7963a2);
-  drawer = getent("2f_bedroom_drawer", "targetname");
+  drawer = getEnt("2f_bedroom_drawer", "targetname");
   var_8f7963a2 = getEntArray(drawer.linkname, "linkto");
 
   if(isDefined(drawer)) {
@@ -1942,43 +1942,43 @@ function function_6b7988be() {
   array::delete_all(var_8f7963a2);
   a_decals = getEntArray("blacklight_decals_emissive", "targetname");
   array::delete_all(a_decals);
-  var_5bc503b1 = getent("darkroom_hidden_door", "targetname");
+  var_5bc503b1 = getEnt("darkroom_hidden_door", "targetname");
 
   if(isDefined(var_5bc503b1)) {
     var_5bc503b1 delete();
   }
 
-  chair = getent("kraus_office_chair", "targetname");
+  chair = getEnt("kraus_office_chair", "targetname");
 
   if(isDefined(chair)) {
     chair delete();
   }
 
-  apt_couch_pillow = getent("apt_couch_pillow", "targetname");
+  apt_couch_pillow = getEnt("apt_couch_pillow", "targetname");
 
   if(isDefined(apt_couch_pillow)) {
     apt_couch_pillow delete();
   }
 
-  apt_phone = getent("apt_phone", "targetname");
+  apt_phone = getEnt("apt_phone", "targetname");
 
   if(isDefined(apt_phone)) {
     apt_phone delete();
   }
 
-  apt_nightstand = getent("apt_nightstand", "targetname");
+  apt_nightstand = getEnt("apt_nightstand", "targetname");
 
   if(isDefined(apt_nightstand)) {
     apt_nightstand delete();
   }
 
-  apt_kettle = getent("apt_kettle", "targetname");
+  apt_kettle = getEnt("apt_kettle", "targetname");
 
   if(isDefined(apt_kettle)) {
     apt_kettle delete();
   }
 
-  apt_umbrella = getent("apt_umbrella", "targetname");
+  apt_umbrella = getEnt("apt_umbrella", "targetname");
 
   if(isDefined(apt_umbrella)) {
     apt_umbrella delete();
@@ -2004,9 +2004,9 @@ function function_a3c49bc0(str_objective, b_starting, var_aa1a6455, player) {
 
 function function_be8d91b2() {
   var_22386ba3 = getEntArray("apartment_light1_fill", "targetname");
-  var_13f6cf20 = getent("apartment_light1_spot", "targetname");
+  var_13f6cf20 = getEnt("apartment_light1_spot", "targetname");
   var_f5b792a2 = getEntArray("apartment_light2_fill", "targetname");
-  var_6799f665 = getent("apartment_light2_spot", "targetname");
+  var_6799f665 = getEnt("apartment_light2_spot", "targetname");
 
   foreach(light in var_22386ba3) {
     light setlightintensity(0);

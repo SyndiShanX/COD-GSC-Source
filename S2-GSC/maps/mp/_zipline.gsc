@@ -16,13 +16,13 @@ func_00D5() {
     var_03.var_6ABC = ::func_6ABC;
     var_03.var_6BBF = ::func_6BBF;
     var_04 = [];
-    var_05 = getent(var_01[var_02].var_01A2, "targetname");
+    var_05 = getEnt(var_01[var_02].var_01A2, "targetname");
     if(!isDefined(var_05)) {}
 
     while(isDefined(var_05)) {
       var_04[var_04.size] = var_05;
       if(isDefined(var_05.var_01A2)) {
-        var_05 = getent(var_05.var_01A2, "targetname");
+        var_05 = getEnt(var_05.var_01A2, "targetname");
         continue;
       }
 
@@ -64,9 +64,9 @@ func_AAF8(param_00) {
       var_05 = var_04 * 0.2;
     }
 
-    var_01 moveto(var_02[var_03].var_0116, var_04, var_05);
+    var_01 moveTo(var_02[var_03].var_0116, var_04, var_05);
     if(var_01.var_001D != var_02[var_03].var_001D) {
-      var_01 rotateto(var_02[var_03].var_001D, var_04 * 0.8);
+      var_01 rotateTo(var_02[var_03].var_001D, var_04 * 0.8);
     }
 
     wait(var_04);
@@ -194,15 +194,15 @@ func_6BC0(param_00) {
 
 func_6BE1(param_00) {
   level.var_35B3.var_932D[param_00] = "opening";
-  var_01 = getent("e_door_" + param_00 + "_left", "targetname");
-  var_02 = getent("e_door_" + param_00 + "_right", "targetname");
+  var_01 = getEnt("e_door_" + param_00 + "_left", "targetname");
+  var_02 = getEnt("e_door_" + param_00 + "_right", "targetname");
   if(isDefined(var_01.var_0165) && var_01.var_0165 == "fahrenheit") {
-    var_01 moveto(var_01.var_0116 - anglesToForward(var_01.var_001D) * 35, 2);
-    var_02 moveto(var_02.var_0116 + anglesToForward(var_02.var_001D) * 35, 2);
+    var_01 moveTo(var_01.var_0116 - anglesToForward(var_01.var_001D) * 35, 2);
+    var_02 moveTo(var_02.var_0116 + anglesToForward(var_02.var_001D) * 35, 2);
     var_01 method_8617("elev_door_open");
   } else {
-    var_01 moveto(var_01.var_0116 - anglestoright(var_01.var_001D) * 35, 2);
-    var_02 moveto(var_02.var_0116 + anglestoright(var_02.var_001D) * 35, 2);
+    var_01 moveTo(var_01.var_0116 - anglestoright(var_01.var_001D) * 35, 2);
+    var_02 moveTo(var_02.var_0116 + anglestoright(var_02.var_001D) * 35, 2);
   }
 
   wait(2);
@@ -214,15 +214,15 @@ func_6BE1(param_00) {
 
 func_242F(param_00) {
   level.var_35B3.var_932D[param_00] = "closing";
-  var_01 = getent("e_door_" + param_00 + "_left", "targetname");
-  var_02 = getent("e_door_" + param_00 + "_right", "targetname");
+  var_01 = getEnt("e_door_" + param_00 + "_left", "targetname");
+  var_02 = getEnt("e_door_" + param_00 + "_right", "targetname");
   if(isDefined(var_01.var_0165) && var_01.var_0165 == "fahrenheit") {
-    var_01 moveto(var_01.var_0116 + anglesToForward(var_01.var_001D) * 35, 2);
-    var_02 moveto(var_02.var_0116 - anglesToForward(var_02.var_001D) * 35, 2);
+    var_01 moveTo(var_01.var_0116 + anglesToForward(var_01.var_001D) * 35, 2);
+    var_02 moveTo(var_02.var_0116 - anglesToForward(var_02.var_001D) * 35, 2);
     var_01 method_8617("elev_door_close");
   } else {
-    var_01 moveto(var_01.var_0116 + anglestoright(var_01.var_001D) * 35, 2);
-    var_02 moveto(var_02.var_0116 - anglestoright(var_02.var_001D) * 35, 2);
+    var_01 moveTo(var_01.var_0116 + anglestoright(var_01.var_001D) * 35, 2);
+    var_02 moveTo(var_02.var_0116 - anglestoright(var_02.var_001D) * 35, 2);
   }
 
   wait(2);
@@ -238,23 +238,23 @@ func_1386() {
 
 func_646F() {
   level.var_35B3.var_932D["elevator"] = "moving";
-  var_00 = getent("e_door_elevator_left", "targetname");
-  var_01 = getent("e_door_elevator_right", "targetname");
-  var_02 = getent("elevator", "targetname");
+  var_00 = getEnt("e_door_elevator_left", "targetname");
+  var_01 = getEnt("e_door_elevator_right", "targetname");
+  var_02 = getEnt("elevator", "targetname");
   if(level.var_35B3.var_5E55 == "floor1") {
     level.var_35B3.var_5E55 = "floor2";
     var_03 = var_00.var_0116[2] - level.var_35B3.var_2DAC["floor1"].var_0116[2];
-    var_00 moveto((var_00.var_0116[0], var_00.var_0116[1], level.var_35B3.var_2DAC["floor2"].var_0116[2] + var_03), 5);
+    var_00 moveTo((var_00.var_0116[0], var_00.var_0116[1], level.var_35B3.var_2DAC["floor2"].var_0116[2] + var_03), 5);
     var_03 = var_01.var_0116[2] - level.var_35B3.var_2DAC["floor1"].var_0116[2];
-    var_01 moveto((var_01.var_0116[0], var_01.var_0116[1], level.var_35B3.var_2DAC["floor2"].var_0116[2] + var_03), 5);
-    var_02 moveto(level.var_35B3.var_2DAC["floor2"].var_0116, 5);
+    var_01 moveTo((var_01.var_0116[0], var_01.var_0116[1], level.var_35B3.var_2DAC["floor2"].var_0116[2] + var_03), 5);
+    var_02 moveTo(level.var_35B3.var_2DAC["floor2"].var_0116, 5);
   } else {
     level.var_35B3.var_5E55 = "floor1";
     var_03 = var_01.var_0116[2] - level.var_35B3.var_2DAC["floor2"].var_0116[2];
-    var_00 moveto((var_00.var_0116[0], var_00.var_0116[1], level.var_35B3.var_2DAC["floor1"].var_0116[2] + var_03), 5);
+    var_00 moveTo((var_00.var_0116[0], var_00.var_0116[1], level.var_35B3.var_2DAC["floor1"].var_0116[2] + var_03), 5);
     var_03 = var_01.var_0116[2] - level.var_35B3.var_2DAC["floor2"].var_0116[2];
-    var_01 moveto((var_01.var_0116[0], var_01.var_0116[1], level.var_35B3.var_2DAC["floor1"].var_0116[2] + var_03), 5);
-    var_02 moveto(level.var_35B3.var_2DAC["floor1"].var_0116, 5);
+    var_01 moveTo((var_01.var_0116[0], var_01.var_0116[1], level.var_35B3.var_2DAC["floor1"].var_0116[2] + var_03), 5);
+    var_02 moveTo(level.var_35B3.var_2DAC["floor1"].var_0116, 5);
   }
 
   wait(5);

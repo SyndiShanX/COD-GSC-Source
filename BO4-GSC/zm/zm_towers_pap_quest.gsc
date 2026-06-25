@@ -40,7 +40,7 @@ init() {
     level thread function_a7faeaaf();
   } else if(n_pap_enabled == 0) {
     level flag::set(#"pap_disabled");
-    mdl_sentinel_artifact = getent("mdl_pap_quest_sentinel_artifact", "targetname");
+    mdl_sentinel_artifact = getEnt("mdl_pap_quest_sentinel_artifact", "targetname");
     mdl_sentinel_artifact hide();
     mdl_sentinel_artifact notsolid();
     function_a73ff9f2();
@@ -50,10 +50,10 @@ init() {
   a_mdl_pap_room_debris_clip = getEntArray("mdl_pap_room_debris_clip", "targetname");
 
   foreach(mdl_pap_room_debris_clip in a_mdl_pap_room_debris_clip) {
-    mdl_pap_room_debris_clip disconnectpaths();
+    mdl_pap_room_debris_clip disconnectPaths();
   }
 
-  var_f7afe1a0 = getent("sarcophagus_destroyed", "targetname");
+  var_f7afe1a0 = getEnt("sarcophagus_destroyed", "targetname");
   var_f7afe1a0 hide();
 }
 
@@ -189,25 +189,25 @@ function_3effad88(str_tower) {
 
   switch (str_tower) {
     case #"danu":
-      var_e362d075 = getent("t_pap_quest_danu_encounter", "targetname");
+      var_e362d075 = getEnt("t_pap_quest_danu_encounter", "targetname");
       level flag::clear(#"hash_18134dc5b9b39a96");
       break;
     case #"ra":
-      var_e362d075 = getent("t_pap_quest_ra_encounter", "targetname");
+      var_e362d075 = getEnt("t_pap_quest_ra_encounter", "targetname");
       level flag::clear(#"hash_582eea77824b014d");
       break;
     case #"odin":
-      var_e362d075 = getent("t_pap_quest_odin_encounter", "targetname");
+      var_e362d075 = getEnt("t_pap_quest_odin_encounter", "targetname");
       level flag::clear(#"hash_5cc500f9282cd290");
       break;
     case #"zeus":
-      var_e362d075 = getent("t_pap_quest_zeus_encounter", "targetname");
+      var_e362d075 = getEnt("t_pap_quest_zeus_encounter", "targetname");
       level flag::clear(#"hash_20c64c155f7a0065");
       break;
   }
 
   var_e362d075 triggerenable(1);
-  var_e362d075 sethintstring(str_prompt);
+  var_e362d075 setHintString(str_prompt);
   level flag::clear(#"hash_798d51388d6e10f4");
   level thread function_199b1814(str_tower, get_encounter(str_tower));
 }
@@ -272,7 +272,7 @@ function_64f2d6de(a_ents) {
   a_mdl_heads = getEntArray("mdl_pap_quest_head", "targetname");
 
   foreach(mdl_head in a_mdl_heads) {
-    mdl_head linkto(var_f99f1421, mdl_head.var_d06913fa);
+    mdl_head linkTo(var_f99f1421, mdl_head.var_d06913fa);
   }
 }
 
@@ -347,8 +347,8 @@ function_199b1814(str_tower, str_encounter) {
   var_33a5ad52 = array::randomize(var_33a5ad52);
   var_b994877d = array::randomize(var_b994877d);
   var_a0529e1b = array::randomize(var_a0529e1b);
-  t_trigger = getent(str_trigger, "targetname");
-  var_190d5d80 = getent(t_trigger.target, "targetname");
+  t_trigger = getEnt(str_trigger, "targetname");
+  var_190d5d80 = getEnt(t_trigger.target, "targetname");
   var_190d5d80 thread scene::init("p8_fxanim_zm_towers_challenge_gong_bundle", var_190d5d80);
   b_triggered = 0;
 
@@ -710,7 +710,7 @@ drop_head(v_origin, str_tower, var_5570d8de) {
 
     s_point = struct::get(str_backup);
     var_a0fca4e1 = s_point.origin + (0, 0, 40);
-    var_483b8a0 moveto(var_a0fca4e1, 2);
+    var_483b8a0 moveTo(var_a0fca4e1, 2);
   }
 
   var_483b8a0 thread zm_towers_util::function_48f49769();
@@ -779,7 +779,7 @@ function_499b080d(str_tower, str_encounter) {
     e_player zm_score::add_to_player_score(500 * n_scalar);
   }
 
-  playsoundatposition(#"evt_head_pickup", self.origin);
+  playSoundAtPosition(#"evt_head_pickup", self.origin);
 
   if(isDefined(level.var_9ca6160c) && isinarray(level.var_9ca6160c, self)) {
     arrayremovevalue(level.var_9ca6160c, self);
@@ -837,7 +837,7 @@ function_156669dd(var_5ea5c94d, ended_early) {
       mdl_head show();
     }
 
-    mdl_sentinel_artifact = getent("mdl_pap_quest_sentinel_artifact", "targetname");
+    mdl_sentinel_artifact = getEnt("mdl_pap_quest_sentinel_artifact", "targetname");
     mdl_sentinel_artifact hide();
     mdl_sentinel_artifact notsolid();
     return;
@@ -863,9 +863,9 @@ function_156669dd(var_5ea5c94d, ended_early) {
   level thread scene::play("p8_fxanim_zm_towers_pap_door_blue_bundle");
   level thread scene::play("p8_fxanim_zm_towers_pap_door_red_bundle");
   exploder::exploder("fx8_exp_pap_slam_smk");
-  var_f7afe1a0 = getent("sarcophagus_destroyed", "targetname");
+  var_f7afe1a0 = getEnt("sarcophagus_destroyed", "targetname");
   var_f7afe1a0 show();
-  var_e7ab66ef = getent("sarcophagus_solid", "targetname");
+  var_e7ab66ef = getEnt("sarcophagus_solid", "targetname");
   var_e7ab66ef delete();
   a_mdl_pap_room_debris_clip = getEntArray("mdl_pap_room_debris_clip", "targetname");
 
@@ -889,24 +889,24 @@ function_9b320791() {
 }
 
 function_a2f4eb85() {
-  t_trigger = getent("t_pap_quest_place_head", "targetname");
-  t_trigger sethintstring(#"hash_6b4f36812ac1e729");
+  t_trigger = getEnt("t_pap_quest_place_head", "targetname");
+  t_trigger setHintString(#"hash_6b4f36812ac1e729");
 }
 
 function_7590a833() {
   self notify("5e1fb7fbace74e0b");
   self endon("5e1fb7fbace74e0b");
   level endon(#"pap_quest_completed");
-  t_trigger = getent("t_pap_quest_place_head", "targetname");
+  t_trigger = getEnt("t_pap_quest_place_head", "targetname");
 
   foreach(e_player in level.players) {
     e_player clientfield::set("force_pap_models", 1);
   }
 
   if(function_8b1a219a()) {
-    t_trigger sethintstring(#"hash_785577888de11add");
+    t_trigger setHintString(#"hash_785577888de11add");
   } else {
-    t_trigger sethintstring(#"hash_50fc385a94b3d3f");
+    t_trigger setHintString(#"hash_50fc385a94b3d3f");
   }
 
   while(true) {
@@ -945,7 +945,7 @@ function_5ed0d968(v_player_origin) {
   }
 
   if(level.var_7695ff59 >= 4) {
-    var_10761775 = getent("t_pap_quest_place_head", "targetname");
+    var_10761775 = getEnt("t_pap_quest_place_head", "targetname");
     var_10761775 triggerenable(0);
 
     foreach(e_player in level.players) {
@@ -1061,7 +1061,7 @@ function_61cf4d04() {
 
 function_d7c092b9() {
   level flag::wait_till(#"hash_2cf71ce4a3d1c081");
-  var_10761775 = getent("t_pap_quest_place_head", "targetname");
+  var_10761775 = getEnt("t_pap_quest_place_head", "targetname");
 
   if(isDefined(var_10761775) && !(zm_utility::is_trials() && level.round_number <= 8)) {
     var_10761775 delete();

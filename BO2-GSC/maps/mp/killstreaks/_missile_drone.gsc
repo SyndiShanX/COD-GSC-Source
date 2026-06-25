@@ -194,14 +194,14 @@ drone_target_search(hardpointtype) {
       searchcounter++;
     } else if(level.missile_drone_origin[2] != self.goal.origin[2]) {
       currentangles = self.angles;
-      direction = vectornormalize(anglesToForward(self.angles));
+      direction = vectorNormalize(anglesToForward(self.angles));
       direction = vecscale(direction, 1024);
       self.goal.origin = (self.origin[0] + direction[0], self.origin[1] + direction[1], level.missile_drone_origin[2]);
 
       debug_line(self.origin, self.goal.origin, (1, 1, 0), 5000);
     } else {
       currentangles = self.angles;
-      direction = vectornormalize(anglesToForward(self.angles));
+      direction = vectorNormalize(anglesToForward(self.angles));
       direction = vecscale(direction, 1024);
       self.goal.origin = (level.missile_drone_origin[0] + direction[0], level.missile_drone_origin[1] + direction[1], level.missile_drone_origin[2]);
 
@@ -502,7 +502,7 @@ get_array_sorted_dot_prod(array, mincos) {
     angles = self.angles;
   }
 
-  forwardvec = vectornormalize(anglesToForward(angles));
+  forwardvec = vectorNormalize(anglesToForward(angles));
   dotprod = [];
   index = [];
 
@@ -511,7 +511,7 @@ get_array_sorted_dot_prod(array, mincos) {
     assert(isDefined(array[i]));
     assert(isDefined(array[i].origin));
     assert(isDefined(org));
-    cosa = vectordot(forwardvec, vectornormalize(array[i].origin - org));
+    cosa = vectordot(forwardvec, vectorNormalize(array[i].origin - org));
     assert(isDefined(cosa));
 
     if(isDefined(mincos) && cosa < mincos) {

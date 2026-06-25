@@ -636,7 +636,7 @@ start_truck_patrol() {
   flag_wait("start_truck_patrol");
   autosave_stealth();
 
-  truck_spawner = getent("truck_patrol", "targetname");
+  truck_spawner = getEnt("truck_patrol", "targetname");
   truck_spawner.script_badplace = true;
   level.truck_patrol = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("truck_patrol");
 

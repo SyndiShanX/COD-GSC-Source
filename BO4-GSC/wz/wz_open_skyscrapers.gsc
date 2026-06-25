@@ -477,7 +477,7 @@ function_eef7849() {
     }
 
     if(n_index != prev_index) {
-      player setorigin(var_4ff6627b[n_index].origin);
+      player setOrigin(var_4ff6627b[n_index].origin);
       player setplayerangles((0, var_4ff6627b[n_index].angles[1], 0));
       prev_index = n_index;
       wait 0.1;
@@ -1383,7 +1383,7 @@ function_97714f49() {
       level notify(#"new_damage_circles");
 
       if(getdvarint(#"hash_5fd194403e0d175e", 0) || !isDefined(tracepoint)) {
-        players = getplayers();
+        players = getPlayers();
 
         if(players.size <= 0) {
           continue;
@@ -1541,7 +1541,7 @@ function_a2b6e273() {
     }
 
     if(n_index != prev_index) {
-      player setorigin(level.totalspawnpoints[n_index].origin);
+      player setOrigin(level.totalspawnpoints[n_index].origin);
       player setplayerangles((0, level.totalspawnpoints[n_index].angles[1], 0));
       prev_index = n_index;
       wait 0.1;
@@ -1550,7 +1550,7 @@ function_a2b6e273() {
     if(player buttonPressed("<dev string:x5bb>")) {
       spawn = level.totalspawnpoints[n_index];
       info = spawn::function_f468d9a5(spawn);
-      player setorigin(info.origin);
+      player setOrigin(info.origin);
       player setplayerangles(info.angles);
       player forcefreefall(1, info.freefall, 0);
     }
@@ -1578,7 +1578,7 @@ devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
   pid = getdvarint(#"scr_give_wz_item", 0);
 
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
 
     if(isDefined(player)) {
       if(isDefined(pcb_param_2)) {
@@ -1590,7 +1590,7 @@ devgui_handle_player_command(playercallback, pcb_param_1, pcb_param_2) {
       }
     }
   } else {
-    array::thread_all(getplayers(), playercallback, pcb_param_1, pcb_param_2);
+    array::thread_all(getPlayers(), playercallback, pcb_param_1, pcb_param_2);
   }
 
   setDvar(#"scr_give_wz_item", -1);

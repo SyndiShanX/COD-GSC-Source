@@ -26,8 +26,8 @@ init() {
     return;
   }
 
-  level.sq_volume = getent("sq_common_area", "targetname");
-  level.sq_clip = getent("sq_common_clip", "targetname");
+  level.sq_volume = getEnt("sq_common_area", "targetname");
+  level.sq_clip = getEnt("sq_common_clip", "targetname");
   register_map_navcard("navcard_held_zm_transit", "navcard_held_zm_buried");
 
   if(isDefined(level.sq_clip)) {
@@ -50,7 +50,7 @@ init() {
 }
 
 sq_easy_cleanup() {
-  computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
+  computer_buildable_trig = getEnt("sq_common_buildable_trigger", "targetname");
   computer_buildable_trig delete();
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
@@ -924,7 +924,7 @@ maxissay(line, org, playonent, playonenttag, ignore_power_state) {
   if(isDefined(playonent)) {
     playonent playsoundontag(line, playonenttag);
   } else {
-    playsoundatposition(line, org);
+    playSoundAtPosition(line, org);
   }
 
   wait 10;
@@ -973,7 +973,7 @@ survivor_vox() {
     foreach(player in players) {
       if(distance2dsquared(player.origin, (8000, -6656, 160)) < 1225) {
         if(player useButtonPressed()) {
-          playsoundatposition("zmb_zombie_arc", (8000, -6656, 160));
+          playSoundAtPosition("zmb_zombie_arc", (8000, -6656, 160));
           start_time = gettime();
           end_time = start_time + 5000;
 
@@ -985,7 +985,7 @@ survivor_vox() {
             wait 0.05;
           }
 
-          playsoundatposition("zmb_buildable_piece_add", (8000, -6656, 160));
+          playSoundAtPosition("zmb_buildable_piece_add", (8000, -6656, 160));
         }
       }
     }
@@ -993,7 +993,7 @@ survivor_vox() {
     wait 1;
   }
 
-  playsoundatposition("zmb_weap_wall", (8000, -6656, 160));
+  playSoundAtPosition("zmb_weap_wall", (8000, -6656, 160));
   i = -1;
 
   while(true) {
@@ -1004,9 +1004,9 @@ survivor_vox() {
         if(player useButtonPressed() && is_player_valid(player)) {
           if(flag("power_on")) {
             if(i == -1 || i > 4) {
-              playsoundatposition("vox_maxi_tv_distress_0", (8000, -6656, 160));
+              playSoundAtPosition("vox_maxi_tv_distress_0", (8000, -6656, 160));
             } else if(i < 4) {
-              playsoundatposition(level.survivor_vox[i], (8000, -6656, 160));
+              playSoundAtPosition(level.survivor_vox[i], (8000, -6656, 160));
             }
 
             i++;
@@ -1164,7 +1164,7 @@ avogadro_at_tower() {
 }
 
 droppowerup(story) {
-  center_struct = getstruct("sq_common_tower_fx", "targetname");
+  center_struct = getStruct("sq_common_tower_fx", "targetname");
   trace = bulletTrace(center_struct.origin, center_struct.origin - vectorscale((0, 0, 1), 999999.0), 0, undefined);
   poweruporigin = trace["position"] + vectorscale((0, 0, 1), 25.0);
   mintime = 240;
@@ -1175,7 +1175,7 @@ droppowerup(story) {
     trail setModel("tag_origin");
     wait 0.5;
     playFXOnTag(level._effect[story + "_sparks"], trail, "tag_origin");
-    trail moveto(poweruporigin, 10);
+    trail moveTo(poweruporigin, 10);
     trail waittill("movedone");
     level thread droppoweruptemptation(story, poweruporigin);
     wait 1;
@@ -1292,26 +1292,26 @@ init_navcomputer() {
 }
 
 navcomputer_waitfor_navcard() {
-  computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
-  trig_pos = getstruct("sq_common_key", "targetname");
+  computer_buildable_trig = getEnt("sq_common_buildable_trigger", "targetname");
+  trig_pos = getStruct("sq_common_key", "targetname");
   navcomputer_use_trig = spawn("trigger_radius_use", trig_pos.origin, 0, 48, 48);
-  navcomputer_use_trig setcursorhint("HINT_NOICON");
-  navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
-  navcomputer_use_trig triggerignoreteam();
+  navcomputer_use_trig setCursorHint("HINT_NOICON");
+  navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_USE");
+  navcomputer_use_trig triggerIgnoreTeam();
 
   while(true) {
     navcomputer_use_trig waittill("trigger", who);
 
     if(isPlayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_SUCCESS");
         who playSound("zmb_sq_navcard_success");
         update_sidequest_stats("navcard_applied_zm_transit");
         return;
       } else {
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_FAIL");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_FAIL");
         wait 1;
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_USE");
       }
     }
   }

@@ -206,7 +206,7 @@ function function_a1aaf8c0() {
 function private function_3dadedf8(localclientnum) {
   while(true) {
     origin = getlocalclientpos(localclientnum);
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     players = arraysortclosest(players, origin, undefined, 0, 6000);
     bleeding = 0;
 

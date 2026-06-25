@@ -243,7 +243,7 @@ guy_goes_directly_to_turret(var_0, var_1, var_2, var_3) {
 guy_gets_on_turret(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_2 endon("death");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("newanim");
   self.drivingvehicle = undefined;
   self.no_ai = 1;
@@ -258,9 +258,9 @@ guy_gets_on_turret(var_0, var_1, var_2, var_3) {
   var_6 = var_0 gettagangles(var_4.sittag);
   var_2 setdefaultdroppitch(0);
   var_2 thread turret_animate(var_2.passenger2turret_anime);
-  self animscripted("passenger2turret", var_5, var_6, var_3);
+  self animScripted("passenger2turret", var_5, var_6, var_3);
   wait(getanimlength(var_3));
-  self stopanimscripted();
+  self stopanimScripted();
   var_2 turret_aim_restore();
   self useturret(var_2);
 }
@@ -590,7 +590,7 @@ turret_aim_straight(var_0) {
   var_4 = self gettagorigin("tag_aim") + var_3;
   self.temptarget = spawn("script_origin", var_4);
   self.temptarget.ignoreme = 1;
-  self.temptarget linkto(self.ownervehicle);
+  self.temptarget linkTo(self.ownervehicle);
   self cleartargetentity();
   self settargetentity(self.temptarget);
   self waittill("turret_on_target");

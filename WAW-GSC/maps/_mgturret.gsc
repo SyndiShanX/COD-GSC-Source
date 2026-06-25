@@ -443,7 +443,7 @@ temp_think(mg42, targ) {
   }
 }
 turret_think(node) {
-  turret = GetEnt(node.auto_mg42_target, "targetname");
+  turret = getEnt(node.auto_mg42_target, "targetname");
   mintime = 0.5;
   if(isDefined(turret.script_turret_reuse_min)) {
     mintime = turret.script_turret_reuse_min;
@@ -940,7 +940,7 @@ aim_turret_at_ambush_point_or_visible_enemy(turret, ent) {
 
   for(i = ent.bread_crumbs.size - 3; i >= 0; i--) {
     crumb = ent.bread_crumbs[i];
-    normal = VectorNormalize(crumb - turret.origin);
+    normal = vectorNormalize(crumb - turret.origin);
     dot = VectorDot(forward, normal);
     if(dot < 0.75) {
       continue;
@@ -1077,7 +1077,7 @@ run_to_new_spot_and_setup_gun(spot) {
     thread play_sound_in_space("weapon_setup");
   }
 
-  self AnimScripted("setup_done", spot.origin, spot.angles, setup_anim);
+  self animScripted("setup_done", spot.origin, spot.angles, setup_anim);
 
   restoreDefaults();
 
@@ -1422,10 +1422,10 @@ mg_anim_ent() {
   self endon("stop_mg_anim_ent");
   self endon("death");
 
-  anim_ent = GetEnt(self.script_animent, "targetname");
+  anim_ent = getEnt(self.script_animent, "targetname");
 
   if(!isDefined(anim_ent)) {
-    assertMsg("Could not GetEnt( " + self.script_animent + ", \"targetname\" ) to animate the object for the given Turret");
+    assertMsg("Could not getEnt( " + self.script_animent + ", \"targetname\" ) to animate the object for the given Turret");
   }
 
   if(isDefined(anim_ent.script_animname)) {

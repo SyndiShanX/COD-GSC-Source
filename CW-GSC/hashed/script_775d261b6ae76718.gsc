@@ -259,7 +259,7 @@ function function_45ba6f18() {
 
   foreach(clip in exfil_escape_cover_clip) {
     if(isDefined(clip.script_noteworthy) && clip.script_noteworthy == "link_to_elevator") {
-      clip linkto(level.elevator);
+      clip linkTo(level.elevator);
     }
 
     if(isDefined(clip.script_string) && clip.script_string == "delete_on_gear_up") {
@@ -272,7 +272,7 @@ function function_45ba6f18() {
   foreach(model in exfil_escape_cover_model) {
     if(isDefined(model.script_noteworthy) && model.script_noteworthy == "link_to_elevator") {
       if(isDefined(model.script_model)) {
-        model.script_model linkto(level.elevator);
+        model.script_model linkTo(level.elevator);
       }
     }
 

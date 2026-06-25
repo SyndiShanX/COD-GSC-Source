@@ -37,7 +37,7 @@ function codecallback_ratscriptcommand(params) {
 function rscteleport(params) {
   player = [[level.rat.common.gethostplayer]]();
   pos = (float(params.x), float(params.y), float(params.z));
-  player setorigin(pos);
+  player setOrigin(pos);
   if(isDefined(params.ax)) {
     angles = (float(params.ax), float(params.ay), float(params.az));
     player setplayerangles(angles);
@@ -51,7 +51,7 @@ function rscteleportenemies(params) {
       continue;
     }
     pos = (float(params.x), float(params.y), float(params.z));
-    player setorigin(pos);
+    player setOrigin(pos);
     if(isDefined(params.ax)) {
       angles = (float(params.ax), float(params.ay), float(params.az));
       player setplayerangles(angles);

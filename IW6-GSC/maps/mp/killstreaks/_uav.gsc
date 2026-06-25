@@ -98,7 +98,7 @@ rotateUAVRig(rotateTime, endonMsg) {
   }
 
   while(true) {
-    self RotateYaw(-360, rotateTime);
+    self rotateYaw(-360, rotateTime);
     wait(rotateTime);
   }
 }
@@ -214,10 +214,10 @@ launchUAV(owner, duration, uavType) {
   xOffset = cos(angle) * radiusOffset;
   yOffset = sin(angle) * radiusOffset;
 
-  angleVector = VectorNormalize((xOffset, yOffset, zOffset));
+  angleVector = vectorNormalize((xOffset, yOffset, zOffset));
   angleVector = (angleVector * RandomIntRange(6000, 7000));
 
-  UAVModel LinkTo(level.UAVRig, "tag_origin", angleVector, (0, angle - 90, 0));
+  UAVModel linkTo(level.UAVRig, "tag_origin", angleVector, (0, angle - 90, 0));
 
   UAVModel thread updateUAVModelVisibility();
 
@@ -240,7 +240,7 @@ launchUAV(owner, duration, uavType) {
     UAVModel Unlink();
 
     destPoint = UAVModel.origin + (anglesToForward(UAVModel.angles) * 20000);
-    UAVModel MoveTo(destPoint, 60);
+    UAVModel moveTo(destPoint, 60);
     if(isDefined(level.uavSettings[uavType].fxId_leave) && isDefined(level.uavSettings[uavType].fx_leave_tag)) {
       playFXOnTag(level.uavSettings[uavType].fxId_leave, UAVModel, level.uavSettings[uavType].fx_leave_tag);
     }
@@ -250,7 +250,7 @@ launchUAV(owner, duration, uavType) {
     if(UAVModel.damageTaken < UAVModel.maxHealth) {
       UAVModel notify("leaving");
       UAVModel.isLeaving = true;
-      UAVModel MoveTo(destPoint, 4, 4, 0.0);
+      UAVModel moveTo(destPoint, 4, 4, 0.0);
     }
 
     UAVModel waittill_notify_or_timeout_hostmigration_pause("death", 4 + UAVModel.timeToAdd);

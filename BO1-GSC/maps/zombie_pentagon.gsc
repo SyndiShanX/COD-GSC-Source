@@ -72,7 +72,7 @@ delete_in_createfx() {
       targets = getEntArray(exterior_goals[i].target, "targetname");
       for(j = 0; j < targets.size; j++) {
         if(isDefined(targets[j].script_parameters) && targets[j].script_parameters == "repair_board") {
-          unbroken_section = GetEnt(targets[j].target, "targetname");
+          unbroken_section = getEnt(targets[j].target, "targetname");
           if(isDefined(unbroken_section)) {
             unbroken_section self_delete();
           }
@@ -105,9 +105,9 @@ pentagon_zone_init() {
   level.zones["hallway_level1"].num_spawners = 4;
 }
 enable_zone_elevators_init() {
-  elev_zone_trig = GetEnt("elevator1_down_riders", "targetname");
+  elev_zone_trig = getEnt("elevator1_down_riders", "targetname");
   elev_zone_trig thread maps\zombie_pentagon_teleporter::enable_zone_portals();
-  elev_zone_trig2 = GetEnt("elevator2_down_riders", "targetname");
+  elev_zone_trig2 = getEnt("elevator2_down_riders", "targetname");
   elev_zone_trig2 thread maps\zombie_pentagon_teleporter::enable_zone_portals();
 }
 include_weapons() {
@@ -199,9 +199,9 @@ include_powerups() {
   include_powerup("minigun");
 }
 electric_switch() {
-  trig = getent("use_elec_switch", "targetname");
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  trig setcursorhint("HINT_NOICON");
+  trig = getEnt("use_elec_switch", "targetname");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setCursorHint("HINT_NOICON");
   level thread wait_for_power();
   trig waittill("trigger", user);
   trig delete();
@@ -209,7 +209,7 @@ electric_switch() {
   Objective_State(8, "done");
 }
 wait_for_power() {
-  master_switch = getent("elec_switch", "targetname");
+  master_switch = getEnt("elec_switch", "targetname");
   master_switch notsolid();
   flag_wait("power_on");
   exploder(3500);
@@ -227,7 +227,7 @@ wait_for_power() {
   clientnotify("ZPO");
   maps\zombie_pentagon_teleporter::teleporter_init();
   master_switch waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  playFX(level._effect["switch_sparks"], getStruct("elec_switch_fx", "targetname").origin);
   master_switch playSound("zmb_turn_on");
   level thread maps\zombie_pentagon_amb::play_pentagon_announcer_vox("zmb_vox_pentann_poweron");
 }
@@ -262,7 +262,7 @@ zombie_pathing_cleanup() {
 vision_set_init() {
   level waittill("start_of_round");
   exploder(2000);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] VisionSetNaked("zombie_pentagon", 0.5);
   }
@@ -334,7 +334,7 @@ pentagon_bonfire_init() {
   current_defcon_level = level.defcon_level;
   punch_switches = getEntArray("punch_switch", "targetname");
   signs = getEntArray("defcon_sign", "targetname");
-  pack_door_slam = GetEnt("slam_pack_door", "targetname");
+  pack_door_slam = getEnt("slam_pack_door", "targetname");
   flag_set("bonfire_reset");
   level.defcon_level = 1;
   level notify("pack_room_reset");
@@ -384,10 +384,10 @@ lab_shutters_think() {
       vector = vector_scale(self.script_vector, scale);
       thief_vector = vector_scale(self.script_vector, .2);
       while(true) {
-        self MoveTo(door_pos + vector, time, time * 0.25, time * 0.25);
+        self moveTo(door_pos + vector, time, time * 0.25, time * 0.25);
         self thread maps\_zombiemode_blockers::door_solid_thread();
         flag_wait("thief_round");
-        self MoveTo(door_pos + thief_vector, time, time * 0.25, time * 0.25);
+        self moveTo(door_pos + thief_vector, time, time * 0.25, time * 0.25);
         self thread maps\_zombiemode_blockers::door_solid_thread();
         while(flag("thief_round")) {
           wait(0.5);
@@ -410,7 +410,7 @@ pentagon_brush_lights() {
   if(!isDefined(self.target)) {
     return;
   }
-  self.off_version = GetEnt(self.target, "targetname");
+  self.off_version = getEnt(self.target, "targetname");
   self.off_version Hide();
   flag_wait("power_on");
   self Hide();
@@ -463,11 +463,11 @@ pentagon_exit_level() {
 }
 pentagon_find_exit_point() {
   self endon("death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = VectorNormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {

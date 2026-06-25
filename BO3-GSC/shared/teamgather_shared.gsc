@@ -47,7 +47,7 @@ class cteamgather {
 
   function get_players_playing() {
     a_players = [];
-    a_all_players = getplayers();
+    a_all_players = getPlayers();
     for(i = 0; i < a_all_players.size; i++) {
       e_player = a_all_players[i];
       if(e_player.sessionstate == "playing") {
@@ -178,7 +178,7 @@ class cteamgather {
       }
       if(!reject) {
         v_forward = anglesToForward(m_v_interact_angles);
-        v_dir = vectornormalize(e_player.zoom_pos - m_v_interact_position);
+        v_dir = vectorNormalize(e_player.zoom_pos - m_v_interact_position);
         dp = vectordot(v_forward, v_dir);
         if(dp > -0.5) {
           reject = 1;
@@ -191,10 +191,10 @@ class cteamgather {
         break;
       }
     }
-    e_player setorigin(e_player.zoom_pos);
+    e_player setOrigin(e_player.zoom_pos);
     v0 = (m_v_interact_position[0], m_v_interact_position[1], m_v_interact_position[2]);
     v1 = (e_player.zoom_pos[0], e_player.zoom_pos[1], m_v_interact_position[2]);
-    v_dir = vectornormalize(v0 - v1);
+    v_dir = vectorNormalize(v0 - v1);
     v_angles = vectortoangles(v_dir);
     e_player setplayerangles(v_angles);
   }
@@ -385,11 +385,11 @@ class cteamgather {
   function setup_gameobject(v_pos, str_model, str_use_hint, e_los_ignore_me) {
     n_radius = 48;
     e_trigger = spawn("trigger_radius_use", v_pos, 0, n_radius, 30);
-    e_trigger triggerignoreteam();
+    e_trigger triggerIgnoreTeam();
     e_trigger setvisibletoall();
     e_trigger setteamfortrigger("none");
-    e_trigger usetriggerrequirelookat();
-    e_trigger setcursorhint("HINT_NOICON");
+    e_trigger useTriggerRequireLookAt();
+    e_trigger setCursorHint("HINT_NOICON");
     gobj_model_offset = (0, 0, 0);
     if(isDefined(str_model)) {
       gobj_visuals[0] = spawn("script_model", v_pos + gobj_model_offset);

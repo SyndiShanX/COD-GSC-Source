@@ -42,19 +42,19 @@ init_zeppelin(str_script_noteworthy, str_ender) {
 move_zeppelin_down_new_path(a_structs) {
   s_path_start = get_unused_struct(a_structs);
   self ghost();
-  self moveto(s_path_start.origin, 0.1);
-  self rotateto(s_path_start.angles, 0.1);
+  self moveTo(s_path_start.origin, 0.1);
+  self rotateTo(s_path_start.angles, 0.1);
   self waittill("movedone");
   self show();
 
   if(!isDefined(s_path_start.goal_struct)) {
     assert(isDefined(s_path_start.target), "move_zeppelin_down_new_path found start struct at " + s_path_start.origin + " without a target! These are needed for zeppelin splines!");
-    s_path_start.goal_struct = getstruct(s_path_start.target, "targetname");
+    s_path_start.goal_struct = getStruct(s_path_start.target, "targetname");
     assert(isDefined(s_path_start.goal_struct), "move_zeppelin_down_new_path couldn't find goal for path start struct at " + s_path_start.origin);
   }
 
   n_move_time = randomfloatrange(120.0, 150.0);
-  self moveto(s_path_start.goal_struct.origin, n_move_time);
+  self moveTo(s_path_start.goal_struct.origin, n_move_time);
   self waittill("movedone");
 }
 

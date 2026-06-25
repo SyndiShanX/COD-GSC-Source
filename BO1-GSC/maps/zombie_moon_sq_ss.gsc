@@ -19,7 +19,7 @@ init_1() {
   declare_sidequest_stage("sq", "ss1", ::init_stage_1, ::stage_logic, ::exit_stage_1);
   buttons = getEntArray("sq_ss_button", "targetname");
   for(i = 0; i < buttons.size; i++) {
-    ent = GetEnt(buttons[i].target, "targetname");
+    ent = getEnt(buttons[i].target, "targetname");
     buttons[i].terminal_model = ent;
   }
   level._ss_buttons = buttons;

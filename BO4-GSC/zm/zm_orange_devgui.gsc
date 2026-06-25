@@ -24,7 +24,7 @@ init() {
 
 jump_to(str_dest) {
   s_dest = struct::get(str_dest);
-  self setorigin(s_dest.origin);
+  self setOrigin(s_dest.origin);
   self setplayerangles(s_dest.angles);
 }
 
@@ -59,7 +59,7 @@ devgui() {
 
     switch (str_command) {
       case #"debug_jump1":
-        getplayers()[0] jump_to("<dev string:x8eb>");
+        getPlayers()[0] jump_to("<dev string:x8eb>");
         break;
       case #"hash_18769c2b6ae60247":
         level thread zm_orange_fasttravel_ziplines::function_80a9077f();

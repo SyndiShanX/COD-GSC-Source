@@ -196,16 +196,16 @@ function function_130d4334() {
 
 function private function_d794f3ac() {
   level endon(#"end_game");
-  var_192a77dd = getent("medical_door", "targetname");
-  var_192a77dd disconnectpaths();
+  var_192a77dd = getEnt("medical_door", "targetname");
+  var_192a77dd disconnectPaths();
   level waittill(#"hash_5674ed1aa008ba97");
   level flag::set("connect_zone_trans_north_pap_room_to_zone_trans_north");
   var_192a77dd connectpaths();
   var_ceb9f97e = struct::get("medical_door_shaft", "targetname");
   var_6e000a0e = util::spawn_model("tag_origin", var_ceb9f97e.origin, var_ceb9f97e.angles);
-  var_192a77dd linkto(var_6e000a0e);
+  var_192a77dd linkTo(var_6e000a0e);
   var_6e000a0e playSound(#"hash_2bf666c2ef742d89");
-  var_6e000a0e rotateto(var_6e000a0e.angles + (0, -120, 0), 1, 0.25, 0.25);
+  var_6e000a0e rotateTo(var_6e000a0e.angles + (0, -120, 0), 1, 0.25, 0.25);
   var_6e000a0e waittill(#"rotatedone");
 
   if(isDefined(var_6e000a0e)) {
@@ -215,15 +215,15 @@ function private function_d794f3ac() {
 
 function private function_e663b61e() {
   level endon(#"end_game");
-  var_8e0d050c = getent("armory_door", "targetname");
-  var_a801f97d = getent(var_8e0d050c.target, "targetname");
-  var_a801f97d disconnectpaths();
+  var_8e0d050c = getEnt("armory_door", "targetname");
+  var_a801f97d = getEnt(var_8e0d050c.target, "targetname");
+  var_a801f97d disconnectPaths();
   level waittill(#"hash_426979dda15dd76f");
   level flag::set("connect_zone_trans_south_pap_room_to_zone_trans_south");
   var_a801f97d connectpaths();
-  var_a801f97d linkto(var_8e0d050c);
+  var_a801f97d linkTo(var_8e0d050c);
   var_8e0d050c playSound(#"hash_2170098ce6c0016");
-  var_8e0d050c moveto(var_8e0d050c.origin + (0, 0, 90), 2, 0.5, 0.5);
+  var_8e0d050c moveTo(var_8e0d050c.origin + (0, 0, 90), 2, 0.5, 0.5);
 }
 
 function function_12f1a9dd() {
@@ -248,16 +248,16 @@ function function_12f1a9dd() {
   }
 
   if(level.var_1cffd28c === 1) {
-    var_7692d390 = getent("script_plane_collision", "targetname");
-    var_7692d390 disconnectpaths();
+    var_7692d390 = getEnt("script_plane_collision", "targetname");
+    var_7692d390 disconnectPaths();
     var_7692d390 solid();
     level scene::play(#"hash_2f425040d5e62683", "drop");
     level.var_1cffd28c = 0;
   }
 
   if(level.var_5a953d3d === 1) {
-    truckcollision = getent("script_truck_collision", "targetname");
-    truckcollision disconnectpaths();
+    truckcollision = getEnt("script_truck_collision", "targetname");
+    truckcollision disconnectPaths();
     truckcollision solid();
     level scene::play(#"hash_3b239490a05b582e", "drop");
     level.var_5a953d3d = 0;

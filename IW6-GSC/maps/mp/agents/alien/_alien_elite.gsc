@@ -323,7 +323,7 @@ player_fly_back(impulse, direction) {
   speed = Length(final_velocity);
 
   if(speed >= 400.0) {
-    final_velocity = VectorNormalize(final_velocity) * 400.0;
+    final_velocity = vectorNormalize(final_velocity) * 400.0;
   }
 
   self SetVelocity(final_velocity);
@@ -552,7 +552,7 @@ area_damage_and_impulse(damage_radius, min_damage, max_damage, impulse) {
     if(DistanceSquared(self.origin, player.origin) > damage_radius_squared) {
       continue;
     }
-    pushDirection = VectorNormalize(player.origin - self.origin);
+    pushDirection = vectorNormalize(player.origin - self.origin);
     player player_fly_back(impulse, pushDirection);
   }
 }

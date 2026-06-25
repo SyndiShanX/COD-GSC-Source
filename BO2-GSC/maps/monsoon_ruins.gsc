@@ -47,9 +47,9 @@ init_ruins_flags() {
 }
 
 skipto_camo_battle() {
-  level.harper = init_hero("harper", ::skipto_teleport_single_ai, getstruct("harper_skipto_camo_battle", "targetname"));
-  level.salazar = init_hero("salazar", ::skipto_teleport_single_ai, getstruct("salazar_skipto_camo_battle", "targetname"));
-  level.crosby = init_hero("crosby", ::skipto_teleport_single_ai, getstruct("crosby_skipto_camo_battle", "targetname"));
+  level.harper = init_hero("harper", ::skipto_teleport_single_ai, getStruct("harper_skipto_camo_battle", "targetname"));
+  level.salazar = init_hero("salazar", ::skipto_teleport_single_ai, getStruct("salazar_skipto_camo_battle", "targetname"));
+  level.crosby = init_hero("crosby", ::skipto_teleport_single_ai, getStruct("crosby_skipto_camo_battle", "targetname"));
   skipto_teleport_players("player_skipto_camo_battle");
   trigger_use("camo_intro_squad_color");
   array_thread(get_heroes(), ::set_ignoreme, 1);
@@ -85,7 +85,7 @@ skipto_outer_ruins() {
 }
 
 skipto_inner_ruins() {
-  setcellinvisibleatpos(getent("obj_ruins_interior", "targetname").origin);
+  setcellinvisibleatpos(getEnt("obj_ruins_interior", "targetname").origin);
   level.harper = init_hero("harper");
   level.salazar = init_hero("salazar");
   level.crosby = init_hero("crosby");
@@ -180,9 +180,9 @@ camo_battle_main() {
 }
 
 camo_mighty_mason() {
-  t_use = getent("trigger_mighty", "targetname");
-  t_use sethintstring(&"SCRIPT_HOLD_TO_USE");
-  t_use setcursorhint("HINT_NOICON");
+  t_use = getEnt("trigger_mighty", "targetname");
+  t_use setHintString(&"SCRIPT_HOLD_TO_USE");
+  t_use setCursorHint("HINT_NOICON");
   t_use trigger_off();
   level waittill("stealth_successful");
 
@@ -230,7 +230,7 @@ camo_mighty_mason() {
 }
 
 camo_mighty_mason_fx() {
-  s_fx = getstruct("mighty_fx", "targetname");
+  s_fx = getStruct("mighty_fx", "targetname");
 
   while(!flag("mighty_mason_done")) {
     playFX(getfx("mighty_fx"), s_fx.origin);
@@ -259,7 +259,7 @@ camo_battle_fx_boxes() {
 }
 
 camo_battle_fx_light() {
-  m_light = getent("fxanim_wind_light", "targetname");
+  m_light = getEnt("fxanim_wind_light", "targetname");
   m_light attach("p6_container_yard_light_on", "tag_origin");
   m_light play_fx("light_yard", undefined, undefined, "turn_off", 1, "tag_light1");
   m_light play_fx("light_yard", undefined, undefined, "turn_off", 1, "tag_light2");
@@ -282,7 +282,7 @@ camo_battle_gaz_retreat() {
   t_start = trigger_wait("start_camo_battle_gaz");
   t_start delete();
   veh_gaz thread go_path(getvehiclenode("camo_battle_gaz_path", "targetname"));
-  fx_anim = getent("fxanim_wind_barrel_01", "targetname");
+  fx_anim = getEnt("fxanim_wind_barrel_01", "targetname");
 
   while(distance2d(level.player.origin, fx_anim.origin) > 700) {
     wait 0.05;
@@ -369,7 +369,7 @@ camo_stealth_positive_listener() {
 }
 
 camo_stealth_loop() {
-  s_align = getstruct("camo_battle_intro", "targetname");
+  s_align = getStruct("camo_battle_intro", "targetname");
   n_index = self.script_int;
   s_align maps\_stealth_logic::stealth_ai_idle_and_react(self, "camo_stealth_loop_" + n_index, "camo_stealth_react_" + n_index);
 }
@@ -474,7 +474,7 @@ camo_battle_stealth_settings() {
 
 camo_battle_lift() {
   trigger_wait("lift_patrol_start");
-  ai_lift_guard = getent("lift_guard", "targetname") spawn_ai(1);
+  ai_lift_guard = getEnt("lift_guard", "targetname") spawn_ai(1);
   ai_lift_guard thread camo_battle_stealth_assist();
 
   if(flag("ruins_stealth_over")) {
@@ -500,7 +500,7 @@ camo_battle_lift() {
 }
 
 helipad_battle_main() {
-  setcellinvisibleatpos(getent("obj_ruins_interior", "targetname").origin);
+  setcellinvisibleatpos(getEnt("obj_ruins_interior", "targetname").origin);
   add_spawn_function_veh("heli_turret", ::heli_turret_think);
   add_spawn_function_veh("heli_killed", ::heli_killed_think);
   trigger_use("trigger_spawn_helicopters");
@@ -542,7 +542,7 @@ helipad_clean_up() {
   wait 0.05;
   trigger_use("move_squad_outer_ruins");
   flag_wait("player_reached_outer_ruins");
-  t_cleanup = getent("obj_ruins", "targetname");
+  t_cleanup = getEnt("obj_ruins", "targetname");
   a_axis = getaiarray("axis");
 
   foreach(ai in a_axis) {
@@ -563,7 +563,7 @@ helipad_fx_tarp() {
 }
 
 helipad_midway_cleanup() {
-  s_cleanup = getstruct("helipad_midway_cleanup", "targetname");
+  s_cleanup = getStruct("helipad_midway_cleanup", "targetname");
   a_axis = getaiarray("axis");
 
   foreach(ai in a_axis) {
@@ -643,12 +643,12 @@ helipad_squad_destroy_helicopter_vo() {
 
 helipad_destroy_lion_statue() {
   t_start = trigger_wait("helipad_lion_rpg");
-  s_start = getstruct(t_start.target, "targetname");
-  s_end = getstruct(s_start.target, "targetname");
+  s_start = getStruct(t_start.target, "targetname");
+  s_end = getStruct(s_start.target, "targetname");
   e_rpg = magicbullet("metalstorm_launcher", s_start.origin, s_end.origin);
   e_rpg waittill("death");
   level notify("fxanim_lion_statue_01_start");
-  m_lion = getent("lion_statue_collision", "targetname");
+  m_lion = getEnt("lion_statue_collision", "targetname");
   m_lion solid();
 }
 
@@ -682,11 +682,11 @@ helipad_ai_plant_shield(n_plant) {
   ai thread helipad_ai_plant_shield_early();
   ai.shield = spawn_model("t6_wpn_shield_carry_world", ai gettagorigin("tag_weapon_left"), ai gettagangles("tag_weapon_left"));
   ai.shield setscriptmoverflag(0);
-  ai.shield linkto(ai, "tag_weapon_left");
+  ai.shield linkTo(ai, "tag_weapon_left");
   ai detach("t6_wpn_shield_carry_world", "tag_weapon_left");
   ai.shield thread deploy_shield();
   ai set_ignoreall(0);
-  ai set_goalradius(32);
+  ai set_goalRadius(32);
   ai setgoalnode(getnode("shield_plant_cover_" + n_plant, "targetname"));
   ai clear_run_anim();
 }
@@ -722,7 +722,7 @@ helipad_plant_shield(ai_actor) {
 }
 
 helipad_battle_salazar_titus(ai_salazar) {
-  vh_heli = getent("heli_killed", "targetname");
+  vh_heli = getEnt("heli_killed", "targetname");
   ai_salazar maps\_titus::magic_bullet_titus(vh_heli.origin + vectorscale((0, 0, -1), 70.0));
   wait 2;
   flag_set("salazar_destroyed_heli");
@@ -740,17 +740,17 @@ heli_turret_think() {
   self setteam("allies");
   wait 0.05;
   self veh_toggle_exhaust_fx(0);
-  t_use = getent("helicopter_use_trigger", "targetname");
-  t_use sethintstring(&"SCRIPT_HINT_INTRUDER");
-  t_use setcursorhint("HINT_NOICON");
+  t_use = getEnt("helicopter_use_trigger", "targetname");
+  t_use setHintString(&"SCRIPT_HINT_INTRUDER");
+  t_use setCursorHint("HINT_NOICON");
   t_use trigger_off();
   level.player waittill_player_has_intruder_perk();
   t_use trigger_on();
   set_objective_perk(level.obj_intruder, t_use, 1500);
   t_use thread heli_turret_vo();
   t_use waittill("trigger", player);
-  t_use sethintstring("");
-  self linkto(t_use);
+  t_use setHintString("");
+  self linkTo(t_use);
   flag_clear("player_off_turret");
   v_player_origin = player.origin;
   v_player_angles = player getplayerangles();
@@ -777,7 +777,7 @@ heli_turret_think() {
   setcellinvisibleatpos((3944, 53494, -782));
   screen_fade_out(0, undefined, 1);
   self hidepart("body_animate_jnt");
-  self settargetentity(getent("heli_retreat", "targetname"), vectorscale((0, 0, 1), 70.0), 0);
+  self settargetentity(getEnt("heli_retreat", "targetname"), vectorscale((0, 0, 1), 70.0), 0);
   wait 0.2;
   self makevehicleusable();
   self usevehicle(player, 0);
@@ -811,7 +811,7 @@ heli_turret_think() {
   player.overrideplayerdamage = undefined;
   self showpart("body_animate_jnt");
   wait 0.2;
-  player setorigin(v_player_origin);
+  player setOrigin(v_player_origin);
   player setplayerangles(v_player_angles);
   luinotifyevent(&"hud_update_vehicle");
   setsaveddvar("cg_forceInfrared", 0);
@@ -984,17 +984,17 @@ heli_killed_death_watch() {
   m_fake.targetname = "heli_killed_fake";
   m_fake hide();
   m_fake notsolid();
-  clip_living = getent("heli_alive", "targetname");
-  clip_dead = getent("heli_dead", "targetname");
+  clip_living = getEnt("heli_alive", "targetname");
+  clip_dead = getEnt("heli_dead", "targetname");
   clip_dead notsolid();
   clip_dead connectpaths();
   flag_wait_either("salazar_destroyed_heli", "helicopter_destroyed_early");
   clip_living delete();
   clip_dead solid();
-  clip_dead disconnectpaths();
+  clip_dead disconnectPaths();
   level notify("fxanim_heli_explode_start");
   earthquake(0.8, 1.0, level.player.origin, 800, level.player);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   self.script_nocorpse = 1;
   self notify("death");
   self setteam("none");
@@ -1181,7 +1181,7 @@ outer_ruins_plant_turret() {
   flag_wait("plant_turret");
   level thread run_scene("plant_turret");
   flag_wait("plant_turret_started");
-  turret = getent("inner_ruins_turret", "targetname");
+  turret = getEnt("inner_ruins_turret", "targetname");
   a_ai = get_ais_from_scene("plant_turret");
   array_wait(a_ai, "death");
   end_scene("plant_turret");
@@ -1190,9 +1190,9 @@ outer_ruins_plant_turret() {
   turret_trace = bulletTrace(trace_start, trace_end, 0, turret);
   anchor = spawn("script_origin", turret.origin);
   anchor.angles = turret.angles;
-  turret linkto(anchor);
-  anchor moveto(turret_trace["position"], 0.3);
-  anchor rotateto((0, turret.angles[1], 0), 0.2);
+  turret linkTo(anchor);
+  anchor moveTo(turret_trace["position"], 0.3);
+  anchor rotateTo((0, turret.angles[1], 0), 0.2);
   anchor waittill("movedone");
   anchor delete();
   turret notify("death");
@@ -1221,7 +1221,7 @@ inner_ruins_main() {
   array_thread(getaiarray("axis"), ::die);
   setmusicstate("MONSOON_BATTLE_1_END");
   autosave_by_name("at_temple_door");
-  t_door_damage = getent("temple_doors_trigger", "targetname");
+  t_door_damage = getEnt("temple_doors_trigger", "targetname");
   t_door_damage thread inner_ruins_door_think();
   level.crosby thread inner_ruins_crosby();
   level.salazar thread inner_ruins_salazar();
@@ -1261,7 +1261,7 @@ inner_ruins_destroy_choice() {
 
 inner_ruins_destroy_message() {
   if(!level.player player_has_explosive_weapon_equipped()) {
-    set_objective(level.obj_destroy_door, getent("temple_doors", "targetname"), "breadcrumb");
+    set_objective(level.obj_destroy_door, getEnt("temple_doors", "targetname"), "breadcrumb");
 
     while(!flag("ruins_door_destroyed")) {
       if(level.player player_has_explosive_weapon_equipped()) {
@@ -1273,7 +1273,7 @@ inner_ruins_destroy_message() {
   }
 
   if(!flag("ruins_door_destroyed")) {
-    set_objective(level.obj_destroy_door, getent("temple_doors", "targetname"), "destroy");
+    set_objective(level.obj_destroy_door, getEnt("temple_doors", "targetname"), "destroy");
     screen_message_create(&"MONSOON_TEMPLE_TUTORIAL");
     level waittill_either("ruins_door_destroyed", "harper_shooting");
     screen_message_delete();
@@ -1291,8 +1291,8 @@ inner_ruins_harper_shoot_door() {
 
 inner_ruins_harper_titus(ai_harper) {
   if(!flag("ruins_door_destroyed")) {
-    m_doors_trigger = getent("temple_doors_trigger", "targetname");
-    m_doors = getent("temple_doors", "targetname");
+    m_doors_trigger = getEnt("temple_doors_trigger", "targetname");
+    m_doors = getEnt("temple_doors", "targetname");
     ai_harper maps\_titus::magic_bullet_titus(m_doors.origin);
     flag_wait("ruins_door_destroyed");
 
@@ -1319,7 +1319,7 @@ inner_ruins_door_think() {
     }
   }
 
-  setcellvisibleatpos(getent("obj_ruins_interior", "targetname").origin);
+  setcellvisibleatpos(getEnt("obj_ruins_interior", "targetname").origin);
   flag_set("ruins_door_destroyed");
   level.friendlyfiredisabled = 1;
   level notify("_rain_lightning");
@@ -1327,10 +1327,10 @@ inner_ruins_door_think() {
   exploder(1000);
   level notify("fxanim_temple_door_start");
   earthquake(0.8, 0.5, level.player.origin, 500);
-  level.player playrumbleonentity("artillery_rumble");
-  m_door_clip = getent("temple_doors", "targetname");
-  m_door_pristine = getent("temple_door_left", "targetname");
-  m_door_destroyed = getent("temple_doors_destroyed", "targetname");
+  level.player playRumbleOnEntity("artillery_rumble");
+  m_door_clip = getEnt("temple_doors", "targetname");
+  m_door_pristine = getEnt("temple_door_left", "targetname");
+  m_door_destroyed = getEnt("temple_doors_destroyed", "targetname");
   m_door_clip notsolid();
   m_door_clip connectpaths();
   m_door_clip delete();
@@ -1406,14 +1406,14 @@ inner_ruins_harper() {
 }
 
 inner_ruins_destruction_right() {
-  t_event = getent("trigger_ruins_right_destroyed", "targetname");
+  t_event = getEnt("trigger_ruins_right_destroyed", "targetname");
   t_event waittill("trigger");
   t_event delete();
   level notify("fxanim_tree_fall_rt_start");
 }
 
 inner_ruins_destruction_left() {
-  t_event = getent("trigger_ruins_left_destroyed", "targetname");
+  t_event = getEnt("trigger_ruins_left_destroyed", "targetname");
   a_c4_pos = getStructArray(t_event.target, "targetname");
   a_c4 = [];
 
@@ -1436,7 +1436,7 @@ inner_ruins_destruction_left() {
   }
 
   earthquake(0.8, 0.5, level.player.origin, 500);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   ai_in_ruin = get_ai("ruin_collapse_left", "script_noteworthy");
 
   if(isDefined(ai_in_ruin) && isalive(ai_in_ruin)) {
@@ -1445,7 +1445,7 @@ inner_ruins_destruction_left() {
   }
 
   wait 3;
-  pos = getstruct("ruin_corpse_delete", "targetname");
+  pos = getStruct("ruin_corpse_delete", "targetname");
   a_corpses = getcorpsearray();
 
   foreach(corpse in a_corpses) {
@@ -1482,7 +1482,7 @@ ruins_interior_main() {
 
 ruins_interior_vo() {
   level endon("player_at_clean_room");
-  m_destroyed_door = getent("temple_doors_destroyed", "targetname");
+  m_destroyed_door = getEnt("temple_doors_destroyed", "targetname");
 
   while(level.player.origin[0] < m_destroyed_door.origin[0]) {
     wait 0.05;
@@ -1494,7 +1494,7 @@ ruins_interior_vo() {
   flag_wait("seal_ruins");
   wait 0.05;
   array_notify(get_heroes(), "stop_hero_rain");
-  m_collapse_clip = getent("look_at", "script_noteworthy");
+  m_collapse_clip = getEnt("look_at", "script_noteworthy");
   level.player waittill_player_looking_at(m_collapse_clip.origin);
   wait 0.5;
   level.harper say_dialog("harp_no_turning_back_now_1");
@@ -1503,7 +1503,7 @@ ruins_interior_vo() {
 ruins_interior_seal() {
   flag_wait("seal_ruins");
   setmusicstate("MONSOON_IN_RUINS");
-  s_safety = getstruct("seal_ruins_safety", "targetname");
+  s_safety = getStruct("seal_ruins_safety", "targetname");
 
   while(level.player.origin[0] < s_safety.origin[0] || level.player.origin[1] < s_safety.origin[1]) {
     wait 0.05;
@@ -1512,10 +1512,10 @@ ruins_interior_seal() {
   a_heroes = get_heroes();
 
   foreach(hero in a_heroes) {
-    s_pos = getstruct("safety_temple_" + hero.script_animname, "targetname");
+    s_pos = getStruct("safety_temple_" + hero.script_animname, "targetname");
 
     if(hero.origin[0] < s_pos.origin[0]) {
-      hero anim_stopanimscripted();
+      hero anim_stopanimScripted();
       hero forceteleport(s_pos.origin, s_pos.angles);
     }
   }
@@ -1523,9 +1523,9 @@ ruins_interior_seal() {
   set_rain_level(0);
   setsaveddvar("wind_global_vector", "-180 -180 40");
   a_turrets = getEntArray("outer_ruins_turret", "targetname");
-  a_turrets = add_to_array(a_turrets, getent("inner_ruins_turret", "targetname"), 0);
+  a_turrets = add_to_array(a_turrets, getEnt("inner_ruins_turret", "targetname"), 0);
   array_delete(a_turrets);
-  veh_heli_turret = getent("heli_turret", "targetname");
+  veh_heli_turret = getEnt("heli_turret", "targetname");
 
   if(isDefined(veh_heli_turret)) {
     veh_heli_turret.delete_on_death = 1;
@@ -1536,7 +1536,7 @@ ruins_interior_seal() {
     }
   }
 
-  veh_heli_killed = getent("heli_killed_fake", "targetname");
+  veh_heli_killed = getEnt("heli_killed_fake", "targetname");
 
   if(isDefined(veh_heli_killed)) {
     veh_heli_killed.delete_on_death = 1;
@@ -1550,13 +1550,13 @@ ruins_interior_seal() {
   level notify("remove_c4");
   a_c4 = getEntArray("planted_c4", "targetname");
   array_delete(a_c4);
-  m_collapse = getent("ruins_blocker", "targetname");
+  m_collapse = getEnt("ruins_blocker", "targetname");
   m_collapse solid();
-  m_collapse disconnectpaths();
+  m_collapse disconnectPaths();
   m_collapse show();
   earthquake(0.4, 2, level.player.origin, 500);
   level.player playrumblelooponentity("damage_light");
-  playsoundatposition("evt_ruin_collapse", (6545, 53569, -493));
+  playSoundAtPosition("evt_ruin_collapse", (6545, 53569, -493));
   level.player playSound("evt_ruin_shake");
   level clientnotify("snoff");
   wait 2;

@@ -202,7 +202,7 @@ function private mocompadjusttocoverupdate(entity, mocompanim, mocompanimblendou
   }
   movevector = entity.nodeoffsetorigin - entity.origin;
   if(lengthsquared(movevector) > 1) {
-    movevector = vectornormalize(movevector) * 1;
+    movevector = vectorNormalize(movevector) * 1;
   }
   entity forceteleport(entity.origin + movevector, entity.angles, 0);
   normalizedtime = ((entity getanimtime(mocompanim) * getanimlength(mocompanim)) + mocompanimblendouttime) / mocompduration;

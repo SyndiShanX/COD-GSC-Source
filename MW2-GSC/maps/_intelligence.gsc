@@ -92,7 +92,7 @@ create_array_of_intel_items() {
   intelligence_items = getEntArray("intelligence_item", "targetname");
   for(i = 0; i < intelligence_items.size; i++) {
     println(intelligence_items[i].origin);
-    intelligence_items[i].item = getent(intelligence_items[i].target, "targetname");
+    intelligence_items[i].item = getEnt(intelligence_items[i].target, "targetname");
     intelligence_items[i].found = false;
   }
   return intelligence_items;
@@ -121,7 +121,7 @@ wait_for_pickup() {
 
   if(self.classname == "trigger_use") {
     self setHintString(&"SCRIPT_INTELLIGENCE_PICKUP");
-    self usetriggerrequirelookat();
+    self useTriggerRequireLookAt();
   }
 
   self waittill("trigger", player);

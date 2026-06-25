@@ -845,7 +845,7 @@ func_1287B(var_0) {
   scripts\cp\zombies\zombie_analytics::func_AF82(1, self, var_0.type, self.itempicked, " None ", level.transactionid);
   var_0.var_CB63 setModel(getweaponmodel(var_5));
   var_6 = func_7A06(var_5);
-  var_0.var_CB63 sethintstring(var_6);
+  var_0.var_CB63 setHintString(var_6);
   var_0.var_CB63 makeusable();
   var_0.pillageinfo = spawnStruct();
   var_0.pillageinfo.type = "explosive";

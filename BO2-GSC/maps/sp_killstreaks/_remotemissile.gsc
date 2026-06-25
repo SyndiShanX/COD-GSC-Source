@@ -174,7 +174,7 @@ _fire(lifeid, player, team, origin, angles, targetpos) {
   rocket missile_sound_stop();
 
   if(isDefined(player)) {
-    player playrumbleonentity("grenade_rumble");
+    player playRumbleOnEntity("grenade_rumble");
     player thread staticeffect(0.5);
     player.killstreak_waitamount = undefined;
     player unlinkfrommissile();

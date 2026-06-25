@@ -10,10 +10,10 @@ main() {
 
 setup_linked_ent() {
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0)) {
-      self linkto(var_0);
+      self linkTo(var_0);
     } else {}
   }
 }
@@ -82,7 +82,7 @@ wobbler_think() {
     var_1 = randomfloatrange(0.75, 2.0);
     var_0 = pick_new_target_angle(self.angles[self.axis]);
     var_2 = update_angles_vector_from_axis(self.axis, self.angles, var_0);
-    self rotateto(var_2, var_1, var_1 * 0.5, var_1 * 0.5);
+    self rotateTo(var_2, var_1, var_1 * 0.5, var_1 * 0.5);
     wait(var_1);
   }
 }

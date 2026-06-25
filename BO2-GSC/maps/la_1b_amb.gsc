@@ -133,7 +133,7 @@ switch_music_wait() {
 
 play_intro_radio() {
   level waittill("radio_start_wakeup");
-  playsoundatposition("vox_blend_la1b_intro", (0, 0, 0));
+  playSoundAtPosition("vox_blend_la1b_intro", (0, 0, 0));
 }
 
 la_drone_control_tones(activate) {

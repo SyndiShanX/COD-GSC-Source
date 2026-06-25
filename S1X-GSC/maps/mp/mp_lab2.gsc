@@ -210,8 +210,8 @@ isOutOfBounds() {
 SetupDynamicEvent() {
   groundShadowPatchBefore = getEntArray("ground_shadow_patch_before", "targetname");
   groundShadowPatchAfter = getEntArray("ground_shadow_patch_after", "targetname");
-  fromEnt = GetEnt("teleport_from", "targetname");
-  toEnt = GetEnt("teleport_to", "targetname");
+  fromEnt = getEnt("teleport_from", "targetname");
+  toEnt = getEnt("teleport_to", "targetname");
   foreach(thing in groundShadowPatchBefore) {
     thing.origin += toent.origin - froment.origin;
   }
@@ -238,13 +238,13 @@ SetupDynamicEvent() {
   FlyingBuildingEnt.radiant_pos = FlyingBuildingEnt.origin;
   FlyingBuildingEnt.flying = false;
   FlyingBuildingEnt.parts = parts;
-  FlyingBuildingEnt.TriggerHurtLower = getent("building_hurt_01", "targetname");
-  FlyingBuildingEnt.TriggerHurtUpper = getent("building_hurt_02", "targetname");
-  FlyingBuildingEnt.TriggerKillVehiclesHeli = getent("vehicle_kill_heli", "targetname");
+  FlyingBuildingEnt.TriggerHurtLower = getEnt("building_hurt_01", "targetname");
+  FlyingBuildingEnt.TriggerHurtUpper = getEnt("building_hurt_02", "targetname");
+  FlyingBuildingEnt.TriggerKillVehiclesHeli = getEnt("vehicle_kill_heli", "targetname");
   FlyingBuildingEnt.TriggerKillVehiclesHeliOffset = (525, 36, 635);
 
   FlyingBuildingEnt.TriggerKillVehiclesHeli.origin += (0, 0, -10000);
-  FlyingBuildingEnt.TriggerKillVehiclesBuilding = getent("vehicle_kill_building", "targetname");
+  FlyingBuildingEnt.TriggerKillVehiclesBuilding = getEnt("vehicle_kill_building", "targetname");
 
   FlyingBuildingEnt.TriggerKillVehiclesBuildingOffset = (FlyingBuildingEnt.TriggerKillVehiclesBuilding.origin - FlyingBuildingEnt.origin);
   FlyingBuildingEnt.TriggerKillVehiclesBuilding.origin += (0, 0, -10000);
@@ -260,9 +260,9 @@ SetupDynamicEvent() {
     part LinkToSynchronizedParent(FlyingBuildingEnt);
   }
 
-  FlyingBuildingEnt.DynamicPathBlock = getent("flying_building_paths_unblock", "targetname");
+  FlyingBuildingEnt.DynamicPathBlock = getEnt("flying_building_paths_unblock", "targetname");
 
-  FlyingBuildingEnt.DynamicPathRampSwitch = getent("flying_building_path_ramp_switch", "targetname");
+  FlyingBuildingEnt.DynamicPathRampSwitch = getEnt("flying_building_path_ramp_switch", "targetname");
 
   FlyingBuildingEnt.DynamicPathBlock LinkToSynchronizedParent(FlyingBuildingEnt);
 
@@ -344,7 +344,7 @@ dynamicEventEndFunc() {
 
       if(isDefined(part.script_noteworthy)) {
         if(part.script_noteworthy == "flying_building_collision_shell") {
-          part DisconnectPaths();
+          part disconnectPaths();
           part SetAISightLineVisible(true);
         } else if(part.script_noteworthy == "collision") {
           part delete();
@@ -377,7 +377,7 @@ GetNetQuantizedAngle(angle) {
 dom_b_move() {
   wait(0.05);
 
-  post_event_flag_b_origin = getstruct("dom_point_b_location", "targetname");
+  post_event_flag_b_origin = getStruct("dom_point_b_location", "targetname");
 
   foreach(domFlag in level.flags) {
     if(domFlag.script_label == "_b") {
@@ -516,7 +516,7 @@ MoveFlyingBuilding() {
       part.unresolved_collision_kill = false;
       if(isDefined(part.script_noteworthy)) {
         if(part.script_noteworthy == "flying_building_collision_shell") {
-          part DisconnectPaths();
+          part disconnectPaths();
           part SetAISightLineVisible(true);
         }
       }
@@ -635,7 +635,7 @@ set_lighting_values() {
 
 RotateMeshes(time) {
   while(1) {
-    self RotateYaw(360, time);
+    self rotateYaw(360, time);
     wait(time);
   }
 }
@@ -643,7 +643,7 @@ RotateMeshes(time) {
 SetupCraneChem() {
   level.AlarmSystem = spawnStruct();
   level.AlarmSystem.SpinnerArray = getEntArray("horizontal_spinner", "targetname");
-  level.AlarmSystem.AlarmSoundEnt = GetEnt("alarm_missile_sound01", "targetname");
+  level.AlarmSystem.AlarmSoundEnt = getEnt("alarm_missile_sound01", "targetname");
 
   level.GasMachine = spawnStruct();
   level.GasMachine.TotalSpawned = [];
@@ -653,7 +653,7 @@ SetupCraneChem() {
   level.GasMachine.ExplosionAngleOffset = (-90, 0, 0);
   level.GasMachine.MachineSparkArray = getEntArray("sparkgroup", "targetname");
   level.GasMachine.SprayerDripArray = getEntArray("dripgroup", "targetname");
-  level.GasMachine.PartcileDryLocation = getstruct("particle_dryer", "targetname");
+  level.GasMachine.PartcileDryLocation = getStruct("particle_dryer", "targetname");
 
   level.GasMachine.chemical_rackPauseTime = 0;
   level.GasMachine.chemical_racksActive = true;
@@ -666,14 +666,14 @@ SetupCraneChem() {
   level.GasMachine.SpraySheetState = 1;
   level.GasMachine.TotalChemCanHealth = 100;
   level.GasMachine.ParticleSpawnOriginOffset = (0, 0, 0);
-  level.GasMachine.DryerFan = GetEnt("dryer_fan", "targetname");
+  level.GasMachine.DryerFan = getEnt("dryer_fan", "targetname");
   level.GasMachine.DryerFanRotateVelocity = (0, 1400, 0);
   level.GasMachine.GasRange = 170;
 
   CurrentStruct = level.GasMachine.chemical_rackGotosArray[0];
   while(true) {
     if(isDefined(CurrentStruct.target)) {
-      FoundStruct = getstruct(CurrentStruct.target, "targetname");
+      FoundStruct = getStruct(CurrentStruct.target, "targetname");
       level.GasMachine.chemical_rackGotosArray = add_to_array(level.GasMachine.chemical_rackGotosArray, FoundStruct);
       CurrentStruct = FoundStruct;
       continue;
@@ -875,7 +875,7 @@ SpawnCrane(RackGotos, HasCans) {
       Crane.chemical_rack = spawn("script_model", Crane GetTagOrigin("tag_cargo"));
       Crane.exploding = false;
       Crane.chemical_rack setModel("lab2_cannister_holder_01");
-      Crane.chemical_rack linkto(Crane, "tag_cargo");
+      Crane.chemical_rack linkTo(Crane, "tag_cargo");
       Crane.chemical_rack AddToTotalSpawned();
       Crane.has_chemicals = true;
       Crane.chemical_rack solid();

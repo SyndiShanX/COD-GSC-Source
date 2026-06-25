@@ -398,7 +398,7 @@ getplayerlookingatdronetoolong(var_0, var_1) {
     }
 
     var_4 = anglesToForward(var_3 getplayerangles());
-    var_5 = vectornormalize(var_0.origin - var_3.origin);
+    var_5 = vectorNormalize(var_0.origin - var_3.origin);
     var_6 = vectordot(var_4, var_5);
 
     if(var_6 < 0.7) {
@@ -526,7 +526,7 @@ dronedodrop(var_0) {
 
   var_5 = var_0 + (0, 0, 40);
   var_6 = (randomfloatrange(-1 * var_4, var_4), randomfloatrange(-1 * var_4, var_4), var_4);
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_8 = spawn("script_model", var_5);
   var_8 setModel(var_2);
   var_8 physicslaunchserver(var_5, var_6);
@@ -687,7 +687,7 @@ dronehandlepickup() {
     var_4 = spawn("script_model", self.origin);
     var_4 setModel(var_2);
     var_4 hudoutlineenable(2, 0);
-    var_4 linkto(self, "tag_origin", (0, 0, 60), (0, 0, 0));
+    var_4 linkTo(self, "tag_origin", (0, 0, 60), (0, 0, 0));
     thread dronecleanuppickupmodel(var_4);
   }
 

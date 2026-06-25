@@ -420,13 +420,13 @@ mg42_think() {
     println("Guy at org ", self.origin, " had no node");
     return;
   }
-  mg42 = getent(node.target, "targetname");
+  mg42 = getEnt(node.target, "targetname");
   mg42.org = node.origin;
 
   if(isDefined(mg42.target)) {
     if((!isDefined(level.mg42_trigger)) || (!isDefined(level.mg42_trigger[mg42.target]))) {
       level.mg42_trigger[mg42.target] = false;
-      getent(mg42.target, "targetname") thread mg42_trigger();
+      getEnt(mg42.target, "targetname") thread mg42_trigger();
     }
     trigger = true;
   } else
@@ -573,7 +573,7 @@ mg42_gunner_manual_think(mg42, trigger) {
     while(!isDefined(level.player_covertrigger)) {
       current_org = targ_org.origin;
       if(distance(current_org, targets[self.gun_targ].origin) > mindist) {
-        temp_vec = vectornormalize(targets[self.gun_targ].origin - current_org);
+        temp_vec = vectorNormalize(targets[self.gun_targ].origin - current_org);
         temp_vec = vector_multiply(temp_vec, mindist);
         current_org += temp_vec;
       } else
@@ -619,7 +619,7 @@ mg42_gunner_manual_think(mg42, trigger) {
       while(player_safe()) {
         current_org = targ_org.origin;
         if(distance(current_org, targets[self.gun_targ].origin) > mindist) {
-          temp_vec = vectornormalize(targets[self.gun_targ].origin - current_org);
+          temp_vec = vectorNormalize(targets[self.gun_targ].origin - current_org);
           temp_vec = vector_multiply(temp_vec, mindist);
           current_org += temp_vec;
         } else
@@ -728,7 +728,7 @@ temp_think(mg42, targ) {
   }
 }
 turret_think(node) {
-  turret = getent(node.auto_mg42_target, "targetname");
+  turret = getEnt(node.auto_mg42_target, "targetname");
   mintime = 0.5;
   if(isDefined(turret.script_turret_reuse_min)) {
     mintime = turret.script_turret_reuse_min;
@@ -1367,7 +1367,7 @@ run_to_new_spot_and_setup_gun(spot) {
     thread play_sound_in_space("weapon_setup");
   }
 
-  self animscripted("setup_done", spot.origin, spot.angles, setup_anim);
+  self animScripted("setup_done", spot.origin, spot.angles, setup_anim);
 
   restoreDefaults();
 

@@ -377,7 +377,7 @@ vlobby_player() {
     primWeap = player.pers["primaryWeapon"];
   }
 
-  cao_spawnpoint = getent("cao_spawnpoint", "targetname");
+  cao_spawnpoint = getEnt("cao_spawnpoint", "targetname");
   if(!localPlayMatchReturn) {
     vlprintln("adding xuid " + xuid + "from vlobby_player");
     ownerId = add_avatar(xuid);
@@ -410,7 +410,7 @@ vlobby_player() {
   origin = (-70.7675, -691.293, 507.472);
   toavatar = player.avatar_spawnpoint.origin - origin;
   angles = (0, 87, 0);
-  toavatar = VectorNormalize(toavatar);
+  toavatar = vectorNormalize(toavatar);
 
   camera = spawn("script_model", origin);
   camera.angles = angles;
@@ -435,9 +435,9 @@ vlobby_player() {
 
   level.vlCamera = camera;
 
-  player SetOrigin(camera.origin);
-  player PlayerLinkTo(camera, "tag_player");
-  player CameraLinkTo(camera, "tag_player");
+  player setOrigin(camera.origin);
+  player PlayerlinkTo(camera, "tag_player");
+  player CameralinkTo(camera, "tag_player");
   level.in_firingrange = false;
 
   player AllowFire(false);
@@ -597,7 +597,7 @@ vlobby_player() {
           camParams.mode = camParams.newmode;
 
           camera.cut = true;
-          player SetOrigin(targetAvatar.origin);
+          player setOrigin(targetAvatar.origin);
         } else if(camParams.newmode == "clanprofile") {
           hide_avatar(player.cao_agent);
           show_non_owner_avatars();
@@ -654,7 +654,7 @@ vlobby_player() {
           player prep_for_controls(targetAvatar, targetAvatar.angles);
 
           camera.MovingState = "starting";
-          player SetOrigin(targetAvatar.origin);
+          player setOrigin(targetAvatar.origin);
         }
         camParams.mode = camParams.newmode;
       }
@@ -701,11 +701,11 @@ StoreCameraTargets(camera) {
     camera.CamerHelperArray[camera.CamerHelperArray.size] = AvatarSpawn;
   }
   foreach(AvatarSpawn in PlayerPositions) {
-    CameraTarget = GetEnt(AvatarSpawn.target, "targetname");
+    CameraTarget = getEnt(AvatarSpawn.target, "targetname");
     if(CameraTarget.script_noteworthy == "camera_target") {
       AvatarSpawn.camera_lookat = CameraTarget;
     }
-    CameraEnt = GetEnt(CameraTarget.target, "targetname");
+    CameraEnt = getEnt(CameraTarget.target, "targetname");
     if(CameraEnt.script_noteworthy == "camera") {
       AvatarSpawn.camera_helper = CameraEnt;
       CameraEnt.camera_goal = AvatarSpawn;
@@ -728,7 +728,7 @@ calc_target_dir(camerapos, targetpos, camParams) {
   D = dist2D / sqrt(1 + camParams.cur_camoffset_ratio * camParams.cur_camoffset_ratio);
   vx = c2t[0] - camParams.cur_camoffset_ratio * c2t[1];
   vy = camParams.cur_camoffset_ratio * c2t[0] + c2t[1];
-  v = D * VectorNormalize((vx, vy, 0));
+  v = D * vectorNormalize((vx, vy, 0));
 
   v = v + (0, 0, c2t[2]);
   return v;
@@ -761,7 +761,7 @@ CamMove(target, time, acctime, dectime) {
   if(isDefined(self.cut)) {
     self.origin = target;
   } else {
-    self moveto(target, time, acctime, dectime);
+    self moveTo(target, time, acctime, dectime);
   }
 }
 
@@ -769,7 +769,7 @@ CamRotate(target, time, acctime, dectime) {
   if(isDefined(self.cut)) {
     self.angles = target;
   } else {
-    self rotateto(target, time, acctime, dectime);
+    self rotateTo(target, time, acctime, dectime);
   }
 }
 
@@ -1008,7 +1008,7 @@ MovePlayerEyeToCam(camera) {
   player = level.players[0];
   eyePos = player getEye();
   eyeDif = eyePos - player.origin;
-  player SetOrigin(camera.origin - eyeDif, false);
+  player setOrigin(camera.origin - eyeDif, false);
   player SetPlayerAngles((player.angles[0], camera.angles[1], player.angles[2]));
 }
 
@@ -1064,9 +1064,9 @@ cao_update(camera, targetAvatar, camParams) {
   target_origin = targetAvatar.origin + (0, 0, targetzoff);
 
   c2t = target_origin - (start_origin + camParams.origin_offset);
-  c2t = camParams.dist * VectorNormalize(c2t);
+  c2t = camParams.dist * vectorNormalize(c2t);
   c2t = (c2t[0], c2t[1], -1 * cameraZOff);
-  c2t = camParams.dist * VectorNormalize(c2t);
+  c2t = camParams.dist * vectorNormalize(c2t);
   newCamOrigin = target_origin - c2t;
 
   if(isDefined(level.caoAvatarPosOffset)) {
@@ -1214,7 +1214,7 @@ spawn_an_avatar(spawnpoint, primaryWeapon, secondaryWeapon, primWeap, equipment,
   agent.ownerid = ownerid;
 
   agent SetPlayerAngles(agent.spawn_angles);
-  agent SetOrigin(ground_origin, true);
+  agent setOrigin(ground_origin, true);
   agent.angles = agent.spawn_angles;
   agent.startangles = agent.spawn_angles;
   agent.storedangleY = agent.angles[1];
@@ -2918,7 +2918,7 @@ find_best_cam_path(_start, _end, obstacles) {
 move_outside_circle(point, circle) {
   center = circle["center"];
   radius = circle["radius"];
-  dir = VectorNormalize((point[0] - center[0], point[1] - center[1], 0));
+  dir = vectorNormalize((point[0] - center[0], point[1] - center[1], 0));
   point = (center[0] + radius * dir[0], center[1] + radius * dir[1], point[2]);
   return point;
 }
@@ -2929,7 +2929,7 @@ trace2d(start, end, circle) {
   radius = circle["radius"];
   pathradius = radius + pathbias;
   vec2d = (end[0] - start[0], end[1] - start[1], 0);
-  dir = VectorNormalize(vec2d);
+  dir = vectorNormalize(vec2d);
   dist = Length2D(vec2d);
   s2c = (center[0] - start[0], center[1] - start[1], 0);
   off = VectorDot(dir, s2c);
@@ -2946,7 +2946,7 @@ trace2d(start, end, circle) {
   radratio = 1.0;
   if(dist < radius) {
     intersect = true;
-    normal = VectorNormalize(normal);
+    normal = vectorNormalize(normal);
 
     closestpoint = (center[0] + pathradius * normal[0], center[1] + pathradius * normal[1], start[2] + (fraction * (end[2] - start[2])));
     radratio = dist / radius;
@@ -2962,7 +2962,7 @@ trace2d(start, end, circle) {
 calc_new_pos(prv_point, speed, goal) {
   dist = Distance(prv_point, goal);
   if(dist > speed) {
-    dir = VectorNormalize(goal - prv_point);
+    dir = vectorNormalize(goal - prv_point);
     goal = prv_point + speed * dir;
   }
   return goal;
@@ -2975,7 +2975,7 @@ lookahead_path(prvIdx, prv_point, speed, lookahead, path) {
   }
   end = path[prvIdx + 1];
   len = Distance(start, end);
-  dir = VectorNormalize(end - start);
+  dir = vectorNormalize(end - start);
   dist_on_path = VectorDot(dir, prv_point - start);
   if(dist_on_path < 0) {
     dist_on_path = 0;
@@ -3085,7 +3085,7 @@ build_path_info(camera, camParams, start_loc, end_loc, endAngles) {
   camera.pathInfo_start_loc = start_loc;
   camera.pathInfo_end_loc = end_loc;
   camera.pathInfo_velocity = (0, 0, 0);
-  baseTravelDir = VectorNormalize(camera.pathInfo_end_loc - camera.pathInfo_start_loc);
+  baseTravelDir = vectorNormalize(camera.pathInfo_end_loc - camera.pathInfo_start_loc);
   startDP = VectorDot(baseTravelDir, camera.pathInfo_startAim);
   endDP = VectorDot(baseTravelDir, camera.pathInfo_endAim);
   path_mode = 0;
@@ -3169,7 +3169,7 @@ update_camera_position_on_path(camera) {
     remainingLen = curSegLen - camera.distOnPathSegment;
     if(remainingLen > distToTravel) {
       camera.distOnPathSegment += distToTravel;
-      neworigin = camera.path[camera.pathIdx] + camera.distOnPathSegment * VectorNormalize(camera.path[camera.pathIdx + 1] - camera.path[camera.pathIdx]);
+      neworigin = camera.path[camera.pathIdx] + camera.distOnPathSegment * vectorNormalize(camera.path[camera.pathIdx + 1] - camera.path[camera.pathIdx]);
       camera.pathInfo_velocity = neworigin - camera.origin;
       camera.origin = neworigin;
       camera.distanceOnPath += distToTravel;
@@ -3239,8 +3239,8 @@ calc_f(cam_origin, cam_lookat, target) {
   C = cam_origin;
   T = target;
   result = [];
-  X = VectorNormalize(VectorCross(P - C, (0, 0, 1)));
-  Z = VectorNormalize(VectorCross(X, P - C));
+  X = vectorNormalize(VectorCross(P - C, (0, 0, 1)));
+  Z = vectorNormalize(VectorCross(X, P - C));
   CT = T - C;
   Tx = T - (VectorDot(Z, CT) * Z);
   Tz = T - (VectorDot(X, CT) * X);
@@ -3296,8 +3296,8 @@ calc_cam_lookat(fparams, cam_origin, target) {
   C = cam_origin;
   T = target;
   CT = T - C;
-  X = VectorNormalize(VectorCross(CT, (0, 0, 1)));
-  Z = VectorNormalize(VectorCross(X, CT));
+  X = vectorNormalize(VectorCross(CT, (0, 0, 1)));
+  Z = vectorNormalize(VectorCross(X, CT));
 
   CTx = CT - (VectorDot(CT, Z) * Z);
   Hx = Length(CTx);
@@ -3426,11 +3426,11 @@ debug_pathing() {
   trigger = false;
   player_points = getEntArray("player_pos", "targetname");
   foreach(AvatarSpawn in player_points) {
-    CameraTarget = GetEnt(AvatarSpawn.target, "targetname");
+    CameraTarget = getEnt(AvatarSpawn.target, "targetname");
     if(CameraTarget.script_noteworthy == "camera_target") {
       AvatarSpawn.camera_lookat = CameraTarget;
     }
-    CameraEnt = GetEnt(CameraTarget.target, "targetname");
+    CameraEnt = getEnt(CameraTarget.target, "targetname");
     if(CameraEnt.script_noteworthy == "camera") {
       AvatarSpawn.camera_helper = CameraEnt;
       CameraEnt.camera_goal = AvatarSpawn;

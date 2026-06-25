@@ -427,7 +427,7 @@ sardines_ball(var_0) {
       self.locations[self.locations.size] = var_1.origin + (0, 0, 32);
 
       if(isDefined(var_1.target)) {
-        var_1 = getent(var_1.target, "targetname");
+        var_1 = getEnt(var_1.target, "targetname");
         continue;
       }
 
@@ -626,7 +626,7 @@ sardines_ballpanic(var_0, var_1, var_2, var_3) {
 
   var_12 = vectortoangles(var_2);
   var_2 = (var_2[0], var_2[1], 0);
-  var_13 = vectornormalize(var_2);
+  var_13 = vectorNormalize(var_2);
   var_14 = length(var_1);
   var_15 = var_1 / var_14;
   var_16 = (-1 * var_15[1], var_15[0], var_15[2]);
@@ -687,7 +687,7 @@ sardines_ballpanic(var_0, var_1, var_2, var_3) {
       var_18[1].currentvels[var_18[1].currentvels.size] = var_4[var_5];
     }
   } else {
-    var_15 = vectornormalize(var_1);
+    var_15 = vectorNormalize(var_1);
     var_16 = (-1 * var_15[1], var_15[0], var_15[2]);
     var_18[0].midpoint = self.origin + 20 * var_16 + 180 * var_15 + (0, 0, 100);
     var_18[0].midvel = (2 * var_15 + var_16 + (0, 0, 1)) / 2.45;
@@ -903,7 +903,7 @@ sardines_ballwaitthenaddpiece(var_0, var_1, var_2, var_3) {
 sardines_balllinkpiece(var_0, var_1, var_2, var_3) {
   var_4 = var_2 * sin(var_1);
   var_5 = -1 * var_2 * cos(var_1);
-  self linkto(var_0, "tag_origin", (var_4, var_5, var_3), (0, var_1, 0));
+  self linkTo(var_0, "tag_origin", (var_4, var_5, var_3), (0, var_1, 0));
 }
 
 sardines_detectpeople(var_0, var_1, var_2, var_3, var_4) {

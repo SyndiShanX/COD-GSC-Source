@@ -613,8 +613,8 @@ _id_17F7(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isai(var_10)) {
       continue;
     }
-    var_10 moveto(var_11, var_3, var_4, var_5);
-    var_10 rotateto(var_12, var_3, var_4, var_5);
+    var_10 moveTo(var_11, var_3, var_4, var_5);
+    var_10 rotateTo(var_12, var_3, var_4, var_5);
   }
 }
 
@@ -669,7 +669,7 @@ _id_17EB(var_0, var_1) {
   var_2 = self gettagorigin(var_1);
   var_3 = spawn("script_model", var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   return var_3;
 }
 

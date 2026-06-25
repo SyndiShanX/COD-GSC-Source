@@ -6,7 +6,7 @@
 func_8197(var_0) {
   var_1 = self getshootatpos() + (0, 0, -3);
   var_2 = (var_1[0] - var_0[0], var_1[1] - var_0[1], var_1[2] - var_0[2]);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_2[2] * -1;
   return var_3;
 }
@@ -1059,7 +1059,7 @@ canspawntestclient() {
   }
 
   var_0 = self.enemy getshootatpos() - self getshootatpos();
-  var_0 = vectornormalize(var_0);
+  var_0 = vectorNormalize(var_0);
   var_1 = vectortoangles(var_0)[0];
   return angleclamp180(var_1);
 }
@@ -1070,7 +1070,7 @@ castshadows(var_0) {
   }
 
   var_1 = var_0 - self getshootatpos();
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_2 = vectortoangles(var_1)[0];
   return angleclamp180(var_2);
 }
@@ -1087,7 +1087,7 @@ func_8063(var_0, var_1) {
   }
 
   var_4 = var_0 - var_1;
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_5 = vectortoangles(var_4)[0];
   return angleclamp180(var_5);
 }

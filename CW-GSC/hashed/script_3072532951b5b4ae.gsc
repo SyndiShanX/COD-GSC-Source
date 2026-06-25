@@ -198,7 +198,7 @@ function updatevisionforlighting() {}
 function function_6a7ad1cf(behaviortreeentity) {
   if(is_true(self.flashlight.transition)) {
     if(!isDefined(self.var_3ed929ba) && self getblackboardattribute("_flashlight") === "flashlight_out") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(self getthreatsight(player) > 0) {
           return false;
         }
@@ -399,7 +399,7 @@ function private function_d19483ee() {
   range = isDefined(self.var_1c936867) ? self.var_1c936867 : 850;
   cosfov = 0.866;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.stealth)) {
       continue;
     }
@@ -595,7 +595,7 @@ function idle_updatecurious(behaviortreeentity) {
   target = undefined;
   var_d37db7af = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     threatsight = self getthreatsight(player);
 
     if(!isDefined(target) || threatsight > var_d37db7af) {
@@ -674,7 +674,7 @@ function idle_init(behaviortreeentity) {
   idle_updatestyle(self.bt.instancedata[taskid]);
   self.combatmode = "no_cover";
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.stealth)) {
       continue;
     }
@@ -765,7 +765,7 @@ function function_f7659f0d() {
 
   var_26b3b46a = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     threat = self getthreatsight(player);
 
     if(threat > 0.1) {
@@ -811,7 +811,7 @@ function findclosestlospointwithin(pod, var_72cc3c18, var_465a4fd5, vol, scriptg
 }
 
 function investigate_sanitycheckinitialpos(investigatepos, searchpos) {
-  var_f578e91a = vectornormalize(investigatepos - self.origin);
+  var_f578e91a = vectorNormalize(investigatepos - self.origin);
   var_ea982379 = searchpos - self.origin;
   var_de013700 = length(var_ea982379);
 
@@ -828,7 +828,7 @@ function investigate_sanitycheckinitialpos(investigatepos, searchpos) {
 
 function investigate_getcorpseoffsetpos(corpsepos) {
   var_c1edb9e5 = corpsepos - self.origin;
-  offsetpos = corpsepos - vectornormalize(var_c1edb9e5) * 32;
+  offsetpos = corpsepos - vectorNormalize(var_c1edb9e5) * 32;
   offsetpos = getclosestpointonnavmesh(offsetpos, 500);
   return offsetpos;
 }
@@ -850,9 +850,9 @@ function investigate_getinitialpos() {
       pos = self.stealth.investigate_point;
     }
 
-    var_39725a4e = vectornormalize(self.goalpos - self.origin);
+    var_39725a4e = vectorNormalize(self.goalpos - self.origin);
     dirfacing = anglesToForward(self.angles);
-    var_93a2516c = vectornormalize(pos - self.origin);
+    var_93a2516c = vectorNormalize(pos - self.origin);
 
     if(isPlayer(event.entity) && !isPlayer(self.stealth.investigate_entity)) {
       shouldupdate = 1;
@@ -1339,7 +1339,7 @@ function investigate_move_updateaimtarget(instancedata) {
     facingdir = anglesToForward(self.angles);
     var_4b9400c1 = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(self getthreatsight(player) > 0) {
         var_4b9400c1 = 1;
         resetcqbtwitch(instancedata);
@@ -1545,8 +1545,8 @@ function investigate_move(behaviortreeentity) {
     instancedata.enablelookdownpathtime = undefined;
   }
 
-  if(isalive(getplayers()[0])) {
-    target = getplayers()[0];
+  if(isalive(getPlayers()[0])) {
+    target = getPlayers()[0];
 
     if(self cansee(target)) {
       assert(issentient(target));
@@ -1662,7 +1662,7 @@ function investigate_lookaround(behaviortreeentity) {
     return true;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(self getthreatsight(player) > 0.05 && self namespace_979752dc::function_d58e1c1c() && self.alertlevel != "high_alert") {
       return false;
     }
@@ -1681,7 +1681,7 @@ function investigate_lookaround_terminate(behaviortreeentity) {
 function investigate_targetedlookaround(behaviortreeentity) {
   var_26b3b46a = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(self getthreatsight(player) > 0.05) {
       self.cqb_target = self lastknownpos(player);
       var_26b3b46a = 1;
@@ -1927,8 +1927,8 @@ function hunt_getpos() {
     }
   }
 
-  if(!isDefined(searchpos) && getplayers().size > 0) {
-    searchpos = getplayers()[0].origin;
+  if(!isDefined(searchpos) && getPlayers().size > 0) {
+    searchpos = getPlayers()[0].origin;
   }
 
   var_88427393 = isvec(searchpos) ? searchpos : searchpos.origin;

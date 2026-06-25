@@ -248,9 +248,9 @@ random(array) {
 
 get_players(str_team) {
   if(isDefined(str_team)) {
-    return getplayers(str_team);
+    return getPlayers(str_team);
   } else {
-    return getplayers();
+    return getPlayers();
   }
 }
 
@@ -1040,7 +1040,7 @@ trigger_use(str_name, str_key, ent, b_assert) {
   }
 
   if(isDefined(str_name)) {
-    e_trig = getent(str_name, str_key);
+    e_trig = getEnt(str_name, str_key);
 
     if(!isDefined(e_trig)) {
       if(b_assert) {
@@ -1129,7 +1129,7 @@ is_trigger_once(trig) {
   return isDefined(trig) ? trig has_spawnflag(1024) || (!isDefined(self.classname) && !isDefined("trigger_once") || isDefined(self.classname) && isDefined("trigger_once") && self.classname == "trigger_once") : 0;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   if(!isDefined(type)) {
     type = "targetname";
   }

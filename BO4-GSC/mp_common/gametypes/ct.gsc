@@ -138,7 +138,7 @@ j_fore_le_01() {
   level endon(#"combattraining_logic_finished");
   level.var_105dad71 = 1;
   level.var_200077ef = 0;
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player thread function_377cd9ae();
   e_player thread function_78aff698();
 

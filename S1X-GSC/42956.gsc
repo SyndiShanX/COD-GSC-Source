@@ -140,8 +140,8 @@ onplaced(var_0) {
     self[[var_1.onplaceddelegate]](var_0);
   }
 
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(var_1.hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(var_1.hintstring);
   var_2 = self.owner;
   var_2 forceusehintoff();
   var_2.iscarrying = undefined;
@@ -441,7 +441,7 @@ createbombsquadmodel(var_0) {
     var_2 hide();
     var_2 thread maps\mp\gametypes\_weapons::bombsquadvisibilityupdater(self.owner);
     var_2 setModel(var_1.modelbombsquad);
-    var_2 linkto(self);
+    var_2 linkTo(self);
     var_2 setcontents(0);
     self.bombsquadmodel = var_2;
     self waittill("death");

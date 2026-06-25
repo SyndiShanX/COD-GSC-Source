@@ -65,7 +65,7 @@ boat_mginit(var_0, var_1, var_2) {
   }
 
   var_5 = spawnturret("misc_turret", (0, 0, 0), var_0);
-  var_5 linkto(self, var_1, (0, 0, 0), (0, -1 * var_4, 0));
+  var_5 linkTo(self, var_1, (0, 0, 0), (0, -1 * var_4, 0));
   var_5 setModel(var_2);
   var_5.angles = self.angles;
   var_5.isvehicleattached = 1;

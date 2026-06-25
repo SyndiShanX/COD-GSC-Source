@@ -195,7 +195,7 @@ function private function_e855118e() {
   self waittill(#"hash_2201232e09d14552");
   self namespace_83eb6304::turnofffx("skeleton_hand_energy");
   self thread function_c91fa191();
-  amount = randomintrange(4, 8) + getplayers().size * randomint(4);
+  amount = randomintrange(4, 8) + getPlayers().size * randomint(4);
   doa_enemy::function_a6b807ea(self.var_33dcf942, randomintrange(4, 8), self.origin + anglesToForward(self.angles) * 40, 50, undefined, self.enemy, self, undefined, undefined, 1);
   self waittill(#"hash_2201232e09d14552");
   self namespace_83eb6304::turnofffx("skeleton_hand_energy");
@@ -246,7 +246,7 @@ function function_d63e2f4a() {
 
   if(namespace_ec06fe4a::function_a8975c67()) {
     playFX("explosions/fx_exp_grenade_dirt", self.origin);
-    playsoundatposition(#"zmb_doa_ai_bfather_missile_imp", self.origin);
+    playSoundAtPosition(#"zmb_doa_ai_bfather_missile_imp", self.origin);
   }
 
   self deletedelay();
@@ -396,7 +396,7 @@ function function_2ee0142d() {
     self.zombie_move_speed = "run";
   }
 
-  self.health = 1700 + getplayers().size * 350;
+  self.health = 1700 + getPlayers().size * 350;
   self.maxhealth = self.health;
   self.var_490042cd = gettime();
   self callback::function_d8abfc3d(#"on_ai_killed", &function_4ac532fd);
@@ -417,7 +417,7 @@ function function_a54cde8b() {
   self.meleedistsq = sqr(90);
   self.maxhealth = 20000;
   self.health = self.maxhealth;
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self clientfield::increment("skel_spawn_fx", 1);
   self thread function_6e5de5bd(50);
   aiutility::addaioverridedamagecallback(self, &function_abab78a7);
@@ -645,7 +645,7 @@ function private function_42a1dabd() {
     var_93a62fe = namespace_7f5aeb59::function_7781556b(self.origin);
 
     if(isDefined(var_93a62fe)) {
-      angles = vectortoangles(vectornormalize(var_93a62fe.origin - self.origin));
+      angles = vectortoangles(vectorNormalize(var_93a62fe.origin - self.origin));
       self forceteleport(self.origin, angles);
       var_ee3cfcfe.angles = angles;
     }

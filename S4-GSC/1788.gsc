@@ -334,7 +334,7 @@ _id_748E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
     if(var_15) {
       var_16 = scripts\engine\trace::_id_3EE0();
-      var_17 = vectornormalize(var_7);
+      var_17 = vectorNormalize(var_7);
       var_18 = var_6 - var_17 * 12;
       var_19 = var_6 + var_17 * 12;
       var_20 = scripts\engine\trace::_id_C051(var_18, var_19, undefined, var_16);
@@ -381,8 +381,8 @@ _id_748E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       return 1;
     } else if(issubstr(var_13, "molotov")) {
       var_24 = var_0.origin - self.origin;
-      var_25 = vectornormalize((var_24[0], var_24[1], 0));
-      var_24 = vectornormalize(var_24);
+      var_25 = vectorNormalize((var_24[0], var_24[1], 0));
+      var_24 = vectorNormalize(var_24);
 
       if(vectordot(anglesToForward(self.angles), var_25) > 0.5 && -0.98 < var_24[2] && var_24[2] < 0.98) {
         return 1;
@@ -392,9 +392,9 @@ _id_748E(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
   if(var_4 == "MOD_MELEE") {
     if(isDefined(var_1)) {
-      var_26 = vectornormalize(var_1.origin - self.origin);
+      var_26 = vectorNormalize(var_1.origin - self.origin);
     } else {
-      var_26 = vectornormalize(var_6 - self.origin);
+      var_26 = vectorNormalize(var_6 - self.origin);
     }
 
     var_27 = anglesToForward(self.angles);

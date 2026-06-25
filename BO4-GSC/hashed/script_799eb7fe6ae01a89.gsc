@@ -21,7 +21,7 @@ init() {
 }
 
 function_5d6ee8e9(var_5ea5c94d) {
-  var_21569a93 = getent("morgue_stand_trig", "targetname");
+  var_21569a93 = getEnt("morgue_stand_trig", "targetname");
   s_lookat = struct::get("morgue_lookat");
   var_ca7809eb = 20000;
   var_87706f3b = 0;
@@ -61,7 +61,7 @@ function_5d6ee8e9(var_5ea5c94d) {
 function_65937bee(var_5ea5c94d, ended_early) {
   if(var_5ea5c94d || ended_early) {}
 
-  var_21569a93 = getent("morgue_stand_trig", "targetname");
+  var_21569a93 = getEnt("morgue_stand_trig", "targetname");
   var_21569a93 delete();
 }
 

@@ -828,7 +828,7 @@ get_progress(var_0, var_1, var_2, var_3) {
   }
 
   var_3 = max(0.01, var_3);
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = var_2 - var_0;
   var_6 = vectordot(var_5, var_4);
   var_6 = var_6 / var_3;
@@ -854,7 +854,7 @@ can_see_origin(var_0, var_1) {
 
 point_in_fov(var_0) {
   var_1 = anglesToForward(self.angles);
-  var_2 = vectornormalize(var_0 - self.origin);
+  var_2 = vectorNormalize(var_0 - self.origin);
   var_3 = vectordot(var_1, var_2);
   return var_3 > 0.766;
 }
@@ -1090,7 +1090,7 @@ default_unresolved_collision_handler() {
   if(var_0.size) {
     self cancelmantle();
     self dontinterpolate();
-    self setorigin(var_0[0].origin);
+    self setOrigin(var_0[0].origin);
     reset_unresolved_collision_handler();
   } else
     self kill();
@@ -1127,11 +1127,11 @@ play_sound_on_tag(var_0, var_1, var_2, var_3, var_4) {
   thread delete_on_death_wait_sound(var_5, "sounddone");
 
   if(isDefined(var_1)) {
-    var_5 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_5 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   } else {
     var_5.origin = self.origin;
     var_5.angles = self.angles;
-    var_5 linkto(self);
+    var_5 linkTo(self);
   }
 
   var_5 playSound(var_0, "sounddone");
@@ -1181,11 +1181,11 @@ play_loop_sound_on_tag(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_1)) {
-    var_4 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_4 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   } else {
     var_4.origin = self.origin;
     var_4.angles = self.angles;
-    var_4 linkto(self);
+    var_4 linkTo(self);
   }
 
   var_4 playLoopSound(var_0);
@@ -1295,7 +1295,7 @@ spawn_anim_model(var_0, var_1, var_2) {
 }
 
 trigger_wait(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return;
@@ -1365,7 +1365,7 @@ set_flag_on_targetname_trigger(var_0) {
   if(common_scripts\utility::flag(var_0)) {
     return;
   }
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
   common_scripts\utility::flag_set(var_0);
 }
@@ -2164,7 +2164,7 @@ get_linked_structs() {
     var_1 = common_scripts\utility::get_links();
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_3 = common_scripts\utility::getstruct(var_1[var_2], "script_linkname");
+      var_3 = common_scripts\utility::getStruct(var_1[var_2], "script_linkname");
 
       if(isDefined(var_3)) {
         var_0[var_0.size] = var_3;
@@ -2190,10 +2190,10 @@ get_last_ent_in_chain(var_0) {
           var_1 = getnode(var_1.target, "targetname");
           break;
         case "ent":
-          var_1 = getent(var_1.target, "targetname");
+          var_1 = getEnt(var_1.target, "targetname");
           break;
         case "struct":
-          var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
+          var_1 = common_scripts\utility::getStruct(var_1.target, "targetname");
           break;
         default:
       }
@@ -2210,7 +2210,7 @@ get_last_ent_in_chain(var_0) {
 
 player_seek(var_0) {
   var_1 = spawn("script_origin", level.player.origin);
-  var_1 linkto(level.player);
+  var_1 linkTo(level.player);
 
   if(isDefined(var_0)) {
     thread timeout(var_0);
@@ -2777,7 +2777,7 @@ flashrumbleloop(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -3168,13 +3168,13 @@ linetime(var_0, var_1, var_2, var_3) {
 }
 
 within_fov_2d(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize((var_2[0], var_2[1], 0) - (var_0[0], var_0[1], 0));
+  var_4 = vectorNormalize((var_2[0], var_2[1], 0) - (var_0[0], var_0[1], 0));
   var_5 = anglesToForward((0, var_1[1], 0));
   return vectordot(var_5, var_4) >= var_3;
 }
 
 get_dot(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = anglesToForward(var_1);
   var_5 = vectordot(var_4, var_3);
   return var_5;
@@ -3221,7 +3221,7 @@ generic_dialogue_queue(var_0, var_1) {
 radio_dialogue(var_0, var_1) {
   if(!isDefined(level.player_radio_emitter)) {
     var_2 = spawn("script_origin", (0, 0, 0));
-    var_2 linkto(level.player, "", (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level.player_radio_emitter = var_2;
   }
 
@@ -3258,7 +3258,7 @@ radio_dialogue_clear_stack() {
 radio_dialogue_interupt(var_0) {
   if(!isDefined(level.player_radio_emitter)) {
     var_1 = spawn("script_origin", (0, 0, 0));
-    var_1 linkto(level.player, "", (0, 0, 0), (0, 0, 0));
+    var_1 linkTo(level.player, "", (0, 0, 0), (0, 0, 0));
     level.player_radio_emitter = var_1;
   }
 
@@ -3464,32 +3464,32 @@ ignore_triggers(var_0) {
 }
 
 activate_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 activate_trigger();
 }
 
 activate_trigger_with_noteworthy(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 activate_trigger();
 }
 
 disable_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 common_scripts\utility::trigger_off();
 }
 
 disable_trigger_with_noteworthy(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 common_scripts\utility::trigger_off();
 }
 
 enable_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 common_scripts\utility::trigger_on();
 }
 
 enable_trigger_with_noteworthy(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 common_scripts\utility::trigger_on();
 }
 
@@ -4042,7 +4042,7 @@ set_ignoresuppression(var_0) {
   self.ignoresuppression = var_0;
 }
 
-set_goalradius(var_0) {
+set_goalRadius(var_0) {
   self.goalradius = var_0;
 }
 
@@ -4430,17 +4430,17 @@ lerp_player_view_to_position(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
   var_10.angles = var_9 getplayerangles();
 
   if(isDefined(var_8) && var_8) {
-    var_9 playerlinkto(var_10, "", var_3, var_4, var_5, var_6, var_7, var_8);
+    var_9 playerlinkTo(var_10, "", var_3, var_4, var_5, var_6, var_7, var_8);
   } else if(isDefined(var_4)) {
-    var_9 playerlinkto(var_10, "", var_3, var_4, var_5, var_6, var_7);
+    var_9 playerlinkTo(var_10, "", var_3, var_4, var_5, var_6, var_7);
   } else if(isDefined(var_3)) {
-    var_9 playerlinkto(var_10, "", var_3);
+    var_9 playerlinkTo(var_10, "", var_3);
   } else {
-    var_9 playerlinkto(var_10);
+    var_9 playerlinkTo(var_10);
   }
 
-  var_10 moveto(var_0, var_2, var_2 * 0.25);
-  var_10 rotateto(var_1, var_2, var_2 * 0.25);
+  var_10 moveTo(var_0, var_2, var_2 * 0.25);
+  var_10 rotateTo(var_1, var_2, var_2 * 0.25);
   wait(var_2);
   var_10 delete();
 }
@@ -4465,8 +4465,8 @@ lerp_player_view_to_position_oldstyle(var_0, var_1, var_2, var_3, var_4, var_5, 
     var_9 playerlinktodelta(var_10);
   }
 
-  var_10 moveto(var_0, var_2, var_2 * 0.25);
-  var_10 rotateto(var_1, var_2, var_2 * 0.25);
+  var_10 moveTo(var_0, var_2, var_2 * 0.25);
+  var_10 rotateTo(var_1, var_2, var_2 * 0.25);
   wait(var_2);
   var_10 delete();
 }
@@ -4690,7 +4690,7 @@ geo_off() {
     return;
   }
   self.realorigin = self getorigin();
-  self moveto(self.realorigin + (0, 0, -10000), 0.2);
+  self moveTo(self.realorigin + (0, 0, -10000), 0.2);
   self.geo_off = 1;
 }
 
@@ -4698,7 +4698,7 @@ geo_on() {
   if(!isDefined(self.geo_off)) {
     return;
   }
-  self moveto(self.realorigin, 0.2);
+  self moveTo(self.realorigin, 0.2);
   self waittill("movedone");
   self.geo_off = undefined;
 }
@@ -4867,13 +4867,13 @@ array_spawn_noteworthy(var_0, var_1, var_2, var_3) {
 }
 
 spawn_script_noteworthy(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   var_3 = var_2 spawn_ai(var_1);
   return var_3;
 }
 
 spawn_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 spawn_ai(var_1);
   return var_3;
 }
@@ -5050,10 +5050,10 @@ hunted_style_door_open(var_0) {
     self playSound("door_wood_slow_open");
   }
 
-  self rotateto(self.angles + (0, 70, 0), 2, 0.5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, 0.5, 0);
   self connectpaths();
   self waittill("rotatedone");
-  self rotateto(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 palm_style_door_open(var_0) {
@@ -5065,10 +5065,10 @@ palm_style_door_open(var_0) {
     self playSound("door_wood_slow_open");
   }
 
-  self rotateto(self.angles + (0, 70, 0), 2, 0.5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, 0.5, 0);
   self connectpaths();
   self waittill("rotatedone");
-  self rotateto(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 lerp_fov_overtime(var_0, var_1) {
@@ -5107,8 +5107,8 @@ apply_end_fog() {
   maps\_art::set_fog_progress(1);
 }
 
-anim_stopanimscripted() {
-  self stopanimscripted();
+anim_stopanimScripted() {
+  self stopanimScripted();
   self notify("stop_loop");
   self notify("single anim", "end");
   self notify("looping anim", "end");
@@ -5703,7 +5703,7 @@ mix_down(var_0) {
   }
 }
 
-manual_linkto(var_0, var_1) {
+manual_linkTo(var_0, var_1) {
   var_0 endon("death");
   self endon("death");
 
@@ -6154,13 +6154,13 @@ teleport_players(var_0) {
       var_3 = var_2;
     }
 
-    var_8 setorigin(var_3.origin);
+    var_8 setOrigin(var_3.origin);
     var_8 setplayerangles(var_3.angles);
   }
 }
 
 teleport_player(var_0) {
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
 
   if(isDefined(var_0.angles)) {
     level.player setplayerangles(var_0.angles);
@@ -6574,7 +6574,7 @@ blend_movespeedscale_default(var_0) {
 
 teleport_ent(var_0) {
   if(isPlayer(self)) {
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
     self setplayerangles(var_0.angles);
   } else
     self forceteleport(var_0.origin, var_0.angles);
@@ -6586,7 +6586,7 @@ teleport_to_ent_tag(var_0, var_1) {
   self dontinterpolate();
 
   if(isPlayer(self)) {
-    self setorigin(var_2);
+    self setOrigin(var_2);
     self setplayerangles(var_3);
   } else if(isai(self))
     self forceteleport(var_2, var_3);
@@ -6638,7 +6638,7 @@ beginsliding(var_0, var_1, var_2) {
   if(var_4) {
     var_3 playerlinktoblend(var_5, undefined, 1);
   } else {
-    var_3 playerlinkto(var_5);
+    var_3 playerlinkTo(var_5);
   }
 
   var_3 disableweapons();
@@ -6944,7 +6944,7 @@ tracefx(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_7["rumble"])) {
     var_11 = get_player_from_self();
-    var_11 playrumbleonentity(var_7["rumble"]);
+    var_11 playRumbleOnEntity(var_7["rumble"]);
   }
 }
 
@@ -7064,7 +7064,7 @@ get_player_view_controller(var_0, var_1, var_2, var_3) {
   var_5 = spawnturret("misc_turret", var_4, var_3);
   var_5.angles = var_0 gettagangles(var_1);
   var_5 setModel("tag_turret");
-  var_5 linkto(var_0, var_1, var_2, (0, 0, 0));
+  var_5 linkTo(var_0, var_1, var_2, (0, 0, 0));
   var_5 makeunusable();
   var_5 hide();
   var_5 setmode("manual");
@@ -7170,7 +7170,7 @@ show_entity() {
       self solid();
 
       if(self.spawnflags & 1) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       break;
@@ -7793,7 +7793,7 @@ waittill_volume_dead_then_set_flag(var_0) {
 }
 
 waittill_targetname_volume_dead_then_set_flag(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2 waittill_volume_dead_then_set_flag(var_1);
 }
 
@@ -7853,10 +7853,10 @@ add_target_pivot(var_0) {
   if(isDefined(var_0)) {
     self.pivot = var_0;
   } else {
-    self.pivot = getent(self.target, "targetname");
+    self.pivot = getEnt(self.target, "targetname");
   }
 
-  self linkto(self.pivot);
+  self linkTo(self.pivot);
 }
 
 get_color_volume_from_trigger() {
@@ -7895,13 +7895,13 @@ flashbangstop() {
 }
 
 getent_or_struct(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;
   }
 
-  return common_scripts\utility::getstruct(var_0, var_1);
+  return common_scripts\utility::getStruct(var_0, var_1);
 }
 
 grenade_earthquake() {
@@ -7944,9 +7944,9 @@ player_rides_in_humvee(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_1 allowprone(0);
   var_1 disableweapons();
   var_6 = common_scripts\utility::spawn_tag_origin();
-  var_6 linkto(self, "tag_passenger", player_rides_in_humvee_offset(var_0), (0, 0, 0));
+  var_6 linkTo(self, "tag_passenger", player_rides_in_humvee_offset(var_0), (0, 0, 0));
   var_6.player_dismount = common_scripts\utility::spawn_tag_origin();
-  var_6.player_dismount linkto(self, "tag_body", player_rides_humvee_offset_dismount(var_0), (0, 0, 0));
+  var_6.player_dismount linkTo(self, "tag_body", player_rides_humvee_offset_dismount(var_0), (0, 0, 0));
 
   if(!isDefined(var_2)) {
     var_2 = 90;
@@ -7965,7 +7965,7 @@ player_rides_in_humvee(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_1 disableweapons();
-  var_1 playerlinkto(var_6, "tag_origin", 0.8, var_2, var_3, var_4, var_5);
+  var_1 playerlinkTo(var_6, "tag_origin", 0.8, var_2, var_3, var_4, var_5);
   var_1.humvee_org = var_6;
   return var_6;
 }
@@ -8009,7 +8009,7 @@ player_leaves_humvee(var_0) {
 
   if(!var_0) {
     var_3 = 0.6;
-    var_1 moveto(var_1.player_dismount.origin, var_3, var_3 * 0.5, var_3 * 0.5);
+    var_1 moveTo(var_1.player_dismount.origin, var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
   }
 
@@ -8042,9 +8042,9 @@ bloodsplateffect(var_0) {
 }
 
 screen_effect_sides(var_0) {
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = [];
@@ -8394,7 +8394,7 @@ fx_volume_pause_noteworthy(var_0, var_1) {
 }
 
 fx_volume_pause_noteworthy_thread(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   var_2 notify("new_volume_command");
   var_2 endon("new_volume_command");
   wait 0.05;
@@ -8442,7 +8442,7 @@ fx_volume_restart_noteworthy(var_0) {
 }
 
 fx_volume_restart_noteworthy_thread(var_0) {
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 notify("new_volume_command");
   var_1 endon("new_volume_command");
   wait 0.05;
@@ -8571,9 +8571,9 @@ move_with_rate(var_0, var_1, var_2) {
 
   var_3 = distance(self.origin, var_0);
   var_4 = var_3 / var_2;
-  var_5 = vectornormalize(var_0 - self.origin);
-  self moveto(var_0, var_4, 0, 0);
-  self rotateto(var_1, var_4, 0, 0);
+  var_5 = vectorNormalize(var_0 - self.origin);
+  self moveTo(var_0, var_4, 0, 0);
+  self rotateTo(var_1, var_4, 0, 0);
   wait(var_4);
 
   if(!isDefined(self)) {
@@ -8710,7 +8710,7 @@ deletestructarray_ref(var_0, var_1) {
 }
 
 getstruct_delete(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, var_1);
+  var_2 = common_scripts\utility::getStruct(var_0, var_1);
   deletestruct_ref(var_2);
   return var_2;
 }
@@ -9321,11 +9321,11 @@ follow_path_wait_for_player(var_0, var_1) {
 
   var_2 = undefined;
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(level.player.origin - self.origin);
+  var_3 = vectorNormalize(level.player.origin - self.origin);
 
   if(isDefined(var_0.target)) {
     var_4 = common_scripts\utility::get_target_ent(var_0.target);
-    var_2 = vectornormalize(var_4.origin - var_0.origin);
+    var_2 = vectorNormalize(var_4.origin - var_0.origin);
   } else if(isDefined(var_0.angles))
     var_2 = anglesToForward(var_0.angles);
   else {

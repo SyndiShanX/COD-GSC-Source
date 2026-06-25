@@ -381,9 +381,9 @@ _id_107DC(var_0) {
     var_12 = spawn("script_model", var_11._id_E706);
     var_12 setModel("tag_origin");
     var_12.angles = var_11._id_E67A;
-    self cameralinkto(var_12, "tag_origin");
-    var_12 moveto(var_11._id_533C, 18);
-    var_12 rotateto(var_11._id_52DF, 18);
+    self cameralinkTo(var_12, "tag_origin");
+    var_12 moveTo(var_11._id_533C, 18);
+    var_12 rotateTo(var_11._id_52DF, 18);
     _id_07D1::_id_60C2("prematch_done");
     var_9 = 1;
     self _meth_8060();
@@ -624,7 +624,7 @@ _id_C7EB() {
   }
 
   var_3 = anglesToForward(self.angles);
-  var_4 = vectornormalize(var_3) * 5;
+  var_4 = vectorNormalize(var_3) * 5;
 
   if(!scripts\engine\trace::ray_trace_passed(self._id_5EC7 + var_4, self._id_5EC7 + var_4 - (0, 0, 16), var_1, var_2)) {
     var_0._id_8AEB = 0;
@@ -1412,7 +1412,7 @@ _id_E37E(var_0) {
     waitframe();
   }
 
-  self cameralinkto(var_9, "tag_origin", 1);
+  self cameralinkTo(var_9, "tag_origin", 1);
   var_12 = scripts\cp_mp\utility\game_utility::_id_6B2D();
   self notify("mapCamera_start");
 
@@ -1556,7 +1556,7 @@ _id_E37E(var_0) {
   wait 0.25;
   self _meth_844E("", 0.75);
   var_13 = var_3;
-  var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   var_14 = 0;
 
   for(;;) {
@@ -1577,7 +1577,7 @@ _id_E37E(var_0) {
     var_13 = var_4;
 
     if(isDefined(var_13.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_13.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_13.target, "targetname");
       continue;
     }
 
@@ -1586,7 +1586,7 @@ _id_E37E(var_0) {
 
   var_13._id_5539 = 1;
   var_13 = var_3;
-  var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
 
   if(level.gametype == "base") {
     thread scripts\common\infil_ftue::create_base_infil_ftue();
@@ -1645,8 +1645,8 @@ spectatorcammove(var_0, var_1, var_2, var_3, var_4) {
       var_9 = 1;
     }
 
-    var_0 moveto(var_2.origin, var_6, var_8, var_7);
-    var_0 rotateto(var_2.angles, var_6, var_8, var_7);
+    var_0 moveTo(var_2.origin, var_6, var_8, var_7);
+    var_0 rotateTo(var_2.angles, var_6, var_8, var_7);
 
     if(isDefined(var_2._id_5539)) {
       var_10 = int(var_6 / 2);
@@ -1662,7 +1662,7 @@ spectatorcammove(var_0, var_1, var_2, var_3, var_4) {
     var_1 = var_2;
 
     if(isDefined(var_1.target)) {
-      var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       continue;
     }
 

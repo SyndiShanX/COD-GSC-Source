@@ -34,7 +34,7 @@ main() {
   thread spawn_blocker_collision((1464, 2103, 458), (0, 0, 0));
   thread spawn_blocker_collision((1464, 2103, 488), (0, 0, 0));
   audio_settings();
-  var_0 = getent("trigger_underwater", "targetname");
+  var_0 = getEnt("trigger_underwater", "targetname");
   var_0 thread watchplayerenterwater();
   level thread clearwatervarsonspawn(var_0);
   level thread waitcarryobjects();
@@ -162,7 +162,7 @@ watchcarryobjects() {
         if(level.gametype == "ctf") {
           maps\mp\gametypes\_gameobjects::returnhome();
         } else {
-          var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+          var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
           thread movecarryobject(var_2.origin, var_2.angles);
         }
 

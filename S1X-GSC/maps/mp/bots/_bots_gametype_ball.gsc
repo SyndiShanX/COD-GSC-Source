@@ -287,7 +287,7 @@ bot_ball_think() {
 
       if(result == "goal" && DistanceSquared(self.origin, goal_jump_node_picked.origin) <= 16 * 16) {
         self BotClearScriptGoal();
-        look_dir = VectorNormalize(enemy_goal.origin - self getEye());
+        look_dir = vectorNormalize(enemy_goal.origin - self getEye());
         if(VectorDot(look_dir, (0, 0, 1)) < 0.93) {
           self BotLookAtPoint(enemy_goal.origin, 5.0, "script_forced");
         }
@@ -446,7 +446,7 @@ monitor_pass_throw() {
 
           if(ally_dist_to_goal_sq <= my_dist_to_goal_sq) {
             bot_dir = anglesToForward(self GetPlayerAngles());
-            bot_to_ally = VectorNormalize(self.pass_target.origin - self.origin);
+            bot_to_ally = vectorNormalize(self.pass_target.origin - self.origin);
             dot = VectorDot(bot_dir, bot_to_ally);
             if(dot > 0.70) {
               self BotLookAtPoint(self.pass_target.origin + (0, 0, 40), 1.25, "script_forced");
@@ -472,7 +472,7 @@ monitor_pass_throw() {
           too_close_to_goal = my_dist_to_my_goal_sq < squared(get_ball_goal_protect_radius());
           if(!too_close_to_goal && DistanceSquared(self.origin, self.enemy.origin) < squared(SCR_CONST_BALL_MAX_ENEMY_THROW_DIST)) {
             enemy_dir = anglesToForward(self.enemy GetPlayerAngles());
-            enemy_to_bot = VectorNormalize(self.origin - self.enemy.origin);
+            enemy_to_bot = vectorNormalize(self.origin - self.enemy.origin);
             dot = VectorDot(enemy_dir, enemy_to_bot);
             if(dot > 0.50) {
               bot_dir = anglesToForward(self GetPlayerAngles());

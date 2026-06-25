@@ -155,7 +155,7 @@ _id_FF81(var_0, var_1) {
   var_0.modelname = "veh8_civ_lnd_palfa_windows_east_physics_tan_mp";
   var_0._id_0481 = "van";
   var_0._id_04DE = "palfa_physics_mp";
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;

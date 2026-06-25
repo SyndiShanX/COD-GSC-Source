@@ -63,7 +63,7 @@ function function_a612a2b3() {
   self.weapon_model = util::spawn_model(level.chest_joker_model, v_origin, self.angles + vectorscale((0, 1, 0), 180));
   self.weapon_model playSound("zmb_bgb_unbearable_activate");
   wait(0.35);
-  self.weapon_model moveto(self.origin, 1, 0.5);
+  self.weapon_model moveTo(self.origin, 1, 0.5);
   self.weapon_model waittill("movedone");
   self.weapon_model delete();
 }

@@ -1002,7 +1002,7 @@ function function_437af554() {
 }
 
 function function_6aa4492a() {
-  t_main_street_start = getent("t_main_street_start", "targetname");
+  t_main_street_start = getEnt("t_main_street_start", "targetname");
 
   if(istouching(level.player.origin, t_main_street_start)) {
     level.woods hms_util::dialogue("vox_cp_amrk_01800_wood_keepmovingupthe_73");
@@ -1242,7 +1242,7 @@ function main_street_bubby_damage_react_dialogue() {
   var_ffbbfc35[8] = hms_util::function_e1449992(level.var_c39cfb7a, "vox_cp_amrk_02800_bbby_tryagain_80");
   var_ffbbfc35[9] = hms_util::function_e1449992(level.var_c39cfb7a, "vox_cp_amrk_02800_bbby_hathattickles_ab");
   var_4baf0b18 = 0;
-  t_bubby_damage = getent("t_bubby_damage", "targetname");
+  t_bubby_damage = getEnt("t_bubby_damage", "targetname");
 
   while(true) {
     trigger_hit = t_bubby_damage trigger::wait_till();

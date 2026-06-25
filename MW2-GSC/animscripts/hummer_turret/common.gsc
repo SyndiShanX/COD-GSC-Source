@@ -269,7 +269,7 @@ guy_gets_on_turret(vehicle, pos, turret, animation) {
   self endon("death");
   turret endon("death");
 
-  self StopAnimScripted();
+  self StopanimScripted();
   self notify("newanim");
 
   self.drivingVehicle = undefined;
@@ -287,9 +287,9 @@ guy_gets_on_turret(vehicle, pos, turret, animation) {
   turret SetDefaultDropPitch(0);
   turret thread turret_animate(turret.passenger2turret_anime);
 
-  self AnimScripted("passenger2turret", org, angles, animation);
+  self animScripted("passenger2turret", org, angles, animation);
   wait(GetAnimLength(animation));
-  self StopAnimScripted();
+  self StopanimScripted();
 
   turret turret_aim_restore();
 
@@ -644,7 +644,7 @@ turret_aim_straight(straightAngles) {
   self.tempTarget = spawn("script_origin", targetOrigin);
   self.tempTarget.ignoreme = true;
 
-  self.tempTarget LinkTo(self.ownerVehicle);
+  self.tempTarget linkTo(self.ownerVehicle);
 
   self ClearTargetEntity();
   self SetTargetEntity(self.tempTarget);

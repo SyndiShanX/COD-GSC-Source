@@ -946,7 +946,7 @@ teleport_to_zone_character(zone_name, character) {
 
     spawnPoint = spawnPoints[0];
     character DontInterpolate();
-    character SetOrigin(spawnPoint.origin);
+    character setOrigin(spawnPoint.origin);
     character SetPlayerAngles(spawnPoint.angles);
     return;
   }
@@ -1011,7 +1011,7 @@ teleport_to_zone_character(zone_name, character) {
   } else {
     character CancelMantle();
     character DontInterpolate();
-    character SetOrigin(teleport_origin);
+    character setOrigin(teleport_origin);
     character SetPlayerAngles(teleport_angles);
 
     thread teleport_validate_success(character);
@@ -1071,7 +1071,7 @@ teleport_to_zone_killstreaks(zone_name) {
 
   teleport_add_delta(level.lbSniper, delta);
 
-  airstrikeheight = GetEnt("airstrikeheight", "targetname");
+  airstrikeheight = getEnt("airstrikeheight", "targetname");
   teleport_add_delta(airstrikeheight, delta);
 
   points = getEntArray("mp_airsupport", "classname");
@@ -1082,7 +1082,7 @@ teleport_to_zone_killstreaks(zone_name) {
 
   array_thread_safe(level.lasedStrikeEnts, ::teleport_self_add_delta, delta);
 
-  remote_uav_range = GetEnt("remote_uav_range", "targetname");
+  remote_uav_range = getEnt("remote_uav_range", "targetname");
   teleport_add_delta(remote_uav_range, delta);
 
   foreach(participant in level.participants) {

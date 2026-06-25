@@ -30,7 +30,7 @@ vignettes() {
   level thread maps\_vignette_util::vignette_register(::ending_pt1_player_sequence_start, "vignette_ending_player_jumped_flag");
   level thread maps\_vignette_util::vignette_register(::ending_pt1_sequence, "vignette_ending_scene_start");
   level thread maps\_vignette_util::vignette_register(::ending_pt2_player_sequence_save, "vignette_ending_crash_flag");
-  var_0 = getent("dam_break_m880", "targetname");
+  var_0 = getEnt("dam_break_m880", "targetname");
 
   if(isDefined(var_0)) {
     level thread dam_break_m880_init();
@@ -1272,13 +1272,13 @@ vignette_actor_aware_everything() {
 
 dam_break_m880_init() {
   if(level.start_point == "infil" || level.start_point == "streets_to_dam") {
-    var_0 = getent("streets_to_dam_garage_exit", "targetname");
+    var_0 = getEnt("streets_to_dam_garage_exit", "targetname");
     var_0 waittill("trigger");
   }
 
   if(level.start_point == "infil" || level.start_point == "streets_to_dam" || level.start_point == "streets_to_dam_2" || level.start_point == "dam" || level.start_point == "flooding_ext") {
     level.dam_break_m880 = maps\_vignette_util::vignette_vehicle_spawn("dam_break_m880", "dam_break_m880");
-    var_1 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+    var_1 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
     var_1.origin = var_1.origin + (0, 0, 3);
     var_1 maps\_anim::anim_first_frame_solo(level.dam_break_m880, "dam_break_m880_launch_prep");
     var_2 = level.scr_anim["dam_break_m880"]["dam_break_m880_launch_prep"];
@@ -1325,7 +1325,7 @@ dam_break_m880_launch_prep_spawn() {
 
 dam_break_m880_launch_prep(var_0) {
   wait 2.5;
-  var_1 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_2 = [];
   var_2["dam_break_m880"] = var_0;
   var_1 thread maps\_anim::anim_single(var_2, "dam_break_m880_launch_prep");
@@ -1381,10 +1381,10 @@ dam_break(var_0, var_1) {
   level.player playerlinktoblend(var_4, "tag_player", 0.25, 0.125, 0.125);
   level.player disableweapons();
   level.player disableoffhandweapons();
-  var_7 = common_scripts\utility::getstruct("vignette_dam_and_church_destruction", "script_noteworthy");
+  var_7 = common_scripts\utility::getStruct("vignette_dam_and_church_destruction", "script_noteworthy");
   thread play_dam_break_water(var_7);
   thread play_dam_destruction_anim();
-  var_7 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_7 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   thread maps\flood_fx::dof_dam_break();
   thread enable_player_control(var_4);
   thread enable_lens_vignette(var_4);
@@ -1435,7 +1435,7 @@ dam_break_ally(var_0) {
 
   switch (self.animname) {
     case "ally_0":
-      self setgoalpos(common_scripts\utility::getstruct("ally0_flee_face", "targetname").origin);
+      self setgoalpos(common_scripts\utility::getStruct("ally0_flee_face", "targetname").origin);
       var_0 maps\_anim::anim_single_solo(self, "dam_break");
       thread maps\flood_flooding::ally0_main();
       break;
@@ -1465,16 +1465,16 @@ opfor_m880_escape_spawn(var_0) {
 }
 
 opfor_m880_escape(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_0 = [];
   var_0["dam_break_opfor_m880"] = var_1;
   var_2 maps\_anim::anim_single(var_0, "opfor_m880_escape");
 }
 
 init_dam_destruction_anim() {
-  var_0 = common_scripts\utility::getstruct("vignette_dam_and_church_destruction", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_dam_and_church_destruction", "script_noteworthy");
   level.dam_break_dam = maps\_utility::spawn_anim_model("dam_break_dam");
-  var_1 = getent("flood_dam", "targetname");
+  var_1 = getEnt("flood_dam", "targetname");
 
   if(isDefined(var_1)) {
     var_1 hide();
@@ -1486,7 +1486,7 @@ init_dam_destruction_anim() {
 }
 
 play_dam_destruction_anim() {
-  var_0 = common_scripts\utility::getstruct("vignette_dam_and_church_destruction", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_dam_and_church_destruction", "script_noteworthy");
 
   if(!isDefined(level.dam_break_dam)) {
     level.dam_break_dam = maps\_utility::spawn_anim_model("dam_break_dam");
@@ -1500,17 +1500,17 @@ play_dam_destruction_anim() {
 }
 
 play_cone_anims(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_2 = maps\_utility::spawn_anim_model("dam_break_cone_01");
-  var_3 = getent("cone_collision1", "targetname");
+  var_3 = getEnt("cone_collision1", "targetname");
   var_3.origin = var_2 gettagorigin("com_trafficcone02");
   var_3.angles = var_2 gettagangles("com_trafficcone02");
-  var_3 linkto(var_2, "com_trafficcone02", (0, 0, 20), (0, 0, 0));
+  var_3 linkTo(var_2, "com_trafficcone02", (0, 0, 20), (0, 0, 0));
   var_4 = maps\_utility::spawn_anim_model("dam_break_cone_02");
-  var_3 = getent("cone_collision2", "targetname");
+  var_3 = getEnt("cone_collision2", "targetname");
   var_3.origin = var_4 gettagorigin("com_trafficcone02");
   var_3.angles = var_4 gettagangles("com_trafficcone02");
-  var_3 linkto(var_4, "com_trafficcone02", (0, 0, 20), (0, 0, 0));
+  var_3 linkTo(var_4, "com_trafficcone02", (0, 0, 20), (0, 0, 0));
   var_5 = maps\_utility::spawn_anim_model("dam_break_cone_03");
   var_6 = maps\_utility::spawn_anim_model("dam_break_barrier_01");
   var_7 = maps\_utility::spawn_anim_model("dam_break_barrier_02");
@@ -1550,7 +1550,7 @@ change_dof() {
 }
 
 dam_break_missile_01(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_2 = maps\_utility::spawn_anim_model("dam_break_missile_01");
   var_2 hide();
   var_0 = [];
@@ -1563,7 +1563,7 @@ dam_break_missile_01(var_0) {
 }
 
 dam_break_missile_02(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_2 = maps\_utility::spawn_anim_model("dam_break_missile_02");
   var_2 hide();
   var_0 = [];
@@ -1575,7 +1575,7 @@ dam_break_missile_02(var_0) {
 }
 
 dam_break_missile_03(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_2 = maps\_utility::spawn_anim_model("dam_break_missile_03");
   var_2 hide();
   var_0 = [];
@@ -1587,7 +1587,7 @@ dam_break_missile_03(var_0) {
 }
 
 dam_break_missile_04(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_2 = maps\_utility::spawn_anim_model("dam_break_missile_04");
   var_2 hide();
   var_0 = [];
@@ -1612,7 +1612,7 @@ dam_break_street_water_init() {
   }
 
   if(level.start_point == "infil" || level.start_point == "streets_to_dam" || level.start_point == "streets_to_dam_2" || level.start_point == "dam" || level.start_point == "flooding_ext") {
-    var_0 = common_scripts\utility::getstruct("vignette_dam_break_floating_objects", "script_noteworthy");
+    var_0 = common_scripts\utility::getStruct("vignette_dam_break_floating_objects", "script_noteworthy");
     var_1 = maps\_utility::spawn_anim_model("dam_break_street_debris");
     attach_fx_anim_model(var_1, "com_trafficcone01", "j_flood_dam_street_street_debris_com_trafficcone01_1", "angry_flood_cleanup");
     attach_fx_anim_model(var_1, "com_trafficcone01", "j_flood_dam_street_street_debris_com_trafficcone01_2", "angry_flood_cleanup");
@@ -1649,7 +1649,7 @@ dam_break_street_water_init() {
 }
 
 dam_break_street_water(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_dam_break_floating_objects", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_break_floating_objects", "script_noteworthy");
   attach_fx_anim_model(level.dam_break_street_debris, "vehicle_iveco_lynx_iw6", "j_flood_dam_street_street_debris_vehicle_iveco_lynx_iw6_5");
   attach_fx_anim_model(level.dam_break_street_debris, "vehicle_man_7t_iw6", "j_flood_dam_street_street_debris_vehicle_man_7t_iw6_10");
   attach_fx_anim_model(level.dam_break_street_debris, "vehicle_man_7t_iw6", "j_flood_dam_street_street_debris_vehicle_man_7t_iw6_25");
@@ -1671,12 +1671,12 @@ dam_break_street_water(var_0) {
 
 church_destruction_init() {
   level.dam_break_church_spire = maps\_utility::spawn_anim_model("dam_break_church_spire");
-  var_0 = common_scripts\utility::getstruct("vignette_dam_and_church_destruction", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_dam_and_church_destruction", "script_noteworthy");
   var_0 maps\_anim::anim_first_frame_solo(level.dam_break_church_spire, "start_church_destruction");
 }
 
 start_church_destruction(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_dam_and_church_destruction", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_dam_and_church_destruction", "script_noteworthy");
   var_0 = [];
   var_0["dam_break_church_spire"] = level.dam_break_church_spire;
   thread maps\flood_fx::dam_street_flood_church_hits();
@@ -1689,7 +1689,7 @@ palm_tree_spawn() {
 }
 
 palm_tree() {
-  var_0 = common_scripts\utility::getstruct("vignette_plam_tree", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_plam_tree", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("palm_tree_01");
   var_2 = [];
   var_2["palm_tree_01"] = var_1;
@@ -1697,7 +1697,7 @@ palm_tree() {
 }
 
 street_stop_sign_01_spawn() {
-  var_0 = common_scripts\utility::getstruct("vignette_street_stop_sign_01", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_street_stop_sign_01", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("flood_stop_sign_01");
   var_1.script_noteworthy = "tanks_cleanup";
   var_2 = [];
@@ -1708,7 +1708,7 @@ street_stop_sign_01_spawn() {
 }
 
 street_stop_sign_01(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_street_stop_sign_01", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_street_stop_sign_01", "script_noteworthy");
   var_2 = [];
   var_2["flood_stop_sign_01"] = var_0;
   var_1 maps\_anim::anim_single(var_2, "street_stop_sign_01");
@@ -1727,7 +1727,7 @@ convoy_checkpoint_spawn() {
 }
 
 convoy_checkpoint(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("vignette_convoy_checkpoint_node", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("vignette_convoy_checkpoint_node", "script_noteworthy");
   var_5 = maps\_utility::spawn_anim_model("convoy_checkpoint_radio");
   var_5 thread maps\flood_streets::delete_on_flag("enemy_alerted");
   var_6 = [];
@@ -1765,7 +1765,7 @@ m880_crash_spawn(var_0, var_1) {
 }
 
 m880_crash(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("vignette_m880_crash", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("vignette_m880_crash", "script_noteworthy");
   var_2 notify("start_crash_debris");
   var_2 notify("start_crash_barrels");
   var_3 = [];
@@ -1786,7 +1786,7 @@ m880_lynx_crash() {
   var_0 = [];
   var_0["convoy_lynx"] = self;
   var_1 = level.scr_anim["convoy_lynx"]["m880_crash"];
-  var_2 = common_scripts\utility::getstruct("vignette_m880_crash", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("vignette_m880_crash", "script_noteworthy");
   var_3 = spawnStruct();
   var_3.origin = getstartorigin(var_2.origin, var_2.angles, var_1);
   var_3.angles = getstartangles(var_2.origin, var_2.angles, var_1);
@@ -1801,7 +1801,7 @@ m880_lynx_crash() {
 
 m880_crash_loop(var_0) {
   var_0 endon("stop_crash_loop");
-  var_1 = common_scripts\utility::getstruct("vignette_m880_crash", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_m880_crash", "script_noteworthy");
   var_2 = [];
   var_2["m880_crash_m880"] = var_0;
   var_2["convoy_barrier_tall_01"] = level.convoy_tall_barricade_01;
@@ -1813,7 +1813,7 @@ m880_crash_loop(var_0) {
 
 m880_crash_anim_init() {
   wait 0.1;
-  var_0 = common_scripts\utility::getstruct("vignette_m880_crash", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_m880_crash", "script_noteworthy");
   thread m880_crash_barrels(var_0);
   thread m880_crash_debris(var_0);
 }
@@ -1847,7 +1847,7 @@ m880_crash_debris(var_0) {
   var_11.script_noteworthy = "m880_cleanup";
   var_12 = maps\_utility::spawn_anim_model("convoy_debris_m880_03");
   var_12.script_noteworthy = "m880_cleanup";
-  level.m880_radiation_gate = getent("checkpoint_gate", "targetname");
+  level.m880_radiation_gate = getEnt("checkpoint_gate", "targetname");
   level.m880_radiation_gate.animname = "m880_radiation_gate";
   level.m880_radiation_gate maps\_utility::assign_animtree();
   var_13 = [];
@@ -1866,10 +1866,10 @@ m880_crash_debris(var_0) {
   var_13["convoy_debris_m880_03"] = var_12;
   var_13["m880_radiation_gate"] = level.m880_radiation_gate;
   var_0 maps\_anim::anim_first_frame(var_13, "m880_crash_debris");
-  var_14 = getent("checkpoint_concrete_swap_barrier_1", "targetname");
-  var_15 = getent("checkpoint_concrete_swap_barrier_2", "targetname");
+  var_14 = getEnt("checkpoint_concrete_swap_barrier_1", "targetname");
+  var_15 = getEnt("checkpoint_concrete_swap_barrier_2", "targetname");
   var_15 delete();
-  var_16 = getent("checkpoint_concrete_swap_barrier_3", "targetname");
+  var_16 = getEnt("checkpoint_concrete_swap_barrier_3", "targetname");
   var_10 hide();
   var_12 hide();
   var_0 thread m880_crash_debris_collision_change();
@@ -1896,7 +1896,7 @@ wait_show_and_delete_debris(var_0, var_1, var_2) {
 m880_crash_debris_left_side(var_0) {
   var_0 waittill("start_crash_debris");
   wait 4.0;
-  var_0 = common_scripts\utility::getstruct("vignette_m880_crash_left", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_m880_crash_left", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("convoy_debris_m880_02");
   var_2 = [];
   var_2["convoy_debris_m880_02"] = var_1;
@@ -1981,7 +1981,7 @@ launcher_callout_ally01_spawn() {
 }
 
 launcher_callout_ally01(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct("vignette_launcher_callout_ally01_node", "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct("vignette_launcher_callout_ally01_node", "script_noteworthy");
 
   if(isDefined(var_1) && isDefined(var_2)) {
     var_3.origin = var_1;
@@ -2000,7 +2000,7 @@ launcher_callout_ally02_spawn() {
 }
 
 launcher_callout_ally02(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct("vignette_launcher_callout_ally02_node", "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct("vignette_launcher_callout_ally02_node", "script_noteworthy");
 
   if(isDefined(var_1) && isDefined(var_2)) {
     var_3.origin = var_1;
@@ -2019,7 +2019,7 @@ launcher_callout_ally03_spawn() {
 }
 
 launcher_callout_ally03(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct("vignette_launcher_callout_ally03_node", "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct("vignette_launcher_callout_ally03_node", "script_noteworthy");
 
   if(isDefined(var_1) && isDefined(var_2)) {
     var_3.origin = var_1;
@@ -2036,7 +2036,7 @@ alley_flood_spawn() {
 }
 
 alley_flood() {
-  var_0 = common_scripts\utility::getstruct("vignette_alley_flood", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_alley_flood", "script_noteworthy");
   maps\_utility::delaythread(7.5, maps\flood_flooding::alley_flood_collision_cheater, "waterball_path_4");
   maps\_utility::delaythread(8.5, maps\flood_flooding::angry_flood_rumble_loop, "alley_flood_door_rumble_ent");
   var_1 = 0.0;
@@ -2052,7 +2052,7 @@ alley_flood_vehicles_spawn(var_0, var_1) {
   var_4 = [];
   var_4["alley_flood_man7t"] = var_2;
   var_4["alley_flood_debris"] = var_3;
-  var_5 = getent("alley_flood_rumble_ent", "targetname");
+  var_5 = getEnt("alley_flood_rumble_ent", "targetname");
   var_5 common_scripts\utility::delaycall(3.25, ::playrumbleonentity, "heavy_1s");
   var_0 thread maps\_anim::anim_single(var_4, "alley_flood", undefined, 10);
   common_scripts\utility::flag_wait("player_at_stairs_stop_nag");
@@ -2072,7 +2072,7 @@ warehouse_stairs_start_spawn() {
 }
 
 warehouse_stairs_start(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct("vignette_warehouse_stairs", "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct("vignette_warehouse_stairs", "script_noteworthy");
   var_4 = [];
   var_4["warehouse_stairs_ally_01"] = var_0;
   var_4["warehouse_stairs_ally_02"] = var_1;
@@ -2093,7 +2093,7 @@ flood_mall_roof_door_spawn() {
 }
 
 flood_mall_roof_door(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("mall_breach_origin", "targetname");
+  var_4 = common_scripts\utility::getStruct("mall_breach_origin", "targetname");
   var_5 = [];
   var_5["vignette_mall_roof_door_ally1"] = var_1;
   var_5["vignette_mall_roof_door_ally2"] = var_2;
@@ -2103,7 +2103,7 @@ flood_mall_roof_door(var_0, var_1, var_2, var_3) {
 }
 
 flood_sweptaway() {
-  var_0 = common_scripts\utility::getstruct("flood_sweptaway", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("flood_sweptaway", "script_noteworthy");
   level.player freezecontrols(1);
   level.player allowprone(0);
   level.player allowcrouch(0);
@@ -2135,7 +2135,7 @@ sweptaway_spawn() {
 }
 
 sweptaway(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("vignette_sweptaway", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("vignette_sweptaway", "script_noteworthy");
   var_5 = maps\_utility::spawn_anim_model("sweptaway_lynx_01");
   var_6 = maps\_utility::spawn_anim_model("sweptaway_lynx_02");
   var_7 = maps\_utility::spawn_anim_model("sweptaway_lynx_03");
@@ -2177,7 +2177,7 @@ sweptaway(var_0, var_1, var_2, var_3) {
 }
 
 sweptaway_test() {
-  var_0 = common_scripts\utility::getstruct("vignette_sweptaway", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_sweptaway", "script_noteworthy");
   var_1 = maps\_vignette_util::vignette_actor_spawn("swept_opfor_tree", "swept_opfor_tree");
   var_2 = maps\_utility::spawn_anim_model("sweptaway_coupe");
   var_3 = [];
@@ -2187,31 +2187,31 @@ sweptaway_test() {
 }
 
 skybridge_doorbreach_setup() {
-  var_0 = common_scripts\utility::getstruct("vignette_skybridge_doorbreach_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_skybridge_doorbreach_node", "script_noteworthy");
 
   if(!isDefined(level.skybridge_door)) {
-    var_1 = common_scripts\utility::getstruct("skybridge_doorbreach_struct", "targetname");
+    var_1 = common_scripts\utility::getStruct("skybridge_doorbreach_struct", "targetname");
     level.skybridge_door = maps\_utility::spawn_anim_model("skybridge_door_breach_door", var_1.origin);
     var_2 = spawn("script_origin", var_1.origin);
-    var_2 linkto(level.skybridge_door);
-    var_3 = getent("skybridge_doorbreach_clip", "targetname");
-    var_3 linkto(var_2);
+    var_2 linkTo(level.skybridge_door);
+    var_3 = getEnt("skybridge_doorbreach_clip", "targetname");
+    var_3 linkTo(var_2);
   }
 
   var_0 maps\_anim::anim_first_frame_solo(level.skybridge_door, "skybridge_doorbreach");
 }
 
 skybridge_doorbreach_spawn() {
-  var_0 = common_scripts\utility::getstruct("vignette_skybridge_doorbreach_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_skybridge_doorbreach_node", "script_noteworthy");
   level.allies[0] maps\_utility::clear_archetype();
 
   if(!isDefined(level.skybridge_door)) {
-    var_1 = common_scripts\utility::getstruct("skybridge_doorbreach_struct", "targetname");
+    var_1 = common_scripts\utility::getStruct("skybridge_doorbreach_struct", "targetname");
     level.skybridge_door = maps\_utility::spawn_anim_model("skybridge_door_breach_door", var_1.origin);
     var_2 = spawn("script_origin", var_1.origin);
-    var_2 linkto(level.skybridge_door);
-    var_3 = getent("skybridge_doorbreach_clip", "targetname");
-    var_3 linkto(var_2);
+    var_2 linkTo(level.skybridge_door);
+    var_3 = getEnt("skybridge_doorbreach_clip", "targetname");
+    var_3 linkTo(var_2);
   }
 
   var_4 = [];
@@ -2237,7 +2237,7 @@ skybridge_ally_approach() {
   level.allies[0] endon("player_on_skybridge");
   level.allies[0] maps\_utility::disable_ai_color();
   level.allies[0] maps\_vignette_util::vignette_actor_ignore_everything();
-  var_0 = common_scripts\utility::getstruct("vignette_skybridge_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_skybridge_node", "script_noteworthy");
   var_0 maps\_anim::anim_reach_solo(level.allies[0], "skybridge_ally_approach");
   level.allies[0] maps\_utility::enable_turnanims();
   var_0 maps\_anim::anim_single_solo(level.allies[0], "skybridge_ally_approach");
@@ -2248,7 +2248,7 @@ skybridge_ally_approach() {
 
 skybridge_scene_firstframe() {
   thread skybridge_restart_player_bridge_loop();
-  var_0 = common_scripts\utility::getstruct("vignette_skybridge_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_skybridge_node", "script_noteworthy");
 
   if(!isDefined(level.skybridge_building)) {
     level.skybridge_building = maps\_utility::spawn_anim_model("skybridge_building03");
@@ -2270,7 +2270,7 @@ skybridge_scene_firstframe() {
 }
 
 skybridge_scene_spawn() {
-  var_0 = common_scripts\utility::getstruct("vignette_skybridge_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_skybridge_node", "script_noteworthy");
   var_0 thread skybridge_player_bridge_vignette();
 
   if(!isDefined(level.skybridge_building)) {
@@ -2303,8 +2303,8 @@ skybridge_scene_spawn() {
   common_scripts\utility::flag_wait("on_skybridge");
   thread maps\flood_audio::skybridge_wash_away();
   var_0 notify("player_land");
-  var_1["sweptaway_skybridge_01"] stopanimscripted();
-  var_1["skybridge_building03"] stopanimscripted();
+  var_1["sweptaway_skybridge_01"] stopanimScripted();
+  var_1["skybridge_building03"] stopanimScripted();
   var_0 thread maps\_anim::anim_single_solo(var_1["sweptaway_skybridge_01"], "flood_skybridge_skybridge_part2");
   var_0 thread maps\_anim::anim_single_solo(var_1["skybridge_building03"], "flood_skybridge_building_part2");
 }
@@ -2317,7 +2317,7 @@ skybridge_player_bridge_vignette() {
   self notify("player_bridge_restart");
 
   foreach(var_1 in level.skybridge_sections) {
-    var_1 stopanimscripted();
+    var_1 stopanimScripted();
   }
 
   foreach(var_4 in level.skybridge_sections) {
@@ -2341,18 +2341,18 @@ skybridge_restart_player_bridge_loop(var_0, var_1) {
 
   var_2 = undefined;
   var_3 = 0.0;
-  var_4 = common_scripts\utility::getstruct("vignette_skybridge_node", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("vignette_skybridge_node", "script_noteworthy");
   var_4 notify("player_bridge_restart");
 
   if(0 < level.skybridge_sections.size) {
     foreach(var_6 in level.skybridge_sections) {
-      var_6 stopanimscripted();
+      var_6 stopanimScripted();
     }
 
     var_4 thread maps\_anim::anim_loop(level.skybridge_sections, "skybridge_sway", "player_bridge_restart");
   } else {
     for(var_8 = 0; var_8 < 3; var_8++) {
-      var_9 = common_scripts\utility::getstruct("skybridge_clip_loc_" + var_8, "script_noteworthy");
+      var_9 = common_scripts\utility::getStruct("skybridge_clip_loc_" + var_8, "script_noteworthy");
       level.skybridge_sections[var_8] = maps\_utility::spawn_anim_model("skybridge_sect_" + var_8, var_9.origin);
 
       if(isDefined(var_1)) {
@@ -2370,8 +2370,8 @@ skybridge_restart_player_bridge_loop(var_0, var_1) {
             break;
         }
 
-        var_10 = getent("skybridge_clip_" + var_8, "targetname");
-        var_10 linkto(level.skybridge_origins[var_8]);
+        var_10 = getEnt("skybridge_clip_" + var_8, "targetname");
+        var_10 linkTo(level.skybridge_origins[var_8]);
       }
     }
 
@@ -2414,9 +2414,9 @@ skybridge_player_flinch() {
   level.player playerlinktoblend(var_0, "tag_player", 0.3);
   thread maps\_anim::anim_single(var_1, "skybridge_flinch");
   wait 0.75;
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 0.25;
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   wait 0.66;
   level.player unlink();
   var_0 delete();
@@ -2429,13 +2429,13 @@ skybridge_player_flinch() {
 }
 
 skybridge_ally_cross(var_0) {
-  var_1 = getent("backwards_blocker", "targetname");
+  var_1 = getEnt("backwards_blocker", "targetname");
   var_1 movez(-416, 0.05);
-  var_2 = common_scripts\utility::getstruct("vignette_skybridge_node", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("vignette_skybridge_node", "script_noteworthy");
   level.allies[0] notify("player_on_skybridge");
   var_2 notify("player_on_skybridge");
-  level.allies[0] stopanimscripted();
-  var_3 = getent("ally_in_front_vol", "targetname");
+  level.allies[0] stopanimScripted();
+  var_3 = getEnt("ally_in_front_vol", "targetname");
 
   if(level.allies[0] istouching(var_3)) {
     var_2 thread maps\_anim::anim_single_solo(level.allies[0], "skybridge_cross_ahead");
@@ -2456,7 +2456,7 @@ skybridge_ally_cross(var_0) {
 rooftops_ally_holdup() {
   self endon("interrupt");
   thread rooftops_ally_holdup_interrupt();
-  var_0 = common_scripts\utility::getstruct("ally_hold_01_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("ally_hold_01_node", "script_noteworthy");
   var_0 maps\_anim::anim_reach_solo(self, "ally_hold_01");
   var_0 maps\_anim::anim_single_solo(self, "ally_hold_01");
   maps\_utility::set_force_color("r");
@@ -2467,12 +2467,12 @@ rooftops_ally_holdup_interrupt() {
   self endon("holdup_complete");
   common_scripts\utility::flag_wait("rooftops_interior_encounter_start");
   self notify("interrupt");
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::set_force_color("r");
 }
 
 rooftops_enemy_exfil_setup_heli() {
-  var_0 = common_scripts\utility::getstruct("vignette_rooftops_ropeladder_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_rooftops_ropeladder_node", "script_noteworthy");
   common_scripts\utility::flag_wait("rooftops_heli_spawned");
   common_scripts\utility::exploder("rooftop1_heli_debri");
   thread maps\flood_audio::sfx_heli_rooftops_sequence(level.rooftop_heli);
@@ -2487,13 +2487,13 @@ rooftops_enemy_exfil_setup_heli() {
 
 rooftops_enemy_exfil_spawn() {
   common_scripts\utility::flag_wait("rooftops_heli_spawned");
-  var_0 = common_scripts\utility::getstruct("vignette_rooftops_ropeladder_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_rooftops_ropeladder_node", "script_noteworthy");
   common_scripts\utility::flag_wait("rooftops_exterior_encounter_start");
   wait 0.5;
   var_0 notify("exfil_abort");
 
   foreach(var_2 in level.rooftops_exfil_anim_guys) {
-    var_2 stopanimscripted();
+    var_2 stopanimScripted();
   }
 
   if(!isalive(level.rooftop_heli_opfor[0])) {
@@ -2537,13 +2537,13 @@ rooftops_enemy_exfil_spawn_actors(var_0) {
 
 rooftops_outro_scene_setup() {
   common_scripts\utility::flag_wait("flood_mid_tr_loaded");
-  var_0 = common_scripts\utility::getstruct("vignette_rooftops_outro", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_rooftops_outro", "script_noteworthy");
   level.rooftop_outro_props["rooftops_brickwall"] = maps\_utility::spawn_anim_model("rooftops_brickwall");
   var_0 maps\_anim::anim_first_frame(level.rooftop_outro_props, "rooftops_wall_kick");
 }
 
 rooftops_outro_scene_spawn() {
-  var_0 = common_scripts\utility::getstruct("vignette_rooftops_outro", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_rooftops_outro", "script_noteworthy");
   var_1 = [];
   var_1["rooftops_brickwall"] = level.rooftop_outro_props["rooftops_brickwall"];
   var_1["ally_0"] = level.allies[0];
@@ -2562,7 +2562,7 @@ rooftops_outro_scene_spawn() {
 }
 
 rooftops_water_long_jump_spawn() {
-  var_0 = common_scripts\utility::getstruct("rooftops_water_long_jump", "targetname");
+  var_0 = common_scripts\utility::getStruct("rooftops_water_long_jump", "targetname");
   var_0 maps\_anim::anim_reach_solo(level.allies[0], "rooftops_water_long_jump");
   level.allies[0] thread maps\flood_audio::sfx_rooftops_ally_jump();
   var_0 maps\_anim::anim_single_solo(level.allies[0], "rooftops_water_long_jump");
@@ -2576,7 +2576,7 @@ rooftops_water_long_jump_spawn() {
       var_0 thread maps\_anim::anim_loop_solo(level.allies[0], "rooftops_water_approach_loop", "player_followed");
       common_scripts\utility::flag_wait("rooftops_water_player_followed");
       var_0 notify("player_followed");
-      level.allies[0] stopanimscripted();
+      level.allies[0] stopanimScripted();
     }
 
     var_0 maps\_anim::anim_single_solo(level.allies[0], "rooftops_water_approach_jump");
@@ -2609,7 +2609,7 @@ rooftops_water_intro() {
 }
 
 rooftops_water_intro_flare_scene() {
-  var_0 = common_scripts\utility::getstruct("vignette_opfor_waving_flares", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_opfor_waving_flares", "script_noteworthy");
   var_1 = [];
   var_1["opfor_1"] = level.rooftops_water_opfor[1];
   var_1["flare_left_01"] = maps\_utility::spawn_anim_model("flare_left_01");
@@ -2622,7 +2622,7 @@ rooftops_water_intro_flare_scene() {
   var_0 notify("spotted");
 
   if(isalive(level.rooftops_water_opfor[1])) {
-    level.rooftops_water_opfor[1] stopanimscripted();
+    level.rooftops_water_opfor[1] stopanimScripted();
     level.rooftops_water_opfor[1].health = 150;
     level.rooftops_water_opfor[1].ignoreme = 0;
     level.rooftops_water_opfor[1] notify("fight");
@@ -2632,7 +2632,7 @@ rooftops_water_intro_flare_scene() {
 }
 
 rooftops_water_intro_truck_scene() {
-  var_0 = common_scripts\utility::getstruct("vignette_rooftops_02_encounter_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_rooftops_02_encounter_node", "script_noteworthy");
   var_1 = [];
   var_1["opfor_0"] = level.rooftops_water_opfor[0];
   var_0 thread maps\_anim::anim_first_frame(var_1, "rooftops_water_reveal");
@@ -2667,7 +2667,7 @@ debris_bridge_spawn() {
 }
 
 debris_bridge_loop1() {
-  var_0 = common_scripts\utility::getstruct("vignette_debris_bridge_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_debris_bridge_node", "script_noteworthy");
   var_1 = [];
   var_1[var_1.size] = maps\_utility::spawn_anim_model("debris_debrissmall");
   var_1[var_1.size] = maps\_utility::spawn_anim_model("debris_wall");
@@ -2681,7 +2681,7 @@ debris_bridge_loop1() {
 }
 
 debris_bridge_vign1_and_loop2(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_debris_bridge_node", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_debris_bridge_node", "script_noteworthy");
   var_1 notify("pile_up");
   level.debrisbridge_origins = [];
   var_2 = [];
@@ -2708,12 +2708,12 @@ debris_bridge_vign1_and_loop2(var_0) {
         var_5 = 15;
       }
 
-      var_6 = common_scripts\utility::getstruct("debrisbridge_struct_" + var_5, "script_noteworthy");
+      var_6 = common_scripts\utility::getStruct("debrisbridge_struct_" + var_5, "script_noteworthy");
       var_7 = maps\_utility::spawn_anim_model(var_4, var_6.origin);
       var_8 = spawn("script_origin", var_6.origin);
-      var_9 = getent("debrisbridge_prop_" + var_5, "targetname");
-      var_8 linkto(var_7);
-      var_9 linkto(var_8);
+      var_9 = getEnt("debrisbridge_prop_" + var_5, "targetname");
+      var_8 linkTo(var_7);
+      var_9 linkTo(var_8);
       var_0[var_0.size] = var_7;
       level.debrisbridge_origins[level.debrisbridge_origins.size] = var_8;
       continue;
@@ -2735,15 +2735,15 @@ debris_bridge_vign1_and_loop2(var_0) {
   var_0 = common_scripts\utility::array_remove(var_0, var_11);
   var_0["debris_clip"] = maps\_utility::spawn_anim_model("debris_clip");
   var_1 maps\_anim::anim_first_frame_solo(var_0["debris_clip"], "debris_bridge_vign1");
-  var_12 = getent("debrisbridge_clip_all", "targetname");
-  var_12 linkto(var_0["debris_clip"]);
+  var_12 = getEnt("debrisbridge_clip_all", "targetname");
+  var_12 linkTo(var_0["debris_clip"]);
   var_1 thread maps\_anim::anim_loop(var_0, "debris_bridge_loop2", "bridge_crossing");
   level thread debris_bridge_cleanup(var_0);
   return var_0;
 }
 
 debris_bridge_final_loop() {
-  var_0 = common_scripts\utility::getstruct("vignette_debris_bridge_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_debris_bridge_node", "script_noteworthy");
   var_1 = [];
   var_1[var_1.size] = maps\_utility::spawn_anim_model("debris_movingtruck");
   var_1[var_1.size] = maps\_utility::spawn_anim_model("debris_vanblue");
@@ -2767,11 +2767,11 @@ debris_bridge_final_loop() {
 }
 
 debris_bridge_vign2_and_loop3(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_debris_bridge_node", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_debris_bridge_node", "script_noteworthy");
   var_1 notify("bridge_crossing");
 
   foreach(var_3 in var_0) {
-    var_3 stopanimscripted();
+    var_3 stopanimScripted();
   }
 
   waittillframeend;
@@ -2781,13 +2781,13 @@ debris_bridge_vign2_and_loop3(var_0) {
 }
 
 debris_bridge_vign2_and_loop3_ally() {
-  var_0 = common_scripts\utility::getstruct("vignette_debris_bridge_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_debris_bridge_node", "script_noteworthy");
   common_scripts\utility::flag_wait_all("debrisbridge_ally_0_ready", "debrisbridge_ally_1_ready");
   var_0 notify("move_across");
 
   foreach(var_2 in level.allies) {
     if(2 != var_2.debrisbridge_loc) {
-      var_2 stopanimscripted();
+      var_2 stopanimScripted();
     }
   }
 
@@ -2814,7 +2814,7 @@ debris_bridge_vign2_and_loop3_ally() {
   }
 
   var_0 notify("move_across_late");
-  var_4 stopanimscripted();
+  var_4 stopanimScripted();
   var_4 thread debris_bridge_actor_vign_and_transition_to_combat(var_0);
 }
 
@@ -2875,7 +2875,7 @@ garage_jump_01_spawn() {
 }
 
 garage_jump_01(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_garage_jump_01", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_garage_jump_01", "script_noteworthy");
   var_2 = [];
   var_2["garage_jump_01_opfor"] = var_0;
   var_1 maps\_anim::anim_single(var_2, "garage_jump_01");
@@ -2888,21 +2888,21 @@ garage_jump_02_spawn() {
 }
 
 garage_jump_02(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_garage_jump_02", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_garage_jump_02", "script_noteworthy");
   var_2 = [];
   var_2["garage_jump_02_opfor"] = var_0;
   var_1 maps\_anim::anim_single(var_2, "garage_jump_02");
 }
 
 rooftops_traversal_01_spawn() {
-  var_0 = common_scripts\utility::getstruct("vignette_rooftops_traversal_01", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_rooftops_traversal_01", "script_noteworthy");
   var_0 maps\_anim::anim_single(maps\_utility::make_array(level.allies[0]), "rooftops_traversal_01");
 }
 
 rooftops_traversal_02_spawn() {}
 
 rooftops_traversal_02(var_0) {
-  var_1 = common_scripts\utility::getstruct("rooftops_traversal_02_ally_node", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("rooftops_traversal_02_ally_node", "script_noteworthy");
   var_2 = [];
   var_2["rooftops_traversal_02_ally"] = var_0;
   var_1 maps\_anim::anim_single(var_2, "rooftops_traversal_02");
@@ -2911,7 +2911,7 @@ rooftops_traversal_02(var_0) {
 rooftops_traversal_03_spawn() {}
 
 rooftops_traversal_03(var_0) {
-  var_1 = common_scripts\utility::getstruct("rooftops_traversal_03_ally_node", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("rooftops_traversal_03_ally_node", "script_noteworthy");
   var_2 = [];
   var_2["rooftops_traversal_03_ally"] = var_0;
   var_1 maps\_anim::anim_single(var_2, "rooftops_traversal_03");
@@ -2924,7 +2924,7 @@ attach_fx_anim_model(var_0, var_1, var_2, var_3) {
   var_6.angles = var_5;
   var_6.origin = var_4;
   var_6 setModel(var_1);
-  var_6 linkto(var_0, var_2);
+  var_6 linkTo(var_0, var_2);
 
   if(isDefined(var_3)) {
     var_6.script_noteworthy = var_3;
@@ -2939,8 +2939,8 @@ ending_animatic_setup() {
   level.ending_door_l = maps\_utility::spawn_anim_model("ending_breach_door_l");
   level.ending_door_r = maps\_utility::spawn_anim_model("ending_breach_door_r");
   level.ending_heli = maps\_utility::spawn_anim_model("outro_pt1_heli");
-  var_0 = getent("nh90_collision", "targetname");
-  var_0 linkto(level.ending_heli);
+  var_0 = getEnt("nh90_collision", "targetname");
+  var_0 linkTo(level.ending_heli);
   level.ending_hvt = maps\_vignette_util::vignette_actor_spawn("garcia_spawner", "generic");
   level.ending_hvt maps\_utility::gun_remove();
   level.ending_opfor_0 = maps\_vignette_util::vignette_actor_spawn("vignette_ending_opfor01", "opfor_0");
@@ -2963,7 +2963,7 @@ ending_animatic_setup() {
   level.ending_opfor_3 = maps\_vignette_util::vignette_actor_spawn("vignette_outro_pilot", "opfor_3");
   level.ending_opfor_3 maps\_utility::gun_remove();
   level.ending_opfor_3.nodrop = 1;
-  level.outro_node = common_scripts\utility::getstruct("vignette_outro", "script_noteworthy");
+  level.outro_node = common_scripts\utility::getStruct("vignette_outro", "script_noteworthy");
   level.outro_node maps\_anim::anim_first_frame(maps\_utility::make_array(level.ending_door_l, level.ending_door_r, level.ending_opfor_0, level.ending_opfor_1, level.ending_opfor_2), "outro_pt1_breach");
   level.outro_node maps\_anim::anim_first_frame_solo(level.ending_heli, "outro_pt1_heli");
   level.outro_node maps\_anim::anim_first_frame(maps\_utility::make_array(level.ending_opfor_0, level.ending_opfor_1), "outro_pt1_start");
@@ -2977,13 +2977,13 @@ ending_animatic_setup() {
   var_1 = getEntArray("upper_garage_door_l", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.ending_door_l);
+    var_3 linkTo(level.ending_door_l);
   }
 
   var_1 = getEntArray("upper_garage_door_r", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.ending_door_r);
+    var_3 linkTo(level.ending_door_r);
   }
 
   common_scripts\utility::flag_set("ending_anims_ready");
@@ -3073,8 +3073,8 @@ ending_pt1_ally_0_sequence() {
   common_scripts\utility::flag_wait("vignette_ending_scene_start");
 
   foreach(var_2 in var_0) {
-    var_2 stopanimscripted();
-    var_2 linkto(level.ending_heli);
+    var_2 stopanimScripted();
+    var_2 linkTo(level.ending_heli);
   }
 
   maps\_utility::gun_remove();
@@ -3091,8 +3091,8 @@ ending_pt1_ally_1_sequence() {
   common_scripts\utility::flag_wait("vignette_ending_scene_start");
 
   foreach(var_2 in var_0) {
-    var_2 stopanimscripted();
-    var_2 linkto(level.ending_heli);
+    var_2 stopanimScripted();
+    var_2 linkTo(level.ending_heli);
   }
 
   maps\_utility::gun_remove();
@@ -3110,7 +3110,7 @@ ending_pt1_ally_1_sequence() {
   }
 
   level.ending_opfor_3 show();
-  level.ending_opfor_3 linkto(level.ending_heli);
+  level.ending_opfor_3 linkTo(level.ending_heli);
   var_0["opfor_3"] = level.ending_opfor_3;
   var_4 = "outro_pt1_pilot_kill";
   level.ending_heli thread maps\_anim::anim_single(var_0, var_4, "tag_origin");
@@ -3137,7 +3137,7 @@ ending_pt1_player_sequence_start() {
   setsaveddvar("hud_showStance", 0);
   level.ending_arms = maps\_utility::spawn_anim_model("player_rig");
   level.ending_arms hide();
-  level.ending_arms linkto(level.ending_heli);
+  level.ending_arms linkTo(level.ending_heli);
   level.player thread maps\flood_ending::ending_player_camera_logic();
   level.player thread maps\flood_ending::ending_player_qte_0_logic();
   level.player thread maps\flood_ending::ending_player_weapon_logic();
@@ -3162,8 +3162,8 @@ ending_pt1_sequence() {
   var_0 = [];
   common_scripts\utility::flag_clear("vignette_ending_qte_success");
   level.player thread maps\flood_ending::ending_player_land_on_heli_effects();
-  level.ending_gun linkto(level.ending_heli);
-  level.ending_opfor_0 linkto(level.ending_heli);
+  level.ending_gun linkTo(level.ending_heli);
+  level.ending_opfor_0 linkTo(level.ending_heli);
   var_0["outro_gun_player"] = level.ending_gun;
   var_0["opfor_0"] = level.ending_opfor_0;
   var_1 = "outro_pt1_melee_player";
@@ -3183,10 +3183,10 @@ ending_pt1_sequence() {
   }
 
   level.ending_hvt show();
-  level.ending_hvt linkto(level.ending_heli);
-  level.ending_gun stopanimscripted();
+  level.ending_hvt linkTo(level.ending_heli);
+  level.ending_gun stopanimScripted();
   level.ending_gun unlink();
-  level.ending_gun linkto(level.ending_arms, "tag_knife_attach2");
+  level.ending_gun linkTo(level.ending_arms, "tag_knife_attach2");
   var_0 = common_scripts\utility::array_remove(var_0, level.ending_gun);
   var_0["ally_0"] = level.allies[0];
   var_0["opfor_1"] = level.ending_opfor_1;
@@ -3199,7 +3199,7 @@ ending_pt1_sequence() {
   level.ending_opfor_0 hide();
   level.enemy_gun.origin = level.ending_hvt gettagorigin("TAG_INHAND");
   level.enemy_gun.angles = level.ending_hvt gettagangles("TAG_INHAND");
-  level.enemy_gun linkto(level.ending_hvt, "TAG_INHAND");
+  level.enemy_gun linkTo(level.ending_hvt, "TAG_INHAND");
   common_scripts\utility::flag_clear("vignette_ending_qte_success");
   var_0 = common_scripts\utility::array_remove(var_0, level.ending_opfor_0);
   var_0["opfor_3"] = level.ending_opfor_3;
@@ -3222,7 +3222,7 @@ ending_pt1_sequence() {
 
   level.allies[1] show();
   var_0["ally_1"] = level.allies[1];
-  level.ending_hvt stopanimscripted();
+  level.ending_hvt stopanimScripted();
   level.player common_scripts\utility::delaycall(0.4, ::disableweapons);
   level.allies[0] maps\_utility::delaythread(1.0, maps\_utility::smart_dialogue, "flood_mrk_weregoingdown");
   level.allies[0] maps\_utility::delaythread(2.5, maps\_utility::smart_dialogue, "flood_oby_holdon");
@@ -3271,7 +3271,7 @@ ending_harmless_shots_logic(var_0) {
 }
 
 ending_player_shoot_gun() {
-  self playrumbleonentity("heavygun_fire");
+  self playRumbleOnEntity("heavygun_fire");
   playFXOnTag(level._effect["fx_usp_muzzle_flash"], level.ending_gun, "tag_flash");
   var_0 = level.ending_gun gettagorigin("tag_flash");
   var_1 = anglesToForward(level.ending_gun gettagangles("tag_flash"));
@@ -3287,7 +3287,7 @@ outro_pt1_blood(var_0) {
   var_1 = maps\_utility::spawn_anim_model("outro_pt1_blood");
   var_0 = [];
   var_0["outro_pt1_blood"] = var_1;
-  var_1 linkto(level.ending_heli);
+  var_1 linkTo(level.ending_heli);
   level.ending_heli maps\_anim::anim_single(var_0, "outro_pt1_blood");
 }
 
@@ -3314,7 +3314,7 @@ ending_pt2_player_sequence_save() {
   var_2["player_rig"] = level.ending_arms;
   var_2["outro_player_legs"] = var_0;
   var_3 = 4.0;
-  level.outro_node = common_scripts\utility::getstruct("vignette_outro_end", "script_noteworthy");
+  level.outro_node = common_scripts\utility::getStruct("vignette_outro_end", "script_noteworthy");
   thread maps\flood_fx::set_vf_end2();
   level thread ending_pt2_hvt();
   level.player common_scripts\utility::delaycall(var_3 + 4.25, ::playrumbleonentity, "light_1s");
@@ -3360,7 +3360,7 @@ ending_pt2_player_sequence_save() {
   common_scripts\utility::flag_set("vignette_ending_qte_grabbed");
   common_scripts\utility::flag_set("vignette_ending_qte_success");
   maps\_utility::autosave_by_name_silent("ending_ally_grab");
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   level.player thread maps\flood_util::earthquake_w_fade(0.2, 2, 1, 1);
   var_4 = "outro_pt2_vargas_death";
   thread maps\flood_audio::sfx_change_zone();
@@ -3469,7 +3469,7 @@ building_01_debri_anim_spawn() {
 
 building_01_debri_anim() {
   var_0 = [];
-  var_1 = common_scripts\utility::getstruct("building_01_debri_anim", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("building_01_debri_anim", "script_noteworthy");
   var_2 = maps\_utility::spawn_anim_model("building_01_debri");
   var_0[var_0.size] = attach_fx_anim_model(var_2, "com_wallchunk_boardsmall03_dark", "j_building_01_debri_com_wallchunk_boardsmall03_1");
   var_0[var_0.size] = attach_fx_anim_model(var_2, "com_wallchunk_boardsmall04_dark", "j_building_01_debri_com_wallchunk_boardsmall04_2");
@@ -3574,20 +3574,20 @@ building_01_debri_anim() {
 setup_enemies_open_gate() {
   level.ending_gate_l = maps\_utility::spawn_anim_model("ending_breach_door_l");
   level.ending_gate_r = maps\_utility::spawn_anim_model("ending_breach_door_r");
-  level.ending_gate_node_left = common_scripts\utility::getstruct("ending_gate_node_left", "targetname");
+  level.ending_gate_node_left = common_scripts\utility::getStruct("ending_gate_node_left", "targetname");
   level.ending_gate_node_left maps\_anim::anim_first_frame_solo(level.ending_gate_l, "outro_pt1_breach");
-  level.ending_gate_node_right = common_scripts\utility::getstruct("ending_gate_node_right", "targetname");
+  level.ending_gate_node_right = common_scripts\utility::getStruct("ending_gate_node_right", "targetname");
   level.ending_gate_node_right maps\_anim::anim_first_frame_solo(level.ending_gate_r, "outro_pt1_breach");
   var_0 = getEntArray("garage_door_r", "targetname");
 
   foreach(var_2 in var_0) {
-    var_2 linkto(level.ending_gate_l);
+    var_2 linkTo(level.ending_gate_l);
   }
 
   var_0 = getEntArray("garage_door_l", "targetname");
 
   foreach(var_2 in var_0) {
-    var_2 linkto(level.ending_gate_r);
+    var_2 linkTo(level.ending_gate_r);
   }
 }
 
@@ -3597,13 +3597,13 @@ enemies_open_gate() {
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, maps\_utility::enable_cqbwalk);
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, maps\flood_ending::ending_temp_ignore);
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai, 1);
-  var_1 = getent("gate_keeper", "targetname");
+  var_1 = getEnt("gate_keeper", "targetname");
   var_1 maps\_utility::add_spawn_function(maps\_utility::disable_long_death);
   var_1 maps\_utility::add_spawn_function(maps\flood_ending::ending_temp_ignore);
   var_1 maps\_utility::add_spawn_function(maps\flood_ending::ending_remove_gate_keepers);
   var_2 = var_1 maps\_utility::spawn_ai(1);
   var_2.animname = "generic";
-  var_3 = common_scripts\utility::getstruct("ending_open_door", "targetname");
+  var_3 = common_scripts\utility::getStruct("ending_open_door", "targetname");
   var_3 maps\_anim::anim_reach_solo(var_2, "ending_door_kick");
   var_3 thread maps\_anim::anim_single_solo(var_2, "ending_door_kick");
   wait 0.1;

@@ -80,12 +80,12 @@ main() {
 }
 
 initExtraCollision() {
-  collision128 = GetEnt("clip128x128x8", "targetname");
+  collision128 = getEnt("clip128x128x8", "targetname");
   blocker = spawn("script_model", (832, 1938, 466));
   blocker.angles = (0, 0, -90);
   blocker CloneBrushmodelToScriptmodel(collision128);
 
-  collision2 = GetEnt("player128x128x8", "targetname");
+  collision2 = getEnt("player128x128x8", "targetname");
   collision2Ent = spawn("script_model", (1144, 1938, 466));
   collision2Ent.angles = (0, 0, -90);
   collision2Ent CloneBrushmodelToScriptmodel(collision2);
@@ -122,17 +122,17 @@ trigger_wait_damage(trigger, damage_notify) {
 }
 
 generic_shootable_double_doors(anim_node_targetname, left_gate_targetname, left_gate_tag, right_gate_targetname, right_gate_tag, lock_targetname, gate_clip_targetname, gate_triggers_targetname, closed_loop_anim, open_in_anim, open_out_anim, lock_idle_anim, open_sound_left, open_sound_right, open_sound_lock, damage_notify, open_flag, affect_pathing, extra_delete) {
-  left_gate = GetEnt(left_gate_targetname, "targetname");
-  right_gate = GetEnt(right_gate_targetname, "targetname");
+  left_gate = getEnt(left_gate_targetname, "targetname");
+  right_gate = getEnt(right_gate_targetname, "targetname");
   if(isDefined(lock_targetname)) {
-    lock = GetEnt(lock_targetname, "targetname");
+    lock = getEnt(lock_targetname, "targetname");
   } else {
     lock = undefined;
   }
-  gate_clip = GetEnt(gate_clip_targetname, "targetname");
+  gate_clip = getEnt(gate_clip_targetname, "targetname");
   gate_triggers = getEntArray(gate_triggers_targetname, "targetname");
 
-  anim_node_ref = GetEnt(anim_node_targetname, "targetname");
+  anim_node_ref = getEnt(anim_node_targetname, "targetname");
   gate_anim_node = spawn("script_model", anim_node_ref.origin);
   if(isDefined(anim_node_ref.angles)) {
     gate_anim_node.angles = anim_node_ref.angles;
@@ -147,20 +147,20 @@ generic_shootable_double_doors(anim_node_targetname, left_gate_targetname, left_
   waitframe();
 
   if(isDefined(left_gate_tag)) {
-    left_gate LinkTo(gate_anim_node, left_gate_tag);
+    left_gate linkTo(gate_anim_node, left_gate_tag);
   } else {
-    left_gate LinkTo(gate_anim_node, "j_prop_1");
+    left_gate linkTo(gate_anim_node, "j_prop_1");
   }
   if(isDefined(right_gate_tag)) {
-    right_gate LinkTo(gate_anim_node, right_gate_tag);
+    right_gate linkTo(gate_anim_node, right_gate_tag);
   } else {
-    right_gate LinkTo(gate_anim_node, "j_prop_2");
+    right_gate linkTo(gate_anim_node, "j_prop_2");
   }
 
   waitframe();
 
   if(affect_pathing) {
-    gate_clip DisconnectPaths();
+    gate_clip disconnectPaths();
   } else {
     gate_clip ConnectPaths();
   }
@@ -293,7 +293,7 @@ get_linked_structs() {
   if(isDefined(self.script_linkTo)) {
     linknames = get_links();
     for(i = 0; i < linknames.size; i++) {
-      ent = getstruct(linknames[i], "script_linkname");
+      ent = getStruct(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         array[array.size] = ent;
       }
@@ -365,7 +365,7 @@ hopper_wheel(initially_clockwise, movetime) {
 
 bot_underground_trapped_watch() {
   escape_triggers = getEntArray("gate_trigger", "targetname");
-  underground_volume = GetEnt("underground_volume", "targetname");
+  underground_volume = getEnt("underground_volume", "targetname");
 
   while(!flag("chain_broken")) {
     while(flag("hopper_closed") && !flag("chain_broken")) {
@@ -419,8 +419,8 @@ shootable_ladder() {
   top_node = GetNode("ladder_top_node", "targetname");
   DisconnectNodePair(top_node, bottom_node);
 
-  ladder_model = GetEnt("scripted_ladder", "targetname");
-  ladder_brush = GetEnt("ladder_brush_bottom", "targetname");
+  ladder_model = getEnt("scripted_ladder", "targetname");
+  ladder_brush = getEnt("ladder_brush_bottom", "targetname");
 
   ladder_brush NotSolid();
   ladder_brush trigger_off();
@@ -428,16 +428,16 @@ shootable_ladder() {
   ladder_brush setCanDamage(true);
   ladder_model setCanDamage(true);
 
-  ladder_down_pos = getstruct("ladder_down_loc", "targetname");
-  ladder_up_pos = getstruct("ladder_up_loc", "targetname");
+  ladder_down_pos = getStruct("ladder_down_loc", "targetname");
+  ladder_up_pos = getStruct("ladder_up_loc", "targetname");
 
   ladder_link = spawn("script_model", ladder_down_pos.origin);
   ladder_link setModel("tag_origin");
-  ladder_model LinkTo(ladder_link);
+  ladder_model linkTo(ladder_link);
 
   waitframe();
 
-  ladder_link MoveTo(ladder_up_pos.origin, 0.1, 0.0, 0.0);
+  ladder_link moveTo(ladder_up_pos.origin, 0.1, 0.0, 0.0);
   wait(0.2);
 
   ladder_model Unlink();
@@ -449,11 +449,11 @@ shootable_ladder() {
 
   ladder_link Delete();
 
-  ladder_model LinkTo(ladder_anim_node, "j_prop_1");
+  ladder_model linkTo(ladder_anim_node, "j_prop_1");
 
   waitframe();
 
-  ladder_trigger = GetEnt("ladder_damage_trigger", "targetname");
+  ladder_trigger = getEnt("ladder_damage_trigger", "targetname");
   add_to_bot_damage_targets(ladder_trigger);
 
   damageable_array = [];
@@ -472,7 +472,7 @@ shootable_ladder() {
 
   ConnectNodePair(top_node, bottom_node);
 
-  ladder_test_volume = GetEnt("ladder_brush_volume", "targetname");
+  ladder_test_volume = getEnt("ladder_brush_volume", "targetname");
   ladder_volume_occupied = true;
 
   while(ladder_volume_occupied) {
@@ -506,7 +506,7 @@ waittill_damage_flag_set(flag_name) {
 
 bot_shootable_target_watch(trigger_targetname, awareness_volume_targetname, endon_flag) {
   shootable_triggers = getEntArray(trigger_targetname, "targetname");
-  awareness_volume = GetEnt(awareness_volume_targetname, "targetname");
+  awareness_volume = getEnt(awareness_volume_targetname, "targetname");
 
   while(!flag(endon_flag)) {
     if(isDefined(level.participants)) {

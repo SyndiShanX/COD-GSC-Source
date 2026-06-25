@@ -313,7 +313,7 @@ class class_c4926dee {
 
       last = m_active;
       m_active = 0;
-      players = getplayers();
+      players = getPlayers();
 
       if(function_30a0163e()) {
         room = function_7475529a();
@@ -461,7 +461,7 @@ class class_c4926dee {
 
     m_model.modelname = [[var_de510cda]] - > function_c1009efb();
     m_model.angles = angles;
-    m_model.health = [[var_de510cda]] - > function_de9607de() * getplayers().size;
+    m_model.health = [[var_de510cda]] - > function_de9607de() * getPlayers().size;
 
     if(!isDefined(m_model.health)) {
       m_model.health = 5000;
@@ -703,7 +703,7 @@ function function_40ec656b(model, var_3ac6a87b, var_c4a370ce) {
   model namespace_83eb6304::function_3ecfde67(var_3ac6a87b);
 
   if(namespace_ec06fe4a::function_a8975c67() && isDefined(var_c4a370ce) && validateorigin(model.origin)) {
-    playsoundatposition(var_c4a370ce, model.origin);
+    playSoundAtPosition(var_c4a370ce, model.origin);
   }
 
   util::wait_network_frame();
@@ -750,7 +750,7 @@ function function_5db81c1c() {
 
 function function_782e605e(name) {
   generators = struct::get_array(name + "_doa_generator", "targetname");
-  var_d613e783 = (getplayers().size - 1) * 10;
+  var_d613e783 = (getPlayers().size - 1) * 10;
 
   foreach(item in generators) {
     var_9b3d6734 = 100;

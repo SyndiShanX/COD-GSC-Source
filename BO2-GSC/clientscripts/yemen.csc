@@ -92,7 +92,7 @@ speech_crowd_animate_guy() {
   level waittill("crowd_cheer_hush");
   self thread animate_drone("idle");
   level waittill("crowd_cheer_start");
-  s_crowd_center = getstruct("speech_crowd_cheer_center", "targetname");
+  s_crowd_center = getStruct("speech_crowd_cheer_center", "targetname");
   n_dist = distance2d(s_crowd_center.origin, self.origin);
   n_time = n_dist * 0.003;
   wait(n_time);

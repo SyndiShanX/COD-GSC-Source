@@ -34,7 +34,7 @@ dotraverseanim_dlc(var_0, var_1, var_2, var_3) {
   }
 
   self.var_6378 = var_5;
-  self.traversalvector = vectornormalize(var_5 - var_4.origin);
+  self.traversalvector = vectorNormalize(var_5 - var_4.origin);
   var_6 = undefined;
   var_6 = var_4.opcode::OP_ScriptMethodCallPointer;
   if(var_1 == "traverse_external") {
@@ -116,10 +116,10 @@ dotraverseanim_dlc(var_0, var_1, var_2, var_3) {
   opcode::OP_CallBuiltin4 = self func_8145();
   if(isDefined(opcode::OP_CallBuiltin4) && isDefined(var_1E.target)) {
     self.endnode = opcode::OP_CallBuiltin4;
-    opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
+    opcode::OP_CallBuiltin5 = scripts\engine\utility::getStruct(self.endnode.target, "targetname");
     if(var_13.size > 0) {
       scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_13, "traverse", var_14, var_12, 0, ::zombietraversenotetrackhandler_dlc);
-      opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
+      opcode::OP_CallBuiltin5 = scripts\engine\utility::getStruct(self.endnode.target, "targetname");
       if(isDefined(var_1F.script_noteworthy) && var_1F.script_noteworthy == "continue_flex_height") {
         scripts\mp\agents\_scriptedagents::func_5AC1(var_6, var_7, var_13, "traverse", var_12, var_10, 1, ::zombietraversenotetrackhandler_dlc);
       }
@@ -136,7 +136,7 @@ dotraverseanim_dlc(var_0, var_1, var_2, var_3) {
       self scragentsetanimscale(1, 1);
       scripts\mp\agents\_scriptedagents::func_CED5(var_6, var_7, "traverse", "end", ::zombietraversenotetrackhandler_dlc);
     } else {
-      opcode::OP_CallBuiltin = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
+      opcode::OP_CallBuiltin = scripts\engine\utility::getStruct(self.endnode.target, "targetname");
       opcode::OP_CallBuiltin5 = var_20.origin;
       opcode::OP_BoolNot = var_11[0];
       scripts\mp\agents\_scriptedagents::func_5AC2(var_6, var_7, "traverse", var_13, var_14, var_10, opcode::OP_CallBuiltin5, opcode::OP_BoolNot, ::zombietraversenotetrackhandler_dlc);
@@ -318,7 +318,7 @@ lerptoabovegrounddlc() {
   var_4 = getgroundposition(var_1, 8);
   var_5 = var_4[2];
   if(var_3 < var_5) {
-    self setorigin((self.origin[0], self.origin[1], var_5 + var_0), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_5 + var_0), 0);
   }
 }
 
@@ -350,7 +350,7 @@ traverse_lerp_z_over_time_dlc(var_0, var_1, var_2) {
     }
 
     var_6 = scripts\mp\agents\zombie\zombie_util::func_AB6F(var_5, var_0, var_1);
-    self setorigin((self.origin[0], self.origin[1], var_6), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_6), 0);
     wait(0.05);
   }
 }
@@ -422,12 +422,12 @@ balloongrabnotehandler(var_0, var_1, var_2, var_3) {
     }
 
     self.balloon_in_hand.origin = var_5;
-    self linkto(self.balloon_in_hand);
+    self linkTo(self.balloon_in_hand);
     self playerlinkedoffsetenable();
     var_6 = randomintrange(-50, 50);
     var_7 = randomintrange(-50, 50);
-    self.balloon_in_hand moveto(self.origin + (var_6, var_7, self.detonate_height), 6, 3);
-    self.balloon_in_hand rotateyaw(randomint(360), 6);
+    self.balloon_in_hand moveTo(self.origin + (var_6, var_7, self.detonate_height), 6, 3);
+    self.balloon_in_hand rotateYaw(randomint(360), 6);
     thread handleballoonfloating();
   }
 }

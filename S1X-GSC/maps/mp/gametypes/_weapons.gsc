@@ -1649,7 +1649,7 @@ init() {
 
         self.killCamEnt = spawn("script_model", missile.origin);
         self.killCamEnt.angles = missile.angles;
-        self.killCamEnt LinkTo(missile);
+        self.killCamEnt linkTo(missile);
         self.killCamEnt SetScriptMoverKillCam("rocket_corpse");
         self.killCamEnt SetContents(0);
 
@@ -1659,8 +1659,8 @@ init() {
         self.body.origin = missile.origin;
         self.body.angles = missile.angles;
         self.body SetCorpseFalling(false);
-        self.body EnableLinkTo();
-        self.body LinkTo(missile);
+        self.body EnablelinkTo();
+        self.body linkTo(missile);
         self.body SetContents(0);
 
         if(!isDefined(self.switching_teams)) {
@@ -1669,18 +1669,18 @@ init() {
 
         self PlayerHide();
 
-        missile_up = VectorNormalize(AnglesToUp(missile.angles));
-        missile_forward = VectorNormalize(anglesToForward(missile.angles));
+        missile_up = vectorNormalize(AnglesToUp(missile.angles));
+        missile_forward = vectorNormalize(anglesToForward(missile.angles));
         eye_offset = (missile_forward * camera_offset_up) + (missile_up * camera_offset_forward);
         eye_origin = missile.origin + eye_offset;
 
         eye_pos = spawn("script_model", eye_origin);
         eye_pos setModel("tag_origin");
         eye_pos.angles = VectorToAngles(missile.origin - eye_pos.origin);
-        eye_pos LinkTo(missile);
+        eye_pos linkTo(missile);
         eye_pos SetContents(0);
 
-        self CameraLinkTo(eye_pos, "tag_origin");
+        self CameralinkTo(eye_pos, "tag_origin");
 
         if(drag_player_time_seconds > durationSec) {
           drag_player_time_seconds = durationSec;
@@ -1698,7 +1698,7 @@ init() {
         self.body SetCorpseFalling(true);
         self.body StartRagdoll();
 
-        eye_pos LinkTo(self.body);
+        eye_pos linkTo(self.body);
 
         self.isRocketCorpse = undefined;
 
@@ -1802,7 +1802,7 @@ init() {
           break;
       }
       toBlast = pos - viewOrigin;
-      toBlast = VectorNormalize(toBlast);
+      toBlast = vectorNormalize(toBlast);
 
       percent_angle = 0.5 * (1.0 + VectorDot(forward, toBlast));
 
@@ -2059,7 +2059,7 @@ init() {
           claymore.origin = claymore.origin + claymoreZOffset;
 
           if(isDefined(parent)) {
-            claymore linkto(parent);
+            claymore linkTo(parent);
           }
 
           claymore Show();
@@ -2316,7 +2316,7 @@ init() {
         return false;
       }
 
-      dirToPos = vectornormalize(dirToPos);
+      dirToPos = vectorNormalize(dirToPos);
 
       dot = vectorDot(dirToPos, claymoreForward);
       return (dot > level.claymoreDetectionDot);
@@ -2809,7 +2809,7 @@ init() {
         return true;
       }
 
-      dir = vectornormalize(diff);
+      dir = vectorNormalize(diff);
       midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
 
       trace = bulletTrace(midpos, to, false, ent);
@@ -2946,7 +2946,7 @@ init() {
                 break;
             }
             toBlast = inflictorOrigin - viewOrigin;
-            toBlast = VectorNormalize(toBlast);
+            toBlast = vectorNormalize(toBlast);
 
             percent_angle = 0.5 * (1.0 + VectorDot(forward, toBlast));
 
@@ -3594,7 +3594,7 @@ init() {
 
       parent = self GetLinkedParent();
       if(isDefined(parent)) {
-        mine linkto(parent);
+        mine linkTo(parent);
       }
 
       mine makeExplosiveTargetableByAI(!lethal);
@@ -3758,8 +3758,8 @@ init() {
       }
 
       explodePos = self.origin + (0, 0, 64);
-      self MoveTo(explodePos, 0.7, 0, .65);
-      self.killCamEnt MoveTo(explodePos + self.killCamOffset, 0.7, 0, .65);
+      self moveTo(explodePos, 0.7, 0, .65);
+      self.killCamEnt moveTo(explodePos + self.killCamOffset, 0.7, 0, .65);
 
       self RotateVelocity((0, 750, 32), 0.7, 0, .65);
       self thread playSpinnerFX();
@@ -4046,7 +4046,7 @@ init() {
         trace["normal"] *= -1;
       }
 
-      normal = vectornormalize(trace["normal"]);
+      normal = vectorNormalize(trace["normal"]);
       plantAngles = vectortoangles(normal);
       plantAngles += (90, 0, 0);
 

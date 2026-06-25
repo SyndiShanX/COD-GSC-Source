@@ -55,7 +55,7 @@ section_flag_init() {
 
 rooftop_fan_spin() {
   level endon("rooftop_complete");
-  var_0 = getent("rooftop_fan", "targetname");
+  var_0 = getEnt("rooftop_fan", "targetname");
 
   for(;;) {
     var_0 rotatepitch(360, 10);
@@ -99,7 +99,7 @@ rooftop_enemy_wave_2_upper() {
   level endon("player_went_lower_path");
   maps\_utility::trigger_wait_targetname("rooftop_upper_wave_2_trigger");
   level notify("player_went_upper_path");
-  var_0 = getent("rooftop_wave_2_trigger", "targetname");
+  var_0 = getEnt("rooftop_wave_2_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
 }
 
@@ -107,9 +107,9 @@ rooftop_enemy_wave_2_lower() {
   level endon("player_went_upper_path");
   maps\_utility::trigger_wait_targetname("rooftop_wave_2_trigger");
   level notify("player_went_lower_path");
-  var_0 = getent("rooftop_upper_wave_2_trigger", "targetname");
+  var_0 = getEnt("rooftop_upper_wave_2_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
-  var_0 = getent("rooftop_enemy_fan_spawner_trigger", "targetname");
+  var_0 = getEnt("rooftop_enemy_fan_spawner_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
 }
 
@@ -157,10 +157,10 @@ rooftop_last_guys_rush() {
 
 rooftop_enemy_retreating() {
   maps\_utility::trigger_wait_targetname("rooftop_ally_move_406");
-  var_0 = getent("rooftop_section_1", "targetname");
+  var_0 = getEnt("rooftop_section_1", "targetname");
   badplace_brush("rooftop_section_1", -1, var_0, "axis");
   maps\_utility::trigger_wait_targetname("rooftop_ally_move_408");
-  var_0 = getent("rooftop_section_2", "targetname");
+  var_0 = getEnt("rooftop_section_2", "targetname");
   badplace_brush("rooftop_section_2", -1, var_0, "axis");
   level waittill("rooftop_complete");
   badplace_delete("rooftop_section_1");
@@ -174,20 +174,20 @@ rooftop_enemy_door_kicker() {
   var_0.attackeraccuracy = 100;
   var_0.health = 1;
   var_0.animname = "enemy";
-  var_1 = getent("door_kicker_node", "targetname");
+  var_1 = getEnt("door_kicker_node", "targetname");
   var_1 thread maps\_anim::anim_single_run_solo(var_0, "rooftop_enemy_door_kick");
   thread maps\factory_audio::sfx_kicking_door_sound();
   wait 2.1;
-  var_2 = getent("rooftop_enemy_door_blocker", "targetname");
+  var_2 = getEnt("rooftop_enemy_door_blocker", "targetname");
   var_2 connectpaths();
   var_2 notsolid();
   thread rooftop_ally_doorway_blocker();
-  var_3 = getent("rooftop_enemy_door", "targetname");
-  var_3 rotateto(var_3.angles - (0, 175, 0), 0.3, 0, 0.1);
+  var_3 = getEnt("rooftop_enemy_door", "targetname");
+  var_3 rotateTo(var_3.angles - (0, 175, 0), 0.3, 0, 0.1);
   var_0.ignoreme = 0;
   level.squad["ALLY_CHARLIE"].favoriteenemy = var_0;
   wait 0.3;
-  var_3 rotateto(var_3.angles + (0, 20, 0), 0.7, 0, 0.1);
+  var_3 rotateTo(var_3.angles + (0, 20, 0), 0.7, 0, 0.1);
 }
 
 rooftop_staircase_threatbias() {
@@ -215,7 +215,7 @@ rooftop_ally_movement_setup() {
   rooftop_ally_movement("rooftop_section_1", "rooftop_ally_move_404");
   wait 2;
   rooftop_ally_movement("rooftop_section_2", "rooftop_ally_move_406");
-  var_3 = getent("rooftop_wave_2_trigger", "targetname");
+  var_3 = getEnt("rooftop_wave_2_trigger", "targetname");
   common_scripts\utility::flag_set("factory_rooftop_wind_gust_moment");
   maps\factory_util::safe_trigger_by_targetname("rooftop_wave_2_trigger");
   wait 2;
@@ -236,9 +236,9 @@ rooftop_ally_doorway_blocker() {
   maps\_utility::trigger_wait_targetname("doorway_block_trigger");
   level.squad["ALLY_BRAVO"].ignoreall = 1;
   level.squad["ALLY_BRAVO"] clearenemy();
-  var_0 = getent("rooftop_enemy_door_blocker", "targetname");
+  var_0 = getEnt("rooftop_enemy_door_blocker", "targetname");
   var_0 solid();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   wait 2;
   level.squad["ALLY_BRAVO"].ignoreall = 0;
 }
@@ -274,7 +274,7 @@ ally_vignette_traversal(var_0, var_1) {
   level endon("deleting_echo");
   maps\_utility::disable_pain();
   self.ignoresuppression = 1;
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
   var_2 maps\_anim::anim_reach_solo(self, var_1);
   var_2 maps\_anim::anim_single_run_solo(self, var_1);
   maps\_utility::enable_ai_color();
@@ -282,9 +282,9 @@ ally_vignette_traversal(var_0, var_1) {
 
 rooftop_ally_movement(var_0, var_1) {
   level endon("rooftop_enemies_cleared");
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2 maps\_utility::waittill_volume_dead_or_dying();
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
   maps\factory_util::safe_trigger_by_targetname(var_1);
   waittillframeend;
 
@@ -302,10 +302,10 @@ rooftop_door_breach() {
   var_3 = [];
   var_3[var_3.size] = level.squad["ALLY_ALPHA"];
   var_3[var_3.size] = level.squad["ALLY_CHARLIE"];
-  var_4 = getent("rooftop_breach_door", "targetname");
+  var_4 = getEnt("rooftop_breach_door", "targetname");
   var_4.animname = "rooftop_breach_door";
   var_4 maps\_utility::assign_animtree();
-  var_5 = getent("rooftop_breach_node", "script_noteworthy");
+  var_5 = getEnt("rooftop_breach_node", "script_noteworthy");
   var_5 thread rooftop_breach_alpha_get_ready();
   var_5 thread rooftop_breach_charlie_get_ready();
   thread rooftop_door_breach_sight_check();
@@ -322,7 +322,7 @@ rooftop_door_breach() {
   thread rooftop_enemy_door_kicker();
   wait 3.6;
   level notify("rooftop_door_kicked");
-  var_6 = getent("rooftop_door_clip", "targetname");
+  var_6 = getEnt("rooftop_door_clip", "targetname");
   var_6 connectpaths();
   wait 0.3;
   maps\_utility::activate_trigger("rooftop_go_trigger", "targetname");
@@ -338,7 +338,7 @@ rooftop_door_breach() {
 
 rooftop_door_breach_sight_check() {
   level endon("player_near_rooftop_door");
-  var_0 = getent("rooftop_door_lookat_check", "targetname");
+  var_0 = getEnt("rooftop_door_lookat_check", "targetname");
 
   while(!level.player maps\_utility::player_looking_at(var_0.origin)) {
     wait 0.1;
@@ -478,8 +478,8 @@ rooftop_heli() {
   var_0 thread spotlight_heli_target_think();
   var_0 thread spotlight_heli_spotlight_off();
   var_0 waittill("rooftop_heli_unload");
-  var_1 = getent("heli_spotlight_fastrope_target", "targetname");
-  var_0 setturrettargetent(var_1, (0, 0, 0));
+  var_1 = getEnt("heli_spotlight_fastrope_target", "targetname");
+  var_0 setturrettargetEnt(var_1, (0, 0, 0));
   wait 12;
   var_0 thread spotlight_heli_target_think();
   common_scripts\utility::flag_set("rooftop_heli_unloaded");
@@ -507,7 +507,7 @@ spotlight_heli_target_think() {
   var_4 = 16;
   var_5 = 0;
   var_6 = 16;
-  self setturrettargetent(var_0, (0, 0, 0));
+  self setturrettargetEnt(var_0, (0, 0, 0));
   vehicle_scripts\_attack_heli::heli_default_target_setup();
 
   for(;;) {
@@ -583,9 +583,9 @@ spotlight_heli_target_choice() {
 
 spotlight_hitbox() {
   self endon("rooftop_spotlight_off");
-  var_0 = getent("rooftop_spotlight_hitbox", "targetname");
+  var_0 = getEnt("rooftop_spotlight_hitbox", "targetname");
   var_0.origin = self gettagorigin("tag_flash");
-  var_0 linkto(self, "tag_flash");
+  var_0 linkTo(self, "tag_flash");
   var_0 setCanDamage(1);
   var_0 hide();
   var_1 = 0;

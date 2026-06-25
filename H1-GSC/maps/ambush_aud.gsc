@@ -207,7 +207,7 @@ aud_start_ambience_war() {
 }
 
 aud_russian_battle_chatter() {
-  var_0 = getent("battlechatter_node", "targetname");
+  var_0 = getEnt("battlechatter_node", "targetname");
   wait 0.5;
   thread common_scripts\utility::play_sound_in_space("ambush_ru_bchatter_threat", var_0.origin);
   var_1 = randomfloatrange(0.5, 1.5);

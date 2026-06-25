@@ -2288,7 +2288,7 @@ areinteractionsenabled() {
   return self.disabledinteractions < 1;
 }
 
-_linkto(var_0, var_1, var_2, var_3, var_4) {
+_linkTo(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_2)) {
     var_2 = "tag_origin";
   }
@@ -2308,7 +2308,7 @@ _linkto(var_0, var_1, var_2, var_3, var_4) {
   self.playerlinkedcounter++;
 
   if(self.playerlinkedcounter == 1) {
-    self linkto(var_1, var_2, var_3, var_4);
+    self linkTo(var_1, var_2, var_3, var_4);
   }
 }
 

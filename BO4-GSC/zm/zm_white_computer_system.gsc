@@ -256,7 +256,7 @@ function_f359c8a0(s_key, e_player) {
       if(level.var_f13364b4.var_b1e1ac14 >= 4) {
         iprintlnbold("<dev string:x38>");
 
-        playsoundatposition("zmb_comp_keypad_action_full", self.origin);
+        playSoundAtPosition("zmb_comp_keypad_action_full", self.origin);
         break;
       }
 
@@ -266,7 +266,7 @@ function_f359c8a0(s_key, e_player) {
 
       iprintlnbold("<dev string:x66>" + s_key.script_string + "<dev string:x71>" + s_key.script_int);
 
-      playsoundatposition("zmb_comp_keypad_press_" + s_key.script_int, self.origin);
+      playSoundAtPosition("zmb_comp_keypad_press_" + s_key.script_int, self.origin);
       function_52838f02("both", 1);
       level.var_18f1ca6e function_b2fba7f5();
       level.var_18f1ca6e thread function_a196c54b();
@@ -277,7 +277,7 @@ function_f359c8a0(s_key, e_player) {
       if(level.var_f13364b4.var_b1e1ac14 < 4) {
         iprintlnbold("<dev string:x75>" + level.var_f13364b4.var_d7813dfd[0] + level.var_f13364b4.var_d7813dfd[1] + level.var_f13364b4.var_d7813dfd[2] + level.var_f13364b4.var_d7813dfd[3]);
 
-        playsoundatposition("zmb_comp_keypad_action_full", self.origin);
+        playSoundAtPosition("zmb_comp_keypad_action_full", self.origin);
         break;
       }
 
@@ -292,7 +292,7 @@ function_f359c8a0(s_key, e_player) {
 
       iprintlnbold("<dev string:xad>");
 
-      playsoundatposition("zmb_comp_keypad_action_clear", self.origin);
+      playSoundAtPosition("zmb_comp_keypad_action_clear", self.origin);
       break;
     default:
 
@@ -346,7 +346,7 @@ function_cd7e0989(n_code) {
   if(!isDefined(level.var_f13364b4.a_n_codes[n_code])) {
     iprintlnbold("<dev string:x19e>");
 
-    playsoundatposition("zmb_comp_keypad_action_fail", self.origin);
+    playSoundAtPosition("zmb_comp_keypad_action_fail", self.origin);
     level thread zm_white_util::function_ec34b5ee(#"hash_74933b1a2d246442");
     return;
   }
@@ -354,7 +354,7 @@ function_cd7e0989(n_code) {
   if(level.var_f13364b4.var_cf1f0c9 && !array::contains(level.var_d7e5aaac, n_code)) {
     iprintlnbold("<dev string:x1b2>");
 
-    playsoundatposition("zmb_comp_keypad_action_fail", self.origin);
+    playSoundAtPosition("zmb_comp_keypad_action_fail", self.origin);
     level thread zm_white_util::function_ec34b5ee(#"hash_74933b1a2d246442");
     return;
   }
@@ -362,7 +362,7 @@ function_cd7e0989(n_code) {
   if(level.var_f13364b4.a_n_codes[n_code].var_544c05c6 <= 0) {
     iprintlnbold("<dev string:x1de>");
 
-    playsoundatposition("zmb_comp_keypad_action_fail", self.origin);
+    playSoundAtPosition("zmb_comp_keypad_action_fail", self.origin);
     level thread zm_white_util::function_ec34b5ee(#"hash_74933b1a2d246442");
     return;
   }
@@ -372,7 +372,7 @@ function_cd7e0989(n_code) {
 
     level thread[[level.var_f13364b4.a_n_codes[n_code].var_d9d9d617]]();
     level.var_f13364b4.a_n_codes[n_code].var_544c05c6--;
-    playsoundatposition("zmb_comp_keypad_action_success", self.origin);
+    playSoundAtPosition("zmb_comp_keypad_action_success", self.origin);
 
     if(!array::contains(level.var_d7e5aaac, n_code)) {
       level thread function_6591945d();
@@ -621,14 +621,14 @@ function_8fff2dd() {
   level._effect[#"hash_440d5a73d8a98e41"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_7";
   level._effect[#"hash_440d5373d8a9825c"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_8";
   level._effect[#"hash_440d5473d8a9840f"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_9";
-  level.var_f3c560b6[0] = getent("code_display_digit0", "script_noteworthy");
+  level.var_f3c560b6[0] = getEnt("code_display_digit0", "script_noteworthy");
 
   for(i = 0; i < 4; i++) {
     level.var_40361d9a[i] = "screen_code_display_digit" + i;
-    level.var_1e220e78[i] = getent(level.var_40361d9a[i], "script_noteworthy");
+    level.var_1e220e78[i] = getEnt(level.var_40361d9a[i], "script_noteworthy");
     level.var_1e220e78[i] hide();
     level.var_3dbe29c9[i] = "screen_code_display_large_digit" + i;
-    level.var_17ff2d5e[i] = getent(level.var_3dbe29c9[i], "script_noteworthy");
+    level.var_17ff2d5e[i] = getEnt(level.var_3dbe29c9[i], "script_noteworthy");
     level.var_17ff2d5e[i] hide();
   }
 }
@@ -735,12 +735,12 @@ function_7ee18649() {
 }
 
 function_a02dfba() {
-  level.var_ff8f72ad = getent("mesh_code_display_02", "script_noteworthy");
-  level.var_d2e0194f = getent("mesh_code_display_03", "script_noteworthy");
-  level.var_a91ec5cd = getent("mesh_code_display_04", "script_noteworthy");
-  level.var_b6696062 = getent("mesh_code_display_05", "script_noteworthy");
-  level.var_a925c5df = getent("mesh_code_display_06", "script_noteworthy");
-  level.var_b6f4617c = getent("mesh_code_display_07", "script_noteworthy");
+  level.var_ff8f72ad = getEnt("mesh_code_display_02", "script_noteworthy");
+  level.var_d2e0194f = getEnt("mesh_code_display_03", "script_noteworthy");
+  level.var_a91ec5cd = getEnt("mesh_code_display_04", "script_noteworthy");
+  level.var_b6696062 = getEnt("mesh_code_display_05", "script_noteworthy");
+  level.var_a925c5df = getEnt("mesh_code_display_06", "script_noteworthy");
+  level.var_b6f4617c = getEnt("mesh_code_display_07", "script_noteworthy");
   level.var_ff8f72ad function_f0af359();
   level.var_d2e0194f function_f0af359();
   level.var_a91ec5cd function_f0af359();
@@ -785,7 +785,7 @@ function_da24090c(n_code) {
 
 delete_entities() {
   for(i = 0; i < 4; i++) {
-    var_51d09dba = getent("code_display_digit" + i, "script_noteworthy");
+    var_51d09dba = getEnt("code_display_digit" + i, "script_noteworthy");
 
     if(isDefined(var_51d09dba)) {
       var_51d09dba delete();
@@ -797,11 +797,11 @@ clock_init(n_id) {
   self.var_5543b573 = n_id;
   self.var_2b315dde[0] = "string";
   self.var_731ce5fc[0] = "string";
-  self.var_e3a88238 = getent("computersystem_clock_colon", "targetname");
+  self.var_e3a88238 = getEnt("computersystem_clock_colon", "targetname");
 
   for(i = 0; i < 4; i++) {
     self.var_731ce5fc[i] = "computersystem_" + self.var_5543b573 + "_clock_digit" + i;
-    self.var_2b315dde[i] = getent(self.var_731ce5fc[i], "script_noteworthy");
+    self.var_2b315dde[i] = getEnt(self.var_731ce5fc[i], "script_noteworthy");
   }
 }
 
@@ -982,8 +982,8 @@ function_7a1b3cff() {
 }
 
 function_45822b7e() {
-  level.var_18f1ca6e = getent("face_screen", "targetname");
-  level.var_cb1cac73 = getent("computer_system_extras", "targetname");
+  level.var_18f1ca6e = getEnt("face_screen", "targetname");
+  level.var_cb1cac73 = getEnt("computer_system_extras", "targetname");
   level.var_cb1cac73 hidepart("tag_control_panel");
   level thread function_a3442c46("0");
   level.var_18f1ca6e thread function_a196c54b();
@@ -1134,7 +1134,7 @@ function_31890499() {
 }
 
 function_d83247cd() {
-  level.var_5d577798 = getent("code_printer_monitor", "targetname");
+  level.var_5d577798 = getEnt("code_printer_monitor", "targetname");
   level.var_5d577798 showpart("tag_screen_static");
   level.var_5d577798 hidepart("tag_screen_unbroken");
   level.var_5d577798 hidepart("tag_screen_broken");
@@ -1150,7 +1150,7 @@ function_5fbede7a() {
 }
 
 function_60f15ca8() {
-  var_a94d1ca3 = getent("code_printer_paper", "targetname");
+  var_a94d1ca3 = getEnt("code_printer_paper", "targetname");
   level._effect[#"hash_ae7ff67227046f2"] = #"hash_731cff4f6f2d012d";
   var_73a8928d = var_a94d1ca3.origin;
   level.var_5d577798 stoploopsound();
@@ -1161,7 +1161,7 @@ function_60f15ca8() {
   level.var_5d577798 hidepart("tag_screen_unbroken");
   wait 2;
   var_a94d1ca3 playSound(#"hash_51945414465e1801");
-  var_a94d1ca3 moveto(var_73a8928d + (0, -6, 0), 0.3);
+  var_a94d1ca3 moveTo(var_73a8928d + (0, -6, 0), 0.3);
 }
 
 function_6338402() {

@@ -289,7 +289,7 @@ function_df74a8f3(var_1b2a0645, var_d695a79f, members, commander) {
     var_d695a79f += yspacing;
     var_1b2a0645 += var_96e1d277;
     var_78caba27 = function_65b80a10(commander, member);
-    debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:x109>" + (member isplayinganimscripted() ? "<dev string:x11a>" : "<dev string:x11f>"), member isplayinganimscripted() ? (1, 0.5, 0) : (0, 1, 0), textalpha, backgroundcolor, backgroundalpha, textsize);
+    debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:x109>" + (member isplayinganimScripted() ? "<dev string:x11a>" : "<dev string:x11f>"), member isplayinganimScripted() ? (1, 0.5, 0) : (0, 1, 0), textalpha, backgroundcolor, backgroundalpha, textsize);
     var_1b2a0645 += var_6e868cb7;
     var_d695a79f += yspacing;
     debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:x125>" + var_78caba27, function_41c81572(var_78caba27), textalpha, backgroundcolor, backgroundalpha, textsize);
@@ -326,7 +326,7 @@ function_df74a8f3(var_1b2a0645, var_d695a79f, members, commander) {
       var_d695a79f += yspacing;
       var_1b2a0645 += var_96e1d277;
       var_78caba27 = function_65b80a10(commander, member, vehicle);
-      debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:x109>" + (vehicle isplayinganimscripted() ? "<dev string:x11a>" : "<dev string:x11f>"), vehicle isplayinganimscripted() ? (1, 0.5, 0) : (0, 1, 0), textalpha, backgroundcolor, backgroundalpha, textsize);
+      debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:x109>" + (vehicle isplayinganimScripted() ? "<dev string:x11a>" : "<dev string:x11f>"), vehicle isplayinganimScripted() ? (1, 0.5, 0) : (0, 1, 0), textalpha, backgroundcolor, backgroundalpha, textsize);
       var_1b2a0645 += var_6e868cb7;
       var_d695a79f += yspacing;
       debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:x125>" + var_78caba27, function_41c81572(var_78caba27), textalpha, backgroundcolor, backgroundalpha, textsize);
@@ -1285,7 +1285,7 @@ isvalidbotorplayer(client) {
 }
 
 isvalidbot(bot) {
-  return isDefined(bot) && isbot(bot) && bot bot::initialized() && !bot isplayinganimscripted() && ai::getaiattribute(bot, "control") === "commander" && bot bot::function_343d7ef4();
+  return isDefined(bot) && isbot(bot) && bot bot::initialized() && !bot isplayinganimScripted() && ai::getaiattribute(bot, "control") === "commander" && bot bot::function_343d7ef4();
 }
 
 function_4732f860(bot) {

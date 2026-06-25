@@ -307,9 +307,9 @@ function function_2761fc04(ent, var_1d25915, linkedentity, var_e330010e) {
     assert(isDefined(var_e330010e), "<dev string:x109>");
 
     if(isstring(var_e330010e) && var_e330010e != "" && var_e330010e != "tag_origin") {
-      ent linkto(linkedentity, var_e330010e);
+      ent linkTo(linkedentity, var_e330010e);
     } else {
-      ent linkto(linkedentity);
+      ent linkTo(linkedentity);
     }
 
     if(!isarray(linkedentity.var_a415b6d6)) {

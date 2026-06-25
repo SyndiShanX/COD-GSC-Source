@@ -227,7 +227,7 @@ quad_vox() {
   wait(5);
   quad_wait = 5;
   while(1) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(DistanceSquared(self.origin, players[i].origin) > 1200 * 1200) {
         self playSound("zmb_quad_amb");
@@ -245,7 +245,7 @@ quad_vox() {
 quad_close() {
   self endon("death");
   while(1) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(is_player_valid(players[i], true)) {
         if(DistanceSquared(self.origin, players[i].origin) < 150 * 150) {
@@ -440,7 +440,7 @@ quad_gas_explo_death() {
   self Delete();
 }
 quad_death_explo(origin, death_vars) {
-  playsoundatposition("zmb_quad_explo", origin);
+  playSoundAtPosition("zmb_quad_explo", origin);
   playFX(level._effect["dog_gib"], origin);
   players = get_players();
   zombies = GetAIArray("axis");
@@ -496,7 +496,7 @@ quad_trail() {
   self.fx_quad_trail = spawn("script_model", self GetTagOrigin("tag_origin"));
   self.fx_quad_trail.angles = self GetTagAngles("tag_origin");
   self.fx_quad_trail setModel("tag_origin");
-  self.fx_quad_trail LinkTo(self, "tag_origin");
+  self.fx_quad_trail linkTo(self, "tag_origin");
   maps\_zombiemode_net::network_safe_play_fx_on_tag("quad_fx", 2, level._effect["quad_trail"], self.fx_quad_trail, "tag_origin");
 }
 quad_post_death() {
@@ -538,7 +538,7 @@ quad_post_teleport() {
     self.fx_quad_trail = spawn("script_model", self GetTagOrigin("tag_origin"));
     self.fx_quad_trail.angles = self GetTagAngles("tag_origin");
     self.fx_quad_trail setModel("tag_origin");
-    self.fx_quad_trail LinkTo(self, "tag_origin");
+    self.fx_quad_trail linkTo(self, "tag_origin");
     maps\_zombiemode_net::network_safe_play_fx_on_tag("quad_fx", 2, level._effect["quad_trail"], self.fx_quad_trail, "tag_origin");
   }
 }
@@ -583,7 +583,7 @@ quad_bhb_horizon_death(bhb_org, poi_ent) {
   rand_int = RandomIntRange(1, 4);
   anim_str = "black_hole_death_" + rand_int;
   pulled_in_anim = level.scr_anim[self.animname][anim_str];
-  self AnimScripted("pulled_in_complete", self.origin, self.angles, pulled_in_anim);
+  self animScripted("pulled_in_complete", self.origin, self.angles, pulled_in_anim);
   self waittill_either("bhb_burst", "pulled_in_complete");
   playFXOnTag(level._effect["black_hole_bomb_zombie_destroy"], self, "tag_origin");
   poi_ent notify("black_hole_bomb_kill");

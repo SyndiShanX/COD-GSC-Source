@@ -80,13 +80,13 @@ post_missile_launch_main() {
     thread ambient_building_explosions("building_hit");
   }
 
-  level.warehouse_elevator_mantle_right = getent("warehouse_elevator_mantle_right", "script_noteworthy");
+  level.warehouse_elevator_mantle_right = getEnt("warehouse_elevator_mantle_right", "script_noteworthy");
   level.warehouse_elevator_mantle_right hide();
   level.warehouse_elevator_mantle_right notsolid();
-  level.warehouse_elevator_mantle_left = getent("warehouse_elevator_mantle_left", "script_noteworthy");
+  level.warehouse_elevator_mantle_left = getEnt("warehouse_elevator_mantle_left", "script_noteworthy");
   level.warehouse_elevator_mantle_left hide();
   level.warehouse_elevator_mantle_left notsolid();
-  var_0 = getent("elevator_top_crate", "script_noteworthy");
+  var_0 = getEnt("elevator_top_crate", "script_noteworthy");
   var_1 = getEntArray("elevator_bottom_crates", "script_noteworthy");
 
   foreach(var_3 in var_1) {
@@ -115,20 +115,20 @@ warehouse_main() {
     maps\satfarm_code::spawn_player_checkpoint("warehouse");
     maps\satfarm_code::spawn_allies();
     maps\_utility::battlechatter_on("axis");
-    level.player_elevator_clip_back = getent("player_elevator_clip_back", "targetname");
+    level.player_elevator_clip_back = getEnt("player_elevator_clip_back", "targetname");
     level.player_elevator_clip_back notsolid();
     thread ambient_building_explosions("warehouse_end");
     safe_activate_trigger_with_targetname("move_allies_into_elevator");
-    var_0 = getent("missile_launch_missile", "targetname");
+    var_0 = getEnt("missile_launch_missile", "targetname");
     var_0 delete();
-    level.ally_elevator_clip_back = getent("ally_elevator_clip_back", "targetname");
-    level.warehouse_elevator_mantle_right = getent("warehouse_elevator_mantle_right", "script_noteworthy");
+    level.ally_elevator_clip_back = getEnt("ally_elevator_clip_back", "targetname");
+    level.warehouse_elevator_mantle_right = getEnt("warehouse_elevator_mantle_right", "script_noteworthy");
     level.warehouse_elevator_mantle_right hide();
     level.warehouse_elevator_mantle_right notsolid();
-    level.warehouse_elevator_mantle_left = getent("warehouse_elevator_mantle_left", "script_noteworthy");
+    level.warehouse_elevator_mantle_left = getEnt("warehouse_elevator_mantle_left", "script_noteworthy");
     level.warehouse_elevator_mantle_left hide();
     level.warehouse_elevator_mantle_left notsolid();
-    var_1 = getent("elevator_top_crate", "script_noteworthy");
+    var_1 = getEnt("elevator_top_crate", "script_noteworthy");
     var_2 = getEntArray("elevator_bottom_crates", "script_noteworthy");
 
     foreach(var_4 in var_2) {
@@ -163,13 +163,13 @@ breach() {
   var_1 = undefined;
   level.saf_exit_door_right_obj show();
   common_scripts\utility::flag_wait("control_room_enemies_dead");
-  var_2 = getent("breach_door_trigger", "targetname");
-  var_1 = common_scripts\utility::getstruct("breach_door_lookat", "targetname");
+  var_2 = getEnt("breach_door_trigger", "targetname");
+  var_1 = common_scripts\utility::getStruct("breach_door_lookat", "targetname");
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-    var_2 sethintstring(&"SATFARM_BREACH_CONSOLE");
+    var_2 setHintString(&"SATFARM_BREACH_CONSOLE");
   } else {
-    var_2 sethintstring(&"SATFARM_BREACH");
+    var_2 setHintString(&"SATFARM_BREACH");
   }
 
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_2, var_1, cos(40));
@@ -186,19 +186,19 @@ breach() {
   var_3 = level.player common_scripts\utility::spawn_tag_origin();
   level.player playerlinktoblend(var_3, "tag_origin", 0.2, 0.1, 0.1);
   level.player playerlinktodelta(var_3, "tag_origin", 1, 0, 0, 0, 0, 1);
-  var_4 = common_scripts\utility::getstruct("breach_start_pos", "targetname");
-  var_3 moveto(var_4.origin, 0.75, 0, 0);
-  var_3 rotateto(var_4.angles, 0.75, 0, 0);
+  var_4 = common_scripts\utility::getStruct("breach_start_pos", "targetname");
+  var_3 moveTo(var_4.origin, 0.75, 0, 0);
+  var_3 rotateTo(var_4.angles, 0.75, 0, 0);
   level waittill("door_knockdown");
   common_scripts\utility::flag_set("start_breach_outside_ambience");
-  var_5 = getent("breach_door_clip", "targetname");
+  var_5 = getEnt("breach_door_clip", "targetname");
   var_5 notsolid();
   var_5 connectpaths();
   level.slomobreachduration = 3.5;
   thread fire_extinguisher_breach_slowmo();
-  var_6 = common_scripts\utility::getstruct("breach_door_pos", "targetname");
-  var_3 moveto(var_6.origin, 0.75, 0, 0);
-  var_3 rotateto(var_6.angles, 0.75, 0, 0);
+  var_6 = common_scripts\utility::getStruct("breach_door_pos", "targetname");
+  var_3 moveTo(var_6.origin, 0.75, 0, 0);
+  var_3 rotateTo(var_6.angles, 0.75, 0, 0);
   thread give_power_back();
   wait 0.75;
   level.player unlink();
@@ -320,7 +320,7 @@ breach_enemy_setup() {
   maps\_utility::disable_surprise();
   self.accuracy = 0.01;
   self.baseaccuracy = 0.01;
-  self.struct = common_scripts\utility::getstruct(self.script_noteworthy + "_struct", "targetname");
+  self.struct = common_scripts\utility::getStruct(self.script_noteworthy + "_struct", "targetname");
 
   if(self.script_noteworthy == "breach_guy_1") {
     self.animation = "payback_breach_doorguy";
@@ -378,7 +378,7 @@ breach_rpg_guy() {
   self.nodrop = 1;
   self.noragdoll = 1;
   wait 0.75;
-  var_0 = getent("rpg_scripted_target", "targetname");
+  var_0 = getEnt("rpg_scripted_target", "targetname");
   self setentitytarget(var_0);
   self shoot();
   wait 1.5;
@@ -460,17 +460,17 @@ dead_guy() {
 missile_launch_setup() {
   var_0 = maps\_utility::spawn_anim_model("player_arms");
   var_0 hide();
-  var_1 = getent("missile_launch_button_panel", "targetname");
+  var_1 = getEnt("missile_launch_button_panel", "targetname");
   var_1.animname = "missile_button_panel";
   var_1 maps\_anim::setanimtree();
-  var_2 = getent("missile_launch_button", "targetname");
+  var_2 = getEnt("missile_launch_button", "targetname");
   var_2.animname = "missile_button";
   var_2 maps\_anim::setanimtree();
-  var_3 = getent("missile_launch_button_lit", "targetname");
+  var_3 = getEnt("missile_launch_button_lit", "targetname");
   var_3.animname = "missile_button_lit";
   var_3 maps\_anim::setanimtree();
   var_3 hide();
-  var_4 = getent("missile_launch_button_panel_obj", "targetname");
+  var_4 = getEnt("missile_launch_button_panel_obj", "targetname");
   var_4.animname = "missile_button_panel_obj";
   var_4 maps\_anim::setanimtree();
   var_4 hide();
@@ -486,12 +486,12 @@ missile_launch_setup() {
   common_scripts\utility::exploder(6007);
   var_2 hide();
   var_3 show();
-  var_6 = getent("missile_launch_trigger", "targetname");
+  var_6 = getEnt("missile_launch_trigger", "targetname");
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-    var_6 sethintstring(&"SATFARM_MISSILE_LAUNCH_CONSOLE");
+    var_6 setHintString(&"SATFARM_MISSILE_LAUNCH_CONSOLE");
   } else {
-    var_6 sethintstring(&"SATFARM_MISSILE_LAUNCH");
+    var_6 setHintString(&"SATFARM_MISSILE_LAUNCH");
   }
 
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_6, var_2, cos(40));
@@ -534,15 +534,15 @@ missile_launch() {
   var_0 = getEntArray("silo_doors", "targetname");
   common_scripts\utility::array_thread(var_0, ::missile_silo_doors);
   common_scripts\utility::flag_wait("silo_doors_open");
-  var_1 = common_scripts\utility::getstruct("missile_launch_tube_fx_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("missile_launch_tube_fx_struct", "targetname");
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
   playFXOnTag(level._effect["launchtube_steam"], var_2, "tag_origin");
-  var_3 = getent("missile_launch_missile", "targetname");
+  var_3 = getEnt("missile_launch_missile", "targetname");
   var_4 = common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(var_3, "polysurface24", (0, 400, 55), (-180, -90, 0));
+  var_4 linkTo(var_3, "polysurface24", (0, 400, 55), (-180, -90, 0));
   thread common_scripts\utility::play_sound_in_space("satf_end_missile_launch", (-6199, 55839, 157));
   thread common_scripts\utility::play_sound_in_space("satf_launch_rattles", level.player.origin);
-  level.player playrumbleonentity("missile_launch");
+  level.player playRumbleOnEntity("missile_launch");
   earthquake(0.3, 15, var_3.origin, 3000);
   playFXOnTag(level._effect["smoke_geotrail_missile_large"], var_4, "tag_origin");
   common_scripts\utility::exploder(6001);
@@ -576,13 +576,13 @@ missile_launch_missile(var_0, var_1) {
   var_2 = 0;
 
   for(var_3 = 400; var_2 < 3; var_3 = var_3 + 2) {
-    var_0 moveto(var_0.origin + (0, 0, var_3), 1);
+    var_0 moveTo(var_0.origin + (0, 0, var_3), 1);
     wait 1;
     var_2++;
   }
 
   while(var_2 < 80 && !common_scripts\utility::flag("player_in_loading_bay")) {
-    var_0 moveto(var_0.origin + (0, 0, var_3), 1);
+    var_0 moveTo(var_0.origin + (0, 0, var_3), 1);
     wait 1;
     var_2++;
     var_3 = var_3 + 202;
@@ -752,7 +752,7 @@ alert_enemies_react() {
   }
 
   self notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self clearentitytarget();
 
   if(isDefined(self.gun_removed)) {
@@ -983,30 +983,30 @@ breach_setup() {
 
   foreach(var_2 in var_0) {
     if(var_2.script_noteworthy == "right") {
-      var_3 = getent("breach_door_clip_right", "targetname");
-      var_3 linkto(var_2);
-      var_4 = getent("breach_door_window_right", "targetname");
-      var_4 linkto(var_2);
-      var_2 linkto(level.breach_door_rig, "J_prop_1", (0, 0, 0), (0, 0, 0));
+      var_3 = getEnt("breach_door_clip_right", "targetname");
+      var_3 linkTo(var_2);
+      var_4 = getEnt("breach_door_window_right", "targetname");
+      var_4 linkTo(var_2);
+      var_2 linkTo(level.breach_door_rig, "J_prop_1", (0, 0, 0), (0, 0, 0));
       continue;
     }
 
-    var_3 = getent("breach_door_clip_left", "targetname");
-    var_3 linkto(var_2);
-    var_4 = getent("breach_door_window_left", "targetname");
-    var_4 linkto(var_2);
-    var_2 linkto(level.breach_door_rig, "J_prop_2", (0, 0, 0), (0, 0, 0));
+    var_3 = getEnt("breach_door_clip_left", "targetname");
+    var_3 linkTo(var_2);
+    var_4 = getEnt("breach_door_window_left", "targetname");
+    var_4 linkTo(var_2);
+    var_2 linkTo(level.breach_door_rig, "J_prop_2", (0, 0, 0), (0, 0, 0));
   }
 
-  level.breach_anim_struct = common_scripts\utility::getstruct("breach_anim_struct", "targetname");
+  level.breach_anim_struct = common_scripts\utility::getStruct("breach_anim_struct", "targetname");
   level.breach_anim_struct maps\_anim::anim_first_frame_solo(level.breach_door_rig, "breach_breach");
   level.saf_exit_door_right_obj = spawn("script_model", level.breach_door_rig.origin);
   level.saf_exit_door_right_obj setModel("saf_exit_door_right_obj");
-  level.saf_exit_door_right_obj linkto(level.breach_door_rig, "J_prop_2", (0, 0, 0), (0, 0, 0));
+  level.saf_exit_door_right_obj linkTo(level.breach_door_rig, "J_prop_2", (0, 0, 0), (0, 0, 0));
   level.saf_exit_door_right_obj hide();
   level.fire_extinguisher = maps\_utility::spawn_anim_model("fire_extinguisher");
-  level.fire_extinguisher_aim_ent = getent("aim_ent", "targetname");
-  level.fire_extinguisher_aim_ent linkto(level.fire_extinguisher, "j_extinguisher_body", (0, 0, 0), (0, 0, 0));
+  level.fire_extinguisher_aim_ent = getEnt("aim_ent", "targetname");
+  level.fire_extinguisher_aim_ent linkTo(level.fire_extinguisher, "j_extinguisher_body", (0, 0, 0), (0, 0, 0));
   level.breach_anim_struct maps\_anim::anim_first_frame_solo(level.fire_extinguisher, "breach_enter");
 }
 
@@ -1015,15 +1015,15 @@ breach_door_clips() {
 
   foreach(var_2 in var_0) {
     if(var_2.script_noteworthy == "right") {
-      var_3 = getent("breach_door_clip_right", "targetname");
-      var_4 = getent("breach_door_window_right", "targetname");
+      var_3 = getEnt("breach_door_clip_right", "targetname");
+      var_4 = getEnt("breach_door_window_right", "targetname");
       var_4 thread connect_door_path();
       var_3 thread connect_door_path();
       continue;
     }
 
-    var_3 = getent("breach_door_clip_left", "targetname");
-    var_4 = getent("breach_door_window_left", "targetname");
+    var_3 = getEnt("breach_door_clip_left", "targetname");
+    var_4 = getEnt("breach_door_window_left", "targetname");
     var_4 thread connect_door_path();
     var_3 thread connect_door_path();
   }
@@ -1037,12 +1037,12 @@ connect_door_path() {
 fire_extinguisher_shot() {
   common_scripts\utility::flag_wait_either("player_shot_extinguisher", "ghost1_shot_extinguisher");
   level thread maps\satfarm_audio::tower_door_explosion();
-  var_0 = common_scripts\utility::getstruct("fire_extinguisher_end", "targetname");
+  var_0 = common_scripts\utility::getStruct("fire_extinguisher_end", "targetname");
 
   if(common_scripts\utility::flag("player_shot_extinguisher")) {
     radiusdamage(var_0.origin, 220, 200, 50);
   } else {
-    var_1 = common_scripts\utility::getstruct("fire_extinguisher_end_2", "targetname");
+    var_1 = common_scripts\utility::getStruct("fire_extinguisher_end_2", "targetname");
     radiusdamage(var_1.origin, 80, 200, 50);
   }
 
@@ -1065,14 +1065,14 @@ fire_extinguisher_shot() {
     }
   }
 
-  var_6 = common_scripts\utility::getstruct("ceiling_tiles_struct", "targetname");
+  var_6 = common_scripts\utility::getStruct("ceiling_tiles_struct", "targetname");
   physicsexplosionsphere(var_6.origin, 100, 80, 1);
-  var_7 = common_scripts\utility::getstruct("floor_struct", "targetname");
+  var_7 = common_scripts\utility::getStruct("floor_struct", "targetname");
   physicsexplosionsphere(var_7.origin, 55, 55, 0.2);
-  var_8 = common_scripts\utility::getstruct("paper_fx_struct", "targetname");
+  var_8 = common_scripts\utility::getStruct("paper_fx_struct", "targetname");
   var_9 = var_8 common_scripts\utility::spawn_tag_origin();
   playFXOnTag(level._effect["paper_blowing_stack_flat_cluster"], var_9, "tag_origin");
-  var_10 = getent("breach_room_hanging_wire", "targetname");
+  var_10 = getEnt("breach_room_hanging_wire", "targetname");
   var_10 rotatepitch(-10, 1, 0, 0.5);
   wait 1;
   var_10 rotatepitch(10, 0.5, 0, 0);
@@ -1190,11 +1190,11 @@ building_hit_moment() {
   common_scripts\utility::flag_wait("building_hit");
   level thread maps\satfarm_audio::building_hit_moment();
   earthquake(0.3, 2.5, level.player.origin, 300);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread break_light();
   thread building_hit_fx();
-  var_5 = getent("building_hit_light", "targetname");
-  var_6 = getent("building_hit_light_02", "targetname");
+  var_5 = getEnt("building_hit_light", "targetname");
+  var_6 = getEnt("building_hit_light_02", "targetname");
   var_5 setlightintensity(0.01);
 
   if(isDefined(var_6)) {
@@ -1220,22 +1220,22 @@ break_light() {
     var_3 show();
   }
 
-  var_7 = common_scripts\utility::getstruct("destroyed_light_spark_fx", "targetname");
+  var_7 = common_scripts\utility::getStruct("destroyed_light_spark_fx", "targetname");
   playFX(level._effect["light_damage_runner"], var_7.origin);
-  var_8 = common_scripts\utility::getstruct("destroyed_light_swing_fx", "targetname");
+  var_8 = common_scripts\utility::getStruct("destroyed_light_swing_fx", "targetname");
   playFX(level._effect["light_fluorescent_blowout_runner"], var_8.origin);
 
   foreach(var_3 in var_0) {
     if(var_3.script_noteworthy == "swing") {
-      var_10 = common_scripts\utility::getstruct("light_origin_struct", "targetname");
+      var_10 = common_scripts\utility::getStruct("light_origin_struct", "targetname");
       var_11 = var_10 common_scripts\utility::spawn_tag_origin();
       var_11.angles = var_3.angles;
-      var_3 linkto(var_11, "tag_origin");
-      var_11 rotateto(var_11.angles + (15, 0, 0), 0.5);
+      var_3 linkTo(var_11, "tag_origin");
+      var_11 rotateTo(var_11.angles + (15, 0, 0), 0.5);
       wait 0.5;
-      var_11 rotateto(var_11.angles + (-1, 0, 0), 0.25);
+      var_11 rotateTo(var_11.angles + (-1, 0, 0), 0.25);
       wait 0.25;
-      var_11 rotateto(var_11.angles + (1, 0, 0.1), 0.25);
+      var_11 rotateTo(var_11.angles + (1, 0, 0.1), 0.25);
       wait 0.25;
     }
   }
@@ -1254,7 +1254,7 @@ building_hit_fx() {
 }
 
 wait_for_all_enemies_to_leave_volume() {
-  var_0 = getent("loading_bay_volume", "targetname");
+  var_0 = getEnt("loading_bay_volume", "targetname");
 
   for(;;) {
     var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
@@ -1271,7 +1271,7 @@ wait_for_all_enemies_to_leave_volume() {
 
 loading_bay_enemy_setup() {
   self endon("death");
-  var_0 = getent("loading_bay_volume", "targetname");
+  var_0 = getEnt("loading_bay_volume", "targetname");
   thread retreat_to_elevator_room();
 
   if(isDefined(self.script_noteworthy)) {
@@ -1334,7 +1334,7 @@ loading_bay_enemy_setup() {
 
 retreat_to_elevator_room() {
   self endon("death");
-  var_0 = getent("elevator_room_volume", "targetname");
+  var_0 = getEnt("elevator_room_volume", "targetname");
   common_scripts\utility::flag_wait("loading_bay_enemies_retreat");
   wait(randomfloatrange(0.3, 0.8));
   maps\_utility::set_fixednode_false();
@@ -1346,7 +1346,7 @@ retreat_to_elevator_room() {
 
 tunnel_behavior() {
   self endon("death");
-  var_0 = getent("tunnel_entrance_volume", "targetname");
+  var_0 = getEnt("tunnel_entrance_volume", "targetname");
 
   for(;;) {
     if(self istouching(var_0)) {
@@ -1446,7 +1446,7 @@ elevator_room_enemy_setup() {
     wait(randomfloatrange(0.3, 0.8));
   }
 
-  var_0 = getent("elevator_room_volume", "targetname");
+  var_0 = getEnt("elevator_room_volume", "targetname");
   maps\_utility::set_fixednode_false();
   self setgoalvolumeauto(var_0);
 }
@@ -1475,13 +1475,13 @@ elevator_enemies() {
   level.elevator_room_enemies = maps\_utility::array_removedead_or_dying(level.elevator_room_enemies);
   level.elevator_room_enemies = common_scripts\utility::array_combine(level.elevator_room_enemies, var_0);
   wait 0.1;
-  level.warehouse_elevator_origin moveto(level.warehouse_elevator_origin.origin + (0, 0, -224), 0.5, 0, 0);
+  level.warehouse_elevator_origin moveTo(level.warehouse_elevator_origin.origin + (0, 0, -224), 0.5, 0, 0);
   common_scripts\utility::flag_wait_either("send_in_elevator", "send_in_elevator_trigger");
-  level.warehouse_elevator_origin moveto(level.warehouse_elevator_origin.origin + (0, 0, 224), 5, 0, 1);
+  level.warehouse_elevator_origin moveTo(level.warehouse_elevator_origin.origin + (0, 0, 224), 5, 0, 1);
   thread common_scripts\utility::play_sound_in_space("satf_elevator_arrival", (-5173, 54719, -179));
   wait 5;
   thread common_scripts\utility::play_sound_in_space("satf_elevator_arrival_gate_open", (-5173, 54719, -179));
-  level.player_elevator_clip_back = getent("player_elevator_clip_back", "targetname");
+  level.player_elevator_clip_back = getEnt("player_elevator_clip_back", "targetname");
   level.player_elevator_clip_back notsolid();
 
   foreach(var_2 in level.warehouse_elevator_doors) {
@@ -1491,48 +1491,48 @@ elevator_enemies() {
   foreach(var_2 in level.warehouse_elevator_doors) {
     if(isDefined(var_2.script_noteworthy)) {
       if(var_2.script_noteworthy == "elevator_room_side_door_right") {
-        var_5 = common_scripts\utility::getstruct("elevator_room_side_door_right_open_struct", "targetname");
-        var_2 moveto(var_5.origin, 2);
+        var_5 = common_scripts\utility::getStruct("elevator_room_side_door_right_open_struct", "targetname");
+        var_2 moveTo(var_5.origin, 2);
         var_2 connectpaths();
         continue;
       }
 
       if(var_2.script_noteworthy == "elevator_room_side_door_left") {
-        var_6 = common_scripts\utility::getstruct("elevator_room_side_door_left_open_struct", "targetname");
-        var_2 moveto(var_6.origin, 2);
+        var_6 = common_scripts\utility::getStruct("elevator_room_side_door_left_open_struct", "targetname");
+        var_2 moveTo(var_6.origin, 2);
         var_2 connectpaths();
       }
     }
   }
 
   wait 2;
-  level.ally_elevator_clip_back = getent("ally_elevator_clip_back", "targetname");
+  level.ally_elevator_clip_back = getEnt("ally_elevator_clip_back", "targetname");
   level.ally_elevator_clip_back notsolid();
   level.ally_elevator_clip_back connectpaths();
   common_scripts\utility::flag_set("elevator_enemies_unload");
 
   foreach(var_2 in level.warehouse_elevator_doors) {
-    var_2 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_2 linkTo(level.warehouse_elevator_origin, "tag_origin");
   }
 }
 
 warehouse_elevator_setup() {
-  level.warehouse_elevator_struct = common_scripts\utility::getstruct("warehouse_elevator_struct", "targetname");
+  level.warehouse_elevator_struct = common_scripts\utility::getStruct("warehouse_elevator_struct", "targetname");
   level.warehouse_elevator_origin = level.warehouse_elevator_struct common_scripts\utility::spawn_tag_origin();
-  level.warehouse_elevator = getent("warehouse_elevator", "targetname");
-  level.warehouse_elevator linkto(level.warehouse_elevator_origin, "tag_origin");
-  level.warehouse_elevator_platform = getent("warehouse_elevator_platform", "targetname");
-  level.warehouse_elevator_platform linkto(level.warehouse_elevator_origin, "tag_origin");
+  level.warehouse_elevator = getEnt("warehouse_elevator", "targetname");
+  level.warehouse_elevator linkTo(level.warehouse_elevator_origin, "tag_origin");
+  level.warehouse_elevator_platform = getEnt("warehouse_elevator_platform", "targetname");
+  level.warehouse_elevator_platform linkTo(level.warehouse_elevator_origin, "tag_origin");
   level.warehouse_elevator_doors = getEntArray("warehouse_elevator_doors", "targetname");
 
   foreach(var_1 in level.warehouse_elevator_doors) {
-    var_1 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_1 linkTo(level.warehouse_elevator_origin, "tag_origin");
   }
 
   var_3 = getEntArray("tc_elevator_models", "targetname");
 
   foreach(var_5 in var_3) {
-    var_5 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_5 linkTo(level.warehouse_elevator_origin, "tag_origin");
   }
 }
 
@@ -1567,7 +1567,7 @@ allies_vo_post_missile_launch() {
   wait 1;
   level.allies[0] thread maps\satfarm_code::char_dialog_add_and_go("satfarm_hsh_wehavetoget");
   common_scripts\utility::flag_wait("most_ghost1_to_elevator_room");
-  var_0 = getent("tunnel_volume", "targetname");
+  var_0 = getEnt("tunnel_volume", "targetname");
 
   if(level.player istouching(var_0)) {
     level.allies[0] thread maps\satfarm_code::char_dialog_add_and_go("satfarm_hsh_moveup");
@@ -1582,7 +1582,7 @@ allies_vo_post_missile_launch() {
 }
 
 door_kick_ally() {
-  var_0 = common_scripts\utility::getstruct("ally_post_breach_anim_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("ally_post_breach_anim_struct", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "door_kick_in");
 
   if(!common_scripts\utility::flag("player_on_stairs")) {
@@ -1596,7 +1596,7 @@ door_kick_ally() {
   level notify("post_breach_doors_open");
   thread post_breach_doors();
   wait 0.6;
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::enable_ai_color();
   safe_activate_trigger_with_targetname("move_allies_into_hallway");
   common_scripts\utility::flag_set("post_missile_launch_breach_done");
@@ -1611,16 +1611,16 @@ post_breach_doors() {
 
   foreach(var_2 in var_0) {
     if(var_2.script_noteworthy == "right") {
-      var_3 = getent("post_breach_door_clip_right", "targetname");
-      var_3 linkto(var_2);
-      var_2 rotateto((0, 100, 0), 0.5);
+      var_3 = getEnt("post_breach_door_clip_right", "targetname");
+      var_3 linkTo(var_2);
+      var_2 rotateTo((0, 100, 0), 0.5);
       var_3 thread connect_door_path();
       continue;
     }
 
-    var_3 = getent("post_breach_door_clip_left", "targetname");
-    var_3 linkto(var_2);
-    var_2 rotateto((0, -60, 0), 0.5);
+    var_3 = getEnt("post_breach_door_clip_left", "targetname");
+    var_3 linkTo(var_2);
+    var_2 rotateTo((0, -60, 0), 0.5);
     var_3 thread connect_door_path();
   }
 }
@@ -1632,7 +1632,7 @@ warehouse_elevator() {
 
   common_scripts\utility::flag_wait("allies_in_elevator");
   thread warehouse_lift();
-  var_0 = getent("warehouse_elevator_volume", "targetname");
+  var_0 = getEnt("warehouse_elevator_volume", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -1654,14 +1654,14 @@ warehouse_elevator() {
   foreach(var_2 in level.warehouse_elevator_doors) {
     if(isDefined(var_2.script_noteworthy)) {
       if(var_2.script_noteworthy == "elevator_room_side_door_right") {
-        var_5 = common_scripts\utility::getstruct("elevator_room_side_door_right_struct", "targetname");
-        var_2 moveto(var_5.origin, 2);
+        var_5 = common_scripts\utility::getStruct("elevator_room_side_door_right_struct", "targetname");
+        var_2 moveTo(var_5.origin, 2);
         continue;
       }
 
       if(var_2.script_noteworthy == "elevator_room_side_door_left") {
-        var_6 = common_scripts\utility::getstruct("elevator_room_side_door_left_struct", "targetname");
-        var_2 moveto(var_6.origin, 2);
+        var_6 = common_scripts\utility::getStruct("elevator_room_side_door_left_struct", "targetname");
+        var_2 moveTo(var_6.origin, 2);
       }
     }
   }
@@ -1669,10 +1669,10 @@ warehouse_elevator() {
   wait 2;
 
   foreach(var_2 in level.warehouse_elevator_doors) {
-    var_2 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_2 linkTo(level.warehouse_elevator_origin, "tag_origin");
   }
 
-  level.warehouse_elevator_origin moveto(level.warehouse_elevator_origin.origin + (0, 0, -448), 15, 1, 1);
+  level.warehouse_elevator_origin moveTo(level.warehouse_elevator_origin.origin + (0, 0, -448), 15, 1, 1);
   wait 15;
 
   foreach(var_2 in level.warehouse_elevator_doors) {
@@ -1681,21 +1681,21 @@ warehouse_elevator() {
 
   common_scripts\utility::flag_set("elevator_landed");
   maps\_utility::autosave_by_name("elevator_landed");
-  var_12 = getent("player_elevator_clip_front", "targetname");
+  var_12 = getEnt("player_elevator_clip_front", "targetname");
   var_12 delete();
 
   foreach(var_2 in level.warehouse_elevator_doors) {
     if(isDefined(var_2.script_noteworthy)) {
       if(var_2.script_noteworthy == "warehouse_side_door_right") {
-        var_14 = common_scripts\utility::getstruct("warehouse_side_door_right_struct", "targetname");
-        var_2 moveto(var_14.origin, 2);
+        var_14 = common_scripts\utility::getStruct("warehouse_side_door_right_struct", "targetname");
+        var_2 moveTo(var_14.origin, 2);
         var_2 connectpaths();
         continue;
       }
 
       if(var_2.script_noteworthy == "warehouse_side_door_left") {
-        var_15 = common_scripts\utility::getstruct("warehouse_side_door_left_struct", "targetname");
-        var_2 moveto(var_15.origin, 2);
+        var_15 = common_scripts\utility::getStruct("warehouse_side_door_left_struct", "targetname");
+        var_2 moveTo(var_15.origin, 2);
         var_2 connectpaths();
       }
     }
@@ -1718,42 +1718,42 @@ warehouse_elevator() {
 warehouse_lift() {
   common_scripts\utility::flag_wait("start_ambient_warehouse_scenarios");
   maps\_utility::autosave_by_name("warehouse_elevator");
-  var_0 = getent("warehouse_lift_brush", "targetname");
+  var_0 = getEnt("warehouse_lift_brush", "targetname");
   var_1 = getEntArray("warehouse_lift_entities", "targetname");
-  var_2 = common_scripts\utility::getstruct("warehouse_lift_struct", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("warehouse_lift_struct", "script_noteworthy");
   level.warehouse_lift_tag_origin = var_2 common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(level.warehouse_lift_tag_origin, "tag_origin");
+  var_0 linkTo(level.warehouse_lift_tag_origin, "tag_origin");
 
   foreach(var_4 in var_1) {
-    var_4 linkto(level.warehouse_lift_tag_origin, "tag_origin");
+    var_4 linkTo(level.warehouse_lift_tag_origin, "tag_origin");
   }
 
-  var_6 = getent("warehouse_lift_player_clip", "targetname");
-  var_6 linkto(level.warehouse_lift_tag_origin, "tag_origin");
-  var_7 = getent("warehouse_lift_clip", "targetname");
-  var_7 linkto(level.warehouse_lift_tag_origin, "tag_origin");
-  var_8 = common_scripts\utility::getstruct("warehouse_lift_enemy_1_struct", "targetname");
+  var_6 = getEnt("warehouse_lift_player_clip", "targetname");
+  var_6 linkTo(level.warehouse_lift_tag_origin, "tag_origin");
+  var_7 = getEnt("warehouse_lift_clip", "targetname");
+  var_7 linkTo(level.warehouse_lift_tag_origin, "tag_origin");
+  var_8 = common_scripts\utility::getStruct("warehouse_lift_enemy_1_struct", "targetname");
   level.warehouse_lift_enemy_1_origin = var_8 common_scripts\utility::spawn_tag_origin();
-  level.warehouse_lift_enemy_1_origin linkto(level.warehouse_lift_tag_origin, "tag_origin");
-  var_9 = common_scripts\utility::getstruct("warehouse_lift_enemy_2_struct", "targetname");
+  level.warehouse_lift_enemy_1_origin linkTo(level.warehouse_lift_tag_origin, "tag_origin");
+  var_9 = common_scripts\utility::getStruct("warehouse_lift_enemy_2_struct", "targetname");
   level.warehouse_lift_enemy_2_origin = var_9 common_scripts\utility::spawn_tag_origin();
-  level.warehouse_lift_enemy_2_origin linkto(level.warehouse_lift_tag_origin, "tag_origin");
+  level.warehouse_lift_enemy_2_origin linkTo(level.warehouse_lift_tag_origin, "tag_origin");
   maps\_utility::array_spawn_function_targetname("warehouse_enemies_lift", ::warehouse_enemy_lift_setup);
   var_10 = maps\_utility::array_spawn_targetname("warehouse_enemies_lift", 1);
   common_scripts\utility::flag_wait("elevator_landed");
   thread common_scripts\utility::play_sound_in_space("satf_elevator_gate_open", (-5173, 54719, -179));
-  var_11 = getent("warehouse_block_cover_clip", "targetname");
+  var_11 = getEnt("warehouse_block_cover_clip", "targetname");
   var_11 notsolid();
   var_11 connectpaths();
   var_11 delete();
   wait 1;
   thread common_scripts\utility::play_sound_in_space("satf_warehouse_lift", (-5627, 55977, -447));
   var_12 = level.warehouse_lift_tag_origin.origin + (0, 0, -144);
-  level.warehouse_lift_tag_origin moveto(var_12, 12, 1, 1);
+  level.warehouse_lift_tag_origin moveTo(var_12, 12, 1, 1);
   wait 12;
   var_7 unlink();
   var_12 = var_7.origin + (0, 0, -64);
-  var_7 moveto(var_12, 0.5, 0, 0);
+  var_7 moveTo(var_12, 0.5, 0, 0);
   wait 0.5;
   var_7 connectpaths();
   common_scripts\utility::flag_set("lift_landed");
@@ -1776,7 +1776,7 @@ warehouse_lift() {
 }
 
 warehouse_bay_doors() {
-  var_0 = getent("warehouse_bay_doors_light", "targetname");
+  var_0 = getEnt("warehouse_bay_doors_light", "targetname");
 
   if(isDefined(var_0)) {
     var_0 setlightintensity(1.0);
@@ -1787,13 +1787,13 @@ warehouse_bay_doors() {
 
   foreach(var_3 in var_1) {
     if(var_3.script_noteworthy == "right") {
-      var_4 = common_scripts\utility::getstruct("warehouse_bay_doors_right", "targetname");
-      var_3 moveto(var_4.origin, 1);
+      var_4 = common_scripts\utility::getStruct("warehouse_bay_doors_right", "targetname");
+      var_3 moveTo(var_4.origin, 1);
       continue;
     }
 
-    var_5 = common_scripts\utility::getstruct("warehouse_bay_doors_left", "targetname");
-    var_3 moveto(var_5.origin, 1);
+    var_5 = common_scripts\utility::getStruct("warehouse_bay_doors_left", "targetname");
+    var_3 moveTo(var_5.origin, 1);
   }
 }
 
@@ -1816,7 +1816,7 @@ warehouse_combat() {
   var_3 = maps\_utility::array_spawn_targetname("warehouse_enemies_upper", 1);
   safe_activate_trigger_with_targetname("advance_allies_wave_2_trigger");
   common_scripts\utility::flag_wait("advance_allies_wave_3_flag");
-  var_4 = getent("warehouse_volume", "targetname");
+  var_4 = getEnt("warehouse_volume", "targetname");
   var_5 = maps\_utility::array_spawn_targetname("warehouse_enemies_wave_3", 1);
   level.warehouse_enemies = maps\_utility::array_removedead_or_dying(level.warehouse_enemies);
   level.warehouse_enemies = common_scripts\utility::array_combine(level.warehouse_enemies, var_5);
@@ -1830,7 +1830,7 @@ warehouse_combat() {
   thread set_accuracy(var_4, "allies", 0.01);
   thread warehouse_last_push();
   common_scripts\utility::flag_wait_any("warehouse_last_push", "player_on_train_platform");
-  var_4 = getent("underground_warehouse_volume", "targetname");
+  var_4 = getEnt("underground_warehouse_volume", "targetname");
   thread set_accuracy(var_4, "axis", 0.1);
 
   foreach(var_7 in level.warehouse_enemies) {
@@ -1857,10 +1857,10 @@ warehouse_combat() {
 }
 
 handle_enemy_accuracy_while_player_in_elevator() {
-  var_0 = getent("warehouse_volume", "targetname");
+  var_0 = getEnt("warehouse_volume", "targetname");
   thread set_accuracy(var_0, "axis", 0.01);
   common_scripts\utility::flag_wait("player_in_warehouse");
-  var_0 = getent("warehouse_volume", "targetname");
+  var_0 = getEnt("warehouse_volume", "targetname");
   thread set_accuracy(var_0, "axis");
 }
 
@@ -1992,7 +1992,7 @@ warehouse_enemy_ambient_setup() {
   self endon("death");
 
   if(isDefined(self.script_noteworthy)) {
-    self.struct = common_scripts\utility::getstruct(self.script_noteworthy + "_struct", "targetname");
+    self.struct = common_scripts\utility::getStruct(self.script_noteworthy + "_struct", "targetname");
 
     switch (self.script_noteworthy) {
       case "warehouse_ambient_enemy_animated_1":
@@ -2000,7 +2000,7 @@ warehouse_enemy_ambient_setup() {
         self.animname = "generic";
         self.allowdeath = 1;
         self.animation = "clockwork_chaos_wave_guard";
-        self.volume = getent("warehouse_enemies_ambient_runners_lower_volume", "targetname");
+        self.volume = getEnt("warehouse_enemies_ambient_runners_lower_volume", "targetname");
         self.struct maps\_anim::anim_first_frame_solo(self, self.animation);
         thread warehouse_ambient_animated_enemies();
         break;
@@ -2009,7 +2009,7 @@ warehouse_enemy_ambient_setup() {
         self.animname = "generic";
         self.allowdeath = 1;
         self.animation = "payback_escape_forward_wave_left_soap";
-        self.volume = getent("warehouse_ambient_enemy_animated_2_volume", "targetname");
+        self.volume = getEnt("warehouse_ambient_enemy_animated_2_volume", "targetname");
         thread warehouse_ambient_animated_enemies(1);
         break;
       case "warehouse_enemies_ambient_runners_lower":
@@ -2035,13 +2035,13 @@ warehouse_enemy_lift_setup() {
     switch (self.script_noteworthy) {
       case "warehouse_lift_enemy_1":
         self.struct = level.warehouse_lift_enemy_1_origin;
-        self linkto(self.struct, "tag_origin");
+        self linkTo(self.struct, "tag_origin");
         self.idleanim = "warehouse_lift_enemy_1_loop";
         thread play_idle_anims();
         break;
       case "warehouse_lift_enemy_2":
         self.struct = level.warehouse_lift_enemy_2_origin;
-        self linkto(self.struct, "tag_origin");
+        self linkTo(self.struct, "tag_origin");
         self.idleanim = "warehouse_lift_enemy_2_loop";
         thread warehouse_lift_enemy_2();
         break;
@@ -2065,7 +2065,7 @@ warehouse_enemy_lift_setup() {
   }
 
   maps\_utility::set_fixednode_false();
-  var_0 = getent("warehouse_middle_volume", "targetname");
+  var_0 = getEnt("warehouse_middle_volume", "targetname");
   self setgoalvolumeauto(var_0);
   level.warehouse_enemies = common_scripts\utility::add_to_array(level.warehouse_enemies, self);
 }
@@ -2085,14 +2085,14 @@ warehouse_enemy_setup() {
   if(isDefined(self.script_noteworthy)) {
     switch (self.script_noteworthy) {
       case "warehouse_enemy_animated_1":
-        self.struct = common_scripts\utility::getstruct("warehouse_enemy_animated_1_struct", "targetname");
+        self.struct = common_scripts\utility::getStruct("warehouse_enemy_animated_1_struct", "targetname");
         self.animation = "roadkill_shepherd_shout_sequence";
         thread animated_warehouse_guys();
         break;
       case "warehouse_enemies_run_in_1":
         warehouse_enemies_run_in_1();
         alert_enemies_react();
-        var_0 = getent("warehouse_front_volume", "targetname");
+        var_0 = getEnt("warehouse_front_volume", "targetname");
         maps\_utility::set_fixednode_false();
         self setgoalvolumeauto(var_0);
         self.ignoreall = 1;
@@ -2123,7 +2123,7 @@ animated_warehouse_guys() {
   }
 
   alert_enemies_react();
-  var_0 = getent("warehouse_front_volume", "targetname");
+  var_0 = getEnt("warehouse_front_volume", "targetname");
   maps\_utility::set_fixednode_false();
   self setgoalvolumeauto(var_0);
 }
@@ -2131,7 +2131,7 @@ animated_warehouse_guys() {
 warehouse_enemies_run_in_1() {
   level endon("warehouse_enemies_alerted");
   common_scripts\utility::flag_wait("start_ambient_warehouse_scenarios");
-  var_0 = getent("warehouse_ambient_enemy_animated_2_volume", "targetname");
+  var_0 = getEnt("warehouse_ambient_enemy_animated_2_volume", "targetname");
   maps\_utility::set_fixednode_false();
   self setgoalvolumeauto(var_0);
   self waittill("goal");
@@ -2166,7 +2166,7 @@ warehouse_enemy_ambient_runners_setup() {
   }
 
   maps\_utility::set_fixednode_false();
-  var_0 = getent(self.script_noteworthy + "_volume", "targetname");
+  var_0 = getEnt(self.script_noteworthy + "_volume", "targetname");
   self setgoalvolumeauto(var_0);
 
   if(self.script_noteworthy != "warehouse_enemies_ambient_runners_upper") {
@@ -2204,7 +2204,7 @@ warehouse_enemy_last_wave_setup() {
 
 safe_activate_trigger_with_targetname(var_0) {
   var_1 = 64;
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(isDefined(var_2) && !isDefined(var_2.trigger_off)) {
     var_2 maps\_utility::activate_trigger();
@@ -2216,9 +2216,9 @@ safe_activate_trigger_with_targetname(var_0) {
 }
 
 retreat_from_vol_to_vol(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
   var_6 = var_5 maps\_utility::get_ai_touching_volume("axis");
-  var_7 = getent(var_1, "targetname");
+  var_7 = getEnt(var_1, "targetname");
   var_8 = getnode(var_7.target, "targetname");
 
   foreach(var_10 in var_6) {
@@ -2245,7 +2245,7 @@ retreat_from_vol_to_vol(var_0, var_1, var_2, var_3, var_4) {
 }
 
 check_trigger_flagset(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
 
   if(isDefined(var_1.script_flag_set)) {
@@ -2277,38 +2277,38 @@ train_car() {
   }
 
   var_4 = getEntArray("train_car", "targetname");
-  var_2 = common_scripts\utility::getstruct("train_car_struct", "targetname");
+  var_2 = common_scripts\utility::getStruct("train_car_struct", "targetname");
   level.train_car_tag_origin = var_2 common_scripts\utility::spawn_tag_origin();
-  var_5 = common_scripts\utility::getstruct("ghost1_train_struct", "targetname");
+  var_5 = common_scripts\utility::getStruct("ghost1_train_struct", "targetname");
   var_6 = var_5 common_scripts\utility::spawn_tag_origin();
   var_6.origin = var_6.origin + (-30, 0, 0);
 
   foreach(var_8 in var_4) {
-    var_8 linkto(level.train_car_tag_origin, "tag_origin");
+    var_8 linkTo(level.train_car_tag_origin, "tag_origin");
     var_8 retargetscriptmodellighting(var_6);
   }
 
-  var_10 = getent("train_car_player_clip", "targetname");
+  var_10 = getEnt("train_car_player_clip", "targetname");
   var_10 notsolid();
-  var_10 linkto(level.train_car_tag_origin, "tag_origin");
-  var_11 = getent("train_car_player_inner_clip", "targetname");
+  var_10 linkTo(level.train_car_tag_origin, "tag_origin");
+  var_11 = getEnt("train_car_player_inner_clip", "targetname");
   var_11 notsolid();
-  var_11 linkto(level.train_car_tag_origin, "tag_origin");
+  var_11 linkTo(level.train_car_tag_origin, "tag_origin");
   common_scripts\utility::flag_wait("start_ambient_warehouse_scenarios");
-  var_12 = common_scripts\utility::getstruct("train_car_struct_2", "targetname");
-  level.train_car_tag_origin moveto(var_12.origin, 20, 0, 8);
+  var_12 = common_scripts\utility::getStruct("train_car_struct_2", "targetname");
+  level.train_car_tag_origin moveTo(var_12.origin, 20, 0, 8);
   wait 20;
   common_scripts\utility::flag_wait_any("warehouse_last_push", "player_on_train_platform");
   level thread maps\satfarm_audio::train_leaving();
   objective_onentity(maps\_utility::obj("train"), level.train_car_tag_origin, (-210, -240, 180));
   thread watch_for_player_on_train(var_10, var_11);
   thread player_falls_on_tracks();
-  var_13 = common_scripts\utility::getstruct("train_car_allies_load_struct", "targetname");
-  level.train_car_tag_origin moveto(var_13.origin, 3, 0, 0);
+  var_13 = common_scripts\utility::getStruct("train_car_allies_load_struct", "targetname");
+  level.train_car_tag_origin moveTo(var_13.origin, 3, 0, 0);
   wait 3;
   common_scripts\utility::flag_set("send_allies_to_train");
-  var_14 = common_scripts\utility::getstruct("train_car_player_fail_struct", "targetname");
-  level.train_car_tag_origin moveto(var_14.origin, 22, 0, 0);
+  var_14 = common_scripts\utility::getStruct("train_car_player_fail_struct", "targetname");
+  level.train_car_tag_origin moveTo(var_14.origin, 22, 0, 0);
   wait 22;
 
   if(!common_scripts\utility::flag("player_train_trigger")) {
@@ -2319,8 +2319,8 @@ train_car() {
   }
 
   if(!common_scripts\utility::flag("warehouse_end")) {
-    var_15 = common_scripts\utility::getstruct("train_car_end_struct", "targetname");
-    level.train_car_tag_origin moveto(var_15.origin, 15, 0, 0);
+    var_15 = common_scripts\utility::getStruct("train_car_end_struct", "targetname");
+    level.train_car_tag_origin moveTo(var_15.origin, 15, 0, 0);
     wait 15;
   }
 
@@ -2339,9 +2339,9 @@ spawn_model_from_struct(var_0) {
 }
 
 watch_for_player_on_train(var_0, var_1) {
-  var_2 = getent("train_car_volume", "targetname");
-  var_2 enablelinkto();
-  var_2 linkto(level.train_car_tag_origin, "tag_origin");
+  var_2 = getEnt("train_car_volume", "targetname");
+  var_2 enablelinkTo();
+  var_2 linkTo(level.train_car_tag_origin, "tag_origin");
   level.player_touching_volume = undefined;
   thread watch_player_push_volume();
 
@@ -2377,7 +2377,7 @@ watch_for_player_on_train(var_0, var_1) {
 }
 
 watch_player_push_volume() {
-  var_0 = getent("push_player_volume", "targetname");
+  var_0 = getEnt("push_player_volume", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -2396,7 +2396,7 @@ watch_player_push_volume() {
 
 player_falls_on_tracks() {
   level endon("warehouse_end");
-  var_0 = getent("warehouse_train_track_volume", "targetname");
+  var_0 = getEnt("warehouse_train_track_volume", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -2416,7 +2416,7 @@ allies_movement_warehouse() {
   }
 
   thread allies_vo_warehouse();
-  var_0 = getent("warehouse_elevator_volume", "targetname");
+  var_0 = getEnt("warehouse_elevator_volume", "targetname");
 
   for(;;) {
     var_1 = 1;
@@ -2436,7 +2436,7 @@ allies_movement_warehouse() {
   }
 
   level.ally_elevator_clip_back solid();
-  level.ally_elevator_clip_back disconnectpaths();
+  level.ally_elevator_clip_back disconnectPaths();
   level.allies[0].ignoreall = 1;
   common_scripts\utility::flag_wait("start_ambient_warehouse_scenarios");
   wait 0.5;
@@ -2455,7 +2455,7 @@ allies_movement_warehouse() {
   wait 0.1;
   level.allies[0].accuracy = 10.0;
   level.allies[0].baseaccuracy = 10.0;
-  var_5 = getent("ghost1_path_to_train_volume", "targetname");
+  var_5 = getEnt("ghost1_path_to_train_volume", "targetname");
   var_6 = var_5 maps\_utility::get_ai_touching_volume("axis");
 
   foreach(var_8 in var_6) {
@@ -2536,13 +2536,13 @@ animate_allies_to_train() {
     common_scripts\utility::flag_wait("send_allies_to_train");
   }
 
-  var_1 = common_scripts\utility::getstruct("ghost1_train_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("ghost1_train_struct", "targetname");
   var_1 maps\_anim::anim_reach_solo(self, "satfarm_train_jump_straight_run");
   var_1 thread maps\_anim::anim_single_solo(self, "satfarm_train_jump_straight_run");
   wait 0.5;
   var_2 = common_scripts\utility::spawn_tag_origin();
-  var_2 linkto(level.train_car_tag_origin, "tag_origin");
-  self linkto(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(level.train_car_tag_origin, "tag_origin");
+  self linkTo(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
   self waittillmatch("single anim", "end");
   self.ignoreall = 0;
   common_scripts\utility::flag_set("ghost1_on_train");
@@ -2556,8 +2556,8 @@ ambient_building_explosions(var_0) {
   wait 8;
   var_1 = undefined;
   var_2 = undefined;
-  var_3 = getent("control_tower_building_second_floor_volume", "targetname");
-  var_4 = getent("control_tower_building_first_floor_volume", "targetname");
+  var_3 = getEnt("control_tower_building_second_floor_volume", "targetname");
+  var_4 = getEnt("control_tower_building_first_floor_volume", "targetname");
   level.last_ceiling_light_spark_fx_struct = undefined;
   level.ceiling_light_spark_fx_count = 0;
 
@@ -2627,7 +2627,7 @@ ambient_building_explosions(var_0) {
 wall_lights() {
   var_0 = getEntArray("wall_light", "targetname");
   common_scripts\utility::array_thread(var_0, ::wall_lights_think);
-  var_1 = getent("spinning_light_object", "targetname");
+  var_1 = getEnt("spinning_light_object", "targetname");
   var_1 thread wall_lights_think(1);
   common_scripts\utility::flag_wait("warehouse_end");
 
@@ -2647,7 +2647,7 @@ wall_lights_think(var_0) {
     var_2 = common_scripts\utility::spawn_tag_origin();
     var_2.angles = (0, 90, 0);
     self.angles = (0, 0, 0);
-    self linkto(var_2, "tag_origin");
+    self linkTo(var_2, "tag_origin");
   }
 
   for(;;) {

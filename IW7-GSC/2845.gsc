@@ -172,7 +172,7 @@ func_734F(var_0) {
   var_1 = var_0 scripts\engine\utility::spawn_script_origin();
   var_1.grenade = var_0;
   level.var_0149.var_B37A[level.var_0149.var_B37A.size] = var_1;
-  var_1 linkto(var_0, "tag_fx", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_fx", (0, 0, 0), (0, 0, 0));
   var_2 = func_734E();
   var_0 func_13771(var_1);
   var_3 = isDefined(var_1.var_0118);
@@ -205,7 +205,7 @@ func_734F(var_0) {
   }
 
   if(var_5 && var_6 > 4096) {
-    var_7 = vectordot(scripts\engine\utility::flatten_vector(vectornormalize(var_4 - level.player.origin)), anglesToForward(level.player.angles));
+    var_7 = vectordot(scripts\engine\utility::flatten_vector(vectorNormalize(var_4 - level.player.origin)), anglesToForward(level.player.angles));
 
     if(var_7 < 0.0) {
       var_5 = 0;
@@ -351,7 +351,7 @@ func_734D(var_0, var_1, var_2, var_3) {
       } else if(var_7 < var_8 + var_9) {
         if(!isalive(var_11[var_7])) {
           setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 2);
-          var_15 linkto(var_11[var_7].ent, func_129D(var_11[var_7].ent), (0, 0, 0), (0, 0, 0));
+          var_15 linkTo(var_11[var_7].ent, func_129D(var_11[var_7].ent), (0, 0, 0), (0, 0, 0));
         }
       } else {
         setomnvar("ui_fragreticles_" + var_7 + "_lock_state", 3);
@@ -579,7 +579,7 @@ func_13C7E(var_0, var_1, var_2, var_3) {
     var_4 = var_1;
   }
 
-  var_6 = vectornormalize(var_5);
+  var_6 = vectorNormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
   var_7 = bulletTrace(var_4, var_1, 0, var_3);
 

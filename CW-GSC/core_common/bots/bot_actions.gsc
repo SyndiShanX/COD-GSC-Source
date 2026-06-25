@@ -328,7 +328,7 @@ function private function_97bc2873(actionparams) {
   }
 
   fwd = anglesToForward(self getplayerangles());
-  enemydir = vectornormalize(self.enemy.origin - self.origin);
+  enemydir = vectorNormalize(self.enemy.origin - self.origin);
   enemydot = vectordot(fwd, enemydir);
 
   if(enemydot < 0.7) {

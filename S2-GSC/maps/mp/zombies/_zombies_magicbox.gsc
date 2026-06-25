@@ -220,7 +220,7 @@ func_801A(param_00, param_01) {
   } else {
     param_00.var_586E = spawn("weapon_" + param_01, param_00.var_A9EA.var_0116);
     var_02 = (0, 0, 0);
-    param_00.var_586E linkto(param_00.var_A9EA, "tag_origin", var_02, (0, 0, 0));
+    param_00.var_586E linkTo(param_00.var_A9EA, "tag_origin", var_02, (0, 0, 0));
   }
 
   param_00.var_586E makeunusable();
@@ -511,13 +511,13 @@ func_A7EB(param_00) {
 
     self.var_A7D7 = 0;
     if(0) {
-      self setcursorhint("HINT_NOICON");
+      self setCursorHint("HINT_NOICON");
     }
 
     var_03 = param_00 getcurrentprimaryweapon();
     if(lib_0547::func_57AF(var_03) || lib_0547::func_5862(var_03)) {
       if(0) {
-        self sethintstring("");
+        self setHintString("");
         self setsecondaryhintstring("");
         self settertiaryhintstring("");
         self.var_3006 = undefined;
@@ -539,7 +539,7 @@ func_A7EB(param_00) {
 
       self.var_3006 = self.var_2925;
       if(0) {
-        self sethintstring(func_4412(self));
+        self setHintString(func_4412(self));
         self setsecondaryhintstring(func_4411(self));
         self settertiaryhintstring("");
       }
@@ -557,7 +557,7 @@ func_A7EB(param_00) {
     if(0) {
       self setsecondaryhintstring(func_4734(self));
       self settertiaryhintstring(func_4733(self));
-      self sethintstring(&"ZOMBIES_WALL_BUY_GENERIC");
+      self setHintString(&"ZOMBIES_WALL_BUY_GENERIC");
     }
 
     if(1) {
@@ -1492,7 +1492,7 @@ func_5F7B() {
     var_0A = func_456D(var_02);
     if(isDefined(var_02.var_6298)) {
       if(isDefined(var_02.var_6298.var_01A2)) {
-        var_0B = getent(var_02.var_6298.var_01A2, "targetname");
+        var_0B = getEnt(var_02.var_6298.var_01A2, "targetname");
         if(isDefined(var_0B) && var_0B.var_003B == "light") {
           var_02.var_5CCE = var_0B;
           var_02.var_5CCE.var_5D70 = var_02.var_5CCE method_81DE();
@@ -1577,14 +1577,14 @@ func_08D7(param_00, param_01, param_02) {
   }
 
   if(0) {
-    param_00 sethintstring(func_4401());
+    param_00 setHintString(func_4401());
     param_00 setsecondaryhintstring(lib_0547::func_4474(param_00.var_267B));
   }
 }
 
 func_2A7B(param_00, param_01) {
   if(0) {
-    param_00 sethintstring(func_4520());
+    param_00 setHintString(func_4520());
     param_00 setsecondaryhintstring(lib_0547::func_4474(0));
   }
 
@@ -1881,7 +1881,7 @@ func_A922(param_00, param_01) {
       }
 
       if(0) {
-        param_00 sethintstring(var_13);
+        param_00 setHintString(var_13);
         param_00 setsecondaryhintstring("");
       }
 
@@ -2186,7 +2186,7 @@ func_A9D6() {
     return;
   }
 
-  var_00 = getent(self.var_6298.var_01A2, "targetname");
+  var_00 = getEnt(self.var_6298.var_01A2, "targetname");
   if(isDefined(var_00) && var_00.var_003B == "light") {
     self.var_6298.var_5CCE = var_00;
     self.var_6298.var_5CCE.var_5D70 = self.var_6298.var_5CCE method_81DE();
@@ -2232,7 +2232,7 @@ func_A9DA(param_00) {
         break;
 
       case "no_upgrades":
-        self sethintstring("");
+        self setHintString("");
         self setsecondaryhintstring("");
         param_00 waittill("allow_upgrades");
         var_02 = lib_0547::func_462A(param_00);
@@ -2240,14 +2240,14 @@ func_A9DA(param_00) {
     }
 
     var_03 = getweapondisplayname(var_02);
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
     if(!lib_0547::func_4BA8(param_00, var_03) || !func_A9D5(param_00, var_03)) {
-      self sethintstring(&"ZOMBIES_WEAPON_LEVEL_BOX");
+      self setHintString(&"ZOMBIES_WEAPON_LEVEL_BOX");
       self setsecondaryhintstring(&"ZOMBIES_COST_2500");
       continue;
     }
 
-    self sethintstring("");
+    self setHintString("");
     self setsecondaryhintstring("");
   }
 }
@@ -2263,7 +2263,7 @@ func_7AAB() {
 
 func_A9D7() {
   level endon("game_ended");
-  self.var_6298 = getent(self.var_01A2, "targetname");
+  self.var_6298 = getEnt(self.var_01A2, "targetname");
   self.var_0C2F = 1;
   if(func_57DF(self)) {
     func_A9D6();
@@ -2694,8 +2694,8 @@ func_0DB7() {
 }
 
 func_0DB8(param_00, param_01) {
-  param_00 usetriggerrequirelookat();
-  param_00 sethintstring(&"ZOMBIES_AMMO_CRATE_HINT");
+  param_00 useTriggerRequireLookAt();
+  param_00 setHintString(&"ZOMBIES_AMMO_CRATE_HINT");
   param_00 setsecondaryhintstring(&"ZOMBIES_COST_500");
   for(;;) {
     var_02 = param_00 lib_0547::func_A795();

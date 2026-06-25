@@ -207,7 +207,7 @@ slide_left() {
   }
 
   var_01 = self.var_116;
-  self.var_116 = self.var_116 + var_00 * vectornormalize(anglesToForward(self.var_1D));
+  self.var_116 = self.var_116 + var_00 * vectorNormalize(anglesToForward(self.var_1D));
 }
 
 run_wallbuy_trigger_mysterybox_mod(param_00, param_01) {
@@ -272,8 +272,8 @@ run_wallbuy_trigger_mysterybox_mod(param_00, param_01) {
     var_02.var_586E unlink();
     var_02.var_586E slide_left();
     var_02.var_586E method_8449(var_02.itementlink);
-    var_0E = var_02.var_A9E3 + 6 * vectornormalize(anglestoright(var_02.var_A9BD));
-    var_02.itementlink moveto(var_0E, 0.15);
+    var_0E = var_02.var_A9E3 + 6 * vectorNormalize(anglestoright(var_02.var_A9BD));
+    var_02.itementlink moveTo(var_0E, 0.15);
     wait(0.25);
     if(var_0D lib_0579::func_4BA5()) {
       var_0D lib_0579::func_A246();

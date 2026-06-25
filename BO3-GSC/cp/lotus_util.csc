@@ -39,7 +39,7 @@ function function_571c4083(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_83b903a6(a_ents) {
   foreach(ent in a_ents) {
-    ent linkto(self);
+    ent linkTo(self);
   }
 }
 
@@ -222,7 +222,7 @@ function function_9259cfc(n_index) {
   }
   self thread function_20e0d03e();
   wait(randomfloat(1));
-  self moveto(var_99dbd5bf["position"], n_time);
+  self moveTo(var_99dbd5bf["position"], n_time);
   self waittill("movedone");
   self delete();
 }
@@ -242,7 +242,7 @@ function function_20e0d03e() {
         break;
       }
       default: {
-        self rotateyaw(360, n_time);
+        self rotateYaw(360, n_time);
         break;
       }
     }

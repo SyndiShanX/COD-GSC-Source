@@ -61,7 +61,7 @@ _id_B73A(var_0) {
   self._id_B5A4._id_10D19 = _id_0736::_id_74B5;
   level._id_7753 thread _id_0706::_id_17FD(self, self._id_B5A4, "blima_getin", var_1);
   wait(_func_0079(%sdr_cp_veh_lbravo_seat_2_getin));
-  self._id_B5A4 linkto(level._id_7753, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
+  self._id_B5A4 linkTo(level._id_7753, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
   self _meth_820B(1, 0.25, 0.25, 60, 60, 30, 30);
   self._id_7D98 = 1;
   level._id_7753 notify("player_boarded_heli");
@@ -325,7 +325,7 @@ _id_E2FC(var_0, var_1) {
   var_5 = _func_00D2(var_2.origin, var_2.angles, level._id_CC31["exfil_ally"]["blima_drop_l_idle_in"]);
   var_3.origin = var_4;
   var_3.angles = var_5;
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_2._id_10E83 = var_3;
   var_2 thread _id_7CB5(var_3);
 }
@@ -389,8 +389,8 @@ _id_7FC0(var_0) {
 _id_3F88(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_model", var_0);
   var_5 setModel("tag_origin");
-  var_5 sethintstring(var_1);
-  var_5 setcursorhint("HINT_BUTTON");
+  var_5 setHintString(var_1);
+  var_5 setCursorHint("HINT_BUTTON");
   var_5 _meth_84D4(200);
   var_5 sethintdisplayfov(90);
   var_5 setuserange(72);
@@ -573,7 +573,7 @@ _id_7064(var_0) {
   var_1[0] = var_0.origin;
 
   for(var_2 = var_0; isDefined(var_2.target); var_2 = var_3) {
-    var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_1[var_1.size] = var_3.origin;
   }
 

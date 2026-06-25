@@ -135,7 +135,7 @@ on_begin(weapon_name, var_eaa7f0ba, var_957937ee, var_9c56c5a9, var_b896fe29) {
   if(isDefined(self.var_eaa7f0ba) && self.var_eaa7f0ba) {
     level thread function_fa5e5e08();
   } else {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread function_e73fbbf7();
     }
   }
@@ -146,7 +146,7 @@ on_begin(weapon_name, var_eaa7f0ba, var_957937ee, var_9c56c5a9, var_b896fe29) {
 on_end(round_reset) {
   zm_trial_util::function_f3dbeda7();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 
@@ -164,7 +164,7 @@ on_end(round_reset) {
   if(!round_reset) {
     var_57807cdc = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       assert(isDefined(player.var_4ced1fcf));
 
       if(!player.var_4ced1fcf) {
@@ -173,7 +173,7 @@ on_end(round_reset) {
     }
 
     if(isDefined(self.var_eaa7f0ba) && self.var_eaa7f0ba) {
-      if(var_57807cdc.size == getplayers().size) {
+      if(var_57807cdc.size == getPlayers().size) {
         if(var_57807cdc.size == 1) {
           zm_trial::fail(#"hash_753fe45bee19e131", var_57807cdc);
         } else {
@@ -187,7 +187,7 @@ on_end(round_reset) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_4ced1fcf = undefined;
   }
 
@@ -237,7 +237,7 @@ setup_objective(str_weapon, s_challenge) {
       function_da7940a3(n_obj_id, 1);
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread monitor_objective(s_challenge, a_weapons);
     }
   }
@@ -277,7 +277,7 @@ function_fa5e5e08() {
   while(true) {
     var_5cb7ddf1 = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(level.var_19b2578f) && level.var_19b2578f) {
         player function_52f6931d();
       } else {

@@ -493,7 +493,7 @@ function bombs() {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  sdbomb = getent("sd_bomb", "targetname");
+  sdbomb = getEnt("sd_bomb", "targetname");
 
   if(isDefined(sdbomb)) {
     sdbomb delete();
@@ -507,7 +507,7 @@ function bombs() {
     scriptlabel = trigger.script_label;
     visuals = getEntArray(bombzones[index].target, "targetname");
     clipbrushes = getEntArray("bombzone_clip" + scriptlabel, "targetname");
-    defusetrig = getent(visuals[0].target, "targetname");
+    defusetrig = getEnt(visuals[0].target, "targetname");
     var_b3c46dd0 = game.defenders;
     var_2b4ef22b = #"group_enemy";
 
@@ -540,7 +540,7 @@ function bombs() {
     }
 
     name = #"dem" + scriptlabel;
-    trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+    trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
     trigger usetriggerignoreuseholdtime();
     trigger function_268e4500();
     trigger function_682f34cf(-800);
@@ -832,7 +832,7 @@ function dropbombmodel(player, site) {
   trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), 0, player);
   tempangle = randomfloat(360);
   forward = (cos(tempangle), sin(tempangle), 0);
-  forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
+  forward = vectorNormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
   dropangles = vectortoangles(forward);
   offset = (0, 0, 3);
 

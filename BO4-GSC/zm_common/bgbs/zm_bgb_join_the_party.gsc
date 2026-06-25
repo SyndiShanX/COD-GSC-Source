@@ -23,7 +23,7 @@ __init__() {
 }
 
 activation() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player util::is_spectating()) {
       player thread zm_player::spectator_respawn_player();
     }
@@ -44,7 +44,7 @@ activation() {
 }
 
 validation() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player util::is_spectating()) {
       return true;
     }

@@ -52,7 +52,7 @@ init_assembly_line() {
     PrecacheMpAnim(a);
   }
 
-  scripted_node = GetStruct("robot_arm_scripted_node", "targetname");
+  scripted_node = getStruct("robot_arm_scripted_node", "targetname");
 
   drones = getEntArray("assembly_line_drone", "targetname");
   foreach(i, drone in drones) {
@@ -172,18 +172,18 @@ hanger_floor_init() {
   switch (self.script_noteworthy) {
     case "hanger_door_left":
       self.origin -= door_offset;
-      self DisconnectPaths();
+      self disconnectPaths();
       break;
     case "hanger_door_right":
       self.origin += door_offset;
-      self DisconnectPaths();
+      self disconnectPaths();
       break;
 
     case "drone":
       if(isDefined(self.target)) {
-        clip = GetEnt(self.target, "targetname");
+        clip = getEnt(self.target, "targetname");
         clip.carepackageTouchValid = true;
-        clip LinkTo(self);
+        clip linkTo(self);
       }
       break;
     default:
@@ -205,7 +205,7 @@ hanger_event_idle_anims() {
 
       anims["drone"] = "mp_lev_drone_deploy_idle";
 
-      ref_node = getstruct("ref_anim_node", "targetname");
+      ref_node = getStruct("ref_anim_node", "targetname");
       self ScriptModelPlayAnimDeltaMotionFromPos(anims[self.script_noteworthy], ref_node.origin, ref_node.angles);
 
       if(isDefined(self.collision_prop)) {
@@ -252,7 +252,7 @@ hanger_floor_run() {
 
       anims["drone"] = "mp_lev_drone_deploy";
 
-      ref_node = getstruct("ref_anim_node", "targetname");
+      ref_node = getStruct("ref_anim_node", "targetname");
 
       wait drone_delay;
       self ScriptModelPlayAnimDeltaMotionFromPos(anims[self.script_noteworthy], ref_node.origin, ref_node.angles);
@@ -264,13 +264,13 @@ hanger_floor_run() {
       break;
     case "window":
       wait drone_delay;
-      target = getstruct(self.target, "targetname");
-      self MoveTo(target.origin, window_move_time);
+      target = getStruct(self.target, "targetname");
+      self moveTo(target.origin, window_move_time);
       break;
     case "window_step":
       wait drone_delay;
-      target = getstruct(self.target, "targetname");
-      self MoveTo(target.origin, step_move_time);
+      target = getStruct(self.target, "targetname");
+      self moveTo(target.origin, step_move_time);
       break;
     default:
       break;
@@ -278,13 +278,13 @@ hanger_floor_run() {
 }
 
 hanger_event_disconnect_nodes(targetname) {
-  path_ent = GetEnt(targetname, "targetname");
+  path_ent = getEnt(targetname, "targetname");
   if(!isDefined(path_ent)) {
     return;
   }
 
   path_ent.origin += (0, 0, 1200);
-  path_ent DisconnectPaths();
+  path_ent disconnectPaths();
   path_ent.origin -= (0, 0, 1200);
 }
 
@@ -297,7 +297,7 @@ hanger_event_disconnect_nodes_floor() {
 }
 
 hanger_event_connect_nodes(targetname) {
-  path_ent = GetEnt(targetname, "targetname");
+  path_ent = getEnt(targetname, "targetname");
   if(!isDefined(path_ent)) {
     return;
   }

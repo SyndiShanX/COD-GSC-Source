@@ -130,7 +130,7 @@ function activatercbomb(hardpointtype) {
   if(killstreak_id == -1) {
     return false;
   }
-  rcbomb = spawnvehicle("rc_car_mp", placement.origin, placement.angles, "rcbomb");
+  rcbomb = spawnVehicle("rc_car_mp", placement.origin, placement.angles, "rcbomb");
   rcbomb killstreaks::configure_team("rcbomb", killstreak_id, player, "small_vehicle", undefined, &configureteampost);
   rcbomb killstreak_hacking::enable_hacking("rcbomb", &hackedprefunction, &hackedpostfunction);
   rcbomb.damagetaken = 0;
@@ -326,7 +326,7 @@ function explode(attacker, weapon) {
   self vehicle::toggle_exhaust_fx(0);
   self vehicle::toggle_sounds(0);
   self vehicle::lights_off();
-  self playrumbleonentity("rcbomb_explosion");
+  self playRumbleOnEntity("rcbomb_explosion");
   if(!self.abandoned && attacker != self.owner && isPlayer(attacker)) {
     attacker challenges::destroyrcbomb(weapon);
     if(self.owner util::isenemyplayer(attacker)) {

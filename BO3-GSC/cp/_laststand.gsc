@@ -152,7 +152,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   if(!isDefined(level.var_83405e54) || !level.var_83405e54) {
     self laststand_give_pistol();
   }
-  if(isDefined(level.playersuicideallowed) && level.playersuicideallowed && getplayers().size > 1) {
+  if(isDefined(level.playersuicideallowed) && level.playersuicideallowed && getPlayers().size > 1) {
     if(!isDefined(level.canplayersuicide) || self[[level.canplayersuicide]]()) {
       self thread suicide_trigger_spawn();
     }
@@ -325,7 +325,7 @@ function laststand_bleedout_decrement() {
 }
 
 function private check_early_bleedout() {
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     if(self.lives == 0) {
       self.bleedout_time = 3;
@@ -375,7 +375,7 @@ function laststand_bleedout(delay) {
     check_early_bleedout();
   }
   if(isDefined(level.var_ee7cb602) && level.var_ee7cb602) {
-    playsoundatposition("evt_death_down", (0, 0, 0));
+    playSoundAtPosition("evt_death_down", (0, 0, 0));
   }
   self thread laststand_bleedout_damage();
   do {
@@ -424,7 +424,7 @@ function bleed_out() {
 
 function respawn_player_after_time(n_time_seconds) {
   self endon("disconnect");
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     return;
   }
@@ -575,12 +575,12 @@ function revive_trigger_spawn() {
   } else {
     radius = getdvarint("revive_trigger_radius");
     self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-    self.revivetrigger sethintstring("");
-    self.revivetrigger setcursorhint("HINT_NOICON");
+    self.revivetrigger setHintString("");
+    self.revivetrigger setCursorHint("HINT_NOICON");
     self.revivetrigger setmovingplatformenabled(1);
-    self.revivetrigger enablelinkto();
+    self.revivetrigger enablelinkTo();
     self.revivetrigger.origin = self.origin;
-    self.revivetrigger linkto(self);
+    self.revivetrigger linkTo(self);
     self.revivetrigger.beingrevived = 0;
     self.revivetrigger.createtime = gettime();
   }
@@ -597,8 +597,8 @@ function revive_trigger_think() {
     if(!isDefined(self.revivetrigger)) {
       self notify("stop_revive_trigger");
     }
-    self.revivetrigger sethintstring("");
-    players = getplayers();
+    self.revivetrigger setHintString("");
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(players[i] can_revive(self)) {
         self.revivetrigger setrevivehintstring(&"COOP_BUTTON_TO_REVIVE_PLAYER", self.team);
@@ -717,7 +717,7 @@ function revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived.revivetrigger.beingrevived = 1;
   playerbeingrevived.revive_hud settext(&"COOP_PLAYER_IS_REVIVING_YOU", self);
   playerbeingrevived revive_hud_show_n_fade(3);
-  playerbeingrevived.revivetrigger sethintstring("");
+  playerbeingrevived.revivetrigger setHintString("");
   if(isPlayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
   }
@@ -783,7 +783,7 @@ function revive_do_revive(playerbeingrevived, revivergun) {
       playerbeingrevived stoprevive(self);
     }
   }
-  playerbeingrevived.revivetrigger sethintstring(&"COOP_BUTTON_TO_REVIVE_PLAYER");
+  playerbeingrevived.revivetrigger setHintString(&"COOP_BUTTON_TO_REVIVE_PLAYER");
   playerbeingrevived.revivetrigger.beingrevived = 0;
   self notify("do_revive_ended_normally");
   self.is_reviving_any--;

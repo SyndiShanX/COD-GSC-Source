@@ -40,7 +40,7 @@ scriptable_crate_spore_plant() {
   self.coll_model.angles = self.angles;
   self.coll_model.parent = self;
   self.coll_model.team = self.team;
-  self.coll_model linkto(self, "J_Spore_hitbox");
+  self.coll_model linkTo(self, "J_Spore_hitbox");
   self.coll_model setCanDamage(1);
   self.coll_model setCanRadiusDamage(1);
   self.coll_model.alien_type = "seeder_spore";

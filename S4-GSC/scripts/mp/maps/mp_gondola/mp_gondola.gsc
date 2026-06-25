@@ -59,21 +59,21 @@ gondola_setup(var_0, var_1) {
     switch (var_4._id_039B) {
       case "gondola_model":
         var_2.gmodel = var_4;
-        var_4 linkto(var_2, "tag_origin");
+        var_4 linkTo(var_2, "tag_origin");
         break;
       case "gondola_truck":
         var_2._id_F6A5 = var_4;
         var_2._id_F6A5._id_E6C9 = var_4.angles;
-        var_4 linkto(var_2, "tag_origin");
+        var_4 linkTo(var_2, "tag_origin");
         break;
       case "gondola_light":
         var_2._id_0278 = var_4;
-        var_4 linkto(var_2, "tag_origin");
+        var_4 linkTo(var_2, "tag_origin");
         break;
       case "gondola_clip":
         var_2._id_39A7 = var_4;
         var_2._id_39A7._id_F9A8 = 1;
-        var_4 linkto(var_2, "tag_origin");
+        var_4 linkTo(var_2, "tag_origin");
         var_4._id_A1C0 = 1;
         break;
       case "gondola_touching_trigger":
@@ -81,7 +81,7 @@ gondola_setup(var_0, var_1) {
 
         if(istrue(level.gondolas_use_triggers)) {
           var_2.touching_trigger _meth_80DB();
-          var_2.touching_trigger linkto(var_2);
+          var_2.touching_trigger linkTo(var_2);
         } else {
           var_2.touching_trigger delete();
           var_2.touching_trigger = undefined;
@@ -91,7 +91,7 @@ gondola_setup(var_0, var_1) {
     }
   }
 
-  var_8 = scripts\engine\utility::getstruct("gondola_start_" + scripts\engine\utility::_id_EA52(var_1), "script_noteworthy");
+  var_8 = scripts\engine\utility::getStruct("gondola_start_" + scripts\engine\utility::_id_EA52(var_1), "script_noteworthy");
   var_2 thread gondola_run(var_8);
 }
 
@@ -155,21 +155,21 @@ gondola_run(var_0) {
 
       if(var_2) {
         thread gondola_audio(self);
-        self moveto(var_3[var_15].origin, var_16, var_16 * 0.9);
+        self moveTo(var_3[var_15].origin, var_16, var_16 * 0.9);
         var_2 = 0;
       } else
-        self moveto(var_3[var_15].origin, var_16);
+        self moveTo(var_3[var_15].origin, var_16);
 
-      self rotateto(var_3[var_15].angles, var_16);
+      self rotateTo(var_3[var_15].angles, var_16);
 
       if(isDefined(var_3[var_15].truck_goal)) {
         self._id_F6A5 unlink();
         var_6 = 0;
-        self._id_F6A5 moveto(var_3[var_15].truck_goal.origin, var_16);
-        self._id_F6A5 rotateto(var_3[var_15].truck_goal.angles, var_16);
+        self._id_F6A5 moveTo(var_3[var_15].truck_goal.origin, var_16);
+        self._id_F6A5 rotateTo(var_3[var_15].truck_goal.angles, var_16);
       } else if(!var_6) {
         var_6 = 1;
-        self._id_F6A5 linkto(self, "tag_origin");
+        self._id_F6A5 linkTo(self, "tag_origin");
       }
 
       wait(var_16);
@@ -283,20 +283,20 @@ gondola_audio(var_0) {
 }
 
 gondola_wheel_run() {
-  var_0 = getent("gondola_wheel_large", "targetname");
-  var_1 = getent("gondola_wheel_small", "targetname");
+  var_0 = getEnt("gondola_wheel_large", "targetname");
+  var_1 = getEnt("gondola_wheel_small", "targetname");
   var_2 = 15;
   var_3 = 1;
 
   for(;;) {
     if(var_3) {
-      var_0 rotateyaw(360, var_2, var_2 * 0.5);
-      var_1 rotateyaw(360, var_2, var_2 * 0.5);
+      var_0 rotateYaw(360, var_2, var_2 * 0.5);
+      var_1 rotateYaw(360, var_2, var_2 * 0.5);
       var_3 = 0;
     }
 
-    var_0 rotateyaw(360, var_2);
-    var_1 rotateyaw(360, var_2);
+    var_0 rotateYaw(360, var_2);
+    var_1 rotateYaw(360, var_2);
     wait(var_2);
   }
 }

@@ -1948,7 +1948,7 @@ dropweaponfordeathzombies(var_0, var_1, var_2) {
   var_6.visuals setModel("pickups_zombies_01_tombstone");
   var_6.visuals hide();
   var_6.visuals hudoutlineenable(1, 0);
-  var_6.visuals linkto(var_6, "j_dogtag", (0, 0, -12), (0, 0, 0));
+  var_6.visuals linkTo(var_6, "j_dogtag", (0, 0, -12), (0, 0, 0));
   var_6.trigger = spawn("trigger_radius", var_4 + var_5, 0, 32, 32);
 
   foreach(var_8 in level.players) {
@@ -2568,11 +2568,11 @@ pickupbounce() {
   }
 
   for(;;) {
-    var_0 moveto(var_2, var_3, 0.15, 0.15);
-    var_0 rotateyaw(180, var_3);
+    var_0 moveTo(var_2, var_3, 0.15, 0.15);
+    var_0 rotateYaw(180, var_3);
     wait(var_3);
-    var_0 moveto(var_1, var_3, 0.15, 0.15);
-    var_0 rotateyaw(180, var_3);
+    var_0 moveTo(var_1, var_3, 0.15, 0.15);
+    var_0 rotateYaw(180, var_3);
     wait(var_3);
   }
 }
@@ -2797,7 +2797,7 @@ turnonfiresalemachine(var_0) {
     wait 0.05;
   }
 
-  var_0 sethintstring(&"ZOMBIES_FIRE_SALE_MAGIC_BOX");
+  var_0 setHintString(&"ZOMBIES_FIRE_SALE_MAGIC_BOX");
   var_0 setsecondaryhintstring(var_0 maps\mp\zombies\_wall_buys::getmagicboxhintstringcost());
   var_0 maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(var_0.cost));
   var_0 maps\mp\zombies\_util::tokenhintstring(1);
@@ -2821,13 +2821,13 @@ turnofffiresalemachine(var_0) {
   }
 
   if(!var_0.active) {
-    var_0 sethintstring(maps\mp\zombies\_wall_buys::getmagicboxhintsting(1));
+    var_0 setHintString(maps\mp\zombies\_wall_buys::getmagicboxhintsting(1));
     var_0 setsecondaryhintstring(maps\mp\zombies\_wall_buys::getmagicboxhintstringcost(1));
     var_0 maps\mp\zombies\_util::tokenhintstring(0);
     var_0 maps\mp\zombies\_wall_buys::deactivatemagicboxeffects(var_0.modelent, var_0.light);
     var_0 notify("fireSaleOver");
   } else {
-    var_0 sethintstring(maps\mp\zombies\_wall_buys::getmagicboxhintsting());
+    var_0 setHintString(maps\mp\zombies\_wall_buys::getmagicboxhintsting());
     var_0 setsecondaryhintstring(maps\mp\zombies\_wall_buys::getmagicboxhintstringcost());
     var_0 setsecondaryhintstring(var_0 maps\mp\zombies\_wall_buys::getmagicboxhintstringcost());
     var_0 maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(var_0.cost));

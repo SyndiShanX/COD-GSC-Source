@@ -977,7 +977,7 @@ findgoodsuppressspot(startoffset) {
   trace = bulletTrace(self.lastenemysightpos, currentenemypos, 0, undefined);
   starttracesat = trace["position"];
   percievedmovementvector = self.lastenemysightpos - starttracesat;
-  lookvector = vectornormalize(self.lastenemysightpos - startoffset);
+  lookvector = vectorNormalize(self.lastenemysightpos - startoffset);
   percievedmovementvector = percievedmovementvector - vectorscale(lookvector, vectordot(percievedmovementvector, lookvector));
   numtraces = int(length(percievedmovementvector) / 20.0 + 0.5);
 
@@ -1366,7 +1366,7 @@ isoktolookatentity() {
 
 entityinfront(origin) {
   forward = anglesToForward(self.angles);
-  dot = vectordot(forward, vectornormalize(origin - self.origin));
+  dot = vectordot(forward, vectorNormalize(origin - self.origin));
   return dot > 0.3;
 }
 

@@ -587,9 +587,9 @@ dropTheCrate(dropPoint, dropType, lbHeight, dropImmediately, crateOverride, star
   dropCrate = createAirDropCrate(self.owner, dropType, crateType, startPos);
 
   if(dropType == "airdrop_mega" || dropType == "nuke_drop") {
-    dropCrate LinkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
+    dropCrate linkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
   } else {
-    dropCrate LinkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
+    dropCrate linkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
   }
 
   dropCrate.angles = (0, 0, 0);
@@ -672,7 +672,7 @@ getPathEnd(coord, yaw) {
 getFlyHeightOffset(dropSite) {
   lbFlyHeight = 850;
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   if(!isDefined(heightEnt)) {
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
@@ -900,7 +900,7 @@ playloopOnEnt(alias) {
 
   soundOrg.origin = self.origin;
   soundOrg.angles = self.angles;
-  soundOrg linkto(self);
+  soundOrg linkTo(self);
 
   soundOrg playLoopSound(alias);
 
@@ -1237,7 +1237,7 @@ refillAmmo() {
 }
 
 useHoldThink(player, useTime) {
-  player playerLinkTo(self);
+  player playerlinkTo(self);
   player playerLinkedOffsetEnable();
 
   player _disableWeapon();

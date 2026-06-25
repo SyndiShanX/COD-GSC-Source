@@ -121,7 +121,7 @@ func_24AA(var_0, var_1) {
   for(var_4 = 0; var_4 < var_3; var_4++) {
     var_5 = spawn("script_model", self.origin + (0, 0, 50));
     var_5 setModel(level.bulletstormshield["section"].friendlymodel);
-    var_5 linkto(self, "tag_origin", var_2[var_4], (0, 90 * var_4 + 1, 0));
+    var_5 linkTo(self, "tag_origin", var_2[var_4], (0, 90 * var_4 + 1, 0));
     var_5 thread func_13B3A(var_1);
   }
 }
@@ -324,7 +324,7 @@ func_13B3A(var_0) {
 func_10A10(var_0, var_1, var_2, var_3, var_4) {
   self endon("death");
   if(isDefined(self)) {
-    self rotateyaw(var_0, var_1, var_2, var_3);
+    self rotateYaw(var_0, var_1, var_2, var_3);
   }
 
   wait(var_1);

@@ -52,7 +52,7 @@ missile_monitormisstarget(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_7 = anglesToForward(var_5.angles);
-    var_8 = vectornormalize(var_0.origin - var_5.origin);
+    var_8 = vectorNormalize(var_0.origin - var_5.origin);
   }
 
   if(isDefined(var_0)) {
@@ -113,7 +113,7 @@ do_evade(var_0) {
   self endon("kill_death_anim");
   var_9 = self.origin;
   var_10 = self.angles;
-  self animscripted("evading", var_9, var_10, var_5);
+  self animScripted("evading", var_9, var_10, var_5);
   self.allowdeath = 1;
   wait(var_6 - 0.05);
   thread maps\_vehicle_code::animate_drive_idle();
@@ -390,10 +390,10 @@ shootflares(var_0) {
   var_5.angles = var_2;
 
   if(self.flarerig_link) {
-    var_1 playrumbleonentity("smg_fire");
+    var_1 playRumbleOnEntity("smg_fire");
 
     if(isDefined(self.vehicle)) {
-      var_5 linkto(self.vehicle, "tag_origin");
+      var_5 linkTo(self.vehicle, "tag_origin");
     }
   }
 
@@ -405,7 +405,7 @@ shootflares(var_0) {
     var_15 = var_5 common_scripts\utility::spawn_tag_origin();
     var_15.origin = var_5 gettagorigin(var_14);
     var_15.angles = var_5 gettagangles(var_14);
-    var_15 linkto(var_5, var_14);
+    var_15 linkTo(var_5, var_14);
     var_15 thread flare_trackvelocity();
     var_11[var_14] = var_15;
   }
@@ -547,7 +547,7 @@ pairflareswithclosestmissile() {
 
       switch (var_2.type_missile) {
         case "guided":
-          var_2 missile_settargetent(var_3);
+          var_2 missile_settargetEnt(var_3);
           var_2 missile_setflightmodedirect();
           break;
         case "straight":

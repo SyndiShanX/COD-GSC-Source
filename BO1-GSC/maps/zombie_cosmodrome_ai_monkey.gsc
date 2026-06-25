@@ -16,7 +16,7 @@ init() {
 monkey_cosmodrome_enter_level() {
   self endon("death");
   end = self monkey_lander_get_closest_dest();
-  end_launch = getstruct(end.target, "targetname");
+  end_launch = getStruct(end.target, "targetname");
   start_launch = end_launch.origin + (0, 0, 2000);
   lander = spawn("script_model", start_launch);
   angles = VectorToAngles(end.origin - start_launch);
@@ -28,10 +28,10 @@ monkey_cosmodrome_enter_level() {
   wait_network_frame();
   lander setclientflag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_MONKEY_LANDER_FX);
   self forceteleport(lander.origin);
-  self linkto(lander);
+  self linkTo(lander);
   wait(2.5);
   lander show();
-  lander MoveTo(end.origin, 0.6);
+  lander moveTo(end.origin, 0.6);
   lander waittill("movedone");
   lander clearclientflag(level._SCRIPTMOVER_COSMODROME_CLIENT_FLAG_MONKEY_LANDER_FX);
   wait(2.0);

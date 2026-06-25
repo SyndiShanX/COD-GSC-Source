@@ -86,7 +86,7 @@ function function_8964c489(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_4df1985a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(bwastimejump, #"hash_37176262d696964e");
+  self playRumbleOnEntity(bwastimejump, #"hash_37176262d696964e");
 }
 
 function function_4264d325(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -129,7 +129,7 @@ function function_ab048a51(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwastimejump == 1) {
     if(!isDefined(self.var_76f19917)) {
       self.var_76f19917 = util::spawn_model(fieldname, "tag_origin", self.origin);
-      self.var_76f19917 linkto(self, fx_tag);
+      self.var_76f19917 linkTo(self, fx_tag);
       self.var_76f19917 thread function_d8e166f1(self);
     }
 
@@ -151,7 +151,7 @@ function function_564170b7(localclientnum) {
   player = function_5c10bd79(localclientnum);
 
   while(isDefined(player) && isDefined(self.var_c437eded)) {
-    dir = vectornormalize(player.origin - self.origin);
+    dir = vectorNormalize(player.origin - self.origin);
     var_96517510 = self gettagorigin("J_Spine4");
 
     if(!isDefined(var_96517510)) {
@@ -235,7 +235,7 @@ function function_ba2d251(localclientnum, target, val) {
   }
 
   self.var_2516545b = util::playFXOnTag(localclientnum, fxname, self, "tag_orgin");
-  target_dir = vectornormalize(target_pos - self.origin);
+  target_dir = vectorNormalize(target_pos - self.origin);
   self.angles = vectortoangles(target_dir);
   plane_vec = perpendicularvector(target_dir);
   rotation = randomint(360);
@@ -258,7 +258,7 @@ function function_ba2d251(localclientnum, target, val) {
     move_vec = target_dir * var_d785526d + start_dir * var_4f217ff7;
 
     if(length(move_vec) < distance) {
-      self moveto(self.origin + move_vec, 0.016);
+      self moveTo(self.origin + move_vec, 0.016);
     } else {
       self.origin = target_pos;
     }
@@ -280,7 +280,7 @@ function function_ba2d251(localclientnum, target, val) {
     }
 
     distance = distance(self.origin, target_pos);
-    target_dir = vectornormalize(target_pos - self.origin);
+    target_dir = vectorNormalize(target_pos - self.origin);
     var_4f217ff7 = var_4f217ff7 < 0 ? 0 : var_4f217ff7 - var_a6c0e687;
     var_d785526d = var_d785526d > max_speed ? max_speed : var_d785526d + var_725ea2c9;
   }
@@ -379,7 +379,7 @@ function function_97f75611(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_ddb51446(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(bwastimejump, #"hash_6fed0a32376b64b2");
+  self playRumbleOnEntity(bwastimejump, #"hash_6fed0a32376b64b2");
 
   if(self zm_utility::function_f8796df3(bwastimejump)) {
     if(viewmodelhastag(bwastimejump, "tag_flash")) {
@@ -670,7 +670,7 @@ function private function_cd07a2bb(localclientnum, oldval, newval, bnewent, bini
   if(bwastimejump == 1) {
     if(!isDefined(self.var_48531c81)) {
       self.var_48531c81 = util::spawn_model(fieldname, "tag_origin", self.origin);
-      self.var_48531c81 linkto(self, fx_tag);
+      self.var_48531c81 linkTo(self, fx_tag);
       self.var_48531c81 thread function_d8e166f1(self);
     }
 
@@ -689,7 +689,7 @@ function private function_cd07a2bb(localclientnum, oldval, newval, bnewent, bini
 
     var_e09ff13a = util::spawn_model(fieldname, "tag_origin", self.origin);
     var_e09ff13a.var_cc0e9e52 = util::playFXOnTag(fieldname, #"hash_4b9be18c0ce06e50", var_e09ff13a, "tag_origin");
-    var_e09ff13a linkto(self, fx_tag);
+    var_e09ff13a linkTo(self, fx_tag);
     var_e09ff13a thread function_bf22dbf0(fieldname, self);
     return;
   }

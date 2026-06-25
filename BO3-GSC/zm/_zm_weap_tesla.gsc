@@ -122,7 +122,7 @@ function tesla_sound_thread() {
     if(result == "weapon_change" || result == "grenade_fire" && (self getcurrentweapon() == level.weaponzmteslagun || self getcurrentweapon() == level.weaponzmteslagunupgraded)) {
       if(!isDefined(self.tesla_loop_sound)) {
         self.tesla_loop_sound = spawn("script_origin", self.origin);
-        self.tesla_loop_sound linkto(self);
+        self.tesla_loop_sound linkTo(self);
         self thread cleanup_loop_sound(self.tesla_loop_sound);
       }
       self.tesla_loop_sound playLoopSound("wpn_tesla_idle", 0.25);
@@ -193,7 +193,7 @@ function play_tesla_sound(emotion) {
     level.var_9533aed++;
     level.one_emo_at_a_time = 1;
     org = spawn("script_origin", self.origin);
-    org linkto(self);
+    org linkTo(self);
     org playsoundwithnotify(emotion, ("sound_complete" + "_") + level.var_9533aed);
     org waittill(("sound_complete" + "_") + level.var_9533aed);
     org delete();

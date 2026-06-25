@@ -32,11 +32,11 @@ setup_spinning_ents() {
   var_1 = getEntArray("spinning", "targetname");
 
   foreach(var_3 in var_1) {
-    var_4 = getent(var_3.script_linkto, "script_linkname");
+    var_4 = getEnt(var_3.script_linkto, "script_linkname");
     wait 1.0;
 
     if(isDefined(var_4)) {
-      var_3 linkto(var_0);
+      var_3 linkTo(var_0);
       var_3 thread maps\_utility::yaw_ent_by_linked(1.0);
       var_4 thread maps\_utility::rotate_ent_with_ent(var_3);
     }

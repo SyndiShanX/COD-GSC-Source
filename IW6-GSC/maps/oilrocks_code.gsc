@@ -270,7 +270,7 @@ spawn_apache_player(var_0, var_1, var_2) {
 spawn_apache_player_at_struct(var_0, var_1, var_2) {
   apache_sun_settings();
   var_3 = undefined;
-  var_4 = getent("vehicle_apache_player", "targetname");
+  var_4 = getEnt("vehicle_apache_player", "targetname");
   var_4.origin = var_0.origin + (0, 0, 128);
   var_4.angles = var_0.angles;
   var_3 = maps\_vehicle::vehicle_spawn(var_4);

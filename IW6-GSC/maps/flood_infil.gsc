@@ -78,7 +78,7 @@ infil_flyin_player() {
   level.player allowprone(0);
   level.player allowcrouch(0);
   level.player disableweapons();
-  var_0 = getent("player_heli_infil_clip", "targetname");
+  var_0 = getEnt("player_heli_infil_clip", "targetname");
   var_0 hide();
   var_0 notsolid();
   level.player screenshakeonentity(0.5, 0.5, 0.5, 21, 0, 3, 0, 2.35, 0.75, 0.75);
@@ -98,11 +98,11 @@ infil_flyin_player() {
   level.allies[2].script_startingposition = 6;
   var_1 maps\_utility::guy_enter_vehicle(level.allies[2]);
   var_1.player_link_ent = common_scripts\utility::spawn_tag_origin();
-  var_1.player_link_ent linkto(var_1, "tag_player", (20, 6, 0), (0, -66, 0));
+  var_1.player_link_ent linkTo(var_1, "tag_player", (20, 6, 0), (0, -66, 0));
   level.player playerlinktodelta(var_1.player_link_ent, "tag_player", 1, 0, 0, 0, 0, 1);
   level.player common_scripts\utility::delaycall(0.15, ::playerlinktodelta, var_1.player_link_ent, "tag_player", 1, 25, 25, 20, 20, 1);
   var_1 thread infil_flyin_player_unload_gt();
-  var_2 = common_scripts\utility::getstruct("player_chopper_lz", "targetname");
+  var_2 = common_scripts\utility::getStruct("player_chopper_lz", "targetname");
   var_2 waittill("trigger");
   thread maps\flood_audio::sfx_infil_heli_flyaway(var_1);
   wait 2.25;
@@ -251,7 +251,7 @@ infil_flyin_allies() {
 }
 
 vignette_old_choppers_for_test() {
-  var_0 = common_scripts\utility::getstruct("vignette_infil_old", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_infil_old", "script_noteworthy");
   var_1 = maps\_vignette_util::vignette_vehicle_spawn("infil_heli_player", "infil_heli_player");
   var_2 = maps\_vignette_util::vignette_vehicle_spawn("infil_heli_ally", "infil_heli_ally");
   var_3 = [];
@@ -276,7 +276,7 @@ infil_flyin_old() {
   var_1 vehicle_turnengineoff();
   thread maps\flood_audio::sfx_heli_infil();
   maps\_utility::delaythread(level.infil_global_offset + 9, maps\flood_fx::fx_heli_land);
-  var_7 = common_scripts\utility::getstruct("vignette_infil_old", "script_noteworthy");
+  var_7 = common_scripts\utility::getStruct("vignette_infil_old", "script_noteworthy");
   setsaveddvar("compass", 0);
   setsaveddvar("ammoCounterHide", 1);
   setsaveddvar("actionSlotsHide", 1);
@@ -291,11 +291,11 @@ infil_flyin_old() {
   var_8["infil_heli_ally"] = var_1;
   var_9 = maps\_utility::spawn_anim_model("player_rig");
   var_9 hide();
-  var_9 linkto(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
+  var_9 linkTo(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player playerlinktodelta(var_9, "tag_player", 1, 65, 65, 15, 15, 1);
-  level.allies[0] linkto(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
-  level.allies[1] linkto(var_0, "tag_player", (40, 300, 0), (0, 0, 0));
-  level.allies[2] linkto(var_0, "tag_player", (40, 200, 0), (0, 0, 0));
+  level.allies[0] linkTo(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
+  level.allies[1] linkTo(var_0, "tag_player", (40, 300, 0), (0, 0, 0));
+  level.allies[2] linkTo(var_0, "tag_player", (40, 200, 0), (0, 0, 0));
   var_10 = [];
   var_10["heli_01_copilot"] = var_2;
   var_11 = [];
@@ -308,11 +308,11 @@ infil_flyin_old() {
   var_12["heli_02_ally_04"] = var_6;
 
   foreach(var_14 in var_10) {
-    var_14 linkto(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
+    var_14 linkTo(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
   }
 
   foreach(var_14 in var_12) {
-    var_14 linkto(var_1, "tag_player", (0, 0, 0), (0, 0, 0));
+    var_14 linkTo(var_1, "tag_player", (0, 0, 0), (0, 0, 0));
   }
 
   var_7 thread maps\_anim::anim_single(var_8, "infil");
@@ -396,10 +396,10 @@ unlink_ally_from_heli(var_0) {
 }
 
 swap_hi_res_dam(var_0) {
-  var_1 = getent("flood_dam", "targetname");
+  var_1 = getEnt("flood_dam", "targetname");
   var_1 hide();
   wait(var_0);
-  var_1 = getent("flood_dam", "targetname");
+  var_1 = getEnt("flood_dam", "targetname");
   var_1 show();
 }
 
@@ -425,14 +425,14 @@ setup_dead_destroyed_and_misc() {
     common_scripts\utility::waitframe();
   }
 
-  var_8 = common_scripts\utility::getstruct("vignette_street_stop_sign_01", "script_noteworthy");
+  var_8 = common_scripts\utility::getStruct("vignette_street_stop_sign_01", "script_noteworthy");
   var_8 thread crush_stop_sign_when_near_tank(165);
 }
 
 create_dead_guys() {
   var_0 = 10;
   var_1 = 8;
-  var_2 = getent("dead_guy_ally", "targetname");
+  var_2 = getEnt("dead_guy_ally", "targetname");
   var_3 = getnodearray("infil_dead_ally_node", "targetname");
 
   for(var_4 = 0; var_4 < var_0; var_4++) {
@@ -464,7 +464,7 @@ setup_initial_ai() {
   var_4.script_noteworthy = "tanks_cleanup";
   level.lynx_smash_array = [];
   level.lynx_smash_array["lynx_smash"] = var_4;
-  var_5 = getent("lynx_smash_node", "targetname");
+  var_5 = getEnt("lynx_smash_node", "targetname");
   var_5 thread maps\_anim::anim_first_frame(level.lynx_smash_array, "lynx_smash");
   var_6 = maps\_utility::spawn_anim_model("flood_tank_battle_barrier_01");
   var_6.script_noteworthy = "tanks_cleanup";
@@ -479,7 +479,7 @@ setup_initial_ai() {
   level.tank_window_array["flood_tank_battle_barrier_02"] = var_7;
   level.tank_window_array["flood_tank_battle_window_frame"] = var_8;
   level.tank_window_array["flood_tank_battle_tankdebris"] = var_9;
-  var_5 = getent("tank_window_node", "targetname");
+  var_5 = getEnt("tank_window_node", "targetname");
   var_5 thread maps\_anim::anim_first_frame(level.tank_window_array, "tank_window");
 }
 
@@ -523,7 +523,7 @@ infil_sidestreet() {
   var_1 vehicle_setspeedimmediate(60, 999);
   var_1 maps\_vehicle::godon();
   var_1 vehicle_turnengineoff();
-  var_2 = common_scripts\utility::getstruct("infil_chopper_crash01", "targetname");
+  var_2 = common_scripts\utility::getStruct("infil_chopper_crash01", "targetname");
   var_1.perferred_crash_location = var_2;
   level maps\_utility::delaythread(3.2, ::kill_intro_chopper, var_1, var_1.riders);
   var_1 thread spawn_fx_at_hit_pos();
@@ -556,50 +556,50 @@ get_origin_for_rpg() {
 }
 
 create_passengers() {
-  var_0 = getent("infil_chooper_rider1", "targetname");
-  var_1 = getent("infil_chooper_rider2", "targetname");
-  var_2 = getent("infil_chooper_rider3", "targetname");
-  var_3 = getent("infil_chooper_rider4", "targetname");
+  var_0 = getEnt("infil_chooper_rider1", "targetname");
+  var_1 = getEnt("infil_chooper_rider2", "targetname");
+  var_2 = getEnt("infil_chooper_rider3", "targetname");
+  var_3 = getEnt("infil_chooper_rider4", "targetname");
   var_4 = var_0 maps\_utility::spawn_ai();
   var_4.script_noteworthy = "tanks_cleanup";
   var_5 = common_scripts\utility::spawn_tag_origin();
   var_5.script_noteworthy = "tanks_cleanup";
   var_5.origin = self gettagorigin("tag_detach_left");
   var_5.angles = self gettagangles("tag_detach_left");
-  var_5 linkto(self, "tag_detach_left");
+  var_5 linkTo(self, "tag_detach_left");
   var_5 thread maps\_anim::anim_generic_loop(var_4, "heli_idle1");
   var_4 teleport(var_5.origin, var_5.angles);
-  var_4 linkto(self);
+  var_4 linkTo(self);
   var_6 = var_1 maps\_utility::spawn_ai();
   var_6.script_noteworthy = "tanks_cleanup";
   var_7 = common_scripts\utility::spawn_tag_origin();
   var_7.script_noteworthy = "tanks_cleanup";
   var_7.origin = self gettagorigin("tag_detach_left");
   var_7.angles = self gettagangles("tag_detach_left");
-  var_7 linkto(self);
+  var_7 linkTo(self);
   var_7 thread maps\_anim::anim_generic_loop(var_6, "heli_idle2");
   var_6 teleport(var_7.origin, var_7.angles);
-  var_6 linkto(self);
+  var_6 linkTo(self);
   var_8 = var_2 maps\_utility::spawn_ai();
   var_8.script_noteworthy = "tanks_cleanup";
   var_9 = common_scripts\utility::spawn_tag_origin();
   var_9.script_noteworthy = "tanks_cleanup";
   var_9.origin = self gettagorigin("tag_detach_right");
   var_9.angles = self gettagangles("tag_detach_right");
-  var_9 linkto(self);
+  var_9 linkTo(self);
   var_9 thread maps\_anim::anim_generic_loop(var_8, "heli_idle1");
   var_8 teleport(var_9.origin, var_9.angles);
-  var_8 linkto(self);
+  var_8 linkTo(self);
   var_10 = var_3 maps\_utility::spawn_ai();
   var_10.script_noteworthy = "tanks_cleanup";
   var_11 = common_scripts\utility::spawn_tag_origin();
   var_11.script_noteworthy = "tanks_cleanup";
   var_11.origin = self gettagorigin("tag_detach_right");
   var_11.angles = self gettagangles("tag_detach_right");
-  var_11 linkto(self);
+  var_11 linkTo(self);
   var_11 thread maps\_anim::anim_generic_loop(var_10, "heli_idle2");
   var_10 teleport(var_11.origin, var_11.angles);
-  var_10 linkto(self);
+  var_10 linkTo(self);
   var_12 = [];
   var_12[var_12.size] = var_4;
   var_12[var_12.size] = var_6;
@@ -614,7 +614,7 @@ kill_intro_chopper(var_0, var_1) {
 
   foreach(var_3 in var_0.infil_passengers) {
     var_3 unlink();
-    var_3 stopanimscripted();
+    var_3 stopanimScripted();
     var_3 kill();
     var_3 startragdollfromimpact("torso_upper", anglesToForward(var_3.angles) * 3000);
     wait(randomfloatrange(0.25, 0.85));
@@ -630,8 +630,8 @@ tank_damage_player(var_0, var_1) {
     var_2 = spawn("trigger_radius", self.origin + 130 * anglesToForward(self.angles), 0, 70, 70);
   }
 
-  var_2 enablelinkto();
-  var_2 linkto(self);
+  var_2 enablelinkTo();
+  var_2 linkTo(self);
 
   while(isDefined(var_2)) {
     var_2 waittill("trigger");
@@ -649,16 +649,16 @@ tank_damage_player(var_0, var_1) {
         level.player dodamage(var_3, level.player.origin);
       }
 
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
       wait 0.1;
     }
 
     if(!isalive(level.player)) {
       setDvar("ui_deadquote", &"FLOOD_FAIL_VEHICLE_CRUSH");
-      self stopanimscripted();
+      self stopanimScripted();
 
       foreach(var_5 in level.lynx_smash_array) {
-        var_5 stopanimscripted();
+        var_5 stopanimScripted();
       }
     }
   }
@@ -672,7 +672,7 @@ tank_battle() {
   level.tank_ally_joel maps\_vehicle::godon();
   level.tank_ally_joel maps\_utility::delaythread(0.25, maps\_vehicle::mgoff);
   level.tank_ally_joel vehicle_setspeed(12, 6);
-  var_0 = getent("infil_tank_ally_pease", "targetname");
+  var_0 = getEnt("infil_tank_ally_pease", "targetname");
   var_1 = var_0 maps\_vehicle::spawn_vehicle_and_gopath();
   var_1 vehicle_setspeed(12, 12);
   var_1 maps\_vehicle::godon();
@@ -747,7 +747,7 @@ tank_battle() {
   level thread maps\_utility::smart_radio_dialogue("flood_tnk_ineedvisualon");
   level thread maps\_utility::smart_radio_dialogue("flood_tnk_onethreeengageleftgunner");
   var_13 = % flood_tank_battle_lynx_smash_tank;
-  var_14 = getent("lynx_smash_node", "targetname");
+  var_14 = getEnt("lynx_smash_node", "targetname");
   var_15 = spawnStruct();
   var_15.origin = getstartorigin(var_14.origin, var_14.angles, var_13);
   var_15.angles = getstartangles(var_14.origin, var_14.angles, var_13);
@@ -757,14 +757,14 @@ tank_battle() {
   common_scripts\utility::flag_wait("player_at_corner");
   level.tank_ally_joel.mgturret[0] setmode("manual");
   level.tank_ally_joel.mgturret[0] stopbarrelspin();
-  var_0 = getent("enemy_tank_2", "targetname");
+  var_0 = getEnt("enemy_tank_2", "targetname");
   level.enemy_tank_2 = var_0 maps\_utility::spawn_vehicle();
   level.enemy_tank_2 thread tank_invulnerable_warning();
   level.enemy_tank_2 maps\_vehicle::godon();
   level.enemy_tank_2 maps\_utility::delaythread(0.25, maps\_vehicle::mgoff);
   level.enemy_tank_2 maps\_vehicle::gopath();
   level.enemy_tank_2 vehicle_setspeedimmediate(6, 5);
-  var_0 = getent("enemy_tank_3", "targetname");
+  var_0 = getEnt("enemy_tank_3", "targetname");
   level.enemy_tank_3 = var_0 maps\_utility::spawn_vehicle();
   level.enemy_tank_3 thread tank_invulnerable_warning();
   level.enemy_tank_3 maps\_vehicle::godon();
@@ -774,19 +774,19 @@ tank_battle() {
   level maps\_utility::delaythread(9, maps\_vehicle::spawn_vehicles_from_targetname_and_drive, "tanks_mainstreet_driveby");
   level maps\_utility::delaythread(14, ::kill_player_with_tanks, "tanks_patio_loitering");
   wait 2;
-  var_16 = getent("tank_target_balcony", "targetname");
+  var_16 = getEnt("tank_target_balcony", "targetname");
   level.tank_ally_joel thread maps\_utility::smart_radio_dialogue_overlap("flood_us12_on");
   level.tank_ally_joel fire_cannon_at_target(var_16, 1, undefined, undefined, "flood_us7_away");
   level thread maps\_utility::kill_deathflag("streets_wave_2a");
   wait 1.75;
-  var_16 = getent("tank_target_planters", "targetname");
+  var_16 = getEnt("tank_target_planters", "targetname");
   level.tank_ally_joel thread maps\_utility::smart_radio_dialogue_overlap("flood_us11_on");
   level.tank_ally_joel fire_cannon_at_target(var_16, 1, undefined, undefined, "flood_us7_away");
   level thread maps\flood_streets::destroy_planter("planter_06");
   level thread maps\flood_streets::destroy_planter("planter_08");
   level thread maps\_utility::kill_deathflag("streets_wave_2b");
   level.tank_ally_joel.mgturret[0] common_scripts\utility::delaycall(5.5, ::settargetentity, level.enemy_tank_2, (0, 0, 45));
-  var_17 = getent("enemy_tank_2_garage_target", "targetname");
+  var_17 = getEnt("enemy_tank_2_garage_target", "targetname");
   level.tank_ally_joel common_scripts\utility::delaycall(3, ::setturrettargetvec, var_17.origin + (400, 0, 300));
   level.tank_ally_joel common_scripts\utility::delaycall(10, ::setturrettargetent, level.enemy_tank_2);
   level thread enemy_mg_pin_down_player(level.enemy_tank_2.mgturret[1], level.enemy_tank_3.mgturret[1]);
@@ -794,11 +794,11 @@ tank_battle() {
   level maps\_utility::delaythread(4, maps\_utility::smart_radio_dialogue, "flood_gs5_twotargetsat10");
   level thread maps\_utility::activate_trigger_with_targetname("second_street_advance");
   level thread animated_script_model(level.tank_ally_joel, var_14, #animtree, var_13);
-  var_18 = getent("lynx_smash_col_tank_back", "targetname");
-  var_18 moveto(var_18.origin + (0, -224, 96), 0.05);
+  var_18 = getEnt("lynx_smash_col_tank_back", "targetname");
+  var_18 moveTo(var_18.origin + (0, -224, 96), 0.05);
   var_18 common_scripts\utility::delaycall(0.1, ::linkto, level.tank_ally_joel);
   level.tank_ally_joel notify("suspend_drive_anims");
-  level.tank_ally_joel animscripted("tank_animation", var_14.origin, var_14.angles, var_13);
+  level.tank_ally_joel animScripted("tank_animation", var_14.origin, var_14.angles, var_13);
   level.tank_ally_joel maps\_utility::delaythread(3, ::tank_damage_player);
   level.tank_ally_joel common_scripts\utility::delaycall(3.25, ::playrumblelooponentity, "tank_rumble");
   var_14 thread maps\_anim::anim_single(level.lynx_smash_array, "lynx_smash");
@@ -817,7 +817,7 @@ tank_battle() {
 
   level thread maps\flood_util::hide_models_by_targetname("lynx_smash_col_before");
   level.tank_ally_joel kill();
-  level.tank_ally_joel playrumbleonentity("heavy_1s");
+  level.tank_ally_joel playRumbleOnEntity("heavy_1s");
 
   foreach(var_23 in level.allies) {
     var_23.forcesuppression = 1;
@@ -828,28 +828,28 @@ tank_battle() {
   level thread set_flag_after_timer("allies_in_position", 5);
   common_scripts\utility::flag_wait("allies_in_position");
   wait 3;
-  var_25 = getent("enemy_tank_2_window_target", "targetname");
+  var_25 = getEnt("enemy_tank_2_window_target", "targetname");
   level.player.og_health = level.player.health;
   level.player.demigod = 1;
   level.enemy_tank_3 fire_cannon_at_target(var_25, 1);
-  var_25 playrumbleonentity("heavy_1s");
+  var_25 playRumbleOnEntity("heavy_1s");
   level.player maps\_utility::delaythread(0.2, ::disable_demigod);
   level thread maps\_utility::kill_deathflag("infil_ally_redshirt");
   thread maps\flood_audio::sfx_tank_bust_wall();
   wait 4;
   wait 1;
   var_13 = % flood_tank_battle_window_tank;
-  var_14 = getent("tank_window_node", "targetname");
+  var_14 = getEnt("tank_window_node", "targetname");
   var_15 = spawnStruct();
   var_15.origin = getstartorigin(var_14.origin, var_14.angles, var_13);
   var_15.angles = getstartangles(var_14.origin, var_14.angles, var_13);
-  var_26 = getent("allied_tank_2", "targetname");
+  var_26 = getEnt("allied_tank_2", "targetname");
   var_26 = var_26 maps\_utility::spawn_vehicle();
   var_26 maps\_vehicle::godon();
-  level.tank_wall_sfx linkto(var_26, "tag_origin", (120, 0, 100), (0, 0, 0));
+  level.tank_wall_sfx linkTo(var_26, "tag_origin", (120, 0, 100), (0, 0, 0));
   level thread animated_script_model(var_26, var_14, #animtree, var_13);
   var_26 notify("suspend_drive_anims");
-  var_26 animscripted("tank_animation", var_14.origin, var_14.angles, var_13);
+  var_26 animScripted("tank_animation", var_14.origin, var_14.angles, var_13);
   var_26 playrumblelooponentity("tank_rumble");
   var_26 common_scripts\utility::delaycall(3, ::playrumbleonentity, "heavy_1s");
   var_26 common_scripts\utility::delaycall(4.75, ::stoprumble, "tank_rumble");
@@ -858,14 +858,14 @@ tank_battle() {
   var_14 thread maps\_anim::anim_single(level.tank_window_array, "tank_window");
   thread maps\flood_fx::fx_tank_window_break();
   var_26 common_scripts\utility::delaycall(1.5, ::playrumbleonentity, "heavy_2s");
-  var_25 = getent("tank_wallsmash_debris_col", "targetname");
+  var_25 = getEnt("tank_wallsmash_debris_col", "targetname");
   var_25 common_scripts\utility::delaycall(4, ::movez, 24, 0.1);
   wait 2.63;
-  var_25 = getent("flag_remove_after_window_tank", "targetname");
+  var_25 = getEnt("flag_remove_after_window_tank", "targetname");
   var_25 common_scripts\utility::trigger_off();
-  var_25 = getent("streets_run_for_it", "targetname");
+  var_25 = getEnt("streets_run_for_it", "targetname");
   var_25 common_scripts\utility::trigger_off();
-  var_27 = getent("allied_tank_2_blocker", "targetname");
+  var_27 = getEnt("allied_tank_2_blocker", "targetname");
   var_27 notsolid();
   level.enemy_tank_2.veh_pathdir = "reverse";
   level.enemy_tank_2.veh_transmission = "reverse";
@@ -898,7 +898,7 @@ tank_battle() {
   level.allies[1] thread allies_run_for_garage();
   level.allies[2] thread allies_run_for_garage();
   wait 1;
-  var_26 setturrettargetent(level.enemy_tank_3);
+  var_26 setturrettargetEnt(level.enemy_tank_3);
   wait 0.5;
   level.enemy_tank_3 fire_cannon_at_target(var_26, 1, (0, 0, 60));
   level.enemy_tank_3 vehicle_setspeed(0);
@@ -915,7 +915,7 @@ tank_battle() {
   }
 
   var_26 kill();
-  var_26 playrumbleonentity("heavy_1s");
+  var_26 playRumbleOnEntity("heavy_1s");
   maps\_utility::battlechatter_on("allies");
 }
 
@@ -1016,11 +1016,11 @@ garage_wave() {
 
 release_waver() {
   level.player endon("death");
-  var_0 = getent("tanks_release_waver", "targetname");
+  var_0 = getEnt("tanks_release_waver", "targetname");
   var_0 waittill("trigger");
   level notify("waver_stop");
   self notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   level thread maps\_utility::activate_trigger_with_targetname("release_waver");
   self.goalradius = self.og_goalradius;
 }
@@ -1098,9 +1098,9 @@ enemy_mg_pin_down_player(var_0, var_1) {
           level.infil_rpg_guy.baseaccuracy = 0;
         }
 
-        level.enemy_tank_3 setturrettargetent(level.player);
+        level.enemy_tank_3 setturrettargetEnt(level.player);
         var_1 setconvergencetime(0);
-        var_1 settargetentity(getent("tank_window_node", "targetname"));
+        var_1 settargetentity(getEnt("tank_window_node", "targetname"));
         var_1 startfiring();
         var_1 common_scripts\utility::delaycall(1, ::setconvergencetime, 2);
         var_1 common_scripts\utility::delaycall(1, ::settargetentity, level.player);
@@ -1221,7 +1221,7 @@ animated_script_model(var_0, var_1, var_2, var_3) {
   var_5 = spawn("script_model", var_1.origin);
   var_5 setModel(var_0.model);
   var_5 useanimtree(var_2);
-  var_5 animscripted("blah", var_1.origin + var_4, var_1.angles, var_3);
+  var_5 animScripted("blah", var_1.origin + var_4, var_1.angles, var_3);
   var_0 waittill("death");
   wait 1;
   var_5 delete();
@@ -1236,7 +1236,7 @@ allies_run_for_garage() {
 }
 
 tank_wall_stuff() {
-  var_0 = getent("enemy_tank", "targetname");
+  var_0 = getEnt("enemy_tank", "targetname");
   var_1 = var_0 maps\_vehicle::spawn_vehicle_and_gopath();
   level.enemy_tank_wall = var_1;
   var_1 maps\_vehicle::godon();
@@ -1285,7 +1285,7 @@ infil_redshirts_spawn_func() {
 }
 
 rpg_guy_shoot_flyin_choopers() {
-  var_0 = getent("infil_rpg_guy_start", "targetname");
+  var_0 = getEnt("infil_rpg_guy_start", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
   level.infil_rpg_guy = var_1;
   var_1 endon("death");
@@ -1301,7 +1301,7 @@ rpg_guy_shoot_flyin_choopers() {
   var_1.ignoreme = 1;
   common_scripts\utility::waitframe();
   var_2 = var_1 gettagorigin("tag_flash") + (0, 0, 50);
-  var_3 = common_scripts\utility::getstruct("rpg_guy_target1", "targetname");
+  var_3 = common_scripts\utility::getStruct("rpg_guy_target1", "targetname");
   common_scripts\utility::noself_delaycall(1, ::magicbullet, "rpg_straight", var_2 + (0, 0, 50), var_3.origin);
   var_1 maps\_anim::anim_generic(var_1, "rpg_reload");
   magicbullet("rpg_straight", var_2, level.player.origin + (0, 100, 100));
@@ -1318,14 +1318,14 @@ rpg_guy_shoot_flyin_choopers() {
   var_1.ignoreall = 0;
   var_1.ignoreme = 0;
   common_scripts\utility::flag_wait("enemy_tank_killed");
-  var_4 = getent("streets_enemy_tank_soldiers_goal_volume_2", "targetname");
+  var_4 = getEnt("streets_enemy_tank_soldiers_goal_volume_2", "targetname");
   var_1 setgoalvolumeauto(var_4);
 }
 
 follow_tank_enemies_spawn_func() {
   self endon("death");
   thread enemies_attack_player_when_in_open();
-  var_0 = getent("streets_enemy_tank_soldiers_goal_volume", "targetname");
+  var_0 = getEnt("streets_enemy_tank_soldiers_goal_volume", "targetname");
   self setgoalvolumeauto(var_0);
   maps\_utility::magic_bullet_shield();
   self.ignoreall = 1;
@@ -1340,7 +1340,7 @@ follow_tank_enemies_spawn_func() {
   maps\_utility::stop_magic_bullet_shield();
   common_scripts\utility::flag_wait("enemy_tank_killed");
   self.ignoreall = 0;
-  var_0 = getent("streets_enemy_tank_soldiers_goal_volume_2", "targetname");
+  var_0 = getEnt("streets_enemy_tank_soldiers_goal_volume_2", "targetname");
   self setgoalvolumeauto(var_0);
   wait 1;
   self.attackeraccuracy = 1;
@@ -1443,17 +1443,17 @@ rotate_barrier_when_near_tank(var_0) {
     common_scripts\utility::waitframe();
   }
 
-  self rotateto(var_2 + (0, 0, -10), 0.2);
+  self rotateTo(var_2 + (0, 0, -10), 0.2);
   wait 0.2;
-  self rotateto(var_1, 0.6);
+  self rotateTo(var_1, 0.6);
   wait 0.6;
-  self rotateto(var_1 + (0, 0, 5), 0.15);
+  self rotateTo(var_1 + (0, 0, 5), 0.15);
   wait 0.15;
-  self rotateto(var_1, 0.15);
+  self rotateTo(var_1, 0.15);
   wait 0.1;
-  self rotateto(var_1 + (0, 0, -5), 0.1);
+  self rotateTo(var_1 + (0, 0, -5), 0.1);
   wait 0.1;
-  self rotateto(var_1, 0.1);
+  self rotateTo(var_1, 0.1);
 }
 
 fire_cannon_at_target(var_0, var_1, var_2, var_3, var_4) {
@@ -1499,7 +1499,7 @@ set_flag_when_allies_in_garage() {
   var_3 = 1;
 
   while(var_0 || var_1 || var_2 || var_3) {
-    var_4 = getent("parking_garage_doorway", "targetname");
+    var_4 = getEnt("parking_garage_doorway", "targetname");
     var_4 waittill("trigger", var_5);
 
     if(level.player istouching(var_4)) {
@@ -1560,7 +1560,7 @@ set_flag_when_allies_in_position() {
   while(var_3 && !common_scripts\utility::flag("allies_in_position")) {
     var_4 = 0;
     var_5 = 0;
-    var_6 = getent("ally_behind_planter", "targetname");
+    var_6 = getEnt("ally_behind_planter", "targetname");
 
     foreach(var_1 in level.street_start_allies) {
       if(isDefined(var_1)) {
@@ -1621,12 +1621,12 @@ infil_flyin_battle() {
   var_1 = getEntArray("infil_flyin_battle_tank_ally_hummer", "targetname");
   var_2 = getEntArray("infil_flyin_battle_tank_ally", "targetname");
   var_3 = getEntArray("infil_flyin_battle_static", "targetname");
-  var_4 = getent("infil_flyin_battle_tank_enemy", "targetname");
-  var_5 = common_scripts\utility::getstruct("infil_flyin_battle_tank_enemy_target", "targetname");
+  var_4 = getEnt("infil_flyin_battle_tank_enemy", "targetname");
+  var_5 = common_scripts\utility::getStruct("infil_flyin_battle_tank_enemy_target", "targetname");
   var_6 = common_scripts\utility::getStructArray("infil_flyin_battle_tank_enemy_barrier_target", "targetname");
-  var_7 = getent("infil_flyin_battle_tank_ally_aim", "targetname");
-  var_8 = getent("infil_flyin_battle_tank_ally_bridge_l", "targetname");
-  var_9 = getent("infil_flyin_battle_tank_ally_bridge_r", "targetname");
+  var_7 = getEnt("infil_flyin_battle_tank_ally_aim", "targetname");
+  var_8 = getEnt("infil_flyin_battle_tank_ally_bridge_l", "targetname");
+  var_9 = getEnt("infil_flyin_battle_tank_ally_bridge_r", "targetname");
 
   foreach(var_11 in var_0) {
     var_11 kill();
@@ -1744,23 +1744,23 @@ streets() {
   level thread maps\flood_streets::hide_spire();
   level thread maps\flood_streets::hide_garage_debris();
   level thread maps\flood_streets::garage_opening_collapse();
-  var_0 = getent("into_parking_garage", "targetname");
+  var_0 = getEnt("into_parking_garage", "targetname");
   var_0 waittill("trigger");
   level notify("end_streets");
 }
 
 kill_player_with_tanks(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
 
   if(isalive(level.enemy_tank_2)) {
-    level.enemy_tank_2 setturrettargetent(level.player);
+    level.enemy_tank_2 setturrettargetEnt(level.player);
     wait 0.5;
     level.enemy_tank_2 fireweapon();
   }
 
   if(isalive(level.enemy_tank_3)) {
-    level.enemy_tank_3 setturrettargetent(level.player);
+    level.enemy_tank_3 setturrettargetEnt(level.player);
     wait 0.5;
     level.enemy_tank_3 fireweapon();
   }
@@ -1778,7 +1778,7 @@ kill_player_with_tanks(var_0) {
 }
 
 streets_battle_blackhawk() {
-  var_0 = getent("trig_battle_blackhawk_fight", "targetname");
+  var_0 = getEnt("trig_battle_blackhawk_fight", "targetname");
   var_0 waittill("trigger");
   thread streets_battle_fire_rocket("streets_battle_blackhawk_rocket_1", "streets_battle_blackhawk_missile_impact_1");
   wait 0.9;
@@ -1793,11 +1793,11 @@ streets_battle_blackhawk() {
 }
 
 streets_battle_fire_rocket(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2 thread maps\_utility::add_spawn_function(::postspawn_crash_blackhawk_rocket);
   var_3 = var_2 maps\_vehicle::spawn_vehicle_and_gopath();
   var_3 waittill("reached_end_node");
-  var_4 = getent(var_1, "targetname");
+  var_4 = getEnt(var_1, "targetname");
   playFX(level._effect["temp_missile_impact"], var_4.origin);
 }
 
@@ -1848,7 +1848,7 @@ crash_blackhawk_missile_impacts() {
 }
 
 blackhawk_countermeasure() {
-  var_0 = getent("trig_countermeasure_blackhawk", "targetname");
+  var_0 = getEnt("trig_countermeasure_blackhawk", "targetname");
   var_0 waittill("trigger");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("streets_countermeasure_blackhawk");
   var_1.script_vehicle_selfremove = 1;
@@ -1857,11 +1857,11 @@ blackhawk_countermeasure() {
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_1 gettagorigin("tag_light_l_wing");
   var_3.angles = var_1 gettagangles("tag_light_l_wing");
-  var_3 linkto(var_1);
+  var_3 linkTo(var_1);
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_4.origin = var_1 gettagorigin("tag_light_r_wing");
   var_4.angles = var_1 gettagangles("tag_light_r_wing");
-  var_4 linkto(var_1);
+  var_4 linkTo(var_1);
   wait 2.75;
 
   for(var_5 = 0; var_5 < 5; var_5++) {
@@ -1873,8 +1873,8 @@ blackhawk_countermeasure() {
 }
 
 nh90_convoy_choppers() {
-  var_0 = getent("convoy_helicopter_crash_location", "targetname");
-  var_1 = getent("trig_enemy_convoy_choppers", "targetname");
+  var_0 = getEnt("convoy_helicopter_crash_location", "targetname");
+  var_1 = getEnt("trig_enemy_convoy_choppers", "targetname");
   var_1 waittill("trigger");
 
   if(!common_scripts\utility::flag("m880_has_spawned")) {

@@ -278,7 +278,7 @@ memberCombatWaiter() {
 }
 updateHeading() {
   if(isDefined(self.enemy)) {
-    self.forward = VectorNormalize(self.enemy.origin - self.origin);
+    self.forward = vectorNormalize(self.enemy.origin - self.origin);
     return;
   }
   newHeading = (0, 0, 0);

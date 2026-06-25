@@ -287,7 +287,7 @@ function_55625f76(spot_origin, spot_angles, anim_name, var_16dd87ad) {
 
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   if(!isDefined(spot_angles)) {
     spot_angles = (0, 0, 0);
@@ -297,7 +297,7 @@ function_55625f76(spot_origin, spot_angles, anim_name, var_16dd87ad) {
   anim_ang = spot_angles;
   anim_org += (0, 0, 0);
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill(#"movedone");
   self unlink();
 
@@ -307,7 +307,7 @@ function_55625f76(spot_origin, spot_angles, anim_name, var_16dd87ad) {
 
   self thread hide_pop(var_16dd87ad);
   self orientmode("face default");
-  self animscripted("rise_anim", self.origin, spot_angles, anim_name, "normal");
+  self animScripted("rise_anim", self.origin, spot_angles, anim_name, "normal");
   self notify(#"rise_anim_finished");
   self.in_the_ground = 0;
   self clientfield::set("zombie_riser_fx", 0);
@@ -326,7 +326,7 @@ function_c9a1a3bd(spot_origin, spot_angles, anim_name, var_c2a69066) {
 
   self clientfield::set("zombie_riser_fx", 1);
   self.is_digging = 1;
-  self animscripted("dig_anim", self.origin, self.angles, anim_name, "normal");
+  self animScripted("dig_anim", self.origin, self.angles, anim_name, "normal");
   self waittillmatch({
     #notetrack: "end"}, #"dig_anim");
   self ghost();
@@ -371,14 +371,14 @@ function_92c7e9a9(ai_zone) {
       n_duration = sqrt(dist_sq) / speed;
 
       if(n_duration > 0.2) {
-        wisp moveto(end_point, n_duration, 0.1, 0.1);
+        wisp moveTo(end_point, n_duration, 0.1, 0.1);
       }
 
       wait n_duration;
     }
 
     if(isalive(self) && isDefined(wisp)) {
-      wisp linkto(self, "j_helmet", (0, 0, 0), (0, 0, 0));
+      wisp linkTo(self, "j_helmet", (0, 0, 0), (0, 0, 0));
       wisp clientfield::set("soultransfer", 0);
       self waittill(#"death");
 
@@ -387,7 +387,7 @@ function_92c7e9a9(ai_zone) {
         wisp unlink();
         end_point = wisp.origin + (0, 0, 60);
         n_duration = 1;
-        wisp moveto(end_point, n_duration, 0.1, 0.1);
+        wisp moveTo(end_point, n_duration, 0.1, 0.1);
         wait n_duration;
       }
     }
@@ -532,7 +532,7 @@ ai_wz_can_see() {
   }
 
   players_in_zone = [];
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].ai_zone) && isDefined(self.ai_zone) && players[i].ai_zone == self.ai_zone) {
@@ -614,7 +614,7 @@ ai_wz_can_see() {
 get_closest_player(str_zone, v_origin) {
   n_closest_dist = 9999999;
   var_655f39be = undefined;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].ai_zone) && players[i].ai_zone == str_zone) {
@@ -969,7 +969,7 @@ function_bf357ddf(spawnpt, itemlist) {
 }
 
 function_ac114e1f(spawnpt, aitype, zone_name) {
-  players = getplayers();
+  players = getPlayers();
   spawned = spawnactor(aitype, spawnpt.origin, spawnpt.angles, "wz_dyn_ai");
 
   if(isDefined(spawned)) {

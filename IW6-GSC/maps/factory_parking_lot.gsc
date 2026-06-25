@@ -108,7 +108,7 @@ parking_lot_allies_take_cover() {
 }
 
 parking_lot_ally_location_check() {
-  var_0 = getent("loading_dock_cover", "targetname");
+  var_0 = getEnt("loading_dock_cover", "targetname");
 
   for(;;) {
     var_1 = var_0 maps\_utility::get_ai_touching_volume("allies");
@@ -138,7 +138,7 @@ parking_lot_blockade_vehicle_1(var_0) {
   level.blockade_vehicle_1 thread maps\factory_audio::sfx_jeep_drive_up_01();
   level.blockade_vehicle_1 maps\_vehicle::godon();
   level.blockade_vehicle_1.animname = "first_opfor_car";
-  var_1 = getent("car_chase_intro", "script_noteworthy");
+  var_1 = getEnt("car_chase_intro", "script_noteworthy");
   level.blockade_vehicle_1 notify("suspend_drive_anims");
   var_1 thread maps\_anim::anim_single_solo(level.blockade_vehicle_1, "car_chase_intro_pullup");
   wait 3;
@@ -157,7 +157,7 @@ parking_lot_blockade_vehicle_2(var_0) {
   level.blockade_vehicle_2 thread maps\factory_audio::sfx_jeep_drive_up_02();
   level.blockade_vehicle_2 maps\_vehicle::godon();
   level.blockade_vehicle_2.animname = "second_opfor_car";
-  var_1 = getent("car_chase_intro", "script_noteworthy");
+  var_1 = getEnt("car_chase_intro", "script_noteworthy");
   level.blockade_vehicle_2 notify("suspend_drive_anims");
   var_1 thread maps\_anim::anim_single_solo(level.blockade_vehicle_2, "car_chase_intro_pullup");
   wait 3.5;
@@ -174,7 +174,7 @@ parking_lot_blockade_vehicle_3(var_0) {
   level.blockade_vehicle_3 thread maps\factory_audio::sfx_tank_drive_up();
   level.blockade_vehicle_3 maps\_vehicle::godon();
   level.blockade_vehicle_3.animname = "heavy_weapon_opfor_car";
-  var_1 = getent("car_chase_intro", "script_noteworthy");
+  var_1 = getEnt("car_chase_intro", "script_noteworthy");
   level.blockade_vehicle_3 notify("suspend_drive_anims");
   var_1 thread maps\_anim::anim_single_solo(level.blockade_vehicle_3, "car_chase_intro_pullup");
   wait 2.5;
@@ -203,7 +203,7 @@ parking_lot_blockade_vehicle_death_radius() {
 }
 
 parking_lot_fire_hydrant_explodes() {
-  var_0 = getent("parking_lot_apc_target_02", "targetname");
+  var_0 = getEnt("parking_lot_apc_target_02", "targetname");
   radiusdamage(var_0.origin, 100, 5000, 5000, level.player);
 }
 

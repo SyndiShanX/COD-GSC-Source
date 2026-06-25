@@ -479,8 +479,8 @@ assault_vehicle_ai_weapons(var_0) {
           var_10 = self vehicleget3ppitchclamp();
           var_11 = angleclamp180(var_9[0]);
           var_12 = var_11 < var_10 && var_11 > -1 * var_10;
-          var_13 = vectornormalize(anglesToForward(self.angles) * (1, 1, 0));
-          var_14 = vectornormalize(var_8 * (1, 1, 0));
+          var_13 = vectorNormalize(anglesToForward(self.angles) * (1, 1, 0));
+          var_14 = vectorNormalize(var_8 * (1, 1, 0));
           var_15 = vectordot(var_13, var_14) > 0.9;
 
           if(var_12 && var_15) {

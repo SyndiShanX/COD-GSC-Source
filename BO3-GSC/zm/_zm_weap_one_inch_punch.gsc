@@ -241,7 +241,7 @@ function zombie_punch_death(ai_zombie) {
   }
   if(isDefined(ai_zombie)) {
     ai_zombie startragdoll();
-    v_launch = (vectornormalize(ai_zombie.origin - self.origin)) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
+    v_launch = (vectorNormalize(ai_zombie.origin - self.origin)) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
     ai_zombie launchragdoll(v_launch);
   }
 }
@@ -277,7 +277,7 @@ function knockdown_zombie_animate() {
   animation_legs = "";
   animation_side = undefined;
   animation_duration = "_default";
-  v_forward = vectordot(anglesToForward(self.angles), vectornormalize(self.v_punched_from - self.origin));
+  v_forward = vectordot(anglesToForward(self.angles), vectorNormalize(self.v_punched_from - self.origin));
   if(v_forward > 0.6) {
     animation_direction = "back";
     if(isDefined(self.missinglegs) && self.missinglegs) {

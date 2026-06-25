@@ -100,7 +100,7 @@ flare_path() {
 flare_initial_fx() {
   model = spawn("script_model", (0, 0, 0));
   model setModel("tag_origin");
-  model linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  model linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_intro"], model, "tag_origin");
   self waittillmatch("noteworthy", "flare_intro_node");
   model delete();
@@ -122,7 +122,7 @@ flare_explodes() {
 
   model2 = spawn("script_model", (0, 0, 0));
   model2 setModel("tag_origin");
-  model2 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  model2 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner"], model2, "tag_origin");
   self waittillmatch("noteworthy", "flare_fade_node");
 
@@ -132,7 +132,7 @@ flare_explodes() {
 flare_burns_out() {
   model3 = spawn("script_model", (0, 0, 0));
   model3 setModel("tag_origin");
-  model3 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  model3 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_fizzout"], model3, "tag_origin");
 
   thread merge_sunsingledvar("sm_sunSampleSizeNear", 0, 1, 1, 0.25);
@@ -188,7 +188,7 @@ flare_from_targetname(targetname) {
 
   flag_wait("flare_start_setting_sundir");
 
-  sunPointsTo = getent(flare.script_linkto, "script_linkname").origin;
+  sunPointsTo = getEnt(flare.script_linkto, "script_linkname").origin;
 
   angles = vectortoangles(flare.origin - sunPointsTo);
   oldForward = anglesToForward(angles);

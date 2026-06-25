@@ -26,9 +26,9 @@ rotate_indefinitely(rotate_time, rotate_fwd) {
 
   while(true) {
     if(rotate_fwd) {
-      self rotateyaw(360, rotate_time, 0, 0);
+      self rotateYaw(360, rotate_time, 0, 0);
     } else {
-      self rotateyaw(-360, rotate_time, 0, 0);
+      self rotateYaw(-360, rotate_time, 0, 0);
     }
 
     wait(rotate_time - 0.1);
@@ -39,7 +39,7 @@ holo_table_rotate() {
   self endon("stop_holo_table");
 
   while(true) {
-    self.e_origin rotateyaw(360, 60.0, 0, 0);
+    self.e_origin rotateYaw(360, 60.0, 0, 0);
     wait(60.0 - 0.1);
   }
 }
@@ -87,7 +87,7 @@ holo_table_run_poi(allow_player_input) {
 
 holo_table_run(allow_player_input) {
   self notify("stop_holo_table");
-  self.display linkto(self.e_origin);
+  self.display linkTo(self.e_origin);
   self thread holo_table_rotate();
   self thread holo_table_run_poi(allow_player_input);
 }
@@ -141,9 +141,9 @@ holo_table_change_poi(n_index_change, move_time_s, display_level_name) {
   world_offset = rvec * v_poi_offset[0] + fvec * v_poi_offset[1];
   world_rotate_pos = self.e_origin.origin - world_offset;
   self.display unlink();
-  self.display moveto(world_rotate_pos, move_time_s, 0, 0);
+  self.display moveTo(world_rotate_pos, move_time_s, 0, 0);
   wait(move_time_s + 0.1);
-  self.display linkto(self.e_origin);
+  self.display linkTo(self.e_origin);
 }
 
 holo_table_get_table(str_hologram) {
@@ -152,12 +152,12 @@ holo_table_get_table(str_hologram) {
 
 holo_table_initialize(str_hologram, str_map_center_origin) {
   holo_table = spawnStruct();
-  display = getent(str_hologram, "targetname");
+  display = getEnt(str_hologram, "targetname");
   display.v_start_org = display.origin;
   display.v_start_ang = display.angles;
   display.n_start_scale = 0.1;
   holo_table.display = display;
-  holo_table.e_origin = getent(str_map_center_origin, "targetname");
+  holo_table.e_origin = getEnt(str_map_center_origin, "targetname");
   holo_table.e_origin.origin = (holo_table.e_origin.origin[0], holo_table.e_origin.origin[1], display.origin[2]);
   holo_table.poi_list = [];
 
@@ -208,7 +208,7 @@ holo_table_scale_overtime(n_time, str_display_name) {
   model = self;
 
   if(isDefined(str_display_name)) {
-    model = getent(str_display_name, "targetname");
+    model = getEnt(str_display_name, "targetname");
   }
 
   model setscale(self.n_start_scale);
@@ -243,7 +243,7 @@ holo_table_scale_overtime_reverse(n_time, str_display_name, hide_after) {
     return;
   }
   if(isDefined(str_display_name)) {
-    model = getent(str_display_name, "targetname");
+    model = getEnt(str_display_name, "targetname");
   }
 
   incs = n_time / 0.05;
@@ -432,7 +432,7 @@ holo_table_feature_prop(model_name, done_notify, scale, map_objective_list, v_of
     }
   }
 
-  e_spin = getent("holo_table_spin", "targetname");
+  e_spin = getEnt("holo_table_spin", "targetname");
   e_model = spawn_model(model_name, e_spin.origin + v_offset, e_spin.angles + extra_spin);
 
   if(!isDefined(b_spin) || isDefined(b_spin) && b_spin) {

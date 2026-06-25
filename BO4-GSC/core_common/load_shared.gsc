@@ -206,7 +206,7 @@ playerdamagerumble() {
       continue;
     }
 
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -241,7 +241,7 @@ player_throwgrenade_timer() {
 
 water_think() {
   assert(isDefined(self.target));
-  targeted = getent(self.target, "targetname");
+  targeted = getEnt(self.target, "targetname");
   assert(isDefined(targeted));
   waterheight = targeted.origin[2];
   targeted = undefined;
@@ -251,7 +251,7 @@ water_think() {
 
   while(true) {
     waitframe(1);
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(players[i].inwater) {
@@ -269,7 +269,7 @@ water_think() {
     }
 
     while(true) {
-      players = getplayers();
+      players = getPlayers();
       players_in_water_count = 0;
 
       for(i = 0; i < players.size; i++) {
@@ -406,7 +406,7 @@ all_players_spawned() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
     count = 0;
 
     for(i = 0; i < players.size; i++) {
@@ -526,11 +526,11 @@ on_spawned() {
 link_ents() {
   foreach(ent in getEntArray()) {
     if(isDefined(ent.linkto)) {
-      e_link = getent(ent.linkto, "linkname");
+      e_link = getEnt(ent.linkto, "linkname");
 
       if(isDefined(e_link)) {
-        ent enablelinkto();
-        ent linkto(e_link);
+        ent enablelinkTo();
+        ent linkTo(e_link);
       }
     }
   }

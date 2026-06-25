@@ -127,7 +127,7 @@ yemeni_teamswitch_spawnfunc() {
 
 yemeni_bft_highlight() {
   m_fx_origin = spawn_model("tag_origin", self gettagorigin("J_SpineLower"), (0, 0, 0));
-  m_fx_origin linkto(self, "J_SpineLower");
+  m_fx_origin linkTo(self, "J_SpineLower");
   playFXOnTag(getfx("friendly_marker"), m_fx_origin, "tag_origin");
   self waittill("death");
   m_fx_origin delete();
@@ -271,7 +271,7 @@ temp_vtol_rappel_start() {
 
 temp_vtol_rappel_guys(str_struct_starts, str_rappeler) {
   a_start_structs = getStructArray(str_struct_starts, "targetname");
-  sp_rappeler = getent(str_rappeler, "targetname");
+  sp_rappeler = getEnt(str_rappeler, "targetname");
 
   foreach(s_rappel_start in a_start_structs) {
     ai_guy = sp_rappeler spawn_ai(1);
@@ -286,12 +286,12 @@ temp_vtol_rappel_guys(str_struct_starts, str_rappeler) {
 
 temp_vtol_rappel_guy(s_rappel_start) {
   self endon("death");
-  s_rappel_end = getstruct(s_rappel_start.target, "targetname");
+  s_rappel_end = getStruct(s_rappel_start.target, "targetname");
   nd_goal = getnode(s_rappel_end.target, "targetname");
   m_mover = spawn("script_origin", self.origin);
-  self linkto(m_mover);
+  self linkTo(m_mover);
   m_mover.origin = s_rappel_start.origin;
-  m_mover moveto(s_rappel_end.origin, 2, 0.5, 0.5);
+  m_mover moveTo(s_rappel_end.origin, 2, 0.5, 0.5);
   m_mover waittill("movedone");
   self unlink();
   self setgoalnode(nd_goal);
@@ -345,7 +345,7 @@ spawn_vtols_at_structs(str_struct_name, str_nd_name) {
 
 init_hero_startstruct(str_hero_name, str_struct_targetname) {
   ai_hero = init_hero(str_hero_name);
-  s_start_pos = getstruct(str_struct_targetname, "targetname");
+  s_start_pos = getStruct(str_struct_targetname, "targetname");
   assert(isDefined(s_start_pos), "Bad Hero setup struct: " + str_struct_targetname);
 
   if(isDefined(s_start_pos.angles)) {
@@ -413,7 +413,7 @@ rotate_continuously(rev_per_second, end_on_notify) {
   }
 
   while(true) {
-    self rotateyaw(360 * rev_per_second, 1.0, 0.0, 0.0);
+    self rotateYaw(360 * rev_per_second, 1.0, 0.0, 0.0);
     wait 0.9;
   }
 }
@@ -527,7 +527,7 @@ ai_delete_when_offscreen() {
   cos_angle = cos(angle);
   forward = anglesToForward(level.player.angles);
 
-  for(ai_to_player = vectornormalize(self.origin - level.player.origin); vectordot(forward, ai_to_player) >= cos_angle; ai_to_player = vectornormalize(self.origin - level.player.origin)) {
+  for(ai_to_player = vectorNormalize(self.origin - level.player.origin); vectordot(forward, ai_to_player) >= cos_angle; ai_to_player = vectorNormalize(self.origin - level.player.origin)) {
     wait 0.1;
     forward = anglesToForward(level.player.angles);
   }

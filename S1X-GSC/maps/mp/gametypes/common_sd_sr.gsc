@@ -110,14 +110,14 @@ bombs() {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  var_0 = getent("sd_bomb_pickup_trig", "targetname");
+  var_0 = getEnt("sd_bomb_pickup_trig", "targetname");
 
   if(!isDefined(var_0)) {
     common_scripts\utility::error("No sd_bomb_pickup_trig trigger found in map.");
     return;
   }
 
-  var_1[0] = getent("sd_bomb", "targetname");
+  var_1[0] = getEnt("sd_bomb", "targetname");
 
   if(!isDefined(var_1[0])) {
     common_scripts\utility::error("No sd_bomb script_model found in map.");
@@ -211,7 +211,7 @@ bombs() {
     }
 
     level.bombzones[level.bombzones.size] = var_8;
-    var_8.bombdefusetrig = getent(var_1[0].target, "targetname");
+    var_8.bombdefusetrig = getEnt(var_1[0].target, "targetname");
     var_8.bombdefusetrig.origin = var_8.bombdefusetrig.origin + (0, 0, -10000);
     var_8.bombdefusetrig.label = var_9;
     var_8.bombdefusetrig usetriggertouchcheckstance(1);
@@ -318,7 +318,7 @@ stop_looping_beep_on_player(var_0) {
 setupkillcament(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 rotateyaw(-45, 0.05);
+  var_1 rotateYaw(-45, 0.05);
   wait 0.05;
   var_2 = self.origin + (0, 0, 5);
   var_3 = self.origin + anglesToForward(var_1.angles) * 100 + (0, 0, 128);
@@ -397,7 +397,7 @@ onenduse(var_0, var_1, var_2) {
 bombplantedanim(var_0) {
   var_0 endon("death");
   var_0 endon("disconnect");
-  var_0 playerlinkto(level.sdbombmodel);
+  var_0 playerlinkTo(level.sdbombmodel);
   var_0 playerlinkedoffsetenable();
 
   while(var_0 getcurrentweapon() == self.useweapon) {

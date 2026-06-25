@@ -10,7 +10,7 @@ crystal_shard_used(var_0) {
   var_1 notsolid();
   var_1._id_0203 = var_0;
   var_0.crystal_shard = var_1;
-  var_0.crystal_shard linkto(var_0);
+  var_0.crystal_shard linkTo(var_0);
   var_0 thread crystal_shard_timeout();
   var_0 waittill("missile_stuck", var_2, var_3, var_4, var_5, var_6, var_7, var_8);
 
@@ -44,7 +44,7 @@ crystal_shard_swallow_by_anemone(var_0) {
   if(isDefined(var_1)) {
     var_1 unlink();
     var_1 endon("death");
-    var_1 moveto(var_0.origin + 20 * anglestoup(var_0.angles), 1);
+    var_1 moveTo(var_0.origin + 20 * anglestoup(var_0.angles), 1);
     var_1 waittill("movedone");
     var_1 delete();
   }

@@ -141,7 +141,7 @@ init_ghost_sounds() {
 }
 
 init_ghost_zone() {
-  level.ghost_start_area = getent("ghost_start_area", "targetname");
+  level.ghost_start_area = getEnt("ghost_start_area", "targetname");
   level.ghost_zone_door_clips = getEntArray("ghost_zone_door_clip", "targetname");
   enable_ghost_zone_door_ai_clips();
   level.ghost_zone_start_lower_locations = getStructArray("ghost_zone_start_lower_location", "targetname");
@@ -150,8 +150,8 @@ init_ghost_zone() {
   level.ghost_back_standing_locations = getStructArray("ghost_back_standing_location", "targetname");
   level.ghost_front_flying_out_path_starts = getStructArray("ghost_front_flying_out_path_start", "targetname");
   level.ghost_back_flying_out_path_starts = getStructArray("ghost_back_flying_out_path_start", "targetname");
-  level.ghost_gazebo_pit_volume = getent("sloth_pack_volume", "targetname");
-  level.ghost_gazebo_pit_perk_pos = getstruct("ghost_gazebo_pit_perk_pos", "targetname");
+  level.ghost_gazebo_pit_volume = getEnt("sloth_pack_volume", "targetname");
+  level.ghost_gazebo_pit_perk_pos = getStruct("ghost_gazebo_pit_perk_pos", "targetname");
   level.ghost_entry_room_to_mansion = "ghost_to_maze_zone_1";
   level.ghost_entry_room_to_maze = "ghost_to_maze_zone_5";
   level.ghost_rooms = [];
@@ -233,7 +233,7 @@ ghost_zone_spawning_think() {
     valid_players = [];
 
     while(valid_player_count < 1) {
-      players = getplayers();
+      players = getPlayers();
       valid_player_count = 0;
 
       foreach(player in players) {
@@ -326,7 +326,7 @@ player_in_ghost_zone_monitor() {
   }
   while(true) {
     if(isDefined(level.zombie_ghost_round_states.any_player_in_ghost_zone) && level.zombie_ghost_round_states.any_player_in_ghost_zone) {
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         if(is_player_valid(player) && (isDefined(player.is_in_ghost_zone) && player.is_in_ghost_zone)) {
@@ -363,7 +363,7 @@ player_in_ghost_zone_monitor() {
 }
 
 is_any_player_near_point(target, spawn_pos) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(target != player && is_player_valid(player)) {
@@ -432,7 +432,7 @@ get_best_spawn_point(player) {
 
 check_players_in_ghost_zone() {
   result = 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(is_player_valid(player, 0, 1) && player_in_ghost_zone(player)) {
@@ -766,7 +766,7 @@ ghost_think() {
 }
 
 start_spawn() {
-  self animscripted(self.origin, self.angles, "zm_spawn");
+  self animScripted(self.origin, self.angles, "zm_spawn");
   self maps\mp\animscripts\zm_shared::donotetracks("spawn_anim");
   self start_chase();
 }
@@ -894,7 +894,7 @@ does_fall_into_pap_hole() {
 start_script_move() {
   self.script_mover = spawn("script_origin", self.origin);
   self.script_mover.angles = self.angles;
-  self linkto(self.script_mover);
+  self linkTo(self.script_mover);
   self.state = "script_move_update";
   self setclientfield("ghost_fx", 4);
   player = self.favoriteenemy;
@@ -953,7 +953,7 @@ script_move_update() {
   player = self.favoriteenemy;
 
   if(is_player_valid(player) && isDefined(self.script_move_target_node)) {
-    desired_angles = vectortoangles(vectornormalize(player.origin - self.origin));
+    desired_angles = vectortoangles(vectorNormalize(player.origin - self.origin));
     distance_squared = distancesquared(self.origin, self.script_move_target_node.origin);
 
     if(distance_squared < 24) {
@@ -974,7 +974,7 @@ script_move_update() {
 
     if(distance_squared_to_target_node_pos <= moved_distance_during_interval * moved_distance_during_interval) {
       target_point = self.script_move_target_node.origin;
-      self.script_mover moveto(target_point, 0.1, 0, 0.1);
+      self.script_mover moveTo(target_point, 0.1, 0, 0.1);
       self.script_mover waittill("movedone");
       self.script_mover.angles = desired_angles;
     } else {
@@ -990,13 +990,13 @@ script_move_update() {
       }
 
       move_dir = target_node_pos - self.origin;
-      move_dir = vectornormalize(move_dir);
+      move_dir = vectorNormalize(move_dir);
       target_point = self.origin + move_dir * 800 * 0.1;
       x_offset = level.ghost_script_move_sin[self.script_move_sin_index] * 6;
       z_offset = level.ghost_script_move_sin[self.script_move_sin_index] * 12;
       target_point = target_point + (x_offset, 0, z_offset);
       self.script_move_sin_index++;
-      self.script_mover moveto(target_point, 0.1);
+      self.script_mover moveTo(target_point, 0.1);
       self.script_mover.angles = desired_angles;
       draw_debug_star(target_point, (0, 1, 0), 1);
     }
@@ -1182,7 +1182,7 @@ evaporate_update() {
 }
 
 is_within_capsule(point, origin, angles, radius, range) {
-  forward_dir = vectornormalize(anglesToForward(angles));
+  forward_dir = vectorNormalize(anglesToForward(angles));
   start = origin + forward_dir * radius;
   end = start + forward_dir * range;
   point_intersect = pointonsegmentnearesttopoint(start, end, point);
@@ -1208,10 +1208,10 @@ is_within_view_2d(point, origin, angles, fov_cos) {
 get_dot_production_2d(point, origin, angles) {
   forward_dir = anglesToForward(angles);
   forward_dir = (forward_dir[0], forward_dir[1], 0);
-  forward_dir = vectornormalize(forward_dir);
+  forward_dir = vectorNormalize(forward_dir);
   to_point_dir = point - origin;
   to_point_dir = (to_point_dir[0], to_point_dir[1], 0);
-  to_point_dir = vectornormalize(to_point_dir);
+  to_point_dir = vectorNormalize(to_point_dir);
   return vectordot(forward_dir, to_point_dir);
 }
 
@@ -1601,7 +1601,7 @@ enable_ghost_zone_door_ai_clips() {
   if(isDefined(level.ghost_zone_door_clips) && level.ghost_zone_door_clips.size > 0) {
     foreach(door_clip in level.ghost_zone_door_clips) {
       door_clip solid();
-      door_clip disconnectpaths();
+      door_clip disconnectPaths();
     }
   }
 }
@@ -1776,7 +1776,7 @@ sndghostroundready() {
     level waittill("between_round_over");
 
     if(level.zombie_ghost_round_states.next_ghost_round_number == level.round_number) {
-      playsoundatposition("zmb_ghost_round_srt", mansion);
+      playSoundAtPosition("zmb_ghost_round_srt", mansion);
       ent = spawn("script_origin", mansion);
       ent playLoopSound("zmb_ghost_round_lp", 3);
       ent thread sndghostroundready_stoplp();
@@ -1799,7 +1799,7 @@ check_sending_away_zombie_followers() {
   if(flag_exists("time_bomb_restore_active") && flag("time_bomb_restore_active")) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   valid_player_in_ghost_zone_count = 0;
   valid_player_count = 0;
 
@@ -1839,7 +1839,7 @@ send_away_zombie_follower(player) {
   dest = 0;
   awaydir = self.origin - player.origin;
   awaydir = (awaydir[0], awaydir[1], 0);
-  awaydir = vectornormalize(awaydir);
+  awaydir = vectorNormalize(awaydir);
   endpos = self.origin + vectorscale(awaydir, 600);
   locs = array_randomize(level.enemy_dog_locations);
 
@@ -2121,7 +2121,7 @@ spawn_ghost_round_presentation_ghost() {
   ghost setanim(%ai_zombie_ghost_idle);
   ghost.script_mover = spawn("script_origin", ghost.origin);
   ghost.script_mover.angles = ghost.angles;
-  ghost linkto(ghost.script_mover);
+  ghost linkTo(ghost.script_mover);
   ghost setclientfield("sndGhostAudio", 1);
 }
 
@@ -2177,7 +2177,7 @@ ghost_switch_windows() {
     self setclientfield("ghost_fx", 5);
     self setclientfield("sndGhostAudio", 0);
     self ghost();
-    self.script_mover moveto(next_spot.origin, 1);
+    self.script_mover moveTo(next_spot.origin, 1);
     self.script_mover waittill("movedone");
     self.script_mover.origin = next_spot.origin;
     self.script_mover.angles = next_spot.angles;
@@ -2193,7 +2193,7 @@ ghost_round_presentation_sound() {
   self endon("death");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(is_player_valid(player)) {
@@ -2450,7 +2450,7 @@ _respawn_ghost_failsafe() {
 
 devgui_warp_to_mansion() {
   player = gethostplayer();
-  player setorigin((2324, 560, 148));
+  player setOrigin((2324, 560, 148));
   player setplayerangles((0, 0, 0));
 }
 

@@ -483,7 +483,7 @@ drive_magic_bullet(vehicle) {
   playFXOnTag(level.zodiac_gunFlashFx, vehicle, "tag_flash");
   playFXOnTag(level.zodiac_gunShellFx, vehicle, "tag_brass");
 
-  level.player PlayRumbleOnEntity("smg_fire");
+  level.player playRumbleOnEntity("smg_fire");
 
   if(!isDefined(end.obj)) {
     return;

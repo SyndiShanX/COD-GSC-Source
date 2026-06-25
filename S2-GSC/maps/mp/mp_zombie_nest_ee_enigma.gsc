@@ -180,7 +180,7 @@ func_52B6() {
 }
 
 func_3B98() {
-  var_00 = getent("enter_com_trig", "targetname");
+  var_00 = getEnt("enter_com_trig", "targetname");
   if(isDefined(var_00)) {
     for(;;) {
       var_00 waittill("trigger", var_01);
@@ -269,8 +269,8 @@ func_7AAC() {
 }
 
 func_8A3F() {
-  self usetriggerrequirelookat();
-  self.var_5F59 = getent(self.var_01A2, "targetname");
+  self useTriggerRequireLookAt();
+  self.var_5F59 = getEnt(self.var_01A2, "targetname");
   if(isDefined(self.var_5F59.var_01A2)) {
     self.var_6643 = common_scripts\utility::func_44BD(self.var_5F59.var_01A2, "targetname");
   }
@@ -545,9 +545,9 @@ func_9300(param_00) {
     return;
   }
 
-  self.var_6643 moveto(self.var_6647.var_0116, 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6647.var_0116, 0.1, 0, 0);
   wait(0.1);
-  self.var_6643 moveto(self.var_6646.var_0116, param_00 - 0.1, 0, 0);
+  self.var_6643 moveTo(self.var_6646.var_0116, param_00 - 0.1, 0, 0);
 }
 
 func_8714() {
@@ -555,7 +555,7 @@ func_8714() {
     return;
   }
 
-  self.var_6643 moveto(self.var_6647.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6647.var_0116, 0.5, 0, 0);
 }
 
 func_8713() {
@@ -563,12 +563,12 @@ func_8713() {
     return;
   }
 
-  self.var_6643 moveto(self.var_6646.var_0116, 0.5, 0, 0);
+  self.var_6643 moveTo(self.var_6646.var_0116, 0.5, 0, 0);
 }
 
 func_2EA6() {
   level endon("flag_both_enigmas_set");
-  var_00 = getent("saltmine_ent_dialogue", "targetname");
+  var_00 = getEnt("saltmine_ent_dialogue", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!isPlayer(var_01)) {

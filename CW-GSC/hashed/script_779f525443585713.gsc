@@ -31,7 +31,7 @@
 #namespace namespace_99e99ffa;
 
 function function_1d90bc4a() {
-  level thread scene::init_streamer(#"scene_kgb_ambient_atrium_talk", getplayers());
+  level thread scene::init_streamer(#"scene_kgb_ambient_atrium_talk", getPlayers());
 }
 
 function function_25482400() {
@@ -589,7 +589,7 @@ function function_3fe5e74f(var_5d4d655a, scene, delay) {
     wait delay;
   }
 
-  volume = getent(var_5d4d655a.script_noteworthy + "_volume", "targetname");
+  volume = getEnt(var_5d4d655a.script_noteworthy + "_volume", "targetname");
 
   if(isDefined(volume)) {
     var_4014838e = volume ai::function_18c4ff86("all");
@@ -648,8 +648,8 @@ function function_c464ca4e(scene) {
     return;
   }
 
-  var_d3bc6863 = getent("atrium_stairwell_double_door_left", "targetname");
-  var_617e03e8 = getent("atrium_stairwell_double_door_right", "targetname");
+  var_d3bc6863 = getEnt("atrium_stairwell_double_door_left", "targetname");
+  var_617e03e8 = getEnt("atrium_stairwell_double_door_right", "targetname");
 
   if(var_b7304209) {
     wait 5.1;
@@ -1239,7 +1239,7 @@ function function_27e034fe(var_c79d614f, start_struct) {
 }
 
 function function_6feed719(var_c79d614f, var_b16d80e2, flag) {
-  getplayers()[0] endon(#"death");
+  getPlayers()[0] endon(#"death");
   var_b16d80e2 = array::randomize(var_b16d80e2);
   var_784e2752 = array::random(var_b16d80e2);
 
@@ -1419,7 +1419,7 @@ function function_13c0420d(flag) {
 
 function function_24a7c694() {
   level endon(#"flag_west_hall_civ_walker");
-  trigger = getent("west_hall_civ_walker_trigger", "targetname");
+  trigger = getEnt("west_hall_civ_walker_trigger", "targetname");
   trigger.door = trigger namespace_e77bf565::function_3203f263();
   trigger.door doors::waittill_door_opened();
   level flag::set("flag_west_hall_civ_walker");
@@ -1506,7 +1506,7 @@ function function_e9217daa(a_ents) {
 function function_30c46cec() {
   level endon(#"flag_player_swap");
   level.player endon(#"death");
-  var_297d68e3 = getent("breakroom_right_door", "targetname");
+  var_297d68e3 = getEnt("breakroom_right_door", "targetname");
 
   if(!level flag::get("kgb_ins_briefing_completed")) {
     level flag::wait_till("kgb_ins_briefing_completed");
@@ -1752,7 +1752,7 @@ function function_d47c1165() {
   level endon(#"kgb_aslt_elev_down_completed");
   level endon(#"flag_player_swap");
   level.player endon(#"death");
-  door = getent("manager_office_door", "targetname");
+  door = getEnt("manager_office_door", "targetname");
   door doors::waittill_door_opened();
 }
 
@@ -1760,7 +1760,7 @@ function function_8c1733b2() {
   level endon(#"flag_player_swap");
   level endon(#"kgb_aslt_elev_down_completed");
   level.player endon(#"death");
-  door = getent("manager_office_door", "targetname");
+  door = getEnt("manager_office_door", "targetname");
 
   while(true) {
     level flag::wait_till_any(["flag_manager_office_door", "kgb_ins_rv_completed"]);
@@ -3704,7 +3704,7 @@ function function_41538e53() {
     level flag::wait_till("kgb_ins_rv_completed");
   }
 
-  var_8b2c48f = getent("mailroom_playercollision", "targetname");
+  var_8b2c48f = getEnt("mailroom_playercollision", "targetname");
 
   if(isDefined(var_8b2c48f)) {
     var_8b2c48f delete();
@@ -3724,19 +3724,19 @@ function function_41538e53() {
     }
   }
 
-  var_d2455957 = getent("eavesdropping_prison_vol", "targetname");
+  var_d2455957 = getEnt("eavesdropping_prison_vol", "targetname");
 
   if(isDefined(var_d2455957)) {
     var_d2455957 delete();
   }
 
-  phone = getent("lobby_phone", "targetname");
+  phone = getEnt("lobby_phone", "targetname");
 
   if(isDefined(phone)) {
     phone delete();
   }
 
-  phone = getent("mailroom_phone", "targetname");
+  phone = getEnt("mailroom_phone", "targetname");
 
   if(isDefined(phone)) {
     phone delete();
@@ -3788,7 +3788,7 @@ function function_fb149e45() {
     return;
   }
 
-  harass_scenes_collision = getent("harass_scenes_collision", "targetname");
+  harass_scenes_collision = getEnt("harass_scenes_collision", "targetname");
 
   if(level flag::get("kgb_aslt_elev_down_completed")) {
     if(isDefined(harass_scenes_collision)) {
@@ -3802,7 +3802,7 @@ function function_fb149e45() {
   harass_scenes_collision connectpaths();
   level flag::wait_till("kgb_ins_rv_completed");
   harass_scenes_collision solid();
-  harass_scenes_collision disconnectpaths();
+  harass_scenes_collision disconnectPaths();
   level flag::wait_till("kgb_aslt_elev_down_completed");
 
   if(isDefined(harass_scenes_collision)) {
@@ -3862,7 +3862,7 @@ function function_ff442a79() {
   }
 
   level flag::wait_till("flag_player_swap");
-  vol = getent("eavesdropping_prison_vol", "targetname");
+  vol = getEnt("eavesdropping_prison_vol", "targetname");
 
   while(true) {
     if(isDefined(vol) && level.player istouching(vol) && getdvarint(#"hash_7fb1be9520b9a725", 100) == 100) {
@@ -3885,8 +3885,8 @@ function function_ff442a79() {
 }
 
 function function_ae16e341(a_ents) {
-  if(isDefined(self) && isDefined(self.script_string) && isDefined(getent(self.script_string, "targetname"))) {
-    phone = getent(self.script_string, "targetname");
+  if(isDefined(self) && isDefined(self.script_string) && isDefined(getEnt(self.script_string, "targetname"))) {
+    phone = getEnt(self.script_string, "targetname");
 
     if(issubstr(self.script_string, "lobby")) {
       level.var_835bee53 = phone.origin;

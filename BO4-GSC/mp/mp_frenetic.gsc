@@ -52,7 +52,7 @@ rotate() {
 
   while(true) {
     if(self.script_noteworthy == "z") {
-      self rotateyaw(360, self.speed);
+      self rotateYaw(360, self.speed);
     } else if(self.script_noteworthy == "x") {
       self rotateroll(360, self.speed);
     } else if(self.script_noteworthy == "y") {

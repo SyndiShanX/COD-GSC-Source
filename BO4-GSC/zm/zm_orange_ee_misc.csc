@@ -36,7 +36,7 @@ jump_scare_note(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 }
 
 pareidolia_ee() {
-  t_pareidolia = getent(0, "t_pareidolia", "targetname");
+  t_pareidolia = getEnt(0, "t_pareidolia", "targetname");
   waitresult = t_pareidolia waittill(#"trigger");
   playSound(0, #"mus_pareidolia", (-7053, -24906, 222));
 }

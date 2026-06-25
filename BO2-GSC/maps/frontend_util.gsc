@@ -75,7 +75,7 @@ setup_basic_scene() {
   }
 
   if(is_true(level.player.is_glove_shown)) {
-    player_body = getent("player_body", "targetname");
+    player_body = getEnt("player_body", "targetname");
     old_blend_time = 0.1;
 
     if(isDefined(player_body)) {
@@ -216,7 +216,7 @@ warp_to_player_start(warp_targetname) {
     warp_targetname = "default_player_start";
   }
 
-  s_warp = getstruct(warp_targetname);
+  s_warp = getStruct(warp_targetname);
   skipto_teleport_players(warp_targetname);
   wait_network_frame();
   level.player.origin = s_warp.origin;
@@ -424,7 +424,7 @@ attach_data_pads() {
   drone_names = array("troop_01_drone", "troop_02_drone");
 
   foreach(name in drone_names) {
-    drone = getent(name, "targetname");
+    drone = getEnt(name, "targetname");
 
     if(isDefined(drone)) {
       if(!is_true(drone.has_tablet)) {
@@ -1128,11 +1128,11 @@ credits_sequence3_abort() {
 }
 
 build_globe() {
-  globe = getent("world_globe", "targetname");
+  globe = getEnt("world_globe", "targetname");
   countries = getEntArray(globe.target, "targetname");
 
   foreach(country in countries) {
-    country linkto(globe);
+    country linkTo(globe);
     country hide();
     country ignorecheapentityflag(1);
     country clearclientflag(14);
@@ -1160,7 +1160,7 @@ process_globe_glow() {
   }
   self.camera_facing = 1;
   self endon("death");
-  globe = getent("world_globe", "targetname");
+  globe = getEnt("world_globe", "targetname");
   self.angles = globe.angles;
 
   while(true) {
@@ -1169,7 +1169,7 @@ process_globe_glow() {
     self_to_camera = cam_pos - self.origin;
     newangles = vectortoangles(self_to_camera);
     newangles = (newangles[0], newangles[1] + 90, newangles[2]);
-    self rotateto(newangles, 0.05, 0, 0);
+    self rotateTo(newangles, 0.05, 0, 0);
     wait_network_frame();
   }
 }
@@ -1179,7 +1179,7 @@ show_holotable_fuzz(do_show) {
     do_show = 1;
   }
 
-  fuzz = getent("holotable_static", "targetname");
+  fuzz = getEnt("holotable_static", "targetname");
 
   if(!isDefined(do_show) && !isDefined(fuzz.shown) || isDefined(do_show) && isDefined(fuzz.shown) && do_show == fuzz.shown) {
     return;
@@ -1208,10 +1208,10 @@ show_globe(do_show, toggle_countries, ambient_spin) {
     ambient_spin = 0;
   }
 
-  globe = getent("world_globe", "targetname");
+  globe = getEnt("world_globe", "targetname");
 
   if(!isDefined(globe.glow_ring)) {
-    globe.glow_ring = getent("world_globe_ring", "targetname");
+    globe.glow_ring = getEnt("world_globe_ring", "targetname");
     globe.glow_ring thread process_globe_glow();
   }
 
@@ -1262,7 +1262,7 @@ globe_show_map(map_name) {
     angles = (0, 0, 0);
   }
 
-  globe = getent("world_globe", "targetname");
+  globe = getEnt("world_globe", "targetname");
   disputed_territory = level.m_rts_territory[map_name];
   city_marker = level.m_rts_city_tag[map_name];
   wait_network_frame();
@@ -1292,7 +1292,7 @@ globe_show_map(map_name) {
 
   globe notify("kill_globe_marker_fx");
   globe play_fx("globe_city_marker", globe.origin, globe.angles, "kill_globe_marker_fx", 1, city_marker);
-  globe rotateto(angles, 0.5, 0, 0);
+  globe rotateTo(angles, 0.5, 0, 0);
 }
 
 frontend_get_hub_number(current_level) {
@@ -1310,13 +1310,13 @@ frontend_get_hub_number(current_level) {
 teardown_basic_scene() {
   level notify("teardown_basic_scene");
   hide_holo_table_props();
-  briggs = getent("briggs_ai", "targetname");
+  briggs = getEnt("briggs_ai", "targetname");
 
   if(isDefined(briggs)) {
     briggs delete();
   }
 
-  briggs_spawner = getent("briggs", "targetname");
+  briggs_spawner = getEnt("briggs", "targetname");
   briggs_spawner.count = 1;
 
   if(isDefined(level.m_mission_team)) {
@@ -1560,9 +1560,9 @@ player_boat_sim(angle_min, angle_max, time) {
   while(true) {
     n_time = time;
     n_angle = randomfloatrange(angle_min, angle_max);
-    self.m_ground_ref rotateto((n_angle, 0, 0), n_time, n_time / 2, n_time / 2);
+    self.m_ground_ref rotateTo((n_angle, 0, 0), n_time, n_time / 2, n_time / 2);
     self.m_ground_ref waittill("rotatedone");
-    self.m_ground_ref rotateto((n_angle * -1, 0, 0), n_time, n_time / 2, n_time / 2);
+    self.m_ground_ref rotateTo((n_angle * -1, 0, 0), n_time, n_time / 2, n_time / 2);
     self.m_ground_ref waittill("rotatedone");
   }
 }
@@ -1571,7 +1571,7 @@ stop_player_boat_sim() {
   self notify("stop_boat_sim");
 
   if(isDefined(self.m_ground_ref)) {
-    self.m_ground_ref rotateto((0, 0, 0), 4.0, 2.0, 2.0);
+    self.m_ground_ref rotateTo((0, 0, 0), 4.0, 2.0, 2.0);
   }
 }
 

@@ -74,7 +74,7 @@ isfactorinuse(var_0, var_1, var_2, var_3) {
 
   var_4 = vectortoangles(self.setocclusionpreset);
   self orientmode("face angle", var_4[1]);
-  var_5 = vectordot(vectornormalize((self.setocclusionpreset[0], self.setocclusionpreset[1], 0)), anglesToForward(self.angles));
+  var_5 = vectordot(vectorNormalize((self.setocclusionpreset[0], self.setocclusionpreset[1], 0)), anglesToForward(self.angles));
   var_6 = 0.966;
   return var_5 > var_6;
 }
@@ -204,7 +204,7 @@ func_A4E8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self clearanim(lib_0A1E::asm_getbodyknob(), var_2);
   self func_82EA(var_1, var_19, 1, var_2, 1);
   self.var_A481 = scripts\engine\utility::spawn_tag_origin();
-  self.var_A481 linkto(self, "tag_origin", (0, 0, 0), (90, 0, 0));
+  self.var_A481 linkTo(self, "tag_origin", (0, 0, 0), (90, 0, 0));
   playFXOnTag(level.var_7649["seeker_thruster"], self.var_A481, "tag_origin");
   var_1A = 0;
   var_1B = 0;

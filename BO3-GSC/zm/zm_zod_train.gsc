@@ -157,7 +157,7 @@ class czmtrain {
     foreach(e_player in level.players) {
       v_pos = m_vh_train gettagorigin(str_tag);
       v_fwd = anglesToForward(e_player.angles);
-      v_to_tag = vectornormalize(v_pos - e_player.origin);
+      v_to_tag = vectorNormalize(v_pos - e_player.origin);
       if(vectordot(v_fwd, v_to_tag) > 0) {
         return true;
       }
@@ -198,8 +198,8 @@ class czmtrain {
     v_tag_angles = m_vh_train gettagangles(str_tag);
     ai teleport(v_tag_pos, v_tag_angles);
     util::wait_network_frame();
-    ai linkto(m_vh_train, str_tag);
-    ai animscripted("entered_train", v_tag_pos, v_tag_angles, s_tag.str_anim);
+    ai linkTo(m_vh_train, str_tag);
+    ai animScripted("entered_train", v_tag_pos, v_tag_angles, s_tag.str_anim);
     ai zombie_shared::donotetracks("entered_train");
     ai unlink();
     s_tag.occupied = 0;
@@ -298,18 +298,18 @@ class czmtrain {
       m_vh_train hidepart("tag_sign_footlight");
       m_vh_train hidepart("tag_sign_canals");
       m_vh_train showpart("tag_sign_waterfront");
-      playsoundatposition("evt_train_switch_track_hit", m_t_switch.origin);
+      playSoundAtPosition("evt_train_switch_track_hit", m_t_switch.origin);
     } else {
       if(m_str_destination == "theater") {
         m_vh_train hidepart("tag_sign_canals");
         m_vh_train hidepart("tag_sign_waterfront");
         m_vh_train showpart("tag_sign_footlight");
-        playsoundatposition("evt_train_switch_track_hit", m_t_switch.origin);
+        playSoundAtPosition("evt_train_switch_track_hit", m_t_switch.origin);
       } else if(m_str_destination == "canal") {
         m_vh_train hidepart("tag_sign_footlight");
         m_vh_train hidepart("tag_sign_waterfront");
         m_vh_train showpart("tag_sign_canals");
-        playsoundatposition("evt_train_switch_track_hit", m_t_switch.origin);
+        playSoundAtPosition("evt_train_switch_track_hit", m_t_switch.origin);
       }
     }
   }
@@ -342,10 +342,10 @@ class czmtrain {
         if(level flag::get("callbox")) {
           level flag::clear("callbox");
         }
-        m_t_switch sethintstring(&"ZM_ZOD_SWITCHING_PROGRESS");
+        m_t_switch setHintString(&"ZM_ZOD_SWITCHING_PROGRESS");
         wait(1);
         if(flag::get("switches_enabled")) {
-          m_t_switch sethintstring(&"ZM_ZOD_SWITCH_ENABLE");
+          m_t_switch setHintString(&"ZM_ZOD_SWITCH_ENABLE");
         }
       }
       level notify("hash_8939bd21");
@@ -410,9 +410,9 @@ class czmtrain {
     foreach(e_door in m_a_mdl_doors) {
       v_pos = get_door_closed_pos(e_door);
       e_door unlink();
-      e_door moveto(v_pos, 0.3);
+      e_door moveTo(v_pos, 0.3);
       e_door.e_clip unlink();
-      e_door.e_clip moveto(e_door.e_clip.var_b620e1b1.origin, 0.3);
+      e_door.e_clip moveTo(e_door.e_clip.var_b620e1b1.origin, 0.3);
     }
     m_a_mdl_doors[0] waittill("movedone");
     util::wait_network_frame();
@@ -420,8 +420,8 @@ class czmtrain {
       v_pos = get_door_closed_pos(e_door);
       e_door.origin = v_pos;
       e_door.angles = e_door.script_origin.angles;
-      e_door linkto(m_vh_train);
-      e_door.e_clip linkto(m_vh_train);
+      e_door linkTo(m_vh_train);
+      e_door.e_clip linkTo(m_vh_train);
     }
   }
 
@@ -430,9 +430,9 @@ class czmtrain {
     foreach(e_door in m_a_mdl_doors) {
       v_pos = get_door_closed_pos(e_door);
       e_door unlink();
-      e_door moveto(v_pos, 0.3);
+      e_door moveTo(v_pos, 0.3);
       e_door.e_clip unlink();
-      e_door.e_clip moveto(e_door.e_clip.var_b620e1b1.origin, 0.3);
+      e_door.e_clip moveTo(e_door.e_clip.var_b620e1b1.origin, 0.3);
     }
     m_a_mdl_doors[0] waittill("movedone");
     util::wait_network_frame();
@@ -440,8 +440,8 @@ class czmtrain {
       v_pos = get_door_closed_pos(e_door);
       e_door.origin = v_pos;
       e_door.angles = e_door.script_origin.angles;
-      e_door linkto(m_vh_train);
-      e_door.e_clip linkto(m_vh_train);
+      e_door linkTo(m_vh_train);
+      e_door.e_clip linkTo(m_vh_train);
     }
     thread recalc_zombies_locked_in_train();
   }
@@ -466,7 +466,7 @@ class czmtrain {
       if(!isDefined(str_side) || (str_side == "left" && e_door.script_string == "train_rear_door") || (str_side == "right" && e_door.script_string == "train_front_door")) {
         v_pos = get_door_open_pos(e_door);
         e_door unlink();
-        e_door moveto(v_pos, 0.3);
+        e_door moveTo(v_pos, 0.3);
         if(!isDefined(a_doors_moved)) {
           a_doors_moved = [];
         } else if(!isarray(a_doors_moved)) {
@@ -474,7 +474,7 @@ class czmtrain {
         }
         a_doors_moved[a_doors_moved.size] = e_door;
         e_door.e_clip unlink();
-        e_door.e_clip moveto(e_door.e_clip.origin + var_7631d55c, 0.3);
+        e_door.e_clip moveTo(e_door.e_clip.origin + var_7631d55c, 0.3);
       }
     }
     if(a_doors_moved.size > 0) {
@@ -486,8 +486,8 @@ class czmtrain {
       v_pos = get_door_open_pos(e_door);
       e_door.origin = v_pos;
       e_door.angles = e_door.script_origin.angles;
-      e_door linkto(m_vh_train);
-      e_door.e_clip linkto(m_vh_train);
+      e_door linkTo(m_vh_train);
+      e_door.e_clip linkTo(m_vh_train);
     }
     for(i = m_a_zombies_locked_in.size - 1; i >= 0; i--) {
       ai = m_a_zombies_locked_in[i];
@@ -541,7 +541,7 @@ class czmtrain {
     while(true) {
       if(b_open) {
         var_9e0dc993 = 0;
-        e_gate moveto(v_closed, 1);
+        e_gate moveTo(v_closed, 1);
         b_open = 0;
         foreach(nd in a_jump_nodes) {
           unlinktraversal(nd);
@@ -549,7 +549,7 @@ class czmtrain {
       }
       self flag::wait_till_clear("moving");
       if(m_str_station == e_gate.script_string) {
-        e_gate moveto(v_open, 1);
+        e_gate moveTo(v_open, 1);
         b_open = 1;
         e_gate waittill("movedone");
         foreach(nd in a_jump_nodes) {
@@ -569,7 +569,7 @@ class czmtrain {
     assert(isDefined(m_str_station));
     e_lever = m_a_s_stations[str_callbox].callbox;
     t_use = zm_zod_util::spawn_trigger_radius(e_lever.origin, 60, 1);
-    thread run_callbox_hintstring(str_callbox, t_use, getent(e_lever.target, "targetname"));
+    thread run_callbox_hintstring(str_callbox, t_use, getEnt(e_lever.target, "targetname"));
     while(true) {
       t_use waittill("trigger", e_who);
       if(!e_who zm_score::can_player_purchase(500)) {
@@ -787,14 +787,14 @@ class czmtrain {
       e_door = m_a_mdl_doors[i];
       e_door hide();
       if(e_door.script_string == "train_front_door") {
-        e_door.e_clip = getent("train_front_clip", "script_string");
+        e_door.e_clip = getEnt("train_front_clip", "script_string");
       } else if(e_door.script_string == "train_rear_door") {
-        e_door.e_clip = getent("train_rear_clip", "script_string");
+        e_door.e_clip = getEnt("train_rear_clip", "script_string");
       }
       if(isDefined(e_door.e_clip)) {
         e_origin = spawn("script_origin", e_door.e_clip.origin);
         e_origin.angles = m_vh_train.angles;
-        e_origin linkto(m_vh_train);
+        e_origin linkTo(m_vh_train);
         e_door.e_clip.var_b620e1b1 = e_origin;
       }
     }
@@ -830,14 +830,14 @@ class czmtrain {
         if(e_ent.script_string == "train_volume") {
           if(!isDefined(m_e_volume)) {
             assert(!isDefined(m_e_volume));
-            e_ent enablelinkto();
+            e_ent enablelinkTo();
             m_e_volume = e_ent;
           }
         } else if(e_ent.script_string == "train_rear_door" || e_ent.script_string == "train_front_door") {
           if(!isDefined(e_ent.script_origin)) {
             e_ent.script_origin = spawn("script_origin", e_ent.origin);
             e_ent.script_origin.angles = m_vh_train.angles;
-            e_ent.script_origin linkto(m_vh_train);
+            e_ent.script_origin linkTo(m_vh_train);
           }
           if(!isDefined(m_a_mdl_doors)) {
             m_a_mdl_doors = [];
@@ -846,7 +846,7 @@ class czmtrain {
           }
           m_a_mdl_doors[m_a_mdl_doors.size] = e_ent;
         }
-        e_ent linkto(m_vh_train);
+        e_ent linkTo(m_vh_train);
         continue;
       }
       iprintlnbold(("" + zm_zod_util::vec_to_string(e_ent.origin)) + "");
@@ -856,13 +856,13 @@ class czmtrain {
       assertmsg(("" + zm_zod_util::vec_to_string(m_vh_train.origin)) + "");
     }
     m_vh_train function_a8e2d7ff();
-    m_t_switch = getent("m_s_switch_trigger", "targetname");
-    m_t_switch triggerignoreteam();
+    m_t_switch = getEnt("m_s_switch_trigger", "targetname");
+    m_t_switch triggerIgnoreTeam();
     m_t_switch setteamfortrigger("none");
-    m_t_switch sethintstring(&"ZM_ZOD_SWITCH_DISABLE");
-    m_t_switch setcursorhint("HINT_NOICON");
-    m_t_switch enablelinkto();
-    m_t_switch linkto(m_vh_train);
+    m_t_switch setHintString(&"ZM_ZOD_SWITCH_DISABLE");
+    m_t_switch setCursorHint("HINT_NOICON");
+    m_t_switch enablelinkTo();
+    m_t_switch linkTo(m_vh_train);
     m_t_switch.player_used = 0;
     thread main();
     a_callboxes = getEntArray("train_call_lever", "targetname");
@@ -1028,7 +1028,7 @@ class czmtrain {
           var_10b9b744++;
         }
         while(!fatal && !function_eb9ee200(spawnpos));
-        e_player setorigin(spawnpos);
+        e_player setOrigin(spawnpos);
       }
     }
   }
@@ -1155,12 +1155,12 @@ class czmtrain {
     var_aed9540e["slums"] = getEntArray("lgt_train_lightrig_slums_debug", "targetname");
     var_aed9540e["theater"] = getEntArray("lgt_train_lightrig_theater_debug", "targetname");
     var_105cc375 = vectorscale((0, 1, 0), 45);
-    self enablelinkto();
+    self enablelinkTo();
     foreach(var_83e6406e in var_aed9540e) {
       foreach(var_66fccd7 in var_83e6406e) {
         var_66fccd7.origin = origin;
         var_66fccd7.angles = angles + var_105cc375;
-        var_66fccd7 linkto(self);
+        var_66fccd7 linkTo(self);
       }
     }
   }
@@ -1172,11 +1172,11 @@ class czmtrain {
   function enable_train_switches(b_enabled) {
     if(b_enabled) {
       self flag::set("switches_enabled");
-      m_t_switch sethintstring(&"ZM_ZOD_SWITCH_ENABLE");
+      m_t_switch setHintString(&"ZM_ZOD_SWITCH_ENABLE");
       function_ca899bfc();
     } else {
       self flag::clear("switches_enabled");
-      m_t_switch sethintstring(&"ZM_ZOD_SWITCH_DISABLE");
+      m_t_switch setHintString(&"ZM_ZOD_SWITCH_DISABLE");
       m_vh_train notify("hash_51689c0f");
     }
   }
@@ -1319,7 +1319,7 @@ function player_intemission_spawn_callback(origin, angles) {
 function initialize_train() {
   level flag::wait_till("all_players_spawned");
   level flag::wait_till("zones_initialized");
-  e_train = getent("zod_train", "targetname");
+  e_train = getEnt("zod_train", "targetname");
   e_train function_7465f87();
   e_train.takedamage = 0;
   e_train clientfield::set("train_rain_fx_occluder", 1);
@@ -1342,22 +1342,22 @@ function function_f37aa349(sn) {
 function function_7465f87() {
   trigs = getEntArray("train_buyable_weapon", "script_noteworthy");
   foreach(trig in trigs) {
-    trig enablelinkto();
-    trig linkto(self, "", self worldtolocalcoords(trig.origin), (0, 0, 0));
+    trig enablelinkTo();
+    trig linkTo(self, "", self worldtolocalcoords(trig.origin), (0, 0, 0));
     trig.weapon = getweapon(trig.zombie_weapon_upgrade);
-    trig setcursorhint("HINT_WEAPON", trig.weapon);
+    trig setCursorHint("HINT_WEAPON", trig.weapon);
     trig.cost = zm_weapons::get_weapon_cost(trig.weapon);
     trig.hint_string = zm_weapons::get_weapon_hint(trig.weapon);
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
-      trig sethintstring(trig.hint_string);
+      trig setHintString(trig.hint_string);
     } else {
       trig.hint_parm1 = trig.cost;
-      trig sethintstring(trig.hint_string, trig.hint_parm1);
+      trig setHintString(trig.hint_string, trig.hint_parm1);
     }
     self.buyable_weapon = trig;
     level._spawned_wallbuys[level._spawned_wallbuys.size] = trig;
-    weapon_model = getent(trig.target, "targetname");
-    weapon_model linkto(self, "", self worldtolocalcoords(weapon_model.origin), weapon_model.angles + self.angles);
+    weapon_model = getEnt(trig.target, "targetname");
+    weapon_model linkTo(self, "", self worldtolocalcoords(weapon_model.origin), weapon_model.angles + self.angles);
     weapon_model setmovingplatformenabled(1);
     weapon_model._linked_ent = trig;
     weapon_model show();
@@ -1454,7 +1454,7 @@ function function_2e9b7fc1(player, weapon = self.weapon) {
   }
   cursor_hint = "HINT_WEAPON";
   cursor_hint_weapon = weapon;
-  self setcursorhint(cursor_hint, cursor_hint_weapon);
+  self setCursorHint(cursor_hint, cursor_hint_weapon);
   return true;
 }
 
@@ -1537,13 +1537,13 @@ function is_ready_for_jumper() {
 }
 
 function debug_go_to_train() {
-  train = getent("", "");
+  train = getEnt("", "");
   if(isDefined(train)) {
     train_origin = train getorigin();
     player = level.players[0];
     if(isDefined(player) && isDefined(train_origin)) {
       train_origin = (train_origin[0], train_origin[1], train_origin[2] - 100);
-      player setorigin(train_origin);
+      player setOrigin(train_origin);
     }
   }
 }

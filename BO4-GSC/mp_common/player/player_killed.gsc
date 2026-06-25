@@ -176,7 +176,7 @@ function_284c61bd(attacker, meansofdeath, bledout = 0) {
 
 function_66cec679() {
   team = self.team;
-  teammates = getplayers(team);
+  teammates = getPlayers(team);
 
   foreach(player in teammates) {
     if(player == self) {
@@ -1096,7 +1096,7 @@ function_7b0f4389() {
 
     if(showmenu) {
       if(isDefined(self.predicted_spawn_point)) {
-        self setorigin(self.predicted_spawn_point.origin);
+        self setOrigin(self.predicted_spawn_point.origin);
         self setplayerangles(self.predicted_spawn_point.angles);
       }
 
@@ -1666,7 +1666,7 @@ function_395ef176() {
 
   if(isDefined(level.teambased) && level.teambased && isDefined(level.takelivesondeath) && level.takelivesondeath && level.numteamlives > 0) {
     enemy_team = util::getotherteam(self.team);
-    teamarray = getplayers(self.team);
+    teamarray = getPlayers(self.team);
 
     if(game.lives[self.team] == 0 && !level.var_61952d8b[self.team]) {
       level.var_61952d8b[self.team] = 1;

@@ -98,7 +98,7 @@ function timeout_beep(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 function function_6d265b7f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  players = getplayers(fieldname);
+  players = getPlayers(fieldname);
 
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -112,7 +112,7 @@ function function_6d265b7f(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_c66f053(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   local_player = self;
   var_c86e6ba8 = self.team;
-  players = getplayers(fieldname);
+  players = getPlayers(fieldname);
   should_play = bwastimejump == 1;
 
   foreach(player in players) {
@@ -226,7 +226,7 @@ function function_74f5faf8(eventparams) {
       var_dc39bd32 codestoppostfxbundle(var_dc39bd32.var_29806c31);
     }
 
-    foreach(player in getplayers(localclientnum)) {
+    foreach(player in getPlayers(localclientnum)) {
       if(isDefined(player) && !isremovedentity(player)) {
         player renderoverridebundle::function_f4eab437(localclientnum, 0, #"hash_2c6fce4151016478");
       }

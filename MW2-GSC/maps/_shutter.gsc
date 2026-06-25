@@ -87,14 +87,14 @@ new_style_shutters() {
   shutters = getEntArray("shutter", "targetname");
 
   foreach(shutter in shutters) {
-    target_ent = getent(shutter.target, "targetname");
+    target_ent = getEnt(shutter.target, "targetname");
 
     pivot = spawn("script_origin", shutter.origin);
     pivot.angles = target_ent.angles;
     pivot.startYaw = pivot.angles[1];
 
     shutter.pivot = pivot;
-    shutter linkto(pivot);
+    shutter linkTo(pivot);
     pivot addyaw(randomfloatrange(-90, 90));
 
     shutter thread shutterSound();
@@ -160,7 +160,7 @@ shutterWander(shutter, windDirection) {
       newTime = 0.25;
     }
 
-    pivot RotateTo((0, dest_yaw, 0), newTime, newTime * 0.5, newTime * 0.5);
+    pivot rotateTo((0, dest_yaw, 0), newTime, newTime * 0.5, newTime * 0.5);
 
     wait(newTime);
   }
@@ -176,7 +176,7 @@ shutterWanderLeft(shutter, windDirection) {
   }
 
   newTime = 0.2;
-  shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
+  shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
   for(;;) {
@@ -199,7 +199,7 @@ shutterWanderLeft(shutter, windDirection) {
       newTime = 0.3;
     }
 
-    shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
+    shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
     wait(newTime);
   }
 }
@@ -214,7 +214,7 @@ shutterWanderRight(shutter, windDirection) {
   }
 
   newTime = 0.2;
-  shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
+  shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime);
   wait(newTime + 0.1);
 
   for(;;) {
@@ -237,7 +237,7 @@ shutterWanderRight(shutter, windDirection) {
       newTime = 0.3;
     }
 
-    shutter RotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
+    shutter rotateTo((shutter.angles[0], newYaw, shutter.angles[2]), newTime, newTime * 0.5, newTime * 0.5);
     wait(newTime);
   }
 }
@@ -261,7 +261,7 @@ wireWander(wire) {
   ent.origin = vector_multiply(org1, 0.5) + vector_multiply(org2, 0.5);
 
   ent.angles = angles;
-  wire LinkTo(ent);
+  wire linkTo(ent);
   rottimer = 2;
   rotrange = 0.9;
   dist = 4 + RandomFloat(2);

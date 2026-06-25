@@ -332,11 +332,11 @@ move_truck_junk_here(var_0) {
     var_2 unlink();
 
     if(isDefined(var_2.script_ghettotag)) {
-      var_2 linkto(var_0, var_2.script_ghettotag, var_2.base_origin, var_2.base_angles);
+      var_2 linkTo(var_0, var_2.script_ghettotag, var_2.base_origin, var_2.base_angles);
       continue;
     }
 
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
   }
 }
 
@@ -381,7 +381,7 @@ move_riders_here(var_0) {
       continue;
     }
     var_3 unlink();
-    var_3 linkto(var_0, var_4.sittag, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, var_4.sittag, (0, 0, 0), (0, 0, 0));
 
     if(isai(var_3)) {
       var_3 forceteleport(var_0 gettagorigin(var_4.sittag));

@@ -28,7 +28,7 @@ func_00F9() {
 }
 
 func_7830() {
-  var_00 = getent("bunker_ent_dialogue", "targetname");
+  var_00 = getEnt("bunker_ent_dialogue", "targetname");
   var_00 func_A77B();
   if(!lib_0557::func_42D6("1 fire well")) {
     lib_0557::func_8564("1 fire well", 1);
@@ -135,20 +135,20 @@ func_44F7() {
 }
 
 func_AA06() {
-  var_00 = getent("well_clip_bottom", "script_noteworthy");
+  var_00 = getEnt("well_clip_bottom", "script_noteworthy");
   var_00.var_0116 = var_00.var_0116 + (0, 0, 128);
   var_00.var_50D0 = 0;
   wait 0.05;
   var_00 notsolid();
-  var_01 = getent("well_clip_top_plug", "script_noteworthy");
+  var_01 = getEnt("well_clip_top_plug", "script_noteworthy");
   var_01.var_0116 = var_01.var_0116 + (0, 0, -128);
   var_01.var_50D0 = 1;
   wait 0.05;
   var_01 method_805F();
-  var_02 = getent("well_clip_door", "script_noteworthy");
+  var_02 = getEnt("well_clip_door", "script_noteworthy");
   var_02.var_0116 = var_02.var_0116 + (0, 0, -128);
   var_02.var_50D0 = 1;
-  var_03 = getent("well_clip_door_ai", "script_noteworthy");
+  var_03 = getEnt("well_clip_door_ai", "script_noteworthy");
   var_03.var_0116 = var_03.var_0116 + (0, 0, -128);
   var_03.var_50D0 = 1;
   wait 0.05;
@@ -157,8 +157,8 @@ func_AA06() {
 
 func_AA05() {
   var_00 = getEntArray("well_clip_top", "script_noteworthy");
-  var_01 = getent("well_clip_top_plug", "script_noteworthy");
-  var_02 = getent("well_clip_door", "script_noteworthy");
+  var_01 = getEnt("well_clip_top_plug", "script_noteworthy");
+  var_02 = getEnt("well_clip_door", "script_noteworthy");
   foreach(var_04 in var_00) {
     var_04 notsolid();
     var_04 method_8060();
@@ -171,7 +171,7 @@ func_AA05() {
 }
 
 func_AA04() {
-  var_00 = getent("well_clip_bottom", "script_noteworthy");
+  var_00 = getEnt("well_clip_bottom", "script_noteworthy");
   if(!var_00.var_50D0) {
     var_00.var_0116 = var_00.var_0116 + (0, 0, -128);
     var_00.var_50D0 = 1;
@@ -179,16 +179,16 @@ func_AA04() {
 
   wait 0.05;
   var_00 solid();
-  var_01 = getent("well_clip_top_plug", "script_noteworthy");
+  var_01 = getEnt("well_clip_top_plug", "script_noteworthy");
   var_01 solid();
-  var_02 = getent("well_clip_door", "script_noteworthy");
+  var_02 = getEnt("well_clip_door", "script_noteworthy");
   var_02 solid();
-  var_03 = getent("well_clip_door_ai", "script_noteworthy");
+  var_03 = getEnt("well_clip_door_ai", "script_noteworthy");
   var_03 solid();
 }
 
 func_AA07() {
-  var_00 = getent("well_clip_bottom", "script_noteworthy");
+  var_00 = getEnt("well_clip_bottom", "script_noteworthy");
   if(!var_00.var_50D0) {
     var_00.var_0116 = var_00.var_0116 + (0, 0, -128);
     var_00.var_50D0 = 1;
@@ -196,23 +196,23 @@ func_AA07() {
 
   wait 0.05;
   var_00 solid();
-  var_01 = getent("well_clip_door_ai", "script_noteworthy");
+  var_01 = getEnt("well_clip_door_ai", "script_noteworthy");
   var_01 method_8060();
   var_01 notsolid();
 }
 
 func_AA08() {
-  var_00 = getent("well_clip_bottom", "script_noteworthy");
+  var_00 = getEnt("well_clip_bottom", "script_noteworthy");
   var_00 notsolid();
   wait 0.05;
   var_00 delete();
-  var_01 = getent("well_clip_top_plug", "script_noteworthy");
+  var_01 = getEnt("well_clip_top_plug", "script_noteworthy");
   var_01 notsolid();
   var_01 method_805F();
-  var_02 = getent("well_clip_door", "script_noteworthy");
+  var_02 = getEnt("well_clip_door", "script_noteworthy");
   var_02 notsolid();
   var_02 delete();
-  var_03 = getent("well_clip_door_ai", "script_noteworthy");
+  var_03 = getEnt("well_clip_door_ai", "script_noteworthy");
   var_03 notsolid();
   var_03 method_805F();
 }
@@ -232,7 +232,7 @@ func_0985() {
 }
 
 func_7856() {
-  var_00 = getent("pilot_light_trigger", "targetname");
+  var_00 = getEnt("pilot_light_trigger", "targetname");
   var_01 = spawnStruct();
   var_00 childthread common_scripts\utility::func_A75D("trigger", var_01);
   foreach(var_03 in level.var_3EFB) {
@@ -281,10 +281,10 @@ func_7855() {
   }
 
   lib_0557::func_7822("1 fire well", &"ZOMBIE_NEST_HINT_STEP_PILOT_LIGHT");
-  var_08 = getent("pilot_light_trigger", "targetname");
+  var_08 = getEnt("pilot_light_trigger", "targetname");
   if(0) {
     if(isDefined(var_08)) {
-      var_09 = getent("nest_ee_pilot_light_model", "targetname");
+      var_09 = getEnt("nest_ee_pilot_light_model", "targetname");
       var_0A = lib_0557::func_782F(undefined, [var_09]);
       lib_0557::func_781D("1 fire well", var_0A);
     }
@@ -536,7 +536,7 @@ func_2EB3(param_00, param_01) {
 }
 
 func_AC98() {
-  var_00 = getent("pilot_light_trigger", "targetname");
+  var_00 = getEnt("pilot_light_trigger", "targetname");
   var_00 thread func_AC99();
   for(;;) {
     var_00 waittill("trigger", var_01);
@@ -552,7 +552,7 @@ func_AC98() {
     if(common_scripts\utility::func_3C77("fuel_valve_1") && common_scripts\utility::func_3C77("fuel_valve_2") && common_scripts\utility::func_3C77("fuel_valve_3")) {
       level.var_6FEB = var_01;
       common_scripts\utility::func_3C8F("Pilot light activated");
-      var_00 sethintstring(&"ZOMBIES_EMPTY_STRING");
+      var_00 setHintString(&"ZOMBIES_EMPTY_STRING");
       break;
     } else {
       thread func_2E85(var_01);
@@ -561,9 +561,9 @@ func_AC98() {
 }
 
 func_AC99() {
-  self sethintstring(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
+  self setHintString(&"ZOMBIE_NEST_OBJECTIVE_OFFLINE");
   common_scripts\utility::func_3CA0("fuel_valve_1", "fuel_valve_2", "fuel_valve_3");
-  self sethintstring(&"ZOMBIE_NEST_PILOTLIGHT");
+  self setHintString(&"ZOMBIE_NEST_PILOTLIGHT");
 }
 
 func_848D(param_00) {
@@ -571,12 +571,12 @@ func_848D(param_00) {
     return;
   }
 
-  var_01 = getent("pilot_light_trigger", "targetname");
+  var_01 = getEnt("pilot_light_trigger", "targetname");
   var_01 common_scripts\utility::func_9DA3();
 }
 
 func_848C() {
-  var_00 = getent("pilot_light_trigger", "targetname");
+  var_00 = getEnt("pilot_light_trigger", "targetname");
   var_00 common_scripts\utility::func_9D9F();
 }
 
@@ -732,7 +732,7 @@ func_3C21() {
         if(common_scripts\utility::func_3C77("fire trap active")) {
           if(func_3C27()) {
             var_01.var_6B38 = 1;
-            var_02 = 5000 * vectornormalize(var_01.var_0116 - var_00.var_0116);
+            var_02 = 5000 * vectorNormalize(var_01.var_0116 - var_00.var_0116);
             var_01 lib_0547::func_5A85("torso_lower", (var_02[0], var_02[1], 5000), level.fire_well_trap, "trap_zm_mp");
             if(!isDefined(self.hitbytrap)) {
               foreach(var_04 in level.var_744A) {

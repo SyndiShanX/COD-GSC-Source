@@ -24,7 +24,7 @@ init() {
   level thread wait_for_initial_conditions();
   array_thread(level.zombie_spawners, ::add_spawn_function, ::zombie_spoon_func);
   level thread bucket_init();
-  spork_portal = getent("afterlife_show_spork", "targetname");
+  spork_portal = getEnt("afterlife_show_spork", "targetname");
   spork_portal setinvisibletoall();
   level.b_spoon_in_tub = 0;
   level.n_spoon_kill_count = 0;
@@ -35,11 +35,11 @@ init() {
 }
 
 spoon_easy_cleanup() {
-  spork_portal = getent("afterlife_show_spork", "targetname");
+  spork_portal = getEnt("afterlife_show_spork", "targetname");
   spork_portal delete();
-  m_spoon_pickup = getent("pickup_spoon", "targetname");
+  m_spoon_pickup = getEnt("pickup_spoon", "targetname");
   m_spoon_pickup delete();
-  m_spoon = getent("zap_spoon", "targetname");
+  m_spoon = getEnt("zap_spoon", "targetname");
   m_spoon delete();
 }
 
@@ -92,7 +92,7 @@ zombie_spoon_func() {
 }
 
 wait_for_initial_conditions() {
-  m_spoon_pickup = getent("pickup_spoon", "targetname");
+  m_spoon_pickup = getEnt("pickup_spoon", "targetname");
   m_spoon_pickup ghost();
   m_spoon_pickup ghostindemo();
 
@@ -101,7 +101,7 @@ wait_for_initial_conditions() {
   }
 
   flag_wait("soul_catchers_charged");
-  m_poster = getent("poster", "targetname");
+  m_poster = getEnt("poster", "targetname");
   m_poster.health = 5000;
   m_poster setCanDamage(1);
   b_poster_knocked_down = 0;
@@ -111,7 +111,7 @@ wait_for_initial_conditions() {
 
     if(weaponname == "frag_grenade_zm" || weaponname == "bouncing_tomahawk_zm" || weaponname == "upgraded_tomahawk_zm") {
       b_poster_knocked_down = 1;
-      playsoundatposition("zmb_squest_spoon_poster", m_poster.origin);
+      playSoundAtPosition("zmb_squest_spoon_poster", m_poster.origin);
       m_poster delete();
 
       if(isDefined(attacker) && isPlayer(attacker)) {
@@ -123,11 +123,11 @@ wait_for_initial_conditions() {
     }
   }
 
-  spork_door = getent("spork_door", "targetname");
+  spork_door = getEnt("spork_door", "targetname");
   spork_door.targetname = "afterlife_door";
-  spork_portal = getent("afterlife_show_spork", "targetname");
+  spork_portal = getEnt("afterlife_show_spork", "targetname");
   spork_portal.targetname = "afterlife_show";
-  m_spoon = getent("zap_spoon", "targetname");
+  m_spoon = getEnt("zap_spoon", "targetname");
   m_spoon ghostindemo();
   m_spoon.health = 50000;
   m_spoon setCanDamage(1);
@@ -155,14 +155,14 @@ tomahawk_the_spoon(grenade, n_grenade_charge_power) {
     return false;
   }
 
-  m_spoon = getent("pickup_spoon", "targetname");
+  m_spoon = getEnt("pickup_spoon", "targetname");
 
   if(distancesquared(m_spoon.origin, grenade.origin) < 40000) {
     m_tomahawk = maps\mp\zombies\_zm_weap_tomahawk::tomahawk_spawn(grenade.origin);
     m_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
     m_player_spoon = spawn("script_model", grenade.origin);
     m_player_spoon setModel("t6_wpn_zmb_spoon_world");
-    m_player_spoon linkto(m_tomahawk);
+    m_player_spoon linkTo(m_tomahawk);
     self maps\mp\zombies\_zm_stats::increment_client_stat("prison_ee_spoon_acquired", 0);
     self thread maps\mp\zombies\_zm_weap_tomahawk::tomahawk_return_player(m_tomahawk);
     self thread give_player_spoon_upon_receipt(m_tomahawk, m_player_spoon);
@@ -201,12 +201,12 @@ give_player_spoon_upon_receipt(m_tomahawk, m_player_spoon) {
 }
 
 bucket_init() {
-  s_bathtub = getstruct("tub_trigger_struct", "targetname");
+  s_bathtub = getStruct("tub_trigger_struct", "targetname");
   level.t_bathtub = spawn("trigger_radius_use", s_bathtub.origin, 0, 40, 150);
-  level.t_bathtub usetriggerrequirelookat();
-  level.t_bathtub triggerignoreteam();
-  level.t_bathtub sethintstring("");
-  level.t_bathtub setcursorhint("HINT_NOICON");
+  level.t_bathtub useTriggerRequireLookAt();
+  level.t_bathtub triggerIgnoreTeam();
+  level.t_bathtub setHintString("");
+  level.t_bathtub setCursorHint("HINT_NOICON");
 }
 
 wait_for_bucket_activated(player) {
@@ -256,7 +256,7 @@ thrust_the_spork() {
 
 debug_prison_spoon_quest() {
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(player hasweapon("bouncing_tomahawk_zm")) {

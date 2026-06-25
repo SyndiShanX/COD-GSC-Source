@@ -477,7 +477,7 @@ func_6C3A(param_00) {
     return (0, 0, 0);
   }
 
-  var_03 = vectornormalize(var_01);
+  var_03 = vectorNormalize(var_01);
   var_04 = param_00[2] * -1;
   var_05 = (var_03[0] * var_04, var_03[1] * var_04, var_02);
   var_06 = vectortoangles(var_05);
@@ -3871,7 +3871,7 @@ func_3B8E(param_00, param_01, param_02) {
 
 findplayerisfacing(param_00, param_01, param_02) {
   var_03 = distance(param_00 getEye(), param_01.var_0116);
-  var_04 = param_00 getEye() + var_03 * vectornormalize(anglesToForward(param_00 geteyeangles()));
+  var_04 = param_00 getEye() + var_03 * vectorNormalize(anglesToForward(param_00 geteyeangles()));
   return distance(param_01.var_0116, var_04) < param_02;
 }
 
@@ -3879,9 +3879,9 @@ findisfacingvectors(param_00, param_01, param_02, param_03) {
   var_04 = cos(param_03);
   var_05 = param_02 - param_00;
   var_05 = var_05 * (1, 1, 0);
-  var_05 = vectornormalize(var_05);
+  var_05 = vectorNormalize(var_05);
   param_01 = param_01 * (1, 1, 0);
-  param_01 = vectornormalize(param_01);
+  param_01 = vectorNormalize(param_01);
   var_06 = vectordot(var_05, param_01);
   return var_06 >= var_04;
 }
@@ -5231,8 +5231,8 @@ func_5FBA(param_00, param_01, param_02, param_03) {
 
   func_065E(var_04, param_00, param_02, param_03);
   self registerusable(var_04, param_02, param_03);
-  self sethintstring(param_01);
-  self setcursorhint("HINT_NOICON");
+  self setHintString(param_01);
+  self setCursorHint("HINT_NOICON");
 }
 
 func_065E(param_00, param_01, param_02, param_03) {
@@ -5542,7 +5542,7 @@ func_863F(param_00, param_01, param_02, param_03) {
 }
 
 func_907D(param_00, param_01, param_02) {
-  var_03 = getent(param_00, "targetname");
+  var_03 = getEnt(param_00, "targetname");
   if(!isDefined(var_03)) {
     return undefined;
   }
@@ -5879,7 +5879,7 @@ func_44DD() {
 }
 
 func_5C98(param_00, param_01, param_02) {
-  var_03 = getent(param_00, "targetname");
+  var_03 = getEnt(param_00, "targetname");
   if(!isDefined(var_03)) {
     return;
   }

@@ -273,7 +273,7 @@ setupExploders() {
     }
 
     if(isDefined(exploder.target)) {
-      org = getent(ent.v["target"], "targetname").origin;
+      org = getEnt(ent.v["target"], "targetname").origin;
       ent.v["angles"] = vectortoangles(org - ent.v["origin"]);
     }
 

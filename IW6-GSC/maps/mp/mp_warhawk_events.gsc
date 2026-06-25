@@ -669,8 +669,8 @@ jet_flyby() {
 
       model playLoopSound("cobra_helicopter_dying_loop");
 
-      model MoveTo(end.origin, time);
-      model RotateTo(end.angles, time);
+      model moveTo(end.origin, time);
+      model rotateTo(end.angles, time);
       model waittill("movedone");
       model Delete();
 
@@ -694,7 +694,7 @@ air_raid() {
     air_raid_path.ends = [];
     end = air_raid_path;
     while(isDefined(end.target)) {
-      end = getstruct(end.target, "targetname");
+      end = getStruct(end.target, "targetname");
       if(!isDefined(end.radius)) {
         end.radius = 100;
       }
@@ -859,10 +859,10 @@ chain_gate_trigger_wait_damage(gate_trigger) {
 }
 
 chain_gate() {
-  left_gate = GetEnt("left_gate", "targetname");
-  right_gate = GetEnt("right_gate", "targetname");
-  lock = GetEnt("lock", "targetname");
-  gate_clip = GetEnt("gate_clip", "targetname");
+  left_gate = getEnt("left_gate", "targetname");
+  right_gate = getEnt("right_gate", "targetname");
+  lock = getEnt("lock", "targetname");
+  gate_clip = getEnt("gate_clip", "targetname");
   gate_triggers = getEntArray("gate_trigger", "targetname");
 
   gate_anim_node = spawn("script_model", left_gate.origin);
@@ -871,8 +871,8 @@ chain_gate() {
   waitframe();
   gate_clip ConnectPaths();
   waitframe();
-  left_gate LinkTo(gate_anim_node, "j_prop_1");
-  right_gate LinkTo(gate_anim_node, "j_prop_2");
+  left_gate linkTo(gate_anim_node, "j_prop_1");
+  right_gate linkTo(gate_anim_node, "j_prop_2");
   waitframe();
   centerpoint = (0, 0, 0);
   num_trigs = 0;
@@ -935,7 +935,7 @@ bot_outside_gate_watch() {
   level endon("chain_broken");
 
   gate_triggers = getEntArray("gate_trigger", "targetname");
-  near_gate_volume = GetEnt("near_gate_volume", "targetname");
+  near_gate_volume = getEnt("near_gate_volume", "targetname");
 
   while(1) {
     if(isDefined(level.participants)) {

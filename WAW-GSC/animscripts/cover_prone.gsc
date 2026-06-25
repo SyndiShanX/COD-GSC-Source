@@ -207,7 +207,7 @@ tryThrowingGrenade(throwAt, safe) {
 
 considerThrowGrenade() {
   if(isDefined(anim.throwGrenadeAtPlayerASAP)) {
-    players = GetPlayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isAlive(players[i])) {
         if(tryThrowingGrenade(players[i], 200)) {

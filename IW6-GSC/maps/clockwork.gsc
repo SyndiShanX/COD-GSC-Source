@@ -42,7 +42,7 @@ main() {
 }
 
 fx_aurora_anim() {
-  var_0 = getent("clk_aurora", "targetname");
+  var_0 = getEnt("clk_aurora", "targetname");
 
   if(isDefined(var_0)) {
     var_0.animname = "aurora";

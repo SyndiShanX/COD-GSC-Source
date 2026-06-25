@@ -280,7 +280,7 @@ bgb_devgui_think() {
 bgb_devgui_acquire(bgb_name) {
   bgb_name = hash(bgb_name);
   playerid = getdvarint(#"hash_7877ee182ba11433", 0);
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(playerid != -1 && playerid != i) {

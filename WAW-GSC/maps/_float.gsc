@@ -54,7 +54,7 @@ floater_think(range, freq, wavelength, rotation, origin) {
   }
 
   org = spawn("script_origin", center);
-  self linkto(org);
+  self linkTo(org);
 
   angles = vectortoangles(center - origin);
   self.nangles = org.angles;
@@ -72,7 +72,7 @@ floater_bob(frac, org) {
 
   while(1) {
     self.rangles = vectorScale(self.rangles, -1);
-    org rotateto(self.rangles, self.time, self.acc, self.acc);
+    org rotateTo(self.rangles, self.time, self.acc, self.acc);
     org waittill("rotatedone");
   }
 }

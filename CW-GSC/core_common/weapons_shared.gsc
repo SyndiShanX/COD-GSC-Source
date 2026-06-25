@@ -52,7 +52,7 @@ function function_867af0b() {
       }
 
       gameobject_link = util::spawn_model("<dev string:x43>", player.origin, player.angles);
-      player playerlinkto(gameobject_link, "<dev string:x43>", 0, 60, 60, 30, 10, 0);
+      player playerlinkTo(gameobject_link, "<dev string:x43>", 0, 60, 60, 30, 10, 0);
       player function_66f3a713();
     } else if(test_mount == 2) {
       player unlink();
@@ -161,7 +161,7 @@ function function_e870d33d() {
         var_6b6455b9 = var_4d7355d2 * -1;
         var_a3a6eba5 = vectortoangles(var_6b6455b9);
       } else {
-        var_4d7355d2 = vectornormalize((var_6b6455b9[0], var_6b6455b9[1], 0)) * -1;
+        var_4d7355d2 = vectorNormalize((var_6b6455b9[0], var_6b6455b9[1], 0)) * -1;
       }
 
       if(current_weapon.var_ba335ef) {
@@ -199,10 +199,10 @@ function function_e870d33d() {
 
         var_80a327fb = var_37c33d3b >= 36 ? "stand" : "crouch";
         exit_origin = player.origin;
-        vehicle_origin = player.origin + vectorscale(vectornormalize((player_forward[0], player_forward[1], 0)), float(isDefined(settings.var_4207321e) ? settings.var_4207321e : 16));
+        vehicle_origin = player.origin + vectorscale(vectorNormalize((player_forward[0], player_forward[1], 0)), float(isDefined(settings.var_4207321e) ? settings.var_4207321e : 16));
         vehicle_origin += (0, 0, var_5035eb1b);
         player.var_2d23ee07 = var_5035eb1b;
-        vehicle = spawnvehicle(var_13ab34e1, vehicle_origin, var_a3a6eba5);
+        vehicle = spawnVehicle(var_13ab34e1, vehicle_origin, var_a3a6eba5);
         vehicle.team = player.team;
         vehicle setteam(vehicle.team);
         vehicle hide();
@@ -278,7 +278,7 @@ function function_e870d33d() {
         vehicle = undefined;
 
         if(vehicle_used) {
-          player setorigin(exit_origin);
+          player setOrigin(exit_origin);
         }
 
         if(var_628f1aed) {
@@ -304,7 +304,7 @@ function function_e870d33d() {
       }
 
       gameobject_link = util::spawn_model("tag_origin", player.origin, var_a3a6eba5);
-      player playerlinkto(gameobject_link);
+      player playerlinkTo(gameobject_link);
       var_79ed7809 = current_weapon.var_40ffe7d2;
       var_79ed7809 = player function_c0101095(current_weapon, var_6b6455b9, var_79ed7809);
       player lerpviewangleclamp(0.5, 0.1, 0.1, current_weapon.var_16e90b80, current_weapon.var_27c94b15, current_weapon.var_6cb9946f, var_79ed7809);
@@ -344,7 +344,7 @@ function function_18a9a4e4(settings) {
     return;
   }
 
-  player playrumbleonentity(settings.mountable_weapon_mounted_rumble);
+  player playRumbleOnEntity(settings.mountable_weapon_mounted_rumble);
 }
 
 function function_7a677105(weapon) {
@@ -465,8 +465,8 @@ function stow_on_back(current) {
         var_6a84bf5b = (0, 90, 0);
       }
 
-      self.var_9ed9707e linkto(self, "tag_origin", v_link_offset, var_6a84bf5b);
-      self.var_9ed9707e setplayercollision(0);
+      self.var_9ed9707e linkTo(self, "tag_origin", v_link_offset, var_6a84bf5b);
+      self.var_9ed9707e setPlayerCollision(0);
       self.tag_stowed_back = undefined;
       return;
     }
@@ -564,7 +564,7 @@ function weapondamagetrace(from, to, startradius, ignore) {
     midpos = to;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
 

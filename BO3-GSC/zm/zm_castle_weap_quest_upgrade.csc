@@ -724,7 +724,7 @@ function function_c069c332(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_2514cb86(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    var_c6a8f11b = getent(localclientnum, "quest_rune_orb", "targetname");
+    var_c6a8f11b = getEnt(localclientnum, "quest_rune_orb", "targetname");
     if(isDefined(var_c6a8f11b)) {
       var_c6a8f11b delete();
     }

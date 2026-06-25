@@ -21,7 +21,7 @@ init() {
   trigs = getEntArray("claymore_purchase", "targetname");
 
   for(i = 0; i < trigs.size; i++) {
-    model = getent(trigs[i].target, "targetname");
+    model = getEnt(trigs[i].target, "targetname");
 
     if(isDefined(model)) {
       model hide();
@@ -40,8 +40,8 @@ init() {
 
 buy_claymores() {
   self.zombie_cost = 1000;
-  self sethintstring(&"ZOMBIE_CLAYMORE_PURCHASE");
-  self setcursorhint("HINT_WEAPON", "claymore_zm");
+  self setHintString(&"ZOMBIE_CLAYMORE_PURCHASE");
+  self setCursorHint("HINT_WEAPON", "claymore_zm");
   self endon("kill_trigger");
 
   if(!isDefined(self.stub)) {
@@ -78,7 +78,7 @@ buy_claymores() {
           }
 
           if(self.claymores_triggered == 0) {
-            model = getent(self.target, "targetname");
+            model = getEnt(self.target, "targetname");
 
             if(isDefined(model)) {
               model thread maps\mp\zombies\_zm_weapons::weapon_show(who);
@@ -110,13 +110,13 @@ buy_claymores() {
 
 claymore_unitrigger_update_prompt(player) {
   if(player is_player_placeable_mine("claymore_zm")) {
-    self sethintstring("");
-    self setcursorhint("HINT_NOICON");
+    self setHintString("");
+    self setCursorHint("HINT_NOICON");
     return false;
   }
 
-  self sethintstring(&"ZOMBIE_CLAYMORE_PURCHASE");
-  self setcursorhint("HINT_WEAPON", "claymore_zm");
+  self setHintString(&"ZOMBIE_CLAYMORE_PURCHASE");
+  self setCursorHint("HINT_WEAPON", "claymore_zm");
   return true;
 }
 
@@ -257,7 +257,7 @@ pickup_claymores_trigger_listener_enable(trigger, player) {
       return;
     }
     trigger trigger_on();
-    trigger linkto(self);
+    trigger linkTo(self);
   }
 }
 
@@ -286,7 +286,7 @@ shouldaffectweaponobject(object) {
     return false;
   }
 
-  dirtopos = vectornormalize(dirtopos);
+  dirtopos = vectorNormalize(dirtopos);
   dot = vectordot(dirtopos, objectforward);
   return dot > level.claymore_detectiondot;
 }
@@ -297,8 +297,8 @@ claymore_detonation() {
   detonateradius = 96;
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateradius), 4, detonateradius, detonateradius * 2);
   damagearea setexcludeteamfortrigger(self.team);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
 
   if(is_true(self.isonbus)) {
     damagearea setmovingplatformenabled(1);

@@ -44,7 +44,7 @@ function function_633f25cf(var_c93cfecf) {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!player stats::function_e3eb9a8b(#"hash_4bc6f04ed9a574bc", var_c93cfecf)) {
     if(player stats::function_505387a6(#"hash_4bc6f04ed9a574bc", var_c93cfecf, 1)) {
@@ -110,7 +110,7 @@ function private function_8de07df8(var_cffbeaae, var_f35de83) {
   var_cffbeaae.origin = var_f35de83.origin;
   var_cffbeaae.angles = var_f35de83.angles;
   vec_right = anglestoright(self.angles);
-  vec_to_player = vectornormalize(level.player getplayercamerapos() - self.origin);
+  vec_to_player = vectorNormalize(level.player getplayercamerapos() - self.origin);
   n_dot = vectordot(vec_right, vec_to_player);
 
   if(abs(n_dot) < 0.3) {
@@ -144,7 +144,7 @@ function private function_eee069b6(b_enable) {
 
 function play() {
   if(!isDefined(level.player)) {
-    level.player = getplayers()[0];
+    level.player = getPlayers()[0];
   }
 
   level.player flag::set(#"playing_arcade_game");
@@ -186,7 +186,7 @@ function private function_939f5cad(machine) {
 
 function exit() {
   if(!isDefined(level.player)) {
-    level.player = getplayers()[0];
+    level.player = getPlayers()[0];
   }
 
   var_cffbeaae = struct::get(#"hash_23c049910e1e4a97");
@@ -210,7 +210,7 @@ function exit() {
 
 function function_71510186() {
   if(!isDefined(level.player)) {
-    level.player = getplayers()[0];
+    level.player = getPlayers()[0];
   }
 
   level.player function_d6faeb2b();

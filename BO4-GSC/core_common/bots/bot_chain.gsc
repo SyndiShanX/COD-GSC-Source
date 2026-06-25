@@ -280,7 +280,7 @@ function_ea764100() {
     }
 
     entities = bot::get_bots();
-    players = getplayers();
+    players = getPlayers();
     campos = (0, 0, 0);
 
     if(players.size > 0) {

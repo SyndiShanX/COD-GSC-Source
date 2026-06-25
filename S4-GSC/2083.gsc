@@ -56,12 +56,12 @@ _id_106A(var_0) {
 
   var_7 = var_0 gettagorigin("tag_turret_pitch");
   var_8 = _id_07D6::_id_3FF0(var_7, "HINT_BUTTON", "hud_icon_turret", &"KILLSTREAKS_HINTS/SENTRY_USE_GL");
-  var_8 linkto(var_0, "tag_turret_pitch", (0, 0, 5), (0, 0, 0));
+  var_8 linkTo(var_0, "tag_turret_pitch", (0, 0, 5), (0, 0, 0));
   var_0._id_FE90 = var_8;
   var_8 thread _id_F89A(var_0);
   var_9 = var_0 gettagorigin("tag_player");
   var_0.killcament = spawn("script_model", var_9);
-  var_0.killcament linkto(var_0, "tag_player", (-60, 0, 20), (0, 0, 0));
+  var_0.killcament linkTo(var_0, "tag_player", (-60, 0, 20), (0, 0, 0));
 }
 
 _id_F89A(var_0) {

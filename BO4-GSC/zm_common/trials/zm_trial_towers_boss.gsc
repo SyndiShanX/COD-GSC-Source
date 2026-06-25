@@ -75,16 +75,16 @@ function_8318a404() {
   level endon(#"end_of_round");
   zm_zonemgr::enable_zone("zone_boss_battle");
   setclearanceceiling(142);
-  level.boss_entry_tower_remains = getent("boss_entry_tower_remains", "targetname");
+  level.boss_entry_tower_remains = getEnt("boss_entry_tower_remains", "targetname");
 
   if(isDefined(level.boss_entry_tower_remains)) {
     level.boss_entry_tower_remains hide();
   }
 
-  entrance_tower_collision = getent("entrance_tower_collision", "targetname");
+  entrance_tower_collision = getEnt("entrance_tower_collision", "targetname");
 
   if(isDefined(entrance_tower_collision)) {
-    entrance_tower_collision disconnectpaths();
+    entrance_tower_collision disconnectPaths();
   }
 
   level scene::init("boss_battle_tempo", "targetname");
@@ -100,10 +100,10 @@ function_8318a404() {
   level thread zm_utility::function_9ad5aeb1(0, 1, 1, 0);
   wait 1;
   var_ff91be3a = struct::get_array("s_zm_towers_port_to_boss", "targetname");
-  var_a10268d3 = getplayers();
+  var_a10268d3 = getPlayers();
 
   for(i = 0; i < var_a10268d3.size; i++) {
-    var_a10268d3[i] setorigin(var_ff91be3a[i].origin);
+    var_a10268d3[i] setOrigin(var_ff91be3a[i].origin);
     var_a10268d3[i] setplayerangles(var_ff91be3a[i].angles);
   }
 
@@ -131,7 +131,7 @@ boss_fight() {
 
   level clientfield::set("crowd_react_boss", 0);
   var_47312393 = struct::get(#"towers_boss_location_1", "script_noteworthy");
-  sp_spawner = getent("zombie_towers_boss_spawner", "script_noteworthy");
+  sp_spawner = getEnt("zombie_towers_boss_spawner", "script_noteworthy");
   level thread function_4d682898();
   level thread function_92e1954c();
   level thread function_1a05e10c(#"boss_ranged_attack_1", "m_quest", "spear_warn");
@@ -186,7 +186,7 @@ function_33935d5f() {
   self notify("51b1374f19c0864a");
   self endon("51b1374f19c0864a");
   self.b_exploded = 0;
-  e_clip = getent(self.target, "targetname");
+  e_clip = getEnt(self.target, "targetname");
 
   while(!self.b_exploded) {
     waitresult = self waittill(#"trigger", #"tower_boss_scripted_trigger_tower");
@@ -268,7 +268,7 @@ function_f9da4403(s_spawn, phase) {
 
 function_dd2db3df() {
   tower = struct::get("entrance_tower", "targetname");
-  entrance_tower_collision = getent("entrance_tower_collision", "targetname");
+  entrance_tower_collision = getEnt("entrance_tower_collision", "targetname");
 
   if(isDefined(entrance_tower_collision)) {
     entrance_tower_collision connectpaths();

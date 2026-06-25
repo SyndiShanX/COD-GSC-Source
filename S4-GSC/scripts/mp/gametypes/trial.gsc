@@ -276,7 +276,7 @@ _id_D6E0() {
   level._id_F53A["axis"]["loadoutKillstreak3"] = "none";
   level._id_F53A["axis"]["loadoutPerks"] = [];
   level._id_F53A["axis"]["loadoutGesture"] = "playerData";
-  var_0 = getent("trial_starting_weapon", "script_noteworthy");
+  var_0 = getEnt("trial_starting_weapon", "script_noteworthy");
 
   if(isDefined(var_0)) {
     var_1 = strtok(var_0._id_CE18, "+");

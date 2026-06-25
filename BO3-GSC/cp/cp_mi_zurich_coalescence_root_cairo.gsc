@@ -171,7 +171,7 @@ function function_962eebf2(str_objective) {
   level util::streamer_wait();
   level thread util::screen_fade_in(1);
   array::thread_all(level.players, &clientfield::increment_to_player, "postfx_transition");
-  playsoundatposition("evt_clearing_trans_in", (0, 0, 0));
+  playSoundAtPosition("evt_clearing_trans_in", (0, 0, 0));
   if(isDefined(level.bzm_zurichdialogue15callback)) {
     level thread[[level.bzm_zurichdialogue15callback]]();
   }
@@ -189,7 +189,7 @@ function function_4cca3b70() {
   scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", &function_fe87d3eb, "done");
   scene::add_scene_func("p7_fxanim_cp_zurich_wall_drop_bundle", &function_e3c9dd29, "play");
   level thread function_ef1ee0c7();
-  var_15ecae1 = getent("trigger_vtol_arrival", "targetname");
+  var_15ecae1 = getEnt("trigger_vtol_arrival", "targetname");
   var_15ecae1 waittill("trigger");
   level thread scene::play("p7_fxanim_cp_zurich_wall_drop_bundle");
   level waittill("rocket_hits_vtol");
@@ -202,7 +202,7 @@ function function_4cca3b70() {
 
 function function_fe87d3eb(a_ents) {
   level flag::wait_till("vtol_dropped_wall");
-  e_doors = getent("wall_drop_doors", "targetname");
+  e_doors = getEnt("wall_drop_doors", "targetname");
   if(!isDefined(e_doors)) {
     return;
   }
@@ -211,7 +211,7 @@ function function_fe87d3eb(a_ents) {
 }
 
 function function_ef1ee0c7() {
-  var_abef87dc = getent("open_wall_doors", "script_noteworthy");
+  var_abef87dc = getEnt("open_wall_doors", "script_noteworthy");
   var_abef87dc waittill("trigger");
   level flag::set("vtol_dropped_wall");
 }
@@ -274,7 +274,7 @@ function function_73238a8(a_ents) {
   foreach(mdl_door in var_7be3ca60) {
     mdl_door delete();
   }
-  e_clip = getent("root_cairo_arena_clip", "targetname");
+  e_clip = getEnt("root_cairo_arena_clip", "targetname");
   if(isDefined(e_clip)) {
     e_clip notsolid();
     e_clip connectpaths();
@@ -283,7 +283,7 @@ function function_73238a8(a_ents) {
 }
 
 function function_54b0174d() {
-  var_35a225f3 = getent("lotus_tower_sink", "targetname");
+  var_35a225f3 = getEnt("lotus_tower_sink", "targetname");
   if(isDefined(var_35a225f3)) {
     var_35a225f3 setscale(0.4);
     var_35a225f3 hide();
@@ -294,7 +294,7 @@ function function_54b0174d() {
 }
 
 function function_1a9fae41() {
-  var_70cf920f = getent("t_lotus_sink", "script_noteworthy");
+  var_70cf920f = getEnt("t_lotus_sink", "script_noteworthy");
   var_70cf920f waittill("trigger");
   s_start = self;
   playFX(level._effect["explosion_large"], self.origin);
@@ -302,8 +302,8 @@ function function_1a9fae41() {
   while(isDefined(s_next)) {
     n_distance = distance(s_start.origin, s_next.origin);
     n_time = n_distance / 20;
-    self moveto(s_next.origin, n_time);
-    self rotateto(s_next.angles, n_time);
+    self moveTo(s_next.origin, n_time);
+    self rotateTo(s_next.angles, n_time);
     self waittill("movedone");
     s_start = s_next;
     s_next = undefined;

@@ -24,7 +24,7 @@ function private function_bc948200() {
 }
 
 function function_c238a64a(var_d7eb0053, var_cfa5cedf, var_de721607, var_1aebd615, var_dd3b452) {
-  level.player = isDefined(level.player) ? level.player : getplayers()[0];
+  level.player = isDefined(level.player) ? level.player : getPlayers()[0];
 
   if(!namespace_61e6d095::exists(#"hash_48087cf592ac15d8")) {
     namespace_61e6d095::create(#"hash_48087cf592ac15d8", #"cctv");

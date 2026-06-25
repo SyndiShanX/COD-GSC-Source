@@ -282,7 +282,7 @@ function function_63f29efd() {
 }
 
 function powerup_grab_get_players_override() {
-  players = getplayers();
+  players = getPlayers();
   if(isDefined(level.ai_robot)) {
     players[players.size] = level.ai_robot;
   }
@@ -365,7 +365,7 @@ function wait_for_revive_machine_to_be_turned_on() {
 }
 
 function zod_use_solo_revive() {
-  players = getplayers();
+  players = getPlayers();
   solo_mode = 0;
   if(players.size == 1 || (isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
     solo_mode = 1;
@@ -383,7 +383,7 @@ function revive_cost_override() {
 }
 
 function use_solo_revive_price() {
-  players = getplayers();
+  players = getPlayers();
   solo_mode = 0;
   if(players.size == 1 || (isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
     solo_mode = 1;
@@ -801,7 +801,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     return charindexarray[0];
@@ -985,8 +985,8 @@ function function_c257bc23() {
 }
 
 function watch_for_world_transformation() {
-  mdl_god_near = getent("mdl_god_near", "targetname");
-  mdl_god_far = getent("mdl_god_far", "targetname");
+  mdl_god_near = getEnt("mdl_god_near", "targetname");
+  mdl_god_far = getEnt("mdl_god_far", "targetname");
   mdl_god_far clientfield::set("far_apothigod_active", 1);
   mdl_god_near clientfield::set("near_apothigod_active", 1);
   mdl_god_far clientfield::set("far_apothigod_active", 0);
@@ -994,13 +994,13 @@ function watch_for_world_transformation() {
   mdl_god_near hide();
   mdl_god_far hide();
   level flag::wait_till("ritual_pap_complete");
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     scoreevents::processscoreevent("main_quest", player);
   }
   function_3d302906(1);
   level flag::wait_till("ee_complete");
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     scoreevents::processscoreevent("main_EE_quest", player);
   }
@@ -1008,8 +1008,8 @@ function watch_for_world_transformation() {
 }
 
 function function_3d302906(var_9392be35) {
-  mdl_god_far = getent("mdl_god_far", "targetname");
-  mdl_god_near = getent("mdl_god_near", "targetname");
+  mdl_god_far = getEnt("mdl_god_far", "targetname");
+  mdl_god_near = getEnt("mdl_god_near", "targetname");
   if(var_9392be35) {
     level thread lui::screen_flash(0.2, 0.5, 1, 1, "white");
     level thread util::set_lighting_state(3);
@@ -1109,7 +1109,7 @@ function no_target_override(zombie) {
         if(player laststand::player_is_in_laststand()) {
           continue;
         }
-        away = vectornormalize(self.origin - player.origin);
+        away = vectorNormalize(self.origin - player.origin);
         endpos = self.origin + vectorscale(away, 600);
         dist_zombie = distancesquared(locs[i].origin, endpos);
         dist_player = distancesquared(locs[i].origin, player.origin);
@@ -1295,7 +1295,7 @@ function function_c9e2531c() {
 function function_5abd3b41(n_index) {
   level notify("devgui_lightning_test");
   level endon("devgui_lightning_test");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   while(true) {
     player clientfield::increment_to_player("devgui_lightning_test", n_index);
     wait(12);
@@ -1309,7 +1309,7 @@ function function_c876231d() {
 function zod_ghost_test(n_index) {
   level notify("zod_ghost_test");
   level endon("zod_ghost_test");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_8cfd368 = 1;
   while(true) {
     foreach(zombie in getaiteamarray(level.zombie_team)) {
@@ -1579,7 +1579,7 @@ function function_b05d27ad() {
 }
 
 function function_eda7de97() {
-  a_players = getplayers();
+  a_players = getPlayers();
   if(!isDefined(level.var_c4acfdc0)) {
     level.var_c4acfdc0 = randomint(a_players.size);
   }
@@ -1655,7 +1655,7 @@ function function_2c092767(a_spots) {
     if(!isDefined(level.n_player_spawn_selection_index)) {
       level.n_player_spawn_selection_index = 0;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
     level.n_player_spawn_selection_index++;
     if(level.n_player_spawn_selection_index >= a_players.size) {
       level.n_player_spawn_selection_index = 0;
@@ -1739,7 +1739,7 @@ function function_f7d81bd5() {
   self endon("hash_f7d81bd5");
   self endon("disconnect");
   level endon("stop_suicide_trigger");
-  e_volume = getent("into_disable_prone", "targetname");
+  e_volume = getEnt("into_disable_prone", "targetname");
   var_d8d76cd3 = 0;
   while(!(isDefined(level.intermission) && level.intermission)) {
     if(self laststand::player_is_in_laststand()) {
@@ -1782,7 +1782,7 @@ function function_aab1d0bd() {
 
 function function_a988e9bb() {
   level flag::wait_till("all_players_connected");
-  array::thread_all(getplayers(), &player_noire_ee);
+  array::thread_all(getPlayers(), &player_noire_ee);
 }
 
 function player_noire_ee() {
@@ -1797,7 +1797,7 @@ function player_noire_ee() {
         n_dist = distance(self.origin, s_start.origin);
         if(n_dist < 85) {
           v_forward = self getweaponforwarddir();
-          v_dir = vectornormalize(s_end.origin - self.origin);
+          v_dir = vectorNormalize(s_end.origin - self.origin);
           dp = vectordot(v_forward, v_dir);
           if(dp > 0.975) {
             visionset_mgr::activate("visionset", "zombie_noire", self);

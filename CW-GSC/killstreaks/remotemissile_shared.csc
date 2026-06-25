@@ -165,7 +165,7 @@ function missile_fired(localclientnum, oldval, newval, bnewent, binitialsnap, fi
       var_b13727dd = getgametypesetting("compassAnchorScorestreakIcons");
       self.iconent function_dce2238(var_b13727dd);
       self.iconent setModel(#"tag_origin");
-      self.iconent linkto(self);
+      self.iconent linkTo(self);
       self.iconent function_5e00861(level.var_bb1f7e1e.var_792e8590);
       self thread function_20fff7ed(level.var_bb1f7e1e.var_792e8590, level.var_bb1f7e1e.var_f99969f1, gettime(), level.var_bb1f7e1e.var_6b2f302f * 1000);
     }
@@ -220,7 +220,7 @@ function bomblets_deployed(localclientnum, oldval, newval, bnewent, binitialsnap
       var_b13727dd = getgametypesetting("compassAnchorScorestreakIcons");
       self.iconent function_dce2238(var_b13727dd);
       self.iconent function_5e00861(level.var_bb1f7e1e.var_c3e4af00);
-      self.iconent linkto(self);
+      self.iconent linkTo(self);
     }
   } else {
     self function_fd73ab50();

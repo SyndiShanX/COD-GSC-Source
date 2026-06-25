@@ -47,7 +47,7 @@ function private function_b61c27bb(einflictor, eattacker, idamage, idflags, smea
 
         if(isDefined(damagefromunderneath) || isDefined(psoffsettime)) {
           if(isDefined(psoffsettime) && (partname === "MOD_RIFLE_BULLET" || partname === "MOD_PISTOL_BULLET")) {
-            damagedirection = vectornormalize(occupant.origin - psoffsettime.origin);
+            damagedirection = vectorNormalize(occupant.origin - psoffsettime.origin);
           } else {
             damagedirection = vsurfacenormal;
           }

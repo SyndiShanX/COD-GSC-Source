@@ -184,9 +184,9 @@ function_488c1ac2() {
 }
 
 function_d79b3357(entity, origin) {
-  playsoundatposition(#"zmb_quad_explo", origin);
+  playSoundAtPosition(#"zmb_quad_explo", origin);
   entity clientfield::set("nova_crawler_burst_clientfield", 1);
-  players = getplayers();
+  players = getPlayers();
   zombies = getaiteamarray(level.zombie_team);
 
   for(i = 0; i < zombies.size; i++) {
@@ -215,7 +215,7 @@ function_4632879c(entity) {
   gas_time = 0;
 
   while(gas_time <= 7) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(players[i] istouching(effectarea)) {
@@ -230,7 +230,7 @@ function_4632879c(entity) {
     gas_time += 1;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] clientfield::set_to_player("nova_crawler_burst_postfx_clientfield", 0);

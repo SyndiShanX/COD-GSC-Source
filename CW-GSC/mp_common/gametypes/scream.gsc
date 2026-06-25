@@ -96,7 +96,7 @@ function onstartgametype() {
 
 function ongameplaying() {
   level endon(#"game_ended");
-  playsoundatposition(#"hash_5a903084d1d3a71e", (0, 0, 0));
+  playSoundAtPosition(#"hash_5a903084d1d3a71e", (0, 0, 0));
   level function_3c555e08();
   function_6ebe14e9();
   players = function_eb6cbb5();
@@ -110,7 +110,7 @@ function ongameplaying() {
     player function_e5e6a6db();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     for(i = 0; i < level.var_c251edf0.size; i++) {
       if(isDefined(level.var_c251edf0[i])) {
         clientnum = level.var_c251edf0[i] getentitynumber();
@@ -134,7 +134,7 @@ function ongameplaying() {
   function_86cf3bac();
   level.var_67ff1bf8 = 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_c251edf0.size > 1) {
       var_21cc35b1 = level.var_c251edf0[0] getentitynumber();
       var_26da87aa = level.var_c251edf0[1] getentitynumber();
@@ -276,7 +276,7 @@ function onroundswitch() {
 function onendround(var_c1e98979) {
   if(var_c1e98979 === 13 && level.var_d62d0655 === 1) {
     if(level.var_2a029538) {
-      thread globallogic_audio::function_61e17de0("screamSlasherKilled", getplayers());
+      thread globallogic_audio::function_61e17de0("screamSlasherKilled", getPlayers());
     }
   }
 }
@@ -415,7 +415,7 @@ function private function_92a8deeb(survivors) {
     #var_7090bf53: 0
   });
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_295c2193 = 0;
     player val::reset(#"hash_32ffc9e998f81c49", "disable_weapon_cycling");
     player enableexecutionattack();
@@ -459,7 +459,7 @@ function private function_92a8deeb(survivors) {
   }
 }
 
-function function_eb6cbb5(players = getplayers()) {
+function function_eb6cbb5(players = getPlayers()) {
   remainingplayers = [];
 
   foreach(player in players) {
@@ -596,7 +596,7 @@ function private function_292de865() {
   self endon(#"death");
   self clientfield::set_to_player("scream_slasher_postfx", 1);
   fxorigin = isDefined(self gettagorigin("j_spineupper")) ? self gettagorigin("j_spineupper") : self.origin;
-  playsoundatposition(#"hash_1ff264c8a40930fd", fxorigin);
+  playSoundAtPosition(#"hash_1ff264c8a40930fd", fxorigin);
 
   if(level.var_2a029538) {
     self thread function_dc32021(#"hash_2de35adf3ecb4c48", 1);
@@ -1047,7 +1047,7 @@ function function_38f40b8b() {
 }
 
 function function_1ccf32e3() {
-  players = getplayers();
+  players = getPlayers();
   var_e63ca453 = level.var_67ff1bf8 === 1 ? level.var_826250a4 : players;
   count = function_eb6cbb5(var_e63ca453).size;
   var_85efa2fd = function_eb6cbb5(level.var_c251edf0).size;
@@ -1068,13 +1068,13 @@ function function_3c555e08() {
   self endon("cf54035051cf2e");
   time = level.var_1d07375a;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.scream_deathmatch_timer scream_deathmatch_timer::open(player);
     level.scream_deathmatch_timer scream_deathmatch_timer::function_302c4b81(player, time);
   }
 
   while(time > 0) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       level.scream_deathmatch_timer scream_deathmatch_timer::function_302c4b81(player, time);
     }
 
@@ -1082,7 +1082,7 @@ function function_3c555e08() {
     time--;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.scream_deathmatch_timer scream_deathmatch_timer::close(player);
   }
 }
@@ -1123,7 +1123,7 @@ function wait_for_timeout() {
 function function_132f1087() {
   level notify(#"hash_6c8454cd6428ce61");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set("scream_underscores", 0);
   }
 }

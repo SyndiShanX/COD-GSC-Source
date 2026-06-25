@@ -818,9 +818,9 @@ _id_CA27(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5._id_2FF7.angles = var_1;
-  var_5 cameralinkto(var_5._id_2FF7, "tag_origin", 1, 1);
-  var_5._id_2FF7 moveto(var_2, 1);
-  var_5._id_2FF7 rotateto(var_3, 1);
+  var_5 cameralinkTo(var_5._id_2FF7, "tag_origin", 1, 1);
+  var_5._id_2FF7 moveTo(var_2, 1);
+  var_5._id_2FF7 rotateTo(var_3, 1);
 
   if(istrue(var_4)) {
     wait 1;
@@ -949,7 +949,7 @@ _id_81C6(var_0, var_1, var_2, var_3) {
     level._id_1465 = scripts\engine\utility::array_combine(var_4, var_5, var_6, var_8, var_7);
   }
 
-  var_9 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_9 = scripts\engine\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_9._id_E363)) {
     var_9._id_E363 = [];
@@ -979,7 +979,7 @@ _id_81C6(var_0, var_1, var_2, var_3) {
   var_9._id_62A9 = var_2;
   var_9._id_3085 = spawn("script_model", var_9.origin);
   var_9._id_3085 setModel("tag_origin");
-  var_9._id_5B97 = scripts\engine\utility::getstruct(var_9._id_0481, "script_noteworthy");
+  var_9._id_5B97 = scripts\engine\utility::getStruct(var_9._id_0481, "script_noteworthy");
   var_9.arena_index = var_3;
   var_16 = getEntArray("arena_evo_grenade_volume", "targetname");
   var_9.arenavolume = scripts\engine\utility::_id_6969(var_9.origin, var_16);

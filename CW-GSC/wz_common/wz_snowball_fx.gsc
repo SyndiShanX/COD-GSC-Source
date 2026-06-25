@@ -43,9 +43,9 @@ function function_c9509a9c(params) {
       var_1f579e1d = attacker.origin - self.origin;
       var_1f579e1d = (var_1f579e1d[0], var_1f579e1d[1], 0);
       vec_right = anglestoright(self.angles);
-      vec_right = vectornormalize(vec_right);
+      vec_right = vectorNormalize(vec_right);
       vec_right = (vec_right[0], vec_right[1], 0);
-      var_1f579e1d = vectornormalize(var_1f579e1d);
+      var_1f579e1d = vectorNormalize(var_1f579e1d);
       vec_dot = vectordot(var_1f579e1d, vec_right);
 
       if(vec_dot > 0.2) {

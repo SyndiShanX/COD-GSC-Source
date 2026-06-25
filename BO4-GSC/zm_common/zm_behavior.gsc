@@ -348,7 +348,7 @@ zombiefindflesh(behaviortreeentity) {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(!isDefined(behaviortreeentity.ignore_player) || players.size == 1) {
     behaviortreeentity.ignore_player = [];
@@ -688,7 +688,7 @@ zombieupdategoal() {
 
             if(var_570a7c72 || var_eb1c6f1c) {
               remaininglength = deviationdistance - segmentlength;
-              seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
+              seedposition = path[index - 1] + vectorNormalize(path[index] - path[index - 1]) * remaininglength;
 
               recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x38>", self);
 
@@ -792,7 +792,7 @@ zombieupdategoalcode() {
 
           if(segmentlength + currentseglength > deviationdistance) {
             remaininglength = deviationdistance - segmentlength;
-            seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
+            seedposition = path[index - 1] + vectorNormalize(path[index] - path[index - 1]) * remaininglength;
 
             recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x38>", self);
 
@@ -1135,7 +1135,7 @@ zombieshouldattackthroughboardscondition(behaviortreeentity) {
   }
 
   freq = getdvarint(#"zombie_reachin_freq", 0);
-  players = getplayers();
+  players = getPlayers();
   attack = 0;
   behaviortreeentity.player_targets = [];
 

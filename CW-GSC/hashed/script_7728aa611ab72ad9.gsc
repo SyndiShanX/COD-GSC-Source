@@ -42,10 +42,10 @@ function spawn_allies(var_58d5c920, str_key = "targetname", var_e565b364 = 0) {
 }
 
 function function_2683ec5d(var_58d5c920, str_key = "targetname") {
-  ai_woods = getent("hero_woods", "targetname", 1);
+  ai_woods = getEnt("hero_woods", "targetname", 1);
 
   if(!isalive(ai_woods)) {
-    var_5b7b93ad = getent(var_58d5c920, str_key);
+    var_5b7b93ad = getEnt(var_58d5c920, str_key);
 
     if(isDefined(var_5b7b93ad)) {
       ai_woods = spawner::simple_spawn_single(var_5b7b93ad);
@@ -81,7 +81,7 @@ function function_85939627(ai_array, var_335a8dcc, var_91e1c669) {
 }
 
 function function_2b6287f4(str_targetname) {
-  t_trigger = getent(str_targetname, "targetname");
+  t_trigger = getEnt(str_targetname, "targetname");
 
   if(isDefined(t_trigger)) {
     t_trigger endon(#"death");
@@ -123,7 +123,7 @@ function function_cc05cde5(str_targetname, str_endon, s_info) {
 
 function function_10223871(str_volume, var_39a39241 = 0) {
   self endon(#"death");
-  vol_fallback = getent(str_volume, "targetname");
+  vol_fallback = getEnt(str_volume, "targetname");
   self ai::force_goal(vol_fallback, 0);
 
   if(var_39a39241) {
@@ -316,7 +316,7 @@ function function_81e3ae7f() {
 }
 
 function function_529afded(var_da81de5e) {
-  var_c4f67127 = getent("nuke_guns_down_trigger", "targetname");
+  var_c4f67127 = getEnt("nuke_guns_down_trigger", "targetname");
   var_c4f67127 waittill(#"trigger");
 
   if(is_true(var_da81de5e)) {

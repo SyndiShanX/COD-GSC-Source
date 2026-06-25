@@ -239,7 +239,7 @@ function private intro_cinematic() {
   music::setmusicstate("cranked_intro");
 
   if(isDefined(level.var_dfee7fc2) && !getdvarint(#"hash_39af51993585a73e", 0)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player.var_f4e33249 = 1;
     }
 
@@ -251,9 +251,9 @@ function private intro_cinematic() {
     namespace_66d6aa44::function_db62d086();
     level.var_dfee7fc2 = undefined;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player dontinterpolate();
-      player setorigin(player.spectator_respawn.origin);
+      player setOrigin(player.spectator_respawn.origin);
       player setplayerangles(player.spectator_respawn.angles);
       player.var_f4e33249 = undefined;
     }
@@ -298,11 +298,11 @@ function function_b03d7dd0(round) {
 }
 
 function on_round_end() {
-  playsoundatposition(#"hash_409b69424385812a", (0, 0, 0));
+  playSoundAtPosition(#"hash_409b69424385812a", (0, 0, 0));
   var_370ac26d = zm::function_d3113f01().var_bd588afd;
   luinotifyevent(#"hash_3e6dd0ad7b864154", 1, var_370ac26d);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_8d41c907)) {
       player.var_8d41c907 = 0;
     }
@@ -355,16 +355,16 @@ function function_74872db6() {
   }
 
   if(var_e4eea632) {
-    playsoundatposition(#"hash_32635012b4632180", (0, 0, 0));
-    array::thread_all(getplayers(), &clientfield::set_player_uimodel, "ZMHud.zmCrankedRoundNotification", 1);
+    playSoundAtPosition(#"hash_32635012b4632180", (0, 0, 0));
+    array::thread_all(getPlayers(), &clientfield::set_player_uimodel, "ZMHud.zmCrankedRoundNotification", 1);
     return;
   }
 
-  array::thread_all(getplayers(), &clientfield::set_player_uimodel, "ZMHud.zmCrankedRoundNotification", 0);
+  array::thread_all(getPlayers(), &clientfield::set_player_uimodel, "ZMHud.zmCrankedRoundNotification", 0);
 }
 
 function give_match_bonus(data) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     var_22ba849f = getdvarint(#"hash_3f0689f4ecc2fbab", 0);

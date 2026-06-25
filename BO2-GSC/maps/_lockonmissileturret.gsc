@@ -208,7 +208,7 @@ multilockmissilefire() {
       if(seat == 0) {
         turret fireweapon(self.missileturrettargetlist[i]);
       } else {
-        turret setgunnertargetent(self.missileturrettargetlist[i], (0, 0, 0), seat - 1);
+        turret setgunnertargetEnt(self.missileturrettargetlist[i], (0, 0, 0), seat - 1);
         missile = turret firegunnerweapon(seat - 1);
         missile setforcenocull();
       }
@@ -592,7 +592,7 @@ getbestmissileturrettarget() {
     forward = anglesToForward(self getplayerangles());
 
     for(i = 0; i < targetsvalid.size; i++) {
-      vec_to_target = vectornormalize(targetsvalid[i].origin - self get_eye());
+      vec_to_target = vectorNormalize(targetsvalid[i].origin - self get_eye());
       dot = vectordot(vec_to_target, forward);
 
       if(dot > bestdot) {
@@ -905,7 +905,7 @@ startmissilecam() {
   script_model = spawn("script_model", (0, 0, 0));
   script_model setModel(self.model);
   script_model hide();
-  script_model linkto(self, "tag_origin", vectorscale((1, 0, 0), 25.0));
+  script_model linkTo(self, "tag_origin", vectorscale((1, 0, 0), 25.0));
   script_model setclientflag(0);
   self waittill("death");
   script_model clearclientflag(0);

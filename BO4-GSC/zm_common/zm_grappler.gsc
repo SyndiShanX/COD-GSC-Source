@@ -70,20 +70,20 @@ start_grapple(prone_2_run_roll, e_grapplee, n_type, n_speed = 1800) {
     e_beamend.origin = prone_2_run_roll grapple_point();
     var_5f04bf66 = e_grapplee grapple_point();
     e_beamend playSound(#"zmb_grapple_start");
-    e_beamend moveto(var_5f04bf66, n_time);
+    e_beamend moveTo(var_5f04bf66, n_time);
     e_beamend waittill(#"movedone");
     var_7fdf7771 = var_5f04bf66 - e_grapplee.origin;
     e_beamend.origin = e_grapplee.origin;
 
     if(isPlayer(e_grapplee)) {
-      e_grapplee playerlinkto(e_beamend, "tag_origin");
+      e_grapplee playerlinkTo(e_beamend, "tag_origin");
     } else {
-      e_grapplee linkto(e_beamend);
+      e_grapplee linkTo(e_beamend);
     }
 
     e_grapplee playSound(#"zmb_grapple_grab");
     var_b7f19309 = prone_2_run_roll grapple_point() - var_7fdf7771;
-    e_beamend moveto(var_b7f19309, n_time);
+    e_beamend moveTo(var_b7f19309, n_time);
     e_beamend playSound(#"zmb_grapple_pull");
     e_beamend waittill(#"movedone");
     function_c43e7cab();
@@ -156,7 +156,7 @@ function_a60cb756(var_b4666218, var_e9f8c8f3) {
 
     if(isPlayer(self)) {
       self freezecontrols(var_b4666218);
-      self setplayercollision(!var_b4666218);
+      self setPlayerCollision(!var_b4666218);
 
       if(var_b4666218) {
         self val::set(#"zm_grappler", "ignoreme");

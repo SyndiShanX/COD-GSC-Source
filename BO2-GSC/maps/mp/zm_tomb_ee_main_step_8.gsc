@@ -47,7 +47,7 @@ stage_logic() {
   flag_wait("ee_quadrotor_disabled");
   wait 1;
   level thread ee_samantha_say("vox_sam_all_staff_freedom_0");
-  s_pos = getstruct("player_portal_final", "targetname");
+  s_pos = getStruct("player_portal_final", "targetname");
   t_portal = tomb_spawn_trigger_radius(s_pos.origin, 100, 1);
   t_portal.require_look_at = 1;
   t_portal.hint_string = &"ZM_TOMB_TELE";
@@ -74,7 +74,7 @@ waittill_player_activates() {
 }
 
 move_into_portal() {
-  s_goal = getstruct("maxis_portal_path", "targetname");
+  s_goal = getStruct("maxis_portal_path", "targetname");
 
   if(distance2dsquared(self.origin, s_goal.origin) < 250000) {
     self setvehgoalpos(s_goal.origin, 1, 2, 1);
@@ -82,7 +82,7 @@ move_into_portal() {
     maxissay("vox_maxi_drone_upgraded_1", self);
     wait 1;
     level thread maxissay("vox_maxi_drone_upgraded_2", self);
-    s_goal = getstruct(s_goal.target, "targetname");
+    s_goal = getStruct(s_goal.target, "targetname");
     self setvehgoalpos(s_goal.origin, 1, 0, 1);
     self waittill_any("near_goal", "force_goal", "reached_end_node");
     self playSound("zmb_qrdrone_leave");

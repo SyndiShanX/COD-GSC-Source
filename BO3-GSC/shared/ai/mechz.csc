@@ -85,12 +85,12 @@ function mechzprocessfootstep(localclientnum, pos, surface, notetrack, bone) {
     e_player earthquake(earthquake_scale, 0.1, pos, n_dist);
   }
   if(n_scale <= 1 && n_scale > 0.8) {
-    e_player playrumbleonentity(localclientnum, "shotgun_fire");
+    e_player playRumbleOnEntity(localclientnum, "shotgun_fire");
   } else {
     if(n_scale <= 0.8 && n_scale > 0.4) {
-      e_player playrumbleonentity(localclientnum, "damage_heavy");
+      e_player playRumbleOnEntity(localclientnum, "damage_heavy");
     } else {
-      e_player playrumbleonentity(localclientnum, "reload_small");
+      e_player playRumbleOnEntity(localclientnum, "reload_small");
     }
   }
   fx = playFXOnTag(localclientnum, level._effect["fx_mech_foot_step"], self, bone);

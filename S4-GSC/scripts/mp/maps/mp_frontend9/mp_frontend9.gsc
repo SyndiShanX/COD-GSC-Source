@@ -37,7 +37,7 @@ _id_AB5F() {
 
 run_explosions() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("frontend3_explosion_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("frontend3_explosion_struct", "targetname");
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   for(;;) {
@@ -127,9 +127,9 @@ add_frontend_transition(var_0, var_1, var_2, var_3) {
 
 endlesslobbyfloor2tiles() {
   wait 0.1;
-  var_0 = getent("lobby_floor_01", "targetname");
+  var_0 = getEnt("lobby_floor_01", "targetname");
   var_1 = getEntArray("lobby_floor_01_collection", "targetname");
-  var_2 = getent("lobby_floor_02", "targetname");
+  var_2 = getEnt("lobby_floor_02", "targetname");
   var_3 = getEntArray("lobby_floor_02_collection", "targetname");
   var_4 = getEntArray("lobby_floor_03_collection", "targetname");
 
@@ -153,13 +153,13 @@ endlesslobbyfloor2tiles() {
   }
   if(isDefined(var_1) && var_1.size >= 1) {
     foreach(var_11 in var_1) {
-      var_11 linkto(var_0);
+      var_11 linkTo(var_0);
     }
   }
 
   if(isDefined(var_3) && var_3.size >= 1) {
     foreach(var_11 in var_3) {
-      var_11 linkto(var_2);
+      var_11 linkTo(var_2);
     }
   }
 
@@ -168,7 +168,7 @@ endlesslobbyfloor2tiles() {
   var_17 = distance(var_15, var_16);
   var_18 = 25.662 * getdvarfloat("#x326cace33648f89f8", 1.0);
   var_19 = var_17 / var_18;
-  var_20 = var_15 + vectornormalize(var_15 - var_16) * var_17;
+  var_20 = var_15 + vectorNormalize(var_15 - var_16) * var_17;
   var_21 = 1;
   wait 0.05;
 
@@ -185,8 +185,8 @@ endlesslobbyfloor2tiles() {
       var_2 dontinterpolate();
       var_2.origin = var_16;
       var_2 show();
-      var_2 moveto(var_15, var_19);
-      var_0 moveto(var_20, var_19);
+      var_2 moveTo(var_15, var_19);
+      var_0 moveTo(var_20, var_19);
     } else {
       scripts\engine\utility::_id_5C04("floor1");
       var_0 hide();
@@ -199,8 +199,8 @@ endlesslobbyfloor2tiles() {
       var_0 dontinterpolate();
       var_0.origin = var_16;
       var_0 show();
-      var_0 moveto(var_15, var_19);
-      var_2 moveto(var_20, var_19);
+      var_0 moveTo(var_15, var_19);
+      var_2 moveTo(var_20, var_19);
     }
 
     var_21 = !var_21;
@@ -210,11 +210,11 @@ endlesslobbyfloor2tiles() {
 
 endlesslobbyfloor3tiles() {
   wait 0.1;
-  var_0 = getent("lobby_floor_01", "targetname");
+  var_0 = getEnt("lobby_floor_01", "targetname");
   var_1 = getEntArray("lobby_floor_01_collection", "targetname");
-  var_2 = getent("lobby_floor_02", "targetname");
+  var_2 = getEnt("lobby_floor_02", "targetname");
   var_3 = getEntArray("lobby_floor_02_collection", "targetname");
-  var_4 = getent("lobby_floor_03", "targetname");
+  var_4 = getEnt("lobby_floor_03", "targetname");
   var_5 = getEntArray("lobby_floor_03_collection", "targetname");
 
   if(getdvarint("#x377ae86419e72a881", 0)) {
@@ -232,19 +232,19 @@ endlesslobbyfloor3tiles() {
   }
   if(isDefined(var_1) && var_1.size >= 1) {
     foreach(var_10 in var_1) {
-      var_10 linkto(var_0);
+      var_10 linkTo(var_0);
     }
   }
 
   if(isDefined(var_3) && var_3.size >= 1) {
     foreach(var_10 in var_3) {
-      var_10 linkto(var_2);
+      var_10 linkTo(var_2);
     }
   }
 
   if(isDefined(var_5) && var_5.size >= 1) {
     foreach(var_10 in var_5) {
-      var_10 linkto(var_4);
+      var_10 linkTo(var_4);
     }
   }
 
@@ -255,7 +255,7 @@ endlesslobbyfloor3tiles() {
   var_20 = 25.662 * getdvarfloat("#x326cace33648f89f8", 1.0);
   var_21 = var_19 / var_20;
   var_22 = var_21 * 0.5;
-  var_23 = var_18 + vectornormalize(var_18 - var_16) * var_19;
+  var_23 = var_18 + vectorNormalize(var_18 - var_16) * var_19;
   var_24 = 2;
   wait 0.05;
 
@@ -271,9 +271,9 @@ endlesslobbyfloor3tiles() {
       var_0 dontinterpolate();
       var_0.origin = var_17;
       var_0 show();
-      var_0 moveto(var_16, var_21);
-      var_2 moveto(var_23, var_21);
-      var_4 moveto(var_18, var_21);
+      var_0 moveTo(var_16, var_21);
+      var_2 moveTo(var_23, var_21);
+      var_4 moveTo(var_18, var_21);
     } else if(var_24 == 2) {
       var_2 hide();
       var_2 dontinterpolate();
@@ -285,9 +285,9 @@ endlesslobbyfloor3tiles() {
       var_2 dontinterpolate();
       var_2.origin = var_17;
       var_2 show();
-      var_2 moveto(var_16, var_21);
-      var_4 moveto(var_23, var_21);
-      var_0 moveto(var_18, var_21);
+      var_2 moveTo(var_16, var_21);
+      var_4 moveTo(var_23, var_21);
+      var_0 moveTo(var_18, var_21);
     } else {
       var_4 hide();
       var_4 dontinterpolate();
@@ -299,9 +299,9 @@ endlesslobbyfloor3tiles() {
       var_4 dontinterpolate();
       var_4.origin = var_17;
       var_4 show();
-      var_4 moveto(var_16, var_21);
-      var_0 moveto(var_23, var_21);
-      var_2 moveto(var_18, var_21);
+      var_4 moveTo(var_16, var_21);
+      var_0 moveTo(var_23, var_21);
+      var_2 moveTo(var_18, var_21);
     }
 
     wait(var_21);

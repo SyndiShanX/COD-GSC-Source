@@ -186,7 +186,7 @@ magma_gat_glow_recharge(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
 
   self thread function_d193f583(localclientnum);
-  self playrumbleonentity(localclientnum, #"hash_41507a7755099d85");
+  self playRumbleOnEntity(localclientnum, #"hash_41507a7755099d85");
   self stoprumble(localclientnum, #"hash_3c64ae4793e47b3a");
 }
 
@@ -228,7 +228,7 @@ function_f9a794dc(localclientnum) {
 
     if(self.var_fa938ed8) {
       self function_78233d29(#"hash_4fb0136f51fcf7", "tag_weapon", "Brightness", 0.016);
-      self playrumbleonentity(localclientnum, #"hash_3c64ae4793e47b3a");
+      self playRumbleOnEntity(localclientnum, #"hash_3c64ae4793e47b3a");
       self stoprumble(localclientnum, #"hash_41507a7755099d85");
     } else {
       var_7616c359 = math::linear_map(self.var_23c215c, 0, 25, 0.15, 0.7);

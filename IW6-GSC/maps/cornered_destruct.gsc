@@ -107,21 +107,21 @@ setup_capture() {
 
 setup_stairwell() {
   level.stairwell_checkpoint = 1;
-  level.rescue_anim_struct = common_scripts\utility::getstruct("rescue_animnode", "targetname");
-  level.fall_anim_struct = common_scripts\utility::getstruct("fall_animnode", "targetname");
-  level.hvt_office_anim_struct = common_scripts\utility::getstruct("hvt_office_animnode", "targetname");
+  level.rescue_anim_struct = common_scripts\utility::getStruct("rescue_animnode", "targetname");
+  level.fall_anim_struct = common_scripts\utility::getStruct("fall_animnode", "targetname");
+  level.hvt_office_anim_struct = common_scripts\utility::getStruct("hvt_office_animnode", "targetname");
   thread maps\cornered::obj_escape();
-  var_0 = getent("hvt_exit_door_rt", "targetname");
-  var_1 = getent("hvt_exit_door_lf", "targetname");
-  var_2 = getent("stairwell_exit_door_clip", "targetname");
+  var_0 = getEnt("hvt_exit_door_rt", "targetname");
+  var_1 = getEnt("hvt_exit_door_lf", "targetname");
+  var_2 = getEnt("stairwell_exit_door_clip", "targetname");
   thread maps\cornered_code::generic_prop_raven_anim(level.hvt_office_anim_struct, "stairwell_door", "cnd_stair_escape_prop_doors", "stairwell_exit_door_left", "stairwell_exit_door_right", 1, "open_stairwell_doors");
-  var_0 rotateyaw(100, 0.05);
-  var_1 rotateyaw(-100, 0.05);
+  var_0 rotateYaw(100, 0.05);
+  var_1 rotateYaw(-100, 0.05);
   var_2 notsolid();
   var_2 connectpaths();
   var_0 connectpaths();
   var_1 connectpaths();
-  var_3 = getent("hvt_office_door_clip", "targetname");
+  var_3 = getEnt("hvt_office_door_clip", "targetname");
   var_3 delete();
   maps\cornered_code::setup_player();
   maps\cornered_code::spawn_allies();
@@ -142,7 +142,7 @@ setup_atrium() {
   level.atrium_checkpoint = 1;
   maps\cornered_code::setup_player();
   maps\cornered_code::spawn_allies();
-  level.fall_anim_struct = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  level.fall_anim_struct = common_scripts\utility::getStruct("fall_animnode", "targetname");
   thread vista_tilt();
   thread fall_props();
   thread fall_physics_debris_lobby();
@@ -179,25 +179,25 @@ begin_atrium() {
 
 vista_tilt_setup() {
   level.vista = getEntArray("vista_buildings", "targetname");
-  level.vista_pivot = getent("air_vista_pivot", "targetname");
+  level.vista_pivot = getEnt("air_vista_pivot", "targetname");
   thread fall_fx_crowd_setup();
   thread fall_fx_billboard_setup();
 
   foreach(var_1 in level.vista) {
     var_1 notsolid();
-    var_1 linkto(level.vista_pivot);
+    var_1 linkTo(level.vista_pivot);
   }
 }
 
 vista_tilt() {
-  level.player_ref_ent = getent("player_ref_ent_1", "targetname");
+  level.player_ref_ent = getEnt("player_ref_ent_1", "targetname");
   level.player playersetgroundreferenceent(level.player_ref_ent);
   level.player.dof_ref_ent = level.player_ref_ent;
 
   if(!isDefined(level.stairwell_checkpoint) && !isDefined(level.atrium_checkpoint)) {
     common_scripts\utility::flag_wait("hvt_office_explosion");
-    level.player_ref_ent rotateto((-4, 0, -7), 5, 1.5);
-    level.vista_pivot rotateto((-4, 0, -7), 5, 1.5);
+    level.player_ref_ent rotateTo((-4, 0, -7), 5, 1.5);
+    level.vista_pivot rotateTo((-4, 0, -7), 5, 1.5);
     var_0 = 0;
     var_1 = 0;
 
@@ -208,8 +208,8 @@ vista_tilt() {
       var_1 = var_1 + -0.0005;
     }
   } else {
-    level.player_ref_ent rotateto((-4, 0, -7), 0.05);
-    level.vista_pivot rotateto((-4, 0, -7), 0.05);
+    level.player_ref_ent rotateTo((-4, 0, -7), 0.05);
+    level.vista_pivot rotateTo((-4, 0, -7), 0.05);
     common_scripts\utility::waitframe();
   }
 
@@ -217,31 +217,31 @@ vista_tilt() {
     common_scripts\utility::flag_wait("office_explosion");
     earthquake(0.5, 4, level.player.origin, 2500);
     thread common_scripts\utility::play_sound_in_space("scn_crnd_quake", level.player.origin);
-    level.player_ref_ent rotateto((0, 0, -8), 5, 1.5);
-    level.vista_pivot rotateto((0, 0, -8), 5, 1.5);
+    level.player_ref_ent rotateTo((0, 0, -8), 5, 1.5);
+    level.vista_pivot rotateTo((0, 0, -8), 5, 1.5);
     wait 4.0;
     level thread random_building_shake_loop(0.1, 3.0, 7.0, 1.0);
   } else {
-    level.player_ref_ent rotateto((0, 0, -8), 0.05);
-    level.vista_pivot rotateto((0, 0, -8), 0.05);
+    level.player_ref_ent rotateTo((0, 0, -8), 0.05);
+    level.vista_pivot rotateTo((0, 0, -8), 0.05);
     common_scripts\utility::waitframe();
   }
 
   common_scripts\utility::flag_wait("lobby_stairwell_shake");
-  level.player_ref_ent rotateto((0, 0, -18), 9, 1, 2);
-  level.vista_pivot rotateto((0, 0, -18), 9, 1, 2);
+  level.player_ref_ent rotateTo((0, 0, -18), 9, 1, 2);
+  level.vista_pivot rotateTo((0, 0, -18), 9, 1, 2);
   wait 9.0;
   common_scripts\utility::flag_wait_all("lobby_shake", "lobby_rorke_ready");
-  level.player_ref_ent rotateto((0, 0, -20), 4, 3);
-  level.vista_pivot rotateto((0, 0, -20), 4, 3);
+  level.player_ref_ent rotateTo((0, 0, -20), 4, 3);
+  level.vista_pivot rotateTo((0, 0, -20), 4, 3);
   lerpsunangles((-12, -10, 0), (-16, -3, 0), 4, 3);
   wait 4.0;
-  level.vista_tilt_animnode = common_scripts\utility::getstruct("bldg_tilt_struct", "targetname");
+  level.vista_tilt_animnode = common_scripts\utility::getStruct("bldg_tilt_struct", "targetname");
   level.vista_tilt_model = maps\_utility::spawn_anim_model("bldg_tilt_cam", level.vista_pivot.origin);
   level.vista_tilt_model.angles = (0, 0, 0);
   level.vista_tilt_animnode maps\_anim::anim_first_frame_solo(level.vista_tilt_model, "cornered_building_fall_building");
-  level.player_ref_ent linkto(level.vista_tilt_model, "J_prop_1");
-  level.vista_pivot linkto(level.vista_tilt_model, "J_prop_1");
+  level.player_ref_ent linkTo(level.vista_tilt_model, "J_prop_1");
+  level.vista_pivot linkTo(level.vista_tilt_model, "J_prop_1");
   common_scripts\utility::waitframe();
   common_scripts\utility::flag_wait("go_building_fall");
   level.vista_tilt_animnode thread maps\_anim::anim_single_solo(level.vista_tilt_model, "cornered_building_fall_building");
@@ -251,7 +251,7 @@ vista_tilt() {
   level.player playersetgroundreferenceent(undefined);
   level.player.dof_ref_ent = undefined;
   level.vista_pivot unlink();
-  level.vista_pivot rotateto((0, 0, 0), 0.05);
+  level.vista_pivot rotateTo((0, 0, 0), 0.05);
   setphysicsgravitydir((0, 0, -1));
   resetsundirection();
   var_3 = getEntArray("end_broken_bldg", "targetname");
@@ -269,9 +269,9 @@ vista_tilt() {
 
 hvt_office_handler() {
   maps\_utility::music_stop(5);
-  level.rescue_anim_struct = common_scripts\utility::getstruct("rescue_animnode", "targetname");
-  level.fall_anim_struct = common_scripts\utility::getstruct("fall_animnode", "targetname");
-  level.hvt_office_anim_struct = common_scripts\utility::getstruct("hvt_office_animnode", "targetname");
+  level.rescue_anim_struct = common_scripts\utility::getStruct("rescue_animnode", "targetname");
+  level.fall_anim_struct = common_scripts\utility::getStruct("fall_animnode", "targetname");
+  level.hvt_office_anim_struct = common_scripts\utility::getStruct("hvt_office_animnode", "targetname");
 
   if(isDefined(level.rescue_checkpoint)) {
     common_scripts\utility::flag_set("garden_finished");
@@ -310,8 +310,8 @@ hvt_office_handler() {
 
 hvt_office_fail() {
   level endon("close_hvt_door");
-  var_0 = getent("fail_hvt_volume", "targetname");
-  var_1 = getent("fail_hvt_volume2", "targetname");
+  var_0 = getEnt("fail_hvt_volume", "targetname");
+  var_1 = getEnt("fail_hvt_volume2", "targetname");
   common_scripts\utility::flag_wait("hvt_office_rorke_entry");
 
   while(!common_scripts\utility::flag("hvt_office_explosion")) {
@@ -358,7 +358,7 @@ hvt_office_player() {
 
 hvt_pre_office_hesh() {
   if(!isDefined(level.rescue_checkpoint)) {
-    var_0 = common_scripts\utility::getstruct("rorke_pre_hvt", "targetname");
+    var_0 = common_scripts\utility::getStruct("rorke_pre_hvt", "targetname");
     thread hesh_pre_office_vo();
 
     if(!isDefined(var_0)) {
@@ -384,7 +384,7 @@ hvt_pre_office_hesh() {
 hesh_pre_office_vo() {
   self endon("done_with_hvt_nag");
   level endon("hvt_office_breach");
-  var_0 = getent("hvt_close_to_hesh", "targetname");
+  var_0 = getEnt("hvt_close_to_hesh", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -405,7 +405,7 @@ hvt_office_keegan() {
   maps\_utility::disable_bulletwhizbyreaction();
 
   if(!isDefined(level.rescue_checkpoint)) {
-    var_0 = common_scripts\utility::getstruct("baker_hvt_door", "targetname");
+    var_0 = common_scripts\utility::getStruct("baker_hvt_door", "targetname");
     var_0 maps\_anim::anim_reach_solo(self, "breach_stackL_approach");
     var_0 maps\_anim::anim_single_solo(self, "breach_stackL_approach");
     common_scripts\utility::flag_set("baker_breach_ready");
@@ -479,7 +479,7 @@ hvt_office_hvt_death() {
 }
 
 hvt_office_hvt() {
-  var_0 = getent("office_hvt", "targetname");
+  var_0 = getEnt("office_hvt", "targetname");
   var_0 maps\_utility::add_spawn_function(::hvt_office_hvt_setup);
   var_1 = maps\_utility::spawn_targetname("office_hvt", 1);
   level.office_hvt = var_1;
@@ -491,7 +491,7 @@ hvt_office_hvt() {
   level.hvt_office_anim_struct thread maps\_anim::anim_single_solo(var_1, "cornered_office_enter");
   var_1 thread maps\_utility::smart_dialogue("cornered_rms_paindoorshove");
   var_1 thread hvt_office_hvt_talking();
-  var_2 = getent("hvt_office_door_clip", "targetname");
+  var_2 = getEnt("hvt_office_door_clip", "targetname");
   var_2 delete();
   thread maps\cornered_audio::aud_hvt("part2", var_1);
   var_1 waittillmatch("single anim", "killable");
@@ -515,7 +515,7 @@ hvt_office_hvt_talking() {
 }
 
 hvt_office_vargas() {
-  var_0 = getent("office_vargas", "targetname");
+  var_0 = getEnt("office_vargas", "targetname");
   var_1 = maps\_utility::spawn_targetname("office_vargas", 1);
   var_1.ignoreme = 1;
   var_1.ignoreall = 1;
@@ -543,7 +543,7 @@ hvt_office_hesh() {
   var_3 = spawn("script_model", var_1);
   var_3.angles = var_2;
   var_3 setModel("weapon_p226");
-  var_3 linkto(var_0, "tag_weapon_left");
+  var_3 linkTo(var_0, "tag_weapon_left");
   common_scripts\utility::flag_wait("hvt_office_rorke_entry");
   var_0 pushplayer(0);
   level.hvt_office_anim_struct thread maps\_anim::anim_single_solo(var_0, "cornered_office_enter");
@@ -616,13 +616,13 @@ hvt_office_safe_block() {
 }
 
 hvt_office_door_block_up() {
-  var_0 = getent("hvt_office_player_block", "targetname");
+  var_0 = getEnt("hvt_office_player_block", "targetname");
   var_0 movez(128, 0.05);
   level.hvt_door_blocker = 1;
 }
 
 hvt_office_door_block_down() {
-  var_0 = getent("hvt_office_player_block", "targetname");
+  var_0 = getEnt("hvt_office_player_block", "targetname");
   var_0 movez(-128, 0.05);
   level.hvt_door_blocker = undefined;
 }
@@ -633,32 +633,32 @@ hvt_office_props() {
   thread maps\cornered_code::generic_prop_raven_anim(level.hvt_office_anim_struct, "office_props", "cornered_office_debris_chair", "hvt_office_debris_chair", "hvt_office_debris_chair2", 1, "hvt_office_explosion", undefined, 3.6);
   thread maps\cornered_code::generic_prop_raven_anim(level.hvt_office_anim_struct, "office_props", "cornered_office_debris_plant", "hvt_debris_plant1", "hvt_debris_plant2", 1, "hvt_office_explosion");
   thread maps\cornered_code::generic_prop_raven_anim(level.hvt_office_anim_struct, "office_props", "cornered_office_debris_couch", "hvt_office_debris_couch1", "hvt_office_debris_couch2", 1, "hvt_office_explosion");
-  var_0 = getent("hvt_office_debris_chair", "targetname");
-  var_1 = getent("hvt_office_debris_chair_clip", "targetname");
-  var_1 linkto(var_0);
-  var_2 = getent("hvt_office_debris_chair2", "targetname");
-  var_3 = getent("hvt_office_debris_chair_clip2", "targetname");
-  var_3 linkto(var_2);
-  var_4 = getent("hvt_office_debris_couch1", "targetname");
-  var_5 = getent("hvt_office_debris_couch1_clip", "targetname");
-  var_5 linkto(var_4);
+  var_0 = getEnt("hvt_office_debris_chair", "targetname");
+  var_1 = getEnt("hvt_office_debris_chair_clip", "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("hvt_office_debris_chair2", "targetname");
+  var_3 = getEnt("hvt_office_debris_chair_clip2", "targetname");
+  var_3 linkTo(var_2);
+  var_4 = getEnt("hvt_office_debris_couch1", "targetname");
+  var_5 = getEnt("hvt_office_debris_couch1_clip", "targetname");
+  var_5 linkTo(var_4);
   var_6 = getEntArray("hvt_office_debris_couch1_cushions", "targetname");
 
   foreach(var_8 in var_6) {
-    var_8 linkto(var_4);
+    var_8 linkTo(var_4);
   }
 
-  var_10 = getent("hvt_office_debris_couch2", "targetname");
-  var_11 = getent("hvt_office_debris_couch2_clip", "targetname");
-  var_11 linkto(var_10);
+  var_10 = getEnt("hvt_office_debris_couch2", "targetname");
+  var_11 = getEnt("hvt_office_debris_couch2_clip", "targetname");
+  var_11 linkTo(var_10);
   var_12 = getEntArray("hvt_office_debris_couch2_cushions", "targetname");
 
   foreach(var_8 in var_12) {
-    var_8 linkto(var_10);
+    var_8 linkTo(var_10);
   }
 
-  var_15 = getent("hvt_debris_plant1", "targetname");
-  var_16 = getent("hvt_debris_plant2", "targetname");
+  var_15 = getEnt("hvt_debris_plant1", "targetname");
+  var_16 = getEnt("hvt_debris_plant2", "targetname");
   thread hvt_office_chair();
   var_17 = maps\_utility::spawn_anim_model("rescue_lights", level.hvt_office_anim_struct.origin);
   var_18 = maps\_utility::spawn_anim_model("rescue_lights", level.hvt_office_anim_struct.origin);
@@ -676,17 +676,17 @@ hvt_office_props() {
   level.hvt_office_anim_struct maps\_anim::anim_single_solo(var_22, "cornered_office_prop_briefcase_enter");
   var_22 delete();
   common_scripts\utility::flag_wait("hvt_office_explosion");
-  var_23 = getent("hvt_debris_plant1_clip", "targetname");
+  var_23 = getEnt("hvt_debris_plant1_clip", "targetname");
   var_23 delete();
-  var_24 = getent("hvt_debris_plant2_clip", "targetname");
+  var_24 = getEnt("hvt_debris_plant2_clip", "targetname");
   var_24 delete();
 }
 
 hvt_office_chair() {
-  var_0 = getent("hvt_office_chair", "targetname");
-  var_1 = getent("hvt_chair_clip", "targetname");
+  var_0 = getEnt("hvt_office_chair", "targetname");
+  var_1 = getEnt("hvt_chair_clip", "targetname");
   var_2 = maps\_utility::spawn_anim_model("office_props");
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   level.hvt_office_anim_struct maps\_anim::anim_first_frame_solo(var_2, "cornered_office_prop_chair_enter");
   var_3 = var_2 gettagorigin("J_prop_1");
   var_4 = var_2 gettagangles("J_prop_1");
@@ -694,7 +694,7 @@ hvt_office_chair() {
   var_0.origin = var_3;
   var_0.angles = var_4;
   common_scripts\utility::waitframe();
-  var_0 linkto(var_2, "J_prop_1");
+  var_0 linkTo(var_2, "J_prop_1");
   common_scripts\utility::flag_wait("hvt_office_rorke_entry");
   level.hvt_office_anim_struct maps\_anim::anim_single_solo(var_2, "cornered_office_prop_chair_enter");
   var_0 unlink();
@@ -706,14 +706,14 @@ hvt_office_doors() {
   thread maps\cornered_code::generic_prop_raven_anim(level.hvt_office_anim_struct, "office_props", "cornered_office_prop_door_a", "hvt_office_entry_door_left", undefined, 1, "hvt_office_breach");
   thread maps\cornered_code::generic_prop_raven_anim(level.hvt_office_anim_struct, "office_props", "cornered_office_prop_door_b", "hvt_exit_door_lf", "hvt_exit_door_rt", 1, "hvt_office_rorke_entry");
   thread maps\cornered_code::generic_prop_raven_anim(level.hvt_office_anim_struct, "stairwell_door", "cnd_stair_escape_prop_doors", "stairwell_exit_door_left", "stairwell_exit_door_right", 1, "open_stairwell_doors");
-  var_0 = getent("hvt_exit_door_rt", "targetname");
-  var_1 = getent("hvt_exit_door_lf", "targetname");
+  var_0 = getEnt("hvt_exit_door_rt", "targetname");
+  var_1 = getEnt("hvt_exit_door_lf", "targetname");
   common_scripts\utility::flag_wait("hvt_office_rorke_entry");
   wait 1;
   var_0 connectpaths();
   var_1 connectpaths();
   common_scripts\utility::flag_wait("open_stairwell_doors");
-  var_2 = getent("stairwell_exit_door_clip", "targetname");
+  var_2 = getEnt("stairwell_exit_door_clip", "targetname");
   thread maps\cornered_audio::aud_hvt("exit");
   wait 0.3;
   var_2 notsolid();
@@ -725,7 +725,7 @@ hvt_office_doors() {
 hvt_office_environment() {
   common_scripts\utility::exploder(7751);
   setsaveddvar("phys_gravityChangeWakeupRadius", 4000);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   earthquake(0.5, 4, level.player.origin, 2500);
   level thread lobby_and_stair_fx();
   var_0 = common_scripts\utility::getStructArray("hvt_office_phys", "targetname");
@@ -747,9 +747,9 @@ hvt_office_environment() {
 }
 
 hvt_office_briefcase() {
-  var_0 = getent("briefcase_trigger", "targetname");
-  var_0 sethintstring(&"CORNERED_PICK_UP_BRIEFCASE_HINT");
-  var_1 = common_scripts\utility::getstruct("briefcase_look", "targetname");
+  var_0 = getEnt("briefcase_trigger", "targetname");
+  var_0 setHintString(&"CORNERED_PICK_UP_BRIEFCASE_HINT");
+  var_1 = common_scripts\utility::getStruct("briefcase_look", "targetname");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("player_can_use_briefcase");
   var_0 common_scripts\utility::trigger_on();
@@ -774,7 +774,7 @@ stairwell_handler() {
   common_scripts\utility::exploder(7651);
   maps\cornered_audio::aud_hvt_destruct01();
   thread maps\cornered_lighting::stairwell_light(16);
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   earthquake(0.25, 2, level.player.origin, 2500);
   level thread lobby_and_stair_fx();
   wait 0.25;
@@ -789,7 +789,7 @@ stairwell_handler() {
   level.player shellshock("cornered_stairwell", 1.0);
   level.player pushplayervector((0, -25, 0));
   thread maps\cornered_lighting::stairwell_light(18);
-  level.player playrumbleonentity("light_3s");
+  level.player playRumbleOnEntity("light_3s");
   earthquake(0.15, 2, level.player.origin, 2500);
   level thread lobby_and_stair_fx();
   wait 0.25;
@@ -800,7 +800,7 @@ stairwell_handler() {
   common_scripts\utility::flag_wait("stairwell_shake_3");
   level notify("done_random_shaking");
   thread maps\cornered_lighting::stairwell_light(12);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   earthquake(0.25, 3, level.player.origin, 2500);
   level thread lobby_and_stair_fx();
   wait 3.0;
@@ -814,10 +814,10 @@ stairwell_cracks() {
 }
 
 stairwell_crack_flat(var_0, var_1) {
-  var_2 = getent("stairwell_crack_decal_1" + var_0, "targetname");
-  var_3 = getent("stairwell_crack_decal_2" + var_0, "targetname");
-  var_4 = getent("stairwell_crack_decal_3" + var_0, "targetname");
-  var_5 = getent("stairwell_crack_decal_4" + var_0, "targetname");
+  var_2 = getEnt("stairwell_crack_decal_1" + var_0, "targetname");
+  var_3 = getEnt("stairwell_crack_decal_2" + var_0, "targetname");
+  var_4 = getEnt("stairwell_crack_decal_3" + var_0, "targetname");
+  var_5 = getEnt("stairwell_crack_decal_4" + var_0, "targetname");
   var_2 hide();
   var_3 hide();
   var_4 hide();
@@ -843,12 +843,12 @@ stairwell_crack_flat(var_0, var_1) {
 }
 
 stairwell_pipes() {
-  var_0 = getent("stair_pipe_left", "targetname");
-  var_1 = getent("stair_pipe_right1", "targetname");
-  var_2 = getent("stair_pipe_right2", "targetname");
-  var_3 = getent("stair_pipe_right3", "targetname");
-  var_2 linkto(var_1);
-  var_3 linkto(var_1);
+  var_0 = getEnt("stair_pipe_left", "targetname");
+  var_1 = getEnt("stair_pipe_right1", "targetname");
+  var_2 = getEnt("stair_pipe_right2", "targetname");
+  var_3 = getEnt("stair_pipe_right3", "targetname");
+  var_2 linkTo(var_1);
+  var_3 linkTo(var_1);
   common_scripts\utility::waitframe();
   var_4 = maps\_utility::spawn_anim_model("stairwell_pipe");
   level.hvt_office_anim_struct maps\_anim::anim_first_frame_solo(var_4, "cnd_stair_escape_prop_pipe");
@@ -860,8 +860,8 @@ stairwell_pipes() {
   var_1.angles = var_6;
   var_0.origin = var_7;
   var_0.angles = var_8;
-  var_0 linkto(var_4, "J_prop_2");
-  var_1 linkto(var_4, "J_prop_1");
+  var_0 linkTo(var_4, "J_prop_2");
+  var_1 linkTo(var_4, "J_prop_1");
   common_scripts\utility::flag_wait("stairwell_shake_1");
   level.hvt_office_anim_struct thread maps\_anim::anim_single_solo(var_4, "cnd_stair_escape_prop_pipe");
   common_scripts\utility::exploder(8471);
@@ -929,7 +929,7 @@ stairwell_baker() {
   level.hvt_office_anim_struct thread maps\_anim::anim_single_solo(self, "cornered_stairs");
   wait 9.7;
   self waittillmatch("single anim", "end");
-  var_0 = getent("stair_baker_dont_stop", "targetname");
+  var_0 = getEnt("stair_baker_dont_stop", "targetname");
 
   if(level.player istouching(var_0)) {
     level.hvt_office_anim_struct maps\_anim::anim_single_solo(self, "cornered_stairs_run");
@@ -942,7 +942,7 @@ stairwell_baker() {
 
     common_scripts\utility::flag_wait("allies_move_to_rescue");
     level.hvt_office_anim_struct notify("stop_loop");
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   if(!common_scripts\utility::flag("allies_move_to_rescue")) {
@@ -976,7 +976,7 @@ office_enemy() {
   self.health = 10;
   self.movespeedscale = 0.8;
   self.ignoreme = 1;
-  var_0 = common_scripts\utility::getstruct(self.script_noteworthy, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.script_noteworthy, "targetname");
   thread office_enemy_die();
   common_scripts\utility::flag_wait("found_hvt");
   self.ignoreme = 0;
@@ -994,9 +994,9 @@ office_enemy_die() {
   wait 0.5;
 
   if(isalive(self)) {
-    var_0 = common_scripts\utility::getstruct("office_bullet_1", "targetname");
+    var_0 = common_scripts\utility::getStruct("office_bullet_1", "targetname");
     var_1 = var_0 common_scripts\utility::spawn_tag_origin();
-    var_2 = common_scripts\utility::getstruct("office_bullet_2", "targetname");
+    var_2 = common_scripts\utility::getStruct("office_bullet_2", "targetname");
     var_3 = var_2 common_scripts\utility::spawn_tag_origin();
 
     if(!level.player islookingat(var_1)) {
@@ -1034,17 +1034,17 @@ office_handler() {
 }
 
 office_teleport_allies() {
-  var_0 = getent("stairwell_teleport_check", "targetname");
+  var_0 = getEnt("stairwell_teleport_check", "targetname");
   var_1 = getnode("stairwell_teleport_" + self.animname, "targetname");
-  var_2 = getent("player_look_at_office", "targetname");
-  var_3 = vectornormalize(level.player.origin - self.origin);
+  var_2 = getEnt("player_look_at_office", "targetname");
+  var_3 = vectorNormalize(level.player.origin - self.origin);
   var_4 = anglesToForward(self.angles);
 
   if(self istouching(var_0) && vectordot(var_3, var_4) <= -0.25) {
     if(self == level.allies[level.const_baker]) {
       var_5 = getnode("hall_post_stumble_baker", "targetname");
       level notify("stop_stairwell_baker");
-      self stopanimscripted();
+      self stopanimScripted();
       self clearenemy();
       maps\_utility::teleport_ai(var_1);
       self.goalradius = 16;
@@ -1056,7 +1056,7 @@ office_teleport_allies() {
     if(self == level.allies[level.const_rorke]) {
       var_5 = getnode("hall_post_stumble_rorke", "targetname");
       level notify("stop_stairwell_rorke");
-      self stopanimscripted();
+      self stopanimScripted();
       self clearenemy();
       maps\_utility::teleport_ai(var_1);
       self.goalradius = 16;
@@ -1085,11 +1085,11 @@ office_vo() {
 }
 
 office_props() {
-  var_0 = getent("office_shift_chair_clip", "targetname");
-  var_1 = getent("office_shift_chair", "targetname");
+  var_0 = getEnt("office_shift_chair_clip", "targetname");
+  var_1 = getEnt("office_shift_chair", "targetname");
   var_0.origin = var_1.origin;
   var_0.angles = var_1.angles;
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   thread maps\cornered_code::generic_prop_raven_anim(level.rescue_anim_struct, "office_shift_chair", "cornered_office_shift_chair", "office_shift_chair", undefined, 1, "office_ally_anims_starting");
   var_2 = maps\_utility::spawn_anim_model("rescue_lights", level.rescue_anim_struct.origin);
   var_3 = maps\_utility::spawn_anim_model("rescue_lights", level.rescue_anim_struct.origin);
@@ -1129,13 +1129,13 @@ office_jitter() {
 }
 
 office_light(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0 + "_bar_" + var_1, "targetname");
-  var_5 = getent(var_0 + "_shade_" + var_1, "targetname");
-  var_6 = getent(var_0 + "_bulb_" + var_1, "targetname");
+  var_4 = getEnt(var_0 + "_bar_" + var_1, "targetname");
+  var_5 = getEnt(var_0 + "_shade_" + var_1, "targetname");
+  var_6 = getEnt(var_0 + "_bulb_" + var_1, "targetname");
   var_2 maps\_anim::anim_first_frame_solo(self, "cornered_rescue_" + var_0);
-  var_4 linkto(self, "J_prop_1");
-  var_5 linkto(self, "J_prop_2");
-  var_6 linkto(var_5);
+  var_4 linkTo(self, "J_prop_1");
+  var_5 linkTo(self, "J_prop_2");
+  var_6 linkTo(var_5);
   common_scripts\utility::flag_wait(var_3);
   var_2 maps\_anim::anim_single_solo(self, "cornered_rescue_" + var_0);
   var_2 thread maps\_anim::anim_loop_solo(self, "cornered_rescue_" + var_0 + "_loop", "stop_light_loop");
@@ -1149,17 +1149,17 @@ office_light(var_0, var_1, var_2, var_3) {
 }
 
 office_door_to_lobby() {
-  var_0 = getent("door_to_lobby", "targetname");
-  var_1 = getent("lobby_door_player_clip", "targetname");
+  var_0 = getEnt("door_to_lobby", "targetname");
+  var_1 = getEnt("lobby_door_player_clip", "targetname");
   var_2 = getEntArray("door_to_lobby_handles", "targetname");
 
   foreach(var_4 in var_2) {
-    var_4 linkto(var_0);
+    var_4 linkTo(var_0);
   }
 
   var_6 = maps\_utility::spawn_anim_model("exfil_bldg");
   level.fall_anim_struct maps\_anim::anim_first_frame_solo(var_6, "cornered_building_fall_lobby_door");
-  var_0 linkto(var_6, "j_prop_1");
+  var_0 linkTo(var_6, "j_prop_1");
   common_scripts\utility::flag_wait("open_lobby_door");
   level.fall_anim_struct thread maps\_anim::anim_single_solo(var_6, "cornered_building_fall_lobby_door");
   wait 1;
@@ -1171,7 +1171,7 @@ office_door_to_lobby() {
 }
 
 fall_handler() {
-  level.fall_anim_struct = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  level.fall_anim_struct = common_scripts\utility::getStruct("fall_animnode", "targetname");
   level.allies[level.const_rorke] thread fall_allies_rorke();
   level.allies[level.const_baker] thread fall_allies_baker();
   thread fall_physics_debris_entry_stairs();
@@ -1193,7 +1193,7 @@ fall_environment() {
   maps\_utility::stop_exploder(22);
   maps\_utility::stop_exploder(8471);
   screenshake(level.player.origin, 0.5, 0.5, 0.25, 2.0, 0, 0.5, 500, 8, 8, 2);
-  level.player playrumbleonentity("light_2s");
+  level.player playRumbleOnEntity("light_2s");
   level.player maps\_utility::blend_movespeedscale(0.5, 0.5);
   level.player shellshock("cornered_horizontal_start", 2);
   level thread lobby_and_stair_fx();
@@ -1247,7 +1247,7 @@ fall_fx_crowd_setup() {
     var_3.fxid = var_2.v["fxid"];
     var_3.origin = var_2.v["origin"];
     var_3.angles = var_2.v["angles"];
-    var_3 linkto(level.vista_pivot);
+    var_3 linkTo(level.vista_pivot);
     thread fall_fx_crowd_fx(var_3);
   }
 }
@@ -1265,7 +1265,7 @@ fall_fx_billboard_setup() {
     var_3.fxid = var_2.v["fxid"];
     var_3.origin = var_2.v["origin"];
     var_3.angles = var_2.v["angles"];
-    var_3 linkto(level.vista_pivot);
+    var_3 linkTo(level.vista_pivot);
     thread fall_fx_billboard_fx(var_3);
   }
 
@@ -1283,10 +1283,10 @@ fall_fx_billboard_fx(var_0) {
 }
 
 fall_fx_tile() {
-  var_0 = common_scripts\utility::getstruct("test_tile1", "targetname");
-  var_1 = common_scripts\utility::getstruct("test_tile2", "targetname");
-  var_2 = common_scripts\utility::getstruct("test_tile3", "targetname");
-  var_3 = common_scripts\utility::getstruct("test_tile4", "targetname");
+  var_0 = common_scripts\utility::getStruct("test_tile1", "targetname");
+  var_1 = common_scripts\utility::getStruct("test_tile2", "targetname");
+  var_2 = common_scripts\utility::getStruct("test_tile3", "targetname");
+  var_3 = common_scripts\utility::getStruct("test_tile4", "targetname");
   wait 6.85;
   playFX(level._effect["vfx_atrium_tile"], var_0.origin + (0, 0, 2), (0, 1, 0));
   wait 0.55;
@@ -1308,19 +1308,19 @@ fall_player() {
   level.fall_arms_and_legs[1] = var_1;
   level.player enableinvulnerability();
   level.player playerlinktoblend(var_0, "tag_player", 0.6);
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   clearallcorpses();
   level.fall_anim_struct maps\_anim::anim_single_solo(level.fall_arms_and_legs[0], "lobby_tumble_player");
   common_scripts\utility::flag_set("fall_stagger_anim_done");
   level.player unlink();
   level.player setmovespeedscale(0.4);
-  level.player playrumbleonentity("light_3s");
+  level.player playRumbleOnEntity("light_3s");
   wait 3.0;
   common_scripts\utility::flag_set("fall_down_shake");
   thread watch_for_player_death();
   level.player playerlinktoblend(var_0, "tag_player", 0.5, 0.25);
   level.fall_anim_struct thread maps\_anim::anim_single(level.fall_arms_and_legs, "lobby_react_player");
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   var_0 show();
   var_1 show();
   level.player setviewkickscale(2.0);
@@ -1340,7 +1340,7 @@ fall_player() {
   level.player playerlinktodelta(var_0, "tag_player", 0.5, 70, 70, 65, 40);
   level.fall_arms_and_legs[0] waittillmatch("single anim", "kick_view");
   level.player setviewkickscale(2.5);
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   common_scripts\utility::waitframe();
   var_2 = level.player getgunangles();
 
@@ -1354,12 +1354,12 @@ fall_player() {
   common_scripts\utility::flag_set("player_is_slipping");
   level thread maps\cornered_code_slide::building_fall_anim_rig();
   common_scripts\utility::flag_set("fall_rubble_shift");
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   level.fall_path_rig waittillmatch("single anim", "original_start");
   common_scripts\utility::flag_set("go_building_fall");
   level notify("begin_atrium_fall");
   thread fall_enemies_slide();
-  level.player playrumbleonentity("collapsing_building");
+  level.player playRumbleOnEntity("collapsing_building");
   level.player lerpviewangleclamp(0.75, 0.5, 0, 55, 70, 50, 50);
   level.player disableinvulnerability();
   level.fall_path_rig waittillmatch("single anim", "sm_debris_b");
@@ -1386,7 +1386,7 @@ fall_player() {
   level.player lerpfov(82, 1.5);
   thread fall_props_parachute();
   thread fall_props_player_parachute();
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   level thread lobby_and_stair_fx();
   level.player lerpviewangleclamp(0.5, 0, 0, 80, 80, 120, 120);
   setphysicsgravitydir((0, -0.7, -0.1));
@@ -1403,7 +1403,7 @@ fall_player() {
   level.fall_path_rig waittillmatch("single anim", "spiderweb_glass");
   thread fall_glass_final_impact();
   physicsexplosionsphere(level.player.origin, 100, 64, 1);
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   level.fall_path_rig waittillmatch("single anim", "teleport_player");
 
   if(maps\cornered_code::is_e3()) {
@@ -1648,22 +1648,22 @@ fall_props() {
   thread fall_props_lobby_furniture();
   thread fall_props_debris_a();
   thread fall_props_debris_b();
-  var_1 = getent("bldg_tilt_tables", "targetname");
+  var_1 = getEnt("bldg_tilt_tables", "targetname");
   var_1.animname = "bldg_tilt_tables";
   var_1 maps\_anim::setanimtree();
-  var_2 = getent("lobby_rubble", "targetname");
+  var_2 = getEnt("lobby_rubble", "targetname");
   var_2.animname = "bldg_shake_rubble";
   var_2 maps\_anim::setanimtree();
-  var_3 = getent("lobby_hanging_light_1", "targetname");
+  var_3 = getEnt("lobby_hanging_light_1", "targetname");
   var_3.animname = "lobby_lights";
   var_3 maps\_anim::setanimtree();
-  var_4 = getent("lobby_hanging_light_2", "targetname");
+  var_4 = getEnt("lobby_hanging_light_2", "targetname");
   var_4.animname = "lobby_lights";
   var_4 maps\_anim::setanimtree();
-  var_5 = getent("falling_pillar_1", "targetname");
+  var_5 = getEnt("falling_pillar_1", "targetname");
   var_5.animname = "bldg_tilt_pillar";
   var_5 maps\_anim::setanimtree();
-  var_6 = getent("fall_floor_collapse", "targetname");
+  var_6 = getEnt("fall_floor_collapse", "targetname");
   var_6.animname = "bldg_tilt_floor";
   var_6 maps\_anim::setanimtree();
   var_7 = getEntArray("falling_lights", "targetname");
@@ -1697,7 +1697,7 @@ fall_props() {
 }
 
 fall_props_debris_a() {
-  var_0 = getent("bldg_tilt_debris_a", "targetname");
+  var_0 = getEnt("bldg_tilt_debris_a", "targetname");
   var_0.animname = "bldg_tilt_debris_a";
   var_0 maps\_anim::setanimtree();
   var_1 = maps\_utility::spawn_anim_model("lobby_objects");
@@ -1710,7 +1710,7 @@ fall_props_debris_a() {
     var_6 = var_1 gettagangles("J_prop_" + var_4.script_noteworthy);
     var_4.origin = var_5;
     var_4.angles = var_6;
-    var_4 linkto(var_1, "J_prop_" + var_4.script_noteworthy);
+    var_4 linkTo(var_1, "J_prop_" + var_4.script_noteworthy);
   }
 
   common_scripts\utility::flag_wait("go_sm_debris_a");
@@ -1722,7 +1722,7 @@ fall_props_debris_a() {
 }
 
 fall_props_debris_b() {
-  var_0 = getent("bldg_tilt_debris_b", "targetname");
+  var_0 = getEnt("bldg_tilt_debris_b", "targetname");
   var_0.animname = "bldg_tilt_debris_b";
   var_0 maps\_anim::setanimtree();
   wait 0.2;
@@ -1734,16 +1734,16 @@ fall_props_debris_b() {
 
 fall_props_pillar_rumble() {
   wait 2.65;
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   wait 1.65;
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   level.player setblurforplayer(3.0, 0.05);
   wait 0.35;
   level.player setblurforplayer(0.0, 0.5);
 }
 
 fall_prop_picture() {
-  var_0 = getent("lobby_tilting_picture", "targetname");
+  var_0 = getEnt("lobby_tilting_picture", "targetname");
   var_0 maps\_utility::add_target_pivot();
   var_1 = var_0.pivot;
   var_2 = 18;
@@ -1769,7 +1769,7 @@ fall_prop_picture() {
 fall_props_lobby_furniture() {
   var_0 = maps\_utility::spawn_anim_model("lobby_objects");
   var_1 = getEntArray("lobby_furniture", "targetname");
-  var_2 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   var_2 maps\_anim::anim_first_frame_solo(var_0, "cornered_building_fall_lobby_furniture_a");
 
   foreach(var_4 in var_1) {
@@ -1777,13 +1777,13 @@ fall_props_lobby_furniture() {
     var_6 = var_0 gettagangles("J_prop_" + var_4.script_noteworthy);
     var_4.origin = var_5;
     var_4.angles = var_6;
-    var_4 linkto(var_0, "J_prop_" + var_4.script_noteworthy);
+    var_4 linkTo(var_0, "J_prop_" + var_4.script_noteworthy);
 
     if(var_4.script_noteworthy == "6" || var_4.script_noteworthy == "11") {
       var_7 = getEntArray("pillows_" + var_4.script_noteworthy, "targetname");
 
       foreach(var_9 in var_7) {
-        var_9 linkto(var_4);
+        var_9 linkTo(var_4);
       }
     }
   }
@@ -1802,7 +1802,7 @@ fall_props_lobby_furniture() {
 }
 
 fall_prop_corner_collapse() {
-  var_0 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   var_1 = getEntArray("bldg_fall_corner_collapse", "targetname");
 
   foreach(var_3 in var_1) {
@@ -1828,7 +1828,7 @@ fall_prop_corner_collapse() {
     destroyglass(var_3);
   }
 
-  var_12 = getent("corner_beam", "targetname");
+  var_12 = getEnt("corner_beam", "targetname");
   var_12 delete();
   wait 0.7;
 
@@ -1856,7 +1856,7 @@ fall_prop_corner_collapse() {
 }
 
 fall_props_atrium_lights() {
-  var_0 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   self.animname = "bldg_tilt_light";
   maps\_anim::setanimtree();
   var_0 thread maps\_anim::anim_loop_solo(self, "cornered_building_fall_idle_hanging_light_" + self.script_noteworthy, "stop_swaying_loop");
@@ -1867,9 +1867,9 @@ fall_props_atrium_lights() {
 }
 
 fall_prop_merrick_window() {
-  var_0 = getent("merrick_glass_pane", "targetname");
-  var_1 = getent("merrick_glass_pane_distress", "targetname");
-  var_2 = getent("merrick_glass_pane_broken", "targetname");
+  var_0 = getEnt("merrick_glass_pane", "targetname");
+  var_1 = getEnt("merrick_glass_pane_distress", "targetname");
+  var_2 = getEnt("merrick_glass_pane_broken", "targetname");
   var_1 hide();
   var_2 hide();
   common_scripts\utility::flag_wait("player_is_slipping");
@@ -1882,7 +1882,7 @@ fall_prop_merrick_window() {
 }
 
 fall_props_parachute() {
-  var_0 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   var_1 = [];
   var_1[0] = maps\_utility::spawn_anim_model("exfil_chute_1");
   var_1[1] = maps\_utility::spawn_anim_model("exfil_chute_2");
@@ -1904,7 +1904,7 @@ fall_props_parachute() {
 }
 
 fall_props_player_parachute() {
-  var_0 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   var_1 = [];
   var_1[0] = maps\_utility::spawn_anim_model("exfil_ripcord_player");
   var_1[1] = maps\_utility::spawn_anim_model("exfil_chute_player");
@@ -1924,14 +1924,14 @@ fall_props_ext_bldg() {
   var_0 = getEntArray("end_broken_bldg", "targetname");
   var_0[0] thread fall_fx_end_bldg();
   var_1 = maps\_utility::spawn_anim_model("exfil_bldg");
-  var_2 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   var_2 maps\_anim::anim_first_frame_solo(var_1, "cornered_exfil_building_and_sign");
   var_3 = var_1 gettagorigin("J_prop_1");
   var_4 = var_1 gettagangles("J_prop_1");
   common_scripts\utility::waitframe();
 
   foreach(var_6 in var_0) {
-    var_6 linkto(var_1, "J_prop_1");
+    var_6 linkTo(var_1, "J_prop_1");
   }
 
   common_scripts\utility::flag_wait("go_exfil_bldg");
@@ -1939,10 +1939,10 @@ fall_props_ext_bldg() {
 }
 
 fall_props_ext_sign() {
-  var_0 = getent("fall_tiran_sign", "script_noteworthy");
+  var_0 = getEnt("fall_tiran_sign", "script_noteworthy");
   var_0.animname = "exfil_sign";
   var_0 maps\_anim::setanimtree();
-  var_1 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_1 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   common_scripts\utility::flag_wait("go_exfil_bldg");
   var_1 maps\_anim::anim_single_solo(var_0, "cornered_exfil_sign");
 }
@@ -1956,7 +1956,7 @@ fall_fx_end_bldg() {
       var_3.fxid = var_2.v["fxid"];
       var_3.origin = var_2.v["origin"];
       var_3.angles = var_2.v["angles"];
-      var_3 linkto(self);
+      var_3 linkTo(self);
       thread fall_fx_bldg_fx(var_3);
     }
   }
@@ -1998,7 +1998,7 @@ fall_break_glass_with_delay(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 fall_glass_final_impact() {
   var_0 = getglass("atrium_fall_glass");
-  var_1 = getent("atrium_fall_glass_clip", "targetname");
+  var_1 = getEnt("atrium_fall_glass_clip", "targetname");
   destroyglass(var_0);
   var_1 delete();
 }
@@ -2078,11 +2078,11 @@ fall_physics_debris_slide() {
   common_scripts\utility::flag_wait("atrium_pillar_break");
   var_1 = level.player common_scripts\utility::spawn_tag_origin();
   var_1.origin = level.player.origin + (24, 4, 12);
-  var_1 linkto(level.fall_arms_and_legs[0]);
+  var_1 linkTo(level.fall_arms_and_legs[0]);
   var_1 thread maps\cornered_code::debris_spawner(0.1, 0.2, 1200, (0, -1, -0.01), 1, 1);
   var_2 = level.player common_scripts\utility::spawn_tag_origin();
   var_2.origin = level.player.origin + (-24, 4, 12);
-  var_2 linkto(level.fall_arms_and_legs[0]);
+  var_2 linkTo(level.fall_arms_and_legs[0]);
   var_2 thread maps\cornered_code::debris_spawner(0.1, 0.2, 1200, (0, -1, -0.01), 1, 1);
   common_scripts\utility::flag_wait_any("atrium_finished", "parachute_exfil");
   var_1 delete();
@@ -2102,11 +2102,11 @@ random_building_shake_loop(var_0, var_1, var_2, var_3) {
     var_4 = randomfloatrange(var_1, var_2);
 
     if(var_4 < 2) {
-      level.player playrumbleonentity("light_1s");
+      level.player playRumbleOnEntity("light_1s");
     } else if(var_4 >= 2 && var_4 < 3) {
-      level.player playrumbleonentity("light_2s");
+      level.player playRumbleOnEntity("light_2s");
     } else {
-      level.player playrumbleonentity("light_3s");
+      level.player playRumbleOnEntity("light_3s");
     }
 
     level thread lobby_and_stair_fx();
@@ -2131,7 +2131,7 @@ fall_enemy_self_anim() {
 }
 
 fall_enemy_node_anim(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
   self.animname = "generic";
   self.allowdeath = 1;
   self.deathanim = undefined;
@@ -2145,7 +2145,7 @@ fall_enemy_node_anim(var_0, var_1) {
 
 corpse_clear() {
   level endon("teleported");
-  var_0 = getent("corpse_cleaner", "targetname");
+  var_0 = getEnt("corpse_cleaner", "targetname");
 
   for(;;) {
     var_1 = getcorpsearray();

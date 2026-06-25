@@ -123,7 +123,7 @@ function function_a2209df2(e_player, var_307bab92, var_c807e383, v_up, var_5c447
       var_72027ac3 = var_20d031ed / 1920;
       str_return = "none";
       if(var_72027ac3 > 0) {
-        var_28388a90 moveto(var_69a783ad, var_72027ac3, var_72027ac3 * 0.3, 0);
+        var_28388a90 moveTo(var_69a783ad, var_72027ac3, var_72027ac3 * 0.3, 0);
         level thread function_2abb74b7(e_player, var_8f0f462c, var_c807e383);
         level thread function_a6220124(var_8f0f462c);
         if(var_5c44718b) {
@@ -246,7 +246,7 @@ function function_2abb74b7(e_player, var_8f0f462c, var_c807e383) {
           var_ffc350c5 = vectortoangles(ai_enemy.origin - var_28388a90.origin);
           var_f6fb36f8 = ((var_ffc350c5[1] - var_a90ad319[1]) > 0 ? 1 : -1);
           var_a5d28b3d = var_a5d28b3d * var_f6fb36f8;
-          v_launch = vectornormalize(anglesToForward((0, var_a90ad319[1] + var_a5d28b3d, 0)));
+          v_launch = vectorNormalize(anglesToForward((0, var_a90ad319[1] + var_a5d28b3d, 0)));
           level thread function_3af108ec(e_player, ai_enemy, v_launch);
           continue;
         }

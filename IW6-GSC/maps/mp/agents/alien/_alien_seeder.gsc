@@ -180,7 +180,7 @@ seeder_spit_attack(var_0) {
     var_6 = (0, 0, 0) - var_5;
     var_7 = axistoangles(var_4, var_6, var_3);
   } else {
-    var_4 = vectornormalize(var_2 - self.origin);
+    var_4 = vectorNormalize(var_2 - self.origin);
 
     if(isDefined(self.current_spit_node)) {
       var_3 = anglestoup(self.current_spit_node.angles);
@@ -418,7 +418,7 @@ seeder_spawn_turret(var_0, var_1, var_2, var_3) {
   var_5.coll_model.angles = var_5.angles;
   var_5.coll_model.parent = var_5;
   var_5.coll_model.team = var_5.team;
-  var_5.coll_model linkto(var_5, "J_Spore_hitbox");
+  var_5.coll_model linkTo(var_5, "J_Spore_hitbox");
   var_5.coll_model setCanDamage(1);
   var_5.coll_model setCanRadiusDamage(1);
   var_5.coll_model.alien_type = "seeder_spore";
@@ -781,8 +781,8 @@ seeder_turret_spit_attack() {
 
 target_is_above_turret(var_0) {
   var_1 = self gettagorigin("J_Spore_46");
-  var_2 = vectornormalize(anglestoup(self.angles));
-  var_3 = vectornormalize(var_0 - var_1);
+  var_2 = vectorNormalize(anglestoup(self.angles));
+  var_3 = vectorNormalize(var_0 - var_1);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0.32) {
@@ -794,11 +794,11 @@ target_is_above_turret(var_0) {
 
 rotatedartfx() {
   self endon("death");
-  self rotateyaw(-20, 1, 0.2, 0.1);
+  self rotateYaw(-20, 1, 0.2, 0.1);
   wait 1;
-  self rotateyaw(40, 1, 0.2, 0.1);
+  self rotateYaw(40, 1, 0.2, 0.1);
   wait 1;
-  self rotateyaw(-20, 1, 0.2, 0.1);
+  self rotateYaw(-20, 1, 0.2, 0.1);
 }
 
 seeder_turret_cleanup() {
@@ -856,13 +856,13 @@ seeder_turret_face_target() {
     }
 
     var_2 = self.enemy.origin - self.origin;
-    var_3 = vectornormalize(projectvectortoplane(var_2, vectornormalize(anglestoup(self.angles))));
+    var_3 = vectorNormalize(projectvectortoplane(var_2, vectorNormalize(anglestoup(self.angles))));
     var_4 = anglesToForward(self.angles);
     var_5 = vectordot(var_3, var_4);
 
     if(var_5 < 1) {
       var_6 = acos(var_5);
-      var_7 = vectordot(vectorcross(var_3, var_4), vectornormalize(anglestoup(self.angles)));
+      var_7 = vectordot(vectorcross(var_3, var_4), vectorNormalize(anglestoup(self.angles)));
 
       if(var_7 > 0) {
         var_6 = var_6 * -1;

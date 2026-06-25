@@ -40,19 +40,19 @@ defend_zodiac_pre_load() {
   thread maps\carrier_code::player_rain_drops();
   level.zodiacs = [];
   level.gunboats = [];
-  level.water_splash_trigger = getent("water_splash_trigger", "targetname");
-  level.defend_zodiac_ally_respawner = getent("defend_zodiac_ally_respawner", "targetname");
+  level.water_splash_trigger = getEnt("water_splash_trigger", "targetname");
+  level.defend_zodiac_ally_respawner = getEnt("defend_zodiac_ally_respawner", "targetname");
   level.dz_intermission_enemies = [];
   level.dead_ally_drones = [];
   level.cut_ropes = [];
   level.zodiac_ally_shoot_targets = common_scripts\utility::getStructArray("zodiac_ally_shoot_target", "targetname");
   level.zodiac_allies = [];
   level.corpse_entnums = [];
-  level.defend_zodiac_arrived_right = getent("defend_zodiac_arrived_right", "targetname");
+  level.defend_zodiac_arrived_right = getEnt("defend_zodiac_arrived_right", "targetname");
   level.defend_zodiac_arrived_right maps\_utility::hide_entity();
-  level.defend_zodiac_arrived_catwalk = getent("defend_zodiac_arrived_catwalk", "targetname");
+  level.defend_zodiac_arrived_catwalk = getEnt("defend_zodiac_arrived_catwalk", "targetname");
   level.defend_zodiac_arrived_catwalk maps\_utility::hide_entity();
-  level.start_climbover = getent("start_climbover", "targetname");
+  level.start_climbover = getEnt("start_climbover", "targetname");
   level.start_climbover maps\_utility::hide_entity();
   level.stern_corner_clean = getEntArray("stern_corner_clean", "targetname");
   level.stern_corner_dmg = getEntArray("stern_corner_dmg", "targetname");
@@ -75,16 +75,16 @@ defend_zodiac_pre_load() {
   common_scripts\utility::array_thread(level.elevator_dmg_models, maps\carrier_code::hide_and_drop_entity);
   level.elevator_ac130_dmg_02 = getEntArray("elevator_ac130_dmg_02", "targetname");
   common_scripts\utility::array_thread(level.elevator_ac130_dmg_02, maps\carrier_code::hide_and_drop_entity);
-  level.fed_destroyer_osprey = getent("fed_destroyer_osprey", "targetname");
-  level.fed_destroyer_clip = getent("fed_destroyer_clip", "targetname");
+  level.fed_destroyer_osprey = getEnt("fed_destroyer_osprey", "targetname");
+  level.fed_destroyer_clip = getEnt("fed_destroyer_clip", "targetname");
   level.destroyer_guy_nodes = getEntArray("destroyer_guy_nodes", "script_noteworthy");
   level.fed_destroyer_fx_guns = getEntArray("fed_destroyer_fx_gun", "targetname");
   level.destroyer_targets_big = [];
   level.fed_destroyer_guys = [];
-  level.osprey_carrier_vol = getent("osprey_carrier_vol", "targetname");
+  level.osprey_carrier_vol = getEnt("osprey_carrier_vol", "targetname");
   level.ally_edge_nodes = getnodearray("ally_edge_node_02", "targetname");
   level.ally_shoot_nodes = getnodearray("ally_shoot_node_02", "targetname");
-  level.cut_rope_trigger = getent("cut_rope_trigger", "targetname");
+  level.cut_rope_trigger = getEnt("cut_rope_trigger", "targetname");
   level.cut_rope_trigger maps\_utility::hide_entity();
 }
 
@@ -100,12 +100,12 @@ setup_defend_zodiac() {
   common_scripts\utility::flag_set("deck_transition_finished");
   thread maps\carrier::obj_defend_carrier();
   thread maps\carrier_audio::aud_check("defend_zodiac");
-  var_0 = getent("blast_shield1_clip", "targetname");
+  var_0 = getEnt("blast_shield1_clip", "targetname");
   var_0 maps\_utility::show_entity();
-  var_1 = getent("blast_shield2_clip", "targetname");
+  var_1 = getEnt("blast_shield2_clip", "targetname");
   var_1 maps\_utility::show_entity();
   thread run_allies(1);
-  var_2 = getent("water_wake_intro", "targetname");
+  var_2 = getEnt("water_wake_intro", "targetname");
   var_2 delete();
   level.debug_function = ::osprey_intermission;
   thread run_jet_takeoff();
@@ -140,7 +140,7 @@ gunship_attack_autosave() {
   if(common_scripts\utility::flag("dz_warning_right") || common_scripts\utility::flag("dz_warning_front") || common_scripts\utility::flag("dz_warning_rear")) {
     return;
   }
-  if(level.player istouching(getent("gunship_attack_save_vol", "targetname"))) {
+  if(level.player istouching(getEnt("gunship_attack_save_vol", "targetname"))) {
     thread maps\_utility::autosave_now();
   }
 }
@@ -197,29 +197,29 @@ run_hesh() {
   common_scripts\utility::flag_wait("hesh_run");
   level.hesh maps\_utility::delaythread(1.5, maps\_utility::enable_exits);
   level.hesh maps\_utility::disable_cqbwalk();
-  level.hesh maps\_utility::set_goalradius(100);
+  level.hesh maps\_utility::set_goalRadius(100);
   level.hesh maps\_utility::pathrandompercent_zero();
   level.hesh maps\_utility::set_baseaccuracy(15);
   level.hesh maps\_utility::unset_forcegoal();
   level.hesh disable_flinch();
   thread hesh_initial_sprint();
-  var_0 = common_scripts\utility::getstruct("hesh_defend_run_1", "targetname");
+  var_0 = common_scripts\utility::getStruct("hesh_defend_run_1", "targetname");
   level.hesh setgoalpos(var_0.origin);
   level.hesh waittill("goal");
-  var_1 = common_scripts\utility::getstruct("hesh_defend_run_2", "targetname");
+  var_1 = common_scripts\utility::getStruct("hesh_defend_run_2", "targetname");
   level.hesh setgoalpos(var_1.origin);
-  level.hesh maps\_utility::set_goalradius(8);
+  level.hesh maps\_utility::set_goalRadius(8);
   level.hesh.ignoreall = 0;
   common_scripts\utility::flag_wait("dz_deck_explode");
   wait 0.25;
   level.hesh maps\_anim::anim_generic_custom_animmode(level.hesh, "gravity", "run_react_stumble");
   level.hesh maps\_utility::set_ignoreall(0);
-  var_2 = common_scripts\utility::getstruct("hesh_defend_run_jumpdown", "targetname");
+  var_2 = common_scripts\utility::getStruct("hesh_defend_run_jumpdown", "targetname");
   var_2 maps\_anim::anim_generic_reach(level.hesh, "traverse_jumpdown_56");
   var_2 thread maps\_anim::anim_generic(level.hesh, "traverse_jumpdown_56");
   wait 1.2;
-  level.hesh stopanimscripted();
-  level.hesh maps\_utility::set_goalradius(8);
+  level.hesh stopanimScripted();
+  level.hesh maps\_utility::set_goalRadius(8);
   level.hesh maps\_utility::disable_sprint();
   var_3 = getnode("defend_zodiac_hesh_node_right", "targetname");
   var_3 maps\_anim::anim_generic_reach(level.hesh, "carrier_rappel_defend_ally_lean_enter");
@@ -229,7 +229,7 @@ run_hesh() {
 
 hesh_initial_sprint() {
   common_scripts\utility::flag_wait("defend_zodiac_arrived_right");
-  var_0 = common_scripts\utility::getstruct("defend_dot", "targetname");
+  var_0 = common_scripts\utility::getStruct("defend_dot", "targetname");
   var_1 = distance(var_0.origin, level.player.origin);
   var_2 = distance(var_0.origin, level.hesh.origin);
 
@@ -454,7 +454,7 @@ run_enemies() {
 
 waittill_kickoff_zodiac() {
   level endon("defend_zodiac_arrived_right");
-  var_0 = common_scripts\utility::getstruct("hesh_defend_run_1", "targetname");
+  var_0 = common_scripts\utility::getStruct("hesh_defend_run_1", "targetname");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_1 maps\_utility::waittill_player_lookat(0.7, 1.5, 1);
@@ -538,11 +538,11 @@ player_can_see(var_0) {
 }
 
 initial_rpgs() {
-  var_0 = common_scripts\utility::getstruct("dz_initial_rpg_01", "targetname");
+  var_0 = common_scripts\utility::getStruct("dz_initial_rpg_01", "targetname");
   var_1 = var_0.origin + anglesToForward(var_0.angles) * 5000;
   magicbullet("panzerfaust3_cheap", var_0.origin, var_1);
   wait 1;
-  var_0 = common_scripts\utility::getstruct("dz_initial_rpg_02", "targetname");
+  var_0 = common_scripts\utility::getStruct("dz_initial_rpg_02", "targetname");
   var_1 = var_0.origin + anglesToForward(var_0.angles) * 5000;
   magicbullet("panzerfaust3_cheap", var_0.origin, var_1);
 }
@@ -575,12 +575,12 @@ climb_over(var_0, var_1, var_2, var_3) {
     var_1 = 0;
   }
 
-  var_4 = common_scripts\utility::getstruct(var_0 + "_rappel", "targetname");
+  var_4 = common_scripts\utility::getStruct(var_0 + "_rappel", "targetname");
   var_5 = maps\carrier_code_zodiac::setup_rope(var_4);
   var_5 thread maps\carrier_code_zodiac::shoot_rope(var_4, 1);
   var_6 = var_1 + 2;
   var_5 thread maps\_utility::notify_delay("rappel_done", var_6);
-  var_7 = getent(var_0, "targetname");
+  var_7 = getEnt(var_0, "targetname");
   var_8 = maps\_utility::spawn_targetname(var_0, 1);
   var_8.spawner = var_7;
   var_8.dropweapon = 0;
@@ -696,11 +696,11 @@ zodiac_turn_wave() {
 
 osprey_intermission() {
   common_scripts\utility::flag_set("osprey_intermission");
-  var_0 = common_scripts\utility::getstruct("osprey_intermission_lookat", "targetname").origin;
+  var_0 = common_scripts\utility::getStruct("osprey_intermission_lookat", "targetname").origin;
   var_1 = vectortoangles(var_0 - level.player.origin);
   var_1 = maps\_utility::set_x(var_1, 0);
   level.player setplayerangles(var_1);
-  var_2 = getent("inhibit_intermission_climbover", "targetname");
+  var_2 = getEnt("inhibit_intermission_climbover", "targetname");
   var_3 = getaicount("all");
 
   if(var_3 < 20 && !level.player istouching(var_2)) {
@@ -857,7 +857,7 @@ run_intro() {
 
 intro_migs() {
   maps\_utility::array_spawn_function_targetname("dz_intro_jet_01", maps\carrier_vista::jet_phalanx_spawn_function, "tracking_start", "tracking_end");
-  getent("dz_intro_jet_01", "targetname") maps\carrier_code::waittill_player_not_looking(1);
+  getEnt("dz_intro_jet_01", "targetname") maps\carrier_code::waittill_player_not_looking(1);
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("dz_intro_jet_01");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("dz_intro_jet_02");
   maps\carrier_code::phalanx_gun_fire_target("crr_phalanx_01", var_0, "tracking_start", "tracking_end", (0, 0, 0), "tag_body");
@@ -869,16 +869,16 @@ deck_explode() {
   thread maps\carrier_audio::aud_carr_zodiac_deck_explode();
   wait 2.5;
   common_scripts\utility::flag_set("dz_deck_explode");
-  var_0 = common_scripts\utility::getstruct("dz_intro_deck_explode", "targetname");
+  var_0 = common_scripts\utility::getStruct("dz_intro_deck_explode", "targetname");
   playFX(common_scripts\utility::getfx("vfx_missile_death_deck"), var_0.origin);
   radiusdamage(var_0.origin, var_0.radius, 300, 90, undefined, "MOD_EXPLOSIVE");
   physicsexplosionsphere(var_0.origin, var_0.radius * 2, var_0.radius, 100);
   screenshake(var_0.origin, 3, 2, 2, 0.8, 0, 0.8, 2000, 4, 6, 5);
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   common_scripts\utility::array_thread(level.dz_deck_explode_dmg, maps\carrier_code::show_and_raise_entity);
   common_scripts\utility::array_thread(getEntArray("barrel_impact_2", "targetname"), maps\_utility::hide_entity);
   common_scripts\utility::array_thread(getEntArray("odin_phys_objects_2", "targetname"), maps\_utility::hide_entity);
-  getent("dz_deck_explode_weapon", "script_noteworthy") delete();
+  getEnt("dz_deck_explode_weapon", "script_noteworthy") delete();
 }
 
 deck_explode_guys() {
@@ -887,14 +887,14 @@ deck_explode_guys() {
   wait 1;
 
   foreach(var_2 in var_0) {
-    var_2 maps\_utility::set_goalradius(4);
-    var_2 setgoalpos(common_scripts\utility::getstruct(var_2.target, "targetname").origin);
+    var_2 maps\_utility::set_goalRadius(4);
+    var_2 setgoalpos(common_scripts\utility::getStruct(var_2.target, "targetname").origin);
   }
 }
 
 deck_explode_vista() {
   common_scripts\utility::flag_wait("defend_zodiac_arrived_catwalk");
-  var_0 = common_scripts\utility::getstruct("dz_intro_deck_explode_vista", "targetname");
+  var_0 = common_scripts\utility::getStruct("dz_intro_deck_explode_vista", "targetname");
   playFX(common_scripts\utility::getfx("vfx_missile_death_deck"), var_0.origin);
   thread maps\carrier_audio::aud_carr_zodiac_deck_explode_vista();
   radiusdamage(var_0.origin, var_0.radius, 300, 90, undefined, "MOD_EXPLOSIVE");
@@ -903,7 +903,7 @@ deck_explode_vista() {
 }
 
 heli_flyover() {
-  var_0 = common_scripts\utility::getstruct("hesh_defend_run_1", "targetname");
+  var_0 = common_scripts\utility::getStruct("hesh_defend_run_1", "targetname");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_1 maps\_utility::waittill_player_lookat(0.5, 0, 1);
@@ -923,7 +923,7 @@ run_jet_takeoff() {
   if(isDefined(level.old_player_origin)) {
     var_0 = common_scripts\utility::spawn_tag_origin();
     var_0.origin = level.old_player_origin;
-    var_1 = getent("nearby_jet2", "targetname");
+    var_1 = getEnt("nearby_jet2", "targetname");
 
     if(!var_0 istouching(var_1)) {
       common_scripts\utility::flag_wait("defend_zodiac_osprey_turn");
@@ -943,7 +943,7 @@ run_allies(var_0) {
     maps\_utility::array_delete(var_1);
   }
 
-  level.respawn_spawner_org = common_scripts\utility::getstruct("defend_zodiac_allies_respawn_struct", "targetname").origin;
+  level.respawn_spawner_org = common_scripts\utility::getStruct("defend_zodiac_allies_respawn_struct", "targetname").origin;
   common_scripts\utility::flag_clear("respawn_friendlies");
   maps\_utility::activate_trigger_with_targetname("defend_zodiac_allies_move");
   level.friendly_startup_thread = ::ally_think;
@@ -972,7 +972,7 @@ initial_drone_allies() {
   }
 
   common_scripts\utility::flag_wait("defend_zodiac_wave_01");
-  var_1 = getent("defend_zodiac_ally_drone_initial_02", "targetname");
+  var_1 = getEnt("defend_zodiac_ally_drone_initial_02", "targetname");
 
   if(!maps\_utility::either_player_looking_at(var_1.origin)) {
     var_0 = maps\_utility::spawn_targetname("defend_zodiac_ally_drone_initial_02", 0);
@@ -1250,7 +1250,7 @@ ally_push() {
   }
   self.push_enemy endon("death");
   self.animname = "generic";
-  self.push_enemy stopanimscripted();
+  self.push_enemy stopanimScripted();
   self.push_enemy unlink();
   self.push_enemy.ref_node thread maps\_anim::anim_generic(self.push_enemy, "carrier_rappel_defend_ally_push_victim");
   self.push_enemy thread kill_push_enemy();
@@ -1529,14 +1529,14 @@ enemy_destroyer_guy_logic() {
   self.drone_run_speed = 140;
 
   if(isDefined(self.script_moveoverride)) {
-    self linkto(level.fed_destroyer_osprey);
+    self linkTo(level.fed_destroyer_osprey);
     wait(self.script_moveoverride);
     self notify("move");
     self unlink();
   }
 
   self waittill("goal");
-  self linkto(level.fed_destroyer_osprey);
+  self linkTo(level.fed_destroyer_osprey);
 }
 
 pre_gunship_attack_vo() {
@@ -1547,34 +1547,34 @@ pre_gunship_attack_vo() {
 }
 
 osprey2_gunship_attack() {
-  var_0 = common_scripts\utility::getstruct("osprey2_gunship_attack_pos", "targetname");
+  var_0 = common_scripts\utility::getStruct("osprey2_gunship_attack_pos", "targetname");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   wait 5.5;
   maps\_utility::delaythread(4.5, maps\carrier_code::gunship_line_attack_fake, "osprey2_gunship_attack_25_01", var_0.origin);
-  var_2 = common_scripts\utility::getstruct("osprey2_gunship_attack_105_01", "targetname");
+  var_2 = common_scripts\utility::getStruct("osprey2_gunship_attack_105_01", "targetname");
   thread maps\carrier_code::ac130_magic_105_fake(var_0.origin, var_2.origin);
   thread maps\carrier_audio::aud_zodiac_gunship_attack_105_fake(var_2);
   wait 1;
-  var_2 = common_scripts\utility::getstruct("osprey2_gunship_attack_105_02", "targetname");
+  var_2 = common_scripts\utility::getStruct("osprey2_gunship_attack_105_02", "targetname");
   thread maps\carrier_code::ac130_magic_105_fake(var_0.origin, var_2.origin);
   thread maps\carrier_audio::aud_zodiac_gunship_attack_105_fake(var_2);
   wait 0.5;
-  var_2 = common_scripts\utility::getstruct("osprey2_gunship_attack_105_03", "targetname");
+  var_2 = common_scripts\utility::getStruct("osprey2_gunship_attack_105_03", "targetname");
   thread maps\carrier_code::ac130_magic_bullet_fake("40mm", var_0.origin, var_2.origin);
   var_1 maps\_utility::play_sound_on_entity("ac130_40mm_fire_npc");
   thread maps\carrier_audio::aud_zodiac_gunship_attack_105_fake(var_2);
   wait 1;
-  var_2 = common_scripts\utility::getstruct("osprey2_gunship_attack_105_04", "targetname");
+  var_2 = common_scripts\utility::getStruct("osprey2_gunship_attack_105_04", "targetname");
   thread maps\carrier_code::ac130_magic_105_fake(var_0.origin, var_2.origin);
   thread maps\carrier_audio::aud_zodiac_gunship_attack_105_fake(var_2);
   wait 2;
-  var_2 = common_scripts\utility::getstruct("osprey2_gunship_attack_105_deck", "targetname");
+  var_2 = common_scripts\utility::getStruct("osprey2_gunship_attack_105_deck", "targetname");
   thread maps\carrier_code::ac130_magic_bullet_fake("40mm", var_0.origin, var_2.origin);
   var_1 maps\_utility::play_sound_on_entity("ac130_40mm_fire_npc");
   thread maps\carrier_audio::aud_zodiac_gunship_attack_105_fake(var_2);
   wait 1;
-  var_2 = common_scripts\utility::getstruct("osprey2_gunship_attack_105_05", "targetname");
+  var_2 = common_scripts\utility::getStruct("osprey2_gunship_attack_105_05", "targetname");
   thread maps\carrier_code::ac130_magic_bullet_fake("40mm", var_0.origin, var_2.origin);
   var_1 maps\_utility::play_sound_on_entity("ac130_40mm_fire_npc");
   thread maps\carrier_audio::aud_zodiac_gunship_attack_105_fake(var_2);
@@ -1584,7 +1584,7 @@ osprey2_gunship_attack() {
 
 gunship_attack() {
   if(isDefined(level.player_ignored_2nd_osprey)) {
-    var_0 = getent("enemy_ac130", "targetname");
+    var_0 = getEnt("enemy_ac130", "targetname");
     var_0 maps\carrier_code::waittill_player_not_looking(1);
   }
 
@@ -1595,10 +1595,10 @@ gunship_attack() {
   if(!isDefined(level.player_ignored_2nd_osprey)) {
     teleport_player_post_osprey();
     thread gunship_damage();
-    var_1 = getent("gunship_transition_turn_player_vol", "targetname");
+    var_1 = getEnt("gunship_transition_turn_player_vol", "targetname");
 
     if(level.player istouching(var_1)) {
-      var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+      var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
       level.player setplayerangles(var_2.angles);
     }
   }
@@ -1608,7 +1608,7 @@ gunship_attack() {
   thread player_handle_speed_for_knockdown();
   thread allies_gunship_run();
   thread hesh_gunship_run();
-  var_4 = common_scripts\utility::getstruct("gunship_105_01", "targetname");
+  var_4 = common_scripts\utility::getStruct("gunship_105_01", "targetname");
 
   if(level.player.origin[1] < var_4.origin[1]) {
     var_5 = common_scripts\utility::spawn_tag_origin();
@@ -1663,11 +1663,11 @@ gunship_damage() {
 teleport_player_post_osprey() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = level.player.origin;
-  var_1 = getent("player_near_knockdown_vol", "targetname");
+  var_1 = getEnt("player_near_knockdown_vol", "targetname");
 
   if(var_0 istouching(var_1)) {
     level.player.near_knockdown = 1;
-    maps\_utility::teleport_player(common_scripts\utility::getstruct("player_near_knockdown_teleport", "targetname"));
+    maps\_utility::teleport_player(common_scripts\utility::getStruct("player_near_knockdown_teleport", "targetname"));
     var_0 delete();
     return;
   }
@@ -1687,7 +1687,7 @@ teleport_player_post_osprey() {
 }
 
 allies_gunship_run() {
-  var_0 = getent("gunship_trans_ally_runto_elevator_vol", "targetname");
+  var_0 = getEnt("gunship_trans_ally_runto_elevator_vol", "targetname");
 
   foreach(var_2 in level.zodiac_allies) {
     if(isalive(var_2)) {
@@ -1718,12 +1718,12 @@ single_ally_run(var_0) {
 hesh_gunship_run() {
   level endon("knockdown_moment");
   level.hesh notify("stop_edge_think");
-  var_0 = common_scripts\utility::getstruct("sparrow_run_hesh_start_idle", "targetname");
+  var_0 = common_scripts\utility::getStruct("sparrow_run_hesh_start_idle", "targetname");
 
   if(!isDefined(level.player_ignored_2nd_osprey)) {
     var_1 = teleport_hesh_post_osprey();
     level.hesh notify("stop_loop");
-    level.hesh stopanimscripted();
+    level.hesh stopanimScripted();
 
     if(maps\carrier_code::eval(level.player.near_knockdown)) {
       level.hesh forceteleport(var_0.origin, var_0.angles);
@@ -1755,7 +1755,7 @@ hesh_gunship_run() {
   common_scripts\utility::flag_set("gunship_attacking");
   common_scripts\utility::flag_set("obj_defend_carrier_complete");
   thread maps\carrier::obj_sparrow();
-  var_2 = common_scripts\utility::getstruct("sparrow_run_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("sparrow_run_animnode", "targetname");
   thread hesh_close_to_knockdown(var_0);
   var_0 maps\_anim::anim_reach_solo(level.hesh, "sparrow_start_idle");
   level.hesh enable_flinch();
@@ -1789,7 +1789,7 @@ player_handle_speed_for_knockdown() {
   level.hesh endon("death");
   level endon("knockdown_moment");
   thread reset_player_speed();
-  var_0 = common_scripts\utility::getstruct("sparrow_run_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("sparrow_run_animnode", "targetname");
 
   for(;;) {
     if(level.player.origin[1] > level.hesh.origin[1] && level.player.origin[1] < var_0.origin[1] + 200) {
@@ -1830,7 +1830,7 @@ gunship_attacking() {
   thread gunship_trans_loop();
   thread gunship_trans_death_warning();
   thread elevator_105();
-  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getstruct("gunship_105_01", "targetname").origin);
+  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getStruct("gunship_105_01", "targetname").origin);
   level.ac_130 maps\_utility::play_sound_on_entity("ac130_40mm_fire_npc");
   thread maps\carrier_audio::aud_gunship_incoming_zodiac();
   maps\_utility::delaythread(2, maps\carrier_code::phalanx_gun_offline, "crr_phalanx_01");
@@ -1851,7 +1851,7 @@ gunship_trans_2() {
   level endon("gunship_trans_4");
   common_scripts\utility::flag_wait("gunship_trans_2");
   maps\_utility::delaythread(0, maps\carrier_code::gunship_line_attack, "gunship_25_02");
-  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getstruct("gunship_105_02", "targetname").origin);
+  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getStruct("gunship_105_02", "targetname").origin);
   level.ac_130 maps\_utility::play_sound_on_entity("ac130_40mm_fire_npc");
   thread maps\carrier_audio::aud_gunship_incoming_zodiac();
   maps\_utility::delaythread(1, ::launch_props, "gunship_trans_impact_objects_02");
@@ -1861,7 +1861,7 @@ gunship_trans_3() {
   level endon("gunship_trans_4");
   common_scripts\utility::flag_wait("gunship_trans_3");
   maps\_utility::delaythread(0, maps\carrier_code::gunship_line_attack, "gunship_25_03");
-  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getstruct("gunship_105_03", "targetname").origin);
+  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getStruct("gunship_105_03", "targetname").origin);
   level.ac_130 maps\_utility::play_sound_on_entity("ac130_40mm_fire_npc");
   thread maps\carrier_audio::aud_gunship_incoming_zodiac();
 }
@@ -1869,16 +1869,16 @@ gunship_trans_3() {
 gunship_trans_4() {
   common_scripts\utility::flag_wait("gunship_trans_4");
   maps\_utility::delaythread(0, maps\carrier_code::gunship_line_attack, "gunship_25_04");
-  var_0 = common_scripts\utility::getstruct("sparrow_trans_105_pre_start", "targetname");
-  var_1 = common_scripts\utility::getstruct("sparrow_trans_105_pre_01", "targetname");
+  var_0 = common_scripts\utility::getStruct("sparrow_trans_105_pre_start", "targetname");
+  var_1 = common_scripts\utility::getStruct("sparrow_trans_105_pre_01", "targetname");
   level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_105_fake, var_0.origin, var_1.origin);
   thread maps\carrier_audio::aud_gunship_incoming_zodiac();
   thread maps\carrier_audio::aud_gunship_trans_4_105_01();
-  var_2 = common_scripts\utility::getstruct("sparrow_trans_105_pre_02", "targetname");
+  var_2 = common_scripts\utility::getStruct("sparrow_trans_105_pre_02", "targetname");
   level.ac_130 maps\_utility::delaythread(0.6, maps\carrier_code::ac130_magic_105_fake, var_0.origin, var_2.origin);
   thread maps\carrier_audio::aud_gunship_incoming_zodiac();
   thread maps\carrier_audio::aud_gunship_trans_4_105_02();
-  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getstruct("gunship_105_04", "targetname").origin);
+  level.ac_130 maps\_utility::delaythread(0, maps\carrier_code::ac130_magic_bullet, "40mm", common_scripts\utility::getStruct("gunship_105_04", "targetname").origin);
   level.ac_130 maps\_utility::play_sound_on_entity("ac130_40mm_fire_npc");
   thread maps\carrier_audio::aud_gunship_incoming_zodiac();
 }
@@ -1933,7 +1933,7 @@ elevator_105(var_0) {
   wait 1;
   var_1 = maps\_utility::array_removedead(var_1);
   common_scripts\utility::array_thread(var_1, maps\_utility::stop_magic_bullet_shield);
-  var_2 = common_scripts\utility::getstruct("dz_elevator_explode", "targetname");
+  var_2 = common_scripts\utility::getStruct("dz_elevator_explode", "targetname");
   radiusdamage(var_2.origin, var_2.radius, 300, 90, undefined, "MOD_EXPLOSIVE");
   physicsexplosionsphere(var_2.origin, var_2.radius * 2, var_2.radius, 100);
   common_scripts\utility::waitframe();
@@ -1961,7 +1961,7 @@ elevator_lean_over(var_0) {
   self.dropweapon = 0;
   self.nodrop = 1;
   self.grenadeammo = 0;
-  var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.target, "targetname");
 
   if(!maps\carrier_code::eval(var_0)) {
     var_1 maps\_anim::anim_generic_reach(self, "carrier_rappel_defend_ally_lean_enter");
@@ -2016,19 +2016,19 @@ gunship_death() {
 }
 
 lower_blastshield(var_0) {
-  var_1 = getent("blastshield", "targetname");
-  var_2 = getent("blastshield_clip", "targetname");
-  var_2 linkto(var_1);
-  var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_1 = getEnt("blastshield", "targetname");
+  var_2 = getEnt("blastshield_clip", "targetname");
+  var_2 linkTo(var_1);
+  var_3 = common_scripts\utility::getStruct(var_1.target, "targetname");
 
   if(maps\carrier_code::eval(var_0)) {
-    var_1 moveto(var_3.origin, 0.1);
-    var_1 rotateto(var_3.angles, 0.1);
+    var_1 moveTo(var_3.origin, 0.1);
+    var_1 rotateTo(var_3.angles, 0.1);
     wait 5;
     var_2 connectpaths();
   } else {
-    var_1 moveto(var_3.origin, 5, 2, 2);
-    var_1 rotateto(var_3.angles, 5, 2, 2);
+    var_1 moveTo(var_3.origin, 5, 2, 2);
+    var_1 rotateTo(var_3.angles, 5, 2, 2);
     wait 5;
     var_2 connectpaths();
   }
@@ -2079,9 +2079,9 @@ defend_zodiac_autosave(var_0, var_1) {
 kill_trigger_setup() {
   var_0 = getEntArray("dz_kill_triggers", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, maps\_utility::show_entity);
-  var_1 = getent("dz_kill_vol_right", "targetname");
-  var_2 = getent("dz_kill_vol_front", "targetname");
-  var_3 = getent("dz_kill_vol_rear", "targetname");
+  var_1 = getEnt("dz_kill_vol_right", "targetname");
+  var_2 = getEnt("dz_kill_vol_front", "targetname");
+  var_3 = getEnt("dz_kill_vol_rear", "targetname");
   var_4 = [var_1, var_2, var_3];
   thread kill_trigger(var_4, "dz_warning_right", "dz_warning_front", "dz_warning_rear");
   common_scripts\utility::flag_wait("knockdown_moment");

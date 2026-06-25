@@ -222,7 +222,7 @@ function private function_70873aee(local_client_num, client_num) {
 }
 
 function function_8565908c(local_client_num, client_num) {
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(isDefined(player) && player getentitynumber() == client_num) {
@@ -349,7 +349,7 @@ function function_e2fff1e7(local_client_num, oldval, newval, bnewent, binitialsn
 
   self function_8a561cb1();
 
-  foreach(player in getplayers(fieldname)) {
+  foreach(player in getPlayers(fieldname)) {
     if(player function_d2503806("rob_sonar_set_friendly_spy_mp")) {
       player stoprenderoverridebundle("rob_sonar_set_friendly_spy_mp");
     }

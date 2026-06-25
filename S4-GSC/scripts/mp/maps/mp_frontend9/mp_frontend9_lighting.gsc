@@ -24,7 +24,7 @@ operator_far() {
   setDvar("#x3315497e1370274af", 32);
   setDvar("#x3c0aa0a6ec3acae1a", 3);
   setDvar("#x34ffe3d8b0515fe9d", 6);
-  level.camera_character_faction_select._id_22B1 = getent("char_west_b_detail", "targetname");
+  level.camera_character_faction_select._id_22B1 = getEnt("char_west_b_detail", "targetname");
   level.camera_character_faction_select._id_22B1._id_47FB = [7, 75];
   level.camera_character_faction_select._id_A370 = 34;
 }
@@ -63,23 +63,23 @@ lobby_far() {
 
 flare_lgt_pos_lerp() {
   wait 5;
-  var_0 = getent("flare_lgt", "targetname");
+  var_0 = getEnt("flare_lgt", "targetname");
   var_0 _meth_8338(0);
   var_0 _meth_8334((1, 0.95, 0.9));
   var_1 = var_0.origin;
-  var_2 = getent("lobby_charslot_01", "targetname");
-  var_3 = scripts\engine\utility::getstruct("pos_1", "targetname");
-  var_4 = scripts\engine\utility::getstruct("pos_2", "targetname");
-  var_5 = scripts\engine\utility::getstruct("pos_3", "targetname");
-  var_6 = scripts\engine\utility::getstruct("pos_4", "targetname");
-  var_7 = scripts\engine\utility::getstruct("pos_5", "targetname");
-  var_8 = scripts\engine\utility::getstruct("pos_6", "targetname");
-  var_9 = scripts\engine\utility::getstruct("pos_7", "targetname");
-  var_10 = scripts\engine\utility::getstruct("pos_8", "targetname");
-  var_11 = scripts\engine\utility::getstruct("pos_9", "targetname");
-  var_12 = scripts\engine\utility::getstruct("pos_10", "targetname");
-  var_13 = scripts\engine\utility::getstruct("pos_11", "targetname");
-  var_14 = scripts\engine\utility::getstruct("pos_12", "targetname");
+  var_2 = getEnt("lobby_charslot_01", "targetname");
+  var_3 = scripts\engine\utility::getStruct("pos_1", "targetname");
+  var_4 = scripts\engine\utility::getStruct("pos_2", "targetname");
+  var_5 = scripts\engine\utility::getStruct("pos_3", "targetname");
+  var_6 = scripts\engine\utility::getStruct("pos_4", "targetname");
+  var_7 = scripts\engine\utility::getStruct("pos_5", "targetname");
+  var_8 = scripts\engine\utility::getStruct("pos_6", "targetname");
+  var_9 = scripts\engine\utility::getStruct("pos_7", "targetname");
+  var_10 = scripts\engine\utility::getStruct("pos_8", "targetname");
+  var_11 = scripts\engine\utility::getStruct("pos_9", "targetname");
+  var_12 = scripts\engine\utility::getStruct("pos_10", "targetname");
+  var_13 = scripts\engine\utility::getStruct("pos_11", "targetname");
+  var_14 = scripts\engine\utility::getStruct("pos_12", "targetname");
 
   if(scripts\engine\utility::_id_5C00("flare_on") == 0) {
     scripts\engine\utility::_id_5C1B("flare_on");
@@ -132,20 +132,20 @@ flare_lgt_pos_lerp() {
 
 flare_lgt_pos_lerp_op() {
   wait 5;
-  var_0 = getent("flare_lgt_op", "targetname");
+  var_0 = getEnt("flare_lgt_op", "targetname");
   var_0 _meth_8338(10);
   var_0 _meth_8334((1, 0.95, 0.9));
   var_1 = var_0.origin;
-  var_2 = getent("charroom_char_west_b", "targetname");
-  var_3 = scripts\engine\utility::getstruct("pos_13", "targetname");
-  var_4 = scripts\engine\utility::getstruct("pos_14", "targetname");
-  var_5 = scripts\engine\utility::getstruct("pos_15", "targetname");
-  var_6 = scripts\engine\utility::getstruct("pos_16", "targetname");
-  var_7 = scripts\engine\utility::getstruct("pos_17", "targetname");
-  var_8 = scripts\engine\utility::getstruct("pos_18", "targetname");
-  var_9 = scripts\engine\utility::getstruct("pos_19", "targetname");
-  var_10 = scripts\engine\utility::getstruct("pos_20", "targetname");
-  var_11 = scripts\engine\utility::getstruct("pos_21", "targetname");
+  var_2 = getEnt("charroom_char_west_b", "targetname");
+  var_3 = scripts\engine\utility::getStruct("pos_13", "targetname");
+  var_4 = scripts\engine\utility::getStruct("pos_14", "targetname");
+  var_5 = scripts\engine\utility::getStruct("pos_15", "targetname");
+  var_6 = scripts\engine\utility::getStruct("pos_16", "targetname");
+  var_7 = scripts\engine\utility::getStruct("pos_17", "targetname");
+  var_8 = scripts\engine\utility::getStruct("pos_18", "targetname");
+  var_9 = scripts\engine\utility::getStruct("pos_19", "targetname");
+  var_10 = scripts\engine\utility::getStruct("pos_20", "targetname");
+  var_11 = scripts\engine\utility::getStruct("pos_21", "targetname");
 
   if(scripts\engine\utility::_id_5C00("flare_on_op") == 0) {
     scripts\engine\utility::_id_5C1B("flare_on_op");
@@ -255,7 +255,7 @@ spot_lerp_origin(var_0, var_1, var_2) {
 }
 
 lerp_spot_intensity(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_3)) {
     return;

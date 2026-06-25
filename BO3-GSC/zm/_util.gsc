@@ -58,7 +58,7 @@ function brush_throw() {
   }
   ent = undefined;
   if(isDefined(self.v["target"])) {
-    ent = getent(self.v["target"], "targetname");
+    ent = getEnt(self.v["target"], "targetname");
   }
   if(!isDefined(ent)) {
     self.model delete();

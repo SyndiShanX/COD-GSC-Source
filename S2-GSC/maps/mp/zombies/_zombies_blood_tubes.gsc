@@ -46,16 +46,16 @@ handle_blood_tube_upgrade_overrides() {
 
 handle_pap_button(param_00) {
   var_01 = param_00.stone.var_116;
-  var_02 = param_00.stone.var_116 - 2 * vectornormalize(anglesToForward(param_00.stone.var_1D));
+  var_02 = param_00.stone.var_116 - 2 * vectorNormalize(anglesToForward(param_00.stone.var_1D));
   for(;;) {
     param_00.var_9D65 waittill("trigger", var_03);
-    param_00.stone moveto(var_02, 0.5, 0, 0.1);
+    param_00.stone moveTo(var_02, 0.5, 0, 0.1);
     lib_0378::func_8D74("aud_deathraven_button", param_00.stone);
     level.papoverridden = 1;
     wait(0.5);
     param_00.stone setModel("zmf_blood_tube_brick_01_glow");
     param_00.var_9D65 waittill("trigger", var_03);
-    param_00.stone moveto(var_01, 0.5, 0, 0.1);
+    param_00.stone moveTo(var_01, 0.5, 0, 0.1);
     lib_0378::func_8D74("aud_deathraven_button", param_00.stone);
     level.papoverridden = 0;
     wait(0.5);
@@ -143,7 +143,7 @@ tube_setup() {
       case "door_l_pivot":
         self.door_l_pivot = var_02;
         self.door_l_pivot.initialangles = self.door_l_pivot.var_1D;
-        self.door_l.var_241F = getent(self.door_l_pivot.var_1A2, "targetname");
+        self.door_l.var_241F = getEnt(self.door_l_pivot.var_1A2, "targetname");
         self.door_l.var_241F.var_A045 = ::transport_unresolved_collide;
         self.door_l.var_241F.var_206B = self;
         self.door_l.var_241F method_8449(self.door_l_pivot);
@@ -152,7 +152,7 @@ tube_setup() {
       case "door_r_pivot":
         self.door_r_pivot = var_02;
         self.door_r_pivot.initialangles = self.door_r_pivot.var_1D;
-        self.door_r.var_241F = getent(self.door_r_pivot.var_1A2, "targetname");
+        self.door_r.var_241F = getEnt(self.door_r_pivot.var_1A2, "targetname");
         self.door_r.var_241F.var_A045 = ::transport_unresolved_collide;
         self.door_r.var_241F.var_206B = self;
         self.door_r.var_241F method_8449(self.door_r_pivot);
@@ -381,7 +381,7 @@ do_transport_rumble(param_00, param_01) {
   var_02 method_8322();
   while(gettime() - var_03 < param_00 * 1000) {
     wait(randomfloat(0.4) + 0.7);
-    var_02 playrumbleonentity("damage_heavy");
+    var_02 playRumbleOnEntity("damage_heavy");
   }
 
   if(common_scripts\utility::func_562E(var_02.isdarkpassenger)) {
@@ -441,7 +441,7 @@ tube_do_transport(param_00, param_01, param_02) {
     }
   }
 
-  self setorigin(param_01.blood_spawns[param_02].var_116);
+  self setOrigin(param_01.blood_spawns[param_02].var_116);
   if(isDefined(self.wing_fx)) {
     thread maps\mp\zombies\zombie_king::spawn_wings();
   }
@@ -773,8 +773,8 @@ transport_close(param_00) {
   }
 
   var_01 = 3;
-  self.door_r_pivot rotateto(self.door_r_pivot.initialangles, var_01);
-  self.door_l_pivot rotateto(self.door_l_pivot.initialangles, var_01);
+  self.door_r_pivot rotateTo(self.door_r_pivot.initialangles, var_01);
+  self.door_l_pivot rotateTo(self.door_l_pivot.initialangles, var_01);
   lib_0378::func_8D74("aud_blood_tube_door_close");
   wait(var_01);
   self.doing_transport = 1;
@@ -798,8 +798,8 @@ transport_open(param_00) {
 
   playFX(level.var_611["zmb_desc_bloodtube_drip_exit"], self.door_l_pivot.var_116);
   var_02 = 3;
-  self.door_r_pivot rotateto(self.door_r_pivot.initialangles + (0, -60, 0), var_02);
-  self.door_l_pivot rotateto(self.door_l_pivot.initialangles + (0, 60, 0), var_02);
+  self.door_r_pivot rotateTo(self.door_r_pivot.initialangles + (0, -60, 0), var_02);
+  self.door_l_pivot rotateTo(self.door_l_pivot.initialangles + (0, 60, 0), var_02);
   lib_0378::func_8D74("aud_blood_tube_door_open");
   wait(var_02);
   self.doing_transport = 0;

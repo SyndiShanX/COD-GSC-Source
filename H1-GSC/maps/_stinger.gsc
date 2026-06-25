@@ -244,7 +244,7 @@ looplocalseeksound(var_0, var_1) {
 
   for(;;) {
     self playlocalsound(var_0);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(var_1);
   }
 }
@@ -260,11 +260,11 @@ looplocallocksound(var_0, var_1) {
 
   for(;;) {
     self playlocalsound(var_0);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(var_1 / 3);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(var_1 / 3);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(var_1 / 3);
     self stoprumble("stinger_lock_rumble");
   }

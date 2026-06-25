@@ -99,7 +99,7 @@ function sophia_transition_fx(localclientnum, oldval, newval, bnewent, binitials
 
 function sophia_follow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level endon("hash_249c0595");
-  var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
+  var_1c7b6837 = getEnt(localclientnum, "sophia_eye", "targetname");
   if(!isDefined(var_1c7b6837)) {
     var_af8a18df = struct::get("ee_beam_sophia", "targetname");
     var_1c7b6837 = util::spawn_model(localclientnum, "p7_zm_gen_dark_arena_sphere", var_af8a18df.origin, var_af8a18df.angles);
@@ -112,7 +112,7 @@ function sophia_follow(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     return;
   }
   if(newval == 0) {
-    var_1c7b6837 rotateto((0, 0, 0), 0.5);
+    var_1c7b6837 rotateTo((0, 0, 0), 0.5);
   } else {
     level.var_9a736d20 = 1;
     var_1c7b6837 thread function_36666e11(self);
@@ -132,15 +132,15 @@ function function_36666e11(e_player) {
     var_c746e6bf = e_player gettagorigin("j_head");
     var_933e0d32 = vectortoangles(var_c746e6bf - self.origin);
     var_933e0d32 = (var_933e0d32[0], var_933e0d32[1], var_933e0d32[2]);
-    self rotateto(var_933e0d32, 0.1);
+    self rotateTo(var_933e0d32, 0.1);
     wait(0.1);
   }
 }
 
 function sophia_delete_local(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
+  var_1c7b6837 = getEnt(localclientnum, "sophia_eye", "targetname");
   if(isDefined(var_1c7b6837)) {
-    var_1c7b6837 rotateto((0, 0, 0), 0.2);
+    var_1c7b6837 rotateTo((0, 0, 0), 0.2);
     var_1c7b6837 delete();
   }
 }

@@ -83,7 +83,7 @@ function private on_begin(var_44c4c23d, var_bd332e71) {
   self.var_6b31b86f = [];
   self.var_45de08d7 = [];
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player zm_trial_util::function_9bf8e274();
     self.var_f0966a0b[e_player.clientid] = [];
     self thread take_player_weapons(n_interval, e_player);

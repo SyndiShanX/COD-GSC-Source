@@ -27,7 +27,7 @@ mortarTeam(spawners, node, mortar_targets, delay_base, delay_range) {
 }
 
 mortarTrigger() {
-  spawner = getent(self.target, "targetname");
+  spawner = getEnt(self.target, "targetname");
 
   spawner endon("death");
   self waittill("trigger");

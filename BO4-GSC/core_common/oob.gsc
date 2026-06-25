@@ -168,7 +168,7 @@ waitforclonetouch() {
     waitresult = self waittill(#"trigger");
     clone = waitresult.activator;
 
-    if(isactor(clone) && isDefined(clone.isaiclone) && clone.isaiclone && !clone isplayinganimscripted()) {
+    if(isactor(clone) && isDefined(clone.isaiclone) && clone.isaiclone && !clone isplayinganimScripted()) {
       clone notify(#"clone_shutdown");
     }
   }
@@ -234,7 +234,7 @@ enter_oob(entity) {
   }
 
   player.oob_lastvalidplayerloc = entity.origin;
-  player.oob_lastvalidplayerdir = vectornormalize(entity getvelocity());
+  player.oob_lastvalidplayerdir = vectorNormalize(entity getvelocity());
   player clientfield::set_to_player("nonplayer_oob_usage", 0);
   player val::set(#"oob", "show_hud", 0);
   player thread watchforleave(entity);

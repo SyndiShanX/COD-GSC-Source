@@ -124,7 +124,7 @@ _id_1643() {
 
       if(var_7[var_8].classname == "script_model") {
         var_3 = var_7[var_8];
-        var_4 = getent(var_3.target, "targetname");
+        var_4 = getEnt(var_3.target, "targetname");
         var_2 = 1;
       }
     }
@@ -246,9 +246,9 @@ _id_1645() {
         self._id_1647[self._id_1647.size] = var_4;
       }
       if(!isDefined(self._id_1648)) {
-        self._id_1648[0] = getent(var_4.target, "targetname");
+        self._id_1648[0] = getEnt(var_4.target, "targetname");
       } else {
-        self._id_1648[self._id_1648.size] = getent(var_4.target, "targetname");
+        self._id_1648[self._id_1648.size] = getEnt(var_4.target, "targetname");
       }
       self._id_1646 = 1;
     }

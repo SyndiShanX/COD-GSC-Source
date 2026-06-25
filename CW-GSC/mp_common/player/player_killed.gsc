@@ -253,7 +253,7 @@ function function_284c61bd(attacker, meansofdeath, bledout = 0) {
 
 function private function_66cec679() {
   team = self.team;
-  teammates = getplayers(team);
+  teammates = getPlayers(team);
 
   foreach(player in teammates) {
     player spectating::set_permissions();
@@ -1243,7 +1243,7 @@ function private function_7b0f4389() {
 
     if(showmenu) {
       if(isDefined(self.predicted_spawn_point)) {
-        self setorigin(self.predicted_spawn_point.origin);
+        self setOrigin(self.predicted_spawn_point.origin);
         self setplayerangles(self.predicted_spawn_point.angles);
       }
 
@@ -1824,7 +1824,7 @@ function private function_4e3e8bee(einflictor, attacker, smeansofdeath, weapon, 
 }
 
 function function_63aa4562() {
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(teammate in teammates) {
     if(isalive(teammate) && !teammate laststand::player_is_in_laststand()) {
@@ -1900,12 +1900,12 @@ function private post_game_death(einflictor, attacker, idamage, smeansofdeath, w
 
 function private function_395ef176() {
   self endon(#"disconnect");
-  var_8f42b3ff = 10 - getplayers(self.team).size;
+  var_8f42b3ff = 10 - getPlayers(self.team).size;
   var_65671d4a = level.numteamlives - var_8f42b3ff;
 
   if(is_true(level.teambased) && is_true(level.takelivesondeath) && level.numteamlives > 0) {
     enemy_team = util::getotherteam(self.team);
-    teamarray = getplayers(self.team);
+    teamarray = getPlayers(self.team);
 
     if(game.lives[self.team] == 0 && !level.var_61952d8b[self.team]) {
       level.var_61952d8b[self.team] = 1;

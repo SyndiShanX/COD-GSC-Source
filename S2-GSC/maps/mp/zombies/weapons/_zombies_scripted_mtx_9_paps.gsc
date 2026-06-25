@@ -337,7 +337,7 @@ pulse_drag_in_victim(param_00) {
   var_03 = 400 * var_02;
   var_04 = self.var_0116 - param_00.var_0116;
   var_04 = (var_04[0], var_04[1], 0);
-  var_04 = var_03 * vectornormalize(var_04);
+  var_04 = var_03 * vectorNormalize(var_04);
   var_04 = (var_04[0], var_04[1], 125 * var_02);
   param_00 setvelocity(var_04);
 }

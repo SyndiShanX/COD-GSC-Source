@@ -72,7 +72,7 @@ function function_33ef1077(var_7589d009, var_cfa5fdd5, var_5021564e, var_79d6c88
   s_lookat = level struct::get(var_79d6c881, "targetname");
 
   if(isDefined(var_e74daa74)) {
-    var_4026a1a6 = getent(var_e74daa74, "script_noteworthy");
+    var_4026a1a6 = getEnt(var_e74daa74, "script_noteworthy");
 
     if(!isDefined(var_4026a1a6)) {
       return;

@@ -18,7 +18,7 @@ _id_106AF(var_0, var_1, var_2) {
     level._id_204A = 1;
 
     if(isDefined(level._id_EC5B)) {
-      level._id_EC5B sethintstring("");
+      level._id_EC5B setHintString("");
     }
 
     var_5 = spawnStruct();
@@ -53,7 +53,7 @@ _id_106AF(var_0, var_1, var_2) {
       var_9 = 0;
 
       if(isDefined(level._id_EC5B)) {
-        level._id_EC5B sethintstring(level._id_EC5B._id_E9E6);
+        level._id_EC5B setHintString(level._id_EC5B._id_E9E6);
       }
     }
 

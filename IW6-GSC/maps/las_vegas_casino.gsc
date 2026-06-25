@@ -149,7 +149,7 @@ ambush() {
   maps\las_vegas_code::intro_time(&"LAS_VEGAS_INTRO_TIME1", 8, 3, 1);
   level.dog.movementtype = "walk";
   level.dog thread maps\las_vegas_code::start_scripted_movement();
-  var_1 = common_scripts\utility::getstruct("ambush_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("ambush_struct", "targetname");
   var_2 = [level.hesh, level.elias, level.merrick];
   maps\_utility::delaythread(11, ::ambush_gas_grenades);
   maps\_utility::delaythread(15, ::ambush_riley_getout);
@@ -249,7 +249,7 @@ player_fall() {
   var_0 = 2;
   maps\_utility::player_speed_set(10, var_0);
   level.player shellshock("vegas_gas", 30);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player thread maps\_utility::play_sound_on_entity("scn_vegas_plr_cough");
   level.player allowjump(0);
   level.player setclienttriggeraudiozone("las_vegas_gassed_black", 6);
@@ -314,9 +314,9 @@ pitch_and_roll() {
   for(;;) {
     var_7 = (randomfloatrange(var_4, var_2), 0, randomfloatrange(var_4, var_2));
     var_8 = randomfloatrange(var_6, var_5);
-    self rotateto(var_1 + var_7, var_8, var_8 * 0.2, var_8 * 0.2);
+    self rotateTo(var_1 + var_7, var_8, var_8 * 0.2, var_8 * 0.2);
     self waittill("rotatedone");
-    self rotateto(var_1 - var_7, var_8, var_8 * 0.2, var_8 * 0.2);
+    self rotateTo(var_1 - var_7, var_8, var_8 * 0.2, var_8 * 0.2);
     self waittill("rotatedone");
   }
 }
@@ -343,7 +343,7 @@ gas_rorke_shows_up() {
   var_4 = common_scripts\utility::get_target_ent("rorke_gas_pos");
   var_4 thread maps\_anim::anim_generic_loop(level.rorke, "NML_vargas_idle");
   var_5 = common_scripts\utility::get_target_ent("gas_player_final_pos");
-  level.player setorigin(var_5.origin);
+  level.player setOrigin(var_5.origin);
   level.player setplayerangles(var_5.angles);
   wait 0.15;
   level notify("stop_player_drunk");
@@ -418,11 +418,11 @@ drag1() {
   thread maps\las_vegas_code::intro_time(&"LAS_VEGAS_INTRO_TIME2", 5, 3);
   level.player shellshock("vegas_drag", 999);
   maps\_utility::array_spawn_targetname("drag1_enemies", 1);
-  var_0 = common_scripts\utility::getstruct("drag1_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("drag1_struct", "targetname");
   level.player common_scripts\utility::delaycall(3, ::playrumblelooponentity, "vegas_drag");
   thread blur_fadein();
   thread maps\las_vegas_code::do_player_drag(var_0);
-  var_0 = common_scripts\utility::getstruct("drag1_hesh_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("drag1_hesh_struct", "targetname");
   thread maps\las_vegas_code::do_hesh_drag(var_0);
   thread drag1_audio();
   wait 7;
@@ -502,13 +502,13 @@ drag2() {
   level.player setclienttriggeraudiozone("las_vegas_drag2", 5);
   level.player shellshock("vegas_drag", 999);
   maps\_utility::array_spawn_targetname("drag2_enemies", 1);
-  var_0 = common_scripts\utility::getstruct("drag2_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("drag2_struct", "targetname");
   thread blur_fadein();
   maps\_utility::delaythread(7, ::blur_pulse);
   level.player common_scripts\utility::delaycall(3, ::playrumblelooponentity, "vegas_drag");
   thread maps\las_vegas_code::do_player_drag(var_0);
   thread merrick_beatup();
-  var_0 = common_scripts\utility::getstruct("drag2_hesh_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("drag2_hesh_struct", "targetname");
   thread maps\las_vegas_code::do_hesh_drag(var_0);
   thread drag2_audio();
   common_scripts\utility::flag_wait("drag2_start_fadeout");
@@ -523,7 +523,7 @@ drag2_audio() {
 }
 
 merrick_beatup() {
-  var_0 = common_scripts\utility::getstruct("drag2_beatup_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("drag2_beatup_struct", "targetname");
   var_1 = [];
   var_2 = getEntArray("beatup_spawners", "targetname");
 
@@ -599,7 +599,7 @@ elias_death() {
   }
 
   level.rorke attach("viewmodel_mp443", "tag_inhand");
-  var_4 = common_scripts\utility::getstruct("elias_death_struct", "targetname");
+  var_4 = common_scripts\utility::getStruct("elias_death_struct", "targetname");
   var_0 = [level.hesh, level.elias, level.rorke, level.player.body, level.player.rig];
   var_4 maps\_anim::anim_first_frame(var_0, "elias_death_start");
   level.hesh.chair = maps\las_vegas_code::spawn_linked_model("com_cafe_chair", level.hesh, "tag_sync");
@@ -610,7 +610,7 @@ elias_death() {
   maps\_utility::add_cleanup_ent(level.player.body, "elias_death");
   var_4 maps\_anim::anim_first_frame_solo(level.player.rig, "elias_death_start");
   level.ground_ref_ent = common_scripts\utility::spawn_tag_origin();
-  level.ground_ref_ent linkto(level.player.rig, "tag_player", (0, 0, 0), (0, 0, 0));
+  level.ground_ref_ent linkTo(level.player.rig, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player playersetgroundreferenceent(level.ground_ref_ent);
   level.player playerlinktodelta(level.player.rig, "tag_player", 1, 0, 0, 0, 0, 1);
   level.rorke.anim_playsound_func = maps\las_vegas_code::custom_playsound_on_ent;
@@ -670,7 +670,7 @@ elias_death_visual_tweaks() {
   thread maps\_art::dof_enable_script(0, 0, 10, 35, 75, 6, 0.1);
   wait 7;
   thread elias_death_dof_normal();
-  level.ground_ref_ent rotateto((-45, 30, 0), 1);
+  level.ground_ref_ent rotateTo((-45, 30, 0), 1);
   level.player lerpfov(45, 8);
   common_scripts\utility::flag_wait("elias_death_struggle");
   level notify("stop_hurt_overlay");
@@ -765,7 +765,7 @@ elias_death_struggle_thread(var_0, var_1) {
     }
 
     common_scripts\utility::array_thread(var_0, maps\_utility::anim_stopanimscripted);
-    var_1 maps\las_vegas_code::struct_stopanimscripted();
+    var_1 maps\las_vegas_code::struct_stopanimScripted();
   }
 }
 
@@ -828,7 +828,7 @@ elias_death_blood_pool() {
 }
 
 intro_struct_realign(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("elias_death_struct", "targetname");
+  var_2 = common_scripts\utility::getStruct("elias_death_struct", "targetname");
 
   if(isDefined(var_0)) {
     var_2.origin = common_scripts\utility::drop_to_ground(var_0, 10, -200);
@@ -874,7 +874,7 @@ elias_death_end_thread() {
 rescue() {
   maps\las_vegas_code::ui_show_stance(0);
   thread maps\las_vegas_code::intro_time(&"LAS_VEGAS_INTRO_TIME5", 10, 3);
-  var_0 = common_scripts\utility::getstruct("rescue_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("rescue_struct", "targetname");
   rescue_player_init(var_0);
   wait 8;
   level.player clearclienttriggeraudiozone(3);
@@ -915,9 +915,9 @@ rescue() {
 }
 
 rescue_tie(var_0, var_1) {
-  var_2 = getent(self.script_noteworthy + "_tie", "targetname");
+  var_2 = getEnt(self.script_noteworthy + "_tie", "targetname");
   var_2 notsolid();
-  var_2 linkto(self, "J_Wrist_RI", var_0, var_1);
+  var_2 linkTo(self, "J_Wrist_RI", var_0, var_1);
   self.tie = var_2;
 }
 
@@ -925,7 +925,7 @@ rescue_sounds() {
   level.hesh maps\_utility::delaythread(16.92, maps\_utility::play_sound_on_tag, "vegas_hsh_rescue_push", "j_head");
   level.hesh maps\_utility::delaythread(17.2, maps\_utility::play_sound_on_tag, "vegas_hsh_rescue_strike_1", "j_head");
   level.hesh maps\_utility::delaythread(19.2, maps\_utility::play_sound_on_tag, "vegas_hsh_rescue_strike_2", "j_head");
-  var_0 = getent("gunner2_ai", "targetname");
+  var_0 = getEnt("gunner2_ai", "targetname");
   var_0 maps\_utility::delaythread(18.43, maps\_utility::play_sound_on_tag, "vegas_fs1_rescue_hit", "j_head");
   var_0 maps\_utility::delaythread(19.6, maps\_utility::play_sound_on_tag, "vegas_fs1_rescue_struggle", "j_head");
   var_0 maps\_utility::delaythread(20.92, maps\_utility::play_sound_on_tag, "vegas_fs1_rescue_strangle", "j_head");
@@ -1068,7 +1068,7 @@ player_flinch() {
 }
 
 rescue_sniper() {
-  var_0 = common_scripts\utility::getstruct("sniper_glint_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("sniper_glint_struct", "targetname");
   var_1 = gettime();
   var_2 = var_1 + 11000;
   sniper_sort_targets();
@@ -1112,7 +1112,7 @@ rescue_sniper() {
     var_11 = var_9 gettagorigin("J_SpineUpper");
     var_12 = distance(var_7.origin, var_11);
     var_4 = var_12 / var_8;
-    var_7 moveto(var_11, var_4);
+    var_7 moveTo(var_11, var_4);
     var_4 = max(var_4, 0.06);
     wait(var_4 - 0.05);
   }
@@ -1123,7 +1123,7 @@ rescue_snipe_gunner(var_0, var_1) {
   rescue_sniper_shot(var_0, "J_SpineUpper", 1);
   wait 3;
   self laserforceon();
-  var_1 linkto(var_0, "j_head", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "j_head", (0, 0, 0), (0, 0, 0));
   wait 0.5;
   thread rescue_sniper_shot(var_0, "j_head", 1);
   var_1 unlink();
@@ -1142,7 +1142,7 @@ rescue_sniper_track_target(var_0) {
 
   for(;;) {
     var_2 = vectortoangles(var_0.origin - self.origin);
-    self rotateto(var_2, var_1);
+    self rotateTo(var_2, var_1);
     wait(var_1);
   }
 }
@@ -1201,26 +1201,26 @@ rescue_sniper_shot(var_0, var_1, var_2) {
     return;
   }
   var_3 = var_0 gettagorigin(var_1);
-  var_4 = self.origin + vectornormalize(var_3 - self.origin) * 10000;
+  var_4 = self.origin + vectorNormalize(var_3 - self.origin) * 10000;
   magicbullet("l115a3_nosound", self.origin, var_3);
   var_5 = bulletTrace(self.origin, var_3, 0);
   var_3 = var_0 gettagorigin(var_1);
-  var_6 = vectornormalize(self.origin - var_3);
+  var_6 = vectorNormalize(self.origin - var_3);
   var_7 = var_3 + var_6 * 100;
   magicbullet("l115a3_nosound", var_7, var_3);
   var_8 = bulletTrace(var_7, var_4, 0);
-  var_6 = vectornormalize(var_4 - var_7);
+  var_6 = vectorNormalize(var_4 - var_7);
   playFX(common_scripts\utility::getfx("big_blood_spurt"), var_3, var_6);
   var_9 = common_scripts\utility::spawn_tag_origin();
   var_9.origin = var_5["position"];
   playFXOnTag(common_scripts\utility::getfx("bullettrail"), var_9, "tag_origin");
 
   if(isDefined(var_2)) {
-    var_10 = getent("gunner1_ai", "targetname");
+    var_10 = getEnt("gunner1_ai", "targetname");
     var_10 thread maps\_utility::play_sound_on_tag("sniper_bullet_large_flesh_npc", "j_SpineUpper");
   }
 
-  var_9 moveto(var_8["position"], 0.2);
+  var_9 moveTo(var_8["position"], 0.2);
   var_9 common_scripts\utility::delaycall(2, ::delete);
   level thread common_scripts\utility::play_sound_in_space("weap_l115a3_fire_sniper", self.origin);
 }
@@ -1355,7 +1355,7 @@ bar() {
   common_scripts\utility::flag_wait("human_shield");
   level.merrick.ignoreall = 0;
   level.bar_enemies = [];
-  var_0 = getent("casino_bar_idler", "targetname");
+  var_0 = getEnt("casino_bar_idler", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
   level.bar_enemies[level.bar_enemies.size] = var_1;
   var_2 = getnode(var_0.script_linkto, "script_linkname");
@@ -1431,9 +1431,9 @@ human_shield_hesh(var_0) {
   common_scripts\utility::flag_wait("human_shield");
   level.breach_ai = [];
   maps\_utility::array_spawn_targetname("bar_talkers");
-  var_3 = getent("bar_left_entry_door", "targetname");
-  var_1 maps\las_vegas_code::struct_stopanimscripted();
-  var_4 = common_scripts\utility::getstruct("human_shield_spot", "targetname");
+  var_3 = getEnt("bar_left_entry_door", "targetname");
+  var_1 maps\las_vegas_code::struct_stopanimScripted();
+  var_4 = common_scripts\utility::getStruct("human_shield_spot", "targetname");
   var_4 thread maps\_anim::anim_first_frame(level.breach_ai, "vegas_humanshield_breach");
   common_scripts\utility::flag_set("humanshield_start");
   level.breach_ai[level.breach_ai.size] = self;
@@ -1487,8 +1487,8 @@ postspawn_bar_talker() {
 humanshield_breach_code(var_0) {
   self endon("vegas_humanshield_breach_loop");
   wait 2;
-  var_1 = getent("bar_left_entry_door", "targetname");
-  var_2 = getent("bar_right_entry_door", "targetname");
+  var_1 = getEnt("bar_left_entry_door", "targetname");
+  var_2 = getEnt("bar_right_entry_door", "targetname");
   var_1 thread maps\las_vegas_code::door_open(0.8, "double_door_wood_creeky", 96, undefined, 0.4);
   var_2 thread maps\las_vegas_code::door_open(1, undefined, 100, undefined, 0.4);
   wait 0.5;
@@ -1527,8 +1527,8 @@ bar_player_ads_breathin() {
 }
 
 bar_radio_scene() {
-  var_0 = getent("casino_bar_radio_guy", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = getEnt("casino_bar_radio_guy", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 = maps\_utility::dronespawn_bodyonly(var_0);
   level.enemy_radio_guy = var_2;
   var_2.animname = "radio_guy";
@@ -1543,12 +1543,12 @@ bar_radio_scene() {
   var_2 maps\_anim::anim_single_solo(var_2, var_4);
   var_1 maps\_anim::anim_single_solo(var_2, var_5);
   maps\las_vegas_code::init_enemy_radio();
-  level.enemy_radio linkto(var_2, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  level.enemy_radio linkTo(var_2, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_wait("bar_enemies_dead");
 }
 
 hesh_pickup_radio(var_0) {
-  var_1 = common_scripts\utility::getstruct("casino_bar_radio_spot", "targetname");
+  var_1 = common_scripts\utility::getStruct("casino_bar_radio_spot", "targetname");
   var_1 maps\_anim::anim_reach_solo(self, "bar_radio_pickup");
   level.merrick thread maps\_utility::smart_dialogue("vegas_mrk_grabhisradiowe");
   maps\_utility::delaythread(2, maps\las_vegas_code::radio_volume, 1, 4);
@@ -1590,7 +1590,7 @@ postspawn_bar_enemy() {
   var_2 = "com_cardboardbox_dusty_01";
   self.box = spawn("script_model", self.origin);
   self.box setModel(var_2);
-  self.box linkto(self, "tag_inhand", (0, 0, 0), (0, 90, 0));
+  self.box linkTo(self, "tag_inhand", (0, 0, 0), (0, 90, 0));
   self.stealth_radius_multiplier = 0;
   thread maps\las_vegas_code::waittill_stealth_notify();
   thread bar_walkers_reset();
@@ -1598,7 +1598,7 @@ postspawn_bar_enemy() {
   self.goalradius = 5;
   self setgoalpos(self.origin);
   wait 4;
-  var_3 = common_scripts\utility::getstruct(var_0.script_linkto, "script_linkname");
+  var_3 = common_scripts\utility::getStruct(var_0.script_linkto, "script_linkname");
   var_4 = maps\las_vegas_code::get_target_chain_array(var_3);
 
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
@@ -1610,7 +1610,7 @@ postspawn_bar_enemy() {
     if(!common_scripts\utility::flag("humanshield_start")) {
       thread maps\_anim::anim_first_frame_solo(self, self.animation);
       common_scripts\utility::flag_wait("humanshield_start");
-      self stopanimscripted();
+      self stopanimScripted();
     }
   }
 }
@@ -1668,11 +1668,11 @@ kitchen() {
 
 init_kitchen_carts() {
   var_0 = init_kitchen_cart("kitchen_cart1");
-  var_1 = common_scripts\utility::getstruct("kitchen_enter", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("kitchen_enter", "script_noteworthy");
   var_1 maps\_anim::anim_first_frame_solo(var_0, "kitchen_stumble");
   var_0 = init_kitchen_cart("kitchen_cart2");
   var_0 init_kitchen_cart_plates();
-  var_1 = common_scripts\utility::getstruct("casino_kitchen_flashlight_scene", "targetname");
+  var_1 = common_scripts\utility::getStruct("casino_kitchen_flashlight_scene", "targetname");
   var_1 maps\_anim::anim_first_frame_solo(var_0, "kitchen_hide_enter");
 }
 
@@ -1693,7 +1693,7 @@ init_kitchen_cart(var_0) {
   var_2.animname = "cart";
   var_2 maps\_utility::assign_animtree();
   var_2.clip = var_3;
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_2.targetname = var_0;
   return var_2;
 }
@@ -1718,7 +1718,7 @@ init_kitchen_cart_plates() {
       var_2 setModel("com_breakable_platestack_large");
     }
 
-    var_2 linkto(self, var_6[0]);
+    var_2 linkTo(self, var_6[0]);
     var_2.tagname = var_6[0];
     var_2.falltime = var_6[2];
     var_0[var_0.size] = var_2;
@@ -1729,9 +1729,9 @@ init_kitchen_cart_plates() {
 
 kitchen_enter_merrick(var_0) {
   common_scripts\utility::flag_wait("kitchen_doors_open");
-  var_1 = common_scripts\utility::getstruct("kitchen_enter", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("kitchen_enter", "script_noteworthy");
   var_1 maps\_anim::anim_reach_solo(self, "kitchen_stumble");
-  var_2 = getent("kitchen_cart1", "targetname");
+  var_2 = getEnt("kitchen_cart1", "targetname");
   var_2.animname = "cart";
   var_2 maps\_utility::assign_animtree();
   level.merrick maps\_utility::delaythread(1, maps\_utility::smart_dialogue, "vegas_mrk_aghdammitgrunt");
@@ -1746,11 +1746,11 @@ kitchen_enter_merrick(var_0) {
     var_1 waittill("kitchen_stumble");
     var_1 thread maps\_anim::anim_loop_solo(self, "kitchen_stumble_idle");
     common_scripts\utility::flag_wait("player_in_kitchen");
-    var_1 maps\las_vegas_code::struct_stopanimscripted();
+    var_1 maps\las_vegas_code::struct_stopanimScripted();
     var_1 maps\_anim::anim_single_solo(self, "kitchen_stumble_idle_exit");
   } else {
-    var_1 maps\las_vegas_code::struct_stopanimscripted();
-    maps\_utility::anim_stopanimscripted();
+    var_1 maps\las_vegas_code::struct_stopanimScripted();
+    maps\_utility::anim_stopanimScripted();
   }
 
   common_scripts\utility::flag_set("kitchen_spawn_keegan");
@@ -1758,7 +1758,7 @@ kitchen_enter_merrick(var_0) {
 
 kitchen_hide_merrick(var_0) {
   var_0 maps\_anim::anim_reach_solo(self, "kitchen_hide_enter");
-  var_1 = getent("kitchen_cart2", "targetname");
+  var_1 = getEnt("kitchen_cart2", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "kitchen_hide_enter");
 
   foreach(var_3 in var_1.plates) {
@@ -1782,7 +1782,7 @@ kitchen_hide_merrick(var_0) {
   common_scripts\utility::flag_wait("kitchen_hide_everyone_up");
 
   if(!common_scripts\utility::flag("kitchen_stealth_alert")) {
-    var_0 maps\las_vegas_code::struct_stopanimscripted();
+    var_0 maps\las_vegas_code::struct_stopanimScripted();
     var_0 maps\_anim::anim_single(var_5, "kitchen_hide_exit");
   }
 
@@ -1816,8 +1816,8 @@ kitchen_spotted(var_0) {
   level endon("kitchen_enemies_gone");
   common_scripts\utility::flag_wait("kitchen_stealth_alert");
   common_scripts\utility::flag_wait("kitchen_enemy_doors_open");
-  var_0 maps\las_vegas_code::struct_stopanimscripted();
-  maps\_utility::anim_stopanimscripted();
+  var_0 maps\las_vegas_code::struct_stopanimScripted();
+  maps\_utility::anim_stopanimScripted();
   var_0 maps\_anim::anim_single_solo(self, "kitchen_alert_exit");
   self.goalradius = 200;
   self.ignoreme = 0;
@@ -1859,7 +1859,7 @@ kitchen_hide_dialogue() {
 
 kitchen_spawn_keegan() {
   common_scripts\utility::flag_wait("kitchen_spawn_keegan");
-  var_0 = common_scripts\utility::getstruct("keegan_kitchen_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("keegan_kitchen_spot", "targetname");
   maps\las_vegas_code::spawn_hero("keegan", var_0);
   level.keegan.dontavoidplayer = 1;
   level.keegan pushplayer(1);
@@ -1870,7 +1870,7 @@ kitchen_spawn_keegan() {
 
 kitchen_hide_keegan() {
   common_scripts\utility::flag_wait("player_in_kitchen");
-  var_0 = common_scripts\utility::getstruct("kitchen_hide", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("kitchen_hide", "script_noteworthy");
   var_1 = var_0 maps\las_vegas_code::makestruct();
   var_1 maps\_anim::anim_reach_and_approach_node_solo(self, "kitchen_hide_enter", undefined, "Exposed", "stand");
   common_scripts\utility::flag_wait("kitchen_hide_start");
@@ -1880,8 +1880,8 @@ kitchen_hide_keegan() {
   common_scripts\utility::flag_wait("kitchen_player_hidden");
   common_scripts\utility::flag_set("kitchen_hide_started");
   level notify("stop_keegan_hide_enter");
-  var_1 maps\las_vegas_code::struct_stopanimscripted();
-  maps\_utility::anim_stopanimscripted();
+  var_1 maps\las_vegas_code::struct_stopanimScripted();
+  maps\_utility::anim_stopanimScripted();
   maps\_utility::delaythread(2, ::kitchen_spawn_enemies);
   level thread kitchen_hide_enemy_dialogue();
   level thread kitchen_hide_loop_dialogue();
@@ -1918,10 +1918,10 @@ kitchen_ambush_keegan(var_0) {
 
   if(!common_scripts\utility::flag("kitchen_stealth_alert")) {
     var_1 thread maps\_utility::notify_delay("stop_stealth_notify", 7.7);
-    var_0 maps\las_vegas_code::struct_stopanimscripted();
+    var_0 maps\las_vegas_code::struct_stopanimScripted();
     var_0 = var_0 maps\las_vegas_code::makestruct();
-    maps\_utility::anim_stopanimscripted();
-    var_1 maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
+    var_1 maps\_utility::anim_stopanimScripted();
     var_1.stealth_radius_multiplier = 0.5;
     level notify("flashlight_start_wait");
     var_2 = [var_1, self];
@@ -1943,7 +1943,7 @@ kitchen_ambush_keegan(var_0) {
   common_scripts\utility::flag_wait_any("kitchen_enemies_gone", "kitchen_stealth_alert");
 
   if(maps\_utility::ent_flag("doing_kitchen_ambush")) {
-    var_0 maps\las_vegas_code::struct_stopanimscripted();
+    var_0 maps\las_vegas_code::struct_stopanimScripted();
     var_1.allowdeath = 1;
     var_1.deathfunction = maps\las_vegas_code::death_wait;
     var_1.dontavoidplayer = 1;
@@ -1997,8 +1997,8 @@ keegan_ambush_sounds(var_0) {
 keegan_ambush_end_early(var_0) {
   wait 4.5;
   set_pose("crouch");
-  var_0 maps\las_vegas_code::struct_stopanimscripted();
-  maps\_utility::anim_stopanimscripted();
+  var_0 maps\las_vegas_code::struct_stopanimScripted();
+  maps\_utility::anim_stopanimScripted();
   kitchen_keegan_cleanup();
 }
 
@@ -2073,8 +2073,8 @@ kitchen_ambush_keegan_handler(var_0) {
     set_pose("crouch");
     common_scripts\utility::flag_wait("kitchen_enemy_doors_open");
     wait 1;
-    var_0 maps\las_vegas_code::struct_stopanimscripted();
-    maps\_utility::anim_stopanimscripted();
+    var_0 maps\las_vegas_code::struct_stopanimScripted();
+    maps\_utility::anim_stopanimScripted();
     kitchen_keegan_cleanup();
     wait 0.2;
     self.suppressionwait = 5;
@@ -2093,7 +2093,7 @@ kitchen_ambush_keegan_handler(var_0) {
       level.kitchen_enemies[level.kitchen_enemies.size] = level.kitchen_flashlight_enemy;
     }
   } else if(var_1 < 7.7) {
-    maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
     kitchen_keegan_cleanup();
   } else {
     maps\_utility::ent_flag_set("doing_kitchen_ambush");
@@ -2102,7 +2102,7 @@ kitchen_ambush_keegan_handler(var_0) {
 
   if(isDefined(level.kitchen_flashlight_enemy) && isalive(level.kitchen_flashlight_enemy)) {
     level.kitchen_enemies[level.kitchen_enemies.size] = level.kitchen_flashlight_enemy;
-    level.kitchen_flashlight_enemy maps\_utility::anim_stopanimscripted();
+    level.kitchen_flashlight_enemy maps\_utility::anim_stopanimScripted();
     level.kitchen_flashlight_enemy kitchen_attack_player();
   }
 
@@ -2231,7 +2231,7 @@ kitchen_hold_position() {
   if(!common_scripts\utility::flag("kitchen_enemy_doors_open")) {
     self notify("stop_going_to_node");
     self notify("stop_scripted_movement");
-    var_0 = common_scripts\utility::getstruct("kitchen_hold_struct", "targetname");
+    var_0 = common_scripts\utility::getStruct("kitchen_hold_struct", "targetname");
     self.goalradius = 100;
     self setgoalpos(var_0.origin);
     common_scripts\utility::flag_wait("kitchen_enemy_doors_open");
@@ -2255,10 +2255,10 @@ kitchen_attack_player() {
 
 kitchen_nade_door() {
   level endon("kitchen_enemies_gone");
-  var_0 = common_scripts\utility::getstruct("kitchen_nade_struct", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct("kitchen_nade_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   common_scripts\utility::flag_wait("kitchen_stealth_alert");
-  var_2 = vectornormalize(var_1.origin - var_0.origin);
+  var_2 = vectorNormalize(var_1.origin - var_0.origin);
   wait 4;
 
   if(common_scripts\utility::flag("kitchen_enemy_doors_open")) {
@@ -2306,7 +2306,7 @@ postspawn_kitchen_flashlight() {
   var_0 = common_scripts\utility::getfx("flashlight_spotlight");
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("com_flashlight_on");
-  var_1 linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
   self.flashlight = var_1;
   playFXOnTag(var_0, var_1, "tag_light");
   level waittill("unlink_flashlight");
@@ -2378,7 +2378,7 @@ atrium() {
   level.keegan maps\_utility::enable_cqbwalk();
   level.hesh maps\_utility::enable_cqbwalk();
   wait 0.1;
-  var_0 = getent("atrium_volume", "targetname");
+  var_0 = getEnt("atrium_volume", "targetname");
   var_0 maps\_utility::waittill_volume_dead_or_dying();
   common_scripts\utility::flag_set("shops_area_clear");
   common_scripts\utility::flag_set("shops_move_in");
@@ -2574,8 +2574,8 @@ actor_rappel(var_0, var_1) {
       wait 2.6;
 
       foreach(var_5 in var_3) {
-        var_1 maps\las_vegas_code::struct_stopanimscripted();
-        var_5 maps\_utility::anim_stopanimscripted();
+        var_1 maps\las_vegas_code::struct_stopanimScripted();
+        var_5 maps\_utility::anim_stopanimScripted();
       }
 
       var_1 thread maps\_anim::anim_last_frame_solo(var_1.rope, "temp_rappel_over_rail");
@@ -2599,20 +2599,20 @@ actor_rappel_death(var_0) {
   if(!isDefined(self)) {
     return;
   }
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   self.skipdeathanim = 1;
   self kill();
 }
 
 atrium_room_destruction() {
   wait(randomfloatrange(2, 4));
-  var_0 = getent("atrium_car_fall", "targetname");
+  var_0 = getEnt("atrium_car_fall", "targetname");
   var_1 = maps\_utility::getent_or_struct_or_node(var_0.target, "targetname");
   var_2 = maps\las_vegas_code::get_target_chain_array(var_1);
 
   foreach(var_4 in var_2) {
-    var_0 moveto(var_4.origin, 0.4);
-    var_0 rotateto(var_4.angles, 0.4);
+    var_0 moveTo(var_4.origin, 0.4);
+    var_0 rotateTo(var_4.angles, 0.4);
     wait 0.4;
   }
 
@@ -2652,7 +2652,7 @@ casino_floor() {
 }
 
 init_casino_door() {
-  var_0 = getent("casino_door", "targetname");
+  var_0 = getEnt("casino_door", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::array_call(var_1, ::linkto, var_0);
 }
@@ -2660,18 +2660,18 @@ init_casino_door() {
 open_casino_door_anim(var_0) {
   self setgoalnode(var_0);
   common_scripts\utility::flag_wait("headed_to_casino_floor");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 = getanimlength(maps\_utility::getanim("open_casino_door"));
   var_1 maps\_anim::anim_reach_solo(self, "open_casino_door");
   var_1 thread maps\_anim::anim_single_solo(self, "open_casino_door");
-  var_3 = getent("casino_door", "targetname");
+  var_3 = getEnt("casino_door", "targetname");
   var_3 maps\_utility::delaythread(1.25, ::open_casino_door);
   level maps\_utility::delaythread(1, common_scripts\utility::flag_set, "casino_door_opened");
 }
 
 open_casino_door() {
   self playSound("scn_vegas_glass_door_open");
-  self rotateyaw(93, 1.5);
+  self rotateYaw(93, 1.5);
   wait 3;
   self connectpaths();
 }
@@ -2709,7 +2709,7 @@ floor_restore_heroes() {
 }
 
 floor_colors() {
-  var_0 = getent("start_casino_floor_colors", "targetname");
+  var_0 = getEnt("start_casino_floor_colors", "targetname");
   var_0 waittill("trigger");
 
   if(!common_scripts\utility::flag("floor_battle_start")) {
@@ -2724,7 +2724,7 @@ floor_colors() {
 
 casino_battle() {
   level.casino_floor = spawnStruct();
-  level.casino_floor.enemy_volume = getent("floor_volume_start", "targetname");
+  level.casino_floor.enemy_volume = getEnt("floor_volume_start", "targetname");
   level.casino_floor.enemies = [];
   var_0 = getEntArray("floor_volume_triggers", "targetname");
   common_scripts\utility::array_thread(var_0, maps\las_vegas_code::enemy_volume_trigger_thread, level.casino_floor, "casino_floor_done");
@@ -2745,10 +2745,10 @@ casino_battle() {
 }
 
 floor_go_colors() {
-  var_0 = getent("start_casino_floor_colors", "targetname");
+  var_0 = getEnt("start_casino_floor_colors", "targetname");
   var_0 endon("trigger");
   wait 5;
-  var_1 = getent("floor_volume_start", "targetname");
+  var_1 = getEnt("floor_volume_start", "targetname");
 
   for(;;) {
     wait 0.1;
@@ -2848,7 +2848,7 @@ postspawn_floor_ambush() {
 
 ambush_handler() {
   level endon("stealth_event_notify");
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   var_0 waittill("trigger");
   maps\_utility::disable_cqbwalk();
   maps\_utility::set_archetype("creepwalk");
@@ -2907,7 +2907,7 @@ last_snipers_think() {
 
 casino_floor_end() {
   common_scripts\utility::flag_wait("player_escalator_casino_floor");
-  var_0 = getent("floor_end_volume", "targetname");
+  var_0 = getEnt("floor_end_volume", "targetname");
   var_0 maps\_utility::waittill_volume_dead_or_dying();
   common_scripts\utility::flag_set("casino_floor_done");
 }
@@ -2921,8 +2921,8 @@ postspawn_floor_gate() {
     self.dontavoidplayer = 1;
     self setCanDamage(0);
     self waittill("goal");
-    var_1 = getent("floor_gate", "targetname");
-    var_1 moveto(var_1.origin + (0, 0, -40), 0.5, 0.4, 0.1);
+    var_1 = getEnt("floor_gate", "targetname");
+    var_1 moveTo(var_1.origin + (0, 0, -40), 0.5, 0.4, 0.1);
     self.ignoreall = 0;
     self.dontavoidplayer = 0;
     self setCanDamage(1);
@@ -2958,7 +2958,7 @@ radio_conversation() {
 }
 
 init_gate() {
-  var_0 = getent("floor_gate", "targetname");
+  var_0 = getEnt("floor_gate", "targetname");
 
   if(isDefined(var_0.init)) {
     return;
@@ -2966,7 +2966,7 @@ init_gate() {
   var_0.animname = "gate";
   var_0 maps\_anim::setanimtree();
   var_0.init = 1;
-  var_1 = common_scripts\utility::getstruct("open_gate", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("open_gate", "script_noteworthy");
   var_2 = var_1 maps\las_vegas_code::makestruct();
   var_2.origin = var_2.origin + (0, 0, 40);
   var_2 maps\_anim::anim_first_frame_solo(var_0, "gate_lift");
@@ -2977,10 +2977,10 @@ open_gate_keegan(var_0) {
   level maps\_utility::delaythread(3.5, common_scripts\utility::flag_set, "merrick_under_gate");
   level maps\_utility::delaythread(5, common_scripts\utility::flag_set, "hesh_under_gate");
   level.keegan maps\_utility::delaythread(3, maps\_utility::smart_dialogue, "vegas_kgn_effortsoundsoflifting");
-  var_1 = getent("floor_gate", "targetname");
+  var_1 = getEnt("floor_gate", "targetname");
   var_1.animname = "gate";
   var_1 maps\_anim::setanimtree();
-  var_2 = getent("gate_playerclip", "targetname");
+  var_2 = getEnt("gate_playerclip", "targetname");
   var_2.og_pos = var_2.origin;
   var_2 common_scripts\utility::delaycall(3.6, ::moveto, var_2.origin + (0, 0, 51), 2);
   var_3 = [level.keegan, var_1];
@@ -2996,7 +2996,7 @@ open_gate_keegan(var_0) {
   }
 
   var_2.origin = var_2.og_pos;
-  var_0 maps\las_vegas_code::struct_stopanimscripted();
+  var_0 maps\las_vegas_code::struct_stopanimScripted();
   var_0 thread maps\_anim::anim_single(var_3, "under_gate");
 }
 
@@ -3018,7 +3018,7 @@ hotel_hallway_dialogue() {
 }
 
 player_under_gate() {
-  var_0 = getent("through_gate_volume", "targetname");
+  var_0 = getEnt("through_gate_volume", "targetname");
   var_1 = [level.hesh, level.merrick, level.player];
 
   for(;;) {
@@ -3063,7 +3063,7 @@ escalator_birds() {
 
 casino_hotel_runners(var_0) {
   wait(randomfloatrange(var_0[0], var_0[1]));
-  var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.target, "targetname");
   var_2 = maps\_utility::spawn_ai(1);
 
   if(!isDefined(var_2)) {
@@ -3119,8 +3119,8 @@ hallway_timed_grenades() {
 }
 
 add_gas_struct(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
-  var_2.end = common_scripts\utility::getstruct(var_2.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
+  var_2.end = common_scripts\utility::getStruct(var_2.target, "targetname");
   var_3 = 0;
 
   if(!isDefined(level.gas_handler)) {
@@ -3129,7 +3129,7 @@ add_gas_struct(var_0, var_1) {
     var_3 = 1;
   }
 
-  var_2.normal = vectornormalize(var_2.end.origin - var_2.origin);
+  var_2.normal = vectorNormalize(var_2.end.origin - var_2.origin);
   level.gas_handler.structs[level.gas_handler.structs.size] = var_2;
 
   if(var_3) {
@@ -3146,7 +3146,7 @@ gas_struct_think(var_0) {
     var_4 = 0;
 
     foreach(var_6 in level.gas_handler.structs) {
-      var_7 = vectornormalize(level.player.origin - var_6.end.origin);
+      var_7 = vectorNormalize(level.player.origin - var_6.end.origin);
       var_8 = vectordot(var_7, var_6.normal);
 
       if(var_8 < 0) {
@@ -3363,8 +3363,8 @@ nade_room() {
   var_1 = common_scripts\utility::getStructArray("nade_room_struct", "targetname");
 
   foreach(var_3 in var_1) {
-    var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
-    var_3.dir = vectornormalize(var_4.origin - var_3.origin);
+    var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
+    var_3.dir = vectorNormalize(var_4.origin - var_3.origin);
   }
 
   var_6 = "fraggrenade";
@@ -3449,14 +3449,14 @@ casino_jumpout_sequence() {
   }
 
   level.jumpout_enemies = [];
-  var_3 = getent("casino_hotel_trig_5", "targetname");
+  var_3 = getEnt("casino_hotel_trig_5", "targetname");
   thread maps\las_vegas_code::func_waittill_msg(var_3, "trigger", ::casino_raid_end_hallway_guys);
-  var_4 = common_scripts\utility::getstruct("casino_raid_sequence_spot", "targetname");
-  var_5 = getent("casino_hotel_door", "targetname");
+  var_4 = common_scripts\utility::getStruct("casino_raid_sequence_spot", "targetname");
+  var_5 = getEnt("casino_hotel_door", "targetname");
   var_6 = getEntArray(var_5.target, "targetname");
 
   foreach(var_8 in var_6) {
-    var_8 linkto(var_5);
+    var_8 linkTo(var_5);
 
     if(isDefined(var_8.script_noteworthy)) {
       var_5.breakpiece = var_8;
@@ -3527,7 +3527,7 @@ casino_jumpout_code(var_0, var_1) {
     var_1 maps\_utility::delaythread(2.4, maps\las_vegas_code::door_open, 0.4, undefined, 105);
     var_1 maps\_utility::delaythread(2.85, maps\las_vegas_code::door_open, 0.8, undefined, -10, 0, 0.2);
     wait 5;
-    var_5 = getent("casino_raidroom_wind_trig", "targetname");
+    var_5 = getEnt("casino_raidroom_wind_trig", "targetname");
 
     if(!level.player maps\_utility::player_looking_at(var_5.origin + (-20, 0, 0))) {
       var_2 maps\_anim::anim_set_rate_single(self, "vegas_raid_jump", 0);
@@ -3548,13 +3548,13 @@ casino_jumpout_code(var_0, var_1) {
     }
 
     thread maps\_utility::smart_dialogue("vegas_mrk_gettothewindow");
-    var_6 = getent("casino_raidroom_glass", "targetname");
+    var_6 = getEnt("casino_raidroom_glass", "targetname");
     level.windspot = spawn("script_origin", var_6.origin + (0, -500, 0));
     level.windspot maps\_utility::delaythread(1.3, common_scripts\utility::play_loop_sound_on_entity, "loop_wind_near");
     maps\_utility::delaythread(1.3, common_scripts\utility::play_sound_in_space, "glass_pane_blowout", var_6.origin);
     maps\_utility::delaythread(1.3, maps\_utility::deleteent, var_6);
     maps\_utility::delaythread(1.3, common_scripts\utility::exploder, "raidroom_dust_enter");
-    var_7 = common_scripts\utility::getstruct("raidroom_glass_spot", "targetname");
+    var_7 = common_scripts\utility::getStruct("raidroom_glass_spot", "targetname");
     var_8 = maps\_utility::spawn_anim_model("window", var_7.origin);
     var_7 maps\_anim::anim_first_frame_solo(var_8, "raid_window_shatter");
     var_8 hide();
@@ -3588,7 +3588,7 @@ casino_jumpout_code(var_0, var_1) {
       var_2 maps\_anim::anim_set_rate_single(self, "vegas_raid_jump", 1);
       var_2 waittill("vegas_raid_jump");
       wait 0.05;
-      var_2 = common_scripts\utility::getstruct("outside_temp_spot", "targetname");
+      var_2 = common_scripts\utility::getStruct("outside_temp_spot", "targetname");
       self forceteleport(var_2.origin, var_2.angles, 10000);
       self setgoalpos(var_2.origin);
     }
@@ -3611,7 +3611,7 @@ casino_jumpout_code(var_0, var_1) {
       thread jumpout_ahead_of_player();
       var_2 maps\_anim::anim_single_solo(self, "vegas_raid_jump");
       wait 0.05;
-      var_2 = common_scripts\utility::getstruct("outside_temp_spot", "targetname");
+      var_2 = common_scripts\utility::getStruct("outside_temp_spot", "targetname");
       self forceteleport(var_2.origin, var_2.angles, 10000);
       self setgoalpos(var_2.origin);
     }
@@ -3711,7 +3711,7 @@ casino_jumpout_trenchrun() {
         break;
       }
 
-      var_6 = common_scripts\utility::getstruct(var_6.target, "targetname");
+      var_6 = common_scripts\utility::getStruct(var_6.target, "targetname");
       var_7 = var_7 + randomfloatrange(0.5, 1);
       wait 0.05;
     }
@@ -3789,10 +3789,10 @@ trenchrun_get_gun() {
 
 trenchrun_fake_shooters() {
   level endon("player_in_hotel_room");
-  var_0 = getent("casino_hotel_trig_4", "targetname");
+  var_0 = getEnt("casino_hotel_trig_4", "targetname");
   var_0 waittill("trigger");
   maps\_utility::battlechatter_on("axis");
-  var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.target, "targetname");
 
   for(;;) {
     wait(randomfloatrange(0.5, 1));
@@ -3865,7 +3865,7 @@ play_nag_lines(var_0, var_1, var_2) {
 
 casino_raidroom_wind() {
   level endon("delete_interior_sandstorm");
-  var_0 = getent("casino_raidroom_wind_trig", "targetname");
+  var_0 = getEnt("casino_raidroom_wind_trig", "targetname");
   maps\las_vegas_code::trigger_waittill_trigger("casino_raidroom_wind_trig");
   var_1 = 0;
 
@@ -3956,14 +3956,14 @@ slide() {
     var_2 useanimtree(#animtree);
   }
 
-  var_4 = getent("vegas_window_hdr", "targetname");
+  var_4 = getEnt("vegas_window_hdr", "targetname");
   var_4 hide();
-  var_5 = common_scripts\utility::getstruct("casino_player_slide_start", "targetname");
+  var_5 = common_scripts\utility::getStruct("casino_player_slide_start", "targetname");
   var_6 = var_5 maps\las_vegas_code::makestruct();
   var_7 = maps\_utility::spawn_anim_model("player_rig", level.player.origin);
   var_7 hide();
   var_8 = maps\_utility::spawn_anim_model("player_legs", level.player.origin);
-  var_9 = getent("player_slide_tarp", "targetname");
+  var_9 = getEnt("player_slide_tarp", "targetname");
   var_9 useanimtree(#animtree);
   var_9.animname = "tarp";
   var_10 = [var_7, var_8];
@@ -4016,7 +4016,7 @@ slide() {
   setblur(3, 0);
   wait 0.1;
   setblur(0, 0.8);
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   var_6 waittill("casino_player_slide");
   level.player common_scripts\utility::delaycall(0.6, ::setclienttriggeraudiozone, "las_vegas_gassed_black", 0.2);
   level.fadein = maps\_hud_util::create_client_overlay("black", 1, level.player);
@@ -4029,7 +4029,7 @@ slide() {
   }
 
   common_scripts\utility::flag_set("FLAG_player_slide_complete");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 
   if(isDefined(level.jumpout_enemies)) {
     level.jumpout_enemies = maps\_utility::remove_dead_from_array(level.jumpout_enemies);

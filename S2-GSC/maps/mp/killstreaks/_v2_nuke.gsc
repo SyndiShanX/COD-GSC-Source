@@ -108,7 +108,7 @@ func_685C() {
   foreach(var_01 in level.var_744A) {
     var_02 = anglesToForward(var_01.var_001D);
     var_02 = (var_02[0], var_02[1], 0);
-    var_02 = vectornormalize(var_02);
+    var_02 = vectorNormalize(var_02);
     var_03 = 5000;
     var_04 = spawn("script_model", var_01.var_0116 + var_02 * var_03);
     var_04 setModel("tag_origin");
@@ -199,7 +199,7 @@ func_685A() {
   level endon("nuke_cancelled");
   foreach(var_01 in level.var_744A) {
     earthquake(0.6, 5, var_01.var_0116, 1000, var_01);
-    var_01 playrumbleonentity("damage_heavy");
+    var_01 playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -281,7 +281,7 @@ func_3D58(param_00) {
   self endon("flash_rumble_loop");
   var_01 = gettime() + param_00 * 1000;
   while(gettime() < var_01) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }

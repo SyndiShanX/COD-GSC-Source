@@ -102,18 +102,18 @@ function electric_switch() {
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy) && !is_true(self.var_1d2fecd6)) {
       switch (master_switch.script_noteworthy) {
         case #"elec_switch":
-          self sethintstring(#"zombie/electric_switch");
+          self setHintString(#"zombie/electric_switch");
           break;
         case #"hash_47bde376753a03c9":
-          self sethintstring(#"zombie/electric_switch");
+          self setHintString(#"zombie/electric_switch");
           break;
         case #"artifact_mind":
           level waittill(#"player_spawned");
-          self sethintstring(#"hash_60e4802baafefe56");
+          self setHintString(#"hash_60e4802baafefe56");
           break;
       }
     } else if(!is_true(self.var_1d2fecd6)) {
-      self sethintstring(#"zombie/electric_switch");
+      self setHintString(#"zombie/electric_switch");
     }
 
     self setvisibletoall();
@@ -152,7 +152,7 @@ function electric_switch() {
     user zm_stats::increment_challenge_stat(#"power_activated");
     user contracts::increment_zm_contract(#"hash_464acc5cd524989");
     level turn_power_on_and_open_doors(power_zone);
-    user playrumbleonentity("damage_light");
+    user playRumbleOnEntity("damage_light");
     switchentnum = self getentitynumber();
 
     if(isDefined(switchentnum) && isDefined(user)) {
@@ -747,7 +747,7 @@ function turn_power_on_and_open_doors(power_zone, var_9d1c1c4a = 1) {
   }
 
   if(var_9d1c1c4a) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::function_8f10788e("boas_power_turnedon");
     }
   }
@@ -812,7 +812,7 @@ function turn_power_off_and_close_doors(power_zone) {
 
         if(isDefined(level.temporary_power_switch_logic)) {
           door.power_on = 0;
-          door sethintstring(#"zombie/need_power");
+          door setHintString(#"zombie/need_power");
           door notify(#"kill_door_think");
           door thread zm_blockers::door_think();
         }
@@ -844,7 +844,7 @@ function function_da4a8c05(hintstring, n_zone = 0) {
   level.var_cef2e607[#"hash_1d6a2292435f5d0a"]++;
   wait float(function_60d95f53()) / 1000 * (level.var_cef2e607[#"hash_1d6a2292435f5d0a"] % int(0.5 / float(function_60d95f53()) / 1000) + 1);
   self.script_noteworthy = undefined;
-  self.trigger sethintstring(hintstring);
+  self.trigger setHintString(hintstring);
 
   if(isDefined(self.var_49d94d8a)) {
     self[[self.var_49d94d8a]]();
@@ -863,7 +863,7 @@ function function_1ae64b8c(hintstring, n_zone = 0) {
 
   level flag::wait_till_clear(str_flag);
   self.script_noteworthy = "power";
-  self.trigger sethintstring(#"zombie/need_power");
+  self.trigger setHintString(#"zombie/need_power");
 
   if(isDefined(self.var_7cf0a191)) {
     self[[self.var_7cf0a191]]();

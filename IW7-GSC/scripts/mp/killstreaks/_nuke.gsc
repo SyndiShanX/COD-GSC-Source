@@ -181,7 +181,7 @@ func_13959(var_0) {
   level endon("game_ended");
   thread func_1395C();
   wait(2);
-  self moveto(self.var_C96C, 5, 0.2, 2);
+  self moveTo(self.var_C96C, 5, 0.2, 2);
   thread func_665A();
   self waittill("near_goal");
   thread func_10DD1();
@@ -446,7 +446,7 @@ func_C1BC(var_0) {
   level waittill("nuke_death");
   scripts\mp\shellshock::_earthquake(0.4, 0.1, level.mapcenter, 100000);
   foreach(var_2 in level.players) {
-    var_2 playrumbleonentity("damage_heavy");
+    var_2 playRumbleOnEntity("damage_heavy");
   }
 }
 

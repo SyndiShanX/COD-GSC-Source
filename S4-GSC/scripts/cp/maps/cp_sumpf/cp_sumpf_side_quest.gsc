@@ -90,13 +90,13 @@ drop_final_loot(var_0) {
 
 init_bunny_torso() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("bunny_head", "targetname");
+  var_0 = scripts\engine\utility::getStruct("bunny_head", "targetname");
   var_0.mdl_bunny = scripts\cp\utility::_id_E190("s4_zm_bunny_body", var_0.origin, var_0.angles);
   var_0.mdl_bunny._id_039B = "bunny_interact";
   var_0.mdl_bunny.b_torso = 1;
 
   if(isDefined(level.zipline)) {
-    var_0.mdl_bunny linkto(level.zipline);
+    var_0.mdl_bunny linkTo(level.zipline);
   }
 
   var_0.mdl_bunny thread play_laugh_sound();
@@ -120,7 +120,7 @@ init_bunny_torso() {
 
 init_bunny_leg() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("bunny_leg", "targetname");
+  var_0 = scripts\engine\utility::getStruct("bunny_leg", "targetname");
   var_0.mdl_bunny = scripts\cp\utility::_id_E190("s4_zm_bunny_legs", var_0.origin + (0, 0, 5), var_0.angles);
   var_0.mdl_bunny._id_039B = "bunny_interact";
   var_0.mdl_bunny.b_leg = 1;

@@ -149,7 +149,7 @@ specialops_remove_unused() {
 enable_triggered_start(challenge_id_start) {
   level endon("challenge_timer_expired");
 
-  trigger_ent = getent(challenge_id_start, "script_noteworthy");
+  trigger_ent = getEnt(challenge_id_start, "script_noteworthy");
   AssertEx(isDefined(trigger_ent), "challenge_id (" + challenge_id_start + ") was unable to match with a valid trigger.");
 
   trigger_ent waittill("trigger");
@@ -165,7 +165,7 @@ enable_triggered_complete(challenge_id, challenge_id_complete, touch_style) {
     touch_style = "freeze";
   }
 
-  trigger_ent = getent(challenge_id, "script_noteworthy");
+  trigger_ent = getEnt(challenge_id, "script_noteworthy");
   AssertEx(isDefined(trigger_ent), "challenge_id (" + challenge_id + ") was unable to match with a valid trigger.");
   thread disable_mission_end_trigger(trigger_ent);
 

@@ -138,7 +138,7 @@ eagle_eye_far_flung() {
   screen_fade_in(0.2, undefined, 1);
   level thread eagle_eye_extra_arms();
   level clientnotify("sndFakeAmbEnd");
-  playsoundatposition("evt_binocs_hud_pwr_down", (0, 0, 0));
+  playSoundAtPosition("evt_binocs_hud_pwr_down", (0, 0, 0));
   level.player allowcrouch(1);
   luinotifyevent(&"hud_update_vehicle_custom", 1, 0);
   level thread eagle_eye_start_glasses();
@@ -174,7 +174,7 @@ eagle_eye_vo() {
 
 eagle_eye_vertigo() {
   flag_set("vertigo_started");
-  o_player_start = getent("intro_far_flung_player_spot_org", "targetname");
+  o_player_start = getEnt("intro_far_flung_player_spot_org", "targetname");
   a_m_fx_models = getEntArray("enemy_marker_model", "targetname");
   o_player_start delete();
   array_delete(a_m_fx_models);
@@ -253,7 +253,7 @@ eagle_eye_crosby_jumps() {
   self.vh_wingsuit hide();
   self.vh_wingsuit.origin = self.origin;
   self.vh_wingsuit setphysangles(self.angles);
-  self linkto(self.vh_wingsuit, "tag_driver");
+  self linkTo(self.vh_wingsuit, "tag_driver");
   self thread maps\monsoon_wingsuit::do_flight_anims("fwd_idle");
   nd_start = getvehiclenode("path_wingsuit_crosby", "targetname");
   self.vh_wingsuit go_path(nd_start);
@@ -292,7 +292,7 @@ squad_equip_suits(m_player_body) {
 
 jump_fail_check() {
   level endon("leap_of_faith_started");
-  e_volume = getent("wingsuit_leap_fail_volume", "targetname");
+  e_volume = getEnt("wingsuit_leap_fail_volume", "targetname");
 
   while(true) {
     if(self istouching(e_volume)) {
@@ -305,7 +305,7 @@ jump_fail_check() {
 }
 
 setup_goggles() {
-  o_player_start = getent("intro_far_flung_player_spot_org", "targetname");
+  o_player_start = getEnt("intro_far_flung_player_spot_org", "targetname");
   level.player setplayerangles(o_player_start.angles);
   level.player.origin = o_player_start.origin;
   level.player playerlinktodelta(o_player_start, undefined, 1, 30, 30, 50, 0);
@@ -400,7 +400,7 @@ intro_start_ambient_activity() {
 }
 
 ambient_guards() {
-  sp_intro = getent("intro_vig_spawner", "targetname");
+  sp_intro = getEnt("intro_vig_spawner", "targetname");
   sp_intro add_spawn_function(::ambient_guard_think);
   add_spawn_function_veh("intro_turret", ::ambient_turret_think);
 
@@ -409,7 +409,7 @@ ambient_guards() {
   }
 
   wait 0.3;
-  s_align = getstruct("camo_battle_intro", "targetname");
+  s_align = getStruct("camo_battle_intro", "targetname");
 
   for(i = 1; i < 5; i++) {
     loop_guard = sp_intro spawn_ai(1);
@@ -452,8 +452,8 @@ ambient_heli() {
   vh_heli setneargoalnotifydist(400);
   vh_heli sethoverparams(50);
   vh_heli setdefaultpitch(15);
-  vh_heli setlookatent(getent("lift_ruins", "targetname"));
-  vh_heli setvehgoalpos(getstruct("intro_heli_goal_1", "targetname").origin);
+  vh_heli setlookatent(getEnt("lift_ruins", "targetname"));
+  vh_heli setvehgoalpos(getStruct("intro_heli_goal_1", "targetname").origin);
   luinotifyevent(&"hud_goggles_add_poi", 2, vh_heli getentitynumber(), -50);
   flag_wait("vertigo_started");
   vh_heli.delete_on_death = 1;
@@ -466,7 +466,7 @@ ambient_heli() {
 
 lift_control() {
   level waittill("intro_start_ambient_activity");
-  m_lift = getent("lift_ruins", "targetname");
+  m_lift = getEnt("lift_ruins", "targetname");
   m_lift setclientflag(11);
   level waittill("move_lift_down");
   outside_lift_move_down();
@@ -478,8 +478,8 @@ lift_control() {
 ambient_poi_zoom() {
   wait 1;
   level.intro_poi = getStructArray("intro_poi", "targetname");
-  level.intro_poi = add_to_array(level.intro_poi, getent("lift_ruins", "targetname"), 0);
-  level.intro_poi = add_to_array(level.intro_poi, getent("heli_goggles_intro", "targetname"), 0);
+  level.intro_poi = add_to_array(level.intro_poi, getEnt("lift_ruins", "targetname"), 0);
+  level.intro_poi = add_to_array(level.intro_poi, getEnt("heli_goggles_intro", "targetname"), 0);
   str_poi = undefined;
   b_zoom = 0;
 
@@ -550,15 +550,15 @@ cliff_swing_flying_rumble(guy) {
 }
 
 cliff_swing_assist_rumble(guy) {
-  level.player playrumbleonentity("monsoon_harper_swing");
+  level.player playRumbleOnEntity("monsoon_harper_swing");
 }
 
 nanoglove_impact(guy) {
-  level.player playrumbleonentity("monsoon_gloves_impact");
+  level.player playRumbleOnEntity("monsoon_gloves_impact");
 }
 
 single_rumble(guy) {
-  level.player playrumbleonentity("monsoon_gloves_impact");
+  level.player playRumbleOnEntity("monsoon_gloves_impact");
 }
 
 cliff_swing_harper_1_fail(player) {
@@ -584,7 +584,7 @@ cliff_swing_harper_3_fail(player) {
 cliff_swing_fail(str_flag, str_scene) {
   flag_set("cliff_swing_fail_checked");
   screen_message_delete();
-  level.player playrumbleonentity("monsoon_gloves_impact");
+  level.player playRumbleOnEntity("monsoon_gloves_impact");
   level thread timescale_tween(1.8, 1.0, 0.5);
 
   if(!flag(str_flag)) {
@@ -649,7 +649,7 @@ cliff_swing_rope(str_swing_anim) {
 cliff_swing_player_fx() {
   self endon("death");
   wait 1;
-  m_player_body = getent("player_body", "targetname");
+  m_player_body = getEnt("player_body", "targetname");
 
   for(i = 0; i < 10; i++) {
     playFXOnTag(getfx("fx_water_rope_swing"), m_player_body, "tag_camera");
@@ -719,10 +719,10 @@ set_time_scale_for_time(n_scale, n_time) {
 
 cliff_swing_success_window_player(n_time_scale, n_scale_timer, str_rumble, str_prompt, str_button, str_direction) {
   level thread timescale_tween(1.0, n_time_scale, 0.2);
-  level.player playrumbleonentity(str_rumble);
+  level.player playRumbleOnEntity(str_rumble);
   level.player waittill_input(str_prompt, str_button, str_direction);
   level thread timescale_tween(n_time_scale, 1.0, 0.2);
-  level.player playrumbleonentity(str_rumble);
+  level.player playRumbleOnEntity(str_rumble);
 
   if(!flag("cliff_swing_fail_checked")) {
     flag_set("cliff_hands_up");
@@ -745,7 +745,7 @@ real_body_hide(player_body) {
 }
 
 real_body_show(player_body) {
-  fake_player_body = getent("player_body_double", "targetname");
+  fake_player_body = getEnt("player_body_double", "targetname");
 
   if(isDefined(fake_player_body)) {
     fake_player_body delete();
@@ -785,11 +785,11 @@ cliff_swing_tree_fall(m_player_body) {
   exploder(166);
   level notify("fxanim_lightning_tree_start");
   wait 1.5;
-  level.player playerlinktodelta(getent("player_body", "targetname"), "tag_player", 1, 25, 5, 30, 0);
+  level.player playerlinktodelta(getEnt("player_body", "targetname"), "tag_player", 1, 25, 5, 30, 0);
   wait 1;
   stop_exploder(166);
   level thread maps\createart\monsoon_art::lightning_strike();
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   earthquake(0.75, 1, level.player.origin, 200, level.player);
   wait 2.5;
   setmusicstate("MONSOON_TREE_FALL");

@@ -355,7 +355,7 @@ function flagradarmover() {
   self endon("dropped");
   self.portable_radar endon("death");
   for(;;) {
-    self.portable_radar moveto(self.currentcarrier.origin, 0.05);
+    self.portable_radar moveTo(self.currentcarrier.origin, 0.05);
     wait(0.05);
   }
 }

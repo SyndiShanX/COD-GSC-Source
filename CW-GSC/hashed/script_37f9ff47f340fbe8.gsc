@@ -146,7 +146,7 @@ function function_3b3f9801(var_b3160f0, axis) {
       break;
   }
 
-  self rotateto(var_b3160f0.cur_value, var_cad5b24d);
+  self rotateTo(var_b3160f0.cur_value, var_cad5b24d);
 }
 
 function function_faea843b(var_b3160f0, axis) {

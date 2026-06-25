@@ -100,13 +100,13 @@ pooledbuildable_stub_for_piece(piece) {
 
 pooledbuildabletrigger_update_prompt(player) {
   can_use = self.stub pooledbuildablestub_update_prompt(player, self);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
 
   if(isDefined(self.stub.cursor_hint)) {
     if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon)) {
-      self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
+      self setCursorHint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
     } else {
-      self setcursorhint(self.stub.cursor_hint);
+      self setCursorHint(self.stub.cursor_hint);
     }
   }
 
@@ -186,7 +186,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
 }
 
 find_bench(bench_name) {
-  return getent(bench_name, "targetname");
+  return getEnt(bench_name, "targetname");
 }
 
 swap_buildable_fields(stub1, stub2) {
@@ -302,7 +302,7 @@ pooled_buildable_place_think() {
 
     if(!isDefined(bind_to) || isDefined(self.stub.bound_to_buildable) && self.stub.bound_to_buildable != bind_to || isDefined(bind_to.bound_to_buildable) && self.stub != bind_to.bound_to_buildable) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
 
       if(isDefined(self.stub.oncantuse)) {
         self.stub[[self.stub.oncantuse]](player);
@@ -315,7 +315,7 @@ pooled_buildable_place_think() {
 
     if(!status) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
 
       if(isDefined(bind_to.oncantuse)) {
         bind_to[[bind_to.oncantuse]](player);
@@ -361,7 +361,7 @@ pooled_buildable_place_think() {
         prompt = player player_build(self.stub.buildablezone);
         player_built = player;
         self.stub.hint_string = prompt;
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     }
   }

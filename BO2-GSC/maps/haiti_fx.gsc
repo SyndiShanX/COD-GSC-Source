@@ -206,7 +206,7 @@ createfx_control_room_closet() {
     m_destroyed hide();
   }
 
-  m_door = getent("trappedinthecloset", "targetname");
+  m_door = getEnt("trappedinthecloset", "targetname");
   m_door delete();
   level waittill("bomb_exploded");
 

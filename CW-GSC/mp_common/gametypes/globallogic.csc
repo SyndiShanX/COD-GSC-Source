@@ -202,7 +202,7 @@ function function_765b7c63(local_client_num, oldval, newval, bnewent, binitialsn
   }
 
   level notify(#"thermal_toggle");
-  players = getplayers(local_client_num);
+  players = getPlayers(local_client_num);
 
   foreach(player in players) {
     if(util::function_fbce7263(player.team, self.team) && player hasperk(local_client_num, #"specialty_immunenvthermal")) {

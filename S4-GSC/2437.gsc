@@ -516,7 +516,7 @@ toggle_all_exfil_portal_clip(var_0) {
 }
 
 toggle_exfil_portal_clip(var_0) {
-  var_1 = getent(self._id_0481 + "_clip", "targetname");
+  var_1 = getEnt(self._id_0481 + "_clip", "targetname");
 
   if(!isDefined(var_1)) {
     return;

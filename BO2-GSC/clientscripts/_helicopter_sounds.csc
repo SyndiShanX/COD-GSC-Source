@@ -465,7 +465,7 @@ setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3, distancecheck
   self.heli[bone_location] = spawnStruct();
   self.heli[bone_location].sound_type = type;
   self.heli[bone_location].run = spawn(0, self.origin, "script_origin");
-  self.heli[bone_location].run linkto(self, tag);
+  self.heli[bone_location].run linkTo(self, tag);
   self.heli[bone_location].run.alias = run;
   self.sound_ents[self.sound_ents.size] = self.heli[bone_location].run;
 
@@ -475,21 +475,21 @@ setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3, distancecheck
 
   if(isDefined(dmg1)) {
     self.heli[bone_location].dmg1 = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].dmg1 linkto(self, tag);
+    self.heli[bone_location].dmg1 linkTo(self, tag);
     self.heli[bone_location].dmg1.alias = dmg1;
     self.sound_ents[self.sound_ents.size] = self.heli[bone_location].dmg1;
   }
 
   if(isDefined(dmg2)) {
     self.heli[bone_location].idle = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].idle linkto(self, tag);
+    self.heli[bone_location].idle linkTo(self, tag);
     self.heli[bone_location].idle.alias = dmg2;
     self.sound_ents[self.sound_ents.size] = self.heli[bone_location].dmg2;
   }
 
   if(isDefined(dmg3)) {
     self.heli[bone_location].idle = spawn(0, self.origin, "script_origin");
-    self.heli[bone_location].idle linkto(self, tag);
+    self.heli[bone_location].idle linkTo(self, tag);
     self.heli[bone_location].idle.alias = dmg3;
     self.sound_ents[self.sound_ents.size] = self.heli[bone_location].dmg3;
   }
@@ -1954,21 +1954,21 @@ veh_throttle() {
   return;
   vehicle = self;
   self.idle = spawn(0, self.origin, "script_origin");
-  self.idle linkto(self, "tag_origin");
+  self.idle linkTo(self, "tag_origin");
   self.offidle = spawn(0, self.origin, "script_origin");
-  self.offidle linkto(self, "tag_origin");
+  self.offidle linkTo(self, "tag_origin");
   self.onlow = spawn(0, self.origin, "script_origin");
-  self.onlow linkto(self, "tag_origin");
+  self.onlow linkTo(self, "tag_origin");
   self.offlow = spawn(0, self.origin, "script_origin");
-  self.offlow linkto(self, "tag_origin");
+  self.offlow linkTo(self, "tag_origin");
   self.onmid = spawn(0, self.origin, "script_origin");
-  self.onmid linkto(self, "tag_origin");
+  self.onmid linkTo(self, "tag_origin");
   self.offmid = spawn(0, self.origin, "script_origin");
-  self.offmid linkto(self, "tag_origin");
+  self.offmid linkTo(self, "tag_origin");
   self.onhigh = spawn(0, self.origin, "script_origin");
-  self.onhigh linkto(self, "tag_origin");
+  self.onhigh linkTo(self, "tag_origin");
   self.offhigh = spawn(0, self.origin, "script_origin");
-  self.offhigh linkto(self, "tag_origin");
+  self.offhigh linkTo(self, "tag_origin");
   idle = self.idle playLoopSound("blk_car_idle_plr", 1);
   self thread playdrivesounds(idle, -1, 0, 0.16, 0.274, 1, 0.133);
   offidle = self.offidle playLoopSound("blk_car_idle_plr", 1);
@@ -2130,9 +2130,9 @@ drone_up_down_transition() {
   either = qr_ent_either playLoopSound("veh_qrdrone_vertical");
   qr_ent_either setloopstate("veh_qrdrone_vertical", 0, 0);
   tag = "tag_origin";
-  qr_ent_up linkto(self, tag);
-  qr_ent_down linkto(self, tag);
-  qr_ent_either linkto(self, tag);
+  qr_ent_up linkTo(self, tag);
+  qr_ent_down linkTo(self, tag);
+  qr_ent_either linkTo(self, tag);
   self thread drone_button_watch();
 
   while(true) {
@@ -2173,7 +2173,7 @@ drone_rotate_angle(heli_type, heli_part) {
   angle = qr_ent_angle playLoopSound("veh_qrdrone_idle_rotate");
   setsoundvolume(angle, 0);
   tag = "tag_origin";
-  qr_ent_angle linkto(self, tag);
+  qr_ent_angle linkTo(self, tag);
 
   while(true) {
     last_angle = abs(self.angles[1]);

@@ -96,7 +96,7 @@ func_19D2() {
 
 func_12F2(var_0, var_1) {
   var_2 = anglesToForward(level.player.angles);
-  var_3 = vectornormalize(var_0.origin - level.player.origin);
+  var_3 = vectorNormalize(var_0.origin - level.player.origin);
   var_4 = vectordot(var_2, var_3);
   if(var_4 >= var_1) {
     return 1;
@@ -617,7 +617,7 @@ func_1951() {
 
     var_12 = self gettagangles("J_Spine4") + (0, 0, 0);
     var_13 = self gettagorigin("J_Spine4");
-    var_14 = vectornormalize(var_11 - var_13);
+    var_14 = vectorNormalize(var_11 - var_13);
     var_15 = anglestoright(var_12);
     var_10 = anglestoup(var_12);
     var_11 = anglestoup(var_12) * -1;
@@ -713,7 +713,7 @@ func_1953() {
       var_5 = self gettagorigin("J_Head");
     }
 
-    var_6 = vectornormalize(var_2 - var_5);
+    var_6 = vectorNormalize(var_2 - var_5);
     var_7 = anglesToForward(var_3);
     var_8 = vectordot(var_7, var_6);
     var_9 = func_6F41(var_8, 1, -1, 0, 1);
@@ -770,7 +770,7 @@ func_194D() {
     var_2 = self gettagangles("j_head");
     var_3 = self gettagorigin("j_head");
     var_4 = self gettagangles("J_Spine4") + (0, 90, 0);
-    var_5 = vectornormalize(var_1 - var_3);
+    var_5 = vectorNormalize(var_1 - var_3);
     var_6 = anglestoup(var_2);
     var_7 = scripts\engine\utility::flatten_vector(var_5);
     var_8 = scripts\engine\utility::flatten_vector(var_6);
@@ -810,7 +810,7 @@ func_1950() {
     var_3 = self gettagorigin("j_head");
     var_4 = self gettagangles("J_Spine4");
     var_5 = anglesToForward(var_2);
-    var_6 = vectornormalize(var_1 - var_3);
+    var_6 = vectorNormalize(var_1 - var_3);
     var_7 = vectordot(var_5, var_6);
     var_8 = func_6F41(var_7, 1, -1, 0.3, 0.7);
     var_9 = clamp(var_8, 0, 1);
@@ -856,7 +856,7 @@ func_1966() {
       var_9 = self.var_77A3.origin;
     }
 
-    var_10 = vectornormalize(var_9 - self.origin);
+    var_10 = vectorNormalize(var_9 - self.origin);
     var_11 = anglesToForward(self.angles);
     var_12 = anglestoright(self.angles);
     var_13 = anglestoright(self.angles) * -1;
@@ -980,7 +980,7 @@ func_195D(var_0) {
   var_5 = self gettagorigin("J_Spine4");
   var_6 = anglestoright(var_4);
   var_7 = anglestoup(var_4);
-  var_8 = vectornormalize(var_3 - var_5);
+  var_8 = vectorNormalize(var_3 - var_5);
   var_9 = scripts\engine\utility::flatten_vector(var_6);
   var_10 = scripts\engine\utility::flatten_vector(var_7);
   var_11 = scripts\engine\utility::flatten_vector(var_8);
@@ -989,7 +989,7 @@ func_195D(var_0) {
   var_14 = clamp(func_6F41(var_12, 0.2, 1, 0, 1), 0, 1);
   var_15 = clamp(func_6F41(var_13, 0.2, 1, 0, 1), 0, 1);
   var_10 = self gettagorigin("J_Spine4");
-  var_11 = vectornormalize(var_3 - var_10);
+  var_11 = vectorNormalize(var_3 - var_10);
   var_12 = anglesToForward(var_4);
   var_13 = vectordot(var_11, var_12);
   var_14 = var_13 * -1;
@@ -1323,7 +1323,7 @@ func_194C(var_0, var_1, var_2) {
   var_14 = self gettagorigin("tag_origin");
   var_15 = anglestoright(var_13);
   var_10 = anglesToForward(var_13);
-  var_11 = vectornormalize(var_12 - var_14);
+  var_11 = vectorNormalize(var_12 - var_14);
   var_12 = scripts\engine\utility::flatten_vector(var_15);
   var_13 = scripts\engine\utility::flatten_vector(var_10);
   var_14 = scripts\engine\utility::flatten_vector(var_11);
@@ -1332,7 +1332,7 @@ func_194C(var_0, var_1, var_2) {
   var_17 = clamp(func_6F41(var_15, 0.2, 1, 0, 1), 0, 1);
   var_18 = clamp(func_6F41(var_16, 0.2, 1, 0, 1), 0, 1);
   var_19 = self gettagorigin("J_Spine4");
-  var_1A = vectornormalize(var_12 - var_19);
+  var_1A = vectorNormalize(var_12 - var_19);
   var_1B = anglestoup(var_13);
   var_1C = vectordot(var_1A, var_1B);
   var_1D = var_1C * -1;
@@ -1460,7 +1460,7 @@ func_1952() {
     var_10 = self gettagorigin("J_Head");
     var_11 = self gettagangles("J_Spine4") + (0, 90, 0);
     var_12 = self gettagorigin("J_Spine4");
-    var_13 = vectornormalize(var_8 - var_12);
+    var_13 = vectorNormalize(var_8 - var_12);
     var_14 = anglestoright(var_11);
     var_15 = scripts\engine\utility::flatten_vector(var_14);
     var_10 = scripts\engine\utility::flatten_vector(var_13);
@@ -1506,7 +1506,7 @@ func_1954() {
       var_4 = self gettagorigin("J_Head");
     }
 
-    var_5 = vectornormalize(var_1 - var_4);
+    var_5 = vectorNormalize(var_1 - var_4);
     var_6 = anglesToForward(var_2);
     var_7 = vectordot(var_6, var_5);
     var_8 = func_6F41(var_7, 1, -1, 0, 1);
@@ -1634,7 +1634,7 @@ func_2B8A() {
 
     var_10 = var_0 gettagangles("tag_origin");
     var_11 = var_0 gettagorigin("tag_origin");
-    var_12 = scripts\engine\utility::flatten_vector(vectornormalize(var_9 - var_11));
+    var_12 = scripts\engine\utility::flatten_vector(vectorNormalize(var_9 - var_11));
     var_13 = anglesToForward(var_10);
     var_14 = anglestoright(var_10);
     var_15 = anglestoright(var_10) * -1;
@@ -1808,7 +1808,7 @@ func_2B86() {
 
     var_12 = var_0 gettagangles("tag_origin");
     var_13 = var_0 gettagorigin("tag_origin");
-    var_14 = scripts\engine\utility::flatten_vector(vectornormalize(var_11 - var_13));
+    var_14 = scripts\engine\utility::flatten_vector(vectorNormalize(var_11 - var_13));
     var_15 = anglesToForward(var_12);
     var_10 = anglestoright(var_12);
     var_11 = anglestoright(var_12) * -1;

@@ -219,7 +219,7 @@ function _immolategrenadedetonationwatch(tag, count, attacker, weapon) {
   self stopsound("gdt_immolation_human_countdown");
   attacker thread _detonate_grenades(self, 100, count);
   if(isalive(self)) {
-    self stopanimscripted();
+    self stopanimScripted();
     self kill(self.origin, (isDefined(attacker) ? attacker : undefined), undefined, weapon);
   }
 }
@@ -248,13 +248,13 @@ function _immolatehuman(attacker, upgraded, immediate = 0) {
   if(self.archetype != "human_riotshield" && self cybercom::function_78525729() == "stand" && randomint(100) < getdvarint("scr_immolation_specialanimchance", 15)) {
     self notify("bhtn_action_notify", "reactImmolationLong");
     self thread _immolategrenadedetonationwatch("tag_inhand", 1, attacker, weapon);
-    self animscripted("immo_anim", self.origin, self.angles, "ai_base_rifle_stn_exposed_immolate_explode_midthrow");
+    self animScripted("immo_anim", self.origin, self.angles, "ai_base_rifle_stn_exposed_immolate_explode_midthrow");
     self thread cybercom::stopanimscriptedonnotify("damage_pain", "immo_anim", 1, attacker, weapon);
     self waittillmatch("immo_anim");
     self.grenade_prop = spawn("script_model", self gettagorigin("tag_inhand"));
     self.grenade_prop setModel("wpn_t7_grenade_frag_world");
-    self.grenade_prop enablelinkto();
-    self.grenade_prop linkto(self, "tag_inhand");
+    self.grenade_prop enablelinkTo();
+    self.grenade_prop linkTo(self, "tag_inhand");
     playFXOnTag("light/fx_ability_light_chest_immolation", self.grenade_prop, "tag_origin");
     self waittillmatch("immo_anim");
     self stopsound("gdt_immolation_human_countdown");
@@ -433,7 +433,7 @@ function ai_activateimmolate(target, var_9bc2efcb = 1, upgraded) {
   if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
-    self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
+    self animScripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self waittillmatch("ai_cybercom_anim");
   }
   weapon = getweapon("gadget_immolation");

@@ -17,8 +17,8 @@ waterShallowInit(waterDeleteZ, waterShallowSplashZ) {
     level.waterDeleteZ = waterDeleteZ;
   }
 
-  level.trigUnderWater = GetEnt("trigger_underwater", "targetname");
-  level.trigAboveWater = GetEnt("trigger_abovewater", "targetname");
+  level.trigUnderWater = getEnt("trigger_underwater", "targetname");
+  level.trigAboveWater = getEnt("trigger_abovewater", "targetname");
   level.trigUnderWater thread watchPlayerEnterWater(level.trigAboveWater, waterShallowSplashZ);
   level thread clearWaterVarsOnspawn(level.trigUnderWater);
 
@@ -265,7 +265,7 @@ inWaterWake(waterShallowSplashZ) {
     if(abs(vel[2]) > 30) {
       playFX(level._effect["water_kick"], (self.origin[0], self.origin[1], min(zGround, self.origin[2])));
     } else if(Length2DSquared(vel) > 60 * 60) {
-      fwd = VectorNormalize((vel[0], vel[1], 0));
+      fwd = vectorNormalize((vel[0], vel[1], 0));
       playFX(level._effect["water_kick"], (self.origin[0], self.origin[1], min(zGround, self.origin[2])) + fwd * 36, fwd, (0, 0, 1));
     }
   }

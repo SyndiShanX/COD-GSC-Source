@@ -187,10 +187,10 @@ tomahawk_rumble(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, field
   if(newvalue) {
     switch (newvalue) {
       case 1:
-        self playrumbleonentity(localclientnum, "zm_weap_chakram_catch_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_chakram_catch_rumble");
         break;
       case 2:
-        self playrumbleonentity(localclientnum, "zm_weap_chakram_throw_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_chakram_throw_rumble");
         break;
     }
   }

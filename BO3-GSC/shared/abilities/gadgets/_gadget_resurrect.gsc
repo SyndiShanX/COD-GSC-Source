@@ -271,7 +271,7 @@ function do_resurrected_on_dead_body_fx() {
 }
 
 function do_resurrected_on_spawned_player_fx() {
-  playsoundatposition("mpl_resurrect_npc", self.origin);
+  playSoundAtPosition("mpl_resurrect_npc", self.origin);
   fx = playFX("player/fx_plyr_rejack_light", self.origin);
 }
 

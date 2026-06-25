@@ -50,11 +50,11 @@ function function_129a815f(localclientnum) {
 function function_47ecaed4(localclientnum) {
   level.var_ff4acd38 = [];
   i = 0;
-  var_8c9a6a50 = getent(localclientnum, "lighthouse_light_ring_1", "targetname");
+  var_8c9a6a50 = getEnt(localclientnum, "lighthouse_light_ring_1", "targetname");
   while(isDefined(var_8c9a6a50)) {
     level.var_ff4acd38[i] = var_8c9a6a50;
     i++;
-    var_8c9a6a50 = getent(localclientnum, "lighthouse_light_ring_" + (i + 1), "targetname");
+    var_8c9a6a50 = getEnt(localclientnum, "lighthouse_light_ring_" + (i + 1), "targetname");
   }
   for(;;) {
     function_e9849e59(localclientnum);

@@ -209,7 +209,7 @@ mechz_do_jump(wait_for_stationary_tank) {
   self.not_interruptable = 1;
   self setfreecameralockonallowed(0);
   self thread mechz_jump_vo();
-  self animscripted(self.origin, self.angles, "zm_fly_out");
+  self animScripted(self.origin, self.angles, "zm_fly_out");
   self maps\mp\animscripts\zm_shared::donotetracks("jump_anim");
   self ghost();
   self.mechz_hidden = 1;
@@ -224,7 +224,7 @@ mechz_do_jump(wait_for_stationary_tank) {
 
   self thread maps\mp\zombies\_zm_spawner::zombie_eye_glow_stop();
   self fx_cleanup();
-  self animscripted(self.origin, self.angles, "zm_fly_hover");
+  self animScripted(self.origin, self.angles, "zm_fly_hover");
   wait(level.mechz_jump_delay);
 
   if(isDefined(wait_for_stationary_tank) && wait_for_stationary_tank) {
@@ -242,7 +242,7 @@ mechz_do_jump(wait_for_stationary_tank) {
     self.closest_jump_point.angles = (0, 0, 0);
   }
 
-  self animscripted(self.closest_jump_point.origin, self.closest_jump_point.angles, "zm_fly_in");
+  self animScripted(self.closest_jump_point.origin, self.closest_jump_point.angles, "zm_fly_in");
   self solid();
   self.mechz_hidden = 0;
   self show();
@@ -275,6 +275,6 @@ mechz_kill_jump_watcher() {
 mechz_jump_cleanup() {
   self.fx_field = self.fx_field &~128;
   self setclientfield("mechz_fx", self.fx_field);
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("jump_complete");
 }

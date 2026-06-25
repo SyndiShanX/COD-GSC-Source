@@ -166,7 +166,7 @@ get_players_in_zone(zone_name, return_players) {
 
   zone = level.zones[zone_name];
   players_in_zone = [];
-  players = getplayers();
+  players = getPlayers();
 
   if(zm_utility::function_21f4ac36()) {
     foreach(player in players) {
@@ -224,7 +224,7 @@ any_player_in_zone(zone_name) {
   zone = level.zones[zone_name];
 
   if(zm_utility::function_21f4ac36()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(level.var_e5a996e8)) {
         node = [[level.var_e5a996e8]](player, zone);
       } else {
@@ -240,7 +240,7 @@ any_player_in_zone(zone_name) {
 
   if(zm_utility::function_c85ebbbc()) {
     for(i = 0; i < zone.volumes.size; i++) {
-      players = getplayers();
+      players = getPlayers();
 
       for(j = 0; j < players.size; j++) {
         if(players[j] istouching(zone.volumes[i]) && !(players[j].sessionstate == "spectator")) {
@@ -514,7 +514,7 @@ zone_init(zone_name, zone_tag) {
     }
 
     for(i = 0; i < box_locs.size; i++) {
-      chest_ent = getent(box_locs[i].script_noteworthy + "_zbarrier", "script_noteworthy");
+      chest_ent = getEnt(box_locs[i].script_noteworthy + "_zbarrier", "script_noteworthy");
 
       if(chest_ent entity_in_zone(zone_name, 1)) {
         if(!isDefined(zone.magic_boxes)) {
@@ -1234,7 +1234,7 @@ function private function_8a9003ae() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     if(!isDefined(players) || players.size == 0) {
       continue;
@@ -1340,11 +1340,11 @@ function_d4cf2b9b(force_update = 0) {
       level.zone_paths = [];
     }
 
-    players = getplayers();
+    players = getPlayers();
     active_players = [];
     zone_paths = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.sessionstate !== "spectator") {
         active_players[active_players.size] = player;
       }

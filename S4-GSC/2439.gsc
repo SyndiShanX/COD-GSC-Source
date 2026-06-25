@@ -1562,17 +1562,17 @@ _id_CF90(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_11 = var_0.origin - (0, 0, var_7);
 
   for(;;) {
-    var_0 moveto(var_10, var_6, var_8, var_9);
+    var_0 moveTo(var_10, var_6, var_8, var_9);
 
     if(var_5) {
-      var_0 rotateyaw(var_0.angles[2] + 45, var_6);
+      var_0 rotateYaw(var_0.angles[2] + 45, var_6);
     }
 
     wait(var_6);
-    var_0 moveto(var_11, var_6, var_8, var_9);
+    var_0 moveTo(var_11, var_6, var_8, var_9);
 
     if(var_5) {
-      var_0 rotateyaw(var_0.angles[2] + 45, var_6);
+      var_0 rotateYaw(var_0.angles[2] + 45, var_6);
     }
 
     wait(var_6);

@@ -132,8 +132,8 @@ electric_trap_fx(name, side) {
 }
 
 zapper_switch_fx(ent) {
-  switchfx = getstruct("zapper_switch_fx_" + ent, "targetname");
-  zapperfx = getstruct("zapper_fx_" + ent, "targetname");
+  switchfx = getStruct("zapper_switch_fx_" + ent, "targetname");
+  zapperfx = getStruct("zapper_fx_" + ent, "targetname");
 
   switch_forward = anglesToForward(switchfx.angles);
   switch_up = anglestoup(switchfx.angles);

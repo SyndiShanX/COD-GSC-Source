@@ -85,7 +85,7 @@ set_lighting_values() {
 }
 
 dynamic_ents() {
-  emergency_state = GetEnt("mp_recovery_signage", "targetname");
+  emergency_state = getEnt("mp_recovery_signage", "targetname");
   wait(.05);
   emergency_state hide_notsolid();
   FlickerLights();
@@ -153,9 +153,9 @@ dynamic_ents() {
 }
 
 recovery_dynamic_event() {
-  hologram_signs = GetEnt("hologram_signs", "targetname");
+  hologram_signs = getEnt("hologram_signs", "targetname");
   hologram_signs hide_notsolid();
-  emergency_state = GetEnt("mp_recovery_signage", "targetname");
+  emergency_state = getEnt("mp_recovery_signage", "targetname");
   emergency_state show();
   thread KillLights();
   thread spawnHangarDoors();
@@ -219,7 +219,7 @@ dynamic_pathing_main() {
 
   foreach(door in hangar_doors) {
     if(door.classname == "script_brushmodel") {
-      door DisconnectPaths();
+      door disconnectPaths();
     }
   }
 }
@@ -271,8 +271,8 @@ spawnHangarDoors() {
   level.DynamicEventStatus = "event_in_progress";
 
   foreach(rightdoor in rightdoorArray) {
-    rightdoorOrigin = GetEnt(rightdoor.target, "targetname");
-    rightdoor MoveTo(rightdoorOrigin.origin, door_open_time);
+    rightdoorOrigin = getEnt(rightdoor.target, "targetname");
+    rightdoor moveTo(rightdoorOrigin.origin, door_open_time);
   }
 
   thread notify_doors_open(door_open_time);
@@ -286,9 +286,9 @@ spawnHangarDoors() {
   level waittill("close_doors");
 
   foreach(rightdoor in rightdoorArray) {
-    rightdoorOrigin = GetEnt(rightdoor.target, "targetname");
-    rightdoorclose = GetEnt(rightdoorOrigin.target, "targetname");
-    rightdoor MoveTo(rightdoorclose.origin, door_close_time);
+    rightdoorOrigin = getEnt(rightdoor.target, "targetname");
+    rightdoorclose = getEnt(rightdoorOrigin.target, "targetname");
+    rightdoor moveTo(rightdoorclose.origin, door_close_time);
     level thread maps\mp\mp_recovery_fx::sulfur_door_fx();
   }
 
@@ -393,7 +393,7 @@ gasCloudStart() {
 
   gas_cloud_travel_time = 40;
   door_close_time = 12;
-  level.gas_cloud_origin moveto((level.gas_cloud_origin.origin + (0, 3912, 0)), gas_cloud_travel_time);
+  level.gas_cloud_origin moveTo((level.gas_cloud_origin.origin + (0, 3912, 0)), gas_cloud_travel_time);
   level.gas_cloud_origin thread killPlayersInCloud(gas_cloud_travel_time + door_close_time, 7.5);
   start_door_close_time = gas_cloud_travel_time - (door_close_time / 2);
   thread setup_poison_gas_death();
@@ -653,7 +653,7 @@ play_earthquake_rumble(time) {
   frames = time * 20;
 
   while(frames >= 0) {
-    self PlayRumbleOnEntity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait(.1);
     frames = frames - 2;
   }

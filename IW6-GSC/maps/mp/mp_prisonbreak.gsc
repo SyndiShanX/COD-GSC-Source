@@ -60,7 +60,7 @@ initPatchModels() {
   blackThing1 setModel("defaultvehicle");
   blackThing1.angles = (359.24, 258.983, -8.0374);
 
-  collision1 = GetEnt("clip128x128x128", "targetname");
+  collision1 = getEnt("clip128x128x128", "targetname");
   collision1Ent = spawn("script_model", (1112, 1859.07, 949.574));
   collision1Ent.angles = (0, 325, 45);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
@@ -82,9 +82,9 @@ onBombTimerEnd() {
   door1 = getEnt("prisondoor1", "targetname");
   door2 = getEnt("prisondoor2", "targetname");
 
-  door1 RotateYaw(-70, 0.5);
+  door1 rotateYaw(-70, 0.5);
   door1 playSound("scn_prison_gate_right");
-  door2 RotateYaw(70, 0.5);
+  door2 rotateYaw(70, 0.5);
   door1 playSound("scn_prison_gate_left");
 
   wait(1);
@@ -140,7 +140,7 @@ holdPrisoner() {
 
   self _disableWeapon();
   anchor = spawn("script_origin", self.origin);
-  self playerLinkTo(anchor);
+  self playerlinkTo(anchor);
 
   level waittill("sd_free_prisoners");
 
@@ -598,10 +598,10 @@ tree_bridge_init() {
   self.animated_prop setModel("generic_prop_raven");
   self.animated_prop.angles = self.tree.angles;
 
-  self.tree LinkTo(self.animated_prop, "j_prop_2");
+  self.tree linkTo(self.animated_prop, "j_prop_2");
 
   foreach(ent in self.linked_ents) {
-    ent LinkTo(self.tree);
+    ent linkTo(self.tree);
   }
 
   self thread tree_bridge_run();
@@ -663,7 +663,7 @@ tree_bridge_run() {
   anim_length = GetAnimLength(%mp_prisonbreak_tree_fall);
   fall_time = anim_length - 0.3;
 
-  sound_origin = GetEnt("tree_impact_sound_origin", "targetname");
+  sound_origin = getEnt("tree_impact_sound_origin", "targetname");
   sound_origin delayThread(fall_time, ::PlaySound_wrapper, "scn_prison_tree_impact");
 
   wait(fall_time);
@@ -690,7 +690,7 @@ tree_bridge_run() {
     }
   }
 
-  clip_base = getent("tree_base_clip", "targetname");
+  clip_base = getEnt("tree_base_clip", "targetname");
   if(isDefined(clip_base)) {
     clip_base Delete();
   }
@@ -758,7 +758,7 @@ log_pile_init() {
       case "log":
         self.logs[self.logs.size] = target_ent;
         if(isDefined(target_ent.target)) {
-          target_ent.endpos = getstruct(target_ent.target, "targetname");
+          target_ent.endpos = getStruct(target_ent.target, "targetname");
         }
         break;
       case "animated_log_use_visuals":
@@ -787,9 +787,9 @@ log_pile_init() {
       case "clip_move":
 
         if(isDefined(target_ent.target)) {
-          target_ent.end_pos = getstruct(target_ent.target, "targetname");
+          target_ent.end_pos = getStruct(target_ent.target, "targetname");
           if(isDefined(target_ent.end_pos) && isDefined(target_ent.end_pos.target)) {
-            target_ent.start_pos = getstruct(target_ent.end_pos.target, "targetname");
+            target_ent.start_pos = getStruct(target_ent.end_pos.target, "targetname");
             if(isDefined(target_ent.start_pos)) {
               target_ent.move_delta = target_ent.end_pos.origin - target_ent.start_pos.origin;
               if(target_ent is_dynamic_path()) {
@@ -809,15 +809,15 @@ log_pile_init() {
       case "kill_trigger":
         self.kill_trigger = target_ent;
         if(isDefined(self.kill_trigger.target)) {
-          self.kill_trigger.start_pos = getstruct(self.kill_trigger.target, "targetname");
+          self.kill_trigger.start_pos = getStruct(self.kill_trigger.target, "targetname");
           if(isDefined(self.kill_trigger.start_pos) && isDefined(self.kill_trigger.start_pos.target)) {
-            self.kill_trigger.end_pos = getstruct(self.kill_trigger.start_pos.target, "targetname");
+            self.kill_trigger.end_pos = getStruct(self.kill_trigger.start_pos.target, "targetname");
             if(isDefined(self.kill_trigger.end_pos)) {
               self.kill_trigger.script_mover = spawn("script_model", self.kill_trigger.start_pos.origin);
               self.kill_trigger.script_mover setModel("tag_origin");
 
-              self.kill_trigger EnableLinkTo();
-              self.kill_trigger LinkTo(self.kill_trigger.script_mover, "tag_origin");
+              self.kill_trigger EnablelinkTo();
+              self.kill_trigger linkTo(self.kill_trigger.script_mover, "tag_origin");
             }
           }
         }
@@ -849,7 +849,7 @@ log_pile_init() {
     foreach(linked_kill_trigger in self.kill_trigger_linked) {
       linked_kill_trigger.killCamEnt = self.killCamEnt;
 
-      linked_kill_trigger EnableLinkTo();
+      linked_kill_trigger EnablelinkTo();
       linked_kill_trigger.no_moving_platfrom_unlink = true;
       linked_kill_trigger linkTo(link_visuals_to, linked_kill_trigger.script_parameters);
     }
@@ -867,9 +867,9 @@ log_pile_init() {
 
   if(isDefined(link_visuals_to) && isDefined(self.use_model)) {
     if(isDefined(link_visuals_to_tag)) {
-      self.use_model LinkTo(link_visuals_to, link_visuals_to_tag);
+      self.use_model linkTo(link_visuals_to, link_visuals_to_tag);
     } else {
-      self.use_model LinkTo(link_visuals_to);
+      self.use_model linkTo(link_visuals_to);
     }
   }
 }
@@ -926,12 +926,12 @@ log_pile_run() {
   }
 
   if(isDefined(self.kill_trigger) && isDefined(self.kill_trigger.script_mover)) {
-    self.kill_trigger.script_mover MoveTo(self.kill_trigger.end_pos.origin, log_roll_time, log_roll_time * .5, 0);
+    self.kill_trigger.script_mover moveTo(self.kill_trigger.end_pos.origin, log_roll_time, log_roll_time * .5, 0);
   }
 
   foreach(log in self.logs) {
     if(isDefined(log.endpos)) {
-      log MoveTo(log.endpos.origin, log_roll_time, log_roll_time * .5, 0);
+      log moveTo(log.endpos.origin, log_roll_time, log_roll_time * .5, 0);
 
       delta_angles = log.endpos.angles - log.angles;
       delta_angles = normalize_angles_180(delta_angles);
@@ -947,7 +947,7 @@ log_pile_run() {
 
     throw_vec = (-20000, 0, 9000);
     offset = (0, 0, 50);
-    delete_volume = GetEnt("care_package_delete_volume", "targetname");
+    delete_volume = getEnt("care_package_delete_volume", "targetname");
 
     maps\mp\killstreaks\_airdrop::throw_linked_care_packages(animated_log, offset, throw_vec, delete_volume);
 
@@ -973,7 +973,7 @@ log_pile_run() {
 
 log_pile_clip_move(delay_time, move_time) {
   wait(delay_time);
-  self MoveTo(self.origin + self.move_delta, move_time);
+  self moveTo(self.origin + self.move_delta, move_time);
 }
 
 log_pile_kill_trigger(trigger) {
@@ -1030,12 +1030,12 @@ falling_rock_init() {
     }
     switch (target.script_noteworthy) {
       case "kill_trigger":
-        target EnableLinkTo();
-        target LinkTo(self);
+        target EnablelinkTo();
+        target linkTo(self);
         self.kill_trigger = target;
         break;
       case "rock_clip":
-        target LinkTo(self);
+        target linkTo(self);
         self.clip = target;
         break;
       case "fall_to":
@@ -1045,7 +1045,7 @@ falling_rock_init() {
 
         while(isDefined(target.target)) {
           prev_target = target;
-          target = getstruct(target.target, "targetname");
+          target = getStruct(target.target, "targetname");
           if(!isDefined(target)) {
             break;
           }
@@ -1059,9 +1059,9 @@ falling_rock_init() {
       case "clip_move":
 
         if(isDefined(target.target)) {
-          target.end_pos = getstruct(target.target, "targetname");
+          target.end_pos = getStruct(target.target, "targetname");
           if(isDefined(target.end_pos) && isDefined(target.end_pos.target)) {
-            target.start_pos = getstruct(target.end_pos.target, "targetname");
+            target.start_pos = getStruct(target.end_pos.target, "targetname");
             if(isDefined(target.start_pos)) {
               target.move_delta = target.end_pos.origin - target.start_pos.origin;
               target.origin = target.origin - target.move_delta;
@@ -1120,15 +1120,15 @@ falling_rock_run() {
 
     time = (next.fall_dist / self.fall_dist) * fall_time;
 
-    self MoveTo(next.origin, time, time * accel, 0);
-    self RotateTo(next.angles, time, time * accel, 0);
+    self moveTo(next.origin, time, time * accel, 0);
+    self rotateTo(next.angles, time, time * accel, 0);
 
     if(i == self.fall_to.size - 1) {
       foreach(clip_move in self.clip_move) {
         if(clip_move is_dynamic_path()) {
           clip_move delayCall(time, ::DisconnectPaths);
         }
-        clip_move MoveTo(clip_move.origin + clip_move.move_delta, time);
+        clip_move moveTo(clip_move.origin + clip_move.move_delta, time);
       }
     }
 
@@ -1177,14 +1177,14 @@ rock_slides_init() {
     switch (target.script_noteworthy) {
       case "ground":
         if(isDefined(target.target) && !remove) {
-          target.start_pos = getstruct(target.target, "targetname");
+          target.start_pos = getStruct(target.target, "targetname");
           if(isDefined(target.start_pos) && isDefined(target.start_pos.target)) {
-            target.end_pos = getstruct(target.start_pos.target, "targetname");
+            target.end_pos = getStruct(target.start_pos.target, "targetname");
             if(isDefined(target.end_pos)) {
               target.move_ent = spawn("script_model", target.start_pos.origin);
               target.move_ent setModel("tag_origin");
               target.move_ent.angles = target.start_pos.angles;
-              target LinkTo(target.move_ent);
+              target linkTo(target.move_ent);
               self.ground_ents[self.ground_ents.size] = target;
               target.move_delete = isDefined(target.end_pos.script_noteworthy) && target.end_pos.script_noteworthy == "delete";
             }
@@ -1195,7 +1195,7 @@ rock_slides_init() {
         if(remove) {
           target Delete();
         } else {
-          target.end_pos = getstruct(target.target, "targetname");
+          target.end_pos = getStruct(target.target, "targetname");
           if(isDefined(target.end_pos)) {
             self.rocks[self.rocks.size] = target;
             target.move_delete = isDefined(target.end_pos.script_noteworthy) && target.end_pos.script_noteworthy == "delete";
@@ -1245,8 +1245,8 @@ rock_slide_run() {
 
   rock_time = 1.5;
   foreach(rock in self.rocks) {
-    rock MoveTo(rock.end_pos.origin, rock_time, rock_time, 0);
-    rock RotateTo(rock.end_pos.angles, rock_time, rock_time, 0);
+    rock moveTo(rock.end_pos.origin, rock_time, rock_time, 0);
+    rock rotateTo(rock.end_pos.angles, rock_time, rock_time, 0);
     if(rock.move_delete) {
       rock delayCall(rock_time, ::delete);
     }
@@ -1256,8 +1256,8 @@ rock_slide_run() {
 
   slide_time = 1;
   foreach(ent in self.ground_ents) {
-    ent.move_ent MoveTo(ent.end_pos.origin, slide_time, slide_time, 0);
-    ent.move_ent RotateTo(ent.end_pos.angles, slide_time, slide_time, 0);
+    ent.move_ent moveTo(ent.end_pos.origin, slide_time, slide_time, 0);
+    ent.move_ent rotateTo(ent.end_pos.angles, slide_time, slide_time, 0);
     if(ent.move_delete) {
       ent delayCall(rock_time, ::delete);
     }
@@ -1326,7 +1326,7 @@ hand_icon_update(type, origin, angles, icon_id, end_ons) {
 
       dir_check = true;
       if(isDefined(dir)) {
-        dir_to_player = VectorNormalize(test_origin - origin);
+        dir_to_player = vectorNormalize(test_origin - origin);
         dir_check = VectorDot(dir, dir_to_player) > .2;
       }
 
@@ -1383,7 +1383,7 @@ hand_icon_fade_out() {
 }
 
 tower_radio() {
-  tower_radio = GetEnt("tower_radio", "targetname");
+  tower_radio = getEnt("tower_radio", "targetname");
 
   tower_radio.tracklist = [];
   tower_radio.tracklist[0] = "mus_emt_portable_radio_01";

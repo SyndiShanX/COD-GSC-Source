@@ -58,7 +58,7 @@ class robotphalanx {
     if(!scattered_) {
       _assignphalanxstance(tier1robots_, "stand");
       wait(1);
-      forward = vectornormalize(endposition_ - startposition_);
+      forward = vectorNormalize(endposition_ - startposition_);
       _movephalanxtier(tier1robots_, phalanxtype_, "phalanx_tier1", endposition_, forward);
       _movephalanxtier(tier2robots_, phalanxtype_, "phalanx_tier2", endposition_, forward);
       _movephalanxtier(tier3robots_, phalanxtype_, "phalanx_tier3", endposition_, forward);
@@ -72,7 +72,7 @@ class robotphalanx {
     assert(isvec(origin));
     assert(isvec(destination));
     maxtiersize = math::clamp(maxtiersize, 1, 10);
-    forward = vectornormalize(destination - origin);
+    forward = vectorNormalize(destination - origin);
     tier1robots_ = _createphalanxtier(phalanxtype, "phalanx_tier1", origin, forward, maxtiersize, tieronespawner);
     tier2robots_ = _createphalanxtier(phalanxtype, "phalanx_tier2", origin, forward, maxtiersize, tiertwospawner);
     tier3robots_ = _createphalanxtier(phalanxtype, "phalanx_tier3", origin, forward, maxtiersize, tierthreespawner);

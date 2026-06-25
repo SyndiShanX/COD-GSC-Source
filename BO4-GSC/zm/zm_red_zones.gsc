@@ -245,7 +245,7 @@ function_a929cb60(s_spot) {
     str_anim = #"ai_zombie_base_traverse_ground_climbout_fast";
   }
 
-  self animscripted("rise_anim", self.origin, s_spot.angles, str_anim, "normal");
+  self animScripted("rise_anim", self.origin, s_spot.angles, str_anim, "normal");
 }
 
 hide_pop() {

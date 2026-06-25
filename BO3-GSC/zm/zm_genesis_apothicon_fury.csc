@@ -43,6 +43,6 @@ function function_87fb20f7(localclientnum, oldval, newval, bnewent, binitialsnap
   if(newval == 2) {
     playFXOnTag(localclientnum, level._effect["apothicon_fury_meteor_exp"], self, "tag_origin");
     self earthquake(0.1, 1, self.origin, 100);
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
   }
 }

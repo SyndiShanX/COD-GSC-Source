@@ -194,7 +194,7 @@ event_handler[level_init] main(eventstruct) {
   callback::on_round_begin(&play_avalanche);
 
   if(!zm_utility::is_ee_enabled()) {
-    e_ind = getent("ee_ind", "targetname");
+    e_ind = getEnt("ee_ind", "targetname");
 
     if(isDefined(e_ind)) {
       e_ind delete();
@@ -210,7 +210,7 @@ event_handler[level_init] main(eventstruct) {
 
   level thread zm_orange_devgui::init();
 
-  e_spawner = getent("zombie_spawner", "script_noteworthy");
+  e_spawner = getEnt("zombie_spawner", "script_noteworthy");
   e_spawner spawner::add_spawn_function(&function_6be9c49c);
   level flag::init(#"hash_7a06360d0821c8e1");
   level thread function_227dcc04();
@@ -241,7 +241,7 @@ assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
@@ -628,7 +628,7 @@ function_227dcc04() {
 }
 
 function_b5695720() {
-  e_spawner = getent("scientist_spawner", "script_noteworthy");
+  e_spawner = getEnt("scientist_spawner", "script_noteworthy");
   e_spawner.script_noteworthy = "zombie_spawner";
   e_spawner spawner::add_spawn_function(&zm_behavior::function_57d3b5eb);
   e_spawner spawner::add_spawn_function(&function_bdf62232);

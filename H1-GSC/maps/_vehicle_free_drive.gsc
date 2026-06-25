@@ -215,7 +215,7 @@ setup_free_drive_path(var_0) {
 }
 
 create_path(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_2 = [];
   var_3 = 0;
   var_4 = var_1;
@@ -224,7 +224,7 @@ create_path(var_0) {
     var_5 = var_1;
 
     if(isDefined(var_1.target)) {
-      var_5 = common_scripts\utility::getstruct(var_1.target, "targetname");
+      var_5 = common_scripts\utility::getStruct(var_1.target, "targetname");
     }
 
     var_1.origin = drop_point_to_ground(var_1.origin);
@@ -236,7 +236,7 @@ create_path(var_0) {
     var_1.col_moving_volumes = [];
     var_1.origins = [];
     var_1.origins["left"] = var_1.origin;
-    var_6 = common_scripts\utility::getstruct(var_1.script_linkto, "script_linkname");
+    var_6 = common_scripts\utility::getStruct(var_1.script_linkto, "script_linkname");
     var_6.origin = drop_point_to_ground(var_6.origin);
     var_1.origins["right"] = var_6.origin;
     var_1.road_width = distance(var_1.origins["right"], var_1.origins["left"]);
@@ -278,7 +278,7 @@ add_collision_to_path(var_0) {
   var_1 = common_scripts\utility::getStructArray("road_path_col", "targetname");
 
   foreach(var_3 in var_1) {
-    var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
     var_3.origin = drop_point_to_ground(var_3.origin);
     var_4.origin = drop_point_to_ground(var_4.origin);
     var_3.other_col_point = var_4;
@@ -1051,14 +1051,14 @@ progress_dif(var_0, var_1, var_2, var_3) {
 
 get_progression_between_points(var_0, var_1, var_2) {
   var_3 = [];
-  var_4 = vectornormalize(var_2 - var_1);
+  var_4 = vectorNormalize(var_2 - var_1);
   var_5 = var_0 - var_1;
   var_6 = vectordot(var_5, var_4);
   var_7 = var_1 + var_4 * var_6;
   var_3["progress"] = var_6;
   var_3["offset"] = distance2d(var_7, var_0);
   var_8 = anglestoright(vectortoangles(var_4));
-  var_9 = vectornormalize(var_7 - var_0);
+  var_9 = vectorNormalize(var_7 - var_0);
   var_10 = vectordot(var_8, var_9);
   var_3["side"] = "right";
 

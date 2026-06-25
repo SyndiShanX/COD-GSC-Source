@@ -10,7 +10,7 @@
 init() {
   trigs = getEntArray("claymore_purchase", "targetname");
   for(i = 0; i < trigs.size; i++) {
-    model = getent(trigs[i].target, "targetname");
+    model = getEnt(trigs[i].target, "targetname");
     model hide();
   }
   array_thread(trigs, ::buy_claymores);
@@ -22,7 +22,7 @@ init() {
 }
 buy_claymores() {
   self.zombie_cost = 1000;
-  self sethintstring(&"ZOMBIE_CLAYMORE_PURCHASE");
+  self setHintString(&"ZOMBIE_CLAYMORE_PURCHASE");
   self setCursorHint("HINT_NOICON");
   level thread set_claymore_visible();
   self.claymores_triggered = false;
@@ -45,7 +45,7 @@ buy_claymores() {
           who thread claymore_setup();
           who thread show_claymore_hint("claymore_purchased");
           if(self.claymores_triggered == false) {
-            model = getent(self.target, "targetname");
+            model = getEnt(self.target, "targetname");
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.claymores_triggered = true;
           }
@@ -61,7 +61,7 @@ buy_claymores() {
   }
 }
 set_claymore_visible() {
-  players = getplayers();
+  players = getPlayers();
   trigs = getEntArray("claymore_purchase", "targetname");
   while(1) {
     for(j = 0; j < players.size; j++) {
@@ -72,7 +72,7 @@ set_claymore_visible() {
       }
     }
     wait(1);
-    players = getplayers();
+    players = getPlayers();
   }
 }
 claymore_watch() {
@@ -129,7 +129,7 @@ pickup_claymores_trigger_listener_enable(trigger, player) {
       return;
     }
     trigger trigger_on();
-    trigger linkto(self);
+    trigger linkTo(self);
   }
 }
 pickup_claymores_trigger_listener_disable(trigger, player) {
@@ -151,7 +151,7 @@ shouldAffectWeaponObject(object) {
   if(dist < level.claymore_detectionMinDist) {
     return false;
   }
-  dirToPos = vectornormalize(dirToPos);
+  dirToPos = vectorNormalize(dirToPos);
   dot = vectorDot(dirToPos, objectForward);
   return (dot > level.claymore_detectionDot);
 }
@@ -166,8 +166,8 @@ claymore_detonation() {
     playerTeamToAllow = "allies";
   }
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateRadius), spawnFlag, detonateRadius, detonateRadius * 2);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self thread delete_claymores_on_death(damagearea);
   if(!isDefined(level.claymores)) {
     level.claymores = [];

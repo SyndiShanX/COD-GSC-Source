@@ -57,13 +57,13 @@ arrival() {
   level.ai_salazar = init_hero("salazar_pistol");
   level.ai_salazar set_blend_in_out_times(0.2);
   level thread setup_vtol("player_vtol");
-  level.m_duffle_bag = getent("duffle_bag", "targetname");
+  level.m_duffle_bag = getEnt("duffle_bag", "targetname");
   level.m_duffle_bag set_blend_in_out_times(0.2);
-  level.m_harper_briefcase = getent("harper_briefcase", "targetname");
+  level.m_harper_briefcase = getEnt("harper_briefcase", "targetname");
   level.m_harper_briefcase set_blend_in_out_times(0.2);
   level.m_player_briefcase = spawn_model("p6_spiderbot_case_anim");
   level.m_player_briefcase.animname = "player_briefcase";
-  vtol_clip = getent("clip_vtol_blocker", "targetname");
+  vtol_clip = getEnt("clip_vtol_blocker", "targetname");
   vtol_clip trigger_off();
   a_ai_security_single = simple_spawn_single("security1");
   a_ai_security_single add_cleanup_ent("cleanup_checkin");
@@ -79,7 +79,7 @@ arrival() {
   exploder(105);
   flag_wait("starting final intro screen fadeout");
   exploder(102);
-  playsoundatposition("evt_jet_intro", (0, 0, 0));
+  playSoundAtPosition("evt_jet_intro", (0, 0, 0));
   level thread setup_vtol("takeoff_vtol", "start_vtol_takeoff");
   level thread setup_vtol("intro_vtol");
   level thread setup_asds();
@@ -339,15 +339,15 @@ setup_lighting_pairs(ent) {
 }
 
 setup_lighting_alignment_for_plane_exit() {
-  s_align = getstruct("intro_landing", "targetname");
+  s_align = getStruct("intro_landing", "targetname");
   m_align_scene = spawn_model("tag_origin", s_align.origin, s_align.angles);
-  vh_plane = getent("player_vtol", "targetname");
+  vh_plane = getEnt("player_vtol", "targetname");
   m_align_plane = spawn_model("tag_origin", vh_plane.origin, vh_plane.angles);
   m_align_scene.targetname = "align_plane_exit_lighting";
-  m_align_scene linkto(m_align_plane);
-  m_lighting_org = getent("player_vtol_lighting_org", "targetname");
-  m_align_plane moveto(m_lighting_org.origin, 0.05);
-  m_align_plane rotateto(m_lighting_org.angles, 0.05);
+  m_align_scene linkTo(m_align_plane);
+  m_lighting_org = getEnt("player_vtol_lighting_org", "targetname");
+  m_align_plane moveTo(m_lighting_org.origin, 0.05);
+  m_align_plane rotateTo(m_lighting_org.angles, 0.05);
   m_align_plane waittill("movedone");
   level thread lighting_alignment_cleanup_for_plane_exit(m_align_plane, m_lighting_org, m_align_scene);
 }
@@ -374,11 +374,11 @@ lighting_alignment_cleanup_for_plane_exit(m_align_plane, m_lighting_org, m_align
 
 landing_player_scenes(vh_vtol) {
   run_scene_first_frame("final_approach_squad");
-  level.ai_harper linkto(vh_vtol);
-  level.ai_salazar linkto(vh_vtol);
-  level.m_duffle_bag linkto(vh_vtol);
-  level.m_harper_briefcase linkto(vh_vtol);
-  level.m_player_briefcase linkto(vh_vtol);
+  level.ai_harper linkTo(vh_vtol);
+  level.ai_salazar linkTo(vh_vtol);
+  level.m_duffle_bag linkTo(vh_vtol);
+  level.m_harper_briefcase linkTo(vh_vtol);
+  level.m_player_briefcase linkTo(vh_vtol);
   flag_wait("starting final intro screen fadeout");
   level thread visionset_flyin();
   delay_thread(25.0, ::flyin_show_cells);
@@ -394,23 +394,23 @@ landing_player_scenes(vh_vtol) {
   level thread run_scene_and_delete("landing_player");
   level.player thread maps\createart\karma_art::vision_set_change("sp_karma_intro");
   level thread maps\karma_checkin::pa_dialog();
-  vtol_clip = getent("clip_vtol_blocker", "targetname");
+  vtol_clip = getEnt("clip_vtol_blocker", "targetname");
   vtol_clip trigger_on();
   scene_wait("landing_player");
   level.m_player_briefcase delete();
-  t_obj = getent("clip_scanner_blocker_2", "targetname");
+  t_obj = getEnt("clip_scanner_blocker_2", "targetname");
   set_objective(level.obj_security, t_obj);
   level.player_interactive_model = "c_usa_masonjr_karma_armlaunch_viewbody";
 }
 
 landing_player_scene_start(m_player_body) {
-  glasses = getent("glasses", "targetname");
+  glasses = getEnt("glasses", "targetname");
   glasses setviewmodelrenderflag(1);
   m_player_body setviewmodelrenderflag(1);
 }
 
 landing_rumble_start(ent) {
-  level.player playrumbleonentity("karma_landing");
+  level.player playRumbleOnEntity("karma_landing");
 }
 
 visionset_flyin() {
@@ -583,10 +583,10 @@ arrival_cleanup() {
 }
 
 flyin_dialog_pilot() {
-  s_struct = getstruct("flyin_pilot_vo_struct", "targetname");
+  s_struct = getStruct("flyin_pilot_vo_struct", "targetname");
   e_pos = spawn("script_origin", s_struct.origin);
   flag_wait("final_approach_pilots_started");
-  e_pos linkto(getent("player_vtol", "targetname"));
+  e_pos linkTo(getEnt("player_vtol", "targetname"));
   ai_pilot = get_model_or_models_from_scene("final_approach_pilots", "pilot");
   e_pos say_dialog("cont_icarus_9_you_are_c_0", undefined, 1);
   e_pos say_dialog("cont_maintain_current_hea_0", undefined, 1);

@@ -14,40 +14,40 @@ venomx_init() {
 }
 
 init_door_ent_model_update() {
-  var_0 = getent("fuse_box_door", "script_noteworthy");
+  var_0 = getEnt("fuse_box_door", "script_noteworthy");
   var_0 setModel("cp_final_ship_hallway_control_box_door");
 }
 
 init_containment_pad_stuff() {
-  level.zomb_goal_containment_struct = scripts\engine\utility::getstruct("zomb_goal_containment", "script_noteworthy");
-  level.containmentpadtop = getent("pad_top", "script_noteworthy");
+  level.zomb_goal_containment_struct = scripts\engine\utility::getStruct("zomb_goal_containment", "script_noteworthy");
+  level.containmentpadtop = getEnt("pad_top", "script_noteworthy");
   level.openpositioncontainmenttop = (939.5, 5620, 264);
   level.closedpositioncontainmenttop = level.containmentpadtop.origin;
-  level.containmentpadbottom = getent("pad_bottom", "script_noteworthy");
+  level.containmentpadbottom = getEnt("pad_bottom", "script_noteworthy");
   level.closedpositioncontainmentbottom = level.containmentpadbottom.origin;
   level.openpositioncontainmentbottom = (939.5, 5620, -8);
-  level.timeperiodmodel = getent("timeperiod_model", "script_noteworthy");
+  level.timeperiodmodel = getEnt("timeperiod_model", "script_noteworthy");
   wait(10);
   level thread unblock_venomx_pad();
 }
 
 unblock_venomx_pad() {
-  level.containmentpadtop moveto(level.openpositioncontainmenttop, 0.2);
-  level.containmentpadbottom moveto(level.openpositioncontainmentbottom, 0.2);
-  var_0 = getent("venomx_pad_blocker", "script_noteworthy");
+  level.containmentpadtop moveTo(level.openpositioncontainmenttop, 0.2);
+  level.containmentpadbottom moveTo(level.openpositioncontainmentbottom, 0.2);
+  var_0 = getEnt("venomx_pad_blocker", "script_noteworthy");
   var_0 notsolid();
   var_0 connectpaths();
   scripts\engine\utility::play_sound_in_space("zmb_containment_pod_open", level.zomb_goal_containment_struct.origin);
-  level.zombie_trap = getent("zombie_trap", "script_noteworthy");
+  level.zombie_trap = getEnt("zombie_trap", "script_noteworthy");
   level.zombie_trap hide();
 }
 
 block_venomx_pad() {
-  level.containmentpadtop moveto(level.closedpositioncontainmenttop, 0.2);
-  level.containmentpadbottom moveto(level.closedpositioncontainmentbottom, 0.2);
-  var_0 = getent("venomx_pad_blocker", "script_noteworthy");
+  level.containmentpadtop moveTo(level.closedpositioncontainmenttop, 0.2);
+  level.containmentpadbottom moveTo(level.closedpositioncontainmentbottom, 0.2);
+  var_0 = getEnt("venomx_pad_blocker", "script_noteworthy");
   var_0 solid();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   scripts\engine\utility::play_sound_in_space("zmb_containment_pod_close", level.zomb_goal_containment_struct.origin);
   level.zombie_trap show();
 }
@@ -69,19 +69,19 @@ movemodelwithdpad(var_0, var_1) {
 
     switch (var_2) {
       case "pad_up":
-        var_0 moveto(level.openpositioncontainmenttop, 0.2);
+        var_0 moveTo(level.openpositioncontainmenttop, 0.2);
         break;
 
       case "pad_down":
-        var_1 moveto(level.openpositioncontainmentbottom, 0.2);
+        var_1 moveTo(level.openpositioncontainmentbottom, 0.2);
         break;
 
       case "pad_left":
-        var_0 moveto(level.closedpositioncontainmenttop, 0.2);
+        var_0 moveTo(level.closedpositioncontainmenttop, 0.2);
         break;
 
       case "pad_right":
-        var_1 moveto(level.closedpositioncontainmentbottom, 0.2);
+        var_1 moveTo(level.closedpositioncontainmentbottom, 0.2);
         break;
 
       default:
@@ -139,13 +139,13 @@ init_timer_texture() {
 }
 
 move_venomx_locker_door(var_0) {
-  var_1 = getent("venomx_locker_door", "script_noteworthy");
+  var_1 = getEnt("venomx_locker_door", "script_noteworthy");
   if(var_0) {
-    var_1 rotateto((0, 105, 0), 0.1);
+    var_1 rotateTo((0, 105, 0), 0.1);
     return;
   }
 
-  var_1 rotateto((0, 315, 0), 0.1);
+  var_1 rotateTo((0, 315, 0), 0.1);
 }
 
 setup_wire_models() {
@@ -580,7 +580,7 @@ phone_exit_damage() {
 
 player_clock_tick_sfx(var_0) {
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playLoopSound("quest_rewind_clock_tick_long");
   level waittill("containment_timer_sfx_done");
   var_1 stoploopsound();
@@ -713,14 +713,14 @@ update_player_monitor_wires(var_0) {
 }
 
 move_fuse_box_door(var_0) {
-  var_1 = getent("fuse_box_door", "script_noteworthy");
+  var_1 = getEnt("fuse_box_door", "script_noteworthy");
   var_2 = "";
   if(var_0) {
     var_2 = "zmb_venx_fuse_box_open";
-    var_1 rotateto((0, 57.6995, 0), 0.1);
+    var_1 rotateTo((0, 57.6995, 0), 0.1);
   } else {
     var_2 = "zmb_venx_fuse_box_close";
-    var_1 rotateto((0, 180, 0), 0.1);
+    var_1 rotateTo((0, 180, 0), 0.1);
   }
 
   playsoundatpos(var_1.origin, var_2);
@@ -1149,11 +1149,11 @@ init_venomx_models_interactions() {
   level.morsecodekeypap1 = scripts\engine\utility::random(level.morsecodekeysarray);
   level.morsecodekeysarray = scripts\engine\utility::array_remove(level.morsecodekeysarray, level.morsecodekeypap1);
   level.morsecodekeypap2 = scripts\engine\utility::random(level.morsecodekeysarray);
-  level.morsedashmodel = getent("dot_button", "script_noteworthy");
-  level.morsedotmodel = getent("dash_button", "script_noteworthy");
-  level.zombie_venomx_containment_trigger = getent("zombie_containment_volume", "targetname");
+  level.morsedashmodel = getEnt("dot_button", "script_noteworthy");
+  level.morsedotmodel = getEnt("dash_button", "script_noteworthy");
+  level.zombie_venomx_containment_trigger = getEnt("zombie_containment_volume", "targetname");
   level.zombie_venomx_containment_trigger thread watch_for_containment_trigger();
-  level.hidden_figures_volume = getent("hidden_figures_volume", "script_noteworthy");
+  level.hidden_figures_volume = getEnt("hidden_figures_volume", "script_noteworthy");
   if(!isDefined(level.hidden_figures)) {
     level.hidden_figures = [];
   }
@@ -2312,7 +2312,7 @@ spinegg() {
   wait(0.25);
   playFXOnTag(level._effect["vfx_eggsac_glow"], self, "tag_origin");
   for(;;) {
-    self rotateyaw(36, 0.1);
+    self rotateYaw(36, 0.1);
     wait(0.1);
   }
 }
@@ -2472,7 +2472,7 @@ runmazeinstanceforpoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
         var_4.xcoord = var_1;
         var_4.ycoord = var_2;
         var_10 = return_position_x_y(var_1, var_2, var_4);
-        var_4 moveto(var_10, 0.1);
+        var_4 moveTo(var_10, 0.1);
         var_5 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_puzzle_all_complete", "final_comment_vo");
         var_5 notify("end_thread_for_" + var_4.mod_name);
       } else if(!scripts\engine\utility::istrue(level.maze_completed[var_4.mod_name])) {
@@ -2487,7 +2487,7 @@ runmazeinstanceforpoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_4.xcoord = var_1;
     var_4.ycoord = var_2;
     var_10 = return_position_x_y(var_1, var_2, var_4);
-    var_4 moveto(var_10, 0.1);
+    var_4 moveTo(var_10, 0.1);
     return;
   }
 
@@ -2498,16 +2498,16 @@ runmazeinstanceforpoint(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   level.maze_completed["maze2"] = 0;
   playFX(level._effect["temp_circuit_fx"], var_4.origin);
   var_5 playlocalsound("cp_final_venom_quest_fail_maze");
-  var_5 playrumbleonentity("damage_light");
+  var_5 playRumbleOnEntity("damage_light");
   level.failed_puzzle = 1;
   level.puzzles_solved = 0;
 }
 
 show_unsolved_mazes_on_crt() {
   wait(15);
-  level.unsolved_crt_model = getent("unsolved_console_venomx", "script_noteworthy");
+  level.unsolved_crt_model = getEnt("unsolved_console_venomx", "script_noteworthy");
   level.unsolved_crt_model setscriptablepartstate("unsolved_grid", "neutral");
-  level.unsolved_crt_model_2 = getent("unsolved_console_venomx_2", "script_noteworthy");
+  level.unsolved_crt_model_2 = getEnt("unsolved_console_venomx_2", "script_noteworthy");
   level.unsolved_crt_model_2 setscriptablepartstate("unsolved_grid", "neutral");
   level thread setup_maze_models();
 }
@@ -3775,7 +3775,7 @@ play_morse_dash(var_0, var_1) {
 }
 
 unblock_venomx_door() {
-  var_0 = getent("venomx_door_blocker", "script_noteworthy");
+  var_0 = getEnt("venomx_door_blocker", "script_noteworthy");
   var_0 notsolid();
   var_0 connectpaths();
 }

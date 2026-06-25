@@ -441,7 +441,7 @@ createTank(tankForPlayer) {
   tankType = tankForPlayer.tankType;
   lifeId = tankForPlayer.lifeId;
 
-  remoteTank = SpawnVehicle(level.tankSettings[tankType].modelBase, tankType, level.tankSettings[tankType].vehicleInfo, tankForPlayer.origin, tankForPlayer.angles, owner);
+  remoteTank = spawnVehicle(level.tankSettings[tankType].modelBase, tankType, level.tankSettings[tankType].vehicleInfo, tankForPlayer.origin, tankForPlayer.angles, owner);
   if(!isDefined(remoteTank)) {
     return undefined;
   }
@@ -449,7 +449,7 @@ createTank(tankForPlayer) {
   turretAttachTagOrigin = remoteTank GetTagOrigin("tag_turret_attach");
 
   mgTurret = SpawnTurret("misc_turret", turretAttachTagOrigin, level.tankSettings[tankType].mgTurretInfo, false);
-  mgTurret LinkTo(remoteTank, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
+  mgTurret linkTo(remoteTank, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
   mgTurret setModel(level.tankSettings[tankType].modelMGTurret);
   mgTurret.health = level.tankSettings[tankType].health;
 
@@ -1038,7 +1038,7 @@ tank_DropMines(remoteTank) {
   while(true) {
     if(self SecondaryOffhandbuttonPressed()) {
       trace = bulletTrace(remoteTank.origin + (0, 0, 4), remoteTank.origin - (0, 0, 4), false, remoteTank);
-      normal = VectorNormalize(trace["normal"]);
+      normal = vectorNormalize(trace["normal"]);
       plantAngles = VectorToAngles(normal);
       plantAngles += (90, 0, 0);
 

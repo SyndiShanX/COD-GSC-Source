@@ -9,7 +9,7 @@ zerog() {
   var_2 = 6;
   level endon("kill_free_fall");
   level waittill("start_freefall");
-  level.zerog_origin = common_scripts\utility::getstruct("all_plane_origin", "targetname");
+  level.zerog_origin = common_scripts\utility::getStruct("all_plane_origin", "targetname");
   var_3 = randomfloatrange(0.25, 0.75);
   wait(var_3);
   wait 0.25;
@@ -20,26 +20,26 @@ zerog() {
 in_air_sequence() {}
 
 player_on_back() {
-  var_0 = getent("player_on_back_pre_one", "targetname");
-  var_1 = getent("player_on_back_one", "targetname");
-  var_2 = getent("r_plane_player_climb_one", "targetname");
+  var_0 = getEnt("player_on_back_pre_one", "targetname");
+  var_1 = getEnt("player_on_back_one", "targetname");
+  var_2 = getEnt("r_plane_player_climb_one", "targetname");
   var_3 = getEntArray("player_on_back", "targetname");
   var_4 = common_scripts\utility::getclosest(level.player.origin, var_3);
   var_5 = spawn("script_model", var_4.origin);
   var_5 setModel("tag_origin");
-  var_5 linkto(level.plane_core);
-  level.chair_vargas_2.reference maps\_utility::anim_stopanimscripted();
+  var_5 linkTo(level.plane_core);
+  level.chair_vargas_2.reference maps\_utility::anim_stopanimScripted();
   level.vargas allowedstances("crouch");
   common_scripts\utility::flag_set("ground_rotate_ref");
-  var_6 = getent("c17_left_wing", "targetname");
+  var_6 = getEnt("c17_left_wing", "targetname");
   playFX(common_scripts\utility::getfx("aerial_explosion_large"), var_6.origin + (0, -200, -40));
   level.player shellshock("hijack_minor", 4.0);
   level.plane_core maps\iplane::batman_rotate_plane();
 }
 
 anim_first_roll_everyone() {
-  level.mccoy_anim_org maps\_utility::anim_stopanimscripted();
-  level.kersey_anim_org maps\_utility::anim_stopanimscripted();
+  level.mccoy_anim_org maps\_utility::anim_stopanimScripted();
+  level.kersey_anim_org maps\_utility::anim_stopanimScripted();
   level.elias hide();
   level.hesh hide();
   level.merrick hide();
@@ -65,11 +65,11 @@ move_primary_light(var_0) {
 
 move_with_plane(var_0) {
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(level.plane_core);
+  var_1 linkTo(level.plane_core);
   var_0 endon("kill_light");
 
   for(;;) {
-    var_0 moveto(var_1.origin, 0.05);
+    var_0 moveTo(var_1.origin, 0.05);
     wait 0.05;
   }
 }
@@ -183,9 +183,9 @@ pitch_and_roll() {
   for(;;) {
     var_6 = (0, randomfloatrange(var_3, var_2), randomfloatrange(var_3, var_2));
     var_7 = randomfloatrange(var_5, var_4);
-    self rotateto(var_1 + var_6, var_7, var_7 * 0.2, var_7 * 0.2);
+    self rotateTo(var_1 + var_6, var_7, var_7 * 0.2, var_7 * 0.2);
     self waittill("rotatedone");
-    self rotateto(var_1 - var_6, var_7, var_7 * 0.2, var_7 * 0.2);
+    self rotateTo(var_1 - var_6, var_7, var_7 * 0.2, var_7 * 0.2);
     self waittill("rotatedone");
   }
 }
@@ -205,7 +205,7 @@ light_follow_plane(var_0) {
   var_1 = self.origin - var_0.origin;
 
   for(;;) {
-    self moveto(var_0.origin + var_1, 0.05);
+    self moveTo(var_0.origin + var_1, 0.05);
     wait 0.05;
   }
 }

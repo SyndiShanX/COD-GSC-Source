@@ -248,7 +248,7 @@ script_mortargroup_mortarzone() {
         if(is_lastblast(level.mortars[self.script_mortargroup][var_14], var_0)) {
           continue;
         }
-        var_15 = vectornormalize(level.mortars[self.script_mortargroup][var_14].origin - level.player.origin);
+        var_15 = vectorNormalize(level.mortars[self.script_mortargroup][var_14].origin - level.player.origin);
 
         if(vectordot(var_12, var_15) > 0.3) {
           var_13[var_13.size] = var_14;
@@ -269,7 +269,7 @@ script_mortargroup_mortarzone() {
 
     if(var_2 && gettime() > var_1) {
       if(isDefined(self.target)) {
-        var_16 = getent(self.target, "targetname");
+        var_16 = getEnt(self.target, "targetname");
 
         if(isDefined(var_16)) {
           var_16 notify("trigger");
@@ -302,7 +302,7 @@ script_mortargroup_domortar() {
   self waittill("mortar");
 
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0)) {
       var_0 notify("trigger");
@@ -785,9 +785,9 @@ setup_mortar_terrain() {
 
   if(isDefined(self.script_hidden)) {
     if(isDefined(self.script_hidden)) {
-      self.hidden_terrain = getent(self.script_hidden, "targetname");
+      self.hidden_terrain = getEnt(self.script_hidden, "targetname");
     } else if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
-      self.hidden_terrain = getent(self.terrain[0].target, "targetname");
+      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
     }
 
     if(isDefined(self.hidden_terrain)) {
@@ -795,7 +795,7 @@ setup_mortar_terrain() {
     }
   } else if(isDefined(self.has_terrain)) {
     if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
-      self.hidden_terrain = getent(self.terrain[0].target, "targetname");
+      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
     }
 
     if(isDefined(self.hidden_terrain)) {

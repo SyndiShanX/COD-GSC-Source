@@ -80,7 +80,7 @@ function_7c4ef26b(predictedspawn) {
 function_db31e447() {
   self endon(#"death");
   s_beacon = function_3192c7f3();
-  self setorigin(s_beacon.origin);
+  self setOrigin(s_beacon.origin);
   self setplayerangles(s_beacon.angles);
 
   if(!isDefined(s_beacon.guard1)) {
@@ -137,7 +137,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     }
 
     if(weapon.name == #"gadget_radiation_field") {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       trace = bulletTrace(e_player.origin + (0, 0, 40), self.origin + (0, 0, 40), 0, self);
 
       if(trace[#"fraction"] < 1) {
@@ -406,7 +406,7 @@ function_d6c7161f() {
         }
 
         level notify(#"beacon_destroyed");
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         e_player thread ct_utils::function_785eb2ca();
         wait 0.1;
         s_beacon.e_beacon delete();
@@ -482,18 +482,18 @@ function_ce452e0() {
 }
 
 function_d6cd1a2d() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player endon(#"death");
   e_player ct_utils::function_329f9ba6(#"hash_543a5a1c6eed9669", 3, "green");
 }
 
 function_965614a5() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player ct_utils::function_329f9ba6(#"hash_1b301c864ab49c7a", 3, "green");
 }
 
 function_2add9e5f() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player ct_utils::function_329f9ba6(#"hash_49da6342b2ffd978", 3, "green");
   level.var_a2cbd584 = 1;
   a_hostiles = util::get_active_players(#"axis");
@@ -502,11 +502,11 @@ function_2add9e5f() {
 }
 
 function_db3dc2c2() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player ct_utils::function_329f9ba6(#"hash_1e1ef1194ce5ad64", 1.5, "green");
 }
 
 function_d2ae88f1() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_c95709abcf47cdb", 5, "green");
 }

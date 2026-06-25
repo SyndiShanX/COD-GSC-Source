@@ -258,7 +258,7 @@ drop_robot() {
     globallogic_audio::leader_dialog("sfgStartOvertime");
   }
 
-  movetrigger = getent("escort_robot_move_trig", "targetname");
+  movetrigger = getEnt("escort_robot_move_trig", "targetname");
   patharray = get_robot_path_array();
   startdir = patharray[0] - movetrigger.origin;
   startangles = vectortoangles(startdir);
@@ -271,7 +271,7 @@ drop_robot() {
   goalpath = supplydrop::supplydrophelistartpath_v2_setup(heli_drop_goal, dropoffset);
   supplydrop::supplydrophelistartpath_v2_part2_local(heli_drop_goal, goalpath, dropoffset);
   drop_direction = vectortoangles((heli_drop_goal[0], heli_drop_goal[1], 0) - (goalpath.start[0], goalpath.start[1], 0));
-  chopper = spawnvehicle("vehicle_t8_mil_helicopter_transport_mp_escort", heli_drop_goal, (0, 0, 0));
+  chopper = spawnVehicle("vehicle_t8_mil_helicopter_transport_mp_escort", heli_drop_goal, (0, 0, 0));
   chopper.maxhealth = 999999;
   chopper.health = 999999;
   chopper setteam(game.attackers);
@@ -1304,14 +1304,14 @@ robot_move_chatter() {
 }
 
 setup_move_object(robot, triggername) {
-  trigger = getent(triggername, "targetname");
+  trigger = getEnt(triggername, "targetname");
   useobj = gameobjects::create_use_object(game.attackers, trigger, [], (0, 0, 0), #"escort_robot");
   useobj gameobjects::set_objective_entity(robot);
   useobj gameobjects::allow_use(#"none");
   useobj gameobjects::set_visible_team(#"any");
   useobj gameobjects::set_use_time(0);
-  trigger enablelinkto();
-  trigger linkto(robot);
+  trigger enablelinkTo();
+  trigger linkTo(robot);
   useobj.onuse = &on_use_robot_move;
   useobj.onupdateuserate = &on_update_use_rate_robot_move;
   useobj.robot = robot;
@@ -1446,7 +1446,7 @@ wait_escort_shutdown(player) {
 }
 
 setup_reboot_object(robot, triggername) {
-  trigger = getent(triggername, "targetname");
+  trigger = getEnt(triggername, "targetname");
 
   if(isDefined(trigger)) {
     trigger delete();
@@ -1454,7 +1454,7 @@ setup_reboot_object(robot, triggername) {
 }
 
 setup_goal_object(robot, triggername) {
-  trigger = getent(triggername, "targetname");
+  trigger = getEnt(triggername, "targetname");
 
   if(isDefined(game.var_69b0dc87)) {
     trigger = spawn("trigger_radius_new", game.var_69b0dc87);
@@ -1526,7 +1526,7 @@ explode_robot_after_wait(wait_time) {
 kill_anything_blocking_goal(goal) {
   self endon(#"end_kill_anything");
   self.disablefinalkillcam = 1;
-  dirtogoal = vectornormalize(goal - self.origin);
+  dirtogoal = vectorNormalize(goal - self.origin);
   atleastonedestroyed = 0;
   bestcandidate = undefined;
   bestcandidatedot = -1e+09;
@@ -1630,7 +1630,7 @@ destroy_supply_crate_blocking_goal(dirtogoal) {
 
   if(isDefined(bestcrate)) {
     playFX(level._supply_drop_explosion_fx, bestcrate.origin);
-    playsoundatposition(#"wpn_grenade_explode", bestcrate.origin);
+    playSoundAtPosition(#"wpn_grenade_explode", bestcrate.origin);
     wait 0.1;
     bestcrate supplydrop::cratedelete();
     return true;

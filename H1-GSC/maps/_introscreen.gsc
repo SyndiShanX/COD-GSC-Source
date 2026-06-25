@@ -190,11 +190,11 @@ flying_intro() {
   level.player playerlinktoabsolute(var_5);
   var_5.angles = (var_5.angles[0] + 89, var_5.angles[1], 0);
   wait(var_2);
-  var_5 moveto(var_4 + (0, 0, 0), 2, 0, 2);
+  var_5 moveTo(var_4 + (0, 0, 0), 2, 0, 2);
   common_scripts\utility::flag_set("introscreen_remove_submix");
   wait 1.2;
   wait 0.3;
-  var_5 rotateto((var_5.angles[0] - 89, var_5.angles[1], 0), 0.5, 0.3, 0.2);
+  var_5 rotateTo((var_5.angles[0] - 89, var_5.angles[1], 0), 0.5, 0.3, 0.2);
 
   if(!var_3) {
     savegame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", 1);

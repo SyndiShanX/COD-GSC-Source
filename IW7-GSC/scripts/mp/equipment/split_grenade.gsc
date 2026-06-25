@@ -16,7 +16,7 @@ func_10A54(var_0) {
     scripts\mp\utility::func_85C6(var_2, "split_grenade_mp");
     var_2.exploding = 1;
     var_2.parentinflictor = var_0 getentitynumber();
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
     var_2 hide(1);
     var_2 forcehidegrenadehudwarning(1);
     var_2 thread func_40FA(var_0, self);

@@ -139,7 +139,7 @@ odin_spin_room_logic() {
   wait 0.1;
   thread maps\odin_anim::spin_deadguys();
   common_scripts\utility::flag_set("start_near_explosion_sequence");
-  var_4 = common_scripts\utility::getstruct("kyra_move_node02", "targetname");
+  var_4 = common_scripts\utility::getStruct("kyra_move_node02", "targetname");
   var_4 notify("stop_loop");
   maps\_utility::delaythread(1, maps\odin_escape::manage_earth, "hide");
   setsaveddvar("player_swimWaterCurrent", (0, 0, 0));
@@ -152,7 +152,7 @@ odin_spin_room_logic() {
   thread maps\odin_fx::fx_spin_create_rog_plumes();
   wait 1.8;
   earthquake(0.3, 3, level.player.origin, 500);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   maps\_utility::stop_exploder("escape_destruction");
   maps\_utility::stop_exploder("escape_destruction_ng");
   common_scripts\utility::exploder("spin_implosion");
@@ -189,7 +189,7 @@ odin_spin_room_logic() {
 }
 
 spin_colliders_go() {
-  var_0 = getent("colliding_debris_node", "targetname");
+  var_0 = getEnt("colliding_debris_node", "targetname");
   var_1 = [];
   var_1["space_crate_01_burned"] = maps\_utility::spawn_anim_model("space_crate_01_burned");
   var_1["space_debris_01"] = maps\_utility::spawn_anim_model("space_debris_01");
@@ -206,8 +206,8 @@ spin_colliders_go() {
     var_6 = randomfloatrange(-360, 360);
     var_7 = common_scripts\utility::spawn_tag_origin();
     var_7.origin = var_3.origin;
-    var_3 linkto(var_7);
-    var_7 moveto((var_7.origin[0] + 0, var_7.origin[1] + var_4, var_7.origin[2] + var_5), 10, 0, 10);
+    var_3 linkTo(var_7);
+    var_7 moveTo((var_7.origin[0] + 0, var_7.origin[1] + var_4, var_7.origin[2] + var_5), 10, 0, 10);
     var_7 rotateby((var_6, var_6, var_6), 10, 0, 10);
     level.sat_ent_del[level.sat_ent_del.size] = var_7;
     level.sat_ent_del[level.sat_ent_del.size] = var_3;
@@ -260,12 +260,12 @@ prespawn_decomp_legs() {
 }
 
 prespawn_decomp_crates() {
-  var_0 = getent("odin_decomp_anim", "targetname");
-  var_1 = getent("spin_decomp_container_01", "targetname");
+  var_0 = getEnt("odin_decomp_anim", "targetname");
+  var_1 = getEnt("spin_decomp_container_01", "targetname");
   prepare_crates_for_anim(var_1, "decomp_crate_01");
-  var_2 = getent("spin_decomp_container_02", "targetname");
+  var_2 = getEnt("spin_decomp_container_02", "targetname");
   prepare_crates_for_anim(var_2, "decomp_crate_02");
-  var_3 = getent("spin_decomp_container_03", "targetname");
+  var_3 = getEnt("spin_decomp_container_03", "targetname");
   prepare_crates_for_anim(var_3, "decomp_crate_03");
   var_4 = [];
   var_4["space_storage_container_01"] = maps\_utility::spawn_anim_model("space_storage_container_01");
@@ -296,18 +296,18 @@ link_bags_to_spin_crates(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     level.sat_ent_del[level.sat_ent_del.size] = var_4;
-    var_4 linkto(var_1);
+    var_4 linkTo(var_1);
   }
 }
 
 prespawn_decomp_panels() {
   var_0 = [];
-  var_0[0] = getent("decomp_anim_panel_01", "targetname");
-  var_0[1] = getent("decomp_anim_panel_02", "targetname");
-  var_0[2] = getent("decomp_anim_panel_03", "targetname");
-  var_0[3] = getent("decomp_anim_panel_04", "targetname");
-  var_0[4] = getent("decomp_anim_panel_05", "targetname");
-  var_0[5] = getent("decomp_anim_panel_06", "targetname");
+  var_0[0] = getEnt("decomp_anim_panel_01", "targetname");
+  var_0[1] = getEnt("decomp_anim_panel_02", "targetname");
+  var_0[2] = getEnt("decomp_anim_panel_03", "targetname");
+  var_0[3] = getEnt("decomp_anim_panel_04", "targetname");
+  var_0[4] = getEnt("decomp_anim_panel_05", "targetname");
+  var_0[5] = getEnt("decomp_anim_panel_06", "targetname");
   var_1 = [];
   var_1[0] = maps\_utility::spawn_anim_model("decomp_pannel_01", var_0[0].origin);
   var_1[1] = maps\_utility::spawn_anim_model("decomp_pannel_02", var_0[1].origin);
@@ -326,10 +326,10 @@ prespawn_decomp_panels() {
     var_4 = getEntArray(var_3.target, "targetname");
 
     foreach(var_6 in var_4) {
-      var_6 linkto(var_1[var_8]);
+      var_6 linkTo(var_1[var_8]);
     }
 
-    var_3 linkto(var_1[var_8]);
+    var_3 linkTo(var_1[var_8]);
   }
 
   return var_1;
@@ -360,15 +360,15 @@ spin_cleanup(var_0) {
 
 spinning_room_geo_simple(var_0, var_1, var_2, var_3, var_4) {
   level.spinning_room_parts = [];
-  var_5 = getent(var_1, "targetname");
+  var_5 = getEnt(var_1, "targetname");
   var_6 = getEntArray(var_0, "targetname");
 
   foreach(var_8 in var_6) {
-    var_8 linkto(var_5);
+    var_8 linkTo(var_5);
   }
 
-  var_10 = getent("spin_geo_final_pos", "targetname");
-  var_5 moveto(var_10.origin, 0.1);
+  var_10 = getEnt("spin_geo_final_pos", "targetname");
+  var_5 moveTo(var_10.origin, 0.1);
   var_5 waittill("movedone");
   common_scripts\utility::flag_wait("odin_start_spin_decomp_real");
   common_scripts\utility::exploder("spin02_airlock_breach_steam01");
@@ -384,16 +384,16 @@ spinning_room_geo_simple(var_0, var_1, var_2, var_3, var_4) {
 spin_busted_module() {
   level endon("spin_clear");
   var_0 = getEntArray("spin_busted_module", "targetname");
-  var_1 = getent("busted_module_path1", "targetname");
-  var_2 = getent("busted_module_path2", "targetname");
+  var_1 = getEnt("busted_module_path1", "targetname");
+  var_2 = getEnt("busted_module_path2", "targetname");
 
   foreach(var_4 in var_0) {
-    var_4 linkto(var_1);
+    var_4 linkTo(var_1);
   }
 
   common_scripts\utility::flag_wait("playsound");
   common_scripts\utility::flag_wait("spin_approaching_enemies");
-  var_1 moveto(var_2.origin, 95, 3, 0.1);
+  var_1 moveTo(var_2.origin, 95, 3, 0.1);
   var_1 rotatevelocity((1.75, 0, 0.8), 90, 0.1, 0.1);
 
   while(!common_scripts\utility::flag("spin_clear")) {
@@ -407,7 +407,7 @@ spin_push_to_spacejump() {
   level.forwardpush = -1600;
   thread adjust_forward_push();
   var_0 = 10;
-  var_1 = getent("spin_push_desired_pos", "targetname");
+  var_1 = getEnt("spin_push_desired_pos", "targetname");
   var_2 = var_1.origin[1];
   var_3 = var_1.origin[2];
   level.spin_allowance_y = 40;
@@ -419,10 +419,10 @@ spin_push_to_spacejump() {
   var_8 = 80;
   var_9 = level.ally.moveplaybackrate;
   level.ally.moveplaybackrate = 2;
-  var_10 = getent("spin_skybox_rotator", "targetname");
+  var_10 = getEnt("spin_skybox_rotator", "targetname");
   var_11 = 5;
-  var_12 = getent("box_animNode", "script_noteworthy");
-  var_13 = getent("spin_deadguy_static_node_05", "targetname");
+  var_12 = getEnt("box_animNode", "script_noteworthy");
+  var_13 = getEnt("spin_deadguy_static_node_05", "targetname");
 
   for(;;) {
     if(level.player.origin[1] < var_2 - level.spin_allowance_y) {
@@ -560,7 +560,7 @@ spin_push_to_spacejump() {
 }
 
 adjust_forward_push() {
-  var_0 = getent("ally_shooting_target", "script_noteworthy");
+  var_0 = getEnt("ally_shooting_target", "script_noteworthy");
   common_scripts\utility::flag_wait("spin_approaching_enemies");
   level.forwardpush = -1900;
   wait 2;
@@ -603,18 +603,18 @@ spin_sat_and_earth_mover(var_0) {
   var_1 = maps\odin_util::satellite_get_script_mover();
   var_1 unlink();
   var_2 = maps\odin_util::earth_get_script_mover();
-  var_3 = getent("spin_skybox_rotator", "targetname");
-  var_4 = getent("sunflare_origin", "targetname");
-  var_5 = getent("space_mover", "targetname");
-  var_6 = getent("initial_sat_orientation", "targetname");
-  var_7 = getent("spin_earth_front_pos", "targetname");
+  var_3 = getEnt("spin_skybox_rotator", "targetname");
+  var_4 = getEnt("sunflare_origin", "targetname");
+  var_5 = getEnt("space_mover", "targetname");
+  var_6 = getEnt("initial_sat_orientation", "targetname");
+  var_7 = getEnt("spin_earth_front_pos", "targetname");
   var_8 = 20;
 
   if(!isDefined(var_3) || !isDefined(var_5) || !isDefined(var_2)) {
     return;
   }
-  var_1 moveto(var_6.origin, 0.1);
-  var_1 rotateto(var_6.angles, 0.1);
+  var_1 moveTo(var_6.origin, 0.1);
+  var_1 rotateTo(var_6.angles, 0.1);
   wait 0.2;
 
   if(!isDefined(var_0)) {
@@ -623,10 +623,10 @@ spin_sat_and_earth_mover(var_0) {
 
   var_1 unlink();
   wait 0.05;
-  var_9 = getent("spin_aligned_rotator_org", "targetname");
-  var_5 linkto(var_9);
-  var_1 linkto(var_9);
-  var_2 linkto(var_9);
+  var_9 = getEnt("spin_aligned_rotator_org", "targetname");
+  var_5 linkTo(var_9);
+  var_1 linkTo(var_9);
+  var_2 linkTo(var_9);
   var_10 = 400;
   var_9 rotateroll(var_10 * -1, 0.1);
   var_9 waittill("rotatedone");
@@ -653,12 +653,12 @@ spin_sat_and_earth_mover(var_0) {
 
   var_12 = var_11 * 0.1;
   var_13 = var_11 * 0.5;
-  var_5 linkto(var_2);
-  var_2 moveto(var_7.origin, var_11, var_12, var_13);
-  var_2 rotateto(var_7.angles, var_11, var_12, var_13);
-  var_14 = getent("final_sat_orientation", "targetname");
-  var_1 moveto(var_14.origin, var_11, var_12, var_13);
-  var_1 rotateto(var_14.angles, var_11, var_12, var_13);
+  var_5 linkTo(var_2);
+  var_2 moveTo(var_7.origin, var_11, var_12, var_13);
+  var_2 rotateTo(var_7.angles, var_11, var_12, var_13);
+  var_14 = getEnt("final_sat_orientation", "targetname");
+  var_1 moveTo(var_14.origin, var_11, var_12, var_13);
+  var_1 rotateTo(var_14.angles, var_11, var_12, var_13);
   var_1 waittill("rotatedone");
   common_scripts\utility::flag_set("lgt_flag_spin_over");
 }
@@ -703,7 +703,7 @@ spin_do_moving_debris(var_0, var_1, var_2, var_3) {
 
   foreach(var_10 in var_4) {
     if(isDefined(var_10.target)) {
-      var_11 = getent(var_10.target, "targetname");
+      var_11 = getEnt(var_10.target, "targetname");
 
       if(isDefined(var_11)) {
         var_12 = var_5;
@@ -724,7 +724,7 @@ spin_do_moving_debris(var_0, var_1, var_2, var_3) {
         }
 
         var_10 thread spin_do_moving_debris_fx(var_10.origin, var_11.origin, var_12);
-        var_10 moveto(var_11.origin, var_12);
+        var_10 moveTo(var_11.origin, var_12);
         var_16 = randomint(3);
 
         if(var_16 == 0) {
@@ -763,7 +763,7 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
 
     foreach(var_14 in var_11) {
       if(var_14 != var_12) {
-        var_14 linkto(var_12);
+        var_14 linkTo(var_12);
       }
     }
 
@@ -782,7 +782,7 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
 
   foreach(var_17 in var_7) {
     if(isDefined(var_17.target)) {
-      var_18 = getent(var_17.target, "targetname");
+      var_18 = getEnt(var_17.target, "targetname");
 
       if(!isDefined(var_18)) {
         continue;
@@ -804,7 +804,7 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
         var_22 = var_22 * -1;
       }
 
-      var_17 moveto(var_18.origin, var_19);
+      var_17 moveTo(var_18.origin, var_19);
       var_23 = randomint(3);
 
       if(var_23 == 0) {
@@ -849,7 +849,7 @@ spin_do_moving_debris_fx(var_0, var_1, var_2) {
     var_4.origin = self.origin;
     var_5 = var_0 - var_1;
     var_4.angles = vectortoangles(var_5);
-    var_4 linkto(self);
+    var_4 linkTo(self);
     wait(var_2 * randomfloatrange(0.2, 0.4));
     playFXOnTag(level._effect["odin_spin_piece_debris_runner"], var_4, "tag_origin");
     wait 3;
@@ -895,35 +895,35 @@ spin_piece_pieces() {
 
 do_unique_debris() {
   var_0 = 400;
-  var_1 = getent("spin_unique_debris_reaching_guy", "targetname");
+  var_1 = getEnt("spin_unique_debris_reaching_guy", "targetname");
   var_2 = getEntArray(var_1.target, "targetname");
 
   foreach(var_4 in var_2) {
     if(isDefined(var_1)) {
-      var_4 linkto(var_1);
+      var_4 linkTo(var_1);
       var_1 rotatevelocity((0, 0, 12), var_0);
     }
   }
 
-  var_1 = getent("spin_unique_debris_rotating_01", "targetname");
+  var_1 = getEnt("spin_unique_debris_rotating_01", "targetname");
 
   if(isDefined(var_1)) {
     var_1 rotatevelocity((10, 0, 0), var_0);
   }
 
-  var_1 = getent("spin_unique_debris_rotating_02", "targetname");
+  var_1 = getEnt("spin_unique_debris_rotating_02", "targetname");
 
   if(isDefined(var_1)) {
     var_1 rotatevelocity((0, 24, 0), var_0);
   }
 
-  var_1 = getent("spin_unique_debris_rotating_03", "targetname");
+  var_1 = getEnt("spin_unique_debris_rotating_03", "targetname");
 
   if(isDefined(var_1)) {
     var_1 rotatevelocity((0, 0, 14), var_0);
   }
 
-  var_1 = getent("spin_unique_debris_rotating_05", "targetname");
+  var_1 = getEnt("spin_unique_debris_rotating_05", "targetname");
 
   if(isDefined(var_1)) {
     var_1 rotatevelocity((6, 0, 0), var_0);
@@ -938,7 +938,7 @@ do_spacejump_debris(var_0) {
       var_4 = getEntArray(var_3.script_linkto, "script_linkname");
 
       foreach(var_6 in var_4) {
-        var_6 linkto(var_3);
+        var_6 linkTo(var_3);
       }
 
       var_8 = randomfloatrange(15.0, 45.0);
@@ -990,7 +990,7 @@ spin_debris_rotation(var_0, var_1, var_2) {
 
   for(;;) {
     var_6 = combineangles(self.angles, (var_3, var_4, var_5));
-    self rotateto(var_6, 0.1);
+    self rotateTo(var_6, 0.1);
     wait 0.05;
   }
 }

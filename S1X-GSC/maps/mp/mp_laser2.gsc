@@ -209,7 +209,7 @@ HandleCloudsAerialLeave() {
 #using_animtree("animated_props");
 RotateRadar() {
   wait(0.05);
-  Radar01 = getent("radar_dish01_rotate", "targetname");
+  Radar01 = getEnt("radar_dish01_rotate", "targetname");
 
   ScriptModelPlayAnimWithNotify(Radar01, "lsr_radar_dish_loop", "ps_emt_satellite_dish_rotate", "emt_satellite_dish_rotate", "laser2_custom_end_notify", "laser2_custom_ent_end_notify", "laser2_custom_ent2_end_notify");
 }
@@ -244,7 +244,7 @@ DynamicEvent_init() {
 
   level.ocean.warning_time = 30;
   level.ocean.origin = level.ocean.origin - (0, 0, WATER_HEIGHT_OFFSET);
-  ocean_underside = getent("ocean_water_underside", "targetname");
+  ocean_underside = getEnt("ocean_water_underside", "targetname");
   triggers = getEntArray("trigger_underwater", "targetname");
   props = getEntArray("ocean_moving_prop", "targetname");
   buoys = getEntArray("buoy", "targetname");
@@ -322,7 +322,7 @@ DynamicEvent_init() {
     array_thread(level.moving_buoys, ::handlePropAttachments, level.ocean);
   }
 
-  tidal_wave = GetEnt("tidal_wave", "targetname");
+  tidal_wave = getEnt("tidal_wave", "targetname");
   tidal_wave hide();
 
   trigger_off("trig_kill_00", "targetname");
@@ -351,7 +351,7 @@ connect_paths() {
 
 disconnect_paths() {
   if(isDefined(self)) {
-    self DisconnectPaths();
+    self disconnectPaths();
   }
 }
 
@@ -391,9 +391,9 @@ oceanSinMovement(startPoint) {
   self endon("ocean_sin_movement");
 
   while(true) {
-    self moveto((0, level.oceanSinAmplitude, level.oceanSinAmplitude) + startPoint, level.oceanSinPeriod / 2, level.oceanSinPeriod * 0.25, level.oceanSinPeriod * 0.25);
+    self moveTo((0, level.oceanSinAmplitude, level.oceanSinAmplitude) + startPoint, level.oceanSinPeriod / 2, level.oceanSinPeriod * 0.25, level.oceanSinPeriod * 0.25);
     wait level.oceanSinPeriod / 2;
-    self moveto(-1 * (0, level.oceanSinAmplitude, level.oceanSinAmplitude) + startPoint, level.oceanSinPeriod / 2, level.oceanSinPeriod * 0.25, level.oceanSinPeriod * 0.25);
+    self moveTo(-1 * (0, level.oceanSinAmplitude, level.oceanSinAmplitude) + startPoint, level.oceanSinPeriod / 2, level.oceanSinPeriod * 0.25, level.oceanSinPeriod * 0.25);
     wait level.oceanSinPeriod / 2;
   }
 }
@@ -457,7 +457,7 @@ oceanMover_init(targetname) {
 
   assertEx(isDefined(targetname), "no targetname specified for oceanMover_init()");
 
-  water = getent(targetname, "targetname");
+  water = getEnt(targetname, "targetname");
 
   if(!isDefined(water)) {
     AssertMsg("water is not defined. Expecting targetname of " + targetname);
@@ -514,14 +514,14 @@ handleMovingWater() {
 
   level.skipOceanSpawns = true;
   ocean = level.ocean;
-  tidal_wave = GetEnt("tidal_wave", "targetname");
+  tidal_wave = getEnt("tidal_wave", "targetname");
   tidal_wave show();
   ocean_model = spawn_tag_origin();
   ocean_model.targetname = "ocean_tag_origin";
   ocean_model show();
-  car = getent("lsr_tidal_wave_car", "targetname");
-  container_closed = getent("lsr_tidal_wave_shipping_container_closed", "targetname");
-  container_open = getent("lsr_tidal_wave_shipping_container_open", "targetname");
+  car = getEnt("lsr_tidal_wave_car", "targetname");
+  container_closed = getEnt("lsr_tidal_wave_shipping_container_closed", "targetname");
+  container_open = getEnt("lsr_tidal_wave_shipping_container_open", "targetname");
 
   create_bot_badplaces();
 
@@ -559,7 +559,7 @@ handleMovingWater() {
 
   tidal_wave thread tidal_wave_notetracks();
   tidal_wave ScriptModelPlayAnimDeltaMotion("lsr_tidal_wave_mesh_anim", "tidal_wave_notetrack");
-  ocean linkto(ocean_model);
+  ocean linkTo(ocean_model);
   ocean_model ScriptModelPlayAnimDeltaMotion("lsr_tidal_wave_ocean_anim");
   if(isDefined(car)) {
     car ScriptModelPlayAnimDeltaMotion("lsr_tidal_wave_car");
@@ -708,7 +708,7 @@ play_earthquake_rumble(time) {
   frames = time * 20;
 
   while(frames >= 0) {
-    self PlayRumbleOnEntity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait(.1);
     frames = frames - 2;
   }
@@ -923,7 +923,7 @@ handleWatertriggerMovement(parent) {
 
   waterline_ent = undefined;
   if(isDefined(self.target)) {
-    waterline_ent = getstruct(self.target, "targetname");
+    waterline_ent = getStruct(self.target, "targetname");
   }
 
   parent_offset = self.origin - parent.origin;

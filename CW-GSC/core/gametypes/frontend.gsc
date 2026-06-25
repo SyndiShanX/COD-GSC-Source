@@ -123,7 +123,7 @@ function event_handler[ui_menuresponse] codecallback_menuresponse(eventstruct) {
   }
 
   if(menu == "<dev string:x105>") {
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     if(!isDefined(player)) {
       return;
@@ -178,7 +178,7 @@ function event_handler[ui_menuresponse] codecallback_menuresponse(eventstruct) {
       wait 0.1;
     }
 
-    player setorigin(spawn.origin);
+    player setOrigin(spawn.origin);
   }
 }
 

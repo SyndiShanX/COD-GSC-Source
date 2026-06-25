@@ -171,12 +171,12 @@ _id_94F9(var_0) {
       continue;
     }
 
-    self cameralinkto(self._id_3A19, "tag_origin", 1);
+    self cameralinkTo(self._id_3A19, "tag_origin", 1);
     var_1 = level._id_3A18.origin;
     var_2 = (0, 0, 30);
     var_2 = var_2 + -80 * var_0;
     var_3 = var_1 + var_2;
-    self._id_3A19 moveto(var_3, 10.5, 5.2, 5.2);
+    self._id_3A19 moveTo(var_3, 10.5, 5.2, 5.2);
     self._id_3A19.angles = vectortoangles(var_0);
     break;
   }
@@ -280,7 +280,7 @@ _id_FC30() {
         if(isDefined(var_0) && isDefined(level._id_3A1B) && var_0 == level._id_3A1B) {
           self._id_8B02 = 1;
           self._id_E3E7 = var_0;
-          var_2 = vectornormalize(level._id_3A1A);
+          var_2 = vectorNormalize(level._id_3A1A);
           var_3 = var_0 getvieworigin();
           self._id_3A19 = spawn("script_model", var_3);
           self._id_3A19.angles = vectortoangles(var_2);
@@ -296,7 +296,7 @@ _id_FC30() {
       var_6 = distance2d(var_4, var_5);
       var_7 = var_4 - var_5;
       var_8 = (var_7[0], var_7[1], 0);
-      var_8 = vectornormalize(var_8);
+      var_8 = vectorNormalize(var_8);
       var_9 = var_4;
       var_10 = (0, 0, 30);
       var_10 = var_10 + -80 * var_8;
@@ -305,10 +305,10 @@ _id_FC30() {
       if(var_6 > 600) {
         self._id_3A19.origin = var_11;
       } else {
-        self._id_3A19 moveto(var_11, 0.5, 0, 0.2);
+        self._id_3A19 moveTo(var_11, 0.5, 0, 0.2);
       }
 
-      self._id_3A19 rotateto(vectortoangles(var_7), 0.15, 0.05, 0.05);
+      self._id_3A19 rotateTo(vectortoangles(var_7), 0.15, 0.05, 0.05);
     }
 
     wait 0.05;

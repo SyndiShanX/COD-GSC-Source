@@ -37,7 +37,7 @@ __main__() {
 
 ee_schuster_step1_setup(var_5ea5c94d) {
   var_66ef9199 = struct::get_array("office_audio_log_schuster");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     if(e_player zm_characters::is_character(array(#"prt_zm_richtofen", #"prt_zm_richtofen_ofc", #"prt_zm_richtofen_whi_novials"))) {
@@ -130,9 +130,9 @@ function_488e39dc() {
 
 function_20b4f09a() {
   self endon(#"death");
-  self usetriggerrequirelookat();
-  self setcursorhint("HINT_NOICON");
-  self sethintstring("");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
+  self setHintString("");
   s_notify = self waittill(#"trigger");
   self.s_audio_log thread function_8c80503();
 }
@@ -171,7 +171,7 @@ function_8c80503() {
 
 function_d4c6dc0d() {
   self.is_playing_audio = 1;
-  e_recorder = getent(self.target2, "targetname");
+  e_recorder = getEnt(self.target2, "targetname");
   var_df4e73a7 = getEntArray(e_recorder.target, "targetname");
 
   while(self.is_playing_audio && var_df4e73a7.size > 0) {

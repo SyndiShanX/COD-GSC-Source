@@ -258,8 +258,8 @@ function_2cf40ddd() {
     waitframe(1);
   }
 
-  var_7cd7e8f3 = getent("trig_prophet_seeker1", "targetname");
-  var_572adc8 = getent("trig_seeker_wrong_way", "targetname");
+  var_7cd7e8f3 = getEnt("trig_prophet_seeker1", "targetname");
+  var_572adc8 = getEnt("trig_seeker_wrong_way", "targetname");
 
   do {
     waitframe(1);
@@ -289,7 +289,7 @@ function_2cf40ddd() {
 function_723d853a() {
   level endon(#"combattraining_logic_finished");
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_seeker_follow_nag", 10, 10);
-  trig = getent("trig_prophet_seeker1", "targetname");
+  trig = getEnt("trig_prophet_seeker1", "targetname");
 
   while(!self istouching(trig)) {
     waitframe(1);
@@ -320,7 +320,7 @@ function_1690f8ca() {
   self val::set(#"seeker_distraction", "ignoreme", 1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_distract_enemy_0"));
   var_4bf2090e = 0;
-  trig_tut_seeker2_deploy = getent("trig_tut_seeker2_deploy", "targetname");
+  trig_tut_seeker2_deploy = getEnt("trig_tut_seeker2_deploy", "targetname");
   level.var_e72728b8 = array(#"shock_rifle");
   self thread ct_utils::function_61c3d59c(#"hash_72a3ecaa4a8465c0", array("vox_tvoi_tutor_prop_distract_enemy_1"));
 
@@ -660,7 +660,7 @@ function_799be48a(_hash) {
 
 function_64d067e7(var_e3dee394) {
   level endon(#"combattraining_logic_finished");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   level.var_31a4679 = struct::get(var_e3dee394, "targetname");
   level.var_91a1cd89 = 1;
   level.var_924c5b44 loadout::give_loadout(#"axis", 0);
@@ -1046,7 +1046,7 @@ function_d910a202() {
     level.var_da5432a2 = 0;
   }
 
-  self setorigin(s_loc.origin);
+  self setOrigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
   self thread function_aae68385(s_loc);
 }
@@ -1324,13 +1324,13 @@ function_147ce591() {
     level.var_da5432a2 = 0;
   }
 
-  self setorigin(s_loc.origin);
+  self setOrigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
   self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 64);
   self util::magic_bullet_shield();
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     n_dist = distance(self.origin, e_player.origin);
 
     if(n_dist < 650) {
@@ -1371,7 +1371,7 @@ function_383a4355() {
     level.var_da5432a2 = 0;
   }
 
-  self setorigin(s_loc.origin);
+  self setOrigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
   self val::set(#"enemy_prophet", "ignoreall", 1);
   self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 32, 1, 1, 1);
@@ -1389,7 +1389,7 @@ function_d6e37caf() {
     level.var_da5432a2 = 0;
   }
 
-  self setorigin(s_loc.origin);
+  self setOrigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
   self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 64);
   self val::set(#"enemy_tempest", "ignoreall", 1);
@@ -1405,7 +1405,7 @@ dailydaily() {
     level.var_da5432a2 = 0;
   }
 
-  self setorigin(s_loc.origin);
+  self setOrigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
   self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 64);
   self val::set(#"enemy_tempest", "ignoreall", 1);
@@ -1477,7 +1477,7 @@ function_f868e3e2() {
   level notify(#"enemy_chopper_setup_end");
   level endon(#"combattraining_logic_finished", #"enemy_chopper_setup_end", #"fin2_enemy_chopper_destroyed");
   s_spawn = struct::get("s_chopper_spawn", "targetname");
-  level.vh_enemy_chopper = spawnvehicle(#"veh_t8_helicopter_gunship_mp", s_spawn.origin, s_spawn.angles, "vh_enemy_chopper");
+  level.vh_enemy_chopper = spawnVehicle(#"veh_t8_helicopter_gunship_mp", s_spawn.origin, s_spawn.angles, "vh_enemy_chopper");
   level.vh_enemy_chopper setteam(#"axis");
   level.vh_enemy_chopper setrotorspeed(1);
   level.vh_enemy_chopper.overridevehicledamage = &function_b274b737;

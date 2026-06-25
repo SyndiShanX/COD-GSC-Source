@@ -861,7 +861,7 @@ _id_80E1() {
   level._id_F5B5[0] = ::_id_F5E0;
 }
 
-getstruct(var_0, var_1) {
+getStruct(var_0, var_1) {
   var_2 = level._id_EA70[var_1][var_0];
 
   if(!isDefined(var_2)) {
@@ -1138,7 +1138,7 @@ _id_4796(var_0, var_1) {
 }
 
 _id_6D99(var_0, var_1) {
-  var_2 = getstruct(var_0, var_1);
+  var_2 = getStruct(var_0, var_1);
   _id_4794(var_2);
   return var_2;
 }

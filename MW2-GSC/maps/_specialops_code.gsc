@@ -86,7 +86,7 @@ place_player_at_start_point(player, start_point) {
   assertex(isDefined(player), "place_player_at_start_point() requires a valid player.");
   assertex(isDefined(start_point), "place_player_at_start_point() requires a valid start_point.");
 
-  player SetOrigin(start_point.origin);
+  player setOrigin(start_point.origin);
   if(isDefined(start_point.angles)) {
     player setPlayerAngles(start_point.angles);
   }
@@ -94,14 +94,14 @@ place_player_at_start_point(player, start_point) {
 
 place_player2_near_player1() {
   level.player2 setPlayerAngles(level.player.angles + (0, -25, 0));
-  level.player2 SetOrigin(level.player.origin);
+  level.player2 setOrigin(level.player.origin);
 
   ent = spawnStruct();
   ent.entity = level.player2;
   ent.right = -20.0;
   ent.forward = -50.0;
   ent translate_local();
-  level.player2 SetOrigin(level.player2.origin);
+  level.player2 setOrigin(level.player2.origin);
 }
 
 specialops_remove_entity_check(special_op_state) {

@@ -408,7 +408,7 @@ moving_water() {
 moving_water_flag(var_0) {
   level endon("disable_space");
   var_1 = 40;
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_3 = anglesToForward(var_2.angles) * var_1;
 
   for(;;) {
@@ -489,7 +489,7 @@ direction_change_smoothing() {
     var_6 = 0;
 
     if(level.wall_friction_enabled) {
-      var_7 = vectornormalize(level.player getvelocity());
+      var_7 = vectorNormalize(level.player getvelocity());
       var_8 = anglestoright(vectortoangles(var_7));
       var_9 = anglestoup(vectortoangles(var_7));
       var_10 = level.wall_friction_offset_dist;
@@ -545,7 +545,7 @@ space_sprint() {
   for(;;) {
     if(level.player issprinting()) {
       if(var_0 == 0) {
-        level.player playrumbleonentity("light_1s");
+        level.player playRumbleOnEntity("light_1s");
         wait 0.05;
         level.player stoprumble("light_1s");
         var_0 = 1;
@@ -754,22 +754,22 @@ attach_audio_points_to_player() {
 
       if(var_0 == 0) {
         var_1.origin = level._thruster_rig gettagorigin("tag_jet_top");
-        var_1 linkto(level._thruster_rig, "tag_jet_top", (0, 0, 0), (0, 0, 0));
+        var_1 linkTo(level._thruster_rig, "tag_jet_top", (0, 0, 0), (0, 0, 0));
       } else if(var_0 == 1) {
         var_1.origin = level._thruster_rig gettagorigin("tag_jet_bottom");
-        var_1 linkto(level._thruster_rig, "tag_jet_bottom", (0, 0, 0), (0, 0, 0));
+        var_1 linkTo(level._thruster_rig, "tag_jet_bottom", (0, 0, 0), (0, 0, 0));
       } else if(var_0 == 2) {
         var_1.origin = level._thruster_rig gettagorigin("tag_jet_front");
-        var_1 linkto(level._thruster_rig, "tag_jet_front", (0, 0, 0), (0, 0, 0));
+        var_1 linkTo(level._thruster_rig, "tag_jet_front", (0, 0, 0), (0, 0, 0));
       } else if(var_0 == 3) {
         var_1.origin = level._thruster_rig gettagorigin("tag_jet_left");
-        var_1 linkto(level._thruster_rig, "tag_jet_left", (0, 0, 0), (0, 0, 0));
+        var_1 linkTo(level._thruster_rig, "tag_jet_left", (0, 0, 0), (0, 0, 0));
       } else if(var_0 == 4) {
         var_1.origin = level._thruster_rig gettagorigin("tag_jet_right");
-        var_1 linkto(level._thruster_rig, "tag_jet_right", (0, 0, 0), (0, 0, 0));
+        var_1 linkTo(level._thruster_rig, "tag_jet_right", (0, 0, 0), (0, 0, 0));
       } else if(var_0 == 5) {
         var_1.origin = level._thruster_rig gettagorigin("tag_jet_back");
-        var_1 linkto(level._thruster_rig, "tag_jet_back", (0, 0, 0), (0, 0, 0));
+        var_1 linkTo(level._thruster_rig, "tag_jet_back", (0, 0, 0), (0, 0, 0));
       }
 
       var_1 thread thruster_audio_logic(var_0);

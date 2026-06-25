@@ -967,14 +967,14 @@ fall_down(vdir, stance) {
 
   if(isDefined(vdir) && length(vdir) > 0) {
     xyspeedmag = 40 + randomint(12) + randomint(12);
-    xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+    xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
   }
 
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = origin;
   linker.angles = angles;
   self._fall_down_anchor = linker;
-  self playerlinkto(linker);
+  self playerlinkTo(linker);
   self playsoundtoplayer("zmb_player_death_fall", self);
   falling = stance != "prone";
 
@@ -984,8 +984,8 @@ fall_down(vdir, stance) {
     floor_height = 10 + origin[2] - eye[2];
     origin = origin + (0, 0, floor_height);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
   }
 
   self freezecontrols(1);
@@ -1001,13 +1001,13 @@ fall_down(vdir, stance) {
     bounce = randomint(4) + 8;
     origin = origin + (0, 0, bounce) - xyspeed * 0.1;
     lerptime = bounce / 50.0;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = origin + (0, 0, bounce * -1) + xyspeed * 0.1;
     lerptime = lerptime / 2.0;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
   }
 
   wait 15;
@@ -1524,7 +1524,7 @@ buried_add_player_dialogue(speaker, category, type, alias, response, chance) {
 
 buried_audio_custom_response_line(player, index, category, type) {
   if(type == "vulture_stink") {
-    a_players = getplayers();
+    a_players = getPlayers();
     arrayremovevalue(a_players, player);
 
     if(a_players.size > 0) {
@@ -1909,7 +1909,7 @@ buried_custom_bank_withdrawl_vo() {
 }
 
 sloth_first_encounter_vo() {
-  trigger = getent("sloth_first_encounter_trigger", "targetname");
+  trigger = getEnt("sloth_first_encounter_trigger", "targetname");
 
   while(true) {
     trigger waittill("trigger", ent);
@@ -1959,7 +1959,7 @@ sloth_crawler_vo() {
       zombie = zombies[i];
 
       if(isDefined(zombie) && !(isDefined(zombie.has_legs) && zombie.has_legs)) {
-        a_players = getplayers();
+        a_players = getPlayers();
 
         foreach(player in a_players) {
           if(is_player_valid(player) && !(isDefined(player.isspeaking) && player.isspeaking)) {
@@ -1980,8 +1980,8 @@ sloth_crawler_vo() {
 
 collapsing_catwalk_init() {
   level endon("catwalk_collapsed");
-  trig = getent("start_platform_trig", "targetname");
-  platform = getent("start_platform", "targetname");
+  trig = getEnt("start_platform_trig", "targetname");
+  platform = getEnt("start_platform", "targetname");
 
   while(true) {
     trig waittill("trigger", who);
@@ -2003,7 +2003,7 @@ collapsing_platform_watcher(who, platform) {
     platform playSound("zmb_catwalk_shake");
   }
 
-  jump_blocker_clip = getent("start_platform_delayed_clip", "targetname");
+  jump_blocker_clip = getEnt("start_platform_delayed_clip", "targetname");
   earthquake(0.3, 3, who.origin, 128);
   level waittill_notify_or_timeout("lsat_purchased", 2);
 

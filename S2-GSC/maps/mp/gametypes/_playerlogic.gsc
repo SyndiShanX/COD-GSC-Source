@@ -1090,7 +1090,7 @@ func_9049() {
 
   self spawn_0(var_00.var_0116, var_00.var_001D);
   var_00 setModel("tag_origin");
-  self playerlinkto(var_00);
+  self playerlinkTo(var_00);
   self method_8003();
   maps\mp\_utility::func_3E8E(1);
   self method_800F();

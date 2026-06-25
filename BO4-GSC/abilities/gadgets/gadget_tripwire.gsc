@@ -243,7 +243,7 @@ function_b9549a9() {
   fxorg.angles = angles;
   fxorg setModel(#"tag_origin");
   self.var_886bd8dc = fxorg;
-  fxorg linkto(self);
+  fxorg linkTo(self);
 
   if(!isDefined(self.activated)) {
     self playSound(#"hash_58a0696fb1726978");
@@ -394,7 +394,7 @@ function_d334c3fa(endpoint) {
   }
 
   result = 0;
-  enemyplayers = getplayers("all", self.origin, level.var_c72e8c51.var_831055cb);
+  enemyplayers = getPlayers("all", self.origin, level.var_c72e8c51.var_831055cb);
 
   foreach(player in enemyplayers) {
     if(!isDefined(player.prev_origin)) {
@@ -579,16 +579,16 @@ function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
     if(isDefined(var_2f6adbe3)) {
       explosionsound = #"exp_tripwire";
       explosiondir = self.origin - var_2f6adbe3.origin;
-      explosiondir = vectornormalize(explosiondir);
+      explosiondir = vectorNormalize(explosiondir);
       perpvec = perpendicularvector(explosiondir);
       owner = isDefined(var_2f6adbe3.owner) && isentity(var_2f6adbe3.owner) ? var_2f6adbe3.owner : undefined;
       var_2f6adbe3 cylinderdamage(explosiondir * explosiondist, var_2f6adbe3.origin, nearradius, farradius, maxdamage, mindamage, owner, "MOD_EXPLOSIVE", self.weapon);
       playFX(#"hash_69455dfeef0311c2", var_2f6adbe3.origin, explosiondir, perpvec);
-      playsoundatposition(explosionsound, self.origin);
-      playsoundatposition(explosionsound, var_2f6adbe3.origin);
+      playSoundAtPosition(explosionsound, self.origin);
+      playSoundAtPosition(explosionsound, var_2f6adbe3.origin);
       var_2f6adbe3 ghost();
       explosiondir = var_2f6adbe3.origin - self.origin;
-      explosiondir = vectornormalize(explosiondir);
+      explosiondir = vectorNormalize(explosiondir);
     }
 
     if(isDefined(self) && isDefined(self.owner)) {
@@ -697,7 +697,7 @@ function_9b3a657f(weapon) {
     playFX(level.var_c72e8c51.shockrifledestructionfx, self.origin);
   }
 
-  playsoundatposition(#"wpn_tripwire_remove", self.origin);
+  playSoundAtPosition(#"wpn_tripwire_remove", self.origin);
   self stoploopsound(0.5);
   arrayremovevalue(level.tripwires, self);
   var_886bd8dc = self.var_886bd8dc;

@@ -207,7 +207,7 @@ func_7DC9(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2) {
     var_9 = (var_1[0], var_1[1], 0);
-    var_10 = vectornormalize(var_9);
+    var_10 = vectorNormalize(var_9);
 
     if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;
@@ -406,7 +406,7 @@ func_5AC1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_8 = self.endnode_pos;
     var_9 = 1;
   } else {
-    var_8 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
+    var_8 = scripts\engine\utility::getStruct(self.endnode.target, "targetname");
     var_8 = var_8.origin;
     var_10 = getnotetracktimes(var_2, "highest_point");
     var_9 = var_10[0];

@@ -779,7 +779,7 @@ init_trigger_flags() {
   level.trigger_func[false] = ::trigger_off;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   assertex(isDefined(name) && isDefined(type), "Did not fill in name and type");
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
@@ -1843,7 +1843,7 @@ get_target_ent(target) {
 
   AssertEx(isDefined(target), "Self had no target!");
 
-  ent = GetEnt(target, "targetname");
+  ent = getEnt(target, "targetname");
   if(isDefined(ent)) {
     return ent;
   }
@@ -1855,7 +1855,7 @@ get_target_ent(target) {
     }
   }
 
-  ent = getstruct(target, "targetname");
+  ent = getStruct(target, "targetname");
   if(isDefined(ent)) {
     return ent;
   }
@@ -1911,7 +1911,7 @@ exploder_rumble() {
     return;
   }
   self exploder_delay();
-  level.player PlayRumbleOnEntity(self.v["rumble"]);
+  level.player playRumbleOnEntity(self.v["rumble"]);
 }
 
 exploder_delay() {
@@ -2311,11 +2311,11 @@ play_loop_sound_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);

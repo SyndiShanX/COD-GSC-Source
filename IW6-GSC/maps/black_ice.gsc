@@ -441,13 +441,13 @@ trains_periph_logic(var_0, var_1) {
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
     var_4 = getEntArray("train_" + var_3, "targetname");
-    var_5 = getent("train_control_node_" + var_3, "targetname");
+    var_5 = getEnt("train_control_node_" + var_3, "targetname");
     var_5.init_origin = var_5.origin;
     var_5.trains = [];
 
     foreach(var_7 in var_4) {
       var_7 show();
-      var_7 linkto(var_5);
+      var_7 linkTo(var_5);
       var_5.trains[var_5.trains.size] = var_7;
     }
 
@@ -459,13 +459,13 @@ trains_move(var_0, var_1, var_2) {
   wait(var_0);
   var_3 = 288.0;
   var_4 = 100.0;
-  var_5 = getent("train_target_node", "targetname");
+  var_5 = getEnt("train_target_node", "targetname");
   var_6 = var_3 * level.timestep;
   var_7 = var_5.origin - var_1.origin;
 
   while(lengthsquared(var_7) > var_4) {
     var_7 = var_5.origin - var_1.origin;
-    var_8 = vectornormalize(var_7);
+    var_8 = vectorNormalize(var_7);
     var_1.origin = var_1.origin + var_8 * var_6;
     wait(level.timestep);
   }

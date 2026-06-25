@@ -25,7 +25,7 @@ config_system() {
 init_snd_flags() {}
 
 init_globals() {
-  level.aud.bog_faked_ambience_ent = getent("amb_damb_bog_01", "targetname");
+  level.aud.bog_faked_ambience_ent = getEnt("amb_damb_bog_01", "targetname");
 }
 
 launch_threads() {
@@ -122,8 +122,8 @@ start_end_checkpoint(var_0) {
 }
 
 play_intro_scripted_cobra_pass_by() {
-  var_0 = common_scripts\utility::getstruct("auto9", "targetname");
-  var_1 = common_scripts\utility::getstruct("auto3112", "targetname");
+  var_0 = common_scripts\utility::getStruct("auto9", "targetname");
+  var_1 = common_scripts\utility::getStruct("auto3112", "targetname");
   var_0 thread play_scripted_pass_by_sfx("scn_intro_cobra_passby_01");
   var_1 thread play_scripted_pass_by_sfx("scn_intro_cobra_passby_02");
 }
@@ -157,7 +157,7 @@ start_shanty_open_audio() {
 }
 
 play_chain_link_fence_sfx() {
-  var_0 = getent("trig_metal_fence_sfx", "targetname");
+  var_0 = getEnt("trig_metal_fence_sfx", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -183,7 +183,7 @@ play_scripted_pass_by_sfx(var_0) {
 trigger_sound_emitter() {
   if(isDefined(self.script_parameters) && isDefined(self.target)) {
     self waittill("trigger", var_0);
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
     var_1 maps\_utility::play_sound_on_entity(self.script_parameters);
   }
 }
@@ -193,7 +193,7 @@ start_gunfire_damb_bog() {
 }
 
 start_gunfire_damb_first_war_zone() {
-  var_0 = getent("amb_damb_first_warzone_01", "targetname");
+  var_0 = getEnt("amb_damb_first_warzone_01", "targetname");
   soundscripts\_audio_dynamic_ambi::damb_start_preset_at_point("bog_gun_fire", var_0.origin, "first_war_zone_gunfire");
 }
 
@@ -203,7 +203,7 @@ start_bog_combat_emitter() {
 }
 
 monitor_stop_bog_combat_emitter() {
-  var_0 = getent("stop_combat_emitter_sfx", "targetname");
+  var_0 = getEnt("stop_combat_emitter_sfx", "targetname");
   var_0 waittill("trigger");
   level.aud.bog_faked_ambience_ent common_scripts\utility::stop_loop_sound_on_entity("emt_bog_a_bog_combat");
 }
@@ -230,7 +230,7 @@ handle_cobra_waypoint_audio(var_0) {
 }
 
 start_distant_alarm_sfx() {
-  level.alarm_ent = getent("distant_alarm_sfx", "targetname");
+  level.alarm_ent = getEnt("distant_alarm_sfx", "targetname");
   level.alarm_ent thread common_scripts\utility::play_loop_sound_on_entity("emt_air_raid_alarm", undefined, 0, 20);
 }
 

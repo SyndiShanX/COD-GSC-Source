@@ -89,7 +89,7 @@ function start_timed_vortex(v_vortex_origin, n_vortex_radius, vortex_pull_durati
   assert(isDefined(vortex_pull_duration), "");
   n_starttime = gettime();
   n_currtime = gettime() - n_starttime;
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   if(!isDefined(n_vortex_explosion_radius)) {
     n_vortex_explosion_radius = n_vortex_radius * 1.5;
   }
@@ -233,7 +233,7 @@ function private vortex_explosion(v_vortex_explosion_origin, eattacker, n_vortex
       n_radius_sqr = n_vortex_radius * n_vortex_radius;
       n_distance_sqr = distancesquared(ai_zombie.origin, v_vortex_explosion_origin);
       n_dist_mult = n_distance_sqr / n_radius_sqr;
-      v_fling = vectornormalize(ai_zombie.origin - v_vortex_explosion_origin);
+      v_fling = vectorNormalize(ai_zombie.origin - v_vortex_explosion_origin);
       v_fling = (v_fling[0], v_fling[1], abs(v_fling[2]));
       v_fling = vectorscale(v_fling, 100 + (100 * n_dist_mult));
       if(!(isDefined(level.ignore_vortex_ragdoll) && level.ignore_vortex_ragdoll)) {
@@ -280,10 +280,10 @@ function state_idgun_crush_update(params) {
   if(self.archetype == "raps") {
     crush_anim = "ai_zombie_zod_raps_dth_f_id_gun_crush";
   }
-  veh_to_black_hole_vec = vectornormalize(black_hole_center - self.origin);
+  veh_to_black_hole_vec = vectorNormalize(black_hole_center - self.origin);
   fly_ent = spawn("script_origin", self.origin);
   fly_ent thread flyentdelete(self);
-  self linkto(fly_ent);
+  self linkTo(fly_ent);
   while(true) {
     veh_to_black_hole_dist_sqr = distancesquared(self.origin, black_hole_center);
     if(veh_to_black_hole_dist_sqr < 144) {
@@ -293,7 +293,7 @@ function state_idgun_crush_update(params) {
     }
     if(!(isDefined(self.crush_anim_started) && self.crush_anim_started) && veh_to_black_hole_dist_sqr < 1600) {
       if(isDefined(crush_anim)) {
-        self animscripted("anim_notify", self.origin, self.angles, crush_anim, "normal", undefined, undefined, 0.2);
+        self animScripted("anim_notify", self.origin, self.angles, crush_anim, "normal", undefined, undefined, 0.2);
       }
       self.crush_anim_started = 1;
     }

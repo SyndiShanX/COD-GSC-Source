@@ -10,7 +10,7 @@ init(localclientnum) {
   array_thread(triggers, ::multicams_trigger_thread);
 
   for(i = 1; i <= 4; i++) {
-    camerastruct = getstruct("extracam" + i, "targetname");
+    camerastruct = getStruct("extracam" + i, "targetname");
 
     if(isDefined(camerastruct)) {
       camera_ent = spawn(localclientnum, camerastruct.origin, "script_origin");

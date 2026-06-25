@@ -175,7 +175,7 @@ playradiationsound() {
   var_0 = spawn("script_origin", (0, 0, 0));
   var_0.origin = self.origin;
   var_0.angles = self.angles;
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_1 = self.radiation.sound;
 
   for(;;) {

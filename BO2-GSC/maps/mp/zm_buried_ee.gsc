@@ -11,8 +11,8 @@
 #include maps\mp\zombies\_zm_powerups;
 
 init_ghost_piano() {
-  t_bullseye = getent("bullseye", "script_noteworthy");
-  t_chalk_line = getent("ee_bar_chalk_line_trigger", "targetname");
+  t_bullseye = getEnt("bullseye", "script_noteworthy");
+  t_chalk_line = getEnt("ee_bar_chalk_line_trigger", "targetname");
 
   if(!isDefined(t_bullseye) || !isDefined(t_chalk_line)) {
     return;
@@ -104,7 +104,7 @@ mansion_ghost_plays_piano() {
 #using_animtree("zm_buried_ghost");
 
 spawn_and_animate_ghost_pianist() {
-  s_anim = getstruct("ee_mansion_piano_anim_struct", "targetname");
+  s_anim = getStruct("ee_mansion_piano_anim_struct", "targetname");
   e_temp = spawn("script_model", s_anim.origin);
   e_temp.angles = s_anim.angles;
   e_temp setclientfield("ghost_fx", 3);
@@ -119,8 +119,8 @@ spawn_and_animate_ghost_pianist() {
 }
 
 reward_think() {
-  t_use = getent("ee_ghost_piano_mansion_use_trigger", "targetname");
-  t_use sethintstring(&"ZM_BURIED_HINT_GHOST_PIANO", 10);
+  t_use = getEnt("ee_ghost_piano_mansion_use_trigger", "targetname");
+  t_use setHintString(&"ZM_BURIED_HINT_GHOST_PIANO", 10);
   t_use setinvisibletoall();
 
   while(true) {
@@ -195,8 +195,8 @@ warp_to_struct(str_value, str_key) {
     str_key = "targetname";
   }
 
-  s_warp = getstruct(str_value, str_key);
-  self setorigin(s_warp.origin);
+  s_warp = getStruct(str_value, str_key);
+  self setOrigin(s_warp.origin);
 
   if(isDefined(s_warp.angles)) {
     self setplayerangles(s_warp.angles);

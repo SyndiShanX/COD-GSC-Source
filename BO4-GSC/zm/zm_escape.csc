@@ -109,7 +109,7 @@ rumble_gondola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     while(true) {
       if(isinarray(getlocalplayers(), self)) {
-        self playrumbleonentity(localclientnum, "reload_small");
+        self playRumbleOnEntity(localclientnum, "reload_small");
       }
 
       wait 0.25;
@@ -121,7 +121,7 @@ rumble_gondola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   self notify(#"rumble_gondola_finished");
 
   if(isinarray(getlocalplayers(), self)) {
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
   }
 }
 
@@ -133,7 +133,7 @@ function_1bccf046(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self endon(#"hash_2e4f137d472e68e9");
 
     while(true) {
-      self playrumbleonentity(localclientnum, "reload_small");
+      self playRumbleOnEntity(localclientnum, "reload_small");
       wait 0.25;
     }
 

@@ -70,7 +70,7 @@ function _on(slot, weapon) {
   if(self.health < (self.maxhealth * getdvarfloat("scr_overdrive_min_health", 0.35))) {
     self setnormalhealth(getdvarfloat("scr_overdrive_min_health", 0.35));
   }
-  self playrumbleonentity("tank_rumble");
+  self playRumbleOnEntity("tank_rumble");
   if(isPlayer(self)) {
     itemindex = getitemindexfromref("cybercom_overdrive");
     if(isDefined(itemindex)) {

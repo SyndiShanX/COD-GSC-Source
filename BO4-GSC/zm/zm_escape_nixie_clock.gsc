@@ -37,7 +37,7 @@ function_fb0bd6b9() {
   level flag::init(#"nixie_door_open");
   level flag::init(#"hash_7ebd1255a2e91e3e");
   level flag::init(#"hash_795bde5570f8b67c");
-  var_5554a9f4 = getent("nixie_door_trigger", "targetname");
+  var_5554a9f4 = getEnt("nixie_door_trigger", "targetname");
   var_5554a9f4 thread _goodlighting_hangar_a();
   a_s_nixie_tubes = struct::get_array("nixie_tubes", "script_noteworthy");
 
@@ -50,46 +50,46 @@ function_fb0bd6b9() {
 }
 
 _goodlighting_hangar_a() {
-  self sethintstring(#"hash_2f5a14e8bf175422");
+  self setHintString(#"hash_2f5a14e8bf175422");
   self.b_can_open = 0;
   level flag::wait_till(#"have_wardens_key");
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_749f3ae6e6a73762");
+    self setHintString(#"hash_749f3ae6e6a73762");
   } else {
-    self sethintstring(#"hash_7b303154f29d09c6");
+    self setHintString(#"hash_7b303154f29d09c6");
   }
 
   self waittill(#"trigger");
-  mdl_lock = getent("masterkey_lock_3", "targetname");
+  mdl_lock = getEnt("masterkey_lock_3", "targetname");
 
   if(isDefined(mdl_lock)) {
     mdl_lock delete();
   }
 
-  playsoundatposition(#"hash_b0382b7432f8232", self.origin);
-  mdl_door_left = getent("nixie_door_left", "targetname");
-  mdl_door_right = getent("nixie_door_right", "targetname");
+  playSoundAtPosition(#"hash_b0382b7432f8232", self.origin);
+  mdl_door_left = getEnt("nixie_door_left", "targetname");
+  mdl_door_right = getEnt("nixie_door_right", "targetname");
   mdl_door_left notsolid();
   mdl_door_right notsolid();
-  mdl_door_left rotateyaw(-94, 1, 0.2, 0.2);
-  mdl_door_right rotateyaw(195, 1, 0.2, 0.2);
+  mdl_door_left rotateYaw(-94, 1, 0.2, 0.2);
+  mdl_door_right rotateYaw(195, 1, 0.2, 0.2);
   level thread function_152c339e();
   self delete();
   level flag::set(#"nixie_door_open");
   level thread function_89f2ec87();
   wait 1;
-  mdl_door_left rotateyaw(8, 1, 0.2, 0.2);
-  mdl_door_right rotateyaw(-10, 1, 0.2, 0.2);
+  mdl_door_left rotateYaw(8, 1, 0.2, 0.2);
+  mdl_door_right rotateYaw(-10, 1, 0.2, 0.2);
   wait 1;
-  mdl_door_left rotateyaw(-5, 1, 0.2, 0.2);
-  mdl_door_right rotateyaw(7, 1, 0.2, 0.2);
+  mdl_door_left rotateYaw(-5, 1, 0.2, 0.2);
+  mdl_door_right rotateYaw(7, 1, 0.2, 0.2);
   wait 1;
-  mdl_door_left rotateyaw(3, 1, 0.2, 0.2);
-  mdl_door_right rotateyaw(-5, 1, 0.2, 0.2);
+  mdl_door_left rotateYaw(3, 1, 0.2, 0.2);
+  mdl_door_right rotateYaw(-5, 1, 0.2, 0.2);
   wait 1;
-  mdl_door_left rotateyaw(-2, 1, 0.2, 0.2);
-  mdl_door_right rotateyaw(3, 1, 0.2, 0.2);
+  mdl_door_left rotateYaw(-2, 1, 0.2, 0.2);
+  mdl_door_right rotateYaw(3, 1, 0.2, 0.2);
 }
 
 function_89f2ec87() {
@@ -214,13 +214,13 @@ function_ba25a76f(n_max_time, var_62002857 = 0) {
 function_d6ae109c(b_turn_on) {
   if(b_turn_on) {
     self.e_sound = spawn("script_origin", self.origin);
-    playsoundatposition(#"evt_nixie_clock_on", self.origin);
+    playSoundAtPosition(#"evt_nixie_clock_on", self.origin);
     self.e_sound playLoopSound(#"evt_nixie_clock_lp");
     return;
   }
 
   if(isDefined(self.e_sound)) {
-    playsoundatposition(#"evt_nixie_clock_off", self.origin);
+    playSoundAtPosition(#"evt_nixie_clock_off", self.origin);
     self.e_sound stoploopsound();
     wait 0.5;
     self.e_sound delete();
@@ -244,13 +244,13 @@ function_bad2e505(player) {
 
     switch (self.targetname) {
       case #"nixie_tube_trigger_1":
-        self sethintstring(#"");
+        self setHintString(#"");
         break;
       case #"nixie_tube_trigger_2":
-        self sethintstring(#"");
+        self setHintString(#"");
         break;
       case #"nixie_tube_trigger_3":
-        self sethintstring(#"");
+        self setHintString(#"");
         break;
     }
 
@@ -416,7 +416,7 @@ function_f2f53f97() {
 
   for(s_target = struct::get(s_spawn_location.target); isDefined(s_target); s_target = struct::get(s_target.target)) {
     n_time = distance(mdl_powerup.origin, s_target.origin) / 300;
-    mdl_powerup moveto(s_target.origin, n_time);
+    mdl_powerup moveTo(s_target.origin, n_time);
     mdl_powerup waittill(#"movedone");
   }
 
@@ -433,7 +433,7 @@ function_25aaae40() {
 
 function_15aa00e7() {
   var_43b4f0a = struct::get("nixie_tube_2");
-  playsoundatposition(#"hash_1588095b858588d", var_43b4f0a.origin);
+  playSoundAtPosition(#"hash_1588095b858588d", var_43b4f0a.origin);
 
   if(!(isDefined(level.var_19fe84f5) && level.var_19fe84f5)) {
     if(zm_zonemgr::get_players_in_zone("zone_citadel_stairs") > 0) {

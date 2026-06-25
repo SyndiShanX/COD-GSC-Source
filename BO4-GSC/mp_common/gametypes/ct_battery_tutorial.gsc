@@ -1609,7 +1609,7 @@ function_abd58b32() {
 
 function_5e9629d8(waypoint) {
   self endon(#"death");
-  vol_room = getent("vol_grenade_room", "targetname");
+  vol_room = getEnt("vol_grenade_room", "targetname");
 
   while(true) {
     waitresult = self waittill(#"grenade_fire");
@@ -1872,7 +1872,7 @@ function_e7a8d041() {
   level.players[0] endon(#"death");
   self endon(#"death", #"explode");
   level endon(#"window_hit");
-  var_e5784d10 = getent("vol_window_target", "targetname");
+  var_e5784d10 = getEnt("vol_window_target", "targetname");
 
   while(true) {
     if(self istouching(var_e5784d10)) {

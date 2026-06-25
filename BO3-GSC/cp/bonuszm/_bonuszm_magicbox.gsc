@@ -125,18 +125,18 @@ class class_dafbfd8e {
     var_b8eeb0fe clientfield::set("magicbox_open_glow", 1);
     weaponinfo = function_c3e9e1ab(e_player);
     var_7983c848 = spawn("trigger_radius_use", var_3f29a509.origin + vectorscale((0, 0, 1), 3), 0, 94, 64);
-    var_7983c848 triggerignoreteam();
+    var_7983c848 triggerIgnoreTeam();
     var_7983c848 setvisibletoall();
-    var_7983c848 usetriggerrequirelookat();
+    var_7983c848 useTriggerRequireLookAt();
     var_7983c848 setteamfortrigger("none");
-    var_7983c848 setcursorhint("HINT_INTERACTIVE_PROMPT");
-    var_7983c848 sethintstring(&"COOP_MAGICBOX_SWAP_WEAPON");
+    var_7983c848 setCursorHint("HINT_INTERACTIVE_PROMPT");
+    var_7983c848 setHintString(&"COOP_MAGICBOX_SWAP_WEAPON");
     var_b8eeb0fe.var_7983c848 = var_7983c848;
     var_aafa484e = util::init_interactive_gameobject(var_7983c848, &"cp_magic_box", &"COOP_MAGICBOX_SWAP_WEAPON", &onuse);
     var_aafa484e.dontlinkplayertotrigger = 1;
     var_aafa484e.classobj = self;
-    var_aafa484e enablelinkto();
-    var_aafa484e linkto(var_7983c848);
+    var_aafa484e enablelinkTo();
+    var_aafa484e linkTo(var_7983c848);
     e_player unlink();
     var_7983c848 util::waittill_any_timeout(6, "player_took_weapon");
     var_7983c848 notify("hash_49d64e9");
@@ -171,30 +171,30 @@ class class_dafbfd8e {
 
   function function_309dd42b(mdl_mobile_armory) {
     e_trigger = spawn("trigger_radius_use", mdl_mobile_armory.origin + vectorscale((0, 0, 1), 3), 0, 94, 64);
-    e_trigger triggerignoreteam();
+    e_trigger triggerIgnoreTeam();
     e_trigger setvisibletoall();
-    e_trigger usetriggerrequirelookat();
+    e_trigger useTriggerRequireLookAt();
     e_trigger setteamfortrigger("none");
-    e_trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
-    e_trigger sethintstring(&"COOP_MAGICBOX");
+    e_trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
+    e_trigger setHintString(&"COOP_MAGICBOX");
     var_9fd18135 = getEntArray("bonuszm_magicbox", "script_noteworthy");
     var_b8eeb0fe = arraygetclosest(e_trigger.origin, var_9fd18135);
     var_b8eeb0fe.origin = mdl_mobile_armory.origin;
     var_b8eeb0fe.angles = mdl_mobile_armory.angles + (vectorscale((0, -1, 0), 90));
     var_b8eeb0fe hidezbarrierpiece(1);
     if(isDefined(mdl_mobile_armory.script_linkto)) {
-      moving_platform = getent(mdl_mobile_armory.script_linkto, "targetname");
-      mdl_mobile_armory linkto(moving_platform);
-      var_b8eeb0fe linkto(moving_platform);
-      e_trigger enablelinkto();
-      e_trigger linkto(moving_platform);
+      moving_platform = getEnt(mdl_mobile_armory.script_linkto, "targetname");
+      mdl_mobile_armory linkTo(moving_platform);
+      var_b8eeb0fe linkTo(moving_platform);
+      e_trigger enablelinkTo();
+      e_trigger linkTo(moving_platform);
     }
     s_mobile_armory_object = util::init_interactive_gameobject(e_trigger, &"cp_magic_box", &"COOP_OPEN", &onuse);
     s_mobile_armory_object.dontlinkplayertotrigger = 1;
     s_mobile_armory_object.classobj = self;
     if(!isDefined(mdl_mobile_armory.script_linkto)) {
-      s_mobile_armory_object enablelinkto();
-      s_mobile_armory_object linkto(e_trigger);
+      s_mobile_armory_object enablelinkTo();
+      s_mobile_armory_object linkTo(e_trigger);
     }
     mdl_mobile_armory.gameobject = s_mobile_armory_object;
     var_b8eeb0fe.gameobject = s_mobile_armory_object;

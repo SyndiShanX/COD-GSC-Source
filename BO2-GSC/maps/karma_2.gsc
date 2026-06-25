@@ -45,7 +45,7 @@ main() {
   maps\karma_2_amb::main();
   maps\karma_2_anim::main();
   maps\_heatseekingmissile::init();
-  level.e_extra_cam = getent("endgame_extra_cam", "targetname");
+  level.e_extra_cam = getEnt("endgame_extra_cam", "targetname");
   onplayerconnect_callback(::on_player_connect);
   level thread maps\_drones::init();
   level thread maps\karma_civilians::civ_init();
@@ -136,11 +136,11 @@ init_spawn_funcs() {
   add_global_spawn_function("neutral", ::global_neutral_settings);
   add_global_spawn_function("allies", ::spawn_func_follow_path);
   add_global_drone_spawn_function("neutral", ::auto_delete_with_ref);
-  sp = getent("defalco", "targetname");
+  sp = getEnt("defalco", "targetname");
   sp add_spawn_function(::spawn_func_defalco);
-  sp = getent("harper", "targetname");
+  sp = getEnt("harper", "targetname");
   sp add_spawn_function(::spawn_func_harper);
-  sp = getent("salazar", "targetname");
+  sp = getEnt("salazar", "targetname");
   sp add_spawn_function(::spawn_func_salazar);
   add_spawn_function_veh_by_type("heli_blackhawk_stealth_axis", ::spawn_func_helicopter);
   add_spawn_function_veh_by_type("drone_metalstorm_karma", ::spawn_func_asd);

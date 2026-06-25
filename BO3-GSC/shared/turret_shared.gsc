@@ -351,7 +351,7 @@ function fire(n_index) {
       return;
     }
     if(isDefined(s_turret.e_target)) {
-      self setgunnertargetent(s_turret.e_target, s_turret.v_offset, n_index - 1);
+      self setgunnertargetEnt(s_turret.e_target, s_turret.v_offset, n_index - 1);
     }
     self fireweapon(n_index, s_turret.e_target, s_turret.v_offset, s_turret.e_parent);
   }
@@ -571,7 +571,7 @@ function _has_nearby_player_enemy(index, turret) {
     turret.next_nearby_enemy_time = time;
   }
   if(time >= turret.next_nearby_enemy_time) {
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(turret.team == player.team) {
         continue;
@@ -1255,7 +1255,7 @@ function trace_test(e_target, v_offset = (0, 0, 0), n_index) {
     v_start_org = self gettagorigin(s_turret.str_tag_pivot);
     if(e_target sightconetrace(v_start_org, self) > 0.2) {
       v_target = e_target.origin + v_offset;
-      v_start_org = v_start_org + ((vectornormalize(v_target - v_start_org)) * 50);
+      v_start_org = v_start_org + ((vectorNormalize(v_target - v_start_org)) * 50);
       a_trace = bulletTrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 1, 1);
       if(a_trace["fraction"] > 0.6) {
         return true;
@@ -1272,7 +1272,7 @@ function trace_test(e_target, v_offset = (0, 0, 0), n_index) {
   if(distancesquared(v_start_org, v_target) < 10000) {
     return true;
   }
-  v_dir_to_target = vectornormalize(v_target - v_start_org);
+  v_dir_to_target = vectorNormalize(v_target - v_start_org);
   if(!sessionmodeismultiplayergame()) {
     v_start_org = v_start_org + (v_dir_to_target * 50);
     v_target = v_target - (v_dir_to_target * 75);

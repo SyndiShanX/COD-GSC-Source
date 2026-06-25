@@ -21,7 +21,7 @@ func_3D58(param_00) {
   self notify("flash_rumble_loop");
   var_01 = gettime() + param_00 * 1000;
   while(gettime() < var_01) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }

@@ -186,7 +186,7 @@ ghost_trail_to_scu(var_0, var_1, var_2) {
   playFXOnTag(level._effect["zombie_ghost_trail"], var_3, "tag_origin");
   var_4 = var_1;
   for(;;) {
-    var_3 moveto(var_4, 0.5, 0.125);
+    var_3 moveTo(var_4, 0.5, 0.125);
     var_3 waittill("movedone");
     if(!isDefined(var_2) && isDefined(var_2.deployed_scu)) {
       break;
@@ -479,7 +479,7 @@ start_death_trigger_monitor() {
     return;
   }
 
-  var_0 = getent("ghost_death_trigger", "targetname");
+  var_0 = getEnt("ghost_death_trigger", "targetname");
   var_0 thread ghost_death_trigger_monitor(var_0);
 }
 
@@ -512,7 +512,7 @@ end_ghost_wave() {
 }
 
 stop_death_trigger_monitor() {
-  var_0 = getent("ghost_death_trigger", "targetname");
+  var_0 = getEnt("ghost_death_trigger", "targetname");
   var_0 notify("stop_death_trigger_monitor");
 }
 
@@ -650,7 +650,7 @@ move_group(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_7 moveto(var_7.origin + var_4, var_2);
+    var_7 moveTo(var_7.origin + var_4, var_2);
   }
 
   wait(var_2 + var_3);
@@ -718,7 +718,7 @@ spawn_moving_target_group(var_0) {
 }
 
 spawn_moving_target(var_0) {
-  var_1 = scripts\engine\utility::getstruct("ghost_wave_start_pos", "targetname");
+  var_1 = scripts\engine\utility::getStruct("ghost_wave_start_pos", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel(get_moving_target_model());
   var_2.angles = var_1.angles;
@@ -728,7 +728,7 @@ spawn_moving_target(var_0) {
     [[level.assign_moving_target_flags_func]](var_0, var_2);
   }
 
-  var_2 moveto(var_0.origin, 1);
+  var_2 moveTo(var_0.origin, 1);
   var_3 = var_0.script_noteworthy;
   level.moving_target_priority[var_3][level.moving_target_priority[var_3].size] = var_2;
   return var_2;
@@ -755,7 +755,7 @@ activate_moving_targets_default(var_0) {
   foreach(var_2 in level.moving_target_groups) {
     foreach(var_4 in var_2) {
       var_4.original_angles_to_face = var_4.angles;
-      var_4 rotateto(var_4.angles_to_face_when_activated, 1, 1);
+      var_4 rotateTo(var_4.angles_to_face_when_activated, 1, 1);
     }
   }
 
@@ -806,20 +806,20 @@ all_moving_targets_show_color() {
 hide_color(var_0) {
   var_0 endon("death");
   var_0 endon("become_red_moving_target");
-  var_0 rotateto(var_0.original_angles_to_face, 1, 1);
+  var_0 rotateTo(var_0.original_angles_to_face, 1, 1);
   wait(1);
   var_0 setscriptablepartstate("skull_vfx", "off");
 }
 
 show_color(var_0) {
   var_0 endon("death");
-  var_0 rotateto(var_0.angles_to_face_when_activated, 1, 1);
+  var_0 rotateTo(var_0.angles_to_face_when_activated, 1, 1);
   wait(1);
   var_0 setscriptablepartstate("skull_vfx", var_0.color);
 }
 
 start_ghost_portal_vfx() {
-  var_0 = scripts\engine\utility::getstruct("ghost_wave_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ghost_wave_portal", "targetname");
   var_1 = spawnfx(level._effect["moving_target_portal"], var_0.origin, anglesToForward(var_0.angles), anglestoup(var_0.angles));
   wait(1);
   triggerfx(var_1);
@@ -868,7 +868,7 @@ moving_targets_attack_logic() {
 
     var_4 = var_3.moving_target;
     var_5 = var_3.player;
-    var_6 = vectornormalize(var_5 getEye() - var_4.origin);
+    var_6 = vectorNormalize(var_5 getEye() - var_4.origin);
     var_7 = var_4.origin + var_6 * 60;
     var_8 = var_5.origin;
     level thread shoot_8bit_lasers(var_7, var_8);
@@ -1181,8 +1181,8 @@ get_active_moving_target_based_on_priority() {
 fly_back_into_portal(var_0) {
   var_0 endon("death");
   var_0.flying_to_portal = 1;
-  var_1 = scripts\engine\utility::getstruct("ghost_wave_start_pos", "targetname");
-  var_0 moveto(var_1.origin, 6);
+  var_1 = scripts\engine\utility::getStruct("ghost_wave_start_pos", "targetname");
+  var_0 moveTo(var_1.origin, 6);
   var_0 waittill("movedone");
   level.num_moving_target_escaped++;
   display_target_escaped_message();
@@ -1260,14 +1260,14 @@ delay_end_ghost_wave_on_fail() {
 teleport_into_arcade_console(var_0) {
   var_1 = scripts\engine\utility::getStructArray("ghost_wave_player_start", "targetname");
   var_2 = var_1[var_0 getentitynumber()];
-  var_0 setorigin(var_2.origin);
+  var_0 setOrigin(var_2.origin);
   var_0 setplayerangles(var_2.angles);
 }
 
 teleport_out_of_arcade_console(var_0) {
   var_1 = scripts\engine\utility::getStructArray("ghost_wave_player_end", "targetname");
   var_2 = var_1[var_0 getentitynumber()];
-  var_0 setorigin(scripts\engine\utility::drop_to_ground(var_2.origin, 50, -300));
+  var_0 setOrigin(scripts\engine\utility::drop_to_ground(var_2.origin, 50, -300));
   var_0 setplayerangles(var_2.angles);
 }
 
@@ -1355,7 +1355,7 @@ activate_death_grid_lines_and_trigger() {
 }
 
 advance_death_grid_lines_and_trigger() {
-  var_0 = getent("ghost_death_trigger", "targetname");
+  var_0 = getEnt("ghost_death_trigger", "targetname");
   var_1 = var_0.origin[1];
   var_2 = var_1 + 217;
   var_3 = level.death_trigger_activate_y_pos + 217 * get_max_num_of_death_trigger_advance();
@@ -1376,8 +1376,8 @@ get_max_num_of_death_trigger_advance() {
 }
 
 set_death_grid_lines_and_trigger_y_pos(var_0) {
-  var_1 = getent("ghost_death_trigger", "targetname");
-  var_2 = getent("ghost_death_grid_lines", "targetname");
+  var_1 = getEnt("ghost_death_trigger", "targetname");
+  var_2 = getEnt("ghost_death_grid_lines", "targetname");
   var_1 dontinterpolate();
   var_2 dontinterpolate();
   var_1.origin = (var_1.origin[0], var_0, var_1.origin[2]);

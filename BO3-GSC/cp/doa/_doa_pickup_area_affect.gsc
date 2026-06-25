@@ -22,7 +22,7 @@
 function function_be253d27(var_53e67bd3 = 0.6) {
   self endon("death");
   while(isDefined(self)) {
-    self rotateto(self.angles + vectorscale((0, 1, 0), 180), var_53e67bd3);
+    self rotateTo(self.angles + vectorscale((0, 1, 0), 180), var_53e67bd3);
     wait(var_53e67bd3);
   }
 }
@@ -56,7 +56,7 @@ function function_ca06d008(player, origin) {
   }
   trigger = spawn("trigger_radius", coat.origin, 9, level.doa.rules.var_942b8706, 60);
   trigger.targetname = "teamShifterUpdate";
-  trigger enablelinkto();
+  trigger enablelinkTo();
   trigger.opentime = 2300;
   trigger.var_96ff2cda = gettime() + trigger.opentime;
   trigger.radiussq = level.doa.rules.var_942b8706 * level.doa.rules.var_942b8706;
@@ -146,8 +146,8 @@ function timeshifterupdate(player, origin) {
   clock playLoopSound("zmb_pwup_clock_loop", 2);
   trigger = spawn("trigger_radius", clock.origin, 9, level.doa.rules.var_942b8706, 60);
   trigger.targetname = "timeShifterUpdate";
-  trigger enablelinkto();
-  trigger linkto(clock);
+  trigger enablelinkTo();
+  trigger linkTo(clock);
   trigger.opentime = 3000;
   trigger.var_96ff2cda = gettime() + trigger.opentime;
   trigger.radiussq = level.doa.rules.var_942b8706 * level.doa.rules.var_942b8706;
@@ -230,7 +230,7 @@ function function_159bb1dd(player, origin) {
   monkey thread namespace_eaa992c::function_285a2999(namespace_831a4a7c::function_e7e0aa7f(player.entnum));
   def = doa_pickups::function_bac08508(11);
   monkey useanimtree($zombie_cymbal_monkey);
-  monkey animscripted("anim", monkey.origin, monkey.angles, %zombie_cymbal_monkey::o_monkey_bomb);
+  monkey animScripted("anim", monkey.origin, monkey.angles, %zombie_cymbal_monkey::o_monkey_bomb);
   monkey.angles = (0, randomint(360), 0);
   monkey makesentient();
   monkey.threatbias = 0;

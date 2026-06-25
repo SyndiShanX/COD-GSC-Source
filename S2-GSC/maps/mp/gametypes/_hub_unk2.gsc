@@ -26,16 +26,16 @@ func_00D5() {
   func_8A20("division_prestige_npc", "division_prestige_menu", undefined, undefined, undefined);
   func_A937();
   wait 0.05;
-  level.var_A409 = getent("quartermaster_camera", "targetname");
+  level.var_A409 = getEnt("quartermaster_camera", "targetname");
   level.var_A40F = common_scripts\utility::func_46B5("quartermaster_spawn", "targetname");
   level.var_A408 = common_scripts\utility::func_46B5("quartermaster_bg_spawn", "targetname");
   level.var_4F4A = getdvarint("cg_fov");
   if(!isDefined(level.var_A40F)) {
-    level.var_A40F = getent("quartermaster_spawn", "targetname");
+    level.var_A40F = getEnt("quartermaster_spawn", "targetname");
   }
 
   if(!isDefined(level.var_A408)) {
-    level.var_A408 = getent("quartermaster_bg_spawn", "targetname");
+    level.var_A408 = getEnt("quartermaster_bg_spawn", "targetname");
   }
 
   if(!isDefined(level.var_A409) || !isDefined(level.var_A40F) || !isDefined(level.var_A408)) {
@@ -97,7 +97,7 @@ func_A937() {
 }
 
 func_8A3C() {
-  level.var_781C = getent("quartermaster_npc", "targetname");
+  level.var_781C = getEnt("quartermaster_npc", "targetname");
   level.var_781C.var_831A = common_scripts\utility::func_44BD("quartermaster_scripted_node", "targetname");
   func_772B(level.var_781C.var_831A, "quartermaster_scripted_node");
   if(!isDefined(level.var_781C)) {
@@ -117,7 +117,7 @@ func_8A3C() {
 }
 
 func_8A23() {
-  level.var_4BF3 = getent("headquarters_npc", "targetname");
+  level.var_4BF3 = getEnt("headquarters_npc", "targetname");
   level.var_4BF3.var_831A = common_scripts\utility::func_44BD("headquarters_scripted_node", "targetname");
   func_772B(level.var_4BF3.var_831A, "headquarters_scripted_node");
   if(!isDefined(level.var_4BF3)) {
@@ -209,7 +209,7 @@ func_8A23() {
     level.var_4BF3.var_A40D = "usa_requisition_org1";
     var_07 = spawn("script_model", (0, 0, 0));
     var_07 setModel("hub_us_candlestick_microphone_01");
-    var_07 linkto(level.var_4BF3, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+    var_07 linkTo(level.var_4BF3, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
     level.var_4BF3.var_267E = [507, 504, 0, 0, 0, 0];
     level.var_4BF3 setcostumemodels(level.var_4BF3.var_267E);
     level.var_4BF3.var_0EAC["mp_hub_ro_ask_cordinate_ro"] = spawnStruct();
@@ -274,7 +274,7 @@ func_8A23() {
 }
 
 func_8A07() {
-  level.var_1783 = getent("blacksmith_npc", "targetname");
+  level.var_1783 = getEnt("blacksmith_npc", "targetname");
   level.var_1783.var_831A = common_scripts\utility::func_44BD("blacksmith_scripted_node", "targetname");
   if(!isDefined(level.var_1783)) {
     return;
@@ -295,7 +295,7 @@ func_8A07() {
     var_00.var_5717 = 0;
     var_01 = spawn("script_model", (0, 0, 0));
     var_01 setModel("npc_usa_m1garand_base");
-    var_01 linkto(var_00, "tag_inhand", (0, 0, 0), (0, 0, 0));
+    var_01 linkTo(var_00, "tag_inhand", (0, 0, 0), (0, 0, 0));
     level.var_1783.var_6DFB["aide1"] = var_00;
     var_02 = spawn("script_model", (0, 0, 0));
     var_02 setModel("mp_hub_allies_bench_grinder_01");
@@ -304,7 +304,7 @@ func_8A07() {
     var_03 = spawn("script_model", (0, 0, 0));
     var_03 setModel("npc_usa_bayonet_long_base");
     var_03.var_0109 = "knife";
-    var_03 linkto(level.var_1783, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_03 linkTo(level.var_1783, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     level.var_1783.var_0EAC = [];
     level.var_1783.var_0ED2["vendor"] = [];
     level.var_1783.var_0ED2["vendor"][0] = [];
@@ -351,7 +351,7 @@ func_8A07() {
 }
 
 func_8A2D() {
-  level.var_5F83 = getent("mail_npc", "targetname");
+  level.var_5F83 = getEnt("mail_npc", "targetname");
   if(!isDefined(level.var_5F83)) {
     return;
   }
@@ -366,7 +366,7 @@ func_8A2D() {
 }
 
 func_8A54() {
-  level.var_AC32 = getent("zombie_npc", "targetname");
+  level.var_AC32 = getEnt("zombie_npc", "targetname");
   if(!isDefined(level.var_AC32)) {
     return;
   }
@@ -389,7 +389,7 @@ func_8A54() {
 }
 
 func_8A1F() {
-  level.var_4012 = getent("general_npc", "targetname");
+  level.var_4012 = getEnt("general_npc", "targetname");
   level.var_4012.var_831A = common_scripts\utility::func_44BD("general_scripted_node", "targetname");
   func_772B(level.var_4012.var_831A, "general_scripted_node");
   if(!isDefined(level.var_4012)) {
@@ -426,7 +426,7 @@ func_8A1F() {
     level.var_4012 setcostumemodels(level.var_4012.var_267E);
     var_00 = spawn("script_model", (0, 0, 0));
     var_00 setModel("eng_raidstick_org1");
-    var_00 linkto(level.var_4012, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+    var_00 linkTo(level.var_4012, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
     level.var_4012 thread func_71F3();
   }
 
@@ -436,7 +436,7 @@ func_8A1F() {
 }
 
 func_8A20(param_00, param_01, param_02, param_03, param_04) {
-  var_05 = getent(param_00, "targetname");
+  var_05 = getEnt(param_00, "targetname");
   if(!isDefined(var_05)) {
     return;
   }
@@ -464,7 +464,7 @@ func_8A20(param_00, param_01, param_02, param_03, param_04) {
 }
 
 func_8A02() {
-  level.var_6B22 = getent("1v1_npc", "targetname");
+  level.var_6B22 = getEnt("1v1_npc", "targetname");
   if(!isDefined(level.var_6B22)) {
     return;
   }
@@ -479,7 +479,7 @@ func_8A02() {
 }
 
 func_8A49() {
-  level.var_9957 = getent("theater_icon", "targetname");
+  level.var_9957 = getEnt("theater_icon", "targetname");
   level.var_9957.var_6113 = "theater_menu";
   level.var_9957.var_5A7E = "spv_hub_theater_kswitch";
   level.var_9957.var_50DA = 1;
@@ -1841,9 +1841,9 @@ func_8A47(param_00) {
     var_04 = spawn("script_model", (0, 0, 0));
     var_04 setModel(var_03.var_0106);
     if(!var_01.size) {
-      var_04 linkto(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_04 linkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     } else {
-      var_04 linkto(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+      var_04 linkTo(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
     }
 
     var_04.var_0109 = var_03.var_0109;
@@ -2012,7 +2012,7 @@ func_2839(param_00, param_01, param_02, param_03, param_04, param_05) {
     var_06.var_01D3 = 0;
     var_06.var_01D7 = 0;
     var_06.var_01D9 = 0 + param_03;
-    var_06 settargetent(param_00, "tag_origin");
+    var_06 settargetEnt(param_00, "tag_origin");
   } else {
     var_06.var_01D3 = param_00.var_0116[0];
     var_06.var_01D7 = param_00.var_0116[1];
@@ -2034,7 +2034,7 @@ func_2839(param_00, param_01, param_02, param_03, param_04, param_05) {
       var_07.var_01D3 = 0;
       var_07.var_01D7 = 0;
       var_07.var_01D9 = 0 + param_03;
-      var_07 settargetent(param_00, "tag_origin");
+      var_07 settargetEnt(param_00, "tag_origin");
     } else {
       var_07.var_01D3 = param_00.var_0116[0];
       var_07.var_01D7 = param_00.var_0116[1];

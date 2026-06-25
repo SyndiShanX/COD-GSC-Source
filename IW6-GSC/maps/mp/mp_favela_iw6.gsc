@@ -218,7 +218,7 @@ setupFireHydrants() {
 hydrantWaitForDeath() {
   level endon("game_ended");
 
-  hydrant = GetEnt(self.target, "targetname");
+  hydrant = getEnt(self.target, "targetname");
 
   hydrant.trigger = self;
 

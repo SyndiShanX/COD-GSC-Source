@@ -458,7 +458,7 @@ function_1989cfaf(tacbundle, params, node) {
   }
 
   mindot = isDefined(tacbundle.var_f58a14bd) ? tacbundle.var_f58a14bd : 0;
-  dir = vectornormalize(node.origin - self.origin);
+  dir = vectorNormalize(node.origin - self.origin);
 
   if(vectordot(dir, anglesToForward(node.angles)) <= mindot) {
     self bot::record_text("<dev string:x29e>", (1, 0, 0), "<dev string:x4c>");

@@ -749,8 +749,8 @@ function_d4c74ab3() {
 
 _scene_link() {
   self.e_scene_link = util::spawn_model("tag_origin", self.origin, self.angles);
-  e_linkto = getent(self.linkto, "linkname");
-  self.e_scene_link linkto(e_linkto);
+  e_linkto = getEnt(self.linkto, "linkname");
+  self.e_scene_link linkTo(e_linkto);
   util::waittill_any_ents_two(self, "death", e_linkto, "death");
   self.e_scene_link delete();
 }
@@ -2318,7 +2318,7 @@ function_a4ad0308(o_scene) {
         self.scene_skip_start_time = gettime();
 
         if(self ishost()) {
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             if(isDefined(player.skip_scene_menu_handle) && !player ishost()) {
               player.skip_scene_menu_handle cp_skip_scene_menu::set_hostisskipping(player, 1);
             }
@@ -2332,7 +2332,7 @@ function_a4ad0308(o_scene) {
           self.var_fc92900f = 1;
           var_4ca048a2 = 0;
 
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             if(isDefined(player.var_fc92900f) && player.var_fc92900f) {
               var_4ca048a2++;
             }
@@ -2349,7 +2349,7 @@ function_a4ad0308(o_scene) {
       self.scene_skip_start_time = undefined;
 
       if(self ishost()) {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           if(isDefined(player.skip_scene_menu_handle) && !player ishost()) {
             player.skip_scene_menu_handle cp_skip_scene_menu::set_hostisskipping(player, 0);
           }
@@ -2375,7 +2375,7 @@ function_a4ad0308(o_scene) {
     music::setmusicstatebyteam("death", self.team);
     start_scene_skip(o_scene);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player._scene_object) && isDefined(player._scene_object._o_scene) && player._scene_object._o_scene != o_scene) {
         var_bf6b1ad2 = player._scene_object._o_scene;
 
@@ -2427,7 +2427,7 @@ clear_scene_skipping_ui() {
 
 function_63033fc3(str_notify) {
   if(isclass(self) || self == level) {
-    array::thread_all(getplayers(), &clear_scene_skipping_ui);
+    array::thread_all(getPlayers(), &clear_scene_skipping_ui);
     return;
   }
 

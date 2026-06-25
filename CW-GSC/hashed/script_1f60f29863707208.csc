@@ -144,10 +144,10 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
   var_f0029f2 = struct::get_array("harvesting_unit", "targetname");
   harvesting_unit = arraygetclosest(self.origin, var_f0029f2);
   util::playFXOnTag(bwasdemojump, #"hash_61e3c7a179d7cdfb", e_fx, "tag_origin");
-  e_fx moveto(e_fx.origin + (0, 0, 40), 0.8);
+  e_fx moveTo(e_fx.origin + (0, 0, 40), 0.8);
   wait 0.75;
   n_time = distance(e_fx.origin, harvesting_unit.origin) / 400;
-  e_fx moveto(harvesting_unit.origin + (0, 0, 32), n_time);
+  e_fx moveTo(harvesting_unit.origin + (0, 0, 32), n_time);
   e_fx waittill(#"movedone");
   util::playFXOnTag(bwasdemojump, #"hash_4d1d38d5da4d929b", e_fx, "tag_origin");
   e_fx stoploopsound(e_fx.sound_id);
@@ -218,7 +218,7 @@ function function_1cd2646f(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_eb8ccdd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   playFX(bwasdemojump, #"zombie/fx9_player_shockwave_retrieval", self.origin, (180, 0, 0));
   self playSound(bwasdemojump, #"hash_5db462e1df5084e7");
-  self playrumbleonentity(bwasdemojump, "damage_heavy");
+  self playRumbleOnEntity(bwasdemojump, "damage_heavy");
 }
 
 function function_a6554e90(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -246,7 +246,7 @@ function function_5907109e(localclientnum, oldval, newval, bnewent, binitialsnap
     playSound(fieldname, #"hash_3dcbd3c8335a5f78", var_f7e00fc2.origin);
     e_player = function_5c10bd79(fieldname);
     earthquake(fieldname, 1, 0.5, e_player.origin, 512);
-    e_player playrumbleonentity(fieldname, "damage_heavy");
+    e_player playRumbleOnEntity(fieldname, "damage_heavy");
     return;
   }
 
@@ -455,7 +455,7 @@ function function_1d33d741(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_6d56f7a8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    var_3b1d1169 = getent(fieldname, "lab_second_hidden_door", "targetname");
+    var_3b1d1169 = getEnt(fieldname, "lab_second_hidden_door", "targetname");
     var_3b1d1169.rob = #"hash_7f1bc2146f524d7c";
     var_3b1d1169.reveal = 1;
     var_3b1d1169.brightness = 0;
@@ -467,7 +467,7 @@ function function_6d56f7a8(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_6774a2f2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_3b1d1169 = getent(bwastimejump, "lab_second_hidden_door", "targetname");
+  var_3b1d1169 = getEnt(bwastimejump, "lab_second_hidden_door", "targetname");
   level notify(#"hash_39278a16dce99955");
 
   if(isDefined(var_3b1d1169.brightness)) {
@@ -494,7 +494,7 @@ function function_a28ff742(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwastimejump == 1) {
     forcestreamxmodel(#"p9_zm_platinum_lab_hidden_metal_door_04");
-    var_3b1d1169 = getent(fieldname, "lab_second_hidden_door", "targetname");
+    var_3b1d1169 = getEnt(fieldname, "lab_second_hidden_door", "targetname");
     var_3b1d1169.var_3bfeafe1 = 1;
 
     if(is_true(var_3b1d1169.var_d280dacf)) {
@@ -545,7 +545,7 @@ function function_296ed7c6(localclientnum, oldval, newval, bnewent, binitialsnap
   self endon("5c5fc7b7296d62c4");
 
   if(bwastimejump == 1) {
-    var_3b1d1169 = getent(fieldname, "lab_second_hidden_door", "targetname");
+    var_3b1d1169 = getEnt(fieldname, "lab_second_hidden_door", "targetname");
 
     if(is_true(var_3b1d1169.var_d280dacf)) {
       soundstoploopemitter("zmb_mq_stp1_door_burn_lp", (-2739, 14319, -320));
@@ -572,8 +572,8 @@ function function_fb770d12(localclientnum, oldval, newval, bnewent, binitialsnap
   level endon(#"end_game");
 
   if(bwastimejump == 1) {
-    var_3b1d1169 = getent(fieldname, "tempest_lure_lid", "targetname");
-    var_3b1d1169 rotateto((0, 300, 0), 1);
+    var_3b1d1169 = getEnt(fieldname, "tempest_lure_lid", "targetname");
+    var_3b1d1169 rotateTo((0, 300, 0), 1);
     var_3b1d1169 playSound(fieldname, #"hash_6f2d121185d8149d");
   }
 }
@@ -629,16 +629,16 @@ function function_850f10bc(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_c9b5b294(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level endon(#"end_game");
-  var_96ab0838 = getent(fieldname, "railway_switch_mdl", "targetname");
+  var_96ab0838 = getEnt(fieldname, "railway_switch_mdl", "targetname");
 
   if(bwastimejump == 0) {
     playSound(fieldname, #"hash_28cf0abbf826d676", var_96ab0838.origin);
-    var_96ab0838 rotateto((0, 270, 140), 1);
+    var_96ab0838 rotateTo((0, 270, 140), 1);
   }
 
   if(bwastimejump == 1) {
     playSound(fieldname, #"hash_1199afea16cbe3e2", var_96ab0838.origin);
-    var_96ab0838 rotateto((0, 270, -140), 1);
+    var_96ab0838 rotateTo((0, 270, -140), 1);
     wait 1;
     playSound(fieldname, #"hash_32c95b8a98c5c138", var_96ab0838.origin);
   }
@@ -779,7 +779,7 @@ function function_faeec0f5(localclientnum, oldval, newval, bnewent, binitialsnap
     var_e8a5ef56.mdl.origin = (-2737.5, 14414, -539.5);
     var_324a4a44 = struct::get("nuke_warhead_riser", "targetname");
     var_324a4a44.mdl = util::spawn_model(fieldname, #"hash_33b9cfeab1d8bc73", var_e8a5ef56.mdl gettagorigin("tag_center") + (0, 0, -5), var_e8a5ef56.angles);
-    var_324a4a44.mdl linkto(var_e8a5ef56.mdl);
+    var_324a4a44.mdl linkTo(var_e8a5ef56.mdl);
 
     for(i = 1; i < 4; i++) {
       switch (i) {
@@ -819,7 +819,7 @@ function function_d8aa203(localclientnum, oldval, newval, bnewent, binitialsnap,
     s_canister = function_83257eca(bwastimejump);
 
     if(isDefined(s_canister.mdl)) {
-      s_canister.mdl moveto(s_canister.mdl.origin + (0, 0, 8), 3);
+      s_canister.mdl moveTo(s_canister.mdl.origin + (0, 0, 8), 3);
       playSound(fieldname, #"hash_2eedbe412ecac84", s_canister.mdl.origin + (0, 0, 12));
     }
   }
@@ -828,7 +828,7 @@ function function_d8aa203(localclientnum, oldval, newval, bnewent, binitialsnap,
     var_e8a5ef56 = struct::get("nuke_warhead_riser", "targetname");
 
     if(isDefined(var_e8a5ef56.mdl)) {
-      var_e8a5ef56.mdl moveto(var_e8a5ef56.mdl.origin + (0, 0, 4), 3);
+      var_e8a5ef56.mdl moveTo(var_e8a5ef56.mdl.origin + (0, 0, 4), 3);
       playSound(fieldname, #"hash_552ec912f6cad0a0", var_e8a5ef56.mdl.origin + (0, 0, 8));
     }
   }

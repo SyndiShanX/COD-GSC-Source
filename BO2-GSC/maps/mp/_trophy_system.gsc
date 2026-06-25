@@ -238,7 +238,7 @@ trophysystemdetonate(attacker, weaponname) {
     maps\mp\_scoreevents::processscoreevent("destroyed_trophy_system", attacker, self.owner, weaponname);
   }
 
-  playsoundatposition("dst_equipment_destroy", self.origin);
+  playSoundAtPosition("dst_equipment_destroy", self.origin);
   self delete();
 }
 

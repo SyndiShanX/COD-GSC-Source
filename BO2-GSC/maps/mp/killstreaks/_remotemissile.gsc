@@ -150,7 +150,7 @@ _fire(lifeid, player, team, killstreak_id) {
 
   foreach(spawn in remotemissilespawnarray) {
     if(isDefined(spawn.target)) {
-      spawn.targetent = getent(spawn.target, "targetname");
+      spawn.targetent = getEnt(spawn.target, "targetname");
     }
   }
 
@@ -163,7 +163,7 @@ _fire(lifeid, player, team, killstreak_id) {
   if(isDefined(remotemissilespawn)) {
     startpos = remotemissilespawn.origin;
     targetpos = remotemissilespawn.targetent.origin;
-    vector = vectornormalize(startpos - targetpos);
+    vector = vectorNormalize(startpos - targetpos);
     startpos = vector * level.missileremotelaunchvert + targetpos;
   } else {
     upvector = (0, 0, level.missileremotelaunchvert);
@@ -193,7 +193,7 @@ _fire(lifeid, player, team, killstreak_id) {
   }
 
   rocket = magicbullet("remote_missile_missile_mp", startpos, targetpos, player);
-  forceanglevector = vectornormalize(targetpos - startpos);
+  forceanglevector = vectorNormalize(targetpos - startpos);
   rocket.angles = vectortoangles(forceanglevector);
   rocket.targetname = "remote_missile";
   rocket.team = team;
@@ -261,7 +261,7 @@ player_missile_end(rocket, performplayerkillstreakend, unlink) {
     self thread destroy_missile_hud();
 
     if(isDefined(performplayerkillstreakend) && performplayerkillstreakend) {
-      self playrumbleonentity("grenade_rumble");
+      self playRumbleOnEntity("grenade_rumble");
 
       if(level.gameended == 0) {
         self sendkillstreakdamageevent(600);
@@ -406,14 +406,14 @@ rocket_cleanupondeath() {
 missile_sound_play(player) {
   snd_first_person = spawn("script_model", self.origin);
   snd_first_person setModel("tag_origin");
-  snd_first_person linkto(self);
+  snd_first_person linkTo(self);
   snd_first_person setinvisibletoall();
   snd_first_person setvisibletoplayer(player);
   snd_first_person playLoopSound("wpn_remote_missile_loop_plr", 0.5);
   self.snd_first = snd_first_person;
   snd_third_person = spawn("script_model", self.origin);
   snd_third_person setModel("tag_origin");
-  snd_third_person linkto(self);
+  snd_third_person linkTo(self);
   snd_third_person setvisibletoall();
   snd_third_person setinvisibletoplayer(player);
   snd_third_person playLoopSound("wpn_remote_missile_loop_npc", 0.2);
@@ -428,7 +428,7 @@ missile_sound_boost(rocket) {
   self waittill("missile_boost");
   rocket.snd_first playLoopSound("wpn_remote_missile_boost_plr");
   rocket.snd_first playSound("wpn_remote_missile_fire_boost");
-  self playrumbleonentity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
 
   if(rocket.origin[2] - self.origin[2] > 4000) {
     rocket notify("stop_impact_sound");
@@ -856,7 +856,7 @@ missile_deploy_watch(rocket) {
 
       playFX(level.missileremotedeployfx, rocket.origin, anglesToForward(rocket.angles));
       self playlocalsound("mpl_rc_exp");
-      self playrumbleonentity("sniper_fire");
+      self playRumbleOnEntity("sniper_fire");
       earthquake(0.2, 0.2, rocket.origin, 200);
       rocket hide();
       rocket setmissilecoasting(1);

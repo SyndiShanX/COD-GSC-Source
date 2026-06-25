@@ -102,7 +102,7 @@ splinter(org) {
 }
 
 go(org) {
-  temp_vec = vectornormalize(self.origin - org);
+  temp_vec = vectorNormalize(self.origin - org);
   temp_vec = vector_multiply(temp_vec, 250 + randomint(100));
 
   x = temp_vec[0];
@@ -133,7 +133,7 @@ small_gibs(org, startorg) {
     }
 
     startorg += (50 - randomint(100), 50 - randomint(100), 0);
-    temp_vec = vectornormalize(org - startorg);
+    temp_vec = vectorNormalize(org - startorg);
     temp_vec = vector_multiply(temp_vec, 300 + randomint(150));
 
     x = temp_vec[0];

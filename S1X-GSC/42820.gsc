@@ -911,7 +911,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     setmatchdata("lives", var_0, "killerAngles", 2, int(var_1.angles[2]));
     var_14 = anglesToForward((0, self.angles[1], 0));
     var_15 = self.origin - var_1.origin;
-    var_15 = vectornormalize((var_15[0], var_15[1], 0));
+    var_15 = vectorNormalize((var_15[0], var_15[1], 0));
     var_13 = vectordot(var_14, var_15);
     setmatchdata("lives", var_0, "dotOfDeath", var_13);
 

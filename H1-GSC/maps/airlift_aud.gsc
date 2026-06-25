@@ -189,7 +189,7 @@ set_context_ext_for_seaknight() {
 
 aud_seaknight_sound_node_spawner() {
   level.seaknight_engine_sound_node = spawn("script_origin", level.seaknight.origin);
-  level.seaknight_engine_sound_node linkto(level.seaknight);
+  level.seaknight_engine_sound_node linkTo(level.seaknight);
 }
 
 aud_seaknight_event_handler(var_0, var_1, var_2, var_3, var_4) {
@@ -225,7 +225,7 @@ aud_convoy_passby_manager(var_0, var_1, var_2, var_3) {
 }
 
 aud_cobra_passby_manager(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   var_3 waittill("trigger", var_4);
   wait(var_2);
   var_4 thread maps\_utility::play_sound_on_entity(var_1);

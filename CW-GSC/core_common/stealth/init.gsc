@@ -21,7 +21,7 @@ function set_stealth_mode(enabled, musichidden, musicspotted) {
 
     level thread stealth_threat_sight::threat_sight_set_enabled(1);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread stealth_player::main();
     }
 

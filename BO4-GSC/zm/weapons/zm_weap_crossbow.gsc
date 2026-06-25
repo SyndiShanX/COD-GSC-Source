@@ -306,7 +306,7 @@ function_8194ec6(var_5824ff75 = 0) {
   }
 
   while(isDefined(self.var_2c2980d3) && self.var_2c2980d3) {
-    self rotateyaw(var_a0edda8b, float(function_60d95f53()) / 1000);
+    self rotateYaw(var_a0edda8b, float(function_60d95f53()) / 1000);
     waitframe(1);
   }
 }
@@ -343,7 +343,7 @@ function_c805f2f9(params) {
         self zombie_utility::derive_damage_refs(params.vpoint);
       }
 
-      var_eb0d0f20 = 75 * vectornormalize(params.vdir);
+      var_eb0d0f20 = 75 * vectorNormalize(params.vdir);
       var_eb0d0f20 = (var_eb0d0f20[0], var_eb0d0f20[1], 20);
       self startragdoll();
       self launchragdoll(var_eb0d0f20);

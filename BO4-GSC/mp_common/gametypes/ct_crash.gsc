@@ -222,7 +222,7 @@ j_fore_le_01() {
 
   while(true) {
     if(isDefined(level.var_e6db911d) && level.var_e6db911d) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       var_1411e20e = e_player ct_bots::function_dde6edbd();
 
       if(var_1411e20e.size == 0) {
@@ -253,7 +253,7 @@ j_fore_le_01() {
 }
 
 function_587088a0() {
-  var_1411e20e = getplayers(#"axis");
+  var_1411e20e = getPlayers(#"axis");
 
   foreach(bot in var_1411e20e) {
     bot clientfield::set("set_vip", 1);
@@ -292,7 +292,7 @@ function_7bc70c24(var_a1b34e6f) {
     entity ct_bots::function_26d45f32();
     entity.var_ef59b90 = 5;
     entity.resurrect_not_allowed_by = undefined;
-    entity setorigin(entity.var_9a79d89d);
+    entity setOrigin(entity.var_9a79d89d);
     entity setplayerangles(entity.var_5ab7c19c);
     entity.disablespawning = 1;
     entity.var_6722b63 = 0;
@@ -379,7 +379,7 @@ function_836b3d02() {
 }
 
 function_d4c7a27f() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   var_66775908 = util::get_active_players(#"allies");
   arrayremovevalue(var_66775908, e_player);
   var_66775908 = array::randomize(var_66775908);
@@ -411,7 +411,7 @@ function_e268297c(e_captive) {
 
   while(true) {
     if(!isalive(self)) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       e_player thread ct_utils::function_d471f8fa(15, undefined, 1);
       level thread function_6511fb07();
       break;
@@ -440,7 +440,7 @@ function_e268297c(e_captive) {
 
       if(dt >= 40) {
         e_captive suicide();
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         e_player thread ct_utils::function_d471f8fa(-60, undefined, 1);
         level thread function_f5eba86b();
         level.var_9e8e503f--;
@@ -457,7 +457,7 @@ function_e268297c(e_captive) {
       level.var_f78f9034 = ct_utils::create_waypoint(#"hash_10b60fe281bbfeca", e_captive.origin, e_captive.angles, #"any", undefined, 0, undefined);
       self.var_7630c482 = 1;
       n_start_time = gettime() / 1000;
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       e_player thread function_6b37f8a5();
     }
 
@@ -477,7 +477,7 @@ function_e268297c(e_captive) {
 }
 
 function_52a2e58a(a_players) {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   a_bots = arraysortclosest(a_players, e_player.origin, undefined, 0, 800);
   var_811b6a20 = [];
   v_forward = anglesToForward(e_player.angles);
@@ -486,7 +486,7 @@ function_52a2e58a(a_players) {
     n_dist = distance(bot.origin, e_player.origin);
 
     if(n_dist < 800) {
-      v_dir = vectornormalize(bot.origin - e_player.origin);
+      v_dir = vectorNormalize(bot.origin - e_player.origin);
       dp = vectordot(v_forward, v_dir);
 
       if(dp > 0.4) {
@@ -502,7 +502,7 @@ function_e60bbaf4() {
   level.var_cea5b696 = 0;
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     a_captives = util::get_active_players(#"allies");
     arrayremovevalue(a_captives, e_player);
     b_game_over = 1;
@@ -580,38 +580,38 @@ function_6b37f8a5() {
 }
 
 intro_msg() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_7fcaeb7f148aba86", 4, "green", 0);
 }
 
 function_f5eba86b() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_4c6cfe7bf6bdab6d", 4, "red");
 }
 
 function_1b25b7dc() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_76cbc958f8398240", 5, "red", 2);
 }
 
 function_6511fb07() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_14db51c946ba874e", 5, "green");
 }
 
 function_f8888fe5() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_69afc05cf0c10527", 4, "red", 2);
 }
 
 function_3a3bc266() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_6a9ca42b7fbc4ccd", 4, "red", 2);
 }
 
 function_5f17f29() {
   level endon(#"hash_2459a7f38b7c48c2");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   while(true) {
     level waittill(#"soldier_rescued");

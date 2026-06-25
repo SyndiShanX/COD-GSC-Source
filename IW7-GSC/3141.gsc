@@ -25,7 +25,7 @@ func_BEA0(var_0, var_1, var_2, var_3) {
 
   var_7 = func_7EAE();
   if(isDefined(var_7) && !isDefined(self.var_595F)) {
-    var_8 = vectornormalize(var_7 - self.origin);
+    var_8 = vectorNormalize(var_7 - self.origin);
     if(vectordot(var_4, var_8) <= 0.5) {
       self._blackboard.var_5279 = var_8;
       return 1;
@@ -59,7 +59,7 @@ func_BEA1(var_0, var_1, var_2, var_3) {
   if(isDefined(self.vehicle_getspawnerarray)) {
     if(distancesquared(self.vehicle_getspawnerarray, self.origin) > 144) {
       var_4 = self.setocclusionpreset;
-      var_4 = vectornormalize((var_4[0], var_4[1], 0));
+      var_4 = vectorNormalize((var_4[0], var_4[1], 0));
       var_5 = anglesToForward(self.angles);
       if(vectordot(var_4, var_5) <= 0.857) {
         self._blackboard.var_5279 = var_4;
@@ -509,7 +509,7 @@ func_100BE(var_0, var_1, var_2, var_3) {
       return 0;
     }
 
-    var_8 = vectornormalize(var_8);
+    var_8 = vectorNormalize(var_8);
     if(vectordot(var_8, var_4) > -0.342) {
       return 0;
     }

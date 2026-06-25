@@ -88,7 +88,7 @@ function light_zombie_death() {
   wait(0.05);
   var_e0d84aa = "MOD_EXPLOSIVE";
   radiusdamage(ai_zombie.origin + vectorscale((0, 0, 1), 35), 128, 30, 10, self, var_e0d84aa);
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     player thread function_4745b0a9(ai_zombie.origin);
   }

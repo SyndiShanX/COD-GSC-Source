@@ -54,7 +54,7 @@ function moon_astro_enter_level() {
 }
 
 function play_line_if_player_can_see() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(distancesquared(self.origin, players[i].origin) <= 640000) {
       cansee = self zmhd_cleanup::player_can_see_me(players[i]);

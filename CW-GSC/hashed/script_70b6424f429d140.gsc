@@ -36,7 +36,7 @@ function main(str_skipto, b_starting) {
   level thread globallogic_ui::function_7bc0e4b9();
   level.var_aece851d = [];
   level.var_fc514951 = 0;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::set("takedown_hit1_intro", "show_weapon_hud", 0);
 
   if(is_true(level.var_fc514951)) {
@@ -62,7 +62,7 @@ function main(str_skipto, b_starting) {
 }
 
 function function_77438329() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(!player isstreamerready()) {
     waitframe(1);
@@ -105,14 +105,14 @@ function function_bff76496(f) {
 }
 
 function function_50c1c92b() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.fake_player = util::spawn_player_clone(player);
   level.fake_player.targetname = "FakePlayer";
   thread function_3b697267();
 }
 
 function function_3b697267() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player allowcrouch(0);
   waitframe(3);
   player takeallweapons();
@@ -163,27 +163,27 @@ function function_3d66ebcc(tname, var_5283a254, skipto_end = 0) {
   player_heli hidepart("tag_gunner_barrel1", "veh_t8_mil_helicopter_uh1d_left_gun_mount_attach_grn", 1);
   thread heli_light(level.var_9a3944f4, "ally_heli_spot_light_bustout", "tag_glass_front_left_lower_d0", (-20, 12, 0), level.var_9a3944f4, 0, 1);
   level.var_9a3944f4 thread function_3cebcd1b();
-  player_heli.probe = getent("heli_probe", "targetname");
+  player_heli.probe = getEnt("heli_probe", "targetname");
 
   if(isDefined(player_heli.probe)) {
-    player_heli.probe linkto(player_heli, "tag_fire_extinguisher_attach", (-4, 0, 12), (0, 0, 0));
+    player_heli.probe linkTo(player_heli, "tag_fire_extinguisher_attach", (-4, 0, 12), (0, 0, 0));
   }
 
-  player_heli.var_6098f318 = getent("heli_cab_probe", "targetname");
+  player_heli.var_6098f318 = getEnt("heli_cab_probe", "targetname");
 
   if(isDefined(player_heli.var_6098f318)) {
-    player_heli.var_6098f318 linkto(player_heli, "tag_fire_extinguisher_attach", (38, 0, 16), (0, 0, 0));
+    player_heli.var_6098f318 linkTo(player_heli, "tag_fire_extinguisher_attach", (38, 0, 16), (0, 0, 0));
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   tag = "tag_origin";
 
   if(!is_true(level.var_fc514951)) {
     wait 1;
   }
 
-  mover = getent("intro_heli_assault_linked", "targetname");
-  mover linkto(player_heli, tag, (0, 0, 0), (0, 0, 0));
+  mover = getEnt("intro_heli_assault_linked", "targetname");
+  mover linkTo(player_heli, tag, (0, 0, 0), (0, 0, 0));
 
   if(is_true(var_5283a254)) {
     var_afb6d099 = 15;
@@ -242,15 +242,15 @@ function function_e826dfbb() {
   woods = undefined;
 
   while(!isDefined(woods)) {
-    woods = getent("woods_chopper_from_scene", "script_noteworthy", 1);
+    woods = getEnt("woods_chopper_from_scene", "script_noteworthy", 1);
     waitframe(2);
   }
 
   wait 0.5;
   woods util::magic_bullet_shield();
   guys = [];
-  guys[0] = getent("driver_woods_kills", "targetname", 1);
-  guys[1] = getent("passenger_woods_kills", "targetname", 1);
+  guys[0] = getEnt("driver_woods_kills", "targetname", 1);
+  guys[1] = getEnt("passenger_woods_kills", "targetname", 1);
 
   for(i = 0; i < 2; i++) {
     woods waittill(#"fire_gun");
@@ -336,7 +336,7 @@ function function_3cebcd1b() {
       }
     }
 
-    var_4cd99adc = getent(var_87c48267, "script_noteworthy", 1);
+    var_4cd99adc = getEnt(var_87c48267, "script_noteworthy", 1);
 
     if(!isDefined(var_4cd99adc)) {
       var_4cd99adc = struct::get(var_87c48267, "targetname");
@@ -361,7 +361,7 @@ function function_f97ce389(heli, tag, var_2d65f507, var_5525c0b0) {
     playFXOnTag(#"hash_7d057d370983507f", heli.light, "tag_origin");
   }
 
-  heli.light linkto(heli, "tag_searchlight_fx", (0, 0, 0), (0, 0, 0));
+  heli.light linkTo(heli, "tag_searchlight_fx", (0, 0, 0), (0, 0, 0));
 }
 
 function heli_light(heli, tname, tag, var_2d65f507, var_ba240678, var_fa2357fe = 0, var_1a67724f = 0, var_5525c0b0 = 0) {
@@ -380,15 +380,15 @@ function heli_light(heli, tname, tag, var_2d65f507, var_ba240678, var_fa2357fe =
         function_f97ce389(heli, tag, var_2d65f507, var_5525c0b0);
       }
     } else {
-      heli.light = getent(tname, "targetname");
+      heli.light = getEnt(tname, "targetname");
 
       if(!isDefined(heli.light)) {
-        heli.light = getent(tname + "_temp", "targetname");
+        heli.light = getEnt(tname + "_temp", "targetname");
       }
     }
 
     if(isDefined(heli.light)) {
-      heli.light linkto(heli, tag, (0, 0, -64), var_2d65f507);
+      heli.light linkTo(heli, tag, (0, 0, -64), var_2d65f507);
       level.var_eaf95d92[tname] = heli.light;
     }
   }
@@ -438,9 +438,9 @@ function function_cbe25a41(var_4cd99adc, tag, var_fa2357fe = 0, var_1a67724f = 0
     self.var_2526f86c = var_2526f86c;
 
     if(self.var_1a67724f) {
-      self.var_ba240678 linkto(self, var_869cc293, (0, 0, 0), (0, 0, 0));
+      self.var_ba240678 linkTo(self, var_869cc293, (0, 0, 0), (0, 0, 0));
     } else if(self.var_2526f86c) {
-      self.var_ba240678 linkto(var_4cd99adc, tag, (0, 0, 0), (0, 0, 0));
+      self.var_ba240678 linkTo(var_4cd99adc, tag, (0, 0, 0), (0, 0, 0));
     }
 
     self sethoverparams(75, 100, 50);
@@ -464,7 +464,7 @@ function function_cbe25a41(var_4cd99adc, tag, var_fa2357fe = 0, var_1a67724f = 0
   self.var_ba240678 endon(#"death");
 
   if(self.var_1a67724f || !isDefined(self.light)) {
-    self.var_ba240678 linkto(self, var_869cc293, (0, 0, 0), (0, 0, 0));
+    self.var_ba240678 linkTo(self, var_869cc293, (0, 0, 0), (0, 0, 0));
     function_f97ce389(self, tag, (0, 0, 0), var_5525c0b0);
   }
 
@@ -472,11 +472,11 @@ function function_cbe25a41(var_4cd99adc, tag, var_fa2357fe = 0, var_1a67724f = 0
   var_61bc4e7 = 0;
 
   if(var_fa2357fe) {
-    var_8c29c159 = getent("light_ally_helispot_bnc", "targetname");
+    var_8c29c159 = getEnt("light_ally_helispot_bnc", "targetname");
 
     if(isDefined(var_8c29c159)) {
       var_8c29c159.var_6da8d78a = 1;
-      var_8c29c159 linkto(self.var_ba240678, "tag_origin", (0, 0, -200), (0, 0, 0));
+      var_8c29c159 linkTo(self.var_ba240678, "tag_origin", (0, 0, -200), (0, 0, 0));
 
       if(var_61bc4e7) {
         var_8c29c159 thread function_336e9e88();
@@ -572,7 +572,7 @@ function function_28090f23() {
 
   for(i = 0; i < 2; i++) {
     tags[i] = util::spawn_model("tag_origin", self.origin, self.angles);
-    tags[i] linkto(self, tagnames[i], (0, 0, 0), (0, 0, 0));
+    tags[i] linkTo(self, tagnames[i], (0, 0, 0), (0, 0, 0));
     playFXOnTag(#"hash_45003fc29bb60a21", tags[i], "tag_origin");
   }
 }
@@ -609,7 +609,7 @@ function function_a01817ae() {
   woods = undefined;
 
   while(!isDefined(woods)) {
-    woods = getent("woods_chopper_from_scene", "script_noteworthy", 1);
+    woods = getEnt("woods_chopper_from_scene", "script_noteworthy", 1);
     waitframe(1);
   }
 

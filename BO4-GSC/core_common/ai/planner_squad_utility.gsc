@@ -123,7 +123,7 @@ _calculateadjustedpathsegments(params) {
 
     if(params.adjustedpath.size >= 2) {
       direction = params.adjustedpath[1] - params.adjustedpath[0];
-      direction = vectornormalize(direction);
+      direction = vectorNormalize(direction);
       fallback = params.adjustedpath[0] - direction * 256;
       fallback = getclosestpointonnavmesh(fallback, 256);
 

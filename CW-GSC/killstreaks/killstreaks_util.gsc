@@ -247,11 +247,11 @@ function private function_a021023d(rotator, angle, radius, var_b468418b, var_93e
   radiusoffset = radius + (var_b468418b == 0 ? 0 : randomint(var_b468418b));
   xoffset = cos(angle) * radiusoffset;
   yoffset = sin(angle) * radiusoffset;
-  anglevector = vectornormalize((xoffset, yoffset, 0));
+  anglevector = vectorNormalize((xoffset, yoffset, 0));
   anglevector *= radius;
   anglevector = (anglevector[0], anglevector[1], 0);
   angle_offset = 90 * (var_93e44bb3 > 0 ? 1 : -1);
-  self linkto(rotator, "tag_origin", anglevector, (0, angle + angle_offset, roll));
+  self linkTo(rotator, "tag_origin", anglevector, (0, angle + angle_offset, roll));
 }
 
 function function_67d553c4(rotator, radius, var_b468418b, var_93e44bb3, roll = 0) {
@@ -287,7 +287,7 @@ function function_1ddb2653(seconds, direction) {
   self endon(#"death");
 
   for(;;) {
-    self rotateyaw(360 * (direction > 0 ? 1 : -1), seconds);
+    self rotateYaw(360 * (direction > 0 ? 1 : -1), seconds);
     wait seconds;
   }
 }
@@ -299,11 +299,11 @@ function function_8294e9b3() {
   for(;;) {
     z = randomintrange(-200, -100);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
     z = randomintrange(100, 200);
     time = randomintrange(3, 6);
-    self moveto(centerorigin + (0, 0, z), time, 1, 1);
+    self moveTo(centerorigin + (0, 0, z), time, 1, 1);
     wait time;
   }
 }

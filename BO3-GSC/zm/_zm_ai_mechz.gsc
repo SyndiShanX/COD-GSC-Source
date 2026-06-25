@@ -214,7 +214,7 @@ function spawn_mechz(s_location, flyin = 0) {
       ai.heroweapon_kill_power = 10;
       e_player = zm_utility::get_closest_player(s_location.origin);
       v_dir = e_player.origin - s_location.origin;
-      v_dir = vectornormalize(v_dir);
+      v_dir = vectorNormalize(v_dir);
       v_angles = vectortoangles(v_dir);
       var_89f898ad = zm_utility::flat_angle(v_angles);
       s_spawn_location = s_location;
@@ -273,7 +273,7 @@ function function_c441eaba(var_678a2319) {
       e_zombie kill();
     }
   }
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     dist_sq = distancesquared(player.origin, var_678a2319);
     if(dist_sq <= var_b54110bd) {
@@ -286,14 +286,14 @@ function function_c441eaba(var_678a2319) {
     earthquake_scale = scale * 0.15;
     earthquake(earthquake_scale, 0.1, var_678a2319, 1500);
     if(scale >= 0.66) {
-      player playrumbleonentity("shotgun_fire");
+      player playRumbleOnEntity("shotgun_fire");
       continue;
     }
     if(scale >= 0.33) {
-      player playrumbleonentity("damage_heavy");
+      player playRumbleOnEntity("damage_heavy");
       continue;
     }
-    player playrumbleonentity("reload_small");
+    player playRumbleOnEntity("reload_small");
   }
   if(isDefined(self.var_1411e129)) {
     self.var_1411e129 delete();
@@ -306,7 +306,7 @@ function function_bbdc1f34(var_678a2319) {
   self waittill("hash_3d18ed4f");
   var_f0dad551 = 9216;
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       dist_sq = distancesquared(player.origin, var_678a2319);
       if(dist_sq <= var_f0dad551) {
@@ -454,11 +454,11 @@ function function_3efae612(zombie) {
   zombie.knockdown = 1;
   zombie.knockdown_type = "knockdown_shoved";
   zombie_to_mechz = self.origin - zombie.origin;
-  zombie_to_mechz_2d = vectornormalize((zombie_to_mechz[0], zombie_to_mechz[1], 0));
+  zombie_to_mechz_2d = vectorNormalize((zombie_to_mechz[0], zombie_to_mechz[1], 0));
   zombie_forward = anglesToForward(zombie.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(zombie.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_mechz_2d, zombie_forward_2d);
   if(dot >= 0.5) {
     zombie.knockdown_direction = "front";
@@ -500,8 +500,8 @@ function function_10d36217(mechz) {
   enemy_vec = origin - mechz.origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0.7) {
     return false;
@@ -539,9 +539,9 @@ function private function_fbad70fd() {
 }
 
 function private function_94a24a91(cmd) {
-  players = getplayers();
+  players = getPlayers();
   var_6aad1b23 = getEntArray("", "");
-  mechz = arraygetclosest(getplayers()[0].origin, var_6aad1b23);
+  mechz = arraygetclosest(getPlayers()[0].origin, var_6aad1b23);
   switch (cmd) {
     case "": {
       queryresult = positionquery_source_navigation(players[0].origin, 128, 256, 128, 20);
@@ -557,7 +557,7 @@ function private function_94a24a91(cmd) {
       if(!isDefined(level.zm_loc_types[""]) || level.zm_loc_types[""].size == 0) {
         iprintln("");
       }
-      spot = arraygetclosest(getplayers()[0].origin, level.zm_loc_types[""]);
+      spot = arraygetclosest(getPlayers()[0].origin, level.zm_loc_types[""]);
       if(isDefined(spot)) {
         mechz = spawn_mechz(spot, 1);
       } else {

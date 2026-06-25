@@ -40,7 +40,7 @@ spawn_model_and_linkto_me(var_0, var_1) {
   var_2 = spawn("script_model", self gettagorigin(var_1));
   var_2 setModel(var_0);
   var_2.angles = self gettagangles(var_1);
-  var_2 linkto(self, var_1);
+  var_2 linkTo(self, var_1);
   return var_2;
 }
 
@@ -189,7 +189,7 @@ return_struct_spline(var_0) {
   var_2[0] = var_1;
 
   for(;;) {
-    var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
+    var_3 = common_scripts\utility::getStruct(var_1.target, "targetname");
 
     if(isDefined(var_3)) {
       if(var_3 == var_0 || maps\_utility::is_in_array(var_2, var_3)) {
@@ -585,7 +585,7 @@ is_behind_player() {
   var_1 = anglesToForward(var_0);
   var_2 = level.player.origin - (0, 0, level.player.origin[2]);
   var_3 = self.origin - (0, 0, self.origin[2]);
-  var_4 = vectornormalize(var_3 - var_2);
+  var_4 = vectorNormalize(var_3 - var_2);
   var_5 = vectordot(var_4, var_1);
   return var_5 < -0.1;
 }
@@ -743,7 +743,7 @@ shootflares(var_0) {
 
   foreach(var_5 in var_3) {
     var_6 = common_scripts\utility::spawn_tag_origin();
-    var_6 linkto(var_1, var_5, (0, 0, 0), (0, 0, 0));
+    var_6 linkTo(var_1, var_5, (0, 0, 0), (0, 0, 0));
     var_6 thread flare_trackvelocity();
     var_2[var_5] = var_6;
   }
@@ -763,7 +763,7 @@ shootflares(var_0) {
   }
 
   if(isDefined(var_0)) {
-    var_0 missile_settargetent(common_scripts\utility::random(var_2));
+    var_0 missile_settargetEnt(common_scripts\utility::random(var_2));
   }
 
   var_1 waittillmatch("flare_anim", "end");
@@ -1007,7 +1007,7 @@ set_flag_on_targetname_trigger_by_player(var_0) {
     common_scripts\utility::flag_init(var_0);
   }
 
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -1117,7 +1117,7 @@ ignore_me_ignore_all_off() {
 
 shop_door_open(var_0) {
   wait 1.15;
-  self rotateto(self.angles + (0, 90, 0), 2.2, 0.6, 1.6);
+  self rotateTo(self.angles + (0, 90, 0), 2.2, 0.6, 1.6);
   self connectpaths();
   self waittill("rotatedone");
 }

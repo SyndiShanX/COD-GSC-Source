@@ -15,7 +15,7 @@ _id_1DD6() {
   for(var_0 = self; isDefined(var_0.target); var_0 = var_0._id_1DD8) {
     var_0 startusinglessfrequentlighting();
     var_0._id_1DD7 = var_0.origin;
-    var_0._id_1DD8 = getent(var_0.target, "targetname");
+    var_0._id_1DD8 = getEnt(var_0.target, "targetname");
   }
 
   var_0._id_1DD7 = var_0.origin;
@@ -34,7 +34,7 @@ _id_1DDA(var_0) {
     var_1 show();
 
     if(var_4 != var_0) {
-      var_1 moveto(var_4._id_1DD7, var_3);
+      var_1 moveTo(var_4._id_1DD7, var_3);
     } else {
       var_1.origin = var_2;
     }
@@ -73,7 +73,7 @@ _id_1DDA(var_0) {
 }
 
 _id_1DDB(var_0, var_1) {
-  self moveto(var_1._id_1DD7, var_0, 0, var_0);
+  self moveTo(var_1._id_1DD7, var_0, 0, var_0);
   wait(var_0);
-  self moveto(self.origin, 0.05);
+  self moveTo(self.origin, 0.05);
 }

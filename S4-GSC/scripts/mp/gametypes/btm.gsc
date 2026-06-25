@@ -1454,8 +1454,8 @@ _id_8C2D() {
   level endon("game_ended");
   self endon("death");
   self setuserange(120);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_MODE_RUGBY/CRATE_USE");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_MODE_RUGBY/CRATE_USE");
   self setuseholdduration("duration_long");
   self makeuseable();
   self._id_84EF = 0;
@@ -1706,7 +1706,7 @@ _id_1097A() {
       }
     }
 
-    var_5._id_2636 = getent(var_4[0].target, "targetname");
+    var_5._id_2636 = getEnt(var_4[0].target, "targetname");
     var_5._id_2636.origin = var_5._id_2636.origin + (0, 0, -10000);
     var_5._id_2636.label = var_6;
     var_5._id_A6C9 = spawn("trigger_radius", var_5.trigger.origin, 0, 140, 100);

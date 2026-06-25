@@ -40,7 +40,7 @@ init_fake_drill() {
 }
 
 register_nonlinear_outpost(var_0, var_1) {
-  var_2 = common_scripts\utility::getstruct("outpost_" + var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct("outpost_" + var_0, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -195,13 +195,13 @@ encounter_outline_icon_hinttext(var_0) {
   }
 
   var_0.use_trigger thread maps\mp\alien\_hive::set_hive_icon(var_1, 1300);
-  var_0.use_trigger setcursorhint("HINT_NOICON");
+  var_0.use_trigger setCursorHint("HINT_NOICON");
   var_0.use_trigger common_scripts\utility::trigger_on();
 
   if(var_0.type == "transition") {
-    var_0.use_trigger sethintstring(&"MP_ALIEN_LAST_TRANSITION_OPEN_HINT");
+    var_0.use_trigger setHintString(&"MP_ALIEN_LAST_TRANSITION_OPEN_HINT");
   } else {
-    var_0.use_trigger sethintstring(&"MP_ALIEN_LAST_CONDUIT_START_HINT");
+    var_0.use_trigger setHintString(&"MP_ALIEN_LAST_CONDUIT_START_HINT");
   }
 
   var_2 = undefined;
@@ -224,7 +224,7 @@ encounter_outline_icon_hinttext(var_0) {
   level common_scripts\utility::waittill_any("outpost_encounter_started", "game_ended", "start_cross_vignette");
   var_0.use_trigger notify("stop_listening");
   var_0.use_trigger maps\mp\alien\_hive::destroy_hive_icon();
-  var_0.use_trigger sethintstring("");
+  var_0.use_trigger setHintString("");
   var_0.use_trigger common_scripts\utility::trigger_off();
 
   if(maps\mp\alien\_utility::alien_mode_has("outline") && isDefined(var_2)) {
@@ -269,7 +269,7 @@ setup_conduit_encounter(var_0) {
     }
   }
 
-  var_5 = getent(var_0.name + "_scriptable", "targetname");
+  var_5 = getEnt(var_0.name + "_scriptable", "targetname");
   var_0.conduit.scriptable = var_5;
 }
 
@@ -380,7 +380,7 @@ set_conduit_state_run(var_0) {
   level.drill notify("online");
   level.drill setCanDamage(1);
   level.drill makeunusable();
-  level.drill sethintstring("");
+  level.drill setHintString("");
   var_1 = level.drill_health_hardcore;
   level.drill.maxhealth = 20000 + var_1;
   level.drill.health = int(20000 + var_1 * level.drill.owner maps\mp\alien\_perk_utility::perk_getdrillhealthscalar());
@@ -437,7 +437,7 @@ conduit_fx_damaged() {
 conduit_encounter_complete() {
   maps\mp\alien\_hive::destroy_hive_icon();
   self makeunusable();
-  self sethintstring("");
+  self setHintString("");
 
   if(maps\mp\alien\_utility::alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::remove_from_outline_drill_watch_list(self);
@@ -545,11 +545,11 @@ sfx_conduit_on() {
   wait 0.1;
   var_0 = level.drill;
   level.drill_sfx_lp = spawn("script_origin", var_0.origin);
-  level.drill_sfx_lp linkto(var_0);
+  level.drill_sfx_lp linkTo(var_0);
 
   if(!isDefined(level.drill_sfx_dist_lp)) {
     level.drill_sfx_dist_lp = spawn("script_origin", var_0.origin);
-    level.drill_sfx_dist_lp linkto(var_0);
+    level.drill_sfx_dist_lp linkTo(var_0);
   }
 
   wait 0.1;
@@ -655,21 +655,21 @@ setup_transition_encounter(var_0) {
   }
 
   if(isDefined(var_0.gate_pivot) && isDefined(var_0.gate_clip)) {
-    var_0.gate_clip linkto(var_0.gate_pivot);
+    var_0.gate_clip linkTo(var_0.gate_pivot);
   }
 
   if(isDefined(var_0.gate_pivot)) {
     foreach(var_6 in var_0.gate_models) {
-      var_6 linkto(var_0.gate_pivot);
+      var_6 linkTo(var_0.gate_pivot);
     }
   }
 
   if(isDefined(var_0.gate_pivot_double) && isDefined(var_0.gate_clip_double)) {
-    var_0.gate_clip_double linkto(var_0.gate_pivot_double);
+    var_0.gate_clip_double linkTo(var_0.gate_pivot_double);
   }
 
   if(isDefined(var_0.gate_pivot_double)) {
-    var_0.gate_model_double linkto(var_0.gate_pivot_double);
+    var_0.gate_model_double linkTo(var_0.gate_pivot_double);
   }
 }
 
@@ -763,7 +763,7 @@ transition_running(var_0, var_1, var_2) {
     level.drill = undefined;
   }
 
-  var_3 = common_scripts\utility::getstruct("hidden_drill_pos", "targetname");
+  var_3 = common_scripts\utility::getStruct("hidden_drill_pos", "targetname");
   level.drill = spawn("script_model", var_3.origin);
   level.drill.state = "planted";
   level thread maps\mp\alien\_music_and_dialog::playvoforbombplant(var_2);
@@ -790,7 +790,7 @@ set_transition_state_run(var_0) {
   level.drill notify("online");
   level.drill setCanDamage(0);
   level.drill makeunusable();
-  level.drill sethintstring("");
+  level.drill setHintString("");
   var_1 = level.drill_health_hardcore;
   level.drill.maxhealth = 20000 + var_1;
   level.drill.health = int(20000 + var_1 * 1.0);
@@ -861,7 +861,7 @@ opener_pivot(var_0, var_1) {
   level thread play_door_sounds(var_0);
   var_0.gate_pivot rotateby((0, var_2, 0), 1.0, 0.2, 0.2);
   wait 1.5;
-  var_0.gate_clip disconnectpaths();
+  var_0.gate_clip disconnectPaths();
 }
 
 opener_slide(var_0, var_1, var_2) {
@@ -883,7 +883,7 @@ opener_slide(var_0, var_1, var_2) {
   }
 
   wait 1.5;
-  var_0.gate_clip disconnectpaths();
+  var_0.gate_clip disconnectPaths();
 }
 
 opener_slide_x(var_0, var_1) {
@@ -899,7 +899,7 @@ opener_slide_x(var_0, var_1) {
   level thread play_door_sounds(var_0);
   var_0.gate_pivot movex(var_2, 2.0, 0.3, 0.6);
   wait 1.5;
-  var_0.gate_clip disconnectpaths();
+  var_0.gate_clip disconnectPaths();
 }
 
 opener_doors(var_0, var_1) {
@@ -917,8 +917,8 @@ opener_doors(var_0, var_1) {
   var_0.gate_pivot rotateby((0, var_2, 0), 1.0, 0.2, 0.2);
   var_0.gate_pivot_double rotateby((0, var_2 * -1, 0), 1.0, 0.2, 0.2);
   wait 1.5;
-  var_0.gate_clip disconnectpaths();
-  var_0.gate_clip_double disconnectpaths();
+  var_0.gate_clip disconnectPaths();
+  var_0.gate_clip_double disconnectPaths();
 }
 
 play_door_sounds(var_0) {
@@ -1021,7 +1021,7 @@ set_debug_startpointlocations() {
 
   for(level.debug_startpointlocations = []; var_0 <= 4; var_0++) {
     var_1 = level.current_area_name + "_spawn_" + var_0;
-    var_2 = common_scripts\utility::getstruct(var_1, "targetname");
+    var_2 = common_scripts\utility::getStruct(var_1, "targetname");
 
     if(!isDefined(var_2)) {
       return;

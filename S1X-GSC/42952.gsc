@@ -137,7 +137,7 @@ trajectory_kill(var_0) {
 
 capsule_damage(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = var_2 - var_1;
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_8 = length(var_6);
   var_9 = var_3 * var_3;
 
@@ -290,7 +290,7 @@ monitordropinternal(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_0 thread playermonitorfordronedelivery(var_1, var_2, var_9, var_7);
   }
 
-  var_7 linkto(var_1, "tag_origin", (0, 0, 0), (-90, 0, 0));
+  var_7 linkTo(var_1, "tag_origin", (0, 0, 0), (-90, 0, 0));
   var_1 waittill("death", var_10, var_11, var_12);
 
   if(isDefined(var_1) && !var_8 && var_1.origin[2] > var_2.droppoint[2] && distancesquared(var_1.origin, var_2.droppoint) > 22500) {
@@ -348,7 +348,7 @@ crateimpactcleanup(var_0) {
       if(var_3 istouching(self)) {
         foreach(var_5 in var_1) {
           if(distancesquared(var_5.origin, self.origin) > 10000) {
-            var_3 setorigin(var_5.origin, 1);
+            var_3 setOrigin(var_5.origin, 1);
             var_1 = common_scripts\utility::array_remove(var_1, var_5);
             break;
           }
@@ -649,7 +649,7 @@ playermonitorfordronedelivery(var_0, var_1, var_2, var_3) {
   var_9 thread carepackagedronewatchdeath();
   var_9 endon("death");
   var_9 vehicle_teleport(var_3.origin, var_3.angles, 0, 0);
-  var_3 linkto(var_9, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_9, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_3.friendlymodel scriptmodelplayanim("orbital_care_package_fan_spin", "nothing");
   var_3.enemymodel scriptmodelplayanim("orbital_care_package_fan_spin", "nothing");
   maps\mp\killstreaks\_drone_carepackage::setupcarepackagedrone(var_9, 1);
@@ -679,7 +679,7 @@ playermonitorfordronedelivery(var_0, var_1, var_2, var_3) {
   }
 
   if(var_3.health > 0) {
-    var_2 linkto(var_9, "tag_origin");
+    var_2 linkTo(var_9, "tag_origin");
     var_2 notify("linkedToDrone");
     var_9 thread maps\mp\killstreaks\_drone_carepackage::carepackagedrone_deleteonactivate();
     var_9 carepackagedronefindowner();

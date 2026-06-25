@@ -687,7 +687,7 @@ function do_gib(model, tag) {
     forward = self._gib_vel;
     self._gib_vel = undefined;
   } else {
-    forward = vectornormalize(end_pos - start_pos);
+    forward = vectorNormalize(end_pos - start_pos);
     forward = forward * randomfloatrange(0.6, 1);
     forward = forward + (0, 0, randomfloatrange(0.4, 0.7));
   }

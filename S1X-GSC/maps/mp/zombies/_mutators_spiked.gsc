@@ -76,7 +76,7 @@ spikeblast(var_0) {
   self.spikeblastready = 0;
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = self gettagorigin("J_Spine4");
-  var_1 linkto(self, "J_Spine4");
+  var_1 linkTo(self, "J_Spine4");
   wait 0.05;
   playFX(common_scripts\utility::getfx("mut_spiked_explosion_2"), var_1.origin);
   playsoundatpos(var_1.origin, "zmb_mut_spiked_explo_overkill");

@@ -184,11 +184,11 @@ func_1211(var_0, var_1, var_2, var_3) {
     level.var_5A23[var_0].var_5A25 = var_5 scripts\engine\utility::spawn_tag_origin();
     level.var_5A23[var_0].var_59FF = var_7 scripts\engine\utility::spawn_tag_origin();
     level.var_5A23[var_0].var_59FF.angles = var_7.angles + (0, 180, 0);
-    level.var_5A23[var_0].var_59FF linkto(level.var_5A23[var_0].var_5978);
+    level.var_5A23[var_0].var_59FF linkTo(level.var_5A23[var_0].var_5978);
     level.var_5A23[var_0].var_5A58 = distance2d(level.var_5A23[var_0].var_5A25.origin, level.var_5A23[var_0].var_59FF.origin);
     var_8 = func_12A6(var_4, "door_kick_animstruct");
     level.var_5A23[var_0].var_A5A9 = var_8 scripts\engine\utility::spawn_tag_origin();
-    level.var_5A23[var_0].var_A5A9 linkto(level.var_5A23[var_0].var_5A25);
+    level.var_5A23[var_0].var_A5A9 linkTo(level.var_5A23[var_0].var_5A25);
     var_9 = -140.0;
 
     if(isDefined(var_5.var_EE0E)) {
@@ -202,11 +202,11 @@ func_1211(var_0, var_1, var_2, var_3) {
     level.var_5A23[var_0].var_5A26 = var_5 scripts\engine\utility::spawn_tag_origin();
     level.var_5A23[var_0].var_5A26.angles = level.var_5A23[var_0].var_5A26.angles + (0, 180, 0);
     level.var_5A23[var_0].var_5A00 = var_7 scripts\engine\utility::spawn_tag_origin();
-    level.var_5A23[var_0].var_5A00 linkto(level.var_5A23[var_0].var_5978);
+    level.var_5A23[var_0].var_5A00 linkTo(level.var_5A23[var_0].var_5978);
     level.var_5A23[var_0].var_5A58 = distance2d(level.var_5A23[var_0].var_5A26.origin, level.var_5A23[var_0].var_5A00.origin);
     var_10 = func_12A6(var_4, "door_kick_animstruct_b");
     level.var_5A23[var_0].var_A5AA = var_10 scripts\engine\utility::spawn_tag_origin();
-    level.var_5A23[var_0].var_A5AA linkto(level.var_5A23[var_0].var_5A26);
+    level.var_5A23[var_0].var_A5AA linkTo(level.var_5A23[var_0].var_5A26);
     var_9 = 140.0;
 
     if(isDefined(var_5.var_EE0D)) {
@@ -217,10 +217,10 @@ func_1211(var_0, var_1, var_2, var_3) {
   }
 
   level.var_5A23[var_0].var_5A2A = var_5 scripts\engine\utility::spawn_tag_origin();
-  level.var_5A23[var_0].var_5978 linkto(level.var_5A23[var_0].var_5A2A);
+  level.var_5A23[var_0].var_5978 linkTo(level.var_5A23[var_0].var_5A2A);
   level.var_5A23[var_0].var_5A24 = level.var_5A23[var_0].var_5A2A.angles;
   level.var_5A23[var_0].var_5A03 = func_12A6(var_4, "door_peek_clip");
-  level.var_5A23[var_0].var_5A03 linkto(level.var_5A23[var_0].var_5978);
+  level.var_5A23[var_0].var_5A03 linkTo(level.var_5A23[var_0].var_5978);
   level.var_5A23[var_0].var_5A56 = func_12A6(var_4, "door_peek_static_clip");
 
   if(!var_1) {
@@ -228,13 +228,13 @@ func_1211(var_0, var_1, var_2, var_3) {
     level.var_5A23[var_0].var_4C26 = spawn("script_origin", var_11.origin);
     level.var_5A23[var_0].var_4C26.origin = var_11.origin;
     level.var_5A23[var_0].var_4C26.angles = var_11.angles;
-    level.var_5A23[var_0].var_4C26 linkto(level.var_5A23[var_0].var_5978);
+    level.var_5A23[var_0].var_4C26 linkTo(level.var_5A23[var_0].var_5978);
   } else {
     var_11 = func_12A6(var_4, "door_kick_interact_b");
     level.var_5A23[var_0].var_4C27 = spawn("script_origin", var_11.origin);
     level.var_5A23[var_0].var_4C27.origin = var_11.origin;
     level.var_5A23[var_0].var_4C27.angles = var_11.angles;
-    level.var_5A23[var_0].var_4C27 linkto(level.var_5A23[var_0].var_5978);
+    level.var_5A23[var_0].var_4C27 linkTo(level.var_5A23[var_0].var_5978);
   }
 
   level.var_5A23[var_0].var_C9D4 = 0;
@@ -275,7 +275,7 @@ func_1211(var_0, var_1, var_2, var_3) {
     level.var_5A23[var_0].var_5978 unlink();
     var_12 = level.var_5A23[var_0].var_C9FF.var_11782;
     level.var_5A23[var_0].var_5A2A.origin = level.var_5A23[var_0].var_5A2A.origin + var_12 * anglesToForward(level.var_5A23[var_0].var_5A26.angles);
-    level.var_5A23[var_0].var_5978 linkto(level.var_5A23[var_0].var_5A2A);
+    level.var_5A23[var_0].var_5978 linkTo(level.var_5A23[var_0].var_5A2A);
   }
 
   thread func_120D(var_0, level.var_5A23[var_0].var_5978, level.var_5A23[var_0].var_5A03);
@@ -393,7 +393,7 @@ func_1202(var_0, var_1) {
     var_15 = var_4.angles;
     var_4 unlink();
     var_4.origin = var_4.origin + var_12;
-    var_16 = vectornormalize(var_4.origin - level.player.origin);
+    var_16 = vectorNormalize(var_4.origin - level.player.origin);
     var_17 = distance(var_4.origin, level.player.origin);
     var_16 = rotatevector(var_16, var_13);
     var_4.origin = level.player.origin + var_16 * var_17;
@@ -440,9 +440,9 @@ func_1202(var_0, var_1) {
 
     level.player getweaponweight(level.var_5A23[var_0].var_C9FD, "tag_player", 0.2, 0.0, 0.0);
     wait 0.05;
-    level.var_5A23[var_0].var_C9FD linkto(var_4);
-    var_4 moveto(var_14, var_28);
-    var_4 rotateto(var_15, var_28);
+    level.var_5A23[var_0].var_C9FD linkTo(var_4);
+    var_4 moveTo(var_14, var_28);
+    var_4 rotateTo(var_15, var_28);
     level thread scripts\sp\utility::func_C12D(var_0 + "door_peek_blend_complete", var_28 + 0.1);
     level thread scripts\sp\utility::func_C12D("door_peek_blend_complete", var_28 + 0.1);
     var_4 scripts\engine\utility::delaycall(var_28 + 0.05, ::linkto, level.var_5A23[var_0].var_5978);
@@ -570,7 +570,7 @@ func_11F5(var_0, var_1, var_2) {
         level.var_5A23[var_0].var_5978 playLoopSound("doorpeek_" + func_1299(level.var_5A23[var_0].var_5A57) + "_move_loop");
       }
 
-      level.var_5A23[var_0].var_5A2A rotateto(var_10 + (0, 0.0 - level.var_5A23[var_0].var_5A21, 0), 0.1, 0.0, 0.0);
+      level.var_5A23[var_0].var_5A2A rotateTo(var_10 + (0, 0.0 - level.var_5A23[var_0].var_5A21, 0), 0.1, 0.0, 0.0);
 
       if(!var_1) {
         var_18 = clamp(level.var_5A23[var_0].var_5A21 / var_4.var_B481, 0.0, 1.0) * (var_4.var_B4AA - var_4.var_B7C1) + var_4.var_B7C1;
@@ -614,7 +614,7 @@ func_1210(var_0, var_1) {
   }
 
   var_3 = 0.15;
-  level.var_5A23[var_0].var_5A2A rotateto(level.var_5A23[var_0].var_5A24 + (0, var_2, 0), var_3, 0.0, 0.0);
+  level.var_5A23[var_0].var_5A2A rotateTo(level.var_5A23[var_0].var_5A24 + (0, var_2, 0), var_3, 0.0, 0.0);
   level.var_5A23[var_0].var_5A2A scripts\engine\utility::delaycall(var_3 + 0.05, ::delete);
   level.var_5A23[var_0].var_5A03 connectpaths();
   level.var_5A23[var_0].var_5A03 scripts\engine\utility::delaycall(var_3 + 0.05, ::disconnectpaths);
@@ -676,7 +676,7 @@ func_11F7(var_0, var_1, var_2, var_3) {
         continue;
       }
       var_15 = scripts\sp\math::func_ACE9(var_12, var_12 + var_14 * 64, self.ogorigin, var_6);
-      var_16 = vectornormalize(var_15 - self.ogorigin);
+      var_16 = vectorNormalize(var_15 - self.ogorigin);
       var_15 = self.ogorigin + var_16 * distance(var_15, self.ogorigin) * 0.75 * var_11;
 
       if(distance(var_15, self.ogorigin) > 32.0) {
@@ -854,7 +854,7 @@ func_120B(var_0, var_1, var_2) {
 
       var_9 = 50;
       var_10 = level.player getnormalizedmovement();
-      var_11 = vectornormalize((var_10[0], 0 - var_10[1], 0));
+      var_11 = vectorNormalize((var_10[0], 0 - var_10[1], 0));
       var_12 = vectortoangles(var_11);
       var_13 = level.player getplayerangles(1);
       var_14 = _combineangles(var_13, var_12);
@@ -909,19 +909,19 @@ func_120B(var_0, var_1, var_2) {
         var_25 = acos(clamp(vectordot(var_20, var_23), -1, 1));
         var_26 = var_24 / var_17;
         var_27 = var_25 / var_17;
-        level.var_5A23[var_0.targetname].var_5A2A rotateto(level.var_5A23[var_0.targetname].var_5A24, var_26, 0.0, 0.0);
+        level.var_5A23[var_0.targetname].var_5A2A rotateTo(level.var_5A23[var_0.targetname].var_5A24, var_26, 0.0, 0.0);
         wait(var_26);
-        level.var_5A23[var_0.targetname].var_5A2A rotateto(level.var_5A23[var_0.targetname].var_5A24 + (0, var_18, 0), var_27, 0.0, 0.0);
+        level.var_5A23[var_0.targetname].var_5A2A rotateTo(level.var_5A23[var_0.targetname].var_5A24 + (0, var_18, 0), var_27, 0.0, 0.0);
         wait(var_27);
       } else {
         var_28 = acos(clamp(vectordot(var_19, var_20), -1, 1));
         var_29 = var_28 / var_17;
-        level.var_5A23[var_0.targetname].var_5A2A rotateto(level.var_5A23[var_0.targetname].var_5A24 + (0, var_18, 0), var_29, 0.0, 0.0);
+        level.var_5A23[var_0.targetname].var_5A2A rotateTo(level.var_5A23[var_0.targetname].var_5A24 + (0, var_18, 0), var_29, 0.0, 0.0);
         wait(var_29);
       }
 
       wait 0.05;
-      var_2 disconnectpaths();
+      var_2 disconnectPaths();
       level.var_5A23[var_0.targetname].var_5A2A delete();
       level notify(var_0.targetname + "door_peek_finished");
       level notify("door_peek_finished");
@@ -937,7 +937,7 @@ func_11FC(var_0) {
   var_2 = anglesToForward(level.var_5A23[var_0.targetname].var_5A2A.angles);
   var_3 = -1 * anglestoright(level.var_5A23[var_0.targetname].var_5A2A.angles);
   var_4 = level.player.origin - var_1.origin;
-  var_5 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_4);
   var_6 = level.var_5A23[var_0.targetname].var_5A58 + 8;
   var_7 = 48;
 
@@ -1041,7 +1041,7 @@ func_11FD(var_0) {
   var_8 = -1 * anglestoright(level.var_5A23[var_0.targetname].var_5A25.angles);
   var_9 = level.var_5A23[var_0.targetname].var_5A25.origin + var_7 * var_6.var_11782 * -0.5;
   var_10 = level.player.origin - var_9;
-  var_11 = vectornormalize(var_10);
+  var_11 = vectorNormalize(var_10);
   var_12 = level.var_5A23[var_5].var_5A58 + 8;
   var_13 = 48;
 
@@ -1158,7 +1158,7 @@ func_11F9(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     var_16 = func_12A1(var_0, var_2);
     var_17 = 0.2;
-    var_8 moveto(var_16, var_17, var_17 / 2.0, 0.0);
+    var_8 moveTo(var_16, var_17, var_17 / 2.0, 0.0);
 
     if(var_1.var_EE52 == "airlock") {
       level.player scripts\sp\utility::func_2B76(0);
@@ -1359,7 +1359,7 @@ func_1209(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    var_9 = vectornormalize((var_8[0], 0 - var_8[1], 0));
+    var_9 = vectorNormalize((var_8[0], 0 - var_8[1], 0));
     var_10 = vectortoangles(var_9);
     var_11 = level.player getplayerangles(1);
     var_12 = _combineangles(var_11, var_10);
@@ -1428,7 +1428,7 @@ func_1296(var_0, var_1) {
   }
 
   var_6 = 0;
-  var_7 = vectornormalize((var_2[0], 0 - var_2[1], 0));
+  var_7 = vectorNormalize((var_2[0], 0 - var_2[1], 0));
   var_8 = vectortoangles(var_7);
   var_9 = level.player getplayerangles(1);
   var_10 = _combineangles(var_9, var_8);
@@ -1643,7 +1643,7 @@ func_59D5(var_0, var_1) {
 
 func_59A4() {
   wait 0.75;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   earthquake(0.35, 0.75, level.player.origin, 200);
   func_0F18::func_10E8A("broadcast", "attack", level.player getEye(), 800);
 }
@@ -1786,7 +1786,7 @@ func_11EC(var_0) {
   var_2 = func_12A6(var_1, "door_peek_door");
   var_3 = func_12A6(var_1, "door_peek_clip");
   var_4 = var_2.var_EE52;
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_5 = func_12A6(var_1, "door_kick_animstruct");
   var_6 = func_12A6(var_1, "door_kick_animstruct2");
   var_7 = var_5 scripts\engine\utility::spawn_tag_origin();
@@ -1812,7 +1812,7 @@ func_11EC(var_0) {
   var_21 = var_20 + var_17;
   var_21 = clamp(var_21, 0.0, var_18);
   var_22 = var_13 + (0, 0 - var_21, 0);
-  level.var_5A23[var_0].var_5A2A rotateto(var_22, var_15, 0.0, 0.2);
+  level.var_5A23[var_0].var_5A2A rotateTo(var_22, var_15, 0.0, 0.2);
   var_2 thread scripts\engine\utility::play_sound_in_space("doorpeek_" + func_1299(var_4) + "_kick", var_2.origin);
   thread func_1351(var_0);
   wait(var_16);
@@ -1824,8 +1824,8 @@ func_11EC(var_0) {
   var_23 = var_7 func_12A0(0, 30, 0);
   var_24 = level.player scripts\engine\utility::spawn_tag_origin();
   level.player getweightedchanceroll(var_24, "tag_origin", 1, 10, 10, 10, 10, 0);
-  var_24 moveto(var_23, var_19, 0.0, 0.2);
-  var_24 rotateto((var_24.angles[0], var_5.angles[1], var_24.angles[2]), 0.5, 0.0, 0.2);
+  var_24 moveTo(var_23, var_19, 0.0, 0.2);
+  var_24 rotateTo((var_24.angles[0], var_5.angles[1], var_24.angles[2]), 0.5, 0.0, 0.2);
   wait(var_19);
   func_11EE();
   level notify(var_0 + "stop_fake_origin_link");
@@ -1845,7 +1845,7 @@ func_11ED(var_0) {
   var_2 = func_12A6(var_1, "door_peek_door");
   var_3 = func_12A6(var_1, "door_peek_clip");
   var_4 = var_2.var_EE52;
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_5 = func_12A6(var_1, "door_kick_animstruct");
   var_6 = func_12A6(var_1, "door_kick_animstruct2");
   var_7 = var_5 scripts\engine\utility::spawn_tag_origin();
@@ -1876,7 +1876,7 @@ func_11ED(var_0) {
   var_24 = clamp(var_23 * var_15, var_16, var_15);
   var_25 = clamp(var_24 - var_19, var_20, var_24);
   var_26 = var_13 + (0, 0 - var_22, 0);
-  level.var_5A23[var_0].var_5A2A rotateto(var_26, var_24, var_24 * 0.4, 0);
+  level.var_5A23[var_0].var_5A2A rotateTo(var_26, var_24, var_24 * 0.4, 0);
   var_2 playSound("doorpeek_" + func_1299(var_4) + "_shove");
   thread func_1351(var_0);
   scripts\engine\utility::delaythread(var_25, ::func_11EE);
@@ -1944,7 +1944,7 @@ func_11F0(var_0, var_1, var_2) {
   var_4 = func_12A6(var_3, "door_peek_door");
   var_5 = func_12A6(var_3, "door_peek_clip");
   var_6 = var_4.var_EE52;
-  var_5 linkto(var_4);
+  var_5 linkTo(var_4);
 
   if(!var_1) {
     var_7 = level.var_5A23[var_0].var_A5A9;
@@ -2021,7 +2021,7 @@ func_11F0(var_0, var_1, var_2) {
   var_31 = var_7.angles;
   var_7 unlink();
   var_7.origin = var_7.origin + var_28;
-  var_32 = vectornormalize(var_7.origin - level.player.origin);
+  var_32 = vectorNormalize(var_7.origin - level.player.origin);
   var_33 = distance(var_7.origin, level.player.origin);
   var_32 = rotatevector(var_32, var_29);
   var_7.origin = level.player.origin + var_32 * var_33;
@@ -2042,9 +2042,9 @@ func_11F0(var_0, var_1, var_2) {
   level.player scripts\engine\utility::delaycall(var_37, ::getweightedchanceroll, level.var_5A23[var_4.targetname].var_A5AE, "tag_player", 1, 0, 0, 0, 0, 0);
   level.player scripts\engine\utility::delaycall(var_38, ::lerpviewangleclamp, var_39, 0, 0, 40, 40, 60, 10);
   wait 0.05;
-  level.var_5A23[var_4.targetname].var_A5AE linkto(var_7);
-  var_7 moveto(var_30, var_35);
-  var_7 rotateto(var_31, var_35);
+  level.var_5A23[var_4.targetname].var_A5AE linkTo(var_7);
+  var_7 moveTo(var_30, var_35);
+  var_7 rotateTo(var_31, var_35);
   wait(var_35);
   level.player scripts\sp\utility::func_2B76(0.2, 0.05);
 
@@ -2052,14 +2052,14 @@ func_11F0(var_0, var_1, var_2) {
     var_41 = 0.7;
     wait(var_36 - var_35 - var_41);
     var_42 = var_7 func_12A0(-60, 0, 0);
-    var_7 moveto(var_42, var_41, 0.2, 0.1);
+    var_7 moveTo(var_42, var_41, 0.2, 0.1);
     wait(var_41);
   } else if(isDefined(level.var_5A1C)) {
     if(level.var_5A1C > 0) {
       wait(var_36 * level.var_5A1C);
     }
 
-    var_7 scripts\sp\utility::anim_stopanimscripted();
+    var_7 scripts\sp\utility::anim_stopanimScripted();
   } else {
     wait(var_36 - var_35);
   }
@@ -2487,7 +2487,7 @@ func_5A1B(var_0) {
 }
 
 func_59D9(var_0, var_1) {
-  level.var_5A23[var_0].var_5A2A rotateto(level.var_5A23[var_0].var_5A24 + (0, -140, 0), var_1, 0.0, 0.0);
+  level.var_5A23[var_0].var_5A2A rotateTo(level.var_5A23[var_0].var_5A24 + (0, -140, 0), var_1, 0.0, 0.0);
   level.var_5A23[var_0].var_5A2A scripts\engine\utility::delaycall(var_1 + 0.05, ::delete);
   level.var_5A23[var_0].var_5A03 connectpaths();
   level.var_5A23[var_0].var_5A03 scripts\engine\utility::delaycall(var_1 + 0.05, ::disconnectpaths);

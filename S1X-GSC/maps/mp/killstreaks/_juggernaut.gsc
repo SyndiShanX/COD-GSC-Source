@@ -199,7 +199,7 @@ radarMover(portableRadar) {
   self endon("jugdar_removed");
 
   for(;;) {
-    portableRadar MoveTo(self.origin, .05);
+    portableRadar moveTo(self.origin, .05);
     wait(0.05);
   }
 }
@@ -739,10 +739,10 @@ setupCoopTurret(data, player) {
   turret make_entity_sentient_mp(player.team);
   turret maps\mp\killstreaks\_autosentry::addToTurretList(turret GetEntityNumber());
   turret thread maps\mp\killstreaks\_remoteturret::turret_watchDisabled();
-  turret LinkTo(player, "tag_turret", (0, 0, 0), (0, 0, 0));
+  turret linkTo(player, "tag_turret", (0, 0, 0), (0, 0, 0));
 
   turret.effect = spawnAttachmentEffect(startOrigin, player);
-  turret.effect LinkTo(turret, "tag_player", (29, -7, -6), (0, 0, 0));
+  turret.effect linkTo(turret, "tag_player", (29, -7, -6), (0, 0, 0));
   turret.effect Hide();
 
   data.coopTurret = turret;
@@ -856,7 +856,7 @@ setupRadar(player, data) {
   radarOrigin = player GetTagOrigin("tag_recon_back");
 
   radar = spawnAttachment("radar", "npc_heavy_exo_armor_recon_back_base", radarOrigin, undefined, player);
-  radar LinkTo(player, "tag_recon_back", (0, 0, 0), (0, 0, 0));
+  radar linkTo(player, "tag_recon_back", (0, 0, 0), (0, 0, 0));
 
   player thread playerHandleRadarPing(data, radar);
 
@@ -942,15 +942,15 @@ stop_exo_ping() {
 setupManiac(player) {
   legsOrigin = player GetTagOrigin("tag_maniac_l");
   speedAttachment = spawnAttachment("speedAttachment", "npc_heavy_exo_armor_maniac_l_base", legsOrigin, undefined, player);
-  speedAttachment LinkTo(player, "tag_maniac_l", (0, 0, 0), (0, 0, 0));
+  speedAttachment linkTo(player, "tag_maniac_l", (0, 0, 0), (0, 0, 0));
 
   legsOrigin = player GetTagOrigin("tag_maniac_r");
   speedAttachmentR = spawnAttachment("speedAttachment", "npc_heavy_exo_armor_maniac_r_base", legsOrigin, undefined, player);
-  speedAttachmentR LinkTo(player, "tag_maniac_r", (0, 0, 0), (0, 0, 0));
+  speedAttachmentR linkTo(player, "tag_maniac_r", (0, 0, 0), (0, 0, 0));
 
   backOrigin = player GetTagOrigin("tag_jetpack");
   speedAttachmentB = spawnAttachment("speedAttachment", "npc_heavy_exo_armor_jetpack_base", backOrigin, undefined, player);
-  speedAttachmentB LinkTo(player, "tag_jetpack", (0, 0, 0), (0, 0, 0));
+  speedAttachmentB linkTo(player, "tag_jetpack", (0, 0, 0), (0, 0, 0));
 
   waittillAttachmentDone(player);
 
@@ -1023,7 +1023,7 @@ setupTrophy(player, data) {
   trophy1 = spawnAttachment("trophy", "npc_heavy_exo_armor_trophy_l_base", chestOrigin, undefined, player);
   trophy1.stunned = false;
   trophy1.ammo = 1;
-  trophy1 LinkTo(player, "tag_trophy_l", (0, 0, 0), (0, 0, 0));
+  trophy1 linkTo(player, "tag_trophy_l", (0, 0, 0), (0, 0, 0));
   trophy1.weaponName = "heavy_exo_trophy_mp";
   trophy1 thread maps\mp\gametypes\_equipment::trophyActive(player, undefined, true, trophy1.weaponName);
   trophy1 thread maps\mp\gametypes\_equipment::trophyAddlaser(12, (90, 90, 270));
@@ -1033,7 +1033,7 @@ setupTrophy(player, data) {
   trophy2 = spawnAttachment("trophy", "npc_heavy_exo_armor_trophy_r_base", chestOrigin, undefined, player);
   trophy2.stunned = false;
   trophy2.ammo = 1;
-  trophy2 LinkTo(player, "tag_trophy_r", (0, 0, 0), (0, 0, 0));
+  trophy2 linkTo(player, "tag_trophy_r", (0, 0, 0), (0, 0, 0));
   trophy2.weaponName = "heavy_exo_trophy_mp";
   trophy2 thread maps\mp\gametypes\_equipment::trophyActive(player, undefined, true, trophy2.weaponName);
   trophy2 thread maps\mp\gametypes\_equipment::trophyAddlaser(6, (260, 90, 270));
@@ -1109,7 +1109,7 @@ setupRocketSwarm(player, data) {
   rocketAttachment.reloading = false;
   rocketAttachment.rockets = [];
   rocketAttachment.icons = [];
-  rocketAttachment LinkTo(player, tag, (0, 0, 0), (0, 0, 0));
+  rocketAttachment linkTo(player, tag, (0, 0, 0), (0, 0, 0));
   rocketAttachment Hide();
   player.rocketAttachment = rocketAttachment;
 
@@ -1175,7 +1175,7 @@ getBestEnemy(player, numSightTracesTotal) {
     }
 
     enemyEye = guy getEye();
-    dirToEnemy = VectorNormalize(enemyEye - playerEye);
+    dirToEnemy = vectorNormalize(enemyEye - playerEye);
     dot = VectorDot(playerDir, dirToEnemy);
     if(dot > cos32) {
       bestEnemies[bestEnemies.size] = guy;
@@ -1937,7 +1937,7 @@ fireDropPod(node, modules) {
   useEnt.crateType = "juggernaut";
   useEnt.dropType = "juggernaut";
   useEnt thread control_goliath_usability();
-  useEnt SetHintString(&"KILLSTREAKS_HEAVY_EXO_PICKUP");
+  useEnt setHintString(&"KILLSTREAKS_HEAVY_EXO_PICKUP");
   useEnt thread maps\mp\killstreaks\_airdrop::crateOtherCaptureThink();
   useEnt thread maps\mp\killstreaks\_airdrop::crateOwnerCaptureThink();
   useEnt thread useGoliathUpdater();
@@ -2014,7 +2014,7 @@ fireDropPod(node, modules) {
     activator is_entering_goliath(emptyMech, targetPos);
 
     if(isDefined(activator) && IsAlive(activator)) {
-      activator SetOrigin(targetPos, true);
+      activator setOrigin(targetPos, true);
       activator SetPlayerAngles(emptyMech.angles);
       activator EnableWeapons();
       activator giveJuggernaut("juggernaut_exosuit", modules);
@@ -2114,7 +2114,7 @@ control_goliath_usability() {
 is_entering_goliath(goliathModel, targetPos) {
   goliathForward = anglesToForward(goliathModel.angles);
   targetPos = targetPos - (goliathForward * 37);
-  self SetOrigin(targetPos, false);
+  self setOrigin(targetPos, false);
   self SetPlayerAngles(goliathModel.angles);
 
   wait(0.05);
@@ -2126,7 +2126,7 @@ is_entering_goliath(goliathModel, targetPos) {
 }
 
 createCollision(targetPos) {
-  collision = GetEnt("goliath_collision", "targetname");
+  collision = getEnt("goliath_collision", "targetname");
   if(isDefined(collision)) {
     self CloneBrushmodelToScriptmodel(collision);
   }
@@ -2213,7 +2213,7 @@ adjustLink(item, tagName, player, startOrigin, startAngles) {
     currentOrigin = nextOrigin;
 
     item Unlink();
-    item LinkTo(player, tagName, currentOrigin, currentAngles);
+    item linkTo(player, tagName, currentOrigin, currentAngles);
   }
 }
 

@@ -370,7 +370,7 @@ alien_area_init(area_array) {
   level.current_area_index = 0;
 
   foreach(area in area_array) {
-    area_volume = GetEnt(area, "targetname");
+    area_volume = getEnt(area, "targetname");
     assert(isDefined(area_volume));
 
     level.world_areas[area] = area_volume;
@@ -562,7 +562,7 @@ get_linked_nodes_and_delete(start_node) {
   cur_node = start_node;
 
   while(isDefined(cur_node.target)) {
-    next_node = getent(cur_node.target, "targetname");
+    next_node = getEnt(cur_node.target, "targetname");
     if(isDefined(next_node)) {
       cur_node delete();
       cur_node = next_node;

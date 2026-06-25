@@ -32,10 +32,10 @@ main() {
   level flag::init(#"blood_waiting");
   level flag::init(#"blood_active");
   level.s_mq_blood_vessel_loc = struct::get("mq_blood_vessel_loc", "targetname");
-  level.s_mq_blood_vessel_loc.vessel = getent(level.s_mq_blood_vessel_loc.target, "targetname");
+  level.s_mq_blood_vessel_loc.vessel = getEnt(level.s_mq_blood_vessel_loc.target, "targetname");
   level.s_mq_blood_vessel_loc.vessel hide();
   level.s_mq_blood_vessel_loc zm_unitrigger::create("", 128);
-  level.var_4adebdfc = getent("mq_blood", "targetname");
+  level.var_4adebdfc = getEnt("mq_blood", "targetname");
   level.var_4adebdfc val::set(#"mq_blood", "allowdeath", 0);
   level.var_4adebdfc val::set(#"mq_blood", "takedamage", 0);
   level.var_4adebdfc.a_wisps = [];
@@ -45,7 +45,7 @@ main() {
   level.var_e70fa660 = zm_hms_util::function_2719d4c0("mq_blood_whisp_loc", "targetname", "script_int");
   level waittill(#"start_zombie_round_logic");
   level.s_mq_blood_vessel_loc thread blood_think();
-  level.var_4adebdfc moveto(level.a_s_mq_blood_locs[0].origin, 1, 0.1, 0.3);
+  level.var_4adebdfc moveTo(level.a_s_mq_blood_locs[0].origin, 1, 0.1, 0.3);
   level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
   level.var_9928b94b = [];
   level.var_9928b94b[0] = array("docks_1", "docks_2", "boathouse", "frozen_crevasse", "ice_grotto", "lagoon");
@@ -147,7 +147,7 @@ blood_think() {
 
       player dodamage(damage, level.var_4adebdfc.origin);
 
-      if(getplayers().size < 2 && player laststand::player_is_in_laststand()) {
+      if(getPlayers().size < 2 && player laststand::player_is_in_laststand()) {
         player thread function_15f8d6f0();
       }
 
@@ -232,7 +232,7 @@ blood_event() {
 
   level flag::clear(#"blood_active");
   level thread function_9a991dc2(2);
-  self moveto(level.a_s_mq_blood_locs[0].origin, 1, 0.1, 0.5);
+  self moveTo(level.a_s_mq_blood_locs[0].origin, 1, 0.1, 0.5);
   self.var_d0fed9fb = undefined;
   level.var_9e3c632e++;
   level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
@@ -292,7 +292,7 @@ blood_move() {
     }
 
     s_point = array::random(stance_any_step);
-    self moveto(s_point.origin, 0.5, 0.1, 0.2);
+    self moveTo(s_point.origin, 0.5, 0.1, 0.2);
     self.var_d0fed9fb = s_point.script_int;
     s_result = self waittilltimeout(randomintrangeinclusive(4 - level.var_9e3c632e, 6 - level.var_9e3c632e), #"threshold_hit");
   }
@@ -321,13 +321,13 @@ function_c2d403f(n_index) {
     if(isPlayer(s_notify.attacker)) {
       if(self.b_frozen) {
         if(self.b_primed) {
-          self moveto(level.s_mq_blood_vessel_loc.vessel.origin, 0.7, 0.1, 0.1);
+          self moveTo(level.s_mq_blood_vessel_loc.vessel.origin, 0.7, 0.1, 0.1);
           wait 0.7;
           level.var_64f7b41e++;
           self thread util::delayed_delete(0.1);
         } else {
           var_3a253a6f = max(distance(self.origin, level.var_e70fa660[n_index].origin) / 1000, 1);
-          self moveto(level.var_e70fa660[n_index].origin, var_3a253a6f, 0.2, 0.2);
+          self moveTo(level.var_e70fa660[n_index].origin, var_3a253a6f, 0.2, 0.2);
           wait var_3a253a6f;
           self.b_primed = 1;
           self notify(#"primed");
@@ -354,7 +354,7 @@ function_a4fa2df0(n_index) {
   self endon(#"death", #"primed");
 
   if(level.var_9e3c632e > 2) {
-    self moveto(level.var_e70fa660[n_index].origin, 0.3, 0.1, 0.1);
+    self moveTo(level.var_e70fa660[n_index].origin, 0.3, 0.1, 0.1);
     self.b_primed = 1;
     return;
   }
@@ -397,7 +397,7 @@ function_a4fa2df0(n_index) {
 
     loc = array::random(var_a4cd10ea);
     var_3a253a6f = max(distance(self.origin, loc.origin) / 1000, 1);
-    self moveto(loc.origin + (0, 0, 50), var_3a253a6f, 0.2, 0.2);
+    self moveTo(loc.origin + (0, 0, 50), var_3a253a6f, 0.2, 0.2);
     wait var_3a253a6f;
     self.b_near = 0;
 

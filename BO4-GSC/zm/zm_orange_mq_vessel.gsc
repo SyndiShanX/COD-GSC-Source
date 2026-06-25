@@ -114,14 +114,14 @@ main() {
 
   a_s_vl = struct::get_array("mq_vessel_loc", "targetname");
   level.var_d6513b72 = array::random(a_s_vl);
-  level.var_d6513b72.e_vessel = getent(level.var_d6513b72.target, "targetname");
+  level.var_d6513b72.e_vessel = getEnt(level.var_d6513b72.target, "targetname");
   level.var_d6513b72.e_vessel hide();
-  level.var_d6513b72.e_cover = getent(level.var_d6513b72.target2, "targetname");
-  level.var_d6513b72.e_safe = getent(level.var_d6513b72.target3, "targetname");
+  level.var_d6513b72.e_cover = getEnt(level.var_d6513b72.target2, "targetname");
+  level.var_d6513b72.e_safe = getEnt(level.var_d6513b72.target3, "targetname");
 
   for(i = 0; i < a_s_vl.size; i++) {
     if(a_s_vl[i] != level.var_d6513b72) {
-      e_vessel = getent(a_s_vl[i].target, "targetname");
+      e_vessel = getEnt(a_s_vl[i].target, "targetname");
       e_vessel delete();
     }
   }
@@ -207,7 +207,7 @@ function_a5fa6428() {
 cover_think() {
   level endon(#"end_game", #"vessel_found");
   self endon(#"death");
-  trigger = getent(self.target, "targetname");
+  trigger = getEnt(self.target, "targetname");
 
   while(true) {
     s_result = trigger waittill(#"damage");
@@ -224,7 +224,7 @@ cover_think() {
   if(isDefined(self.dyn) && !isDefined(self.var_f0d6ee1f)) {
     self.var_f0d6ee1f = 1;
     createdynentandlaunch(self.dyn, self.origin, self.angles, self.origin, v_force);
-    playsoundatposition(#"hash_1ff16e6eb6a9dfed", self.origin);
+    playSoundAtPosition(#"hash_1ff16e6eb6a9dfed", self.origin);
   }
 }
 

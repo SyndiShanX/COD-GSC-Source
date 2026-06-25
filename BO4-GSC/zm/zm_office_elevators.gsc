@@ -39,8 +39,8 @@ init() {
   level thread function_dec13a5b();
   level.var_fc1f5422 = struct::get_array("war_room_zone_elevator_spawns", "targetname");
   level.var_3d9e751c = struct::get_array("labs_elevator_spawns", "targetname");
-  elevator1 = getent("elevator1", "targetname");
-  elevator2 = getent("elevator2", "targetname");
+  elevator1 = getEnt("elevator1", "targetname");
+  elevator2 = getEnt("elevator2", "targetname");
   elevator1.cost = 500;
   elevator1.station = "elevator1_up";
   elevator1.called = 0;
@@ -98,36 +98,36 @@ function_3d4e24ea() {
 registergondola_moving_watcher() {
   level.a_e_elevator = getEntArray("elevator2", "targetname");
   level.a_e_elevator1 = getEntArray("elevator1", "targetname");
-  var_844f2ba7 = getent("fx_light_elevator_origin", "targetname");
+  var_844f2ba7 = getEnt("fx_light_elevator_origin", "targetname");
   var_844f2ba7.fx_ent = util::spawn_model("tag_origin", var_844f2ba7.origin);
   var_844f2ba7.fx_ent.angles = var_844f2ba7.angles;
   var_844f2ba7.elevator_fx_light = playFXOnTag(level.fx_elevator_light, var_844f2ba7.fx_ent, "tag_origin");
-  var_844f2ba7.elevator_fx_light linkto(level.a_e_elevator[0]);
-  var_428c7836 = getent("fx_light_elevator1_origin", "targetname");
+  var_844f2ba7.elevator_fx_light linkTo(level.a_e_elevator[0]);
+  var_428c7836 = getEnt("fx_light_elevator1_origin", "targetname");
   var_428c7836.fx_ent = util::spawn_model("tag_origin", var_428c7836.origin);
   var_428c7836.fx_ent.angles = var_428c7836.angles;
   var_428c7836.var_286bc7b5 = playFXOnTag(level.var_41a1bc06, var_428c7836.fx_ent, "tag_origin");
-  var_428c7836.var_286bc7b5 linkto(level.a_e_elevator1[0]);
-  var_71ffef77 = getent("lgt_elevator_panel_illum_origin", "targetname");
+  var_428c7836.var_286bc7b5 linkTo(level.a_e_elevator1[0]);
+  var_71ffef77 = getEnt("lgt_elevator_panel_illum_origin", "targetname");
   var_71ffef77.fx_ent = util::spawn_model("tag_origin", var_71ffef77.origin);
   var_71ffef77.fx_ent.angles = var_71ffef77.angles;
   var_71ffef77.elevator_fx_light = playFXOnTag(level.var_e33251c7, var_71ffef77.fx_ent, "tag_origin");
-  var_71ffef77.elevator_fx_light linkto(level.a_e_elevator[0]);
-  var_b15265f4 = getent("lgt_elevator_panel_caster_origin", "targetname");
+  var_71ffef77.elevator_fx_light linkTo(level.a_e_elevator[0]);
+  var_b15265f4 = getEnt("lgt_elevator_panel_caster_origin", "targetname");
   var_b15265f4.fx_ent = util::spawn_model("tag_origin", var_b15265f4.origin);
   var_b15265f4.fx_ent.angles = var_b15265f4.angles;
   var_b15265f4.elevator_fx_light = playFXOnTag(level.var_715ae9f9, var_b15265f4.fx_ent, "tag_origin");
-  var_b15265f4.elevator_fx_light linkto(level.a_e_elevator[0]);
-  cp_safehouse_training_nextround_traversal = getent("lgt_elevator2_panel_illum_origin", "targetname");
+  var_b15265f4.elevator_fx_light linkTo(level.a_e_elevator[0]);
+  cp_safehouse_training_nextround_traversal = getEnt("lgt_elevator2_panel_illum_origin", "targetname");
   cp_safehouse_training_nextround_traversal.fx_ent = util::spawn_model("tag_origin", cp_safehouse_training_nextround_traversal.origin);
   cp_safehouse_training_nextround_traversal.fx_ent.angles = cp_safehouse_training_nextround_traversal.angles;
   cp_safehouse_training_nextround_traversal.elevator_fx_light = playFXOnTag(level.var_e33251c7, cp_safehouse_training_nextround_traversal.fx_ent, "tag_origin");
-  cp_safehouse_training_nextround_traversal.elevator_fx_light linkto(level.a_e_elevator1[0]);
-  var_c95e76a9 = getent("lgt_elevator2_panel_caster_origin", "targetname");
+  cp_safehouse_training_nextround_traversal.elevator_fx_light linkTo(level.a_e_elevator1[0]);
+  var_c95e76a9 = getEnt("lgt_elevator2_panel_caster_origin", "targetname");
   var_c95e76a9.fx_ent = util::spawn_model("tag_origin", var_c95e76a9.origin);
   var_c95e76a9.fx_ent.angles = var_c95e76a9.angles;
   var_c95e76a9.elevator_fx_light = playFXOnTag(level.var_715ae9f9, var_c95e76a9.fx_ent, "tag_origin");
-  var_c95e76a9.elevator_fx_light linkto(level.a_e_elevator1[0]);
+  var_c95e76a9.elevator_fx_light linkTo(level.a_e_elevator1[0]);
   var_844f2f0a = getEntArray("fx_light_illum_elevator_origin", "targetname");
   var_6d00692f = getEntArray("fx_light_illum_elevator2_origin", "targetname");
 
@@ -135,14 +135,14 @@ registergondola_moving_watcher() {
     e_light.fx_ent = util::spawn_model("tag_origin", e_light.origin);
     e_light.fx_ent.angles = e_light.angles;
     e_light.elevator_fx_light = playFXOnTag(level.var_dca712ff, e_light.fx_ent, "tag_origin");
-    e_light.elevator_fx_light linkto(level.a_e_elevator[0]);
+    e_light.elevator_fx_light linkTo(level.a_e_elevator[0]);
   }
 
   foreach(e_light in var_6d00692f) {
     e_light.fx_ent = util::spawn_model("tag_origin", e_light.origin);
     e_light.fx_ent.angles = e_light.angles;
     e_light.elevator_fx_light = playFXOnTag(level.var_8caf5068, e_light.fx_ent, "tag_origin");
-    e_light.elevator_fx_light linkto(level.a_e_elevator1[0]);
+    e_light.elevator_fx_light linkTo(level.a_e_elevator1[0]);
   }
 }
 
@@ -180,11 +180,11 @@ function_d23ea9aa() {
   }
 
   foreach(e_indicator in var_ef2c2035) {
-    e_indicator linkto(level.a_e_elevator[0]);
+    e_indicator linkTo(level.a_e_elevator[0]);
   }
 
   foreach(e_indicator in var_5abda158) {
-    e_indicator linkto(level.a_e_elevator1[0]);
+    e_indicator linkTo(level.a_e_elevator1[0]);
   }
 
   function_db4ac61a();
@@ -308,12 +308,12 @@ init_call_boxes() {
 }
 
 call_box_think(elevator) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_4e2495c99a50f326");
+    self setHintString(#"hash_4e2495c99a50f326");
   } else {
-    self sethintstring(#"hash_2f56b9d8ac49ff92");
+    self setHintString(#"hash_2f56b9d8ac49ff92");
   }
 
   while(true) {
@@ -324,13 +324,13 @@ call_box_think(elevator) {
 
     if(!elev_clear) {
       zm_utility::play_sound_at_pos("no_purchase", self.origin);
-      self sethintstring(#"hash_2af4a28719c51767");
+      self setHintString(#"hash_2af4a28719c51767");
       wait 1;
 
       if(function_8b1a219a()) {
-        self sethintstring(#"hash_4e2495c99a50f326");
+        self setHintString(#"hash_4e2495c99a50f326");
       } else {
-        self sethintstring(#"hash_2f56b9d8ac49ff92");
+        self setHintString(#"hash_2f56b9d8ac49ff92");
       }
     } else if(elevator.active == 1 || !who can_buy_elevator()) {
       zm_utility::play_sound_at_pos("no_purchase", self.origin);
@@ -338,7 +338,7 @@ call_box_think(elevator) {
       call_destination = self.script_noteworthy;
       elevator.called = 1;
       elevator.active = 1;
-      playsoundatposition(elevator.var_243802fa, self.origin);
+      playSoundAtPosition(elevator.var_243802fa, self.origin);
       elevator disable_callboxes();
       elevator disable_elevator_buys();
       self thread elevator_move_to(elevator);
@@ -350,7 +350,7 @@ call_box_think(elevator) {
 
 is_elevator_clear(elevator) {
   elevator_door_safety = getEntArray(elevator.targetname + "_safety", "script_noteworthy");
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(elevator_door_safety)) {
     for(i = 0; i < elevator_door_safety.size; i++) {
@@ -386,7 +386,7 @@ block_elev_doors(block) {
 }
 
 init_buy() {
-  trigger = getent(self.targetname + "_buy", "script_noteworthy");
+  trigger = getEnt(self.targetname + "_buy", "script_noteworthy");
   trigger thread elevator_buy_think(self);
 }
 
@@ -403,9 +403,9 @@ elevator_buy_think(elevator) {
     level.var_31560d97 = #"hash_6362bcfbec5e8759";
   }
 
-  self setcursorhint("HINT_NOICON");
-  self usetriggerrequirelookat();
-  self sethintstring(level.var_31560d97, elevator.cost);
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setHintString(level.var_31560d97, elevator.cost);
 
   while(true) {
     who = undefined;
@@ -415,9 +415,9 @@ elevator_buy_think(elevator) {
 
     if(!elev_clear) {
       zm_utility::play_sound_at_pos("no_purchase", self.origin);
-      self sethintstring(#"hash_2af4a28719c51767");
+      self setHintString(#"hash_2af4a28719c51767");
       wait 1;
-      self sethintstring(level.var_31560d97, elevator.cost);
+      self setHintString(level.var_31560d97, elevator.cost);
     } else if(zm_utility::is_player_valid(who) && who zm_score::can_player_purchase(elevator.cost) && who can_buy_elevator()) {
       elevator.active = 1;
       who zm_score::minus_to_player_score(elevator.cost);
@@ -461,16 +461,16 @@ disable_callboxes() {
 }
 
 disable_elevator_buys() {
-  elevator_buy = getent(self.targetname + "_buy", "script_noteworthy");
-  elevator_buy setcursorhint("HINT_NOICON");
-  elevator_buy sethintstring("");
+  elevator_buy = getEnt(self.targetname + "_buy", "script_noteworthy");
+  elevator_buy setCursorHint("HINT_NOICON");
+  elevator_buy setHintString("");
   elevator_buy triggerenable(0);
 }
 
 enable_elevator_buys() {
-  elevator_buy = getent(self.targetname + "_buy", "script_noteworthy");
-  elevator_buy setcursorhint("HINT_NOICON");
-  elevator_buy sethintstring(level.var_31560d97, self.cost);
+  elevator_buy = getEnt(self.targetname + "_buy", "script_noteworthy");
+  elevator_buy setCursorHint("HINT_NOICON");
+  elevator_buy setHintString(level.var_31560d97, self.cost);
   elevator_buy triggerenable(1);
 }
 
@@ -482,9 +482,9 @@ enable_callboxes() {
       call_boxes[j] triggerenable(1);
 
       if(function_8b1a219a()) {
-        call_boxes[j] sethintstring(#"hash_4e2495c99a50f326");
+        call_boxes[j] setHintString(#"hash_4e2495c99a50f326");
       } else {
-        call_boxes[j] sethintstring(#"hash_2f56b9d8ac49ff92");
+        call_boxes[j] setHintString(#"hash_2f56b9d8ac49ff92");
       }
 
       continue;
@@ -495,7 +495,7 @@ enable_callboxes() {
 }
 
 elevator_move_to(elevator) {
-  players = getplayers();
+  players = getPlayers();
   elevator close_elev_doors();
   level flag::clear("spawn_zombies");
   elevator waittill(#"doors_finished_moving");
@@ -628,7 +628,7 @@ elevator_closet_cleanup() {
 }
 
 elev_clean_up_corpses() {
-  corpse_trig = getent(self.targetname + "_zombie_cleanup", "targetname");
+  corpse_trig = getEnt(self.targetname + "_zombie_cleanup", "targetname");
   corpses = getcorpsearray();
 
   if(isDefined(corpses)) {
@@ -672,8 +672,8 @@ init_elevator1_doors() {
     self.doors_outer_up[l].startpos = self.doors_outer_up[l].origin;
   }
 
-  self.var_15a48007 = getent("elev1_level2_crush", "targetname");
-  self.var_8e5e8534 = getent("elev1_level3_crush", "targetname");
+  self.var_15a48007 = getEnt("elev1_level2_crush", "targetname");
+  self.var_8e5e8534 = getEnt("elev1_level3_crush", "targetname");
 }
 
 init_elevator2_doors() {
@@ -695,8 +695,8 @@ init_elevator2_doors() {
     self.doors_outer_up[l].startpos = self.doors_outer_up[l].origin;
   }
 
-  self.var_15a48007 = getent("elev2_level1_crush", "targetname");
-  self.var_8e5e8534 = getent("elev2_level2_crush", "targetname");
+  self.var_15a48007 = getEnt("elev2_level1_crush", "targetname");
+  self.var_8e5e8534 = getEnt("elev2_level2_crush", "targetname");
 }
 
 close_elev_doors() {
@@ -714,7 +714,7 @@ close_elev_doors() {
     for(k = 0; k < self.doors_down.size; k++) {
       newpos3 = (self.doors_down[k].startpos[0], self.doors_down[k].startpos[1], self.doors_down[k].origin[2]);
       self.doors_down[k] thread relink_elev_doors(newpos3, self, 1);
-      playsoundatposition(#"evt_elevator_freight_door_close", newpos3);
+      playSoundAtPosition(#"evt_elevator_freight_door_close", newpos3);
     }
   }
 
@@ -722,7 +722,7 @@ close_elev_doors() {
     for(l = 0; l < self.doors_up.size; l++) {
       newpos4 = (self.doors_up[l].startpos[0], self.doors_up[l].startpos[1], self.doors_up[l].origin[2]);
       self.doors_up[l] thread relink_elev_doors(newpos4, self, 1);
-      playsoundatposition(#"evt_elevator_freight_door_close", newpos4);
+      playSoundAtPosition(#"evt_elevator_freight_door_close", newpos4);
     }
 
     if(self.station == self.targetname + "_down") {
@@ -751,7 +751,7 @@ close_elev_doors() {
       }
 
       self.doors[m] thread relink_elev_doors(newpos5, self, 1);
-      playsoundatposition(#"evt_elevator_office_door_close", newpos5);
+      playSoundAtPosition(#"evt_elevator_office_door_close", newpos5);
     }
 
     if(self.station == self.targetname + "_down") {
@@ -786,7 +786,7 @@ open_elev_doors() {
         pos2 = self.doors_up[i].startpos + self.doors_up[i].script_vector;
         newpos2 = (pos2[0], pos2[1], self.doors_up[i].origin[2]);
         self.doors_up[i] thread relink_elev_doors(newpos2, self, 1);
-        playsoundatposition(#"evt_elevator_freight_door_open", newpos2);
+        playSoundAtPosition(#"evt_elevator_freight_door_open", newpos2);
       }
     }
 
@@ -795,7 +795,7 @@ open_elev_doors() {
         pos1 = self.doors_down[i].startpos + self.doors_down[i].script_vector;
         newpos = (pos1[0], pos1[1], self.doors_down[i].origin[2]);
         self.doors_down[i] thread relink_elev_doors(newpos, self, 1);
-        playsoundatposition(#"evt_elevator_freight_door_open", newpos);
+        playSoundAtPosition(#"evt_elevator_freight_door_open", newpos);
       }
 
       nd_elev1_in_labs = getnode("nd_elev1_in_labs", "targetname");
@@ -816,7 +816,7 @@ open_elev_doors() {
         }
 
         self.doors[m] thread relink_elev_doors(newpos2, self, 1);
-        playsoundatposition(#"evt_elevator_office_door_open", newpos2);
+        playSoundAtPosition(#"evt_elevator_office_door_open", newpos2);
       }
 
       nd_elev2_in_war_room = getnode("nd_elev2_in_war_room", "targetname");
@@ -839,7 +839,7 @@ open_elev_doors() {
       pos2 = self.doors_up[i].startpos + self.doors_up[i].script_vector;
       newpos2 = (pos2[0], pos2[1], self.doors_up[i].origin[2]);
       self.doors_up[i] thread relink_elev_doors(newpos2, self, 1);
-      playsoundatposition(#"evt_elevator_freight_door_open", newpos2);
+      playSoundAtPosition(#"evt_elevator_freight_door_open", newpos2);
     }
   }
 
@@ -848,7 +848,7 @@ open_elev_doors() {
       pos4 = self.doors_down[k].startpos + self.doors_down[k].script_vector;
       newpos4 = (pos4[0], pos4[1], self.doors_down[k].origin[2]);
       self.doors_down[k] thread relink_elev_doors(newpos4, self, 1);
-      playsoundatposition(#"evt_elevator_freight_door_open", newpos4);
+      playSoundAtPosition(#"evt_elevator_freight_door_open", newpos4);
     }
 
     nd_elev1_in_war_room = getnode("nd_elev1_in_war_room", "targetname");
@@ -863,7 +863,7 @@ open_elev_doors() {
       pos3 = self.doors[m].startpos + self.doors[m].script_vector;
       newpos3 = (pos3[0], pos3[1], self.doors[m].origin[2]);
       self.doors[m] thread relink_elev_doors(newpos3, self, 1);
-      playsoundatposition(#"evt_elevator_office_door_open", newpos3);
+      playSoundAtPosition(#"evt_elevator_office_door_open", newpos3);
     }
 
     nd_elev2_in_level1 = getnode("nd_elev2_in_level1", "targetname");
@@ -876,11 +876,11 @@ open_elev_doors() {
 
 relink_elev_doors(pos, elev, linked) {
   self unlink();
-  self moveto(pos, 1);
+  self moveTo(pos, 1);
   self waittill(#"movedone");
 
   if(linked) {
-    self linkto(elev);
+    self linkTo(elev);
   }
 
   elev notify(#"doors_finished_moving");
@@ -891,7 +891,7 @@ relink_elev_doors(pos, elev, linked) {
 }
 
 redirect_zombies(destination) {
-  players = getplayers();
+  players = getPlayers();
   num_players = 0;
 
   for(i = 0; i < players.size; i++) {
@@ -917,7 +917,7 @@ redirect_zombies(destination) {
 }
 
 unlock_players() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] unlink();
@@ -935,13 +935,13 @@ elevator1_3d_audio() {
   while(true) {
     self waittill(#"start_3d_audio");
     ent = spawn("script_origin", self.origin + (0, 0, 30));
-    ent linkto(self);
+    ent linkTo(self);
     ent playSound("evt_elevator_freight_start");
     ent playLoopSound("evt_elevator_freight_run_3d");
     self waittill(#"reached_end_node");
     ent delete();
-    playsoundatposition(#"evt_elevator_freight_stop", self.origin);
-    playsoundatposition(#"hash_5bbffe8bd9e541a7", self.origin + (0, 0, 120));
+    playSoundAtPosition(#"evt_elevator_freight_stop", self.origin);
+    playSoundAtPosition(#"hash_5bbffe8bd9e541a7", self.origin + (0, 0, 120));
   }
 }
 
@@ -949,12 +949,12 @@ elevator2_3d_audio() {
   while(true) {
     self waittill(#"start_3d_audio");
     ent = spawn("script_origin", self.origin + (0, 0, 30));
-    ent linkto(self);
+    ent linkTo(self);
     ent playSound(#"evt_elevator_office_start");
     ent playLoopSound(#"evt_elevator_office_run_3d");
     self waittill(#"reached_end_node");
     ent delete();
-    playsoundatposition(#"hash_b696d1d50b35e32", self.origin + (0, 0, 120));
+    playSoundAtPosition(#"hash_b696d1d50b35e32", self.origin + (0, 0, 120));
   }
 }
 
@@ -986,7 +986,7 @@ function_dec13a5b() {
 
   while(true) {
     level waittill(#"host_migration_begin");
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player val::set("host_migration", "allowdeath", 0);
@@ -996,7 +996,7 @@ function_dec13a5b() {
     level waittill(#"host_migration_end");
     level thread function_1576e092();
     wait 1.5;
-    a_players = getplayers();
+    a_players = getPlayers();
     var_ed7230a5 = [];
 
     foreach(e_player in a_players) {
@@ -1041,7 +1041,7 @@ function_dec13a5b() {
     }
 
     wait 5;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player val::reset("host_migration", "allowdeath");
@@ -1053,14 +1053,14 @@ function_dec13a5b() {
 function_da48c149(s_pos) {
   n_attempts = 0;
   self dontinterpolate();
-  self setorigin(s_pos.origin);
+  self setOrigin(s_pos.origin);
 
   do {
     wait 1;
 
     if(!(isDefined(self zm_utility::in_playable_area()) && self zm_utility::in_playable_area())) {
       self dontinterpolate();
-      self setorigin(s_pos.origin);
+      self setOrigin(s_pos.origin);
     }
 
     n_attempts++;
@@ -1069,46 +1069,46 @@ function_da48c149(s_pos) {
 }
 
 function_1576e092() {
-  var_844f2ba7 = getent("fx_light_elevator_origin", "targetname");
+  var_844f2ba7 = getEnt("fx_light_elevator_origin", "targetname");
 
   if(isDefined(var_844f2ba7.fx_ent)) {
     var_844f2ba7.elevator_fx_light = playFXOnTag(level.fx_elevator_light, var_844f2ba7.fx_ent, "tag_origin");
-    var_844f2ba7.elevator_fx_light linkto(level.a_e_elevator[0]);
+    var_844f2ba7.elevator_fx_light linkTo(level.a_e_elevator[0]);
   }
 
-  var_428c7836 = getent("fx_light_elevator1_origin", "targetname");
+  var_428c7836 = getEnt("fx_light_elevator1_origin", "targetname");
 
   if(isDefined(var_428c7836.fx_ent)) {
     var_428c7836.var_286bc7b5 = playFXOnTag(level.var_41a1bc06, var_428c7836.fx_ent, "tag_origin");
-    var_428c7836.var_286bc7b5 linkto(level.a_e_elevator1[0]);
+    var_428c7836.var_286bc7b5 linkTo(level.a_e_elevator1[0]);
   }
 
-  var_71ffef77 = getent("lgt_elevator_panel_illum_origin", "targetname");
+  var_71ffef77 = getEnt("lgt_elevator_panel_illum_origin", "targetname");
 
   if(isDefined(var_71ffef77.fx_ent)) {
     var_71ffef77.elevator_fx_light = playFXOnTag(level.var_e33251c7, var_71ffef77.fx_ent, "tag_origin");
-    var_71ffef77.elevator_fx_light linkto(level.a_e_elevator[0]);
+    var_71ffef77.elevator_fx_light linkTo(level.a_e_elevator[0]);
   }
 
-  var_b15265f4 = getent("lgt_elevator_panel_caster_origin", "targetname");
+  var_b15265f4 = getEnt("lgt_elevator_panel_caster_origin", "targetname");
 
   if(isDefined(var_b15265f4.fx_ent)) {
     var_b15265f4.elevator_fx_light = playFXOnTag(level.var_715ae9f9, var_b15265f4.fx_ent, "tag_origin");
-    var_b15265f4.elevator_fx_light linkto(level.a_e_elevator[0]);
+    var_b15265f4.elevator_fx_light linkTo(level.a_e_elevator[0]);
   }
 
-  cp_safehouse_training_nextround_traversal = getent("lgt_elevator2_panel_illum_origin", "targetname");
+  cp_safehouse_training_nextround_traversal = getEnt("lgt_elevator2_panel_illum_origin", "targetname");
 
   if(isDefined(cp_safehouse_training_nextround_traversal.fx_ent)) {
     cp_safehouse_training_nextround_traversal.elevator_fx_light = playFXOnTag(level.var_e33251c7, cp_safehouse_training_nextround_traversal.fx_ent, "tag_origin");
-    cp_safehouse_training_nextround_traversal.elevator_fx_light linkto(level.a_e_elevator1[0]);
+    cp_safehouse_training_nextround_traversal.elevator_fx_light linkTo(level.a_e_elevator1[0]);
   }
 
-  var_c95e76a9 = getent("lgt_elevator2_panel_caster_origin", "targetname");
+  var_c95e76a9 = getEnt("lgt_elevator2_panel_caster_origin", "targetname");
 
   if(isDefined(var_c95e76a9.fx_ent)) {
     var_c95e76a9.elevator_fx_light = playFXOnTag(level.var_715ae9f9, var_c95e76a9.fx_ent, "tag_origin");
-    var_c95e76a9.elevator_fx_light linkto(level.a_e_elevator1[0]);
+    var_c95e76a9.elevator_fx_light linkTo(level.a_e_elevator1[0]);
   }
 
   var_844f2f0a = getEntArray("fx_light_illum_elevator_origin", "targetname");
@@ -1117,14 +1117,14 @@ function_1576e092() {
   foreach(e_light in var_844f2f0a) {
     if(isDefined(e_light.fx_ent)) {
       e_light.elevator_fx_light = playFXOnTag(level.var_dca712ff, e_light.fx_ent, "tag_origin");
-      e_light.elevator_fx_light linkto(level.a_e_elevator[0]);
+      e_light.elevator_fx_light linkTo(level.a_e_elevator[0]);
     }
   }
 
   foreach(e_light in var_6d00692f) {
     if(isDefined(e_light.fx_ent)) {
       e_light.elevator_fx_light = playFXOnTag(level.var_8caf5068, e_light.fx_ent, "tag_origin");
-      e_light.elevator_fx_light linkto(level.a_e_elevator1[0]);
+      e_light.elevator_fx_light linkTo(level.a_e_elevator1[0]);
     }
   }
 }

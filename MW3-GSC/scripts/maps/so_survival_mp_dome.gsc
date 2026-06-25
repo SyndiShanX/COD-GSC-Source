@@ -37,7 +37,7 @@ _id_47CD(var_0) {
     }
 
     var_3[var_3.size] = var_5;
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
     var_6 delete();
   }
 

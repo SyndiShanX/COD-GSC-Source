@@ -89,11 +89,11 @@ spawn_dead_body(var_0) {
 
   if(isDefined(self.custom_death_anim)) {
     if(isDefined(self.link_corpse_clip)) {
-      var_4 = getent("corpse_clip_" + self.script_noteworthy, "targetname");
+      var_4 = getEnt("corpse_clip_" + self.script_noteworthy, "targetname");
 
       if(isDefined(var_4)) {
         var_4.origin = var_2.origin;
-        var_4 linkto(var_2, "tag_origin");
+        var_4 linkTo(var_2, "tag_origin");
       }
     }
 

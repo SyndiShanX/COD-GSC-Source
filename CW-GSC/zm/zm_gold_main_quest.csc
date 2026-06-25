@@ -124,7 +124,7 @@ function function_78d36eb1(localclientnum, oldval, newval, bnewent, binitialsnap
     self function_a5edb367(#"death_ring");
     self.var_2c8e49d2 = util::spawn_model(fieldname, #"p8_big_cylinder", self.origin);
     self.var_2c8e49d2 playrenderoverridebundle(#"rob_wz_boundary");
-    self.var_2c8e49d2 linkto(self);
+    self.var_2c8e49d2 linkTo(self);
     self thread function_1fd7d1f6();
     return;
   }
@@ -249,7 +249,7 @@ function function_95631678(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump) {
     playSound(fieldname, #"hash_7b48ab684f546cde", (0, 0, 0));
     earthquake(fieldname, 0.25, 4, self.origin, 10000);
-    self playrumbleonentity(fieldname, #"hash_7a5e120ae2a2d457");
+    self playRumbleOnEntity(fieldname, #"hash_7a5e120ae2a2d457");
   }
 }
 

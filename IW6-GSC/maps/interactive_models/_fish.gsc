@@ -185,16 +185,16 @@ single_fish_flee(var_0, var_1) {
       var_6 = self.interruptedent.origin;
     }
 
-    var_5 = vectornormalize(var_6 - self.origin);
+    var_5 = vectorNormalize(var_6 - self.origin);
   }
 
   thread single_fish_interruptfollowers();
   self.nextorigin = single_fish_getnextorigin();
   var_7 = self.nextorigin - self.origin;
-  var_8 = vectornormalize(var_7);
+  var_8 = vectorNormalize(var_7);
 
   if(isDefined(var_5) && vectordot(var_5, var_8) > 0.7) {
-    var_8 = var_5 + vectornormalize(var_8 - var_5);
+    var_8 = var_5 + vectorNormalize(var_8 - var_5);
   }
 
   var_9 = anglesToForward(self.angles);
@@ -214,7 +214,7 @@ single_fish_flee(var_0, var_1) {
   var_12 = vectortoangles(var_8);
   var_13 = randomfloatrange(0.8, 1.2);
   var_14 = maps\interactive_models\_interactive_utility::single_anim(var_2.anims, var_10, "flee anim", 1, self.script_moveplaybackrate * var_13);
-  self rotateto(var_12, 0.2 / self.script_moveplaybackrate, 0, 0.2 / self.script_moveplaybackrate);
+  self rotateTo(var_12, 0.2 / self.script_moveplaybackrate, 0, 0.2 / self.script_moveplaybackrate);
   var_15 = getanimlength(var_14) / (self.script_moveplaybackrate * var_13);
   var_15 = var_15 - 0.5;
   var_15 = var_15 - randomfloat(2);
@@ -222,9 +222,9 @@ single_fish_flee(var_0, var_1) {
 
   while(var_15 > 0.3) {
     var_7 = self.nextorigin - self.origin;
-    var_8 = vectornormalize(var_7);
+    var_8 = vectorNormalize(var_7);
     var_12 = vectortoangles(var_8);
-    self rotateto(var_12, 1, 0.1, 0.3);
+    self rotateTo(var_12, 1, 0.1, 0.3);
     wait 0.3;
     var_15 = var_15 - 0.3;
   }

@@ -39,10 +39,10 @@ func_95D9() {
 func_97AD() {
   level endon("game_ended");
   self.var_19 = 0;
-  self.var_13EFC = scripts\engine\utility::getstruct(self.target, "targetname");
-  var_0 = scripts\engine\utility::getstruct(self.var_13EFC.target, "targetname");
+  self.var_13EFC = scripts\engine\utility::getStruct(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct(self.var_13EFC.target, "targetname");
   while(isDefined(var_0.target)) {
-    var_0 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   }
 
   self.var_13EFB = var_0;
@@ -190,22 +190,22 @@ player_zipline(var_0, var_1) {
   var_5 = var_3.origin + (0, 0, -45);
   var_0.zipline = self;
   var_0 delay_nearby_zombie_cleanup();
-  var_0 setorigin(var_4 + (0, 0, -45));
+  var_0 setOrigin(var_4 + (0, 0, -45));
   var_0 setplayerangles(var_2.angles);
   var_6 = spawn("script_model", var_4);
   var_6.angles = var_2.angles;
   var_6 setModel("tag_origin");
-  var_7 = getent("zipline_cord", "targetname");
+  var_7 = getEnt("zipline_cord", "targetname");
   if(isDefined(var_7)) {
-    var_7 linkto(var_6);
+    var_7 linkTo(var_6);
   }
 
-  var_8 = getent("zipline_handle", "targetname");
+  var_8 = getEnt("zipline_handle", "targetname");
   if(isDefined(var_8)) {
-    var_8 linkto(var_6);
+    var_8 linkTo(var_6);
   }
 
-  var_0 playerlinkto(var_6, undefined, 0.5, 20, 10, 50, 40);
+  var_0 playerlinkTo(var_6, undefined, 0.5, 20, 10, 50, 40);
   var_6 playLoopSound("rave_zipline_lp");
   var_0 playlocalsound("rave_zipline_wind_lr");
   var_0 playerlinkedoffsetenable();
@@ -223,7 +223,7 @@ player_zipline(var_0, var_1) {
   var_12 = scripts\engine\utility::random(var_11);
   var_13 = distance(var_10.origin, var_5);
   var_1 = var_13 / 500;
-  var_6 moveto(var_5, var_1);
+  var_6 moveTo(var_5, var_1);
   var_0 thread func_ECC7(var_1);
   wait(var_1);
   for(var_10 = var_12; isDefined(var_10.target); var_10 = var_12) {
@@ -232,7 +232,7 @@ player_zipline(var_0, var_1) {
     var_5 = var_12.origin;
     var_13 = distance(var_10.origin, var_5);
     var_1 = var_13 / 500;
-    var_6 moveto(var_5, var_1);
+    var_6 moveTo(var_5, var_1);
     var_0 thread func_ECC7(var_1);
     wait(var_1);
   }
@@ -244,7 +244,7 @@ player_zipline(var_0, var_1) {
   var_0.is_fast_traveling = undefined;
   var_0.zipline = undefined;
   var_0 limitedmovement(1);
-  var_0.var_13EFD = vectornormalize(anglesToForward(var_0.angles)) * 500 * 0.1;
+  var_0.var_13EFD = vectorNormalize(anglesToForward(var_0.angles)) * 500 * 0.1;
   var_0 unlink();
   var_0 stoplocalsound("rave_zipline_wind_lr");
   var_0 stoplocalsound("rave_zipline_wind_lsrs");
@@ -286,23 +286,23 @@ func_11325(var_0, var_1, var_2) {
   for(var_8 = 0; var_8 < var_6; var_8++) {
     if(var_7) {
       var_7 = 0;
-      self rotateyaw(var_3, var_4, 0.2, 0.2);
+      self rotateYaw(var_3, var_4, 0.2, 0.2);
       wait(var_4);
       wait(0.1);
-      self rotateyaw(var_3 * -1, var_4, 0.2, 0.2);
+      self rotateYaw(var_3 * -1, var_4, 0.2, 0.2);
       wait(var_4);
       continue;
     }
 
     var_7 = 1;
-    self rotateyaw(var_3 * -1, var_4, 0.2, 0.2);
+    self rotateYaw(var_3 * -1, var_4, 0.2, 0.2);
     wait(var_4);
     wait(0.1);
-    self rotateyaw(var_3, var_4, 0.2, 0.2);
+    self rotateYaw(var_3, var_4, 0.2, 0.2);
     wait(var_4);
   }
 
-  self rotateto(var_5, 1);
+  self rotateTo(var_5, 1);
 }
 
 func_ECC7(var_0) {
@@ -313,7 +313,7 @@ func_ECC7(var_0) {
     var_3.origin = self getEye();
     triggerfx(var_3);
     earthquake(0.2, 0.25, self.origin, 96);
-    self playrumbleonentity("slide_loop");
+    self playRumbleOnEntity("slide_loop");
     scripts\engine\utility::waitframe();
     var_1 = gettime();
   }
@@ -337,7 +337,7 @@ teleport_to_safe_spot(var_0) {
 
   var_0 unlink();
   var_0 dontinterpolate();
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
   var_0 setplayerangles(var_1.angles);
   var_0.disable_consumables = undefined;
   var_0 enableoffhandweapons();

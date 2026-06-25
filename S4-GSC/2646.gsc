@@ -148,7 +148,7 @@ _id_A716(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(level._id_A6F8)) {
     var_10 = level._id_A6F8.origin;
-    var_11 = vectornormalize((var_10[0], var_10[1], 0) - (self.origin[0], self.origin[1], 0));
+    var_11 = vectorNormalize((var_10[0], var_10[1], 0) - (self.origin[0], self.origin[1], 0));
     var_9 = var_10 + var_11 * 15000;
     var_9 = var_9 + (0, 0, 30000) + var_11 * 5000;
   } else if(var_0.streakname != "nuke_select_location") {}
@@ -531,7 +531,7 @@ _id_A6F1(var_0, var_1) {
             if(scripts\mp\utility\player::isreallyalive(var_5)) {
               var_7 = makeweapon("s4_v2_mp");
               _id_07C3::_id_108F(var_5, level._id_A738.player, undefined, var_7, 0, undefined, undefined, undefined, undefined, undefined);
-              var_14 = vectornormalize(var_5.origin + (0, 0, 1000) - level._id_A700.origin);
+              var_14 = vectorNormalize(var_5.origin + (0, 0, 1000) - level._id_A700.origin);
               var_5 thread _id_07C3::_id_5B1C(level._id_A700, level._id_A738.player, 999999, 0, "MOD_EXPLOSIVE", var_7, var_5.origin, var_14, "none", 0, 0, undefined, undefined);
             }
           }
@@ -626,7 +626,7 @@ _id_A6F7(var_0, var_1) {
 
   foreach(var_4 in level.players) {
     var_4 _meth_83F4("tank_rumble");
-    var_4 playrumbleonentity("damage_heavy");
+    var_4 playRumbleOnEntity("damage_heavy");
   }
 }
 

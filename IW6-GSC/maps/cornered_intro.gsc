@@ -86,13 +86,13 @@ cornered_intro_pre_load() {
   level.arms_and_legs = [];
   level.arms_and_legs = common_scripts\utility::add_to_array(level.arms_and_legs, level.cornered_player_arms);
   level.arms_and_legs = common_scripts\utility::add_to_array(level.arms_and_legs, level.cornered_player_legs);
-  level.zipline_trolley_obj = getent("zipline_trolley_obj", "targetname");
+  level.zipline_trolley_obj = getEnt("zipline_trolley_obj", "targetname");
   level.zipline_trolley_obj hide();
-  level.rappel_window_frame_obj = getent("rappel_window_frame_obj", "targetname");
+  level.rappel_window_frame_obj = getEnt("rappel_window_frame_obj", "targetname");
   level.rappel_window_frame_obj hide();
-  level.zipline_window_player_hit = getent("zipline_window_player_hit", "targetname");
+  level.zipline_window_player_hit = getEnt("zipline_window_player_hit", "targetname");
   level.zipline_window_player_hit hide();
-  level.reflection_window_inverted = getent("reflection_window", "targetname");
+  level.reflection_window_inverted = getEnt("reflection_window", "targetname");
   level.reflection_window_inverted hide();
   level.large_outside_lights_on = getEntArray("large_outside_lights_on", "targetname");
   level.large_outside_lights_off = getEntArray("large_outside_lights_off", "targetname");
@@ -193,9 +193,9 @@ intro_handler() {
     thread intro_enemy_scene();
   }
 
-  var_0 = getent("start_building_fall_volume", "targetname");
+  var_0 = getEnt("start_building_fall_volume", "targetname");
   var_0 thread maps\cornered_code::cornered_falling_death();
-  level.intro_struct = common_scripts\utility::getstruct("stealth_intro_struct", "targetname");
+  level.intro_struct = common_scripts\utility::getStruct("stealth_intro_struct", "targetname");
   thread intro_player();
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname("vip_heli");
   level.vip_heli = maps\_utility::get_vehicle("vip_heli", "script_noteworthy");
@@ -216,7 +216,7 @@ intro_handler() {
 
   if(!maps\cornered_code::is_e3()) {
     level.vip_heli thread maps\_vehicle_code::animate_drive_idle();
-    var_2 = common_scripts\utility::getstruct("vip_start_node", "targetname");
+    var_2 = common_scripts\utility::getStruct("vip_start_node", "targetname");
     level.vip_heli thread maps\_vehicle::vehicle_paths(var_2);
     var_1 maps\_vehicle::godon();
     var_1 vehicle_turnengineoff();
@@ -239,7 +239,7 @@ intro_handler() {
   wait 1.2;
   common_scripts\utility::flag_set("intro_vo_begin");
   wait 2.5;
-  level.player playrumbleonentity("chopper_flyover");
+  level.player playRumbleOnEntity("chopper_flyover");
   earthquake(0.25, 9, level.vip_heli.origin, 6000);
 
   if(!maps\cornered_code::is_e3()) {
@@ -289,8 +289,8 @@ intro_player() {
 
 handle_binocular_zoom_magnet() {
   self endon("take_binoculars");
-  var_0 = common_scripts\utility::getstruct("binoculars_zone_bottom_left", "targetname").origin;
-  var_1 = common_scripts\utility::getstruct("binoculars_zone_top_right", "targetname").origin;
+  var_0 = common_scripts\utility::getStruct("binoculars_zone_bottom_left", "targetname").origin;
+  var_1 = common_scripts\utility::getStruct("binoculars_zone_top_right", "targetname").origin;
 
   for(;;) {
     self waittill("binoculars_zoom_lerp");
@@ -302,18 +302,18 @@ handle_binocular_zoom_magnet() {
     var_7 = vectortoangles(var_1 - self getEye())[0];
 
     if(angleclamp180(var_2 - var_4) <= 0 && angleclamp180(var_2 - var_5) >= 0) {
-      var_8 = vectornormalize(vectorcross((0, 0, 1), var_1 - var_0));
+      var_8 = vectorNormalize(vectorcross((0, 0, 1), var_1 - var_0));
       var_9 = vectordot(var_0 - self getEye(), var_8) / vectordot(anglesToForward(self getplayerangles()), var_8);
       var_10 = self getEye() + anglesToForward(self getplayerangles()) * var_9;
 
       if(var_10[2] > var_1[2] && var_10[2] - var_1[2] < 500) {
         var_11 = (var_0[0], var_0[1], var_1[2]);
-        var_12 = vectornormalize(var_0 - var_1);
+        var_12 = vectorNormalize(var_0 - var_1);
         var_13 = var_1 + var_12 * vectordot(var_12, var_10 - var_1);
         adjust_player_view(var_10, var_13);
       } else if(var_10[2] < var_0[2] && var_0[2] - var_10[2] < 500) {
         var_11 = (var_1[0], var_1[1], var_0[2]);
-        var_12 = vectornormalize(var_1 - var_0);
+        var_12 = vectorNormalize(var_1 - var_0);
         var_13 = var_0 + var_12 * vectordot(var_12, var_10 - var_0);
         adjust_player_view(var_10, var_13);
       }
@@ -337,7 +337,7 @@ adjust_player_view(var_0, var_1) {
   var_3 settargetentity(var_6, self.origin - self getEye());
   wait 1;
   self unlink();
-  self setorigin(var_5);
+  self setOrigin(var_5);
   var_3 delete();
   var_2 delete();
   var_4 delete();
@@ -380,7 +380,7 @@ merrick_handle_name_when_scanning() {
 #using_animtree("generic_human");
 
 intro_rorke() {
-  var_0 = getent("rorke_fake_collision", "targetname");
+  var_0 = getEnt("rorke_fake_collision", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
@@ -496,7 +496,7 @@ intro_rorke_gun() {
   var_3 attach("weapon_silencer_01", "");
   var_3.origin = var_1;
   var_3.angles = var_2;
-  var_3 linkto(var_0, "J_prop_1");
+  var_3 linkTo(var_0, "J_prop_1");
   level.intro_struct thread maps\_anim::anim_single_solo(var_0, "cornered_intro_rorke_gun");
   common_scripts\utility::flag_wait("swap_ally_intro_gun");
   var_3 unlink();
@@ -539,17 +539,17 @@ intro_prep_vip_heli() {
   self setmaxpitchroll(10, 10);
   thread maps\_vehicle::vehicle_lights_on("running");
   thread maps\_vehicle::vehicle_lights_on("interior");
-  var_0 = getent("vip_heli_window_block", "targetname");
-  var_1 = getent("vip_heli_right_door_block", "targetname");
-  var_2 = getent("vip_heli_left_door_block", "targetname");
-  var_0 linkto(self, "tag_origin");
-  var_1 linkto(self, "door_r");
-  var_2 linkto(self, "door_l");
+  var_0 = getEnt("vip_heli_window_block", "targetname");
+  var_1 = getEnt("vip_heli_right_door_block", "targetname");
+  var_2 = getEnt("vip_heli_left_door_block", "targetname");
+  var_0 linkTo(self, "tag_origin");
+  var_1 linkTo(self, "door_r");
+  var_2 linkTo(self, "door_l");
   var_3 = self gettagorigin("tag_origin");
   var_4 = self gettagangles("tag_origin");
   var_5 = spawn("script_model", var_3);
   var_5.angles = (0, 90, 0);
-  var_5 linkto(self, "tag_origin", (27, 1, -54), (0, 0, 0));
+  var_5 linkTo(self, "tag_origin", (27, 1, -54), (0, 0, 0));
   var_5 setModel("vehicle_nh90_interior_only");
   var_5 setcontents(0);
   var_5 notsolid();
@@ -570,7 +570,7 @@ intro_heli_land() {
   common_scripts\utility::flag_wait("vip_heli_move_to_anim");
   maps\_utility::vehicle_detachfrompath();
   common_scripts\utility::flag_set("vip_heli_approach");
-  var_0 = common_scripts\utility::getstruct("intro_hvt_roof_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("intro_hvt_roof_animnode", "targetname");
   var_0 maps\_anim::anim_single_solo(self, "cornered_roof_arrival_land_nh90");
   common_scripts\utility::flag_set("intro_heli_landed");
   self setgoalyaw(self.angles[1]);
@@ -594,7 +594,7 @@ intro_heli_land() {
   waittillframeend;
   thread maps\_vehicle_code::animate_drive_idle();
   self setmaxpitchroll(10, 35);
-  var_1 = common_scripts\utility::getstruct("vip_heli_exit_path", "targetname");
+  var_1 = common_scripts\utility::getStruct("vip_heli_exit_path", "targetname");
   thread maps\_vehicle::vehicle_paths(var_1);
 }
 
@@ -616,7 +616,7 @@ intro_enemy_setup() {
     level.briefcase = spawn("script_model", self gettagorigin("tag_weapon_left"));
     level.briefcase setModel("cnd_briefcase_01_shell");
     level.briefcase.angles = var_0;
-    level.briefcase linkto(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+    level.briefcase linkTo(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   } else {
     switch (self.headmodel) {
       case "head_fed_basic_a":
@@ -733,7 +733,7 @@ debug_death() {
 }
 
 intro_enemy_scene() {
-  level.intro_roof_node = common_scripts\utility::getstruct("intro_hvt_roof_animnode", "targetname");
+  level.intro_roof_node = common_scripts\utility::getStruct("intro_hvt_roof_animnode", "targetname");
   thread intro_roof_door2();
   var_0 = maps\_utility::array_spawn_function_targetname("intro_roof_guys_0", ::intro_enemy_setup);
   var_1 = maps\_utility::array_spawn_function_targetname("intro_roof_guys_1", ::intro_enemy_setup);
@@ -895,7 +895,7 @@ player_looking_at_hvt() {
 intro_binocs_check_look_target() {
   level endon("binoculars_deactivated");
   level childthread look_at_roof_nag();
-  var_0 = common_scripts\utility::getstruct("intro_hvt_roof_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("intro_hvt_roof_animnode", "targetname");
   level.binoc_target = level.vip_heli;
 
   while(!isDefined(self.current_binocular_zoom_level)) {
@@ -925,8 +925,8 @@ set_binoc_target_to_hvt() {
 
 intro_binocs_check_look_target_for_render() {
   level endon("binoculars_deactivated");
-  var_0 = common_scripts\utility::getstruct("intro_hvt_roof_animnode", "targetname");
-  var_1 = common_scripts\utility::getstruct("intro_binoc_target", "targetname");
+  var_0 = common_scripts\utility::getStruct("intro_hvt_roof_animnode", "targetname");
+  var_1 = common_scripts\utility::getStruct("intro_binoc_target", "targetname");
 
   while(!isDefined(self.current_binocular_zoom_level)) {
     wait 0.05;
@@ -1145,10 +1145,10 @@ waittill_binoculars_active() {
 }
 
 intro_roof_door2() {
-  var_0 = getent("roof_door2_l", "targetname");
-  var_1 = getent("roof_door2_r", "targetname");
-  var_0 rotateyaw(95, 0.05);
-  var_1 rotateyaw(-95, 0.05);
+  var_0 = getEnt("roof_door2_l", "targetname");
+  var_1 = getEnt("roof_door2_r", "targetname");
+  var_0 rotateYaw(95, 0.05);
+  var_1 rotateYaw(-95, 0.05);
   wait 0.35;
   var_0 connectpaths();
   var_1 connectpaths();
@@ -1165,7 +1165,7 @@ intro_target_monitor() {
 intro_building_check() {
   level endon("player_falling");
   level endon("player_is_starting_zipline");
-  var_0 = getent("off_building_vol", "targetname");
+  var_0 = getEnt("off_building_vol", "targetname");
 
   for(;;) {
     if(!level.player istouching(var_0)) {
@@ -1376,8 +1376,8 @@ intro_binocs_oracle_scanning_vo() {
 }
 
 zipline_setup() {
-  level.zipline_anim_struct = common_scripts\utility::getstruct("zipline_anim_struct", "targetname");
-  level.zipline_launcher_player = getent("zipline_launcher_player", "targetname");
+  level.zipline_anim_struct = common_scripts\utility::getStruct("zipline_anim_struct", "targetname");
+  level.zipline_launcher_player = getEnt("zipline_launcher_player", "targetname");
   level.zipline_launcher_player setdefaultdroppitch(-10);
   level.zipline_launcher_player maketurretinoperable();
   level.zipline_launcher_player makeunusable();
@@ -1389,11 +1389,11 @@ zipline_setup() {
   level.fake_turret.targetname = "zipline_launcher_player";
   level.fake_turret maps\_anim::setanimtree();
   level.zipline_anim_struct thread maps\_anim::anim_first_frame_solo(level.fake_turret, "zipline_launcher_setup_player");
-  level.zipline_launcher_rorke = getent("zipline_launcher_rorke", "targetname");
+  level.zipline_launcher_rorke = getEnt("zipline_launcher_rorke", "targetname");
   level.zipline_launcher_rorke.animname = "zipline_launcher";
   level.zipline_launcher_rorke maps\_anim::setanimtree();
   level.zipline_anim_struct thread maps\_anim::anim_first_frame_solo(level.zipline_launcher_rorke, "zipline_launcher_setup_rorke");
-  level.zipline_launcher_baker = getent("zipline_launcher_baker", "targetname");
+  level.zipline_launcher_baker = getEnt("zipline_launcher_baker", "targetname");
   level.zipline_launcher_baker.animname = "zipline_launcher";
   level.zipline_launcher_baker maps\_anim::setanimtree();
   level.zipline_anim_struct thread maps\_anim::anim_first_frame_solo(level.zipline_launcher_baker, "zipline_launcher_setup_baker");
@@ -1530,7 +1530,7 @@ zipline_rorke_anims() {
   zipline_launcher_setup_anims("zipline_launcher_setup_rorke");
 
   if(common_scripts\utility::flag("player_setting_turret")) {
-    self stopanimscripted();
+    self stopanimScripted();
     level.zipline_launcher_rorke_count++;
 
     while(level.zipline_launcher_rorke_count < 2) {
@@ -1547,7 +1547,7 @@ zipline_rorke_anims() {
 
   if(common_scripts\utility::flag("player_is_starting_zipline")) {
     foreach(var_2 in var_0) {
-      var_2 stopanimscripted();
+      var_2 stopanimScripted();
     }
 
     if(isDefined(level.zipline_trolley_rorke.is_out)) {} else
@@ -1582,7 +1582,7 @@ setup_launcher_rorke(var_0) {
   level.zipline_launcher_rorke zipline_launcher_setup_anims("zipline_launcher_setup_rorke");
 
   if(common_scripts\utility::flag("player_setting_turret")) {
-    level.zipline_launcher_rorke stopanimscripted();
+    level.zipline_launcher_rorke stopanimScripted();
     level.zipline_launcher_rorke_count++;
   }
 }
@@ -1607,7 +1607,7 @@ zipline_baker_anims() {
   zipline_launcher_setup_anims("zipline_launcher_setup_baker");
 
   if(common_scripts\utility::flag("player_setting_turret")) {
-    self stopanimscripted();
+    self stopanimScripted();
     level.zipline_launcher_baker_count++;
 
     while(level.zipline_launcher_baker_count < 2) {
@@ -1624,7 +1624,7 @@ zipline_baker_anims() {
 
   if(common_scripts\utility::flag("player_is_starting_zipline")) {
     foreach(var_2 in var_0) {
-      var_2 stopanimscripted();
+      var_2 stopanimScripted();
     }
 
     if(isDefined(level.zipline_trolley_baker.is_out)) {} else
@@ -1648,7 +1648,7 @@ setup_launcher_baker() {
   level.zipline_launcher_baker zipline_launcher_setup_anims("zipline_launcher_setup_baker");
 
   if(common_scripts\utility::flag("player_setting_turret")) {
-    level.zipline_launcher_baker stopanimscripted();
+    level.zipline_launcher_baker stopanimScripted();
     level.zipline_launcher_baker_count++;
   }
 }
@@ -1780,17 +1780,17 @@ zipline_player_anims() {
   common_scripts\utility::flag_wait("player_can_use_zipline");
   level.zipline_trolley_obj show();
   level.zipline_trolley_obj maps\_utility::glow();
-  var_0 = getent("zipline_trigger", "targetname");
+  var_0 = getEnt("zipline_trigger", "targetname");
 
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-      var_0 sethintstring(&"CORNERED_START_ZIPLINE_CONSOLE");
+      var_0 setHintString(&"CORNERED_START_ZIPLINE_CONSOLE");
     } else {
-      var_0 sethintstring(&"CORNERED_START_ZIPLINE");
+      var_0 setHintString(&"CORNERED_START_ZIPLINE");
     }
   }
 
-  var_1 = common_scripts\utility::getstruct("zipline_lookat", "targetname");
+  var_1 = common_scripts\utility::getStruct("zipline_lookat", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_0, var_1, cos(40), 0, 1);
   level.zipline_trolley_obj maps\_utility::stopglow();
   level.zipline_trolley_obj delete();
@@ -1825,7 +1825,7 @@ zipline_player_anims() {
   level.player playerlinktodelta(level.cornered_player_arms, "tag_player", 1, 0, 0, 60, 50);
   wait 3.0;
   common_scripts\utility::flag_set("player_is_ziplining");
-  var_2 = getent("start_building_fall_volume", "targetname");
+  var_2 = getEnt("start_building_fall_volume", "targetname");
   var_2 delete();
   wait 1.0;
   thread maps\cornered_audio::aud_zipline("detach");
@@ -1886,9 +1886,9 @@ release_view(var_0) {
 
 glass_impact(var_0) {
   earthquake(0.25, 1, level.player.origin, 800);
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   level.zipline_window_player_hit show();
-  var_1 = getent("zipline_window_player", "targetname");
+  var_1 = getEnt("zipline_window_player", "targetname");
   var_1 delete();
   thread maps\cornered_audio::aud_zipline("landing");
   maps\_utility::stop_exploder(67);

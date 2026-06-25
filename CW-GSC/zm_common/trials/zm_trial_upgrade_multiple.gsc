@@ -49,13 +49,13 @@ function private on_begin(n_count, n_repacks) {
     self.var_5027af68 = 0;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_e73fbbf7(self.var_5ba20db5, self.var_5027af68);
   }
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 
@@ -65,7 +65,7 @@ function private on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_c2490d61 === 0) {
         if(!isDefined(var_696c3b4)) {
           var_696c3b4 = [];

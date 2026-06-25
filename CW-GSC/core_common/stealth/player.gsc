@@ -284,7 +284,7 @@ function stealthhints_eventmonitor() {
       continue;
     }
 
-    if(event.entity !== getplayers()[0]) {
+    if(event.entity !== getPlayers()[0]) {
       continue;
     }
 
@@ -325,7 +325,7 @@ function stealthhints_eventmonitor() {
 
     if((eventtype == "sight" || eventtype == "proximity") && self issprinting()) {
       eventtype = "footstep_sprint";
-    } else if(eventtype == "proximity" && lengthsquared((getplayers()[0] getvelocity()[0], getplayers()[0] getvelocity()[1], 0)) > 11025) {
+    } else if(eventtype == "proximity" && lengthsquared((getPlayers()[0] getvelocity()[0], getPlayers()[0] getvelocity()[1], 0)) > 11025) {
       eventtype = "proximity_speed";
     } else if(eventtype == "sight" && self getstance() == "stand") {
       eventtype = "sight_standing";

@@ -45,7 +45,7 @@ on_grenade_fired(s_params) {
     e_grenade = s_params.projectile;
     e_grenade ghost();
     e_grenade.mdl_music_box = util::spawn_model(e_grenade.model, e_grenade.origin, (0, self.angles[1] - 75, 0));
-    e_grenade.mdl_music_box linkto(e_grenade);
+    e_grenade.mdl_music_box linkTo(e_grenade);
     e_grenade.mdl_music_box clientfield::set("" + #"music_box_light_fx", 1);
     e_grenade.weapon = s_params.weapon;
     s_waitresult = s_params.projectile waittill(#"stationary");
@@ -81,10 +81,10 @@ function_9d9bff80(var_2fe3186e, attacker) {
       e_zombie.var_42d5176d = 1;
       e_zombie.marked_for_death = 1;
       e_floater = util::spawn_model("tag_origin", e_zombie getcentroid(), e_zombie.angles);
-      e_zombie linkto(e_floater);
+      e_zombie linkTo(e_floater);
       e_zombie.e_floater = e_floater;
       e_zombie thread util::delete_on_death(e_zombie.e_floater);
-      e_floater moveto(e_floater.origin + (0, 0, randomfloatrange(16, 64)), 0.5);
+      e_floater moveTo(e_floater.origin + (0, 0, randomfloatrange(16, 64)), 0.5);
 
       if(e_zombie.archetype === #"zombie") {
         e_floater thread function_3710157f(e_zombie);
@@ -100,11 +100,11 @@ function_9d9bff80(var_2fe3186e, attacker) {
 
   foreach(e_zombie in a_zombies) {
     if(isalive(e_zombie)) {
-      var_c0225146 = var_b7fc8c3e + vectornormalize(e_zombie getcentroid() - var_b7fc8c3e) * 80;
+      var_c0225146 = var_b7fc8c3e + vectorNormalize(e_zombie getcentroid() - var_b7fc8c3e) * 80;
       n_distance = distance(e_zombie getcentroid(), var_b7fc8c3e);
-      e_zombie.e_floater moveto(var_c0225146, n_distance / 100);
+      e_zombie.e_floater moveTo(var_c0225146, n_distance / 100);
       var_358047f1 = vectortoangles(e_zombie getcentroid() - var_b7fc8c3e);
-      e_zombie.e_floater rotateto(var_358047f1, 1);
+      e_zombie.e_floater rotateTo(var_358047f1, 1);
       continue;
     }
 
@@ -127,14 +127,14 @@ function_9d9bff80(var_2fe3186e, attacker) {
     if(isalive(e_zombie)) {
       [[level.var_14160fb0]] - > waitinqueue(e_zombie);
       e_zombie startragdoll(1);
-      var_23ef51ef = vectornormalize(e_zombie getcentroid() - var_b7fc8c3e) * randomfloatrange(150, 250);
+      var_23ef51ef = vectorNormalize(e_zombie getcentroid() - var_b7fc8c3e) * randomfloatrange(150, 250);
       e_zombie launchragdoll(var_23ef51ef + (0, 0, 32));
       e_zombie dodamage(e_zombie.maxhealth, e_zombie.origin, attacker, self, 0, "MOD_GRENADE", 0, self.weapon);
       e_zombie clientfield::set("" + #"music_box_zombie_flame_trail_fx", 1);
     }
   }
 
-  self playrumbleonentity("talon_spike");
+  self playRumbleOnEntity("talon_spike");
   dist = distance(level.var_f1907c72.origin, var_b7fc8c3e);
 
   if(isDefined(level.var_f1907c72) && dist <= 160) {
@@ -210,7 +210,7 @@ in_bounds(e_owner) {
     return true;
   }
 
-  v_dir = vectornormalize(e_owner.origin - self.origin);
+  v_dir = vectorNormalize(e_owner.origin - self.origin);
   v_pos = self.origin + v_dir * 32;
   v_valid_point = getclosestpointonnavmesh(self.origin, 150);
 
@@ -228,7 +228,7 @@ in_bounds(e_owner) {
 }
 
 function_9a83be2b() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isalive(players[i])) {

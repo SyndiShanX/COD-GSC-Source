@@ -86,8 +86,8 @@ _id_8136() {
 }
 
 _id_9B8B(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
-  var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   level._id_1C2F[var_0._id_0481] = var_0;
   var_0._id_1C2D = var_2;
   var_0._id_1C2E = var_3;
@@ -200,10 +200,10 @@ _id_E67F(var_0, var_1, var_2, var_3) {
     var_4 = rotatevector((-42.2388, -23.4915, 0), self.angles);
   }
 
-  var_0._id_B5A4 moveto(self.origin + var_4, 0.4, 0.1, 0.1);
-  var_7 = vectornormalize(var_4 * -1);
+  var_0._id_B5A4 moveTo(self.origin + var_4, 0.4, 0.1, 0.1);
+  var_7 = vectorNormalize(var_4 * -1);
   var_8 = _id_FFE3(var_7, (0, 0, 1));
-  var_0._id_B5A4 rotateto(var_8, 0.4, 0.1, 0.1);
+  var_0._id_B5A4 rotateTo(var_8, 0.4, 0.1, 0.1);
   var_9 = gettime();
   var_0 _id_0A94::_id_6FA0();
   var_10 = gettime();
@@ -212,9 +212,9 @@ _id_E67F(var_0, var_1, var_2, var_3) {
   wait(var_12);
   var_3 show();
   var_3 hidefromplayer(var_0);
-  var_0._id_B5A4 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_2 linkto(var_0._id_B5A4, var_5, (0, 0, 0), (0, 0, 0));
-  var_3 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0._id_B5A4 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_0._id_B5A4, var_5, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0._id_B5A4 _meth_83CA(var_0);
   _id_06C6::_id_17C2(var_0._id_B5A4, var_6);
   thread _id_07AA::_id_17FD(var_0, var_0._id_B5A4, var_6);
@@ -342,7 +342,7 @@ _id_1C2B(var_0, var_1) {
   var_9 = var_7 / var_8;
   var_10 = 0.4 * var_9;
   var_11 = 0.15 * var_9;
-  var_2._id_1C21 moveto(var_3.origin, var_9, var_10, var_11);
+  var_2._id_1C21 moveTo(var_3.origin, var_9, var_10, var_11);
   wait(var_9);
   var_2._id_1C21 stoploopsound("br_auto_ascender_device_lp_npc");
   var_1 notify("ascender_loop_done");
@@ -388,7 +388,7 @@ _id_1C24() {
   var_1 = var_0._id_1C2A._id_1C2E.origin;
   var_2 = var_0._id_1C2A._id_1C2E.angles;
   var_0._id_1C2A _id_3872(var_0);
-  var_0 setorigin(var_1);
+  var_0 setOrigin(var_1);
   var_0 setplayerangles(var_2);
   var_0 notify("ascender_cancel");
 }

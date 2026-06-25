@@ -14,7 +14,7 @@ function main() {
 }
 
 function snd_dmg_monk() {
-  trigger = getent("snd_monkey", "targetname");
+  trigger = getEnt("snd_monkey", "targetname");
   if(!isDefined(trigger)) {
     return;
   }
@@ -28,7 +28,7 @@ function snd_dmg_monk() {
 }
 
 function snd_dmg_cheet() {
-  trigger = getent("snd_cheet", "targetname");
+  trigger = getEnt("snd_cheet", "targetname");
   if(!isDefined(trigger)) {
     return;
   }
@@ -42,7 +42,7 @@ function snd_dmg_cheet() {
 }
 
 function snd_dmg_boar() {
-  trigger = getent("snd_boar", "targetname");
+  trigger = getEnt("snd_boar", "targetname");
   if(!isDefined(trigger)) {
     return;
   }

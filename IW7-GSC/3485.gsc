@@ -134,7 +134,7 @@ func_C4CD(var_0, var_1, var_2) {
   wait(randomfloatrange(var_3.var_5FEE, var_3.var_5FED));
   var_7 = var_3.var_5FEC;
   var_8 = spawn("script_model", var_1 + var_3.killcamoffset);
-  var_8 linkto(var_4);
+  var_8 linkTo(var_4);
 
   for(self.killcament = var_8; var_7 > 0.0; var_7 = var_7 - var_3.var_5FE7) {
     foreach(var_10 in level.characters) {

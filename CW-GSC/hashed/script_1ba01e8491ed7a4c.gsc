@@ -111,7 +111,7 @@ function function_bf8d2448(str_skipto, b_starting) {
 }
 
 function function_89e4fd54() {
-  spawner = getent("rudnik", "targetname");
+  spawner = getEnt("rudnik", "targetname");
   spawner spawner::add_spawn_function(&namespace_ba979a10::function_78a1b9ef);
   spawner::add_spawn_function_group("motor_pool_enemies", "script_noteworthy", &function_11c72468);
   spawner::add_spawn_function_group("rooftop_enemies", "script_noteworthy", &function_6a87063a);
@@ -320,7 +320,7 @@ function function_7f2c92f5() {
   self setgoal(self.origin, 0, 64, 128);
   self val::set("guy_truck", "ignoreall", 1);
 
-  while(self isplayinganimscripted()) {
+  while(self isplayinganimScripted()) {
     waitframe(1);
   }
 
@@ -346,7 +346,7 @@ function function_c82d4e91() {
 
   foreach(guy in enemies) {
     if(isDefined(guy) && isalive(guy)) {
-      vol = getent("final_bunker_int_combat_vol", "targetname");
+      vol = getEnt("final_bunker_int_combat_vol", "targetname");
       guy setgoal(vol, 1);
     }
   }
@@ -465,7 +465,7 @@ function function_c85c94ca() {
 
 function function_2f4f8bce() {
   level waittill(#"hash_32210e7ba4780afb");
-  var_a94cb625 = getent("table_flip_pulse_pos", "targetname");
+  var_a94cb625 = getEnt("table_flip_pulse_pos", "targetname");
   physicsexplosionsphere(var_a94cb625.origin, 100, 100, 0.15);
 }
 
@@ -500,7 +500,7 @@ function function_81f64302() {
 }
 
 function function_38ac2a96() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon(#"flag_tundra_vip_kill_confirmed");
   player endon(#"death");
 
@@ -529,7 +529,7 @@ function function_38ac2a96() {
 }
 
 function function_6bfbb3e8() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level spy_camera::function_f91a82ef(1, undefined);
   level flag::wait_till("flag_tundra_vip_kill_confirmed");
   player waittill(#"end_camera_ads");

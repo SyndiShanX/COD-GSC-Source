@@ -153,7 +153,7 @@ function function_189ed812() {
 }
 
 function function_1b6ee215() {
-  var_501cba6a = getent("ee_book", "targetname");
+  var_501cba6a = getEnt("ee_book", "targetname");
   var_501cba6a ghost();
   function_c3466d96(0);
   level.var_b94f6d7a = struct::get_array("ee_totem_leyline", "targetname");
@@ -205,7 +205,7 @@ function function_8a05e65() {
 }
 
 function ee_begin() {
-  var_501cba6a = getent("ee_book", "targetname");
+  var_501cba6a = getEnt("ee_book", "targetname");
   e_deletable_spawn_point = spawn("script_model", var_501cba6a.origin);
   e_deletable_spawn_point setModel("tag_origin");
   e_deletable_spawn_point.origin = var_501cba6a.origin;
@@ -287,7 +287,7 @@ function function_f0c43ca0() {
     var_c96f65f1 = 1;
     players = level.activeplayers;
     foreach(player in players) {
-      e_volume = getent("defend_area_volume_pap", "targetname");
+      e_volume = getEnt("defend_area_volume_pap", "targetname");
       if(!player istouching(e_volume)) {
         var_c96f65f1 = 0;
       }
@@ -314,8 +314,8 @@ function function_f0c43ca0() {
 }
 
 function function_db8d1f6e() {
-  mdl_god_far = getent("mdl_god_far", "targetname");
-  mdl_god_near = getent("mdl_god_near", "targetname");
+  mdl_god_far = getEnt("mdl_god_far", "targetname");
+  mdl_god_near = getEnt("mdl_god_near", "targetname");
   mdl_god_far clientfield::set("far_apothigod_active", 0);
   mdl_god_near clientfield::set("near_apothigod_active", 1);
   mdl_god_far hide();
@@ -365,8 +365,8 @@ function function_13d06927() {
 function function_4778e04() {
   while(level flag::get("ee_final_boss_defeated") === 0) {
     flag::wait_till_clear("ee_final_boss_staggered");
-    playsoundatposition("zmb_zod_apothigod_vox_warn_attack", (0, 0, 0));
-    mdl_god_near = getent("mdl_god_near", "targetname");
+    playSoundAtPosition("zmb_zod_apothigod_vox_warn_attack", (0, 0, 0));
+    mdl_god_near = getEnt("mdl_god_near", "targetname");
     mdl_god_near clientfield::increment("near_apothigod_roar");
     function_224a2f3e();
     var_88a57214 = randomfloatrange(30, 45);
@@ -550,8 +550,8 @@ function function_3bd22f9e(var_9a8bfa33) {
   level endon("ee_final_boss_defeated");
   level endon("ee_final_boss_staggered");
   var_5dab4912 = "ee_district_rail_electrified_" + var_9a8bfa33;
-  var_9440a97c = getent(var_5dab4912, "targetname");
-  var_a5fd6c97 = getent(var_9440a97c.target, "targetname");
+  var_9440a97c = getEnt(var_5dab4912, "targetname");
+  var_a5fd6c97 = getEnt(var_9440a97c.target, "targetname");
   var_a5fd6c97 thread zm_altbody_beast::watch_lightning_damage(var_9440a97c);
   level flag::clear(var_5dab4912);
   var_a5fd6c97 clientfield::set("ee_rail_electricity_state", 0);
@@ -563,8 +563,8 @@ function function_3bd22f9e(var_9a8bfa33) {
 
 function function_d3b3eb03(var_9a8bfa33) {
   var_5dab4912 = "ee_district_rail_electrified_" + var_9a8bfa33;
-  var_9440a97c = getent(var_5dab4912, "targetname");
-  var_a5fd6c97 = getent(var_9440a97c.target, "targetname");
+  var_9440a97c = getEnt(var_5dab4912, "targetname");
+  var_a5fd6c97 = getEnt(var_9440a97c.target, "targetname");
   level flag::set(var_5dab4912);
   var_a5fd6c97 clientfield::set("ee_rail_electricity_state", 1);
   function_61d12305(var_9a8bfa33, 1);
@@ -609,7 +609,7 @@ function function_93ea4183(var_9a8bfa33, b_on) {
 }
 
 function function_378c2b96() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     e_player = players[i];
     e_player zm::spectator_respawn_player();
@@ -776,7 +776,7 @@ function function_19076f5e() {
       level clientfield::set("sndEndIGC", 1);
     }
   }
-  playsoundatposition(alias, (0, 0, 0));
+  playSoundAtPosition(alias, (0, 0, 0));
 }
 
 function function_d26c80f1() {
@@ -823,7 +823,7 @@ function ee_ending() {
     player.play_scene_transition_effect = 1;
   }
   wait(2);
-  mdl_god_near = getent("mdl_god_near", "targetname");
+  mdl_god_near = getEnt("mdl_god_near", "targetname");
   mdl_god_near clientfield::increment("apothigod_death");
   level clientfield::set("portal_state_ending", 1);
   scene::play("cin_zod_vign_summoning_key");
@@ -847,7 +847,7 @@ function ee_ending() {
 function function_e186ed49(a_ents) {
   a_ents["archon"] waittill("start_fade");
   level thread lui::screen_flash(1, 1.5, 0.5, 1, "white");
-  playsoundatposition("zmb_zod_endigc_whitescreen", (0, 0, 0));
+  playSoundAtPosition("zmb_zod_endigc_whitescreen", (0, 0, 0));
   wait(1);
   for(i = 1; i < 5; i++) {
     str_charname = function_d93f551b(i);
@@ -867,7 +867,7 @@ function function_5091df99() {
   a_spots = [];
   for(i = 0; i < level.players.size; i++) {
     a_spots[i] = struct::get("ending_igc_exit_" + i);
-    level.players[i] setorigin(a_spots[i].origin);
+    level.players[i] setOrigin(a_spots[i].origin);
     if(isDefined(a_spots[i].angles)) {
       level.players[i] setplayerangles(a_spots[i].angles);
     }
@@ -916,8 +916,8 @@ function function_e30b3505() {
 
 function function_bddd53dc(trig_stub, player) {
   iprintlnbold("");
-  var_501cba6a = getent("ee_book", "targetname");
-  var_501cba6a moveto(var_501cba6a.origin + vectorscale((0, 0, 1), 48), 3, 1, 1);
+  var_501cba6a = getEnt("ee_book", "targetname");
+  var_501cba6a moveTo(var_501cba6a.origin + vectorscale((0, 0, 1), 48), 3, 1, 1);
   wait(3);
   playFXOnTag(level._effect["ee_quest_book_mist"], var_501cba6a, "tag_origin");
   var_501cba6a playSound("zmb_ee_main_book_aflame");
@@ -932,9 +932,9 @@ function function_bddd53dc(trig_stub, player) {
 }
 
 function function_f75d6374() {
-  var_f59a8cd1 = getent("ee_totem_hanging", "targetname");
+  var_f59a8cd1 = getEnt("ee_totem_hanging", "targetname");
   s_loc = struct::get("ee_totem_landed_position", "targetname");
-  var_f59a8cd1 moveto(s_loc.origin, 3, 1, 1);
+  var_f59a8cd1 moveTo(s_loc.origin, 3, 1, 1);
   wait(3);
   level clientfield::set("ee_totem_state", 1);
   var_f59a8cd1 clientfield::set("totem_state_fx", 1);
@@ -995,7 +995,7 @@ function function_f3d23e2c() {
 }
 
 function function_e525a12(b_show) {
-  var_f59a8cd1 = getent("ee_totem_hanging", "targetname");
+  var_f59a8cd1 = getEnt("ee_totem_hanging", "targetname");
   if(b_show) {
     var_f59a8cd1 show();
     var_f59a8cd1 clientfield::set("totem_state_fx", 1);
@@ -1008,7 +1008,7 @@ function function_e525a12(b_show) {
 function function_9190a90e(n_char_index) {
   str_charname = function_d93f551b(n_char_index);
   str_triggername = "keeper_resurrection_" + str_charname;
-  var_e6e52f57 = getent(str_triggername, "targetname");
+  var_e6e52f57 = getEnt(str_triggername, "targetname");
   while(true) {
     var_e6e52f57 waittill("trigger", player);
     if(player zm_utility::in_revive_trigger()) {
@@ -1383,7 +1383,7 @@ function function_ce4db8c8(player) {
   }
   player.var_11104075 = spawn("script_model", player.origin);
   player.var_11104075 setModel("t7_zm_zod_keepers_totem");
-  player.var_11104075 linkto(player, "tag_stowed_back", (0, 12, -32));
+  player.var_11104075 linkTo(player, "tag_stowed_back", (0, 12, -32));
   player.var_11104075 clientfield::set("totem_state_fx", 1);
   foreach(var_b9caebb1 in level.var_b94f6d7a) {
     level thread function_fe31ce39(var_b9caebb1);
@@ -1508,7 +1508,7 @@ function function_f016ad0d(trig_stub, player) {
     player playSound("zmb_zod_totem_pickup");
     player.var_11104075 = spawn("script_model", player.origin);
     player.var_11104075 setModel("t7_zm_zod_keepers_totem");
-    player.var_11104075 linkto(player, "tag_stowed_back", (0, 12, -32));
+    player.var_11104075 linkTo(player, "tag_stowed_back", (0, 12, -32));
     player.var_11104075 clientfield::set("totem_state_fx", 1);
     trig_stub.var_4cf62d2c clientfield::set("totem_damage_fx", 0);
     trig_stub.var_4cf62d2c delete();
@@ -1717,7 +1717,7 @@ function function_737ebab() {
   level endon("ee_keeper_resurrected");
   level endon("ee_keeper_resurrection_failed");
   level endon("ee_boss_defeated");
-  level.wasp_targets = getplayers();
+  level.wasp_targets = getPlayers();
   for(i = 0; i < level.wasp_targets.size; i++) {
     level.wasp_targets[i].hunted_by = 0;
   }
@@ -1798,7 +1798,7 @@ function function_83bdd16b() {
   level endon("ee_keeper_resurrected");
   level endon("ee_keeper_resurrection_failed");
   level endon("ee_boss_defeated");
-  level.raps_targets = getplayers();
+  level.raps_targets = getPlayers();
   for(i = 0; i < level.raps_targets.size; i++) {
     level.raps_targets[i].hunted_by = 0;
   }
@@ -2074,8 +2074,8 @@ function function_bdd0041e(n_val) {
 }
 
 function function_7787c089(n_val) {
-  mdl_god_far = getent("mdl_god_far", "targetname");
-  mdl_god_near = getent("mdl_god_near", "targetname");
+  mdl_god_far = getEnt("mdl_god_far", "targetname");
+  mdl_god_near = getEnt("mdl_god_near", "targetname");
   switch (n_val) {
     case 1: {
       mdl_god_far clientfield::set("far_apothigod_active", 0);

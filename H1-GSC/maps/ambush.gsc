@@ -220,12 +220,12 @@ setup_flags() {
 }
 
 takeover_flags() {
-  maps\_utility::flag_trigger_init("takeover_danger", getent("takeover_danger_trigger", "targetname"));
-  maps\_utility::flag_trigger_init("takeover_setup", getent("takeover_setup", "targetname"));
+  maps\_utility::flag_trigger_init("takeover_danger", getEnt("takeover_danger_trigger", "targetname"));
+  maps\_utility::flag_trigger_init("takeover_setup", getEnt("takeover_setup", "targetname"));
   common_scripts\utility::flag_init("takeover_checkpoint_located");
-  maps\_utility::flag_trigger_init("takeover_inplace", getent("takeover_inplace", "targetname"));
-  maps\_utility::flag_trigger_init("takeover_force", getent("takeover_boundary", "targetname"));
-  maps\_utility::flag_trigger_init("takeover_advance", getent("takeover_boundary", "targetname"));
+  maps\_utility::flag_trigger_init("takeover_inplace", getEnt("takeover_inplace", "targetname"));
+  maps\_utility::flag_trigger_init("takeover_force", getEnt("takeover_boundary", "targetname"));
+  maps\_utility::flag_trigger_init("takeover_advance", getEnt("takeover_boundary", "targetname"));
   common_scripts\utility::flag_init("takeover_done");
   common_scripts\utility::flag_init("takeover_briefing_done");
   common_scripts\utility::flag_init("takeover_finalized_done");
@@ -257,45 +257,45 @@ ambush_flags() {
 
 village_flags() {
   common_scripts\utility::flag_init("village_helicopter_greeting");
-  maps\_utility::flag_trigger_init("village_gasstation", getent("village_gasstation", "targetname"), 1);
-  maps\_utility::flag_trigger_init("junkyard_exit", getent("junkyard_exit", "targetname"));
-  maps\_utility::flag_trigger_init("village_road", getent("village_road", "targetname"));
-  maps\_utility::flag_trigger_init("village_approach", getent("village_approach", "targetname"));
+  maps\_utility::flag_trigger_init("village_gasstation", getEnt("village_gasstation", "targetname"), 1);
+  maps\_utility::flag_trigger_init("junkyard_exit", getEnt("junkyard_exit", "targetname"));
+  maps\_utility::flag_trigger_init("village_road", getEnt("village_road", "targetname"));
+  maps\_utility::flag_trigger_init("village_approach", getEnt("village_approach", "targetname"));
   common_scripts\utility::flag_init("village_defend");
-  maps\_utility::flag_trigger_init("village_retreat", getent("village_retreat", "targetname"));
-  maps\_utility::flag_trigger_init("village_force_escape", getent("village_force_escape", "targetname"));
-  maps\_utility::flag_trigger_init("village_wrong_way", getent("village_wrong_way", "targetname"));
-  maps\_utility::flag_trigger_init("village_past_alley", getent("village_past_alley", "targetname"));
+  maps\_utility::flag_trigger_init("village_retreat", getEnt("village_retreat", "targetname"));
+  maps\_utility::flag_trigger_init("village_force_escape", getEnt("village_force_escape", "targetname"));
+  maps\_utility::flag_trigger_init("village_wrong_way", getEnt("village_wrong_way", "targetname"));
+  maps\_utility::flag_trigger_init("village_past_alley", getEnt("village_past_alley", "targetname"));
   common_scripts\utility::flag_init("village_badguy_escape");
   common_scripts\utility::flag_init("village_alley");
 }
 
 morpheus_flags() {
-  maps\_utility::flag_trigger_init("morpheus_quick_start", getent("morpheus_quick_start", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_dumpster", getent("morpheus_dumpster", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_green_car", getent("morpheus_green_car", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_iron_fence", getent("morpheus_iron_fence", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_quick_start", getEnt("morpheus_quick_start", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_dumpster", getEnt("morpheus_dumpster", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_green_car", getEnt("morpheus_green_car", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_iron_fence", getEnt("morpheus_iron_fence", "targetname"));
   common_scripts\utility::flag_init("morpheus_iron_fence_fight");
-  maps\_utility::flag_trigger_init("morpheus_flanker", getent("morpheus_flanker", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_rpg", getent("morpheus_rpg", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_2nd_floor", getent("morpheus_2nd_floor", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_single", getent("morpheus_single", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_target", getent("morpheus_target", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_target_moving", getent("morpheus_target_moving", "targetname"));
-  maps\_utility::flag_trigger_init("morpheus_alley", getent("morpheus_alley", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_flanker", getEnt("morpheus_flanker", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_rpg", getEnt("morpheus_rpg", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_2nd_floor", getEnt("morpheus_2nd_floor", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_single", getEnt("morpheus_single", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_target", getEnt("morpheus_target", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_target_moving", getEnt("morpheus_target_moving", "targetname"));
+  maps\_utility::flag_trigger_init("morpheus_alley", getEnt("morpheus_alley", "targetname"));
 }
 
 apartment_flags() {
-  maps\_utility::flag_trigger_init("apartment_start", getent("apartment_start", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_badguy_run", getent("apartment_badguy_run", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_fire", getent("apartment_fire", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_start", getEnt("apartment_start", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_badguy_run", getEnt("apartment_badguy_run", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_fire", getEnt("apartment_fire", "targetname"));
   common_scripts\utility::flag_init("apartment_heli_attack");
   common_scripts\utility::flag_init("apartment_heli_firing");
   common_scripts\utility::flag_init("apartment_mg_destroyed");
-  maps\_utility::flag_trigger_init("apartment_badguy_attack", getent("apartment_badguy_attack", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_inside", getent("apartment_inside", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_badguy_3rd_flr", getent("apartment_badguy_3rd_flr", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_mg_4th_flr", getent("apartment_mg_4th_flr", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_badguy_attack", getEnt("apartment_badguy_attack", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_inside", getEnt("apartment_inside", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_badguy_3rd_flr", getEnt("apartment_badguy_3rd_flr", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_mg_4th_flr", getEnt("apartment_mg_4th_flr", "targetname"));
   common_scripts\utility::flag_init("apartment_mg_destroyed_2");
   common_scripts\utility::flag_init("apartment_clear");
   common_scripts\utility::flag_init("gaz_shouts_at_zakhaev");
@@ -304,15 +304,15 @@ apartment_flags() {
   common_scripts\utility::flag_init("h1_zakhaev_suicide_stepping_down");
   common_scripts\utility::flag_init("h1_zakhaev_suicide_down");
   common_scripts\utility::flag_init("h1_zakhaev_suicide_let_play");
-  maps\_utility::flag_trigger_init("apartment_roof", getent("apartment_roof", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_roof_friendlies", getent("apartment_roof_friendlies", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_stairs", getent("apartment_stairs", "targetname"));
-  maps\_utility::flag_trigger_init("apartment_suicide", getent("apartment_suicide", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_roof", getEnt("apartment_roof", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_roof_friendlies", getEnt("apartment_roof_friendlies", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_stairs", getEnt("apartment_stairs", "targetname"));
+  maps\_utility::flag_trigger_init("apartment_suicide", getEnt("apartment_suicide", "targetname"));
   common_scripts\utility::flag_init("obj_flexicuff");
-  maps\_utility::flag_trigger_init("stage1", getent("stage1", "targetname"));
-  maps\_utility::flag_trigger_init("stage2", getent("stage2", "targetname"));
-  maps\_utility::flag_trigger_init("stage3", getent("stage3", "targetname"));
-  maps\_utility::flag_trigger_init("stage4", getent("stage4", "targetname"));
+  maps\_utility::flag_trigger_init("stage1", getEnt("stage1", "targetname"));
+  maps\_utility::flag_trigger_init("stage2", getEnt("stage2", "targetname"));
+  maps\_utility::flag_trigger_init("stage3", getEnt("stage3", "targetname"));
+  maps\_utility::flag_trigger_init("stage4", getEnt("stage4", "targetname"));
   common_scripts\utility::flag_init("forced_suicide");
   common_scripts\utility::flag_init("timed_suicide");
   common_scripts\utility::flag_init("apartment_suicide_done");
@@ -358,7 +358,7 @@ guardtower_dead_enemies() {
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_1[var_2] maps\_anim::anim_first_frame_solo(var_0[var_2], "death_pose_" + var_2);
-    var_0[var_2] linkto(var_1[var_2]);
+    var_0[var_2] linkTo(var_1[var_2]);
   }
 
   common_scripts\utility::flag_wait("ambush_switch_tower");
@@ -375,21 +375,21 @@ guardtower_dead_enemies() {
   var_3[1] useanimtree(#animtree);
   var_4 = getEntArray("dead_enemies_ground", "script_noteworthy");
   var_4[0] thread maps\_anim::anim_first_frame_solo(var_3[0], "det_school_enter_pt2_npc_deadbody_08");
-  var_3[0] linkto(var_4[0]);
+  var_3[0] linkTo(var_4[0]);
   var_4[1] thread maps\_anim::anim_first_frame_solo(var_3[1], "det_school_enter_pt2_npc_deadbody_01");
-  var_3[1] linkto(var_4[1]);
+  var_3[1] linkTo(var_4[1]);
 }
 
 takeover_objective() {
   wait 8;
-  var_0 = getent("obj_checkpoint", "targetname");
+  var_0 = getEnt("obj_checkpoint", "targetname");
   objective_add(0, "active", &"AMBUSH_OBJ_CHECKPOINT", var_0.origin);
   objective_current(0);
   common_scripts\utility::flag_wait_either("takeover_checkpoint_located", "takeover_force");
   objective_state(0, "done");
 
   if(!common_scripts\utility::flag("takeover_force")) {
-    var_1 = getent("obj_dumpster", "targetname");
+    var_1 = getEnt("obj_dumpster", "targetname");
     objective_add(1, "active", &"AMBUSH_OBJ_GET_IN_POSITION", var_1.origin);
     objective_current(1);
   }
@@ -427,7 +427,7 @@ takeover_setup() {
   level.price maps\_anim::anim_single_queue(level.price, "ambush_pri_notbad");
   level maps\_utility::radio_dialogue_queue("ambush_mhp_radiojammers");
   common_scripts\utility::array_call(getEntArray("gate_open", "targetname"), ::hide);
-  getent("rear_blocker_open", "targetname") hide();
+  getEnt("rear_blocker_open", "targetname") hide();
   common_scripts\utility::flag_wait("takeover_setup");
   maps\_utility::autosave_by_name("dumpster");
   common_scripts\utility::flag_set("takeover_checkpoint_located");
@@ -445,7 +445,7 @@ takeover_setup() {
 }
 
 takeover_predumpster_activate_color() {
-  var_0 = getent("takeover_predumpster_color_trigger", "targetname");
+  var_0 = getEnt("takeover_predumpster_color_trigger", "targetname");
   var_0 waittill("trigger");
   maps\_utility::activate_trigger_with_targetname("takeover_predumpster_color_o");
   wait 0.2;
@@ -473,7 +473,7 @@ takeover_postdumpster_activate_color() {
 takeover_attack() {
   common_scripts\utility::flag_wait("takeover_force");
   soundscripts\_snd::snd_message("aud_stop_mix_stealth_ambush");
-  var_0 = getent("takeout_path_blocker", "targetname");
+  var_0 = getEnt("takeout_path_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   common_scripts\utility::array_thread(getEntArray("takeover_trigger", "script_noteworthy"), common_scripts\utility::trigger_off);
@@ -488,9 +488,9 @@ takeover_attack() {
   var_1 = getaiarray("axis");
   maps\_utility::waittill_dead_or_dying(var_1, var_1.size - 3);
 
-  if(isDefined(getent("takeover_diner_color_init", "targetname"))) {
+  if(isDefined(getEnt("takeover_diner_color_init", "targetname"))) {
     maps\_utility::activate_trigger_with_targetname("takeover_diner_color_init");
-    getent("takeover_diner_color_init", "targetname") common_scripts\utility::trigger_off();
+    getEnt("takeover_diner_color_init", "targetname") common_scripts\utility::trigger_off();
   }
 
   var_1 = getaiarray("axis");
@@ -507,7 +507,7 @@ takeover_attack() {
 
 takeover_briefing() {
   level.price maps\_utility::disable_ai_color();
-  var_0 = getent("cleanup_animent", "targetname");
+  var_0 = getEnt("cleanup_animent", "targetname");
   var_1[0] = level.price;
   var_1[1] = level.kamarov;
 
@@ -557,7 +557,7 @@ takeover_briefing_dialogue() {
 }
 
 takeover_clear_roof() {
-  var_0 = getent("clear_roof", "targetname");
+  var_0 = getEnt("clear_roof", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::array_thread(maps\_utility::get_ai_group_ai("roof_guy"), ::kill_ai, 0, 5);
 }
@@ -620,13 +620,13 @@ aarea_ambush_init() {
   ambush_setup();
   maps\_utility::autosave_by_name("ambush");
   common_scripts\utility::flag_set("aa_ambush");
-  var_0 = getent("rear_blocker", "targetname");
+  var_0 = getEnt("rear_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
-  getent("rear_blocker_open", "targetname") show();
-  getent("badguy", "script_noteworthy") maps\_utility::add_spawn_function(::ambush_badguy_spawn_function);
-  getent("badguy_passanger", "script_noteworthy") maps\_utility::add_spawn_function(::ambush_badguy_passanger_spawn_function);
-  getent("badguy_passanger", "script_noteworthy") maps\_utility::add_spawn_function(::ambush_badguy_passanger_hit_tower_death);
+  getEnt("rear_blocker_open", "targetname") show();
+  getEnt("badguy", "script_noteworthy") maps\_utility::add_spawn_function(::ambush_badguy_spawn_function);
+  getEnt("badguy_passanger", "script_noteworthy") maps\_utility::add_spawn_function(::ambush_badguy_passanger_spawn_function);
+  getEnt("badguy_passanger", "script_noteworthy") maps\_utility::add_spawn_function(::ambush_badguy_passanger_hit_tower_death);
   maps\_utility::activate_trigger_with_targetname("ambush_enemy_color_init");
   level thread ambush_player_interrupt();
   level thread ambush_helicopter();
@@ -673,17 +673,17 @@ ambush_helicopter() {
   var_0 = spawn("script_model", level.helicopter gettagorigin("tag_turret"));
   var_0.angles = level.helicopter gettagangles("tag_turret");
   var_0 notsolid();
-  var_0 linkto(level.helicopter, "tag_turret", (-10, -10, 0), (0, 0, 0));
+  var_0 linkTo(level.helicopter, "tag_turret", (-10, -10, 0), (0, 0, 0));
   var_0 setModel("h1_blackhawk_missile_luncher");
-  var_1 = common_scripts\utility::getstruct(level.helicopter.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(level.helicopter.target, "targetname");
   level.helicopter thread heli_path_speed();
   level.helicopter sethoverparams(150, 120, 60);
   var_2 = maps\_utility::getent_or_struct("heli_restart_avm", "script_noteworthy");
   level.helicopter thread maps\ambush_aud::aud_start_ambush_heli_scripted_sequence(var_2);
-  var_1 = common_scripts\utility::getstruct("rocket_attack", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("rocket_attack", "script_noteworthy");
   var_1 waittill("trigger");
   level.helicopter setvehweapon("hunted_crash_missile");
-  level.helicopter setturrettargetent(level.rear_bmp);
+  level.helicopter setturrettargetEnt(level.rear_bmp);
   level.rear_bmp maps\_vehicle::godoff();
   var_3 = level.helicopter fireweapon("tag_barrel", level.rear_bmp, (0, 0, 0));
   thread maps\ambush_aud::snd_heli_missile_shoot(level.helicopter, var_3);
@@ -854,25 +854,25 @@ ambush_caravan() {
 }
 
 ambush_streetlight() {
-  var_0 = getent("streetlight", "targetname");
+  var_0 = getEnt("streetlight", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
 
   if(var_1[0].classname == "script_model") {
     var_2 = var_1[0].angles;
     var_3 = var_1[0].origin;
     var_1[0] delete();
-    var_1[1] linkto(var_0);
+    var_1[1] linkTo(var_0);
   } else {
     var_2 = var_1[1].angles;
     var_3 = var_1[1].origin;
     var_1[1] delete();
-    var_1[0] linkto(var_0);
+    var_1[0] linkTo(var_0);
   }
 
   var_4 = getvehiclenode("streetlight_hit", "script_noteworthy");
   var_4 waittill("trigger");
-  var_0 rotateto(var_2, 0.3, 0, 0.1);
-  var_0 moveto(var_3, 0.3, 0, 0.1);
+  var_0 rotateTo(var_2, 0.3, 0, 0.1);
+  var_0 moveTo(var_3, 0.3, 0, 0.1);
   var_4 = getvehiclenode("truck_hit", "script_noteworthy");
   var_4 waittill("trigger");
   level.middle_bm21 joltbody(level.middle_bm21.origin + (0, 0, 64), 2);
@@ -880,7 +880,7 @@ ambush_streetlight() {
 
 ambush_bmp_attack() {
   self endon("death");
-  var_0 = getent("bmp_target", "targetname");
+  var_0 = getEnt("bmp_target", "targetname");
   level.rear_bmp thread bmp_pan_target(var_0);
   level.rear_bmp waittill("turret_on_target");
 
@@ -891,13 +891,13 @@ ambush_bmp_attack() {
 }
 
 bmp_pan_target(var_0) {
-  self setturrettargetent(var_0);
+  self setturrettargetEnt(var_0);
   self waittill("turret_on_target");
 
   while(isDefined(var_0.target)) {
     wait 0.5;
-    var_0 = getent(var_0.target, "targetname");
-    self setturrettargetent(var_0);
+    var_0 = getEnt(var_0.target, "targetname");
+    self setturrettargetEnt(var_0);
     self waittill("turret_on_target");
   }
 }
@@ -906,8 +906,8 @@ ambush_rockets() {
   common_scripts\utility::flag_wait("ambush_rocket");
   var_0 = maps\_utility::get_ai_group_ai("rocket_man");
   var_0 = common_scripts\utility::get_array_of_closest(level.rear_truck.origin, var_0);
-  var_1 = getent("rpg_target1", "targetname");
-  var_2 = getent("rpg_target2", "targetname");
+  var_1 = getEnt("rpg_target1", "targetname");
+  var_2 = getEnt("rpg_target2", "targetname");
   var_0[0] notify("end_patrol");
   var_0[0] maps\_utility::set_ignoresuppression(1);
   var_0[0] setgoalnode(getnode("bmp_attack_node", "targetname"));
@@ -993,7 +993,7 @@ ambush_mark() {
     thread ambush_mark_talk_anim();
 
   common_scripts\utility::flag_wait("ambush_rocket");
-  var_0 = getent("ambush_mark_target", "targetname");
+  var_0 = getEnt("ambush_mark_target", "targetname");
   level.mark setentitytarget(var_0, 1);
   common_scripts\utility::flag_wait_or_timeout("ambush_start", 4);
   level.mark clearenemy();
@@ -1038,7 +1038,7 @@ ambush_mark_talk_anim() {
   level.mark setthreatbiasgroup("allies");
   level.mark _meth_856F(1);
   wait 1;
-  level.mark stopanimscripted();
+  level.mark stopanimScripted();
   level.mark notify("single anim", "end");
   waitframe();
   level.griggs_towerfall_origin = level.mark.origin;
@@ -1077,8 +1077,8 @@ h1_griggs_tower_idle_thread() {
 ambush_setup() {
   common_scripts\utility::flag_wait("takeover_briefing_done");
   level notify("putout_fires");
-  var_0 = getent("player_outofsight", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("player_outofsight", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   common_scripts\utility::flag_set("takeover_fade_clear");
   wait 0.1;
@@ -1118,7 +1118,7 @@ ambush_setup() {
   level.steve.fixednode = 1;
   ambush_setup_enemy_allies();
   var_1 = getnode("startnodeplayer_ambush", "targetname");
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles + (13, 0, 0));
   level.player setthreatbiasgroup("oblivious");
   maps\_utility::activate_trigger_with_targetname("ambush_setup_color_init");
@@ -1219,7 +1219,7 @@ ambush_steve() {
   level.steve.grenadeawareness = 0;
   common_scripts\utility::flag_wait("ambush_vehicles_inplace");
   level.steve thread maps\_patrol::patrol("caravan_walkby");
-  var_1 = getent("badguy_spotted", "script_noteworthy");
+  var_1 = getEnt("badguy_spotted", "script_noteworthy");
   var_1 waittill("trigger");
   level.steve.grenadeawareness = var_0;
   level.steve maps\_anim::anim_single_queue(level.steve, "ambush_gaz_visualtarget");
@@ -1246,7 +1246,7 @@ ambush_delay() {
   common_scripts\utility::flag_wait("ambush_vehicles_inplace");
   common_scripts\utility::flag_wait("ambush_rocket");
   wait 1;
-  var_1 = getent("delay_fire_target", "targetname");
+  var_1 = getEnt("delay_fire_target", "targetname");
   self setentitytarget(var_1);
   self.maxsightdistsqrd = 67108864;
   wait 1;
@@ -1286,13 +1286,13 @@ ambush_allied_spawnfunc() {
 }
 
 ambush_tower_fall() {
-  var_0 = getent("guard_tower_blocker", "script_noteworthy");
+  var_0 = getEnt("guard_tower_blocker", "script_noteworthy");
   var_0 notsolid();
-  var_1 = getent("guard_tower", "targetname");
+  var_1 = getEnt("guard_tower", "targetname");
   var_2 = getEntArray("guard_tower_part", "targetname");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
-    var_2[var_3] linkto(var_1);
+    var_2[var_3] linkTo(var_1);
   }
 
   var_4 = getEntArray("guard_tower_d", "targetname");
@@ -1316,7 +1316,7 @@ ambush_tower_fall() {
   soundscripts\_snd::snd_message("aud_start_mix_tower_crash");
 
   if(getdvarint("use_old_tower") == 1) {
-    level.mark linkto(var_1);
+    level.mark linkTo(var_1);
   } else {
     thread ambush_tower_fall_player(var_1);
     thread ambush_tower_fall_mark(var_1);
@@ -1326,13 +1326,13 @@ ambush_tower_fall() {
   earthquake(0.1, 0.5, level.player.origin, 400);
   thread ambush_tower_rumble();
   level notify("tower_fall_start");
-  var_1 rotateto((5, 0, 0), 0.5, 0, 0.5);
+  var_1 rotateTo((5, 0, 0), 0.5, 0, 0.5);
   wait 0.5;
-  var_1 rotateto((2, 0, 5), 1, 0.7, 0.3);
+  var_1 rotateTo((2, 0, 5), 1, 0.7, 0.3);
   wait 1;
-  var_1 rotateto((0, 0, -2), 0.7, 0.5, 0.2);
+  var_1 rotateTo((0, 0, -2), 0.7, 0.5, 0.2);
   wait 0.7;
-  var_1 rotateto((0, 20, 90), 1.7, 1.7, 0);
+  var_1 rotateTo((0, 20, 90), 1.7, 1.7, 0);
   wait 1.65;
   level.mark unlink();
   level notify("tower_fall_unlink");
@@ -1357,10 +1357,10 @@ ambush_tower_fall() {
 }
 
 ambush_tower_rumble() {
-  level.player playrumbleonentity("generic_attack_heavy_500");
+  level.player playRumbleOnEntity("generic_attack_heavy_500");
   level.player playrumblelooponentity("generic_quake_loop");
   common_scripts\utility::flag_wait("player_tower_hits_ground");
-  level.player playrumbleonentity("generic_attack_heavy_1500");
+  level.player playRumbleOnEntity("generic_attack_heavy_1500");
   level.player stoprumble("generic_quake_loop");
 }
 
@@ -1373,11 +1373,11 @@ ambush_tower_fall_player(var_0) {
   level waittill("tower_fall_start");
   var_1 = spawn("script_origin", level.player.origin);
   var_1.angles = (0, level.player.angles[1], 0);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   thread h1_towerfalling_dof();
   var_2 = maps\_utility::spawn_anim_model("player_rig", var_1.origin, var_1.angles);
   var_2 hide();
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   var_1 thread maps\_anim::anim_first_frame_solo(var_2, "ambush_plr_tower_fall");
   level.player playerlinktodeltablendviewangle(var_2, "tag_player", 1, 0.4, 0.2, 0.2, 50, 50, 40, 10);
   wait 0.4;
@@ -1425,8 +1425,8 @@ ambush_tower_fall_mark(var_0) {
   }
   var_1 = spawn("script_origin", level.griggs_towerfall_origin);
   var_1.angles = level.mark.angles;
-  var_1 linkto(var_0);
-  level.mark linkto(var_1);
+  var_1 linkTo(var_0);
+  level.mark linkTo(var_1);
   level waittill("tower_fall_start");
   var_2 = "ambush_grg_tower_fall_crouch";
 
@@ -1454,7 +1454,7 @@ ambush_tower_swap() {
 
   if(self.classname == "script_brushmodel") {
     self solid();
-    self disconnectpaths();
+    self disconnectPaths();
   }
 
   self show();
@@ -1462,8 +1462,8 @@ ambush_tower_swap() {
 
 ambush_tower_blackout() {
   level.player setthreatbiasgroup("oblivious");
-  var_0 = getent("player_outofsight", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("player_outofsight", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   level.player enableinvulnerability();
   wait 1;
@@ -1472,7 +1472,7 @@ ambush_tower_blackout() {
   level.mark forceteleport(var_1.origin, var_1.angles);
   var_2 = (-439, -197, 9);
   var_3 = (-25, 40, 0);
-  level.player setorigin(var_2);
+  level.player setOrigin(var_2);
   level.player setplayerangles(var_3);
   level.player setstance("prone");
   level.player disableweapons();
@@ -1564,17 +1564,17 @@ ambush_recover() {
       continue;
     }
 
-    var_0 rotateto(var_3, var_4, var_5, var_6);
+    var_0 rotateTo(var_3, var_4, var_5, var_6);
     var_0 waittill("rotatedone");
   }
 
-  var_0 rotateto((0, 0, 0), 1, 0.5, 0.5);
+  var_0 rotateTo((0, 0, 0), 1, 0.5, 0.5);
   var_0 waittill("rotatedone");
   level.player playersetgroundreferenceent(undefined);
 }
 
 main_objective() {
-  var_0 = getent("main_objective", "targetname");
+  var_0 = getEnt("main_objective", "targetname");
   objective_add(4, "active", &"AMBUSH_OBJ_CAPTURE_TARGET", var_0.origin);
   objective_current(4);
 
@@ -1585,7 +1585,7 @@ main_objective() {
       common_scripts\utility::flag_wait(var_0.script_flag_wait);
     }
 
-    var_0 = getent(var_0.target, "targetname");
+    var_0 = getEnt(var_0.target, "targetname");
     objective_position(4, var_0.origin);
     objective_ring(4);
     level notify("main_objective_updated");
@@ -1600,8 +1600,8 @@ aarea_village_init() {
   common_scripts\utility::flag_set("aa_hunt");
   level thread village_nag("village_gasstation", undefined, "ambush_mhp_wrongway", 1);
   common_scripts\utility::array_thread(getEntArray("village_trigger", "script_noteworthy"), common_scripts\utility::trigger_on);
-  getent("badguy_village", "script_noteworthy") maps\_utility::add_spawn_function(::badguy_spawn_function);
-  getent("badguy_village", "script_noteworthy") maps\_utility::add_spawn_function(::village_badguy);
+  getEnt("badguy_village", "script_noteworthy") maps\_utility::add_spawn_function(::badguy_spawn_function);
+  getEnt("badguy_village", "script_noteworthy") maps\_utility::add_spawn_function(::village_badguy);
   maps\_utility::autosave_by_name("village");
   maps\_utility::arcademode_checkpoint(4, 2);
   level thread village_friendlies();
@@ -1644,7 +1644,7 @@ village_friendlies() {
   level.steve maps\_utility::stop_magic_bullet_shield();
   level.steve delete();
   waittillframeend;
-  var_3 = getent("steve", "targetname");
+  var_3 = getEnt("steve", "targetname");
   var_3.count = 1;
   level.steve = scripted_spawn("steve", "targetname", 1);
   level.steve thread maps\_utility::magic_bullet_shield();
@@ -1701,7 +1701,7 @@ village_nag(var_0, var_1, var_2, var_3, var_4) {
 
 village_friendlies_six() {
   level endon("village_badguy_escape");
-  var_0 = getent("friendlies_arriving", "targetname");
+  var_0 = getEnt("friendlies_arriving", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1960,9 +1960,9 @@ morpheus_iron_fence() {
 morpheus_iron_fence_fight() {
   level endon("morpheus_iron_fence_fight");
   level thread set_flag_on_player_action("morpheus_iron_fence_fight", 1, 1);
-  var_0 = getent("fight_timeout_trigger", "targetname");
+  var_0 = getEnt("fight_timeout_trigger", "targetname");
   var_0 waittill("trigger");
-  var_0 = getent("fight_trigger", "targetname");
+  var_0 = getEnt("fight_trigger", "targetname");
   var_0 maps\_utility::wait_for_trigger_or_timeout(1);
   common_scripts\utility::flag_set("morpheus_iron_fence_fight");
 }
@@ -2023,7 +2023,7 @@ morpheus_rpg_dialogue() {
 
 morpheus_rpg_clear(var_0) {
   level endon(var_0);
-  var_1 = getent("morpheus_rpg_clear", "targetname");
+  var_1 = getEnt("morpheus_rpg_clear", "targetname");
   var_1 waittill("trigger");
   common_scripts\utility::array_thread(maps\_utility::get_ai_group_ai("roof_guy"), maps\_utility::self_delete);
   level notify("morpheus_rpg_clear");
@@ -2043,7 +2043,7 @@ morpheus_2nd_floor() {
 
 morpheus_2nd_floor_clear(var_0) {
   level endon(var_0);
-  var_1 = getent("morpheus_rpg_clear", "targetname");
+  var_1 = getEnt("morpheus_rpg_clear", "targetname");
   var_1 waittill("trigger");
   common_scripts\utility::array_thread(maps\_utility::get_ai_group_ai("floor_guy"), maps\_utility::self_delete);
   level notify("morpheus_2nd_floor_clear");
@@ -2066,7 +2066,7 @@ morpheus_single_dialogue() {
 
 morpheus_single_clear(var_0) {
   level endon(var_0);
-  var_1 = getent("morpheus_single_clear", "targetname");
+  var_1 = getEnt("morpheus_single_clear", "targetname");
   var_1 waittill("trigger");
   common_scripts\utility::array_thread(maps\_utility::get_ai_group_ai("single_guy"), maps\_utility::self_delete);
   level notify("morpheus_single_clear");
@@ -2103,7 +2103,7 @@ morpheus_alley() {
 
 morpheus_alley_clear(var_0) {
   level endon(var_0);
-  var_1 = getent("morpheus_alley_clear", "targetname");
+  var_1 = getEnt("morpheus_alley_clear", "targetname");
   var_1 waittill("trigger");
   common_scripts\utility::array_thread(maps\_utility::get_ai_group_ai("alley_guy"), maps\_utility::self_delete);
   level notify("morpheus_alley_clear");
@@ -2116,7 +2116,7 @@ detonate_car_setup() {
 
 detonate_car(var_0) {
   level endon("apartment_mg_destroyed");
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
   var_2 = common_scripts\utility::getclosest(var_1.origin, var_0);
   self waittill("trigger");
   var_2 common_scripts\_destructible::force_explosion();
@@ -2180,16 +2180,16 @@ apartment_slowdown() {
 apartment_helicopter() {
   common_scripts\utility::flag_wait("apartment_heli_attack");
   maps\_spawner::kill_spawnernum(6);
-  var_0 = getent("heli_mg_nest_aim_point", "targetname");
+  var_0 = getEnt("heli_mg_nest_aim_point", "targetname");
   level.helicopter thread apartment_helicopter_turret(var_0, undefined, 300);
   var_1 = maps\_utility::get_ai_group_ai("fifthfloor_guy");
   common_scripts\utility::array_thread(var_1, ::rail_guy_fall_on_death);
   soundscripts\_snd::snd_message("aud_start_mix_heli_1st_turret");
-  var_2 = common_scripts\utility::getstruct("helicopter_fire", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("helicopter_fire", "script_noteworthy");
   var_2 waittill("trigger");
   common_scripts\utility::flag_set("apartment_heli_firing");
   common_scripts\_exploder::exploder(5);
-  var_3 = getent("mg_destroyed", "script_noteworthy");
+  var_3 = getEnt("mg_destroyed", "script_noteworthy");
   var_3 waittill("trigger");
   wait 1;
   var_3 thread maps\_utility::play_sound_on_entity("scn_ambush_turret1_explo_default");
@@ -2197,20 +2197,20 @@ apartment_helicopter() {
   wait 2;
   soundscripts\_snd::snd_message("aud_stop_mix_heli_1st_turret");
   common_scripts\utility::flag_wait("apartment_inside");
-  var_0 = getent("heli_ambient_targets", "targetname");
+  var_0 = getEnt("heli_ambient_targets", "targetname");
   level.helicopter thread apartment_helicopter_ambient_turret(var_0, 100);
   wait_ambient_turret_end();
   level notify("ambient_turret_end");
   common_scripts\utility::flag_clear("apartment_heli_firing");
   common_scripts\utility::flag_wait("apartment_mg_4th_flr");
-  var_0 = getent("heli_mg_nest_aim_point_2", "targetname");
+  var_0 = getEnt("heli_mg_nest_aim_point_2", "targetname");
   level.helicopter thread apartment_helicopter_turret(var_0, 1, 100);
   soundscripts\_snd::snd_message("aud_start_mix_heli_2nd_turret");
   wait 4;
   common_scripts\utility::flag_set("apartment_heli_firing");
   common_scripts\_exploder::exploder(6);
   maps\_spawner::kill_spawnernum(7);
-  var_3 = getent("mg_destroyed_2", "script_noteworthy");
+  var_3 = getEnt("mg_destroyed_2", "script_noteworthy");
   var_3 waittill("trigger");
   wait 1;
   var_3 thread maps\_utility::play_sound_on_entity("scn_ambush_turret2_explo_default");
@@ -2255,7 +2255,7 @@ rail_guy_fall_on_death() {
     self.deathanim = % exposed_death_blowback;
 
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 playSound("ambush_guy_falling_rail", "vo_end");
   var_0 waittill("vo_end");
   wait 0.05;
@@ -2267,7 +2267,7 @@ apartment_helicopter_turret_guy() {
   var_0 character\character_sp_opforce_geoff::main();
   var_0.animname = "generic";
   var_0 useanimtree(#animtree);
-  var_0 linkto(self, "tag_origin", (0, -32, -25), (0, 90, 0));
+  var_0 linkTo(self, "tag_origin", (0, -32, -25), (0, 90, 0));
   level.scr_anim["generic"]["crouch_shoot"] = % crouch_shoot_straight;
   maps\_anim::anim_generic_first_frame(var_0, "crouch_shoot");
   self waittill("death");
@@ -2284,7 +2284,7 @@ apartment_helicopter_ambient_turret(var_0, var_1) {
   var_2 = spawnturret("misc_turret", (0, 0, 0), "heli_minigun_noai");
   var_2 setModel("cod3mg42");
   var_2.team = "allies";
-  var_2 linkto(level.helicopter, "tag_detach", (0, 120, 10), (0, 0, 0));
+  var_2 linkTo(level.helicopter, "tag_detach", (0, 120, 10), (0, 0, 0));
   var_2 thread apartment_helicopter_turret_guy();
   var_2 makeunusable();
   var_2 setmode("manual");
@@ -2307,10 +2307,10 @@ apartment_helicopter_ambient_turret_track(var_0, var_1, var_2) {
   level endon("ambient_turret_end");
 
   while(isDefined(var_0.target)) {
-    var_0 = getent(var_0.target, "targetname");
+    var_0 = getEnt(var_0.target, "targetname");
     var_3 = distance(var_0.origin, var_1.origin);
     var_4 = var_3 / var_2;
-    var_1 moveto(var_0.origin, var_4);
+    var_1 moveTo(var_0.origin, var_4);
     var_1 waittill("movedone");
     var_0 notify("trigger");
     var_0 maps\_utility::script_delay();
@@ -2324,9 +2324,9 @@ apartment_helicopter_turret(var_0, var_1, var_2) {
   var_3.team = "allies";
 
   if(isDefined(var_1)) {
-    var_3 linkto(level.helicopter, "tag_detach", (0, 120, 10), (0, 0, 0));
+    var_3 linkTo(level.helicopter, "tag_detach", (0, 120, 10), (0, 0, 0));
   } else {
-    var_3 linkto(level.helicopter, "tag_detach", (0, 12, 10), (0, 180, 0));
+    var_3 linkTo(level.helicopter, "tag_detach", (0, 12, 10), (0, 180, 0));
   }
 
   var_3 thread apartment_helicopter_turret_guy();
@@ -2352,10 +2352,10 @@ apartment_helicopter_turret(var_0, var_1, var_2) {
 
 apartment_helicopter_turret_mg_nest(var_0, var_1, var_2) {
   while(isDefined(var_0.target)) {
-    var_0 = getent(var_0.target, "targetname");
+    var_0 = getEnt(var_0.target, "targetname");
     var_3 = distance(var_0.origin, var_1.origin);
     var_4 = var_3 / var_2;
-    var_1 moveto(var_0.origin, var_4);
+    var_1 moveTo(var_0.origin, var_4);
     var_1 waittill("movedone");
     var_0 notify("trigger");
     var_0 maps\_utility::script_delay();
@@ -2380,12 +2380,12 @@ apartment_helicopter_rooftop_turret() {
   var_0 character\character_sp_opforce_geoff::main();
   var_0.animname = "generic";
   var_0 useanimtree(#animtree);
-  var_0 linkto(level.helicopter, "tag_detach", (-15, 45, -13), (0, 270, 0));
+  var_0 linkTo(level.helicopter, "tag_detach", (-15, 45, -13), (0, 270, 0));
   level.scr_anim["generic"]["crouch_shoot"] = % crouch_shoot_straight;
   var_0 maps\_anim::anim_generic_first_frame(var_0, "crouch_shoot");
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("weapon_m4");
-  var_1 linkto(var_0, "tag_weapon_right", (1, 0, 3), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_weapon_right", (1, 0, 3), (0, 0, 0));
 }
 
 apartment_friendlies() {
@@ -2486,12 +2486,12 @@ apartment_dialogue() {
 }
 
 apartment_mg_nest() {
-  var_0 = getent("apartment_manual_mg", "targetname");
+  var_0 = getEnt("apartment_manual_mg", "targetname");
   var_0.team = "axis";
-  var_1 = getent("mg_player_kill", "targetname");
-  var_2 = getent("mg_player_target", "targetname");
+  var_1 = getEnt("mg_player_kill", "targetname");
+  var_2 = getEnt("mg_player_target", "targetname");
   var_0 thread apartment_mg_killzone(var_1, var_2, "apartment_mg_destroyed");
-  var_3 = getent("mg_nest_damage_trigger", "targetname");
+  var_3 = getEnt("mg_nest_damage_trigger", "targetname");
   level thread apartment_mg_nest_player_damage("apartment_mg_destroyed", var_3, 600);
   var_4 = getEntArray("sandbag", "targetname");
   common_scripts\utility::array_thread(var_4, ::apartment_mg_nest_sandbag);
@@ -2554,15 +2554,15 @@ apartment_mg_nest_sandbag() {
 }
 
 apartment_mg_nest_2() {
-  var_0 = getent("apartment_manual_mg_2", "targetname");
+  var_0 = getEnt("apartment_manual_mg_2", "targetname");
   var_0.team = "axis";
-  var_1 = getent("mg_player_kill_2", "targetname");
-  var_2 = getent("mg_player_target_2", "targetname");
+  var_1 = getEnt("mg_player_kill_2", "targetname");
+  var_2 = getEnt("mg_player_target_2", "targetname");
   var_0 thread apartment_mg_killzone(var_1, var_2, "apartment_mg_destroyed_2");
-  var_3 = getent("mg_nest_damage_trigger_2", "targetname");
+  var_3 = getEnt("mg_nest_damage_trigger_2", "targetname");
   level thread apartment_mg_nest_player_damage("apartment_mg_destroyed_2", var_3, 450);
-  getent("nest_2_clip", "targetname") delete();
-  var_4 = getent("mg_nest_2_explosion", "targetname");
+  getEnt("nest_2_clip", "targetname") delete();
+  var_4 = getEnt("mg_nest_2_explosion", "targetname");
   var_5 = getEntArray("nest_2", "targetname");
   common_scripts\utility::array_thread(var_5, ::apartment_mg_nest_2_explosion, var_4.origin);
   common_scripts\utility::flag_wait("apartment_mg_4th_flr");
@@ -2621,7 +2621,7 @@ apartment_mg_kill(var_0, var_1) {
 
 apartment_teleport_roof_friendlies() {
   maps\_utility::array_delete(getEntArray("teleport_roof_friendlies_delete", "script_noteworthy"));
-  getent("teleport_roof_friendlies_trig", "targetname") waittill("trigger");
+  getEnt("teleport_roof_friendlies_trig", "targetname") waittill("trigger");
   var_0 = getnode("teleport_roof_gaz_node", "targetname");
   var_1 = getnode("teleport_roof_griggs_node", "targetname");
   level.steve maps\_utility::teleport_ai(var_0);
@@ -2652,7 +2652,7 @@ apartment_suicide_price() {
   level.price thread squad_init();
   level.price.name = "Captain Price";
   var_0 = getnode("price_roof_end", "targetname");
-  var_1 = getent("price_roof_ent", "targetname");
+  var_1 = getEnt("price_roof_ent", "targetname");
   level.price.goalradius = 64;
   level.price setgoalnode(var_0);
   var_1 thread maps\_anim::anim_loop_solo(level.price, "roof_idle", undefined, "stop_idle");
@@ -2683,7 +2683,7 @@ apartment_suicide_badguy() {
   level.badguy.dropweapon = 0;
   level.badguy.grenadeammo = 0;
   level.badguy.health = 10;
-  var_0 = getent("roof_anim_ent_3", "targetname");
+  var_0 = getEnt("roof_anim_ent_3", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(level.badguy, "jump");
   common_scripts\utility::flag_wait("apartment_suicide");
   level.badguy thread apartment_suicide_badguy_fx();
@@ -2715,7 +2715,7 @@ apartment_suicide_badguy_h1() {
   level.badguy.dropweapon = 0;
   level.badguy.grenadeammo = 0;
   level.badguy.health = 10;
-  var_0 = getent("roof_anim_ent_3", "targetname");
+  var_0 = getEnt("roof_anim_ent_3", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(level.badguy, "h1_climb_up");
   common_scripts\utility::flag_wait("apartment_suicide");
   level.player thread flag_on_seeing_zakhaev_h1("h1_player_seen_zakhaev", "stage3");
@@ -2728,7 +2728,7 @@ apartment_suicide_badguy_h1() {
 
   common_scripts\utility::flag_wait("stage3");
   var_0 notify("interrupt_zakhaev_climb_up");
-  level.badguy stopanimscripted();
+  level.badguy stopanimScripted();
   level.badguy notify("single anim", "end");
   level.badguy notify("looping anim", "end");
   var_0 maps\_anim::anim_first_frame_solo(level.badguy, "h1_climb_back_down_die");
@@ -2833,7 +2833,7 @@ apartment_suicide_badguy_fx() {
 apartment_suicide_badguy_interrupt() {
   level endon("missionfailed");
   level endon("timed_suicide");
-  var_0 = getent("force_suicide", "targetname");
+  var_0 = getEnt("force_suicide", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("forced_suicide");
 
@@ -2843,27 +2843,27 @@ apartment_suicide_badguy_interrupt() {
   level.player disableweapons();
   level.player thread set_playerspeed(60, 0.25);
   level.badguy.allowdeath = 0;
-  var_1 = getent("roof_anim_ent_3", "targetname");
+  var_1 = getEnt("roof_anim_ent_3", "targetname");
 
   if(getdvarint("use_old_suicide") == 1) {
     level thread slowdown();
-    level.badguy stopanimscripted();
+    level.badguy stopanimScripted();
     level.badguy notify("single anim", "end");
     var_1 maps\_anim::anim_single_solo(level.badguy, "quick_jump");
   } else {
     if(common_scripts\utility::flag("h1_zakhaev_suicide_down")) {
-      level.badguy stopanimscripted();
+      level.badguy stopanimScripted();
       level.badguy notify("single anim", "end");
       var_1 thread maps\_anim::anim_single_solo(level.badguy, "h1_quickdeath_down");
       level.badguy thread slowmo_on_notetrack();
     } else if(common_scripts\utility::flag("h1_zakhaev_suicide_stepping_down")) {
       level.badguy waittillmatch("single anim", "done_stepping");
-      level.badguy stopanimscripted();
+      level.badguy stopanimScripted();
       level.badguy notify("single anim", "end");
       var_1 thread maps\_anim::anim_single_solo(level.badguy, "h1_quickdeath_down");
       level.badguy thread slowmo_on_notetrack();
     } else if(!common_scripts\utility::flag("h1_zakhaev_suicide_let_play")) {
-      level.badguy stopanimscripted();
+      level.badguy stopanimScripted();
       level.badguy notify("single anim", "end");
       var_1 thread maps\_anim::anim_single_solo(level.badguy, "h1_quickdeath_up");
       level.badguy thread slowmo_on_notetrack();
@@ -3117,11 +3117,11 @@ start_ambush() {
   common_scripts\utility::array_thread(getEntArray("village_trigger", "script_noteworthy"), common_scripts\utility::trigger_off);
   setup_friendlies(3);
   start_teleport_squad("ambush");
-  var_0 = getent("takeout_path_blocker", "targetname");
+  var_0 = getEnt("takeout_path_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   common_scripts\utility::array_call(getEntArray("gate_open", "targetname"), ::hide);
-  getent("rear_blocker_open", "targetname") hide();
+  getEnt("rear_blocker_open", "targetname") hide();
   level thread guardtower_dead_enemies();
   common_scripts\utility::flag_set("takeover_fade_clear");
   common_scripts\utility::flag_set("takeover_fade_done");
@@ -3139,13 +3139,13 @@ start_village() {
   maps\_utility::activate_trigger_with_targetname("ambush_attack_color_init");
   common_scripts\utility::array_thread(getEntArray("takeover_trigger", "script_noteworthy"), common_scripts\utility::trigger_off);
   common_scripts\utility::array_thread(getEntArray("village_trigger", "script_noteworthy"), common_scripts\utility::trigger_off);
-  var_0 = getent("takeout_path_blocker", "targetname");
+  var_0 = getEnt("takeout_path_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
-  var_0 = getent("rear_blocker", "targetname");
+  var_0 = getEnt("rear_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
-  var_1 = getent("guard_tower", "targetname");
+  var_1 = getEnt("guard_tower", "targetname");
   var_2 = getEntArray("guard_tower_part", "targetname");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
@@ -3160,7 +3160,7 @@ start_village() {
   }
 
   level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname("blackhawk");
-  var_5 = common_scripts\utility::getstruct("village_heli_start", "targetname");
+  var_5 = common_scripts\utility::getStruct("village_heli_start", "targetname");
   level.helicopter thread heli_path_speed(var_5);
   aarea_village_init();
 }
@@ -3173,7 +3173,7 @@ start_morpheus() {
   level.player setthreatbiasgroup("player");
   maps\_utility::activate_trigger_with_targetname("village_retreat_2_color_init");
   level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname("blackhawk");
-  var_0 = common_scripts\utility::getstruct("apartment_heli_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("apartment_heli_start", "targetname");
   level.helicopter thread heli_path_speed(var_0);
   aarea_morpheus_init();
 }
@@ -3187,7 +3187,7 @@ start_apartment() {
   level.steve maps\_utility::set_force_color("g");
   maps\_utility::activate_trigger_with_targetname("apartment_color_init");
   level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname("blackhawk");
-  var_0 = common_scripts\utility::getstruct("apartment_heli_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("apartment_heli_start", "targetname");
   level.helicopter thread heli_path_speed(var_0);
   common_scripts\utility::flag_wait("apartment_start");
   aarea_apartment_init();
@@ -3196,12 +3196,12 @@ start_apartment() {
 start_suicide() {
   soundscripts\_snd::snd_message("start_apartment_checkpoint");
   setup_friendlies(0);
-  var_0 = getent("startnodesteve_suicide", "targetname");
+  var_0 = getEnt("startnodesteve_suicide", "targetname");
   level.steve forceteleport(var_0.origin);
-  var_1 = getent("startnodemark_suicide", "targetname");
+  var_1 = getEnt("startnodemark_suicide", "targetname");
   level.mark forceteleport(var_1.origin);
-  var_2 = getent("startnodeplayer_suicide", "targetname");
-  level.player setorigin(var_2.origin);
+  var_2 = getEnt("startnodeplayer_suicide", "targetname");
+  level.player setOrigin(var_2.origin);
   level.player setplayerangles(var_2.angles);
   maps\ambush_lighting::setup_apartment_start_lighting();
   level thread suicide_badguy_h1();
@@ -3210,7 +3210,7 @@ start_suicide() {
   level.mark maps\_utility::set_force_color("g");
   maps\_utility::activate_trigger_with_noteworthy("suicide_color_init");
   level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname("blackhawk");
-  var_3 = common_scripts\utility::getstruct("apartment_heli_start", "targetname");
+  var_3 = common_scripts\utility::getStruct("apartment_heli_start", "targetname");
   level.helicopter thread heli_path_speed(var_3);
   common_scripts\utility::flag_set("apartment_roof_friendlies");
   level thread apartment_suicide();
@@ -3240,7 +3240,7 @@ setup_friendlies(var_0) {
   level.steve.animname = "steve";
   level.steve.name = "Gaz";
   level.steve thread squad_init();
-  getent("kamarov", "script_noteworthy") maps\_utility::add_spawn_function(::kamarov);
+  getEnt("kamarov", "script_noteworthy") maps\_utility::add_spawn_function(::kamarov);
   var_1 = getEntArray("allies", "targetname");
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
@@ -3289,7 +3289,7 @@ get_generic_allies() {
 
 scripted_spawn(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
-    var_3 = getent(var_0, var_1);
+    var_3 = getEnt(var_0, var_1);
   }
 
   if(isDefined(var_2)) {
@@ -3315,7 +3315,7 @@ scripted_array_spawn(var_0, var_1, var_2) {
 
 start_teleport_squad(var_0) {
   var_1 = getnode("startnodeplayer_" + var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
 
   for(var_2 = 0; var_2 < level.squad.size; var_2++) {
@@ -3643,7 +3643,7 @@ fixednode_unset() {
 }
 
 fall_death() {
-  var_0 = getent("fall_death", "targetname");
+  var_0 = getEnt("fall_death", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);

@@ -34,11 +34,11 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   level.var_e9cb2217 = spawnStruct();
-  level.var_e9cb2217.mdl_wall = getent("side_ee_secret_maxammo_wall", "targetname");
-  level.var_e9cb2217.var_66253114 = getent("side_ee_secret_maxammo_decal", "targetname");
-  level.var_e9cb2217.mdl_clip = getent("side_ee_secret_maxammo_clip", "targetname");
+  level.var_e9cb2217.mdl_wall = getEnt("side_ee_secret_maxammo_wall", "targetname");
+  level.var_e9cb2217.var_66253114 = getEnt("side_ee_secret_maxammo_decal", "targetname");
+  level.var_e9cb2217.mdl_clip = getEnt("side_ee_secret_maxammo_clip", "targetname");
   level.var_e9cb2217.var_fc7e1b7a = struct::get("s_secret_ammo_pos", "targetname");
-  level.var_e9cb2217.var_2559c370 = getent("easter_egg_hidden_max_ammo_appear", "targetname");
+  level.var_e9cb2217.var_2559c370 = getEnt("easter_egg_hidden_max_ammo_appear", "targetname");
   level.var_e9cb2217.var_2559c370 hide();
   callback::on_spawned(&on_player_spawned);
   callback::on_connect(&on_player_connected);

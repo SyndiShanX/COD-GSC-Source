@@ -1158,7 +1158,7 @@ updateMinimapSetting() {
           if(znear < 16) znear = 16;
           if(znear > 10000) znear = 10000;
 
-          player playerlinkto(origin);
+          player playerlinkTo(origin);
           origin.origin = viewpos + (0, 0, -62);
           origin.angles = (90, getnorthyaw(), 0);
 
@@ -1207,10 +1207,10 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   diaglen = length(mincorner - maxcorner);
 
   mincorneroffset = (mincorner - viewpos);
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800);
   maxcorneroffset = (maxcorner - viewpos);
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800);
 
   diagonal = maxcorner - mincorner;
@@ -1561,7 +1561,7 @@ haveTestClientPlantExplosive() {
 
   if(isDefined(bot)) {
     trace = bulletTrace(bot.origin + (0, 0, 4), bot.origin - (0, 0, 4), false, bot);
-    normal = vectornormalize(trace["normal"]);
+    normal = vectorNormalize(trace["normal"]);
     plantAngles = vectortoangles(normal);
     plantAngles += (90, 0, 0);
 
@@ -2243,22 +2243,22 @@ devHurtPlayerDirectional() {
   if(isDefined(bot)) {
     switch (getDvar("scr_devhurtplayerdirectional")) {
       case "right100":
-        bot SetOrigin(notbot.origin + (0, 0, 5) + (AnglesToRight(notbot.angles) * 100));
+        bot setOrigin(notbot.origin + (0, 0, 5) + (AnglesToRight(notbot.angles) * 100));
         break;
       case "left100":
-        bot SetOrigin(notbot.origin + (0, 0, 5) + ((AnglesToRight(notbot.angles) * 100) * -1));
+        bot setOrigin(notbot.origin + (0, 0, 5) + ((AnglesToRight(notbot.angles) * 100) * -1));
         break;
       case "center100":
-        bot SetOrigin(notbot.origin + (0, 0, 5) + (anglesToForward(notbot.angles) * 100));
+        bot setOrigin(notbot.origin + (0, 0, 5) + (anglesToForward(notbot.angles) * 100));
         break;
       case "right600":
-        bot SetOrigin(notbot.origin + (0, 0, 5) + (AnglesToRight(notbot.angles) * 600));
+        bot setOrigin(notbot.origin + (0, 0, 5) + (AnglesToRight(notbot.angles) * 600));
         break;
       case "left600":
-        bot SetOrigin(notbot.origin + (0, 0, 5) + ((AnglesToRight(notbot.angles) * 600) * -1));
+        bot setOrigin(notbot.origin + (0, 0, 5) + ((AnglesToRight(notbot.angles) * 600) * -1));
         break;
       case "center600":
-        bot SetOrigin(notbot.origin + (0, 0, 5) + (anglesToForward(notbot.angles) * 600));
+        bot setOrigin(notbot.origin + (0, 0, 5) + (anglesToForward(notbot.angles) * 600));
         break;
     }
 
@@ -2725,7 +2725,7 @@ drawPath(lineColor, textColor, textAlpha, textScale, textOffset, drawTime, endon
   entFirstTarget = ent.targetname;
 
   while(isDefined(ent.target)) {
-    entTarget = GetEnt(ent.target, "targetname");
+    entTarget = getEnt(ent.target, "targetname");
     ent thread drawPathSegment(entTarget, lineColor, textColor, textAlpha, textScale, textOffset, drawTime, endonMsg);
 
     if(ent.targetname == "heli_loop_start") {

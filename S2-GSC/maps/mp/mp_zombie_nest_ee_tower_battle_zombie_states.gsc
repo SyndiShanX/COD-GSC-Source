@@ -190,7 +190,7 @@ func_7679(param_00, param_01) {
   self endon("clear_tower_behavior_handled");
   thread func_49A2(level.var_7AC8);
   self.var_001D = param_00.var_001D;
-  self setorigin(param_00.var_0116);
+  self setOrigin(param_00.var_0116);
   maps\mp\mp_zombie_nest_ee_util::func_8579(param_00.var_001D);
   maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "tower_objective");
   var_02 = maps\mp\agents\_scripted_agent_anim_util::func_434D(param_01, undefined, 1);

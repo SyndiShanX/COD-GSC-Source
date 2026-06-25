@@ -29,7 +29,7 @@ function private on_begin(var_c8a36f90, var_16e6b8ea) {
   level.var_a96e21f8 = isDefined(var_c8a36f90) ? var_c8a36f90 : "movement";
   var_16e6b8ea = zm_trial::function_5769f26a(var_16e6b8ea);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_1633056a(var_16e6b8ea);
   }
 }

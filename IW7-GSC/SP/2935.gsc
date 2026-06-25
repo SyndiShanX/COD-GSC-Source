@@ -1572,8 +1572,8 @@ func_F3DE() {
 
   if(isDefined(var_0.target)) {
     var_1 = getnode(var_0.target, "targetname");
-    var_2 = getent(var_0.target, "targetname");
-    var_3 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_4 = undefined;
     if(isDefined(var_1)) {
       var_4 = var_1;
@@ -1840,7 +1840,7 @@ ishighjumping(var_0, var_1, var_2) {
     if(isDefined(var_0.target)) {
       var_7 = [[var_1]](var_0.target);
       if(var_7.size == 1) {
-        var_6 = vectornormalize(var_7[0].origin - var_0.origin);
+        var_6 = vectorNormalize(var_7[0].origin - var_0.origin);
       } else if(isDefined(var_0.angles)) {
         var_6 = anglesToForward(var_0.angles);
       }
@@ -1850,7 +1850,7 @@ ishighjumping(var_0, var_1, var_2) {
 
     var_8 = [];
     foreach(var_4 in level.players) {
-      var_8[var_8.size] = vectornormalize(var_4.origin - self.origin);
+      var_8[var_8.size] = vectorNormalize(var_4.origin - self.origin);
     }
 
     foreach(var_12 in var_8) {
@@ -2114,7 +2114,7 @@ func_11054() {
 
 func_73D9(var_0) {
   var_1 = getnode(var_0.target, "targetname");
-  var_2 = getent(var_1.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   var_2 give_player_session_tokens("auto_ai");
   var_2 cleartargetentity();
   var_3 = 0;
@@ -2157,11 +2157,11 @@ func_73D2(var_0, var_1) {
 func_73D8(var_0) {
   var_0 endon("friendly_finished_using_mg42");
   self.var_369 = 1;
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"PLATFORM_USEAIONMG42");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
   self.var_369 = 0;
-  self sethintstring("");
+  self setHintString("");
   self stopuseturret();
   self notify("stopped_use_turret");
   var_0 notify("friendly_finished_using_mg42");
@@ -2233,7 +2233,7 @@ func_73D6(var_0, var_1) {
   thread func_73D1(var_0);
   self func_83D7(var_0);
   if(isDefined(var_0.target)) {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
     if(isDefined(var_2)) {
       var_2 thread func_73D4(var_0, self);
     }
@@ -2639,7 +2639,7 @@ func_6F4E() {
   if(isDefined(var_0)) {
     self give_more_perk(var_0);
   } else {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
     if(isDefined(var_0)) {
       self give_mp_super_weapon(var_0.origin);
     }
@@ -2683,7 +2683,7 @@ func_6F4E() {
   }
 
   if(isDefined(var_0.target)) {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
     if(isDefined(var_2) && var_2.var_9F == "misc_turret") {
       self give_more_perk(var_0);
       self.objective_playermask_showto = 4;

@@ -70,7 +70,7 @@ function function_3ba58018() {
   self.doa.var_74e4ded8 = 1;
   self setavoidancemask("avoid none");
   self collidewithactors(0);
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self.health = 1500;
   self.var_af545843 = 1;
   self.var_abe67a20 = 1;
@@ -454,7 +454,7 @@ function function_a19ebce9(target) {
   self.var_96cd28f6 = gettime();
   registernotice_walla = anglesToForward(self.angles);
   var_2f706708 = self gettagorigin("j_neck");
-  var_c1324bcf = vectornormalize(target.origin - self.origin);
+  var_c1324bcf = vectorNormalize(target.origin - self.origin);
   var_aa74cdcb = vectordot(var_c1324bcf, registernotice_walla);
 
   if(var_aa74cdcb > 0.8) {
@@ -471,7 +471,7 @@ function function_a19ebce9(target) {
     target dodamage(self.var_cc28f8dc, self.origin, self, self, "none", "MOD_MELEE");
 
     if(isPlayer(target)) {
-      target playrumbleonentity("damage_heavy");
+      target playRumbleOnEntity("damage_heavy");
     }
   }
 }

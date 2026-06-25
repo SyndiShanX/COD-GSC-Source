@@ -93,7 +93,7 @@ _id_A180(var_0, var_1) {
   }
 
   wait 2.2;
-  var_0 playrumbleonentity("damage_bullet");
+  var_0 playRumbleOnEntity("damage_bullet");
   earthquake(0.24, 1, var_1.origin, 256);
   var_1 hidepart(var_1._id_D9C4, "misc_wm_mortar");
 }
@@ -168,14 +168,14 @@ _id_A18C(var_0) {
     var_0._id_832C makeunusable();
     _id_B533(var_1, var_0);
     wait 5;
-    var_0 rotateto(var_0._id_A988, 0.1);
+    var_0 rotateTo(var_0._id_A988, 0.1);
     wait 1;
   }
 }
 
 _id_B533(var_0, var_1) {
   self endon("death_or_disconnect");
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
   var_0 setplayerangles(var_1.angles);
   var_0 _id_3F5D(var_0, "player_mortar");
   var_0._id_B5A4.angles = var_1.angles;
@@ -250,7 +250,7 @@ _id_A18A(var_0) {
       var_0._id_BC49 showtoplayer(self);
     }
 
-    var_0._id_BC49 moveto(var_1 + (0, 0, 10), 0.1);
+    var_0._id_BC49 moveTo(var_1 + (0, 0, 10), 0.1);
     wait 0.05;
   }
 }
@@ -344,9 +344,9 @@ _id_A193(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_1)) {
-    var_12 setcursorhint(var_1);
+    var_12 setCursorHint(var_1);
   } else {
-    var_12 setcursorhint("HINT_NOICON");
+    var_12 setCursorHint("HINT_NOICON");
   }
 
   if(isDefined(var_2)) {
@@ -354,7 +354,7 @@ _id_A193(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_3)) {
-    var_12 sethintstring(var_3);
+    var_12 setHintString(var_3);
   }
 
   if(isDefined(var_4)) {

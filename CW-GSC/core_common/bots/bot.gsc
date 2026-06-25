@@ -384,7 +384,7 @@ function private function_4fb21bb4() {
   } else if(self.bot.enemyseen) {
     if(!isDefined(self.bot.var_a0b6205e) || isDefined(self.enemy) && self.bot.lastenemy !== self.enemy) {
       var_32bdb70 = self.origin - self.enemylastseenpos;
-      normal = vectornormalize((var_32bdb70[0], var_32bdb70[1], 0));
+      normal = vectorNormalize((var_32bdb70[0], var_32bdb70[1], 0));
       self.bot.var_a0b6205e = normal;
     }
   }
@@ -866,7 +866,7 @@ function private fixed_spawn_override() {
   if(isDefined(origin)) {
     self.ignoreall = 1;
     self dontinterpolate();
-    self setorigin(origin);
+    self setOrigin(origin);
 
     if(isDefined(angles)) {
       self setplayerangles(angles);

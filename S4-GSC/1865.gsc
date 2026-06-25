@@ -125,7 +125,7 @@ _id_1CFD(var_0) {
 }
 
 _id_472B(var_0) {
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
   if(isDefined(var_1)) {
     if(scripts\engine\utility::array_contains(level._id_EA70["targetname"][var_0], var_1)) {

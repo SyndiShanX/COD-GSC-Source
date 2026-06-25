@@ -83,7 +83,7 @@ vehicle_linked_entities_think() {
 
   foreach(var_4 in var_0) {
     if(var_4 != var_2) {
-      var_4 linkto(var_2);
+      var_4 linkTo(var_2);
     }
   }
 
@@ -93,7 +93,7 @@ vehicle_linked_entities_think() {
     var_4 show();
 
     if(var_4 != var_2) {
-      var_4 linkto(var_8);
+      var_4 linkTo(var_8);
     }
   }
 
@@ -1305,7 +1305,7 @@ heli_wait_node(var_0, var_1) {
 helipath(var_0, var_1, var_2) {
   self setairresistance(30);
   self vehicle_setspeed(var_1, var_2, 10);
-  maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct(var_0, "targetname"));
+  maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct(var_0, "targetname"));
 }
 
 setvehgoalnode(var_0) {
@@ -1729,7 +1729,7 @@ vehicle_kill() {
       wait 0.05;
 
       if(!isDefined(self.dontdisconnectpaths) && !self vehicle_isphysveh()) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       _freevehicle();
@@ -1743,7 +1743,7 @@ vehicle_kill() {
       self notify("newpath");
 
       if(!isDefined(self.dontdisconnectpaths)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       vehicle_kill_badplace_forever();
@@ -1781,7 +1781,7 @@ vehicle_kill() {
         if(!isDefined(self)) {
           return;
         }
-        self disconnectpaths();
+        self disconnectPaths();
         self notify("kill_badplace_forever");
         self kill();
         self notify("newpath");
@@ -2055,7 +2055,7 @@ vehicle_do_crash_tank() {
   self notify("deadstop");
 
   if(!isDefined(self.dontdisconnectpaths)) {
-    self disconnectpaths();
+    self disconnectPaths();
   }
 
   if(isDefined(self.tankgetout) && self.tankgetout > 0) {
@@ -2068,7 +2068,7 @@ vehicle_do_crash_diveboat() {
     return;
   }
   if(!isDefined(self.dontdisconnectpaths)) {
-    self disconnectpaths();
+    self disconnectPaths();
   }
 }
 
@@ -2080,7 +2080,7 @@ vehicle_do_crash_physics() {
   self notify("deadstop");
 
   if(!isDefined(self.dontdisconnectpaths)) {
-    self disconnectpaths();
+    self disconnectPaths();
   }
 
   if(isDefined(self.tankgetout) && self.tankgetout > 0) {
@@ -2620,7 +2620,7 @@ helicopter_crash_path(var_0) {
   self endon("death");
 
   while(isDefined(var_0.target)) {
-    var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
     var_1 = 56;
 
     if(isDefined(var_0.radius)) {
@@ -2943,7 +2943,7 @@ deathfx_ent() {
     var_0.angles = var_1.angles;
     var_0 notsolid();
     var_0 hide();
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
     self.deathfx_ent = var_0;
   } else
     self.deathfx_ent setModel(self.model);
@@ -3044,7 +3044,7 @@ apply_truckjunk() {
       var_3.script_parameters = var_2.script_parameters;
     }
 
-    var_3 linkto(self, var_4, var_2.origin, var_2.angles);
+    var_3 linkTo(self, var_4, var_2.origin, var_2.angles);
 
     if(isDefined(var_2.destructible_type)) {
       var_3.destructible_type = var_2.destructible_type;
@@ -3064,12 +3064,12 @@ truckjunk_dyn(var_0) {
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   playFXOnTag(self.destroyefx, var_1, "tag_origin");
 }
 
 truckjunk() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = ghetto_tag_create(var_0);
 
   if(isspawner(self)) {
@@ -3077,7 +3077,7 @@ truckjunk() {
   }
 
   if(isDefined(self.targetname)) {
-    var_2 = getent(self.targetname, "target");
+    var_2 = getEnt(self.targetname, "target");
 
     if(isspawner(var_2)) {
       var_1.spawner = var_2;
@@ -3198,7 +3198,7 @@ _getvehiclespawnerarray_by_spawngroup(var_0) {
   return var_2;
 }
 
-manual_tag_linkto(var_0, var_1) {
+manual_tag_linkTo(var_0, var_1) {
   for(;;) {
     if(!isDefined(self)) {
       break;
@@ -3304,7 +3304,7 @@ update_steering(var_0) {
 }
 
 get_from_spawnStruct(var_0) {
-  return common_scripts\utility::getstruct(var_0, "targetname");
+  return common_scripts\utility::getStruct(var_0, "targetname");
 }
 
 get_from_entity(var_0) {
@@ -3318,11 +3318,11 @@ get_from_entity(var_0) {
 }
 
 get_from_spawnstruct_target(var_0) {
-  return common_scripts\utility::getstruct(var_0, "target");
+  return common_scripts\utility::getStruct(var_0, "target");
 }
 
 get_from_entity_target(var_0) {
-  return getent(var_0, "target");
+  return getEnt(var_0, "target");
 }
 
 get_from_vehicle_node(var_0) {
@@ -3330,7 +3330,7 @@ get_from_vehicle_node(var_0) {
 }
 
 set_lookat_from_dest(var_0) {
-  var_1 = getent(var_0.script_linkto, "script_linkname");
+  var_1 = getEnt(var_0.script_linkto, "script_linkname");
 
   if(!isDefined(var_1)) {
     return;
@@ -3601,7 +3601,7 @@ aircraft_wash_thread(var_0, var_1) {
       var_31 = anglesToForward(var_21 + (0, 180, 0));
     }
 
-    if(abs(vectordot(vectornormalize(var_31), var_29)) > 0.999) {
+    if(abs(vectordot(vectorNormalize(var_31), var_29)) > 0.999) {
       continue;
     }
     playFX(var_26, var_28, var_29, var_31);
@@ -3904,7 +3904,7 @@ disconnect_paths_whenstopped() {
   while(isDefined(self)) {
     if(self vehicle_getspeed() < 1) {
       if(!isDefined(self.dontdisconnectpaths)) {
-        self disconnectpaths();
+        self disconnectPaths();
       } else {}
 
       self notify("speed_zero_path_disconnect");
@@ -3945,9 +3945,9 @@ mginit() {
     var_6 = spawnturret("misc_turret", (0, 0, 0), var_5.info);
 
     if(isDefined(var_5.offset_tag)) {
-      var_6 linkto(self, var_5.tag, var_5.offset_tag, (0, -1 * var_1, 0));
+      var_6 linkTo(self, var_5.tag, var_5.offset_tag, (0, -1 * var_1, 0));
     } else {
-      var_6 linkto(self, var_5.tag, (0, 0, 0), (0, -1 * var_1, 0));
+      var_6 linkTo(self, var_5.tag, (0, 0, 0), (0, -1 * var_1, 0));
     }
 
     var_6 setModel(var_5.model);
@@ -4237,7 +4237,7 @@ is_node_script_struct(var_0) {
     return 0;
   }
 
-  return isDefined(common_scripts\utility::getstruct(var_0.targetname, "targetname"));
+  return isDefined(common_scripts\utility::getStruct(var_0.targetname, "targetname"));
 }
 
 setup_vehicles(var_0) {
@@ -4366,8 +4366,8 @@ vehicle_rumble() {
   var_2 = var_1.radius * 2;
   var_3 = -1 * var_1.radius;
   var_4 = spawn("trigger_radius", self.origin + (0, 0, var_3), 0, var_1.radius, var_2);
-  var_4 enablelinkto();
-  var_4 linkto(self);
+  var_4 enablelinkTo();
+  var_4 linkTo(self);
   self.rumbletrigger = var_4;
   self endon("death");
 
@@ -4515,7 +4515,7 @@ get_vehiclenode_any_dynamic(var_0) {
   var_1 = getvehiclenode(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   } else if(_ishelicopter()) {}
 
   if(!isDefined(var_1)) {
@@ -4719,7 +4719,7 @@ hit_bullet_armor(var_0) {
 
 regen_front_armor(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(var_0.origin - self.origin);
+  var_3 = vectorNormalize(var_0.origin - self.origin);
 
   if(vectordot(var_2, var_3) > 0.86) {
     self.health = self.health + int(var_1 * level.vehicle_frontarmor[self.classname]);
@@ -4840,7 +4840,7 @@ getonpath(var_0) {
     }
 
     if(!isDefined(var_1)) {
-      var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+      var_1 = common_scripts\utility::getStruct(self.target, "targetname");
     }
   }
 
@@ -4979,7 +4979,7 @@ move_turrets_here(var_0) {
   }
   foreach(var_4, var_3 in self.mgturret) {
     var_3 unlink();
-    var_3 linkto(var_0, level.vehicle_mgturret[var_1][var_4].tag, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, level.vehicle_mgturret[var_1][var_4].tag, (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -5475,9 +5475,9 @@ move_effects_ent_here(var_0, var_1) {
   var_2 unlink();
 
   if(isDefined(var_1)) {
-    var_2 linkto(var_0, var_1);
+    var_2 linkTo(var_0, var_1);
   } else {
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
   }
 }
 
@@ -5615,7 +5615,7 @@ get_directional_deathanim(var_0, var_1) {
 }
 
 get_attacker_direction(var_0) {
-  var_1 = vectornormalize(anglesToForward(self.angles));
+  var_1 = vectorNormalize(anglesToForward(self.angles));
   var_2 = vectortoangles(var_1);
   var_3 = vectortoangles(var_0.origin - self.origin);
   var_4 = var_2[1] - var_3[1];
@@ -5775,7 +5775,7 @@ prepare_vehicle_play_anim_from_node() {
   self.modeldummy.angles = self.angles;
   self.modeldummy useanimtree(#animtree);
   self.modeldummy hide();
-  self.modeldummy linkto(self);
+  self.modeldummy linkTo(self);
 }
 
 vehicle_play_anim_from_node(var_0) {
@@ -5814,8 +5814,8 @@ vehicle_play_anim_from_node(var_0) {
     var_8 = length(var_5);
     var_9 = distance(self.origin, var_6.origin);
     var_10 = var_9 / var_8;
-    self.modeldummy moveto(var_6.origin, var_10);
-    self.modeldummy rotateto(var_6.angles, var_10);
+    self.modeldummy moveTo(var_6.origin, var_10);
+    self.modeldummy rotateTo(var_6.angles, var_10);
     var_11 = int(var_10 / 0.05) * 0.05;
 
     if(var_11 >= 0.05) {
@@ -5833,7 +5833,7 @@ vehicle_dummy_add_collison(var_0) {
     thread model_dummycoll_death();
     var_1 = self.modeldummy.origin - self.modeldummy gettagorigin(var_0);
     var_2 = self.modeldummy.angles - self.modeldummy gettagangles(var_0);
-    self.modeldummycoll linkto(self.modeldummy, var_0, var_1, var_2);
+    self.modeldummycoll linkTo(self.modeldummy, var_0, var_1, var_2);
     self.modeldummycoll vehicle_assignbrushmodelcollision();
     self.modeldummycoll hide();
     self.modeldummycoll dontinterpolate();

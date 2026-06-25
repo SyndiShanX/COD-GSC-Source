@@ -23,7 +23,7 @@ __init__() {
 }
 
 on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       level.var_b07feb9b = zm_trial::function_5769f26a(var_8a72a00b);
       break;
@@ -47,11 +47,11 @@ on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
 on_end(round_reset) {
   if(!round_reset) {
     if(level.var_61541a89 < level.var_b07feb9b) {
-      zm_trial::fail(#"hash_73f632514ab7d15", getplayers());
+      zm_trial::fail(#"hash_73f632514ab7d15", getPlayers());
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 

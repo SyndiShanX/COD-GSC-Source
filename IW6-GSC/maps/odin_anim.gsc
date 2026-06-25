@@ -439,7 +439,7 @@ odin_hall_escape_turn01_ally_spawn() {
 }
 
 odin_hall_escape_turn01_ally(var_0) {
-  var_1 = common_scripts\utility::getstruct("odin_hall_escape_turn01", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("odin_hall_escape_turn01", "script_noteworthy");
   var_2 = [];
   var_2["hall_escape_turn01_ally"] = var_0;
   var_1 maps\_anim::anim_first_frame(var_2, "odin_hall_escape_turn01_ally");
@@ -451,7 +451,7 @@ odin_hall_escape_turn01_player_spawn() {
 }
 
 odin_hall_escape_turn01_player() {
-  var_0 = common_scripts\utility::getstruct("odin_hall_escape_turn01", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("odin_hall_escape_turn01", "script_noteworthy");
   level.player freezecontrols(1);
   level.player allowprone(0);
   level.player allowcrouch(0);
@@ -480,7 +480,7 @@ odin_hall_escape_turn02_ally_spawn() {
 }
 
 odin_hall_escape_turn02_ally(var_0) {
-  var_1 = common_scripts\utility::getstruct("odin_hall_escape_turn02", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("odin_hall_escape_turn02", "script_noteworthy");
   var_2 = [];
   var_2["hall_escape_turn02_ally"] = var_0;
   var_1 maps\_anim::anim_first_frame(var_2, "odin_hall_escape_turn02_ally");
@@ -492,7 +492,7 @@ odin_hall_escape_turn02_player_spawn() {
 }
 
 odin_hall_escape_turn02_player() {
-  var_0 = common_scripts\utility::getstruct("odin_hall_escape_turn02", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("odin_hall_escape_turn02", "script_noteworthy");
   level.player freezecontrols(1);
   level.player allowprone(0);
   level.player allowcrouch(0);
@@ -515,14 +515,14 @@ odin_hall_escape_turn02_player() {
 }
 
 decomp_explosion_anim_ally() {
-  var_0 = getent("odin_decomp_anim", "targetname");
+  var_0 = getEnt("odin_decomp_anim", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(level.ally, "odin_escape_spin_room_ally01");
   var_0 maps\_anim::anim_single_solo(level.ally, "odin_escape_spin_room_ally01");
   level notify("decomp_ally_anim_done");
 }
 
 decomp_explosion_anim_enemies(var_0) {
-  var_1 = getent("odin_decomp_anim", "targetname");
+  var_1 = getEnt("odin_decomp_anim", "targetname");
   var_1 maps\_anim::anim_first_frame_solo(var_0[0], "odin_escape_spin_room_opfor01");
   var_1 maps\_anim::anim_first_frame_solo(var_0[1], "odin_escape_spin_room_opfor02");
   var_1 thread maps\_anim::anim_single_solo(var_0[0], "odin_escape_spin_room_opfor01");
@@ -539,7 +539,7 @@ decomp_explosion_anim_enemies(var_0) {
 
 decomp_explosion_anim_player_legs(var_0) {
   common_scripts\utility::flag_wait("player_is_decompressing");
-  var_1 = getent("odin_decomp_anim", "targetname");
+  var_1 = getEnt("odin_decomp_anim", "targetname");
   var_1 maps\_anim::anim_first_frame_solo(var_0, "odin_escape_spin_room_player_body");
   var_1 thread maps\_anim::anim_single_solo(var_0, "odin_escape_spin_room_player_body");
   common_scripts\utility::flag_wait("player_linked_with_legs");
@@ -550,7 +550,7 @@ decomp_explosion_anim_player_legs(var_0) {
 }
 
 decomp_explosion_anim_props(var_0, var_1) {
-  var_2 = getent("odin_decomp_anim", "targetname");
+  var_2 = getEnt("odin_decomp_anim", "targetname");
   var_3 = [];
   var_3[0] = maps\_utility::spawn_anim_model("decomp_solar_panel");
   var_3 = common_scripts\utility::array_combine(var_3, var_0);
@@ -572,7 +572,7 @@ decomp_explosion_anim_props(var_0, var_1) {
 decomp_explosion_anim_player(var_0) {
   common_scripts\utility::flag_set("player_is_decompressing");
   setsaveddvar("ammoCounterHide", "1");
-  var_1 = getent("odin_decomp_anim", "targetname");
+  var_1 = getEnt("odin_decomp_anim", "targetname");
   var_2 = maps\_utility::spawn_anim_model("player_rig");
   var_2.animname = "player_rig";
   var_2 hide();
@@ -629,11 +629,11 @@ decomp_anim_notify_end_slomo(var_0) {
 }
 
 decomp_light_rumble(var_0) {
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
 }
 
 decomp_heavy_rumble(var_0) {
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
 }
 
 decomp_anim_notify_done(var_0) {
@@ -641,7 +641,7 @@ decomp_anim_notify_done(var_0) {
 }
 
 spin_deadguys() {
-  var_0 = getent("spin_deadguy_01_node", "targetname");
+  var_0 = getEnt("spin_deadguy_01_node", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_1", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -652,7 +652,7 @@ spin_deadguys() {
   var_1 thread maps\odin_util::odin_drop_weapon();
   var_0 thread maps\_anim::anim_loop_solo(var_1, "odin_spin_struggling_enemy_01_loop", "stop_spin_deadguy_loops");
   var_1 thread move_and_spin_and_animate_spin_dead_guy((-500, -600, 100), 0, 25, 0, undefined, "odin_spin_struggling_enemy_01_loop", var_0);
-  var_0 = getent("spin_deadguy_02_node", "targetname");
+  var_0 = getEnt("spin_deadguy_02_node", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_2", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -663,7 +663,7 @@ spin_deadguys() {
   var_1 thread maps\odin_util::odin_drop_weapon();
   var_0 thread maps\_anim::anim_loop_solo(var_1, "odin_spin_struggling_enemy_02_loop", "stop_spin_deadguy_loops");
   var_1 thread move_and_spin_and_animate_spin_dead_guy((-1000, 200, -200), 0, 80, 0, undefined, "odin_spin_struggling_enemy_02_loop", var_0);
-  var_0 = getent("spin_deadguy_static_node_01", "targetname");
+  var_0 = getEnt("spin_deadguy_static_node_01", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_static_1", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -674,7 +674,7 @@ spin_deadguys() {
   var_1 thread maps\odin_util::odin_drop_weapon();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_escape_spin_opfor_death_01");
   var_1 thread move_and_spin_and_animate_spin_dead_guy((-12000, 2400, 2400), 0, 120, 0.1, undefined, "odin_spin_struggling_enemy_02_loop");
-  var_0 = getent("spin_deadguy_static_node_02", "targetname");
+  var_0 = getEnt("spin_deadguy_static_node_02", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_static_2", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -685,7 +685,7 @@ spin_deadguys() {
   var_1 thread maps\odin_util::odin_drop_weapon();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_escape_spin_opfor_death_02");
   var_1 thread move_and_spin_and_animate_spin_dead_guy((400, 800, 100), 0, 20, 0.2, undefined, "odin_spin_struggling_enemy_01_loop");
-  var_0 = getent("spin_deadguy_static_node_03", "targetname");
+  var_0 = getEnt("spin_deadguy_static_node_03", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_static_3", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -696,7 +696,7 @@ spin_deadguys() {
   var_1 thread maps\odin_util::odin_drop_weapon();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_escape_spin_opfor_death_03");
   var_1 thread move_and_spin_and_animate_spin_dead_guy((1000, 500, 800), 0, 30, 0.4, undefined, "odin_spin_struggling_enemy_02_loop");
-  var_0 = getent("spin_deadguy_static_node_04", "targetname");
+  var_0 = getEnt("spin_deadguy_static_node_04", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_static_4", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -707,7 +707,7 @@ spin_deadguys() {
   var_1 thread maps\odin_util::odin_drop_weapon();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_escape_spin_opfor_death_04");
   var_1 thread move_and_spin_and_animate_spin_dead_guy((1200, -800, -210), 0, 25, 0.8, undefined, "odin_spin_struggling_enemy_01_loop");
-  var_0 = getent("spin_deadguy_static_node_05", "targetname");
+  var_0 = getEnt("spin_deadguy_static_node_05", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_static_5", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -718,7 +718,7 @@ spin_deadguys() {
   var_1 thread maps\odin_util::odin_drop_weapon();
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_escape_spin_opfor_death_02");
   var_1 thread move_and_spin_and_animate_spin_dead_guy((-1000, 1000, 100), 0, 30, 0.8, undefined, "odin_spin_struggling_enemy_02_loop");
-  var_0 = getent("spin_deadguy_03_node", "targetname");
+  var_0 = getEnt("spin_deadguy_03_node", "targetname");
   var_1 = maps\odin_util::spawn_odin_actor_single("spin_deadguy_3", 1);
   var_1.dontevershoot = 1;
   var_1.ignoreall = 1;
@@ -745,14 +745,14 @@ move_and_spin_and_animate_spin_dead_guy(var_0, var_1, var_2, var_3, var_4, var_5
   var_9 = common_scripts\utility::spawn_tag_origin();
   var_9.origin = var_8.origin;
   var_9.angles = var_8.angles;
-  var_8 linkto(var_9);
+  var_8 linkTo(var_9);
 
   if(isDefined(var_6)) {
     var_6 notify("stop_spin_deadguy_loops");
     wait 0.1;
   }
 
-  var_9 moveto(var_9.origin + var_0, var_2, var_2 * var_3, 0);
+  var_9 moveTo(var_9.origin + var_0, var_2, var_2 * var_3, 0);
 
   if(isDefined(var_7)) {
     playFXOnTag(level._effect["spc_fire_puff_bigger_light"], var_9, "tag_origin");
@@ -762,7 +762,7 @@ move_and_spin_and_animate_spin_dead_guy(var_0, var_1, var_2, var_3, var_4, var_5
     var_9 maps\_anim::anim_single_solo(var_8, var_4, "tag_origin");
   } else {
     if(distance(var_9.origin + var_0, var_9.origin) / var_2 < 70) {
-      var_9 rotateto((randomfloatrange(-180, 180), randomfloatrange(-180, 180), randomfloatrange(-180, 180)), var_2);
+      var_9 rotateTo((randomfloatrange(-180, 180), randomfloatrange(-180, 180), randomfloatrange(-180, 180)), var_2);
     } else {
       var_9 rotatepitch(6000, var_2);
     }
@@ -778,7 +778,7 @@ move_and_spin_and_animate_spin_dead_guy(var_0, var_1, var_2, var_3, var_4, var_5
 }
 
 satellite_traversal_props() {
-  var_0 = common_scripts\utility::getstruct("satellite_traversal_top", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("satellite_traversal_top", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("satellite_traversal_solar_panels");
   var_2 = [];
   var_2["satellite_traversal_solar_panels"] = var_1;

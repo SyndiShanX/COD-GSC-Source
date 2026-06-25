@@ -134,7 +134,7 @@ function function_9f72eb8b(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(self) && isDefined(bwastimejump)) {
     self playSound(bwastimejump, #"hash_6916591c817c7bf8");
-    a_players = getplayers(bwastimejump, undefined, self.origin, 2500);
+    a_players = getPlayers(bwastimejump, undefined, self.origin, 2500);
     array::thread_all(a_players, &postfx::playpostfxbundle, #"pstfx_underwater");
     level thread function_36083e9a(bwastimejump, a_players);
   }

@@ -54,7 +54,7 @@ function_3d288f14() {
 }
 
 is_team_empty(team) {
-  team_players = getplayers(team);
+  team_players = getPlayers(team);
 
   if(team_players.size > 0) {
     return false;
@@ -108,7 +108,7 @@ function_a9d594a0(party) {
 }
 
 function_d28f6fa0(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     function_a9d594a0(player getparty());

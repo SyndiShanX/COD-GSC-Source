@@ -468,12 +468,12 @@ closedooronturretdeath(var_0) {
 }
 
 init_arena_turret_door() {
-  self.mover = getent(self.target, "targetname");
+  self.mover = getEnt(self.target, "targetname");
   self.mover.closed_pos = self.mover.origin;
-  var_0 = common_scripts\utility::getstruct(self.mover.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.mover.target, "targetname");
   self.mover.open_pos = var_0.origin;
-  var_1 = getent(self.mover.target, "targetname");
-  var_1 linkto(self.mover);
+  var_1 = getEnt(self.mover.target, "targetname");
+  var_1 linkTo(self.mover);
 
   if(level.nextgen) {
     var_2 = getscriptablearray("light_pluse_turret_mp_zombie_h2o", "targetname");
@@ -508,9 +508,9 @@ close_door() {
 
 activate_door(var_0, var_1) {
   if(var_0 == "open") {
-    self moveto(self.open_pos, var_1);
+    self moveTo(self.open_pos, var_1);
   } else if(var_0 == "close") {
-    self moveto(self.closed_pos, var_1);
+    self moveTo(self.closed_pos, var_1);
   }
 
   self playSound("interact_door");
@@ -520,7 +520,7 @@ activate_door(var_0, var_1) {
     if(var_0 == "open") {
       self connectpaths();
     } else if(var_0 == "close") {
-      self disconnectpaths();
+      self disconnectPaths();
     }
   }
 }
@@ -565,7 +565,7 @@ mountedturret_initsentry() {
   self setCanDamage(0);
   self.team = "axis";
   self setturretteam("axis");
-  self.aimingorg = common_scripts\utility::getstruct(self.target, "targetname");
+  self.aimingorg = common_scripts\utility::getStruct(self.target, "targetname");
   self setturretmodechangewait(1);
   maps\mp\killstreaks\_autosentry::sentry_setinactive();
 }

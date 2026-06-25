@@ -26,13 +26,13 @@ function private preinit() {
 }
 
 function private on_begin() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread movement_watcher();
   }
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"stop_movement_watch");
   }
 }

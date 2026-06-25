@@ -34,7 +34,7 @@ temple_powerup_grab(powerup) {
 monkey_swarm(powerup) {
   monkey_count_per_player = 2;
   flag_clear("spawn_zombies");
-  players = GetPlayers();
+  players = getPlayers();
   level.monkeys_left_to_spawn = players.size * monkey_count_per_player;
   for(i = 0; i < players.size; i++) {
     players[i] thread player_monkey_think(monkey_count_per_player);
@@ -101,14 +101,14 @@ player_monkey_think(numMonkeys) {
     spawns[i].last_spawn_time = GetTime();
     monkey.attacking_zombie = false;
     monkey.no_shrink = true;
-    monkey SetPlayerCollision(false);
+    monkey setPlayerCollision(false);
     monkey maps\_zombiemode_ai_monkey::monkey_prespawn();
     monkey ForceTeleport(spawnLoc, spawnAngles);
     if(bloodFX) {
       playFX(level._effect["zombie_kill"], spawnLoc);
     }
     playFX(level._effect["monkey_death"], spawnLoc);
-    playsoundatposition("zmb_bolt", spawnLoc);
+    playSoundAtPosition("zmb_bolt", spawnLoc);
     monkey magic_bullet_shield();
     monkey disable_pain();
     monkey thread maps\_zombiemode_ai_monkey::monkey_zombie_choose_run();
@@ -126,7 +126,7 @@ monkey_powerup_timeout() {
     self.zombie.monkey_claimed = false;
   }
   playFX(level._effect["monkey_death"], self.origin);
-  playsoundatposition("zmb_bolt", self.origin);
+  playSoundAtPosition("zmb_bolt", self.origin);
   self notify("timeout");
   self Delete();
 }
@@ -183,19 +183,19 @@ monkey_attack_zombie(zombie) {
   self.attacking_zombie = true;
   zombie_anim = % ai_zombie_taunts_9;
   zombie notify("stop_find_flesh");
-  zombie animscripted("zombie_react", zombie.origin, zombie.angles, zombie_anim, "normal", %body, 1, 0.2);
+  zombie animScripted("zombie_react", zombie.origin, zombie.angles, zombie_anim, "normal", %body, 1, 0.2);
   forward = anglesToForward(zombie.angles);
   perk_attack_anim = % ai_zombie_monkey_attack_perks_front;
   time = getAnimLength(perk_attack_anim);
   self maps\_zombiemode_audio::do_zombies_playvocals("attack", "monkey_zombie");
-  self animscripted("perk_attack_anim", zombie.origin + forward * 35.0, zombie.angles - (0, 180, 0), perk_attack_anim, "normal", %body, 1, 0.2);
+  self animScripted("perk_attack_anim", zombie.origin + forward * 35.0, zombie.angles - (0, 180, 0), perk_attack_anim, "normal", %body, 1, 0.2);
   wait(time);
   self.attacking_zombie = false;
   if(isDefined(zombie)) {
     zombie.no_powerups = true;
     zombie.a.gib_ref = "head";
     zombie dodamage(zombie.health + 666, zombie.origin);
-    players = GetPlayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       players[i] maps\_zombiemode_score::player_add_points("nuke_powerup", 20);
     }

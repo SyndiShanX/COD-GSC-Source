@@ -101,7 +101,7 @@ function function_93e7ee52(challengetype = 0, name) {
       level thread namespace_9fc66ac::announce(62);
       def = doa_enemy::function_251ee3bd("pole_zombie");
 
-      for(count = getplayers().size; count; count--) {
+      for(count = getPlayers().size; count; count--) {
         level.doa.var_a77e4601[level.doa.var_a77e4601.size] = def;
       }
 
@@ -371,7 +371,7 @@ function function_29ff6b1() {
 
 function function_17f47e92() {
   maxai = [[level.doa.var_39e3fa99]] - > function_c892290a();
-  [[level.doa.var_39e3fa99]] - > function_6d5262dc(16 + 8 * getplayers().size);
+  [[level.doa.var_39e3fa99]] - > function_6d5262dc(16 + 8 * getPlayers().size);
 
   if(!isDefined(level.doa.var_a77e4601)) {
     level.doa.var_a77e4601 = [];
@@ -408,7 +408,7 @@ function function_201a7d58() {
     spawnloc.origin = [[level.doa.var_39e3fa99]] - > function_70fb5745().origin + (0, 0, 1600);
     spawnloc.angles = [[level.doa.var_39e3fa99]] - > function_70fb5745().angles;
   } else {
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size) {
       player = players[randomint(players.size)];
@@ -430,7 +430,7 @@ function function_9f6da3ff() {
   [[var_94f3b914]] - > function_7edd7727(6);
   wait 5;
   origin = [[level.doa.var_39e3fa99]] - > function_ffcf1d1();
-  waves = 4 + getplayers().size;
+  waves = 4 + getPlayers().size;
   level.doa.var_a598a835 = &function_201a7d58;
 
   while(waves) {

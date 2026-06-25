@@ -191,7 +191,7 @@ function private dom_start() {
 }
 
 function private function_19d221fa(objective) {
-  teamcount = getplayers(self.team).size;
+  teamcount = getPlayers(self.team).size;
   objectivecount = level function_994c497(objective);
 
   if(objectivecount > 0) {
@@ -202,7 +202,7 @@ function private function_19d221fa(objective) {
 }
 
 function private function_d5bf23f5(objective) {
-  teamcount = getplayers(self.team).size;
+  teamcount = getPlayers(self.team).size;
   objectivecount = level function_994c497(objective);
 
   if(objectivecount > 0) {

@@ -199,7 +199,7 @@ init() {
 setup_player_usable_vehicle() {
   assert(isDefined(self));
   assert(isDefined(self.target));
-  self.trigger = getent(self.target, "targetname");
+  self.trigger = getEnt(self.target, "targetname");
   assert(isDefined(self.trigger));
 
   self.script_targetoffset_z = -100;
@@ -276,7 +276,7 @@ player_becomes_pilot_model(chopper) {
   chopper.pilotModel = spawn("script_model", chopper getTagOrigin("tag_pilot"));
   chopper.pilotModel.angles = chopper getTagAngles("tag_pilot");
   chopper.pilotModel setModel("body_complete_sp_cobra_pilot_desert_zack");
-  chopper.pilotModel linkto(chopper, "tag_pilot", (0, 0, -40), (0, 0, 0));
+  chopper.pilotModel linkTo(chopper, "tag_pilot", (0, 0, -40), (0, 0, 0));
   chopper.pilotModel useAnimTree(#animtree);
 
   while(isDefined(chopper)) {
@@ -1770,7 +1770,7 @@ ammo_Reload_Station_Cinematic_Reload(regenPoint, trigger) {
 
   wait 5;
 
-  level.player linkto(level.playervehicle);
+  level.player linkTo(level.playervehicle);
 
   level.playervehicle useby(level.player);
 
@@ -1832,7 +1832,7 @@ ammo_Reload_Station_Notify(notifyString) {
     }
     regenPoint = self.origin;
     if(isDefined(self.target)) {
-      ent = getent(self.target, "targetname");
+      ent = getEnt(self.target, "targetname");
       if(isDefined(ent)) {
         regenPoint = ent.origin;
       }
@@ -1892,7 +1892,7 @@ playLoopSoundForSeeking(alias) {
   thread delete_on_death(org);
   org.origin = level.player.origin;
   org.angles = level.player.angles;
-  org linkto(level.player);
+  org linkTo(level.player);
   org playLoopSound(alias);
   self waittill("stop sound" + alias);
   org stoploopsound(alias);
@@ -1902,7 +1902,7 @@ playLoopSoundForSeeking(alias) {
 gunner_spawn(chopper) {
   gunner = spawn("script_model", level.playervehicle getTagOrigin("tag_gunner"));
   gunner.angles = level.playervehicle getTagAngles("tag_gunner");
-  gunner linkto(level.playervehicle, "tag_gunner");
+  gunner linkTo(level.playervehicle, "tag_gunner");
   gunner setModel("body_complete_sp_cobra_pilot_desert_zack");
 
   gunner useAnimTree(#animtree);

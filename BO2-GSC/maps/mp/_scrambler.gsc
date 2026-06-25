@@ -60,7 +60,7 @@ scramblerdetonate(attacker, weaponname) {
     attacker maps\mp\_challenges::destroyedequipment(weaponname);
   }
 
-  playsoundatposition("dst_equipment_destroy", self.origin);
+  playSoundAtPosition("dst_equipment_destroy", self.origin);
   self delete();
 }
 

@@ -138,7 +138,7 @@ dead_bodies() {
 }
 
 alley_cleanup() {
-  t_alley = getent("bus_dam_fxanim_cleanup_trig", "targetname");
+  t_alley = getEnt("bus_dam_fxanim_cleanup_trig", "targetname");
   a_script_models = getEntArray("script_model", "classname");
 
   foreach(script_model in a_script_models) {
@@ -179,7 +179,7 @@ monitor_drone_stealth_section() {
   if(!flag("drone_intro_attack") && !flag("drone_searcher_attack") && !flag("drone_bank_attack")) {
     flag_set("drones_gone");
   } else {
-    while(isalive(getent("drone_helicopter", "targetname")) || isalive(getent("drone_searcher", "targetname")) || isalive(getent("drone_bank", "targetname"))) {
+    while(isalive(getEnt("drone_helicopter", "targetname")) || isalive(getEnt("drone_searcher", "targetname")) || isalive(getEnt("drone_bank", "targetname"))) {
       wait 1;
     }
 
@@ -317,7 +317,7 @@ spawn_drone_searcher() {
   level endon("drone_attacks_player");
   level endon("drone_detected_player");
   flag_wait("spawn_drone_searcher");
-  s_spawnpt = getstruct("drone_searcher_spawnpt", "targetname");
+  s_spawnpt = getStruct("drone_searcher_spawnpt", "targetname");
   vh_drone = spawn_vehicle_from_targetname("isi_drone");
   vh_drone.origin = s_spawnpt.origin;
   vh_drone.angles = s_spawnpt.angles;
@@ -336,14 +336,14 @@ drone_searcher_logic() {
   self endon("death");
   self endon("stop_drone_searcher_logic");
   self endon("stop_logic");
-  self.spotlight_target = getent("drone_searcher_target", "targetname");
-  s_goal1 = getstruct("drone_searcher_goal1", "targetname");
-  s_goal2 = getstruct("drone_searcher_goal2", "targetname");
-  s_goal3 = getstruct("drone_searcher_goal3", "targetname");
-  s_goal4 = getstruct("drone_searcher_goal4", "targetname");
-  s_goal5 = getstruct("drone_flyaway1", "targetname");
-  s_goal6 = getstruct("drone_flyaway2", "targetname");
-  s_goal7 = getstruct("drone_flyaway3", "targetname");
+  self.spotlight_target = getEnt("drone_searcher_target", "targetname");
+  s_goal1 = getStruct("drone_searcher_goal1", "targetname");
+  s_goal2 = getStruct("drone_searcher_goal2", "targetname");
+  s_goal3 = getStruct("drone_searcher_goal3", "targetname");
+  s_goal4 = getStruct("drone_searcher_goal4", "targetname");
+  s_goal5 = getStruct("drone_flyaway1", "targetname");
+  s_goal6 = getStruct("drone_flyaway2", "targetname");
+  s_goal7 = getStruct("drone_flyaway3", "targetname");
   target_set(self);
   self setspeed(30, 15, 12);
   self thread drone_searcher_deathwatch();
@@ -423,30 +423,30 @@ drone_searcher_searchlight_off() {
 
 drone_searcher_target_movement() {
   level endon("dept_store_entered");
-  s_goal1 = getstruct("drone_searcher_target_goal1", "targetname");
-  s_goal2 = getstruct("drone_searcher_target_goal2", "targetname");
-  s_goal3 = getstruct("drone_searcher_target_goal3", "targetname");
-  s_goal4 = getstruct("drone_searcher_target_goal4", "targetname");
-  s_goal5 = getstruct("drone_searcher_target_goal5", "targetname");
-  s_goal6 = getstruct("drone_searcher_target_goal6", "targetname");
+  s_goal1 = getStruct("drone_searcher_target_goal1", "targetname");
+  s_goal2 = getStruct("drone_searcher_target_goal2", "targetname");
+  s_goal3 = getStruct("drone_searcher_target_goal3", "targetname");
+  s_goal4 = getStruct("drone_searcher_target_goal4", "targetname");
+  s_goal5 = getStruct("drone_searcher_target_goal5", "targetname");
+  s_goal6 = getStruct("drone_searcher_target_goal6", "targetname");
   wait 1;
-  self moveto(s_goal1.origin, 3);
+  self moveTo(s_goal1.origin, 3);
   self waittill("movedone");
   flag_set("drone_searcher_look_left");
-  self moveto(s_goal2.origin, 3);
+  self moveTo(s_goal2.origin, 3);
   self waittill("movedone");
   wait 2;
-  self moveto(s_goal3.origin, 4);
+  self moveTo(s_goal3.origin, 4);
   self waittill("movedone");
   flag_set("drone_searcher_look_away");
-  self moveto(s_goal4.origin, 6);
+  self moveTo(s_goal4.origin, 6);
   self waittill("movedone");
   wait 2;
-  self moveto(s_goal5.origin, 6);
+  self moveTo(s_goal5.origin, 6);
   self waittill("movedone");
   wait 2;
   flag_set("drone_searcher_done");
-  self moveto(s_goal6.origin, 4);
+  self moveTo(s_goal6.origin, 4);
   self waittill("movedone");
   flag_wait("drone_fly_off");
   flag_set("drone_searcher_flyoff");
@@ -457,9 +457,9 @@ drone_searcher_alt_logic() {
   self endon("stop_logic");
   level endon("drone_attacks_player");
   level endon("drone_detected_player");
-  s_goal_3 = getstruct("drone_searcher_altgoal3", "targetname");
-  s_goal_4 = getstruct("drone_searcher_altgoal4", "targetname");
-  s_goal_5 = getstruct("drone_searcher_altgoal5", "targetname");
+  s_goal_3 = getStruct("drone_searcher_altgoal3", "targetname");
+  s_goal_4 = getStruct("drone_searcher_altgoal4", "targetname");
+  s_goal_5 = getStruct("drone_searcher_altgoal5", "targetname");
   self setspeed(5, 3, 1);
   self setvehgoalpos(s_goal_3.origin, 1);
   self waittill("goal");
@@ -479,29 +479,29 @@ drone_searcher_spotlight_alt_movement() {
   level endon("drone_attacks_player");
   level endon("drone_detected_player");
   level endon("player_entered_bank");
-  s_goal1 = getstruct("drone_searcher_alttarget_goal1", "targetname");
-  s_goal2 = getstruct("drone_searcher_alttarget_goal2", "targetname");
-  s_goal3 = getstruct("drone_searcher_alttarget_goal3", "targetname");
-  self moveto(s_goal1.origin, 1);
+  s_goal1 = getStruct("drone_searcher_alttarget_goal1", "targetname");
+  s_goal2 = getStruct("drone_searcher_alttarget_goal2", "targetname");
+  s_goal3 = getStruct("drone_searcher_alttarget_goal3", "targetname");
+  self moveTo(s_goal1.origin, 1);
   self waittill("movedone");
   level waittill("start_dept_store_search");
-  self moveto(s_goal2.origin, 5);
+  self moveTo(s_goal2.origin, 5);
   self waittill("movedone");
   level.harper notify("stop_follow_path");
   wait 0.2;
   level.harper thread harper_end_hand_signals();
   wait 0.2;
   level.harper thread follow_path(getnode("harper_node_alt", "targetname"));
-  self moveto(s_goal3.origin, 5);
+  self moveTo(s_goal3.origin, 5);
   self waittill("movedone");
   wait 3;
-  self moveto(s_goal2.origin, 5);
+  self moveTo(s_goal2.origin, 5);
   self waittill("movedone");
   flag_set("drone_searcher_flyoff");
 }
 
 drone_bank_search() {
-  s_spawnpt = getstruct("bank_drone_goal1", "targetname");
+  s_spawnpt = getStruct("bank_drone_goal1", "targetname");
   vh_drone = spawn_vehicle_from_targetname("isi_drone");
   vh_drone.origin = s_spawnpt.origin;
   vh_drone.angles = s_spawnpt.angles;
@@ -534,11 +534,11 @@ drone_bank_search_logic() {
   level endon("drone_detected_player");
   self thread bank_drone_death_watch();
   self thread drone_bank_searchlight_on();
-  s_goal2 = getstruct("bank_drone_goal2", "targetname");
-  s_goal3 = getstruct("bank_drone_goal3", "targetname");
-  s_goal4 = getstruct("bank_drone_goal4", "targetname");
-  s_goal5 = getstruct("bank_drone_goal5", "targetname");
-  e_target = getent("bank_drone_target", "targetname");
+  s_goal2 = getStruct("bank_drone_goal2", "targetname");
+  s_goal3 = getStruct("bank_drone_goal3", "targetname");
+  s_goal4 = getStruct("bank_drone_goal4", "targetname");
+  s_goal5 = getStruct("bank_drone_goal5", "targetname");
+  e_target = getEnt("bank_drone_target", "targetname");
   e_target thread move_drone_bank_target();
   target_set(self);
   self set_turret_target(e_target, (0, 0, 0), 0);
@@ -576,14 +576,14 @@ bank_drone_death_watch() {
 }
 
 move_drone_bank_target() {
-  s_goal1 = getstruct("bank_target_goal1", "targetname");
-  s_goal2 = getstruct("bank_target_goal2", "targetname");
-  s_goal3 = getstruct("bank_target_goal3", "targetname");
-  self moveto(s_goal1.origin, 3);
+  s_goal1 = getStruct("bank_target_goal1", "targetname");
+  s_goal2 = getStruct("bank_target_goal2", "targetname");
+  s_goal3 = getStruct("bank_target_goal3", "targetname");
+  self moveTo(s_goal1.origin, 3);
   self waittill("movedone");
-  self moveto(s_goal2.origin, 5);
+  self moveTo(s_goal2.origin, 5);
   self waittill("movedone");
-  self moveto(s_goal3.origin, 7);
+  self moveTo(s_goal3.origin, 7);
   self waittill("movedone");
   self delete();
 }
@@ -664,7 +664,7 @@ drone_spotlight_control() {
     self waittill("new_follow_node", nd_path);
 
     if(isDefined(nd_path.target)) {
-      s_target = getstruct(nd_path.target, "targetname");
+      s_target = getStruct(nd_path.target, "targetname");
 
       if(isDefined(s_target)) {
         self thread follow_spotlight_path(s_target);
@@ -684,7 +684,7 @@ follow_spotlight_path(s_target) {
     a_spotlight_path[a_spotlight_path.size] = s_target;
 
     if(isDefined(s_target.target)) {
-      s_target = getstruct(s_target.target, "targetname");
+      s_target = getStruct(s_target.target, "targetname");
     } else {
       s_target = undefined;
     }
@@ -745,7 +745,7 @@ _aim_spotlight(target, n_speed_scale, b_face) {
   self.spotlight_target.origin = target.origin;
 
   if(!isvec(target) && isDefined(target.classname)) {
-    self.spotlight_target linkto(target);
+    self.spotlight_target linkTo(target);
   }
 
   if(b_face) {
@@ -846,7 +846,7 @@ vo_avoid_spotlight() {
 
 _can_spotlight_see_position(v_target_position, n_dot_tolerance) {
   v_spotlight_origin = self gettagorigin("tag_spotlight");
-  v_to_harper_from_spotlight = vectornormalize(v_target_position - v_spotlight_origin);
+  v_to_harper_from_spotlight = vectorNormalize(v_target_position - v_spotlight_origin);
   v_drone_forward = anglesToForward(self gettagangles("tag_spotlight"));
   n_dot = vectordot(v_to_harper_from_spotlight, v_drone_forward);
 
@@ -893,7 +893,7 @@ drone_helicopter_setup() {
   if(!isDefined(self.targetname) && !isDefined("drone_helicopter") || isDefined(self.targetname) && isDefined("drone_helicopter") && self.targetname == "drone_helicopter") {
     self play_fx("helicopter_drone_spotlight_targeting", undefined, undefined, "spotlight_off", 1, "tag_spotlight");
     self play_fx("drone_lens_flare", undefined, undefined, "spotlight_off", 1, "tag_spotlight");
-    self.spotlight_target = getent("intro_target", "targetname");
+    self.spotlight_target = getEnt("intro_target", "targetname");
   } else {
     self.spotlight_target = spawn("script_origin", self.origin + anglesToForward(self.angles) * 5000 + vectorscale((0, 0, -1), 500.0));
     self play_fx("helicopter_drone_spotlight_cheap", undefined, undefined, "death", 1, "tag_spotlight");
@@ -924,12 +924,12 @@ spawn_funch_stealth_drone1() {
   self thread drone_flyaway();
   level.stealth_drone1 = self;
   self ent_flag_init("spotlight_paused");
-  s_goal1 = getstruct("drone_intro_goal1", "targetname");
-  s_goal2 = getstruct("drone_intro_goal2", "targetname");
-  s_goal3 = getstruct("drone_intro_goal3", "targetname");
-  s_goal4 = getstruct("drone_intro_goal4", "targetname");
-  s_goal5 = getstruct("drone_intro_goal5", "targetname");
-  s_goal6 = getstruct("drone_intro_goal6", "targetname");
+  s_goal1 = getStruct("drone_intro_goal1", "targetname");
+  s_goal2 = getStruct("drone_intro_goal2", "targetname");
+  s_goal3 = getStruct("drone_intro_goal3", "targetname");
+  s_goal4 = getStruct("drone_intro_goal4", "targetname");
+  s_goal5 = getStruct("drone_intro_goal5", "targetname");
+  s_goal6 = getStruct("drone_intro_goal6", "targetname");
   self setspeed(25, 15, 10);
   flag_wait("start_anthem_approach");
   wait 0.3;
@@ -977,9 +977,9 @@ spawn_funch_stealth_drone1() {
 }
 
 rumble_drone_turret() {
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait 1;
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }
 
 drone_spotlight_movement() {
@@ -988,51 +988,51 @@ drone_spotlight_movement() {
   level endon("dept_store_entered");
   level endon("drone_attacks_player");
   level endon("drone_detected_player");
-  self moveto(self.origin + vectorscale((1, 0, 0), 200.0), 2);
+  self moveTo(self.origin + vectorscale((1, 0, 0), 200.0), 2);
   self waittill("movedone");
-  s_goal_0 = getstruct("drone_intro_light_0", "targetname");
-  s_goal_1 = getstruct("drone_intro_light_1", "targetname");
-  s_goal_2 = getstruct("drone_intro_light_2", "targetname");
-  s_goal_3 = getstruct("drone_intro_light_3", "targetname");
-  s_goal_4 = getstruct("drone_intro_light_4", "targetname");
-  s_goal_5 = getstruct("drone_intro_light_5", "targetname");
-  s_goal_6 = getstruct("drone_intro_light_6", "targetname");
-  s_goal_7 = getstruct("drone_intro_light_7", "targetname");
-  s_goal_8 = getstruct("drone_intro_light_8", "targetname");
-  self moveto(s_goal_0.origin, 2);
+  s_goal_0 = getStruct("drone_intro_light_0", "targetname");
+  s_goal_1 = getStruct("drone_intro_light_1", "targetname");
+  s_goal_2 = getStruct("drone_intro_light_2", "targetname");
+  s_goal_3 = getStruct("drone_intro_light_3", "targetname");
+  s_goal_4 = getStruct("drone_intro_light_4", "targetname");
+  s_goal_5 = getStruct("drone_intro_light_5", "targetname");
+  s_goal_6 = getStruct("drone_intro_light_6", "targetname");
+  s_goal_7 = getStruct("drone_intro_light_7", "targetname");
+  s_goal_8 = getStruct("drone_intro_light_8", "targetname");
+  self moveTo(s_goal_0.origin, 2);
   self waittill("movedone");
-  self moveto(s_goal_1.origin, 5);
+  self moveTo(s_goal_1.origin, 5);
   self waittill("movedone");
   flag_wait("civ_targeted");
-  self moveto(s_goal_3.origin, 1);
+  self moveTo(s_goal_3.origin, 1);
   self waittill("movedone");
   flag_wait("looking_at_target");
   wait 2;
-  self moveto(s_goal_2.origin, 4);
+  self moveTo(s_goal_2.origin, 4);
   self waittill("movedone");
   wait 2;
   flag_set("move1");
-  self moveto(s_goal_3.origin, 4);
+  self moveTo(s_goal_3.origin, 4);
   self waittill("movedone");
   flag_clear("looking_at_target");
   flag_set("moveto_cafe");
-  self moveto(s_goal_4.origin, 3);
+  self moveTo(s_goal_4.origin, 3);
   self waittill("movedone");
-  self moveto(s_goal_5.origin, 3);
+  self moveTo(s_goal_5.origin, 3);
   self waittill("movedone");
   flag_wait("looking_at_target");
   wait 1;
 
   if(!flag("player_across_street")) {
-    self moveto(s_goal_8.origin, 4);
+    self moveTo(s_goal_8.origin, 4);
     self waittill("movedone");
     wait 1;
     flag_set("move3");
     wait 1;
   } else {
-    self moveto(s_goal_7.origin, 2);
+    self moveTo(s_goal_7.origin, 2);
     self waittill("movedone");
-    self moveto(s_goal_4.origin, 2);
+    self moveTo(s_goal_4.origin, 2);
     self waittill("movedone");
     flag_set("move3");
   }
@@ -1040,39 +1040,39 @@ drone_spotlight_movement() {
   flag_clear("looking_at_target");
 
   if(!flag("player_across_street")) {
-    self moveto(s_goal_4.origin, 4);
+    self moveTo(s_goal_4.origin, 4);
     self waittill("movedone");
   } else {
-    self moveto(s_goal_6.origin, 4);
+    self moveTo(s_goal_6.origin, 4);
     self waittill("movedone");
   }
 
   wait 2;
 
   if(!flag("player_across_street")) {
-    self moveto(s_goal_6.origin, 6);
+    self moveTo(s_goal_6.origin, 6);
     self waittill("movedone");
   } else {
-    self moveto(s_goal_4.origin, 4);
+    self moveTo(s_goal_4.origin, 4);
     self waittill("movedone");
   }
 
   wait 2;
   flag_set("moveto_cafe_side");
-  self moveto(s_goal_2.origin, 4);
+  self moveTo(s_goal_2.origin, 4);
   self waittill("movedone");
-  self moveto(s_goal_1.origin, 5);
+  self moveTo(s_goal_1.origin, 5);
   self waittill("movedone");
   wait 2;
-  self moveto(s_goal_5.origin, 3);
+  self moveTo(s_goal_5.origin, 3);
   self waittill("movedone");
   wait 2;
   flag_set("drone_turned_around");
-  self moveto(s_goal_7.origin, 3);
+  self moveTo(s_goal_7.origin, 3);
   wait 2;
   flag_set("spawn_drone_searcher");
   self waittill("movedone");
-  self moveto(s_goal_4.origin, 3);
+  self moveTo(s_goal_4.origin, 3);
   self waittill("movedone");
 }
 
@@ -1081,13 +1081,13 @@ player_entered_dept() {
   level endon("drone_attacks_player");
   level endon("drone_detected_player");
   flag_wait("dept_store_entered");
-  self.spotlight_target = getent("dept_target", "targetname");
+  self.spotlight_target = getEnt("dept_target", "targetname");
   self clearlookatent();
   self setlookatent(self.spotlight_target);
   self maps\_turret::set_turret_target(self.spotlight_target, undefined, 0);
-  s_goal_0 = getstruct("dept_goal_0", "targetname");
-  s_goal_1 = getstruct("dept_goal_1", "targetname");
-  s_goal_2 = getstruct("dept_goal_2", "targetname");
+  s_goal_0 = getStruct("dept_goal_0", "targetname");
+  s_goal_1 = getStruct("dept_goal_1", "targetname");
+  s_goal_2 = getStruct("dept_goal_2", "targetname");
   self setspeed(5, 3, 1);
   self setvehgoalpos(s_goal_0.origin, 1);
   self waittill("goal");
@@ -1104,12 +1104,12 @@ player_entered_dept() {
 dept_target_movement() {
   level endon("drone_attacks_player");
   level endon("drone_detected_player");
-  s_goal_0 = getstruct("dept_target_0", "targetname");
-  s_goal_1 = getstruct("dept_target_1", "targetname");
+  s_goal_0 = getStruct("dept_target_0", "targetname");
+  s_goal_1 = getStruct("dept_target_1", "targetname");
   wait 3;
-  self moveto(s_goal_0.origin, 4);
+  self moveTo(s_goal_0.origin, 4);
   self waittill("movedone");
-  self moveto(s_goal_1.origin, 4);
+  self moveTo(s_goal_1.origin, 4);
   self waittill("movedone");
 }
 
@@ -1128,9 +1128,9 @@ drone_flyaway_logic() {
   self endon("death");
   level endon("drone_attacks_player");
   level endon("drone_detected_player");
-  s_goal1 = getstruct("drone_flyaway1", "targetname");
-  s_goal2 = getstruct("drone_flyaway2", "targetname");
-  s_goal3 = getstruct("drone_flyaway3", "targetname");
+  s_goal1 = getStruct("drone_flyaway1", "targetname");
+  s_goal2 = getStruct("drone_flyaway2", "targetname");
+  s_goal3 = getStruct("drone_flyaway3", "targetname");
   e_lookat = spawn("script_origin", s_goal1.origin);
   self setlookatent(e_lookat);
   self clear_turret_target(0);
@@ -1221,7 +1221,7 @@ drone_spotlight_detection() {
     v_spotlight_origin = self gettagorigin("tag_flash");
     v_spotlight_angles = self gettagangles("tag_flash");
     v_player_trace_origin = level.player get_eye();
-    v_to_player = vectornormalize(v_player_trace_origin - v_spotlight_origin);
+    v_to_player = vectorNormalize(v_player_trace_origin - v_spotlight_origin);
     v_forward = anglesToForward(v_spotlight_angles);
     n_dot = vectordot(v_forward, v_to_player);
     str_difficulty = getdifficulty();
@@ -1262,7 +1262,7 @@ drone_lens_flare() {
     v_spotlight_origin = self gettagorigin("tag_flash");
     v_spotlight_angles = self gettagangles("tag_flash");
     v_player_trace_origin = level.player get_eye();
-    v_to_player = vectornormalize(v_player_trace_origin - v_spotlight_origin);
+    v_to_player = vectorNormalize(v_player_trace_origin - v_spotlight_origin);
     v_forward = anglesToForward(v_spotlight_angles);
     n_dot = vectordot(v_forward, v_to_player);
     n_sight_trace = level.player sightconetrace(v_spotlight_origin, self, v_forward, 10);
@@ -1483,7 +1483,7 @@ harper_beeline_to_bank() {
 }
 
 monitor_drone_attack() {
-  while(isalive(getent("drone_helicopter", "targetname")) || isalive(getent("drone_searcher", "targetname")) || isalive(getent("drone_bank", "targetname"))) {
+  while(isalive(getEnt("drone_helicopter", "targetname")) || isalive(getEnt("drone_searcher", "targetname")) || isalive(getEnt("drone_bank", "targetname"))) {
     wait 1;
   }
 
@@ -1495,7 +1495,7 @@ harper_shoot_at_drone() {
   level endon("drones_gone");
 
   while(true) {
-    vh_drone1 = getent("drone_helicopter", "targetname");
+    vh_drone1 = getEnt("drone_helicopter", "targetname");
 
     if(isDefined(vh_drone1) && flag("drone_intro_attack")) {
       self thread shoot_at_target(vh_drone1, undefined, undefined, randomintrange(4, 6));
@@ -1505,7 +1505,7 @@ harper_shoot_at_drone() {
     } else
       self stop_shoot_at_target();
 
-    vh_drone2 = getent("drone_searcher", "targetname");
+    vh_drone2 = getEnt("drone_searcher", "targetname");
 
     if(isDefined(vh_drone2) && flag("drone_searcher_attack")) {
       self thread shoot_at_target(vh_drone2, undefined, undefined, randomintrange(4, 6));
@@ -1515,7 +1515,7 @@ harper_shoot_at_drone() {
     } else
       self stop_shoot_at_target();
 
-    vh_drone3 = getent("drone_bank", "targetname");
+    vh_drone3 = getEnt("drone_bank", "targetname");
 
     if(isDefined(vh_drone3) && flag("drone_bank_attack")) {
       self thread shoot_at_target(vh_drone3, undefined, undefined, randomintrange(4, 6));
@@ -1617,8 +1617,8 @@ sewer_exterior_ai_setup() {
 sewer_guard_spotlight_logic() {
   self endon("death");
   searchlight_turret_tag = "tag_flash";
-  s_right = getent("sewer_guard_spotlight_target", "targetname");
-  s_left = getstruct(s_right.target, "targetname");
+  s_right = getEnt("sewer_guard_spotlight_target", "targetname");
+  s_left = getStruct(s_right.target, "targetname");
   self play_fx("helicopter_drone_spotlight_cheap", self gettagorigin(searchlight_turret_tag), self gettagangles(searchlight_turret_tag), "sewer_light_off", 1, searchlight_turret_tag);
   self maps\_turret::set_turret_target(s_right, (0, 0, 0), 0);
   s_right thread sewer_searchlight_target_movement(s_left.origin);
@@ -1629,9 +1629,9 @@ sewer_searchlight_target_movement(v_pos) {
   v_org = self.origin;
 
   while(true) {
-    self moveto(v_pos, 8);
+    self moveTo(v_pos, 8);
     self waittill("movedone");
-    self moveto(v_org, 8);
+    self moveTo(v_org, 8);
     self waittill("movedone");
   }
 }
@@ -1648,7 +1648,7 @@ sewer_guard_logic() {
   self set_ignoreme(0);
   self set_ignoreall(0);
   self pakistan_move_mode("cqb");
-  self set_goalradius(1024);
+  self set_goalRadius(1024);
 }
 
 death_function_sewer_guard() {
@@ -1718,14 +1718,14 @@ walk_anims() {
 
 harper_at_ladder() {
   flag_wait("harper_at_ladder");
-  self thread aim_at_target(getent("sewer_aim_entity", "targetname"));
+  self thread aim_at_target(getEnt("sewer_aim_entity", "targetname"));
   wait 3;
   self lookatentity(level.player);
   wait 2;
   self lookatentity();
 
   while(true) {
-    self thread aim_at_target(getent("sewer_aim_entity", "targetname"));
+    self thread aim_at_target(getEnt("sewer_aim_entity", "targetname"));
     wait(randomfloatrange(3.0, 6.0));
     self lookatentity(level.player);
     wait(randomfloatrange(3.0, 6.0));
@@ -1736,8 +1736,8 @@ harper_at_ladder() {
 perk_intruder_setup() {
   t_perk_use = get_ent("perk_intruder_trigger", "targetname", 1);
   t_perk_use trigger_off();
-  t_perk_use setcursorhint("HINT_NOICON");
-  t_perk_use sethintstring(&"PAKISTAN_SHARED_PERK_INTRUDER_SOCT");
+  t_perk_use setCursorHint("HINT_NOICON");
+  t_perk_use setHintString(&"PAKISTAN_SHARED_PERK_INTRUDER_SOCT");
   level.player waittill_player_has_intruder_perk();
   t_perk_use trigger_on();
   trigger_wait("perk_intruder_logic_trigger");
@@ -1747,7 +1747,7 @@ perk_intruder_setup() {
   set_objective(level.obj_interact_intruder, undefined, "done", undefined, 0);
   bm_door_clip = get_ent("sewer_intruder_perk_door", "targetname", 1);
   m_door = get_ent("intruder_perk_door", "targetname", 1);
-  bm_door_clip linkto(m_door, "hinge");
+  bm_door_clip linkTo(m_door, "hinge");
   simple_spawn_single("intruder_guy1");
   simple_spawn_single("intruder_guy2");
   level thread intruder_rumble();
@@ -1766,7 +1766,7 @@ intruder_perk_guy_spawn_func() {
   self thread monitor_guard_death();
   self setgoalpos(self.origin);
   flag_wait("intruder_guards_alerted");
-  self stopanimscripted(1);
+  self stopanimScripted(1);
 }
 
 intruder_guard_shotat() {
@@ -1782,25 +1782,25 @@ monitor_guard_death() {
 
 corpse_alley_player_jump_rumble(m_player_body) {
   wait 1;
-  level.player playrumbleonentity("reload_clipout");
+  level.player playRumbleOnEntity("reload_clipout");
   earthquake(0.05, 1, level.player.origin, 1000, level.player);
   wait 1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.1, 1, level.player.origin, 1000, level.player);
   wait 1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.06, 1, level.player.origin, 1000, level.player);
   wait 1;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.07, 1, level.player.origin, 1000, level.player);
   wait 0.25;
-  level.player playrumbleonentity("reload_clipout");
+  level.player playRumbleOnEntity("reload_clipout");
   earthquake(0.05, 1, level.player.origin, 1000, level.player);
 }
 
 intruder_rumble() {
   level.player rumble_loop(2, 1, "reload_clipout");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.08, 1, level.player.origin, 1000, level.player);
 }
 

@@ -375,13 +375,13 @@ func_1273F(var_0) {
 
 trigger_friendly_respawn(var_0) {
   var_0 endon("death");
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = undefined;
   if(isDefined(var_1)) {
     var_2 = var_1.origin;
     var_1 delete();
   } else {
-    var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_2 = var_1.origin;
   }
 
@@ -438,18 +438,18 @@ func_1275F(var_0) {
 func_12794(var_0) {
   var_0 func_84C0(1);
   if(isDefined(var_0.target)) {
-    var_1 = getent(var_0.target, "targetname");
-    var_0 enablelinkto();
-    var_0 linkto(var_1);
+    var_1 = getEnt(var_0.target, "targetname");
+    var_0 enablelinkTo();
+    var_0 linkTo(var_1);
   }
 }
 
 func_12723(var_0) {
   var_0 func_84C0(1);
   if(isDefined(var_0.target)) {
-    var_1 = getent(var_0.target, "targetname");
-    var_0 enablelinkto();
-    var_0 linkto(var_1);
+    var_1 = getEnt(var_0.target, "targetname");
+    var_0 enablelinkTo();
+    var_0 linkTo(var_1);
   }
 }
 
@@ -728,7 +728,7 @@ func_12761(var_0, var_1) {
         continue;
       }
 
-      var_11 = vectornormalize(var_5 - var_9.origin);
+      var_11 = vectorNormalize(var_5 - var_9.origin);
       var_12 = var_9 getplayerangles();
       var_13 = anglesToForward(var_12);
       var_14 = vectordot(var_13, var_11);
@@ -930,7 +930,7 @@ func_12734(var_0) {
   foreach(var_4 in var_1) {
     var_5 = var_2[var_4.script_noteworthy];
     var_4 connectpaths();
-    var_4 rotateyaw(var_5, 1, 0, 0.5);
+    var_4 rotateYaw(var_5, 1, 0, 0.5);
   }
 }
 
@@ -985,7 +985,7 @@ func_7C30() {
   var_1 = strtok(self.script_linkto, " ");
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
-    var_4 = getent(var_3, "script_linkname");
+    var_4 = getEnt(var_3, "script_linkname");
     if(isDefined(var_4)) {
       var_0[var_0.size] = var_4;
     }
@@ -1329,8 +1329,8 @@ func_1275A(var_0) {
 
   var_0.var_12751 = level.var_A0E4;
   level.var_A0E4++;
-  var_0.var_C75B = scripts\engine\utility::getstruct(var_0.target, "targetname");
-  var_0.var_98F5 = scripts\engine\utility::getstruct(var_0.var_C75B.target, "targetname");
+  var_0.var_C75B = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_0.var_98F5 = scripts\engine\utility::getStruct(var_0.var_C75B.target, "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(!isDefined(level.var_D127) || var_1 != level.var_D127) {
@@ -1360,9 +1360,9 @@ func_1275B(var_0) {
     scripts\engine\utility::flag_init(var_1);
   }
 
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   if(!isDefined(var_2)) {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
     var_3 = 1;
   } else {
     var_3 = 0;
@@ -1407,7 +1407,7 @@ func_A391(var_0, var_1, var_2) {
   var_4 = 0;
   if(var_1) {
     var_5 = getpartname(self.model, 0);
-    var_3 linkto(self, var_5, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(self, var_5, (0, 0, 0), (0, 0, 0));
   } else {
     var_3.origin = self.origin;
   }
@@ -1420,10 +1420,10 @@ func_A391(var_0, var_1, var_2) {
       var_6++;
     }
 
-    var_7 = vectornormalize(self.origin - level.var_D127.origin);
+    var_7 = vectorNormalize(self.origin - level.var_D127.origin);
     var_8 = anglesToForward(level.var_D127.angles);
     var_9 = vectordot(var_7, var_8);
-    var_10 = vectornormalize(level.var_D127.func_2AC);
+    var_10 = vectorNormalize(level.var_D127.func_2AC);
     var_11 = vectordot(var_7, var_10);
     if(var_9 > 0.1 && var_11 > 0.1) {
       if(var_4) {
@@ -1457,7 +1457,7 @@ func_12759(var_0) {
     scripts\engine\utility::flag_init(var_2);
   }
 
-  var_3 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   for(;;) {
     var_0 waittill("trigger", var_4);
     if(!isDefined(level.var_D127) || var_4 != level.var_D127 || scripts\engine\utility::flag(var_1)) {
@@ -1643,7 +1643,7 @@ func_1273C(var_0) {
           }
         }
       } else if(isDefined(var_0.target)) {
-        var_6 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+        var_6 = scripts\engine\utility::getStruct(var_0.target, "targetname");
         var_5 = var_6.origin;
         if(isDefined(var_6.script_radius)) {
           if(distance2dsquared(var_4.origin, var_6.origin) <= squared(var_6.script_radius)) {
@@ -1659,9 +1659,9 @@ func_1273C(var_0) {
 
     var_4 dodamage(var_3, var_5);
     if(var_3 < 6) {
-      var_4 playrumbleonentity("damage_light");
+      var_4 playRumbleOnEntity("damage_light");
     } else {
-      var_4 playrumbleonentity("damage_heavy");
+      var_4 playRumbleOnEntity("damage_heavy");
     }
 
     var_0 scripts\sp\utility::script_delay();

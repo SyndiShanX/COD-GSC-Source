@@ -185,7 +185,7 @@ objectives_intro() {
   flag_wait("cliff_swing_6_player_done");
   set_objective(level.obj_salazar_crosby, undefined, "done");
   flag_wait("jet_stream_launch_obj");
-  set_objective(level.obj_intro_leap, getstruct("obj_squirrel_jump", "targetname").origin, "breadcrumb");
+  set_objective(level.obj_intro_leap, getStruct("obj_squirrel_jump", "targetname").origin, "breadcrumb");
   flag_wait("jet_stream_launch_obj_complete");
   set_objective(level.obj_intro_leap, undefined, "delete");
 }
@@ -196,84 +196,84 @@ objectives_ruins() {
   flag_wait("predator_intro_started");
   set_objective(level.obj_reach_lab, undefined, "remove");
   flag_wait("predator_intro_scene_done");
-  set_objective(level.obj_reach_lab, getent("obj_helipad", "targetname"));
+  set_objective(level.obj_reach_lab, getEnt("obj_helipad", "targetname"));
   flag_wait("player_reached_helipad");
-  set_objective(level.obj_reach_lab, getent("obj_temple", "targetname"));
+  set_objective(level.obj_reach_lab, getEnt("obj_temple", "targetname"));
   flag_wait("player_reached_temple_entrance");
   set_objective(level.obj_reach_lab, undefined, "remove");
   flag_wait("ruins_door_destroyed");
-  set_objective(level.obj_reach_lab, getent("obj_ruins_interior", "targetname"), "breadcrumb");
+  set_objective(level.obj_reach_lab, getEnt("obj_ruins_interior", "targetname"), "breadcrumb");
   flag_wait("obj_lab_entrance_regroup");
   set_objective(level.obj_reach_lab, undefined, "done");
 }
 
 objectives_lab() {
-  set_objective(level.obj_infiltrate_lab, getstruct("obj_infiltrate_lab"), "breadcrumb");
+  set_objective(level.obj_infiltrate_lab, getStruct("obj_infiltrate_lab"), "breadcrumb");
   flag_wait("player_at_lab_entrance");
   set_objective(level.obj_infiltrate_lab, undefined, "remove");
   flag_wait("lab_entrance_open");
-  set_objective(level.obj_infiltrate_lab, getstruct("obj_clean_room"), "breadcrumb");
+  set_objective(level.obj_infiltrate_lab, getStruct("obj_clean_room"), "breadcrumb");
   flag_wait("player_at_clean_room");
   set_objective(level.obj_infiltrate_lab, undefined, "remove");
   flag_wait("set_lift_objective");
-  set_objective(level.obj_infiltrate_lab, getstruct("obj_interior_elevator"), "breadcrumb");
+  set_objective(level.obj_infiltrate_lab, getStruct("obj_interior_elevator"), "breadcrumb");
   flag_wait("start_lift_move_up");
-  set_objective(level.obj_infiltrate_lab, getstruct("obj_interior_elevator"), "remove");
+  set_objective(level.obj_infiltrate_lab, getStruct("obj_interior_elevator"), "remove");
   flag_wait("elevator_is_ready");
   set_objective(level.obj_infiltrate_lab, undefined, "done");
-  set_objective(level.obj_infiltrate_lower_lab, getstruct("obj_elevator_panel"), "breadcrumb");
+  set_objective(level.obj_infiltrate_lower_lab, getStruct("obj_elevator_panel"), "breadcrumb");
   flag_wait("start_lift_move_down");
   set_objective(level.obj_infiltrate_lower_lab, undefined, "remove");
   flag_wait("set_ddm_objective");
-  set_objective(level.obj_infiltrate_lower_lab, getstruct("obj_ddm_regroup"), "breadcrumb");
+  set_objective(level.obj_infiltrate_lower_lab, getStruct("obj_ddm_regroup"), "breadcrumb");
   flag_wait("player_at_ddm");
   set_objective(level.obj_infiltrate_lower_lab, undefined, "remove");
   wait 0.1;
   set_objective(level.obj_infiltrate_lower_lab, undefined, "delete");
   flag_wait("set_obj_help_isaac");
-  set_objective(level.obj_open_container, getstruct("obj_help_isaac"), "breadcrumb");
+  set_objective(level.obj_open_container, getStruct("obj_help_isaac"), "breadcrumb");
   flag_wait("player_at_isaac");
-  set_objective(level.obj_open_container, getstruct("obj_help_isaac"), "remove");
+  set_objective(level.obj_open_container, getStruct("obj_help_isaac"), "remove");
   set_objective(level.obj_open_container, undefined, "delete");
   flag_wait("isaac_defend_start");
   set_objective(level.obj_lab_defend);
   flag_wait("lab_defend_done");
   set_objective(level.obj_lab_defend, undefined, "delete");
   flag_wait("set_celerium_door_obj");
-  set_objective(level.obj_open_vault, getstruct("obj_player_celerium_door"), "breadcrumb");
+  set_objective(level.obj_open_vault, getStruct("obj_player_celerium_door"), "breadcrumb");
   flag_wait("player_triggered_celerium_door");
-  set_objective(level.obj_open_vault, getstruct("obj_player_celerium_door"), "remove");
+  set_objective(level.obj_open_vault, getStruct("obj_player_celerium_door"), "remove");
   set_objective(level.obj_open_vault, undefined, "delete");
   flag_wait("set_celerium_chip_obj");
-  set_objective(level.obj_celerium_drive, getstruct("obj_celerium_chip"), "breadcrumb");
+  set_objective(level.obj_celerium_drive, getStruct("obj_celerium_chip"), "breadcrumb");
   wait 0.1;
   objective_setflag(level.obj_celerium_drive, "fadeoutonscreen", 1);
   flag_wait("remove_celerium_breadcrumb");
-  set_objective(level.obj_celerium_drive, getstruct("obj_celerium_chip"), "remove");
+  set_objective(level.obj_celerium_drive, getStruct("obj_celerium_chip"), "remove");
   flag_wait("celerium_event_done");
   set_objective(level.obj_celerium_drive, undefined, "done");
   flag_wait("isaacs_killers_cleared");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_1"), "breadcrumb");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_1"), "breadcrumb");
   flag_wait("spawn_escape_path_guys");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_1"), "remove");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_1"), "remove");
   flag_wait("escape_path_guys_cleared");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_2"), "breadcrumb");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_2"), "breadcrumb");
   flag_wait("player_asd_stairs_pos");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_2"), "remove");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_3"), "breadcrumb");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_2"), "remove");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_3"), "breadcrumb");
   flag_wait("open_top_stairs_doors");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_3"), "remove");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_3"), "remove");
   flag_wait("top_stairs_guys_cleared");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_4"), "breadcrumb");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_4"), "breadcrumb");
   flag_wait("set_briggs_breadcrumb");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_4"), "remove");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_5"), "breadcrumb");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_4"), "remove");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_5"), "breadcrumb");
   flag_wait("spawn_briggs_scene");
-  set_objective(level.obj_escape_lab, getstruct("obj_escape_5"), "remove");
+  set_objective(level.obj_escape_lab, getStruct("obj_escape_5"), "remove");
   flag_wait("briggs_in_position");
-  set_objective(level.obj_escape_lab, getstruct("s_brigg_celerium_obj"), "breadcrumb");
+  set_objective(level.obj_escape_lab, getStruct("s_brigg_celerium_obj"), "breadcrumb");
   flag_wait("celerium_obj_done");
-  set_objective(level.obj_escape_lab, getstruct("s_brigg_celerium_obj"), "remove");
+  set_objective(level.obj_escape_lab, getStruct("s_brigg_celerium_obj"), "remove");
 }
 
 level_init_flags() {
@@ -398,7 +398,7 @@ setup_camo_suit_ai() {
   self ent_flag_init("camo_suit_on");
   self ent_flag_set("camo_suit_on");
   self.camo_sound_ent = spawn("script_origin", self.origin);
-  self.camo_sound_ent linkto(self, "tag_origin");
+  self.camo_sound_ent linkTo(self, "tag_origin");
   self playSound("fly_camo_suit_npc_on", self.origin);
   self.camo_sound_ent playLoopSound("fly_camo_suit_npc_loop", 0.5);
   self.canflank = 1;
@@ -707,35 +707,35 @@ _rain_drops() {
 }
 
 outside_lift_init() {
-  m_lift = getent("lift_ruins", "targetname");
+  m_lift = getEnt("lift_ruins", "targetname");
   m_lift attach("p6_monsoon_ext_elevator_rain_box", "tag_origin");
   m_lift setmovingplatformenabled(1);
   m_lift.b_top = 1;
-  t_use = getent("lift_use_trigger", "targetname");
-  t_use enablelinkto();
-  t_use linkto(m_lift);
-  t_use sethintstring(&"MONSOON_LIFT_PROMPT");
-  t_use setcursorhint("HINT_NOICON");
-  m_lift.t_hurt = getent("outside_lift_hurt", "targetname");
+  t_use = getEnt("lift_use_trigger", "targetname");
+  t_use enablelinkTo();
+  t_use linkTo(m_lift);
+  t_use setHintString(&"MONSOON_LIFT_PROMPT");
+  t_use setCursorHint("HINT_NOICON");
+  m_lift.t_hurt = getEnt("outside_lift_hurt", "targetname");
   m_lift.t_hurt.v_start_org = m_lift.t_hurt.origin;
   m_lift.t_hurt trigger_off();
-  m_lift.t_hurt enablelinkto();
-  e_exterior_lift_red_light = getent("exterior_lift_red_light", "targetname");
-  e_exterior_lift_red_light linkto(m_lift);
-  e_exterior_lift_scanner = getent("exterior_lift_scanner", "targetname");
-  e_exterior_lift_scanner linkto(m_lift);
-  a_m_doors[0] = getent("lift_ruins_door_2_left", "targetname");
-  a_m_doors[1] = getent("lift_ruins_door_2_right", "targetname");
-  a_m_doors[2] = getent("lift_ruins_door_1_left", "targetname");
-  a_m_doors[3] = getent("lift_ruins_door_1_right", "targetname");
-  a_m_doors[4] = getent("lift_ruins_window_1_left", "targetname");
-  a_m_doors[5] = getent("lift_ruins_window_1_right", "targetname");
-  a_m_doors[6] = getent("lift_ruins_window_2_left", "targetname");
-  a_m_doors[7] = getent("lift_ruins_window_2_right", "targetname");
+  m_lift.t_hurt enablelinkTo();
+  e_exterior_lift_red_light = getEnt("exterior_lift_red_light", "targetname");
+  e_exterior_lift_red_light linkTo(m_lift);
+  e_exterior_lift_scanner = getEnt("exterior_lift_scanner", "targetname");
+  e_exterior_lift_scanner linkTo(m_lift);
+  a_m_doors[0] = getEnt("lift_ruins_door_2_left", "targetname");
+  a_m_doors[1] = getEnt("lift_ruins_door_2_right", "targetname");
+  a_m_doors[2] = getEnt("lift_ruins_door_1_left", "targetname");
+  a_m_doors[3] = getEnt("lift_ruins_door_1_right", "targetname");
+  a_m_doors[4] = getEnt("lift_ruins_window_1_left", "targetname");
+  a_m_doors[5] = getEnt("lift_ruins_window_1_right", "targetname");
+  a_m_doors[6] = getEnt("lift_ruins_window_2_left", "targetname");
+  a_m_doors[7] = getEnt("lift_ruins_window_2_right", "targetname");
 
   foreach(m_door in a_m_doors) {
     m_door setforcenocull();
-    m_door linkto(m_lift);
+    m_door linkTo(m_lift);
   }
 
   m_lift play_fx("lift_light", undefined, undefined, undefined, 1, "tag_origin");
@@ -743,12 +743,12 @@ outside_lift_init() {
   m_lift.a_bottom_nodes = getnodearray("lift_bottom", "targetname");
   array_func(m_lift.a_top_nodes, ::node_connect_to_path);
   m_lift.v_lift_top = m_lift.origin;
-  m_lift.v_lift_bottom = (m_lift.origin[0], m_lift.origin[1], getstruct("lift_end", "targetname").origin[2]);
+  m_lift.v_lift_bottom = (m_lift.origin[0], m_lift.origin[1], getStruct("lift_end", "targetname").origin[2]);
 
   while(!flag("seal_ruins")) {
-    t_use sethintstring(&"MONSOON_LIFT_PROMPT");
+    t_use setHintString(&"MONSOON_LIFT_PROMPT");
     t_use waittill("trigger");
-    t_use sethintstring("");
+    t_use setHintString("");
 
     if(flag("seal_ruins")) {
       continue;
@@ -775,12 +775,12 @@ outside_lift_init() {
 }
 
 outside_lift_move_down() {
-  m_lift = getent("lift_ruins", "targetname");
+  m_lift = getEnt("lift_ruins", "targetname");
   m_lift.t_hurt trigger_on();
-  m_lift.t_hurt linkto(m_lift);
+  m_lift.t_hurt linkTo(m_lift);
   array_func(m_lift.a_top_nodes, ::node_disconnect_from_path);
-  m_door_north_l = getent("lift_ruins_door_2_left", "targetname");
-  m_door_north_r = getent("lift_ruins_door_2_right", "targetname");
+  m_door_north_l = getEnt("lift_ruins_door_2_left", "targetname");
+  m_door_north_r = getEnt("lift_ruins_door_2_right", "targetname");
   m_door_north_l unlink();
   m_door_north_r unlink();
   m_door_north_l movey(-60, 2, 0.5);
@@ -788,16 +788,16 @@ outside_lift_move_down() {
   m_door_north_l playSound("evt_lift_close");
   m_door_north_r playSound("evt_lift_close");
   m_door_north_r waittill("movedone");
-  m_door_north_l linkto(m_lift);
-  m_door_north_r linkto(m_lift);
-  m_lift moveto(m_lift.v_lift_bottom, 6, 1.2, 1.2);
+  m_door_north_l linkTo(m_lift);
+  m_door_north_r linkTo(m_lift);
+  m_lift moveTo(m_lift.v_lift_bottom, 6, 1.2, 1.2);
   m_lift playSound("evt_lift_start_3d");
   m_lift playLoopSound("evt_lift_loop_3d", 1);
   m_lift waittill("movedone");
   m_lift stoploopsound(1);
   m_lift playSound("evt_lift_stop_3d");
-  m_door_south_l = getent("lift_ruins_door_1_left", "targetname");
-  m_door_south_r = getent("lift_ruins_door_1_right", "targetname");
+  m_door_south_l = getEnt("lift_ruins_door_1_left", "targetname");
+  m_door_south_r = getEnt("lift_ruins_door_1_right", "targetname");
   m_door_south_l unlink();
   m_door_south_r unlink();
   m_door_south_l movey(60, 2, 0.5);
@@ -805,8 +805,8 @@ outside_lift_move_down() {
   m_door_north_l playSound("evt_lift_open");
   m_door_north_r playSound("evt_lift_open");
   m_door_south_r waittill("movedone");
-  m_door_south_l linkto(m_lift);
-  m_door_south_r linkto(m_lift);
+  m_door_south_l linkTo(m_lift);
+  m_door_south_r linkTo(m_lift);
   array_func(m_lift.a_bottom_nodes, ::node_connect_to_path);
   m_lift.b_top = 0;
   m_lift.t_hurt unlink();
@@ -815,10 +815,10 @@ outside_lift_move_down() {
 }
 
 outside_lift_move_up() {
-  m_lift = getent("lift_ruins", "targetname");
+  m_lift = getEnt("lift_ruins", "targetname");
   array_func(m_lift.a_bottom_nodes, ::node_disconnect_from_path);
-  m_door_south_l = getent("lift_ruins_door_1_left", "targetname");
-  m_door_south_r = getent("lift_ruins_door_1_right", "targetname");
+  m_door_south_l = getEnt("lift_ruins_door_1_left", "targetname");
+  m_door_south_r = getEnt("lift_ruins_door_1_right", "targetname");
   m_door_south_l unlink();
   m_door_south_r unlink();
   m_door_south_l movey(-60, 2, 0.5);
@@ -826,16 +826,16 @@ outside_lift_move_up() {
   m_door_south_l playSound("evt_lift_close");
   m_door_south_r playSound("evt_lift_close");
   m_door_south_r waittill("movedone");
-  m_door_south_l linkto(m_lift);
-  m_door_south_r linkto(m_lift);
-  m_lift moveto(m_lift.v_lift_top, 6, 1.2, 1.2);
+  m_door_south_l linkTo(m_lift);
+  m_door_south_r linkTo(m_lift);
+  m_lift moveTo(m_lift.v_lift_top, 6, 1.2, 1.2);
   m_lift playSound("evt_lift_start_3d");
   m_lift playLoopSound("evt_lift_loop_3d", 1);
   m_lift waittill("movedone");
   m_lift stoploopsound(1);
   m_lift playSound("evt_lift_stop_3d");
-  m_door_north_l = getent("lift_ruins_door_2_left", "targetname");
-  m_door_north_r = getent("lift_ruins_door_2_right", "targetname");
+  m_door_north_l = getEnt("lift_ruins_door_2_left", "targetname");
+  m_door_north_r = getEnt("lift_ruins_door_2_right", "targetname");
   m_door_north_l unlink();
   m_door_north_r unlink();
   m_door_north_l movey(60, 2, 0.5);
@@ -843,14 +843,14 @@ outside_lift_move_up() {
   m_door_north_l playSound("evt_lift_open");
   m_door_north_r playSound("evt_lift_open");
   m_door_north_r waittill("movedone");
-  m_door_north_l linkto(m_lift);
-  m_door_north_r linkto(m_lift);
+  m_door_north_l linkTo(m_lift);
+  m_door_north_r linkTo(m_lift);
   array_func(m_lift.a_top_nodes, ::node_connect_to_path);
   m_lift.b_top = 1;
 }
 
 use_trigger_on_group_clear(str_group_name, str_trigger_name) {
-  t_color = getent(str_trigger_name, "targetname");
+  t_color = getEnt(str_trigger_name, "targetname");
 
   if(isDefined(t_color)) {
     t_color thread _use_trigger_on_group_clear_think(str_group_name);
@@ -869,7 +869,7 @@ use_trigger_on_group_count(str_group_name, str_trigger_name, n_count, b_weaken) 
     b_weaken = 0;
   }
 
-  t_color = getent(str_trigger_name, "targetname");
+  t_color = getEnt(str_trigger_name, "targetname");
 
   if(isDefined(t_color)) {
     t_color thread _use_trigger_on_group_count_think(str_group_name, n_count, b_weaken);
@@ -891,9 +891,9 @@ _use_trigger_on_group_count_think(str_group_name, n_count, b_weaken) {
 bruteforce_perk_asd() {
   flag_wait("lift_at_bottom");
   run_scene_first_frame("bruteforce_perk_asd_door");
-  t_use = getent("trig_asd_player", "targetname");
-  t_use sethintstring(&"MONSOON_PLAYER_ASD_HINT");
-  t_use setcursorhint("HINT_NOICON");
+  t_use = getEnt("trig_asd_player", "targetname");
+  t_use setHintString(&"MONSOON_PLAYER_ASD_HINT");
+  t_use setCursorHint("HINT_NOICON");
   t_use trigger_off();
   level.player waittill_player_has_brute_force_perk();
   t_use trigger_on();
@@ -933,7 +933,7 @@ asd_player_think() {
   self.ignoreall = 1;
   flag_wait("open_asd_door");
   self thread monitor_player_asd_death();
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   flag_wait("player_asd_rollout");
   self maps\_metal_storm::metalstorm_on();
   self thread asd_god_mode_off();
@@ -941,22 +941,22 @@ asd_player_think() {
   self thread player_asd_rumble();
   self.ignoreme = 0;
   self.ignoreall = 0;
-  s_asd_player_rollout_spot = getstruct("asd_player_rollout_spot", "targetname");
+  s_asd_player_rollout_spot = getStruct("asd_player_rollout_spot", "targetname");
   self setvehgoalpos(s_asd_player_rollout_spot.origin, 1, 2, 1);
   self waittill_any("goal", "near_goal");
   self maps\_vehicle::defend(self.origin, 128);
   flag_wait("isaac_defend_start");
-  s_asd_player_defend_spot = getstruct("asd_player_defend_spot", "targetname");
+  s_asd_player_defend_spot = getStruct("asd_player_defend_spot", "targetname");
   self setvehgoalpos(s_asd_player_defend_spot.origin, 1, 2, 1);
   self waittill_any("goal", "near_goal");
   self maps\_vehicle::defend(self.origin, 250);
   flag_wait("heroes_fallback");
   wait 1.5;
-  s_player_asd_fallback_pos = getstruct("player_asd_fallback_pos", "targetname");
+  s_player_asd_fallback_pos = getStruct("player_asd_fallback_pos", "targetname");
   self setvehgoalpos(s_player_asd_fallback_pos.origin, 1, 2, 1);
   flag_wait("isaac_is_shot");
   self veh_magic_bullet_shield(1);
-  s_player_asd_emp_pos = getstruct("player_asd_emp_pos", "targetname");
+  s_player_asd_emp_pos = getStruct("player_asd_emp_pos", "targetname");
   self.origin = s_player_asd_emp_pos.origin;
   self.angles = s_player_asd_emp_pos.angles;
   self.ignoreall = 1;
@@ -986,7 +986,7 @@ player_door_rumble() {
     n_distance = distance(self.origin, level.player.origin);
 
     if(n_distance < n_rumble_distance) {
-      level.player playrumbleonentity("tank_rumble");
+      level.player playRumbleOnEntity("tank_rumble");
     }
 
     wait 0.05;
@@ -1000,7 +1000,7 @@ player_asd_rumble() {
     n_distance = distance(self.origin, level.player.origin);
 
     if(n_distance < 200) {
-      level.player playrumbleonentity("tank_rumble");
+      level.player playRumbleOnEntity("tank_rumble");
     }
 
     wait 0.05;
@@ -1008,15 +1008,15 @@ player_asd_rumble() {
 }
 
 monsoon_light_rumble(guy) {
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 monsoon_screen_tap_rumble(guy) {
-  level.player playrumbleonentity("reload_clipout");
+  level.player playRumbleOnEntity("reload_clipout");
 }
 
 monsoon_heavy_rumble(guy) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 waittill_input(str_hint, str_buttonpress, str_direction) {
@@ -1147,7 +1147,7 @@ sway_init() {
 
   foreach(struct in a_structs) {
     e_origin = spawn("script_origin", struct.origin);
-    e_origin.m_model = getent(struct.target, "targetname");
+    e_origin.m_model = getEnt(struct.target, "targetname");
     e_origin.m_model _sway_attach_vines();
 
     switch (e_origin.m_model.model) {
@@ -1192,9 +1192,9 @@ _sway_tree_think() {
 _sway_think(str_type) {
   assert(isDefined(str_type), "Sway origin has no script_noteworthy set.");
   v_wind_dir = vectortoangles(getdvarvector(#"wind_global_vector"));
-  self rotateto(v_wind_dir, 0.05);
+  self rotateTo(v_wind_dir, 0.05);
   self waittill("rotatedone");
-  self.m_model linkto(self);
+  self.m_model linkTo(self);
 
   while(!flag("seal_ruins")) {
     switch (str_type) {
@@ -1234,11 +1234,11 @@ _sway_attach_vines() {
     return;
   } else if(self.model == "t5_foliage_tree_aquilaria01v2_small_no_vines") {
     self.vine_model = spawn_anim_model("aquilaria", self.origin, self.angles);
-    self.vine_model linkto(self);
+    self.vine_model linkTo(self);
     self.vine_model thread anim_loop(self.vine_model, "vines");
   } else if(self.model == "p6_strangler_fig_tree_no_vines_sway") {
     self.vine_model = spawn_anim_model("strangler", self.origin, self.angles);
-    self.vine_model linkto(self);
+    self.vine_model linkTo(self);
     self.vine_model thread anim_loop(self.vine_model, "vines");
   }
 }
@@ -1250,7 +1250,7 @@ toggle_titus_weapon(ai_actor) {
   } else {
     str_model = getweaponmodel("exptitus6_sp");
     ai_actor.titus = spawn_model(str_model, ai_actor gettagorigin("tag_weapon_left"), ai_actor gettagangles("tag_weapon_left"));
-    ai_actor.titus linkto(ai_actor, "tag_weapon_left");
+    ai_actor.titus linkTo(ai_actor, "tag_weapon_left");
   }
 }
 

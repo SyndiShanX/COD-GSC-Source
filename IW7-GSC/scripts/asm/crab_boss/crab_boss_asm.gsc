@@ -806,9 +806,9 @@ applyallmotiontowards(var_0, var_1, var_2, var_3) {
 
     var_8 = getmovedelta(var_2, var_6, var_7);
     var_9 = length2d(var_8) * var_3;
-    var_10 = vectornormalize(var_1 - self.origin);
+    var_10 = vectorNormalize(var_1 - self.origin);
     var_11 = self.origin + var_10 * var_9;
-    self setorigin(var_11, 0);
+    self setOrigin(var_11, 0);
     wait(0.05);
     var_4 = var_4 + 0.05;
   }

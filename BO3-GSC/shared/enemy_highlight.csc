@@ -100,7 +100,7 @@ function enemy_highlight_display_frame(localclientnum, materialname, size, fovpe
         }
         assert(isDefined(entpos));
         assert(isDefined(eye));
-        deltadir = vectornormalize(entpos - eye);
+        deltadir = vectorNormalize(entpos - eye);
         dot = vectordot(deltadir, viewdir);
         if(dot < dotlimit) {
           showit = 0;

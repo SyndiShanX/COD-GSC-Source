@@ -155,7 +155,7 @@ use_crafting_station(var_0, var_1) {
 
     var_0.souvenir_toy movez(-35, 0.2);
     var_0.souvenir_toy waittill("movedone");
-    var_0.souvenir_toy moveto(var_0.egg_land_spot.origin, 0.2);
+    var_0.souvenir_toy moveTo(var_0.egg_land_spot.origin, 0.2);
     level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_use_souvenircoin");
     scripts\cp\zombies\zombie_analytics::log_souvenircoindeposited(level.wave_num, level.souvenircointype);
     craft_souvenir(var_0, var_1);
@@ -363,12 +363,12 @@ crafting_item_timeout(var_0) {
   var_4 = 0;
   while(gettime() < var_2) {
     if(var_4 == 0) {
-      self rotateyaw(360, 2);
+      self rotateYaw(360, 2);
       self movez(5, 2);
     }
 
     if(var_4 == 2) {
-      self rotateyaw(360, 2);
+      self rotateYaw(360, 2);
       self movez(-5, 2);
     }
 

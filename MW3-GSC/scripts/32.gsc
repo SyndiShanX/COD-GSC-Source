@@ -329,7 +329,7 @@ gunfireloopfxvecthread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   var_14 = var_3;
   var_15 = var_4 - var_3;
-  var_2 = vectornormalize(var_2 - var_1);
+  var_2 = vectorNormalize(var_2 - var_1);
   var_16 = spawnfx(level._effect[var_0], var_1, var_2);
 
   if(!level.createfx_enabled) {
@@ -371,7 +371,7 @@ setup_fx() {
   var_0 = undefined;
 
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
 
     if(isDefined(var_1)) {
       var_0 = var_1.origin;

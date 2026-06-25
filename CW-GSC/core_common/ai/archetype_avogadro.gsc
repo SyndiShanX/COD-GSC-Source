@@ -155,7 +155,7 @@ function function_905d3c1a(entity) {
 
   delta = getmovedelta("ai_t9_zm_avogadro_arrival", 0, 1);
   new_origin = (entity.origin[0], entity.origin[1], entity.origin[2] - delta[2]);
-  entity animscripted("avogadro_arrival_finished", new_origin, (0, entity.angles[1], 0), "ai_t9_zm_avogadro_arrival", "normal", "root", 1, 0);
+  entity animScripted("avogadro_arrival_finished", new_origin, (0, entity.angles[1], 0), "ai_t9_zm_avogadro_arrival", "normal", "root", 1, 0);
 }
 
 function function_99ce086a(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {}
@@ -436,8 +436,8 @@ function private function_f8e8c129(entity) {
     if((dist_sq > 14400 || is_false(entity.can_phase)) && dist_sq < 2250000) {
       vec_facing = anglesToForward(self.angles);
       var_482d3bba = (vec_facing[0], vec_facing[1], 0);
-      var_45ed4f50 = vectornormalize((vec_facing[0], vec_facing[1], 0));
-      var_9743030a = vectornormalize((vec_enemy[0], vec_enemy[1], 0));
+      var_45ed4f50 = vectorNormalize((vec_facing[0], vec_facing[1], 0));
+      var_9743030a = vectorNormalize((vec_enemy[0], vec_enemy[1], 0));
       var_5e958f82 = vectordot(var_45ed4f50, var_9743030a);
 
       if(var_5e958f82 > 0.99) {
@@ -563,7 +563,7 @@ function private shoot_bolt_wait(entity) {
   recordsphere(target_pos, 10, (0, 1, 0), "<dev string:x38>");
 
   velocity = target_pos - source_pos;
-  velocity = vectornormalize(velocity);
+  velocity = vectorNormalize(velocity);
   velocity *= 800;
   bolt = entity magicmissile(getweapon(#"avogadro_bolt"), source_pos, velocity);
 
@@ -633,7 +633,7 @@ function function_5f86757d() {
     return waitresult;
   }
 
-  playsoundatposition(#"hash_525786cd7853a7a0", self.origin);
+  playSoundAtPosition(#"hash_525786cd7853a7a0", self.origin);
   self clientfield::set("" + #"avogadro_bolt_fx", 0);
   return waitresult;
 }
@@ -883,7 +883,7 @@ function function_c3ceb539(entity) {
         dist_sq = distancesquared(test_point, entity.origin);
 
         if(dist_sq > sqr(entity.var_42a18a37)) {
-          test_points[var_2fa931bb] = vectornormalize(test_point - entity.origin) * entity.var_42a18a37 + entity.origin;
+          test_points[var_2fa931bb] = vectorNormalize(test_point - entity.origin) * entity.var_42a18a37 + entity.origin;
         }
 
         var_2fa931bb++;
@@ -923,7 +923,7 @@ function function_c3ceb539(entity) {
 
     if(isDefined(player_angles) && isDefined(bestpoint)) {
       var_891a94cf = anglesToForward(player_angles);
-      var_e4529f5f = acos(vectordot(var_891a94cf, vectornormalize(bestpoint - entity.favoriteenemy.origin)));
+      var_e4529f5f = acos(vectordot(var_891a94cf, vectorNormalize(bestpoint - entity.favoriteenemy.origin)));
       distsqrd = distancesquared(bestpoint, entity.favoriteenemy.origin);
       dist = sqrt(distsqrd);
     }
@@ -1305,7 +1305,7 @@ function function_598bf886(entity) {
   target = get_target_ent(entity);
 
   if(nextstate != entity.var_e8a7f45d.state) {
-    dirtoenemy = vectornormalize(target.origin - entity.origin);
+    dirtoenemy = vectorNormalize(target.origin - entity.origin);
     angles = vectortoangles(dirtoenemy);
     angles = (0, angles[1], 0);
 

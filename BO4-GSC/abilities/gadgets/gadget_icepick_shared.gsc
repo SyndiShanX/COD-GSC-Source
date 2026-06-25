@@ -151,7 +151,7 @@ function_a5b83ede(hacker, var_11a83c3a) {
   }
 
   if(var_696beab8) {
-    foreach(player in getplayers(var_11a83c3a.team)) {
+    foreach(player in getPlayers(var_11a83c3a.team)) {
       thread function_27c9bfc8(player, 1);
     }
   }
@@ -359,7 +359,7 @@ function_13f4415c() {
 
 function_73d5db3b(player) {
   player.var_be9a0b4b = [];
-  player.var_be9a0b4b[0] = getplayers();
+  player.var_be9a0b4b[0] = getPlayers();
   function_d65b8dbe(player.var_be9a0b4b[0], &function_8d50c205);
   player.var_be9a0b4b[1] = [];
   player.var_be9a0b4b[2] = [];
@@ -685,7 +685,7 @@ function_ea2dfad6(hacker) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       continue;
     }

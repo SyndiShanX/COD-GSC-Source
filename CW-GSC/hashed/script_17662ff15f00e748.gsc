@@ -71,7 +71,7 @@ function function_54989f74(trap, var_7c56394 = 0) {
     hazard.targetname = "hazard";
     hazard.var_fd5301f9 = "dragonhead";
     hazard.angles = trap.angles;
-    hazard enablelinkto();
+    hazard enablelinkTo();
   }
 
   trap.script_model = hazard;
@@ -267,7 +267,7 @@ function function_d1b295d7(trap) {
 
     if(isPlayer(guy)) {
       guy dodamage(isDefined(trap.damage) ? trap.damage : guy.health + 100, guy.origin);
-      guy playrumbleonentity("mechz_footstep_medium");
+      guy playRumbleOnEntity("mechz_footstep_medium");
       guy namespace_83eb6304::function_3ecfde67("burn_zombie");
 
       if(isDefined(trap.var_2e485cc) && guy.birthtime != gettime()) {

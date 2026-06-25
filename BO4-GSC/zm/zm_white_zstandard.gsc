@@ -262,11 +262,11 @@ function_c87db3f7(str_next_defend) {
 }
 
 function_c7e2bbe2(n_max) {
-  return getplayers().size;
+  return getPlayers().size;
 }
 
 function_aee9d1fb(n_max) {
-  return getplayers().size;
+  return getPlayers().size;
 }
 
 on_round_begin() {
@@ -493,7 +493,7 @@ function_ac904e5e() {
 }
 
 function_f436d901() {
-  var_5180bf9a = getent("use_elec_switch", "targetname");
+  var_5180bf9a = getEnt("use_elec_switch", "targetname");
   var_5180bf9a hide();
 }
 

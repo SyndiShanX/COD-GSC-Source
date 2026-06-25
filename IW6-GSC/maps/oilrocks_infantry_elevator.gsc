@@ -4,7 +4,7 @@
 ***********************************************/
 
 start() {
-  common_scripts\utility::getstruct("infantry_elevator_player_start", "targetname").origin = (42758.8, 8655.44, 324);
+  common_scripts\utility::getStruct("infantry_elevator_player_start", "targetname").origin = (42758.8, 8655.44, 324);
   maps\oilrocks_apache_code::spawn_apache_allies("apache_elevator_ally_0");
   maps\oilrocks_infantry_code::infantry_teleport_start("infantry_elevator_player_start");
 }
@@ -19,7 +19,7 @@ hacky_sound_wait(var_0) {
 }
 
 main() {
-  var_0 = getent("elevator_dialogue", "targetname");
+  var_0 = getEnt("elevator_dialogue", "targetname");
   var_0 waittill("trigger");
   maps\oilrocks_apache_code::send_apaches_to_hangout("hangout_volume_rooftop");
   var_1 = 1;
@@ -42,7 +42,7 @@ main() {
   maps\_utility::trigger_wait_targetname("trigger_elevator");
   maps\_utility::delaythread(0.4, maps\_utility::autosave_now);
   elevator_zoom();
-  var_6 = getent("elevator_up_the_shaft", "targetname");
+  var_6 = getEnt("elevator_up_the_shaft", "targetname");
   var_7 = maps\_utility::getstructarray_delete("elevator_positions", "targetname");
   var_8 = measure_shaft("shaft_measure");
   thread cleanup_infantry_area();

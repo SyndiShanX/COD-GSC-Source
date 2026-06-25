@@ -77,10 +77,10 @@ function function_a999a42a() {
 
 function function_2c776a2a(e_player) {
   if(isDefined(self.stub.b_on) && self.stub.b_on) {
-    self sethintstring("");
+    self setHintString("");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -131,7 +131,7 @@ function function_66d50897(var_ffc8395e) {
         var_5cd02106 = soundgetplaybacktime(str_vo);
         if(var_5cd02106 > 0) {
           var_269117b2 = var_5cd02106 / 1000;
-          playsoundatposition(str_vo, var_c46d7830);
+          playSoundAtPosition(str_vo, var_c46d7830);
           wait(var_269117b2);
         }
         arrayremovevalue(level.var_66b7ed7e, self);
@@ -191,7 +191,7 @@ function function_418d5e87(n_val) {
   if(isDefined(s_dest)) {
     player = level.activeplayers[0];
     var_5d8a4d6d = util::spawn_model("", player.origin, player.angles);
-    player linkto(var_5d8a4d6d);
+    player linkTo(var_5d8a4d6d);
     var_5d8a4d6d.origin = s_dest.origin;
     wait(0.5);
     player unlink();

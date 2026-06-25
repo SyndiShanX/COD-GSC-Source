@@ -299,7 +299,7 @@ _id_5AE2(var_0, var_1, var_2) {
       if(isDefined(level._id_20EC) && scripts\engine\utility::array_contains(level._id_20EC, var_7)) {
         continue;
       }
-      var_8 = vectornormalize(var_7.origin - var_0.origin);
+      var_8 = vectorNormalize(var_7.origin - var_0.origin);
       var_9 = vectordot(var_5, var_8);
 
       if(var_9 <= var_2 && !_func_01A5(var_7.origin)) {

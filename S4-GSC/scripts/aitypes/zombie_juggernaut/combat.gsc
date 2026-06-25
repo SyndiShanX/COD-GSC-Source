@@ -137,7 +137,7 @@ detachbackpack(var_0) {
   var_4 solid();
   var_4.angles = var_3;
   var_5 = 2000;
-  var_6 = vectornormalize(var_2 - var_1) * var_5;
+  var_6 = vectorNormalize(var_2 - var_1) * var_5;
   var_6 = var_6;
   var_4 physicslaunchserver(var_2, var_6);
   explodebackpack(var_2, 1, var_0);
@@ -189,7 +189,7 @@ causebackpackdamage(var_0, var_1) {
 launchbackpack(var_0, var_1, var_2) {
   wait(var_0);
   var_3 = 2000;
-  var_4 = vectornormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(0, 1))) * var_3;
+  var_4 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(0, 1))) * var_3;
 
   if(isDefined(var_1)) {
     var_5 = var_1 _meth_8169();
@@ -452,7 +452,7 @@ _id_884A(var_0) {
   }
 
   var_1 = anglesToForward(self.angles);
-  var_2 = vectornormalize(self._id_0192.origin - self.origin);
+  var_2 = vectorNormalize(self._id_0192.origin - self.origin);
   var_3 = vectordot(var_1, var_2);
 
   if(var_3 < var_0) {
@@ -573,7 +573,7 @@ _id_341C(var_0) {
 setupshootsweep() {
   self endon("death");
   var_0 = self._id_0192 _meth_8176();
-  var_1 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(var_0 - self.origin);
   var_2 = anglestoup(self._id_0192.angles);
   var_3 = _func_025B(var_2, var_1);
   var_4 = 64;
@@ -588,9 +588,9 @@ setupshootsweep() {
   if(isDefined(self.shoot_sweep_ent)) {
     self.shoot_sweep_ent.origin = var_5;
     wait 0.25;
-    self.shoot_sweep_ent moveto(var_6, 1.0, 0.05, 0.05);
+    self.shoot_sweep_ent moveTo(var_6, 1.0, 0.05, 0.05);
     wait 1.0;
-    self.shoot_sweep_ent moveto(var_5, 1.0, 0.05, 0.05);
+    self.shoot_sweep_ent moveTo(var_5, 1.0, 0.05, 0.05);
   }
 }
 
@@ -600,7 +600,7 @@ hitzombies() {
   var_2 = 0;
 
   foreach(var_4 in var_1) {
-    var_5 = vectornormalize(var_4.origin - self.origin);
+    var_5 = vectorNormalize(var_4.origin - self.origin);
 
     if(vectordot(var_0, var_5) > 0.98) {
       if(var_2 < 2) {
@@ -956,7 +956,7 @@ onjuggernautdamagefinished(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
   if(!var_13 && !var_14) {
     if(var_15) {
       if(isvector(var_7)) {
-        var_16 = vectornormalize(anglesToForward(self.angles));
+        var_16 = vectorNormalize(anglesToForward(self.angles));
         var_17 = vectordot(var_7, var_16);
 
         if(var_17 > 0.6) {

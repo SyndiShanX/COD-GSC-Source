@@ -164,7 +164,7 @@ _id_8EC7(var_0, var_1) {
   var_0.modelname = "veh8_mil_lnd_umike_infil_physics_mp";
   var_0._id_0481 = "large_transport";
   var_0._id_04DE = "umike_physics_mp";
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;

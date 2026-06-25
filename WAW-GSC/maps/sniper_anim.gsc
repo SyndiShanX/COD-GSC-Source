@@ -736,7 +736,7 @@ officers_sniper_shoot_atyou() {
     shotspot = (get_players()[0] getEye()) + (randomint(15), randomint(15), randomint(15));
   }
   vec = firespot - shotspot;
-  nvec = vectornormalize(vec);
+  nvec = vectorNormalize(vec);
   playFX(level._effect["fake_rifleflash"], firespot);
   trace = bulletTrace(firespot + (nvec * 5), shotspot, false, undefined);
   bullettracer(firespot + (nvec * 5), shotspot, true);
@@ -791,7 +791,7 @@ alley_flamer_fire_control(guy) {
 }
 
 crow_rumble_pecks(guy) {
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 shoo_crow(guy) {
@@ -804,9 +804,9 @@ horchhide_cutoff(guy) {
     level.horchhide_talk_count = 0;
   }
   level.horchhide_talk_count++;
-  trig = getent("wave_player_fromhorch", "targetname");
+  trig = getEnt("wave_player_fromhorch", "targetname");
   if(!level.player istouching(trig) && level.horchhide_talk_count > 2) {
-    level.hero stopanimscripted();
+    level.hero stopanimScripted();
     level notify("horchhide_done");
   }
 }
@@ -820,7 +820,7 @@ mark_my_words(guy) {
 #using_animtree("sniper_crows");
 do_collectible_corpse() {
   wait_for_first_player();
-  spot = getstruct("collectible_body_align", "targetname");
+  spot = getStruct("collectible_body_align", "targetname");
   corpse = spawn("script_model", spot.origin);
   corpse character\char_rus_r_ppsh_forsniper::main();
   corpse UseAnimTree(#animtree);

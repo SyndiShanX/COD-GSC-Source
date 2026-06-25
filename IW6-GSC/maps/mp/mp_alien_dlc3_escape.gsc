@@ -4,7 +4,7 @@
 ********************************************/
 
 hide_escape_geo(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 connectpaths();
   var_1 notsolid();
   var_1 hide();
@@ -22,7 +22,7 @@ hide_escape_geo(var_0) {
       break;
   }
 
-  var_3 = getent(var_2, "targetname");
+  var_3 = getEnt(var_2, "targetname");
 
   if(isDefined(var_3)) {
     var_3 setscriptablepartstate(0, "ff_down");
@@ -30,8 +30,8 @@ hide_escape_geo(var_0) {
 }
 
 show_escape_geo(var_0) {
-  var_1 = getent(var_0, "targetname");
-  var_1 disconnectpaths();
+  var_1 = getEnt(var_0, "targetname");
+  var_1 disconnectPaths();
   var_1 solid();
   var_1 show();
   var_2 = undefined;
@@ -48,7 +48,7 @@ show_escape_geo(var_0) {
       break;
   }
 
-  var_3 = getent(var_2, "targetname");
+  var_3 = getEnt(var_2, "targetname");
 
   if(isDefined(var_3)) {
     var_3 setscriptablepartstate(0, "open");
@@ -131,7 +131,7 @@ escape_global_logic() {
   thread run_out_music();
   thread aud_end_logic();
   common_scripts\utility::flag_set("cortex_carryable");
-  level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
+  level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
   var_0 = gettime();
   setomnvar("ui_alien_nuke_timer", gettime() + 300000);
   level thread escape_timer();
@@ -150,7 +150,7 @@ escape_global_logic() {
   level.current_cortex_spot = undefined;
   common_scripts\utility::flag_set("cortex_carryable");
   level.cortex_use_trigger makeusable();
-  level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
+  level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
   maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 3, 0, "high");
   var_1 = playFX(level._effect["escape_area"], (2368, -7056, 1151.22));
   var_2 = wait_for_players_to_escape();
@@ -329,7 +329,7 @@ escape_blocker_logic(var_0, var_1, var_2) {
   iprintlnbold(&"MP_ALIEN_DESCENT_CORTEX_NEXT_AREA");
   common_scripts\utility::flag_set("cortex_carryable");
   level.cortex_use_trigger makeusable();
-  level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
+  level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
   maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 3, 0, "high");
   wait_for_player_to_place_cortex("escape_blocker_" + var_0 + "_cortex");
   common_scripts\utility::flag_clear("cortex_carryable");
@@ -339,13 +339,13 @@ escape_blocker_logic(var_0, var_1, var_2) {
   setomnvar("ui_alien_boss_icon", 5);
   setomnvar("ui_alien_boss_progression", 100);
   level.cortex_use_trigger.origin = level.cortex.origin + (0, 0, 30);
-  level.cortex_use_trigger sethintstring("");
+  level.cortex_use_trigger setHintString("");
   maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 1, 0, "high");
   level thread cortex_charge_monitor(var_0);
   level waittill("escape_forcefield_destroyed");
   wait 1;
   maps\mp\alien\_spawn_director::end_cycle();
-  getent(var_2, "targetname") delete();
+  getEnt(var_2, "targetname") delete();
   var_3 = undefined;
 
   switch (var_0) {
@@ -360,7 +360,7 @@ escape_blocker_logic(var_0, var_1, var_2) {
       break;
   }
 
-  var_4 = getent(var_3, "targetname");
+  var_4 = getEnt(var_3, "targetname");
   var_4 setscriptablepartstate(0, "ff_down");
   level thread maps\mp\mp_alien_dlc3_vignettes::descent_vo_escape_barrier_down(var_0);
   iprintlnbold(&"MP_ALIEN_DESCENT_CORTEX_FF_DOWN");
@@ -394,7 +394,7 @@ cortex_charge_monitor(var_0) {
       iprintln(&"MP_ALIEN_DESCENT_USE_THE_CORTEX");
       level thread maps\mp\mp_alien_dlc3_vignettes::descent_vo_escape_cortex_ready(var_0);
       level.cortex_use_trigger makeusable();
-      level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_CORTEX_USE");
+      level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_CORTEX_USE");
       maps\mp\alien\_outline_proto::enable_outline_for_players(level.cortex, level.players, 3, 0, "high");
       level.cortex_use_trigger maps\mp\alien\mp_alien_dlc3_ark::wait_until_player_use_cortex();
       playFX(level._effect["cortex_blast"], level.cortex_use_trigger.origin);
@@ -464,8 +464,8 @@ escape_falling_debris_fx_delete() {
 escape_falling_boulders_fx() {
   self endon("disconnect");
   level endon("game_ended");
-  var_0 = getent("fx_boulders_01", "targetname");
-  var_1 = getent("fx_boulders_02", "targetname");
+  var_0 = getEnt("fx_boulders_01", "targetname");
+  var_1 = getEnt("fx_boulders_02", "targetname");
   var_2 = ["default", "rock1", "rock2", "rock3", "rock4", "rock5", "rock6", "rock7"];
 
   for(;;) {
@@ -485,7 +485,7 @@ wait_for_player_to_place_cortex(var_0) {
     var_2 thread check_for_player_near_spot_with_cortex(var_0);
   }
 
-  var_4 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_0, "targetname");
   var_5 = "waypoint_alien_blocker";
   var_6 = 14;
   var_7 = 14;
@@ -547,7 +547,7 @@ do_trail_death() {
     var_5 = 0.05;
   }
 
-  self moveto(var_3.origin, var_5);
+  self moveTo(var_3.origin, var_5);
   self waittill("movedone");
 
   if(var_4) {
@@ -561,7 +561,7 @@ do_trail_death() {
     var_7 = common_scripts\utility::random(var_6);
     var_1 = distance(var_3.origin, var_7.origin);
     var_5 = var_1 / var_2;
-    self moveto(var_7.origin, var_5);
+    self moveTo(var_7.origin, var_5);
     self waittill("movedone");
 
     if(!isDefined(var_7.target)) {
@@ -582,13 +582,13 @@ clear_cortex_lowermessage() {
 }
 
 wait_for_cortex_planted(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   for(;;) {
     level waittill("cortex_plant");
     level.cortex.origin = var_1.origin;
     level.cortex_use_trigger makeunusable();
-    level.cortex_use_trigger sethintstring("");
+    level.cortex_use_trigger setHintString("");
     level notify("cortex_planted");
     return;
   }
@@ -599,7 +599,7 @@ check_for_player_near_spot_with_cortex(var_0) {
   self endon("death");
   level endon("cortex_planted");
   var_1 = 6400;
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
   level.current_cortex_spot = var_2;
 
   for(;;) {

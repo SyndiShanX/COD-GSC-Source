@@ -34,7 +34,7 @@ supply_drop_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   if(newval == 1) {
     fxent = spawn(localclientnum, self.origin, "script_model");
     fxent setModel("tag_origin");
-    fxent linkto(self);
+    fxent linkTo(self);
     var_96514d8b = isDefined(getgametypesetting(#"hash_2e25d475b271a700")) ? getgametypesetting(#"hash_2e25d475b271a700") : 0;
 
     if(var_96514d8b) {

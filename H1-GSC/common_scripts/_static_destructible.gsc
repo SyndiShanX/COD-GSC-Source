@@ -13,14 +13,14 @@ static_destructible_think() {
   self setCanDamage(1);
   self.destroyed_fx_id = loadfx(self.script_parameters);
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(self);
+  var_0 linkTo(self);
 
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5);
 
     if(var_5 != "MOD_MELEE" && var_5 != "MOD_IMPACT") {
       playFXOnTag(self.destroyed_fx_id, var_0, "tag_origin");
-      var_6 = getent(self.target, "targetname");
+      var_6 = getEnt(self.target, "targetname");
       var_6 delete();
       self delete();
       wait 15;

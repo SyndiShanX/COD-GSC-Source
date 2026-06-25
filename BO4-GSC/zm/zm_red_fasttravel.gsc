@@ -62,7 +62,7 @@ on_player_spawned() {
 }
 
 function_e49ceeb9(str_targetname) {
-  mdl_item = getent(str_targetname, "targetname");
+  mdl_item = getEnt(str_targetname, "targetname");
   var_5c7b8d71 = spawn("trigger_radius_new", mdl_item.origin, 0, 614);
   var_5c7b8d71 thread function_91fabcb(mdl_item);
 }
@@ -81,7 +81,7 @@ function_d69c301b() {
 
 forcestream_crafted_item(str_model, n_z_diff) {
   level waittill(#"blueprint_completed");
-  mdl_item = getent(str_model, "targetname");
+  mdl_item = getEnt(str_model, "targetname");
   var_5c7b8d71 = spawn("trigger_radius_new", mdl_item.origin + (0, 0, n_z_diff), 0, 614);
   var_5c7b8d71 thread function_91fabcb(mdl_item);
 }
@@ -162,12 +162,12 @@ function_a5689564(s_loc) {
     }
 
     level.var_4775015b[level.var_4775015b.size] = s_loc;
-    var_42b23772 = getent(s_loc.target, "targetname");
+    var_42b23772 = getEnt(s_loc.target, "targetname");
     var_42b23772 hidepart("tag_symbol_blue");
     var_42b23772 hidepart("tag_symbol_red");
     var_42b23772.var_3925cac9 = [];
     s_loc.var_42b23772 = var_42b23772;
-    var_2a2d0b17 = getent(var_42b23772.target, "targetname");
+    var_2a2d0b17 = getEnt(var_42b23772.target, "targetname");
     var_2a2d0b17 hidepart("tag_symbol_blue");
     var_2a2d0b17 hide();
     var_2a2d0b17.var_3925cac9 = [];

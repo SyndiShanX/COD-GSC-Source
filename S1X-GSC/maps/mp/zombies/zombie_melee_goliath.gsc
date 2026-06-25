@@ -123,7 +123,7 @@ attachgoliathweapons() {
     var_1 setModel(var_0[var_2]);
   }
 
-  var_1 linkto(self, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   maps\mp\zombies\_util::playfxontagnetwork(common_scripts\utility::getfx("zombie_melee_goliath_electric"), var_1, "tag_fx");
   self.goliathweapon = var_1;
   var_3 = spawn("script_model", self gettagorigin("TAG_WEAPON_LEFT"));
@@ -135,7 +135,7 @@ attachgoliathweapons() {
     var_3 setModel("dlc_bruiser_riot_shield");
   }
 
-  var_3 linkto(self, "TAG_WEAPON_LEFT", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, "TAG_WEAPON_LEFT", (0, 0, 0), (0, 0, 0));
   self.goliathshield = var_3;
   maps\mp\zombies\_util::playfxontagnetwork(common_scripts\utility::getfx("goliath_shield_light"), var_3, "TAG_SHIELD_SPARKS");
 }
@@ -161,7 +161,7 @@ setupmeleegoliathstate() {
   self.meleeradiusbasesq = squared(self.meleeradiusbase);
   maps\mp\zombies\_util::setmeleeradius(self.meleeradiusbase);
   self.defaultgoalradius = self.radius + 1;
-  self scragentsetgoalradius(self.defaultgoalradius);
+  self scragentsetgoalRadius(self.defaultgoalradius);
   self.meleedot = 0.5;
   self.ignoreexpiretime = 1;
   self.ignorezombierecycling = 1;
@@ -217,7 +217,7 @@ stay_in_playspace() {
     if(isDefined(level.zone_data) && !maps\mp\zombies\_zombies_zone_manager::iszombieinanyzone(self)) {
       var_0 = maps\mp\zombies\_zombies::getspawnpoint("zombie_melee_goliath", 1);
       playFX(common_scripts\utility::getfx("npc_teleport_enemy"), self.origin, (1, 0, 0), (0, 0, 1));
-      self setorigin(var_0.origin, 1);
+      self setOrigin(var_0.origin, 1);
       self setplayerangles(var_0.angles);
       playFX(common_scripts\utility::getfx("npc_teleport_enemy"), var_0.origin, (1, 0, 0), (0, 0, 1));
     }
@@ -654,7 +654,7 @@ updatemeleegoliathlerppos(var_0, var_1, var_2, var_3) {
       var_9 = var_7 - var_4;
 
       if(lengthsquared(var_9) > var_8 * var_8) {
-        var_7 = var_4 + vectornormalize(var_9) * var_8;
+        var_7 = var_4 + vectorNormalize(var_9) * var_8;
       }
     }
 
@@ -986,7 +986,7 @@ spawngib(var_0, var_1, var_2, var_3) {
   var_4 setModel(var_0);
   var_4.angles = var_2;
   var_5 = (randomfloatrange(-2000, 2000), randomfloatrange(-2000, 2000), randomfloatrange(-2000, 2000));
-  var_6 = vectornormalize(common_scripts\utility::randomvectorincone((0, 0, 1.75) + var_3, 15));
+  var_6 = vectorNormalize(common_scripts\utility::randomvectorincone((0, 0, 1.75) + var_3, 15));
   var_4 physicslaunchclientwithimpulse(var_6 * 4000, var_5);
   var_4 deleteonhostmigration();
 
@@ -1043,7 +1043,7 @@ collidewithnearbyzombies() {
       if(vectordot(var_5, var_1) < 0) {
         continue;
       }
-      var_5 = vectornormalize(var_5);
+      var_5 = vectorNormalize(var_5);
       collidewithagent(var_4, var_5);
     }
   }
@@ -1134,7 +1134,7 @@ firemissile(var_0) {
   var_3 = (randomintrange(-1 * var_1, var_1), randomintrange(-1 * var_1, var_1), randomintrange(-1 * var_1, var_1));
   var_4 = var_0 getEye() + var_3;
   var_5 = magicbullet("goliath_rocket_mp", var_2, var_4, self);
-  var_5 missile_settargetent(var_0, (0, 0, 32));
+  var_5 missile_settargetEnt(var_0, (0, 0, 32));
   var_5.owner = self;
   var_5 thread empmissile();
 }

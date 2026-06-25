@@ -457,7 +457,7 @@ base_array_cleanup() {
 base_array_exit_rpg() {
   common_scripts\utility::flag_wait("base_array_exit_rpg");
   maps\_utility::array_spawn_targetname("base_array_exit_tower_rpg_guys", 1);
-  var_0 = common_scripts\utility::getstruct("base_array_exit_rpg_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("base_array_exit_rpg_spot", "targetname");
   magicbullet("rpg_straight", var_0.origin, level.playertank.origin);
 }
 

@@ -104,7 +104,7 @@ function loadeffects() {
 
 function function_68714b99() {
   pin = spawn("script_origin", self.origin);
-  self linkto(pin);
+  self linkTo(pin);
   self waittill("free_vehicle");
   pin delete();
 }
@@ -141,7 +141,7 @@ function function_a3fd472e() {
   var_4fb2233[var_4fb2233.size] = "port_vtol2_vh";
   target_array = target_getarray();
   foreach(name in var_4fb2233) {
-    vtol = getent(name, "targetname");
+    vtol = getEnt(name, "targetname");
     if(isDefined(vtol)) {
       vtol.allowcontinuedlockonafterinvis = 1;
       array::add(target_array, vtol);
@@ -170,7 +170,7 @@ function splash_fx() {
 }
 
 function function_b86ff37e(n_hacking_time, objective, var_d66abd8d) {
-  trig = getent(var_d66abd8d, "targetname");
+  trig = getEnt(var_d66abd8d, "targetname");
   trig.var_611ccff1 = util::init_interactive_gameobject(trig, istring(objective), &"CP_MI_CAIRO_AQUIFER_OPEN", &function_ee5d34cb);
   trig.var_611ccff1 gameobjects::set_use_time(n_hacking_time);
   trig.var_611ccff1.onbeginuse = &function_eae79770;
@@ -250,7 +250,7 @@ function function_eee6cbf2() {
 }
 
 function function_9c6e51f(ent) {
-  model = getent(self.target, "targetname");
+  model = getEnt(self.target, "targetname");
   if(isDefined(ent) && (isDefined(ent.pvtol) && ent islinkedto(ent.pvtol) || isvehicle(ent))) {
     anims = [];
     anims[anims.size] = "p7_fxanim_cp_aqu_radar_array_01";
@@ -499,7 +499,7 @@ function function_78e66c54() {
         self.dogfighter function_78d2c721("lock");
         self.dogfighter function_78d2c721("props");
         self.dogfighter function_fe19b920("killed");
-        playsoundatposition("evt_vehicle_explosion_lyr", self.origin);
+        playSoundAtPosition("evt_vehicle_explosion_lyr", self.origin);
         self thread function_c7676d36();
         if(!isDefined(self.var_c12a181e)) {
           self.dogfighter namespace_b5b83650::function_c27610f9("aq_dogfight_kill_only_guns");
@@ -537,7 +537,7 @@ function function_14f37b59(section, start_time, dogfighter, var_eb969a93, spawne
   }
   lerp_time = 0.2;
   if(!isDefined(root)) {
-    root = getent("dogfighting_scene", "targetname");
+    root = getEnt("dogfighting_scene", "targetname");
   }
   if(!isDefined(start_time)) {
     start_time = 0;
@@ -728,7 +728,7 @@ function function_dbe3d86f() {
 function function_e9a25955() {
   self endon("disconnect");
   self endon("death");
-  var_522698b3 = getent("dogfighting_scene", "targetname");
+  var_522698b3 = getEnt("dogfighting_scene", "targetname");
   radius = 10000;
   var_dda84f1a = getEntArray("landing_zone_1", "script_noteworthy");
   self thread fixup_heightmap_on_use(1);
@@ -749,7 +749,7 @@ function function_e9a25955() {
       veh.origin = self function_a9d982da().origin;
       veh.angles = self function_a9d982da().angles;
     } else {
-      var_cb30cca = vectornormalize(self.origin - var_c30a0e54);
+      var_cb30cca = vectorNormalize(self.origin - var_c30a0e54);
       var_d768f7b8 = anglesToForward(self.pvtol.angles);
       if(vectordot(var_cb30cca, var_d768f7b8) < 0) {
         veh.origin = self.pvtol.origin + (var_d768f7b8 * 7500);
@@ -770,7 +770,7 @@ function function_e9a25955() {
     while(isDefined(self) && isDefined(self.pvtol) && (distancesquared(var_c30a0e54, veh.origin) > (radius * radius) || velocity_to_mph(self.pvtol getvelocity()) > 50)) {
       height = self.pvtol getheliheightlockheight((veh.origin[0], veh.origin[1], var_dda84f1a[0].origin[2]));
       var_c30a0e54 = (var_522698b3.origin[0], var_522698b3.origin[1], height);
-      desired_origin = var_c30a0e54 + (((vectornormalize((veh.origin[0], veh.origin[1], height) - var_c30a0e54)) * radius) * 0.9);
+      desired_origin = var_c30a0e54 + (((vectorNormalize((veh.origin[0], veh.origin[1], height) - var_c30a0e54)) * radius) * 0.9);
       speed_scale = pow(math::clamp(distance(veh.origin, desired_origin) / 2400, 0, 1), 2);
       desired_angles = vectortoangles(desired_origin - veh.origin);
       var_3e02e245 = angleclamp180(desired_angles[1]);
@@ -1290,7 +1290,7 @@ function function_3034fbb(new_state) {
       case "autopilot": {
         self.pvtol show();
         self.pvtol solid();
-        self.pvtol stopanimscripted(0);
+        self.pvtol stopanimScripted(0);
         self.pvtol clientfield::set("vtol_enable_wash_fx", 0);
         self.pvtol notify("hash_7b977278");
         break;
@@ -1307,7 +1307,7 @@ function function_3034fbb(new_state) {
         }
         self.pvtol cleartargetyaw();
         self.pvtol clearvehgoalpos();
-        self.pvtol stopanimscripted(0);
+        self.pvtol stopanimScripted(0);
         break;
       }
       case "enter": {
@@ -1497,7 +1497,7 @@ function function_e34692a9(zone, teleport, var_acaabf08 = 1) {
       self.pvtol waittillmatch("hash_5d9bca70");
       self.pvtol clientfield::set("vtol_canopy_state", 1);
       self.pvtol waittillmatch("hash_5d9bca70");
-      self.pvtol stopanimscripted(0);
+      self.pvtol stopanimScripted(0);
       self.pvtol clientfield::set("vtol_engines_state", 0);
       self.pvtol setvehgoalpos(var_72ae61b3.origin + vectorscale((0, 0, 1), 120), 1);
       self.pvtol settargetyaw(var_72ae61b3.angles[1]);
@@ -1506,8 +1506,8 @@ function function_e34692a9(zone, teleport, var_acaabf08 = 1) {
       self.pvtol sethoverparams(28, 24, 24);
     }
   }
-  if(!var_acaabf08 && self isplayinganimscripted()) {
-    while(self isplayinganimscripted()) {
+  if(!var_acaabf08 && self isplayinganimScripted()) {
+    while(self isplayinganimScripted()) {
       wait(0.05);
     }
   } else {
@@ -1576,8 +1576,8 @@ function function_e1fcf95(play_anim, var_74df67ae) {
     anim_time = getanimlength(anim_name);
     anim_rate = anim_time / lerp_time;
     self thread animation::play(anim_name, mover_ent, "tag_origin", anim_rate, 0.2, 0, 0);
-    mover_ent moveto(target_origin, lerp_time, 0, 0);
-    mover_ent rotateto(target_angles, lerp_time, 0, 0);
+    mover_ent moveTo(target_origin, lerp_time, 0, 0);
+    mover_ent rotateTo(target_angles, lerp_time, 0, 0);
     wait(lerp_time - 0.05);
     self thread animation::play(var_8f8a1689, self.pvtol, "tag_origin", 1, 0.2, 0.1, 0, 0, 0, 0);
     self waittillmatch(var_8f8a1689);
@@ -1599,7 +1599,7 @@ function function_e267ae99() {
           var_39f734b7 = arraygetclosest(player.origin, a_spawn_points);
           var_b2577cba = var_39f734b7.origin;
           var_b2577cba = player player::get_snapped_spot_origin(var_b2577cba);
-          player setorigin(var_b2577cba);
+          player setOrigin(var_b2577cba);
           if(isDefined(var_39f734b7.angles)) {
             player setplayerangles(var_39f734b7.angles);
           }
@@ -1674,7 +1674,7 @@ function function_a65d16ff() {
     self.pvtol makevehicleusable();
     org = self.pvtol gettagorigin("tag_driver_camera");
     ang = self.pvtol gettagangles("tag_driver_camera");
-    self setorigin(org);
+    self setOrigin(org);
     self setplayerangles((0, ang[1], 0));
     self.pvtol usevehicle(self, 0);
     self.pvtol makevehicleunusable();
@@ -1932,7 +1932,7 @@ function function_2b89d912(landing_zone) {
   wait(1);
   self.pvtol clientfield::set("vtol_enable_wash_fx", 0);
   self.pvtol waittillmatch("hash_fce0770a");
-  self.pvtol stopanimscripted(0);
+  self.pvtol stopanimScripted(0);
   self.pvtol ghost();
   self.pvtol.origin = (self.pvtol.origin[0], self.pvtol.origin[1], var_1f21c6ab);
   self.pvtol setvehgoalpos(self.pvtol.origin, 1);
@@ -2021,7 +2021,7 @@ function wait_until_height_change_safe(player, volname, blocking) {
   if(!isDefined(volname)) {
     volname = "contains_whole_aquifer";
   }
-  vol = getent(volname, "targetname");
+  vol = getEnt(volname, "targetname");
   if(!isDefined(vol)) {
     return 1;
   }
@@ -2293,7 +2293,7 @@ function watch_player_lockon() {
       enemy_forward = anglesToForward(enemy.angles);
       heading_dot = vectordot(forward, enemy_forward);
       if(heading_dot >= heading_min_dot) {
-        normal = vectornormalize(to_enemy);
+        normal = vectorNormalize(to_enemy);
         dot = vectordot(forward, normal);
         if(dot > min_dot && dot > best_dot) {
           best_dot = dot;
@@ -2361,7 +2361,7 @@ function delete_me() {
 
 function function_3fce552c(on) {
   if(0) {
-    ent = getent("boss_tree", "targetname");
+    ent = getEnt("boss_tree", "targetname");
     ent notsolid();
     if(on) {
       ent show();
@@ -2402,13 +2402,13 @@ function toggle_door(name, open) {
       }
       door show();
       door solid();
-      door disconnectpaths();
+      door disconnectPaths();
     }
   }
 }
 
 function safe_use_trigger(name) {
-  trig = getent(name, "targetname");
+  trig = getEnt(name, "targetname");
   if(isDefined(trig)) {
     trig trigger::use();
   }
@@ -2515,7 +2515,7 @@ function function_2d64c4b0(player) {
               }
             }
             wait(1);
-            if(isDefined(driver) && !isalive(driver) && !driver isplayinganimscripted()) {
+            if(isDefined(driver) && !isalive(driver) && !driver isplayinganimScripted()) {
               driver thread lui::screen_fade_out(0.5);
             }
             return;
@@ -2606,7 +2606,7 @@ function function_61b71c43() {
   scene::add_scene_func("cin_aqu_01_10_intro_1st_flyin_main", &function_f005cfe, "done");
   scene::init("cin_aqu_01_10_intro_1st_flyin_main");
   level.var_39c3b76e = vehicle::simple_spawn_single("hendricks_vtol");
-  level.kane = getent("kane_intro", "targetname") spawner::spawn(1);
+  level.kane = getEnt("kane_intro", "targetname") spawner::spawn(1);
   level.var_ae4620ba = vehicle::simple_spawn_single("kane_vtol");
 }
 
@@ -2692,7 +2692,7 @@ function function_af376a0e(animname, index, section, var_84fe82cd) {
   self thread function_22a0413d("piloted");
   self enableinvulnerability();
   self.pvtol vehicle::god_on();
-  self.pvtol stopanimscripted(0);
+  self.pvtol stopanimScripted(0);
   self.pvtol disabledriverfiring(0);
   self.pvtol disablegunnerfiring(0, 0);
   self.pvtol returnplayercontrol();
@@ -2747,7 +2747,7 @@ function function_c11cfb53(var_1f5ba763) {
   while(!isDefined(self.vehicle)) {
     wait(0.1);
   }
-  var_3770a3b5 = getent(var_1f5ba763, "targetname");
+  var_3770a3b5 = getEnt(var_1f5ba763, "targetname");
   wait(1);
   self util::stop_magic_bullet_shield();
   self function_ab5de970(var_3770a3b5);
@@ -2803,7 +2803,7 @@ function player_kill_triggers(targetname, state) {
 }
 
 function function_77fde091(state) {
-  clip = getent("vtol_water_room_clip", "targetname");
+  clip = getEnt("vtol_water_room_clip", "targetname");
   if(state == 1) {
     clip solid();
   } else {
@@ -2824,8 +2824,8 @@ function function_5a160fe7() {
 }
 
 function function_7d76ae16(current_vol, var_29f8e61c) {
-  var_8173bf49 = getent(current_vol, "targetname");
-  var_a77639b2 = getent(var_29f8e61c, "targetname");
+  var_8173bf49 = getEnt(current_vol, "targetname");
+  var_a77639b2 = getEnt(var_29f8e61c, "targetname");
   guys = getaiteamarray("axis");
   foreach(guy in guys) {
     if(isDefined(guy) || isalive(guy)) {
@@ -2961,13 +2961,13 @@ function function_f0905754() {
 }
 
 function function_287ca2ad(state) {
-  top = getent("hangar_umbra_top_door", "targetname");
+  top = getEnt("hangar_umbra_top_door", "targetname");
   top ghost();
   top notsolid();
-  side1 = getent("hangar_umbra_sidedoor_1", "targetname");
+  side1 = getEnt("hangar_umbra_sidedoor_1", "targetname");
   side1 ghost();
   side1 notsolid();
-  side2 = getent("hangar_umbra_sidedoor_2", "targetname");
+  side2 = getEnt("hangar_umbra_sidedoor_2", "targetname");
   side2 ghost();
   side2 notsolid();
   umbragate_set("hangar_top_door", state);
@@ -3095,7 +3095,7 @@ function function_96450f49(var_6c968618, var_a3a78823) {
     base[base.size] = st;
     st = struct::get(var_6c968618 + (base.size + 1));
   }
-  focus = getent(var_6c968618 + "focus", "targetname");
+  focus = getEnt(var_6c968618 + "focus", "targetname");
   isrockettype = 1;
   if(isrockettype) {
     level.var_c37cadc1 setvehweapon(getweapon("vtol_fighter_player_missile_turret"));
@@ -3206,9 +3206,9 @@ function function_5b6daa1a(focus, isrockettype, var_a3a78823) {
     self.var_bded8100 = enemy;
     self setlookatent(enemy);
     if(isrockettype) {
-      self setturrettargetent(enemy, enemy.origin + vectorscale((0, 0, 1), 60));
+      self setturrettargetEnt(enemy, enemy.origin + vectorscale((0, 0, 1), 60));
     } else {
-      self setturrettargetent(enemy, enemy.origin + vectorscale((0, 0, 1), 60));
+      self setturrettargetEnt(enemy, enemy.origin + vectorscale((0, 0, 1), 60));
     }
     wait(0.4);
     if(isDefined(enemy)) {
@@ -3448,7 +3448,7 @@ function function_c897523d(active) {
 }
 
 function get_dot(start_origin, start_angles, end_origin) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot;

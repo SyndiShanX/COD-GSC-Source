@@ -100,7 +100,7 @@ bulletwhizbyreaction() {
     var_7 = anglesToForward(self.angles);
 
     if(isDefined(self.whizbyenemy)) {
-      var_8 = vectornormalize(self.whizbyenemy.origin - self.origin);
+      var_8 = vectorNormalize(self.whizbyenemy.origin - self.origin);
     } else {
       var_8 = var_7;
     }
@@ -167,7 +167,7 @@ getnewenemyreactionanim() {
 
     if(isDefined(var_1[self.prevscript])) {
       var_2 = anglesToForward(self.node.angles);
-      var_3 = vectornormalize(self.reactiontargetpos - self.origin);
+      var_3 = vectorNormalize(self.reactiontargetpos - self.origin);
 
       if(vectordot(var_2, var_3) < -0.5) {
         self orientmode("face current");
@@ -198,7 +198,7 @@ getnewenemyreactionanim() {
     }
 
     if(self.a.pose == "crouch") {
-      var_3 = vectornormalize(self.reactiontargetpos - self.origin);
+      var_3 = vectorNormalize(self.reactiontargetpos - self.origin);
       var_6 = anglesToForward(self.angles);
 
       if(vectordot(var_6, var_3) < -0.5) {

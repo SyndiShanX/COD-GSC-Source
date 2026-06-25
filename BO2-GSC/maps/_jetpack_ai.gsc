@@ -146,7 +146,7 @@ _create_and_link_jetpack() {
   self.m_jetpack = spawn("script_model", v_origin);
   self.m_jetpack.angles = v_angles;
   self.m_jetpack setModel("veh_t6_air_jetpack");
-  self.m_jetpack linkto(self, "J_SpineUpper");
+  self.m_jetpack linkTo(self, "J_SpineUpper");
 }
 
 _attach_jetpack_fx() {

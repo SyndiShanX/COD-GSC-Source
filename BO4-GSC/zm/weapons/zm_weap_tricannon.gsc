@@ -92,7 +92,7 @@ function_68e4ed32(weapon) {
     }
 
     v_ai = ai getcentroid();
-    v_normal = vectornormalize(v_ai - v_start);
+    v_normal = vectorNormalize(v_ai - v_start);
     dot = vectordot(var_ee5864e0, v_normal);
 
     if(dot <= 0) {
@@ -102,7 +102,7 @@ function_68e4ed32(weapon) {
     waitframe(1);
 
     if(isalive(ai)) {
-      var_f1aedaaa = vectornormalize(var_ee5864e0);
+      var_f1aedaaa = vectorNormalize(var_ee5864e0);
 
       if(0 == ai sightconetrace(v_start, self, var_f1aedaaa, 22.5)) {
         continue;
@@ -176,7 +176,7 @@ function_54d03fdd(weapon, b_packed) {
     }
 
     var_b7523d07 = ai getcentroid();
-    normal = vectornormalize(var_b7523d07 - v_start);
+    normal = vectorNormalize(var_b7523d07 - v_start);
     dot = vectordot(var_ee5864e0, normal);
 
     if(dot <= 0) {
@@ -189,7 +189,7 @@ function_54d03fdd(weapon, b_packed) {
       continue;
     }
 
-    var_f1aedaaa = vectornormalize(var_ee5864e0);
+    var_f1aedaaa = vectorNormalize(var_ee5864e0);
 
     if(0 == ai sightconetrace(v_start, self, var_f1aedaaa, 50)) {
       continue;
@@ -225,7 +225,7 @@ function_54d03fdd(weapon, b_packed) {
 
     if(!isalive(ai)) {
       ai startragdoll(1);
-      ai launchragdoll(vectornormalize(var_b7523d07 - self.origin) * n_launch);
+      ai launchragdoll(vectorNormalize(var_b7523d07 - self.origin) * n_launch);
       continue;
     }
 
@@ -391,7 +391,7 @@ function_3e2e539(params) {
   if(isalive(self)) {
     if(self.health <= params.idamage) {
       v_z_offset = (0, 0, randomfloat(0.6));
-      v_launch = (vectornormalize(params.vdir) + v_z_offset) * randomintrange(75, 125);
+      v_launch = (vectorNormalize(params.vdir) + v_z_offset) * randomintrange(75, 125);
       self startragdoll(1);
       self launchragdoll(v_launch);
       return false;

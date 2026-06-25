@@ -103,7 +103,7 @@ function function_dc160233(action) {
     self.var_d5bd339b = 1;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isalive(self)) {
     player.takedown.body_shield.drop = "dead";
@@ -113,7 +113,7 @@ function function_dc160233(action) {
 }
 
 function function_faf4a34d(guy) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   victim = isDefined(player.takedown.var_198a4d10) ? player.takedown.var_198a4d10 : self;
 
   if(isactor(victim)) {
@@ -122,11 +122,11 @@ function function_faf4a34d(guy) {
 
   player val::set(#"action", "takedamage", 0);
   player util::delay(0.5, undefined, &val::set, #"action", "takedamage", 1);
-  player playrumbleonentity("damage_heavy");
+  player playRumbleOnEntity("damage_heavy");
 }
 
 function function_dec110ef(guy) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(player.var_2cb06cc6.name == "body_shield_grenade") {
     return;
@@ -142,7 +142,7 @@ function function_5c01c962(size) {
 }
 
 function function_85d6c09b(guy) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player action_utility::function_76e2ec80();
 }
 
@@ -389,7 +389,7 @@ function function_1058ffa1(guy = self) {
   assert(isactor(guy));
   guy.var_54163419 = util::spawn_model(#"wpn_t9_eqp_grenade_frag_view", guy.origin, guy.angles);
   guy.var_54163419 notsolid();
-  guy.var_54163419 linkto(guy, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
+  guy.var_54163419 linkTo(guy, "tag_accessory_left", (0, 0, 0), (0, 0, 0));
   guy callback::function_30c3f95d(&function_6794cd13);
 }
 
@@ -403,7 +403,7 @@ function function_30e6300b(var_5fb1bd74) {
     var_5fb1bd74.var_54163419.dropped = 1;
     launchforce = var_5fb1bd74.var_bc2602c8 * 2;
     launchforce += (randomfloatrange(-0.5, 0.5), randomfloatrange(-0.5, 0.5), randomfloatrange(-0.5, 0.5));
-    launchforce = vectornormalize(launchforce) * 0.1;
+    launchforce = vectorNormalize(launchforce) * 0.1;
     var_5fb1bd74.var_54163419 unlink();
     var_5fb1bd74.var_54163419 physicslaunch(var_5fb1bd74.var_54163419.origin - (0, 0, 3), launchforce);
     var_5fb1bd74.var_54163419 thread grenade_explode(var_5fb1bd74, 2);
@@ -432,7 +432,7 @@ function grenade_explode(var_5fb1bd74, delay) {
       origin = grenade.origin;
       grenade delete();
       wpn_grenade = getweapon(#"frag_grenade");
-      player = getplayers()[0];
+      player = getPlayers()[0];
       player.body_shield_grenade = player magicgrenademanualplayer(origin, (0, 0, 0), wpn_grenade, 0);
     }
   }
@@ -469,7 +469,7 @@ function function_13841987() {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(self scene::function_c935c42()) {
     objectlist = arraycopy(self._scene_object._o_scene._a_objects);
@@ -485,7 +485,7 @@ function function_13841987() {
     }
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
   self.allowpain = 0;
   self.ignoreme = 1;
   scene_root = player.takedown.body_shield.scene_root;
@@ -532,7 +532,7 @@ function function_84d08d48(delay) {
 }
 
 function function_bae5ad1b() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isai(self)) {
     return;
@@ -558,7 +558,7 @@ function function_306feb88(guy) {
   self endoncallback(&function_e69bc894, #"hash_2860a6b03ec878f6", #"death", #"killanimscript");
   last_position = self.origin;
   anim_name = undefined;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"disconnect");
   destroyed = [];
   var_29fbf4b0 = max(60, max(80, 32));
@@ -589,8 +589,8 @@ function function_306feb88(guy) {
       }
 
       dir = interact.origin - self.origin;
-      dir = vectornormalize((dir[0], dir[1], 0));
-      move_dir = vectornormalize(move_delta);
+      dir = vectorNormalize((dir[0], dir[1], 0));
+      move_dir = vectorNormalize(move_delta);
       dot = vectordot(move_dir, dir);
 
       if(dot < 0) {
@@ -652,7 +652,7 @@ function function_306feb88(guy) {
 
           if(distance2dsquared(self.origin, test_point) < 32 * 32) {
             impactpoint = interact.origin + (0, 0, 15);
-            impactpoint += vectornormalize(self.origin - interact.origin) * 10;
+            impactpoint += vectorNormalize(self.origin - interact.origin) * 10;
             radiusdamage(impactpoint, 16, interact.health + 1, interact.health, self, "MOD_IMPACT");
             destroyed[interact getentitynumber()] = interact;
           }
@@ -670,9 +670,9 @@ function function_306feb88(guy) {
     traceend = tracestart + var_c3548f43;
     traceendfar = tracestart + var_858fa287;
     trace = physicstrace(tracestart, traceend, boundsmin, boundsmax, self, mask);
-    movedir = vectornormalize(move_delta);
+    movedir = vectorNormalize(move_delta);
     facingdir = anglesToForward(self.angles);
-    facingdir = vectornormalize((facingdir[0], facingdir[1], 0));
+    facingdir = vectorNormalize((facingdir[0], facingdir[1], 0));
     dotfwd = vectordot(facingdir, movedir);
     self.var_bc2602c8 = movedir;
     anim_name = undefined;
@@ -704,7 +704,7 @@ function function_306feb88(guy) {
       animtoplay = level.player_actions.anims[#"generic"][anim_name];
 
       if(isDefined(animtoplay)) {
-        self animscripted(animtoplay, self.origin, self.angles, animtoplay, "custom", undefined, undefined, 0.1);
+        self animScripted(animtoplay, self.origin, self.angles, animtoplay, "custom", undefined, undefined, 0.1);
         self endon(#"death");
         wait getanimlength(animtoplay) - 0.1;
         self.skipdeathanim = 1;
@@ -738,7 +738,7 @@ function function_adf3cfb0() {
 
   self orientmode("face angle", self.var_475b4bbe);
   self animmode("gravity");
-  self animscripted(self.var_f6639ad8, self.origin, self.angles, self.var_f6639ad8, "custom");
+  self animScripted(self.var_f6639ad8, self.origin, self.angles, self.var_f6639ad8, "custom");
   wait getanimlength(self.var_f6639ad8);
 }
 

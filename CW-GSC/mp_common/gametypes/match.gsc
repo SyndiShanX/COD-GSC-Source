@@ -176,7 +176,7 @@ function function_10cd0ad() {
     totalkills[team] = 0;
     totaldeaths[team] = 0;
 
-    foreach(player in getplayers(team)) {
+    foreach(player in getPlayers(team)) {
       totalkills[team] += player.pers[#"kills"];
       totaldeaths[team] += player.pers[#"deaths"];
     }

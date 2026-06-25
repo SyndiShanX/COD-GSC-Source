@@ -156,7 +156,7 @@ _id_E284(var_0, var_1) {
     if(isDefined(var_9)) {
       var_12 = var_11.origin * (1, 1, 0) + var_2;
       var_13 = var_9.origin * (1, 1, 0) + var_2;
-      var_14 = vectornormalize(var_13 - var_12);
+      var_14 = vectorNormalize(var_13 - var_12);
       var_4 = var_13 - var_14 * 15000;
       var_5 = var_13;
       var_6 = vectortoangles(var_14);
@@ -250,7 +250,7 @@ _id_E284(var_0, var_1) {
   var_22._id_5FE5._id_F88D = 1;
   var_22._id_5FE5.name = "front_turret";
   var_22._id_5FE5._id_1DF2 = undefined;
-  var_22._id_5FE5 linkto(var_22);
+  var_22._id_5FE5 linkTo(var_22);
   var_22._id_5FE5 _meth_83A0(var_0.team);
   var_22._id_5FE5 _meth_839D(0);
   var_22._id_5FE5 setmode("manual");
@@ -268,7 +268,7 @@ _id_E284(var_0, var_1) {
   var_22._id_C0C8._id_F88D = 1;
   var_22._id_C0C8.name = "rear_turret";
   var_22._id_C0C8._id_1DF2 = undefined;
-  var_22._id_C0C8 linkto(var_22);
+  var_22._id_C0C8 linkTo(var_22);
   var_22._id_C0C8 _meth_83A0(var_0.team);
   var_22._id_C0C8 _meth_839D(0);
   var_22._id_C0C8 setmode("manual");
@@ -278,7 +278,7 @@ _id_E284(var_0, var_1) {
   var_22._id_C0C8._id_71F1 setModel("tag_origin");
   var_22._id_C0C8._id_71F1 dontinterpolate();
   var_22.killcament = spawn("script_model", var_22 gettagorigin("tag_ground"));
-  var_22.killcament linkto(var_22, "tag_ground", (-600, 0, 1000), (0, 0, 0));
+  var_22.killcament linkTo(var_22, "tag_ground", (-600, 0, 1000), (0, 0, 0));
   var_22._id_5FE5.killcament = var_22.killcament;
   var_22._id_C0C8.killcament = var_22.killcament;
   level notify("matchrecording_chopper", var_22);
@@ -366,7 +366,7 @@ _id_36C8(var_0, var_1, var_2, var_3) {
         var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var_0);
       }
 
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -572,13 +572,13 @@ _id_36D8(var_0, var_1, var_2, var_3) {
     var_4 = (var_8, var_9, var_10);
     var_0._id_71F1.origin = var_4;
   } else if(!var_0._id_71F1 _meth_81CC())
-    var_0._id_71F1 linkto(var_1, "tag_origin", (0, 0, 30), (0, 0, 0));
+    var_0._id_71F1 linkTo(var_1, "tag_origin", (0, 0, 30), (0, 0, 0));
 }
 
 _id_36DB() {
   var_0 = 0.992;
   var_1 = anglesToForward(self gettagangles("tag_flash"));
-  var_2 = vectornormalize(self._id_71F1.origin - self.origin);
+  var_2 = vectorNormalize(self._id_71F1.origin - self.origin);
   var_3 = vectordot(var_1, var_2);
 
   if(isDefined(self _meth_817F(1)) && var_3 >= var_0) {

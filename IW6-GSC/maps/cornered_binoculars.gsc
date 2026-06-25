@@ -186,7 +186,7 @@ binoculars_init_hud() {
   self.binoculars_hud_item["reticle_targetting"].aligny = "middle";
   self.binoculars_hud_item["reticle_targetting"].alpha = 0.0;
   self.binocular_reticle_target = spawn("script_origin", self.origin);
-  self.binoculars_hud_item["reticle_targetting"] settargetent(self.binocular_reticle_target);
+  self.binoculars_hud_item["reticle_targetting"] settargetEnt(self.binocular_reticle_target);
   self.binoculars_hud_item["reticle_targetting"] setwaypoint(1, 0);
   self.binoculars_hud_item["reticle_scanning"] = maps\_hud_util::createicon("cnd_face_recog_reticle_03", 300, 300);
   self.binoculars_hud_item["reticle_scanning"] set_default_hud_parameters();
@@ -333,7 +333,7 @@ binoculars_scan_target_points(var_0) {
 
   thread maps\cornered_audio::aud_binoculars("seeker_on");
   self.binocular_reticle_target.origin = var_0 gettagorigin("J_Head") - (0, 0, 7);
-  self.binocular_reticle_target linkto(var_0, "J_Head");
+  self.binocular_reticle_target linkTo(var_0, "J_Head");
   setsaveddvar("waypointIconHeight", 36);
   setsaveddvar("waypointIconWidth", 36);
   wait 0.05;
@@ -460,7 +460,7 @@ binoculars_unlock_from_target() {
     self.binoculars_linked_to_target = 0;
 
     if(isDefined(self.prev_origin)) {
-      self setorigin(self.prev_origin);
+      self setOrigin(self.prev_origin);
       self.prev_origin = undefined;
     }
 
@@ -598,32 +598,32 @@ binocular_face_scanning_lines(var_0) {
   self.binoculars_face_scanning_models[0][0] = spawn("script_model", var_0 gettagorigin("J_Head"));
   self.binoculars_face_scanning_models[0][0].angles = var_0 gettagangles("J_Head");
   self.binoculars_face_scanning_models[0][0] setModel("cnd_facial_rcg_01_non_hvt");
-  self.binoculars_face_scanning_models[0][0] linkto(var_0, "J_Head");
+  self.binoculars_face_scanning_models[0][0] linkTo(var_0, "J_Head");
   self.binoculars_face_scanning_models[0][0] hideallparts();
   self.binoculars_face_scanning_models[0][1] = spawn("script_model", var_0 gettagorigin("J_Head"));
   self.binoculars_face_scanning_models[0][1].angles = var_0 gettagangles("J_Head");
   self.binoculars_face_scanning_models[0][1] setModel("cnd_facial_rcg_02_non_hvt");
-  self.binoculars_face_scanning_models[0][1] linkto(var_0, "J_Head");
+  self.binoculars_face_scanning_models[0][1] linkTo(var_0, "J_Head");
   self.binoculars_face_scanning_models[0][1] hideallparts();
   self.binoculars_face_scanning_models[0][2] = spawn("script_model", var_0 gettagorigin("J_Head"));
   self.binoculars_face_scanning_models[0][2].angles = var_0 gettagangles("J_Head");
   self.binoculars_face_scanning_models[0][2] setModel("cnd_facial_rcg_03_non_hvt");
-  self.binoculars_face_scanning_models[0][2] linkto(var_0, "J_Head");
+  self.binoculars_face_scanning_models[0][2] linkTo(var_0, "J_Head");
   self.binoculars_face_scanning_models[0][2] hideallparts();
   self.binoculars_face_scanning_models[1][0] = spawn("script_model", var_0 gettagorigin("J_Head"));
   self.binoculars_face_scanning_models[1][0].angles = var_0 gettagangles("J_Head");
   self.binoculars_face_scanning_models[1][0] setModel("cnd_facial_rcg_01");
-  self.binoculars_face_scanning_models[1][0] linkto(var_0, "J_Head");
+  self.binoculars_face_scanning_models[1][0] linkTo(var_0, "J_Head");
   self.binoculars_face_scanning_models[1][0] hideallparts();
   self.binoculars_face_scanning_models[1][1] = spawn("script_model", var_0 gettagorigin("J_Head"));
   self.binoculars_face_scanning_models[1][1].angles = var_0 gettagangles("J_Head");
   self.binoculars_face_scanning_models[1][1] setModel("cnd_facial_rcg_02");
-  self.binoculars_face_scanning_models[1][1] linkto(var_0, "J_Head");
+  self.binoculars_face_scanning_models[1][1] linkTo(var_0, "J_Head");
   self.binoculars_face_scanning_models[1][1] hideallparts();
   self.binoculars_face_scanning_models[1][2] = spawn("script_model", var_0 gettagorigin("J_Head"));
   self.binoculars_face_scanning_models[1][2].angles = var_0 gettagangles("J_Head");
   self.binoculars_face_scanning_models[1][2] setModel("cnd_facial_rcg_03");
-  self.binoculars_face_scanning_models[1][2] linkto(var_0, "J_Head");
+  self.binoculars_face_scanning_models[1][2] linkTo(var_0, "J_Head");
   self.binoculars_face_scanning_models[1][2] hideallparts();
   self.binoculars_hud_item["percentage"] = maps\_hud_util::createclientfontstring("small", 1.3);
   self.binoculars_hud_item["percentage"].x = 203;
@@ -1303,7 +1303,7 @@ binocular_reticle_target_reaction() {
 
           self.binocular_target.origin = self.binoculars_scan_target gettagorigin("tag_eye") - (0, 0, 3);
           self.binocular_target.angles = self.binoculars_scan_target gettagangles("tag_eye");
-          self.binocular_target linkto(self.binoculars_scan_target, "tag_eye");
+          self.binocular_target linkTo(self.binoculars_scan_target, "tag_eye");
           self.binocular_target.linked_to_ent = self.binoculars_scan_target;
           thread binoculars_remove_target_on_death(self.binoculars_scan_target);
           var_5 = self.binoculars_scan_target;

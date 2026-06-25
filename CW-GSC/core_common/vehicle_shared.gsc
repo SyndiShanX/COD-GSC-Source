@@ -900,7 +900,7 @@ function function_3f76e204(path_start, player_origin, player_angles, height_offs
 
   var_f9b50317 = (isDefined(level.mapcenter) ? level.mapcenter : (0, 0, 0)) - player_origin;
   var_bf81c9d8 = distance(player_origin, isDefined(level.mapcenter) ? level.mapcenter : (0, 0, 0));
-  var_f9b50317 = vectornormalize(var_f9b50317);
+  var_f9b50317 = vectorNormalize(var_f9b50317);
   new_angles = vectortoangles(var_f9b50317);
   new_angles += angle_offset;
   var_f9b50317 *= var_bf81c9d8 * var_bc779e6c;
@@ -1010,7 +1010,7 @@ function init(vehicle) {
   vehicle useanimtree("generic");
 
   if(isDefined(vehicle.e_dyn_path)) {
-    vehicle.e_dyn_path linkto(vehicle);
+    vehicle.e_dyn_path linkTo(vehicle);
   }
 
   vehicle flag::init("waiting_for_flag");
@@ -1800,7 +1800,7 @@ function get_vehiclenode_any_dynamic(target) {
   path_start = getvehiclenode(target, "targetname");
 
   if(!isDefined(path_start)) {
-    path_start = getent(target, "targetname");
+    path_start = getEnt(target, "targetname");
   } else if(self.vehicleclass === "plane") {
     println("<dev string:x256>" + path_start.targetname);
     println("<dev string:x276>" + self.vehicletype);
@@ -2024,7 +2024,7 @@ function spawn(modelname, targetname, vehicletype, origin, angles) {
   assert(isDefined(vehicletype));
   assert(isDefined(origin));
   assert(isDefined(angles));
-  return spawnvehicle(vehicletype, origin, angles, targetname);
+  return spawnVehicle(vehicletype, origin, angles, targetname);
 }
 
 function impact_fx(fxname, surfacetypes) {
@@ -2350,7 +2350,7 @@ function get_from_spawnStruct(target) {
 }
 
 function get_from_entity(target) {
-  return getent(target, "targetname");
+  return getEnt(target, "targetname");
 }
 
 function get_from_spawnstruct_target(target) {
@@ -2358,7 +2358,7 @@ function get_from_spawnstruct_target(target) {
 }
 
 function get_from_entity_target(target) {
-  return getent(target, "target");
+  return getEnt(target, "target");
 }
 
 function is_destructible() {
@@ -2746,7 +2746,7 @@ function private _watch_for_hijacked_vehicles() {
 }
 
 function disconnect_paths(detail_level = 2, move_allowed = 1) {
-  self disconnectpaths(detail_level, move_allowed);
+  self disconnectPaths(detail_level, move_allowed);
   self enableobstacle(0);
 }
 
@@ -3012,7 +3012,7 @@ function get_closest_attacker_with_missile_locked_on_to_me(monitored_entity) {
       client_flag = 1 << attacker getentitynumber();
 
       if(client_flag &remaining_locked_on_flags) {
-        to_attacker = vectornormalize(attacker.origin - view_origin);
+        to_attacker = vectorNormalize(attacker.origin - view_origin);
         attacker_dot = vectordot(view_forward, to_attacker);
 
         if(attacker_dot > closest_attacker_dot) {
@@ -3284,7 +3284,7 @@ function private function_d53cf714(params) {
 
   if(isDefined(params) && isDefined(params.value)) {
     if(params.value != "<dev string:x252>") {
-      player = getplayers()[0];
+      player = getPlayers()[0];
       level.vehicle_spawner.dynamic_spawn_hud = newdebughudelem(player);
       level.vehicle_spawner.dynamic_spawn_hud.alignx = "<dev string:x566>";
       level.vehicle_spawner.dynamic_spawn_hud.x = 20;
@@ -3304,13 +3304,13 @@ function private function_8b412f99(vehicle_name) {
   self endon(#"hash_4e305005b552fa4e");
 
   while(true) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     origin = player.origin + anglesToForward(player getplayerangles()) * 270;
     origin += (0, 0, 40);
 
     if(player useButtonPressed()) {
       self.dynamic_spawn_dummy_model hide();
-      vehicle = spawnvehicle(vehicle_name, origin, player.angles, "<dev string:x57e>");
+      vehicle = spawnVehicle(vehicle_name, origin, player.angles, "<dev string:x57e>");
       vehicle makevehicleusable();
 
       while(player useButtonPressed()) {
@@ -3382,7 +3382,7 @@ function function_280e8883() {
 
 function function_cccd25de(params) {
   if(int(params.value)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player isinvehicle()) {
         vehicle = player getvehicleoccupied();
         vehicle dodamage(vehicle.maxhealth, vehicle.origin);
@@ -3443,7 +3443,7 @@ function function_93844822(e_player, b_skip_scene, b_enter = 1) {
           }
         }
 
-        var_9d0b2a04 = vectordot(anglestoright(self.angles), vectornormalize(self.origin - e_player.origin));
+        var_9d0b2a04 = vectordot(anglestoright(self.angles), vectorNormalize(self.origin - e_player.origin));
 
         if(var_9d0b2a04 > 0) {
           var_664b49b8 = "left";
@@ -3504,7 +3504,7 @@ function function_93844822(e_player, b_skip_scene, b_enter = 1) {
 
     if(!b_enter) {
       if(isDefined(s_info.v_teleport_pos)) {
-        e_player setorigin(s_info.v_teleport_pos);
+        e_player setOrigin(s_info.v_teleport_pos);
       }
 
       if(isDefined(s_info.v_teleport_angles)) {
@@ -3648,7 +3648,7 @@ function function_700512f1(vehicle) {
   vehicleup = anglestoup(vehicle.angles);
   var_2dd1b16a = vehicle.origin + vehicleup * 20;
   angles = (0, vehicle.angles[1], 0);
-  rightvecdot = vectordot(anglestoright(angles), vectornormalize(self.origin - var_2dd1b16a));
+  rightvecdot = vectordot(anglestoright(angles), vectorNormalize(self.origin - var_2dd1b16a));
 
   if(rightvecdot > 0) {
     return "right";
@@ -3734,7 +3734,7 @@ function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
       animation = self function_1895ca2(var_8730ee3e, var_ef8d5042, var_de5ed888);
 
       if(isDefined(animation) && self hasdobj()) {
-        self animscripted("vehicle_enter_anim_player", eventstruct.vehicle function_5051cc0c(eventstruct.seat_index), eventstruct.vehicle function_90d45d34(eventstruct.seat_index), animation, "server script", undefined, isDefined(eventstruct.vehicle.var_7d3d0f72) ? eventstruct.vehicle.var_7d3d0f72 : 1, undefined, undefined, undefined, 1);
+        self animScripted("vehicle_enter_anim_player", eventstruct.vehicle function_5051cc0c(eventstruct.seat_index), eventstruct.vehicle function_90d45d34(eventstruct.seat_index), animation, "server script", undefined, isDefined(eventstruct.vehicle.var_7d3d0f72) ? eventstruct.vehicle.var_7d3d0f72 : 1, undefined, undefined, undefined, 1);
       }
 
       self callback::callback(#"on_vehicle_enter");
@@ -3757,7 +3757,7 @@ function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
           animorigin = trace[#"position"];
         }
 
-        eventstruct.vehicle animscripted("vehicle_enter_anim_vehicle", animorigin, angles, vehicleanim, "normal", undefined, isDefined(eventstruct.vehicle.var_7d3d0f72) ? eventstruct.vehicle.var_7d3d0f72 : 1, undefined, undefined, undefined, 1);
+        eventstruct.vehicle animScripted("vehicle_enter_anim_vehicle", animorigin, angles, vehicleanim, "normal", undefined, isDefined(eventstruct.vehicle.var_7d3d0f72) ? eventstruct.vehicle.var_7d3d0f72 : 1, undefined, undefined, undefined, 1);
       }
     }
   }
@@ -3794,7 +3794,7 @@ function event_handler[change_seat] function_124469f4(eventstruct) {
         eventstruct.vehicle.t_sarah_foy_objective__indicator_[eventstruct.seat_index] = 1;
       }
 
-      rightvecdot = vectordot(anglestoright(eventstruct.vehicle.angles), vectornormalize(self.origin - eventstruct.vehicle.origin));
+      rightvecdot = vectordot(anglestoright(eventstruct.vehicle.angles), vectorNormalize(self.origin - eventstruct.vehicle.origin));
 
       if(rightvecdot > 0) {
         animation = var_8730ee3e.var_9b47c071;
@@ -3803,7 +3803,7 @@ function event_handler[change_seat] function_124469f4(eventstruct) {
       }
 
       if(isDefined(animation)) {
-        self animscripted("vehicle_enter_anim", eventstruct.vehicle function_5051cc0c(eventstruct.seat_index), eventstruct.vehicle function_90d45d34(eventstruct.seat_index), animation, "server script", undefined, 1, undefined, undefined, undefined, 1);
+        self animScripted("vehicle_enter_anim", eventstruct.vehicle function_5051cc0c(eventstruct.seat_index), eventstruct.vehicle function_90d45d34(eventstruct.seat_index), animation, "server script", undefined, 1, undefined, undefined, undefined, 1);
       }
 
       vehicleanim = var_8730ee3e.vehicleenteranim;
@@ -3821,7 +3821,7 @@ function function_fa8ced6e(v_origin, v_angles, str_vehicle = undefined) {
   }
 
   assert(isDefined(str_vehicle), "<dev string:x6b1>");
-  vh_player = spawnvehicle(str_vehicle, v_origin, v_angles, "player_spawned_vehicle");
+  vh_player = spawnVehicle(str_vehicle, v_origin, v_angles, "player_spawned_vehicle");
   vh_player usevehicle(self, 0);
   return vh_player;
 }
@@ -3984,14 +3984,14 @@ function function_e863c9af(owner, var_8fbb46cd, var_abfdfad5) {
   ownerforward = anglesToForward(owner.angles);
 
   if(!var_abfdfad5) {
-    var_538c5a93 = vectornormalize((ownerforward[0], ownerforward[1], 0));
+    var_538c5a93 = vectorNormalize((ownerforward[0], ownerforward[1], 0));
     velocity = var_538c5a93 * 1000;
-    var_43fa4fb6 = vectornormalize((var_8fbb46cd[0], var_8fbb46cd[1], 0));
+    var_43fa4fb6 = vectorNormalize((var_8fbb46cd[0], var_8fbb46cd[1], 0));
     velocity += function_7786cb5e(var_43fa4fb6, owner getvelocity()) * 1.2;
   } else {
-    ownerforward = vectornormalize(ownerforward);
+    ownerforward = vectorNormalize(ownerforward);
     velocity = ownerforward * 1000;
-    var_8fbb46cd = vectornormalize(var_8fbb46cd);
+    var_8fbb46cd = vectorNormalize(var_8fbb46cd);
     velocity += owner getvelocity() * 1.2;
   }
 
@@ -4025,14 +4025,14 @@ function move_flare(owner, gravity, var_2434a7ac, var_2d0d8b66, max_time, flare_
   }
 
   velocity = function_e863c9af(owner, anglesToForward(var_4626a28f), var_abfdfad5);
-  var_c1ad7c79 = vectornormalize(velocity);
+  var_c1ad7c79 = vectorNormalize(velocity);
 
   while(gettime() < end_time) {
     if(gettime() > var_6de53efa) {
       newvelocity = velocity * (1 - (gettime() - var_6de53efa) / 1000 / (max_time - var_2434a7ac));
     } else {
       velocity = self getvelocity();
-      var_c18f874c = vectornormalize(velocity);
+      var_c18f874c = vectorNormalize(velocity);
       var_40a3c87d = function_e863c9af(owner, var_c18f874c, var_abfdfad5);
       velocity = lerpvector(velocity, var_40a3c87d, 0.5);
       newvelocity = velocity;
@@ -4046,14 +4046,14 @@ function move_flare(owner, gravity, var_2434a7ac, var_2d0d8b66, max_time, flare_
       if(traceresult[#"fraction"] > 0) {
         movetopos = traceresult[#"position"] + traceresult[#"normal"] * 0.1;
         var_2d0d8b66 *= traceresult[#"fraction"];
-        self moveto(movetopos, var_2d0d8b66);
+        self moveTo(movetopos, var_2d0d8b66);
         self waittill(#"movedone");
       }
 
       break;
     }
 
-    self moveto(movetopos, var_2d0d8b66);
+    self moveTo(movetopos, var_2d0d8b66);
     wait var_2d0d8b66;
   }
 

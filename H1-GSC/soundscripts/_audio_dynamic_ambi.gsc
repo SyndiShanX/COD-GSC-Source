@@ -408,7 +408,7 @@ dambx_play_component_loops(var_0, var_1, var_2, var_3, var_4) {
       var_7 playLoopSound(var_6);
 
       if(isDefined(var_4)) {
-        var_7 linkto(var_4);
+        var_7 linkTo(var_4);
       }
 
       var_8 = level._audio.damb.single_loop_handle_index;
@@ -667,7 +667,7 @@ dambx_perform_oneshot_event(var_0, var_1, var_2) {
     var_4 = spawn("script_origin", var_3 + var_2.start_position);
 
     if(isDefined(var_2.ent) && var_2.mode == "attach") {
-      var_4 linkto(var_2.ent);
+      var_4 linkTo(var_2.ent);
     }
 
     var_4 playSound(var_2.alias["name"], "sounddone");
@@ -681,7 +681,7 @@ dambx_perform_oneshot_event(var_0, var_1, var_2) {
 
       if(isDefined(var_2.end_position) && !isDefined(var_2.entity)) {
         var_6 = 0.1 * var_2.travel_time;
-        var_4 moveto(var_3 + var_2.end_position, var_2.travel_time, var_6, var_6);
+        var_4 moveTo(var_3 + var_2.end_position, var_2.travel_time, var_6, var_6);
       }
 
       if(isDefined(var_2.start_pitch)) {
@@ -740,7 +740,7 @@ dambx_perform_loop_event(var_0, var_1, var_2) {
     var_13 = spawn("script_origin", var_3 + var_2.start_position);
 
     if(isDefined(var_2.ent) && var_2.mode == "attach") {
-      var_13 linkto(var_2.ent);
+      var_13 linkTo(var_2.ent);
     }
 
     var_13 playLoopSound(var_9);
@@ -768,7 +768,7 @@ dambx_perform_loop_event(var_0, var_1, var_2) {
 
       if(var_15) {
         var_16 = 0.1 * var_2.travel_time;
-        var_13 moveto(var_3 + var_2.end_position, var_2.travel_time, var_16, var_16);
+        var_13 moveTo(var_3 + var_2.end_position, var_2.travel_time, var_16, var_16);
       }
 
       if(isDefined(var_2.start_pitch)) {

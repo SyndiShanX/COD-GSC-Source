@@ -34,7 +34,7 @@ function play_intro_music() {
 function power_clangs() {
   clangs = struct::get_array("amb_power_clang", "targetname");
   for(i = 0; i < clangs.size; i++) {
-    playsoundatposition("zmb_circuit", clangs[i].origin);
+    playSoundAtPosition("zmb_circuit", clangs[i].origin);
     wait(randomfloatrange(0.25, 0.7));
   }
 }
@@ -82,7 +82,7 @@ function play_initial_alarm() {
   structs = struct::get_array("amb_warning_siren", "targetname");
   wait(1);
   for(i = 0; i < structs.size; i++) {
-    playsoundatposition("evt_cosmo_alarm_single", structs[i].origin);
+    playSoundAtPosition("evt_cosmo_alarm_single", structs[i].origin);
   }
   wait(0.5);
 }
@@ -106,7 +106,7 @@ function radio_easter_eggs() {
 function function_5fd10b57() {
   self zm_unitrigger::create_unitrigger();
   self waittill("trigger_activated");
-  playsoundatposition("vox_radio_egg_" + self.script_int, self.origin);
+  playSoundAtPosition("vox_radio_egg_" + self.script_int, self.origin);
 }
 
 function function_7624a208() {
@@ -155,7 +155,7 @@ function function_10544d8() {
     self.var_48df29fd delete();
   }
   level notify("hash_b524a8eb");
-  playsoundatposition("zmb_redphone_destroy", self.origin);
+  playSoundAtPosition("zmb_redphone_destroy", self.origin);
   self.t_damage delete();
 }
 
@@ -187,7 +187,7 @@ function init_redphone_eggs() {
       if(var_a008170d.size <= 0) {
         var_a008170d = array(0, 1, 2, 3, 4, 5, 6, 7, 8);
       }
-      playsoundatposition("vox_egg_redphone_" + var_f1b4932d, var_9d999891.origin);
+      playSoundAtPosition("vox_egg_redphone_" + var_f1b4932d, var_9d999891.origin);
       var_693fabd9 = var_f1b4932d;
       wait(30);
     }
@@ -250,7 +250,7 @@ function function_d772340() {
 function init_doll_eggs() {
   wait(10);
   for(i = 0; i < 4; i++) {
-    ent = getent("doll_egg_" + i, "targetname");
+    ent = getEnt("doll_egg_" + i, "targetname");
     if(!isDefined(ent)) {
       return;
     }
@@ -262,8 +262,8 @@ function doll_egg(num) {
   if(!isDefined(self)) {
     return;
   }
-  self usetriggerrequirelookat();
-  self setcursorhint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
   alias = undefined;
   while(true) {
     self waittill("trigger", player);
@@ -294,7 +294,7 @@ function doll_egg(num) {
 }
 
 function function_a0f14d15(grenade, model, player) {
-  var_7d5605b7 = getent("sndzhdeggtrig", "targetname");
+  var_7d5605b7 = getEnt("sndzhdeggtrig", "targetname");
   if(!isDefined(var_7d5605b7)) {
     return false;
   }
@@ -332,9 +332,9 @@ function function_2e4843da() {
 function function_61c7f9a3(grenade, model, var_7d5605b7) {
   wait(1);
   time = 3;
-  var_7d5605b7.s_target.var_ac086ffb moveto(grenade.origin + vectorscale((0, 0, 1), 50), time, time - 0.05);
+  var_7d5605b7.s_target.var_ac086ffb moveTo(grenade.origin + vectorscale((0, 0, 1), 50), time, time - 0.05);
   wait(time);
-  playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + vectorscale((0, 0, 1), 50));
+  playSoundAtPosition("zmb_gersh_teleporter_out", grenade.origin + vectorscale((0, 0, 1), 50));
   model delete();
   var_7d5605b7 notify("hash_de264026");
 }

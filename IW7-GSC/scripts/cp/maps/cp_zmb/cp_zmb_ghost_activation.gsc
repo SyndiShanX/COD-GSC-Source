@@ -76,8 +76,8 @@ shoot_ice_monster_eyes_monitor(var_0) {
 }
 
 wait_for_8bitskull_damage(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
-  var_4 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_0, "targetname");
   var_5 = spawnfx(level._effect["skull_target"], var_4.origin, anglesToForward(var_4.angles), anglestoup(var_4.angles));
   var_3 thread eye_damage_monitor(var_3, var_1);
   wait(2);
@@ -118,7 +118,7 @@ debug_shoot_ice_monster_eye_during_coaster_ride() {}
 
 spell_the_word_ghost() {
   level endon("spelled_the_word_ghost");
-  var_0 = getent("ghost_activation_letters_trigger", "targetname");
+  var_0 = getEnt("ghost_activation_letters_trigger", "targetname");
   var_0 delete();
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("zmb_8_bit_price");
@@ -664,12 +664,12 @@ movement_logic(var_0) {
   var_4 = 120;
   for(;;) {
     for(var_5 = 1; var_5 <= var_3; var_5++) {
-      var_0 moveto(var_0.origin - (var_4, 0, 0), var_1);
+      var_0 moveTo(var_0.origin - (var_4, 0, 0), var_1);
       wait(var_2);
     }
 
     for(var_5 = 1; var_5 <= var_3; var_5++) {
-      var_0 moveto(var_0.origin + (var_4, 0, 0), var_1);
+      var_0 moveTo(var_0.origin + (var_4, 0, 0), var_1);
       wait(var_2);
     }
   }
@@ -704,7 +704,7 @@ debug_hit_the_floating_skull_with_spaceland_laser() {}
 
 brute_hit_arcade_cabinet_with_laser() {
   level endon("brute_laser_hit_cabinet");
-  var_0 = getent("ghost_arcade_damage_trigger", "targetname");
+  var_0 = getEnt("ghost_arcade_damage_trigger", "targetname");
   for(;;) {
     var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(isDefined(var_2) && isDefined(var_2.agent_type) && var_2.agent_type == "zombie_brute" && isDefined(var_5) && var_5 == "MOD_RIFLE_BULLET") {
@@ -722,7 +722,7 @@ debug_brute_hit_arcade_cabinet_with_laser() {}
 wait_for_player_activation() {
   level endon("player_debug_activate_cabinet");
   var_0 = disable_arcade_cabinet_next_to_ghost_n_skull();
-  var_1 = getent("ghost_arcade_activation_area", "targetname");
+  var_1 = getEnt("ghost_arcade_activation_area", "targetname");
   level.gns_game_console_vfx = spawnfx(level._effect["GnS_activation"], (2859, -553, 286));
   triggerfx(level.gns_game_console_vfx);
   var_2 = (2874, -542, 242);

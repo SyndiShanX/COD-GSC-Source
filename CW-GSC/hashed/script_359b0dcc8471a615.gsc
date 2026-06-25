@@ -47,7 +47,7 @@ function mannequin_init() {
 
     if(i < 28) {
       if(isDefined(var_4c9b75d1)) {
-        var_4c9b75d1 disconnectpaths();
+        var_4c9b75d1 disconnectPaths();
       }
 
       continue;

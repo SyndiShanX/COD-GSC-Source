@@ -189,7 +189,7 @@ ally_ships() {
 
 ship_shoot_loop(var_0, var_1) {
   level endon(var_1);
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
 
   for(;;) {
     var_2 thread ship_shoot();
@@ -223,7 +223,7 @@ ship_shoot_vert_missile_loop(var_0, var_1, var_2, var_3, var_4, var_5) {
     level endon(var_5);
   }
 
-  var_6 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_6 = common_scripts\utility::getStruct(var_0, "targetname");
 
   for(;;) {
     if(randomint(100) > 75) {
@@ -308,7 +308,7 @@ land_shoot_vert_missile_loop(var_0, var_1, var_2, var_3, var_4, var_5) {
     level endon(var_5);
   }
 
-  var_6 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_6 = common_scripts\utility::getStruct(var_0, "targetname");
 
   for(;;) {
     if(isDefined(level.player.using_depth_charge) && level.player.using_depth_charge) {
@@ -385,14 +385,14 @@ dz_enemy_destroyer_mortars() {
   var_0 = "defend_zodiac_finished";
   level endon(var_0);
   var_1 = ["dz_enemy_mortar_01_dest_01", "dz_enemy_mortar_01_dest_02", "dz_enemy_mortar_01_dest_03", "dz_enemy_mortar_01_dest_04"];
-  var_2 = common_scripts\utility::getstruct("dz_enemy_mortar_01", "targetname");
+  var_2 = common_scripts\utility::getStruct("dz_enemy_mortar_01", "targetname");
   var_3 = common_scripts\utility::getStructArray("dz_enemy_mortar_01_dest", "targetname");
 
   for(;;) {
     var_4 = var_1[randomint(var_1.size)];
-    var_5 = common_scripts\utility::getstruct(var_4, "targetname");
+    var_5 = common_scripts\utility::getStruct(var_4, "targetname");
     screenshake(var_5.origin, 3.5, 2, 2.5, 2, 0, 2, 10000, 5, 2, 7, 2.6);
-    level.player playrumbleonentity("heavy_1s");
+    level.player playRumbleOnEntity("heavy_1s");
     thread common_scripts\utility::play_sound_in_space("exp_armor_vehicle", var_5.origin);
     wait(randomfloatrange(8, 14));
   }
@@ -577,7 +577,7 @@ handle_exploding_heli_fx(var_0) {
 handle_onplayer_debris() {
   var_0 = spawn("script_model", self.origin);
   var_0 setModel("tag_origin");
-  var_0 linkto(self);
+  var_0 linkTo(self);
   playFXOnTag(common_scripts\utility::getfx("vfx_post_impact_debris"), var_0, "tag_origin");
   level.antenna waittillmatch("single anim", "impact_deck2");
   stopFXOnTag(common_scripts\utility::getfx("vfx_post_impact_debris"), var_0, "tag_origin");

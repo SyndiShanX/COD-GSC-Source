@@ -44,7 +44,7 @@ main() {
   level thread escape_intro_checkpoints();
   level thread escape_intro_hints();
   level thread escape_intro_vo();
-  m_blockade = getent("drone_blockade", "targetname");
+  m_blockade = getEnt("drone_blockade", "targetname");
   m_blockade thread drone_intro_blockade();
   level thread blockade_scaffolding_damage_triggers();
   level thread shoot_or_collide_triggers_creates_fx("scaffolding_1_collide_trigger", "scaffolding_1_damage_trigger", "scaffolding_1", "soct_window_smash", undefined, undefined);
@@ -62,7 +62,7 @@ main() {
 escape_intro_objectives() {
   set_objective(level.obj_escape);
   trigger_wait("sm_di_scaffolding");
-  s_blockade_obj = getstruct("blockade_obj", "targetname");
+  s_blockade_obj = getStruct("blockade_obj", "targetname");
   set_objective(level.obj_blockade, s_blockade_obj, "destroy");
   level waittill("di_blockade_destroyed");
   set_objective(level.obj_blockade, s_blockade_obj, "done");
@@ -88,13 +88,13 @@ escape_intro_vo() {
 }
 
 escape_intro_spawn_funcs() {
-  sp_st_fork = getent("st_fork_bad", "targetname");
+  sp_st_fork = getEnt("st_fork_bad", "targetname");
   sp_st_fork add_spawn_function(::run_over);
   a_st_scaffolding_left_0 = getEntArray("st_scaffolding_left_0", "targetname");
   array_thread(a_st_scaffolding_left_0, ::add_spawn_function, ::run_over);
-  sp_st_scaffolding_middle_0 = getent("st_scaffolding_middle_0", "targetname");
+  sp_st_scaffolding_middle_0 = getEnt("st_scaffolding_middle_0", "targetname");
   sp_st_scaffolding_middle_0 add_spawn_function(::shoot_at_target_untill_dead, level.player);
-  sp_st_scaffolding_right_0 = getent("st_scaffolding_right_0", "targetname");
+  sp_st_scaffolding_right_0 = getEnt("st_scaffolding_right_0", "targetname");
   sp_st_scaffolding_right_0 add_spawn_function(::shoot_at_target_untill_dead, level.player);
   a_ai_targets = getEntArray("ai_target", "script_noteworthy");
   array_thread(a_ai_targets, ::add_spawn_function, ::set_lock_on_target, vectorscale((0, 0, 1), 45.0));
@@ -143,19 +143,19 @@ cleanup_di_right_guys() {
 }
 
 cleanup_intro_part1() {
-  e_ent = getent("di_left_0_ai", "targetname");
+  e_ent = getEnt("di_left_0_ai", "targetname");
 
   if(isDefined(e_ent)) {
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
   }
 
-  e_ent = getent("di_glass_building_1_ai", "targetname");
+  e_ent = getEnt("di_glass_building_1_ai", "targetname");
 
   if(isDefined(e_ent)) {
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
   }
 
-  e_ent = getent("di_glass_building_2_ai", "targetname");
+  e_ent = getEnt("di_glass_building_2_ai", "targetname");
 
   if(isDefined(e_ent)) {
     e_ent dodamage(e_ent.health + 100, e_ent.origin);
@@ -165,17 +165,17 @@ cleanup_intro_part1() {
 drone_intro_lookat_targets() {
   self endon("death");
   self waittill("di_billboard");
-  self setlookatent(getent("lookat_di_billboard", "targetname"));
+  self setlookatent(getEnt("lookat_di_billboard", "targetname"));
 
   iprintlnbold("look at billboard");
 
   self waittill("di_left_side");
-  self setlookatent(getent("lookat_di_left", "targetname"));
+  self setlookatent(getEnt("lookat_di_left", "targetname"));
 
   iprintlnbold("look left");
 
   self waittill("di_blockade");
-  self setlookatent(getent("drone_blockade_01", "targetname"));
+  self setlookatent(getEnt("drone_blockade_01", "targetname"));
   iprintlnbold("look at blockade");
 }
 
@@ -213,8 +213,8 @@ drone_intro_billboard() {
   level thread run_scene_clear_goal("di_billboard_right");
   level thread run_scene_clear_goal("di_billboard_side");
   scene_wait("di_billboard_right");
-  m_billboard = getent("billboard_fall", "targetname");
-  t_billboard = getent("t_di_billboard", "targetname");
+  m_billboard = getEnt("billboard_fall", "targetname");
+  t_billboard = getEnt("t_di_billboard", "targetname");
   e_triggerer = undefined;
 
   while(!isPlayer(e_triggerer)) {
@@ -222,7 +222,7 @@ drone_intro_billboard() {
     wait 0.05;
   }
 
-  e_floor = getent("intro_billboard_walkway", "targetname");
+  e_floor = getEnt("intro_billboard_walkway", "targetname");
   e_floor delete();
   billboard_ragdoll(1);
   billboard_ragdoll(2);
@@ -246,8 +246,8 @@ intro_pipe_building_01_guy() {
 }
 
 billboard_ragdoll(n_index) {
-  s_target = getstruct("billboard_target_" + n_index, "targetname");
-  ai_billboard = getent("di_billboard_" + n_index + "_ai", "targetname");
+  s_target = getStruct("billboard_target_" + n_index, "targetname");
+  ai_billboard = getEnt("di_billboard_" + n_index + "_ai", "targetname");
 
   if(isalive(ai_billboard)) {
     v_launch = s_target.origin - ai_billboard.origin;
@@ -281,7 +281,7 @@ drone_intro_scaffolding() {
   level thread run_scene("di_scaffolding_middle_7");
   wait 0.2;
   level thread run_scene("di_scaffolding_middle_8");
-  e_spawner = getent("intro_launcher_left_side_spawner", "targetname");
+  e_spawner = getEnt("intro_launcher_left_side_spawner", "targetname");
   e_ai = simple_spawn_single(e_spawner);
   e_ai.goalradius = 48;
 }
@@ -362,7 +362,7 @@ drone_intro_blockade() {
       level notify("fxanim_drone_blockade_start");
       level notify("di_blockade_destroyed");
       level.blockade_destroyed_time = gettime();
-      s_blockade_obj = getstruct("blockade_obj", "targetname");
+      s_blockade_obj = getStruct("blockade_obj", "targetname");
       a_blockades = getEntArray("drone_blockade_01", "targetname");
       array_delete(a_blockades);
       b_blockade_destroyed = 1;
@@ -430,13 +430,13 @@ kill_on_player_vehicle_swap() {
 
   level.player.viewlockedentity waittill("change_seat");
   pak3_kill_vehicle(self);
-  e_drone = getent("passenger_700_drone", "targetname");
+  e_drone = getEnt("passenger_700_drone", "targetname");
 
   if(isDefined(e_drone)) {
     e_drone delete();
   }
 
-  e_drone = getent("shooter_700_drone", "targetname");
+  e_drone = getEnt("shooter_700_drone", "targetname");
 
   if(isDefined(e_drone)) {
     e_drone delete();
@@ -464,7 +464,7 @@ soct_intro_chicken_left() {
   self endon("swerved_right");
   nd_swerve = getvehiclenode("chicken_swerve", "targetname");
   nd_dest = getvehiclenode("chicken_dest_left", "targetname");
-  e_trigger = getent("chicken_swerve_left", "targetname");
+  e_trigger = getEnt("chicken_swerve_left", "targetname");
 
   if(isDefined(e_trigger)) {
     e_trigger waittill("trigger");
@@ -499,11 +499,11 @@ soct_intro_change_speed() {
 
 blockade_scaffolding_damage_triggers() {
   health = 3000;
-  scaffolding_trigger1 = getent("scaffolding_start1_damage_trigger", "targetname");
+  scaffolding_trigger1 = getEnt("scaffolding_start1_damage_trigger", "targetname");
   scaffolding_trigger1 thread scaffolding_damage_trigger1(health);
-  scaffolding_trigger2 = getent("scaffolding_start2_damage_trigger", "targetname");
+  scaffolding_trigger2 = getEnt("scaffolding_start2_damage_trigger", "targetname");
   scaffolding_trigger2 thread scaffolding_damage_trigger2(health);
-  scaffolding_trigger5 = getent("scaffolding_start5_damage_trigger", "targetname");
+  scaffolding_trigger5 = getEnt("scaffolding_start5_damage_trigger", "targetname");
   scaffolding_trigger5 thread scaffolding_damage_trigger5(health);
 }
 
@@ -516,7 +516,7 @@ scaffolding_damage_trigger1(health) {
     }
   }
 
-  playsoundatposition("evt_soct_scaffold_1", self.origin);
+  playSoundAtPosition("evt_soct_scaffold_1", self.origin);
   level notify("fxanim_drone_scaffold_01_start");
   self delete();
   remove_blockage_scaffolding_upper_collision();
@@ -554,11 +554,11 @@ scaffolding_damage_trigger5(health) {
 remove_blockage_scaffolding_upper_collision() {
   if(flag("blockage_scaffolding_collision_deleted") == 0) {
     flag_set("blockage_scaffolding_collision_deleted");
-    e_ent = getent("blockade_scaffolding_1", "targetname");
+    e_ent = getEnt("blockade_scaffolding_1", "targetname");
     e_ent delete();
-    e_ent = getent("blockade_scaffolding_2", "targetname");
+    e_ent = getEnt("blockade_scaffolding_2", "targetname");
     e_ent delete();
-    e_ent = getent("blockade_scaffolding_3", "targetname");
+    e_ent = getEnt("blockade_scaffolding_3", "targetname");
     e_ent delete();
   }
 }
@@ -567,7 +567,7 @@ start_left_balcony_damage_trigger() {
   wait 6;
   e_ai = simple_spawn_single("start_left_balcony_spawner");
   e_ai thread left_balcony_ai();
-  e_damage_trigger = getent("start_left_balcony_damage_trigger", "targetname");
+  e_damage_trigger = getEnt("start_left_balcony_damage_trigger", "targetname");
   health = 500;
 
   while(health > 0) {
@@ -579,7 +579,7 @@ start_left_balcony_damage_trigger() {
   }
 
   level notify("fxanim_balcony_collapse_start");
-  e_clip = getent("start_left_balcony_clip", "targetname");
+  e_clip = getEnt("start_left_balcony_clip", "targetname");
   e_clip delete();
   e_damage_trigger delete();
 }
@@ -594,8 +594,8 @@ left_balcony_ai() {
 
 blockage_walkway_damage_trigger(str_endon) {
   level endon(str_endon);
-  e_info_volume = getent("blockage_walkway_info_volume", "targetname");
-  e_damage_trigger = getent("blockage_walkway_damage_trigger", "targetname");
+  e_info_volume = getEnt("blockage_walkway_info_volume", "targetname");
+  e_damage_trigger = getEnt("blockage_walkway_damage_trigger", "targetname");
 
   while(true) {
     e_damage_trigger waittill("damage", amount, attacker, direction_vec, damage_ori, type);

@@ -209,13 +209,13 @@ dotraverseteleport(var_0, var_1, var_2, var_3) {
     var_4 = self func_8146();
   }
 
-  var_5 = vectornormalize(var_4 - self.origin * (1, 1, 0));
+  var_5 = vectorNormalize(var_4 - self.origin * (1, 1, 0));
   var_6 = vectortoangles(var_5);
   self orientmode("face angle abs", var_6);
   wait(0.9);
   self hide();
   self.ishidden = 1;
-  self setorigin(var_4, 0);
+  self setOrigin(var_4, 0);
   playFX(level._effect["elvira_stand_smoke"], var_4);
   wait(0.25);
   self show();

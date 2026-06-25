@@ -307,7 +307,7 @@ function private function_91d9d948(objective) {
     return;
   }
 
-  enemyfwd = vectornormalize(self.enemy.origin - self.origin);
+  enemyfwd = vectorNormalize(self.enemy.origin - self.origin);
   var_6dc3b94d = [];
   regioninfo = function_b507a336(goalinfo.regionid);
 
@@ -582,7 +582,7 @@ function private function_f25530e3() {
 function private function_db3a19e8() {
   pixbeginevent(#"");
 
-  if(self isplayinganimscripted() || self arecontrolsfrozen() || self function_5972c3cf() || self isinvehicle()) {
+  if(self isplayinganimScripted() || self arecontrolsfrozen() || self function_5972c3cf() || self isinvehicle()) {
     pixendevent();
     return;
   }

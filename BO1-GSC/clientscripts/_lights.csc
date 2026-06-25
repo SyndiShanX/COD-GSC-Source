@@ -128,7 +128,7 @@ rotate_light_yaw() {
   while(1) {
     for(i = 0; i < self.lights.size; i++) {
       if(isDefined(self.lights[i])) {
-        self.lights[i] RotateYaw(360, self.script_light_rotate_yaw);
+        self.lights[i] rotateYaw(360, self.script_light_rotate_yaw);
       }
     }
     self.lights[0] waittill("rotatedone");
@@ -143,7 +143,7 @@ create_lights(clientNum) {
     self thread rotate_light_yaw();
   }
   if(isDefined(self.script_light_model) && isDefined(self.script_light_on_model) && isDefined(self.script_light_off_model)) {
-    ent = getent(clientNum, self.script_light_model, "targetname");
+    ent = getEnt(clientNum, self.script_light_model, "targetname");
     if(isDefined(ent)) {
       if(!isDefined(self.light_models)) {
         self.light_models = [];

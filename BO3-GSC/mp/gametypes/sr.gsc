@@ -399,12 +399,12 @@ function bombs() {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  trigger = getent("sd_bomb_pickup_trig", "targetname");
+  trigger = getEnt("sd_bomb_pickup_trig", "targetname");
   if(!isDefined(trigger)) {
     util::error("");
     return;
   }
-  visuals[0] = getent("sd_bomb", "targetname");
+  visuals[0] = getEnt("sd_bomb", "targetname");
   if(!isDefined(visuals[0])) {
     util::error("");
     return;
@@ -460,7 +460,7 @@ function bombs() {
       }
     }
     level.bombzones[level.bombzones.size] = bombzone;
-    bombzone.bombdefusetrig = getent(visuals[0].target, "targetname");
+    bombzone.bombdefusetrig = getEnt(visuals[0].target, "targetname");
     assert(isDefined(bombzone.bombdefusetrig));
     bombzone.bombdefusetrig.origin = bombzone.bombdefusetrig.origin + (vectorscale((0, 0, -1), 10000));
     bombzone.bombdefusetrig.label = label;
@@ -657,7 +657,7 @@ function bombplanted(destroyedobj, player) {
     trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 20), player.origin - vectorscale((0, 0, 1), 2000), 0, player);
     tempangle = randomfloat(360);
     forward = (cos(tempangle), sin(tempangle), 0);
-    forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
+    forward = vectorNormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
     dropangles = vectortoangles(forward);
     level.sdbombmodel = spawn("script_model", trace["position"]);
     level.sdbombmodel.angles = dropangles;

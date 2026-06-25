@@ -123,7 +123,7 @@ drone_level_scenario_one() {
   level.rts.codespawncb = ::dronecodespawner;
   thread drone_geo_changes();
   flag_wait("all_players_connected");
-  getplayers()[0] setdstat("PlayerCareerStats", "storypoints", "SO_WAR_TUTORIAL_COMPLETE", 1);
+  getPlayers()[0] setdstat("PlayerCareerStats", "storypoints", "SO_WAR_TUTORIAL_COMPLETE", 1);
   level thread drone_ai_takeover_off();
   level thread drone_ai_takeover_on();
   flag_wait("start_rts");
@@ -157,7 +157,7 @@ setup_objectives() {
 }
 
 drone_level_player_startfps() {
-  playerstart = getent("rts_player_start", "targetname");
+  playerstart = getEnt("rts_player_start", "targetname");
   assert(isDefined(playerstart));
   inf2squad = getsquadbypkg("infantry_ally_reg2_pkg", "allies");
   nextsquad = inf2squad.id;
@@ -201,7 +201,7 @@ level_fade_in(player, delay) {
 }
 
 drone_geo_changes() {
-  level.rts_floor = getent("overwatch_floor", "targetname");
+  level.rts_floor = getEnt("overwatch_floor", "targetname");
   level.rts_floor delete();
   ents = getEntArray("rts_poi_LZ", "targetname");
 
@@ -234,16 +234,16 @@ drone_geo_changes() {
   level.laser_doors = getEntArray("laser_door", "targetname");
 
   foreach(ent in level.laser_doors) {
-    ent disconnectpaths();
+    ent disconnectPaths();
   }
 
-  roof = getent("rts_factory_roof", "targetname");
+  roof = getEnt("rts_factory_roof", "targetname");
 
   if(isDefined(roof)) {
-    targetloc = getstruct("rts_factory_roof_pos", "targetname");
+    targetloc = getStruct("rts_factory_roof_pos", "targetname");
 
     if(isDefined(targetloc)) {
-      roof moveto(targetloc.origin, 0.1);
+      roof moveTo(targetloc.origin, 0.1);
     }
   }
 }
@@ -581,7 +581,7 @@ drone_tutorial() {
       flag_set("block_button_press");
 
     spots = sortarraybyfurthest(dogsquad.members[0].origin, getEntArray("rts_movespot", "targetname"), undefined, undefined, 1);
-    level.rts.tutorialobj = getent("tut_highlight", "targetname");
+    level.rts.tutorialobj = getEnt("tut_highlight", "targetname");
     level.rts.tutorialobj ignorecheapentityflag(1);
     level.rts.tutorialobj hide();
     spot = spots[1].origin;
@@ -894,7 +894,7 @@ metal_storm_target_think(squadid) {
 
   flag_set("target_is_ready");
   level waittill("metal_storm_target_practice");
-  spot = getent("asd_movespot", "targetname");
+  spot = getEnt("asd_movespot", "targetname");
   maps\_so_rts_squad::ordersquaddefend(spot.origin, squadid);
 
   foreach(guy in level.rts.squads[squadid].members) {
@@ -917,7 +917,7 @@ metal_storm_target(squadid) {
 
 dronecodespawner(pkg_ref, team, callback, squadid) {
   if(pkg_ref.ref == "infantry_ally_reg_pkg") {
-    spot = getent("squad_1_loc", "targetname");
+    spot = getEnt("squad_1_loc", "targetname");
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin);
     maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
@@ -925,7 +925,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       guy.allow_oob = 1;
     }
   } else if(pkg_ref.ref == "infantry_ally_reg2_pkg") {
-    spot = getent("squad_2_loc", "targetname");
+    spot = getEnt("squad_2_loc", "targetname");
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin);
     maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
@@ -933,7 +933,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
       guy.allow_oob = 1;
     }
   } else if(pkg_ref.ref == "bigdog_pkg") {
-    spot = getstruct("bigdog_unit_start_point", "targetname");
+    spot = getStruct("bigdog_unit_start_point", "targetname");
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, undefined, spot.origin, 0);
     level.rts.squads[squadid].members[0] forceteleport(spot.origin, spot.angles);
     level.rts.squads[squadid].members[0] thread claw_think();
@@ -961,6 +961,6 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
 claw_think() {
   wait 1;
   self.goalradius = 64;
-  spot = getstruct("claw_movespot", "targetname");
+  spot = getStruct("claw_movespot", "targetname");
   self setgoalpos(spot.origin);
 }

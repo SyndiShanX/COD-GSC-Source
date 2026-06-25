@@ -77,7 +77,7 @@ class csceneplayer: csceneobject {
 
     if(b_enable) {
       while(isalive(player)) {
-        player playrumbleonentity("damage_heavy");
+        player playRumbleOnEntity("damage_heavy");
         wait 0.1;
       }
 
@@ -157,7 +157,7 @@ class csceneplayer: csceneobject {
     csceneobject::function_a04fb5f4();
 
     if(!function_6c1c67c1() && isPlayer(player)) {
-      endcamanimscripted(player);
+      endcamanimScripted(player);
 
       if(csceneobject::function_595c601b()) {
         n_camera_tween = get_camera_tween();
@@ -216,7 +216,7 @@ class csceneplayer: csceneobject {
       player flag::clear(#"non_shared_igc");
     }
 
-    if(!isDefined(player) || !player isplayinganimscripted()) {
+    if(!isDefined(player) || !player isplayinganimScripted()) {
       current_playing_anim[_n_ent_num] = undefined;
     }
 
@@ -249,7 +249,7 @@ class csceneplayer: csceneobject {
 
     if(b_enable) {
       while(isalive(player)) {
-        player playrumbleonentity("damage_light");
+        player playRumbleOnEntity("damage_light");
         wait 0.3;
       }
 
@@ -358,7 +358,7 @@ class csceneplayer: csceneobject {
 
   function stop_camera(player) {
     if(isPlayer(player)) {
-      endcamanimscripted(player);
+      endcamanimScripted(player);
     }
   }
 
@@ -800,7 +800,7 @@ class csceneplayer: csceneobject {
         if(isarray(player.var_8826a030) && player.var_8826a030.size) {
           var_c09527fe = arraygetclosest(player.origin, player.var_8826a030);
           v_to_target = var_c09527fe.origin - player.origin;
-          v_to_target = vectornormalize(v_to_target);
+          v_to_target = vectorNormalize(v_to_target);
           var_59c304d1 = vectortoangles(v_to_target);
         } else {
           var_59c304d1 = player getplayerangles();
@@ -1167,7 +1167,7 @@ class csceneplayer: csceneobject {
     csceneobject::update_alignment();
     v_origin = isDefined(m_align.origin) ? m_align.origin : (0, 0, 0);
     v_angles = isDefined(m_align.angles) ? m_align.angles : (0, 0, 0);
-    self thread _camanimscripted(player, isDefined(player.var_36fa161e) ? player.var_36fa161e : _str_camera, v_origin, v_angles, n_start_time);
+    self thread _camanimScripted(player, isDefined(player.var_36fa161e) ? player.var_36fa161e : _str_camera, v_origin, v_angles, n_start_time);
     player.var_36fa161e = undefined;
     on_play_anim(player);
   }
@@ -1416,7 +1416,7 @@ class csceneplayer: csceneobject {
     player clearstowedweapon();
   }
 
-  function _camanimscripted(player, str_camera, v_origin, v_angles, n_start_time = 0) {
+  function _camanimScripted(player, str_camera, v_origin, v_angles, n_start_time = 0) {
     player notify(#"camanimscripted");
     player endon(#"camanimscripted", #"disconnect");
 
@@ -1429,13 +1429,13 @@ class csceneplayer: csceneobject {
     n_lerp_time = csceneobject::get_lerp_time();
     n_lerp_time = int(n_lerp_time * 1000);
     player dontinterpolate();
-    camanimscripted(player, str_camera, var_41193b94, v_origin, v_angles, n_lerp_time);
+    camanimScripted(player, str_camera, var_41193b94, v_origin, v_angles, n_lerp_time);
     wait_for_camera(str_camera, n_start_time);
     player dontinterpolate();
   }
 
   function function_c503dca9(player, var_ec50a0d3) {
-    a_players = array::exclude(getplayers(), player);
+    a_players = array::exclude(getPlayers(), player);
 
     foreach(player_other in a_players) {
       n_height_diff = abs(player_other.origin[2] - player.origin[2]);
@@ -1451,7 +1451,7 @@ class csceneplayer: csceneobject {
 
         var_b52c361d = 0;
         var_55d77e67 = 0;
-        var_9d0b2a04 = vectordot(anglestoright(player.angles), vectornormalize(player.origin - player_other.origin));
+        var_9d0b2a04 = vectordot(anglestoright(player.angles), vectorNormalize(player.origin - player_other.origin));
 
         if(var_9d0b2a04 > 0) {
           var_b52c361d = 1;
@@ -1806,7 +1806,7 @@ class cscenefakeplayer: csceneobject {
 
   function _spawn_ent() {
     if(is_true(_s.var_671e284a)) {
-      a_players = getplayers();
+      a_players = getPlayers();
       player = array::random(a_players);
 
       if(isDefined(player)) {
@@ -2014,7 +2014,7 @@ class cscenesharedplayer: csceneplayer, csceneobject {
 
     if(isDefined(_e) && player != _e) {
       player dontinterpolate();
-      player setorigin(_e.origin);
+      player setOrigin(_e.origin);
 
       if(!isbot(player)) {
         player setplayerangles(_e getplayerangles());
@@ -2071,7 +2071,7 @@ class cscenesharedplayer: csceneplayer, csceneobject {
         player flag::clear(player_animation_notify + "_skip_init_clear");
       }
 
-      if(!player isplayinganimscripted()) {
+      if(!player isplayinganimScripted()) {
         current_playing_anim[player_num] = undefined;
       }
 

@@ -110,7 +110,7 @@ func_B907(var_0) {
   if(!isDefined(level.var_B901) || !isDefined(level.var_B901[var_0]) || !isDefined(level.var_B901[var_0].var_7605)) {
     return;
   }
-  var_1 = scripts\engine\utility::getstruct(var_0 + "_fx_tag_origin", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0 + "_fx_tag_origin", "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -141,7 +141,7 @@ func_B906(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   thread func_B90B(var_4, var_0, var_1, var_2);
   var_5 = level.var_B901[var_4].var_13C0B[var_2].var_CA09;
 
@@ -192,7 +192,7 @@ func_B90B(var_0, var_1, var_2, var_3) {
 
     if(var_5["fraction"] < 1.0) {
       var_6 = scripts\engine\utility::spawn_tag_origin(var_1, vectortoangles(var_5["normal"]));
-      var_6 linkto(self);
+      var_6 linkTo(self);
       var_7 = randomint(level.var_B901[var_0].var_756F[var_4].size);
       var_8 = var_0 + "_" + var_4 + "_" + var_7;
       playFXOnTag(scripts\engine\utility::getfx(var_8), var_6, "tag_origin");
@@ -274,7 +274,7 @@ func_B90A(var_0, var_1, var_2, var_3, var_4, var_5) {
       return;
     }
     var_17 = scripts\engine\utility::spawn_tag_origin(var_13, var_14);
-    var_17 linkto(self);
+    var_17 linkTo(self);
     playFXOnTag(scripts\engine\utility::getfx(var_16), var_17, "tag_origin");
     level.var_B902++;
 

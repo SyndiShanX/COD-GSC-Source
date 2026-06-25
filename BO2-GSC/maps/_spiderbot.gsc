@@ -136,7 +136,7 @@ watch_for_jump() {
   while(true) {
     if(self.driver jumpbuttonPressed() && !self.in_air && !self ent_flag("playing_scripted_anim")) {
       self.in_air = 1;
-      v_movement = vectornormalize(level.player getnormalizedmovement() + (0, 0, 1));
+      v_movement = vectorNormalize(level.player getnormalizedmovement() + (0, 0, 1));
       v_forward = anglesToForward(self.angles);
       v_right = anglestoright(self.angles);
       v_up = anglestoup(self.angles);
@@ -147,7 +147,7 @@ watch_for_jump() {
         v_forward = v_forward * v_movement[0];
         v_right = v_right * v_movement[1];
         v_up = v_up * v_movement[2];
-        v_orientation = vectornormalize(v_forward + v_right + v_up);
+        v_orientation = vectorNormalize(v_forward + v_right + v_up);
         v_force = v_orientation * 165;
       }
 

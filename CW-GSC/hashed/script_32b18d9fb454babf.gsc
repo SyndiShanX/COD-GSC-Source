@@ -52,8 +52,8 @@ function private function_64a75da7() {
     if(!isDefined(level.contentmanager.var_c4181ea)) {
       level namespace_73df937d::spawn_safehouse(level.contentmanager.var_5f2429b1);
 
-      foreach(player in getplayers()) {
-        player setorigin(level.contentmanager.var_c4181ea.origin);
+      foreach(player in getPlayers()) {
+        player setOrigin(level.contentmanager.var_c4181ea.origin);
       }
     }
 

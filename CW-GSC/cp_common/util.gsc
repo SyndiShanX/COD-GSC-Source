@@ -54,7 +54,7 @@ function private preinit() {
 }
 
 function private function_e6d37e3b(oldval, newval) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(player)) {
     player notify(#"hash_301c38546c8e722d");
@@ -138,7 +138,7 @@ function function_d2554df(str_id) {
 function add_gametype(gt) {}
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -785,10 +785,10 @@ function function_268bdf4f(name, func_init, arg1, arg2, arg3, arg4, arg5, var_dc
   }
 
   name = tolower(name);
-  ai_hero = getent(name, "targetname", 1);
+  ai_hero = getEnt(name, "targetname", 1);
 
   if(!isalive(ai_hero)) {
-    spawner = getent(name, "targetname");
+    spawner = getEnt(name, "targetname");
 
     if(!is_true(spawner.spawning)) {
       spawner.count++;
@@ -1017,7 +1017,7 @@ function private function_79e25924() {
           continue;
         }
 
-        if(!self isplayinganimscripted()) {
+        if(!self isplayinganimScripted()) {
           self playgestureviewmodel(self.var_acac2f93, undefined, undefined, undefined, undefined, undefined, 1);
         }
       }
@@ -1173,7 +1173,7 @@ function function_b9dfcfb7(var_67df10fb = 4) {
 
 function function_2b98ebb1(str_team, str_objective, var_26ed87a4 = 3, var_86fdb2cc = 1) {
   str_team = get_team_mapping(str_team);
-  a_players = getplayers(str_team);
+  a_players = getPlayers(str_team);
   array::thread_all(a_players, &globallogic_ui::function_d679cb5b);
   waitframe(1);
 
@@ -1221,7 +1221,7 @@ function function_4e4e008c(str_objective, var_f1515fd2 = 2, var_86fdb2cc = 1) {
 function function_74a9e89b(str_team = #"any", str_vehicle = undefined) {
   level flag::wait_till("all_players_spawned");
 
-  foreach(e_player in getplayers(str_team)) {
+  foreach(e_player in getPlayers(str_team)) {
     var_30181301 = [];
 
     if(str_team == #"axis") {
@@ -1505,7 +1505,7 @@ function blend_movespeedscale(n_scale, n_time = 0) {
   player = self;
 
   if(!isPlayer(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player thread player_speed_proc(n_scale, n_time);
@@ -1536,7 +1536,7 @@ function blend_movespeedscale_default(n_time = 0) {
   player = self;
 
   if(!isPlayer(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player blend_movespeedscale(1, n_time);
@@ -1580,7 +1580,7 @@ function private function_244408f7(parms) {
 }
 
 function dialog_faction_vo(var_d9823b39, var_be096d26, var_7f1981e0, var_500f33b5) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isPlayer(player)) {
     return;
@@ -1603,7 +1603,7 @@ function dialog_faction_vo(var_d9823b39, var_be096d26, var_7f1981e0, var_500f33b
 }
 
 function function_c76fa9e1(var_42ff3045, var_d47e50e, var_97085828) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isPlayer(player)) {
     return;
@@ -1623,7 +1623,7 @@ function function_c76fa9e1(var_42ff3045, var_d47e50e, var_97085828) {
 }
 
 function dialog_gender_vo(var_fb68995e, var_75afe953, var_7c7241a) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isPlayer(player)) {
     return;
@@ -1654,7 +1654,7 @@ function function_b6f9da41(str_vo) {
 }
 
 function function_d8ae866d(var_d9823b39, var_be096d26, var_7f1981e0, var_500f33b5) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   switch (player namespace_70eba6e6::function_b6a02677()) {
     case 1:
@@ -1669,7 +1669,7 @@ function function_d8ae866d(var_d9823b39, var_be096d26, var_7f1981e0, var_500f33b
 }
 
 function function_a1a0fe0c(var_42ff3045, var_d47e50e, var_97085828) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   switch (player player_decision::function_1c4fb6d4()) {
     case 0:
@@ -1682,7 +1682,7 @@ function function_a1a0fe0c(var_42ff3045, var_d47e50e, var_97085828) {
 }
 
 function function_3ac6fa36(var_fb68995e, var_75afe953, var_7c7241a) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   switch (player namespace_70eba6e6::function_33bf99f8(1)) {
     case 0:
@@ -1695,7 +1695,7 @@ function function_3ac6fa36(var_fb68995e, var_75afe953, var_7c7241a) {
 }
 
 function function_875955a() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   switch (player player_decision::function_1c4fb6d4()) {
     case 0:
@@ -1763,7 +1763,7 @@ function function_de500b59() {
   }
 
   if(mapname === #"cp_rus_kgb") {
-    if(getplayers()[0].var_4fc36735 === 1) {
+    if(getPlayers()[0].var_4fc36735 === 1) {
       return #"hash_40c037a247e8b24f";
     } else {
       return #"hash_59ecd456f45762d4";

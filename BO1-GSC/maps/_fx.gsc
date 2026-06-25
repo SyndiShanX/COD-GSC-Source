@@ -99,7 +99,7 @@ setup_fx() {
   }
   org = undefined;
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     if(isDefined(ent)) {
       org = ent.origin;
     }

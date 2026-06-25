@@ -106,7 +106,7 @@ function set(str_objective, a_targets, var_8c7ec5ce, var_4cfa0710 = str_objectiv
     thread objectives_ui::function_1c6b4aeb();
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(player) && show_waypoint) {
     player thread objectives_ui::show_objectives(0);
@@ -577,7 +577,7 @@ function private function_b6b76073(str_objective, ent, var_4003470b) {
   }
 
   objid = function_285e460(str_objective, target);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   in_area = 0;
 
@@ -613,7 +613,7 @@ function private function_634c16ef(str_objective, ent, radius, var_4003470b) {
   }
 
   objid = function_285e460(str_objective, target);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   if(isentity(ent)) {
@@ -655,7 +655,7 @@ function private function_37cf9b17(str_objective, pos, radius, var_4003470b) {
   }
 
   objid = function_285e460(str_objective, target);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   radius_squared = radius * radius;
   in_area = 0;

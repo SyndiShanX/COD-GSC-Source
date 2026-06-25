@@ -330,7 +330,7 @@ function private function_70dbf276() {
         }
       }
       if(isPlayer(guy)) {
-        guy setorigin(spot);
+        guy setOrigin(spot);
         continue;
       }
       if(isactor(guy)) {
@@ -388,9 +388,9 @@ function function_3341776e(origin, var_891d7d80 = origin, var_ba2a535c = 85) {
         dist_squared = distancesquared(origin, hazard.origin);
         if(dist_squared < min_dist_squared) {
           dir = origin - hazard.origin;
-          dir = vectornormalize(dir);
+          dir = vectorNormalize(dir);
           var_b72287b9 = origin - var_891d7d80;
-          var_b72287b9 = vectornormalize(dir);
+          var_b72287b9 = vectorNormalize(dir);
           if(vectordot(dir, var_b72287b9) < 0) {
             dir = dir * -1;
           }

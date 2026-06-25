@@ -590,7 +590,7 @@ function function_c0557b7a(var_97009eaf, var_17151ed6, var_c5a3eca9) {
 }
 
 function private function_47fb5849() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player districts::function_930f8c81("interior_cathedral_01");
   level flag::wait_till("flg_emp_blast");
   e_player districts::function_a7d79fcb("vista_buildings_main_street");
@@ -604,13 +604,13 @@ function private function_47fb5849() {
 
 function function_5b0b935c() {
   level waittill(#"hash_b8fa6af917a13ca");
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   level waittill(#"hash_af75fb9dee3d105");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level waittill(#"hash_5e20063bd2c01416");
-  level.player playrumbleonentity("riotshield_impact");
+  level.player playRumbleOnEntity("riotshield_impact");
   level waittill(#"hash_3d2d4e3bc0920646");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level waittill(#"hash_25609fdc6b3f335e");
-  level.player playrumbleonentity("leap_end");
+  level.player playRumbleOnEntity("leap_end");
 }

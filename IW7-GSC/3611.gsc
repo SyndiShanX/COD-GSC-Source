@@ -154,7 +154,7 @@ func_13450() {
   var_3 setModel("tag_origin");
   wait(0.1);
   playfxontagforclients(scripts\engine\utility::getfx("visionPulse_ping"), var_3, "tag_origin", self);
-  var_3 moveto(var_2, 1);
+  var_3 moveTo(var_2, 1);
   wait(1);
   var_3 delete();
 }

@@ -215,7 +215,7 @@ guy_deathimate_me(var_0, var_1) {
   var_0 = convert_guy_to_drone(var_0);
   [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", var_4);
   detach_models_with_substr(var_0, "weapon_");
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 notsolid();
   var_0 setanim(var_1.death);
 
@@ -572,7 +572,7 @@ link_to_sittag(var_0, var_1, var_2, var_3) {
   if(var_3 && !isDefined(var_0.script_drone)) {
     var_0 linktoblendtotag(self, var_1, 0);
   } else {
-    var_0 linkto(self, var_1, var_2, (0, 0, 0));
+    var_0 linkTo(self, var_1, var_2, (0, 0, 0));
   }
 }
 
@@ -1138,7 +1138,7 @@ getout_rigspawn(var_0, var_1, var_2) {
   var_8 setModel(level.vehicle_attachedmodels[var_3][var_4.fastroperig].model);
   self.fastroperig[var_4.fastroperig] = var_8;
   var_8 useanimtree(#animtree);
-  var_8 linkto(var_0, level.vehicle_attachedmodels[var_3][var_4.fastroperig].tag, (0, 0, 0), (0, 0, 0));
+  var_8 linkTo(var_0, level.vehicle_attachedmodels[var_3][var_4.fastroperig].tag, (0, 0, 0), (0, 0, 0));
   thread getoutrig_model(var_4, var_8, level.vehicle_attachedmodels[var_3][var_4.fastroperig].tag, level.vehicle_attachedmodels[var_3][var_4.fastroperig].dropanim, var_2);
   return var_8;
 }
@@ -1510,8 +1510,8 @@ parachute_unload(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_1 gettagorigin("tag_driver");
   var_6 = var_1 gettagangles("tag_driver");
   var_0 forceteleport(var_5, var_6);
-  var_0 linkto(var_1, "tag_driver");
-  var_1 animscripted("parachute_unload", self.origin, self.angles, var_2);
+  var_0 linkTo(var_1, "tag_driver");
+  var_1 animScripted("parachute_unload", self.origin, self.angles, var_2);
 
   if(isDefined(var_4)) {
     var_1 thread parachute_notetrack_logic("parachute_unload", "show_parachute", var_4);
@@ -1519,7 +1519,7 @@ parachute_unload(var_0, var_1, var_2, var_3, var_4) {
     var_1 thread parachute_notetrack_logic("parachute_unload", "show_parachute");
   }
 
-  var_0 animscripted("parachute_unload", var_0.origin, var_0.angles, var_3);
+  var_0 animScripted("parachute_unload", var_0.origin, var_0.angles, var_3);
   level thread parachute_death_monitor(var_0, var_1);
   var_1 waittillmatch("parachute_unload", "end");
   var_1 notify("parachute_landed");
@@ -1531,10 +1531,10 @@ parachute_unload(var_0, var_1, var_2, var_3, var_4) {
 
 parachute_movement(var_0) {
   var_1 = anglesToForward(var_0.angles);
-  var_2 = vectornormalize(common_scripts\utility::flat_angle(var_1));
+  var_2 = vectorNormalize(common_scripts\utility::flat_angle(var_1));
   var_3 = self.origin + var_2 * 10000;
   thread maps\_utility::draw_line_from_ent_for_time(self, var_3, 1, 0, 0, 10);
-  self moveto(var_3, 1);
+  self moveTo(var_3, 1);
 }
 
 parachute_death_monitor(var_0, var_1) {
@@ -1610,7 +1610,7 @@ guy_resets_goalpos(var_0) {
     return 0;
   }
 
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
 
   if(isDefined(var_2) && var_2.classname == "info_volume") {
     var_0 setgoalvolumeauto(var_2);
@@ -1646,7 +1646,7 @@ animontag(var_0, var_1, var_2, var_3, var_4, var_5) {
     level thread animontag_ragdoll_death(var_0, self);
   }
 
-  var_0 animscripted(var_5, var_7, var_8, var_2);
+  var_0 animScripted(var_5, var_7, var_8, var_2);
 
   if(isai(var_0)) {
     thread donotetracks(var_0, var_6, var_5);
@@ -1660,7 +1660,7 @@ animontag(var_0, var_1, var_2, var_3, var_4, var_5) {
       wait(var_9);
     }
 
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
     var_0.interval = 0;
     var_0 thread recover_interval();
   } else {
@@ -1743,7 +1743,7 @@ animontag_ragdoll_death_fall(var_0, var_1, var_2) {
 
     if(abs(var_3[2] + 16) <= abs(var_5)) {
       var_0 thread maps\_utility::play_sound_on_entity("generic_death_falling");
-      var_0 animscripted("fastrope_fall", var_0.origin, var_0.angles, var_0.ragdoll_fall_anim);
+      var_0 animScripted("fastrope_fall", var_0.origin, var_0.angles, var_0.ragdoll_fall_anim);
       var_0 waittillmatch("fastrope_fall", "start_ragdoll");
     }
   }
@@ -1785,7 +1785,7 @@ donotetracks(var_0, var_1, var_2) {
 }
 
 animatemoveintoplace(var_0, var_1, var_2, var_3) {
-  var_0 animscripted("movetospot", var_1, var_2, var_3);
+  var_0 animScripted("movetospot", var_1, var_2, var_3);
   var_0 waittillmatch("movetospot", "end");
 }
 
@@ -1983,7 +1983,7 @@ guy_blowup(var_0) {
   var_0 notsolid();
   var_0.origin = var_4;
   var_0.angles = var_3;
-  var_0 animscripted("deathanim", var_4, var_3, var_2.explosion_death);
+  var_0 animScripted("deathanim", var_4, var_3, var_2.explosion_death);
   var_5 = 0.3;
 
   if(isDefined(var_2.explosion_death_ragdollfraction)) {

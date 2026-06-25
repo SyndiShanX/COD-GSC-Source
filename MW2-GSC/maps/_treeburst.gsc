@@ -79,7 +79,7 @@ treeburst() {
   treeorg.origin = self.origin;
   treeorg.angles = (treeup_angles[0], rest_angles[1], rest_angles[2]);
 
-  self linkto(treeorg);
+  self linkTo(treeorg);
 
   treeorg rotateTo(rest_angles, 1.15, .5, 0);
   treeorg waittill("rotatedone");

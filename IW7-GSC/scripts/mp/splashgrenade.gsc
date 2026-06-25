@@ -17,7 +17,7 @@ splashgrenadeused(var_0) {
     var_3.team = self.team;
     var_3.weapon_name = "globproj_mp";
     var_3.parentinflictor = var_0 getentitynumber();
-    var_3 linkto(var_0, "", (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, "", (0, 0, 0), (0, 0, 0));
     var_3 hide(1);
     var_0.grenades[var_0.grenades.size] = var_3;
     var_3 thread istrialversion();
@@ -171,8 +171,8 @@ func_B79A(var_0, var_1) {
   var_5 = spawn("trigger_rotatable_radius", var_0.origin, 0, var_4, 60);
   var_5.angles = var_0.angles;
   var_5.owner = self;
-  var_5 enablelinkto();
-  var_5 linkto(var_0);
+  var_5 enablelinkTo();
+  var_5 linkTo(var_0);
   var_5 hide();
   var_5.var_B799 = var_0;
   var_5 thread func_13B91();

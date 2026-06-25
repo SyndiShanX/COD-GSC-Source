@@ -89,7 +89,7 @@ generate_shovel_unitrigger(e_shovel) {
 shovel_trigger_prompt_and_visiblity(e_player) {
   can_use = self.stub shovel_prompt_update(e_player);
   self setinvisibletoplayer(e_player, !can_use);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
   return can_use;
 }
 
@@ -257,7 +257,7 @@ dig_spot_spawn() {
   self.m_dig = spawn("script_model", self.origin + vectorscale((0, 0, -1), 40.0));
   self.m_dig setModel("p6_zm_tm_dig_mound");
   self.m_dig.angles = self.angles;
-  self.m_dig moveto(self.origin, 3, 0, 1);
+  self.m_dig moveTo(self.origin, 3, 0, 1);
   self.m_dig waittill("movedone");
   t_dig = tomb_spawn_trigger_radius(self.origin + vectorscale((0, 0, 1), 20.0), 100, 1);
   t_dig.prompt_and_visibility_func = ::dig_spot_trigger_visibility;
@@ -271,9 +271,9 @@ dig_spot_spawn() {
 
 dig_spot_trigger_visibility(player) {
   if(isDefined(player.dig_vars["has_shovel"]) && player.dig_vars["has_shovel"]) {
-    self sethintstring(&"ZM_TOMB_X2D");
+    self setHintString(&"ZM_TOMB_X2D");
   } else {
-    self sethintstring(&"ZM_TOMB_NS");
+    self setHintString(&"ZM_TOMB_NS");
   }
 
   return true;
@@ -368,8 +368,8 @@ dig_up_zombie(player, s_dig_spot) {
   e_linker = spawn("script_origin", (0, 0, 0));
   e_linker.origin = ai_zombie.origin;
   e_linker.angles = ai_zombie.angles;
-  ai_zombie linkto(e_linker);
-  e_linker moveto(player.origin + vectorscale((1, 1, 0), 100.0), 0.1);
+  ai_zombie linkTo(e_linker);
+  e_linker moveTo(player.origin + vectorscale((1, 1, 0), 100.0), 0.1);
   e_linker waittill("movedone");
   ai_zombie unlink();
   e_linker delete();
@@ -588,9 +588,9 @@ ee_zombie_blood_dig() {
   a_z_spots = getStructArray("zombie_blood_dig_spot", "targetname");
   self.t_zombie_blood_dig = spawn("trigger_radius_use", (0, 0, 0), 0, 100, 50);
   self.t_zombie_blood_dig.e_unique_player = self;
-  self.t_zombie_blood_dig triggerignoreteam();
-  self.t_zombie_blood_dig setcursorhint("HINT_NOICON");
-  self.t_zombie_blood_dig sethintstring(&"ZM_TOMB_X2D");
+  self.t_zombie_blood_dig triggerIgnoreTeam();
+  self.t_zombie_blood_dig setCursorHint("HINT_NOICON");
+  self.t_zombie_blood_dig setHintString(&"ZM_TOMB_X2D");
   self.t_zombie_blood_dig maps\mp\zombies\_zm_powerup_zombie_blood::make_zombie_blood_entity();
 
   while(n_z_spots_found < 4) {
@@ -640,7 +640,7 @@ create_zombie_blood_dig_spot(e_player) {
   self.m_dig.angles = self.angles;
   self.m_dig setModel("p6_zm_tm_dig_mound_blood");
   self.m_dig maps\mp\zombies\_zm_powerup_zombie_blood::make_zombie_blood_entity();
-  self.m_dig moveto(self.origin, 3, 0, 1);
+  self.m_dig moveTo(self.origin, 3, 0, 1);
   self.m_dig waittill("movedone");
   self.m_dig.e_unique_player = e_player;
 
@@ -680,7 +680,7 @@ spawn_perk_upgrade_bottle(v_origin, e_player) {
   m_fx setinvisibletoall();
   m_fx setvisibletoplayer(e_player);
   playFXOnTag(level._effect["special_glow"], m_fx, "tag_origin");
-  m_bottle linkto(m_fx);
+  m_bottle linkTo(m_fx);
   m_fx thread rotate_perk_upgrade_bottle();
 
   while(isDefined(e_player) && !e_player istouching(m_bottle)) {
@@ -701,7 +701,7 @@ rotate_perk_upgrade_bottle() {
   self endon("death");
 
   while(true) {
-    self rotateyaw(360, 5);
+    self rotateYaw(360, 5);
     self waittill("rotatedone");
   }
 }
@@ -771,7 +771,7 @@ watch_devgui_dig() {
     if(getDvar(#"_id_C817F0A0") == "on") {
       setDvar("give_shovel", "off");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.dig_vars["has_shovel"] = 1;
         n_player = player getentitynumber() + 1;
         level setclientfield("shovel_player" + n_player, 1);
@@ -781,7 +781,7 @@ watch_devgui_dig() {
     if(getDvar(#"_id_8B880FB8") == "on") {
       setDvar("give_golden_shovel", "off");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.dig_vars["has_shovel"] = 1;
         player.dig_vars["has_upgraded_shovel"] = 1;
         player thread ee_zombie_blood_dig();
@@ -793,7 +793,7 @@ watch_devgui_dig() {
     if(getDvar(#"_id_AE371CCE") == "on") {
       setDvar("give_helmet", "off");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.dig_vars["has_helmet"] = 1;
         n_player = player getentitynumber() + 1;
         level setclientfield("helmet_player" + n_player, 1);
@@ -834,7 +834,7 @@ watch_devgui_dig() {
         s_spot.m_dig = spawn("script_model", s_spot.origin + vectorscale((0, 0, -1), 40.0));
         s_spot.m_dig.angles = s_spot.angles;
         s_spot.m_dig setModel("p6_zm_tm_dig_mound_blood");
-        s_spot.m_dig moveto(s_spot.origin, 3, 0, 1);
+        s_spot.m_dig moveTo(s_spot.origin, 3, 0, 1);
         wait_network_frame();
       }
     }
@@ -848,7 +848,7 @@ watch_devgui_dig() {
       level setclientfield("snow_level", level.weather_snow);
       wait 1;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(is_player_valid(player, 0, 1)) {
           player set_weather_to_player();
         }
@@ -864,7 +864,7 @@ watch_devgui_dig() {
       level setclientfield("snow_level", level.weather_snow);
       wait 1;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(is_player_valid(player, 0, 1)) {
           player set_weather_to_player();
         }
@@ -880,7 +880,7 @@ watch_devgui_dig() {
       level setclientfield("snow_level", level.weather_snow);
       wait 1;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(is_player_valid(player, 0, 1)) {
           player set_weather_to_player();
         }

@@ -132,7 +132,7 @@ zombie_coast_player_out_of_playable_area_monitor_callback() {
 }
 zombie_unlock_all() {
   flag_wait("begin_spawning");
-  players = GetPlayers();
+  players = getPlayers();
   flag_set("power_on");
   zombie_doors = getEntArray("zombie_door", "targetname");
   for(i = 0; i < zombie_doors.size; i++) {
@@ -356,9 +356,9 @@ init_sounds() {
   maps\_zombiemode_utility::add_sound("ship_container_door", "zmb_ship_container_door");
 }
 electric_switch() {
-  trig = getent("use_elec_switch", "targetname");
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  trig setcursorhint("HINT_NOICON");
+  trig = getEnt("use_elec_switch", "targetname");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setCursorHint("HINT_NOICON");
   level thread wait_for_power();
   trig waittill("trigger", user);
   trig delete();
@@ -366,7 +366,7 @@ electric_switch() {
   Objective_State(8, "done");
 }
 wait_for_power() {
-  master_switch = getent("elec_switch", "targetname");
+  master_switch = getEnt("elec_switch", "targetname");
   master_switch notsolid();
   flag_wait("power_on");
   master_switch rotateroll(-90, .3);
@@ -390,7 +390,7 @@ wait_for_power() {
   level notify("electric_door");
   clientnotify("ZPO");
   master_switch waittill("rotatedone");
-  playFX(level._effect["switch_sparks"], getstruct("elec_switch_fx", "targetname").origin);
+  playFX(level._effect["switch_sparks"], getStruct("elec_switch_fx", "targetname").origin);
   master_switch playSound("zmb_turn_on");
 }
 electric_door_function() {
@@ -402,8 +402,8 @@ electric_door_function() {
   thread open_electric_doors(door_trigs);
 }
 set_door_unusable() {
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self UseTriggerRequireLookAt();
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self useTriggerRequireLookAt();
 }
 open_electric_doors(door_trigs) {
   time = 1;
@@ -423,7 +423,7 @@ open_electric_doors(door_trigs) {
           time = doors[j].script_transition_time;
         }
         play_sound_at_pos("door_rotate_open", doors[j].origin);
-        doors[j] RotateTo(doors[j].script_angles, time, 0, 0);
+        doors[j] rotateTo(doors[j].script_angles, time, 0, 0);
         doors[j] thread maps\_zombiemode_blockers::door_solid_thread();
         doors[j] playSound("door_slide_open");
       } else if(door_trigs[i].type == "move" || door_trigs[i].type == "slide_apart") {
@@ -433,7 +433,7 @@ open_electric_doors(door_trigs) {
           time = doors[j].script_transition_time;
         }
         play_sound_at_pos("door_slide_open", doors[j].origin);
-        doors[j] MoveTo(doors[j].origin + doors[j].script_vector, time, time * 0.25, time * 0.25);
+        doors[j] moveTo(doors[j].origin + doors[j].script_vector, time, time * 0.25, time * 0.25);
         doors[j] thread maps\_zombiemode_blockers::door_solid_thread();
         doors[j] playSound("door_slide_open");
       }
@@ -467,9 +467,9 @@ play_door_dialog() {
   }
 }
 check_plankB(from, forward) {
-  trigger = getent(from, "targetname");
-  trigger sethintstring(&"ZOMBIE_BUILD_BRIDGE");
-  trigger setcursorhint("HINT_NOICON");
+  trigger = getEnt(from, "targetname");
+  trigger setHintString(&"ZOMBIE_BUILD_BRIDGE");
+  trigger setCursorHint("HINT_NOICON");
   trigger endon("plankB_done");
   user = undefined;
   done = false;
@@ -477,22 +477,22 @@ check_plankB(from, forward) {
     trigger waittill("trigger", user);
     if(is_player_valid(user) && user.score >= level.plankB_cost) {
       user maps\_zombiemode_score::minus_to_player_score(level.plankB_cost);
-      other = getent(trigger.target, "targetname");
+      other = getEnt(trigger.target, "targetname");
       other notify("plankB_done");
       other delete();
       trigger delete();
-      clip = getent("plankB_clip", "targetname");
+      clip = getEnt("plankB_clip", "targetname");
       clip connectpaths();
       clip delete();
       if(forward == true) {
         for(i = 1; i <= 4; i++) {
-          bridge = getent("residence2ship_walk" + i, "targetname");
+          bridge = getEnt("residence2ship_walk" + i, "targetname");
           bridge show();
           wait(0.5);
         }
       } else {
         for(i = 4; i >= 1; i--) {
-          bridge = getent("residence2ship_walk" + i, "targetname");
+          bridge = getEnt("residence2ship_walk" + i, "targetname");
           bridge show();
           wait(0.5);
         }
@@ -524,11 +524,11 @@ stairs_init() {
     cost = self.zombie_cost;
   }
   self set_hint_string(self, "default_buy_debris_" + cost);
-  self SetCursorHint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   if(isDefined(self.script_flag) && !isDefined(level.flag[self.script_flag])) {
     flag_init(self.script_flag);
   }
-  self UseTriggerRequireLookAt();
+  self useTriggerRequireLookAt();
   clip = undefined;
   debris = undefined;
   planks = getEntArray(self.target, "targetname");
@@ -571,13 +571,13 @@ stairs_think(planks, debris, clip) {
         level.stairs_pieces = 0;
         self set_hint_string(self, "");
         if(isDefined(debris.script_linkTo)) {
-          debris_struct = getstruct(debris.script_linkTo, "script_linkname");
+          debris_struct = getStruct(debris.script_linkTo, "script_linkname");
           if(isDefined(debris_struct)) {
             debris thread special_debris_move(debris_struct);
           }
         }
         if(isDefined(clip)) {
-          clip moveto(clip.origin + (0, 0, -1000), 0.1);
+          clip moveTo(clip.origin + (0, 0, -1000), 0.1);
           wait(0.1);
           clip connectpaths();
           clip delete();
@@ -594,11 +594,11 @@ stairs_move(struct, planks, trigger) {
   self notsolid();
   selfpos = self.origin;
   selfang = self.angles;
-  self moveto(struct.origin, 0.1);
+  self moveTo(struct.origin, 0.1);
   wait(randomfloatrange(1.0, 10.0));
   self show();
   self play_sound_on_ent("debris_move");
-  playsoundatposition("lightning_l", self.origin);
+  playSoundAtPosition("lightning_l", self.origin);
   if(isDefined(self.script_firefx)) {
     playFX(level._effect[self.script_firefx], self.origin);
   }
@@ -609,7 +609,7 @@ stairs_move(struct, planks, trigger) {
       for(i = 0; i < num; i++) {
         angles = og_angles + (-5 + RandomFloat(10), -5 + RandomFloat(10), -5 + RandomFloat(10));
         time = RandomFloatRange(0.1, 0.4);
-        self Rotateto(angles, time);
+        self rotateTo(angles, time);
         wait(time - 0.05);
       }
     }
@@ -618,8 +618,8 @@ stairs_move(struct, planks, trigger) {
   if(isDefined(self.script_transition_time)) {
     time = self.script_transition_time;
   }
-  self MoveTo(selfpos, time, time * 0.5);
-  self RotateTo(selfang, time * 0.75);
+  self moveTo(selfpos, time, time * 0.5);
+  self rotateTo(selfang, time * 0.75);
   self waittill("movedone");
   level.stairs_pieces++;
   if(level.stairs_pieces >= planks.size) {
@@ -627,14 +627,14 @@ stairs_move(struct, planks, trigger) {
   }
   if(isDefined(self.script_fxid)) {
     playFX(level._effect[self.script_fxid], self.origin);
-    playsoundatposition("zombie_spawn", self.origin);
+    playSoundAtPosition("zombie_spawn", self.origin);
   }
 }
 special_debris_move(struct) {
   self script_delay();
   self notsolid();
   self play_sound_on_ent("debris_move");
-  playsoundatposition("lightning_l", self.origin);
+  playSoundAtPosition("lightning_l", self.origin);
   if(isDefined(self.script_firefx)) {
     playFX(level._effect[self.script_firefx], self.origin);
   }
@@ -643,16 +643,16 @@ special_debris_move(struct) {
   for(i = 0; i < num; i++) {
     angles = og_angles + (-5 + RandomFloat(10), -5 + RandomFloat(10), -5 + RandomFloat(10));
     time = RandomFloatRange(0.1, 0.4);
-    self Rotateto(angles, time);
+    self rotateTo(angles, time);
     wait(time - 0.05);
   }
   time = 0.5;
-  self MoveTo(struct.origin, time, time * 0.5);
-  self RotateTo(struct.angles, time * 0.75);
+  self moveTo(struct.origin, time, time * 0.5);
+  self rotateTo(struct.angles, time * 0.75);
   self waittill("movedone");
   if(isDefined(self.script_fxid)) {
     playFX(level._effect[self.script_fxid], self.origin);
-    playsoundatposition("zombie_spawn", self.origin);
+    playSoundAtPosition("zombie_spawn", self.origin);
   }
   self Delete();
 }
@@ -696,7 +696,7 @@ coast_custom_viewmodel_override(entity_num) {
 }
 setup_water_physics() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] SetClientDvars("phys_buoyancy", 1);
   }
@@ -719,14 +719,14 @@ coast_power_on_lighthouse_react() {
   exploder(301);
 }
 rock_wall_barricade() {
-  rock_wall = getstruct("special_rock_wall", "script_noteworthy");
+  rock_wall = getStruct("special_rock_wall", "script_noteworthy");
   boards = getEntArray(rock_wall.target, "targetname");
   rock = undefined;
   for(i = 0; i < boards.size; i++) {
     if(isDefined(boards[i].target)) {
-      rock = GetEnt(boards[i].target, "targetname");
+      rock = getEnt(boards[i].target, "targetname");
       if(isDefined(rock)) {
-        rock LinkTo(boards[i]);
+        rock linkTo(boards[i]);
       }
     }
   }

@@ -71,7 +71,7 @@ begin_garden() {
 }
 
 fireworks_garden() {
-  var_0 = getent("TRIG_garden_setup", "targetname");
+  var_0 = getEnt("TRIG_garden_setup", "targetname");
   var_0 waittill("trigger");
   thread maps\cornered_lighting::fireworks_start("garden");
   common_scripts\utility::flag_wait("go_to_stairwell");
@@ -130,7 +130,7 @@ garden_entity_cleanup() {
 }
 
 get_verify_and_delete_ent(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     var_2 delete();
@@ -148,7 +148,7 @@ get_verify_and_delete_ent_array(var_0, var_1) {
 }
 
 check_trigger_flagset(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
 
   if(isDefined(var_1.script_flag_set)) {
@@ -245,15 +245,15 @@ garden_last_stand() {
 }
 
 close_hvt_office_doors(var_0) {
-  var_1 = getent("hvt_office_entry_door_left", "targetname");
-  var_2 = getent("hvt_office_entry_door_right", "targetname");
-  var_3 = common_scripts\utility::getstruct("hvt_office_entry_door_left_dest", "targetname");
-  var_4 = common_scripts\utility::getstruct("hvt_office_entry_door_right_dest", "targetname");
-  var_1 moveto(var_3.origin, var_0);
-  var_2 moveto(var_4.origin, var_0);
+  var_1 = getEnt("hvt_office_entry_door_left", "targetname");
+  var_2 = getEnt("hvt_office_entry_door_right", "targetname");
+  var_3 = common_scripts\utility::getStruct("hvt_office_entry_door_left_dest", "targetname");
+  var_4 = common_scripts\utility::getStruct("hvt_office_entry_door_right_dest", "targetname");
+  var_1 moveTo(var_3.origin, var_0);
+  var_2 moveTo(var_4.origin, var_0);
   wait 0.5;
-  var_1 disconnectpaths();
-  var_2 disconnectpaths();
+  var_1 disconnectPaths();
+  var_2 disconnectPaths();
 }
 
 delayed_setgoalvolumeauto(var_0) {
@@ -302,7 +302,7 @@ ally_goal_mark() {
 }
 
 garden_window_break() {
-  var_0 = getent("garden_glass", "targetname");
+  var_0 = getEnt("garden_glass", "targetname");
   maps\_utility::array_spawn_function_targetname("garden_glass_breaker_spawners", ::garden_glass_room_guy_spawnfunc);
   maps\_utility::array_spawn_targetname("garden_glass_breaker_spawners", 1);
   wait 1.5;
@@ -360,9 +360,9 @@ garden_vo() {
 }
 
 retreat_from_vol_to_vol(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   var_5 = var_4 maps\_utility::get_ai_touching_volume("axis");
-  var_6 = getent(var_1, "targetname");
+  var_6 = getEnt(var_1, "targetname");
   var_7 = getnode(var_6.target, "targetname");
 
   foreach(var_9 in var_5) {

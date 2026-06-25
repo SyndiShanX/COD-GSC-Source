@@ -130,7 +130,7 @@ gate_splash() {
 }
 
 finishline() {
-  trigger = getent("finishline", "targetname");
+  trigger = getEnt("finishline", "targetname");
   assert(isDefined(trigger));
 
   trigger waittill("trigger", player);

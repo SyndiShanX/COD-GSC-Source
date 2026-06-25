@@ -222,7 +222,7 @@ swampSlasherKillEffect(victim) {
   attackDir = self.origin - victim.origin;
   hitPos = victim GetTagOrigin("j_neck");
 
-  playFX(level._effect["vfx_flesh_hit_body_fatal_hatchet"], hitPos, VectorNormalize(attackDir), AnglesToUp(victim GetTagAngles("j_neck")));
+  playFX(level._effect["vfx_flesh_hit_body_fatal_hatchet"], hitPos, vectorNormalize(attackDir), AnglesToUp(victim GetTagAngles("j_neck")));
   victim playSound("scn_axe_kill_npc");
 
   wait(0.05);
@@ -329,7 +329,7 @@ VFX_BAT_COOLDOWN = 60;
 vfxBatCaveWaitInit(triggername) {
   level endon("game_ended");
 
-  trigger = GetEnt(triggername, "targetname");
+  trigger = getEnt(triggername, "targetname");
   if(isDefined(trigger)) {
     trigger childthread vfxBatCaveTrigger();
 

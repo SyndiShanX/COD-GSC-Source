@@ -41,7 +41,7 @@ func_0CAE(param_00, param_01, param_02, param_03) {
         if(!isDefined(level.var_744A[var_08].var_57D9)) {
           level.var_744A[var_08].var_57D9 = 1;
           if(isDefined(var_07)) {
-            level.var_744A[var_08] setorigin(var_07[var_08].var_0116);
+            level.var_744A[var_08] setOrigin(var_07[var_08].var_0116);
             level.var_744A[var_08] setangles(var_07[var_08].var_001D);
           }
 

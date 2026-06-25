@@ -204,8 +204,8 @@ function function_32afe89a(ai_zombie) {
     ai_zombie thread zombie_utility::zombie_eye_glow_stop();
     ai_zombie clientfield::set("death_ray_shock_eye_fx", 1);
     if(isalive(ai_zombie) && (!(isDefined(ai_zombie.var_61f7b3a0) && ai_zombie.var_61f7b3a0))) {
-      if(ai_zombie isplayinganimscripted()) {
-        ai_zombie stopanimscripted(0.3);
+      if(ai_zombie isplayinganimScripted()) {
+        ai_zombie stopanimScripted(0.3);
         wait(0.1);
       }
       ai_zombie thread scene::play("cin_zm_dlc1_zombie_dth_deathray_04", ai_zombie);
@@ -380,8 +380,8 @@ function function_c2e953fb(ai_zombie) {
     ai_zombie thread zombie_utility::zombie_eye_glow();
     ai_zombie clientfield::set("entranced", 0);
     ai_zombie notify("hash_11c32d95");
-    if(ai_zombie isplayinganimscripted()) {
-      ai_zombie stopanimscripted(0.3);
+    if(ai_zombie isplayinganimScripted()) {
+      ai_zombie stopanimScripted(0.3);
     }
   } else if(isDefined(ai_zombie.var_b4e06d32) && ai_zombie.var_b4e06d32 && (!(isDefined(ai_zombie.var_f7522faa) && ai_zombie.var_f7522faa))) {
     ai_zombie clientfield::set("spider_glow_fx", 0);

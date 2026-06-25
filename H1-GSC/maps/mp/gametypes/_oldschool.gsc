@@ -80,7 +80,7 @@ deletepickups() {
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(isDefined(var_0[var_1].target)) {
-      getent(var_0[var_1].target, "targetname") delete();
+      getEnt(var_0[var_1].target, "targetname") delete();
     }
 
     var_0[var_1] delete();
@@ -275,7 +275,7 @@ trackpickup(var_0, var_1) {
       return;
     }
 
-    var_15 = getent(var_0.target, "targetname");
+    var_15 = getEnt(var_0.target, "targetname");
     var_16 = level.pickupperkrespawntime;
 
     if(!getdvarint("scr_game_perks")) {
@@ -286,7 +286,7 @@ trackpickup(var_0, var_1) {
     }
 
     if(isDefined(level.perkpickuphints[var_14])) {
-      var_15 sethintstring(level.perkpickuphints[var_14]);
+      var_15 setHintString(level.perkpickuphints[var_14]);
     }
   } else {
     common_scripts\utility::error("oldschool_pickup with classname " + var_4 + " is not supported (at location " + var_0.origin + ")");

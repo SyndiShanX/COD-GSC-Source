@@ -71,16 +71,16 @@ function wall_start(str_objective) {
   var_27e33204 = struct::get("ghost_station_open_manhole_anim_org");
   var_27e33204 struct::delete();
   manhole_target = struct::get("manhole_target");
-  var_3fc9accf = getent("ghost_station_exit_sewer_cover", "targetname");
+  var_3fc9accf = getEnt("ghost_station_exit_sewer_cover", "targetname");
   var_3fc9accf.origin = manhole_target.origin;
   var_3fc9accf.angles = manhole_target.angles;
-  getent("sewer_cover_clip", "targetname") delete();
+  getEnt("sewer_cover_clip", "targetname") delete();
 }
 
 function function_cca0368(str_objective, b_starting) {
   scene::add_scene_func("aib_vign_stakeout_wall_gl", &function_a23963d2, "init");
   scene::add_scene_func("aib_vign_stakeout_wall_gl", &function_ba702467, "wall_acroof");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   namespace_5ceacc03::music("4.0_rooftops");
 
   if(b_starting) {
@@ -155,7 +155,7 @@ function function_f39fdd43(str_objective, b_starting, var_aa1a6455, player) {
     }
   }
 
-  guard_room_shelf_clip = getent("guard_room_shelf_clip", "targetname");
+  guard_room_shelf_clip = getEnt("guard_room_shelf_clip", "targetname");
 
   if(isDefined(guard_room_shelf_clip)) {
     guard_room_shelf_clip delete();
@@ -165,13 +165,13 @@ function function_f39fdd43(str_objective, b_starting, var_aa1a6455, player) {
     level.var_7f69cef1 delete();
   }
 
-  ghost_station_exit_sewer_cover = getent("ghost_station_exit_sewer_cover", "targetname");
+  ghost_station_exit_sewer_cover = getEnt("ghost_station_exit_sewer_cover", "targetname");
 
   if(isDefined(ghost_station_exit_sewer_cover)) {
     ghost_station_exit_sewer_cover delete();
   }
 
-  var_aa11c33f = getent("sewer_cover_clip", "targetname");
+  var_aa11c33f = getEnt("sewer_cover_clip", "targetname");
 
   if(isDefined(var_aa11c33f)) {
     var_aa11c33f delete();
@@ -190,9 +190,9 @@ function function_f39fdd43(str_objective, b_starting, var_aa1a6455, player) {
 
 function function_4e2b941a() {
   level flag::wait_till("player_out_of_doors");
-  var_62f78985 = getent("adler_roof_door1", "targetname");
+  var_62f78985 = getEnt("adler_roof_door1", "targetname");
   var_62f78985 unlink();
-  var_62f78985 rotateto(var_62f78985.original_angles, 0.5);
+  var_62f78985 rotateTo(var_62f78985.original_angles, 0.5);
   wait 0.5;
   districts::function_930f8c81("tunnels");
   districts::function_a7d79fcb("tailor_and_alley");
@@ -358,7 +358,7 @@ function function_fadf5523(str_id) {
 
   self val::reset(str_id, "ignoreall");
   self val::reset(str_id, "ignoreme");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self function_a3fcf9e0("attack", player, player.origin);
 }
 
@@ -508,7 +508,7 @@ function function_a673fa00(skipto) {
     level flag::wait_till("move_wall_allies_01a");
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread function_6ea5318c(skipto);
   util::waittill_any_ents(level, "stealth_spotted", level, "street_car_scene_end", level, "guard_killed");
   player namespace_979752dc::set_disguised(0);
@@ -581,10 +581,10 @@ function function_e76b838d(skipto) {
 }
 
 function function_ffb7e31d() {
-  logo = getent("vista_building_logo", "targetname");
+  logo = getEnt("vista_building_logo", "targetname");
 
   while(!level flag::get("street_done")) {
-    logo rotateyaw(360, 30, 0, 0);
+    logo rotateYaw(360, 30, 0, 0);
     wait 30;
   }
 
@@ -689,7 +689,7 @@ function function_59b4c034() {
 
 function function_bc3cf90d() {
   level flag::wait_till("player_out_of_doors");
-  door = getent("adler_roof_door1", "targetname");
+  door = getEnt("adler_roof_door1", "targetname");
   door unlink();
   door.angles = (0, 269, 0);
 }
@@ -710,7 +710,7 @@ function rooftop_start(str_objective) {
 }
 
 function rooftop_main(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     namespace_5ceacc03::music("4.0_rooftops");
@@ -818,7 +818,7 @@ function identify_kraus(skipto) {
   level.checkpoint_question_guard stealth_enemy::set_blind(1);
   level.checkpoint_question_guard.holdfire = 1;
   level.checkpoint_question_guard thread function_fadf5523("checkpoint_scene");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level thread function_967ed4a(skipto);
   level flag::wait_till("start_camera_hints");
   player spy_camera::function_6de171e9();
@@ -856,10 +856,10 @@ function function_11009074() {
   self sethighdetail(1);
   level.checkpoint_question_guard sethighdetail(1);
   level.checkpoint_question_guard flashlight::function_bfffb3fe();
-  self.var_34fc6abf = getent("kraus_cp_umbrella", "targetname");
+  self.var_34fc6abf = getEnt("kraus_cp_umbrella", "targetname");
   self.var_34fc6abf sethighdetail(1);
   self.var_34fc6abf.animname = "kraus_umbrella";
-  self.briefcase = getent("kraus_cp_briefcase", "targetname");
+  self.briefcase = getEnt("kraus_cp_briefcase", "targetname");
   self.briefcase sethighdetail(1);
   self.briefcase.animname = "kraus_briefcase";
   level.kraus thread function_106c684b(self.var_34fc6abf, "switching_to_overlay");
@@ -928,13 +928,13 @@ function function_ba06bd3a(a_ents) {
 
   level.var_c0e9c7c4.old_origin = level.var_c0e9c7c4.origin;
   level.var_c0e9c7c4.old_angles = level.var_c0e9c7c4.angles;
-  level.var_c0e9c7c4 linkto(a_ents[#"hash_5aa24d6a1d003dc2"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  level.var_c0e9c7c4 linkTo(a_ents[#"hash_5aa24d6a1d003dc2"], "j_prop_1", (0, 0, 0), (0, 0, 0));
 }
 
 function function_bfd89ef1() {
   level endon(#"mission_failed");
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player forcestreambundle("cin_stakeout_wall_bar_enter");
   scene::add_scene_func("cin_stakeout_wall_bar_enter", &function_e0855d12, "init");
   scene::add_scene_func("cin_stakeout_wall_bar_enter", &function_ba06bd3a, "bar_dialogue_exit");
@@ -989,7 +989,7 @@ function function_69f72ac5() {
   level endon(#"flag_player_cleanup_wall");
   s_waitresult = self waittill(#"death");
 
-  if(isDefined(s_waitresult.attacker) && s_waitresult.attacker === getplayers()[0]) {
+  if(isDefined(s_waitresult.attacker) && s_waitresult.attacker === getPlayers()[0]) {
     level thread function_cb0dcac();
   }
 }
@@ -1001,20 +1001,20 @@ function function_3f531d4() {
   while(true) {
     s_waitresult = self waittill(#"damage");
 
-    if(isDefined(s_waitresult.attacker) && s_waitresult.attacker == getplayers()[0]) {
+    if(isDefined(s_waitresult.attacker) && s_waitresult.attacker == getPlayers()[0]) {
       level thread function_cb0dcac();
     }
   }
 }
 
 function function_cb0dcac() {
-  getplayers()[0] endon(#"death");
+  getPlayers()[0] endon(#"death");
   wait 1;
   level util::missionfailedwrapper(#"hash_4c5af5a1cd80371", #"hash_4d106f3a6b13c1a");
 }
 
 function function_32b46292() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon(#"saw_kraus");
   player endon(#"death");
   player function_7d7b4491();
@@ -1063,7 +1063,7 @@ function function_3b103fbc() {
 
 function function_afc2d473(oldval, newval) {
   if(newval) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     player notify(#"zoomed");
   }
 }
@@ -1128,7 +1128,7 @@ function function_d5a5cf11() {
   var_54ca8df4[var_54ca8df4.size] = "vox_cp_stkt_05100_adlr_no_eb";
   feedback = arraycopy(var_54ca8df4);
   var_8b6eeb37 = "vox_cp_stkt_05100_adlr_hesnotinuniform_d1";
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.kraus thread function_ecc8b2d();
 
   while(true) {

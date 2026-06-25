@@ -55,7 +55,7 @@ function function_d7d24283(e_powerup, player) {
 }
 
 function function_8be02874(drop_item, player) {
-  players = getplayers(player.team);
+  players = getPlayers(player.team);
 
   if(isDefined(level._get_game_module_players)) {
     players = [[level._get_game_module_players]](player);

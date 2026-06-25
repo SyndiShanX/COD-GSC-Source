@@ -319,7 +319,7 @@ func_1E9A(param_00, param_01) {
     var_08 = param_00.var_4C35;
     var_09 = param_00.var_0116 - var_03;
     if(length(var_09) > 0.01) {
-      var_0A = vectornormalize(var_09);
+      var_0A = vectorNormalize(var_09);
       if(var_04) {
         if(getnorthyaw() != 0) {
           var_0B = var_0A * -1 * var_07 + (-1 * var_08, 0, 0);
@@ -366,7 +366,7 @@ func_1E9A(param_00, param_01) {
     }
 
     var_09 = var_06.var_0116;
-    var_07 playrumbleonentity("damage_light");
+    var_07 playRumbleOnEntity("damage_light");
     wait 0.05;
   }
 }
@@ -502,7 +502,7 @@ func_4433() {
   var_01 = common_scripts\utility::func_44BE("remoteMissileSpawn", "targetname");
   foreach(var_03 in var_01) {
     if(isDefined(var_03.var_01A2)) {
-      var_03.var_01A4 = getent(var_03.var_01A2, "targetname");
+      var_03.var_01A4 = getEnt(var_03.var_01A2, "targetname");
     }
   }
 
@@ -522,7 +522,7 @@ func_4433() {
       var_06 = level.var_7C62;
     }
 
-    var_07 = vectornormalize(var_00.var_92FA - var_00.var_9834);
+    var_07 = vectorNormalize(var_00.var_92FA - var_00.var_9834);
     var_00.var_92FA = var_07 * var_06 + var_00.var_9834;
   } else {
     var_08 = (0, 0, level.var_067B["Launch_Value"].var_A416);

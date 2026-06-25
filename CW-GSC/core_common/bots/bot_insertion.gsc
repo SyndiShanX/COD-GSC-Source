@@ -34,7 +34,7 @@ function private function_b7de760d() {
 }
 
 function private function_58a44f22() {
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(player in teammates) {
     if(isPlayer(player) && !isbot(player) && player function_b7de760d()) {
@@ -46,7 +46,7 @@ function private function_58a44f22() {
 }
 
 function private function_9ea8f9d6() {
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(player in teammates) {
     if(isPlayer(player) && !isbot(player) && player function_b7de760d()) {
@@ -154,7 +154,7 @@ function private function_8f2f3bcd() {
 }
 
 function function_d26744ff(target_point, lead_player) {
-  direction = vectornormalize(lead_player - self.origin);
+  direction = vectorNormalize(lead_player - self.origin);
   goal_angles = vectortoangles(direction);
 
   if(goal_angles[0] < 45) {
@@ -185,7 +185,7 @@ function function_13ba9cec(target_point, lead_player, var_282c0a8e) {
   }
 
   goal_angles = [[var_282c0a8e]](target_point, lead_player);
-  var_8fbb46cd = vectornormalize(self getvelocity());
+  var_8fbb46cd = vectorNormalize(self getvelocity());
   var_e0db94ca = vectortoangles(var_8fbb46cd);
   angle_delta = goal_angles - var_e0db94ca;
   var_ce2f4ce0 = function_dac81c9a(angleclamp180(angle_delta[0]));
@@ -213,7 +213,7 @@ function function_c9a18304(params) {
     waitframe(1);
     self botsetmovemagnitude(1);
     target_point = function_8f2f3bcd();
-    direction = vectornormalize(target_point - self.origin);
+    direction = vectorNormalize(target_point - self.origin);
     angles = vectortoangles(direction);
     angles = (90, angles[1], 0);
     self botsetmoveangles(angles);

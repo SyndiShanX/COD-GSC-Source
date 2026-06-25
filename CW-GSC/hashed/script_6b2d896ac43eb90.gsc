@@ -79,7 +79,7 @@ function function_e28ce6d9(struct) {
   v_trigger_offset = (0, 0, 32);
   trigger = content_manager::spawn_interact(struct, &function_1fab9ee0, #"hash_48951800c1051da7", undefined, 100, undefined, undefined, v_trigger_offset);
   trigger.var_9d7362a4 = #"hash_48951800c1051da7";
-  trigger usetriggerrequirelookat(0);
+  trigger useTriggerRequireLookAt(0);
   struct zm_utility::function_747180ea(struct.objid, undefined, trigger);
   trigger.scriptmodel = mdl_beacon;
   mdl_beacon.trigger = trigger;
@@ -221,7 +221,7 @@ function warp(mdl_beacon) {
 
   mdl_beacon showpart("screen_portal_jnt");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_stats::function_945c7ce2(#"hash_1a5bd2708defa02b", 1);
     player chopper_gunner::function_24fbd61e();
     player clientfield::increment_to_player("" + #"teleport_started", 1);
@@ -254,7 +254,7 @@ function warp(mdl_beacon) {
     level.var_16fecec8 = 1;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player)) {
       player player_free_fall::allow_player_basejumping(0);
       player val::set(#"hash_7bb41176a4b58056", "takedamage", 0);
@@ -279,7 +279,7 @@ function warp(mdl_beacon) {
   while(var_e8f53400) {
     var_e8f53400 = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(is_true(player.var_16735873)) {
         var_e8f53400 = 1;
         break;
@@ -295,7 +295,7 @@ function warp(mdl_beacon) {
 
   wait 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player player_free_fall::allow_player_basejumping(1);
     player clientfield::increment_to_player("" + #"teleport_ended", 1);
   }
@@ -407,7 +407,7 @@ function destroy_beacon(mdl_beacon, var_fcfc4edd = 10, var_495727a3) {
   v_tag_angles = mdl_beacon gettagangles(var_62157006);
   var_668819de = axistoangles(anglestoright(v_tag_angles), anglesToForward(v_tag_angles));
   bomb = util::spawn_model(#"p9_fxanim_zm_ndu_essence_bomb_body_mod", var_f6aedcc6, var_668819de);
-  bomb linkto(mdl_beacon, var_62157006);
+  bomb linkTo(mdl_beacon, var_62157006);
   level scene::function_27f5972e(#"p9_fxanim_sv_tesla_tower_dmg_bundle");
   timer = int(var_fcfc4edd);
   var_82edff1 = 0;
@@ -470,7 +470,7 @@ function function_22aada64() {
   self val::set(#"beacon", "takedamage", 1);
   self val::set(#"beacon", "allowdeath", 0);
   n_damage = 0;
-  n_threshold = 1000 * getplayers().size * level.var_b48509f9;
+  n_threshold = 1000 * getPlayers().size * level.var_b48509f9;
 
   while(true) {
     s_result = self waittill(#"damage");
@@ -479,7 +479,7 @@ function function_22aada64() {
     if(n_damage > n_threshold && isDefined(self)) {
       self scene::stop(#"p9_fxanim_sv_tesla_tower_clean_bundle");
       self thread scene::play(#"p9_fxanim_sv_tesla_tower_dmg_bundle", self);
-      playsoundatposition(#"exp_beacon", self.origin);
+      playSoundAtPosition(#"exp_beacon", self.origin);
       playFXOnTag(#"hash_56a294b510faabf7", self, "tag_origin");
       playFXOnTag(#"hash_15925475df9c7da7", self, "ball_jnt");
       self val::reset_all(#"beacon");

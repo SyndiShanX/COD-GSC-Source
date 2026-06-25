@@ -344,7 +344,7 @@ watch_stink() {
   while(true) {
     self.stink = undefined;
     has_perk = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player hasperk("specialty_nomotionsensor")) {
@@ -372,7 +372,7 @@ watch_stink() {
 }
 
 watch_pack_volume() {
-  volume = getent("sloth_pack_volume", "targetname");
+  volume = getEnt("sloth_pack_volume", "targetname");
 
   if(isDefined(volume)) {
     while(true) {
@@ -667,7 +667,7 @@ unhide_sloth_barrier() {
   self show();
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "clip") {
-    self disconnectpaths();
+    self disconnectPaths();
   }
 }
 
@@ -684,11 +684,11 @@ is_barricade_ent(ent) {
 }
 
 jail_cell_watcher() {
-  level.jail_cell_volume = getent("jail_cell_volume", "targetname");
+  level.jail_cell_volume = getEnt("jail_cell_volume", "targetname");
 }
 
 init_hunched_volume() {
-  level.hunched_volume = getent("hunched_volume", "targetname");
+  level.hunched_volume = getEnt("hunched_volume", "targetname");
 }
 
 init_crash_triggers() {
@@ -798,7 +798,7 @@ init_wallbuys() {
     }
   }
 
-  level.gunshop_zone = getent("sloth_candyzone_gunshop", "targetname");
+  level.gunshop_zone = getEnt("sloth_candyzone_gunshop", "targetname");
 }
 
 init_generator() {
@@ -932,9 +932,9 @@ sloth_prespawn() {
   self.paralyzer_hit_callback = ::sloth_paralyzed;
   self.paralyzer_slowtime = 0;
   self.allowpain = 0;
-  self.jail_start = getstruct("sloth_idle_pos", "targetname");
+  self.jail_start = getStruct("sloth_idle_pos", "targetname");
   self forceteleport(self.jail_start.origin, self.jail_start.angles);
-  self.gunshop = getstruct("sloth_gunshop", "targetname");
+  self.gunshop = getStruct("sloth_gunshop", "targetname");
   self set_zombie_run_cycle("walk");
   self.locomotion = "walk";
   self animmode("normal");
@@ -947,7 +947,7 @@ sloth_prespawn() {
   if(!isDefined(self.sndent)) {
     origin = self gettagorigin("J_neck");
     self.sndent = spawn("script_origin", origin);
-    self.sndent linkto(self, "J_neck");
+    self.sndent linkTo(self, "J_neck");
   }
 
   self.meleedamage = 5;
@@ -1043,7 +1043,7 @@ sloth_spawning_logic() {
     continue;
   }
 
-  spawner = getent("sloth_zombie_spawner", "script_noteworthy");
+  spawner = getEnt("sloth_zombie_spawner", "script_noteworthy");
 
   if(!isDefined(spawner)) {
     assertmsg("No sloth spawner in the map.");
@@ -1582,7 +1582,7 @@ update_berserk() {
       }
 
       if(isDefined(hit_ent.targetname) && hit_ent.targetname == "sloth_fountain_clip") {
-        fountain = getent("courtyard_fountain", "script_noteworthy");
+        fountain = getEnt("courtyard_fountain", "script_noteworthy");
 
         if(isDefined(fountain)) {
           fountain notify("trigger", self);
@@ -1803,7 +1803,7 @@ start_jail_run(do_pain) {
 }
 
 start_jail_wait() {
-  self stopanimscripted();
+  self stopanimScripted();
   self action_jail_wait();
   self thread sndchangebreathingstate("scared");
   return true;
@@ -1822,7 +1822,7 @@ start_player_idle(lock) {
     self orientmode("face default");
     self.anchor.origin = self.origin;
     self.anchor.angles = self.angles;
-    self linkto(self.anchor);
+    self linkTo(self.anchor);
   }
 
   gimme_anim = undefined;
@@ -1958,10 +1958,10 @@ get_facing_barricade(ignore_segment_dist) {
 
   if(isPlayer(self)) {
     angles = self getplayerangles();
-    vec_forward = vectornormalize(anglesToForward(flat_angle(angles)));
+    vec_forward = vectorNormalize(anglesToForward(flat_angle(angles)));
   } else {
     angles = self.angles;
-    vec_forward = vectornormalize(anglesToForward(flat_angle(angles))) * -1;
+    vec_forward = vectorNormalize(anglesToForward(flat_angle(angles))) * -1;
   }
 
   triggers = getEntArray("sloth_barricade", "targetname");
@@ -1983,13 +1983,13 @@ get_facing_barricade(ignore_segment_dist) {
       segment_length = barricade_dist * 2;
       end = start + vec_forward * segment_length;
       segment_point = pointonsegmentnearesttopoint(start, end, ground_pos);
-      vec_barricade = vectornormalize(anglesToForward(barricade.angles)) * -1;
+      vec_barricade = vectorNormalize(anglesToForward(barricade.angles)) * -1;
       dot_barricade = vectordot(vec_forward, vec_barricade);
 
       if(dot_barricade < 0.707) {
         continue;
       }
-      vec_position = vectornormalize(ground_pos - start);
+      vec_position = vectorNormalize(ground_pos - start);
       dot_position = vectordot(vec_position, vec_barricade);
 
       if(dot_position < 0.707) {
@@ -2039,7 +2039,7 @@ barricade_assist() {
   closest = undefined;
   closest_dot = 0;
   closest_segment_point = undefined;
-  vec_forward = vectornormalize(anglesToForward(self.angles));
+  vec_forward = vectorNormalize(anglesToForward(self.angles));
   vec_backward = vec_forward * -1;
   triggers = getEntArray("sloth_barricade", "targetname");
 
@@ -2097,12 +2097,12 @@ start_eat(player) {
     self.candy_model = spawn("script_model", twr_origin);
     self.candy_model.angles = twr_angles;
     self.candy_model setModel(level.candy_model);
-    self.candy_model linkto(self, "tag_weapon_right");
+    self.candy_model linkTo(self, "tag_weapon_right");
   } else
     self.candy_model show();
 
   self setclientfield("sloth_eating", 1);
-  self thread action_animscripted("zm_eat_candy", "eat_candy_anim");
+  self thread action_animScripted("zm_eat_candy", "eat_candy_anim");
   return true;
 }
 
@@ -2199,7 +2199,7 @@ action_jail_idle() {
   self setgoalpos(self.origin);
 
   while(true) {
-    self animscripted(self.jail_start.origin, self.jail_start.angles, "zm_jail_idle");
+    self animScripted(self.jail_start.origin, self.jail_start.angles, "zm_jail_idle");
     maps\mp\animscripts\zm_shared::donotetracks("jail_idle_anim");
   }
 }
@@ -2214,18 +2214,18 @@ action_jail_cower(jumpback) {
   }
 
   self.needs_action = 0;
-  self animscripted(self.jail_start.origin, self.jail_start.angles, cower_trans);
+  self animScripted(self.jail_start.origin, self.jail_start.angles, cower_trans);
   maps\mp\animscripts\zm_shared::donotetracks("jail_2_cower_anim");
   self.anchor.origin = self.origin;
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   self setgoalpos(self.origin);
   self setanimstatefromasd(cower_idle);
 }
 
 action_jail_open() {
   self.needs_action = 0;
-  self animscripted(self.jail_start.origin, self.jail_start.angles, "zm_jail_open");
+  self animScripted(self.jail_start.origin, self.jail_start.angles, "zm_jail_open");
   maps\mp\animscripts\zm_shared::donotetracks("jail_open_anim");
   self.needs_action = 1;
 }
@@ -2237,7 +2237,7 @@ action_jail_close() {
     level thread[[level.jail_close_door]]();
   }
 
-  self animscripted(self.jail_start.origin, self.jail_start.angles, "zm_cower_2_close");
+  self animScripted(self.jail_start.origin, self.jail_start.angles, "zm_cower_2_close");
   self blend_notetracks("cower_2_close_anim");
   level notify("cell_close");
   self.needs_action = 1;
@@ -2248,7 +2248,7 @@ action_jail_wait() {
   self setgoalpos(self.origin);
   self.anchor.origin = self.origin;
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   self setanimstatefromasd("zm_cower_jumpback_idle");
   self.needs_action = 1;
 }
@@ -2324,14 +2324,14 @@ action_jail_run(pos, do_pain) {
 
   self setgoalpos(pos);
   self waittill("goal");
-  self animscripted(self.jail_start.origin, self.jail_start.angles, "zm_run_into_jail_cower");
+  self animScripted(self.jail_start.origin, self.jail_start.angles, "zm_run_into_jail_cower");
   self blend_notetracks("run_into_jail_cower_anim");
   self.needs_action = 1;
 }
 
 sloth_retreat_vo() {
   wait 1.0;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_closest = get_array_of_closest(self.origin, a_players);
 
   for(i = 0; i < a_closest.size; i++) {
@@ -2366,7 +2366,7 @@ action_roam_point(point) {
       self sloth_check_turn(ground_pos, 0);
       self setgoalpos(ground_pos);
       self waittill("goal");
-      sub_goal_next = getstruct(sub_goal.target, "targetname");
+      sub_goal_next = getStruct(sub_goal.target, "targetname");
       ground_pos = groundpos(sub_goal_next.origin);
       self sloth_check_turn(ground_pos, 0);
       self setgoalpos(ground_pos);
@@ -2470,8 +2470,8 @@ sloth_check_turn(pos, dot_limit) {
   if(is_true(self.is_turning)) {
     return;
   }
-  vec_forward = vectornormalize(anglesToForward(self.angles));
-  vec_goal = vectornormalize(pos - self.origin);
+  vec_forward = vectorNormalize(anglesToForward(self.angles));
+  vec_goal = vectorNormalize(pos - self.origin);
   dot = vectordot(vec_forward, vec_goal);
 
   if(dot < dot_limit) {
@@ -2566,7 +2566,7 @@ action_anim(asd_name, notify_name) {
   self.needs_action = 1;
 }
 
-action_animscripted(asd_name, notify_name, origin, angles) {
+action_animScripted(asd_name, notify_name, origin, angles) {
   self endon("death");
   org = self.origin;
   ang = self.angles;
@@ -2580,7 +2580,7 @@ action_animscripted(asd_name, notify_name, origin, angles) {
   }
 
   self.needs_action = 0;
-  self animscripted(org, ang, asd_name);
+  self animScripted(org, ang, asd_name);
   maps\mp\animscripts\zm_shared::donotetracks(notify_name);
   self.needs_action = 1;
 }
@@ -2595,7 +2595,7 @@ custom_berserk() {
     self.booze_model = spawn("script_model", twr_origin);
     self.booze_model.angles = twr_angles;
     self.booze_model setModel(level.booze_model);
-    self.booze_model linkto(self, "tag_weapon_right");
+    self.booze_model linkTo(self, "tag_weapon_right");
   } else
     self.booze_model show();
 
@@ -2714,7 +2714,7 @@ action_gunshop_candy() {
   self setgoalpos(self.origin);
 
   while(true) {
-    self animscripted(self.origin, self.angles, "zm_player_idle");
+    self animScripted(self.origin, self.angles, "zm_player_idle");
     maps\mp\animscripts\zm_shared::donotetracks("player_idle_anim");
   }
 }
@@ -2728,7 +2728,7 @@ action_table_eat() {
   align_angles = self.angles;
 
   if(isDefined(self.bench)) {
-    table = getent(self.bench.target, "targetname");
+    table = getEnt(self.bench.target, "targetname");
     anim_id = self getanimfromasd(asd, 0);
     table_org = getstartorigin(table.origin, table.angles, anim_id);
     align_org = table.origin;
@@ -2738,7 +2738,7 @@ action_table_eat() {
   self.needs_action = 0;
   self setgoalpos(table_org);
   self waittill("goal");
-  self animscripted(align_org, align_angles, asd);
+  self animScripted(align_org, align_angles, asd);
   maps\mp\animscripts\zm_shared::donotetracks("eat_candy_storage_table_anim");
   self notify("table_eat_done");
   self.needs_action = 1;
@@ -2751,7 +2751,7 @@ action_headbang() {
   self setgoalpos(self.origin);
 
   while(true) {
-    self animscripted(self.origin, self.angles, "zm_headbang");
+    self animScripted(self.origin, self.angles, "zm_headbang");
     maps\mp\animscripts\zm_shared::donotetracks("headbang_anim");
   }
 }
@@ -2761,7 +2761,7 @@ action_smell() {
   self endon("stop_action");
   self.needs_action = 0;
   self setgoalpos(self.origin);
-  self animscripted(self.origin, self.angles, "zm_smell_react");
+  self animScripted(self.origin, self.angles, "zm_smell_react");
   maps\mp\animscripts\zm_shared::donotetracks("smell_react_anim");
   self.needs_action = 1;
 }
@@ -2771,7 +2771,7 @@ stop_action() {
   self.is_turning = 0;
   self.teleport = undefined;
   self.needs_action = 1;
-  self stopanimscripted();
+  self stopanimScripted();
   self unlink();
   self orientmode("face default");
 }
@@ -2912,7 +2912,7 @@ protect_action() {
         self sloth_check_turn(self.target_zombie.origin, -0.923);
         self.anchor.origin = self.origin;
         self.anchor.angles = flat_angle(vectortoangles(self.target_zombie.origin - self.origin));
-        self animscripted(self.anchor.origin, self.anchor.angles, "zm_melee_attack");
+        self animScripted(self.anchor.origin, self.anchor.angles, "zm_melee_attack");
         maps\mp\animscripts\zm_shared::donotetracks("melee_attack", ::sloth_melee_notetracks);
         self.target_zombie = undefined;
       } else {
@@ -3018,9 +3018,9 @@ lamp_action() {
   sloth_print("got lamp");
 
   self.oillamp maps\mp\zombies\_zm_buildables::piece_unspawn();
-  self action_animscripted("zm_wallbuy_remove", "wallbuy_remove_anim");
+  self action_animScripted("zm_wallbuy_remove", "wallbuy_remove_anim");
   stub = self.buildable_zone.stub;
-  vec_right = vectornormalize(anglestoright(stub.angles));
+  vec_right = vectorNormalize(anglestoright(stub.angles));
   ground_pos = stub.origin - vec_right * 60;
   ground_pos = groundpos(ground_pos);
   self setgoalpos(ground_pos);
@@ -3028,7 +3028,7 @@ lamp_action() {
   generator_angle = vectortoangles(vec_right);
   self orientmode("face angle", generator_angle[1]);
   wait 0.75;
-  self action_animscripted("zm_wallbuy_add", "wallbuy_add_anim");
+  self action_animScripted("zm_wallbuy_add", "wallbuy_add_anim");
   self player_set_buildable_piece(self.oillamp, 1);
   self maps\mp\zombies\_zm_buildables::player_build(self.buildable_zone);
 
@@ -3076,7 +3076,7 @@ powerup_cycle_action() {
 
       sloth_print("too close to powerup: " + sqrt(dist));
 
-      vec_forward = vectornormalize(anglesToForward(self.angles));
+      vec_forward = vectorNormalize(anglesToForward(self.angles));
       dest_pos = groundpos(self.active_powerup.origin + vec_forward * 100);
     }
 
@@ -3119,7 +3119,7 @@ powerup_cycle_action() {
     if(isDefined(self.active_powerup)) {
       self.anchor.origin = self.origin;
       self.anchor.angles = flat_angle(vectortoangles(powerup_pos - self.origin));
-      self animscripted(self.anchor.origin, self.anchor.angles, "zm_cycle_powerup");
+      self animScripted(self.anchor.origin, self.anchor.angles, "zm_cycle_powerup");
       maps\mp\animscripts\zm_shared::donotetracks("cycle_powerup_anim", ::powerup_change);
     }
   }
@@ -3180,13 +3180,13 @@ dance_action() {
       break;
     }
 
-    self animscripted(self.origin, self.angles, "zm_dance");
+    self animScripted(self.origin, self.angles, "zm_dance");
     maps\mp\animscripts\zm_shared::donotetracks("dance_anim", ::dance_attack);
     wait 0.1;
   }
 
   self notify("stop_dance");
-  self animscripted(self.origin, self.angles, "zm_vomit");
+  self animScripted(self.origin, self.angles, "zm_vomit");
   maps\mp\animscripts\zm_shared::donotetracks("vomit_anim", ::vomit_notetrack);
   self.context_done = 1;
 }
@@ -3306,10 +3306,10 @@ is_facing(facee, dot_limit) {
 
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > dot_limit;
 }
@@ -3336,7 +3336,7 @@ sloth_gift_prompt(player) {
 
   if(!player is_facing(sloth, dotlimit) || !sloth is_facing(player, dotlimit)) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     can_use = 0;
   } else if(active)
     can_use = 1;
@@ -3512,7 +3512,7 @@ sloth_reset_anim() {
   self endon("death");
 
   if(self.state == "jail_idle") {
-    self animscripted(self.jail_start.origin, self.jail_start.angles, "zm_jail_idle");
+    self animScripted(self.jail_start.origin, self.jail_start.angles, "zm_jail_idle");
     maps\mp\animscripts\zm_shared::donotetracks("jail_idle_anim");
   } else if(isDefined(self.reset_asd))
     self setanimstatefromasd(self.reset_asd);
@@ -3529,7 +3529,7 @@ sloth_time_bomb_setup() {
 time_bomb_global_data_save_sloth() {}
 
 time_bomb_global_data_restore_sloth() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player istouching(level.jail_cell_volume)) {
@@ -3573,7 +3573,7 @@ sloth_debug_axis() {
     self.debug_axis = spawn("script_model", org);
     self.debug_axis.angles = ang;
     self.debug_axis setModel("fx_axis_createfx");
-    self.debug_axis linkto(self, "tag_weapon_right");
+    self.debug_axis linkTo(self, "tag_weapon_right");
   }
 }
 
@@ -3601,7 +3601,7 @@ sloth_debug_buildables() {
         self.buildable_model = spawn("script_model", twr_origin);
         self.buildable_model.angles = twr_angles;
         self.buildable_model setModel(level.small_turbine);
-        self.buildable_model linkto(self, tag_name);
+        self.buildable_model linkTo(self, tag_name);
       }
 
       foreach(zone in level.sloth_buildable_zones) {
@@ -3734,7 +3734,7 @@ sloth_devgui_candy() {
 
 sloth_devgui_warp_to_jail() {
   player = gethostplayer();
-  player setorigin((-1142, 557, 28));
+  player setOrigin((-1142, 557, 28));
   player setplayerangles(vectorscale((0, 1, 0), 90.0));
 }
 

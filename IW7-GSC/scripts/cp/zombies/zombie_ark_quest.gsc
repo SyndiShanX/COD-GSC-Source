@@ -28,7 +28,7 @@ wait_for_all_arks_deposited() {
   scripts\engine\utility::flag_wait("yellow_ark_quest");
   scripts\engine\utility::flag_wait("red_ark_quest");
   scripts\engine\utility::flag_wait("green_ark_quest");
-  var_0 = scripts\engine\utility::getstruct("arkpink,pink", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("arkpink,pink", "script_noteworthy");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin_ground_essence");
   var_2 = spawnfx(level._effect["pink_ark_spawn"], var_0.origin);
@@ -38,14 +38,14 @@ wait_for_all_arks_deposited() {
   var_1 thread flytogatormouth(var_1, var_0, var_2);
   scripts\engine\utility::flag_set("all_attachments_deposited");
   level notify("all_attachments_deposited");
-  var_3 = getent("master_arcane_deposit", "targetname");
+  var_3 = getEnt("master_arcane_deposit", "targetname");
   var_3 makeunusable();
   var_4 = getomnvarvalue("pink");
   if(isDefined(var_4)) {
     level scripts\cp\utility::set_quest_icon(var_4);
   }
 
-  var_5 = scripts\engine\utility::getstruct("ark_quest_station", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStruct("ark_quest_station", "script_noteworthy");
   var_5.buy_loc = var_1;
   add_white_ark_attachment_pickup(var_5);
 }
@@ -61,11 +61,11 @@ flytogatormouth(var_0, var_1, var_2) {
   var_2 delete();
   playFXOnTag(level._effect["pink_essense"], var_0, "tag_origin");
   var_3 = var_1;
-  var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   var_5 = undefined;
   for(;;) {
     var_6 = get_move_rate(var_0, var_3.origin, var_4.origin, 400);
-    var_0 moveto(var_4.origin, var_6);
+    var_0 moveTo(var_4.origin, var_6);
     var_0 waittill("movedone");
     var_3 = var_4;
     if(isDefined(var_5)) {
@@ -76,13 +76,13 @@ flytogatormouth(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_3.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     } else {
       break;
     }
 
     if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "arcane_struct_portal") {
-      var_5 = scripts\engine\utility::getstruct(var_4.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
     }
   }
 
@@ -104,10 +104,10 @@ get_move_rate(var_0, var_1, var_2, var_3) {
 }
 
 wait_for_ufo_quest_completion() {
-  var_0 = getent("master_arcane_deposit", "targetname");
+  var_0 = getEnt("master_arcane_deposit", "targetname");
   var_0 makeunusable();
   var_0 makeusable();
-  var_0 setcursorhint("HINT_NODISPLAY");
+  var_0 setCursorHint("HINT_NODISPLAY");
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "arkpink,pink") {

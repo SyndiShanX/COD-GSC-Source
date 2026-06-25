@@ -256,7 +256,7 @@ function set_goal(value, key = "targetname", b_force = 0) {
   if(isDefined(goal)) {
     self setgoal(goal, b_force);
   } else {
-    goal = getent(value, key);
+    goal = getEnt(value, key);
     if(isDefined(goal)) {
       self setgoal(goal, b_force);
     } else {

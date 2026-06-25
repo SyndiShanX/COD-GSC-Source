@@ -121,7 +121,7 @@ function function_4824fe93(origin, num) {
   s_origin thread zm_island_util::function_8faf1d24(vectorscale((0, 0, 1), 255), "");
   s_origin waittill("trigger_activated");
   zm_unitrigger::unregister_unitrigger(s_origin.s_unitrigger);
-  playsoundatposition("vox_maxis_maxis_radio_" + num, origin);
+  playSoundAtPosition("vox_maxis_maxis_radio_" + num, origin);
 }
 
 function function_76bcb530() {
@@ -139,7 +139,7 @@ function function_76bcb530() {
   var_be2a0077 = array(1, 3, 5, 6, 7, 5);
   while(true) {
     var_f918ed35 waittill("trigger_activated");
-    playsoundatposition("zmb_pod_play", var_f918ed35.origin);
+    playSoundAtPosition("zmb_pod_play", var_f918ed35.origin);
     level.var_eeab4a07 = 1;
     var_d1146a02 = function_c5359566();
     match = 1;
@@ -256,7 +256,7 @@ function function_d75eac4e() {
   self zm_unitrigger::create_unitrigger(undefined, 24);
   while(true) {
     self waittill("trigger_activated");
-    playsoundatposition(self.script_sound, self.origin);
+    playSoundAtPosition(self.script_sound, self.origin);
     wait(200);
   }
 }
@@ -269,7 +269,7 @@ function function_e01c1b04(var_f45614a) {
     var_4237d65e = randomintrange(0, var_f45614a.size);
     var_f45614a[var_4237d65e] zm_unitrigger::create_unitrigger(undefined, 24);
     var_f45614a[var_4237d65e] waittill("trigger_activated");
-    playsoundatposition(var_f45614a[var_4237d65e].script_sound, var_f45614a[var_4237d65e].origin);
+    playSoundAtPosition(var_f45614a[var_4237d65e].script_sound, var_f45614a[var_4237d65e].origin);
     zm_unitrigger::unregister_unitrigger(var_f45614a[var_4237d65e].unitrigger);
     wait(150);
   }

@@ -42,7 +42,7 @@ func_7F8A() {
   if(isDefined(var_0) && isDefined(var_0[0]) && isDefined(var_1) && isDefined(var_1[0])) {
     var_2 = distance(var_0[0].origin, var_1[0].origin) / 2;
     var_3 = vectortoangles(var_0[0].origin - var_1[0].origin);
-    var_3 = vectornormalize(var_3);
+    var_3 = vectorNormalize(var_3);
     return var_0[0].origin + var_3 * var_2;
   }
 
@@ -69,7 +69,7 @@ func_BBF2(var_0) {
     var_3 = var_2.var_AD31.size % 6;
     var_4 = "tag_ride" + var_3;
     var_5 = var_2 gettagorigin(var_4);
-    var_0 setorigin(var_5);
+    var_0 setOrigin(var_5);
     if(var_3 < 3) {
       var_0 setstance("crouch");
     }
@@ -203,7 +203,7 @@ func_57DE(var_0) {
   var_2 = level.spawnpoints[var_1].origin * (1, 1, 0);
   var_3 = 8000;
   var_4 = 8000;
-  var_5 = getent("airstrikeheight", "targetname");
+  var_5 = getEnt("airstrikeheight", "targetname");
   var_6 = (0, 0, var_5.origin[2] + randomintrange(-100, 600));
   var_7 = anglesToForward((0, randomint(45), 0));
   var_8 = var_2 + var_6 + var_7 * var_3 * -1;
@@ -227,9 +227,9 @@ func_57DE(var_0) {
   var_13 playLoopSound("veh_mig29_dist_loop");
   var_13 thread playplanefx();
   var_14 = distance(var_8, var_9);
-  var_12 moveto(var_9 * 2, var_14 / 2000, 0, 0);
+  var_12 moveTo(var_9 * 2, var_14 / 2000, 0, 0);
   wait(randomfloatrange(0.25, 0.5));
-  var_13 moveto(var_11 * 2, var_14 / 2000, 0, 0);
+  var_13 moveTo(var_11 * 2, var_14 / 2000, 0, 0);
   wait(var_14 / 2000);
   var_12 delete();
   var_13 delete();

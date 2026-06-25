@@ -53,7 +53,7 @@ function private on_player_disconnect() {
 function private function_301f229d(team) {
   var_9e7013f = [];
   var_52e61055 = [];
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -69,7 +69,7 @@ function private function_301f229d(team) {
     }
 
     if(isbot(player)) {
-      if(!player.ignoreall && !player isplayinganimscripted() && !player arecontrolsfrozen() && !player function_5972c3cf() && !player isinvehicle()) {
+      if(!player.ignoreall && !player isplayinganimScripted() && !player arecontrolsfrozen() && !player function_5972c3cf() && !player isinvehicle()) {
         if(!isDefined(player.bot.revivetarget) || !isDefined(player.bot.revivetarget.revivetrigger) || !is_true(player.is_reviving_any)) {
           var_52e61055[var_52e61055.size] = player;
         }

@@ -132,28 +132,28 @@ fxanim_init(localclientnum) {
     level thread pirate_animate_fx(localclientnum, "pirate_captain_2", "boat_02_jnt", level.scr_anim["fxanim_props"]["captain_02"]);
     level thread pirate_animate_fx(localclientnum, "pirate_oarsman_1", "boat_01_jnt", level.scr_anim["fxanim_props"]["oarsmen_01"]);
     level thread pirate_animate_fx(localclientnum, "pirate_oarsman_2", "boat_02_jnt", level.scr_anim["fxanim_props"]["oarsmen_02"]);
-    trex_fence_ribs = getent(localclientnum, "trex_fence_ribs", "targetname");
-    t_rex_stand = getent(localclientnum, "t_rex_stand", "targetname");
-    t_rex_head = getent(localclientnum, "t_rex_fence", "targetname");
+    trex_fence_ribs = getEnt(localclientnum, "trex_fence_ribs", "targetname");
+    t_rex_stand = getEnt(localclientnum, "t_rex_stand", "targetname");
+    t_rex_head = getEnt(localclientnum, "t_rex_fence", "targetname");
     level thread t_rex_animate_fx(localclientnum, t_rex_head, t_rex_stand);
     trex_fence_ribs waittill_dobj(localclientnum);
     t_rex_head waittill_dobj(localclientnum);
     trex_fence_ribs.origin = t_rex_head gettagorigin("body_base_jnt");
     trex_fence_ribs.angles = t_rex_head gettagangles("body_base_jnt");
-    trex_fence_ribs linkto(t_rex_head, "body_base_jnt");
-    brontosaurus = getent(localclientnum, "brontosaurus_head", "targetname");
+    trex_fence_ribs linkTo(t_rex_head, "body_base_jnt");
+    brontosaurus = getEnt(localclientnum, "brontosaurus_head", "targetname");
     brontosaurus thread brontosaurus_animate_fx(localclientnum);
     break;
   }
 }
 
 pirate_animate_fx(localclientnum, enttargetname, boatjoint, pirateanimation) {
-  pirateent = getent(localclientnum, enttargetname, "targetname");
+  pirateent = getEnt(localclientnum, enttargetname, "targetname");
   pirateent waittill_dobj(localclientnum);
-  pirate_boats_link = getent(localclientnum, "pirate_boats_link", "targetname");
+  pirate_boats_link = getEnt(localclientnum, "pirate_boats_link", "targetname");
   pirateent.origin = pirate_boats_link gettagorigin(boatjoint);
   pirateent.angles = pirate_boats_link gettagangles(boatjoint);
-  pirateent linkto(pirate_boats_link, boatjoint);
+  pirateent linkTo(pirate_boats_link, boatjoint);
   pirateent useanimtree(#animtree);
   pirateent setanimrestart(pirateanimation, 1.0, 0.0, 1.0);
 }
@@ -204,17 +204,17 @@ brontosaurus_animate_fx(localclientnum) {
   self useanimtree(#animtree);
   mintime = 15;
   maxtime = 20;
-  self animscripted(level.scr_anim["fxanim_props"]["brontosaurus_chew_anim"], 1.0, 0.0, 1.0);
+  self animScripted(level.scr_anim["fxanim_props"]["brontosaurus_chew_anim"], 1.0, 0.0, 1.0);
 
   for(;;) {
     timer = randomfloatrange(mintime, maxtime);
     wait(timer);
     self clearanim(level.scr_anim["fxanim_props"]["brontosaurus_chew_anim"], 0.5);
-    self animscripted(level.scr_anim["fxanim_props"]["brontosaurus_look_around"], 1.0, 0.5, 1.0);
+    self animScripted(level.scr_anim["fxanim_props"]["brontosaurus_look_around"], 1.0, 0.5, 1.0);
     anim_length = getanimlength(level.scr_anim["fxanim_props"]["brontosaurus_look_around"]);
     wait(anim_length);
     self clearanim(level.scr_anim["fxanim_props"]["brontosaurus_look_around"], 0.5);
-    self animscripted(level.scr_anim["fxanim_props"]["brontosaurus_chew_anim"], 1.0, 0.5, 1.0);
+    self animScripted(level.scr_anim["fxanim_props"]["brontosaurus_chew_anim"], 1.0, 0.5, 1.0);
 
     mintime = getdvarfloatdefault("mp_studio_trex_min_wait", mintime);
     maxtime = getdvarfloatdefault("mp_studio_trex_max_wait", maxtime);

@@ -646,7 +646,7 @@ func_2AB2(param_00) {
   var_07 lib_0378::func_8D74("wpn_bouncingbetty_trigger");
   maps\mp\gametypes\_hostmigration::func_A6F5(0.1);
   var_07 lib_0378::func_8D74("wpn_bouncingbetty_spin");
-  var_07 moveto(var_04, 0.7, 0, 0.65);
+  var_07 moveTo(var_04, 0.7, 0, 0.65);
   var_07 rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   var_07 thread func_74DD();
   maps\mp\gametypes\_hostmigration::func_A6F5(0.65);

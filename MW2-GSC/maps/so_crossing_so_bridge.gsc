@@ -49,7 +49,7 @@ thread music_loop("so_crossing_so_bridge_music", 256);
 thread enable_escape_warning();
 thread enable_escape_failure();
 
-objective_marker = getent("so_obj_crossing", "targetname");
+objective_marker = getEnt("so_obj_crossing", "targetname");
 objective_add(1, "current", level.challenge_objective, objective_marker.origin);
 
 enable_uav_resources();
@@ -126,7 +126,7 @@ enable_bridge_collapse() {
   thread collapsed_section_shakes();
   thread bridge_collapse_prep();
 
-  trigger = GetEnt("bridge_collapse", "targetname");
+  trigger = getEnt("bridge_collapse", "targetname");
 
   if(getDvar("test_bridge_collapse") == "1") {
     trigger thread notify_delay("trigger", 10);
@@ -139,7 +139,7 @@ enable_bridge_collapse() {
     player blend_movespeedscale(0.7, 2);
   }
 
-  dmg_trigger = GetEnt("so_bridge_damage_trigger", "targetname");
+  dmg_trigger = getEnt("so_bridge_damage_trigger", "targetname");
 
   count = 0;
   while(1) {

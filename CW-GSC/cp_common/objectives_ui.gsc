@@ -41,7 +41,7 @@ function show_objectives(var_e9791619 = 1) {
 }
 
 function function_49ebaad2() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(player)) {
     timeout = 5;

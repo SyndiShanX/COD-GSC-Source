@@ -83,7 +83,7 @@ function function_46051422(n_time = 60) {
 }
 
 function function_b1aa7056() {
-  t_lookat_doppleganger_enable = getent("t_lookat_doppleganger_enable", "targetname");
+  t_lookat_doppleganger_enable = getEnt("t_lookat_doppleganger_enable", "targetname");
   if(isDefined(t_lookat_doppleganger_enable)) {
     while(true) {
       t_lookat_doppleganger_enable waittill("trigger", e_who);
@@ -228,16 +228,16 @@ function function_69f74476() {
     self enableinvulnerability();
     ai = self.ai_doppleganger;
     var_1f377995 = util::spawn_model("tag_origin", ai.origin, self.angles);
-    ai linkto(var_1f377995);
+    ai linkTo(var_1f377995);
     self setplayerangles(vectortoangles(ai.origin - self.origin));
     self thread function_89b0bd32();
-    v_dest = self.origin + (vectornormalize(anglesToForward(self.angles)) * 30);
+    v_dest = self.origin + (vectorNormalize(anglesToForward(self.angles)) * 30);
     ai util::stop_magic_bullet_shield();
     ai thread scene::play("zm_dlc2_side_ee_doppleganger_scare_180l");
     wait(0.05);
-    var_1f377995 moveto(v_dest, 0.1);
+    var_1f377995 moveTo(v_dest, 0.1);
     var_1f377995 waittill("movedone");
-    var_1f377995 linkto(self);
+    var_1f377995 linkTo(self);
     ai waittill("scene_done");
     self notify("hash_916d8c9f");
     self util::player_unlock_control();
@@ -254,7 +254,7 @@ function function_89b0bd32() {
   self endon("hash_916d8c9f");
   self endon("disconnect");
   while(true) {
-    self playrumbleonentity("tank_damage_heavy_mp");
+    self playRumbleOnEntity("tank_damage_heavy_mp");
     earthquake(0.35, 0.5, self.origin, 325);
     wait(0.15);
   }

@@ -39,14 +39,14 @@ recruit_spawn() {
 
 recruit_setup_pilot() {
   var_0 = maps\_vignette_util::vignette_actor_spawn("pilot_recruits", "pilot");
-  var_1 = common_scripts\utility::getstruct("pilot_anim_node", "targetname");
+  var_1 = common_scripts\utility::getStruct("pilot_anim_node", "targetname");
   var_1 thread maps\_anim::anim_loop_solo(var_0, "sitting_idle_pilot");
   var_0 maps\_utility::gun_remove();
   level.pilot = var_0;
 }
 
 recruit(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("recruit_anim_node_r", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("recruit_anim_node_r", "script_noteworthy");
   var_5 = level.recruits_dog;
   var_6 = [];
   var_6["hesh"] = var_1;
@@ -119,9 +119,9 @@ recruits_dof_changes() {
 recruits_dog_spawn() {
   var_0 = maps\homecoming_util::dog_spawn();
   var_0.animname = "riley";
-  var_1 = common_scripts\utility::getstruct("recruit_anim_node_r", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("recruit_anim_node_r", "script_noteworthy");
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.recruits_dog = var_0;
   common_scripts\utility::flag_wait("FLAG_start_recruit_scene");
   var_0 unlink();

@@ -332,7 +332,7 @@ _loop_stink_trail(localclientnumber) {
 
   if(!isDefined(self.sndent)) {
     self.sndent = spawn(0, self.origin, "script_origin");
-    self.sndent linkto(self);
+    self.sndent linkTo(self);
   }
 
   sndent = self.sndent;

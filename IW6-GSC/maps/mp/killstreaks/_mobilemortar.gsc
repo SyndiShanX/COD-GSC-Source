@@ -321,7 +321,7 @@ moveToPosition(position) {
   }
 
   movetime = 3.0;
-  self MoveTo(pos, movetime, movetime * 0.6, movetime * 0.4);
+  self moveTo(pos, movetime, movetime * 0.6, movetime * 0.4);
   wait(movetime);
 
   if(position == "entrance") {
@@ -531,12 +531,12 @@ mortarRecoil() {
   restorePos = self.origin;
   restoreAngles = self.angles;
 
-  self MoveTo(backPos, 0.10);
+  self moveTo(backPos, 0.10);
   self RotatePitch(-3, 0.10);
   wait(0.10);
 
-  self MoveTo(restorePos, 0.15);
-  self RotateTo(restoreAngles, 0.15);
+  self moveTo(restorePos, 0.15);
+  self rotateTo(restoreAngles, 0.15);
   wait(0.15);
 }
 

@@ -63,7 +63,7 @@ func_98F9(param_00) {
     var_0B.var_1D = var_01.var_1D;
     var_0B setModel("tag_origin");
     var_0B.var_2DA7 = var_0A["position"];
-    var_0B.var_2F0C = vectornormalize(var_0B.var_2DA7 - var_0B.var_116);
+    var_0B.var_2F0C = vectorNormalize(var_0B.var_2DA7 - var_0B.var_116);
     var_0B.var_9B7F = var_0A["fraction"];
     var_0B.var_721C = var_01;
     var_0B.var_953E = param_00.var_953E;

@@ -75,7 +75,7 @@ main() {
 }
 
 zm_treasure_chest_init() {
-  chest1 = getstruct("start_chest", "script_noteworthy");
+  chest1 = getStruct("start_chest", "script_noteworthy");
   level.chests = [];
   level.chests[level.chests.size] = chest1;
   maps\mp\zombies\_zm_magicbox::treasure_chest_init("start_chest");
@@ -86,7 +86,7 @@ give_afterlife() {
   flag_wait("initial_players_connected");
   wait 0.5;
   n_start_pos = 1;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player.afterlife) && !player.afterlife) {
@@ -102,7 +102,7 @@ fake_kill_player(n_start_pos) {
   self thread afterlife_laststand();
   self waittill("player_fake_corpse_created");
   self thread afterlife_tutorial();
-  e_corpse_location = getstruct("corpse_starting_point_" + n_start_pos, "targetname");
+  e_corpse_location = getStruct("corpse_starting_point_" + n_start_pos, "targetname");
   trace_start = e_corpse_location.origin;
   trace_end = e_corpse_location.origin + vectorscale((0, 0, -1), 100.0);
   corpse_trace = physicstrace(trace_start, trace_end, vectorscale((-1, -1, 0), 10.0), vectorscale((1, 1, 0), 10.0), self.e_afterlife_corpse);
@@ -159,9 +159,9 @@ afterlife_tutorial_jump_watch() {
 
 afterlife_powerups() {
   level._powerup_grab_check = ::cell_grab_check;
-  s_powerup_loc = getstruct("powerup_start", "targetname");
+  s_powerup_loc = getStruct("powerup_start", "targetname");
   spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
-  s_powerup_loc = getstruct("powerup_cell_1", "targetname");
+  s_powerup_loc = getStruct("powerup_cell_1", "targetname");
 
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
@@ -169,7 +169,7 @@ afterlife_powerups() {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "insta_kill");
   }
 
-  s_powerup_loc = getstruct("powerup_cell_2", "targetname");
+  s_powerup_loc = getStruct("powerup_cell_2", "targetname");
 
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
@@ -179,30 +179,30 @@ afterlife_powerups() {
 }
 
 cell_grab_check(player) {
-  cell_powerup = getstruct("powerup_start", "targetname");
+  cell_powerup = getStruct("powerup_start", "targetname");
 
   if(self.origin == cell_powerup.origin + vectorscale((0, 0, 1), 40.0)) {
-    m_door = getent("powerup_door", "targetname");
+    m_door = getEnt("powerup_door", "targetname");
 
     if(!isDefined(m_door.opened)) {
       return false;
     }
   }
 
-  cell_powerup = getstruct("powerup_cell_1", "targetname");
+  cell_powerup = getStruct("powerup_cell_1", "targetname");
 
   if(self.origin == cell_powerup.origin + vectorscale((0, 0, 1), 40.0)) {
-    m_door = getent("powerup_cell_door_1", "targetname");
+    m_door = getEnt("powerup_cell_door_1", "targetname");
 
     if(!isDefined(m_door.opened)) {
       return false;
     }
   }
 
-  cell_powerup = getstruct("powerup_cell_2", "targetname");
+  cell_powerup = getStruct("powerup_cell_2", "targetname");
 
   if(self.origin == cell_powerup.origin + vectorscale((0, 0, 1), 40.0)) {
-    m_door = getent("powerup_cell_door_2", "targetname");
+    m_door = getEnt("powerup_cell_door_2", "targetname");
 
     if(!isDefined(m_door.opened)) {
       return false;
@@ -213,7 +213,7 @@ cell_grab_check(player) {
 }
 
 afterlife_intro_door() {
-  m_door = getent("powerup_door", "targetname");
+  m_door = getEnt("powerup_door", "targetname");
   level waittill("intro_powerup_activate");
   wait 1;
   array_delete(getEntArray("wires_cell_dblock", "script_noteworthy"));
@@ -221,12 +221,12 @@ afterlife_intro_door() {
   m_door movex(34, 2, 1);
   m_door playSound("zmb_jail_door");
   level waittill("intro_powerup_restored");
-  s_powerup_loc = getstruct("powerup_start", "targetname");
+  s_powerup_loc = getStruct("powerup_start", "targetname");
   spawn_infinite_powerup_drop(s_powerup_loc.origin);
 }
 
 afterlife_cell_door_1() {
-  m_door = getent("powerup_cell_door_1", "targetname");
+  m_door = getEnt("powerup_cell_door_1", "targetname");
   level waittill("cell_1_powerup_activate");
   wait 1;
   array_delete(getEntArray("wires_cell_cafeteria", "script_noteworthy"));
@@ -236,7 +236,7 @@ afterlife_cell_door_1() {
 }
 
 afterlife_cell_door_2() {
-  m_door = getent("powerup_cell_door_2", "targetname");
+  m_door = getEnt("powerup_cell_door_2", "targetname");
   level waittill("cell_2_powerup_activate");
   wait 1;
   array_delete(getEntArray("wires_cell_michigan", "script_noteworthy"));

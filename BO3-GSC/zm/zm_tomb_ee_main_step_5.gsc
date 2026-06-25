@@ -45,7 +45,7 @@ function exit_stage(success) {
 
 function spawn_zombie_blood_plane() {
   s_biplane_pos = struct::get("air_crystal_biplane_pos", "targetname");
-  vh_biplane = spawnvehicle("biplane_zm", (0, 0, 0), (0, 0, 0), "zombie_blood_biplane");
+  vh_biplane = spawnVehicle("biplane_zm", (0, 0, 0), (0, 0, 0), "zombie_blood_biplane");
   vh_biplane flag::init("biplane_down");
   vh_biplane zm_powerup_zombie_blood::make_zombie_blood_entity();
   vh_biplane playLoopSound("zmb_zombieblood_3rd_plane_loop", 1);
@@ -74,8 +74,8 @@ function spawn_zombie_blood_plane() {
   a_start_pos = util::get_array_of_closest(ai_pilot.origin, a_start_pos);
   linker = spawn("script_model", ai_pilot.origin);
   linker setModel("tag_origin");
-  ai_pilot linkto(linker);
-  linker moveto(a_start_pos[0].origin, 3);
+  ai_pilot linkTo(linker);
+  linker moveTo(a_start_pos[0].origin, 3);
   linker waittill("movedone");
   linker delete();
   ai_pilot util::stop_magic_bullet_shield();
@@ -139,7 +139,7 @@ function spawn_quadrotor_pickup(v_origin, v_angles) {
 
 function quadrotor_pickup_think() {
   self endon("kill_trigger");
-  m_quadrotor = getent("quadrotor_pickup", "targetname");
+  m_quadrotor = getEnt("quadrotor_pickup", "targetname");
   while(true) {
     self waittill("trigger", player);
     player playSound("vox_maxi_drone_upgraded_0");

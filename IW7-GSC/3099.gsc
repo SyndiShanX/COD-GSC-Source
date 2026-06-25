@@ -29,8 +29,8 @@ func_1A3F() {
 
   var_1 = anglesToForward(self.angles);
   var_2 = var_0.origin - self.origin;
-  var_1 = vectornormalize(var_1);
-  var_2 = vectornormalize(var_2);
+  var_1 = vectorNormalize(var_1);
+  var_2 = vectorNormalize(var_2);
   var_3 = distancesquared(self.origin, var_0.origin);
   return vectordot(var_1, var_2) > 0.9659 && var_3 < 625000000;
 }
@@ -206,7 +206,7 @@ func_36D1(var_0) {
 }
 
 func_36D2() {
-  var_0 = vectornormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)));
+  var_0 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), randomfloatrange(-1, 1)));
   var_1 = var_0 * (2000.0 * randomfloat(1));
   return var_1;
 }
@@ -218,7 +218,7 @@ func_36D0(var_0, var_1) {
   rotatevector(var_2, var_4);
   var_5 = var_2 * var_0;
   var_6 = var_1.origin - self.origin;
-  var_6 = vectornormalize(var_6);
+  var_6 = vectorNormalize(var_6);
   var_7 = (0, 0, 1);
 
   if(vectordot(var_6, var_7) > 0.99) {
@@ -271,7 +271,7 @@ func_9760() {
 func_AAE3(var_0, var_1, var_2, var_3) {
   var_4 = var_0 - var_1;
   var_5 = var_2 - var_1;
-  var_6 = vectordot(vectornormalize(var_4), vectornormalize(var_5));
+  var_6 = vectordot(vectorNormalize(var_4), vectorNormalize(var_5));
   var_7 = acos(clamp(var_6, 0.0, 1.0));
   var_8 = _atan(var_3 / length(var_5));
 
@@ -336,7 +336,7 @@ func_36D3(var_0) {
 func_36D8(var_0) {
   var_1 = self.spaceship_vel;
   var_1 = scripts\engine\utility::mph_to_ips(var_1);
-  var_0 = vectornormalize(var_1);
+  var_0 = vectorNormalize(var_1);
 }
 
 func_7AAC() {
@@ -501,8 +501,8 @@ func_6EA0(var_0) {
   var_8 = 100 * anglestoup(self.angles);
   var_9 = var_4 + var_5 * var_6 + var_7 + var_8;
   var_10 = var_4 + var_5 * (-1 * var_6) + var_7 + var_8;
-  var_2.angles = _axistoangles(vectornormalize(var_9), anglestoright(self.angles), anglestoup(self.angles));
-  var_3.angles = _axistoangles(vectornormalize(var_10), anglestoright(self.angles), anglestoup(self.angles));
+  var_2.angles = _axistoangles(vectorNormalize(var_9), anglestoright(self.angles), anglestoup(self.angles));
+  var_3.angles = _axistoangles(vectorNormalize(var_10), anglestoright(self.angles), anglestoup(self.angles));
   wait 0.05;
   thread func_12D9A();
 
@@ -558,7 +558,7 @@ func_6EA1(var_0, var_1) {
     self notify("pos_updated");
     var_9 = anglestoup(self.angles);
     var_10 = anglestoright(self.angles);
-    var_11 = vectornormalize(self.origin - self.var_C3CF);
+    var_11 = vectorNormalize(self.origin - self.var_C3CF);
     self.angles = _axistoangles(var_11, var_10, var_9);
     var_0 = var_0 * (1 - var_3);
     var_5 = scripts\sp\math::func_C097(var_7, var_8, var_6);
@@ -699,7 +699,7 @@ func_12E3A() {
         continue;
       }
       if(var_2) {
-        var_7 = vectornormalize(var_5.origin - self.origin);
+        var_7 = vectorNormalize(var_5.origin - self.origin);
         var_8 = anglesToForward(self.angles);
         var_9 = vectordot(var_7, var_8);
 
@@ -755,8 +755,8 @@ func_7941(var_0) {
 }
 
 func_7AF9(var_0) {
-  var_1 = vectornormalize(self.spaceship_vel);
-  var_2 = vectornormalize(var_0.spaceship_vel);
+  var_1 = vectorNormalize(self.spaceship_vel);
+  var_2 = vectorNormalize(var_0.spaceship_vel);
   var_3 = scripts\sp\math::func_C097(40, 360, length(var_0.spaceship_vel));
   var_4 = vectordot(var_1, var_2);
   var_5 = scripts\sp\math::func_6A8E(1, abs(var_4), var_3);

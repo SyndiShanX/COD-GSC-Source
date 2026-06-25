@@ -8,7 +8,7 @@ func_211C() {
   if(getDvar("zmb_arcade_test") != "") {
     setDvar("debug_pause_spawning", 1);
     var_0 = scripts\engine\utility::getStructArray("dance_floor_attract_spots", "targetname");
-    level.players[0] setorigin(var_0[0].origin);
+    level.players[0] setOrigin(var_0[0].origin);
     level.players[0] setplayerangles(var_0[0].angles);
     wait(3);
   }
@@ -43,12 +43,12 @@ use_arcade_game(var_0, var_1) {
 
   level thread func_5FB8(var_1, var_0);
   var_1 setplayerangles(var_0.angles + (29, 0, 0));
-  var_1 setorigin(var_0.origin, 0);
+  var_1 setOrigin(var_0.origin, 0);
   var_1.anchor = spawn("script_model", var_1.origin);
   var_1.anchor setModel("tag_origin");
-  var_1 playerlinkto(var_1.anchor, "tag_origin", 1, 0, 0, 0, 0, 0);
+  var_1 playerlinkTo(var_1.anchor, "tag_origin", 1, 0, 0, 0, 0, 0);
   var_1.anchor.angles = var_0.angles + (29, 0, 0);
-  var_1.anchor.origin = scripts\engine\utility::getstruct(var_0.target, "targetname").origin + scripts\cp\utility::vec_multiply(anglesToForward(var_0.angles), 3);
+  var_1.anchor.origin = scripts\engine\utility::getStruct(var_0.target, "targetname").origin + scripts\cp\utility::vec_multiply(anglesToForward(var_0.angles), 3);
   if(!scripts\engine\utility::istrue(var_1.in_afterlife_arcade)) {
     var_1 scripts\engine\utility::allow_weapon(0);
   }
@@ -72,11 +72,11 @@ use_arcade_game(var_0, var_1) {
   var_1 scripts\cp\zombies\achievement::update_achievement_arcade(var_1, var_0.script_noteworthy, level.wave_num);
   wait(0.25);
   if(isDefined(var_0.script_index)) {
-    var_3 = getent(var_0.name, "targetname");
+    var_3 = getEnt(var_0.name, "targetname");
     var_4 = var_0.script_index;
     var_3 setscriptablepartstate("cab" + var_4, "emulated");
   } else if(isDefined(var_0.groupname)) {
-    var_3 = getent(var_0.groupname, "targetname");
+    var_3 = getEnt(var_0.groupname, "targetname");
     var_3 setscriptablepartstate(var_0.name, "emulated");
   }
 
@@ -93,11 +93,11 @@ use_arcade_game(var_0, var_1) {
   var_1 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_1 stoplocalsound("arcadeSound");
   if(isDefined(var_0.script_index)) {
-    var_3 = getent(var_0.name, "targetname");
+    var_3 = getEnt(var_0.name, "targetname");
     var_4 = var_0.script_index;
     var_3 setscriptablepartstate("cab" + var_4, "idle");
   } else if(isDefined(var_0.groupname)) {
-    var_3 = getent(var_0.groupname, "targetname");
+    var_3 = getEnt(var_0.groupname, "targetname");
     var_3 setscriptablepartstate(var_0.name, "idle");
   }
 
@@ -139,7 +139,7 @@ func_5FB8(var_0, var_1) {
   var_0 playanimscriptevent("power_active_cp", "gesture001");
   var_0.anchor.angles = var_1.angles;
   var_3 = scripts\cp\utility::vec_multiply(anglesToForward(var_1.angles), -15);
-  var_0.anchor.origin = scripts\engine\utility::getstruct(var_1.target, "targetname").origin + (0, 0, 1) + var_3;
+  var_0.anchor.origin = scripts\engine\utility::getStruct(var_1.target, "targetname").origin + (0, 0, 1) + var_3;
   wait(0.1);
   var_0.anchor delete();
   var_0 unlink();
@@ -190,11 +190,11 @@ func_61D8(var_0, var_1) {
   var_0 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_0 stoplocalsound("arcadeSound");
   if(isDefined(var_1.script_index)) {
-    var_3 = getent(var_1.name, "targetname");
+    var_3 = getEnt(var_1.name, "targetname");
     var_4 = var_1.script_index;
     var_3 setscriptablepartstate("cab" + var_4, "idle");
   } else if(isDefined(var_1.groupname)) {
-    var_3 = getent(var_1.groupname, "targetname");
+    var_3 = getEnt(var_1.groupname, "targetname");
     var_3 setscriptablepartstate(var_1.name, "idle");
   }
 
@@ -222,11 +222,11 @@ func_61D7(var_0, var_1) {
   var_0 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_0 stoplocalsound("arcadeSound");
   if(isDefined(var_1.script_index)) {
-    var_2 = getent(var_1.name, "targetname");
+    var_2 = getEnt(var_1.name, "targetname");
     var_3 = var_1.script_index;
     var_2 setscriptablepartstate("cab" + var_3, "idle");
   } else if(isDefined(var_1.groupname)) {
-    var_2 = getent(var_1.groupname, "targetname");
+    var_2 = getEnt(var_1.groupname, "targetname");
     var_2 setscriptablepartstate(var_1.name, "idle");
   }
 
@@ -259,11 +259,11 @@ func_5653(var_0, var_1) {
   var_0 setclientomnvar("zm_arcade_emulator", "arcade_off");
   var_0 stoplocalsound("arcadeSound");
   if(isDefined(var_1.script_index)) {
-    var_2 = getent(var_1.name, "targetname");
+    var_2 = getEnt(var_1.name, "targetname");
     var_3 = var_1.script_index;
     var_2 setscriptablepartstate("cab" + var_3, "idle");
   } else if(isDefined(var_1.groupname)) {
-    var_2 = getent(var_1.groupname, "targetname");
+    var_2 = getEnt(var_1.groupname, "targetname");
     var_2 setscriptablepartstate(var_1.name, "idle");
   }
 
@@ -293,11 +293,11 @@ func_61D6(var_0, var_1) {
   var_0 endon("spawned");
   var_0 waittill("disconnect");
   if(isDefined(var_1.script_index)) {
-    var_2 = getent(var_1.name, "targetname");
+    var_2 = getEnt(var_1.name, "targetname");
     var_3 = var_1.script_index;
     var_2 setscriptablepartstate("cab" + var_3, "idle");
   } else if(isDefined(var_1.groupname)) {
-    var_2 = getent(var_1.groupname, "targetname");
+    var_2 = getEnt(var_1.groupname, "targetname");
     var_2 setscriptablepartstate(var_1.name, "idle");
   }
 

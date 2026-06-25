@@ -148,7 +148,7 @@ on_player_disconnect() {
 }
 
 function_7ff2fc91() {
-  friendlies = getplayers(self.team);
+  friendlies = getPlayers(self.team);
   var_90c1e72d = 0;
 
   foreach(player in friendlies) {
@@ -330,7 +330,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   }
 
   var_2066d96d = 1;
-  friendlies = getplayers(self.team);
+  friendlies = getPlayers(self.team);
   var_90c1e72d = 0;
 
   foreach(player in friendlies) {
@@ -428,7 +428,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
     }
   }
 
-  enemies = getplayers(util::getotherteam(self.team));
+  enemies = getPlayers(util::getotherteam(self.team));
 
   foreach(player in enemies) {
     if(!player laststand::player_is_in_laststand()) {
@@ -670,7 +670,7 @@ bleed_out() {
 
 respawn_player_after_time(n_time_seconds) {
   self endon(#"death", #"disconnect");
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1) {
     return;
@@ -693,12 +693,12 @@ function_2907ce7a() {
 revive_trigger_spawn() {
   radius = getdvarint(#"revive_trigger_radius", 100);
   self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-  self.revivetrigger sethintstring("");
-  self.revivetrigger setcursorhint("HINT_NOICON");
+  self.revivetrigger setHintString("");
+  self.revivetrigger setCursorHint("HINT_NOICON");
   self.revivetrigger setmovingplatformenabled(1);
-  self.revivetrigger enablelinkto();
+  self.revivetrigger enablelinkTo();
   self.revivetrigger.origin = self.origin;
-  self.revivetrigger linkto(self);
+  self.revivetrigger linkTo(self);
   self.revivetrigger.beingrevived = 0;
   self.revivetrigger.createtime = gettime();
   self.revivetrigger.radius = radius;
@@ -717,7 +717,7 @@ revive_trigger_think() {
       self notify(#"stop_revive_trigger");
     }
 
-    self.revivetrigger sethintstring("");
+    self.revivetrigger setHintString("");
 
     if(getdvarint(#"lastand_selfrevive", 0) && self attackButtonPressed() && self throwbuttonPressed() && self fragButtonPressed()) {
       self thread revive_success(self);
@@ -725,7 +725,7 @@ revive_trigger_think() {
       return;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(players[i].team != self.team) {
@@ -810,7 +810,7 @@ function_356caede(team) {
     return false;
   }
 
-  players = getplayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
+  players = getPlayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
   height = getdvarint(#"finisher_trigger_height", 15);
 
   foreach(player in players) {
@@ -868,7 +868,7 @@ function_356caede(team) {
         if(isDefined(var_62728357) && var_62728357) {
           self function_516a3bef(0);
           self setplayerangles(kill_angles);
-          self setorigin(kill_origin);
+          self setOrigin(kill_origin);
           self dodamage(self.var_969fabf4, self.origin, finisher, undefined, "none", "MOD_MELEE_ASSASSINATE", 8192);
           self function_2907ce7a();
           return true;
@@ -914,7 +914,7 @@ function_fab0e07e(finisher) {
   if(isDefined(self) && isDefined(finisher) && isalive(self) && isalive(finisher)) {
     self.laststandparams.savedorigin = self.origin;
     self.laststandparams.savedangles = self.angles;
-    self playerlinkto(finisher, "tag_sync");
+    self playerlinkTo(finisher, "tag_sync");
   }
 }
 
@@ -923,7 +923,7 @@ function_516a3bef(replace) {
     self unlink();
 
     if(replace) {
-      self setorigin(self.laststandparams.savedorigin);
+      self setOrigin(self.laststandparams.savedorigin);
     }
   }
 }
@@ -1072,7 +1072,7 @@ revive_do_revive(playerbeingrevived) {
   revived = 0;
   playerbeingrevived clientfield::set_player_uimodel("hudItems.laststand.beingRevived", 1);
   playerbeingrevived.revivetrigger.beingrevived = 1;
-  playerbeingrevived.revivetrigger sethintstring("");
+  playerbeingrevived.revivetrigger setHintString("");
 
   if(isPlayer(playerbeingrevived)) {
     playerbeingrevived startrevive(self);
@@ -1138,7 +1138,7 @@ revive_do_revive(playerbeingrevived) {
       }
     }
 
-    playerbeingrevived.revivetrigger sethintstring(#"coop/button_to_revive_player");
+    playerbeingrevived.revivetrigger setHintString(#"coop/button_to_revive_player");
     playerbeingrevived.revivetrigger.beingrevived = 0;
 
     if(isDefined(revived) && revived && isDefined(level.var_f80fdd3f)) {
@@ -1350,7 +1350,7 @@ function_1e8018b0() {
   function_92d1707f(#"hash_142816c2e7c5da66", self.var_d75a6ff5);
   self.var_d75a6ff5 = undefined;
   level.var_701f2ed4[self.team]--;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(level.var_701f2ed4[player.team])) {

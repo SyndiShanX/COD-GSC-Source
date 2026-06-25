@@ -113,7 +113,7 @@ _id_CA3E(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_7) && var_6.size > 0) {
-    var_8 = vectornormalize(var_7 / var_6.size);
+    var_8 = vectorNormalize(var_7 / var_6.size);
     var_8 = var_8 * (1, 1, 0);
   } else {
     var_13 = randomint(360);
@@ -314,7 +314,7 @@ glide_bomb_earthquake(var_0) {
   }
 }
 
-glide_bomb_delaycontrolslinkto(var_0) {
+glide_bomb_delaycontrolslinkTo(var_0) {
   wait 1;
   self _meth_8094(var_0);
 }
@@ -354,13 +354,13 @@ _id_7026(var_0, var_1, var_2, var_3, var_4) {
     var_9[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "addToActiveKillstreakList")]](var_1.streakname, "Killstreak_Air", self, 0, 1, 50);
   }
 
-  self cameralinkto(var_9, "tag_player", 0, 0, 1);
+  self cameralinkTo(var_9, "tag_player", 0, 0, 1);
   thread glide_bomb_fovlerp(var_9);
   thread glide_bomb_earthquake(var_9);
   thread _id_10A38();
   var_9.killcament = spawn("script_model", var_9 gettagorigin("tag_player"));
   var_9.killcament setModel("tag_origin");
-  var_9.killcament linkto(var_9, "tag_player");
+  var_9.killcament linkTo(var_9, "tag_player");
   var_9 endon("death");
   var_9 _id_078D::_id_D15E(::_id_701A);
   var_10 = spawn("script_model", var_9 gettagorigin("tag_fx"));
@@ -369,7 +369,7 @@ _id_7026(var_0, var_1, var_2, var_3, var_4) {
   var_10.team = var_9.team;
   var_10.owner = var_9.owner;
   var_10.streakinfo = var_9.streakinfo;
-  var_10 linkto(var_9, "tag_fx");
+  var_10 linkTo(var_9, "tag_fx");
   var_10 setotherent(self);
   var_10 thread _id_7029(var_1);
   var_10 thread _id_702F(var_9);
@@ -388,7 +388,7 @@ _id_7026(var_0, var_1, var_2, var_3, var_4) {
   if(!istrue(var_2)) {
     self _meth_865E();
     self unlink();
-    thread glide_bomb_delaycontrolslinkto(var_9);
+    thread glide_bomb_delaycontrolslinkTo(var_9);
     self._id_036B = 0;
     _id_09C8::_id_0CF9("killstreak_veh_camera_mp", "top", var_9.lifetime, 0);
     scripts\cp_mp\utility\killstreak_utility::_id_0CF8(var_1.streakname, "on");
@@ -556,20 +556,20 @@ _id_702E(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_20 setModel("tag_player");
       var_21 = getdvarint("#x33d3aee96a2edee51", 1000);
       var_22 = getdvarint("#x31d85af254b31c4a", 3250);
-      var_23 = vectornormalize((0.5, 0, -1));
+      var_23 = vectorNormalize((0.5, 0, -1));
       var_24 = var_7 - var_23 * var_21;
       var_25 = (0, 0, var_22);
       var_26 = var_24 + var_25;
       var_20.angles = (5, 0, 0);
       var_6 unlink();
-      var_6 linkto(var_20, "tag_player", (0, 0, 0), (0, 0, 0));
+      var_6 linkTo(var_20, "tag_player", (0, 0, 0), (0, 0, 0));
 
       if(scripts\cp_mp\utility\game_utility::isnightmap()) {
         var_1 scripts\cp_mp\utility\player_utility::_id_D720(0);
       }
 
       var_20.origin = var_26;
-      var_1 cameralinkto(var_20, "tag_player");
+      var_1 cameralinkTo(var_20, "tag_player");
       var_27 = 1;
       var_28 = 0.4;
       var_29 = 0.6;

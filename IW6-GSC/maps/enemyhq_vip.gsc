@@ -29,7 +29,7 @@ begin_vip() {
   maps\_utility::delaythread(0.05, maps\_utility::set_team_bcvoice, "allies", "taskforce");
   level.dog maps\enemyhq_code::set_dog_scripted_mode(level.player);
   maps\_utility::autosave_by_name("vip_room");
-  level.remote_sniper_return_struct = common_scripts\utility::getstruct("vip_return_struct", "targetname");
+  level.remote_sniper_return_struct = common_scripts\utility::getStruct("vip_return_struct", "targetname");
   level.dog maps\enemyhq_code::lock_player_control();
   thread ally_vo();
   common_scripts\utility::flag_wait("setup_vip_enemies");
@@ -61,7 +61,7 @@ begin_vip() {
   maps\_utility::stop_exploder(8011);
   common_scripts\utility::exploder(89);
   level.player disableweaponpickup();
-  var_0 = common_scripts\utility::getstruct("new_vip_breach_e5", "targetname");
+  var_0 = common_scripts\utility::getStruct("new_vip_breach_e5", "targetname");
   thread delete_corpses_around_origin(var_0.origin, 120);
   var_1 = getaiarray("axis");
   common_scripts\utility::array_thread(var_1, maps\enemyhq_code::die_quietly);
@@ -87,11 +87,11 @@ begin_vip() {
 
     if(isalive(level.interogatee)) {
       level.interogatee maps\_utility::stop_magic_bullet_shield();
-      level.interogatee maps\_utility::anim_stopanimscripted();
+      level.interogatee maps\_utility::anim_stopanimScripted();
       level.interogatee maps\_utility::die();
     }
 
-    level.dog maps\_utility::anim_stopanimscripted();
+    level.dog maps\_utility::anim_stopanimScripted();
     level.dog maps\_utility::enable_ai_color();
     level.dog maps\_utility_dogs::disable_dog_sniff();
   }
@@ -121,13 +121,13 @@ auto_breach() {
 }
 
 animate_vip_enemies() {
-  var_0 = getent("vip_enemy_volume", "targetname");
+  var_0 = getEnt("vip_enemy_volume", "targetname");
   var_1 = getEntArray("new_vip_enemy", "targetname");
   var_2 = [];
 
   foreach(var_4 in var_1) {
     var_5 = var_4.script_noteworthy;
-    var_6 = common_scripts\utility::getstruct(var_4.target, "targetname");
+    var_6 = common_scripts\utility::getStruct(var_4.target, "targetname");
     var_7 = var_4 maps\_utility::spawn_ai(1);
     var_7 thread vip_notify_on_death();
     var_7.animname = var_5;
@@ -193,7 +193,7 @@ vip_enemy_interrupt(var_0) {
     self.struct notify("stop_loop");
   }
 
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   self.allowdeath = 1;
   self.ignoreme = 0;
   maps\_utility::enable_ai_color();
@@ -240,7 +240,7 @@ pickai(var_0) {
 }
 
 animate_ally_breach() {
-  var_0 = common_scripts\utility::getstruct("vip_breach1b", "targetname");
+  var_0 = common_scripts\utility::getStruct("vip_breach1b", "targetname");
   level waittill("vip_breach_hot");
   wait 0.5;
   thread open_vip_doors();
@@ -250,7 +250,7 @@ animate_ally_breach() {
     var_3.animname = "ally" + maps\_utility::string(var_1);
 
     if(var_1 > 1) {
-      var_0 = common_scripts\utility::getstruct("vip_breach1", "targetname");
+      var_0 = common_scripts\utility::getStruct("vip_breach1", "targetname");
     }
 
     var_0 thread maps\_anim::anim_single_solo(var_3, "vip_breach");
@@ -263,19 +263,19 @@ animate_ally_breach() {
 }
 
 open_vip_doors() {
-  var_0 = getent("vip_doorhandle_l", "targetname");
-  var_1 = getent("vip_doorhandle_r", "targetname");
-  var_2 = getent("vip_door_l", "targetname");
-  var_3 = getent("vip_door_r", "targetname");
-  var_1 linkto(var_3);
-  var_0 linkto(var_2);
+  var_0 = getEnt("vip_doorhandle_l", "targetname");
+  var_1 = getEnt("vip_doorhandle_r", "targetname");
+  var_2 = getEnt("vip_door_l", "targetname");
+  var_3 = getEnt("vip_door_r", "targetname");
+  var_1 linkTo(var_3);
+  var_0 linkTo(var_2);
   var_1 notsolid();
   var_0 notsolid();
-  var_2 rotateyaw(93, 0.2, 0.1, 0.1);
-  var_2 disconnectpaths();
+  var_2 rotateYaw(93, 0.2, 0.1, 0.1);
+  var_2 disconnectPaths();
   var_2 connectpaths();
-  var_3 rotateyaw(-92, 0.2, 0.1, 0.1);
-  var_3 disconnectpaths();
+  var_3 rotateYaw(-92, 0.2, 0.1, 0.1);
+  var_3 disconnectPaths();
   var_3 connectpaths();
 }
 
@@ -288,17 +288,17 @@ player_back_from_sniping() {
   var_0 = getnode("vip_hesh_loc", "targetname");
   level.allies[2] maps\_utility::teleport_ai(var_0);
   maps\enemyhq_code::safe_activate_trigger_with_targetname("vip_allies_search");
-  var_1 = getent("vip_interrogatee", "targetname");
+  var_1 = getEnt("vip_interrogatee", "targetname");
   var_2 = var_1 maps\_utility::spawn_ai(1);
   level.interogatee = var_2;
-  var_3 = common_scripts\utility::getstruct("vip_interrogate", "targetname");
+  var_3 = common_scripts\utility::getStruct("vip_interrogate", "targetname");
   var_4 = maps\_utility::make_array(level.allies[1], level.allies[2], var_2, level.dog);
   level.allies[1].animname = "goodguy";
   level.allies[2].animname = "hesh";
   level.dog.animname = "dog";
   var_2.animname = "badguy";
   var_2 maps\_utility::magic_bullet_shield();
-  level.dog maps\_utility::anim_stopanimscripted();
+  level.dog maps\_utility::anim_stopanimScripted();
   level.dog unlink();
   common_scripts\utility::waitframe();
   var_3 maps\_anim::anim_first_frame(var_4, "vip_interrogate");
@@ -343,13 +343,13 @@ badguyline3(var_0) {
 
 let_player_through() {
   wait 15;
-  var_0 = getent("vip_player_clip", "targetname");
+  var_0 = getEnt("vip_player_clip", "targetname");
   var_0 notsolid();
   common_scripts\utility::flag_set("vip_done");
 }
 
 show_knife(var_0) {
-  level.knife linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  level.knife linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
   level.knife show();
 }
 

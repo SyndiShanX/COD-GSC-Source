@@ -90,7 +90,7 @@ function stop(n_blend = 0.2, var_8b43f3e3 = 0) {
   flag::clear(#"scriptedanim");
 
   if(isDefined(self)) {
-    self stopanimscripted(n_blend, var_8b43f3e3);
+    self stopanimScripted(n_blend, var_8b43f3e3);
   }
 }
 
@@ -162,7 +162,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
     v_angles = isDefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0);
   }
 
-  if(self isplayinganimscripted() && isanimlooping(animation)) {
+  if(self isplayinganimScripted() && isanimlooping(animation)) {
     waittillframeend();
   }
 
@@ -190,7 +190,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
     if(isactor(self)) {
       self forceteleport(v_origin, v_angles);
     } else if(isPlayer(self)) {
-      self setorigin(v_origin);
+      self setOrigin(v_origin);
       self setplayerangles(v_angles);
     } else {
       self.origin = v_origin;
@@ -199,9 +199,9 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
 
     if(v_origin_or_ent != self) {
       if(isstring(str_tag)) {
-        self linkto(v_origin_or_ent, str_tag, (0, 0, 0), (0, 0, 0));
+        self linkTo(v_origin_or_ent, str_tag, (0, 0, 0), (0, 0, 0));
       } else {
-        self linkto(v_origin_or_ent);
+        self linkTo(v_origin_or_ent);
       }
     }
 
@@ -209,7 +209,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
       if(isactor(self)) {
         self forceteleport(prevorigin, prevangles);
       } else if(isPlayer(self)) {
-        self setorigin(prevorigin);
+        self setOrigin(prevorigin);
         self setplayerangles(prevangles);
       } else {
         self.origin = prevorigin;
@@ -219,7 +219,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
   }
 
   if(self hasdobj() && !(self.classname === "noclass")) {
-    self animscripted(animation, v_origin, v_angles, animation, mode, undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon, var_f4b34dc1, paused, var_dc569aa8, var_1971fee9);
+    self animScripted(animation, v_origin, v_angles, animation, mode, undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon, var_f4b34dc1, paused, var_dc569aa8, var_1971fee9);
     var_1abb7e22 = 1;
   } else {
     println("<dev string:x1ae>" + self getentitynumber() + "<dev string:x1cf>" + hashtostring(animation));
@@ -837,7 +837,7 @@ function private function_bd10424d() {
   player = self;
 
   if(currentsessionmode() == 2) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player function_f2729fc0(0);
@@ -847,7 +847,7 @@ function private function_e97a4b27() {
   player = self;
 
   if(currentsessionmode() == 2) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player function_d8cae271(0);
@@ -857,7 +857,7 @@ function private function_a37627b3() {
   player = self;
 
   if(currentsessionmode() == 2) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player function_f2729fc0(1);
@@ -867,7 +867,7 @@ function private function_54657829() {
   player = self;
 
   if(currentsessionmode() == 2) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   player function_d8cae271(1);

@@ -3086,7 +3086,7 @@ function pineapplegunplayerkilleffect(attacker) {
   if(!isDefined(self)) {
     return;
   }
-  playsoundatposition("evt_annihilation_npc", self.origin);
+  playSoundAtPosition("evt_annihilation_npc", self.origin);
   codesetclientfield(self, "pineapplegun_effect", 1);
   self shake_and_rumble(0, 0.3, 0.35, 1);
   wait(0.1);
@@ -3102,7 +3102,7 @@ function bowplayerkilleffect() {
   if(!isDefined(self)) {
     return;
   }
-  playsoundatposition("evt_annihilation_npc", self.origin);
+  playSoundAtPosition("evt_annihilation_npc", self.origin);
   codesetclientfield(self, "annihilate_effect", 1);
   self shake_and_rumble(0, 0.3, 0.35, 1);
   if(!isDefined(self)) {
@@ -3118,7 +3118,7 @@ function pineapplegunactorkilleffect() {
   if(!isDefined(self)) {
     return;
   }
-  playsoundatposition("evt_annihilation_npc", self.origin);
+  playSoundAtPosition("evt_annihilation_npc", self.origin);
   if(!isDefined(body)) {
     return;
   }
@@ -3138,7 +3138,7 @@ function shake_and_rumble(n_delay, shake_size, shake_time, rumble_num) {
   v_pos = self.origin;
   earthquake(nmagnitude, nduration, v_pos, nradius);
   for(i = 0; i < rumble_num; i++) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.1);
   }
 }

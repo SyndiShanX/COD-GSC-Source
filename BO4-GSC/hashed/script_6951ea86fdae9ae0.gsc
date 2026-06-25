@@ -32,10 +32,10 @@ on_begin(var_c8a36f90, var_a9dd1993, var_2953986a, var_3790b4e4, var_edc5a14f) {
   level zm_trial::function_25ee130(1);
 
   if(level.var_e91491fb === #"prone") {
-    array::thread_all(getplayers(), &zm_trial_util::function_9bf8e274);
+    array::thread_all(getPlayers(), &zm_trial_util::function_9bf8e274);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_1633056a(var_a9dd1993, var_2953986a, var_3790b4e4, var_edc5a14f);
   }
 }
@@ -45,7 +45,7 @@ on_end(round_reset) {
   level zm_trial::function_25ee130(0);
 
   if(level.var_e91491fb === #"prone") {
-    array::thread_all(getplayers(), &zm_trial_util::function_73ff0096);
+    array::thread_all(getPlayers(), &zm_trial_util::function_73ff0096);
   }
 
   level.var_e91491fb = undefined;

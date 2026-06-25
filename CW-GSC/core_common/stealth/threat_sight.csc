@@ -69,7 +69,7 @@ function private function_8991ddb4(localclientnum) {
 
     if(!isDefined(self.threat_sight.var_b4185011) && self hasdobj(localclientnum) && self haspart(localclientnum, "j_head")) {
       self.threat_sight.var_b4185011 = spawn(localclientnum, self gettagorigin("j_head"), "script_origin");
-      self.threat_sight.var_b4185011 linkto(self, "j_head");
+      self.threat_sight.var_b4185011 linkTo(self, "j_head");
     }
 
     entnum = self getentitynumber();

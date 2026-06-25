@@ -1332,9 +1332,9 @@ attack_secondary() {
   }
 }
 missile_target_sight_check(missiletarget) {
-  heli2target_normal = vectornormalize(missiletarget.origin - self.origin);
+  heli2target_normal = vectorNormalize(missiletarget.origin - self.origin);
   heli2forward = anglesToForward(self.angles);
-  heli2forward_normal = vectornormalize(heli2forward);
+  heli2forward_normal = vectorNormalize(heli2forward);
 
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
 

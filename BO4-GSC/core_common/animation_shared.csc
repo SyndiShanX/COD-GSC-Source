@@ -57,7 +57,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
   n_start_time = math::clamp(n_start_time, 0, 1);
 
   if(isvec(v_origin_or_ent) && isvec(v_angles_or_tag)) {
-    self animscripted("_anim_notify_", v_origin_or_ent, v_angles_or_tag, animation, n_blend_in, n_rate, n_start_time);
+    self animScripted("_anim_notify_", v_origin_or_ent, v_angles_or_tag, animation, n_blend_in, n_rate, n_start_time);
   } else {
     if(isstring(v_angles_or_tag)) {
       assert(isDefined(v_origin_or_ent.model), "<dev string:x75>" + animation + "<dev string:x90>" + v_angles_or_tag + "<dev string:x9d>");
@@ -66,11 +66,11 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
       self.origin = v_pos;
       self.angles = v_ang;
       b_link = 1;
-      self animscripted("_anim_notify_", self.origin, self.angles, animation, n_blend_in, n_rate, n_start_time);
+      self animScripted("_anim_notify_", self.origin, self.angles, animation, n_blend_in, n_rate, n_start_time);
     } else {
       v_angles = isDefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0);
       v_origin = isDefined(v_origin_or_ent.origin) ? v_origin_or_ent.origin : (0, 0, 0);
-      self animscripted("_anim_notify_", v_origin, v_angles, animation, n_blend_in, n_rate, n_start_time);
+      self animScripted("_anim_notify_", v_origin, v_angles, animation, n_blend_in, n_rate, n_start_time);
     }
 
     if(n_start_time > 0) {

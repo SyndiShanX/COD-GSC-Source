@@ -389,7 +389,7 @@ function private function_493d2e03(team) {
 }
 
 function function_34460764(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     player allowspectateallteams(1);
@@ -404,7 +404,7 @@ function function_ef775048(team, spectate_team) {
     return;
   }
 
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     player function_493d2e03(spectate_team);
@@ -528,7 +528,7 @@ function function_836ee9ed(var_156b3879) {
     return self;
   }
 
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
 
   foreach(player in players) {
     var_156b3879 = follow_chain(player);

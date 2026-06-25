@@ -907,7 +907,7 @@ func_83EC(var_0) {
   var_1.angles = self.angles;
   var_1 setModel(level.var_108D3["friendly"]);
   var_1 setcontents(0);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 playLoopSound("tactical_insert_lp");
   thread func_83ED(self, var_1, var_0);
   self waittill("death");
@@ -980,8 +980,8 @@ func_83EE(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_PATCH_PICKUP_TI");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_PATCH_PICKUP_TI");
   thread func_12E8B(var_0);
 
   for(;;) {
@@ -1026,7 +1026,7 @@ deleteti(var_0) {
   var_4 setcontents(0);
 
   if(isDefined(var_3)) {
-    var_4 linkto(var_3);
+    var_4 linkTo(var_3);
   }
 
   thread func_5F2B(var_4);
@@ -1043,8 +1043,8 @@ func_83E9(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self.enemytrigger setcursorhint("HINT_NOICON");
-  self.enemytrigger sethintstring(&"MP_PATCH_DESTROY_TI");
+  self.enemytrigger setCursorHint("HINT_NOICON");
+  self.enemytrigger setHintString(&"MP_PATCH_DESTROY_TI");
   self.enemytrigger scripts\mp\utility::makeenemyusable(var_0);
 
   for(;;) {
@@ -1812,7 +1812,7 @@ watchlifepackkills() {
     var_7 thread watchlifepackuse(var_6);
     var_7 thread watchlifepackdeath(var_6);
     var_6 thread hoverlifepack();
-    var_6 rotateyaw(1000, 30, 0.2, 0.2);
+    var_6 rotateYaw(1000, 30, 0.2, 0.2);
     var_6 thread watchlifepacklifetime(10, var_7);
     var_6 thread watchlifepackowner();
 
@@ -1909,9 +1909,9 @@ hoverlifepack() {
   var_0 = self.origin;
 
   for(;;) {
-    self moveto(var_0 + (0, 0, 15), 1, 0.2, 0.2);
+    self moveTo(var_0 + (0, 0, 15), 1, 0.2, 0.2);
     wait 1;
-    self moveto(var_0, 1, 0.2, 0.2);
+    self moveTo(var_0, 1, 0.2, 0.2);
     wait 1;
   }
 }
@@ -2063,7 +2063,7 @@ attachtoughenuparmor(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_6.angles = self.angles;
-  var_6 linkto(self, var_0, var_7, var_8);
+  var_6 linkTo(self, var_0, var_7, var_8);
   var_6 thread watchtoughenupplayerend(self);
   var_6 thread watchtoughenupgameend();
   return var_6;
@@ -2079,7 +2079,7 @@ settoughenupmodel(var_0, var_1, var_2, var_3) {
     var_4 setModel(level.bulletstormshield["section"].enemymodel);
   }
 
-  var_4 linkto(self, "tag_origin", var_1, (0, 90 * (var_2 + 1), 0));
+  var_4 linkTo(self, "tag_origin", var_1, (0, 90 * (var_2 + 1), 0));
   var_4 hide();
   var_4 thread watchtoughenupplayerend(self.owner);
   var_4 thread watchtoughenupgameend();
@@ -2329,77 +2329,77 @@ func_4650(var_0, var_1, var_2) {
   self endon("spawned_player");
   self endon("disconnect");
   self endon("death");
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
 
   switch (var_2) {
     case "power_c4":
-      self.trigger sethintstring(&"MP_PICKUP_C4");
+      self.trigger setHintString(&"MP_PICKUP_C4");
       break;
     case "power_biospike":
-      self.trigger sethintstring(&"MP_PICKUP_BIOSPIKE");
+      self.trigger setHintString(&"MP_PICKUP_BIOSPIKE");
       break;
     case "power_bouncingBetty":
-      self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
+      self.trigger setHintString(&"MP_PICKUP_BOUNCING_BETTY");
       break;
     case "power_semtex":
-      self.trigger sethintstring(&"MP_PICKUP_SEMTEX");
+      self.trigger setHintString(&"MP_PICKUP_SEMTEX");
       break;
     case "power_smokeGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_SMOKE_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_SMOKE_GRENADE");
       break;
     case "power_domeshield":
-      self.trigger sethintstring(&"MP_PICKUP_DOME_SHIELD");
+      self.trigger setHintString(&"MP_PICKUP_DOME_SHIELD");
       break;
     case "power_shardBall":
-      self.trigger sethintstring(&"MP_PICKUP_SHARD_BALL");
+      self.trigger setHintString(&"MP_PICKUP_SHARD_BALL");
       break;
     case "power_splashGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_SPLASH_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_SPLASH_GRENADE");
       break;
     case "power_clusterGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_CLUSTER_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_CLUSTER_GRENADE");
       break;
     case "power_smokeWall":
-      self.trigger sethintstring(&"MP_PICKUP_SMOKE_WALL");
+      self.trigger setHintString(&"MP_PICKUP_SMOKE_WALL");
       break;
     case "power_empGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_EMP_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_EMP_GRENADE");
       break;
     case "power_blackholeGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_BLACKHOLE_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_BLACKHOLE_GRENADE");
       break;
     case "power_blinkKnife":
-      self.trigger sethintstring(&"MP_PICKUP_TELEPORT_KNIFE");
+      self.trigger setHintString(&"MP_PICKUP_TELEPORT_KNIFE");
       break;
     case "power_throwingReap":
-      self.trigger sethintstring(&"MP_PICKUP_THROWING_REAP");
+      self.trigger setHintString(&"MP_PICKUP_THROWING_REAP");
       break;
     case "power_thermobaric":
-      self.trigger sethintstring(&"MP_PICKUP_THERMOBARIC");
+      self.trigger setHintString(&"MP_PICKUP_THERMOBARIC");
       break;
     case "power_playerTrophySystem":
-      self.trigger sethintstring(&"MP_PICKUP_PLAYER_TROPHY");
+      self.trigger setHintString(&"MP_PICKUP_PLAYER_TROPHY");
       break;
     case "power_discMarker":
-      self.trigger sethintstring(&"MP_PICKUP_DISC_MARKER");
+      self.trigger setHintString(&"MP_PICKUP_DISC_MARKER");
       break;
     case "power_caseBomb":
-      self.trigger sethintstring(&"MP_PICKUP_CASE_BOMB");
+      self.trigger setHintString(&"MP_PICKUP_CASE_BOMB");
       break;
     case "power_transponder":
-      self.trigger sethintstring(&"MP_PICKUP_TRANSPONDER");
+      self.trigger setHintString(&"MP_PICKUP_TRANSPONDER");
       break;
     case "power_gasGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_GAS_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_GAS_GRENADE");
       break;
     case "power_blackoutGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_BLACKOUT_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_BLACKOUT_GRENADE");
       break;
     case "power_copycatGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_COPYCAT_GRENADE");
+      self.trigger setHintString(&"MP_PICKUP_COPYCAT_GRENADE");
       break;
     case "power_arcGrenade":
-      self.trigger sethintstring(&"MP_PICKUP_ARC_MINE");
+      self.trigger setHintString(&"MP_PICKUP_ARC_MINE");
       break;
   }
 
@@ -2590,8 +2590,8 @@ func_10225() {
         if(var_8 <= 0) {
           continue;
         }
-        var_9 = vectornormalize(var_6);
-        var_10 = vectornormalize(var_7);
+        var_9 = vectorNormalize(var_6);
+        var_10 = vectorNormalize(var_7);
         var_8 = vectordot(var_9, var_10);
 
         if(var_8 < 0.965926) {
@@ -2677,10 +2677,10 @@ updatesixthsensevfx(var_0, var_1) {
 getsixthsensedirection(var_0) {
   var_1 = anglesToForward(self getplayerangles());
   var_2 = (var_1[0], var_1[1], var_1[2]);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_0.origin - self.origin;
   var_4 = (var_3[0], var_3[1], var_3[2]);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_5 = vectordot(var_2, var_4);
 
   if(var_5 >= 0.92388) {
@@ -2744,8 +2744,8 @@ setcamoelite() {
         if(var_7 <= 0) {
           continue;
         }
-        var_8 = vectornormalize(var_5);
-        var_9 = vectornormalize(var_6);
+        var_8 = vectorNormalize(var_5);
+        var_9 = vectorNormalize(var_6);
         var_7 = vectordot(var_8, var_9);
 
         if(var_7 < 0.965926) {
@@ -3881,7 +3881,7 @@ runadsawareness() {
 
 playincomingwarning(var_0) {
   self setscriptablepartstate("heightened_senses", "scrn_pulse");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_0 playsoundtoplayer("ghost_senses_ping", self);
   wait 0.2;
 
@@ -3889,7 +3889,7 @@ playincomingwarning(var_0) {
     self setscriptablepartstate("heightened_senses", "default");
 
     if(scripts\mp\utility::isreallyalive(self)) {
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
 
       if(isDefined(var_0) && scripts\mp\utility::isreallyalive(var_0)) {
         var_0 playsoundtoplayer("ghost_senses_ping", self);
@@ -4678,7 +4678,7 @@ battleslideshield_raise() {
   var_0 setModel("weapon_shinguard_wm");
   var_0 setCanDamage(1);
   var_0.health = 250;
-  var_0 linkto(self, "tag_origin", (30, 0, 0), (0, 90, 0));
+  var_0 linkTo(self, "tag_origin", (30, 0, 0), (0, 90, 0));
   var_0 show();
   self.battleslideshield = var_0;
   thread battleslideshield_killonjumpfall(var_0);
@@ -4903,7 +4903,7 @@ thrusterloop() {
   wait 0.05;
 
   for(;;) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     scripts\mp\shellshock::_earthquake(0.1, 0.3, self.origin, 120);
     var_0 = playerphysicstrace(self.origin + (0, 0, 10), self.origin - (0, 0, 600)) + (0, 0, 1);
     self.thrustfxent.origin = var_0;
@@ -4977,7 +4977,7 @@ executehover() {
   self allowjump(0);
   self playlocalsound("ghost_wall_attach");
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  self playerlinkto(var_0);
+  self playerlinkTo(var_0);
   thread managetimeout(var_0);
 }
 

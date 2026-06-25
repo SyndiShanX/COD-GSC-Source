@@ -227,7 +227,7 @@ function function_59d43f02(var_5207017, player, var_545e45) {
   player val::set(#"fling_player", "allow_prone", 0);
   player val::set(#"fling_player", "allow_stand", 1);
   player val::set(#"fling_player", "freezecontrols_allowlook", 1);
-  player playrumbleonentity("damage_heavy");
+  player playRumbleOnEntity("damage_heavy");
 
   if(player isinvehicle()) {
     vehicle = player getvehicleoccupied();
@@ -236,14 +236,14 @@ function function_59d43f02(var_5207017, player, var_545e45) {
       player setstance("stand");
     }
 
-    player setorigin(player.origin + (0, 0, 1));
+    player setOrigin(player.origin + (0, 0, 1));
   }
 
   visionset_mgr::activate("overlay", "sr_jump_pad_visionset", player);
   var_91418561 = getdvarint(#"bg_gravity", 800);
 
   if(isDefined(var_5207017.s_target)) {
-    v_launch = vectornormalize(var_5207017.s_target.origin - player.origin) * var_91418561;
+    v_launch = vectorNormalize(var_5207017.s_target.origin - player.origin) * var_91418561;
     v_dest = var_5207017.s_target.origin;
 
     debugstar(var_5207017.s_target.origin, 500, (0, 1, 0));
@@ -261,7 +261,7 @@ function function_59d43f02(var_5207017, player, var_545e45) {
 
   n_dist = distance(player.origin, v_dest);
   var_fd6264f6 = n_dist / var_91418561;
-  playsoundatposition(#"hash_7ff8d8dbf89e6f0d", player.origin);
+  playSoundAtPosition(#"hash_7ff8d8dbf89e6f0d", player.origin);
   player clientfield::set_to_player("jump_pad_wind_sound", 1);
   player thread flag::set_for_time(2, #"hash_4e5451766f737d14");
 

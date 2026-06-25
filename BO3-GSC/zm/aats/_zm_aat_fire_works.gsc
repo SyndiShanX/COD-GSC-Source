@@ -65,7 +65,7 @@ function fire_works_summon(e_player, w_weapon) {
   mdl_weapon.b_aat_fire_works_weapon = 1;
   mdl_weapon.allow_zombie_to_target_ai = 1;
   mdl_weapon thread clientfield::set("zm_aat_fire_works", 1);
-  mdl_weapon moveto(v_firing_pos, 0.5);
+  mdl_weapon moveTo(v_firing_pos, 0.5);
   mdl_weapon waittill("movedone");
   for(i = 0; i < 10; i++) {
     zombie = mdl_weapon zm_aat_fire_works_get_target();
@@ -81,7 +81,7 @@ function fire_works_summon(e_player, w_weapon) {
     magicbullet(w_summoned_weapon, v_flash_pos, v_target_pos, mdl_weapon);
     util::wait_network_frame();
   }
-  mdl_weapon moveto(v_target_zombie_origin, 0.5);
+  mdl_weapon moveTo(v_target_zombie_origin, 0.5);
   mdl_weapon waittill("movedone");
   mdl_weapon clientfield::set("zm_aat_fire_works", 0);
   util::wait_network_frame();

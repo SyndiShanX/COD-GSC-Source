@@ -501,7 +501,7 @@ _getplayersinattractorrange(var_0, var_1, var_2, var_3) {
     if(!maps\mp\zombies\_util::isplayerinfected(var_6) && var_7 < 100 && distancesquared(var_6.origin, var_0.origin) < var_2) {
       if(level.nextgen) {
         var_8 = anglesToForward(var_0.modelent.angles);
-        var_9 = vectornormalize(var_6.origin - var_0.modelent.origin);
+        var_9 = vectorNormalize(var_6.origin - var_0.modelent.origin);
         var_10 = vectordot(var_8, var_9);
 
         if(var_10 > var_3) {

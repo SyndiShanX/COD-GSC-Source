@@ -143,15 +143,15 @@ function main(str_objective, b_starting) {
   var_b3f15cbd = spawner::simple_spawn("rooftop_defend_ac130_fodder_2");
   var_cd182301 = arraycombine(var_c1a1f81e, var_b3f15cbd);
   level flag::wait_till("flg_ac130_active");
-  var_bd8e9ff7 = getent("rooftop_damage_trigger_1", "targetname");
+  var_bd8e9ff7 = getEnt("rooftop_damage_trigger_1", "targetname");
   var_49fe9e2a = struct::get("ac130_damage_fx_1", "targetname");
-  var_cab83a4a = getent("rooftop_damage_trigger_2", "targetname");
+  var_cab83a4a = getEnt("rooftop_damage_trigger_2", "targetname");
   var_5c45c2b8 = struct::get("ac130_damage_fx_2", "targetname");
-  var_18ffd6d8 = getent("rooftop_damage_trigger_3", "targetname");
+  var_18ffd6d8 = getEnt("rooftop_damage_trigger_3", "targetname");
   var_a34ad0c5 = struct::get("ac130_damage_fx_3", "targetname");
-  var_cb6b3b9c = getent("rooftop_damage_trigger_4", "targetname");
+  var_cb6b3b9c = getEnt("rooftop_damage_trigger_4", "targetname");
   var_588a3b41 = struct::get("ac130_damage_fx_4", "targetname");
-  var_1922d70a = getent("rooftop_damage_trigger_5", "targetname");
+  var_1922d70a = getEnt("rooftop_damage_trigger_5", "targetname");
   var_30f16c10 = struct::get("ac130_damage_fx_5", "targetname");
   level thread function_501002d8(var_bd8e9ff7, var_49fe9e2a);
   level thread function_501002d8(var_cab83a4a, var_5c45c2b8);
@@ -221,7 +221,7 @@ function function_4189d2e2() {
 
 function function_4abb5b73() {
   self endon(#"death");
-  vol_fallback = getent("a_wave_catch_all_enemies_fallback", "targetname");
+  vol_fallback = getEnt("a_wave_catch_all_enemies_fallback", "targetname");
   self setgoal(vol_fallback);
   self waittill(#"goal");
 
@@ -235,7 +235,7 @@ function function_d210173f(var_3c97f36d, var_5442a320) {
   self val::set(#"hash_722c2bad015d62bc", "ignoreall", 1);
   self spawner::go_to_struct(struct::get(var_3c97f36d, "targetname"));
   self waittill(#"goal");
-  self thread ai::shoot_at_target("normal", getent(var_5442a320, "targetname"), "tag_origin", 10, 100, 1);
+  self thread ai::shoot_at_target("normal", getEnt(var_5442a320, "targetname"), "tag_origin", 10, 100, 1);
   self waittill(#"shoot");
   self ai::stop_shoot_at_target();
   self val::set(#"hash_722c2bad015d62bc", "ignoreall", 0);
@@ -419,7 +419,7 @@ function function_e179de40() {
   var_10489ce6 = spawner::simple_spawn("exfil_ally_killers");
 
   foreach(guy in var_10489ce6) {
-    guy thread ai::shoot_at_target("normal", getent("exfil_killers_shoot_at_skyhook", "targetname"), "tag_origin", 10, 100, 1);
+    guy thread ai::shoot_at_target("normal", getEnt("exfil_killers_shoot_at_skyhook", "targetname"), "tag_origin", 10, 100, 1);
   }
 }
 
@@ -469,7 +469,7 @@ function function_442dca4f() {
   var_10489ce6 = spawner::simple_spawn("exfil_ally_killers");
 
   foreach(guy in var_10489ce6) {
-    guy thread ai::shoot_at_target("normal", getent("exfil_killers_shoot_at_skyhook", "targetname"), "tag_origin", 10, 100, 1);
+    guy thread ai::shoot_at_target("normal", getEnt("exfil_killers_shoot_at_skyhook", "targetname"), "tag_origin", 10, 100, 1);
   }
 }
 
@@ -533,7 +533,7 @@ function function_ac6f37f4() {
 
 function function_68558af9() {
   level endon(#"flg_ac130_done");
-  var_77b3f074 = getent("back_left_gl_splash_trig", "targetname");
+  var_77b3f074 = getEnt("back_left_gl_splash_trig", "targetname");
   var_81d24c08 = struct::get("gl_splash_damage_origin", "targetname");
 
   while(true) {
@@ -568,7 +568,7 @@ function function_29758311() {
     wait 0.3;
   }
 
-  namespace_8bcd067b::function_1c110d7a(getent("ac130_center_point", "targetname").origin, 8000, 8000 * (cos(60), sin(60), 0));
+  namespace_8bcd067b::function_1c110d7a(getEnt("ac130_center_point", "targetname").origin, 8000, 8000 * (cos(60), sin(60), 0));
   self killstreaks::give("ac130");
   self killstreaks::usekillstreak("ac130", 0);
   self thread function_d057152("veh_t9_mil_us_air_gunship_cp_nic_rev");
@@ -584,7 +584,7 @@ function function_29758311() {
 
   if(level.player istouching(level.park)) {
     var_d9445fa5 = (level.player.origin[0], level.park.origin[1] - 32, level.player.origin[2]);
-    level.player setorigin(var_d9445fa5);
+    level.player setOrigin(var_d9445fa5);
   }
 
   wait 2;
@@ -620,7 +620,7 @@ function function_501002d8(damage_trigger, fx_struct) {
 
 function function_e1201e79() {
   level endon(#"flg_ac130_done");
-  damage_trigger = getent("ac130_player_killed_volume", "targetname");
+  damage_trigger = getEnt("ac130_player_killed_volume", "targetname");
 
   while(true) {
     var_7b1b5529 = damage_trigger waittill(#"damage");
@@ -633,7 +633,7 @@ function function_e1201e79() {
 
 function function_353a1ac4() {
   level endon(#"flg_ac130_done");
-  damage_trigger = getent("ac130_player_shot_balloon_volume", "targetname");
+  damage_trigger = getEnt("ac130_player_shot_balloon_volume", "targetname");
   var_9d262a11 = (40, 40, -10);
   level thread function_b8f67d09(damage_trigger.origin + var_9d262a11);
 

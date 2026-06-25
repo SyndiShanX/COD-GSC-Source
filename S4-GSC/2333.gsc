@@ -38,7 +38,7 @@ _id_A15C(var_0) {
   }
 
   var_0._id_A15E = var_1;
-  var_0._id_A15E linkto(var_0);
+  var_0._id_A15E linkTo(var_0);
   var_0._id_A15E.originating_player = self;
   var_0 playSound("zmb_monkey_throw_vox");
   level._id_1E2D = scripts\engine\utility::array_add(level._id_1E2D, var_0._id_A15E);

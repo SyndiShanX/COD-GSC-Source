@@ -48,26 +48,26 @@ function function_41b278b3() {
 
 function function_fbea6a64(e_player) {
   if(e_player.is_drinking > 0) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(level flag::get("lockdown_active") && self.stub.script_noteworthy !== "street_flinger") {
-    self sethintstring(&"ZM_STALINGRAD_FLINGER_DISABLED");
+    self setHintString(&"ZM_STALINGRAD_FLINGER_DISABLED");
     return false;
   }
   if(isDefined(self.stub.var_66a9cd70) && self.stub.var_66a9cd70) {
-    self sethintstring(&"ZOMBIE_TRAP_ACTIVE");
+    self setHintString(&"ZOMBIE_TRAP_ACTIVE");
     return false;
   }
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     return false;
   }
   if(self.stub.var_dd690f31 === 0) {
-    self sethintstring(&"ZM_STALINGRAD_TRAP_COOLDOWN");
+    self setHintString(&"ZM_STALINGRAD_TRAP_COOLDOWN");
     return false;
   }
-  self sethintstring(&"ZM_STALINGRAD_FLINGER_TRAP_USE", 1000);
+  self setHintString(&"ZM_STALINGRAD_FLINGER_TRAP_USE", 1000);
   return true;
 }
 
@@ -100,11 +100,11 @@ function function_d9a07413(e_player, var_a70a7d09) {
   }
   self zm_stalingrad_util::function_903f6b36(1);
   var_b4f536a1 = struct::get(var_a70a7d09.target);
-  var_ebbae7d4 = getent(var_b4f536a1.target, "targetname");
+  var_ebbae7d4 = getEnt(var_b4f536a1.target, "targetname");
   v_fling = anglesToForward(var_b4f536a1.angles);
   n_rotate_angle = var_ebbae7d4.script_int;
   if(isDefined(var_ebbae7d4.target)) {
-    var_d617e29b = getent(var_ebbae7d4.target, "targetname");
+    var_d617e29b = getEnt(var_ebbae7d4.target, "targetname");
   }
   n_start_time = gettime();
   n_total_time = 0;
@@ -174,7 +174,7 @@ function function_fce6cca8() {
   var_8e692aea[1] = (270, 3865, -12);
   var_5733bd24 = randomintrange(0, 2);
   var_848f1155 = spawn("script_origin", self.origin);
-  self playerlinkto(var_848f1155);
+  self playerlinkTo(var_848f1155);
   self notsolid();
   var_848f1155 notsolid();
   self.var_fa6d2a24 = 1;

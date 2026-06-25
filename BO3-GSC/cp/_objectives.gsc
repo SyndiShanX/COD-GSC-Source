@@ -194,7 +194,7 @@ class cbreadcrumbobjective: cobjective {
     obj_id = m_a_player_game_obj[entnum];
     objective_setvisibletoplayer(obj_id, player);
     do {
-      t_current = getent(str_trig_targetname, "targetname");
+      t_current = getEnt(str_trig_targetname, "targetname");
       if(isDefined(t_current)) {
         if(isDefined(t_current.target)) {
           if(isDefined(t_current.script_flag_true)) {

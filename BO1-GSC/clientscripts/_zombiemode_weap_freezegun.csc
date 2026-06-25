@@ -64,7 +64,7 @@ freezegun_get_gibforce(tag, force_from_torso, shatter) {
     if(force_from_torso) {
       start_pos = self gettagorigin("J_SpineLower");
     }
-    forward = VectorNormalize(self gettagorigin(tag) - start_pos);
+    forward = vectorNormalize(self gettagorigin(tag) - start_pos);
     forward *= RandomIntRange(600, 1000);
     forward += (0, 0, RandomIntRange(400, 700));
     return forward;

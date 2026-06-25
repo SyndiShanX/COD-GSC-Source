@@ -31,7 +31,7 @@ _id_6E4A(var_0) {
 _id_A221(var_0) {
   var_1 = _func_02AB(var_0.origin);
   self dontinterpolate();
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
   self _meth_82BE(var_0.origin);
   self._id_0229 = 0;
 }

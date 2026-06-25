@@ -77,7 +77,7 @@ finishline() {
   level endon("time_ran_out");
 
   playersRequired = level.players.size;
-  trigger = getent("finishline", "targetname");
+  trigger = getEnt("finishline", "targetname");
   assert(isDefined(trigger));
 
   for(;;) {
@@ -298,7 +298,7 @@ spawn_enemy_bike_snowrace() {
 
   spawn_pos = drop_to_ground(spawn_pos);
 
-  snowmobile_spawner = getent("snowmobile_spawner", "targetname");
+  snowmobile_spawner = getEnt("snowmobile_spawner", "targetname");
   assertEx(isDefined(snowmobile_spawner), "Need a snowmobile spawner with targetname snowmobile_spawner in the level");
   targ = spawn_array["targ"];
 

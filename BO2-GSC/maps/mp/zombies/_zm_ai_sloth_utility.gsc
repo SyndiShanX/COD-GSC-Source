@@ -62,7 +62,7 @@ watch_crash_pos() {
       if(dist < dist_crash) {
         self.anchor.origin = self.origin;
         self.anchor.angles = self.angles;
-        self linkto(self.anchor);
+        self linkTo(self.anchor);
         self setclientfield("sloth_berserk", 0);
         self sloth_set_state("crash", 0);
         wait 0.25;

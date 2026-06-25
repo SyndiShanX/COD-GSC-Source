@@ -65,7 +65,7 @@ nicaragua_to_misssion_animations() {
   t_sanity_check = get_ent("stair_anim_sanity_check_trigger", "targetname", 1);
   a_guys_in_room = get_ai_touching_volume("axis", undefined, t_sanity_check);
   level thread load_gump("nicaragua_gump_josefina");
-  m_door = getent("josephina_door", "targetname");
+  m_door = getEnt("josephina_door", "targetname");
   m_door hide();
   trigger_wait("mansion_menendez_meets_mason_trigger", "script_noteworthy");
   exploder(590);
@@ -83,7 +83,7 @@ nicaragua_to_misssion_animations() {
   level.player.b_weapons_disabled = 1;
   level.player hide_hud();
   m_door show();
-  m_door = getent("shattered_part2_door", "targetname");
+  m_door = getEnt("shattered_part2_door", "targetname");
   m_door.angles = (0, 0, 0);
   a_ai = getaiarray();
 
@@ -96,9 +96,9 @@ nicaragua_to_misssion_animations() {
   model_delete_area("menendez_execution");
   model_delete_area("menendez_stables_and_upper_village");
   menendez_chickens_cleanup();
-  m_scorch_marks = getent("josefina_hall_scorch", "targetname");
+  m_scorch_marks = getEnt("josefina_hall_scorch", "targetname");
   m_scorch_marks hide();
-  m_clip = getent("traversal_to_other_side_clip", "targetname");
+  m_clip = getEnt("traversal_to_other_side_clip", "targetname");
   m_clip connectpaths();
   wait 0.15;
   m_clip delete();
@@ -126,6 +126,6 @@ shattered_1_slow_mo_end(m_player_body) {
 
 shattered_1_explosion(m_player_body) {
   exploder(595);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   level notify("shattered_1_done");
 }

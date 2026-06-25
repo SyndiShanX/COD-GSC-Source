@@ -66,7 +66,7 @@ setupEggForMap(eggName) {
 
     AssertEx(isDefined(flags), "dlcAlienEggs bit flag not set up for map: " + getMapName());
 
-    egg = GetEnt(eggName, "targetname");
+    egg = getEnt(eggName, "targetname");
     if(isDefined(egg)) {
       if(egg.classname == "script_model") {
         egg setCanDamage(true);

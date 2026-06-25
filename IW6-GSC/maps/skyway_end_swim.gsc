@@ -21,8 +21,8 @@ section_precache() {
 
 section_post_inits() {
   level._end_swim = spawnStruct();
-  level._end_swim.ally_start = getent("ally1_start_end_swim", "targetname");
-  level._end_swim.player_start = getent("player_start_end_swim", "targetname");
+  level._end_swim.ally_start = getEnt("ally1_start_end_swim", "targetname");
+  level._end_swim.player_start = getEnt("player_start_end_swim", "targetname");
   level.swim_rumble_mag = 0.16;
   level.swim_blur_mag = 0.6;
   level.swim_blur_fade = 0.4;
@@ -77,7 +77,7 @@ main() {
 }
 
 end_swim_init_vars() {
-  level.end_swim_anim_node = common_scripts\utility::getstruct("vignette_swimout", "targetname");
+  level.end_swim_anim_node = common_scripts\utility::getStruct("vignette_swimout", "targetname");
   level.player allowfire(0);
 }
 
@@ -90,7 +90,7 @@ choking_logic() {
   level.player_fx_org setanim(level.scr_anim["sw_swim_view_fx"]["swim_fx_base"]);
   level.player_fx_org setanim(level.scr_anim["sw_swim_view_fx"]["swim_fx_add"]);
   level.player_fx_org setanimlimited(level.scr_anim["sw_swim_view_fx"]["swim_drown_overlay"], 0.0, 0.0);
-  var_0 = common_scripts\utility::getstruct("swim_final_dist_check", "targetname");
+  var_0 = common_scripts\utility::getStruct("swim_final_dist_check", "targetname");
   var_1 = 2000;
   var_2 = 400;
   var_3 = 0.5;
@@ -338,7 +338,7 @@ enemy_logic() {
 }
 
 retarget_engines() {
-  var_0 = getent("lighttarget_engines", "targetname");
+  var_0 = getEnt("lighttarget_engines", "targetname");
   var_1 = getEntArray("loco_engines", "script_noteworthy");
 
   foreach(var_3 in var_1) {

@@ -148,7 +148,7 @@ func_12889(var_0) {
     var_8 = 2;
   }
 
-  var_10 = spawnvehicle(var_3, "minijackal", var_4, var_2, self.angles, self);
+  var_10 = spawnVehicle(var_3, "minijackal", var_4, var_2, self.angles, self);
   level.var_B7AD[level.var_B7AD.size] = var_10;
   decrementminijackalsincoming(self);
   var_10 give_player_tickets(1);
@@ -335,7 +335,7 @@ trackmissiletargetinview(var_0, var_1) {
       continue;
     }
     var_11 = var_10.origin;
-    var_12 = vectornormalize(var_11 - var_5);
+    var_12 = vectorNormalize(var_11 - var_5);
     var_7[var_7.size] = var_10;
     var_13 = distance2d(var_5, var_11);
 
@@ -346,7 +346,7 @@ trackmissiletargetinview(var_0, var_1) {
   }
 
   if(isDefined(var_3)) {
-    self missile_settargetent(var_3, (0, 0, 40));
+    self missile_settargetEnt(var_3, (0, 0, 40));
     self missile_setflightmodedirect();
     var_3.apextargetted = 1;
     var_3 thread watchtarget(self);
@@ -500,13 +500,13 @@ func_4CF1(var_0, var_1) {
 
 func_3239(var_0) {
   self earthquakeforplayer(0.2, 0.25, var_0.origin, 50);
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   thread func_1349D(var_0, 0.4);
 }
 
 func_69E6(var_0) {
   self earthquakeforplayer(0.5, 0.45, var_0.origin, 1000);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   thread func_1349D(var_0, 0.7);
 }
 

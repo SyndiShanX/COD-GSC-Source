@@ -16,8 +16,8 @@ function on_gameplay_started(localclientnum) {
 }
 
 function function_807e8ee9(localclientnum) {
-  var_296d73cb = getent(localclientnum, "clock_min_hand", "targetname");
-  var_30bcd607 = getent(localclientnum, "clock_sec_hand", "targetname");
+  var_296d73cb = getEnt(localclientnum, "clock_min_hand", "targetname");
+  var_30bcd607 = getEnt(localclientnum, "clock_sec_hand", "targetname");
   timelimit = getgametypesetting(#"timelimit");
 
   if(!getdvarint(#"hash_151d18a5663d31ce", 1) || !isDefined(var_296d73cb) || !isDefined(var_30bcd607) || !isDefined(timelimit)) {

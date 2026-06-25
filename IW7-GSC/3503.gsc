@@ -44,7 +44,7 @@ dostrike(var_0, var_1, var_2, var_3) {
   var_4 = level.var_A692[var_1];
   var_5 = var_3 - var_2;
   var_6 = (var_5[0], var_5[1], 0);
-  var_5 = vectornormalize(var_5);
+  var_5 = vectorNormalize(var_5);
   var_7 = var_3;
   var_8 = scripts\mp\killstreaks\killstreaks::findunobstructedfiringpoint(var_0, var_3 + (0, 0, 10), 10000);
 

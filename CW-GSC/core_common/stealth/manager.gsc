@@ -260,7 +260,7 @@ function teams_thread() {
 
   while(true) {
     level flag::wait_till("stealth_enabled");
-    level.stealth.enemies[#"axis"] = getplayers();
+    level.stealth.enemies[#"axis"] = getPlayers();
     level.stealth.enemies[#"allies"] = getactorteamarray("axis");
     wait 0.05;
   }
@@ -305,7 +305,7 @@ function event_change(name) {
 function init_save() {
   level flag::init("stealth_player_nade");
   level.stealth.save.player_nades = 0;
-  array::thread_all(getplayers(), &player_grenade_check);
+  array::thread_all(getPlayers(), &player_grenade_check);
 }
 
 function player_grenade_check() {

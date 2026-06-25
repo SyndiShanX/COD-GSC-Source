@@ -194,35 +194,35 @@ function function_5dfd7fb1(nodename, nodekey, benabled) {
 }
 
 function function_95feac9c() {
-  level.elevator = getent("elevator", "targetname");
+  level.elevator = getEnt("elevator", "targetname");
   level thread function_c0dcd012();
-  level.elevator_body_clip = getent("elevator_body_clip", "targetname");
-  level.elevator_body_clip linkto(level.elevator);
-  level.elevator_left_door_clip = getent("elevator_left_door_clip", "targetname");
-  level.elevator_left_door_clip linkto(level.elevator);
-  level.elevator_right_door_clip = getent("elevator_right_door_clip", "targetname");
-  level.elevator_right_door_clip linkto(level.elevator);
-  level.elevator_doorway_player_clip = getent("elevator_doorway_player_clip", "targetname");
-  level.elevator_doorway_player_clip linkto(level.elevator);
+  level.elevator_body_clip = getEnt("elevator_body_clip", "targetname");
+  level.elevator_body_clip linkTo(level.elevator);
+  level.elevator_left_door_clip = getEnt("elevator_left_door_clip", "targetname");
+  level.elevator_left_door_clip linkTo(level.elevator);
+  level.elevator_right_door_clip = getEnt("elevator_right_door_clip", "targetname");
+  level.elevator_right_door_clip linkTo(level.elevator);
+  level.elevator_doorway_player_clip = getEnt("elevator_doorway_player_clip", "targetname");
+  level.elevator_doorway_player_clip linkTo(level.elevator);
   level.elevator_lights = getEntArray("elevator_light", "targetname");
 
   if(isDefined(level.elevator_lights) && level.elevator_lights.size > 0) {
     foreach(light in level.elevator_lights) {
-      light linkto(level.elevator);
+      light linkTo(level.elevator);
     }
   }
 
   level flag::set("elevator_clips_ready");
   level thread function_c6e1b306();
-  level.elevator_probe = getent("elevator_probe", "targetname");
-  level.elevator_probe linkto(level.elevator);
+  level.elevator_probe = getEnt("elevator_probe", "targetname");
+  level.elevator_probe linkTo(level.elevator);
 }
 
 function function_c0dcd012() {
-  exfil_escape_alarm_light_elevator = getent("exfil_escape_alarm_light_elevator", "targetname");
+  exfil_escape_alarm_light_elevator = getEnt("exfil_escape_alarm_light_elevator", "targetname");
 
   if(isDefined(exfil_escape_alarm_light_elevator)) {
-    exfil_escape_alarm_light_elevator linkto(level.elevator, "tag_origin", (0, 46, 85), (0, 90, -90));
+    exfil_escape_alarm_light_elevator linkTo(level.elevator, "tag_origin", (0, 46, 85), (0, 90, -90));
     level flag::wait_till("turn_on_elevator_alarm_light");
     exfil_escape_alarm_light_elevator setlightintensity(12000000);
   }
@@ -244,7 +244,7 @@ function function_c6e1b306() {
 }
 
 function toggle_light(tname, var_b1e77977) {
-  light = getent(tname, "targetname");
+  light = getEnt(tname, "targetname");
 
   if(isDefined(light)) {
     if(is_true(var_b1e77977)) {
@@ -301,7 +301,7 @@ function rotating_object() {
 
   while(true) {
     if(self.var_a1a5e6bc == "yaw") {
-      self rotateyaw(360, self.var_b1c6f60c);
+      self rotateYaw(360, self.var_b1c6f60c);
     } else if(self.var_a1a5e6bc == "roll") {
       self rotateroll(360, self.var_b1c6f60c);
     } else if(self.var_a1a5e6bc == "pitch") {
@@ -626,7 +626,7 @@ function function_7264e049(params) {
 
 function function_27006ab9() {
   lockers = getEntArray("kgb_locker_model", "script_noteworthy");
-  var_a19acf63 = getent("camera_locker_vol", "targetname");
+  var_a19acf63 = getEnt("camera_locker_vol", "targetname");
 
   foreach(item in lockers) {
     if(item istouching(var_a19acf63)) {
@@ -1126,7 +1126,7 @@ function function_8017ace8(count) {
       scene = "bodystash_cabinet_a_cabinet";
     }
 
-    vol.locker = getent(struct.target, "targetname");
+    vol.locker = getEnt(struct.target, "targetname");
     vol.locker useanimtree("generic");
     vol.locker animation::first_frame(scene, struct.origin, struct.angles);
   }
@@ -1357,7 +1357,7 @@ function placed_suspended_weapons() {
   placed_suspended_weapons = getEntArray("placed_suspended_weapons", "targetname");
 
   foreach(weapon in placed_suspended_weapons) {
-    weapon linkto(var_e777609);
+    weapon linkTo(var_e777609);
   }
 }
 
@@ -1456,7 +1456,7 @@ function private function_f78628e6() {
 }
 
 function arcade_work_order() {
-  paper = getent("arcade_work_order", "targetname");
+  paper = getEnt("arcade_work_order", "targetname");
   paper util::create_cursor_hint(undefined, (0, 0, 0), undefined, 40, undefined, &function_18b8373e, undefined, 150, undefined, undefined, undefined, 0, &function_2a64654d);
 }
 
@@ -1487,7 +1487,7 @@ function function_2a64654d(prompt) {
 }
 
 function function_e2e72d4(b_open = 1, b_delete = 0) {
-  clip = getent("kgb_briefing_clip", "targetname");
+  clip = getEnt("kgb_briefing_clip", "targetname");
   var_15a8ac74 = getEntArray("kgb_briefing_open", "targetname");
   var_e663923e = getEntArray("kgb_briefing_closed", "targetname");
 
@@ -1630,7 +1630,7 @@ function function_a43c15af() {
 }
 
 function function_af5c4ca3(params) {
-  level.player playrumbleonentity(params);
+  level.player playRumbleOnEntity(params);
 }
 
 function function_f1a3033(params) {

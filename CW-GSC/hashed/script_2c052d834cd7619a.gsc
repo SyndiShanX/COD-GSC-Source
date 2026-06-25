@@ -38,9 +38,9 @@ function function_124c1a34(player, model, note) {
   }
 
   blade.targetname = "blade";
-  blade setplayercollision(0);
-  blade enablelinkto();
-  blade linkto(self, undefined, (0, -70, 0));
+  blade setPlayerCollision(0);
+  blade enablelinkTo();
+  blade linkTo(self, undefined, (0, -70, 0));
   trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", blade.origin, 1 | 512 | 8, 30, 50);
 
   if(!isDefined(trigger)) {
@@ -49,8 +49,8 @@ function function_124c1a34(player, model, note) {
   }
 
   trigger.targetname = "blade";
-  trigger enablelinkto();
-  trigger linkto(blade);
+  trigger enablelinkTo();
+  trigger linkTo(blade);
   trigger thread function_7daf5356(player, note);
   blade namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sawblade_active_lp");
   self.blade = blade;
@@ -81,9 +81,9 @@ function sawbladeupdate(model = "zombietron_sawblade") {
 
   org.targetname = "sawbladeUpdate";
   org.angles = (0, randomint(180), 0);
-  org enablelinkto();
+  org enablelinkTo();
   self.doa.var_1739bd8e[self.doa.var_1739bd8e.size] = org;
-  org linkto(self, undefined, (0, 0, 32));
+  org linkTo(self, undefined, (0, 0, 32));
   self thread function_40fc311d(org, note);
   self thread function_20139eee(org, note);
   result = org function_124c1a34(self, model, note);
@@ -93,7 +93,7 @@ function sawbladeupdate(model = "zombietron_sawblade") {
   }
 
   while(isDefined(org)) {
-    org rotateto(org.angles + (0, 180, 0), 0.4);
+    org rotateTo(org.angles + (0, 180, 0), 0.4);
     wait 0.4;
   }
 }

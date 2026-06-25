@@ -292,13 +292,13 @@ function init() {
   zm_utility::init_utility();
   util::registerclientsys("lsm");
   initializestattracking();
-  if(getplayers().size <= 1) {
+  if(getPlayers().size <= 1) {
     incrementcounter("global_solo_games", 1);
   } else {
     if(isDefined(level.systemlink) && level.systemlink) {
       incrementcounter("global_systemlink_games", 1);
     } else {
-      if(getdvarint("splitscreen_playerCount") == getplayers().size) {
+      if(getdvarint("splitscreen_playerCount") == getPlayers().size) {
         incrementcounter("global_splitscreen_games", 1);
       } else {
         incrementcounter("global_coop_games", 1);
@@ -397,12 +397,12 @@ function fade_out_intro_screen_zm(hold_black_time, fade_out_time, destroyed_afte
   if(!isDefined(fade_out_time)) {
     fade_out_time = 1.5;
   }
-  array::thread_all(getplayers(), &initialblackend);
+  array::thread_all(getPlayers(), &initialblackend);
   level clientfield::set("sndZMBFadeIn", 1);
   lui::screen_fade_in(fade_out_time, undefined);
   wait(1.6);
   level.passed_introscreen = 1;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(level.customhudreveal)) {
       players[i] thread[[level.customhudreveal]]();
@@ -442,7 +442,7 @@ function onallplayersready() {
   println("" + getnumexpectedplayers());
   player_count_actual = 0;
   while(getnumconnectedplayers() < getnumexpectedplayers() || player_count_actual != getnumexpectedplayers()) {
-    players = getplayers();
+    players = getPlayers();
     player_count_actual = 0;
     for(i = 0; i < players.size; i++) {
       players[i] freezecontrols(1);
@@ -461,7 +461,7 @@ function onallplayersready() {
     level thread add_bots();
     level flag::set("initial_players_connected");
   } else {
-    players = getplayers();
+    players = getPlayers();
     if(players.size == 1) {
       level flag::set("solo_game");
       level.solo_lives_given = 0;
@@ -471,7 +471,7 @@ function onallplayersready() {
       level set_default_laststand_pistol(1);
     }
     level flag::set("initial_players_connected");
-    array::thread_all(getplayers(), &initialblack);
+    array::thread_all(getPlayers(), &initialblack);
     while(!aretexturesloaded()) {
       wait(0.05);
     }
@@ -623,10 +623,10 @@ function add_bots() {
   setDvar("bot_AllowMovement", "1");
   setDvar("bot_PressAttackBtn", "1");
   setDvar("bot_PressMeleeBtn", "1");
-  while(getplayers().size < 2) {
+  while(getPlayers().size < 2) {
     wait(0.05);
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] freezecontrols(0);
     println("");
@@ -656,7 +656,7 @@ function post_all_players_connected() {
   zm_utility::increment_zm_dash_counter("start_per_player", level.players.size);
   zm_utility::upload_zm_dash_counters();
   level.dash_counter_start_player_count = level.players.size;
-  println("", level.script, "", getplayers().size);
+  println("", level.script, "", getPlayers().size);
   level thread round_end_monitor();
   if(!level.zombie_anim_intro) {
     if(isDefined(level._round_start_func)) {
@@ -748,7 +748,7 @@ function player_track_ammo_count() {
 
 function spawn_vo() {
   wait(1);
-  players = getplayers();
+  players = getPlayers();
   if(players.size > 1) {
     player = array::random(players);
     index = zm_utility::get_player_index(player);
@@ -1187,10 +1187,10 @@ function zombie_intro_screen(string1, string2, string3, string4, string5) {
 }
 
 function players_playing() {
-  players = getplayers();
+  players = getPlayers();
   level.players_playing = players.size;
   wait(20);
-  players = getplayers();
+  players = getPlayers();
   level.players_playing = players.size;
 }
 
@@ -1208,7 +1208,7 @@ function onplayerconnect_clientdvars() {
 }
 
 function checkforalldead(excluded_player) {
-  players = getplayers();
+  players = getPlayers();
   count = 0;
   for(i = 0; i < players.size; i++) {
     if(isDefined(excluded_player) && excluded_player == players[i]) {
@@ -1405,7 +1405,7 @@ function player_out_of_playable_area_monitor() {
         self zm_stats::increment_client_stat("cheat_total", 0);
         self playlocalsound(level.zmb_laugh_alias);
         wait(0.5);
-        if(getplayers().size == 1 && level flag::get("solo_game") && (isDefined(self.waiting_to_revive) && self.waiting_to_revive)) {
+        if(getPlayers().size == 1 && level flag::get("solo_game") && (isDefined(self.waiting_to_revive) && self.waiting_to_revive)) {
           level notify("end_game");
         } else {
           self disableinvulnerability();
@@ -1679,7 +1679,7 @@ function player_laststand(einflictor, attacker, idamage, smeansofdeath, weapon, 
   if(isDefined(self.pers_upgrades_awarded["perk_lose"]) && self.pers_upgrades_awarded["perk_lose"]) {
     self zm_pers_upgrades_functions::pers_upgrade_perk_lose_save();
   }
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1 && level flag::get("solo_game")) {
     if(self.lives > 0 && self hasperk("specialty_quickrevive")) {
       self thread wait_and_revive();
@@ -1722,7 +1722,7 @@ function player_laststand(einflictor, attacker, idamage, smeansofdeath, weapon, 
 function failsafe_revive_give_back_weapons(excluded_player) {
   for(i = 0; i < 10; i++) {
     wait(0.05);
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(player == excluded_player || !isDefined(player.reviveprogressbar) || player zm_laststand::is_reviving_any()) {
         continue;
@@ -1827,7 +1827,7 @@ function set_third_person(value) {
 
 function last_stand_revive() {
   level endon("between_round_over");
-  players = getplayers();
+  players = getPlayers();
   laststand_count = 0;
   foreach(player in players) {
     if(!zm_utility::is_player_valid(player)) {
@@ -2139,7 +2139,7 @@ function spectators_respawn() {
     return;
   }
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       e_player = players[i];
       e_player spectator_respawn_player();
@@ -2216,7 +2216,7 @@ function check_for_valid_spawn_near_team(revivee, return_struct) {
     spawn_location = [[level.check_for_valid_spawn_near_team_callback]](revivee, return_struct);
     return spawn_location;
   }
-  players = getplayers();
+  players = getPlayers();
   spawn_points = zm_gametype::get_player_spawns_for_gametype();
   closest_group = undefined;
   closest_distance = 100000000;
@@ -2369,7 +2369,7 @@ function check_for_valid_spawn_within_range(revivee, v_position, return_struct, 
 
 function get_players_on_team(exclude) {
   teammates = [];
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i].spawn_side == self.spawn_side && !isDefined(players[i].revivetrigger) && players[i] != exclude) {
       teammates[teammates.size] = players[i];
@@ -2379,7 +2379,7 @@ function get_players_on_team(exclude) {
 }
 
 function get_safe_breadcrumb_pos(player) {
-  players = getplayers();
+  players = getPlayers();
   valid_players = [];
   min_dist = 22500;
   for(i = 0; i < players.size; i++) {
@@ -2420,7 +2420,7 @@ function round_spawning() {
   }
   zombie_utility::ai_calculate_health(level.round_number);
   count = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i].zombification_time = 0;
   }
@@ -2601,7 +2601,7 @@ function round_pause(delay = 30) {
     delay--;
     level.countdown_hud setvalue(delay);
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] playlocalsound("zmb_perks_packa_ready");
   }
@@ -2661,7 +2661,7 @@ function play_door_dialog() {
   timer = 0;
   while(true) {
     wait(0.05);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       dist = distancesquared(players[i].origin, self.origin);
       if(dist > 4900) {
@@ -2683,7 +2683,7 @@ function play_door_dialog() {
 }
 
 function wait_until_first_player() {
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(players[0])) {
     level waittill("first_player_ready");
   }
@@ -2708,7 +2708,7 @@ function round_one_up() {
     intro = 0;
   }
   if(level.round_number == 5 || level.round_number == 10 || level.round_number == 20 || level.round_number == 35 || level.round_number == 50) {
-    players = getplayers();
+    players = getPlayers();
     rand = randomintrange(0, players.size);
     players[rand] thread zm_audio::create_and_play_dialog("general", "round_" + level.round_number);
   }
@@ -2730,7 +2730,7 @@ function round_over() {
     return;
   }
   time = [[level.func_get_delay_between_rounds]]();
-  players = getplayers();
+  players = getPlayers();
   for(player_index = 0; player_index < players.size; player_index++) {
     if(!isDefined(players[player_index].pers["previous_distance_traveled"])) {
       players[player_index].pers["previous_distance_traveled"] = 0;
@@ -2794,7 +2794,7 @@ function round_think(restart = 0) {
       [[level.initial_round_wait_func]]();
     }
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
-      players = getplayers();
+      players = getPlayers();
       foreach(player in players) {
         if(!(isDefined(player.hostmigrationcontrolsfrozen) && player.hostmigrationcontrolsfrozen)) {
           player freezecontrols(0);
@@ -2834,7 +2834,7 @@ function round_think(restart = 0) {
       round_one_up();
     }
     zm_powerups::powerup_round_start();
-    players = getplayers();
+    players = getPlayers();
     array::thread_all(players, &zm_blockers::rebuild_barrier_reward_reset);
     if(!(isDefined(level.headshots_only) && level.headshots_only) && !restart) {
       level thread award_grenades_for_survivors();
@@ -2853,7 +2853,7 @@ function round_think(restart = 0) {
     level notify("start_of_round");
     recordzombieroundstart();
     bb::logroundevent("start_of_round");
-    players = getplayers();
+    players = getPlayers();
     for(index = 0; index < players.size; index++) {
       players[index] recordroundstartstats();
     }
@@ -2868,14 +2868,14 @@ function round_think(restart = 0) {
     if(isDefined(level.round_end_custom_logic)) {
       [[level.round_end_custom_logic]]();
     }
-    players = getplayers();
+    players = getPlayers();
     if(isDefined(level.no_end_game_check) && level.no_end_game_check) {
       level thread last_stand_revive();
       level thread spectators_respawn();
     } else if(1 != players.size) {
       level thread spectators_respawn();
     }
-    players = getplayers();
+    players = getPlayers();
     array::thread_all(players, &zm_pers_upgrades_system::round_end);
     if(((int(level.round_number / 5)) * 5) == level.round_number) {
       level clientfield::set("round_complete_time", int(((level.time - level.n_gameplay_start_time) + 500) / 1000));
@@ -2890,7 +2890,7 @@ function round_think(restart = 0) {
     setroundsplayed(get_round_number());
     level.zombie_vars["zombie_spawn_delay"] = [[level.func_get_zombie_spawn_delay]](get_round_number());
     matchutctime = getutc();
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(level.curr_gametype_affects_rank && get_round_number() > (3 + level.start_round)) {
         player zm_stats::add_client_stat("weighted_rounds_played", get_round_number());
@@ -2924,7 +2924,7 @@ function round_think(restart = 0) {
 }
 
 function award_grenades_for_survivors() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!players[i].is_zombie && (!(isDefined(players[i].altbody) && players[i].altbody)) && !players[i] laststand::player_is_in_laststand()) {
       lethal_grenade = players[i] zm_utility::get_player_lethal_grenade();
@@ -3343,7 +3343,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
     if(smeansofdeath != "MOD_FALLING") {
       self thread playswipesound(smeansofdeath, eattacker);
       if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isPlayer(eattacker)) {
-        self playrumbleonentity("damage_heavy");
+        self playRumbleOnEntity("damage_heavy");
       }
       if(isDefined(eattacker.is_zombie) && eattacker.is_zombie) {
         self zm_audio::create_and_play_dialog("general", "attacked");
@@ -3451,7 +3451,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
       return 0;
     }
   }
-  players = getplayers();
+  players = getPlayers();
   count = 0;
   for(i = 0; i < players.size; i++) {
     if(players[i] == self || players[i].is_zombie || players[i] laststand::player_is_in_laststand() || players[i].sessionstate == "spectator") {
@@ -3559,8 +3559,8 @@ function wait_and_revive() {
   self.lives--;
   if(isDefined(level.exit_level_func)) {
     self thread[[level.exit_level_func]]();
-  } else if(getplayers().size == 1) {
-    player = getplayers()[0];
+  } else if(getPlayers().size == 1) {
+    player = getPlayers()[0];
     level.move_away_points = positionquery_source_navigation(player.origin, 480, 960, 120, 20);
     if(!isDefined(level.move_away_points)) {
       level.move_away_points = positionquery_source_navigation(player.last_valid_position, 480, 960, 120, 20);
@@ -3852,7 +3852,7 @@ function end_game() {
   level clientfield::set("game_end_time", int(((gettime() - level.n_gameplay_start_time) + 500) / 1000));
   util::clientnotify("zesn");
   level thread zm_audio::sndmusicsystem_playstate("game_over");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] clientfield::set("zmbLastStand", 0);
   }
@@ -3875,7 +3875,7 @@ function end_game() {
   wait(0.1);
   game_over = [];
   survived = [];
-  players = getplayers();
+  players = getPlayers();
   setmatchflag("disableIngameMenu", 1);
   foreach(player in players) {
     player closeingamemenu();
@@ -3965,7 +3965,7 @@ function end_game() {
     level thread zm_utility::upload_zm_dash_counters_end_game();
   }
   finalizematchrecord();
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(isDefined(player.sessionstate) && player.sessionstate == "spectator") {
       player.sessionstate = "playing";
@@ -3978,7 +3978,7 @@ function end_game() {
     map_restart(1);
     wait(666);
   }
-  players = getplayers();
+  players = getPlayers();
   luinotifyevent(&"force_scoreboard", 1, 1);
   intermission();
   wait(level.zombie_vars["zombie_intermission_time"]);
@@ -3998,9 +3998,9 @@ function end_game() {
     }
   }
   level notify("stop_intermission");
-  array::thread_all(getplayers(), &player_exit_level);
+  array::thread_all(getPlayers(), &player_exit_level);
   wait(1.5);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] cameraactivate(0);
   }
@@ -4037,7 +4037,7 @@ function check_end_game_intermission_delay() {
 }
 
 function upload_leaderboards() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] uploadleaderboards();
   }
@@ -4185,7 +4185,7 @@ function to_mins(seconds) {
 function intermission() {
   level.intermission = 1;
   level notify("intermission");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] setclientthirdperson(0);
     players[i] resetfov();
@@ -4194,7 +4194,7 @@ function intermission() {
     players[i] stopsounds();
   }
   wait(5.25);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] clientfield::set("zmbLastStand", 0);
   }
@@ -4272,7 +4272,7 @@ function player_intermission() {
     for(i = 0; i < points.size; i++) {
       point = points[i];
       nextpoint = points[i + 1];
-      self setorigin(point.origin);
+      self setOrigin(point.origin);
       self setplayerangles(point.angles);
       wait(0.15);
       self notify("player_intermission_spawned");
@@ -4330,11 +4330,11 @@ function default_delayed_exit() {
 
 function default_find_exit_point() {
   self endon("death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   if(isDefined(level.zm_loc_types["wait_location"]) && level.zm_loc_types["wait_location"].size > 0) {
     locs = array::randomize(level.zm_loc_types["wait_location"]);
@@ -4368,7 +4368,7 @@ function default_find_exit_point() {
 
 function play_level_start_vox_delayed() {
   wait(3);
-  players = getplayers();
+  players = getPlayers();
   num = randomintrange(0, players.size);
   players[num] zm_audio::create_and_play_dialog("general", "intro");
 }
@@ -4387,7 +4387,7 @@ function register_sidequest(id, sidequest_stat) {
   if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] zm_stats::get_global_stat(level.zombie_sidequest_stat[id])) {
       level.zombie_sidequest_previously_completed[id] = 1;
@@ -4409,7 +4409,7 @@ function set_sidequest_completed(id) {
   if(isDefined(level.zm_disable_recording_stats) && level.zm_disable_recording_stats) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(level.zombie_sidequest_stat[id])) {
       players[i] zm_stats::add_global_stat(level.zombie_sidequest_stat[id], 1);
@@ -4486,7 +4486,7 @@ function watchdisconnect() {
 }
 
 function increment_dog_round_stat(stat) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     player zm_stats::increment_client_stat("zdog_rounds_" + stat);
   }
@@ -4501,7 +4501,7 @@ function refresh_player_navcard_hud() {
   if(!isDefined(level.navcards)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     navcard_bits = 0;
     for(i = 0; i < level.navcards.size; i++) {
@@ -4535,7 +4535,7 @@ function player_too_many_players_check() {
   if(level.scr_zm_ui_gametype == "zgrief" || level.scr_zm_ui_gametype == "zmeat") {
     max_players = 8;
   }
-  if(getplayers().size > max_players) {
+  if(getPlayers().size > max_players) {
     zm_game_module::freeze_players(1);
     level notify("end_game");
   }

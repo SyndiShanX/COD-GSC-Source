@@ -155,7 +155,7 @@ function teleport_player(str_name) {
 
   if(isDefined(s_teleport)) {
     player = util::gethostplayer();
-    player setorigin(s_teleport.origin);
+    player setOrigin(s_teleport.origin);
     player setplayerangles(s_teleport.angles);
     setDvar(#"hash_130bfa97ce58483d", "<dev string:x66>");
   }
@@ -320,7 +320,7 @@ function function_1c40531e() {
       if(var_334c38a9) {
         host function_801766d7("<dev string:x4d2>");
       } else if(var_e0acd843) {
-        endcamanimscripted(host);
+        endcamanimScripted(host);
       } else {
         host cycle_model("<dev string:x4d2>");
       }
@@ -353,7 +353,7 @@ function function_1c40531e() {
           if(isDefined(s_instance.var_906f7138) && isDefined(s_instance.e_rotator) && !is_true(s_instance.var_906f7138.var_769f97fc)) {
             s_instance.var_906f7138 unlink();
             s_instance.var_906f7138 function_5fcc703c();
-            s_instance.var_906f7138 linkto(s_instance.e_rotator);
+            s_instance.var_906f7138 linkTo(s_instance.e_rotator);
           }
         }
       } else {
@@ -396,12 +396,12 @@ function function_d6a44f15(str_instance) {
 
   s_instance = level.var_2fb0636f[str_instance];
   function_86086836(s_instance);
-  host = getplayers()[0];
+  host = getPlayers()[0];
   v_forward = anglesToForward(host getplayerangles());
   v_forward = vectorscale(v_forward, 4000);
   var_5927a215 = (10, 10, 10);
   v_eye = host getplayercamerapos();
-  var_abd03397 = physicstrace(v_eye, v_eye + v_forward, -1 * var_5927a215, var_5927a215, getplayers()[0], 64 | 2);
+  var_abd03397 = physicstrace(v_eye, v_eye + v_forward, -1 * var_5927a215, var_5927a215, getPlayers()[0], 64 | 2);
   v_origin = var_abd03397[#"position"];
 
   if(isDefined(s_instance.var_ef831719)) {
@@ -410,7 +410,7 @@ function function_d6a44f15(str_instance) {
 
   s_instance.var_ef831719 = util::spawn_model("<dev string:x548>", v_origin);
   s_instance.e_rotator.origin = v_origin;
-  s_instance.e_rotator linkto(s_instance.var_ef831719);
+  s_instance.e_rotator linkTo(s_instance.var_ef831719);
 }
 
 function function_e099a386(str_instance) {
@@ -420,7 +420,7 @@ function function_e099a386(str_instance) {
 
   s_instance = level.var_2fb0636f[str_instance];
   function_86086836(s_instance);
-  host = getplayers()[0];
+  host = getPlayers()[0];
   v_forward = anglesToForward(host getplayerangles());
   v_forward = vectorscale(v_forward, 125);
   v_player_origin = host getorigin();
@@ -433,13 +433,13 @@ function function_e099a386(str_instance) {
   s_instance.var_ef831719 = util::spawn_model("<dev string:x548>", v_origin);
   s_instance.var_ef831719.var_14e5bc7e = 1;
   s_instance.e_rotator.origin = s_instance.var_ef831719.origin;
-  s_instance.e_rotator linkto(s_instance.var_ef831719);
-  s_instance.var_ef831719 linkto(host);
+  s_instance.e_rotator linkTo(s_instance.var_ef831719);
+  s_instance.var_ef831719 linkTo(host);
   s_instance.var_ef831719 thread function_e742c352();
 }
 
 function function_e742c352() {
-  host = getplayers()[0];
+  host = getPlayers()[0];
   host endon(#"death");
   self endon(#"death");
 
@@ -450,7 +450,7 @@ function function_e742c352() {
     if(level.var_acfca739 && host adsButtonPressed() && var_3e6ac197 != (0, 0, 0)) {
       self unlink();
       self.origin = (self.origin[0], self.origin[1], self.origin[2] + var_3e6ac197[0] * 3);
-      self linkto(host);
+      self linkTo(host);
     }
 
     waitframe(1);
@@ -464,7 +464,7 @@ function function_5f0fa6bb(str_instance) {
 
   s_instance = level.var_2fb0636f[str_instance];
   function_86086836(s_instance);
-  host = getplayers()[0];
+  host = getPlayers()[0];
 
   if(isDefined(s_instance.var_ef831719)) {
     s_instance.var_ef831719 delete();
@@ -519,7 +519,7 @@ function function_637cc13b(s_instance) {
     var_867459dc = s_anim.var_867459dc;
     str_tag = isDefined(s_anim.var_31e8d962) ? s_anim.var_31e8d962 : "<dev string:x548>";
     s_instance.var_906f7138.var_546c3278 = util::spawn_model(var_867459dc, s_instance.var_906f7138.origin, s_instance.var_906f7138.angles);
-    s_instance.var_906f7138.var_546c3278 linkto(s_instance.var_906f7138, str_tag, s_anim.var_4ec51611, s_anim.var_4224ff2d);
+    s_instance.var_906f7138.var_546c3278 linkTo(s_instance.var_906f7138, str_tag, s_anim.var_4ec51611, s_anim.var_4224ff2d);
     return;
   }
 
@@ -527,7 +527,7 @@ function function_637cc13b(s_instance) {
     var_867459dc = s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_867459dc;
     str_tag = isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_31e8d962) ? s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_31e8d962 : "<dev string:x548>";
     s_instance.var_906f7138.var_546c3278 = util::spawn_model(var_867459dc, s_instance.var_906f7138.origin, s_instance.var_906f7138.angles);
-    s_instance.var_906f7138.var_546c3278 linkto(s_instance.var_906f7138, str_tag, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4ec51611, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4224ff2d);
+    s_instance.var_906f7138.var_546c3278 linkTo(s_instance.var_906f7138, str_tag, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4ec51611, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4224ff2d);
   }
 }
 
@@ -585,7 +585,7 @@ function function_801766d7(str_option) {
 
     if(isDefined(s_instance.var_906f7138) && !is_true(s_instance.var_906f7138.var_769f97fc)) {
       s_instance.var_906f7138 animation::stop();
-      s_instance.var_906f7138 linkto(s_instance.e_rotator);
+      s_instance.var_906f7138 linkTo(s_instance.e_rotator);
       s_instance.var_906f7138.var_734e9da0 = undefined;
     }
   }
@@ -673,8 +673,8 @@ function function_86086836(s_instance) {
 function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
   level flag::wait_till("<dev string:x571>");
   function_86086836(s_instance);
-  host = getplayers()[0];
-  endcamanimscripted(host);
+  host = getPlayers()[0];
+  endcamanimScripted(host);
 
   if(isDefined(s_instance.var_906f7138.var_546c3278)) {
     s_instance.var_906f7138.var_546c3278 delete();
@@ -700,7 +700,7 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
 
       break;
     case #"vehicle":
-      s_instance.var_906f7138 = spawnvehicle(var_9eb2d2aa, v_pos, v_ang);
+      s_instance.var_906f7138 = spawnVehicle(var_9eb2d2aa, v_pos, v_ang);
       s_instance.var_906f7138 val::set("<dev string:x5db>", "<dev string:x5e7>", 1);
       s_instance.var_906f7138 val::set("<dev string:x5db>", "<dev string:x5f4>", 1);
       break;
@@ -730,7 +730,7 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
       return;
   }
 
-  s_instance.var_906f7138 linkto(s_instance.e_rotator);
+  s_instance.var_906f7138 linkTo(s_instance.e_rotator);
   s_instance.e_rotator unlink();
   s_instance.e_rotator.angles = (s_instance.e_rotator.angles[0], s_instance.e_rotator.angles[1], 0);
 
@@ -739,15 +739,15 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
     s_instance.var_ef831719.angles = (s_instance.var_ef831719.angles[0], s_instance.var_ef831719.angles[1], 0);
 
     if(is_true(s_instance.var_ef831719.var_14e5bc7e)) {
-      s_instance.e_rotator linkto(s_instance.var_ef831719);
-      s_instance.var_ef831719 linkto(host);
+      s_instance.e_rotator linkTo(s_instance.var_ef831719);
+      s_instance.var_ef831719 linkTo(host);
     }
   }
 
   if(isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_867459dc)) {
     str_tag = isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_31e8d962) ? s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_31e8d962 : "<dev string:x548>";
     s_instance.var_906f7138.var_546c3278 = util::spawn_model(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_867459dc, s_instance.var_906f7138.origin, s_instance.var_906f7138.angles);
-    s_instance.var_906f7138.var_546c3278 linkto(s_instance.var_906f7138, str_tag, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4ec51611, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4224ff2d);
+    s_instance.var_906f7138.var_546c3278 linkTo(s_instance.var_906f7138, str_tag, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4ec51611, s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_4224ff2d);
   }
 
   if(isDefined(s_instance.script_string)) {
@@ -757,7 +757,7 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
       s_align = s_instance;
     }
 
-    camanimscripted(getplayers()[0], s_instance.script_string, 0, s_align.origin, s_align.angles);
+    camanimScripted(getPlayers()[0], s_instance.script_string, 0, s_align.origin, s_align.angles);
   }
 }
 
@@ -767,7 +767,7 @@ function function_ff217e96(var_5a86a1c2, v_pos, v_ang, s_instance, var_2ceba174)
   }
 
   level flag::wait_till("<dev string:x61d>");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_be7bc546 = currentsessionmode();
   var_123ebd30 = getallcharacterbodies(var_be7bc546);
 
@@ -820,11 +820,11 @@ function function_6559555e() {
     }
 
     if(level.var_59a2c772) {
-      if(getplayers()[0] fragButtonPressed()) {
+      if(getPlayers()[0] fragButtonPressed()) {
         debug2dtext((50, 530, 0), "<dev string:x640>", undefined, undefined, undefined, 1, 0.8, 1);
         debug2dtext((50, 530, 0) + (0, 20, 0), "<dev string:x676>", undefined, undefined, undefined, 1, 0.8, 1);
         debug2dtext((50, 530, 0) + (0, 20, 0) * 2, "<dev string:x69a>", undefined, undefined, undefined, 1, 0.8, 1);
-      } else if(getplayers()[0] adsButtonPressed()) {
+      } else if(getPlayers()[0] adsButtonPressed()) {
         debug2dtext((50, 530, 0), "<dev string:x6c1>", undefined, undefined, undefined, 1, 0.8, 1);
         debug2dtext((50, 530, 0) + (0, 20, 0), "<dev string:x6db>", undefined, undefined, undefined, 1, 0.8, 1);
         debug2dtext((50, 530, 0) + (0, 20, 0) * 2, "<dev string:x700>", undefined, undefined, undefined, 1, 0.8, 1);
@@ -963,7 +963,7 @@ function function_e01777dc(s_instance) {
         }
 
         var_5a15da23 = absangleclamp360(var_5a15da23);
-        s_instance.e_rotator rotateto(var_5a15da23, float(function_60d95f53()) / 1000);
+        s_instance.e_rotator rotateTo(var_5a15da23, float(function_60d95f53()) / 1000);
       }
     }
 
@@ -976,7 +976,7 @@ function function_fcde0f45(s_instance) {
     if(level flag::get("<dev string:x527>")) {
       foreach(s_instance in level.var_2fb0636f) {
         if(isDefined(s_instance.var_bfd82e27)) {
-          s_instance.var_bfd82e27 rotateyaw(3, float(function_60d95f53()) / 1000);
+          s_instance.var_bfd82e27 rotateYaw(3, float(function_60d95f53()) / 1000);
         }
       }
     }

@@ -202,7 +202,7 @@ _id_E35E(var_0, var_1, var_2, var_3) {
   level._id_C7F4[var_0.guid]._id_ABCB = ::_id_C7F0;
   level._id_C7F4[var_0.guid]._id_AAC2 = ::_id_C7F2;
   level._id_C7F4[var_0.guid]._id_AA80 = ::_id_C7F3;
-  level._id_C7F4[var_0.guid].trigger setcursorhint("HINT_BUTTON");
+  level._id_C7F4[var_0.guid].trigger setCursorHint("HINT_BUTTON");
   level._id_C7F4[var_0.guid].trigger setuseholdduration("duration_none");
   level._id_C7F4[var_0.guid].trigger _meth_84D1(1);
   level._id_C7F4[var_0.guid].trigger _meth_84D7("tag_origin");
@@ -215,7 +215,7 @@ _id_E35E(var_0, var_1, var_2, var_3) {
   level._id_C7F4[var_0.guid].trigger._id_0481 = "revive_trigger";
 
   if(!scripts\cp_mp\utility\game_utility::_id_89EC()) {
-    level._id_C7F4[var_0.guid].trigger sethintstring(&"MP/LASTSTAND_REVIVE_USE");
+    level._id_C7F4[var_0.guid].trigger setHintString(&"MP/LASTSTAND_REVIVE_USE");
   } else {}
 
   level._id_C7F4[var_0.guid] _id_07D6::_id_D8D2(var_11);
@@ -610,7 +610,7 @@ _id_C7F1(var_0, var_1) {
   var_9 setModel("tag_origin");
   var_9.angles = var_7;
   var_2._id_C7DD = var_9;
-  var_2 cameralinkto(var_9, "tag_origin", 1);
+  var_2 cameralinkTo(var_9, "tag_origin", 1);
   var_2 thread _id_C7DE();
 
   if(scripts\cp_mp\utility\game_utility::isnightmap()) {
@@ -623,7 +623,7 @@ _id_C7F1(var_0, var_1) {
 _id_6CF3(var_0, var_1) {
   var_2 = level._id_C7F4[var_0.guid]._id_4140;
   var_3 = var_2;
-  var_4 = vectornormalize(var_1.origin - var_3);
+  var_4 = vectorNormalize(var_1.origin - var_3);
   var_5 = 2;
   var_6 = 30;
   var_7 = 360 / var_6;
@@ -671,7 +671,7 @@ _id_6CF3(var_0, var_1) {
 
   var_23 = spawnStruct();
   var_23.origin = var_15;
-  var_24 = vectornormalize(var_3 - var_15);
+  var_24 = vectorNormalize(var_3 - var_15);
   var_23.angles = vectortoangles(var_24);
   return var_23;
 }
@@ -681,7 +681,7 @@ _id_C7DE(var_0) {
   var_2 = self._id_C7DD.origin + anglesToForward(self._id_C7DD.angles) * 50.0;
   var_3 = scripts\engine\trace::_id_E409(var_1, var_2, 2.0, undefined)["position"];
   var_4 = level._id_C7F4[self.guid]._id_FEE7 / 1000;
-  self._id_C7DD moveto(var_3, var_4, var_4 * 0.3, var_4 * 0.3);
+  self._id_C7DD moveTo(var_3, var_4, var_4 * 0.3, var_4 * 0.3);
 }
 
 _id_19DF() {
@@ -708,9 +708,9 @@ _id_15B3(var_0) {
 _id_A228(var_0, var_1, var_2) {
   var_3 = 1.0;
   var_4 = 1.0;
-  self moveto(var_0, 1.0, 0.5, 0.5);
+  self moveTo(var_0, 1.0, 0.5, 0.5);
   var_1 = (-9.5111, var_2.angles[1], 0);
-  self rotateto(var_1, 1.0, 0.5, 0.5);
+  self rotateTo(var_1, 1.0, 0.5, 0.5);
 }
 
 _id_C7F2(var_0, var_1, var_2, var_3) {
@@ -844,9 +844,9 @@ _id_CA72() {
   self waittill("spawned_player");
   var_0 = self getEye();
   var_1 = self.angles;
-  self cameralinkto(self._id_C7DD, "tag_origin", 1);
-  self._id_C7DD moveto(var_0, 0.25, 0.1, 0.1);
-  self._id_C7DD rotateto(var_1, 0.25, 0.1, 0.1);
+  self cameralinkTo(self._id_C7DD, "tag_origin", 1);
+  self._id_C7DD moveTo(var_0, 0.25, 0.1, 0.1);
+  self._id_C7DD rotateTo(var_1, 0.25, 0.1, 0.1);
   wait 0.25;
   self visionsetnakedforplayer("", 0.1);
   self _meth_8060();

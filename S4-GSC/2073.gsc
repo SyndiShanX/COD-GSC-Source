@@ -240,7 +240,7 @@ _id_828E(var_0, var_1, var_2) {
     var_1._id_8E7F = var_3;
 
   if(isDefined(var_1._id_50B4)) {
-    var_4 linkto(var_1._id_50B4);
+    var_4 linkTo(var_1._id_50B4);
   }
 
   level._id_E371[var_2][var_0] = var_1;
@@ -920,7 +920,7 @@ _id_D6DC() {
       }
     }
   } else
-    var_1 = scripts\engine\utility::getstruct("axisLeft_alliesRight", "targetname");
+    var_1 = scripts\engine\utility::getStruct("axisLeft_alliesRight", "targetname");
 
   var_5 = [];
 
@@ -1937,9 +1937,9 @@ _id_748C(var_0, var_1) {
           var_12 = spawn("script_model", var_11._id_E706);
           var_12 setModel("tag_origin");
           var_12.angles = var_11._id_E67A;
-          self cameralinkto(var_12, "tag_origin");
-          var_12 moveto(var_11._id_533C, 18);
-          var_12 rotateto(var_11._id_52DF, 18);
+          self cameralinkTo(var_12, "tag_origin");
+          var_12 moveTo(var_11._id_533C, 18);
+          var_12 rotateTo(var_11._id_52DF, 18);
           _id_07D1::_id_60C2("prematch_done");
           self _meth_8060();
           self._id_E282 = 0.5;
@@ -2339,7 +2339,7 @@ _id_9A31(var_0) {
         return;
       }
       var_4 = var_2.origin + var_3 * -8500 + (0, 0, 7000);
-      var_8 = vectornormalize(var_2.origin - var_4);
+      var_8 = vectorNormalize(var_2.origin - var_4);
       var_5 = scripts\mp\utility\script::_id_FFE3(var_8, (0, 0, 1));
 
       if(istrue(level._id_FEF0)) {
@@ -2352,8 +2352,8 @@ _id_9A31(var_0) {
 
     self._id_E281 = var_4;
     self._id_E280 = var_5;
-    self._id_E277 moveto(var_4, 0.25, 0.05, 0.2);
-    self._id_E277 rotateto(var_5, 0.25, 0.05, 0.2);
+    self._id_E277 moveTo(var_4, 0.25, 0.05, 0.2);
+    self._id_E277 rotateTo(var_5, 0.25, 0.05, 0.2);
     waitframe();
   }
 }
@@ -2387,7 +2387,7 @@ _id_9A35(var_0) {
 
       var_9 = level._id_E371[var_0][self.team]._id_1782.origin;
       var_10 = var_9 + var_3 * -8500 + (0, 0, 7000);
-      var_11 = vectornormalize(var_9 - var_10);
+      var_11 = vectorNormalize(var_9 - var_10);
       var_6 = scripts\mp\utility\script::_id_FFE3(var_11, (0, 0, 1));
       var_5 = var_5 + scripts\mp\gametypes\arm::_id_2EE0(self.team, var_9);
     }
@@ -2396,12 +2396,12 @@ _id_9A35(var_0) {
     self._id_E280 = var_6;
 
     if(!isDefined(self._id_E276) || gettime() > self._id_E276) {
-      self._id_E277 moveto(var_5, 0.25, 0.05, 0.2);
-      self._id_E277 rotateto(var_6, 0.25, 0.05, 0.2);
+      self._id_E277 moveTo(var_5, 0.25, 0.05, 0.2);
+      self._id_E277 rotateTo(var_6, 0.25, 0.05, 0.2);
     } else if(!var_4) {
       var_4 = 1;
-      self._id_E277 moveto(var_5, self._id_E282, self._id_E282 * 0.3, self._id_E282 * 0.4);
-      self._id_E277 rotateto(var_6, self._id_E282, self._id_E282 * 0.3, self._id_E282 * 0.4);
+      self._id_E277 moveTo(var_5, self._id_E282, self._id_E282 * 0.3, self._id_E282 * 0.4);
+      self._id_E277 rotateTo(var_6, self._id_E282, self._id_E282 * 0.3, self._id_E282 * 0.4);
     }
 
     waitframe();

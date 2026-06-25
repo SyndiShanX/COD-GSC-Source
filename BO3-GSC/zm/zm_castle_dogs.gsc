@@ -43,7 +43,7 @@ function dog_round_tracker() {
       level.round_wait_func = &zm_ai_dogs::dog_round_wait_func;
       level clientfield::set("castle_fog_bank_switch", 1);
       level.next_dog_round = level.round_number + randomintrange(7, 14);
-      getplayers()[0] iprintln("" + level.next_dog_round);
+      getPlayers()[0] iprintln("" + level.next_dog_round);
     } else if(level flag::get("dog_round")) {
       level clientfield::set("castle_fog_bank_switch", 0);
       zm_ai_dogs::dog_round_stop();

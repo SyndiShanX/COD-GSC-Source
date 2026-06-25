@@ -64,7 +64,7 @@ escape_debri_launch(var_0) {
   wait(randomfloat(var_0));
   var_1 = anglestoright((0, 180, 50));
   var_1 = maps\_utility::vector_multiply(var_1, 10000);
-  var_2 = getent(self.target, "targetname");
+  var_2 = getEnt(self.target, "targetname");
   var_2 show();
   self delete();
   thread common_scripts\utility::play_sound_in_space("cgoship_panel_break_away", var_2.origin);
@@ -177,7 +177,7 @@ escape_event() {
         switch (var_1) {
           case "event_waterleak":
             if(isDefined(var_13[var_16].target)) {
-              var_19 = getent(var_13[var_16].target, "targetname");
+              var_19 = getEnt(var_13[var_16].target, "targetname");
               var_19 thread escape_event_waterleak_blur();
             }
 
@@ -189,7 +189,7 @@ escape_event() {
 
       break;
     case "cargocontainer":
-      var_20 = getent(self.target, "targetname");
+      var_20 = getEnt(self.target, "targetname");
       var_21 = var_14;
       var_22 = (0, 0, 90);
       var_23 = undefined;
@@ -198,7 +198,7 @@ escape_event() {
       if(var_20.angles != (0, 90, 0) && var_20.angles != (0, 270, 0)) {
         var_25 = maps\_utility::vector_multiply(anglestoup((0, 360, 0)), 4);
         var_26 = maps\_utility::vector_multiply(anglestoright((0, 360, 0)), -1);
-        var_24 = vectornormalize(var_25 + var_26);
+        var_24 = vectorNormalize(var_25 + var_26);
         var_21 = var_21 * 800;
         var_27 = anglestoright((0, 360, 0));
         var_27 = maps\_utility::vector_multiply(var_27, 64);
@@ -207,7 +207,7 @@ escape_event() {
         var_25 = anglestoup(level._sea_org.angles);
         var_26 = maps\_utility::vector_multiply(anglestoright(level._sea_org.angles), -1);
         var_23 = var_20.origin + var_22;
-        var_24 = vectornormalize(var_25 + var_26);
+        var_24 = vectorNormalize(var_25 + var_26);
       }
 
       var_24 = var_24 * (var_21 * 0.75);
@@ -234,7 +234,7 @@ escape_event() {
           var_28 = getEntArray(var_13[var_16].target, "targetname");
 
           for(var_29 = 0; var_29 < var_28.size; var_29++) {
-            var_28[var_29] linkto(var_13[var_16]);
+            var_28[var_29] linkTo(var_13[var_16]);
           }
         }
 
@@ -250,7 +250,7 @@ escape_event() {
   }
   if(var_6 > 1) {
     earthquake(0.25, 0.75, level.player.origin, 1024);
-    level.player playrumbleonentity("tank_rumble");
+    level.player playRumbleOnEntity("tank_rumble");
     return;
   }
 
@@ -290,11 +290,11 @@ escape_event_rotate(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 = self.angles;
 
   if(isDefined(var_1)) {
-    self rotateto(var_3, var_4, var_2, var_1);
+    self rotateTo(var_3, var_4, var_2, var_1);
   } else if(isDefined(var_2)) {
-    self rotateto(var_3, var_4, var_2);
+    self rotateTo(var_3, var_4, var_2);
   } else {
-    self rotateto(var_3, var_4);
+    self rotateTo(var_3, var_4);
 
     if(isDefined(self.script_noteworthy)) {
       wait(var_4 * 0.75);
@@ -303,9 +303,9 @@ escape_event_rotate(var_0, var_1, var_2, var_3, var_4, var_5) {
       wait(var_4);
       var_8 = var_7 + maps\_utility::vector_multiply(var_3, 0.3);
       var_9 = var_4 * 0.5;
-      self rotateto(var_8, var_9, 0, var_9);
+      self rotateTo(var_8, var_9, 0, var_9);
       wait(var_9);
-      self rotateto(var_3, var_9, var_9, 0);
+      self rotateTo(var_3, var_9, var_9, 0);
     }
   }
 }
@@ -319,7 +319,7 @@ escape_event_wobble_pipe() {
   var_5 = float(self.script_noteworthy);
 
   for(;;) {
-    self rotateto((var_0[0], var_0[1], var_0[2] + var_5 * sin(var_1) * -1), 0.1);
+    self rotateTo((var_0[0], var_0[1], var_0[2] + var_5 * sin(var_1) * -1), 0.1);
 
     if(var_1 >= var_2) {
       var_1 = 0;
@@ -412,7 +412,7 @@ escape_event_ai(var_0) {
   var_2 = getanimlength(level.scr_anim[self.animname][var_1]);
   thread maps\_anim::anim_single_solo(self, var_1);
   wait(var_2 - 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("single_anim_done");
   self notify("done_stumbling");
   self.springleak = 0;
@@ -425,7 +425,7 @@ escape_event_player() {
   level.player setvelocity((0, 1, 0));
   player_speed_set_cargoship(135, 0.1);
   maps\_utility::delaythread(0.5, ::player_speed_set_cargoship, 185, 2.5);
-  level.player playrumbleonentity("tank_rumble");
+  level.player playRumbleOnEntity("tank_rumble");
   maps\_utility::delaythread(0.05, ::blur_overlay, 2.4, 0.25);
   maps\_utility::delaythread(0.3, ::blur_overlay, 0, 0.5);
   level.player maps\_utility::delaythread(0.1, maps\_utility::play_sound_on_entity, "breathing_hurt");
@@ -441,7 +441,7 @@ escape_player_last_quake() {
   earthquake(0.25, 1.5, level.player.origin, 1024);
   player_speed_set_cargoship(100, 0.1);
   maps\_utility::delaythread(0.25, ::player_speed_set_cargoship, 140, 2);
-  level.player playrumbleonentity("tank_rumble");
+  level.player playRumbleOnEntity("tank_rumble");
 }
 
 misc_light_flicker(var_0, var_1, var_2) {
@@ -810,12 +810,12 @@ escape_quake() {
 }
 
 escape_explosion_drops() {
-  var_0 = getent("escape_first_falling_container", "targetname");
+  var_0 = getEnt("escape_first_falling_container", "targetname");
   var_1 = getEntArray("escape_first_fallen_container", "targetname");
   var_2 = 2;
   var_3 = 0;
   var_4 = 0;
-  var_0 rotateto((0, 45, 0), 2);
+  var_0 rotateTo((0, 45, 0), 2);
   wait(var_2);
   var_0 delete();
 
@@ -836,7 +836,7 @@ escape_explosion_drops() {
     var_7[var_5] solid();
 
     if(var_7[var_5].spawnflags & 1) {
-      var_7[var_5] disconnectpaths();
+      var_7[var_5] disconnectPaths();
     }
   }
 }
@@ -959,7 +959,7 @@ escape_shellshock() {
   thread escape_shellshock_breathing();
   thread escape_shellshock_heartbeat();
   thread escape_shellshock_depthoffield();
-  level.player playrumbleonentity("tank_rumble");
+  level.player playRumbleOnEntity("tank_rumble");
   level thread maps\_utility::notify_delay("stop_heartbeat_sound", 18);
   clearallcorpses();
   var_0 = (600, -296, -360);
@@ -972,7 +972,7 @@ escape_shellshock() {
   var_2 = spawn("script_model", level.player.origin);
   var_2.angles = level.player getplayerangles();
   var_2 setModel("tag_origin");
-  var_1 linkto(var_2, "tag_origin");
+  var_1 linkTo(var_2, "tag_origin");
   var_2 thread common_scripts\utility::play_loop_sound_on_entity("shellshock_loop");
   maps\mo_tools::playerweapontake();
   var_3 = getEntArray();
@@ -983,8 +983,8 @@ escape_shellshock() {
     }
   }
 
-  var_5 = getent("hallways_door", "targetname");
-  var_6 = getent(var_5.target, "targetname");
+  var_5 = getEnt("hallways_door", "targetname");
+  var_6 = getEnt(var_5.target, "targetname");
   var_5 delete();
   var_6 delete();
   var_7 = (358.273, 286.02, -89.0164);
@@ -999,7 +999,7 @@ escape_shellshock() {
   var_9 delete();
   var_8 delete();
   var_2 thread maps\_anim::anim_single_solo(var_1, "player_explosion_start");
-  var_2 moveto(var_10, 1);
+  var_2 moveTo(var_10, 1);
   var_2 waittill("movedone");
   thread escape_new_explosion_scene(var_2, var_1, var_0);
   wait 9.45;
@@ -1023,10 +1023,10 @@ escape_new_explosion_scene(var_0, var_1, var_2) {
   var_5.origin = (var_5.origin[0], var_5.origin[1], -360);
   var_1 show();
   var_5 maps\_anim::anim_first_frame_solo(var_1, "player_explosion");
-  var_3 stopanimscripted();
+  var_3 stopanimScripted();
   var_3 unlink();
   var_5 thread maps\_anim::anim_generic(var_3, "price_explosion");
-  var_4 stopanimscripted();
+  var_4 stopanimScripted();
   var_4 unlink();
   var_5 thread maps\_anim::anim_generic(var_4, "grigsby_explosion");
   var_5 maps\_anim::anim_single_solo(var_1, "player_explosion");
@@ -1038,42 +1038,42 @@ escape_new_explosion_scene(var_0, var_1, var_2) {
 }
 
 escape_old_explosion_scene(var_0, var_1) {
-  var_0 rotateto((344.064, 286.67, -93.2207), 0.2, 0, 0.2);
-  var_0 moveto(var_1, 0.2, 0, 0.2);
+  var_0 rotateTo((344.064, 286.67, -93.2207), 0.2, 0, 0.2);
+  var_0 moveTo(var_1, 0.2, 0, 0.2);
   wait 0.1;
-  var_0 rotateto((358.273, 286.02, -89.0164), 0.3, 0.3, 0);
-  var_0 moveto(var_0.origin + (0, 0, -12), 0.3, 0.3, 0);
+  var_0 rotateTo((358.273, 286.02, -89.0164), 0.3, 0.3, 0);
+  var_0 moveTo(var_0.origin + (0, 0, -12), 0.3, 0.3, 0);
   wait 0.3;
-  var_0 rotateto((344.064, 286.67, -93.2207), 2.05, 0, 2.05);
-  var_0 moveto(var_0.origin + (0, 0, 0), 2.05, 0, 2.05);
+  var_0 rotateTo((344.064, 286.67, -93.2207), 2.05, 0, 2.05);
+  var_0 moveTo(var_0.origin + (0, 0, 0), 2.05, 0, 2.05);
   wait 2.05;
-  var_0 rotateto((321.374, 134.198, 58.7419), 6, 3, 3);
-  var_0 moveto(var_0.origin + (0, 0, -32), 3, 3, 0);
+  var_0 rotateTo((321.374, 134.198, 58.7419), 6, 3, 3);
+  var_0 moveTo(var_0.origin + (0, 0, -32), 3, 3, 0);
   wait 3;
-  var_0 moveto(var_0.origin + (0, 0, 32), 3, 0, 3);
+  var_0 moveTo(var_0.origin + (0, 0, 32), 3, 0, 3);
   wait 3;
-  var_0 rotateto((344.064, 286.67, -93.2207), 6, 3, 3);
-  var_0 moveto(var_0.origin + (0, 0, -32), 3, 3, 0);
+  var_0 rotateTo((344.064, 286.67, -93.2207), 6, 3, 3);
+  var_0 moveTo(var_0.origin + (0, 0, -32), 3, 3, 0);
   wait 3;
-  var_0 moveto(var_0.origin + (0, 0, 36), 3, 0, 3);
+  var_0 moveTo(var_0.origin + (0, 0, 36), 3, 0, 3);
   wait 3;
-  var_0 rotateto((321.374, 134.198, 58.7419), 4, 2, 2);
-  var_0 moveto(var_0.origin + (0, 0, -32), 2, 2, 0);
+  var_0 rotateTo((321.374, 134.198, 58.7419), 4, 2, 2);
+  var_0 moveTo(var_0.origin + (0, 0, -32), 2, 2, 0);
   wait 2;
-  var_0 moveto(var_0.origin + (0, 0, 36), 2, 0, 2);
+  var_0 moveTo(var_0.origin + (0, 0, 36), 2, 0, 2);
   wait 2;
-  var_0 rotateto((330.674, 192.977, -13.8899), 2, 1, 1);
-  var_0 moveto(var_0.origin + (0, 0, -16), 2, 2, 0);
+  var_0 rotateTo((330.674, 192.977, -13.8899), 2, 1, 1);
+  var_0 moveTo(var_0.origin + (0, 0, -16), 2, 2, 0);
   wait 2;
-  var_0 rotateto((327.722, 180.996, -2.2776), 0.5, 0.25, 0.25);
+  var_0 rotateTo((327.722, 180.996, -2.2776), 0.5, 0.25, 0.25);
   wait 0.5;
   wait 0.25;
-  var_0 rotateto((-10, 180, 0), 0.5);
-  var_0 moveto(var_0.origin + (0, 0, 0), 0.5);
+  var_0 rotateTo((-10, 180, 0), 0.5);
+  var_0 moveTo(var_0.origin + (0, 0, 0), 0.5);
   wait 0.5;
-  var_0 rotateto((0, 75, 10), 1.5);
+  var_0 rotateTo((0, 75, 10), 1.5);
   wait 0.35;
-  var_0 moveto(var_0.origin + (0, 0, 10), 0.75);
+  var_0 moveTo(var_0.origin + (0, 0, 10), 0.75);
   wait 0.4;
   wait 0.74;
   wait 0.3;
@@ -1232,12 +1232,12 @@ execute_ai(var_0, var_1, var_2, var_3, var_4) {
     }
     var_0[var_8].execute_target = 1;
     var_9 = spawn("script_origin", var_0[var_8] gettagorigin("j_spine4"));
-    var_9 linkto(var_0[var_8], "j_spine4");
+    var_9 linkTo(var_0[var_8], "j_spine4");
     maps\mo_tools::enable_cqbwalk_ign_demo_wrapper();
     maps\_utility::cqb_aim(var_9);
 
     if(var_3) {
-      while(isDefined(var_0[var_8]) && abs(vectordot(vectornormalize(self gettagangles("tag_flash")), vectornormalize(var_9.origin - self gettagorigin("tag_flash")))) < 0.85) {
+      while(isDefined(var_0[var_8]) && abs(vectordot(vectorNormalize(self gettagangles("tag_flash")), vectorNormalize(var_9.origin - self gettagorigin("tag_flash")))) < 0.85) {
         wait 0.1;
       }
     }
@@ -1339,7 +1339,7 @@ patrol() {
 patrol2() {
   common_scripts\utility::waittill_either("damage", "patrol_stop");
   self notify("stopanimscripted");
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::clear_run_anim();
   thread maps\_utility::enable_arrivals();
   flashlight_light(0);
@@ -1353,7 +1353,7 @@ flashlight_light(var_0) {
     var_2 = spawn("script_model", (0, 0, 0));
     var_2 setModel("tag_origin");
     var_2 hide();
-    var_2 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
     thread flashlight_light_death(var_2);
     playFXOnTag(level._effect["flashlight"], var_2, "tag_origin");
   } else
@@ -1373,7 +1373,7 @@ door_opens(var_0) {
     var_1 = var_1 * var_0;
   }
 
-  self rotateyaw(var_1, 0.4, 0, 0.3);
+  self rotateYaw(var_1, 0.4, 0, 0.3);
 }
 
 txt_voice(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
@@ -1469,7 +1469,7 @@ heli_flypath(var_0) {
     level.heli.vehicle waittill("near_goal");
 
     if(isDefined(var_0.target)) {
-      var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
       continue;
     }
 
@@ -1559,7 +1559,7 @@ heli_circle_area_start(var_0) {
   self.vehicle cleargoalyaw();
   self.vehicle clearlookatent();
   self endon("stop_circling_area");
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   thread heli_circle_area_gun();
 
   for(;;) {
@@ -1570,11 +1570,11 @@ heli_circle_area_start(var_0) {
     wait 5;
 
     if(isDefined(var_1.target)) {
-      var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
+      var_1 = common_scripts\utility::getStruct(var_1.target, "targetname");
       continue;
     }
 
-    var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   }
 }
 
@@ -1759,7 +1759,7 @@ deck_minigun_dodamage_to_ent(var_0) {
 }
 
 deck_explosion_guy() {
-  var_0 = getent("aftdeck_explosion_enemy", "targetname");
+  var_0 = getEnt("aftdeck_explosion_enemy", "targetname");
   var_0 maps\_utility::add_spawn_function(::deck_explosion_guy_spawn);
   var_1 = var_0 maps\_utility::spawn_ai(1);
   var_1.ignoreme = 1;
@@ -1782,7 +1782,7 @@ deck_enemies_see(var_0) {
   var_0 notify("stop_smoking");
   var_0 notify("patrol_stop");
   var_0 notify("see_enemy");
-  var_0 stopanimscripted();
+  var_0 stopanimScripted();
 }
 
 enemies_death_msg(var_0) {
@@ -2015,7 +2015,7 @@ heli_minigun_attach(var_0) {
   self.minigun[tolower(var_0)] = spawnturret("misc_turret", self gettagorigin("tag_gun" + var_1), "heli_minigun_noai");
   self.minigun[tolower(var_0)].angles = self gettagangles("tag_gun" + var_1);
   self.minigun[tolower(var_0)] setModel("weapon_minigun");
-  self.minigun[tolower(var_0)] linkto(self, "tag_gun" + var_1);
+  self.minigun[tolower(var_0)] linkTo(self, "tag_gun" + var_1);
   self.minigun[tolower(var_0)] makeunusable();
   self.minigun[tolower(var_0)] setmode("manual");
   self.minigun[tolower(var_0)] setturretteam("allies");
@@ -2026,7 +2026,7 @@ heli_searchlight_on() {
   self.spotlight = spawnturret("misc_turret", self gettagorigin("tag_barrel"), "heli_spotlight");
   self.spotlight.angles = self gettagangles("tag_barrel");
   self.spotlight setModel("com_blackhawk_spotlight_on_mg_setup");
-  self.spotlight linkto(self, "tag_barrel", (0, 0, -16), (0, 0, 0));
+  self.spotlight linkTo(self, "tag_barrel", (0, 0, -16), (0, 0, 0));
   self.spotlight makeunusable();
   self.spotlight setmode("manual");
   self.spotlight settoparc(5);
@@ -2064,8 +2064,8 @@ heli_searchlight_off() {
   self.spotlight notify("death");
   var_0 = spawn("script_model", self.spotlight.origin);
   var_0 setModel("tag_origin");
-  self.spotlight linkto(var_0);
-  var_0 moveto((0, 0, -10000), 0.05);
+  self.spotlight linkTo(var_0);
+  var_0 moveTo((0, 0, -10000), 0.05);
   wait 0.25;
   self.spotlight delete();
   var_0 delete();
@@ -2081,7 +2081,7 @@ heli_searchlight_dlight() {
     var_1 = var_1 + var_2;
 
     if(isDefined(self.dlight)) {
-      self.dlight moveto(var_1, 0.1);
+      self.dlight moveTo(var_1, 0.1);
     }
 
     wait 0.1;
@@ -2096,7 +2096,7 @@ heli_searchlight_target_calcai(var_0) {
 
   for(var_4 = 1; var_4 < var_0.size; var_4++) {
     var_5 = var_0[var_4].origin - level.player.origin;
-    vectornormalize(var_5);
+    vectorNormalize(var_5);
     var_6 = vectordot(var_5, var_1);
 
     if(var_6 > var_2) {
@@ -2126,10 +2126,10 @@ heli_searchlight_target(var_0, var_1) {
       var_2 = level.player;
       break;
     case "targetname":
-      var_2 = getent(var_1, var_0);
+      var_2 = getEnt(var_1, var_0);
       break;
     case "script_noteworthy":
-      var_2 = getent(var_1, var_0);
+      var_2 = getEnt(var_1, var_0);
       break;
     case "hero":
       var_2 = level.heroes5[var_1];
@@ -2185,10 +2185,10 @@ heli_searchlight_bridge() {
 
 heli_deckdrop_target() {
   common_scripts\utility::flag_wait("walk_deck");
-  var_0 = getent("heli_deck_spottarget", "targetname");
+  var_0 = getEnt("heli_deck_spottarget", "targetname");
   level.heli.model.spotlight_default_target = var_0;
   level.heli.model thread heli_searchlight_target("heli_deck_spottarget");
-  var_0 linkto(level.heli.model, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(level.heli.model, "tag_turret", (0, 0, 0), (0, 0, 0));
 }
 
 player_speed_set_cargoship(var_0, var_1) {
@@ -2223,10 +2223,10 @@ player_speed_reset(var_0) {
 
 cargohold_1_light_sway(var_0) {
   var_1 = spawn("script_origin", self.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
 
   for(;;) {
-    self moveto(var_1.origin, 0.1);
+    self moveTo(var_1.origin, 0.1);
     wait 0.1;
   }
 }
@@ -2243,18 +2243,18 @@ misc_light_sway() {
     level._sea_org waittill("sway1");
     var_2 = level._sea_org.time;
     var_3 = var_2 * 0.5;
-    self moveto(var_1 + (0, 20, 0), var_2, var_3, var_3);
+    self moveTo(var_1 + (0, 20, 0), var_2, var_3, var_3);
     level._sea_org waittill("sway2");
     var_2 = level._sea_org.time;
     var_3 = var_2 * 0.5;
-    self moveto(var_1 + (0, -20, 0), var_2, var_3, var_3);
+    self moveTo(var_1 + (0, -20, 0), var_2, var_3, var_3);
   }
 }
 
 misc_tv_stairs_on() {
   wait 1;
   self.usetrig notify("trigger");
-  var_0 = getent("start_bridge_standoff", "targetname");
+  var_0 = getEnt("start_bridge_standoff", "targetname");
   var_0 waittill("trigger");
   self.usetrig notify("trigger");
 }
@@ -2279,12 +2279,12 @@ misc_tv() {
 
   self.glow = undefined;
   self.gloworg = self.origin + (0, 0, 14) + maps\_utility::vector_multiply(anglesToForward(self.angles), 55);
-  self.usetrig = getent(self.target, "targetname");
-  self.usetrig usetriggerrequirelookat();
-  self.usetrig setcursorhint("HINT_NOICON");
+  self.usetrig = getEnt(self.target, "targetname");
+  self.usetrig useTriggerRequireLookAt();
+  self.usetrig setCursorHint("HINT_NOICON");
 
   if(isDefined(self.usetrig.target)) {
-    self.lite = getent(self.usetrig.target, "targetname");
+    self.lite = getEnt(self.usetrig.target, "targetname");
 
     if(isDefined(self.lite)) {
       self.liteintensity = self.lite getlightintensity();
@@ -2612,7 +2612,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
       self orientmode("face motion");
       var_7 thread maps\_anim::anim_single_solo(self, var_3);
       wait(var_8 - 0.2);
-      self stopanimscripted();
+      self stopanimScripted();
       var_7 delete();
       var_3 = undefined;
 
@@ -2710,7 +2710,7 @@ cargohold_flashthrow(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_9 = var_9 + (0, 0, 200);
-    var_10 = vectornormalize(var_9 - var_8);
+    var_10 = vectorNormalize(var_9 - var_8);
 
     if(!isDefined(var_2)) {
       var_2 = 350;
@@ -2858,7 +2858,7 @@ jumptothink() {
       common_scripts\utility::flag_wait("heroes_ready");
       level.heli maps\mo_fastrope::fastrope_heli_overtake_now();
       level.heli.vehicle vehicle_setspeed(700, 700);
-      level.heli.vehicle setvehgoalpos(common_scripts\utility::getstruct("intro_ride_node", "targetname").origin + (0, 0, 920), 1);
+      level.heli.vehicle setvehgoalpos(common_scripts\utility::getStruct("intro_ride_node", "targetname").origin + (0, 0, 920), 1);
       level.heli.vehicle settargetyaw(220);
       wait 5.5;
       maps\_utility::delaythread(2.5, soundscripts\_snd::snd_message, "aud_stop_intro_mix");
@@ -2877,7 +2877,7 @@ jumptothink() {
       level.player maps\_utility::set_light_set_player("cargoship_exterior");
       level.heli maps\mo_fastrope::fastrope_heli_overtake_now();
       level.heli.vehicle vehicle_setspeed(300, 300, 250);
-      level.heli.vehicle setvehgoalpos(common_scripts\utility::getstruct("heli_deck_landing_node", "targetname").origin + (0, 0, 146), 1);
+      level.heli.vehicle setvehgoalpos(common_scripts\utility::getStruct("heli_deck_landing_node", "targetname").origin + (0, 0, 146), 1);
       var_1 = getnode("quarters_price_2", "targetname");
       level.heroes5["price"] thread jumptoactor(var_1.origin);
       var_1 = getnode("quarters_alavi_2", "targetname");
@@ -2966,8 +2966,8 @@ jumptothink() {
       level.heroes5["alavi"].accuracy = level.heroes5["price"].cgo_old_accuracy;
       level.heroes5["grigsby"].accuracy = level.heroes5["price"].cgo_old_accuracy;
       thread player_speed_set_cargoship(137, 1);
-      getent("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
-      getent("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
       common_scripts\utility::flag_set("hallways_lowerhall2");
       break;
     case "cargohold2":
@@ -3014,9 +3014,9 @@ jumptothink() {
       level.heroes5["grigsby"].accuracy = level.heroes5["price"].cgo_old_accuracy;
       level.heroes5["grigsby"].wantshotgun = 1;
       thread player_speed_set_cargoship(137, 1);
-      getent("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
-      getent("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
       common_scripts\utility::array_thread(getEntArray("pulp_fiction_trigger", "targetname"), common_scripts\utility::trigger_off);
       common_scripts\utility::flag_set("cargoholds2");
       break;
@@ -3067,11 +3067,11 @@ jumptothink() {
       level.heroes5["alavi"].ignoreme = 0;
       level.heroes5["grigsby"].ignoreme = 0;
       thread player_speed_set_cargoship(137, 1);
-      getent("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
-      getent("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
       common_scripts\utility::array_thread(getEntArray("pulp_fiction_trigger", "targetname"), common_scripts\utility::trigger_off);
       common_scripts\utility::flag_set("laststand");
       break;
@@ -3112,14 +3112,14 @@ jumptothink() {
       level.heroes5["seat5"] maps\mo_tools::disable_cqbwalk_ign_demo_wrapper();
       level.heroes5["seat6"] maps\mo_tools::disable_cqbwalk_ign_demo_wrapper();
       level.heroes5["grigsby"].wantshotgun = 1;
-      getent("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
-      getent("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies1", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies3", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies1", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies3", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
       common_scripts\utility::array_thread(getEntArray("pulp_fiction_trigger", "targetname"), common_scripts\utility::trigger_off);
       common_scripts\utility::flag_set("package");
       break;
@@ -3163,14 +3163,14 @@ jumptothink() {
       level.heroes5["seat6"] thread jumptoactor(var_1["seat6"].origin);
       level.heroes7["pilot"] delete();
       level.heroes7["copilot"] delete();
-      getent("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
-      getent("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies1", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies3", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies1", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies3", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
       common_scripts\utility::array_thread(getEntArray("pulp_fiction_trigger", "targetname"), common_scripts\utility::trigger_off);
       common_scripts\utility::flag_set("escape");
       thread maps\_utility::flag_set_delayed("package_secure", 1);
@@ -3224,14 +3224,14 @@ jumptothink() {
       level.heroes5["seat6"] thread jumptoactor(var_1["seat6"].origin);
       level.heroes7["pilot"] delete();
       level.heroes7["copilot"] delete();
-      getent("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
-      getent("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies1", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold3_enemies3", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
-      getent("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners", "target") common_scripts\utility::trigger_off();
+      getEnt("hallways_lower_runners2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold1_flashed_enemies", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies1", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold3_enemies3", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies2", "target") common_scripts\utility::trigger_off();
+      getEnt("cargohold2_catwalk_enemies", "target") common_scripts\utility::trigger_off();
       common_scripts\utility::array_thread(getEntArray("pulp_fiction_trigger", "targetname"), common_scripts\utility::trigger_off);
       common_scripts\utility::flag_set("escape");
       common_scripts\utility::flag_set("package_secure");
@@ -3270,8 +3270,8 @@ jumptothink() {
       level._sea_org.acctime = level._sea_org.time * 0.5;
       level._sea_org.dectime = level._sea_org.time * 0.5;
       level._sea_org.rotation = (0, 0, -40);
-      level._sea_link rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-      level._sea_org rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+      level._sea_link rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+      level._sea_org rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
       level._sea_link movez(-300, 0.1);
       level._sea_org movez(-300, 0.1);
       break;
@@ -3281,14 +3281,14 @@ jumptothink() {
     case "end":
     case "escape":
     case "package":
-      var_8 = getent("cargohold1_door", "targetname");
-      var_9 = getent(var_8.target, "targetname");
+      var_8 = getEnt("cargohold1_door", "targetname");
+      var_9 = getEnt(var_8.target, "targetname");
       var_9 notsolid();
       var_9 connectpaths();
       var_8 door_opens();
     case "cargohold":
-      var_8 = getent("hallways_door", "targetname");
-      var_9 = getent(var_8.target, "targetname");
+      var_8 = getEnt("hallways_door", "targetname");
+      var_9 = getEnt(var_8.target, "targetname");
       var_9 notsolid();
       var_9 connectpaths();
       var_8 door_opens();
@@ -3300,7 +3300,7 @@ jumptothink() {
     maps\mo_tools::playerweapongive();
   }
 
-  var_1 = common_scripts\utility::getstruct("jumpto_" + level.jumpto, "targetname");
+  var_1 = common_scripts\utility::getStruct("jumpto_" + level.jumpto, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -3309,17 +3309,17 @@ jumptothink() {
   level.player allowlean(1);
   level.player allowcrouch(1);
   level.player allowprone(1);
-  level.player setorigin(var_1.origin + (0, 0, 8));
+  level.player setOrigin(var_1.origin + (0, 0, 8));
   level.player setplayerangles(var_1.angles);
 }
 
 jumptoactor(var_0) {
   self notify("overtakenow");
   self unlink();
-  self stopanimscripted();
+  self stopanimScripted();
   var_1 = spawn("script_origin", self.origin);
-  self linkto(var_1);
-  var_1 moveto(var_0, 0.2);
+  self linkTo(var_1);
+  var_1 moveTo(var_0, 0.2);
   wait 0.25;
   self unlink();
   var_1 delete();
@@ -3371,17 +3371,17 @@ jumptorandomtrigthink() {
 }
 
 escape_catwalk() {
-  var_0 = getent("escape_catwalk", "targetname");
+  var_0 = getEnt("escape_catwalk", "targetname");
   var_1 = getEntArray(var_0.targetname, "target");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
-    var_1[var_2] linkto(var_0);
+    var_1[var_2] linkTo(var_0);
   }
 
   common_scripts\utility::flag_wait("escape_catwalk");
   var_0 movez(-4, 0.25, 0, 0);
   var_0 movey(-2, 0.25, 0, 0);
-  var_0 rotateto((0, 0, 5), 0.25, 0, 0);
+  var_0 rotateTo((0, 0, 5), 0.25, 0, 0);
   var_0 waittill("rotatedone");
   var_0 thread escape_catwalk_sway();
   var_0 thread maps\_utility::play_sound_on_entity("cgo_escape_catwalk_breaks");
@@ -3401,7 +3401,7 @@ escape_catwalk() {
   var_0 common_scripts\utility::stop_loop_sound_on_entity("cgo_escape_catwalk_creaks_loop");
   var_0 thread maps\_utility::play_sound_on_entity("cgo_escape_catwalk_collapse");
   var_0 movez(-16, 1.5, 0, 1.5);
-  var_0 rotateto((10, 0, 90), 1.5, 0, 1.5);
+  var_0 rotateTo((10, 0, 90), 1.5, 0, 1.5);
   wait 2;
 
   if(!common_scripts\utility::flag("escape_catwalk_madeit")) {
@@ -3420,9 +3420,9 @@ escape_catwalk_sway() {
   var_0 = 0.7;
 
   for(;;) {
-    self rotateto((0, -2 * var_0, -2 * var_0), 1, 0.5, 0.5);
+    self rotateTo((0, -2 * var_0, -2 * var_0), 1, 0.5, 0.5);
     self waittill("rotatedone");
-    self rotateto((0, 2 * var_0, 2 * var_0), 1, 0.5, 0.5);
+    self rotateTo((0, 2 * var_0, 2 * var_0), 1, 0.5, 0.5);
     self waittill("rotatedone");
   }
 }
@@ -3551,38 +3551,38 @@ escape_heroes_run(var_0) {
     switch (var_0) {
       case "escape_cargohold2":
         var_11 = "price_escape_1";
-        var_12 = getent("escape_cargohold2b", "script_noteworthy");
+        var_12 = getEnt("escape_cargohold2b", "script_noteworthy");
         var_13 = undefined;
-        var_14 = getent("newpos_price_escape_cargohold2b", "targetname");
+        var_14 = getEnt("newpos_price_escape_cargohold2b", "targetname");
         var_15 = undefined;
         break;
       case "escape_hallway_lower":
         var_11 = "price_escape_2";
-        var_12 = getent("escape_hallway_lowerb", "script_noteworthy");
+        var_12 = getEnt("escape_hallway_lowerb", "script_noteworthy");
         var_13 = undefined;
-        var_14 = getent("newpos_price_escape_hallway_lowerb", "targetname");
+        var_14 = getEnt("newpos_price_escape_hallway_lowerb", "targetname");
         var_15 = undefined;
         break;
       case "escape_hallway_lowerb":
         var_11 = "price_escape_3";
-        var_12 = getent("escape_hallway_lowerc", "script_noteworthy");
-        var_13 = getent("escape_hallway_lowerd", "script_noteworthy");
-        var_14 = getent("newpos_price_escape_hallway_lowerc", "targetname");
-        var_15 = getent("newpos_price_escape_hallway_lowerd", "targetname");
+        var_12 = getEnt("escape_hallway_lowerc", "script_noteworthy");
+        var_13 = getEnt("escape_hallway_lowerd", "script_noteworthy");
+        var_14 = getEnt("newpos_price_escape_hallway_lowerc", "targetname");
+        var_15 = getEnt("newpos_price_escape_hallway_lowerd", "targetname");
         break;
       case "escape_hallway_lowerd":
         var_11 = "price_escape_4";
-        var_12 = getent("escape_hallway_lowere", "script_noteworthy");
-        var_13 = getent("escape_hallway_upper", "script_noteworthy");
-        var_14 = getent("newpos_price_escape_hallway_lowere", "targetname");
-        var_15 = getent("newpos_price_escape_hallway_upper", "targetname");
+        var_12 = getEnt("escape_hallway_lowere", "script_noteworthy");
+        var_13 = getEnt("escape_hallway_upper", "script_noteworthy");
+        var_14 = getEnt("newpos_price_escape_hallway_lowere", "targetname");
+        var_15 = getEnt("newpos_price_escape_hallway_upper", "targetname");
         break;
       case "escape_hallway_upperb":
         var_11 = "price_escape_5";
         self.a.animreachcustomradius = 15;
-        var_12 = getent("escape_aftdeck", "script_noteworthy");
+        var_12 = getEnt("escape_aftdeck", "script_noteworthy");
         var_13 = undefined;
-        var_14 = getent("newpos_price_escape_aftdeck", "targetname");
+        var_14 = getEnt("newpos_price_escape_aftdeck", "targetname");
         var_15 = undefined;
         break;
       default:
@@ -3595,7 +3595,7 @@ escape_heroes_run(var_0) {
     }
 
     if(isDefined(var_11)) {
-      var_16 = getent("price_escapeanims_refpos", "targetname");
+      var_16 = getEnt("price_escapeanims_refpos", "targetname");
       var_16 maps\_anim::anim_reach_solo(self, var_11);
       self.a.animreachcustomradius = undefined;
 
@@ -3663,8 +3663,8 @@ escape_heroes2() {
   self.oldanimname = self.animname;
   self.animname = "escape";
   self allowedstances("crouch", "stand");
-  self stopanimscripted();
-  self linkto(var_0);
+  self stopanimScripted();
+  self linkTo(var_0);
   var_0 thread maps\_anim::anim_single_solo(self, "blowback");
   var_1 = undefined;
 
@@ -3681,7 +3681,7 @@ escape_heroes2() {
       break;
   }
 
-  var_0 moveto(var_1, 1, 0, 0.5);
+  var_0 moveTo(var_1, 1, 0, 0.5);
 
   if(self.script_noteworthy == "price" || self.script_noteworthy == "grigsby") {
     wait 5;
@@ -3706,7 +3706,7 @@ escape_heroes2() {
   if(self.script_noteworthy == "price" || self.script_noteworthy == "grigsby") {
     return;
   }
-  self stopanimscripted();
+  self stopanimScripted();
   self unlink();
   self setgoalpos(var_1);
   self.goalradius = 16;
@@ -3733,8 +3733,8 @@ escape_heroes2() {
 
 escape_heroes() {
   level endon("escape_explosion");
-  var_0 = getent("escape_door", "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt("escape_door", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1 notsolid();
   var_1 connectpaths();
   var_0 thread door_opens(0.6);
@@ -3791,10 +3791,10 @@ escape_heroes() {
     }
 
     self waittill("goal");
-    var_6 = common_scripts\utility::getstruct(var_3.targetname, "target");
+    var_6 = common_scripts\utility::getStruct(var_3.targetname, "target");
 
     if(isDefined(var_6)) {
-      var_7 = getent(var_6.targetname, "target");
+      var_7 = getEnt(var_6.targetname, "target");
 
       if(!common_scripts\utility::flag(var_7.script_flag)) {
         common_scripts\utility::flag_wait(var_7.script_flag);
@@ -3819,18 +3819,18 @@ escape_waterlevel() {
   maps\_utility::geo_on();
   var_0 = self.path;
   self show();
-  self moveto(var_0.origin, 0.5);
-  self rotateto(var_0.angles, 0.5);
+  self moveTo(var_0.origin, 0.5);
+  self rotateTo(var_0.angles, 0.5);
   wait 0.5;
   self notify("show");
   level._sea_org waittill("tilt_20_degrees");
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
-  self moveto(var_0.origin, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-  self rotateto(var_0.angles, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
+  self moveTo(var_0.origin, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  self rotateTo(var_0.angles, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
   level._sea_org waittill("tilt_30_degrees");
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
-  self moveto(var_0.origin, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-  self rotateto(var_0.angles, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
+  self moveTo(var_0.origin, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  self rotateTo(var_0.angles, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
 }
 
 escape_tilt_gravity(var_0) {
@@ -3882,8 +3882,8 @@ escape_tiltboat() {
 
   level._sea_org.sway = "sway2";
   level._sea_org notify("sway2");
-  level._sea_link rotateto(level._sea_org.rotation, level._sea_org.time, 1, 0);
-  level._sea_org rotateto(level._sea_org.rotation, level._sea_org.time, 1, 0);
+  level._sea_link rotateTo(level._sea_org.rotation, level._sea_org.time, 1, 0);
+  level._sea_org rotateTo(level._sea_org.rotation, level._sea_org.time, 1, 0);
   wait(level._sea_org.time);
   level notify("stop_escape_tilt_gravity");
   level waittill("escape_unlink_player");
@@ -3895,8 +3895,8 @@ escape_tiltboat() {
   level._sea_org notify("tilt_20_degrees");
   level._sea_org.sway = "sway1";
   level._sea_org notify("sway1");
-  level._sea_link rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-  level._sea_org rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_link rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_org rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
   wait(level._sea_org.time);
   level notify("stop_escape_tilt_gravity");
   common_scripts\utility::flag_wait("escape_tilt_30");
@@ -3908,15 +3908,15 @@ escape_tiltboat() {
   level._sea_org notify("tilt_30_degrees");
   level._sea_org.sway = "sway2";
   level._sea_org notify("sway2");
-  level._sea_link rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-  level._sea_org rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_link rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_org rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
   wait(level._sea_org.time);
   level._sea_org.time = 1;
   level._sea_org.acctime = level._sea_org.time * 0.5;
   level._sea_org.dectime = level._sea_org.time * 0.5;
   level._sea_org.rotation = (0, 0, var_0["stage_3"]);
-  level._sea_link rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-  level._sea_org rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_link rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_org rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
   wait(level._sea_org.time);
   level notify("stop_escape_tilt_gravity");
   common_scripts\utility::flag_wait("escape_cargohold1_enter");
@@ -3928,15 +3928,15 @@ escape_tiltboat() {
   level._sea_org notify("tilt_40_degrees");
   level._sea_org.sway = "sway1";
   level._sea_org notify("sway1");
-  level._sea_link rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-  level._sea_org rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_link rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_org rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
   wait(level._sea_org.time);
   level._sea_org.time = 1;
   level._sea_org.acctime = level._sea_org.time * 0.5;
   level._sea_org.dectime = level._sea_org.time * 0.5;
   level._sea_org.rotation = (0, 0, var_0["stage_5"]);
-  level._sea_link rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
-  level._sea_org rotateto(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_link rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
+  level._sea_org rotateTo(level._sea_org.rotation, level._sea_org.time, level._sea_org.acctime, level._sea_org.dectime);
   wait(level._sea_org.time);
   level notify("stop_escape_tilt_gravity");
   level._sea_link movez(-300, 1, 0.5, 0.5);
@@ -3989,7 +3989,7 @@ escape_fx_setup() {
   var_9 = getEntArray("escape_container", "targetname");
 
   for(var_5 = 0; var_5 < var_9.size; var_5++) {
-    var_10 = getent(var_9[var_5].target, "targetname");
+    var_10 = getEnt(var_9[var_5].target, "targetname");
     var_10 show();
     var_9[var_5] delete();
   }
@@ -4100,7 +4100,7 @@ escape_fx_setup_throw_obj(var_0, var_1, var_2, var_3) {
 }
 
 escape_explosion() {
-  var_0 = getent("escape_sink_start", "targetname");
+  var_0 = getEnt("escape_sink_start", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_clear("_sea_bob");
   common_scripts\utility::flag_set("start_sinking_boat");
@@ -4365,10 +4365,10 @@ escape_mission_failed() {
 
 end_handle_player_fall() {
   common_scripts\utility::flag_wait("escape_aftdeck_flag");
-  var_0 = getent("end_player_clip", "targetname");
+  var_0 = getEnt("end_player_clip", "targetname");
   var_0 delete();
   level endon("end_start_player_anim");
-  var_1 = getent("end_player_fall", "targetname");
+  var_1 = getEnt("end_player_fall", "targetname");
   var_1 waittill("trigger");
 
   if(getDvar("cargoship_jump") == "") {
@@ -4394,7 +4394,7 @@ escape_handle_wrongway() {
   }
   common_scripts\utility::flag_wait("escape_explosion");
   common_scripts\utility::array_thread(getEntArray("end_wrongway_kill", "targetname"), ::escape_handle_wrongway_kill);
-  var_0 = getent("end_wrongway", "targetname");
+  var_0 = getEnt("end_wrongway", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -4426,7 +4426,7 @@ water_stuff_for_art1(var_0) {
     var_3 = 1;
   }
 
-  var_5 = getent("sea_black", "targetname");
+  var_5 = getEnt("sea_black", "targetname");
   var_6 = var_5 getorigin();
   var_5 delete();
   var_5 = spawn("script_model", var_6);
@@ -4438,7 +4438,7 @@ water_stuff_for_art1(var_0) {
     level.sea_black = var_5;
   }
 
-  var_5 = getent("sea_foam", "targetname");
+  var_5 = getEnt("sea_foam", "targetname");
   var_5 delete();
   var_5 = spawn("script_model", var_6);
   var_5 setModel(var_2);
@@ -4452,10 +4452,10 @@ water_stuff_for_art1(var_0) {
   if(var_3) {
     level.sea_black hide();
     level.sea_black.angles = level._sea_link.angles;
-    level.sea_black linkto(level._sea_link);
+    level.sea_black linkTo(level._sea_link);
     level.sea_foam hide();
     level.sea_foam.angles = level._sea_link.angles;
-    level.sea_foam linkto(level._sea_link);
+    level.sea_foam linkTo(level._sea_link);
   }
 }
 
@@ -4858,7 +4858,7 @@ orient_cameraviewangles_helicopterstart() {
 }
 
 deck_light_shadow_hack() {
-  var_0 = getent("deck_light_hack", "script_noteworthy");
+  var_0 = getEnt("deck_light_hack", "script_noteworthy");
 
   for(;;) {
     common_scripts\utility::flag_wait("deck_light_shadow");

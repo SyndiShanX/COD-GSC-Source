@@ -24,7 +24,7 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function function_900862de() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player setsunshadowsplitdistance(3500);
@@ -32,7 +32,7 @@ function function_900862de() {
 }
 
 function on_game_playing() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player setsunshadowsplitdistance(1500);

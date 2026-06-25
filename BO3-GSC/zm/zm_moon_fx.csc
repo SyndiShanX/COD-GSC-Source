@@ -45,9 +45,9 @@ function airlock_fx(localclientnum) {
   var_2043fd45 = struct::get_array("s_airlock_jambs_fx", "targetname");
   for(i = 0; i < var_2043fd45.size; i++) {
     if(isDefined(var_2043fd45[i].script_vector)) {
-      forwardvec = vectornormalize(anglesToForward(var_2043fd45[i].script_vector));
+      forwardvec = vectorNormalize(anglesToForward(var_2043fd45[i].script_vector));
     } else {
-      forwardvec = vectornormalize(anglesToForward(var_2043fd45[i].angles));
+      forwardvec = vectorNormalize(anglesToForward(var_2043fd45[i].angles));
     }
     playFX(localclientnum, level._effect["airlock_fx"], var_2043fd45[i].origin, forwardvec);
   }

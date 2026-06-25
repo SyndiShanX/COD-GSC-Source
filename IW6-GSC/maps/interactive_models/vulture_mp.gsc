@@ -42,7 +42,7 @@ vulture_circling_internal(origin) {
   vulture.angles = (0, yaw, 0);
   vulture setModel("ng_vulture");
 
-  vulture LinkTo(rig, "tag_attach");
+  vulture linkTo(rig, "tag_attach");
   riganim = level._interactive["vultures"]["anims"][mod(count, 3)];
   rig ScriptModelPlayAnim(riganim);
   level._interactive["vultures"]["vultures"][count] = vulture;

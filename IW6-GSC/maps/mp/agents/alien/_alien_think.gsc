@@ -214,7 +214,7 @@ GetAttackPosition(target, attackDist, timeFromNow) {
 
   targetPredictedPosition = self GetTargetPredictedPosition(target, timeFromNow);
 
-  targetToMe = VectorNormalize(self.origin - targetPredictedPosition);
+  targetToMe = vectorNormalize(self.origin - targetPredictedPosition);
   attackPos = targetPredictedPosition + targetToMe * attackDist;
 
   attackPos = GetGroundPosition(attackPos, alienRadius, 64, 64);
@@ -364,7 +364,7 @@ react_to_attractor_flare() {
   attractNode = get_flare_node();
   if(isDefined(attractNode)) {
     self ScrAgentSetGoalNode(attractNode);
-    self ScrAgentSetGoalRadius(64.0);
+    self ScrAgentSetgoalRadius(64.0);
     self waittill("goal_reached");
 
     while(isDefined(self.attractor_flare)) {
@@ -381,10 +381,10 @@ get_flare_node() {
   }
 
   inBetweenNodes = [];
-  flareToAlien = VectorNormalize(self.origin - self.attractor_flare.origin);
+  flareToAlien = vectorNormalize(self.origin - self.attractor_flare.origin);
 
   foreach(possibleNode in attractNodes) {
-    flareToNode = VectorNormalize(possibleNode.origin - self.attractor_flare.origin);
+    flareToNode = vectorNormalize(possibleNode.origin - self.attractor_flare.origin);
     if(VectorDot(flareToNode, flareToAlien) < 0) {
       continue;
     }
@@ -437,7 +437,7 @@ posture_after_enemy_downed() {
 
   if(isDefined(postureNode)) {
     self ScrAgentSetGoalNode(postureNode);
-    self ScrAgentSetGoalRadius(64.0);
+    self ScrAgentSetgoalRadius(64.0);
     self waittill("goal_reached");
   }
 
@@ -473,7 +473,7 @@ get_downed_posture_node() {
   filters = [];
 
   filters["direction"] = "override";
-  filters["direction_override"] = VectorNormalize(self.origin - self.downed_enemy_location);
+  filters["direction_override"] = vectorNormalize(self.origin - self.downed_enemy_location);
   filters["direction_weight"] = 10.0;
   filters["min_height"] = 64.0;
   filters["max_height"] = 400.0;
@@ -564,7 +564,7 @@ alien_attack_sequence(enemy) {
 
 alien_synch_attack_enemy(enemy) {
   if(Distance2DSquared(self.origin, enemy.origin) > ALIEN_MIN_MELEE_DISTANCE) {
-    self ScrAgentSetGoalRadius(ALIEN_MIN_MELEE_DISTANCE);
+    self ScrAgentSetgoalRadius(ALIEN_MIN_MELEE_DISTANCE);
     self ScrAgentSetGoalEntity(enemy);
     self waittill("goal_reached");
   }
@@ -580,7 +580,7 @@ alien_synch_attack_enemy(enemy) {
     select_synch_index(enemy);
 
     if(should_move_to_synch_attack_pos(enemy)) {
-      self ScrAgentSetGoalRadius(30);
+      self ScrAgentSetgoalRadius(30);
       self ScrAgentSetGoalPos(self.synch_attack_pos);
       self waittill("goal_reached");
     }
@@ -593,7 +593,7 @@ alien_synch_attack_enemy(enemy) {
 
 select_synch_index(enemy) {
   synchList = enemy get_synch_direction_list(self);
-  enemyToSelf = VectorNormalize(self.origin - enemy.origin);
+  enemyToSelf = vectorNormalize(self.origin - enemy.origin);
   bestSynchAttackIndex = undefined;
   bestSynchAnimState = undefined;
   bestSynchAttackPos = undefined;
@@ -608,7 +608,7 @@ select_synch_index(enemy) {
     rotatedOffset = synchPos["offset_direction"] * offset;
     synchAttackPos = enemy LocalToWorldCoords(rotatedOffset);
 
-    enemyToSynchPos = VectorNormalize(synchAttackPos - enemy.origin);
+    enemyToSynchPos = vectorNormalize(synchAttackPos - enemy.origin);
     offsetAngle = VectorDot(enemyToSynchPos, enemyToSelf);
 
     if(offsetAngle > bestOffsetAngle) {
@@ -627,8 +627,8 @@ select_synch_index(enemy) {
 should_move_to_synch_attack_pos(enemy) {
   COS_45 = 0.707;
 
-  enemyToPos = VectorNormalize(self.synch_attack_pos - enemy.origin);
-  enemyToSelf = VectorNormalize(self.origin - enemy.origin);
+  enemyToPos = vectorNormalize(self.synch_attack_pos - enemy.origin);
+  enemyToSelf = vectorNormalize(self.origin - enemy.origin);
   isInSameDirection = VectorDot(enemyToPos, enemyToSelf) > COS_45;
   isFurther = DistanceSquared(enemy.origin, self.origin) > DistanceSquared(enemy.origin, self.synch_attack_pos);
 
@@ -760,13 +760,13 @@ attempt_bad_path_move_nearby_node(enemy) {
   }
 
   self ScrAgentSetGoalPos(self.origin);
-  self ScrAgentSetGoalRadius(2048);
+  self ScrAgentSetgoalRadius(2048);
   targetNode = nodes[RandomInt(nodes.size)];
   if(self attempt_badpath_jump(enemy, targetNode)) {
     return true;
   } else {
     self ScrAgentSetGoalNode(targetNode);
-    self ScrAgentSetGoalRadius(64);
+    self ScrAgentSetgoalRadius(64);
     self waittill("goal_reached");
     return true;
   }
@@ -827,7 +827,7 @@ attempt_badpath_move_to_node(enemy, min_distance, max_distance, height_differenc
   if(nodes.size > 0) {
     moveNode = nodes[RandomInt(nodes.size)];
     self ScrAgentSetGoalNode(moveNode);
-    self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+    self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
     self waittill("goal_reached");
     return true;
   }
@@ -844,7 +844,7 @@ attempt_badpath_jump(enemy, node) {
     self.leapEndAngles = node.angles;
     self alien_attack(enemy, "badpath_jump");
     self ScrAgentSetGoalPos(self.origin);
-    self ScrAgentSetGoalRadius(2048);
+    self ScrAgentSetgoalRadius(2048);
     self waittill("goal_reached");
   }
   wait 0.5;
@@ -988,7 +988,7 @@ alien_pet_follow() {
 
   follow_dist_sqr = follow_dist * follow_dist;
 
-  self ScrAgentSetGoalRadius(follow_dist);
+  self ScrAgentSetgoalRadius(follow_dist);
 
   while(!IsAlive(self.enemy)) {
     if(!isDefined(self.owner) || !IsAlive(self.owner)) {
@@ -1013,7 +1013,7 @@ alien_pet_follow() {
           continue;
         }
         self ScrAgentSetGoalNode(target_node);
-        self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+        self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
         self waittill("goal_reached");
         wait RandomFloatRange(0.5, 1.5);
       }
@@ -1067,7 +1067,7 @@ alien_wait_for_combat(enemy) {
 
     node_to_go = get_retreat_node_rated(enemy, filters, nodes);
     self ScrAgentSetGoalNode(node_to_go);
-    self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+    self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
     self waittill("goal_reached");
     wait RandomFloatRange(1.5, 3.5);
 
@@ -1169,7 +1169,7 @@ elevated_delay_retreat(enemy, direction) {
   }
 
   self ScrAgentSetGoalNode(elevated_jump_node);
-  self ScrAgentSetGoalRadius(32);
+  self ScrAgentSetgoalRadius(32);
   self waittill("goal_reached");
   wait 1.5;
 }
@@ -1183,7 +1183,7 @@ get_elevated_jump_node(enemy, direction) {
   filters = [];
   if(GetDvarInt("alien_retreat_towards_spawn") == 1) {
     filters["direction"] = "override";
-    filters["direction_override"] = VectorNormalize(self.spawnOrigin - enemy.origin);
+    filters["direction_override"] = vectorNormalize(self.spawnOrigin - enemy.origin);
     filters["direction_weight"] = 8.0;
   } else {
     filters["direction"] = direction;
@@ -1226,7 +1226,7 @@ cover_retreat(enemy, direction) {
     filters["max_dist_from_enemy"] = 1200.0;
   } else if(GetDvarInt("alien_retreat_towards_spawn") == 1) {
     filters["direction"] = "override";
-    filters["direction_override"] = VectorNormalize(self.spawnOrigin - enemy.origin);
+    filters["direction_override"] = vectorNormalize(self.spawnOrigin - enemy.origin);
     filters["direction_weight"] = 8.0;
     filters["enemy_los_weight"] = 6.0;
     filters["max_dist_from_enemy"] = 800.0;
@@ -1257,7 +1257,7 @@ cover_retreat(enemy, direction) {
   }
 
   self ScrAgentSetGoalNode(cover_node);
-  self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+  self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
   self waittill("goal_reached");
 
   for(i = 0; i < EXTRA_COVER_NODE_AFTER_1ST_COVER; i++) {
@@ -1268,7 +1268,7 @@ cover_retreat(enemy, direction) {
     }
 
     self ScrAgentSetGoalNode(cover_node);
-    self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+    self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
     self waittill("goal_reached");
   }
 }
@@ -1323,7 +1323,7 @@ circling_retreat(enemy, direction) {
   first_circle_node = get_retreat_node_rated(enemy, filters, nodes);
 
   self ScrAgentSetGoalNode(first_circle_node);
-  self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+  self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
   self waittill("goal_reached");
 
   should_go_left = RandomInt(2);
@@ -1349,7 +1349,7 @@ circling_retreat(enemy, direction) {
     next_circle_node = get_retreat_node_rated(enemy, filters, nodes);
 
     self ScrAgentSetGoalNode(next_circle_node);
-    self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+    self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
     self waittill("goal_reached");
   }
 }
@@ -1367,7 +1367,7 @@ elevated_circling_retreat(enemy, direction) {
   }
 
   self ScrAgentSetGoalNode(elevated_jump_node);
-  self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+  self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
   self waittill("goal_reached");
 
   filters = [];
@@ -1409,7 +1409,7 @@ elevated_circling_retreat(enemy, direction) {
     next_circle_node = get_retreat_node_rated(enemy, filters, jump_nodes);
 
     self ScrAgentSetGoalNode(next_circle_node);
-    self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+    self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
     self waittill("goal_reached");
   }
 }
@@ -1449,7 +1449,7 @@ close_range_retreat(enemy) {
   }
 
   filters["direction"] = "override";
-  filters["direction_override"] = VectorNormalize(retreatLocation - self.origin);
+  filters["direction_override"] = vectorNormalize(retreatLocation - self.origin);
   filters["min_height"] = -32.0;
   filters["max_height"] = 32.0;
   filters["height_weight"] = 6.0;
@@ -1467,7 +1467,7 @@ close_range_retreat(enemy) {
   close_range_node = get_retreat_node_rated(enemy, filters, nodes);
 
   self ScrAgentSetGoalNode(close_range_node);
-  self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+  self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
   self waittill("goal_reached");
 }
 
@@ -1550,9 +1550,9 @@ get_retreat_node_rated(enemy, filters, nodes) {
     compare_vector = undefined;
     if(use_cover_target_vector) {
       target_vector = anglesToForward(node.angles);
-      compare_vector = VectorNormalize(enemy.origin - node_origin);
+      compare_vector = vectorNormalize(enemy.origin - node_origin);
     } else {
-      compare_vector = VectorNormalize(node_origin - self.origin);
+      compare_vector = vectorNormalize(node_origin - self.origin);
     }
 
     dot = VectorDot(target_vector, compare_vector);
@@ -1825,8 +1825,8 @@ find_wall_leap_node(enemy) {
       continue;
     }
 
-    enemy_eye_to_node = VectorNormalize(jump_node.origin - enemy_eye);
-    enemy_eye_to_node_no_z = VectorNormalize(enemy_eye_to_node * (1, 1, 0));
+    enemy_eye_to_node = vectorNormalize(jump_node.origin - enemy_eye);
+    enemy_eye_to_node_no_z = vectorNormalize(enemy_eye_to_node * (1, 1, 0));
     dot = VectorDot(enemy_eye_to_node, enemy_eye_to_node_no_z);
     if(dot < COS_MAX_VERTICAL_ANGLE) {
       continue;
@@ -1907,7 +1907,7 @@ alien_melee(enemy) {
   if(melee_okay() && self AttemptMelee()) {
     if(self get_alien_type() != "spitter" && self get_alien_type() != "seeder") {
       self ScrAgentSetGoalEntity(enemy);
-      self ScrAgentSetGoalRadius(4096.0);
+      self ScrAgentSetgoalRadius(4096.0);
     }
     self waittill("melee_complete");
   } else {
@@ -2011,7 +2011,7 @@ approach_enemy(max_distance, enemy, maxNodeTries) {
 run_to_approach_node(approach_node, max_distance, enemy) {
   self notify("approach_goal_invalid");
 
-  self ScrAgentSetGoalRadius(ALIEN_NODE_GOAL_RADIUS);
+  self ScrAgentSetgoalRadius(ALIEN_NODE_GOAL_RADIUS);
   self ScrAgentSetGoalNode(approach_node);
 
   wait_till_reached_goal_or_distance_from_enemy(approach_node, max_distance, enemy);
@@ -2023,7 +2023,7 @@ run_to_enemy(max_distance, enemy) {
   self notify("approach_goal_invalid");
 
   goal_radius = max(max_distance + ALIEN_GOAL_RADIUS_ADJUSTMENT, 32);
-  self ScrAgentSetGoalRadius(goal_radius);
+  self ScrAgentSetgoalRadius(goal_radius);
   self ScrAgentSetGoalEntity(enemy);
 
   wait_till_distance_from_enemy(max_distance, enemy);
@@ -2050,8 +2050,8 @@ monitor_approach_goal_invalid(goal_node, enemy) {
       break;
     }
 
-    enemyToSelf = VectorNormalize(self.origin - enemy.origin);
-    enemyToGoal = VectorNormalize(goal_node.origin - enemy.origin);
+    enemyToSelf = vectorNormalize(self.origin - enemy.origin);
+    enemyToGoal = vectorNormalize(goal_node.origin - enemy.origin);
 
     if(VectorDot(enemytoSelf, enemyToGoal) < 0) {
       break;
@@ -2100,7 +2100,7 @@ get_offset_location_from_enemy(enemy, minOffsetDistance, maxOffsetDistance, minO
     targetLocation = self.origin;
   }
 
-  flatEnemyToTarget = VectorNormalize((targetLocation - enemy.origin) * (1, 1, 0));
+  flatEnemyToTarget = vectorNormalize((targetLocation - enemy.origin) * (1, 1, 0));
   yawValue = RandomIntRange(minOffsetYaw, maxOffsetYaw);
   if(cointoss()) {
     yawValue *= -1;
@@ -2135,7 +2135,7 @@ get_approach_node(enemy) {
   filters = [];
   filters["direction"] = "override";
   filters["direction_weight"] = 6.0;
-  filters["direction_override"] = VectorNormalize(enemy.origin - self.origin);
+  filters["direction_override"] = vectorNormalize(enemy.origin - self.origin);
   filters["min_height"] = -32.0;
   filters["max_height"] = 32.0;
   filters["height_weight"] = 6.0;
@@ -2185,7 +2185,7 @@ wait_for_valid_leap_melee(enemy) {
 go_to_leaping_melee_position(enemy) {
   debug_alien_ai_state("go_to_leaping_melee_position");
   self ScrAgentSetGoalEntity(enemy);
-  self ScrAgentSetGoalRadius(ALIEN_LEAP_MELEE_DISTANCE_MIN + ALIEN_GOAL_RADIUS_ADJUSTMENT);
+  self ScrAgentSetgoalRadius(ALIEN_LEAP_MELEE_DISTANCE_MIN + ALIEN_GOAL_RADIUS_ADJUSTMENT);
 
   return wait_for_valid_leap_melee(enemy);
 }
@@ -2210,7 +2210,7 @@ go_to_leaping_melee_node(enemy) {
   }
 
   self ScrAgentSetGoalNode(chosen_node);
-  self ScrAgentSetGoalRadius(ALIEN_LEAP_MELEE_DISTANCE_MIN + ALIEN_GOAL_RADIUS_ADJUSTMENT);
+  self ScrAgentSetgoalRadius(ALIEN_LEAP_MELEE_DISTANCE_MIN + ALIEN_GOAL_RADIUS_ADJUSTMENT);
 
   target_dist_squared = ALIEN_LEAP_MELEE_DISTANCE_MAX * ALIEN_LEAP_MELEE_DISTANCE_MAX;
   min_jump_dist_squared = 0.0;

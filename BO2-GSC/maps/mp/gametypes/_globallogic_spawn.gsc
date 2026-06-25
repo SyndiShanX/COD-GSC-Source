@@ -537,7 +537,7 @@ spawninterroundintermission() {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
   self maps\mp\gametypes\_globallogic_defaults::default_onspawnintermission();
-  self setorigin(self.origin);
+  self setOrigin(self.origin);
   self setplayerangles(self.angles);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 }

@@ -153,8 +153,8 @@ func_7C17() {
 func_BF26(var_0, var_1, var_2) {
   if(isDefined(level.var_DBDF) && level.var_DBDF.size) {}
 
-  var_3 = getent(var_2, "targetname");
-  var_4 = vectornormalize(anglesToForward(var_3.angles)) * 40;
+  var_3 = getEnt(var_2, "targetname");
+  var_4 = vectorNormalize(anglesToForward(var_3.angles)) * 40;
   level.var_DBDF[var_0] = [];
   level.radial_button_group[var_0]["view_start"] = var_1;
   level.radial_button_group[var_0]["view_pos"] = var_3.origin + var_4;
@@ -163,7 +163,7 @@ func_BF26(var_0, var_1, var_2) {
 }
 
 func_BF25(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_2, "targetname");
+  var_4 = getEnt(var_2, "targetname");
   var_5 = disableweaponpickup(var_0, var_4);
   var_6 = spawnStruct();
   var_6.pos = var_4.origin;
@@ -348,12 +348,12 @@ func_13FC9(var_0, var_1) {
 disableweaponpickup(var_0, var_1) {
   var_2 = level.radial_button_group[var_0]["view_angles"];
   var_3 = level.radial_button_group[var_0]["view_pos"];
-  var_3 = var_3 + vectornormalize(anglesToForward(var_2)) * 40;
+  var_3 = var_3 + vectorNormalize(anglesToForward(var_2)) * 40;
   var_4 = anglesToForward(var_2);
-  var_5 = vectornormalize(anglestoup(var_2));
+  var_5 = vectorNormalize(anglestoup(var_2));
   var_6 = var_1.angles;
   var_7 = var_1.origin;
-  var_8 = vectornormalize(vectorfromlinetopoint(var_3, var_3 + var_4, var_7));
+  var_8 = vectorNormalize(vectorfromlinetopoint(var_3, var_3 + var_4, var_7));
   var_9 = acos(vectordot(var_8, var_5));
 
   if(vectordot(anglestoright(var_2), var_8) < 0) {
@@ -366,7 +366,7 @@ disableweaponpickup(var_0, var_1) {
 func_DBDA(var_0, var_1) {
   var_2 = (270 - var_0, 0, 0);
   var_3 = anglesToForward(var_2);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = var_4 * var_1;
   return var_5;
 }
@@ -433,10 +433,10 @@ func_1338C() {
 
 func_31AD(var_0) {
   level.var_1338D[var_0] = [];
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   for(level.var_1338D[var_0][level.var_1338D[var_0].size] = var_1; isDefined(var_1) && isDefined(var_1.target); var_1 = var_2) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
     level.var_1338D[var_0][level.var_1338D[var_0].size] = var_2;
   }
 }
@@ -446,8 +446,8 @@ func_83FC(var_0) {
     var_1 = level.var_1338D[var_0][0];
     level.var_5F21 = spawn("script_model", var_1.origin);
     level.var_5F21.angles = var_1.angles;
-    self setorigin(level.var_5F21.origin - (0, 0, 65));
-    self linkto(level.var_5F21);
+    self setOrigin(level.var_5F21.origin - (0, 0, 65));
+    self linkTo(level.var_5F21);
     wait 0.05;
     self setplayerangles(level.var_5F21.angles);
     thread func_7284();
@@ -472,8 +472,8 @@ func_83FC(var_0) {
       }
     }
 
-    level.var_5F21 moveto(var_6.origin, var_2, var_2 * 0.5, 0);
-    level.var_5F21 rotateto(var_6.angles, var_2, var_2 * 0.5, 0);
+    level.var_5F21 moveTo(var_6.origin, var_2, var_2 * 0.5, 0);
+    level.var_5F21 rotateTo(var_6.angles, var_2, var_2 * 0.5, 0);
     wait(var_2);
   }
 }
@@ -494,8 +494,8 @@ func_83FD(var_0, var_1) {
   if(!1) {
     for(var_5 = level.var_1338D[var_0].size - 1; var_5 >= 0; var_5--) {
       var_6 = level.var_1338D[var_0][var_5];
-      level.var_5F21 moveto(var_6.origin, var_2);
-      level.var_5F21 rotateto(var_6.angles, var_2);
+      level.var_5F21 moveTo(var_6.origin, var_2);
+      level.var_5F21 rotateTo(var_6.angles, var_2);
       wait(var_2);
     }
   }
@@ -503,8 +503,8 @@ func_83FD(var_0, var_1) {
   thread func_2BD8(3, var_2);
   var_7 = level.radial_button_group[var_1]["player_view_pos"];
   var_8 = level.radial_button_group[var_1]["view_angles"];
-  level.var_5F21 moveto(var_7, var_2, var_2 * 0.5, 0);
-  level.var_5F21 rotateto(var_8, var_2, var_2 * 0.5, 0);
+  level.var_5F21 moveTo(var_7, var_2, var_2 * 0.5, 0);
+  level.var_5F21 rotateTo(var_8, var_2, var_2 * 0.5, 0);
   wait(var_2);
 }
 

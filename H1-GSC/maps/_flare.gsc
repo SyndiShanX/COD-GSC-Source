@@ -122,7 +122,7 @@ flare_path() {
 flare_initial_fx() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_intro"], var_0, "tag_origin");
   self waittillmatch("noteworthy", "flare_intro_node");
   var_0 delete();
@@ -152,7 +152,7 @@ flare_explodes() {
 
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner"], var_0, "tag_origin");
   self waittillmatch("noteworthy", "flare_fade_node");
   var_0 delete();
@@ -161,7 +161,7 @@ flare_explodes() {
 flare_burns_out() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   playFXOnTag(level._effect["flare_runner_fizzout"], var_0, "tag_origin");
   var_0 thread maps\_utility::play_sound_on_tag_endon_death("flare_runner_fizzout");
   thread merge_sunsingledvar("sm_sunSampleSizeNear", 0, 1, 1, 0.5);
@@ -213,7 +213,7 @@ flare_from_targetname(var_0) {
   var_3 = var_2;
   var_4 = var_3 * -100;
   common_scripts\utility::flag_wait("flare_start_setting_sundir");
-  var_5 = getent(var_1.script_linkto, "script_linkname").origin;
+  var_5 = getEnt(var_1.script_linkto, "script_linkname").origin;
   var_3 = vectortoangles(var_1.origin - var_5);
   var_6 = anglesToForward(var_3);
 

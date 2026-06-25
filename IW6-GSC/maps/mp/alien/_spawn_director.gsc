@@ -351,7 +351,7 @@ get_lanes_from_names(lane_names) {
 
 populate_lane_spawners() {
   foreach(index, lane in level.lanes) {
-    laneStruct = getstruct(index, "targetname");
+    laneStruct = getStruct(index, "targetname");
 
     AssertEx(isDefined(laneStruct), "Can't find struct in level for lane: " + index);
     /

@@ -25,15 +25,15 @@ section_post_inits() {
 
 start() {
   iprintln("rooftop combat");
-  var_0 = getent("rt_combat_start_player", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("rt_combat_start_player", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
-  var_1 = getent("rt_helo_crash_ally", "targetname");
+  var_1 = getEnt("rt_helo_crash_ally", "targetname");
   level._ally forceteleport(var_1.origin, var_1.angles);
   level._ally thread maps\_utility::enable_careful();
   level._ally thread maps\_utility::set_grenadeammo(0);
   level._ally thread maps\_utility::set_force_color("r");
-  getent("rt2_color_start", "targetname") notify("trigger");
+  getEnt("rt2_color_start", "targetname") notify("trigger");
   thread maps\skyway_fx::fx_turnon_loco_exterior_lights();
   common_scripts\utility::flag_set("flag_helo_end");
   var_2 = ["train_rt0", "train_rt1", "train_rt2"];
@@ -76,7 +76,7 @@ rt_combat() {
   maps\_utility::array_spawn_targetname("rt2_opfor_rope");
   maps\_utility::flood_spawn(getEntArray("rt2_opfor", "targetname"));
   maps\skyway_util::delay_retreat("rt_opfor", maps\skyway_util::kt_time(60), -4, "flag_rt2_combat_retreat", ["rt2_color_fin", "rt2_color_end"], 1);
-  getent("rt3_color_rt2", "targetname") notify("trigger");
+  getEnt("rt3_color_rt2", "targetname") notify("trigger");
   maps\_spawner::killspawner(320);
   maps\_utility::flood_spawn(getEntArray("rt3_opfor", "targetname"));
   wait 1;
@@ -84,7 +84,7 @@ rt_combat() {
   level._ally thread flag_set_near_ent("flag_rt3_ally_at_end", level._train.cars["train_rt3"].sus_f, 420);
   maps\_utility::flagwaitthread("flag_rooftops_combat_done", common_scripts\utility::flag_set, "flag_rooftops_fight_end");
   maps\skyway_util::delay_retreat("rt_opfor", maps\skyway_util::kt_time(75), 0, "flag_rooftops_fight_end");
-  var_0 = getent("rt3_color_end", "targetname");
+  var_0 = getEnt("rt3_color_end", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
@@ -157,7 +157,7 @@ rt_run_cleanup_proc() {
     return;
   }
   level._ally unlink();
-  level._ally teleportentityrelative(level._ally, getent("rt_tele_end_run_ally", "targetname"));
+  level._ally teleportentityrelative(level._ally, getEnt("rt_tele_end_run_ally", "targetname"));
   level._ally dontinterpolate();
 
   if(!common_scripts\utility::flag("flag_loco_started")) {
@@ -205,8 +205,8 @@ setup_spawners() {
   maps\_utility::array_spawn_function_targetname("rt2_opfor_rope", ::opfor_rope, level._train.cars["train_rt2"].body, undefined, "rt_grapple_kill");
   maps\_utility::array_spawn_function_targetname("rt3_opfor", ::opfor_infil);
   maps\_utility::array_spawn_function_targetname("rt3_opfor", ::rt_spawn_node_check, ["flag_rt3_combat_fin", "flag_rt3_combat_end", "flag_rt3_combat_mid"], ["rt3_node_fin", "rt3_node_end", "rt3_node_mid"]);
-  maps\_utility::array_spawn_function_targetname("rt3_opfor_rope_l", ::opfor_rope, getent("rt3_anim_grapple", "targetname"), "tag_origin");
-  maps\_utility::array_spawn_function_targetname("rt3_opfor_rope_r", ::opfor_rope, getent("rt3_anim_grapple", "targetname"), "tag_origin");
+  maps\_utility::array_spawn_function_targetname("rt3_opfor_rope_l", ::opfor_rope, getEnt("rt3_anim_grapple", "targetname"), "tag_origin");
+  maps\_utility::array_spawn_function_targetname("rt3_opfor_rope_r", ::opfor_rope, getEnt("rt3_anim_grapple", "targetname"), "tag_origin");
 }
 
 rt_spawn_node_check(var_0, var_1) {
@@ -251,9 +251,9 @@ opfor_rope(var_0, var_1, var_2) {
   self.newenemyreactiondistsq = 0;
   wait 0.1;
   self.animname = "sw_opfor_grapple_" + maps\_utility::string(self.script_index);
-  self linkto(var_0, var_1, (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, var_1, (0, 0, 0), (0, 0, 0));
   var_4 = maps\_utility::spawn_anim_model("sw_rope_grapple_" + maps\_utility::string(self.script_index));
-  var_4 linkto(var_0, var_1, (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0, var_1, (0, 0, 0), (0, 0, 0));
   maps\_utility::set_deathanim("sw_grapple_up_death");
   thread rt_falling_death();
   var_0 thread maps\_anim::anim_single_solo(var_4, "sw_grapple_up", var_1);
@@ -287,7 +287,7 @@ opfor_infil() {
   wait 0.1;
   var_2 = var_1.script_namenumber + "_opfor";
   self.allowdeath = 1;
-  self linkto(var_1);
+  self linkTo(var_1);
   var_1 thread maps\_anim::anim_single_solo(var_1, "sw_entry_u");
   var_1 maps\_anim::anim_single_solo(self, "sw_entry_u", undefined, 0.1, var_2);
   self unlink();

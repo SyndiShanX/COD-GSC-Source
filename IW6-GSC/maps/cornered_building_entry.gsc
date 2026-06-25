@@ -127,17 +127,17 @@ cornered_building_entry_pre_load() {
   maps\_utility::add_hint_string("virus_deploy", &"CORNERED_DEPLOY_VIRUS");
   maps\_utility::add_hint_string("inverted_kill", &"CORNERED_INVERTED_KILL", ::should_break_inverted_kill_hint);
   maps\_utility::add_hint_string("knife_throw", &"CORNERED_KNIFE_THROW");
-  level.clean_window_player = getent("clean_window_player", "targetname");
-  level.clean_window_rorke = getent("clean_window_rorke", "targetname");
-  level.start_inverted_rappel_trigger = getent("start_inverted_rappel_trigger", "targetname");
+  level.clean_window_player = getEnt("clean_window_player", "targetname");
+  level.clean_window_rorke = getEnt("clean_window_rorke", "targetname");
+  level.start_inverted_rappel_trigger = getEnt("start_inverted_rappel_trigger", "targetname");
   level.start_inverted_rappel_trigger common_scripts\utility::trigger_off();
-  level.balcony_enemies_clip = getent("balcony_enemies_clip", "targetname");
+  level.balcony_enemies_clip = getEnt("balcony_enemies_clip", "targetname");
   level.balcony_enemies_clip notsolid();
   level.balcony_enemies_clip connectpaths();
-  level.inverted_kill_balcony_door_clip = getent("inverted_kill_balcony_door_clip", "targetname");
+  level.inverted_kill_balcony_door_clip = getEnt("inverted_kill_balcony_door_clip", "targetname");
   level.inverted_kill_balcony_door_clip notsolid();
   level.inverted_kill_balcony_door_clip connectpaths();
-  level.move_rorke_to_window_trigger = getent("move_rorke_to_window_trigger", "targetname");
+  level.move_rorke_to_window_trigger = getEnt("move_rorke_to_window_trigger", "targetname");
   level.move_rorke_to_window_trigger common_scripts\utility::trigger_off();
   common_scripts\utility::flag_init("building_entry_finished");
   common_scripts\utility::flag_init("shadow_kill_finished");
@@ -166,7 +166,7 @@ setup_shadow_kill() {
   thread building_entry_tv();
   thread maps\cornered::obj_upload_virus();
   thread maps\cornered_audio::aud_check("shadow_kill");
-  var_0 = getent("building_entry_tv_script_brushmodel", "targetname");
+  var_0 = getEnt("building_entry_tv_script_brushmodel", "targetname");
   thread maps\cornered_code::watch_tv_for_damage(var_0, "player_has_exited_the_building", undefined, level.hide_bink_brush);
   thread maps\cornered_code::delete_window_reflectors();
 }
@@ -178,7 +178,7 @@ setup_inverted_rappel() {
   thread maps\cornered_lighting::fireworks_stealth_rappel();
   maps\cornered_code::setup_player();
   maps\cornered_code::spawn_allies();
-  var_0 = getent("building_entry_tv_script_brushmodel", "targetname");
+  var_0 = getEnt("building_entry_tv_script_brushmodel", "targetname");
   thread maps\cornered_code::watch_tv_for_damage(var_0, "player_has_exited_the_building", undefined, level.hide_bink_brush);
   thread maps\cornered_code::delete_building_glow();
   thread maps\cornered_code::delete_window_reflectors();
@@ -253,7 +253,7 @@ building_entry() {
     level.player thread maps\cornered_code::player_flap_sleeves();
   }
 
-  var_4 = getent("building_entry_tv_script_brushmodel", "targetname");
+  var_4 = getEnt("building_entry_tv_script_brushmodel", "targetname");
   thread maps\cornered_code::watch_tv_for_damage(var_4, "player_has_exited_the_building", undefined, level.hide_bink_brush);
   thread handle_building_entry();
   thread building_entry_combat();
@@ -310,22 +310,22 @@ trigger_disable_on_jump() {
 }
 
 handle_building_entry() {
-  level.shadowkill_struct = common_scripts\utility::getstruct("shadow_kill_anim_struct", "targetname");
-  level.rappel_entry_anim_struct = common_scripts\utility::getstruct("rappel_entry_anim_struct_stealth", "targetname");
-  level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+  level.shadowkill_struct = common_scripts\utility::getStruct("shadow_kill_anim_struct", "targetname");
+  level.rappel_entry_anim_struct = common_scripts\utility::getStruct("rappel_entry_anim_struct_stealth", "targetname");
+  level.building_entry_exit_anim_struct = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
   maps\cornered_code_rappel::cornered_stop_random_wind();
   thread maps\cornered_audio::aud_stop_wind();
   common_scripts\utility::flag_wait("enter_building_ready");
   level.rappel_window_frame_obj show();
   level.rappel_window_frame_obj maps\_utility::glow();
-  var_0 = common_scripts\utility::getstruct("entry_look_at", "targetname");
-  var_1 = getent("player_enter_building_trigger", "targetname");
+  var_0 = common_scripts\utility::getStruct("entry_look_at", "targetname");
+  var_1 = getEnt("player_enter_building_trigger", "targetname");
 
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-      var_1 sethintstring(&"CORNERED_ENTER_BUILDING_CONSOLE");
+      var_1 setHintString(&"CORNERED_ENTER_BUILDING_CONSOLE");
     } else {
-      var_1 sethintstring(&"CORNERED_ENTER_BUILDING");
+      var_1 setHintString(&"CORNERED_ENTER_BUILDING");
     }
   }
 
@@ -369,15 +369,15 @@ player_enter_building() {
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = level.rappel_player_legs.origin;
   var_1.angles = level.rappel_player_legs.angles;
-  level.rappel_player_legs linkto(var_1, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.rappel_player_legs linkTo(var_1, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.cnd_rappel_player_rope unlink();
   wait 0.1;
   var_2 = 0.5;
   var_3 = 0.2;
   level.player playerlinktoblend(level.cornered_player_arms, "tag_player", var_2);
-  var_1 moveto(var_1.origin + (0, 0, -100), var_2, 0, 0);
-  level.cnd_rappel_player_rope moveto(var_0.origin, var_3, 0, 0);
-  level.cnd_rappel_player_rope rotateto(var_0.angles, var_3, 0, 0);
+  var_1 moveTo(var_1.origin + (0, 0, -100), var_2, 0, 0);
+  level.cnd_rappel_player_rope moveTo(var_0.origin, var_3, 0, 0);
+  level.cnd_rappel_player_rope rotateTo(var_0.angles, var_3, 0, 0);
   wait 0.5;
   level.rappel_player_legs delete();
   var_1 delete();
@@ -456,14 +456,14 @@ spawn_glass_cutter(var_0) {
   if(var_0.animname == "rorke") {
     level.rorke_glass_cutter = spawn("script_model", var_0 gettagorigin("tag_weapon_chest"));
     level.rorke_glass_cutter setModel("cnd_laser_cutter");
-    level.rorke_glass_cutter linkto(var_0, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+    level.rorke_glass_cutter linkTo(var_0, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
     level.window_fx_model = spawn("script_model", level.clean_window_rorke.origin);
     level.window_fx_model setModel("cnd_window_pane_fx");
     level.window_fx_model thread maps\cornered_code::entity_cleanup("player_pounce");
   } else {
     level.player_glass_cutter = spawn("script_model", var_0 gettagorigin("tag_weapon_right"));
     level.player_glass_cutter setModel("cnd_laser_cutter");
-    level.player_glass_cutter linkto(var_0, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    level.player_glass_cutter linkTo(var_0, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -567,14 +567,14 @@ building_entry_tv() {
       level.hide_bink_brush show();
     }
 
-    var_0 = getent("building_entry_tv_light", "targetname");
+    var_0 = getEnt("building_entry_tv_light", "targetname");
 
     if(isDefined(var_0)) {
       var_0 setlightintensity(0.01);
     }
   } else {
     level.hide_bink_brush show();
-    var_0 = getent("building_entry_tv_light", "targetname");
+    var_0 = getEnt("building_entry_tv_light", "targetname");
 
     if(isDefined(var_0)) {
       var_0 setlightintensity(0.01);
@@ -605,8 +605,8 @@ upload_virus_setup() {
   level.rack = maps\_utility::spawn_anim_model("rack");
   level.rack setModel("cnd_server_rack_anim");
   level.rack.animname = "rack";
-  var_0 = getent("server_rack_clip", "targetname");
-  var_0 linkto(level.rack, "j_rack", (0, 0, 0), (0, 90, 0));
+  var_0 = getEnt("server_rack_clip", "targetname");
+  var_0 linkTo(level.rack, "j_rack", (0, 0, 0), (0, 90, 0));
   level.virus_upload_anim_array = [];
   level.virus_upload_anim_array[0] = level.cornered_player_arms;
   level.virus_upload_anim_array[1] = level.device;
@@ -615,19 +615,19 @@ upload_virus_setup() {
   common_scripts\utility::flag_wait("player_can_upload_virus");
   thread virus_upload_bink_start();
   level.rack setModel("cnd_server_rack_anim_obj");
-  level.virus_upload_trigger = getent("player_upload_virus_trigger", "targetname");
+  level.virus_upload_trigger = getEnt("player_upload_virus_trigger", "targetname");
   level.virus_upload_trigger common_scripts\utility::trigger_off();
-  level.virus_upload_lookat = common_scripts\utility::getstruct("player_upload_virus_lookat", "targetname");
-  level.rack_pull_out_trigger = getent("player_pulling_out_rack_trigger_old", "targetname");
-  level.rack_pull_out_lookat = common_scripts\utility::getstruct("pulling_out_rack_lookat", "targetname");
-  var_1 = getent("player_pulling_out_rack_trigger", "targetname");
+  level.virus_upload_lookat = common_scripts\utility::getStruct("player_upload_virus_lookat", "targetname");
+  level.rack_pull_out_trigger = getEnt("player_pulling_out_rack_trigger_old", "targetname");
+  level.rack_pull_out_lookat = common_scripts\utility::getStruct("pulling_out_rack_lookat", "targetname");
+  var_1 = getEnt("player_pulling_out_rack_trigger", "targetname");
   var_1 delete();
 
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-      level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
+      level.rack_pull_out_trigger setHintString(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
     } else {
-      level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
+      level.rack_pull_out_trigger setHintString(&"CORNERED_START_UPLOAD_VIRUS");
     }
   }
 
@@ -718,9 +718,9 @@ upload_virus_enter() {
 
     if(!maps\cornered_code::is_e3()) {
       if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-        level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
+        level.rack_pull_out_trigger setHintString(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
       } else {
-        level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
+        level.rack_pull_out_trigger setHintString(&"CORNERED_START_UPLOAD_VIRUS");
       }
     }
 
@@ -733,9 +733,9 @@ upload_virus_enter() {
 
     if(!maps\cornered_code::is_e3()) {
       if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-        level.virus_upload_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
+        level.virus_upload_trigger setHintString(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
       } else {
-        level.virus_upload_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
+        level.virus_upload_trigger setHintString(&"CORNERED_START_UPLOAD_VIRUS");
       }
     }
 
@@ -987,7 +987,7 @@ upload_virus_exit() {
 
 player_in_upload_volume() {
   level endon("force_player_upload_end");
-  var_0 = getent("player_virus_upload_volume", "targetname");
+  var_0 = getEnt("player_virus_upload_volume", "targetname");
   level.player allowfire(0);
   level.allow_fire = undefined;
   level.player disableweaponpickup();
@@ -1474,7 +1474,7 @@ festival_spotlights() {
 
   foreach(var_3 in var_0) {
     var_4 = maps\_utility::spawn_anim_model("festival_spotlight", var_3.origin);
-    var_4 linkto(level.vista_pivot);
+    var_4 linkTo(level.vista_pivot);
     var_1 = common_scripts\utility::add_to_array(var_1, var_4);
   }
 
@@ -1493,7 +1493,7 @@ festival_spotlights() {
     stopFXOnTag(level._effect["vfx_festival_spot_cnd"], var_4, "J_prop_1");
     stopFXOnTag(level._effect["vfx_festival_spot_cnd"], var_4, "J_prop_2");
     var_4 notify("stop_loop");
-    var_4 stopanimscripted();
+    var_4 stopanimScripted();
   }
 
   common_scripts\utility::flag_wait("fall_down_shake");
@@ -1531,10 +1531,10 @@ festival_balloons() {
 }
 
 festival_balloons_internal(var_0, var_1) {
-  var_1 linkto(level.vista_pivot);
+  var_1 linkTo(level.vista_pivot);
 
   foreach(var_3 in var_0) {
-    var_3 linkto(var_1, "J_prop_1");
+    var_3 linkTo(var_1, "J_prop_1");
   }
 
   wait(randomfloatrange(0.3, 2.5));
@@ -1545,29 +1545,29 @@ festival_balloons_internal(var_0, var_1) {
   }
 
   var_1 notify("stop_loop");
-  var_1 stopanimscripted();
+  var_1 stopanimScripted();
   common_scripts\utility::flag_wait("fall_down_shake");
   wait(randomfloatrange(0.3, 2.5));
   var_1 thread maps\_anim::anim_loop_solo(var_1, "cornered_balloon_wiggle", "stop_loop");
 }
 
 ambient_building_lights() {
-  var_0 = getent("window_light_1a", "targetname");
-  var_1 = getent("window_light_1b", "targetname");
-  var_2 = getent("window_light_1c", "targetname");
-  var_3 = getent("window_light_1d", "targetname");
-  var_4 = getent("window_light_4a", "targetname");
-  var_5 = getent("window_light_4b", "targetname");
+  var_0 = getEnt("window_light_1a", "targetname");
+  var_1 = getEnt("window_light_1b", "targetname");
+  var_2 = getEnt("window_light_1c", "targetname");
+  var_3 = getEnt("window_light_1d", "targetname");
+  var_4 = getEnt("window_light_4a", "targetname");
+  var_5 = getEnt("window_light_4b", "targetname");
   var_0 thread ambient_building_lights_internal(5, 15);
   var_1 thread ambient_building_lights_internal(0, 10);
   var_2 thread ambient_building_lights_internal(5, 15);
   var_3 thread ambient_building_lights_internal(0, 10);
   var_4 thread ambient_building_lights_internal(5, 15);
   var_5 thread ambient_building_lights_internal(0, 10);
-  var_6 = getent("vista_elevator_a", "targetname");
-  var_7 = getent("vista_elevator_b", "targetname");
-  var_8 = getent("vista_elevator_c", "targetname");
-  var_9 = getent("vista_elevator_d", "targetname");
+  var_6 = getEnt("vista_elevator_a", "targetname");
+  var_7 = getEnt("vista_elevator_b", "targetname");
+  var_8 = getEnt("vista_elevator_c", "targetname");
+  var_9 = getEnt("vista_elevator_d", "targetname");
   var_6 thread ambient_building_elevators(19184, 29680);
   var_7 thread ambient_building_elevators(19184, 29680);
   var_8 thread ambient_building_elevators(7138, 23298);
@@ -1617,11 +1617,11 @@ ambient_building_elevators(var_0, var_1) {
       continue;
     }
     if(isDefined(self.going_up)) {
-      self moveto(self.origin + (0, 0, var_2), var_3, 0.5, 0.5);
+      self moveTo(self.origin + (0, 0, var_2), var_3, 0.5, 0.5);
       self.going_up = undefined;
       wait(var_3);
     } else {
-      self moveto(self.origin + (0, 0, var_2 * -1), var_3, 0.5, 0.5);
+      self moveTo(self.origin + (0, 0, var_2 * -1), var_3, 0.5, 0.5);
       self.going_up = 1;
       wait(var_3);
     }
@@ -1635,7 +1635,7 @@ ambient_building_elevators(var_0, var_1) {
 }
 
 building_entry_combat() {
-  var_0 = getent("player_out_rorke_building_entry_volume", "targetname");
+  var_0 = getEnt("player_out_rorke_building_entry_volume", "targetname");
   thread maps\cornered_code::watch_player_in_volume(var_0, "player_out_of_rorkes_way");
   common_scripts\utility::flag_wait("player_out_of_rorkes_way");
   level.rappel_max_lateral_dist_right = 200;
@@ -1686,7 +1686,7 @@ nag_player_to_jump() {
 
 allies_building_entry_movement() {
   if(isDefined(level.building_entry_startpoint)) {
-    level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+    level.building_entry_exit_anim_struct = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
     common_scripts\utility::waitframe();
   }
 
@@ -1709,7 +1709,7 @@ allies_building_entry_movement() {
 
 baker_building_entry_movement() {
   self notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   maps\cornered_code_rappel_allies::ally_rappel_stop_aiming();
   maps\cornered_code_rappel_allies::ally_start_calm_idle("stealth");
 }
@@ -1792,16 +1792,16 @@ handle_shadow_kill() {
     thread setup_window_cutout(level.clean_window_player, "cnd_window_pane_cutout_player");
     thread setup_window_cutout(level.clean_window_rorke, "cnd_window_pane_cutout_ally");
     common_scripts\utility::flag_set("player_can_upload_virus");
-    var_0 = getent("move_into_power_junction_room_trigger", "targetname");
+    var_0 = getEnt("move_into_power_junction_room_trigger", "targetname");
     var_0 delete();
-    var_0 = getent("move_to_power_junction_room_entrance_trigger", "targetname");
+    var_0 = getEnt("move_to_power_junction_room_entrance_trigger", "targetname");
     var_0 delete();
-    level.shadowkill_struct = common_scripts\utility::getstruct("shadow_kill_anim_struct", "targetname");
-    level.rappel_entry_anim_struct = common_scripts\utility::getstruct("rappel_entry_anim_struct_stealth", "targetname");
-    level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+    level.shadowkill_struct = common_scripts\utility::getStruct("shadow_kill_anim_struct", "targetname");
+    level.rappel_entry_anim_struct = common_scripts\utility::getStruct("rappel_entry_anim_struct_stealth", "targetname");
+    level.building_entry_exit_anim_struct = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
   }
 
-  level.force_rorke_pathing_clip = getent("force_rorke_pathing_clip", "targetname");
+  level.force_rorke_pathing_clip = getEnt("force_rorke_pathing_clip", "targetname");
   level.force_rorke_pathing_clip notsolid();
   level.force_rorke_pathing_clip connectpaths();
   thread upload_virus_setup();
@@ -1828,7 +1828,7 @@ shadow_kill_combat() {
 }
 
 door_sounds(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0, "targetname");
   thread common_scripts\utility::play_sound_in_space(var_1, var_3.origin);
   wait 0.5;
   thread common_scripts\utility::play_sound_in_space(var_2, var_3.origin);
@@ -1859,7 +1859,7 @@ power_junction_patrollers() {
     thread alert_all_on_death();
   }
 
-  self.volume = getent("power_junction_patrollers_start_hallway_volume", "targetname");
+  self.volume = getEnt("power_junction_patrollers_start_hallway_volume", "targetname");
   thread maps\cornered_code::watch_for_death_and_alert_all_in_volume("enemies_aware", "enemies_aware");
 
   if(self.script_noteworthy == "enemy_1") {
@@ -1882,7 +1882,7 @@ power_junction_patrollers() {
   if(self.script_noteworthy == "enemy_4") {
     common_scripts\utility::flag_wait("start_power_junction_patrol_wave_2");
     thread waittill_goal_and_animate();
-    var_0 = getent("power_junction_post_shadow_kill_volume", "targetname");
+    var_0 = getEnt("power_junction_post_shadow_kill_volume", "targetname");
     thread handle_volume_touching(var_0, "last_patroller_out_of_shadow_kill_volume", "last_patroller_out_of_shadow_kill_volume");
   }
 }
@@ -1910,7 +1910,7 @@ waittill_goal_and_animate() {
 
   level.shadowkill_struct thread maps\_anim::anim_single_solo(self, "cornered_shadowkill_" + self.script_noteworthy);
   self waittillmatch("single anim", "end");
-  var_0 = common_scripts\utility::getstruct("resume_patrol_" + self.script_noteworthy, "targetname");
+  var_0 = common_scripts\utility::getStruct("resume_patrol_" + self.script_noteworthy, "targetname");
   self.target = var_0.targetname;
   self notify("end_patrol");
   thread maps\_patrol::patrol(self.target);
@@ -2000,7 +2000,7 @@ stealth_is_broken(var_0) {
   }
 
   common_scripts\utility::flag_wait("enemies_aware");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   self notify("end_patrol");
   maps\_utility::set_moveplaybackrate(1.0);
   self.ignoreall = 0;
@@ -2031,7 +2031,7 @@ player_seek_cnd() {
 
 check_patrol_in_volume(var_0) {
   level endon("enemies_aware");
-  var_1 = getent("delete_power_junction_patrol_volume", "targetname");
+  var_1 = getEnt("delete_power_junction_patrol_volume", "targetname");
   var_2 = [];
 
   foreach(var_4 in var_0) {
@@ -2089,14 +2089,14 @@ wait_till_offscreen_then_delete() {
 
 watch_for_player_to_break_stealth(var_0) {
   level endon("all_in");
-  var_1 = getent("watch_for_player_shoot_volume", "targetname");
+  var_1 = getEnt("watch_for_player_shoot_volume", "targetname");
   common_scripts\utility::array_thread(var_0, ::watch_for_player_to_shoot_while_enemy_in_volume, var_1, "enemies_aware", "all_in");
-  var_1 = getent("power_junction_patrollers_start_hallway_volume", "targetname");
+  var_1 = getEnt("power_junction_patrollers_start_hallway_volume", "targetname");
   level.player thread handle_volume_touching(var_1, "enemies_aware", "patrol_out_of_start_hallway");
-  var_1 = getent("power_junction_shadow_kill_volume", "targetname");
+  var_1 = getEnt("power_junction_shadow_kill_volume", "targetname");
   common_scripts\utility::array_thread(var_0, ::handle_volume_touching, var_1, "patrol_out_of_start_hallway", "patrol_out_of_start_hallway");
   common_scripts\utility::flag_wait("patrol_out_of_start_hallway");
-  var_1 = getent("power_junction_shadow_kill_volume", "targetname");
+  var_1 = getEnt("power_junction_shadow_kill_volume", "targetname");
   level.player thread handle_volume_touching(var_1, "enemies_aware", "shadow_kill_stab");
   var_2 = [];
 
@@ -2106,15 +2106,15 @@ watch_for_player_to_break_stealth(var_0) {
     }
   }
 
-  var_1 = getent("power_junction_post_shadow_kill_volume", "targetname");
+  var_1 = getEnt("power_junction_post_shadow_kill_volume", "targetname");
   common_scripts\utility::array_thread(var_2, ::handle_volume_touching, var_1, "patrol_out_of_shadow_kill_volume", "patrol_out_of_shadow_kill_volume");
   common_scripts\utility::flag_wait("patrol_out_of_shadow_kill_volume");
-  var_1 = getent("power_junction_post_shadow_kill_volume", "targetname");
+  var_1 = getEnt("power_junction_post_shadow_kill_volume", "targetname");
   common_scripts\utility::array_thread(var_2, ::handle_volume_touching, var_1, "enemies_aware", "enemies_aware", 1);
-  var_1 = getent("power_junction_weapons_free_volume", "targetname");
+  var_1 = getEnt("power_junction_weapons_free_volume", "targetname");
   common_scripts\utility::array_thread(var_0, ::handle_volume_touching, var_1, "patrol_out_of_power_junction_hallway", "enemies_aware");
   common_scripts\utility::flag_wait("patrol_out_of_power_junction_hallway");
-  var_1 = getent("outside_power_junction_hallway_volume", "targetname");
+  var_1 = getEnt("outside_power_junction_hallway_volume", "targetname");
   level.player thread handle_volume_touching(var_1, "enemies_aware", "enemies_aware");
 }
 
@@ -2228,7 +2228,7 @@ weapon_down_vo() {
   level endon("enemies_aware");
   level endon("let_them_pass");
   common_scripts\utility::flag_wait("rorke_in_alcove");
-  var_0 = getent("player_shadow_kill_volume", "targetname");
+  var_0 = getEnt("player_shadow_kill_volume", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -2257,7 +2257,7 @@ stealth_break_rorke_vo() {
 
 allies_shadow_kill_movement() {
   if(!isDefined(level.building_entry_exit_anim_struct)) {
-    level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+    level.building_entry_exit_anim_struct = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
     common_scripts\utility::waitframe();
   }
 
@@ -2327,16 +2327,16 @@ shadow_kill_leadup() {
   wait 1;
   level.shadowkill_struct notify("stop_loop");
   waittillframeend;
-  self stopanimscripted();
+  self stopanimScripted();
   level.shadowkill_struct maps\_anim::anim_single_solo(self, "shadowkill_front_to_back");
   level.shadowkill_struct thread maps\_anim::anim_loop_solo(self, "shadowkill_back_idle", "stop_loop");
   common_scripts\utility::flag_wait("shadow_kill_start");
   level.shadowkill_struct notify("stop_loop");
-  level.allies[level.const_rorke] stopanimscripted();
+  level.allies[level.const_rorke] stopanimScripted();
   level.rorke_knife = spawn("script_model", (0, 0, 0));
   level.rorke_knife setModel("weapon_bolo_knife");
   level.rorke_knife hide();
-  level.rorke_knife linkto(level.allies[level.const_rorke], "tag_stowed_back", (0, 0, 0), (0, 0, 0));
+  level.rorke_knife linkTo(level.allies[level.const_rorke], "tag_stowed_back", (0, 0, 0), (0, 0, 0));
   thread maps\cornered_audio::aud_virus("kill");
   level.shadowkill_struct thread maps\_anim::anim_single_solo(level.allies[level.const_rorke], "shadowkill_end");
   thread rorke_shadow_kill();
@@ -2478,7 +2478,7 @@ allies_building_exit_hookup() {
     maps\_utility::enable_cqbwalk();
     level.move_rorke_to_window_trigger common_scripts\utility::trigger_on();
     level.force_rorke_pathing_clip solid();
-    level.force_rorke_pathing_clip disconnectpaths();
+    level.force_rorke_pathing_clip disconnectPaths();
     var_0 = getnode("rorke_wait_at_end_of_hall_node", "targetname");
     thread maps\cornered_code::send_to_node_and_set_flag_if_specified_when_reached(var_0, "rorke_at_hall_end");
     thread hall_clear_vo();
@@ -2497,7 +2497,7 @@ allies_building_exit_hookup() {
   }
 
   if(!isDefined(level.building_entry_exit_anim_struct)) {
-    level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+    level.building_entry_exit_anim_struct = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
   }
 
   level.building_entry_exit_anim_struct maps\_anim::anim_single_solo(self, "cnd_rappel_stealth_exit_bldg_hookup_" + self.animname);
@@ -2519,7 +2519,7 @@ rorke_react_to_stealth_break(var_0) {
   common_scripts\utility::flag_wait("enemies_aware");
   level.shadowkill_struct notify("stop_loop");
   waittillframeend;
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = 0;
   maps\_utility::set_baseaccuracy(0.2);
   maps\_utility::disable_surprise();
@@ -2541,8 +2541,8 @@ handle_rappel_inverted() {
       level.player_exit_to_inverted_rope = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
     }
 
-    level.rappel_entry_anim_struct = common_scripts\utility::getstruct("rappel_entry_anim_struct_stealth", "targetname");
-    level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+    level.rappel_entry_anim_struct = common_scripts\utility::getStruct("rappel_entry_anim_struct_stealth", "targetname");
+    level.building_entry_exit_anim_struct = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
     level.rorke_exit_to_inverted_rope = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
     level.rorke_exit_to_inverted_rope.animname = "building_entry_rope_rorke";
     level.building_entry_exit_anim_struct maps\_anim::anim_last_frame_solo(level.rorke_exit_to_inverted_rope, "building_entry_rorke");
@@ -2563,17 +2563,17 @@ handle_rappel_inverted() {
 
   level.player_exit_to_inverted_rope setModel("cnd_rappel_tele_rope_obj");
   common_scripts\utility::flag_wait("exit_building_ready");
-  var_0 = getent("player_exit_building_trigger", "targetname");
+  var_0 = getEnt("player_exit_building_trigger", "targetname");
 
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-      var_0 sethintstring(&"CORNERED_EXIT_BUILDING_CONSOLE");
+      var_0 setHintString(&"CORNERED_EXIT_BUILDING_CONSOLE");
     } else {
-      var_0 sethintstring(&"CORNERED_EXIT_BUILDING");
+      var_0 setHintString(&"CORNERED_EXIT_BUILDING");
     }
   }
 
-  var_1 = common_scripts\utility::getstruct("inverted_look_at", "targetname");
+  var_1 = common_scripts\utility::getStruct("inverted_look_at", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_0, var_1, cos(40), 0, 1);
   common_scripts\utility::flag_set("player_exiting_building");
   thread virus_deploy_bink();
@@ -2641,7 +2641,7 @@ handle_rappel_inverted() {
 
 player_handle_outside_effects() {
   level endon("junction_entrance_close");
-  var_0 = getent("inverted_kill_balcony", "targetname");
+  var_0 = getEnt("inverted_kill_balcony", "targetname");
   var_1 = 1;
 
   for(;;) {
@@ -2734,7 +2734,7 @@ player_exit_building() {
 
 constrict_player_view_at_top() {
   level endon("player_initiated_pounce");
-  var_0 = getent("inverted_rappel_restrict_player_view_volume", "targetname");
+  var_0 = getEnt("inverted_rappel_restrict_player_view_volume", "targetname");
 
   for(;;) {
     common_scripts\utility::flag_wait("constrict_player_view");
@@ -2840,7 +2840,7 @@ turn_lights_off(var_0, var_1) {
 }
 
 funnel_player() {
-  var_0 = common_scripts\utility::getstruct("inverted_rappel_z_max", "targetname");
+  var_0 = common_scripts\utility::getStruct("inverted_rappel_z_max", "targetname");
   level.z_min = level.player.origin[2];
   level.z_max = var_0.origin[2];
   var_1 = level.rappel_max_lateral_dist_right;
@@ -2881,7 +2881,7 @@ player_inverted_kill() {
   level.player_push_knife = spawn("script_model", (0, 0, 0));
   level.player_push_knife setModel("viewmodel_lg_push_knife");
   level.player_push_knife hide();
-  level.player_push_knife linkto(level.cornered_player_arms, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  level.player_push_knife linkTo(level.cornered_player_arms, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   level.rappel_entry_anim_struct thread maps\_anim::anim_first_frame(level.arms_and_legs, "pounce_player");
   common_scripts\utility::flag_wait("player_can_start_inverted_kill");
   player_initiates_inverted_kill();
@@ -2930,7 +2930,7 @@ player_inverted_kill() {
         level.player_push_knife_projectile = spawn("script_model", (0, 0, 0));
         level.player_push_knife_projectile setModel("projectile_lg_push_knife");
         level.player_push_knife_projectile hide();
-        level.player_push_knife_projectile linkto(level.cornered_player_arms, "tag_weapon_right", (5, 0, 0), (0, 0, 0));
+        level.player_push_knife_projectile linkTo(level.cornered_player_arms, "tag_weapon_right", (5, 0, 0), (0, 0, 0));
         level.rappel_entry_anim_struct thread maps\_anim::anim_first_frame_solo(level.cornered_player_arms, "knife_throw");
         level.player_push_knife_projectile show();
         level.cornered_player_arms show();
@@ -2977,7 +2977,7 @@ do_knife_throw_blood() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
   var_0.angles = vectortoangles((1, 0, 1));
-  var_0 linkto(level.player_knife_throw_enemy, "tag_weapon_chest", (0, -6, 0), (0, -90, 0));
+  var_0 linkTo(level.player_knife_throw_enemy, "tag_weapon_chest", (0, -6, 0), (0, -90, 0));
   playFXOnTag(common_scripts\utility::getfx("neck_stab_blood"), var_0, "tag_origin");
   wait 5;
   var_0 delete();
@@ -3045,7 +3045,7 @@ watch_push_knife_throw() {
   level.player_push_knife_projectile unlink();
 
   if(isDefined(level.player_knife_throw_enemy)) {
-    level.player_push_knife_projectile linkto(level.player_knife_throw_enemy, "tag_weapon_chest", (0, -6, 0), (0, -90, 0));
+    level.player_push_knife_projectile linkTo(level.player_knife_throw_enemy, "tag_weapon_chest", (0, -6, 0), (0, -90, 0));
   }
 
   common_scripts\utility::flag_wait("courtyard_intro_goto_elevator");
@@ -3055,7 +3055,7 @@ watch_push_knife_throw() {
 player_initiates_inverted_kill() {
   level endon("inverted_kill_fail_kill_player");
   level endon("inverted_kill_enemy_turned_around");
-  var_0 = getent("inverted_kill_start_volume", "targetname");
+  var_0 = getEnt("inverted_kill_start_volume", "targetname");
   common_scripts\utility::flag_set("player_not_in_inverted_kill_volume");
 
   for(;;) {
@@ -3235,7 +3235,7 @@ rappel_balcony_setup() {
   thread balcony_anims();
 
   if(self.script_noteworthy == "cornered_inv_balcony_walkin_enemy2") {
-    var_0 = getent("inverted_rappel_balcony_volume", "targetname");
+    var_0 = getEnt("inverted_rappel_balcony_volume", "targetname");
 
     for(;;) {
       if(self istouching(var_0)) {
@@ -3250,14 +3250,14 @@ rappel_balcony_setup() {
   common_scripts\utility::flag_wait("balcony_enemies_on_balcony");
   self.allowdeath = 1;
   level.balcony_enemies_clip solid();
-  level.balcony_enemies_clip disconnectpaths();
+  level.balcony_enemies_clip disconnectPaths();
   common_scripts\utility::flag_wait("enemies_aware");
 
   if(self.script_noteworthy == "cornered_inv_balcony_walkin_enemy2") {
     self.ignoreall = 0;
     level.rappel_entry_anim_struct notify("stop_loop");
     waittillframeend;
-    maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
     self.favoriteenemy = level.player;
   }
 }
@@ -3289,7 +3289,7 @@ if_player_passes_balcony_before_killing() {
   wait(randomfloatrange(0.25, 0.75));
   var_0 = level.allies[level.const_rorke] gettagorigin("j_head");
   var_1 = self gettagorigin("j_head");
-  var_2 = vectornormalize(var_1 - var_0);
+  var_2 = vectorNormalize(var_1 - var_0);
   var_3 = var_0 + var_2 * (distance(var_1, var_0) - 10);
   self.health = 1;
   magicbullet(level.allies[level.const_rorke].weapon, var_3, var_1);
@@ -3304,12 +3304,12 @@ sleeping_enemy_below_setup() {
   self.noragdoll = 1;
   self.health = 10;
   self.deathanim = % cnd_rappel_stealth_3rd_floor_sleeping_enemy_death;
-  var_0 = getent("sleeping_enemy_below_chair", "targetname");
+  var_0 = getEnt("sleeping_enemy_below_chair", "targetname");
   var_0.animname = "chair";
   var_0 maps\_anim::setanimtree();
   var_1[0] = self;
   var_1[1] = var_0;
-  self.struct = common_scripts\utility::getstruct("sleeping_enemy_below_struct", "targetname");
+  self.struct = common_scripts\utility::getStruct("sleeping_enemy_below_struct", "targetname");
   self.struct thread maps\_anim::anim_loop(var_1, "sleep_idle", "stop_loop");
   common_scripts\utility::flag_wait("player_is_past_balcony");
   common_scripts\utility::waitframe();
@@ -3375,7 +3375,7 @@ inverted_kill_enemies_setup() {
     player_inverted_kill_enemy_anims();
 
     if(isDefined(self.walkin_anim)) {
-      self stopanimscripted();
+      self stopanimScripted();
     } else {
       level.rappel_entry_anim_struct notify("stop_player_inverted_kill_enemy_idle");
       waittillframeend;
@@ -3388,7 +3388,7 @@ inverted_kill_enemies_setup() {
         if(common_scripts\utility::flag("player_pounce")) {
           if(common_scripts\utility::flag("inverted_kill_enemy_started_turning_around")) {
             if(!common_scripts\utility::flag("inverted_kill_enemy_turned_around")) {
-              self stopanimscripted();
+              self stopanimScripted();
               level.rappel_entry_anim_struct thread maps\_anim::anim_single_solo(self, "player_inverted_kill_enemy_pounce_fail2");
               wait 1;
               maps\_utility::gun_remove();
@@ -3399,7 +3399,7 @@ inverted_kill_enemies_setup() {
               self.favoriteenemy = level.player;
             }
           } else {
-            self stopanimscripted();
+            self stopanimScripted();
             level.rappel_entry_anim_struct thread maps\_anim::anim_single_solo(self, "player_inverted_kill_enemy_pounce_fail");
             wait 1;
             maps\_utility::gun_remove();
@@ -3437,7 +3437,7 @@ inverted_kill_enemies_setup() {
 
     if(common_scripts\utility::flag("player_throws_knife")) {
       thread maps\cornered_audio::aud_invert("throw");
-      self stopanimscripted();
+      self stopanimScripted();
       var_0 = getnode("knife_throw_enemy_node", "targetname");
       maps\_utility::set_goal_radius(8);
       self setgoalnode(var_0);
@@ -3467,7 +3467,7 @@ inverted_kill_enemies_setup() {
     self show();
     thread rorke_inverted_kill_enemy();
     common_scripts\utility::flag_wait("rorke_inverted_kill");
-    self stopanimscripted();
+    self stopanimScripted();
     common_scripts\utility::waitframe();
     self.deathanim = % cornered_inv_tkdn_death_guy3;
     self kill();
@@ -3476,7 +3476,7 @@ inverted_kill_enemies_setup() {
 
 move_player_up_at_death() {
   level.player waittill("death");
-  level.player setorigin(level.player.origin + (0, 0, 16));
+  level.player setOrigin(level.player.origin + (0, 0, 16));
 }
 
 allow_inverted_kill(var_0) {
@@ -3615,11 +3615,11 @@ inverted_kill_too_close_vo() {
 
 allies_inverted_rappel_movement() {
   if(!isDefined(level.rappel_anim_struct)) {
-    level.rappel_anim_struct = getent("allies_rappel_struct_stealth", "targetname");
+    level.rappel_anim_struct = getEnt("allies_rappel_struct_stealth", "targetname");
   }
 
   if(!isDefined(level.building_entry_exit_anim_struct)) {
-    level.building_entry_exit_anim_struct = common_scripts\utility::getstruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
+    level.building_entry_exit_anim_struct = common_scripts\utility::getStruct("rappel_stealth_building_entry_exit_anim_struct", "targetname");
   }
 
   if(isDefined(level.inverted_rappel_startpoint)) {
@@ -3639,7 +3639,7 @@ allies_inverted_rappel_movement() {
 }
 
 inverted_rappel_movement_rorke() {
-  var_0 = common_scripts\utility::getstruct("inverted_rappel_start_rorke", "targetname");
+  var_0 = common_scripts\utility::getStruct("inverted_rappel_start_rorke", "targetname");
   var_0 thread maps\_anim::anim_single_solo(self, "cornered_inv_run_stop");
   wait 0.25;
   common_scripts\utility::flag_set("player_ready_to_deploy_virus");
@@ -3659,7 +3659,7 @@ inverted_rappel_movement_rorke() {
   if(common_scripts\utility::flag("player_is_past_balcony")) {
     self notify("stop_loop");
     waittillframeend;
-    var_1 = common_scripts\utility::getstruct("inverted_rappel_balcony_teleport_rorke", "targetname");
+    var_1 = common_scripts\utility::getStruct("inverted_rappel_balcony_teleport_rorke", "targetname");
     var_1 maps\_anim::anim_first_frame_solo(self, "cornered_inv_run_start");
   } else if(common_scripts\utility::flag("balcony_enemies_killed")) {
     wait 1;
@@ -3672,7 +3672,7 @@ inverted_rappel_movement_rorke() {
   if(common_scripts\utility::flag("player_initiated_pounce")) {
     self notify("stop_loop");
     waittillframeend;
-    self stopanimscripted();
+    self stopanimScripted();
     level.rappel_entry_anim_struct maps\_anim::anim_first_frame_solo(self, "cornered_inv_tkdn_pounce_rorke");
   } else {
     knife_out_rorke_anims();
@@ -3680,7 +3680,7 @@ inverted_rappel_movement_rorke() {
     if(common_scripts\utility::flag("player_initiated_pounce")) {
       self notify("stop_loop");
       waittillframeend;
-      self stopanimscripted();
+      self stopanimScripted();
       level.rappel_entry_anim_struct maps\_anim::anim_first_frame_solo(self, "cornered_inv_tkdn_pounce_rorke");
     }
   }
@@ -3688,12 +3688,12 @@ inverted_rappel_movement_rorke() {
   common_scripts\utility::flag_wait("player_knife_throw_enemy_dead");
   self notify("stop_loop");
   waittillframeend;
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(!common_scripts\utility::flag("inverted_kill_knife_rorke")) {
     level.rorke_inverted_kill_knife = spawn("script_model", (0, 0, 0));
     level.rorke_inverted_kill_knife setModel("weapon_parabolic_knife");
-    level.rorke_inverted_kill_knife linkto(level.allies[level.const_rorke], "TAG_INHAND", (0, 0, 0), (0, 0, 0));
+    level.rorke_inverted_kill_knife linkTo(level.allies[level.const_rorke], "TAG_INHAND", (0, 0, 0), (0, 0, 0));
   }
 
   maps\cornered_code_rappel_allies::ally_rappel_stop_rope();
@@ -3729,7 +3729,7 @@ knife_out_rorke_anims() {
 spawn_rorke_inverted_kill_knife(var_0) {
   level.rorke_inverted_kill_knife = spawn("script_model", (0, 0, 0));
   level.rorke_inverted_kill_knife setModel("weapon_parabolic_knife");
-  level.rorke_inverted_kill_knife linkto(level.allies[level.const_rorke], "TAG_INHAND", (0, 0, 0), (0, 0, 0));
+  level.rorke_inverted_kill_knife linkTo(level.allies[level.const_rorke], "TAG_INHAND", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_set("inverted_kill_knife_rorke");
 }
 
@@ -3747,7 +3747,7 @@ inverted_rappel_movement_baker() {
   if(common_scripts\utility::flag("player_is_past_balcony")) {
     self notify("stop_loop");
     waittillframeend;
-    var_0 = common_scripts\utility::getstruct("inverted_rappel_balcony_teleport_baker", "targetname");
+    var_0 = common_scripts\utility::getStruct("inverted_rappel_balcony_teleport_baker", "targetname");
     var_0 maps\_anim::anim_first_frame_solo(self, "cornered_inv_run_start");
   } else if(common_scripts\utility::flag("balcony_enemies_killed")) {
     wait 2;
@@ -3759,7 +3759,7 @@ inverted_rappel_movement_baker() {
   var_1 = undefined;
   common_scripts\utility::flag_wait("player_knife_throw_enemy_dead");
   self notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(!isDefined(var_1)) {
     maps\cornered_code_rappel_allies::ally_rappel_stop_rope();
@@ -3799,7 +3799,7 @@ inverted_rappel_ally_movement() {
   level endon("player_knife_throw_enemy_dead");
   maps\_anim::anim_single_solo(self, "cornered_inv_run_start");
   thread maps\_anim::anim_loop_solo(self, "cornered_inv_run", "stop_loop");
-  var_0 = getent("inverted_rappel_stop_volume_1", "targetname");
+  var_0 = getEnt("inverted_rappel_stop_volume_1", "targetname");
   move_to_volume(var_0);
 
   if(!common_scripts\utility::flag("inverted_rappel_start_ally_move_1")) {
@@ -3814,10 +3814,10 @@ inverted_rappel_ally_movement() {
   }
 
   if(self.animname == "rorke") {
-    var_0 = getent("inverted_rappel_rorke_stop_volume", "targetname");
+    var_0 = getEnt("inverted_rappel_rorke_stop_volume", "targetname");
     move_to_volume(var_0);
   } else {
-    var_0 = getent("inverted_rappel_stop_volume_2", "targetname");
+    var_0 = getEnt("inverted_rappel_stop_volume_2", "targetname");
     move_to_volume(var_0);
 
     if(!common_scripts\utility::flag("inverted_rappel_start_ally_move_2")) {
@@ -3831,7 +3831,7 @@ inverted_rappel_ally_movement() {
       thread maps\_anim::anim_loop_solo(self, "cornered_inv_run", "stop_loop");
     }
 
-    var_0 = getent("inverted_rappel_stop_volume", "targetname");
+    var_0 = getEnt("inverted_rappel_stop_volume", "targetname");
     move_to_volume(var_0);
     self notify("stop_loop");
     maps\_anim::anim_single_solo(self, "cornered_inv_run_stop");
@@ -3870,12 +3870,12 @@ rorke_inverted_kill_knife_putaway(var_0) {
 
 inverted_baker_door(var_0) {
   var_1 = maps\_utility::spawn_anim_model("courtyard_entry");
-  var_2 = getent("cy_entry_door1", "targetname");
-  var_3 = getent("cy_entry_door1_handle", "targetname");
-  var_4 = getent("cy_entry_door2", "targetname");
-  var_3 linkto(var_2);
+  var_2 = getEnt("cy_entry_door1", "targetname");
+  var_3 = getEnt("cy_entry_door1_handle", "targetname");
+  var_4 = getEnt("cy_entry_door2", "targetname");
+  var_3 linkTo(var_2);
   level.rappel_entry_anim_struct maps\_anim::anim_first_frame_solo(var_1, "cornered_inv_tkdn_doors");
-  var_2 linkto(var_1, "j_prop_1");
-  var_4 linkto(var_1, "j_prop_2");
+  var_2 linkTo(var_1, "j_prop_1");
+  var_4 linkTo(var_1, "j_prop_2");
   level.rappel_entry_anim_struct maps\_anim::anim_single_solo(var_1, "cornered_inv_tkdn_doors");
 }

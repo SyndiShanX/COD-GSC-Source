@@ -733,7 +733,7 @@ function private function_3b07d86e() {
   level notify(#"hash_528115ad9eebc84f");
 
   if(!self isragdoll()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!zombie_utility::is_player_valid(player, undefined, undefined, 0)) {
         continue;
       }
@@ -1265,7 +1265,7 @@ function round_spawn() {
 }
 
 function private function_255c7194() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   queryresult = positionquery_source_navigation(player.origin, 256, 512, 128, 20);
 
   if(isDefined(queryresult) && queryresult.data.size > 0) {
@@ -1283,7 +1283,7 @@ function private function_fa69f8d2(type) {
   var_7a56405a[3] = #"catalyst_electric";
   var_7a56405a[2] = #"catalyst_plasma";
   var_7a56405a[4] = #"catalyst_water";
-  player = getplayers()[0];
+  player = getPlayers()[0];
   direction = player getplayerangles();
   direction_vec = anglesToForward(direction);
   eye = player getEye();

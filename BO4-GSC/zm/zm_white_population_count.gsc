@@ -16,8 +16,8 @@ init() {
 nuked_population_sign_think() {
   level flag::init(#"hash_35762ecd1ee8f3c1");
   level endon(#"end_game", #"shard_step_complete");
-  var_50f6b3f4 = getent("counter_tens", "targetname");
-  var_d02e9cd = getent("counter_ones", "targetname");
+  var_50f6b3f4 = getEnt("counter_tens", "targetname");
+  var_d02e9cd = getEnt("counter_ones", "targetname");
   n_step = 36;
   n_ones = 0;
   n_tens = 0;

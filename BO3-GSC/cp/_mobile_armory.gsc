@@ -40,7 +40,7 @@ class cmobilearmory {
     gameobject gameobjects::destroy_object(1);
     gameobject delete();
     if(isDefined(target)) {
-      var_5ba2ceb4 = getent(target, "targetname");
+      var_5ba2ceb4 = getEnt(target, "targetname");
       if(isDefined(var_5ba2ceb4)) {
         var_5ba2ceb4 delete();
       }
@@ -240,17 +240,17 @@ class cmobilearmory {
 
   function init_mobile_armory(mdl_mobile_armory) {
     t_use = spawn("trigger_radius_use", mdl_mobile_armory.origin + vectorscale((0, 0, 1), 24), 0, 94, 64);
-    t_use triggerignoreteam();
+    t_use triggerIgnoreTeam();
     t_use setvisibletoall();
-    t_use usetriggerrequirelookat();
+    t_use useTriggerRequireLookAt();
     t_use setteamfortrigger("none");
-    t_use setcursorhint("HINT_INTERACTIVE_PROMPT");
-    t_use sethintstring(&"COOP_SELECT_LOADOUT");
+    t_use setCursorHint("HINT_INTERACTIVE_PROMPT");
+    t_use setHintString(&"COOP_SELECT_LOADOUT");
     if(isDefined(mdl_mobile_armory.script_linkto)) {
-      moving_platform = getent(mdl_mobile_armory.script_linkto, "targetname");
-      mdl_mobile_armory linkto(moving_platform);
-      t_use enablelinkto();
-      t_use linkto(moving_platform);
+      moving_platform = getEnt(mdl_mobile_armory.script_linkto, "targetname");
+      mdl_mobile_armory linkTo(moving_platform);
+      t_use enablelinkTo();
+      t_use linkTo(moving_platform);
     }
     mdl_mobile_armory oed::enable_keyline(1);
     mdl_mobile_armory hidepart("tag_weapons_01_jnt");
@@ -273,8 +273,8 @@ class cmobilearmory {
     s_mobile_armory_object.origin = mdl_mobile_armory.origin;
     s_mobile_armory_object.angles = s_mobile_armory_object.angles;
     if(!isDefined(mdl_mobile_armory.script_linkto)) {
-      s_mobile_armory_object enablelinkto();
-      s_mobile_armory_object linkto(t_use);
+      s_mobile_armory_object enablelinkTo();
+      s_mobile_armory_object linkTo(t_use);
     }
     mdl_mobile_armory.gameobject = s_mobile_armory_object;
     var_ab455203 = mdl_mobile_armory;

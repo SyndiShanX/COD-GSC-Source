@@ -332,7 +332,7 @@ function function_23255935(str_targetname) {
       point = function_4ba8fde(s_bundle.itemspawnentry);
 
       if(isDefined(point.itementry)) {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           if(isDefined(player) && !player function_f0f36d47(var_d5fa8477)) {
             s_intel.mdl_intel = function_2ba45c94(var_d5fa8477, s_intel.origin, s_intel.angles, (64, 64, 64), undefined, undefined, player.name, 0);
 
@@ -380,7 +380,7 @@ function function_23255935(str_targetname) {
       return;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player function_f0f36d47(var_d5fa8477)) {
         s_intel.mdl_intel hidefromplayer(player);
       }
@@ -451,7 +451,7 @@ function function_2ba45c94(var_d5fa8477, v_pos, v_ang = (0, 0, 0), var_cd038aea,
         level.var_35aa6043[level.var_35aa6043.size] = mdl_intel;
       }
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player function_f0f36d47(var_d5fa8477) || isDefined(mdl_intel.var_b09e2381) && player.name != mdl_intel.var_b09e2381) {
           mdl_intel hidefromplayer(player);
 
@@ -542,7 +542,7 @@ function private function_6efd4108() {
 
     var_db08e6c3 = "<dev string:x4c>";
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(self.var_b09e2381) && player.name == self.var_b09e2381 || !isDefined(self.var_b09e2381) && !player function_f0f36d47(self.var_d5fa8477)) {
         v_offset = (player getentitynumber() + 1) * (0, 0, -5);
         print3d(self.origin + v_offset, player.name, (0, 1, 0), undefined, 0.2);
@@ -567,7 +567,7 @@ function function_c1974629(v_target_loc, n_power = 200) {
   }
 
   if(!isDefined(v_target_loc) && isDefined(self.target)) {
-    target = getent(self.target, "targetname");
+    target = getEnt(self.target, "targetname");
 
     if(!isDefined(target)) {
       target = struct::get(self.target, "targetname");
@@ -1038,7 +1038,7 @@ function function_3f3be625(var_d5fa8477, var_eac6151d) {
   }
 
   if(self issplitscreen()) {
-    foreach(other_player in getplayers()) {
+    foreach(other_player in getPlayers()) {
       if(self === other_player) {
         continue;
       }
@@ -1329,7 +1329,7 @@ function function_a3e4f9a1(var_f84ece9f) {
 }
 
 function function_1a594d26(var_d5fa8477) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!player function_f0f36d47(var_d5fa8477)) {
       return false;
     }
@@ -1354,7 +1354,7 @@ function private on_ai_killed(params) {
       var_44a24b57 += (0, 0, 16);
     }
 
-    level thread function_20c3dbfd(getplayers(), var_44a24b57);
+    level thread function_20c3dbfd(getPlayers(), var_44a24b57);
   }
 }
 
@@ -1420,7 +1420,7 @@ function function_d0e6ff7a(var_d5fa8477, var_8f788dfa, n_power) {
   s_intel = struct::get(var_d5fa8477, "scriptbundlename");
 
   if(isDefined(var_8f788dfa)) {
-    t_damage = getent(var_8f788dfa, "targetname");
+    t_damage = getEnt(var_8f788dfa, "targetname");
   }
 
   if(!isDefined(s_intel)) {
@@ -1502,7 +1502,7 @@ function function_2ced1cf7(params) {
 
       break;
     case #"hash_82bcb0445b8db9":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread collect_intel(params.value);
       }
 
@@ -1528,8 +1528,8 @@ function function_2ced1cf7(params) {
       }
 
       if(isDefined(v_pos)) {
-        getplayers()[0] dontinterpolate();
-        getplayers()[0] setorigin(v_pos);
+        getPlayers()[0] dontinterpolate();
+        getPlayers()[0] setOrigin(v_pos);
       } else {
         iprintlnbold("<dev string:x32d>" + params.value);
       }

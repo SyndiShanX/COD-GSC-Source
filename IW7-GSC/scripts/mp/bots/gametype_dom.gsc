@@ -779,7 +779,7 @@ monitor_flag_status(var_0) {
       if(self istouching(var_0) && var_0.useobj.userate <= 0) {
         if(self bothasscriptgoal()) {
           var_12 = self botgetscriptgoal();
-          var_13 = self botgetscriptgoalradius();
+          var_13 = self botgetscriptgoalRadius();
           if(distancesquared(self.origin, var_12) < squared(var_13)) {
             var_14 = self getnearestnode();
             if(isDefined(var_14)) {

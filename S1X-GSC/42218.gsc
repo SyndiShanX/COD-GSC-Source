@@ -1398,7 +1398,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
           if(isDefined(var_5)) {
             var_85 = var_5.origin;
-            var_77 = vectornormalize(var_3 - var_85);
+            var_77 = vectorNormalize(var_3 - var_85);
             var_77 = var_77 * 200;
           }
         }
@@ -1967,7 +1967,7 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
         if(level.destructible_type[self.destructibleinfo].parts[var_18][0].v["physicsOnExplosion"] > 0) {
           var_23 = level.destructible_type[self.destructibleinfo].parts[var_18][0].v["physicsOnExplosion"];
           var_24 = self gettagorigin(var_16);
-          var_25 = vectornormalize(var_24 - var_17);
+          var_25 = vectorNormalize(var_24 - var_17);
           var_25 = var_25 * (randomfloatrange(var_1, var_2) * var_23);
 
           if(isDefined(var_13) && isDefined(var_14)) {
@@ -2230,13 +2230,13 @@ play_sound(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = spawn("script_origin", self gettagorigin(var_1));
     var_2 hide();
-    var_2 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   } else {
     var_2 = spawn("script_origin", (0, 0, 0));
     var_2 hide();
     var_2.origin = self.origin;
     var_2.angles = self.angles;
-    var_2 linkto(self);
+    var_2 linkTo(self);
   }
 
   var_2 playSound(var_0);
@@ -2320,13 +2320,13 @@ do_random_dynamic_attachment(var_0, var_1, var_2, var_3) {
     var_4[0] = spawn("script_model", self gettagorigin(var_0));
     var_4[0].angles = self gettagangles(var_0);
     var_4[0] setModel(var_1);
-    var_4[0] linkto(self, var_0);
+    var_4[0] linkTo(self, var_0);
 
     if(isDefined(var_2) && var_2 != "") {
       var_4[1] = spawn("script_model", self gettagorigin(var_0));
       var_4[1].angles = self gettagangles(var_0);
       var_4[1] setModel(var_2);
-      var_4[1] linkto(self, var_0);
+      var_4[1] linkTo(self, var_0);
     }
   }
 
@@ -2619,14 +2619,14 @@ destructible_spotlight_think(var_0, var_1, var_2, var_3) {
   level notify("new_destructible_spotlight");
   level.destructible_spotlight unlink();
   var_5 = common_scripts\utility::spawn_tag_origin();
-  var_5 linkto(self, var_0["spotlight_tag"], (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(self, var_0["spotlight_tag"], (0, 0, 0), (0, 0, 0));
   level.destructible_spotlight.origin = self.breakable_light.origin;
   level.destructible_spotlight.angles = self.breakable_light.angles;
   level.destructible_spotlight thread spotlight_fizzles_out(var_0, var_1, var_2, var_3, var_5);
   wait 0.05;
 
   if(isDefined(var_5)) {
-    level.destructible_spotlight linkto(var_5);
+    level.destructible_spotlight linkTo(var_5);
   }
 }
 
@@ -3314,7 +3314,7 @@ startdot_group(var_0) {
     }
 
     if(isDefined(var_3.parent)) {
-      var_4 linkto(var_3.parent);
+      var_4 linkTo(var_3.parent);
       var_3.parent.dot = var_4;
     }
 

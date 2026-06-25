@@ -44,7 +44,7 @@ function private function_4ee6dbc3(drop_item, player) {
   level endon(#"end_game");
   team = player.team;
   level thread zm_powerups::show_on_hud(team, "cranked_pause", 10);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     if(isDefined(e_player) && isPlayer(e_player) && isDefined(drop_item.hint)) {
@@ -53,8 +53,8 @@ function private function_4ee6dbc3(drop_item, player) {
   }
 
   level flag::set("cranked_pause");
-  playsoundatposition(#"hash_6add4f54cc6f196a", (0, 0, 0));
+  playSoundAtPosition(#"hash_6add4f54cc6f196a", (0, 0, 0));
   wait 10;
   level flag::clear("cranked_pause");
-  playsoundatposition(#"hash_54a9a9f2c8be8a9d", (0, 0, 0));
+  playSoundAtPosition(#"hash_54a9a9f2c8be8a9d", (0, 0, 0));
 }

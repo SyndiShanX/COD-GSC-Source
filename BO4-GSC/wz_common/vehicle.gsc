@@ -448,7 +448,7 @@ function_53f7a11f(player) {
 }
 
 on_player_corpse() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.var_2e8665de) && player.var_2e8665de && self === player.body) {
       self hide();
       return;
@@ -1318,7 +1318,7 @@ function_2ec624a6() {
     playFXOnTag("vehicle/fx8_exhaust_truck_cargo_startup_os", self, "tag_fx_exhaust");
 
     if(isDefined(waitresult.player)) {
-      waitresult.player playrumbleonentity("jet_rumble");
+      waitresult.player playRumbleOnEntity("jet_rumble");
     }
   }
 }
@@ -1359,7 +1359,7 @@ function_1592c29e(player, eventstruct) {
   }
 
   if(validateorigin(eventstruct.vehicle.origin)) {
-    playsoundatposition(#"hash_7a0942da55ff521d", eventstruct.vehicle.origin);
+    playSoundAtPosition(#"hash_7a0942da55ff521d", eventstruct.vehicle.origin);
   }
 
   eventstruct.vehicle vehicle::toggle_control_bone_group(1, 1);
@@ -1382,7 +1382,7 @@ function_67e1a636(player, eventstruct) {
 
   if(!isDefined(occupants) || occupants.size == 0) {
     if(validateorigin(eventstruct.vehicle.origin)) {
-      playsoundatposition(#"hash_7a0942da55ff521d", eventstruct.vehicle.origin);
+      playSoundAtPosition(#"hash_7a0942da55ff521d", eventstruct.vehicle.origin);
     }
 
     eventstruct.vehicle vehicle::toggle_control_bone_group(1, 0);
@@ -1739,8 +1739,8 @@ function_e8e41bbb() {
 
             if(isDefined(fxorg)) {
               fxorg setModel(#"tag_origin");
-              fxorg enablelinkto();
-              fxorg linkto(self, self.settings.var_95861ca4, (0, 0, 0), (0, 0, 0));
+              fxorg enablelinkTo();
+              fxorg linkTo(self, self.settings.var_95861ca4, (0, 0, 0), (0, 0, 0));
               playFXOnTag(self.settings.var_b5c8e89a, fxorg, "tag_origin");
               fxorg thread deletemeonnotify(self, "death");
             }
@@ -2274,9 +2274,9 @@ function_6c8cff7e(normal, origin = self.origin, offset = 0) {
     self.rotatemover thread deletemeonnotify(self, "death");
     self.rotatemover.angles = self.angles;
     targetangles = function_c1fa62a2(self.rotatemover.angles, normal);
-    self linkto(self.rotatemover);
-    self.rotatemover rotateto(targetangles, 0.5, 0, 0.5);
-    self.rotatemover moveto(origin + (0, 0, offset), 0.5, 0, 0.5);
+    self linkTo(self.rotatemover);
+    self.rotatemover rotateTo(targetangles, 0.5, 0, 0.5);
+    self.rotatemover moveTo(origin + (0, 0, offset), 0.5, 0, 0.5);
     self.rotatemover waittill(#"rotatedone");
     self.rotatemover delete();
     self.rotatemover = undefined;
@@ -2753,7 +2753,7 @@ function_4885ce1(params) {
   }
 
   if(isDefined(params.entity) && isvehicle(params.entity) && params.entity function_dcef0ba1(0) && !params.entity isvehicleseatoccupied(0)) {
-    force = vectornormalize(params.entity.origin - self.origin) * 1.2;
+    force = vectorNormalize(params.entity.origin - self.origin) * 1.2;
     params.entity launchvehicle(force);
   }
 

@@ -222,7 +222,7 @@ shepherd_points_at_player() {
     animation = self getanim("ending");
 
     right = AnglesToRight(self.angles);
-    othervec = VectorNormalize(level.player.origin - self.origin);
+    othervec = vectorNormalize(level.player.origin - self.origin);
 
     forward = anglesToForward(self.angles);
     right = AnglesToRight(self.angles);

@@ -23,23 +23,23 @@ queue_pipes_drop() {
   wait 0.5;
   level notify("fxanim_pipes_block_start");
   level clientnotify("fog_level_increase");
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   earthquake(0.8, 1, level.player.origin, 1000, level.player);
   level notify("fxanim_pipes_break_loop_02_start");
-  playsoundatposition("evt_pipe_blast", (1433, 2117, -333));
+  playSoundAtPosition("evt_pipe_blast", (1433, 2117, -333));
   earthquake(0.1, 12, level.player.origin, 1000, level.player);
   wait 12;
   level notify("fxanim_pipes_break_burst_02_start");
   level clientnotify("fog_level_increase");
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   earthquake(0.5, 1, level.player.origin, 1000, level.player);
   level notify("fxanim_pipes_break_loop_01_start");
-  playsoundatposition("evt_pipe_blast", (1341, 2308, -324));
+  playSoundAtPosition("evt_pipe_blast", (1341, 2308, -324));
   earthquake(0.1, 10, level.player.origin, 1000, level.player);
   wait 10;
   level notify("fxanim_pipes_break_burst_01_start");
   level clientnotify("fog_level_increase");
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   earthquake(0.3, 0.75, level.player.origin, 1000, level.player);
 }
 
@@ -77,7 +77,7 @@ snd_pipe_steam_lrg_2(num, origin) {
 }
 
 door_open(door_name, delete_door) {
-  door = getent(door_name, "targetname");
+  door = getEnt(door_name, "targetname");
   door connectpaths();
 
   if(isDefined(delete_door)) {
@@ -105,8 +105,8 @@ init_doors() {
   wait_network_frame();
   m_door_left = get_model_or_models_from_scene("door_bash_left", "defend_door_left");
   m_door_left.collision = get_ent("sensitive_room_door_breach_left_clip", "targetname");
-  m_door_left.collision linkto(m_door_left, "tag_animate");
+  m_door_left.collision linkTo(m_door_left, "tag_animate");
   m_door_right = get_model_or_models_from_scene("door_bash_right", "defend_door_right");
   m_door_right.collision = get_ent("sensitive_room_door_breach_right_clip", "targetname");
-  m_door_right.collision linkto(m_door_right, "tag_animate");
+  m_door_right.collision linkTo(m_door_right, "tag_animate");
 }

@@ -45,7 +45,7 @@ main() {
 balcony_throw() {
   run_scene_first_frame("balcony_throw");
   trigger_wait("trig_balcony_throw");
-  s_haycart_dest = getstruct("struct_mm_haycart_dest", "targetname");
+  s_haycart_dest = getStruct("struct_mm_haycart_dest", "targetname");
   level.player waittill_player_looking_at(s_haycart_dest.origin, 45, 0);
   level thread run_scene("balcony_throw");
   flag_wait("balcony_throw_started");
@@ -90,16 +90,16 @@ event_cleanup() {
 }
 
 nicaragua_to_mission_objectives() {
-  e_trigger = getent("objective_to_mission_part1_trigger", "targetname");
+  e_trigger = getEnt("objective_to_mission_part1_trigger", "targetname");
   str_struct_name = e_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_menendez_save_josefina, s_struct, "");
   e_trigger waittill("trigger");
   set_objective(level.obj_menendez_save_josefina, undefined, "remove");
   wait 0.5;
-  e_trigger = getent("objective_to_mission_part2_trigger", "targetname");
+  e_trigger = getEnt("objective_to_mission_part2_trigger", "targetname");
   str_struct_name = e_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_menendez_save_josefina, s_struct, "");
 }
 

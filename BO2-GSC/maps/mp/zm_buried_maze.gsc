@@ -129,8 +129,8 @@ randomize_maze_perms() {
 
 init() {
   level._maze = spawnStruct();
-  level._maze.players_in_maze_volume = getent("maze_player_volume", "targetname");
-  level._maze.players_can_see_maze_volume = getent("maze_player_can_see_volume", "targetname");
+  level._maze.players_in_maze_volume = getEnt("maze_player_volume", "targetname");
+  level._maze.players_can_see_maze_volume = getEnt("maze_player_can_see_volume", "targetname");
   init_maze_clientfields();
   init_maze_permutations();
   init_maze_blocker_pool();
@@ -148,7 +148,7 @@ maze_blocker_sinks_thread(blocker) {
   }
 
   blocker maps\mp\zombies\_zm_equip_headchopper::destroyheadchopperstouching();
-  blocker moveto(self.origin - vectorscale((0, 0, 1), 96.0), 1.0);
+  blocker moveTo(self.origin - vectorscale((0, 0, 1), 96.0), 1.0);
   blocker waittill("movedone");
 
   if(flag("start_zombie_round_logic")) {
@@ -188,7 +188,7 @@ maze_blocker_rises_thread() {
   }
 
   blocker maps\mp\zombies\_zm_equip_headchopper::destroyheadchopperstouching();
-  blocker moveto(self.origin, 0.65);
+  blocker moveTo(self.origin, 0.65);
   blocker thread delay_destroy_corpses_near_blocker();
   blocker waittill("movedone");
 
@@ -257,7 +257,7 @@ maze_debug_print(str) {
 }
 
 maze_can_change() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player.sessionstate != "spectator" && player istouching(level._maze.players_in_maze_volume)) {
@@ -363,7 +363,7 @@ maze_do_zombie_rise(spot) {
 
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
@@ -373,13 +373,13 @@ maze_do_zombie_rise(spot) {
   anim_ang = spot.angles;
   anim_org = anim_org + (0, 0, 0);
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill("movedone");
   target_org = get_desired_origin();
 
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
 
@@ -401,7 +401,7 @@ maze_do_zombie_rise(spot) {
   }
 
   self orientmode("face default");
-  self animscripted(spot.origin, spot.angles, "zm_rise_hedge", substate);
+  self animScripted(spot.origin, spot.angles, "zm_rise_hedge", substate);
   self notify("rise_anim_finished");
   spot notify("stop_zombie_rise_fx");
   self.in_the_ground = 0;

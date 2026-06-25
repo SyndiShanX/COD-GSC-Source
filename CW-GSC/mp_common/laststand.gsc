@@ -434,7 +434,7 @@ function function_78d8cf9b(player) {
     teams = player function_2b77bc35();
 
     foreach(team in teams) {
-      players = getplayers(team);
+      players = getPlayers(team);
       friendlies = arraycombine(friendlies, players, 0, 0);
     }
   }
@@ -476,7 +476,7 @@ function function_86c92a7e() {
 
       target dodamage(1000, target.origin);
     } else if(var_e796bc31 == "<dev string:x50>") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isDefined(player.revivetrigger)) {
           player notify(#"auto_revive");
         }
@@ -579,7 +579,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
   if(is_true(getgametypesetting("enableSpyModeLaststandTeamOverride"))) {
     friendlies = function_a1ef346b();
   } else {
-    friendlies = getplayers(self.team);
+    friendlies = getPlayers(self.team);
   }
 
   var_4cf51823 = self function_c0ec19cd();
@@ -662,7 +662,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
       count++;
       level.var_ead46974[team] = count;
 
-      foreach(player in getplayers(team)) {
+      foreach(player in getPlayers(team)) {
         player clientfield::set_player_uimodel("EnemyTeamLastLivesData.numPlayersDowned", count);
       }
     }
@@ -1027,7 +1027,7 @@ function bleed_out() {
 
 function respawn_player_after_time(n_time_seconds) {
   self endon(#"death", #"disconnect");
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1) {
     return;
@@ -1052,12 +1052,12 @@ function function_2907ce7a() {
 function revive_trigger_spawn() {
   radius = getdvarint(#"revive_trigger_radius", 100);
   self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-  self.revivetrigger sethintstring("");
-  self.revivetrigger setcursorhint("HINT_NOICON");
+  self.revivetrigger setHintString("");
+  self.revivetrigger setCursorHint("HINT_NOICON");
   self.revivetrigger setmovingplatformenabled(1);
-  self.revivetrigger enablelinkto();
+  self.revivetrigger enablelinkTo();
   self.revivetrigger.origin = self.origin;
-  self.revivetrigger linkto(self);
+  self.revivetrigger linkTo(self);
   self.revivetrigger.beingrevived = 0;
   self.revivetrigger.createtime = gettime();
   self.revivetrigger.radius = radius;
@@ -1066,7 +1066,7 @@ function revive_trigger_spawn() {
   if(!is_true(getgametypesetting("enableSpyModeLaststandTeamOverride"))) {
     self.revivetrigger setteamfortrigger(self.team);
   } else {
-    self.revivetrigger triggerignoreteam();
+    self.revivetrigger triggerIgnoreTeam();
   }
 
   self thread revive_trigger_think();
@@ -1083,8 +1083,8 @@ function revive_trigger_think() {
       self notify(#"stop_revive_trigger");
     }
 
-    self.revivetrigger sethintstring("");
-    players = getplayers();
+    self.revivetrigger setHintString("");
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(!is_true(getgametypesetting("enableSpyModeLaststandTeamOverride"))) {
@@ -1177,7 +1177,7 @@ function function_356caede(team) {
     return false;
   }
 
-  players = getplayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
+  players = getPlayers(team, self.revivetrigger.origin, self.revivetrigger.radius);
   height = getdvarint(#"finisher_trigger_height", 15);
 
   foreach(player in players) {
@@ -1237,7 +1237,7 @@ function function_356caede(team) {
         if(is_true(var_62728357)) {
           self function_516a3bef(0);
           self setplayerangles(kill_angles);
-          self setorigin(kill_origin);
+          self setOrigin(kill_origin);
           self dodamage(self.var_969fabf4, self.origin, finisher, undefined, "none", "MOD_MELEE_ASSASSINATE", 8192);
           self function_2907ce7a();
           return true;
@@ -1283,7 +1283,7 @@ function function_fab0e07e(finisher) {
   if(isDefined(self) && isDefined(finisher) && isalive(self) && isalive(finisher)) {
     self.laststandparams.savedorigin = self.origin;
     self.laststandparams.savedangles = self.angles;
-    self playerlinkto(finisher, "tag_sync");
+    self playerlinkTo(finisher, "tag_sync");
   }
 }
 
@@ -1292,7 +1292,7 @@ function function_516a3bef(replace) {
     self unlink();
 
     if(replace) {
-      self setorigin(self.laststandparams.savedorigin);
+      self setOrigin(self.laststandparams.savedorigin);
     }
   }
 }
@@ -1352,7 +1352,7 @@ function function_92bfddb4() {
 
 function function_c3249e8c() {
   assert(isPlayer(self));
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
 
   for(index = 0; index < players.size; index++) {
     if(players[index] == self) {
@@ -1466,7 +1466,7 @@ function revive_do_revive(playerbeingrevived) {
   revived = 0;
   playerbeingrevived clientfield::set_player_uimodel("hudItems.laststand.beingRevived", 1);
   playerbeingrevived.revivetrigger.beingrevived = 1;
-  playerbeingrevived.revivetrigger sethintstring("");
+  playerbeingrevived.revivetrigger setHintString("");
   playerbeingrevived function_6bf621ea(#"revive_timer", 2, int(revivetime * 1000), playerbeingrevived getentitynumber());
 
   if(isPlayer(playerbeingrevived)) {
@@ -1528,7 +1528,7 @@ function revive_do_revive(playerbeingrevived) {
       }
     }
 
-    playerbeingrevived.revivetrigger sethintstring(#"coop/button_to_revive_player");
+    playerbeingrevived.revivetrigger setHintString(#"coop/button_to_revive_player");
     playerbeingrevived.revivetrigger.beingrevived = 0;
 
     if(is_true(revived) && isDefined(level.var_f80fdd3f)) {
@@ -1600,7 +1600,7 @@ function function_73d6c609() {
   self clientfield::set_player_uimodel("hudItems.laststand.beingRevived", 1);
   self clientfield::set_to_player("isSelfReviving", 1);
   self.revivetrigger.beingrevived = 1;
-  self.revivetrigger sethintstring("");
+  self.revivetrigger setHintString("");
   self function_6bf621ea(#"revive_timer", 2, int(revivetime * 1000), self getentitynumber());
 
   if(isPlayer(self)) {
@@ -1654,7 +1654,7 @@ function function_73d6c609() {
   }
 
   if(isDefined(self.revivetrigger)) {
-    self.revivetrigger sethintstring(#"coop/button_to_revive_player");
+    self.revivetrigger setHintString(#"coop/button_to_revive_player");
     self.revivetrigger.beingrevived = 0;
 
     if(is_true(revived) && isDefined(level.var_f80fdd3f)) {
@@ -1879,7 +1879,7 @@ function function_1e8018b0() {
   level.var_dea23a93[self.team]--;
   var_9b6c9b51 = level.var_dea23a93[self.team];
 
-  foreach(player in getplayers(self.team)) {
+  foreach(player in getPlayers(self.team)) {
     player clientfield::set_player_uimodel("PlayerTeamLastLivesData.numPlayersDowned", var_9b6c9b51);
   }
 
@@ -1891,7 +1891,7 @@ function function_1e8018b0() {
     count--;
     level.var_ead46974[team] = count;
 
-    foreach(player in getplayers(team)) {
+    foreach(player in getPlayers(team)) {
       player clientfield::set_player_uimodel("EnemyTeamLastLivesData.numPlayersDowned", count);
     }
   }

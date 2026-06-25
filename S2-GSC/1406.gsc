@@ -226,7 +226,7 @@ lib_057E::func_8FA7(param_00, param_01) {
   var_02.var_0116 = param_00;
   var_02 makeusable();
   var_02 method_805B();
-  var_02 sethintstring(&"ZOMBIE_NEST_PICKUP_HEAD");
+  var_02 setHintString(&"ZOMBIE_NEST_PICKUP_HEAD");
   var_02 physicslaunchserver(var_02.var_0116 + var_07, var_04, var_05, var_06);
   var_02.var_558F = 0;
   var_02 notify("recycle_fireman_head");
@@ -246,7 +246,7 @@ lib_057E::func_8FA7(param_00, param_01) {
   var_02 method_84E0();
   var_02 makeunusable();
   var_02 hudoutlinedisable();
-  var_02 sethintstring(&"ZOMBIES_EMPTY_STRING");
+  var_02 setHintString(&"ZOMBIES_EMPTY_STRING");
   var_02 method_805B();
   var_02 method_8511();
 }

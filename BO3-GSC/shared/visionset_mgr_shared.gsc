@@ -53,7 +53,7 @@ function activate(type, name, player, opt_param_1, opt_param_2, opt_param_3) {
   if(isDefined(state.lerp_thread)) {
     state thread lerp_thread_wrapper(state.lerp_thread, opt_param_1, opt_param_2, opt_param_3);
   } else {
-    players = getplayers();
+    players = getPlayers();
     for(player_index = 0; player_index < players.size; player_index++) {
       state set_state_active(players[player_index], 1);
     }
@@ -72,7 +72,7 @@ function deactivate(type, name, player) {
       return;
     }
   }
-  players = getplayers();
+  players = getPlayers();
   for(player_index = 0; player_index < players.size; player_index++) {
     state set_state_inactive(players[player_index]);
   }
@@ -98,7 +98,7 @@ function set_state_inactive(player) {
 }
 
 function timeout_lerp_thread(timeout, opt_param_2, opt_param_3) {
-  players = getplayers();
+  players = getPlayers();
   for(player_index = 0; player_index < players.size; player_index++) {
     self set_state_active(players[player_index], 1);
   }
@@ -123,7 +123,7 @@ function duration_lerp_thread(duration, max_duration) {
     if(0 >= lerp) {
       break;
     }
-    players = getplayers();
+    players = getPlayers();
     for(player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
     }
@@ -180,7 +180,7 @@ function ramp_in_out_thread(ramp_in, full_period, ramp_out) {
     if(1 <= lerp) {
       break;
     }
-    players = getplayers();
+    players = getPlayers();
     for(player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
     }
@@ -200,7 +200,7 @@ function ramp_in_out_thread(ramp_in, full_period, ramp_out) {
     if(0 >= lerp) {
       break;
     }
-    players = getplayers();
+    players = getPlayers();
     for(player_index = 0; player_index < players.size; player_index++) {
       self set_state_active(players[player_index], lerp);
     }
@@ -404,7 +404,7 @@ function monitor() {
   while(true) {
     wait(0.05);
     waittillframeend();
-    players = getplayers();
+    players = getPlayers();
     for(type_index = 0; type_index < typekeys.size; type_index++) {
       type = typekeys[type_index];
       if(!level.vsmgr[type].in_use) {

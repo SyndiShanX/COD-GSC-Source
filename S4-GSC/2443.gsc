@@ -36,7 +36,7 @@ _id_BA4E() {
     level thread _id_7F81();
   }
 
-  var_5 = scripts\engine\utility::getstruct("s_teleport_room_1", "targetname");
+  var_5 = scripts\engine\utility::getStruct("s_teleport_room_1", "targetname");
 
   if(isDefined(var_5)) {
     level._id_2030 = 1;
@@ -121,9 +121,9 @@ _id_59CF(var_0) {
 
   if(isDefined(self._id_7976[var_1]) && self._id_7976[var_1] != " ") {
     if(isDefined(var_2)) {
-      self sethintstring(var_0, self._id_7976[var_1], var_2);
+      self setHintString(var_0, self._id_7976[var_1], var_2);
     } else {
-      self sethintstring(var_0, self._id_7976[var_1]);
+      self setHintString(var_0, self._id_7976[var_1]);
     }
   }
 
@@ -268,7 +268,7 @@ _id_59CC(var_0, var_1) {
         var_9 = var_3 + "_end";
       }
 
-      var_10 = getent("veh_fasttravel_cam", "targetname");
+      var_10 = getEnt("veh_fasttravel_cam", "targetname");
       _id_59C8(var_10, var_7, undefined, var_9, undefined, var_0, undefined, undefined);
       break;
     case "flinger":
@@ -342,7 +342,7 @@ _id_F02A(var_0, var_1) {
 
   if(!istrue(self._id_E3E5)) {
     self dontinterpolate();
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
     self setvelocity((0, 0, 0));
   }
 
@@ -411,7 +411,7 @@ _id_6445(var_0) {
   var_1 = [];
 
   for(var_2 = 0; var_2 < 4; var_2++) {
-    var_3 = scripts\engine\utility::getstruct(var_0 + var_2);
+    var_3 = scripts\engine\utility::getStruct(var_0 + var_2);
     var_1 = scripts\engine\utility::array_add(var_1, var_3);
   }
 
@@ -663,7 +663,7 @@ _id_106AA(var_0) {
   }
   self._id_50DC = spawn("script_origin", var_0.origin);
   self._id_50DC.angles = var_0.angles;
-  self playerlinkto(self._id_50DC);
+  self playerlinkTo(self._id_50DC);
 }
 
 _id_106AB(var_0, var_1, var_2) {
@@ -672,7 +672,7 @@ _id_106AB(var_0, var_1, var_2) {
   }
   waitframe();
   self dontinterpolate();
-  self setorigin(var_1.origin);
+  self setOrigin(var_1.origin);
   self setplayerangles(var_1.angles);
   childthread _id_106AA(var_1);
   waittillframeend;
@@ -692,7 +692,7 @@ _id_59CB(var_0, var_1, var_2) {
 
   for(var_5 = 0; var_5 < 4; var_5++) {
     var_6 = "s_teleport_room_" + (var_5 + 1);
-    var_4[var_5] = ::scripts\engine\utility::getstruct(var_6, "targetname");
+    var_4[var_5] = ::scripts\engine\utility::getStruct(var_6, "targetname");
   }
 
   if(!isDefined(level._id_A38D)) {
@@ -920,6 +920,6 @@ _id_4460(var_0) {
     }
   }
 
-  var_2 setorigin(var_3);
+  var_2 setOrigin(var_3);
   var_2 setplayerangles(var_4);
 }

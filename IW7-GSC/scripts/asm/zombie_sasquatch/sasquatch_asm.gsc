@@ -90,7 +90,7 @@ sasquatch_domeleedamage() {
     }
 
     var_12 = (var_10[0], var_10[1], 0);
-    var_10 = vectornormalize(var_12);
+    var_10 = vectorNormalize(var_12);
     var_13 = vectordot(var_10, var_6);
     if(var_11 < var_4) {
       if(var_13 < var_5) {
@@ -139,7 +139,7 @@ sasquatch_throwrock(var_0) {
   if(isDefined(var_0)) {
     var_3 = anglesToForward(self.angles);
     var_4 = var_0.origin - self.origin;
-    if(vectordot(var_3, vectornormalize(var_4)) > 0.707) {
+    if(vectordot(var_3, vectorNormalize(var_4)) > 0.707) {
       if(isalive(var_0)) {
         var_2 = var_0 getEye();
       } else {
@@ -197,7 +197,7 @@ sas_play_traverseexternal(var_0, var_1, var_2, var_3) {
   var_4 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   scripts\mp\agents\_scriptedagents::func_CED4(var_1, var_4, 1);
   var_5 = self func_8146();
-  self setorigin(var_5);
+  self setOrigin(var_5);
   self notify("killanimscript");
   scripts\asm\asm::asm_fireevent(var_1, "end");
 }

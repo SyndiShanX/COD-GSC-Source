@@ -71,7 +71,7 @@ spawnWolf(id) {
   agent set_agent_team(self.team, self);
 
   structName = "wolf_spawn_0" + id;
-  wolfStruct = getstruct(structName, "targetname");
+  wolfStruct = getStruct(structName, "targetname");
 
   spawnOrigin = wolfStruct.origin;
   spawnAngles = self.angles;
@@ -346,7 +346,7 @@ UpdateMoveState() {
 }
 
 pickNewLocation() {
-  self.wolfGoalPos = GetStruct(self.wolfGoalPos.target, "targetname");
+  self.wolfGoalPos = getStruct(self.wolfGoalPos.target, "targetname");
 }
 
 get_closest(origin, points, maxDist) {

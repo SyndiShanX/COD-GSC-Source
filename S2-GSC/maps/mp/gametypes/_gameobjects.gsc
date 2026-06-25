@@ -677,7 +677,7 @@ func_866E(param_00) {
 
     if(var_02["fraction"] < 1 && distance(var_02["position"], var_01) < 10) {
       var_06 = (cos(var_04), sin(var_04), 0);
-      var_06 = vectornormalize(var_06 - var_02["normal"] * vectordot(var_06, var_02["normal"]));
+      var_06 = vectorNormalize(var_06 - var_02["normal"] * vectordot(var_06, var_02["normal"]));
       var_07 = vectortoangles(var_06);
     } else {
       var_07 = (0, var_05, 0);
@@ -1527,7 +1527,7 @@ func_7799(param_00, param_01) {
 
   var_04 = param_00.var_0116 - self.var_9D65.var_0116;
   var_04 = (var_04[0], var_04[1], 0);
-  var_04 = vectornormalize(var_04);
+  var_04 = vectorNormalize(var_04);
   var_04 = var_04 * 5;
   foreach(var_06 in var_02) {
     var_07 = param_00 getEye();
@@ -2020,9 +2020,9 @@ func_A213(param_00) {
     param_00 allowmovement(0);
     param_00 method_8324();
   } else if(isPlayer(param_00)) {
-    param_00 playerlinkto(self.var_9D65);
+    param_00 playerlinkTo(self.var_9D65);
   } else {
-    param_00 linkto(self.var_9D65);
+    param_00 linkTo(self.var_9D65);
   }
 
   param_00 clientclaimtrigger(self.var_9D65);
@@ -2536,18 +2536,18 @@ func_A19A(param_00, param_01) {
 
       if(self.var_01B9 == "carryObject") {
         if(isDefined(self.var_2006) && !func_8B9A(param_00)) {
-          var_06 settargetent(self.var_2006);
+          var_06 settargetEnt(self.var_2006);
         } else if(!isDefined(self.var_2006) && isDefined(self.var_695F) && self.var_695F) {
-          var_06 settargetent(self.var_A582[0]);
+          var_06 settargetEnt(self.var_A582[0]);
         } else {
-          var_06 cleartargetent();
+          var_06 cleartargetEnt();
         }
       }
     } else {
       var_06 fadeovertime(0.05);
       var_06.var_0018 = 0;
       var_06.var_57CB = 0;
-      var_06 cleartargetent();
+      var_06 cleartargetEnt();
     }
 
     var_06 thread func_4D1C();
@@ -2750,7 +2750,7 @@ func_873F(param_00, param_01) {
 }
 
 func_8A57(param_00) {
-  self.var_9D65 sethintstring(param_00);
+  self.var_9D65 setHintString(param_00);
 }
 
 func_0C1D(param_00) {

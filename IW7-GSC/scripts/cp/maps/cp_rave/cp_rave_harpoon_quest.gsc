@@ -18,12 +18,12 @@ harpoon_quest_init() {
 }
 
 collect_bait() {
-  var_0 = scripts\engine\utility::getstruct("bait_loc", "targetname");
+  var_0 = scripts\engine\utility::getStruct("bait_loc", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
   var_1 makeusable();
-  var_1 sethintstring(&"CP_RAVE_PICK_UP_BAIT");
-  level.bait_model = getent("bait_pickup", "targetname");
+  var_1 setHintString(&"CP_RAVE_PICK_UP_BAIT");
+  level.bait_model = getEnt("bait_pickup", "targetname");
   for(;;) {
     var_1 waittill("trigger", var_2);
     var_2.has_bait = 1;
@@ -92,7 +92,7 @@ fly_off_the_handle() {
   playFXOnTag(level._effect["harpoon_symbol_1"], self, "tag_origin");
   var_0 = scripts\engine\utility::getStructArray("bait_head_end_spot", "targetname");
   var_1 = scripts\engine\utility::getclosest(self.origin, var_0, 500);
-  self moveto(var_1.origin, 2);
+  self moveTo(var_1.origin, 2);
   self waittill("movedone");
   self makeusable();
   self ghost_killed_update_func((100000, 100000, 0), 10000);
@@ -134,9 +134,9 @@ face_enemy(var_0) {
   for(;;) {
     if(!self.head isenemyinfrontofme(var_0, 0.9, (0, 90, 0))) {
       if(self.head isenemyrightofme(var_0, (0, 115, 0))) {
-        self rotateyaw(self.angles[2] + 10, 0.15, 0.05, 0.05);
+        self rotateYaw(self.angles[2] + 10, 0.15, 0.05, 0.05);
       } else {
-        self rotateyaw(self.angles[2] - 10, 0.15, 0.05, 0.05);
+        self rotateYaw(self.angles[2] - 10, 0.15, 0.05, 0.05);
       }
     } else {
       break;
@@ -147,14 +147,14 @@ face_enemy(var_0) {
 }
 
 isenemyinfrontofme(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_0.origin - self.origin * (1, 1, 0));
+  var_3 = vectorNormalize(var_0.origin - self.origin * (1, 1, 0));
   var_4 = anglestoright(self.angles + var_2);
   var_5 = vectordot(var_3, var_4);
   return var_5 > var_1;
 }
 
 isenemyrightofme(var_0, var_1) {
-  var_2 = vectornormalize(var_0.origin - self.origin * (1, 1, 0));
+  var_2 = vectorNormalize(var_0.origin - self.origin * (1, 1, 0));
   var_3 = anglesToForward(self.angles + var_1);
   var_4 = vectordot(var_2, var_3);
   return var_4 > 0;
@@ -203,13 +203,13 @@ head_logic() {
       self setscriptablepartstate("symbol", "on");
       self setscriptablepartstate("bait", "inactive");
       self setscriptablepartstate("audio", "leaving_wall");
-      self moveto(self.origin + (10, 0, 0), 0.1);
+      self moveTo(self.origin + (10, 0, 0), 0.1);
       wait(0.1);
-      self moveto(self.origin + (-20, 0, 0), 0.1);
+      self moveTo(self.origin + (-20, 0, 0), 0.1);
       wait(0.1);
-      self moveto(self.origin + (10, 0, 10), 0.1);
+      self moveTo(self.origin + (10, 0, 10), 0.1);
       wait(0.1);
-      self moveto(self.origin + (-10, 0, -20), 0.1);
+      self moveTo(self.origin + (-10, 0, -20), 0.1);
       wait(0.1);
       self.on_wall = 0;
       self setscriptablepartstate("head", "active");
@@ -228,27 +228,27 @@ head_logic() {
 }
 
 move_to_bait_spot() {
-  self moveto(self.bait_spot.origin, 1, 0.25, 0.25);
+  self moveTo(self.bait_spot.origin, 1, 0.25, 0.25);
   self waittill("movedone");
 }
 
 move_along_path() {
   self setscriptablepartstate("audio", "flying");
-  self moveto(self.bait_spot.origin, 0.5, 0.1, 0.1);
+  self moveTo(self.bait_spot.origin, 0.5, 0.1, 0.1);
   self waittill("movedone");
   for(var_0 = self.bait_spot; isDefined(var_0.target); var_0 = var_1) {
-    var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     self ghost_killed_update_func((0, 720, 0), 2, 0.1, 0.1);
-    self moveto(var_1.origin, 2, 0.25, 0.25);
+    self moveTo(var_1.origin, 2, 0.25, 0.25);
     self waittill("movedone");
   }
 }
 
 move_back_to_wall() {
   self setscriptablepartstate("audio", "returning_to_wall");
-  self rotateto(self.wall_angles, 0.5);
+  self rotateTo(self.wall_angles, 0.5);
   self waittill("rotatedone");
-  self moveto(self.wall_spot, 1, 0.25, 0.25);
+  self moveTo(self.wall_spot, 1, 0.25, 0.25);
   self waittill("movedone");
   if(isDefined(self.bait)) {
     self.bait delete();
@@ -359,7 +359,7 @@ break_the_chains() {
   var_2 = spawn("script_origin", var_1);
   wait(0.1);
   var_2 makeusable();
-  var_2 sethintstring(&"CP_RAVE_BREAK_LOCK");
+  var_2 setHintString(&"CP_RAVE_BREAK_LOCK");
   var_2 waittill("trigger");
   var_3 = spawn("script_model", var_0[0].origin);
   var_3 setModel("tag_origin");
@@ -373,11 +373,11 @@ break_the_chains() {
 }
 
 take_harpoon_weapon() {
-  var_0 = getent("harpoon_gun_quest", "targetname");
-  var_1 = getent("harpoon_gun_quest_activation_spot", "targetname");
+  var_0 = getEnt("harpoon_gun_quest", "targetname");
+  var_1 = getEnt("harpoon_gun_quest_activation_spot", "targetname");
   scripts\engine\utility::flag_wait("harpoon_unlocked");
   var_1 makeusable();
-  var_1 sethintstring(&"CP_RAVE_PICKUP_ITEM");
+  var_1 setHintString(&"CP_RAVE_PICKUP_ITEM");
   var_1 waittill("trigger", var_2);
   var_2 giveweapon("iw7_harpoon_zm");
   var_2 switchtoweapon("iw7_harpoon_zm");

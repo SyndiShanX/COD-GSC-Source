@@ -298,7 +298,7 @@ swimmingDrownDamage(phase) {
     rumble = "damage_heavy";
   }
   while(isDefined(rumble)) {
-    self PlayRumbleOnEntity(self GetLocalClientNumber(), rumble);
+    self playRumbleOnEntity(self GetLocalClientNumber(), rumble);
     wait pause;
   }
 }
@@ -662,8 +662,8 @@ swimming_loops_ai() {
     }
     real_ent1 = spawn(0, (0, 0, 0), "script_origin");
     real_ent2 = spawn(0, (0, 0, 0), "script_origin");
-    real_ent1 LinkTo(self, "tag_origin");
-    real_ent2 LinkTo(self, "tag_origin");
+    real_ent1 linkTo(self, "tag_origin");
+    real_ent2 linkTo(self, "tag_origin");
     self thread swimming_loop_delete(real_ent1, real_ent2);
     self thread save_restore_ent_delete(real_ent1, real_ent2);
     while(!self.is_on_dryland && level._swimming.is_swimming_enabled && isDefined(real_ent1) && isDefined(real_ent2)) {

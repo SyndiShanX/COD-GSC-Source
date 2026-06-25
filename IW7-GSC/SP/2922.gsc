@@ -482,7 +482,7 @@ func_EC0F(var_0, var_1, var_2) {
   func_EC08("point", var_3, 1);
   var_4 = scripts\common\trace::ray_trace(self.origin + (0, 0, 1), self.origin + (0, 0, -6), self);
   if(isDefined(var_4["entity"])) {
-    self linkto(var_4["entity"]);
+    self linkTo(var_4["entity"]);
   }
 
   thread scripts\sp\anim::func_1ECC(self, var_2, "stop_loop");

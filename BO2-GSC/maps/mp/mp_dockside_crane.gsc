@@ -20,7 +20,7 @@ init() {
   level.crate_models[1] = "p6_dockside_container_lrg_blue";
   level.crate_models[2] = "p6_dockside_container_lrg_white";
   level.crate_models[3] = "p6_dockside_container_lrg_orange";
-  claw = getent("claw_base", "targetname");
+  claw = getEnt("claw_base", "targetname");
   claw.z_upper = claw.origin[2];
   claw thread sound_wires_move();
   arms_y = getEntArray("claw_arm_y", "targetname");
@@ -43,22 +43,22 @@ init() {
   crate_data = [];
 
   for(i = 0; i < crates.size; i++) {
-    crates[i] disconnectpaths();
+    crates[i] disconnectPaths();
     data = spawnStruct();
     data.origin = crates[i].origin;
     data.angles = crates[i].angles;
     crate_data[i] = data;
   }
 
-  rail = getent("crane_rail", "targetname");
+  rail = getEnt("crane_rail", "targetname");
   rail thread sound_ring_move();
-  rail.roller = getent("crane_roller", "targetname");
-  rail.roller.wheel = getent("crane_wheel", "targetname");
+  rail.roller = getEnt("crane_roller", "targetname");
+  rail.roller.wheel = getEnt("crane_wheel", "targetname");
   claw.wires = getEntArray("crane_wire", "targetname");
   claw.z_wire_max = rail.roller.wheel.origin[2] - 50;
 
   foreach(wire in claw.wires) {
-    wire linkto(claw);
+    wire linkTo(claw);
 
     if(wire.origin[2] > claw.z_wire_max) {
       wire ghost();
@@ -77,8 +77,8 @@ init() {
   foreach(crate in crates) {
     crate.kill_trigger = getclosest(crate.origin, triggers);
     crate.kill_trigger.origin = crate.origin - vectorscale((0, 0, 1), 5.0);
-    crate.kill_trigger enablelinkto();
-    crate.kill_trigger linkto(crate);
+    crate.kill_trigger enablelinkTo();
+    crate.kill_trigger linkTo(crate);
 
     if(crate.model != "") {
       crate.kill_trigger.active = 1;
@@ -89,8 +89,8 @@ init() {
   }
 
   trigger = getclosest(claw.origin, triggers);
-  trigger enablelinkto();
-  trigger linkto(claw);
+  trigger enablelinkTo();
+  trigger linkTo(claw);
   trigger.active = 1;
   placements = array_randomize(placements);
   level thread crane_think(claw, rail, crates, crate_data, placements);
@@ -190,16 +190,16 @@ crane_think(claw, rail, crates, crate_data, placements) {
 }
 
 crane_move(claw, desired, z_dist) {
-  self.roller linkto(self);
-  self.roller.wheel linkto(self.roller);
-  claw linkto(self.roller.wheel);
+  self.roller linkTo(self);
+  self.roller.wheel linkTo(self.roller);
+  claw linkTo(self.roller.wheel);
   goal = (desired.origin[0], desired.origin[1], self.origin[2]);
-  dir = vectornormalize(goal - self.origin);
+  dir = vectorNormalize(goal - self.origin);
   angles = vectortoangles(dir);
   angles = (self.angles[0], angles[1] + 90, self.angles[2]);
   yawdiff = absangleclamp360(self.angles[1] - angles[1]);
   time = yawdiff / 25;
-  self rotateto(angles, time, time * 0.35, time * 0.45);
+  self rotateTo(angles, time, time * 0.35, time * 0.45);
   self thread physics_move();
   level notify("wires_stop");
   level notify("ring_move");
@@ -214,18 +214,18 @@ crane_move(claw, desired, z_dist) {
     time = getdvarfloat(#"scr_crane_claw_drop_time_min");
   }
 
-  self.roller moveto(goal, time, time * 0.25, time * 0.25);
+  self.roller moveTo(goal, time, time * 0.25, time * 0.25);
   self.roller thread physics_move();
   goal = (desired.origin[0], desired.origin[1], self.roller.wheel.origin[2]);
   self.roller.wheel unlink();
-  self.roller.wheel moveto(goal, time, time * 0.25, time * 0.25);
-  self.roller.wheel rotateto(desired.angles + vectorscale((0, 1, 0), 90.0), time, time * 0.25, time * 0.25);
+  self.roller.wheel moveTo(goal, time, time * 0.25, time * 0.25);
+  self.roller.wheel rotateTo(desired.angles + vectorscale((0, 1, 0), 90.0), time, time * 0.25, time * 0.25);
   claw.z_initial = claw.origin[2];
   claw unlink();
-  claw rotateto(desired.angles, time, time * 0.25, time * 0.25);
+  claw rotateTo(desired.angles, time, time * 0.25, time * 0.25);
   claw.goal = (goal[0], goal[1], claw.origin[2] + z_dist);
   claw.time = time;
-  claw moveto(claw.goal, time, time * 0.25, time * 0.25);
+  claw moveTo(claw.goal, time, time * 0.25, time * 0.25);
   level notify("ring_stop");
 }
 
@@ -255,7 +255,7 @@ claw_crate_grab(crate, z_dist) {
   self arms_close(crate);
   crate movez(33, getdvarfloat(#"scr_crane_arm_z_move_time"));
   self claw_z_arms(33);
-  crate linkto(self);
+  crate linkTo(self);
   self movez(z_dist, getdvarfloat(#"scr_crane_claw_move_time"));
   self thread wire_render();
   level notify("wires_move");
@@ -398,7 +398,7 @@ arms_close(crate) {
 claw_link_arms(name) {
   foreach(arm in self.arms) {
     if(arm.targetname == name) {
-      arm linkto(arm.parent);
+      arm linkTo(arm.parent);
     }
   }
 }
@@ -421,7 +421,7 @@ claw_move_arms(dist, crate) {
 
     if(arm.targetname == "claw_arm_y") {
       arms[arms.size] = arm;
-      arm moveto(arm.goal, getdvarfloat(#"scr_crane_arm_y_move_time"));
+      arm moveTo(arm.goal, getdvarfloat(#"scr_crane_arm_y_move_time"));
     }
   }
 
@@ -430,7 +430,7 @@ claw_move_arms(dist, crate) {
 
     foreach(arm in self.arms) {
       if(arm.targetname == "claw_arm_y") {
-        arm moveto(arm.goal, 0.1);
+        arm moveTo(arm.goal, 0.1);
         self playSound("amb_crane_arms_b");
       }
     }
@@ -588,10 +588,10 @@ claw_drop_pause() {
   if(time <= 0) {
     return;
   }
-  self moveto(self.origin, 0.01);
+  self moveTo(self.origin, 0.01);
   wait 3;
   self thread claw_drop_think();
-  self moveto(self.goal, time);
+  self moveTo(self.goal, time);
 }
 
 destroy_supply_crates() {
@@ -601,7 +601,7 @@ destroy_supply_crates() {
     if(distancesquared(crate.origin, self.origin) < 40000) {
       if(crate istouching(self)) {
         playFX(level._supply_drop_explosion_fx, crate.origin);
-        playsoundatposition("wpn_grenade_explode", crate.origin);
+        playSoundAtPosition("wpn_grenade_explode", crate.origin);
         wait 0.1;
         crate maps\mp\killstreaks\_supplydrop::cratedelete();
       }

@@ -28,8 +28,8 @@ function main() {
   level thread scene::init("p7_fxanim_zm_stal_elevator_bundle");
   s_right = struct::get("bridge_trigger_right");
   s_left = struct::get("bridge_trigger_left");
-  e_gate = getent("powered_bridge_gate", "targetname");
-  e_gate disconnectpaths();
+  e_gate = getEnt("powered_bridge_gate", "targetname");
+  e_gate disconnectPaths();
   var_efdf0fee = getEntArray("bridge_light_on", "targetname");
   array::run_all(var_efdf0fee, &hide);
   s_right function_e457f1d();
@@ -52,14 +52,14 @@ function function_e457f1d() {
 
 function function_87d1b410(e_player) {
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     return false;
   }
   if(level flag::get("bridge_in_use")) {
-    self sethintstring(&"ZM_STALINGRAD_BRIDGE_UNAVAILABLE");
+    self setHintString(&"ZM_STALINGRAD_BRIDGE_UNAVAILABLE");
     return false;
   }
-  self sethintstring(&"ZM_STALINGRAD_BRIDGE_USE", 500);
+  self setHintString(&"ZM_STALINGRAD_BRIDGE_USE", 500);
   return true;
 }
 
@@ -89,7 +89,7 @@ function activate_bridge(e_player) {
   level flag::set("bridge_in_use");
   level flag::set("activate_bridge");
   level.zones["powered_bridge_zone"].is_enabled = 1;
-  e_gate = getent("powered_bridge_gate", "targetname");
+  e_gate = getEnt("powered_bridge_gate", "targetname");
   s_rumble = struct::get("bridge_rumble");
   var_cefeeda4 = getnodearray("powered_bridge_door", "targetname");
   level thread scene::play("p7_fxanim_zm_stal_elevator_bundle");
@@ -109,7 +109,7 @@ function activate_bridge(e_player) {
   level flag::wait_till_clear("bridge_jitter_stop");
   e_gate movez(100, 0.05);
   e_gate waittill("movedone");
-  e_gate disconnectpaths();
+  e_gate disconnectPaths();
   foreach(var_8bd15b35 in var_cefeeda4) {
     unlinktraversal(var_8bd15b35);
   }
@@ -124,7 +124,7 @@ function activate_bridge(e_player) {
 }
 
 function function_462efa3d() {
-  var_435fc5db = getent("bridge_area", "targetname");
+  var_435fc5db = getEnt("bridge_area", "targetname");
   a_zombies = getaiteamarray(level.zombie_team);
   foreach(ai in a_zombies) {
     if(ai istouching(var_435fc5db)) {
@@ -134,8 +134,8 @@ function function_462efa3d() {
 }
 
 function function_ef72d561() {
-  e_bridge = getent("bridge_left", "targetname");
-  var_c83a1961 = getent("bridge_right", "targetname");
+  e_bridge = getEnt("bridge_left", "targetname");
+  var_c83a1961 = getEnt("bridge_right", "targetname");
   e_bridge rotatepitch(90, 0.75);
   var_c83a1961 rotatepitch(-90, 0.75);
   e_bridge waittill("rotatedone");
@@ -147,8 +147,8 @@ function function_40ac3c12(e_player) {
   var_da999e54 = getEntArray("bridge_light_off", "targetname");
   array::run_all(var_da999e54, &hide);
   level thread exploder::exploder("bridge_lights_exploder");
-  var_fa30b172 = getent("bridge_left", "targetname");
-  var_c83a1961 = getent("bridge_right", "targetname");
+  var_fa30b172 = getEnt("bridge_left", "targetname");
+  var_c83a1961 = getEnt("bridge_right", "targetname");
   while(!level flag::get("bridge_jitter_stop")) {
     var_fa30b172 movez(2 * -1, 0.05);
     var_c83a1961 movez(2 * -1, 0.05);
@@ -157,8 +157,8 @@ function function_40ac3c12(e_player) {
     var_c83a1961 movez(2, 0.05);
     var_fa30b172 waittill("movedone");
   }
-  var_edc0081d = getent("bridge_left_volume", "targetname");
-  var_55155900 = getent("bridge_right_volume", "targetname");
+  var_edc0081d = getEnt("bridge_left_volume", "targetname");
+  var_55155900 = getEnt("bridge_right_volume", "targetname");
   function_e0c7ad1e(var_edc0081d, var_55155900);
   function_54227761(var_edc0081d, var_55155900, e_player);
   var_fa30b172 rotatepitch(-90, 0.25);
@@ -192,7 +192,7 @@ function function_fce6cca8(str_side) {
   v_right = var_7bb55377.origin;
   var_848f1155 = spawn("script_model", self.origin);
   var_848f1155 setModel("tag_origin");
-  self playerlinkto(var_848f1155, "tag_origin");
+  self playerlinkTo(var_848f1155, "tag_origin");
   self notsolid();
   var_848f1155 notsolid();
   self.var_fa6d2a24 = 1;

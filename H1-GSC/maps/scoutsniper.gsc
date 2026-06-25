@@ -203,7 +203,7 @@ intro_main() {
   level.price endon("death");
   common_scripts\utility::flag_wait("initial_setup_done");
   level.player disableweapons();
-  var_0 = getent("price_start_node", "targetname");
+  var_0 = getEnt("price_start_node", "targetname");
   var_0 thread maps\_anim::anim_first_frame_solo(level.price, "scoutsniper_opening_price");
   wait 4;
   common_scripts\utility::flag_set("intro");
@@ -273,7 +273,7 @@ intro_handle_spotted_dialogue() {
 }
 
 intro_handle_leave_area_clip() {
-  var_0 = getent("intro_leave_area_clip", "targetname");
+  var_0 = getEnt("intro_leave_area_clip", "targetname");
   var_0 thread intro_handle_leave_area_clip_spotted();
   var_0 endon("death");
   level endon("_stealth_spotted");
@@ -293,14 +293,14 @@ intro_handle_leave_area_clip_spotted() {
 }
 
 intro_handle_last_patrol_clip() {
-  var_0 = getent("intro_last_patrol_clip", "targetname");
+  var_0 = getEnt("intro_last_patrol_clip", "targetname");
   var_0 connectpaths();
   var_0 maps\_utility::geo_off();
   level endon("_stealth_spotted");
   common_scripts\utility::flag_wait("intro_patrol_guys_dead");
   var_0 thread intro_handle_last_patrol_clip_spotted();
   var_0 maps\_utility::geo_on();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 intro_handle_last_patrol_clip_spotted() {
@@ -313,7 +313,7 @@ intro_handle_leave_area_flag() {
   level endon("_stealth_spotted");
   level endon("intro_last_patrol_dead");
   level endon("intro_left_area");
-  var_0 = getent("intro_leave_area", "script_noteworthy");
+  var_0 = getEnt("intro_leave_area", "script_noteworthy");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("intro_last_patrol");
   level.intro_last_patrol waittill("goal");
@@ -333,7 +333,7 @@ intro_handle_leave_area_flag() {
 intro_handle_safezone_flag() {
   level endon("_stealth_spotted");
   level endon("church_intro");
-  var_0 = getent("intro_leave_area_safe_zone", "targetname");
+  var_0 = getEnt("intro_leave_area_safe_zone", "targetname");
 
   for(;;) {
     var_1 = 1;
@@ -365,10 +365,10 @@ intro_runup(var_0) {
   level endon("_stealth_spotted");
   self allowedstances("stand");
   var_0 thread maps\_anim::anim_single_solo(self, "scoutsniper_opening_price");
-  var_1 = getent("price_intro_path", "targetname");
+  var_1 = getEnt("price_intro_path", "targetname");
   var_2 = getanimlength(maps\_utility::getanim("scoutsniper_opening_price"));
   wait(var_2 - 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
   level maps\_utility::delaythread(2, maps\_utility::function_stack, maps\_utility::radio_dialogue, "scoutsniper_mcm_deadman");
   maps\_utility::delaythread(0.1, maps\scoutsniper_code::dynamic_run_speed);
   maps\scoutsniper_code::scoutsniper_follow_path(var_1);
@@ -544,7 +544,7 @@ intro_sneakup_tableguys() {
   self allowedstances("stand");
   level maps\_utility::delaythread(0.75, maps\_utility::function_stack, maps\_utility::radio_dialogue, "scoutsniper_mcm_move");
   var_0 = getnode("price_intro_tableguys_node1", "targetname");
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
   maps\_stealth_behavior::friendly_spotted_getup_from_prone(vectortoangles(var_1));
   maps\_utility::delaythread(0.25, maps\scoutsniper_code::dynamic_run_speed);
   var_0 maps\_anim::anim_generic_reach_and_arrive(self, "stop_cornerR");
@@ -1065,7 +1065,7 @@ church_sneakup_dialogue_help() {
   }
   level endon("_stealth_found_corpse");
   level endon("event_awareness");
-  var_0 = common_scripts\utility::getstruct("church_wrong_tower", "targetname");
+  var_0 = common_scripts\utility::getStruct("church_wrong_tower", "targetname");
 
   while(!common_scripts\utility::flag("church_lookout_dead")) {
     while(level.player playerads() < 0.85) {
@@ -1074,7 +1074,7 @@ church_sneakup_dialogue_help() {
 
     while(level.player playerads() > 0.85) {
       var_1 = anglesToForward(level.player getplayerangles());
-      var_2 = vectornormalize(var_0.origin - level.player.origin);
+      var_2 = vectorNormalize(var_0.origin - level.player.origin);
 
       if(vectordot(var_1, var_2) > 0.996) {
         break;
@@ -1132,7 +1132,7 @@ church_moveup_car() {
   }
   level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_go");
   var_0 = getnode("church_price_node_car", "targetname");
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
   maps\_utility::ent_flag_clear("_stealth_stance_handler");
   maps\_stealth_behavior::friendly_spotted_getup_from_prone(vectortoangles(var_1), 1);
   maps\scoutsniper_code::scoutsniper_follow_path(var_0);
@@ -1202,7 +1202,7 @@ church_run_for_it_commit() {
   level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_readygo");
   self notify("scoutsniper_mcm_readygo");
   var_0 = getnode("church_price_runforit", "targetname");
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
   maps\_stealth_behavior::friendly_spotted_getup_from_prone(vectortoangles(var_1), 1);
   thread maps\scoutsniper_code::scoutsniper_follow_path(var_0);
   self waittill("scoutsniper_path_end_reached");
@@ -1218,7 +1218,7 @@ church_run_for_it_dead_dialogue() {
 }
 
 church_lookout() {
-  var_0 = getent("church_lookout", "script_noteworthy");
+  var_0 = getEnt("church_lookout", "script_noteworthy");
   var_1 = [];
   var_1["saw"] = maps\scoutsniper_code::church_lookout_stealth_behavior_saw_corpse;
   var_1["found"] = maps\scoutsniper_code::church_lookout_stealth_behavior_found_corpse;
@@ -1244,7 +1244,7 @@ church_lookout() {
   var_4.goalradius = 1024;
   var_4 maps\_stealth_behavior::ai_change_behavior_function("alert", "alerted_once", maps\scoutsniper_code::church_lookout_stealth_behavior_alert_level_attack);
   var_4 notify("_stealth_stop_stealth_logic");
-  var_5 = getent("church_ladder_slide_node", "targetname");
+  var_5 = getEnt("church_ladder_slide_node", "targetname");
   var_5 maps\_anim::anim_generic(var_4, "ladder_slide");
   var_4 setgoalpos(var_4.origin);
   var_4 thread maps\_stealth_behavior::enemy_announce_huh();
@@ -1272,11 +1272,11 @@ church_lookout_wait() {
 church_lookout_death() {
   var_0 = "corpse_" + self.ai_number;
   self waittill("death");
-  var_1 = getent("doggie_clip", "targetname");
+  var_1 = getEnt("doggie_clip", "targetname");
   var_1 solid();
-  var_1 disconnectpaths();
+  var_1 disconnectPaths();
   waittillframeend;
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
 
   if(isDefined(var_2)) {
     var_2 delete();
@@ -1301,7 +1301,7 @@ church_lookout_death() {
 }
 
 church_patroller() {
-  var_0 = getent("church_smoker", "script_noteworthy");
+  var_0 = getEnt("church_smoker", "script_noteworthy");
   var_0 thread maps\_utility::add_spawn_function(maps\_stealth_logic::stealth_ai);
   var_0 thread maps\_utility::add_spawn_function(::church_patroller_death);
   var_0 thread maps\_utility::add_spawn_function(::church_patroller_faraway_trig);
@@ -1316,7 +1316,7 @@ church_patroller_faraway_trig() {
     return;
   }
   level endon("_stealth_spotted");
-  var_0 = getent("church_patrol_faraway_trig", "targetname");
+  var_0 = getEnt("church_patrol_faraway_trig", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1395,7 +1395,7 @@ church_open_door() {
     var_0 = "church_door_front_node";
     var_1 = "open_door_slow";
     var_2 = maps\scoutsniper_code::door_open_slow;
-    var_3 = getent(var_0, "targetname");
+    var_3 = getEnt(var_0, "targetname");
     var_3 maps\_anim::anim_generic_reach_and_arrive(self, var_1);
     var_3 maps\_anim::anim_first_frame_solo(self, var_1);
   }
@@ -1415,9 +1415,9 @@ church_open_door_commit(var_0, var_1, var_2) {
   common_scripts\utility::flag_set("church_door_open");
   var_0 thread maps\_anim::anim_single_solo(self, var_1);
   maps\_utility::enable_cqbwalk();
-  var_3 = getent("church_door_front", "targetname");
-  var_4 = getent("church_door_model", "targetname");
-  var_4 linkto(var_3);
+  var_3 = getEnt("church_door_front", "targetname");
+  var_4 = getEnt("church_door_model", "targetname");
+  var_4 linkTo(var_3);
   var_3[[var_2]]();
 }
 
@@ -1449,7 +1449,7 @@ church_walkthrough_lookaround() {
     return;
   }
   level endon("_stealth_spotted");
-  var_0 = getent("church_price_look_around_node", "targetname");
+  var_0 = getEnt("church_price_look_around_node", "targetname");
   maps\_utility::set_goal_pos(var_0.origin);
   self.goalradius = 72;
   self waittill("goal");
@@ -1602,7 +1602,7 @@ h1_macmillan_in_graveyard() {
   level endon("graveyard_hind_gone");
 
   for(;;) {
-    var_0 = getent("field_hind_flyover", "targetname");
+    var_0 = getEnt("field_hind_flyover", "targetname");
     var_0 waittill("trigger", var_1);
 
     if(var_1 == self) {
@@ -1643,7 +1643,7 @@ h1_macmillan_heli_sequence() {
       level.price waittill("goal");
     }
 
-    self stopanimscripted();
+    self stopanimScripted();
     self allowedstances("prone");
     self.animname = "generic";
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "pronehide_dive");
@@ -1686,7 +1686,7 @@ h1_macmillan_graveyard_spotted() {
   self.accuracy = self._stealth.behavior.badaccuracy;
   self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
   self allowedstances("prone", "crouch", "stand");
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = 0;
   self.ignoreme = 0;
   maps\_utility::disable_cqbwalk();
@@ -1771,13 +1771,13 @@ graveyard_hind_death_dialogue() {
 }
 
 graveyard_hind() {
-  var_0 = getent("field_hind_flyover", "targetname");
+  var_0 = getEnt("field_hind_flyover", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("graveyard_hear_that");
   level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_hearthat");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("field_hind");
   maps\_wibble::wibble_add_heli_to_track(var_1);
-  var_2 = getent("hind_restart_avm", "script_noteworthy");
+  var_2 = getEnt("hind_restart_avm", "script_noteworthy");
   var_1 thread maps\scoutsniper_aud::aud_start_graveyard_heli_scripted_sequence(var_2);
   level.hind = var_1;
   common_scripts\utility::flag_set("graveyard_hind_ready");
@@ -1814,7 +1814,7 @@ graveyard_hind_spot_enemy() {
     return;
   }
   level endon("_stealth_spotted");
-  var_0 = getent("graveyard_inside_church_trig", "targetname");
+  var_0 = getEnt("graveyard_inside_church_trig", "targetname");
   var_1 = 0;
   var_2 = 0.05;
 
@@ -1952,7 +1952,7 @@ field_endmission() {
 }
 
 field_handle_flags() {
-  var_0 = getent("field_price_getdown", "targetname");
+  var_0 = getEnt("field_price_getdown", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("field_getdown");
 }
@@ -1994,12 +1994,12 @@ field_moveup() {
   }
   level endon("_stealth_spotted");
   level endon("field_cutting_it_close");
-  var_0 = getent("field_price_node1", "targetname");
+  var_0 = getEnt("field_price_node1", "targetname");
   var_1 = getdvarfloat("scoutsniper_macmillan_sprintwait_field", 4);
   maps\_utility::delaythread(var_1, maps\scoutsniper_code::dynamic_run_speed);
   thread maps\scoutsniper_code::scoutsniper_follow_path(var_0);
   self pushplayer(1);
-  var_0 = getent("field_price_stop_dynamic", "targetname");
+  var_0 = getEnt("field_price_stop_dynamic", "targetname");
   var_0 waittill("trigger");
   self notify("stop_dynamic_run_speed");
   waittillframeend;
@@ -2027,7 +2027,7 @@ field_moveup2() {
   }
   level endon("_stealth_spotted");
   level endon("field_cutting_it_close");
-  var_0 = getent("field_price_decide_start", "targetname");
+  var_0 = getEnt("field_price_decide_start", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("field_start");
   self waittill("scoutsniper_path_end_reached");
@@ -2061,7 +2061,7 @@ field_creep() {
     return;
   }
   level endon("_stealth_spotted");
-  var_0 = getent("field_price_prone_node", "targetname");
+  var_0 = getEnt("field_price_prone_node", "targetname");
   thread maps\scoutsniper_code::scoutsniper_follow_path(var_0);
   maps\_utility::delaythread(12, ::field_creep_dialogue);
   self.moveplaybackrate = 1;
@@ -2096,7 +2096,7 @@ field_creep() {
   maps\_stealth_behavior::friendly_stance_handler_resume_path();
   wait 0.5;
   maps\_utility::ent_flag_set("_stealth_stance_handler");
-  var_0 = getent("field_price_clear", "targetname");
+  var_0 = getEnt("field_price_clear", "targetname");
   var_0 waittill("trigger");
   maps\_utility::ent_flag_clear("_stealth_stance_handler");
   self allowedstances("prone", "crouch", "stand");
@@ -2301,7 +2301,7 @@ field_enemy_think() {
   wait 0.05;
   self.fixednode = 0;
   common_scripts\utility::flag_wait("field_start");
-  var_0 = getent("field_turn_around_trig", "targetname");
+  var_0 = getEnt("field_turn_around_trig", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -3045,7 +3045,7 @@ cargo_patrol_death() {
 }
 
 cargo_enemies_death() {
-  var_0 = getent("cargo_guys", "target");
+  var_0 = getEnt("cargo_guys", "target");
   var_0 waittill("trigger");
   wait 0.1;
   var_1 = maps\_utility::get_living_ai_array("cargo_smokers", "script_noteworthy");
@@ -3070,7 +3070,7 @@ cargo_patrol_defend1_death() {
   self waittill("death");
   common_scripts\utility::flag_set("cargo_patrol_defend1_dead");
   waittillframeend;
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
 
   if(!isDefined(var_1)) {
     return;
@@ -3081,7 +3081,7 @@ cargo_patrol_defend1_death() {
 
 cargo_handle_defend1_flag() {
   level endon("cargo_started_defend_moment");
-  var_0 = getent("cargo_defend1_node", "targetname");
+  var_0 = getEnt("cargo_defend1_node", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("cargo_enemy_ready_to_defend1");
   var_1 = getanimlength(%patrol_bored_idle_smoke);
@@ -3110,7 +3110,7 @@ cargo_sneakup() {
   level endon("_stealth_spotted");
 
   if(!common_scripts\utility::flag("cargo_patrol_defend1_dead")) {
-    var_0 = getent("cargo_price_sneakup_node", "targetname");
+    var_0 = getEnt("cargo_price_sneakup_node", "targetname");
     self allowedstances("crouch");
     maps\scoutsniper_code::scoutsniper_follow_path(var_0);
   }
@@ -3206,7 +3206,7 @@ cargo_attack_commit_fail(var_0, var_1, var_2) {
   var_1 endon(var_2);
   var_0 thread maps\scoutsniper_code::killed_by_player();
   var_0 waittill("killed_by_player");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("stop_animmode");
   var_1 notify("stop_animmode");
   var_3 = "run_2_stop";
@@ -3307,7 +3307,7 @@ cargo_slipby() {
 }
 
 cargo_insane() {
-  var_0 = getent("cargo_insane", "targetname");
+  var_0 = getEnt("cargo_insane", "targetname");
   var_1 = getEntArray("intelligence_item", "targetname");
   var_1 = common_scripts\utility::get_array_of_closest(var_0 getorigin(), var_1);
   var_1[0] thread maps\scoutsniper_code::cargo_insane_handle_use();
@@ -3402,7 +3402,7 @@ dash_main() {
   common_scripts\utility::array_thread(getEntArray("dash_sniper", "targetname"), maps\_utility::add_spawn_function, maps\scoutsniper_code::dash_sniper_death);
   common_scripts\utility::array_thread(getEntArray("dash_sniper", "targetname"), maps\_utility::add_spawn_function, ::dash_sniper_approach);
   common_scripts\utility::array_thread(getEntArray("dash_guard_check", "script_noteworthy"), maps\scoutsniper_code::dash_run_check);
-  var_4 = getent("dash_intro_guy", "target");
+  var_4 = getEnt("dash_intro_guy", "target");
   thread maps\_utility::set_flag_on_trigger(var_4, "dash_spawn");
   thread maps\scoutsniper_code::dash_handle_price_stop_bullet_shield();
   thread maps\scoutsniper_code::dash_handle_doors_blowopen();
@@ -3554,8 +3554,8 @@ dash_holdup() {
 
   if(getdvarint("use_old_container_dash") == 1) {
     wait 1;
-    var_2 = getent("dash_door_right", "script_noteworthy");
-    var_3 = getent("dash_door_left", "script_noteworthy");
+    var_2 = getEnt("dash_door_right", "script_noteworthy");
+    var_3 = getEnt("dash_door_left", "script_noteworthy");
     common_scripts\utility::flag_set("dash_door_R_open");
     var_2 playSound("door_cargo_container_push_open");
     var_2 maps\scoutsniper_code::dash_door_slow(1);
@@ -3572,8 +3572,8 @@ dash_run() {
   maps\_utility::set_generic_run_anim("sprint_h1", 1, 0);
 
   if(getdvarint("use_old_container_dash") == 1) {
-    var_0 = getent("dash_door_right", "script_noteworthy");
-    var_1 = getent("dash_door_left", "script_noteworthy");
+    var_0 = getEnt("dash_door_right", "script_noteworthy");
+    var_1 = getEnt("dash_door_left", "script_noteworthy");
     wait 9.5;
     level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_hoooold");
     wait 4;
@@ -3595,11 +3595,11 @@ dash_crawl() {
     return;
   }
   level endon("_stealth_spotted");
-  var_0 = getent("dash_price_crawl_start", "targetname");
+  var_0 = getEnt("dash_price_crawl_start", "targetname");
 
   if(getdvarint("use_old_jeep_cover") != 1) {
     self waittill("anim_reach_complete");
-    var_0 = getent(var_0.target, "targetname");
+    var_0 = getEnt(var_0.target, "targetname");
   }
 
   self.moveplaybackrate = 1;
@@ -3626,12 +3626,12 @@ dash_crawl() {
   }
 
   maps\_stealth_behavior::ai_create_behavior_function("state", "spotted", maps\scoutsniper_code::dash_state_spotted);
-  var_1 = getent("dash_first_truck_player_clip", "targetname");
+  var_1 = getEnt("dash_first_truck_player_clip", "targetname");
   var_1 notsolid();
-  var_2 = getent("dash_crawl_patroller1", "target");
+  var_2 = getEnt("dash_crawl_patroller1", "target");
   var_2 waittill("trigger");
   soundscripts\_snd::snd_message("aud_start_dash_convoy_sequence");
-  var_2 = getent("dash_crawl_firsttruck", "targetname");
+  var_2 = getEnt("dash_crawl_firsttruck", "targetname");
   var_2 waittill("trigger");
 
   if(distance(level.player.origin, level.price.origin) < level.hearing_distance) {
@@ -3664,7 +3664,7 @@ dash_crawl() {
 
   maps\_stealth_behavior::ai_create_behavior_function("state", "spotted", maps\_stealth_behavior::friendly_state_spotted);
   wait 4;
-  var_3 = getent("dash_last_truck_player_clip", "targetname");
+  var_3 = getEnt("dash_last_truck_player_clip", "targetname");
   var_3 notsolid();
 }
 
@@ -3680,14 +3680,14 @@ dash_last() {
   var_1 = getanimlength(maps\_utility::getanim_generic("prone2stand"));
   thread maps\_anim::anim_generic(self, "prone2stand");
   wait(var_1 - 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
   self allowedstances("stand", "crouch", "prone");
   maps\_utility::delaythread(0.5, maps\scoutsniper_code::scoutsniper_follow_path, var_0, 100);
   thread maps\scoutsniper_code::price_custom_detection(300, "price_run_to_dash_last_stretch2");
   var_1 = getanimlength(maps\_utility::getanim_generic("stand2run"));
   thread maps\_anim::anim_generic(self, "stand2run");
   wait(var_1 - 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(common_scripts\utility::flag("town_no_turning_back")) {
     if(!common_scripts\utility::flag("dash_work_as_team")) {
@@ -3952,7 +3952,7 @@ dogs_food() {
 
 dogs_eater() {
   self endon("death");
-  var_0 = getent("dogs_eat_node", "targetname");
+  var_0 = getEnt("dogs_eat_node", "targetname");
   self.ref_node = var_0;
   self.ref_angles = var_0.angles;
   self.mode = "none";
@@ -3960,7 +3960,7 @@ dogs_eater() {
   self.maxhealth = 1;
   var_1 = self.goalradius;
   self.goalradius = 4;
-  self linkto(var_0);
+  self linkTo(var_0);
   thread dog_eater_unlink_on_death();
 
   for(;;) {
@@ -3981,7 +3981,7 @@ dogs_eater() {
   self.goalradius = var_1;
   self notify("stop_loop");
   self.ref_node notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self.favoriteenemy = level.player;
 }
 
@@ -4090,7 +4090,7 @@ dogs_moveup() {
   self.ref_node thread maps\_anim::anim_generic(self, "enemy_exposed");
   self.ref_node waittill("enemy_exposed");
   self.a.bdisablemovetwitch = 1;
-  var_0 = getent("dogs_moveup_node2", "targetname");
+  var_0 = getEnt("dogs_moveup_node2", "targetname");
   var_0 maps\_anim::anim_generic_reach(self, "cqb_look_around");
   var_0 thread maps\_anim::anim_generic(self, "cqb_look_around");
   self.a.bdisablemovetwitch = 0;
@@ -4161,12 +4161,12 @@ center_main() {
 center_handle_heli() {
   var_0 = "kill_center_handle_heli_thread";
   level endon(var_0);
-  var_1 = getent("trigger_school_heli", "script_noteworthy");
+  var_1 = getEnt("trigger_school_heli", "script_noteworthy");
   var_1 waittill("trigger");
   soundscripts\_snd::snd_message("start_school_heli_mix");
-  var_2 = getent("center_heli_path", "targetname");
+  var_2 = getEnt("center_heli_path", "targetname");
   var_2 waittill("trigger", var_3);
-  var_4 = getent("heli_restart_avm", "script_noteworthy");
+  var_4 = getEnt("heli_restart_avm", "script_noteworthy");
   var_3 thread maps\scoutsniper_aud::aud_start_school_heli_scripted_sequence(var_4);
   thread maps\scoutsniper_aud::aud_school_heli_rumble();
   var_3 endon("death");
@@ -4290,7 +4290,7 @@ end_moveup() {
     maps\_utility::enable_cqbwalk();
     maps\_utility::cqb_aim(var_4);
     wait 2.5;
-    var_4 moveto(var_4.origin + (0, 100, 60), 2.5);
+    var_4 moveTo(var_4.origin + (0, 100, 60), 2.5);
     wait 2.5;
     maps\_utility::disable_cqbwalk();
     var_4 delete();
@@ -4373,7 +4373,7 @@ start_graveyard() {
 
 start_graveyard_x() {
   start_common();
-  var_0 = getent("church_door_front", "targetname");
+  var_0 = getEnt("church_door_front", "targetname");
   var_0 thread maps\scoutsniper_code::door_open_slow();
   level.price maps\scoutsniper_code::teleport_actor(getnode("church_price_backdoor_node", "targetname"));
   maps\scoutsniper_code::teleport_player_to_start_point("graveyard");
@@ -4395,9 +4395,9 @@ start_pond() {
   soundscripts\_snd::snd_message("aud_start_pond_checkpoint");
   start_common();
   waittillframeend;
-  var_0 = getent("pond_guys_trig", "targetname");
+  var_0 = getEnt("pond_guys_trig", "targetname");
   var_0 notify("trigger");
-  level.price maps\scoutsniper_code::teleport_actor(getent("field_price_clear", "targetname"));
+  level.price maps\scoutsniper_code::teleport_actor(getEnt("field_price_clear", "targetname"));
   waittillframeend;
   maps\scoutsniper_code::teleport_player_to_start_point();
   common_scripts\utility::flag_set("initial_setup_done");
@@ -4533,7 +4533,7 @@ initlevel() {
   createthreatbiasgroup("dog");
   setignoremegroup("price", "dog");
   maps\_utility::delaythread(0.5, ::initlevel2);
-  var_0 = getent("doggie_clip", "targetname");
+  var_0 = getEnt("doggie_clip", "targetname");
   var_0 notsolid();
   var_0 connectpaths();
   maps\scoutsniper_code::hint_setup();
@@ -4573,7 +4573,7 @@ player_health_shield() {
 }
 
 initprice() {
-  var_0 = getent("price", "script_noteworthy");
+  var_0 = getEnt("price", "script_noteworthy");
   level.price = var_0 dospawn();
   level.price.ref_node = spawn("script_origin", level.price.origin);
   maps\_utility::spawn_failed(level.price);
@@ -4616,7 +4616,7 @@ graveyard_hind_detect_damage() {
   var_0 = spawn("script_model", self.origin);
   var_0.angles = self.angles;
   var_0 setModel(self.model);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   self.body = var_0;
   self hide();
   var_0 useanimtree(#animtree);
@@ -4648,7 +4648,7 @@ dash_hind_detect_damage() {
   var_0 = spawn("script_model", self.origin);
   var_0.angles = self.angles;
   var_0 setModel(self.model);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 hide();
   self.body = var_0;
   var_0 useanimtree(#animtree);

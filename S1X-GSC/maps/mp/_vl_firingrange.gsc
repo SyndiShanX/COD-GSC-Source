@@ -15,7 +15,7 @@
 init_firingrange() {
   firingrange = spawnStruct();
 
-  firingrange.fr_start = getent("firingrange_start", "targetname");
+  firingrange.fr_start = getEnt("firingrange_start", "targetname");
   firingrange.AllTargetsArray = firing_range_setup_targets();
   firingrange.AllEnvArray = firing_range_setup_env();
   firingrange.TransitionMeshes = [];
@@ -28,7 +28,7 @@ init_firingrange() {
   firingrange.AllFloorPannels = firing_range_setup_floor_panels();
   firingrange.AllVFX_Struct = firing_range_setup_env_VFX();
   firingrange.All3dUiScreens = firing_range_setup_3dui_screens();
-  firingrange.audio_buzzer_struct = getstruct("audio_buzzer_org", "targetname");
+  firingrange.audio_buzzer_struct = getStruct("audio_buzzer_org", "targetname");
   firingrange.SoundEnts = [];
   firingrange.last_target = undefined;
   firingrange.target_move_dist = 32;
@@ -282,7 +282,7 @@ MonitorUpReleased(target) {
 
     GoalDist = Distance2D(level.firingrange.MaxPoint.origin, target.origin);
     if(GoalDist <= 1) {
-      target moveto(target.origin, 0.05);
+      target moveTo(target.origin, 0.05);
     } else {
       GoalPos = target.origin + (anglesToForward(level.firingrange.AllTargetMax[0].angles) * level.firingrange.GraceDisance * -1);
       GoalDist = Distance2D(GoalPos, target.origin);
@@ -326,7 +326,7 @@ MonitorDownReleased(target) {
 
     GoalDist = Distance2D(level.firingrange.MinPointModPos, target.origin);
     if(GoalDist <= 1) {
-      target moveto(target.origin, 0.05);
+      target moveTo(target.origin, 0.05);
     } else {
       GoalPos = target.origin + (anglesToForward(level.firingrange.AllTargetMax[0].angles) * (level.firingrange.GraceDisance));
       GoalDist = Distance2D(GoalPos, target.origin);
@@ -354,7 +354,7 @@ MoveLogic(GoalPos, target, player) {
       MoveTime = 0.05;
     }
 
-    target moveto(GoalPos, MoveTime);
+    target moveTo(GoalPos, MoveTime);
   }
 }
 
@@ -370,7 +370,7 @@ MoveStopper(target, player) {
         if(level.firingrange.ButtonTimer > 0) {
           level.firingrange.ButtonTimer = level.firingrange.ButtonTimer - 0.05;
         } else {
-          target moveto(target.origin, 0.05);
+          target moveTo(target.origin, 0.05);
           level.firingrange.PressedDown = false;
           level.firingrange.PressedUp = false;
         }
@@ -782,7 +782,7 @@ MoveFloorPanelUp() {
   delay_time = RandomFloatRange(0.0, 1);
   wait(delay_time);
   self setModel("rec_holo_emitter_floor_on");
-  self MoveTo(self.up_position, 0.25, 0.1, 0.1);
+  self moveTo(self.up_position, 0.25, 0.1, 0.1);
 }
 
 MoveFloorPanelDown() {
@@ -792,7 +792,7 @@ MoveFloorPanelDown() {
 
   delay_time = RandomFloatRange(0.0, 1);
   wait(delay_time);
-  self MoveTo(self.og_position, 0.25, 0.1, 0.1);
+  self moveTo(self.og_position, 0.25, 0.1, 0.1);
 }
 
 ShutDownRound(RoundNumber, player) {
@@ -1186,17 +1186,17 @@ MoveTargetToDest() {
       time = dist / level.firingrange.Round_target_unit_per_second;
 
       if(isDefined(self.current_ent.script_noteworthy) && self.current_ent.script_noteworthy == "jump") {
-        self moveto(self.current_ent.origin, time * 0.5, 0, 0.1);
+        self moveTo(self.current_ent.origin, time * 0.5, 0, 0.1);
       } else if(isDefined(self.last_ent.script_noteworthy) && self.last_ent.script_noteworthy == "jump") {
-        self moveto(self.current_ent.origin, time * 0.5, 0.1, 0);
+        self moveTo(self.current_ent.origin, time * 0.5, 0.1, 0);
       } else {
-        self moveto(self.current_ent.origin, time);
+        self moveTo(self.current_ent.origin, time);
       }
 
       self waittill("movedone");
 
       if(isDefined(self.current_ent.target)) {
-        next_ent = getent(self.current_ent.target, "targetname");
+        next_ent = getEnt(self.current_ent.target, "targetname");
         self.last_ent = self.current_ent;
         self.current_ent = next_ent;
       } else {
@@ -1228,7 +1228,7 @@ PopInPopOut() {
     if(isDefined(self)) {
       dist = distance(cover_loc, exposed_loc);
       time = dist / level.firingrange.Round_target_unit_per_second;
-      self moveto(cover_loc, time);
+      self moveTo(cover_loc, time);
 
       self waittill("movedone");
 
@@ -1236,7 +1236,7 @@ PopInPopOut() {
 
       dist = distance(cover_loc, exposed_loc);
       time = dist / level.firingrange.Round_target_unit_per_second;
-      self moveto(exposed_loc, time);
+      self moveTo(exposed_loc, time);
 
       self waittill("movedone");
 
@@ -1255,7 +1255,7 @@ MoveBackForth() {
   if(isDefined(self.last_ent.script_noteworthy) && self.last_ent.script_noteworthy == "jump") {
     jump_ent = self.last_ent;
     jump_ent_loc = jump_ent.origin;
-    self.last_ent = getent(jump_ent.targetname, "target");
+    self.last_ent = getEnt(jump_ent.targetname, "target");
   }
 
   end_loc = self.current_ent.origin;
@@ -1272,13 +1272,13 @@ MoveBackForth() {
         dist = distance(jump_ent_loc, end_loc);
         time = dist / level.firingrange.Round_target_unit_per_second;
 
-        self moveto(jump_ent_loc, time * .5, 0, 0.1);
+        self moveTo(jump_ent_loc, time * .5, 0, 0.1);
         self waittill("movedone");
 
         dist = distance(jump_ent_loc, start_loc);
         time = dist / level.firingrange.Round_target_unit_per_second;
 
-        self moveto(start_loc, time * .5, 0.1, 0);
+        self moveTo(start_loc, time * .5, 0.1, 0);
         self waittill("movedone");
 
         wait(2);
@@ -1286,25 +1286,25 @@ MoveBackForth() {
         dist = distance(jump_ent_loc, start_loc);
         time = dist / level.firingrange.Round_target_unit_per_second;
 
-        self moveto(jump_ent_loc, time * .5, 0, 0.1);
+        self moveTo(jump_ent_loc, time * .5, 0, 0.1);
         self waittill("movedone");
 
         dist = distance(jump_ent_loc, end_loc);
         time = dist / level.firingrange.Round_target_unit_per_second;
 
-        self moveto(end_loc, time * .5, 0.1, 0);
+        self moveTo(end_loc, time * .5, 0.1, 0);
         self waittill("movedone");
       } else {
         dist = distance(start_loc, end_loc);
         time = dist / level.firingrange.Round_target_unit_per_second;
 
-        self moveto(start_loc, time);
+        self moveTo(start_loc, time);
 
         self waittill("movedone");
 
         dist = distance(end_loc, start_loc);
         time = dist / level.firingrange.Round_target_unit_per_second;
-        self moveto(end_loc, time);
+        self moveTo(end_loc, time);
 
         self waittill("movedone");
       }
@@ -1489,8 +1489,8 @@ firing_range_setup_targets() {
     object.alive = false;
     object.pers["team"] = "axis";
     object.team = "axis";
-    object.origin_ent = GetEnt(object.target, "targetname");
-    object.aimassist_target = GetEnt(object.origin_ent.target, "targetname");
+    object.origin_ent = getEnt(object.target, "targetname");
+    object.aimassist_target = getEnt(object.origin_ent.target, "targetname");
     object.aimassist_target LinkToSynchronizedParent(object);
     object.aimassist_target.pers["team"] = "axis";
     object.aimassist_target.team = "axis";
@@ -1552,7 +1552,7 @@ target_reset() {
 }
 
 lerp_spot_intensity(targetname, time, endintensity) {
-  ent = GetEnt(targetName, "targetname");
+  ent = getEnt(targetName, "targetname");
   if(!isDefined(ent)) {
     return;
   }

@@ -64,7 +64,7 @@ function function_8c61edee(localclientnum, oldval, newval, bnewent, binitialsnap
       var_f3133091 = arraygetclosest(self.origin, var_b2632866);
     }
 
-    v_up = vectornormalize(anglestoup(self.angles)) * 40 + self.origin;
+    v_up = vectorNormalize(anglestoup(self.angles)) * 40 + self.origin;
 
     if(isDefined(var_f3133091) && isDefined(v_up)) {
       self.e_vortex = util::spawn_model(fieldname, "tag_origin", var_f3133091.origin + (0, 0, 50));

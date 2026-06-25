@@ -170,7 +170,7 @@ _id_F7A3(var_0) {
       var_7 = ["ks_strike_camera_1", "ks_strike_camera_2", "ks_strike_camera_3", "ks_strike_camera_4"];
 
       foreach(var_9 in var_7) {
-        var_10 = scripts\engine\utility::getstruct(var_9, "targetname");
+        var_10 = scripts\engine\utility::getStruct(var_9, "targetname");
 
         if(!isDefined(var_10)) {
           var_0 notify("killstreak_finished_with_deploy_weapon");
@@ -307,11 +307,11 @@ _id_4066(var_0, var_1) {
   var_6._id_2FF8 = spawn("script_model", var_6.origin - (0, 0, 10));
   var_6._id_2FF8 setModel("tag_player");
   var_6._id_2FF8.angles = vectortoangles(level._id_9AAC - var_6._id_2FF8.origin);
-  var_6._id_2FF8 linkto(var_6);
+  var_6._id_2FF8 linkTo(var_6);
   var_6._id_3A00 = spawn("script_model", var_6._id_2FF8.origin - (0, 0, 10));
   var_6._id_3A00 setModel("ks_toma_strike_mp");
   var_6._id_3A00.angles = var_6.angles;
-  var_6._id_3A00 linkto(var_6._id_2FF8);
+  var_6._id_3A00 linkTo(var_6._id_2FF8);
   level._id_F30F[level._id_F30F.size] = var_6;
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
@@ -360,7 +360,7 @@ _id_E732(var_0, var_1, var_2, var_3) {
         return;
       }
       self setplayerangles(var_1.angles);
-      self cameralinkto(var_1, "tag_origin");
+      self cameralinkTo(var_1, "tag_origin");
       self remotecontrolvehicle(var_1);
       var_1 thread _id_F32A();
       var_1 thread _id_F326();
@@ -368,7 +368,7 @@ _id_E732(var_0, var_1, var_2, var_3) {
       var_1 thread _id_F328(var_5);
       thread _id_F330(var_5, var_1);
       var_1._id_B7AB = spawn("script_origin", var_1.origin);
-      var_1._id_B7AB linkto(var_1);
+      var_1._id_B7AB linkTo(var_1);
       var_1._id_B7AB playLoopSound("veh_apache_killstreak_amb_lr");
       self setclientomnvar("ui_killstreak_health", (var_1.maxhealth - var_1._id_014E) / var_1.maxhealth);
     } else if(var_0 == 1) {
@@ -401,7 +401,7 @@ _id_E732(var_0, var_1, var_2, var_3) {
       }
 
       var_1._id_3A00 setscriptablepartstate("clouds", "on");
-      var_1 moveto(var_1._id_AEDC, 70);
+      var_1 moveTo(var_1._id_AEDC, 70);
     }
 
     self._id_3A05 = 3;
@@ -450,7 +450,7 @@ _id_F318(var_0, var_1, var_2, var_3) {
         var_2[[scripts\cp_mp\utility\script_utility::getsharedfunc("killstreak", "updateScrapAssistDataForceCredit")]](var_0);
       }
 
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -520,10 +520,10 @@ _id_F31D(var_0) {
   if(isDefined(self.owner) && self.owner scripts\cp_mp\utility\player_utility::_id_8ACE()) {
     if(istrue(self._id_8EE2)) {
       earthquake(0.25, 0.2, self.origin, 150);
-      self.owner playrumbleonentity("damage_heavy");
+      self.owner playRumbleOnEntity("damage_heavy");
     } else {
       earthquake(0.15, 0.15, self.origin, 150);
-      self.owner playrumbleonentity("damage_light");
+      self.owner playRumbleOnEntity("damage_light");
     }
   }
 
@@ -691,8 +691,8 @@ _id_F320(var_0, var_1, var_2, var_3) {
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.25);
   self setclientomnvar("ui_cluster_controls", 0);
   var_3 setscriptablepartstate("target", "off", 0);
-  var_4 moveto(var_2.origin, 0.25);
-  var_4 rotateto(var_2.angles, 0.25);
+  var_4 moveTo(var_2.origin, 0.25);
+  var_4 rotateTo(var_2.angles, 0.25);
   var_4 waittill("rotatedone");
   self visionsetnakedforplayer("", 0.2);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(0.1);
@@ -946,7 +946,7 @@ _id_F310(var_0, var_1, var_2, var_3) {
 _id_5B09(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
   var_6 = _id_F312(var_0, var_2, var_3, var_4);
-  var_7 = vectornormalize(var_0 - (var_6[0], var_6[1], 0));
+  var_7 = vectorNormalize(var_0 - (var_6[0], var_6[1], 0));
   var_8 = _id_F317(var_0, var_1, var_7);
   var_9 = (0, 0, -1 * getdvarint("#x33c01342f08fa6256", 800));
   var_10 = (var_8.point - 0.5 * var_9 * _func_0219(4) - var_6) / 4;
@@ -1041,18 +1041,18 @@ _id_F313(var_0, var_1, var_2) {
   var_4 = 512;
   var_5 = var_3 * var_3;
   var_6 = magicgrenademanual("s4_ks_ord_ger_mp", var_0._id_E06F, var_3, 5, self);
-  var_6.angles = vectortoangles(vectornormalize(var_0._id_0200 - var_0._id_E06F));
+  var_6.angles = vectortoangles(vectorNormalize(var_0._id_0200 - var_0._id_E06F));
   var_6 setentityowner(self);
   var_6 setotherent(self);
   var_6._id_57B8 = spawn("script_model", var_6.origin);
   var_6._id_57B8 setModel("ks_toma_strike_missile_mp");
-  var_6._id_57B8 linkto(var_6);
+  var_6._id_57B8 linkTo(var_6);
   var_6._id_57B8 dontinterpolate();
   var_6._id_57B8 setentityowner(self);
   var_6._id_57B8.streakinfo = var_1;
   thread _id_084C::bombing_run_incoming_close(var_6);
   var_7 = spawn("script_model", var_0._id_E06F);
-  var_7 linkto(var_6, "tag_origin", (10, 0, 10), (0, 0, 0));
+  var_7 linkTo(var_6, "tag_origin", (10, 0, 10), (0, 0, 0));
   var_6.killcament = var_7;
   var_6.owner = self;
   var_6.streakinfo = var_1;
@@ -1223,7 +1223,7 @@ _id_F2FE(var_0, var_1) {
   self endon("death");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
   self unlink();
-  self moveto(var_1, 3);
+  self moveTo(var_1, 3);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(7);
   self delete();
 }
@@ -1251,7 +1251,7 @@ _id_F30E(var_0, var_1, var_2) {
 
 _id_F309(var_0, var_1, var_2) {
   var_3 = undefined;
-  var_4 = vectornormalize(var_2);
+  var_4 = vectorNormalize(var_2);
   var_5 = anglestoup(self.angles);
   var_6 = anglestoright(var_1);
 
@@ -1311,7 +1311,7 @@ _id_F2FA(var_0, var_1, var_2, var_3, var_4) {
   var_17 = anglestoright(var_2);
   var_18 = anglestoup(var_2);
   var_19 = _func_01C6(var_18, var_16, 45);
-  var_20 = vectornormalize(_func_025B(var_19, var_18));
+  var_20 = vectorNormalize(_func_025B(var_19, var_18));
   var_21 = _func_025B(var_20, var_16);
   var_22 = _func_0017(var_19, var_20, var_21);
   var_14 = _id_F2F4();
@@ -1319,7 +1319,7 @@ _id_F2FA(var_0, var_1, var_2, var_3, var_4) {
   var_15.killcament = var_6;
   var_13._id_2B0E[var_13._id_2B0E.size] = var_15;
   var_19 = _func_01C6(var_18, var_16, -45);
-  var_20 = vectornormalize(_func_025B(var_19, var_18));
+  var_20 = vectorNormalize(_func_025B(var_19, var_18));
   var_21 = _func_025B(var_20, var_16);
   var_22 = _func_0017(var_19, var_20, var_21);
   var_14 = _id_F2F4();
@@ -1516,7 +1516,7 @@ _id_F2F1(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 setentityowner(var_3);
 
   if(isDefined(var_2)) {
-    var_6 linkto(var_2);
+    var_6 linkTo(var_2);
   }
 
   return var_6;
@@ -1737,13 +1737,13 @@ _id_F2F6(var_0, var_1) {
 }
 
 _id_F301(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_0, var_1));
+  var_2 = vectorNormalize(_func_025B(var_0, var_1));
   var_1 = _func_025B(var_2, var_0);
   return _func_0017(var_2, var_1, var_0);
 }
 
 _id_F300(var_0, var_1) {
-  var_2 = vectornormalize(_func_025B(var_1, var_0));
+  var_2 = vectorNormalize(_func_025B(var_1, var_0));
   var_1 = _func_025B(var_0, var_2);
   return _func_0017(var_1, var_2, var_0);
 }
@@ -1819,7 +1819,7 @@ _id_F312(var_0, var_1, var_2, var_3) {
   var_11 = var_7 + (0, 0, var_8 * 1.5);
 
   foreach(var_13 in var_10) {
-    var_14 = vectornormalize(var_13 - var_7);
+    var_14 = vectorNormalize(var_13 - var_7);
     var_15 = var_7 + (0, 0, var_8) - var_14 * var_9;
     var_16 = var_7;
     var_17 = scripts\engine\trace::ray_trace_passed(var_15, var_16, undefined, var_4);

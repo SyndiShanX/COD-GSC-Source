@@ -68,7 +68,7 @@ function function_7fba300(e_player, var_289e02fc) {
     self startragdoll();
     n_dist = distance2d(self.origin, var_289e02fc);
     var_37f1fb21 = (128 - n_dist) / 128;
-    var_9450d281 = vectornormalize(self getcentroid() - var_289e02fc);
+    var_9450d281 = vectorNormalize(self getcentroid() - var_289e02fc);
     if(var_9450d281[2] < 0.8) {
       var_9450d281 = (var_9450d281[0], var_9450d281[1], 0.8);
     }
@@ -310,11 +310,11 @@ function function_d1e69389(var_63f884ec) {
   self endon("death");
   if(!(isDefined(self.knockdown) && self.knockdown) && (!(isDefined(self.missinglegs) && self.missinglegs))) {
     self.knockdown = 1;
-    self setplayercollision(0);
+    self setPlayerCollision(0);
     var_25cdb267 = var_63f884ec - self.origin;
-    var_a87a26a1 = vectornormalize((var_25cdb267[0], var_25cdb267[1], 0));
-    v_zombie_forward = vectornormalize((anglesToForward(self.angles)[0], anglesToForward(self.angles)[1], 0));
-    v_zombie_right = vectornormalize((anglestoright(self.angles)[0], anglestoright(self.angles)[1], 0));
+    var_a87a26a1 = vectorNormalize((var_25cdb267[0], var_25cdb267[1], 0));
+    v_zombie_forward = vectorNormalize((anglesToForward(self.angles)[0], anglesToForward(self.angles)[1], 0));
+    v_zombie_right = vectorNormalize((anglestoright(self.angles)[0], anglestoright(self.angles)[1], 0));
     v_dot = vectordot(var_a87a26a1, v_zombie_forward);
     if(v_dot >= 0.5) {
       self.knockdown_direction = "front";
@@ -339,7 +339,7 @@ function function_d1e69389(var_63f884ec) {
       }
     }
     wait(2.5);
-    self setplayercollision(1);
+    self setPlayerCollision(1);
     self.knockdown = 0;
   }
 }
@@ -347,7 +347,7 @@ function function_d1e69389(var_63f884ec) {
 function function_866906f(v_hit_origin, str_weapon_name, var_3fee16b8, var_a5018155, var_83c68ee2 = undefined) {
   var_980aeb4e = anglesToForward(var_3fee16b8.angles);
   if(var_980aeb4e[2] != -1) {
-    var_3e878400 = vectornormalize(var_980aeb4e * -1);
+    var_3e878400 = vectorNormalize(var_980aeb4e * -1);
     var_75181c09 = v_hit_origin + (var_3e878400 * var_a5018155);
   } else {
     var_75181c09 = v_hit_origin + (0, 0, 1);

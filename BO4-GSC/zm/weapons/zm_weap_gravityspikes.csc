@@ -155,7 +155,7 @@ gravity_trap_rumble(localclientnum) {
   self endon(#"vortex_stop", #"death");
 
   while(isDefined(self)) {
-    self playrumbleonentity(localclientnum, "zm_weap_gravityspikes_vortex");
+    self playRumbleOnEntity(localclientnum, "zm_weap_gravityspikes_vortex");
     wait 0.15;
   }
 }

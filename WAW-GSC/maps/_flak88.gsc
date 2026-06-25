@@ -118,7 +118,7 @@ flakcrew_playAnim(flak, animName) {
   tagOrigin = flak getTagOrigin("tag_turret");
   tagAngles = flak getTagAngles("tag_turret");
   if(isalive(self)) {
-    self animscripted("scriptedanimdone", tagOrigin, tagAngles, level.scr_anim[self.crewposition][animName]);
+    self animScripted("scriptedanimdone", tagOrigin, tagAngles, level.scr_anim[self.crewposition][animName]);
     self thread donotetracks_flak88("scriptedanimdone", flak);
     self.allowDeath = 1;
     self waittillmatch("scriptedanimdone", "end");
@@ -179,7 +179,7 @@ flakcrew_gunbackinhand(flak) {
   self.health = self.oldhealth;
   self.oldhealth = undefined;
   wait randomfloatrange(0, 1);
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 badplace_when_near() {
@@ -228,7 +228,7 @@ flak88_init() {
       self.bombs = [];
       for(i = 0; i < triggerUse.size; i++) {
         if(isDefined(triggerUse[i].target)) {
-          tempBomb = getent(triggerUse[i].target, "targetname");
+          tempBomb = getEnt(triggerUse[i].target, "targetname");
           if(isDefined(tempBomb)) {
             self.bombTriggers[self.bombTriggers.size] = triggerUse[i];
             self.bombs[self.bombs.size] = tempBomb;
@@ -276,12 +276,12 @@ flak_monitorTurretAngles() {
 flak88_explosives() {
   self endon("death");
   for(i = 0; i < self.bombs.size; i++) {
-    self.bombs[i] linkto(self, "tag_turret");
+    self.bombs[i] linkTo(self, "tag_turret");
     self.bombs[i] setModel(level.flak88_bomb_model_obj);
   }
   for(i = 0; i < self.bombTriggers.size; i++) {
-    self.bombTriggers[i] enablelinkto();
-    self.bombTriggers[i] linkto(self, "tag_barrel");
+    self.bombTriggers[i] enablelinkTo();
+    self.bombTriggers[i] linkTo(self, "tag_barrel");
     self thread flak88_explosives_wait(self.bombTriggers[i]);
   }
 
@@ -523,7 +523,7 @@ spawner_trigger() {
             spawned.oldhealth = 1;
           }
           spawned.health = 1;
-          spawned linkto(self, "tag_turret");
+          spawned linkTo(self, "tag_turret");
 
           spawned.anim_disablelongdeath = true;
 
@@ -641,7 +641,7 @@ mount_world_flakcrew(entArray) {
     if(isDefined(crew_array[i]) && isalive(crew_array[i])) {
       crew_array[i].oldhealth = crew_array[i].health;
       crew_array[i].health = 1;
-      crew_array[i] linkto(self, "tag_turret");
+      crew_array[i] linkTo(self, "tag_turret");
 
       crew_array[i].anim_disablelongdeath = true;
 
@@ -1006,8 +1006,8 @@ fire_flak88() {
 
 flakbarrel(flakbarrel) {
   flakbarrel solid();
-  flak = getent(flakbarrel.target, "targetname");
-  flakbarrel linkto(flak, "tag_barrel");
+  flak = getEnt(flakbarrel.target, "targetname");
+  flakbarrel linkTo(flak, "tag_barrel");
   flak waittill("death");
   flakbarrel unlink();
 }

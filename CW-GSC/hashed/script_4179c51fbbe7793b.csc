@@ -16,17 +16,17 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function function_11fba536(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_11196acd = getent(0, "nuke_cloud_ring_a_rest", "targetname");
+  var_11196acd = getEnt(0, "nuke_cloud_ring_a_rest", "targetname");
   var_11196acd hide();
 }
 
 function function_685e7492(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_11196acd = getent(0, "nuke_cloud_ring_a", "targetname");
-  var_6c6ea17e = getent(0, "nuke_cloud_ring_a_rest", "targetname");
-  var_a2de0e58 = getent(0, "nuke_cloud_ring_b", "targetname");
-  var_1d4dedf6 = getent(0, "nuke_cloud_ring_b_rest", "targetname");
-  var_ac9f21da = getent(0, "nuke_cloud_ring_c", "targetname");
-  var_a173cea7 = getent(0, "nuke_cloud_ring_c_rest", "targetname");
+  var_11196acd = getEnt(0, "nuke_cloud_ring_a", "targetname");
+  var_6c6ea17e = getEnt(0, "nuke_cloud_ring_a_rest", "targetname");
+  var_a2de0e58 = getEnt(0, "nuke_cloud_ring_b", "targetname");
+  var_1d4dedf6 = getEnt(0, "nuke_cloud_ring_b_rest", "targetname");
+  var_ac9f21da = getEnt(0, "nuke_cloud_ring_c", "targetname");
+  var_a173cea7 = getEnt(0, "nuke_cloud_ring_c_rest", "targetname");
   var_11196acd hide();
   var_6c6ea17e hide();
   var_a2de0e58 hide();
@@ -45,7 +45,7 @@ function function_4a6ad8d7(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_b25ca84b() {
-  shockwave = getent(0, "nuke_shockwave_a", "targetname");
+  shockwave = getEnt(0, "nuke_shockwave_a", "targetname");
   wait 1;
 
   for(loopcount = 0; loopcount < 1; loopcount++) {
@@ -65,7 +65,7 @@ function function_b25ca84b() {
 }
 
 function function_5b0bca7f() {
-  cloud = getent(0, "nuke_cloud_ring_a_rest", "targetname");
+  cloud = getEnt(0, "nuke_cloud_ring_a_rest", "targetname");
   function_aa5bd1e8("nuke_cloud_ring_a", "nuke_cloud_ring_a_rest");
   cloud playrenderoverridebundle("rob_nuke_cloud_ring_fade_01");
   wait 16;
@@ -81,8 +81,8 @@ function function_9fccf47b() {
 }
 
 function function_aa5bd1e8(var_6c1da019, var_37749f24) {
-  cloud = getent(0, var_6c1da019, "targetname");
-  var_6c6ea17e = getent(0, var_37749f24, "targetname");
+  cloud = getEnt(0, var_6c1da019, "targetname");
+  var_6c6ea17e = getEnt(0, var_37749f24, "targetname");
   steps = 0;
   maxsteps = 81;
   timeoffset = 0;
@@ -112,7 +112,7 @@ function function_aa5bd1e8(var_6c1da019, var_37749f24) {
 }
 
 function function_d79ef530() {
-  cloud = getent(0, "nuke_shockwave_a", "targetname");
+  cloud = getEnt(0, "nuke_shockwave_a", "targetname");
   brightness = 0;
 
   while(true) {

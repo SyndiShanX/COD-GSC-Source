@@ -87,7 +87,7 @@ function_24167ed8() {
 function_ab07399f() {
   foreach(t_crafting in level.a_t_crafting[#"ztable_white_open"]) {
     if(isDefined(t_crafting.var_4f749ffe)) {
-      t_crafting.var_ae360c37 = getent(t_crafting.var_4f749ffe.target, "targetname");
+      t_crafting.var_ae360c37 = getEnt(t_crafting.var_4f749ffe.target, "targetname");
       t_crafting.var_ae360c37 ghost();
     }
   }
@@ -131,7 +131,7 @@ function_e0a8fc52() {
   level notify(#"modifier_acquired");
   self playSound(#"hash_59436c2037092176");
   level.var_279a11a3.related_parent setinvisibletoall();
-  var_ae360c37 = getent(level.var_279a11a3.related_parent.target, "targetname");
+  var_ae360c37 = getEnt(level.var_279a11a3.related_parent.target, "targetname");
   var_ae360c37 setinvisibletoall();
   zm_ui_inventory::function_7df6bb60("teleporter_pad_1", 1);
   zm_ui_inventory::function_7df6bb60("teleporter_pad_2", 1);
@@ -280,7 +280,7 @@ teleport_player(user) {
   destination = var_298e4578.var_52a6f692;
   user clientfield::increment_to_player("teleporter_depart", 1);
   playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_out", self.origin);
+  playSoundAtPosition(#"evt_teleporter_out", self.origin);
   level thread function_fe50866d(user, self, var_298e4578);
   self function_134670b9(1);
   user zm_fasttravel::function_66d020b0(undefined, undefined, undefined, undefined, destination, undefined, string(self.n_dest), 0);
@@ -289,7 +289,7 @@ teleport_player(user) {
   user thread function_c234a5ce();
   user clientfield::increment_to_player("teleporter_arrive", 1);
   playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
+  playSoundAtPosition(#"evt_teleporter_go", var_298e4578.origin);
   user playsoundtoplayer(#"evt_teleporter_go_plr", user);
   wait 0.5;
   user function_96e88318();
@@ -339,7 +339,7 @@ cooldown_portal_timer(e_user) {
   wait 20;
   arrayremovevalue(self.a_e_users, e_user);
   self function_cb7c6fc7(e_user, 1);
-  playsoundatposition(#"hash_1c870a3a31a2dcf9", self.origin);
+  playSoundAtPosition(#"hash_1c870a3a31a2dcf9", self.origin);
 }
 
 function_cb7c6fc7(e_user, b_show = 1) {
@@ -530,7 +530,7 @@ function_71be28e1(zombie, start_portal, end_portal) {
   self endon(#"death");
   playFX(level._effect[#"teleport_depart"], zombie.origin);
   playFX(level._effect[#"portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_out", zombie.origin);
+  playSoundAtPosition(#"evt_teleporter_out", zombie.origin);
   zombie function_1f034d46(end_portal.origin);
   zombie.b_ignore_cleanup = 1;
   zombie forceteleport(level.s_zombie_teleport_room.origin);
@@ -547,7 +547,7 @@ function_71be28e1(zombie, start_portal, end_portal) {
   zombie function_1f034d46();
   playFX(level._effect[#"teleport_arrive"], zombie.origin);
   playFX(level._effect[#"portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_go", zombie.origin);
+  playSoundAtPosition(#"evt_teleporter_go", zombie.origin);
   self.b_ignore_cleanup = self.var_693b80bb;
 }
 
@@ -758,7 +758,7 @@ function_a09d62f1() {
 
       if(isDefined(self.e_model)) {
         self.e_model show();
-        playsoundatposition(#"hash_d8a6518e5c2027d", self.e_model.origin + (0, 0, 20));
+        playSoundAtPosition(#"hash_d8a6518e5c2027d", self.e_model.origin + (0, 0, 20));
       }
 
       level.a_s_active = function_688df525();
@@ -781,7 +781,7 @@ function_a09d62f1() {
 
       if(isDefined(self.e_model)) {
         self.e_model hide();
-        playsoundatposition(#"hash_59436c2037092176", self.e_model.origin + (0, 0, 20));
+        playSoundAtPosition(#"hash_59436c2037092176", self.e_model.origin + (0, 0, 20));
       }
 
       if(level.var_868c98df == 1) {
@@ -828,27 +828,27 @@ function_97d4ad50() {
 
 function_99407d66(e_player) {
   if(e_player zm_utility::is_drinking()) {
-    self sethintstring("");
+    self setHintString("");
     return 0;
   }
 
   if(self.stub.related_parent.b_active === 0 && level.var_868c98df === 0) {
-    self sethintstring(#"hash_5fb23a325b41e010");
+    self setHintString(#"hash_5fb23a325b41e010");
     return 1;
   }
 
   if(self.stub.related_parent.b_active === 1) {
     if(function_26ddb915()) {
-      self sethintstring(#"hash_79fc5d02a880a44b");
+      self setHintString(#"hash_79fc5d02a880a44b");
       return 1;
     } else if(self.stub.related_parent.b_locked === 1) {
-      self sethintstring(#"hash_4a621c0c0f51fef9");
+      self setHintString(#"hash_4a621c0c0f51fef9");
       return 1;
     } else if(function_8b1a219a()) {
-      self sethintstring(#"hash_57249497bfb88a5");
+      self setHintString(#"hash_57249497bfb88a5");
       return 1;
     } else {
-      self sethintstring(#"hash_6801c3df1d9b2a37");
+      self setHintString(#"hash_6801c3df1d9b2a37");
       return 1;
     }
 
@@ -856,11 +856,11 @@ function_99407d66(e_player) {
   }
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_57748c9a86bf5e92");
+    self setHintString(#"hash_57748c9a86bf5e92");
     return 1;
   }
 
-  self sethintstring(#"hash_45755e67c1efbdb6");
+  self setHintString(#"hash_45755e67c1efbdb6");
   return 1;
 }
 
@@ -985,7 +985,7 @@ disable_teleporter() {
   self notify(#"kill_portal_cooldown");
   self.a_e_users = [];
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     self function_7c7520a5(e_player);
   }
 }
@@ -1001,7 +1001,7 @@ reenable_teleporter(var_1e62b431 = 1) {
   if(var_1e62b431) {
     self thread function_360c6be0();
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       self function_cb7c6fc7(e_player, 1);
     }
   }

@@ -543,7 +543,7 @@ function function_6cb3521c(params) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     setDvar(#"hash_31933df32887a98b", int(tokens[1]));
   }
 }

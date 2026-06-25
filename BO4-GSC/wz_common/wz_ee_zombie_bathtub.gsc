@@ -26,7 +26,7 @@ __init__() {
     clientfield::register("world", "zombie_arm_blood_splash", 20000, 1, "counter");
     clientfield::register("world", "bathtub_fake_soul_sfx", 20000, 1, "counter");
     level.var_e91bcfae = 0;
-    zombie_arm = getent("zombie_arm", "targetname");
+    zombie_arm = getEnt("zombie_arm", "targetname");
 
     if(isDefined(zombie_arm)) {
       zombie_arm ghost();
@@ -75,7 +75,7 @@ on_player_item_pickup(params) {
 
   if(isPlayer(self)) {
     if(isDefined(item.var_cd8fb96) && item.var_cd8fb96) {
-      zombie_arm = getent("zombie_arm", "targetname");
+      zombie_arm = getEnt("zombie_arm", "targetname");
 
       if(isDefined(zombie_arm)) {
         var_4805bfaa = (zombie_arm.origin[0], zombie_arm.origin[1], zombie_arm.origin[2] + -24);
@@ -97,7 +97,7 @@ function_613448ed(player, bathtub) {
   }
 
   golden_spork = function_1deb2b38(bathtub);
-  zombie_arm = getent("zombie_arm", "targetname");
+  zombie_arm = getEnt("zombie_arm", "targetname");
 
   if(isDefined(zombie_arm) && isDefined(golden_spork)) {
     golden_spork.var_cd8fb96 = 1;
@@ -119,7 +119,7 @@ function_ca44f5a5(zombie_arm, target_pos, var_e77e9de = 0) {
   }
 
   zombie_arm endon(#"death");
-  zombie_arm moveto(target_pos, 2);
+  zombie_arm moveTo(target_pos, 2);
 
   if(var_e77e9de) {
     zombie_arm waittill(#"movedone");
@@ -128,7 +128,7 @@ function_ca44f5a5(zombie_arm, target_pos, var_e77e9de = 0) {
 }
 
 function_b413daad(golden_spork, target_pos) {
-  golden_spork moveto(target_pos, 2);
+  golden_spork moveTo(target_pos, 2);
 }
 
 function_1deb2b38(var_b721e8a9) {
@@ -167,7 +167,7 @@ function_7eabf705() {
 
   while(true) {
     if(getdvarint(#"hash_7e7b9e2edcf6d1ee", 0)) {
-      players = getplayers();
+      players = getPlayers();
       bathtub = struct::get(#"zombie_bathub", "<dev string:x9c>");
       function_613448ed(players[0], bathtub);
       level notify(#"golden_spork_debugged");

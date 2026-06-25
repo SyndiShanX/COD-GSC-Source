@@ -259,7 +259,7 @@ function_cf3224fe(b_success) {
 function_d9f6b173() {
   self endon(#"death");
   self.var_1574ae06 = 1;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   self.var_9a79d89d = e_player.origin;
   self.var_5ab7c19c = e_player.angles;
   self.var_bab91f2 = 500;
@@ -359,7 +359,7 @@ function_f7cf3a9b(n_count, var_6448415b = 1) {
     var_3e8bb57d = undefined;
 
     if(isDefined(var_7d691124.target)) {
-      var_3e8bb57d = getent(var_7d691124.target, "targetname");
+      var_3e8bb57d = getEnt(var_7d691124.target, "targetname");
     }
 
     if(!isDefined(var_3e8bb57d)) {
@@ -860,7 +860,7 @@ function_4c551667() {
     entity.prevstate = 3;
     entity.var_ef59b90 = 3;
     entity.resurrect_not_allowed_by = undefined;
-    entity setorigin(s_vip.origin);
+    entity setOrigin(s_vip.origin);
     entity setplayerangles(s_vip.angles);
     entity.disablespawning = 1;
     entity.var_6722b63 = 0;

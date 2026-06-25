@@ -18,7 +18,7 @@ money_precache() {
 }
 check_players() {
   flag_wait("all_players_connected");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players.size > 1) {
       players[i] thread money_dump();
@@ -84,11 +84,11 @@ money_grab() {
       if(dist < 64) {
         playFX(level._effect["powerup_grabbed"], self.origin);
         playFX(level._effect["powerup_grabbed_wave"], self.origin);
-        playsoundatposition("zmb_powerup_grabbed_3p", self.origin);
+        playSoundAtPosition("zmb_powerup_grabbed_3p", self.origin);
         players[i].old_score += self.score;
         players[i].score += self.score;
         wait(0.1);
-        playsoundatposition("zmb_cha_ching", self.origin);
+        playSoundAtPosition("zmb_cha_ching", self.origin);
         self stoploopsound();
         self.player.moneyDump = undefined;
         self delete();
@@ -107,7 +107,7 @@ money_wobble() {
     self playLoopSound("zmb_spawn_powerup_loop");
   }
   while(isDefined(self)) {
-    self rotateyaw(360, 3, 3, 0);
+    self rotateYaw(360, 3, 3, 0);
     self waittill("rotatedone");
   }
 }

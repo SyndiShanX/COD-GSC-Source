@@ -195,7 +195,7 @@ function function_71d88f26(weapon) {
 }
 
 function function_f894ad3e() {
-  self playrumbleonentity("zod_shield_juke");
+  self playRumbleOnEntity("zod_shield_juke");
   if(self zm_equipment::get_player_equipment() == getweapon("dragonshield")) {
     var_e93a0115 = "burninate";
     var_c3937998 = level.var_7ba638ea;
@@ -299,12 +299,12 @@ function function_459dacdd() {
       zombies[i] function_8e9a1613("range", (1, 0, 0));
       return;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(test_range_squared < var_36f73bb5) {
       level.var_e4a96ed9[level.var_e4a96ed9.size] = zombies[i];
       dist_mult = 1;
-      fling_vec = vectornormalize(test_origin - view_pos);
+      fling_vec = vectorNormalize(test_origin - view_pos);
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 50 + (50 * dist_mult));
       level.var_1c1b4cce[level.var_1c1b4cce.size] = fling_vec;
@@ -337,9 +337,9 @@ function function_459dacdd() {
     if(test_range_squared < fling_range_squared) {
       level.var_e4a96ed9[level.var_e4a96ed9.size] = zombies[i];
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-      fling_vec = vectornormalize(test_origin - view_pos);
+      fling_vec = vectorNormalize(test_origin - view_pos);
       if(5000 < test_range_squared) {
-        fling_vec = fling_vec + (vectornormalize(test_origin - radial_origin));
+        fling_vec = fling_vec + (vectorNormalize(test_origin - radial_origin));
       }
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 50 + (50 * dist_mult));
@@ -522,7 +522,7 @@ function function_a3a9c2dc() {
 }
 
 function function_6f901616(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
   switch (cmd) {
     case "": {

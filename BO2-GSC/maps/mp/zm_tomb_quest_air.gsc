@@ -25,7 +25,7 @@ main() {
   level thread maps\mp\zm_tomb_vo::watch_one_shot_line("puzzle", "try_puzzle", "vo_try_puzzle_air2");
   level thread air_puzzle_1_run();
   flag_wait("air_puzzle_1_complete");
-  playsoundatposition("zmb_squest_step1_finished", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_step1_finished", (0, 0, 0));
   level thread air_puzzle_1_cleanup();
   level thread rumble_players_in_chamber(5, 3.0);
   level thread air_puzzle_2_run();
@@ -42,13 +42,13 @@ air_puzzle_1_init() {
 air_puzzle_1_cleanup() {
   for(i = 1; i <= 3; i++) {
     n_move = (4 - i) * 20.0;
-    e_ring = getent("ceiling_ring_0" + i, "targetname");
-    e_ring rotateyaw(360, 1.5, 0.5, 0.0);
+    e_ring = getEnt("ceiling_ring_0" + i, "targetname");
+    e_ring rotateYaw(360, 1.5, 0.5, 0.0);
     e_ring movez(n_move, 1.5, 0.5, 0.0);
     e_ring waittill("movedone");
   }
 
-  playsoundatposition("zmb_squest_wind_ring_disappear", level.a_ceiling_rings[0].origin);
+  playSoundAtPosition("zmb_squest_wind_ring_disappear", level.a_ceiling_rings[0].origin);
 }
 
 air_puzzle_1_run() {
@@ -76,7 +76,7 @@ ceiling_ring_randomize() {
 
 ceiling_ring_update_position() {
   new_angles = (self.angles[0], self.position * 90, self.angles[2]);
-  self rotateto(new_angles, 0.5, 0.2, 0.2);
+  self rotateTo(new_angles, 0.5, 0.2, 0.2);
   self playSound("zmb_squest_wind_ring_turn");
   self waittill("rotatedone");
 }
@@ -129,7 +129,7 @@ air_puzzle_2_init() {
   a_smoke_pos = getStructArray("puzzle_smoke_origin", "targetname");
 
   foreach(s_smoke_pos in a_smoke_pos) {
-    s_smoke_pos.detector_brush = getent(s_smoke_pos.target, "targetname");
+    s_smoke_pos.detector_brush = getEnt(s_smoke_pos.target, "targetname");
     s_smoke_pos.detector_brush ghost();
   }
 }
@@ -152,7 +152,7 @@ air_puzzle_2_run() {
     }
 
     if(all_smoke_solved) {
-      a_players = getplayers();
+      a_players = getPlayers();
 
       foreach(e_player in a_players) {
         if(e_player hasweapon("staff_air_zm")) {
@@ -173,7 +173,7 @@ air_puzzle_smoke() {
   self.e_fx.angles = self.angles;
   self.e_fx setModel("tag_origin");
   self.e_fx playLoopSound("zmb_squest_wind_incense_loop", 2);
-  s_dest = getstruct("puzzle_smoke_dest", "targetname");
+  s_dest = getStruct("puzzle_smoke_dest", "targetname");
   playFXOnTag(level._effect["air_puzzle_smoke"], self.e_fx, "tag_origin");
   self thread air_puzzle_run_smoke_direction();
   flag_wait("air_puzzle_2_complete");
@@ -187,8 +187,8 @@ air_puzzle_smoke() {
 air_puzzle_run_smoke_direction() {
   level endon("air_puzzle_2_complete");
   self endon("death");
-  s_dest = getstruct("puzzle_smoke_dest", "targetname");
-  v_to_dest = vectornormalize(s_dest.origin - self.origin);
+  s_dest = getStruct("puzzle_smoke_dest", "targetname");
+  v_to_dest = vectorNormalize(s_dest.origin - self.origin);
   f_min_dot = cos(self.script_int);
   self.solved = 0;
   self.detector_brush setCanDamage(1);
@@ -201,7 +201,7 @@ air_puzzle_run_smoke_direction() {
       level notify("vo_try_puzzle_air2", attacker);
       new_yaw = vectoangles(direction_vec);
       new_orient = (0, new_yaw, 0);
-      self.e_fx rotateto(new_orient, 1.0, 0.3, 0.3);
+      self.e_fx rotateTo(new_orient, 1.0, 0.3, 0.3);
       self.e_fx waittill("rotatedone");
       f_dot = vectordot(v_to_dest, direction_vec);
       self.solved = f_dot > f_min_dot;

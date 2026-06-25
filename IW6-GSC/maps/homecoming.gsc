@@ -370,19 +370,19 @@ objective_start_flags() {
 }
 
 setup_turrets() {
-  var_0 = getent("bunker_turret", "targetname");
-  var_1 = getent("bunker_turret_pole", "targetname");
+  var_0 = getEnt("bunker_turret", "targetname");
+  var_1 = getEnt("bunker_turret_pole", "targetname");
   var_0.base = var_1;
-  var_0.base linkto(var_0);
+  var_0.base linkTo(var_0);
   var_0 setleftarc(65);
   var_0 setrightarc(65);
   var_0 setbottomarc(15);
   var_0 settoparc(25);
   level.balcony_turret = var_0;
-  var_0 = getent("trench_turret", "targetname");
-  var_1 = getent("trench_turret_pole", "targetname");
+  var_0 = getEnt("trench_turret", "targetname");
+  var_1 = getEnt("trench_turret_pole", "targetname");
   var_0.base = var_1;
-  var_0.base linkto(var_0);
+  var_0.base linkTo(var_0);
   var_0 setbottomarc(15);
   var_0 setleftarc(45);
   var_0 setrightarc(45);
@@ -401,12 +401,12 @@ start_bunker_sequence() {
   var_0 = maps\_hud_util::create_client_overlay("black", 1, level.player);
   maps\homecoming_util::alliesteletostartspot("start_bunker");
   iprintlnbold("THIS START POINT DOES NOT WORK, PLEASE DO NOT SEND ME BUGS USING IT!");
-  getent("start_beach_ai", "targetname") maps\_utility::notify_delay("trigger", 0.05);
+  getEnt("start_beach_ai", "targetname") maps\_utility::notify_delay("trigger", 0.05);
   var_0 thread maps\_hud_util::fade_over_time(0, 1);
   var_1 = getnode("movespot_bunker_entrance", "targetname");
   level.hesh setgoalnode(var_1);
   common_scripts\utility::flag_wait("FLAG_start_bunker");
-  level.hesh thread maps\_utility::follow_path_and_animate(common_scripts\utility::getstruct("intro_street_hesh_path_4", "targetname"), 999999);
+  level.hesh thread maps\_utility::follow_path_and_animate(common_scripts\utility::getStruct("intro_street_hesh_path_4", "targetname"), 999999);
 }
 
 start_bunker_artillery_sequence() {
@@ -427,16 +427,16 @@ start_bunker_wave2_sequence() {
   var_1 = getnode("movespot_bunker", "targetname");
   level.hesh setgoalnode(var_1);
   common_scripts\utility::flag_set("FLAG_artillery_sequence_done");
-  var_2 = getent("bunker_turret", "targetname");
-  var_3 = getent("bunker_mg_nonbroken", "targetname");
-  var_4 = getent("bunker_mg_broken", "targetname");
+  var_2 = getEnt("bunker_turret", "targetname");
+  var_3 = getEnt("bunker_mg_nonbroken", "targetname");
+  var_4 = getEnt("bunker_mg_broken", "targetname");
   var_3 delete();
   var_4 show();
   var_2 notify("stop_using_built_in_burst_fire");
   var_2 notify("stopfiring");
   var_2 delete();
-  var_3 = getent("bunker_roof_nonbroken", "targetname");
-  var_4 = getent("bunker_roof_broken", "targetname");
+  var_3 = getEnt("bunker_roof_nonbroken", "targetname");
+  var_4 = getEnt("bunker_roof_broken", "targetname");
   var_4 show();
   var_3 delete();
   maps\_utility::disable_trigger_with_targetname("player_top_bunker_trig");
@@ -626,7 +626,7 @@ start_artillery_test() {
     var_5 = spawn("script_origin", var_4.origin);
     var_5.angles = var_4.angles;
     var_5.script_noteworthy = var_4.script_noteworthy;
-    var_5 linkto(level.balcony[var_4.script_noteworthy]);
+    var_5 linkTo(level.balcony[var_4.script_noteworthy]);
     var_3.balconyent = var_5;
     level.balconystumblers = common_scripts\utility::array_add(level.balconystumblers, var_3);
   }
@@ -657,14 +657,14 @@ start_hind_test() {
 #using_animtree("generic_human");
 
 start_knife_test() {
-  var_0 = common_scripts\utility::getstruct("elias_house_attack_sequence", "targetname");
+  var_0 = common_scripts\utility::getStruct("elias_house_attack_sequence", "targetname");
   var_1 = spawn("script_model", level.player.origin);
   var_1 character\character_elite_pmc_assault_a_black::main();
   var_1 useanimtree(#animtree);
   var_1.animname = "elite";
   level.knife = spawn("script_model", var_1.origin);
   level.knife setModel("weapon_parabolic_knife");
-  level.knife linkto(var_1, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  level.knife linkTo(var_1, "tag_inhand", (0, 0, 0), (0, 0, 0));
   var_2 = maps\_utility::spawn_anim_model("player_rig");
   maps\homecoming_util::cinematicmode_on(1);
   level.player playerlinktoabsolute(var_2, "tag_player");

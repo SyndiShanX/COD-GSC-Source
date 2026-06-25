@@ -713,7 +713,7 @@ function private function_690b6f24(entity) {
       var_7c43328d = getweapon(#"hash_5c00a044827a0e2e");
       var_dd92dfed = entity getcentroid() + (0, 0, 20);
       bolt_speed = getdvarfloat(#"hash_7f3203e297288dd0", 400);
-      v_velocity = vectornormalize(entity.var_26dc9a8a[0].origin - var_dd92dfed + (0, 0, 50)) * bolt_speed;
+      v_velocity = vectorNormalize(entity.var_26dc9a8a[0].origin - var_dd92dfed + (0, 0, 50)) * bolt_speed;
       target = entity.var_26dc9a8a[0];
       var_5b61a3b6 = entity magicmissile(var_7c43328d, var_dd92dfed, v_velocity, target);
 
@@ -900,7 +900,7 @@ function private designate_preferred_soa_for_players() {
   while(true) {
     soas = getaiarchetypearray(#"soa");
     level.var_a81a9504 = soas;
-    players = getplayers();
+    players = getPlayers();
     var_db920e6e = [[], [], [], []];
 
     foreach(soa in soas) {
@@ -944,7 +944,7 @@ function function_a64f7068() {
     return undefined;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size <= 1) {
     return players[0];
@@ -1068,7 +1068,7 @@ function function_85d7a413(entity, target) {
   var_51fb6d83 = lengthsquared(to_player);
 
   if(target_player.origin !== entity.origin && target.origin !== entity.origin) {
-    if(var_51fb6d83 < lengthsquared(var_64ec1ea4) && vectordot(vectornormalize(to_player), vectornormalize(var_64ec1ea4)) > 0.866025) {
+    if(var_51fb6d83 < lengthsquared(var_64ec1ea4) && vectordot(vectorNormalize(to_player), vectorNormalize(var_64ec1ea4)) > 0.866025) {
       return false;
     }
   }
@@ -1332,7 +1332,7 @@ function function_f10f6b15(entity) {
   }
 
   if(var_493731bd > 15 && length2dsquared(entity getvelocity()) > 0 && entity.var_5a0d79a4 > 10) {
-    var_95f90063 = vectornormalize(entity getvelocity()) * 75;
+    var_95f90063 = vectorNormalize(entity getvelocity()) * 75;
     var_95f90063 = (var_95f90063[0], var_95f90063[1], 0);
     hit_nothing = bullettracepassed(var_f990c5ac, var_f990c5ac + var_95f90063, 0, entity);
     entity.var_78fdc8b4 = undefined;
@@ -1519,14 +1519,14 @@ function function_88023de5(entity, mocompanim, mocompanimblendouttime, mocompani
 
   if(var_10160518.delta_z > 0) {
     percentage = easesine(percentage, 0, 1);
-    new_origin = mocompduration.origin + vectornormalize(var_17075fc1) * var_6450293d;
+    new_origin = mocompduration.origin + vectorNormalize(var_17075fc1) * var_6450293d;
     var_74d0dd30 = var_10160518.start[2] + var_10160518.delta_z * percentage;
     new_origin = (new_origin[0], new_origin[1], var_74d0dd30);
   } else if(lengthsquared(var_eb7e4cf7) <= sqr(var_10160518.var_1a655500)) {
-    new_origin = mocompduration.origin + vectornormalize(var_17075fc1) * var_6450293d;
+    new_origin = mocompduration.origin + vectorNormalize(var_17075fc1) * var_6450293d;
     var_74d0dd30 = new_origin[2];
   } else {
-    new_origin = mocompduration.origin + vectornormalize(var_eb7e4cf7) * var_6450293d;
+    new_origin = mocompduration.origin + vectorNormalize(var_eb7e4cf7) * var_6450293d;
     var_74d0dd30 = var_10160518.start[2];
     new_origin = (new_origin[0], new_origin[1], var_74d0dd30);
   }
@@ -1593,7 +1593,7 @@ function function_90db0e6d(entity, mocompanim, mocompanimblendouttime, mocompani
   var_9fe419d0 = mocompduration.var_1389a0b3;
   speed = 10;
   var_17075fc1 = var_9fe419d0.var_b4a3c7c5.origin - mocompduration.origin;
-  new_origin = mocompduration.origin + vectornormalize(var_17075fc1) * speed;
+  new_origin = mocompduration.origin + vectorNormalize(var_17075fc1) * speed;
   new_angles = (0, vectortoyaw(var_17075fc1), 0);
   mocompduration forceteleport(new_origin, new_angles, 0);
 }
@@ -1798,7 +1798,7 @@ function function_ff6a04bc(entity) {
     return false;
   }
 
-  var_b629d106 = vectornormalize(var_23876531);
+  var_b629d106 = vectorNormalize(var_23876531);
   var_8ebe7c9f = 200;
   var_2dc610d5 = entity.origin + var_b629d106 * (var_4892db1b - var_8ebe7c9f);
   var_2dc610d5 = (var_2dc610d5[0], var_2dc610d5[1], entity.favoriteenemy.origin[2]);
@@ -1936,7 +1936,7 @@ function function_3b5becd0(entity, mocompanim, mocompanimblendouttime, mocompani
 
   speed = min(speed, var_19eb3ee6);
   mocompduration.var_c53ce8cb = speed;
-  new_origin = mocompduration.origin + vectornormalize(var_17075fc1) * speed;
+  new_origin = mocompduration.origin + vectorNormalize(var_17075fc1) * speed;
   new_angles = (0, vectortoyaw(var_17075fc1), 0);
   mocompduration forceteleport(new_origin, new_angles, 0);
 }
@@ -2248,7 +2248,7 @@ function function_47f3f527(entity) {
 
   if(isDefined(possible_spots[0])) {
     z_offset = (0, 0, 50);
-    end = possible_spots[0].origin + z_offset + vectornormalize(entity.favoriteenemy.origin - possible_spots[0].origin) * 200;
+    end = possible_spots[0].origin + z_offset + vectorNormalize(entity.favoriteenemy.origin - possible_spots[0].origin) * 200;
     hit_nothing = bullettracepassed(possible_spots[0].origin + z_offset, end, 0, entity);
 
     recordline(possible_spots[0].origin + z_offset, end, hit_nothing ? (0, 1, 0) : (1, 0, 0));
@@ -2326,7 +2326,7 @@ function function_2a8799e1(entity, mocompanim, mocompanimblendouttime, mocompani
   var_3354f994 = (var_d15ca860[0], var_d15ca860[1], 0);
 
   if(var_67662307 > speed) {
-    new_origin = mocompduration.origin + vectornormalize(var_3354f994) * speed;
+    new_origin = mocompduration.origin + vectorNormalize(var_3354f994) * speed;
 
     if(var_6ceb29a9.delta_z < var_6ceb29a9.var_1a655500) {
       z_percentage = easesine(percentage_2d, 1, 1);
@@ -2969,8 +2969,8 @@ function function_a91b9ba0(entity, target) {
   }
 
   level flag::set(#"hash_59adf62a6bf02202");
-  level.var_dadd5b88[0] linkto(entity);
-  level.var_dadd5b88[1] linkto(target);
+  level.var_dadd5b88[0] linkTo(entity);
+  level.var_dadd5b88[1] linkTo(target);
   level.var_dadd5b88[0] clientfield::set("soaLifeDrainEntCF", 1);
   util::wait_network_frame(1);
 
@@ -3355,8 +3355,8 @@ function function_7c39bab6() {
 
 function function_6cf38b2c() {
   var_d610cbe2 = sqr(1000);
-  player = getplayers()[0];
-  player_vec = vectornormalize(anglesToForward(player getplayerangles()));
+  player = getPlayers()[0];
+  player_vec = vectorNormalize(anglesToForward(player getplayerangles()));
   player_eye = player.origin + (0, 0, player getplayerviewheight());
   trace = bulletTrace(player_eye, player_eye + player_vec * 1000, 0, player);
 

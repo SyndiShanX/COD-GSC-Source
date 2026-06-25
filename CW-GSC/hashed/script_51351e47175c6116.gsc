@@ -52,7 +52,7 @@ function function_32160152(player, modelname, origin, angles, scale = 1) {
 
     if(roll < 60) {
       spawnorigin = model.origin;
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         if(!isDefined(player.doa.vehicle)) {

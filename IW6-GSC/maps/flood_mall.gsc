@@ -113,7 +113,7 @@ mall() {
 block_until_ground_collapse(var_0) {
   self endon("death");
   level endon("swept_away");
-  var_1 = getent("mall_floor", "targetname");
+  var_1 = getEnt("mall_floor", "targetname");
 
   if(!isDefined(var_0)) {
     var_0 = 8;
@@ -313,11 +313,11 @@ flood_spawner(var_0, var_1, var_2) {
   level endon("swept_away");
   level endon(var_0);
   var_3 = [];
-  var_3[0] = getent("mall_ai_rocket_jumprail", "targetname");
-  var_3[1] = getent("mall_ai_rocket_farbalc", "targetname");
-  var_3[2] = getent("mall_ai_rocket_backwalkway", "targetname");
-  var_3[3] = getent("mall_ai_walkway_a", "targetname");
-  var_3[4] = getent("mall_ai_walkway_b", "targetname");
+  var_3[0] = getEnt("mall_ai_rocket_jumprail", "targetname");
+  var_3[1] = getEnt("mall_ai_rocket_farbalc", "targetname");
+  var_3[2] = getEnt("mall_ai_rocket_backwalkway", "targetname");
+  var_3[3] = getEnt("mall_ai_walkway_a", "targetname");
+  var_3[4] = getEnt("mall_ai_walkway_b", "targetname");
 
   for(;;) {
     var_4 = maps\_utility::get_living_ai_array("mall_ai", "script_noteworthy");
@@ -345,7 +345,7 @@ weapon_make_fall() {
   var_0 = spawn("script_model", self.origin);
   wait 0.1;
   var_0 thread event_gravity();
-  self linkto(var_0);
+  self linkTo(var_0);
   wait 1;
   self delete();
   var_0 delete();
@@ -394,7 +394,7 @@ mall_rootop_event() {
   level endon("swept_away");
   mallroof_firstframe();
   level.mallroof_struct thread maps\_anim::anim_loop_solo(level.mallroof_impact, "mallroof_idle", "stop_loop");
-  var_0 = getent("warehouse_waters_retarget", "targetname");
+  var_0 = getEnt("warehouse_waters_retarget", "targetname");
   level.mallroof_acboxes thread maps\flood_util::spawn_and_link_models_to_tags("acbox_obj", var_0);
   level.mallroof_smallrubble thread maps\flood_util::spawn_and_link_models_to_tags("acbox_obj", var_0);
   mall_delete_warehouse_ents();
@@ -406,16 +406,16 @@ mall_rootop_event() {
   }
 
   common_scripts\utility::flag_wait("mall_attack_player");
-  var_5 = getent("flood_mall_roof_opfor", "targetname");
+  var_5 = getEnt("flood_mall_roof_opfor", "targetname");
   var_5.animname = "generic";
   var_5 thread maps\_utility::dialogue_queue("flood_vz2_americans");
-  var_6 = getent("mall_ai_rocket_backwalkway", "targetname");
+  var_6 = getEnt("mall_ai_rocket_backwalkway", "targetname");
   var_6 maps\_utility::add_spawn_function(::mall_enemy_spawn_func, "mall_goalvolume_main", "mall_enemy_cover_close");
   var_6 maps\_utility::spawn_ai(1);
-  var_6 = getent("mall_ai_rocket_farbalc", "targetname");
+  var_6 = getEnt("mall_ai_rocket_farbalc", "targetname");
   var_6 maps\_utility::add_spawn_function(::mall_enemy_spawn_func, "mall_goalvolume_main", "mall_enemy_cover_balc");
   var_6 maps\_utility::spawn_ai(1);
-  var_6 = getent("mall_ai_rocket_jumprail", "targetname");
+  var_6 = getEnt("mall_ai_rocket_jumprail", "targetname");
   var_6 maps\_utility::add_spawn_function(::mall_enemy_spawn_func, "mall_goalvolume_main", "mall_enemy_cover_farplant");
   var_6 maps\_utility::spawn_ai(1);
   common_scripts\utility::flag_wait("player_on_mall_roof");
@@ -473,7 +473,7 @@ mall_rootop_event() {
   }
 
   var_21 = getcorpsearray();
-  var_22 = getent("corpse_fall_volume", "targetname");
+  var_22 = getEnt("corpse_fall_volume", "targetname");
   var_23 = [];
   var_23[var_23.size] = "j_mainroot";
   var_23[var_23.size] = "j_neck";
@@ -516,7 +516,7 @@ mall_rootop_event() {
           }
         }
 
-        var_25 linkto(level.mallroof_far, getpartname(var_16, common_scripts\utility::array_find(var_15, var_32[var_40])));
+        var_25 linkTo(level.mallroof_far, getpartname(var_16, common_scripts\utility::array_find(var_15, var_32[var_40])));
       }
     }
 
@@ -528,7 +528,7 @@ mall_rootop_event() {
   thread ally_roof_collapsing_vo();
   thread player_disallow_jump();
   level.player disableweaponpickup();
-  var_42 = getent("weapon_fall_volume", "targetname");
+  var_42 = getEnt("weapon_fall_volume", "targetname");
   var_43 = maps\_utility::getallweapons();
 
   foreach(var_45 in var_43) {
@@ -564,7 +564,7 @@ mall_rootop_event() {
   level.flood_mall_weapon_model = level.player maps\flood_util::create_world_model_from_ent_weapon();
   level.flood_mall_weapon_model.origin = var_51 gettagorigin("tag_weapon");
   level.flood_mall_weapon_model.angles = var_51 gettagangles("tag_weapon");
-  level.flood_mall_weapon_model linkto(var_51, "tag_weapon");
+  level.flood_mall_weapon_model linkTo(var_51, "tag_weapon");
 
   for(;;) {
     var_52 = bulletTrace(level.player.origin + (0, 0, 52), level.player.origin + (0, 0, 100), 0, self);
@@ -620,7 +620,7 @@ corpse_ragdoll_when_vertical() {
   maps\flood_util::jkuprint("vertical");
   self unlink();
   var_1 = common_scripts\utility::spawn_tag_origin();
-  self linkto(var_1);
+  self linkTo(var_1);
   var_1 movegravity((0, 0, -100), 3);
   wait 3;
   var_1 delete();
@@ -638,7 +638,7 @@ smooth_player_link(var_0, var_1) {
 }
 
 mall_rooftop_flyby_helis() {
-  var_0 = getent("player_mall_rooftop", "targetname");
+  var_0 = getEnt("player_mall_rooftop", "targetname");
   var_0 waittill("trigger");
   thread mall_rooftop_flyby_heli1();
   thread mall_rooftop_flyby_heli2();
@@ -653,14 +653,14 @@ mall_rooftop_flyby_heli1() {
   var_0 sethoverparams(10, 10, 20);
   var_0 setmaxpitchroll(30, 30);
   var_0 vehicle_setspeed(30, 10, 10);
-  var_1 = common_scripts\utility::getstruct("mall_rooftop_heli_flyby1_hover", "targetname");
+  var_1 = common_scripts\utility::getStruct("mall_rooftop_heli_flyby1_hover", "targetname");
 
   while(distancesquared(var_1.origin, var_0.origin) > 400000) {
     wait 0.05;
   }
 
   var_0 thread maps\_utility::vehicle_detachfrompath();
-  var_2 = common_scripts\utility::getstruct("mall_rooftop_heli_flyby1_flyaway", "targetname");
+  var_2 = common_scripts\utility::getStruct("mall_rooftop_heli_flyby1_flyaway", "targetname");
   var_0 setvehgoalpos(var_2.origin, 1);
   var_0 vehicle_setspeed(20);
   wait 8.0;
@@ -703,14 +703,14 @@ mall_rooftop_pickup_heli() {
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("mall_rooftop_heli");
   var_0 vehicle_turnengineoff();
   thread maps\flood_audio::sfx_play_chopper_5(var_0);
-  var_1 = getent("mall_roof_helicopter_crash_location", "targetname");
+  var_1 = getEnt("mall_roof_helicopter_crash_location", "targetname");
   var_0.perferred_crash_location = var_1;
   var_0 setmaxpitchroll(30, 60);
   var_0 setyawspeedbyname("slow");
   var_0 sethoverparams(50, 10, 20);
   var_0.path_gobbler = 1;
   var_0 endon("death");
-  var_2 = common_scripts\utility::getstruct("mall_rooftop_heli_hover", "targetname");
+  var_2 = common_scripts\utility::getStruct("mall_rooftop_heli_hover", "targetname");
 
   while(distancesquared(var_2.origin, var_0.origin) > 4000) {
     wait 0.05;
@@ -720,7 +720,7 @@ mall_rooftop_pickup_heli() {
   var_0 setlookatent(var_3);
   common_scripts\utility::flag_set("mall_rooftop_heli_flyaway");
   var_0 thread maps\_utility::vehicle_detachfrompath();
-  var_4 = common_scripts\utility::getstruct("mall_rooftop_heli_flyaway", "targetname");
+  var_4 = common_scripts\utility::getStruct("mall_rooftop_heli_flyaway", "targetname");
   var_0 vehicle_setspeed(2);
   var_0 setvehgoalpos(var_4.origin, 1);
   common_scripts\utility::flag_wait("rocket_event");
@@ -746,7 +746,7 @@ mall_rooftop_heli_damage_watcher() {
     if(var_0 > 15) {
       if(!common_scripts\utility::flag("mall_rooftop_heli_flyaway")) {
         thread maps\_utility::vehicle_detachfrompath();
-        var_11 = common_scripts\utility::getstruct("mall_rooftop_heli_hover", "targetname");
+        var_11 = common_scripts\utility::getStruct("mall_rooftop_heli_hover", "targetname");
         self vehicle_setspeed(2);
         self setvehgoalpos(var_11.origin, 1);
       }
@@ -765,7 +765,7 @@ event_quaker_big(var_0) {
   level.player playSound("scn_flood_mall_rumble_shake_int_lg");
   wait 1.893;
   earthquake(0.5, 1.5, level.player.origin, 1600);
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   common_scripts\utility::exploder("stairwell_dust");
   thread maps\flood_fx::light_flicker("mall_flicker_light");
   wait 2.0;
@@ -791,7 +791,7 @@ event_quaker_indoor() {
     level.player playSound("scn_flood_mall_rumble_shake_int");
     thread maps\flood_audio::sfx_mall_ceiling_debris();
     earthquake(randomfloatrange(0.05, 0.175), randomfloatrange(0.5, 1), level.player.origin, 1600);
-    level.player playrumbleonentity("light_1s");
+    level.player playRumbleOnEntity("light_1s");
     common_scripts\utility::exploder("stairwell_dust");
     wait(randomfloatrange(4, 7));
   }
@@ -804,7 +804,7 @@ event_quaker_outdoor() {
 
   for(;;) {
     earthquake(randomfloatrange(0.075, 0.2), randomfloatrange(2, 3), level.player.origin, 1600);
-    level.player playrumbleonentity("light_1s");
+    level.player playRumbleOnEntity("light_1s");
     common_scripts\utility::exploder("mall_roof_dust");
     wait(randomfloatrange(3, 7));
   }
@@ -815,19 +815,19 @@ event_quaker_collapse() {
   level thread event_rumble_collapse();
   earthquake(0.15, 11, level.player.origin, 1600);
   level.player playSound("scn_flood_mall_rumble_02");
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 4;
   earthquake(0.4, 1, level.player.origin, 1600);
   level.player playSound("scn_flood_mall_rumble_03");
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   wait 1;
   earthquake(0.25, 1, level.player.origin, 1600);
   level.player playSound("scn_flood_mall_rumble_04");
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   wait 2.5;
   earthquake(0.5, 1, level.player.origin, 1600);
   level.player playSound("scn_flood_mall_rumble_05");
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   wait 1.5;
 }
 
@@ -844,7 +844,7 @@ event_rumble_collapse() {
       var_0.origin = var_0.origin + (0, 0, -8);
     }
 
-    var_0 linkto(level.player);
+    var_0 linkTo(level.player);
     common_scripts\utility::waitframe();
   }
 
@@ -861,7 +861,7 @@ event_gravity() {
 event_debris_fall() {
   var_0 = 2;
   self rotatevelocity((randomfloatrange(-200, 200), randomfloatrange(-200, 200), randomfloatrange(-200, 200)), 3000);
-  self moveto(self.origin + (0, 0, -300), var_0);
+  self moveTo(self.origin + (0, 0, -300), var_0);
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
   playFXOnTag(level._effect["giant_water_splash"], var_1, "tag_origin");
@@ -882,12 +882,12 @@ mall_enemy_spawn_func(var_0, var_1) {
 
   if(!common_scripts\utility::flag("player_on_mall_roof")) {
     if(randomint(2) == 0) {
-      var_2 = getent("mall_goalvolume_camper1", "targetname");
+      var_2 = getEnt("mall_goalvolume_camper1", "targetname");
     } else {
-      var_2 = getent("mall_goalvolume_camper2", "targetname");
+      var_2 = getEnt("mall_goalvolume_camper2", "targetname");
     }
   } else
-    var_2 = getent(var_0, "targetname");
+    var_2 = getEnt(var_0, "targetname");
 
   self setgoalvolumeauto(var_2);
   self.animname = "generic";
@@ -908,15 +908,15 @@ mall_enemy_spawn_func(var_0, var_1) {
 }
 
 enemy_setup_vign() {
-  var_0 = getent("flood_mall_roof_opfor", "targetname");
+  var_0 = getEnt("flood_mall_roof_opfor", "targetname");
   thread enemy_setup_vign_floor(var_0);
   var_1 = maps\_utility::spawn_anim_model("mall_roof_opfor_geo", var_0.origin);
-  var_2 = getent("warehouse_waters_retarget", "targetname");
+  var_2 = getEnt("warehouse_waters_retarget", "targetname");
   var_1 retargetscriptmodellighting(var_2);
-  var_3 = getent("mall_help_hanging_guy", "targetname");
+  var_3 = getEnt("mall_help_hanging_guy", "targetname");
   var_4 = var_3 maps\_utility::spawn_ai(1);
   var_4.animname = "opfor_1";
-  var_4 setgoalvolumeauto(getent("mall_goalvolume_main", "targetname"));
+  var_4 setgoalvolumeauto(getEnt("mall_goalvolume_main", "targetname"));
   var_4.noragdoll = 1;
   var_4.health = 1;
   var_4.grenadeammo = 0;
@@ -925,7 +925,7 @@ enemy_setup_vign() {
   var_4.a.pose = "crouch";
   var_4.allowdeath = 1;
   var_4 thread watch_player_pos();
-  var_3 = getent("mall_hanging_guy", "targetname");
+  var_3 = getEnt("mall_hanging_guy", "targetname");
   var_5 = var_3 maps\_utility::spawn_ai(1);
   var_5.animname = "opfor_2";
   var_5.ignoreme = 1;
@@ -949,8 +949,8 @@ enemy_setup_vign() {
 }
 
 enemy_setup_vign_floor(var_0) {
-  var_1 = getent("warehouse_waters_retarget", "targetname");
-  var_2 = getent("roof_collapse_faling_floor_vign1", "targetname");
+  var_1 = getEnt("warehouse_waters_retarget", "targetname");
+  var_2 = getEnt("roof_collapse_faling_floor_vign1", "targetname");
   var_2 show();
   var_2.animname = "mall_roof_opfor_geo_vign";
   var_2 maps\_utility::assign_animtree();
@@ -967,7 +967,7 @@ enemy_setup_vign_floor(var_0) {
       var_8 setModel(var_7);
       var_8.angles = var_2 gettagangles(var_6);
       var_8.targetname = "acbox_obj";
-      var_8 linkto(var_2, var_6);
+      var_8 linkTo(var_2, var_6);
       var_8 retargetscriptmodellighting(var_1);
     }
 
@@ -991,7 +991,7 @@ kill_help_hanging_guy() {
   while(isalive(self)) {
     wait(randomfloatrange(1.0, 1.5));
     var_0 = self.origin;
-    self stopanimscripted();
+    self stopanimScripted();
     magicbullet("pp19", self.origin, self.origin + (0, 0, 32));
   }
 
@@ -1034,9 +1034,9 @@ enemy_hanging_guy_vo(var_0, var_1) {
 
 enemy_twitch() {
   common_scripts\utility::flag_wait("player_on_mall_roof");
-  var_0 = getent("mall_lookat_hanging_guy", "targetname");
+  var_0 = getEnt("mall_lookat_hanging_guy", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai(1);
-  var_1 setgoalvolumeauto(getent("mall_goalvolume_main", "targetname"));
+  var_1 setgoalvolumeauto(getEnt("mall_goalvolume_main", "targetname"));
   var_1.animname = "generic";
   var_1.allowdeath = 1;
   var_1.health = 150;
@@ -1054,7 +1054,7 @@ enemy_twitch_runstumble() {
   common_scripts\utility::flag_wait("player_on_mall_roof");
 
   if(!common_scripts\utility::flag("mall_attack_player")) {
-    var_0 = common_scripts\utility::getstruct("runstumble_runstumble", "targetname");
+    var_0 = common_scripts\utility::getStruct("runstumble_runstumble", "targetname");
     var_0 maps\_anim::anim_reach_solo(self, "run_react_stumble_non_loop");
     var_0 maps\_anim::anim_generic_run(self, "run_react_stumble_non_loop");
     maps\_anim::anim_generic(self, "run_trans_2_readystand_1");
@@ -1066,7 +1066,7 @@ enemy_stop_vign_and_attack() {
   self endon("death");
   common_scripts\utility::flag_wait("mall_attack_player");
   self notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = 0;
 }
 
@@ -1112,7 +1112,7 @@ ally0_mall() {
   thread maps\_utility::enable_cqbwalk();
   self.mall_grenadeammo = self.grenadeammo;
   self.grenadeammo = 0;
-  var_0 = common_scripts\utility::getstruct("mall_breach_origin", "targetname");
+  var_0 = common_scripts\utility::getStruct("mall_breach_origin", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "flood_mall_roof_door");
   var_0 thread maps\_anim::anim_loop_solo(self, "flood_mall_roof_door_loop", "stop_loop");
   common_scripts\utility::flag_set("ally0_breach_ready");
@@ -1139,7 +1139,7 @@ ally1_mall() {
   thread maps\_utility::enable_cqbwalk();
   self.mall_grenadeammo = self.grenadeammo;
   self.grenadeammo = 0;
-  var_0 = common_scripts\utility::getstruct("mall_breach_origin", "targetname");
+  var_0 = common_scripts\utility::getStruct("mall_breach_origin", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "flood_mall_roof_door");
   var_0 thread maps\_anim::anim_loop_solo(self, "flood_mall_roof_door_loop", "stop_loop");
   common_scripts\utility::flag_wait("mall_breach_start");
@@ -1197,7 +1197,7 @@ ally2_mall() {
   thread maps\_utility::enable_cqbwalk();
   self.mall_grenadeammo = self.grenadeammo;
   self.grenadeammo = 0;
-  var_0 = common_scripts\utility::getstruct("mall_breach_origin", "targetname");
+  var_0 = common_scripts\utility::getStruct("mall_breach_origin", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "flood_mall_roof_door_walkup");
   var_0 maps\_anim::anim_single_solo(self, "flood_mall_roof_door_walkup");
   var_0 thread maps\_anim::anim_loop_solo(self, "flood_mall_roof_door_loop", "stop_loop");
@@ -1225,7 +1225,7 @@ ally_roof_collapse_vo() {
   level endon("swept_away");
   level.player maps\flood_audio::sfx_mall_first_screen_shake();
   earthquake(0.5, 1, level.player.origin, 1600);
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   level.allies[1] maps\_utility::dialogue_queue("flood_kgn_keepmoving");
   level.allies[2] maps\_utility::dialogue_queue("flood_diz_gettingshotat");
   level.allies[0] maps\_utility::dialogue_queue("flood_diz_engagingtargets");
@@ -1239,15 +1239,15 @@ ally_roof_collapsing_vo() {
 }
 
 trigger_player_mall_rooftop() {
-  var_0 = getent("player_mall_rooftop", "targetname");
+  var_0 = getEnt("player_mall_rooftop", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("player_on_mall_roof");
   maps\flood_util::jkuprint("player on mall roof");
   thread toggle_mall_door_clip("show");
   thread maps\flood_fx::destroy_fx_warehouse_floating_debris();
   var_1 = getEntArray("coverwater_warehouse", "targetname");
-  var_2 = getent("coverwater_warehouse_above", "targetname");
-  var_3 = getent("coverwater_warehouse_under", "targetname");
+  var_2 = getEnt("coverwater_warehouse_above", "targetname");
+  var_3 = getEnt("coverwater_warehouse_under", "targetname");
   var_1 = common_scripts\utility::array_add(var_1, var_2);
   var_1 = common_scripts\utility::array_add(var_1, var_3);
 
@@ -1258,7 +1258,7 @@ trigger_player_mall_rooftop() {
 }
 
 toggle_mall_door_clip(var_0) {
-  var_1 = getent("mall_door_clip", "targetname");
+  var_1 = getEnt("mall_door_clip", "targetname");
 
   switch (var_0) {
     case "show":
@@ -1273,35 +1273,35 @@ toggle_mall_door_clip(var_0) {
 }
 
 breach_door_open() {
-  var_0 = getent("mall_door_roof", "targetname");
+  var_0 = getEnt("mall_door_roof", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::array_call(var_1, ::linkto, var_0);
   var_2 = 1;
-  var_0 rotateyaw(-65, var_2, 0.1, 0.1);
+  var_0 rotateYaw(-65, var_2, 0.1, 0.1);
   wait(var_2);
   var_0 connectpaths();
 }
 
 breach_door_close() {
-  var_0 = getent("mall_door_roof", "targetname");
+  var_0 = getEnt("mall_door_roof", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::array_call(var_1, ::linkto, var_0);
   var_2 = 0.2;
-  var_0 rotateyaw(65, var_2, 0.1, 0.1);
+  var_0 rotateYaw(65, var_2, 0.1, 0.1);
   wait(var_2);
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 breach_door_open_close() {
-  var_0 = getent("mall_door_roof", "targetname");
+  var_0 = getEnt("mall_door_roof", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::array_call(var_1, ::linkto, var_0);
-  var_0 rotateyaw(125, 0.2, 0.1, 0.1);
+  var_0 rotateYaw(125, 0.2, 0.1, 0.1);
   var_0 connectpaths();
   wait 0.3;
-  var_0 rotateyaw(-125, 0.2, 0.1, 0.1);
+  var_0 rotateYaw(-125, 0.2, 0.1, 0.1);
   wait 0.3;
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 ally_breach_goal(var_0) {
@@ -1315,7 +1315,7 @@ ally_breach_goal(var_0) {
 
 mall_rooftop_floor_splash() {
   level endon("swept_away");
-  var_0 = getent("mall_under_rooftop_splash", "targetname");
+  var_0 = getEnt("mall_under_rooftop_splash", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
   wait 0.1;
@@ -1327,24 +1327,24 @@ mall_rooftop_floor_splash() {
 }
 
 mall_breach_enemy_1() {
-  var_0 = getent("mall_breacher_1", "targetname");
+  var_0 = getEnt("mall_breacher_1", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai(1);
   var_1 thread mall_breach_enemy_setup();
-  var_2 = common_scripts\utility::getstruct("mall_breach_enemy_loc1", "targetname");
+  var_2 = common_scripts\utility::getStruct("mall_breach_enemy_loc1", "targetname");
   var_2 maps\_anim::anim_generic(var_1, "mall_breach_enemy_1");
 }
 
 mall_breach_enemy_2() {
-  var_0 = getent("mall_breacher_2", "targetname");
+  var_0 = getEnt("mall_breacher_2", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai(1);
   var_1 thread mall_breach_enemy_setup();
   var_1.animname = "breacher2";
-  var_0 = getent("mall_breacher_3", "targetname");
+  var_0 = getEnt("mall_breacher_3", "targetname");
   var_2 = var_0 maps\_utility::spawn_ai(1);
   var_2 thread mall_breach_enemy_setup();
   var_2.animname = "breacher3";
   var_3 = maps\_utility::make_array(var_1, var_2);
-  var_4 = common_scripts\utility::getstruct("mall_breach_enemy_loc2", "targetname");
+  var_4 = common_scripts\utility::getStruct("mall_breach_enemy_loc2", "targetname");
   var_4 maps\_anim::anim_single(var_3, "mall_breach_enemy_2");
 }
 
@@ -1394,52 +1394,52 @@ wait_for_bullet() {
 
 mall_roof_door_firstframe() {
   level.flood_mall_roof_door_model = maps\_utility::spawn_anim_model("flood_mall_roof_door_model");
-  var_0 = common_scripts\utility::getstruct("mall_breach_origin", "targetname");
+  var_0 = common_scripts\utility::getStruct("mall_breach_origin", "targetname");
   var_0 thread maps\_anim::anim_first_frame_solo(level.flood_mall_roof_door_model, "flood_mall_roof_door");
   var_1 = getEntArray("mall_roof_door", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(level.flood_mall_roof_door_model);
+    var_3 linkTo(level.flood_mall_roof_door_model);
   }
 }
 
 remove_hall_clip() {
-  var_0 = getent("mall_roof_door_hall_clip", "targetname");
+  var_0 = getEnt("mall_roof_door_hall_clip", "targetname");
   var_0 hide();
   var_0 notsolid();
 }
 
 mallroof_firstframe(var_0) {
   common_scripts\utility::flag_wait("flood_mid_tr_loaded");
-  level.mallroof_back = getent("flood_mallroof_back", "targetname");
+  level.mallroof_back = getEnt("flood_mallroof_back", "targetname");
   level.mallroof_back.animname = "mallroof_back";
   level.mallroof_back maps\_utility::assign_animtree();
-  level.mallroof_center = getent("flood_mallroof_center", "targetname");
+  level.mallroof_center = getEnt("flood_mallroof_center", "targetname");
   level.mallroof_center.animname = "mallroof_center";
   level.mallroof_center maps\_utility::assign_animtree();
   level.mallroof_center retargetscriptmodellighting(level.mallroof_back);
-  level.mallroof_far = getent("flood_mallroof_far", "targetname");
+  level.mallroof_far = getEnt("flood_mallroof_far", "targetname");
   level.mallroof_far.animname = "mallroof_far";
   level.mallroof_far maps\_utility::assign_animtree();
-  level.mallroof_impact = getent("flood_mallroof_impact", "targetname");
+  level.mallroof_impact = getEnt("flood_mallroof_impact", "targetname");
   level.mallroof_impact.animname = "mallroof_impact";
   level.mallroof_impact maps\_utility::assign_animtree();
-  level.mallroof_rafters1 = getent("flood_mallroof_rafters1", "targetname");
+  level.mallroof_rafters1 = getEnt("flood_mallroof_rafters1", "targetname");
   level.mallroof_rafters1.animname = "mallroof_rafters1";
   level.mallroof_rafters1 maps\_utility::assign_animtree();
-  level.mallroof_rafters2 = getent("flood_mallroof_rafters2", "targetname");
+  level.mallroof_rafters2 = getEnt("flood_mallroof_rafters2", "targetname");
   level.mallroof_rafters2.animname = "mallroof_rafters2";
   level.mallroof_rafters2 maps\_utility::assign_animtree();
-  level.mallroof_acboxes = getent("flood_mallroof_acboxes", "targetname");
+  level.mallroof_acboxes = getEnt("flood_mallroof_acboxes", "targetname");
   level.mallroof_acboxes.animname = "mallroof_acboxes";
   level.mallroof_acboxes maps\_utility::assign_animtree();
-  level.mallroof_smallrubble = getent("flood_mallroof_smallrubble", "targetname");
+  level.mallroof_smallrubble = getEnt("flood_mallroof_smallrubble", "targetname");
   level.mallroof_smallrubble.animname = "mallroof_smallrubble";
   level.mallroof_smallrubble maps\_utility::assign_animtree();
-  level.mallroof_cables = getent("flood_mallroof_cables", "targetname");
+  level.mallroof_cables = getEnt("flood_mallroof_cables", "targetname");
   level.mallroof_cables.animname = "mallroof_cables";
   level.mallroof_cables maps\_utility::assign_animtree();
-  level.mallroof_struct = common_scripts\utility::getstruct("mallroof_collapse", "targetname");
+  level.mallroof_struct = common_scripts\utility::getStruct("mallroof_collapse", "targetname");
   level.mallroof_array = [];
   level.mallroof_array["mallroof_back"] = level.mallroof_back;
   level.mallroof_array["mallroof_center"] = level.mallroof_center;
@@ -1456,7 +1456,7 @@ mallroof_firstframe(var_0) {
       var_2 hide();
     }
 
-    var_4 = getent("roof_collapse_faling_floor_vign1", "targetname");
+    var_4 = getEnt("roof_collapse_faling_floor_vign1", "targetname");
     var_4 hide();
   } else {
     level.mallroof_struct thread maps\_anim::anim_first_frame(level.mallroof_array, "mallroof_collapse");
@@ -1471,7 +1471,7 @@ mallroof_firstframe_show_objects() {
 }
 
 mall_door_temp_collision(var_0) {
-  var_1 = getent("mall_door_temp_collision", "targetname");
+  var_1 = getEnt("mall_door_temp_collision", "targetname");
 
   if(!isDefined(var_0)) {
     var_1 hide();
@@ -1480,7 +1480,7 @@ mall_door_temp_collision(var_0) {
   } else {
     var_1 show();
     var_1 solid();
-    var_1 disconnectpaths();
+    var_1 disconnectPaths();
   }
 }
 
@@ -1489,7 +1489,7 @@ mall_attack_player() {
   common_scripts\utility::flag_set("mall_attack_player");
   level notify("mall_attack_player");
   level.allies[1] notify("stop nags");
-  var_0 = getent("mall_start_cover_hack", "targetname");
+  var_0 = getEnt("mall_start_cover_hack", "targetname");
   var_0 hide();
   var_0 notsolid();
 }

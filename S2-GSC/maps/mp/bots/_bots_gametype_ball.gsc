@@ -276,7 +276,7 @@ func_632C() {
           var_04 = distancesquared(self.var_6EA9.var_0116, var_01.var_0116);
           if(var_04 <= var_03) {
             var_05 = anglesToForward(self getangles());
-            var_06 = vectornormalize(self.var_6EA9.var_0116 - self.var_0116);
+            var_06 = vectorNormalize(self.var_6EA9.var_0116 - self.var_0116);
             var_07 = vectordot(var_05, var_06);
             if(var_07 > 0.7) {
               self botlookatpoint(self.var_6EA9.var_0116 + (0, 0, 40), 1.25, "script_forced");
@@ -297,7 +297,7 @@ func_632C() {
           var_0A = var_09 < squared(func_40BB());
           if(!var_0A && distancesquared(self.var_0116, self.var_0088.var_0116) < squared(350)) {
             var_0B = anglesToForward(self.var_0088 getangles());
-            var_0C = vectornormalize(self.var_0116 - self.var_0088.var_0116);
+            var_0C = vectorNormalize(self.var_0116 - self.var_0088.var_0116);
             var_07 = vectordot(var_0B, var_0C);
             if(var_07 > 0.5) {
               var_05 = anglesToForward(self getangles());

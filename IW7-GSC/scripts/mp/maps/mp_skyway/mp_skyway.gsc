@@ -44,46 +44,46 @@ fix_collision() {
   var_0 = spawn("script_model", (1856, -736, -112));
   var_0.angles = (0, 0, 180);
   var_0 setModel("mp_desert_uplink_col_01");
-  var_1 = getent("clip32x32x256", "targetname");
+  var_1 = getEnt("clip32x32x256", "targetname");
   var_2 = spawn("script_model", (256, -60, -32));
   var_2.angles = (0, 0, 90);
   var_2 clonebrushmodeltoscriptmodel(var_1);
-  var_3 = getent("clip32x32x256", "targetname");
+  var_3 = getEnt("clip32x32x256", "targetname");
   var_4 = spawn("script_model", (368, -60, -32));
   var_4.angles = (0, 0, 90);
   var_4 clonebrushmodeltoscriptmodel(var_3);
-  var_5 = getent("player256x256x8", "targetname");
+  var_5 = getEnt("player256x256x8", "targetname");
   var_6 = spawn("script_model", (384, -192, 80));
   var_6.angles = (0, 60, 90);
   var_6 clonebrushmodeltoscriptmodel(var_5);
-  var_7 = getent("player256x256x8", "targetname");
+  var_7 = getEnt("player256x256x8", "targetname");
   var_8 = spawn("script_model", (256, -192, 80));
   var_8.angles = (0, -60, 90);
   var_8 clonebrushmodeltoscriptmodel(var_7);
-  var_9 = getent("clip64x64x256", "targetname");
+  var_9 = getEnt("clip64x64x256", "targetname");
   var_10 = spawn("script_model", (284, 1216, -40));
   var_10.angles = (0, 0, 90);
   var_10 clonebrushmodeltoscriptmodel(var_9);
-  var_11 = getent("clip64x64x256", "targetname");
+  var_11 = getEnt("clip64x64x256", "targetname");
   var_12 = spawn("script_model", (348, 1216, -40));
   var_12.angles = (0, 0, 90);
   var_12 clonebrushmodeltoscriptmodel(var_11);
-  var_13 = getent("clip64x64x128", "targetname");
+  var_13 = getEnt("clip64x64x128", "targetname");
   var_14 = spawn("script_model", (776, 3868, 276));
   var_14.angles = (0, 0, 0);
   var_14 clonebrushmodeltoscriptmodel(var_13);
   var_15 = spawn("script_model", (2520, 1392, -12));
   var_15.angles = (0, 0, 0);
   var_15 setModel("mp_skyway_nosight_v1");
-  var_10 = getent("clip128x128x256", "targetname");
+  var_10 = getEnt("clip128x128x256", "targetname");
   var_11 = spawn("script_model", (88, 2988, 252));
   var_11.angles = (0, 270, 90);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("player128x128x8", "targetname");
+  var_12 = getEnt("player128x128x8", "targetname");
   var_13 = spawn("script_model", (325, 688, -70));
   var_13.angles = (0, 0, 0);
   var_13 clonebrushmodeltoscriptmodel(var_12);
-  var_14 = getent("player128x128x8", "targetname");
+  var_14 = getEnt("player128x128x8", "targetname");
   var_15 = spawn("script_model", (328, 560, -70));
   var_15.angles = (0, 0, 0);
   var_15 clonebrushmodeltoscriptmodel(var_14);
@@ -121,7 +121,7 @@ func_5365() {
 
 securitymetaldetectors() {
   level endon("game_ended");
-  var_0 = getent("audio_metal_detector", "targetname");
+  var_0 = getEnt("audio_metal_detector", "targetname");
   if(isDefined(var_0)) {
     for(;;) {
       var_0 waittill("trigger", var_1);

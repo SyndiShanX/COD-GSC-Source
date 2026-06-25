@@ -92,19 +92,19 @@ function cleanup(name, starting, direct, player) {
   level thread namespace_e77bf565::function_27006ab9();
   level thread namespace_99e99ffa::function_41538e53();
   namespace_93648050::remove_all();
-  projector = getent("kgb_conference_room_projector", "targetname");
+  projector = getEnt("kgb_conference_room_projector", "targetname");
 
   if(isDefined(projector)) {
     projector delete();
   }
 
-  blinds_open = getent("charkov_blinds_open", "targetname");
+  blinds_open = getEnt("charkov_blinds_open", "targetname");
 
   if(isDefined(blinds_open)) {
     blinds_open delete();
   }
 
-  var_b36d9c38 = getent("charkov_blinds_closed", "targetname");
+  var_b36d9c38 = getEnt("charkov_blinds_closed", "targetname");
 
   if(isDefined(var_b36d9c38)) {
     var_b36d9c38 delete();
@@ -333,11 +333,11 @@ function function_bd2b281() {
   level.player endon(#"death");
   f_time = 1.75;
   wait f_time;
-  level.player playrumbleonentity(#"hash_5b7713a379ba4843");
+  level.player playRumbleOnEntity(#"hash_5b7713a379ba4843");
   wait 6 - f_time;
-  level.player playrumbleonentity(#"hash_557fcb9fd5f0f812");
+  level.player playRumbleOnEntity(#"hash_557fcb9fd5f0f812");
   wait 8;
-  level.player playrumbleonentity(#"hash_599c601d51bf76cf");
+  level.player playRumbleOnEntity(#"hash_599c601d51bf76cf");
   level flag::wait_till("flag_cleanup_kgb_hq");
   level thread function_d801675e();
 }
@@ -347,7 +347,7 @@ function function_d801675e() {
   level endon(#"hash_7d8046bc5c3382d4");
 
   while(true) {
-    level.player playrumbleonentity(#"hash_557fcb9fd5f0f812");
+    level.player playRumbleOnEntity(#"hash_557fcb9fd5f0f812");
     wait 5;
   }
 }
@@ -357,10 +357,10 @@ function function_195e2ff1() {
   namespace_353d803e::music("deactivate_9.0_infiltrating");
   wait 2;
   level notify(#"hash_7d8046bc5c3382d4");
-  level.player playrumbleonentity(#"hash_3b1938b38d96e123");
+  level.player playRumbleOnEntity(#"hash_3b1938b38d96e123");
   level flag::wait_till("attack_success");
   wait 0.5;
-  level.player playrumbleonentity(#"hash_5b7713a379ba4843");
+  level.player playRumbleOnEntity(#"hash_5b7713a379ba4843");
 }
 
 function function_1ef3bb4() {
@@ -369,16 +369,16 @@ function function_1ef3bb4() {
   wait 1;
   level notify(#"hash_7d8046bc5c3382d4");
   level.player stoprumble(#"hash_557fcb9fd5f0f812");
-  level.player playrumbleonentity(#"hash_109e3e977480ca06");
+  level.player playRumbleOnEntity(#"hash_109e3e977480ca06");
   wait 2.25;
-  level.player playrumbleonentity(#"hash_5b7713a379ba4843");
+  level.player playRumbleOnEntity(#"hash_5b7713a379ba4843");
 }
 
 function function_ca1bfb16() {
   level.player endon(#"death");
-  level.player playrumbleonentity(#"hash_3b1938b38d96e123");
+  level.player playRumbleOnEntity(#"hash_3b1938b38d96e123");
   wait 10;
-  level.player playrumbleonentity(#"hash_599c601d51bf76cf");
+  level.player playRumbleOnEntity(#"hash_599c601d51bf76cf");
 }
 
 function function_beefb420() {
@@ -392,9 +392,9 @@ function function_c40f1128() {
   wait 4;
   level notify(#"hash_7d8046bc5c3382d4");
   wait 3;
-  level.player playrumbleonentity(#"hash_599c601d51bf76cf");
+  level.player playRumbleOnEntity(#"hash_599c601d51bf76cf");
   wait 7;
-  level.player playrumbleonentity(#"hash_599c601d51bf76cf");
+  level.player playRumbleOnEntity(#"hash_599c601d51bf76cf");
 }
 
 function function_84594864() {

@@ -173,7 +173,7 @@ superslasherdeathscriptmodelsequence(var_0) {
   playsoundatpos(var_2.origin, "zmb_superslasher_death_lr");
   var_2 thread super_slasher_death_vfx_sequence(var_2);
   wait(3.5);
-  var_2 moveto(var_1 + (0, 0, -300), 11.5);
+  var_2 moveTo(var_1 + (0, 0, -300), 11.5);
   var_2 waittill("movedone");
   var_2 delete();
   level notify("super_slasher_death");
@@ -210,7 +210,7 @@ onsuperslasherdamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
 
   if(isDefined(self.btrophysystem)) {
     if(isDefined(var_1) && isPlayer(var_1)) {
-      self.lastdamagedir[self.lastdamagedir.size] = vectornormalize(var_1.origin - self.origin);
+      self.lastdamagedir[self.lastdamagedir.size] = vectorNormalize(var_1.origin - self.origin);
       self.lastdamagetime = gettime();
     }
 

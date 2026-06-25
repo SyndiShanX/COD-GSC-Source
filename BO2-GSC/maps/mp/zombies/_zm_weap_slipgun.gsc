@@ -420,7 +420,7 @@ slippery_spot_choke(lifetime) {
 add_slippery_spot(origin, duration, startpos) {
   wait 0.5;
   level.slippery_spot_count++;
-  hit_norm = vectornormalize(startpos - origin);
+  hit_norm = vectorNormalize(startpos - origin);
   hit_from = 6 * hit_norm;
   trace_height = 120;
   trace = bulletTrace(origin + hit_from, origin + hit_from + (0, 0, trace_height * -1), 0, undefined);

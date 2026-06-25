@@ -488,7 +488,7 @@ function_76c22343(var_227b1773, value, var_ed2d510) {
 
   playercount = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player)) {
       playercount++;
     }
@@ -527,7 +527,7 @@ countdown(waitsec, circleindex, nextcircle) {
   }
 
   voiceevent("warCircleCollapseOccurring");
-  playsoundatposition(#"hash_3fb30e7a85b2bf7e", (0, 0, 0));
+  playSoundAtPosition(#"hash_3fb30e7a85b2bf7e", (0, 0, 0));
 }
 
 function_9229c3b3(scalesec, newradius, neworigin) {
@@ -547,7 +547,7 @@ function_9229c3b3(scalesec, newradius, neworigin) {
   time = gettime();
   endtime = time + int(scalesec * 1000);
   level clientfield::set_world_uimodel("hudItems.warzone.collapseProgress", 0);
-  self moveto(neworigin, scalesec);
+  self moveTo(neworigin, scalesec);
   scaledelta = newradius - self.radius;
   frames = scalesec / float(function_60d95f53()) / 1000;
   framedelta = scaledelta / frames;
@@ -627,7 +627,7 @@ function_dc15ad60() {
     level.var_a8077fea = [];
     time = gettime();
 
-    foreach(i, player in getplayers()) {
+    foreach(i, player in getPlayers()) {
       if(isDefined(level.deathcircle.scaling) && level.deathcircle.scaling && i % 5 == updatepass) {
         player function_ba02cfb5();
       }
@@ -718,7 +718,7 @@ function_dc15ad60() {
 }
 
 cleanup_feedback(notifyhash) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_60d14da8(0);
     player hide_effects();
   }
@@ -740,7 +740,7 @@ function_ba02cfb5() {
   }
 
   nextcenter = isDefined(nextcircle) ? nextcircle.origin : var_46fc3d6e.origin;
-  dir = vectornormalize(playerorigin - nextcenter);
+  dir = vectorNormalize(playerorigin - nextcenter);
   nextpoint = nextcenter;
 
   if(isDefined(nextcircle)) {

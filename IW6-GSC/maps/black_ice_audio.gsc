@@ -14,7 +14,7 @@ main() {
   thread sfx_command_warning_sfx();
   thread sfx_derrick_expl_init();
   thread sfx_tanks_wind_gust_trigger();
-  var_0 = getent("pre_common_room", "targetname");
+  var_0 = getEnt("pre_common_room", "targetname");
   var_0 thread precommon_sound();
 }
 
@@ -175,7 +175,7 @@ sfx_breach_detonate() {
 sfx_underwater_combat_amb() {
   wait 13;
   level.underwater_combat_amb = spawn("script_origin", level.player.origin);
-  level.underwater_combat_amb linkto(level.player);
+  level.underwater_combat_amb linkTo(level.player);
   level.underwater_combat_amb playLoopSound("scn_blackice_infil_combat_amb");
   common_scripts\utility::flag_wait("flag_player_breaching");
   wait 2;
@@ -280,25 +280,25 @@ sfx_stop_ascend_sound_wait(var_0) {
 }
 
 sfx_wind_trigger_setup() {
-  var_0 = getent("trigger_ascend_wind_01", "targetname");
+  var_0 = getEnt("trigger_ascend_wind_01", "targetname");
   var_0 thread sfx_ascend_wind_01();
-  var_1 = getent("trigger_ascend_wind_02", "targetname");
+  var_1 = getEnt("trigger_ascend_wind_02", "targetname");
   var_1 thread sfx_ascend_wind_02();
-  var_2 = getent("trigger_ascend_wind_03", "targetname");
+  var_2 = getEnt("trigger_ascend_wind_03", "targetname");
   var_2 thread sfx_ascend_wind_03();
 }
 
 sfx_ascend_wind_01() {
   self waittill("trigger");
   level.ascend_wind_01 = spawn("script_origin", level.player.origin);
-  level.ascend_wind_01 linkto(level.player);
+  level.ascend_wind_01 linkTo(level.player);
   level.ascend_wind_01 playLoopSound("scn_blackice_ascend_wind_01");
 }
 
 sfx_ascend_wind_02() {
   self waittill("trigger");
   level.ascend_wind_02 = spawn("script_origin", level.player.origin);
-  level.ascend_wind_02 linkto(level.player);
+  level.ascend_wind_02 linkTo(level.player);
   level.ascend_wind_02 playLoopSound("scn_blackice_ascend_wind_02");
 
   if(isDefined(level.ascend_wind_01)) {
@@ -311,7 +311,7 @@ sfx_ascend_wind_02() {
 sfx_ascend_wind_03() {
   self waittill("trigger");
   level.ascend_wind_03 = spawn("script_origin", level.player.origin);
-  level.ascend_wind_03 linkto(level.player);
+  level.ascend_wind_03 linkTo(level.player);
   level.ascend_wind_03 playLoopSound("scn_blackice_ascend_wind_03");
 
   if(isDefined(level.ascend_wind_02)) {
@@ -325,7 +325,7 @@ sfx_ascend_wind_last() {
   thread sfx_ascend_wind_03_fade();
   wait 2;
   level.ascend_wind_04 = spawn("script_origin", level.player.origin);
-  level.ascend_wind_04 linkto(level.player);
+  level.ascend_wind_04 linkTo(level.player);
   level.ascend_wind_04 playLoopSound("scn_blackice_ascend_wind_02");
   wait 3;
   thread sfx_stop_dist_oil_rig();
@@ -351,7 +351,7 @@ sfx_cargo_sway() {
 
 sfx_cargo_lift(var_0) {
   level.cargo_lift = spawn("script_origin", var_0.origin + (0, 0, -700));
-  level.cargo_lift linkto(var_0);
+  level.cargo_lift linkTo(var_0);
   level.cargo_lift playSound("scn_blackice_cargo_lift");
   wait 21;
   level.cargo_lift delete();
@@ -433,7 +433,7 @@ sfx_fire_tower_triggers() {
   var_0 = [];
 
   for(var_1 = 0; var_1 < level.sfx_fire_tower_trigger_array.size; var_1++) {
-    var_0[var_1] = getent(level.sfx_fire_tower_trigger_array[var_1].trig, "targetname");
+    var_0[var_1] = getEnt(level.sfx_fire_tower_trigger_array[var_1].trig, "targetname");
   }
 }
 
@@ -487,8 +487,8 @@ hall_search_music() {
 }
 
 sfx_metal_beam_event() {
-  var_0 = getent("audio_metal_beam_event", "script_noteworthy");
-  var_1 = getent("audio_metal_beam_event_move", "script_noteworthy");
+  var_0 = getEnt("audio_metal_beam_event", "script_noteworthy");
+  var_1 = getEnt("audio_metal_beam_event_move", "script_noteworthy");
   var_0 waittill("trigger");
   maps\_utility::delaythread(0.01, common_scripts\utility::play_sound_in_space, "emt_metal_beam_settle_rumble_ss", (1787, 2822, 2370));
   maps\_utility::delaythread(1.2, common_scripts\utility::play_sound_in_space, "emt_metal_beam_settle_01_ss", (1689, 2800, 2316));
@@ -852,7 +852,7 @@ sfx_common_breach_mix() {
 }
 
 sfx_derrick_expl_init() {
-  var_0 = getent("derrick_expl_trig", "targetname");
+  var_0 = getEnt("derrick_expl_trig", "targetname");
   var_0 thread sfx_derrick_expl_trig();
 }
 
@@ -882,11 +882,11 @@ sfx_heli_flyin_mudpumps(var_0) {
   thread sfx_heli_flyin_sweetener(var_0);
   wait 0.2;
   level.heli_flyin_mudpumps = spawn("script_origin", var_0.origin);
-  level.heli_flyin_mudpumps linkto(var_0);
+  level.heli_flyin_mudpumps linkTo(var_0);
   level.heli_flyin_mudpumps playSound("scn_blackice_pipedeck_heli_in_boats");
   wait 0.8;
   level.heli_engine_lp_01 = spawn("script_origin", var_0.origin);
-  level.heli_engine_lp_01 linkto(var_0);
+  level.heli_engine_lp_01 linkTo(var_0);
   level.heli_engine_lp_01 playLoopSound("scn_blackice_pipedeck_heli_lp");
   level.heli_engine_lp_01 scalevolume(0.0, 0.0);
   thread sfx_assault_heli_wind(var_0);
@@ -898,14 +898,14 @@ sfx_heli_flyin_mudpumps(var_0) {
 sfx_heli_flyin_sweetener(var_0) {
   wait 1.2;
   level.heli_flyin_swt = spawn("script_origin", var_0.origin);
-  level.heli_flyin_swt linkto(var_0);
+  level.heli_flyin_swt linkTo(var_0);
   level.heli_flyin_swt playSound("scn_blackice_pipedeck_heli_in_swt");
 }
 
 sfx_heli_flyin_pipedeck(var_0) {
   if(!common_scripts\utility::flag("heli_mudpumps_in")) {
     level.heli_engine_lp_01 = spawn("script_origin", var_0.origin);
-    level.heli_engine_lp_01 linkto(var_0);
+    level.heli_engine_lp_01 linkTo(var_0);
     level.heli_engine_lp_01 playLoopSound("scn_blackice_pipedeck_heli_lp");
     thread sfx_assault_heli_wind(var_0);
     thread sfx_heli_wind_debris();
@@ -915,7 +915,7 @@ sfx_heli_flyin_pipedeck(var_0) {
 sfx_heli_move_pipedeck(var_0) {
   wait 1;
   level.heli_move_boats = spawn("script_origin", var_0.origin);
-  level.heli_move_boats linkto(var_0);
+  level.heli_move_boats linkTo(var_0);
   level.heli_move_boats playSound("scn_blackice_pipedeck_heli_move_01");
   wait 1;
   level.heli_engine_lp_01 scalevolume(0.6, 3.0);
@@ -925,7 +925,7 @@ sfx_heli_move_pipedeck(var_0) {
 
 sfx_heli_flyaway_boats(var_0) {
   level.heli_flyaway_boats = spawn("script_origin", var_0.origin);
-  level.heli_flyaway_boats linkto(var_0);
+  level.heli_flyaway_boats linkTo(var_0);
   level.heli_flyaway_boats playSound("scn_blackice_pipedeck_heli_away_boats");
   level.heli_engine_lp_01 scalevolume(0.5, 1.0);
   wait 1;
@@ -942,7 +942,7 @@ sfx_assault_heli_flyin() {
 sfx_assault_heli_engine(var_0) {
   wait 0.1;
   level.heli_engine_lp_02 = spawn("script_origin", var_0.origin);
-  level.heli_engine_lp_02 linkto(var_0);
+  level.heli_engine_lp_02 linkTo(var_0);
   level.heli_engine_lp_02 playLoopSound("scn_blackice_pipedeck_heli_lp");
   level.heli_engine_lp_02 scalevolume(0.0);
   wait 0.2;
@@ -953,7 +953,7 @@ sfx_assault_heli_engine(var_0) {
 sfx_heli_flyaway_cmd_center(var_0) {
   wait 0.2;
   level.heli_flyaway_cmd = spawn("script_origin", var_0.origin);
-  level.heli_flyaway_cmd linkto(var_0);
+  level.heli_flyaway_cmd linkTo(var_0);
   level.heli_engine_lp_02 stoploopsound("scn_blackice_pipedeck_heli_lp");
   level.heli_flyaway_cmd playSound("scn_blackice_pipedeck_heli_away_cmd");
   level.heli_engine_lp_02 delete();
@@ -965,7 +965,7 @@ sfx_heli_wind_debris() {
   }
 
   level.heli_wind_debris = spawn("script_origin", level.player.origin);
-  level.heli_wind_debris linkto(level.player);
+  level.heli_wind_debris linkTo(level.player);
   level.heli_wind_debris playLoopSound("scn_blackice_pipedeck_heli_debris_lp");
   level.heli_wind_debris scalevolume(0.0, 0.0);
   wait 0.1;
@@ -983,7 +983,7 @@ sfx_assault_heli_wind(var_0) {
   level.heli_wind endon("death");
   thread common_scripts\utility::delete_on_death(level.heli_wind);
   level.heli_wind.origin = var_0.origin + (0, 0, -350);
-  level.heli_wind linkto(var_0);
+  level.heli_wind linkTo(var_0);
   level.heli_wind playLoopSound("scn_blackice_pipedeck_heli_wind_lp");
   level.heli_wind scalevolume(0.0);
   wait 0.1;
@@ -1001,14 +1001,14 @@ sfx_heli_turret_fire_squibs() {
 
   if(!isDefined(level.heli_squibs)) {
     level.heli_squibs = spawn("script_origin", self.turret_impact.origin);
-    level.heli_squibs linkto(self.turret_impact);
+    level.heli_squibs linkTo(self.turret_impact);
   }
 
   level.heli_squibs playLoopSound("scn_blackice_pipedeck_squib_lp");
 
   if(!isDefined(level.squib_debris)) {
     level.squib_debris = spawn("script_origin", self.turret_impact.origin);
-    level.squib_debris linkto(self.turret_impact);
+    level.squib_debris linkTo(self.turret_impact);
   }
 
   level.squib_debris playLoopSound("scn_blackice_pipedeck_debris_lp");
@@ -1030,7 +1030,7 @@ sfx_heli_turret_shells() {
   if(!isDefined(level.heli_shells)) {
     level.heli_shells = spawn("script_origin", self.origin);
     level.heli_shells.origin = self.origin + (0, 0, -450);
-    level.heli_shells linkto(self);
+    level.heli_shells linkTo(self);
   }
 
   wait 0.2;
@@ -1084,7 +1084,7 @@ sfx_turbines() {
   level.player playSound("scn_blackice_cmd_turbine_start");
   wait 2;
   level.cmd_turbine_lp = spawn("script_origin", (0, 0, 0));
-  level.cmd_turbine_lp linkto(level.player);
+  level.cmd_turbine_lp linkTo(level.player);
   level.cmd_turbine_lp playLoopSound("scn_blackice_cmd_turbine_lp");
   common_scripts\utility::flag_wait("minigame_practice_over");
   wait 0.2;
@@ -1114,7 +1114,7 @@ sfx_exfil_alarm() {
   wait 1.4;
   level.exfil_alarm = spawn("script_origin", (0, 0, 0));
   level.exfil_alarm playLoopSound("scn_blackice_cmd_exfil_alarm");
-  level.exfil_alarm linkto(level.player);
+  level.exfil_alarm linkTo(level.player);
 
   if(common_scripts\utility::flag("sfx_warning_playing")) {
     level.command_warning_node stoploopsound("scn_blackice_cmd_turbine_warning_lp");
@@ -1259,7 +1259,7 @@ sfx_death_stop_rumbles() {
 
 sfx_blackice_console_fail_explo() {
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   wait 1.3;
   var_0 playSound("scn_blackice_exfil_fail_console");
 }

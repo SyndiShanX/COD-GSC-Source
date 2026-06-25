@@ -38,7 +38,7 @@ start_individual_wave() {
 
   var_1 = spawn("script_origin", level.player.origin + (800, var_0, level.water_level_z - level.player.origin[2]));
   var_1 playSound("elm_waves_pass_by");
-  var_1 moveto(var_1.origin + (-1600, 650, 0), 13);
+  var_1 moveTo(var_1.origin + (-1600, 650, 0), 13);
   wait 21;
   var_1 stopsounds();
   var_1 delete();

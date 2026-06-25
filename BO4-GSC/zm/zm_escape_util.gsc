@@ -159,16 +159,16 @@ function_7273c33d(s_loc, var_2c30f72f = 1) {
   self setfreecameralockonallowed(0);
   self forceteleport(s_loc.origin, s_loc.angles);
   self ghost();
-  playsoundatposition(#"zmb_hellhound_prespawn", s_loc.origin);
+  playSoundAtPosition(#"zmb_hellhound_prespawn", s_loc.origin);
   wait 1.5;
 
   if(var_2c30f72f) {
     self clientfield::increment("dog_spawn_fx");
-    playsoundatposition(#"zmb_hellhound_bolt", s_loc.origin);
+    playSoundAtPosition(#"zmb_hellhound_bolt", s_loc.origin);
   }
 
   earthquake(0.5, 0.75, s_loc.origin, 1000);
-  playsoundatposition(#"zmb_hellhound_spawn", s_loc.origin);
+  playSoundAtPosition(#"zmb_hellhound_spawn", s_loc.origin);
   assert(isDefined(self), "<dev string:x38>");
   assert(isalive(self), "<dev string:x53>");
   assert(zm_utility::is_magic_bullet_shield_enabled(self), "<dev string:x68>");
@@ -192,7 +192,7 @@ catwalk_arm_scene_init() {
 function_817220a9(a_ents) {
   a_ents[#"arm_grasp"] setCanDamage(1);
   a_ents[#"arm_grasp"].health = 10000;
-  var_44ec6b44 = getent(self.target, "targetname");
+  var_44ec6b44 = getEnt(self.target, "targetname");
   a_ents[#"arm_grasp"].var_ead5d884 = 1;
 
   if(!zm_utility::is_standard()) {
@@ -347,7 +347,7 @@ function_2d4f5b73() {
 
   if(!level.var_4b695095) {
     level.var_4b695095 = 1;
-    playsoundatposition("amb_thunder_strike_script", (6559, 17376, 3893));
+    playSoundAtPosition("amb_thunder_strike_script", (6559, 17376, 3893));
     wait 3;
     level.var_4b695095 = 0;
   }
@@ -540,7 +540,7 @@ dog_spawn_func() {
 
     var_905a9429 = [];
     var_51fb0ec7 = [];
-    players = getplayers();
+    players = getPlayers();
 
     foreach(loc in level.zm_loc_types[#"dog_location"]) {
       if(array::contains(var_2057a8c1, loc.zone_name)) {
@@ -628,7 +628,7 @@ make_wobble() {
 
   yaw = self.angles[1] + yaw;
   new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-  self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+  self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
   wait randomfloat(waittime - 0.1);
 }
 

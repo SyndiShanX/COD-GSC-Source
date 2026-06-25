@@ -209,7 +209,7 @@ function fail(reason = undefined, var_eeb30248 = undefined) {
     return;
   }
 
-  foreach(aplayer in getplayers()) {
+  foreach(aplayer in getPlayers()) {
     aplayer val::set("round_reset", "takedamage", 0);
     aplayer val::set("round_reset", "freezecontrols", 1);
     aplayer notify(#"fake_death");
@@ -236,7 +236,7 @@ function fail(reason = undefined, var_eeb30248 = undefined) {
 
   if(function_ba9853db() < 3) {
     level flag::set("round_reset");
-    playsoundatposition(#"zmb_trials_round_fail", (0, 0, 0));
+    playSoundAtPosition(#"zmb_trials_round_fail", (0, 0, 0));
   } else {
     level thread function_18b797ec();
     b_game_ended = 1;
@@ -251,17 +251,17 @@ function function_361e2cb0() {
   level notify(#"end_round_think");
   setmatchflag("disableIngameMenu", 1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::set("end_game", "takedamage", 0);
     player closeingamemenu();
     player closemenu("StartMenu_Main");
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::set("end_game", "freezecontrols", 1);
   }
 
-  playsoundatposition(#"hash_6a80142d79605bc6", (0, 0, 0));
+  playSoundAtPosition(#"hash_6a80142d79605bc6", (0, 0, 0));
   zm_trial_util::set_game_state(2);
   level.var_7fe57c6b = 1;
   wait 3;
@@ -272,10 +272,10 @@ function function_361e2cb0() {
 function function_18b797ec() {
   level flag::set(#"trial_failed");
   level notify(#"end_round_think");
-  playsoundatposition(#"hash_24ecb9cb90a831b7", (0, 0, 0));
+  playSoundAtPosition(#"hash_24ecb9cb90a831b7", (0, 0, 0));
   setmatchflag("disableIngameMenu", 1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::set("end_game", "takedamage", 0);
     player val::set("end_game", "freezecontrols", 1);
     player closeingamemenu();
@@ -334,7 +334,7 @@ function private reset_round() {
   function_bcd35efc();
   waitframe(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::reset("round_reset", "takedamage");
     player val::reset("round_reset", "freezecontrols");
     player showcrosshair(1);
@@ -355,7 +355,7 @@ function function_ae725d63(n_delay = 8) {
 }
 
 function private function_f93fbae5() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       continue;
     }
@@ -375,7 +375,7 @@ function private function_f93fbae5() {
 }
 
 function private function_b4d58bfd() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     foreach(weapon in player getweaponslist(1)) {
       player unlockweapon(weapon);
 
@@ -389,7 +389,7 @@ function private function_b4d58bfd() {
 }
 
 function private function_47ed291b() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!is_true(player.var_16735873)) {
       player notify(#"fasttravel_over");
     }
@@ -397,7 +397,7 @@ function private function_47ed291b() {
 }
 
 function private function_10801ad3() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_42a4759e = {};
     player.var_42a4759e.score = player zm_score::get_player_score();
     player.var_42a4759e.score_total = player.score_total;
@@ -436,7 +436,7 @@ function private function_23baf070(loadout) {
 }
 
 function private function_bcd35efc() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_42a4759e)) {
       assertmsg("<dev string:x56>");
       continue;
@@ -537,7 +537,7 @@ function private function_17b04fd7() {
   while(gettime() < end_time) {
     all_players_spawned = 1;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.sessionstate == "spectator") {
         all_players_spawned = 0;
       }
@@ -567,7 +567,7 @@ function function_74872db6() {
     return;
   }
 
-  playsoundatposition(#"hash_44cf63a367dbd4ff", (0, 0, 0));
+  playSoundAtPosition(#"hash_44cf63a367dbd4ff", (0, 0, 0));
   zm_trial_util::set_game_state(0);
   zm_trial_util::function_8cdbf9f0();
   zm_trial_util::function_96e10d88(0);
@@ -600,7 +600,7 @@ function on_round_end() {
   }
 
   level notify(#"trial_round_end");
-  playsoundatposition(#"zmb_trials_round_end", (0, 0, 0));
+  playSoundAtPosition(#"zmb_trials_round_end", (0, 0, 0));
   assert(isDefined(level.var_d77a6967));
   assert(isDefined(level.var_3dd975d5));
 
@@ -626,7 +626,7 @@ function on_round_end() {
       array::delete_all(level.var_d3b05dcb);
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player bgb::take();
     }
   }

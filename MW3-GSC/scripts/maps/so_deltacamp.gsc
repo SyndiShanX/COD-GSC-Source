@@ -211,7 +211,7 @@ _id_4D79(var_0) {
 }
 
 _id_4010() {
-  var_0 = common_scripts\utility::getstruct("breach_hint_01", "targetname");
+  var_0 = common_scripts\utility::getStruct("breach_hint_01", "targetname");
   level._id_4D74 = spawn("script_model", var_0.origin);
   level._id_4D74 setModel("mil_frame_charge_obj");
   level._id_4D74.angles = var_0.angles;
@@ -233,7 +233,7 @@ _id_4010() {
   level._id_4D75 delete();
   common_scripts\utility::flag_wait("target_group_root_v2_03_cleared");
   var_2 common_scripts\utility::trigger_on();
-  var_0 = common_scripts\utility::getstruct("breach_hint_02", "targetname");
+  var_0 = common_scripts\utility::getStruct("breach_hint_02", "targetname");
   level._id_4D76 = spawn("script_model", var_0.origin);
   level._id_4D76 setModel("mil_frame_charge_obj");
   level._id_4D76.angles = var_0.angles;
@@ -269,11 +269,11 @@ _id_4D7E() {
   if(level._id_4D68 == 1) {
     var_0 = maps\_utility::_id_2816("stay_sharp");
     var_1 = &"SO_DELTACAMP_OBJ_V1";
-    var_2 = common_scripts\utility::getstruct("obj_start_pos_v1", "targetname").origin;
+    var_2 = common_scripts\utility::getStruct("obj_start_pos_v1", "targetname").origin;
   } else if(level._id_4D68 == 2) {
     var_0 = maps\_utility::_id_2816("breach_and_clear");
     var_1 = &"SO_DELTACAMP_OBJ_V2";
-    var_2 = common_scripts\utility::getstruct("obj_start_pos_v2", "targetname").origin;
+    var_2 = common_scripts\utility::getStruct("obj_start_pos_v2", "targetname").origin;
   }
 
   objective_add(var_0, "active", var_1);
@@ -300,7 +300,7 @@ _id_4D80() {
   }
   level._id_45C4 endon("death");
   wait 0.5;
-  var_0 = common_scripts\utility::getstruct("truck_speaker", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("truck_speaker", "script_noteworthy");
 
   if(level._id_4D68 == 1) {
     if(!maps\_utility::_id_12C1()) {
@@ -340,7 +340,7 @@ _id_4D81() {
   level endon(level._id_4D6B);
   common_scripts\utility::array_thread(level.players, ::_id_4D83);
   level waittill("weapon_hidden_collected");
-  var_0 = common_scripts\utility::getstruct("speaker_truck", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("speaker_truck", "script_noteworthy");
   _id_0048();
   _id_0084("so_deltacamp_trk_owntoys", var_0);
 }
@@ -477,7 +477,7 @@ _id_4D85() {
   maps\_utility::_id_265A("allies");
 
   if(level._id_4D68 == 1) {
-    var_0 = getent("sandman", "targetname");
+    var_0 = getEnt("sandman", "targetname");
     level._id_45C0 = var_0 maps\_utility::_id_166F(1);
     level._id_45C0 thread _id_4D89();
     level._id_45C0 thread _id_4D88();
@@ -487,11 +487,11 @@ _id_4D85() {
     level._id_45C0.health = 1;
     level._id_45C0 maps\_utility::_id_24F5();
     level._id_45C0._id_1032 = "generic";
-    var_1 = getent("ent_sandman_scene", "targetname");
+    var_1 = getEnt("ent_sandman_scene", "targetname");
     var_1 thread maps\_anim::_id_124E(level._id_45C0, "sandman_idle", "end_idle");
   }
 
-  var_0 = getent("truck", "targetname");
+  var_0 = getEnt("truck", "targetname");
   level._id_45C4 = var_0 maps\_utility::_id_166F(1);
   level._id_45C4 thread _id_4D89();
   level._id_45C4 thread _id_4D88();
@@ -502,15 +502,15 @@ _id_4D85() {
   level._id_45C4._id_1032 = "generic";
 
   if(level._id_4D68 == 1) {
-    var_2 = common_scripts\utility::getstruct("loc_truck_look_at_v1_start", "targetname");
+    var_2 = common_scripts\utility::getStruct("loc_truck_look_at_v1_start", "targetname");
     var_2 thread maps\_anim::_id_124E(level._id_45C4, "truck_idle", "end_idle");
     level._id_45C4 thread _id_4D87(var_2);
   } else if(level._id_4D68 == 2) {
-    var_3 = common_scripts\utility::getstruct("loc_truck_look_at_bridge", "targetname");
+    var_3 = common_scripts\utility::getStruct("loc_truck_look_at_bridge", "targetname");
     var_3 thread maps\_anim::_id_124E(level._id_45C4, "truck_idle", "end_idle");
   }
 
-  var_0 = getent("grinch", "targetname");
+  var_0 = getEnt("grinch", "targetname");
   level._id_4D86 = var_0 maps\_utility::_id_166F(1);
   level._id_4D86 thread _id_4D89();
   level._id_4D86 thread _id_4D88();
@@ -519,7 +519,7 @@ _id_4D85() {
   level._id_4D86.health = 1;
   level._id_4D86 maps\_utility::_id_24F5();
   level._id_4D86._id_1032 = "generic";
-  var_1 = getent("ent_grinch_scene", "targetname");
+  var_1 = getEnt("ent_grinch_scene", "targetname");
   var_1 thread maps\_anim::_id_124E(level._id_4D86, "grinch_idle", "end_idle");
   var_4 = spawn("script_model", level._id_4D86.origin);
   var_4 setModel("com_folding_chair");
@@ -549,7 +549,7 @@ _id_4D87(var_0) {
   }
 
   var_0 notify("end_idle");
-  var_5 = common_scripts\utility::getstruct("loc_truck_look_at_bridge", "targetname");
+  var_5 = common_scripts\utility::getStruct("loc_truck_look_at_bridge", "targetname");
   var_5 thread maps\_anim::_id_124E(self, "truck_idle", "end_idle");
 }
 
@@ -586,7 +586,7 @@ _id_3F71() {
     var_1 _id_4D8E();
 
     if(level._id_4D68 == 2) {
-      var_2 = common_scripts\utility::getstruct("struct_start_pos_player" + (var_3 + 1) + "_v2", "targetname");
+      var_2 = common_scripts\utility::getStruct("struct_start_pos_player" + (var_3 + 1) + "_v2", "targetname");
       var_1 _id_4D8D(var_2);
     }
   }
@@ -620,7 +620,7 @@ _id_4D8B() {
 }
 
 _id_4D8D(var_0) {
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
 
   if(isDefined(var_0.angles)) {
     self setplayerangles(var_0.angles);
@@ -840,7 +840,7 @@ _id_4DA2() {
 
   foreach(var_3 in var_1) {
     if(var_3.classname == "script_origin") {
-      var_0[var_0.size] = getent(var_3.target, "targetname");
+      var_0[var_0.size] = getEnt(var_3.target, "targetname");
     }
     var_0[var_0.size] = var_3;
   }
@@ -862,21 +862,21 @@ _id_4DA3(var_0, var_1) {
     }
   }
 
-  self linkto(self._id_4DA5);
-  var_6 = getent(self._id_4DA5.target, "targetname");
+  self linkTo(self._id_4DA5);
+  var_6 = getEnt(self._id_4DA5.target, "targetname");
   var_6 hide();
   var_6 notsolid();
-  var_6 linkto(self);
-  self._id_035A linkto(self._id_4DA5);
+  var_6 linkTo(self);
+  self._id_035A linkTo(self._id_4DA5);
 
   if(_id_4DBF("reverse", ";")) {
     self._id_4DA5 rotatepitch(90, 0.25);
   } else if(_id_4DBF("sideways_right", ";")) {
-    self._id_4DA5 rotateyaw(-180, 0.35);
+    self._id_4DA5 rotateYaw(-180, 0.35);
   } else if(_id_4DBF("sideways_left", ";")) {
-    self._id_4DA5 rotateyaw(180, 0.35);
+    self._id_4DA5 rotateYaw(180, 0.35);
   } else if(_id_4DBF("vertical", ";")) {
-    self._id_4DA5 moveto(self._id_4DA5.origin - (0, 0, 36), 0.25);
+    self._id_4DA5 moveTo(self._id_4DA5.origin - (0, 0, 36), 0.25);
   } else {
     self._id_4DA5 rotatepitch(-90, 0.25);
   }
@@ -885,7 +885,7 @@ _id_4DA3(var_0, var_1) {
     self._id_4DA7 = undefined;
     self._id_4DA8 = undefined;
     self._id_4DA7 = maps\_utility::_id_0AE9(self._id_4DA5.origin, level._id_4D9B, 10);
-    self._id_4DA8 = getent(self._id_4DA7.target, "targetname");
+    self._id_4DA8 = getEnt(self._id_4DA7.target, "targetname");
     self._id_4DA6 = [];
     self._id_4DA6[0] = self._id_4DA7;
     self._id_4DA6[1] = self._id_4DA8;
@@ -952,11 +952,11 @@ _id_4DA3(var_0, var_1) {
     if(_id_4DBF("reverse", ";")) {
       self._id_4DA5 rotatepitch(-90, var_12);
     } else if(_id_4DBF("sideways_right", ";")) {
-      self._id_4DA5 rotateyaw(180, var_12);
+      self._id_4DA5 rotateYaw(180, var_12);
     } else if(_id_4DBF("sideways_left", ";")) {
-      self._id_4DA5 rotateyaw(-180, var_12);
+      self._id_4DA5 rotateYaw(-180, var_12);
     } else if(_id_4DBF("vertical", ";")) {
-      self._id_4DA5 moveto(self._id_4DA5.origin + (0, 0, 36), var_12);
+      self._id_4DA5 moveTo(self._id_4DA5.origin + (0, 0, 36), var_12);
     } else {
       self._id_4DA5 rotatepitch(90, var_12);
     }
@@ -1032,11 +1032,11 @@ _id_4DA3(var_0, var_1) {
     if(_id_4DBF("reverse", ";")) {
       self._id_4DA5 rotatepitch(90, 0.25);
     } else if(_id_4DBF("sideways_right", ";")) {
-      self._id_4DA5 rotateyaw(-180, 0.35);
+      self._id_4DA5 rotateYaw(-180, 0.35);
     } else if(_id_4DBF("sideways_left", ";")) {
-      self._id_4DA5 rotateyaw(180, 0.35);
+      self._id_4DA5 rotateYaw(180, 0.35);
     } else if(_id_4DBF("vertical", ";")) {
-      self._id_4DA5 moveto(self._id_4DA5.origin - (0, 0, 36), 0.25);
+      self._id_4DA5 moveTo(self._id_4DA5.origin - (0, 0, 36), 0.25);
     } else {
       self._id_4DA5 rotatepitch(-90, 0.25);
     }
@@ -1096,9 +1096,9 @@ _id_4DAD() {
   var_6 = var_5 / (12.0 * var_4);
 
   for(;;) {
-    var_0 moveto(self._id_4DA8.origin, var_6);
+    var_0 moveTo(self._id_4DA8.origin, var_6);
     wait(var_6);
-    var_0 moveto(self._id_4DA7.origin, var_6);
+    var_0 moveTo(self._id_4DA7.origin, var_6);
     wait(var_6);
   }
 }
@@ -1136,7 +1136,7 @@ _id_4DAF() {
     var_5 = common_scripts\utility::ter_op(isDefined(self._id_2AFE), self._id_2AFE, 1);
     var_6 = distance(self._id_4DA9[var_4].origin, self._id_4DA9[var_4 + 1].origin);
     var_7 = var_6 / (12.0 * var_5);
-    var_0 moveto(self._id_4DA9[var_4 + 1].origin, var_7);
+    var_0 moveTo(self._id_4DA9[var_4 + 1].origin, var_7);
     wait(var_7);
   }
 
@@ -1217,7 +1217,7 @@ _id_4DB3() {
     self._id_4DA8 = self._id_4DA6[0];
   }
 
-  self._id_4DA5 moveto(self._id_4DA7.origin, 0.1);
+  self._id_4DA5 moveTo(self._id_4DA7.origin, 0.1);
 }
 
 _id_4DB4() {
@@ -1227,7 +1227,7 @@ _id_4DB4() {
     var_0 = self._id_2961;
   }
   self waittill("open");
-  self rotateyaw(var_0, 0.5, 0.2, 0.1);
+  self rotateYaw(var_0, 0.5, 0.2, 0.1);
 }
 
 _id_4DB5() {
@@ -1492,10 +1492,10 @@ _id_4DC1(var_0) {
   }
 
   foreach(var_11 in var_3) {}
-  var_11 linkto(var_2);
+  var_11 linkTo(var_2);
 
   foreach(var_14 in var_4) {}
-  var_14 linkto(var_2);
+  var_14 linkTo(var_2);
 
   var_16 = var_2;
   var_16._id_4DC2 = var_4;
@@ -1531,9 +1531,9 @@ _id_4042(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_4 = 1.5;
-    self rotateto(self.angles + (0, var_3, 0), 1.5, 0.25, 0.25);
+    self rotateTo(self.angles + (0, var_3, 0), 1.5, 0.25, 0.25);
   } else {
-    self rotateto(self.angles + (0, var_3, 0), 4, 1.5, 1.5);
+    self rotateTo(self.angles + (0, var_3, 0), 4, 1.5, 1.5);
   }
   if(isDefined(self._id_4DC3)) {
     self._id_4DC3 maps\_utility::_id_27C5();
@@ -1566,9 +1566,9 @@ _id_4DC4(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_3 = 1;
-    self rotateto(self.angles + (0, var_2, 0), 1, 0.25, 0.25);
+    self rotateTo(self.angles + (0, var_2, 0), 1, 0.25, 0.25);
   } else {
-    self rotateto(self.angles + (0, var_2, 0), 2, 0.5, 0.5);
+    self rotateTo(self.angles + (0, var_2, 0), 2, 0.5, 0.5);
   }
   if(isDefined(self._id_4DC3)) {
     self._id_4DC3 maps\_utility::_id_27C6();

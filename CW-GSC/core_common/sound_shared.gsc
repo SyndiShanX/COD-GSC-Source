@@ -54,11 +54,11 @@ function loop_on_tag(alias, tag, bstopsoundondeath) {
   }
 
   if(isDefined(tag)) {
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);
@@ -77,11 +77,11 @@ function play_on_tag(alias, tag, ends_on_death, var_50bba55f, radio_dialog) {
   thread delete_on_death_wait_sound(org, "sounddone");
 
   if(isDefined(ends_on_death)) {
-    org linkto(self, ends_on_death, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, ends_on_death, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   if(self === level.player_radio_emitter) {
@@ -148,11 +148,11 @@ function loop_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playLoopSound(alias);

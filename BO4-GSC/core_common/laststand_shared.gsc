@@ -13,7 +13,7 @@ player_is_in_laststand() {
 
 player_num_in_laststand() {
   num = 0;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i] player_is_in_laststand()) {
@@ -25,7 +25,7 @@ player_num_in_laststand() {
 }
 
 player_all_players_in_laststand() {
-  return player_num_in_laststand() == getplayers().size;
+  return player_num_in_laststand() == getPlayers().size;
 }
 
 player_any_player_in_laststand() {
@@ -36,10 +36,10 @@ is_facing(facee, requireddot = 0.9) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > requireddot;
 }

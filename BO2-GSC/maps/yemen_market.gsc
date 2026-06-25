@@ -159,7 +159,7 @@ speech_drones_ignore_player() {
 
 speech_quads() {
   a_quads = [];
-  qdrotor_struct = getstruct("speech_qdrotor_origin", "targetname");
+  qdrotor_struct = getStruct("speech_qdrotor_origin", "targetname");
 
   for(i = 0; i < 4; i++) {
     vh_quad = maps\_vehicle::spawn_vehicle_from_targetname("vtol_attack_drone");
@@ -279,7 +279,7 @@ speech_drone_runners() {
 }
 
 speech_courtyard_ai() {
-  sp_courtyard_spawner = getent("court_terrorists", "targetname");
+  sp_courtyard_spawner = getEnt("court_terrorists", "targetname");
   sp_courtyard_spawner add_spawn_function(::spawn_func_player_damage_only);
   flag_wait("player_turns_back");
   level thread run_scene_and_delete("shooting_drones_ter1");
@@ -351,7 +351,7 @@ autoexec market_gump_cleanup() {
   trigger_wait("trigger_market_unload");
   level thread cleanup("fxanim_vtol1_crash");
   level thread cleanup("market_vtol_crash");
-  m_vtol = getent("market_vtol", "targetname");
+  m_vtol = getEnt("market_vtol", "targetname");
 
   if(isDefined(m_vtol)) {
     m_vtol delete();
@@ -475,7 +475,7 @@ yemen_aigroup_fallback(str_aigroup, str_new_goalvolume, n_fallback_num, str_fall
     }
   }
 
-  vol_goal = getent(str_new_goalvolume, "targetname");
+  vol_goal = getEnt(str_new_goalvolume, "targetname");
 
   foreach(ai_guy in a_ai) {
     ai_guy thread yemen_fallback_move(vol_goal);
@@ -506,7 +506,7 @@ yemen_fallback_move(vol_goal) {
   self setgoalvolumeauto(vol_goal);
   self waittill("goal");
   self setgoalpos(self.origin);
-  self set_goalradius(2048);
+  self set_goalRadius(2048);
 }
 
 yemen_fallback_delay_bloodydeath() {
@@ -585,7 +585,7 @@ melee_01_yemeni() {
 melee_01_yemeni_cancel() {
   self waittill("death");
   end_scene("melee_01");
-  ai_terrorist = getent("melee_01_terrorist", "targetname");
+  ai_terrorist = getEnt("melee_01_terrorist", "targetname");
 
   if(isalive(ai_terrorist)) {
     ai_terrorist ragdoll_death();
@@ -603,7 +603,7 @@ car_flip_guy02(ai) {
 
 car_flip_car(car) {
   scene_wait("car_flip");
-  clip = getent("car_flip_clip", "targetname");
+  clip = getEnt("car_flip_clip", "targetname");
   clip trigger_off();
   clip connectpaths();
   clip delete();
@@ -720,13 +720,13 @@ yemen_market_clean_up() {
 market_vtol_crash() {
   level thread run_scene_and_delete("market_vtol_loop");
   flag_wait("player_leaves_stage");
-  m_vtol = getent("market_vtol", "targetname");
+  m_vtol = getEnt("market_vtol", "targetname");
   m_vtol setforcenocull();
   trigger_wait("market_vtol_crash");
   level thread market_vtol_crash_damage();
   queue_dialog_ally("cd0_vtol_overhead_bring_0");
   queue_dialog_ally("cd1_fire_the_rpg_0");
-  s_stinger_start = getstruct("vtol_crash_stinger_start", "targetname");
+  s_stinger_start = getStruct("vtol_crash_stinger_start", "targetname");
   magicbullet("usrpg_magic_bullet_sp", s_stinger_start.origin, m_vtol.origin - vectorscale((0, 0, 1), 32.0));
   wait 0.8;
   m_vtol vehicle_toggle_sounds(0);
@@ -762,7 +762,7 @@ market_vtol_crash_damage() {
   }
 
   level waittill("fxanim_vtol1_crash_start");
-  crash_struct = getstruct("vtol_crash_damage", "targetname");
+  crash_struct = getStruct("vtol_crash_damage", "targetname");
   wait 5;
   radiusdamage(crash_struct.origin, 256, 200, 100);
 }

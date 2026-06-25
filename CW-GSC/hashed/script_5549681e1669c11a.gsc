@@ -132,8 +132,8 @@ function init() {
     room.dungeon = struct::get("zombietron_bonus_room_dungeon_" + room.name, "script_noteworthy");
     room.var_2f0b512f = function_19e7d0fc(room.name);
     room.spawned_items = [];
-    room.var_1406397f = getent("zombietron_bonus_room_exit_trigger_" + room.name, "targetname");
-    room.var_6eb6f696 = getent("zombietron_bonus_room_abort_trigger_" + room.name, "targetname");
+    room.var_1406397f = getEnt("zombietron_bonus_room_exit_trigger_" + room.name, "targetname");
+    room.var_6eb6f696 = getEnt("zombietron_bonus_room_abort_trigger_" + room.name, "targetname");
     assert(room.var_12ae4b83.size == 4);
     var_663588d = "Zombietron/Debug/AutoTesting/BonusRoomSoak/";
     cmdline = "scr_bonus_room_activate " + room.name + "; zombie_devgui bonusroomsoak";
@@ -512,7 +512,7 @@ function function_898ca25f(room) {
     [[generator]] - > getmodel() namespace_c85a46fe::function_47c860ff(0);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.doa)) {
       player.doa.var_2fb8ffeb = undefined;
 
@@ -542,7 +542,7 @@ function function_898ca25f(room) {
       level namespace_981c1f3c::function_c88b8726(idx);
       var_5b55ba1f = namespace_4dae815d::function_21cd3890(5);
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread namespace_981c1f3c::function_fe17d41e();
       }
     }
@@ -580,7 +580,7 @@ function function_898ca25f(room) {
       vehicle usevehicle(player, 0);
     }
 
-    player setorigin(room.var_12ae4b83[idx].origin);
+    player setOrigin(room.var_12ae4b83[idx].origin);
     player setplayerangles(room.var_12ae4b83[idx].angles);
     player.doa.var_2fb8ffeb = undefined;
     player namespace_7f5aeb59::function_61d74d57();
@@ -719,7 +719,7 @@ function function_898ca25f(room) {
     var_62ad07bf = "evt_doa_travel_doors_chosen";
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player namespace_e32bb68::function_3a59ec34(var_62ad07bf);
   }
 
@@ -848,7 +848,7 @@ function function_707a2001(sec) {
   level endon(#"hash_593a6814c28d14e7", #"game_reset", #"game_over");
   wait sec;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player namespace_e32bb68::function_3a59ec34("evt_doa_travel_warning");
   }
 }
@@ -923,7 +923,7 @@ function function_3c47fbe0(room) {
 
   util::wait_network_frame();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isbot(player)) {
       continue;
     }
@@ -1071,7 +1071,7 @@ function function_a9f78bf(&var_4200bfbf, room) {
   idx = 0;
 
   foreach(player in players) {
-    player setorigin(var_4200bfbf[idx].origin);
+    player setOrigin(var_4200bfbf[idx].origin);
     player setplayerangles(var_4200bfbf[idx].angles);
     player clientfield::increment_to_player("resetCamera");
     player namespace_7f5aeb59::function_61d74d57();
@@ -1147,7 +1147,7 @@ function function_e5c7bce7() {
       }
 
       if(isDefined(level.doa.teleporter) && randomint(5) == 0) {
-        guys[0] setorigin(level.doa.teleporter.origin + (0, 0, 32));
+        guys[0] setOrigin(level.doa.teleporter.origin + (0, 0, 32));
         break;
       }
     }
@@ -1200,7 +1200,7 @@ function function_170eefc7(room, aicount = 28) {
   setsaveddvar(#"hash_63212188205e8c27", 0);
 
   if(room.name == "slideways3") {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player notify(#"lantern_terminated");
     }
   }
@@ -1217,7 +1217,7 @@ function function_170eefc7(room, aicount = 28) {
     [[level.doa.var_39e3fa99]] - > function_6d5262dc(aicount);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("setCameraSide", 0);
     player namespace_7f5aeb59::function_fae39d88();
   }
@@ -1309,7 +1309,7 @@ function function_4d16b7a9(room) {
   level waittill(#"hash_52ca1213084f29fa");
   setjumpheight(128);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("setCameraSide", 1);
     player allowjump(1);
     player allowcrouch(1);
@@ -1347,7 +1347,7 @@ function function_79b68863(var_c4b5b87c) {
   self allowslide(1);
   self allowdoublejump(1);
   self allowsprint(1);
-  self setorigin(level.doa.var_6f3d327.var_12ae4b83[self.entnum].origin);
+  self setOrigin(level.doa.var_6f3d327.var_12ae4b83[self.entnum].origin);
   self setplayerangles(level.doa.var_6f3d327.var_12ae4b83[self.entnum].angles);
   wait 0.5;
 
@@ -1447,7 +1447,7 @@ function function_85a06bf3(var_c4b5b87c) {
     }
 
     assert(isDefined(self.last_damaged_by.var_4c5fe7c6));
-    self setorigin(self.last_damaged_by.var_4c5fe7c6.origin);
+    self setOrigin(self.last_damaged_by.var_4c5fe7c6.origin);
     self setplayerangles(self.last_damaged_by.var_4c5fe7c6.angles);
   }
 
@@ -1461,12 +1461,12 @@ function function_96e96e0f(room) {
   i = 0;
   var_876d2ae2 = struct::get_array("eggxit_1_gateWarp", "targetname");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player === result.activator) {
       continue;
     }
 
-    player setorigin(var_876d2ae2[i].origin);
+    player setOrigin(var_876d2ae2[i].origin);
     player setplayerangles(var_876d2ae2[i].angles);
     waitframe(1);
     player namespace_83eb6304::function_3ecfde67("lightningStrike");
@@ -1530,12 +1530,12 @@ function function_bbd6f14f(room, openpos, closedpos) {
   level endon(#"hash_7dd47c99b7707b1c");
   self notify("35bd1e44daedf28d");
   self endon("35bd1e44daedf28d");
-  var_9b6b2552 = getent("eggxit_margwa_room", "targetname");
+  var_9b6b2552 = getEnt("eggxit_margwa_room", "targetname");
   assert(isDefined(var_9b6b2552));
   var_1ed3b211 = struct::get(var_9b6b2552.target, "targetname");
   assert(isDefined(var_1ed3b211));
   open = 0;
-  self disconnectpaths();
+  self disconnectPaths();
 
   while(true) {
     wait 0.5;
@@ -1548,15 +1548,15 @@ function function_bbd6f14f(room, openpos, closedpos) {
       }
     } else if(open) {
       open = 0;
-      self disconnectpaths();
+      self disconnectPaths();
     }
 
     diff = abs(self.origin[2] - closedpos[2]);
 
     if(diff <= 10) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player istouching(var_9b6b2552)) {
-          player setorigin(var_1ed3b211.origin + (randomintrange(-40, 40), randomintrange(-40, 40), 0));
+          player setOrigin(var_1ed3b211.origin + (randomintrange(-40, 40), randomintrange(-40, 40), 0));
           waitframe(1);
           player namespace_83eb6304::function_3ecfde67("lightningStrike");
           player namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
@@ -1606,7 +1606,7 @@ function function_430e5080(room) {
     deltaz = abs(self.origin[2] - desiredpos[2]);
     timedelta = math::clamp(deltaz / 180 * 5, 0.05, 5);
     self namespace_e32bb68::function_3a59ec34("evt_doa_stonedoor_open");
-    self moveto(desiredpos, timedelta);
+    self moveTo(desiredpos, timedelta);
 
     if(isDefined(margwa)) {
       margwa.ignoreall = 0;
@@ -1645,11 +1645,11 @@ function function_1d4f93c3(room) {
   level waittill(#"hash_52ca1213084f29fa");
   setjumpheight(128);
   level thread function_96e96e0f(room);
-  var_87f0772a = getent("eggxit_margwa_door", "targetname");
+  var_87f0772a = getEnt("eggxit_margwa_door", "targetname");
   var_87f0772a thread function_430e5080(room);
   level.overrideactordamage = &function_96bd659;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.doa.var_4f3aee7b = 0;
     player clientfield::set_to_player("setCameraSide", 2);
     player allowjump(1);
@@ -1671,7 +1671,7 @@ function function_46f8e766() {
   self.var_227e7c79 = !is_true(self.var_d55f22cb);
 
   if(is_true(self.basic)) {
-    self.maxhealth = int(max(self.maxhealth, 5000 + 2000 * getplayers().size));
+    self.maxhealth = int(max(self.maxhealth, 5000 + 2000 * getPlayers().size));
     self.health = self.maxhealth;
   }
 
@@ -1731,7 +1731,7 @@ function function_38de5c23(room, aicount = 28) {
     [[level.doa.var_39e3fa99]] - > function_6d5262dc(aicount);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("setCameraSide", 0);
     player namespace_7f5aeb59::function_fae39d88();
   }
@@ -1778,20 +1778,20 @@ function function_1dfe9126(room) {
     deltaz = abs(self.origin[2] - desiredpos[2]);
     timedelta = math::clamp(deltaz / 158 * 5, 0.05, 5);
     self namespace_e32bb68::function_3a59ec34("evt_doa_stonedoor_open");
-    self moveto(desiredpos, timedelta);
+    self moveTo(desiredpos, timedelta);
     result = self waittill(#"plate_deactivated", #"hash_7e6e589015c9e33d");
     self namespace_e32bb68::function_ae271c0b("stoneDoorOpening");
 
     if(result._notify == #"hash_7e6e589015c9e33d") {
       self namespace_e32bb68::function_3a59ec34("evt_doa_stonedoor_close_fast");
-      self moveto(originalpos, 1);
+      self moveTo(originalpos, 1);
       return;
     }
 
     deltaz = abs(self.origin[2] - originalpos[2]);
     timedelta = math::clamp(deltaz / 158 * 5, 0.05, 5);
     self namespace_e32bb68::function_3a59ec34("evt_doa_stonedoor_close");
-    self moveto(originalpos, timedelta);
+    self moveTo(originalpos, timedelta);
   }
 }
 
@@ -1820,9 +1820,9 @@ function function_c0dff79(room) {
 
       if(isDefined(org)) {
         org thread namespace_ec06fe4a::function_52afe5df(1.2);
-        org enablelinkto();
-        result.activator linkto(org);
-        org moveto(target.origin, 1);
+        org enablelinkTo();
+        result.activator linkTo(org);
+        org moveTo(target.origin, 1);
         wait 1;
         result.activator unlink();
         result.activator namespace_83eb6304::function_3ecfde67("turret_impact");
@@ -1832,7 +1832,7 @@ function function_c0dff79(room) {
         continue;
       }
 
-      result.activator setorigin(target.origin);
+      result.activator setOrigin(target.origin);
       result.activator setplayerangles(target.angles);
     }
   }
@@ -1930,7 +1930,7 @@ function function_af1f8cd5(color) {
 
       if(isDefined(model)) {
         self.doa.score.bombs--;
-        model moveto(model.origin + (0, 0, 2000), 3);
+        model moveTo(model.origin + (0, 0, 2000), 3);
         model thread namespace_ec06fe4a::function_52afe5df(3);
         wait 0.25;
       }
@@ -1944,7 +1944,7 @@ function function_af1f8cd5(color) {
       if(isDefined(model)) {
         model setscale(1.5);
         self.doa.score.boosts--;
-        model moveto(model.origin + (0, 0, 2000), 3);
+        model moveTo(model.origin + (0, 0, 2000), 3);
         model thread namespace_ec06fe4a::function_52afe5df(3);
         wait 0.25;
       }
@@ -1957,7 +1957,7 @@ function function_af1f8cd5(color) {
     if(isDefined(model)) {
       model setscale(3);
       self.doa.score.keys--;
-      model moveto(model.origin + (0, 0, 2000), 3);
+      model moveTo(model.origin + (0, 0, 2000), 3);
       model thread namespace_ec06fe4a::function_52afe5df(3);
       wait 0.25;
     }
@@ -2043,9 +2043,9 @@ function function_b2706226(room) {
     level.doa.var_a598a835 = &function_dff4eac9;
     room.var_dd856bff = struct::get_array("rof_safespot", "targetname");
     var_94f3b914 = doa_enemy::function_d7c5adee("meatball_large");
-    count = 7 + getplayers().size * 3;
+    count = 7 + getPlayers().size * 3;
     spot = function_dff4eac9();
-    wavetime = 60 + (getplayers().size < 2 ? 0 : 5);
+    wavetime = 60 + (getPlayers().size < 2 ? 0 : 5);
     doa_enemy::function_a6b807ea(var_94f3b914, count, spot.origin, 0);
     wait 2;
     level.doa.var_a598a835 = undefined;
@@ -2080,7 +2080,7 @@ function function_b2706226(room) {
         var_49d47ba8 = getaiteamarray("<dev string:x150>");
 
         foreach(ai in var_49d47ba8) {
-          level thread namespace_1e25ad94::debugline(getplayers()[0].origin, ai.origin, 30);
+          level thread namespace_1e25ad94::debugline(getPlayers()[0].origin, ai.origin, 30);
         }
       }
 
@@ -2093,7 +2093,7 @@ function function_b2706226(room) {
     wait 3;
     room.var_dd856bff = struct::get_array("rof_safespot", "targetname");
     bosses = 1;
-    numplayers = getplayers().size;
+    numplayers = getPlayers().size;
 
     switch (numplayers) {
       case 1:
@@ -2153,7 +2153,7 @@ function function_b2706226(room) {
       }
 
       if(wavetime % 20 == 0) {
-        for(count = 4 * getplayers().size; count; count--) {
+        for(count = 4 * getPlayers().size; count; count--) {
           spot = function_d1e1819d();
           var_94f3b914 = doa_enemy::function_d7c5adee(randomint(100) < 50 ? "gladiator_marauder" : "gladiator_destroyer");
           ai = doa_enemy::function_4e8ae191(var_94f3b914, 1, spot.origin, 0);
@@ -2212,7 +2212,7 @@ function function_dff4eac9() {
     spawnloc.origin = spot.origin + (0, 0, 765);
     spawnloc.angles = spot.angles;
   } else {
-    player = getplayers()[randomint(getplayers().size)];
+    player = getPlayers()[randomint(getPlayers().size)];
     spawnloc.origin = player.origin + (0, 0, 765);
     spawnloc.angles = player.angles;
   }
@@ -2226,7 +2226,7 @@ function function_d1e1819d() {
   }
 
   spawnloc = spawnStruct();
-  player = getplayers()[randomint(getplayers().size)];
+  player = getPlayers()[randomint(getPlayers().size)];
   spawnloc.origin = player.origin;
   spawnloc.angles = player.angles;
   return spawnloc;

@@ -101,7 +101,7 @@ function function_ee028271() {
         }
       }
 
-      teamplayers = getplayers(team);
+      teamplayers = getPlayers(team);
 
       foreach(player in teamplayers) {
         player clientfield::set_player_uimodel("hud_items_fireteam_percontroller.waypoint_friendly_count_0", isDefined(level.var_7a88cb07[team][2]) ? level.var_7a88cb07[team][2] : 0);

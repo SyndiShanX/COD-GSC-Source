@@ -54,25 +54,25 @@ init() {
   level thread scene::init(#"p8_fxanim_zm_man_telescope_bundle");
   level thread scene::init(#"p8_fxanim_zm_man_dome_crank_bundle");
   level.var_1613cea0 = 0;
-  level.mdl_ring_outer = getent("ring_outer", "targetname");
-  level.mdl_ring_middle = getent("ring_middle", "targetname");
-  level.mdl_ring_inner = getent("ring_inner", "targetname");
-  level.mdl_ring_outer.e_linkto = getent("ring_outer_linkto", "targetname");
-  level.mdl_ring_outer linkto(level.mdl_ring_outer.e_linkto);
-  level.mdl_ring_middle.e_linkto = getent("ring_middle_linkto", "targetname");
-  level.mdl_ring_middle linkto(level.mdl_ring_middle.e_linkto);
-  level.mdl_ring_inner.e_linkto = getent("ring_inner_linkto", "targetname");
-  level.mdl_ring_inner linkto(level.mdl_ring_inner.e_linkto);
-  level.mdl_ring_outer.e_pos = getent(level.mdl_ring_outer.target, "targetname");
-  level.mdl_ring_middle.e_pos = getent(level.mdl_ring_middle.target, "targetname");
-  level.mdl_ring_inner.e_pos = getent(level.mdl_ring_inner.target, "targetname");
-  level.mdl_ring_outer.e_pos linkto(level.mdl_ring_outer);
-  level.mdl_ring_middle.e_pos linkto(level.mdl_ring_middle);
-  level.mdl_ring_inner.e_pos linkto(level.mdl_ring_inner);
+  level.mdl_ring_outer = getEnt("ring_outer", "targetname");
+  level.mdl_ring_middle = getEnt("ring_middle", "targetname");
+  level.mdl_ring_inner = getEnt("ring_inner", "targetname");
+  level.mdl_ring_outer.e_linkto = getEnt("ring_outer_linkto", "targetname");
+  level.mdl_ring_outer linkTo(level.mdl_ring_outer.e_linkto);
+  level.mdl_ring_middle.e_linkto = getEnt("ring_middle_linkto", "targetname");
+  level.mdl_ring_middle linkTo(level.mdl_ring_middle.e_linkto);
+  level.mdl_ring_inner.e_linkto = getEnt("ring_inner_linkto", "targetname");
+  level.mdl_ring_inner linkTo(level.mdl_ring_inner.e_linkto);
+  level.mdl_ring_outer.e_pos = getEnt(level.mdl_ring_outer.target, "targetname");
+  level.mdl_ring_middle.e_pos = getEnt(level.mdl_ring_middle.target, "targetname");
+  level.mdl_ring_inner.e_pos = getEnt(level.mdl_ring_inner.target, "targetname");
+  level.mdl_ring_outer.e_pos linkTo(level.mdl_ring_outer);
+  level.mdl_ring_middle.e_pos linkTo(level.mdl_ring_middle);
+  level.mdl_ring_inner.e_pos linkTo(level.mdl_ring_inner);
   level.mdl_ring_outer.v_start = level.mdl_ring_outer.e_pos.origin;
   level.mdl_ring_middle.v_start = level.mdl_ring_middle.e_pos.origin;
   level.mdl_ring_inner.v_start = level.mdl_ring_inner.e_pos.origin;
-  mdl_stone = getent("stone_obs", "targetname");
+  mdl_stone = getEnt("stone_obs", "targetname");
   mdl_stone ghost();
   level thread start_ley_line();
   level thread function_30fcf7ae();
@@ -85,18 +85,18 @@ init() {
 }
 
 function_30fcf7ae() {
-  level.mdl_crystal_outer = getent("crystal_outer", "targetname");
-  level.mdl_crystal_outer linkto(level.mdl_ring_outer);
+  level.mdl_crystal_outer = getEnt("crystal_outer", "targetname");
+  level.mdl_crystal_outer linkTo(level.mdl_ring_outer);
   level.mdl_crystal_outer.v_start = level.mdl_crystal_outer.origin;
-  level.mdl_crystal_middle = getent("crystal_middle", "targetname");
-  level.mdl_crystal_middle linkto(level.mdl_ring_middle);
+  level.mdl_crystal_middle = getEnt("crystal_middle", "targetname");
+  level.mdl_crystal_middle linkTo(level.mdl_ring_middle);
   level.mdl_crystal_middle.v_start = level.mdl_crystal_middle.origin;
-  level.mdl_crystal_inner = getent("crystal_inner", "targetname");
-  level.mdl_crystal_inner linkto(level.mdl_ring_inner);
+  level.mdl_crystal_inner = getEnt("crystal_inner", "targetname");
+  level.mdl_crystal_inner linkTo(level.mdl_ring_inner);
   level.mdl_crystal_inner.v_start = level.mdl_crystal_inner.origin;
-  level.e_blue = getent("blue_light", "targetname");
-  level.e_green = getent("green_light", "targetname");
-  level.e_red = getent("red_light", "targetname");
+  level.e_blue = getEnt("blue_light", "targetname");
+  level.e_green = getEnt("green_light", "targetname");
+  level.e_red = getEnt("red_light", "targetname");
   array::run_all(getEntArray("r_con", "script_noteworthy"), &hide);
   level thread rings_start();
   level flag::wait_till("ley_start");
@@ -148,7 +148,7 @@ init_flags() {
 }
 
 init_step_1(var_a276c861) {
-  mdl_stone = getent("gazing_stone_library", "targetname");
+  mdl_stone = getEnt("gazing_stone_library", "targetname");
   var_47323b73 = mdl_stone zm_unitrigger::create(undefined, 64, &function_55b79f54);
   var_47323b73.str_loc = "library";
   var_47323b73.var_f0e6c7a2 = mdl_stone;
@@ -173,7 +173,7 @@ cleanup_step_1(var_5ea5c94d, ended_early) {
     level flag::set(str_flag);
   }
 
-  var_2782a2fe = getent("beam_man", "targetname");
+  var_2782a2fe = getEnt("beam_man", "targetname");
   var_2782a2fe clientfield::set("" + #"ley_lines", 1);
 }
 
@@ -192,14 +192,14 @@ cleanup_step_2(var_5ea5c94d, ended_early) {
 init_step_3(var_a276c861) {
   level zm_ui_inventory::function_7df6bb60(#"zm_mansion_prog_3", 1);
   exploder::exploder("fxexp_telescope_charge");
-  playsoundatposition(#"hash_75404411ef08e098", (4029, -146, -138));
+  playSoundAtPosition(#"hash_75404411ef08e098", (4029, -146, -138));
   level thread door_opener();
   level thread function_5164d716();
   level thread combo_watcher();
   level thread function_d8162064();
 
   if(!var_a276c861) {
-    getent("trigger_combo_button", "targetname") thread function_bfefc7aa();
+    getEnt("trigger_combo_button", "targetname") thread function_bfefc7aa();
     level flag::wait_till(#"wheel_locked");
     power_beam();
   }
@@ -215,21 +215,21 @@ cleanup_step_3(var_5ea5c94d, ended_early) {
   if(!level flag::get(#"wheel_locked")) {
     mdl_wheel = function_b1b02a54();
     mdl_wheel thread scene::play(#"p8_fxanim_zm_man_dome_crank_wheel_bundle", mdl_wheel);
-    mdl_door_right = getent("<dev string:x38>", "<dev string:x5f>");
-    mdl_door_left = getent("<dev string:x6c>", "<dev string:x5f>");
+    mdl_door_right = getEnt("<dev string:x38>", "<dev string:x5f>");
+    mdl_door_left = getEnt("<dev string:x6c>", "<dev string:x5f>");
     var_5a2e8e4f = anglestoright(mdl_door_right.angles);
     var_58aebac7 = anglestoright(mdl_door_left.angles);
     var_a40d6e4f = mdl_door_right.origin + var_5a2e8e4f * 64;
     var_5f19fbd3 = mdl_door_left.origin - var_58aebac7 * 64;
-    mdl_door_right moveto(var_a40d6e4f, 0.1);
-    mdl_door_left moveto(var_5f19fbd3, 0.1);
+    mdl_door_right moveTo(var_a40d6e4f, 0.1);
+    mdl_door_left moveTo(var_5f19fbd3, 0.1);
     mdl_door_left waittill(#"movedone");
   }
 
   level flag::set(#"wheel_locked");
   level flag::set(#"combo_dialed");
   level flag::set(#"combo_done");
-  var_7f147f52 = getent("t_eshield_check", "targetname");
+  var_7f147f52 = getEnt("t_eshield_check", "targetname");
   var_7f147f52 delete();
 }
 
@@ -262,7 +262,7 @@ cleanup_step_4(var_5ea5c94d, ended_early) {
   level flag::set(#"greenhouse_open");
   level flag::set(#"house_defend_done");
   level notify(#"hash_3c7945247db32d89");
-  mdl_stone = getent("stone_obs", "targetname");
+  mdl_stone = getEnt("stone_obs", "targetname");
 
   if(isDefined(mdl_stone)) {
     mdl_stone delete();
@@ -337,22 +337,22 @@ function_fde77b55(mdl_coil) {
     level flag::wait_till_any(array(#"symbol_hit_player_1", #"symbol_hit_player_2", #"symbol_hit_player_3", #"symbol_hit_player_4"));
     a_str_flags = [];
 
-    for(i = 1; i < getplayers().size + 1; i++) {
+    for(i = 1; i < getPlayers().size + 1; i++) {
       a_str_flags[a_str_flags.size] = "symbol_hit_player_" + i;
     }
 
-    wait getplayers().size * 0.35;
+    wait getPlayers().size * 0.35;
 
     if(level flag::get_all(a_str_flags)) {
       level scene::play(#"p8_fxanim_zm_man_beam_device_bundle", "shot 2");
-      var_2782a2fe = getent("beam_man", "targetname");
+      var_2782a2fe = getEnt("beam_man", "targetname");
       var_2782a2fe playSound(#"hash_4a842fe16ea6db6a");
       var_2782a2fe clientfield::set("" + #"ley_lines", 1);
       level flag::set(#"ley_start");
       continue;
     }
 
-    for(i = 1; i < getplayers().size + 1; i++) {
+    for(i = 1; i < getPlayers().size + 1; i++) {
       level flag::clear("symbol_hit_player_" + i);
     }
   }
@@ -366,8 +366,8 @@ function_d3128b5f() {
 
   foreach(s_ring in a_s_rings) {
     trigger = spawn("trigger_box_use", s_ring.origin, 0, 64, 64, 64);
-    trigger setcursorhint("HINT_NOICON");
-    trigger triggerignoreteam();
+    trigger setCursorHint("HINT_NOICON");
+    trigger triggerIgnoreTeam();
     function_dae4ab9b(trigger, 0.1);
     trigger.str_pos = s_ring.script_noteworthy;
     trigger thread function_57692917(s_ring);
@@ -383,8 +383,8 @@ function_d3128b5f() {
 
   var_310c1492 = struct::get("<dev string:x92>");
   var_556dff4b = spawn("<dev string:xa7>", var_310c1492.origin, 0, 64, 128);
-  var_556dff4b setcursorhint("<dev string:xbc>");
-  var_556dff4b triggerignoreteam();
+  var_556dff4b setCursorHint("<dev string:xbc>");
+  var_556dff4b triggerIgnoreTeam();
   var_556dff4b.str_pos = var_310c1492.script_noteworthy;
   var_556dff4b thread function_57692917();
 
@@ -465,9 +465,9 @@ function_57692917(s_ring) {
 }
 
 ring_reset() {
-  level.mdl_ring_inner.e_linkto rotateto(level.mdl_ring_inner.e_linkto.var_5287d229, 2);
-  level.mdl_ring_middle.e_linkto rotateto(level.mdl_ring_middle.e_linkto.var_5287d229, 2);
-  level.mdl_ring_outer.e_linkto rotateto(level.mdl_ring_outer.e_linkto.var_5287d229, 2);
+  level.mdl_ring_inner.e_linkto rotateTo(level.mdl_ring_inner.e_linkto.var_5287d229, 2);
+  level.mdl_ring_middle.e_linkto rotateTo(level.mdl_ring_middle.e_linkto.var_5287d229, 2);
+  level.mdl_ring_outer.e_linkto rotateTo(level.mdl_ring_outer.e_linkto.var_5287d229, 2);
   level.mdl_ring_inner playSound(#"hash_13acff42f13d9448");
   level.mdl_ring_middle playSound(#"hash_7813e29d18ad3dcf");
   level.mdl_ring_outer playSound(#"hash_3b464e57c6aa7e35");
@@ -573,7 +573,7 @@ function_71d1b235() {
   wait 2;
   s_atlas = struct::get("s_atl");
   s_atlas thread scene::play("melt");
-  e_head = getent("head_collision", "targetname");
+  e_head = getEnt("head_collision", "targetname");
   e_head movey(32, 3);
   level.mdl_crystal clientfield::set("" + #"atlas_crystal_fx", 1);
   level waittill(#"rings_delete");
@@ -581,10 +581,10 @@ function_71d1b235() {
   level.mdl_rings showpart("link_ring2_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);
   level.mdl_rings showpart("link_ring3_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);
   function_f856cc2();
-  var_1ed057a1 = getent("beam_obs", "targetname");
+  var_1ed057a1 = getEnt("beam_obs", "targetname");
   var_1ed057a1 clientfield::set("" + #"ley_lines", 2);
   wait 4;
-  e_head disconnectpaths();
+  e_head disconnectPaths();
   var_9283def2 = array("zone_main_hall", "zone_main_hall_north", "zone_start_east", "zone_start_west", "zone_grand_staircase");
   a_players = [];
 
@@ -644,8 +644,8 @@ function_b1b02a54() {
   a_s_scene = struct::get_script_bundle_instances("scene", #"p8_fxanim_zm_man_dome_crank_wheel_bundle");
   a_scene_ents = a_s_scene[getfirstarraykey(a_s_scene)].scene_ents;
   mdl_wheel = a_scene_ents[getfirstarraykey(a_scene_ents)];
-  mdl_wheel stopanimscripted();
-  mdl_wheel moveto(mdl_wheel.origin, 0.1);
+  mdl_wheel stopanimScripted();
+  mdl_wheel moveTo(mdl_wheel.origin, 0.1);
   return mdl_wheel;
 }
 
@@ -653,8 +653,8 @@ door_opener() {
   mdl_wheel = function_b1b02a54();
   var_47323b73 = mdl_wheel zm_unitrigger::create();
   var_47323b73.mdl_wheel = mdl_wheel;
-  var_47323b73.mdl_door_right = getent("mdl_telescope_observatory_door_right", "targetname");
-  var_47323b73.mdl_door_left = getent("mdl_telescope_observatory_door_left", "targetname");
+  var_47323b73.mdl_door_right = getEnt("mdl_telescope_observatory_door_right", "targetname");
+  var_47323b73.mdl_door_left = getEnt("mdl_telescope_observatory_door_left", "targetname");
   var_47323b73 thread function_250cf19b();
   level flag::wait_till(#"wheel_locked");
   zm_unitrigger::unregister_unitrigger(var_47323b73);
@@ -691,8 +691,8 @@ function_250cf19b() {
         var_58aebac7 = anglestoright(self.mdl_door_left.angles);
         var_a40d6e4f = self.mdl_door_right.origin + var_5a2e8e4f * 4;
         var_5f19fbd3 = self.mdl_door_left.origin - var_58aebac7 * 4;
-        self.mdl_door_right moveto(var_a40d6e4f, 0.25);
-        self.mdl_door_left moveto(var_5f19fbd3, 0.25);
+        self.mdl_door_right moveTo(var_a40d6e4f, 0.25);
+        self.mdl_door_left moveTo(var_5f19fbd3, 0.25);
         self.mdl_door_right playLoopSound(#"hash_1734ee34b49eddb4");
         level.n_turns++;
 
@@ -712,7 +712,7 @@ function_250cf19b() {
     self.mdl_door_right stoploopsound();
     self.mdl_wheel stoploopsound();
 
-    if(getplayers().size == 1) {
+    if(getPlayers().size == 1) {
       wait 1;
     }
 
@@ -731,8 +731,8 @@ function_250cf19b() {
         var_58aebac7 = anglestoright(self.mdl_door_left.angles);
         var_a40d6e4f = self.mdl_door_right.origin - var_5a2e8e4f * 4;
         var_5f19fbd3 = self.mdl_door_left.origin + var_58aebac7 * 4;
-        self.mdl_door_right moveto(var_a40d6e4f, 0.25);
-        self.mdl_door_left moveto(var_5f19fbd3, 0.25);
+        self.mdl_door_right moveTo(var_a40d6e4f, 0.25);
+        self.mdl_door_left moveTo(var_5f19fbd3, 0.25);
         self.mdl_door_right playLoopSound(#"hash_644ccbe0bd198b6");
         level.n_turns--;
         array::wait_till(array(self.mdl_door_right, self.mdl_door_left), "movedone");
@@ -755,7 +755,7 @@ function_250cf19b() {
 function_5164d716() {
   level endon(#"wheel_locked", #"greenhouse_open");
   level flag::wait_till(#"telescope_in_place");
-  var_e0cc1e20 = getent("trigger_obs_wheel_lock", "targetname");
+  var_e0cc1e20 = getEnt("trigger_obs_wheel_lock", "targetname");
   var_e0cc1e20.health = 99999;
 
   while(true) {
@@ -765,7 +765,7 @@ function_5164d716() {
     if(isDefined(s_notify.attacker) && isPlayer(s_notify.attacker) && mansion_util::is_shield(s_notify.weapon) && s_notify.mod === "MOD_MELEE" && isDefined(level.n_turns) && level.n_turns > 15) {
       mdl_wheel = function_b1b02a54();
       mdl_wheel scene::play(#"p8_fxanim_zm_man_dome_crank_wheel_bundle", mdl_wheel);
-      mdl_door_right = getent("mdl_telescope_observatory_door_right", "targetname");
+      mdl_door_right = getEnt("mdl_telescope_observatory_door_right", "targetname");
       mdl_wheel stoploopsound();
       mdl_door_right stoploopsound();
       var_e0cc1e20 delete();
@@ -777,8 +777,8 @@ function_5164d716() {
 }
 
 function_e188ae5d() {
-  mdl_base = getent("mdl_tel_base", "targetname");
-  mdl_wheel = getent("mdl_tel_wheel", "targetname");
+  mdl_base = getEnt("mdl_tel_base", "targetname");
+  mdl_wheel = getEnt("mdl_tel_wheel", "targetname");
 
   foreach(var_6142bc53 in level.var_21d0f5ee) {
     mdl_wheel hidepart("tag_wheel_" + var_6142bc53);
@@ -799,7 +799,7 @@ function_e188ae5d() {
 
 function_3f64b455() {
   level endon(#"combo_done");
-  mdl_wheel = getent("mdl_tel_wheel", "targetname");
+  mdl_wheel = getEnt("mdl_tel_wheel", "targetname");
   n_shot = 0;
   level.var_21d0f5ee = array("aquarius", "pisces", "aries", "taurus", "gemini", "cancer", "leo", "virgo", "libra", "scorpio", "sagittarius", "capricorn");
   level thread function_e188ae5d();
@@ -829,7 +829,7 @@ function_3f64b455() {
       }
 
       s_rotate = struct::get(level.var_21d0f5ee[level.var_779d8f63 - 1]);
-      mdl_wheel rotateto(s_rotate.angles, 0.35);
+      mdl_wheel rotateTo(s_rotate.angles, 0.35);
       mdl_wheel playSound(#"hash_bbeb6a0420a769e");
 
       if(n_shot < 9) {
@@ -844,7 +844,7 @@ function_3f64b455() {
 }
 
 function_39b9ecb(s_unitrigger) {
-  v_delta = vectornormalize(s_unitrigger.origin - self getEye());
+  v_delta = vectorNormalize(s_unitrigger.origin - self getEye());
   v_view = anglesToForward(self getplayerangles());
   v_cross = vectorcross(v_view, v_delta);
   var_35b81369 = vectordot(v_cross, anglestoup(s_unitrigger.angles));
@@ -1008,8 +1008,8 @@ function_bfefc7aa() {
   level endon(#"combo_done");
   self notify(#"combo_reset");
   self endon(#"combo_reset");
-  mdl_wheel = getent("mdl_tel_wheel", "targetname");
-  mdl_base = getent("mdl_tel_base", "targetname");
+  mdl_wheel = getEnt("mdl_tel_wheel", "targetname");
+  mdl_base = getEnt("mdl_tel_base", "targetname");
   self.health = 99999;
 
   while(true) {
@@ -1028,7 +1028,7 @@ function_bfefc7aa() {
       level.var_5c086e54[level.var_5c086e54.size] = level.var_779d8f63;
       mdl_base showpart(level.var_21d0f5ee[level.var_779d8f63 - 1] + "_0" + level.var_5c086e54.size);
       mdl_wheel hidepart("tag_wheel_" + level.var_21d0f5ee[level.var_779d8f63 - 1]);
-      playsoundatposition(#"hash_7391894450e708c9", mdl_base gettagorigin(level.var_21d0f5ee[level.var_779d8f63 - 1] + "_0" + level.var_5c086e54.size));
+      playSoundAtPosition(#"hash_7391894450e708c9", mdl_base gettagorigin(level.var_21d0f5ee[level.var_779d8f63 - 1] + "_0" + level.var_5c086e54.size));
       mdl_wheel playSound(#"hash_8ea83abca0ca591");
 
       if(level.var_5c086e54.size > 2) {
@@ -1041,8 +1041,8 @@ function_bfefc7aa() {
 
 combo_watcher() {
   level endon(#"combo_done");
-  mdl_wheel = getent("mdl_tel_wheel", "targetname");
-  mdl_base = getent("mdl_tel_base", "targetname");
+  mdl_wheel = getEnt("mdl_tel_wheel", "targetname");
+  mdl_base = getEnt("mdl_tel_base", "targetname");
 
   while(true) {
     level flag::wait_till(#"combo_dialed");
@@ -1053,7 +1053,7 @@ combo_watcher() {
       mdl_base hidepart(level.var_21d0f5ee[level.var_5c086e54[1] - 1] + "_02");
       mdl_base hidepart(level.var_21d0f5ee[level.var_5c086e54[2] - 1] + "_03");
       wait 0.5;
-      playsoundatposition(#"hash_7391894450e708c9", mdl_base gettagorigin(level.var_21d0f5ee[level.var_5c086e54[1] - 1] + "_02"));
+      playSoundAtPosition(#"hash_7391894450e708c9", mdl_base gettagorigin(level.var_21d0f5ee[level.var_5c086e54[1] - 1] + "_02"));
       mdl_base showpart(level.var_21d0f5ee[level.var_5c086e54[0] - 1] + "_01");
       mdl_base showpart(level.var_21d0f5ee[level.var_5c086e54[1] - 1] + "_02");
       mdl_base showpart(level.var_21d0f5ee[level.var_5c086e54[2] - 1] + "_03");
@@ -1096,10 +1096,10 @@ combo_watcher() {
 function_d8162064() {
   level endon(#"greenhouse_open");
   level flag::wait_till(#"combo_done");
-  mdl_door_right = getent("mdl_telescope_observatory_door_right", "targetname");
-  mdl_door_left = getent("mdl_telescope_observatory_door_left", "targetname");
-  mdl_door_right linkto(level.mdl_telescope, "p8_zm_man_greenhouse_ext_dome_01_link_jnt");
-  mdl_door_left linkto(level.mdl_telescope, "p8_zm_man_greenhouse_ext_dome_01_link_jnt");
+  mdl_door_right = getEnt("mdl_telescope_observatory_door_right", "targetname");
+  mdl_door_left = getEnt("mdl_telescope_observatory_door_left", "targetname");
+  mdl_door_right linkTo(level.mdl_telescope, "p8_zm_man_greenhouse_ext_dome_01_link_jnt");
+  mdl_door_left linkTo(level.mdl_telescope, "p8_zm_man_greenhouse_ext_dome_01_link_jnt");
   array::run_all(util::get_active_players(), &clientfield::increment_to_player, "" + #"mansion_mq_rumble", 1);
   level scene::play(#"p8_fxanim_zm_man_telescope_bundle");
   level flag::set(#"telescope_in_place");
@@ -1127,7 +1127,7 @@ power_beam() {
   level endon(#"power_beam_done");
   level flag::wait_till(#"combo_done");
   level clientfield::set("" + #"skybox_stream", 1);
-  var_7f147f52 = getent("t_eshield_check", "targetname");
+  var_7f147f52 = getEnt("t_eshield_check", "targetname");
   var_7f147f52.health = 999999;
   var_7f147f52 function_d5bfc8e8();
   level thread zm_utility::function_9ad5aeb1(1, 1, 0, 1, 0);
@@ -1172,7 +1172,7 @@ function_d5bfc8e8() {
       }
     }
   }
-  while(var_1a50a8c5 < getplayers().size);
+  while(var_1a50a8c5 < getPlayers().size);
 }
 
 function_3d93d103() {
@@ -1189,7 +1189,7 @@ function_3d93d103() {
 }
 
 function_b87ae607(n_stage) {
-  e_trap = getent("werewolfer_trap_touch", "targetname");
+  e_trap = getEnt("werewolfer_trap_touch", "targetname");
 
   while(true) {
     level flag::wait_till(#"werewolf_trap_active");
@@ -1251,7 +1251,7 @@ tube_shoot() {
   wait 5.3;
   level thread zm_utility::function_9ad5aeb1(0, 1, 0, 1, 0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player setlightingstate(1);
   }
 
@@ -1262,8 +1262,8 @@ tube_shoot() {
     player zm_audio::create_and_play_dialog(#"full_moon", #"react_first");
   }
 
-  getent("beam_man", "targetname") clientfield::set("" + #"ley_lines", 0);
-  getent("beam_obs", "targetname") clientfield::set("" + #"ley_lines", 3);
+  getEnt("beam_man", "targetname") clientfield::set("" + #"ley_lines", 0);
+  getEnt("beam_obs", "targetname") clientfield::set("" + #"ley_lines", 3);
   level.mdl_telescope clientfield::set("" + #"power_beam", 0);
   level.mdl_telescope stoploopsound();
   level.mdl_telescope playSound(#"hash_79e81e464a483017");
@@ -1282,7 +1282,7 @@ function_c888f1f4() {
   wait 8;
   exploder::exploder("exp_lgt_telescope_base_door");
   trigger = trigger::wait_till("scope_door_open", "targetname", undefined, 0);
-  mdl_stone = getent("stone_obs", "targetname");
+  mdl_stone = getEnt("stone_obs", "targetname");
   mdl_stone show();
   mdl_stone clientfield::set("" + #"force_stream_model", 1);
 
@@ -1290,13 +1290,13 @@ function_c888f1f4() {
     trigger delete();
   }
 
-  mdl_door = getent("mdl_telescope_base_door", "targetname");
+  mdl_door = getEnt("mdl_telescope_base_door", "targetname");
   s_moveto = struct::get(mdl_door.target);
   array::run_all(util::get_active_players(), &clientfield::increment_to_player, "" + #"mansion_mq_rumble", 1);
-  mdl_door moveto(s_moveto.origin, 3, 0.1, 1.5);
+  mdl_door moveTo(s_moveto.origin, 3, 0.1, 1.5);
   mdl_door playSound(#"hash_34b16f03c4ce4b97");
   mdl_door waittill(#"movedone");
-  mdl_door moveto(s_moveto.origin - (0, 0, 64), 3);
+  mdl_door moveTo(s_moveto.origin - (0, 0, 64), 3);
   mdl_door playSound(#"hash_34b17003c4ce4d4a");
   mdl_door waittill(#"movedone");
   var_47323b73 = mdl_stone zm_unitrigger::create(undefined, 128);
@@ -1315,7 +1315,7 @@ function_31e641f5() {
     self playSound(#"hash_54ef1510e22e8574");
 
     while(n_time < 3) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(!player useButtonPressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
           b_using = 0;
           n_time = 0;
@@ -1351,7 +1351,7 @@ function_31e641f5() {
   level thread mansion_util::function_f1c106b("loc4", 1);
   self clientfield::set("" + #"stone_soul", 1);
   self playLoopSound(#"hash_5eb57257201f9043");
-  self moveto(struct::get(self.target).origin, 1);
+  self moveTo(struct::get(self.target).origin, 1);
   self waittill(#"movedone");
   self clientfield::set("" + #"stone_pickup", 1);
   self thread function_a8ddd91f();
@@ -1368,12 +1368,12 @@ function_a8ddd91f() {
   level thread zm_utility::function_9ad5aeb1(0, 1, 0, 1, 0);
   level.var_84b2907f = undefined;
   wait 2;
-  mdl_stone = getent("stone_obs", "targetname");
+  mdl_stone = getEnt("stone_obs", "targetname");
   mdl_stone notify(#"stop_spin");
   mdl_stone stoploopsound();
   mdl_stone playSound(#"hash_3019afe90c2eb3aa");
   wait 0.5;
-  mdl_stone rotateto(mdl_stone.var_4c4f2b6, 1);
+  mdl_stone rotateTo(mdl_stone.var_4c4f2b6, 1);
   mdl_stone waittill(#"rotatedone");
   mdl_stone clientfield::set("" + #"stone_soul", 0);
   mdl_stone bobbing((0, 1, 0), 1, 5);
@@ -1396,7 +1396,7 @@ function_c9ebaa3() {
 }
 
 function_78a99a79() {
-  mdl_stone = getent("stone_obs", "targetname");
+  mdl_stone = getEnt("stone_obs", "targetname");
 
   if(isDefined(mdl_stone)) {
     v_loc = mdl_stone.origin + (15, 0, -40);
@@ -1413,7 +1413,7 @@ wave_1() {
   level endon(#"house_defend_done");
   level flag::wait_till(#"house_defend");
   wait 2;
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -1488,10 +1488,10 @@ function_3da8da85(params) {
 }
 
 function_aa1d0bc6() {
-  if(isDefined(20 - getplayers().size)) {
+  if(isDefined(20 - getPlayers().size)) {
     __s = spawnStruct();
     __s endon(#"timeout");
-    __s util::delay_notify(20 - getplayers().size, "timeout");
+    __s util::delay_notify(20 - getPlayers().size, "timeout");
   }
 
   function_655a2fcc();
@@ -1511,7 +1511,7 @@ wave_2() {
   level endon(#"house_defend_done");
   wait 2;
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_wolves = 20;
       break;
@@ -1539,7 +1539,7 @@ wave_2() {
       var_69024a6a.ignore_enemy_count = 1;
       var_69024a6a.b_ignore_cleanup = 1;
       var_69024a6a.no_powerups = 1;
-      var_69024a6a.favoriteenemy = array::random(getplayers());
+      var_69024a6a.favoriteenemy = array::random(getPlayers());
       s_spawn_loc = zm_mansion_special_rounds::function_e1c262fb(var_69024a6a);
       var_69024a6a forceteleport(s_spawn_loc.origin, s_spawn_loc.angles);
       var_69024a6a thread zm_mansion_special_rounds::function_c79d744e(s_spawn_loc);
@@ -1548,7 +1548,7 @@ wave_2() {
 
     wait 0.25;
 
-    while(level.var_20f423f6 > getplayers().size * 4) {
+    while(level.var_20f423f6 > getPlayers().size * 4) {
       wait 0.25;
     }
   }
@@ -1562,10 +1562,10 @@ function_831a12ae(params) {
 }
 
 function_cd9e9ab1() {
-  if(isDefined(30 - getplayers().size * 2)) {
+  if(isDefined(30 - getPlayers().size * 2)) {
     __s = spawnStruct();
     __s endon(#"timeout");
-    __s util::delay_notify(30 - getplayers().size * 2, "timeout");
+    __s util::delay_notify(30 - getPlayers().size * 2, "timeout");
   }
 
   function_a918c691();
@@ -1584,7 +1584,7 @@ function_a918c691() {
 wave_3() {
   level endon(#"house_defend_done");
   wait 3.5;
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:

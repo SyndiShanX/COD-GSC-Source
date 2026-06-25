@@ -251,7 +251,7 @@ function microwaveturretaffectsentity(entity) {
   angles = turret gettagangles("tag_flash");
   origin = turret gettagorigin("tag_flash");
   shoot_at_pos = entity getshootatpos(turret);
-  entdirection = vectornormalize(shoot_at_pos - origin);
+  entdirection = vectorNormalize(shoot_at_pos - origin);
   forward = anglesToForward(angles);
   dot = vectordot(entdirection, forward);
 

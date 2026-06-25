@@ -587,7 +587,7 @@ function function_4ef69a48() {
   self.prop.origin = self.propent.origin;
   self prop::applyxyzoffset();
   self prop::applyanglesoffset();
-  self.prop linkto(self.propent);
+  self.prop linkTo(self.propent);
 }
 
 function function_9cfa92f3() {
@@ -969,7 +969,7 @@ function function_61b27799(propinfo, origin, angles) {
   propent = spawn("", origin);
   propent setcontents(0);
   propent notsolid();
-  propent setplayercollision(0);
+  propent setPlayerCollision(0);
   prop = spawn("", propent.origin);
   prop.angles = angles;
   prop setModel(propinfo.modelname);
@@ -978,7 +978,7 @@ function function_61b27799(propinfo, origin, angles) {
   prop.xyzoffset = propinfo.xyzoffset;
   prop.anglesoffset = propinfo.anglesoffset;
   prop.health = 1;
-  prop setplayercollision(0);
+  prop setPlayerCollision(0);
   forward = anglesToForward(angles) * prop.xyzoffset[0];
   right = anglestoright(angles) * prop.xyzoffset[1];
   up = anglestoup(angles) * prop.xyzoffset[2];
@@ -986,7 +986,7 @@ function function_61b27799(propinfo, origin, angles) {
   prop.origin = prop.origin + right;
   prop.origin = prop.origin + up;
   prop.angles = prop.angles + prop.anglesoffset;
-  prop linkto(propent);
+  prop linkTo(propent);
   propent.prop = prop;
   propent.propinfo = propinfo;
   return propent;
@@ -1057,7 +1057,7 @@ function function_b2eba1e3(propinfo, origin, angles, team) {
   var_a20cbf64.health = 99999;
   var_a20cbf64.maxhealth = 99999;
   var_a20cbf64 thread prop::function_500dc7d9(&namespace_4c773ed3::damageclonewatch);
-  var_a20cbf64 setplayercollision(0);
+  var_a20cbf64 setPlayerCollision(0);
   var_a20cbf64 makesentient();
   var_a20cbf64 notsolidcapsule();
   var_a20cbf64 setteam(team);

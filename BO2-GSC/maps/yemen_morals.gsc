@@ -72,11 +72,11 @@ main() {
 
   flag_set("morals_start");
   exploder(2000);
-  harper_spawner = getent("harper_morals", "targetname");
+  harper_spawner = getEnt("harper_morals", "targetname");
   harper_spawner add_spawn_function(::switch_head);
-  terrorist_spawner_4 = getent("terrorist_morals_04", "targetname");
+  terrorist_spawner_4 = getEnt("terrorist_morals_04", "targetname");
   terrorist_spawner_4 add_spawn_function(::switch_head_terrorist_4);
-  terrorist_spawner_5 = getent("terrorist_morals_05", "targetname");
+  terrorist_spawner_5 = getEnt("terrorist_morals_05", "targetname");
   terrorist_spawner_5 add_spawn_function(::switch_head_terrorist_5);
   level thread end_market_vo();
   level clientnotify("yemen_disable_sonar");
@@ -149,7 +149,7 @@ morals_setup() {
 }
 
 morals_intro_ambient() {
-  vh_vtol = getent("morals_vtol_1", "targetname");
+  vh_vtol = getEnt("morals_vtol_1", "targetname");
   a_sp_terrorists = getEntArray("pre_morals_terrorist", "targetname");
   moral_terrorist_group = [];
 
@@ -158,7 +158,7 @@ morals_intro_ambient() {
     guy thread target_vtol_with_gun();
     guy magic_bullet_shield();
     guy set_ignoreall(1);
-    guy set_goalradius(64);
+    guy set_goalRadius(64);
     moral_terrorist_group[moral_terrorist_group.size] = guy;
   }
 
@@ -166,7 +166,7 @@ morals_intro_ambient() {
   ar_goal_nodes = getnodearray("morals_shoot_vtol_goto_nodes", "targetname");
 
   foreach(terr in moral_terrorist_group) {
-    terr set_goalradius(100);
+    terr set_goalRadius(100);
     ar_goal_nodes = get_array_of_closest(terr.origin, ar_goal_nodes);
     farthest_node = ar_goal_nodes[ar_goal_nodes.size - 1];
 
@@ -180,7 +180,7 @@ morals_intro_ambient() {
 
 target_vtol_with_gun() {
   self endon("death");
-  vh_vtol = getent("morals_vtol_1", "targetname");
+  vh_vtol = getEnt("morals_vtol_1", "targetname");
   wait 2;
   self thread shoot_at_target(vh_vtol, undefined, randomfloatrange(0.5, 2), -1);
 }
@@ -277,22 +277,22 @@ camera_tween() {
 morals_arm_light_fx() {
   player_model = get_model_or_models_from_scene("morals_shoot_vtol_player", "player_body");
   ent_origin = spawn_model("tag_origin", player_model gettagorigin("J_Wrist_RI"), player_model gettagangles("J_Wrist_RI"));
-  ent_origin linkto(player_model, "J_Wrist_RI");
+  ent_origin linkTo(player_model, "J_Wrist_RI");
   playFXOnTag(getfx("morals_arm_light"), ent_origin, "tag_origin");
   wait 14;
   ent_origin delete();
 }
 
 morals_shoot_vtol_fire_rocket(ai_guy) {
-  playsoundatposition("wpn_rpg_fire_plr", (0, 0, 0));
-  m_fhj = getent("fhj_morals", "targetname");
-  vh_vtol = getent("morals_vtol_1", "targetname");
+  playSoundAtPosition("wpn_rpg_fire_plr", (0, 0, 0));
+  m_fhj = getEnt("fhj_morals", "targetname");
+  vh_vtol = getEnt("morals_vtol_1", "targetname");
   m_rocket = spawn_model("projectile_at4", m_fhj.origin, m_fhj.angles);
   playFXOnTag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
-  m_rocket moveto(vh_vtol.origin - vectorscale((0, 0, 1), 112.0), 0.5);
+  m_rocket moveTo(vh_vtol.origin - vectorscale((0, 0, 1), 112.0), 0.5);
   m_rocket waittill("movedone");
   m_rocket delete();
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   level notify("fxanim_vtol2_crash_start");
   wait 0.2;
   turn_off_vehicle_exhaust(vh_vtol);
@@ -314,9 +314,9 @@ morals_shoot_vtol_camera_out(unused_param) {
 }
 
 moral_vtol_crash_anim(guy) {
-  vh_vtol = getent("morals_vtol_1", "targetname");
+  vh_vtol = getEnt("morals_vtol_1", "targetname");
   level thread run_scene_and_delete("morals_vtol_crashing");
-  playsoundatposition("fxa_vtol2_crash", (0, 0, 0));
+  playSoundAtPosition("fxa_vtol2_crash", (0, 0, 0));
   thread fx_morals_vtol_crash();
   scene_wait("morals_vtol_crashing");
   wait 2;
@@ -340,7 +340,7 @@ fx_morals_vtol_crash() {
   exploder(2100);
   wait 4;
   stop_exploder(2000);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }
 
 vtol_approach() {
@@ -508,7 +508,7 @@ play_gun_shot_fx_rumble(b_farid_shot) {
     b_farid_shot = 0;
   }
 
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   overlay = newclienthudelem(level.player);
   overlay.x = 0;
   overlay.y = 0;
@@ -665,7 +665,7 @@ morals_shoot_harper_vtol_fire(empty_param) {
   level endon("stop_mason_vtol_fire");
   settimescale(0.25);
   m_vtol = get_model_or_models_from_scene("morals_shoot_harper", "morals_shoot_harper_vtol");
-  s_temp = getstruct("morals_align", "targetname");
+  s_temp = getStruct("morals_align", "targetname");
 
   while(isDefined(m_vtol)) {
     m_vtol firegunnerweapon(0);
@@ -675,8 +675,8 @@ morals_shoot_harper_vtol_fire(empty_param) {
 
 morals_shoot_harper_explosion(m_player) {
   exploder(2001);
-  s_temp = getstruct("morals_align", "targetname");
-  playsoundatposition("exp_morals_harper", s_temp.origin);
+  s_temp = getStruct("morals_align", "targetname");
+  playSoundAtPosition("exp_morals_harper", s_temp.origin);
 }
 
 morals_mason_intro() {
@@ -685,7 +685,7 @@ morals_mason_intro() {
     wait 2;
     level thread screen_fade_in(2);
     thread run_scene_and_delete("morals_outcome_farid_lives");
-    ai_salazar = getent("sp_salazar_ai", "targetname");
+    ai_salazar = getEnt("sp_salazar_ai", "targetname");
     ai_in_scene = get_ais_from_scene("morals_outcome_farid_lives");
 
     foreach(ai_dude in ai_in_scene) {

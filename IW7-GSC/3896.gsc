@@ -78,7 +78,7 @@ func_BBC2(var_0) {
   self endon("stop_motion_hack");
 
   for(;;) {
-    self setorigin(var_0.origin, 1);
+    self setOrigin(var_0.origin, 1);
     self.angles = var_0.angles;
     wait 0.05;
   }
@@ -111,7 +111,7 @@ isfactorinuse(var_0, var_1, var_2, var_3) {
 
   var_4 = anglesToForward(self.angles);
   var_5 = vectortoangles(var_4);
-  var_6 = vectordot(vectornormalize((var_4[0], var_4[1], 0)), anglesToForward(self.angles));
+  var_6 = vectordot(vectorNormalize((var_4[0], var_4[1], 0)), anglesToForward(self.angles));
   var_7 = 0.966;
   return var_6 > var_7;
 }

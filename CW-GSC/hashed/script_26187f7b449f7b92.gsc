@@ -97,7 +97,7 @@ function add_a_chicken(model, scale, var_56fa7962, var_706dd25e) {
 
   if(isDefined(orb)) {
     orb.targetname = "add_a_chicken";
-    orb enablelinkto();
+    orb enablelinkTo();
     orb notsolid();
   } else {
     return;
@@ -107,7 +107,7 @@ function add_a_chicken(model, scale, var_56fa7962, var_706dd25e) {
 
   if(isDefined(bird)) {
     bird.targetname = "chicken";
-    bird linkto(orb, "tag_origin");
+    bird linkTo(orb, "tag_origin");
     bird notsolid();
     bird setscale(var_56fa7962);
   } else {
@@ -272,7 +272,7 @@ function function_1284a4d7(player) {
 
     while(self.var_4d2a40eb > 0) {
       var_45263d51 = 1;
-      self rotateto(self.angles + (0, 180, 0), var_45263d51);
+      self rotateTo(self.angles + (0, 180, 0), var_45263d51);
       var_44f689f3 = var_45263d51;
 
       while(var_44f689f3 > 0) {
@@ -369,7 +369,7 @@ function function_9d0fe581(player) {
 
       self.var_ce3eecd4.var_85f8774c = 0;
       self thread function_a46136b9(self.var_ce3eecd4);
-      self moveto(origin, 0.25);
+      self moveTo(origin, 0.25);
       self waittill(#"movedone");
     }
 
@@ -402,7 +402,7 @@ function function_9d0fe581(player) {
       }
 
       self.is_moving = 1;
-      self moveto(point, self.movetime, 0, 0);
+      self moveTo(point, self.movetime, 0, 0);
       self waittill(#"movedone");
       continue;
     }

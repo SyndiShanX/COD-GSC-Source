@@ -10,7 +10,7 @@ main() {
   self.a.var_112CB = 0;
   if(getdvarint("ai_iw7") == 1) {
     lib_0A1E::func_2318();
-    scripts\asm\asm_bb::bb_clearanimscripted();
+    scripts\asm\asm_bb::bb_clearanimScripted();
     lib_0A1E::func_230A();
   }
 

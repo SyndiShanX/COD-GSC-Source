@@ -107,7 +107,7 @@ function private function_3bec0f16(origin_destination, var_b05557d5, var_7b06dc8
   var_fecff539 = var_7b06dc88 * var_7b06dc88;
   var_e9aa7ce8 = var_90c75dbe * var_90c75dbe;
   self.var_974e3fcf = 0;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   self childthread function_dceb4d78(5);
 
   self childthread debug(e_player, var_90c75dbe);
@@ -257,7 +257,7 @@ function private function_3bec0f16(origin_destination, var_b05557d5, var_7b06dc8
 }
 
 function private function_dceb4d78(var_e9430cc4) {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   if(!isDefined(level.var_f1028da5)) {
     level.var_f1028da5 = 128;

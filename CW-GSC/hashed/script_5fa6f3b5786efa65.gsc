@@ -79,7 +79,7 @@ function function_44cc3493(var_2177e1d4 = 2, player) {
         guy.var_85a0c6e6 = 1;
         self.org.origin = self.origin + (0, 0, 40);
         self.org namespace_83eb6304::function_3ecfde67("tesla_trail");
-        self.org moveto(guy.origin + (0, 0, 40), 0.4);
+        self.org moveTo(guy.origin + (0, 0, 40), 0.4);
         wait 0.4;
         self.org namespace_83eb6304::turnofffx("tesla_trail");
         level thread namespace_9038b9d9::function_8d45f3be(guy, player);
@@ -146,7 +146,7 @@ function function_465aaf09(player, origin) {
   arcademachine namespace_e32bb68::function_3a59ec34("evt_doa_teleporter_wilds_burst");
   arcademachine namespace_83eb6304::function_3ecfde67("turret_impact");
   arcademachine namespace_e32bb68::function_3a59ec34("evt_doa_pickup_sentry_land");
-  arcademachine moveto(arcademachine.origin + (0, 0, 3000), 1);
+  arcademachine moveTo(arcademachine.origin + (0, 0, 3000), 1);
   level.doa.var_54c5c3e6 = undefined;
   wait 1;
   arcademachine.org namespace_83eb6304::turnofffx("tesla_trail");

@@ -572,7 +572,7 @@ func_1EE8(var_0, var_1, var_2, var_3) {
           var_21 = [[var_6.var_1ED4]]();
         }
 
-        var_6 animscripted(var_9, var_13, var_14, level.var_EC85[var_1F][var_1][var_11], undefined, var_21, var_20);
+        var_6 animScripted(var_9, var_13, var_14, level.var_EC85[var_1F][var_1][var_11], undefined, var_21, var_20);
         var_22 = getanimlength(level.var_EC85[var_1F][var_1][var_11]);
         if(var_22 < var_14) {
           var_14 = var_22;
@@ -750,7 +750,7 @@ func_1F31(var_0, var_1, var_2, var_3, var_4) {
           var_7 lib_0A1E::func_230A();
         }
 
-        var_7 animscripted(var_12, var_10, var_11, level.var_EC85[var_1C][var_1], undefined, var_20, var_1D);
+        var_7 animScripted(var_12, var_10, var_11, level.var_EC85[var_1C][var_1], undefined, var_20, var_1D);
       }
 
       var_21 = getanimlength(level.var_EC85[var_1C][var_1]);
@@ -1096,7 +1096,7 @@ func_1F1B(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       var_14.physics_querypoint.var_22EF = "stand";
       var_12 = var_14 getmovingplatformparent();
       if(isDefined(var_12)) {
-        var_14.physics_querypoint linkto(var_12);
+        var_14.physics_querypoint linkTo(var_12);
       }
     }
 
@@ -1167,8 +1167,8 @@ func_1EEE(var_0, var_1, var_2, var_3, var_4, var_5) {
       continue;
     }
 
-    var_10 moveto(var_11, var_3, var_4, var_5);
-    var_10 rotateto(var_12, var_3, var_4, var_5);
+    var_10 moveTo(var_11, var_3, var_4, var_5);
+    var_10 rotateTo(var_12, var_3, var_4, var_5);
   }
 }
 
@@ -1211,7 +1211,7 @@ func_1EE5(var_0, var_1) {
   var_2 = self gettagorigin(var_1);
   var_3 = spawn("script_model", var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   return var_3;
 }
 

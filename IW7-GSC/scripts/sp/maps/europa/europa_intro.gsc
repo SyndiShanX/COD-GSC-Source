@@ -132,7 +132,7 @@ func_5E01() {
   level.var_5D6C lib_0BBF::func_1101E();
   level.player playerlinktodelta(level.var_D267, "tag_player", 1, 0, 0, 0, 0, 1);
   level.player.var_8632 = spawn("script_origin", level.player.origin);
-  level.player.var_8632 linkto(level.var_D267, "tag_player", (0, 0, 0), (0, 0, 0));
+  level.player.var_8632 linkTo(level.var_D267, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player getwholescenedurationmin(level.player.var_8632);
   if(scripts\sp\utility::func_9BB5()) {
     level.var_EBBC scripts\anim\shared::placeweaponon(level.var_EBBC.weapon, "none");
@@ -265,13 +265,13 @@ func_5E21() {
   scripts\engine\utility::exploder("ex_jump_out");
   thread func_25DF();
   level.player.var_8892 = level.var_5D6C scripts\engine\utility::spawn_tag_origin();
-  level.var_D267 linkto(level.player.var_8892, "tag_origin");
+  level.var_D267 linkTo(level.player.var_8892, "tag_origin");
   level.player.var_8892 thread scripts\sp\anim::func_1F35(level.var_D267, "europa_dropship_halo_jump", "tag_origin");
   scripts\engine\utility::delaythread(4.5, ::func_CFDC);
   thread func_1C0C();
   level.var_EBCB = level.var_5D6C scripts\engine\utility::spawn_tag_origin();
-  level.var_EBBB linkto(level.var_EBCB, "tag_origin");
-  level.var_EBBC linkto(level.var_EBCB, "tag_origin");
+  level.var_EBBB linkTo(level.var_EBCB, "tag_origin");
+  level.var_EBBC linkTo(level.var_EBCB, "tag_origin");
   level.var_EBCB thread scripts\sp\anim::func_1F2C([level.var_EBBB, level.var_EBBC], "europa_dropship_halo_jump", "tag_origin");
   if(level.console || level.player usinggamepad()) {
     level.player lerpviewangleclamp(1, 0.5, 0.5, 10, 10, 10, 10);
@@ -325,19 +325,19 @@ func_F39B() {
 
 func_D067() {
   var_0 = level.var_D267 scripts\engine\utility::spawn_tag_origin();
-  level.var_D267 linkto(var_0);
+  level.var_D267 linkTo(var_0);
   var_0 thread scripts\sp\anim::func_1F35(level.var_D267, "europa_dropship_halo_death_rel", "tag_origin");
   var_1 = [level.player, level.var_D267];
-  var_2 = scripts\engine\utility::getstruct("sipes_lookaround", "targetname").origin[2] + 70;
+  var_2 = scripts\engine\utility::getStruct("sipes_lookaround", "targetname").origin[2] + 70;
   var_3 = (level.var_D267.origin[0], level.var_D267.origin[1], var_2);
   var_4 = getanimlength(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"));
   var_5 = 3;
   level.var_D267 func_82B1(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"), var_5);
   level.var_D267 func_82B0(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_death_rel"), 0.6);
   var_4 = var_4 * 1 / var_5;
-  var_0 moveto(var_3, var_4);
+  var_0 moveTo(var_3, var_4);
   wait(var_4);
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   level.var_E7C2 delete();
   level.player freezecontrols(1);
   setomnvar("ui_death_hint", 0);
@@ -471,7 +471,7 @@ func_9500() {
 
 func_CFDC() {
   level endon("stop_player_controlled_updates");
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   scripts\engine\utility::delaythread(1.25, ::func_5858);
   scripts\engine\utility::delaythread(0.9, scripts\sp\maps\europa\europa_util::func_134B7, "europa_tee_staytight");
   thread func_CF62();
@@ -575,7 +575,7 @@ func_CFDD(var_0, var_1, var_2) {
     var_7[1] = var_7[1] * self.var_B3D1;
     var_8 = max(length(var_7[0]), length(var_7[1]));
     var_9 = var_7[0] + var_7[1] * 0.5;
-    var_9 = vectornormalize(var_9) * var_8;
+    var_9 = vectorNormalize(var_9) * var_8;
   } else {
     var_9 = level.player getnormalizedmovement();
     var_9 = var_9 * self.var_B3D1;
@@ -700,7 +700,7 @@ func_5727() {
   level endon("lightning_death");
   level endon("boost_required_start");
   self.var_2A4C = spawn("script_origin", level.player.origin);
-  self.var_2A4C linkto(level.player);
+  self.var_2A4C linkTo(level.player);
   level.player.var_58DF = 0;
   var_0 = 600;
   var_1 = 0.175;
@@ -886,9 +886,9 @@ func_25DE() {
 
 func_25DF() {
   level.var_1178C = spawn("script_origin", level.player.origin);
-  level.var_1178C linkto(level.player);
+  level.var_1178C linkTo(level.player);
   level.var_1178D = spawn("script_origin", level.player.origin);
-  level.var_1178D linkto(level.player);
+  level.var_1178D linkTo(level.player);
   level.var_1178C playSound("scn_jump_from_plane_01_lr");
   wait(3.4);
   level.player func_82C0("europa_halo_jump", 0.5);
@@ -896,14 +896,14 @@ func_25DF() {
   thread func_8891();
   func_13760(0.58);
   level.var_1178C playSound("scn_jump_from_plane_02_lr");
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   level.player playSound("scn_jump_from_plane_booster_save_lr");
 }
 
 func_8891() {
   level endon("player_landed");
   level.var_6E87 = spawn("script_origin", level.player.origin);
-  level.var_6E87 linkto(level.player);
+  level.var_6E87 linkTo(level.player);
   wait(1);
   level.var_6E87 ghostattack(0);
   var_0 = 0;
@@ -960,7 +960,7 @@ func_D1B3() {
   thread func_DFCD();
   thread func_7451();
   level waittill("player_landed");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.var_E7C2 delete();
   lib_0E4B::func_8DEA();
   setomnvar("ui_hud_heist_boost", 0);
@@ -975,7 +975,7 @@ func_D1B3() {
     }
   }
 
-  level.player.var_8632 rotateto((0, 0, 0), 0.5);
+  level.player.var_8632 rotateTo((0, 0, 0), 0.5);
   level waittill("land_animation_over");
   level.player getwholescenedurationmin(undefined);
   level.player.var_8632 delete();
@@ -1051,7 +1051,7 @@ func_5DFD() {
     iprintln("hiding intro_surface_vista_01");
   }
 
-  var_0 = getent("intro_surface_vista_01", "targetname");
+  var_0 = getEnt("intro_surface_vista_01", "targetname");
   var_0 hide();
   if(getdvarint("debug_europa")) {
     iprintln("hiding base_reveal_vista");
@@ -1125,8 +1125,8 @@ func_2CAC() {
   for(;;) {
     if(level.player gettimeremainingpercentage()) {
       earthquake(0.43, 0.3, level.player.origin, 200);
-      level.player playrumbleonentity("heavy_3s");
-      level.player playrumbleonentity("damage_heavy");
+      level.player playRumbleOnEntity("heavy_3s");
+      level.player playRumbleOnEntity("damage_heavy");
       level.player func_8291(0.5, 0.5, 0.5, 0.3, 0, -1, 0, 30, 30, 30);
       wait(0.1);
     }
@@ -1142,7 +1142,7 @@ func_D1B4() {
   scripts\engine\utility::exploder("landing");
   scripts\engine\utility::exploder("ex_landing_impact");
   var_0 = level.var_D267 scripts\engine\utility::spawn_tag_origin();
-  level.var_D267 linkto(var_0);
+  level.var_D267 linkTo(var_0);
   var_0 thread scripts\sp\anim::func_1F35(level.var_D267, "europa_dropship_halo_land_rel", "tag_origin");
   var_1 = 0.462069;
   var_2 = getanimlength(level.var_D267 scripts\sp\utility::func_7DC1("europa_dropship_halo_land_rel"));
@@ -1154,7 +1154,7 @@ func_D1B4() {
   var_6 = var_2 * 1 - var_1;
   var_2 = var_2 * 1 / var_5;
   var_7 = var_2 * var_1;
-  var_0 moveto(var_3, var_7);
+  var_0 moveTo(var_3, var_7);
   wait(var_2 * var_1);
   func_F537(1);
   level.player playSound("scn_jump_from_plane_booster_land_lr");
@@ -1210,16 +1210,16 @@ func_59E8() {
   }
 
   wait(0.7);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   level.var_E7C2 = scripts\sp\utility::func_7C23();
   level.var_E7C2 thread scripts\sp\utility::func_E7C9(1, 0.1);
   level.var_E7C2 scripts\engine\utility::delaythread(0.1, scripts\sp\utility::func_E7C9, 0.2, 1);
   playFXOnTag(scripts\engine\utility::getfx("dropship_door_open"), level.var_5D6C, "tag_origin");
   thread func_59B9();
-  var_0 = scripts\engine\utility::getstruct("dropship_door_sound", "targetname");
+  var_0 = scripts\engine\utility::getStruct("dropship_door_sound", "targetname");
   var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_1 playSound("scn_europa_dropship_door_open");
-  var_2 = scripts\engine\utility::getstruct("dropship_door_100units", "targetname");
+  var_2 = scripts\engine\utility::getStruct("dropship_door_100units", "targetname");
   var_3 = scripts\engine\utility::spawn_tag_origin(var_2.origin, var_2.angles);
   var_3 playLoopSound("scn_europa_dropship_door_wind_lp");
   if(getdvarint("debug_europa")) {
@@ -1278,7 +1278,7 @@ func_5E23() {
   level endon("boost_required_end");
   level.var_E7C2 endon("death");
   var_0 = spawn("script_origin", level.player.origin + (0, 0, 0));
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   stopallrumbles();
   for(;;) {
     if(level.var_D36A) {
@@ -1307,8 +1307,8 @@ func_5E23() {
     var_0 unlink();
     var_8 = 700 * clamp(1 - var_1, 0, 1);
     var_0.origin = level.player.origin + (0, 0, var_8);
-    var_0 linkto(level.player);
-    var_0 playrumbleonentity("heavy_1s");
+    var_0 linkTo(level.player);
+    var_0 playRumbleOnEntity("heavy_1s");
     wait(var_5);
   }
 }
@@ -1385,7 +1385,7 @@ func_5E0F() {
 
 func_5E24() {
   level.player.var_8894 = spawn("script_origin", level.player.origin);
-  level.player.var_8894 linkto(level.player);
+  level.player.var_8894 linkTo(level.player);
   setomnvar("ui_europa_halo_drop_state", 3);
   scripts\engine\utility::flag_wait("halo_jump_start");
   wait(4);
@@ -1585,7 +1585,7 @@ func_8E4A() {
 func_4211() {
   scripts\engine\utility::flag_wait("player_at_opening");
   wait(3);
-  var_0 = scripts\engine\utility::getstruct("jump_obj", "targetname");
+  var_0 = scripts\engine\utility::getStruct("jump_obj", "targetname");
   objective_position(1, var_0.origin - (0, 0, 56));
   if(level.var_7683 < 2) {
     objective_setpointertextoverride(1, &"EUROPA_JUMPIN");
@@ -1602,7 +1602,7 @@ func_420E() {
     iprintln("hiding intro_surface_vista_01");
   }
 
-  var_0 = getent("intro_surface_vista_01", "targetname");
+  var_0 = getEnt("intro_surface_vista_01", "targetname");
   var_0 hide();
   if(getdvarint("debug_europa")) {
     iprintln("hiding intro_surface_vista_01");
@@ -1634,12 +1634,12 @@ func_AB7E() {
   level endon("cliffjump_start");
   var_0 = 15000;
   level.player.var_738C = level.player scripts\engine\utility::spawn_script_origin();
-  level.player.var_738C linkto(level.player);
+  level.player.var_738C linkTo(level.player);
   level.player.var_47A2 = level.player scripts\engine\utility::spawn_script_origin();
-  level.player.var_47A2 linkto(level.player);
+  level.player.var_47A2 linkTo(level.player);
   var_1 = 1;
-  var_2 = scripts\engine\utility::getstruct("oval_start", "targetname").origin;
-  var_3 = scripts\engine\utility::getstruct("oval_end", "targetname").origin;
+  var_2 = scripts\engine\utility::getStruct("oval_start", "targetname").origin;
+  var_3 = scripts\engine\utility::getStruct("oval_end", "targetname").origin;
   var_4 = distance2d(var_2, var_3) * 0.5;
   var_5 = var_4 * 0.4;
   var_6 = scripts\sp\math::func_7ADE(var_2, var_3);
@@ -1795,7 +1795,7 @@ func_EBC2() {
 }
 
 func_420C() {
-  var_0 = getent("intro_surface_vista_01", "targetname");
+  var_0 = getEnt("intro_surface_vista_01", "targetname");
   var_0 hide();
   if(getdvarint("debug_europa")) {
     iprintln("Hiding \'intro_surface_vista_01\' ");
@@ -1848,7 +1848,7 @@ func_4A5D() {
 
 func_B013() {
   level endon("cliffjump_start");
-  self.var_B015 = scripts\engine\utility::getstruct("lookdown_" + self.var_1FBB, "targetname");
+  self.var_B015 = scripts\engine\utility::getStruct("lookdown_" + self.var_1FBB, "targetname");
   scripts\sp\utility::func_54F7();
   wait(randomfloatrange(0.2, 1.5));
   self.var_B015 scripts\sp\anim::func_1F17(self, "lookdown");
@@ -1861,7 +1861,7 @@ func_41FF() {
   scripts\engine\utility::flag_clear("boost_required_start");
   scripts\engine\utility::flag_clear("boost_required_end");
   scripts\engine\utility::flag_clear("player_boosted");
-  level.var_421D = scripts\engine\utility::getstruct("cliffjumper_takedown", "targetname");
+  level.var_421D = scripts\engine\utility::getStruct("cliffjumper_takedown", "targetname");
   level.var_421D.var_D267 = scripts\sp\utility::func_10639("player_rig", level.var_421D.origin + (0, 0, 4000), (0, 0, 0));
   level.var_421D.var_D267 hide();
   scripts\engine\utility::flag_wait("cliffjump_start");
@@ -1954,7 +1954,7 @@ func_3DB5(var_0) {
   level endon("player_stabbed");
   wait(var_0);
   scripts\engine\utility::flag_set("scar_saved_player");
-  var_1 = scripts\engine\utility::getstruct("blood_pool_struct", "targetname").origin;
+  var_1 = scripts\engine\utility::getStruct("blood_pool_struct", "targetname").origin;
   playFX(level._effect["deathfx_bloodpool_generic"], var_1);
   settimescale(1);
   level.var_4214 delete();
@@ -1971,8 +1971,8 @@ func_3DB5(var_0) {
 }
 
 func_6ADE() {
-  var_0 = scripts\engine\utility::getstruct("cliff_bullet_start", "targetname").origin;
-  var_1 = scripts\engine\utility::getstruct("blood_pool_struct", "targetname").origin;
+  var_0 = scripts\engine\utility::getStruct("cliff_bullet_start", "targetname").origin;
+  var_1 = scripts\engine\utility::getStruct("blood_pool_struct", "targetname").origin;
   var_2 = 6;
   var_3 = [];
   for(var_4 = 0; var_4 < var_2; var_4++) {
@@ -1984,7 +1984,7 @@ func_6ADE() {
     playFX(level._effect["bullet_tracer"], var_5, anglesToForward(var_8), anglestoup(var_8));
     wait(0.05);
     if(isDefined(level.var_421D.var_D04B)) {
-      playFX(level.var_7649["human_gib_head"], scripts\engine\utility::getstruct("blood_pool_struct", "targetname").origin);
+      playFX(level.var_7649["human_gib_head"], scripts\engine\utility::getStruct("blood_pool_struct", "targetname").origin);
     }
 
     wait(randomfloatrange(0.15, 0.25));
@@ -2065,7 +2065,7 @@ func_AD0C(var_0) {
   var_7 = var_1 - var_2;
   var_8 = scripts\sp\math::func_C097(var_6, var_5, var_7);
   var_9 = scripts\sp\math::func_6A8E(var_3, var_4, var_8);
-  if(level.player istouching(getent("freaking_lerp_quicker", "targetname"))) {
+  if(level.player istouching(getEnt("freaking_lerp_quicker", "targetname"))) {
     var_9 = 0.5;
   }
 
@@ -2178,7 +2178,7 @@ func_4202(var_0) {
     var_0.var_D361.angles = (85, level.player.angles[1], level.player.angles[2]);
     level.player playerlinktoabsolute(var_0.var_D361);
     var_0.var_D267 hide();
-    var_0.var_D361 moveto(var_0.origin, var_1);
+    var_0.var_D361 moveTo(var_0.origin, var_1);
     level.player clearhudtutorialmessage();
     wait(0.15);
     playworldsound("player_falling_death_impact", level.player.origin);
@@ -2261,7 +2261,7 @@ func_D86A() {
     level.player waittill("playerboost");
     level.var_CF99 = 1;
     level.player thread scripts\sp\utility::play_sound_on_entity("double_jump_boost_plr");
-    level.player playrumbleonentity("heavy_1s");
+    level.player playRumbleOnEntity("heavy_1s");
   }
 }
 

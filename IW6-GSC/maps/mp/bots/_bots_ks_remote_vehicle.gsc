@@ -193,7 +193,7 @@ bot_killstreak_remote_control(killstreak_info, killstreaks_array, canUseFunc, co
   needs_to_reach_hide_goal = true;
   hideNode = undefined;
   if(isDefined(self.node_ambushing_from)) {
-    script_goal_radius = self BotGetScriptGoalRadius();
+    script_goal_radius = self BotGetScriptgoalRadius();
 
     dist_sq_to_camp_goal = DistanceSquared(self.origin, self.node_ambushing_from.origin);
     if(dist_sq_to_camp_goal < squared(script_goal_radius)) {
@@ -438,8 +438,8 @@ bot_control_switchblade_cluster() {
           if(!isDefined(best_target)) {
             best_target = enemy;
           } else {
-            rocket_to_best_target = VectorNormalize(best_target.origin - current_rocket.origin);
-            rocket_to_enemy = VectorNormalize(enemy.origin - current_rocket.origin);
+            rocket_to_best_target = vectorNormalize(best_target.origin - current_rocket.origin);
+            rocket_to_enemy = vectorNormalize(enemy.origin - current_rocket.origin);
             rocket_orientation = anglesToForward(current_rocket.angles);
 
             dot_to_best_target = VectorDot(rocket_to_best_target, rocket_orientation);
@@ -539,7 +539,7 @@ bot_control_switchblade_cluster() {
 
 missile_get_desired_angles_to_target(missile, target_origin) {
   current_target = missile_find_ground_target(missile, target_origin[2]);
-  missile_target_to_desired_target = VectorNormalize(target_origin - current_target);
+  missile_target_to_desired_target = vectorNormalize(target_origin - current_target);
   return VectorToAngles(missile_target_to_desired_target);
 }
 
@@ -721,7 +721,7 @@ bot_control_vanguard() {
           last_pos = self.vehicle_controlling.origin;
         }
 
-        dir_to_next_node = VectorNormalize(next_node.origin - self.vehicle_controlling.origin);
+        dir_to_next_node = vectorNormalize(next_node.origin - self.vehicle_controlling.origin);
         self BotSetScriptMove(VectorToAngles(dir_to_next_node)[1], 0.20);
         self BotLookAtPoint(next_node.origin, 0.20, "script_forced");
 
@@ -1209,7 +1209,7 @@ heli_pilot_control_heli_aiming() {
       target_loc = target_loc + inaccuracy_vector;
 
       heli_eye_pos = self.vehicle_controlling GetTagOrigin("tag_player");
-      heli_eye_to_enemy_norm = VectorNormalize(target_loc - heli_eye_pos);
+      heli_eye_to_enemy_norm = vectorNormalize(target_loc - heli_eye_pos);
       player_angles = anglesToForward(self GetPlayerAngles());
       dot = VectorDot(heli_eye_to_enemy_norm, player_angles);
       if(dot > 0.5) {
@@ -1604,8 +1604,8 @@ bot_odin_get_player_target_point(player) {
     time_since_predicted = cur_time - self.odin_predicted_loc_time_for_player[player_ent_num];
 
     if(time_since_predicted <= SCR_CONST_PLAYER_PREDICT_UPDATE_TIME) {
-      player_velocity = VectorNormalize(player GetEntityVelocity());
-      player_to_predicted_loc = VectorNormalize(self.odin_predicted_loc_for_player[player_ent_num] - player.origin);
+      player_velocity = vectorNormalize(player GetEntityVelocity());
+      player_to_predicted_loc = vectorNormalize(self.odin_predicted_loc_for_player[player_ent_num] - player.origin);
       if(VectorDot(player_velocity, player_to_predicted_loc) < -0.5) {
         return player.origin;
       }

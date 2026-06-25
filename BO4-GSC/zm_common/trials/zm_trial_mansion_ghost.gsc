@@ -99,7 +99,7 @@ ghost_path() {
   function_da7940a3(level.e_ghost.n_obj_id, 1);
   level.e_ghost thread mansion_pap::function_7ff450ae();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_889abd74();
   }
 
@@ -110,7 +110,7 @@ ghost_path() {
 
     level.e_ghost mansion_pap::show_trail(nd_start);
     level.e_ghost.e_mover = util::spawn_model("tag_origin", level.e_ghost.origin, level.e_ghost.angles);
-    level.e_ghost linkto(level.e_ghost.e_mover);
+    level.e_ghost linkTo(level.e_ghost.e_mover);
     level.e_ghost.e_mover thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", level.e_ghost);
     level.e_ghost thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", level.e_ghost.mdl_head);
     wait 5;
@@ -121,8 +121,8 @@ ghost_path() {
     start_timers(20);
     level.e_ghost.e_mover thread scene::play(#"aib_vign_zm_mnsn_ghost_walk_01", level.e_ghost);
     level.e_ghost thread scene::play(#"aib_vign_zm_mnsn_ghost_walk_01", level.e_ghost.mdl_head);
-    level.e_ghost.e_mover moveto(nd_start.origin, 20);
-    level.e_ghost.e_mover rotateto(nd_start.angles, 20);
+    level.e_ghost.e_mover moveTo(nd_start.origin, 20);
+    level.e_ghost.e_mover rotateTo(nd_start.angles, 20);
     wait 20;
     stop_timers();
     level.e_ghost.e_mover scene::stop(#"aib_vign_zm_mnsn_ghost_walk_01");
@@ -131,7 +131,7 @@ ghost_path() {
 }
 
 start_timers(n_timer) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::open(player);
       level.var_f995ece6 zm_trial_timer::set_timer_text(player, #"hash_2cf8dfaf82a4082a");
@@ -143,7 +143,7 @@ start_timers(n_timer) {
 }
 
 stop_timers() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::close(player);
       player zm_trial_util::stop_timer();

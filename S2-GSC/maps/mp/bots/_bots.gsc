@@ -1717,7 +1717,7 @@ func_1AFE() {
           var_1A.var_087F = ::func_A1D8;
           var_1C = func_2736(var_0A) - var_0A.var_0116;
           var_1D = length(var_1C) * randomfloat(1);
-          var_1B = var_0A.var_0116 + vectornormalize(var_1C) * var_1D + (0, 0, 12);
+          var_1B = var_0A.var_0116 + vectorNormalize(var_1C) * var_1D + (0, 0, 12);
         }
       } else {
         var_1A.var_087F = ::func_A1DC;
@@ -2205,17 +2205,17 @@ func_2B9C() {}
 
 func_6348() {
   maps\mp\bots\_bots_util::func_1B20();
-  level.var_1AEC = getent("smoke_grenade_sight_clip_small", "targetname");
+  level.var_1AEC = getEnt("smoke_grenade_sight_clip_small", "targetname");
   if(!isDefined(level.var_1AEC)) {
     return;
   }
 
-  level.var_1AEB = getent("smoke_grenade_sight_clip_medium", "targetname");
+  level.var_1AEB = getEnt("smoke_grenade_sight_clip_medium", "targetname");
   if(!isDefined(level.var_1AEB)) {
     return;
   }
 
-  level.var_1AEA = getent("smoke_grenade_sight_clip_large", "targetname");
+  level.var_1AEA = getEnt("smoke_grenade_sight_clip_large", "targetname");
   if(!isDefined(level.var_1AEA)) {
     return;
   }

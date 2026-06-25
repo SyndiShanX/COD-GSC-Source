@@ -788,7 +788,7 @@ _id_D25F(var_0, var_1) {
   var_2 = _id_6521(var_1, self);
 
   if(isDefined(var_2)) {
-    self._id_8388 sethintstring(var_2);
+    self._id_8388 setHintString(var_2);
   }
 
   if(_id_8371(var_1)) {
@@ -827,7 +827,7 @@ _id_D25F(var_0, var_1) {
     var_8 = [[level._id_8393[var_1._id_039B].hint_type_func]](var_1, self);
   }
 
-  self._id_8388 setcursorhint(var_8);
+  self._id_8388 setCursorHint(var_8);
   self._id_8388 _meth_83A1(1);
 
   if(isDefined(level._id_838A)) {
@@ -1505,7 +1505,7 @@ _id_835A(var_0, var_1, var_2, var_3) {
   self endon("disconnect");
   level notify("interaction", "purchase_denied", level._id_8393[var_0._id_039B], self);
   self._id_4668 = 1;
-  self._id_8388 sethintstring(var_1);
+  self._id_8388 setHintString(var_1);
   wait 1;
   self._id_4668 = undefined;
   _id_D25F(self._id_8388, var_0);
@@ -1553,7 +1553,7 @@ _id_C1A2() {
   _id_D1A5(undefined);
 
   if(isDefined(self._id_8388)) {
-    self._id_8388 sethintstring("");
+    self._id_8388 setHintString("");
   }
 }
 

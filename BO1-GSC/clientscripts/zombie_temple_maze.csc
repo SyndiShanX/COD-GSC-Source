@@ -89,7 +89,7 @@ _maze_mover_move(goal, time) {
   if(time == 0) {
     time = .01;
   }
-  self moveto(goal, time);
+  self moveTo(goal, time);
   self waittill("movedone");
   self.isMoving = false;
   if(self.isActive) {

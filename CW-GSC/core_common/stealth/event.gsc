@@ -329,7 +329,7 @@ function event_broadcast_generic(eventtype, eventposition, eventradius, eventent
   ais = getactorteamarray("axis", "team3");
 
   if(!isDefined(evententity)) {
-    evententity = getplayers()[0];
+    evententity = getPlayers()[0];
   }
 
   var_1e5aa1c5 = sqr(eventradius);

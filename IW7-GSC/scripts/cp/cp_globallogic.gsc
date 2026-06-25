@@ -970,7 +970,7 @@ setupexploders() {
     }
 
     if(isDefined(var_6.target)) {
-      var_8 = getent(var_7.v["target"], "targetname").origin;
+      var_8 = getEnt(var_7.v["target"], "targetname").origin;
       var_7.v["angles"] = vectortoangles(var_8 - var_7.v["origin"]);
     }
 

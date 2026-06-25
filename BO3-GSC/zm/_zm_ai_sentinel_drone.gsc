@@ -164,7 +164,7 @@ function function_5cf4e163() {
 function function_7766fb04() {
   level endon("intermission");
   level endon("sentinel_round");
-  level.var_6693a532 = getplayers();
+  level.var_6693a532 = getPlayers();
   for(i = 0; i < level.var_6693a532.size; i++) {
     level.var_6693a532[i].hunted_by = 0;
   }
@@ -186,7 +186,7 @@ function function_7766fb04() {
   wait(1);
   sentinel_round_fx(1);
   visionset_mgr::activate("visionset", "zm_sentinel_round_visionset", undefined, 1.5, 1.5, 2);
-  playsoundatposition("vox_zmba_event_sentinelstart_0", (0, 0, 0));
+  playSoundAtPosition("vox_zmba_event_sentinelstart_0", (0, 0, 0));
   level thread zm_stalingrad_vo::function_3800b6e0();
   wait(3);
   level flag::set("sentinel_round_in_progress");
@@ -282,8 +282,8 @@ function function_b27530eb(v_pos) {
   self.angles = (0, randomintrange(0, 360), 0);
   e_origin = spawn("script_origin", self.origin);
   e_origin.angles = self.angles;
-  self linkto(e_origin);
-  e_origin moveto(var_92968756, 3);
+  self linkTo(e_origin);
+  e_origin moveTo(var_92968756, 3);
   e_origin playSound("zmb_sentinel_intro_spawn");
   e_origin util::delay(3, undefined, &function_e6bf0279);
   self clientfield::set("sentinel_spawn_fx", 1);
@@ -441,7 +441,7 @@ function function_1a7787ed() {
       n_num_to_spawn--;
       ai_zombie clientfield::set("sentinel_zombie_spawn_fx", 1);
       ai_zombie thread function_fdd9c3df(self);
-      playsoundatposition("zmb_sentinel_res_spawn", level.var_a657e360.origin);
+      playSoundAtPosition("zmb_sentinel_res_spawn", level.var_a657e360.origin);
       wait(var_4bb04d82);
     }
     util::wait_network_frame();
@@ -705,7 +705,7 @@ function function_630f7ed5(v_origin) {
   v_navmesh = getclosestpointonnavmesh(v_origin, 512, 16);
   if(isDefined(v_navmesh)) {
     wait(2);
-    self moveto(v_navmesh + vectorscale((0, 0, 1), 40), 2);
+    self moveTo(v_navmesh + vectorscale((0, 0, 1), 40), 2);
   }
 }
 
@@ -812,7 +812,7 @@ function function_acaa3ee4(origin) {}
 
 function function_6cb24476() {
   self endon("death");
-  v_compact_mode = getent("sentinel_compact", "targetname");
+  v_compact_mode = getEnt("sentinel_compact", "targetname");
   while(true) {
     if(self istouching(v_compact_mode)) {
       self sentinel_drone::sentinel_setcompactmode(1);

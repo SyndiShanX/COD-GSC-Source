@@ -137,7 +137,7 @@ function function_740dbf99() {
   level flag::clear("stealth_meter_combat_alerted");
 }
 
-function group_setcombatgoalradius(group, goalradius) {
+function group_setcombatgoalRadius(group, goalradius) {
   assert(isDefined(level.stealth));
 
   if(!isDefined(level.stealth.combat_goalradius)) {
@@ -626,14 +626,14 @@ function stealth_music(musichidden, musicspotted) {
     level flag::wait_till_clear("stealth_spotted");
     level flag::wait_till_clear("stealth_music_pause");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread stealth_music_transition(musichidden);
     }
 
     level flag::wait_till("stealth_spotted");
     level flag::wait_till_clear("stealth_music_pause");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread stealth_music_transition(musicspotted);
     }
   }
@@ -643,7 +643,7 @@ function stealth_music_stop() {
   self notify(#"stealth_music");
   self notify(#"stealth_music_pause_monitor");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread stealth_music_transition(undefined);
   }
 }
@@ -655,21 +655,21 @@ function stealth_music_pause_monitor(musichidden, musicspotted) {
   while(true) {
     level flag::wait_till("stealth_music_pause");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread stealth_music_transition(undefined);
     }
 
     level flag::wait_till_clear("stealth_music_pause");
 
     if(level flag::get("stealth_spotted")) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread stealth_music_transition(musicspotted);
       }
 
       continue;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread stealth_music_transition(musichidden);
     }
   }
@@ -781,7 +781,7 @@ function disable_stealth_system() {
     ai enable_stealth_for_ai(0);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.maxvisibledist = 8192;
 
     if(player flag::exists("stealth_enabled")) {
@@ -806,7 +806,7 @@ function enable_stealth_system() {
     ai enable_stealth_for_ai(1);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player flag::exists("stealth_enabled")) {
       player flag::set("stealth_enabled");
     }
@@ -818,7 +818,7 @@ function enable_stealth_for_ai(enabled, var_6f52290c = 0) {
     self.maxvisibledist = 8192;
 
     if(self flag::exists("stealth_enabled") && self flag::get("stealth_enabled") && self.team == "axis") {
-      player = getplayers()[0];
+      player = getPlayers()[0];
       dummyevent = spawnStruct();
       dummyevent.origin = player.origin;
       dummyevent.investigate_point = player.origin;

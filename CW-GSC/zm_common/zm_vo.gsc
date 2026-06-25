@@ -203,7 +203,7 @@ function function_1084cf1d() {
   wait 5;
   n_index = randomintrangeinclusive(0, 11);
   var_64edfc97 = #"hash_73e4d6659cb4dda3" + n_index;
-  playsoundatposition(var_64edfc97, v_origin);
+  playSoundAtPosition(var_64edfc97, v_origin);
 }
 
 function private on_item_pickup(params) {
@@ -860,7 +860,7 @@ function is_player_valid(e_player) {
 function get_valid_players() {
   a_valid_players = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(zm_utility::is_player_valid(player)) {
       if(!isDefined(a_valid_players)) {
         a_valid_players = [];
@@ -967,7 +967,7 @@ function function_8abe0568(str_type, n_delay, str_sound, b_wait_if_busy = 0, var
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_8abe0568(str_type, undefined, str_sound, b_wait_if_busy, var_92885147);
   }
 
@@ -1220,7 +1220,7 @@ function function_7622cb70(var_b58a6345, n_delay, b_wait_if_busy = 1, var_54c38d
       }
     }
 
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     if(isPlayer(player)) {
       str_vo_alias = player globallogic_audio::get_commander_dialog_alias(var_b58a6345);
@@ -1271,7 +1271,7 @@ function function_7622cb70(var_b58a6345, n_delay, b_wait_if_busy = 1, var_54c38d
       self notify(str_vo_alias + "_end_vo_say_commander_line");
     } else {
       a_players = function_a1ef346b();
-      var_2690dae = getplayers()[0] function_f577c17d(str_vo_alias, var_b58a6345);
+      var_2690dae = getPlayers()[0] function_f577c17d(str_vo_alias, var_b58a6345);
       level globallogic_audio::function_61e17de0(var_b58a6345, a_players, undefined, undefined, undefined, str_vo_alias);
 
       foreach(player in a_players) {
@@ -1315,7 +1315,7 @@ function function_7622cb70(var_b58a6345, n_delay, b_wait_if_busy = 1, var_54c38d
   if(isPlayer(self)) {
     str_bundle = self.pers[level.var_7ee6af9f];
   } else {
-    str_bundle = isDefined(level.var_e2f95698) ? level.var_e2f95698 : getplayers()[0].pers[level.var_7ee6af9f];
+    str_bundle = isDefined(level.var_e2f95698) ? level.var_e2f95698 : getPlayers()[0].pers[level.var_7ee6af9f];
   }
 
   var_a6e45682 = getscriptbundle(str_bundle);
@@ -1462,7 +1462,7 @@ function private function_f2efbd1c(var_64edfc97, var_b4dd2e62, var_dcfc156f, var
 
     a_players = array(self);
   } else {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     if(isarray(var_ce5964ab)) {
       a_players = array::exclude(a_players, var_ce5964ab);
@@ -1575,7 +1575,7 @@ function function_58f7f768(str_notify) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_604084ea();
@@ -1826,7 +1826,7 @@ function vo_stop() {
 function function_3c173d37(v_pos, n_range = 1000) {
   level notify(#"hash_1ca30bf3bc01d214");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(v_pos) || distancesquared(player.origin, v_pos) <= n_range * n_range) {
       player function_604084ea();
       player vo_stop();
@@ -1887,7 +1887,7 @@ function private function_7bed52a(killstreaktype, team, killstreakid) {
 
   foreach(currentteam, _ in level.teams) {
     if(currentteam != team) {
-      players = getplayers(currentteam, self.origin, scriptbundle.var_e23aed46);
+      players = getPlayers(currentteam, self.origin, scriptbundle.var_e23aed46);
       globallogic_audio::function_61e17de0(dialogkey, players, undefined, killstreakid);
     }
   }

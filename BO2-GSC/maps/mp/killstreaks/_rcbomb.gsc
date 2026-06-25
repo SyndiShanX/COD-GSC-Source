@@ -131,7 +131,7 @@ spawnrcbomb(placement, team) {
   enemymodel = "veh_t6_drone_rcxd_alt";
   death_model = "veh_t6_drone_rcxd";
   car = "rc_car_medium_mp";
-  vehicle = spawnvehicle(model, "rcbomb", car, placement.origin, placement.angles);
+  vehicle = spawnVehicle(model, "rcbomb", car, placement.origin, placement.angles);
   vehicle makevehicleunusable();
   vehicle.death_model = death_model;
   vehicle.allowfriendlyfiredamageoverride = ::rccarallowfriendlyfiredamage;
@@ -454,7 +454,7 @@ blowup(attacker, weaponname) {
     self radiusdamage(origin, radius, max_damage, min_damage, attacker, "MOD_EXPLOSIVE", "rcbomb_mp");
     physicsexplosionsphere(origin, radius, radius, 1, max_damage, min_damage);
     maps\mp\gametypes\_shellshock::rcbomb_earthquake(origin);
-    playsoundatposition("mpl_rc_exp", self.origin);
+    playSoundAtPosition("mpl_rc_exp", self.origin);
     playFX(level._effect["rcbombexplosion"], explosionorigin, (0, 0, 1));
   }
 

@@ -6,7 +6,7 @@
 lib_0562::func_00D5() {
   common_scripts\utility::func_092C("moneyCloud", "vfx/gameplay\mp\zombie/gj_pickup_zombies_01_money");
   foreach(var_01 in ["classic_ee_trigger_01", "classic_ee_trigger_02", "classic_ee_trigger_03", "classic_ee_trigger_04"]) {
-    var_02 = getent(var_01, "script_noteworthy");
+    var_02 = getEnt(var_01, "script_noteworthy");
     level.var_231F[var_01] = var_02;
     thread lib_0562::func_3599(var_02);
   }

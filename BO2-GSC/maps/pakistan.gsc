@@ -146,14 +146,14 @@ level_precache() {
 
 pakistan_objectives() {
   flag_wait("intro_anim_done");
-  s_market_goal = getstruct("market_exit_objective", "targetname");
+  s_market_goal = getStruct("market_exit_objective", "targetname");
   set_objective(level.obj_get_to_base, s_market_goal, "breadcrumb");
   flag_wait("frogger_started");
-  s_arch_goal = getstruct("skipto_bus_street", "targetname");
+  s_arch_goal = getStruct("skipto_bus_street", "targetname");
   set_objective(level.obj_get_to_base, s_market_goal, "remove");
   set_objective(level.obj_get_to_base, s_arch_goal, "breadcrumb");
   flag_wait("frogger_done");
-  s_bus_goal = getstruct("bus_dam_temp_wave_struct", "targetname");
+  s_bus_goal = getStruct("bus_dam_temp_wave_struct", "targetname");
   set_objective(level.obj_get_to_base, s_arch_goal, "remove");
   set_objective(level.obj_get_to_base, s_bus_goal, "breadcrumb");
   flag_wait("bus_dam_runners_started");
@@ -165,12 +165,12 @@ pakistan_objectives() {
   set_objective(level.obj_bus_escape, undefined, "done", undefined, 0);
   flag_wait("drone1_start");
   set_objective(level.obj_get_to_base, undefined, "done", undefined, 0);
-  set_objective(level.obj_avoid_drones, getstruct("stealth_start_obj", "targetname"), "breadcrumb");
+  set_objective(level.obj_avoid_drones, getStruct("stealth_start_obj", "targetname"), "breadcrumb");
   flag_wait("corpse_alley_player_done");
-  set_objective(level.obj_avoid_drones, getstruct("stealth_start_obj", "targetname"), "remove");
-  set_objective(level.obj_avoid_drones, getent("trigger_bank", "targetname"), "breadcrumb");
+  set_objective(level.obj_avoid_drones, getStruct("stealth_start_obj", "targetname"), "remove");
+  set_objective(level.obj_avoid_drones, getEnt("trigger_bank", "targetname"), "breadcrumb");
   flag_wait("player_entered_bank");
-  set_objective(level.obj_avoid_drones, getent("trigger_bank", "targetname"), "remove");
+  set_objective(level.obj_avoid_drones, getEnt("trigger_bank", "targetname"), "remove");
   set_objective(level.obj_avoid_drones, level.harper, "follow");
   flag_wait("sewer_move_up");
   set_objective(level.obj_avoid_drones, level.harper, "remove");
@@ -180,10 +180,10 @@ pakistan_objectives() {
   set_objective(level.obj_get_to_base_again, level.harper, "follow");
   flag_wait("approach_exit");
   set_objective(level.obj_get_to_base_again, level.harper, "remove");
-  set_objective(level.obj_get_to_base_again, getstruct("pakistan_sewer_exit_temp", "targetname"), "breadcrumb");
+  set_objective(level.obj_get_to_base_again, getStruct("pakistan_sewer_exit_temp", "targetname"), "breadcrumb");
   flag_wait("player_at_ladder");
-  set_objective(level.obj_get_to_base_again, getstruct("pakistan_sewer_exit_temp", "targetname"), "remove");
-  set_objective(level.obj_get_to_base_again, getstruct("obj_manhole", "targetname"), "breadcrumb");
+  set_objective(level.obj_get_to_base_again, getStruct("pakistan_sewer_exit_temp", "targetname"), "remove");
+  set_objective(level.obj_get_to_base_again, getStruct("obj_manhole", "targetname"), "breadcrumb");
   flag_wait("pak1_done");
   set_objective(level.obj_get_to_base_again, undefined, "done");
 }
@@ -209,9 +209,9 @@ global_funcs() {
   wait_network_frame();
   maps\pakistan_market::claw_1_init();
   maps\_rusher::init_rusher();
-  m_clip = getent("clip_alley_door", "targetname");
-  e_door = getent("pakistan_alley_door", "targetname");
-  m_clip linkto(e_door, "door_hinge_jnt");
+  m_clip = getEnt("clip_alley_door", "targetname");
+  e_door = getEnt("pakistan_alley_door", "targetname");
+  m_clip linkTo(e_door, "door_hinge_jnt");
 }
 
 toggle_ignore_state() {

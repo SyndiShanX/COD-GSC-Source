@@ -258,7 +258,7 @@ function_32e782df(params) {
 }
 
 on_end_game() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -969,7 +969,7 @@ tutorial_hints(slot, weapon, var_8430d11b, var_6c65cb8d, var_eadf8864, var_be7c2
       break;
     }
 
-    if(self isinvehicle() || self function_8bc54983() || self scene::is_igc_active() || self isplayinganimscripted()) {
+    if(self isinvehicle() || self function_8bc54983() || self scene::is_igc_active() || self isplayinganimScripted()) {
       wait 5;
       continue;
     }
@@ -1064,7 +1064,7 @@ abilities_devgui_player_connect() {
   }
 
   wait 2;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i] != self) {
@@ -1549,7 +1549,7 @@ abilities_devgui_handle_player_command(cmd, playercallback, pcb_param) {
   pid = getdvarint(#"scr_abilities_devgui_player", 0);
 
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
 
     if(isDefined(player)) {
       if(isDefined(pcb_param)) {
@@ -1562,7 +1562,7 @@ abilities_devgui_handle_player_command(cmd, playercallback, pcb_param) {
     return;
   }
 
-  array::thread_all(getplayers(), playercallback, pcb_param);
+  array::thread_all(getPlayers(), playercallback, pcb_param);
 }
 
 abilities_devgui_power_fill() {

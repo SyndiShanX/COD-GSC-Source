@@ -21,9 +21,9 @@ init_loudspeaker_trap() {
     var_2.origin = (2412, -2058, var_2.origin[2]);
   }
 
-  level.loudspeaker_blast_zone = getent("loudspeaker_blast_zone", "targetname");
+  level.loudspeaker_blast_zone = getEnt("loudspeaker_blast_zone", "targetname");
   level.dance_floor_volume = level.loudspeaker_blast_zone;
-  level.rave_dance_attract_zone = getent("rave_dance_attract_trig", "targetname");
+  level.rave_dance_attract_zone = getEnt("rave_dance_attract_trig", "targetname");
   level.rave_dance_attract_zone.fgetarg = 750;
   level.rave_dance_attract_zone.height = 175;
   level.rave_dance_attract_zone.origin = level.rave_dance_attract_zone.origin + (0, 0, -50);
@@ -32,7 +32,7 @@ init_loudspeaker_trap() {
   }
 
   wait(1);
-  level.rave_dance_attract_sorter = scripts\engine\utility::getstruct("rave_dance_sorter", "targetname");
+  level.rave_dance_attract_sorter = scripts\engine\utility::getStruct("rave_dance_sorter", "targetname");
   level.rave_dance_spots = scripts\engine\utility::getStructArray("rave_dance_spots", "targetname");
   func_E1E0();
 }
@@ -102,7 +102,7 @@ sfx_speaker_trap() {
 
 func_254E() {
   level endon("speaker_trap_done");
-  var_0 = getent("rave_dance_attract_trig", "targetname");
+  var_0 = getEnt("rave_dance_attract_trig", "targetname");
   level.rave_dancing_zombies = [];
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -195,7 +195,7 @@ loudspeaker_damage(var_0, var_1, var_2) {
         continue;
       }
 
-      var_5 setvelocity(vectornormalize(var_5.origin + (0, 0, 40) - level.rave_dance_attract_sorter.origin) * 1800 + (0, 0, 550));
+      var_5 setvelocity(vectorNormalize(var_5.origin + (0, 0, 40) - level.rave_dance_attract_sorter.origin) * 1800 + (0, 0, 550));
       var_5.do_immediate_ragdoll = 1;
       var_5.customdeath = 1;
       var_5 thread speaker_delayed_death(var_1);

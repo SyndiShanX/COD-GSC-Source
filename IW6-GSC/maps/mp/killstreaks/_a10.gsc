@@ -211,7 +211,7 @@ attachTurret(streakName) {
   config = level.planeConfigs[streakName];
   turretPos = self GetTagOrigin(config.turretAttachPoint);
   turret = SpawnTurret("misc_turret", self.origin + turretPos, config.turretName, false);
-  turret LinkTo(self, config.turretAttachPoint, (0, 0, 0), (0, 0, 0));
+  turret linkTo(self, config.turretAttachPoint, (0, 0, 0), (0, 0, 0));
   turret setModel("vehicle_ugv_talon_gun_mp");
   turret.angles = self.angles;
   turret.owner = self.owner;
@@ -422,7 +422,7 @@ missileIsGoodTarget(target) {
 }
 
 missileTargetAngle(target) {
-  dirToTarget = VectorNormalize(target.origin - self.origin);
+  dirToTarget = vectorNormalize(target.origin - self.origin);
   facingDir = anglesToForward(self.angles);
 
   return VectorDot(dirToTarget, facingDir);
@@ -648,7 +648,7 @@ updateCannonShake(streakName) {
     barrelPoint = self GetTagOrigin("tag_flash_attach") + 20 * anglesToForward(self.angles);
     playFX(config.cannonFireVFX, barrelPoint);
 
-    self PlayRumbleOnEntity(config.cannonRumble);
+    self playRumbleOnEntity(config.cannonRumble);
 
     wait(0.1);
   }

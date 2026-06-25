@@ -349,14 +349,14 @@ func_4A1F(var_0) {
   var_1 = var_0.owner;
   var_2 = var_0.tanktype;
   var_3 = var_0.lifeid;
-  var_4 = spawnvehicle(level.tanksettings[var_2].modelbase, var_2, level.tanksettings[var_2].vehicleinfo, var_0.origin, var_0.angles, var_1);
+  var_4 = spawnVehicle(level.tanksettings[var_2].modelbase, var_2, level.tanksettings[var_2].vehicleinfo, var_0.origin, var_0.angles, var_1);
   if(!isDefined(var_4)) {
     return undefined;
   }
 
   var_5 = var_4 gettagorigin("tag_turret_attach");
   var_6 = spawnturret("misc_turret", var_5, level.tanksettings[var_2].mgturretinfo, 0);
-  var_6 linkto(var_4, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
+  var_6 linkTo(var_4, "tag_turret_attach", (0, 0, 0), (0, 0, 0));
   var_6 setModel(level.tanksettings[var_2].var_B922);
   var_6.health = level.tanksettings[var_2].health;
   var_6.owner = var_1;
@@ -412,7 +412,7 @@ func_114CC() {
       if(var_3 != var_0 && var_3.team == var_0.team) {
         var_4 = self.mgturret scripts\mp\entityheadicons::setheadicon(var_3, scripts\mp\teams::func_81B0(self.team), var_1, 10, 10, 0, 0.05, 0, 1, 0, 1);
         if(isDefined(var_4)) {
-          var_4 settargetent(self);
+          var_4 settargetEnt(self);
         }
       }
     }
@@ -843,7 +843,7 @@ func_114B6(var_0) {
   for(;;) {
     if(self secondaryoffhandbuttonPressed()) {
       var_1 = bulletTrace(var_0.origin + (0, 0, 4), var_0.origin - (0, 0, 4), 0, var_0);
-      var_2 = vectornormalize(var_1["normal"]);
+      var_2 = vectorNormalize(var_1["normal"]);
       var_3 = vectortoangles(var_2);
       var_3 = var_3 + (90, 0, 0);
       var_4 = scripts\mp\weapons::spawnmine(var_0.origin, self, "equipment", var_3);

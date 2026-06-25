@@ -44,10 +44,10 @@ func_7D7A(var_0, var_1) {
     var_6.origin = var_0;
     return var_6;
   } else if(isstring(var_1)) {
-    if(isstruct(scripts\engine\utility::getstruct(var_1, "targetname"))) {
-      return scripts\engine\utility::getstruct(var_1, "targetname");
-    } else if(isent(getent(var_1, "targetname"))) {
-      return getent(var_1, "targetname");
+    if(isstruct(scripts\engine\utility::getStruct(var_1, "targetname"))) {
+      return scripts\engine\utility::getStruct(var_1, "targetname");
+    } else if(isent(getEnt(var_1, "targetname"))) {
+      return getEnt(var_1, "targetname");
     } else if(isnode(getnode(var_1, "targetname"))) {
       return getnode(var_1, "targetname");
     } else if(getsubstr(var_1, 0, 2) == "**") {
@@ -88,7 +88,7 @@ func_798D(var_0, var_1, var_2) {
 
 func_798E(var_0, var_1, var_2) {
   if(var_2 == "_ignore_last_sparam") {
-    return getent(var_0, var_1);
+    return getEnt(var_0, var_1);
   }
 
   var_3 = getEntArray(var_0, var_1);
@@ -103,7 +103,7 @@ func_798E(var_0, var_1, var_2) {
 
 func_7CBE(var_0, var_1, var_2) {
   if(var_2 == "_ignore_last_sparam") {
-    return scripts\engine\utility::getstruct(var_0, var_1);
+    return scripts\engine\utility::getStruct(var_0, var_1);
   }
 
   var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
@@ -1348,7 +1348,7 @@ func_37D0(var_0, var_1, var_2) {
   var_5 = var_3 + anglesToForward(var_4) * -24;
   var_6 = scripts\engine\utility::spawn_tag_origin(var_3, var_4);
   playFXOnTag(scripts\engine\utility::getfx("vfx_sc_armory_terminal_camo_change_scan"), var_6, "tag_origin");
-  var_6 moveto(var_5, 1, 0.125, 0.125);
+  var_6 moveTo(var_5, 1, 0.125, 0.125);
   var_6 scripts\engine\utility::delaycall(1, ::moveto, var_3, 1, 0.125, 0.125);
   wait(0.5);
   var_0 setscriptablepartstate("camouflage", "camouflageOn", 1);

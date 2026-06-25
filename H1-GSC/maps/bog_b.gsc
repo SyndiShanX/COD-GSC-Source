@@ -141,8 +141,8 @@ main() {
   common_scripts\utility::array_thread(getEntArray("computer_des", "targetname"), ::computer_destruct);
   thread maps\_utility::ai_team_run_twitch_think("allies", "alley_cleared", undefined, "ch46", undefined);
   level.abrams = maps\_vehicle::waittill_vehiclespawn("abrams");
-  var_0 = getent("abrams_top_clip", "targetname");
-  var_0 linkto(level.abrams, "tag_turret", (-10, 0, 10), (0, -90, 0));
+  var_0 = getEnt("abrams_top_clip", "targetname");
+  var_0 linkTo(level.abrams, "tag_turret", (-10, 0, 10), (0, -90, 0));
   thread seaknight_player_door_clip();
   setsaveddvar("r_reactiveMotionWindAmplitudeScale", 3);
   setsaveddvar("r_reactiveMotionWindStrength", 1);
@@ -158,7 +158,7 @@ main() {
   setsaveddvar("r_lodFOVScaleOverrideStartMinAngle", 55);
   level.abrams.vehicle_treadfx_min_speed = 5;
   wait 0.05;
-  var_1 = getent("alley_volume", "targetname");
+  var_1 = getEnt("alley_volume", "targetname");
   var_2 = getEntArray("destructible", "targetname");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
@@ -167,23 +167,23 @@ main() {
     }
   }
 
-  var_4 = getent("dumpster", "targetname");
-  var_5 = getent("dumpster_clip", "targetname");
+  var_4 = getEnt("dumpster", "targetname");
+  var_5 = getEnt("dumpster_clip", "targetname");
   var_5.origin = var_4.origin;
   var_5.angles = (0, var_4.angles[1], 0);
-  var_0 = getent("truck_clip_before", "targetname");
+  var_0 = getEnt("truck_clip_before", "targetname");
   var_0 notsolid();
   var_0 delete();
   var_6 = spawn("script_model", (3900, -1500, 100));
   var_6 setModel("h1_bog_b_patch_concrete_slab");
   level.abrams.issquad = 1;
   level.abrams.forwardent = spawn("script_origin", level.abrams gettagorigin("tag_flash"));
-  level.abrams.forwardent linkto(level.abrams);
-  level.tire_fire = getent("tire_fire", "targetname");
+  level.abrams.forwardent linkTo(level.abrams);
+  level.tire_fire = getEnt("tire_fire", "targetname");
   playFXOnTag(level._effect["fire_wreckage_ground"], level.tire_fire, "tag_origin");
   common_scripts\utility::flag_set("aa_bog_b_zone_bog");
   wait 6.5;
-  getent("player_spawn_safety_brush", "targetname") delete();
+  getEnt("player_spawn_safety_brush", "targetname") delete();
   wait 3.0;
   objective_add(1, "current", &"BOG_B_OBJ_ESCORT_TANK", (4347, -4683, 130));
 }
@@ -269,8 +269,8 @@ ishero() {
 }
 
 fog_adjust() {
-  var_0 = getent("fog_in", "targetname");
-  var_1 = getent("fog_out", "targetname");
+  var_0 = getEnt("fog_in", "targetname");
+  var_1 = getEnt("fog_out", "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -300,7 +300,7 @@ start_bog() {
 }
 
 first_friendly_advancement_trigger() {
-  var_0 = getent("first_friendly_advancement_trigger", "script_noteworthy");
+  var_0 = getEnt("first_friendly_advancement_trigger", "script_noteworthy");
   var_0 endon("trigger");
   wait 3;
 
@@ -313,8 +313,8 @@ first_friendly_advancement_trigger() {
 start_arch() {
   soundscripts\_snd::snd_message("aud_start_arch_checkpoint");
   spawn_starting_friendlies("friendly_starting_spawner_arch");
-  var_0 = getent("playerstart_arch", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("playerstart_arch", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles((0, var_0.angles[1], 0));
   wait 0.05;
   var_1 = getaiarray("axis");
@@ -339,8 +339,8 @@ start_arch() {
 start_alley() {
   soundscripts\_snd::snd_message("aud_start_alley_checkpoint");
   spawn_starting_friendlies("friendly_starting_spawner_alley");
-  var_0 = getent("playerstart_alley", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("playerstart_alley", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles((0, var_0.angles[1], 0));
   waittillframeend;
   var_1 = getaiarray("axis");
@@ -382,8 +382,8 @@ friendlies_become_invulnerable() {
 
 start_ch46() {
   soundscripts\_snd::snd_message("aud_start_ch46_checkpoint");
-  var_0 = getent("seaknight_land_location", "script_noteworthy");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("seaknight_land_location", "script_noteworthy");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles((0, var_0.angles[1], 0));
   waittillframeend;
   var_1 = getaiarray("axis");
@@ -432,7 +432,7 @@ spawn_starting_friendlies(var_0) {
 
 ignored_till_fastrope(var_0) {
   var_1 = undefined;
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isspawner(var_1)) {
     var_1 = maps\_vehicle::waittill_vehiclespawn(var_0);
@@ -464,7 +464,7 @@ ignored_till_fastrope(var_0) {
 }
 
 stragglers_chase() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self waittill("trigger");
   var_1 = getaiarray("axis");
 
@@ -493,7 +493,7 @@ truck_tank_collide_think(var_0, var_1, var_2) {
   }
 
   level endon(var_0 + "_stop_collide_think");
-  var_4 = getent(var_0 + "_tank_collide_trigger", "targetname");
+  var_4 = getEnt(var_0 + "_tank_collide_trigger", "targetname");
 
   for(;;) {
     var_4 waittill("trigger", var_5);
@@ -604,9 +604,9 @@ attack_troops() {
 }
 
 tank_turret_forward() {
-  getent("tank_turret_forward", "targetname") waittill("trigger");
+  getEnt("tank_turret_forward", "targetname") waittill("trigger");
   self notify("stop_attacking_troops");
-  self setturrettargetent(self.forwardent);
+  self setturrettargetEnt(self.forwardent);
   common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 4.0);
   self clearturrettarget();
 }
@@ -706,7 +706,7 @@ setupexploder(var_0, var_1, var_2) {
     }
   }
 
-  var_3.impact_detector = getent("exploder_detectimpact_" + var_3.snumber, "targetname");
+  var_3.impact_detector = getEnt("exploder_detectimpact_" + var_3.snumber, "targetname");
 
   if(isDefined(var_3.impact_detector)) {
     var_3.impact_detector notsolid();
@@ -932,9 +932,9 @@ killspawner(var_0) {
 }
 
 alley_dumpster_sequence() {
-  var_0 = getent("start_dumpster_sequence", "script_noteworthy");
+  var_0 = getEnt("start_dumpster_sequence", "script_noteworthy");
   var_0 waittill("trigger");
-  var_1 = getent("post_archway_color_trigger", "targetname");
+  var_1 = getEnt("post_archway_color_trigger", "targetname");
   var_1 common_scripts\utility::trigger_off();
   wait 0.05;
   var_2 = getnode("vasquez_dumpster_node", "targetname");
@@ -978,18 +978,18 @@ alley_dumpster_sequence() {
     var_6 thread maps\_utility::magic_bullet_shield();
   }
 
-  var_8 = getent("dumpster", "targetname");
+  var_8 = getEnt("dumpster", "targetname");
   var_8.animname = "dumpster";
   var_8 useanimtree(level.scr_animtree["dumpster"]);
-  var_9 = getent("dumpster_clip", "targetname");
+  var_9 = getEnt("dumpster_clip", "targetname");
   var_2 = spawn("script_origin", var_8.origin);
   var_2.angles = var_8.angles;
   var_8 thread updateclippos(var_9);
-  var_10 = getent("dumpster_new_model", "targetname");
+  var_10 = getEnt("dumpster_new_model", "targetname");
 
   if(isDefined(var_10)) {
     var_8 hide();
-    var_10 linkto(var_8);
+    var_10 linkTo(var_8);
   }
 
   var_6 thread maps\_utility::set_ignoresuppression(1);
@@ -1021,7 +1021,7 @@ alley_dumpster_sequence() {
   level.price.overridemovemode = undefined;
   level.price.force_crouch = undefined;
   var_8 notify("stop_updating_clip");
-  var_9 disconnectpaths();
+  var_9 disconnectPaths();
   var_6 allowedstances("crouch", "stand", "prone");
   level.price setgoalnode(getnode("dumpster_push_afternode_dumpsterguy", "targetname"));
   var_6 setgoalnode(getnode("dumpster_push_afternode_vasquez", "targetname"));
@@ -1032,7 +1032,7 @@ alley_dumpster_sequence() {
 }
 
 remove_alley_seperation_clip() {
-  var_0 = getent("alley_seperation_clip", "targetname");
+  var_0 = getEnt("alley_seperation_clip", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1068,8 +1068,8 @@ updateclippos(var_0) {
   var_0.angles = self.angles;
 
   for(;;) {
-    var_0 moveto(self.origin, 0.1);
-    var_0 rotateto((0, self.angles[1], 0), 0.1);
+    var_0 moveTo(self.origin, 0.1);
+    var_0 rotateTo((0, self.angles[1], 0), 0.1);
     wait 0.1;
   }
 }
@@ -1100,7 +1100,7 @@ alley_cleared() {
   common_scripts\utility::flag_set("alley_cleared");
   soundscripts\_snd::snd_message("start_decrease_ambiance");
   common_scripts\utility::flag_wait("dumpster_pushed");
-  getent("alley_protect_door_breech_color_trigger", "targetname") notify("trigger");
+  getEnt("alley_protect_door_breech_color_trigger", "targetname") notify("trigger");
   var_0 = level.alleyfriends[0];
 
   if(var_0 == level.price) {
@@ -1118,7 +1118,7 @@ alley_door_kick(var_0) {
   var_1[1] = level.price;
   var_1[0].animname = "alley_door_kicker_left";
   var_1[1].animname = "alley_door_kicker_right";
-  var_2 = getent("alley_door_scripted_node", "targetname");
+  var_2 = getEnt("alley_door_scripted_node", "targetname");
 
   if(getdvarint("use_old_door_breach") == 1) {
     thread alley_door_guy1_idle(var_2, var_1[0]);
@@ -1141,7 +1141,7 @@ alley_door_kick(var_0) {
     var_3 anim_reach_orient_and_play(var_0, "alley_breach", var_4, "right");
   }
 
-  getent("last_color_order_trigger", "targetname") notify("trigger");
+  getEnt("last_color_order_trigger", "targetname") notify("trigger");
   thread alley_door_remove_player_clip();
 }
 
@@ -1185,7 +1185,7 @@ alley_door_remove_player_clip(var_0) {
     wait(var_0);
   }
 
-  getent("alley_door_player_clip", "targetname") delete();
+  getEnt("alley_door_player_clip", "targetname") delete();
 }
 
 alley_door_guy1_idle(var_0, var_1) {
@@ -1194,12 +1194,12 @@ alley_door_guy1_idle(var_0, var_1) {
 }
 
 alley_dooropen(var_0) {
-  var_1 = getent("alley_door", "targetname");
+  var_1 = getEnt("alley_door", "targetname");
   var_1 connectpaths();
   var_1 thread common_scripts\utility::play_sound_in_space("metal_door_kick");
-  var_1 rotateyaw(-140, 0.5, 0, 0);
+  var_1 rotateYaw(-140, 0.5, 0, 0);
   wait 0.5;
-  var_1 disconnectpaths();
+  var_1 disconnectPaths();
 }
 
 flyby() {
@@ -1214,7 +1214,7 @@ flyby() {
 }
 
 flyby_go(var_0) {
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = ((var_0.origin[0] + var_1.origin[0]) / 2, (var_0.origin[1] + var_1.origin[1]) / 2, 0);
   var_3 = vectortoangles(var_1.origin - var_0.origin);
   var_4 = (0, var_3[1], 0);
@@ -1231,7 +1231,7 @@ flyby_go(var_0) {
   var_10.angles = var_4;
   var_11 = abs(var_5 - var_6);
   var_12 = var_11 / var_7;
-  var_10 moveto(var_9, var_12, 0, 0);
+  var_10 moveTo(var_9, var_12, 0, 0);
   playFXOnTag(level._effect["contrail"], var_10, "tag_right_wingtip");
   playFXOnTag(level._effect["contrail_02"], var_10, "tag_left_wingtip");
   thread flyby_planesound(var_10);
@@ -1277,8 +1277,8 @@ flyby_planesound(var_0) {
 }
 
 teamssplitup() {
-  getent("teams_split_up", "script_noteworthy") waittill("trigger");
-  var_0 = getent("price_inside_split_up_house", "targetname");
+  getEnt("teams_split_up", "script_noteworthy") waittill("trigger");
+  var_0 = getEnt("price_inside_split_up_house", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1342,7 +1342,7 @@ lastsequence() {
     wait 4.0;
     level.player thread playradiosound(level.scr_sound["tank_commander"]["switchmanual"]);
     wait 2.5;
-    level.abrams setturrettargetent(level.t72, (0, 0, 50));
+    level.abrams setturrettargetEnt(level.t72, (0, 0, 50));
   }
 
   if(getdvarint("use_old_celebration") == 1) {
@@ -1403,7 +1403,7 @@ lastsequence() {
 
 t72_kill_player_trigger() {
   level endon("t72_exploded");
-  var_0 = getent("t72_kill_player_trigger", "targetname");
+  var_0 = getEnt("t72_kill_player_trigger", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -1493,7 +1493,7 @@ abrams_moveto_t72() {
 abrams_moveto_t72_clearturret() {
   level.abrams notify("stop_attacking_troops");
   wait 0.05;
-  level.abrams setturrettargetent(level.abrams.forwardent);
+  level.abrams setturrettargetEnt(level.abrams.forwardent);
   level.abrams common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 4.0);
   level.abrams clearturrettarget();
 }
@@ -1748,10 +1748,10 @@ advancealleyfriendliestoend(var_0, var_1, var_2) {
   var_3 thread doorblocker_anim_on_trigger(var_6);
   var_3 thread doorblocker_reach_door();
   var_3.script_noteworthy = "doorblocker";
-  var_7 = getent("doorblocker_clip", "targetname");
+  var_7 = getEnt("doorblocker_clip", "targetname");
   var_7.origin = var_3 gettagorigin("tag_origin");
   var_7.angles = var_3 gettagangles("tag_origin");
-  var_7 linkto(var_3, "tag_origin");
+  var_7 linkTo(var_3, "tag_origin");
   var_3.player_clip = var_7;
   thread doorblocker_slow_trigger();
   level.price maps\_utility::set_force_color("o");
@@ -1794,7 +1794,7 @@ vasquez_wait_on_other_marine(var_0) {
 }
 
 doorblocker_anim_on_trigger(var_0) {
-  var_1 = getent("door_block_trigger", "targetname");
+  var_1 = getEnt("door_block_trigger", "targetname");
   var_1 waittill("trigger");
   self.animname = "guard";
   var_0 maps\_anim::anim_reach_solo(self, "stop");
@@ -1802,7 +1802,7 @@ doorblocker_anim_on_trigger(var_0) {
   thread disable_door_block_clip(getanimlength(level.scr_anim["guard"]["stop"]));
   maps\_utility::delaythread(0.8, maps\_anim::anim_single_queue, self, "stop_snd");
   var_0 maps\_anim::anim_single_solo(self, "stop");
-  getent("last_color_order_trigger2", "targetname") notify("trigger");
+  getEnt("last_color_order_trigger2", "targetname") notify("trigger");
   common_scripts\utility::flag_set("ok_to_do_spotting");
 }
 
@@ -1818,12 +1818,12 @@ doorblocker_reach_door() {
 
 disable_door_block_clip(var_0) {
   wait(var_0 - 2.0);
-  var_1 = getent("door_block_clip", "targetname");
+  var_1 = getEnt("door_block_clip", "targetname");
   var_1 delete();
 }
 
 doorblocker_slow_trigger() {
-  var_0 = getent("doorblocker_slow_trig", "targetname");
+  var_0 = getEnt("doorblocker_slow_trig", "targetname");
 
   while(!common_scripts\utility::flag("doorblocker_reach_door")) {
     if(level.player istouching(var_0)) {
@@ -1847,29 +1847,29 @@ doorblocker_slow_trigger() {
 t72_in_final_position_preh1() {
   level.t72 = maps\_vehicle::waittill_vehiclespawn("t72");
   level.t72 waittill("reached_end_node");
-  var_0 = getent("exploder_300_target", "targetname");
-  level.t72 setturrettargetent(var_0);
+  var_0 = getEnt("exploder_300_target", "targetname");
+  level.t72 setturrettargetEnt(var_0);
   level.t72 common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 4.0);
   level.t72 clearturrettarget();
   level.t72 fireweapon();
   level.t72 maps\bog_b_anim::shoot_t72_anim();
   common_scripts\_exploder::exploder(300);
   wait 2.0;
-  var_1 = getent("t72_aim_at_final_building_location", "targetname");
-  level.t72 setturrettargetent(var_1);
+  var_1 = getEnt("t72_aim_at_final_building_location", "targetname");
+  level.t72 setturrettargetEnt(var_1);
   level.t72 common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 4.0);
   level.t72 clearturrettarget();
 
   if(getDvar("bog_debug_tank") == "1") {
     var_2 = level.t72 gettagorigin("tag_flash");
     var_3 = level.t72 gettagorigin("tag_turret");
-    var_1 = getent("t72_aim_at_final_building_location", "targetname");
+    var_1 = getEnt("t72_aim_at_final_building_location", "targetname");
     var_4 = abs(var_2[2] - var_3[2]);
     var_5 = distance(var_2, var_3);
     var_6 = asin(var_4 / var_5);
     iprintlnbold("UP: " + var_6);
     var_7 = anglesToForward(level.t72.angles);
-    var_8 = vectornormalize(var_1.origin - level.t72.origin);
+    var_8 = vectorNormalize(var_1.origin - level.t72.origin);
     var_9 = acos(vectordot(var_7, var_8));
     iprintlnbold("LEFT: " + var_9);
   }
@@ -1881,8 +1881,8 @@ t72_in_final_position() {
   thread t72_exploder_detect_impact_init();
   level.t72 = maps\_vehicle::waittill_vehiclespawn("t72");
   wait 8;
-  var_0 = getent("t72_entry_target", "targetname");
-  level.t72 setturrettargetent(var_0);
+  var_0 = getEnt("t72_entry_target", "targetname");
+  level.t72 setturrettargetEnt(var_0);
   level.t72 waittill("reached_end_node");
 
   if(!common_scripts\utility::flag("arrived_at_spotting")) {
@@ -1890,8 +1890,8 @@ t72_in_final_position() {
     wait 1.5;
   }
 
-  var_1 = getent("exploder_300_target", "targetname");
-  level.t72 setturrettargetent(var_1);
+  var_1 = getEnt("exploder_300_target", "targetname");
+  level.t72 setturrettargetEnt(var_1);
   level.t72 common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 4.0);
   level.t72 clearturrettarget();
   wait 1;
@@ -1902,8 +1902,8 @@ t72_in_final_position() {
   thread sustain_fire();
   common_scripts\utility::flag_wait("tank_in_final_position");
   wait 0.8;
-  var_2 = getent("t72_aim_at_final_building_location", "targetname");
-  level.t72 setturrettargetent(var_2);
+  var_2 = getEnt("t72_aim_at_final_building_location", "targetname");
+  level.t72 setturrettargetEnt(var_2);
   common_scripts\utility::flag_set("t72_in_final_position");
 }
 
@@ -1911,7 +1911,7 @@ t72_exploder_detect_impact_init() {
   if(getdvarint("use_old_exploderdelay")) {
     return;
   }
-  level.t72_impact_detector = getent("exploder_detectimpact_300", "targetname");
+  level.t72_impact_detector = getEnt("exploder_detectimpact_300", "targetname");
 
   if(!isDefined(level.t72_impact_detector)) {
     return;
@@ -1942,7 +1942,7 @@ sustain_fire() {
 }
 
 vehicle_path_disconnector() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 notsolid();
   var_0.origin = var_0.origin - (0, 0, 1024);
   var_1 = "tank_bad_place_brush_" + var_0 getentitynumber();
@@ -1975,7 +1975,7 @@ vehicle_reconnects_paths(var_0, var_1) {
 }
 
 delete_ai_in_zone() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self waittill("trigger");
   var_1 = getaiarray("axis");
 
@@ -2035,7 +2035,7 @@ savegame_redundancy_check() {
 }
 
 waittill_zone_clear(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   while(ai_touching_area(var_1)) {
     wait 2;
@@ -2063,7 +2063,7 @@ tank_advancement_bog() {
   common_scripts\utility::flag_wait("truck_crush_tank_in_position");
   common_scripts\utility::flag_wait("truck_crush_player_in_position");
   thread dosavegame("tank_crush");
-  var_0 = getent("crunch_truck_1", "targetname");
+  var_0 = getEnt("crunch_truck_1", "targetname");
   var_1 = 10;
 
   for(var_2 = 0; var_2 < var_1 * 20; var_2++) {
@@ -2087,8 +2087,8 @@ tank_advancement_bog() {
 }
 
 archway_color_trigger() {
-  var_0 = getent("pre_archway_color_trigger", "targetname");
-  var_1 = getent("post_archway_color_trigger", "targetname");
+  var_0 = getEnt("pre_archway_color_trigger", "targetname");
+  var_1 = getEnt("post_archway_color_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   var_1 common_scripts\utility::trigger_off();
   var_2 = getvehiclenode("truck_approach_crush_node", "script_noteworthy");
@@ -2156,11 +2156,11 @@ tank_advancement_alley() {
   thread abrams_setup_t72();
   common_scripts\utility::flag_wait("abrams_advance_to_end_level");
   var_0 = getvehiclenode("tank_crush_truck2", "script_noteworthy");
-  var_1 = getent("crunch_truck_2", "targetname");
+  var_1 = getEnt("crunch_truck_2", "targetname");
   var_2 = getvehiclenode("tank_path_4", "targetname");
   level.abrams notify("stop_attacking_troops");
   wait 0.05;
-  level.abrams setturrettargetent(level.abrams.forwardent);
+  level.abrams setturrettargetEnt(level.abrams.forwardent);
   level.abrams common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 4.0);
   level.abrams clearturrettarget();
   common_scripts\utility::flag_set("abrams_start_moving_after_city_fight");
@@ -2172,32 +2172,32 @@ tank_advancement_alley() {
   var_1 thread swap_crush_material(level.scr_anim["truck"]["tank_crush"]);
   level.abrams maps\_vehicle::tank_crush(var_1, var_2, level.scr_anim["tank"]["tank_crush2"], level.scr_anim["truck"]["tank_crush2"], level.scr_animtree["tank_crush2"], level.scr_sound["tank_crush2"], 1, ::rotate_crushed_truck_clip);
   level.abrams.wheeldir = 1;
-  level.abrams setturrettargetent(getent("final_abrams_aim_spot", "targetname"));
+  level.abrams setturrettargetEnt(getEnt("final_abrams_aim_spot", "targetname"));
   level.abrams vehicle_setspeed(0, 10, 10);
 }
 
 seaknight() {
   soundscripts\_snd::snd_message("seaknight_rescue_submix");
-  var_0 = getent("seaknight_path", "targetname");
-  var_1 = getent("seaknight_land_location", "script_noteworthy");
+  var_0 = getEnt("seaknight_path", "targetname");
+  var_1 = getEnt("seaknight_land_location", "script_noteworthy");
   objective_state(1, "done");
   wait 1.0;
-  var_2 = getent("seaknight_wait_location", "script_noteworthy");
+  var_2 = getEnt("seaknight_wait_location", "script_noteworthy");
   objective_add(2, "current", &"BOG_B_OBJ_SEAKNIGHT", var_2.origin);
   thread dosavegame("seaknight");
   common_scripts\utility::flag_set("seaknight_start");
   thread disperse_allies_unevenly_to_seaknight();
-  getent("seaknight_friendly_trigger", "targetname") notify("trigger");
+  getEnt("seaknight_friendly_trigger", "targetname") notify("trigger");
   level.seaknight = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("seaknight");
   level.seaknight setModel("vehicle_ch46e_opened_door_interior_a");
   var_3 = spawn("script_model", level.seaknight gettagorigin("body_animate_jnt"));
   var_3 setModel("vehicle_ch46e_opened_door_interior_b");
   var_3.angles = level.seaknight.angles;
-  var_3 linkto(level.seaknight, "body_animate_jnt");
+  var_3 linkTo(level.seaknight, "body_animate_jnt");
   var_4 = spawn("script_model", level.seaknight gettagorigin("body_animate_jnt"));
   var_4 setModel("vehicle_ch46e_wires");
   var_4.angles = level.seaknight.angles;
-  var_4 linkto(level.seaknight, "body_animate_jnt");
+  var_4 linkTo(level.seaknight, "body_animate_jnt");
   maps\_wibble::wibble_add_heli_to_track(level.seaknight);
   maps\_utility::playerwatch_register_crusher(level.seaknight);
   wait 0.05;
@@ -2210,7 +2210,7 @@ seaknight() {
   var_6 maps\_utility::vehicle_land();
   var_6 sethoverparams(0, 0, 0);
   var_6 thread seaknight_doors_open();
-  getent("player_in_seaknight", "targetname") waittill("trigger");
+  getEnt("player_in_seaknight", "targetname") waittill("trigger");
   wait 5.0;
   common_scripts\utility::flag_wait("seaknight_dialog_done");
   maps\_utility::nextmission();
@@ -2283,20 +2283,20 @@ seaknight_doors_open() {
 }
 
 seaknight_player_door_clip() {
-  var_0 = getent("seaknight_player_door_clip", "targetname");
+  var_0 = getEnt("seaknight_player_door_clip", "targetname");
   var_0 notsolid();
-  var_1 = getent("seaknight_almost_land_location", "script_noteworthy");
+  var_1 = getEnt("seaknight_almost_land_location", "script_noteworthy");
   var_1 waittill("trigger", var_2);
   wait 12;
   var_0 solid();
-  var_3 = getent("seaknight_land_location", "script_noteworthy");
+  var_3 = getEnt("seaknight_land_location", "script_noteworthy");
   var_3 waittill("trigger", var_2);
   wait 4;
   var_0 notsolid();
 }
 
 seaknight_dialog() {
-  var_0 = getent("seaknight_almost_land_location", "script_noteworthy");
+  var_0 = getEnt("seaknight_almost_land_location", "script_noteworthy");
   var_0 waittill("trigger", var_1);
   wait 5.0;
   level.player playradiosound(level.scr_sound["saknight"]["getonboard"]);
@@ -2306,7 +2306,7 @@ seaknight_dialog() {
 }
 
 bog_enemies_retreat() {
-  getent("bog_enemies_retreat", "targetname") waittill("trigger");
+  getEnt("bog_enemies_retreat", "targetname") waittill("trigger");
   thread killspawner(9);
   var_0 = getaiarray("axis");
   var_1 = getnodearray("bog_enemies_retreat_node", "targetname");
@@ -2322,7 +2322,7 @@ bog_enemies_retreat() {
     var_0[var_2] thread enemy_retreat_think(var_3);
   }
 
-  var_4 = getent("chopper_guy_pre_crush_trig", "targetname");
+  var_4 = getEnt("chopper_guy_pre_crush_trig", "targetname");
   var_4 maps\_utility::activate_trigger();
 }
 
@@ -2370,7 +2370,7 @@ ignored_by_tank_cannon(var_0) {
 }
 
 player_passed_dumpster() {
-  getent("player_passed_dumpster", "targetname") waittill("trigger");
+  getEnt("player_passed_dumpster", "targetname") waittill("trigger");
   common_scripts\utility::flag_set("player_passed_dumpster");
 }
 
@@ -2437,8 +2437,8 @@ swap_crush_material(var_0) {
 }
 
 rotate_crushed_truck_clip(var_0) {
-  var_1 = getent(var_0.targetname + "_precrushed_clip", "targetname");
-  var_1 rotateyaw(-15, 1.5);
+  var_1 = getEnt(var_0.targetname + "_precrushed_clip", "targetname");
+  var_1 rotateYaw(-15, 1.5);
 }
 
 docomingthroughaudio(var_0) {

@@ -70,7 +70,7 @@ function insta_kill_powerup(drop_item, player) {
 
   team = player.team;
   level thread zm_powerups::show_on_hud(team, "insta_kill");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     if(isDefined(e_player) && isPlayer(e_player) && isDefined(drop_item.hint)) {
@@ -87,7 +87,7 @@ function insta_kill_powerup(drop_item, player) {
 
   wait n_wait_time;
   zombie_utility::set_zombie_var_team(#"zombie_insta_kill", team, 0);
-  players = getplayers(team);
+  players = getPlayers(team);
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {

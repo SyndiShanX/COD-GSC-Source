@@ -104,7 +104,7 @@ class cbeastcode {
           v_eye_direction = anglesToForward(player getplayerangles());
           foreach(s_tag in a_s_input_button_tags) {
             v_tag_origin = s_tag.v_origin;
-            v_eye_to_tag = vectornormalize(v_tag_origin - v_eye_origin);
+            v_eye_to_tag = vectorNormalize(v_tag_origin - v_eye_origin);
             n_dot = vectordot(v_eye_to_tag, v_eye_direction);
             if(n_dot > n_closest_dot) {
               n_closest_dot = n_dot;
@@ -127,9 +127,9 @@ class cbeastcode {
         str_old_hint = str_hint;
         stub.hint_string = str_hint;
         if(str_hint === (&"ZM_ZOD_KEYCODE_INCREMENT_NUMBER")) {
-          self sethintstring(stub.hint_string, player.n_keycode_lookat_tag + 1);
+          self setHintString(stub.hint_string, player.n_keycode_lookat_tag + 1);
         } else {
-          self sethintstring(stub.hint_string);
+          self setHintString(stub.hint_string);
         }
       }
       wait(0.1);
@@ -151,7 +151,7 @@ class cbeastcode {
       while(player istouching(t_lookat)) {
         v_eye_origin = player getplayercamerapos();
         v_eye_direction = anglesToForward(player getplayerangles());
-        var_744d3805 = vectornormalize(var_43544e59 - v_eye_origin);
+        var_744d3805 = vectorNormalize(var_43544e59 - v_eye_origin);
         n_dot = vectordot(var_744d3805, v_eye_direction);
         if(n_dot > 0.9) {
           n_number = get_number_in_code(n_code_index, var_d7d7b586);
@@ -199,7 +199,7 @@ class cbeastcode {
     var_71f130fa = var_71f130fa - 1;
     for(i = 0; i < m_a_codes.size; i++) {
       if(test_current_code_against_this_code(m_a_codes[i])) {
-        playsoundatposition("zmb_zod_sword_symbol_right", (2624, -5104, -312));
+        playSoundAtPosition("zmb_zod_sword_symbol_right", (2624, -5104, -312));
         m_n_device_state = 3;
         hide_readout(1);
         [[m_a_funcs[i]]]();
@@ -208,7 +208,7 @@ class cbeastcode {
     }
     m_n_device_state = 4;
     m_n_input_index = 0;
-    playsoundatposition("zmb_zod_sword_symbol_wrong", (2624, -5104, -312));
+    playSoundAtPosition("zmb_zod_sword_symbol_wrong", (2624, -5104, -312));
     if(var_71f130fa > 0) {
       hide_readout(1);
       wait(3);
@@ -351,13 +351,13 @@ function init() {
   a_mdl_clues = [];
   a_t_inputs = [];
   for(i = 0; i < 3; i++) {
-    mdl_clue_number = getent("keeper_sword_locker_clue_" + i, "targetname");
+    mdl_clue_number = getEnt("keeper_sword_locker_clue_" + i, "targetname");
     a_mdl_clues[a_mdl_clues.size] = mdl_clue_number;
   }
   for(i = 0; i < 10; i++) {
-    mdl_beast_number = getent("keeper_sword_locker_number_" + i, "targetname");
+    mdl_beast_number = getEnt("keeper_sword_locker_number_" + i, "targetname");
     a_mdl_inputs[a_mdl_inputs.size] = mdl_beast_number;
-    t_input = getent("keeper_sword_locker_trigger_" + i, "targetname");
+    t_input = getEnt("keeper_sword_locker_trigger_" + i, "targetname");
     a_t_inputs[a_t_inputs.size] = t_input;
   }
   var_4582f16d = getEntArray("keeper_sword_locker_clue_lookat", "targetname");

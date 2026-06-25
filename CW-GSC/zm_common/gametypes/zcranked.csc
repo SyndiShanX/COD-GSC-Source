@@ -106,7 +106,7 @@ function function_ee85e4e3(localclientnum) {
       function_672403ca("zmb_cranked_neardeath", 1, blendscale);
       self.var_5a72f7c9 = 1;
       str_alias = #"hash_37a0bf7f61bc3362" + n_timer;
-      self playrumbleonentity(localclientnum, #"infiltration_rumble");
+      self playRumbleOnEntity(localclientnum, #"infiltration_rumble");
     } else if(n_timer <= 10) {
       str_alias = #"hash_bb1df4387e47518";
     } else if(n_timer <= 15) {

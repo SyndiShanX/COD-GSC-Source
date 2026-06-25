@@ -295,7 +295,7 @@ _id_8281() {
   var_2 = scripts\engine\utility::spawn_tag_origin(var_0, var_1);
   var_3 = spawnturret("misc_turret", var_2.origin, "tur_gun_faridah_mp", 0);
   var_3.angles = var_2.angles;
-  var_3 linkto(var_2, "tag_origin", (0, 0, 16), (0, 0, 0));
+  var_3 linkTo(var_2, "tag_origin", (0, 0, 16), (0, 0, 0));
   var_3 setModel("weapon_mg_bravo50_balcony");
   var_3 makeunusable();
   var_3 setnodeploy(1);
@@ -304,7 +304,7 @@ _id_8281() {
   var_3.objweapon = var_4;
   var_5 = var_3 gettagorigin("tag_turret_pitch");
   var_6 = _id_07D6::_id_3FF0(var_5, "HINT_BUTTON", "hud_icon_turret", &"KILLSTREAKS_HINTS/SENTRY_USE_GL");
-  var_6 linkto(var_3, "tag_turret_pitch", (0, 0, 5), (0, 0, 0));
+  var_6 linkTo(var_3, "tag_turret_pitch", (0, 0, 5), (0, 0, 0));
   var_6 thread _id_F89A(var_3);
   var_3.killcament = spawn("script_model", (255, -1425, 210));
 }
@@ -1216,7 +1216,7 @@ _id_3E9F(var_0, var_1) {
   }
 
   self._id_FE90 = _id_07D6::_id_3FF0(self.origin + anglestoup(self.angles) * 24, "HINT_BUTTON", var_6, var_5, -1, undefined, "show", 250, 360, 100, 360);
-  self._id_FE90 linkto(self);
+  self._id_FE90 linkTo(self);
 
   if(var_1 == "juggernaut") {
     thread _id_60A7(var_0);
@@ -2427,7 +2427,7 @@ _id_E727() {
   var_3.angles = var_2;
   self._id_E3E9 = var_3;
   self._id_8AD7 = 1;
-  self cameralinkto(var_3, "tag_origin", 1);
+  self cameralinkTo(var_3, "tag_origin", 1);
   thread _id_4CF1();
   var_3 _id_A227(self, var_1, var_2);
 }
@@ -2468,16 +2468,16 @@ _id_A227(var_0, var_1, var_2) {
   var_0 endon("spawned_player");
   var_3 = 1.0;
   var_4 = 1.0;
-  self moveto(var_1, 1.0, 0.5, 0.5);
+  self moveTo(var_1, 1.0, 0.5, 0.5);
   var_0 _meth_82FD("spawn_cam", 0.5, "mix");
-  self rotateto(var_2, 1.0, 0.5, 0.5);
+  self rotateTo(var_2, 1.0, 0.5, 0.5);
   var_0 thread _id_E705();
   wait 1.1;
   var_5 = anglesToForward(var_2) * 300;
   var_5 = var_5 * (1, 1, 0);
 
   if(isDefined(var_0) && isDefined(var_0._id_E3E9)) {
-    self moveto(var_1 + var_5, 15.0, 1.0, 1.0);
+    self moveTo(var_1 + var_5, 15.0, 1.0, 1.0);
     var_0 earthquakeforplayer(0.03, 15.0, var_1 + var_5, 1000);
   }
 }
@@ -2487,11 +2487,11 @@ _id_CA72() {
   var_0 = self getEye();
   var_1 = self.angles;
   scripts\mp\utility\player::_id_FD26("spectator");
-  self cameralinkto(self._id_E3E9, "tag_origin", 1);
+  self cameralinkTo(self._id_E3E9, "tag_origin", 1);
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.2);
-  self._id_E3E9 moveto(var_0, 0.5);
+  self._id_E3E9 moveTo(var_0, 0.5);
   self _meth_8078(0.5);
-  self._id_E3E9 rotateto(var_1, 0.5, 0.5);
+  self._id_E3E9 rotateTo(var_1, 0.5, 0.5);
   wait 0.5;
   self visionsetnakedforplayer("", 0);
   thread _id_B8DB();

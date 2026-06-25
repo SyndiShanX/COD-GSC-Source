@@ -93,7 +93,7 @@ _id_0BE6(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4.target)) {
-      var_4._id_EEA2 = getent(var_4.target, "targetname");
+      var_4._id_EEA2 = getEnt(var_4.target, "targetname");
     }
   }
 
@@ -106,7 +106,7 @@ _id_0BE6(var_0, var_1) {
   if(isDefined(var_6)) {
     var_7 = var_6.origin;
     var_8 = var_6._id_EEA2.origin;
-    var_9 = vectornormalize(var_7 - var_8);
+    var_9 = vectorNormalize(var_7 - var_8);
     var_7 = var_9 * 14000 + var_8;
     var_10 = scripts\cp_mp\utility\weapon_utility::_magicbullet(makeweapon("remotemissile_projectile_mp"), var_7, var_8, var_1);
   } else {
@@ -155,7 +155,7 @@ _id_9F6D(var_0, var_1) {
     var_0 visionsetmissilecamforplayer(game["thermal_vision"], 1.0);
     var_0 _meth_840B();
     var_0 thread _id_46BE();
-    var_0 cameralinkto(var_1, "tag_origin");
+    var_0 cameralinkTo(var_1, "tag_origin");
     var_0 _meth_8094(var_1);
 
     if(getdvarint("#x36c8f5946a1247e70")) {

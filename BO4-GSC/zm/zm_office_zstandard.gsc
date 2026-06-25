@@ -220,7 +220,7 @@ defend_areas() {
   level thread function_c87db3f7(str_next_defend);
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player notify(#"defend_completed");
     e_player function_b4afc059(var_37b7b46a);
   }
@@ -265,7 +265,7 @@ function_c87db3f7(str_next_defend) {
     objective_add(n_obj_id, "active", s_objective_loc.origin, #"hash_649649ac2d1051cb");
     function_da7940a3(n_obj_id, 1);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread function_eede094a(n_obj_id);
     }
   }
@@ -373,9 +373,9 @@ function_35ff3f69() {
 
 function_cc31fe55(str_elevator) {
   level endon(#"end_game");
-  t_move_trigger = getent(str_elevator + "_buy", "script_noteworthy");
-  var_2ffe3076 = getent(str_elevator + "_touch_volume", "targetname");
-  e_elevator = getent(str_elevator, "targetname");
+  t_move_trigger = getEnt(str_elevator + "_buy", "script_noteworthy");
+  var_2ffe3076 = getEnt(str_elevator + "_touch_volume", "targetname");
+  e_elevator = getEnt(str_elevator, "targetname");
   s_objective_loc = struct::get("s_" + str_elevator);
   n_obj_id = gameobjects::get_next_obj_id();
   level flag::wait_till("elevators_initialized");
@@ -466,7 +466,7 @@ function_466fb0ff(str_last_defend) {
       var_7f66a3c0 = zm_utility::function_11101458(str_next_defend);
       objective_setinvisibletoall(var_7f66a3c0);
 
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         e_player thread function_fa0d0109(var_37b7b46a, var_7f66a3c0, str_next_defend);
       }
     }
@@ -476,7 +476,7 @@ function_466fb0ff(str_last_defend) {
     zm_utility::function_33798535(var_679cd7a8.var_39c44288, var_679cd7a8.a_str_zones, var_679cd7a8.var_ed1db1a7);
 
     if(str_next_defend == #"groom_lake") {
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         e_player notify(#"defend_completed");
         e_player function_b4afc059(var_37b7b46a);
       }
@@ -568,7 +568,7 @@ function_ac904e5e() {
 }
 
 function_f436d901() {
-  var_5180bf9a = getent("use_elec_switch", "targetname");
+  var_5180bf9a = getEnt("use_elec_switch", "targetname");
   var_5180bf9a hide();
 }
 

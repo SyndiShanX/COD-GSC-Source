@@ -101,17 +101,17 @@ electric_switch() {
       switch (master_switch.script_noteworthy) {
         case #"elec_switch":
           if(function_8b1a219a()) {
-            self sethintstring(#"zombie/electric_switch_keyboard");
+            self setHintString(#"zombie/electric_switch_keyboard");
           } else {
-            self sethintstring(#"zombie/electric_switch");
+            self setHintString(#"zombie/electric_switch");
           }
 
           break;
         case #"hash_47bde376753a03c9":
           if(function_8b1a219a()) {
-            self sethintstring(#"zombie/electric_switch_keyboard");
+            self setHintString(#"zombie/electric_switch_keyboard");
           } else {
-            self sethintstring(#"zombie/electric_switch");
+            self setHintString(#"zombie/electric_switch");
           }
 
           break;
@@ -119,9 +119,9 @@ electric_switch() {
           level waittill(#"player_spawned");
 
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_10cc78ab5ba5a7f2");
+            self setHintString(#"hash_10cc78ab5ba5a7f2");
           } else {
-            self sethintstring(#"hash_60e4802baafefe56");
+            self setHintString(#"hash_60e4802baafefe56");
           }
 
           break;
@@ -180,7 +180,7 @@ electric_switch() {
     if(isDefined(master_switch) && isDefined(master_switch.script_noteworthy)) {
       switch (master_switch.script_noteworthy) {
         case #"elec_switch":
-          self sethintstring(#"zombie/electric_switch_off");
+          self setHintString(#"zombie/electric_switch_off");
           break;
       }
     }
@@ -821,7 +821,7 @@ turn_power_off_and_close_doors(power_zone) {
 
         if(isDefined(level.temporary_power_switch_logic)) {
           door.power_on = 0;
-          door sethintstring(#"zombie/need_power");
+          door setHintString(#"zombie/need_power");
           door notify(#"kill_door_think");
           door thread zm_blockers::door_think();
         }

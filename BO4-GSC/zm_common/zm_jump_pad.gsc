@@ -362,7 +362,7 @@ jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
     self thread disconnect_failsafe_pad_poi_clean();
   }
 
-  self setorigin(self.origin + (0, 0, 1));
+  self setOrigin(self.origin + (0, 0, 1));
 
   while(gettime() - start_time < jump_time) {
     self setvelocity(vec_direction);
@@ -420,7 +420,7 @@ failsafe_pad_poi_clean(ent_trig, ent_poi) {
 jump_pad_enemy_follow_or_ignore(ent_poi) {
   self endon(#"death", #"disconnect");
   zombies = getaiteamarray(level.zombie_team);
-  players = getplayers();
+  players = getPlayers();
   valid_players = 0;
 
   for(p = 0; p < players.size; p++) {
@@ -480,7 +480,7 @@ stop_chasing_the_sky(ent_poi) {
 
   while(isDefined(self._pad_follow) && self._pad_follow) {
     if(isDefined(self.favoriteenemy)) {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(zm_utility::is_player_valid(players[i]) && players[i] != self.favoriteenemy) {

@@ -68,12 +68,12 @@ main() {
 }
 
 initExtraCollision() {
-  collision1 = GetEnt("clip128x128x256", "targetname");
+  collision1 = getEnt("clip128x128x256", "targetname");
   collision1Ent = spawn("script_model", (-459.25, 1848, 487.75));
   collision1Ent.angles = (270, 322.793, 37.2067);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
 
-  collision2 = GetEnt("clip256x256x128", "targetname");
+  collision2 = getEnt("clip256x256x128", "targetname");
   collision2Ent = spawn("script_model", (-1984, 344, -120));
   collision2Ent.angles = (0, 0, 0);
   collision2Ent CloneBrushmodelToScriptmodel(collision2);
@@ -456,7 +456,7 @@ play_hit(effect_id, spawn_point, spawn_dir) {
 
 #using_animtree("mp_ca_rumble_animtree");
 setup_fish() {
-  fish = GetEnt("bannerfish", "targetname");
+  fish = getEnt("bannerfish", "targetname");
 
   if(isDefined(fish)) {
     fish thread update_fish();
@@ -495,9 +495,9 @@ update_metal_detector() {
   foreach(device in detector_devices) {
     if(DistanceSquared(device.origin, self.origin) < 10000.0) {
       device.md_health = 100.0;
-      device.light_on = GetEnt(device.target, "targetname");
-      device.light_off = GetEnt(device.light_on.target, "targetname");
-      device.light_broke = GetEnt(device.light_off.target, "targetname");
+      device.light_on = getEnt(device.target, "targetname");
+      device.light_off = getEnt(device.light_on.target, "targetname");
+      device.light_broke = getEnt(device.light_off.target, "targetname");
       device thread metal_detector_damage_monitor(self);
       my_devices = array_add(my_devices, device);
     }
@@ -611,8 +611,8 @@ update_bouy() {
     dest = start_point + offset;
     time = Max(3.0, DistanceSquared(self.origin, dest) / bob_rateSq);
 
-    self RotateTo(VectorToAngles(dest - start_point), time, 1.5, 1.5);
-    self MoveTo(dest, time, 1.5, 1.5);
+    self rotateTo(VectorToAngles(dest - start_point), time, 1.5, 1.5);
+    self moveTo(dest, time, 1.5, 1.5);
     wait time;
   }
 }
@@ -641,7 +641,7 @@ update_dock_boat() {
     }
     bobbing_down = !bobbing_down;
 
-    self RotateTo(start_rot + tilt, time, 1.0, 1.0);
+    self rotateTo(start_rot + tilt, time, 1.0, 1.0);
     wait time;
   }
 }
@@ -657,7 +657,7 @@ setup_monitors() {
 }
 
 update_monitor() {
-  damage_state = GetEnt(self.target, "targetname");
+  damage_state = getEnt(self.target, "targetname");
   if(!isDefined(damage_state)) {
     PrintLn("No monitor damage state found.");
     return;
@@ -692,19 +692,19 @@ setup_watertanks() {
 }
 
 update_watertank(index) {
-  water_surface = GetEnt(self.target, "targetname");
+  water_surface = getEnt(self.target, "targetname");
   if(!isDefined(water_surface)) {
     PrintLn("Water tank is missing a water_surface");
     return;
   }
 
-  water_bottom = GetEnt(water_surface.target, "targetname");
+  water_bottom = getEnt(water_surface.target, "targetname");
   if(!isDefined(water_bottom)) {
     PrintLn("Water tank is missing a water_bottom");
     return;
   }
 
-  broken_glass = GetEnt(water_bottom.target, "targetname");
+  broken_glass = getEnt(water_bottom.target, "targetname");
   if(!isDefined(broken_glass)) {
     PrintLn("Water tank is missing a broken glass mesh");
     return;
@@ -789,7 +789,7 @@ update_watertank_fish() {
   effect_id = level._effect["vfx_fish_school"];
   fish_ent = spawn("script_model", self.origin);
   fish_ent setModel("tag_origin");
-  fish_ent LinkTo(self);
+  fish_ent linkTo(self);
 
   self thread maintain_watertank_fish(effect_id, fish_ent);
 
@@ -885,7 +885,7 @@ allocate_new_tank_crack() {
 update_trolley() {
   waitframe();
 
-  trolley = GetEnt("moving_trolley", "targetname");
+  trolley = getEnt("moving_trolley", "targetname");
   if(!isDefined(trolley)) {
     PrintLn("Trolley is missing.");
     return;
@@ -902,15 +902,15 @@ update_trolley() {
   trolley_lights = getStructArray("trolley_light", "targetname");
   array_thread(trolley_lights, ::trolley_attach_lights, trolley);
 
-  trolley_mesh = getent("moving_trolley_mesh", "targetname");
+  trolley_mesh = getEnt("moving_trolley_mesh", "targetname");
   if(isDefined(trolley_mesh)) {
-    trolley_mesh linkto(trolley);
+    trolley_mesh linkTo(trolley);
   }
 
   trolley_mesh_extras = getEntArray("moving_trolley_extras", "targetname");
   if(trolley_mesh_extras.size > 0) {
     foreach(extra in trolley_mesh_extras) {
-      extra linkto(trolley);
+      extra linkTo(trolley);
     }
   }
 
@@ -927,7 +927,7 @@ update_trolley() {
     wheel_rotations[i] = trolley.angles - trolley_wheels[i].angles;
   }
 
-  current_point = GetEnt("trolley_path_start", "targetname");
+  current_point = getEnt("trolley_path_start", "targetname");
   if(!isDefined(current_point)) {
     PrintLn("No trolley path to follow.");
     return;
@@ -950,7 +950,7 @@ update_trolley() {
     start_time = current_point.script_accel;
   }
 
-  current_point = GetEnt(current_point.target, "targetname");
+  current_point = getEnt(current_point.target, "targetname");
   while(isDefined(current_point)) {
     if(!trolley.enabled) {
       wait 0.05;
@@ -971,8 +971,8 @@ update_trolley() {
     move_time = Distance(trolley.origin, current_point.origin) / move_speed;
     move_time = Max(move_time, stop_time + start_time);
 
-    trolley MoveTo(current_point.origin, move_time, start_time, stop_time);
-    trolley RotateTo(current_point.angles, move_time, start_time, stop_time);
+    trolley moveTo(current_point.origin, move_time, start_time, stop_time);
+    trolley rotateTo(current_point.angles, move_time, start_time, stop_time);
 
     wheel_speed = move_speed * 2.1;
     if(isDefined(current_point.script_anglevehicle) && (current_point.script_anglevehicle == 1)) {
@@ -982,7 +982,7 @@ update_trolley() {
     point_angle = current_point.angles[1];
     for(i = 0; i < trolley_wheels.size; i++) {
       wheel_spot = current_point.origin - RotateVector(wheel_offsets[i], current_point.angles);
-      trolley_wheels[i] MoveTo(wheel_spot, move_time, start_time, stop_time);
+      trolley_wheels[i] moveTo(wheel_spot, move_time, start_time, stop_time);
       wheel_turn = (point_angle + wheel_rotations[i][1] - trolley_wheels[i].angles[1]) / move_time;
       specific_wheel_speed = wheel_speed;
       if(isDefined(trolley_wheels[i].script_index) && (trolley_wheels[i].script_index == 1)) {
@@ -1025,7 +1025,7 @@ update_trolley() {
       trolley_mesh PlaySoundOnMovingEnt("trolley_corner");
     }
 
-    current_point = GetEnt(current_point.target, "targetname");
+    current_point = getEnt(current_point.target, "targetname");
   }
 }
 
@@ -1033,7 +1033,7 @@ trolley_attach_lights(trolley) {
   light_mount = spawn("script_model", self.origin);
   light_mount.angles = self.angles;
   light_mount setModel("tag_origin");
-  light_mount LinkTo(trolley);
+  light_mount linkTo(trolley);
 
   while(1) {
     playFXOnTag(level._effect["vfx_pot_lights_trolley"], light_mount, "tag_origin");
@@ -1064,13 +1064,13 @@ monitor_trolley_dvar() {
 }
 
 update_destroyer() {
-  ship = GetEnt("roaming_destroyer", "targetname");
+  ship = getEnt("roaming_destroyer", "targetname");
   if(!isDefined(ship)) {
     PrintLn("No roaming_destroyer ship.");
     return;
   }
 
-  current_point = GetEnt(ship.target, "targetname");
+  current_point = getEnt(ship.target, "targetname");
   if(!isDefined(current_point)) {
     PrintLn("No roaming_destroyer ship path to follow.");
     return;
@@ -1083,7 +1083,7 @@ update_destroyer() {
   accel_time = 0.0;
   decel_time = 0.0;
 
-  current_point = GetEnt(current_point.target, "targetname");
+  current_point = getEnt(current_point.target, "targetname");
   if(isDefined(current_point.script_decel)) {
     decel_time = current_point.script_decel;
   }
@@ -1101,11 +1101,11 @@ update_destroyer() {
     base_move_time = Distance(ship.origin, current_point.origin) / move_speed;
     move_time = Max(base_move_time, accel_time + decel_time);
 
-    ship MoveTo(current_point.origin, move_time, accel_time, decel_time);
-    ship RotateTo(current_point.angles, move_time, accel_time, decel_time);
+    ship moveTo(current_point.origin, move_time, accel_time, decel_time);
+    ship rotateTo(current_point.angles, move_time, accel_time, decel_time);
     wait move_time;
 
-    next_point = GetEnt(current_point.target, "targetname");
+    next_point = getEnt(current_point.target, "targetname");
     if(isDefined(next_point)) {
       if(isDefined(next_point.script_node_pausetime)) {
         wait next_point.script_node_pausetime;
@@ -1121,7 +1121,7 @@ update_destroyer() {
 }
 
 update_lighthouse_light() {
-  lighthouse_light = GetEnt("lighthouse_light", "targetname");
+  lighthouse_light = getEnt("lighthouse_light", "targetname");
   if(!isDefined(lighthouse_light)) {
     PrintLn("No lighthouse light.");
     return;
@@ -1150,7 +1150,7 @@ update_artillery_fx() {
     next_shot = 30.0 + RandomFloat(20.0);
 
     sound_ent.origin = fx_pos + (0, 0, 1000);
-    sound_ent MoveTo(sound_ent.origin + (-55000, -60000, 16000), LookupSoundLength(sound_alias) * 0.001, 0.2);
+    sound_ent moveTo(sound_ent.origin + (-55000, -60000, 16000), LookupSoundLength(sound_alias) * 0.001, 0.2);
     sound_ent PlaySoundOnMovingEnt(sound_alias);
 
     playFX(fx_alias, fx_pos, fx_rot, fx_up);
@@ -1174,7 +1174,7 @@ update_heli_fx() {
     next_heli = 60.0 + RandomFloat(30.0);
 
     sound_ent.origin = fx_pos + (0, 0, 700);
-    sound_ent MoveTo(sound_ent.origin + (-55000, -10000, 3000), 40.0, 10.0);
+    sound_ent moveTo(sound_ent.origin + (-55000, -10000, 3000), 40.0, 10.0);
     sound_ent PlaySoundOnMovingEnt(sound_alias);
 
     playFX(fx_alias, fx_pos, fx_rot, fx_up);
@@ -1198,7 +1198,7 @@ update_flybyjet_fx() {
     next_plane = 90.0 + RandomFloat(30.0);
 
     sound_ent.origin = fx_pos + (0, 0, 1000);
-    sound_ent MoveTo(sound_ent.origin + (-55000, -55000, 0), 20.0, 0.6);
+    sound_ent moveTo(sound_ent.origin + (-55000, -55000, 0), 20.0, 0.6);
     sound_ent PlaySoundOnMovingEnt(sound_alias);
 
     playFX(fx_alias, fx_pos, fx_rot, fx_up);

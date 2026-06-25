@@ -29,7 +29,7 @@ player_start() {
   var_0 = (-989, 8433, 666);
   var_1 = (-18, 25, 0);
   level.player setstance("prone");
-  level.player setorigin(var_0);
+  level.player setOrigin(var_0);
   level.player setplayerangles(var_1);
 }
 
@@ -64,7 +64,7 @@ main() {
   common_scripts\utility::flag_init("fall_complete");
   common_scripts\utility::flag_init("collapse");
   common_scripts\utility::flag_init("collapse_done");
-  maps\_utility::flag_trigger_init("radiation_death", getent("death_point", "targetname"));
+  maps\_utility::flag_trigger_init("radiation_death", getEnt("death_point", "targetname"));
   common_scripts\utility::flag_init("helicopterfall_bodysense");
   level.allow_fall = 1;
 
@@ -112,7 +112,7 @@ setup_dead_bodies() {
 }
 
 playground() {
-  var_0 = getent("playground", "targetname");
+  var_0 = getEnt("playground", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::play_sound_in_space("playground_memory", var_0.origin);
 }
@@ -159,12 +159,12 @@ radio_chatter() {
 
 countdown_to_death() {
   level endon("dying");
-  var_0 = getent("outside", "targetname");
+  var_0 = getEnt("outside", "targetname");
   var_0 maps\_utility::wait_for_trigger_or_timeout(50);
   wait 30;
 
   if(!common_scripts\utility::flag("collapse_done")) {
-    var_1 = getent("raze", "targetname");
+    var_1 = getEnt("raze", "targetname");
     var_1 notify("trigger");
     common_scripts\utility::flag_wait_or_timeout("collapse_done", 10);
   }
@@ -176,18 +176,18 @@ countdown_to_death() {
 objective() {
   common_scripts\utility::flag_wait("awake");
   wait 4;
-  var_0 = getent("radiac_equipment", "targetname");
+  var_0 = getEnt("radiac_equipment", "targetname");
   objective_add(1, "active", &"AFTERMATH_OBJ_OFFICER", var_0.origin);
   objective_current(1);
-  var_1 = getent("officer", "targetname");
+  var_1 = getEnt("officer", "targetname");
   var_1 waittill("trigger");
   objective_state(1, "done");
   level.player thread player_jump_punishment();
   wait 3;
-  var_0 = getent("overhead_cover", "targetname");
+  var_0 = getEnt("overhead_cover", "targetname");
   objective_add(2, "active", &"AFTERMATH_OBJ_SECURE_COVER", var_0.origin);
   objective_current(2);
-  var_1 = getent("death_point", "targetname");
+  var_1 = getEnt("death_point", "targetname");
   var_1 waittill("trigger");
   var_2 = cos(30);
 
@@ -210,14 +210,14 @@ radiation_death() {
   level.ground_ref_ent thread stumble((20, 10, 30), 0.2, 1.5, 1);
   wait 0.2;
   level waittill("recovered");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player allowstand(0);
   level.player allowcrouch(0);
   var_0 = level.player getplayerangles();
   var_1 = adjust_angles_to_player((0, 90 - var_0[1], -25 - var_0[0]));
-  level.ground_ref_ent rotateto(var_1, 6, 3, 1);
+  level.ground_ref_ent rotateTo(var_1, 6, 3, 1);
   wait 4.5;
-  var_2 = getent("collapse_extra", "targetname");
+  var_2 = getEnt("collapse_extra", "targetname");
   var_2 notify("trigger", 1);
   level notify("aftermath_lighting_glow", 6);
   wait 3;
@@ -242,7 +242,7 @@ building_collapse_h1() {
 building_collapse_back() {
   common_scripts\utility::flag_init("building_collapse_back");
   level endon("building_collapse_side");
-  var_0 = getent("collapse_back", "targetname");
+  var_0 = getEnt("collapse_back", "targetname");
   var_0 waittill("trigger");
   building_collapse_wait_for_ready("collapse_center_2");
   building_collapse_active("building_collapse_back");
@@ -262,7 +262,7 @@ building_collapse_explode(var_0) {
 building_collapse_side() {
   common_scripts\utility::flag_init("building_collapse_side");
   level endon("building_collapse_back");
-  var_0 = getent("collapse_side", "targetname");
+  var_0 = getEnt("collapse_side", "targetname");
   var_0 waittill("trigger");
   building_collapse_wait_for_ready("collapse_center_4");
   building_collapse_active("building_collapse_side");
@@ -276,7 +276,7 @@ building_collapse_side() {
 
 building_collapse_extra() {
   common_scripts\utility::flag_init("building_collapse_extra");
-  var_0 = getent("collapse_extra", "targetname");
+  var_0 = getEnt("collapse_extra", "targetname");
   var_0 waittill("trigger", var_1);
 
   while(common_scripts\utility::flag("building_collapse_side") || common_scripts\utility::flag("building_collapse_back")) {
@@ -317,7 +317,7 @@ building_collapse_complete(var_0) {
 }
 
 building_collapse_wait_for_ready(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = cos(45);
 
   for(;;) {
@@ -336,14 +336,14 @@ building_collapse_wait_for_ready(var_0) {
 
 building_collapse_pull_view(var_0, var_1) {
   self endon("helicopterfall_bodysense");
-  var_2 = getent("collapse_center_" + var_0, "targetname");
+  var_2 = getEnt("collapse_center_" + var_0, "targetname");
   var_3 = level.player getplayerangles();
   var_4 = vectortoangles(var_2.origin - level.player.origin);
   var_5 = spawn("script_origin", level.player.origin);
   var_5.angles = var_4;
   var_6 = 1.75;
   level.player playerlinktoblend(var_5, undefined, var_6, var_6 * 0.333, var_6 * 0.333, 1);
-  level.ground_ref_ent rotateto((0, 0, 0), var_6, var_6 * 0.333, var_6 * 0.333);
+  level.ground_ref_ent rotateTo((0, 0, 0), var_6, var_6 * 0.333, var_6 * 0.333);
   wait(var_6);
   wait 1.0;
   level.player setplayerangles(var_4);
@@ -351,17 +351,17 @@ building_collapse_pull_view(var_0, var_1) {
 }
 
 building_collapse_recenter_view(var_0) {
-  level.ground_ref_ent rotateto((0, var_0, 0), 4, 2, 2);
+  level.ground_ref_ent rotateTo((0, var_0, 0), 4, 2, 2);
   level waittill("building_collapse_final_wait", var_1);
   var_2 = var_1 * 0.5;
   var_3 = var_1 * 0.25;
   wait(var_2);
-  level.ground_ref_ent rotateto((0, 0, 0), var_2, var_3, var_3);
+  level.ground_ref_ent rotateTo((0, 0, 0), var_2, var_3, var_3);
 }
 
 building_collapse() {
-  getent("raze", "targetname") waittill("trigger");
-  var_0 = getent("building_collapse", "targetname");
+  getEnt("raze", "targetname") waittill("trigger");
+  var_0 = getEnt("building_collapse", "targetname");
   var_1 = cos(45);
 
   while(!common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin + (0, 0, -1000), var_1)) {
@@ -374,14 +374,14 @@ building_collapse() {
   thread common_scripts\utility::play_sound_in_space("exp_building_collapse_dist", level.player.origin);
   var_2 = getEntArray(var_0.target, "targetname");
   common_scripts\utility::array_thread(var_2, ::collapse, var_0);
-  var_0 moveto(var_0.origin + (0, 0, -3000), 7, 4, 0);
+  var_0 moveTo(var_0.origin + (0, 0, -3000), 7, 4, 0);
   wait 0.5;
   common_scripts\_exploder::exploder(1);
   var_3 = adjust_angles_to_player((0, 0, -20));
-  level.ground_ref_ent rotateto(var_3, 2, 1, 1);
+  level.ground_ref_ent rotateTo(var_3, 2, 1, 1);
   level.ground_ref_ent waittill("rotatedone");
   wait 1;
-  level.ground_ref_ent rotateto((0, 0, 0), 3, 1.5, 1.5);
+  level.ground_ref_ent rotateTo((0, 0, 0), 3, 1.5, 1.5);
   wait 2;
   common_scripts\utility::flag_clear("collapse");
   common_scripts\utility::flag_set("collapse_done");
@@ -401,8 +401,8 @@ collapse(var_0) {
   }
 
   wait(randomfloat(0.1) + self.script_delay);
-  var_2 = vectornormalize(common_scripts\utility::flat_origin(var_0.origin) - common_scripts\utility::flat_origin(self.origin));
-  var_3 = maps\_utility::vector_multiply(vector_switch(vectornormalize(var_2)), randomintrange(80, 100));
+  var_2 = vectorNormalize(common_scripts\utility::flat_origin(var_0.origin) - common_scripts\utility::flat_origin(self.origin));
+  var_3 = maps\_utility::vector_multiply(vector_switch(vectorNormalize(var_2)), randomintrange(80, 100));
   var_2 = random_vector((1, 1, 0.1));
   var_2 = maps\_utility::vector_multiply(var_2, randomintrange(100, 150));
   self rotatevelocity(var_3, 2, 0.2, 0);
@@ -437,7 +437,7 @@ player_heartbeat() {
 
   if(!isDefined(level.heartbeat_ent)) {
     level.heartbeat_ent = spawn("script_origin", level.player.origin);
-    level.heartbeat_ent linkto(level.player);
+    level.heartbeat_ent linkTo(level.player);
   }
 
   level.heartbeat_ent playLoopSound("aftermath_heartbeat");
@@ -486,7 +486,7 @@ player_wakeup() {
   level.player allowcrouch(0);
   var_0 = (-989, 8433, 666);
   var_1 = (-18, 25, 0);
-  level.player setorigin(var_0);
+  level.player setOrigin(var_0);
   level.player setplayerangles(var_1);
   var_2 = create_overlay_element("overlay_hunted_black", 1);
   wait 5;
@@ -547,7 +547,7 @@ body_sense_wakeup_setup() {
   level.player_body_node maps\_anim::anim_first_frame_solo(level.player_body, "jackson_wakeup");
   var_0 = level.player_body gettagorigin("tag_camera");
   var_0 = var_0 - (0, 0, 11);
-  level.player setorigin(var_0);
+  level.player setOrigin(var_0);
   var_1 = level.player_body gettagangles("tag_camera");
   var_1 = (0, var_1[1], 0);
   level.player setplayerangles(var_1);
@@ -562,7 +562,7 @@ body_sense_wakeup_start() {
   thread h1_aftermathwakeupseq_dof();
   var_0 = 0.333;
   wait(getanimlength(level.scr_anim["player_body"]["jackson_wakeup"]) - var_0);
-  level.ground_ref_ent rotateto((0, 0, 0), var_0, var_0 * 0.333, var_0 * 0.333);
+  level.ground_ref_ent rotateTo((0, 0, 0), var_0, var_0 * 0.333, var_0 * 0.333);
   level.ground_ref_ent waittill("rotatedone");
   level.player unlink();
   level.player_body hide();
@@ -721,7 +721,7 @@ fall() {
   level.ground_ref_ent thread stumble((20, 10, 30), 0.2, 1.5, 1, 1);
   wait 0.2;
   level notify("aftermath_lighting_pain", 0);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player allowstand(0);
   level.player allowcrouch(0);
 
@@ -745,12 +745,12 @@ fall() {
 stumble(var_0, var_1, var_2, var_3, var_4) {
   level endon("stop_stumble");
   var_0 = adjust_angles_to_player(var_0);
-  level.ground_ref_ent rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  level.ground_ref_ent rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   level.ground_ref_ent waittill("rotatedone");
   var_5 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_5 = var_5 * var_3;
   var_5 = adjust_angles_to_player(var_5);
-  level.ground_ref_ent rotateto(var_5, var_2, 0, var_2 / 2);
+  level.ground_ref_ent rotateTo(var_5, var_2, 0, var_2 / 2);
   level.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(var_4)) {
@@ -765,15 +765,15 @@ recover() {
     return;
   }
   var_0 = adjust_angles_to_player((-5, -5, 0));
-  level.ground_ref_ent rotateto(var_0, 0.6, 0.6, 0);
+  level.ground_ref_ent rotateTo(var_0, 0.6, 0.6, 0);
   level.ground_ref_ent waittill("rotatedone");
   var_0 = adjust_angles_to_player((-15, -20, 0));
-  level.ground_ref_ent rotateto(var_0, 2.5, 0, 2.5);
+  level.ground_ref_ent rotateTo(var_0, 2.5, 0, 2.5);
   level.ground_ref_ent waittill("rotatedone");
   var_0 = adjust_angles_to_player((5, 5, 0));
-  level.ground_ref_ent rotateto(var_0, 2.5, 2, 0.5);
+  level.ground_ref_ent rotateTo(var_0, 2.5, 2, 0.5);
   level.ground_ref_ent waittill("rotatedone");
-  level.ground_ref_ent rotateto((0, 0, 0), 1, 0.2, 0.8);
+  level.ground_ref_ent rotateTo((0, 0, 0), 1, 0.2, 0.8);
 }
 
 create_overlay_element(var_0, var_1) {

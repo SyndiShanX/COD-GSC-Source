@@ -54,7 +54,7 @@ _id_3CE1() {
 _id_3CE2() {
   level._id_3CE3 = spawnStruct();
   level._id_3CE3._id_3CE4 = [];
-  var_0 = common_scripts\utility::getstruct("map_center", "targetname");
+  var_0 = common_scripts\utility::getStruct("map_center", "targetname");
   level.mapcenter = var_0.origin;
   common_scripts\utility::array_thread(level.players, ::_id_3CE7);
 

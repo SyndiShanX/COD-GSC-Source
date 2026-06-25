@@ -83,7 +83,7 @@ function event_handler[gametype_init] main(eventstruct) {
 function on_mission_failed() {
   level thread function_34459363(level.var_85b00b2b, level.var_30eb363);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     bb::function_cd497743("mission_fail", player);
   }
 }
@@ -122,7 +122,7 @@ function function_45b62760() {
 function function_7f1305bc() {
   while(true) {
     level waittill(#"save_restore");
-    player = getplayers()[0];
+    player = getPlayers()[0];
     level thread lui::screen_fade(0, 1, 1, "black");
     globallogic_ui::function_cdbb5c49(1, 1);
     player function_a7af3a2a();
@@ -317,7 +317,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   }
 
   if(level.gameskill >= 2) {
-    playsoundatposition(#"hash_7dcd120ea369ea68", (0, 0, 0));
+    playSoundAtPosition(#"hash_7dcd120ea369ea68", (0, 0, 0));
     level thread function_34459363(var_f695d653, level.var_30eb363);
   }
 }

@@ -20,7 +20,7 @@ _id_3B69(var_0, var_1) {
 }
 
 _id_3B6A(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
 
   for(;;) {
     var_2 waittill("trigger", var_3);

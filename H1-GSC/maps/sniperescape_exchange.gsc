@@ -5,13 +5,13 @@
 ******************************************/
 
 exchange_turret_org() {
-  var_0 = getent("turret2", "targetname");
+  var_0 = getEnt("turret2", "targetname");
   return var_0.origin;
 }
 
 exchange_turret() {
-  var_0 = getent("turret2", "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt("turret2", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_0 makeunusable();
   var_0 hide();
   var_0.origin = var_1.origin;
@@ -44,7 +44,7 @@ exchange_turret() {
 
   common_scripts\utility::flag_wait("player_gets_off_turret");
   level.player enableturretdismount();
-  var_3 = getent("barrett_trigger", "targetname");
+  var_3 = getEnt("barrett_trigger", "targetname");
   var_3 delete();
   var_0 delete();
   setsaveddvar("compass", 1);
@@ -57,7 +57,7 @@ exchange_turret() {
   level.level_specific_dof = 0;
   setsaveddvar("r_lodFOVFixedScale", 1);
   setblur(0, 0.05);
-  level.player setorigin(level.player.original_org + (0, 0, 90));
+  level.player setOrigin(level.player.original_org + (0, 0, 90));
 }
 
 update_goal_yaw(var_0) {
@@ -72,7 +72,7 @@ update_goal_yaw(var_0) {
 }
 
 track_ent_chain(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = spawn("script_model", var_1.origin);
   thread update_goal_yaw(var_2);
   var_3 = 4926.53;
@@ -83,7 +83,7 @@ track_ent_chain(var_0) {
       break;
     }
 
-    var_5 = getent(var_1.target, "targetname");
+    var_5 = getEnt(var_1.target, "targetname");
     var_6 = distance(var_5.origin, var_1.origin);
     var_7 = var_6 * var_4 / var_3;
 
@@ -91,7 +91,7 @@ track_ent_chain(var_0) {
       var_7 = 0.05;
     }
 
-    var_2 moveto(var_5.origin, var_7);
+    var_2 moveTo(var_5.origin, var_7);
     wait(var_7);
     var_1 = var_5;
   }
@@ -108,7 +108,7 @@ exchange_heli_tracking() {
 }
 
 exchange_trace_converter() {
-  var_0 = getent("bullet_block", "targetname");
+  var_0 = getEnt("bullet_block", "targetname");
   var_0 hide();
   var_1 = -5000;
 
@@ -168,7 +168,7 @@ exchange_player_fires() {
   var_13 = 314.245;
   var_14 = var_8 * var_13;
   waittillframeend;
-  var_15 = getent("turret2", "targetname");
+  var_15 = getEnt("turret2", "targetname");
 
   if(!isDefined(var_15)) {
     return;
@@ -437,12 +437,12 @@ exchange_bored_idle() {
 }
 
 lean_and_smoke() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 maps\_anim::anim_generic_loop(self, "smoke_idle");
 }
 
 stand_and_smoke() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 maps\_anim::anim_generic_loop(self, "smoking");
 }
 
@@ -450,9 +450,9 @@ exchange_barrett_trigger() {
   common_scripts\utility::flag_init("player_grabbing_barrett_start");
   thread h1_playergrabbarrettlogic();
   common_scripts\utility::flag_wait("can_use_turret");
-  var_0 = getent("barrett_trigger", "targetname");
-  var_0 sethintstring(&"SNIPERESCAPE_BARRETT_USE");
-  var_1 = getent("turret2", "targetname");
+  var_0 = getEnt("barrett_trigger", "targetname");
+  var_0 setHintString(&"SNIPERESCAPE_BARRETT_USE");
+  var_1 = getEnt("turret2", "targetname");
   var_0 waittill("trigger");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_set("player_grabbing_barrett_start");
@@ -463,7 +463,7 @@ exchange_barrett_trigger() {
     player_attach_to_barret_with_anim();
   }
 
-  level.view_org moveto(level.view_org.origin + (0, 0, 260), 0.1);
+  level.view_org moveTo(level.view_org.origin + (0, 0, 260), 0.1);
   level.view_org delete();
   level.player setplayerangles((5.5, -65.06, 0));
   level.player.original_org = level.player.origin;
@@ -551,8 +551,8 @@ player_attach_to_barret_with_script() {
   var_0 = 5;
   var_1 = 0.4;
   var_2 = 0.45;
-  level.view_org moveto((781.86, -11719.7, 953.57), var_0, var_0 * var_1, var_0 * var_2);
-  level.view_org rotateto((8.48, -56.48, 0), var_0, var_0 * var_1, var_0 * var_2);
+  level.view_org moveTo((781.86, -11719.7, 953.57), var_0, var_0 * var_1, var_0 * var_2);
+  level.view_org rotateTo((8.48, -56.48, 0), var_0, var_0 * var_1, var_0 * var_2);
   thread blackscreen(var_0);
   wait(var_0);
 }
@@ -759,7 +759,7 @@ stop_loop() {
     return;
   }
 
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(isDefined(var_0)) {
     var_0 notify("stop_loop");
@@ -818,7 +818,7 @@ exchange_baddie_main_think() {
 
     if(!isDefined(self.drivingvehicle)) {
       stop_loop();
-      self stopanimscripted();
+      self stopanimScripted();
       maps\_anim::anim_generic_custom_animmode(self, "gravity", var_0);
       maps\_utility::clear_run_anim();
       self.disableexits = 0;
@@ -843,7 +843,7 @@ exchange_waittill_time_to_go_to_car() {
 
 exchange_baddie_runs_to_car() {
   self endon("death");
-  var_0 = getent(self.script_linkto, "script_linkname");
+  var_0 = getEnt(self.script_linkto, "script_linkname");
 
   if(!isDefined(var_0)) {
     var_1 = getnode(self.script_linkto, "script_linkname");
@@ -883,7 +883,7 @@ exchange_baddie_runs_to_car() {
   if(isDefined(self.script_vehicleride)) {
     var_2 = maps\_vehicle_aianim::get_my_vehicleride();
   } else {
-    var_2 = get_shared_linkto();
+    var_2 = get_shared_linkTo();
     self.script_vehicleride = var_2.script_vehicleride;
   }
 
@@ -918,7 +918,7 @@ exchange_baddie_runs_to_cover() {
   }
 }
 
-get_shared_linkto() {
+get_shared_linkTo() {
   var_0 = strtok(self.script_linkto, " ");
   var_1 = var_0[0];
   var_2 = getEntArray("script_vehicle", "code_classname");
@@ -1055,7 +1055,7 @@ get_path_from_array(var_0) {
 }
 
 exchange_vehicle_waits_for_passengers(var_0) {
-  var_1 = getent(var_0, "script_linkname");
+  var_1 = getEnt(var_0, "script_linkname");
 
   if(!isDefined(var_1)) {
     return;
@@ -1075,7 +1075,7 @@ draworg2() {}
 
 exchange_zaks_car_door() {
   level endon("zak_spawns");
-  var_0 = getent("zak_car_org", "script_noteworthy");
+  var_0 = getEnt("zak_car_org", "script_noteworthy");
   common_scripts\utility::flag_wait("player_attacks_exchange");
   var_0 maps\_utility::ent_flag_set("passenger_got_in");
 }
@@ -1140,7 +1140,7 @@ zak_arm_blood() {
   }
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("tag_origin");
-  var_2 linkto(self, "J_Shoulder_LE", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(self, "J_Shoulder_LE", (0, 0, 0), (0, 0, 0));
   var_2 thread maps\_debug::drawtagforever("tag_origin");
 
   for(var_3 = 0; var_3 < var_1; var_3++) {
@@ -1164,7 +1164,7 @@ zak_arm_blood_pump(var_0, var_1, var_2) {
 zak_blood_pool() {
   self endon("stop_blood");
   wait 1;
-  var_0 = getent("blood_pool", "targetname");
+  var_0 = getEnt("blood_pool", "targetname");
   var_1 = var_0.origin[2];
 
   for(;;) {
@@ -1192,7 +1192,7 @@ blood_pool() {
     if(!isDefined(var_0.target)) {
       return;
     }
-    var_0 = getent(var_0.target, "targetname");
+    var_0 = getEnt(var_0.target, "targetname");
   }
 }
 
@@ -1204,7 +1204,7 @@ zak_dies() {
   var_0 hide();
   var_0.animname = "zak_script_model";
   var_0 maps\_utility::assign_animtree();
-  var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::waittill_either("damage", "fake_damage");
   var_1 = "zak_pain";
 
@@ -1298,7 +1298,7 @@ exchange_zak_and_guards_jab_it_up(var_0, var_1) {
   var_0 thread maps\_anim::anim_single(var_1, "exchange");
   common_scripts\utility::flag_wait("block_heli_arrives");
   wait 2;
-  var_5 = getent("exchange_org2", "targetname");
+  var_5 = getEnt("exchange_org2", "targetname");
 
   if(isDefined(var_4)) {
     var_4 unlink();
@@ -1313,7 +1313,7 @@ set_exchange_timings(var_0) {
   common_scripts\utility::flag_wait("block_heli_arrives");
   wait 2;
   self setflaggedanim("single anim", maps\_utility::getanim("exchange"), 1, 0, 0);
-  self linkto(var_0);
+  self linkTo(var_0);
   thread exchange_unlink();
   common_scripts\utility::flag_wait("block_heli_moves");
   self setflaggedanim("single anim", maps\_utility::getanim("exchange"), 1, 0, 1);
@@ -1355,7 +1355,7 @@ exchange_dof() {
 
 exchange_scale_dof_while_on_turret() {
   var_0 = maps\_cinematography::dyndof("sniper_scope") maps\_cinematography::dyndof_values(4, 50, 4, 1) maps\_cinematography::dyndof_autofocus(1) maps\_cinematography::dyndof_view_pos(level.player getEye());
-  var_0 maps\_cinematography::dyndof_autofocus_add_ignore_entity(getent("bullet_block", "targetname"));
+  var_0 maps\_cinematography::dyndof_autofocus_add_ignore_entity(getEnt("bullet_block", "targetname"));
   thread maps\_cinematography::dyndof_system_start(1);
   var_1 = 9000;
   var_2 = 1000;
@@ -1541,9 +1541,9 @@ exchange_case_velcalc() {
 
 exchange_brick_drop() {
   var_0 = spawn("script_model", (0, 0, 0));
-  var_0 linkto(self, "J_Case", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "J_Case", (0, 0, 0), (0, 0, 0));
   var_1 = spawn("script_model", (0, 0, 0));
-  var_1 linkto(self, "TAG_GOLD_BRICK", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "TAG_GOLD_BRICK", (0, 0, 0), (0, 0, 0));
   common_scripts\utility::flag_wait("player_attacks_exchange");
   wait(level.exchanger_surprise_time);
 
@@ -1566,7 +1566,7 @@ exchange_brick_drop() {
 }
 
 wait_until_seaknight_gets_close(var_0) {
-  var_1 = getent("seaknight_landing", "targetname");
+  var_1 = getEnt("seaknight_landing", "targetname");
   level.seanode = var_1;
 
   for(;;) {
@@ -1580,7 +1580,7 @@ wait_until_seaknight_gets_close(var_0) {
 }
 
 should_break_prone_hint() {
-  var_0 = getent("player_snipe_spot", "targetname");
+  var_0 = getEnt("player_snipe_spot", "targetname");
 
   if(distance(self.origin, var_0.origin) >= var_0.radius) {
     return 1;
@@ -1657,7 +1657,7 @@ clear_path_speed(var_0) {
 }
 
 exchange_wind_flag() {
-  var_0 = getent("wind_flag", "script_noteworthy");
+  var_0 = getEnt("wind_flag", "script_noteworthy");
   var_0 endon("death");
 
   for(;;) {
@@ -1673,7 +1673,7 @@ exchange_flag_rotates() {
 
   for(;;) {
     level waittill("wind_flag_rotation", var_0, var_1);
-    self rotateyaw(var_0, var_1, var_1 * 0.25, var_1 * 0.25);
+    self rotateYaw(var_0, var_1, var_1 * 0.25, var_1 * 0.25);
   }
 }
 
@@ -1692,16 +1692,16 @@ exchange_flag_relinks(var_0) {
   var_0 maps\_utility::ent_flag_wait("time_to_go");
   common_scripts\utility::flag_wait_either("zak_uaz_leaves", "player_attacks_exchange");
   self.angles = (0, var_0.angles[1] + 180, 0);
-  self linkto(var_0);
+  self linkTo(var_0);
 }
 
 exchange_flag() {
   var_0 = maps\_utility::spawn_anim_model("flag");
   var_0.origin = self.origin;
   var_0.angles = self.angles;
-  var_1 = getent(self.script_linkto, "script_linkname");
-  self linkto(var_0);
-  var_0 linkto(var_1);
+  var_1 = getEnt(self.script_linkto, "script_linkname");
+  self linkTo(var_0);
+  var_0 linkTo(var_1);
   var_0 thread exchange_flag_rotates();
   var_0 thread exchange_flag_relinks(var_1);
   var_2 = 0;
@@ -1768,7 +1768,7 @@ exchange_heli() {
 
   if(isalive(level.zakhaev)) {
     level.zakhaev notify("run_to_car");
-    level.zakhaev maps\_utility::anim_stopanimscripted();
+    level.zakhaev maps\_utility::anim_stopanimScripted();
   }
 
   wait 10;
@@ -1784,7 +1784,7 @@ exchange_followup_heli_shoots_hotel() {
   self endon("death");
   self endon("death_spiral");
   maps\_vehicle::vehicle_flag_arrived("block_heli_followup");
-  var_0 = getent("hotel_look_org", "targetname");
+  var_0 = getEnt("hotel_look_org", "targetname");
   self setlookatent(var_0);
   common_scripts\utility::flag_wait("apartment_explosion");
   wait 1.5;
@@ -1803,9 +1803,9 @@ exchange_block_view_on_attack() {
   self endon("death");
   common_scripts\utility::flag_wait("player_attacks_exchange");
   self notify("newpath");
-  var_0 = getent("heli_block_org", "targetname");
+  var_0 = getEnt("heli_block_org", "targetname");
   self setvehgoalpos(var_0.origin, 1);
-  var_1 = getent("hotel_look_org", "targetname");
+  var_1 = getEnt("hotel_look_org", "targetname");
   self setlookatent(var_1);
   self waittill("goal");
   level notify("heli_blocking_crawling_zak");
@@ -1868,7 +1868,7 @@ exchange_heli_pilot(var_0, var_1, var_2, var_3) {
     return;
   }
   self endon("death");
-  var_4 linkto(self, var_1);
+  var_4 linkTo(self, var_1);
   var_4.helitag = var_1;
   var_4.no_magic_death = 1;
   var_4.allowdeath = 0;
@@ -1902,7 +1902,7 @@ exchange_heli_pilot(var_0, var_1, var_2, var_3) {
   var_4.is_victim = 1;
   var_5 = spawn("script_model", (0, 0, 0));
   var_5 setModel(level.scr_model[var_1]);
-  var_5 linkto(self, var_3, (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(self, var_3, (0, 0, 0), (0, 0, 0));
   self.bloodmodels[self.bloodmodels.size] = var_5;
   self notify("death_spiral");
   thread common_scripts\utility::play_sound_in_space("havoc_helicopter_pilot_shot_gls", self.origin);
@@ -1943,11 +1943,11 @@ exchange_heli_death_spiral() {
 }
 
 exchange_ready_to_run(var_0) {
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 exchange_claymore() {
-  var_0 = getent("claymore_org", "targetname");
+  var_0 = getEnt("claymore_org", "targetname");
   var_0.origin = (215.199, -10977.9, 1028);
   var_0.angles = (0, 161.65, 0);
   level.price.grenadeweapon = "claymore";
@@ -2044,7 +2044,7 @@ blow_up_hotel() {
   wait 0.5;
   level.player endon("death");
   var_0 = 0.314286;
-  var_1 = getent("explosion_death_trigger", "targetname");
+  var_1 = getEnt("explosion_death_trigger", "targetname");
 
   for(;;) {
     var_1 thread deathtouch();
@@ -2053,7 +2053,7 @@ blow_up_hotel() {
       break;
     }
 
-    var_1 = getent(var_1.target, "targetname");
+    var_1 = getEnt(var_1.target, "targetname");
     wait(var_0);
   }
 }
@@ -2202,7 +2202,7 @@ barrett_intro() {
 
 barrett_intro_with_anim() {
   level.barrett_intro_with_anim = 1;
-  level.player_intro_node = getent(level.price.target, "targetname");
+  level.player_intro_node = getEnt(level.price.target, "targetname");
   level.player_intro_model = maps\_utility::spawn_anim_model("player_grab_barret");
   level.player_intro_node maps\_anim::anim_first_frame_solo(level.player_intro_model, "grab_barret_prep");
   level.player_intro_node thread maps\_anim::anim_loop_solo(level.player_intro_model, "grab_barret_idle");
@@ -2214,7 +2214,7 @@ barrett_intro_with_script(var_0) {
 }
 
 armtest() {
-  var_0 = getent("flying_arm", "targetname");
+  var_0 = getEnt("flying_arm", "targetname");
   var_1 = spawn("script_origin", (0, 0, 0));
   var_1.origin = var_0.origin;
   var_2 = 135;
@@ -2393,7 +2393,7 @@ animonorg(var_0, var_1, var_2, var_3) {
   var_0 endon("animontag_thread");
   var_4 = "animontagdone";
   var_5 = self;
-  var_0 animscripted(var_4, var_1, var_2, var_3);
+  var_0 animScripted(var_4, var_1, var_2, var_3);
   thread maps\_vehicle_aianim::donotetracks(var_0, var_5, var_4);
   wait(getanimlength(var_3) * 0.28);
   var_0 setanimknob(var_3, 1, 1, 0.1);
@@ -2428,7 +2428,7 @@ can_display_flashback_guy_name() {
     return 0;
   }
 
-  var_4 = getent("bullet_block", "targetname");
+  var_4 = getEnt("bullet_block", "targetname");
   var_5 = maps\_vehicle::get_vehicle_from_targetname("view_block_heli");
   var_6 = 0;
   var_7 = level.player getEye() + 10000 * anglesToForward(level.player getplayerangles());

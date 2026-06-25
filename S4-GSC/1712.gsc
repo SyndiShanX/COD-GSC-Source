@@ -1597,7 +1597,7 @@ _id_DBFA(var_0) {
     return anim._id_58E3;
   }
 
-  var_7 = vectornormalize(var_4);
+  var_7 = vectorNormalize(var_4);
 
   if(vectordot(var_3, var_7) < 0) {
     return anim._id_58E3;

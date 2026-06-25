@@ -52,9 +52,9 @@ function is_player() {
 function lerp(chunk) {
   link = spawn("script_origin", self getorigin());
   link.angles = self.first_node.angles;
-  self linkto(link);
-  link rotateto(self.first_node.angles, level._contextual_grab_lerp_time);
-  link moveto(self.attacking_spot, level._contextual_grab_lerp_time);
+  self linkTo(link);
+  link rotateTo(self.first_node.angles, level._contextual_grab_lerp_time);
+  link moveTo(self.attacking_spot, level._contextual_grab_lerp_time);
   link util::waittill_multiple("rotatedone", "movedone");
   self unlink();
   link delete();
@@ -160,18 +160,18 @@ function move_zombie_spawn_location(spot) {
       }
       self.anchor = spawn("script_origin", self.origin);
       self.anchor.angles = self.angles;
-      self linkto(self.anchor);
+      self linkTo(self.anchor);
       self.anchor thread anchor_delete_failsafe(self);
       if(!isDefined(spot.angles)) {
         spot.angles = (0, 0, 0);
       }
       self ghost();
-      self.anchor moveto(spot.origin, 0.05);
+      self.anchor moveTo(spot.origin, 0.05);
       self.anchor waittill("movedone");
       target_org = zombie_utility::get_desired_origin();
       if(isDefined(target_org)) {
         anim_ang = vectortoangles(target_org - self.origin);
-        self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+        self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
         self.anchor waittill("rotatedone");
       }
       if(isDefined(level.zombie_spawn_fx)) {
@@ -920,7 +920,7 @@ function default_validate_enemy_path_length(player) {
 function get_closest_valid_player(origin, ignore_player) {
   aiprofile_beginentry("get_closest_valid_player");
   valid_player_found = 0;
-  players = getplayers();
+  players = getPlayers();
   if(isDefined(level.get_closest_valid_player_override)) {
     players = [[level.get_closest_valid_player_override]]();
   }
@@ -1079,7 +1079,7 @@ function is_player_valid(player, checkignoremeflag, ignore_laststand_players) {
 }
 
 function get_number_of_valid_players() {
-  players = getplayers();
+  players = getPlayers();
   num_player_valid = 0;
   for(i = 0; i < players.size; i++) {
     if(is_player_valid(players[i])) {
@@ -1856,13 +1856,13 @@ function set_hint_string(ent, default_ref, cost) {
   }
   if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
     ref = (ref + "_") + cost;
-    self sethintstring(get_zombie_hint(ref));
+    self setHintString(get_zombie_hint(ref));
   } else {
     hint = get_zombie_hint(ref);
     if(isDefined(cost)) {
-      self sethintstring(hint, cost);
+      self setHintString(hint, cost);
     } else {
-      self sethintstring(hint);
+      self setHintString(hint);
     }
   }
 }
@@ -1892,15 +1892,15 @@ function unitrigger_set_hint_string(ent, default_ref, cost) {
     }
     if(isDefined(level.legacy_hint_system) && level.legacy_hint_system) {
       ref = (ref + "_") + cost;
-      trigger sethintstring(get_zombie_hint(ref));
+      trigger setHintString(get_zombie_hint(ref));
       continue;
     }
     hint = get_zombie_hint(ref);
     if(isDefined(cost)) {
-      trigger sethintstring(hint, cost);
+      trigger setHintString(hint, cost);
       continue;
     }
-    trigger sethintstring(hint);
+    trigger setHintString(hint);
   }
 }
 
@@ -1914,7 +1914,7 @@ function add_sound(ref, alias) {
 function play_sound_at_pos(ref, pos, ent) {
   if(isDefined(ent)) {
     if(isDefined(ent.script_soundalias)) {
-      playsoundatposition(ent.script_soundalias, pos);
+      playSoundAtPosition(ent.script_soundalias, pos);
       return;
     }
     if(isDefined(self.script_sound)) {
@@ -1928,7 +1928,7 @@ function play_sound_at_pos(ref, pos, ent) {
     assertmsg(("" + ref) + "");
     return;
   }
-  playsoundatposition(level.zombie_sounds[ref], pos);
+  playSoundAtPosition(level.zombie_sounds[ref], pos);
 }
 
 function play_sound_on_ent(ref) {
@@ -2201,7 +2201,7 @@ function include_weapon(weapon_name, in_box) {
 }
 
 function trigger_invisible(enable) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
       self setinvisibletoplayer(players[i], enable);
@@ -2304,7 +2304,7 @@ function remove_mod_from_methodofdeath(mod) {
 }
 
 function clear_fog_threads() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] notify("stop_fog");
   }
@@ -2859,7 +2859,7 @@ function giveachievement_wrapper(achievement, all_players) {
   achievement_lower = tolower(achievement);
   global_counter = 0;
   if(isDefined(all_players) && all_players) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       players[i] giveachievement(achievement);
       has_achievement = 0;
@@ -2958,7 +2958,7 @@ function waittill_not_moving() {
 
 function get_closest_player(org) {
   players = [];
-  players = getplayers();
+  players = getPlayers();
   return arraygetclosest(org, players);
 }
 
@@ -2999,7 +2999,7 @@ function track_players_intersection_tracker() {
   wait(5);
   while(true) {
     killed_players = 0;
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(players[i] laststand::player_is_in_laststand() || "playing" != players[i].sessionstate) {
         continue;
@@ -3329,9 +3329,9 @@ function place_navcard(str_model, str_stat, org, angles) {
   navcard.angles = angles;
   wait(1);
   navcard_pickup_trig = spawn("trigger_radius_use", org, 0, 84, 72);
-  navcard_pickup_trig setcursorhint("HINT_NOICON");
-  navcard_pickup_trig sethintstring(&"ZOMBIE_NAVCARD_PICKUP");
-  navcard_pickup_trig triggerignoreteam();
+  navcard_pickup_trig setCursorHint("HINT_NOICON");
+  navcard_pickup_trig setHintString(&"ZOMBIE_NAVCARD_PICKUP");
+  navcard_pickup_trig triggerIgnoreTeam();
   a_navcard_stats = array("navcard_held_zm_transit", "navcard_held_zm_highrise", "navcard_held_zm_buried");
   is_holding_card = 0;
   str_placing_stat = undefined;
@@ -3365,7 +3365,7 @@ function sq_refresh_player_navcard_hud() {
   if(!isDefined(level.navcards)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     player thread sq_refresh_player_navcard_hud_internal();
   }
@@ -3725,7 +3725,7 @@ function wait_clear_streamer_hint(lifetime) {
 
 function create_streamer_hint(origin, angles, value, lifetime) {
   if(self == level) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clear_streamer_hint();
     }
   }
@@ -3831,8 +3831,8 @@ function is_facing(facee, requireddot = 0.5, b_2d = 1) {
     v_forward_computed = v_forward;
     v_to_facee_computed = v_to_facee;
   }
-  v_unit_forward_computed = vectornormalize(v_forward_computed);
-  v_unit_to_facee_computed = vectornormalize(v_to_facee_computed);
+  v_unit_forward_computed = vectorNormalize(v_forward_computed);
+  v_unit_to_facee_computed = vectorNormalize(v_to_facee_computed);
   dotproduct = vectordot(v_unit_forward_computed, v_unit_to_facee_computed);
   return dotproduct > requireddot;
 }
@@ -3852,7 +3852,7 @@ function upload_zm_dash_counters(force_upload = 0) {
 }
 
 function upload_zm_dash_counters_end_game() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player flag::exists("finished_reporting_consumables")) {
       player flag::wait_till("finished_reporting_consumables");
     }

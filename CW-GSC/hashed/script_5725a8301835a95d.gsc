@@ -185,7 +185,7 @@ function private function_95da1d88(instance, var_eece1f6a, var_f8dfa2cf) {
         }
 
         n_radius = 64;
-        n_dist = distance(spawn.origin, getplayers()[0].origin);
+        n_dist = distance(spawn.origin, getPlayers()[0].origin);
         n_radius *= n_dist / 3000;
         sphere(spawn.origin, n_radius, str_color, 1, 0, 7, 5);
       }
@@ -201,7 +201,7 @@ function private function_95da1d88(instance, var_eece1f6a, var_f8dfa2cf) {
 
         if(isDefined(s_spawn)) {
           foreach(player in function_a1ef346b()) {
-            player setorigin(s_spawn.origin);
+            player setOrigin(s_spawn.origin);
           }
 
           n_spawn++;

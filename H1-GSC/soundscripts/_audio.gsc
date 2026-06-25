@@ -128,7 +128,7 @@ aud_play_line_emitter(var_0, var_1, var_2, var_3, var_4, var_5) {
 audx_play_line_emitter_internal() {
   level endon(self.label + "_line_emitter_stop");
   var_0 = self.point2 - self.point1;
-  var_1 = vectornormalize(var_0);
+  var_1 = vectorNormalize(var_0);
   var_2 = distance(self.point1, self.point2);
   var_3 = 0.1;
 
@@ -146,7 +146,7 @@ audx_play_line_emitter_internal() {
       self scalevolume(1.0, self.fade_in);
       self.is_playing = 1;
     } else
-      self moveto(var_6, var_3);
+      self moveTo(var_6, var_3);
 
     wait(var_3);
   }
@@ -541,7 +541,7 @@ trigger_multiple_audio_progress(var_0, var_1, var_2, var_3) {
   }
 
   if(!isDefined(self.script_audio_use_distance_only)) {
-    var_4 = vectornormalize(var_1 - var_0);
+    var_4 = vectorNormalize(var_1 - var_0);
     var_5 = var_3 - var_0;
     var_6 = vectordot(var_5, var_4);
     var_6 = var_6 / var_2;
@@ -554,7 +554,7 @@ trigger_multiple_audio_progress(var_0, var_1, var_2, var_3) {
 }
 
 trigger_multiple_audio_progress_point(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_1 - var_0);
+  var_3 = vectorNormalize(var_1 - var_0);
   var_4 = var_2 - var_0;
   var_5 = vectordot(var_4, var_3);
   return var_3 * var_5 + var_0;
@@ -672,8 +672,8 @@ aud_play_dynamic_explosion(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_13 = spawn("script_origin", var_7.origin);
     var_12 soundscripts\_snd_playsound::snd_play(var_1);
     var_13 soundscripts\_snd_playsound::snd_play(var_2);
-    var_12 moveto(var_9[0], var_11, 0, 0);
-    var_13 moveto(var_9[1], var_11, 0, 0);
+    var_12 moveTo(var_9[0], var_11, 0, 0);
+    var_13 moveTo(var_9[1], var_11, 0, 0);
   }
 }
 
@@ -1533,9 +1533,9 @@ deprecated_aud_play_linked_sound(var_0, var_1, var_2, var_3, var_4, var_5, var_6
   var_10 = spawn("script_origin", var_9);
 
   if(isDefined(var_4)) {
-    var_10 linkto(var_1, "tag_origin", var_4, (0, 0, 0));
+    var_10 linkTo(var_1, "tag_origin", var_4, (0, 0, 0));
   } else {
-    var_10 linkto(var_1);
+    var_10 linkTo(var_1);
   }
 
   if(var_8 == "loop") {
@@ -1684,7 +1684,7 @@ deprecated_aud_play_conversation(var_0, var_1) {
     }
 
     var_7 = spawn("script_origin", (0, 0, 0));
-    var_7 linkto(var_6.ent, "", (0, 0, 0), (0, 0, 0));
+    var_7 linkTo(var_6.ent, "", (0, 0, 0), (0, 0, 0));
     var_7 soundscripts\_snd_playsound::snd_play(var_6.sound, "sounddone");
     var_7 waittill("sounddone");
     wait 0.05;

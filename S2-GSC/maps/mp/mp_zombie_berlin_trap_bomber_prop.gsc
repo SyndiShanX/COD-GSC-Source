@@ -4,10 +4,10 @@
 *********************************************************/
 
 trap_bomber_prop(param_00) {
-  var_01 = getent("zmb_trap_bomber_engine_mdl", "script_noteworthy");
-  var_02 = getent("propeller_center_fx_trap", "script_noteworthy");
+  var_01 = getEnt("zmb_trap_bomber_engine_mdl", "script_noteworthy");
+  var_02 = getEnt("propeller_center_fx_trap", "script_noteworthy");
   var_01 lib_0378::func_8D74("start_trap_prop", 0.5);
-  var_03 = getent("propeller_damage", "script_noteworthy");
+  var_03 = getEnt("propeller_damage", "script_noteworthy");
   var_03.var_9C92 = param_00;
   var_03.var_9CBB = "trap_bomber_prop";
   wait(0.3);
@@ -54,7 +54,7 @@ do_ground_blood(param_00, param_01) {
 
 toss_ragdoll(param_00, param_01) {
   var_02 = self gettagorigin("J_Head");
-  var_03 = vectornormalize(var_02 - param_00.var_116);
+  var_03 = vectorNormalize(var_02 - param_00.var_116);
   var_04 = ["head", "neck"];
   var_05 = common_scripts\utility::func_7A33(var_04);
   lib_0547::func_5A85(var_05, 500 * var_03, param_01, "trap_zm_mp");

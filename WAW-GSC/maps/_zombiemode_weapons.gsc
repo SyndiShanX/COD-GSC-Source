@@ -183,12 +183,12 @@ init_weapon_upgrade() {
   for(i = 0; i < weapon_spawns.size; i++) {
     hint_string = get_weapon_hint(weapon_spawns[i].zombie_weapon_upgrade);
 
-    weapon_spawns[i] SetHintString(hint_string);
+    weapon_spawns[i] setHintString(hint_string);
     weapon_spawns[i] setCursorHint("HINT_NOICON");
-    weapon_spawns[i] UseTriggerRequireLookAt();
+    weapon_spawns[i] useTriggerRequireLookAt();
 
     weapon_spawns[i] thread weapon_spawn_think();
-    model = getent(weapon_spawns[i].target, "targetname");
+    model = getEnt(weapon_spawns[i].target, "targetname");
     model hide();
   }
 }
@@ -196,9 +196,9 @@ init_weapon_cabinet() {
   weapon_cabs = getEntArray("weapon_cabinet_use", "targetname");
 
   for(i = 0; i < weapon_cabs.size; i++) {
-    weapon_cabs[i] SetHintString(&"ZOMBIE_CABINET_OPEN_1500");
+    weapon_cabs[i] setHintString(&"ZOMBIE_CABINET_OPEN_1500");
     weapon_cabs[i] setCursorHint("HINT_NOICON");
-    weapon_cabs[i] UseTriggerRequireLookAt();
+    weapon_cabs[i] useTriggerRequireLookAt();
   }
 
   array_thread(weapon_cabs, ::weapon_cabinet_think);
@@ -294,9 +294,9 @@ hide_chest() {
 }
 
 get_chest_pieces() {
-  lid = GetEnt(self.target, "targetname");
-  org = GetEnt(lid.target, "targetname");
-  box = GetEnt(org.target, "targetname");
+  lid = getEnt(self.target, "targetname");
+  org = getEnt(lid.target, "targetname");
+  box = getEnt(org.target, "targetname");
 
   pieces = [];
   pieces[pieces.size] = self;
@@ -317,20 +317,20 @@ show_magic_box() {
     pieces[i] enable_trigger();
   }
 
-  anchor = GetEnt(self.target, "targetname");
-  anchorTarget = GetEnt(anchor.target, "targetname");
+  anchor = getEnt(self.target, "targetname");
+  anchorTarget = getEnt(anchor.target, "targetname");
 
   level.pandora_light.angles = (-90, anchorTarget.angles[1] + 180, 0);
 
   if(isDefined(level.script) && level.script != "nazi_zombie_sumpf") {
     playFX(level._effect["poltergeist"], pieces[0].origin);
   } else {
-    level.pandora_light moveto(anchorTarget.origin, 0.05);
+    level.pandora_light moveTo(anchorTarget.origin, 0.05);
     wait(1);
     playFXOnTag(level._effect["lght_marker_flare"], level.pandora_light, "tag_origin");
   }
 
-  playsoundatposition("box_poof", pieces[0].origin);
+  playSoundAtPosition("box_poof", pieces[0].origin);
   wait(.5);
   for(i = 0; i < pieces.size; i++) {
     if(pieces[i].classname != "trigger_use") {
@@ -372,8 +372,8 @@ treasure_chest_think() {
     wait 0.05;
   }
 
-  lid = getent(self.target, "targetname");
-  weapon_spawn_org = getent(lid.target, "targetname");
+  lid = getEnt(self.target, "targetname");
+  weapon_spawn_org = getEnt(lid.target, "targetname");
 
   lid thread treasure_chest_lid_open();
 
@@ -393,7 +393,7 @@ treasure_chest_think() {
   } else {
     self.grab_weapon_hint = true;
     level thread treasure_chest_user_hint(self, user);
-    self sethintstring(&"ZOMBIE_TRADE_WEAPONS");
+    self setHintString(&"ZOMBIE_TRADE_WEAPONS");
     self setCursorHint("HINT_NOICON");
     self setvisibletoplayer(user);
 
@@ -499,13 +499,13 @@ treasure_chest_move(lid) {
 
   anchor playSound("box_move");
   for(i = 0; i < fake_pieces.size; i++) {
-    fake_pieces[i] linkto(anchor);
+    fake_pieces[i] linkTo(anchor);
   }
 
-  playsoundatposition("whoosh", soundpoint.origin);
-  playsoundatposition("ann_vox_magicbox", soundpoint.origin);
+  playSoundAtPosition("whoosh", soundpoint.origin);
+  playSoundAtPosition("ann_vox_magicbox", soundpoint.origin);
 
-  anchor moveto(anchor.origin + (0, 0, 50), 5);
+  anchor moveTo(anchor.origin + (0, 0, 50), 5);
   if(level.chests[level.chest_index].script_noteworthy == "magic_box_south" || level.chests[level.chest_index].script_noteworthy == "magic_box_bathroom" || level.chests[level.chest_index].script_noteworthy == "magic_box_hallway") {
     anchor Vibrate((50, 0, 0), 10, 0.5, 5);
   } else if(level.script != "nazi_zombie_sumpf") {
@@ -527,7 +527,7 @@ treasure_chest_move(lid) {
 
   playFX(level._effect["poltergeist"], anchor.origin);
 
-  playsoundatposition("box_poof", soundpoint.origin);
+  playSoundAtPosition("box_poof", soundpoint.origin);
   for(i = 0; i < fake_pieces.size; i++) {
     fake_pieces[i] delete();
   }
@@ -775,7 +775,7 @@ treasure_chest_weapon_spawn(chest, player) {
 
   floatHeight = 40;
 
-  model moveto(model.origin + (0, 0, floatHeight), 3, 2, 0.9);
+  model moveTo(model.origin + (0, 0, floatHeight), 3, 2, 0.9);
 
   modelname = undefined;
   rand = undefined;
@@ -899,7 +899,7 @@ treasure_chest_weapon_spawn(chest, player) {
 }
 timer_til_despawn(floatHeight) {
   putBackTime = 12;
-  self MoveTo(self.origin - (0, 0, floatHeight), putBackTime, (putBackTime * 0.5));
+  self moveTo(self.origin - (0, 0, floatHeight), putBackTime, (putBackTime * 0.5));
   wait(putBackTime);
 
   if(isDefined(self)) {
@@ -1043,7 +1043,7 @@ weapon_cabinet_think() {
 
       self play_sound_on_ent("purchase");
 
-      self SetHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
+      self setHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
 
       self setCursorHint("HINT_NOICON");
       player maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
@@ -1082,9 +1082,9 @@ weapon_cabinet_think() {
 
 weapon_cabinet_door_open(left_or_right) {
   if(left_or_right == "left") {
-    self rotateyaw(120, 0.3, 0.2, 0.1);
+    self rotateYaw(120, 0.3, 0.2, 0.1);
   } else if(left_or_right == "right") {
-    self rotateyaw(-120, 0.3, 0.2, 0.1);
+    self rotateYaw(-120, 0.3, 0.2, 0.1);
   }
 }
 
@@ -1133,13 +1133,13 @@ weapon_spawn_think() {
     if(!player_has_weapon) {
       if(player.score >= cost) {
         if(self.first_time_triggered == false) {
-          model = getent(self.target, "targetname");
+          model = getEnt(self.target, "targetname");
 
           model thread weapon_show(player);
           self.first_time_triggered = true;
 
           if(!is_grenade) {
-            self SetHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
+            self setHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
           }
         }
 
@@ -1153,12 +1153,12 @@ weapon_spawn_think() {
     } else {
       if(player.score >= ammo_cost) {
         if(self.first_time_triggered == false) {
-          model = getent(self.target, "targetname");
+          model = getEnt(self.target, "targetname");
 
           model thread weapon_show(player);
           self.first_time_triggered = true;
           if(!is_grenade) {
-            self SetHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
+            self setHintString(&"ZOMBIE_WEAPONCOSTAMMO", cost, ammo_cost);
           }
         }
 
@@ -1200,7 +1200,7 @@ weapon_show(player) {
   play_sound_at_pos("weapon_show", self.origin, self);
 
   time = 1;
-  self MoveTo(self.og_origin, time);
+  self moveTo(self.og_origin, time);
 }
 
 weapon_give(weapon) {
@@ -1398,7 +1398,7 @@ add_weapon_to_sound_array(vo, num) {
   if(!isDefined(vo)) {
     return;
   }
-  player = getplayers();
+  player = getPlayers();
   for(i = 0; i < player.size; i++) {
     index = maps\_zombiemode_weapons::get_player_index(player);
     player_index = "plr_" + index + "_";

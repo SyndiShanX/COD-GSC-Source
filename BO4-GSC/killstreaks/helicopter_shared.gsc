@@ -192,13 +192,13 @@ heli_path_graph() {
     startnode_array = [];
     isprimarydest = 0;
     destnode_pointer = path_dest[i];
-    destnode = getent(destnode_pointer.target, "targetname");
+    destnode = getEnt(destnode_pointer.target, "targetname");
 
     for(j = 0; j < path_start.size; j++) {
       todest = 0;
 
       for(currentnode = path_start[j]; isDefined(currentnode.target); currentnode = nextnode) {
-        nextnode = getent(currentnode.target, "targetname");
+        nextnode = getEnt(currentnode.target, "targetname");
 
         if(nextnode.origin == destnode.origin) {
           todest = 1;
@@ -208,7 +208,7 @@ heli_path_graph() {
         airsupport::debug_print3d_simple("<dev string:xb5>", currentnode, (0, 0, -10));
 
         if(isDefined(nextnode.target)) {
-          airsupport::debug_line(nextnode.origin, getent(nextnode.target, "<dev string:xb9>").origin, (0.25, 0.5, 0.25), 5);
+          airsupport::debug_line(nextnode.origin, getEnt(nextnode.target, "<dev string:xb9>").origin, (0.25, 0.5, 0.25), 5);
         }
 
         if(isDefined(currentnode.script_delay)) {
@@ -217,7 +217,7 @@ heli_path_graph() {
       }
 
       if(todest) {
-        startnode_array[startnode_array.size] = getent(path_start[j].target, "targetname");
+        startnode_array[startnode_array.size] = getEnt(path_start[j].target, "targetname");
 
         if(isDefined(path_start[j].script_noteworthy) && path_start[j].script_noteworthy == "primary") {
           isprimarydest = 1;
@@ -236,14 +236,14 @@ heli_path_graph() {
   }
 
   for(i = 0; i < loop_start.size; i++) {
-    startnode = getent(loop_start[i].target, "targetname");
+    startnode = getEnt(loop_start[i].target, "targetname");
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
 
   assert(isDefined(level.heli_loop_paths[0]), "<dev string:xeb>");
 
   for(i = 0; i < gunner_loop_start.size; i++) {
-    startnode = getent(gunner_loop_start[i].target, "targetname");
+    startnode = getEnt(gunner_loop_start[i].target, "targetname");
     startnode.isgunnerpath = 1;
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
@@ -265,7 +265,7 @@ heli_path_graph() {
   assert(isDefined(level.heli_leavenodes[0]), "<dev string:x13c>");
 
   for(i = 0; i < crash_start.size; i++) {
-    crash_start_node = getent(crash_start[i].target, "targetname");
+    crash_start_node = getEnt(crash_start[i].target, "targetname");
     level.heli_crash_paths[level.heli_crash_paths.size] = crash_start_node;
   }
 
@@ -347,7 +347,7 @@ set_goal_pos(goalpos, stop) {
 }
 
 spawn_helicopter(owner, origin, angles, vehicledef, targetname, target_offset, hardpointtype, killstreak_id) {
-  chopper = spawnvehicle(vehicledef, origin, angles);
+  chopper = spawnVehicle(vehicledef, origin, angles);
   chopper setowner(owner);
   chopper.owner = owner;
   chopper clientfield::set("enemyvehicle", 1);
@@ -564,7 +564,7 @@ heli_think(owner, startnode, heli_team, missilesenabled, protectlocation, hardpo
   chopper.requireddeathcount = owner.deathcount;
   chopper.chaff_offset = level.chaff_offset[#"attack"];
   minigun_snd_ent = spawn("script_origin", chopper gettagorigin("tag_flash"));
-  minigun_snd_ent linkto(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
+  minigun_snd_ent linkTo(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
   chopper.minigun_snd_ent = minigun_snd_ent;
   minigun_snd_ent thread autostopsound();
   chopper thread heli_existance();
@@ -638,7 +638,7 @@ heli_existance() {
 create_flare_ent(offset) {
   self.flare_ent = spawn("script_model", self gettagorigin("tag_origin"));
   self.flare_ent setModel(#"tag_origin");
-  self.flare_ent linkto(self, "tag_origin", offset);
+  self.flare_ent linkTo(self, "tag_origin", offset);
 }
 
 heli_missile_regen() {
@@ -2650,9 +2650,9 @@ turret_target_check(turrettarget, attackangle) {
 }
 
 target_cone_check(target, conecosine) {
-  heli2target_normal = vectornormalize(target.origin - self.origin);
+  heli2target_normal = vectorNormalize(target.origin - self.origin);
   heli2forward = anglesToForward(self.angles);
-  heli2forward_normal = vectornormalize(heli2forward);
+  heli2forward_normal = vectorNormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
 
   if(heli_dot_target >= conecosine) {

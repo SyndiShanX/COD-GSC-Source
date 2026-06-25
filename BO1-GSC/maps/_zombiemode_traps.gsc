@@ -149,7 +149,7 @@ trap_init() {
   flag_wait("all_players_connected");
   self trap_lights_red();
   for(i = 0; i < self._trap_use_trigs.size; i++) {
-    self._trap_use_trigs[i] SetCursorHint("HINT_NOICON");
+    self._trap_use_trigs[i] setCursorHint("HINT_NOICON");
   }
   if(!isDefined(self.script_flag_wait)) {
     self trap_set_string(&"ZOMBIE_NEED_POWER");
@@ -241,11 +241,11 @@ trap_lights_green() {
 trap_set_string(string, param1, param2) {
   for(i = 0; i < self._trap_use_trigs.size; i++) {
     if(!isDefined(param1)) {
-      self._trap_use_trigs[i] SetHintString(string);
+      self._trap_use_trigs[i] setHintString(string);
     } else if(!isDefined(param2)) {
-      self._trap_use_trigs[i] SetHintString(string, param1);
+      self._trap_use_trigs[i] setHintString(string, param1);
     } else {
-      self._trap_use_trigs[i] SetHintString(string, param1, param2);
+      self._trap_use_trigs[i] setHintString(string, param1, param2);
     }
   }
 }
@@ -315,18 +315,18 @@ trap_activate_rotating() {
   self thread trig_update(self._trap_movers[0]);
   old_angles = self._trap_movers[0].angles;
   for(i = 0; i < self._trap_movers.size; i++) {
-    self._trap_movers[i] RotateYaw(360, 5.0, 4.5);
+    self._trap_movers[i] rotateYaw(360, 5.0, 4.5);
   }
   wait(5.0);
   step = 1.5;
   for(t = 0; t < self._trap_duration; t = t + step) {
     for(i = 0; i < self._trap_movers.size; i++) {
-      self._trap_movers[i] RotateYaw(360, step);
+      self._trap_movers[i] rotateYaw(360, step);
     }
     wait(step);
   }
   for(i = 0; i < self._trap_movers.size; i++) {
-    self._trap_movers[i] RotateYaw(360, 5.0, 0.0, 4.5);
+    self._trap_movers[i] rotateYaw(360, 5.0, 0.0, 4.5);
   }
   wait(5.0);
   for(i = 0; i < self._trap_movers.size; i++) {
@@ -353,7 +353,7 @@ trap_audio_fx(trap) {
   trap waittill_any_or_timeout(trap._trap_duration, "trap_done");
   if(isDefined(sound_origin)) {
     if(trap.script_noteworthy == "fire") {
-      playsoundatposition("zmb_firetrap_end", sound_origin.origin);
+      playSoundAtPosition("zmb_firetrap_end", sound_origin.origin);
     }
     sound_origin stoploopsound();
     wait(.05);
@@ -364,7 +364,7 @@ play_electrical_sound(trap) {
   trap endon("trap_done");
   while(1) {
     wait(randomfloatrange(0.1, 0.5));
-    playsoundatposition("zmb_elec_arc", self.origin);
+    playSoundAtPosition("zmb_elec_arc", self.origin);
   }
 }
 trap_damage() {
@@ -484,7 +484,7 @@ zombie_trap_death(trap, param) {
           refs[5] = "no_legs";
           refs[6] = "head";
           self.a.gib_ref = refs[randomint(refs.size)];
-          playsoundatposition("zmb_zombie_arc", self.origin);
+          playSoundAtPosition("zmb_zombie_arc", self.origin);
           if(trap._trap_type == "electric") {
             if(randomint(100) > 50) {
               self thread electroctute_death_fx();
@@ -528,9 +528,9 @@ play_elec_vocals() {
   if(isDefined(self)) {
     org = self.origin;
     wait(0.15);
-    playsoundatposition("zmb_elec_vocals", org);
-    playsoundatposition("zmb_zombie_arc", org);
-    playsoundatposition("zmb_exp_jib_zombie", org);
+    playSoundAtPosition("zmb_elec_vocals", org);
+    playSoundAtPosition("zmb_zombie_arc", org);
+    playSoundAtPosition("zmb_exp_jib_zombie", org);
   }
 }
 electroctute_death_fx() {

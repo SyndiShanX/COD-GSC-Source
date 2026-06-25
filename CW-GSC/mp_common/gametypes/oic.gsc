@@ -71,7 +71,7 @@ function onplayerdisconnect() {
 
 function private function_1ccf32e3() {
   count = getplayersleft().size;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(player)) {

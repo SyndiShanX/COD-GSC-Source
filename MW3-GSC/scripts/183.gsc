@@ -1083,7 +1083,7 @@ _id_1EEA() {
     if(isDefined(self._id_1EEB)) {
       continue;
     }
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -1353,7 +1353,7 @@ _id_1EF7(var_0) {
 }
 
 _id_1EF9() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self._id_1EFA = var_0.origin[2];
   var_0 delete();
 }
@@ -1372,7 +1372,7 @@ _id_1EFB() {
 _id_1EFC() {
   var_0 = self getorigin();
   var_1 = "piano_" + self.script_noteworthy;
-  self sethintstring(&"SCRIPT_PLATFORM_PIANO");
+  self setHintString(&"SCRIPT_PLATFORM_PIANO");
 
   for(;;) {
     self waittill("trigger");
@@ -1448,7 +1448,7 @@ _id_1EFF(var_0) {
 }
 
 _id_1F00() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = var_0.origin[2];
   var_0 = undefined;
   level._id_1F01 = 8;
@@ -1686,7 +1686,7 @@ _id_1F12(var_0, var_1) {
         continue;
       }
 
-      var_11 = vectornormalize(var_5 - var_9.origin);
+      var_11 = vectorNormalize(var_5 - var_9.origin);
       var_12 = var_9 getplayerangles();
       var_13 = anglesToForward(var_12);
       var_14 = vectordot(var_13, var_11);
@@ -2257,7 +2257,7 @@ _id_1F36(var_0) {
 _id_1F37(var_0) {
   level._id_1F38[1] = ::_id_1F42;
   level._id_1F38[0] = ::_id_1F43;
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
 
   for(;;) {
     var_0 waittill("trigger");
@@ -2508,14 +2508,14 @@ _id_1F4A(var_0) {
 
 _id_1F4B(var_0) {
   var_0 endon("death");
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = undefined;
 
   if(isDefined(var_1)) {
     var_2 = var_1.origin;
     var_1 delete();
   } else {
-    var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
     var_2 = var_1.origin;
   }
 
@@ -2956,7 +2956,7 @@ _id_1F6C() {
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2];
-    var_4 = getent(var_3, "script_linkname");
+    var_4 = getEnt(var_3, "script_linkname");
 
     if(isDefined(var_4)) {
       var_0[var_0.size] = var_4;
@@ -3027,12 +3027,12 @@ _id_1F6F(var_0) {
     }
   }
 
-  var_5 = getent(var_0.target, "targetname");
+  var_5 = getEnt(var_0.target, "targetname");
   var_6 = var_5.origin;
   var_7 = undefined;
 
   if(isDefined(var_5.target)) {
-    var_8 = getent(var_5.target, "targetname");
+    var_8 = getEnt(var_5.target, "targetname");
     var_7 = var_8.origin;
   } else {
     var_7 = var_6 + (var_0.origin - var_6) * 2;
@@ -3303,7 +3303,7 @@ _id_1F96() {
   if(isDefined(var_0)) {
     var_4 = var_0.classname;
     var_5 = var_0.origin;
-    var_6 = vectornormalize(var_5 - self.origin);
+    var_6 = vectorNormalize(var_5 - self.origin);
     var_7 = anglesToForward(self getplayerangles());
     var_3 = vectordot(var_6, var_7);
   }
@@ -3390,7 +3390,7 @@ _id_1F9F(var_0) {
   foreach(var_4 in var_1) {
     var_5 = var_2[var_4.script_noteworthy];
     var_4 connectpaths();
-    var_4 rotateyaw(var_5, 1, 0, 0.5);
+    var_4 rotateYaw(var_5, 1, 0, 0.5);
   }
 }
 
@@ -3614,8 +3614,8 @@ _id_1FB4(var_0, var_1) {
 _id_1FB5() {
   precacheitem("claymore");
   self endon("deleted");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"WEAPON_CLAYMORE_PICKUP");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"WEAPON_CLAYMORE_PICKUP");
   self makeusable();
   var_0 = weaponmaxammo("claymore") + weaponclipsize("claymore");
 
@@ -3676,8 +3676,8 @@ _id_1FB7() {
   self._id_1FB8 = spawn("script_model", self.origin + (0, 0, 28));
   self._id_1FB8 setModel("tag_origin");
   self._id_1FB8 makeusable();
-  self._id_1FB8 setcursorhint("HINT_NOICON");
-  self._id_1FB8 sethintstring(&"WEAPON_CACHE_USE_HINT");
+  self._id_1FB8 setCursorHint("HINT_NOICON");
+  self._id_1FB8 setHintString(&"WEAPON_CACHE_USE_HINT");
   thread _id_1FB9();
 
   for(;;) {
@@ -3783,15 +3783,15 @@ _id_1FC0(var_0) {
 
   if(isDefined(var_0._id_1B0E) && isDefined(var_0._id_1B0F)) {
     var_1 = 1;
-    var_3 = getent(var_0.target, "targetname");
+    var_3 = getEnt(var_0.target, "targetname");
 
     if(!isDefined(var_3)) {
-      var_3 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_3 = common_scripts\utility::getStruct(var_0.target, "targetname");
     }
-    var_4 = getent(var_3.target, "targetname");
+    var_4 = getEnt(var_3.target, "targetname");
 
     if(!isDefined(var_4)) {
-      var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+      var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
     }
     var_3 = var_3.origin;
     var_4 = var_4.origin;

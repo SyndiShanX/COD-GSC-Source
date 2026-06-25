@@ -126,7 +126,7 @@ break_sensitive_windows() {
   a_s_bullets = getStructArray("sensitive_magic_bullet", "targetname");
 
   foreach(s_bullet in a_s_bullets) {
-    s_bullet_end = getstruct(s_bullet.target, "targetname");
+    s_bullet_end = getStruct(s_bullet.target, "targetname");
 
     for(i = 0; i < 5; i++) {
       magicbullet("xm8_sp", s_bullet.origin, s_bullet_end.origin);
@@ -134,7 +134,7 @@ break_sensitive_windows() {
     }
   }
 
-  s_extinguisher = getstruct("sensitive_fire_extinguisher", "targetname");
+  s_extinguisher = getStruct("sensitive_fire_extinguisher", "targetname");
   radiusdamage(s_extinguisher.origin, 32, 200, 100);
 }
 
@@ -260,11 +260,11 @@ run_mason_cctv() {
   checkpoint_respawn_safe_spot_set("player_skipto_mason_security");
   autosave_by_name("goto_cctv_room");
   flag_wait("player_at_cctv_room");
-  set_objective(level.obj_restore_control, getent("cctv_door", "targetname").origin);
+  set_objective(level.obj_restore_control, getEnt("cctv_door", "targetname").origin);
   waittill_ai_group_ai_count("aigroup_cctv_room", 0);
   level thread cctv_room_door_opens_and_gates_player();
   set_objective(level.obj_restore_control, undefined, "done");
-  cctv_trigger = getent("mason_security_feed_trigger", "targetname");
+  cctv_trigger = getEnt("mason_security_feed_trigger", "targetname");
   cctv_trigger trigger_on();
   s_objective_marker = get_struct("objective_marker_cctv_anim_start", "targetname", 1);
   set_objective(level.obj_cctv, s_objective_marker.origin, "");
@@ -366,13 +366,13 @@ save_restored_cctv_bink() {
 
 cctv_room_door_opens_and_gates_player() {
   m_origin = get_model_or_models_from_scene("cctv_security_room_door_opens", "cctv_room_door");
-  m_door = getent("cctv_door", "targetname");
+  m_door = getEnt("cctv_door", "targetname");
   m_door.v_original_position = m_door.origin;
   m_door.v_original_angles = m_door.angles;
-  m_door linkto(m_origin, "origin_animate_jnt");
-  m_door_clip = getent("cctv_door_clip", "targetname");
+  m_door linkTo(m_origin, "origin_animate_jnt");
+  m_door_clip = getEnt("cctv_door_clip", "targetname");
   flag_wait("player_outside_cctv_room");
-  m_door_clip rotateyaw(-110, 1, 0.2, 0.2);
+  m_door_clip rotateYaw(-110, 1, 0.2, 0.2);
   run_scene_and_delete("cctv_security_room_door_opens");
   level thread turn_on_cctv();
   checkpoint_respawn_safe_spot_clear();
@@ -381,7 +381,7 @@ cctv_room_door_opens_and_gates_player() {
   setmusicstate("BLACKOUT_PRE_MENENDEZ");
   stop_exploder(1111);
   level.player thread queue_dialog("sect_seal_the_door_0");
-  m_door_clip rotateyaw(110, 0.1);
+  m_door_clip rotateYaw(110, 0.1);
   run_scene_and_delete("cctv_security_room_door_closes");
   m_door.origin = m_door.v_original_position;
   m_door.angles = m_door.v_original_angles;
@@ -402,7 +402,7 @@ harper_takeover_turret() {
   if(level.is_harper_alive) {
     trigger_wait("trigger_harper_turret_hack");
     dialog_harper_turret();
-    turret = getent("security_turret", "targetname");
+    turret = getEnt("security_turret", "targetname");
 
     if(isDefined(turret) && isalive(turret)) {
       turret turret_set_team("allies");
@@ -478,7 +478,7 @@ notetrack_window_throw_attach_gun(ai_pmc) {
   ai_pmc gun_switchto(ai_pmc.primaryweapon, "right");
   ai_pmc.temp_weapon = spawn("weapon_" + ai_pmc.primaryweapon, ai_pmc gettagorigin("tag_weapon_right"));
   ai_pmc.temp_weapon.angles = ai_pmc gettagangles("tag_weapon_right");
-  ai_pmc.temp_weapon linkto(ai_pmc, "tag_weapon_right");
+  ai_pmc.temp_weapon linkTo(ai_pmc, "tag_weapon_right");
   ai_pmc gun_switchto(ai_pmc.primaryweapon, "none");
 }
 
@@ -509,7 +509,7 @@ scene_torchcutters() {
 }
 
 scene_cctv_taunt_mason() {
-  origin = getstruct("menendez_start_extracam", "targetname");
+  origin = getStruct("menendez_start_extracam", "targetname");
   sm_cam_ent = spawn_model("tag_origin", origin.origin, origin.angles);
   sm_cam_ent.targetname = origin.targetname + "_cam_ent";
   level.extra_cam_surfaces["cctv_right"] show();
@@ -568,7 +568,7 @@ setup_briggs() {
 }
 
 spawn_briggs() {
-  briggs_spawner = getent("briggs", "targetname");
+  briggs_spawner = getEnt("briggs", "targetname");
   briggs_spawner add_spawn_function(::setup_briggs);
   level.briggs = init_hero_startstruct("briggs", "briggs_meat_shield_start");
   level.briggs gun_switchto(level.briggs.sidearm, "right");
@@ -581,7 +581,7 @@ scene_security_reboot() {
   spawn_briggs();
   level thread run_scene("briggs_pip");
   level thread set_force_no_cull_on_actors_during_scene("briggs_pip", "mason_watches_menendez_in_server_room_done");
-  origin = getstruct("pip_glasses_pos", "targetname");
+  origin = getStruct("pip_glasses_pos", "targetname");
   sm_cam_ent = spawn_model("tag_origin", origin.origin, origin.angles);
   sm_cam_ent.targetname = origin.targetname + "_cam_ent";
   sm_cam_ent setclientflag(11);

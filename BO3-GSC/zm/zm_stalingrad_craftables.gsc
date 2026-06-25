@@ -95,7 +95,7 @@ function function_6545e739(player) {
 }
 
 function function_7de936c2(player) {
-  var_a23d8924 = getent("dragonride_fuse_box", "targetname");
+  var_a23d8924 = getEnt("dragonride_fuse_box", "targetname");
   if(isDefined(var_a23d8924)) {
     var_a23d8924 playSound("zmb_zod_fuse_place");
   }
@@ -104,7 +104,7 @@ function function_7de936c2(player) {
 function function_39c3c699() {
   level flag::set("dragonride_crafted");
   zm_spawner::register_zombie_death_event_callback();
-  var_a21e2a98 = getent("dragonride_fuse_box", "targetname");
+  var_a21e2a98 = getEnt("dragonride_fuse_box", "targetname");
   var_a21e2a98 hidepart("tag_dragon_network_console_screen_red");
   var_a21e2a98 showpart("tag_dragon_network_console_screen_green");
   level thread zm_stalingrad_vo::function_6576bb4b();

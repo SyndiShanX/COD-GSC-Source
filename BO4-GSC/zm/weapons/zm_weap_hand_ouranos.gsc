@@ -177,9 +177,9 @@ function_56a040a5(b_up) {
   forward_view_angles = anglesToForward(self getplayerangles());
 
   if(forward_view_angles[2] < -0.7) {
-    var_ccb70dad = vectornormalize((forward_view_angles[0], forward_view_angles[1], -0.25));
+    var_ccb70dad = vectorNormalize((forward_view_angles[0], forward_view_angles[1], -0.25));
   } else {
-    var_ccb70dad = vectornormalize(forward_view_angles);
+    var_ccb70dad = vectorNormalize(forward_view_angles);
   }
 
   a_e_targets = function_3874b38f();
@@ -298,7 +298,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
   }
 
   if(!isDefined(ai_zombie)) {
-    e_projectile moveto(v_end, n_time);
+    e_projectile moveTo(v_end, n_time);
     e_projectile waittill(#"movedone");
     e_projectile clientfield::increment("ouranos_impact");
     waitframe(1);
@@ -318,7 +318,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
       }
 
       if(isDefined(ai_zombie)) {
-        e_projectile moveto(ai_zombie getcentroid(), n_time);
+        e_projectile moveTo(ai_zombie getcentroid(), n_time);
         wait n_time - 0.05;
       }
     } else if(isDefined(ai_zombie)) {
@@ -341,11 +341,11 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
       }
 
       if(e_projectile.n_index === 1) {
-        e_projectile moveto(v_right_end, n_time);
+        e_projectile moveTo(v_right_end, n_time);
       } else if(e_projectile.n_index === 2) {
-        e_projectile moveto(v_left_end, n_time);
+        e_projectile moveTo(v_left_end, n_time);
       } else {
-        e_projectile moveto(v_end, n_time);
+        e_projectile moveTo(v_end, n_time);
       }
 
       wait n_time - 0.05;
@@ -395,7 +395,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
         }
 
         if(isDefined(v_end) && isDefined(ai_zombie)) {
-          e_projectile moveto(v_end, n_time);
+          e_projectile moveTo(v_end, n_time);
         }
 
         waitframe(1);
@@ -413,7 +413,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
   }
 
   if(isDefined(v_end)) {
-    e_projectile moveto(v_end, 0.05);
+    e_projectile moveTo(v_end, 0.05);
     e_projectile waittill(#"movedone");
   }
 
@@ -460,7 +460,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
   var_61906722 = randomfloatrange(250, 300);
 
   if(!isDefined(v_to_target)) {
-    v_to_target = vectornormalize(e_target.origin - self.origin + (n_random_x, n_random_y, var_61906722));
+    v_to_target = vectorNormalize(e_target.origin - self.origin + (n_random_x, n_random_y, var_61906722));
   }
 
   if(isactor(e_target) && zm_utility::is_magic_bullet_shield_enabled(e_target)) {
@@ -542,7 +542,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
       }
 
       e_target zm_utility::function_ffc279(v_fling, self, undefined, weapon);
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
     }
   } else {
     e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);

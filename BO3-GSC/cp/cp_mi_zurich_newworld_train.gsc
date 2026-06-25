@@ -113,7 +113,7 @@ function function_63d2d91e() {
   self clientfield::set("train_fx_occlude", 1);
   var_bf143437 = getEntArray("probe_inf_white_igc", "script_noteworthy");
   foreach(var_7aa19f58 in var_bf143437) {
-    var_7aa19f58 linkto(self);
+    var_7aa19f58 linkTo(self);
   }
   self waittill("hash_999f40e4");
   self hidepart("tag_glass");
@@ -467,7 +467,7 @@ function play_train_wakeup_robot(a_ents) {
 
 function done_train_wakeup_robot(a_ents) {
   if(isDefined(self.target)) {
-    e_goalvolume = getent(self.target, "targetname");
+    e_goalvolume = getEnt(self.target, "targetname");
     if(!isDefined(e_goalvolume)) {
       nd_target = getnode(self.target, "targetname");
       a_ents["train_wakeup_robot"] setgoal(nd_target, 1);
@@ -806,7 +806,7 @@ function function_84631064(a_ents) {
 
 function start_sequential_train_door_lockdown() {
   clientfield::set("train_lockdown_shutters_5", 1);
-  e_trigger = getent("train_car_lockdown_04", "targetname");
+  e_trigger = getEnt("train_car_lockdown_04", "targetname");
   e_trigger wait_for_train_car_to_be_empty();
   var_5bcb8a4d = struct::get_array("train_civilians_car_1", "script_noteworthy");
   foreach(s_scene in var_5bcb8a4d) {
@@ -816,7 +816,7 @@ function start_sequential_train_door_lockdown() {
   }
   level clientfield::set("inbound_igc_glass", 0);
   clientfield::set("train_lockdown_shutters_4", 1);
-  e_trigger = getent("train_car_lockdown_03", "targetname");
+  e_trigger = getEnt("train_car_lockdown_03", "targetname");
   e_trigger wait_for_train_car_to_be_empty();
   var_5bcb8a4d = struct::get_array("train_civilians_car_2", "script_noteworthy");
   foreach(s_scene in var_5bcb8a4d) {
@@ -827,7 +827,7 @@ function start_sequential_train_door_lockdown() {
   var_809fd273 = struct::get("train_car_2_robot_charger", "targetname");
   var_809fd273 scene::stop(1);
   clientfield::set("train_lockdown_shutters_3", 1);
-  e_trigger = getent("train_car_lockdown_02", "targetname");
+  e_trigger = getEnt("train_car_lockdown_02", "targetname");
   e_trigger wait_for_train_car_to_be_empty();
   var_5bcb8a4d = struct::get_array("train_civilians_car_3", "script_noteworthy");
   foreach(s_scene in var_5bcb8a4d) {
@@ -844,10 +844,10 @@ function start_sequential_train_door_lockdown() {
   level clientfield::set("train_robot_swing_glass_left", 0);
   level clientfield::set("train_robot_swing_glass_right", 0);
   clientfield::set("train_lockdown_shutters_2", 1);
-  var_dee3d10a = getent("train_rooftop_regroup_zone", "targetname");
+  var_dee3d10a = getEnt("train_rooftop_regroup_zone", "targetname");
   var_dee3d10a.var_3367c99d = 1000;
   var_dee3d10a waittill("trigger");
-  e_trigger = getent("train_car_lockdown_01", "targetname");
+  e_trigger = getEnt("train_car_lockdown_01", "targetname");
   e_trigger wait_for_train_car_to_be_empty();
   trigger::use("enable_car_0_respawns");
   var_5bcb8a4d = struct::get_array("train_civilians_car_4", "script_noteworthy");
@@ -908,28 +908,28 @@ function wait_for_train_car_to_be_empty() {
 
 function train_car_door_lock(n_index) {
   trigger::use(("disable_car_" + n_index) + "_respawns");
-  var_265e12e8 = getent(("train_lockdown_door_0" + n_index) + "_l", "targetname");
-  var_3a80c4a6 = getent(("train_lockdown_door_0" + n_index) + "_r", "targetname");
+  var_265e12e8 = getEnt(("train_lockdown_door_0" + n_index) + "_l", "targetname");
+  var_3a80c4a6 = getEnt(("train_lockdown_door_0" + n_index) + "_r", "targetname");
   var_265e12e8 movey(-64, 0.2);
   var_3a80c4a6 movey(64, 0.2);
   var_3a80c4a6 playSound("evt_train_door_close");
   var_265e12e8 waittill("movedone");
-  var_265e12e8 disconnectpaths(0, 0);
-  var_3a80c4a6 disconnectpaths(0, 0);
-  e_gate = getent("train_umbra_gate_0" + n_index, "targetname");
+  var_265e12e8 disconnectPaths(0, 0);
+  var_3a80c4a6 disconnectPaths(0, 0);
+  e_gate = getEnt("train_umbra_gate_0" + n_index, "targetname");
   e_gate show();
   e_gate solid();
   umbragate_set("train_umbra_gate_0" + n_index, 0);
 }
 
 function function_42e02b4(n_index) {
-  e_gate = getent("train_umbra_gate_0" + n_index, "targetname");
+  e_gate = getEnt("train_umbra_gate_0" + n_index, "targetname");
   e_gate ghost();
   e_gate notsolid();
   e_gate connectpaths();
   umbragate_set("train_umbra_gate_0" + n_index, 1);
-  var_265e12e8 = getent(("train_lockdown_door_0" + n_index) + "_l", "targetname");
-  var_3a80c4a6 = getent(("train_lockdown_door_0" + n_index) + "_r", "targetname");
+  var_265e12e8 = getEnt(("train_lockdown_door_0" + n_index) + "_l", "targetname");
+  var_3a80c4a6 = getEnt(("train_lockdown_door_0" + n_index) + "_r", "targetname");
   var_265e12e8 movey(64, 0.2);
   var_3a80c4a6 movey(-64, 0.2);
   var_3a80c4a6 playSound("evt_train_door_open");
@@ -944,7 +944,7 @@ function function_57409da3() {
   level flag::init("train_car_3_locked_down");
   level flag::init("train_car_2_locked_down");
   level flag::init("train_car_1_locked_down");
-  e_gate = getent("train_umbra_gate_04", "targetname");
+  e_gate = getEnt("train_umbra_gate_04", "targetname");
   e_gate ghost();
   e_gate notsolid();
   e_gate connectpaths();
@@ -955,15 +955,15 @@ function function_57409da3() {
   level thread train_car_door_lock(1);
   trigger::wait_till("train_car_lockdown_03");
   function_42e02b4(3);
-  e_trigger = getent("train_car_lockdown_04", "targetname");
+  e_trigger = getEnt("train_car_lockdown_04", "targetname");
   e_trigger thread wait_for_train_car_to_be_empty();
   trigger::wait_till("train_car_lockdown_02");
   function_42e02b4(2);
-  e_trigger = getent("train_car_lockdown_03", "targetname");
+  e_trigger = getEnt("train_car_lockdown_03", "targetname");
   e_trigger thread wait_for_train_car_to_be_empty();
   trigger::wait_till("train_car_lockdown_01");
   function_42e02b4(1);
-  e_trigger = getent("train_car_lockdown_02", "targetname");
+  e_trigger = getEnt("train_car_lockdown_02", "targetname");
   e_trigger thread wait_for_train_car_to_be_empty();
 }
 
@@ -1046,7 +1046,7 @@ function function_33267d4e() {
 function train_wind_resistance() {
   level endon("detach_bomb_igc_terminate");
   level thread player_on_top_of_train_watcher();
-  e_volume = getent("train_rooftop_volume", "targetname");
+  e_volume = getEnt("train_rooftop_volume", "targetname");
   while(isDefined(e_volume)) {
     foreach(player in level.players) {
       if(!(isDefined(player.is_on_train_roof) && player.is_on_train_roof) && player istouching(e_volume)) {
@@ -1058,7 +1058,7 @@ function train_wind_resistance() {
 }
 
 function player_on_top_of_train_watcher() {
-  e_trigger = getent("player_enters_train_rooftop", "targetname");
+  e_trigger = getEnt("player_enters_train_rooftop", "targetname");
   e_trigger waittill("trigger");
   altered_gravity_enable();
   level.player_on_top_of_train = 1;
@@ -1178,7 +1178,7 @@ function skipto_train_rooftop_init(str_objective, b_starting) {
   level thread function_13b3e595();
   level thread function_376cc585();
   level thread scene::play("p7_fxanim_cp_newworld_train_quadtank_tarp_bundle");
-  var_3b374bac = getent("train_detach_bomb_hack", "targetname");
+  var_3b374bac = getEnt("train_detach_bomb_hack", "targetname");
   var_3b374bac triggerenable(0);
   trigger::wait_till("train_1st_rooftop_enemy_spawns");
   if(level.activeplayers.size > 1) {
@@ -1220,7 +1220,7 @@ function function_422fbc49() {
   self endon("death");
   self.script_accuracy = 0.1;
   self ai::set_behavior_attribute("sprint", 1);
-  e_goalvolume = getent(self.target, "targetname");
+  e_goalvolume = getEnt(self.target, "targetname");
   self setgoal(e_goalvolume, 1);
   a_flags = [];
   a_flags[0] = "climb_up_robots_cleared";
@@ -1257,7 +1257,7 @@ function train_quadtank_scenes() {
 
 function function_3f4179e6(a_ents) {
   foreach(ent in a_ents) {
-    ent setplayercollision(0);
+    ent setPlayerCollision(0);
   }
 }
 
@@ -1340,7 +1340,7 @@ function skipto_detach_bomb_igc_init(str_objective, b_starting) {
       s_scene scene::skipto_end();
     }
     function_cfb8d002();
-    var_3b374bac = getent("train_detach_bomb_hack", "targetname");
+    var_3b374bac = getEnt("train_detach_bomb_hack", "targetname");
     var_3b374bac triggerenable(0);
     load::function_c32ba481();
     level clientfield::set("train_main_fx_occlude", 1);
@@ -1377,9 +1377,9 @@ function skipto_detach_bomb_igc_done(str_objective, b_starting, b_direct, player
     objectives::complete("cp_level_newworld_train_subobj_hack_door");
   }
   level clientfield::set("train_brake_flaps", 2);
-  var_265e12e8 = getent("train_bomb_push_door_l", "targetname");
+  var_265e12e8 = getEnt("train_bomb_push_door_l", "targetname");
   var_265e12e8 delete();
-  var_3a80c4a6 = getent("train_bomb_push_door_r", "targetname");
+  var_3a80c4a6 = getEnt("train_bomb_push_door_r", "targetname");
   var_3a80c4a6 delete();
   level notify("hash_f49d815e");
   level thread function_f0cad19e();
@@ -1387,7 +1387,7 @@ function skipto_detach_bomb_igc_done(str_objective, b_starting, b_direct, player
 
 function function_84dc13df() {
   objectives::set("cp_level_newworld_train_subobj_hack_door");
-  var_3b374bac = getent("train_detach_bomb_hack", "targetname");
+  var_3b374bac = getEnt("train_detach_bomb_hack", "targetname");
   var_3b374bac triggerenable(1);
   e_player = newworld_util::function_16dd8c5f("train_detach_bomb_hack", &"cp_level_newworld_access_door", &"CP_MI_ZURICH_NEWWORLD_HACK", "train_door_panel", "train_door_hacked", 0);
   objectives::complete("cp_level_newworld_train_subobj_hack_door");
@@ -1401,10 +1401,10 @@ function function_cfb8d002() {
 
 function function_368767cf(a_ents) {
   var_3ebf068e = a_ents["newworld_train_end"];
-  var_3ebf068e enablelinkto();
+  var_3ebf068e enablelinkTo();
   var_bf143437 = getEntArray("snw_bomb_detach", "script_noteworthy");
   foreach(e_probe in var_bf143437) {
-    e_probe linkto(var_3ebf068e);
+    e_probe linkTo(var_3ebf068e);
   }
   var_3ebf068e ghost();
 }
@@ -1423,12 +1423,12 @@ function detach_bomb_igc(e_player) {
   scene::add_scene_func("cin_new_16_01_detachbombcar_1st_detach", &function_37f058fc, "play");
   level thread scene::play("cin_new_16_01_detachbombcar_1st_detach", e_player);
   hidemiscmodels("train_bomb_exterior_hide");
-  var_3ebf068e = getent("newworld_train_end", "targetname");
+  var_3ebf068e = getEnt("newworld_train_end", "targetname");
   var_3ebf068e show();
   level waittill("hash_8fa0f2c");
-  var_3a80c4a6 = getent("train_bomb_push_door_r", "targetname");
+  var_3a80c4a6 = getEnt("train_bomb_push_door_r", "targetname");
   var_3a80c4a6 movey(-64, 0.5);
-  var_265e12e8 = getent("train_bomb_push_door_l", "targetname");
+  var_265e12e8 = getEnt("train_bomb_push_door_l", "targetname");
   var_265e12e8 movey(64, 0.5);
 }
 
@@ -1479,7 +1479,7 @@ function function_7db3194d(a_ents) {
 function function_778d22d7(a_ents) {
   a_ents["player 1"] waittill("train_explosion");
   exploder::exploder("ex_bomb_igc");
-  var_3ebf068e = getent("newworld_train_end", "targetname");
+  var_3ebf068e = getEnt("newworld_train_end", "targetname");
   var_3ebf068e clientfield::set("train_explosion_fx", 1);
 }
 
@@ -1494,27 +1494,27 @@ function function_68c5ad6d() {
 }
 
 function function_de13d6e2(var_be1a191b = 0) {
-  level.var_55c8b6a7 = getent("train_terrain_country_01_track_01", "targetname");
+  level.var_55c8b6a7 = getEnt("train_terrain_country_01_track_01", "targetname");
   level.var_55c8b6a7 function_52874109("country_01_lighting");
-  level.var_e3c1476c = getent("train_terrain_country_01_track_02", "targetname");
+  level.var_e3c1476c = getEnt("train_terrain_country_01_track_02", "targetname");
   level.var_e3c1476c function_52874109("country_02_lighting");
-  level.var_9c3c1d5 = getent("train_terrain_country_01_track_03", "targetname");
+  level.var_9c3c1d5 = getEnt("train_terrain_country_01_track_03", "targetname");
   level.var_9c3c1d5 function_52874109("country_03_lighting");
-  level.var_1bfadc08 = getent("train_terrain_country_02_track_01", "targetname");
+  level.var_1bfadc08 = getEnt("train_terrain_country_02_track_01", "targetname");
   level.var_1bfadc08 function_52874109("country2_01_lighting");
-  level.var_8e024b43 = getent("train_terrain_country_02_track_02", "targetname");
+  level.var_8e024b43 = getEnt("train_terrain_country_02_track_02", "targetname");
   level.var_8e024b43 function_52874109("country2_02_lighting");
-  level.var_67ffd0da = getent("train_terrain_country_02_track_03", "targetname");
+  level.var_67ffd0da = getEnt("train_terrain_country_02_track_03", "targetname");
   level.var_67ffd0da function_52874109("country2_03_lighting");
-  level.var_accc6632 = getent("train_terrain_tunnel_01_track_01", "targetname");
+  level.var_accc6632 = getEnt("train_terrain_tunnel_01_track_01", "targetname");
   level.var_accc6632 function_52874109("tunnel_01_lighting");
-  level.var_86c9ebc9 = getent("train_terrain_tunnel_01_track_02", "targetname");
+  level.var_86c9ebc9 = getEnt("train_terrain_tunnel_01_track_02", "targetname");
   level.var_86c9ebc9 function_52874109("tunnel_02_lighting");
-  level.var_60c77160 = getent("train_terrain_tunnel_01_track_03", "targetname");
+  level.var_60c77160 = getEnt("train_terrain_tunnel_01_track_03", "targetname");
   level.var_60c77160 function_52874109("tunnel_03_lighting");
-  level.var_689205c5 = getent("train_terrain_city_01_track_01", "targetname");
-  level.var_8e94802e = getent("train_terrain_city_01_track_02", "targetname");
-  level.var_b496fa97 = getent("train_terrain_city_01_track_03", "targetname");
+  level.var_689205c5 = getEnt("train_terrain_city_01_track_01", "targetname");
+  level.var_8e94802e = getEnt("train_terrain_city_01_track_02", "targetname");
+  level.var_b496fa97 = getEnt("train_terrain_city_01_track_03", "targetname");
   if(var_be1a191b == 1) {
     level.var_689205c5 delete();
     level.var_8e94802e delete();
@@ -1527,7 +1527,7 @@ function function_de13d6e2(var_be1a191b = 0) {
   foreach(var_7d2a21b6 in a_env) {
     if(isDefined(var_7d2a21b6.var_685c7a0b)) {
       foreach(var_f4933ec0 in var_7d2a21b6.var_685c7a0b) {
-        var_f4933ec0 linkto(var_7d2a21b6);
+        var_f4933ec0 linkTo(var_7d2a21b6);
       }
     }
     function_8b08d700(var_7d2a21b6);
@@ -1763,9 +1763,9 @@ function function_7d334045() {
   e_2 = level.var_8e94802e;
   e_3 = level.var_b496fa97;
   level notify("hash_f49d815e");
-  e_1 moveto(e_1.origin, 0.05);
-  e_2 moveto(e_2.origin, 0.05);
-  e_3 moveto(e_3.origin, 0.05);
+  e_1 moveTo(e_1.origin, 0.05);
+  e_2 moveTo(e_2.origin, 0.05);
+  e_3 moveTo(e_3.origin, 0.05);
 }
 
 function function_9eb901e() {
@@ -1776,12 +1776,12 @@ function function_9eb901e() {
   var_2a854236 = level.var_8e024b43;
   var_482c7cd = level.var_67ffd0da;
   level notify("hash_f49d815e");
-  e_1 moveto(e_1.origin, 0.05);
-  e_2 moveto(e_2.origin, 0.05);
-  e_3 moveto(e_3.origin, 0.05);
-  var_5087bc9f moveto(var_5087bc9f.origin, 0.05);
-  var_2a854236 moveto(var_2a854236.origin, 0.05);
-  var_482c7cd moveto(var_482c7cd.origin, 0.05);
+  e_1 moveTo(e_1.origin, 0.05);
+  e_2 moveTo(e_2.origin, 0.05);
+  e_3 moveTo(e_3.origin, 0.05);
+  var_5087bc9f moveTo(var_5087bc9f.origin, 0.05);
+  var_2a854236 moveTo(var_2a854236.origin, 0.05);
+  var_482c7cd moveTo(var_482c7cd.origin, 0.05);
 }
 
 function function_f0cad19e() {
@@ -1821,7 +1821,7 @@ function function_c24ce0f9(a_s_teleports) {
       self enableinvulnerability();
       self ghost();
       self util::freeze_player_controls(1);
-      self setorigin(s_spot.origin);
+      self setOrigin(s_spot.origin);
       self setplayerangles(s_spot.angles);
       self clientfield::increment_to_player("postfx_igc");
       util::wait_network_frame();
@@ -1841,7 +1841,7 @@ function function_c24ce0f9(a_s_teleports) {
 
 function train_robot_fell_off() {
   level endon("detach_bomb_igc_terminate");
-  e_trigger = getent("train_bad_area_robots", "targetname");
+  e_trigger = getEnt("train_bad_area_robots", "targetname");
   while(true) {
     e_trigger waittill("trigger", e_who);
     if(!isPlayer(e_who)) {
@@ -1852,7 +1852,7 @@ function train_robot_fell_off() {
 
 function function_f9012fc() {
   level endon("detach_bomb_igc_terminate");
-  var_32400ae0 = getent("train_grenades_make_duds", "targetname");
+  var_32400ae0 = getEnt("train_grenades_make_duds", "targetname");
   foreach(player in level.players) {
     player thread grenade_toss(var_32400ae0);
   }

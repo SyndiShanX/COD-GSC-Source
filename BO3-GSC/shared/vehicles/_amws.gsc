@@ -209,8 +209,8 @@ function state_stationary_update(params) {
       }
       if(self vehcansee(self.enemy)) {
         if(distsqr < (self.settings.engagementdistmax * 3) * (self.settings.engagementdistmax * 3)) {
-          self setturrettargetent(self.enemy, vectorscale((0, 0, -1), 5));
-          self setgunnertargetent(self.enemy, vectorscale((0, 0, -1), 5), 0);
+          self setturrettargetEnt(self.enemy, vectorscale((0, 0, -1), 5));
+          self setgunnertargetEnt(self.enemy, vectorscale((0, 0, -1), 5), 0);
           if(vehicle_ai::iscooldownready("rocket") && self.turretontarget && self.gib_rocket !== 1) {
             self thread firerocketlauncher(self.enemy);
             vehicle_ai::cooldown("rocket", self.settings.rocketcooldown);
@@ -277,7 +277,7 @@ function turretfireupdate() {
       }
     }
     if(isDefined(self.enemy) && self vehcansee(self.enemy) && distancesquared(self.enemy.origin, self.origin) < (self.settings.engagementdistmax * 3) * (self.settings.engagementdistmax * 3)) {
-      self setgunnertargetent(self.enemy, (0, 0, 0), 0);
+      self setgunnertargetEnt(self.enemy, (0, 0, 0), 0);
       if(self is_ai_using_minigun()) {
         self setturretspinning(1);
       }
@@ -366,7 +366,7 @@ function state_combat_update(params) {
       self state_combat_update_wait(0.5);
       continue;
     }
-    self setturrettargetent(self.enemy);
+    self setturrettargetEnt(self.enemy);
     if(self vehcansee(self.enemy)) {
       self.lasttimetargetinsight = gettime();
     }
@@ -457,7 +457,7 @@ function firerocketlauncher(enemy) {
   self notify("stop_rocket_firing_thread");
   self endon("stop_rocket_firing_thread");
   if(isDefined(enemy)) {
-    self setturrettargetent(enemy);
+    self setturrettargetEnt(enemy);
     self util::waittill_any_timeout(1, "turret_on_target");
     if(self.variant == "armored") {
       vehicle_ai::fire_for_rounds(1, 0, enemy);

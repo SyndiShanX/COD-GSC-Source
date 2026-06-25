@@ -57,7 +57,7 @@ function function_d5ed5165(s_window) {
     last_repaired_chunk = chunk;
     if(isDefined(s_window.clip)) {
       s_window.clip triggerenable(1);
-      s_window.clip disconnectpaths();
+      s_window.clip disconnectPaths();
     } else {
       zm_blockers::blocker_disconnect_paths(s_window.neg_start, s_window.neg_end);
     }

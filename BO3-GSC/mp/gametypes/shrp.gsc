@@ -135,7 +135,7 @@ function getrandomweaponnamefromprogression() {
   }
   debug_weapon = getdvarstring("");
   allowproneblock = 1;
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player getstance() == "prone") {
       allowproneblock = 0;

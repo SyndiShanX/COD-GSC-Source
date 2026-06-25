@@ -78,7 +78,7 @@ player_heartbeat() {
       if(flag("player_heartbeat_sound")) {
         level.player thread play_sound_on_entity("breathing_heartbeat");
         wait 0.05;
-        level.player PlayRumbleOnEntity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
       }
 
       wait level.player_heartrate;
@@ -147,7 +147,7 @@ adjust_swivel_over_time(ent) {
     }
 
     start_time = gettime();
-    ent moveto((yaw, 0, 0), time, time * 0.5, time * 0.5);
+    ent moveTo((yaw, 0, 0), time, time * 0.5, time * 0.5);
     wait time;
 
     wait_for_buffer_time_to_pass(start_time, 0.6);
@@ -164,7 +164,7 @@ adjust_swivel_over_time(ent) {
 swivel_ends() {
   level waittill("stop_drunk_walk");
   time = 0.8;
-  level.ground_ref_ent rotateto((0, 0, 0), time, time * 0.5, time * 0.5);
+  level.ground_ref_ent rotateTo((0, 0, 0), time, time * 0.5, time * 0.5);
   wait time;
   level.ground_ref_ent delete();
   level.player playerSetGroundReferenceEnt(undefined);
@@ -227,7 +227,7 @@ swivel() {
     pitch = sin(pitch_sin) * 4 * level.unsteady_scale;
 
     if(!flag("player_limping")) {
-      level.ground_ref_ent rotateto((pitch * 0.15, yaw * -1, pitch * 0.85), time, time * 0.5, time * 0.5);
+      level.ground_ref_ent rotateTo((pitch * 0.15, yaw * -1, pitch * 0.85), time, time * 0.5, time * 0.5);
     }
 
     wait 0.05;
@@ -263,8 +263,8 @@ adjust_roll_ent(roll_ent) {
   walking_count = 0;
   cap = 140;
 
-  struct = getstruct("limp_yaw_ent", "targetname");
-  targ = getstruct(struct.target, "targetname");
+  struct = getStruct("limp_yaw_ent", "targetname");
+  targ = getStruct(struct.target, "targetname");
   angles = vectortoangles(targ.origin - struct.origin);
   forward = anglesToForward(angles);
 
@@ -300,7 +300,7 @@ adjust_roll_ent(roll_ent) {
       time = 2;
       ent = spawn_tag_origin();
       ent.origin = (level.unsteady_scale, 0, 0);
-      ent moveto((1, 0, 0), time, time * 0.5, time * 0.5);
+      ent moveTo((1, 0, 0), time, time * 0.5, time * 0.5);
       for(;;) {
         level.unsteady_scale = ent.origin[0];
         if(level.unsteady_scale == 1) {
@@ -316,12 +316,12 @@ adjust_roll_ent(roll_ent) {
 
     time = 0.45;
     roll = randomfloatrange(-16, -11);
-    roll_ent moveto((roll, 0, 0), time, 0, time);
+    roll_ent moveTo((roll, 0, 0), time, 0, time);
     wait time;
 
     time *= 0.8;
     offset = randomfloatrange(-2, 2);
-    roll_ent moveto((offset, 0, 0), time, time * 0.5, time * 0.5);
+    roll_ent moveTo((offset, 0, 0), time, time * 0.5, time * 0.5);
     wait time;
   }
 }
@@ -349,7 +349,7 @@ limp_thread() {
     set_vision_set("aftermath_hurt", stun_time * 2);
     delaythread(1, ::set_vision_set, "aftermath_walking", stun_time);
     delaythread(stun_time * 2, ::set_vision_set, "aftermath_walking", stun_time);
-    level.player PlayRumbleOnEntity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     level.player blend_movespeedscale(0.25, 0.3);
     level.player delaythread(stun_time * 0.5, ::blend_movespeedscale, ENDING_MOVE_SPEED, stun_time);
 
@@ -462,13 +462,13 @@ stumble(stumble_angles, stumble_time, recover_time, no_notify) {
   }
   stumble_angles = adjust_angles_to_player(stumble_angles);
 
-  level.ground_ref_ent rotateto(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
+  level.ground_ref_ent rotateTo(stumble_angles, stumble_time, (stumble_time / 4 * 3), (stumble_time / 4));
   level.ground_ref_ent waittill("rotatedone");
 
   base_angles = (randomfloat(4) - 4, randomfloat(5), 0);
   base_angles = adjust_angles_to_player(base_angles);
 
-  level.ground_ref_ent rotateto(base_angles, recover_time, 0, recover_time / 2);
+  level.ground_ref_ent rotateTo(base_angles, recover_time, 0, recover_time / 2);
   level.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(no_notify)) {
@@ -478,18 +478,18 @@ stumble(stumble_angles, stumble_time, recover_time, no_notify) {
 
 recover() {
   angles = adjust_angles_to_player((-5, -5, 0));
-  level.ground_ref_ent rotateto(angles, .6, 0.6, 0);
+  level.ground_ref_ent rotateTo(angles, .6, 0.6, 0);
   level.ground_ref_ent waittill("rotatedone");
 
   angles = adjust_angles_to_player((-15, -20, 0));
-  level.ground_ref_ent rotateto(angles, 2.5, 0, 2.5);
+  level.ground_ref_ent rotateTo(angles, 2.5, 0, 2.5);
   level.ground_ref_ent waittill("rotatedone");
 
   angles = adjust_angles_to_player((5, 5, 0));
-  level.ground_ref_ent rotateto(angles, 2.5, 2, 0.5);
+  level.ground_ref_ent rotateTo(angles, 2.5, 2, 0.5);
   level.ground_ref_ent waittill("rotatedone");
 
-  level.ground_ref_ent rotateto((0, 0, 0), 1, 0.2, 0.8);
+  level.ground_ref_ent rotateTo((0, 0, 0), 1, 0.2, 0.8);
 }
 
 create_overlay_element(shader_name, start_alpha) {

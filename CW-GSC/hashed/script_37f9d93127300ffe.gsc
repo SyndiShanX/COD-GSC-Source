@@ -128,7 +128,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   array::thread_all(sniper_overlook_volumes, &namespace_d9b153b9::ent_cleanup);
   door_struct = namespace_d9b153b9::door_setup("sniper_overlook_door_struct", 1, 1);
   door_struct thread namespace_d9b153b9::ent_cleanup();
-  clip = getent("sniper_overlook_player_blocker_clip_for_turning_off_districts", "targetname");
+  clip = getEnt("sniper_overlook_player_blocker_clip_for_turning_off_districts", "targetname");
   clip thread namespace_d9b153b9::ent_cleanup();
 }
 
@@ -149,7 +149,7 @@ function function_c26b0bc0() {
 
 function function_85393839() {
   wait 2;
-  vol_binoculars_house_target = getent("vol_binoculars_house_target", "targetname");
+  vol_binoculars_house_target = getEnt("vol_binoculars_house_target", "targetname");
   objectives::function_4eb5c04a("clear_objective", vol_binoculars_house_target.origin + (0, 0, 8));
   objectives::function_67f87f80("clear_objective", undefined, #"hash_4c04cd21fa55d4e2");
 }
@@ -181,7 +181,7 @@ function sniper_overlook() {
 }
 
 function function_58fc3ddf() {
-  clip = getent("sniper_overlook_player_blocker_clip_for_turning_off_districts", "targetname");
+  clip = getEnt("sniper_overlook_player_blocker_clip_for_turning_off_districts", "targetname");
   clip notsolid();
   level flag::wait_till("flag_sniper_overlook_district_cleanup");
   clip solid();
@@ -665,7 +665,7 @@ function function_a0b36023() {
     level.player playgestureviewmodel("ges_t9_blind_reaction");
   }
 
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level notify(#"hash_5fba9f8fd9c7fc1e");
 
   if(flag::get("flag_sniper_in_strike")) {
@@ -687,7 +687,7 @@ function function_a0b36023() {
 function napalm_strike() {
   thread function_f27c4eda();
   wait 0.15;
-  var_43f2100f = getent("napalmCamShakeLoc", "targetname");
+  var_43f2100f = getEnt("napalmCamShakeLoc", "targetname");
   screenshake(var_43f2100f.origin, 0.6, 0, 0.2, 2, 0.4, -0.8, 2100, 14, 0, 6, 0.6);
   wait 1.5;
   screenshake(var_43f2100f.origin, 0.8, 0, 0.3, 1.8, 0.3, 1, 2100, 13, 0, 6, 0.6);
@@ -729,7 +729,7 @@ function function_6f77f823() {
 
   for(i = 1; i < 45; i++) {
     trace_start = self gettagorigin("tag_origin");
-    var_9cd4bce5 = vectornormalize(var_46c257b5.origin - trace_start);
+    var_9cd4bce5 = vectorNormalize(var_46c257b5.origin - trace_start);
     trace_end = var_46c257b5.origin + var_9cd4bce5 * 500;
     trace = bulletTrace(trace_start, trace_end, 0, self);
     var_70413e45 = (var_9cd4bce5 * -1 + trace[#"normal"]) * 0.5;
@@ -921,7 +921,7 @@ function function_aa8d26c2(var_fa673a5a, binoculars, grenade, var_1262a1ad, var_
 
 function function_df641ff1(var_2fbdcecc) {
   level endon(#"hash_532b11970a5c4f3");
-  vol_binoculars_house_target = getent("vol_binoculars_house_target", "targetname");
+  vol_binoculars_house_target = getEnt("vol_binoculars_house_target", "targetname");
   level.var_a267c0bf = 0;
   level.var_e88d4a19 = 0;
 

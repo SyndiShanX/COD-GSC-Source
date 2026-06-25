@@ -78,17 +78,17 @@ interroation_scene() {
 
 wait_for_player_use_rourke() {
   level.vargas endon("trigger");
-  var_0 = getent("player_use_vargas", "targetname");
+  var_0 = getEnt("player_use_vargas", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
-  var_2 = getent("v_use_trigger", "targetname");
-  var_3 = getent("player_push_lookat", "targetname");
+  var_2 = getEnt("v_use_trigger", "targetname");
+  var_3 = getEnt("player_push_lookat", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
       if(level.player maps\_utility::player_looking_at(var_3.origin)) {
         if(distance2d(level.player.origin, var_0.origin) <= 15) {
           level.vargas makeusable();
-          level.vargas sethintstring(&"JUNGLE_GHOSTS_RORKE_PUSH");
+          level.vargas setHintString(&"JUNGLE_GHOSTS_RORKE_PUSH");
           wait 0.05;
           continue;
         }
@@ -129,13 +129,13 @@ intro_logic(var_0, var_1, var_2) {
   var_1 thread maps\_anim::anim_single(var_0, "int_intro");
   level.player_rig thread handle_player_punch_animation(var_1);
   var_2 maps\_anim::anim_single_solo(level.vargas, "int_intro");
-  level.vargas linkto(var_2);
+  level.vargas linkTo(var_2);
 
   foreach(var_4 in var_0) {
     var_4 thread create_node_and_idle(var_1, "int_intro_idle");
   }
 
-  level.chair_vargas_2 linkto(var_2);
+  level.chair_vargas_2 linkTo(var_2);
   var_2 thread maps\_anim::anim_loop_solo(level.vargas, "int_intro_idle");
   common_scripts\utility::flag_set("player_can_push_chair");
   common_scripts\utility::flag_wait("iplane_start_drag_anim");
@@ -158,8 +158,8 @@ intro_logic(var_0, var_1, var_2) {
   level.player lerpfov(55, 2);
   var_9 = 0.5;
   var_10 = 0.75;
-  level.player_rig moveto(var_8.origin, var_10, 0.25, 0);
-  level.player_rig rotateto(var_8.angles, var_10, 0.25, 0);
+  level.player_rig moveTo(var_8.origin, var_10, 0.25, 0);
+  level.player_rig rotateTo(var_8.angles, var_10, 0.25, 0);
   earthquake(0.4, 1.75, level.player.origin, 500);
   level notify("inter_done");
 }
@@ -202,8 +202,8 @@ do_elias_int_anim() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = level.elias.origin;
   var_0.angles = (0, 0, 0);
-  level.elias linkto(var_0);
-  var_0 rotateyaw(-110, 4);
+  level.elias linkTo(var_0);
+  var_0 rotateYaw(-110, 4);
 }
 
 create_node_and_idle(var_0, var_1) {
@@ -245,9 +245,9 @@ merrick_move_to_edge() {
 
 drag_vargas_to_edge(var_0) {
   var_1 = common_scripts\utility::get_target_ent("vargas_drag_temp");
-  level.vargas linkto(var_0);
-  level.hesh linkto(var_0);
-  level.player_rig linkto(var_0);
+  level.vargas linkTo(var_0);
+  level.hesh linkTo(var_0);
+  level.player_rig linkTo(var_0);
   var_2 = distance(var_0.origin, var_1.origin);
   var_3 = 15.0;
   var_4 = var_2 / var_3;
@@ -306,7 +306,7 @@ drag_on_ls(var_0, var_1, var_2) {
 
     if(var_3[0] > 0.1) {
       level notify("player_pushing");
-      var_4 = vectornormalize(var_1.origin - var_0.origin);
+      var_4 = vectorNormalize(var_1.origin - var_0.origin);
       var_5 = var_2 * 0.07 * (var_3[0] + 0.01);
 
       if(common_scripts\utility::flag("iplane_drag_talk_done")) {
@@ -319,9 +319,9 @@ drag_on_ls(var_0, var_1, var_2) {
         var_5 = var_6;
       }
 
-      var_0 moveto(var_0.origin + var_5 * var_4, 0.1);
+      var_0 moveTo(var_0.origin + var_5 * var_4, 0.1);
       level.old_dist = distance(var_0.origin, var_1.origin) - var_5;
-      level.player playrumbleonentity("tank_rumble");
+      level.player playRumbleOnEntity("tank_rumble");
       common_scripts\utility::flag_set("vargas_drag");
     } else {
       common_scripts\utility::flag_clear("vargas_drag");
@@ -361,7 +361,7 @@ player_hold_vargas(var_0) {
   thread common_scripts\utility::play_sound_in_space("scn_iplane_elias_push_rorke_over", level.player.origin);
   var_2 thread maps\_anim::anim_single_solo(level.player_rig, "int_slam");
   wait 2.2;
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }
 
 blend_player_position() {
@@ -378,7 +378,7 @@ show_rig() {
 
 hesh_hold_vargas(var_0) {
   var_0 notify("stop_loop");
-  level.hesh stopanimscripted();
+  level.hesh stopanimScripted();
   var_1 = common_scripts\utility::get_target_ent("int_hesh_push_node");
   var_1 maps\_anim::anim_reach_solo(level.hesh, "hesh_hold_vargas");
   var_1 thread maps\_anim::anim_first_frame_solo(level.hesh, "hesh_hold_vargas");
@@ -386,7 +386,7 @@ hesh_hold_vargas(var_0) {
 
 elias_move_to_button() {
   var_0 = common_scripts\utility::get_target_ent("int_elias_button_node");
-  level.elias stopanimscripted();
+  level.elias stopanimScripted();
   level.elias notify("stop_first_frame");
   level.elias.anim_node = var_0;
   var_0 maps\_anim::anim_reach_solo(level.elias, "elias_door_open");
@@ -431,25 +431,25 @@ blackscreen_intro(var_0) {
 }
 
 punching_rumbles() {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.2;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.75;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.6;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.9;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.6;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.9;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.8;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 5.5;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.3;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 plane_quakes() {
@@ -463,13 +463,13 @@ plane_quakes() {
 
 open_the_ramp() {
   common_scripts\utility::flag_wait("player_activated_ramps_open");
-  var_0 = getent("ramp_collision", "script_noteworthy");
-  var_0 linkto(level.bay_door_lower_model);
+  var_0 = getEnt("ramp_collision", "script_noteworthy");
+  var_0 linkTo(level.bay_door_lower_model);
   var_1 = 3;
   var_2 = getEntArray("destroy_plane_debris02", "targetname");
 
   foreach(var_4 in var_2) {
-    var_4 linkto(level.bay_door_lower);
+    var_4 linkTo(level.bay_door_lower);
   }
 
   thread maps\iplane::setup_plane_debris(var_2, var_1);
@@ -515,11 +515,11 @@ connect_and_start_tarps() {
   var_1 = getEntArray("crates02", "targetname");
 
   foreach(var_3 in var_0) {
-    var_3 linkto(level.bay_door_lower);
+    var_3 linkTo(level.bay_door_lower);
   }
 
   foreach(var_6 in var_1) {
-    var_6 linkto(level.plane_tail);
+    var_6 linkTo(level.plane_tail);
   }
 
   foreach(var_3 in var_0) {
@@ -546,7 +546,7 @@ connect_and_start_tarps() {
 }
 
 lower_bottom_bay_door(var_0) {
-  self linkto(level.bay_door_lower_model);
+  self linkTo(level.bay_door_lower_model);
   level.bay_door_lower_model.animname = "bottom_ramp";
   level.bay_door_lower_model maps\_anim::setanimtree();
   level.bay_door_lower_model unlink();
@@ -558,11 +558,11 @@ lower_bottom_bay_door(var_0) {
   }
 
   level.bay_door_lower_model waittill("rotatedone");
-  level.bay_door_lower_model linkto(level.plane_core);
+  level.bay_door_lower_model linkTo(level.plane_core);
 }
 
 raise_top_bay_door(var_0) {
-  self linkto(level.bay_door_upper_model);
+  self linkTo(level.bay_door_upper_model);
   level.bay_door_upper_model.animname = "top_ramp";
   level.bay_door_upper_model maps\_anim::setanimtree();
   level.bay_door_upper_model unlink();
@@ -575,7 +575,7 @@ raise_top_bay_door(var_0) {
 
   level.bay_door_upper_model waittill("rotatedone");
   level.bay_door_upper_model thread maps\_utility::play_sound_on_entity("scn_iplane_ramp_open_end");
-  level.bay_door_upper_model linkto(level.plane_core);
+  level.bay_door_upper_model linkTo(level.plane_core);
 }
 
 set_start_positions(var_0) {
@@ -584,7 +584,7 @@ set_start_positions(var_0) {
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":
-        level.player setorigin(var_3.origin);
+        level.player setOrigin(var_3.origin);
         level.player setplayerangles(var_3.angles);
         break;
       case "hesh":
@@ -652,8 +652,8 @@ throw_player_to_window() {
   common_scripts\utility::flag_set("ground_rotate_ref_off");
   level.player playerlinktoblend(level.player_rig, "tag_player");
   level.player_rig unlink();
-  level.player_rig moveto(var_0.origin, 0.15);
-  level.player_rig rotateto(var_0.angles, 0.15);
+  level.player_rig moveTo(var_0.origin, 0.15);
+  level.player_rig rotateTo(var_0.angles, 0.15);
   level.player_rig waittill("movedone");
 }
 
@@ -674,7 +674,7 @@ hidden_rope_think() {
   maps\_anim::setanimtree();
   var_0 thread maps\_anim::anim_first_frame_solo(self, "rope_fire");
   common_scripts\utility::flag_wait("fire_ropes");
-  self linkto(level.rope_main_org);
+  self linkTo(level.rope_main_org);
   var_0 thread maps\_anim::anim_single_solo(self, "rope_fire");
   common_scripts\utility::flag_wait("start_explosion_breach");
   wait 2.5;
@@ -691,7 +691,7 @@ rope_think() {
   maps\_anim::setanimtree();
   var_0 thread maps\_anim::anim_first_frame_solo(self, "rope_fire");
   common_scripts\utility::flag_wait("fire_ropes");
-  self linkto(level.rope_main_org);
+  self linkTo(level.rope_main_org);
   maps\_utility::script_delay();
   self show();
   var_0 thread maps\_anim::anim_single_solo(self, "rope_fire");

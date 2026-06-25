@@ -301,7 +301,7 @@ watch_dryfire() {
 }
 
 intro_overlook_static() {
-  var_0 = common_scripts\utility::getstruct("sniper_introaim_static", "targetname");
+  var_0 = common_scripts\utility::getStruct("sniper_introaim_static", "targetname");
   level.remote_turret_current_fov = 55;
   level.remote_turret_right_arc = 22;
   level.remote_turret_left_arc = 45;
@@ -327,7 +327,7 @@ intro_overlook_static() {
     thread intro_dof(0.7);
     wait 0.4;
     var_1 = length(self.turret_look_at_ent.origin - self.origin);
-    var_0 = common_scripts\utility::getstruct("sniper_introaim_4", "targetname");
+    var_0 = common_scripts\utility::getStruct("sniper_introaim_4", "targetname");
     var_2 = self.origin + anglesToForward(level.player getplayerangles()) * var_1;
     self.turret_look_at_ent.origin = var_2;
     self.player_view_controller snaptotargetentity(self.turret_look_at_ent);
@@ -340,7 +340,7 @@ intro_overlook_static() {
     var_3 = min(var_3, 4);
     var_3 = max(var_3, 1);
     wait 0.05;
-    self.turret_look_at_ent moveto(var_0.origin, var_3, var_3 / 4, var_3 / 4);
+    self.turret_look_at_ent moveTo(var_0.origin, var_3, var_3 / 4, var_3 / 4);
     var_4 = 2;
     self lerpfov(var_4, var_3);
     level.remote_turret_current_fov = var_4;
@@ -444,7 +444,7 @@ monitor_player_bishop() {
     if(level.remote_turret_current_fov < 45) {
       foreach(var_16 in var_6) {
         if(!isDefined(var_16.found)) {
-          var_17 = vectornormalize(var_16.origin - level.player.origin);
+          var_17 = vectorNormalize(var_16.origin - level.player.origin);
           var_18 = vectordot(var_17, var_14);
           var_19 = 0.9975;
 
@@ -476,7 +476,7 @@ monitor_player_bishop() {
         if(isDefined(var_25.found)) {
           continue;
         }
-        var_17 = vectornormalize(var_25.origin - level.player.origin);
+        var_17 = vectorNormalize(var_25.origin - level.player.origin);
         var_18 = vectordot(var_17, var_14);
 
         if(var_18 > 0.998) {
@@ -548,7 +548,7 @@ bishop_in_crosshairs() {
 }
 
 bishop_glimpse() {
-  var_0 = common_scripts\utility::getstruct("vip_sniper_breach_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("vip_sniper_breach_struct", "targetname");
   var_1 = maps\_utility::spawn_targetname("bishop_tease_hech", 1);
   var_1.animname = "bishop";
   var_1.disable_sniper_outline = 1;
@@ -563,7 +563,7 @@ bishop_glimpse() {
   var_3 = maps\_utility::spawn_anim_model("mr_chair");
   var_4 = maps\_utility::spawn_anim_model("mr_chair");
   var_4 setModel("dub_restaurant_chair_dirty_01b");
-  var_4 linkto(var_3, "J_Prop_1");
+  var_4 linkTo(var_3, "J_Prop_1");
   var_5 = [var_2[0], var_2[2]];
   var_6 = [var_1, var_3, var_2[1]];
   var_0 maps\_anim::anim_first_frame([var_3], "bishop_glimpse");
@@ -622,15 +622,15 @@ intro_dof(var_0) {
 
 opening_view_anims(var_0) {
   maps\_utility::delaythread(5, ::player_get_mk32);
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_2 = var_1;
   var_3 = maps\_utility::spawn_anim_model("remote_sniper");
   var_4 = maps\_utility::spawn_anim_model("remote_sniper");
   var_4 setModel("weapon_remote_sniper_gun");
   var_5 = maps\_utility::spawn_anim_model("remote_sniper");
   var_5 setModel("weapon_remote_sniper_tripod");
-  var_4 linkto(var_3, "j_prop_2");
-  var_5 linkto(var_3, "j_prop_1");
+  var_4 linkTo(var_3, "j_prop_2");
+  var_5 linkTo(var_3, "j_prop_1");
   level.prop_sentry = var_3;
   level.intro_anim_from = var_1;
   level.intro_anim_from_keegan = var_2;
@@ -640,7 +640,7 @@ opening_view_anims(var_0) {
   var_6 = level.allies[0] gettagorigin("tag_weapon_left");
   level.bone = spawn("script_model", var_6);
   level.bone setModel("mil_mre_chocolate02");
-  level.bone linkto(level.allies[0], "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  level.bone linkTo(level.allies[0], "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   level.allies[1] thread end_anim_then_loop(var_2, "intro_loop_keegan", "stop_intro_loop", 1);
   level.allies[2] thread end_anim_then_loop(var_1, "intro_player_loop", "stop_intro_loop", 0);
   var_2 maps\_anim::anim_first_frame([level.prop_sentry], "intro_player");
@@ -683,7 +683,7 @@ trig_active_on_look(var_0, var_1, var_2) {
 
   while(!common_scripts\utility::flag(var_2)) {
     var_4 = anglesToForward(level.player.angles);
-    var_5 = vectornormalize(var_0 - level.player.origin);
+    var_5 = vectorNormalize(var_0 - level.player.origin);
     var_6 = vectordot(var_4, var_5);
 
     if(var_3 && var_6 < var_1) {
@@ -707,13 +707,13 @@ handle_intro_ammo_counter() {
 }
 
 pickup_mk32(var_0) {
-  var_1 = getent("mk32_noglow", "targetname");
-  var_2 = getent("mk32_glowy", "targetname");
+  var_1 = getEnt("mk32_noglow", "targetname");
+  var_2 = getEnt("mk32_glowy", "targetname");
   var_2 hide();
   thread opening_view_anims("sniper_placement_merrick");
   maps\_utility::enable_trigger_with_targetname("picked_up_mk32");
-  var_3 = common_scripts\utility::getstruct("mk32_noglow_lookstruct", "targetname");
-  var_4 = getent("picked_up_mk32", "targetname");
+  var_3 = common_scripts\utility::getStruct("mk32_noglow_lookstruct", "targetname");
+  var_4 = getEnt("picked_up_mk32", "targetname");
   var_4 thread trig_active_on_look(var_3.origin, 0.8, "picked_up_mk32");
   common_scripts\utility::flag_wait_or_timeout("picked_up_mk32", 10);
   var_1 delete();
@@ -722,7 +722,7 @@ pickup_mk32(var_0) {
     var_2 show();
   }
 
-  var_5 = common_scripts\utility::getstruct("sniper_placement_forward", "targetname");
+  var_5 = common_scripts\utility::getStruct("sniper_placement_forward", "targetname");
   thread convoy();
   common_scripts\utility::flag_wait("picked_up_mk32");
   setsaveddvar("ammoCounterHide", 0);
@@ -858,13 +858,13 @@ load_up() {
     self.cargo[self.cargo.size] = spawn("script_model", var_5);
     self.cargo[self.cargo.size - 1].angles = self gettagangles("tag_body");
     self.cargo[self.cargo.size - 1] setModel(var_0[var_4]);
-    self.cargo[self.cargo.size - 1] linkto(self);
+    self.cargo[self.cargo.size - 1] linkTo(self);
     self.cargo[self.cargo.size - 1].linked_vehicle = self;
   }
 }
 
 watch_convoy_trig() {
-  var_0 = getent("convoy_touchup", "targetname");
+  var_0 = getEnt("convoy_touchup", "targetname");
 
   while(isDefined(var_0)) {
     var_0 waittill("trigger", var_1);
@@ -933,7 +933,7 @@ go_street() {
   level notify("keegan_stop_tinkering");
   level notify("stop_intro_loop");
   waittillframeend;
-  var_0 = getent("beta_blocker_player_clip", "targetname");
+  var_0 = getEnt("beta_blocker_player_clip", "targetname");
 
   if(isDefined(var_0)) {
     var_0 notsolid();
@@ -950,7 +950,7 @@ go_street() {
 merrick_look_at_flyby() {
   wait 2;
   level.allies[0] maps\_utility::disable_ai_color();
-  var_0 = common_scripts\utility::getstruct("merrick_plane_look", "targetname");
+  var_0 = common_scripts\utility::getStruct("merrick_plane_look", "targetname");
   level.allies[0].animname = "baker";
   var_0 maps\_anim::anim_reach_solo(level.allies[0], "merrick_intro_watch_planes");
   var_0 maps\_anim::anim_single_solo(level.allies[0], "merrick_intro_watch_planes");
@@ -965,7 +965,7 @@ ally_shoot_convoy() {
   thread ally_grenade();
   anim.grenadetimers["AI_teargas_grenade"] = randomintrange(0, 20000);
   var_0 = self;
-  var_1 = getent("stick_me", "targetname");
+  var_1 = getEnt("stick_me", "targetname");
   var_2 = 0;
   var_3 = 0;
   thread watch_last_truck();
@@ -999,7 +999,7 @@ ally_shoot_convoy() {
 }
 
 watch_last_truck() {
-  var_0 = getent("stick_me", "targetname");
+  var_0 = getEnt("stick_me", "targetname");
   var_1 = level.player;
 
   for(;;) {
@@ -1241,16 +1241,16 @@ track_live() {
         }
 
         if(var_22 != "") {
-          var_6 linkto(var_10, var_22);
+          var_6 linkTo(var_10, var_22);
         } else {
           var_9 = 0;
         }
       } else
-        var_6 linkto(var_10);
+        var_6 linkTo(var_10);
     }
 
     if(var_9) {
-      var_7 linkto(var_6);
+      var_7 linkTo(var_6);
       playFXOnTag(common_scripts\utility::getfx("vfx_glow_stickyg_blink"), var_7, "tag_origin");
       wait 7;
       stopFXOnTag(common_scripts\utility::getfx("vfx_glow_stickyg_blink"), var_7, "tag_origin");
@@ -1272,7 +1272,7 @@ track_dud() {
   level endon("death");
   var_0 = self.origin;
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(self);
+  var_1 linkTo(self);
   thread maps\enemyhq_audio::aud_mk32_dud_beep(var_1);
   self waittill("explode", var_2);
 
@@ -1336,10 +1336,10 @@ track_dud() {
         level.player notify("player_tagged_truck");
       }
 
-      var_7 linkto(var_9);
+      var_7 linkTo(var_9);
     }
 
-    var_1 linkto(var_7);
+    var_1 linkTo(var_7);
     thread maps\enemyhq_audio::aud_mk32_dud_beep_hit(var_1, var_10, var_6);
     playFXOnTag(common_scripts\utility::getfx("vfx_glow_stickyg_blink"), var_1, "tag_origin");
     wait 0.6;
@@ -1376,8 +1376,8 @@ watch_for_remote_turret_activate(var_0) {
   self endon("death");
   self notify("stop_watching_remote_sniper");
   self endon("stop_watching_remote_sniper");
-  var_1 = common_scripts\utility::getstruct("sniper_placement", "targetname");
-  var_2 = common_scripts\utility::getstruct("sniper_teleport_default", "targetname");
+  var_1 = common_scripts\utility::getStruct("sniper_placement", "targetname");
+  var_2 = common_scripts\utility::getStruct("sniper_teleport_default", "targetname");
 
   for(;;) {
     self waittill("use_remote_turret");
@@ -1458,7 +1458,7 @@ handle_looper() {
     self vehicle_teleport(var_0, var_1);
     wait 0.1;
     self show();
-    var_3 = common_scripts\utility::getstruct(var_2, "targetname");
+    var_3 = common_scripts\utility::getStruct(var_2, "targetname");
     thread maps\_vehicle::vehicle_paths(var_3);
   }
 }
@@ -1510,7 +1510,7 @@ spawn_cargo_carrier(var_0) {
       var_3[var_4] notsolid();
     }
 
-    var_3[var_4] linkto(var_1);
+    var_3[var_4] linkTo(var_1);
   }
 
   wait 0.1;
@@ -1540,7 +1540,7 @@ oneshot_armada(var_0, var_1) {
 
   var_2 = anglesToForward(self.angles);
   var_3 = self.origin + var_2 * var_0;
-  self moveto(var_3, var_1, 1, 1);
+  self moveTo(var_3, var_1, 1, 1);
   wait(var_1);
   self delete();
 }
@@ -1562,7 +1562,7 @@ loop_armada(var_0, var_1) {
   for(;;) {
     var_4 = anglesToForward(self.angles);
     var_5 = self.origin + var_4 * var_0;
-    self moveto(var_5, var_1, 1, 1);
+    self moveTo(var_5, var_1, 1, 1);
     thread maps\enemyhq_audio::aud_fx_planes();
     wait(var_1);
     self hide();
@@ -1626,7 +1626,7 @@ loop_new_ships() {
   var_3 = [1, 1.3, 1.7, 2];
 
   for(;;) {
-    self moveto(self.dest, self.curr_movetime * var_3[self.my_speed] * self.my_extra, 1, 1);
+    self moveTo(self.dest, self.curr_movetime * var_3[self.my_speed] * self.my_extra, 1, 1);
     wait(self.curr_movetime * var_3[self.my_speed] * self.my_extra);
     self.curr_movetime = var_1;
     self.origin = self.startpos;
@@ -1636,8 +1636,8 @@ loop_new_ships() {
 
 blow_wall() {
   common_scripts\utility::flag_wait("kick_off_atrium_combat");
-  var_0 = getent("security_gate_crash_pieces2", "targetname");
-  var_1 = common_scripts\utility::getstruct("player_teleport_atrium", "targetname");
+  var_0 = getEnt("security_gate_crash_pieces2", "targetname");
+  var_1 = common_scripts\utility::getStruct("player_teleport_atrium", "targetname");
   var_0.animname = "hamburg_security_gate_crash";
   common_scripts\utility::exploder(666);
   common_scripts\utility::exploder(777);
@@ -1672,7 +1672,7 @@ handle_intro_sniper_outline() {
       }
       var_5 = 0.998;
       var_6 = 0;
-      var_7 = vectornormalize(var_4.origin - level.player.origin);
+      var_7 = vectorNormalize(var_4.origin - level.player.origin);
 
       if(vectordot(var_1, var_7) >= var_5) {
         var_6 = 1;
@@ -1724,9 +1724,9 @@ intro_plane_flyby_01() {
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("intro_escort_01b");
   var_2 = getEntArray("flybyA_hide_on_load", "script_noteworthy");
   common_scripts\utility::array_call(var_2, ::show);
-  var_3 = getent("intro_transport_03", "targetname");
-  var_4 = getent("intro_transport_04", "targetname");
-  var_5 = getent("intro_transport_05", "targetname");
+  var_3 = getEnt("intro_transport_03", "targetname");
+  var_4 = getEnt("intro_transport_04", "targetname");
+  var_5 = getEnt("intro_transport_05", "targetname");
   var_3 thread maps\enemyhq_intro::intro_transport_mover(65000, 17);
   var_4 thread maps\enemyhq_intro::intro_transport_mover(65000, 17);
   var_5 thread maps\enemyhq_intro::intro_transport_mover(65000, 17);
@@ -1941,14 +1941,14 @@ field_activity() {
 }
 
 setup_soccer_scene() {
-  var_0 = common_scripts\utility::getstruct("field_soccer_struct", "targetname");
-  var_1 = getent("soccer_pass_guy1", "targetname");
+  var_0 = common_scripts\utility::getStruct("field_soccer_struct", "targetname");
+  var_1 = getEnt("soccer_pass_guy1", "targetname");
   level.soccer_pass_guy1 = var_1 maps\_utility::spawn_ai(1);
-  var_2 = getent("soccer_pass_guy2", "targetname");
+  var_2 = getEnt("soccer_pass_guy2", "targetname");
   level.soccer_pass_guy2 = var_2 maps\_utility::spawn_ai(1);
-  var_3 = getent("soccer_goal_guy1", "targetname");
+  var_3 = getEnt("soccer_goal_guy1", "targetname");
   level.soccer_goal_guy1 = var_3 maps\_utility::spawn_ai(1);
-  var_4 = getent("soccer_goal_guy2", "targetname");
+  var_4 = getEnt("soccer_goal_guy2", "targetname");
   level.soccer_goal_guy2 = var_4 maps\_utility::spawn_ai(1);
   level.soccer_goal_guy1.animname = "soccer_goal_guy1";
   level.soccer_goal_guy2.animname = "soccer_goal_guy2";
@@ -1999,7 +1999,7 @@ exfil_sniper() {
   common_scripts\utility::flag_wait("remote_sniper_ready");
   level.remote_turret_max_fov = 45;
   level.remote_turret_min_fov = 5;
-  var_0 = common_scripts\utility::getstruct("exfil_sniper_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("exfil_sniper_struct", "targetname");
   level.player.turret_look_at_ent.origin = var_0.origin;
   level.remote_turret_current_fov = 25;
   level.player lerpfov(level.remote_turret_current_fov, 0.05);
@@ -2022,7 +2022,7 @@ butchdance() {
   common_scripts\utility::flag_wait("remote_sniper_ready");
   level.remote_turret_max_fov = 30;
   level.remote_turret_min_fov = 5;
-  var_0 = common_scripts\utility::getstruct("butchdance_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("butchdance_struct", "targetname");
   level.player.turret_look_at_ent.origin = var_0.origin;
   var_1 = 4;
   level.remote_turret_current_fov = 20;
@@ -2051,7 +2051,7 @@ rpg_kibble() {
   common_scripts\utility::flag_wait("remote_sniper_ready");
   level.remote_turret_max_fov = 15;
   level.remote_turret_min_fov = 4;
-  var_1 = common_scripts\utility::getstruct("rpg_kibble_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("rpg_kibble_struct", "targetname");
   level.player.turret_look_at_ent.origin = var_1.origin;
   level.remote_turret_current_fov = 12;
   level.player lerpfov(level.remote_turret_current_fov, 0.05);
@@ -2066,7 +2066,7 @@ rpg_kibble() {
 sniper_vip_breach() {
   level.player endon("death");
   common_scripts\utility::flag_wait("activate_vip_sniper");
-  var_0 = common_scripts\utility::getstruct("vip_sniper_breach_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("vip_sniper_breach_struct", "targetname");
   level.remote_turret_start_look = var_0.origin;
   level.remote_turret_right_arc = 10;
   level.remote_turret_left_arc = 10;
@@ -2167,9 +2167,9 @@ setup_sniper_view(var_0, var_1) {
   }
 
   level.player thread watch_for_remote_turret_activate(var_1);
-  var_2 = common_scripts\utility::getstruct("sniper_placement", "targetname");
+  var_2 = common_scripts\utility::getStruct("sniper_placement", "targetname");
   level.remote_sniper_origin = var_2.origin;
-  var_3 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(self.turret_look_at_ent)) {
     self.turret_look_at_ent = spawn("script_model", self.origin);

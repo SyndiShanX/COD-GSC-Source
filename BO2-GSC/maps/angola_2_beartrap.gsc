@@ -139,7 +139,7 @@ bear_trap_closing_animations() {
   beartrap.origin = self.origin;
   beartrap.angles = self.angles;
   self hide();
-  playsoundatposition("exp_beartrap_clamp", self.origin);
+  playSoundAtPosition("exp_beartrap_clamp", self.origin);
   self anim_single(beartrap, "beartrap_snap_closed");
   self thread anim_loop(beartrap, "beartrap_closed_idle", "beartrap_stop_loop");
   self waittill_either("ai_caught_dead", "death");
@@ -156,7 +156,7 @@ cleanup_beartrap_script_model(delay) {
   }
 
   self notify("beartrap_stop_loop");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self delete();
 }
 
@@ -206,7 +206,7 @@ primed_beartrap_explode(guy) {
   wait 4;
   level.num_beartrap_catches = level.num_beartrap_catches + 1;
   playFX(level._effect["def_explosion"], self.origin);
-  playsoundatposition("exp_mortar", self.origin);
+  playSoundAtPosition("exp_mortar", self.origin);
 
   if(isDefined(self.mortar_ref)) {
     self.mortar_ref delete();
@@ -242,7 +242,7 @@ beartrap_search_for_ai_victim(ai_enemy, in_range_distance, vis_dot) {
 
   if(dist_to_trap < in_range_distance) {
     v_ai_forward = anglesToForward(ai_enemy.angles);
-    v_dir_to_trap = vectornormalize(self.origin - ai_enemy.origin);
+    v_dir_to_trap = vectorNormalize(self.origin - ai_enemy.origin);
     dot = vectordot(v_ai_forward, v_dir_to_trap);
 
     if(dot > vis_dot) {
@@ -341,7 +341,7 @@ beartrap_explosive_think() {
 
     if(dist < 64) {
       forward = anglesToForward(level.player.angles);
-      dir = vectornormalize(self.origin - level.player.origin);
+      dir = vectorNormalize(self.origin - level.player.origin);
       dot = vectordot(forward, dir);
 
       if(dot >= 0.0) {
@@ -400,7 +400,7 @@ ai_beartrap_explosive_death(e_beartrap) {
     x = randomintrange(-30, 30);
     y = randomintrange(-30, 30);
     v_launch = (x, y, 100);
-    vectornormalize(v_launch);
+    vectorNormalize(v_launch);
     v_launch = v_launch * 1.5;
     self launchragdoll(v_launch, "J_SpineUpper");
     level.num_beartrap_catches = level.num_beartrap_catches + 1;

@@ -356,7 +356,7 @@ _id_1181(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(self._id_117F) && self._id_117F) {
     return 0;
   }
-  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.8) {
+  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectorNormalize(self.enemy.origin - self.origin)) > 0.8) {
     return 0;
   }
   if(self.a._id_0D26 != "stand" || self.a._id_0D2B != "run" && !animscripts\utility::_id_10B9()) {
@@ -418,7 +418,7 @@ _id_1183(var_0, var_1, var_2, var_3, var_4) {
     self endon("goal_changed");
     self._id_10AD = anim._id_1185[var_0];
     _id_1182(var_5, self._id_10AD);
-    var_11 = vectornormalize(var_1 - self.origin);
+    var_11 = vectorNormalize(var_1 - self.origin);
     var_6 = _id_1189(var_1, var_3, var_0, var_11, var_7, var_8, var_9);
     self._id_10AD = length(anim._id_1186[var_0][var_10]);
     _id_1182(var_5, self._id_10AD);
@@ -484,7 +484,7 @@ _id_1189(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(!level._id_1184 || !var_6) {
-      var_14 = vectornormalize(self._id_1188 - self.origin);
+      var_14 = vectorNormalize(self._id_1188 - self.origin);
       var_15 = var_1 - anim._id_1187[var_2][var_8._id_1162];
       var_16 = anglesToForward((0, var_15, 0));
       var_17 = vectordot(var_14, var_16);
@@ -645,7 +645,7 @@ _id_1192() {
   if(var_3) {
     var_0 = _id_1174(var_2);
   }
-  var_4 = vectornormalize(self.pathgoalpos - self.origin);
+  var_4 = vectorNormalize(self.pathgoalpos - self.origin);
   var_5 = vectortoyaw(var_4);
 
   if(isDefined(self._id_1195)) {
@@ -717,7 +717,7 @@ _id_1192() {
       var_16 = self.angles[1];
     }
     var_20 = var_14 - var_12;
-    var_17 = self.origin + vectornormalize(self.pathgoalpos - self.origin) * var_20;
+    var_17 = self.origin + vectorNormalize(self.pathgoalpos - self.origin) * var_20;
   } else {
     var_16 = self.angles[1];
     var_17 = self.origin;
@@ -1015,7 +1015,7 @@ _id_11A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_11 = (0, var_3 + var_8 * var_7[var_10] + var_9, 0);
-    var_12 = vectornormalize(anglesToForward(var_11));
+    var_12 = vectorNormalize(anglesToForward(var_11));
     var_0._id_1196[var_10] = vectordot(var_4, var_12);
   }
 }

@@ -239,7 +239,7 @@ func_47BB(param_00) {
 func_4681(param_00) {
   var_01 = anglesToForward(param_00.var_001D);
   var_01 = common_scripts\utility::func_3D5D(var_01);
-  var_01 = vectornormalize(var_01);
+  var_01 = vectorNormalize(var_01);
   var_02 = param_00.var_0116 + var_01 * func_467E() + (0, 0, 30);
   var_03 = getclosestpointonnavmesh(var_02, param_00);
   return var_03;

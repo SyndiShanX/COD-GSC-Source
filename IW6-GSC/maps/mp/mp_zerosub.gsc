@@ -170,9 +170,9 @@ setupEvents(setup) {
 }
 
 playEnvironmentAnims() {
-  fanObj01 = GetEnt("zerosub_fan_01", "targetname");
-  fanObj02 = GetEnt("zerosub_fan_02", "targetname");
-  radarObj = GetEnt("zerosub_radar_dish", "targetname");
+  fanObj01 = getEnt("zerosub_fan_01", "targetname");
+  fanObj02 = getEnt("zerosub_fan_02", "targetname");
+  radarObj = getEnt("zerosub_radar_dish", "targetname");
   bushObj01 = getEntArray("zerosub_bush_01", "targetname");
   treeObj02 = getEntArray("zerosub_tree_02", "targetname");
   treeObj03 = getEntArray("zerosub_tree_03", "targetname");
@@ -707,7 +707,7 @@ isOutside() {
   outside = true;
 
   if(!isDefined(level.zerosub_inside_trigger)) {
-    level.zerosub_inside_trigger = GetEnt("mp_zerosub_indoor_triggers", "targetname");
+    level.zerosub_inside_trigger = getEnt("mp_zerosub_indoor_triggers", "targetname");
   }
 
   if(isDefined(level.zerosub_inside_trigger)) {
@@ -774,7 +774,7 @@ watchPlayerspawn() {
 
     if(isDefined(player.beastKillCam)) {
       player.beastKillCam.origin = player.origin + (100, 100, 100);
-      player.beastKillCam LinkTo(player);
+      player.beastKillCam linkTo(player);
     }
 
     player thread playEnvironmentFX();

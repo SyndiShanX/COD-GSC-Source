@@ -305,7 +305,7 @@ psource_hudshow() {
   players = get_players();
 
   players[0] freezecontrols(true);
-  players[0] setorigin(self.origin + (players[0].origin - players[0] getEye()) - vector_multiply(anglesToForward(self.angles), 3));
+  players[0] setOrigin(self.origin + (players[0].origin - players[0] getEye()) - vector_multiply(anglesToForward(self.angles), 3));
   players[0] setplayerangles(self.angles);
   level.photosource.alpha = 1;
   flag_set("psource_refresh");

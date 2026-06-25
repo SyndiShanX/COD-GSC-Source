@@ -29,8 +29,8 @@ function init_stage() {
   zm_temple_sq_brock::delete_radio();
   level flag::clear("meteor_impact");
   level thread lgs_intro();
-  if(getplayers().size == 1) {
-    getplayers()[0] giveweapon(level.w_shrink_ray_upgraded);
+  if(getPlayers().size == 1) {
+    getPlayers()[0] giveweapon(level.w_shrink_ray_upgraded);
   }
 }
 
@@ -43,7 +43,7 @@ function lgs_intro() {
   level thread play_nikolai_farting();
   wait(2);
   wait(1.5);
-  earthquake(1, 0.8, getplayers()[0].origin, 200);
+  earthquake(1, 0.8, getPlayers()[0].origin, 200);
   wait(1);
   level flag::set("meteor_impact");
 }
@@ -51,7 +51,7 @@ function lgs_intro() {
 function play_nikolai_farting() {
   level endon("sq_lgs_over");
   wait(2);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i].characterindex == 1) {
       players[i] playSound("evt_sq_lgs_fart");
@@ -61,9 +61,9 @@ function play_nikolai_farting() {
 }
 
 function play_intro_audio() {
-  playsoundatposition("evt_sq_lgs_meteor_incoming", (-1680, -780, 147));
+  playSoundAtPosition("evt_sq_lgs_meteor_incoming", (-1680, -780, 147));
   wait(3.3);
-  playsoundatposition("evt_sq_lgs_meteor_impact", (-1229, -1642, 198));
+  playSoundAtPosition("evt_sq_lgs_meteor_impact", (-1229, -1642, 198));
 }
 
 function first_damage() {
@@ -86,7 +86,7 @@ function wait_for_player_to_get_close() {
   self endon("death");
   self endon("first_damage_done");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(distancesquared(self.origin, players[i].origin) <= 250000) {
         players[i] thread zm_audio::create_and_play_dialog("eggs", "quest3", 0);
@@ -129,19 +129,19 @@ function check_for_closed_slide(ent) {
       self waittill("reached_node", node);
       if(isDefined(node.script_noteworthy) && node.script_noteworthy == "pre_gate") {
         if(!level flag::get("waterslide_open")) {
-          players = getplayers();
+          players = getPlayers();
           for(i = 0; i < players.size; i++) {
             if(distancesquared(self.origin, players[i].origin) <= 250000) {
               players[i] thread zm_audio::create_and_play_dialog("eggs", "quest3", 7);
             }
           }
-          self._crystal stopanimscripted();
+          self._crystal stopanimScripted();
           while(!level flag::get("waterslide_open")) {
             self setspeedimmediate(0);
             wait(0.05);
           }
           wait(0.5);
-          self._crystal animscripted("spin", self._crystal.origin, self._crystal.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
+          self._crystal animScripted("spin", self._crystal.origin, self._crystal.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
           self resumespeed(12);
           return;
         }
@@ -175,7 +175,7 @@ function function_c7e74d12() {
 function lgs_crystal() {
   self endon("death");
   self ghost();
-  self.trigger = getent("sq_lgs_crystal_trig", "targetname");
+  self.trigger = getEnt("sq_lgs_crystal_trig", "targetname");
   self.trigger.var_b82c7478 = 1;
   self.trigger.origin = self.origin;
   self.trigger.var_d5784b10 = self.trigger.origin;
@@ -201,7 +201,7 @@ function lgs_crystal() {
     } else {
       time = 1;
     }
-    self moveto(struct.origin, time, time / 10);
+    self moveTo(struct.origin, time, time / 10);
     self waittill("movedone");
     self playSound("evt_sq_lgs_crystal_hit1");
     target = struct.target;
@@ -211,7 +211,7 @@ function lgs_crystal() {
   self.trigger thread report_melee_early();
   zm_weap_shrink_ray::add_shrinkable_object(self);
   self waittill("shrunk");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     currentweapon = players[i] getcurrentweapon();
     if(currentweapon == level.w_shrink_ray || currentweapon == level.w_shrink_ray_upgraded) {
@@ -234,22 +234,22 @@ function lgs_crystal() {
   self notsolid();
   self useanimtree($generic);
   self.animname = "crystal";
-  vehicle = getent("crystal_mover", "targetname");
+  vehicle = getEnt("crystal_mover", "targetname");
   vehicle.origin = self.origin;
   vehicle.angles = self.angles;
   vehicle._crystal = self;
   level._lgs_veh = vehicle;
   util::wait_network_frame();
   origin_animate = util::spawn_model("tag_origin_animate", vehicle.origin);
-  self linkto(origin_animate, "origin_animate_jnt", (0, 0, 0), vectorscale((1, 0, 0), 90));
-  origin_animate linkto(vehicle);
-  self animscripted("spin", self.origin, self.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
+  self linkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), vectorscale((1, 0, 0), 90));
+  origin_animate linkTo(vehicle);
+  self animScripted("spin", self.origin, self.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
   vehicle vehicle::get_on_and_go_path("sq_lgs_node_start");
   vehicle._origin_animate = origin_animate;
   vehicle thread water_trail(self);
   vehicle thread check_for_closed_slide(self);
   vehicle waittill("reached_end_node");
-  self stopanimscripted();
+  self stopanimScripted();
   self unlink();
   self stoploopsound();
   self playSound("evt_sq_lgs_crystal_land_2");
@@ -259,7 +259,7 @@ function lgs_crystal() {
   level flag::wait_till("minecart_geyser_active");
   self notify("kill_bobble");
   self clientfield::set("watertrail", 1);
-  self moveto(self.origin + vectorscale((0, 0, 1), 4000), 2, 0.1);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 4000), 2, 0.1);
   level notify("suspend_timer");
   level notify("raise_crystal_1");
   level notify("raise_crystal_2");
@@ -267,14 +267,14 @@ function lgs_crystal() {
   level waittill("hash_18e4f2bc");
   self clientfield::set("watertrail", 0);
   wait(2);
-  holder = getent("empty_holder", "script_noteworthy");
+  holder = getEnt("empty_holder", "script_noteworthy");
   self.origin = (holder.origin[0], holder.origin[1], self.origin[2]);
   self setModel("p7_zm_sha_crystal");
-  playsoundatposition("evt_sq_lgs_crystal_incoming", (holder.origin[0], holder.origin[1], holder.origin[2] + 134));
-  self moveto((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
+  playSoundAtPosition("evt_sq_lgs_crystal_incoming", (holder.origin[0], holder.origin[1], holder.origin[2] + 134));
+  self moveTo((holder.origin[0], holder.origin[1], holder.origin[2] + 134), 2);
   self waittill("movedone");
   self playSound("evt_sq_lgs_crystal_landinholder");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest3", 8);
   level notify("crystal_dropped");
   self ghost();
@@ -287,7 +287,7 @@ function crystal_spin() {
   self endon("kill_bobble");
   while(true) {
     t = randomfloatrange(0.2, 0.8);
-    self rotateto((180 + randomfloat(180), 300 + randomfloat(60), 180 + randomfloat(180)), t);
+    self rotateTo((180 + randomfloat(180), 300 + randomfloat(60), 180 + randomfloat(180)), t);
     wait(t);
   }
 }
@@ -300,9 +300,9 @@ function crystal_bobble() {
   bottom_pos = node.origin + vectorscale((0, 0, 1), 4);
   top_pos = bottom_pos + vectorscale((0, 0, 1), 3);
   while(true) {
-    self moveto(top_pos + (0, 0, randomfloat(3)), 0.2 + randomfloat(0.1), 0.1);
+    self moveTo(top_pos + (0, 0, randomfloat(3)), 0.2 + randomfloat(0.1), 0.1);
     self waittill("movedone");
-    self moveto(bottom_pos + (0, 0, randomfloat(5)), 0.05 + randomfloat(0.07), 0, 0.03);
+    self moveTo(bottom_pos + (0, 0, randomfloat(5)), 0.05 + randomfloat(0.07), 0, 0.03);
     self waittill("movedone");
   }
 }

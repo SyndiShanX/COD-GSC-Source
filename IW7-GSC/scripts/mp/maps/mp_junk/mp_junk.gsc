@@ -24,7 +24,7 @@ main() {
   thread on_connect();
   thread func_CDA4("mp_junk_screens");
   level._effect["grinder_kill"] = loadfx("vfx\iw7\levels\mp_junk\vfx_body_exp.vfx");
-  var_0 = getent("grinderKillTrigger", "targetname");
+  var_0 = getEnt("grinderKillTrigger", "targetname");
   thread killtriggerloop(var_0);
   thread fix_collision();
   thread droptonavmeshtriggers();
@@ -33,7 +33,7 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("player512x512x8", "targetname");
+  var_0 = getEnt("player512x512x8", "targetname");
   var_1 = spawn("script_model", (1520, -76, 512));
   var_1.angles = (0, 0, 90);
   var_1 clonebrushmodeltoscriptmodel(var_0);
@@ -55,30 +55,30 @@ fix_collision() {
   var_7 = spawn("script_model", (700, 1368, -80));
   var_7.angles = (0, 270, 90);
   var_7 setModel("mp_rivet_missile_patch_01");
-  var_8 = getent("player512x512x8", "targetname");
+  var_8 = getEnt("player512x512x8", "targetname");
   var_9 = spawn("script_model", (-804, 1072, 576));
   var_9.angles = (88, 135, 0);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("player64x64x256", "targetname");
+  var_10 = getEnt("player64x64x256", "targetname");
   var_11 = spawn("script_model", (208, -1248, 512));
   var_11.angles = (0, 50, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);
   var_12 = spawn("script_model", (208, -1248, 256));
   var_12.angles = (0, 50, 0);
   var_12 clonebrushmodeltoscriptmodel(var_10);
-  var_13 = getent("player64x64x256", "targetname");
+  var_13 = getEnt("player64x64x256", "targetname");
   var_14 = spawn("script_model", (208, -1248, 192));
   var_14.angles = (0, 50, 0);
   var_14 clonebrushmodeltoscriptmodel(var_13);
-  var_15 = getent("player512x512x8", "targetname");
+  var_15 = getEnt("player512x512x8", "targetname");
   var_10 = spawn("script_model", (-607, 1267, 576));
   var_10.angles = (89.5, 135, 0);
   var_10 clonebrushmodeltoscriptmodel(var_15);
-  var_11 = getent("player512x512x8", "targetname");
+  var_11 = getEnt("player512x512x8", "targetname");
   var_12 = spawn("script_model", (-2194, -2328, 576));
   var_12.angles = (270, 0, 0);
   var_12 clonebrushmodeltoscriptmodel(var_11);
-  var_13 = getent("player512x512x8", "targetname");
+  var_13 = getEnt("player512x512x8", "targetname");
   var_14 = spawn("script_model", (-2194, -1816, 576));
   var_14.angles = (270, 0, 0);
   var_14 clonebrushmodeltoscriptmodel(var_13);
@@ -116,7 +116,7 @@ on_connect() {
 setupmagnets(var_0) {
   var_1 = getEntArray(var_0, "targetname");
   foreach(var_3 in var_1) {
-    var_3.upref = getent(var_3.target, "targetname");
+    var_3.upref = getEnt(var_3.target, "targetname");
     var_3.var_127BE = [];
     thread magwatch(var_3);
   }
@@ -138,13 +138,13 @@ magupvector(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_2.origin);
   var_3.angles = var_2.angles;
   var_3 setModel("tag_origin");
-  var_2 playerlinkto(var_3, "tag_origin", 0, 180, 180, 180, 180, 0);
-  var_3 moveto(var_0.upref.origin + (0, 0, -72), 1, 0.75, 0);
+  var_2 playerlinkTo(var_3, "tag_origin", 0, 180, 180, 180, 180, 0);
+  var_3 moveTo(var_0.upref.origin + (0, 0, -72), 1, 0.75, 0);
   var_3 rotateroll(180, 1, 0.9, 0);
   wait(1);
   var_2 unlink();
   var_2 setworldupreference(var_0.upref);
-  var_2 playrumbleonentity("damage_heavy");
+  var_2 playRumbleOnEntity("damage_heavy");
   var_3 delete();
   while(isDefined(var_2) && isalive(var_2) && var_2 istouching(var_0)) {
     scripts\engine\utility::waitframe();
@@ -155,8 +155,8 @@ magupvector(var_0, var_1, var_2) {
     var_3 = spawn("script_model", var_2.origin);
     var_3.angles = var_2.angles + (0, 0, 180);
     var_3 setModel("tag_origin");
-    var_2 playerlinkto(var_3, "tag_origin", 0, 180, 180, 180, 180, 0);
-    var_3 moveto(var_2.origin + (0, 0, -74), 0.5, 0.1, 0);
+    var_2 playerlinkTo(var_3, "tag_origin", 0, 180, 180, 180, 180, 0);
+    var_3 moveTo(var_2.origin + (0, 0, -74), 0.5, 0.1, 0);
     var_3 rotateroll(-180, 0.5, 0, 0.4);
     wait(0.5);
     var_2 unlink();
@@ -171,7 +171,7 @@ magupvector(var_0, var_1, var_2) {
 
 apex_not_outofbounds() {
   level.outofboundstriggerpatches = [];
-  var_0 = getent("apex_unoutofbounds", "targetname");
+  var_0 = getEnt("apex_unoutofbounds", "targetname");
   level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_0;
   level waittill("game_ended");
   foreach(var_0 in level.outofboundstriggerpatches) {

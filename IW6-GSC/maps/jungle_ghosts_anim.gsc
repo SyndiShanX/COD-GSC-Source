@@ -387,7 +387,7 @@ hide_me(var_0) {
   var_1 notsolid();
   var_1 connectpaths();
   wait 0.5;
-  var_2 = getent("dest_crate", "targetname");
+  var_2 = getEnt("dest_crate", "targetname");
 
   if(level.player istouching(var_2)) {
     level.player enabledeathshield(0);
@@ -397,14 +397,14 @@ hide_me(var_0) {
   }
 
   var_2 solid();
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
 }
 
 show_me(var_0) {
   common_scripts\utility::flag_set("box_swap");
   var_0 show();
-  level.player playrumbleonentity("damage_heavy");
-  var_1 = common_scripts\utility::getstruct("crate_do_damage", "targetname");
+  level.player playRumbleOnEntity("damage_heavy");
+  var_1 = common_scripts\utility::getStruct("crate_do_damage", "targetname");
   wait 0.25;
   radiusdamage(var_1.origin, 80, 1000, 1000);
 }
@@ -460,7 +460,7 @@ falling_impact(var_0) {
   }
 
   earthquake(randomfloatrange(0.4, 0.45), randomfloatrange(1, 1.25), level.player.origin, 200);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 final_impact(var_0) {

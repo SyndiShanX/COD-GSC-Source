@@ -409,7 +409,7 @@ _id_10C4(var_0) {
   }
   var_3 = getmovedelta(var_0, 0, 1);
   var_5 = self localtoworldcoords(var_3);
-  var_5 = var_4 + vectornormalize(var_5 - var_4) * 20;
+  var_5 = var_4 + vectorNormalize(var_5 - var_4) * 20;
   return self maymovefrompointtopoint(var_4, var_5, 1, 1);
 }
 
@@ -511,7 +511,7 @@ _id_10CB() {
     if(!issentient(var_0)) {
       continue;
     }
-    var_2 = vectornormalize(var_1 - self.origin);
+    var_2 = vectorNormalize(var_1 - self.origin);
 
     if(self.lookaheaddir[0] * var_2[1] - var_2[0] * self.lookaheaddir[1] > 0) {
       if(!_id_10CA(self._id_10CD, self._id_10CE)) {
@@ -700,7 +700,7 @@ _id_10D9() {
   if(lengthsquared(var_3) < 1) {
     return;
   }
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = anglesToForward(var_2.angles);
   var_5 = var_4[0] * var_3[1] - var_4[1] * var_3[0] > 0;
 
@@ -817,7 +817,7 @@ _id_10DC(var_0, var_1, var_2) {
   animscripts\shared::_id_0C51("sideToSide", ::_id_10DD);
   var_4 = self getanimtime(var_3);
   var_5 = var_2.origin - var_1.origin;
-  var_5 = vectornormalize((var_5[0], var_5[1], 0));
+  var_5 = vectorNormalize((var_5[0], var_5[1], 0));
   var_6 = getmovedelta(var_3, var_4, 1);
   var_7 = var_2.origin - self.origin;
   var_7 = (var_7[0], var_7[1], 0);

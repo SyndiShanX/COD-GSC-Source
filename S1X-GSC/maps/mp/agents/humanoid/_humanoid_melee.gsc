@@ -180,7 +180,7 @@ attackshouldhit(var_0) {
 }
 
 isenemyinfrontofme(var_0, var_1) {
-  var_2 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
+  var_2 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
   return var_4 > var_1;
@@ -249,7 +249,7 @@ updatelerppos(var_0, var_1, var_2, var_3) {
     var_9 = var_7 - var_4;
 
     if(lengthsquared(var_9) > var_8 * var_8) {
-      var_7 = var_4 + vectornormalize(var_9) * var_8;
+      var_7 = var_4 + vectorNormalize(var_9) * var_8;
     }
 
     self scragentsetorientmode("face enemy");
@@ -283,7 +283,7 @@ getupdatedattackpos(var_0, var_1) {
 isprotectedbyriotshield(var_0) {
   if(var_0 maps\mp\_riotshield::hasriotshield()) {
     var_1 = self.origin - var_0.origin;
-    var_2 = vectornormalize((var_1[0], var_1[1], 0));
+    var_2 = vectorNormalize((var_1[0], var_1[1], 0));
     var_3 = anglesToForward(var_0.angles);
     var_4 = vectordot(var_3, var_1);
 

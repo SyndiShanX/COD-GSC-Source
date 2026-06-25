@@ -50,14 +50,14 @@ positionweaponavatar_stub(var_0, var_1) {
 
 playerteleportavatartoweaponroom_stub(var_0, var_1, var_2) {
   if(issubstr(var_0.primaryweapon, "akimbo")) {
-    struct = common_scripts\utility::getstruct("characterShotgun", "targetname");
+    struct = common_scripts\utility::getStruct("characterShotgun", "targetname");
     var_1.scenenode = struct.scenenode;
     var_0 unlink();
     var_0 agentplaylobbyanimakimbo(var_1.scenenode, 1);
   } else {
     var_3 = maps\mp\_vl_base::getweaponroomstring(var_0.primaryweapon);
     var_4 = "character" + var_3;
-    var_5 = common_scripts\utility::getstruct(var_4, "targetname");
+    var_5 = common_scripts\utility::getStruct(var_4, "targetname");
     var_1.scenenode = var_5.scenenode;
     var_0 unlink();
     var_0 maps\mp\_vl_avatar::agentplaylobbyanim(var_1.scenenode, var_0.primaryweapon, var_2);

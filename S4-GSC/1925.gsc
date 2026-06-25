@@ -72,8 +72,8 @@ _id_D85F(var_0) {
   }
 
   wait 1;
-  var_1 = getent("playable_area", "targetname");
-  var_2 = getent("boundary_toxic_line", "targetname");
+  var_1 = getEnt("playable_area", "targetname");
+  var_2 = getEnt("boundary_toxic_line", "targetname");
   var_3 = isDefined(var_1);
   var_4 = getDvar("#x36d16f02578d0ee10");
   var_5 = getDvar("#x3a30c33efc8281eb1");
@@ -133,7 +133,7 @@ _id_D85F(var_0) {
 }
 
 _id_109FE() {
-  self setorigin(self._id_8F26);
+  self setOrigin(self._id_8F26);
 }
 
 _id_FC9F(var_0) {
@@ -2813,7 +2813,7 @@ _id_0C4B(var_0, var_1, var_2, var_3, var_4) {
   self._id_B70D++;
 
   if(self._id_B70D == 1) {
-    self linkto(var_1, var_2, var_3, var_4);
+    self linkTo(var_1, var_2, var_3, var_4);
   }
 }
 
@@ -3240,13 +3240,13 @@ _id_A247(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    var_2 = vectornormalize(var_1);
+    var_2 = vectorNormalize(var_1);
   } else {
     var_2 = anglesToForward(self.angles);
   }
 
   var_3 = _func_025B((0, 0, 1), var_2);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   self _meth_8508(var_4, var_0);
 }
 
@@ -3829,7 +3829,7 @@ get_riot_shield_bullet_damage_percent() {
 
 isprotectedbyriotshieldcp(var_0) {
   if(isDefined(var_0._id_75A5) && var_0._id_75A5) {
-    var_1 = vectornormalize(self.origin - var_0.origin);
+    var_1 = vectorNormalize(self.origin - var_0.origin);
     var_2 = anglesToForward(var_0.angles);
     var_3 = vectordot(var_2, var_1);
 
@@ -7517,9 +7517,9 @@ _id_10027(var_0) {
   var_2 = var_0 gettagorigin("tag_origin", 1);
 
   if(isDefined(var_2)) {
-    var_1 linkto(var_0, "tag_origin", (0, 0, 190), (0, 0, 0));
+    var_1 linkTo(var_0, "tag_origin", (0, 0, 190), (0, 0, 0));
   } else {
-    var_1 linkto(var_0);
+    var_1 linkTo(var_0);
   }
 
   var_3 = _id_100BA();
@@ -7757,7 +7757,7 @@ _id_D51F() {
           continue;
         }
         var_23 = var_22 getEye();
-        var_24 = vectordot(var_14, vectornormalize(var_23 - var_12));
+        var_24 = vectordot(var_14, vectorNormalize(var_23 - var_12));
 
         if(var_24 < var_6) {
           continue;
@@ -7818,7 +7818,7 @@ _id_D524() {
   self endon("death_delay_finished");
   var_0 = ["physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_characterproxy", "physicscontents_glass", "physicscontents_itemclip"];
   var_1 = physics_createcontents(var_0);
-  var_2 = vectornormalize(self.origin - self._id_8FFD.origin);
+  var_2 = vectorNormalize(self.origin - self._id_8FFD.origin);
   var_3 = self.origin + (0, 0, 42);
   var_4 = var_3 + var_2 * 120.0;
   var_5 = scripts\engine\trace::_id_E409(var_3, var_4, 2.0, self, var_1, 0);
@@ -8039,33 +8039,33 @@ _id_3EEE(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
     }
 
     if(isDefined(self.model) && self.classname == "script_model" && scripts\engine\utility::hastag(self.model, var_15)) {
-      var_14 linkto(self, var_15, var_1, (0, 0, 0));
+      var_14 linkTo(self, var_15, var_1, (0, 0, 0));
     } else if(isDefined(var_0)) {
-      var_14 linkto(self, var_15, var_1, (0, 0, 0));
+      var_14 linkTo(self, var_15, var_1, (0, 0, 0));
     } else if(isDefined(self.angles)) {
       var_14.origin = var_14.origin + rotatevector(var_1, self.angles);
 
       if(isent(self)) {
-        var_14 linkto(self);
+        var_14 linkTo(self);
       }
     } else {
       var_14.origin = var_14.origin + var_1;
 
       if(isent(self)) {
-        var_14 linkto(self);
+        var_14 linkTo(self);
       }
     }
   } else if(isDefined(var_0))
     var_14 _meth_84D7(var_0);
 
   if(isDefined(var_8) && var_8) {
-    var_14 setcursorhint("HINT_NOICON");
+    var_14 setCursorHint("HINT_NOICON");
   } else {
-    var_14 setcursorhint("HINT_BUTTON");
+    var_14 setCursorHint("HINT_BUTTON");
   }
 
   if(isDefined(var_2)) {
-    var_14 sethintstring(var_2);
+    var_14 setHintString(var_2);
   }
 
   var_16 = 360;
@@ -8999,7 +8999,7 @@ _id_F036(var_0, var_1, var_2) {
 
   foreach(var_6 in _id_6C61(var_0)) {
     var_3[var_4].angles = scripts\engine\utility::ter_op(isDefined(var_3[var_4].angles), var_3[var_4].angles, (0, 0, 0));
-    var_6 setorigin(var_3[var_4].origin);
+    var_6 setOrigin(var_3[var_4].origin);
     var_6 setplayerangles(var_3[var_4].angles);
     var_6 dontinterpolate();
     var_4++;
@@ -9037,7 +9037,7 @@ _id_F03D(var_0, var_1) {
   }
   var_3 = randomintrange(0, var_2.size);
   var_2[var_3].angles = scripts\engine\utility::ter_op(isDefined(var_2[var_3].angles), var_2[var_3].angles, (0, 0, 0));
-  var_0 setorigin(var_2[var_3].origin);
+  var_0 setOrigin(var_2[var_3].origin);
   var_0 setplayerangles(var_2[var_3].angles);
   var_0 dontinterpolate();
 }
@@ -9120,9 +9120,9 @@ _id_D5A6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_1)) {
-    self setcursorhint(var_1);
+    self setCursorHint(var_1);
   } else {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 
   if(isDefined(var_2)) {
@@ -9130,7 +9130,7 @@ _id_D5A6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_3)) {
-    self sethintstring(var_3);
+    self setHintString(var_3);
   }
 
   if(isDefined(var_4)) {
@@ -9620,8 +9620,8 @@ _id_7744(var_0, var_1) {
     level._id_774B = [];
   }
 
-  var_2 = scripts\engine\utility::getstruct(var_0, "script_noteworthy");
-  var_3 = scripts\engine\utility::getstruct(var_1, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct(var_0, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStruct(var_1, "script_noteworthy");
   level._id_774A[level._id_774A.size] = var_2;
   level._id_774B[level._id_774B.size] = var_3;
 }

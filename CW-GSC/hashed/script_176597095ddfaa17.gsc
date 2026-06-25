@@ -75,7 +75,7 @@ function start() {
 function function_e568ca74() {
   level endon(#"hash_1c6770a6f6ea06b6");
   level flag::wait_till_clear(#"hash_4930756571725d11");
-  var_123dc898 = getent("fow_border_all", "targetname");
+  var_123dc898 = getEnt("fow_border_all", "targetname");
 
   if(isDefined(var_123dc898)) {
     var_123dc898 clientfield::set("fogofwarflag", 1);
@@ -83,8 +83,8 @@ function function_e568ca74() {
 }
 
 function function_1c5219e4(var_6874207, var_d001b56c) {
-  var_df0c0b31 = getent(var_6874207, "targetname");
-  var_9bdd487c = getent(var_d001b56c, "targetname");
+  var_df0c0b31 = getEnt(var_6874207, "targetname");
+  var_9bdd487c = getEnt(var_d001b56c, "targetname");
 
   if(isDefined(var_df0c0b31) && isDefined(var_9bdd487c)) {
     var_df0c0b31.var_9bdd487c = var_9bdd487c;
@@ -108,7 +108,7 @@ function function_d4dec4e8(destination, str_targetname) {
 
     if(isDefined(var_6c486d1a)) {
       var_6c486d1a.activated = 1;
-      var_f6b2bc6f = getent(var_6c486d1a.targetname, "target");
+      var_f6b2bc6f = getEnt(var_6c486d1a.targetname, "target");
 
       if(isDefined(var_f6b2bc6f)) {
         var_f6b2bc6f.activated = 1;
@@ -152,7 +152,7 @@ function function_f1ad7968(destination, str_targetname) {
 
     if(isDefined(var_6c486d1a)) {
       var_6c486d1a.activated = 0;
-      var_f6b2bc6f = getent(var_6c486d1a.targetname, "target");
+      var_f6b2bc6f = getEnt(var_6c486d1a.targetname, "target");
 
       if(isDefined(var_f6b2bc6f)) {
         var_f6b2bc6f.activated = 0;
@@ -171,7 +171,7 @@ function function_f1ad7968(destination, str_targetname) {
 
 function function_ac8a88de(var_6874207, var_d0c31a32) {
   level.var_973f0101 = 1;
-  var_df0c0b31 = getent(var_d0c31a32, "targetname");
+  var_df0c0b31 = getEnt(var_d0c31a32, "targetname");
 
   if(isDefined(var_df0c0b31)) {
     var_df0c0b31.activated = 1;
@@ -183,7 +183,7 @@ function function_ac8a88de(var_6874207, var_d0c31a32) {
     }
 
     if(isDefined(var_df0c0b31.var_9bdd487c)) {
-      var_62567791 = getent(var_df0c0b31.var_9bdd487c.target, "targetname");
+      var_62567791 = getEnt(var_df0c0b31.var_9bdd487c.target, "targetname");
 
       if(isDefined(var_62567791)) {
         var_62567791 clientfield::set("fogofwarflag", 1);
@@ -197,7 +197,7 @@ function function_ac8a88de(var_6874207, var_d0c31a32) {
 function private function_fcf7c9c8() {
   self endon(#"death");
   move_origin = self.origin + (0, 0, -20000);
-  self moveto(move_origin, 3);
+  self moveTo(move_origin, 3);
   wait 5;
   self delete();
 }
@@ -251,7 +251,7 @@ function function_dc15ad60() {
   while(true) {
     time = gettime();
     dodamage = time >= var_f4d9a132;
-    var_6effa129 = arraycombine(getplayers(), getvehiclearray());
+    var_6effa129 = arraycombine(getPlayers(), getvehiclearray());
 
     foreach(entity in var_6effa129) {
       if(!isDefined(entity.var_6a2e2f41)) {
@@ -347,7 +347,7 @@ function function_dc15ad60() {
 }
 
 function private cleanup_feedback(notifyhash) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player hide_effects();
   }
 }

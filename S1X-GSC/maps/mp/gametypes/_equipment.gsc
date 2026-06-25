@@ -308,7 +308,7 @@ trophyWithinMinDot(grenade) {
   }
 
   dirTrophy = anglesToForward(self.angles + self.trophyAngleOffset);
-  dirToGrenade = VectorNormalize(grenade.origin - self.origin);
+  dirToGrenade = vectorNormalize(grenade.origin - self.origin);
 
   dot = VectorDot(dirTrophy, dirToGrenade);
 

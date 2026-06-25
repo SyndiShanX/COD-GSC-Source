@@ -159,7 +159,7 @@ function function_886bcebf() {
   level flag::set("flag_fx_exploder_start_jungle_path");
 
   if(!isDefined(level.rice_paddies_intro_heli)) {
-    level.rice_paddies_intro_heli = getent("rice_paddies_intro_heli", "targetname");
+    level.rice_paddies_intro_heli = getEnt("rice_paddies_intro_heli", "targetname");
   }
 
   if(!isDefined(level.var_8212fff1)) {
@@ -207,11 +207,11 @@ function function_61c7a808(str_objective) {
     level thread scene::init("scene_pri_intro_long", level.var_209e1b2d);
     level thread scene::play("scene_pri_intro_long", level.var_209e1b2d);
     level thread function_cb906385("intro_long_magicbullet_start_struct", "intro_long_magicbullet_end_struct");
-    getplayers()[0] waittill(#"hash_46b49ecf80181c56");
+    getPlayers()[0] waittill(#"hash_46b49ecf80181c56");
     level notify(#"hash_336c5048dcf6d064");
     level thread function_cb906385("intro_long_magicbullet_start_struct", "intro_long_magicbullet_end_2_struct");
     level thread function_274673a1();
-    getplayers()[0] waittill(#"hash_193b7066aa5e7141");
+    getPlayers()[0] waittill(#"hash_193b7066aa5e7141");
     level notify(#"hash_518acb5c9f4114da");
     level thread function_cb906385("intro_long_magicbullet_start_struct", "intro_long_magicbullet_end_struct");
     level thread scene::play("scene_pri_intro_vc_attack");
@@ -220,9 +220,9 @@ function function_61c7a808(str_objective) {
     level thread util::delay(0.8, undefined, &function_96e425c7, "intro_long_anim_magicgrenade3");
     level thread util::delay(1.2, undefined, &function_96e425c7, "intro_long_anim_magicgrenade1");
     level thread util::delay(2, undefined, &function_96e425c7, "intro_long_anim_magicgrenade2");
-    getplayers()[0] waittill(#"hash_5887ded86e911c44");
+    getPlayers()[0] waittill(#"hash_5887ded86e911c44");
     level thread function_cb906385("intro_long_magicbullet_start_struct", "intro_long_magicbullet_end_2_struct");
-    getplayers()[0] waittill(#"player_on_ground");
+    getPlayers()[0] waittill(#"player_on_ground");
     level.player val::set("intro_player_anim", "takedamage", 1);
     level.player dodamage(60, level.player.origin);
     level flag::set("rice_paddies_v1_initial_wave");
@@ -261,7 +261,7 @@ function function_61c7a808(str_objective) {
     wait 0.05;
 
     if(animation != "scene_pri_intro_short_fastforward") {
-      getplayers()[0] waittill(#"player_on_ground");
+      getPlayers()[0] waittill(#"player_on_ground");
       level flag::set("rice_paddies_v1_initial_wave");
     }
   }
@@ -329,20 +329,20 @@ function function_5e6ccf87() {
   level.player playrumblelooponentity(#"buzz_high");
   level.player waittill(#"stop_rumble");
   level.player stoprumble(#"buzz_high");
-  level.player playrumbleonentity("anim_med");
+  level.player playRumbleOnEntity("anim_med");
 }
 
 function function_5e71243b() {
-  org = getent("ally_drop_weapon_org", "targetname");
-  weapon = getent(org.linkname, "linkto");
+  org = getEnt("ally_drop_weapon_org", "targetname");
+  weapon = getEnt(org.linkname, "linkto");
 
   if(isDefined(weapon)) {
     weapon hide();
   }
 
   level waittill(#"hash_43adf39eda87fda2");
-  org = getent("ally_drop_weapon_org", "targetname");
-  org linkto(level.var_2d5aba86, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  org = getEnt("ally_drop_weapon_org", "targetname");
+  org linkTo(level.var_2d5aba86, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   level.var_2d5aba86 waittillmatch({
     #notetrack: "hide_weapon"}, #"hash_6cc8280ad38cc4af");
 
@@ -358,7 +358,7 @@ function function_274673a1() {
   wait 0.05;
   level.var_274673a1 setrotorspeed(1);
   level.var_274673a1.ignoreme = 1;
-  getplayers()[0] waittill(#"hash_193b7066aa5e7141");
+  getPlayers()[0] waittill(#"hash_193b7066aa5e7141");
   var_ee768162 = spawner::simple_spawn("rice_paddies_heli_flyby_riders", &function_2c05ec2d);
   nd_path = getvehiclenode("intro_heli_flyby_start_path", "targetname");
   level.var_274673a1 thread vehicle::get_on_and_go_path(nd_path);
@@ -540,8 +540,8 @@ function function_d1fa28d3(var_c79d614f, var_fb00356d) {
       wait 0.05;
     }
 
-    probe = getent("rice_paddies_heli_1_probe", "targetname");
-    probe linkto(level.rice_paddies_intro_heli, "tag_body_animate", (0, 0, 0), (0, 0, 0));
+    probe = getEnt("rice_paddies_heli_1_probe", "targetname");
+    probe linkTo(level.rice_paddies_intro_heli, "tag_body_animate", (0, 0, 0), (0, 0, 0));
     exploder::exploder("rice_paddies_heli_crash_1_probe");
     level.rice_paddies_intro_heli clientfield::set("rice_paddies_heli_1_spark_fx", 1);
 
@@ -553,7 +553,7 @@ function function_d1fa28d3(var_c79d614f, var_fb00356d) {
 
       foreach(smart_model in var_45314ab4) {
         if(isDefined(smart_model)) {
-          smart_model disconnectpaths();
+          smart_model disconnectPaths();
         }
       }
     }
@@ -1245,20 +1245,20 @@ function function_8e61418(str_notify) {
 function function_e041c214(smart_bundle) {
   level endon(#"visit_restart");
   level endon(#"start_outro");
-  var_a4c09f1 = getent("rice_paddies_front1_vol", "targetname");
-  var_61bbe946 = getent("rice_paddies_front_vol", "targetname");
-  var_2af845e = getent("rice_paddies_mid_vol", "targetname");
-  var_6cc537cb = getent("rice_paddies_back_vol", "targetname");
-  var_1024bf40 = getent("rice_paddies_back_left_vol", "targetname");
-  var_c2e05d84 = getent("rice_paddies_back_right_vol", "targetname");
-  var_c4c70223 = getent("rice_paddies_back1_vol", "targetname");
-  var_75422d3c = getent("rice_paddies_hut_vol", "targetname");
-  var_bc0aa3b8 = getent("rice_paddies_hut1_vol", "targetname");
+  var_a4c09f1 = getEnt("rice_paddies_front1_vol", "targetname");
+  var_61bbe946 = getEnt("rice_paddies_front_vol", "targetname");
+  var_2af845e = getEnt("rice_paddies_mid_vol", "targetname");
+  var_6cc537cb = getEnt("rice_paddies_back_vol", "targetname");
+  var_1024bf40 = getEnt("rice_paddies_back_left_vol", "targetname");
+  var_c2e05d84 = getEnt("rice_paddies_back_right_vol", "targetname");
+  var_c4c70223 = getEnt("rice_paddies_back1_vol", "targetname");
+  var_75422d3c = getEnt("rice_paddies_hut_vol", "targetname");
+  var_bc0aa3b8 = getEnt("rice_paddies_hut1_vol", "targetname");
 
   if(level.var_731c10af.paths[#"rice_paddies"].count == 3) {
-    var_61bbe946 = getent("rice_paddies_v3_front_vol", "targetname");
-    var_2af845e = getent("rice_paddies_v3_mid_vol", "targetname");
-    var_6cc537cb = getent("rice_paddies_v3_back_vol", "targetname");
+    var_61bbe946 = getEnt("rice_paddies_v3_front_vol", "targetname");
+    var_2af845e = getEnt("rice_paddies_v3_mid_vol", "targetname");
+    var_6cc537cb = getEnt("rice_paddies_v3_back_vol", "targetname");
   } else if(level.var_731c10af.paths[#"rice_paddies"].count == 0) {
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_1", &function_95246a18, smart_bundle, var_a4c09f1, var_61bbe946, "flag_rice_paddies_enemies_retreat_1");
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_2", &function_95246a18, smart_bundle, var_61bbe946, var_2af845e, "flag_rice_paddies_enemies_retreat_2");
@@ -1300,7 +1300,7 @@ function function_2e55ad19(smart_bundle) {
   level flag::wait_till("rice_paddies_v1_wave_3");
   wait 0.1;
   ai_array = smart_bundle smart_bundle::function_44cbaa85();
-  var_c4c70223 = getent("rice_paddies_back1_vol", "targetname");
+  var_c4c70223 = getEnt("rice_paddies_back1_vol", "targetname");
 
   foreach(ai in ai_array) {
     if(isDefined(ai)) {
@@ -1320,7 +1320,7 @@ function function_d79447e6(smart_bundle) {
   wait 0.1;
   ai_array = smart_bundle smart_bundle::function_44cbaa85();
   count = 0;
-  rice_paddies_jungle_path_vol = getent("rice_paddies_jungle_path_vol", "targetname");
+  rice_paddies_jungle_path_vol = getEnt("rice_paddies_jungle_path_vol", "targetname");
 
   foreach(ai in ai_array) {
     if(isDefined(ai)) {
@@ -1728,7 +1728,7 @@ function function_d2971a8c(smart_bundle) {
         }
       }
 
-      volume = getent(ai.script_noteworthy, "targetname");
+      volume = getEnt(ai.script_noteworthy, "targetname");
       ai notify(#"stop_going_to_node");
       ai cleargoalvolume();
       ai.target = ai.script_noteworthy;
@@ -1854,10 +1854,10 @@ function function_c8f499c5(str_objective) {
   wait 2;
 
   if(str_objective == "rice_paddies_1") {
-    org = getent("ally_drop_weapon_org", "targetname");
+    org = getEnt("ally_drop_weapon_org", "targetname");
 
     if(isDefined(org)) {
-      weapon = getent(org.linkname, "linkto");
+      weapon = getEnt(org.linkname, "linkto");
 
       if(isDefined(weapon)) {
         weapon delete();

@@ -96,7 +96,7 @@ function activatesatellite() {
   satellite thread killstreaks::waittillemp(&destroysatellitebyemp);
   satellite.killstreakdamagemodifier = &killstreakdamagemodifier;
   satellite.rocketdamage = (satellite.maxhealth / 3) + 1;
-  satellite moveto(airsupport::getmapcenter() + (xoffset * -1, yoffset * -1, zoffset), 40000 * 0.001);
+  satellite moveTo(airsupport::getmapcenter() + (xoffset * -1, yoffset * -1, zoffset), 40000 * 0.001);
   target_set(satellite);
   satellite clientfield::set("enemyvehicle", 1);
   satellite thread killstreaks::waitfortimeout("satellite", 40000, &ontimeout, "death", "crashing");
@@ -127,7 +127,7 @@ function configureteampost(owner, ishacked) {
 function rotate(duration) {
   self endon("death");
   while(true) {
-    self rotateyaw(-360, duration);
+    self rotateYaw(-360, duration);
     wait(duration);
   }
 }

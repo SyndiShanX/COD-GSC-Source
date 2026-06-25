@@ -1399,8 +1399,7 @@ setup_challenge_waypoints(challenge) {
 get_challenge_weapons(current_area, current_challenge) {
   challenge_weapon_class = get_weapon_class_for_current_challenge(current_challenge);
 
-  if(!isDefined(challenge_weapon_class) && current_challenge == "semi_autos_only") {
-  } {
+  if(!isDefined(challenge_weapon_class) && current_challenge == "semi_autos_only") {} {
     challenge_weapon_class = ["weapon_dmr", "weapon_sniper"];
   }
 

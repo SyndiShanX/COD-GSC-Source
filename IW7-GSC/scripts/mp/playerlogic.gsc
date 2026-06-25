@@ -982,7 +982,7 @@ spawnspectatormapcam(var_0) {
     wait(0.05);
   }
 
-  self cameralinkto(var_6, "tag_origin");
+  self cameralinkTo(var_6, "tag_origin");
   var_9 = scripts\mp\utility::getmapname();
   self notify("mapCamera_start");
   switch (var_9) {
@@ -1232,7 +1232,7 @@ spawnspectatormapcam(var_0) {
   self visionsetfadetoblackforplayer("", 0.75);
   self playlocalsound("mp_camera_intro_whoosh");
   var_10 = var_3;
-  var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   var_11 = 0;
   for(;;) {
     if(isDefined(var_10.speedadjust)) {
@@ -1246,7 +1246,7 @@ spawnspectatormapcam(var_0) {
     var_10.distancetotarg = var_13;
     var_10 = var_4;
     if(isDefined(var_10.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_10.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_10.target, "targetname");
       continue;
     }
 
@@ -1255,7 +1255,7 @@ spawnspectatormapcam(var_0) {
 
   var_10.eol = 1;
   var_10 = var_3;
-  var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   for(;;) {
     var_14 = var_10.distancetotarg / var_11;
     var_15 = var_14 * var_1;
@@ -1271,8 +1271,8 @@ spawnspectatormapcam(var_0) {
       var_11 = 0;
     }
 
-    var_6 moveto(var_4.origin, var_15, var_11, var_10);
-    var_6 rotateto(var_4.angles, var_15, var_11, var_10);
+    var_6 moveTo(var_4.origin, var_15, var_11, var_10);
+    var_6 rotateTo(var_4.angles, var_15, var_11, var_10);
     if(isDefined(var_4.eol)) {
       var_12 = int(var_15 / 2);
       wait(var_12);
@@ -1283,7 +1283,7 @@ spawnspectatormapcam(var_0) {
 
     var_10 = var_4;
     if(isDefined(var_10.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_10.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_10.target, "targetname");
       continue;
     }
 

@@ -829,7 +829,7 @@ enemy_corpse_logic() {
         var_6 = self gettagangles("tag_eye");
         var_7 = self gettagorigin("tag_eye");
         var_8 = anglesToForward(var_6);
-        var_9 = vectornormalize(var_2.origin - var_7);
+        var_9 = vectorNormalize(var_2.origin - var_7);
 
         if(vectordot(var_8, var_9) > 0.55) {
           if(self cansee(var_2)) {

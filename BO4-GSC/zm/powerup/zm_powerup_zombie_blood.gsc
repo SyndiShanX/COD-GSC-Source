@@ -131,7 +131,7 @@ make_zombie_blood_entity() {
   level.a_zombie_blood_entities[level.a_zombie_blood_entities.size] = self;
   self setinvisibletoall();
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player.zombie_vars[#"zombie_powerup_zombie_blood_on"]) {
       if(isDefined(self.e_unique_player)) {
         if(self.e_unique_player == e_player) {

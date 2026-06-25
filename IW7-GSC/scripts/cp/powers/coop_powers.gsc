@@ -682,7 +682,7 @@ func_B2F0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
       continue;
     }
 
-    var_3 = controlslinkto(var_0);
+    var_3 = controlslinkTo(var_0);
     self notify(var_9);
     if(self.powers[var_1].charges != 0 && !self.powers[var_1].var_19) {
       var_12 = undefined;
@@ -726,7 +726,7 @@ func_9EE3(var_0) {
   }
 }
 
-controlslinkto(var_0) {
+controlslinkTo(var_0) {
   if(scripts\engine\utility::istrue(level.var_D788)) {
     return 0.1;
   }
@@ -894,7 +894,7 @@ func_D72A(var_0, var_1, var_2) {
       wait(0.1);
     } else {
       level scripts\engine\utility::waittill_any("grenade_cooldown activated", "infinite_grenade_active", "start_power_cooldown");
-      var_1 = controlslinkto(var_3);
+      var_1 = controlslinkTo(var_3);
     }
 
     if(var_4.var_4617 > var_1) {
@@ -1617,7 +1617,7 @@ func_7952(var_0, var_1, var_2, var_3, var_4) {
     return 0;
   }
 
-  var_6 = vectornormalize(var_5 - var_0);
+  var_6 = vectorNormalize(var_5 - var_0);
   if(!isDefined(var_4) || var_4 == "forward") {
     var_7 = anglesToForward(var_1);
   } else {

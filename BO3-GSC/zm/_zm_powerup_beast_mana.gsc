@@ -38,7 +38,7 @@ function grab_beast_mana(player) {
 }
 
 function beast_mana_powerup(item, player) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!players[i] laststand::player_is_in_laststand() && !players[i].sessionstate == "spectator") {
       if(isDefined(players[i].beastmode) && players[i].beastmode) {
@@ -66,7 +66,7 @@ function mana_on_hud(drop_item, player_team) {
 }
 
 function full_ammo_move_hud(player_team) {
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
   players[0] playsoundtoteam("zmb_full_ammo", player_team);
   wait(0.5);
   move_fade_time = 1.5;

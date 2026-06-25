@@ -56,7 +56,7 @@ moving_water() {
 
 moving_water_flag(var_0) {
   var_1 = 4;
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_3 = anglesToForward(var_2.angles) * var_1;
 
   for(;;) {
@@ -162,7 +162,7 @@ dynamic_dof(var_0) {
       var_11 = var_10;
     }
 
-    var_12 = vectornormalize(anglesToForward(var_11));
+    var_12 = vectorNormalize(anglesToForward(var_11));
     var_13 = bulletTrace(var_9, var_9 + var_12 * var_2, 1, self, 1);
     var_14 = getaiarray("axis");
 
@@ -183,7 +183,7 @@ dynamic_dof(var_0) {
     }
 
     foreach(var_18 in var_14) {
-      var_19 = vectornormalize(var_18.origin - var_9);
+      var_19 = vectorNormalize(var_18.origin - var_9);
       var_20 = vectordot(var_12, var_19);
 
       if(var_20 < 0.923) {

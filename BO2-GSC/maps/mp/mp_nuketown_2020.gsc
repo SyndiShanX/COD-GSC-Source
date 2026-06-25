@@ -127,7 +127,7 @@ nuked_mannequin_init() {
   if(mannequins.size <= 0) {
     return;
   }
-  camerastart = getstruct("endgame_camera_start", "targetname");
+  camerastart = getStruct("endgame_camera_start", "targetname");
   level.endgamemannequin = getclosest(camerastart.origin, mannequins);
   remove_count = mannequins.size - 25;
   remove_count = clamp(remove_count, 0, remove_count);
@@ -139,7 +139,7 @@ nuked_mannequin_init() {
     if(level.endgamemannequin == mannequins[i]) {
       continue;
     }
-    collision = getent(mannequins[i].target, "targetname");
+    collision = getEnt(mannequins[i].target, "targetname");
     assert(isDefined(collision));
     collision delete();
     mannequins[i] delete();
@@ -188,7 +188,7 @@ nuked_end_game() {
 nuke_detonation() {
   level notify("bomb_drop_pre");
   clientnotify("bomb_drop_pre");
-  bomb_loc = getent("bomb_loc", "targetname");
+  bomb_loc = getEnt("bomb_loc", "targetname");
   bomb_loc playSound("amb_end_nuke_2d");
   destructibles = getEntArray("destructible", "targetname");
 
@@ -198,13 +198,13 @@ nuke_detonation() {
     }
   }
 
-  displaysign = getent("nuke_display_glass_server", "targetname");
+  displaysign = getEnt("nuke_display_glass_server", "targetname");
   assert(isDefined(displaysign));
   displaysign hide();
   bombwaitpretime = getdvarfloatdefault("scr_nuke_car_pre", 0.5);
   wait(bombwaitpretime);
   exploder(level.const_fx_exploder_nuke);
-  bomb_loc = getent("bomb_loc", "targetname");
+  bomb_loc = getEnt("bomb_loc", "targetname");
   bomb_loc playSound("amb_end_nuke");
   level notify("bomb_drop");
   clientnotify("bomb_drop");
@@ -216,14 +216,14 @@ nuke_detonation() {
   physicsexplosionsphere(location, 128, 128, 1);
   mannequinwaittime = getdvarfloatdefault("scr_nuke_mannequin_flip", 0.25);
   wait(mannequinwaittime);
-  level.endgamemannequin rotateto(level.endgamemannequin.angles + vectorscale((0, 0, 1), 90.0), 0.7);
-  level.endgamemannequin moveto(level.endgamemannequin.origin + vectorscale((0, 1, 0), 90.0), 1);
+  level.endgamemannequin rotateTo(level.endgamemannequin.angles + vectorscale((0, 0, 1), 90.0), 0.7);
+  level.endgamemannequin moveTo(level.endgamemannequin.origin + vectorscale((0, 1, 0), 90.0), 1);
 }
 
 nuked_bomb_drop_think() {
-  camerastart = getstruct("endgame_camera_start", "targetname");
-  cameraend = getstruct(camerastart.target, "targetname");
-  bomb_loc = getent("bomb_loc", "targetname");
+  camerastart = getStruct("endgame_camera_start", "targetname");
+  cameraend = getStruct(camerastart.target, "targetname");
+  bomb_loc = getEnt("bomb_loc", "targetname");
   cam_move_time = set_dvar_float_if_unset("scr_cam_move_time", "4.0");
   bomb_explode_delay = set_dvar_float_if_unset("scr_bomb_explode_delay", "2.75");
   env_destroy_delay = set_dvar_float_if_unset("scr_env_destroy_delay", "0.5");
@@ -243,8 +243,8 @@ nuked_bomb_drop_think() {
       player setdepthoffield(0, 128, 7000, 10000, 6, 1.8);
     }
 
-    camera moveto(cameraend.origin, cam_move_time, 0, 0);
-    camera rotateto(cameraend.angles, cam_move_time, 0, 0);
+    camera moveTo(cameraend.origin, cam_move_time, 0, 0);
+    camera rotateTo(cameraend.angles, cam_move_time, 0, 0);
     bombwaittime = getdvarfloatdefault("mp_nuketown_2020_bombwait", 3.0);
     wait(bombwaittime);
     wait(env_destroy_delay);
@@ -255,8 +255,8 @@ nuked_bomb_drop_think() {
 }
 
 nuked_population_sign_think() {
-  tens_model = getent("counter_tens", "targetname");
-  ones_model = getent("counter_ones", "targetname");
+  tens_model = getEnt("counter_tens", "targetname");
+  ones_model = getEnt("counter_ones", "targetname");
   step = 36;
   ones = 0;
   tens = 0;
@@ -318,12 +318,12 @@ do_vcs() {
   if(level.wiiu) {
     return;
   }
-  targettag = getent("player_tv_position", "targetname");
+  targettag = getEnt("player_tv_position", "targetname");
   level.vcs_trigger = spawn("trigger_radius_use", targettag.origin, 0, 64, 64);
-  level.vcs_trigger setcursorhint("HINT_NOICON");
-  level.vcs_trigger sethintstring(&"MPUI_USE_VCS_HINT");
-  level.vcs_trigger triggerignoreteam();
-  screen = getent("nuketown_tv", "targetname");
+  level.vcs_trigger setCursorHint("HINT_NOICON");
+  level.vcs_trigger setHintString(&"MPUI_USE_VCS_HINT");
+  level.vcs_trigger triggerIgnoreTeam();
+  screen = getEnt("nuketown_tv", "targetname");
   screen setModel("nt_sign_population_vcs");
 
   while(true) {
@@ -344,8 +344,8 @@ do_vcs() {
     placementtag = spawn("script_model", player.origin);
     placementtag.angles = player.angles;
     player playerlinktoabsolute(placementtag);
-    placementtag moveto(targettag.origin, 0.5, 0.05, 0.05);
-    placementtag rotateto(targettag.angles, 0.5, 0.05, 0.05);
+    placementtag moveTo(targettag.origin, 0.5, 0.05, 0.05);
+    placementtag rotateTo(targettag.angles, 0.5, 0.05, 0.05);
     player enableinvulnerability();
     player openmenu("vcs");
     player wait_till_done_playing_vcs();
@@ -373,7 +373,7 @@ wait_till_done_playing_vcs() {
 }
 
 nuked_powerlevel_think() {
-  pin_model = getent("nuketown_sign_needle", "targetname");
+  pin_model = getEnt("nuketown_sign_needle", "targetname");
   pin_model thread pin_think();
 }
 
@@ -421,7 +421,7 @@ pin_think() {
 
 pin_move(angle, time) {
   angles = (angle, self.angles[1], self.angles[2]);
-  self rotateto(angles, time);
+  self rotateTo(angles, time);
 }
 
 pin_check_rotation(angle, time) {

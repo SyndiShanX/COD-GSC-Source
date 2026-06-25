@@ -45,7 +45,7 @@ rush(endon_flag, timeout) {
   self.health = self.health + 100;
   player = get_closest_player(self.origin);
   self.rushing_goalent = spawn("script_origin", player.origin);
-  self.rushing_goalent LinkTo(player);
+  self.rushing_goalent linkTo(player);
   self thread keep_rushing_player(player);
   if(!isDefined(self.noWoundedRushing) || self.noWoundedRushing == false) {
     self thread change_to_wounded();
@@ -142,11 +142,11 @@ set_rusher_type() {
     self.leftGunModel = spawn("script_model", self.origin);
     self.leftGunModel setModel(GetWeaponModel(self.weapon));
     self.leftGunModel UseWeaponHideTags(self.weapon);
-    self.leftGunModel LinkTo(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+    self.leftGunModel linkTo(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
     self.rightGunModel = spawn("script_model", self.origin);
     self.rightGunModel setModel(GetWeaponModel(self.weapon));
     self.rightGunModel UseWeaponHideTags(self.weapon);
-    self.rightGunModel LinkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    self.rightGunModel linkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     self.rightGunModel Hide();
     self.secondGunHand = "left";
     self thread dualWeaponDropLogic();

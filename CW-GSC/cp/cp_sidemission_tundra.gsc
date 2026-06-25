@@ -34,7 +34,7 @@ function event_handler[level_init] main(eventstruct) {
   setDvar(#"hkai_pathfinditerationlimit", 5000);
   load::main();
   init_callbacks();
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   level.var_30eb363 = #"hash_4e516e60f6798859";
   level.var_85b00b2b = #"hash_67c0d8cb1c978161";
   level.var_3ff1b984[getweapon(#"ac130")] = 1;

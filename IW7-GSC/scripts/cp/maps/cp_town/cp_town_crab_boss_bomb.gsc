@@ -425,13 +425,13 @@ delay_deactivate_bomb_panel(var_0) {
 transition_into_enter_bomb_code(var_0, var_1) {
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
-  var_1 playerlinkto(var_2, "tag_origin", 1, 0, 0, 0, 0, 0);
+  var_1 playerlinkTo(var_2, "tag_origin", 1, 0, 0, 0, 0, 0);
   var_1.pre_bomb_code_stance = var_1 getstance();
   var_1 allowprone(0);
   var_1 allowcrouch(1);
   var_1 allowstand(0);
   var_2.angles = var_0.angles + (0, 0, 0);
-  var_2 moveto(var_0.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_0.angles), -15), 0.3);
+  var_2 moveTo(var_0.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_0.angles), -15), 0.3);
   var_0.anchor = var_2;
   var_2 waittill("movedone");
 }
@@ -574,14 +574,14 @@ nuclear_bomb_armed_sequence() {
 
 delay_move_status_lights_down() {
   wait(2);
-  var_0 = scripts\engine\utility::getstruct("bomb_lights", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("bomb_lights", "script_noteworthy");
   if(isDefined(var_0.bomb_lights)) {
-    var_0.bomb_lights moveto(var_0.bomb_lights.origin - (0, 0, 8), 1.5);
+    var_0.bomb_lights moveTo(var_0.bomb_lights.origin - (0, 0, 8), 1.5);
   }
 
   foreach(var_2 in level.bomb_interaction_structs) {
     if(isDefined(var_2.bomb_status_light)) {
-      var_2.bomb_status_light moveto(var_2.bomb_status_light.origin - (0, 0, 8), 1.5);
+      var_2.bomb_status_light moveTo(var_2.bomb_status_light.origin - (0, 0, 8), 1.5);
     }
   }
 }
@@ -645,11 +645,11 @@ setup_bomb_panel(var_0) {
 }
 
 activate_bomb_panel(var_0) {
-  var_0.bomb_panel_model moveto(var_0.bomb_panel_model.active_origin, 0.3);
+  var_0.bomb_panel_model moveTo(var_0.bomb_panel_model.active_origin, 0.3);
 }
 
 deactivate_bomb_panel(var_0) {
-  var_0.bomb_panel_model moveto(var_0.bomb_panel_model.var_C725, 0.3);
+  var_0.bomb_panel_model moveTo(var_0.bomb_panel_model.var_C725, 0.3);
 }
 
 turn_on_bomb_status_light(var_0) {
@@ -665,7 +665,7 @@ show_bomb_code() {
 }
 
 setup_bomb_lights() {
-  var_0 = scripts\engine\utility::getstruct("bomb_lights", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("bomb_lights", "script_noteworthy");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("cp_town_nuke_lights");
   var_1.angles = var_0.angles;
@@ -674,11 +674,11 @@ setup_bomb_lights() {
 
 move_up(var_0) {
   var_0 endon("death");
-  var_0 moveto(var_0.origin + (0, 0, 8), 1.5);
+  var_0 moveTo(var_0.origin + (0, 0, 8), 1.5);
 }
 
 delete_bomb_lights() {
-  var_0 = scripts\engine\utility::getstruct("bomb_lights", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("bomb_lights", "script_noteworthy");
   if(isDefined(var_0.bomb_lights)) {
     var_0.bomb_lights delete();
   }

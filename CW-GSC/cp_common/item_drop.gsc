@@ -89,7 +89,7 @@ function function_4814ed2e(params) {
         }
       }
 
-      playsoundatposition(#"hash_24560114c2498b4d", killer.origin);
+      playSoundAtPosition(#"hash_24560114c2498b4d", killer.origin);
     }
 
     return;
@@ -151,7 +151,7 @@ function function_cdd56b7c(drop, origin) {
   nd.model = spawn("script_model", nd.origin);
   nd.model setModel(drop.model);
   nd.model thread function_24035033();
-  playsoundatposition(#"hash_daa5170584cefa3", origin);
+  playSoundAtPosition(#"hash_daa5170584cefa3", origin);
   return nd;
 }
 
@@ -196,7 +196,7 @@ function pickup(drop) {
     }
   }
 
-  playsoundatposition(#"hash_24560114c2498b4d", self.origin);
+  playSoundAtPosition(#"hash_24560114c2498b4d", self.origin);
   drop.model delete();
   arrayremovevalue(level.var_96d850f9, drop);
   return true;

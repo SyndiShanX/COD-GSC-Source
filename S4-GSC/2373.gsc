@@ -588,7 +588,7 @@ _id_DD74() {
       if(var_17 < var_18 * var_19) {
         continue;
       }
-      var_17 = vectordot(var_11, vectornormalize(var_3));
+      var_17 = vectordot(var_11, vectorNormalize(var_3));
 
       if(var_17 < 0.382683) {
         var_2 = var_2 + 2;
@@ -666,10 +666,10 @@ _id_FD2C(var_0) {
 _id_6D2D(var_0) {
   var_1 = anglesToForward(self getplayerangles());
   var_2 = (var_1[0], var_1[1], var_1[2]);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_0.origin - self.origin;
   var_4 = (var_3[0], var_3[1], var_3[2]);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_5 = vectordot(var_2, var_4);
 
   if(var_5 >= 0.92388) {

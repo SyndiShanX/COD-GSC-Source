@@ -463,7 +463,7 @@ function function_619ae3a0() {
 }
 
 function function_8ff4d53f() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_619ae3a0();
   }
 }

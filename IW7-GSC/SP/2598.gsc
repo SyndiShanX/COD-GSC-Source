@@ -32,9 +32,9 @@ func_33AC(var_0, var_1, var_2, var_3) {
   self playSound("shield_death_c6_1");
   func_3368();
   scripts\anim\shared::func_5D1A();
-  var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30));
+  var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30));
   if(self.var_E2 == "iw7_c6hack_melee" || self.var_E2 == "iw7_c6worker_fists") {
-    var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
+    var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
   }
 
   self func_82B1(lib_0A1E::func_2342(), 0);
@@ -105,7 +105,7 @@ func_3361(var_0, var_1, var_2, var_3) {
     self[[self.var_71C8]]();
   }
 
-  self giverankxp_regularmp("torso_upper", vectornormalize(self.origin - level.player.origin + (0, 0, 10)) * 2200);
+  self giverankxp_regularmp("torso_upper", vectorNormalize(self.origin - level.player.origin + (0, 0, 10)) * 2200);
   wait(0.1);
   var_5 = lib_0A1E::asm_getbodyknob();
   self clearanim(var_5, 0.05);

@@ -48,7 +48,7 @@ friendly_state_spotted() {
 
   self thread friendly_spotted_getup_from_prone();
   self allowedstances("prone", "crouch", "stand");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 }
 
 friendly_spotted_getup_from_prone(angles) {

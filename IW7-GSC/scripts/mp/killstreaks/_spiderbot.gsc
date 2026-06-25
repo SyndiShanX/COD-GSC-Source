@@ -90,12 +90,12 @@ func_13BB0(var_0, var_1) {
   self.var_AD32 = var_4;
   self playerlinktoblend(var_4, "tag_origin", 0.5);
   if(isDefined(var_3.var_1155F) && isPlayer(var_3.var_1155F)) {
-    var_3 linkto(var_3.var_1155F);
+    var_3 linkTo(var_3.var_1155F);
     thread func_13B79(var_3);
     var_5 = 0.5;
     while(distance2dsquared(var_4.origin, var_3.origin) > 400 || !isDefined(var_3.var_1155F)) {
-      var_4 rotateto(vectortoangles(var_3.origin - var_4.origin), 0.3);
-      var_4 moveto(var_3.origin, var_5);
+      var_4 rotateTo(vectortoangles(var_3.origin - var_4.origin), 0.3);
+      var_4 moveTo(var_3.origin, var_5);
       wait(var_5);
       var_5 = var_5 - 0.25;
       var_5 = max(0.05, var_5);
@@ -105,7 +105,7 @@ func_13BB0(var_0, var_1) {
     return;
   }
 
-  var_4 moveto(var_3.origin, 0.5);
+  var_4 moveTo(var_3.origin, 0.5);
   var_4 thread func_13AD8(var_3.origin, self);
 }
 

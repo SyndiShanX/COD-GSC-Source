@@ -39,7 +39,7 @@
 #namespace tkdn_af_intro;
 
 function starting(str_skipto) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(player)) {
     iprintlnbold("<dev string:x38>");
@@ -59,7 +59,7 @@ function main(str_skipto, b_starting) {
   level thread namespace_29a279dd::set_display(3);
   level lui::play_movie(#"hash_1b87a73f3c672bf7", "fullscreen", 1, 0, 0, #"", 20);
 
-  for(player = getplayers()[0]; !isPlayer(player); player = getplayers()[0]) {
+  for(player = getPlayers()[0]; !isPlayer(player); player = getPlayers()[0]) {
     waitframe(1);
   }
 
@@ -124,11 +124,11 @@ function main(str_skipto, b_starting) {
 
 function knife_rumble() {
   level waittill(#"knife_rumble");
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
 }
 
 function function_1dee368(var_54fed624) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isPlayer(player)) {
     return;
@@ -148,7 +148,7 @@ function function_d12ea338() {
 }
 
 function function_cc5aa221() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level waittill(#"hash_6682816c8cb8b60f");
 }
 

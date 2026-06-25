@@ -1339,7 +1339,7 @@ func_2E1F(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
           var_55 = (0, 0, 0);
           if(isDefined(param_07)) {
             var_55 = param_07.var_0116;
-            var_56 = vectornormalize(param_05 - var_55);
+            var_56 = vectorNormalize(param_05 - var_55);
             var_56 = var_56 * 200;
           }
         }
@@ -1902,7 +1902,7 @@ func_3923(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         if(level.var_0075[self.var_2E25].var_6E9F[var_12][0].var_A265["physicsOnExplosion"] > 0) {
           var_17 = level.var_0075[self.var_2E25].var_6E9F[var_12][0].var_A265["physicsOnExplosion"];
           var_18 = self gettagorigin(var_10);
-          var_19 = vectornormalize(var_18 - var_11);
+          var_19 = vectorNormalize(var_18 - var_11);
           var_19 = var_19 * randomfloatrange(param_01, param_02) * var_17;
           if(isDefined(param_0D) && isDefined(param_0E)) {
             var_1A = common_scripts\utility::func_7A61(param_0D, param_0E);
@@ -2160,13 +2160,13 @@ func_71A7(param_00, param_01) {
   if(isDefined(param_01)) {
     var_02 = spawn("script_origin", self gettagorigin(param_01));
     var_02 method_805C();
-    var_02 linkto(self, param_01, (0, 0, 0), (0, 0, 0));
+    var_02 linkTo(self, param_01, (0, 0, 0), (0, 0, 0));
   } else {
     var_02 = spawn("script_origin", (0, 0, 0));
     var_02 method_805C();
     var_02.var_0116 = self.var_0116;
     var_02.var_001D = self.var_001D;
-    var_02 linkto(self);
+    var_02 linkTo(self);
   }
 
   var_02 method_8617(param_00);
@@ -2247,12 +2247,12 @@ func_30DF(param_00, param_01, param_02, param_03) {
     var_04[0] = spawn("script_model", self gettagorigin(param_00));
     var_04[0].var_001D = self gettagangles(param_00);
     var_04[0] setModel(param_01);
-    var_04[0] linkto(self, param_00);
+    var_04[0] linkTo(self, param_00);
     if(isDefined(param_02) && param_02 != "") {
       var_04[1] = spawn("script_model", self gettagorigin(param_00));
       var_04[1].var_001D = self gettagangles(param_00);
       var_04[1] setModel(param_02);
-      var_04[1] linkto(self, param_00);
+      var_04[1] linkTo(self, param_00);
     }
   }
 
@@ -2532,13 +2532,13 @@ func_2E1B(param_00, param_01, param_02, param_03) {
   level notify("new_destructible_spotlight");
   level.var_2E1A unlink();
   var_05 = common_scripts\utility::func_8FFC();
-  var_05 linkto(self, param_00["spotlight_tag"], (0, 0, 0), (0, 0, 0));
+  var_05 linkTo(self, param_00["spotlight_tag"], (0, 0, 0), (0, 0, 0));
   level.var_2E1A.var_0116 = self.var_1BAF.var_0116;
   level.var_2E1A.var_001D = self.var_1BAF.var_001D;
   level.var_2E1A thread func_9117(param_00, param_01, param_02, param_03, var_05);
   wait 0.05;
   if(isDefined(var_05)) {
-    level.var_2E1A linkto(var_05);
+    level.var_2E1A linkTo(var_05);
   }
 }
 
@@ -3218,7 +3218,7 @@ func_92C7(param_00) {
     }
 
     if(isDefined(var_03.var_6E74)) {
-      var_04 linkto(var_03.var_6E74);
+      var_04 linkTo(var_03.var_6E74);
       var_03.var_6E74.var_32B1 = var_04;
     }
 

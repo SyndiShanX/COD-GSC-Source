@@ -85,7 +85,7 @@ listen_for_dog_commands(var_0) {
     }
 
     if(isDefined(var_0.animnode)) {
-      var_0 stopanimscripted();
+      var_0 stopanimScripted();
       var_0.animnode notify("stop_loop");
     }
 
@@ -412,7 +412,7 @@ dog_command_attack(var_0) {
   self endon("damage");
   self endon("cancel_dog_attack");
   self notify("dog_command_attack", var_0);
-  self.dog_marker linkto(var_0, "tag_origin", (0, 0, 0), (-90, 0, -90));
+  self.dog_marker linkTo(var_0, "tag_origin", (0, 0, 0), (-90, 0, -90));
   wait 0.05;
 
   if(!isalive(var_0)) {
@@ -741,7 +741,7 @@ drawchopperattackarrow(var_0, var_1, var_2) {
   level.chopperattackarrow.origin = var_0;
 
   if(var_2 > 0) {
-    level.chopperattackarrow rotateto(vectortoangles(var_1), 0.2);
+    level.chopperattackarrow rotateTo(vectortoangles(var_1), 0.2);
   } else {
     level.chopperattackarrow.angles = vectortoangles(var_1);
   }

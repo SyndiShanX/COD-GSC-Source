@@ -209,13 +209,13 @@ function_29a3aca4() {
 
     if(s_waitresult.var_c8407ea2 !== var_1fc5672) {
       s_waitresult.mdl_rune clientfield::set("" + #"hash_693891d7b7f47419", 2);
-      playsoundatposition("zmb_sk_stones_dest", s_waitresult.mdl_rune.origin);
+      playSoundAtPosition("zmb_sk_stones_dest", s_waitresult.mdl_rune.origin);
       return false;
     }
 
     s_waitresult.mdl_rune clientfield::set("" + #"hash_693891d7b7f47419", 1);
     var_1fc5672++;
-    playsoundatposition("zmb_sk_stones_dest_correct", s_waitresult.mdl_rune.origin);
+    playSoundAtPosition("zmb_sk_stones_dest_correct", s_waitresult.mdl_rune.origin);
   }
 
   s_waitresult.attacker thread zm_vo::function_a2bd5a0c(#"hash_307199a2e20f6edc", 1);
@@ -257,8 +257,8 @@ function_39e0636(var_a276c861) {
       var_ae18fb21 = struct::get("a_skeet_fink_chunk", "targetname");
       var_5901d1c9 = struct::get(var_ae18fb21.target, "targetname");
       mdl_stake = util::spawn_model(#"hash_1a8e66a7966f8086", var_f2dc13a0.origin, var_f2dc13a0.angles);
-      mdl_stake moveto(var_ae18fb21.origin, 3.6, 3.6);
-      mdl_stake rotateto(var_ae18fb21.angles, 3.6, 3.6);
+      mdl_stake moveTo(var_ae18fb21.origin, 3.6, 3.6);
+      mdl_stake rotateTo(var_ae18fb21.angles, 3.6, 3.6);
       wait 3.6 * 0.7;
       mdl_stake playSound("zmb_sk_tree_branch_fall");
       wait 3.6 * 0.3;
@@ -266,8 +266,8 @@ function_39e0636(var_a276c861) {
       playrumbleonposition("grenade_rumble", var_ae18fb21.origin);
       earthquake(0.5, 0.8, var_ae18fb21.origin, 512);
       var_ae18fb21.var_bbd0b2fb = spawn("trigger_radius_use", var_5901d1c9.origin, 0, 64, 72);
-      var_ae18fb21.var_bbd0b2fb setcursorhint("HINT_NOICON");
-      var_ae18fb21.var_bbd0b2fb triggerignoreteam();
+      var_ae18fb21.var_bbd0b2fb setCursorHint("HINT_NOICON");
+      var_ae18fb21.var_bbd0b2fb triggerIgnoreTeam();
       var_ae18fb21.var_bbd0b2fb setvisibletoall();
       var_ae18fb21.var_bbd0b2fb.mdl_stake = mdl_stake;
 
@@ -343,7 +343,7 @@ function_1dc8ad86() {
       if(s_waitresult.var_c8407ea2 == var_1fc5672) {
         var_1fc5672++;
         level clientfield::set("" + #"hash_70b438bea0135fc8", var_1fc5672);
-        playsoundatposition("zmb_sk_tree_hit_knife", (-440, 4200, -415));
+        playSoundAtPosition("zmb_sk_tree_hit_knife", (-440, 4200, -415));
       }
 
       continue;
@@ -351,7 +351,7 @@ function_1dc8ad86() {
 
     if(s_waitresult._notify == #"rune_bashed") {
       if(s_waitresult.var_c8407ea2 == 0 && var_1fc5672 == 4) {
-        playsoundatposition("zmb_sk_tree_hit_shield", (-440, 4200, -415));
+        playSoundAtPosition("zmb_sk_tree_hit_shield", (-440, 4200, -415));
         return 1;
       }
     }
@@ -384,8 +384,8 @@ function_15c82a8a(var_a276c861) {
     var_4b9c76d7.mdl_stake hide();
     var_fb11d383 = struct::get(var_4b9c76d7.target, "targetname");
     var_4b9c76d7.var_360ebd9f = spawn("trigger_radius_use", var_fb11d383.origin, 0, 64, 72);
-    var_4b9c76d7.var_360ebd9f setcursorhint("HINT_NOICON");
-    var_4b9c76d7.var_360ebd9f triggerignoreteam();
+    var_4b9c76d7.var_360ebd9f setCursorHint("HINT_NOICON");
+    var_4b9c76d7.var_360ebd9f triggerIgnoreTeam();
     var_4b9c76d7.var_360ebd9f setvisibletoall();
     level clientfield::set("" + #"hash_5f0c4b68b2a6a75d", 1);
 
@@ -394,7 +394,7 @@ function_15c82a8a(var_a276c861) {
     }
 
     var_4b9c76d7.mdl_stake show();
-    playsoundatposition("zmb_sk_tree_branch_place", var_4b9c76d7.mdl_stake.origin);
+    playSoundAtPosition("zmb_sk_tree_branch_place", var_4b9c76d7.mdl_stake.origin);
     level clientfield::set("" + #"hash_5f0c4b68b2a6a75d", 0);
 
     if(!var_a276c861) {
@@ -458,7 +458,7 @@ function_123eb361(var_88206a50, ent) {
   }
 
   s_inbetween = struct::get(var_88206a50.target, "targetname");
-  var_51e4bd8d = getent(s_inbetween.target, "targetname");
+  var_51e4bd8d = getEnt(s_inbetween.target, "targetname");
   return isDefined(ent) && (isPlayer(ent.attacker) || isPlayer(ent.damageinflictor)) && ent istouching(var_51e4bd8d);
 }
 
@@ -533,9 +533,9 @@ function_7aa50bb7(e_player) {
   can_use &= !e_player hasweapon(level.w_stake_knife);
 
   if(can_use) {
-    self sethintstring(self.stub.blueprint.purchaseprompt);
+    self setHintString(self.stub.blueprint.purchaseprompt);
   } else {
-    self sethintstring("");
+    self setHintString("");
   }
 
   return can_use;

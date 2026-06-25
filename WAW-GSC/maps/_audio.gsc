@@ -66,7 +66,7 @@ spawn_line_sound(sound) {
 
   self.soundmover = [];
 
-  endOfLineEntity = getstruct(startOfLine.target, "targetname");
+  endOfLineEntity = getStruct(startOfLine.target, "targetname");
   if(isDefined(endOfLineEntity)) {
     start = startOfLine.origin;
     end = endOfLineEntity.origin;

@@ -277,9 +277,9 @@ mangrove() {
   level thread bunker_friendlywave();
   level thread bunker_4_47mm();
 
-  trig = getent("chain_bunker_1", "targetname");
+  trig = getEnt("chain_bunker_1", "targetname");
   trig trigger_off();
-  trig = getent("chain_bunker_2", "targetname");
+  trig = getEnt("chain_bunker_2", "targetname");
   trig trigger_off();
 
   setmusicstate("SWAMP");
@@ -477,7 +477,7 @@ mangrove_ambush_beat_2_timeout() {
   flag_wait("mangrove_ambush");
   wait(RandomIntRange(12, 14));
 
-  trig = getent("trig_mangrove_ambush_guys_2", "script_noteworthy");
+  trig = getEnt("trig_mangrove_ambush_guys_2", "script_noteworthy");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -525,7 +525,7 @@ post_trap_chain_1() {
     level.heroes[i].baseaccuracy = level.heroes[i].previous_accuracy;
   }
 
-  trig = getent("trig_chain_post_trap_1", "targetname");
+  trig = getEnt("trig_chain_post_trap_1", "targetname");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -536,7 +536,7 @@ post_trap_chain_2() {
 
   waittill_aigroupcleared("mangrove_ambush_ai_2");
 
-  trig = getent("trig_chain_post_trap_2", "targetname");
+  trig = getEnt("trig_chain_post_trap_2", "targetname");
   if(isDefined(trig)) {
     trig notify("trigger");
   }
@@ -708,7 +708,7 @@ trap_checkers() {
   helper.animname = "trap_react_redshirt_1_idle";
   checker.animname = "trap_react_redshirt_2_idle";
 
-  anim_node = getstruct("node_anim_trap", "targetname");
+  anim_node = getStruct("node_anim_trap", "targetname");
 
   level thread anim_loop_solo(helper, "mangrove_trap", undefined, "stop_mangrove_trap_loop", anim_node);
   level thread anim_loop_solo(checker, "mangrove_trap", undefined, "stop_mangrove_trap_loop", anim_node);
@@ -744,7 +744,7 @@ trap_checker_strat() {
 }
 
 plane_trap_fx() {
-  orig = getstruct("orig_trap_explode", "targetname");
+  orig = getStruct("orig_trap_explode", "targetname");
   temp_orig = spawn("script_origin", orig.origin);
   level thread plane_trap_click_fx(temp_orig);
 
@@ -776,7 +776,7 @@ plane_trap_click_fx(temp_orig) {
 
 #using_animtree("generic_human");
 plane_trap_pilot() {
-  orig = getstruct("orig_plane_trap_pilot", "targetname");
+  orig = getStruct("orig_plane_trap_pilot", "targetname");
 
   pilot = spawn("script_model", orig.origin);
   pilot.angles = orig.angles;
@@ -785,7 +785,7 @@ plane_trap_pilot() {
   pilot.animname = "mangrove_trap";
   pilot.targetname = "script_pilot";
 
-  anim_node = getstruct("node_anim_trap", "targetname");
+  anim_node = getStruct("node_anim_trap", "targetname");
 
   level thread anim_loop_solo(pilot, "trap_idle_pilot", undefined, "mangrove_ambush_pre", anim_node);
 
@@ -1030,7 +1030,7 @@ grenade_vignette() {
 
   event_text("in place. waiting to regroup nearby");
 
-  regroup_trig = getent("trig_near_grenaders", "targetname");
+  regroup_trig = getEnt("trig_near_grenaders", "targetname");
 
   level thread gren_lookat_override();
 
@@ -1075,7 +1075,7 @@ grenade_vignette_post() {
 
   level.roebuck set_generic_run_anim("roebuck_run", true);
 
-  trig = getent("trigger_bunker_wave_1", "script_noteworthy");
+  trig = getEnt("trigger_bunker_wave_1", "script_noteworthy");
   trig notify("trigger");
 
   wait(1.75);
@@ -1089,9 +1089,9 @@ grenade_vignette_post() {
   array_thread(level.heroes, ::set_pacifist_off);
   array_thread(level.heroes, ::set_ignoreme_off);
 
-  trig = getent("chain_bunker_1", "targetname");
+  trig = getEnt("chain_bunker_1", "targetname");
   trig trigger_on();
-  trig = getent("chain_bunker_2", "targetname");
+  trig = getEnt("chain_bunker_2", "targetname");
   trig trigger_on();
 
   set_color_chain("trig_chain_bunkers");
@@ -1100,7 +1100,7 @@ grenade_vignette_post() {
 }
 
 gren_lookat_override() {
-  trig = getent("trig_mangrove_gren_lookat", "targetname");
+  trig = getEnt("trig_mangrove_gren_lookat", "targetname");
   trig waittill("trigger");
 
   flag_set("mangrove_gren_lookat");
@@ -1218,7 +1218,7 @@ box_carry_drop() {
 
   self detach("static_peleliu_crate_jpn_clsd_char", "tag_weapon_left");
 
-  box moveto(ground_trace["position"] - (0, 0, 2), 0.2);
+  box moveTo(ground_trace["position"] - (0, 0, 2), 0.2);
 }
 
 box_carry_damage() {
@@ -1253,15 +1253,15 @@ box_carry_death_run() {
 start_bunkers() {
   setup_level();
 
-  getent("trig_chain_post_trap_2", "targetname") delete();
+  getEnt("trig_chain_post_trap_2", "targetname") delete();
 
   level thread battle_line_ambient_sound();
 
   players_speed_set(0.8, 0.1);
 
-  trig = getent("chain_bunker_1", "targetname");
+  trig = getEnt("chain_bunker_1", "targetname");
   trig trigger_off();
-  trig = getent("chain_bunker_2", "targetname");
+  trig = getEnt("chain_bunker_2", "targetname");
   trig trigger_off();
 
   maps\_vehicle::scripted_spawn(24);
@@ -1407,7 +1407,7 @@ start_admin() {
 start_debug_stairs() {
   setup_level();
 
-  getent("trig_bunker_left_spawners", "targetname") delete();
+  getEnt("trig_bunker_left_spawners", "targetname") delete();
 
   level.roebuck set_generic_run_anim("roebuck_run", true);
 
@@ -1449,9 +1449,9 @@ start_airfield() {
   level thread maps\pel2_airfield::airfield_mortars();
   wait(0.05);
 
-  trig = getent("trig_bunker_left_spawners", "targetname");
+  trig = getEnt("trig_bunker_left_spawners", "targetname");
   trig delete();
-  trig = getent("trig_admin_extra_middle_spawner", "script_noteworthy");
+  trig = getEnt("trig_admin_extra_middle_spawner", "script_noteworthy");
   trig delete();
 
   set_color_heroes("g");
@@ -1481,7 +1481,7 @@ start_aaguns() {
 
   level.roebuck set_generic_run_anim("roebuck_run", true);
 
-  getent("trig_airfield_last_trench", "script_noteworthy") delete();
+  getEnt("trig_airfield_last_trench", "script_noteworthy") delete();
 
   flag_set("chi_3_wave_dead");
 
@@ -1522,10 +1522,10 @@ start_napalm() {
 
   level.roebuck set_generic_run_anim("roebuck_run", true);
 
-  getent("trig_airfield_last_trench", "script_noteworthy") delete();
-  getent("chain_center_of_aa_bunker", "targetname") delete();
+  getEnt("trig_airfield_last_trench", "script_noteworthy") delete();
+  getEnt("chain_center_of_aa_bunker", "targetname") delete();
 
-  respawn_trig = getent("auto5390", "target");
+  respawn_trig = getEnt("auto5390", "target");
   respawn_trig notify("trigger");
 
   level thread debug_tank_health();
@@ -1536,7 +1536,7 @@ start_napalm() {
   extra_guy = simple_spawn("friend_admin_spawner_2");
   reinforcements = array_combine(reinforcements, extra_guy);
 
-  getent("auto2608", "target") delete();
+  getEnt("auto2608", "target") delete();
 
   for(i = 0; i < reinforcements.size; i++) {
     reinforcements[i] forceteleport((2619.5, 8199, 124));
@@ -1583,11 +1583,11 @@ airfield_temp_kill_axis() {
 setup_friendlies() {
   level.heroes = [];
 
-  level.roebuck = getent("roebuck", "script_noteworthy");
+  level.roebuck = getEnt("roebuck", "script_noteworthy");
   level.roebuck.name = "Sgt. Roebuck";
-  level.polonsky = getent("polonsky", "script_noteworthy");
+  level.polonsky = getEnt("polonsky", "script_noteworthy");
   level.polonsky.name = "Pvt. Polonsky";
-  level.extra_hero = getent("king", "script_noteworthy");
+  level.extra_hero = getEnt("king", "script_noteworthy");
 
   level.heroes[0] = level.roebuck;
   level.heroes[1] = level.polonsky;
@@ -1914,7 +1914,7 @@ flamer_advance_bunkers() {
   fire_spot_2 = convert_aiming_struct_to_origin("orig_flame_advance_2");
   fire_spot_3 = convert_aiming_struct_to_origin("orig_flame_advance_3");
 
-  vol = getent("vol_flame_advance_1", "targetname");
+  vol = getEnt("vol_flame_advance_1", "targetname");
   if(!any_player_istouching(vol) && !flag("flamer_advance_to_hide")) {
     level thread flame_move_target(fire_spot_1, 2.5);
     self thread flame_burst(fire_spot_1, "flamer_advance_to_2");
@@ -1930,7 +1930,7 @@ flamer_advance_bunkers() {
     self waittill("goal");
   }
 
-  vol = getent("vol_flame_advance_2", "targetname");
+  vol = getEnt("vol_flame_advance_2", "targetname");
   if(!any_player_istouching(vol) && !flag("flamer_advance_to_hide")) {
     level thread flame_move_target(fire_spot_2, 2.5);
     self thread flame_burst(fire_spot_2, "flamer_advance_to_3");
@@ -1947,7 +1947,7 @@ flamer_advance_bunkers() {
     self waittill("goal");
   }
 
-  vol = getent("vol_flame_advance_3", "targetname");
+  vol = getEnt("vol_flame_advance_3", "targetname");
   if(!any_player_istouching(vol) && !flag("flamer_advance_to_hide")) {
     level thread flame_move_target(fire_spot_3, 2.5);
     self thread flame_burst(fire_spot_3, "flamer_advance_to_hide");
@@ -2070,7 +2070,7 @@ flamer_strat() {
   level thread player_pickup_flamethrower(self);
 
   flag_set("flame_guy_killed");
-  playsoundatposition("flame_stinger", (0, 0, 0));
+  playSoundAtPosition("flame_stinger", (0, 0, 0));
 }
 
 flamer_strat_fake_death(goal_node) {
@@ -2187,11 +2187,11 @@ mg_focus_both_berm_delay() {
 
 mgs_targets_move() {
   mg_targets = [];
-  mg_targets[0] = getent("bunker_end_target_1_converted", "targetname");
-  mg_targets[1] = getent("bunker_end_target_2_converted", "targetname");
-  mg_targets[2] = getent("bunker_end_target_3_converted", "targetname");
-  mg_targets[3] = getent("bunker_end_target_1a_converted", "targetname");
-  mg_targets[4] = getent("bunker_end_target_2a_converted", "targetname");
+  mg_targets[0] = getEnt("bunker_end_target_1_converted", "targetname");
+  mg_targets[1] = getEnt("bunker_end_target_2_converted", "targetname");
+  mg_targets[2] = getEnt("bunker_end_target_3_converted", "targetname");
+  mg_targets[3] = getEnt("bunker_end_target_1a_converted", "targetname");
+  mg_targets[4] = getEnt("bunker_end_target_2a_converted", "targetname");
 
   level thread flame_move_target(mg_targets[0], 3.75);
   level thread flame_move_target(mg_targets[1], 4.75);
@@ -2209,7 +2209,7 @@ mgs_targets_move() {
 
 bunker_distract(which_flag) {
   damage_total = 0;
-  damage_trig = getent("trig_damage_end_bunker", "targetname");
+  damage_trig = getEnt("trig_damage_end_bunker", "targetname");
 
   while(level.bunker_mg_damage_total < 500) {
     damage_trig waittill("damage", damage_amount, attacker);
@@ -2259,13 +2259,13 @@ forest_truck_spawners_strat() {
 deadly_mgs() {
   level thread bunker_mg_killzone();
 
-  turret = getent("flame_bunker_mg_r", "targetname");
+  turret = getEnt("flame_bunker_mg_r", "targetname");
   turret setTurretTeam("axis");
   turret SetMode("auto_ai");
   turret setturretignoregoals(true);
   turret thread maps\_mgturret::burst_fire_unmanned();
 
-  turret = getent("flame_bunker_mg_l", "targetname");
+  turret = getEnt("flame_bunker_mg_l", "targetname");
   turret setTurretTeam("axis");
   turret SetMode("auto_ai");
   turret setturretignoregoals(true);
@@ -2294,7 +2294,7 @@ player_flame_bunker() {
   setmusicstate("FLAMER_DIED");
 
   damage_total = 0;
-  damage_trig = getent("trig_damage_end_bunker_flame", "targetname");
+  damage_trig = getEnt("trig_damage_end_bunker_flame", "targetname");
 
   flame_bunker_mg_damage_total = 0;
 
@@ -2338,7 +2338,7 @@ bunker_window_1_flamed_delay() {
 flame_bunker_continue() {
   flag_wait_either("bunker_window_1_flamed", "bunker_killed_but_not_flamed");
 
-  turret = getent("flame_bunker_mg_l", "targetname");
+  turret = getEnt("flame_bunker_mg_l", "targetname");
   turret cleartargetentity();
   turret SetMode("auto_ai");
   turret notify("death");
@@ -2347,7 +2347,7 @@ flame_bunker_continue() {
 
   flag_wait_either("bunker_window_2_flamed", "bunker_killed_but_not_flamed");
 
-  turret = getent("flame_bunker_mg_r", "targetname");
+  turret = getEnt("flame_bunker_mg_r", "targetname");
   turret cleartargetentity();
   turret SetMode("auto_ai");
   turret notify("death");
@@ -2440,11 +2440,11 @@ bunkers_flame_pre_explosions() {
   radiusdamage((-377.5, -6863.5, -31), 170, 200, 150);
   radiusdamage((-126.7, -6883.5, -47.8), 30, 200, 150);
 
-  orig = getstruct("orig_bunker_flame_fx_1", "targetname");
+  orig = getStruct("orig_bunker_flame_fx_1", "targetname");
 
   earthquake(0.4, 1.0, orig.origin, 800);
   PlayRumbleOnPosition("explosion_generic", orig.origin);
-  playsoundatposition("bomb_far_falloff_1", orig.origin);
+  playSoundAtPosition("bomb_far_falloff_1", orig.origin);
 
   level thread bunkers_flame_pre_explosions_vo();
 
@@ -2452,7 +2452,7 @@ bunkers_flame_pre_explosions() {
 
   earthquake(0.5, 1.2, orig.origin, 900);
   PlayRumbleOnPosition("explosion_generic", orig.origin);
-  playsoundatposition("bomb_far_falloff_2", orig.origin);
+  playSoundAtPosition("bomb_far_falloff_2", orig.origin);
 
   wait(RandomFloatRange(1.25, 1.5));
 
@@ -2479,11 +2479,11 @@ bunkers_flame_pre_explosions_vo() {
 }
 
 blow_hole_in_bunker_wall() {
-  wall = getent("brush_flame_bunker", "targetname");
+  wall = getEnt("brush_flame_bunker", "targetname");
   wall connectpaths();
   wall delete();
 
-  fx_orig = getstruct("orig_bunker_flame_explode", "targetname");
+  fx_orig = getStruct("orig_bunker_flame_explode", "targetname");
   exploder(202);
   exploder(201);
 
@@ -2505,7 +2505,7 @@ chain_bunker_flame_back() {
 
   waittill_aigroupcleared("flame_bunker_defenders_ai_2");
 
-  chain_trig = getent("chain_bunker_flame_back", "targetname");
+  chain_trig = getEnt("chain_bunker_flame_back", "targetname");
   if(isDefined(chain_trig)) {
     chain_trig notify("trigger");
   }
@@ -2514,7 +2514,7 @@ chain_bunker_flame_back() {
 bunkers_flamed_fx() {
   level thread simple_spawn("bunker_post_flame_spawners", ::bunker_post_flame_strat);
 
-  orig = getstruct("orig_bunker_flame_fx_1", "targetname");
+  orig = getStruct("orig_bunker_flame_fx_1", "targetname");
 
   earthquake(0.75, 1.75, orig.origin, 1500);
   PlayRumbleOnPosition("explosion_generic", orig.origin);
@@ -2656,7 +2656,7 @@ clean_up_bunker_chains() {
 }
 
 chain_bunkers_entrance() {
-  far_trig = getent("trig_chain_bunkers_entrance_past", "targetname");
+  far_trig = getEnt("trig_chain_bunkers_entrance_past", "targetname");
   level thread set_flag_on_trigger(far_trig, "chain_bunkers_entrance_past");
 
   level endon("chain_bunkers_entrance_past");
@@ -2665,7 +2665,7 @@ chain_bunkers_entrance() {
 
   waittill_aigroupcount("bunker_1_pre_ai", 2);
 
-  main_trig = getent("trig_chain_bunkers_entrance", "targetname");
+  main_trig = getEnt("trig_chain_bunkers_entrance", "targetname");
   main_trig notify("trigger");
 }
 
@@ -2683,7 +2683,7 @@ chain_bunkers_5() {
     wait(0.4);
   }
 
-  chain_trig = getent("friendly_chain_bunkers_5", "script_noteworthy");
+  chain_trig = getEnt("friendly_chain_bunkers_5", "script_noteworthy");
   chain_trig notify("trigger");
 
   delete_noteworthy_ents("friendly_chain_bunkers_4");
@@ -2725,7 +2725,7 @@ bunkers_end_heroes_strat(goal) {
     play_vo(self, "vo", "suppressing_fire_on_mgs");
   }
 
-  suppression_target = getent("orig_flame_bunker_heroes_targ_converted", "targetname");
+  suppression_target = getEnt("orig_flame_bunker_heroes_targ_converted", "targetname");
   self SetEntityTarget(suppression_target);
 
   self.pacifist = 0;
@@ -2774,8 +2774,8 @@ bunker_mg_killzone() {
 
   level.player_being_targetted = false;
 
-  killzone_trigger = getent("trig_bunker_mg_killzone", "targetname");
-  killzone_trigger_extra = getent("trig_bunker_mg_killzone_extra", "targetname");
+  killzone_trigger = getEnt("trig_bunker_mg_killzone", "targetname");
+  killzone_trigger_extra = getEnt("trig_bunker_mg_killzone_extra", "targetname");
 
   while(!flag("bunkers_flamed")) {
     player_touching = get_player_touching(killzone_trigger);
@@ -2814,7 +2814,7 @@ bunker_mg_killzone() {
 smoke_grenade_on_the_scene() {
   level endon("bunkers_flamed");
 
-  trig = getent("trig_bunker_regroup", "targetname");
+  trig = getEnt("trig_bunker_regroup", "targetname");
 
   while(1) {
     grenades = getEntArray("grenade", "classname");
@@ -2838,7 +2838,7 @@ smoke_grenade_check_decrement() {
 
 guys_47mm_1_force_expand() {
   level endon("bunkers_flamed");
-  trig = getent("trig_47mm_1_radius_expand", "targetname");
+  trig = getEnt("trig_47mm_1_radius_expand", "targetname");
   trig endon("trigger");
 
   waittill_aigroupcleared("bunker_1_pre_ai");
@@ -2853,7 +2853,7 @@ guys_47mm_1_radius_expand() {
 
   change_noteworthy_goalradii("47mm_1_noteworthy", 465);
 
-  at_gun = getent("bunker_gun_1", "targetname");
+  at_gun = getEnt("bunker_gun_1", "targetname");
   at_gun notify("shut down arty");
 
   for(i = 0; i < at_gun.arty_crew.size; i++) {
@@ -2892,11 +2892,11 @@ guys_47mm_2_radius_expand() {
     guys[i] setgoalnode(nodes[i]);
 
     if(nodes[i].targetname == "auto1998") {
-      guys[i] thread delay_at47_retreat_goalradius();
+      guys[i] thread delay_at47_retreat_goalRadius();
     }
   }
 
-  at_gun = getent("bunker_gun_2", "targetname");
+  at_gun = getEnt("bunker_gun_2", "targetname");
   at_gun notify("shut down arty");
 
   for(i = 0; i < at_gun.arty_crew.size; i++) {
@@ -2908,7 +2908,7 @@ guys_47mm_2_radius_expand() {
   array_thread(at_gun.arty_crew, ::set_pacifist_off);
 }
 
-delay_at47_retreat_goalradius() {
+delay_at47_retreat_goalRadius() {
   self endon("death");
   self waittill("goal");
   self.goalradius = 300;
@@ -2921,7 +2921,7 @@ guys_47mm_4_radius_expand() {
 
   change_noteworthy_goalradii("47mm_4_noteworthy", 450);
 
-  at_gun = getent("bunker_gun_4", "targetname");
+  at_gun = getEnt("bunker_gun_4", "targetname");
   at_gun notify("shut down arty");
 
   for(i = 0; i < at_gun.arty_crew.size; i++) {
@@ -3066,7 +3066,7 @@ bunker_1_clear() {
 
   level notify("end_mangrove_drones");
 
-  new_respawn_trig = getent("trigger_bunker_wave_4", "script_noteworthy");
+  new_respawn_trig = getEnt("trigger_bunker_wave_4", "script_noteworthy");
   new_respawn_trig notify("trigger");
 
   intro_guys_advance();
@@ -3145,7 +3145,7 @@ intro_guys_ai_stop_shield() {
 bunker_prepare_flame() {
   event_text("waiting to clear end bunkers");
 
-  regroup_trig = getent("trig_bunker_regroup", "targetname");
+  regroup_trig = getEnt("trig_bunker_regroup", "targetname");
 
   event_text("waiting to regroup");
 
@@ -3164,8 +3164,8 @@ bunker_prepare_flame() {
 bunker_defenders_rhythm_stop() {
   level endon("bunkers_flamed");
 
-  turret_left = getent("flame_bunker_mg_l", "targetname");
-  turret_right = getent("flame_bunker_mg_r", "targetname");
+  turret_left = getEnt("flame_bunker_mg_l", "targetname");
+  turret_right = getEnt("flame_bunker_mg_r", "targetname");
 
   while(1) {
     wait(RandomIntRange(11, 13));
@@ -3243,7 +3243,7 @@ intro_tank_lookat() {
   vnode = getvehiclenode("node_intro_tank_die", "script_noteworthy");
   vnode waittill("trigger");
 
-  tank = getent("intro_tank_1", "targetname");
+  tank = getEnt("intro_tank_1", "targetname");
 
   playFX(level._effect["arty_dirt"], tank.origin, (1, 0, 0));
 
@@ -3277,7 +3277,7 @@ flame_truck() {
 
   wait(3.5);
 
-  truck = getent("flame_truck", "script_noteworthy");
+  truck = getEnt("flame_truck", "script_noteworthy");
   if(truck.health > 0) {
     radiusdamage(truck.origin, 1, truck.health + 1, truck.health + 1);
   }
@@ -3290,14 +3290,14 @@ flame_truck() {
 }
 
 mgs_focus_on_origins(focus) {
-  mg_left = getent("flame_bunker_mg_l", "targetname");
-  mg_right = getent("flame_bunker_mg_r", "targetname");
+  mg_left = getEnt("flame_bunker_mg_l", "targetname");
+  mg_right = getEnt("flame_bunker_mg_r", "targetname");
 
-  targ_1 = getent("bunker_end_target_1_converted", "targetname");
-  targ_1a = getent("bunker_end_target_1a_converted", "targetname");
-  targ_2 = getent("bunker_end_target_2_converted", "targetname");
-  targ_2a = getent("bunker_end_target_2a_converted", "targetname");
-  targ_3 = getent("bunker_end_target_3_converted", "targetname");
+  targ_1 = getEnt("bunker_end_target_1_converted", "targetname");
+  targ_1a = getEnt("bunker_end_target_1a_converted", "targetname");
+  targ_2 = getEnt("bunker_end_target_2_converted", "targetname");
+  targ_2a = getEnt("bunker_end_target_2a_converted", "targetname");
+  targ_3 = getEnt("bunker_end_target_3_converted", "targetname");
 
   mg_left.pel2_old_target_ent = targ_2a;
   mg_right.pel2_old_target_ent = targ_2;
@@ -3342,8 +3342,8 @@ mgs_focus_on_flamer() {
 
   set_players_ignoreme(true);
 
-  mg_left = getent("flame_bunker_mg_l", "targetname");
-  mg_right = getent("flame_bunker_mg_r", "targetname");
+  mg_left = getEnt("flame_bunker_mg_l", "targetname");
+  mg_right = getEnt("flame_bunker_mg_r", "targetname");
 
   mg_left cleartargetentity();
   mg_right cleartargetentity();
@@ -3384,8 +3384,8 @@ mgs_focus_on_flamer() {
 }
 
 mgs_focus_on_ai() {
-  mg_1 = getent("flame_bunker_mg_l", "targetname");
-  mg_2 = getent("flame_bunker_mg_r", "targetname");
+  mg_1 = getEnt("flame_bunker_mg_l", "targetname");
+  mg_2 = getEnt("flame_bunker_mg_r", "targetname");
 
   mg_1 cleartargetentity();
   mg_2 cleartargetentity();
@@ -3465,7 +3465,7 @@ bunker_1_47mm() {
 
   wait(0.05);
 
-  at_gun = getent("bunker_gun_1", "targetname");
+  at_gun = getEnt("bunker_gun_1", "targetname");
 
   at_gun thread arty_fire_impacts((-1213.5, -11928.5, -59.7));
 
@@ -3503,7 +3503,7 @@ bunker_2_47mm() {
 
   wait(0.05);
 
-  at_gun = getent("bunker_gun_2", "targetname");
+  at_gun = getEnt("bunker_gun_2", "targetname");
 
   at_gun thread arty_fire_impacts((-1294, -12475, -57.7));
 
@@ -3537,7 +3537,7 @@ bunker_4_47mm() {
 
   wait(0.05);
 
-  at_gun = getent("bunker_gun_4", "targetname");
+  at_gun = getEnt("bunker_gun_4", "targetname");
 
   for(i = 0; i < at_gun.arty_crew.size; i++) {
     at_gun.arty_crew[i].goalradius = 30;

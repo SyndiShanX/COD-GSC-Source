@@ -343,8 +343,8 @@ get_world_item_spawn_pos(dropToGround) {
 }
 
 make_item_ent_useable(item_ent, hintString) {
-  item_ent SetCursorHint("HINT_NOICON");
-  item_ent SetHintString(hintString);
+  item_ent setCursorHint("HINT_NOICON");
+  item_ent setHintString(hintString);
   item_ent MakeUsable();
 }
 

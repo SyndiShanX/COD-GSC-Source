@@ -56,10 +56,10 @@ function init_clientfields() {}
 function function_22b7fffd() {}
 
 function function_46693791() {
-  driver = getent("intro_driver_assassinate", "targetname", 1);
+  driver = getEnt("intro_driver_assassinate", "targetname", 1);
 
   if(!isDefined(level.var_664fd741)) {
-    level.var_664fd741 = getent("woods_chopper_from_scene", "script_noteworthy", 1);
+    level.var_664fd741 = getEnt("woods_chopper_from_scene", "script_noteworthy", 1);
 
     if(!isDefined(level.var_664fd741)) {
       spawners = getspawnerarray("intro_assault_ally_hudson", "targetename");
@@ -164,7 +164,7 @@ function function_77937c90() {
   to = getnode(self.target, "targetname");
 
   if(!isDefined(to)) {
-    to = getent(self.target, "targetname");
+    to = getEnt(self.target, "targetname");
   }
 
   if(isDefined(to)) {
@@ -196,7 +196,7 @@ function function_a7dc18f3() {
   aiarray = array();
 
   if(!isDefined(level.var_40b02b72)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     player val::set("takedown_hit1_intro", "show_weapon_hud", 0);
     thread tkdn_heli_intro::function_c6662dbb("intro_enemy_trucks", 1);
     waitframe(4);

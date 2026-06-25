@@ -324,6 +324,6 @@ function function_6d9a8286(einflictor, eattacker, idamage, idflags, smeansofdeat
     }
     self.var_cb4b9447 = gettime() + (var_76126537 * 499);
     self shellshock(ss, var_76126537);
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }

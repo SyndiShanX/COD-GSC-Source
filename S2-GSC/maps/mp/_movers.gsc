@@ -110,7 +110,7 @@ func_821E() {
         self.var_6C3E = spawn("script_model", var_02.var_0116);
         self.var_6C3E.var_001D = var_02.var_001D;
         self.var_6C3E setModel("tag_origin");
-        self.var_6C3E linkto(self);
+        self.var_6C3E linkTo(self);
         break;
 
       case "scene_node":
@@ -141,8 +141,8 @@ func_821E() {
     foreach(var_08 in var_06) {
       switch (var_08) {
         case "use_trigger_link":
-          var_02 enablelinkto();
-          var_02 linkto(self);
+          var_02 enablelinkTo();
+          var_02 linkTo(self);
           break;
 
         case "use_trigger":
@@ -152,7 +152,7 @@ func_821E() {
           break;
 
         case "link":
-          var_02 linkto(self);
+          var_02 linkTo(self);
           self.var_5DAB[self.var_5DAB.size] = var_02;
           break;
 
@@ -549,7 +549,7 @@ func_8225(param_00) {
         var_02 method_808C();
         var_02.var_0116 = var_08["origin"];
       } else {
-        var_02 moveto(var_08["origin"], var_03, var_04, var_05);
+        var_02 moveTo(var_08["origin"], var_03, var_04, var_05);
       }
 
       var_06 = 1;
@@ -560,7 +560,7 @@ func_8225(param_00) {
         var_02 method_808C();
         var_02.var_001D = var_08["angles"];
       } else {
-        var_02 rotateto(var_08["angles"], var_03, var_04, var_05);
+        var_02 rotateTo(var_08["angles"], var_03, var_04, var_05);
       }
 
       var_07 = 1;
@@ -748,8 +748,8 @@ func_820F(param_00) {
 func_8234(param_00, param_01) {
   if(param_01) {
     param_00 makeusable();
-    param_00 setcursorhint("HINT_ACTIVATE");
-    param_00 sethintstring(level.var_821D[self.var_6E5C["hintstring"]]);
+    param_00 setCursorHint("HINT_ACTIVATE");
+    param_00 setHintString(level.var_821D[self.var_6E5C["hintstring"]]);
     return;
   }
 
@@ -914,7 +914,7 @@ func_A047(param_00, param_01) {
   var_05 = (0, 0, -100);
   param_00 method_843C();
   param_00 method_808C();
-  param_00 setorigin(param_00.var_0116 + var_05);
+  param_00 setOrigin(param_00.var_0116 + var_05);
   for(var_06 = 0; var_06 < var_02.size; var_06++) {
     var_07 = var_02[var_06];
     var_08 = var_07.var_0116;
@@ -934,7 +934,7 @@ func_A047(param_00, param_01) {
       param_00 setstance("crouch");
     }
 
-    param_00 setorigin(var_08);
+    param_00 setOrigin(var_08);
     return;
   }
 
@@ -946,7 +946,7 @@ func_A047(param_00, param_01) {
     return;
   }
 
-  param_00 setorigin(param_00.var_0116 - var_05);
+  param_00 setOrigin(param_00.var_0116 - var_05);
   if(!isDefined(param_01)) {
     param_01 = 1;
   }
@@ -1057,7 +1057,7 @@ func_4A27(param_00) {
   }
 
   if(isDefined(param_00.var_5DB9)) {
-    self linkto(param_00.var_5DB9);
+    self linkTo(param_00.var_5DB9);
   }
 
   childthread func_4A26(param_00);

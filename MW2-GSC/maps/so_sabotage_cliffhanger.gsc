@@ -34,7 +34,7 @@ foreach(sm in voltron_array) {
   sm delete();
 }
 
-truck_patrol = getent("truck_patrol", "targetname");
+truck_patrol = getEnt("truck_patrol", "targetname");
 truck_patrol.target = "truck_patrol_target";
 
 default_start(::start_so_sabotage);

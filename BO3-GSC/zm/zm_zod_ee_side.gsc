@@ -276,18 +276,18 @@ function function_b066a053() {
       var_707e0d1c notify("hash_a881e3fa");
     }
   }
-  mdl_key = getent("quest_key_pickup", "targetname");
+  mdl_key = getEnt("quest_key_pickup", "targetname");
   mdl_key ghost();
   self zm_zod_shadowman::function_12e7164a(0, 1, 0, 1);
   self.var_93dad597 hidepart("tag_weapon_right");
   v_origin = self.var_93dad597 gettagorigin("tag_weapon_right");
   self.var_14030b0f = spawn("script_model", v_origin);
   self.var_14030b0f setModel("p7_fxanim_zm_zod_redemption_key_ritual_mod");
-  self.var_14030b0f linkto(self.var_93dad597, "tag_weapon_right");
+  self.var_14030b0f linkTo(self.var_93dad597, "tag_weapon_right");
   self.var_14030b0f clientfield::set("item_glow_fx", 1);
   level.players[0] waittill(self.script_parameters + "_vo_done");
   self thread function_98c5d1e5();
-  playsoundatposition("zmb_shadowman_transition", (0, 0, 0));
+  playSoundAtPosition("zmb_shadowman_transition", (0, 0, 0));
   self.var_14030b0f delete();
   self zm_zod_shadowman::function_8888a532(0, 1, 0, 1);
   wait(0.05);
@@ -571,7 +571,7 @@ function function_47965455() {
   self create_unitrigger();
   self thread function_8faf1d24(vectorscale((0, 0, 1), 255), "hs2");
   self waittill("trigger_activated");
-  playsoundatposition("zmb_zod_ee_item_pickup", self.origin);
+  playSoundAtPosition("zmb_zod_ee_item_pickup", self.origin);
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   level.var_d98fa1f1++;
   level notify("hash_bcead67a");
@@ -594,11 +594,11 @@ function function_b6296b8b() {
 }
 
 function function_6d012317() {
-  var_3d01fc2c = getent("brick_cipher", "targetname");
+  var_3d01fc2c = getEnt("brick_cipher", "targetname");
   var_3d01fc2c thread brick_cipher();
-  var_c671e1b1 = getent("picture_cipher", "targetname");
+  var_c671e1b1 = getEnt("picture_cipher", "targetname");
   var_c671e1b1 thread picture_cipher();
-  var_6a19ae41 = getent("hyena", "targetname");
+  var_6a19ae41 = getEnt("hyena", "targetname");
   var_6a19ae41 thread function_7e754365();
 }
 
@@ -686,7 +686,7 @@ function function_523509c2() {
   }
   level.margwa_smash_damage_callback = &function_e8628610;
   level.margwa_damage_override_callback = &function_e6f86e4d;
-  playsoundatposition("zmb_vocals_margwa_death", (0, 0, 0));
+  playSoundAtPosition("zmb_vocals_margwa_death", (0, 0, 0));
 }
 
 function function_9a436d7f() {
@@ -765,7 +765,7 @@ function function_4d249743() {
 }
 
 function laundry_ticket() {
-  var_43af12b1 = getent("laundry_ticket", "targetname");
+  var_43af12b1 = getEnt("laundry_ticket", "targetname");
   var_43af12b1 setCanDamage(1);
   var_43af12b1.health = 999999;
   while(true) {
@@ -857,7 +857,7 @@ function function_c4842cb1(var_187d070c) {
   foreach(player in level.activeplayers) {
     player zm_utility::increment_ignoreme();
   }
-  playsoundatposition("zmb_zod_ee_arniedance", s_center.origin);
+  playSoundAtPosition("zmb_zod_ee_arniedance", s_center.origin);
   level clientfield::set("lil_arnie_dance", 1);
   wait(24);
   foreach(player in level.activeplayers) {
@@ -966,7 +966,7 @@ function function_fa2d33a4() {
   self endon("hash_a881e3fa");
   level.var_cfee9316 = 0;
   var_93dad597 = self.var_93dad597;
-  var_93dad597.trigger = getent("play_on_map_load_trigger", "targetname");
+  var_93dad597.trigger = getEnt("play_on_map_load_trigger", "targetname");
   var_93dad597.trigger triggerenable(0);
   for(i = 1; i <= 3; i++) {
     level waittill("start_of_round");
@@ -1007,7 +1007,7 @@ function function_fa2d33a4() {
 
 function function_9baef344() {
   if(level.var_cfee9316 > 0) {
-    playsoundatposition("zmb_zod_ee_roundskip", (0, 0, 0));
+    playSoundAtPosition("zmb_zod_ee_roundskip", (0, 0, 0));
     level thread function_456b7848(level.var_cfee9316);
     new_round = level.var_cfee9316 * 5;
     bgb_token::function_c2f81136(new_round - level.round_number);
@@ -1319,7 +1319,7 @@ function function_5045e366() {
   s_start = struct::get("alcatraz_plane_start");
   var_aab7a6d1 = util::spawn_model("p7_zm_der_alcatraz_plane", s_start.origin, s_start.angles);
   s_end = struct::get(s_start.target);
-  var_aab7a6d1 moveto(s_end.origin, 30);
+  var_aab7a6d1 moveTo(s_end.origin, 30);
   var_aab7a6d1 playLoopSound("zmb_zod_ee_motd_plane", 5);
   var_aab7a6d1 waittill("movedone");
   var_aab7a6d1 delete();
@@ -1358,7 +1358,7 @@ function unitrigger_prompt_and_visibility(player) {
   if(isDefined(player.var_d89174ae) && player.var_d89174ae || (isDefined(player.beastmode) && player.beastmode)) {
     b_visible = 0;
   } else if(isDefined(self.stub.str_hint)) {
-    self sethintstring(self.stub.str_hint);
+    self setHintString(self.stub.str_hint);
   }
   return b_visible;
 }

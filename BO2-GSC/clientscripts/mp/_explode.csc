@@ -52,9 +52,9 @@ watchforexplosion() {
       trace = bulletTrace(getlocalclienteyepos(localclientnum), position, 0, localplayer);
 
       if(trace["fraction"] >= 1) {
-        forwardvec = vectornormalize(anglesToForward(localplayer.angles));
-        rightvec = vectornormalize(anglestoright(localplayer.angles));
-        explosionvec = vectornormalize(position - localplayer.origin);
+        forwardvec = vectorNormalize(anglesToForward(localplayer.angles));
+        rightvec = vectorNormalize(anglestoright(localplayer.angles));
+        explosionvec = vectorNormalize(position - localplayer.origin);
         fdot = vectordot(explosionvec, forwardvec);
         rdot = vectordot(explosionvec, rightvec);
 

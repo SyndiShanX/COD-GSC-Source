@@ -216,7 +216,7 @@ func_CD4B(var_0, var_1, var_2) {
     }
 
     if(isstring(var_1)) {
-      var_4 = scripts\engine\utility::getstruct(var_1, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
     } else if(isstruct(var_1)) {
       var_4 = var_1;
     } else if(isent(var_1)) {
@@ -537,7 +537,7 @@ func_CD53(var_0, var_1, var_2) {
     }
 
     if(isstring(var_1)) {
-      var_4 = scripts\engine\utility::getstruct(var_1, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
     } else if(isstruct(var_1)) {
       var_4 = var_1;
     } else if(isent(var_1)) {
@@ -627,7 +627,7 @@ func_CD50(var_0, var_1, var_2) {
     }
 
     if(isstring(var_1)) {
-      var_4 = scripts\engine\utility::getstruct(var_1, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1, "targetname");
     } else if(isstruct(var_1)) {
       var_4 = var_1;
     } else if(isent(var_1)) {
@@ -726,7 +726,7 @@ func_7A46() {
 func_7A47(var_0) {
   var_1 = undefined;
   if(isstring(var_0)) {
-    var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   } else if(isstruct(var_0)) {
     var_1 = var_0;
   } else if(isent(var_0)) {
@@ -806,7 +806,7 @@ func_CD4F(var_0, var_1) {
     var_3 = undefined;
     var_4 = self.var_B004["lastanim"];
     if(isstring(var_1)) {
-      var_3 = scripts\engine\utility::getstruct(var_1, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_1, "targetname");
     } else if(isstruct(var_1)) {
       var_3 = var_1;
     } else {
@@ -836,7 +836,7 @@ func_4179() {
 
 func_9C3D(var_0, var_1) {
   var_2 = anglesToForward(level.player.angles);
-  var_3 = vectornormalize(var_0.origin - level.player.origin);
+  var_3 = vectorNormalize(var_0.origin - level.player.origin);
   var_4 = vectordot(var_2, var_3);
   if(var_4 >= var_1) {
     return 1;
@@ -985,7 +985,7 @@ func_9A11() {
           break;
         } else if(self.var_B004["trigger_radius"] > 0 && var_10 < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
           var_14 = self.origin + anglestoup(self.angles) * 66;
-          var_11 = vectornormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
+          var_11 = vectorNormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
           var_13 = scripts\common\trace::ray_trace(var_14, var_11, self, var_12);
           if(isPlayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             break;
@@ -1106,7 +1106,7 @@ func_9A11() {
         var_10 = lengthsquared(level.player.origin - self.origin);
         if(var_10 < squared(self.var_B004["trigger_radius"])) {
           var_14 = self.origin + anglestoup(self.angles) * 66;
-          var_11 = vectornormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
+          var_11 = vectorNormalize(level.player getEye() - var_14) * self.var_B004["trigger_radius"] + var_14;
           var_13 = scripts\common\trace::ray_trace(var_14, var_11, self, var_12);
           if(isPlayer(var_13["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             if(isarray(self.var_B004["diff"]) && self.var_1F25 < self.var_B004["diff"].size - 1) {
@@ -1256,7 +1256,7 @@ func_9A11() {
       }
 
       if(isDefined(var_7)) {
-        var_21 = vectornormalize(level.player.origin - self.origin);
+        var_21 = vectorNormalize(level.player.origin - self.origin);
         var_21 = scripts\engine\utility::flatten_vector(var_21, anglestoup(self.angles));
         var_22 = anglesToForward(self.angles);
         var_23 = vectordot(var_21, var_22);
@@ -1403,7 +1403,7 @@ func_9A35() {
           break;
         } else if(self.var_B004["trigger_radius"] > 0 && var_7 < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
           var_11 = self.origin + anglestoup(self.angles) * 66;
-          var_8 = vectornormalize(level.player getEye() - var_11) * self.var_B004["trigger_radius"] + var_11;
+          var_8 = vectorNormalize(level.player getEye() - var_11) * self.var_B004["trigger_radius"] + var_11;
           var_10 = scripts\common\trace::ray_trace(var_11, var_8, self, var_9);
           if(isPlayer(var_10["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
             break;
@@ -1669,7 +1669,7 @@ func_9A37() {
             break;
           } else if(var_1["trigger_radius"] > 0 && var_9 < squared(var_1["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
             var_13 = self.origin + anglestoup(self.angles) * 66;
-            var_10 = vectornormalize(level.player getEye() - var_13) * var_1["trigger_radius"] + var_13;
+            var_10 = vectorNormalize(level.player getEye() - var_13) * var_1["trigger_radius"] + var_13;
             var_12 = scripts\common\trace::ray_trace(var_13, var_10, self, var_11);
             if(isPlayer(var_12["entity"]) || isDefined(var_1["interaction_trigger_override"])) {
               break;
@@ -1853,7 +1853,7 @@ func_2B88() {
         break;
       } else if(self.var_B004["trigger_radius"] > 0 && var_0 < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925) && !self.var_DC80) {
         var_5 = self.origin + anglestoup(self.angles) * 66;
-        var_1 = vectornormalize(level.player getEye() - var_5) * self.var_B004["trigger_radius"] + var_5;
+        var_1 = vectorNormalize(level.player getEye() - var_5) * self.var_B004["trigger_radius"] + var_5;
         var_3 = scripts\common\trace::ray_trace(var_5, var_1, self, var_2);
         if(isPlayer(var_3["entity"]) || isDefined(self.var_B004["interaction_trigger_override"])) {
           break;
@@ -1872,7 +1872,7 @@ func_CCA9() {
   var_2 = gettime() / 1000;
   var_3 = getanimlength(self.var_B004["fwd_anim"]);
   while(gettime() / 1000 - var_2 < var_3) {
-    var_4 = vectornormalize(level.player.origin - self.origin);
+    var_4 = vectorNormalize(level.player.origin - self.origin);
     var_5 = anglesToForward(self.angles);
     var_6 = anglesToForward(self.angles) * -1;
     var_7 = anglestoright(self.angles);
@@ -2796,7 +2796,7 @@ func_43DA(var_0, var_1) {
   }
 
   if(var_3 < squared(self.var_B004["trigger_radius"]) && func_9C3D(self, 0.925)) {
-    var_4 = vectornormalize(level.player getEye() - self getEye()) * self.var_B004["trigger_radius"] + self getEye();
+    var_4 = vectorNormalize(level.player getEye() - self getEye()) * self.var_B004["trigger_radius"] + self getEye();
     var_6 = scripts\common\trace::ray_trace(self getEye(), var_4, self, var_5);
     if(isPlayer(var_6["entity"])) {
       func_43DB();

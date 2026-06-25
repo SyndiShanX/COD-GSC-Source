@@ -515,7 +515,7 @@ func_CA83() {
   self.objective_playermask_showto = 4;
   self.var_30 = 1;
   var_0 = func_CA84();
-  var_1 = vectornormalize(self.origin - self.var_C98C.origin);
+  var_1 = vectorNormalize(self.origin - self.var_C98C.origin);
   var_2 = anglestoright(self.var_C98C.angles);
   var_3 = "left";
   if(vectordot(var_1, var_2) > 0) {

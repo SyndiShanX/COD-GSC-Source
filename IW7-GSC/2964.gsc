@@ -210,7 +210,7 @@ func_8732(var_0, var_1) {
   var_0 = func_45EE(var_0);
   [[level.vehicle_canturrettargetpoint]]("MOD_RIFLE_BULLET", "torso_upper", var_4);
   func_538C(var_0, "weapon_");
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 notsolid();
   var_0 give_attacker_kill_rewards(var_1.death);
 
@@ -518,7 +518,7 @@ func_AD14(var_0, var_1, var_2, var_3) {
   if(var_3 && !isDefined(var_0.var_ED6E)) {
     var_0 func_81E1(self, var_1, 0);
   } else {
-    var_0 linkto(self, var_1, var_2, (0, 0, 0));
+    var_0 linkTo(self, var_1, var_2, (0, 0, 0));
   }
 }
 
@@ -719,7 +719,7 @@ func_3DD9(var_0, var_1) {
   return 0;
 }
 
-botgetscriptgoalradius(var_0, var_1, var_2) {
+botgetscriptgoalRadius(var_0, var_1, var_2) {
   self endon("unloading");
 
   for(;;) {
@@ -731,7 +731,7 @@ botgetscriptgoalnode(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self.classname;
 
   if(var_4) {
-    thread botgetscriptgoalradius(var_1, var_2, level.vehicle.var_116CE.var_247D[var_5][var_0.var_6B9D].var_92F3);
+    thread botgetscriptgoalRadius(var_1, var_2, level.vehicle.var_116CE.var_247D[var_5][var_0.var_6B9D].var_92F3);
     self waittill("unloading");
   }
 
@@ -888,7 +888,7 @@ botgetfovdot(var_0, var_1, var_2) {
   var_8 setModel(level.vehicle.var_116CE.var_247D[var_3][var_4.var_6B9D].model);
   self.var_6B9D[var_4.var_6B9D] = var_8;
   var_8 glinton(#animtree);
-  var_8 linkto(var_0, level.vehicle.var_116CE.var_247D[var_3][var_4.var_6B9D].tag, (0, 0, 0), (0, 0, 0));
+  var_8 linkTo(var_0, level.vehicle.var_116CE.var_247D[var_3][var_4.var_6B9D].tag, (0, 0, 0), (0, 0, 0));
   thread botgetscriptgoalnode(var_4, var_8, level.vehicle.var_116CE.var_247D[var_3][var_4.var_6B9D].tag, level.vehicle.var_116CE.var_247D[var_3][var_4.var_6B9D].var_5D1B, var_2);
   return var_8;
 }
@@ -1272,7 +1272,7 @@ func_8767(var_0, var_1, var_2, var_3, var_4) {
   var_10.angles = var_0.angles;
   var_10 dontinterpolate();
   var_0 dontinterpolate();
-  var_0 linkto(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 scripts\sp\utility::func_F2A8(1);
   var_0 setCanDamage(1);
   var_0.var_12BC4 = var_3;
@@ -1286,10 +1286,10 @@ func_8767(var_0, var_1, var_2, var_3, var_4) {
   var_18 = length((0, 0, var_17[2]) - (0, 0, var_12[2]));
   var_19 = 350;
   var_20 = var_18 / var_19;
-  var_10 moveto(var_17, var_20);
+  var_10 moveTo(var_17, var_20);
   var_10 waittill("movedone");
   var_0 unlink();
-  var_0 animscripted("dropship_land", var_0.origin, var_0.angles, var_4);
+  var_0 animScripted("dropship_land", var_0.origin, var_0.angles, var_4);
   wait(getanimlength(var_4));
   var_0 notify("hoverunload_done");
   var_0 notify("anim_on_tag_done");
@@ -1336,7 +1336,7 @@ func_8750(var_0) {
     return 0;
   }
 
-  var_3 = getent(var_0.target, "targetname");
+  var_3 = getEnt(var_0.target, "targetname");
 
   if(isDefined(var_3) && var_3.classname == "info_volume") {
     return 0;
@@ -1371,7 +1371,7 @@ func_1FC2(var_0, var_1, var_2, var_3, var_4, var_5) {
     level thread func_1FC3(var_0, self);
   }
 
-  var_0 animscripted(var_5, var_7, var_8, var_2);
+  var_0 animScripted(var_5, var_7, var_8, var_2);
 
   if(isai(var_0)) {
     thread donotetracks(var_0, var_6, var_5);
@@ -1469,7 +1469,7 @@ func_1FC4(var_0, var_1, var_2) {
 
     if(abs(var_3[2] + 16) <= abs(var_5)) {
       var_0 thread scripts\sp\utility::play_sound_on_entity("generic_death_falling");
-      var_0 animscripted("fastrope_fall", var_0.origin, var_0.angles, var_0.var_DC17);
+      var_0 animScripted("fastrope_fall", var_0.origin, var_0.angles, var_0.var_DC17);
       var_0 waittillmatch("fastrope_fall", "start_ragdoll");
     }
   }
@@ -1515,7 +1515,7 @@ donotetracks(var_0, var_1, var_2) {
 }
 
 func_1F9D(var_0, var_1, var_2, var_3) {
-  var_0 animscripted("movetospot", var_1, var_2, var_3);
+  var_0 animScripted("movetospot", var_1, var_2, var_3);
   var_0 waittillmatch("movetospot", "end");
 }
 
@@ -1669,7 +1669,7 @@ func_872D(var_0) {
   var_0 notsolid();
   var_0.origin = var_4;
   var_0.angles = var_3;
-  var_0 animscripted("deathanim", var_4, var_3, var_2.var_69DF);
+  var_0 animScripted("deathanim", var_4, var_3, var_2.var_69DF);
   var_5 = 0.3;
 
   if(isDefined(var_2.var_69E1)) {

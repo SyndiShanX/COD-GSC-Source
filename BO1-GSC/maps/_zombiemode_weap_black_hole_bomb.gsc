@@ -162,7 +162,7 @@ do_black_hole_bomb_sound(model, info) {
   self playLoopSound("wpn_gersh_device_loop_close");
   fakeorigin = self.origin;
   self waittill("explode", position);
-  playsoundatposition("wpn_gersh_device_implode", fakeorigin);
+  playSoundAtPosition("wpn_gersh_device_implode", fakeorigin);
   if(isDefined(model)) {}
   for(i = 0; i < info.sound_attractors.size; i++) {
     if(isDefined(info.sound_attractors[i])) {
@@ -398,7 +398,7 @@ black_hole_bomb_event_horizon_death(vec_black_hole_org, grenade) {
   self maps\_zombiemode_spawner::zombie_eye_glow_stop();
   self playSound("wpn_gersh_device_kill");
   pulled_in_anim = black_hole_bomb_death_anim();
-  self AnimScripted("pulled_in_complete", self.origin, self.angles, pulled_in_anim);
+  self animScripted("pulled_in_complete", self.origin, self.angles, pulled_in_anim);
   self waittill_either("bhb_burst", "pulled_in_complete");
   playFXOnTag(level._effect["black_hole_bomb_zombie_destroy"], self, "tag_origin");
   grenade notify("black_hole_bomb_kill");
@@ -595,7 +595,7 @@ black_hole_teleport(struct_dest) {
   self DisableOffhandWeapons();
   self DisableWeapons();
   self DontInterpolate();
-  self SetOrigin(destination);
+  self setOrigin(destination);
   self SetPlayerAngles(struct_dest.angles);
   self EnableOffhandWeapons();
   self EnableWeapons();
@@ -692,7 +692,7 @@ black_hole_bomb_stolen_by_sam(ent_grenade, ent_model) {
   } else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
   }
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(IsAlive(players[i])) {
       if(is_true(level.player_4_vox_override)) {

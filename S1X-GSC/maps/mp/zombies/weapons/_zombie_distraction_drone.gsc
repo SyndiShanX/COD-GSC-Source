@@ -188,7 +188,7 @@ spawndronemodel() {
 droneanimate() {
   self endon("death");
   thread dronerotate();
-  self moveto(self.origin + (0, 0, 70), 1, 0, 1);
+  self moveTo(self.origin + (0, 0, 70), 1, 0, 1);
 }
 
 dronerotate() {

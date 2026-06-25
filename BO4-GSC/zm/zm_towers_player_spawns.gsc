@@ -31,9 +31,9 @@ function_c91644e8() {
 
 function_e5f05a92() {
   level endon(#"end_game");
-  mdl_clip = getent("arena_gate_east_clip", "targetname");
-  mdl_gate = getent("arena_gate_east", "targetname");
-  mdl_clip linkto(mdl_gate);
+  mdl_clip = getEnt("arena_gate_east_clip", "targetname");
+  mdl_gate = getEnt("arena_gate_east", "targetname");
+  mdl_clip linkTo(mdl_gate);
   level flag::wait_till("begin_spawning");
   wait 2.5;
   mdl_gate movez(100, 3);
@@ -41,7 +41,7 @@ function_e5f05a92() {
   mdl_gate clientfield::set("entry_gate_dust", 1);
   wait 3;
   var_ac1242dd = 0;
-  vol_spawn_area = getent("vol_spawn_area", "targetname");
+  vol_spawn_area = getEnt("vol_spawn_area", "targetname");
 
   while(!var_ac1242dd) {
     a_e_touching = [];
@@ -110,7 +110,7 @@ function_b117d867() {
   level endon(#"end_game");
   scene::init("p8_fxanim_zm_towers_center_platform_rails_bundle");
   level flag::wait_till("begin_spawning");
-  t_trigger = getent("t_raise_center_platform_rails", "targetname");
+  t_trigger = getEnt("t_raise_center_platform_rails", "targetname");
   t_trigger waittilltimeout(6, #"trigger");
   scene::play("p8_fxanim_zm_towers_center_platform_rails_bundle");
   t_trigger delete();

@@ -677,10 +677,10 @@ function_82675316(vdir, limit) {
 
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = vdir * -1;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > limit;
 }
@@ -873,7 +873,7 @@ function_f83f2862() {
   self waittill(#"supply_pod_used");
 
   if(!(isDefined(self.var_9f73d035) && self.var_9f73d035)) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_d471f8fa(5, undefined, 1);
     self.var_9f73d035 = 1;
   }
@@ -1101,7 +1101,7 @@ function_9125af5f() {
       self.resurrect_not_allowed_by = 1;
       level.var_986d14aa = undefined;
       level notify(#"friendly_revived");
-      friendlies = getplayers(self.team);
+      friendlies = getPlayers(self.team);
 
       foreach(player in friendlies) {
         pods = level.var_934fb97.var_27fce4c0[player.clientid];
@@ -1138,7 +1138,7 @@ function_9125af5f() {
         dt = n_time - self.var_8618a8fc;
 
         if(dt >= 25) {
-          e_player = getplayers()[0];
+          e_player = getPlayers()[0];
           n_dist = distance(e_player.origin, self.origin);
 
           if(n_dist < 1000) {
@@ -1177,7 +1177,7 @@ function_ae20926a() {
   }
 
   self.var_2a7a9ac7 = 1;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_28f3ed7e8d30dfff", 5, "green", 2);
   self.health = 650;
   self thread function_b7307ff();
@@ -1187,7 +1187,7 @@ function_ae20926a() {
   self waittill(#"moving_to_exfil");
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     n_dist = distance(e_player.origin, self.origin);
 
     if(n_dist > 900) {
@@ -1202,7 +1202,7 @@ function_ae20926a() {
           self.var_5fc84f68 = n_time;
         }
 
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         n_dist = distance(e_player.origin, self.origin);
         waitframe(1);
       }
@@ -1224,14 +1224,14 @@ function_ae20926a() {
   self.v_train_inbound_igc = 1;
   level.var_88024dd9--;
   level thread ct_utils::function_bfa522d1(0);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_30cf2650faf0b7fb", 4, "green", 2);
   e_player thread ct_utils::function_d471f8fa(30, undefined, 1);
   level notify(#"soldier_rescued");
 }
 
 function_4afb85fd() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player endon(#"death");
   e_player ct_utils::function_329f9ba6(#"hash_5a1802aa5de6267f", 5, "green", 2);
 }
@@ -1240,7 +1240,7 @@ function_b7307ff() {
   self waittill(#"death");
   level.var_88024dd9--;
   level thread ct_utils::function_bfa522d1(0);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_9d6017f6c7829ad", 4, "red", 2);
   e_player thread ct_utils::function_d471f8fa(-30, undefined, 1);
 }
@@ -1298,7 +1298,7 @@ function_c2cfffdd(nd_guard, var_2fd67dea = 0, var_1d1ab17 = 0) {
     self.var_5ab7c19c = nd_guard.angles;
 
     if(!var_1d1ab17) {
-      self setorigin(nd_guard.origin);
+      self setOrigin(nd_guard.origin);
       self setplayerangles(nd_guard.angles);
     }
 
@@ -1374,7 +1374,7 @@ function_7e8fcca2(nd_spawn, n_state = 4) {
 
 function_59458966(nd_spawn, n_state) {
   self endon(#"death");
-  self setorigin(nd_spawn.origin);
+  self setOrigin(nd_spawn.origin);
   self setplayerangles(nd_spawn.angles);
   self.waypoint = self ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", self.origin, self.angles, #"any", undefined, 0, undefined);
 

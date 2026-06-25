@@ -210,17 +210,17 @@ function private function_bb9839d8() {
 function private function_ed97bf94() {
   self endon(#"death");
   level waittill(#"hash_31401122f25f2d2a");
-  self playrumbleonentity("glass_break");
+  self playRumbleOnEntity("glass_break");
   level waittill(#"hash_31401122f25f2d2a");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   level waittill(#"hash_31401122f25f2d2a");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   level waittill(#"hash_31401122f25f2d2a");
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   level waittill(#"hash_31401122f25f2d2a");
-  self playrumbleonentity("reload_clipout");
+  self playRumbleOnEntity("reload_clipout");
   level waittill(#"hash_31401122f25f2d2a");
-  self playrumbleonentity("reload_clipin");
+  self playRumbleOnEntity("reload_clipin");
 }
 
 function private function_db6f14d2() {
@@ -582,7 +582,7 @@ function function_663b296d() {
   level.player val::set(#"hash_75aefe15308514b7", "freezecontrols_allowlook", 1);
   wait 0.5;
   s_scene = struct::get("s_scene_lockpick_player_button_press", "targetname");
-  level.player playrumbleonentity("anim_light");
+  level.player playRumbleOnEntity("anim_light");
   s_scene scene::play("scene_amk_6090_stg_garage");
   level.player val::reset_all(#"hash_75aefe15308514b7");
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_tunnel_alarm", 1);

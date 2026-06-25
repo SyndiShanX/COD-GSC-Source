@@ -77,7 +77,7 @@ monsoon_fxanim_deconstruct() {
   maps\_fxanim::fxanim_reconstruct("fxanim_defend_room_monitors");
   maps\_fxanim::fxanim_reconstruct("fxanim_server_arm_loop");
   maps\_fxanim::fxanim_reconstruct("fxanim_metal_storm_enter");
-  e_volume = getent("model_convert", "targetname");
+  e_volume = getEnt("model_convert", "targetname");
   a_fxanims = getEntArray("fxanim", "script_noteworthy");
 
   foreach(m_fxanim in a_fxanims) {
@@ -137,7 +137,7 @@ on_player_connect() {
 on_saved_restored_monsoon() {
   if(flag("mid_flight_save") && !flag("wingsuit_player_landed")) {
     screen_fade_out(0);
-    level.player.vh_wingsuit.origin = getent("mid_flight_save", "targetname").origin;
+    level.player.vh_wingsuit.origin = getEnt("mid_flight_save", "targetname").origin;
     v_to_goal = vectortoangles((58016, 79256, -13656) - level.player.vh_wingsuit.origin);
     level.player.vh_wingsuit setphysangles((0, v_to_goal[1], 0));
     level.player.vh_wingsuit setspeedimmediate(200);
@@ -152,7 +152,7 @@ on_saved_restored_monsoon() {
     wait_network_frame();
     wait_network_frame();
     luinotifyevent(&"hud_update_vehicle_entity", 1, level.player.vh_wingsuit getentitynumber());
-    s_crumb_pos = getstruct("squirrel_breadcrumb_start", "targetname");
+    s_crumb_pos = getStruct("squirrel_breadcrumb_start", "targetname");
     luinotifyevent(&"hud_update_distance_obj", 3, int(s_crumb_pos.origin[0]), int(s_crumb_pos.origin[1]), int(s_crumb_pos.origin[2]));
   }
 
@@ -251,23 +251,23 @@ level_precache() {
 }
 
 level_init() {
-  m_lion = getent("lion_statue_collision", "targetname");
+  m_lion = getEnt("lion_statue_collision", "targetname");
   m_lion notsolid();
-  m_collapse = getent("ruins_blocker", "targetname");
+  m_collapse = getEnt("ruins_blocker", "targetname");
   m_collapse notsolid();
   m_collapse connectpaths();
   m_collapse hide();
-  m_chute = getent("fxanim_parachute", "targetname");
+  m_chute = getEnt("fxanim_parachute", "targetname");
   m_chute hide();
-  m_temple_doors_destroyed = getent("temple_doors_destroyed", "targetname");
+  m_temple_doors_destroyed = getEnt("temple_doors_destroyed", "targetname");
   m_temple_doors_destroyed hide();
-  trig_player_riotshield = getent("trig_player_riotshield", "targetname");
+  trig_player_riotshield = getEnt("trig_player_riotshield", "targetname");
   trig_player_riotshield trigger_off();
-  trig_player_celerium = getent("trig_player_celerium", "targetname");
+  trig_player_celerium = getEnt("trig_player_celerium", "targetname");
   trig_player_celerium trigger_off();
-  trig_isaac_player = getent("trig_isaac_player", "targetname");
+  trig_isaac_player = getEnt("trig_isaac_player", "targetname");
   trig_isaac_player trigger_off();
-  trig_player_celerium_door = getent("trig_player_celerium_door", "targetname");
+  trig_player_celerium_door = getEnt("trig_player_celerium_door", "targetname");
   trig_player_celerium_door trigger_off();
   level.metalstorm_freeze_death = 1;
   a_escape_trigs = getEntArray("escape_trigs", "script_noteworthy");
@@ -276,11 +276,11 @@ level_init() {
     trig trigger_off();
   }
 
-  trig_briggs_player_use = getent("briggs_player_use", "targetname");
+  trig_briggs_player_use = getEnt("briggs_player_use", "targetname");
   trig_briggs_player_use trigger_off();
-  trig_player_at_lab = getent("trig_player_at_lab", "targetname");
+  trig_player_at_lab = getEnt("trig_player_at_lab", "targetname");
   trig_player_at_lab trigger_off();
-  e_lab_stair_blocker_clip = getent("lab_stair_blocker_clip", "targetname");
+  e_lab_stair_blocker_clip = getEnt("lab_stair_blocker_clip", "targetname");
   e_lab_stair_blocker_clip hide();
   e_lab_stair_blocker_clip notsolid();
 }

@@ -46,7 +46,7 @@ function on_player_connect() {
 function achievement_help_the_others() {
   level endon("end_game");
   level flag::wait_till("ritual_pap_complete");
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     a_players[i] giveachievement("ZM_HELP_OTHERS");
   }
@@ -56,7 +56,7 @@ function achievement_complete_all_rituals() {
   level endon("end_game");
   a_str_ritual_flags = array("ritual_boxer_complete", "ritual_detective_complete", "ritual_femme_complete", "ritual_magician_complete");
   level flag::wait_till_all(a_str_ritual_flags);
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     a_players[i] giveachievement("ZM_COMPLETE_RITUALS");
   }

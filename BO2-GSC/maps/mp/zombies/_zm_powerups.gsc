@@ -693,13 +693,13 @@ powerup_setup(powerup_override, powerup_team, powerup_location) {
       self.worldgundw.angles = self.angles;
       self.worldgundw setModel(maps\mp\zombies\_zm_magicbox::get_left_hand_weapon_model_name(self.weapon));
       self.worldgundw useweaponhidetags(self.weapon);
-      self.worldgundw linkto(self, "tag_weapon", offsetdw, (0, 0, 0));
+      self.worldgundw linkTo(self, "tag_weapon", offsetdw, (0, 0, 0));
     }
   } else
     self setModel(struct.model_name);
 
   maps\mp\_demo::bookmark("zm_powerup_dropped", gettime(), undefined, undefined, 1);
-  playsoundatposition("zmb_spawn_powerup", self.origin);
+  playSoundAtPosition("zmb_spawn_powerup", self.origin);
 
   if(isDefined(powerup_team)) {
     self.powerup_team = powerup_team;
@@ -782,12 +782,12 @@ special_drop_setup() {
       } else {
         is_powerup = 0;
         playFX(level._effect["lightning_dog_spawn"], self.origin);
-        playsoundatposition("pre_spawn", self.origin);
+        playSoundAtPosition("pre_spawn", self.origin);
         wait 1.5;
-        playsoundatposition("zmb_bolt", self.origin);
+        playSoundAtPosition("zmb_bolt", self.origin);
         earthquake(0.5, 0.75, self.origin, 1000);
         playrumbleonposition("explosion_generic", self.origin);
-        playsoundatposition("spawn", self.origin);
+        playSoundAtPosition("spawn", self.origin);
         wait 1.0;
         thread play_sound_2d("sam_nospawn");
         self delete();
@@ -796,12 +796,12 @@ special_drop_setup() {
 
   if(is_powerup) {
     playFX(level._effect["lightning_dog_spawn"], self.origin);
-    playsoundatposition("pre_spawn", self.origin);
+    playSoundAtPosition("pre_spawn", self.origin);
     wait 1.5;
-    playsoundatposition("zmb_bolt", self.origin);
+    playSoundAtPosition("zmb_bolt", self.origin);
     earthquake(0.5, 0.75, self.origin, 1000);
     playrumbleonposition("explosion_generic", self.origin);
-    playsoundatposition("spawn", self.origin);
+    playSoundAtPosition("spawn", self.origin);
     self powerup_setup(powerup);
     self thread powerup_timeout();
     self thread powerup_wobble();
@@ -821,8 +821,8 @@ powerup_zombie_grab(powerup_team) {
   self endon("powerup_grabbed");
   self endon("hacked");
   zombie_grab_trigger = spawn("trigger_radius", self.origin - vectorscale((0, 0, 1), 40.0), 4, 32, 72);
-  zombie_grab_trigger enablelinkto();
-  zombie_grab_trigger linkto(self);
+  zombie_grab_trigger enablelinkTo();
+  zombie_grab_trigger linkTo(self);
   zombie_grab_trigger setteamfortrigger(level.zombie_team);
   self thread powerup_zombie_grab_trigger_cleanup(zombie_grab_trigger);
   poi_dist = 300;
@@ -874,7 +874,7 @@ powerup_zombie_grab(powerup_team) {
 
     level thread maps\mp\zombies\_zm_audio::do_announcer_playvox("powerup", self.powerup_name);
     wait 0.1;
-    playsoundatposition("zmb_powerup_grabbed", self.origin);
+    playSoundAtPosition("zmb_powerup_grabbed", self.origin);
     self stoploopsound();
     self powerup_delete();
     self notify("powerup_grabbed");
@@ -1029,7 +1029,7 @@ powerup_grab(powerup_team) {
         self.claimed = 1;
         self.power_up_grab_player = players[i];
         wait 0.1;
-        playsoundatposition("zmb_powerup_grabbed", self.origin);
+        playSoundAtPosition("zmb_powerup_grabbed", self.origin);
         self stoploopsound();
         self hide();
 
@@ -1139,7 +1139,7 @@ start_carpenter(origin) {
 
       if(isDefined(windows.clip)) {
         windows.clip enable_trigger();
-        windows.clip disconnectpaths();
+        windows.clip disconnectPaths();
       } else
         blocker_disconnect_paths(windows.neg_start, windows.neg_end);
 
@@ -1244,10 +1244,10 @@ powerup_wobble() {
 
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
 
     if(isDefined(self.worldgundw)) {
-      self.worldgundw rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+      self.worldgundw rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     }
 
     wait(randomfloat(waittime - 0.1));
@@ -2333,7 +2333,7 @@ start_carpenter_new(origin) {
 
       if(isDefined(window.clip)) {
         window.clip enable_trigger();
-        window.clip disconnectpaths();
+        window.clip disconnectPaths();
       } else
         blocker_disconnect_paths(window.neg_start, window.neg_end);
 
@@ -2479,7 +2479,7 @@ repair_far_boards(barriers, upgrade) {
 
     if(isDefined(barrier.clip)) {
       barrier.clip enable_trigger();
-      barrier.clip disconnectpaths();
+      barrier.clip disconnectPaths();
     } else
       blocker_disconnect_paths(barrier.neg_start, barrier.neg_end);
 
@@ -2532,7 +2532,7 @@ powerup_move() {
     range_squared = lengthsquared(drag_vector);
 
     if(range_squared > distance * distance) {
-      drag_vector = vectornormalize(drag_vector);
+      drag_vector = vectorNormalize(drag_vector);
       drag_vector = distance * drag_vector;
       moveto = self.origin + drag_vector;
     }

@@ -14,7 +14,7 @@ initkrakententacle() {
 getcurrenttentaclelocationstruct(var_0, var_1) {
   var_2 = level.alien_types["kraken"].attributes[var_1]["ship_side"] + "_location";
   var_3 = level.alien_types["kraken"].attributes[var_0][var_2];
-  var_4 = common_scripts\utility::getstruct(var_3, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_3, "targetname");
   return var_4;
 }
 
@@ -38,7 +38,7 @@ alienkrakententaclespawn(var_0) {
   var_1.alien_type = "tentacle";
   var_1 scragentusemodelcollisionbounds();
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(20000);
+  self scragentsetgoalRadius(20000);
   return var_1;
 }
 
@@ -66,11 +66,11 @@ isextended() {
 
 teleportside(var_0) {
   var_1 = getcurrenttentaclelocationstruct(self.tentacle_name, var_0);
-  self setorigin(var_1.origin, 0);
+  self setOrigin(var_1.origin, 0);
   self setplayerangles(var_1.angles);
   self scragentsetorientmode("face angle abs", var_1.angles, var_1.angles);
   self scragentsetgoalpos(var_1.origin);
-  self scragentsetgoalradius(20000);
+  self scragentsetgoalRadius(20000);
 }
 
 emerge(var_0) {
@@ -214,7 +214,7 @@ performmeleeattack(var_0) {
   }
 
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   self scragentbeginmelee(var_0);
   self waittill("melee_complete");
 }

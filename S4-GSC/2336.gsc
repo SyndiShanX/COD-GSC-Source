@@ -14,7 +14,7 @@ _id_F0FB(var_0, var_1, var_2) {
     var_0._id_7014 = var_3;
     var_0.angles = var_3.angles;
     var_0.owner = self;
-    var_0 linkto(var_3);
+    var_0 linkTo(var_3);
     var_0 setscriptablepartstate("visibility", "hide", 0);
   }
 
@@ -104,9 +104,9 @@ _id_F0F9(var_0, var_1) {
     if(isPlayer(var_0) || isagent(var_0)) {
       if(var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
         if(isDefined(var_1)) {
-          self linkto(var_0, var_1);
+          self linkTo(var_0, var_1);
         } else {
-          self linkto(var_0, "j_spine", (0, 0, 0));
+          self linkTo(var_0, "j_spine", (0, 0, 0));
         }
 
         if(isPlayer(var_0)) {
@@ -114,9 +114,9 @@ _id_F0F9(var_0, var_1) {
         }
       }
     } else if(isDefined(var_1))
-      self linkto(var_0, var_1);
+      self linkTo(var_0, var_1);
     else {
-      self linkto(var_0);
+      self linkTo(var_0);
     }
   }
 }

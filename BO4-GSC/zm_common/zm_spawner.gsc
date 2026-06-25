@@ -503,7 +503,7 @@ do_a_taunt() {
       tauntstate = self.first_node.zbarrier getzbarriertauntanimstate();
     }
 
-    self animscripted("taunt_anim", self.origin, self.angles, "ai_zombie_taunts_4");
+    self animScripted("taunt_anim", self.origin, self.angles, "ai_zombie_taunts_4");
     self taunt_notetracks("taunt_anim");
   }
 }
@@ -537,7 +537,7 @@ should_attack_player_thru_boards() {
   }
 
   freq = getdvarint(#"zombie_reachin_freq", 0);
-  players = getplayers();
+  players = getPlayers();
   attack = 0;
   self.player_targets = [];
 
@@ -562,7 +562,7 @@ should_attack_player_thru_boards() {
   bhtnactionstartevent(self, "attack");
   self notify(#"bhtn_action_notify", {
     #action: "attack"});
-  self animscripted("window_melee_anim", self.origin, self.angles, "ai_zombie_window_attack_arm_l_out");
+  self animScripted("window_melee_anim", self.origin, self.angles, "ai_zombie_window_attack_arm_l_out");
   self window_notetracks("window_melee_anim");
   return true;
 }
@@ -983,7 +983,7 @@ zombie_ragdoll_then_explode(launchvector, attacker) {
   self.a.nodeath = 1;
   self.dont_throw_gib = 1;
   self startragdoll();
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self zombie_utility::reset_attack_spot();
 
   if(isDefined(launchvector)) {
@@ -1427,7 +1427,7 @@ function filter_spawn_points(point, player, player_dir) {
 
 function_dce9f1a6(spots) {
   pixbeginevent(#"hash_1e53352b53c0ae61");
-  players = getplayers();
+  players = getPlayers();
   var_1cb510f7 = [];
 
   foreach(player in players) {
@@ -1603,15 +1603,15 @@ do_zombie_spawn() {
   }
 
   if(getdvarint(#"scr_zombie_spawn_in_view", 0)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     spots = [];
     max_dot = 0;
     look_loc = undefined;
 
     foreach(loc in level.zm_loc_types[#"zombie_location"]) {
-      player_vec = vectornormalize(anglesToForward(player getplayerangles()));
+      player_vec = vectorNormalize(anglesToForward(player getplayerangles()));
       player_vec_2d = (player_vec[0], player_vec[1], 0);
-      player_spawn = vectornormalize(loc.origin - player.origin);
+      player_spawn = vectorNormalize(loc.origin - player.origin);
       player_spawn_2d = (player_spawn[0], player_spawn[1], 0);
       dot = vectordot(player_vec_2d, player_spawn_2d);
       dist = distance(loc.origin, player.origin);
@@ -1728,7 +1728,7 @@ function do_zombie_rise(spot) {
 
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   self.anchor thread zm_utility::anchor_delete_failsafe(self);
 
   if(!isDefined(spot.angles)) {
@@ -1739,13 +1739,13 @@ function do_zombie_rise(spot) {
   anim_ang = spot.angles;
   anim_org += (0, 0, 0);
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill(#"movedone");
   target_org = zombie_utility::get_desired_origin();
 
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill(#"rotatedone");
   }
 
@@ -1772,11 +1772,11 @@ function do_zombie_rise(spot) {
   custom_riseanim = isDefined(self.custom_riseanim) ? self.custom_riseanim : level.custom_riseanim;
 
   if(isDefined(custom_riseanim)) {
-    self animscripted("rise_anim", self.origin, spot.angles, custom_riseanim, "normal");
+    self animScripted("rise_anim", self.origin, spot.angles, custom_riseanim, "normal");
   } else if(isDefined(level.custom_rise_func)) {
     self[[level.custom_rise_func]](spot);
   } else {
-    self animscripted("rise_anim", self.origin, spot.angles, "ai_zombie_base_traverse_ground_climbout_fast", "normal");
+    self animScripted("rise_anim", self.origin, spot.angles, "ai_zombie_base_traverse_ground_climbout_fast", "normal");
   }
 
   self zombie_shared::donotetracks("rise_anim", &zombie_utility::handle_rise_notetracks, spot);
@@ -1937,8 +1937,8 @@ function_45bb11e4(spot) {
     spot.angles = (0, 0, 0);
   }
 
-  self.mdl_anchor moveto(spot.origin, 0.05);
-  self.mdl_anchor rotateto(spot.angles, 0.05);
+  self.mdl_anchor moveTo(spot.origin, 0.05);
+  self.mdl_anchor rotateTo(spot.angles, 0.05);
   self.mdl_anchor waittill(#"movedone", #"death");
   wait 0.05;
   self.create_eyes = 1;

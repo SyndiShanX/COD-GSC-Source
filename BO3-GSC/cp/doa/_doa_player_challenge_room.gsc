@@ -133,7 +133,7 @@ function function_15a0c9b5(room) {
     arrayremovevalue(level.doa.var_ec2bff7b, room, 0);
   }
   level notify("hash_3b432f18");
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify("hash_d28ba89d");
   }
   wait(0.25);
@@ -158,7 +158,7 @@ function function_15a0c9b5(room) {
   if(isDefined(room.vox)) {
     level.voice playSound(room.vox);
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] freezecontrols(0);
   }

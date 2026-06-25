@@ -90,7 +90,7 @@ script_mover_int() {
         self.origin_ent = spawn("script_model", var_2.origin);
         self.origin_ent.angles = var_2.angles;
         self.origin_ent setModel("tag_origin");
-        self.origin_ent linkto(self);
+        self.origin_ent linkTo(self);
         break;
 
       default:
@@ -106,8 +106,8 @@ script_mover_int() {
 
     switch (var_2.script_noteworthy) {
       case "use_trigger_link":
-        var_2 enablelinkto();
-        var_2 linkto(self);
+        var_2 enablelinkTo();
+        var_2 linkTo(self);
         break;
 
       case "use_trigger":
@@ -117,7 +117,7 @@ script_mover_int() {
         break;
 
       case "link":
-        var_2 linkto(self);
+        var_2 linkTo(self);
         self.linked_ents[self.linked_ents.size] = var_2;
         break;
 
@@ -325,7 +325,7 @@ script_mover_move_to_target(var_0) {
         var_5 = var_2.params["decel_frac"] * var_3;
       }
 
-      var_2 moveto(var_8["origin"], var_3, var_4, var_5);
+      var_2 moveTo(var_8["origin"], var_3, var_4, var_5);
       foreach(var_11 in var_1.level_notify) {
         thread script_mover_run_notify(var_11.origin, var_11.script_parameters, self.origin, var_1.origin);
       }
@@ -334,7 +334,7 @@ script_mover_move_to_target(var_0) {
     }
 
     if(anglesclamp180(var_8["angles"]) != anglesclamp180(var_2.angles)) {
-      var_2 rotateto(var_8["angles"], var_3, var_4, var_5);
+      var_2 rotateTo(var_8["angles"], var_3, var_4, var_5);
       var_7 = 1;
     }
 
@@ -386,9 +386,9 @@ script_mover_move_to_target(var_0) {
 script_mover_run_notify(var_0, var_1, var_2, var_3) {
   self endon("move_end");
   var_4 = self;
-  var_5 = vectornormalize(var_3 - var_2);
+  var_5 = vectorNormalize(var_3 - var_2);
   for(;;) {
-    var_6 = vectornormalize(var_0 - var_4.origin);
+    var_6 = vectorNormalize(var_0 - var_4.origin);
     if(vectordot(var_5, var_6) <= 0) {
       break;
     }
@@ -517,8 +517,8 @@ script_mover_allow_usable(var_0) {
 script_mover_set_usable(var_0, var_1) {
   if(var_1) {
     var_0 makeusable();
-    var_0 setcursorhint("HINT_NOICON");
-    var_0 sethintstring(level.script_mover_hintstrings[self.params["hintstring"]]);
+    var_0 setCursorHint("HINT_NOICON");
+    var_0 setHintString(level.script_mover_hintstrings[self.params["hintstring"]]);
     return;
   }
 
@@ -647,7 +647,7 @@ unresolved_collision_nearest_node(var_0, var_1) {
   var_3 = (0, 0, -100);
   var_0 cancelmantle();
   var_0 dontinterpolate();
-  var_0 setorigin(var_0.origin + var_3);
+  var_0 setOrigin(var_0.origin + var_3);
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_5 = var_2[var_4];
     var_6 = var_5.origin;
@@ -663,11 +663,11 @@ unresolved_collision_nearest_node(var_0, var_1) {
       var_0 setstance("crouch");
     }
 
-    var_0 setorigin(var_6);
+    var_0 setOrigin(var_6);
     return;
   }
 
-  var_0 setorigin(var_0.origin - var_3);
+  var_0 setOrigin(var_0.origin - var_3);
   if(!isDefined(var_1)) {
     var_1 = 1;
   }
@@ -785,9 +785,9 @@ script_mover_link_to_use_object(var_0) {
       var_0 thread func_EC11(var_2);
     }
 
-    var_0 playerlinkto(var_2);
+    var_0 playerlinkTo(var_2);
   } else {
-    var_0 linkto(self);
+    var_0 linkTo(self);
   }
 
   var_0 playerlinkedoffsetenable();
@@ -903,7 +903,7 @@ handle_moving_platforms(var_0) {
   if(isDefined(var_0.linkparent)) {
     var_1 = self getlinkedparent();
     if(!isDefined(var_1) || var_1 != var_0.linkparent) {
-      self linkto(var_0.linkparent);
+      self linkTo(var_0.linkparent);
     }
   }
 

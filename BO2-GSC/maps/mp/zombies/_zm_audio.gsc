@@ -928,7 +928,7 @@ play_jingle_or_stinger(perksacola) {
     return;
   }
 
-  playsoundatposition("evt_electrical_surge", self.origin);
+  playSoundAtPosition("evt_electrical_surge", self.origin);
 
   if(!isDefined(self.jingle_is_playing)) {
     self.jingle_is_playing = 0;
@@ -963,13 +963,13 @@ play_random_broken_sounds() {
   if(self.script_sound == "mus_perks_revive_jingle") {
     while(true) {
       wait(randomfloatrange(7, 18));
-      playsoundatposition("zmb_perks_broken_jingle", self.origin);
-      playsoundatposition("evt_electrical_surge", self.origin);
+      playSoundAtPosition("zmb_perks_broken_jingle", self.origin);
+      playSoundAtPosition("evt_electrical_surge", self.origin);
     }
   } else {
     while(true) {
       wait(randomfloatrange(7, 18));
-      playsoundatposition("evt_electrical_surge", self.origin);
+      playSoundAtPosition("evt_electrical_surge", self.origin);
     }
   }
 }

@@ -66,8 +66,8 @@ fan_blade_rotate() {
 animated_cranes() {
   precachempanim("h1_mp_crane_idle_1");
   precachempanim("h1_mp_crane_idle_2");
-  var_0 = getent("crane1", "targetname");
-  var_1 = getent("crane2", "targetname");
+  var_0 = getEnt("crane1", "targetname");
+  var_1 = getEnt("crane2", "targetname");
   var_0 scriptmodelplayanimdeltamotion("h1_mp_crane_idle_1");
   var_1 scriptmodelplayanimdeltamotion("h1_mp_crane_idle_2");
 }

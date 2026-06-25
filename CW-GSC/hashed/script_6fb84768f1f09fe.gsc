@@ -22,7 +22,7 @@ function function_83d35e98(attacker, var_4fa5c66a, attackerangles, victim, mode 
   parms.startpos = var_4fa5c66a;
   parms.startpos += anglesToForward(attackerangles) * var_83ca76ef;
   parms.targetpos = victim gettagorigin(target_tag);
-  parms.targetpos += vectornormalize(parms.startpos - parms.targetpos) * var_3d5fa3d5;
+  parms.targetpos += vectorNormalize(parms.startpos - parms.targetpos) * var_3d5fa3d5;
   parms.var_b21e26bd = victim gettagorigin("j_head");
   parms.var_e93a7f0f = victim.origin;
   parms.angles = vectortoangles(parms.targetpos - parms.startpos);

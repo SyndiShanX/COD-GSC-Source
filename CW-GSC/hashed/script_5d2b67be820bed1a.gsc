@@ -328,7 +328,7 @@ function function_9fbac7d(var_c79d614f) {
     thread namespace_d9b153b9::function_c66297e0("", "struct_path_end_teleport");
   }
 
-  clip_last_room_wall = getent("clip_last_room_wall", "targetname");
+  clip_last_room_wall = getEnt("clip_last_room_wall", "targetname");
   clip_last_room_wall movez(256, 0.1);
   level flag::set("flag_last_room_wall");
   level.player achievements::give_achievement(#"cp_achievement_red_door");

@@ -123,7 +123,7 @@ unresolved_collision_nearest_node_carepackage(param_00) {
   var_03 = 18;
   var_04 = self.var_116;
   for(;;) {
-    var_05 = vectornormalize(anglesToForward((0, var_02, 0)));
+    var_05 = vectorNormalize(anglesToForward((0, var_02, 0)));
     var_04 = self.var_116 + var_01 * var_03 * var_05;
     var_04 = getclosestpointonnavmesh(var_04);
     var_01++;
@@ -149,7 +149,7 @@ unresolved_collision_nearest_node_carepackage(param_00) {
     param_00 setstance("crouch");
   }
 
-  param_00 setorigin(var_04);
+  param_00 setOrigin(var_04);
 }
 
 zm_care_crate_capture(param_00) {
@@ -169,7 +169,7 @@ zm_care_crate_capture_think(param_00) {
 
   var_01 = common_scripts\utility::func_46B7("carepackage_dz", "targetname");
   var_02 = common_scripts\utility::func_4461(self.var_116, var_01, 250);
-  self sethintstring(&"MP_CARE_PACKAGE_PICKUP");
+  self setHintString(&"MP_CARE_PACKAGE_PICKUP");
   if(!self method_8562()) {
     self makeusable();
   } else if(isDefined(level.var_744A)) {

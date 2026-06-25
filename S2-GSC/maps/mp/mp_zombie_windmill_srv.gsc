@@ -98,7 +98,7 @@ windmill_srv_ee() {
   level.ducks_per_window = 1;
   var_00 = 5;
   var_01 = getEntArray("hunt_ee", "targetname");
-  var_02 = getent("dog_ee", "targetname");
+  var_02 = getEnt("dog_ee", "targetname");
   var_02 setModel("zmw_tinker_toy_set_02");
   foreach(var_04 in var_01) {
     var_04 setModel("zmw_belongings_toy_duck_01");
@@ -108,9 +108,9 @@ windmill_srv_ee() {
   var_02.var_926A = var_02.var_116;
   var_02.raised_position = var_02.target_struct.var_116;
   var_02.is_dog = 1;
-  var_06 = getent("srv_pap_fuse_spawn_loc", "targetname");
-  var_06 linkto(var_02);
-  var_07 = getent("srv_pap_fuse_pickup_trig", "targetname");
+  var_06 = getEnt("srv_pap_fuse_spawn_loc", "targetname");
+  var_06 linkTo(var_02);
+  var_07 = getEnt("srv_pap_fuse_pickup_trig", "targetname");
   var_07 common_scripts\utility::func_9D9F();
   foreach(var_04 in var_01) {
     var_04.var_926A = var_04.var_116;
@@ -188,35 +188,35 @@ windmill_srv_ee() {
 }
 
 ee_show_dog_fail() {
-  self moveto(self.raised_position, 1, 0.1, 0.1);
+  self moveTo(self.raised_position, 1, 0.1, 0.1);
   wait(1);
   self vibrate(anglestoright(self.var_1D), 0.3, 0.3, 5);
   wait(5);
-  self moveto(self.var_926A, 3, 0.1, 0.1);
+  self moveTo(self.var_926A, 3, 0.1, 0.1);
   wait(3);
-  self moveto(self.var_926A + (0, 0, 15), 0.25, 0.1, 0.1);
+  self moveTo(self.var_926A + (0, 0, 15), 0.25, 0.1, 0.1);
   wait(4);
-  self moveto(self.var_926A, 3, 0.1, 0.1);
+  self moveTo(self.var_926A, 3, 0.1, 0.1);
   wait(3);
 }
 
 ee_show_dog_success(param_00) {
-  self moveto(self.raised_position, 1, 0.1, 0.1);
+  self moveTo(self.raised_position, 1, 0.1, 0.1);
   wait(2);
   param_00 unlink();
   param_00 thread ee_toss_fuse();
   wait(1);
-  self moveto(self.var_926A, 1);
+  self moveTo(self.var_926A, 1);
 }
 
 ee_toss_fuse() {
   var_00 = self;
   var_01 = common_scripts\utility::func_46B5("srv_pap_fuse_land_path", "targetname");
-  var_00 moveto(var_01.var_116, 0.15);
+  var_00 moveTo(var_01.var_116, 0.15);
   var_02 = common_scripts\utility::func_46B5(var_01.var_1A2, "targetname");
   wait(0.15);
   while(isDefined(var_02)) {
-    var_00 moveto(var_02.var_116, 0.15);
+    var_00 moveTo(var_02.var_116, 0.15);
     if(isDefined(var_02.var_1A2)) {
       var_02 = common_scripts\utility::func_46B5(var_02.var_1A2, "targetname");
       continue;
@@ -226,9 +226,9 @@ ee_toss_fuse() {
     wait(0.15);
   }
 
-  var_03 = getent("srv_pap_fuse_pickup_trig", "targetname");
+  var_03 = getEnt("srv_pap_fuse_pickup_trig", "targetname");
   var_03 common_scripts\utility::func_9DA3();
-  var_03 usetriggerrequirelookat(1);
+  var_03 useTriggerRequireLookAt(1);
   var_03 waittill("trigger");
   var_00 delete();
   var_03 common_scripts\utility::func_9D9F();
@@ -251,7 +251,7 @@ ee_raise(param_00) {
   if(param_00 <= 0) {
     self.var_116 = self.raised_position;
   } else {
-    self moveto(self.raised_position, param_00, 0.1, 0.1);
+    self moveTo(self.raised_position, param_00, 0.1, 0.1);
     wait(param_00);
   }
 
@@ -278,7 +278,7 @@ ee_lower(param_00, param_01) {
     param_00 = 0.5;
   }
 
-  self moveto(self.var_926A, param_00, 0.1, 0.1);
+  self moveTo(self.var_926A, param_00, 0.1, 0.1);
   wait(param_00);
   if(!common_scripts\utility::func_562E(param_01)) {
     self setCanDamage(0);

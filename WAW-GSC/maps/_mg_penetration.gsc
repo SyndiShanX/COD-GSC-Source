@@ -70,7 +70,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
   while(self canSee(enemy)) {
     angles = vectortoangles(enemy getEye() - ent.origin);
     angles = anglesToForward(angles);
-    ent moveto(ent.origin + vectorscale(angles, 12), 0.1);
+    ent moveTo(ent.origin + vectorscale(angles, 12), 0.1);
     wait(0.1);
   }
 
@@ -84,7 +84,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
     units_per_second = 150;
     timer = distance(ent.origin, self.last_enemy_sighting_position) / units_per_second;
     if(timer > 0) {
-      ent moveto(self.last_enemy_sighting_position, timer);
+      ent moveTo(self.last_enemy_sighting_position, timer);
       wait(timer);
     }
 
@@ -94,9 +94,9 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
       oldOrigin = ent.origin;
     }
 
-    ent moveto(ent.origin + vectorscale(angles, 80) + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
+    ent moveTo(ent.origin + vectorscale(angles, 80) + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait(3.5);
-    ent moveto(oldOrigin + vectorscale(angles, -20), 3, 1, 1);
+    ent moveTo(oldOrigin + vectorscale(angles, -20), 3, 1, 1);
   }
 
   wait(randomfloatrange(2.5, 4));
@@ -229,7 +229,7 @@ spotted_an_enemy(ent, enemy) {
   while(self canSee(enemy)) {
     angles = vectortoangles(enemy getEye() - ent.origin);
     angles = anglesToForward(angles);
-    ent moveto(ent.origin + vectorscale(angles, 10), 0.2);
+    ent moveTo(ent.origin + vectorscale(angles, 10), 0.2);
     wait(0.2);
   }
 
@@ -238,12 +238,12 @@ spotted_an_enemy(ent, enemy) {
 
   units_per_second = 150;
   timer = distance(ent.origin, self.last_enemy_sighting_position) / units_per_second;
-  ent moveto(self.last_enemy_sighting_position, timer);
+  ent moveTo(self.last_enemy_sighting_position, timer);
   wait(timer);
   oldOrigin = ent.origin;
-  ent moveto(ent.origin + vectorscale(angles, 80) + (0, 0, -25), 3, 1, 1);
+  ent moveTo(ent.origin + vectorscale(angles, 80) + (0, 0, -25), 3, 1, 1);
   wait(3.5);
-  ent moveto(oldOrigin + vectorscale(angles, -20), 3, 1, 1);
+  ent moveTo(oldOrigin + vectorscale(angles, -20), 3, 1, 1);
   wait(1);
   self stop_firing();
 }

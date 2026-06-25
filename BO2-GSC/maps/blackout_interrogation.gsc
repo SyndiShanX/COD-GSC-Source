@@ -83,7 +83,7 @@ run_mason_start() {
   level thread set_force_no_cull_on_actors_during_scene("intro_cctv", "enter_interrogation_room_started");
   level thread set_force_no_cull_on_actors_during_scene("intro_table", "enter_interrogation_room_started");
   run_scene_and_delete("intro_cctv");
-  playsoundatposition("sce_metal_door", (343, 22, 80));
+  playSoundAtPosition("sce_metal_door", (343, 22, 80));
   e_streamer_hint delete();
   clean_up_mason_start();
 }
@@ -124,7 +124,7 @@ mason_interrogation_streamer_hint() {
   wait 0.1;
   m_player_body = get_model_or_models_from_scene("enter_interrogation_room_part_3", "player_body");
   e_streamer_hint = createstreamerhint(m_player_body.origin, 1);
-  e_streamer_hint linkto(m_player_body);
+  e_streamer_hint linkTo(m_player_body);
   scene_wait("enter_interrogation_room_part_3");
   e_streamer_hint delete();
 }
@@ -152,7 +152,7 @@ run_mason_wakeup() {
   level notify("mason_wakeup");
   level.player shellshock("death", 11.5);
   run_scene_first_frame("sal_door_open", 1);
-  s_player_pos = getstruct("player_skipto_mason_wakeup", "targetname");
+  s_player_pos = getStruct("player_skipto_mason_wakeup", "targetname");
   level thread add_posed_corpses("wakeup_deadguys", "sal_door_open_done");
   run_scene_first_frame("player_wakes_up_in_interrogation_room");
   level.player stop_magic_bullet_shield();
@@ -178,7 +178,7 @@ run_mason_wakeup() {
   level thread wakeup_sequence_salazar();
   level thread maps\_audio::switch_music_wait("BLACKOUT_POST_INTERROGATION", 1);
   autosave_by_name("mason_combat_start");
-  s_armory = getstruct("player_equipment_objective", "targetname");
+  s_armory = getStruct("player_equipment_objective", "targetname");
   level.player waitill_armed();
   scene_wait("salazar_walks_to_hallway_door");
   trigger_wait("hallway_door_trigger");
@@ -371,7 +371,7 @@ place_loadout_item(str_weapon, str_origin, s_anchor, weaponoptions) {
     for(i = 0; i < a_weapon_mount.size; i++) {
       m_weapon_script_model = spawn("weapon_" + str_weapon, a_weapon_mount[i].origin);
       m_weapon_script_model.angles = a_weapon_mount[i].angles;
-      m_weapon_script_model linkto(a_weapon_mount[i]);
+      m_weapon_script_model linkTo(a_weapon_mount[i]);
       m_weapon_script_model itemweaponsetammo(9999, 9999, 0);
       m_weapon_script_model itemweaponsetammo(9999, 9999, 1);
       m_weapon_script_model itemweaponsetoptions(weaponoptions);
@@ -688,7 +688,7 @@ set_loadout_offset(str_weapon_full, s_anchor, str_origin) {
 
 waitill_armed() {
   scene_wait("player_wakes_up_in_interrogation_room");
-  s_armory = getstruct("player_equipment_objective", "targetname");
+  s_armory = getStruct("player_equipment_objective", "targetname");
   set_objective(level.obj_pickup_weapons, s_armory.origin, "");
   level.player allowpickupweapons(1);
   b_armed_for_combat = 0;
@@ -753,7 +753,7 @@ move_up_on_hallway_clear() {
   level endon("friendly_face_started");
   flag_wait("hallway_cleared");
   level.salazar clear_force_color();
-  level.salazar set_goalradius(16);
+  level.salazar set_goalRadius(16);
   level.salazar set_goal_node(getnode("salazar_exit_reach_setup", "targetname"));
 }
 
@@ -799,34 +799,34 @@ hallway_front_rush() {
 }
 
 run_masons_quarters(str_door_name, str_trigger_name, open_angle, str_open_notify) {
-  m_door = getent("masons_door", "targetname");
-  m_door_clip = getent("masons_door_clip", "targetname");
-  m_door_clip linkto(m_door, "tag_animate");
-  t_door = getent("masons_door_trigger", "targetname");
-  t_door setcursorhint("HINT_NOICON");
-  t_door sethintstring(&"BLACKOUT_OPEN_DOOR");
+  m_door = getEnt("masons_door", "targetname");
+  m_door_clip = getEnt("masons_door_clip", "targetname");
+  m_door_clip linkTo(m_door, "tag_animate");
+  t_door = getEnt("masons_door_trigger", "targetname");
+  t_door setCursorHint("HINT_NOICON");
+  t_door setHintString(&"BLACKOUT_OPEN_DOOR");
   t_door waittill("trigger");
   level.player thread run_masons_quarters_rumble();
   run_scene_and_delete("open_masons_door");
-  t_cigar_box = getent("mason_personal_effects_trigger", "targetname");
-  t_cigar_box setcursorhint("HINT_NOICON");
-  t_cigar_box sethintstring(&"BLACKOUT_USE_PERSONAL_EFFECTS");
+  t_cigar_box = getEnt("mason_personal_effects_trigger", "targetname");
+  t_cigar_box setCursorHint("HINT_NOICON");
+  t_cigar_box setHintString(&"BLACKOUT_USE_PERSONAL_EFFECTS");
   t_cigar_box waittill("trigger");
   level.player playSound("evt_masonroom_info_pickup");
   level notify("masons_personal_effects_found");
-  e_cigar_box = getent("mason_personal_effects", "targetname");
+  e_cigar_box = getEnt("mason_personal_effects", "targetname");
   e_cigar_box delete();
 }
 
 run_masons_quarters_rumble() {
   wait 0.6;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
 }
 
 init_doors() {
-  hallway_door = getent("interrogation_hallway_door", "targetname");
-  collision = getent(hallway_door.target, "targetname");
-  collision linkto(hallway_door, "tag_origin");
+  hallway_door = getEnt("interrogation_hallway_door", "targetname");
+  collision = getEnt(hallway_door.target, "targetname");
+  collision linkTo(hallway_door, "tag_origin");
   glass_list = getEntArray("interrogation_mirror_broken", "targetname");
 
   foreach(glass in glass_list) {
@@ -837,7 +837,7 @@ init_doors() {
 }
 
 interrogation_menendez_bleed() {
-  ai_menendez = getent("menendez_ai", "targetname");
+  ai_menendez = getEnt("menendez_ai", "targetname");
   wait 1.5;
 
   if(is_mature()) {
@@ -859,7 +859,7 @@ interrogation_camera() {
 }
 
 interrogation_handcuffs() {
-  m_handcuffs = getent("intro_handcuffs", "targetname");
+  m_handcuffs = getEnt("intro_handcuffs", "targetname");
   m_handcuffs play_fx("handcuffs_light", m_handcuffs.origin, m_handcuffs.angles, "stop_handcuffs", 1);
   flag_wait("intro_disable_handcuffs");
   level.player playSound("evt_power_down");
@@ -890,8 +890,8 @@ notetrack_light_flicker(ai_menendez) {
 notetrack_interrogation_explosion(m_player_body) {
   setDvar("r_exposureTweak", 1);
   clientnotify("INT_flick");
-  playsoundatposition("exp_carrier_impact", (0, 0, 0));
-  level.player playrumbleonentity("artillery_rumble");
+  playSoundAtPosition("exp_carrier_impact", (0, 0, 0));
+  level.player playRumbleOnEntity("artillery_rumble");
   earthquake(0.1, 1, level.player.origin, 128, level.player);
   blend_exposure_over_time(1.0, 0.5);
   blend_exposure_over_time(4.0, 0.2);
@@ -949,8 +949,8 @@ scene_sal_open_door() {
   set_objective(level.obj_pickup_weapons, undefined, "delete");
   run_scene_and_delete("sal_door_open");
   level thread run_scene_and_delete("hallway_door_closes_behind_player");
-  hall_door = getent("interrogation_hallway_door", "targetname");
-  hall_door_collision = getent(hall_door.target, "targetname");
+  hall_door = getEnt("interrogation_hallway_door", "targetname");
+  hall_door_collision = getEnt(hall_door.target, "targetname");
   hall_door_collision connectpaths();
 
   if(scene_exists("taser_knuckles_extras")) {
@@ -966,7 +966,7 @@ notetrack_salazar_runs_into_hallway(e_player_body) {
 
 scene_sal_open_door_rumble(player_body) {
   for(i = 0; i < 2; i++) {
-    level.player playrumbleonentity("tank_rumble");
+    level.player playRumbleOnEntity("tank_rumble");
     earthquake(0.1, 0.1, level.player.origin, 1000, level.player);
     wait 0.1;
   }
@@ -996,7 +996,7 @@ scene_interrogation() {
     }
   }
 
-  mirror_menendez = getent("menendez_ai", "targetname");
+  mirror_menendez = getEnt("menendez_ai", "targetname");
   mirror_menendez custom_ai_weapon_loadout("fiveseven_sp");
   scene_wait("intro_fight");
 }
@@ -1015,8 +1015,8 @@ sal_exit_explosion() {
 
 turn_on_intro_cam() {
   setsaveddvar("r_extracam_custom_aspectratio", 1.61538);
-  s_camera = getstruct("interrogation_cam_pos", "targetname");
-  s_camera_target = getstruct(s_camera.target, "targetname");
+  s_camera = getStruct("interrogation_cam_pos", "targetname");
+  s_camera_target = getStruct(s_camera.target, "targetname");
   s_camera.angles = vectortoangles(s_camera_target.origin - s_camera.origin);
   level.e_camera = spawn("script_model", s_camera.origin);
   level.e_camera setModel("tag_origin");
@@ -1047,20 +1047,20 @@ turn_off_intro_cam() {
 turn_off_intro_cam_hud() {}
 
 room_cams_init() {
-  s_right_mirror = getstruct("mirror_1_dir", "targetname");
+  s_right_mirror = getStruct("mirror_1_dir", "targetname");
   level.e_right_mirror = spawn("script_model", s_right_mirror.origin);
   level.e_right_mirror setModel("tag_origin");
   level.e_right_mirror.angles = s_right_mirror.angles;
   level.e_right_mirror.is_reflected_over_y = 0;
   level.e_right_mirror.s_fake_mirror = s_right_mirror;
-  level.e_right_mirror.s_real_mirror = getstruct("mirror_1_real_room", "targetname");
-  s_left_mirror = getstruct("mirror_2_dir", "targetname");
+  level.e_right_mirror.s_real_mirror = getStruct("mirror_1_real_room", "targetname");
+  s_left_mirror = getStruct("mirror_2_dir", "targetname");
   level.e_left_mirror = spawn("script_model", s_left_mirror.origin);
   level.e_left_mirror setModel("tag_origin");
   level.e_left_mirror.angles = s_left_mirror.angles;
   level.e_left_mirror.is_reflected_over_y = 1;
   level.e_left_mirror.s_fake_mirror = s_left_mirror;
-  level.e_left_mirror.s_real_mirror = getstruct("mirror_2_real_room", "targetname");
+  level.e_left_mirror.s_real_mirror = getStruct("mirror_2_real_room", "targetname");
 }
 
 get_mirror_cam_offset() {
@@ -1097,8 +1097,8 @@ run_mirror_camera() {
     }
 
     frametime = 0.05;
-    self moveto(self.s_fake_mirror.origin + v_offset, frametime, 0, 0);
-    self rotateto(a_dir, frametime, 0, 0);
+    self moveTo(self.s_fake_mirror.origin + v_offset, frametime, 0, 0);
+    self rotateTo(a_dir, frametime, 0, 0);
     wait(frametime);
     self.origin = self.s_fake_mirror.origin + v_offset;
     self.angles = a_dir;
@@ -1187,13 +1187,13 @@ spawn_interrogation_heroes() {
 taser_knuckles_pickup() {
   run_scene_first_frame("taser_knuckle_crate");
   run_scene_first_frame("taser_knuckles_extras");
-  taser_trigger = getent("knuckles_pickup_trigger", "targetname");
+  taser_trigger = getEnt("knuckles_pickup_trigger", "targetname");
   taser_trigger trigger_off();
   level.player waittill_player_has_intruder_perk();
   taser_trigger trigger_on();
   scene_wait("player_wakes_up_in_interrogation_room");
-  taser_trigger setcursorhint("HINT_NOICON");
-  taser_trigger sethintstring(&"SCRIPT_HINT_HACK");
+  taser_trigger setCursorHint("HINT_NOICON");
+  taser_trigger setHintString(&"SCRIPT_HINT_HACK");
   set_objective(level.obj_lock_perk, taser_trigger, "interact");
   waittill_knuckles_trigger();
   set_objective(level.obj_lock_perk, undefined, "remove");
@@ -1221,7 +1221,7 @@ setup_hallway_ally() {
 }
 
 callback_player_knocked_out(player) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level clientnotify("knc_on");
   level.player dodamage(50, level.player.origin);
   level.player shellshock("death", 1.5);

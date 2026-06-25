@@ -351,7 +351,7 @@ _id_5C08() {
     }
   }
 
-  var_5 = getent("ctf_zone_" + game["defenders"], "targetname");
+  var_5 = getEnt("ctf_zone_" + game["defenders"], "targetname");
 
   if(isDefined(var_5)) {
     if(istrue(game["switchedsides"])) {
@@ -361,7 +361,7 @@ _id_5C08() {
     }
   }
 
-  var_5 = getent("ctf_zone_" + game["attackers"], "targetname");
+  var_5 = getEnt("ctf_zone_" + game["attackers"], "targetname");
 
   if(isDefined(var_5)) {
     if(istrue(game["switchedsides"])) {
@@ -588,7 +588,7 @@ _id_405F(var_0, var_1) {
 
 _id_3FA6(var_0, var_1) {
   var_2 = _id_5C07(var_0);
-  var_3 = getent("ctf_zone_" + var_1, "targetname");
+  var_3 = getEnt("ctf_zone_" + var_1, "targetname");
 
   if(!isDefined(var_3)) {
     var_3 = spawn("trigger_radius", var_2.origin - (0, 0, var_2._id_0359 / 2), 0, var_2._id_0359, 80);

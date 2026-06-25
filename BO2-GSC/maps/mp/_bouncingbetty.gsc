@@ -106,7 +106,7 @@ bouncingbettydetonate(attacker, weaponname) {
 
 bouncingbettydestroyed() {
   playFX(level.bettydestroyedfx, self.origin);
-  playsoundatposition("dst_equipment_destroy", self.origin);
+  playSoundAtPosition("dst_equipment_destroy", self.origin);
 
   if(isDefined(self.trigger)) {
     self.trigger delete();
@@ -126,8 +126,8 @@ bouncingbettydestroyed() {
 
 bouncingbettyjumpandexplode() {
   explodepos = self.origin + (0, 0, level.bettyjumpheight);
-  self moveto(explodepos, level.bettyjumptime, level.bettyjumptime, 0);
-  self.killcament moveto(explodepos + self.killcamoffset, level.bettyjumptime, 0, level.bettyjumptime);
+  self moveTo(explodepos, level.bettyjumptime, level.bettyjumptime, 0);
+  self.killcament moveTo(explodepos + self.killcamoffset, level.bettyjumptime, 0, level.bettyjumptime);
   playFX(level.bettylaunchfx, self.origin);
   self rotatevelocity(level.bettyrotatevelocity, level.bettyjumptime, 0, level.bettyjumptime);
   self playSound("fly_betty_jump");

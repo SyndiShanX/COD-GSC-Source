@@ -20,7 +20,7 @@ func_5F84(var_0) {
   func_F491("sprint_loop", "sprint_super");
 
   for(;;) {
-    var_2 = vectornormalize(level.player.origin - self.origin);
+    var_2 = vectorNormalize(level.player.origin - self.origin);
     var_3 = anglesToForward(self.angles);
     var_4 = vectordot(var_3, var_2);
     var_5 = distance2dsquared(level.player.origin, self.origin);

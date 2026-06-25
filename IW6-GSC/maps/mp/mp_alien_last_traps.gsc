@@ -30,8 +30,8 @@ init_tesla_trap() {
 
 wait_for_tesla_switch_activation(var_0) {
   self endon("stop_tesla_trap");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_ALIEN_LAST_USE_TESLA");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_ALIEN_LAST_USE_TESLA");
   self makeusable();
 
   for(;;) {
@@ -177,7 +177,7 @@ run_tesla_trap() {
 tesla_trap_attack(var_0, var_1) {
   self endon("death");
   playFXOnTag(level._effect["tesla_attack"], var_0.attack_bolt, "TAG_ORIGIN");
-  var_0.attack_bolt moveto(var_1, 0.05);
+  var_0.attack_bolt moveTo(var_1, 0.05);
   var_0.attack_bolt waittill("movedone");
   playFXOnTag(level._effect["tesla_shock"], var_0.attack_bolt, "tag_origin");
   self playSound("tesla_shock");
@@ -238,7 +238,7 @@ disable_traps_when_ancestor_attacks() {
     var_1 notify("fire_trap_exhausted");
     var_1 notify("disable_fire_trap");
     var_1.barrel makeusable();
-    var_1.barrel sethintstring(&"MP_ALIEN_LAST_TRAPS_OFFLINE");
+    var_1.barrel setHintString(&"MP_ALIEN_LAST_TRAPS_OFFLINE");
     maps\mp\alien\_outline_proto::remove_from_outline_watch_list(var_1.barrel);
     maps\mp\alien\_outline_proto::enable_outline(var_1.barrel, 4, 1);
     markdangerousnodesintrigger(var_1.burn_trig, 0);
@@ -249,7 +249,7 @@ disable_traps_when_ancestor_attacks() {
   foreach(var_4 in level.electric_fences) {
     var_4 notify("death");
     var_4.generator makeusable();
-    var_4.generator sethintstring(&"MP_ALIEN_LAST_TRAPS_OFFLINE");
+    var_4.generator setHintString(&"MP_ALIEN_LAST_TRAPS_OFFLINE");
     var_4.running = 0;
     var_4.capacity = 0;
     var_4.generator stoploopsound("alien_fence_gen_lp");
@@ -267,7 +267,7 @@ disable_traps_when_ancestor_attacks() {
       var_7 stoploopsound("alien_fence_gen_lp");
     }
 
-    var_7 sethintstring(&"MP_ALIEN_LAST_TRAPS_OFFLINE");
+    var_7 setHintString(&"MP_ALIEN_LAST_TRAPS_OFFLINE");
     var_7 notify("stop_tesla_trap");
     level thread play_disabled_fx(var_7);
     maps\mp\alien\_outline_proto::remove_from_outline_watch_list(var_7);
@@ -295,14 +295,14 @@ disable_traps_when_ancestor_attacks() {
   foreach(var_1 in level.fire_traps) {
     maps\mp\alien\_outline_proto::disable_outline(var_1.barrel);
     var_1.barrel makeusable();
-    var_1.barrel sethintstring(var_1.hintstring);
+    var_1.barrel setHintString(var_1.hintstring);
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(var_1.barrel, var_1.cost);
     var_1 thread maps\mp\alien\_trap::fire_trap_think();
   }
 
   foreach(var_4 in level.electric_fences) {
     var_4.generator makeusable();
-    var_4.generator sethintstring(var_4.hintstring);
+    var_4.generator setHintString(var_4.hintstring);
     var_4 thread maps\mp\alien\_trap::run_electric_trap(maps\mp\alien\_trap::play_fence_on_fx, maps\mp\alien\_trap::play_fence_off_fx, maps\mp\alien\_trap::ambient_fence_shocks);
     maps\mp\alien\_outline_proto::add_to_outline_watch_list(var_4.generator, var_4.cost);
   }
@@ -327,8 +327,8 @@ disable_tesla(var_0) {
 }
 
 enable_tesla() {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_ALIEN_LAST_USE_TESLA");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_ALIEN_LAST_USE_TESLA");
   self makeusable();
   thread wait_for_tesla_switch_activation(getEntArray(self.target, "targetname"));
 }
@@ -371,7 +371,7 @@ disable_turrets() {
   level thread play_disabled_fx(self, undefined, 1);
   maps\mp\alien\_trap::disable_turret();
   self makeunusable();
-  self sethintstring(&"MP_ALIEN_LAST_TURRET_OFFLINE");
+  self setHintString(&"MP_ALIEN_LAST_TURRET_OFFLINE");
   maps\mp\alien\_outline_proto::remove_from_outline_watch_list(self);
   maps\mp\alien\_outline_proto::enable_outline(self, 4, 1);
 }
@@ -388,17 +388,17 @@ reenable_turrets() {
   if(!isDefined(self) || !isDefined(self.weaponinfo) || self.weaponinfo != "turret_minigun_alien") {
     return;
   }
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self makeusable();
   self.enabled = 0;
-  self sethintstring(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
+  self setHintString(&"ALIEN_COLLECTIBLES_ACTIVATE_TURRET");
   self turretfiredisable();
   self maketurretinoperable();
   maps\mp\alien\_outline_proto::add_to_outline_watch_list(self, 750);
 }
 
 setup_trap_repair_generator() {
-  level.ancestor_generator = getent("ancestor_left_generator", "targetname");
+  level.ancestor_generator = getEnt("ancestor_left_generator", "targetname");
 
   if(!isDefined(level.ancestor_generator)) {
     return;
@@ -417,7 +417,7 @@ watch_to_repair() {
 
   for(;;) {
     self makeusable();
-    self sethintstring(&"MP_ALIEN_LAST_REPAIRGENERATOR");
+    self setHintString(&"MP_ALIEN_LAST_REPAIRGENERATOR");
     self waittill("trigger", var_2);
 
     if(maps\mp\alien\_utility::is_true(var_2.iscarrying)) {

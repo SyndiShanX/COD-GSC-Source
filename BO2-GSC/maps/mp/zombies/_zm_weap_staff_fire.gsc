@@ -284,7 +284,7 @@ _fire_stun_zombie_internal(do_stun, run_cycle) {
   }
 
   if(do_stun) {
-    self animscripted(self.origin, self.angles, "zm_afterlife_stun");
+    self animScripted(self.origin, self.angles, "zm_afterlife_stun");
   }
 }
 
@@ -408,7 +408,7 @@ stop_zombie() {
   e_linker = spawn("script_origin", (0, 0, 0));
   e_linker.origin = self.origin;
   e_linker.angles = self.angles;
-  self linkto(e_linker);
+  self linkTo(e_linker);
   self waittill("death");
   e_linker delete();
 }

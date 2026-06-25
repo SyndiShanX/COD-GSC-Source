@@ -168,7 +168,7 @@ function function_3700164e(model, index, v_start, localclientnum) {
   v_start_trace = v_start - vectorscale((0, 0, 1), 5000);
   trace = bulletTrace(v_start_trace, var_89ea469b, 0, undefined);
   var_89ea469b = trace["position"];
-  self moveto(var_89ea469b, 3);
+  self moveTo(var_89ea469b, 3);
   playFXOnTag(localclientnum, level._effect["beacon_shell_trail"], self, "tag_origin");
   self playSound(0, "zmb_homingbeacon_missile_boom");
   self thread function_42cb41ec(var_89ea469b);

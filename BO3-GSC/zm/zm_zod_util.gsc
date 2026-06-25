@@ -107,9 +107,9 @@ function zod_unitrigger_assess_visibility(player) {
     }
   }
   if(isDefined(param1)) {
-    self sethintstring(str_msg, param1);
+    self setHintString(str_msg, param1);
   } else {
-    self sethintstring(str_msg);
+    self setHintString(str_msg);
   }
   return b_visible;
 }
@@ -301,7 +301,7 @@ function function_5cc835d6(v_origin, v_target, n_duration) {
   assert(isDefined(v_target), "");
   e_fx = tag_origin_allocate(v_origin, (0, 0, 0));
   e_fx clientfield::set("zod_egg_soul", 1);
-  e_fx moveto(v_target, n_duration);
+  e_fx moveTo(v_target, n_duration);
   e_fx waittill("movedone");
   e_fx clientfield::set("zod_egg_soul", 0);
   e_fx tag_origin_free();

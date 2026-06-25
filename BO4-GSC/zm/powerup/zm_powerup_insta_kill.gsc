@@ -74,7 +74,7 @@ insta_kill_powerup(drop_item, player) {
 
   wait n_wait_time;
   zombie_utility::set_zombie_var_team(#"zombie_insta_kill", team, 0);
-  players = getplayers(team);
+  players = getPlayers(team);
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {

@@ -109,8 +109,8 @@ playerweather() {
   for(;;) {
     while(common_scripts\utility::flag("player_weather_enabled")) {
       var_2 = var_0.angles;
-      var_1 moveto(var_0.origin + (0, 0, 650), 0.1);
-      var_1 rotateto((-90, var_2[1], 180), 0.1);
+      var_1 moveTo(var_0.origin + (0, 0, 650), 0.1);
+      var_1 rotateTo((-90, var_2[1], 180), 0.1);
       playFXOnTag(level._effect["rain_drops"], var_1, "tag_origin");
       wait 0.3;
     }
@@ -269,7 +269,7 @@ thunder() {
 
   var_0 = spawn("script_origin", (0, 0, 0));
   var_0.origin = level.player.origin + (0, 0, 80);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
 
   if(level.rainlevel <= 8) {
     var_0 playSound("elm_thunder_distant", "sounddone");

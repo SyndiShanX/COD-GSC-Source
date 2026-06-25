@@ -113,7 +113,7 @@ start_extra_cam() {
     level waittill("camera_start", localClientNum);
     if(level.extraCamActive == false) {
       level.extraCamActive = true;
-      level.cameraEnt = GetEnt(localClientNum, "theater_extracam", "targetname");
+      level.cameraEnt = getEnt(localClientNum, "theater_extracam", "targetname");
       level.cameraEnt isExtraCam(0);
       level.cam_corona = spawn(localClientNum, level.cameraEnt.origin + (0, 1, 0), "script_model");
       level.cam_corona setModel("tag_origin");
@@ -146,13 +146,13 @@ pack_clock_init() {
   }
   minutes = curr_time[1];
   seconds = curr_time[2];
-  hour_hand = GetEnt(clientNum, "zom_clock_hour_hand", "targetname");
+  hour_hand = getEnt(clientNum, "zom_clock_hour_hand", "targetname");
   hour_values = [];
   hour_values["hand_time"] = hours;
   hour_values["rotate"] = 30;
   hour_values["rotate_bit"] = 30 / 3600;
   hour_values["first_rotate"] = ((minutes * 60) + seconds) * hour_values["rotate_bit"];
-  minute_hand = GetEnt(clientNum, "zom_clock_minute_hand", "targetname");
+  minute_hand = getEnt(clientNum, "zom_clock_minute_hand", "targetname");
   minute_values = [];
   minute_values["hand_time"] = minutes;
   minute_values["rotate"] = 6;

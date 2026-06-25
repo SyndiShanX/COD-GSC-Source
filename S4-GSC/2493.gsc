@@ -120,7 +120,7 @@ _id_C929(var_0, var_1, var_2) {
   self._id_C922 = var_1;
 
   for(;;) {
-    self rotateyaw(var_1, var_0);
+    self rotateYaw(var_1, var_0);
     wait(var_0);
   }
 }
@@ -272,11 +272,11 @@ _id_5D45(var_0, var_1, var_2) {
   var_7 = var_6 - anglesToForward(var_5) * 20000;
   self.origin = var_7;
   self.angles = var_5;
-  self moveto(var_6, var_4, 0, 1);
+  self moveTo(var_6, var_4, 0, 1);
   wait(var_4 - 3);
   self rotateroll(45, 3);
   wait 3;
-  self linkto(var_0, "tag_origin");
+  self linkTo(var_0, "tag_origin");
 }
 
 _id_9103(var_0, var_1, var_2, var_3) {
@@ -371,18 +371,18 @@ _id_9103(var_0, var_1, var_2, var_3) {
   if(var_1 == "counter_spy_plane") {
     var_17 = spawn("script_model", var_6 gettagorigin("tag_turbine_l_fx"));
     var_17 setModel("tag_origin");
-    var_17 linkto(var_6, "tag_turbine_l_fx");
+    var_17 linkTo(var_6, "tag_turbine_l_fx");
     var_6.propellorfx[0] = var_17;
     playFXOnTag(level._id_0BCE["plane_propellor"], var_6.propellorfx[0], "tag_origin");
     var_18 = spawn("script_model", var_6 gettagorigin("tag_turbine_r_fx"));
     var_18 setModel("tag_origin");
-    var_18 linkto(var_6, "tag_turbine_r_fx");
+    var_18 linkTo(var_6, "tag_turbine_r_fx");
     var_6.propellorfx[1] = var_18;
     playFXOnTag(level._id_0BCE["plane_propellor"], var_6.propellorfx[1], "tag_origin");
   } else if(var_1 == "uav") {
     var_17 = spawn("script_model", var_6 gettagorigin("tag_prop_00"));
     var_17 setModel("tag_origin");
-    var_17 linkto(var_6, "tag_prop_00");
+    var_17 linkTo(var_6, "tag_prop_00");
     var_6.propellorfx[0] = var_17;
     playFXOnTag(level._id_0BCE["plane_propellor"], var_6.propellorfx[0], "tag_origin");
   }
@@ -465,7 +465,7 @@ _id_9103(var_0, var_1, var_2, var_3) {
     var_35 = var_34 + 4000;
     var_36 = cos(var_33) * var_35;
     var_37 = sin(var_33) * var_35;
-    var_38 = vectornormalize((var_36, var_37, var_25));
+    var_38 = vectorNormalize((var_36, var_37, var_25));
     var_38 = var_38 * var_25;
 
     if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "getGameType")) {
@@ -530,7 +530,7 @@ _id_9103(var_0, var_1, var_2, var_3) {
       }
 
       var_46 = 20000 / var_45;
-      var_6 moveto(var_6._id_482B, var_46, 1);
+      var_6 moveTo(var_6._id_482B, var_46, 1);
 
       if(isDefined(level._id_F902[var_1]._id_6091) && isDefined(level._id_F902[var_1]._id_606B)) {
         playFXOnTag(level._id_F902[var_1]._id_6091, var_6, level._id_F902[var_1]._id_606B);
@@ -555,7 +555,7 @@ _id_9103(var_0, var_1, var_2, var_3) {
       var_6._id_8908 = 1;
 
       if(isent(var_6)) {
-        var_6 moveto(var_6._id_482B, 15);
+        var_6 moveTo(var_6._id_482B, 15);
       }
     }
 
@@ -753,7 +753,7 @@ _id_4331() {
         self.damagedfxent = spawn("script_model", var_18);
         self.damagedfxent setModel("tag_origin");
         self.damagedfxent.angles = self.angles;
-        self.damagedfxent linkto(self, "tag_body", (0, 0, 0), (0, 0, 0));
+        self.damagedfxent linkTo(self, "tag_body", (0, 0, 0), (0, 0, 0));
         playFXOnTag(level._id_F902[self._id_F904].fxid_damaged, self.damagedfxent, "tag_origin");
 
         foreach(var_20 in level.players) {

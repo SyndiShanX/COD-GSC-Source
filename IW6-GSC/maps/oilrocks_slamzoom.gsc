@@ -11,7 +11,7 @@ vehicle_spline_cam(var_0, var_1, var_2, var_3) {
   spline_cam_intro(var_1);
   var_4 = getvehiclenode(var_0, "targetname");
   var_5 = var_4 maps\_utility::get_last_ent_in_chain("vehiclenode");
-  var_6 = spawnvehicle("tag_origin", "spline_cam_vehicle", "empty", var_4.origin, var_4.angles);
+  var_6 = spawnVehicle("tag_origin", "spline_cam_vehicle", "empty", var_4.origin, var_4.angles);
   var_6 attachpath(var_4);
   var_6 startpath();
   level.player playersetstreamorigin(var_5.origin);

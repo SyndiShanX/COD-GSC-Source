@@ -104,7 +104,7 @@ post_load() {
   common_scripts\utility::array_thread(var_0, maps\_utility::hide_entity);
   var_1 = getEntArray("vista_building_tiran_dmg", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::hide_entity);
-  var_2 = getent("bldg_tilt_debris_b", "targetname");
+  var_2 = getEnt("bldg_tilt_debris_b", "targetname");
   var_2 hide();
 }
 

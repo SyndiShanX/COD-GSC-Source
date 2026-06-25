@@ -309,7 +309,7 @@ function function_2b22d1f9() {
   s_pavlov_player = struct::get_array("", "");
   var_9544a498 = 0;
   foreach(player in level.activeplayers) {
-    player setorigin(s_pavlov_player[var_9544a498].origin);
+    player setOrigin(s_pavlov_player[var_9544a498].origin);
     player setplayerangles(s_pavlov_player[var_9544a498].angles);
   }
   level flag::set("");
@@ -325,7 +325,7 @@ function function_cc40b263() {
 
 function function_a7e8b47b() {
   var_1a0a3da9 = getEntArray("", "");
-  var_ff1b68c0 = getent("", "");
+  var_ff1b68c0 = getEnt("", "");
   a_e_collision = getEntArray("", "");
   var_50e0150f = getEntArray("", "");
   var_b9e116c5 = getEntArray("", "");
@@ -334,14 +334,14 @@ function function_a7e8b47b() {
     level.var_de98e3ce.gates_open = 0;
     foreach(e_collision in a_e_collision) {
       e_collision movez(600, 0.1);
-      e_collision disconnectpaths();
+      e_collision disconnectPaths();
     }
     foreach(e_gate in var_50e0150f) {
       e_gate movez(600, 0.25);
     }
     foreach(e_door in var_1a0a3da9) {
       e_door movex(114, 1);
-      e_door disconnectpaths();
+      e_door disconnectPaths();
     }
     foreach(e_hatch in var_b9e116c5) {
       e_hatch rotateroll(-90, 1);
@@ -371,7 +371,7 @@ function function_a7e8b47b() {
       linktraversal(var_b0a376a4);
     }
     var_ff1b68c0 movey(84, 1);
-    var_21ce8765 = getent("", "");
+    var_21ce8765 = getEnt("", "");
     var_21ce8765 thread scene::play("");
   }
   return true;

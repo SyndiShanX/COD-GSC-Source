@@ -84,9 +84,9 @@ main() {
 
 nicaragua_mason_to_mission_objectives() {
   flag_wait("mason_dropped_off_balcony");
-  set_objective(level.obj_mason_clear_the_mission, getstruct("mission_start_obj"), "");
+  set_objective(level.obj_mason_clear_the_mission, getStruct("mission_start_obj"), "");
   trigger_wait("mason_mission_begin_precourtyard_trigger");
-  s_struct = getstruct("mission_gate_struct", "targetname");
+  s_struct = getStruct("mission_gate_struct", "targetname");
   set_objective(level.obj_mason_clear_the_mission, s_struct, "");
   wait 1.0;
   level clientnotify("chc_bls");
@@ -99,9 +99,9 @@ nicaragua_mason_to_mission_objectives() {
 mason_mission_bruteforce_perk() {
   level endon("mason_entered_bunker");
   flag_wait("mason_dropped_off_balcony");
-  t_open = getent("bruteforce_perk_trigger", "targetname");
-  t_open sethintstring(&"SCRIPT_HINT_BRUTE_FORCE");
-  t_open setcursorhint("HINT_NOICON");
+  t_open = getEnt("bruteforce_perk_trigger", "targetname");
+  t_open setHintString(&"SCRIPT_HINT_BRUTE_FORCE");
+  t_open setCursorHint("HINT_NOICON");
   t_open trigger_off();
   level.player waittill_player_has_brute_force_perk();
   t_open trigger_on();
@@ -111,7 +111,7 @@ mason_mission_bruteforce_perk() {
   remove_objective_perk(level.obj_mason_bruteforce_perk);
   level thread nocull_for_3d();
   run_scene("bruteforce_perk");
-  m_garage_clip = getent("garage_clip", "targetname");
+  m_garage_clip = getEnt("garage_clip", "targetname");
   m_garage_clip trigger_off();
   m_garage_clip connectpaths();
   m_garage_clip delete();
@@ -144,7 +144,7 @@ mason_mission_setup() {
   add_spawn_function_group("mason_mission_cartel_shotgunners", "script_noteworthy", ::make_ai_aggressive);
   trigger_off("mason_mission_splitup_trigger");
   trigger_off("mason_mission_end_trigger");
-  e_archway_collision = getent("arch_rubble_collision", "targetname");
+  e_archway_collision = getEnt("arch_rubble_collision", "targetname");
   e_archway_collision trigger_off();
   e_archway_collision connectpaths();
   a_nd_archway = getnodearray("mission_archway_cover", "script_noteworthy");
@@ -166,7 +166,7 @@ mason_mission_setup() {
     setenablenode(node, 0);
   }
 
-  m_clip = getent("traversal_to_other_side_clip", "targetname");
+  m_clip = getEnt("traversal_to_other_side_clip", "targetname");
 
   if(isDefined(m_clip)) {
     m_clip trigger_off();
@@ -193,7 +193,7 @@ mason_mission_precourtyard() {
   level thread archway_fxanim();
   wait 0.1;
   a_ai_cartel = get_ai_array("mason_mission_precourtyard_cartel_ai", "targetname");
-  e_goalvolume = getent("mason_mission_precourtyard_goalvolume", "targetname");
+  e_goalvolume = getEnt("mason_mission_precourtyard_goalvolume", "targetname");
 
   foreach(guy in a_ai_cartel) {
     guy setgoalvolumeauto(e_goalvolume);
@@ -238,8 +238,8 @@ precourtyard_guys_invulnerable() {
 precourtyard_enemy_movement() {
   trigger_wait("mason_mission_player_approaching_precourtyard");
   a_ai_enemy = getaiarray("axis");
-  e_goalvolume_backright = getent("precourtyard_back_right_goalvolume", "targetname");
-  e_goalvolume_frontleft = getent("precourtyard_front_left_goalvolume", "targetname");
+  e_goalvolume_backright = getEnt("precourtyard_back_right_goalvolume", "targetname");
+  e_goalvolume_frontleft = getEnt("precourtyard_front_left_goalvolume", "targetname");
 
   foreach(guy in a_ai_enemy) {
     if(isDefined(guy.script_goalvolume) && issubstr(guy.script_goalvolume, "front_right")) {
@@ -301,8 +301,8 @@ sniper_aims_and_shoots(ai_redshirt) {
 
 fountain_fxanim() {
   trigger_wait("fxanim_fountain_trigger");
-  s_start = getstruct("archway_fxanim_fountain_start", "targetname");
-  s_target = getstruct("fountain_target", "targetname");
+  s_start = getStruct("archway_fxanim_fountain_start", "targetname");
+  s_target = getStruct("fountain_target", "targetname");
   e_rocket = magicbullet("rpg_magic_bullet_sp", s_start.origin, s_target.origin);
   e_rocket waittill("death");
   level notify("fxanim_fountain_start");
@@ -318,8 +318,8 @@ fountain_fxanim() {
 
 archway_fxanim() {
   trigger_wait("fxanim_archway_trigger");
-  s_start = getstruct("archway_fxanim_rocket_start", "targetname");
-  s_target = getstruct("mission_arch_target", "targetname");
+  s_start = getStruct("archway_fxanim_rocket_start", "targetname");
+  s_target = getStruct("mission_arch_target", "targetname");
   e_rocket = magicbullet("rpg_magic_bullet_sp", s_start.origin, s_target.origin);
   e_rocket waittill("death");
   level notify("fxanim_archway_start");
@@ -335,9 +335,9 @@ arch_impacts_ground(e_chunks) {
     radiusdamage(struct.origin, 56, 100, 100);
   }
 
-  e_archway_collision = getent("arch_rubble_collision", "targetname");
+  e_archway_collision = getEnt("arch_rubble_collision", "targetname");
   e_archway_collision trigger_on();
-  e_archway_collision disconnectpaths();
+  e_archway_collision disconnectPaths();
   a_nd_archway = getnodearray("mission_archway_cover", "script_noteworthy");
 
   foreach(node in a_nd_archway) {
@@ -486,12 +486,12 @@ mason_mission_courtyard() {
 }
 
 spawn_mission_courtyard_turret_gunner() {
-  sp_spawner = getent("mason_courtyard_turret_gunner", "script_noteworthy");
+  sp_spawner = getEnt("mason_courtyard_turret_gunner", "script_noteworthy");
   ai_gunner = simple_spawn_single(sp_spawner);
   flag_set("mason_mission_gunner_alive");
-  e_turret = getent("mason_courtyard_turret", "targetname");
+  e_turret = getEnt("mason_courtyard_turret", "targetname");
   e_turret thread wait_for_ai_to_use_turret();
-  t_trigger = getent("mission_courtyard_turret_trigger", "targetname");
+  t_trigger = getEnt("mission_courtyard_turret_trigger", "targetname");
 
   if(isalive(ai_gunner)) {
     ai_gunner thread _ai_use_turret(e_turret, 0, t_trigger);
@@ -520,9 +520,9 @@ wait_and_find_new_gunner() {
   level endon("mason_courtyard_fight_complete");
   wait 20;
   flag_set("courtyard_extra_turret_gunner_sent");
-  e_turret = getent("mason_courtyard_turret", "targetname");
+  e_turret = getEnt("mason_courtyard_turret", "targetname");
   e_turret thread wait_for_ai_to_use_turret();
-  t_trigger = getent("mission_courtyard_turret_trigger", "targetname");
+  t_trigger = getEnt("mission_courtyard_turret_trigger", "targetname");
   a_ai_enemies = getaiarray("axis");
   a_ai_sorted = get_array_of_closest(e_turret.origin, a_ai_enemies);
 
@@ -594,7 +594,7 @@ mission_sniper_tower() {
 
 precourtyard_enemies_retreat() {
   a_ai_enemies = getaiarray("axis");
-  e_goalvolume = getent("mason_mission_courtyard_fallback_goalvolume", "targetname");
+  e_goalvolume = getEnt("mason_mission_courtyard_fallback_goalvolume", "targetname");
 
   foreach(guy in a_ai_enemies) {
     if(!issubstr(guy.classname, "Sniper")) {
@@ -681,7 +681,7 @@ check_courtyard_almost_clear(a_ai_enemies) {
   }
 
   a_ai_enemies = remove_dead_from_array(a_ai_enemies);
-  e_goalvolume = getent("mason_mission_courtyard_open", "targetname");
+  e_goalvolume = getEnt("mason_mission_courtyard_open", "targetname");
 
   foreach(guy in a_ai_enemies) {
     if(!isalive(guy)) {
@@ -726,7 +726,7 @@ mason_courtyard_splitup() {
   trigger_use("mason_mission_courtyard_end_colortrigger");
   autosave_by_name("Mason_Courtyard_Complete");
   wait 2.0;
-  e_turret = getent("mason_courtyard_turret", "targetname");
+  e_turret = getEnt("mason_courtyard_turret", "targetname");
 
   if(isDefined(e_turret)) {
     e_turret maps\_turret::disable_turret();
@@ -740,7 +740,7 @@ mason_courtyard_splitup() {
   a_pdf_ai = getmasonallies();
 
   for(i = 1; i < 4; i++) {
-    s_org = getstruct("split_up_pdf_0" + i + "_origin", "targetname");
+    s_org = getStruct("split_up_pdf_0" + i + "_origin", "targetname");
 
     if(a_pdf_ai.size > 0) {
       a_ai_guy = get_array_of_closest(s_org.origin, a_pdf_ai, undefined, 1, 2000);
@@ -822,7 +822,7 @@ begin_split_up_scene(n_index) {
 }
 
 splitup_objective_marker() {
-  s_struct = getstruct("mason_splitup_start_struct", "targetname");
+  s_struct = getStruct("mason_splitup_start_struct", "targetname");
   set_objective(level.obj_mason_splitup_start, s_struct, "");
   flag_wait_any("nicaragua_mason_to_mission_complete", "mason_joined_splitup_scene");
   set_objective(level.obj_mason_splitup_start, undefined, "delete");
@@ -901,7 +901,7 @@ mission_lockdown() {
     setenablenode(node, 1);
   }
 
-  sp_lockdown = getent("mason_mission_lockdown_pdf", "targetname");
+  sp_lockdown = getEnt("mason_mission_lockdown_pdf", "targetname");
   sp_lockdown add_spawn_function(::mission_lockdown_guys_impervious);
   spawn_manager_enable("mason_mission_lockdown_pdf_sm");
 }

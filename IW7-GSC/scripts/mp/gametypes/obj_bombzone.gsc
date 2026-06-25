@@ -20,7 +20,7 @@ bombzone_setupobjective(var_0) {
   var_4 = getEntArray(var_3.target, "targetname");
   if(level.gametype == "dd") {
     var_2 = var_3.script_label;
-    var_5 = getent("dd_bombzone_clip" + var_2, "targetname");
+    var_5 = getEnt("dd_bombzone_clip" + var_2, "targetname");
     if(scripts\mp\utility::inovertime()) {
       if(var_2 == "_a" || var_2 == "_b") {
         var_3 delete();
@@ -96,7 +96,7 @@ bombzone_setupobjective(var_0) {
     }
   }
 
-  var_1.bombdefusetrig = getent(var_4[0].target, "targetname");
+  var_1.bombdefusetrig = getEnt(var_4[0].target, "targetname");
   var_1.bombdefusetrig.origin = var_1.bombdefusetrig.origin + (0, 0, -10000);
   var_1.bombdefusetrig.label = var_2;
   var_1.noweapondropallowedtrigger = spawn("trigger_radius", var_1.trigger.origin, 0, 140, 100);
@@ -106,7 +106,7 @@ bombzone_setupobjective(var_0) {
 setupkillcament(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 rotateyaw(-45, 0.05);
+  var_1 rotateYaw(-45, 0.05);
   wait(0.05);
   var_2 = undefined;
   var_3 = self.origin + (0, 0, 45);
@@ -481,11 +481,11 @@ initobjectivecam(var_0) {
 
   var_6 = [];
   if(isDefined(var_1) && isDefined(var_1.target)) {
-    var_7 = getent(var_1.target, "targetname");
+    var_7 = getEnt(var_1.target, "targetname");
     while(isDefined(var_7)) {
       var_6[var_6.size] = var_7;
       if(isDefined(var_7.target)) {
-        var_7 = getent(var_7.target, "targetname");
+        var_7 = getEnt(var_7.target, "targetname");
         continue;
       }
 
@@ -541,8 +541,8 @@ runobjectivecam() {
       var_7 = 5 / self.path.size / 2;
     }
 
-    self moveto(self.path[var_5].origin, 5 / self.path.size, var_6, var_7);
-    self rotateto(self.path[var_5].angles, 5 / self.path.size, var_6, var_7);
+    self moveTo(self.path[var_5].origin, 5 / self.path.size, var_6, var_7);
+    self rotateTo(self.path[var_5].angles, 5 / self.path.size, var_6, var_7);
     wait(5 / self.path.size);
   }
 }
@@ -613,14 +613,14 @@ bombzone_setupbombcase(var_0) {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  var_1 = getent(var_0 + "_pickup_trig", "targetname");
+  var_1 = getEnt(var_0 + "_pickup_trig", "targetname");
   if(!isDefined(var_1)) {
     scripts\engine\utility::error("No " + var_0 + "_pickup_trig trigger found in map.");
     return;
   }
 
   var_1 = postshipadjustbombtriggerspawn(var_1);
-  var_2[0] = getent(var_0, "targetname");
+  var_2[0] = getEnt(var_0, "targetname");
   if(!isDefined(var_2[0])) {
     scripts\engine\utility::error("No " + var_0 + " script_model found in map.");
     return;
@@ -987,7 +987,7 @@ setmodifiedbombzonescollision(var_0, var_1, var_2, var_3) {
         var_7 = spawn("script_model", var_3[0].origin + var_0);
         var_7.angles = var_1;
         var_7 clonebrushmodeltoscriptmodel(var_6);
-        var_7 disconnectpaths();
+        var_7 disconnectPaths();
         var_6 delete();
         break;
       }

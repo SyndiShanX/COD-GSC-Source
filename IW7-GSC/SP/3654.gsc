@@ -34,18 +34,18 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     }
 
     if(isDefined(self.model) && self.classname == "script_model" && scripts\sp\utility::hastag(self.model, var_10)) {
-      var_15 linkto(self, var_10, var_1, (0, 0, 0));
+      var_15 linkTo(self, var_10, var_1, (0, 0, 0));
     } else if(isDefined(var_0)) {
-      var_15 linkto(self, var_10, var_1, (0, 0, 0));
+      var_15 linkTo(self, var_10, var_1, (0, 0, 0));
     } else if(isDefined(self.angles)) {
       var_15.origin = var_15.origin + rotatevector(var_1, self.angles);
       if(isent(self)) {
-        var_15 linkto(self);
+        var_15 linkTo(self);
       }
     } else {
       var_15.origin = var_15.origin + var_1;
       if(isent(self)) {
-        var_15 linkto(self);
+        var_15 linkTo(self);
       }
     }
   } else if(isDefined(var_0)) {
@@ -53,13 +53,13 @@ func_48C4(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
   }
 
   if(isDefined(var_8) && var_8) {
-    var_15 setcursorhint("HINT_NOICON");
+    var_15 setCursorHint("HINT_NOICON");
   } else {
-    var_15 setcursorhint("HINT_BUTTON");
+    var_15 setCursorHint("HINT_BUTTON");
   }
 
   if(isDefined(var_2)) {
-    var_15 sethintstring(var_2);
+    var_15 setHintString(var_2);
   }
 
   var_11 = 360;
@@ -190,17 +190,17 @@ func_48C6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   if(isDefined(var_0)) {
-    var_8 linkto(self, var_0, var_1, (0, 0, 0));
+    var_8 linkTo(self, var_0, var_1, (0, 0, 0));
   } else if(isDefined(var_1)) {
     if(isDefined(self.model) && self.classname == "script_model" && scripts\sp\utility::hastag(self.model, "tag_origin")) {
-      var_8 linkto(self, "tag_origin", var_1, (0, 0, 0));
+      var_8 linkTo(self, "tag_origin", var_1, (0, 0, 0));
     } else if(isDefined(self.angles)) {
       var_8.origin = var_8.origin + rotatevector(var_1, self.angles);
     } else {
       var_8.origin = var_8.origin + var_1;
     }
   } else if(isent(self)) {
-    var_8 linkto(self);
+    var_8 linkTo(self);
   }
 
   var_8.icon = [];
@@ -208,7 +208,7 @@ func_48C6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_9.alpha = 0;
   var_9 setshader("cursor_hint_circle", 1, 1);
   var_9 setwaypoint(1, 0, 1);
-  var_9 settargetent(var_8);
+  var_9 settargetEnt(var_8);
   var_9.sort = -1;
   var_9.var_1012F = 0;
   var_8.icon["circle"] = var_9;
@@ -221,7 +221,7 @@ func_48C6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   var_10 setwaypoint(0, 0, 1);
-  var_10 settargetent(var_8);
+  var_10 settargetEnt(var_8);
   var_10.sort = 1;
   var_10.var_1012F = 0;
   var_8.icon["button"] = var_10;
@@ -656,7 +656,7 @@ func_D9DB() {
 }
 
 func_79CE(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = anglesToForward(var_1);
   var_5 = vectordot(var_4, var_3);
   return var_5;

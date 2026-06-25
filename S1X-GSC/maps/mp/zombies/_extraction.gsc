@@ -18,7 +18,7 @@ warbirdextractioninit() {}
 warbirdextractionescort() {}
 
 warbirdextraction() {
-  var_0 = common_scripts\utility::getstruct(self.targetextractpoint.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.targetextractpoint.target, "targetname");
   var_1 = spawnhelicopter(level.players[0], var_0.origin, var_0.angles, "warbird_player_mp", "vehicle_xh9_warbird_low_cloaked_in_out_mp_cloak");
   var_1.warbirdturret = var_1 spawn_warbird_turret("warbird_remote_turret_mp", "vehicle_xh9_warbird_turret_cloaked_inout_killstreak_mp_cloak", "tag_player_mp", 0);
   thread warbirdfire(var_1);
@@ -28,7 +28,7 @@ warbirdextraction() {
   var_3 = 40;
 
   while(isDefined(var_2.target)) {
-    var_2 = common_scripts\utility::getstruct(var_2.target, "targetname");
+    var_2 = common_scripts\utility::getStruct(var_2.target, "targetname");
 
     if(isDefined(var_2.script_count)) {
       var_3 = var_2.script_count;
@@ -51,7 +51,7 @@ spawn_warbird_turret(var_0, var_1, var_2, var_3) {
   var_4.angles = self gettagangles(var_2);
   var_4 setModel(var_1);
   var_4 setdefaultdroppitch(55.0);
-  var_4 linkto(self, var_2, (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(self, var_2, (0, 0, 0), (0, 0, 0));
   var_4.owner = self.owner;
   var_4.health = 99999;
   var_4.maxhealth = 1000;
@@ -144,7 +144,7 @@ checkwarbirdtargetlos(var_0) {
   var_0.enemy_target endon("disconnect");
   var_1 = var_0 gettagorigin("TAG_FLASH1");
   var_2 = var_0.enemy_target getEye();
-  var_3 = vectornormalize(var_2 - var_1);
+  var_3 = vectorNormalize(var_2 - var_1);
   var_4 = var_1 + var_3 * 20;
   var_5 = bulletTrace(var_4, var_2, 0, var_0, 0, 0, 0, 0, 0);
 

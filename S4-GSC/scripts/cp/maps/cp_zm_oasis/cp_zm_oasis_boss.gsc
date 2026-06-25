@@ -75,9 +75,9 @@ init() {
   }
 
   level thread spawn_dark_aether_anemones();
-  level.void_construct = getent("void_construct", "targetname");
+  level.void_construct = getEnt("void_construct", "targetname");
   level.void_construct.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", level.void_construct.origin, level.void_construct.angles);
-  level.void_construct.fx_proxy linkto(level.void_construct);
+  level.void_construct.fx_proxy linkTo(level.void_construct);
   playFXOnTag(level._effect["construct_ambient"], level.void_construct.fx_proxy, "tag_origin");
 }
 
@@ -174,7 +174,7 @@ create_body_hit_boxes() {
 
 create_scriptable_hitbox(var_0, var_1) {
   var_2 = scripts\cp\utility::_id_E190("tag_origin", self gettagorigin(var_1), self gettagangles(var_1));
-  var_2 linkto(self, var_1);
+  var_2 linkTo(self, var_1);
   var_2.proxy = _func_03C5("kortifex_head_hitbox", self gettagorigin(var_1), self gettagangles(var_1));
   var_2.proxy setscriptablepartstate("kortifex_head", var_0);
   var_2.proxy _meth_8746(var_2);
@@ -578,22 +578,22 @@ kick_off_boss_fight() {
   level.kortifex._id_DD78["skill_squenece"][3] = ["lighting_bolt", "summon_weapons", "summon_weapons", "summon_zombie", "lighting_bolt"];
   level.kortifex.b_can_damage = 1;
   level.kortifex.sound_proxy = scripts\cp\utility::_id_E190("tag_origin", level.kortifex gettagorigin("tag_eye"));
-  level.kortifex.sound_proxy linkto(level.kortifex, "tag_eye");
+  level.kortifex.sound_proxy linkTo(level.kortifex, "tag_eye");
   level.kortifex.sound_proxy_ri = scripts\cp\utility::_id_E190("tag_origin", level.kortifex gettagorigin("j_eyeball_ri"));
-  level.kortifex.sound_proxy_ri linkto(level.kortifex, "j_eyeball_ri");
+  level.kortifex.sound_proxy_ri linkTo(level.kortifex, "j_eyeball_ri");
   level.kortifex.sound_proxy_le = scripts\cp\utility::_id_E190("tag_origin", level.kortifex gettagorigin("j_eyeball_le"));
-  level.kortifex.sound_proxy_le linkto(level.kortifex, "j_eyeball_le");
+  level.kortifex.sound_proxy_le linkTo(level.kortifex, "j_eyeball_le");
   create_hand_fx_proxy();
   level.kortifex.middle_eye = scripts\cp\utility::_id_E190("s4_zm_kortifex_eyeball", level.kortifex gettagorigin("j_eyeball_mi"));
-  level.kortifex.middle_eye linkto(level.kortifex, "j_eyeball_mi");
+  level.kortifex.middle_eye linkTo(level.kortifex, "j_eyeball_mi");
   level.kortifex.middle_eye setCanDamage(1);
   level.kortifex.middle_eye thread kortifex_eye_take_damage_listener([0]);
   level.kortifex.right_eye = scripts\cp\utility::_id_E190("s4_zm_kortifex_eyeball", level.kortifex gettagorigin("j_eyeball_ri"));
-  level.kortifex.right_eye linkto(level.kortifex, "j_eyeball_ri");
+  level.kortifex.right_eye linkTo(level.kortifex, "j_eyeball_ri");
   level.kortifex.right_eye setCanDamage(1);
   level.kortifex.right_eye thread kortifex_eye_take_damage_listener([1, 2]);
   level.kortifex.left_eye = scripts\cp\utility::_id_E190("s4_zm_kortifex_eyeball", level.kortifex gettagorigin("j_eyeball_le"));
-  level.kortifex.left_eye linkto(level.kortifex, "j_eyeball_le");
+  level.kortifex.left_eye linkTo(level.kortifex, "j_eyeball_le");
   level.kortifex.left_eye setCanDamage(1);
   level.kortifex.left_eye thread kortifex_eye_take_damage_listener([1, 2]);
   turn_kortifex_eyes_fx(0, 1);
@@ -648,16 +648,16 @@ kick_off_boss_fight() {
 create_hand_fx_proxy() {
   var_0 = anglesToForward(vectortoangles(level.kortifex gettagorigin("J_Wrist_LE") - level.kortifex gettagorigin("J_Elbow_LE")));
   level.kortifex.hand_fx_1 = scripts\cp\utility::_id_E190("tag_origin", level.kortifex gettagorigin("J_Wrist_LE") + var_0 * 150 + (0, 0, -100));
-  level.kortifex.hand_fx_1 linkto(level.kortifex, "J_Wrist_LE");
+  level.kortifex.hand_fx_1 linkTo(level.kortifex, "J_Wrist_LE");
   var_0 = anglesToForward(vectortoangles(level.kortifex gettagorigin("J_Wrist_RI") - level.kortifex gettagorigin("J_Elbow_RI")));
   level.kortifex.hand_fx_2 = scripts\cp\utility::_id_E190("tag_origin", level.kortifex gettagorigin("J_Wrist_RI") + var_0 * 150 + (0, 0, -100));
-  level.kortifex.hand_fx_2 linkto(level.kortifex, "J_Wrist_RI");
+  level.kortifex.hand_fx_2 linkTo(level.kortifex, "J_Wrist_RI");
   var_0 = anglesToForward(vectortoangles(level.kortifex gettagorigin("dn_J_Wrist_LE") - level.kortifex gettagorigin("dn_J_Elbow_LE")));
   level.kortifex.hand_fx_3 = scripts\cp\utility::_id_E190("tag_origin", level.kortifex gettagorigin("dn_J_Wrist_LE") + var_0 * 150 + (0, 0, -100));
-  level.kortifex.hand_fx_3 linkto(level.kortifex, "dn_J_Wrist_LE");
+  level.kortifex.hand_fx_3 linkTo(level.kortifex, "dn_J_Wrist_LE");
   var_0 = anglesToForward(vectortoangles(level.kortifex gettagorigin("dn_J_Wrist_RI") - level.kortifex gettagorigin("dn_J_Elbow_RI")));
   level.kortifex.hand_fx_4 = scripts\cp\utility::_id_E190("tag_origin", level.kortifex gettagorigin("dn_J_Wrist_RI") + var_0 * 150 + (0, 0, -100));
-  level.kortifex.hand_fx_4 linkto(level.kortifex, "dn_J_Wrist_RI");
+  level.kortifex.hand_fx_4 linkTo(level.kortifex, "dn_J_Wrist_RI");
 }
 
 scale_boss_health() {
@@ -767,7 +767,7 @@ cleanup_barricades() {
 
 open_portal_back_to_oasis() {
   _id_0737::_id_C266("da_portal_interaction", ::get_portal_hint_func, ::on_portal_interact, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 64);
-  var_0 = scripts\engine\utility::getstruct("da_portal_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("da_portal_pos", "targetname");
   var_0.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles);
   var_0.mdl = scripts\cp\utility::_id_E190("vfx_zm_hub_portal_center_dest_oasis_hub", var_0.origin, var_0.angles);
   playFXOnTag(level._effect["teleport_portal_red"], var_0.fx_proxy, "tag_origin");
@@ -1172,12 +1172,12 @@ triple_upgrade_weapon() {
 }
 
 play_outro_vignette() {
-  var_0 = scripts\engine\utility::getstruct("kortifex_outro_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("kortifex_outro_pos", "targetname");
   var_1 = scripts\cp\utility::_id_E190("c_s4_zmb_kortifex", var_0.origin, var_0.angles);
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_1 _meth_82CB("ai_s4_zm_zombie_kortifex_death_01", "boss_fight", 0, 1, "normal");
   wait 2.7;
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   playFX(level._effect["boss_falling_fx"], var_2.origin, anglesToForward(var_2.angles), anglestoup(var_2.angles));
   var_1 waittillmatch("boss_fight", "finish");
   var_1 delete();
@@ -1218,11 +1218,11 @@ _id_B267() {
   level endon("game_ended");
   scripts\cp\utility::_id_B8ED(level.void_construct.origin, "zmb_construct_voice_stinger_0");
   wait 3;
-  var_0 = scripts\engine\utility::getstruct("kortifex_intro_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("kortifex_intro_pos", "targetname");
   playFX(level._effect["mq_ktfx_showup_fx"], var_0.origin + (0, 0, 50), anglesToForward(var_0.angles), anglestoup(var_0.angles));
   var_1 = scripts\cp\utility::_id_E190("c_s4_zmb_kortifex", var_0.origin, var_0.angles);
   var_1 _meth_82CB("ai_s4_zm_zombie_kortifex_vignette_intro_01", "boss_fight");
-  var_2 = getent("t_dmg_ktfx", "script_noteworthy");
+  var_2 = getEnt("t_dmg_ktfx", "script_noteworthy");
   var_2 thread intro_kortifex_damage_listener();
 
   foreach(var_4 in level.players) {
@@ -1233,7 +1233,7 @@ _id_B267() {
   var_1 waittillmatch("boss_fight", "finish");
   var_1 delete();
   var_2 delete();
-  var_6 = getent("kortifex_clip", "targetname");
+  var_6 = getEnt("kortifex_clip", "targetname");
   var_6 delete();
 }
 
@@ -1357,15 +1357,15 @@ teleport_to_next_platform(var_0) {
   level scripts\engine\utility::_id_5C04("finish_stage_intro_vo");
 
   if(var_0 == "40") {
-    var_5 = scripts\engine\utility::getstruct(level.void_construct.target, "targetname");
+    var_5 = scripts\engine\utility::getStruct(level.void_construct.target, "targetname");
     level.void_construct.origin = var_5.origin;
     level.void_construct.angles = var_5.angles;
     level thread play_sequence_vos(["zm_cpm5_bfs5_krtx_biia", "zm_cpm5_bfs5_krft_biib"], "finish_stage_intro_vo");
   }
 
   if(var_0 == "50") {
-    var_5 = scripts\engine\utility::getstruct(level.void_construct.target, "targetname");
-    var_6 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+    var_5 = scripts\engine\utility::getStruct(level.void_construct.target, "targetname");
+    var_6 = scripts\engine\utility::getStruct(var_5.target, "targetname");
     level.void_construct.origin = var_6.origin;
     level.void_construct.angles = var_6.angles;
     level thread play_sequence_vos(["zm_cpm5_bfs5_krtx_bisa", "zm_cpm5_bfs5_dnvk_bisb"], "finish_stage_intro_vo");
@@ -1690,7 +1690,7 @@ _id_0402(var_0, var_1) {
     var_2 = scripts\engine\utility::array_random(var_0);
 
     if(var_2 != var_1) {
-      var_3 = vectornormalize((var_2.origin[0], var_2.origin[1], 0) - (var_1.origin[0], var_1.origin[1], 0));
+      var_3 = vectorNormalize((var_2.origin[0], var_2.origin[1], 0) - (var_1.origin[0], var_1.origin[1], 0));
       var_4 = level.kortifex._id_DD78["lighting_bolt"].lighting_move_speed / 25;
       var_5 = self.origin + var_3 * var_4;
 
@@ -1783,7 +1783,7 @@ spawn_lighting_bolt_actor(var_0) {
   if(istrue(level.kortifex._id_2038)) {
     if(isPlayer(var_3)) {
       var_3 earthquakeforplayer(0.5, 2, var_3.origin, 100);
-      var_3 playrumbleonentity("cp_zm_s2_mq_shield_rumble");
+      var_3 playRumbleOnEntity("cp_zm_s2_mq_shield_rumble");
       playFXOnTag(level._effect["lighting_bolt_big"], var_3, "j_shield_ri");
       waitframe();
       playFXOnTag(level._effect["hit_decimator_shield"], var_3, "j_shield_ri");
@@ -1799,7 +1799,7 @@ spawn_lighting_bolt_actor(var_0) {
   } else {
     if(isPlayer(var_3)) {
       var_3 earthquakeforplayer(0.5, 2, var_3.origin, 150);
-      var_3 playrumbleonentity("cp_zm_s2_mq_shield_rumble");
+      var_3 playRumbleOnEntity("cp_zm_s2_mq_shield_rumble");
       playFXOnTag(level._effect["lighting_bolt"], var_3, "j_shield_ri");
       waitframe();
       playFXOnTag(level._effect["hit_decimator_shield"], var_3, "j_shield_ri");
@@ -2177,7 +2177,7 @@ weapon_actor_start_move(var_0) {
     }
   }
 
-  self moveto(var_2.origin + (0, 0, 30), 2);
+  self moveTo(var_2.origin + (0, 0, 30), 2);
   self waittill("movedone");
 
   if(isDefined(self)) {
@@ -2226,7 +2226,7 @@ weapon_actor_start_move(var_0) {
             continue;
           }
 
-          var_11 = vectornormalize(var_9 - var_7);
+          var_11 = vectorNormalize(var_9 - var_7);
           var_12 = level.kortifex._id_DD78["summon_weapons"].weapon_types[var_0]._id_A1FD / 20;
           var_9 = var_7 + var_11 * var_12;
           self.origin = var_9 + (0, 0, 30);
@@ -2321,7 +2321,7 @@ play_storm_trail(var_0, var_1) {
   level endon("game_ended");
   var_2 = scripts\cp\utility::_id_E190("tag_origin", var_0);
   playFXOnTag(level._effect["lighting_storm_trail"], var_2, "tag_origin");
-  var_2 moveto(var_1 gettagorigin("j_shield_ri"), 2);
+  var_2 moveTo(var_1 gettagorigin("j_shield_ri"), 2);
   var_2 waittill("movedone");
   var_2 delete();
 }
@@ -2586,8 +2586,8 @@ start_executions() {
   var_1 disable_player_movement(1);
   var_2 = scripts\cp\utility::_id_E190("tag_origin", var_1.origin);
   var_1.moving_proxy = var_2;
-  var_1 playerlinkto(var_2, "tag_origin");
-  var_2 moveto(var_2.origin + (0, 0, 250), 5);
+  var_1 playerlinkTo(var_2, "tag_origin");
+  var_2 moveTo(var_2.origin + (0, 0, 250), 5);
   var_2 waittill("movedone");
   thread break_execution_listener();
   thread execution_timer();
@@ -2637,7 +2637,7 @@ release_execution_player() {
   }
   var_0 = scripts\engine\trace::_bullet_trace(self.origin, self.origin + (0, 0, -500), 0, self);
   var_1 = var_0["position"];
-  self.moving_proxy moveto(var_1, 1);
+  self.moving_proxy moveTo(var_1, 1);
   self.moving_proxy waittill("movedone");
   self unlink();
   disable_player_movement(0);
@@ -2694,7 +2694,7 @@ stun_down_kortifex_listener() {
   scripts\cp\utility::_id_10839(2);
   playFXOnTag(level._effect["rune_shield"], level.kortifex, "j_neck");
   level.kortifex.rune_shield = scripts\cp\utility::_id_E190("s4_zm_kortifex_eyeball_large", level.kortifex gettagorigin("j_neck"));
-  level.kortifex.rune_shield linkto(level.kortifex, "j_neck");
+  level.kortifex.rune_shield linkTo(level.kortifex, "j_neck");
   level.kortifex.rune_shield setCanDamage(1);
   level.kortifex.rune_shield thread ruin_shield_take_damage();
   var_0 = 0;
@@ -2712,7 +2712,7 @@ stun_down_kortifex_listener() {
 
     foreach(var_2 in level.players) {
       var_2 earthquakeforplayer(0.5, 1, var_2.origin, 100);
-      var_2 playrumbleonentity("cp_zm_s2_mq_shield_rumble");
+      var_2 playRumbleOnEntity("cp_zm_s2_mq_shield_rumble");
     }
 
     var_4 = scripts\engine\utility::ter_op(level.players.size >= 2, 3, 1);
@@ -2776,7 +2776,7 @@ stun_down_kortifex_listener() {
       level.kortifex.b_protected_by_shield = 1;
       playFXOnTag(level._effect["rune_shield"], level.kortifex, "j_neck");
       level.kortifex.rune_shield = scripts\cp\utility::_id_E190("s4_zm_kortifex_eyeball_large", level.kortifex gettagorigin("j_neck"));
-      level.kortifex.rune_shield linkto(level.kortifex, "j_neck");
+      level.kortifex.rune_shield linkTo(level.kortifex, "j_neck");
       level.kortifex.rune_shield setCanDamage(1);
       level.kortifex.rune_shield thread ruin_shield_take_damage();
       playFXOnTag(level._effect["rune_shield"], level.kortifex, "j_neck");
@@ -2884,14 +2884,14 @@ watch_electric_heart_stuck() {
   var_2 = vectortoangles((level.void_construct.origin[0], level.void_construct.origin[1], 0) - (self.origin[0], self.origin[1], 0));
   self.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", self.origin, var_2 + (0, -45, 0));
   playFXOnTag(level._effect["suck_pillar"], self.fx_proxy, "tag_origin");
-  self.fx_proxy linkto(self);
+  self.fx_proxy linkTo(self);
   self movez(200, 3);
   self waittill("movedone");
 
   if(isDefined(level.void_construct)) {
     var_3 = level.void_construct.origin + anglesToForward(level.void_construct.angles + (0, -90, 0)) * 2000;
     scripts\cp\utility::_id_B8ED(self.origin, "zmb_meteor_leave_whoosh");
-    self moveto(var_3, 3);
+    self moveTo(var_3, 3);
     self waittill("movedone");
   }
 
@@ -3078,7 +3078,7 @@ skill_screen_shake() {
   foreach(var_1 in level.players) {
     if(isPlayer(var_1)) {
       var_1 earthquakeforplayer(0.5, 2, var_1.origin, 100);
-      var_1 playrumbleonentity("cp_zm_s2_mq_shield_rumble");
+      var_1 playRumbleOnEntity("cp_zm_s2_mq_shield_rumble");
     }
   }
 }

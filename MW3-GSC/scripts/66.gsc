@@ -417,13 +417,13 @@ _id_2289() {
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1._id_1F49 = var_0.origin;
 
   if(isDefined(var_1.target)) {
     if(!isDefined(level._id_2273) || !isDefined(level._id_2273[var_1.target])) {
       level._id_2273[var_1.target] = 0;
-      getent(var_1.target, "targetname") thread _id_2273();
+      getEnt(var_1.target, "targetname") thread _id_2273();
     }
 
     var_2 = 1;
@@ -562,7 +562,7 @@ _id_2290(var_0, var_1) {
       var_7 = var_2.origin;
 
       if(distance(var_7, var_5[self._id_2293].origin) > var_8) {
-        var_12 = vectornormalize(var_5[self._id_2293].origin - var_7);
+        var_12 = vectorNormalize(var_5[self._id_2293].origin - var_7);
         var_12 = var_12 * var_8;
         var_7 = var_7 + var_12;
       } else {
@@ -609,7 +609,7 @@ _id_2290(var_0, var_1) {
         var_7 = var_2.origin;
 
         if(distance(var_7, var_5[self._id_2293].origin) > var_8) {
-          var_12 = vectornormalize(var_5[self._id_2293].origin - var_7);
+          var_12 = vectorNormalize(var_5[self._id_2293].origin - var_7);
           var_12 = var_12 * var_8;
           var_7 = var_7 + var_12;
         } else {
@@ -728,7 +728,7 @@ _id_2297(var_0, var_1) {
 }
 
 _id_2298(var_0) {
-  var_1 = getent(var_0._id_2299, "targetname");
+  var_1 = getEnt(var_0._id_2299, "targetname");
   var_2 = 0.5;
 
   if(isDefined(var_1._id_229A)) {
@@ -1237,7 +1237,7 @@ _id_22BF(var_0, var_1) {
 
   for(var_3 = var_1._id_22BE.size - 3; var_3 >= 0; var_3--) {
     var_4 = var_1._id_22BE[var_3];
-    var_5 = vectornormalize(var_4 - var_0.origin);
+    var_5 = vectorNormalize(var_4 - var_0.origin);
     var_6 = vectordot(var_2, var_5);
 
     if(var_6 < 0.75) {
@@ -1351,7 +1351,7 @@ _id_22C5(var_0) {
   if(soundexists("weapon_setup")) {
     thread common_scripts\utility::play_sound_in_space("weapon_setup");
   }
-  self animscripted("setup_done", var_0.origin, var_0.angles, var_2);
+  self animScripted("setup_done", var_0.origin, var_0.angles, var_2);
   _id_114E();
   self waittillmatch("setup_done", "end");
   var_0 notify("restore_default_drop_pitch");

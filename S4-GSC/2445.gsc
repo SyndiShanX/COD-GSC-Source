@@ -20,7 +20,7 @@ energy_mine_kill_zombie(var_0) {
   }
   if(getdvarint("#x3ce6f1c71a4bdefaa", 0) == 1) {
     if(_id_06FE::is_zm_normal()) {
-      var_1 = vectornormalize((var_0._id_FFD4[0], var_0._id_FFD4[1], 0)) * 1000;
+      var_1 = vectorNormalize((var_0._id_FFD4[0], var_0._id_FFD4[1], 0)) * 1000;
       var_1 = (var_1[0], var_1[1], 0);
       self._id_BF53 = var_1;
       self._id_BF52 = "torso_lower";

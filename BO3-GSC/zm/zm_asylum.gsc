@@ -366,14 +366,14 @@ function init_zombie_asylum() {
 
 function chair_useage() {
   wait(2);
-  chair_trig = getent("dentist_chair", "targetname");
+  chair_trig = getEnt("dentist_chair", "targetname");
   if(isDefined(chair_trig)) {
-    chair_trig setcursorhint("HINT_NOICON");
-    chair_trig usetriggerrequirelookat();
-    players = getplayers();
+    chair_trig setCursorHint("HINT_NOICON");
+    chair_trig useTriggerRequireLookAt();
+    players = getPlayers();
     while(true) {
       chair_trig waittill("trigger", players);
-      playsoundatposition("evt_chair", chair_trig.origin);
+      playSoundAtPosition("evt_chair", chair_trig.origin);
       wait(3);
     }
   }
@@ -392,12 +392,12 @@ function function_a67a7819() {
       continue;
     } else {
       var_7d2efc67++;
-      playsoundatposition("evt_toilet_flush", var_769dd606.origin);
+      playSoundAtPosition("evt_toilet_flush", var_769dd606.origin);
       wait(3.8);
     }
   }
   zm_unitrigger::unregister_unitrigger(var_769dd606.s_unitrigger);
-  playsoundatposition("zmb_cha_ching", var_769dd606.origin);
+  playSoundAtPosition("zmb_cha_ching", var_769dd606.origin);
   level thread zm_audio::sndmusicsystem_playstate("lullaby_for_a_dead_man");
 }
 
@@ -516,10 +516,10 @@ function disable_bump_trigger(triggername) {
 }
 
 function master_electric_switch() {
-  trig = getent("use_master_switch", "targetname");
+  trig = getEnt("use_master_switch", "targetname");
   var_cf413835 = struct::get("power_switch", "targetname");
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  trig setcursorhint("HINT_NOICON");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setCursorHint("HINT_NOICON");
   fx_org = spawn("script_model", (-674.922, -300.473, 284.125));
   fx_org setModel("tag_origin");
   fx_org.angles = vectorscale((0, 1, 0), 90);
@@ -532,7 +532,7 @@ function master_electric_switch() {
   if(cheat != 1) {
     trig waittill("trigger", user);
   }
-  playsoundatposition("zmb_switch_flip", var_cf413835.origin);
+  playSoundAtPosition("zmb_switch_flip", var_cf413835.origin);
   zm_power::turn_power_on_and_open_doors();
   level notify("switch_flipped");
   disable_bump_trigger("switch_door_trig");
@@ -542,8 +542,8 @@ function master_electric_switch() {
   trig delete();
   traps = getEntArray("gas_access", "targetname");
   for(i = 0; i < traps.size; i++) {
-    traps[i] sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-    traps[i] setcursorhint("HINT_NOICON");
+    traps[i] setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+    traps[i] setCursorHint("HINT_NOICON");
     traps[i].is_available = 1;
   }
   var_cf413835 scene::play("p7_fxanim_zmhd_power_switch_bundle");
@@ -566,21 +566,21 @@ function master_electric_switch() {
 }
 
 function function_463cb1c6() {
-  power_on = getent("audio_swtch_left", "targetname");
+  power_on = getEnt("audio_swtch_left", "targetname");
   var_5c141942 = struct::get("evt_circuit_1", "targetname");
   var_36119ed9 = struct::get("evt_circuit_2", "targetname");
   var_100f2470 = struct::get("evt_circuit_3", "targetname");
   wait(0.75);
   if(isDefined(var_5c141942)) {
-    playsoundatposition("evt_circuit_1", var_5c141942.origin);
+    playSoundAtPosition("evt_circuit_1", var_5c141942.origin);
   }
   wait(1.5);
   if(isDefined(var_36119ed9)) {
-    playsoundatposition("evt_circuit_2", var_36119ed9.origin);
+    playSoundAtPosition("evt_circuit_2", var_36119ed9.origin);
   }
   wait(1.5);
   if(isDefined(var_100f2470)) {
-    playsoundatposition("evt_circuit_3", var_100f2470.origin);
+    playSoundAtPosition("evt_circuit_3", var_100f2470.origin);
   }
   wait(0.25);
   power_on playSound("evt_power_on");
@@ -599,7 +599,7 @@ function electric_trap_wire_sparks(side) {
     playFXOnTag(level._effect["electric_current"], self.fx_org, "tag_origin");
     targ = struct::get(sparks.target, "targetname");
     while(isDefined(targ)) {
-      self.fx_org moveto(targ.origin, 0.15);
+      self.fx_org moveTo(targ.origin, 0.15);
       self.fx_org playLoopSound("zmb_elec_current_loop", 0.1);
       self.fx_org waittill("movedone");
       self.fx_org stoploopsound(0.1);
@@ -621,7 +621,7 @@ function electric_current_open_middle_door() {
   playFXOnTag(level._effect["electric_current"], fx_org, "tag_origin");
   targ = struct::get(sparks.target, "targetname");
   while(isDefined(targ)) {
-    fx_org moveto(targ.origin, 0.075);
+    fx_org moveTo(targ.origin, 0.075);
     if(isDefined(targ.script_noteworthy) && (targ.script_noteworthy == "junction_boxs" || targ.script_noteworthy == "electric_end")) {
       playFXOnTag(level._effect["electric_short_oneshot"], fx_org, "tag_origin");
     }
@@ -644,7 +644,7 @@ function play_the_numbers() {
   level thread function_9a0695b3();
   while(true) {
     wait(randomintrange(15, 20));
-    playsoundatposition("evt_the_numbers", (-758, -310, 125));
+    playSoundAtPosition("evt_the_numbers", (-758, -310, 125));
     wait(randomintrange(15, 20));
   }
 }
@@ -652,7 +652,7 @@ function play_the_numbers() {
 function function_9a0695b3() {
   while(true) {
     wait(randomintrange(3, 8));
-    playsoundatposition("zmb_elec_room_sweets", (-758, -310, 125));
+    playSoundAtPosition("zmb_elec_room_sweets", (-758, -310, 125));
   }
 }
 
@@ -771,14 +771,14 @@ function exit_level_func() {
 function play_pa_system() {
   level clientfield::set("asylum_generator_state", 0);
   speakera = struct::get("loudspeaker", "targetname");
-  playsoundatposition("amb_alarm", speakera.origin);
+  playSoundAtPosition("amb_alarm", speakera.origin);
   level thread play_comp_sounds();
   wait(8);
-  playsoundatposition("amb_pa_system", speakera.origin);
+  playSoundAtPosition("amb_pa_system", speakera.origin);
 }
 
 function play_comp_sounds() {
-  computer = getent("comp", "targetname");
+  computer = getEnt("comp", "targetname");
   computer playSound("amb_comp_start");
   wait(6);
   computer playLoopSound("amb_comp_loop");
@@ -904,10 +904,10 @@ function function_db379af2() {
     self waittill("trigger_activated");
     self.var_46907f23++;
     if(self.var_46907f23 > 9) {
-      playsoundatposition("zmb_zhd_toilet_flusheroo", self.origin);
+      playSoundAtPosition("zmb_zhd_toilet_flusheroo", self.origin);
       self.var_46907f23 = 0;
     } else {
-      playsoundatposition("zmb_zhd_toilet_hit", self.origin);
+      playSoundAtPosition("zmb_zhd_toilet_hit", self.origin);
     }
     if(self.var_46907f23 == self.script_int) {
       self.activated = 1;
@@ -943,7 +943,7 @@ function function_fa408417() {
       if(isDefined(struct.script_noteworthy) && struct.script_noteworthy == "toilet3") {
         if(struct.var_46907f23 > 0 && level.var_a3dcfd4f <= 1) {
           struct.var_46907f23 = 0;
-          playsoundatposition("zmb_zhd_toilet_flusheroo", struct.origin);
+          playSoundAtPosition("zmb_zhd_toilet_flusheroo", struct.origin);
         }
         if(isDefined(struct.activated) && struct.activated && level.var_a3dcfd4f <= 2) {
           struct.activated = 0;

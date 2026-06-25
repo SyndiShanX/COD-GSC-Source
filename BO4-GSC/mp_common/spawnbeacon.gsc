@@ -225,7 +225,7 @@ function_b74804ba(origin, angles, player, var_c7a191d5, var_813ea9e) {
   player.var_9bab32d9.spawns = getspawnbeaconspawns(origin);
 
   if(player.var_9bab32d9.spawns.size == 0) {
-    player sethintstring(level.spawnbeaconsettings.settingsbundle.var_bf6a0873);
+    player setHintString(level.spawnbeaconsettings.settingsbundle.var_bf6a0873);
     return false;
   }
 
@@ -255,7 +255,7 @@ function_b74804ba(origin, angles, player, var_c7a191d5, var_813ea9e) {
       distsqr = distancesquared(origin, var_4d511d74[i].origin);
 
       if(distsqr <= testdistance) {
-        player sethintstring(level.spawnbeaconsettings.settingsbundle.cannotbuild);
+        player setHintString(level.spawnbeaconsettings.settingsbundle.cannotbuild);
         return false;
       }
     }
@@ -305,13 +305,13 @@ function_94dcc72e(&spawnlist, spawnbeacon) {
 }
 
 function_6c529d0b(beacon, objective, team, var_d1653c48, hinttext, onusefunc, var_24c69a69, var_6a89b347) {
-  upangle = vectorscale(vectornormalize(anglestoup(beacon.angles)), 5);
+  upangle = vectorscale(vectorNormalize(anglestoup(beacon.angles)), 5);
   var_40989bda = beacon.origin + upangle;
   usetrigger = spawn("trigger_radius_use", var_40989bda, 0, isDefined(level.spawnbeaconsettings.settingsbundle.deactivatetriggerradius) ? level.spawnbeaconsettings.settingsbundle.deactivatetriggerradius : 0, isDefined(level.spawnbeaconsettings.settingsbundle.deactivatetriggerheight) ? level.spawnbeaconsettings.settingsbundle.deactivatetriggerheight : 0);
-  usetrigger triggerignoreteam();
+  usetrigger triggerIgnoreTeam();
   usetrigger setvisibletoall();
   usetrigger setteamfortrigger(#"none");
-  usetrigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  usetrigger setCursorHint("HINT_INTERACTIVE_PROMPT");
 
   if(!isDefined(beacon.var_d7cf6658)) {
     beacon.var_d7cf6658 = [];
@@ -423,7 +423,7 @@ function_f989dc0a(watcher, owner) {
     owner.var_9698a18d = 1;
     owner.var_583f6cce = spawnbeacon;
     spawnbeacon setanim(#"o_spawn_beacon_deploy", 1);
-    upangle = vectorscale(vectornormalize(anglestoup(spawnbeacon.angles)), 5);
+    upangle = vectorscale(vectorNormalize(anglestoup(spawnbeacon.angles)), 5);
 
     if(isDefined(spawnbeacon.var_d7cf6658)) {
       foreach(gameobject in spawnbeacon.var_d7cf6658) {
@@ -494,7 +494,7 @@ function_9aafb7bb(origin, angles, player) {
   player.var_9bab32d9.spawns = getspawnbeaconspawns(origin);
 
   if(player.var_9bab32d9.spawns.size == 0) {
-    player sethintstring(level.spawnbeaconsettings.settingsbundle.var_bf6a0873);
+    player setHintString(level.spawnbeaconsettings.settingsbundle.var_bf6a0873);
     return false;
   }
 
@@ -523,7 +523,7 @@ function_9aafb7bb(origin, angles, player) {
       distsqr = distancesquared(origin, beacon.origin);
 
       if(distsqr <= testdistance) {
-        player sethintstring(level.spawnbeaconsettings.settingsbundle.cannotbuild);
+        player setHintString(level.spawnbeaconsettings.settingsbundle.cannotbuild);
         return false;
       }
     }

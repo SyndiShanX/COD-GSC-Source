@@ -13,7 +13,7 @@
 getTargetAngleOffset(target) {
   pos = self getshootatpos() + (0, 0, -3);
   dir = (pos[0] - target[0], pos[1] - target[1], pos[2] - target[2]);
-  dir = VectorNormalize(dir);
+  dir = vectorNormalize(dir);
   fact = dir[2] * -1;
 
   return fact;
@@ -1580,7 +1580,7 @@ getPitchToEnemy() {
   }
 
   vectorToEnemy = self.enemy getshootatpos() - self getshootatpos();
-  vectorToEnemy = vectornormalize(vectortoenemy);
+  vectorToEnemy = vectorNormalize(vectortoenemy);
   pitchDelta = 360 - vectortoangles(vectorToEnemy)[0];
 
   return AngleClamp180(pitchDelta);
@@ -1592,7 +1592,7 @@ getPitchToSpot(spot) {
   }
 
   vectorToEnemy = spot - self getshootatpos();
-  vectorToEnemy = vectornormalize(vectortoenemy);
+  vectorToEnemy = vectorNormalize(vectortoenemy);
   pitchDelta = 360 - vectortoangles(vectorToEnemy)[0];
 
   return AngleClamp180(pitchDelta);

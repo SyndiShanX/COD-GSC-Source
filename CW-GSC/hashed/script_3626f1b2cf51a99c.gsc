@@ -82,7 +82,7 @@ function action_register(action_name, var_7eba8145, parent_name, var_9386e7ce, a
     #action: action_name
   });
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_b0868791(action_name, 1);
   }
 }
@@ -338,7 +338,7 @@ function function_ebc59735(event_name, radius = 800) {
       continue;
     }
 
-    guy function_a3fcf9e0(event_name, getplayers()[0], self.origin);
+    guy function_a3fcf9e0(event_name, getPlayers()[0], self.origin);
   }
 }
 
@@ -357,7 +357,7 @@ function function_f3f7e971(var_a50a7fa0) {
 }
 
 function private function_303a7a74() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread action_utility::function_76e2ec80();
   player action_utility::function_2795d678(0);
   player action_utility::allow_weapon(1, 1);

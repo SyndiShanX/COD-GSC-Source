@@ -361,7 +361,7 @@ bombs() {
 
     level.bombZones[level.bombZones.size] = bombZone;
 
-    bombZone.bombDefuseTrig = getent(visuals[0].target, "targetname");
+    bombZone.bombDefuseTrig = getEnt(visuals[0].target, "targetname");
     assert(isDefined(bombZone.bombDefuseTrig));
     bombZone.bombDefuseTrig.origin += (0, 0, -10000);
     bombZone.bombDefuseTrig.label = label;
@@ -528,7 +528,7 @@ bombPlanted(destroyedObj, player) {
 
     tempAngle = randomfloat(360);
     forward = (cos(tempAngle), sin(tempAngle), 0);
-    forward = vectornormalize(forward - common_scripts\utility::vector_multiply(trace["normal"], vectordot(forward, trace["normal"])));
+    forward = vectorNormalize(forward - common_scripts\utility::vector_multiply(trace["normal"], vectordot(forward, trace["normal"])));
     dropAngles = vectortoangles(forward);
 
     level.sdBombModel = spawn("script_model", trace["position"]);

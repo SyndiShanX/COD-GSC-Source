@@ -45,7 +45,7 @@ function ai_puppeteer() {
   player = undefined;
 
   while(!isPlayer(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     waitframe(1);
   }
 
@@ -103,7 +103,7 @@ function ai_puppet_manager() {
     } else if(self buttonPressed("<dev string:x6f>")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.ai_puppet) && isusingnavvolume(level.ai_puppet)) {
-          var_8d9fdff6 = vectornormalize(level.playercursor[#"position"] - self.origin);
+          var_8d9fdff6 = vectorNormalize(level.playercursor[#"position"] - self.origin);
           level.playercursor[#"position"] = self.origin + vectorscale(var_8d9fdff6, 1000);
           level.playercursor[#"position"] = level.ai_puppet getclosestpointonnavvolume(level.playercursor[#"position"], 400);
         }
@@ -139,7 +139,7 @@ function ai_puppet_manager() {
     } else if(self buttonPressed("<dev string:x7b>") && self buttonPressed("<dev string:x87>")) {
       if(isDefined(level.ai_puppet)) {
         if(isusingnavvolume(level.ai_puppet)) {
-          var_8d9fdff6 = vectornormalize(level.playercursor[#"position"] - self.origin);
+          var_8d9fdff6 = vectorNormalize(level.playercursor[#"position"] - self.origin);
           level.playercursor[#"position"] = self.origin + vectorscale(var_8d9fdff6, 1000);
           level.playercursor[#"position"] = level.ai_puppet getclosestpointonnavvolume(level.playercursor[#"position"], 400);
         }
@@ -272,7 +272,7 @@ function ai_puppet_set() {
     level.ai_puppet.goalheight = level.ai_puppet.goalradius;
   }
 
-  level.ai_puppet stopanimscripted();
+  level.ai_puppet stopanimScripted();
 }
 
 function ai_puppet_release(restore) {
@@ -444,11 +444,11 @@ function ai_puppeteer_destroy_hud() {
 
 function ai_puppeteer_render_point(point, normal, forward, color) {
   surface_vector = vectorcross(forward, normal);
-  surface_vector = vectornormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vectorscale(surface_vector, 5), color, 1, 1);
   line(point, point + vectorscale(surface_vector, -5), color, 1, 1);
   surface_vector = vectorcross(normal, surface_vector);
-  surface_vector = vectornormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vectorscale(surface_vector, 5), color, 1, 1);
   line(point, point + vectorscale(surface_vector, -5), color, 1, 1);
 }

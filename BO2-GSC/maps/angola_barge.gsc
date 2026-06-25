@@ -38,7 +38,7 @@ teleport_player_to_location(targetname) {
   wait_for_first_player();
   players = get_players();
   node = getnode(targetname, "targetname");
-  players[0] setorigin(node.origin);
+  players[0] setOrigin(node.origin);
   players[0] setplayerangles(node.angles);
 }
 
@@ -62,8 +62,8 @@ skipto_container() {
   cleanup_river_intro_boats();
   visionsetnaked("sp_angola_2_river", 0.5);
   level.barge_spawners = [];
-  level.barge_spawners[0] = getent("river_barge_convoy_2_guards_assault", "targetname");
-  level.barge_spawners[1] = getent("river_barge_convoy_2_guards_assault", "targetname");
+  level.barge_spawners[0] = getEnt("river_barge_convoy_2_guards_assault", "targetname");
+  level.barge_spawners[1] = getEnt("river_barge_convoy_2_guards_assault", "targetname");
   level thread maps\angola_river::clean_up_barge_ents();
   level thread barge_defend_setup();
   flag_set("hudson_container_approach_done");
@@ -134,7 +134,7 @@ barge_defend_attack_boats_think() {
 determine_convoy_spawn_points() {
   level endon("boat_convoy_section_finished");
   index = 1;
-  level.spawn_boat_trigger = getent("trigger_spawner_boats_1", "targetname");
+  level.spawn_boat_trigger = getEnt("trigger_spawner_boats_1", "targetname");
 
   while(true) {
     level.spawn_boat_trigger = trigger_wait("trigger_spawner_boats_" + index);
@@ -251,7 +251,7 @@ boat_wave_1() {
 
   if(!flag("first_gunboat_dead")) {
     level thread boat_wave_1_hudson_vo();
-    e_turret = getent("barge_turret_right", "script_noteworthy");
+    e_turret = getEnt("barge_turret_right", "script_noteworthy");
     e_turret.use_obj_offset = vectorscale((0, 0, 1), 72.0);
     set_objective(level.obj_secure_the_barge, e_turret, "use");
     flag_wait("first_gunboat_dead");
@@ -350,7 +350,7 @@ boat_board_barge_and_unload(str_board_location, vh_enemy_boat, is_replaced, is_c
   }
 
   vh_enemy_boat boarding_boat_wait_until_at_barge(str_board_location);
-  vh_enemy_boat linkto(level.main_barge, "tag_origin");
+  vh_enemy_boat linkTo(level.main_barge, "tag_origin");
   vh_enemy_boat thread unlink_from_barge_if_animating_on_death(str_board_location);
   vh_enemy_boat boarding_boat_spawn_ai(str_board_location, 2);
   level.main_barge anim_single_aligned(vh_enemy_boat, str_boat_boarding_anim, "tag_origin", undefined, 1);
@@ -387,7 +387,7 @@ boarding_boat_ai_think(str_board_location) {
     v_origin = getstartorigin(self.origin, self.angles, level.scr_anim[ai_guy.animname]["board_idle"][0]);
     v_angles = getstartangles(self.origin, self.angles, level.scr_anim[ai_guy.animname]["board_idle"][0]);
     ai_guy forceteleport(v_origin, v_angles);
-    ai_guy linkto(self);
+    ai_guy linkTo(self);
     ai_guy.allowdeath = 1;
     ai_guy thread kill_if_my_boat_dies(self);
     a_ai[a_ai.size] = ai_guy;
@@ -404,7 +404,7 @@ boarding_boat_ai_animate(a_ai, str_board_location) {
 
   foreach(ai_guy in a_ai) {
     ai_guy unlink();
-    ai_guy linkto(level.main_barge);
+    ai_guy linkTo(level.main_barge);
   }
 
   level thread boat_board_hudson_vo(str_board_location);
@@ -605,7 +605,7 @@ boat_board_barge_spawn_additional_ai(str_board_location, n_spawn_count) {
     v_origin = getstartorigin(level.main_barge.origin, level.main_barge.angles, level.scr_anim[ai_guy.animname][str_anim]);
     v_angles = getstartangles(level.main_barge.origin, level.main_barge.angles, level.scr_anim[ai_guy.animname][str_anim]);
     ai_guy forceteleport(v_origin, v_angles);
-    ai_guy linkto(level.main_barge);
+    ai_guy linkTo(level.main_barge);
     a_ai[a_ai.size] = ai_guy;
   }
 
@@ -719,7 +719,7 @@ spawn_barge_ai() {
   ai_guy.overrideactordamage = ::boat_gunner_damage_override;
   ai_guy.script_accuracy = 0.5;
   ai_guy.dontmelee = 1;
-  ai_guy set_goalradius(1024);
+  ai_guy set_goalRadius(1024);
   return ai_guy;
 }
 
@@ -727,7 +727,7 @@ unlink_from_barge_if_animating_on_death(str_board_location) {
   level endon("boat_convoy_section_finished");
   self waittill("death");
   self unlink();
-  self anim_stopanimscripted(0.2);
+  self anim_stopanimScripted(0.2);
 
   if(self.health > 0) {
     radiusdamage(self.origin, 512, self.health * 2, self.health * 2, level.player);
@@ -776,7 +776,7 @@ boarding_vo() {
 barge_barrel_topple_watch() {
   level endon("river_done");
   trigger_wait("barge_barrel_top_trig");
-  m_parent = getent("barrel_fxanim_parent", "targetname");
+  m_parent = getEnt("barrel_fxanim_parent", "targetname");
   m_parent useanimtree(level.scr_animtree["barrel_fxanim_parent"]);
   level.main_barge anim_single_aligned(m_parent, "barge_barrel_topple");
   m_parent delete();
@@ -785,16 +785,16 @@ barge_barrel_topple_watch() {
 barge_knockoff_watch() {
   level endon("barge_defend_done");
   nd_knockoff = getnode("barge_knockoff_node", "targetname");
-  m_box = getent("barge_knockoff_box", "targetname");
+  m_box = getEnt("barge_knockoff_box", "targetname");
   m_origin = spawn_model("tag_origin", m_box.origin, m_box.angles);
-  m_origin linkto(level.main_barge);
+  m_origin linkTo(level.main_barge);
   guy_knocked_off = 0;
 
   while(!guy_knocked_off) {
     ai_owner = getnodeowner(nd_knockoff);
 
     if(isDefined(ai_owner) && ai_owner != level.hudson) {
-      ai_owner set_goalradius(32);
+      ai_owner set_goalRadius(32);
       ai_owner set_fixednode(1);
       ai_owner setgoalnode(nd_knockoff);
       ai_owner waittill_either("death", "goal");
@@ -807,13 +807,13 @@ barge_knockoff_watch() {
         if(isalive(ai_owner)) {
           ai_owner.animname = "crate_knockoff_guy";
           m_box.animname = "crate_knockoff_crate";
-          ai_owner linkto(level.main_barge);
+          ai_owner linkTo(level.main_barge);
           level thread run_scene("crate_knockoff");
           a_models = get_model_or_models_from_scene("crate_knockoff");
 
           foreach(m_anim_model in a_models) {
             m_anim_model unlink();
-            m_anim_model linkto(level.main_barge);
+            m_anim_model linkTo(level.main_barge);
           }
 
           scene_wait("crate_knockoff");
@@ -865,12 +865,12 @@ container_cleanup() {
 
 find_woods() {
   flag_wait("hudson_container_approach_done");
-  truck = getent("woods_container", "targetname");
-  woods_trigger = getent("woods_truck_trigger", "targetname");
-  woods_trigger sethintstring(&"angola_2_open_truck_door");
+  truck = getEnt("woods_container", "targetname");
+  woods_trigger = getEnt("woods_truck_trigger", "targetname");
+  woods_trigger setHintString(&"angola_2_open_truck_door");
   trigger_origin = spawn("script_model", woods_trigger.origin);
   trigger_origin setModel("tag_origin");
-  trigger_origin linkto(level.main_barge);
+  trigger_origin linkTo(level.main_barge);
   autosave_by_name("angola_find_woods");
   setmusicstate("ANGOLA_BARGE_PRE_CONT");
   level notify("search_for_woods");
@@ -897,28 +897,28 @@ find_woods() {
   }
 
   setmusicstate("ANGOLA_DEAD_BODIES");
-  container = getent("woods_container", "targetname");
+  container = getEnt("woods_container", "targetname");
   tag_origin = container gettagorigin("tag_animate");
   tag_angles = container gettagangles("tag_animate");
   level.bodies = [];
 
   if(is_mature()) {
     level.bodies[0] = spawn_model("p6_container_dead_bodies_clump01", tag_origin, tag_angles);
-    level.bodies[0] linkto(container, "tag_animate");
+    level.bodies[0] linkTo(container, "tag_animate");
     level.bodies[1] = spawn_model("p6_container_dead_bodies_clump02", tag_origin, tag_angles);
-    level.bodies[1] linkto(container, "tag_animate");
+    level.bodies[1] linkTo(container, "tag_animate");
     level.bodies[2] = spawn_model("p6_container_dead_bodies_clump03", tag_origin, tag_angles);
-    level.bodies[2] linkto(container, "tag_animate");
+    level.bodies[2] linkTo(container, "tag_animate");
     level.bodies[3] = spawn_model("p6_container_dead_bodies_clump04", tag_origin, tag_angles);
-    level.bodies[3] linkto(container, "tag_animate");
+    level.bodies[3] linkTo(container, "tag_animate");
     level.bodies[4] = spawn_model("p6_container_dead_bodies_clump05", tag_origin, tag_angles);
-    level.bodies[4] linkto(container, "tag_animate");
+    level.bodies[4] linkTo(container, "tag_animate");
   }
 
   level.woods = init_hero("woods");
   woods_trigger delete();
   set_objective(level.obj_find_woods, undefined, "delete");
-  s_align = getstruct("container_lighting_align", "targetname");
+  s_align = getStruct("container_lighting_align", "targetname");
   m_align = spawn_model("tag_origin", s_align.origin, s_align.angles);
   m_align.targetname = "container_lighting_align";
   s_align structdelete();
@@ -940,14 +940,14 @@ find_woods() {
   wait 1;
 
   for(i = 0; i < a_light_targets.size; i++) {
-    if(isDefined(getent(a_light_targets[i], "targetname"))) {
+    if(isDefined(getEnt(a_light_targets[i], "targetname"))) {
       set_lighting_pair(a_light_targets[i], a_light_entities[i]);
     }
   }
 
   wait 4;
   container play_fx("container_bugs", container.origin, container.angles, undefined, 1, "tag_origin");
-  m_back_cover = getent("barge_cover_farback", "script_noteworthy");
+  m_back_cover = getEnt("barge_cover_farback", "script_noteworthy");
   m_back_cover delete();
   m_blocker_linker = getEntArray("barge_ladder_blocker_origin", "targetname");
   m_blocker = getEntArray("barge_ladder_blocker", "targetname");
@@ -955,7 +955,7 @@ find_woods() {
   for(i = 0; i < m_blocker_linker.size; i++) {
     m_blocker[i].origin = m_blocker_linker[i].origin;
     m_blocker[i].angles = m_blocker_linker[i].angles;
-    m_blocker[i] linkto(m_blocker_linker[i]);
+    m_blocker[i] linkTo(m_blocker_linker[i]);
   }
 
   scene_wait("open_woods_container");
@@ -981,8 +981,8 @@ container_body_animations() {
 
   level thread run_scene("container_bodies_body2_p1");
   wait 1;
-  level.container_body1 = getent("body_1", "targetname");
-  level.container_body2 = getent("body_2", "targetname");
+  level.container_body1 = getEnt("body_1", "targetname");
+  level.container_body2 = getEnt("body_2", "targetname");
   scene_wait("container_bodies_body2_p1");
 
   if(is_mature()) {
@@ -1037,19 +1037,19 @@ set_up_lighting_for_cod() {
 }
 
 hind_fight() {
-  start_origin = getent("heli_destination_start", "targetname");
+  start_origin = getEnt("heli_destination_start", "targetname");
   level.river_hind = spawn_vehicle_from_targetname("river_hind_attack_chopper");
   level.river_hind.animname = "river_hind";
   level.river_hind.damaged_effect = 0;
   level.river_hind thread veh_magic_bullet_shield(1);
   target_set(level.river_hind, vectorscale((0, 0, -1), 40.0));
   level.river_hind.destination_nodes = [];
-  level.river_hind.destination_nodes[0] = getent("heli_destination_front_left", "targetname");
-  level.river_hind.destination_nodes[1] = getent("heli_destination_mid_left", "targetname");
-  level.river_hind.destination_nodes[2] = getent("heli_destination_back_left", "targetname");
-  level.river_hind.destination_nodes[3] = getent("heli_destination_back_right", "targetname");
-  level.river_hind.destination_nodes[4] = getent("heli_destination_mid_right", "targetname");
-  level.river_hind.destination_nodes[5] = getent("heli_destination_front_right", "targetname");
+  level.river_hind.destination_nodes[0] = getEnt("heli_destination_front_left", "targetname");
+  level.river_hind.destination_nodes[1] = getEnt("heli_destination_mid_left", "targetname");
+  level.river_hind.destination_nodes[2] = getEnt("heli_destination_back_left", "targetname");
+  level.river_hind.destination_nodes[3] = getEnt("heli_destination_back_right", "targetname");
+  level.river_hind.destination_nodes[4] = getEnt("heli_destination_mid_right", "targetname");
+  level.river_hind.destination_nodes[5] = getEnt("heli_destination_front_right", "targetname");
   level.river_hind.side_already_destroyed = 0;
   level.river_hind.b_initial_move_back = 0;
   level.river_hind.get_to_the_back = 0;
@@ -1134,7 +1134,7 @@ river_hind_damage_override(einflictor, eattacker, idamage, idflags, type, sweapo
 }
 
 river_finale() {
-  hut_heli = getent("real_hut_heli", "targetname");
+  hut_heli = getEnt("real_hut_heli", "targetname");
   hut_heli hide();
   playFXOnTag(level._effect["hind_rotor_damage"], level.river_hind, "tag_body");
   playFXOnTag(level._effect["hind_explosion"], level.river_hind, "tag_origin");
@@ -1183,7 +1183,7 @@ river_finale() {
   level thread maps\_audio::playsoundatposition_wait("evt_building_collapse", (0, 0, 0), 6.3);
   scene_wait("player_hind_shell_shock");
   hut_heli show();
-  hut_fxanim = getent("fxanim_hind_crash", "targetname");
+  hut_fxanim = getEnt("fxanim_hind_crash", "targetname");
   hut_fxanim delete();
   level.river_hind delete();
   scene_wait("player_knocked_off_turret");
@@ -1209,7 +1209,7 @@ run_heli_path_logic() {
   wait 3;
   level.river_hind.goal_radius = 300;
   level.river_hind.is_player_control = 0;
-  first_location = getent("heli_destination_housing", "targetname");
+  first_location = getEnt("heli_destination_housing", "targetname");
   level.river_hind hind_reach_goal(first_location, 400);
   level.river_hind thread hind_go_to_position_and_hold(first_location);
   level.river_hind.current_destination = "heli_destination_housing_node";
@@ -1229,7 +1229,7 @@ destroy_barge_turrets() {
 
   foreach(vh_turret in a_turrets) {
     m_dead_turret = spawn_model("veh_t6_turret_dshk_dead_no_base", vh_turret.origin, vh_turret.angles);
-    m_dead_turret linkto(level.main_barge);
+    m_dead_turret linkTo(level.main_barge);
     vh_turret.delete_on_death = 1;
     vh_turret notify("death");
 
@@ -1256,7 +1256,7 @@ destroy_barge_housing() {
   level thread wait_for_player_to_hit_housing_trigger();
   level waittill("destroy_barge_housing");
   level notify("hind_starting_special_action");
-  hind_target = getent("hind_fire_at_housing", "targetname");
+  hind_target = getEnt("hind_fire_at_housing", "targetname");
   level.river_hind setlookatent(hind_target);
   level.river_hind maps\_turret::set_turret_target(hind_target, vectorscale((0, 0, 1), 30.0), 0);
   level.river_hind maps\_turret::set_turret_target(hind_target, vectorscale((0, 0, 1), 30.0), 1);
@@ -1335,7 +1335,7 @@ wait_for_player_to_hit_housing_trigger() {
 }
 
 destroy_container() {
-  container = getent("woods_container", "targetname");
+  container = getEnt("woods_container", "targetname");
   container notify("spotlight_off");
   level.river_hind setlookatent(container);
   level.river_hind maps\_turret::set_turret_target(container, vectorscale((0, 0, 1), 30.0), 0);
@@ -1429,7 +1429,7 @@ hind_strafe_fire() {
   level endon("hind_crashing");
   hind_fire_at = spawn_model("tag_origin");
   hind_fire_at.origin = self.origin + anglesToForward((self.angles[0], self.angles[1], 0)) * 500 - vectorscale((0, 0, 1), 1000.0);
-  hind_fire_at linkto(self);
+  hind_fire_at linkTo(self);
 
   while(true) {
     if(isDefined(self.holding_position) && self.holding_position) {
@@ -1492,8 +1492,8 @@ fire_on_player_in_sight() {
 }
 
 woods_hudson_idle() {
-  truck = getent("woods_container", "targetname");
-  barge = getent("main_barge", "targetname");
+  truck = getEnt("woods_container", "targetname");
+  barge = getEnt("main_barge", "targetname");
   level thread run_scene("woods_truck_flip");
   playFXOnTag(level._effect["barge_truck_exp"], truck, "tag_origin");
   playFXOnTag(level._effect["barge_truck_exp_2"], barge, "tag_origin");
@@ -1509,16 +1509,16 @@ spawn_barge_housing_damage_fx() {
   fake_housing_barge_damage setModel("fxanim_angola_barge_wheelhouse_mod");
   fake_housing_barge_damage.angles = level.main_barge.angles;
   fake_housing_barge_damage.animname = "barge_wheel_house";
-  fake_housing_barge_damage linkto(level.main_barge);
+  fake_housing_barge_damage linkTo(level.main_barge);
   fake_housing_barge_damage playSound("evt_barge_explo_bridge");
-  cables = getent("barge_wheel_house_cables", "targetname");
+  cables = getEnt("barge_wheel_house_cables", "targetname");
   cables delete();
   playFXOnTag(getfx("barge_wheelhouse_exp"), fake_housing_barge_damage, "wheelhouse_explode_loc_jnt");
   level thread run_scene("wheel_house_explosion");
   wait 0.1;
   earthquake(0.6, 1.5, level.player.origin, 2048, level.player);
   scene_wait("wheel_house_explosion");
-  fake_housing_barge_damage linkto(level.main_barge);
+  fake_housing_barge_damage linkTo(level.main_barge);
 }
 
 spawn_barge_side_damage_fx() {
@@ -1526,17 +1526,17 @@ spawn_barge_side_damage_fx() {
   fake_side_barge_damage setModel("fxanim_angola_barge_side_debris_mod");
   fake_side_barge_damage.angles = level.main_barge.angles;
   fake_side_barge_damage.animname = "barge_side_damage";
-  fake_side_barge_damage linkto(level.main_barge);
+  fake_side_barge_damage linkTo(level.main_barge);
   level thread woods_hudson_idle();
-  container_clip = getent("woods_container_clip", "targetname");
+  container_clip = getEnt("woods_container_clip", "targetname");
   container_clip delete();
-  side_damage_clip = getent("side_damage_clip", "targetname");
+  side_damage_clip = getEnt("side_damage_clip", "targetname");
   side_damage_clip solid();
   level.main_barge hidepart("TAG_SIDE_DAMAGE");
   fake_model = spawn("script_model", level.main_barge gettagorigin("TAG_SIDE_DAMAGE"));
   fake_model setModel("veh_t6_sea_barge_side_dmg_destroyed");
   fake_model.angles = level.main_barge gettagangles("TAG_SIDE_DAMAGE");
-  fake_model linkto(level.main_barge, "TAG_SIDE_DAMAGE");
+  fake_model linkTo(level.main_barge, "TAG_SIDE_DAMAGE");
   level thread run_scene("barge_side_explosion");
   wait 0.1;
   radiusdamage(fake_model.origin, 1024, level.player.health / 4, level.player.health / 8);
@@ -1547,13 +1547,13 @@ spawn_barge_side_damage_fx() {
 
   earthquake(0.5, 1, fake_model.origin, 1024);
   scene_wait("barge_side_explosion");
-  woods_container = getent("woods_container", "targetname");
+  woods_container = getEnt("woods_container", "targetname");
   woods_container delete();
   array_delete(level.bodies);
 }
 
 hind_attack_find_tow() {
-  weapon_origin = getent("launcher_origin", "targetname");
+  weapon_origin = getEnt("launcher_origin", "targetname");
   a_weapons_list = [];
   a_item_list = getitemarray();
 
@@ -1566,11 +1566,11 @@ hind_attack_find_tow() {
   }
 
   tag_origin_linkto = spawn_model("t5_weapon_strela_world_obj", weapon_origin.origin, weapon_origin.angles);
-  tag_origin_linkto linkto(level.main_barge);
+  tag_origin_linkto linkTo(level.main_barge);
   m_weapon_script_model = spawn("weapon_m220_tow_sp", weapon_origin.origin, 8);
   m_weapon_script_model.angles = weapon_origin.angles;
   m_weapon_script_model.targetname = "tow_missile";
-  m_weapon_script_model linkto(weapon_origin);
+  m_weapon_script_model linkTo(weapon_origin);
   m_weapon_script_model itemweaponsetammo(9999, 9999);
   m_weapon_script_model hide();
   tag_origin_linkto thread delete_obj_when_picked_up();
@@ -1587,7 +1587,7 @@ hind_attack_find_tow() {
   }
 
   anim_origin = spawn_model("tag_origin", m_tarp.origin, m_tarp.angles);
-  anim_origin linkto(level.main_barge);
+  anim_origin linkTo(level.main_barge);
   anim_origin.targetname = "tarp_flyoff_origin";
   add_scene_properties("tarp_flyoff", "tarp_flyoff_origin");
   level thread run_scene("tarp_flyoff");
@@ -1621,7 +1621,7 @@ player_teach_ammo_cache() {
     wait 0.05;
   }
 
-  m_jumpto_spot = getent("barge_ammo_obj_spot", "targetname");
+  m_jumpto_spot = getEnt("barge_ammo_obj_spot", "targetname");
   m_jumpto_spot.use_obj_offset = (0, 0, 0);
   set_objective(level.obj_refill_ammo, m_jumpto_spot, "AMMO");
   level thread remove_ammo_marker_on_reload();
@@ -1651,7 +1651,7 @@ remove_ammo_marker_on_reload() {
 }
 
 delete_obj_when_picked_up() {
-  tow_missile = getent("tow_missile", "targetname");
+  tow_missile = getEnt("tow_missile", "targetname");
   tow_missile waittill("trigger");
   level thread monitor_player_has_tow_missile();
   set_objective(level.obj_destroy_hind, level.river_hind, "destroy");
@@ -1855,7 +1855,7 @@ cleanup_river_intro_boats() {
 align_swim_to_anim() {
   self endon("death");
   self endon("stop_align");
-  swim_pos = getent("swim_start", "targetname");
+  swim_pos = getEnt("swim_start", "targetname");
 
   while(true) {
     swim_pos.origin = self.origin;
@@ -1894,8 +1894,8 @@ swim_mechanic() {
   playing_backstroke = 0;
   playing_idle = 1;
   level.m_player_rig notify("stop_align");
-  swim_pos = getent("swim_start", "targetname");
-  swim_end = getstruct("swim_end", "targetname");
+  swim_pos = getEnt("swim_start", "targetname");
+  swim_end = getStruct("swim_end", "targetname");
   swim_end.origin = get_scene_start_pos("j_stealth_player_picks_up_woods", "player_body_river");
   swim_end.angles = get_scene_start_angles("j_stealth_player_picks_up_woods", "player_body_river");
   diff_org = level.m_player_rig.origin - get_scene_start_pos("player_idle_swim", "player_body_river");
@@ -1914,7 +1914,7 @@ swim_mechanic() {
     input = level.player getnormalizedmovement();
 
     if(input[0] < 0 && !playing_backstroke) {
-      swim_pos moveto(swim_end.origin, time);
+      swim_pos moveTo(swim_end.origin, time);
       level thread run_scene("player_backstroke_swim");
       playing_backstroke = 1;
       playing_idle = 0;
@@ -1923,7 +1923,7 @@ swim_mechanic() {
         screen_message_delete();
       }
     } else if(input == 0 && !playing_idle) {
-      swim_pos moveto(swim_pos.origin, 0.05);
+      swim_pos moveTo(swim_pos.origin, 0.05);
       level thread run_scene("player_idle_swim");
       playing_backstroke = 0;
       playing_idle = 1;
@@ -1949,7 +1949,7 @@ play_water_fx_on_everyone() {
   hudson_water_origin setModel("tag_origin");
   playFXOnTag(level._effect["water_splash_effect"], hudson_water_origin, "tag_origin");
   hudson_water_origin.origin = (level.hudson.origin[0], level.hudson.origin[1], -40);
-  hudson_water_origin linkto(level.hudson);
+  hudson_water_origin linkTo(level.hudson);
   level waittill("hudson_idle_on_shore_started");
   hudson_water_origin delete();
 }
@@ -1990,7 +1990,7 @@ rotate_barge() {
 
   while(true) {
     dir = anglesToForward((0, yaw, 0));
-    path_dir = vectornormalize(self.pathlookpos - self.pathpos);
+    path_dir = vectorNormalize(self.pathlookpos - self.pathpos);
     ang_vel = ang_vel + 0.025;
     ang_vel = clamp(ang_vel, -10, 10);
     yaw = yaw - ang_vel * 0.05;
@@ -2014,18 +2014,18 @@ spawn_aft_explosion() {
   fake_aft_board setModel("fxanim_angola_barge_aft_debris_mod");
   fake_aft_board.angles = level.main_barge.angles;
   fake_aft_board.animname = "barge_aft";
-  fake_aft_board linkto(level.main_barge);
+  fake_aft_board linkTo(level.main_barge);
   fake_aft_board playSound("evt_barge_explo_back");
   a_barrels = getEntArray("barge_barrel", "targetname");
   array_delete(a_barrels);
   playFXOnTag(level._effect["barge_aft_exp"], level.main_barge, "tag_origin");
   level.main_barge hidepart("TAG_REAR_DAMAGE");
-  rear_damage_clip = getent("rear_damage_clip", "targetname");
+  rear_damage_clip = getEnt("rear_damage_clip", "targetname");
   rear_damage_clip solid();
   fake_model = spawn("script_model", level.main_barge gettagorigin("TAG_REAR_DAMAGE"));
   fake_model setModel("veh_t6_sea_barge_rear_dmg_destroyed");
   fake_model.angles = level.main_barge gettagangles("TAG_REAR_DAMAGE");
-  fake_model linkto(level.main_barge, "TAG_REAR_DAMAGE");
+  fake_model linkTo(level.main_barge, "TAG_REAR_DAMAGE");
   level notify("aft_explosion");
   trigger_use("barge_barrel_top_trig");
   level thread run_scene("crane_sink");
@@ -2038,7 +2038,7 @@ play_rumble_on_spinning_barge() {
   level endon("hind_crash");
 
   while(true) {
-    level.player playrumbleonentity("tank_damage_light_mp");
+    level.player playRumbleOnEntity("tank_damage_light_mp");
     level.player playSound("evt_barge_water_hit");
     wait(randomfloatrange(1.0, 3.0));
   }
@@ -2076,9 +2076,9 @@ barge_sink_sfx() {
   sink_sfx = spawn("script_origin", (-27701, -2858, 49));
   sink_sfx playLoopSound("evt_barge_sink");
   wait 22;
-  playsoundatposition("evt_barge_barrels", (-27739, -3008, 8));
+  playSoundAtPosition("evt_barge_barrels", (-27739, -3008, 8));
   wait 2;
-  playsoundatposition("evt_barge_crane", (-27739, -3008, 8));
+  playSoundAtPosition("evt_barge_crane", (-27739, -3008, 8));
   wait 20;
   sink_sfx stoploopsound(5);
   wait 7;

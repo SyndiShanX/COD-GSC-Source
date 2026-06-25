@@ -158,7 +158,7 @@ patrol_search_for_player() {
     if(dist_to_player < level.player.stealth_visible_distance) {
       str_message = "Player Behind Me: " + dist_to_player;
       v_ai_forward = anglesToForward(self.angles);
-      v_dir_to_player = vectornormalize(level.player.origin - self.origin);
+      v_dir_to_player = vectorNormalize(level.player.origin - self.origin);
       dot = vectordot(v_ai_forward, v_dir_to_player);
 
       if(dot > level.player.stealth_visible_dot) {

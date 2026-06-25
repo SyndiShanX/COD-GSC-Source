@@ -33,7 +33,7 @@ function armblade_sound_thread() {
       if(result == "weapon_change" && self getcurrentweapon() == level.weaponarmblade) {
         if(!isDefined(self.armblade_loop_sound)) {
           self.armblade_loop_sound = spawn("script_origin", self.origin);
-          self.armblade_loop_sound linkto(self);
+          self.armblade_loop_sound linkTo(self);
         }
         self.armblade_loop_sound playLoopSound("wpn_armblade_idle", 0.25);
         continue;

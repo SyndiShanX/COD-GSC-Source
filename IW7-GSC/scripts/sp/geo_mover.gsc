@@ -41,7 +41,7 @@ func_BD15(var_0) {
 
   foreach(var_5 in var_1) {
     if(var_7 != var_5) {
-      var_5 linkto(var_7);
+      var_5 linkTo(var_7);
     }
   }
 
@@ -180,7 +180,7 @@ func_BD16(var_0, var_1) {
   var_4 hide();
   var_4 scripts\sp\vehicle::playgestureviewmodel();
   var_4 func_83E8();
-  var_2 linkto(var_4);
+  var_2 linkTo(var_4);
   var_4 attachpath(var_3);
   var_4 startpath();
 }
@@ -206,14 +206,14 @@ func_BD14(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  self rotateto(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
-  self moveto(var_4, var_7, var_7 * var_2, var_7 * var_3);
+  self rotateTo(var_0.angles, var_7, var_7 * var_2, var_7 * var_3);
+  self moveTo(var_4, var_7, var_7 * var_2, var_7 * var_3);
   self waittill("movedone");
 }
 
 func_BD13(var_0, var_1, var_2, var_3) {
-  self moveto(var_0.origin, var_1, var_2, var_3);
-  self rotateto(var_0.angles, var_1, var_2, var_3);
+  self moveTo(var_0.origin, var_1, var_2, var_3);
+  self rotateTo(var_0.angles, var_1, var_2, var_3);
   self waittill("movedone");
 }
 
@@ -222,7 +222,7 @@ func_F5B1(var_0) {
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":
-        level.player setorigin(var_3.origin);
+        level.player setOrigin(var_3.origin);
         level.player setplayerangles(var_3.angles);
         break;
     }

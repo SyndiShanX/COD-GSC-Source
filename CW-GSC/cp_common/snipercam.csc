@@ -121,9 +121,9 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5) {
   var_ef954e24 = spawn(localclientnum, parms.startpos, "script_model");
   bullet = util::spawn_model(localclientnum, "attach_t9_bullet_762_tip_view", parms.startpos, parms.angles);
   var_ef954e24.angles = parms.angles;
-  bullet linkto(var_ef954e24);
+  bullet linkTo(var_ef954e24);
   bullet rotatevelocity((0, 0, 4000), 9999);
-  var_ef954e24 moveto(parms.targetpos, parms.time);
+  var_ef954e24 moveTo(parms.targetpos, parms.time);
   thread function_ff6d0f8b(localclientnum, parms, bullet);
   util::playFXOnTag(localclientnum, "maps/cp_takedown/fx9_hit3_sniper_trail", bullet, "tag_bullet_fx");
   playmaincamxcam(localclientnum, #"hash_5c6d1cccae8395ba", 10, undefined, undefined, var_ef954e24);
@@ -182,7 +182,7 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5) {
       var_6de66f1f = focus_pos - var_fa3c8b18;
 
       if(lengthsquared(var_6de66f1f) > 0) {
-        var_6de66f1f = vectornormalize(var_6de66f1f);
+        var_6de66f1f = vectorNormalize(var_6de66f1f);
         var_a4607150 = vectortoangles(var_6de66f1f);
         var_a4607150 = function_23f390cc(var_a4607150);
       } else {
@@ -204,28 +204,28 @@ function private function_7f8d6723(localclientnum, victim, var_d21483a5) {
     var_ac259dff.angles = var_a4607150;
 
     if(isDefined(var_52c1d392)) {
-      var_ac259dff moveto(var_52c1d392.origin, 0.8);
+      var_ac259dff moveTo(var_52c1d392.origin, 0.8);
 
       if(var_d21483a5 == 2 || var_d21483a5 == 4) {
         assert(isDefined(focus_pos));
         var_6de66f1f = focus_pos - var_52c1d392.origin;
 
         if(lengthsquared(var_6de66f1f) > 0) {
-          var_6de66f1f = vectornormalize(var_6de66f1f);
+          var_6de66f1f = vectorNormalize(var_6de66f1f);
           target_angles = vectortoangles(var_6de66f1f);
           target_angles = function_23f390cc(target_angles);
-          var_ac259dff rotateto(target_angles, 0.8);
+          var_ac259dff rotateTo(target_angles, 0.8);
         }
       }
     } else {
       var_7333a53a = var_fa3c8b18 + parms.forward * 25;
-      var_ac259dff moveto(var_7333a53a, 0.8);
+      var_ac259dff moveTo(var_7333a53a, 0.8);
       var_26f59de4 = parms.var_e93a7f0f - var_fa3c8b18;
 
       if(!isDefined(side_cam_start) && lengthsquared(var_26f59de4)) {
-        var_db8de2bd = vectortoangles(vectornormalize(var_26f59de4));
+        var_db8de2bd = vectortoangles(vectorNormalize(var_26f59de4));
         final_angles = var_a4607150 + function_23f390cc((var_db8de2bd[0], 0, 0));
-        var_ac259dff rotateto(final_angles, 0.8);
+        var_ac259dff rotateTo(final_angles, 0.8);
       }
     }
 

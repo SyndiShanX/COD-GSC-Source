@@ -231,7 +231,7 @@ boombox_setplaced(var_0, var_1) {
   var_1.iscarrying = 0;
   self.carriedboombox delete();
   self delete();
-  var_3 moveto(var_2, 0.5);
+  var_3 moveTo(var_2, 0.5);
   wait(0.6);
   var_4 = spawn("script_model", var_3.origin);
   var_4.angles = var_3.angles;
@@ -372,7 +372,7 @@ boombox_explode() {
       continue;
     }
 
-    var_4 setvelocity(vectornormalize(var_4.origin - self.origin) * 400 + (0, 0, 200));
+    var_4 setvelocity(vectorNormalize(var_4.origin - self.origin) * 400 + (0, 0, 200));
     var_4.do_immediate_ragdoll = 1;
     var_4.customdeath = 1;
     var_4 thread boombox_delayed_death(self);

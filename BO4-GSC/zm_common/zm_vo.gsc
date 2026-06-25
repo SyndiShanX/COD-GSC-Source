@@ -566,7 +566,7 @@ is_player_valid(e_player) {
 get_valid_players() {
   a_valid_players = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(zm_utility::is_player_valid(player)) {
       if(!isDefined(a_valid_players)) {
         a_valid_players = [];

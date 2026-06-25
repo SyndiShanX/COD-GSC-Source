@@ -93,9 +93,9 @@ handle_fire_damage_trigger(var_0) {
       var_4 dodamage(var_3, var_5, self, self, "MOD_FIRE", undefined);
 
       if(var_3 < 6) {
-        var_4 playrumbleonentity("damage_light");
+        var_4 playRumbleOnEntity("damage_light");
       } else {
-        var_4 playrumbleonentity("damage_heavy");
+        var_4 playRumbleOnEntity("damage_heavy");
       }
     }
 
@@ -104,7 +104,7 @@ handle_fire_damage_trigger(var_0) {
 }
 
 fix_collision() {
-  var_0 = getent("clip32x32x256", "targetname");
+  var_0 = getEnt("clip32x32x256", "targetname");
   var_1 = spawn("script_model", (-1280.4, 1039.62, 192.088));
   var_1.angles = (270, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
@@ -117,7 +117,7 @@ fix_collision() {
   var_4 = spawn("script_model", (-2048.4, 1039.62, 192.088));
   var_4.angles = (270, 0, 0);
   var_4 clonebrushmodeltoscriptmodel(var_0);
-  var_5 = getent("clip512x512x8", "targetname");
+  var_5 = getEnt("clip512x512x8", "targetname");
   var_6 = spawn("script_model", (-1888, 787.224, 104.911));
   var_6.angles = (0, 0, -157.452);
   var_6 clonebrushmodeltoscriptmodel(var_5);

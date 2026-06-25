@@ -137,7 +137,7 @@ function function_db89c38f(localclientnum, speakingplayer, allyradiussq) {
 
   allies = [];
 
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     if(!function_d804d2f0(localclientnum, speakingplayer, player, allyradiussq)) {
       continue;
     }

@@ -111,7 +111,7 @@ function upload_global_stat_counters() {
       break;
     }
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(isDefined(player.timeplayed) && isDefined(player.timeplayed["total"])) {
@@ -122,7 +122,7 @@ function upload_global_stat_counters() {
     return;
   }
   wait(0.05);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     totalkills = totalkills + player.kills;

@@ -396,7 +396,7 @@ _id_14BB(var_0, var_1, var_2, var_3, var_4) {
       var_7 playLoopSound(var_6);
 
       if(isDefined(var_4)) {
-        var_7 linkto(var_4);
+        var_7 linkTo(var_4);
       }
       var_8 = level._id_1456._id_148D._id_148F;
       level._id_1456._id_148D._id_1492[var_0][var_1]["single_loops"][var_8] = var_7;
@@ -643,7 +643,7 @@ _id_14E0(var_0, var_1, var_2) {
     var_4 = spawn("script_origin", var_3 + var_2._id_14D5);
 
     if(isDefined(var_2._id_14B9) && var_2.mode == "attach") {
-      var_4 linkto(var_2._id_14B9);
+      var_4 linkTo(var_2._id_14B9);
     }
     var_4 playSound(var_2._id_1486["name"], "sounddone");
     var_4 thread maps\_audio::_id_14E1();
@@ -656,7 +656,7 @@ _id_14E0(var_0, var_1, var_2) {
 
       if(isDefined(var_2._id_14D7) && !isDefined(var_2.entity)) {
         var_6 = 0.1 * var_2._id_14D6;
-        var_4 moveto(var_3 + var_2._id_14D7, var_2._id_14D6, var_6, var_6);
+        var_4 moveTo(var_3 + var_2._id_14D7, var_2._id_14D6, var_6, var_6);
       }
 
       if(isDefined(var_2._id_14D8)) {
@@ -713,7 +713,7 @@ _id_14E3(var_0, var_1, var_2) {
     var_13 = spawn("script_origin", var_3 + var_2._id_14D5);
 
     if(isDefined(var_2._id_14B9) && var_2.mode == "attach") {
-      var_13 linkto(var_2._id_14B9);
+      var_13 linkTo(var_2._id_14B9);
     }
     var_13 playLoopSound(var_9);
 
@@ -739,7 +739,7 @@ _id_14E3(var_0, var_1, var_2) {
       }
       if(var_15) {
         var_16 = 0.1 * var_2._id_14D6;
-        var_13 moveto(var_3 + var_2._id_14D7, var_2._id_14D6, var_16, var_16);
+        var_13 moveTo(var_3 + var_2._id_14D7, var_2._id_14D6, var_16, var_16);
       }
 
       if(isDefined(var_2._id_14D8)) {

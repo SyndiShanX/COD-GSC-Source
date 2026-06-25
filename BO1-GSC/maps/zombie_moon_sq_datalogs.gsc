@@ -19,7 +19,7 @@ init() {
   datalogs_delay["vox_story_2_log_6"] = 138;
   i = 0;
   datalog_locs = getStructArray("sq_datalog", "targetname");
-  player = getstruct("sq_reel_to_reel", "targetname");
+  player = getStruct("sq_reel_to_reel", "targetname");
   datalog_locs = array_randomize(datalog_locs);
   while(i < datalogs.size) {
     log_struct = datalog_locs[0];

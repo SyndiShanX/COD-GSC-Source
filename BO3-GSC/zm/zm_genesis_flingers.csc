@@ -57,7 +57,7 @@ function function_ddcc2bf9(localclientnum, var_bfcf4a2a) {
 
 function flinger_pad_active_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval > 0) {
-    var_1143aa58 = getent(localclientnum, level.var_5646965[newval]["pad"], "targetname");
+    var_1143aa58 = getEnt(localclientnum, level.var_5646965[newval]["pad"], "targetname");
     var_1143aa58 thread function_ddcc2bf9(localclientnum, 0);
     exploder::stop_exploder(level.var_5646965[newval]["cooldown"]);
     exploder::exploder(level.var_5646965[newval]["ready"]);
@@ -71,12 +71,12 @@ function flinger_land_smash(localclientnum, oldval, newval, bnewent, binitialsna
 
 function flinger_cooldown_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval > 0) {
-    var_1143aa58 = getent(localclientnum, level.var_5646965[newval]["pad"], "targetname");
+    var_1143aa58 = getEnt(localclientnum, level.var_5646965[newval]["pad"], "targetname");
     var_1143aa58 thread function_ddcc2bf9(localclientnum, 1);
     exploder::stop_exploder(level.var_5646965[newval]["ready"]);
     exploder::exploder(level.var_5646965[newval]["cooldown"]);
     var_32149294 = level.var_5646965[newval]["landpad"];
-    var_f201110a = getent(localclientnum, level.var_5646965[var_32149294]["pad"], "targetname");
+    var_f201110a = getEnt(localclientnum, level.var_5646965[var_32149294]["pad"], "targetname");
     var_f201110a thread function_ddcc2bf9(localclientnum, 1);
     exploder::stop_exploder(level.var_5646965[var_32149294]["ready"]);
     exploder::exploder(level.var_5646965[var_32149294]["cooldown"]);
@@ -85,12 +85,12 @@ function flinger_cooldown_start(localclientnum, oldval, newval, bnewent, binitia
 
 function flinger_cooldown_end(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval > 0) {
-    var_1143aa58 = getent(localclientnum, level.var_5646965[newval]["pad"], "targetname");
+    var_1143aa58 = getEnt(localclientnum, level.var_5646965[newval]["pad"], "targetname");
     var_1143aa58 thread function_ddcc2bf9(localclientnum, 0);
     exploder::stop_exploder(level.var_5646965[newval]["cooldown"]);
     exploder::exploder(level.var_5646965[newval]["ready"]);
     var_32149294 = level.var_5646965[newval]["landpad"];
-    var_f201110a = getent(localclientnum, level.var_5646965[var_32149294]["pad"], "targetname");
+    var_f201110a = getEnt(localclientnum, level.var_5646965[var_32149294]["pad"], "targetname");
     var_f201110a thread function_ddcc2bf9(localclientnum, 0);
     exploder::stop_exploder(level.var_5646965[var_32149294]["cooldown"]);
     exploder::exploder(level.var_5646965[var_32149294]["ready"]);

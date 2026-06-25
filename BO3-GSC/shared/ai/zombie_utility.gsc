@@ -39,7 +39,7 @@ function zombiespawnsetup() {
 function get_closest_valid_player(origin, ignore_player, ignore_laststand_players = 0) {
   pixbeginevent("get_closest_valid_player");
   valid_player_found = 0;
-  targets = getplayers();
+  targets = getPlayers();
   if(isDefined(level.closest_player_targets_override)) {
     targets = [[level.closest_player_targets_override]]();
   }
@@ -1082,7 +1082,7 @@ function zombie_spawn_failed(spawn) {
 
 function get_desired_origin() {
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     if(!isDefined(ent)) {
       ent = struct::get(self.target, "targetname");
     }
@@ -1132,7 +1132,7 @@ function zombie_rise_death(zombie, spot) {
   }
   if(isDefined(zombie)) {
     zombie.deathanim = zombie get_rise_death_anim();
-    zombie stopanimscripted();
+    zombie stopanimScripted();
   }
 }
 
@@ -1471,11 +1471,11 @@ function set_run_speed_easy() {
 function setup_zombie_knockdown(entity) {
   self.knockdown = 1;
   zombie_to_entity = entity.origin - self.origin;
-  zombie_to_entity_2d = vectornormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
+  zombie_to_entity_2d = vectorNormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
   zombie_forward = anglesToForward(self.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(self.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_entity_2d, zombie_forward_2d);
   if(dot >= 0.5) {
     self.knockdown_direction = "front";

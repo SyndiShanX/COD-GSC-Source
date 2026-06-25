@@ -9,7 +9,7 @@ initzombieghost(var_0) {
   self.currentanimstate = undefined;
   self.currentanimindex = undefined;
   self scragentsetphysicsmode("noclip");
-  self scragentsetgoalradius(99999999);
+  self scragentsetgoalRadius(99999999);
   self scragentsetscripted(1);
   setghostnavmode("hover");
   thread scripts\asm\zombie_ghost\zombie_ghost_asm::zombieghost_constantanglesadjust();
@@ -40,11 +40,11 @@ ghostentangled(var_0) {
       if(distancesquared(self.origin, var_5) < 360000) {
         var_6 = var_5;
       } else {
-        var_7 = vectornormalize(var_5 - self.origin);
+        var_7 = vectorNormalize(var_5 - self.origin);
         var_6 = self.origin + var_7 * 600;
       }
 
-      self setorigin(var_6, 0);
+      self setOrigin(var_6, 0);
       self.ghost_target_position = var_1.origin;
       scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::update_entangler_progress(var_1, self);
       return anim.success;
@@ -106,7 +106,7 @@ ghosthide(var_0) {
 
     if(distancesquared(self.ghost_hide_node.origin, self.origin) < 1024) {
       self notify("ghost_reached_hide_node");
-      self.ghost_hide_node = scripts\engine\utility::getstruct(self.ghost_hide_node.target, "targetname");
+      self.ghost_hide_node = scripts\engine\utility::getStruct(self.ghost_hide_node.target, "targetname");
       self.ghost_target_position = self.ghost_hide_node.origin;
     }
 
@@ -537,7 +537,7 @@ getrandomhovernodesaroundtargetpos(var_0, var_1) {
 }
 
 playghostexplosionvfx(var_0) {
-  var_1 = vectornormalize(var_0.velocity);
+  var_1 = vectorNormalize(var_0.velocity);
 
   if(var_1 == (0, 0, 0)) {
     var_1 = (0, 0, 1);

@@ -32,8 +32,8 @@ on_end(round_reset) {
 }
 
 function_3b7e62cf() {
-  elevator1 = getent("elevator1", "targetname");
-  elevator2 = getent("elevator2", "targetname");
+  elevator1 = getEnt("elevator1", "targetname");
+  elevator2 = getEnt("elevator2", "targetname");
   elevator1 thread function_98c1b6be();
   elevator2 thread function_98c1b6be();
 }
@@ -52,8 +52,8 @@ function_28dce407() {
 }
 
 function_72c09628() {
-  elevator1 = getent("elevator1", "targetname");
-  elevator2 = getent("elevator2", "targetname");
+  elevator1 = getEnt("elevator1", "targetname");
+  elevator2 = getEnt("elevator2", "targetname");
   elevator1 zm_office_elevators::enable_callboxes();
   elevator1 zm_office_elevators::enable_elevator_buys();
   elevator2 zm_office_elevators::enable_callboxes();

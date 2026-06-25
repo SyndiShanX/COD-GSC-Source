@@ -13,7 +13,7 @@ func_00F9() {
     var_03 method_805C();
   }
 
-  var_05 = getent("lhog_control", "targetname");
+  var_05 = getEnt("lhog_control", "targetname");
   if(isDefined(var_05)) {
     var_05 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("off");
   }
@@ -37,18 +37,18 @@ func_6C9E() {
 }
 
 func_714D() {
-  var_00 = getent("left_hand_of_god_model", "targetname");
+  var_00 = getEnt("left_hand_of_god_model", "targetname");
   playFXOnTag(level.var_0611["zmb_lhog_init"], var_00, "tag_origin");
 }
 
 func_7862() {
   level notify("nest_ee_fuses_complete");
-  var_00 = getent("overcharge_trig", "targetname");
+  var_00 = getEnt("overcharge_trig", "targetname");
   var_00.var_4D91 = lib_0559::func_7BE3(var_00, "lhog");
-  var_00 sethintstring(&"ZOMBIES_SWITCH_HINT_GENERIC_EXAMINE");
+  var_00 setHintString(&"ZOMBIES_SWITCH_HINT_GENERIC_EXAMINE");
   var_00.var_17A9 = 0;
-  var_01 = getent("left_hand_of_god_model", "targetname");
-  var_02 = getent("lhog_control", "targetname");
+  var_01 = getEnt("left_hand_of_god_model", "targetname");
+  var_02 = getEnt("lhog_control", "targetname");
   if(isDefined(var_02)) {
     var_02 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("red");
   }
@@ -133,9 +133,9 @@ func_179C() {
 }
 
 func_7861() {
-  var_00 = getent("left_hand_of_god_model", "targetname");
-  var_01 = getent("overcharge_trig", "targetname");
-  var_01 sethintstring(&"ZOMBIE_NEST_ENABLE_LEFT_HAND");
+  var_00 = getEnt("left_hand_of_god_model", "targetname");
+  var_01 = getEnt("overcharge_trig", "targetname");
+  var_01 setHintString(&"ZOMBIE_NEST_ENABLE_LEFT_HAND");
   if(1) {
     var_02 = undefined;
     if(isDefined(var_00)) {
@@ -146,7 +146,7 @@ func_7861() {
 
   wait(0.5);
   var_01 waittill("trigger", var_03);
-  var_04 = getent("lhog_control", "targetname");
+  var_04 = getEnt("lhog_control", "targetname");
   if(isDefined(var_04)) {
     var_04 thread maps\mp\mp_zombie_nest_ee_util::func_4D76();
     var_04 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("green");
@@ -335,7 +335,7 @@ func_8C89() {
   }
 
   level.var_5C6A = 0;
-  var_00 = getent("overcharge_trig", "targetname");
+  var_00 = getEnt("overcharge_trig", "targetname");
   var_00 notify("bypassed");
 }
 
@@ -348,7 +348,7 @@ func_20C7(param_00) {
   param_00 thread func_2E8D();
   param_00 common_scripts\utility::func_A70A("trigger", "soft_triggered", "bypassed");
   lib_0557::func_7822("6B Left Hand overcharge", &"ZOMBIE_NEST_HINT_STEP_BATTERIES");
-  param_00 sethintstring(&"ZOMBIE_NEST_PLACE_UBER");
+  param_00 setHintString(&"ZOMBIE_NEST_PLACE_UBER");
   param_00 notify("discovered");
 }
 

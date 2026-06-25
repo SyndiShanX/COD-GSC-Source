@@ -77,9 +77,9 @@ func_2F13(param_00) {
     return;
   }
 
-  var_01 = vectornormalize(anglesToForward(self.var_001D));
-  var_02 = vectornormalize(anglestoright(self.var_001D));
-  var_03 = vectornormalize(param_00 - self.var_0116);
+  var_01 = vectorNormalize(anglesToForward(self.var_001D));
+  var_02 = vectorNormalize(anglestoright(self.var_001D));
+  var_03 = vectorNormalize(param_00 - self.var_0116);
   var_04 = vectordot(var_03, var_01);
   var_05 = vectordot(var_03, var_02);
   var_06 = ["death", "damage"];
@@ -110,9 +110,9 @@ func_17FE(param_00) {
     return;
   }
 
-  var_01 = vectornormalize(anglesToForward(self.var_001D));
-  var_02 = vectornormalize(anglestoright(self.var_001D));
-  var_03 = vectornormalize(param_00 - self.var_0116);
+  var_01 = vectorNormalize(anglesToForward(self.var_001D));
+  var_02 = vectorNormalize(anglestoright(self.var_001D));
+  var_03 = vectorNormalize(param_00 - self.var_0116);
   var_04 = vectordot(var_03, var_01);
   var_05 = vectordot(var_03, var_02);
   var_06 = ["death", "damage"];

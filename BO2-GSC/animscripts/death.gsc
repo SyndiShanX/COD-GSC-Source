@@ -1732,7 +1732,7 @@ do_extended_death(deathseq) {
     record3dtext("AI is going to ragdoll", self.origin + vectorscale((0, 0, 1), 70.0), (1, 1, 1), "Animscript");
   }
 
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self thread death_anim_short_circuit();
   self setflaggedanimknoballrestart("deathhitanim", deathseq[0], %body, 1, 0.1);
   self animscripts\shared::donotetracks("deathhitanim");
@@ -1820,7 +1820,7 @@ play_death_anim(deathanim) {
     return;
   } else {
     if(isDefined(self.a.allowdeathshortcircuit) && self.a.allowdeathshortcircuit) {
-      self setplayercollision(0);
+      self setPlayerCollision(0);
       self thread death_anim_short_circuit();
     } else
       self thread death_anim_short_circuit(0.3);
@@ -1943,7 +1943,7 @@ do_gib() {
       }
 
       for(i = 0; i < pos1.size; i++) {
-        forward = vectornormalize(pos2[i] - pos1[i]);
+        forward = vectorNormalize(pos2[i] - pos1[i]);
         velocities[i] = forward * randomfloatrange(0.6, 1.0);
         velocities[i] = velocities[i] + (0, 0, randomfloatrange(0.4, 0.7));
       }
@@ -1963,7 +1963,7 @@ do_gib() {
     self detach(self.headmodel);
     self playSound("chr_gib_decapitate");
   } else
-    playsoundatposition("chr_death_gibs", self.origin);
+    playSoundAtPosition("chr_death_gibs", self.origin);
 
   self thread maps\_dds::dds_notify("gib", self.team != "allies");
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
@@ -2080,7 +2080,7 @@ headshotslowmo() {
   if(self.team == self.attacker.team) {
     return;
   }
-  if(getplayers().size > 1) {
+  if(getPlayers().size > 1) {
     return;
   }
   if(!isPlayer(self.attacker)) {

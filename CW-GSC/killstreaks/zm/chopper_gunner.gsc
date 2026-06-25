@@ -174,7 +174,7 @@ function function_e6d10d94() {
 
   if(isarray(level.var_b3e433ae)) {
     foreach(volume_name in level.var_b3e433ae) {
-      var_7aad75a5 = getent(volume_name, "targetname");
+      var_7aad75a5 = getEnt(volume_name, "targetname");
 
       if(isDefined(var_7aad75a5)) {
         if(istouching(self.origin, var_7aad75a5)) {
@@ -286,7 +286,7 @@ function function_25d9a09f(vehicle) {
     }
 
     if(isDefined(enemy)) {
-      vectorfromenemy = vectornormalize(((vehicle.origin - enemy.origin)[0], (vehicle.origin - enemy.origin)[1], 0));
+      vectorfromenemy = vectorNormalize(((vehicle.origin - enemy.origin)[0], (vehicle.origin - enemy.origin)[1], 0));
       vehicle turretsettarget(0, enemy);
       vehicle waittilltimeout(1, #"turret_on_target");
       vehicle vehicle_ai::fire_for_time(2 + randomfloat(0.8), 0, enemy);

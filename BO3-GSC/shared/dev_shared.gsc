@@ -38,7 +38,7 @@ function updateminimapsetting() {
     }
     if(minimapheight > 0) {
       level.minimapheight = minimapheight;
-      players = getplayers();
+      players = getPlayers();
       if(players.size > 0) {
         player = util::gethostplayer();
         corners = getEntArray("", "");
@@ -158,10 +158,10 @@ function drawminimapbounds(viewpos, mincorner, maxcorner) {
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   diaglen = length(mincorner - maxcorner);
   mincorneroffset = mincorner - viewpos;
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + (vecscale(mincorneroffset, (diaglen * 1) / 800));
   maxcorneroffset = maxcorner - viewpos;
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + (vecscale(maxcorneroffset, (diaglen * 1) / 800));
   diagonal = maxcorner - mincorner;
   side = vecscale(north, vectordot(diagonal, north));
@@ -204,13 +204,13 @@ function minimapwarn(corners) {
 }
 
 function body_customization_setup_helmet(helmet_index) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player setcharacterhelmetstyle(helmet_index);
   }
 }
 
 function body_customization_setup_body(character_index, body_index) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player setcharacterbodytype(character_index);
     player setcharacterbodystyle(body_index);
   }

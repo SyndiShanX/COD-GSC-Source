@@ -617,7 +617,7 @@ setdropped() {
 
     if(angletrace["fraction"] < 1 && distance(angletrace["position"], trace) < 10.0) {
       forward = (cos(tempangle), sin(tempangle), 0);
-      forward = vectornormalize(forward - vectorscale(angletrace["normal"], vectordot(forward, angletrace["normal"])));
+      forward = vectorNormalize(forward - vectorscale(angletrace["normal"], vectordot(forward, angletrace["normal"])));
       dropangles = vectortoangles(forward);
     } else
       dropangles = (0, tempangle, 0);
@@ -1394,7 +1394,7 @@ useholdthink(player) {
   player notify("use_hold");
 
   if(!(isDefined(self.dontlinkplayertotrigger) && self.dontlinkplayertotrigger)) {
-    player playerlinkto(self.trigger);
+    player playerlinkTo(self.trigger);
     player playerlinkedoffsetenable();
   }
 
@@ -1868,7 +1868,7 @@ setusetext(text) {
 }
 
 setusehinttext(text) {
-  self.trigger sethintstring(text);
+  self.trigger setHintString(text);
 }
 
 allowcarry(relativeteam) {

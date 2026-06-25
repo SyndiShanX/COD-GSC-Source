@@ -52,7 +52,7 @@ is_active() {
 function_2fc5f13() {
   challenge = zm_trial::function_a36e8c38(#"no_powerups");
   assert(isDefined(challenge));
-  var_5843af96 = zm_round_logic::get_zombie_count_for_round(level.round_number, getplayers().size);
+  var_5843af96 = zm_round_logic::get_zombie_count_for_round(level.round_number, getPlayers().size);
   frac = math::clamp(challenge.enemies_killed / var_5843af96, 0, 1);
   modifier = lerpfloat(25, 40, frac);
   return modifier;

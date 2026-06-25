@@ -48,7 +48,7 @@ func_00F9() {
 rotatewaterwheel() {
   level endon("game_ended");
   var_00 = 1800;
-  var_01 = getent("water_wheel", "targetname");
+  var_01 = getEnt("water_wheel", "targetname");
   for(;;) {
     var_01 rotatevelocity((-2, 0, 0), var_00);
     wait(var_00);

@@ -29,7 +29,7 @@ function private on_begin(var_93fc795f, var_a7c52900, var_c8a36f90) {
   level.var_1c8f9eba = var_c8a36f90;
   wait 6;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(var_c8a36f90)) {
       switch (var_c8a36f90) {
         case #"prone_random":

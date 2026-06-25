@@ -40,9 +40,9 @@ function hack(n_hacking_time, e_hacking_player) {
 
 function init_hack_trigger(n_hacking_time = 0.5, str_objective = &"cp_hacking", str_hint_text, var_84221fce, a_keyline_objects, var_27d1693f) {
   if(isDefined(str_hint_text)) {
-    self sethintstring(str_hint_text);
+    self setHintString(str_hint_text);
   }
-  self setcursorhint("HINT_INTERACTIVE_PROMPT");
+  self setCursorHint("HINT_INTERACTIVE_PROMPT");
   if(!isDefined(a_keyline_objects)) {
     a_keyline_objects = [];
   } else {
@@ -88,8 +88,8 @@ function onuse(player) {
     player util::delay(1, undefined, &clientfield::increment_to_player, "hack_dni_fx");
     if(isDefined(self.var_27d1693f)) {
       var_c4ed51d5 = util::spawn_model("tag_origin", player.origin, player.angles);
-      var_c4ed51d5 linkto(self.var_27d1693f);
-      player playerlinkto(var_c4ed51d5, "tag_origin");
+      var_c4ed51d5 linkTo(self.var_27d1693f);
+      player playerlinkTo(var_c4ed51d5, "tag_origin");
       var_c4ed51d5 scene::play("cin_gen_player_hack_start", player);
       var_c4ed51d5 delete();
     } else {

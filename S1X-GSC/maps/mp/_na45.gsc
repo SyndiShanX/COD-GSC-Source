@@ -46,9 +46,9 @@ transfer_primer_to_corpse(hit_ent, part_name) {
   corpse_ent = hit_ent GetCorpseEntity();
   if(isDefined(corpse_ent)) {
     if(isDefined(part_name)) {
-      self.primer LinkTo(corpse_ent, part_name);
+      self.primer linkTo(corpse_ent, part_name);
     } else {
-      self.primer LinkTo(corpse_ent);
+      self.primer linkTo(corpse_ent);
     }
 
     self.primer thread show_primer_fx(self);
@@ -100,9 +100,9 @@ m990_hit(weapon, hit_pos, hit_normal, hit_ent, hit_dir, part_name) {
       }
 
       if(isDefined(part_name)) {
-        self.primer LinkTo(primer_link_ent, part_name);
+        self.primer linkTo(primer_link_ent, part_name);
       } else {
-        self.primer LinkTo(primer_link_ent);
+        self.primer linkTo(primer_link_ent);
       }
     }
 

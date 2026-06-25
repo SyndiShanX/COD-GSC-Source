@@ -33,7 +33,7 @@ function main() {
   level flag::wait_till("start_zombie_round_logic");
   wait(3);
   foreach(e_wall in a_walls) {
-    e_wall moveto(e_wall.up_origin, 0.05);
+    e_wall moveTo(e_wall.up_origin, 0.05);
     e_wall connectpaths();
   }
   level thread chamber_devgui();
@@ -75,7 +75,7 @@ function chamber_change_walls(n_element) {
   }
   e_current_wall = undefined;
   e_new_wall = undefined;
-  playsoundatposition("zmb_chamber_wallchange", (10342, -7921, -272));
+  playSoundAtPosition("zmb_chamber_wallchange", (10342, -7921, -272));
   a_walls = getEntArray("chamber_wall", "script_noteworthy");
   foreach(e_wall in a_walls) {
     if(e_wall.script_int == n_element) {
@@ -90,7 +90,7 @@ function chamber_change_walls(n_element) {
 }
 
 function is_chamber_occupied() {
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(e_player in a_players) {
     if(is_point_in_chamber(e_player.origin)) {
       return true;
@@ -132,17 +132,17 @@ function chamber_wall_change_randomly() {
 }
 
 function move_wall_up() {
-  self moveto(self.up_origin, 1);
+  self moveTo(self.up_origin, 1);
   self waittill("movedone");
   self connectpaths();
 }
 
 function move_wall_down() {
-  self moveto(self.down_origin, 1);
+  self moveTo(self.down_origin, 1);
   self waittill("movedone");
   zm_tomb_utility::rumble_players_in_chamber(2, 0.1);
   self clientfield::increment("divider_fx");
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 function random_shuffle(a_items, item) {
@@ -162,11 +162,11 @@ function random_shuffle(a_items, item) {
 
 function tomb_chamber_find_exit_point() {
   self endon("death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = array::randomize(level.zm_loc_types["wait_location"]);
   for(i = 0; i < locs.size; i++) {
@@ -201,7 +201,7 @@ function chamber_zombies_find_poi() {
 }
 
 function tomb_is_valid_target_in_chamber() {
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(e_player in a_players) {
     if(e_player laststand::player_is_in_laststand()) {
       continue;

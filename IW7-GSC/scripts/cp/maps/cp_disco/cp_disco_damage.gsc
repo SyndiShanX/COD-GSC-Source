@@ -313,7 +313,7 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
             self.ragdollhitloc = var_8;
             if(lengthsquared(var_7) < 1) {
               var_3C = self.origin - var_1.origin;
-              var_3C = vectornormalize((var_3C[0], var_3C[1], 0));
+              var_3C = vectorNormalize((var_3C[0], var_3C[1], 0));
               self.ragdollimpactvector = var_3C * var_3B;
             } else {
               self.ragdollimpactvector = var_7 * var_3B;
@@ -346,7 +346,7 @@ cp_disco_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
         self.ragdollhitloc = var_8;
         if(lengthsquared(var_7) < 1) {
           var_3C = self.origin - var_1.origin;
-          var_3C = vectornormalize((var_3C[0], var_3C[1], 0));
+          var_3C = vectorNormalize((var_3C[0], var_3C[1], 0));
           self.ragdollimpactvector = var_3C * var_3B;
         } else {
           self.ragdollimpactvector = var_7 * var_3B;
@@ -1267,7 +1267,7 @@ kung_fu_damage_everyone_in_radius(var_0, var_1, var_2, var_3) {
 chi_hit(var_0, var_1, var_2) {
   var_3 = 100;
   var_4 = 20;
-  var_5 = vectornormalize(self.origin - var_0.origin) * var_3 + (0, 0, var_4);
+  var_5 = vectorNormalize(self.origin - var_0.origin) * var_3 + (0, 0, var_4);
   var_6 = self.origin + var_5;
   var_7 = level._effect["chi_ghost_hit_blue"];
   if(isDefined(var_0.kung_fu_progression.active_discipline)) {

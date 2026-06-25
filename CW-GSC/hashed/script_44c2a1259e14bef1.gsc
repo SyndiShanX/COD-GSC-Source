@@ -53,7 +53,7 @@ function heal_player() {
 function function_f823ab5e() {
   self.var_9cd2c51d.var_232f5c31 = gettime();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player laststand::player_is_in_laststand() || !isalive(player)) {
       continue;
     }
@@ -82,7 +82,7 @@ function function_f823ab5e() {
 function function_e1dad5f7(var_c886f650 = 0) {
   self.var_9cd2c51d.var_232f5c31 = gettime();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(level.var_cbcc2ab7)) {
       if(![[level.var_cbcc2ab7]](player)) {
         continue;
@@ -178,7 +178,7 @@ function function_87d44a60() {
 
 function function_451de831(var_c360c10f) {
   if(!isDefined(var_c360c10f)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       nearbyzombies = getentitiesinradius(player.origin, 128, 15);
 
       foreach(zombie in nearbyzombies) {
@@ -200,11 +200,11 @@ function function_451de831(var_c360c10f) {
 }
 
 function function_27b2aab7() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player)) {
       var_bf135e90 = spawn("script_model", player.origin);
       var_bf135e90 setModel("tag_origin");
-      var_bf135e90 linkto(player);
+      var_bf135e90 linkTo(player);
       var_bf135e90 clientfield::increment("fx_heal_aoe_pillar_clientfield");
       var_bf135e90 thread function_4c7c38cb();
     }
@@ -229,7 +229,7 @@ function function_1447ebb8(params) {
   function_27b2aab7();
   self function_f823ab5e();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(level.var_cbcc2ab7)) {
       if(![[level.var_cbcc2ab7]](player)) {
         continue;
@@ -246,7 +246,7 @@ function function_6ff0a318(params) {
   function_27b2aab7();
   self function_f823ab5e();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(level.var_cbcc2ab7)) {
       if(![[level.var_cbcc2ab7]](player)) {
         continue;
@@ -265,7 +265,7 @@ function function_62280787(params) {
   function_27b2aab7();
   self thread function_e1dad5f7();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(level.var_cbcc2ab7)) {
       if(![[level.var_cbcc2ab7]](player)) {
         continue;
@@ -287,7 +287,7 @@ function function_594c75d0(params, var_c360c10f = undefined, var_a37a2188 = 0) {
   function_27b2aab7();
   self thread function_e1dad5f7(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(level.var_cbcc2ab7)) {
       if(![[level.var_cbcc2ab7]](player)) {
         continue;
@@ -312,7 +312,7 @@ function function_4a8d5852(params) {
   function_27b2aab7();
   self function_594c75d0(params);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(level.var_cbcc2ab7)) {
       if(![[level.var_cbcc2ab7]](player)) {
         continue;
@@ -384,7 +384,7 @@ function function_381f09f3() {
 }
 
 function function_92297dd0(var_c27b1726, var_c360c10f) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(distance2d(var_c27b1726, player.origin) <= 64) {
       if(player === var_c360c10f) {
         var_a37a2188 = 0;

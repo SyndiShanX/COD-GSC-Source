@@ -45,7 +45,7 @@ activation() {
   zm_ai_utility::function_594bb7bd(self);
 
   if(ispointonnavmesh(self.origin)) {
-    playsoundatposition(#"zmb_bgb_abh_teleport_out", self.origin);
+    playSoundAtPosition(#"zmb_bgb_abh_teleport_out", self.origin);
   }
 
   if(isDefined(level.var_5cfc800b)) {
@@ -64,9 +64,9 @@ activation() {
   if(isDefined(self.var_aba36467) && self.var_aba36467) {
     e_link = util::spawn_model("tag_origin", s_respawn_point.origin, s_respawn_point.angles);
     self setplayerangles(s_respawn_point.angles);
-    self linkto(e_link);
+    self linkTo(e_link);
   } else {
-    self setorigin(s_respawn_point.origin);
+    self setOrigin(s_respawn_point.origin);
     self setplayerangles(s_respawn_point.angles);
   }
 
@@ -215,7 +215,7 @@ get_best_spawnpoint(e_player) {
   }
 
   if(var_40b8a6a8 && isDefined(var_8afe96c9) && !positionwouldtelefrag(var_8afe96c9)) {
-    v_dir = vectornormalize(e_player.origin - var_8afe96c9);
+    v_dir = vectorNormalize(e_player.origin - var_8afe96c9);
     v_angles = vectortoangles(v_dir);
     var_5aff2c2c = spawnStruct();
     var_5aff2c2c.var_72d2300b = 1;
@@ -315,7 +315,7 @@ get_best_spawnpoint(e_player) {
 
   foreach(var_536bc51d in var_ed38ae06) {
     if(!positionwouldtelefrag(var_536bc51d)) {
-      v_dir = vectornormalize(e_player.origin - var_536bc51d);
+      v_dir = vectorNormalize(e_player.origin - var_536bc51d);
       v_angles = vectortoangles(v_dir);
       var_5aff2c2c = spawnStruct();
       var_5aff2c2c.var_72d2300b = 1;

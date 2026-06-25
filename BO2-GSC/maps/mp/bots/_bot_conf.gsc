@@ -27,7 +27,7 @@ bot_conf_think() {
 conf_get_tag_in_sight() {
   angles = self getplayerangles();
   forward = anglesToForward(angles);
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   closest = 999999;
 
   foreach(tag in level.dogtags) {
@@ -40,7 +40,7 @@ conf_get_tag_in_sight() {
       continue;
     }
     delta = tag.curorigin - self.origin;
-    delta = vectornormalize(delta);
+    delta = vectorNormalize(delta);
     dot = vectordot(forward, delta);
 
     if(dot < self.bot.fov && distsq > 40000) {

@@ -256,7 +256,7 @@ getmeleetargetpoint(var_0, var_1) {
         var_20 = 0;
 
         if(isDefined(var_9.claimer) && var_9.claimer != self) {
-          var_21 = vectornormalize(var_4 - var_9.claimer.origin) * self.radius * 2;
+          var_21 = vectorNormalize(var_4 - var_9.claimer.origin) * self.radius * 2;
           var_20 = distancesquared(var_9.claimer.origin + var_21, var_4);
         }
 
@@ -611,7 +611,7 @@ damagehitangle(var_0, var_1) {
   if(isDefined(var_0)) {
     var_3 = var_0 - self gettagorigin("J_SpineLower");
     var_3 = (var_3[0], var_3[1], 0);
-    var_4 = vectortoangles(vectornormalize(var_3));
+    var_4 = vectortoangles(vectorNormalize(var_3));
     var_2 = var_4[1];
   } else if(isDefined(var_1)) {
     var_4 = vectortoangles(var_1);

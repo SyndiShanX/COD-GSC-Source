@@ -19,7 +19,7 @@ function think() {
   if(isDefined(self.bot.var_5efe88e4)) {
     self botsetlookangles(self.bot.var_5efe88e4);
     self.bot.var_9931c7dc = 0;
-  } else if(self isplayinganimscripted() || self arecontrolsfrozen() || self.bot.flashed) {
+  } else if(self isplayinganimScripted() || self arecontrolsfrozen() || self.bot.flashed) {
     self.bot.var_9931c7dc = 0;
   } else if(self function_37d408b6()) {
     self function_23401de9();
@@ -80,7 +80,7 @@ function private function_9b25bbe5(traversal, aimpoint) {
   }
 
   eye = self.origin + (0, 0, self getplayerviewheight());
-  dir = vectornormalize(eye - aimpoint);
+  dir = vectorNormalize(eye - aimpoint);
   return vectordot(traversal.normal, dir) < 0.5;
 }
 
@@ -277,7 +277,7 @@ function private function_eb94f73e() {
 
   if(lengthsquared(movedir) > 0.0001) {
     eye = self.origin + (0, 0, self getplayerviewheight());
-    var_d9100e0 = eye + vectornormalize(movedir) * 128;
+    var_d9100e0 = eye + vectorNormalize(movedir) * 128;
     self function_b5460039(var_d9100e0, #"forward", (0, 1, 1));
     return;
   }

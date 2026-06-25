@@ -144,7 +144,7 @@ func_27D0(param_00, param_01, param_02) {
   if(isDefined(self) && isDefined(var_03)) {
     var_03 thread func_1908(param_02);
     var_03 setModel(param_00);
-    var_03 linkto(self, param_01, (0, 0, 0), (0, 0, 0));
+    var_03 linkTo(self, param_01, (0, 0, 0), (0, 0, 0));
     var_03 method_80B1();
     var_03 markvisibleinkillcam(0);
     self waittill("death");
@@ -1367,7 +1367,7 @@ func_34A9(param_00, param_01, param_02) {
   var_0B.var_9D65.var_68FB = var_0B;
   var_0B.var_0106 = spawn("script_model", var_0B.var_0116);
   var_0B.var_0106 setModel(var_0A);
-  var_0B.var_0106 rotateto((0, 0, 0), 0.1);
+  var_0B.var_0106 rotateTo((0, 0, 0), 0.1);
   var_0B.var_0106 method_805C();
   var_0B.var_0106 showtoclient(param_00);
   var_0B.var_7DFF = var_04;
@@ -1835,8 +1835,8 @@ func_99AD(param_00) {
   }
 
   var_02 = spawn("trigger_radius", self.var_0116, 0, 64, 64);
-  var_02 enablelinkto();
-  var_02 linkto(self);
+  var_02 enablelinkTo();
+  var_02 linkTo(self);
   var_02.var_01A5 = "dropped_knife";
   self.var_5AB2 = var_02;
   thread func_A94E();
@@ -2045,7 +2045,7 @@ func_3D43(param_00, param_01, param_02) {
   }
 
   var_0D = param_01 - var_0C;
-  var_0D = vectornormalize(var_0D);
+  var_0D = vectorNormalize(var_0D);
   var_0E = 0.5 * 1 + vectordot(var_0B, var_0D);
   param_00 notify("flashbang", param_01, var_09, var_0E, param_02);
 }
@@ -2383,7 +2383,7 @@ func_3BD8(param_00, param_01) {
   param_01.var_001D = param_01.var_001D * (0, 1, 1);
   param_01.var_0116 = param_01.var_0116 + var_04;
   if(isDefined(var_07)) {
-    param_01 linkto(var_07);
+    param_01 linkTo(var_07);
   }
 
   param_01 method_805B();
@@ -2417,24 +2417,24 @@ func_37F9(param_00) {
   self endon("disconnect");
   self endon("equipmentWatchUse");
   self endon("change_owner");
-  self.var_9D65 setcursorhint("HINT_NOICON");
+  self.var_9D65 setCursorHint("HINT_NOICON");
   if(self.var_A9E0 == "c4_mp" || self.var_A9E0 == "c4_zm") {
-    self.var_9D65 sethintstring(&"MP_PICKUP_C4");
+    self.var_9D65 setHintString(&"MP_PICKUP_C4");
   } else if(self.var_A9E0 == "claymore_mp") {
-    self.var_9D65 sethintstring(&"MP_PICKUP_CLAYMORE");
+    self.var_9D65 setHintString(&"MP_PICKUP_CLAYMORE");
   } else if(self.var_A9E0 == "bouncingbetty_mp" || self.var_A9E0 == "bouncingbetty_zm") {
-    self.var_9D65 sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
+    self.var_9D65 setHintString(&"MP_PICKUP_BOUNCING_BETTY");
   } else if(self.var_A9E0 == "s2_tactical_insertion_device_mp") {
-    self.var_9D65 sethintstring(&"MP_PICKUP_TI");
+    self.var_9D65 setHintString(&"MP_PICKUP_TI");
   } else if(self.var_A9E0 == "s2_tactical_insertion_cavalry_mp") {
-    self.var_9D65 sethintstring(&"DIVISIONS_DLC4_INSERTION_FLARE_PICKUP");
+    self.var_9D65 setHintString(&"DIVISIONS_DLC4_INSERTION_FLARE_PICKUP");
   }
 
   self.var_9D65 maps\mp\_utility::func_871E(param_00);
 }
 
 func_37F7(param_00) {
-  self.var_9D65 sethintstring("");
+  self.var_9D65 setHintString("");
   self.var_9D65 maps\mp\_utility::func_871D();
 }
 
@@ -2465,7 +2465,7 @@ func_3800(param_00, param_01) {
   self endon("disconnect");
   self endon("death");
   self endon("change_owner");
-  self.var_9D65 setcursorhint("HINT_NOICON");
+  self.var_9D65 setCursorHint("HINT_NOICON");
   func_37F9(param_00);
   self.var_9D65 thread maps\mp\_utility::func_A18D(param_00);
   if(isDefined(param_01) && param_01) {
@@ -2698,7 +2698,7 @@ func_4AF3(param_00, param_01) {
             var_05 = anglesToForward(var_04 getangles());
             var_06 = var_04 getEye();
             var_07 = self.var_0116 + (0, 0, 10);
-            var_08 = vectornormalize(var_07 - var_06);
+            var_08 = vectorNormalize(var_07 - var_06);
             var_09 = vectordot(var_05, var_08);
             if(var_09 > 0.55) {
               var_04 dodamage(1, self.var_0116, param_00, self, "MOD_GRENADE_SPLASH", param_01);
@@ -2865,13 +2865,13 @@ func_9A29(param_00, param_01, param_02, param_03) {
   func_8A4A(param_00, param_01, param_02, param_03);
   self.var_9D65 = spawn("script_origin", self.var_0116 + (0, 0, 25));
   self.var_9D65.var_0117 = self;
-  self.var_9D65 linkto(self);
+  self.var_9D65 linkTo(self);
   if(param_03 == "s2_tactical_insertion_cavalry_mp") {
     param_00 thread func_A931();
     thread func_3800(param_00, 0);
     func_37F9(param_00);
     self.var_3773 = spawn("script_origin", self.var_0116 + (0, 0, 25));
-    self.var_3773 linkto(self);
+    self.var_3773 linkTo(self);
     self.var_3773.var_0117 = self;
     thread maps\mp\perks\_perkfunctions::func_47EA(param_00);
   }
@@ -3028,10 +3028,10 @@ func_A6E2(param_00, param_01) {
 
 func_9A25(param_00) {
   self method_808C();
-  self setorigin(param_00.var_0116);
+  self setOrigin(param_00.var_0116);
   self method_8322();
   self.var_6E6B = 1;
-  self playerlinkto(param_00, undefined, 0, 180, 180, 180, 180, 1);
+  self playerlinkTo(param_00, undefined, 0, 180, 180, 180, 180, 1);
 }
 
 func_9A24(param_00) {
@@ -3138,7 +3138,7 @@ func_9A23() {
   var_03 method_805B();
   self.var_001D = var_03 gettagangles("tag_crate");
   self.var_0116 = var_03 gettagorigin("tag_crate");
-  self playerlinkto(var_03, "tag_crate", 0, 180, 180, 180, 180, 1);
+  self playerlinkTo(var_03, "tag_crate", 0, 180, 180, 180, 180, 1);
   self playerparachutesetactive(1);
   var_04 = spawn("script_model", var_03.var_0116);
   var_04.var_001D = var_03.var_001D;
@@ -3236,7 +3236,7 @@ func_499D(param_00, param_01) {
     var_02["normal"] = var_02["normal"] * -1;
   }
 
-  var_04 = vectornormalize(var_02["normal"]);
+  var_04 = vectorNormalize(var_02["normal"]);
   var_05 = vectortoangles(var_04);
   var_05 = var_05 + (90, 0, 0);
   var_06 = spawn("script_model", var_03);
@@ -3430,7 +3430,7 @@ func_8B85(param_00) {
     return 0;
   }
 
-  var_02 = vectornormalize(var_02);
+  var_02 = vectorNormalize(var_02);
   var_05 = vectordot(var_02, var_03);
   return var_05 > level.var_2330;
 }
@@ -3917,7 +3917,7 @@ func_A9C3(param_00, param_01, param_02, param_03) {
     return 1;
   }
 
-  var_06 = vectornormalize(var_05);
+  var_06 = vectorNormalize(var_05);
   var_04 = param_00 + (var_06[0] * param_02, var_06[1] * param_02, var_06[2] * param_02);
   var_07 = bulletTrace(var_04, param_01, 0, param_03);
   if(getdvarint("scr_damage_debug") != 0 || getdvarint("scr_debugMines") != 0) {
@@ -4642,7 +4642,7 @@ func_8A2E(param_00, param_01) {
   self.var_5A30 = (0, 0, 4);
   self.var_5A2C = spawn("script_model", self.var_0116 + self.var_5A30);
   self.var_5A2C setscriptmoverkillcam("explosive");
-  self.var_5A2C linkto(self);
+  self.var_5A2C linkTo(self);
   param_00.var_37FB = common_scripts\utility::func_0FA0(param_00.var_37FB);
   if(param_00.var_37FB.size >= level.var_6092) {
     if(maps\mp\_utility::func_585F() && isDefined(param_00.var_37FB[0].var_9D65)) {
@@ -4835,8 +4835,8 @@ func_61D2() {
   self notify("remove");
   self delete();
   var_02 = var_00.var_0116 + (0, 0, 64);
-  var_00 moveto(var_02, 0.7, 0, 0.65);
-  var_00.var_5A2C moveto(var_02 + var_00.var_5A30, 0.7, 0, 0.65);
+  var_00 moveTo(var_02, 0.7, 0, 0.65);
+  var_00.var_5A2C moveTo(var_02 + var_00.var_5A30, 0.7, 0, 0.65);
   var_00 rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   var_00 thread func_74DD();
   wait(0.65);
@@ -5316,7 +5316,7 @@ func_905F(param_00, param_01, param_02, param_03, param_04) {
   var_06 thread func_3971(param_01);
   var_07 = self getlinkedparent();
   if(isDefined(var_07)) {
-    var_06 linkto(var_07);
+    var_06 linkTo(var_07);
   }
 
   return var_06;
@@ -5488,7 +5488,7 @@ func_61F9(param_00, param_01) {
     func_8A2E(param_00, param_01);
     self.var_9D65 = spawn("script_origin", self.var_0116 + (0, 0, 25));
     self.var_9D65.var_0117 = self;
-    self.var_9D65 linkto(self);
+    self.var_9D65 linkTo(self);
     thread func_3800(param_00, 0);
     param_00 thread func_61FE(self);
     param_00 thread func_61FD(self);
@@ -6099,7 +6099,7 @@ func_62FE() {
     self waittill("dive_land");
     self.var_5B93 = gettime();
     self setclientomnvar("ui_fullscreen_dirt_left", 1);
-    self playrumbleonentity("defaultweapon_fire");
+    self playRumbleOnEntity("defaultweapon_fire");
   }
 }
 
@@ -6126,7 +6126,7 @@ func_6303() {
     }
 
     if(var_00 == "none" || self method_817F(var_00) == 0) {
-      self playrumbleonentity("defaultweapon_fire");
+      self playRumbleOnEntity("defaultweapon_fire");
     }
   }
 }
@@ -6145,7 +6145,7 @@ func_6304() {
     }
 
     if(var_00 == "none" || self method_817F(var_00) == 0) {
-      self playrumbleonentity("defaultweapon_fire");
+      self playRumbleOnEntity("defaultweapon_fire");
     }
   }
 }

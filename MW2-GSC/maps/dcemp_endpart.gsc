@@ -93,7 +93,7 @@ tunnels_main() {
 }
 
 tunnels_end() {
-  trigger = getent("tunnels_teleport_trigger", "targetname");
+  trigger = getEnt("tunnels_teleport_trigger", "targetname");
   trigger waittill("trigger");
 
   wait 1;
@@ -117,7 +117,7 @@ tunnels_rain() {
 tunnels_door_scene() {
   level endon("tunnels_teleport");
 
-  anim_ent = getent("tunnel_door_animent", "targetname");
+  anim_ent = getEnt("tunnel_door_animent", "targetname");
   door_ent = tunnels_door_setup(anim_ent);
 
   flag_wait("tunnels_main");
@@ -152,17 +152,17 @@ tunnels_door_scene_interrupt(anim_ent) {
   flag_wait("tunnels_teleport");
   anim_ent notify("foley_idle_end");
 
-  level.dunn anim_stopanimscripted();
-  level.foley anim_stopanimscripted();
+  level.dunn anim_stopanimScripted();
+  level.foley anim_stopanimScripted();
 }
 
 tunnels_door_setup(anim_ent) {
-  anim_ent_2 = getent("tunnel_door_animent_2", "targetname");
+  anim_ent_2 = getEnt("tunnel_door_animent_2", "targetname");
 
   door_ent = spawn_anim_model("tunnel_door", anim_ent.origin);
 
-  brush_door = getent("tunnel_door", "targetname");
-  brush_door linkto(door_ent);
+  brush_door = getEnt("tunnel_door", "targetname");
+  brush_door linkTo(door_ent);
 
   brush_door connectpaths();
 
@@ -174,10 +174,10 @@ tunnels_door_setup(anim_ent) {
 tunnels_friendlies_teleport() {
   flag_wait("tunnels_door_teleport");
 
-  foley_dest = getstruct("tunnels_door_foley", "script_noteworthy");
-  dunn_dest = getstruct("tunnels_door_dunn", "script_noteworthy");
+  foley_dest = getStruct("tunnels_door_foley", "script_noteworthy");
+  dunn_dest = getStruct("tunnels_door_dunn", "script_noteworthy");
 
-  volume = getent("tunnels_door_volume", "targetname");
+  volume = getEnt("tunnels_door_volume", "targetname");
   if(!level.foley IsTouching(volume)) {
     level.foley ForceTeleport(foley_dest.origin, foley_dest.angles);
   }
@@ -220,7 +220,7 @@ tunnels_dialogues() {
 
 tunnels_dead_guy() {
   self remove_drone_weapon();
-  animent = getent(self.target, "targetname");
+  animent = getEnt(self.target, "targetname");
   animent anim_generic_first_frame(self, "death_sitting_pose_v1");
 
   flag_wait("tunnels_dunn_anim_end");
@@ -234,7 +234,7 @@ tunnels_dead_check() {
   self.animname = "dead_guy";
   self remove_drone_weapon();
 
-  animent = getent(self.target, "targetname");
+  animent = getEnt(self.target, "targetname");
   animent thread anim_loop_solo(self, "hunted_woundedhostage_idle_start");
 
   level thread tunnels_dead_check_clear(self, animent);
@@ -247,7 +247,7 @@ tunnels_dead_check() {
   level.dunn walkdist_zero();
 
   animent anim_reach_solo(level.dunn, "hunted_woundedhostage_check");
-  animent anim_stopanimscripted();
+  animent anim_stopanimScripted();
 
   guys = [];
   guys[0] = level.dunn;
@@ -267,13 +267,13 @@ tunnels_dead_check_clear(drone, animent) {
   level endon("tunnels_dead_check_done");
 
   flag_wait("tunnels_dunn_anim_end");
-  level.dunn anim_stopanimscripted();
+  level.dunn anim_stopanimScripted();
   if(flag("tunnels_main")) {
     level.dunn enable_ai_color();
   }
 
-  drone anim_stopanimscripted();
-  animent anim_stopanimscripted();
+  drone anim_stopanimScripted();
+  animent anim_stopanimScripted();
   drone delete();
 }
 

@@ -12,13 +12,13 @@ force_spawn() {
 
 bog_backhalf_init() {
   level.tankexplosion_fx = loadfx("fx\explosions\javelin_explosion");
-  level.abrams = getent("abrams", "targetname");
+  level.abrams = getEnt("abrams", "targetname");
   level.abrams.godmode = 1;
   level.abrams.forwardent = spawn("script_origin", level.abrams gettagorigin("tag_flash"));
-  level.abrams.forwardent linkto(level.abrams);
-  var_0 = getent("abrams_top_clip", "targetname");
-  var_0 linkto(level.abrams, "tag_turret", (-30, 0, 10), var_0.angles - level.abrams gettagangles("tag_turret") + (0, 7, 0));
-  level.zpu = getent("zpu", "targetname");
+  level.abrams.forwardent linkTo(level.abrams);
+  var_0 = getEnt("abrams_top_clip", "targetname");
+  var_0 linkTo(level.abrams, "tag_turret", (-30, 0, 10), var_0.angles - level.abrams gettagangles("tag_turret") + (0, 7, 0));
+  level.zpu = getEnt("zpu", "targetname");
   level.tankdefenderpop = 0;
   level.tankatkdead = 0;
   level.totalcount = 0;
@@ -47,7 +47,7 @@ bog_backhalf_init() {
   level.tankencroachrate = 0.8;
   level.tankencroachpausetime = 7;
   level.defensesuccessratio = 0.87;
-  level.beacon = getent("beacon", "targetname");
+  level.beacon = getEnt("beacon", "targetname");
   level.beacon.origin = level.beacon.origin + (0, 0, 2.85);
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "final_bldg_fired_upon", maps\_spawner::kill_spawnernum, 1008);
   common_scripts\utility::array_thread(getEntArray("tank_defender", "script_noteworthy"), maps\_utility::add_spawn_function, ::tank_defender_spawn_setup);
@@ -75,15 +75,15 @@ start_bog_backhalf() {
   thread cobra_bldg_mg();
   thread cobra_sequence();
   thread dialogue();
-  var_0 = getent("badplace_fires", "targetname");
+  var_0 = getEnt("badplace_fires", "targetname");
   badplace_cylinder("hill_fires", -1, var_0.origin, var_0.radius, var_0.height, "allies");
 }
 
 start_zpu() {
   soundscripts\_snd::snd_message("start_zpu_checkpoint");
   common_scripts\utility::flag_set("zpu_orders_given");
-  var_0 = getent("zpu_player_org", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("zpu_player_org", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   thread objectives();
   thread bog_a_backhalf_autosaves();
@@ -120,17 +120,17 @@ start_cobras() {
 }
 
 start_cobras_pos() {
-  var_0 = getent("start_cobras_player", "targetname");
-  level.player setorigin(var_0.origin);
-  var_1 = getent("start_cobras_price", "targetname");
-  level.price = getent("price", "targetname");
+  var_0 = getEnt("start_cobras_player", "targetname");
+  level.player setOrigin(var_0.origin);
+  var_1 = getEnt("start_cobras_price", "targetname");
+  level.price = getEnt("price", "targetname");
   level.price teleport(var_1.origin);
 }
 
 start_end() {
   soundscripts\_snd::snd_message("start_end_checkpoint");
   level.player setplayerangles((0, 80, 0));
-  level.player setorigin((4968, 1528, -12320));
+  level.player setOrigin((4968, 1528, -12320));
   var_0 = getaiarray();
   common_scripts\utility::array_thread(var_0, maps\_utility::set_ignoreme, 1);
   level.abrams thread tank_setup();
@@ -139,10 +139,10 @@ start_end() {
   wait 0.05;
   level notify("begin_sunrise_after_tank_defend", 1);
   abrams_gets_drawing();
-  level.price = getent("price", "targetname");
-  var_2 = getent("price_spawner", "targetname");
+  level.price = getEnt("price", "targetname");
+  var_2 = getEnt("price_spawner", "targetname");
   level.price teleport(var_2.origin);
-  var_3 = getent("mark_spawner", "targetname") stalingradspawn();
+  var_3 = getEnt("mark_spawner", "targetname") stalingradspawn();
   level.mark = var_3;
   maps\_utility::spawn_failed(var_3);
   maps\_utility::spawn_failed(level.price);
@@ -157,7 +157,7 @@ start_end() {
   thread ending_sequence();
   wait 0.05;
   level.player setplayerangles((0, 80, 0));
-  level.player setorigin((4777, 1491, 20));
+  level.player setOrigin((4777, 1491, 20));
 }
 
 temp_friendly_boost() {
@@ -213,7 +213,7 @@ tank_defender_deathnotify() {
 }
 
 tank_defender_deathmonitor() {
-  var_0 = getent("tank_battle_spawner", "targetname");
+  var_0 = getEnt("tank_battle_spawner", "targetname");
   var_0 waittill("trigger");
   wait 10;
   level notify("detpack_rush_flare");
@@ -310,10 +310,10 @@ bog_a_backhalf_autosaves() {
   maps\_utility::autosave_by_name("tank_defense_finished");
 
   if(!common_scripts\utility::flag("zpus_destroyed")) {
-    var_0 = getent("zpuMidSaveTrig", "targetname");
+    var_0 = getEnt("zpuMidSaveTrig", "targetname");
     var_0 waittill("trigger");
     maps\_utility::autosave_by_name("zpu_midpoint_approach");
-    var_1 = getent("zpu_autosave", "targetname");
+    var_1 = getEnt("zpu_autosave", "targetname");
     var_1 waittill("trigger");
     maps\_utility::autosave_by_name("zpu_dont_blow_yourself_up");
   }
@@ -398,7 +398,7 @@ objectives() {
   common_scripts\utility::flag_wait("zpus_destroyed");
   common_scripts\utility::flag_clear("aa_zpu");
   objective_state(6, "done");
-  var_0 = getent("southern_area_objective", "targetname");
+  var_0 = getEnt("southern_area_objective", "targetname");
   objective_add(7, "active", &"BOG_A_SECURE_THE_SOUTHERN_SECTOR", var_0.origin);
   objective_indentlevel(7, 1);
   objective_current(7);
@@ -506,8 +506,8 @@ cobra_sequence() {
   var_0 = spawn("script_model", level.beacon.origin + (0, 0, -3));
   var_0 setModel("com_night_beacon_obj");
   common_scripts\utility::flag_set("beacon_ready_to_use");
-  var_1 = getent("beaconTrig", "targetname");
-  var_1 sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTBEACON");
+  var_1 = getEnt("beaconTrig", "targetname");
+  var_1 setHintString(&"SCRIPT_PLATFORM_HINT_PLANTBEACON");
   var_1 waittill("trigger");
   level.player thread maps\_utility::play_sound_on_entity("scn_bog_a_beacon_plant");
   var_1 delete();
@@ -563,7 +563,7 @@ cobra_flightplan(var_0) {
   var_3 = undefined;
 
   if(isDefined(self.target)) {
-    var_3 = getent(self.target, "targetname");
+    var_3 = getEnt(self.target, "targetname");
   } else {}
 
   var_4 = [];
@@ -572,7 +572,7 @@ cobra_flightplan(var_0) {
     var_4[var_4.size] = var_3;
 
     if(isDefined(var_3.target)) {
-      var_3 = getent(var_3.target, "targetname");
+      var_3 = getEnt(var_3.target, "targetname");
       continue;
     }
 
@@ -674,7 +674,7 @@ cobra_fire(var_0, var_1) {
   switch (var_1) {
     case "alpha":
       common_scripts\_exploder::exploder(500);
-      var_2 = getent("ffar_1001", "targetname");
+      var_2 = getEnt("ffar_1001", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 1, var_2);
       thread cobra_missile_fired_earthquake();
       thread cobra_building_damage_fx(1001);
@@ -695,11 +695,11 @@ cobra_fire(var_0, var_1) {
 
       wait 0.5;
       common_scripts\utility::flag_set("final_bldg_fired_upon");
-      var_2 = getent("ffar_1002", "targetname");
+      var_2 = getEnt("ffar_1002", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 2, var_2);
       thread cobra_missile_fired_earthquake(1);
       thread cobra_building_damage_fx(1002);
-      var_2 = getent("ffar_1003", "targetname");
+      var_2 = getEnt("ffar_1003", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 2, var_2);
       thread cobra_missile_fired_earthquake(1);
       thread cobra_building_damage_fx(1003);
@@ -710,34 +710,34 @@ cobra_fire(var_0, var_1) {
 
       break;
     case "gamma":
-      var_2 = getent("ffar_1008", "targetname");
+      var_2 = getEnt("ffar_1008", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 2, var_2);
       thread cobra_missile_fired_earthquake(1);
       thread cobra_building_damage_fx(1008);
       break;
     case "delta":
-      var_2 = getent("ffar_1000", "targetname");
+      var_2 = getEnt("ffar_1000", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 2, var_2);
       thread cobra_missile_fired_earthquake(1);
       thread cobra_building_damage_fx(1000);
       wait 2;
-      var_2 = getent("ffar_1004", "targetname");
+      var_2 = getEnt("ffar_1004", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 1, var_2);
       thread cobra_missile_fired_earthquake();
       thread cobra_building_damage_fx(1004);
       wait 2;
-      var_2 = getent("ffar_1005", "targetname");
+      var_2 = getEnt("ffar_1005", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 1, var_2);
       thread cobra_missile_fired_earthquake();
       thread cobra_building_damage_fx(1005);
       break;
     case "zeta":
-      var_2 = getent("ffar_1007", "targetname");
+      var_2 = getEnt("ffar_1007", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 2, var_2);
       thread cobra_missile_fired_earthquake(1);
       thread cobra_building_damage_fx(1007);
       wait 3;
-      var_2 = getent("ffar_1006", "targetname");
+      var_2 = getEnt("ffar_1006", "targetname");
       maps\_helicopter_globals::fire_missile("ffar_bog_a_lite", 2, var_2);
       thread cobra_missile_fired_earthquake(1);
       thread cobra_building_damage_fx(1006);
@@ -755,15 +755,15 @@ cobra_missile_fired_earthquake(var_0) {
   earthquake(0.3, 1.0, self.origin, 4000);
 
   if(isDefined(var_0) && var_0 == 1) {
-    level.player playrumbleonentity("generic_attack_heavy_500");
+    level.player playRumbleOnEntity("generic_attack_heavy_500");
   } else {
-    level.player playrumbleonentity("generic_attack_medium_500");
+    level.player playRumbleOnEntity("generic_attack_medium_500");
   }
 }
 
 tank_defense_enforcement() {
-  var_0 = getent("tank_defense_warning", "targetname");
-  var_1 = getent("tank_defense_failed", "targetname");
+  var_0 = getEnt("tank_defense_warning", "targetname");
+  var_1 = getEnt("tank_defense_failed", "targetname");
   var_0 thread tank_defense_warning();
   var_1 thread tank_defense_failure();
 }
@@ -832,7 +832,7 @@ tank_turret_slewing() {
       var_1 = randomint(var_0.size);
       continue;
     } else {
-      self setturrettargetent(var_0[var_1]);
+      self setturrettargetEnt(var_0[var_1]);
       self waittill("turret_on_target");
       wait(randomfloatrange(1, 2));
       var_3++;
@@ -872,7 +872,7 @@ zpu_battle_init() {
   thread zpu_battle_friendly_advance();
   var_0 = getnode("zpu_badplace", "targetname");
   badplace_cylinder("zpuNoAllies", -1, var_0.origin, var_0.radius, var_0.height, "allies");
-  var_1 = getent("zpu_battle_seed", "targetname");
+  var_1 = getEnt("zpu_battle_seed", "targetname");
   wait 2;
   var_1 notify("trigger");
 }
@@ -892,14 +892,14 @@ zpu_battle_trigger_control() {
   var_1 = undefined;
 
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
   }
 
   while(isDefined(var_1)) {
     var_0[var_0.size] = var_1;
 
     if(isDefined(var_1.target)) {
-      var_1 = getent(var_1.target, "targetname");
+      var_1 = getEnt(var_1.target, "targetname");
       continue;
     }
 
@@ -914,7 +914,7 @@ zpu_battle_trigger_control() {
 }
 
 zpu_c4() {
-  var_0 = getent("zpu", "targetname");
+  var_0 = getEnt("zpu", "targetname");
   var_0 maps\_c4::c4_location("tag_c4", (0, 0, 0), (0, 0, 0));
   var_0 waittill("c4_detonation");
   var_0 notify("death");
@@ -928,7 +928,7 @@ zpu_c4() {
 }
 
 zpu_dialogue() {
-  var_0 = getent("plantc4_dialogue", "targetname");
+  var_0 = getEnt("plantc4_dialogue", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("activate_final_bldg");
   var_1 = getnode("zpuTalkingFriendly", "targetname");
@@ -942,7 +942,7 @@ zpu_dialogue() {
   thread zpu_interface();
   maps\_utility::autosave_by_name("zpu_c4_planted");
   var_3 maps\_anim::anim_single_queue(var_3, "goodjob");
-  var_4 = getent("zpu", "targetname");
+  var_4 = getEnt("zpu", "targetname");
   var_5 = length(level.player.origin - var_4.origin);
 
   while(var_5 <= level.zpublastradius * 1.05) {
@@ -975,7 +975,7 @@ zpu_interface() {
 dialogue() {
   if(!common_scripts\utility::flag("tank_defense_completed")) {
     thread dialogue_south_tank_attack();
-    var_0 = getent("backhalf_dialogue", "targetname");
+    var_0 = getEnt("backhalf_dialogue", "targetname");
     var_0 waittill("trigger");
     maps\_utility::radio_dialogue_queue("alphasixstatus");
     maps\_utility::battlechatter_on("allies");
@@ -1036,7 +1036,7 @@ abrams_gets_drawing() {
 }
 
 abrams_turn_straight() {
-  level.abrams setturrettargetent(level.abrams.forwardent);
+  level.abrams setturrettargetEnt(level.abrams.forwardent);
 }
 
 zpu_player_followers() {

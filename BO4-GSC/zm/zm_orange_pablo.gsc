@@ -23,7 +23,7 @@
 #namespace zm_orange_pablo;
 
 init() {
-  level.pablo_npc = getent("pablo_npc", "targetname");
+  level.pablo_npc = getEnt("pablo_npc", "targetname");
   level.pablo_npc.name = "herm";
   level.pablo_npc.isspeaking = 0;
   level.pablo_npc.var_5b6ebfd0 = 0;
@@ -83,11 +83,11 @@ init() {
   level.pablo_npc.var_cb3ed98f[14] = {
     #var_fcab5f41: #"hash_38aad0b1eae4093a", #var_e7b75754: #"", #var_23d421c1: undefined, #n_obj: 3
   };
-  level.npc_pablo = spawner::simple_spawn_single(getent("pablo_spawner", "targetname"));
+  level.npc_pablo = spawner::simple_spawn_single(getEnt("pablo_spawner", "targetname"));
 
   while(!isDefined(level.npc_pablo)) {
     waitframe(1);
-    level.npc_pablo = spawner::simple_spawn_single(getent("pablo_spawner", "targetname"));
+    level.npc_pablo = spawner::simple_spawn_single(getEnt("pablo_spawner", "targetname"));
   }
 
   level.npc_pablo val::set(#"plot_npc", "takedamage", 0);
@@ -511,7 +511,7 @@ function_6248ba90(e_player) {
   }
 
   if(var_832ffcd4) {
-    self sethintstring(zm_utility::function_d6046228(s_info.str_hint, s_info.var_306b9dd6));
+    self setHintString(zm_utility::function_d6046228(s_info.str_hint, s_info.var_306b9dd6));
     return 1;
   }
 
@@ -530,7 +530,7 @@ function_d7e79438() {
   }
 
   level.pablo_npc notify(#"dumbwaiter_interact_started");
-  playsoundatposition(#"hash_512bec1d554e89f1", self.origin);
+  playSoundAtPosition(#"hash_512bec1d554e89f1", self.origin);
   level.pablo_npc thread function_39614d4b();
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   self.s_unitrigger = undefined;
@@ -538,6 +538,6 @@ function_d7e79438() {
 
 function_30a02731() {
   self endon(#"death");
-  playsoundatposition(#"hash_512bec1d554e89f1", self.origin);
+  playSoundAtPosition(#"hash_512bec1d554e89f1", self.origin);
   level.pablo_npc thread function_39614d4b();
 }

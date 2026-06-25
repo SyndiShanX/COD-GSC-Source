@@ -71,7 +71,7 @@ updatedevsettingszm() {
         }
 
         level.players[0] setplayerangles(averageangles);
-        level.players[0] setorigin(averageorigin);
+        level.players[0] setOrigin(averageorigin);
         wait 0.05;
         setDvar("r_streamDumpDistance", "2");
       }

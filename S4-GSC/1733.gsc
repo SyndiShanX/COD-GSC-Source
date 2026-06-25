@@ -215,24 +215,24 @@ _id_FE1B(var_0, var_1, var_2) {
     }
 
     if(istrue(var_2)) {
-      do_stance_based_linkto(var_0, var_1);
+      do_stance_based_linkTo(var_0, var_1);
       return;
     }
 
-    do_stance_based_linkto(var_0);
+    do_stance_based_linkTo(var_0);
     return;
   } else {
     self _meth_80F9(var_0.origin, var_0.angles, 10000);
-    do_stance_based_linkto(var_0);
+    do_stance_based_linkTo(var_0);
   }
 }
 
-do_stance_based_linkto(var_0, var_1) {
+do_stance_based_linkTo(var_0, var_1) {
   if(!isDefined(var_0._id_ADB4)) {
     if(isDefined(var_1)) {
-      self linkto(var_0, var_1);
+      self linkTo(var_0, var_1);
     } else {
-      self linkto(var_0);
+      self linkTo(var_0);
     }
   } else if(isDefined(var_1))
     self _meth_820E(var_0, var_1);

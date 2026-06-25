@@ -654,7 +654,7 @@ turret_modifydamage(var_0, var_1, var_2, var_3) {
   var_4 = maps\mp\gametypes\_damage::handleapdamage(var_1, var_2, var_4, var_0);
 
   if(isDefined(self.owner) && var_4 > 0) {
-    self.owner playrumbleonentity("damage_heavy");
+    self.owner playRumbleOnEntity("damage_heavy");
     self.owner thread maps\mp\killstreaks\_aerial_utility::playershowstreakstaticfordamage();
   }
 
@@ -723,7 +723,7 @@ startusingremoteturret(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self.owner;
 
   if(!var_4) {
-    var_5 playerlinkto(self.remoteent);
+    var_5 playerlinkTo(self.remoteent);
     var_5 playerlinkedoffsetenable();
     var_5 maps\mp\_utility::_giveweapon(level.turretsettings[self.turrettype].laptopinfo);
     var_5 switchtoweapon(level.turretsettings[self.turrettype].laptopinfo);
@@ -1486,8 +1486,8 @@ turret_setpickuphints() {
   self notify("turretClearPickupHints");
   self endon("turretClearPickupHints");
   self.pickupent makeusable();
-  self.pickupent sethintstring(level.turretsettings[self.turrettype].hintpickup);
-  self.pickupent setcursorhint("HINT_NOICON");
+  self.pickupent setHintString(level.turretsettings[self.turrettype].hintpickup);
+  self.pickupent setCursorHint("HINT_NOICON");
   self.pickupent sethintstringvisibleonlytoowner(1);
 
   if(self.rippable) {
@@ -1514,7 +1514,7 @@ turret_clearpickuphints() {
     return;
   }
   self.pickupent makeunusable();
-  self.pickupent sethintstring("");
+  self.pickupent setHintString("");
   self.pickupent setsecondaryhintstring("");
   self.pickupent sethintstringvisibleonlytoowner(0);
 }
@@ -1686,7 +1686,7 @@ turret_firerocket(var_0) {
   if(!var_6 && var_0) {
     return;
   }
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_7 = magicbullet("killstreakmahem_mp", var_1, var_3, self.owner);
 
   if(var_0) {
@@ -1713,7 +1713,7 @@ turret_firerocket(var_0) {
 spawnmuzzleflashent(var_0, var_1, var_2) {
   var_3 = spawn("script_model", (0, 0, 0));
   var_3 setModel("tag_origin");
-  var_3 linkto(var_0, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_0, var_1, (0, 0, 0), (0, 0, 0));
   var_3 hide();
 
   foreach(var_5 in level.players) {
@@ -2029,7 +2029,7 @@ turretdisruptorcanhurtplayer(var_0, var_1, var_2) {
     return 0;
   }
 
-  var_5 = vectornormalize(var_0.origin - self.origin);
+  var_5 = vectorNormalize(var_0.origin - self.origin);
   var_6 = vectordot(var_2, var_5);
 
   if(var_6 < level.turretdisruptordetectdot) {

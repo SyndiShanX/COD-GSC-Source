@@ -130,7 +130,7 @@ aud_open_door_meeting() {
     common_scripts\utility::array_thread(level.aud.first_door_open_trigger, common_scripts\utility::trigger_on);
   }
 
-  var_0 = getent("ambient_emitter_01", "targetname");
+  var_0 = getEnt("ambient_emitter_01", "targetname");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("emt_blackout_ambient_transition");
 }
 
@@ -187,7 +187,7 @@ aud_gaz_open_door_rescue() {
     level.aud.gaz_door_open_trigger common_scripts\utility::trigger_on();
   }
 
-  var_0 = getent("ambient_emitter_02", "targetname");
+  var_0 = getEnt("ambient_emitter_02", "targetname");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("emt_blackout_ambient_transition");
 }
 
@@ -199,7 +199,7 @@ start_player_gets_on_heli_mix() {
 }
 
 aud_start_power_off_sfx() {
-  var_0 = getent("exterior_light_turn_power_off_sfx", "targetname");
+  var_0 = getEnt("exterior_light_turn_power_off_sfx", "targetname");
 
   if(isDefined(var_0)) {
     var_0 thread maps\_utility::play_sound_on_entity("scn_blackout_power_down");
@@ -248,6 +248,6 @@ disable_azm_trigger_before_meeting_door_open() {
 }
 
 disable_azm_trigger_before_gaz_open_door_for_rescue() {
-  level.aud.gaz_door_open_trigger = getent("flag_before_gaz_open_door_for_rescue", "script_noteworthy");
+  level.aud.gaz_door_open_trigger = getEnt("flag_before_gaz_open_door_for_rescue", "script_noteworthy");
   level.aud.gaz_door_open_trigger common_scripts\utility::trigger_off();
 }

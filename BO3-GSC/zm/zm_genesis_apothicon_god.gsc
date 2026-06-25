@@ -64,7 +64,7 @@ function function_3dd4e95e(str_rumble) {
   foreach(e_player in level.activeplayers) {
     n_dist = distancesquared(e_player.origin, self.origin);
     if(n_dist < n_max_dist_sq) {
-      self playrumbleonentity(str_rumble);
+      self playRumbleOnEntity(str_rumble);
     }
   }
 }
@@ -117,7 +117,7 @@ function function_d5419c08() {
       self waittill("trigger_activated", e_player);
     }
     if(!level flag::get("apothicon_near_trap")) {}
-    playsoundatposition("zmb_deathray_activate_console", self.origin);
+    playSoundAtPosition("zmb_deathray_activate_console", self.origin);
     exploder::exploder("fxexp_361");
     level function_73f1531();
     e_player notify("gen_pos");
@@ -136,19 +136,19 @@ function function_a15e0860(s_unitrigger) {
 
 function function_f94d9124(e_player) {
   if(level flag::get("apothicon_trapped") || !level flag::get("apothicon_near_trap")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_GENESIS_APOTHICON_TRAP_READY");
+  self setHintString(&"ZM_GENESIS_APOTHICON_TRAP_READY");
   return true;
 }
 
 function function_d9879865(e_player) {
   if(level flag::get("apothicon_trapped")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_GENESIS_APOTHICON_DOOR");
+  self setHintString(&"ZM_GENESIS_APOTHICON_DOOR");
   return true;
 }
 
@@ -165,7 +165,7 @@ function function_65305393() {
 }
 
 function function_d6eeedf0(n_state) {
-  var_329d83b2 = getent("tesla_trap_console", "targetname");
+  var_329d83b2 = getEnt("tesla_trap_console", "targetname");
   if(n_state == 0) {
     var_329d83b2 showpart("j_flash_off");
     var_329d83b2 hidepart("j_flash_on");
@@ -188,7 +188,7 @@ function function_81a3e18f(b_on) {
 }
 
 function function_78f98ad9() {
-  var_329d83b2 = getent("tesla_trap_console", "targetname");
+  var_329d83b2 = getEnt("tesla_trap_console", "targetname");
   var_329d83b2 function_81a3e18f(1);
   var_329d83b2 function_d6eeedf0(1);
   var_329d83b2 playSound("zmb_deathray_console_ready");
@@ -216,10 +216,10 @@ function function_b89b1260() {
   level endon("hash_b89b1260");
   level endon("apothicon_trapped");
   var_217ba6c8 = struct::get("apothicon_approach_tesla", "targetname");
-  var_329d83b2 = getent("tesla_trap_console", "targetname");
+  var_329d83b2 = getEnt("tesla_trap_console", "targetname");
   while(true) {
     level waittill("hash_864571db");
-    playsoundatposition("evt_apothicon_alarm", (714, 303, 91));
+    playSoundAtPosition("evt_apothicon_alarm", (714, 303, 91));
     level flag::set("apothicon_near_trap");
     level thread function_78f98ad9();
     level waittill("hash_53fb6fd3");

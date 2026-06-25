@@ -18,7 +18,7 @@ init() {
 
   precacheAnims();
 
-  level.riot_shield_collision = GetEnt("riot_shield_collision", "targetname");
+  level.riot_shield_collision = getEnt("riot_shield_collision", "targetname");
 
   level._effect["riot_shield_shock_fx"] = LoadFX("vfx/explosion/riotshield_stun");
   level._effect["riot_shield_deploy_smoke"] = LoadFX("vfx/smoke/riotshield_deploy_smoke");
@@ -522,7 +522,7 @@ spawnRiotshieldCollision(origin, angles, shield_ent) {
   coll_ent.owner = self;
   coll_ent.team = self.team;
   coll_ent CloneBrushmodelToScriptModel(level.riot_shield_collision);
-  coll_ent DisconnectPaths();
+  coll_ent disconnectPaths();
 
   return coll_ent;
 }

@@ -116,7 +116,7 @@ function function_9d0a9f4e(entity, awareness_event) {
     return false;
   }
 
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     if(getdvarint(#"awareness_debug", 0) > 1) {
       record3dtext("<dev string:x69>", (start_pos + awareness_event.position) / 2, var_a6373be0, "<dev string:x38>", entity);
     }
@@ -427,7 +427,7 @@ function function_fa6e010d() {
         }
       }
 
-      if(getplayers(undefined, self.origin, getdvarint(#"hash_40e792a0b1b00e89", 5000)).size) {
+      if(getPlayers(undefined, self.origin, getdvarint(#"hash_40e792a0b1b00e89", 5000)).size) {
         waitframe(var_4e686deb);
       } else {
         self waittilltimeout(1, #"hash_7a49c65fe733bb0b", #"state_changed", #"hash_1ea32021fdf52a8b");

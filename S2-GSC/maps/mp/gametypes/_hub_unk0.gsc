@@ -8,15 +8,15 @@ func_21C7() {
   var_01 = getEntArray("fte_npc_collision", "targetname");
   level.var_836A = getEntArray("fte_section_wall", "targetname");
   foreach(var_03 in var_00) {
-    var_03 setplayercollision(self, 0);
+    var_03 setPlayerCollision(self, 0);
   }
 
   foreach(var_03 in var_01) {
-    var_03 setplayercollision(self, 0);
+    var_03 setPlayerCollision(self, 0);
   }
 
   foreach(var_03 in level.var_836A) {
-    var_03 setplayercollision(self, 0);
+    var_03 setPlayerCollision(self, 0);
   }
 
   if(!maps\mp\gametypes\_hud_util::shoulddohubtutorialflow()) {
@@ -605,7 +605,7 @@ func_2D39() {
 
   level.var_3EF9 = undefined;
   foreach(var_04 in level.var_836A) {
-    var_04 setplayercollision(self, 0);
+    var_04 setPlayerCollision(self, 0);
   }
 }
 
@@ -674,7 +674,7 @@ func_7FAE() {
   var_17 func_54C4("usa_tank_sherman_gun75mm_01");
   for(;;) {
     self method_808C();
-    self setorigin(var_01);
+    self setOrigin(var_01);
     self freezecontrols(1);
     self method_81E2(var_02, "tag_origin_animated");
     self method_8483("mp_hub_allies_fte", 0);
@@ -723,7 +723,7 @@ func_7FAE() {
       break;
     }
 
-    self setorigin(function_0236(var_04.var_0116));
+    self setOrigin(function_0236(var_04.var_0116));
     self setangles((0, 90, 0));
     var_04 method_805C();
     wait 0.05;
@@ -748,7 +748,7 @@ func_74BC(param_00) {
 func_54C4(param_00) {
   var_01 = spawn("script_model", self.var_0116);
   var_01 setModel(param_00);
-  var_01 linkto(self, "TAG_BARREL", (0, 0, 0), (0, 0, 0));
+  var_01 linkTo(self, "TAG_BARREL", (0, 0, 0), (0, 0, 0));
 }
 
 func_54C6() {
@@ -904,7 +904,7 @@ func_7FAC(param_00, param_01, param_02) {
     var_03 scriptmodelplayanim(param_02);
   }
 
-  var_03 moveto(var_03.var_0116 + (0, -22500, 0), 15);
+  var_03 moveTo(var_03.var_0116 + (0, -22500, 0), 15);
   var_03 thread func_7042();
   wait(15);
   var_03 delete();
@@ -935,21 +935,21 @@ func_7FAD(param_00) {
   var_01 = spawn("script_model", param_00);
   var_01.var_001D = (0, 0, 0);
   var_01 setModel("vehicle_usa_tank_sherman_base_01");
-  var_01 moveto((-1700, 1093, 32), 5);
+  var_01 moveTo((-1700, 1093, 32), 5);
   wait(5);
-  var_01 moveto((-1424, 1021, 37), 1.6);
-  var_01 rotateto((0, 330, 0), 1.6);
+  var_01 moveTo((-1424, 1021, 37), 1.6);
+  var_01 rotateTo((0, 330, 0), 1.6);
   wait(1.6);
-  var_01 moveto((-1176, 765, 35), 2);
-  var_01 rotateto((0, 300, 0), 2);
+  var_01 moveTo((-1176, 765, 35), 2);
+  var_01 rotateTo((0, 300, 0), 2);
   wait(2);
-  var_01 moveto((-1064, 253, 46), 3);
-  var_01 rotateto((0, 270, 0), 3);
+  var_01 moveTo((-1064, 253, 46), 3);
+  var_01 rotateTo((0, 270, 0), 3);
   wait(3);
-  var_01 moveto((-1168, -187, 36), 2.55);
-  var_01 rotateto((0, 240, 0), 2.55);
+  var_01 moveTo((-1168, -187, 36), 2.55);
+  var_01 rotateTo((0, 240, 0), 2.55);
   wait(2.55);
-  var_01 moveto(var_01.var_0116 + rotatevector((1000, 0, 0), var_01.var_001D), 5.7);
+  var_01 moveTo(var_01.var_0116 + rotatevector((1000, 0, 0), var_01.var_001D), 5.7);
   wait(5.7);
   var_01 delete();
 }
@@ -957,7 +957,7 @@ func_7FAD(param_00) {
 cleanuphubtutorialents() {
   var_00 = ["intro_path_wire", "intro_path_clip", "intro_beach_wire", "intro_beach_post"];
   foreach(var_02 in var_00) {
-    var_03 = getent(var_02, "targetname");
+    var_03 = getEnt(var_02, "targetname");
     if(isDefined(var_03)) {
       var_03 delete();
     }

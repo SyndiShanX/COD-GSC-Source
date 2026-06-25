@@ -34,14 +34,14 @@ prematch_init() {
     level thread init_train();
 
     if(util::isfirstround() && draft::is_draft_this_round()) {
-      crane = getent("linear_crane_moveable", "targetname");
+      crane = getEnt("linear_crane_moveable", "targetname");
 
       if(isDefined(crane)) {
         crane notify(#"draftend");
       }
 
       exploder::exploder("fxexp_glass_shatter");
-      t_explode = getent("center_event_eploder_trig", "targetname");
+      t_explode = getEnt("center_event_eploder_trig", "targetname");
 
       if(isDefined(t_explode)) {
         t_explode callback::on_trigger(&function_ef8c8edc);
@@ -70,14 +70,14 @@ init_train() {
 }
 
 function_3761a1bc(a_ents) {
-  self.t_hurt = getent("train_hurt_trig", "targetname");
+  self.t_hurt = getEnt("train_hurt_trig", "targetname");
   self.t_hurt.start_pos = self.t_hurt.origin;
-  self.t_hurt enablelinkto();
+  self.t_hurt enablelinkTo();
 }
 
 function_f55fb854(a_ents) {
   if(isDefined(self.t_hurt)) {
-    self.t_hurt linkto(a_ents[#"prop 1"]);
+    self.t_hurt linkTo(a_ents[#"prop 1"]);
   }
 }
 
@@ -91,16 +91,16 @@ function_53b49689(a_ents) {
 init_crane() {
   level endon(#"game_ended");
   exploder::exploder("fxexp_gantry_off");
-  crane = getent("linear_crane_moveable", "targetname");
+  crane = getEnt("linear_crane_moveable", "targetname");
 
   if(!isDefined(crane)) {
     return;
   }
 
   crane thread function_670cd4a3();
-  crane.veh_kill = getent("linear_crane_veh_kill", "targetname");
-  crane.veh_kill enablelinkto();
-  crane.veh_kill linkto(crane);
+  crane.veh_kill = getEnt("linear_crane_veh_kill", "targetname");
+  crane.veh_kill enablelinkTo();
+  crane.veh_kill linkTo(crane);
   crane.veh_kill callback::on_trigger(&function_51905d68);
   crane.buttons = struct::get_array("linear_crane_buttons");
   crane.package = getEntArray(crane.target, "targetname");
@@ -118,12 +118,12 @@ init_crane() {
     waitresult = crane waittilltimeout(5, #"draftend");
 
     if(waitresult._notify !== "draftend") {
-      crane moveto(crane.endpoint, 4);
+      crane moveTo(crane.endpoint, 4);
       crane waittill(#"draftend");
     }
 
     crane.origin = crane.endpoint;
-    crane moveto(crane.startpoint, 4);
+    crane moveTo(crane.startpoint, 4);
     crane playSound("evt_gantry_start");
     crane waittill(#"movedone");
   }
@@ -140,7 +140,7 @@ init_crane() {
   exploder::exploder("fxexp_gantry_on");
   exploder::exploder("fxexp_controlroom_on");
   exploder::exploder("fxexp_cleanroom_on");
-  crane.kill_trig = getent(end_spot.target, "targetname");
+  crane.kill_trig = getEnt(end_spot.target, "targetname");
   crane.kill_trig callback::on_trigger(&function_147c1726);
 
   foreach(button in crane.buttons) {
@@ -171,7 +171,7 @@ function_80c5243b(e_activator) {
   exploder::stop_exploder("fxexp_cleanroom_on");
   exploder::exploder("fxexp_cleanroom_off");
   array::thread_all(crane.buttons, &gameobjects::disable_object);
-  crane moveto(destination, 4);
+  crane moveTo(destination, 4);
   crane playSound("evt_gantry_start");
   wait 3.35;
 

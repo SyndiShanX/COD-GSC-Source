@@ -132,7 +132,7 @@ function function_ca842288() {
     var_c6d25878 = &zm_utility::function_f5a222a8;
     level thread function_66d92f6(1);
   } else {
-    level.var_107cca82 = getent("trial_terminal", "targetname");
+    level.var_107cca82 = getEnt("trial_terminal", "targetname");
 
     if(!isDefined(level.var_107cca82)) {
       return;
@@ -171,7 +171,7 @@ function function_ca842288() {
   level.var_edbe6a7f[3] = 0;
   level thread game_over();
   level flag::wait_till("start_zombie_round_logic");
-  array::thread_all(getplayers(), &clientfield::set_to_player, "" + #"hash_216c75103f478671", 0);
+  array::thread_all(getPlayers(), &clientfield::set_to_player, "" + #"hash_216c75103f478671", 0);
   level flag::set("fl_challenges_active");
   level.var_107cca82 thread scene::play(#"p9_fxanim_zm_gp_dac_bundle", level.var_107cca82);
   function_111530dd();
@@ -483,7 +483,7 @@ function function_111530dd() {
   if(isDefined(level.var_64d3d5c4) && (getdvarint(#"hash_1ca7459bb8b222dd", 0) || level.var_d2bdec66 < 3 && n_round_number >= 5 && math::cointoss(var_7b667696))) {
     level.var_2dffd020 = 2;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player function_34ebccf9()) {
         continue;
       }
@@ -496,7 +496,7 @@ function function_111530dd() {
 
   level.var_2dffd020 = 1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player function_34ebccf9()) {
       continue;
     }
@@ -605,7 +605,7 @@ function function_2bb8d916() {
 }
 
 function function_2ed00fa6(reward_terminal) {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player.var_642ed51a === reward_terminal) {
@@ -915,7 +915,7 @@ function start_challenge(e_player) {
 
   waitframe(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_34b03961(1);
   }
 
@@ -934,7 +934,7 @@ function stop_challenge(var_d46ce3db = 0) {
   wait 0.1;
   level.s_active_challenge = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_7e30f24c();
     player playlocalsound(#"hash_7645f386d2902a9c");
 
@@ -1063,7 +1063,7 @@ function function_8f0594cb(s_challenge) {
   level.s_active_challenge = s_challenge;
   level.var_62ecc169 = float(gettime()) / 1000;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player playlocalsound(#"hash_747fc6d3b1a2412a");
     player.var_6b3806e8 = 0;
     player thread set_challenge_text(level.s_active_challenge.var_4365b81b);
@@ -1105,9 +1105,9 @@ function function_8f0594cb(s_challenge) {
       }
 
       if(n_time_remaining == 1) {
-        array::run_all(getplayers(), &playlocalsound, #"hash_5952b2eecab41e38");
+        array::run_all(getPlayers(), &playlocalsound, #"hash_5952b2eecab41e38");
       } else {
-        array::run_all(getplayers(), &playlocalsound, #"hash_4474c2da74d7cdb9");
+        array::run_all(getPlayers(), &playlocalsound, #"hash_4474c2da74d7cdb9");
       }
     }
 
@@ -1129,13 +1129,13 @@ function function_f51adffa() {
   }
 
   level.var_4427ebb1 = level.s_active_challenge.var_ad12d5bf[0];
-  vol_override = getent("dac_trial_volume_" + level.var_4427ebb1, "targetname");
+  vol_override = getEnt("dac_trial_volume_" + level.var_4427ebb1, "targetname");
   assert(isDefined(level.var_aa3b88c5), "<dev string:x1ef>");
   level.var_2c5f83d = [[level.var_aa3b88c5]](level.var_4427ebb1);
 
   iprintlnbold("<dev string:x268>");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_d7362784(level.s_active_challenge.str_name, level.s_active_challenge.var_ad12d5bf, vol_override);
     player thread set_challenge_text(level.s_active_challenge.var_4365b81b, isDefined(level.s_active_challenge.var_4e0096cd) ? level.s_active_challenge.var_4e0096cd : level.var_2c5f83d);
   }
@@ -1181,13 +1181,13 @@ function function_9742c28f() {
 }
 
 function function_8dbbbce8() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_9ffc76ea(#"multikill_scoreevent");
   }
 }
 
 function function_9f1cd9be() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_9ffc76ea(#"hash_72ca0304c836da88");
   }
 }
@@ -1199,7 +1199,7 @@ function function_8576b59f() {
 function function_9c1479ad() {
   level endon(#"hash_53f7c8af221e6090");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_9ffc76ea([#"glass_smash", #"hash_34928429a0070510"]);
   }
 
@@ -1240,9 +1240,9 @@ function function_1d60215() {
   level.var_4427ebb1 = level.s_active_challenge.var_ad12d5bf[0];
   assert(isDefined(level.var_aa3b88c5), "<dev string:x1ef>");
   level.var_2c5f83d = [[level.var_aa3b88c5]](level.s_active_challenge.var_4427ebb1);
-  vol_override = getent("dac_trial_volume_" + level.var_4427ebb1, "targetname");
+  vol_override = getEnt("dac_trial_volume_" + level.var_4427ebb1, "targetname");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_d7362784(level.s_active_challenge.str_name, level.s_active_challenge.var_ad12d5bf, vol_override);
     player thread set_challenge_text(level.s_active_challenge.var_4365b81b, isDefined(level.s_active_challenge.var_4e0096cd) ? level.s_active_challenge.var_4e0096cd : level.var_2c5f83d);
   }
@@ -1252,7 +1252,7 @@ function function_1d60215() {
   while(true) {
     n_time = gettime() / 1000;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player.var_f94035ca)) {
         player.var_f94035ca = 0;
       }
@@ -1277,7 +1277,7 @@ function function_6be352fc() {
 
 function function_5e882c6f(e_player, var_2b625b6e) {
   str_zone = zm_zonemgr::get_zone_from_position(var_2b625b6e);
-  vol_override = getent("dac_trial_volume_" + level.var_4427ebb1, "targetname");
+  vol_override = getEnt("dac_trial_volume_" + level.var_4427ebb1, "targetname");
 
   if(isDefined(vol_override) && isvec(var_2b625b6e)) {
     if(istouching(var_2b625b6e, vol_override)) {
@@ -1345,7 +1345,7 @@ function function_c8657c04() {
     wait 2;
     n_time = gettime() / 1000;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       b_reward = 0;
 
       if(!isDefined(player.var_d5e64932)) {
@@ -1542,7 +1542,7 @@ function game_over() {
     stop_challenge();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player set_tributeavailable(0);
   }
 
@@ -1683,7 +1683,7 @@ function function_dd77166f() {
 }
 
 function start_timer(n_time_seconds) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"hash_31bea9cf1e6f76a0", n_time_seconds);
   }
 
@@ -1692,7 +1692,7 @@ function start_timer(n_time_seconds) {
 }
 
 function stop_timer() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"hash_31bea9cf1e6f76a0", 0);
   }
 
@@ -1734,7 +1734,7 @@ function private function_e6f97362(params) {
   }
 
   level.var_acf50b77 = params.value;
-  start_challenge(getplayers()[0]);
+  start_challenge(getPlayers()[0]);
   setDvar(#"hash_5b92db1162c53bb5", "<dev string:x556>");
 }
 
@@ -1866,7 +1866,7 @@ function function_5a327610() {
                 level.var_b492b0ef[level.var_b492b0ef.size] = var_543e34e3.var_fb9eb4de;
               }
 
-              var_543e34e3.var_fb9eb4de disconnectpaths();
+              var_543e34e3.var_fb9eb4de disconnectPaths();
             }
 
             continue;
@@ -1889,7 +1889,7 @@ function function_5a327610() {
                 level.var_b492b0ef[level.var_b492b0ef.size] = var_543e34e3.var_fb9eb4de;
               }
 
-              var_543e34e3.var_fb9eb4de disconnectpaths();
+              var_543e34e3.var_fb9eb4de disconnectPaths();
             }
 
             continue;
@@ -1912,7 +1912,7 @@ function function_28239d1e() {
   level endon(#"hash_32f12c135823837", #"end_game", #"portal_activated");
 
   while(true) {
-    foreach(n_index, player in getplayers()) {
+    foreach(n_index, player in getPlayers()) {
       y_offset = n_index * 20;
       debug2dtext((400, 300 + y_offset, 0), player.name + "<dev string:x6a2>" + (isDefined(player.n_tribute) ? player.n_tribute : 0) + "<dev string:x6b9>" + level.var_8b7ab859, undefined, undefined, undefined, 1);
     }
@@ -1936,7 +1936,7 @@ function function_df5afb5e() {
 }
 
 function function_5e613eb7() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player namespace_f999c142::function_53a333a8("<dev string:x556>", 200);
   }
 }

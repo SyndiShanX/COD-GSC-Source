@@ -108,7 +108,7 @@ start_debrief_start_checkpoint(var_0) {
 }
 
 aud_deactivate_hangar_transition_zone() {
-  var_0 = getent("hangar_audio_transition_zone", "targetname");
+  var_0 = getEnt("hangar_audio_transition_zone", "targetname");
   var_0 common_scripts\utility::trigger_off();
 }
 
@@ -117,7 +117,7 @@ aud_activate_hangar_transition_zone() {
 }
 
 aud_disable_bm21_idle() {
-  var_0 = getent("bm21_no_sound_01", "targetname");
+  var_0 = getEnt("bm21_no_sound_01", "targetname");
   var_0 vehicle_turnengineoff();
 }
 
@@ -145,7 +145,7 @@ aud_bm21_driveby_snd(var_0) {
 
 aud_entity_link_on_tag(var_0, var_1, var_2) {
   var_3 = spawn("script_origin", (0, 0, 0));
-  var_3 linkto(var_1, var_2, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_1, var_2, (0, 0, 0), (0, 0, 0));
   var_3 playLoopSound(var_0);
   return var_3;
 }
@@ -156,7 +156,7 @@ aud_vehicle_node_handler(var_0) {
 }
 
 aud_timer_end() {
-  var_0 = getent("timerEntity", "targetname");
+  var_0 = getEnt("timerEntity", "targetname");
   var_0 playSound("scn_timer_end");
 }
 

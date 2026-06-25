@@ -109,7 +109,7 @@ function waitforclonetouch() {
   self endon("death");
   while(true) {
     self waittill("trigger", clone);
-    if(isactor(clone) && isDefined(clone.isaiclone) && clone.isaiclone && !clone isplayinganimscripted()) {
+    if(isactor(clone) && isDefined(clone.isaiclone) && clone.isaiclone && !clone isplayinganimScripted()) {
       clone notify("clone_shutdown");
     }
   }
@@ -138,7 +138,7 @@ function waitforplayertouch() {
       vehicle = entity;
       player = vehicle.owner;
     }
-    if(!player isoutofbounds() && !player isplayinganimscripted() && (!(isDefined(player.oobdisabled) && player.oobdisabled))) {
+    if(!player isoutofbounds() && !player isplayinganimScripted() && (!(isDefined(player.oobdisabled) && player.oobdisabled))) {
       player notify("oob_enter");
       if(isDefined(level.oob_timekeep_ms) && isDefined(player.last_oob_timekeep_ms) && isDefined(player.last_oob_duration_ms) && (gettime() - player.last_oob_timekeep_ms) < level.oob_timekeep_ms) {
         player.oob_start_time = gettime() - (level.oob_timelimit_ms - player.last_oob_duration_ms);
@@ -146,7 +146,7 @@ function waitforplayertouch() {
         player.oob_start_time = gettime();
       }
       player.oob_lastvalidplayerloc = entity.origin;
-      player.oob_lastvalidplayerdir = vectornormalize(entity getvelocity());
+      player.oob_lastvalidplayerdir = vectorNormalize(entity getvelocity());
       player util::show_hud(0);
       player thread watchforleave(self, entity);
       player thread watchfordeath(self, entity);

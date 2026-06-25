@@ -106,7 +106,7 @@ function ai_t8_zm_twrs_tgr_stalk_turn_l_90() {
   level namespace_fc3e8cb::function_92dea087("flg_facades_angle", "flg_facades_turn_corner");
   level thread namespace_fc3e8cb::function_5c5b6ea7("nd_facades_woods_destruction_2", 1, 1);
   level flag::wait_till("flg_facades_corridor_enter");
-  vol_facades_woods_stumble = getent("vol_facades_woods_stumble", "targetname");
+  vol_facades_woods_stumble = getEnt("vol_facades_woods_stumble", "targetname");
   var_54675276 = istouching(level.woods.origin, vol_facades_woods_stumble);
 
   if(var_54675276 == 1) {
@@ -294,7 +294,7 @@ function function_8cc9e7c2(var_43182387 = 0) {
     var_51b8d0b4 = distance2dsquared(level.player.origin, v_end_pos);
 
     if(var_51b8d0b4 < sqr(600)) {
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
 
       if(var_afa4f4f6 == 0) {
         level.player thread function_f94da504(var_43182387, v_end_pos);
@@ -449,13 +449,13 @@ function function_266d11ca(var_1ea2c1da) {
   foreach(index, ai in var_1ea2c1da) {
     switch (index) {
       case 0:
-        vol = getent("vol_rooftops_enemy_right", "targetname");
+        vol = getEnt("vol_rooftops_enemy_right", "targetname");
         break;
       case 1:
-        vol = getent("vol_rooftops_enemy_left", "targetname");
+        vol = getEnt("vol_rooftops_enemy_left", "targetname");
         break;
       default:
-        vol = getent("vol_rooftops_enemy_back", "targetname");
+        vol = getEnt("vol_rooftops_enemy_back", "targetname");
         break;
     }
 
@@ -479,7 +479,7 @@ function function_b3e9c19d() {
   var_ea066846 = struct::get("s_rooftops_mannequin_mb_end", "targetname");
   var_a75f2965 = getweapon(#"frag_grenade");
   var_1da2248f = spawn("script_model", s_mb_start.origin);
-  var_38ffd5df = vectornormalize(var_ea066846.origin - s_mb_start.origin) * 400;
+  var_38ffd5df = vectorNormalize(var_ea066846.origin - s_mb_start.origin) * 400;
   e_grenade = var_1da2248f magicgrenadetype(var_a75f2965, s_mb_start.origin, var_38ffd5df, 1.5);
   var_1da2248f deletedelay();
 }
@@ -839,7 +839,7 @@ function function_debf8314(ai_array) {
   function_1eaaceab(ai_array);
 
   foreach(ai in ai_array) {
-    vol_fallback = getent("vol_motor_pool_left", "targetname");
+    vol_fallback = getEnt("vol_motor_pool_left", "targetname");
     ai thread ai::force_goal(vol_fallback);
   }
 }
@@ -864,7 +864,7 @@ function function_db7a929() {
   level endon(#"flg_escape_player_in_apc");
   level flag::wait_till_any(["flg_motor_pool_advance_3", "flg_motor_pool_one_juggernaut_dead"]);
   wait 2;
-  var_c9ec79c6 = getent("sm_motor_pool_reinforcements_smoke", "targetname");
+  var_c9ec79c6 = getEnt("sm_motor_pool_reinforcements_smoke", "targetname");
   e_grenade = level.player magicgrenadeplayer(getweapon(#"willy_pete"), var_c9ec79c6.origin, (0, 0, 0));
   e_grenade.var_3791d005 = 0;
   var_f201782a = spawner::simple_spawn("ai_enemy_motor_pool_reinforcements", &function_25ec03fc);
@@ -937,10 +937,10 @@ function function_d505ce28(var_67ce64a8 = 0) {
     s_obj_motor_pool_exit = struct::get("s_obj_motor_pool_exit", "targetname");
     var_416224db = spawn("script_model", s_obj_motor_pool_exit.origin);
     var_416224db.origin = s_obj_motor_pool_exit.origin;
-    level.player playrumbleonentity("anim_light");
+    level.player playRumbleOnEntity("anim_light");
     var_416224db playrumblelooponentity("cp_rus_amerika_apc_driveby");
     level scene::play("sc_motor_pool_giant_doors", "targetname");
-    level.player playrumbleonentity("anim_med");
+    level.player playRumbleOnEntity("anim_med");
     earthquake(0.5, 1, s_obj_motor_pool_exit.origin, 1600);
     var_416224db delete();
   }
@@ -1003,13 +1003,13 @@ function function_14fb9b43() {
 
 function function_8ac4bc54() {
   wait 0.9;
-  level.player playrumbleonentity("status_effect_dot");
+  level.player playRumbleOnEntity("status_effect_dot");
   wait 0.7;
-  level.player playrumbleonentity("status_effect_dot");
+  level.player playRumbleOnEntity("status_effect_dot");
   wait 0.7;
-  level.player playrumbleonentity("status_effect_dot");
+  level.player playRumbleOnEntity("status_effect_dot");
   wait 1.5;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 function function_7f87d6ab() {
@@ -1151,11 +1151,11 @@ function function_502e1c27() {
   hms_util::print("<dev string:xa5>");
 
   level thread function_3297dd11();
-  level.player playrumbleonentity("anim_light");
+  level.player playRumbleOnEntity("anim_light");
   level namespace_2977687d::scene_amk_6090_stg_garage();
   snd::client_msg("audio_motor_pool_rollup_door");
   level flag::set("flg_motor_pool_door_player_interact");
-  var_6c4841fb = getent("sm_motor_pool_entry_door", "targetname");
+  var_6c4841fb = getEnt("sm_motor_pool_entry_door", "targetname");
   var_6c4841fb util::delay(2, undefined, &movey, 256, 0.1, 0.05, 0.05);
   level scene::play("sc_motor_pool_entry_door", "Open");
   s_obj_motor_pool_door_interact util::delay(0.2, undefined, &util::remove_cursor_hint);
@@ -1163,7 +1163,7 @@ function function_502e1c27() {
   var_6c4841fb connectpaths();
   level flag::wait_till("flg_motor_pool_close_doors");
   var_6c4841fb movey(-256, 0.1, 0.05, 0.05);
-  var_6c4841fb disconnectpaths();
+  var_6c4841fb disconnectPaths();
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_facades", 1);
   level scene::play("sc_motor_pool_entry_door", "Close");
 }

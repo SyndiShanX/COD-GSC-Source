@@ -280,7 +280,7 @@ function function_13fce2b(var_9e4b7aff) {
   crouch_offset = (0, 0, 20);
   var_3334a329 = (0, 0, 0);
   destination = undefined;
-  playsoundatposition(#"hash_89afcb430026d5c", self.origin + (0, 0, 50));
+  playSoundAtPosition(#"hash_89afcb430026d5c", self.origin + (0, 0, 50));
 
   if(self getstance() == "prone") {
     destination = var_9e4b7aff.origin + prone_offset;
@@ -300,7 +300,7 @@ function function_13fce2b(var_9e4b7aff) {
   self val::set(#"bhb_teleport", "disable_weapons", 1);
   self playSound(#"hash_2bdcf53469acd60d");
   self dontinterpolate();
-  self setorigin(destination);
+  self setOrigin(destination);
   self setplayerangles(var_9e4b7aff.angles);
   self val::reset(#"bhb_teleport", "freezecontrols");
   self val::reset(#"bhb_teleport", "disable_offhand_weapons");
@@ -324,7 +324,7 @@ function function_e788f77() {
 
 function function_f7e9dfd7() {
   wait 2;
-  playsoundatposition("wpn_bhbomb_exit_end", self.origin);
+  playSoundAtPosition("wpn_bhbomb_exit_end", self.origin);
   self delete();
 }
 

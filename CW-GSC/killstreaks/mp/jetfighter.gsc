@@ -139,7 +139,7 @@ function private function_4b3b25af(killstreak_id) {
   }
 
   targets = level function_ce402c10(bundle, team, var_d44b8c3e);
-  playsoundatposition(#"hash_2fbfd58a6c32dd81", var_ce2c18d3.origin);
+  playSoundAtPosition(#"hash_2fbfd58a6c32dd81", var_ce2c18d3.origin);
   var_ce2c18d3 function_c578ef61(targets, killstreak_id);
   wait 4;
 
@@ -174,7 +174,7 @@ function private function_6ff76fc6() {
     var_d44b8c3e = (var_7188db6d.origin[0], var_7188db6d.origin[1], var_7188db6d.origin[2] + height);
   } else if(isDefined(friendlyspawn) && isDefined(enemyspawn)) {
     var_ed17afc5 = friendlyspawn.origin;
-    forward = vectornormalize(enemyspawn.origin - friendlyspawn.origin);
+    forward = vectorNormalize(enemyspawn.origin - friendlyspawn.origin);
     angles = vectortoangles(forward);
     var_d44b8c3e = (var_ed17afc5[0], var_ed17afc5[1], height);
   } else {
@@ -422,7 +422,7 @@ function private firemissile(target, spawnpoint, weapon, owner) {
 
   self.var_fb24e6b5[self.var_fb24e6b5.size] = spawnpoint;
   heatseekingmissile::initlockfield(target);
-  missile = owner magicmissile(weapon, spawnpoint, vectornormalize(target.origin - spawnpoint), target);
+  missile = owner magicmissile(weapon, spawnpoint, vectorNormalize(target.origin - spawnpoint), target);
   missile thread function_644ef4bf(target);
   missile missile_settarget(target);
   missile.team = self.team;
@@ -470,7 +470,7 @@ function private function_593a7842(var_6709bbd6) {
     self thread function_1e2a93a2(var_6709bbd6);
   }
 
-  playsoundatposition("mpl_dogfight_base_quad", self.origin);
+  playSoundAtPosition("mpl_dogfight_base_quad", self.origin);
   self thread function_cc4c1fca();
   self scene::play(#"p9_fxanim_mp_dogfight_01_bundle");
 
@@ -577,7 +577,7 @@ function function_35b87c52() {
 
 function function_2f5700b4(params) {
   if(params.value) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     var_10c3dd58 = player function_6ff76fc6();
     var_d44b8c3e = var_10c3dd58.var_d44b8c3e;
     angles = var_10c3dd58.angles;
@@ -585,7 +585,7 @@ function function_2f5700b4(params) {
     startposition = adjustedpath[#"startposition"];
     angles = adjustedpath[#"angles"];
     var_a50bad8f = util::spawn_model("<dev string:xc1>", (var_d44b8c3e[0], var_d44b8c3e[1], startposition[2]), angles);
-    playsoundatposition("<dev string:xcf>", var_a50bad8f.origin);
+    playSoundAtPosition("<dev string:xcf>", var_a50bad8f.origin);
     var_a50bad8f scene::play(#"p9_fxanim_mp_dogfight_01_bundle");
     var_a50bad8f delete();
     setDvar(#"hash_62c0e40b6a2a602d", 0);

@@ -34,7 +34,7 @@ main() {
     s_dial.b_correct = 0;
     s_dial.n_value = 0;
     s_dial.var_7bb4ff56 = randomintrangeinclusive(1, 9);
-    s_dial.dial_model = getent(s_dial.target, "targetname");
+    s_dial.dial_model = getEnt(s_dial.target, "targetname");
     s_dial.dial_model hide();
   }
 
@@ -171,7 +171,7 @@ lavapit_breach_(object) {
     v_origin = object.var_eb397f67;
   }
 
-  v_delta = vectornormalize(self getEye() - v_origin);
+  v_delta = vectorNormalize(self getEye() - v_origin);
   v_angles = self getplayerangles();
   v_view = anglesToForward(v_angles);
   v_cross = vectorcross(v_view, v_delta);

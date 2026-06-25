@@ -8,7 +8,7 @@ init_vehicle_splines() {
   level.spline_min_progress = -2000;
   level.enemy_snowmobiles_max = 6;
   level.player_ent = spawn("script_origin", level.player.origin + (0, 0, 88));
-  level.player_ent linkto(level.player);
+  level.player_ent linkTo(level.player);
   level.snowmobile_path = make_road_path();
   common_scripts\utility::flag_init("ai_snowmobiles_ram_player");
   common_scripts\utility::flag_set("ai_snowmobiles_ram_player");
@@ -40,7 +40,7 @@ bike_death_score() {
 }
 
 get_guy_from_spawner() {
-  var_0 = getent("spawner", "targetname");
+  var_0 = getEnt("spawner", "targetname");
   var_0.count = 1;
   var_0.origin = self.origin;
   var_0.angles = (0, self.angles[1], 0);
@@ -131,7 +131,7 @@ draw_col_vol_offset(var_0, var_1, var_2, var_3, var_4) {
 }
 
 create_path() {
-  var_0 = common_scripts\utility::getstruct("road_path_left", "targetname");
+  var_0 = common_scripts\utility::getStruct("road_path_left", "targetname");
   var_1 = [];
   var_0.origin = (var_0.origin[0], var_0.origin[1], 0);
   var_2 = 0;
@@ -141,7 +141,7 @@ create_path() {
     var_4 = var_0;
 
     if(isDefined(var_0.target)) {
-      var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
     }
 
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
@@ -166,7 +166,7 @@ create_path() {
     var_0 = var_4;
   }
 
-  var_0 = common_scripts\utility::getstruct("road_path_right", "targetname");
+  var_0 = common_scripts\utility::getStruct("road_path_right", "targetname");
   var_0.origin = (var_0.origin[0], var_0.origin[1], 0);
   var_5 = 0;
 
@@ -174,7 +174,7 @@ create_path() {
     var_4 = var_0;
 
     if(isDefined(var_0.target)) {
-      var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
     }
 
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
@@ -231,7 +231,7 @@ add_collision_to_path(var_0) {
 
   foreach(var_3 in var_1) {
     var_3.origin = (var_3.origin[0], var_3.origin[1], 0);
-    var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
     var_3.other_col_point = var_4;
     var_4.other_col_point = var_3;
   }
@@ -289,7 +289,7 @@ add_collision_to_path_ent(var_0, var_1) {
   if(distance(var_1.origin, var_0.next_node.midpoint) > var_2 * 1.5) {
     return;
   }
-  var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1.target, "targetname");
   var_4 = get_progression_between_points(var_1.origin, var_0.midpoint, var_0.next_node.midpoint);
   var_5 = var_4["progress"];
   var_6 = get_progression_between_points(var_3.origin, var_0.midpoint, var_0.next_node.midpoint);
@@ -412,16 +412,16 @@ get_progression_between_points(var_0, var_1, var_2) {
   var_4 = vectortoangles(var_2 - var_1);
   var_5 = anglesToForward(var_4);
   var_6 = var_1;
-  var_7 = vectornormalize(var_6 - var_0);
+  var_7 = vectorNormalize(var_6 - var_0);
   var_8 = vectordot(var_5, var_7);
-  var_9 = vectornormalize(var_2 - var_1);
+  var_9 = vectorNormalize(var_2 - var_1);
   var_10 = var_0 - var_1;
   var_11 = vectordot(var_10, var_9);
   var_12 = var_1 + var_5 * var_11;
   var_3["progress"] = var_11;
   var_3["offset"] = distance(var_12, var_0);
   var_13 = anglestoright(var_4);
-  var_7 = vectornormalize(var_12 - var_0);
+  var_7 = vectorNormalize(var_12 - var_0);
   var_8 = vectordot(var_13, var_7);
   var_3["dot"] = var_8;
 
@@ -547,7 +547,7 @@ spawn_enemy_bike() {
   }
 
   var_4 = common_scripts\utility::drop_to_ground(var_4);
-  var_6 = getent("snowmobile_spawner", "targetname");
+  var_6 = getEnt("snowmobile_spawner", "targetname");
   var_7 = var_3["targ"];
   var_6.origin = var_4;
   var_6.angles = vectortoangles(var_7.next_node.midpoint - var_7.midpoint);
@@ -958,7 +958,7 @@ match_player_speed(var_0, var_1) {
 track_player_progress(var_0) {
   self.targ = maps\_vehicle_code::get_my_spline_node(var_0);
   self.progress = 0;
-  var_1 = getent("player_sweep_trigger", "targetname");
+  var_1 = getEnt("player_sweep_trigger", "targetname");
   var_2 = isDefined(var_1);
 
   if(var_2) {
@@ -1227,10 +1227,10 @@ track_progress() {
     var_0 = (self.origin[0], self.origin[1], 0);
     var_1 = (self.targ.midpoint[0], self.targ.midpoint[1], 0);
     var_2 = (self.next_targ.midpoint[0], self.next_targ.midpoint[1], 0);
-    var_3 = vectornormalize(var_1 - var_0);
+    var_3 = vectorNormalize(var_1 - var_0);
     var_4 = anglesToForward(self.angles);
     var_5 = vectordot(var_4, var_3);
-    var_6 = vectornormalize(var_2 - var_1);
+    var_6 = vectorNormalize(var_2 - var_1);
     var_7 = var_0 - var_1;
     self.progress = vectordot(var_7, var_6);
     wait 0.05;

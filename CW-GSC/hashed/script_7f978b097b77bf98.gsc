@@ -53,10 +53,10 @@ function function_4d243036(instance) {
   instance.mdl_chest = content_manager::spawn_script_model(s_chest, #"p9_fxanim_zm_gp_chest_01_lrg_black_xmodel");
   s_chest.scriptmodel = instance.mdl_chest;
   instance.mdl_chest clientfield::set("sr_black_chest_fx", 1);
-  instance.mdl_chest disconnectpaths();
+  instance.mdl_chest disconnectPaths();
   instance.n_obj_id = zm_utility::function_f5a222a8(#"hash_6f9aa3330822e0f1", s_chest.origin);
   forward = anglesToForward(s_chest.angles);
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   forward = (forward[0] * 16, forward[1] * 16, forward[2] * 16);
   forward = (forward[0], forward[1], forward[2] + 16);
   trigger = content_manager::spawn_interact(s_chest, &function_b0c8ef74, #"hash_51885cacb17fc72", undefined, 64, 32, undefined, forward);
@@ -107,7 +107,7 @@ function private function_b0c8ef74(eventstruct) {
     level scoreevents::doscoreeventcallback("scoreEventSR", {
       #scoreevent: "event_complete", #nearbyplayers: 1, #var_b0a57f8c: 5000, #location: self.instance.mdl_chest.origin
     });
-    players = getplayers("all", self.instance.mdl_chest.origin, 5000);
+    players = getPlayers("all", self.instance.mdl_chest.origin, 5000);
 
     foreach(player in players) {
       player zm_stats::function_945c7ce2(#"hash_165462f560a0538c", 1);
@@ -136,7 +136,7 @@ function private function_91c5571b(instance) {
 
   switch (instance.var_fc398f5e) {
     case 0:
-      instance.trigger sethintstring(#"hash_1d1be5a6b69d6372");
+      instance.trigger setHintString(#"hash_1d1be5a6b69d6372");
       instance.trigger.b_complete = 1;
       wait 1.75;
 
@@ -156,17 +156,17 @@ function private function_91c5571b(instance) {
       instance.mdl_chest thread zm_vo::function_d6f8bbd9(#"hash_3e6ead8d740a0ff8", undefined, undefined, 1);
       break;
     case 1:
-      instance.trigger sethintstring(#"hash_5947924716292401");
+      instance.trigger setHintString(#"hash_5947924716292401");
       instance.mdl_chest clientfield::set("sr_black_chest_fx", 3);
       instance.mdl_chest thread zm_vo::function_d6f8bbd9(#"hash_32cc24bb8d3000c1", undefined, undefined, 1);
       break;
     case 2:
-      instance.trigger sethintstring(#"hash_59478f4716291ee8");
+      instance.trigger setHintString(#"hash_59478f4716291ee8");
       instance.mdl_chest clientfield::set("sr_black_chest_fx", 3);
       instance.mdl_chest thread zm_vo::function_d6f8bbd9(#"hash_189e0c21824b990a", undefined, undefined, 1);
       break;
     case 3:
-      instance.trigger sethintstring(#"hash_594790471629209b");
+      instance.trigger setHintString(#"hash_594790471629209b");
       break;
   }
 
@@ -176,7 +176,7 @@ function private function_91c5571b(instance) {
 
 function private function_5338581(instance) {
   instance.mdl_chest endon(#"death");
-  playsoundatposition(#"hash_6cad1d9a51f99476", instance.mdl_chest.origin + (0, 0, 20));
+  playSoundAtPosition(#"hash_6cad1d9a51f99476", instance.mdl_chest.origin + (0, 0, 20));
   wait 0.25;
 
   foreach(player in function_a1ef346b("all", instance.mdl_chest.origin, 2048)) {
@@ -185,7 +185,7 @@ function private function_5338581(instance) {
 
   instance.mdl_chest clientfield::set("sr_black_chest_fx", 2);
   wait 2;
-  playsoundatposition(#"hash_2cc0c33bfc0f9373", instance.mdl_chest.origin + (0, 0, 20));
+  playSoundAtPosition(#"hash_2cc0c33bfc0f9373", instance.mdl_chest.origin + (0, 0, 20));
   instance.mdl_chest thread zm_vo::function_d6f8bbd9(#"hash_15b09a217e61af64", 2.5);
   instance.var_fc398f5e = 0;
   s_chest = instance.contentgroups[#"chest"][0];
@@ -224,7 +224,7 @@ function private function_ed1e62c9(instance, var_5ec5a681, s_spawn) {
   trigger callback::on_trigger(&function_e03c6f84);
   var_d4358084.n_obj_id = zm_utility::function_f5a222a8(#"hash_4b8c0ed5c08eb78e", var_d4358084);
   n_move_time = distance(var_d4358084.origin, var_5ec5a681.origin) / 850;
-  var_d4358084 moveto(var_5ec5a681.origin, n_move_time);
+  var_d4358084 moveTo(var_5ec5a681.origin, n_move_time);
   var_d4358084 thread function_1f15d9fc(instance);
   instance.var_fc398f5e++;
 }
@@ -239,7 +239,7 @@ function function_e03c6f84(eventstruct) {
 function private function_1f15d9fc(instance) {
   self endon(#"death", #"end_game");
   self.maxhealth = 500;
-  var_35588796 = max(1, getplayers().size * 0.666);
+  var_35588796 = max(1, getPlayers().size * 0.666);
   self zm_ai_hulk::function_967133dc(0.02, var_35588796);
   self.health = int(self.maxhealth);
   self.health_state = 4;
@@ -381,7 +381,7 @@ function private function_7914c7ef(var_85c920d0, s_chest) {
       s_chest thread scene::play(#"ai_t9_zm_sr_echo_world_spawn", s_chest);
       str_vo = array::function_a3b0f814(s_chest.a_str_vo, 0);
       s_chest thread zm_vo::function_d6f8bbd9(str_vo);
-      a_players = getplayers("all", var_ff1022f3.origin, 350);
+      a_players = getPlayers("all", var_ff1022f3.origin, 350);
 
       foreach(player in a_players) {
         player val::set(#"hash_7f8d812db471e5ed", "takedamage", 0);
@@ -453,7 +453,7 @@ function private function_aa89ee85(v_center, n_duration = 5, n_delay, a_ai, n_ra
     }
   }
 
-  playsoundatposition(#"hash_215113ffa2718a92", v_center);
+  playSoundAtPosition(#"hash_215113ffa2718a92", v_center);
   playFX(#"hash_63333c881b0b81a3", v_center, undefined, (0, 0, 1));
 
   foreach(ai in a_ai) {

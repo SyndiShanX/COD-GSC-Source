@@ -273,13 +273,13 @@ add_powerups_after_round_1() {
 }
 init_weapons_locker() {
   trigger = getEnt("weapons_locker", "targetname");
-  trigger SetCursorHint("HINT_NOICON");
+  trigger setCursorHint("HINT_NOICON");
   wallModel = getEnt(trigger.target, "targetname");
   trigger thread triggerWeaponsLockerWatch(wallModel);
 }
 setup_water_physics() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] SetClientDvars("phys_buoyancy", 1);
   }
@@ -353,12 +353,12 @@ rolling_door_think() {
   self.door_radius = self.script_radius;
   self.door_wait = self.script_string;
   flag_wait(self.door_wait);
-  PlaySoundAtPosition("evt_door_stone_disc", self.origin);
+  playSoundAtPosition("evt_door_stone_disc", self.origin);
   self play_sound_on_ent("purchase");
   playFX(level._effect["rolling_door_open"], self.origin);
   pi = 3.1415926;
   endOrigin = self.origin + (self.door_moveDir * self.door_moveDist);
-  self moveto(endOrigin, self.door_moveTime, 0.1, 0.1);
+  self moveTo(endOrigin, self.door_moveTime, 0.1, 0.1);
   cir = 2 * pi * self.door_radius;
   rotate = (self.door_moveDist / cir) * 360.0;
   self rotateTo(self.angles + (rotate, 0, 0), self.door_moveTime, 0.1, 0.1);
@@ -377,7 +377,7 @@ temple_powerup_fx_func() {
   self delete_powerup_fx();
   self.fx_green = maps\_zombiemode_net::network_safe_spawn("powerup_fx", 2, "script_model", self.origin);
   self.fx_green setModel("tag_origin");
-  self.fx_green LinkTo(self);
+  self.fx_green linkTo(self);
   playFXOnTag(level._effect["powerup_on"], self.fx_green, "tag_origin");
   self thread delete_powerup_fx_wait();
 }
@@ -568,7 +568,7 @@ temple_find_exit_point() {
     wait(.1);
   }
   min_distance_squared = 1024 * 1024;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dest = 0;
   dist_far = 0;
   locs = array_randomize(level.enemy_dog_locations);

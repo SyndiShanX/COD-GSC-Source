@@ -54,10 +54,10 @@ func_E3D8(var_0) {
   level.var_E35D.var_A2E8["b"].var_62EB = func_0EFB::func_7CBE("return_crane_b_end", "script_noteworthy", var_0).origin;
   level.var_E35D.var_A2E8["a"].var_11A05 = func_0EFB::func_7CBE("return_crane_a_topmove", "script_noteworthy", var_0).origin;
   level.var_E35D.var_A2E8["b"].var_11A05 = func_0EFB::func_7CBE("return_crane_b_topmove", "script_noteworthy", var_0).origin;
-  level.var_E35D.var_A2E8["a"].var_3FFB linkto(level.var_E35D.var_A2E8["a"]);
-  level.var_E35D.var_A2E8["b"].var_3FFB linkto(level.var_E35D.var_A2E8["b"]);
-  level.var_E35D.var_A2E8["a"].var_3FFD linkto(level.var_E35D.var_A2E8["a"]);
-  level.var_E35D.var_A2E8["b"].var_3FFD linkto(level.var_E35D.var_A2E8["b"]);
+  level.var_E35D.var_A2E8["a"].var_3FFB linkTo(level.var_E35D.var_A2E8["a"]);
+  level.var_E35D.var_A2E8["b"].var_3FFB linkTo(level.var_E35D.var_A2E8["b"]);
+  level.var_E35D.var_A2E8["a"].var_3FFD linkTo(level.var_E35D.var_A2E8["a"]);
+  level.var_E35D.var_A2E8["b"].var_3FFD linkTo(level.var_E35D.var_A2E8["b"]);
   level.var_E35D.var_A2EA = func_0EFB::func_798B("jackal_return_door_top", "script_noteworthy", "origin", var_0);
   var_3 = getEntArray(level.var_E35D.var_A2EA.target, "targetname");
   scripts\engine\utility::array_call(var_3, ::linkto, level.var_E35D.var_A2EA);
@@ -121,21 +121,21 @@ func_E3DA(var_0) {
       level.var_E35D.var_A2E8["b"].origin = level.var_E35D.var_A2E8["b"].var_10CC9;
       level.var_E35D.var_A2E8["a"].var_3FFB unlink();
       level.var_E35D.var_A2E8["a"].var_3FFB.angles = level.var_E35D.var_A2E8["a"].var_3FFB.angles + (0, 180, 0);
-      level.var_E35D.var_A2E8["a"].var_3FFB linkto(level.var_E35D.var_A2E8["a"]);
+      level.var_E35D.var_A2E8["a"].var_3FFB linkTo(level.var_E35D.var_A2E8["a"]);
       level.var_E35D.var_A2E8["b"].var_3FFB unlink();
       level.var_E35D.var_A2E8["b"].var_3FFB.angles = level.var_E35D.var_A2E8["b"].var_3FFB.angles + (0, 180, 0);
-      level.var_E35D.var_A2E8["b"].var_3FFB linkto(level.var_E35D.var_A2E8["b"]);
+      level.var_E35D.var_A2E8["b"].var_3FFB linkTo(level.var_E35D.var_A2E8["b"]);
       break;
     case "airlock":
       level.var_E35D.var_A2E8["a"].var_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0);
       level.var_E35D.var_A2E8["b"].var_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0);
       level.var_E35D.var_A2E8["a"].var_3FFB unlink();
       level.var_E35D.var_A2E8["a"].var_3FFB.angles = level.var_E35D.var_A2E8["a"].var_3FFB.angles + (0, -90, 0);
-      level.var_E35D.var_A2E8["a"].var_3FFB linkto(level.var_E35D.var_A2E8["a"]);
+      level.var_E35D.var_A2E8["a"].var_3FFB linkTo(level.var_E35D.var_A2E8["a"]);
       level.var_E35D.var_A2E8["b"].var_3FFB unlink();
       level.var_E35D.var_A2E8["b"].var_3FFB.origin = level.var_E35D.var_A2E8["b"].var_3FFB.origin + anglesToForward(level.var_E35D.var_A2E8["b"].var_3FFB.angles) * level.var_E35D.var_A2E8["b"].var_3FFB.var_EACA;
       level.var_E35D.var_A2E8["b"].var_3FFB.angles = level.var_E35D.var_A2E8["b"].var_3FFB.angles + (0, 90, 0);
-      level.var_E35D.var_A2E8["b"].var_3FFB linkto(level.var_E35D.var_A2E8["b"]);
+      level.var_E35D.var_A2E8["b"].var_3FFB linkTo(level.var_E35D.var_A2E8["b"]);
       level.var_E35D.var_A2E8["a"].origin = level.var_E35D.var_A2E8["a"].var_1ACA;
       level.var_E35D.var_A2E8["b"].origin = level.var_E35D.var_A2E8["b"].var_1ACA;
       scripts\engine\utility::waitframe();
@@ -162,9 +162,9 @@ func_E3D9(var_0, var_1, var_2, var_3, var_4) {
   var_5 = length(var_1.var_3FFB.origin - var_1.var_3FFD gettagorigin("j_cranebase"));
 
   if(isDefined(var_4)) {
-    var_0 linkto(var_1.var_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 180, 0));
+    var_0 linkTo(var_1.var_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 180, 0));
   } else {
-    var_0 linkto(var_1.var_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 0, 0));
+    var_0 linkTo(var_1.var_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 0, 0));
   }
 }
 
@@ -188,7 +188,7 @@ func_E3D1(var_0, var_1, var_2, var_3, var_4) {
       var_10 = 1;
     case "full":
       var_11 = var_5 - var_9;
-      level.var_E35D.var_A2E8[var_0] moveto(level.var_E35D.var_A2E8[var_0].var_11A05, var_11);
+      level.var_E35D.var_A2E8[var_0] moveTo(level.var_E35D.var_A2E8[var_0].var_11A05, var_11);
 
       if(var_0 == "a") {
         level.var_E35D.var_A2E8[var_0] thread func_E3CC(var_11, 1);
@@ -199,14 +199,14 @@ func_E3D1(var_0, var_1, var_2, var_3, var_4) {
       }
 
       level.var_E35D.var_A2EA thread func_E3D4(var_5);
-      level.var_E35D.var_A2EA moveto(level.var_E35D.var_A2EA.origin + anglestoright(level.var_E35D.var_A2EA.angles) * 816, var_5);
+      level.var_E35D.var_A2EA moveTo(level.var_E35D.var_A2EA.origin + anglestoright(level.var_E35D.var_A2EA.angles) * 816, var_5);
       wait(var_5 - 0.25);
 
       if(var_0 == "a") {
         level.var_E35D.var_A2E8[var_0] thread func_E3CC(var_4);
       }
 
-      level.var_E35D.var_A2E8[var_0] moveto(level.var_E35D.var_A2E8[var_0].var_1ACA, var_4);
+      level.var_E35D.var_A2E8[var_0] moveTo(level.var_E35D.var_A2E8[var_0].var_1ACA, var_4);
       level.var_E35D.var_A2EA thread func_E3D2(var_6, var_0);
       level waittill("return_door_closed");
     case "pressurize":
@@ -217,12 +217,12 @@ func_E3D1(var_0, var_1, var_2, var_3, var_4) {
       level scripts\sp\endmission::func_CCA8("sc_assault_maptrans_jackal_return", 15);
     case "airlock":
       level.var_E35D.var_A2E8[var_0] thread func_E3CC(var_2, 1);
-      level.var_E35D.var_A2E8[var_0] moveto(level.var_E35D.var_A2E8[var_0].var_1AE0, var_2);
+      level.var_E35D.var_A2E8[var_0] moveTo(level.var_E35D.var_A2E8[var_0].var_1AE0, var_2);
       level.var_E35D thread func_E3CE(var_0, var_2, undefined);
       wait(var_2 + var_9);
       level notify("light_jackal_middoor");
       level.var_E35D.var_A2E9 thread func_E3D4(var_7);
-      level.var_E35D.var_A2E9 moveto(level.var_E35D.var_A2E9.origin + anglestoright(level.var_E35D.var_A2E9.angles) * 816, var_7);
+      level.var_E35D.var_A2E9 moveTo(level.var_E35D.var_A2E9.origin + anglestoright(level.var_E35D.var_A2E9.angles) * 816, var_7);
       wait(var_7);
 
       if(var_0 == "a") {
@@ -231,7 +231,7 @@ func_E3D1(var_0, var_1, var_2, var_3, var_4) {
         level.var_E35D.var_A2E8[var_0] thread func_E3CC(var_3, 1);
       }
 
-      level.var_E35D.var_A2E8[var_0] moveto(level.var_E35D.var_A2E8[var_0].var_62EB, var_3);
+      level.var_E35D.var_A2E8[var_0] moveTo(level.var_E35D.var_A2E8[var_0].var_62EB, var_3);
       wait(var_3);
 
       if(var_0 == "a") {
@@ -240,9 +240,9 @@ func_E3D1(var_0, var_1, var_2, var_3, var_4) {
         level.var_E35D.var_A2E8[var_0].var_A056 scripts\sp\utility::func_C12D("player_dismount", 1);
 
         if(level.script == "shipcrib_rogue" || level.script == "shipcrib_prisoner") {
-          if(isDefined(scripts\engine\utility::getstruct("jackal_return_a_exit", "targetname"))) {
+          if(isDefined(scripts\engine\utility::getStruct("jackal_return_a_exit", "targetname"))) {
             level.player scripts\engine\utility::delaycall(4.5, ::unlink);
-            level scripts\engine\utility::delaythread(4.5, scripts\sp\utility::func_11633, scripts\engine\utility::getstruct("jackal_return_a_exit", "targetname"));
+            level scripts\engine\utility::delaythread(4.5, scripts\sp\utility::func_11633, scripts\engine\utility::getStruct("jackal_return_a_exit", "targetname"));
           }
         }
       }
@@ -266,8 +266,8 @@ func_E3D1(var_0, var_1, var_2, var_3, var_4) {
         level.var_E35D.var_A2E8[var_0].var_3FFB.origin = level.var_E35D.var_A2E8[var_0].var_3FFB.origin + anglesToForward(level.var_E35D.var_A2E8["b"].var_3FFB.angles) * level.var_E35D.var_A2E8[var_0].var_3FFB.var_EACA;
       }
 
-      level.var_E35D.var_A2E8[var_0].var_3FFB linkto(level.var_E35D.var_A2E8[var_0]);
-      level.var_E35D.var_A2E8[var_0] moveto(level.var_E35D.var_A2E8[var_0].var_62EB, 0.05);
+      level.var_E35D.var_A2E8[var_0].var_3FFB linkTo(level.var_E35D.var_A2E8[var_0]);
+      level.var_E35D.var_A2E8[var_0] moveTo(level.var_E35D.var_A2E8[var_0].var_62EB, 0.05);
       break;
   }
 }
@@ -287,7 +287,7 @@ func_E3D2(var_0, var_1) {
   }
 
   thread func_E3D4(var_0);
-  self moveto(self.origin + anglestoright(self.angles) * -816, var_0);
+  self moveTo(self.origin + anglestoright(self.angles) * -816, var_0);
   wait(var_0);
   self.var_9B94 = undefined;
   level notify("return_door_closed");
@@ -356,7 +356,7 @@ func_E3CD(var_0, var_1, var_2, var_3) {
       level.var_E35D.var_A2E8[var_0].var_3FFB unlink();
       level.var_E35D.var_A2E8[var_0].var_3FFB.angles = level.var_E35D.var_A2E8[var_0].var_3FFB.angles + (0, var_8, 0);
       level.var_E35D.var_A2E8[var_0].var_3FFB.origin = level.var_E35D.var_A2E8[var_0].var_3FFB.origin + anglesToForward(level.var_E35D.var_A2E8["b"].angles) * var_9 * var_6;
-      level.var_E35D.var_A2E8[var_0].var_3FFB linkto(level.var_E35D.var_A2E8[var_0]);
+      level.var_E35D.var_A2E8[var_0].var_3FFB linkTo(level.var_E35D.var_A2E8[var_0]);
     }
 
     scripts\engine\utility::waitframe();

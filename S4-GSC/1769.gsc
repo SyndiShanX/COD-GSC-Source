@@ -889,8 +889,8 @@ _id_10121() {
 _id_0C43(var_0, var_1) {
   if(isDefined(var_0) && isDefined(var_1)) {
     var_2 = self _meth_8131();
-    var_2 = vectornormalize(var_2);
-    var_0 = vectornormalize(var_0);
+    var_2 = vectorNormalize(var_2);
+    var_0 = vectorNormalize(var_0);
     var_3 = _func_025E(var_2, var_0, var_1);
     return var_3;
   } else
@@ -1021,7 +1021,7 @@ _id_8D27(var_0, var_1, var_2, var_3) {
     self notify(var_1._id_A6B5);
   }
 
-  var_4 = vectornormalize(self.origin - var_3.origin);
+  var_4 = vectorNormalize(self.origin - var_3.origin);
 
   if(isDefined(var_1._id_D082)) {
     scripts\engine\utility::_id_46A5(var_1._id_D082, ::delete);
@@ -1115,7 +1115,7 @@ _id_43EB() {
     var_0.angles = self.angles;
     var_0 notsolid();
     var_0 hide();
-    var_0 linkto(self);
+    var_0 linkTo(self);
     var_0._id_43B7 = 1;
     self._id_43EB = var_0;
   } else
@@ -1215,7 +1215,7 @@ _id_FBD0(var_0) {
 }
 
 _id_64B7(var_0) {
-  return scripts\engine\utility::getstruct(var_0, "targetname");
+  return scripts\engine\utility::getStruct(var_0, "targetname");
 }
 
 _id_64B6(var_0) {
@@ -1233,7 +1233,7 @@ _id_64B8(var_0) {
 }
 
 _id_D280(var_0) {
-  var_1 = getent(var_0._id_0399, "script_linkname");
+  var_1 = getEnt(var_0._id_0399, "script_linkname");
 
   if(!isDefined(var_1)) {
     return;
@@ -1859,12 +1859,12 @@ mainturret_fire_effect_rumble(var_0) {
     var_10 = _func_0219(var_3);
 
     if(var_8 < var_10) {
-      level.player playrumbleonentity(var_4);
+      level.player playRumbleOnEntity(var_4);
       return;
     }
 
     if(var_8 < var_9) {
-      level.player playrumbleonentity(var_5);
+      level.player playRumbleOnEntity(var_5);
       return;
     }
 
@@ -1873,7 +1873,7 @@ mainturret_fire_effect_rumble(var_0) {
     var_10 = _func_0219(var_3);
 
     if(var_8 < var_10) {
-      level.player playrumbleonentity(var_4);
+      level.player playRumbleOnEntity(var_4);
     }
   }
 }
@@ -2015,7 +2015,7 @@ _id_F885(var_0) {
     var_5 = self._id_997E;
   }
 
-  var_3 linkto(var_5, var_0._id_0427, var_4, (-1 * var_2, -1 * var_1, 0));
+  var_3 linkTo(var_5, var_0._id_0427, var_4, (-1 * var_2, -1 * var_1, 0));
   var_3 setModel(var_0.model);
   var_3.angles = self.angles;
   var_3._id_8AF6 = 1;
@@ -2251,7 +2251,7 @@ _id_1024E() {
   var_3 = -1 * var_1._id_0359;
   var_4 = spawn("trigger_radius", self.origin + (0, 0, var_3), 0, var_1._id_0359, var_2);
   var_4 _meth_80DB();
-  var_4 linkto(self);
+  var_4 linkTo(self);
   self._id_C9A2 = var_4;
   self endon("death");
 
@@ -2376,11 +2376,11 @@ _id_681C(var_0) {
   var_1 = _func_00E5(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   } else if(_id_8897()) {}
 
   if(!isDefined(var_1)) {
-    var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   }
 
   return var_1;
@@ -3208,7 +3208,7 @@ _id_777A(var_0) {
   self endon("entitydeleted");
 
   while(isDefined(var_0.target)) {
-    var_0 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_1 = 56;
 
     if(isDefined(var_0._id_0359)) {

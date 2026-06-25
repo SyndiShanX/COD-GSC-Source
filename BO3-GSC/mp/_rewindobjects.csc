@@ -161,7 +161,7 @@ function addrewindableeventtowatcher(starttime, data) {
   }
 }
 
-function servertimedmoveto(localclientnum, startpoint, endpoint, starttime, duration) {
+function servertimedmoveTo(localclientnum, startpoint, endpoint, starttime, duration) {
   level endon("demo_jump" + localclientnum);
   timeelapsed = (level.servertime - starttime) * 0.001;
   assert(duration > 0);
@@ -175,14 +175,14 @@ function servertimedmoveto(localclientnum, startpoint, endpoint, starttime, dura
       jumppoint = getpointonline(startpoint, endpoint, timeelapsed / duration);
       self.origin = jumppoint;
     }
-    self moveto(endpoint, movetime, 0, 0);
+    self moveTo(endpoint, movetime, 0, 0);
     return true;
   }
   self.origin = endpoint;
   return false;
 }
 
-function servertimedrotateto(localclientnum, angles, starttime, duration, timein, timeout) {
+function servertimedrotateTo(localclientnum, angles, starttime, duration, timein, timeout) {
   level endon("demo_jump" + localclientnum);
   timeelapsed = (level.servertime - starttime) * 0.001;
   if(!isDefined(timein)) {
@@ -194,7 +194,7 @@ function servertimedrotateto(localclientnum, angles, starttime, duration, timein
   assert(duration > 0);
   if(timeelapsed < duration) {
     rotatetime = duration - timeelapsed;
-    self rotateto(angles, rotatetime, timein, timeout);
+    self rotateTo(angles, rotatetime, timein, timeout);
     return true;
   }
   self.angles = angles;

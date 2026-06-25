@@ -155,7 +155,7 @@ _id_3BA9(var_0, var_1, var_2, var_3, var_4) {
 
 _id_3BAA(var_0, var_1, var_2) {
   var_3 = vectortoangles(var_2 - var_1);
-  var_4 = getent("airdrop_littlebird", "targetname");
+  var_4 = getEnt("airdrop_littlebird", "targetname");
   var_4.origin = var_1;
   var_4.angles = var_3;
   var_5 = maps\_vehicle::_id_2A99("airdrop_littlebird");
@@ -193,7 +193,7 @@ _id_3BAB(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
   self.owner endon("disconnect");
   var_6 = _id_3BAC(self.owner, var_0, var_5);
-  var_6 linkto(self, "tag_ground", (32, 0, 5), (0, 0, 0));
+  var_6 linkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
   var_6.angles = (0, 0, 0);
   var_6 show();
   var_7 = self.veh_speed;
@@ -273,7 +273,7 @@ _id_3BB4() {
   var_0.origin = self.origin;
   var_0.angles = self.angles;
   var_0 solid();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0._id_3BB3 = 1;
   self.collision = var_0;
 }
@@ -396,7 +396,7 @@ _id_3BC0(var_0) {
 }
 
 _id_3BC3() {
-  self.collision disconnectpaths();
+  self.collision disconnectPaths();
   var_0 = _id_0611::_id_3BC4(self.cratetype);
   self._id_3BBD = var_0;
   var_1 = _id_3BC9();
@@ -405,8 +405,8 @@ _id_3BC3() {
   objective_icon(var_1, "compass_objpoint_ammo_friendly");
   self.objidfriendly = var_1;
   _id_3BCB(var_0._id_3BC5, (0, 0, 24), 14, 14);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(var_0._id_3BC6);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(var_0._id_3BC6);
   self makeusable();
 
   if(isDefined(level._id_3BC7) && level._id_3BC7) {
@@ -585,7 +585,7 @@ _id_3BD2(var_0) {
 
 getflyheightoffset(var_0) {
   var_1 = 850;
-  var_2 = getent("airstrikeheight", "targetname");
+  var_2 = getEnt("airstrikeheight", "targetname");
 
   if(!isDefined(var_2)) {
     if(isDefined(level.airstrikeheightscale)) {

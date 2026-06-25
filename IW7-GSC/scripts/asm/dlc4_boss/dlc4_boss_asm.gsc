@@ -80,7 +80,7 @@ shouldplayentranceanim(var_0, var_1, var_2, var_3) {
 introfx() {
   var_0 = scripts\asm\dlc4\dlc4_asm::gettunedata();
   self.vo_ent = spawn("script_origin", self gettagorigin("tag_origin"));
-  self.vo_ent linkto(self);
+  self.vo_ent linkTo(self);
   playFX(var_0.air_pound_rise_fx, self.arenacenter);
   wait(0.1);
   playsoundatpos(self.arenacenter, "zmb_ground_spawn_dirt");
@@ -106,7 +106,7 @@ introfx() {
 playmoveexit(var_0, var_1, var_2, var_3) {
   self orientmode("face angle abs", self.angles);
   var_4 = self._blackboard;
-  var_4.desireddir = vectornormalize(var_4.nodes[var_4.desirednode].origin - self.origin);
+  var_4.desireddir = vectorNormalize(var_4.nodes[var_4.desirednode].origin - self.origin);
   var_5 = scripts\asm\asm_mp::asm_getanim(var_0, var_1);
   var_6 = self getsafecircleorigin(var_1, var_5);
   if(self._blackboard.smoothmotion) {
@@ -187,7 +187,7 @@ applyallmotiontowardsdesireddir(var_0, var_1, var_2, var_3) {
     var_11 = getmovedelta(var_1, var_8, var_9);
     var_10 = var_10 + length2d(var_11) * var_2;
     var_12 = self.origin + self._blackboard.desireddir * var_10;
-    self setorigin(var_12 - (0, 0, 1), 0);
+    self setOrigin(var_12 - (0, 0, 1), 0);
     wait(0.05);
     var_4 = var_4 + 0.05;
   }
@@ -213,12 +213,12 @@ adjustlookahead(var_0) {
           continue;
         }
 
-        var_9 = vectornormalize(var_1.nodes[var_1.lookaheadnextnode].origin - var_1.nodes[var_1.lookaheadcurrnode].origin);
+        var_9 = vectorNormalize(var_1.nodes[var_1.lookaheadnextnode].origin - var_1.nodes[var_1.lookaheadcurrnode].origin);
         var_1.lookaheadorigin = var_1.lookaheadorigin + var_9 * var_7;
       }
     }
 
-    self._blackboard.desireddir = vectornormalize(var_1.lookaheadorigin - self.origin * (1, 1, 0));
+    self._blackboard.desireddir = vectorNormalize(var_1.lookaheadorigin - self.origin * (1, 1, 0));
     wait(0.05);
   }
 }
@@ -361,7 +361,7 @@ clap_note_handler(var_0, var_1, var_2, var_3) {
 
 doclapdamage() {
   level endon("rockwall_end");
-  var_0 = getent("rockwall_trig", "targetname");
+  var_0 = getEnt("rockwall_trig", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(!var_1 scripts\cp\utility::is_valid_player()) {
@@ -391,16 +391,16 @@ handleclapprojectile() {
   var_7 setModel(var_0.ratking_staff_projectile_model);
   var_7 show();
   var_7.angles = var_1 + (0, 90, 0);
-  var_8 = getent("rockwall_clip", "targetname");
+  var_8 = getEnt("rockwall_clip", "targetname");
   var_8.angles = var_1 + (0, 90, 0);
   var_8.origin = var_5;
-  var_8 linkto(var_7);
+  var_8 linkTo(var_7);
   var_8 thread doclapdamage();
   var_7 playsoundonmovingent("cp_final_meph_rock_spires");
   level.rockwall_forming = 1;
   while(gettime() < var_6) {
     doclaplethaldamage(var_5, var_4, var_0.staff_projectile_z_delta, var_0.staff_projectile_damage);
-    var_7 moveto(var_5, var_0.staff_projectile_interval);
+    var_7 moveTo(var_5, var_0.staff_projectile_interval);
     earthquake(0.35, 1, var_5, 256);
     wait(var_0.staff_projectile_interval);
     var_5 = var_5 + var_1 * var_3;
@@ -457,7 +457,7 @@ warp_to_closest() {
     wait(0.05);
   }
 
-  self setorigin(getclosestpointonnavmesh(self.origin));
+  self setOrigin(getclosestpointonnavmesh(self.origin));
 }
 
 unlink_from_anchor() {
@@ -540,12 +540,12 @@ createfiretornado(var_0) {
   var_2 = spawn("script_model", var_0.origin);
   wait(0.05);
   var_2 setModel("tag_origin_fire_tornado");
-  var_1 enablelinkto();
-  var_1 linkto(var_2);
+  var_1 enablelinkTo();
+  var_1 linkTo(var_2);
   var_1 thread firetornadodamage();
   wait(0.05);
   var_2 playLoopSound("cp_final_meph_tornado_small_lp");
-  var_2 moveto(scripts\engine\utility::random(scripts\engine\utility::getStructArray(var_0.target, "targetname")).origin, 3);
+  var_2 moveTo(scripts\engine\utility::random(scripts\engine\utility::getStructArray(var_0.target, "targetname")).origin, 3);
   var_2 waittill("movedone");
   var_2 stoploopsound();
   playsoundatpos(var_2.origin, "cp_final_meph_tornado_small_end");
@@ -998,7 +998,7 @@ eclipsespecialwavetimer() {
 }
 
 create_eclipse() {
-  var_0 = getent("eclipse_blocker", "targetname");
+  var_0 = getEnt("eclipse_blocker", "targetname");
   if(!isDefined(var_0.og_origin)) {
     var_0.og_origin = var_0.origin;
   }
@@ -1007,7 +1007,7 @@ create_eclipse() {
   triggerfx(var_1);
   playsoundatpos((-17910.3, 966.038, 5116), "cp_final_meph_eclipse_rock_forming");
   wait(1);
-  var_0 moveto((-17391.3, 400, 3900), 1.25);
+  var_0 moveTo((-17391.3, 400, 3900), 1.25);
   level.current_vision_set = "cp_final_meph_eclipse";
   visionsetnaked("cp_final_meph_eclipse", 1);
   level waittill("ECLIPSE_SPAWN_COMPLETE");
@@ -1016,7 +1016,7 @@ create_eclipse() {
   var_1 delete();
   visionsetnaked("cp_final_meph", 1);
   level.current_vision_set = "cp_final_meph";
-  var_0 moveto(var_0.og_origin, 1.25);
+  var_0 moveTo(var_0.og_origin, 1.25);
   thread createarmageddon();
 }
 
@@ -1292,7 +1292,7 @@ teleporttodesirednode(var_0) {
 }
 
 func_11663(var_0) {
-  self setorigin(var_0 - (0, 0, 1), 0);
+  self setOrigin(var_0 - (0, 0, 1), 0);
   self._blackboard.var_4BF7 = self._blackboard.desirednode;
 }
 

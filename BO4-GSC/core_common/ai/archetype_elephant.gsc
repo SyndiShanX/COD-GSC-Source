@@ -204,7 +204,7 @@ elephantstartdeath(elephant) {
   level thread function_106b6b29();
 
   if(var_55ec4bbf) {
-    soulball = spawnvehicle(#"hash_2db015dc967ccf56", origin, angles, "soul_ball_ai");
+    soulball = spawnVehicle(#"hash_2db015dc967ccf56", origin, angles, "soul_ball_ai");
 
     if(isDefined(soulball)) {
       soulball.var_6353e3f1 = 1;
@@ -231,7 +231,7 @@ function_78f4a0d1() {
 
 function_106b6b29() {
   wait 4.5;
-  playsoundatposition(#"hash_4cf49c7c9533b539", (0, 0, 0));
+  playSoundAtPosition(#"hash_4cf49c7c9533b539", (0, 0, 0));
 }
 
 function_8d7ad318(launchpos, trajectory, targetpos) {
@@ -275,7 +275,7 @@ function_4b28fc8c(entity) {
 
   headproj = spawn("script_model", launchpos);
   headproj setModel("tag_origin");
-  vectorfromenemy = vectornormalize(entity.origin - landpos);
+  vectorfromenemy = vectorNormalize(entity.origin - landpos);
   vectorfromenemy = vectorscale(vectorfromenemy, 250);
   targetpos = landpos + vectorfromenemy + (0, 0, 200);
   headproj clientfield::set("towers_boss_head_proj_fx_cf", 1);
@@ -293,7 +293,7 @@ function_4b28fc8c(entity) {
   var_10b732dc = 0.3;
 
   foreach(point in trajectory) {
-    headproj moveto(point, var_10b732dc);
+    headproj moveTo(point, var_10b732dc);
     headproj waittill(#"movedone");
   }
 
@@ -318,7 +318,7 @@ function_df15eebf(entity) {
       weapon = getweapon(#"zombie_ai_defaultmelee");
       target status_effect::status_effect_apply(params, weapon, entity, 0, 500);
       var_95fca4e5 = (target.origin[0], target.origin[1], self.origin[2]);
-      var_7d97040b = vectornormalize(var_95fca4e5 - self.origin);
+      var_7d97040b = vectorNormalize(var_95fca4e5 - self.origin);
       target playerknockback(1);
       knockback = mapfloat(0, 600, 100, 1000, dist);
       target applyknockback(int(knockback), var_7d97040b);
@@ -363,7 +363,7 @@ function_2328518e(entity) {
       params = getstatuseffect(#"hash_2c80515d8ac9f1b4");
       weapon = getweapon("zombie_ai_defaultmelee");
       target status_effect::status_effect_apply(params, weapon, entity, 0, 500);
-      var_7d97040b = vectornormalize(anglesToForward(target.origin - self.origin));
+      var_7d97040b = vectorNormalize(anglesToForward(target.origin - self.origin));
       target playerknockback(1);
       knockback = mapfloat(0, 450, 100, 500, dist);
       target applyknockback(int(knockback), var_7d97040b);
@@ -693,7 +693,7 @@ function_2798bb2(elephant, rider) {
     rider animation::play(rider.ai.entryanim, alignstruct.origin, alignstruct.angles, 1, 0.2, 0.1, undefined, undefined, undefined, 0);
     rider.takedamage = 1;
     assert(isDefined(rider.ai.var_4f12fc77));
-    rider linkto(elephant, rider.ai.var_4f12fc77, (0, 0, 0), (0, 0, 0));
+    rider linkTo(elephant, rider.ai.var_4f12fc77, (0, 0, 0), (0, 0, 0));
   }
 
   rider thread function_978a4592(elephant, rider);
@@ -734,7 +734,7 @@ function_e5f2ff53(elephant, var_a4946e52, targetname) {
   assert(isDefined(rider));
   rider attach("p7_shr_weapon_spear_lrg", "tag_weapon_right");
   rider.var_c8ec4813 = 1;
-  rider linkto(self, var_a4946e52, (0, 0, 0), (0, 0, 0));
+  rider linkTo(self, var_a4946e52, (0, 0, 0), (0, 0, 0));
   array::add(elephant.ai.riders, rider);
   rider.ai.spearweapon = getweapon("rider_spear_projectile");
   rider.ai.elephant = elephant;
@@ -921,8 +921,8 @@ function_1d65bc12(enemy, elephant, var_60e4c6b7 = 1) {
   enemyvec = enemy.origin - elephant.origin;
   var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
   var_c2ee8451 = (facingvec[0], facingvec[1], 0);
-  var_3e3c8075 = vectornormalize(var_3e3c8075);
-  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  var_3e3c8075 = vectorNormalize(var_3e3c8075);
+  var_c2ee8451 = vectorNormalize(var_c2ee8451);
 
   if(var_60e4c6b7) {
     enemydot = vectordot(var_c2ee8451, var_3e3c8075);
@@ -1393,7 +1393,7 @@ function_cd472d5(entity) {
 
 function_ce8fe2b0(entity, splitorigin) {
   self endon(#"death");
-  forwardvec = vectornormalize(anglesToForward(entity.angles));
+  forwardvec = vectorNormalize(anglesToForward(entity.angles));
   forwarddist = 200;
 
   if(isDefined(splitorigin)) {
@@ -1413,7 +1413,7 @@ function_ce8fe2b0(entity, splitorigin) {
 
     recordsphere(newpos, 15, (1, 0.5, 0), "<dev string:x41>");
 
-    dustball = spawnvehicle(#"hash_6be593a62b8b87a5", newpos, entity.angles, "dynamic_spawn_ai");
+    dustball = spawnVehicle(#"hash_6be593a62b8b87a5", newpos, entity.angles, "dynamic_spawn_ai");
 
     if(isDefined(dustball)) {
       dustball.var_6353e3f1 = 1;
@@ -1428,7 +1428,7 @@ function_ce8fe2b0(entity, splitorigin) {
   }
 
   wait 0.5;
-  targets = getplayers();
+  targets = getPlayers();
 
   for(i = 0; i < targets.size; i++) {
     target = targets[i];
@@ -1658,7 +1658,7 @@ function_f8145b00(entity) {
         if(isDefined(targetpos)) {
           recordsphere(targetpos, 8, (0, 1, 1), "<dev string:x41>");
 
-          dirtoenemy = vectornormalize(targetpos - self.origin);
+          dirtoenemy = vectorNormalize(targetpos - self.origin);
           targetpos += vectorscale(dirtoenemy * -1, 170);
           targetpos = getclosestpointonnavmesh(targetpos, 400, entity getpathfindingradius() * 1.2);
 
@@ -1772,7 +1772,7 @@ function_ab5aea01(entity) {
     return false;
   }
 
-  targets = getplayers();
+  targets = getPlayers();
 
   for(i = 0; i < targets.size; i++) {
     target = targets[i];

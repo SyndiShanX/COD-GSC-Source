@@ -20,13 +20,13 @@ forceinitbroshot() {
 
 initbroshot(var_0) {
   level.camera_bro_shot = spawnStruct();
-  level.camera_bro_shot.basecam = getent("camera_mp_broshot", "targetname");
-  level.camera_bro_shot.char_loc[0] = getent("character_loc_broshot", "targetname");
-  level.camera_bro_shot.char_loc[2] = getent("character_loc_broshot_a", "targetname");
-  level.camera_bro_shot.char_loc[1] = getent("character_loc_broshot_b", "targetname");
-  level.camera_bro_shot.char_loc[3] = getent("character_loc_broshot_c", "targetname");
-  level.camera_bro_shot.char_loc[4] = getent("character_loc_broshot_d", "targetname");
-  level.camera_bro_shot.char_loc[5] = getent("character_loc_broshot_e", "targetname");
+  level.camera_bro_shot.basecam = getEnt("camera_mp_broshot", "targetname");
+  level.camera_bro_shot.char_loc[0] = getEnt("character_loc_broshot", "targetname");
+  level.camera_bro_shot.char_loc[2] = getEnt("character_loc_broshot_a", "targetname");
+  level.camera_bro_shot.char_loc[1] = getEnt("character_loc_broshot_b", "targetname");
+  level.camera_bro_shot.char_loc[3] = getEnt("character_loc_broshot_c", "targetname");
+  level.camera_bro_shot.char_loc[4] = getEnt("character_loc_broshot_d", "targetname");
+  level.camera_bro_shot.char_loc[5] = getEnt("character_loc_broshot_e", "targetname");
   if((!isDefined(self) || !isDefined(level.camera_bro_shot.basecam) || !isDefined(level.teamlist) || !isDefined(level.teamlist["allies"]) || !isDefined(level.teamlist["axis"]) || level.teamlist["allies"].size == 0 && level.teamlist["axis"].size == 0) && !scripts\mp\utility::istrue(level.forcebroshot)) {
     return 0;
   }
@@ -193,7 +193,7 @@ startbroshot(var_0) {
       continue;
     }
 
-    var_3 cameralinkto(level.camera_anchor, "tag_origin", 1);
+    var_3 cameralinkTo(level.camera_anchor, "tag_origin", 1);
     var_3 thread scripts\mp\utility::setuipostgamefade(0);
     scripts\mp\utility::_visionsetnaked("", 0);
     if(!scripts\mp\utility::istrue(level.forcebroshot)) {
@@ -381,8 +381,8 @@ camera_move_helper(var_0, var_1, var_2, var_3) {
   }
 
   level.camera_anchor.move_target = var_0;
-  level.camera_anchor moveto(var_0.origin, var_5);
-  level.camera_anchor rotateto(var_0.angles, var_5);
+  level.camera_anchor moveTo(var_0.origin, var_5);
+  level.camera_anchor rotateTo(var_0.angles, var_5);
   if(isDefined(var_3)) {
     wait(var_5 - var_3);
     thread scripts\mp\utility::setuipostgamefade(var_3);
@@ -846,7 +846,7 @@ onplayerconnect() {
 startlatejoinpodium(var_0) {
   var_0 endon("disconnect");
   wait(0.25);
-  var_0 cameralinkto(level.camera_anchor, "tag_origin", 1);
+  var_0 cameralinkTo(level.camera_anchor, "tag_origin", 1);
   var_1 = var_0 getentitynumber();
   startpodium(var_1, self.mvparray);
 }

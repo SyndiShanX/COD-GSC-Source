@@ -128,7 +128,7 @@ function death_cleanup() {
     self stealth_threat_sight::threat_sight_set_state("death");
     aiutility::removeaioverridedamagecallback(self, &check_kill_damage);
   } else {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       foreach(k, v in player.stealth.threat_entities) {
         if(!isDefined(v)) {
           player.stealth.threat_entities[k] = undefined;
@@ -187,7 +187,7 @@ function proximity_check() {
   var_2b2af503 = undefined;
   playereye = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     donotify = 0;
     dotrace = 0;
 
@@ -372,7 +372,7 @@ function set_alert_level(type, event) {
   if(isDefined(event) && namespace_979752dc::function_7211414e(self.alertlevelscript) < namespace_979752dc::function_7211414e(type)) {
     self notify(#"alert_level_increase");
     event.var_c0659057 = namespace_979752dc::function_7211414e(type);
-    players = getplayers();
+    players = getPlayers();
 
     if(isDefined(players) && players.size > 0) {
       foreach(player in players) {
@@ -505,10 +505,10 @@ function headtrack_player_toggle(bool) {
     }
 
     if(!isDefined(self.stealth.looking_at_entity)) {
-      self.stealth.looking_at_entity = getplayers()[0];
+      self.stealth.looking_at_entity = getPlayers()[0];
     }
 
-    self lookatentity(getplayers()[0]);
+    self lookatentity(getPlayers()[0]);
     return;
   }
 
@@ -608,7 +608,7 @@ function event_handler_should_ignore(event) {
 
 function should_ignore_sprint_footstep(event) {
   traceoffset = (0, 0, 18);
-  ignoreents = getplayers();
+  ignoreents = getPlayers();
 
   if(isDefined(self.stealth.cantracetoaiignoreents)) {
     ignoreents = arraycombine(ignoreents, self.stealth.cantracetoaiignoreents);

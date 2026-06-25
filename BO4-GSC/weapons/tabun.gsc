@@ -93,7 +93,7 @@ damageeffectarea(owner, position, radius, height, killcament) {
   durationoftabun = level.tabungasduration;
 
   while(durationoftabun > 0) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(level.friendlyfire == 0) {

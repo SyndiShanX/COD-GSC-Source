@@ -175,7 +175,7 @@ _id_D264() {
 
 _id_8C0A() {
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   wait 0.1;
   var_0 setModel("juggernaut_scriptable");
   scripts\engine\utility::waittill_any_3("juggernaut_end", "disconnect", "death");
@@ -608,7 +608,7 @@ _id_4459(var_0) {
   var_0._id_54CF = 1;
 
   if(isDefined(var_0._id_E342.target)) {
-    var_1 = scripts\engine\utility::getstruct(var_0._id_E342.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0._id_E342.target, "targetname");
     var_0 _id_D22F(var_1.origin);
   }
 
@@ -1062,7 +1062,7 @@ _id_3D5C(var_0, var_1) {
   }
 
   if(isDefined(var_0._id_CD76)) {
-    var_1._id_CD76 = getent(var_0._id_CD76, "targetname");
+    var_1._id_CD76 = getEnt(var_0._id_CD76, "targetname");
   }
 }
 
@@ -2126,10 +2126,10 @@ _id_998B(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   self.trigger = spawn("script_model", self.origin + (0, 0, 30));
-  self.trigger linkto(self);
+  self.trigger linkTo(self);
   self.trigger makeuseable();
   self.trigger _meth_83A2();
-  self.trigger setcursorhint("HINT_BUTTON");
+  self.trigger setCursorHint("HINT_BUTTON");
   self.trigger _meth_84D4(148);
   self.trigger sethintdisplayfov(90);
   self.trigger setuserange(72);
@@ -2139,7 +2139,7 @@ _id_998B(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.trigger setuseholdduration("duration_short");
 
   if(isDefined(var_2)) {
-    self.trigger sethintstring(var_2);
+    self.trigger setHintString(var_2);
   }
 
   if(isDefined(var_4)) {
@@ -6959,7 +6959,7 @@ _id_7072(var_0, var_1) {
         var_5 = var_0[[var_1]](var_0.target);
 
         if(var_5.size == 1) {
-          var_4 = vectornormalize(var_5[0].origin - var_0.origin);
+          var_4 = vectorNormalize(var_5[0].origin - var_0.origin);
         } else if(isDefined(var_0.angles)) {
           var_4 = anglesToForward(var_0.angles);
         }
@@ -6967,7 +6967,7 @@ _id_7072(var_0, var_1) {
         var_4 = anglesToForward(var_0.angles);
 
       var_6 = [];
-      var_6[var_6.size] = vectornormalize(var_3.origin - self.origin);
+      var_6[var_6.size] = vectorNormalize(var_3.origin - self.origin);
 
       foreach(var_8 in var_6) {
         if(vectordot(var_4, var_8) > 0) {
@@ -8048,7 +8048,7 @@ _id_0C8A(var_0, var_1) {
         }
       }
 
-      var_3 rotateto(var_0.angles, 0.75);
+      var_3 rotateTo(var_0.angles, 0.75);
     }
 
     wait 0.75;

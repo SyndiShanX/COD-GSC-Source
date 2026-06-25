@@ -471,8 +471,7 @@ exploder_damage() {
 
   if(isDefined(level.custom_radius_damage_for_exploders)) {
     [[level.custom_radius_damage_for_exploders]](origin, radius, damage);
-  } else {
-  }
+  } else {}
   RadiusDamage(origin, radius, damage, damage);
 }
 
@@ -677,7 +676,7 @@ exploder_rumble() {
     return;
   }
   self exploder_delay();
-  level.player PlayRumbleOnEntity(self.v["rumble"]);
+  level.player playRumbleOnEntity(self.v["rumble"]);
 }
 
 exploder_delay() {

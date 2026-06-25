@@ -55,7 +55,7 @@ function function_38ba2136() {
 }
 
 function function_4035bef1() {
-  trigger = getent(0, "siren", "targetname");
+  trigger = getEnt(0, "siren", "targetname");
   if(!isDefined(trigger)) {
     return;
   }

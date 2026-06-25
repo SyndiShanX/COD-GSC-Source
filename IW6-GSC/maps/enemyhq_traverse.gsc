@@ -21,7 +21,7 @@ setup_traverse() {
 
 begin_traverse() {
   level.sniper_vision_override = "enemyhq_sniper_view_b";
-  var_0 = getent("debris_slide", "targetname");
+  var_0 = getEnt("debris_slide", "targetname");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_clear("done_sniping_early");
   maps\_utility::autosave_by_name("traverse");
@@ -29,7 +29,7 @@ begin_traverse() {
   thread handle_rpg_ambush();
   thread turn_off_sniping();
   common_scripts\utility::flag_wait("start_rpg_ambush");
-  level.remote_sniper_return_struct = common_scripts\utility::getstruct("ambush_return_spot", "targetname");
+  level.remote_sniper_return_struct = common_scripts\utility::getStruct("ambush_return_spot", "targetname");
   thread handle_ambush_return_spot();
   level.dog maps\_utility::disable_ai_color();
   level.dog setgoalpos(level.dog.origin);
@@ -119,19 +119,19 @@ player_rpg_attractor() {
 }
 
 rpg_crash() {
-  var_0 = common_scripts\utility::getstruct("rpg_originA", "targetname");
-  var_1 = common_scripts\utility::getstruct("rpg_targA", "targetname");
+  var_0 = common_scripts\utility::getStruct("rpg_originA", "targetname");
+  var_1 = common_scripts\utility::getStruct("rpg_targA", "targetname");
   var_2 = missile_createattractororigin(var_1.origin, 10000, 500);
   var_3 = magicbullet("rpg", var_0.origin, var_1.origin);
-  var_4 = getent("debris_slide", "targetname");
+  var_4 = getEnt("debris_slide", "targetname");
   var_4 common_scripts\utility::trigger_on();
   var_3 waittill("explode");
   thread maps\enemyhq_audio::aud_player_slide();
   screenshake(level.player.origin, 50, 50, 50, 0.5);
-  var_1 = common_scripts\utility::getstruct("rpg_explosion", "targetname");
+  var_1 = common_scripts\utility::getStruct("rpg_explosion", "targetname");
   var_5 = common_scripts\utility::getfx("remote_sniper_hit");
   playFX(var_5, var_1.origin, var_1.angles);
-  var_1 = common_scripts\utility::getstruct("rpg_explosion2", "targetname");
+  var_1 = common_scripts\utility::getStruct("rpg_explosion2", "targetname");
   var_5 = common_scripts\utility::getfx("remote_sniper_hit");
   playFX(var_5, var_1.origin, var_1.angles);
   missile_deleteattractor(var_2);
@@ -296,7 +296,7 @@ kill_allies_on_next_shot() {
 
 fake_ally_kill_me() {
   self endon("death");
-  var_0 = common_scripts\utility::getstruct("ally_kill_loc", "targetname");
+  var_0 = common_scripts\utility::getStruct("ally_kill_loc", "targetname");
   var_1 = level.allies[0].weapon;
   magicbullet(var_1, var_0.origin, self.origin + (0, 20, 0));
   wait 0.2;

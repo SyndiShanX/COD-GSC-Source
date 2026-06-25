@@ -117,13 +117,13 @@ heli_path_graph() {
     startnode_array = [];
     isprimarydest = 0;
     destnode_pointer = path_dest[i];
-    destnode = getent(destnode_pointer.target, "targetname");
+    destnode = getEnt(destnode_pointer.target, "targetname");
 
     for(j = 0; j < path_start.size; j++) {
       todest = 0;
 
       for(currentnode = path_start[j]; isDefined(currentnode.target); currentnode = nextnode) {
-        nextnode = getent(currentnode.target, "targetname");
+        nextnode = getEnt(currentnode.target, "targetname");
 
         if(nextnode.origin == destnode.origin) {
           todest = 1;
@@ -133,7 +133,7 @@ heli_path_graph() {
         debug_print3d_simple("+", currentnode, vectorscale((0, 0, -1), 10.0));
 
         if(isDefined(nextnode.target)) {
-          debug_line(nextnode.origin, getent(nextnode.target, "targetname").origin, (0.25, 0.5, 0.25), 5);
+          debug_line(nextnode.origin, getEnt(nextnode.target, "targetname").origin, (0.25, 0.5, 0.25), 5);
         }
 
         if(isDefined(currentnode.script_delay)) {
@@ -142,7 +142,7 @@ heli_path_graph() {
       }
 
       if(todest) {
-        startnode_array[startnode_array.size] = getent(path_start[j].target, "targetname");
+        startnode_array[startnode_array.size] = getEnt(path_start[j].target, "targetname");
 
         if(isDefined(path_start[j].script_noteworthy) && path_start[j].script_noteworthy == "primary") {
           isprimarydest = 1;
@@ -161,14 +161,14 @@ heli_path_graph() {
   }
 
   for(i = 0; i < loop_start.size; i++) {
-    startnode = getent(loop_start[i].target, "targetname");
+    startnode = getEnt(loop_start[i].target, "targetname");
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
 
   assert(isDefined(level.heli_loop_paths[0]), "No helicopter loop paths found in map");
 
   for(i = 0; i < gunner_loop_start.size; i++) {
-    startnode = getent(gunner_loop_start[i].target, "targetname");
+    startnode = getEnt(gunner_loop_start[i].target, "targetname");
     startnode.isgunnerpath = 1;
     level.heli_loop_paths[level.heli_loop_paths.size] = startnode;
   }
@@ -180,7 +180,7 @@ heli_path_graph() {
   assert(isDefined(level.heli_leavenodes[0]), "No helicopter leave nodes found in map");
 
   for(i = 0; i < crash_start.size; i++) {
-    crash_start_node = getent(crash_start[i].target, "targetname");
+    crash_start_node = getEnt(crash_start[i].target, "targetname");
     level.heli_crash_paths[level.heli_crash_paths.size] = crash_start_node;
   }
 
@@ -411,7 +411,7 @@ heli_think(owner, startnode, heli_team, missilesenabled, protectlocation, hardpo
   chopper.requireddeathcount = owner.deathcount;
   chopper.chaff_offset = level.chaff_offset["attack"];
   minigun_snd_ent = spawn("script_origin", chopper gettagorigin("tag_flash"));
-  minigun_snd_ent linkto(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
+  minigun_snd_ent linkTo(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
   chopper.minigun_snd_ent = minigun_snd_ent;
   minigun_snd_ent thread autostopsound();
   chopper.team = heli_team;
@@ -483,7 +483,7 @@ heli_existance() {
 create_flare_ent(offset) {
   self.flare_ent = spawn("script_model", self gettagorigin("tag_origin"));
   self.flare_ent setModel("tag_origin");
-  self.flare_ent linkto(self, "tag_origin", offset);
+  self.flare_ent linkTo(self, "tag_origin", offset);
 }
 
 heli_missile_regen() {
@@ -1649,7 +1649,7 @@ heli_fly(currentnode, startwait, hardpointtype) {
   wait(startwait);
 
   while(isDefined(currentnode.target)) {
-    nextnode = getent(currentnode.target, "targetname");
+    nextnode = getEnt(currentnode.target, "targetname");
     assert(isDefined(nextnode), "Next node in path is undefined, but has targetname");
     pos = nextnode.origin + vectorscale((0, 0, 1), 30.0);
 
@@ -2039,9 +2039,9 @@ turret_target_check(turrettarget, attackangle) {
 }
 
 target_cone_check(target, conecosine) {
-  heli2target_normal = vectornormalize(target.origin - self.origin);
+  heli2target_normal = vectorNormalize(target.origin - self.origin);
   heli2forward = anglesToForward(self.angles);
-  heli2forward_normal = vectornormalize(heli2forward);
+  heli2forward_normal = vectorNormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
 
   if(heli_dot_target >= conecosine) {
@@ -2053,9 +2053,9 @@ target_cone_check(target, conecosine) {
 }
 
 missile_valid_target_check(missiletarget) {
-  heli2target_normal = vectornormalize(missiletarget.origin - self.origin);
+  heli2target_normal = vectorNormalize(missiletarget.origin - self.origin);
   heli2forward = anglesToForward(self.angles);
-  heli2forward_normal = vectornormalize(heli2forward);
+  heli2forward_normal = vectorNormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
 
   if(heli_dot_target >= level.heli_valid_target_cone) {
@@ -2145,7 +2145,7 @@ attack_primary(hardpointtype) {
           break;
         }
 
-        self setturrettargetent(self.turrettarget, vectorscale((0, 0, 1), 50.0));
+        self setturrettargetEnt(self.turrettarget, vectorscale((0, 0, 1), 50.0));
         self waittill("turret_on_target");
         maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
         self notify("turret_on_target");
@@ -2162,7 +2162,7 @@ attack_primary(hardpointtype) {
         for(i = 0; i < level.heli_turretclipsize; i++) {
           if(isDefined(self.turrettarget) && isDefined(self.primarytarget)) {
             if(self.primarytarget != self.turrettarget) {
-              self setturrettargetent(self.primarytarget, vectorscale((0, 0, 1), 40.0));
+              self setturrettargetEnt(self.primarytarget, vectorscale((0, 0, 1), 40.0));
             }
           } else if(isDefined(self.targetlost) && self.targetlost && isDefined(self.turret_last_pos))
             self setturrettargetvec(self.turret_last_pos);

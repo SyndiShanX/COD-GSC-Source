@@ -34,7 +34,7 @@ func_F135(var_0) {
 
   var_2 = scripts\engine\utility::spawn_tag_origin();
   var_2.origin = var_0.origin;
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_2.objective_position = var_0;
   level.var_F10A.var_162D[level.var_F10A.var_162D.size] = var_2;
   var_0 thread func_F136();
@@ -594,12 +594,12 @@ func_F169() {
         if(distance2dsquared(self.origin, level.player getorigin()) < squared(800)) {
           self.var_138F2 = newhudelem();
           var_0 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 30));
-          var_0 linkto(self);
+          var_0 linkTo(self);
           self.var_138F2 setshader("hud_icon_grenade_incoming_seeker", 32, 32);
           self.var_138F2.color = (1, 1, 1);
           self.var_138F2.alpha = 1;
           self.var_138F2 setwaypoint(1, 1, 0);
-          self.var_138F2 settargetent(var_0);
+          self.var_138F2 settargetEnt(var_0);
           scripts\engine\utility::waittill_either("jumped_on_player", "death");
           self.var_138F2 destroy();
           var_0 delete();
@@ -867,7 +867,7 @@ func_F110(var_0, var_1) {
   }
 
   if(var_2 > squared(var_0 * 0.25)) {
-    var_3 = vectordot(scripts\engine\utility::flatten_vector(vectornormalize(var_1 - level.player.origin)), anglesToForward(level.player.angles));
+    var_3 = vectordot(scripts\engine\utility::flatten_vector(vectorNormalize(var_1 - level.player.origin)), anglesToForward(level.player.angles));
     if(var_3 < 0) {
       return;
     }
@@ -972,33 +972,33 @@ func_CBA1() {
     var_1 = var_1 + self.var_37B3;
   }
 
-  var_0 linkto(self, "j_spine4", var_1, (0, 0, 0));
+  var_0 linkTo(self, "j_spine4", var_1, (0, 0, 0));
   var_2 = scripts\engine\utility::spawn_tag_origin();
   var_3 = scripts\engine\utility::spawn_tag_origin();
   var_0 settargetentity(var_3);
-  self.var_CBA0 linkto(var_0, "tag_flash", (0, 0, 0), (0, 0, 0));
+  self.var_CBA0 linkTo(var_0, "tag_flash", (0, 0, 0), (0, 0, 0));
   while(isalive(self)) {
     if(isDefined(self.var_7260)) {
-      var_3 linkto(self.var_7260, "tag_origin", (0, 0, 0), (0, 0, 0));
+      var_3 linkTo(self.var_7260, "tag_origin", (0, 0, 0), (0, 0, 0));
       continue;
     }
 
     if(isDefined(self.melee) && isDefined(self.melee.var_312F) && self.melee.var_312F && isalive(self.melee.target)) {
       if(isDefined(self.var_2479)) {
-        var_3 linkto(self.melee.target, "tag_eye", (0, 0, 0), (0, 0, 0));
+        var_3 linkTo(self.melee.target, "tag_eye", (0, 0, 0), (0, 0, 0));
       } else {
-        var_3 linkto(self.melee.target, "j_neck", (0, 0, 0), (0, 0, 0));
+        var_3 linkTo(self.melee.target, "j_neck", (0, 0, 0), (0, 0, 0));
       }
 
       continue;
     }
 
     if(isalive(self.bt.var_F15D) && self cansee(self.bt.var_F15D) || self.bt.var_1152B) {
-      var_3 linkto(self.bt.var_F15D, "tag_eye", (0, 0, 0), (0, 0, 0));
+      var_3 linkTo(self.bt.var_F15D, "tag_eye", (0, 0, 0), (0, 0, 0));
       continue;
     }
 
-    var_3 linkto(self, "tag_eye", (50, 0, 2), (0, 0, 0));
+    var_3 linkTo(self, "tag_eye", (50, 0, 2), (0, 0, 0));
     wait(0.05);
   }
 
@@ -1247,7 +1247,7 @@ func_F07D() {
 }
 
 func_797E() {
-  var_0 = vectornormalize(anglesToForward(self.angles));
+  var_0 = vectorNormalize(anglesToForward(self.angles));
   var_1 = self.origin + var_0 * 10000;
   var_2 = scripts\common\trace::ray_trace(self getEye(), var_1, self);
   if(isDefined(var_2["entity"])) {

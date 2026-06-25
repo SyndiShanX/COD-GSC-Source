@@ -218,8 +218,8 @@ proximity_detonate(owner) {
   explosionradius = detonateradius * 2;
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateradius), 4, detonateradius, detonateradius * 1.5);
   damagearea setexcludeteamfortrigger(owner.team);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self.damagearea = damagearea;
 
   while(isDefined(self)) {
@@ -269,7 +269,7 @@ player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, attract_di
     model = spawn("script_model", grenade.origin);
     model setModel(level.cymbal_monkey_model);
     model useanimtree(#animtree);
-    model linkto(grenade);
+    model linkTo(grenade);
     model.angles = grenade.angles;
     model thread monkey_cleanup(grenade);
     clone = undefined;

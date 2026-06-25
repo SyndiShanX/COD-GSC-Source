@@ -333,7 +333,7 @@ function function_f7014c3d(base_health) {
       result_health = max;
     }
 
-    num_players = getplayers().size;
+    num_players = getPlayers().size;
 
     if(isDefined(var_5d195d82) && num_players > 1) {
       result_health += result_health * (num_players - 1) * var_5d195d82;
@@ -376,7 +376,7 @@ function function_b5fe98(n_round) {
     result_health = max_health;
   }
 
-  num_players = getplayers().size;
+  num_players = getPlayers().size;
 
   if(isDefined(var_5d195d82) && num_players > 1) {
     result_health += result_health * (num_players - 1) * var_5d195d82;
@@ -644,7 +644,7 @@ function function_991333ce(entity, ai_array) {
 }
 
 function private function_f1b557c6() {
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     return false;
   }
 

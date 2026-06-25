@@ -614,11 +614,11 @@ playBombFx() {
 
   self.bomb_tag_left = spawn("script_model", (0, 0, 0));
   self.bomb_tag_left setModel("tag_origin");
-  self.bomb_tag_left LinkTo(self, "bombaydoor_left_jnt", (0, 0, 0), (0, -90, 0));
+  self.bomb_tag_left linkTo(self, "bombaydoor_left_jnt", (0, 0, 0), (0, -90, 0));
 
   self.bomb_tag_right = spawn("script_model", (0, 0, 0));
   self.bomb_tag_right setModel("tag_origin");
-  self.bomb_tag_right LinkTo(self, "bombaydoor_right_jnt", (0, 0, 0), (0, -90, 0));
+  self.bomb_tag_right linkTo(self, "bombaydoor_right_jnt", (0, 0, 0), (0, -90, 0));
 
   for(;;) {
     playFXOnTag(getfx("airstrike_bombs"), self.bomb_tag_left, "tag_origin");
@@ -1214,8 +1214,8 @@ MissileEyesGo(player, rocket, MissileWeapon) {
 
   player thread playerWaitReset(MissileWeapon);
 
-  player CameraLinkTo(rocket, "tag_origin");
-  player ControlsLinkTo(rocket);
+  player CameralinkTo(rocket, "tag_origin");
+  player ControlslinkTo(rocket);
 
   player thread maps\mp\killstreaks\_missile_strike::playerWatchForEarlyExit(MissileWeapon);
 

@@ -426,7 +426,7 @@ _id_13E1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(var_8) {
     return;
   }
-  var_0 playerlinkto(self, var_1, var_3, var_4, var_5, var_6, var_7, 0);
+  var_0 playerlinkTo(self, var_1, var_3, var_4, var_5, var_6, var_7, 0);
 }
 
 _id_13E3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
@@ -722,7 +722,7 @@ _id_1401(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_13 = anglesToForward(self.angles);
-    var_14 = vectornormalize(var_9.origin - self.origin);
+    var_14 = vectorNormalize(var_9.origin - self.origin);
     var_15 = vectordot(var_13, var_14);
     var_16 = distancesquared(self.origin, var_9.origin);
     var_17 = var_16;

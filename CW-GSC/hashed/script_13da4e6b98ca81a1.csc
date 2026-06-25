@@ -153,7 +153,7 @@ function private codcaster_monitor_xray_change(localclientnum) {
 
 function private function_1cc61419(localclientnum, settings) {
   var_f2a410c9 = [];
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -379,7 +379,7 @@ function private codcaster_monitor_player_pucks(localclientnum) {
     var_c36a1b34 = function_21dc7cf(localclientnum) && function_aa0b7b86(localclientnum, "codcaster_aerialcam_pucks");
     var_1aee36ff = level.gamestarted && (var_c36a1b34 || var_15dfb7fc);
 
-    foreach(player in getplayers(localclientnum)) {
+    foreach(player in getPlayers(localclientnum)) {
       var_1db99579 = function_7ed4edd3(player.name);
       var_950b4dc5 = isDefined(player) && var_1aee36ff && isalive(player) && !isremovedentity(player);
 

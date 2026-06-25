@@ -202,7 +202,7 @@ func_B807() {
       var_10 = scripts\engine\utility::mph_to_ips(var_10);
       var_10 = var_10 * 0.05;
       var_11 = var_10 + var_7;
-      var_12 = vectordot(anglesToForward(self.angles), vectornormalize(var_9));
+      var_12 = vectordot(anglesToForward(self.angles), vectorNormalize(var_9));
       var_13 = var_11 * var_12;
 
       if(var_13 < var_7) {
@@ -286,7 +286,7 @@ func_1992(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_11 = scripts\engine\utility::spawn_tag_origin(self gettagorigin(var_0), self gettagangles(var_0));
 
   if(var_2) {
-    var_12 = vectornormalize(var_1.origin - self.origin);
+    var_12 = vectorNormalize(var_1.origin - self.origin);
     var_11.angles = vectortoangles(var_12);
   }
 
@@ -314,7 +314,7 @@ func_1992(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     var_13 = 1;
     var_14 = scripts\engine\utility::spawn_tag_origin();
     var_14.var_5F27 = 1;
-    var_15 = vectornormalize(var_1.origin - var_11.origin);
+    var_15 = vectorNormalize(var_1.origin - var_11.origin);
     var_14.origin = var_11.origin + var_15 * 30000;
     var_1 = var_14;
   } else {
@@ -622,7 +622,7 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_45 = var_24 + var_26;
     var_46 = var_45 - var_31;
     var_47 = length(var_46);
-    var_48 = vectornormalize(var_46);
+    var_48 = vectorNormalize(var_46);
     var_49 = anglesToForward(var_32);
     var_50 = vectordot(var_48, var_49);
     var_51 = 1 - scripts\sp\math::func_C097(0.3, 1, var_50);
@@ -634,7 +634,7 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
       var_53 = 1 - scripts\sp\math::func_C097(var_50, 1, var_52);
     }
 
-    var_54 = vectornormalize(var_48 * var_53 + var_49 * (1 - var_53));
+    var_54 = vectorNormalize(var_48 * var_53 + var_49 * (1 - var_53));
     var_55 = scripts\sp\math::func_C097(0, 17000, var_47);
     var_55 = scripts\sp\math::func_C09B(var_55);
 
@@ -715,7 +715,7 @@ func_A332(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     }
 
     self.origin = var_38;
-    self.angles = vectortoangles(vectornormalize(var_38 - var_39));
+    self.angles = vectortoangles(vectorNormalize(var_38 - var_39));
     var_39 = var_38;
 
     if(var_62 || isDefined(self.var_72CA)) {
@@ -989,7 +989,7 @@ func_4C7B(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_0["entity"]) && _isent(var_0["entity"])) {
-    var_7 linkto(var_0["entity"]);
+    var_7 linkTo(var_0["entity"]);
   }
 
   playFXOnTag(scripts\engine\utility::getfx(var_6[0]), var_7, "tag_origin");
@@ -1254,7 +1254,7 @@ func_7A60(var_0) {
     var_1 = level.player getEye();
   }
 
-  var_2 = vectornormalize(var_0 - var_1);
+  var_2 = vectorNormalize(var_0 - var_1);
   var_3 = anglesToForward(level.player getplayerangles());
   var_4 = vectordot(var_2, var_3);
   return var_4;

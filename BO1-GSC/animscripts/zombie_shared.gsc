@@ -227,7 +227,7 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
       }
       break;
     case "stop anim":
-      anim_stopanimscripted();
+      anim_stopanimScripted();
       return note;
     default:
       if(isDefined(customFunction)) {

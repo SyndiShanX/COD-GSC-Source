@@ -18,10 +18,10 @@ death_behavior() {
     var_4 = level.player.origin - level.player getEye() + (0, 0, 35);
     var_5 = spawn("script_model", level.player.origin + (0, 0, var_4[2]));
     var_5.angles = (-10, level.player.angles[2], 30);
-    var_5 linkto(var_3);
+    var_5 linkTo(var_3);
 
     if(var_1 != "MOD_CRUSH") {
-      level.player playerlinkto(var_5);
+      level.player playerlinkTo(var_5);
     }
   }
 

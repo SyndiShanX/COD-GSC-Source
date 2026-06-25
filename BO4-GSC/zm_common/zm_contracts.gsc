@@ -75,7 +75,7 @@ function_8968a076(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
 on_round_begin() {
   if(level.round_number == 20) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(!(isDefined(e_player.var_bd1368a8) && e_player.var_bd1368a8)) {
         e_player increment_zm_contract(#"contract_zm_no_pap", 1, #"zstandard");
       }
@@ -85,7 +85,7 @@ on_round_begin() {
   }
 
   if(level.round_number == 30) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       e_player increment_zm_contract(#"contract_zm_rounds", 1, #"zstandard");
     }
 
@@ -135,7 +135,7 @@ on_round_end() {
       break;
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(isDefined(var_c5440c34)) {
       e_player increment_zm_contract(var_c5440c34, 1, #"zstandard");
     }

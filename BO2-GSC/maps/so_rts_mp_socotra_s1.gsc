@@ -142,7 +142,7 @@ socotra_level_scenario_one() {
   flag_set("rts_start_clock");
   level thread socotra_clockwatch();
   level thread maps\_so_rts_support::flag_set_innseconds("start_rts_enemy", 12);
-  level.rts.outroloc = getstruct("outro_loc", "targetname");
+  level.rts.outroloc = getStruct("outro_loc", "targetname");
   level thread socotra_ai_takeover_on();
   level thread socotra_ai_takeover_off();
   level thread socotra_player_oobwatch();
@@ -174,7 +174,7 @@ socotra_clockwatch() {
 
 socotra_orangeobjectivewatch() {
   level endon("socotra_mission_complete");
-  spot = getstruct("outro_obj", "targetname");
+  spot = getStruct("outro_obj", "targetname");
 
   if(!isDefined(spot)) {
     return;
@@ -295,9 +295,9 @@ socotra_player_oobwatch() {
 #using_animtree("generic_human");
 
 setup_scenes() {
-  male_spawner = getent("male_civ_spawner", "targetname");
+  male_spawner = getEnt("male_civ_spawner", "targetname");
   male_spawner.nofakeai = 1;
-  female_spawner = getent("female_civ_spawner", "targetname");
+  female_spawner = getEnt("female_civ_spawner", "targetname");
   female_spawner.nofakeai = 1;
   level.player_interactive_model = "c_usa_seal6_monsoon_armlaunch_viewbody_on";
   add_scene("intro_climbup_player", "intro_loc");
@@ -404,29 +404,29 @@ level_fade_in(player) {
 }
 
 intro_explosion_1(player) {
-  playsoundatposition("evt_missile_explosion", (2370, 567, 273));
-  level.player playrumbleonentity("grenade_rumble");
+  playSoundAtPosition("evt_missile_explosion", (2370, 567, 273));
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 intro_explosion_2(player) {
-  playsoundatposition("evt_missile_explosion", (339, -155, 416));
-  level.player playrumbleonentity("grenade_rumble");
+  playSoundAtPosition("evt_missile_explosion", (339, -155, 416));
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 intro_explosion_3(player) {
-  playsoundatposition("evt_missile_explosion", (-1099, -2102, 224));
-  level.player playrumbleonentity("grenade_rumble");
+  playSoundAtPosition("evt_missile_explosion", (-1099, -2102, 224));
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 nanoglove_left_hand_plant(player) {
-  level.player playrumbleonentity("monsoon_gloves_impact");
+  level.player playRumbleOnEntity("monsoon_gloves_impact");
   player play_fx("nanoglove_impact", player.origin, player.angles, 1, 1, "j_index_le_1");
   player ignorecheapentityflag(1);
   player setclientflag(2);
 }
 
 nanoglove_right_hand_plant(player) {
-  level.player playrumbleonentity("monsoon_gloves_impact");
+  level.player playRumbleOnEntity("monsoon_gloves_impact");
   player play_fx("nanoglove_impact", player.origin, player.angles, 1, 1, "j_index_ri_1");
   player ignorecheapentityflag(1);
   player setclientflag(1);
@@ -642,7 +642,7 @@ socotraairsuperioritytakeoverwatch() {
 }
 
 socotraairheightclamp(squadid) {
-  origin = getent("air_support_start", "targetname").origin;
+  origin = getEnt("air_support_start", "targetname").origin;
   squad = maps\_so_rts_squad::getsquad(squadid);
   squad.centerpoint = (squad.centerpoint[0], squad.centerpoint[1], origin[2]);
   ret = 1;
@@ -682,7 +682,7 @@ force_fire_turret_on_target_when_possible_with_vo(squad) {
 
   if(isDefined(squad.target)) {
     v_target = squad.target.origin;
-    self setgunnertargetent(squad.target, vectorscale((0, 0, 1), 5.0), 1);
+    self setgunnertargetEnt(squad.target, vectorscale((0, 0, 1), 5.0), 1);
   } else {
     v_target = squad.centerpoint;
     self setgunnertargetvec(v_target, 1);
@@ -832,7 +832,7 @@ socotraairsuperioritythink(squadid) {
   flag_wait("intro_done");
   maps\_so_rts_event::trigger_event("dlg_raptor1_inc");
   squad.selectable = 1;
-  maps\_so_rts_squad::ordersquaddefend(getstruct("vtol_initial_dest", "targetname").origin + vectorscale((0, 0, 1), 1000.0), squad.id, 1);
+  maps\_so_rts_squad::ordersquaddefend(getStruct("vtol_initial_dest", "targetname").origin + vectorscale((0, 0, 1), 1000.0), squad.id, 1);
   wait 1;
   squad.selectable = 0;
   squad.squad_execute_cb = ::socotraairnada;
@@ -943,7 +943,7 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
 
       ai_ref = level.rts.ai["ai_spawner_quadrotor"];
       maps\_so_rts_squad::removedeadfromsquad(squadid);
-      loc = getstruct("quadrotor_spawn", "targetname");
+      loc = getStruct("quadrotor_spawn", "targetname");
       ai = maps\_so_rts_support::placevehicle(ai_ref.ref, loc.origin, team);
       ai.ai_ref = ai_ref;
       ai maps\_so_rts_squad::addaitosquad(squadid);
@@ -1017,7 +1017,7 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
       }
     }
   } else if(pkg_ref.ref == "airsuperiority_pkg") {
-    origin = getent("air_support_start", "targetname").origin;
+    origin = getEnt("air_support_start", "targetname").origin;
     ai_ref = level.rts.ai["vtol_air_support_spawner"];
     squadid = maps\_so_rts_squad::createsquad(origin, team, pkg_ref);
 
@@ -1045,7 +1045,7 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
       }
     }
 
-    origin = getstruct("rts_ally_squad_reg_spawnLoc", "targetname").origin;
+    origin = getStruct("rts_ally_squad_reg_spawnLoc", "targetname").origin;
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, ::infantry_init, origin);
     level.rts.squads[squadid].incodespawn = 1;
     newguys = [];
@@ -1084,7 +1084,7 @@ socotracodespawner(pkg_ref, team, callback, squadid) {
       }
     }
 
-    origin = getstruct("rts_ally_squad_heavy_spawnLoc", "targetname").origin;
+    origin = getStruct("rts_ally_squad_heavy_spawnLoc", "targetname").origin;
     squadid = maps\_so_rts_ai::spawn_ai_package_standard(pkg_ref, team, ::infantry_init, origin);
     level.rts.squads[squadid].incodespawn = 1;
     newguys = [];
@@ -1187,7 +1187,7 @@ socotra_heavy_guy_unload(point, radius) {
 }
 
 socotra_heavy_squad_spawned(squadid) {
-  origin = getstruct("rts_ally_squad_heavy", "targetname").origin;
+  origin = getStruct("rts_ally_squad_heavy", "targetname").origin;
   done = 0;
   array_thread(level.rts.squads[squadid].members, ::socotra_heavy_guy_unload, origin, 128);
 
@@ -1280,7 +1280,7 @@ socotra_karma_died() {
 
 socotra_karma_playedasplayerwatch() {
   level endon("karma_restore");
-  outro_spot = getent("karma_outro_spot", "targetname");
+  outro_spot = getEnt("karma_outro_spot", "targetname");
   flag_wait("vtol_at_outro");
 
   while(!flag("karma_at_outro")) {
@@ -1426,7 +1426,7 @@ socotra_karama_bodyguardspawn(squadid) {
       forward = anglesToForward(level.rts.player.angles);
 
       foreach(node in nodes) {
-        dir = vectornormalize(node.origin - level.rts.player.origin);
+        dir = vectorNormalize(node.origin - level.rts.player.origin);
         dot = vectordot(forward, dir);
 
         if(dot < 0) {
@@ -1453,7 +1453,7 @@ socotra_karama_bodyguardspawn(squadid) {
       guy2 forceteleport(guy2node.origin, guy2.angles);
     }
   } else {
-    origin = getstruct("rts_ally_squad_heavy_spawnLoc", "targetname").origin;
+    origin = getStruct("rts_ally_squad_heavy_spawnLoc", "targetname").origin;
 
     if(isDefined(guy1)) {
       guy1 forceteleport(origin, guy1.angles);
@@ -1681,7 +1681,7 @@ socotra_karma_spawn() {
     maps\_so_rts_catalog::setpkgqty("infantry_ally_reg2_pkg", "allies", 1);
   }
 
-  outro_spot = getent("karma_outro_spot", "targetname");
+  outro_spot = getEnt("karma_outro_spot", "targetname");
   flag_wait("vtol_at_outro");
 
   while(!flag("karma_at_outro")) {
@@ -1706,11 +1706,11 @@ vtol_move_away() {
   }
 
   level.rts.vtol setspeed(60, 25, 5);
-  gotopoint = getent("vtol_outro_goto_loc", "targetname").origin;
+  gotopoint = getEnt("vtol_outro_goto_loc", "targetname").origin;
   level.rts.vtol setvehgoalpos(gotopoint, 1);
   level.rts.vtol waittill_any("goal", "near_goal");
   level.rts.vtol setspeed(20, 15, 5);
-  gotopoint = getent("vtol_outro_moveto_loc", "targetname").origin;
+  gotopoint = getEnt("vtol_outro_moveto_loc", "targetname").origin;
   maps\_so_rts_event::trigger_event("dlg_vtol_getting_in_position");
   level.rts.vtol setvehgoalpos(gotopoint, 1);
   note = level.rts.vtol waittill_any_return("goal", "near_goal");
@@ -1721,7 +1721,7 @@ vtol_move_away() {
   }
 
   maps\_so_rts_event::trigger_event("dlg_vtol_in_position");
-  level.rts.vtol setlookatent(getent("vtol_outro_lookat", "targetname"));
+  level.rts.vtol setlookatent(getEnt("vtol_outro_lookat", "targetname"));
   flag_set("vtol_at_outro");
   flag_wait("karma_at_outro");
   maps\_so_rts_rules::mission_complete(1, 0);
@@ -1908,7 +1908,7 @@ socotra_quad_spawn(squadid) {
 }
 
 socotra_level_player_startfps() {
-  playerstart = getent("rts_player_start", "targetname");
+  playerstart = getEnt("rts_player_start", "targetname");
   assert(isDefined(playerstart));
   nextsquad = maps\_so_rts_squad::getnextvalidsquad(undefined);
   assert(nextsquad != -1, "should not be -1, player squad should be created");
@@ -1926,7 +1926,7 @@ socotra_level_player_startfps() {
   level.rts.targetteammate forceteleport(playerstart.origin, playerstart.angles);
   level thread maps\_so_rts_main::player_in_control();
   level waittill("switch_complete");
-  level.rts.player setorigin(playerstart.origin);
+  level.rts.player setOrigin(playerstart.origin);
   level.rts.player setplayerangles(playerstart.angles);
   flag_set("block_input");
   level.rts.player freezecontrols(1);
@@ -2050,7 +2050,7 @@ socotra_geo_changes() {
 populate_dying_bodies() {
   dead_body_locs = getStructArray("dying_body", "targetname");
   wait_for_first_player();
-  male_spawner = getent("male_civ_spawner", "targetname");
+  male_spawner = getEnt("male_civ_spawner", "targetname");
   assert(isDefined(male_spawner));
   male_spawner.nofakeai = 1;
   level.scr_anim["male"]["death_anim"] = array(%ai_gas_death_a, %ai_gas_death_c, %ai_gas_death_g, %ai_gas_death_h);
@@ -2076,16 +2076,16 @@ populate_dying_bodies() {
 
 play_anim_on_civ(animname) {
   death_anim = self get_anim(animname, self.animname);
-  self animscripted("anim_is_over", self.origin, self.angles, death_anim, "normal", %root, 1.0);
+  self animScripted("anim_is_over", self.origin, self.angles, death_anim, "normal", %root, 1.0);
   animlength = getanimlength(death_anim);
   wait(animlength * 0.9);
 }
 
 populate_dead_bodies() {
   dead_body_locs = getStructArray("dead_body", "targetname");
-  male_spawner = getent("male_civ_spawner", "targetname");
+  male_spawner = getEnt("male_civ_spawner", "targetname");
   assert(isDefined(male_spawner));
-  female_spawner = getent("female_civ_spawner", "targetname");
+  female_spawner = getEnt("female_civ_spawner", "targetname");
   assert(isDefined(female_spawner));
   level.scr_anim["male"]["death_pose"] = array(%ch_gen_m_floor_armdown_legspread_onback_deathpose, %ch_gen_m_floor_armdown_onback_deathpose, %ch_gen_m_floor_armdown_onfront_deathpose, %ch_gen_m_floor_armrelaxed_onleftside_deathpose, %ch_gen_m_floor_armsopen_onback_deathpose, %ch_gen_m_floor_armspread_legaskew_onback_deathpose, %ch_gen_m_floor_armspread_legspread_onback_deathpose, %ch_gen_m_floor_armspreadwide_legspread_onback_deathpose, %ch_gen_m_floor_armstomach_onback_deathpose, %ch_gen_m_floor_armstomach_onrightside_deathpose, %ch_gen_m_floor_armstretched_onleftside_deathpose, %ch_gen_m_floor_armstretched_onrightside_deathpose, %ch_gen_m_floor_armup_legaskew_onfront_faceleft_deathpose, %ch_gen_m_floor_armup_legaskew_onfront_faceright_deathpose, %ch_gen_m_floor_armup_onfront_deathpose);
   level.scr_anim["female"]["death_pose"] = array(%ch_gen_f_floor_onback_armstomach_legcurled_deathpose, %ch_gen_f_floor_onback_armup_legcurled_deathpose, %ch_gen_f_floor_onfront_armdown_legstraight_deathpose, %ch_gen_f_floor_onfront_armup_legcurled_deathpose, %ch_gen_f_floor_onfront_armup_legstraight_deathpose, %ch_gen_f_floor_onleftside_armcurled_legcurled_deathpose, %ch_gen_f_floor_onleftside_armstretched_legcurled_deathpose, %ch_gen_f_floor_onrightside_armstomach_legcurled_deathpose, %ch_gen_f_floor_onrightside_armstretched_legcurled_deathpose);
@@ -2131,31 +2131,31 @@ socotra_pick_safehouses() {
   safehouse1.targetname = safeloc1.targetname;
   safehouse1.poi_ref = poinames[0];
   safehouse1.bldgid = safeloc1.script_parameters;
-  safehouse1.trig = getent(safeloc1.target, "targetname");
+  safehouse1.trig = getEnt(safeloc1.target, "targetname");
   safehouse2 = spawn("script_model", safeloc2.origin, 1);
   safehouse2.angles = safeloc2.angles;
   safehouse2.targetname = safeloc2.targetname;
   safehouse2.poi_ref = poinames[1];
   safehouse2.bldgid = safeloc2.script_parameters;
-  safehouse2.trig = getent(safeloc2.target, "targetname");
+  safehouse2.trig = getEnt(safeloc2.target, "targetname");
   safehouse3 = spawn("script_model", safeloc3.origin, 1);
   safehouse3.angles = safeloc3.angles;
   safehouse3.targetname = safeloc3.targetname;
   safehouse3.poi_ref = poinames[2];
   safehouse3.bldgid = safeloc3.script_parameters;
-  safehouse3.trig = getent(safeloc3.target, "targetname");
+  safehouse3.trig = getEnt(safeloc3.target, "targetname");
   safehouse4 = spawn("script_model", safeloc4.origin, 1);
   safehouse4.angles = safeloc4.angles;
   safehouse4.targetname = safeloc4.targetname;
   safehouse4.poi_ref = poinames[3];
   safehouse4.bldgid = safeloc4.script_parameters;
-  safehouse4.trig = getent(safeloc4.target, "targetname");
+  safehouse4.trig = getEnt(safeloc4.target, "targetname");
   safehouse5 = spawn("script_model", safeloc5.origin, 1);
   safehouse5.angles = safeloc5.angles;
   safehouse5.targetname = safeloc5.targetname;
   safehouse5.poi_ref = poinames[4];
   safehouse5.bldgid = safeloc5.script_parameters;
-  safehouse5.trig = getent(safeloc5.target, "targetname");
+  safehouse5.trig = getEnt(safeloc5.target, "targetname");
   level.rts.safehouses = array(safehouse1, safehouse2, safehouse3, safehouse4, safehouse5);
   maps\_so_rts_poi::add_poi(poinames[0], safehouse1, "axis", 1, 1, 0, &"rts_search_poi");
   maps\_so_rts_poi::add_poi(poinames[1], safehouse2, "axis", 1, 1, 0, &"rts_search_poi");
@@ -2165,7 +2165,7 @@ socotra_pick_safehouses() {
 
   foreach(spot in level.rts.safehouses) {
     target = "mp_socotra_bldg_0" + spot.bldgid;
-    spot.site = getstruct(target, "targetname");
+    spot.site = getStruct(target, "targetname");
     spot.modelname = "p6_sf_socotra_bldg_" + spot.bldgid;
   }
 
@@ -2302,13 +2302,13 @@ socotra_outro_fail(alignnode) {
   flag_wait("socotra_fail_fadeout");
   screen_fade_out(0.5);
   wait 0.05;
-  ent = getent("outro_fail_heli1", "targetname");
+  ent = getEnt("outro_fail_heli1", "targetname");
 
   if(isDefined(ent)) {
     ent delete();
   }
 
-  ent = getent("outro_fail_heli2", "targetname");
+  ent = getEnt("outro_fail_heli2", "targetname");
 
   if(isDefined(ent)) {
     ent delete();

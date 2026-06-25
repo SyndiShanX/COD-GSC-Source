@@ -10,21 +10,21 @@ intro_setup() {
   thread maps\_utility::vision_set_fog_changes("", 1);
   var_0 = maps\_utility::spawn_anim_model("player_harness", (0, 0, 0));
   level.harness_model = var_0;
-  var_1 = common_scripts\utility::getstruct("parachute_anim_ent_player", "targetname");
+  var_1 = common_scripts\utility::getStruct("parachute_anim_ent_player", "targetname");
   var_2 = maps\_utility::spawn_anim_model("player_rig", var_1.origin);
   var_2 hide();
   thread sunflare_toggle();
   level.player enableinvulnerability();
   maps\jungle_ghosts_util::move_player_to_start("player_freefall_start");
   var_3 = level.player common_scripts\utility::spawn_tag_origin();
-  level.player playerlinkto(var_3);
+  level.player playerlinkTo(var_3);
   var_3 movegravity((500, 900, 100), 15);
   level.player freezecontrols(1);
   maps\_utility::trigger_wait_targetname("player_freefall_impact");
   level.player unlink();
   var_3 delete();
   level.player clearclienttriggeraudiozone(0.8);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   thread maps\jungle_ghosts_util::fade_out_in("white", undefined, 0.4);
   level.player freezecontrols(0);
   thread setup_friendlies();
@@ -49,7 +49,7 @@ intro_setup() {
   parachute_waittill_player_cuts();
   thread player_landing_sound();
   var_1 notify("stop_idle");
-  var_2 maps\_utility::anim_stopanimscripted();
+  var_2 maps\_utility::anim_stopanimScripted();
   level.player playerlinktoblend(var_2, "tag_player", 0.4, 0, 0);
   thread cut_exploders();
   var_1 maps\_anim::anim_single(var_4, "para_cut");
@@ -95,14 +95,14 @@ cut_exploders() {
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = level.harness_model gettagorigin(var_0) - (0, 0, 2);
   var_3.origin = level.harness_model gettagorigin(var_1);
-  var_2 linkto(level.harness_model);
-  var_3 linkto(level.harness_model);
+  var_2 linkTo(level.harness_model);
+  var_3 linkTo(level.harness_model);
   wait 0.85;
   playFXOnTag(common_scripts\utility::getfx("vfx_parachute_strap_cut"), var_2, "tag_origin");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 2.5;
   playFXOnTag(common_scripts\utility::getfx("vfx_parachute_strap_cut"), var_3, "tag_origin");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 player_landing_sound() {
@@ -123,29 +123,29 @@ dead_pilot_hang() {
   var_1 = 286;
   var_0[0].linker.origin = var_0[0].origin + (0, 0, var_1);
   var_0[1].linker.origin = var_0[1].origin + (0, 0, var_1);
-  var_0[0] linkto(var_0[0].linker, "tag_origin");
-  var_0[1] linkto(var_0[1].linker, "tag_origin");
+  var_0[0] linkTo(var_0[0].linker, "tag_origin");
+  var_0[1] linkTo(var_0[1].linker, "tag_origin");
   var_2 = common_scripts\utility::get_target_ent("lt_jokes");
   var_2.animname = "dead_jungle_pilot";
   var_2 attach("head_pilot_a", "", 1);
   var_2.anim_ent = var_2 common_scripts\utility::spawn_tag_origin();
-  var_2 linkto(var_2.anim_ent, "tag_origin");
-  var_2.anim_ent linkto(var_0[0].linker, "tag_origin");
+  var_2 linkTo(var_2.anim_ent, "tag_origin");
+  var_2.anim_ent linkTo(var_0[0].linker, "tag_origin");
   var_2 useanimtree(#animtree);
   var_2.anim_ent thread maps\_anim::anim_loop_solo(var_2, "dead_idle", "dead_hang_ender");
 
   for(;;) {
-    var_0[0].linker rotateto(var_0[0].linker.angles + (0.5, 0, 0), 6, 0, 0);
-    var_0[1].linker rotateto(var_0[1].linker.angles - (0.5, 0, 0), 6, 0, 0);
+    var_0[0].linker rotateTo(var_0[0].linker.angles + (0.5, 0, 0), 6, 0, 0);
+    var_0[1].linker rotateTo(var_0[1].linker.angles - (0.5, 0, 0), 6, 0, 0);
     wait 5;
-    var_0[0].linker rotateto(var_0[0].linker.angles - (0.5, 0, 0), 6, 0, 0);
-    var_0[1].linker rotateto(var_0[1].linker.angles + (0.5, 0, 0), 6, 0, 0);
+    var_0[0].linker rotateTo(var_0[0].linker.angles - (0.5, 0, 0), 6, 0, 0);
+    var_0[1].linker rotateTo(var_0[1].linker.angles + (0.5, 0, 0), 6, 0, 0);
     wait 5;
-    var_0[0].linker rotateto(var_0[0].linker.angles - (0.5, 0, 0), 6, 0, 0);
-    var_0[1].linker rotateto(var_0[1].linker.angles + (0.5, 0, 0), 6, 0, 0);
+    var_0[0].linker rotateTo(var_0[0].linker.angles - (0.5, 0, 0), 6, 0, 0);
+    var_0[1].linker rotateTo(var_0[1].linker.angles + (0.5, 0, 0), 6, 0, 0);
     wait 5;
-    var_0[0].linker rotateto(var_0[0].linker.angles + (0.5, 0, 0), 6, 0, 0);
-    var_0[1].linker rotateto(var_0[1].linker.angles - (0.5, 0, 0), 6, 0, 0);
+    var_0[0].linker rotateTo(var_0[0].linker.angles + (0.5, 0, 0), 6, 0, 0);
+    var_0[1].linker rotateTo(var_0[1].linker.angles - (0.5, 0, 0), 6, 0, 0);
     wait 5;
   }
 }
@@ -339,14 +339,14 @@ parachute_sway_settings() {
   var_4 = level.player.origin + var_2;
   var_5 = level.player.origin + var_3;
   var_6 = 12;
-  self moveto(var_4, var_6 * 0.5);
+  self moveTo(var_4, var_6 * 0.5);
   wait(var_6 * 0.5);
 
   for(;;) {
     var_6 = randomintrange(13, 18);
-    self moveto(var_5, var_6, var_6 * 0.1, var_6 * 0.9);
+    self moveTo(var_5, var_6, var_6 * 0.1, var_6 * 0.9);
     wait(var_6);
-    self moveto(var_4, var_6, var_6 * 0.1, var_6 * 0.9);
+    self moveTo(var_4, var_6, var_6 * 0.1, var_6 * 0.9);
     wait(var_6);
   }
 }
@@ -395,9 +395,9 @@ parachute_intro_sound() {
 
 parachute_player_land_sounds() {
   common_scripts\utility::flag_wait("player_landed");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.5;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 first_distant_sat_launch() {
@@ -411,8 +411,8 @@ first_distant_sat_launch() {
 }
 
 connect_dropdown_traverse() {
-  var_0 = getent("dropdown_disconnect", "targetname");
-  var_0 disconnectpaths();
+  var_0 = getEnt("dropdown_disconnect", "targetname");
+  var_0 disconnectPaths();
   common_scripts\utility::flag_wait("hill_pos_1");
   var_0.origin = var_0.origin + (0, 0, 1000);
   var_0 connectpaths();
@@ -542,7 +542,7 @@ disable_tired(var_0, var_1) {
   } else {
     var_2 = randomfloatrange(0.65, 1.25);
     var_3 = adjust_angles_to_player((0, 0, 0));
-    self.ground_ref_ent rotateto(var_3, var_2, 0, var_2 / 2);
+    self.ground_ref_ent rotateTo(var_3, var_2, 0, var_2 / 2);
     self.ground_ref_ent waittill("rotatedone");
   }
 
@@ -595,11 +595,11 @@ stumble(var_0, var_1, var_2, var_3) {
   self endon("stop_limp");
   var_0 = adjust_angles_to_player(var_0);
   self notify("stumble");
-  self.ground_ref_ent rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  self.ground_ref_ent rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   self.ground_ref_ent waittill("rotatedone");
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = adjust_angles_to_player(var_4);
-  self.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
+  self.ground_ref_ent rotateTo(var_4, var_2, 0, var_2 / 2);
   self.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(var_3)) {
@@ -872,14 +872,14 @@ lookout_guys_logic() {
 right_meeting_guys_logic() {
   maps\jungle_ghosts_util::enemy_weapons_force_use_silencer();
   thread jungle_enemy_logic("zero", 1);
-  var_0 = common_scripts\utility::getstruct("right_meeting", "targetname");
+  var_0 = common_scripts\utility::getStruct("right_meeting", "targetname");
   thread meeting_animation(var_0, "meeting_trig");
 }
 
 left_meeting_guys_logic() {
   maps\jungle_ghosts_util::enemy_weapons_force_use_silencer();
   thread jungle_enemy_logic("zero", 1);
-  var_0 = common_scripts\utility::getstruct("left_meeting", "targetname");
+  var_0 = common_scripts\utility::getStruct("left_meeting", "targetname");
   thread meeting_animation(var_0, undefined);
 }
 
@@ -958,7 +958,7 @@ lookout_animation() {
   self.og_animname = self.animname;
   self.animname = self.script_noteworthy;
   thread stealth_anim_interupt_detection("helpup_lookout");
-  var_0 = common_scripts\utility::getstruct("lookout_scene", "targetname");
+  var_0 = common_scripts\utility::getStruct("lookout_scene", "targetname");
   var_0 thread maps\_anim::anim_single_solo(self, "helpup_lookout");
   wait 0.05;
   self setanimtime(maps\_utility::getanim("helpup_lookout"), 0.7);
@@ -972,7 +972,7 @@ stealth_anim_interupt_detection(var_0) {
   self endon(var_0);
   thread maps\_stealth_utility::stealth_enemy_endon_alert();
   common_scripts\utility::waittill_any("enemy_stealth_reaction", "damage", "stealth_enemy_endon_alert", "enemy_awareness_reaction", "bulletwhizby");
-  self stopanimscripted();
+  self stopanimScripted();
   var_1 = get_my_meeting_group();
 
   if(isDefined(var_1)) {
@@ -1041,7 +1041,7 @@ set_nearest_stealth_group() {
 cliff_guy_logic() {
   self endon("death");
   self.animname = "generic";
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   self forceteleport(var_0.origin, var_0.angles);
   var_0 maps\_stealth_utility::stealth_ai_idle_and_react(self, "cliff_look", "cliff_look_react");
 }
@@ -1050,7 +1050,7 @@ hill_enemy_on_spotted() {
   self endon("death");
   common_scripts\utility::flag_wait("_stealth_spotted");
   maps\_utility::disable_cqbwalk();
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::set_moveplaybackrate(1);
 }
 
@@ -1126,13 +1126,13 @@ heli_guys_logic() {
 
 plane_meeting_guys_logic() {
   thread jungle_enemy_logic("zero", 1);
-  var_0 = common_scripts\utility::getstruct("plane_meeting", "targetname");
+  var_0 = common_scripts\utility::getStruct("plane_meeting", "targetname");
   thread meeting_animation(var_0);
 }
 
 spawn_hill_enemies_hot() {
-  var_0 = getent("hill_main_volume", "targetname");
-  var_1 = getent("hill_main_volume", "targetname");
+  var_0 = getEnt("hill_main_volume", "targetname");
+  var_1 = getEnt("hill_main_volume", "targetname");
   level.hill_patrollers = common_scripts\utility::array_removeundefined(level.hill_patrollers);
   var_2 = getEntArray("hill_hot_enemies", "targetname");
   var_3 = maps\jungle_ghosts_util::enemy_weapons_force_use_silencer;
@@ -1221,8 +1221,8 @@ send_hill_reenforcements_if_hot() {
 
   if(common_scripts\utility::flag("_stealth_spotted")) {
     level.spawned_reenforcements = 1;
-    var_0 = getent("hilltop_volume_1", "targetname");
-    var_1 = getent("hill_backup_left", "targetname");
+    var_0 = getEnt("hilltop_volume_1", "targetname");
+    var_1 = getEnt("hill_backup_left", "targetname");
     var_2 = maps\jungle_ghosts_util::spawn_ai_from_spawner_send_to_volume(var_1, 4, var_0);
     level.hill_patrollers = common_scripts\utility::array_combine(level.hill_patrollers, var_2);
     common_scripts\utility::flag_set("player_agro_near_execution");
@@ -1325,7 +1325,7 @@ close_to_waterfall_enemy_logic() {
   level endon("waterfall_trig");
   level endon("hostage_flag_set");
   common_scripts\utility::flag_wait("waterfall_approach");
-  var_0 = getent("hilltop_volume_1", "targetname");
+  var_0 = getEnt("hilltop_volume_1", "targetname");
 
   for(;;) {
     var_1 = getaiarray("axis");
@@ -1418,7 +1418,7 @@ waterfall_execution() {
   var_6.anim_ent_b = common_scripts\utility::get_target_ent("hostage_b_anim_ent");
   var_6.anim_ent_c = common_scripts\utility::get_target_ent("elias_walkin");
   common_scripts\utility::array_thread(var_6.a_guys, maps\_utility::disable_long_death);
-  var_7 = getent("waterfall_spotted", "targetname");
+  var_7 = getEnt("waterfall_spotted", "targetname");
   var_6 thread monitor_player_close(var_7);
   var_6.anim_ent_a thread maps\_anim::anim_loop(var_6.a_guys, "rescue_a_idle", "stop_loop");
   var_6.anim_ent_b thread maps\_anim::anim_loop(var_6.b_guys, "rescue_b_idle", "stop_loop");
@@ -1433,8 +1433,8 @@ waterfall_execution() {
   var_6.b_bad_guys = maps\_utility::array_removedead(var_6.b_bad_guys);
   common_scripts\utility::array_thread(var_6.a_bad_guys, ::auto_kill_enemies);
   common_scripts\utility::array_thread(var_6.b_bad_guys, ::auto_kill_enemies);
-  var_6.anim_ent_a maps\_utility::anim_stopanimscripted();
-  var_6.anim_ent_b maps\_utility::anim_stopanimscripted();
+  var_6.anim_ent_a maps\_utility::anim_stopanimScripted();
+  var_6.anim_ent_b maps\_utility::anim_stopanimScripted();
   var_6.a_guys = maps\_utility::array_removedead(var_6.a_guys);
   var_6.b_guys = maps\_utility::array_removedead(var_6.b_guys);
 
@@ -1578,7 +1578,7 @@ do_birds() {
 }
 
 do_bird_single_enemy(var_0) {
-  var_1 = vectornormalize(anglesToForward(self.angles));
+  var_1 = vectorNormalize(anglesToForward(self.angles));
   var_2 = self.origin + var_1 * randomintrange(10, 30);
   var_3 = var_2 + (0, 0, 1000);
   var_4 = randomintrange(-100, 100);
@@ -1589,7 +1589,7 @@ do_bird_single_enemy(var_0) {
 }
 
 do_bird_single(var_0) {
-  var_1 = vectornormalize(anglesToForward(level.player getplayerangles()));
+  var_1 = vectorNormalize(anglesToForward(level.player getplayerangles()));
   var_2 = level.player.origin + var_1 * 1200;
   var_3 = var_2 + (0, 0, 1000);
   var_4 = randomintrange(-300, 300);

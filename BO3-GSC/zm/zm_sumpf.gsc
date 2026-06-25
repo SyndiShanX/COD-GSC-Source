@@ -360,9 +360,9 @@ function custom_add_vox() {
 
 function init_zombie_sumpf() {
   thread zm_sumpf_magic_box::magic_box_init();
-  ziphintdeactivated = getent("zipline_deactivated_hint_trigger", "targetname");
-  ziphintdeactivated sethintstring(&"ZOMBIE_ZIPLINE_DEACTIVATED");
-  ziphintdeactivated setcursorhint("HINT_NOICON");
+  ziphintdeactivated = getEnt("zipline_deactivated_hint_trigger", "targetname");
+  ziphintdeactivated setHintString(&"ZOMBIE_ZIPLINE_DEACTIVATED");
+  ziphintdeactivated setCursorHint("HINT_NOICON");
 }
 
 function turnlightgreen(name) {
@@ -381,13 +381,13 @@ function turnlightred(name) {
 
 function book_useage() {
   book_counter = 0;
-  book_trig = getent("book_trig", "targetname");
-  book_trig setcursorhint("HINT_NOICON");
-  book_trig usetriggerrequirelookat();
+  book_trig = getEnt("book_trig", "targetname");
+  book_trig setCursorHint("HINT_NOICON");
+  book_trig useTriggerRequireLookAt();
   level thread function_620401c0((11308, 3635, -582), "", book_trig, "");
   if(isDefined(book_trig)) {
-    maniac_l = getent("maniac_l", "targetname");
-    maniac_r = getent("maniac_r", "targetname");
+    maniac_l = getEnt("maniac_l", "targetname");
+    maniac_r = getEnt("maniac_r", "targetname");
     book_trig waittill("trigger", player);
     if(isDefined(maniac_l)) {
       maniac_l playSound("evt_maniac_l");
@@ -443,14 +443,14 @@ function function_c06f4240() {
       var_fd0167be++;
     }
   }
-  playsoundatposition("zmb_cha_ching", s_phone_egg.origin);
+  playSoundAtPosition("zmb_cha_ching", s_phone_egg.origin);
   zm_unitrigger::unregister_unitrigger(s_phone_egg.s_unitrigger);
   level thread zm_audio::sndmusicsystem_playstate("the_one");
 }
 
 function play_radio_sounds() {
   iprintlnbold("");
-  pa_system = getent("speaker_in_attic", "targetname");
+  pa_system = getEnt("speaker_in_attic", "targetname");
   wait(0.05);
   pa_system playsoundwithnotify("evt_secret_message", "message_complete");
   pa_system waittill("message_complete");
@@ -488,7 +488,7 @@ function function_53e56ac8() {
 }
 
 function play_super_egg_radio_pa_sounds() {
-  pa_system = getent("speaker_in_attic", "targetname");
+  pa_system = getEnt("speaker_in_attic", "targetname");
   wait(0.05);
   pa_system playsoundwithnotify("vox_superegg_secret_message", "message_complete");
   pa_system waittill("message_complete");
@@ -543,9 +543,9 @@ function function_2fa9f915() {
 }
 
 function meteor_trigger() {
-  player = getplayers();
+  player = getPlayers();
   level endon("meteor_triggered");
-  dmgtrig = getent("meteor", "targetname");
+  dmgtrig = getEnt("meteor", "targetname");
   level thread function_620401c0((11260.5, -2091, -634), "", dmgtrig, "", 3);
   while(true) {
     dmgtrig waittill("trigger", player);
@@ -563,9 +563,9 @@ function setup_custom_vox() {}
 function sumpf_player_spawn_placement() {
   structs = struct::get_array("initial_spawn_points", "targetname");
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(structs[i].origin);
+    players[i] setOrigin(structs[i].origin);
     players[i] setplayerangles(structs[i].angles);
     players[i].spectator_respawn = structs[i];
   }
@@ -608,10 +608,10 @@ function function_22476936() {
 }
 
 function function_c54ccb33() {
-  var_4d028102 = getent("", "");
+  var_4d028102 = getEnt("", "");
   if(isDefined(var_4d028102)) {
     zm_devgui::zombie_devgui_open_sesame();
-    var_4d028102 notify("trigger", getplayers()[0]);
+    var_4d028102 notify("trigger", getPlayers()[0]);
   }
 }
 
@@ -674,7 +674,7 @@ function function_4bb6626e() {
       continue;
     }
     level.var_8ec97b54++;
-    playsoundatposition("zmb_zhd_plate_hit", self.origin);
+    playSoundAtPosition("zmb_zhd_plate_hit", self.origin);
     break;
   }
   if(level.var_8ec97b54 >= 4) {

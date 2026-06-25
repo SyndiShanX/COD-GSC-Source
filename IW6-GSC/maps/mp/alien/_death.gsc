@@ -282,7 +282,7 @@ play_death_anim_and_ragdoll_internal(primary_animState, eInflictor, iDamage, sMe
 
 move_away_from_surface(direction, offset_length) {
   offsetLocation = self.origin + direction * offset_length;
-  self SetOrigin(offsetLocation);
+  self setOrigin(offsetLocation);
 }
 
 get_primary_death_anim_state() {

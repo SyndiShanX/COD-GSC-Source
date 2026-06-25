@@ -165,7 +165,7 @@ onDropIntel(first_drop) {
 
     level.intelEnt = intelEnt;
 
-    level.intelEnt["trigger"] EnableLinkTo();
+    level.intelEnt["trigger"] EnablelinkTo();
   } else {
     if(isDefined(level.intelEnt["visuals"] GetLinkedParent())) {
       level.intelEnt["visuals"] Unlink();
@@ -215,7 +215,7 @@ intelTriggerWatcher() {
   data.endonString = "intelTriggerWatcher";
   data.deathOverrideCallback = ::intelDeathOverride;
   level.intelEnt["visuals"] thread maps\mp\_movers::handle_moving_platforms(data);
-  level.intelEnt["trigger"] LinkTo(level.intelEnt["visuals"]);
+  level.intelEnt["trigger"] linkTo(level.intelEnt["visuals"]);
 
   wait 0.05;
 

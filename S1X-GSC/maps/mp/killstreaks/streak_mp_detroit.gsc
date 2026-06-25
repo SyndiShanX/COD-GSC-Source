@@ -265,7 +265,7 @@ spawn_tram_turret() {
   spawned_turret.angles = (0, 0, 0);
   spawned_turret setModel("vehicle_xh9_warbird_turret_detroit_mp");
   spawned_turret SetDefaultDropPitch(45.0);
-  spawned_turret LinkTo(self, linktotag, (0, 0, 0), (0, 0, 0));
+  spawned_turret linkTo(self, linktotag, (0, 0, 0), (0, 0, 0));
   spawned_turret.owner = self.owner;
   spawned_turret.health = 99999;
   spawned_turret.maxHealth = 1000;
@@ -285,7 +285,7 @@ spawn_tram_turret() {
   spawned_turret.chopper = self;
 
   obj_ent = spawn("script_model", self.origin);
-  obj_ent Linkto(spawned_turret, "tag_aim_pivot", (0, 0, 0), (0, 0, 0));
+  obj_ent linkTo(spawned_turret, "tag_aim_pivot", (0, 0, 0), (0, 0, 0));
   obj_ent SetContents(0);
   spawned_turret thread delete_on_death(obj_ent);
   spawned_turret.obj_ent = obj_ent;

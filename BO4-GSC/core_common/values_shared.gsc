@@ -415,7 +415,7 @@ debug_values() {
         str_key = a_toks[1];
       }
 
-      hud_ent = getent(str_value, str_key, 1);
+      hud_ent = getEnt(str_value, str_key, 1);
       str_label = str_value + "<dev string:x15b>" + str_key;
     }
 

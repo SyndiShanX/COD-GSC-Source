@@ -526,7 +526,7 @@ fire_turret(n_index) {
       }
     } else {
       if(isDefined(s_turret.e_target)) {
-        self setgunnertargetent(s_turret.e_target, s_turret.v_offset, n_index - 1);
+        self setgunnertargetEnt(s_turret.e_target, s_turret.v_offset, n_index - 1);
       }
 
       self firegunnerweapon(n_index - 1);
@@ -1502,7 +1502,7 @@ turret_trace_test(e_target, v_offset, n_index) {
 
     if(e_target sightconetrace(v_start_org, self) > 0.2) {
       v_target = e_target.origin + v_offset;
-      v_start_org = v_start_org + vectornormalize(v_target - v_start_org) * 15;
+      v_start_org = v_start_org + vectorNormalize(v_target - v_start_org) * 15;
       a_trace = bulletTrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 1, 1, e_target);
 
       if(a_trace["fraction"] > 0.6) {
@@ -1521,7 +1521,7 @@ turret_trace_test(e_target, v_offset, n_index) {
     return true;
   }
 
-  v_dir_to_target = vectornormalize(v_target - v_start_org);
+  v_dir_to_target = vectorNormalize(v_target - v_start_org);
   v_start_org = v_start_org + v_dir_to_target * 15;
   v_target = v_target - v_dir_to_target * 75;
 

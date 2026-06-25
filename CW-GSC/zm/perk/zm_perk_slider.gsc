@@ -210,7 +210,7 @@ function function_4d806c6a(var_a25d1f0 = 25, explosion_radius = 64, var_8b77e4de
   }
 
   forward = anglesToForward(self.angles);
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   forward = vectorscale(forward, 64);
   explosion_pos += forward;
   var_c37cb40 = 1;
@@ -218,22 +218,22 @@ function function_4d806c6a(var_a25d1f0 = 25, explosion_radius = 64, var_8b77e4de
   switch (explosion_radius) {
     case 64:
       playFX(#"hash_7d2bc89d5f26531", explosion_pos, forward, (0, 0, 1));
-      playsoundatposition(#"hash_e74488608c9e54b", explosion_pos + (0, 0, 30));
+      playSoundAtPosition(#"hash_e74488608c9e54b", explosion_pos + (0, 0, 30));
       break;
     case 96:
       var_c37cb40 = 2;
       playFX(#"hash_7dd3089d5fb7ed2", explosion_pos, forward, (0, 0, 1));
-      playsoundatposition(#"hash_20bca686136afed1", explosion_pos + (0, 0, 30));
+      playSoundAtPosition(#"hash_20bca686136afed1", explosion_pos + (0, 0, 30));
       break;
     case 128:
       var_c37cb40 = 2;
       playFX(#"hash_7e74089d603ee87", explosion_pos, forward, (0, 0, 1));
-      playsoundatposition(#"hash_20bca686136afed1", explosion_pos + (0, 0, 30));
+      playSoundAtPosition(#"hash_20bca686136afed1", explosion_pos + (0, 0, 30));
       break;
     case 256:
       var_c37cb40 = 2;
       playFX(#"hash_2cf4993681bf5b51", explosion_pos, forward, (0, 0, 1));
-      playsoundatposition(#"hash_2b37bc8619de96ec", explosion_pos + (0, 0, 30));
+      playSoundAtPosition(#"hash_2b37bc8619de96ec", explosion_pos + (0, 0, 30));
       break;
   }
 
@@ -423,7 +423,7 @@ function function_815172d1() {
 
 function function_780bf8d3(dvar) {
   if(is_true(dvar.value)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(is_true(player.var_4fe0aa35)) {
         player.var_fd7683a7 = player.origin;
       }
@@ -434,12 +434,12 @@ function function_780bf8d3(dvar) {
 
   util::wait_network_frame(2);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.var_fd7683a7)) {
       var_201425ca = bullettracepassed(player.var_fd7683a7, player.origin, 0, player, undefined, 0, 1, 1);
 
       if(!var_201425ca) {
-        player setorigin(player.var_fd7683a7);
+        player setOrigin(player.var_fd7683a7);
       }
 
       player.var_fd7683a7 = undefined;

@@ -267,7 +267,7 @@ getValidSpawnPathNodeNearPlayer(bDoPhysicsTraceToPlayer, bDoPhysicsTraceToValida
     if(!pathNode DoesNodeAllowStance("stand") || isDefined(pathnode.no_agent_spawn)) {
       continue;
     }
-    directionToNode = VectorNormalize(pathNode.origin - self.origin);
+    directionToNode = vectorNormalize(pathNode.origin - self.origin);
     dot = VectorDot(playerDirection, directionToNode);
 
     i = 0;

@@ -40,7 +40,7 @@ function _play(animation, v_origin_or_ent = self, v_angles_or_tag, n_rate = 1, n
   flagsys::set("scripted_anim_this_frame");
   flagsys::set("scriptedanim");
   if(isvec(v_origin_or_ent) && isvec(v_angles_or_tag)) {
-    self animscripted("_anim_notify_", v_origin_or_ent, v_angles_or_tag, animation, n_blend_in, n_rate);
+    self animScripted("_anim_notify_", v_origin_or_ent, v_angles_or_tag, animation, n_blend_in, n_rate);
   } else {
     if(isstring(v_angles_or_tag)) {
       assert(isDefined(v_origin_or_ent.model), ((("" + animation) + "") + v_angles_or_tag) + "");
@@ -49,10 +49,10 @@ function _play(animation, v_origin_or_ent = self, v_angles_or_tag, n_rate = 1, n
       self.origin = v_pos;
       self.angles = v_ang;
       b_link = 1;
-      self animscripted("_anim_notify_", self.origin, self.angles, animation, n_blend_in, n_rate);
+      self animScripted("_anim_notify_", self.origin, self.angles, animation, n_blend_in, n_rate);
     } else {
       v_angles = (isDefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0));
-      self animscripted("_anim_notify_", v_origin_or_ent.origin, v_angles, animation, n_blend_in, n_rate);
+      self animScripted("_anim_notify_", v_origin_or_ent.origin, v_angles, animation, n_blend_in, n_rate);
     }
   }
   if(!b_link) {

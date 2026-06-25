@@ -207,25 +207,25 @@ dialog_and_anim(index) {
 }
 
 dog_handler_anim() {
-  anim_struct = getstruct("dog_anim", "targetname");
+  anim_struct = getStruct("dog_anim", "targetname");
 
   anim_struct anim_reach_solo(self, "send_dog");
   flag_set("dog_handler_in_position");
   self AllowedStances("crouch");
 
   flag_wait("dog_in_position");
-  self stopanimscripted();
+  self stopanimScripted();
   anim_struct thread anim_loop_solo(self, "wait_loop");
   wait(4);
   self AllowedStances("crouch", "stand", "prone");
-  self stopanimscripted();
+  self stopanimScripted();
   anim_struct anim_single_solo(self, "send_dog");
 }
 
 dog_victim_think() {
   wait(2);
 
-  spawner = getent("dog_victim", "targetname");
+  spawner = getEnt("dog_victim", "targetname");
   victim = spawner stalingradspawn(true);
   spawn_failed(victim);
 
@@ -251,7 +251,7 @@ dog_anim() {
   self.ignoreall = 1;
   self.pacifist = 1;
 
-  anim_struct = getstruct("dog_anim", "targetname");
+  anim_struct = getStruct("dog_anim", "targetname");
 
   anim_struct anim_reach_solo(self, "wait_loop_reach");
   wait(1);

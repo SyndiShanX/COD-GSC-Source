@@ -300,7 +300,7 @@ dog_manager_spawn_dogs(team, enemyTeam, deathCount) {
 
   requiredDeathCount = deathCount;
 
-  level.dog_spawner = getent("dog_spawner", "targetname");
+  level.dog_spawner = getEnt("dog_spawner", "targetname");
 
   if(!isDefined(level.dog_spawner)) {
     return;

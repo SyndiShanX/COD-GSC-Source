@@ -96,8 +96,8 @@ missileeyes(var_0, var_1) {
   if(isDefined(var_1)) {
     var_0 visionsetmissilecamforplayer(game["thermal_vision"], 1.0);
     var_0 thread delayedfofoverlay();
-    var_0 cameralinkto(var_1, "tag_origin");
-    var_0 controlslinkto(var_1);
+    var_0 cameralinkTo(var_1, "tag_origin");
+    var_0 controlslinkTo(var_1);
 
     if(getdvarint("camera_thirdPerson")) {
       var_0 scripts\mp\utility\game::setthirdpersondof(0);

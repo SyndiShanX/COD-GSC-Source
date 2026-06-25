@@ -59,7 +59,7 @@ function function_3286606(var_d9a11bf0, var_f41e3a56, radius, var_d0293722) {
 function function_ab0709c0(var_d9a11bf0, volume, var_d0293722) {
   level endon(var_d0293722);
   objectives::hide(var_d9a11bf0);
-  vol = getent(volume, "targetname");
+  vol = getEnt(volume, "targetname");
 
   while(true) {
     if(level.player istouching(vol)) {
@@ -75,28 +75,28 @@ function function_ab0709c0(var_d9a11bf0, volume, var_d0293722) {
 function function_ee211e0d() {
   level flag::wait_till("player_rappel_done");
   objectives::scripted(#"search_and_kill_obj", undefined, #"hash_22cbba913d7929f1");
-  var_c7325764 = getent("obj_tundra_bunker_01", "targetname");
+  var_c7325764 = getEnt("obj_tundra_bunker_01", "targetname");
   objectives::function_4eb5c04a("search_01", var_c7325764.origin, #"hash_25312f567bf1f18c");
   objectives::function_6a5ca7ac(#"search_01", undefined, #"search_and_kill_obj", undefined, 0);
-  var_16c0dff0 = getent("search_area_bunker1_01", "targetname");
+  var_16c0dff0 = getEnt("search_area_bunker1_01", "targetname");
   objectives::area("search_area_01", var_16c0dff0.origin, 1100, undefined, undefined, undefined, undefined, "cp_waypoint_area_no_compass");
   waitframe(1);
   objectives::function_67f87f80("search_01", undefined, #"hash_5f6c6d96184307e0");
   level thread function_3286606("search_01", var_16c0dff0, 1100, "search_objective_1_cleared");
   level thread function_c7612635();
-  var_b8923a10 = getent("obj_tundra_bunker_02", "targetname");
+  var_b8923a10 = getEnt("obj_tundra_bunker_02", "targetname");
   objectives::function_4eb5c04a("search_02", var_b8923a10.origin, #"hash_253132567bf1f6a5");
   objectives::function_6a5ca7ac(#"search_02", undefined, #"search_and_kill_obj", undefined, 0);
-  var_29180492 = getent("search_area_bunker2_01", "targetname");
+  var_29180492 = getEnt("search_area_bunker2_01", "targetname");
   objectives::area("search_area_02", var_29180492.origin, 400, undefined, undefined, undefined, undefined, "cp_waypoint_area_no_compass");
   waitframe(1);
   objectives::function_67f87f80("search_02", undefined, #"hash_5f6c6d96184307e0");
   level thread function_3286606("search_02", var_29180492, 400, "search_objective_2_cleared");
   level thread function_7f4315fa();
-  var_c7555796 = getent("obj_tundra_bunker_03", "targetname");
+  var_c7555796 = getEnt("obj_tundra_bunker_03", "targetname");
   objectives::function_4eb5c04a("search_03", var_c7555796.origin, #"hash_253131567bf1f4f2");
   objectives::function_6a5ca7ac(#"search_03", undefined, #"search_and_kill_obj", undefined, 0);
-  var_f1de162b = getent("search_area_bunker3_01", "targetname");
+  var_f1de162b = getEnt("search_area_bunker3_01", "targetname");
   objectives::area("search_area_03", var_f1de162b.origin, 650, undefined, undefined, undefined, undefined, "cp_waypoint_area_no_compass");
   waitframe(1);
   objectives::function_67f87f80("search_03", undefined, #"hash_5f6c6d96184307e0");
@@ -126,12 +126,12 @@ function function_ee211e0d() {
   objectives::complete("search_03");
   objectives::complete("search_area_03");
   level flag::wait_till("flag_rudnik_truck_stop");
-  var_f7bf663b = getent("obj_tundra_final_bunker", "targetname");
+  var_f7bf663b = getEnt("obj_tundra_final_bunker", "targetname");
   objectives::function_4eb5c04a(#"final_building", var_f7bf663b.origin, #"hash_25312c567bf1ec73");
   objectives::function_6a5ca7ac(#"final_building", undefined, #"search_and_kill_obj", undefined, 0);
   waitframe(1);
   objectives::function_67f87f80("final_building", undefined, #"hash_5f6c6d96184307e0");
-  search_obj_04 = getent("search_area_bunker4_01", "targetname");
+  search_obj_04 = getEnt("search_area_bunker4_01", "targetname");
   objectives::area("search_obj_04", search_obj_04.origin, 575, undefined, undefined, undefined, undefined, "cp_waypoint_area_no_compass");
   level thread function_3286606(#"final_building", search_obj_04, 575, "flag_spawn_enemy_vip");
   var_8433129 = struct::get("use_org_door_breach", "targetname");
@@ -197,7 +197,7 @@ function function_aba9a175() {
 function function_f7c83b06(vehicle, start_node) {
   var_825d3987 = vehicle::simple_spawn_single_and_drive(start_node);
   obj_loc = util::spawn_model("tag_origin", var_825d3987.origin + (0, 0, 96), var_825d3987.angles);
-  obj_loc linkto(var_825d3987, "tag_origin");
+  obj_loc linkTo(var_825d3987, "tag_origin");
   objectives::follow(#"follow_vip", obj_loc, undefined, undefined, undefined, #"hash_443d177707542b08");
   objectives::function_67f87f80("follow_vip", obj_loc, #"hash_7ead0c0608d779c");
   snd::client_targetname(var_825d3987, "rudnik_truck");
@@ -316,7 +316,7 @@ function function_c06a491a(teleport_node) {
 }
 
 function function_d6af6077() {
-  trig = getent("player_jump_kill_trigger", "targetname");
+  trig = getEnt("player_jump_kill_trigger", "targetname");
   level flag::wait_till("player_is_rappelling");
   trig delete();
 }
@@ -541,7 +541,7 @@ function function_723f322d() {
           continue;
         }
 
-        dot = vectordot(fwd, vectornormalize(ai.origin - player_origin));
+        dot = vectordot(fwd, vectorNormalize(ai.origin - player_origin));
 
         if(dot > 0.866025 && dot < 0.997) {
           ai_array[ai_array.size] = ai;
@@ -740,7 +740,7 @@ function function_2e11eba4() {
   level thread function_a2ca02f3();
   var_4a37c7a0 = ["Cleared Building with ", "Got Timeout with "];
   var_4aa60bdd = 780000 / 4;
-  getplayers()[0] endon(#"death");
+  getPlayers()[0] endon(#"death");
   start_t = gettime();
   var_53e12236 = 0;
   var_88e50635 = 0;
@@ -793,8 +793,8 @@ function function_7d2d1987(distsquared = 640000, fov = cos(45), var_e6208e62 = 1
 }
 
 function function_7fe34c6e() {
-  clip = getent("final_door_clip_blocker", "targetname");
-  clip disconnectpaths();
+  clip = getEnt("final_door_clip_blocker", "targetname");
+  clip disconnectPaths();
   level flag::wait_till("smoke_tossed");
   clip connectpaths();
 

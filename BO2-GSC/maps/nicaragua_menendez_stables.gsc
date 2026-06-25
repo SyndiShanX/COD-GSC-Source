@@ -60,14 +60,14 @@ init_spawn_functions() {
   setignoremegroup("menendez", "stables_pdf_5");
   setignoremegroup("menendez", "stables_pdf_6");
   add_spawn_function_ai_group("stables_pdf_attacker", ::stables_pdf_logic);
-  sp_stables_pdf = getent("stables_pdf_front", "targetname");
+  sp_stables_pdf = getEnt("stables_pdf_front", "targetname");
   sp_stables_pdf add_spawn_function(::stables_brutality_logic);
   sp_stables_pdf add_spawn_function(::stables_brutality_front_logic);
-  sp_stables_pdf = getent("stables_pdf_back", "targetname");
+  sp_stables_pdf = getEnt("stables_pdf_back", "targetname");
   sp_stables_pdf add_spawn_function(::stables_brutality_logic);
-  sp_stables_pdf = getent("stables_pdf_center", "script_noteworthy");
+  sp_stables_pdf = getEnt("stables_pdf_center", "script_noteworthy");
   sp_stables_pdf add_spawn_function(::stables_rage_get_to_goal, "stables_pdf_center", "stable_exposed_right");
-  sp_stables_pdf = getent("stables_pdf_left", "script_noteworthy");
+  sp_stables_pdf = getEnt("stables_pdf_left", "script_noteworthy");
   sp_stables_pdf add_spawn_function(::stables_rage_get_to_goal, "stables_pdf_left", "stable_exposed_left");
   add_spawn_function_veh_by_type("horse_axis", ::horse_spawn_func);
 }
@@ -117,12 +117,12 @@ execution_enemies_chase_after_player() {
 
 nicaragua_stables_objectives() {
   level notify("strt_hrs");
-  s_barn_door = getstruct("obj_barn_door", "targetname");
+  s_barn_door = getStruct("obj_barn_door", "targetname");
   set_objective(level.obj_menendez_save_josefina, s_barn_door, "");
   flag_wait("padlock_removed");
-  e_trigger = getent("objective_exit_stables_trigger", "targetname");
+  e_trigger = getEnt("objective_exit_stables_trigger", "targetname");
   str_struct_name = e_trigger.target;
-  s_struct = getstruct(str_struct_name, "targetname");
+  s_struct = getStruct(str_struct_name, "targetname");
   set_objective(level.obj_menendez_save_josefina, s_struct, "");
   e_trigger waittill("trigger");
   set_objective(level.obj_menendez_save_josefina, undefined, "remove");
@@ -138,9 +138,9 @@ nicaragua_stables_vo() {
 }
 
 stables_brutality_front_vo() {
-  ai_civ = getent("generic_civ_female_ai", "targetname");
+  ai_civ = getEnt("generic_civ_female_ai", "targetname");
   ai_civ endon("death");
-  ai_pdf = getent("stables_pdf_front_ai", "targetname");
+  ai_pdf = getEnt("stables_pdf_front_ai", "targetname");
   ai_pdf endon("death");
   ai_civ say_dialog("cf7_nooooo_0");
   wait 1;
@@ -155,7 +155,7 @@ shoot_lock_trigger() {
   trigger_wait("trig_barn_door");
   level.player playSound("evt_stable_doors");
   level notify("hrsx");
-  m_barn_door_clip = getent("clip_barn_door", "targetname");
+  m_barn_door_clip = getEnt("clip_barn_door", "targetname");
   m_barn_door_clip connectpaths();
   autosave_by_name("player_opens_stables");
   delay_thread(1, ::rage_mode_important_vo, "mene_aaaaarrgh_0");
@@ -184,7 +184,7 @@ horses_in_stable() {
 
   while(true) {
     level endon("hrsx");
-    playsoundatposition("chr_horse_whinny_loud_npc", (-4543, 2818, 1521));
+    playSoundAtPosition("chr_horse_whinny_loud_npc", (-4543, 2818, 1521));
     wait(randomintrange(1, 2));
   }
 }
@@ -218,20 +218,20 @@ nicaragua_stables_animations() {
 stables_brutality_logic() {
   level endon("rage_on");
   self waittill("death");
-  t_pdf_enter = getent("trig_stables_pdf_enter", "targetname");
+  t_pdf_enter = getEnt("trig_stables_pdf_enter", "targetname");
 
   if(isDefined(t_pdf_enter)) {
     t_pdf_enter useby(level.player);
   }
 
-  t_brutality_start = getent("trig_stables_front_brutality_start", "targetname");
+  t_brutality_start = getEnt("trig_stables_front_brutality_start", "targetname");
 
   if(isDefined(t_brutality_start)) {
     t_brutality_start useby(level.player);
   }
 
   wait 3;
-  t_rage = getent("trig_stables_rage", "targetname");
+  t_rage = getEnt("trig_stables_rage", "targetname");
 
   if(isDefined(t_rage)) {
     t_rage useby(level.player);
@@ -388,10 +388,10 @@ trapped_horse_update() {
 collapse_roof() {
   flag_wait("padlock_removed");
   level notify("fxanim_barn_explode_01_start");
-  playsoundatposition("evt_stable_collapse_a", (-4207, 2816, 1575));
+  playSoundAtPosition("evt_stable_collapse_a", (-4207, 2816, 1575));
   trigger_wait("trig_2nd_stables_fxanim");
   level notify("fxanim_barn_explode_02_start");
-  playsoundatposition("evt_stable_collapse_b", (-4207, 2816, 1575));
+  playSoundAtPosition("evt_stable_collapse_b", (-4207, 2816, 1575));
 }
 
 stables_pdf_logic() {

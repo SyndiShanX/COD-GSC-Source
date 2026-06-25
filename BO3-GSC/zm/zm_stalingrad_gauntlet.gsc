@@ -91,7 +91,7 @@ function function_622ad391() {
 }
 
 function function_fa149742() {
-  var_200dbf9d = getent("egg_drop_damage", "targetname");
+  var_200dbf9d = getEnt("egg_drop_damage", "targetname");
   level flag::wait_till("dragon_pavlov_first_time");
   level scene::init("p7_fxanim_zm_stal_pavlov_boards_bundle");
   var_200dbf9d thread function_a3a149a9();
@@ -110,10 +110,10 @@ function function_a3a149a9() {
 
 function function_61ab1070(player) {
   if(level flag::get("dragon_egg_acquired")) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
-  self sethintstring(&"ZM_STALINGRAD_EGG_PICKUP");
+  self setHintString(&"ZM_STALINGRAD_EGG_PICKUP");
   return true;
 }
 
@@ -131,7 +131,7 @@ function function_cee6cb2a() {
 }
 
 function function_9a76ebf9(s_stub) {
-  var_e0c16f1a = getent("pavlov_boards_egg", "targetname");
+  var_e0c16f1a = getEnt("pavlov_boards_egg", "targetname");
   var_e0c16f1a delete();
   foreach(player in level.activeplayers) {
     player playSound("zmb_drag_egg_pickup");
@@ -153,22 +153,22 @@ function function_5d1a6241() {
 
 function function_3e93cfea(e_player) {
   if(level flag::get("egg_awakened")) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(level flag::get("egg_cooled_hazard") && self.stub.related_parent.var_a1914ebb) {
-    self sethintstring(&"ZM_STALINGRAD_EGG_RETRIEVE");
+    self setHintString(&"ZM_STALINGRAD_EGG_RETRIEVE");
     return true;
   }
   if(level flag::get("egg_bathed_in_flame") && self.stub.related_parent.var_a1914ebb) {
-    self sethintstring(&"ZM_STALINGRAD_EGG_TOO_HOT");
+    self setHintString(&"ZM_STALINGRAD_EGG_TOO_HOT");
     return false;
   }
   if(level flag::get("dragon_egg_acquired") && !level flag::get("egg_placed_in_hazard")) {
-    self sethintstring(&"ZM_STALINGRAD_EGG_PLACE");
+    self setHintString(&"ZM_STALINGRAD_EGG_PLACE");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -304,10 +304,10 @@ function function_efaf3bd6(var_da90aa4c, str_damagemod) {
 
 function function_cf2a342(player) {
   if(!level flag::get("egg_placed_incubator") && !level flag::get("gauntlet_quest_complete")) {
-    self sethintstring(&"ZM_STALINGRAD_EGG_INCUBATE");
+    self setHintString(&"ZM_STALINGRAD_EGG_INCUBATE");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -325,7 +325,7 @@ function function_16907a63() {
 }
 
 function function_59a929b0(s_stub) {
-  var_734c1c5a = getent("dragon_incubator", "targetname");
+  var_734c1c5a = getEnt("dragon_incubator", "targetname");
   var_734c1c5a thread scene::play("p7_fxanim_zm_stal_dragon_incubator_bundle");
   level.var_de98e3ce.var_a6563820 = 7 + (6 * zm_utility::get_number_of_valid_players());
   level.var_c2c83bb6 = spawnStruct();
@@ -336,7 +336,7 @@ function function_59a929b0(s_stub) {
   var_6f3f4356 = getnodearray("pavlovs_lockdown_stair_traverse", "targetname");
   foreach(e_collision in var_2bf0ed11) {
     e_collision solid();
-    e_collision disconnectpaths();
+    e_collision disconnectPaths();
   }
   foreach(e_gate in var_50e0150f) {
     e_gate movez(600, 0.25);
@@ -344,14 +344,14 @@ function function_59a929b0(s_stub) {
   foreach(var_b0a376a4 in var_6f3f4356) {
     unlinktraversal(var_b0a376a4);
   }
-  var_ff1b68c0 = getent("pavlovs_sewer_door", "targetname");
+  var_ff1b68c0 = getEnt("pavlovs_sewer_door", "targetname");
   var_ff1b68c0 movey(-84, 1);
   level thread zm_stalingrad_util::function_2f621485();
   level thread scene::play("p7_fxanim_zm_stal_sewer_gate_down_bundle");
   level thread zm_stalingrad_util::function_e7c75cf0();
   level flag::set("lockdown_active");
   util::wait_network_frame();
-  level.var_de98e3ce.var_d54b9ade.var_62ceb838 = getent("dragon_incubator_egg", "targetname");
+  level.var_de98e3ce.var_d54b9ade.var_62ceb838 = getEnt("dragon_incubator_egg", "targetname");
   level.var_de98e3ce.var_d54b9ade.var_62ceb838 clientfield::increment("dragon_egg_placed", 1);
   level.var_c2c83bb6.var_b372c418 = struct::get_array("pavlovs_B_spawn", "targetname");
   var_d41655e8 = struct::get_array("pavlovs_A_spawn", "targetname");
@@ -372,7 +372,7 @@ function function_59a929b0(s_stub) {
     linktraversal(var_b0a376a4);
   }
   var_ff1b68c0 movey(84, 1);
-  var_21ce8765 = getent("sewer_gate", "targetname");
+  var_21ce8765 = getEnt("sewer_gate", "targetname");
   var_21ce8765 thread scene::play("p7_fxanim_zm_stal_sewer_gate_up_bundle");
   level zm_stalingrad_util::function_2f621485(0);
   wait(5);
@@ -411,7 +411,7 @@ function function_dcc4fd22() {
   } else {
     return;
   }
-  e_goal = getent("basement_lockdown_score", "targetname");
+  e_goal = getEnt("basement_lockdown_score", "targetname");
   if(self istouching(e_goal)) {
     self clientfield::increment("dragon_egg_score_beam_fx", 1);
     level.var_de98e3ce.var_179b5b71++;
@@ -522,7 +522,7 @@ function function_1a7c9b89(var_a48df19e) {
 
 function function_f4ceb3f8() {
   for(n_loops = 0; n_loops <= 3; n_loops++) {
-    playsoundatposition("evt_lockdown_alarm", (-159, 1959, 793));
+    playSoundAtPosition("evt_lockdown_alarm", (-159, 1959, 793));
     wait(1);
   }
 }
@@ -530,18 +530,18 @@ function function_f4ceb3f8() {
 function function_86e242(e_player) {
   var_21e43ff6 = level.var_de98e3ce.var_d54b9ade;
   if(!isDefined(var_21e43ff6)) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(!level flag::get("egg_cooled_incubator")) {
-    self sethintstring(&"ZM_STALINGRAD_EGG_TOO_HOT");
+    self setHintString(&"ZM_STALINGRAD_EGG_TOO_HOT");
     return false;
   }
   if(level.var_de98e3ce.var_987fcd7a && !level flag::get("gauntlet_quest_complete")) {
-    self sethintstring(&"ZM_STALINGRAD_EGG_RETRIEVE");
+    self setHintString(&"ZM_STALINGRAD_EGG_RETRIEVE");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 

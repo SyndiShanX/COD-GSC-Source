@@ -423,7 +423,7 @@ function function_bd715920(var_28b40381, attacker, eventorigin, eventobject, tim
       if(isDefined(var_4e424b8b) ? var_4e424b8b : 0) {
         if(distancesquared(eventorigin, player.origin) < sqr(allyradius)) {
           if(isDefined(var_494ab587) ? var_494ab587 : 0) {
-            relativepos = vectornormalize(player.origin - eventorigin);
+            relativepos = vectorNormalize(player.origin - eventorigin);
             dir = anglesToForward(self getplayerangles());
             dotproduct = vectordot(relativepos, dir);
 
@@ -441,7 +441,7 @@ function function_bd715920(var_28b40381, attacker, eventorigin, eventobject, tim
       }
 
       eyepoint = player getEye();
-      relativepos = vectornormalize(eventorigin - eyepoint);
+      relativepos = vectorNormalize(eventorigin - eyepoint);
       dir = anglesToForward(player getplayerangles());
       dotproduct = vectordot(relativepos, dir);
 
@@ -501,7 +501,7 @@ function function_fc82b10(weapon, eventorigin, eventobject) {
 
         if(var_4e424b8b) {
           if(distancetoplayer < sqr(allyradius)) {
-            relativepos = vectornormalize(player.origin - eventorigin);
+            relativepos = vectorNormalize(player.origin - eventorigin);
             dir = anglesToForward(self getplayerangles());
             dotproduct = vectordot(relativepos, dir);
 
@@ -516,7 +516,7 @@ function function_fc82b10(weapon, eventorigin, eventobject) {
         }
 
         eyepoint = player getEye();
-        relativepos = vectornormalize(eventorigin - eyepoint);
+        relativepos = vectorNormalize(eventorigin - eyepoint);
         dir = anglesToForward(player getplayerangles());
         dotproduct = vectordot(relativepos, dir);
 
@@ -1218,12 +1218,12 @@ function private function_253c2ba4(var_cf210c5b, dialogbuffer) {
     dialogbuffer = mpdialog_value("playerDialogBuffer", 0);
   }
 
-  teamarray = getplayers(self.team);
+  teamarray = getPlayers(self.team);
 
   if(self hasperk(#"specialty_quieter")) {
     arrayremovevalue(teamarray, self, 0);
   } else {
-    localplayers = getplayers(self.team, self.origin, 1200);
+    localplayers = getPlayers(self.team, self.origin, 1200);
 
     foreach(localplayer in localplayers) {
       arrayremovevalue(teamarray, localplayer, 0);

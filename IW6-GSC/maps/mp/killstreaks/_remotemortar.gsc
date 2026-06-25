@@ -186,7 +186,7 @@ remoteFiring(remote) {
       self.firingReaper = true;
 
       self playLocalSound("reaper_fire");
-      self PlayRumbleOnEntity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
 
       origin = self getEye();
       forward = anglesToForward(self GetPlayerAngles());

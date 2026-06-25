@@ -425,7 +425,7 @@ _id_160A(var_0, var_1, var_2, var_3) {
     var_4 = var_3;
   }
   var_5 = spawn("script_origin", var_1.origin);
-  var_5 linkto(var_1, "tag_origin", (var_4, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_1, "tag_origin", (var_4, 0, 0), (0, 0, 0));
   var_5._id_160B = level._id_1456._id_15C2._id_1601[var_2];
   var_5 playSound(var_0, "sounddone");
   var_5 thread _id_160D(var_2);
@@ -440,7 +440,7 @@ _id_160C(var_0, var_1, var_2, var_3) {
     var_4 = var_3;
   }
   var_5 = spawn("script_origin", var_1.origin);
-  var_5 linkto(var_1, "tag_origin", (var_4, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_1, "tag_origin", (var_4, 0, 0), (0, 0, 0));
   var_5._id_160B = level._id_1456._id_15C2._id_1602[var_2];
   var_5 playSound(var_0, "sounddone");
   level._id_1456._id_15C2._id_1600[var_2][var_5._id_160B] = var_5;
@@ -781,7 +781,7 @@ _id_1618(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(var_1.offset)) {
       var_15 = var_1.offset;
     }
-    level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] linkto(var_1.vehicle, "tag_origin", (var_15, 0, 0), (0, 0, 0));
+    level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] linkTo(var_1.vehicle, "tag_origin", (var_15, 0, 0), (0, 0, 0));
     level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] playLoopSound(var_0._id_15EF);
     level._id_1456._id_15C2._id_15D1[var_3][var_0._id_15EF] scalevolume(0.0);
     wait 0.05;
@@ -811,7 +811,7 @@ _id_1619(var_0, var_1, var_2, var_3) {
     foreach(var_8, var_7 in level._id_1456._id_15C2._id_15D1[var_0]) {
       if(var_8 != "entity" && var_8 != "speed" && var_8 != "throttle") {
         var_7 unlink();
-        var_7 linkto(var_1, var_4, (var_5, 0, 0), (0, 0, 0));
+        var_7 linkTo(var_1, var_4, (var_5, 0, 0), (0, 0, 0));
       }
     }
 
@@ -944,13 +944,13 @@ _id_162A() {
   self._id_162F = 0;
   self._id_1630 = spawnStruct();
   self._id_1630._id_1631 = spawn("script_origin", self.origin);
-  self._id_1630._id_1631 linkto(self);
+  self._id_1630._id_1631 linkTo(self);
   self._id_1630._id_1632 = spawn("script_origin", self.origin);
-  self._id_1630._id_1632 linkto(self);
+  self._id_1630._id_1632 linkTo(self);
   self._id_1630._id_1633 = spawn("script_origin", self.origin);
-  self._id_1630._id_1633 linkto(self);
+  self._id_1630._id_1633 linkTo(self);
   self._id_1630._id_1634 = spawn("script_origin", self.origin);
-  self._id_1630._id_1634 linkto(self);
+  self._id_1630._id_1634 linkTo(self);
 
   for(;;) {
     var_0 = self vehicle_getspeed();
@@ -1111,7 +1111,7 @@ _id_163C(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
     if(var_8 < var_2) {
       var_9 = spawn("script_origin", var_0.origin);
-      var_9 linkto(var_0);
+      var_9 linkTo(var_0);
       var_9 playSound(var_1, "sounddone");
       var_0 notify("flyby_sound_played");
       var_9 thread _id_163D(var_0);

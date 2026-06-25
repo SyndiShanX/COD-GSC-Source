@@ -62,7 +62,7 @@ func_A2B2(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     self.var_E473 = self getorigin();
-    self setorigin(var_1);
+    self setOrigin(var_1);
   }
 
   if(!isDefined(var_2)) {
@@ -79,7 +79,7 @@ func_A2B1(var_0) {
   self remotecontrolvehicleoff();
 
   if(isDefined(self.var_E473)) {
-    self setorigin(self.var_E473);
+    self setOrigin(self.var_E473);
   }
 
   self.ignoreme = 0;

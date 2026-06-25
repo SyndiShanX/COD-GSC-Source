@@ -344,7 +344,7 @@ function function_20fe0559() {
     s_altar.var_bee7fa0b++;
     s_altar.var_125b20f8 = player;
     sound = "evt_bottle_dispense";
-    playsoundatposition(sound, self.origin);
+    playSoundAtPosition(sound, self.origin);
     player zm_score::minus_to_player_score(n_cost);
     var_cc1db3c1 = array::exclude(level.a_str_vapors, player.perks_active);
     var_62fef0f1 = array::random(var_cc1db3c1);
@@ -479,13 +479,13 @@ function perk_bottle_motion() {
   level.bottle_spawn_location dontinterpolate();
   level.bottle_spawn_location.origin = self.origin;
   level.bottle_spawn_location.angles = self.angles;
-  level.bottle_spawn_location moveto(level.bottle_spawn_location.origin + (0, 0, 30), 3, 3 * 0.5);
+  level.bottle_spawn_location moveTo(level.bottle_spawn_location.origin + (0, 0, 30), 3, 3 * 0.5);
   level.bottle_spawn_location.angles += (0, 0, 10);
-  level.bottle_spawn_location rotateyaw(720, 3, 3 * 0.5);
+  level.bottle_spawn_location rotateYaw(720, 3, 3 * 0.5);
   self waittill(#"done_cycling");
   level.bottle_spawn_location.angles = self.angles;
-  level.bottle_spawn_location moveto(level.bottle_spawn_location.origin - (0, 0, 30), 10, 10 * 0.5);
-  level.bottle_spawn_location rotateyaw(90, 10, 10 * 0.5);
+  level.bottle_spawn_location moveTo(level.bottle_spawn_location.origin - (0, 0, 30), 10, 10 * 0.5);
+  level.bottle_spawn_location rotateYaw(90, 10, 10 * 0.5);
 }
 
 function function_42171e41(player) {

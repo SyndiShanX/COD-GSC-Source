@@ -200,7 +200,7 @@ function function_792e5cc5() {
       continue;
     }
 
-    startnode = getent(var_311100f0[i].target, "targetname");
+    startnode = getEnt(var_311100f0[i].target, "targetname");
 
     if(!isDefined(startnode)) {
       startnode = struct::get(var_311100f0[i].target, "targetname");
@@ -214,7 +214,7 @@ function function_792e5cc5() {
 
     if(isDefined(startnode.target)) {
       array::add(startnode.var_5943fcff, startnode);
-      next_node = getent(startnode.target, "targetname");
+      next_node = getEnt(startnode.target, "targetname");
 
       if(!isDefined(next_node)) {
         next_node = struct::get(startnode.target, "targetname");
@@ -227,7 +227,7 @@ function function_792e5cc5() {
       while(true) {
         array::add(startnode.var_5943fcff, next_node);
         current_node = next_node;
-        next_node = getent(current_node.target, "targetname");
+        next_node = getEnt(current_node.target, "targetname");
 
         if(!isDefined(next_node)) {
           next_node = struct::get(current_node.target, "targetname");
@@ -263,7 +263,7 @@ function spawn_chopper(start_node) {
     return;
   }
 
-  chopper = spawnvehicle(vehicledef, spawn_node.origin, spawn_node.angles);
+  chopper = spawnVehicle(vehicledef, spawn_node.origin, spawn_node.angles);
   chopper vehicle::toggle_tread_fx(1);
   chopper vehicle::toggle_exhaust_fx(1);
   chopper vehicle::toggle_sounds(1);
@@ -888,9 +888,9 @@ function function_c4b00a04(startnode) {
   self.loopcount = 0;
   self.var_dc70d94d = 0;
   self thread helicopter::function_81cba63();
-  var_b09000c1 = vectornormalize(self.var_94e122a8 - level.players[0].origin) * 1200;
-  var_f8927edb = vectornormalize(level.players[0].origin - self.origin);
-  var_6da223e6 = vectornormalize(self.var_94e122a8 - self.origin);
+  var_b09000c1 = vectorNormalize(self.var_94e122a8 - level.players[0].origin) * 1200;
+  var_f8927edb = vectorNormalize(level.players[0].origin - self.origin);
+  var_6da223e6 = vectorNormalize(self.var_94e122a8 - self.origin);
   var_99ec1a2c = [];
   var_99ec1a2c[0] = self.var_94e122a8 + (var_b09000c1[0], var_b09000c1[1], self.origin[2]);
   var_99ec1a2c[1] = self.var_94e122a8 + (var_b09000c1[1], var_b09000c1[0] * -1, self.origin[2]);

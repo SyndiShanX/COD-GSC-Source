@@ -122,7 +122,7 @@ script_mover_init() {
         self.origin_ent = spawn("script_model", target.origin);
         self.origin_ent.angles = target.angles;
         self.origin_ent setModel("tag_origin");
-        self.origin_ent LinkTo(self);
+        self.origin_ent linkTo(self);
         break;
       case "scripted_node":
       case "scene_node":
@@ -149,8 +149,8 @@ script_mover_init() {
     foreach(tok in toks) {
       switch (tok) {
         case "use_trigger_link":
-          target EnableLinkTo();
-          target LinkTo(self);
+          target EnablelinkTo();
+          target linkTo(self);
 
         case "use_trigger":
           target script_mover_parse_targets();
@@ -158,7 +158,7 @@ script_mover_init() {
           self.use_triggers[self.use_triggers.size] = target;
           break;
         case "link":
-          target LinkTo(self);
+          target linkTo(self);
           self.linked_ents[self.linked_ents.size] = target;
           break;
         default:
@@ -380,8 +380,8 @@ script_mover_connectpaths(mover) {
   self ConnectPaths();
 }
 
-script_mover_disconnectpaths(mover) {
-  self DisconnectPaths(mover);
+script_mover_disconnectPaths(mover) {
+  self disconnectPaths(mover);
 }
 
 script_mover_solid(mover) {
@@ -443,7 +443,7 @@ script_mover_update_paths() {
 
   while(1) {
     foreach(ent in dynamic_path_ents) {
-      ent script_mover_disconnectpaths();
+      ent script_mover_disconnectPaths();
     }
 
     self waittill("move_start");
@@ -559,7 +559,7 @@ script_mover_move_to_target(current) {
         mover DontInterpolate();
         mover.origin = trans["origin"];
       } else {
-        mover MoveTo(trans["origin"], move_time, accel_time, decel_time);
+        mover moveTo(trans["origin"], move_time, accel_time, decel_time);
       }
 
       is_moveTo = true;
@@ -570,7 +570,7 @@ script_mover_move_to_target(current) {
         mover DontInterpolate();
         mover.angles = trans["angles"];
       } else {
-        mover RotateTo(trans["angles"], move_time, accel_time, decel_time);
+        mover rotateTo(trans["angles"], move_time, accel_time, decel_time);
       }
 
       is_rotateTo = true;
@@ -761,8 +761,8 @@ script_mover_allow_usable(usable) {
 script_mover_set_usable(use_ent, usable) {
   if(usable) {
     use_ent MakeUsable();
-    use_ent SetCursorHint("HINT_ACTIVATE");
-    use_ent SetHintString(level.script_mover_hintstrings[self.params["hintstring"]]);
+    use_ent setCursorHint("HINT_ACTIVATE");
+    use_ent setHintString(level.script_mover_hintstrings[self.params["hintstring"]]);
   } else {
     use_ent MakeUnusable();
   }
@@ -907,7 +907,7 @@ unresolved_collision_nearest_node(player, bAllowSuicide) {
 
   player CancelMantle();
   player DontInterpolate();
-  player SetOrigin(player.origin + avoid_telefrag_offset);
+  player setOrigin(player.origin + avoid_telefrag_offset);
 
   for(i = 0; i < nodes.size; i++) {
     check_node = nodes[i];
@@ -925,11 +925,11 @@ unresolved_collision_nearest_node(player, bAllowSuicide) {
       player Setstance("crouch");
     }
 
-    player SetOrigin(org);
+    player setOrigin(org);
     return;
   }
 
-  player SetOrigin(player.origin - avoid_telefrag_offset);
+  player setOrigin(player.origin - avoid_telefrag_offset);
 
   if(!isDefined(bAllowSuicide)) {
     bAllowSuicide = true;
@@ -1048,7 +1048,7 @@ handle_moving_platforms(data) {
   }
 
   if(isDefined(data.linkParent)) {
-    self linkto(data.linkParent);
+    self linkTo(data.linkParent);
   }
 
   childthread handle_moving_platform_touch(data);

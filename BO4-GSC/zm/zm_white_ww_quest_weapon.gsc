@@ -247,9 +247,9 @@ is_soul_capture(var_88206a50, ent) {
 soul_captured(var_f0e6c7a2, ent) {
   n_souls_required = 6;
 
-  if(getplayers().size > 2) {
+  if(getPlayers().size > 2) {
     n_souls_required = 10;
-  } else if(getplayers().size > 1) {
+  } else if(getPlayers().size > 1) {
     n_souls_required = 8;
   }
 
@@ -319,7 +319,7 @@ function_256cc56e() {
 
   wait 1;
   level.var_d9d721fd scene::play("open");
-  playsoundatposition(#"hash_7afd5b8ae2a40c53", level.var_cb94d41d.origin);
+  playSoundAtPosition(#"hash_7afd5b8ae2a40c53", level.var_cb94d41d.origin);
   s_unitrigger = level.var_cb94d41d zm_unitrigger::create(&function_c3076788, 64);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   zm_unitrigger::function_c9e3607c(s_unitrigger, "HINT_WEAPON", level.a_w_ray_guns[2]);
@@ -395,13 +395,13 @@ function_c3076788(e_player) {
   }
 
   if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
-    self sethintstring("");
+    self setHintString("");
   } else if(isDefined(var_45d63569)) {
-    self sethintstring(zm_utility::function_d6046228(str_hint, var_306b9dd6), var_339390e4, var_45d63569);
+    self setHintString(zm_utility::function_d6046228(str_hint, var_306b9dd6), var_339390e4, var_45d63569);
   } else if(isDefined(var_339390e4)) {
-    self sethintstring(zm_utility::function_d6046228(str_hint, var_306b9dd6), var_339390e4);
+    self setHintString(zm_utility::function_d6046228(str_hint, var_306b9dd6), var_339390e4);
   } else {
-    self sethintstring(zm_utility::function_d6046228(str_hint, var_306b9dd6));
+    self setHintString(zm_utility::function_d6046228(str_hint, var_306b9dd6));
   }
 
   return true;
@@ -741,7 +741,7 @@ on_player_loadout_changed(s_event) {
     if(level flag::get("round_reset") || level flag::get(#"trial_failed")) {
       b_rescue = !isinarray(self.var_c27f1e90, #"specialty_additionalprimaryweapon") && self.var_2a62e678 === w_ray_gun;
     } else {
-      e_pap = getent("zm_pack_a_punch", "targetname");
+      e_pap = getEnt("zm_pack_a_punch", "targetname");
       var_e75ac4c0 = e_pap.unitrigger_stub.current_weapon === w_ray_gun;
       n_slot = function_50564ecc(w_ray_gun);
       var_87103d2d = level.var_cb94d41d.a_s_slots[n_slot].n_state == 2;

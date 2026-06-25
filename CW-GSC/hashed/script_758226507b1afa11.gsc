@@ -302,9 +302,9 @@ function function_6fa4a52() {
 
   var_a5e2ead2 = array();
   doors = doors::get_doors();
-  adler_alley_door = getent("adler_alley_door", "targetname");
+  adler_alley_door = getEnt("adler_alley_door", "targetname");
   doors[doors.size] = adler_alley_door;
-  adler_roof_door1 = getent("adler_roof_door1", "targetname");
+  adler_roof_door1 = getEnt("adler_roof_door1", "targetname");
   doors[doors.size] = adler_roof_door1;
 
   foreach(door in snd::function_f218bff5(doors)) {
@@ -987,7 +987,7 @@ function function_aa38f91f(car, targetname) {}
 
 function function_81b3f069(volume) {
   level endon(#"hash_205bf17f449d4088");
-  phone = getent("apt_phone", "targetname");
+  phone = getEnt("apt_phone", "targetname");
   thread function_db3e2ed5(phone);
   level.var_b159d30f = 0;
   level.var_2a973211 = 0.501;

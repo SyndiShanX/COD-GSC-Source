@@ -166,7 +166,7 @@ function oh_shit_vox() {
   self endon("death_or_disconnect");
   while(true) {
     wait(1);
-    players = getplayers();
+    players = getPlayers();
     zombs = zombie_utility::get_round_enemy_array();
     if(players.size >= 1) {
       close_zombs = 0;
@@ -540,7 +540,7 @@ function setup_response_line_override(player, category, subcategory) {
 }
 
 function setup_hero_rival(player, hero, rival, category, type) {
-  players = getplayers();
+  players = getPlayers();
   hero_player = undefined;
   rival_player = undefined;
   foreach(ent in players) {
@@ -673,7 +673,7 @@ function zmbvoxgetlinevariant(prefix, suffix, force_variant) {
 
 function arenearbyspeakersactive(radius = 1000) {
   nearbyspeakeractive = 0;
-  speakers = getplayers();
+  speakers = getPlayers();
   foreach(person in speakers) {
     if(self == person) {
       continue;

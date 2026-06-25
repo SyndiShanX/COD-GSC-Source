@@ -25,7 +25,7 @@ init_neil_quest() {
   scripts\engine\utility::flag_init("transform");
   scripts\engine\utility::flag_init("halt_neil");
   scripts\engine\utility::flag_init("landing_zone_active");
-  getent("neil_usetrig", "targetname") enablelinkto();
+  getEnt("neil_usetrig", "targetname") enablelinkTo();
   var_0 = getvehiclenode("neil_spawn", "targetname");
   func_F999(var_0);
   level thread func_BED2();
@@ -63,7 +63,7 @@ func_BED3() {
   level.neil.upper_body.angles = level.neil.angles;
   level.neil.upper_body setModel(level.var_BEB2);
   level.neil.upper_body func_BEDF("happy");
-  level.neil.upper_body linkto(level.neil);
+  level.neil.upper_body linkTo(level.neil);
   level.neil.upper_body playSound("neil_startup");
   level.neil.upper_body scriptmodelplayanim("IW7_cp_zom_n31l_head_on", 1);
   level.neil setnonstick(1);
@@ -99,7 +99,7 @@ func_BED4() {
     break;
   }
 
-  var_1 = scripts\engine\utility::getstruct("neil_repair", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("neil_repair", "script_noteworthy");
   add_part_to_neil(var_1, var_0);
   func_BEBC(level.neil);
   level func_BED7();
@@ -144,7 +144,7 @@ func_BED8() {
     break;
   }
 
-  var_1 = scripts\engine\utility::getstruct("neil_repair", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("neil_repair", "script_noteworthy");
   add_part_to_neil(var_1, var_0);
   level.var_13BD0 = level.wave_num;
   func_BEBC(level.neil);
@@ -195,7 +195,7 @@ func_BEBD(var_0, var_1, var_2) {
     var_1 = &"CP_ZMB_CHALLENGES_USE_NEIL";
   }
 
-  var_0.var_13084 sethintstring(var_1);
+  var_0.var_13084 setHintString(var_1);
   var_0.var_13084 setuserange(90);
   var_0.var_13084 setusefov(180);
   if(!scripts\engine\utility::istrue(level.var_A6E1)) {
@@ -475,7 +475,7 @@ func_106EF(var_0) {
   var_1.upper_body.angles = var_1.angles;
   var_1 setModel(level.var_BEB1);
   var_1.upper_body setModel(level.var_BEB2);
-  var_1.upper_body linkto(var_1);
+  var_1.upper_body linkTo(var_1);
   var_1 setnonstick(1);
   var_1.upper_body setnonstick(1);
   var_1 setscriptablepartstate("thrusters", "liftoff");
@@ -565,11 +565,11 @@ func_12636(var_0, var_1) {
 
   scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(1);
   level.the_hoff = func_107F0(var_1, var_2);
-  level.the_hoff setorigin(var_2.origin, 0);
+  level.the_hoff setOrigin(var_2.origin, 0);
   level.the_hoff.angles = var_2.angles;
   level.the_hoff hide(1);
   wait(0.5);
-  level.the_hoff linkto(var_2);
+  level.the_hoff linkTo(var_2);
   level.the_hoff playerlinkedoffsetenable();
   var_2.upper_body thread func_A6E2();
   var_2 playSound("neil_upgrade_rocket_launch_land");
@@ -611,7 +611,7 @@ func_12636(var_0, var_1) {
     wait(0.75);
     level.neil.upper_body thread func_A6E2();
     level.the_hoff.var_FFF3 = 1;
-    level.the_hoff setorigin(level.neil.origin + scripts\cp\utility::vec_multiply(anglesToForward(level.neil.angles), 52) + scripts\cp\utility::vec_multiply(anglestoleft(level.neil.angles), 11), 0);
+    level.the_hoff setOrigin(level.neil.origin + scripts\cp\utility::vec_multiply(anglesToForward(level.neil.angles), 52) + scripts\cp\utility::vec_multiply(anglestoleft(level.neil.angles), 11), 0);
     wait(7);
     level.the_hoff takeallweapons();
     destroynavrepulsor("neil");
@@ -622,7 +622,7 @@ func_12636(var_0, var_1) {
     level.neil.upper_body scriptmodelclearanim();
     var_2 = func_106EF(level.neil);
     var_2.upper_body thread func_A6E2();
-    level.the_hoff linkto(var_2);
+    level.the_hoff linkTo(var_2);
     level.the_hoff playerlinkedoffsetenable();
     scripts\engine\utility::flag_set("landing_zone_active");
     level thread func_A82C();
@@ -823,7 +823,7 @@ func_83FF() {
   }
 
   self.var_A8EF = var_4;
-  var_5 = vectornormalize(var_2);
+  var_5 = vectorNormalize(var_2);
   var_6 = var_1.origin - var_5 * 128;
   var_7 = getclosestpointonnavmesh(var_6, self);
   scripts\mp\agents\c6\c6_agent::func_F834(1, 120);
@@ -874,7 +874,7 @@ func_A56E(var_0) {
     if(isPlayer(var_2)) {
       var_2 dodamage(5, var_0);
       var_2.padding_damage = 1;
-      var_2 setvelocity(vectornormalize(var_2.origin - var_0) * 100);
+      var_2 setvelocity(vectorNormalize(var_2.origin - var_0) * 100);
       var_2 thread remove_padding_damage();
       continue;
     }
@@ -966,17 +966,17 @@ func_BEE1(var_0, var_1, var_2, var_3) {
     var_4 = var_0.angles;
   }
 
-  var_5 = spawnvehicle(var_2, "neil", "cp_kevin", var_0.origin + var_1, var_4);
-  var_5.var_13084 = getent("neil_usetrig", "targetname");
+  var_5 = spawnVehicle(var_2, "neil", "cp_kevin", var_0.origin + var_1, var_4);
+  var_5.var_13084 = getEnt("neil_usetrig", "targetname");
   var_5.var_13084.origin = var_5.origin + (0, 0, 60);
-  var_5.var_13084 linkto(var_5);
+  var_5.var_13084 linkTo(var_5);
   var_5 setCanDamage(0);
   if(scripts\engine\utility::istrue(var_3)) {
     var_5.is_neil = 1;
     var_5.upper_body = spawn("script_model", var_5.origin);
     var_5.upper_body.angles = var_5.angles;
     var_5.upper_body setModel(level.var_BEB2);
-    var_5.upper_body linkto(var_5);
+    var_5.upper_body linkTo(var_5);
   }
 
   return var_5;
@@ -1171,7 +1171,7 @@ pickup_battery(var_0, var_1) {
 
   level.var_BEB0 = 1;
   level scripts\cp\utility::set_quest_icon(8);
-  level.neil.var_13084 sethintstring(&"CP_ZMB_INTERACTIONS_LOAD_BATTERY");
+  level.neil.var_13084 setHintString(&"CP_ZMB_INTERACTIONS_LOAD_BATTERY");
 }
 
 pickup_firmware(var_0, var_1) {
@@ -1188,7 +1188,7 @@ pickup_firmware(var_0, var_1) {
 
   level.var_BEC3 = 1;
   level scripts\cp\utility::set_quest_icon(9);
-  level.neil.var_13084 sethintstring(&"CP_ZMB_INTERACTIONS_LOAD_FLOPPY");
+  level.neil.var_13084 setHintString(&"CP_ZMB_INTERACTIONS_LOAD_FLOPPY");
 }
 
 func_9696(var_0) {
@@ -1225,7 +1225,7 @@ func_1077B(var_0, var_1) {
     }
   }
 
-  var_7 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_7 = scripts\engine\utility::getStruct(var_3.target, "targetname");
   var_8 = spawn("script_model", var_7.origin);
   if(isDefined(var_7.angles)) {
     var_8.angles = var_7.angles;
@@ -1239,8 +1239,8 @@ func_1077B(var_0, var_1) {
 }
 
 func_1077A() {
-  var_0 = scripts\engine\utility::getstruct("neil_head", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct("neil_head", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   var_2 setModel(level.var_BEC8);
@@ -1298,7 +1298,7 @@ func_BEAC() {
   level.neil.var_6265 = 0;
   level.neil.cooldown = 1;
   level.neil.var_13084 makeusable();
-  level.neil.var_13084 sethintstring(&"CP_ZMB_CHALLENGES_REBOOTING");
+  level.neil.var_13084 setHintString(&"CP_ZMB_CHALLENGES_REBOOTING");
   var_0 = 120;
   wait(var_0);
   level.neil.var_13084 setuserange(90);
@@ -1392,7 +1392,7 @@ func_E493() {
 }
 
 func_4EFA() {
-  var_0 = scripts\engine\utility::getstruct("neil_repair", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("neil_repair", "script_noteworthy");
   if(isDefined(level.var_BEC5.var_BEC5)) {
     pickup_head(level.var_BEC5, level.players[0]);
     wait(1);
@@ -1444,7 +1444,7 @@ add_part_to_neil(var_0, var_1) {
     level.var_BEC7 = undefined;
     var_1 thread scripts\cp\cp_hud_message::tutorial_lookup_func("quest_neil");
     scripts\engine\utility::flag_set("neil_head_attached");
-    var_2 = getent("neil_repair_clip", "targetname");
+    var_2 = getEnt("neil_repair_clip", "targetname");
     var_2 connectpaths();
     var_2 delete();
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);

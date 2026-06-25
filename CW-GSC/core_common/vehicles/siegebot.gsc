@@ -173,7 +173,7 @@ function state_death_update(params) {
   self waittilltimeout(3, #"bodyfall large");
   self radiusdamage(self.origin + (0, 0, 10), self.radius * 0.8, 150, 60, self, "MOD_CRUSH");
   vehicle_ai::waittill_asm_complete("death@stationary", 3);
-  self disconnectpaths(1);
+  self disconnectPaths(1);
   self thread vehicle_death::cleanup();
   self vehicle_death::freewhensafe();
 }
@@ -376,7 +376,7 @@ function state_jump_update(params) {
   self.jump.linkent.origin = self.origin;
   self.jump.linkent.angles = self.angles;
   waitframe(1);
-  self linkto(self.jump.linkent);
+  self linkTo(self.jump.linkent);
   self.jump.in_air = 1;
 
   if(false) {
@@ -469,7 +469,7 @@ function state_jump_update(params) {
         direction = (randomfloatrange(1, 2), randomfloatrange(1, 2), 0);
       }
 
-      direction = vectornormalize(direction);
+      direction = vectorNormalize(direction);
       strength = 700;
       player setvelocity(player getvelocity() + direction * strength);
 
@@ -601,7 +601,7 @@ function stopmovementandsetbrake() {
 
 function face_target(position, targetanglediff = 30) {
   v_to_enemy = ((position - self.origin)[0], (position - self.origin)[1], 0);
-  v_to_enemy = vectornormalize(v_to_enemy);
+  v_to_enemy = vectorNormalize(v_to_enemy);
   goalangles = vectortoangles(v_to_enemy);
   anglediff = absangleclamp180(self.angles[1] - goalangles[1]);
 
@@ -718,7 +718,7 @@ function function_e177d7af(target) {
     var_628cb978 = getweapon(#"hash_2a42cf9b8d71ff7e");
     var_7f98edcc = target.origin;
     v_origin = self gettagorigin("tag_gunner_flash2");
-    v_dir = vectornormalize(var_7f98edcc - v_origin);
+    v_dir = vectorNormalize(var_7f98edcc - v_origin);
     var_a64609fe = v_dir * 1000;
     self magicmissile(var_628cb978, v_origin, var_a64609fe, target);
     self turretcleartarget(2);

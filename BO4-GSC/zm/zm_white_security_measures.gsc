@@ -57,7 +57,7 @@ init_weapons_locker() {
   }
 
   if(zm_utility::is_ee_enabled() || zm_utility::is_trials()) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(isDefined(e_player)) {
         e_player function_af613bbf(level.s_weapons_locker.a_weapons);
         e_player.var_5a5bf8e7 = 0;
@@ -67,11 +67,11 @@ init_weapons_locker() {
 
   callback::on_connect(&on_player_connect);
   level flag::wait_till(#"enable_countermeasure_3");
-  e_door_l = getent("e_sarge_l", "targetname");
-  e_door_r = getent("e_sarge_r", "targetname");
+  e_door_l = getEnt("e_sarge_l", "targetname");
+  e_door_r = getEnt("e_sarge_r", "targetname");
   e_door_l playSound(#"evt_weapon_locker");
-  e_door_l rotateyaw(185, 0.85, 0.1, 0.1);
-  e_door_r rotateyaw(-220, 1, 0.05, 0.05);
+  e_door_l rotateYaw(185, 0.85, 0.1, 0.1);
+  e_door_r rotateYaw(-220, 1, 0.05, 0.05);
   level.s_weapons_locker zm_unitrigger::create(&function_9d485d13, 64);
   level.s_weapons_locker thread function_4ef09c7a();
 }
@@ -80,7 +80,7 @@ function_33e9442f() {
   level.s_ray_gun_case = struct::get("s_ray_gun_case", "targetname");
   level.s_ray_gun_case.s_case = struct::get("rg_case", "targetname");
   level.s_ray_gun_case.s_case scene::play("idle");
-  level.s_ray_gun_case.e_ray_gun = getent(level.s_ray_gun_case.target, "targetname");
+  level.s_ray_gun_case.e_ray_gun = getEnt(level.s_ray_gun_case.target, "targetname");
   level.s_ray_gun_case.e_ray_gun.w_pickup = level.a_w_ray_guns[3];
 
   if(zm_utility::is_ee_enabled()) {
@@ -100,7 +100,7 @@ function_31c7123b() {
   level.s_shower_trap = struct::get("s_shower_trap", "targetname");
   s_trap = level.s_shower_trap;
   s_trap._trap_type = "acid";
-  s_trap.e_volume = getent(s_trap.target, "targetname");
+  s_trap.e_volume = getEnt(s_trap.target, "targetname");
   s_trap.e_volume._trap_type = "acid";
   s_trap.a_s_trap_fx = struct::get_array(s_trap.target3, "targetname");
   s_trap.a_s_buttons = struct::get_array(s_trap.target2, "targetname");
@@ -185,7 +185,7 @@ function_79eec899() {
     wait n_cooldown;
     function_91ecec97(level.s_shower_trap.a_e_lights, "p8_zm_off_trap_switch_light_green_on");
     level.s_shower_trap.var_41ee2ddc = 1;
-    playsoundatposition(#"zmb_trap_ready", self.origin);
+    playSoundAtPosition(#"zmb_trap_ready", self.origin);
   }
 }
 
@@ -261,7 +261,7 @@ function_d55cc959() {
 }
 
 function_17f9c268() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player istouching(self.e_volume)) {
       e_player thread function_b691c69(self);
     }
@@ -306,16 +306,16 @@ function_24c4375b() {
 }
 
 function_13e49422(trap) {
-  playsoundatposition(#"hash_4b93c2d674807e60", self.origin);
+  playSoundAtPosition(#"hash_4b93c2d674807e60", self.origin);
   self waittill(#"available");
-  playsoundatposition(#"zmb_acid_trap_available", self.origin);
+  playSoundAtPosition(#"zmb_acid_trap_available", self.origin);
 }
 
 function_d8a7606() {
   level.s_fire_trap = struct::get("s_fire_trap", "targetname");
   s_trap = level.s_fire_trap;
   s_trap._trap_type = "fire";
-  s_trap.e_volume = getent(s_trap.target, "targetname");
+  s_trap.e_volume = getEnt(s_trap.target, "targetname");
   s_trap.e_volume._trap_type = "fire";
   s_trap.a_s_trap_fx = struct::get_array(s_trap.target3, "targetname");
   s_trap.a_s_buttons = struct::get_array(s_trap.target2, "targetname");
@@ -401,7 +401,7 @@ function_64fa1b6a() {
     wait n_cooldown;
     function_91ecec97(level.s_fire_trap.a_e_lights, "p8_zm_off_trap_switch_light_green_on");
     level.s_fire_trap.var_41ee2ddc = 1;
-    playsoundatposition(#"zmb_trap_ready", self.origin);
+    playSoundAtPosition(#"zmb_trap_ready", self.origin);
   }
 }
 
@@ -458,7 +458,7 @@ function_11e5b2ee(e_activator, e_volume) {
       refs[5] = "no_legs";
       refs[6] = "head";
       self.a.gib_ref = refs[randomint(refs.size)];
-      playsoundatposition(#"wpn_zmb_electrap_zap", self.origin);
+      playSoundAtPosition(#"wpn_zmb_electrap_zap", self.origin);
       wait randomfloat(1.25);
       self playSound(#"wpn_zmb_electrap_zap");
     }
@@ -486,7 +486,7 @@ fire_trap_fx(b_is_on) {
 }
 
 function_956ddb52() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player istouching(self.e_volume)) {
       e_player thread function_5c6fd230(self);
     }
@@ -534,7 +534,7 @@ init_spinning_trap() {
   level.s_spinning_trap = struct::get("s_spinning_trap", "targetname");
   s_trap = level.s_spinning_trap;
   s_trap._trap_type = "rotating";
-  s_trap.e_volume = getent(s_trap.target, "targetname");
+  s_trap.e_volume = getEnt(s_trap.target, "targetname");
   s_trap.e_volume._trap_type = "rotating";
   s_trap.a_s_buttons = struct::get_array(s_trap.target2, "targetname");
   s_trap.a_e_lights = getEntArray(s_trap.target4, "targetname");
@@ -622,7 +622,7 @@ function_7fffc105() {
     wait n_cooldown;
     function_91ecec97(level.s_spinning_trap.a_e_lights, "p8_zm_off_trap_switch_light_green_on");
     level.s_spinning_trap.var_41ee2ddc = 1;
-    playsoundatposition(#"zmb_trap_ready", self.origin);
+    playSoundAtPosition(#"zmb_trap_ready", self.origin);
   }
 }
 
@@ -697,7 +697,7 @@ function_7bd8cfde(e_activator, s_trap) {
 
   if(!(isDefined(s_trap.var_705682df) && s_trap.var_705682df) && self.zm_ai_category === #"basic" && n_dist <= 128 && self.team != #"allies") {
     self thread function_bcfd9acb(s_trap);
-    a_e_players = util::get_array_of_closest(self.origin, getplayers());
+    a_e_players = util::get_array_of_closest(self.origin, getPlayers());
     return;
   }
 
@@ -730,7 +730,7 @@ function_bcfd9acb(s_trap) {
   self.var_bd4627e1 = 1;
   self clientfield::set("spinning_trap_eye_fx", 1);
   var_e72c9959 = util::spawn_model("tag_origin", s_trap.e_trap.scene_ents[#"prop 1"] gettagorigin("tag_fan_blade_A_2"), s_trap.e_trap.scene_ents[#"prop 1"] gettagangles("tag_fan_blade_A_2"));
-  var_e72c9959 linkto(s_trap.e_trap.scene_ents[#"prop 1"], "tag_fan_blade_A_2");
+  var_e72c9959 linkTo(s_trap.e_trap.scene_ents[#"prop 1"], "tag_fan_blade_A_2");
   self val::set("spinning_trap", "ignoreall", 1);
   self val::set("spinning_trap", "allowdeath", 0);
   self.b_ignore_cleanup = 1;
@@ -739,7 +739,7 @@ function_bcfd9acb(s_trap) {
   self setteam(util::get_enemy_team(self.team));
   self zombie_utility::makezombiecrawler(1);
   var_e72c9959 thread scene::init(#"aib_vign_zm_mob_hook_trap_zombie", self);
-  playsoundatposition(#"hash_42c6cc2204b7fbbd", self.origin);
+  playSoundAtPosition(#"hash_42c6cc2204b7fbbd", self.origin);
   s_trap waittill(#"spinning_trap_complete");
   var_44342e79 = var_e72c9959 scene::function_8582657c(#"p8_fxanim_zm_esc_trap_fan_play", "Shot 2");
   var_e72c9959 scene::play(#"aib_vign_zm_mob_hook_trap_zombie", self);
@@ -761,17 +761,17 @@ function_bcfd9acb(s_trap) {
 
 function_63e5e387(s_trap) {
   n_lift_height = randomintrange(8, 64);
-  v_away_from_source = vectornormalize(self.origin - s_trap.e_volume.origin);
+  v_away_from_source = vectorNormalize(self.origin - s_trap.e_volume.origin);
   v_away_from_source *= 128;
   v_away_from_source = (v_away_from_source[0], v_away_from_source[1], n_lift_height);
   a_trace = physicstraceex(self.origin + (0, 0, 32), self.origin + v_away_from_source, (-16, -16, -16), (16, 16, 16), self);
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self startragdoll();
   self launchragdoll(150 * anglestoup(self.angles) + (v_away_from_source[0], v_away_from_source[1], 0));
 }
 
 function_fcac4b4e() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player istouching(self.e_volume)) {
       e_player thread function_1259cbbb(self);
     }
@@ -860,10 +860,10 @@ function_af613bbf(a_weapons) {
 function_9d485d13(e_player) {
   if(!e_player.var_5a5bf8e7) {
     str_hint = zm_utility::function_d6046228(e_player.var_af561b1f, e_player.var_a794d091);
-    self sethintstring(str_hint);
+    self setHintString(str_hint);
     return true;
   } else {
-    self sethintstring("");
+    self setHintString("");
   }
 
   return false;
@@ -900,36 +900,36 @@ function_67b12ae8(e_player) {
   s_button = self.stub.related_parent;
 
   if(e_player zm_utility::is_drinking()) {
-    self sethintstring("");
+    self setHintString("");
     return 0;
   }
 
   if(s_button.s_trap.var_6b64b967 === 1) {
-    self sethintstring(#"zombie/trap_active");
+    self setHintString(#"zombie/trap_active");
     return 1;
   }
 
   if(isDefined(s_button.power_flag) && !level flag::get(s_button.power_flag)) {
-    self sethintstring(#"zombie/need_power");
+    self setHintString(#"zombie/need_power");
     return 1;
   }
 
   if(level flag::get(#"hash_1478cafcd626c361") && !level flag::get(#"circuit_step_complete")) {
-    self sethintstring(#"zombie/need_power");
+    self setHintString(#"zombie/need_power");
     return 1;
   }
 
   if(s_button.s_trap.var_41ee2ddc === 0) {
-    self sethintstring(#"zombie/trap_cooldown");
+    self setHintString(#"zombie/trap_cooldown");
     return 1;
   }
 
   if(util::get_game_type() == "zstandard") {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_61d85c966dd9e83f");
+      self setHintString(#"hash_61d85c966dd9e83f");
       return 1;
     } else {
-      self sethintstring(#"hash_24a438482954901");
+      self setHintString(#"hash_24a438482954901");
       return 1;
     }
 
@@ -937,11 +937,11 @@ function_67b12ae8(e_player) {
   }
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_6e8ef1b690e98e51", 1000);
+    self setHintString(#"hash_6e8ef1b690e98e51", 1000);
     return 1;
   }
 
-  self sethintstring(#"zombie/button_buy_trap", 1000);
+  self setHintString(#"zombie/button_buy_trap", 1000);
   return 1;
 }
 

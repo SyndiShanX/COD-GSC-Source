@@ -330,7 +330,7 @@ func_3981() {
 
 func_39C7(var_0) {
   var_1 = func_7C33(var_0);
-  var_2 = scripts\engine\utility::getstruct(var_1, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1, "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -375,7 +375,7 @@ func_39C9() {
     var_0 = func_7C33(self.var_EF30);
   }
 
-  var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {}
 
@@ -403,7 +403,7 @@ func_39C9() {
     var_7 = spawn("script_model", var_6["origin"]);
     var_7 setModel(var_4.script_parameters);
     var_7.angles = var_6["angles"];
-    var_7 linkto(self);
+    var_7 linkTo(self);
     var_7 setCanDamage(1);
     self.var_EF3C[self.var_EF3C.size] = var_7;
   }
@@ -531,7 +531,7 @@ func_395F() {
         while(var_0 < 400000000) {
           if(!isDefined(level.var_D127.var_4E93)) {
             level.var_D127.var_4E93 = spawn("script_origin", level.var_D127.origin);
-            level.var_D127.var_4E93 linkto(level.var_D127);
+            level.var_D127.var_4E93 linkTo(level.var_D127);
             wait 0.05;
             level.var_D127.var_4E93 ghostattack(0);
             level.var_D127.var_4E93 playLoopSound("jackal_debris_lp_sfx");
@@ -713,7 +713,7 @@ func_3977() {
 
       var_3 = spawn("script_model", self.origin);
       var_3 setModel(var_4);
-      var_3 linkto(var_1, var_6, (0, 0, 0), (0, 0, 0));
+      var_3 linkTo(var_1, var_6, (0, 0, 0), (0, 0, 0));
       var_1.var_CB53 = scripts\engine\utility::array_add(var_1.var_CB53, var_3);
     }
   } else {
@@ -728,7 +728,7 @@ func_3977() {
       var_6 = "tag_" + var_4;
       var_3 = spawn("script_model", self.origin);
       var_3 setModel(var_4);
-      var_3 linkto(var_1, var_6, (0, 0, 0), (0, 0, 0));
+      var_3 linkTo(var_1, var_6, (0, 0, 0), (0, 0, 0));
       var_1.var_CB53 = scripts\engine\utility::array_add(var_1.var_CB53, var_3);
     }
   }
@@ -830,7 +830,7 @@ func_B2E5() {
     foreach(var_11 in level.var_F02D) {
       var_12 = var_11.origin - level.var_D127.origin;
       var_11.var_56EA = length(var_12);
-      var_13 = vectornormalize(var_12);
+      var_13 = vectorNormalize(var_12);
       var_11.var_5ABB = vectordot(var_13, var_8);
       var_14 = 1 - scripts\sp\math::func_C097(0, var_6, var_11.var_56EA);
       var_15 = scripts\sp\math::func_C097(var_7, 1, var_11.var_5ABB);
@@ -998,7 +998,7 @@ func_39B4() {
         var_1 = distance(self.origin, level.var_D127.origin);
         var_2 = anglestoright(self.angles);
         var_3 = anglestoup(self.angles);
-        var_4 = vectornormalize(level.var_D127.origin - self.origin);
+        var_4 = vectorNormalize(level.var_D127.origin - self.origin);
         var_5 = vectordot(var_2, var_4);
         var_6 = vectordot(var_3, var_4);
         func_0BB6::func_399F(var_1, var_5, var_6);
@@ -1012,7 +1012,7 @@ func_3987(var_0) {
   self endon("predeath");
   var_1 = anglestoright(self.angles);
   var_2 = anglestoup(self.angles);
-  var_3 = vectornormalize(var_0.origin - self.origin);
+  var_3 = vectorNormalize(var_0.origin - self.origin);
   var_4 = vectordot(var_1, var_3);
   var_5 = vectordot(var_2, var_3);
   self.var_8B50["cap_hardpoint_missile_barrage"] = ::scripts\engine\utility::array_removeundefined(self.var_8B50["cap_hardpoint_missile_barrage"]);

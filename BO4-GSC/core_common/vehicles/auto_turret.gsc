@@ -49,7 +49,7 @@ function_b07539aa() {
   }
 
   if(self.settings.disconnectpaths === 1) {
-    self disconnectpaths(1);
+    self disconnectPaths(1);
   }
 
   if(self.settings.ignoreme === 1) {
@@ -343,7 +343,7 @@ rest_turret(resting_pitch = self.settings.resting_pitch) {
 
 state_emped_enter(params) {
   self vehicle_ai::defaultstate_emped_enter(params);
-  playsoundatposition(#"veh_sentry_turret_emp_down", self.origin);
+  playSoundAtPosition(#"veh_sentry_turret_emp_down", self.origin);
   self.turretrotscale = 0.5;
   self rest_turret(params.resting_pitch);
   params.laseron = islaseron(self);
@@ -414,7 +414,7 @@ sentry_turret_alert_sound() {
 turret_idle_sound() {
   if(!isDefined(self.sndloop_ent)) {
     self.sndloop_ent = spawn("script_origin", self.origin);
-    self.sndloop_ent linkto(self);
+    self.sndloop_ent linkTo(self);
     self.sndloop_ent playLoopSound(#"veh_turret_idle");
     self.sndloop_ent thread function_5d665d67(self);
   }

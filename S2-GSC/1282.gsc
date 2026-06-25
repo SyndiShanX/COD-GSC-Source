@@ -671,7 +671,7 @@ func_254B(param_00) {
 }
 
 func_2084(param_00) {
-  param_00 linkto(param_00.var_982E);
+  param_00 linkTo(param_00.var_982E);
 }
 
 ces_setownedbyparent(param_00) {
@@ -703,7 +703,7 @@ func_207A(param_00) {
 func_2087(param_00) {
   param_00 endon("death");
   func_6AB1(param_00);
-  var_01 = vectornormalize(param_00.var_116 - param_00.var_982E.var_116);
+  var_01 = vectorNormalize(param_00.var_116 - param_00.var_982E.var_116);
   var_01 = var_01 * 10000;
   param_00 method_82C5(param_00.var_116, var_01);
 }
@@ -736,7 +736,7 @@ func_2085(param_00) {
 
   var_03 = trajectorycalculateinitialvelocity(param_00.var_116, var_01.var_116, (0, 0, -800), var_02);
   param_00 gravitymove(var_03, var_02);
-  param_00 rotateto(var_01.var_1D, var_02, 0, var_02);
+  param_00 rotateTo(var_01.var_1D, var_02, 0, var_02);
 }
 
 func_2086(param_00) {
@@ -748,15 +748,15 @@ func_2086(param_00) {
     var_02 = 1;
   }
 
-  param_00 moveto(var_01.var_116, var_02);
-  param_00 rotateto(var_01.var_1D, var_02, 0, var_02);
+  param_00 moveTo(var_01.var_116, var_02);
+  param_00 rotateTo(var_01.var_1D, var_02, 0, var_02);
 }
 
 func_2083(param_00) {
   param_00 endon("death");
   func_6AB1(param_00);
-  var_01 = getent(param_00.var_1A2, "targetname");
-  param_00 linkto(var_01);
+  var_01 = getEnt(param_00.var_1A2, "targetname");
+  param_00 linkTo(var_01);
 }
 
 func_2081(param_00) {
@@ -767,7 +767,7 @@ func_2081(param_00) {
   if(var_01.var_116 != param_00.var_116 || anglesdelta(param_00.var_1D, var_01.var_1D) != 0) {
     var_01.var_64DA = spawn("script_origin", param_00.var_116);
     var_01.var_64DA.var_1D = param_00.var_1D;
-    var_01.var_64DA linkto(var_01);
+    var_01.var_64DA linkTo(var_01);
     return;
   }
 
@@ -994,8 +994,8 @@ func_64D5(param_00, param_01, param_02, param_03) {
   param_00.var_64D8 = param_01;
   var_04 = param_00.var_64DB[param_01];
   var_05 = transformmove(var_04.var_116, var_04.var_1D, param_00.var_64DA.var_116, param_00.var_64DA.var_1D, param_00.var_116, param_00.var_1D);
-  param_00 moveto(var_05["origin"], param_02);
-  param_00 rotateto(var_05["angles"], param_02);
+  param_00 moveTo(var_05["origin"], param_02);
+  param_00 rotateTo(var_05["angles"], param_02);
   thread func_64EE(param_00, param_02, param_03);
 }
 
@@ -1121,8 +1121,8 @@ func_79E1(param_00, param_01, param_02, param_03, param_04, param_05) {
     param_00.var_A240 maps\mp\gametypes\_gameobjects::func_2D58();
   }
 
-  param_00 sethintstring(param_01);
-  param_00 setcursorhint("HINT_NOICON");
+  param_00 setHintString(param_01);
+  param_00 setCursorHint("HINT_NOICON");
   if(param_02 > 0) {
     childthread func_79E7(param_00, param_02, param_01, param_03, param_04, param_05);
     return;
@@ -2460,7 +2460,7 @@ func_A3EC() {
     var_18 = spawn("script_origin", var_17);
     var_18.var_1D = self.var_1D;
     var_18 method_805C();
-    var_18 linkto(self);
+    var_18 linkTo(self);
     var_18 thread func_2D1D();
     thread common_scripts\utility::func_2D18(var_18);
     var_18.var_8C3A = var_14[2];
@@ -2593,12 +2593,12 @@ isteleportenabled(param_00, param_01, param_02) {
   param_02 makeunusable();
   param_00 makeunusable();
   if(isDefined(param_02.var_A2C8) && common_scripts\utility::func_562E(param_02.var_A2C8.isdrivable)) {
-    param_00 sethintstring(&"RAIDS_USE_TANK_MG_FROM_GROUND");
+    param_00 setHintString(&"RAIDS_USE_TANK_MG_FROM_GROUND");
   } else {
-    param_00 sethintstring(&"RAIDS_USE_TANK_TURRET");
+    param_00 setHintString(&"RAIDS_USE_TANK_TURRET");
   }
 
-  param_00 setcursorhint("HINT_NOICON");
+  param_00 setCursorHint("HINT_NOICON");
   param_02.var_4B70 = 1;
   param_00.var_6DB2 = param_01;
   param_00.var_9EDD = param_02;

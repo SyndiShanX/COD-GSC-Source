@@ -36,7 +36,7 @@ function function_cc91ce1f(str_objective) {
   level.ai_woods forceteleport(nd_woods_satcom_overlook.origin, nd_woods_satcom_overlook.angles);
   var_56f59f61 = spawn("script_origin", nd_woods_satcom_overlook.origin);
   var_56f59f61.angles = nd_woods_satcom_overlook.angles;
-  level.ai_woods linkto(var_56f59f61);
+  level.ai_woods linkTo(var_56f59f61);
 }
 
 function function_dd87ddce() {
@@ -234,7 +234,7 @@ function function_ef32b815() {
     level.ai_woods setgoal(getnode("nd_satcom_int_woods_arrive", "targetname"), 1);
   }
 
-  t_satcom_woods_ground_approach = getent("t_satcom_woods_ground_approach", "targetname");
+  t_satcom_woods_ground_approach = getEnt("t_satcom_woods_ground_approach", "targetname");
 
   if(isDefined(t_satcom_woods_ground_approach)) {
     t_satcom_woods_ground_approach triggerenable(0);
@@ -295,7 +295,7 @@ function function_c20f6fa3(var_b4c1e6ce) {
     wait 1;
 
     if(!level flag::get("flg_satcom_approach_end")) {
-      t_satcom_enter = getent("t_satcom_enter", "targetname");
+      t_satcom_enter = getEnt("t_satcom_enter", "targetname");
 
       if(isDefined(t_satcom_enter)) {
         trigger::use("t_satcom_enter", "targetname", level.player, 0);
@@ -317,7 +317,7 @@ function function_c20f6fa3(var_b4c1e6ce) {
     wait 1;
 
     if(!level flag::get("flg_satcom_approach_end")) {
-      t_satcom_enter = getent("t_satcom_enter", "targetname");
+      t_satcom_enter = getEnt("t_satcom_enter", "targetname");
 
       if(isDefined(t_satcom_enter)) {
         trigger::use("t_satcom_enter", "targetname", level.player, 0);
@@ -373,7 +373,7 @@ function function_98c3cbb8(var_7f952abc = 0, var_c5ccf1e0 = 0) {
     level flag::wait_till("flg_satcom_reinforce");
   }
 
-  vol_satcom_ground_push = getent("vol_satcom_ground_push", "targetname");
+  vol_satcom_ground_push = getEnt("vol_satcom_ground_push", "targetname");
   self setgoal(vol_satcom_ground_push, 1);
 }
 
@@ -529,7 +529,7 @@ function function_a94c664a() {
 
   level flag::wait_till("flg_satcom_entered");
   wait randomfloatrange(1.5, 3);
-  tr_satcom_interior = getent("tr_satcom_interior", "targetname");
+  tr_satcom_interior = getEnt("tr_satcom_interior", "targetname");
 
   if(isDefined(tr_satcom_interior)) {
     trigger::use("tr_satcom_interior", "targetname", level.player, 0);

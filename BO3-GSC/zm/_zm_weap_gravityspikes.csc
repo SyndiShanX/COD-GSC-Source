@@ -167,7 +167,7 @@ function gravity_trap_rumble(localclientnum) {
   self endon("vortex_stop");
   self endon("death");
   while(isDefined(self)) {
-    self playrumbleonentity(localclientnum, "zod_idgun_vortex_interior");
+    self playRumbleOnEntity(localclientnum, "zod_idgun_vortex_interior");
     wait(0.075);
   }
 }

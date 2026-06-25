@@ -169,7 +169,7 @@ function update_arrays() {
   self.stealth.enemies["axis"] = [];
   self.stealth.enemies["allies"] = [];
   self.stealth.seek = [];
-  playerlist = getplayers();
+  playerlist = getPlayers();
   ailist = getaiarray();
   foreach(player in playerlist) {
     if(!isDefined(player.stealth)) {
@@ -314,7 +314,7 @@ function function_959a64c9() {
       foreach(player in level.activeplayers) {
         enemy getperfectinfo(player, 1);
       }
-      enemy stopanimscripted();
+      enemy stopanimScripted();
       if(isDefined(enemy.patroller) && enemy.patroller) {
         enemy ai::end_and_clean_patrol_behaviors();
       }

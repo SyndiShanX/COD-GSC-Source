@@ -32,7 +32,7 @@ superslasher_domeleedamage() {
     }
 
     var_11 = (var_9[0], var_9[1], 0);
-    var_9 = vectornormalize(var_11);
+    var_9 = vectorNormalize(var_11);
     var_12 = vectordot(var_9, var_6);
     if(var_10 < var_4) {
       if(var_12 < var_5) {
@@ -48,7 +48,7 @@ superslasher_domeleedamage() {
       var_13 = var_13 * 0.05;
     }
 
-    var_14 = vectornormalize(var_8.origin + (0, 0, 45) - self.origin);
+    var_14 = vectorNormalize(var_8.origin + (0, 0, 45) - self.origin);
     var_15 = var_14 * var_13 * 10;
     var_8 setvelocity(var_15);
   }
@@ -408,12 +408,12 @@ superslasher_dothrownsaw() {
     var_1 = self._blackboard.throwsawbackuptargetpos + (0, 0, 48);
   }
 
-  var_2 = vectornormalize(var_1 - var_0);
+  var_2 = vectorNormalize(var_1 - var_0);
   var_3 = vectortoyaw(var_2);
   var_4 = angleclamp180(var_3 - self.angles[1]);
   if(var_4 >= 45 || var_4 <= -45) {
     var_1 = self.origin + anglesToForward(self.angles) * 768;
-    var_2 = vectornormalize(var_1 - var_0);
+    var_2 = vectorNormalize(var_1 - var_0);
   }
 }
 

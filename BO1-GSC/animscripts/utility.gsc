@@ -1111,7 +1111,7 @@ findGoodSuppressSpot(startOffset) {
   trace = bulletTrace(self.lastEnemySightPos, currentEnemyPos, false, undefined);
   startTracesAt = trace["position"];
   percievedMovementVector = self.lastEnemySightPos - startTracesAt;
-  lookVector = VectorNormalize(self.lastEnemySightPos - startOffset);
+  lookVector = vectorNormalize(self.lastEnemySightPos - startOffset);
   percievedMovementVector = percievedMovementVector - vector_scale(lookVector, vectorDot(percievedMovementVector, lookVector));
   idealTraceInterval = 20.0;
   numTraces = int(Length(percievedMovementVector) / idealTraceInterval + 0.5);
@@ -1568,7 +1568,7 @@ IsOkToLookAtEntity() {
 }
 entityInFront(origin) {
   forward = anglesToForward(self.angles);
-  dot = VectorDot(forward, VectorNormalize(origin - self.origin));
+  dot = VectorDot(forward, vectorNormalize(origin - self.origin));
   return (dot > 0.3);
 }
 idleLookatBehavior(dist_thresh, dot_check) {

@@ -945,7 +945,7 @@ bot_update_crouch() {
 bot_update_glass() {
   if(isDefined(self.bot.glass_origin)) {
     forward = anglesToForward(self.angles);
-    dir = vectornormalize(self.bot.glass_origin - self.origin);
+    dir = vectorNormalize(self.bot.glass_origin - self.origin);
     dot = vectordot(forward, dir);
 
     if(dot > 0) {
@@ -1798,9 +1798,9 @@ bot_turret_location(weapon) {
     return;
   }
   forward = anglesToForward(self getplayerangles());
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   delta = enemy.origin - self.origin;
-  delta = vectornormalize(delta);
+  delta = vectorNormalize(delta);
   dot = vectordot(forward, delta);
 
   if(dot < 0.707) {
@@ -1815,7 +1815,7 @@ bot_turret_location(weapon) {
     return;
   }
   delta = node.origin - self.origin;
-  delta = vectornormalize(delta);
+  delta = vectorNormalize(delta);
   dot = vectordot(forward, delta);
 
   if(dot < 0.707) {
@@ -1840,7 +1840,7 @@ bot_use_supply_drop(weapon) {
 
   yaw = (0, self.angles[1], 0);
   dir = anglesToForward(yaw);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   drop_point = self.origin + vectorscale(dir, 384);
   end = drop_point + vectorscale((0, 0, 1), 2048.0);
 
@@ -2211,7 +2211,7 @@ devgui_bot_spawn_think(origin, yaw) {
 
   for(;;) {
     self waittill("spawned_player");
-    self setorigin(origin);
+    self setOrigin(origin);
     angles = (0, yaw, 0);
     self setplayerangles(angles);
   }

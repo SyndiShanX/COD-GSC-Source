@@ -83,7 +83,7 @@ _id_2882(var_0, var_1) {
 
   if(level.gameskill == 0 || level.gameskill == 1) {
     var_2 = spawn("script_origin", var_0.origin + (0, 0, -20));
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
     var_0 thread common_scripts\utility::delete_on_death(var_2);
     var_3 = undefined;
 
@@ -185,7 +185,7 @@ _id_2893() {
   var_2.forward = var_1;
   var_2.up = var_0;
   var_2 maps\_utility::_id_18B9();
-  self._id_288E linkto(self);
+  self._id_288E linkTo(self);
   self._id_288E thread _id_2899(self);
 }
 
@@ -807,7 +807,7 @@ _id_28BA(var_0, var_1, var_2) {
   thread _id_28B9(randomfloatrange(0.2, 2));
 
   for(var_3 = 0; var_3 < var_1; var_3++) {
-    self setturrettargetent(var_0, common_scripts\utility::randomvector(50) + (0, 0, 32));
+    self setturrettargetEnt(var_0, common_scripts\utility::randomvector(50) + (0, 0, 32));
 
     if(self._id_2888 && !self._id_2889) {
       self fireweapon();
@@ -900,7 +900,7 @@ _id_28BE(var_0, var_1) {
 
   if(!isPlayer(var_0) && isai(var_0) && level._id_2879 == 0) {
     var_2 = spawn("script_origin", var_0.origin + (0, 0, 100));
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
     thread _id_28BF(var_2);
     var_0 = var_2;
   }
@@ -945,7 +945,7 @@ _id_28C2(var_0) {
 
   for(var_6 = 0; var_6 < var_4; var_6++) {
     var_3 = var_2 + common_scripts\utility::randomvector(50);
-    self setturrettargetent(var_0, var_3);
+    self setturrettargetEnt(var_0, var_3);
 
     if(self._id_2888) {
       self fireweapon();
@@ -1166,7 +1166,7 @@ _id_28D0() {
     }
 
     if(isDefined(var_0)) {
-      self setturrettargetent(var_0, (0, 0, 0));
+      self setturrettargetEnt(var_0, (0, 0, 0));
     }
   }
 }
@@ -1188,12 +1188,12 @@ _id_28D2() {
   var_1.entity = self._id_28D3;
   var_1.right = 250;
   var_1 maps\_utility::_id_18B9();
-  self._id_28D3 linkto(self);
+  self._id_28D3 linkTo(self);
   var_2 = spawnStruct();
   var_2.entity = self._id_28D4;
   var_2.right = -250;
   var_2 maps\_utility::_id_18B9();
-  self._id_28D4 linkto(self);
+  self._id_28D4 linkTo(self);
   var_3 = [];
   var_3[0] = var_0;
   var_3[1] = self._id_28D3;
@@ -1321,7 +1321,7 @@ _id_28DE(var_0, var_1) {
     if(!isDefined(self._id_288E)) {
       _id_2893();
     }
-    self setturrettargetent(self._id_288E);
+    self setturrettargetEnt(self._id_288E);
     thread _id_28D0();
   }
 }
@@ -1343,7 +1343,7 @@ _id_28E0() {
   }
   while(isDefined(self)) {
     wait 0.05;
-    self setturrettargetent(self._id_288E, (0, 0, 0));
+    self setturrettargetEnt(self._id_288E, (0, 0, 0));
   }
 }
 
@@ -1462,7 +1462,7 @@ _id_28E7(var_0, var_1) {
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
     var_3[var_4] = spawn("script_origin", var_1[var_4].origin);
     var_0 setvehweapon("littlebird_FFAR");
-    var_0 setturrettargetent(var_3[var_4]);
+    var_0 setturrettargetEnt(var_3[var_4]);
     var_5 = var_0 fireweapon(var_2[var_4 % var_2.size], var_3[var_4], (0, 0, 0));
     var_5 common_scripts\utility::delaycall(1, ::missile_cleartarget);
     wait(randomfloatrange(0.2, 0.3));

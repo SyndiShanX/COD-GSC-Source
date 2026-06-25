@@ -43,14 +43,14 @@ subclass_dualwield() {
   self.leftgunmodel = spawn("script_model", self.origin);
   self.leftgunmodel setModel(self.weaponmodel);
   self.leftgunmodel useweaponhidetags(self.weapon);
-  self.leftgunmodel linkto(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  self.leftgunmodel linkTo(self, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
   recordent(self.leftgunmodel);
 
   self.rightgunmodel = spawn("script_model", self.origin);
   self.rightgunmodel setModel(self.weaponmodel);
   self.rightgunmodel useweaponhidetags(self.weapon);
-  self.rightgunmodel linkto(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  self.rightgunmodel linkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
 
   recordent(self.rightgunmodel);
 

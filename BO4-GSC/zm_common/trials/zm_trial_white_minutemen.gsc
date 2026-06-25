@@ -28,7 +28,7 @@ __init__() {
 }
 
 on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       level.var_b4a6cec6 = zm_trial::function_5769f26a(var_8a72a00b);
       break;
@@ -50,7 +50,7 @@ on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   objective_add(n_obj_id, "active", level.s_weapons_locker.origin, #"hash_423a75e2700a53ab");
   function_da7940a3(n_obj_id, 1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_45c57fa5 setinvisibletoplayer(player, 0);
     player.var_5a5bf8e7 = 0;
     player.var_9360d1b5 = undefined;
@@ -64,7 +64,7 @@ on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_b4a6cec6 < level.var_b4a6cec6) {
         if(!isDefined(var_696c3b4)) {
           var_696c3b4 = [];
@@ -84,7 +84,7 @@ on_end(round_reset) {
   objective_delete(level.a_n_objective_ids[#"minutemen"]);
   gameobjects::release_obj_id(level.a_n_objective_ids[#"minutemen"]);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
 
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {

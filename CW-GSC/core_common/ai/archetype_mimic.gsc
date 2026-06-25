@@ -87,11 +87,11 @@ function function_6a99dcd1(params) {
     return;
   }
 
-  if(self isplayinganimscripted() && !self isragdoll()) {
-    self stopanimscripted(0, 1);
+  if(self isplayinganimScripted() && !self isragdoll()) {
+    self stopanimScripted(0, 1);
     self notsolid();
     anim_time = getanimlength(#"ai_t9_zm_mimic_com_death_01");
-    self animscripted(#"hash_f4dc819c820cb3f", self.origin, self.angles, #"ai_t9_zm_mimic_com_death_01", "normal", undefined, 1, 0.2);
+    self animScripted(#"hash_f4dc819c820cb3f", self.origin, self.angles, #"ai_t9_zm_mimic_com_death_01", "normal", undefined, 1, 0.2);
     self waittillmatchtimeout(anim_time, {
       #notetrack: "end"}, #"ai_t9_zm_mimic_com_death_01");
 
@@ -403,7 +403,7 @@ function function_1ef44bfb(params) {
     if(dist_sqr > sqr(200)) {
       if(isentity(activator)) {
         var_8a9e27f9 = self getcentroid();
-        end_point = var_8a9e27f9 + vectornormalize(activator getcentroid() - var_8a9e27f9) * 200;
+        end_point = var_8a9e27f9 + vectorNormalize(activator getcentroid() - var_8a9e27f9) * 200;
 
         if(bullettracepassed(var_8a9e27f9, end_point, 0, self, activator)) {
           self.var_a516906f.anim = #"hash_6194bdd16068478f";
@@ -424,7 +424,7 @@ function function_9e27379a() {
 
   foreach(player in players) {
     targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
-    var_a6470558 = vectornormalize(targetorigin - self.origin);
+    var_a6470558 = vectorNormalize(targetorigin - self.origin);
     player playerknockback(1);
     player applyknockback(100, var_a6470558);
     player playerknockback(0);
@@ -446,7 +446,7 @@ function function_f3b371f1() {
   self orientmode("face angle", self.var_a516906f.angles[1]);
   self animmode("nogravity");
   self pathmode("dont move", 1);
-  self animscripted(self.var_a516906f.anim, self.var_a516906f.origin, self.angles, self.var_a516906f.anim, "custom");
+  self animScripted(self.var_a516906f.anim, self.var_a516906f.origin, self.angles, self.var_a516906f.anim, "custom");
   wait getanimlength(self.var_a516906f.anim);
   self.clamptonavmesh = 1;
   self pathmode("move allowed");
@@ -475,7 +475,7 @@ function function_59fd3f1d(entity) {
   players = function_a1ef346b(undefined, entity.origin, 96);
   closest_player = arraygetclosest(entity.origin, players);
 
-  if(!isDefined(closest_player) || closest_player isplayinganimscripted() || isDefined(entity.var_f6fd2062) && ![[entity.var_f6fd2062]](closest_player)) {
+  if(!isDefined(closest_player) || closest_player isplayinganimScripted() || isDefined(entity.var_f6fd2062) && ![[entity.var_f6fd2062]](closest_player)) {
     return;
   }
 
@@ -537,7 +537,7 @@ function function_d291b5a9(player, var_1b024168, var_52a75904, player_anim) {
     return;
   }
 
-  self animscripted(var_1b024168, origin, angles, var_1b024168, "normal", undefined, 1, var_52a75904);
+  self animScripted(var_1b024168, origin, angles, var_1b024168, "normal", undefined, 1, var_52a75904);
   player thread function_224f342a(player_anim, self, origin, angles);
   anim_time = getanimlength(var_1b024168);
   self waittillmatchtimeout(anim_time, {
@@ -567,12 +567,12 @@ function private function_224f342a(player_anim, mimic, origin, angles) {
   player clientfield::set_to_player("mimic_grab_hit", 1);
   player.var_7342424d = mimic;
   mimic.grabbed_player = player;
-  player animscripted(player_anim, origin, angles, player_anim, "normal", undefined, 1, 0.2, 0.3, 0, 1, 1, undefined, 0, "linear", 0);
+  player animScripted(player_anim, origin, angles, player_anim, "normal", undefined, 1, 0.2, 0.3, 0, 1, 1, undefined, 0, "linear", 0);
   anim_time = getanimlength(player_anim);
   player waittillmatchtimeout(anim_time, {
     #notetrack: "end"}, player_anim);
 
-  while(isDefined(player) && player isplayinganimscripted()) {
+  while(isDefined(player) && player isplayinganimScripted()) {
     waitframe(1);
   }
 
@@ -656,7 +656,7 @@ function function_5f11c5b7(entity, asmstatename) {
     recordstar(math::closest_point_on_line(closest_player.origin, var_e49586c9, var_a36e995b), (1, 0, 1), "<dev string:xcc>");
   }
 
-  if(!isDefined(closest_player) || closest_player isplayinganimscripted() || isDefined(asmstatename.var_f6fd2062) && ![[asmstatename.var_f6fd2062]](closest_player) || !istouching(math::closest_point_on_line(closest_player.origin, var_1ed13caa, var_2ed29acc), closest_player, var_52b615cf) || !istouching(math::closest_point_on_line(closest_player.origin, var_e49586c9, var_a36e995b), closest_player, var_52b615cf)) {
+  if(!isDefined(closest_player) || closest_player isplayinganimScripted() || isDefined(asmstatename.var_f6fd2062) && ![[asmstatename.var_f6fd2062]](closest_player) || !istouching(math::closest_point_on_line(closest_player.origin, var_1ed13caa, var_2ed29acc), closest_player, var_52b615cf) || !istouching(math::closest_point_on_line(closest_player.origin, var_e49586c9, var_a36e995b), closest_player, var_52b615cf)) {
     return 5;
   } else if(!function_4f401255(asmstatename.origin, asmstatename.angles, #"hash_770f46ba71e975e9", closest_player getmins(), closest_player getmaxs(), [asmstatename, closest_player])) {
     asmstatename thread function_d291b5a9(closest_player, #"hash_318ef3b5409e6403", 0.2, #"hash_770f46ba71e975e9");
@@ -914,7 +914,7 @@ function function_fa613511() {
 
 function function_ea10da3f() {
   waitframe(1);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   direction = player getplayerangles();
   direction_vec = anglesToForward(direction);
   eye = player getEye();
@@ -962,7 +962,7 @@ function function_d312cd2c() {
   self notify("<dev string:x73e>");
   self endon("<dev string:x73e>");
   trace = function_ea10da3f();
-  mimic = spawnactor("<dev string:x751>", trace[#"position"], vectortoangles(getplayers()[0].origin - trace[#"position"]));
+  mimic = spawnactor("<dev string:x751>", trace[#"position"], vectortoangles(getPlayers()[0].origin - trace[#"position"]));
 
   if(isDefined(mimic)) {
     mimic.never_hide = 1;
@@ -1044,7 +1044,7 @@ function function_7f6a5e14() {
   waitframe(1);
 
   while(true) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     direction = player getplayerangles();
     direction_vec = anglesToForward(direction);
     eye = player getEye();

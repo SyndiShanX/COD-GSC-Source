@@ -18,7 +18,7 @@ throw_razors_at_players() {
   self endon("death");
   self endon("assin_stop_fire");
   var_00 = ["J_poker2_LE", "J_poker1_RI"];
-  var_01 = 512 * vectornormalize(anglesToForward(self.var_1D));
+  var_01 = 512 * vectorNormalize(anglesToForward(self.var_1D));
   foreach(var_03 in var_00) {
     var_04 = self gettagorigin(var_03);
     var_05 = var_04 + (0, 0, -32) + var_01;

@@ -447,7 +447,7 @@ function_482c54d5(watcher, owner) {
       }
 
       mdl_magma clientfield::set("magma_gat_blob_fx", 2);
-      mdl_magma linkto(ai_zombie, str_tag);
+      mdl_magma linkTo(ai_zombie, str_tag);
       ai_zombie.var_becfae27 = 1;
       ai_zombie thread function_5f305489(mdl_magma);
       self delete();
@@ -710,7 +710,7 @@ function_b1abe6ab(t_damage, weapon) {
 
   while(isDefined(t_damage) && self istouching(t_damage)) {
     self dodamage(1, t_damage.origin, undefined, undefined, "torso_lower", "MOD_BURNED", 0, weapon);
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait 0.4;
   }
 
@@ -968,7 +968,7 @@ function_f2ef907f() {
     var_17022e1e.unitrigger_stub = var_17022e1e zm_unitrigger::create(&function_e33adfe0, 64, &function_b1347a6);
     zm_unitrigger::unitrigger_force_per_player_triggers(var_17022e1e.unitrigger_stub, 1);
     var_17022e1e.unitrigger_stub flag::init(#"hash_56b99393c357db0f");
-    var_17022e1e.var_13202c94 = getent(var_17022e1e.target, "targetname");
+    var_17022e1e.var_13202c94 = getEnt(var_17022e1e.target, "targetname");
     var_17022e1e.var_13202c94 ghost();
   }
 
@@ -1014,33 +1014,33 @@ function_e33adfe0(player) {
   if(!level flag::get(#"hash_634424410f574c1c")) {
     if(player hasweapon(getweapon(#"ww_blundergat_t8"))) {
       if(function_8b1a219a()) {
-        self sethintstring(#"hash_3c3c5ffcb73ae1e3");
+        self setHintString(#"hash_3c3c5ffcb73ae1e3");
       } else {
-        self sethintstring(#"hash_79cd3712c39cdffd");
+        self setHintString(#"hash_79cd3712c39cdffd");
       }
 
       return 1;
     } else if(player hasweapon(getweapon(#"ww_blundergat_t8_upgraded"))) {
       if(function_8b1a219a()) {
-        self sethintstring(#"hash_7a5c526af7853272");
+        self setHintString(#"hash_7a5c526af7853272");
       } else {
-        self sethintstring(#"hash_59f25a380adc99d6");
+        self setHintString(#"hash_59f25a380adc99d6");
       }
 
       return 1;
     } else if(player hasweapon(getweapon(#"ww_blundergat_fire_t8"))) {
       if(function_8b1a219a()) {
-        self sethintstring(#"hash_615644af00de83b0");
+        self setHintString(#"hash_615644af00de83b0");
       } else {
-        self sethintstring(#"hash_133ee13be8566c3c");
+        self setHintString(#"hash_133ee13be8566c3c");
       }
 
       return 1;
     } else if(player hasweapon(getweapon(#"ww_blundergat_fire_t8_upgraded"))) {
       if(function_8b1a219a()) {
-        self sethintstring(#"hash_768453c6e1ea01fb");
+        self setHintString(#"hash_768453c6e1ea01fb");
       } else {
-        self sethintstring(#"hash_5facc77dd98e8ac5");
+        self setHintString(#"hash_5facc77dd98e8ac5");
       }
 
       return 1;
@@ -1056,14 +1056,14 @@ function_e33adfe0(player) {
 
     if(isDefined(player.is_pack_splatting) && player.is_pack_splatting) {
       if(function_8b1a219a()) {
-        self sethintstring(#"hash_3adbdf42b7a8fd09");
+        self setHintString(#"hash_3adbdf42b7a8fd09");
       } else {
-        self sethintstring(#"hash_48bcf6ab597a5e63");
+        self setHintString(#"hash_48bcf6ab597a5e63");
       }
     } else if(function_8b1a219a()) {
-      self sethintstring(#"hash_4114449b7507fd46");
+      self setHintString(#"hash_4114449b7507fd46");
     } else {
-      self sethintstring(#"hash_41dc872d8c9fd072");
+      self setHintString(#"hash_41dc872d8c9fd072");
     }
 
     return 1;
@@ -1073,7 +1073,7 @@ function_e33adfe0(player) {
 }
 
 function_b1347a6() {
-  var_13202c94 = getent(self.stub.related_parent.target, "targetname");
+  var_13202c94 = getEnt(self.stub.related_parent.target, "targetname");
   assert(isDefined(var_13202c94), "<dev string:x38>");
 
   if(!isDefined(var_13202c94)) {

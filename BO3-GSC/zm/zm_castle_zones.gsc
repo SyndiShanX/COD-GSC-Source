@@ -164,8 +164,8 @@ function function_48cfc7df(spot) {
     spot.angles = (0, 0, 0);
   }
   self thread anchor_delete_watcher();
-  self.mdl_anchor moveto(spot.origin, 0.05);
-  self.mdl_anchor rotateto(spot.angles, 0.05);
+  self.mdl_anchor moveTo(spot.origin, 0.05);
+  self.mdl_anchor rotateTo(spot.angles, 0.05);
   self.mdl_anchor waittill("movedone");
   wait(0.05);
   if(!isDefined(self) || !isDefined(self.mdl_anchor)) {

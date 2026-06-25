@@ -103,7 +103,7 @@ function function_7cbeb2f0(normal) {
 function function_e8ad1d81(position, normal, velocity, team, customsettings, attacker, exploder) {
   originalposition = position;
   var_493d36f9 = normal;
-  var_77261b6 = vectornormalize(velocity);
+  var_77261b6 = vectorNormalize(velocity);
   var_1f254a06 = vectorscale(var_77261b6, -1);
   var_d6d43109 = 1;
   var_e76400c0 = undefined;
@@ -616,7 +616,7 @@ function getpotentialtargets(origin) {
     potential_targets = [];
 
     foreach(team, _ in level.teams) {
-      potential_targets = arraycombine(potential_targets, getplayers(team, origin, 65), 0, 0);
+      potential_targets = arraycombine(potential_targets, getPlayers(team, origin, 65), 0, 0);
     }
   }
 
@@ -945,7 +945,7 @@ function sndfiredamage() {
 
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
-    self.sndfireent linkto(self);
+    self.sndfireent linkTo(self);
     self.sndfireent playSound(#"hash_42d7a7b01bd2b414");
     self thread sndfiredamage_deleteent(self.sndfireent);
   }

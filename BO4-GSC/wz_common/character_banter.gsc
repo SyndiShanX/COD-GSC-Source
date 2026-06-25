@@ -45,7 +45,7 @@ on_player_disconnect() {
 
   players = level.var_8dcd4dc8[self.team];
 
-  if(getplayers(self.team).size <= 1) {
+  if(getPlayers(self.team).size <= 1) {
     level.var_8dcd4dc8[self.team] = [];
     return;
   }

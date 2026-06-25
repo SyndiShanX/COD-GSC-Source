@@ -352,14 +352,14 @@ function function_cf07c32a() {
     wait 1;
     var_3ab39d83 = self.origin + (0, 0, 30);
     var_9568b0fc = anglesToForward(self.angles);
-    var_9568b0fc = vectornormalize(var_9568b0fc);
+    var_9568b0fc = vectorNormalize(var_9568b0fc);
     v_behind = var_9568b0fc * -1;
     var_9568b0fc = vectorscale(var_9568b0fc, 256);
     var_9568b0fc = var_3ab39d83 + var_9568b0fc;
     v_behind = vectorscale(v_behind, 256);
     v_behind = var_3ab39d83 + v_behind;
     v_right = anglestoright(self.angles);
-    v_right = vectornormalize(v_right);
+    v_right = vectorNormalize(v_right);
     v_left = v_right * -1;
     v_right = vectorscale(v_right, 256);
     v_right = var_3ab39d83 + v_right;
@@ -383,12 +383,12 @@ function revive_trigger_spawn() {
 
   radius = getdvarint(#"revive_trigger_radius", 100);
   self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-  self.revivetrigger sethintstring("");
-  self.revivetrigger setcursorhint("HINT_NOICON");
+  self.revivetrigger setHintString("");
+  self.revivetrigger setCursorHint("HINT_NOICON");
   self.revivetrigger setmovingplatformenabled(1);
-  self.revivetrigger enablelinkto();
+  self.revivetrigger enablelinkTo();
   self.revivetrigger.origin = self.origin;
-  self.revivetrigger linkto(self);
+  self.revivetrigger linkTo(self);
   self.revivetrigger.beingrevived = 0;
   self.revivetrigger.createtime = gettime();
   self.revivetrigger.radius = radius;
@@ -413,7 +413,7 @@ function revive_trigger_think(t_secondary) {
 
     t_revive function_268e4500();
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       n_depth = 0;
       n_depth = self depthinwater();
       e_player.var_88590b2 = 0;
@@ -445,7 +445,7 @@ function revive_trigger_think(t_secondary) {
       e_player clientfield::set_player_uimodel("hud_items.tombstonePerkAvailable", e_player.var_88590b2);
     }
 
-    foreach(e_reviver in getplayers()) {
+    foreach(e_reviver in getPlayers()) {
       if(!isDefined(e_reviver) || self == e_reviver && !isDefined(self.var_6d772cb) || !e_reviver zm_laststand::is_reviving(self, t_secondary)) {
         continue;
       }
@@ -647,10 +647,10 @@ function function_9ebf012d() {
       origin = new_origin.origin;
     }
 
-    self setorigin(origin);
+    self setOrigin(origin);
     self setplayerangles(angles);
   } else if(isvec(origin) && isvec(angles)) {
-    self setorigin(origin);
+    self setOrigin(origin);
     self setplayerangles(angles);
   }
 
@@ -695,7 +695,7 @@ function function_eedd0275() {
   self endon(#"disconnect");
   self.var_e70b811 = spawn("script_origin", self.origin);
   self.var_e70b811.angles = self.angles;
-  self linkto(self.var_e70b811);
+  self linkTo(self.var_e70b811);
   self.var_e70b811.origin = self.var_dc4f101.origin;
   self.var_e70b811.angles = self.var_dc4f101.angles;
   waitframe(1);

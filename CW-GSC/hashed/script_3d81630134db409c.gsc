@@ -94,7 +94,7 @@ function function_bb3bfb17() {
   exploder::exploder("elev_dust_fall");
   snd::play("evt_yam_elevator_shift_lr", level.player);
   earthquake(0.3, 1, level.player.origin, 150);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 function function_b2e9a7bb(weapon) {
@@ -295,7 +295,7 @@ function function_fc5823d5() {
   s_bunker_locker waittill(#"trigger");
   level thread scene::play("scene_bunker_locker_interact");
   snd::play("evt_yam_locker_open", s_bunker_locker);
-  level.player playrumbleonentity("reload_rechamber");
+  level.player playRumbleOnEntity("reload_rechamber");
   e_player thread namespace_b73b9191::function_d7ce9e77(1);
   s_bunker_locker util::remove_cursor_hint();
   level flag::set("flg_bunker_optional_objective_completed");
@@ -318,7 +318,7 @@ function function_7abee9fe() {
   var_d4027fe0 = spawner::get_ai_group_sentient_count("bunker_flashlight_patrol");
 
   if(var_d4027fe0 <= 0) {
-    e_trigger = getent("bunker_return_dialog", "targetname");
+    e_trigger = getEnt("bunker_return_dialog", "targetname");
     e_trigger waittill(#"trigger");
     a_ai = spawner::simple_spawn("sp_bow_reinforcements", &function_4e376bb9, "flg_woods_regroup_woods_exiting");
     doors::unlock("bunker_situation_door", "targetname", 1);
@@ -336,13 +336,13 @@ function function_a0186be6(s_info) {
 }
 
 function function_cb78f179() {
-  e_bunker_optional_key = getent("e_bunker_optional_key", "targetname");
+  e_bunker_optional_key = getEnt("e_bunker_optional_key", "targetname");
   s_bunker_optional_key_interact = struct::get("s_bunker_optional_key_interact", "targetname");
   s_bunker_optional_key_interact util::create_cursor_hint(undefined, undefined, #"hash_44460a497a8e27e4", 60, undefined, undefined, undefined, 80, undefined, 0);
   s_bunker_optional_key_interact waittill(#"trigger");
   level.player playgestureviewmodel(#"ges_drophand");
   snd::play("evt_yam_key_pickup", level.player);
-  level.player playrumbleonentity("reload_small");
+  level.player playRumbleOnEntity("reload_small");
   e_bunker_optional_key delete();
   level flag::set("flg_bunker_optional_key_found");
   transient = savegame::function_6440b06b(#"transient");
@@ -371,7 +371,7 @@ function function_9fd55cd1() {
 }
 
 function function_99854e6c() {
-  e_bunker_optional_key = getent("<dev string:x38>", "<dev string:x51>");
+  e_bunker_optional_key = getEnt("<dev string:x38>", "<dev string:x51>");
 
   if(isDefined(e_bunker_optional_key)) {
     s_bunker_optional_key_interact = struct::get("<dev string:x5f>", "<dev string:x51>");
@@ -439,7 +439,7 @@ function function_fd54f0f2() {
 
 function function_7a370566() {
   self endon(#"death");
-  goal = getent("vol_bunker_flashlight_patrol", "targetname");
+  goal = getEnt("vol_bunker_flashlight_patrol", "targetname");
   self flag::set("stealth_override_goal");
 
   if(level flag::get("flg_bunker_stealth_fail")) {
@@ -552,7 +552,7 @@ function function_4e75b98e(str_objective, b_starting) {
 }
 
 function function_89f8f4f8() {
-  tr_woods_survey_look = getent("tr_woods_survey_look", "targetname");
+  tr_woods_survey_look = getEnt("tr_woods_survey_look", "targetname");
   tr_woods_survey_look thread trigger::look_trigger(tr_woods_survey_look);
   tr_woods_survey_look waittill(#"trigger_look");
   level flag::set("flg_bunker_office_seen");
@@ -663,22 +663,22 @@ function function_ab20f837(var_d79d7bf4) {
 }
 
 function function_8dc5efb() {
-  var_107d17b4 = getent("e_bunker_survey_door_closed_clip", "targetname");
+  var_107d17b4 = getEnt("e_bunker_survey_door_closed_clip", "targetname");
   var_107d17b4 movez(-1024, 0.1);
 }
 
 function function_a6b2668() {
-  var_fe3b4945 = getent("e_bunker_survey_door_l_clip", "targetname");
-  var_8814d16d = getent("e_bunker_survey_door_r_clip", "targetname");
-  var_107d17b4 = getent("e_bunker_survey_door_closed_clip", "targetname");
+  var_fe3b4945 = getEnt("e_bunker_survey_door_l_clip", "targetname");
+  var_8814d16d = getEnt("e_bunker_survey_door_r_clip", "targetname");
+  var_107d17b4 = getEnt("e_bunker_survey_door_closed_clip", "targetname");
   var_fe3b4945 movez(-1024, 0.1);
   var_8814d16d movez(-1024, 0.1);
   var_107d17b4 movez(1024, 0.1);
 }
 
 function function_38479ea0() {
-  var_fe3b4945 = getent("e_bunker_survey_door_l_clip", "targetname");
-  var_8814d16d = getent("e_bunker_survey_door_r_clip", "targetname");
+  var_fe3b4945 = getEnt("e_bunker_survey_door_l_clip", "targetname");
+  var_8814d16d = getEnt("e_bunker_survey_door_r_clip", "targetname");
   var_fe3b4945 movez(-1024, 0.1);
   var_8814d16d movez(-1024, 0.1);
 }
@@ -732,5 +732,5 @@ function function_aafaafcd(var_6e96c1c2) {
   level endon(#"hash_2acb72769c464cfa");
   level endon(#"hash_2fe46a0db2c6edd1");
   wait 0.3;
-  level.player playrumbleonentity("reload_clipout");
+  level.player playRumbleOnEntity("reload_clipout");
 }

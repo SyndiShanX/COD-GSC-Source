@@ -48,13 +48,13 @@ function function_6ec0595a() {
       return;
     }
 
-    org enablelinkto();
+    org enablelinkTo();
     org.targetname = "tesla_org";
     org.angles = (0, randomint(180), 0);
     self.doa.tesla_org = org;
     org.owner = self;
     org.objects = [];
-    org linkto(self, undefined, (0, 0, 30));
+    org linkTo(self, undefined, (0, 0, 30));
     org thread namespace_ec06fe4a::function_f506b4c7(1);
     org thread function_3be74620(self);
     self thread function_8efc825c(org);
@@ -83,8 +83,8 @@ function function_9b8a196a() {
     return;
   }
 
-  ball setplayercollision(0);
-  ball enablelinkto();
+  ball setPlayerCollision(0);
+  ball enablelinkTo();
   ball.targetname = "teslaBall";
   ball thread function_453dcc55();
   trigger = namespace_ec06fe4a::spawntrigger("trigger_radius", ball.origin, 1 | 512 | 8, 18, 50);
@@ -95,8 +95,8 @@ function function_9b8a196a() {
   }
 
   trigger.targetname = "teslaTrigger";
-  trigger enablelinkto();
-  trigger linkto(ball);
+  trigger enablelinkTo();
+  trigger linkTo(ball);
   trigger thread function_49ee8def();
   trigger.ball = ball;
   ball.trigger = trigger;
@@ -116,7 +116,7 @@ function function_dd76db7c(org) {
 
   if(isDefined(ball)) {
     ball.org = org;
-    ball linkto(org, "tag_origin", var_eb19ca0d);
+    ball linkTo(org, "tag_origin", var_eb19ca0d);
     org.objects[org.objects.size] = ball;
   }
 
@@ -124,7 +124,7 @@ function function_dd76db7c(org) {
 
   if(isDefined(ball)) {
     ball.org = org;
-    ball linkto(org, "tag_origin", var_19e02799);
+    ball linkTo(org, "tag_origin", var_19e02799);
     org.objects[org.objects.size] = ball;
   }
 
@@ -132,7 +132,7 @@ function function_dd76db7c(org) {
 
   if(isDefined(ball)) {
     ball.org = org;
-    ball linkto(org, "tag_origin", var_7ccfed7b);
+    ball linkTo(org, "tag_origin", var_7ccfed7b);
     org.objects[org.objects.size] = ball;
   }
 
@@ -140,7 +140,7 @@ function function_dd76db7c(org) {
 
   if(isDefined(ball)) {
     ball.org = org;
-    ball linkto(org, "tag_origin", var_6b8d4af6);
+    ball linkTo(org, "tag_origin", var_6b8d4af6);
     org.objects[org.objects.size] = ball;
   }
 }
@@ -163,7 +163,7 @@ function function_453dcc55() {
 }
 
 function function_f50d3546(org, vel) {
-  self moveto(org.origin, 0.5);
+  self moveTo(org.origin, 0.5);
   self waittilltimeout(1, #"movedone");
   vel *= 0.25;
   self namespace_83eb6304::function_3ecfde67("tesla_launch");
@@ -475,7 +475,7 @@ function tesla_play_arc_fx(target) {
 
   if(isDefined(fxorg)) {
     fxorg namespace_83eb6304::function_3ecfde67("tesla_trail");
-    fxorg moveto(target_origin, timemove);
+    fxorg moveTo(target_origin, timemove);
     fxorg waittilltimeout(timemove + 1, #"movedone");
     fxorg delete();
   }

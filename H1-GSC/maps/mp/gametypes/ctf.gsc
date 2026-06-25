@@ -386,12 +386,12 @@ createteamflag(var_0) {
     var_1 = maps\mp\_utility::getotherteam(var_0);
   }
 
-  var_2 = getent("ctf_zone_" + var_1, "targetname");
+  var_2 = getEnt("ctf_zone_" + var_1, "targetname");
 
   if(!isDefined(var_2)) {
     common_scripts\utility::error("No ctf_zone_" + var_1 + " trigger found in map.");
   } else {
-    var_3[0] = getent("ctf_flag_" + var_1, "targetname");
+    var_3[0] = getEnt("ctf_flag_" + var_1, "targetname");
 
     if(!isDefined(var_3[0])) {
       common_scripts\utility::error("No ctf_flag_" + var_1 + " script_model found in map.");
@@ -486,7 +486,7 @@ createcapzone(var_0) {
     var_1 = maps\mp\_utility::getotherteam(var_0);
   }
 
-  var_2 = getent("ctf_zone_" + var_1, "targetname");
+  var_2 = getEnt("ctf_zone_" + var_1, "targetname");
   var_3 = [];
   var_4 = maps\mp\gametypes\_gameobjects::createuseobject(var_0, var_2, var_3, (0, 0, 85));
   var_4 maps\mp\gametypes\_gameobjects::allowuse("friendly");

@@ -725,7 +725,7 @@ forward_euler_integration(e_move, v_target_landing, n_initial_speed) {
     recordline(previousposition, position, (1, 0.5, 0), "<dev string:x321>", self);
 
     hostmigration::waittillhostmigrationdone();
-    e_move moveto(position, 0.1);
+    e_move moveTo(position, 0.1);
 
     if(!landed) {
       wait 0.1;
@@ -927,8 +927,8 @@ on_vehicle_killed() {
 kill_rider(entity) {
   if(isDefined(entity)) {
     if(isalive(entity) && !gibserverutils::isgibbed(entity, 2)) {
-      if(entity isplayinganimscripted()) {
-        entity stopanimscripted();
+      if(entity isplayinganimScripted()) {
+        entity stopanimScripted();
       }
 
       if(getdvarint(#"tu1_vehicleridersinvincibility", 1)) {

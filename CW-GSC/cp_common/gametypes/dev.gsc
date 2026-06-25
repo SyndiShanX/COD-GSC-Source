@@ -74,7 +74,7 @@ function warpalltohost(team) {
 }
 
 function warpalltoplayer(team, player) {
-  players = getplayers();
+  players = getPlayers();
   target = undefined;
 
   for(i = 0; i < players.size; i++) {
@@ -120,7 +120,7 @@ function warpalltoplayer(team, player) {
         teleport = node.origin;
       }
 
-      players[i] setorigin(teleport);
+      players[i] setOrigin(teleport);
 
       if(players[i] isinvehicle()) {
         vehicle = players[i] getvehicleoccupied();
@@ -192,7 +192,7 @@ function updatedevsettingszm() {
       }
 
       level.players[0] setplayerangles(averageangles);
-      level.players[0] setorigin(averageorigin);
+      level.players[0] setOrigin(averageorigin);
       waitframe(1);
       setDvar(#"hash_6efff55aa118c517", 2);
     }
@@ -222,7 +222,7 @@ function updatedevsettings() {
       name = getsubstr(getdvarstring(#"scr_playerwarp"), 4);
       warpalltoplayer(undefined, name);
     } else if(getdvarstring(#"scr_playerwarp") == "<dev string:x16b>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
 
       if(!isDefined(level.devgui_start_spawn_index)) {
@@ -237,7 +237,7 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_start_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_start_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_start_spawn_index].angles);
       }
 
@@ -247,7 +247,7 @@ function updatedevsettings() {
         level.devgui_start_spawn_index = 0;
       }
     } else if(getdvarstring(#"scr_playerwarp") == "<dev string:x17f>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
 
       if(!isDefined(level.devgui_start_spawn_index)) {
@@ -262,7 +262,7 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_start_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_start_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_start_spawn_index].angles);
       }
 
@@ -272,7 +272,7 @@ function updatedevsettings() {
         level.devgui_start_spawn_index = spawns.size - 1;
       }
     } else if(getdvarstring(#"scr_playerwarp") == "<dev string:x193>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
       spawns = level.spawnpoints;
       spawns = arraycombine(spawns, level.dem_spawns, 1, 0);
@@ -292,11 +292,11 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_spawn_index].angles);
       }
     } else if(getdvarstring(#"scr_playerwarp") == "<dev string:x1a1>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
       spawns = level.spawnpoints;
       spawns = arraycombine(spawns, level.dem_spawns, 1, 0);
@@ -316,7 +316,7 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_spawn_index].angles);
       }
     } else if(getdvarstring(#"scr_devgui_spawn") != "<dev string:x38>") {
@@ -339,7 +339,7 @@ function updatedevsettings() {
 
       setDvar(#"scr_devgui_spawn", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_ammo") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       if(!isDefined(level.devgui_unlimited_ammo)) {
         level.devgui_unlimited_ammo = 1;
@@ -366,7 +366,7 @@ function updatedevsettings() {
     } else if(getdvarstring(#"scr_give_player_score") != "<dev string:x38>") {
       setDvar(#"scr_give_player_score", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_zero_ammo") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         player = players[i];
@@ -385,7 +385,7 @@ function updatedevsettings() {
 
       setDvar(#"scr_player_zero_ammo", "<dev string:x38>");
     } else if(getdvarstring(#"scr_emp_jammed") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         player = players[i];
@@ -431,7 +431,7 @@ function updatedevsettings() {
         }
 
         level.players[0] setplayerangles(averageangles);
-        level.players[0] setorigin(averageorigin);
+        level.players[0] setOrigin(averageorigin);
         waitframe(1);
         setDvar(#"hash_6efff55aa118c517", 2);
       }
@@ -507,7 +507,7 @@ function updatedevsettings() {
   }
 
   if(getdvarstring(#"scr_givetalent") == "<dev string:x292>") {
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x297>");
 
     foreach(player in players) {
@@ -525,7 +525,7 @@ function updatedevsettings() {
   if(getdvarstring(#"scr_givetalent") != "<dev string:x38>") {
     talentname = getdvarstring(#"scr_givetalent");
     var_2fe3f7e3 = hash(talentname);
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x2bd>" + talentname + "<dev string:x2dc>");
 
     foreach(player in players) {
@@ -1180,7 +1180,7 @@ function drawpath(linecolor, textcolor, textalpha, textscale, textoffset, drawti
   entfirsttarget = ent.targetname;
 
   while(isDefined(ent.target)) {
-    enttarget = getent(ent.target, "<dev string:x12a>");
+    enttarget = getEnt(ent.target, "<dev string:x12a>");
     ent thread drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endonmsg);
 
     if(ent.targetname == "<dev string:x458>") {

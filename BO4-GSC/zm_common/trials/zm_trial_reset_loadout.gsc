@@ -33,7 +33,7 @@ on_begin(var_30dbb2e5, var_f2c84b6b) {
     level thread function_d1dabace();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(var_30dbb2e5 === "ammo") {
       player thread reset_ammo(var_f2c84b6b);
       continue;
@@ -171,7 +171,7 @@ function_d1dabace(n_time = 30) {
   wait 12;
   level.var_7f7fd2ac = gettime() + int(n_time * 1000);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_128378c9(n_time);
     player.var_838c00de = 1;
   }
@@ -187,7 +187,7 @@ function_59d771f7() {
   level.var_7f7fd2ac = undefined;
   level.func_magicbox_update_prompt_use_override = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_885fb2c8();
     player.var_838c00de = undefined;
   }

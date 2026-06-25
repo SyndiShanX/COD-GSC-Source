@@ -82,12 +82,12 @@ _id_BD51(var_0, var_1) {
   foreach(var_4 in var_2) {
     switch (var_4._id_039B) {
       case "no_sight_clip":
-        var_4 linkto(var_0);
+        var_4 linkTo(var_0);
         var_4 thread _id_10138(var_0, var_4);
         break;
       case "under_vehicle_trigger":
         var_4 _meth_80DB();
-        var_4 linkto(var_0);
+        var_4 linkTo(var_0);
         var_4 thread _id_10138(var_0, var_4);
         var_0._id_F93C = var_4;
         break;
@@ -547,7 +547,7 @@ _id_F95A(var_0, var_1) {
     var_2 = _id_668C(var_0, var_1);
 
     if(var_2 != var_3) {
-      var_0 setorigin(var_2);
+      var_0 setOrigin(var_2);
       var_3 = var_2;
     }
 
@@ -696,7 +696,7 @@ _id_5B3D(var_0, var_1, var_2) {
   var_5 = var_2._id_C0B4._id_9F57.origin + var_4 * var_3;
   var_6 = _func_0143("interceptor_missile_cp", var_5, var_0.origin);
   var_6._id_EE66 = _id_99AB(var_6);
-  var_6 missile_settargetent(var_6._id_EE66);
+  var_6 missile_settargetEnt(var_6._id_EE66);
   var_6 _meth_8231();
   var_6 setscriptablepartstate("thruster", "on", 0);
   _id_D260(var_6, var_0);
@@ -1024,7 +1024,7 @@ _id_5B4E(var_0, var_1) {
   var_4 = anglestoleft(var_0 getplayerangles());
   var_5 = var_1._id_C0B4._id_9F57.origin + var_4 * var_2;
   var_6 = _func_0143("overwatch_missile_cp", var_5, var_3.origin, var_0);
-  var_6 missile_settargetent(var_3);
+  var_6 missile_settargetEnt(var_3);
   var_6 _meth_8231();
   var_6 setscriptablepartstate("thruster", "on", 0);
   var_3 thread _id_3834(var_3, var_6);
@@ -1385,7 +1385,7 @@ _id_9992(var_0, var_1) {
   var_2 = spawn("script_model", var_1._id_C0B4._id_CB8A.origin);
   var_2 setModel("tag_origin");
   var_2.angles = var_1._id_C0B4._id_CB8A.angles;
-  var_2 linkto(var_1._id_C0B4._id_CB8A);
+  var_2 linkTo(var_1._id_C0B4._id_CB8A);
   var_0._id_AD79 = var_2;
 }
 
@@ -1647,7 +1647,7 @@ _id_54B3(var_0, var_1) {
   var_2._id_306E = var_2._id_300E + _id_6633();
   var_2 thread _id_3838(var_2, var_0, var_1);
   var_0._id_AD79 = var_2;
-  var_0 cameralinkto(var_2, "tag_origin");
+  var_0 cameralinkTo(var_2, "tag_origin");
   var_0 thread _id_307F(var_0, var_1);
   var_0 thread _id_3073(var_0, var_1);
   var_0 thread _id_3078(var_0, var_1);
@@ -2151,7 +2151,7 @@ _id_C929(var_0, var_1, var_2) {
   }
 
   for(;;) {
-    self rotateyaw(var_1, var_0);
+    self rotateYaw(var_1, var_0);
     wait(var_0);
   }
 }
@@ -2182,7 +2182,7 @@ _id_B2B9(var_0, var_1, var_2) {
   var_6 = var_1 gettagangles(var_4);
   var_0._id_B5A4 = spawn("script_model", var_5);
   var_0._id_B5A4.angles = var_6;
-  var_0._id_B5A4 linkto(var_1, var_4);
+  var_0._id_B5A4 linkTo(var_1, var_4);
   var_0._id_B5A4 setModel(var_3);
   var_0._id_B5A4 hide();
   var_0 setstance("stand");
@@ -2404,7 +2404,7 @@ _id_576F(var_0, var_1, var_2) {
   _id_FBE4(var_1);
   var_0._id_41A7 = undefined;
   var_3 = _id_6491(var_0, var_1, var_2);
-  var_0 setorigin(var_3, 1);
+  var_0 setOrigin(var_3, 1);
   var_0 _meth_846C(undefined);
   var_0 enableoffhandprimaryweapons();
   var_0 enableoffhandsecondaryweapons();
@@ -2488,7 +2488,7 @@ _id_6491(var_0, var_1, var_2) {
   var_2 = var_3[var_4];
   var_5 = _id_648E(var_0, var_1, var_2);
   var_6 = _id_648F(var_0, var_1, var_2);
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_7 = var_7 * -5;
   var_8 = var_5.origin + var_6;
   var_9 = scripts\engine\trace::_id_3219(var_5.origin + var_7, var_8, 6, 80, undefined, var_1);
@@ -2510,7 +2510,7 @@ _id_6491(var_0, var_1, var_2) {
 
     if(isDefined(var_5)) {
       var_6 = _id_648F(var_0, var_1, var_2);
-      var_7 = vectornormalize(var_6);
+      var_7 = vectorNormalize(var_6);
       var_7 = var_7 * -5;
       var_8 = var_5.origin + var_6;
       var_9 = scripts\engine\trace::_id_3219(var_5.origin + var_7, var_8, 6, 80, undefined, var_1);
@@ -2595,7 +2595,7 @@ _id_99D0(var_0, var_1, var_2, var_3) {
   var_9 setModel("tag_origin");
   var_9.angles = var_0.angles;
   var_9.vehicle = var_0;
-  var_9 linkto(var_0);
+  var_9 linkTo(var_0);
   var_9 thread _id_3837(var_9, var_0);
   return var_9;
 }
@@ -2730,10 +2730,10 @@ _id_D412(var_0, var_1) {
     var_9 = var_6 + var_3 * var_8._id_5FD0 + var_4 * var_8._id_C84B + var_5 * var_8._id_FB2D;
     var_10 = spawn("script_model", var_9);
     var_10 setModel("tag_origin");
-    var_10 linkto(var_0);
+    var_10 linkTo(var_0);
     var_8 = _id_6815(var_11);
-    var_10 sethintstring(var_8._id_7976);
-    var_10 setcursorhint("HINT_BUTTON");
+    var_10 setHintString(var_8._id_7976);
+    var_10 setCursorHint("HINT_BUTTON");
     var_10 _meth_84D4(var_8._id_4B6D);
     var_10 sethintdisplayfov(var_8._id_4B5A);
     var_10 setuserange(var_8._id_FDF4);
@@ -2841,9 +2841,9 @@ _id_99A2(var_0, var_1, var_2, var_3) {
   var_5 useanimtree(#animtree);
 
   if(isDefined(var_3)) {
-    var_5 linkto(var_0, var_1, var_3, (0, 0, 0));
+    var_5 linkTo(var_0, var_1, var_3, (0, 0, 0));
   } else {
-    var_5 linkto(var_0, var_1);
+    var_5 linkTo(var_0, var_1);
   }
 
   var_5 thread _id_58F3(var_5);
@@ -3251,7 +3251,7 @@ _id_F709(var_0, var_1, var_2, var_3, var_4) {
 
 _id_FB5F(var_0) {
   var_1 = _id_6816(var_0, "driver");
-  var_1 sethintstring(_id_6464(var_0));
+  var_1 setHintString(_id_6464(var_0));
 }
 
 _id_6464(var_0) {
@@ -3420,7 +3420,7 @@ _id_B2FA(var_0, var_1, var_2, var_3, var_4) {
   var_6 = spawn("script_model", var_5);
   var_6 setModel("tag_origin");
   var_6.angles = vectortoangles(var_4);
-  var_6 linkto(var_0);
+  var_6 linkTo(var_0);
   wait 0.1;
   playFXOnTag(level._effect[var_2], var_6, "tag_origin");
   scripts\engine\utility::_id_10888(var_0, "death", var_3, "interaction_point_disabled");
@@ -3782,7 +3782,7 @@ _id_7A57(var_0, var_1) {
   var_3 scripts\cp\utility::_id_7970("enter_vehicle_with_hostage", 0);
   var_0 makeunusable();
   var_0.angles = (var_0.angles[0], var_4.angles[1] + 180, var_0.angles[2]);
-  var_0 linkto(var_4);
+  var_0 linkTo(var_4);
 
   if(isDefined(var_0._id_10CBF)) {
     _func_015C(var_0._id_10CBF);
@@ -3971,7 +3971,7 @@ _id_4C2D(var_0, var_1, var_2) {
   var_8 = spawn("script_model", var_6);
   var_8.origin = var_6;
   var_8.angles = var_7;
-  var_1 setorigin(var_6, 1);
+  var_1 setOrigin(var_6, 1);
   var_1 setplayerangles(var_7);
   var_1 setstance("stand");
   var_1 disableweapons();
@@ -3989,7 +3989,7 @@ _id_4C2D(var_0, var_1, var_2) {
   var_1 setstance("stand");
   var_1 cameradefault();
   var_1 enableweapons();
-  var_1 setorigin(var_3, 1);
+  var_1 setOrigin(var_3, 1);
 
   if(istrue(var_9)) {
     return 1;
@@ -4062,7 +4062,7 @@ _id_4C00(var_0, var_1, var_2, var_3) {
   var_1 setstance("stand");
   var_1 cameradefault();
   var_1 enableweapons();
-  var_1 setorigin(var_4, 0);
+  var_1 setOrigin(var_4, 0);
   return var_9;
 }
 
@@ -4093,7 +4093,7 @@ _id_E0F1(var_0) {
   var_1 = spawn("script_model", var_0 gettagorigin("tag_accessory_left"));
   var_1 setModel("automotive_fix_a_can_01");
   var_1.angles = var_0 gettagangles("tag_accessory_left");
-  var_1 linkto(var_0, "tag_accessory_left");
+  var_1 linkTo(var_0, "tag_accessory_left");
   var_0._id_30B3 = var_1;
 }
 
@@ -4164,7 +4164,7 @@ _id_40BA(var_0, var_1, var_2) {
     }
 
     var_3 = anglesToForward(var_0.angles);
-    var_4 = vectornormalize(var_1.origin - var_0.origin);
+    var_4 = vectorNormalize(var_1.origin - var_0.origin);
 
     if(vectordot(var_3, var_4) < 0) {
       break;
@@ -4239,7 +4239,7 @@ _id_65AB() {
 
 _id_D260(var_0, var_1) {
   var_0._id_EE66.origin = var_1.origin;
-  var_0._id_EE66 linkto(var_1);
+  var_0._id_EE66 linkTo(var_1);
   var_0._id_EE73 = var_1;
 }
 
@@ -4253,7 +4253,7 @@ _id_4694(var_0, var_1, var_2) {
   wait 0.25;
 
   if(isDefined(var_2)) {
-    var_0 missile_settargetent(var_2);
+    var_0 missile_settargetEnt(var_2);
   }
 
   var_1 delete();
@@ -4320,7 +4320,7 @@ _id_8CB5(var_0, var_1, var_2) {
   for(;;) {
     var_4 = var_2.origin - var_1.origin;
     var_4 = var_4 * (1, 1, 0);
-    var_4 = vectornormalize(var_4);
+    var_4 = vectorNormalize(var_4);
     var_5 = var_1.origin + var_4 * 7500;
     var_5 = (var_5[0], var_5[1], var_3);
     var_0.origin = var_5;
@@ -4330,7 +4330,7 @@ _id_8CB5(var_0, var_1, var_2) {
 
 _id_9999(var_0, var_1) {
   var_2 = _func_0143("cruise_missile_cp", var_0, var_1.origin);
-  var_2 missile_settargetent(var_1);
+  var_2 missile_settargetEnt(var_1);
   var_2 _meth_8231();
   var_2 setscriptablepartstate("main_thruster", "on", 0);
   var_2 setscriptablepartstate("wing_trails", "on");
@@ -4340,7 +4340,7 @@ _id_9999(var_0, var_1) {
 
 _id_999B(var_0, var_1) {
   var_2 = _func_0143("cruise_missile_warhead_cp", var_0 gettagorigin("tag_missile"), var_1.origin);
-  var_2 missile_settargetent(var_1);
+  var_2 missile_settargetEnt(var_1);
   var_2 _meth_8231();
   var_2 setscriptablepartstate("sub_thruster", "on", 0);
   var_2._id_96E6 = 0;
@@ -4357,7 +4357,7 @@ _id_999A(var_0, var_1) {
   var_2 = var_0[2];
   var_3 = var_1.origin - var_0;
   var_3 = var_3 * (1, 1, 0);
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = var_1.origin + var_3 * 7500;
   var_4 = (var_4[0], var_4[1], var_2);
   var_5 = spawn("script_model", var_4);
@@ -4390,7 +4390,7 @@ _id_99B7(var_0) {
 _id_8CB1(var_0, var_1) {
   var_2 = spawn("script_model", var_0.origin);
   var_2 setModel("tag_player");
-  var_1 linkto(var_2, "tag_player");
+  var_1 linkTo(var_2, "tag_player");
   var_2 thread _id_8CBE(var_2);
   var_2 thread _id_8CB6(var_2, var_0);
   var_2 thread _id_3837(var_2, var_0);
@@ -4400,7 +4400,7 @@ _id_8CBE(var_0) {
   var_0 endon("death");
 
   for(;;) {
-    var_0 rotateyaw(360, 180);
+    var_0 rotateYaw(360, 180);
     wait 180;
   }
 }
@@ -4420,12 +4420,12 @@ _id_8CB6(var_0, var_1) {
     }
 
     if(var_3 <= 100) {
-      var_0 moveto(var_2, var_4, 0, var_4);
+      var_0 moveTo(var_2, var_4, 0, var_4);
       waitframe();
       continue;
     }
 
-    var_0 moveto(var_2, var_4);
+    var_0 moveTo(var_2, var_4);
     var_0 scripts\engine\utility::_id_108A7(var_4, "movedone");
   }
 }
@@ -4443,7 +4443,7 @@ _id_3F42(var_0, var_1) {
   var_3 = spawn("script_model", var_1.origin + var_2 * 170 + (0, 0, -140));
   var_3 setModel("tag_player");
   var_3.angles = vectortoangles((0, 0, -1));
-  var_3 linkto(var_1);
+  var_3 linkTo(var_1);
   var_3 thread _id_3837(var_3, var_0);
   return var_3;
 }
@@ -4453,7 +4453,7 @@ _id_3F66(var_0, var_1) {
   var_3 = spawn("script_model", var_1.origin + var_2 * 0 + (0, 0, -140));
   var_3 setModel("tag_player");
   var_3.angles = vectortoangles(var_0.origin - var_3.origin);
-  var_3 linkto(var_1);
+  var_3 linkTo(var_1);
   var_3 thread _id_3837(var_3, var_0);
   var_3 thread _id_8CB4(var_3, var_0);
   return var_3;
@@ -4517,7 +4517,7 @@ _id_0FDF(var_0) {
   var_1 = spawnturret("misc_turret", var_0 gettagorigin("tag_turret"), "tur_gun_decho_cp", 0);
   var_1.angles = var_0.angles;
   var_1.team = "allies";
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 setModel("veh8_civ_lnd_decho_rebel_mg_no_hatch");
   var_1 setmode("sentry_offline");
   var_1 setsentryowner(undefined);
@@ -4580,7 +4580,7 @@ _id_0FDE(var_0) {
   var_9 = var_8 + var_5 * var_1 + var_6 * var_2 + var_7 * var_3;
   var_10 = spawn("script_model", var_9);
   var_10 setModel("tag_origin");
-  var_10 linkto(var_0);
+  var_10 linkTo(var_0);
   var_10 thread _id_3837(var_10, var_0);
   var_0._id_7187 = var_10;
   var_0._id_7188 = "iw8_la_mike32_mp";

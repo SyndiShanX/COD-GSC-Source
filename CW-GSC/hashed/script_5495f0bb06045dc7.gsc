@@ -213,7 +213,7 @@ function start_warzone() {
   level.var_bde3d03 = undefined;
   survey_id = function_70171add();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player spawn::function_8cef1872();
     player val::reset(#"warzonestaging", "takedamage");
 
@@ -249,7 +249,7 @@ function on_player_disconnect() {
 function team_eliminated(params) {
   team = params.team;
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     dogtag = player.var_c0ad34c;
 
     if(isDefined(dogtag)) {
@@ -519,7 +519,7 @@ function private function_ec2c9808(response, intpayload) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player.team === self.team) {
       if(response == "placed") {
         xcoord = int(intpayload / 1000);
@@ -688,7 +688,7 @@ function function_3832a0d2(team) {
 
 function private function_b5f4c9d8(team) {
   winner = undefined;
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     if(!isalive(player)) {
@@ -712,7 +712,7 @@ function on_one_left_event(team) {
     return;
   }
 
-  foreach(player in getplayers(team)) {
+  foreach(player in getPlayers(team)) {
     if(isalive(player) && !player laststand::player_is_in_laststand()) {
       player globallogic_audio::leader_dialog_on_player("warLastManStanding");
       return;
@@ -893,7 +893,7 @@ function function_a3e209ba() {
 }
 
 function function_aaa24662() {
-  belowworldtrigger = getent("below_world_trigger", "targetname");
+  belowworldtrigger = getEnt("below_world_trigger", "targetname");
 
   if(!isentity(belowworldtrigger)) {
     return;
@@ -922,7 +922,7 @@ function private function_1e150a0b(player) {
     var_708a2754 = physicstrace(startpos, endpos, (0, 0, 0), (0, 0, 0), player, 32);
 
     if(var_708a2754[#"fraction"] < 1) {
-      player setorigin(var_708a2754[#"position"]);
+      player setOrigin(var_708a2754[#"position"]);
       return;
     }
 
@@ -941,7 +941,7 @@ function private function_6ee52dd0(damage, damageinterval) {
   while(!is_true(level.gameended)) {
     time = gettime();
 
-    foreach(i, player in getplayers()) {
+    foreach(i, player in getPlayers()) {
       if(!isalive(player)) {
         continue;
       }

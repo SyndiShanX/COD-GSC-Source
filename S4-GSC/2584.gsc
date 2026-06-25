@@ -262,8 +262,8 @@ _id_ECFF(var_0) {
   var_0 endon("disconnect");
   self._id_B0B5 = spawn("script_origin", self.origin);
   self._id_B0B5 makeuseable();
-  self._id_B0B5 setcursorhint("HINT_NOICON");
-  self._id_B0B5 sethintstring(&"MP_PATCH/PICKUP_TI");
+  self._id_B0B5 setCursorHint("HINT_NOICON");
+  self._id_B0B5 setHintString(&"MP_PATCH/PICKUP_TI");
 
   foreach(var_2 in level.players) {
     _id_ED06(var_2);
@@ -384,8 +384,8 @@ _id_ECF4(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   self makeuseable();
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_PATCH/DESTROY_TI");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_PATCH/DESTROY_TI");
 
   foreach(var_2 in level.players) {
     _id_ED04(var_2);

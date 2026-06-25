@@ -102,9 +102,9 @@ function function_48737ebb() {
 }
 
 function function_cf9b0986() {
-  sp = getent("lazar", "targetname");
+  sp = getEnt("lazar", "targetname");
   sp spawner::add_spawn_function(&function_9995e4d5);
-  sp = getent("park", "targetname");
+  sp = getEnt("park", "targetname");
   sp spawner::add_spawn_function(&function_9995e4d5);
 }
 

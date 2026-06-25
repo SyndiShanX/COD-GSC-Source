@@ -122,7 +122,7 @@ function init_sniper_boss() {
   incoming_vo[3] = "hend_heads_up_more_tango_0";
   incoming_vo[4] = "hend_watch_those_doors_0";
   incoming_line = 0;
-  level.turret = getent("veh_turret", "targetname");
+  level.turret = getEnt("veh_turret", "targetname");
   level.turret setmaxhealth(9999);
   level.turret vehicle::god_on();
   level.sniper_boss = spawner::simple_spawn_single("hyperion");
@@ -191,7 +191,7 @@ function init_sniper_boss() {
         }
         case 3: {
           guys = getaiteamarray("axis");
-          vol = getent("boss_end_vol", "targetname");
+          vol = getEnt("boss_end_vol", "targetname");
           foreach(guy in guys) {
             guy setgoalvolume(vol);
           }
@@ -296,7 +296,7 @@ function set_up_sniper_location(index) {
   level.sniper_override_target = undefined;
   if(index >= 0 && index < level.sniper_origins.size) {
     level.sniper_loc = level.sniper_origins[index];
-    level.sniper_hit_trigger = getent(level.sniper_loc.target, "targetname");
+    level.sniper_hit_trigger = getEnt(level.sniper_loc.target, "targetname");
     level.turret.origin = level.sniper_loc.origin - vectorscale((0, 0, 1), 32);
     if(!isDefined(level.sniper_hit_trigger)) {
       assertmsg("");
@@ -336,7 +336,7 @@ function function_fe242426() {
 
 function get_players_touching(trigger) {
   touchers = [];
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player istouching(trigger)) {
       touchers[touchers.size] = player;
@@ -361,7 +361,7 @@ function end_battle() {
   level.hendricks dialog::say("hend_that_should_do_it_0");
   thread function_c3af0181();
   level flag::set("boss_finale_ready");
-  trig = getent("boss_finale_trigger", "targetname");
+  trig = getEnt("boss_finale_trigger", "targetname");
   trig triggerenable(1);
   trig.var_611ccff1 = util::init_interactive_gameobject(trig, &"cp_level_aquifer_capture_door", &"CP_MI_CAIRO_AQUIFER_BREACH", &function_479374a3);
   trig.var_611ccff1 gameobjects::set_use_time(0.35);
@@ -382,15 +382,15 @@ function function_479374a3() {
     [[level.bzm_forceaicleanup]]();
   }
   array::thread_all(guys, &aquifer_util::delete_me);
-  struct = getent("hyperion_death_origin", "targetname");
+  struct = getEnt("hyperion_death_origin", "targetname");
   if(isDefined(level.bzm_aquiferdialogue6callback)) {
     level thread[[level.bzm_aquiferdialogue6callback]]();
   }
-  ent = getent("control_window_shatter_01", "targetname");
+  ent = getEnt("control_window_shatter_01", "targetname");
   if(isDefined(ent)) {
     ent hide();
   }
-  door = getent("boss_hideaway_door", "targetname");
+  door = getEnt("boss_hideaway_door", "targetname");
   level thread namespace_71a63eac::function_e0e00797();
   a_ents = [];
   if(!isDefined(a_ents)) {
@@ -459,7 +459,7 @@ function function_510d0407() {
 function function_d1b143ce() {
   var_e42db353 = undefined;
   if(isDefined(self.target)) {
-    var_e42db353 = getent(self.target, "targetname");
+    var_e42db353 = getEnt(self.target, "targetname");
     var_e42db353 triggerenable(0);
     self.target = undefined;
   }
@@ -541,7 +541,7 @@ function function_329f82a0() {
 }
 
 function function_6ea369f7() {
-  trig = getent("sniper_alley", "targetname");
+  trig = getEnt("sniper_alley", "targetname");
   while(!level flag::get("end_battle")) {
     trig waittill("trigger", who);
     if(isPlayer(who) && isalive(who)) {
@@ -553,8 +553,8 @@ function function_6ea369f7() {
 }
 
 function function_6800ac1d() {
-  trig = getent("boss_hack1", "targetname");
-  trig2 = getent("boss_hack2", "targetname");
+  trig = getEnt("boss_hack1", "targetname");
+  trig2 = getEnt("boss_hack2", "targetname");
   trig triggerenable(1);
   trig2 triggerenable(0);
   aquifer_obj::objectives_set("cp_level_aquifer_boss");
@@ -571,10 +571,10 @@ function function_6800ac1d() {
   thread savegame::checkpoint_save();
   trig2.var_611ccff1 gameobjects::disable_object();
   wait(1.5);
-  struct = getent("hyperion_death_origin", "targetname");
+  struct = getEnt("hyperion_death_origin", "targetname");
   struct thread scene::play("cin_aqu_05_20_boss_3rd_death_debris");
   wait(2.5);
-  var_e42db353 = getent("boss_debris_hurter", "targetname");
+  var_e42db353 = getEnt("boss_debris_hurter", "targetname");
   var_e42db353 triggerenable(1);
   aquifer_util::toggle_door("debris_clip", 0);
   wait(0.25);
@@ -605,7 +605,7 @@ function function_dae6fcbf(name) {
 
 function function_a354fb63(num) {
   b_success = 0;
-  trig = getent("boss_hack" + (isDefined(num) ? "" + num : ""), "targetname");
+  trig = getEnt("boss_hack" + (isDefined(num) ? "" + num : ""), "targetname");
   while(!b_success) {
     level.hacking flag::wait_till("in_progress");
     thread function_41ca61ef(num);
@@ -661,7 +661,7 @@ function function_a354fb63(num) {
 }
 
 function function_339776e2(name) {
-  ent = getent(name, "script_parameters");
+  ent = getEnt(name, "script_parameters");
   if(isDefined(ent)) {
     ent kill();
   }

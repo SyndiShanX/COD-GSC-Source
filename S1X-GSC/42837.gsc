@@ -457,11 +457,11 @@ teleport_get_matching_dom_flag(var_0, var_1) {
 
 teleport_onteleportctf(var_0) {
   if(game["switchedsides"]) {
-    level.ctf_second_zones["axis"] = getent("post_event_capzone_allies", "targetname");
-    level.ctf_second_zones["allies"] = getent("post_event_capzone_axis", "targetname");
+    level.ctf_second_zones["axis"] = getEnt("post_event_capzone_allies", "targetname");
+    level.ctf_second_zones["allies"] = getEnt("post_event_capzone_axis", "targetname");
   } else {
-    level.ctf_second_zones["allies"] = getent("post_event_capzone_allies", "targetname");
-    level.ctf_second_zones["axis"] = getent("post_event_capzone_axis", "targetname");
+    level.ctf_second_zones["allies"] = getEnt("post_event_capzone_allies", "targetname");
+    level.ctf_second_zones["axis"] = getEnt("post_event_capzone_axis", "targetname");
   }
 
   var_1 = [];
@@ -528,11 +528,11 @@ teleport_onteleportball(var_0) {
   level.ball_starts_post_event = common_scripts\utility::getStructArray("ball_start_post_event", "targetname");
 
   if(game["switchedsides"]) {
-    level.ball_goals_post_event["allies"] = common_scripts\utility::getstruct("ball_goal_axis_post_event", "targetname");
-    level.ball_goals_post_event["axis"] = common_scripts\utility::getstruct("ball_goal_allies_post_event", "targetname");
+    level.ball_goals_post_event["allies"] = common_scripts\utility::getStruct("ball_goal_axis_post_event", "targetname");
+    level.ball_goals_post_event["axis"] = common_scripts\utility::getStruct("ball_goal_allies_post_event", "targetname");
   } else {
-    level.ball_goals_post_event["axis"] = common_scripts\utility::getstruct("ball_goal_axis_post_event", "targetname");
-    level.ball_goals_post_event["allies"] = common_scripts\utility::getstruct("ball_goal_allies_post_event", "targetname");
+    level.ball_goals_post_event["axis"] = common_scripts\utility::getStruct("ball_goal_axis_post_event", "targetname");
+    level.ball_goals_post_event["allies"] = common_scripts\utility::getStruct("ball_goal_allies_post_event", "targetname");
   }
 
   var_1 = [];
@@ -927,7 +927,7 @@ teleport_to_zone_character(var_0, var_1) {
     var_5 = teleport_filter_spawn_point(var_5, var_0);
     var_6 = var_5[0];
     var_1 dontinterpolate();
-    var_1 setorigin(var_6.origin);
+    var_1 setOrigin(var_6.origin);
     var_1 setplayerangles(var_6.angles);
   } else {
     var_7 = undefined;
@@ -999,7 +999,7 @@ teleport_to_zone_character(var_0, var_1) {
 
     var_1 cancelmantle();
     var_1 dontinterpolate();
-    var_1 setorigin(var_7);
+    var_1 setOrigin(var_7);
     var_1 setplayerangles(var_8);
     thread teleport_validate_success(var_1);
   }

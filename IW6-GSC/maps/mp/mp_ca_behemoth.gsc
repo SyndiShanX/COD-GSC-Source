@@ -74,13 +74,13 @@ rotate_fan() {
   self endon("stop_rotate");
 
   while(1) {
-    self RotateYaw(360, 0.5);
+    self rotateYaw(360, 0.5);
     wait 0.25;
   }
 }
 
 update_fan() {
-  trigger_box = GetEnt(self.target, "targetname");
+  trigger_box = getEnt(self.target, "targetname");
   if(isDefined(trigger_box)) {
     trigger_box setCanDamage(true);
     self thread rotate_fan();
@@ -93,7 +93,7 @@ update_fan() {
 
     trigger_box setCanDamage(false);
 
-    self RotateYaw(RandomFloat(360), 1.0, 0, .75);
+    self rotateYaw(RandomFloat(360), 1.0, 0, .75);
   }
 }
 
@@ -165,7 +165,7 @@ behemothSetMiniMap(material) {
   north = (cos(northYaw), sin(northYaw), 0);
   west = (0 - north[1], north[0], 0);
 
-  cornerdiff = VectorNormalize(corner1 - corner0);
+  cornerdiff = vectorNormalize(corner1 - corner0);
 
   if(vectordot(cornerdiff, west) > 0) {
     if(vectordot(cornerdiff, north) > 0) {
@@ -484,13 +484,13 @@ setup_movers() {
 }
 
 setup_mover_nodes() {
-  next_point = GetStruct(self.target, "targetname");
+  next_point = getStruct(self.target, "targetname");
   if(isDefined(next_point)) {
     self.angles = VectorToAngles(self.origin - next_point.origin);
     good_to_go = 1;
     while((next_point != self) && (good_to_go)) {
       curr_point = next_point;
-      next_point = GetStruct(curr_point.target, "targetname");
+      next_point = getStruct(curr_point.target, "targetname");
       if(isDefined(next_point)) {
         next_point.angles = VectorToAngles(next_point.origin - curr_point.origin);
       } else
@@ -500,7 +500,7 @@ setup_mover_nodes() {
 }
 
 update_mover() {
-  current_point = GetStruct(self.target, "targetname");
+  current_point = getStruct(self.target, "targetname");
   if(!isDefined(current_point)) {
     return;
   }
@@ -518,7 +518,7 @@ update_mover() {
     start_time = current_point.script_accel;
   }
 
-  current_point = GetStruct(current_point.target, "targetname");
+  current_point = getStruct(current_point.target, "targetname");
   while(isDefined(current_point)) {
     stop_time = 0.0;
     if(isDefined(current_point.script_decel)) {
@@ -533,8 +533,8 @@ update_mover() {
     move_time = Distance(self.origin, current_point.origin) / move_speed;
     move_time = Max(move_time, stop_time + start_time);
 
-    self MoveTo(current_point.origin, move_time, start_time, stop_time);
-    self RotateTo(current_point.angles, move_time, start_time, stop_time);
+    self moveTo(current_point.origin, move_time, start_time, stop_time);
+    self rotateTo(current_point.angles, move_time, start_time, stop_time);
 
     point_angle = current_point.angles[1];
 
@@ -549,6 +549,6 @@ update_mover() {
       start_time = current_point.script_accel;
     }
 
-    current_point = GetStruct(current_point.target, "targetname");
+    current_point = getStruct(current_point.target, "targetname");
   }
 }

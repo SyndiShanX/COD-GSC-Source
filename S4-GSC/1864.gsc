@@ -226,7 +226,7 @@ _id_BD70(var_0) {
     if(isDefined(level._id_EA70[var_2[1]]) && isDefined(level._id_EA70[var_2[1]][var_2[0]])) {
       var_3 = scripts\engine\utility::getStructArray(var_2[0], var_2[1]);
     } else {
-      var_3 = getent(var_2[0], var_2[1]);
+      var_3 = getEnt(var_2[0], var_2[1]);
     }
   }
 

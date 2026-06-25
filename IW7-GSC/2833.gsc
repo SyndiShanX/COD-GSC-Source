@@ -10,7 +10,7 @@ func_37A9() {
 func_CCBE() {
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("tag_origin");
-  var_0 linkto(level.player, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(level.player, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.var_C04F = 1;
   level.player.var_763C = var_0;
   var_1 = scripts\engine\utility::getStructArray("fxchain_start", "script_noteworthy");
@@ -39,8 +39,8 @@ func_CCBE() {
     if(var_3.size > 0) {
       var_4 = sortbydistance(var_3, level.player.origin)[0];
       if(distance2dsquared(level.player.origin, var_4.origin) <= squared(var_4.fgetarg)) {
-        var_5 = scripts\engine\utility::getstruct(var_4.script_noteworthy, "targetname");
-        var_6 = scripts\engine\utility::getstruct(var_4.script_parameters, "targetname");
+        var_5 = scripts\engine\utility::getStruct(var_4.script_noteworthy, "targetname");
+        var_6 = scripts\engine\utility::getStruct(var_4.script_parameters, "targetname");
         var_7 = vectordot(anglesToForward(var_4.angles), level.player.origin - var_4.origin);
         var_8 = undefined;
         if(var_7 > 0 && level.var_37CF.var_3C0A == var_6.var_3C0A) {

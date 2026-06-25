@@ -169,12 +169,12 @@ function private spawnplane(startnode, owner, killstreak_id, killstreakbundle, k
   bundlename = sessionmodeiszombiesgame() ? "napalm_strike_zm" : "napalm_strike";
   startposition = startnode.origin;
   angles = startnode.angles;
-  fakevehicle = spawnvehicle("fake_vehicle", startposition, angles);
+  fakevehicle = spawnVehicle("fake_vehicle", startposition, angles);
   plane = spawn("script_model", startposition);
   plane function_a7d56780(killstreakbundle);
   plane.fakevehicle = fakevehicle;
   plane.angles = angles;
-  plane linkto(fakevehicle);
+  plane linkTo(fakevehicle);
   plane.weapon = getweapon(bundlename);
   plane setweapon(plane.weapon);
   plane setowner(owner);
@@ -285,7 +285,7 @@ function private function_c248485(plane, targetpoint, team, owner, dosound = 0, 
     }
 
     if(dosound && i == killstreakbundle.var_2df25e4a / 2) {
-      playsoundatposition(#"hash_18c79f680760b8c8", targetpoint);
+      playSoundAtPosition(#"hash_18c79f680760b8c8", targetpoint);
     }
 
     var_1d6434c4 -= killstreakbundle.var_4bb1a46b;
@@ -312,7 +312,7 @@ function private function_c4cbfac7(plane, team, killstreakbundle, var_8be94730, 
   bomb thread function_4947d695();
   var_5496c504.origin = bomb.origin;
   var_5496c504.angles = bomb.angles;
-  var_5496c504 linkto(bomb);
+  var_5496c504 linkTo(bomb);
   var_5496c504 show();
   bomb ghost();
   bomb.angles = angles;
@@ -327,7 +327,7 @@ function private function_c4cbfac7(plane, team, killstreakbundle, var_8be94730, 
   shot = level.var_ea918548[randomint(level.var_ea918548.size)];
   bomb thread scene::play(#"p9_fxanim_mp_napalm_strike_spin", shot, array(var_5496c504));
   killcament unlink();
-  killcament linkto(bomb);
+  killcament linkTo(bomb);
   result = bomb waittill(#"projectile_impact_explode", #"entitydeleted");
   location notify(#"napalm_explode");
 
@@ -368,7 +368,7 @@ function function_a7d56780(killstreakbundle) {
     killcament util::deleteaftertime(killstreakbundle.var_b5f47b94 + 10);
     killcament.starttime = gettime();
     killcament.angles = var_7ab8be7d;
-    killcament linkto(self);
+    killcament linkTo(self);
     self.var_1bb01d48[i] = killcament;
   }
 }
@@ -463,7 +463,7 @@ function function_985141f2(owner, startpos, normal, direction, killcament, team,
   firesound playLoopSound(#"hash_8e00d255f2085d5");
   killcament unlink();
   var_ab1069fa = startpos + vectorscale(anglesToForward(killcament.angles), -500);
-  killcament moveto(var_ab1069fa, 4, 0, 1);
+  killcament moveTo(var_ab1069fa, 4, 0, 1);
   level thread function_660d94c3(firesound, killcament, fireduration);
   damageendtime = int(gettime() + fireduration * 1000);
   var_b1dd2ca0 = getarraykeys(locations[#"loc"]);
@@ -702,7 +702,7 @@ function private sndfiredamage() {
 
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
-    self.sndfireent linkto(self, "tag_origin");
+    self.sndfireent linkTo(self, "tag_origin");
     self.sndfireent playSound(#"chr_burn_start");
     self thread sndfiredamage_deleteent(self.sndfireent);
   }

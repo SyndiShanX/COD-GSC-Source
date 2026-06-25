@@ -63,7 +63,7 @@ function on_player_spawned(localclientnum) {
 }
 
 function private function_5d6c2a78(localclientnum) {
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     if(!player function_21c0fa55() && player.team == self.team) {
       player function_bcc9c79c(localclientnum);
     }

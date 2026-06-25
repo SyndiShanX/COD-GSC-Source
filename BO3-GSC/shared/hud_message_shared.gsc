@@ -419,7 +419,7 @@ function waittillnotifiesdone() {
   timewaited = 0;
   while(pendingnotifies && timewaited < 12) {
     pendingnotifies = 0;
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i].notifyqueue) && players[i].notifyqueue.size > 0) {
         pendingnotifies = 1;

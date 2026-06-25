@@ -158,7 +158,7 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function function_44ed971() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"hash_20d620050345e82", 1);
   }
 }
@@ -192,7 +192,7 @@ function function_c260f7a1(var_e9ea5e13) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player hasweapon(var_a02789e0) || player hasweapon(var_f934814c) || player hasweapon(var_fb0c0b60) || player hasweapon(var_95254da2) || player hasweapon(var_7de2a5d9)) {
       var_b6a0e846++;
     }
@@ -219,7 +219,7 @@ function function_ddc13fd6() {
   a_s_spots = level.zm_loc_types[#"zombie_location"];
 
   if(getdvarint(#"scr_zombie_spawn_in_view", 0)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     a_s_spots = zm_spawner::function_3f416d76(player, a_s_spots);
   }
 
@@ -321,14 +321,14 @@ function setupmusic() {
 
 function function_65c65feb(b_active = 0) {
   if(b_active) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clientfield::set_to_player("" + #"music_underscore", 2);
     }
 
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 3);
   }
 }
@@ -355,7 +355,7 @@ function private function_360fb84d() {
 
   for(var_d1ae80e1 = undefined; true; var_d1ae80e1 = level.round_number + 2) {
     s_waitresult = level waittill(#"start_of_round", #"pap_quest_completed");
-    n_players = zm_utility::function_a2541519(getplayers().size);
+    n_players = zm_utility::function_a2541519(getPlayers().size);
 
     if(!zm_round_spawning::function_fab464c4(level.round_number) && (n_players == 1 && level.round_number >= 15 || n_players > 1 && level.round_number >= 13 || isDefined(var_d1ae80e1) && level.round_number >= var_d1ae80e1)) {
       function_a95110c(level.round_number);
@@ -650,7 +650,7 @@ function function_7a15a086() {
 
   while(true) {
     if(level flag::get("power_on")) {
-      a_players = getplayers();
+      a_players = getPlayers();
 
       foreach(player in a_players) {
         foreach(vol in var_b6596672) {
@@ -669,7 +669,7 @@ function function_7a15a086() {
 function function_85bd89cb() {
   level endon(#"end_game");
   level flag::wait_till("start_zombie_round_logic");
-  toy_horse_trigger = getent("toy_horse_trigger", "targetname");
+  toy_horse_trigger = getEnt("toy_horse_trigger", "targetname");
   level thread scene::init(#"hash_4054de8e8701c4d");
   toy_horse_trigger waittill(#"trigger");
   level thread scene::play(#"hash_4054de8e8701c4d");

@@ -18,7 +18,7 @@
 #namespace zodt8_narrative;
 
 init() {
-  getent("yoshi_doshi", "targetname") hide();
+  getEnt("yoshi_doshi", "targetname") hide();
   init_clientfields();
 
   if(zm_utility::is_ee_enabled()) {
@@ -52,10 +52,10 @@ init_flags() {
 
 function_904b119() {
   hidemiscmodels("freerangeanimalcrackers");
-  getent("bloody_sight", "targetname") hide();
-  getent("life_preserver_catch", "targetname") hide();
-  getent("life_preserver_catch" + "_l", "targetname") hide();
-  getent("life_preserver_catch" + "_r", "targetname") hide();
+  getEnt("bloody_sight", "targetname") hide();
+  getEnt("life_preserver_catch", "targetname") hide();
+  getEnt("life_preserver_catch" + "_l", "targetname") hide();
+  getEnt("life_preserver_catch" + "_r", "targetname") hide();
 }
 
 function_a425bf07() {
@@ -115,13 +115,13 @@ function_e7fd1a33() {
 
     n_rotate = randomintrange(160, 200);
     n_x_move = randomintrange(var_f21d9eb3, n_max_x);
-    self rotateto((self.angles[0], n_rotate, self.angles[2]), 0.25);
-    self moveto((n_x_move, self.origin[1], self.origin[2]), 0.25);
+    self rotateTo((self.angles[0], n_rotate, self.angles[2]), 0.25);
+    self moveTo((n_x_move, self.origin[1], self.origin[2]), 0.25);
   }
 }
 
 function_7b89f32a() {
-  mdl_painting = getent("clottedcreamtea", "targetname");
+  mdl_painting = getEnt("clottedcreamtea", "targetname");
 
   if(!isDefined(mdl_painting)) {
     return;
@@ -140,13 +140,13 @@ function_7b89f32a() {
   s_loc = struct::get(#"clottedcreamtea");
   v_offset = (0, 0, -32);
   var_55e11aa9 = util::spawn_model("tag_origin", mdl_painting.origin + v_offset, mdl_painting.angles);
-  mdl_painting linkto(var_55e11aa9);
+  mdl_painting linkTo(var_55e11aa9);
   v_offset = (0, 20, 24);
-  var_55e11aa9 moveto(s_loc.origin + v_offset, 1.5, 1.5);
+  var_55e11aa9 moveTo(s_loc.origin + v_offset, 1.5, 1.5);
   var_55e11aa9 rotatepitch(138, 1.5, 1.5);
   var_55e11aa9 waittill(#"movedone");
   var_55e11aa9 delete();
-  mdl_painting disconnectpaths();
+  mdl_painting disconnectPaths();
 }
 
 function_8a44027() {
@@ -172,7 +172,7 @@ function_c3a5f1fe(a_ents) {
     }
   }
 
-  mdl_book = getent("pages_of_words", "targetname");
+  mdl_book = getEnt("pages_of_words", "targetname");
   mdl_book setModel(#"hash_6a0ad79cfc79892d");
   e_raven delete();
 }
@@ -180,7 +180,7 @@ function_c3a5f1fe(a_ents) {
 function_59ecbee4() {
   level waittill(#"water_initialized");
   level thread function_240b713f();
-  var_5c608f55 = getent("yoshi_doshi", "targetname");
+  var_5c608f55 = getEnt("yoshi_doshi", "targetname");
 
   while(true) {
     b_show = 0;
@@ -227,7 +227,7 @@ function_d3a41243() {
 
     if(s_result.weapon === w_sticky) {
       mdl_fx = util::spawn_model("tag_origin", struct::get(#"macaroni_puddle").origin);
-      mdl_fx linkto(level.e_sway);
+      mdl_fx linkTo(level.e_sway);
       mdl_fx clientfield::set("" + #"morse_star", 1);
       break;
     }
@@ -383,7 +383,7 @@ function_ad05f6f3() {
     }
   }
 
-  playsoundatposition(#"hash_2cf59d6222de4f6f", self.origin);
+  playSoundAtPosition(#"hash_2cf59d6222de4f6f", self.origin);
   self delete();
 }
 
@@ -500,16 +500,16 @@ function_7c9ab1ea(t_flag, var_f96aafd8) {
 }
 
 function_b11c26c9() {
-  e_sway = getent("skybox_water", "targetname");
-  e_homunculus = getent("life_preserver_catch", "targetname");
-  var_21bb918c = getent("life_preserver_catch" + "_l", "targetname");
-  var_c8279d50 = getent("life_preserver_catch" + "_r", "targetname");
+  e_sway = getEnt("skybox_water", "targetname");
+  e_homunculus = getEnt("life_preserver_catch", "targetname");
+  var_21bb918c = getEnt("life_preserver_catch" + "_l", "targetname");
+  var_c8279d50 = getEnt("life_preserver_catch" + "_r", "targetname");
   e_homunculus setscale(5);
   var_21bb918c setscale(1.75);
   var_c8279d50 setscale(1.75);
-  e_homunculus linkto(e_sway);
-  var_21bb918c linkto(e_sway);
-  var_c8279d50 linkto(e_sway);
+  e_homunculus linkTo(e_sway);
+  var_21bb918c linkTo(e_sway);
+  var_c8279d50 linkTo(e_sway);
   e_homunculus ghost();
   var_21bb918c ghost();
   var_c8279d50 ghost();
@@ -575,8 +575,8 @@ function_c867ac0a(e_homunculus, var_21bb918c, var_c8279d50) {
   var_c8279d50 sethighdetail(1);
   var_21bb918c.var_55e11aa9 = util::spawn_model("tag_origin", var_21bb918c.origin);
   var_c8279d50.var_55e11aa9 = util::spawn_model("tag_origin", var_c8279d50.origin);
-  var_21bb918c.var_55e11aa9 linkto(level.e_sway);
-  var_c8279d50.var_55e11aa9 linkto(level.e_sway);
+  var_21bb918c.var_55e11aa9 linkTo(level.e_sway);
+  var_c8279d50.var_55e11aa9 linkTo(level.e_sway);
   a_angles = function_a7ae2066();
   function_dc92e2d4(a_angles, var_21bb918c, var_c8279d50, #"start");
   wait 1;
@@ -678,13 +678,13 @@ function_c867ac0a(e_homunculus, var_21bb918c, var_c8279d50) {
 function_dc92e2d4(a_angles, var_21bb918c, var_c8279d50, str_letter) {
   var_21bb918c unlink();
   var_c8279d50 unlink();
-  var_21bb918c rotateto(a_angles[#"left"][str_letter], 0.5);
-  var_c8279d50 rotateto(a_angles[#"right"][str_letter], 0.5);
+  var_21bb918c rotateTo(a_angles[#"left"][str_letter], 0.5);
+  var_c8279d50 rotateTo(a_angles[#"right"][str_letter], 0.5);
   var_c8279d50 waittill(#"rotatedone");
   var_21bb918c.origin = var_21bb918c.var_55e11aa9.origin;
   var_c8279d50.origin = var_c8279d50.var_55e11aa9.origin;
-  var_21bb918c linkto(level.e_sway);
-  var_c8279d50 linkto(level.e_sway);
+  var_21bb918c linkTo(level.e_sway);
+  var_c8279d50 linkTo(level.e_sway);
   wait 1.25;
 }
 
@@ -882,7 +882,7 @@ function_bef7f017(s_trigger_loc) {
         level notify(#"hash_20b6d10f9de5d13a");
 
         foreach(player in util::get_active_players()) {
-          player playrumbleonentity(#"hash_2c759068c6a8567d");
+          player playRumbleOnEntity(#"hash_2c759068c6a8567d");
         }
 
         break;
@@ -914,7 +914,7 @@ function_24d85b68() {
 
     foreach(player in a_players) {
       if(player.origin[2] < 750 && distancesquared(player.origin, self.origin) < 169) {
-        player playrumbleonentity(#"hash_2c759068c6a8567d");
+        player playRumbleOnEntity(#"hash_2c759068c6a8567d");
       }
 
       waitframe(1);

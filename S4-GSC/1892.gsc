@@ -340,7 +340,7 @@ _id_8821(var_0, var_1, var_2, var_3) {
   }
 
   if(var_7 < 96) {
-    if(vectordot(var_8, vectornormalize(var_1.origin - var_0.origin)) > 0) {
+    if(vectordot(var_8, vectorNormalize(var_1.origin - var_0.origin)) > 0) {
       _id_143A(var_0, var_1, var_2);
       return 1;
     }

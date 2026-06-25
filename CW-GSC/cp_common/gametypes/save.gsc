@@ -94,7 +94,7 @@ function save(var_116ab377, var_296c7056) {
   }
 
   savegame_create(var_116ab377, var_296c7056);
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(player)) {
     return;
@@ -204,7 +204,7 @@ function function_9797184c() {
 function function_379f84b3() {
   missionid = function_8136eb5a();
   world.mapdata[missionid][#"transient"].var_2e7c022f = [];
-  player = getplayers()[0];
+  player = getPlayers()[0];
   a_weapon_list = player getweaponslist();
   current_weapon = player getcurrentweapon();
   world.mapdata[missionid][#"transient"].var_37017d9 = current_weapon.name;
@@ -238,7 +238,7 @@ function function_379f84b3() {
 
 function function_7396472d() {
   missionid = function_8136eb5a();
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
     player takeallweapons();
@@ -318,7 +318,7 @@ function private function_396464b(var_62a2ec8e = 0) {
   level notify(#"checkpoint_save");
   level endon(#"checkpoint_save", #"save_restore");
   level notify(#"kill_save");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isPlayer(player) && player util::function_a1d6293()) {
     return;

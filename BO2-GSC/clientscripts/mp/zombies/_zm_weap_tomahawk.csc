@@ -32,14 +32,14 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
   if(bwasdemojump) {
     if(newval == 1) {
-      e_pickup_fx = getent(localclientnum, "tomahawk_pickup_fx_origin", "targetname");
+      e_pickup_fx = getEnt(localclientnum, "tomahawk_pickup_fx_origin", "targetname");
 
       if(isDefined(e_pickup_fx) && isDefined(e_pickup_fx.fx_id)) {
         stopfx(localclientnum, e_pickup_fx.fx_id);
         e_pickup_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup"], e_pickup_fx, "tag_origin");
       }
     } else if(newval == 2) {
-      e_pickup_upgrade_fx = getent(localclientnum, "tomahawk_pickup_upgrade_fx_origin", "targetname");
+      e_pickup_upgrade_fx = getEnt(localclientnum, "tomahawk_pickup_upgrade_fx_origin", "targetname");
 
       if(isDefined(e_pickup_upgrade_fx) && isDefined(e_pickup_upgrade_fx.fx_id)) {
         stopfx(localclientnum, e_pickup_upgrade_fx.fx_id);
@@ -51,7 +51,7 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
 
   if(newval == 1) {
-    e_pickup_fx = getent(localclientnum, "tomahawk_pickup_fx_origin", "targetname");
+    e_pickup_fx = getEnt(localclientnum, "tomahawk_pickup_fx_origin", "targetname");
 
     if(!isDefined(e_pickup_fx)) {
       e_pickup_fx = spawn(localclientnum, self.origin, "script_model");
@@ -66,7 +66,7 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
     e_pickup_fx.fx_id = playFXOnTag(localclientnum, level._effect["tomahawk_pickup"], e_pickup_fx, "tag_origin");
   } else if(newval == 2) {
-    e_pickup_fx = getent(localclientnum, "tomahawk_pickup_fx_origin", "targetname");
+    e_pickup_fx = getEnt(localclientnum, "tomahawk_pickup_fx_origin", "targetname");
 
     if(isDefined(e_pickup_fx)) {
       e_pickup_upgrade_fx = spawn(localclientnum, e_pickup_fx.origin, "script_model");

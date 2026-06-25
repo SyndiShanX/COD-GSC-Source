@@ -23,7 +23,7 @@ _id_F8FC(var_0, var_1) {
     var_7 = level._id_4123;
   }
 
-  var_0 linkto(var_7, "tag_origin", (var_5, var_6, var_3), (0, var_2 - 90, 0));
+  var_0 linkTo(var_7, "tag_origin", (var_5, var_6, var_3), (0, var_2 - 90, 0));
   var_0 hide();
   var_0 dontinterpolate();
   waitframe();
@@ -46,14 +46,14 @@ _id_F8FC(var_0, var_1) {
   }
 
   var_0.origin = var_0.origin + -1 * anglesToForward(var_0.angles) * var_9;
-  var_0 moveto(var_8, 3);
+  var_0 moveTo(var_8, 3);
   var_0 rotateroll(20, 0.05);
   var_0 dontinterpolate();
   level notify("uav_update");
   var_0 _id_080C::_id_108F6("death", 3);
 
   if(isDefined(var_0)) {
-    var_0 linkto(var_7, "tag_origin");
+    var_0 linkTo(var_7, "tag_origin");
   }
 }
 
@@ -78,7 +78,7 @@ _id_F8FD(var_0, var_1) {
     var_0._id_9F23 _id_080C::_id_D557(3000, 0);
   }
 
-  var_0 moveto(var_3, 3);
+  var_0 moveTo(var_3, 3);
   var_0 rotateroll(-20, 1.0);
   var_0 _id_080C::_id_108F6("death", 2.0);
   var_4 = _id_6E18(var_0._id_04DE, var_0.team);
@@ -782,7 +782,7 @@ _id_C929(var_0) {
   var_2 = -1 * var_0 * var_1;
 
   for(;;) {
-    self rotateyaw(var_2, var_1);
+    self rotateYaw(var_2, var_1);
     wait(var_1);
   }
 }
@@ -1299,7 +1299,7 @@ _id_3DA6(var_0, var_1) {
 
   for(var_6 = 0; var_6 < var_4 * 1000; var_6 = gettime() - var_5) {
     var_7 = anglesToForward(self.angles);
-    var_8 = vectornormalize(var_0.origin - self.origin);
+    var_8 = vectorNormalize(var_0.origin - self.origin);
     var_9 = vectordot(var_7, var_8);
     var_10 = self.origin + rotatevector(var_2, self.angles);
     var_11 = var_10 + var_7 * 8000;

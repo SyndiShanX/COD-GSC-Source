@@ -32,7 +32,7 @@ function_bea20a96(event, params) {
 
 function_daed27e8(event, params) {
   mpl_heatwave_fx(level, event, params);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player mpl_heatwave_fx(player, event, params);
@@ -663,7 +663,7 @@ event_handler[event_a98a54a7] function_323548ba(eventstruct) {
 
 event_handler[player_laststand] codecallback_playerlaststand(eventstruct) {
   self endon(#"disconnect");
-  self stopanimscripted();
+  self stopanimScripted();
   [[level.callbackplayerlaststand]](eventstruct.inflictor, eventstruct.attacker, eventstruct.amount, eventstruct.mod, eventstruct.weapon, eventstruct.direction, eventstruct.hit_location, eventstruct.time_offset, eventstruct.delay);
 }
 
@@ -781,7 +781,7 @@ killedcustomtraversallistener() {
 
   if(isDefined(self)) {
     self finishtraversal();
-    self stopanimscripted();
+    self stopanimScripted();
     self unlink();
   }
 }
@@ -798,10 +798,10 @@ event_handler[entity_playcustomtraversal] codecallback_playcustomtraversal(event
 
   if(isDefined(endparent)) {
     offset = entity.origin - endparent.origin;
-    entity linkto(endparent, "", offset);
+    entity linkTo(endparent, "", offset);
   }
 
-  entity animscripted("custom_traversal_anim_finished", eventstruct.location, eventstruct.direction, eventstruct.animation, eventstruct.anim_mode, undefined, eventstruct.playback_speed, eventstruct.goal_time, eventstruct.lerp_time);
+  entity animScripted("custom_traversal_anim_finished", eventstruct.location, eventstruct.direction, eventstruct.animation, eventstruct.anim_mode, undefined, eventstruct.playback_speed, eventstruct.goal_time, eventstruct.lerp_time);
   entity thread finishcustomtraversallistener();
   entity thread killedcustomtraversallistener();
 }

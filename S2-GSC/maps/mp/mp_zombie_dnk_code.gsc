@@ -89,7 +89,7 @@ ship_tilting_object_setup() {
 
         case "trigger_multiple":
           var_02.safetytrigger = var_05;
-          var_05 enablelinkto();
+          var_05 enablelinkTo();
           var_05 method_8449(var_02);
           var_05 thread ship_tilting_collision_backup();
           break;
@@ -152,20 +152,20 @@ ship_tilting_object_movement() {
     switch (var_03) {
       case "ship_tilting_starboard":
         if(isDefined(self.starboardorigin)) {
-          self moveto(self.starboardorigin, var_00, var_01, var_02);
+          self moveTo(self.starboardorigin, var_00, var_01, var_02);
           lib_0378::func_8D74("start_vehicle_slide", var_00, "ship_tilting_starboard");
         } else {
-          self moveto(self.var_6C55, var_00, var_01, var_02);
+          self moveTo(self.var_6C55, var_00, var_01, var_02);
           lib_0378::func_8D74("start_vehicle_slide", var_00, "ship_tilting_original");
         }
         break;
 
       case "ship_tilting_port":
         if(isDefined(self.portorigin)) {
-          self moveto(self.portorigin, var_00, var_01, var_02);
+          self moveTo(self.portorigin, var_00, var_01, var_02);
           lib_0378::func_8D74("start_vehicle_slide", var_00, "ship_tilting_port");
         } else {
-          self moveto(self.var_6C55, var_00, var_01, var_02);
+          self moveTo(self.var_6C55, var_00, var_01, var_02);
           lib_0378::func_8D74("start_vehicle_slide", var_00, "ship_tilting_original");
         }
         break;
@@ -280,14 +280,14 @@ ship_tilting_water_tilt() {
       case "ship_tilting_starboard":
         thread fx_water_tilt_1();
         foreach(var_06 in var_00) {
-          var_06 rotateto((1, 0, 0), var_01, var_02, var_03);
+          var_06 rotateTo((1, 0, 0), var_01, var_02, var_03);
         }
         break;
 
       case "ship_tilting_port":
         thread fx_water_tilt_2();
         foreach(var_06 in var_00) {
-          var_06 rotateto((-1, 0, 0), var_01, var_02, var_03);
+          var_06 rotateTo((-1, 0, 0), var_01, var_02, var_03);
         }
         break;
     }
@@ -314,13 +314,13 @@ ship_tilting_camera_tilt() {
     var_01 = level common_scripts\utility::func_A715("ship_tilting_starboard", "ship_tilting_port");
     lib_0378::func_8D74("zmb_dnk_ship_tilt", var_01);
     if(var_01 == "ship_tilting_starboard") {
-      level.groundrefent rotateto((8, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
+      level.groundrefent rotateTo((8, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
       wait(var_00);
-      level.groundrefent rotateto((5, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
+      level.groundrefent rotateTo((5, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
     } else if(var_01 == "ship_tilting_port") {
-      level.groundrefent rotateto((-8, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
+      level.groundrefent rotateTo((-8, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
       wait(var_00);
-      level.groundrefent rotateto((-5, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
+      level.groundrefent rotateTo((-5, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
     }
 
     foreach(var_03 in level.var_744A) {
@@ -354,8 +354,8 @@ water_trap_init() {
   level.var_9CD1["active_to_cooldown"] = undefined;
   level.var_9CD1["cooldown_to_active"] = undefined;
   var_00 = common_scripts\utility::func_46B5("trap_ship_tilting_water", "script_noteworthy");
-  var_00.damagetrigger = getent("ship_tilting_trap_damage_trig", "targetname");
-  var_00.vfxplane = getent("ship_tilting_trap_vfx_plane", "targetname");
+  var_00.damagetrigger = getEnt("ship_tilting_trap_damage_trig", "targetname");
+  var_00.vfxplane = getEnt("ship_tilting_trap_vfx_plane", "targetname");
   var_00.vfxplane method_805C();
   var_00 thread water_trap_movement();
   thread maps\mp\zombies\_zombies_traps::func_9CC6("trap_ship_tilting_water", "active", ::water_trap);
@@ -386,28 +386,28 @@ water_trap_rotate_lever(param_00, param_01) {
     return;
   }
 
-  self.var_6298 rotateto(param_01.var_1D, 0.35, 0.1, 0.1);
+  self.var_6298 rotateTo(param_01.var_1D, 0.35, 0.1, 0.1);
   wait(2);
-  self.var_6298 rotateto(param_00, 0.35, 0.1, 0.1);
+  self.var_6298 rotateTo(param_00, 0.35, 0.1, 0.1);
 }
 
 water_trap_movement() {
   var_00 = randomfloatrange(6, 7);
   var_01 = var_00 * 0.3;
   var_02 = var_00 * 0.05;
-  var_03 = getent("ship_tilting_trap_org", "targetname");
-  self.damagetrigger enablelinkto();
+  var_03 = getEnt("ship_tilting_trap_org", "targetname");
+  self.damagetrigger enablelinkTo();
   self.damagetrigger method_8449(var_03);
   for(;;) {
     var_04 = level common_scripts\utility::func_A715("ship_tilting_starboard", "ship_tilting_port");
     wait(var_00 * 0.2);
     switch (var_04) {
       case "ship_tilting_starboard":
-        var_03 moveto((-216, 1968, -296), var_00, var_01, var_02);
+        var_03 moveTo((-216, 1968, -296), var_00, var_01, var_02);
         break;
 
       case "ship_tilting_port":
-        var_03 moveto((312, 1968, -296), var_00, var_01, var_02);
+        var_03 moveTo((312, 1968, -296), var_00, var_01, var_02);
         break;
     }
   }
@@ -660,7 +660,7 @@ visions_footprints_logic(param_00) {
     level endon("stop_fake_zombie_spawning");
   }
 
-  var_01 = getent("ship_tilting_trap_damage_trig", "targetname");
+  var_01 = getEnt("ship_tilting_trap_damage_trig", "targetname");
   var_02 = getEntArray("footsteps_trigger", "targetname");
   var_02 = common_scripts\utility::func_F6F(var_02, var_01);
   for(;;) {
@@ -797,14 +797,14 @@ floating_object_spawn_object(param_00) {
       var_09 = randomintrange(0, 360);
       var_0A = randomintrange(0, 360);
       var_0B = randomintrange(0, 360);
-      param_00.objectmodel rotateto((var_09, var_0A, var_0B), 0.05);
+      param_00.objectmodel rotateTo((var_09, var_0A, var_0B), 0.05);
       var_09 = randomintrange(0, 360);
       var_0A = randomintrange(0, 360);
       var_0B = randomintrange(0, 360);
-      param_00.modelorigin rotateto((var_09, var_0A, var_0B), var_08);
+      param_00.modelorigin rotateTo((var_09, var_0A, var_0B), var_08);
     }
 
-    param_00.modelorigin moveto(var_01.var_116, var_08);
+    param_00.modelorigin moveTo(var_01.var_116, var_08);
     level common_scripts\utility::func_A74B("altered_state_end", var_08);
     param_00.objectmodel thread floating_object_cleanup();
   }
@@ -957,12 +957,12 @@ ___________________escape___________________() {}
 
 escape_init() {
   var_00 = getEntArray("escape_boat_cleats", "script_noteworthy");
-  var_01 = getent("escape_boat", "targetname");
+  var_01 = getEnt("escape_boat", "targetname");
   foreach(var_03 in var_00) {
-    var_03 linkto(var_01);
+    var_03 linkTo(var_01);
   }
 
-  var_05 = getent("escape_boat_rack", "targetname");
+  var_05 = getEnt("escape_boat_rack", "targetname");
   var_01 method_8449(var_05, "rope_01", (0, -80, 0), (0, 0, 0));
   var_05 method_8278("s2_zdu_ship_boat_rack_idle_down");
 }
@@ -973,8 +973,8 @@ escape_extra_run() {
 
 escape_higgins_raise() {
   var_00 = getEntArray("escape_boat_cleats", "script_noteworthy");
-  var_01 = getent("escape_boat", "targetname");
-  var_02 = getent("escape_boat_rack", "targetname");
+  var_01 = getEnt("escape_boat", "targetname");
+  var_02 = getEnt("escape_boat_rack", "targetname");
   var_02 method_8278("s2_zdu_ship_boat_rack_up");
   playFXOnTag(level.var_611["zmb_dnk_boat_water_pull"], var_01, "tag_origin");
   var_03 = getanimlength(%s2_zdu_ship_boat_rack_up);
@@ -1001,15 +1001,15 @@ defense_spawner_toggle() {
 ___________________audio_log___________________() {}
 
 audio_log_init() {
-  var_00 = getent("lore_primary", "script_noteworthy");
-  var_00.var_9D5E = getent(var_00.var_1A2, "targetname");
+  var_00 = getEnt("lore_primary", "script_noteworthy");
+  var_00.var_9D5E = getEnt(var_00.var_1A2, "targetname");
   var_00 method_805C();
   var_00.var_9D5E common_scripts\utility::func_9D9F();
   audio_log_listen(var_00);
 }
 
 audio_log_listen(param_00) {
-  var_01 = getent("audio_log_hanging_model", "targetname");
+  var_01 = getEnt("audio_log_hanging_model", "targetname");
   var_01 setCanDamage(1);
   var_01 waittill("damage");
   var_02 = param_00.var_116 - var_01.var_116;
@@ -1017,7 +1017,7 @@ audio_log_listen(param_00) {
   var_04 = 1 / var_03;
   var_05 = var_02 * (var_04, var_04, 0);
   var_01 gravitymove(var_05, var_03);
-  var_01 rotateto(param_00.var_1D, var_03);
+  var_01 rotateTo(param_00.var_1D, var_03);
   wait(var_03);
   var_01.var_116 = param_00.var_116;
   var_01 delete();
@@ -1101,8 +1101,8 @@ ee_activate_gas() {
 }
 
 ee_activate_gas_uber_think() {
-  var_00 = getent("ee_uberschnell_intact", "script_noteworthy");
-  var_01 = getent("ee_trig_dmg_uberschnell", "script_noteworthy");
+  var_00 = getEnt("ee_uberschnell_intact", "script_noteworthy");
+  var_01 = getEnt("ee_trig_dmg_uberschnell", "script_noteworthy");
   for(;;) {
     var_01 waittill("damage", var_02, var_03, var_04, var_05, var_06);
     if(var_06 == "MELEE" || var_06 == "MOD_MELEE") {
@@ -1143,7 +1143,7 @@ ee_activate_gas_all_players_wait_for_visions() {
 ee_activate_gas_player_grant_visions() {
   var_00 = self;
   var_00 endon("disconnect");
-  var_01 = getent("ee_trig_dmg_uberschnell", "script_noteworthy");
+  var_01 = getEnt("ee_trig_dmg_uberschnell", "script_noteworthy");
   while(!common_scripts\utility::func_3C77("ee_activate_gas_all_players_in_visions")) {
     if(!common_scripts\utility::func_562E(var_00.invisionstate)) {
       var_02 = distancesquared(var_00.var_116, var_01.var_116);
@@ -1223,7 +1223,7 @@ ee_summon_fish() {
 ee_summon_fish_setup_fish() {
   var_00 = common_scripts\utility::func_46B7("ee_vfx_flopping_fish", "script_noteworthy");
   foreach(var_02 in var_00) {
-    var_02.damagetrigger = getent(var_02.var_1A2, "targetname");
+    var_02.damagetrigger = getEnt(var_02.var_1A2, "targetname");
     var_02.var_3F76 = spawn("script_model", var_02.var_116);
     var_02.var_3F76 setModel("tag_origin");
     var_02.var_3F76.var_1D = var_02.var_1D;
@@ -1339,8 +1339,8 @@ ee_follow_fish_move_to_destination(param_00) {
   var_01 = 75;
   var_02 = distance(self.var_116, param_00.var_116);
   var_03 = var_02 / var_01;
-  self moveto(param_00.var_116, var_03);
-  self rotateto(param_00.var_1D, var_03);
+  self moveTo(param_00.var_116, var_03);
+  self rotateTo(param_00.var_1D, var_03);
   wait(var_03);
 }
 
@@ -1629,7 +1629,7 @@ ee_conquer_fish() {
 }
 
 ee_conquer_fish_setup() {
-  var_00 = getent("ee_conquer_fish_water_plane", "script_noteworthy");
+  var_00 = getEnt("ee_conquer_fish_water_plane", "script_noteworthy");
   var_00 method_805C();
   level.numbucketshuffleassassins = 0;
 }
@@ -1653,11 +1653,11 @@ ee_conquer_fish_void_enter() {
     }
   }
 
-  level.groundrefent rotateto((0, 0, 0), 0.05);
+  level.groundrefent rotateTo((0, 0, 0), 0.05);
   common_scripts\utility::func_3C7B("flag_ship_tilting_enabled");
   var_06 = common_scripts\utility::func_46B7("ee_bucket_shuffle_tp_to_void", "targetname");
   for(var_07 = 0; var_07 < level.var_744A.size; var_07++) {
-    level.var_744A[var_07] setorigin(var_06[var_07].var_116);
+    level.var_744A[var_07] setOrigin(var_06[var_07].var_116);
     level.var_744A[var_07] setangles(var_06[var_07].var_1D);
     thread lib_0547::func_7CF8(level.var_744A[var_07], "void_fading");
   }
@@ -1726,12 +1726,12 @@ ee_conquer_fish_void_setup() {
 }
 
 ee_conquer_fish_void_fall_teleport() {
-  var_00 = getent("void_falling_teleport_trigger", "targetname");
+  var_00 = getEnt("void_falling_teleport_trigger", "targetname");
   var_01 = 0;
   for(;;) {
     var_00 waittill("trigger", var_02);
     if(isPlayer(var_02) && isalive(var_02)) {
-      var_02 setorigin(level.voidfallteleportlocations[var_01].var_116);
+      var_02 setOrigin(level.voidfallteleportlocations[var_01].var_116);
       var_01++;
       if(var_01 >= level.voidfallteleportlocations.size) {
         var_01 = 0;
@@ -1817,7 +1817,7 @@ ee_conquer_fish_void_straub_vignette_init() {
   var_02 setModel("zom_straub_wholebody_dlc");
   var_02.color = spawn("script_model", var_01.var_116);
   var_02.color setModel("zom_head_kier_dirt_org1_dlc");
-  var_02.color linkto(var_02, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  var_02.color linkTo(var_02, "j_spineupper", (0, 0, 0), (0, 0, 0));
   var_03 = undefined;
   switch (var_01.var_165) {
     case "ee_conquer_fish_straub_vignette_one":
@@ -1827,7 +1827,7 @@ ee_conquer_fish_void_straub_vignette_init() {
       var_01.var_9A8E = "npc_zom_med_knife_02";
       var_01.var_778F = getEntArray("ee_conquer_fish_tfr_prop", "script_noteworthy");
       var_01.straubvo = "zmb_dnk_stra_youmustbeklausfriendsthea2";
-      var_01.straubclip = getent("ee_conquer_fish_straub_clip_one", "script_noteworthy");
+      var_01.straubclip = getEnt("ee_conquer_fish_straub_clip_one", "script_noteworthy");
       var_01.straubclip solid();
       var_01 thread ee_conquer_fish_void_straub_vignette_play(var_02);
       var_04 = common_scripts\utility::func_46B7("ee_conquer_fish_tfr_zombie_spawner", "targetname");
@@ -1842,7 +1842,7 @@ ee_conquer_fish_void_straub_vignette_init() {
       var_01.var_9A8E = undefined;
       var_01.var_778F = undefined;
       var_01.straubvo = "zmb_dnk_stra_soyousurvivedthehellofmit_delay";
-      var_01.straubclip = getent("ee_conquer_fish_straub_clip_two", "script_noteworthy");
+      var_01.straubclip = getEnt("ee_conquer_fish_straub_clip_two", "script_noteworthy");
       var_01.straubclip solid();
       var_01 thread ee_conquer_fish_void_straub_vignette_play(var_02);
       var_04 = common_scripts\utility::func_46B7("ee_conquer_fish_tds_zombie_spawner", "targetname");
@@ -1862,7 +1862,7 @@ ee_conquer_fish_void_straub_vignette_init() {
       var_01.var_778F = getEntArray("ee_conquer_fish_vignette_three_prop", "script_noteworthy");
       var_01.straubvo = "zmb_dnk_stra_vidlog_straubdeath1";
       var_01.straubvotwo = "zmb_dnk_stra_vidlog_straubdeath2";
-      var_01.straubclip = getent("ee_conquer_fish_straub_clip_three", "script_noteworthy");
+      var_01.straubclip = getEnt("ee_conquer_fish_straub_clip_three", "script_noteworthy");
       var_01.straubclip solid();
       var_01.straubclip method_8449(var_02);
       var_01 thread ee_conquer_fish_void_straub_vignette_play(var_02, 1);
@@ -1885,7 +1885,7 @@ ee_conquer_fish_void_straub_vignette_play(param_00, param_01) {
   if(isDefined(var_02.var_9A8E)) {
     var_03 = spawn("script_model", var_02.var_116);
     var_03 setModel(var_02.var_9A8E);
-    var_03 linkto(param_00, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
+    var_03 linkTo(param_00, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
     var_02.var_9A8E = var_03;
   }
 
@@ -2041,7 +2041,7 @@ ee_conquer_fish_void_straub_final_vignette_zombies() {
     level.straub_vignette_zombie[var_01].idle_anim_name = "s2_zom_straub_death_end_zom_0" + common_scripts\utility::func_9AAD(var_01 + 1);
     level.straub_vignette_zombie[var_01].color = spawn("script_model", var_00.var_116);
     level.straub_vignette_zombie[var_01].color setModel(common_scripts\utility::func_7A33(["zom_head_fdr02_org1", "zom_head_fdr03_org1", "zom_head_fdr04_org1"]));
-    level.straub_vignette_zombie[var_01].color linkto(level.straub_vignette_zombie[var_01], "j_spineupper", (0, 0, 0), (0, 0, 0));
+    level.straub_vignette_zombie[var_01].color linkTo(level.straub_vignette_zombie[var_01], "j_spineupper", (0, 0, 0), (0, 0, 0));
     level.straub_vignette_zombie[var_01] method_8495(level.straub_vignette_zombie[var_01].animation_name, var_00.var_116, var_00.var_1D);
     level.straub_vignette_zombie[var_01].color method_8495(level.straub_vignette_zombie[var_01].animation_name, var_00.var_116, var_00.var_1D);
   }
@@ -2072,10 +2072,10 @@ ee_conquer_fish_void_straub_final_vignette_flicker() {
 
 ee_conquer_fish_bucket_shuffle_init() {
   level endon("bucket_shuffle_complete");
-  level.bucketfish = getent("ee_bucket_shuffle_fish", "targetname");
+  level.bucketfish = getEnt("ee_bucket_shuffle_fish", "targetname");
   level.bucketfish scriptmodelplayanim("zmb_follow_the_fish_loop", undefined, 0, 0.75);
   thread ee_conquer_fish_bucket_shuffle_fish_float();
-  var_00 = getent("vol_ee_conquer_fish_bucket_shuffle_platform", "targetname");
+  var_00 = getEnt("vol_ee_conquer_fish_bucket_shuffle_platform", "targetname");
   wait_until_all_players_in_volume(var_00);
   level.voidfallteleportlocations = common_scripts\utility::func_46B7("void_tp_platform_final", "targetname");
   wait(1);
@@ -2142,8 +2142,8 @@ ee_conquer_fish_bucket_shuffle_setup_buckets(param_00) {
     level.bucketfish method_805C();
   }
 
-  level.bucketfish moveto(level.chosenbucket.var_116 + (0, 6, 72), 0.1);
-  level.bucketfish rotateto((0, 0, 90), 0.1);
+  level.bucketfish moveTo(level.chosenbucket.var_116 + (0, 6, 72), 0.1);
+  level.bucketfish rotateTo((0, 0, 90), 0.1);
   wait(1.5);
   level.bucketfish thread hallucination_poof_fx(0);
   level.bucketfish method_805B();
@@ -2233,7 +2233,7 @@ ee_conquer_fish_bucket_shuffle_run(param_00, param_01) {
       var_0B = common_scripts\utility::func_7A33(var_08);
       var_08 = common_scripts\utility::func_F93(var_08, var_0B);
       lib_0378::func_8D74("ctf_bucket_move", var_0A, var_02);
-      var_0A moveto(var_0B.var_116, var_02);
+      var_0A moveTo(var_0B.var_116, var_02);
       var_0A thread ee_conquer_fish_bucket_wait_for_damage();
     }
 
@@ -2249,19 +2249,19 @@ ee_conquer_fish_bucket_shuffle_run(param_00, param_01) {
   level.damagedbucket rotatepitch(180, 0.5, 0.2, 0.1);
   wait(0.5);
   if(var_0D == "bucket_shuffle_success") {
-    level.bucketfish moveto(level.damagedbucket.var_116 - (0, -6, 24), 0.05);
-    level.bucketfish rotateto((0, 0, 90), 0.05);
+    level.bucketfish moveTo(level.damagedbucket.var_116 - (0, -6, 24), 0.05);
+    level.bucketfish rotateTo((0, 0, 90), 0.05);
     wait(0.1);
     level.bucketfish method_805B();
     level.bucketfish movez(-12, 0.5);
     wait(0.25);
-    level.bucketfish rotateto((0, 0, 0), 0.5);
+    level.bucketfish rotateTo((0, 0, 0), 0.5);
     wait(1);
     var_0E = 0.25;
     var_0F = 10;
     for(var_10 = 0; var_10 < var_0F; var_10++) {
       lib_0378::func_8D74("ctf_fish_360", level.bucketfish.var_116, var_0E);
-      level.bucketfish rotateyaw(360, var_0E);
+      level.bucketfish rotateYaw(360, var_0E);
       wait(var_0E);
     }
 
@@ -2281,8 +2281,8 @@ ee_conquer_fish_bucket_shuffle_run(param_00, param_01) {
 
   if(var_12 == "bucket_shuffle_fail") {
     wait(2);
-    level.bucketfish moveto(level.chosenbucket.var_116 + (0, -6, 8), 0.05);
-    level.bucketfish rotateto((0, 0, -90), 0.05);
+    level.bucketfish moveTo(level.chosenbucket.var_116 + (0, -6, 8), 0.05);
+    level.bucketfish rotateTo((0, 0, -90), 0.05);
     wait(0.1);
     level.bucketfish method_805B();
     level.bucketfish movez(72, 0.6, 0, 0.5);
@@ -2374,7 +2374,7 @@ ee_conquer_fish_exit_void() {
   common_scripts\utility::func_3C8F("flag_ee_altered_state_finished");
   var_03 = common_scripts\utility::func_46B7("ee_bucket_shuffle_tp_to_ship", "targetname");
   for(var_04 = 0; var_04 < level.var_744A.size; var_04++) {
-    level.var_744A[var_04] setorigin(var_03[var_04].var_116);
+    level.var_744A[var_04] setOrigin(var_03[var_04].var_116);
     level.var_744A[var_04] setangles(var_03[var_04].var_1D);
     level.var_744A[var_04] notify("altered_state_end");
     level.var_744A[var_04] maps\mp\zombies\shotgun\_zombies_shotgun_gamemode_utility::altered_state_end_overlay(1);
@@ -2400,7 +2400,7 @@ ee_conquer_fish_exit_void_failsafe() {
       if(lib_055A::func_7413(var_02, "zone_the_void")) {
         var_03 = common_scripts\utility::func_46B7("ee_bucket_shuffle_tp_to_ship", "targetname");
         var_04 = common_scripts\utility::func_7A33(var_03);
-        var_02 setorigin(var_04.var_116);
+        var_02 setOrigin(var_04.var_116);
         var_02 setangles(var_04.var_1D);
       }
     }
@@ -2458,10 +2458,10 @@ ee_get_part_think() {
     var_02 method_805B();
   }
 
-  var_04 = getent("ee_get_part_sword_part", "script_noteworthy");
+  var_04 = getEnt("ee_get_part_sword_part", "script_noteworthy");
   level thread maps\mp\zombies\weapons\_zombie_dlc3_melee::sword_post_ee_complete_handler();
-  var_05 = getent("ee_trig_get_part_sword_part", "targetname");
-  var_05 sethintstring(&"ZOMBIE_DLC3_PICKUP_PART_3");
+  var_05 = getEnt("ee_trig_get_part_sword_part", "targetname");
+  var_05 setHintString(&"ZOMBIE_DLC3_PICKUP_PART_3");
   var_05 waittill("trigger", var_06);
   if(!common_scripts\utility::func_F79(var_06 getweaponslistall(), "island_grenade_hc_zm")) {
     level thread maps\mp\zombies\_zombies_magicbox::func_A7D5(var_06, "island_grenade_hc_zm", undefined);
@@ -2472,7 +2472,7 @@ ee_get_part_think() {
 }
 
 ee_get_part_grant_pomel_grenade() {
-  var_00 = getent("ee_trig_get_part_sword_part", "targetname");
+  var_00 = getEnt("ee_trig_get_part_sword_part", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!common_scripts\utility::func_F79(var_01 getweaponslistall(), "island_grenade_hc_zm")) {

@@ -235,7 +235,7 @@ function function_59d4fec2() {
   level flag::wait_till("connect_rooftops_to_destroyed_upper_floors");
   scene::add_scene_func(#"p9_fxanim_zm_platinum_zipline_bundle", &function_88c5fdab, "play");
   level flag::set("enable_destroyed_upper_zone");
-  var_25e85afd = array(getent("connect_rooftops_to_destroyed_upper_floors", "script_flag"), getent("connect_destroyed_upper_floors_to_rooftops", "script_flag"));
+  var_25e85afd = array(getEnt("connect_rooftops_to_destroyed_upper_floors", "script_flag"), getEnt("connect_destroyed_upper_floors_to_rooftops", "script_flag"));
   array::thread_all(var_25e85afd, &function_eb29ebc0);
 
   foreach(e_door in var_659010cf) {
@@ -259,7 +259,7 @@ function function_fc7b3c20() {
   level flag::wait_till("connect_hotel_zone");
   zm_zonemgr::enable_zone("zone_east_berlin_hotel_1");
   zm_zonemgr::enable_zone("zone_east_berlin_hotel_2");
-  var_25e85afd = array(getent("connect_east_berlin_hotel_to_rooftops_interior", "script_flag"), getent("connect_rooftops_interior_to_east_berlin_hotel", "script_flag"));
+  var_25e85afd = array(getEnt("connect_east_berlin_hotel_to_rooftops_interior", "script_flag"), getEnt("connect_rooftops_interior_to_east_berlin_hotel", "script_flag"));
   array::thread_all(var_25e85afd, &function_eb29ebc0);
   level flag::wait_till("connect_rooftops_interior_to_east_berlin_hotel");
 
@@ -284,7 +284,7 @@ function function_6453e9bd() {
   level flag::wait_till("connect_korber_roof_to_destroyed_upper_floors");
   level flag::set("enable_korber_zone");
   level flag::set("enable_destroyed_upper_zone");
-  var_25e85afd = array(getent("connect_destroyed_upper_floors_to_korber_roof", "script_flag"), getent("connect_korber_roof_to_destroyed_upper_floors", "script_flag"));
+  var_25e85afd = array(getEnt("connect_destroyed_upper_floors_to_korber_roof", "script_flag"), getEnt("connect_korber_roof_to_destroyed_upper_floors", "script_flag"));
   array::thread_all(var_25e85afd, &function_eb29ebc0);
 
   foreach(e_door in var_659010cf) {

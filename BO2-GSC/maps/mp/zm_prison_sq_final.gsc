@@ -33,7 +33,7 @@ stage_one() {
   flag_wait("spoon_obtained");
   flag_wait("warden_blundergat_obtained");
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player.fq_client_hint = newclienthudelem(player);
@@ -48,7 +48,7 @@ stage_one() {
   }
 
   for(i = 1; i < 4; i++) {
-    m_nixie_tube = getent("nixie_tube_" + i, "targetname");
+    m_nixie_tube = getEnt("nixie_tube_" + i, "targetname");
     m_nixie_tube thread nixie_tube_scramble_protected_effects(i);
   }
 
@@ -60,13 +60,13 @@ stage_one() {
   level waittill_multiple("nixie_final_" + 386, "nixie_final_" + 481, "nixie_final_" + 101, "nixie_final_" + 872);
   nixie_tube_off();
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player.fq_client_hint destroy();
   }
 
-  m_nixie_tube = getent("nixie_tube_1", "targetname");
+  m_nixie_tube = getEnt("nixie_tube_1", "targetname");
   m_nixie_tube playsoundwithnotify("vox_brutus_nixie_right_0", "scary_voice");
   m_nixie_tube waittill("scary_voice");
   wait 3;
@@ -74,7 +74,7 @@ stage_one() {
 }
 
 sq_final_easy_cleanup() {
-  t_plane_fly_afterlife = getent("plane_fly_afterlife_trigger", "script_noteworthy");
+  t_plane_fly_afterlife = getEnt("plane_fly_afterlife_trigger", "script_noteworthy");
   t_plane_fly_afterlife delete();
 }
 
@@ -83,7 +83,7 @@ nixie_tube_off() {
   wait 1;
 
   for(i = 1; i < 4; i++) {
-    m_nixie_tube = getent("nixie_tube_" + i, "targetname");
+    m_nixie_tube = getEnt("nixie_tube_" + i, "targetname");
 
     for(j = 0; j < 10; j++) {
       m_nixie_tube hidepart("J_" + j);
@@ -129,7 +129,7 @@ nixie_tube_scramble_protected_effects(n_tube_index) {
 }
 
 nixie_final_audio_cue_code() {
-  m_nixie_tube = getent("nixie_tube_1", "targetname");
+  m_nixie_tube = getEnt("nixie_tube_1", "targetname");
   m_nixie_tube playsoundwithnotify("vox_brutus_nixie_right_0", "scary_voice");
   m_nixie_tube waittill("scary_voice");
 }
@@ -148,9 +148,9 @@ nixie_tube_win_effects_all_tubes_final(goal_num_1, goal_num_2, goal_num_3) {
   }
 
   a_nixie_tube = [];
-  a_nixie_tube[1] = getent("nixie_tube_1", "targetname");
-  a_nixie_tube[2] = getent("nixie_tube_2", "targetname");
-  a_nixie_tube[3] = getent("nixie_tube_3", "targetname");
+  a_nixie_tube[1] = getEnt("nixie_tube_1", "targetname");
+  a_nixie_tube[2] = getEnt("nixie_tube_2", "targetname");
+  a_nixie_tube[3] = getEnt("nixie_tube_3", "targetname");
   n_off_tube = 1;
 
   for(start_time = 0; start_time < 2; start_time = start_time + 0.15) {
@@ -245,12 +245,12 @@ stage_two() {
   }
 
   level.m_headphones delete();
-  t_plane_fly_afterlife = getent("plane_fly_afterlife_trigger", "script_noteworthy");
+  t_plane_fly_afterlife = getEnt("plane_fly_afterlife_trigger", "script_noteworthy");
   t_plane_fly_afterlife playSound("zmb_easteregg_laugh");
   trigger_is_on = 0;
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size > 1) {
       arlington_is_present = 0;
@@ -281,13 +281,13 @@ headphones_rotate() {
   self endon("death");
 
   while(true) {
-    self rotateyaw(360, 3);
+    self rotateYaw(360, 3);
     self waittill("rotatedone");
   }
 }
 
 play_sq_audio_log(num, a_vo, b_use_trig) {
-  v_pos = getstruct("sq_at_" + num, "targetname").origin;
+  v_pos = getStruct("sq_at_" + num, "targetname").origin;
 
   if(!isDefined(level.m_headphones)) {
     level.m_headphones = spawn("script_model", v_pos);
@@ -310,7 +310,7 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
 
   level.m_headphones trigger_off();
   level setclientfield("toggle_futz", 1);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_audio_log", player);
@@ -323,7 +323,7 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
   }
 
   level setclientfield("toggle_futz", 0);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_audio_log", player);
@@ -331,15 +331,15 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
 }
 
 final_flight_setup() {
-  t_plane_fly_afterlife = getent("plane_fly_afterlife_trigger", "script_noteworthy");
+  t_plane_fly_afterlife = getEnt("plane_fly_afterlife_trigger", "script_noteworthy");
   t_plane_fly_afterlife thread final_flight_trigger();
   t_plane_fly_afterlife trigger_off();
 }
 
 final_flight_trigger() {
-  t_plane_fly = getent("plane_fly_trigger", "targetname");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring("");
+  t_plane_fly = getEnt("plane_fly_trigger", "targetname");
+  self setCursorHint("HINT_NOICON");
+  self setHintString("");
 
   while(isDefined(self)) {
     self waittill("trigger", e_triggerer);
@@ -353,7 +353,7 @@ final_flight_trigger() {
         }
       }
 
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size < 2) {
         continue;
@@ -410,26 +410,26 @@ final_flight_player_thread() {
   a_nml_teleport_targets = [];
 
   for(i = 1; i < 6; i++) {
-    a_nml_teleport_targets[i - 1] = getstruct("nml_telepoint_" + i, "targetname");
+    a_nml_teleport_targets[i - 1] = getStruct("nml_telepoint_" + i, "targetname");
   }
 
   self.n_passenger_index = level.final_flight_players.size;
   a_players = [];
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size == 1) {
     self.n_passenger_index = 1;
   }
 
-  m_plane_craftable = getent("plane_craftable", "targetname");
-  m_plane_about_to_crash = getent("plane_about_to_crash", "targetname");
+  m_plane_craftable = getEnt("plane_craftable", "targetname");
+  m_plane_about_to_crash = getEnt("plane_about_to_crash", "targetname");
   m_plane_about_to_crash ghost();
-  veh_plane_flyable = getent("plane_flyable", "targetname");
+  veh_plane_flyable = getEnt("plane_flyable", "targetname");
   veh_plane_flyable show();
   flag_set("plane_boarded");
-  t_plane_fly = getent("plane_fly_trigger", "targetname");
+  t_plane_fly = getEnt("plane_fly_trigger", "targetname");
   str_hint_string = "BOARD FINAL FLIGHT";
-  t_plane_fly sethintstring(str_hint_string);
+  t_plane_fly setHintString(str_hint_string);
   self playerlinktodelta(m_plane_craftable, "tag_player_crouched_" + (self.n_passenger_index + 1));
   self allowcrouch(1);
   self allowstand(0);
@@ -461,8 +461,8 @@ final_flight_player_thread() {
   self setstance("stand");
   self allowcrouch(0);
   flag_clear("spawn_zombies");
-  self setorigin(a_nml_teleport_targets[self.n_passenger_index].origin);
-  e_poi = getstruct("plane_crash_poi", "targetname");
+  self setOrigin(a_nml_teleport_targets[self.n_passenger_index].origin);
+  e_poi = getStruct("plane_crash_poi", "targetname");
   vec_to_target = e_poi.origin - self.origin;
   vec_to_target = vectortoangles(vec_to_target);
   vec_to_target = (0, vec_to_target[1], 0);
@@ -480,7 +480,7 @@ stage_final() {
 
   while(isDefined(b_everyone_alive) && !b_everyone_alive) {
     b_everyone_alive = 1;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(isDefined(player.afterlife) && player.afterlife) {
@@ -493,10 +493,10 @@ stage_final() {
 
   level._should_skip_ignore_player_logic = ::final_showdown_zombie_logic;
   flag_set("spawn_zombies");
-  array_func(getplayers(), maps\mp\zombies\_zm_afterlife::afterlife_remove);
+  array_func(getPlayers(), maps\mp\zombies\_zm_afterlife::afterlife_remove);
   p_weasel = undefined;
   a_player_team = [];
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player.dontspeak = 1;
@@ -524,21 +524,21 @@ stage_final() {
       player.health = player.maxhealth;
     }
 
-    s_start_point = getstruct("final_fight_starting_point_weasel", "targetname");
+    s_start_point = getStruct("final_fight_starting_point_weasel", "targetname");
 
     if(isDefined(p_weasel) && isDefined(s_start_point)) {
       playFX(level._effect["afterlife_teleport"], p_weasel.origin);
-      p_weasel setorigin(s_start_point.origin);
+      p_weasel setOrigin(s_start_point.origin);
       p_weasel setplayerangles(s_start_point.angles);
       playFX(level._effect["afterlife_teleport"], p_weasel.origin);
     }
 
     for(i = 0; i < a_player_team.size; i++) {
-      s_start_point = getstruct("final_fight_starting_point_hero_" + (i + 1), "targetname");
+      s_start_point = getStruct("final_fight_starting_point_hero_" + (i + 1), "targetname");
 
       if(isDefined(a_player_team[i]) && isDefined(s_start_point)) {
         playFX(level._effect["afterlife_teleport"], a_player_team[i].origin);
-        a_player_team[i] setorigin(s_start_point.origin);
+        a_player_team[i] setOrigin(s_start_point.origin);
         a_player_team[i] setplayerangles(s_start_point.angles);
         playFX(level._effect["afterlife_teleport"], a_player_team[i].origin);
       }
@@ -567,7 +567,7 @@ stage_final() {
   wait 2;
 
   if(level.winner == "weasel") {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player freezecontrols(1);
@@ -576,13 +576,13 @@ stage_final() {
       player create_ending_message(&"ZM_PRISON_GOOD");
       player.client_hint.sort = 55;
       player.client_hint.color = (0, 0, 0);
-      playsoundatposition("zmb_quest_final_white_good", (0, 0, 0));
+      playSoundAtPosition("zmb_quest_final_white_good", (0, 0, 0));
       level.sndgameovermusicoverride = "game_over_final_good";
     }
 
     level.custom_intermission = ::player_intermission_bridge;
   } else {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player freezecontrols(1);
@@ -591,13 +591,13 @@ stage_final() {
       player create_ending_message(&"ZM_PRISON_BAD");
       player.client_hint.sort = 55;
       player.client_hint.color = (0, 0, 0);
-      playsoundatposition("zmb_quest_final_white_bad", (0, 0, 0));
+      playSoundAtPosition("zmb_quest_final_white_bad", (0, 0, 0));
       level.sndgameovermusicoverride = "game_over_final_bad";
     }
   }
 
   wait 5;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player.client_hint)) {
@@ -659,7 +659,7 @@ final_showdown_track_team(a_player_team) {
 }
 
 final_showdown_zombie_logic() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player.character_name == "Arlington") {
@@ -829,7 +829,7 @@ player_intermission_bridge() {
           speed = points[i].speed;
         }
 
-        target_point = getstruct(points[i].target, "targetname");
+        target_point = getStruct(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
@@ -840,8 +840,8 @@ player_intermission_bridge() {
 
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
-        org moveto(target_point.origin, time, q_time, q_time);
-        org rotateto(target_point.angles, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait(time - q_time);
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 1;

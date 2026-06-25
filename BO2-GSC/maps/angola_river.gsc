@@ -37,13 +37,13 @@ init_heroes() {
 setup_level() {
   level.player thread maps\createart\angola_art::river();
   level.barge_spawners = [];
-  level.barge_spawners[0] = getent("river_barge_convoy_2_guards_assault", "targetname");
-  level.barge_spawners[1] = getent("river_barge_convoy_2_guards_assault", "targetname");
+  level.barge_spawners[0] = getEnt("river_barge_convoy_2_guards_assault", "targetname");
+  level.barge_spawners[1] = getEnt("river_barge_convoy_2_guards_assault", "targetname");
   level.max_river_heli_speed = 65;
-  level.main_barge = getent("main_barge", "targetname");
-  level.escort_boat = getent("main_convoy_escort_boat_medium_1", "targetname");
-  level.escort_boat_2 = getent("main_convoy_escort_boat_medium_2", "targetname");
-  level.escort_boat_3 = getent("main_convoy_escort_boat_medium_4", "targetname");
+  level.main_barge = getEnt("main_barge", "targetname");
+  level.escort_boat = getEnt("main_convoy_escort_boat_medium_1", "targetname");
+  level.escort_boat_2 = getEnt("main_convoy_escort_boat_medium_2", "targetname");
+  level.escort_boat_3 = getEnt("main_convoy_escort_boat_medium_4", "targetname");
   level.escort_boat_small = getEntArray("main_convoy_escort_boat_small", "targetname");
   level.boarding_vo_playing = 0;
   level.overrideactordamage = ::actor_turret_damage_override;
@@ -105,10 +105,10 @@ setup_hudson_heli(player_driver) {
   }
 
   vh_river_heli = spawn_vehicle_from_targetname("river_player_heli");
-  vh_river_heli.player_transfer_location = getent("heli_transfer_player_location", "targetname");
-  vh_river_heli.rpg_target = getent("heli_target_origin", "targetname");
-  vh_river_heli.rpg_target linkto(vh_river_heli, "tag_origin", (800, 0, -100));
-  vh_river_heli.player_transfer_location linkto(vh_river_heli, "tag_origin", vectorscale((0, 0, -1), 100.0));
+  vh_river_heli.player_transfer_location = getEnt("heli_transfer_player_location", "targetname");
+  vh_river_heli.rpg_target = getEnt("heli_target_origin", "targetname");
+  vh_river_heli.rpg_target linkTo(vh_river_heli, "tag_origin", (800, 0, -100));
+  vh_river_heli.player_transfer_location linkTo(vh_river_heli, "tag_origin", vectorscale((0, 0, -1), 100.0));
   vh_river_heli setmovingplatformenabled(1);
   vh_river_heli thread veh_magic_bullet_shield(1);
   playFXOnTag(level._effect["heli_trail"], vh_river_heli, "tag_origin");
@@ -136,7 +136,7 @@ match_origin(other_ent) {
 
 river_intro() {
   level.player thread take_and_giveback_weapons("give_player_weapon_back", 0);
-  main_barge = getent("main_barge", "targetname");
+  main_barge = getEnt("main_barge", "targetname");
   main_barge.animname = "main_barge";
   level.player setclientdvar("r_waterSheetingFX_allowed", 0);
   wait 2;
@@ -146,7 +146,7 @@ river_intro() {
   set_objective(level.obj_secure_the_barge);
   timer = getanimlength(%ch_ang_05_01_rundown_intro_player);
   wait(timer - 9.85);
-  vh_heli = getent("river_player_heli", "targetname");
+  vh_heli = getEnt("river_player_heli", "targetname");
   fake_fire_origin = getEntArray("fake_fire_origin", "targetname");
   magicbullet("rpg_magic_bullet_sp_angola", fake_fire_origin[0].origin, vh_heli.origin, level.main_barge, vh_heli, (400, -512, -140));
   level thread heli_alarm_on();
@@ -164,12 +164,12 @@ river_intro() {
 
 hudson_heli_think() {
   path_node_start_heli = getvehiclenode("heli_start_node", "targetname");
-  vh_heli = getent("river_player_heli", "targetname");
+  vh_heli = getEnt("river_player_heli", "targetname");
   vh_heli hidepart("tag_weapons_pod");
   vh_heli hidepart("Tag_gunner_barrel2");
   vh_heli hidepart("Tag_gunner_barrel4");
   vh_heli attach("veh_t6_air_alouette_dmg_att", "tag_origin");
-  level.hudson linkto(vh_heli, "tag_driver");
+  level.hudson linkTo(vh_heli, "tag_driver");
   level thread run_scene("heli_attack_hudson_idle");
   level.player playrumblelooponentity("angola_hind_ride");
   vh_heli thread go_path(path_node_start_heli);
@@ -180,8 +180,8 @@ hudson_heli_think() {
 
 heli_jump() {
   level.player.ignoreme = 1;
-  main_barge = getent("main_barge", "targetname");
-  m_jumpto_spot = getent("barge_jumpto_obj_spot", "targetname");
+  main_barge = getEnt("main_barge", "targetname");
+  m_jumpto_spot = getEnt("barge_jumpto_obj_spot", "targetname");
   m_jumpto_spot.use_obj_offset = vectorscale((0, 0, 1), 64.0);
   set_objective(level.obj_secure_the_barge, m_jumpto_spot, "jump");
   level.player enableweapons();
@@ -203,20 +203,20 @@ heli_jump() {
   set_objective(level.obj_secure_the_barge, m_jumpto_spot, "remove");
   level notify("player_jumped");
   stopallrumbles();
-  level.hudson linkto(main_barge);
+  level.hudson linkTo(main_barge);
   end_scene("heli_hold_steady");
-  spawners = getent("river_barge_convoy_2_guards_assault", "targetname");
+  spawners = getEnt("river_barge_convoy_2_guards_assault", "targetname");
   machete_dude = simple_spawn_single(spawners);
   machete_dude thread magic_bullet_shield();
   machete_dude.animname = "machete_dude";
   createstreamermodelhint(machete_dude.model, 8.0);
   machete_dude attach("t6_wpn_machete_prop", "tag_weapon_left");
   machete_dude thread remove_machete_prop();
-  machete_dude linkto(main_barge);
+  machete_dude linkTo(main_barge);
   machete_dude thread stop_magic_bullet_shield();
   level thread run_scene("machete_jump");
   fake_body notify("stop_match_origin");
-  fake_body linkto(main_barge);
+  fake_body linkTo(main_barge);
   main_barge thread anim_single_aligned(fake_body, "player_jump_on_boat");
   fake_body show();
   level.player playerlinktoabsolute(fake_body, "tag_player");
@@ -227,7 +227,7 @@ heli_jump() {
   level.hudson gun_recall();
   level clientnotify("alouette_jumped");
   level thread maps\_audio::switch_music_wait("ANGOLA_MACHETE", 0.5);
-  vh_heli = getent("river_player_heli", "targetname");
+  vh_heli = getEnt("river_player_heli", "targetname");
   vh_heli thread heli_crash_audio();
   vh_heli play_fx("heli_fire", vh_heli.origin, vh_heli.angles, undefined, 1, "tag_origin");
   main_barge waittill("player_jump_on_boat");
@@ -407,7 +407,7 @@ fire_machine_gun_on(target) {
 }
 
 fail_player_for_not_jumping() {
-  trigger = getent("heli_jump_trigger", "targetname");
+  trigger = getEnt("heli_jump_trigger", "targetname");
   trigger endon("trigger");
   missile_fired = 0;
 
@@ -415,7 +415,7 @@ fail_player_for_not_jumping() {
     wait 0.05;
   }
 
-  vh_heli = getent("river_player_heli", "targetname");
+  vh_heli = getEnt("river_player_heli", "targetname");
   playFXOnTag(getfx("intro_heli_missle_exp"), vh_heli, "tag_origin");
   wait 0.5;
   level.player kill();
@@ -423,7 +423,7 @@ fail_player_for_not_jumping() {
 
 heli_crash_audio() {
   fake_heli_snd = spawn("script_origin", self.origin);
-  fake_heli_snd linkto(self);
+  fake_heli_snd linkTo(self);
   fake_heli_snd playLoopSound("evt_heli_crash_loop", 1.5);
   wait 1;
   fake_heli_snd playSound("evt_heli_crash");
@@ -437,20 +437,20 @@ heli_crash_audio() {
 
 barge_audio(alias) {
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent linkto(self);
+  sound_ent linkTo(self);
   sound_ent playLoopSound(alias, 0.05);
   sound_ent_back = spawn("script_origin", self.origin);
-  sound_ent_back linkto(self, "tag_origin", vectorscale((1, 0, 0), 400.0));
+  sound_ent_back linkTo(self, "tag_origin", vectorscale((1, 0, 0), 400.0));
   sound_ent_back playLoopSound("veh_barge2_motor_high_plr", 0.05);
   sound_ent_back thread swap_engine_sound();
   sound_ent_side_left = spawn("script_origin", self.origin);
-  sound_ent_side_left linkto(self, "tag_origin", (-500, 400, 0));
+  sound_ent_side_left linkTo(self, "tag_origin", (-500, 400, 0));
   sound_ent_side_left playLoopSound("veh_barge2_water_side_left", 0.05);
   sound_ent_side_right = spawn("script_origin", self.origin);
-  sound_ent_side_right linkto(self, "tag_origin", (-500, -400, 0));
+  sound_ent_side_right linkTo(self, "tag_origin", (-500, -400, 0));
   sound_ent_side_right playLoopSound("veh_barge2_water_side_right", 0.05);
   sound_ent_back_water = spawn("script_origin", self.origin);
-  sound_ent_back_water linkto(self, "tag_origin", vectorscale((-1, 0, 0), 800.0));
+  sound_ent_back_water linkTo(self, "tag_origin", vectorscale((-1, 0, 0), 800.0));
   sound_ent_back_water playLoopSound("veh_barge2_water_back", 0.05);
   level thread barge_sound_cleanup();
   level waittill("stop_boat_audio");
@@ -478,7 +478,7 @@ magic_missile_turret() {
   self endon("delete");
   self.v_my_boat endon("death");
   self.v_my_boat endon("delete");
-  fire_from = getent(self.target, "targetname");
+  fire_from = getEnt(self.target, "targetname");
 
   while(true) {
     random = randomint(10);
@@ -591,7 +591,7 @@ unlink_from_barge_on_death() {
   self waittill("explosive_death");
   self.origin = self.origin - vectorscale((0, 0, 1), 50.0);
   smoke_tag = spawn_model("tag_origin", self.origin, self.angles);
-  smoke_tag linkto(self);
+  smoke_tag linkTo(self);
   smoke_tag play_fx("small_boat_smoke_trail", smoke_tag.origin, smoke_tag.angles, undefined, 1, "tag_origin");
   run_scene(self.death_animation);
   wait 5;
@@ -605,7 +605,7 @@ signature_death() {
   level thread run_scene("signature_gunboat_death");
   level thread run_scene("signature_small_gunboat_death");
   smoke_tag = spawn_model("tag_origin", self.origin, self.angles);
-  smoke_tag linkto(self);
+  smoke_tag linkTo(self);
   smoke_tag play_fx("small_boat_smoke_trail", smoke_tag.origin, smoke_tag.angles, undefined, 1, "tag_origin");
   wait 5;
   smoke_tag delete();
@@ -665,7 +665,7 @@ boat_convoy_setup() {
 }
 
 convoy_boat_spawn(str_boat_spawner_targetname, v_path_offset, n_gunner_count) {
-  s_origin = getstruct("river_small_boat_spawn", "targetname");
+  s_origin = getStruct("river_small_boat_spawn", "targetname");
   vh_boat = spawn_vehicle_from_targetname(str_boat_spawner_targetname);
   vh_boat setspeed(5);
   vh_boat.origin = s_origin.origin;
@@ -699,7 +699,7 @@ convoy_boat_add_driver() {
   v_origin = getstartorigin(v_tag_origin, v_tag_angles, level.scr_anim["enemy_ai_driver"][str_anim][0]);
   v_angles = getstartangles(v_tag_origin, v_tag_angles, level.scr_anim["enemy_ai_driver"][str_anim][0]);
   ai_driver forceteleport(v_origin, v_angles);
-  ai_driver linkto(self, "tag_origin");
+  ai_driver linkTo(self, "tag_origin");
   ai_driver thread maps\angola_barge::kill_on_boat_death(self);
   ai_driver thread watch_driver_death(self);
   self thread anim_loop_aligned(ai_driver, str_anim, "tag_origin");
@@ -737,7 +737,7 @@ convoy_boat_add_rpg_guy() {
   v_angles = self gettagangles("tag_enter_gunner2");
   ai_guy.overrideactordamage = ::boat_gunner_damage_override;
   ai_guy forceteleport(v_origin, v_angles);
-  ai_guy linkto(self, "tag_enter_gunner2");
+  ai_guy linkTo(self, "tag_enter_gunner2");
   self.gunner[1] = ai_guy;
   ai_guy thread maps\angola_barge::kill_on_boat_death(self);
 }
@@ -765,7 +765,7 @@ setup_and_anim_crane(str_crane_tag, n_crane, str_noteworthy) {
   n_origin = level.main_barge gettagorigin(str_crane_tag);
   n_angles = level.main_barge gettagangles(str_crane_tag);
   crane_model = spawn_model("fxanim_angola_barge_crane_mod", n_origin, n_angles);
-  crane_model linkto(level.main_barge, str_crane_tag);
+  crane_model linkTo(level.main_barge, str_crane_tag);
   crane_model.animname = "barge_crane_" + n_crane;
   crane_model.targetname = "barge_crane_" + n_crane;
 
@@ -785,7 +785,7 @@ setup_and_anim_crane(str_crane_tag, n_crane, str_noteworthy) {
 
 destroy_rear_crane() {
   wait 1;
-  m_crane = getent("rear_crane", "script_noteworthy");
+  m_crane = getEnt("rear_crane", "script_noteworthy");
   m_crane setCanDamage(1);
   level waittill("gunboat_ram_left");
   end_scene("crane_loop_idle_2");
@@ -799,7 +799,7 @@ setup_barge_side_panel(str_tag) {
   n_origin = level.main_barge gettagorigin(str_tag);
   n_angles = level.main_barge gettagangles(str_tag);
   m_panel = spawn_model("fxanim_angola_barge_side_panel_mod", n_origin, n_angles);
-  m_panel linkto(level.main_barge, str_tag);
+  m_panel linkTo(level.main_barge, str_tag);
   m_panel setCanDamage(1);
   m_panel thread panel_delete_in_container();
 
@@ -839,14 +839,14 @@ panel_delete_in_container() {
 setup_boat_goal_sets() {
   level.boat_goal_sets = [];
   level.boat_goal_sets["med_boat_1"] = [];
-  level.boat_goal_sets["med_boat_1"][0] = getent("boat_goal_set_m1f", "script_noteworthy");
-  level.boat_goal_sets["med_boat_1"]["left"] = getent("boat_goal_set_m1b", "script_noteworthy");
+  level.boat_goal_sets["med_boat_1"][0] = getEnt("boat_goal_set_m1f", "script_noteworthy");
+  level.boat_goal_sets["med_boat_1"]["left"] = getEnt("boat_goal_set_m1b", "script_noteworthy");
   level.boat_goal_sets["med_boat_2"] = [];
-  level.boat_goal_sets["med_boat_2"]["small_boat"] = getent("boat_goal_set_m2f", "script_noteworthy");
-  level.boat_goal_sets["med_boat_2"]["right"] = getent("boat_goal_set_m2b", "script_noteworthy");
-  level.boat_goal_sets["med_boat_2"]["left"] = getent("boat_goal_set_m1b", "script_noteworthy");
-  level.boat_goal_sets["med_boat_2"]["frontleft"] = getent("boat_goal_set_frontleft", "script_noteworthy");
-  level.boat_goal_sets["med_boat_2"]["frontright"] = getent("boat_goal_set_frontright", "script_noteworthy");
+  level.boat_goal_sets["med_boat_2"]["small_boat"] = getEnt("boat_goal_set_m2f", "script_noteworthy");
+  level.boat_goal_sets["med_boat_2"]["right"] = getEnt("boat_goal_set_m2b", "script_noteworthy");
+  level.boat_goal_sets["med_boat_2"]["left"] = getEnt("boat_goal_set_m1b", "script_noteworthy");
+  level.boat_goal_sets["med_boat_2"]["frontleft"] = getEnt("boat_goal_set_frontleft", "script_noteworthy");
+  level.boat_goal_sets["med_boat_2"]["frontright"] = getEnt("boat_goal_set_frontright", "script_noteworthy");
 }
 
 goal_set_logic_small(s_goal_set) {
@@ -905,9 +905,9 @@ get_player_on_barge() {
   wait 5;
   trigger_wait("boat_ram_player_jump_trigger");
   level.jumped_to_barge = 1;
-  player_jump_origin = getent("player_barge_jump_origin", "targetname");
+  player_jump_origin = getEnt("player_barge_jump_origin", "targetname");
   level.player setplayerangles(player_jump_origin.angles);
-  level.player setorigin(level.player.origin + anglesToForward(player_jump_origin.angles) * 75);
+  level.player setOrigin(level.player.origin + anglesToForward(player_jump_origin.angles) * 75);
 }
 
 player_fails_to_jump_to_barge() {
@@ -953,7 +953,7 @@ barge_chase_boats(start_origin) {
     boat.origin = new_pos;
     delta = level.escort_boat.origin - boat.origin;
     delta = (delta[0], delta[1], 0);
-    yaw = vectortoangles(vectornormalize(delta))[1];
+    yaw = vectortoangles(vectorNormalize(delta))[1];
     boat setphysangles((0, yaw, 0));
     boat thread barge_chase_boat_think(offsets[i], i);
     wait 1.0;
@@ -965,7 +965,7 @@ barge_chase_boats(start_origin) {
   boat thread watch_boat_hmg_death();
   delta = level.escort_boat.origin - boat.origin;
   delta = (delta[0], delta[1], 0);
-  yaw = vectortoangles(vectornormalize(delta))[1];
+  yaw = vectortoangles(vectorNormalize(delta))[1];
   boat setphysangles((0, yaw, 0));
   boat thread barge_chase_boat_think((0, 0, 0), 2);
 }
@@ -1043,43 +1043,43 @@ clean_up_barge_ents() {
   array_delete(boat_goals);
   hind_fly_path = getEntArray("hind_fly_path", "targetname");
   array_delete(boat_goals);
-  hind_start_path = getent("heli_destination_start", "targetname");
+  hind_start_path = getEnt("heli_destination_start", "targetname");
 
   if(isDefined(hind_start_path)) {
     hind_start_path delete();
   }
 
-  heli_jump_trigger = getent("heli_jump_trigger", "targetname");
+  heli_jump_trigger = getEnt("heli_jump_trigger", "targetname");
 
   if(isDefined(heli_jump_trigger)) {
     heli_jump_trigger delete();
   }
 
-  side_damage_clip = getent("side_damage_clip", "targetname");
+  side_damage_clip = getEnt("side_damage_clip", "targetname");
 
   if(isDefined(side_damage_clip)) {
     side_damage_clip delete();
   }
 
-  rear_damage_clip = getent("rear_damage_clip", "targetname");
+  rear_damage_clip = getEnt("rear_damage_clip", "targetname");
 
   if(isDefined(rear_damage_clip)) {
     rear_damage_clip delete();
   }
 
-  trigger = getent("trigger_ammo_refill", "script_noteworthy");
+  trigger = getEnt("trigger_ammo_refill", "script_noteworthy");
 
   if(isDefined(trigger)) {
     trigger delete();
   }
 
-  clip = getent("ammo_refill_clip", "targetname");
+  clip = getEnt("ammo_refill_clip", "targetname");
 
   if(isDefined(clip)) {
     clip delete();
   }
 
-  model = getent("ammo_crate_model", "targetname");
+  model = getEnt("ammo_crate_model", "targetname");
 
   if(isDefined(model)) {
     model delete();
@@ -1104,8 +1104,8 @@ barge_link_model(str_ent_name) {
   }
 
   foreach(e_ent in a_ent) {
-    e_ent enablelinkto();
-    e_ent linkto(self);
+    e_ent enablelinkTo();
+    e_ent linkTo(self);
     e_ent setmovingplatformenabled(1);
 
     if(isDefined(e_ent.script_string) && e_ent.script_string == "not_solid") {
@@ -1117,7 +1117,7 @@ barge_link_model(str_ent_name) {
 setup_barge(start_node, path_start_delay) {
   self thread barge_audio("veh_barge2_engine_high_plr");
   self.b_no_speed_match = 1;
-  m_collectible = getent("barge_collectible", "script_noteworthy");
+  m_collectible = getEnt("barge_collectible", "script_noteworthy");
 
   if(isDefined(m_collectible)) {
     m_collectible.trigger.script_noteworthy = "barge_collectible_trig";
@@ -1158,11 +1158,11 @@ setup_barge(start_node, path_start_delay) {
   cables.angles = level.main_barge.angles;
   cables.animname = "barge_wheel_house_cables";
   cables.targetname = "barge_wheel_house_cables";
-  cables linkto(level.main_barge);
+  cables linkTo(level.main_barge);
   level thread run_scene("barge_cable_loop");
-  side_damage_clip = getent("side_damage_clip", "targetname");
+  side_damage_clip = getEnt("side_damage_clip", "targetname");
   side_damage_clip notsolid();
-  rear_damage_clip = getent("rear_damage_clip", "targetname");
+  rear_damage_clip = getEnt("rear_damage_clip", "targetname");
   rear_damage_clip notsolid();
   level thread manage_barge_bend("RIGHT");
   level thread manage_barge_bend("LEFT");
@@ -1175,11 +1175,11 @@ setup_barge(start_node, path_start_delay) {
     level thread setup_barge_side_panel(str_tag);
   }
 
-  woods_truck_trigger = getent("woods_truck_trigger", "targetname");
-  woods_truck_trigger enablelinkto();
-  woods_truck_trigger linkto(self);
+  woods_truck_trigger = getEnt("woods_truck_trigger", "targetname");
+  woods_truck_trigger enablelinkTo();
+  woods_truck_trigger linkTo(self);
   woods_truck_trigger trigger_off();
-  woods_truck_trigger setcursorhint("hint_noicon");
+  woods_truck_trigger setCursorHint("hint_noicon");
   a_gun_spots = getEntArray("barge_rpg_spot", "targetname");
 
   foreach(m_gun_spot in a_gun_spots) {
@@ -1191,39 +1191,39 @@ setup_barge(start_node, path_start_delay) {
   fake_fire_origin = getEntArray("fake_fire_origin", "targetname");
 
   for(i = 0; i < fake_fire_origin.size; i++) {
-    fake_fire_origin[i] linkto(self);
+    fake_fire_origin[i] linkTo(self);
   }
 
   self setmovingplatformenabled(1);
   crates = getEntArray("barge_crates", "script_noteworthy");
-  crates[0] linkto(self);
+  crates[0] linkTo(self);
 
   for(i = 1; i < crates.size; i++) {
-    crates[i] linkto(crates[0]);
+    crates[i] linkTo(crates[0]);
   }
 
   tarps = getEntArray("crate_tarps", "targetname");
 
   for(i = 0; i < tarps.size; i++) {
-    tarps[i] linkto(crates[0]);
+    tarps[i] linkTo(crates[0]);
   }
 
-  weapon_origin = getent("launcher_origin", "targetname");
-  weapon_origin linkto(crates[0]);
+  weapon_origin = getEnt("launcher_origin", "targetname");
+  weapon_origin linkTo(crates[0]);
   barge_origin_struct = spawn("script_origin", level.main_barge gettagorigin("tag_origin"));
-  barge_origin_struct linkto(self, "tag_origin");
+  barge_origin_struct linkTo(self, "tag_origin");
   barge_origin_struct.targetname = "barge_origin_struct";
-  player_jump_origin = getent("player_barge_jump_origin", "targetname");
-  player_jump_origin linkto(self);
-  housing_origin = getent("hind_fire_at_housing", "targetname");
-  housing_trigger = getent("tigger_hind_fire_at_housing", "targetname");
-  housing_trigger enablelinkto();
-  housing_origin linkto(level.main_barge);
-  housing_trigger linkto(housing_origin);
+  player_jump_origin = getEnt("player_barge_jump_origin", "targetname");
+  player_jump_origin linkTo(self);
+  housing_origin = getEnt("hind_fire_at_housing", "targetname");
+  housing_trigger = getEnt("tigger_hind_fire_at_housing", "targetname");
+  housing_trigger enablelinkTo();
+  housing_origin linkTo(level.main_barge);
+  housing_trigger linkTo(housing_origin);
   a_player_clip = getEntArray("barge_player_clip", "targetname");
 
   foreach(m_clip in a_player_clip) {
-    m_clip linkto(housing_origin);
+    m_clip linkTo(housing_origin);
     m_clip setmovingplatformenabled(1);
   }
 
@@ -1259,14 +1259,14 @@ manage_barge_bend(str_side) {
 barge_play_exhaust_fx() {
   if(!is_after_skipto("heli_jump")) {
     m_fx_point = spawn_model("tag_origin", self.origin, self.angles);
-    m_fx_point linkto(self);
+    m_fx_point linkTo(self);
     playFXOnTag(getfx("barge_exhaust_intro"), m_fx_point, "tag_origin");
     level waittill("intro_heli_hit_by_missile");
     m_fx_point delete();
   }
 
   m_fx_point = spawn_model("tag_origin", self gettagorigin("tag_exhaust_fx"), self gettagangles("tag_exhaust_fx"));
-  m_fx_point linkto(self, "tag_exhaust_fx");
+  m_fx_point linkTo(self, "tag_exhaust_fx");
   playFXOnTag(getfx("barge_exhaust"), m_fx_point, "tag_origin");
   level waittill("barge_wheelhouse_destroyed");
   m_fx_point delete();
@@ -1274,18 +1274,18 @@ barge_play_exhaust_fx() {
 
 barge_intruder_box() {
   level endon("hind_crash");
-  t_intruder = getent("intruder_box_trig", "targetname");
+  t_intruder = getEnt("intruder_box_trig", "targetname");
   level thread barge_intruder_box_cleanup();
 
   if(level.player hasperk("specialty_intruder")) {
-    t_intruder setcursorhint("HINT_NOICON");
-    t_intruder sethintstring(&"SCRIPT_HINT_INTRUDER");
-    m_box = getent("intruder_box", "targetname");
+    t_intruder setCursorHint("HINT_NOICON");
+    t_intruder setHintString(&"SCRIPT_HINT_INTRUDER");
+    m_box = getEnt("intruder_box", "targetname");
     m_box.use_obj_offset = vectorscale((0, 0, 1), 32.0);
     set_objective(level.obj_intruder, m_box, "interact", undefined, 0);
     m_box thread barge_intruder_hide_marker_in_container();
     m_origin = spawn_model("tag_origin", m_box.origin, m_box.angles);
-    m_origin linkto(level.main_barge);
+    m_origin linkTo(level.main_barge);
     trigger_wait("intruder_box_trig");
     set_objective(level.obj_intruder, m_box, "delete", undefined, 0);
     m_box notify("intruder_box_opened");
@@ -1296,7 +1296,7 @@ barge_intruder_box() {
 
     foreach(m_anim_model in a_models) {
       m_anim_model unlink();
-      m_anim_model linkto(m_origin);
+      m_anim_model linkTo(m_origin);
     }
 
     level.player setperk("specialty_flakjacket");
@@ -1304,7 +1304,7 @@ barge_intruder_box() {
     thread screen_message_create(&"ANGOLA_2_PERK_FLAK_JACKET", undefined, undefined, undefined, 3);
   }
 
-  t_intruder = getent("intruder_box_trig", "targetname");
+  t_intruder = getEnt("intruder_box_trig", "targetname");
   t_intruder delete();
 }
 
@@ -1323,7 +1323,7 @@ barge_intruder_hide_marker_in_container() {
 }
 
 barge_intro_ai_think() {
-  vh_heli = getent("river_player_heli", "targetname");
+  vh_heli = getEnt("river_player_heli", "targetname");
   a_top_deck = getnodearray("top_goto_pos", "targetname");
   a_bottom = getnodearray("intro_bottom_cover", "targetname");
   wait 1;
@@ -1364,8 +1364,8 @@ barge_intro_ai_fallback(nd_goto) {
 }
 
 setup_dyn_ents() {
-  dyn_ent_spawn = getent("place_dyn_ent", "targetname");
-  dyn_ent_spawn linkto(level.main_barge);
+  dyn_ent_spawn = getEnt("place_dyn_ent", "targetname");
+  dyn_ent_spawn linkTo(level.main_barge);
   dyn_ent_spawn setclientflag(9);
   level waittill("place_dyn_ents");
   level clientnotify("unlink_box");
@@ -1375,7 +1375,7 @@ setup_dyn_ents() {
 
 setup_small_boat(start_node, start_path_delay, path_fixed_offset) {
   self endon("death");
-  vh_heli = getent("river_player_heli", "targetname");
+  vh_heli = getEnt("river_player_heli", "targetname");
   self thread fire_weapon_on_target(vh_heli);
   self thread boat_river_bob();
   self.dont_kill_riders = 1;
@@ -1418,7 +1418,7 @@ fire_weapon_on_heli(str_notify, vh_heli) {
   guards = simple_spawn("main_convoy_escort_boat_medium_1_guard", ::guard_setup);
 
   if(!isDefined(vh_heli)) {
-    vh_heli = getent("river_player_heli", "targetname");
+    vh_heli = getEnt("river_player_heli", "targetname");
   }
 
   if(isDefined(guards[0])) {
@@ -1500,8 +1500,8 @@ fire_weapon_on_ent(str_notify, ent) {
 guard_setup() {
   self endon("death");
   level endon("kill_all_on_turret");
-  heli_target = getent("heli_target_origin", "targetname");
-  vh_heli = getent("river_player_heli", "targetname");
+  heli_target = getEnt("heli_target_origin", "targetname");
+  vh_heli = getEnt("river_player_heli", "targetname");
   self setentitytarget(vh_heli);
 
   if(isDefined(self.target)) {
@@ -1545,7 +1545,7 @@ obj_fail_if_truck_takes_damage() {
     self waittill("trigger", ent);
 
     if(ent == level.player) {
-      gaz_truck = getent("gaz_trucks", "script_noteworthy");
+      gaz_truck = getEnt("gaz_trucks", "script_noteworthy");
       playFXOnTag(level._effect["ship_explosion"], gaz_truck, "tag_origin");
       playFXOnTag(level._effect["ship_fire"], gaz_truck, "tag_origin");
       wait 2;
@@ -1598,10 +1598,10 @@ set_boat_swaying(num) {
 
 attach_all_origin_to_boat() {
   a_origin = getEntArray("convoy_spawn_spot", "script_noteworthy");
-  main_barge = getent("main_barge", "targetname");
+  main_barge = getEnt("main_barge", "targetname");
 
   for(i = 0; i < a_origin.size; i++) {
-    a_origin[i] linkto(main_barge);
+    a_origin[i] linkTo(main_barge);
   }
 }
 
@@ -1627,12 +1627,12 @@ set_threat_bias_group_for_barge_ai() {
 #using_animtree("vehicles");
 
 strella_guard_run() {
-  spawners = getent("river_barge_convoy_2_guards_assault", "targetname");
+  spawners = getEnt("river_barge_convoy_2_guards_assault", "targetname");
   start_node = getnode("strella_guard_start", "targetname");
   strella_guard = simple_spawn_single(spawners);
   strella_guard.animname = "strella_guy";
   strella_guard forceteleport(start_node.origin, start_node.angles);
-  gaz66 = getent("strella_truck", "targetname");
+  gaz66 = getEnt("strella_truck", "targetname");
   gaz66 useanimtree(#animtree);
   gaz66 setanim(%v_ang_05_03_ghaz_cargo_open_cargo, 1, 0, 1);
 }
@@ -1749,7 +1749,7 @@ trigger_gun_flak() {
 }
 
 get_flak_spot() {
-  main_barge = getent("main_barge", "targetname");
+  main_barge = getEnt("main_barge", "targetname");
   x = main_barge.origin[0] + randomintrange(-1500, 1500);
   y = main_barge.origin[1] + randomintrange(-1500, 1500);
   z = main_barge.origin[2] + randomintrange(500, 1000);
@@ -1758,28 +1758,28 @@ get_flak_spot() {
 }
 
 setup_specialty_perk() {
-  boat = getent("main_convoy_escort_boat_medium_1", "targetname");
+  boat = getEnt("main_convoy_escort_boat_medium_1", "targetname");
   boat attach("veh_t6_sea_gunboat_medium_waterbox", "tag_origin");
-  specialty_trigger = getent("player_turret_special_trigger", "targetname");
-  specialty_trigger enablelinkto();
-  specialty_trigger linkto(boat);
-  specialty_trigger setcursorhint("HINT_NOICON");
-  specialty_trigger sethintstring("");
+  specialty_trigger = getEnt("player_turret_special_trigger", "targetname");
+  specialty_trigger enablelinkTo();
+  specialty_trigger linkTo(boat);
+  specialty_trigger setCursorHint("HINT_NOICON");
+  specialty_trigger setHintString("");
   level waittill("heli_ride_done");
   level.escort_boat setseatoccupied(2, 1);
   level.player waittill_player_has_brute_force_perk();
   e_obj_location = spawn("script_model", boat gettagorigin("tag_gunner2") + vectorscale((0, 0, 1), 60.0));
   e_obj_location setModel("tag_origin");
-  e_obj_location linkto(boat);
+  e_obj_location linkTo(boat);
   set_objective(level.obj_brute_force, e_obj_location, "interact");
-  specialty_trigger sethintstring(&"ANGOLA_2_UNJAM_GUN");
+  specialty_trigger setHintString(&"ANGOLA_2_UNJAM_GUN");
   specialty_trigger waittill("trigger");
   set_objective(level.obj_brute_force, e_obj_location, "remove");
   run_scene("player_unlock_gun");
   level.escort_boat setseatoccupied(2, 0);
   specialty_trigger delete();
   boat usevehicle(level.player, 2);
-  damage_trigger = getent("player_turret_damage_trigger", "targetname");
+  damage_trigger = getEnt("player_turret_damage_trigger", "targetname");
 
   while(isDefined(boat)) {
     if(isDefined(boat getseatoccupant(2))) {

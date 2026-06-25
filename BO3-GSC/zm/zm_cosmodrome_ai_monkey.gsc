@@ -33,10 +33,10 @@ function monkey_cosmodrome_enter_level() {
   util::wait_network_frame();
   lander clientfield::set("COSMO_MONKEY_LANDER_FX", 1);
   self forceteleport(lander.origin);
-  self linkto(lander);
+  self linkTo(lander);
   wait(2.5);
   lander show();
-  lander moveto(end.origin, 0.6);
+  lander moveTo(end.origin, 0.6);
   lander waittill("movedone");
   lander clientfield::set("COSMO_MONKEY_LANDER_FX", 0);
   wait(2);

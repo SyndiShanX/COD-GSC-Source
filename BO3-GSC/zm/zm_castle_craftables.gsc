@@ -123,9 +123,9 @@ function function_31bdb575(var_6aeefdcb) {
 }
 
 function function_e8931ee2(piecestub) {
-  var_309c2973 = getent("spike_quest_console_switch", "targetname");
+  var_309c2973 = getEnt("spike_quest_console_switch", "targetname");
   var_309c2973.unitrigger = var_309c2973 function_ab1218c8();
-  var_85a409cc = getent("spike_quest_wall_switch", "targetname");
+  var_85a409cc = getEnt("spike_quest_wall_switch", "targetname");
   var_85a409cc.unitrigger = var_85a409cc function_af32bcac();
   self thread function_bf54e556(piecestub, var_85a409cc);
   self thread function_cecf7412(piecestub, var_309c2973);
@@ -146,10 +146,10 @@ function function_af32bcac() {
 
 function function_daa4f9c9(player) {
   if(level flag::get("rocket_pad_trigger_available") && (!(isDefined(level.var_ddbeeb3f) && level.var_ddbeeb3f))) {
-    self sethintstring(&"ZM_CASTLE_GRAVITYSPIKE_A10_SWITCH");
+    self setHintString(&"ZM_CASTLE_GRAVITYSPIKE_A10_SWITCH");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -169,7 +169,7 @@ function function_7d712d6a() {
 function function_bf54e556(var_d97c08b2, var_85a409cc) {
   var_85a409cc playSound("evt_tram_lever");
   exploder::exploder("lgt_gs_console_red_0");
-  var_d5793a57 = getent("spike_quest_wall_door", "targetname");
+  var_d5793a57 = getEnt("spike_quest_wall_door", "targetname");
   while(!level flag::get("gravityspike_part_guards_found")) {
     level flag::wait_till("rocket_firing");
     wait(6);
@@ -177,7 +177,7 @@ function function_bf54e556(var_d97c08b2, var_85a409cc) {
     exploder::exploder("lgt_gs_console_grn_0");
     exploder::stop_exploder("lgt_gs_console_red_0");
     var_85a409cc rotateroll(-120, 0.5);
-    var_d5793a57 rotateyaw(-120, 0.25);
+    var_d5793a57 rotateYaw(-120, 0.25);
     var_85a409cc playSound("evt_tram_lever");
     level util::waittill_either("a10_wall_switch_activated", "open_a10_doors");
     level flag::clear("rocket_pad_trigger_available");
@@ -186,7 +186,7 @@ function function_bf54e556(var_d97c08b2, var_85a409cc) {
     var_85a409cc rotateroll(120, 0.5);
     var_85a409cc playSound("evt_tram_lever");
     level flag::wait_till_clear("rocket_firing");
-    var_d5793a57 rotateyaw(120, 0.25);
+    var_d5793a57 rotateYaw(120, 0.25);
   }
 }
 
@@ -204,7 +204,7 @@ function function_ab1218c8() {
 
 function function_cecf7412(var_d97c08b2, var_309c2973) {
   self function_9980920d(var_d97c08b2);
-  var_586d1d4f = getent("spike_quest_console", "targetname");
+  var_586d1d4f = getEnt("spike_quest_console", "targetname");
   var_586d1d4f clientfield::set("death_ray_status_light", 2);
   var_309c2973 rotateroll(-120, 0.5);
   var_309c2973 playSound("evt_tram_lever");
@@ -261,10 +261,10 @@ function function_ff4c7ead(str_exploder) {
 
 function function_26a928fd(player) {
   if(!(isDefined(level.var_ddbeeb3f) && level.var_ddbeeb3f) && (isDefined(level.var_d73f1734) && level.var_d73f1734)) {
-    self sethintstring(&"ZM_CASTLE_GRAVITYSPIKE_A10_CONSOLE");
+    self setHintString(&"ZM_CASTLE_GRAVITYSPIKE_A10_CONSOLE");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
@@ -417,7 +417,7 @@ function function_e5b369e4(b_teleported) {
     }
     yaw = self.model.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self.model rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self.model rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     wait(randomfloat(waittime - 0.1));
   }
 }
@@ -567,10 +567,10 @@ function function_98c7dfa5(v_origin, v_angles) {
 function function_4ae7dabf(player) {
   wpn_gravityspikes = getweapon("hero_gravityspikes_melee");
   if(player.gravityspikes_state == 0) {
-    self sethintstring(&"ZM_CASTLE_GRAVITYSPIKE_PICKUP");
+    self setHintString(&"ZM_CASTLE_GRAVITYSPIKE_PICKUP");
     return true;
   }
-  self sethintstring(&"ZM_CASTLE_GRAVITYSPIKE_ALREADY_HAVE");
+  self setHintString(&"ZM_CASTLE_GRAVITYSPIKE_ALREADY_HAVE");
   return false;
 }
 
@@ -599,7 +599,7 @@ function function_adbf2990(trig_stub, player) {
     player thread zm_castle_vo::function_4e11dfdc();
     player gadgetpowerset(player gadgetgetslot(wpn_gravityspikes), 100);
     player zm_weap_gravityspikes::update_gravityspikes_state(2);
-    player playrumbleonentity("zm_castle_interact_rumble");
+    player playRumbleOnEntity("zm_castle_interact_rumble");
   }
 }
 

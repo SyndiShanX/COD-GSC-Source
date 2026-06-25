@@ -220,7 +220,7 @@ function gravityspikes_attack_watcher(wpn_gravityspikes) {
   while(true) {
     self waittill("weapon_melee_power", weapon);
     if(weapon == wpn_gravityspikes) {
-      self playrumbleonentity("talon_spike");
+      self playRumbleOnEntity("talon_spike");
       self thread knockdown_zombies_slam();
       self thread no_damage_gravityspikes_slam();
     }
@@ -341,7 +341,7 @@ function chop_zombies(first_time, leftswing, weapon = level.weaponnone) {
     if(dist_sq > dist_to_check) {
       continue;
     }
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
     if(dot <= 0) {
       continue;
@@ -610,7 +610,7 @@ function create_gravity_trap_unitrigger(v_origin, wpn_gravityspikes) {
 
 function gravity_trap_trigger_visibility(player) {
   if(player == self.stub.gravityspike_owner) {
-    self sethintstring(&"ZM_CASTLE_GRAVITYSPIKE_PICKUP");
+    self setHintString(&"ZM_CASTLE_GRAVITYSPIKE_PICKUP");
     return true;
   }
   self setinvisibletoplayer(player);
@@ -695,7 +695,7 @@ function zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift
   } else {
     if(level.n_zombies_lifted_for_ragdoll < 12) {
       self thread track_lifted_for_ragdoll_count();
-      v_away_from_source = vectornormalize(self.origin - v_attack_source);
+      v_away_from_source = vectorNormalize(self.origin - v_attack_source);
       v_away_from_source = v_away_from_source * n_push_away;
       v_away_from_source = (v_away_from_source[0], v_away_from_source[1], n_lift_height);
       a_trace = physicstraceex(self.origin + vectorscale((0, 0, 1), 32), self.origin + v_away_from_source, vectorscale((-1, -1, -1), 16), vectorscale((1, 1, 1), 16), self);
@@ -703,7 +703,7 @@ function zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift
       v_lift = v_lift + v_lift_offset;
       n_lift_time = length(v_lift) / n_lift_speed;
       if(isDefined(self) && (isDefined(self.b_melee_kill) && self.b_melee_kill)) {
-        self setplayercollision(0);
+        self setPlayerCollision(0);
         if(!(isDefined(level.ignore_gravityspikes_ragdoll) && level.ignore_gravityspikes_ragdoll)) {
           self startragdoll();
           self launchragdoll((150 * anglestoup(self.angles)) + (v_away_from_source[0], v_away_from_source[1], 0));
@@ -712,7 +712,7 @@ function zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift
         self clientfield::set("sparky_zombie_trail_fx", 1);
         util::wait_network_frame();
       } else if(isDefined(self) && v_lift[2] > 0 && length(v_lift) > length(v_lift_offset)) {
-        self setplayercollision(0);
+        self setPlayerCollision(0);
         self clientfield::set("sparky_beam_fx", 1);
         self clientfield::set("sparky_zombie_fx", 1);
         self playSound("zmb_talon_electrocute");
@@ -723,8 +723,8 @@ function zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift
         }
         self.mdl_trap_mover = util::spawn_model("tag_origin", self.origin, self.angles);
         self thread util::delete_on_death(self.mdl_trap_mover);
-        self linkto(self.mdl_trap_mover, "tag_origin");
-        self.mdl_trap_mover moveto(self.origin + v_lift, n_lift_time, 0, n_lift_time * 0.4);
+        self linkTo(self.mdl_trap_mover, "tag_origin");
+        self.mdl_trap_mover moveTo(self.origin + v_lift, n_lift_time, 0, n_lift_time * 0.4);
         self thread zombie_lift_wacky_rotate(n_lift_time, player);
         self thread gravity_trap_notify_watcher(player);
         self waittill("gravity_trap_complete");
@@ -779,7 +779,7 @@ function zombie_lift_wacky_rotate(n_lift_time, player) {
   while(true) {
     negative_x = (randomintrange(0, 10) < 5 ? 1 : -1);
     negative_z = (randomintrange(0, 10) < 5 ? 1 : -1);
-    self.mdl_trap_mover rotateto((randomintrange(90, 180) * negative_x, randomintrange(-90, 90), randomintrange(90, 180) * negative_z), (n_lift_time > 2 ? n_lift_time : 5), 0);
+    self.mdl_trap_mover rotateTo((randomintrange(90, 180) * negative_x, randomintrange(-90, 90), randomintrange(90, 180) * negative_z), (n_lift_time > 2 ? n_lift_time : 5), 0);
     self.mdl_trap_mover waittill("rotatedone");
   }
 }
@@ -856,11 +856,11 @@ function zombie_slam_direction(v_position) {
   }
   self.knockdown = 1;
   v_zombie_to_player = v_position - self.origin;
-  v_zombie_to_player_2d = vectornormalize((v_zombie_to_player[0], v_zombie_to_player[1], 0));
+  v_zombie_to_player_2d = vectorNormalize((v_zombie_to_player[0], v_zombie_to_player[1], 0));
   v_zombie_forward = anglesToForward(self.angles);
-  v_zombie_forward_2d = vectornormalize((v_zombie_forward[0], v_zombie_forward[1], 0));
+  v_zombie_forward_2d = vectorNormalize((v_zombie_forward[0], v_zombie_forward[1], 0));
   v_zombie_right = anglestoright(self.angles);
-  v_zombie_right_2d = vectornormalize((v_zombie_right[0], v_zombie_right[1], 0));
+  v_zombie_right_2d = vectorNormalize((v_zombie_right[0], v_zombie_right[1], 0));
   v_dot = vectordot(v_zombie_to_player_2d, v_zombie_forward_2d);
   if(v_dot >= 0.5) {
     self.knockdown_direction = "front";
@@ -905,7 +905,7 @@ function function_81889ac5() {
   while(true) {
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == wpn_gravityspikes.name) {
           player zm_weapons::weapon_give(wpn_gravityspikes, 0, 1);
           player thread zm_equipment::show_hint_text(&"", 3);
@@ -919,7 +919,7 @@ function function_81889ac5() {
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == wpn_gravityspikes.name) {
           gravityspikes_power_update(player);
         }
@@ -928,7 +928,7 @@ function function_81889ac5() {
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == wpn_gravityspikes.name) {
           setDvar("", 1);
         }
@@ -937,7 +937,7 @@ function function_81889ac5() {
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == wpn_gravityspikes.name) {
           setDvar("", 0);
         }

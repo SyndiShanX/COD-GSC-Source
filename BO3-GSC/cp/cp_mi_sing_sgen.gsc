@@ -83,7 +83,7 @@ function main() {
   if(isDefined(a_s_align) && a_s_align.size > 1) {
     level.v_underwater_offset = a_s_align[1].origin - a_s_align[0].origin;
   }
-  t_boundary = getent("flood_defend_out_of_boundary_trig", "targetname");
+  t_boundary = getEnt("flood_defend_out_of_boundary_trig", "targetname");
   t_boundary setinvisibletoall();
   level thread level_threads();
   level thread namespace_99202726::function_66df416f();
@@ -489,7 +489,7 @@ function script_tag_align_create(str_name, n_index = 0) {
 }
 
 function hide_show_fxanim_door_flood() {
-  e_door_clip = getent("flood_door_player_clip", "targetname");
+  e_door_clip = getEnt("flood_door_player_clip", "targetname");
   e_door_clip movez(128, 0.05);
   level thread sgen_util::set_door_state("surgical_room_entrance_door", "open");
 }

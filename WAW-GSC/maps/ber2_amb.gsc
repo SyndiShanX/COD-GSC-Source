@@ -24,8 +24,8 @@ main() {
 /
 play_tinnitus() {
   level waittill("tinnitus");
-  tinnitus = getent("2d_origin", "targetname");
-  cough_player = getent("rats_2d", "targetname");
+  tinnitus = getEnt("2d_origin", "targetname");
+  cough_player = getEnt("rats_2d", "targetname");
   wait 2;
   tinnitus playLoopSound("player_explosion_loop", 3);
   wait 3.5;
@@ -37,7 +37,7 @@ play_arty_sound() {
 
   while(1) {
     level waittill("ber2_earthquake");
-    ber2_earthquake = getent("2d_origin", "targetname");
+    ber2_earthquake = getEnt("2d_origin", "targetname");
     ber2_earthquake playSound("art_int");
   }
 }
@@ -46,7 +46,7 @@ play_metro_arty_sound() {
 
   while(1) {
     level waittill("metro_arty");
-    metro_arty = getent("2d_origin", "targetname");
+    metro_arty = getEnt("2d_origin", "targetname");
     metro_arty playSound("metro_arty");
   }
 }
@@ -55,7 +55,7 @@ play_metro_rats_sound() {
 
   while(1) {
     level waittill("start_rats");
-    start_rats = getent("rats_2d", "targetname");
+    start_rats = getEnt("rats_2d", "targetname");
     start_rats playSound("rats");
   }
 }
@@ -64,7 +64,7 @@ play_wave_arty_sound() {
 
   while(1) {
     level waittill("wave_arty");
-    wave_arty = getent("2d_origin", "targetname");
+    wave_arty = getEnt("2d_origin", "targetname");
     wave_arty playSound("wave_arty");
   }
 }
@@ -73,9 +73,9 @@ play_rumble_sound() {
 
   while(1) {
     level waittill("rumble");
-    rumble = getent("rumble_2d", "targetname");
-    rattle1 = getent("rattle1", "targetname");
-    rattle2 = getent("rattle2", "targetname");
+    rumble = getEnt("rumble_2d", "targetname");
+    rattle1 = getEnt("rattle1", "targetname");
+    rattle2 = getEnt("rattle2", "targetname");
 
     rumble playLoopSound("rumble", 1);
 
@@ -91,13 +91,13 @@ play_rumble_sound() {
 play_wave_sound() {
   level waittill("subway_exitgate_startRunners");
 
-  subway_exitgate_startRunners = getent("smodel_metrowave", "targetname");
-  wave_impact = getent("wave_impact", "targetname");
-  underwater_loop1 = getent("underwater_loop1", "targetname");
-  underwater_loop2 = getent("underwater_loop2", "targetname");
-  underwater_scream1 = getent("underwater_scream1", "targetname");
-  underwater_scream2 = getent("underwater_scream2", "targetname");
-  slow_shatter = getent("slow_shatter", "targetname");
+  subway_exitgate_startRunners = getEnt("smodel_metrowave", "targetname");
+  wave_impact = getEnt("wave_impact", "targetname");
+  underwater_loop1 = getEnt("underwater_loop1", "targetname");
+  underwater_loop2 = getEnt("underwater_loop2", "targetname");
+  underwater_scream1 = getEnt("underwater_scream1", "targetname");
+  underwater_scream2 = getEnt("underwater_scream2", "targetname");
+  slow_shatter = getEnt("slow_shatter", "targetname");
 
   subway_exitgate_startRunners playLoopSound("wave");
 

@@ -138,9 +138,9 @@ function_e9aa9e80(localclientnum) {
     var_a05eed18 = self gettagorigin(str_fx_tag);
 
     if(isDefined(var_a05eed18)) {
-      self.e_fx moveto(var_a05eed18, 0.1);
+      self.e_fx moveTo(var_a05eed18, 0.1);
     } else {
-      self.e_fx moveto(self.origin, 0.1);
+      self.e_fx moveTo(self.origin, 0.1);
     }
 
     util::server_wait(localclientnum, 0.1);
@@ -149,7 +149,7 @@ function_e9aa9e80(localclientnum) {
       return;
     }
 
-    self.e_fx moveto(e_ball.origin, 0.1);
+    self.e_fx moveTo(e_ball.origin, 0.1);
     util::server_wait(localclientnum, 0.1);
   }
 }

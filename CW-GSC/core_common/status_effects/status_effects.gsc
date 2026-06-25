@@ -156,7 +156,7 @@ function status_effects_devgui_think() {
 }
 
 function function_64ba1c7e(pid) {
-  player = getplayers()[pid - 1];
+  player = getPlayers()[pid - 1];
 
   if(isDefined(player)) {
     player function_6519f95f();
@@ -165,7 +165,7 @@ function function_64ba1c7e(pid) {
 
 function status_effects_set_active_effect(pid) {
   arg = getdvarint(#"scr_status_effects_devgui_arg", 0);
-  player = getplayers()[pid - 1];
+  player = getPlayers()[pid - 1];
 
   if(isDefined(player)) {
     player function_e2bff3ce(arg, undefined, player);
@@ -174,7 +174,7 @@ function status_effects_set_active_effect(pid) {
 
 function status_effects_give_grenade(pid) {
   arg = getdvarstring(#"scr_status_effects_devgui_arg");
-  player = getplayers()[pid - 1];
+  player = getPlayers()[pid - 1];
 
   if(isDefined(player)) {
     weapon = getweapon(arg);

@@ -259,7 +259,7 @@ function function_2ba36cfa(watcher) {
 function function_62d26159(var_86cccd7b, player) {
   self endon(#"death", #"hash_46b95c46bf0a5522");
   self.var_9f865186 = var_86cccd7b;
-  self.var_dac47117 linkto(self.var_9f865186);
+  self.var_dac47117 linkTo(self.var_9f865186);
   var_86cccd7b ai::stun(10);
   var_86cccd7b.b_ignore_cleanup = 1;
   var_86cccd7b.is_inert = 1;

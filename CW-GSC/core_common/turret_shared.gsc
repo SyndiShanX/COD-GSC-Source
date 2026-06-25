@@ -416,7 +416,7 @@ function get_in(ai_actor, n_index = 0) {
     }
 
     if(!is_true(ai_actor islinkedto(self))) {
-      ai_actor linkto(self);
+      ai_actor linkTo(self);
       println("<dev string:xb6>" + n_index + "<dev string:xf8>" + self.model + "<dev string:x104>");
     }
 
@@ -747,7 +747,7 @@ function function_12269140(target, n_index = 0) {
 
   var_8ee48240 = cos(s_turret.var_bf6d793d.aimyawanglel);
   v_angles = isDefined(s_turret.node) ? s_turret.node.angles : self.angles;
-  v_to_enemy = vectornormalize(v_pos - self.origin);
+  v_to_enemy = vectorNormalize(v_pos - self.origin);
   dot = vectordot(v_to_enemy, anglesToForward(v_angles));
   return dot >= var_8ee48240;
 }
@@ -890,7 +890,7 @@ function function_1358b930(n_index) {
 
     if(time - var_8bcad4e7 > 500) {
       var_8bcad4e7 = time;
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         if(!util::function_fbce7263(self.team, player.team)) {
@@ -903,7 +903,7 @@ function function_1358b930(n_index) {
         }
 
         if(ai_user cansee(player) || is_target(player, n_index)) {
-          toenemy = vectornormalize(player.origin - ai_user.origin);
+          toenemy = vectorNormalize(player.origin - ai_user.origin);
           dot = vectordot(toenemy, anglesToForward(s_turret.node.angles));
 
           if(dot < var_324bed9c) {
@@ -1403,7 +1403,7 @@ function trace_test(e_target, v_offset = (0, 0, 0), n_index) {
 
     if(e_target sightconetrace(v_start_org, self) > 0.2) {
       v_target = e_target.origin + v_offset;
-      v_start_org += vectornormalize(v_target - v_start_org) * 50;
+      v_start_org += vectorNormalize(v_target - v_start_org) * 50;
       a_trace = bulletTrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 0, 1);
 
       if(a_trace[#"fraction"] > 0.6) {
@@ -1426,7 +1426,7 @@ function trace_test(e_target, v_offset = (0, 0, 0), n_index) {
     return true;
   }
 
-  v_dir_to_target = vectornormalize(v_target - v_start_org);
+  v_dir_to_target = vectorNormalize(v_target - v_start_org);
   v_start_org += v_dir_to_target * 50;
 
   if(sighttracepassed(v_start_org, v_target, 0, self, e_target)) {

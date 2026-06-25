@@ -208,7 +208,7 @@ onconnect() {
 
 function_e1919661() {
   self.gameobject_link = util::spawn_model("tag_origin", self.origin, self.angles);
-  self playerlinkto(self.gameobject_link, "tag_origin", 0, 30, 30, 30, 30);
+  self playerlinkTo(self.gameobject_link, "tag_origin", 0, 30, 30, 30, 30);
 }
 
 function_feeebad() {
@@ -714,7 +714,7 @@ function_4f2c425d() {
     return;
   }
 
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(teammate in teammates) {
     if(teammate == level.bagomoney.carrier) {
@@ -792,10 +792,10 @@ function_b3faa437() {
   var_fa06e6b7 = struct::get_array("bounty_bag_o_money", "variantname");
   var_85b31568 = var_fa06e6b7[randomint(var_fa06e6b7.size)].origin;
   usetrigger = spawn("trigger_radius_use", var_85b31568 + (0, 0, 15), 0, 80, 60);
-  usetrigger triggerignoreteam();
+  usetrigger triggerIgnoreTeam();
   usetrigger setvisibletoall();
   usetrigger setteamfortrigger(#"none");
-  usetrigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  usetrigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   usetrigger function_682f34cf(-800);
   var_8b6f8e45 = [];
   var_8b6f8e45[0] = spawn("script_model", var_85b31568);
@@ -1065,7 +1065,7 @@ function_554b5692(helicopter) {
   assert(isDefined(helicopter.rope));
   helicopter.rope useanimtree("generic");
   helicopter.rope setModel(#"hash_142fee14ea7bdb9b");
-  helicopter.rope linkto(helicopter, "tag_origin_animate");
+  helicopter.rope linkTo(helicopter, "tag_origin_animate");
   helicopter.rope hide();
 }
 
@@ -1178,7 +1178,7 @@ function_36f403(helicopter) {
 }
 
 function_d23cf101(origin, angles, context) {
-  helicopter = spawnvehicle(#"vehicle_t8_mil_helicopter_swat_transport", origin, angles, "bounty_deposit_site_helicopter");
+  helicopter = spawnVehicle(#"vehicle_t8_mil_helicopter_swat_transport", origin, angles, "bounty_deposit_site_helicopter");
   helicopter.spawntime = gettime();
   helicopter.attackers = [];
   helicopter.attackerdata = [];
@@ -1208,7 +1208,7 @@ function_d23cf101(origin, angles, context) {
   pilot = spawnactor(aitype, helicopter.origin, (0, 0, 0));
   pilot.var_e09b732c = 1;
   pilot.ai.swat_gunner = 1;
-  pilot linkto(helicopter, "tag_driver", (0, 0, 0), (0, 0, 0));
+  pilot linkTo(helicopter, "tag_driver", (0, 0, 0), (0, 0, 0));
   pilot.ignoreall = 1;
   pilot.ignoreme = 1;
   pilot ai::gun_remove();
@@ -1370,7 +1370,7 @@ function_8de67419(leavenode) {
 function_8debcb6(origin) {
   objective_delete(level.var_b167ae9a);
   trigger = spawn("trigger_radius_new", origin, 0, 90, 100);
-  trigger triggerignoreteam();
+  trigger triggerIgnoreTeam();
   useobj = gameobjects::create_use_object(#"none", trigger, [], (0, 0, 0), #"hash_7e7657e9c8f441eb");
   useobj gameobjects::set_visible_team(#"any");
   useobj gameobjects::allow_use(#"any");
@@ -1518,7 +1518,7 @@ bountydrop() {
   startpoint = (startpoint[0], startpoint[1], droppoint[2]);
   timer = randomintrange(level.var_8e8e80c6, level.var_374a483e);
   wait timer;
-  supplydropveh = spawnvehicle(#"vehicle_t8_mil_helicopter_transport_mp", startpoint, vectortoangles(vectornormalize(droppoint - startpoint)));
+  supplydropveh = spawnVehicle(#"vehicle_t8_mil_helicopter_transport_mp", startpoint, vectortoangles(vectorNormalize(droppoint - startpoint)));
   supplydropveh.goalradius = 128;
   supplydropveh.goalheight = 128;
 
@@ -1534,7 +1534,7 @@ bountydrop() {
   supplydropveh vehicle::toggle_sounds(1);
   supplydrop = spawn("script_model", (0, 0, 0));
   supplydrop setModel("wpn_t7_drop_box_wz");
-  supplydrop linkto(supplydropveh, "tag_cargo_attach", (0, 0, -30));
+  supplydrop linkTo(supplydropveh, "tag_cargo_attach", (0, 0, -30));
   supplydropveh.supplydrop = supplydrop;
   supplydropveh function_a57c34b7(droppoint, 1, 0);
   supplydropveh thread function_6d1352cb(droppoint);
@@ -1551,7 +1551,7 @@ function_6d1352cb(droppoint) {
     if(currdist < 225 * 225) {
       self setspeed(0);
       self.supplydrop unlink();
-      self.supplydrop moveto(droppoint - (0, 0, 1990), 2);
+      self.supplydrop moveTo(droppoint - (0, 0, 1990), 2);
       self.supplydrop playSound("evt_supply_drop");
       self.supplydrop thread function_9ec1d15();
       self.supplydrop = undefined;
@@ -1571,8 +1571,8 @@ function_9ec1d15() {
   self physicslaunch();
   self waittill(#"stationary");
   self.trigger = spawn("trigger_radius_use", self.origin, 0, 100, 60);
-  self.trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
-  self.trigger triggerignoreteam();
+  self.trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
+  self.trigger triggerIgnoreTeam();
   self.gameobject = gameobjects::create_use_object(#"neutral", self.trigger, [], (0, 0, 60), "bounty_drop", 1);
   self.gameobject gameobjects::set_objective_entity(self.gameobject);
   self.gameobject gameobjects::set_visible_team(#"any");

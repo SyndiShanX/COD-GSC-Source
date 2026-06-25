@@ -40,7 +40,7 @@ function_301b775b() {
 
 function_a27362d0(params) {
   if(level.deathcircleindex >= level.deathcircles.size - 2) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player) && !infection::function_74650d7()) {
         player clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 0);
       }
@@ -85,7 +85,7 @@ function_1540761c(params) {
 }
 
 function_832ecb3d(params) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 0);
   }
 }

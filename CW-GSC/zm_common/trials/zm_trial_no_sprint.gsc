@@ -24,7 +24,7 @@ function private preinit() {
 function private on_begin() {
   callback::on_spawned(&function_dc856fd8);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player allowsprint(0);
     player._allow_sprint = 0;
     player thread function_dc856fd8();
@@ -35,7 +35,7 @@ function private on_begin() {
 function private on_end(round_reset) {
   callback::remove_on_spawned(&function_dc856fd8);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"allow_sprint");
     player._allow_sprint = undefined;
     player allowsprint(1);

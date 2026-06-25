@@ -111,7 +111,7 @@ rotating_turbines() {
 rotate_turbine() {
   var_0 = randomfloatrange(3, 6);
   self.org = common_scripts\utility::get_linked_ent();
-  self linkto(self.org);
+  self linkTo(self.org);
 
   for(;;) {
     self.org rotateroll(90, var_0);

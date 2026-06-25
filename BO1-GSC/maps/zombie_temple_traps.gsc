@@ -13,8 +13,8 @@ init_temple_traps() {
   level thread init_maze_trap();
 }
 trigger_wait_for_power() {
-  self sethintstring(&"ZOMBIE_NEED_POWER");
-  self SetCursorHint("HINT_NOICON");
+  self setHintString(&"ZOMBIE_NEED_POWER");
+  self setCursorHint("HINT_NOICON");
   self.in_use = 0;
   flag_wait("power_on");
 }
@@ -22,7 +22,7 @@ spear_trap_init() {
   spearTraps = getEntArray("spear_trap", "targetname");
   for(i = 0; i < spearTraps.size; i++) {
     spearTrap = spearTraps[i];
-    spearTrap.clip = GetEnt(spearTrap.target, "targetname");
+    spearTrap.clip = getEnt(spearTrap.target, "targetname");
     spearTrap.clip notsolid();
     spearTrap.clip connectPaths();
     spearTrap.enable_flag = spearTrap.script_noteworthy;
@@ -103,7 +103,7 @@ spear_trap_slow() {
     painAnims[4] = % ai_zombie_taunts_5f;
     painAnim = random(painAnims);
     if(is_true(self.has_legs)) {
-      self animscripted("spear_pain_anim", self.origin, self.angles, painAnim);
+      self animScripted("spear_pain_anim", self.origin, self.angles, painAnim);
       self _zombie_spear_trap_damage_wait();
     }
   }
@@ -133,7 +133,7 @@ _zombie_spear_trap_damage_wait() {
     PrintLn("Spear Trap : Choke");
     wait(0.05);
   }
-  self stopanimscripted(.5);
+  self stopanimScripted(.5);
   level._num_ai_released++;
 }
 _fake_red() {
@@ -206,8 +206,8 @@ waterfall_trap_init() {
   for(i = 0; i < useTriggers.size; i++) {
     trapStruct = spawnStruct();
     trapStruct.useTrigger = useTriggers[i];
-    trapStruct.useTrigger SetHintString(&"ZOMBIE_NEED_POWER");
-    trapStruct.useTrigger SetCursorHint("HINT_NOICON");
+    trapStruct.useTrigger setHintString(&"ZOMBIE_NEED_POWER");
+    trapStruct.useTrigger setCursorHint("HINT_NOICON");
     trapStruct.trap_switches = [];
     trapStruct.trap_damage = [];
     trapStruct.trap_shake = [];
@@ -242,13 +242,13 @@ waterfall_trap_init() {
 waterfall_trap_think() {
   while(1) {
     self notify("trap_ready");
-    self.useTrigger SetHintString(&"ZOMBIE_TEMPLE_USE_WATER_TRAP");
+    self.useTrigger setHintString(&"ZOMBIE_TEMPLE_USE_WATER_TRAP");
     self.useTrigger waittill("trigger", who);
     if(is_player_valid(who) && !who in_revive_trigger()) {
       who.used_waterfall = true;
       self thread temple_trap_move_switch();
       self waittill("switch_activated");
-      self.useTrigger SetHintString("");
+      self.useTrigger setHintString("");
       waterfall_trap_on();
       wait(.5);
       who.used_waterfall = false;
@@ -258,7 +258,7 @@ waterfall_trap_think() {
       self thread waterfall_screen_shake(activeTime);
       wait activeTime;
       self notify("trap_off");
-      self.useTrigger SetHintString(&"ZOMBIE_TEMPLE_WATER_TRAP_COOL");
+      self.useTrigger setHintString(&"ZOMBIE_TEMPLE_WATER_TRAP_COOL");
       array_thread(self.water_drop_trigs, ::trigger_off);
       waterfall_trap_off();
       array_notify(self.trap_damage, "trap_off");
@@ -292,7 +292,7 @@ waterfall_screen_shake_single(activeTime, origin) {
 waterfall_trap_on() {
   soundStruct = getStruct("waterfall_trap_origin", "targetname");
   if(isDefined(soundStruct)) {
-    playsoundatposition("evt_waterfall_trap", soundStruct.origin);
+    playSoundAtPosition("evt_waterfall_trap", soundStruct.origin);
   }
   level notify("waterfall");
   clientnotify("WF");
@@ -331,7 +331,7 @@ waterfall_trap_player(fwd, time) {
   wait(1);
   vel = self GetVelocity();
   self SetVelocity(vel + fwd * 60.0);
-  self PlayRumbleOnEntity("slide_rumble");
+  self playRumbleOnEntity("slide_rumble");
 }
 waterfall_trap_monkey(magnitude, dir) {
   wait(1);
@@ -549,7 +549,7 @@ _maze_mover_move(goal, time) {
   if(time == 0) {
     time = .01;
   }
-  self moveto(goal, time);
+  self moveTo(goal, time);
   self waittill("movedone");
   self.isMoving = false;
   if(self.isActive) {
@@ -559,7 +559,7 @@ _maze_mover_move(goal, time) {
   }
   if(self.pathBlocker) {
     if(self.isActive) {
-      self disconnectpaths();
+      self disconnectPaths();
     } else {
       self connectpaths();
     }
@@ -919,7 +919,7 @@ maze_vibrate_active_floors(time) {
       cell = level.mazeCells[i];
       if(cell.floor.isActive) {
         cell thread maze_vibrate_floor((endTime - GetTime()) / 1000.0);
-        players = GetPlayers();
+        players = getPlayers();
         for(w = 0; w < players.size; w++) {
           if(players[w] IsTouching(cell.trigger)) {
             cell.trigger thread trigger_thread(players[w], ::temple_maze_player_vibrate_on, ::temple_maze_player_vibrate_off);
@@ -1055,7 +1055,7 @@ zombie_waterfall_knockdown() {
   }
 }
 override_thundergun_damage_func(player, gib) {
-  dmg_point = getstruct("waterfall_dmg_point", "script_noteworthy");
+  dmg_point = getStruct("waterfall_dmg_point", "script_noteworthy");
   self.thundergun_handle_pain_notetracks = ::handle_knockdown_pain_notetracks;
   self DoDamage(1, dmg_point.origin);
 }

@@ -146,7 +146,7 @@ play_charge_fx(w_grenade) {
       }
 
       var_673471b1 += 1000;
-      self playrumbleonentity("reload_small");
+      self playRumbleOnEntity("reload_small");
     }
 
     if(var_673471b1 > 2400 && self.var_4f8fb07f != #"tomahawk_t8_upgraded") {
@@ -167,7 +167,7 @@ function_9310fcc0(w_grenade) {
   wait 1;
 
   while(true) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait 0.3;
   }
 }
@@ -233,7 +233,7 @@ tomahawk_thrown(e_grenade) {
   if(level.active_powerups.size && isDefined(e_grenade)) {
     foreach(e_powerup in level.active_powerups) {
       if(self util::is_looking_at(e_powerup)) {
-        v_dir = vectornormalize(e_grenade.origin - eyepos);
+        v_dir = vectorNormalize(e_grenade.origin - eyepos);
 
         if(isDefined(e_powerup sightconetrace(eyepos, self, v_dir, 4)) && e_powerup sightconetrace(eyepos, self, v_dir, 4)) {
           if(!isDefined(a_powerups)) {
@@ -261,7 +261,7 @@ tomahawk_thrown(e_grenade) {
 
     foreach(powerup in a_powerups) {
       powerup.origin = mdl_tomahawk.origin;
-      powerup linkto(mdl_tomahawk);
+      powerup linkTo(mdl_tomahawk);
       mdl_tomahawk.a_has_powerup = a_powerups;
     }
 
@@ -397,7 +397,7 @@ tomahawk_ricochet_attack(var_65f2e452, e_grenade, var_bc201c9e, e_ignore) {
       break;
     }
 
-    if(isDefined(ai_zombie sightconetrace(v_start_pos, e_ignore, vectornormalize(self getplayerangles()), 5)) && ai_zombie sightconetrace(v_start_pos, e_ignore, vectornormalize(self getplayerangles()), 5)) {
+    if(isDefined(ai_zombie sightconetrace(v_start_pos, e_ignore, vectorNormalize(self getplayerangles()), 5)) && ai_zombie sightconetrace(v_start_pos, e_ignore, vectorNormalize(self getplayerangles()), 5)) {
       if(!(isDefined(ai_zombie.hit_by_tomahawk) && ai_zombie.hit_by_tomahawk)) {
         if(!isDefined(var_f500f73e)) {
           var_f500f73e = [];
@@ -433,7 +433,7 @@ function_d81951f5(mdl_tomahawk, var_65f2e452) {
   a_ai_zombies = util::get_array_of_closest(self.origin, getaiteamarray(level.zombie_team), undefined, undefined, 900);
 
   foreach(ai_zombie in a_ai_zombies) {
-    if(isDefined(ai_zombie sightconetrace(self getEye(), self, vectornormalize(self getplayerangles()), 17)) && ai_zombie sightconetrace(self getEye(), self, vectornormalize(self getplayerangles()), 17) && !(isDefined(ai_zombie.hit_by_tomahawk) && ai_zombie.hit_by_tomahawk)) {
+    if(isDefined(ai_zombie sightconetrace(self getEye(), self, vectorNormalize(self getplayerangles()), 17)) && ai_zombie sightconetrace(self getEye(), self, vectorNormalize(self getplayerangles()), 17) && !(isDefined(ai_zombie.hit_by_tomahawk) && ai_zombie.hit_by_tomahawk)) {
       if(!isDefined(var_f500f73e)) {
         var_f500f73e = [];
       } else if(!isarray(var_f500f73e)) {
@@ -494,7 +494,7 @@ function_c7ddedb2(mdl_tomahawk, ai_zombie, var_bfed4a7 = 0.25) {
 
   if(isalive(ai_zombie) && !(isDefined(ai_zombie.hit_by_tomahawk) && ai_zombie.hit_by_tomahawk)) {
     v_target = ai_zombie gettagorigin("J_Head");
-    mdl_tomahawk moveto(v_target, var_bfed4a7);
+    mdl_tomahawk moveTo(v_target, var_bfed4a7);
     wait var_bfed4a7;
 
     if(isalive(ai_zombie)) {
@@ -534,7 +534,7 @@ tomahawk_return_player(mdl_tomahawk, var_65f2e452, n_move_speed = 1600) {
     }
 
     while(n_dist_sq > 1600) {
-      mdl_tomahawk moveto(self getEye(), var_e65ebf4);
+      mdl_tomahawk moveTo(self getEye(), var_e65ebf4);
 
       if(var_65f2e452 < 5) {
         self function_723cb8bd(mdl_tomahawk);
@@ -673,7 +673,7 @@ tomahawk_rumble(var_b2e05bae) {
   if(var_b2e05bae) {
     switch (var_b2e05bae) {
       case 3:
-        self playrumbleonentity("zm_weap_special_activate_rumble");
+        self playRumbleOnEntity("zm_weap_special_activate_rumble");
         break;
       case 1:
         self clientfield::increment_to_player("tomahawk_rumble", 1);

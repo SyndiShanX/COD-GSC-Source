@@ -17,7 +17,7 @@
 main() {
   SetSavedDvar("com_cinematicEndInWhite", 1);
 
-  price_spawner = getent("price", "script_noteworthy");
+  price_spawner = getEnt("price", "script_noteworthy");
   price_spawner.script_friendname = "Captain MacTavish";
 
   level.DODGE_DISTANCE = 500;
@@ -85,7 +85,7 @@ clifftop_main() {
 
   level.friendlyFireDisabled = false;
   SetSavedDvar("g_friendlyfiredist", 175);
-  node = getstruct("price_clifftopstart", "targetname");
+  node = getStruct("price_clifftopstart", "targetname");
 
   level.price.moveplaybackrate = .6;
   level.price.goalradius = 16;
@@ -211,7 +211,7 @@ hangerpath_main() {
     wait(0.05);
   }
 
-  price_hanger_start = getent("price_hanger_start", "targetname");
+  price_hanger_start = getEnt("price_hanger_start", "targetname");
   level.price_spawner.script_stealth = undefined;
   level.price_spawner.origin = price_hanger_start.origin;
   level.price = new_captain_price_spawns();
@@ -305,7 +305,7 @@ hangerpath_main() {
 hanger_main() {
   flag_wait("player_on_backdoor_path");
 
-  satelite_sequence_node = GetEnt("satelite_sequence", "targetname");
+  satelite_sequence_node = getEnt("satelite_sequence", "targetname");
   level.drill = spawn_anim_model("drill");
   satelite_sequence_node anim_first_frame_solo(level.drill, "enter");
 
@@ -350,7 +350,7 @@ hanger_main() {
 
   hanger_enemies_enter = getnode("hanger_enemies_enter", "targetname");
 
-  use_satelite = getent("use_satelite", "targetname");
+  use_satelite = getEnt("use_satelite", "targetname");
   satelite_sequence_node = getnode("satelite_sequence", "targetname");
 
   keyboard_trigger = getEntWithFlag("keyboard_used");
@@ -366,7 +366,7 @@ hanger_main() {
   level.price thread dialogue_queue("cliff_pri_goupstairs");
 
   thread keyboard_nag();
-  dsm = getent("dsm", "targetname");
+  dsm = getEnt("dsm", "targetname");
   dsm makeusable();
   dsm setHintString(&"CLIFFHANGER_USE_SATELITE");
 
@@ -393,10 +393,10 @@ start_satellite() {
   start_common_cliffhanger();
   friendly_init_cliffhanger();
 
-  player_hanger_start = getent("start_satellite_player", "targetname");
+  player_hanger_start = getEnt("start_satellite_player", "targetname");
   level.player teleport_ent(player_hanger_start);
 
-  node = getent("price_hanger_start", "targetname");
+  node = getEnt("price_hanger_start", "targetname");
   level.price forceTeleport(node.origin, node.angles);
   level.price forceUseWeapon("ak47_arctic", "primary");
 
@@ -473,9 +473,9 @@ start_ch_tarmac(e3) {
   }
   disable_stealth_system();
 
-  player_hanger_start = getent("price_capture_node", "targetname");
+  player_hanger_start = getEnt("price_capture_node", "targetname");
   level.player teleport_ent(player_hanger_start);
-  level.player PlayerLinkTo(player_hanger_start, undefined, 1, 0, 0, 0, 0);
+  level.player PlayerlinkTo(player_hanger_start, undefined, 1, 0, 0, 0, 0);
 
   node = getnode("price_tarmac_path", "targetname");
   level.price forceTeleport(node.origin, node.angles);
@@ -550,10 +550,10 @@ cliffhanger_tarmac_main() {
   thread more_reinforcements_spawn();
   level.player ent_flag_clear("_stealth_enabled");
   level.player.maxVisibleDist = 8000;
-  blue_house_bottom_door = getent("blue_house_bottom_door", "targetname");
+  blue_house_bottom_door = getEnt("blue_house_bottom_door", "targetname");
   blue_house_bottom_door delete();
 
-  blue_house_top_door = getent("blue_house_top_door", "targetname");
+  blue_house_top_door = getEnt("blue_house_top_door", "targetname");
   blue_house_top_door delete();
 
   maps\_vehicle_spline::init_vehicle_splines();
@@ -624,15 +624,15 @@ start_clifftop() {
 
   ch_teleport_player("clifftop");
 
-  node = getstruct("price_clifftopstart", "targetname");
+  node = getStruct("price_clifftopstart", "targetname");
   level.price forceTeleport(node.origin, node.angles);
 }
 
 start_jump() {
   start_common_cliffhanger();
 
-  start_pos = getent("player_big_jump_start", "targetname");
-  level.player setorigin(start_pos.origin);
+  start_pos = getEnt("player_big_jump_start", "targetname");
+  level.player setOrigin(start_pos.origin);
   level.player setplayerangles(start_pos.angles);
 
   thread maps\_climb::death_trigger();
@@ -718,7 +718,7 @@ start_hangerpath() {
   sight_ranges_blizzard();
   ch_teleport_player();
 
-  price_hanger_start = getent("price_hanger_start", "targetname");
+  price_hanger_start = getEnt("price_hanger_start", "targetname");
   level.price teleport_ent(price_hanger_start);
 }
 
@@ -733,17 +733,17 @@ start_hanger() {
   start_common_cliffhanger();
   friendly_init_cliffhanger();
 
-  player_hanger_start = getent("player_hanger_start", "targetname");
+  player_hanger_start = getEnt("player_hanger_start", "targetname");
   level.player teleport_ent(player_hanger_start);
 
-  node = getent("price_hanger_start", "targetname");
+  node = getEnt("price_hanger_start", "targetname");
   level.price forceTeleport(node.origin, node.angles);
 
   maps\_blizzard::blizzard_level_transition_light(3);
 }
 
 start_common_cliffhanger() {
-  level.price_spawner = getent("price", "script_noteworthy");
+  level.price_spawner = getEnt("price", "script_noteworthy");
   player_init();
   misc_precache();
   model_initializations();

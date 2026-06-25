@@ -928,7 +928,7 @@ _id_10800(var_0, var_1, var_2) {
 
       if(!self._id_01B7) {
         var_5 = self._id_027F;
-        var_5 = vectornormalize((var_5[0], var_5[1], 0));
+        var_5 = vectorNormalize((var_5[0], var_5[1], 0));
         var_6 = anglesToForward(self.angles);
 
         if(vectordot(var_5, var_6) < 0.966) {
@@ -1497,11 +1497,11 @@ _id_3603(var_0, var_1, var_2) {
   if(isDefined(self._id_011F)) {
     var_4 = anglestoright(self._id_011F.angles);
     var_5 = anglesToForward(self._id_011F.angles);
-    var_6 = vectornormalize(self._id_9499 - self.origin);
+    var_6 = vectorNormalize(self._id_9499 - self.origin);
   } else {
     var_4 = anglestoright(self.angles);
     var_5 = anglesToForward(self.angles);
-    var_6 = vectornormalize(self._id_9499 - self.origin);
+    var_6 = vectorNormalize(self._id_9499 - self.origin);
   }
 
   var_7 = vectordot(var_4, var_6) >= 0;
@@ -2085,7 +2085,7 @@ _id_03D3(var_0) {
     }
 
     if(isDefined(var_0) && (var_0.type == "Conceal Stand" || var_0.type == "Conceal Crouch")) {
-      var_1 = vectornormalize(var_0.origin - self.origin);
+      var_1 = vectorNormalize(var_0.origin - self.origin);
       var_2 = _func_030A(var_1, self.angles);
       var_3 = var_0.angles[1];
       var_4 = _func_000B(var_3 - var_2[1]);
@@ -2232,7 +2232,7 @@ _id_5BEE(var_0) {
   if(distancesquared(var_0.origin, self._id_0192.origin) > 4096.0) {
     if(!isDefined(self._id_0B67._id_5BF1) || self._id_0B67._id_5BF1 < gettime()) {
       var_1 = (0, 0, 50);
-      var_2 = vectornormalize(self._id_0192.origin - var_0.origin);
+      var_2 = vectorNormalize(self._id_0192.origin - var_0.origin);
       var_3 = var_0.origin + var_1;
       var_4 = var_3 + var_2 * 64.0;
       self._id_0B67._id_5BF1 = gettime() + 1050;

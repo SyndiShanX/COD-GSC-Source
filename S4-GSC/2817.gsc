@@ -160,7 +160,7 @@ _id_6DBD() {
     return self._id_EEA3;
   }
 
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0)) {
     return undefined;

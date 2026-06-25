@@ -57,7 +57,7 @@ function stage_logic_2() {
   angles = level._be.angles;
   exploder::exploder("fxexp_405");
   level._be playSound("evt_be_insert");
-  level._be stopanimscripted();
+  level._be stopanimScripted();
   level._be unlink();
   level._be dontinterpolate();
   level._be.origin = org;
@@ -67,7 +67,7 @@ function stage_logic_2() {
     level._be_vehicle delete();
   }
   if(isDefined(level._be_origin_animate)) {
-    level._be_origin_animate stopanimscripted();
+    level._be_origin_animate stopanimScripted();
     level._be_origin_animate delete();
   }
   zm_weap_quantum_bomb::quantum_bomb_register_result("be2", undefined, 100, &be2_validation);
@@ -80,7 +80,7 @@ function stage_logic_2() {
   level.teleport_target_trigger = spawn("trigger_radius", s.origin + (vectorscale((0, 0, -1), 70)), 0, 125, 100);
   level.black_hole_bomb_loc_check_func = &bhb_teleport_loc_check;
   level waittill("be2_tp_done");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 2);
   level.black_hole_bomb_loc_check_func = undefined;
   level._be delete();
@@ -93,7 +93,7 @@ function wait_for_close_player() {
   self endon("death");
   wait(25);
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) <= 62500) {
         players[i] thread zm_audio::create_and_play_dialog("eggs", "quest8", 0);
@@ -118,11 +118,11 @@ function teleport_target(grenade, model) {
   level.teleport_target_trigger = undefined;
   wait(1);
   time = 3;
-  model moveto(grenade.origin + vectorscale((0, 0, 1), 50), time, time - 0.05);
+  model moveTo(grenade.origin + vectorscale((0, 0, 1), 50), time, time - 0.05);
   wait(time);
   teleport_targets = struct::get_array("vista_rocket", "targetname");
   model ghost();
-  playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + vectorscale((0, 0, 1), 50));
+  playSoundAtPosition("zmb_gersh_teleporter_out", grenade.origin + vectorscale((0, 0, 1), 50));
   wait(0.5);
   model stoploopsound(1);
   wait(0.5);
@@ -187,11 +187,11 @@ function moon_be_activate() {
   level._be.stopped = 0;
   level._be thread waittill_player_is_close();
   origin_animate = util::spawn_model("tag_origin_animate", level._be.origin);
-  level._be linkto(origin_animate, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
-  level._be_vehicle = spawnvehicle("misc_freefall", road_start.origin, road_start.angles, "be_mover");
+  level._be linkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  level._be_vehicle = spawnVehicle("misc_freefall", road_start.origin, road_start.angles, "be_mover");
   level._be_vehicle._be_model = level._be;
   level._be_vehicle._be_org_anim = origin_animate;
-  origin_animate linkto(level._be_vehicle);
+  origin_animate linkTo(level._be_vehicle);
   level._be_origin_animate = origin_animate;
   level._be_vehicle attachpath(road_start);
   d_trig = spawn("trigger_damage", level._be_vehicle.origin, 0, 32, 72);
@@ -207,7 +207,7 @@ function moon_be_activate() {
     }
   }
   d_trig delete();
-  level._be animscripted("spin", level._be.origin, level._be.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
+  level._be animScripted("spin", level._be.origin, level._be.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
   level._be_vehicle thread moon_be_think();
   level._be_vehicle startpath();
 }
@@ -415,17 +415,17 @@ function get_closest_index_2d(org, array, dist = 9999999) {
 
 function moon_be_anim_swap(int_anim) {
   self endon("death");
-  self._be_model stopanimscripted();
+  self._be_model stopanimScripted();
   if(int_anim == 0) {
-    self._be_model animscripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
+    self._be_model animScripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
   } else {
-    self._be_model animscripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
+    self._be_model animScripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
   }
 }
 
 function moon_be_stop_anim() {
   self endon("death");
-  self._be_model stopanimscripted();
+  self._be_model stopanimScripted();
 }
 
 function moon_be_resume_anim() {
@@ -433,15 +433,15 @@ function moon_be_resume_anim() {
   self endon("be_stage_one_over");
   rand = randomint(1);
   if(rand) {
-    self._be_model animscripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
+    self._be_model animScripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
   } else {
-    self._be_model animscripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
+    self._be_model animScripted("spin", self._be_model.origin, self._be_model.angles, "p7_fxanim_zm_sha_crystal_sml_anim");
   }
 }
 
 function waittill_player_is_close() {
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) <= 62500) {
         players[i] thread zm_audio::create_and_play_dialog("eggs", "quest2", 0);

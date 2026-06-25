@@ -263,7 +263,7 @@ _id_987D(var_0) {
   var_10._id_5FE5.name = "front_turret";
   var_10._id_5FE5._id_1DF2 = undefined;
   var_10._id_5FE5._id_10324 = "loot_chopper";
-  var_10._id_5FE5 linkto(var_10);
+  var_10._id_5FE5 linkTo(var_10);
   var_10._id_5FE5 _meth_83A0(var_10.team);
   var_10._id_5FE5 _meth_839D(0);
   var_10._id_5FE5 setmode("manual");
@@ -279,7 +279,7 @@ _id_987D(var_0) {
   var_10._id_C0C8.name = "rear_turret";
   var_10._id_C0C8._id_1DF2 = undefined;
   var_10._id_C0C8._id_10324 = "loot_chopper";
-  var_10._id_C0C8 linkto(var_10);
+  var_10._id_C0C8 linkTo(var_10);
   var_10._id_C0C8 _meth_83A0(var_10.team);
   var_10._id_C0C8 _meth_839D(0);
   var_10._id_C0C8 setmode("manual");

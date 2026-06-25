@@ -281,7 +281,7 @@ attachMissiles() {
     self.missiles[missileTag] = spawn("script_model", self GetTagOrigin(missileTag));
     self.missiles[missileTag] setModel("veh_ca_a10_missile");
     self.missiles[missileTag].angles = self GetTagAngles(missileTag);
-    self.missiles[missileTag] LinkTo(self, missileTag);
+    self.missiles[missileTag] linkTo(self, missileTag);
     i--;
   }
 }
@@ -290,7 +290,7 @@ attachAnimatedFlaps() {
   self.animated_flaps = spawn("script_model", self GetTagOrigin("tag_origin"));
   self.animated_flaps setModel("veh_ca_a10_flaps_animated");
   self.animated_flaps.angles = self GetTagAngles("tag_origin");
-  self.animated_flaps LinkTo(self, "tag_origin");
+  self.animated_flaps linkTo(self, "tag_origin");
 }
 
 spawnAircraft(streakName, lifeId, splineId, numPlane) {
@@ -307,7 +307,7 @@ spawnAircraft(streakName, lifeId, splineId, numPlane) {
   self.plane attachMissiles();
   self.plane attachAnimatedFlaps();
 
-  self CameraLinkTo(self.plane, "tag_player");
+  self CameralinkTo(self.plane, "tag_player");
   self RemoteControlVehicle(self.plane);
   self thread watchIntroCleared(streakName, self.plane);
   self.plane SetPlaneSplineId(self, splineId);
@@ -329,7 +329,7 @@ SpawnAndPlaySoundForA10(plane, numPlane) {
   sound_ent = spawn("script_model", plane.origin);
   sound_ent setModel("tag_origin");
   sound_alias = ("scn_impact_a10_passby_0" + numPlane);
-  sound_ent linkto(plane);
+  sound_ent linkTo(plane);
   sound_ent PlaySoundOnMovingEnt(sound_alias);
 }
 
@@ -338,7 +338,7 @@ attachTurret(streakName) {
   turretPos = self GetTagOrigin(config.turretAttachPoint);
   turret = SpawnTurret("misc_turret", self.origin + turretPos, config.turretName, false);
   turret.angles = self GetTagAngles(config.turretAttachPoint);
-  turret LinkTo(self, config.turretAttachPoint, (0, 0, 0), (0, 0, 0));
+  turret linkTo(self, config.turretAttachPoint, (0, 0, 0), (0, 0, 0));
 
   turret.owner = self.owner;
 
@@ -604,7 +604,7 @@ missileIsGoodTarget(target) {
 }
 
 missileTargetAngle(target) {
-  dirToTarget = VectorNormalize(target.origin - self.origin);
+  dirToTarget = vectorNormalize(target.origin - self.origin);
   facingDir = anglesToForward(self.angles);
 
   return VectorDot(dirToTarget, facingDir);
@@ -800,7 +800,7 @@ update_hit_sound_ent() {
   moving_ent playLoopSound("a10_bullet_impact_lp");
 
   while(isDefined(self) && self.owner.is_attacking) {
-    moving_ent MoveTo(self get_look_position(), 0.15);
+    moving_ent moveTo(self get_look_position(), 0.15);
     wait 0.01;
   }
 
@@ -819,7 +819,7 @@ update_gatling_sound_ent() {
   moving_gatling_ent playLoopSound("a10_npc_fire_gatling_lp");
 
   while(isDefined(self) && isDefined(self.owner) && isDefined(moving_gatling_ent) && self.owner.is_attacking) {
-    moving_gatling_ent MoveTo(self.origin, 0.1);
+    moving_gatling_ent moveTo(self.origin, 0.1);
     wait 0.01;
   }
 
@@ -934,7 +934,7 @@ updateCannonShake(streakName) {
 
     playFX(config.cannonFireVFX, barrelPoint);
 
-    self.owner PlayRumbleOnEntity(config.cannonRumble);
+    self.owner playRumbleOnEntity(config.cannonRumble);
 
     wait(0.1);
   }

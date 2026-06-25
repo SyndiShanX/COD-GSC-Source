@@ -656,10 +656,10 @@ _id_C80C(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_0.origin + (0, 0, 30));
   var_3 setModel("tag_origin");
   var_3 makeuseable();
-  var_3 sethintstring("MP/DOOR_USE_LOCK");
+  var_3 setHintString("MP/DOOR_USE_LOCK");
   var_3 setuseholdduration("duration_long");
   var_3 setusefov(15);
-  var_3 setcursorhint("HINT_BUTTON");
+  var_3 setCursorHint("HINT_BUTTON");
 
   foreach(var_5 in var_1) {
     var_3 disableplayeruse(var_5);
@@ -964,8 +964,8 @@ _id_21C2() {
   thread _id_1418();
   thread _id_1417();
   thread _id_FFD3();
-  var_0 = getent("bank_vol_01", "targetname");
-  var_1 = getent("bank_vol_01_upper", "targetname");
+  var_0 = getEnt("bank_vol_01", "targetname");
+  var_1 = getEnt("bank_vol_01_upper", "targetname");
   level._id_10C61 = [];
   var_2 = scripts\engine\utility::getStructArray("enemy_wave_01", "targetname");
 
@@ -981,10 +981,10 @@ _id_21C2() {
     level._id_10C61 = scripts\engine\utility::array_add(level._id_10C61, var_5);
   }
 
-  var_7 = getent("wave_01_overrun_trig", "targetname");
+  var_7 = getEnt("wave_01_overrun_trig", "targetname");
   _id_10937(var_7, level._id_10C61, level._id_10C61.size - 3);
   level notify("spawn_wave2");
-  var_8 = getent("bank_vol_02", "targetname");
+  var_8 = getEnt("bank_vol_02", "targetname");
   var_9 = [];
   var_10 = scripts\engine\utility::getStructArray("enemy_wave_02", "targetname");
 
@@ -1004,9 +1004,9 @@ _id_21C2() {
   scripts\mp\gametypes\br_ai_encounters_util::_id_108BD(var_9, var_9.size);
   wait 0.5;
   self notify("open_vault");
-  var_17 = getent("bank_vol_03", "targetname");
+  var_17 = getEnt("bank_vol_03", "targetname");
   var_18 = [];
-  var_19 = scripts\engine\utility::getstruct("enemy_wave_03_boss", "targetname");
+  var_19 = scripts\engine\utility::getStruct("enemy_wave_03_boss", "targetname");
   var_20 = _id_EF05(var_19);
   var_20 thread _id_8BDD();
   var_18 = scripts\engine\utility::array_add(var_18, var_20);
@@ -1025,14 +1025,14 @@ _id_FFD0(var_0) {
     return;
   }
 
-  var_1 = getent("vault_door_clip", "targetname");
-  var_1 linkto(var_0);
+  var_1 = getEnt("vault_door_clip", "targetname");
+  var_1 linkTo(var_0);
   var_0._id_E5A7 = var_0.angles;
   var_0.init = 1;
 }
 
 _id_FFD3() {
-  var_0 = getent("vault_door", "targetname");
+  var_0 = getEnt("vault_door", "targetname");
   _id_FFD0(var_0);
   _id_FFD1();
   var_0 thread _id_FFD2();
@@ -1126,18 +1126,18 @@ _id_21C4(var_0) {
 }
 
 _id_13B7() {
-  var_0 = getent("ai_encounter_crate", "targetname");
+  var_0 = getEnt("ai_encounter_crate", "targetname");
   var_0 movez(256, 0.05);
   wait 0.5;
   _func_02B0(var_0);
-  var_1 = getent("kickoff_airport_encounter", "targetname");
+  var_1 = getEnt("kickoff_airport_encounter", "targetname");
   var_1 waittill("trigger", var_2);
   var_3 = "s4_smoke_usa_m18_mp";
-  var_4 = magicgrenademanual(var_3, scripts\engine\utility::getstruct("airport_smoke_toss_pos", "targetname").origin, anglesToForward(scripts\engine\utility::getstruct("airport_smoke_toss_pos", "targetname").angles) * 400, 1);
+  var_4 = magicgrenademanual(var_3, scripts\engine\utility::getStruct("airport_smoke_toss_pos", "targetname").origin, anglesToForward(scripts\engine\utility::getStruct("airport_smoke_toss_pos", "targetname").angles) * 400, 1);
   wait 0.1;
-  var_5 = magicgrenademanual(var_3, scripts\engine\utility::getstruct("airport_smoke_toss_pos_02", "targetname").origin, anglesToForward(scripts\engine\utility::getstruct("airport_smoke_toss_pos_02", "targetname").angles) * 400, 1.3);
-  var_6 = magicgrenademanual(var_3, scripts\engine\utility::getstruct("airport_smoke_toss_pos_03", "targetname").origin, anglesToForward(scripts\engine\utility::getstruct("airport_smoke_toss_pos_03", "targetname").angles) * 450, 2);
-  var_7 = getent("airport_vol_01", "targetname");
+  var_5 = magicgrenademanual(var_3, scripts\engine\utility::getStruct("airport_smoke_toss_pos_02", "targetname").origin, anglesToForward(scripts\engine\utility::getStruct("airport_smoke_toss_pos_02", "targetname").angles) * 400, 1.3);
+  var_6 = magicgrenademanual(var_3, scripts\engine\utility::getStruct("airport_smoke_toss_pos_03", "targetname").origin, anglesToForward(scripts\engine\utility::getStruct("airport_smoke_toss_pos_03", "targetname").angles) * 450, 2);
+  var_7 = getEnt("airport_vol_01", "targetname");
   wait 2;
   var_8 = [];
   var_9 = scripts\engine\utility::getStructArray("airport_enemy_wave_01", "targetname");
@@ -1149,7 +1149,7 @@ _id_13B7() {
     var_8 = scripts\engine\utility::array_add(var_8, var_12);
   }
 
-  var_14 = getent("wave_01_overrun_trig", "targetname");
+  var_14 = getEnt("wave_01_overrun_trig", "targetname");
   scripts\mp\gametypes\br_ai_encounters_util::_id_108BD(var_8, var_8.size);
   _id_5275(1);
 }
@@ -1222,7 +1222,7 @@ _id_F6E3(var_0) {
   self endon("encounter_end");
 
   if(!istrue(var_0.init)) {
-    var_0._id_1788 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_0._id_1788 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
     if(!isDefined(var_0._id_1788.angles)) {
       var_0._id_1788.angles = (0, 0, 0);
@@ -1718,13 +1718,13 @@ _id_5823(var_0) {
   var_1 _meth_82CB("sdr_cp_hostage_dropoff_ground_idle_pilot");
   var_1 _meth_8642(1);
   var_1 makeuseable();
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 setCursorHint("HINT_NOICON");
   var_1 setuseholdduration("duration_medium");
   var_1 sethintrequiresholding(1);
   var_1 sethintdisplayfov(120);
   var_1 setusefov(120);
   var_1 setuserange(80);
-  var_1 sethintstring(&"MP_BR_USE_PLUNDER_CACHE");
+  var_1 setHintString(&"MP_BR_USE_PLUNDER_CACHE");
   var_1 setasgametypeobjective();
   var_1 show();
   var_1._id_C0AD = 0;
@@ -1757,7 +1757,7 @@ _id_582D(var_0, var_1) {
   var_2.label = &"MP/BR_RESPAWN_BODY";
   self._id_79CE = var_2;
   var_0 _meth_82CB("sdr_cp_hostage_walk_hostage");
-  var_0 linkto(self, "j_clavicle_le", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "j_clavicle_le", (0, 0, 0), (0, 0, 0));
   self allowads(0);
   self allowcrouch(0);
   self allowprone(0);
@@ -1821,10 +1821,10 @@ _id_5821(var_0) {
 
 _id_5820() {
   self makeuseable();
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self setuseholdduration("duration_long");
   self sethintrequiresholding(1);
-  self sethintstring(&"MP_BR_USE_PLUNDER_CACHE");
+  self setHintString(&"MP_BR_USE_PLUNDER_CACHE");
   self._id_C0AD = 1;
 }
 

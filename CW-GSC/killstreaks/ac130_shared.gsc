@@ -71,7 +71,7 @@ function spawnac130(killstreaktype) {
   bundle = killstreaks::get_script_bundle("ac130");
   assert(isDefined(bundle));
   spawnpos = level.mapcenter + (5000, 5000, 8000);
-  level.ac130 = spawnvehicle(bundle.ksvehicle, spawnpos, (0, 0, 0), "ac130");
+  level.ac130 = spawnVehicle(bundle.ksvehicle, spawnpos, (0, 0, 0), "ac130");
   level.ac130.identifier_weapon = getweapon("ac130");
   level.ac130 killstreaks::configure_team(killstreaktype, killstreak_id, player, "helicopter");
   level.ac130 killstreak_hacking::enable_hacking("ac130", &hackedprefunction, &hackedpostfunction);
@@ -822,7 +822,7 @@ function function_dea7ec6a(einflictor, eattacker, idamage, idflags, smeansofdeat
         var_74d40edb = idamage getvelocity();
 
         if(lengthsquared(var_74d40edb) > sqr(50)) {
-          var_29edfc10 = vectornormalize(var_74d40edb);
+          var_29edfc10 = vectorNormalize(var_74d40edb);
           playFX(bundle.var_888a5ff7, shitloc, var_29edfc10, undefined, undefined, self.team);
         }
       }
@@ -873,7 +873,7 @@ function function_cd679760(startnode, destnodes) {
   self endon(#"flying", #"crashing", #"leaving", #"death");
   bundle = killstreaks::get_script_bundle("ac130");
   assert(isDefined(bundle));
-  nextnode = getent(startnode.target, "targetname");
+  nextnode = getEnt(startnode.target, "targetname");
   assert(isDefined(nextnode), "<dev string:x38>");
   self setspeed(150, 80);
   self setneargoalnotifydist(100);
@@ -884,7 +884,7 @@ function function_cd679760(startnode, destnodes) {
   if(!self.playermovedrecently) {
     node = self updateareanodes(destnodes, 0);
     level.ac130.currentnode = node;
-    targetnode = getent(node.target, "targetname");
+    targetnode = getEnt(node.target, "targetname");
     traveltonode(targetnode);
 
     if(isDefined(targetnode.script_airspeed) && isDefined(targetnode.script_accel)) {
@@ -955,7 +955,7 @@ function watchlocationchangethread(destnodes) {
     player.moves++;
     node = self updateareanodes(destnodes, 1);
     ac130.currentnode = node;
-    targetnode = getent(node.target, "targetname");
+    targetnode = getEnt(node.target, "targetname");
     player playlocalsound(#"mpl_cgunner_nav");
     ac130 traveltonode(targetnode);
 
@@ -1020,7 +1020,7 @@ function updateareanodes(areanodes, forcemove) {
       continue;
     }
 
-    helinode = getent(node.target, "targetname");
+    helinode = getEnt(node.target, "targetname");
 
     foreach(player in node.validplayers) {
       node.nodescore += 1;

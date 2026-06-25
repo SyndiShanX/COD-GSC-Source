@@ -81,7 +81,7 @@ func_7E37(var_0) {
 }
 
 func_49D1(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = getent("airstrikeheight", "targetname");
+  var_6 = getEnt("airstrikeheight", "targetname");
   var_7 = var_2.origin;
   var_8 = anglesToForward(var_3);
   var_9 = var_1.origin;
@@ -152,7 +152,7 @@ func_7DFC(var_0) {
   self endon("crashing");
   self endon("helicopter_removed");
   self endon("heightReturned");
-  var_1 = getent("airstrikeheight", "targetname");
+  var_1 = getEnt("airstrikeheight", "targetname");
   if(isDefined(var_1)) {
     var_2 = var_1.origin[2];
   } else if(isDefined(level.airstrikeheightscale)) {

@@ -74,15 +74,15 @@ setupblackboard() {
 }
 
 setupnodes() {
-  self.arenacenter = scripts\engine\utility::getstruct("arena_center", "targetname").origin;
+  self.arenacenter = scripts\engine\utility::getStruct("arena_center", "targetname").origin;
   var_0 = [];
-  var_1 = scripts\engine\utility::getstruct("boss_path", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("boss_path", "script_noteworthy");
   var_2 = var_1.targetname;
 
   for(;;) {
-    var_1.var_1E75 = vectornormalize((self.arenacenter - var_1.origin) * (1, 1, 0));
+    var_1.var_1E75 = vectorNormalize((self.arenacenter - var_1.origin) * (1, 1, 0));
     var_0[var_0.size] = var_1;
-    var_1 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
     if(var_1.targetname == var_2) {
       break;
@@ -255,7 +255,7 @@ setupactions() {
 
 entrance_begin(var_0) {
   self.introfinished = 0;
-  self scragentsetgoalradius(100000);
+  self scragentsetgoalRadius(100000);
   self clearpath();
   self._blackboard.desirednode = 0;
   self._blackboard.smoothmotion = 0;
@@ -747,7 +747,7 @@ pickrandomvalidaction(var_0) {
 }
 
 moveaction_begin(var_0) {
-  self scragentsetgoalradius(100000);
+  self scragentsetgoalRadius(100000);
   self clearpath();
   scripts\asm\dlc4\dlc4_asm::clearasmaction();
   self setscriptablepartstate("flame_trail", "on");
@@ -787,7 +787,7 @@ moveaction_tick(var_0) {
       }
 
       moveaction_internalsetup(var_0);
-      var_1.desireddir = vectornormalize(var_1.nodes[var_1.desirednode].origin - self.origin);
+      var_1.desireddir = vectorNormalize(var_1.nodes[var_1.desirednode].origin - self.origin);
     }
   } else if(var_1.nodestomove == 1) {
     if(var_2 + var_1.movearrivaldist >= var_3) {
@@ -811,7 +811,7 @@ moveaction_end(var_0) {
 }
 
 tempidle_begin(var_0) {
-  self scragentsetgoalradius(100000);
+  self scragentsetgoalRadius(100000);
   self clearpath();
   scripts\asm\dlc4\dlc4_asm::clearasmaction();
   func_F8A3(var_0, "temp_idle");
@@ -1246,7 +1246,7 @@ func_593B() {
 }
 
 func_F8A3(var_0, var_1) {
-  self scragentsetgoalradius(100000000);
+  self scragentsetgoalRadius(100000000);
   self clearpath();
   scripts\asm\dlc4\dlc4_asm::setasmaction(var_1);
 }

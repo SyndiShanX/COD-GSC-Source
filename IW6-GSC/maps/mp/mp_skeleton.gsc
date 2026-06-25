@@ -37,7 +37,7 @@ main() {
 }
 
 initAdditionalCollision() {
-  collision1 = GetEnt("clip128x128x8", "targetname");
+  collision1 = getEnt("clip128x128x8", "targetname");
   collision1Ent = spawn("script_model", (-1065.81, -1288.17, 238.002));
   collision1ent.angles = (352.044, 14.1584, 10.0585);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
@@ -58,12 +58,12 @@ initAdditionalCollision() {
 }
 
 portcullis_watch() {
-  intact_gate = GetEnt("gate", "targetname");
-  destroyed_gate = GetEnt("gate_d", "targetname");
-  gate_dest = getstruct(intact_gate.target, "targetname");
-  destroyed_collision = GetEnt("destroyed_collision", "targetname");
-  intact_collision = GetEnt("intact_collision", "targetname");
-  killCam_loc = getstruct("gate_killcam", "targetname");
+  intact_gate = getEnt("gate", "targetname");
+  destroyed_gate = getEnt("gate_d", "targetname");
+  gate_dest = getStruct(intact_gate.target, "targetname");
+  destroyed_collision = getEnt("destroyed_collision", "targetname");
+  intact_collision = getEnt("intact_collision", "targetname");
+  killCam_loc = getStruct("gate_killcam", "targetname");
 
   gate_crash_time = 1.0;
 
@@ -71,21 +71,21 @@ portcullis_watch() {
   intact_collision.killCamEnt setModel("tag_origin");
 
   destroyed_gate Hide();
-  destroyed_gate LinkTo(intact_gate);
+  destroyed_gate linkTo(intact_gate);
 
   destroyed_collision NotSolid();
   intact_collision NotSolid();
   intact_collision ConnectPaths();
   intact_collision.dest_origin = intact_collision.origin;
-  intact_collision MoveTo(intact_gate.origin, 0.1, 0.0, 0.0);
+  intact_collision moveTo(intact_gate.origin, 0.1, 0.0, 0.0);
 
   intact_gate setCanDamage(true);
 
   intact_gate waittill("damage", damage, attacker, direction_vec, impact_loc, damage_type);
 
-  intact_gate MoveTo(gate_dest.origin, gate_crash_time, gate_crash_time, 0.0);
+  intact_gate moveTo(gate_dest.origin, gate_crash_time, gate_crash_time, 0.0);
   intact_collision Solid();
-  intact_collision MoveTo(intact_collision.dest_origin, gate_crash_time, gate_crash_time, 0.0);
+  intact_collision moveTo(intact_collision.dest_origin, gate_crash_time, gate_crash_time, 0.0);
 
   intact_collision.unresolved_collision_notify_min = 1;
   intact_collision.unresolved_collision_kill = true;
@@ -97,7 +97,7 @@ portcullis_watch() {
 
   wait(gate_crash_time);
 
-  intact_collision DisconnectPaths();
+  intact_collision disconnectPaths();
 
   intact_collision thread maps\mp\_movers::stop_player_pushed_kill();
 

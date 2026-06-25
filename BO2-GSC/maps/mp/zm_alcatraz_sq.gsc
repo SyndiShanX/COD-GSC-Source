@@ -145,10 +145,10 @@ host_migration_listener() {
 
   while(true) {
     level waittill("host_migration_end");
-    m_plane_craftable = getent("plane_craftable", "targetname");
-    m_plane_about_to_crash = getent("plane_about_to_crash", "targetname");
-    veh_plane_flyable = getent("plane_flyable", "targetname");
-    a_players = getplayers();
+    m_plane_craftable = getEnt("plane_craftable", "targetname");
+    m_plane_about_to_crash = getEnt("plane_about_to_crash", "targetname");
+    veh_plane_flyable = getEnt("plane_flyable", "targetname");
+    a_players = getPlayers();
 
     if(flag("plane_boarded") && !flag("plane_departed")) {
       foreach(player in a_players) {
@@ -191,11 +191,11 @@ host_migration_listener() {
 
 prevent_theater_mode_spoilers() {
   flag_wait("initial_blackscreen_passed");
-  m_plane_flyable = getent("plane_flyable", "targetname");
+  m_plane_flyable = getEnt("plane_flyable", "targetname");
   m_plane_flyable setinvisibletoall();
-  m_plane_hideable_engine = getent("plane_hideable_engine", "targetname");
+  m_plane_hideable_engine = getEnt("plane_hideable_engine", "targetname");
   m_plane_hideable_engine ghost();
-  m_plane_hideable_clothes_pile = getent("plane_hideable_clothes_pile", "targetname");
+  m_plane_hideable_clothes_pile = getEnt("plane_hideable_clothes_pile", "targetname");
   m_plane_hideable_clothes_pile ghost();
   a_str_partnames = [];
   a_str_partnames[0] = "cloth";
@@ -245,7 +245,7 @@ setup_puzzle_piece_glint() {
     playFXOnTag(level._effect["key_glint"], m_master_key, "tag_origin");
   }
 
-  m_fake_plane_steering = getent("fake_veh_t6_dlc_zombie_part_control", "targetname");
+  m_fake_plane_steering = getEnt("fake_veh_t6_dlc_zombie_part_control", "targetname");
 
   if(isDefined(m_fake_plane_steering)) {
     playFXOnTag(level._effect["quest_item_glow"], m_fake_plane_steering, "tag_origin");
@@ -275,7 +275,7 @@ setup_devgui() {
 watch_devgui_alcatraz_final_battle() {
   while(true) {
     if(getDvar(#"_id_9624FC9B") == "on") {
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         iprintlnbold("LINK PLAYER TO PLANE, START COUNTDOWN IF NOT YET STARTED");
@@ -295,7 +295,7 @@ watch_devgui_get_key() {
   while(true) {
     if(getDvar(#"_id_B1E41F18") == "on") {
       a_players = [];
-      a_players = getplayers();
+      a_players = getPlayers();
       m_master_key = get_craftable_piece_model("quest_key1", "p6_zm_al_key");
 
       if(isDefined(m_master_key)) {
@@ -314,7 +314,7 @@ watch_devgui_afterlife() {
   while(true) {
     if(getDvar(#"_id_51DB321F") == "on") {
       a_players = [];
-      a_players = getplayers();
+      a_players = getPlayers();
 
       for(i = 0; i < a_players.size; i++) {
         a_players[i] afterlife_add();
@@ -330,7 +330,7 @@ watch_devgui_afterlife() {
 watch_devgui_give_shield() {
   while(true) {
     if(getDvar(#"_id_DF65AA39") == "on") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(is_equipment_included("alcatraz_shield_zm")) {
           player maps\mp\zombies\_zm_equipment::equipment_buy("alcatraz_shield_zm");
         }
@@ -363,14 +363,14 @@ watch_devgui_plane() {
   }
 
   level thread maps\mp\zm_alcatraz_sq_vo::escape_flight_vo();
-  plane_craftable = getent("plane_craftable", "targetname");
+  plane_craftable = getEnt("plane_craftable", "targetname");
   plane_craftable showpart("tag_support_upper");
   plane_craftable showpart("tag_wing_skins_up");
   plane_craftable showpart("tag_engines_up");
   plane_craftable showpart("tag_feul_tanks");
   plane_craftable showpart("tag_control_mechanism");
   plane_craftable showpart("tag_fuel_hose");
-  t_plane_fly = getent("plane_fly_trigger", "targetname");
+  t_plane_fly = getEnt("plane_fly_trigger", "targetname");
   t_plane_fly trigger_on();
   t_plane_fly.require_look_at = 0;
 
@@ -440,7 +440,7 @@ setup_key_doors() {
 }
 
 create_key_door_unitrigger(piece_num, width, height, length) {
-  t_key_door = getstruct("key_door_" + piece_num + "_trigger", "targetname");
+  t_key_door = getStruct("key_door_" + piece_num + "_trigger", "targetname");
   t_key_door.unitrigger_stub = spawnStruct();
   t_key_door.unitrigger_stub.origin = t_key_door.origin;
   t_key_door.unitrigger_stub.angles = t_key_door.angles;
@@ -461,9 +461,9 @@ key_door_trigger_visibility(player) {
   self setinvisibletoplayer(player, b_is_invis);
 
   if(flag("key_found")) {
-    self sethintstring(&"ZM_PRISON_KEY_DOOR");
+    self setHintString(&"ZM_PRISON_KEY_DOOR");
   } else {
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
   }
 
   return !b_is_invis;
@@ -495,7 +495,7 @@ master_key_door_trigger_thread() {
 }
 
 open_custom_door_master_key(n_door_index, e_triggerer) {
-  m_lock = getent("masterkey_lock_" + n_door_index, "targetname");
+  m_lock = getEnt("masterkey_lock_" + n_door_index, "targetname");
   m_lock playSound("zmb_quest_key_unlock");
   playFXOnTag(level._effect["fx_alcatraz_unlock_door"], m_lock, "tag_origin");
   wait 0.5;
@@ -503,8 +503,8 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
 
   switch (n_door_index) {
     case 1:
-      shower_key_door = getent("shower_key_door", "targetname");
-      shower_key_door moveto(shower_key_door.origin + vectorscale((1, 0, 0), 80.0), 0.25);
+      shower_key_door = getEnt("shower_key_door", "targetname");
+      shower_key_door moveTo(shower_key_door.origin + vectorscale((1, 0, 0), 80.0), 0.25);
       shower_key_door connectpaths();
 
       if(isDefined(e_triggerer)) {
@@ -514,18 +514,18 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       shower_key_door playSound("zmb_chainlink_open");
       break;
     case 2:
-      admin_powerhouse_puzzle_door_clip = getent("admin_powerhouse_puzzle_door_clip", "targetname");
+      admin_powerhouse_puzzle_door_clip = getEnt("admin_powerhouse_puzzle_door_clip", "targetname");
       admin_powerhouse_puzzle_door_clip delete();
-      admin_powerhouse_puzzle_door = getent("admin_powerhouse_puzzle_door", "targetname");
-      admin_powerhouse_puzzle_door rotateyaw(90, 0.5);
+      admin_powerhouse_puzzle_door = getEnt("admin_powerhouse_puzzle_door", "targetname");
+      admin_powerhouse_puzzle_door rotateYaw(90, 0.5);
       admin_powerhouse_puzzle_door playSound("zmb_chainlink_open");
       break;
     case 3:
-      m_nixie_door_left = getent("nixie_door_left", "targetname");
-      m_nixie_door_right = getent("nixie_door_right", "targetname");
-      m_nixie_door_left rotateyaw(-165, 0.5);
-      m_nixie_door_right rotateyaw(165, 0.5);
-      m_nixie_tube_weaponclip = getent("nixie_tube_weaponclip", "targetname");
+      m_nixie_door_left = getEnt("nixie_door_left", "targetname");
+      m_nixie_door_right = getEnt("nixie_door_right", "targetname");
+      m_nixie_door_left rotateYaw(-165, 0.5);
+      m_nixie_door_right rotateYaw(165, 0.5);
+      m_nixie_tube_weaponclip = getEnt("nixie_tube_weaponclip", "targetname");
       m_nixie_tube_weaponclip delete();
 
       if(isDefined(e_triggerer)) {
@@ -534,12 +534,12 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
 
       break;
     case 4:
-      m_gate_01 = getent("cable_puzzle_gate_01", "targetname");
-      m_gate_01 moveto(m_gate_01.origin + (-16, 80, 0), 0.5);
+      m_gate_01 = getEnt("cable_puzzle_gate_01", "targetname");
+      m_gate_01 moveTo(m_gate_01.origin + (-16, 80, 0), 0.5);
       m_gate_01 connectpaths();
-      gate_1_monsterclip = getent("docks_gate_1_monsterclip", "targetname");
+      gate_1_monsterclip = getEnt("docks_gate_1_monsterclip", "targetname");
       gate_1_monsterclip.origin = gate_1_monsterclip.origin + vectorscale((0, 0, 1), 256.0);
-      gate_1_monsterclip disconnectpaths();
+      gate_1_monsterclip disconnectPaths();
       gate_1_monsterclip.origin = gate_1_monsterclip.origin - vectorscale((0, 0, 1), 256.0);
 
       if(isDefined(e_triggerer)) {
@@ -551,13 +551,13 @@ open_custom_door_master_key(n_door_index, e_triggerer) {
       flag_set("docks_inner_gate_open");
       break;
     case 5:
-      m_infirmary_case_door_left = getent("infirmary_case_door_left", "targetname");
-      m_infirmary_case_door_right = getent("infirmary_case_door_right", "targetname");
-      m_infirmary_case_door_left rotateyaw(-165, 0.5);
-      m_infirmary_case_door_right rotateyaw(165, 0.5);
-      m_fake_plane_steering = getent("fake_veh_t6_dlc_zombie_part_control", "targetname");
+      m_infirmary_case_door_left = getEnt("infirmary_case_door_left", "targetname");
+      m_infirmary_case_door_right = getEnt("infirmary_case_door_right", "targetname");
+      m_infirmary_case_door_left rotateYaw(-165, 0.5);
+      m_infirmary_case_door_right rotateYaw(165, 0.5);
+      m_fake_plane_steering = getEnt("fake_veh_t6_dlc_zombie_part_control", "targetname");
       m_plane_steering = get_craftable_piece_model("plane", "steering");
-      m_plane_steering moveto(m_plane_steering.origin + vectorscale((0, 0, 1), 512.0), 0.05);
+      m_plane_steering moveTo(m_plane_steering.origin + vectorscale((0, 0, 1), 512.0), 0.05);
       m_plane_steering setvisibletoall();
       m_fake_plane_steering hide();
 
@@ -587,11 +587,11 @@ setup_puzzles() {
 }
 
 setup_quest_triggers() {
-  t_plane_fuelable = getent("plane_fuelable_trigger", "targetname");
+  t_plane_fuelable = getEnt("plane_fuelable_trigger", "targetname");
   t_plane_fuelable trigger_off();
-  t_plane_fly = getent("plane_fly_trigger", "targetname");
-  t_plane_fly setcursorhint("HINT_NOICON");
-  t_plane_fly sethintstring(&"ZM_PRISON_PLANE_BOARD");
+  t_plane_fly = getEnt("plane_fly_trigger", "targetname");
+  t_plane_fly setCursorHint("HINT_NOICON");
+  t_plane_fly setHintString(&"ZM_PRISON_PLANE_BOARD");
   t_plane_fly.require_look_at = 0;
   t_plane_fly thread plane_fly_trigger_thread();
 }
@@ -613,18 +613,18 @@ setup_master_key() {
 
 key_pulley(str_master_key_location) {
   if(level.is_master_key_west) {
-    t_other_hurt_trigger = getent("pulley_hurt_trigger_east", "targetname");
-    t_other_panel = getent("master_key_pulley_east", "targetname");
+    t_other_hurt_trigger = getEnt("pulley_hurt_trigger_east", "targetname");
+    t_other_panel = getEnt("master_key_pulley_east", "targetname");
   } else {
-    t_other_hurt_trigger = getent("pulley_hurt_trigger_west", "targetname");
-    t_other_panel = getent("master_key_pulley_west", "targetname");
+    t_other_hurt_trigger = getEnt("pulley_hurt_trigger_west", "targetname");
+    t_other_panel = getEnt("master_key_pulley_west", "targetname");
   }
 
   t_other_hurt_trigger delete();
   t_other_panel setModel("p6_zm_al_power_station_panels_03");
-  t_pulley_hurt_trigger = getent("pulley_hurt_trigger_" + str_master_key_location, "targetname");
+  t_pulley_hurt_trigger = getEnt("pulley_hurt_trigger_" + str_master_key_location, "targetname");
   t_pulley_hurt_trigger thread maps\mp\zm_alcatraz_sq_vo::sndhitelectrifiedpulley(str_master_key_location);
-  m_master_key_pulley = getent("master_key_pulley_" + str_master_key_location, "targetname");
+  m_master_key_pulley = getEnt("master_key_pulley_" + str_master_key_location, "targetname");
   m_master_key_pulley play_fx("fx_alcatraz_panel_on_2", m_master_key_pulley.origin, m_master_key_pulley.angles, "power_down", 1, undefined, undefined);
   m_master_key_pulley thread afterlife_interact_object_think();
   level waittill("master_key_pulley_" + str_master_key_location);
@@ -642,7 +642,7 @@ key_pulley(str_master_key_location) {
     array_delete(getEntArray("wires_pulley_east", "script_noteworthy"));
   }
 
-  t_hurt_trigger = getent("pulley_hurt_trigger_" + str_master_key_location, "targetname");
+  t_hurt_trigger = getEnt("pulley_hurt_trigger_" + str_master_key_location, "targetname");
   t_hurt_trigger delete();
 
   if(str_master_key_location == "west") {
@@ -656,16 +656,16 @@ key_pulley(str_master_key_location) {
   m_master_key = get_craftable_piece_model("quest_key1", "p6_zm_al_key");
 
   if(isDefined(m_master_key)) {
-    e_master_key_target = getstruct("master_key_" + str_master_key_location + "_origin", "targetname");
+    e_master_key_target = getStruct("master_key_" + str_master_key_location + "_origin", "targetname");
     m_master_key.origin = e_master_key_target.origin;
     m_master_key setvisibletoall();
   }
 }
 
 setup_dryer_challenge() {
-  t_dryer = getent("dryer_trigger", "targetname");
-  t_dryer setcursorhint("HINT_NOICON");
-  t_dryer sethintstring(&"ZM_PRISON_LAUNDRY_MACHINE_ACTIVATE");
+  t_dryer = getEnt("dryer_trigger", "targetname");
+  t_dryer setCursorHint("HINT_NOICON");
+  t_dryer setHintString(&"ZM_PRISON_LAUNDRY_MACHINE_ACTIVATE");
   t_dryer thread dryer_trigger_thread();
   t_dryer thread dryer_zombies_thread();
   t_dryer trigger_off();
@@ -677,7 +677,7 @@ setup_dryer_challenge() {
   t_dryer trigger_on();
   t_dryer playSound("evt_dryer_rdy_bell");
   wait 1;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!player.afterlife && distance(player.origin, t_dryer.origin) < 1500) {
@@ -695,8 +695,8 @@ dryer_trigger_thread() {
   self waittill("trigger");
   self trigger_off();
   level setclientfield("dryer_stage", 2);
-  dryer_playerclip = getent("dryer_playerclip", "targetname");
-  dryer_playerclip moveto(dryer_playerclip.origin + vectorscale((0, 0, 1), 104.0), 0.05);
+  dryer_playerclip = getEnt("dryer_playerclip", "targetname");
+  dryer_playerclip moveTo(dryer_playerclip.origin + vectorscale((0, 0, 1), 104.0), 0.05);
   level clientnotify("sndFF");
 
   if(!(isDefined(level.music_override) && level.music_override)) {
@@ -723,7 +723,7 @@ dryer_trigger_thread() {
   level clientnotify("fxanim_dryer_end_start");
   wait 2;
   flag_clear("dryer_cycle_active");
-  dryer_playerclip = getent("dryer_playerclip", "targetname");
+  dryer_playerclip = getEnt("dryer_playerclip", "targetname");
   dryer_playerclip delete();
   sndent stoploopsound();
   sndent playSound("evt_dryer_stop");
@@ -755,7 +755,7 @@ sndmusicvariable() {
 
 dryer_zombies_thread() {
   n_zombie_count_min = 20;
-  e_shower_zone = getent("cellblock_shower", "targetname");
+  e_shower_zone = getEnt("cellblock_shower", "targetname");
   flag_wait("dryer_cycle_active");
 
   if(level.round_number > 4 || isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
@@ -810,7 +810,7 @@ get_farthest_available_zombie(e_landmark) {
 
 get_zombies_touching_volume(team, volume_name, volume) {
   if(!isDefined(volume)) {
-    volume = getent(volume_name, "targetname");
+    volume = getEnt(volume_name, "targetname");
     assert(isDefined(volume), volume_name + " does not exist");
   }
 
@@ -840,8 +840,8 @@ dryer_teleports_zombie() {
     linker thread linker_delete_watch(self);
     linker.origin = self.origin;
     linker.angles = self.angles;
-    self linkto(linker);
-    linker moveto(nd_target.origin, 0.05);
+    self linkTo(linker);
+    linker moveTo(nd_target.origin, 0.05);
     linker waittill("movedone");
     playFX(level._effect["afterlife_teleport"], self.origin);
     linker delete();
@@ -850,7 +850,7 @@ dryer_teleports_zombie() {
     self.ignoreall = 1;
     self notify("stop_find_flesh");
     self thread afterlife_zapped_fx();
-    self animscripted(self.origin, self.angles, "zm_afterlife_stun");
+    self animScripted(self.origin, self.angles, "zm_afterlife_stun");
     self maps\mp\animscripts\shared::donotetracks("stunned");
     self.ignoreall = 0;
     self thread maps\mp\zombies\_zm_ai_basic::find_flesh();
@@ -904,21 +904,21 @@ generator_challenge_main_thread() {
 
   level clientnotify("sndWard");
   level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("piece_mid");
-  t_warden_fence_damage = getent("warden_fence_damage", "targetname");
+  t_warden_fence_damage = getEnt("warden_fence_damage", "targetname");
   t_warden_fence_damage delete();
   level setclientfield("warden_fence_down", 1);
   array_delete(getEntArray("generator_wires", "script_noteworthy"));
   wait 3;
   stop_exploder(2000);
   wait 1;
-  players = getplayers();
+  players = getPlayers();
   player = players[randomintrange(0, players.size)];
   player do_player_general_vox("general", "power_off", undefined, 100);
 }
 
 generator_panel_trigger_thread(n_panel_index, generator_soundent) {
   self endon("death");
-  m_generator_panel = getent("generator_panel_" + n_panel_index, "targetname");
+  m_generator_panel = getEnt("generator_panel_" + n_panel_index, "targetname");
   m_generator_panel thread afterlife_interact_object_think();
   m_generator_panel play_fx("fx_alcatraz_panel_on_2", m_generator_panel.origin, m_generator_panel.angles, "generator_panel_" + n_panel_index + "_afterlife", 1, undefined, undefined);
   level waittill("generator_panel_" + n_panel_index + "_afterlife");
@@ -931,7 +931,7 @@ generator_panel_trigger_thread(n_panel_index, generator_soundent) {
   playFXOnTag(level._effect["fx_alcatraz_panel_ol"], m_generator_panel, "tag_origin");
   m_generator_panel play_fx("fx_alcatraz_panel_off_2", m_generator_panel.origin, m_generator_panel.angles, undefined, 1, undefined, undefined);
   set_generator_vfx_amount(level.n_generator_panels_active, generator_soundent);
-  playsoundatposition("zmb_quest_generator_panel_spark", m_generator_panel.origin);
+  playSoundAtPosition("zmb_quest_generator_panel_spark", m_generator_panel.origin);
 }
 
 set_generator_vfx_amount(n_vfx_amount, generator_soundent) {
@@ -959,12 +959,12 @@ setup_gate_puzzle() {
   self endon("death");
   is_gate_toggled = 0;
   is_inner_gate_toggleable = 0;
-  m_gate_02 = getent("cable_puzzle_gate_02", "targetname");
+  m_gate_02 = getEnt("cable_puzzle_gate_02", "targetname");
   n_gate_move_duration = 0.5;
-  m_docks_shockbox = getent("docks_panel", "targetname");
+  m_docks_shockbox = getEnt("docks_panel", "targetname");
   array_set_visible_to_all(getEntArray("wires_docks_gate_toggle", "script_noteworthy"), 0);
   a_players = [];
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size > 1) {
     is_inner_gate_toggleable = 1;
@@ -980,19 +980,19 @@ setup_gate_puzzle() {
     }
 
     if(!flag("docks_outer_gate_open")) {
-      m_gate_02 moveto(m_gate_02.origin + (-16, 80, 0), n_gate_move_duration);
+      m_gate_02 moveTo(m_gate_02.origin + (-16, 80, 0), n_gate_move_duration);
       wait(n_gate_move_duration + 0.25);
       m_gate_02 connectpaths();
-      gate_2_monsterclip = getent("docks_gate_2_monsterclip", "targetname");
+      gate_2_monsterclip = getEnt("docks_gate_2_monsterclip", "targetname");
       gate_2_monsterclip.origin = gate_2_monsterclip.origin + vectorscale((0, 0, 1), 256.0);
-      gate_2_monsterclip disconnectpaths();
+      gate_2_monsterclip disconnectPaths();
       gate_2_monsterclip.origin = gate_2_monsterclip.origin - vectorscale((0, 0, 1), 256.0);
       m_gate_02 playSound("zmb_chainlink_close");
     } else if(!flag("docks_gates_remain_open")) {
-      m_gate_02 moveto(m_gate_02.origin - (-16, 80, 0), n_gate_move_duration);
+      m_gate_02 moveTo(m_gate_02.origin - (-16, 80, 0), n_gate_move_duration);
       wait(n_gate_move_duration + 0.25);
-      m_gate_02 disconnectpaths();
-      gate_2_monsterclip = getent("docks_gate_2_monsterclip", "targetname");
+      m_gate_02 disconnectPaths();
+      gate_2_monsterclip = getEnt("docks_gate_2_monsterclip", "targetname");
       gate_2_monsterclip connectpaths();
       m_gate_02 playSound("zmb_chainlink_open");
     }
@@ -1015,21 +1015,21 @@ toggle_inner_gate(n_gate_move_duration) {
 
   if(flag("docks_inner_gate_open") && !flag("docks_gates_remain_open")) {
     for(i = 0; i < a_m_gate_01.size; i++) {
-      a_m_gate_01[i] moveto(a_m_gate_01[i].origin - (-16, 80, 0), n_gate_move_duration);
+      a_m_gate_01[i] moveTo(a_m_gate_01[i].origin - (-16, 80, 0), n_gate_move_duration);
     }
 
     wait(n_gate_move_duration + 0.25);
 
     for(i = 0; i < a_m_gate_01.size; i++) {
-      a_m_gate_01[i] disconnectpaths();
+      a_m_gate_01[i] disconnectPaths();
     }
 
-    gate_1_monsterclip = getent("docks_gate_1_monsterclip", "targetname");
+    gate_1_monsterclip = getEnt("docks_gate_1_monsterclip", "targetname");
     gate_1_monsterclip connectpaths();
     a_m_gate_01[0] playSound("zmb_chainlink_close");
   } else {
     for(i = 0; i < a_m_gate_01.size; i++) {
-      a_m_gate_01[i] moveto(a_m_gate_01[i].origin + (-16, 80, 0), n_gate_move_duration);
+      a_m_gate_01[i] moveTo(a_m_gate_01[i].origin + (-16, 80, 0), n_gate_move_duration);
     }
 
     wait(n_gate_move_duration + 0.25);
@@ -1038,9 +1038,9 @@ toggle_inner_gate(n_gate_move_duration) {
       a_m_gate_01[i] connectpaths();
     }
 
-    gate_1_monsterclip = getent("docks_gate_1_monsterclip", "targetname");
+    gate_1_monsterclip = getEnt("docks_gate_1_monsterclip", "targetname");
     gate_1_monsterclip.origin = gate_1_monsterclip.origin + vectorscale((0, 0, 1), 256.0);
-    gate_1_monsterclip disconnectpaths();
+    gate_1_monsterclip disconnectPaths();
     gate_1_monsterclip.origin = gate_1_monsterclip.origin - vectorscale((0, 0, 1), 256.0);
     a_m_gate_01[0] playSound("zmb_chainlink_open");
   }
@@ -1049,13 +1049,13 @@ toggle_inner_gate(n_gate_move_duration) {
 }
 
 plane_fly_trigger_thread() {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"ZM_PRISON_PLANE_BEGIN_TAKEOFF");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"ZM_PRISON_PLANE_BEGIN_TAKEOFF");
   flag_wait("initial_players_connected");
   flag_wait("brutus_setup_complete");
   self trigger_off();
   wait 1;
-  m_plane_craftable = getent("plane_craftable", "targetname");
+  m_plane_craftable = getEnt("plane_craftable", "targetname");
   m_plane_craftable show();
   m_plane_craftable hidepart("tag_support_upper");
   m_plane_craftable hidepart("tag_wing_skins_up");
@@ -1108,18 +1108,18 @@ plane_boarding_thread() {
   a_nml_teleport_targets = [];
 
   for(i = 1; i < 6; i++) {
-    a_nml_teleport_targets[i - 1] = getstruct("nml_telepoint_" + i, "targetname");
+    a_nml_teleport_targets[i - 1] = getStruct("nml_telepoint_" + i, "targetname");
   }
 
   level.characters_in_nml[level.characters_in_nml.size] = self.character_name;
   self.on_a_plane = 1;
   level.someone_has_visited_nml = 1;
   self.n_passenger_index = level.characters_in_nml.size;
-  m_plane_craftable = getent("plane_craftable", "targetname");
-  m_plane_about_to_crash = getent("plane_about_to_crash", "targetname");
-  veh_plane_flyable = getent("plane_flyable", "targetname");
-  t_plane_fly = getent("plane_fly_trigger", "targetname");
-  t_plane_fly sethintstring(&"ZM_PRISON_PLANE_BOARD");
+  m_plane_craftable = getEnt("plane_craftable", "targetname");
+  m_plane_about_to_crash = getEnt("plane_about_to_crash", "targetname");
+  veh_plane_flyable = getEnt("plane_flyable", "targetname");
+  t_plane_fly = getEnt("plane_fly_trigger", "targetname");
+  t_plane_fly setHintString(&"ZM_PRISON_PLANE_BOARD");
   self enableinvulnerability();
   self playerlinktodelta(m_plane_craftable, "tag_player_crouched_" + (self.n_passenger_index + 1));
   self allowstand(0);
@@ -1147,7 +1147,7 @@ plane_boarding_thread() {
   self giveweapon("falling_hands_zm");
   self switchtoweaponimmediate("falling_hands_zm");
   self setweaponammoclip("falling_hands_zm", 0);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player != self) {
@@ -1168,7 +1168,7 @@ plane_boarding_thread() {
   self unlink();
   self allowstand(1);
   self setstance("stand");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player != self) {
@@ -1177,8 +1177,8 @@ plane_boarding_thread() {
   }
 
   flag_clear("spawn_zombies");
-  self setorigin(a_nml_teleport_targets[self.n_passenger_index].origin);
-  e_poi = getstruct("plane_crash_poi", "targetname");
+  self setOrigin(a_nml_teleport_targets[self.n_passenger_index].origin);
+  e_poi = getStruct("plane_crash_poi", "targetname");
   vec_to_target = e_poi.origin - self.origin;
   vec_to_target = vectortoangles(vec_to_target);
   vec_to_target = (0, vec_to_target[1], 0);
@@ -1204,7 +1204,7 @@ plane_boarding_thread() {
   level.brutus_respawn_after_despawn = 1;
   wait 5;
   character_name = level.characters_in_nml[randomintrange(0, level.characters_in_nml.size)];
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player) && player.character_name == character_name) {
@@ -1251,7 +1251,7 @@ track_quest_status_thread() {
     prep_for_new_quest();
     waittill_crafted("refuelable_plane");
     maps\mp\zombies\_zm_ai_brutus::transfer_plane_trigger("fuel", "fly");
-    t_plane_fly = getent("plane_fly_trigger", "targetname");
+    t_plane_fly = getEnt("plane_fly_trigger", "targetname");
     t_plane_fly trigger_on();
   }
 }
@@ -1269,8 +1269,8 @@ bestow_quest_rewards() {
 prep_for_new_quest() {
   for(i = 1; i < 4; i++) {
     str_trigger_targetname = "trigger_electric_chair_" + i;
-    t_electric_chair = getent(str_trigger_targetname, "targetname");
-    t_electric_chair sethintstring(&"ZM_PRISON_ELECTRIC_CHAIR_ACTIVATE");
+    t_electric_chair = getEnt(str_trigger_targetname, "targetname");
+    t_electric_chair setHintString(&"ZM_PRISON_ELECTRIC_CHAIR_ACTIVATE");
     t_electric_chair trigger_on();
   }
 
@@ -1286,14 +1286,14 @@ prep_for_new_quest() {
     }
   }
 
-  t_plane_fly = getent("plane_fly_trigger", "targetname");
+  t_plane_fly = getEnt("plane_fly_trigger", "targetname");
   t_plane_fly trigger_off();
   players = get_players();
   t_plane_fly setvisibletoall();
   maps\mp\zombies\_zm_ai_brutus::transfer_plane_trigger("fly", "fuel");
 
   for(i = 1; i < 5; i++) {
-    m_electric_chair = getent("electric_chair_" + i, "targetname");
+    m_electric_chair = getEnt("electric_chair_" + i, "targetname");
     m_electric_chair notify("bridge_empty");
   }
 
@@ -1301,10 +1301,10 @@ prep_for_new_quest() {
 
   iprintlnbold("plane location reset");
 
-  m_plane_craftable = getent("plane_craftable", "targetname");
+  m_plane_craftable = getEnt("plane_craftable", "targetname");
   m_plane_craftable show();
   playFXOnTag(level._effect["fx_alcatraz_plane_apear"], m_plane_craftable, "tag_origin");
-  veh_plane_flyable = getent("plane_flyable", "targetname");
+  veh_plane_flyable = getEnt("plane_flyable", "targetname");
   veh_plane_flyable attachpath(getvehiclenode("zombie_plane_underground", "targetname"));
   vo_play_four_part_conversation(level.four_part_convos["alcatraz_return_quest_reset"]);
   flag_clear("plane_is_away");
@@ -1312,10 +1312,10 @@ prep_for_new_quest() {
 
 plane_flight_thread() {
   while(true) {
-    m_plane_about_to_crash = getent("plane_about_to_crash", "targetname");
-    m_plane_craftable = getent("plane_craftable", "targetname");
-    t_plane_fly = getent("plane_fly_trigger", "targetname");
-    veh_plane_flyable = getent("plane_flyable", "targetname");
+    m_plane_about_to_crash = getEnt("plane_about_to_crash", "targetname");
+    m_plane_craftable = getEnt("plane_craftable", "targetname");
+    t_plane_fly = getEnt("plane_fly_trigger", "targetname");
+    veh_plane_flyable = getEnt("plane_flyable", "targetname");
     m_plane_about_to_crash ghost();
     flag_wait("plane_boarded");
     level clientnotify("sndPB");
@@ -1362,10 +1362,10 @@ plane_flight_thread() {
     level setclientfield("fog_stage", 3);
     veh_plane_flyable setinvisibletoall();
     n_crash_duration = 2.25;
-    nd_plane_about_to_crash_1 = getstruct("plane_about_to_crash_point_1", "targetname");
+    nd_plane_about_to_crash_1 = getStruct("plane_about_to_crash_point_1", "targetname");
     m_plane_about_to_crash.origin = nd_plane_about_to_crash_1.origin;
-    nd_plane_about_to_crash_2 = getstruct("plane_about_to_crash_point_2", "targetname");
-    m_plane_about_to_crash moveto(nd_plane_about_to_crash_2.origin, n_crash_duration);
+    nd_plane_about_to_crash_2 = getStruct("plane_about_to_crash_point_2", "targetname");
+    m_plane_about_to_crash moveTo(nd_plane_about_to_crash_2.origin, n_crash_duration);
     m_plane_about_to_crash thread spin_while_falling();
     stop_exploder(10000);
     m_plane_about_to_crash waittill("movedone");
@@ -1455,7 +1455,7 @@ brutus_on_the_bridge() {
 
 last_brutus_on_bridge() {
   level endon("bridge_empty");
-  e_gg_zone = getent("zone_golden_gate_bridge", "targetname");
+  e_gg_zone = getEnt("zone_golden_gate_bridge", "targetname");
   a_bridge_brutuses = [];
 
   while(true) {
@@ -1496,7 +1496,7 @@ allow_brutus_powerup_spawning() {
 }
 
 get_bridge_brutuses() {
-  e_gg_zone = getent("zone_golden_gate_bridge", "targetname");
+  e_gg_zone = getEnt("zone_golden_gate_bridge", "targetname");
   a_bridge_brutuses = [];
   zombies = getaispeciesarray("axis", "all");
 
@@ -1518,14 +1518,14 @@ brutus_despawn_manager() {
   level notify("brutus_despawn_manager");
   level endon("brutus_despawn_manager");
   level endon("bridge_empty");
-  e_gg_zone = getent("zone_golden_gate_bridge", "targetname");
+  e_gg_zone = getEnt("zone_golden_gate_bridge", "targetname");
 
   while(true) {
     b_is_time_to_despawn = 0;
 
     while(!b_is_time_to_despawn) {
       b_is_time_to_despawn = 1;
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         if(isDefined(player) && player istouching(e_gg_zone) && !player.afterlife && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
@@ -1548,7 +1548,7 @@ brutus_despawn_manager() {
 
     while(!b_is_time_to_bring_back) {
       b_is_time_to_bring_back = 0;
-      players = getplayers();
+      players = getPlayers();
 
       foreach(player in players) {
         if(isDefined(player) && player istouching(e_gg_zone) && !player.afterlife && !player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
@@ -1565,7 +1565,7 @@ brutus_despawn_manager() {
 
 get_bridge_brutus_count() {
   n_touching_count = 0;
-  e_gg_zone = getent("zone_golden_gate_bridge", "targetname");
+  e_gg_zone = getEnt("zone_golden_gate_bridge", "targetname");
   zombies = getaispeciesarray("axis", "all");
 
   for(i = 0; i < zombies.size; i++) {
@@ -1611,7 +1611,7 @@ manage_electric_chairs() {
 
     for(i = 1; i < 5; i++) {
       str_trigger_targetname = "trigger_electric_chair_" + i;
-      t_electric_chair = getent(str_trigger_targetname, "targetname");
+      t_electric_chair = getEnt(str_trigger_targetname, "targetname");
 
       if(isDefined(level.electric_chair_trigger_thread_custom_func)) {
         t_electric_chair thread[[level.electric_chair_trigger_thread_custom_func]](i);
@@ -1619,18 +1619,18 @@ manage_electric_chairs() {
         t_electric_chair thread electric_chair_trigger_thread(i);
       }
 
-      t_electric_chair setcursorhint("HINT_NOICON");
-      t_electric_chair sethintstring(&"ZM_PRISON_ELECTRIC_CHAIR_ACTIVATE");
-      t_electric_chair usetriggerrequirelookat();
+      t_electric_chair setCursorHint("HINT_NOICON");
+      t_electric_chair setHintString(&"ZM_PRISON_ELECTRIC_CHAIR_ACTIVATE");
+      t_electric_chair useTriggerRequireLookAt();
     }
 
     if(level.final_flight_activated) {
       level.revive_trigger_should_ignore_sight_checks = maps\mp\zm_prison_sq_final::revive_trigger_should_ignore_sight_checks;
 
       for(j = 0; j < level.final_flight_players.size; j++) {
-        m_electric_chair = getent("electric_chair_" + (j + 1), "targetname");
+        m_electric_chair = getEnt("electric_chair_" + (j + 1), "targetname");
         corpse = level.final_flight_players[j].e_afterlife_corpse;
-        corpse linkto(m_electric_chair, "tag_origin", (0, 0, 0), (0, 0, 0));
+        corpse linkTo(m_electric_chair, "tag_origin", (0, 0, 0), (0, 0, 0));
         corpse maps\mp\zombies\_zm_clone::clone_animate("chair");
         wait 1;
         corpse.revivetrigger unlink();
@@ -1641,7 +1641,7 @@ manage_electric_chairs() {
 
       for(j = 1; j < 5; j++) {
         str_trigger_targetname = "trigger_electric_chair_" + j;
-        t_electric_chair = getent(str_trigger_targetname, "targetname");
+        t_electric_chair = getEnt(str_trigger_targetname, "targetname");
         t_electric_chair trigger_off();
       }
 
@@ -1650,10 +1650,10 @@ manage_electric_chairs() {
       }
     } else {
       for(i = 1; i < 5; i++) {
-        m_electric_chair = getent("electric_chair_" + i, "targetname");
+        m_electric_chair = getEnt("electric_chair_" + i, "targetname");
         m_electric_chair hide();
         str_trigger_targetname = "trigger_electric_chair_" + i;
-        t_electric_chair = getent(str_trigger_targetname, "targetname");
+        t_electric_chair = getEnt(str_trigger_targetname, "targetname");
         t_electric_chair trigger_off();
       }
 
@@ -1662,11 +1662,11 @@ manage_electric_chairs() {
       exploder(666);
 
       for(i = 1; i < 5; i++) {
-        m_electric_chair = getent("electric_chair_" + i, "targetname");
+        m_electric_chair = getEnt("electric_chair_" + i, "targetname");
         m_electric_chair show();
         m_electric_chair thread snddelayedchairaudio(i);
         str_trigger_targetname = "trigger_electric_chair_" + i;
-        t_electric_chair = getent(str_trigger_targetname, "targetname");
+        t_electric_chair = getEnt(str_trigger_targetname, "targetname");
         t_electric_chair trigger_on();
       }
 
@@ -1685,7 +1685,7 @@ snddelayedchairaudio(i) {
 electric_chair_trigger_thread(chair_number) {
   level notify("electric_chair_trigger_thread_" + chair_number);
   level endon("electric_chair_trigger_thread_" + chair_number);
-  m_electric_chair = getent("electric_chair_" + chair_number, "targetname");
+  m_electric_chair = getEnt("electric_chair_" + chair_number, "targetname");
   n_effects_wait_1 = 4;
   n_effects_wait_2 = 0.15;
   n_effects_wait_3 = 2;
@@ -1698,7 +1698,7 @@ electric_chair_trigger_thread(chair_number) {
 
     if(isPlayer(e_triggerer) && is_player_valid(e_triggerer)) {
       e_triggerer enableinvulnerability();
-      self sethintstring("");
+      self setHintString("");
       self trigger_off();
       flag_set("plane_trip_to_nml_successful");
 
@@ -1717,7 +1717,7 @@ electric_chair_trigger_thread(chair_number) {
       }
 
       chair_corpse = e_triggerer maps\mp\zombies\_zm_clone::spawn_player_clone(e_triggerer, e_triggerer.origin, undefined);
-      chair_corpse linkto(m_electric_chair, "tag_origin", (0, 0, 0), (0, 0, 0));
+      chair_corpse linkTo(m_electric_chair, "tag_origin", (0, 0, 0), (0, 0, 0));
       chair_corpse.ignoreme = 1;
       chair_corpse show();
       chair_corpse detachall();
@@ -1764,7 +1764,7 @@ electric_chair_trigger_thread(chair_number) {
 
       m_fx_1 delete();
       m_fx_2 delete();
-      self sethintstring(&"ZM_PRISON_ELECTRIC_CHAIR_ACTIVATE");
+      self setHintString(&"ZM_PRISON_ELECTRIC_CHAIR_ACTIVATE");
       self trigger_on();
     }
   }
@@ -1772,8 +1772,8 @@ electric_chair_trigger_thread(chair_number) {
 
 electric_chair_player_thread(m_linkpoint, chair_number, n_effects_duration) {
   self endon("death_or_disconnect");
-  e_home_telepoint = getstruct("home_telepoint_" + chair_number, "targetname");
-  e_corpse_location = getstruct("corpse_starting_point_" + chair_number, "targetname");
+  e_home_telepoint = getStruct("home_telepoint_" + chair_number, "targetname");
+  e_corpse_location = getStruct("corpse_starting_point_" + chair_number, "targetname");
   self disableweapons();
   self enableinvulnerability();
   self setstance("stand");
@@ -1820,7 +1820,7 @@ electric_chair_player_thread(m_linkpoint, chair_number, n_effects_duration) {
   trace_end = e_corpse_location.origin + vectorscale((0, 0, -1), 100.0);
   corpse_trace = bulletTrace(trace_start, trace_end, 0, self.e_afterlife_corpse);
   self.e_afterlife_corpse.origin = corpse_trace["position"];
-  self setorigin(e_home_telepoint.origin);
+  self setOrigin(e_home_telepoint.origin);
   self enableweapons();
   self setclientfieldtoplayer("rumble_electric_chair", 0);
 
@@ -1842,7 +1842,7 @@ reset_plane_hint_string(player) {
   if(isDefined(self.stub)) {
     println("Error: This should have been handled by the craftables callback");
   } else
-    self.fly_trigger sethintstring(&"ZM_PRISON_PLANE_BEGIN_TAKEOFF");
+    self.fly_trigger setHintString(&"ZM_PRISON_PLANE_BEGIN_TAKEOFF");
 }
 
 play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, str_tag, b_no_cull) {
@@ -1854,9 +1854,9 @@ play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, st
 
     if(isDefined(b_link_to_self) && b_link_to_self) {
       if(isDefined(str_tag)) {
-        m_fx linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
+        m_fx linkTo(self, str_tag, (0, 0, 0), (0, 0, 0));
       } else {
-        m_fx linkto(self);
+        m_fx linkTo(self);
       }
     }
 
@@ -1952,13 +1952,13 @@ player_death_watcher() {
 
   iprintlnbold("player_death_watcher");
 
-  e_gg_zone = getent("zone_golden_gate_bridge", "targetname");
+  e_gg_zone = getEnt("zone_golden_gate_bridge", "targetname");
   nml_trip_is_over = 0;
 
   while(!nml_trip_is_over) {
     level waittill("start_of_round");
     nml_trip_is_over = 1;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player istouching(e_gg_zone) || isDefined(player.on_a_plane) && player.on_a_plane) {

@@ -310,7 +310,7 @@ function function_f86ae9e5() {
 }
 
 function function_24ca3437(team, var_efb758a8, calloutplayer) {
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     player luinotifyevent(#"player_callout", 2, var_efb758a8, calloutplayer);
@@ -436,7 +436,7 @@ function function_98c89d66(victim, wassuicide) {
     }
 
     if(!wassuicide) {
-      survivors = getplayers(game.defenders);
+      survivors = getPlayers(game.defenders);
 
       foreach(survivor in survivors) {
         if(survivor != victim && survivor function_f86ae9e5()) {
@@ -509,7 +509,7 @@ function onfinalsurvivor() {
   sound::play_on_players("mpl_infection_zombie_created_stinger_last");
   globallogic_audio::leader_dialog("infectNoLives", game.defenders);
   globallogic_audio::leader_dialog("infectNoLivesEnemy", game.attackers);
-  finalsurvivor = getplayers(game.defenders)[0];
+  finalsurvivor = getPlayers(game.defenders)[0];
 
   if(!level.infect_awardedfinalsurvivor) {
     finalsurvivor function_4928e571();
@@ -835,7 +835,7 @@ function function_3ba09e5e() {
 
 function function_170ee166(team) {
   activeplayers = [];
-  teamplayers = getplayers(team);
+  teamplayers = getPlayers(team);
 
   foreach(player in teamplayers) {
     if(player.sessionstate == "spectator") {
@@ -908,7 +908,7 @@ function setfirstinfected() {
 }
 
 function forcespawnteam(team) {
-  players = getplayers(team);
+  players = getPlayers(team);
 
   foreach(player in players) {
     player thread playerforcespawn();
@@ -978,7 +978,7 @@ function changeteam(team) {
 }
 
 function function_4d9c9e8e(team) {
-  playersonteam = getplayers(team);
+  playersonteam = getPlayers(team);
   return playersonteam.size;
 }
 
@@ -997,7 +997,7 @@ function function_e6d991bc(weapon) {
 }
 
 function function_d3beb9d3() {
-  attackers = getplayers(game.attackers);
+  attackers = getPlayers(game.attackers);
 
   if(attackers.size < 2) {
     return;

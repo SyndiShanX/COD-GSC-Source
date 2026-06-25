@@ -55,7 +55,7 @@ _id_EB6C(var_0) {
   var_3 = anglesToForward(self.angles);
   var_4 = anglestoup(self.angles);
   var_4 = var_4 * 0.6;
-  var_5 = vectornormalize(var_3 + var_4);
+  var_5 = vectorNormalize(var_3 + var_4);
   var_6 = var_5 * var_2;
   var_7 = _func_0143("iw8_ammocrate_marker_zm", var_1, var_1 + var_6, self);
   self notify("grenade_fire", var_7);

@@ -69,7 +69,7 @@ function private function_8df2fc68(cmd) {
 
 function function_2d9abf0f() {
   if(getdvarint(#"hash_226d79954e87df70", 0)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::increment_challenge_stat(#"hash_45b90af94bc28199");
     }
   }
@@ -80,7 +80,7 @@ function function_4e9f972a(var_4d2ad93e) {
   self endon("2617ebb80093e4be");
   level flag::set(#"hash_554d70a6779336e1");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player playlocalsound(#"hash_17c36e83d2e0bc31");
     level.onslaught_hud onslaught_hud::function_71fd1345(player, 1);
     player clientfield::set_player_uimodel("hudItems.onslaught.lottoloadouts_rarity", function_4bac897(var_4d2ad93e));
@@ -89,7 +89,7 @@ function function_4e9f972a(var_4d2ad93e) {
   objective_manager::stop_timer();
   objective_manager::start_timer(5);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_e3871553(var_4d2ad93e);
     player playlocalsound(#"hash_6ff6896abbcdb20e");
   }

@@ -40,7 +40,7 @@ function private on_end(round_reset) {
     if(is_true(self.trial_completed)) {
       luinotifyevent(#"zm_trial_completed");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player zm_utility::give_achievement(#"zm_trials_round_30");
       }
     }
@@ -58,7 +58,7 @@ function private function_e7254828() {
     level.var_bccd8271 = curr_time;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     best_time = player zm_stats::function_8e274b32(self.var_c2964c77);
 
     if(best_time == 0 && !var_ee7ca64) {

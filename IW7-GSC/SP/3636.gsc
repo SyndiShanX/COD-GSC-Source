@@ -131,7 +131,7 @@ func_2A33(var_0) {
 
         func_28C6();
         earthquake(0.12, 0.1, self getEye(), 5000);
-        self playrumbleonentity("heavygun_fire");
+        self playRumbleOnEntity("heavygun_fire");
         wait(0.05);
       }
 
@@ -264,7 +264,7 @@ func_28C6(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_10 = var_11["position"];
-    var_12 = vectornormalize(var_10 - var_9);
+    var_12 = vectorNormalize(var_10 - var_9);
     var_10 = var_10 + var_12 * var_13;
     if(level.player.var_4BDD >= 500) {
       continue;

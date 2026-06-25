@@ -93,8 +93,8 @@ function private function_b5c0079f() {
   if(isDefined(var_38c235fa)) {
     self.rotor_trigger = spawn("trigger_radius", var_38c235fa - (0, 0, self.rotor_radius * 0.5), 0, self.rotor_radius, self.rotor_radius);
     driver = self getseatoccupant(0);
-    self.rotor_trigger enablelinkto();
-    self.rotor_trigger linkto(self, self.var_f3652bd);
+    self.rotor_trigger enablelinkTo();
+    self.rotor_trigger linkTo(self, self.var_f3652bd);
     self.rotor_trigger setexcludeteamfortrigger(driver.team);
     self.rotor_trigger triggerenable(1);
     self.rotor_trigger callback::on_trigger(&function_727338d1);

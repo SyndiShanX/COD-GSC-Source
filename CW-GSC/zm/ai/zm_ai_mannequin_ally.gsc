@@ -261,7 +261,7 @@ function private function_e3e858b1(dist, move_speed) {
 
   if(ais.size > 0) {
     ai = ais[0];
-    fwd = vectorscale(vectornormalize(anglesToForward(ai.angles)), dist);
+    fwd = vectorscale(vectorNormalize(anglesToForward(ai.angles)), dist);
     eye = ai.origin + (0, 0, 80);
     trace = bulletTrace(eye, eye + fwd, 0, ai);
     var_380c580a = positionquery_source_navigation(trace[#"position"], 128, 256, 128, 20);

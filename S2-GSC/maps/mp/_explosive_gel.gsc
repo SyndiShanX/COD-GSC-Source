@@ -109,7 +109,7 @@ func_939D(param_00) {
   var_09 = spawn("script_model", var_08);
   var_09.var_5817 = var_06;
   var_09.var_56F9 = var_07;
-  var_0A = vectornormalize(var_05["normal"]);
+  var_0A = vectorNormalize(var_05["normal"]);
   var_0B = vectortoangles(var_0A);
   var_0B = var_0B + (90, 0, 0);
   var_09.var_001D = var_0B;
@@ -136,7 +136,7 @@ func_27D0(param_00, param_01, param_02) {
   wait 0.05;
   var_03 thread maps\mp\gametypes\_weapons::func_1908(param_02);
   var_03 setModel(param_00);
-  var_03 linkto(self, param_01, (0, 0, 0), (0, 0, 0));
+  var_03 linkTo(self, param_01, (0, 0, 0), (0, 0, 0));
   var_03 method_80B1();
   self waittill("death");
   if(isDefined(self.var_9D65)) {

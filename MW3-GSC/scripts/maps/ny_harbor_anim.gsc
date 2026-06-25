@@ -445,13 +445,13 @@ _id_47D8() {
 }
 
 _id_012A(var_0) {
-  level.player playrumbleonentity("viewmodel_small");
+  level.player playRumbleOnEntity("viewmodel_small");
 }
 
 _id_012B(var_0) {
-  level.player playrumbleonentity("viewmodel_medium");
+  level.player playRumbleOnEntity("viewmodel_medium");
 }
 
 _id_012C(var_0) {
-  level.player playrumbleonentity("viewmodel_large");
+  level.player playRumbleOnEntity("viewmodel_large");
 }

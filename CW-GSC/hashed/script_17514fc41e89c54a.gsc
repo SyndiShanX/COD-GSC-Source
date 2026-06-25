@@ -59,7 +59,7 @@ function function_504e44da() {
 
 function function_9e216600() {
   if(getdvarint(#"hash_6d9eda83aac99122", 0)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::increment_challenge_stat(#"hash_5a234b7c00ae1ae4");
     }
   }

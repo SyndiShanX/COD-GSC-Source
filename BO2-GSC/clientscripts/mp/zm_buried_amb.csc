@@ -189,7 +189,7 @@ init_fxanim_loops() {
 }
 
 sndslidetrigger() {
-  trig = getent(0, "sndSlide", "targetname");
+  trig = getEnt(0, "sndSlide", "targetname");
 
   if(!isDefined(trig)) {
     return;
@@ -209,7 +209,7 @@ sndslidetriggeraudio(trig) {
   self playSound(0, "zmb_slide_start");
   ent = spawn(0, self.origin, "script_origin");
   ent thread cleanup_on_spectate();
-  ent linkto(self);
+  ent linkTo(self);
   ent playLoopSound("zmb_slide_loop", 0.25);
 
   while(self istouching(trig)) {
@@ -254,7 +254,7 @@ sndslidewoodaudio(calling_trig) {
   self endon("sndEndWood");
   self endon("bled_out");
   calling_trig endon("player_in_spectate");
-  trig = getent(0, "sndWoodStop", "targetname");
+  trig = getEnt(0, "sndWoodStop", "targetname");
   trig waittill("trigger", who);
 
   if(who == self) {

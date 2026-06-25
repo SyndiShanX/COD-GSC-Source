@@ -243,7 +243,7 @@ function_486ef0f6() {
 
       foreach(e_player in util::get_active_players()) {
         e_player clientfield::increment_to_player("" + #"hero_katana_vigor_postfx");
-        e_player playrumbleonentity("damage_heavy");
+        e_player playRumbleOnEntity("damage_heavy");
       }
     } else {
       var_aa11c23c clientfield::set("" + #"portal_loop_fx", 0);
@@ -387,7 +387,7 @@ function_b264ca4d() {
   b_success = undefined;
   level.var_5deac933 = [];
   var_3df8381d = level function_5dc786f7();
-  var_6433d2a2 = getent("m_c_ra", "targetname");
+  var_6433d2a2 = getEnt("m_c_ra", "targetname");
   var_6433d2a2 thread function_333c93f3(var_3df8381d);
   level waittill(#"morse_code_complete");
   var_6e25652d = getvehiclenode("gh_b_st_node", "targetname");
@@ -618,9 +618,9 @@ function_bb88526(n_num) {
 
 function_333c93f3(var_3df8381d) {
   level.var_66a47b57 = spawn("trigger_radius_use", self.origin, 0, 48);
-  level.var_66a47b57 triggerignoreteam();
-  level.var_66a47b57 sethintstring(#"");
-  level.var_66a47b57 setcursorhint("HINT_NOICON");
+  level.var_66a47b57 triggerIgnoreTeam();
+  level.var_66a47b57 setHintString(#"");
+  level.var_66a47b57 setCursorHint("HINT_NOICON");
   level.var_66a47b57.is_visible = 1;
   level.var_66a47b57 endon(#"death");
   var_ae5529ba = undefined;
@@ -744,7 +744,7 @@ function_333c93f3(var_3df8381d) {
       var_5830315f = e_player function_bfe4e5a9(var_77d58f80, var_9b830416);
 
       if(isDefined(var_5830315f) && var_5830315f) {
-        playsoundatposition(#"zmb_lightning_l", level.var_66a47b57.origin);
+        playSoundAtPosition(#"zmb_lightning_l", level.var_66a47b57.origin);
         level notify(#"morse_code_complete");
         e_player thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
         level.var_66a47b57 delete();
@@ -776,7 +776,7 @@ function_b87b2393() {
 function_bfe4e5a9(var_5faf08a9, n_entry) {
   self.var_da61dab6 = 1;
   self thread function_b8dc82a8();
-  mdl_radio = getent("m_c_ra", "targetname");
+  mdl_radio = getEnt("m_c_ra", "targetname");
 
   if(isDefined(level.var_bf412074) && level.var_bf412074) {
     self thread function_bb88526(n_entry);
@@ -846,8 +846,8 @@ function_bb47b90d(var_dcd55ef2) {
   for(s_next_pos = struct::get(var_dcd55ef2.target, "targetname"); true; s_next_pos = var_dcd55ef2) {
     n_dist = distance(s_next_pos.origin, var_25d70459.origin);
     n_time_travel = n_dist / 45;
-    self moveto(s_next_pos.origin, n_time_travel);
-    self rotateto(s_next_pos.angles, n_time_travel);
+    self moveTo(s_next_pos.origin, n_time_travel);
+    self rotateTo(s_next_pos.angles, n_time_travel);
     wait n_time_travel;
     var_25d70459 = s_next_pos;
 
@@ -880,7 +880,7 @@ function_c3923440() {
   level.var_558993a0 waittill(#"ai_ghost_interacted");
   level.var_558993a0.var_2ef9b50a = 1;
   level.var_558993a0 thread function_4e69659c();
-  var_5e7c3fee = getent("pa_do_vol", "targetname");
+  var_5e7c3fee = getEnt("pa_do_vol", "targetname");
 
   while(!level.var_558993a0 istouching(var_5e7c3fee)) {
     wait 1;
@@ -892,11 +892,11 @@ function_c3923440() {
 function_744712bc(s_params) {
   if(!isDefined(level.var_558993a0) && isPlayer(s_params.eattacker) && (self zm_zonemgr::entity_in_zone("zone_infirmary") || self zm_zonemgr::entity_in_zone("zone_infirmary_roof"))) {
     v_teleport_position = self.origin + (0, 0, 5);
-    level.var_558993a0 = zombie_utility::spawn_zombie(getent("g_zombie_spawner", "targetname"), "gh_bm");
+    level.var_558993a0 = zombie_utility::spawn_zombie(getEnt("g_zombie_spawner", "targetname"), "gh_bm");
 
     while(!isDefined(level.var_558993a0)) {
       waitframe(1);
-      level.var_558993a0 = zombie_utility::spawn_zombie(getent("g_zombie_spawner", "targetname"), "gh_bm");
+      level.var_558993a0 = zombie_utility::spawn_zombie(getEnt("g_zombie_spawner", "targetname"), "gh_bm");
     }
 
     level.var_558993a0 function_e128a8d4();
@@ -984,7 +984,7 @@ function_524c833(e_player) {
 
 function_54e0f89(e_player) {
   self endon(#"death");
-  v_dir = vectornormalize(e_player.origin - self.origin);
+  v_dir = vectorNormalize(e_player.origin - self.origin);
   v_pos = e_player.origin + v_dir * 40;
   v_pos = getclosestpointonnavmesh(v_pos, 128, 16);
 
@@ -1001,8 +1001,8 @@ function_dbb17bef(var_25d70459) {
   s_next_pos = struct::get(var_25d70459.target, "targetname");
   n_dist = distance(s_next_pos.origin, var_25d70459.origin);
   n_time_travel = n_dist / 45;
-  self moveto(s_next_pos.origin, n_time_travel);
-  self rotateto(s_next_pos.angles, n_time_travel);
+  self moveTo(s_next_pos.origin, n_time_travel);
+  self rotateTo(s_next_pos.angles, n_time_travel);
   wait n_time_travel;
   self stoploopsound();
   self clientfield::increment("" + #"tugboat_spawn_fx");
@@ -1487,11 +1487,11 @@ function_59945272(s_params) {
   if(!isDefined(level.var_7b71cdb7) && isPlayer(s_params.eattacker) && (self zm_zonemgr::entity_in_zone("zone_cafeteria") || self zm_zonemgr::entity_in_zone("zone_cafeteria_end"))) {
     callback::remove_on_ai_killed(&function_59945272);
     v_teleport_position = self.origin + (0, 0, 5);
-    level.var_7b71cdb7 = zombie_utility::spawn_zombie(getent("g_rob_zombie_spawner", "targetname"), "cb_gh");
+    level.var_7b71cdb7 = zombie_utility::spawn_zombie(getEnt("g_rob_zombie_spawner", "targetname"), "cb_gh");
 
     while(!isDefined(level.var_7b71cdb7)) {
       waitframe(1);
-      level.var_7b71cdb7 = zombie_utility::spawn_zombie(getent("g_rob_zombie_spawner", "targetname"), "cb_gh");
+      level.var_7b71cdb7 = zombie_utility::spawn_zombie(getEnt("g_rob_zombie_spawner", "targetname"), "cb_gh");
     }
 
     level.var_7b71cdb7 function_e128a8d4(0);
@@ -1640,11 +1640,11 @@ function_995231f6(s_params) {
   if(!isDefined(level.var_acc853e7) && isPlayer(s_params.eattacker) && (self zm_zonemgr::entity_in_zone("zone_library") || self zm_zonemgr::entity_in_zone("zone_start"))) {
     callback::remove_on_ai_killed(&function_995231f6);
     v_teleport_position = self.origin + (0, 0, 5);
-    level.var_acc853e7 = zombie_utility::spawn_zombie(getent("g_rob_zombie_spawner", "targetname"), "ni_gh");
+    level.var_acc853e7 = zombie_utility::spawn_zombie(getEnt("g_rob_zombie_spawner", "targetname"), "ni_gh");
 
     while(!isDefined(level.var_acc853e7)) {
       waitframe(1);
-      level.var_acc853e7 = zombie_utility::spawn_zombie(getent("g_rob_zombie_spawner", "targetname"), "ni_gh");
+      level.var_acc853e7 = zombie_utility::spawn_zombie(getEnt("g_rob_zombie_spawner", "targetname"), "ni_gh");
     }
 
     level.var_acc853e7 function_e128a8d4(0);
@@ -1702,7 +1702,7 @@ function_3f90c49f() {
   }
 
   self.mdl_spoon = util::spawn_model(#"wpn_t8_zm_spoon_world", self gettagorigin("tag_weapon_right"), self gettagangles("tag_weapon_right"));
-  self.mdl_spoon linkto(self, "tag_weapon_right");
+  self.mdl_spoon linkTo(self, "tag_weapon_right");
   self.mdl_spoon clientfield::set("" + #"ghost_spoon_fx", 1);
 }
 
@@ -1842,7 +1842,7 @@ function_f8da844f(var_aa11c23c) {
       level.var_acc853e7 val::reset(#"ai_ghost", "allowdeath");
       level.var_acc853e7 setCanDamage(1);
       level.var_acc853e7 clientfield::set("" + #"ghost_death_fx", 1);
-      playsoundatposition("zmb_spoon_ghost_annihilate", level.var_acc853e7.origin);
+      playSoundAtPosition("zmb_spoon_ghost_annihilate", level.var_acc853e7.origin);
       gibserverutils::annihilate(level.var_acc853e7);
       level.var_acc853e7 dodamage(level.var_acc853e7.health + 1000, self.origin, undefined, self);
     }
@@ -2200,7 +2200,7 @@ function_580723de(b_shown = 1, e_player) {
 
   if(isDefined(e_player)) {
     level.var_7c9cd6ae = util::spawn_model(#"hash_122bc018037432b0", e_player gettagorigin("tag_stowed_back"), e_player gettagangles("tag_stowed_back"));
-    level.var_7c9cd6ae linkto(e_player, "tag_stowed_back", (30, -2, -5), (0, 90, -90));
+    level.var_7c9cd6ae linkTo(e_player, "tag_stowed_back", (30, -2, -5), (0, 90, -90));
     level.var_7c9cd6ae clientfield::set("" + #"hash_504d26c38b96651c", 10);
     level.var_7c9cd6ae setinvisibletoplayer(e_player);
   }
@@ -2251,13 +2251,13 @@ function_c11e25eb() {
   var_58774a5e = struct::get("ph_gen_pos", "targetname");
   self thread function_eab368cb(var_58774a5e);
   self waittill(#"generator_interacted");
-  playsoundatposition(#"hash_7a1782a9382ccd72", var_58774a5e.origin);
+  playSoundAtPosition(#"hash_7a1782a9382ccd72", var_58774a5e.origin);
   self thread function_718e6106();
   var_7ed2d43 = self waittill(#"hash_2877e7dda4d090c8");
-  e_generator = getent("b64_si_gen", "script_noteworthy");
+  e_generator = getEnt("b64_si_gen", "script_noteworthy");
   e_generator setModel(#"p8_fxanim_zm_esc_generator_lrg_on_mod");
   e_generator thread scene::play(e_generator.bundle, "ON", e_generator);
-  playsoundatposition(#"hash_5a77a78c82aebb7", e_generator.origin);
+  playSoundAtPosition(#"hash_5a77a78c82aebb7", e_generator.origin);
   exploder::exploder("lgtexp_building64_power_on");
 
   if(!(isDefined(var_7ed2d43.b_success) && var_7ed2d43.b_success)) {
@@ -2295,11 +2295,11 @@ function_adf8de89(e_player) {
 
   if(!isDefined(level.var_8eec9430)) {
     var_bc84fb2a = struct::get("ph_gh_sp", "targetname");
-    level.var_8eec9430 = zombie_utility::spawn_zombie(getent("g_zombie_spawner", "targetname"), "ph_gh", var_bc84fb2a);
+    level.var_8eec9430 = zombie_utility::spawn_zombie(getEnt("g_zombie_spawner", "targetname"), "ph_gh", var_bc84fb2a);
 
     while(!isDefined(level.var_8eec9430)) {
       waitframe(1);
-      level.var_8eec9430 = zombie_utility::spawn_zombie(getent("g_zombie_spawner", "targetname"), "ph_gh", var_bc84fb2a);
+      level.var_8eec9430 = zombie_utility::spawn_zombie(getEnt("g_zombie_spawner", "targetname"), "ph_gh", var_bc84fb2a);
     }
   }
 
@@ -2323,7 +2323,7 @@ function_dc369dee(var_b51b4b08) {
     level.var_8eec9430 waittilltimeout(20, #"goal");
 
     if(isDefined(level.var_8eec9430.b_visible) && level.var_8eec9430.b_visible && isinarray(level.var_62f48651, s_next_pos.script_int)) {
-      mdl_lever = getent("flicker_" + s_next_pos.script_int + 1, "targetname");
+      mdl_lever = getEnt("flicker_" + s_next_pos.script_int + 1, "targetname");
       mdl_lever scene::play(#"aib_vign_zm_mob_power_ghost_opperate_success", array(level.var_8eec9430, mdl_lever));
 
       if(!isDefined(level.var_ed42611e)) {
@@ -2342,12 +2342,12 @@ function_dc369dee(var_b51b4b08) {
       });
       self thread function_3b4d7656(s_next_pos.script_int);
     } else {
-      mdl_lever = getent("flicker_" + s_next_pos.script_int + 1, "targetname");
+      mdl_lever = getEnt("flicker_" + s_next_pos.script_int + 1, "targetname");
       mdl_lever scene::play(#"aib_vign_zm_mob_power_ghost_opperate_fail", level.var_8eec9430);
 
       if(!isinarray(level.var_ed42611e, mdl_lever)) {
         if(isDefined(level.var_8eec9430.b_visible) && level.var_8eec9430.b_visible && isinarray(level.var_62f48651, s_next_pos.script_int)) {
-          mdl_lever = getent("flicker_" + s_next_pos.script_int + 1, "targetname");
+          mdl_lever = getEnt("flicker_" + s_next_pos.script_int + 1, "targetname");
           mdl_lever scene::play(#"aib_vign_zm_mob_power_ghost_opperate_success", array(level.var_8eec9430, mdl_lever));
 
           if(!isDefined(level.var_ed42611e)) {
@@ -2447,9 +2447,9 @@ function_34e153c7() {
   foreach(mdl_monitor in level.a_mdl_monitors) {
     var_aa794395 = mdl_monitor.origin + anglesToForward(mdl_monitor.angles) * -15;
     mdl_monitor.t_interact = spawn("trigger_radius_use", var_aa794395, 0, 64, 64);
-    mdl_monitor.t_interact sethintstring(#"");
-    mdl_monitor.t_interact setcursorhint("HINT_NOICON");
-    mdl_monitor.t_interact triggerignoreteam();
+    mdl_monitor.t_interact setHintString(#"");
+    mdl_monitor.t_interact setCursorHint("HINT_NOICON");
+    mdl_monitor.t_interact triggerIgnoreTeam();
     mdl_monitor thread function_a9c796c9(1);
     mdl_monitor thread function_3f41df11(self);
   }
@@ -2462,7 +2462,7 @@ function_34e153c7() {
     mdl_monitor thread function_a9c796c9(0);
   }
 
-  var_e1b1210d = getent("md_te_mi", "targetname");
+  var_e1b1210d = getEnt("md_te_mi", "targetname");
   var_e1b1210d setModel(#"hash_75a106abbb5f5fa1");
   var_e1b1210d playSound(#"hash_4bf7a429b9e473");
   var_e1b1210d stoploopsound();
@@ -2544,22 +2544,22 @@ function_3b4d7656(n_num) {
 
   switch (n_num) {
     case 0:
-      mdl_panel = getent("ph_p_1", "script_noteworthy");
+      mdl_panel = getEnt("ph_p_1", "script_noteworthy");
       break;
     case 1:
-      mdl_panel = getent("ph_p_1", "script_noteworthy");
+      mdl_panel = getEnt("ph_p_1", "script_noteworthy");
       break;
     case 2:
-      mdl_panel = getent("ph_p_1", "script_noteworthy");
+      mdl_panel = getEnt("ph_p_1", "script_noteworthy");
       break;
     case 3:
-      mdl_panel = getent("ph_p_1", "script_noteworthy");
+      mdl_panel = getEnt("ph_p_1", "script_noteworthy");
       break;
     case 4:
-      mdl_panel = getent("ph_p_1", "script_noteworthy");
+      mdl_panel = getEnt("ph_p_1", "script_noteworthy");
       break;
     case 5:
-      mdl_panel = getent("ph_p_1", "script_noteworthy");
+      mdl_panel = getEnt("ph_p_1", "script_noteworthy");
       break;
   }
 
@@ -2571,15 +2571,15 @@ function_3b4d7656(n_num) {
 
 function_eab368cb(s_interact) {
   self endon(#"death", #"hash_300e9fed7925cd69");
-  e_generator = getent("b64_si_gen", "script_noteworthy");
+  e_generator = getEnt("b64_si_gen", "script_noteworthy");
   e_generator setModel(#"p8_fxanim_zm_esc_generator_lrg_mod");
   e_generator thread scene::play(e_generator.bundle, "OFF", e_generator);
   s_interact.var_b31fa41a = util::spawn_model("tag_origin", s_interact.origin, s_interact.angles);
   s_interact.var_b31fa41a clientfield::set("" + #"generator_spark_fx", 1);
   s_interact.t_interact = spawn("trigger_radius_use", s_interact.origin, 0, 128, 64);
-  s_interact.t_interact sethintstring(#"");
-  s_interact.t_interact setcursorhint("HINT_NOICON");
-  s_interact.t_interact triggerignoreteam();
+  s_interact.t_interact setHintString(#"");
+  s_interact.t_interact setCursorHint("HINT_NOICON");
+  s_interact.t_interact triggerIgnoreTeam();
   s_interact.t_interact setvisibletoall();
 
   while(true) {
@@ -2687,11 +2687,11 @@ function_18b599e0() {
 
   foreach(var_7b2c16b1 in level.var_f7febee4) {
     var_7b2c16b1.mdl_symbol = util::spawn_model(var_7b2c16b1.model, var_7b2c16b1.origin, var_7b2c16b1.angles);
-    var_7b2c16b1.mdl_light = getent(var_7b2c16b1.target, "targetname");
+    var_7b2c16b1.mdl_light = getEnt(var_7b2c16b1.target, "targetname");
     var_7b2c16b1.t_interact = spawn("trigger_radius_use", var_7b2c16b1.origin, 0, 64, 64);
-    var_7b2c16b1.t_interact sethintstring(#"");
-    var_7b2c16b1.t_interact setcursorhint("HINT_NOICON");
-    var_7b2c16b1.t_interact triggerignoreteam();
+    var_7b2c16b1.t_interact setHintString(#"");
+    var_7b2c16b1.t_interact setCursorHint("HINT_NOICON");
+    var_7b2c16b1.t_interact triggerIgnoreTeam();
     var_7b2c16b1.t_interact setinvisibletoall();
   }
 
@@ -2722,7 +2722,7 @@ function_dc164d78() {
 
   for(n_total_time = 0; !(isDefined(b_trace_passed) && b_trace_passed) &n_total_time < 6.1; n_total_time = (n_current_time - n_start_time) / 1000) {
     foreach(e_player in util::get_players()) {
-      if(isDefined(level.var_84fbe7bc[0].mdl_symbol sightconetrace(e_player getEye(), e_player, vectornormalize(e_player getplayerangles()), 30)) && level.var_84fbe7bc[0].mdl_symbol sightconetrace(e_player getEye(), e_player, vectornormalize(e_player getplayerangles()), 30)) {
+      if(isDefined(level.var_84fbe7bc[0].mdl_symbol sightconetrace(e_player getEye(), e_player, vectorNormalize(e_player getplayerangles()), 30)) && level.var_84fbe7bc[0].mdl_symbol sightconetrace(e_player getEye(), e_player, vectorNormalize(e_player getplayerangles()), 30)) {
         b_trace_passed = 1;
         break;
       }
@@ -2778,7 +2778,7 @@ function_dc164d78() {
     level.var_84fbe7bc = function_1b0a3e6e();
   }
 
-  playsoundatposition(#"hash_2218138040c6b2ff", (0, 0, 0));
+  playSoundAtPosition(#"hash_2218138040c6b2ff", (0, 0, 0));
   return true;
 }
 
@@ -2894,7 +2894,7 @@ function_bc57a72c(var_c34665fc) {
     var_78fda516.t_interact delete();
   }
 
-  var_e1b1210d = getent("md_te_mi", "targetname");
+  var_e1b1210d = getEnt("md_te_mi", "targetname");
 
   if(isDefined(var_e1b1210d)) {
     var_e1b1210d setModel(#"hash_75a106abbb5f5fa1");
@@ -2911,9 +2911,9 @@ function_1fb1907c() {
   var_78fda516.var_11e3fffb = util::spawn_model(var_78fda516.model, var_78fda516.origin, var_78fda516.angles);
   var_78fda516.var_11e3fffb playSound(#"hash_13aeee936e183bc7");
   var_78fda516.t_interact = spawn("trigger_radius_use", var_78fda516.origin, 0, 64, 64);
-  var_78fda516.t_interact sethintstring(#"");
-  var_78fda516.t_interact setcursorhint("HINT_NOICON");
-  var_78fda516.t_interact triggerignoreteam();
+  var_78fda516.t_interact setHintString(#"");
+  var_78fda516.t_interact setCursorHint("HINT_NOICON");
+  var_78fda516.t_interact triggerIgnoreTeam();
 
   while(true) {
     s_result = var_78fda516.t_interact waittill(#"trigger");
@@ -2932,12 +2932,12 @@ function_1fb1907c() {
 
 function_ca9ddf1b() {
   self endon(#"death", #"hash_300e9fed7925cd69");
-  var_e1b1210d = getent("md_te_mi", "targetname");
+  var_e1b1210d = getEnt("md_te_mi", "targetname");
   var_aa794395 = var_e1b1210d.origin + anglesToForward(var_e1b1210d.angles) * -15 + (0, 0, 5);
   var_e1b1210d.t_interact = spawn("trigger_radius_use", var_aa794395, 0, 64, 64);
-  var_e1b1210d.t_interact sethintstring(#"");
-  var_e1b1210d.t_interact setcursorhint("HINT_NOICON");
-  var_e1b1210d.t_interact triggerignoreteam();
+  var_e1b1210d.t_interact setHintString(#"");
+  var_e1b1210d.t_interact setCursorHint("HINT_NOICON");
+  var_e1b1210d.t_interact triggerIgnoreTeam();
 
   while(isDefined(var_e1b1210d.t_interact)) {
     s_result = var_e1b1210d.t_interact waittill(#"trigger");
@@ -3133,9 +3133,9 @@ function_29d29761(e_ghost, var_5b9ba5a5) {
 function_a9277243() {
   self endon(#"death");
   self.t_interact = spawn("trigger_radius_use", self.origin, 0, 94, 64);
-  self.t_interact sethintstring(#"");
-  self.t_interact setcursorhint("HINT_NOICON");
-  self.t_interact triggerignoreteam();
+  self.t_interact setHintString(#"");
+  self.t_interact setCursorHint("HINT_NOICON");
+  self.t_interact triggerIgnoreTeam();
 
   while(isDefined(self.t_interact)) {
     s_result = self.t_interact waittill(#"trigger");
@@ -3205,11 +3205,11 @@ function_1db8a8b2(var_b51b4b08) {
 function_768e71d5() {
   self endon(#"death", #"hash_71716a8e79096aee");
   self.t_interact = spawn("trigger_radius_use", self.origin + anglesToForward(self.angles) * 15 + (0, 0, 5), 0, 64, 64);
-  self.t_interact enablelinkto();
-  self.t_interact linkto(self);
-  self.t_interact sethintstring(#"");
-  self.t_interact setcursorhint("HINT_NOICON");
-  self.t_interact triggerignoreteam();
+  self.t_interact enablelinkTo();
+  self.t_interact linkTo(self);
+  self.t_interact setHintString(#"");
+  self.t_interact setCursorHint("HINT_NOICON");
+  self.t_interact triggerIgnoreTeam();
   self.t_interact setvisibletoall();
   self.t_interact endon(#"death");
 
@@ -3315,7 +3315,7 @@ function_b952c1b(var_4bdd091b, str_tag = "j_spinelower") {
   n_total_time = 0;
 
   while(n_dist_sq > 576 && isalive(var_4bdd091b)) {
-    var_88f24b00 moveto(var_4bdd091b gettagorigin(str_tag), n_move_time);
+    var_88f24b00 moveTo(var_4bdd091b gettagorigin(str_tag), n_move_time);
     wait 0.1;
 
     if(isalive(var_4bdd091b)) {
@@ -3378,15 +3378,15 @@ function_252499a3(v_pos) {
   mdl_orb setscale(4);
   mdl_orb playSound(#"hash_748c338212771d3");
   mdl_orb.t_interact = spawn("trigger_radius_use", v_pos + (0, 0, 20), 0, 64, 64);
-  mdl_orb.t_interact sethintstring(#"");
-  mdl_orb.t_interact setcursorhint("HINT_NOICON");
-  mdl_orb.t_interact triggerignoreteam();
+  mdl_orb.t_interact setHintString(#"");
+  mdl_orb.t_interact setCursorHint("HINT_NOICON");
+  mdl_orb.t_interact triggerIgnoreTeam();
 
   while(isDefined(mdl_orb)) {
     s_result = mdl_orb.t_interact waittill(#"trigger");
 
     if(isPlayer(s_result.activator)) {
-      playsoundatposition(#"hash_6aa220e65103f345", mdl_orb.origin);
+      playSoundAtPosition(#"hash_6aa220e65103f345", mdl_orb.origin);
       mdl_orb.t_interact delete();
       mdl_orb delete();
       s_result.activator thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");

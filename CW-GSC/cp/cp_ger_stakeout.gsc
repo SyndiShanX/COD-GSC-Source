@@ -135,7 +135,7 @@ function on_player_connect() {
 }
 
 function function_4174e4e6() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.player = player;
   player setcharacterbodytype(1);
   player setcharacteroutfit(5);
@@ -168,7 +168,7 @@ function init_spawnfunctions() {
 
 function function_bf14bffe() {
   level flag::wait_till("all_players_spawned");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   setDvar(#"hash_7b06b8037c26b99b", 30);
   level flag::wait_till("level_is_go");
@@ -190,9 +190,9 @@ function function_bf14bffe() {
 
 function function_356633ac() {
   level flag::wait_till("all_players_spawned");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
-  t_rain_ladder = getent("t_rain_ladder", "targetname");
+  t_rain_ladder = getEnt("t_rain_ladder", "targetname");
 
   if(!isDefined(t_rain_ladder)) {
     return;

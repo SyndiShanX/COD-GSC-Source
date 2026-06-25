@@ -28,7 +28,7 @@ function main(str_skipto, b_starting) {
   level thread function_35e99044();
   level thread namespace_31c67f6d::function_15231086("eboard_ready");
   s_player_start = struct::get("s_post_armada_player_start", "targetname");
-  level.player setorigin(s_player_start.origin);
+  level.player setOrigin(s_player_start.origin);
   level.player setplayerangles(s_player_start.angles);
   level thread namespace_31c67f6d::function_29279de1("post_armada");
   level thread namespace_31c67f6d::function_b0558ba2("2");
@@ -438,8 +438,8 @@ function function_9ff4321a() {
   level.sims thread function_5312ebff();
   level namespace_31c67f6d::function_7fd3a4d8(1);
   level.lazar delete();
-  var_f3c7854c = getent("lazar_food", "targetname");
+  var_f3c7854c = getEnt("lazar_food", "targetname");
   var_f3c7854c delete();
-  var_a3eb66a5 = getent("lazar_fork", "targetname");
+  var_a3eb66a5 = getEnt("lazar_fork", "targetname");
   var_a3eb66a5 delete();
 }

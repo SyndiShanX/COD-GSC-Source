@@ -148,7 +148,7 @@ add_rumble_for_notify(message, rumble, player) {
 
   for(;;) {
     self waittill(message);
-    player playrumbleonentity(rumble);
+    player playRumbleOnEntity(rumble);
   }
 }
 
@@ -334,7 +334,7 @@ waittill_vehicle_crashes() {
   self waittill_any("veh_collision", "veh_falling");
 }
 waittill_vehicle_falling_so() {
-  trigger_ent = GetEnt("player_crashes_trigger", "script_noteworthy");
+  trigger_ent = getEnt("player_crashes_trigger", "script_noteworthy");
   while(1) {
     trigger_ent waittill("trigger", player);
     if(!isDefined(player) || !isPlayer(player)) {
@@ -547,7 +547,7 @@ drive_magic_bullet(vehicle) {
     end = start + forward * 1500;
   }
 
-  self PlayRumbleOnEntity("pistol_fire_auto");
+  self playRumbleOnEntity("pistol_fire_auto");
   MagicBullet(level.snowmobile_gun, start, end, self);
 
   playFXOnTag(level.snowmobile_gunFlashFx, vehicle, "tag_flash");

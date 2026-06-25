@@ -181,7 +181,7 @@ function pain_update(params) {
     asmstate = "pain@stationary";
   }
   self asmrequestsubstate(asmstate);
-  playsoundatposition("prj_quad_impact", self.origin);
+  playSoundAtPosition("prj_quad_impact", self.origin);
   self cancelaimove();
   self clearvehgoalpos();
   self clearturrettarget();
@@ -278,7 +278,7 @@ function quadtank_death(params) {
   self vehicle::set_damage_fx_level(0);
   streamermodelhint(self.deathmodel, 6);
   if(!isDefined(self.custom_death_sequence)) {
-    playsoundatposition("prj_quad_impact", self.origin);
+    playSoundAtPosition("prj_quad_impact", self.origin);
     self playSound("veh_quadtank_power_down");
     self playSound("veh_quadtank_sparks");
     self asmrequestsubstate("death@stationary");
@@ -308,12 +308,12 @@ function quadtank_emped(params) {
     return;
   }
   self.emped = 1;
-  playsoundatposition("veh_quadtankemp_down", self.origin);
+  playSoundAtPosition("veh_quadtankemp_down", self.origin);
   self.turretrotscale = 0.2;
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
     self.stun_fx setModel("tag_origin");
-    self.stun_fx linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
+    self.stun_fx linkTo(self, "tag_turret", (0, 0, 0), (0, 0, 0));
   }
   time = params.notify_param[0];
   assert(isDefined(time));
@@ -547,7 +547,7 @@ function quadtank_weapon_think_cannon() {
   while(true) {
     if(self.hold_cannon === 1 || !vehicle_ai::iscooldownready("main_cannon")) {
       if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
         self setlookatent(self.enemy);
       }
       wait(0.2);
@@ -555,7 +555,7 @@ function quadtank_weapon_think_cannon() {
     }
     if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
       self.turretrotscale = 1 * self.difficulty_scale_up;
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
       self setlookatent(self.enemy);
       if(cant_see_enemy_count >= 2) {
         wait(0.1);
@@ -569,11 +569,11 @@ function quadtank_weapon_think_cannon() {
         if(distancesquared(self.origin, self.enemy.origin) > 72900 && self.turretontarget) {
           v_my_forward = anglesToForward(self.angles);
           v_to_enemy = self.enemy.origin - self.origin;
-          v_to_enemy = vectornormalize(v_to_enemy);
+          v_to_enemy = vectorNormalize(v_to_enemy);
           dot = vectordot(v_to_enemy, v_my_forward);
           if(dot > 0.707) {
             self asmrequestsubstate("fire@stationary");
-            self setturrettargetent(self.enemy);
+            self setturrettargetEnt(self.enemy);
             self thread set_detonation_time(self.enemy);
             if(isDefined(level.players) && level.players.size < 3) {
               self set_side_turrets_enabled(0);
@@ -595,7 +595,7 @@ function quadtank_weapon_think_cannon() {
       }
       self.getreadytofire = undefined;
       if(isDefined(self.enemy)) {
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
         self setlookatent(self.enemy);
       }
       if(fired) {
@@ -615,7 +615,7 @@ function quadtank_weapon_think_cannon() {
           self cleartargetentity();
         } else {
           if(isDefined(self.enemy)) {
-            self setturrettargetent(self.enemy);
+            self setturrettargetEnt(self.enemy);
             self clearlookatent();
           } else {
             self clearlookatent();
@@ -634,7 +634,7 @@ function attack_thread_rocket() {
   while(true) {
     usejavelin = 0;
     if(isDefined(self.enemy)) {
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
       self setlookatent(self.enemy);
     }
     if(isDefined(self.enemy) && vehicle_ai::iscooldownready("javelin_rocket_launcher", 0.5)) {
@@ -863,7 +863,7 @@ function do_melee(shoulddodamage, enemy) {
   }
   self notify("play_meleefx");
   if(shoulddodamage) {
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       player._takedamage_old = player.takedamage;
       player.takedamage = 0;
@@ -879,7 +879,7 @@ function do_melee(shoulddodamage, enemy) {
     if(abs(direction[0]) < 0.01 && abs(direction[1]) < 0.01) {
       direction = (randomfloatrange(1, 2), randomfloatrange(1, 2), 0);
     }
-    direction = vectornormalize(direction);
+    direction = vectorNormalize(direction);
     strength = 1000;
     enemy setvelocity(enemy getvelocity() + (direction * strength));
     enemy trigger_player_shock_fx();
@@ -971,7 +971,7 @@ function quadtankcallback_vehicledamage(einflictor, eattacker, idamage, idflags,
   if(isactor(eattacker) && idamage > 250) {
     idamage = 250;
   }
-  num_players = getplayers().size;
+  num_players = getPlayers().size;
   maxdamage = self.healthdefault * (0.2 - (0.025 * num_players));
   if(smeansofdeath !== "MOD_UNKNOWN" && idamage > maxdamage) {
     idamage = maxdamage;
@@ -985,7 +985,7 @@ function quadtankcallback_vehicledamage(einflictor, eattacker, idamage, idflags,
     self.damage_during_trophy_down = self.damage_during_trophy_down + idamage;
   }
   if(damagelevelchanged && smeansofdeath != "MOD_MELEE_ASSASSINATE" && (!isDefined(eattacker) || eattacker.team !== self.team) && !isDefined(driver)) {
-    playsoundatposition("prj_quad_impact", self.origin);
+    playSoundAtPosition("prj_quad_impact", self.origin);
   }
   idamage = vehicle_ai::shared_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
   return idamage;

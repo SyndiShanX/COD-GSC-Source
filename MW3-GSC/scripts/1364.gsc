@@ -227,7 +227,7 @@ _id_4119() {
         if(_id_411B(level._id_4114[self._id_4115][var_14], var_0)) {
           continue;
         }
-        var_15 = vectornormalize(level._id_4114[self._id_4115][var_14].origin - level.player.origin);
+        var_15 = vectorNormalize(level._id_4114[self._id_4115][var_14].origin - level.player.origin);
 
         if(vectordot(var_12, var_15) > 0.3) {
           var_13[var_13.size] = var_14;
@@ -247,7 +247,7 @@ _id_4119() {
 
     if(var_2 && gettime() > var_1) {
       if(isDefined(self.target)) {
-        var_16 = getent(self.target, "targetname");
+        var_16 = getEnt(self.target, "targetname");
 
         if(isDefined(var_16)) {
           var_16 notify("trigger");
@@ -279,7 +279,7 @@ _id_411C() {
   self waittill("mortar");
 
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0)) {
       var_0 notify("trigger");
@@ -739,16 +739,16 @@ _id_4146() {
 
   if(isDefined(self._id_4148)) {
     if(isDefined(self._id_4148)) {
-      self._id_4149 = getent(self._id_4148, "targetname");
+      self._id_4149 = getEnt(self._id_4148, "targetname");
     } else if(isDefined(self._id_4147) && isDefined(self._id_4147[0].target)) {
-      self._id_4149 = getent(self._id_4147[0].target, "targetname");
+      self._id_4149 = getEnt(self._id_4147[0].target, "targetname");
     }
     if(isDefined(self._id_4149)) {
       self._id_4149 hide();
     }
   } else if(isDefined(self._id_4116)) {
     if(isDefined(self._id_4147) && isDefined(self._id_4147[0].target)) {
-      self._id_4149 = getent(self._id_4147[0].target, "targetname");
+      self._id_4149 = getEnt(self._id_4147[0].target, "targetname");
     }
     if(isDefined(self._id_4149)) {
       self._id_4149 hide();

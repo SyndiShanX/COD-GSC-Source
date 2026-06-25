@@ -32,12 +32,12 @@ vision_torture() {
 
 movePlayerToStartPoint(sTargetname) {
   assert(isDefined(sTargetname));
-  start = getent(sTargetname, "targetname");
-  level.player SetOrigin(start.origin);
+  start = getEnt(sTargetname, "targetname");
+  level.player setOrigin(start.origin);
 
   lookat = undefined;
   if(isDefined(start.target)) {
-    lookat = getent(start.target, "targetname");
+    lookat = getEnt(start.target, "targetname");
     assert(isDefined(lookat));
   }
 
@@ -171,7 +171,7 @@ seek_player() {
 gag_fence_dog() {
   trigger_wait("fence_dog_gag", "targetname");
 
-  spawner = getent("fence_dog_spawner", "targetname");
+  spawner = getEnt("fence_dog_spawner", "targetname");
   dog = spawner stalingradspawn();
   spawn_failed(dog);
   dog endon("death");
@@ -180,7 +180,7 @@ gag_fence_dog() {
   old_maxsightdistsqrd = dog.maxsightdistsqrd;
   dog.maxsightdistsqrd = 0;
   dog set_ignoreall(true);
-  animNode = getent("fence_dog_node", "targetname");
+  animNode = getEnt("fence_dog_node", "targetname");
 
   dog setlookatEntity(level.player);
   animNode anim_reach_solo(dog, "fence_attack");
@@ -227,7 +227,7 @@ window_smasher() {
 
   wait 0.3;
 
-  self stopAnimScripted();
+  self stopanimScripted();
 
   wait 0.3;
 
@@ -285,7 +285,7 @@ open_window(window, delay) {
 play_sound_trigger() {
   assert(isDefined(self.script_noteworthy));
   assert(isDefined(self.target));
-  soundEnt = getent(self.target, "targetname");
+  soundEnt = getEnt(self.target, "targetname");
   assert(isDefined(soundEnt));
 
   self waittill("trigger");
@@ -296,11 +296,11 @@ play_sound_trigger() {
 gag_civilian_window_1() {
   trigger_wait("gag_civilian_window_1", "targetname");
 
-  spawner = getent("window_civilian_spawner_1", "targetname");
+  spawner = getEnt("window_civilian_spawner_1", "targetname");
   guy = spawner spawn_ai(true);
   guy endon("death");
 
-  windowNode = getent("civilian_window_node1", "targetname");
+  windowNode = getEnt("civilian_window_node1", "targetname");
   windowNode anim_generic(guy, "civilian_window_1");
 
   runawayNode = getnode("window_civilian_spawner_runto_node", "targetname");
@@ -590,10 +590,10 @@ physics_drop_model() {
 
 forklift_blocker() {
   forklift_before = getEntArray("forklift_before", "targetname");
-  forklift_before_clip = getent("forklift_before_clip", "targetname");
+  forklift_before_clip = getEnt("forklift_before_clip", "targetname");
 
   forklift_after = getEntArray("forklift_after", "targetname");
-  forklift_after_clip = getent("forklift_after_clip", "targetname");
+  forklift_after_clip = getEnt("forklift_after_clip", "targetname");
 
   array_call(forklift_after, ::hide);
   forklift_after_clip notsolid();
@@ -700,8 +700,8 @@ delete_ai_not_bullet_shielded() {
 }
 
 bike_rider(pathTargetname) {
-  bike_path_start = getent(pathTargetname, "targetname");
-  bike_path_end = getent(bike_path_start.target, "targetname");
+  bike_path_start = getEnt(pathTargetname, "targetname");
+  bike_path_end = getEnt(bike_path_start.target, "targetname");
 
   bike = spawn("script_model", bike_path_start.origin);
   bike setModel("com_bike_animated");
@@ -730,7 +730,7 @@ bike_rider(pathTargetname) {
   rider setanim(level.scr_anim["generic"]["bike_rider"]);
 
   moveTime = 10;
-  bike MoveTo(bike_path_end.origin, moveTime, 0, 0);
+  bike moveTo(bike_path_end.origin, moveTime, 0, 0);
 
   wait moveTime;
 
@@ -745,7 +745,7 @@ potted_plant() {
 
   trig = undefined;
   if(isDefined(self.target)) {
-    trig = getent(self.target, "targetname");
+    trig = getEnt(self.target, "targetname");
   }
 
   self thread potted_plant_damage();
@@ -792,7 +792,7 @@ play_fx_trig() {
   fx = self.script_noteworthy;
   assert(isDefined(level._effect[fx]));
   assert(isDefined(self.target));
-  fxEnt = getent(self.target, "targetname");
+  fxEnt = getEnt(self.target, "targetname");
   fxID = getfx(fx);
   for(;;) {
     self waittill("trigger");
@@ -951,7 +951,7 @@ retreat_trigger() {
   node = getnode(self.target, "targetname");
   assert(isDefined(node));
   assert(isDefined(node.radius));
-  volume = getent(self.target, "targetname");
+  volume = getEnt(self.target, "targetname");
   assert(isDefined(volume));
 
   self waittill("trigger");

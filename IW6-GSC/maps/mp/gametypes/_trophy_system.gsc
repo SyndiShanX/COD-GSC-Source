@@ -75,7 +75,7 @@ trophyUsed(grenade) {
 
   trophy.trigger = spawn("script_origin", offset_origin);
 
-  trophy.trigger LinkTo(trophy);
+  trophy.trigger linkTo(trophy);
 
   trophy thread trophyDamage(self);
   trophy thread trophyWaitForDetonation();
@@ -195,7 +195,7 @@ trophyActive(owner) {
   specialProtectionDistanceSquared = 384 * 384;
 
   self.killCamEnt = spawn("script_model", position + (0, 0, 5));
-  self.killCamEnt LinkTo(self);
+  self.killCamEnt linkTo(self);
 
   if(!isDefined(level.grenades)) {
     level.grenades = [];

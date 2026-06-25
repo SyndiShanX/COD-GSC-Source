@@ -359,9 +359,9 @@ enter_vlobby(player) {
   deactivate_targets();
 
   camera = player.camera;
-  player SetOrigin(camera.origin);
-  player PlayerLinkTo(camera, "tag_player");
-  player CameraLinkTo(camera, "tag_player");
+  player setOrigin(camera.origin);
+  player PlayerlinkTo(camera, "tag_player");
+  player CameralinkTo(camera, "tag_player");
   player SetClientDVar("cg_fovscale", "0.6153");
 
   player VisionSetNakedForPlayer("mp_virtual_lobby_cac", 0);

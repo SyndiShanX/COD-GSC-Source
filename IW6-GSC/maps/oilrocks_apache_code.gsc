@@ -35,7 +35,7 @@ apache_ally_path_attack_func(var_0) {
     return;
   }
   self endon("apache_ally_attack_override");
-  var_1 = getent(var_0.script_linkto, "script_linkname");
+  var_1 = getEnt(var_0.script_linkto, "script_linkname");
 
   if(isDefined(var_1.script_noteworthy)) {
     var_2 = getEntArray(var_1.script_noteworthy, "script_noteworthy");
@@ -87,7 +87,7 @@ heli_attack_mg_veh_weapon(var_0, var_1) {
   self endon("death");
   self notify("heli_attack_mg_stop");
   self endon("heli_attack_mg_stop");
-  self setturrettargetent(var_0);
+  self setturrettargetEnt(var_0);
   var_2 = 0.1;
 
   for(;;) {
@@ -188,12 +188,12 @@ vehicle_attack_missile(var_0, var_1, var_2) {
     } else
       var_13 = (0, 0, 48);
 
-    var_12 linkto(var_0, "tag_origin", var_13, (0, 0, 0));
+    var_12 linkTo(var_0, "tag_origin", var_13, (0, 0, 0));
   } else if(isai(var_0)) {
     var_13 = (0, 0, 24);
-    var_12 linkto(var_0, "tag_origin", var_13, (0, 0, 0));
+    var_12 linkTo(var_0, "tag_origin", var_13, (0, 0, 0));
   } else
-    var_12 linkto(var_0);
+    var_12 linkTo(var_0);
 
   var_12.missiles_waiting = var_4;
   var_12.missiles_chasing = 0;
@@ -220,7 +220,7 @@ vehicle_attack_missile(var_0, var_1, var_2) {
       var_16 = self fireweapon(var_15, var_12);
     } else {
       var_17 = self gettagorigin(var_15);
-      var_18 = vectornormalize(var_0.origin - var_17);
+      var_18 = vectorNormalize(var_0.origin - var_17);
       var_16 = magicbullet(var_5, var_17 + var_18 * 60, var_17 + var_18 * 120);
     }
 
@@ -299,7 +299,7 @@ attack_missile_set_up_and_notify(var_0, var_1, var_2, var_3) {
 
 ai_attack_missile(var_0, var_1) {
   var_2 = self gettagorigin("tag_eye");
-  var_3 = vectornormalize(var_0.origin - var_2);
+  var_3 = vectorNormalize(var_0.origin - var_2);
   var_4 = var_2 + var_3 * 36;
   var_5 = var_2 + var_3 * 120;
   var_6 = (0, 0, 0);
@@ -317,7 +317,7 @@ ai_attack_missile(var_0, var_1) {
 
   var_7 = magicbullet("apache_lockon_missile_ai_enemy", var_4, var_5);
   var_7 common_scripts\utility::missile_settargetandflightmode(var_0, "top", var_6);
-  playFX(common_scripts\utility::getfx("FX_apache_ai_hydra_rocket_flash_wv"), var_4, vectornormalize(var_5 - var_4));
+  playFX(common_scripts\utility::getfx("FX_apache_ai_hydra_rocket_flash_wv"), var_4, vectorNormalize(var_5 - var_4));
   attack_missile_set_up_and_notify(var_7, var_0, var_1);
 }
 
@@ -354,7 +354,7 @@ spawn_apache_allies(var_0) {
   var_4 = undefined;
 
   foreach(var_6 in var_2) {
-    var_7 = common_scripts\utility::getstruct(var_0 + var_6, "targetname");
+    var_7 = common_scripts\utility::getStruct(var_0 + var_6, "targetname");
     var_1[var_1.size] = spawn_apache_ally(var_6, var_7.origin, var_7.angles);
   }
 
@@ -364,7 +364,7 @@ spawn_apache_allies(var_0) {
 spawn_apache_ally(var_0, var_1, var_2) {
   var_3 = "apache_ally_spawner_0" + var_0;
   var_4 = "apache_ally_0" + var_0;
-  var_5 = getent(var_4, "targetname");
+  var_5 = getEnt(var_4, "targetname");
 
   if(isDefined(var_5)) {
     var_5 vehicle_teleport(var_1, var_2);
@@ -375,7 +375,7 @@ spawn_apache_ally(var_0, var_1, var_2) {
 }
 
 spawn_apache_ally_targetname(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   var_4.origin = common_scripts\utility::ter_op(isDefined(var_2), var_2, var_4.origin);
   var_4.angles = common_scripts\utility::ter_op(isDefined(var_3), var_3, var_4.angles);
   var_5 = maps\_vehicle::vehicle_spawn(var_4);
@@ -427,7 +427,7 @@ get_apache_allies() {
 }
 
 get_apache_ally(var_0) {
-  var_1 = getent("apache_ally_0" + var_0, "targetname");
+  var_1 = getEnt("apache_ally_0" + var_0, "targetname");
   return var_1;
 }
 
@@ -436,7 +436,7 @@ get_apache_ally_id() {
 }
 
 get_apache_player() {
-  return getent("apache_player", "targetname");
+  return getEnt("apache_player", "targetname");
 }
 
 is_apache_player(var_0) {
@@ -456,7 +456,7 @@ spawn_blackhawk_ally(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
 
   if(isDefined(var_0)) {
-    var_4 = common_scripts\utility::getstruct(var_0, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_0, "targetname");
   }
 
   if(isDefined(var_1)) {
@@ -468,7 +468,7 @@ spawn_blackhawk_ally(var_0, var_1, var_2, var_3) {
     var_4.angles = var_2;
   }
 
-  var_5 = getent("blackhawk_ally_spawner", "targetname");
+  var_5 = getEnt("blackhawk_ally_spawner", "targetname");
   var_5.script_allow_rider_deaths = 0;
   var_5.origin = var_4.origin;
   var_5.angles = var_4.angles;
@@ -520,7 +520,7 @@ asign_blackhawk_riders() {
 }
 
 get_blackhawk_ally() {
-  var_0 = getent("blackhawk_ally", "targetname");
+  var_0 = getEnt("blackhawk_ally", "targetname");
   return var_0;
 }
 
@@ -569,7 +569,7 @@ heli_ai_collision_cylinder_add() {
     var_0.in_use = 1;
     var_0.origin = self.origin;
     var_0.angles = self.angles;
-    var_0 linkto(self, "tag_origin");
+    var_0 linkTo(self, "tag_origin");
     thread heli_ai_collision_cylinder_on_death_remove(var_0);
   }
 }
@@ -1201,7 +1201,7 @@ dot_to_apache_player_facing_2d() {
 
   if(isDefined(var_0)) {
     var_1 = anglesToForward((0, var_0.angles[1], 0));
-    var_2 = vectornormalize((self.origin[0], self.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
+    var_2 = vectorNormalize((self.origin[0], self.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
     self.dot_to_apache_player_facing_2d = vectordot(var_1, var_2);
   }
 
@@ -1308,7 +1308,7 @@ heli_ai_pre_move_func() {
 }
 
 spawn_hind_enemy(var_0) {
-  var_1 = getent("hind_enemy", "targetname");
+  var_1 = getEnt("hind_enemy", "targetname");
   var_1 vehicle_spawner_adjust_health_and_damage();
 
   while(isDefined(var_1.vehicle_spawned_thisframe)) {
@@ -1635,7 +1635,7 @@ rpg_ai_attack(var_0, var_1) {
   self.combatmode = "no_cover";
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_0.origin;
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   self setentitytarget(var_2);
   var_3 = gettime() + 4000;
 
@@ -1870,7 +1870,7 @@ send_apaches_to_hangout(var_0) {
 }
 
 send_apaches_to_hangout_thread(var_0) {
-  maps\_chopperboss_utility::chopper_boss_set_hangout_volume(getent(var_0, "targetname"));
+  maps\_chopperboss_utility::chopper_boss_set_hangout_volume(getEnt(var_0, "targetname"));
   var_1 = get_apache_allies();
 
   foreach(var_3 in var_1) {

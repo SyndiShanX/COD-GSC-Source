@@ -161,7 +161,7 @@ moveawayfromenemy(var_0) {
 
   if(var_1 >= self.nextmoveawayposupdatetime) {
     _id_0B05::_id_D602("sprint");
-    var_2 = vectornormalize(self.origin - self._id_0192.origin);
+    var_2 = vectorNormalize(self.origin - self._id_0192.origin);
     var_3 = self.origin + var_2 * 80;
     var_3 = self _meth_86F8(var_3);
     self _meth_84BC(0, var_3);
@@ -738,7 +738,7 @@ explodeatpos(var_0, var_1) {
 
   foreach(var_9 in var_7) {
     if(isalive(var_9) && var_9 _id_06FE::is_zm_normal()) {
-      var_10 = vectornormalize(var_9.origin - var_0);
+      var_10 = vectorNormalize(var_9.origin - var_0);
       playFXOnTag(self.eruption_knockdown_fx, var_9, "j_spine4");
       var_9 scripts\aitypes\zombie_common\push::knockdown(var_10, 0.05);
     }

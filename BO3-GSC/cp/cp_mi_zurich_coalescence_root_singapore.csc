@@ -111,7 +111,7 @@ function function_f354307b(localclientnum, oldval, newval, bnewent, binitialsnap
   if(!isDefined(self.var_2e7c1306)) {
     str_tag = "zur_wave_jnt";
     self.var_2e7c1306 = util::spawn_model(localclientnum, "tag_origin", self gettagorigin(str_tag), self gettagangles(str_tag));
-    self.var_2e7c1306 linkto(self, str_tag);
+    self.var_2e7c1306 linkTo(self, str_tag);
     self.var_2e7c1306 setwaterdisturbanceparams(0.4, 1000, 2500, 1, 0);
   }
   if(newval) {

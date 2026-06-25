@@ -69,7 +69,7 @@ function function_1e254f15() {
 function bio_breach_rumble(localclientnum) {
   self endon("disconnect");
   for(i = 0; i < 10; i++) {
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
     wait(randomfloatrange(0.1, 0.2));
   }
 }
@@ -104,7 +104,7 @@ function do_digger_moving_earthquake_rumble(localclientnum, quake_ent) {
     }
     player earthquake(randomfloatrange(0.15, 0.25), 3, quake_ent.origin, 2500);
     if(distancesquared(quake_ent.origin, player.origin) < dist_sqd) {
-      player playrumbleonentity(localclientnum, "slide_rumble");
+      player playRumbleOnEntity(localclientnum, "slide_rumble");
     }
     wait(randomfloatrange(0.05, 0.15));
   }
@@ -125,7 +125,7 @@ function do_digger_digging_earthquake_rumble(localclientnum, quake_ent) {
     }
     player earthquake(randomfloatrange(0.12, 0.17), 3, quake_ent.origin, 1500);
     if(distancesquared(quake_ent.origin, player.origin) < dist && (abs(quake_ent.origin[2] - player.origin[2])) < 750) {
-      player playrumbleonentity(localclientnum, "grenade_rumble");
+      player playRumbleOnEntity(localclientnum, "grenade_rumble");
     }
     wait(randomfloatrange(0.1, 0.25));
   }
@@ -180,9 +180,9 @@ function digger_visibility_toggle(localclient, visible) {
         tracks[i] hide();
       }
       for(i = 0; i < diggers.size; i++) {
-        arm = getent(localclient, diggers[i].target, "targetname");
-        blade_center = getent(localclient, arm.target, "targetname");
-        blade = getent(localclient, blade_center.target, "targetname");
+        arm = getEnt(localclient, diggers[i].target, "targetname");
+        blade_center = getEnt(localclient, arm.target, "targetname");
+        blade = getEnt(localclient, blade_center.target, "targetname");
         diggers[i] hide();
         arm hide();
         blade hide();
@@ -194,9 +194,9 @@ function digger_visibility_toggle(localclient, visible) {
         tracks[i] show();
       }
       for(i = 0; i < diggers.size; i++) {
-        arm = getent(localclient, diggers[i].target, "targetname");
-        blade_center = getent(localclient, arm.target, "targetname");
-        blade = getent(localclient, blade_center.target, "targetname");
+        arm = getEnt(localclient, diggers[i].target, "targetname");
+        blade_center = getEnt(localclient, arm.target, "targetname");
+        blade = getEnt(localclient, blade_center.target, "targetname");
         diggers[i] show();
         arm show();
         blade show();
@@ -210,15 +210,15 @@ function init_excavator_consoles() {
   wait(15);
   for(index = 0; index < level.localplayers.size; index++) {
     if(!level clientfield::get("TCA")) {
-      var_cc373138 = getent(index, "tunnel_console", "targetname");
+      var_cc373138 = getEnt(index, "tunnel_console", "targetname");
       function_9b3daafa(index, var_cc373138, 0);
     }
     if(!level clientfield::get("HCA")) {
-      var_cc373138 = getent(index, "hangar_console", "targetname");
+      var_cc373138 = getEnt(index, "hangar_console", "targetname");
       function_9b3daafa(index, var_cc373138, 0);
     }
     if(!level clientfield::get("BCA")) {
-      var_cc373138 = getent(index, "biodome_console", "targetname");
+      var_cc373138 = getEnt(index, "biodome_console", "targetname");
       function_9b3daafa(index, var_cc373138, 0);
     }
   }
@@ -239,7 +239,7 @@ function function_774edb15(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     }
   }
-  var_cc373138 = getent(localclientnum, var_ffc320da, "targetname");
+  var_cc373138 = getEnt(localclientnum, var_ffc320da, "targetname");
   if(newval) {
     function_9b3daafa(localclientnum, var_cc373138, 1);
   } else {

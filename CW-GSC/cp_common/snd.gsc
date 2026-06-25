@@ -179,8 +179,8 @@ function function_b5959278(ent, var_1d25915, linkedentity, var_e330010e) {
       var_e330010e = "";
     }
 
-    ent enablelinkto();
-    ent linkto(linkedentity, var_e330010e, linkedoffset, linkedangles);
+    ent enablelinkTo();
+    ent linkTo(linkedentity, var_e330010e, linkedoffset, linkedangles);
 
     if(!isarray(linkedentity.var_a415b6d6)) {
       linkedentity.var_a415b6d6 = [];

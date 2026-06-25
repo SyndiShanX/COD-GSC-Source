@@ -52,7 +52,7 @@ function train_rain_fx_occluder(localclientnum, oldval, newval, bnewent, binitia
   if(newval) {
     if(!isDefined(self.mdl_tag)) {
       self.mdl_tag = util::spawn_model(localclientnum, "tag_origin", self.origin, self.angles);
-      self.mdl_tag linkto(self);
+      self.mdl_tag linkTo(self);
       self.var_c604c399 = addboltedfxexclusionvolume(localclientnum, self.mdl_tag, "tag_origin", (768 / 2, 184 / 2, 296 / 2));
     }
   }

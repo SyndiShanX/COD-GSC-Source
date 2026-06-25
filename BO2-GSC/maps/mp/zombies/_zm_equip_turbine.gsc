@@ -419,7 +419,7 @@ turbine_disappear_fx(origin, waittime) {
   playFX(level._turbine_disappear_fx, origin);
 
   if(isDefined(self.buildableturbine)) {
-    playsoundatposition("zmb_turbine_explo", self.buildableturbine.origin);
+    playSoundAtPosition("zmb_turbine_explo", self.buildableturbine.origin);
   }
 }
 

@@ -89,7 +89,7 @@ firetrident() {
   var_8 = var_7 + self getvelocity() * 0.05 + rotatevector(level.trident.startoffset, var_2);
   var_9 = tridentgetprojectileent(var_8, self.angles);
   var_10 = level.trident.maxdist / level.trident.movespeed;
-  var_9 moveto(var_7 + var_6 * level.trident.maxdist, var_10);
+  var_9 moveTo(var_7 + var_6 * level.trident.maxdist, var_10);
   var_11 = var_7;
   var_12 = var_8 + level.trident.movespeed * 0.05 * var_6;
   var_13 = self;
@@ -203,7 +203,7 @@ firetrident() {
 
         var_9 playSound("wpn_trident_bounce_snap");
         var_10 = level.trident.maxdist / level.trident.movespeed;
-        var_9 moveto(var_9.origin + var_6 * level.trident.maxdist, var_10);
+        var_9 moveTo(var_9.origin + var_6 * level.trident.maxdist, var_10);
       }
 
       break;
@@ -222,7 +222,7 @@ firetrident() {
 }
 
 calculateintersectdirection(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_0 - var_2);
+  var_4 = vectorNormalize(var_0 - var_2);
   var_5 = vectordot(var_4, var_1);
   var_6 = var_4 * var_5;
   var_7 = var_1 - var_6;
@@ -234,7 +234,7 @@ calculateintersectdirection(var_0, var_1, var_2, var_3) {
     var_9 = var_10 + var_7;
   }
 
-  var_9 = vectornormalize(var_9);
+  var_9 = vectorNormalize(var_9);
   return var_9;
 }
 

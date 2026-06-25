@@ -133,7 +133,7 @@ skybridge_teleport_cheats() {
   var_1 = distance(level.allies[0].origin, var_0.origin);
 
   if(256 < var_1) {
-    var_2 = common_scripts\utility::getstruct("skybridge_breach_jumpto", "targetname");
+    var_2 = common_scripts\utility::getStruct("skybridge_breach_jumpto", "targetname");
     level.allies[0] forceteleport(var_2.origin, var_2.angles, 1024);
     var_3 = level.allies[0].moveplaybackrate;
     level.allies[0].moveplaybackrate = 1.2;
@@ -149,11 +149,11 @@ skybridge_ally_setup_breach() {
 
   if(128 < distance(level.allies[0].origin, var_0.origin)) {
     if(256 < distance(level.allies[0].origin, var_0.origin)) {
-      var_2 = common_scripts\utility::getstruct("skybridge_breach_jumpto", "targetname");
+      var_2 = common_scripts\utility::getStruct("skybridge_breach_jumpto", "targetname");
       var_1 = self.moveplaybackrate;
       self.moveplaybackrate = 1.15;
     } else
-      var_2 = common_scripts\utility::getstruct("skybridge_ally_1", "targetname");
+      var_2 = common_scripts\utility::getStruct("skybridge_ally_1", "targetname");
 
     self forceteleport(var_2.origin, var_2.angles, 1024);
   }
@@ -178,11 +178,11 @@ skybridge_debris_hit(var_0) {
 
     if("large" == var_0) {
       level.player shellshock("flood_bridge_stumble", 0.6);
-      level.player playrumbleonentity("heavy_2s");
+      level.player playRumbleOnEntity("heavy_2s");
       wait 0.75;
       level.player.on_bridge = 0;
     } else if("med" == var_0) {
-      level.player playrumbleonentity("light_1s");
+      level.player playRumbleOnEntity("light_1s");
       wait 0.75;
       level.player.on_bridge = 0;
     }
@@ -220,7 +220,7 @@ skybridge_approach_fluff() {
   level.player playSound("scn_flood_mall_rumble_shake_int_lg");
   wait 1.893;
   level.player thread maps\flood_util::earthquake_w_fade(0.2, 0.95, 0.25, 0.6);
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
 }
 
 rooftops_start() {
@@ -325,7 +325,7 @@ rooftops_encounters_player_logic() {
   self.ignorerandombulletdamage = 1;
   thread rooftops_player_start_combat_attack("rooftops_exterior_encounter_start");
   common_scripts\utility::flag_wait("rooftops_exterior_encounter_start");
-  var_0 = getent("in_sight_of_enemy_exfil", "targetname");
+  var_0 = getEnt("in_sight_of_enemy_exfil", "targetname");
 
   if(isDefined(var_0)) {
     var_0 waittill("trigger");
@@ -333,7 +333,7 @@ rooftops_encounters_player_logic() {
 
   thread maps\flood_util::notify_on_function_finish("can_be_hit", common_scripts\utility::waittill_notify_or_timeout, "weapon_fired", 2.5);
 
-  if(isDefined(getent("exfil_abort", "targetname"))) {
+  if(isDefined(getEnt("exfil_abort", "targetname"))) {
     thread maps\flood_util::notify_on_function_finish("can_be_hit", maps\_utility::wait_for_targetname_trigger, "exfil_abort");
     self waittill("can_be_hit");
   }
@@ -401,7 +401,7 @@ rooftops_encounters_ally_logic() {
 }
 
 rooftops_encounter_a_ally_crouch_walk_to_cover() {
-  var_0 = getent("in_sight_of_enemy_exfil", "targetname");
+  var_0 = getEnt("in_sight_of_enemy_exfil", "targetname");
 
   if(isDefined(var_0)) {
     var_1 = self.goalradius;
@@ -414,7 +414,7 @@ rooftops_encounter_a_ally_crouch_walk_to_cover() {
 }
 
 rooftops_exterior_waittill_encounter_trigger() {
-  var_0 = getent("rooftops_encounter_a_1_trigger", "targetname");
+  var_0 = getEnt("rooftops_encounter_a_1_trigger", "targetname");
 
   while(!common_scripts\utility::flag("rooftops_runner_escape")) {
     if(!isDefined(var_0)) {
@@ -451,7 +451,7 @@ rooftops_ally_advance_to_roof() {
   level thread maps\flood_util::notify_on_enemy_count_touching_volume("rooftop_runners_vol", 0, "enemies_escaped");
   level common_scripts\utility::waittill_any("enemies_escaped", "rooftop_runners_death");
   level notify("stop_checking_volume");
-  var_0 = getent("rooftops_encounter_a_setup", "targetname");
+  var_0 = getEnt("rooftops_encounter_a_setup", "targetname");
 
   if(isDefined(var_0)) {
     var_0 maps\_utility::activate_trigger();
@@ -497,10 +497,10 @@ rooftop_enemy_runner_logic() {
     self.animname = "generic";
     self.health = 1;
     self.allowdeath = 1;
-    var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(self.target, "targetname");
     var_0 thread maps\_anim::anim_loop_solo(self, "hacking", "enemies_spotted");
   } else {
-    var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+    var_1 = common_scripts\utility::getStruct(self.target, "targetname");
     self teleport(var_1.origin, var_1.angles);
     maps\_utility::set_fixednode_true();
     self.ignoreall = 1;
@@ -521,7 +521,7 @@ rooftop_enemy_runner_logic() {
     }
 
     self notify("enemies_spotted");
-    self stopanimscripted();
+    self stopanimScripted();
     self.fixednode = 1;
     self.maxfaceenemydist = 1024;
     self setgoalnode(getnode("runner_goal_0", "targetname"));
@@ -574,7 +574,7 @@ rooftop_enemy_exfil_logic() {
       var_0 thread maps\_anim::anim_loop_solo(self, "stand_idle", "enemy_spotted");
       self waittill("enemy");
       var_0 notify("enemy_spotted");
-      self stopanimscripted();
+      self stopanimScripted();
       maps\_utility::handsignal("enemy");
       wait 3.0;
       self.fixednode = 0;
@@ -590,7 +590,7 @@ rooftop_enemy_exfil_logic() {
       self waittill("fight");
       wait 0.3;
       var_0 notify("enemy_spotted");
-      self stopanimscripted();
+      self stopanimScripted();
     } else {
       self.ignoreall = 1;
       maps\_patrol_anims_creepwalk::enable_creepwalk();
@@ -629,15 +629,15 @@ rooftops_enemy_alert_rest(var_0) {
 }
 
 rooftops_outro_setup_blocker() {
-  var_0 = getent("brick_wall_blocker", "targetname");
+  var_0 = getEnt("brick_wall_blocker", "targetname");
   var_0 movez(-128, 0.05);
   maps\_utility::wait_for_targetname_trigger("rooftops_ally_exited");
-  var_0 = getent("brick_wall_blocker", "targetname");
+  var_0 = getEnt("brick_wall_blocker", "targetname");
   var_0 notsolid();
 }
 
 rooftops_outro_remove_blocker(var_0) {
-  var_1 = getent("brick_wall_blocker", "targetname");
+  var_1 = getEnt("brick_wall_blocker", "targetname");
   var_1 notsolid();
 }
 
@@ -678,7 +678,7 @@ rooftop_water_start() {
 
 script_turnoff_garagefacade() {
   level endon("debrisbridge_done");
-  var_0 = getent("trigger_turnoff_garagefacade", "targetname");
+  var_0 = getEnt("trigger_turnoff_garagefacade", "targetname");
   var_0 waittill("trigger");
   thread maps\flood_util::hide_models_by_targetname("garage_facade");
   thread script_turnon_garagefacade();
@@ -686,7 +686,7 @@ script_turnoff_garagefacade() {
 
 script_turnon_garagefacade() {
   level endon("debrisbridge_done");
-  var_0 = getent("trigger_turnon_garagefacade", "targetname");
+  var_0 = getEnt("trigger_turnon_garagefacade", "targetname");
   var_0 waittill("trigger");
   thread maps\flood_util::show_models_by_targetname("garage_facade");
   thread script_turnoff_garagefacade();
@@ -782,7 +782,7 @@ rooftops_encounter_b() {
         break;
       case 3:
         maps\flood_util::waittill_enemy_count_or_flag(3, "rooftops_water_enemy_retreat");
-        var_2 = getent("debrisbridge_color_order_start", "targetname");
+        var_2 = getEnt("debrisbridge_color_order_start", "targetname");
 
         if(!common_scripts\utility::flag("rooftop_water_done")) {
           if(isDefined(var_2)) {
@@ -819,14 +819,14 @@ rooftops_water_intro_flare_setup(var_0, var_1) {
   playFXOnTag(level._effect["fx_flare_trail"], var_1, "TAG_FIRE_FX");
   thread rooftops_water_intro_flare_actor_cleanup();
   common_scripts\utility::flag_wait("rooftops_water_flare_intro_done");
-  var_0 stopanimscripted();
-  var_1 stopanimscripted();
+  var_0 stopanimScripted();
+  var_1 stopanimScripted();
   var_2 = bulletTrace(var_0.origin, var_0.origin - (0, 0, 10000), 0);
-  var_0 moveto(var_2["position"], 0.5);
-  var_0 rotateto((0, randomint(360), randomint(360)), 0.5);
+  var_0 moveTo(var_2["position"], 0.5);
+  var_0 rotateTo((0, randomint(360), randomint(360)), 0.5);
   var_2 = bulletTrace(var_1.origin, var_1.origin - (0, 0, 10000), 0);
-  var_1 moveto(var_2["position"], 0.5);
-  var_1 rotateto((0, randomint(360), randomint(360)), 0.5);
+  var_1 moveTo(var_2["position"], 0.5);
+  var_1 rotateTo((0, randomint(360), randomint(360)), 0.5);
   wait 5.0;
   stopFXOnTag(level._effect["fx_flare_trail"], var_0, "TAG_FIRE_FX");
   stopFXOnTag(level._effect["fx_flare_trail"], var_1, "TAG_FIRE_FX");
@@ -854,13 +854,13 @@ rooftops_water_truck_actor_setup() {
 rooftops_water_reveal_grab_gun(var_0) {
   var_0.glock.origin = var_0 gettagorigin("TAG_INHAND");
   var_0.glock.angles = var_0 gettagangles("TAG_INHAND");
-  var_0.glock linkto(var_0, "TAG_INHAND");
+  var_0.glock linkTo(var_0, "TAG_INHAND");
 }
 
 rooftops_water_reveal_shoot(var_0) {
   if(isDefined(var_0.glock)) {
     var_1 = level.player getEye();
-    var_2 = vectornormalize(var_1 - var_0.glock gettagorigin("TAG_FLASH"));
+    var_2 = vectorNormalize(var_1 - var_0.glock gettagorigin("TAG_FLASH"));
     var_3 = anglestoright(vectortoangles(var_2));
     var_4 = 1;
 
@@ -880,7 +880,7 @@ rooftops_water_player_logic() {
   common_scripts\utility::flag_wait("rooftops_water_in_combat_space");
   common_scripts\utility::flag_set("rooftops_water_encounter_start");
   maps\_utility::wait_for_notify_or_timeout("weapon_fired", 6.0);
-  getent("rooftops_water_sight_blocker", "targetname") delete();
+  getEnt("rooftops_water_sight_blocker", "targetname") delete();
   maps\_gameskill::updatealldifficulty();
   self.ignorerandombulletdamage = 0;
 }
@@ -902,7 +902,7 @@ rooftops_water_enemy_logic() {
 }
 
 rooftops_water_enemy_heli_logic() {
-  var_0 = getent("rooftops_water_heli_0", "targetname");
+  var_0 = getEnt("rooftops_water_heli_0", "targetname");
   var_0 maps\_utility::add_spawn_function(::rooftops_water_heli_movement_logic);
   var_1 = maps\_vehicle::vehicle_spawn(var_0);
   var_1 thread maps\flood_audio::sfx_heli_rooftops_water_idle();
@@ -946,7 +946,7 @@ rooftops_water_heli_exit_logic() {
   thread maps\flood_audio::sfx_heli_rooftops_water();
   thread maps\_vehicle::gopath();
   common_scripts\utility::flag_wait_or_timeout("rooftops_water_heli_exit", 5.7);
-  var_0 = common_scripts\utility::getstruct("south_exit", "targetname");
+  var_0 = common_scripts\utility::getStruct("south_exit", "targetname");
   self clearlookatent();
   self vehicle_helisetai(var_0.origin, 45, 10, 15, 0, (0, 0, 0), 0, 0.0, 0, 0, 0, 0, 0);
   self.attachedpath = var_0;
@@ -954,9 +954,9 @@ rooftops_water_heli_exit_logic() {
 }
 
 rooftops_water_enter_combat_space() {
-  var_0 = getent("rooftops_water_jumpdown_splash_ally", "targetname");
+  var_0 = getEnt("rooftops_water_jumpdown_splash_ally", "targetname");
   var_0 thread rooftops_water_enter_combat_space_play_effects();
-  var_0 = getent("rooftops_water_jumpdown_splash", "targetname");
+  var_0 = getEnt("rooftops_water_jumpdown_splash", "targetname");
   var_0 thread rooftops_water_enter_combat_space_play_effects();
 }
 
@@ -965,7 +965,7 @@ rooftops_water_enter_combat_space_play_effects() {
   var_1 = undefined;
 
   if(var_0 == level.player) {
-    var_0 playrumbleonentity("heavy_2s");
+    var_0 playRumbleOnEntity("heavy_2s");
     var_2 = anglesToForward(level.player getplayerangles());
     var_1 = var_0.origin + (0, 0, 24) + var_2 * 28;
     var_0 playSound("scn_flood_intowater_splash_plr_ss");
@@ -984,7 +984,7 @@ rooftops_encounter_b_ally_logic() {
   thread rooftops_encounter_b_ally_use_water_correctly();
   maps\_utility::disable_surprise();
   common_scripts\utility::flag_wait("rooftops_water_encounter_start");
-  var_0 = getent("in_sight_of_rooftop_scene", "targetname");
+  var_0 = getEnt("in_sight_of_rooftop_scene", "targetname");
 
   if(isDefined(var_0)) {
     var_0 maps\_utility::activate_trigger();
@@ -995,7 +995,7 @@ rooftops_encounter_b_ally_logic() {
   thread maps\flood_util::notify_on_enemy_count(1, "go_for_the_kill");
   self waittill("go_for_the_kill");
   maps\flood_util::cleanup_triggers("rooftops_encounter_b");
-  var_0 = getent("rooftops_encounter_b_kill_shot", "targetname");
+  var_0 = getEnt("rooftops_encounter_b_kill_shot", "targetname");
 
   if(isDefined(var_0)) {
     var_0 maps\_utility::activate_trigger();
@@ -1003,7 +1003,7 @@ rooftops_encounter_b_ally_logic() {
 }
 
 rooftops_water_set_advancing_state() {
-  var_0 = getent("push_to_next_encounter", "script_noteworthy");
+  var_0 = getEnt("push_to_next_encounter", "script_noteworthy");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("rooftops_water_advancing");
 }
@@ -1155,7 +1155,7 @@ rooftops_encounter_b_handle_defensive() {
 rooftops_water_reveal_logic() {
   self endon("death");
   waittillframeend;
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   var_1 = getnode(self.target, "targetname");
 
   if(isDefined(var_0)) {
@@ -1205,7 +1205,7 @@ rooftops_water_reveal_logic() {
 
 rooftops_encounter_b_ally_use_water_correctly() {
   var_0 = common_scripts\utility::array_combine(getEntArray("rooftops_encounter_b", "targetname"), getEntArray("rooftops_encounter_b_cleanup_push", "targetname"));
-  var_0 = common_scripts\utility::array_add(var_0, getent("in_sight_of_rooftop_scene", "targetname"));
+  var_0 = common_scripts\utility::array_add(var_0, getEnt("in_sight_of_rooftop_scene", "targetname"));
   common_scripts\utility::array_thread(var_0, ::ally_crouch_walk_to_goal, self);
 }
 
@@ -1250,10 +1250,10 @@ rooftops_encounter_b_force_clear() {
 
 rooftops_encounter_b_outro() {
   level.allies[0] allowedstances("stand", "crouch", "prone");
-  var_0 = getent("rooftops_encounter_b_vo_2", "targetname");
+  var_0 = getEnt("rooftops_encounter_b_vo_2", "targetname");
   var_0 maps\_utility::activate_trigger();
   var_0 common_scripts\utility::delaycall(0.1, ::delete);
-  var_1 = getent("rooftops_encounter_b_done", "targetname");
+  var_1 = getEnt("rooftops_encounter_b_done", "targetname");
 
   if(isDefined(var_1)) {
     var_1 maps\_utility::activate_trigger();
@@ -1261,7 +1261,7 @@ rooftops_encounter_b_outro() {
 }
 
 rooftops_water_splash() {
-  var_0 = getent("coverwater_rooftop_trigger", "targetname");
+  var_0 = getEnt("coverwater_rooftop_trigger", "targetname");
 
   while(!level.player istouching(var_0)) {
     common_scripts\utility::waitframe();
@@ -1317,7 +1317,7 @@ player_debrisbridge_death_fx() {
 }
 
 debrisbridge_water_enter_combat_space() {
-  var_0 = getent("debrisbridge_water_jumpdown_splash", "targetname");
+  var_0 = getEnt("debrisbridge_water_jumpdown_splash", "targetname");
   var_0 thread debrisbridge_water_enter_combat_space_play_effects();
   var_0 thread debrisbridge_water_enter_combat_space_play_effects_ally();
 }
@@ -1329,7 +1329,7 @@ debrisbridge_water_enter_combat_space_play_effects() {
     self waittill("trigger", var_0);
 
     if(var_0 == level.player) {
-      var_0 playrumbleonentity("heavy_2s");
+      var_0 playRumbleOnEntity("heavy_2s");
       var_1 = anglesToForward(level.player getplayerangles());
       var_2 = var_0.origin + var_1 * 45;
       var_0 playSound("scn_flood_intowater_splash_plr_ss");
@@ -1417,7 +1417,7 @@ debrisbridge_ally_vo() {
 }
 
 debris_bridge_allies_loop() {
-  var_0 = common_scripts\utility::getstruct("vignette_debris_bridge_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_debris_bridge_node", "script_noteworthy");
   var_1 = [];
   var_1[var_1.size] = getnode("debrisbridge_kill_shot_0", "targetname");
   var_1[var_1.size] = getnode("debrisbridge_kill_shot_1", "targetname");
@@ -1432,7 +1432,7 @@ debris_bridge_allies_loop() {
 
 debris_bridge_reach_and_loop(var_0, var_1) {
   maps\_vignette_util::vignette_actor_ignore_everything();
-  level.db_faux_enemy = getent("debrisbridge_faux_enemy", "targetname");
+  level.db_faux_enemy = getEnt("debrisbridge_faux_enemy", "targetname");
 
   if(var_1 == 0) {
     level.allies[0] thread maps\_utility::smart_dialogue("flood_vrg_merrickeliasfollowmy");
@@ -1478,7 +1478,7 @@ debrisbridge_enemy_spawn_group_logic(var_0, var_1, var_2, var_3) {
   common_scripts\utility::array_thread(var_4, maps\_utility::spawn_ai, 1);
 
   if("bottom" == var_3) {
-    var_5 = getent("debrisbridge_special", "targetname");
+    var_5 = getEnt("debrisbridge_special", "targetname");
     var_5 maps\_utility::add_spawn_function(maps\_utility::disable_long_death);
     var_5 maps\_utility::add_spawn_function(maps\_utility::set_grenadeammo, 0);
     var_5 maps\_utility::add_spawn_function(::debrisbridge_enemy_aggrisive_logic);
@@ -1494,8 +1494,8 @@ debrisbridge_enemy_aggrisive_logic() {
   self.health = 1;
   self.ignoresuppression = 1;
   self.suppressionwait = 0;
-  var_0 = getent("debrisbridge_aggresive_vol", "targetname");
-  var_1 = getent("debrisbridge_enemy_aggresive", "targetname");
+  var_0 = getEnt("debrisbridge_aggresive_vol", "targetname");
+  var_1 = getEnt("debrisbridge_enemy_aggresive", "targetname");
 
   if(self istouching(var_1)) {
     self setgoalvolumeauto(var_0);
@@ -1516,7 +1516,7 @@ debrisbridge_enemy_logic() {
 
 debrisbridge_path_logic() {
   common_scripts\utility::flag_wait("debrisbridge_ready");
-  var_0 = getent("debrisbridge_stop_blocking", "targetname");
+  var_0 = getEnt("debrisbridge_stop_blocking", "targetname");
 
   if(isDefined(var_0)) {
     var_0 maps\_utility::activate_trigger();
@@ -1631,7 +1631,7 @@ debrisbridge_clear_enemies_top() {
   var_0 = [26.0, 26.6, 13.0, 17.6, 36.0];
 
   for(var_1 = 0; var_1 < 5; var_1++) {
-    var_2 = getent("debris_bridge_car_" + var_1, "targetname");
+    var_2 = getEnt("debris_bridge_car_" + var_1, "targetname");
     level maps\_utility::delaythread(var_0[var_1], ::debrisbridge_kill_enemies_top, var_1, var_2);
   }
 }
@@ -1750,7 +1750,7 @@ debrisbridge_crossing() {
   }
 
   wait 1.15;
-  var_1 = getent("debrisbridge_fodder_0", "targetname");
+  var_1 = getEnt("debrisbridge_fodder_0", "targetname");
 
   if(isDefined(var_1)) {
     var_1 maps\_utility::add_spawn_function(maps\_utility::disable_long_death);
@@ -1760,7 +1760,7 @@ debrisbridge_crossing() {
 
   if("fu" == var_0 || "hard" == var_0) {
     wait 1.6;
-    var_1 = getent("debrisbridge_fodder_1", "targetname");
+    var_1 = getEnt("debrisbridge_fodder_1", "targetname");
 
     if(isDefined(var_1)) {
       var_1 maps\_utility::add_spawn_function(maps\_utility::disable_long_death);
@@ -1856,7 +1856,7 @@ suspend_actor_turnanims() {
 }
 
 rooftops_heli_logic() {
-  var_0 = getent("rooftops_encounter_heli", "targetname");
+  var_0 = getEnt("rooftops_encounter_heli", "targetname");
   common_scripts\utility::flag_wait("skybridge_heli_go");
   level.rooftop_heli = maps\_vehicle::vehicle_spawn(var_0);
   level.rooftop_heli maps\_vehicle::godon();
@@ -1944,13 +1944,13 @@ rooftop_water_to_debrisbridge_transition() {
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, maps\_utility::set_grenadeammo, 0);
   common_scripts\utility::array_thread(var_0, maps\_utility::add_spawn_function, ::debrisbridge_enemy_logic);
   common_scripts\utility::array_thread(var_0, maps\_utility::spawn_ai, 1);
-  var_1 = common_scripts\utility::getstruct("debrisbridge_ally_1", "targetname");
+  var_1 = common_scripts\utility::getStruct("debrisbridge_ally_1", "targetname");
   level.allies[1] teleport(var_1.origin, var_1.angles);
   level.allies[1] maps\_utility::enable_ai_color();
   level.allies[1] maps\_utility::set_force_color("p");
   level.allies[1].goalradius = 96;
   level.allies[1] maps\_utility::gun_recall();
-  var_1 = common_scripts\utility::getstruct("debrisbridge_ally_2", "targetname");
+  var_1 = common_scripts\utility::getStruct("debrisbridge_ally_2", "targetname");
   level.allies[2] teleport(var_1.origin, var_1.angles);
   level.allies[2] maps\_utility::enable_ai_color();
   level.allies[2] maps\_utility::set_force_color("b");
@@ -1961,7 +1961,7 @@ rooftop_water_to_debrisbridge_transition() {
 }
 
 ally_rooftop_water_to_debrisbridge() {
-  var_0 = getent("debrisbridge_ally_logic_0_trigger", "targetname");
+  var_0 = getEnt("debrisbridge_ally_logic_0_trigger", "targetname");
   var_1 = self.suppressionwait;
   self.ignoreall = 1;
   self.ignoresuppression = 1;
@@ -2012,7 +2012,7 @@ rooftops_shoot_around_actor(var_0, var_1, var_2) {
       }
     } else {
       var_4 = var_0 getEye();
-      var_5 = vectornormalize(var_4 - self gettagorigin("TAG_FLASH"));
+      var_5 = vectorNormalize(var_4 - self gettagorigin("TAG_FLASH"));
       var_6 = anglestoright(vectortoangles(var_5));
       var_7 = 1;
 
@@ -2032,23 +2032,23 @@ rooftops_shoot_around_actor(var_0, var_1, var_2) {
 
 rooftops_cleanup_jumpto() {
   waittillframeend;
-  var_0 = getent("skybridge_start", "targetname");
+  var_0 = getEnt("skybridge_start", "targetname");
   var_0 delete();
-  var_0 = getent("rooftops_start", "targetname");
+  var_0 = getEnt("rooftops_start", "targetname");
   var_0 delete();
-  var_0 = getent("rooftop_water_start", "targetname");
+  var_0 = getEnt("rooftop_water_start", "targetname");
   var_0 delete();
-  var_0 = getent("debrisbridge_start", "targetname");
+  var_0 = getEnt("debrisbridge_start", "targetname");
   var_0 delete();
-  var_0 = getent("ending_start", "targetname");
+  var_0 = getEnt("ending_start", "targetname");
   var_0 delete();
 }
 
 rooftops_cleanup_post_skybridge() {
   waittillframeend;
-  var_0 = getent("rooftops_encounter_heli", "targetname");
+  var_0 = getEnt("rooftops_encounter_heli", "targetname");
   var_0 delete();
-  var_1 = getent("ally_in_front_vol", "targetname");
+  var_1 = getEnt("ally_in_front_vol", "targetname");
   var_1 delete();
   var_2 = getEntArray("skybridge_noprone", "targetname");
 
@@ -2080,13 +2080,13 @@ rooftops_cleanup_post_wallkick() {
     }
   }
 
-  var_11 = getent("rooftop_runners_vol", "targetname");
+  var_11 = getEnt("rooftop_runners_vol", "targetname");
   var_11 delete();
-  var_11 = getent("rooftops_encounter_a_intro_vol", "targetname");
+  var_11 = getEnt("rooftops_encounter_a_intro_vol", "targetname");
   var_11 delete();
-  var_11 = getent("rooftops_encounter_a_flank_left_vol", "targetname");
+  var_11 = getEnt("rooftops_encounter_a_flank_left_vol", "targetname");
   var_11 delete();
-  var_11 = getent("rooftops_encounter_a_flank_right_vol", "targetname");
+  var_11 = getEnt("rooftops_encounter_a_flank_right_vol", "targetname");
   var_11 delete();
   var_12 = getEntArray("rooftops_misc_triggers", "script_noteworthy");
 
@@ -2101,7 +2101,7 @@ rooftops_cleanup_post_wallkick() {
   }
 
   for(var_4 = 0; var_4 < 3; var_4++) {
-    var_20 = getent("skybridge_clip_" + var_4, "targetname");
+    var_20 = getEnt("skybridge_clip_" + var_4, "targetname");
     var_20 delete();
 
     if(isDefined(level.skybridge_sections) && isDefined(level.skybridge_sections[var_4])) {
@@ -2110,7 +2110,7 @@ rooftops_cleanup_post_wallkick() {
     }
   }
 
-  var_20 = getent("skybridge_doorbreach_clip", "targetname");
+  var_20 = getEnt("skybridge_doorbreach_clip", "targetname");
   var_20 delete();
 
   if(isDefined(level.skybridge_door)) {
@@ -2137,17 +2137,17 @@ rooftops_cleanup_post_debrisbridge_dropdown() {
     }
   }
 
-  var_5 = getent("rooftops_encounter_b_water_vol", "targetname");
+  var_5 = getEnt("rooftops_encounter_b_water_vol", "targetname");
   var_5 delete();
-  var_5 = getent("rooftops_encounter_b_flush_vol", "targetname");
+  var_5 = getEnt("rooftops_encounter_b_flush_vol", "targetname");
   var_5 delete();
-  var_5 = getent("rooftops_encounter_b_catwalk_vol", "targetname");
+  var_5 = getEnt("rooftops_encounter_b_catwalk_vol", "targetname");
   var_5 delete();
-  var_5 = getent("rooftops_encounter_b_ledge_vol", "targetname");
+  var_5 = getEnt("rooftops_encounter_b_ledge_vol", "targetname");
   var_5 delete();
-  var_5 = getent("rooftops_encounter_b_gunner_vol", "targetname");
+  var_5 = getEnt("rooftops_encounter_b_gunner_vol", "targetname");
   var_5 delete();
-  var_5 = getent("rooftops_encounter_b_safe_vol", "targetname");
+  var_5 = getEnt("rooftops_encounter_b_safe_vol", "targetname");
   var_5 delete();
   var_6 = getEntArray("rooftops_water_misc_triggers", "script_noteworthy");
 
@@ -2197,21 +2197,21 @@ rooftops_cleanup_post_debrisbridge() {
     }
   }
 
-  var_7 = getent("debrisbridge_fodder_0", "targetname");
+  var_7 = getEnt("debrisbridge_fodder_0", "targetname");
   var_7 delete();
-  var_7 = getent("debrisbridge_fodder_1", "targetname");
+  var_7 = getEnt("debrisbridge_fodder_1", "targetname");
   var_7 delete();
-  var_11 = getent("debrisbridge_encounter_vol", "targetname");
+  var_11 = getEnt("debrisbridge_encounter_vol", "targetname");
   var_11 delete();
-  var_11 = getent("debrisbridge_encounter_bottom_vol", "targetname");
+  var_11 = getEnt("debrisbridge_encounter_bottom_vol", "targetname");
   var_11 delete();
-  var_11 = getent("debrisbridge_crossing_vol", "targetname");
+  var_11 = getEnt("debrisbridge_crossing_vol", "targetname");
   var_11 delete();
-  var_11 = getent("debrisbridge_aggresive_vol", "targetname");
+  var_11 = getEnt("debrisbridge_aggresive_vol", "targetname");
   var_11 delete();
-  var_12 = getent("debrisbridge_enemy_aggresive", "targetname");
+  var_12 = getEnt("debrisbridge_enemy_aggresive", "targetname");
   var_12 delete();
-  var_12 = getent("debrisbridge_noprone", "targetname");
+  var_12 = getEnt("debrisbridge_noprone", "targetname");
   var_12 delete();
   var_13 = getEntArray("debrisbridge_misc_triggers", "script_noteworthy");
 
@@ -2219,11 +2219,11 @@ rooftops_cleanup_post_debrisbridge() {
     var_12 delete();
   }
 
-  var_16 = getent("debrisbridge_prop_14", "targetname");
+  var_16 = getEnt("debrisbridge_prop_14", "targetname");
   var_16 delete();
-  var_16 = getent("debrisbridge_prop_15", "targetname");
+  var_16 = getEnt("debrisbridge_prop_15", "targetname");
   var_16 delete();
-  var_16 = getent("debrisbridge_clip_all", "targetname");
+  var_16 = getEnt("debrisbridge_clip_all", "targetname");
   var_16 delete();
 
   if(isDefined(level.debrisbridge_origins)) {
@@ -2355,7 +2355,7 @@ rooftops_encounter_a_ally_vo() {
 
 rooftops_encounter_a_ally_vo_holdup() {
   self endon("spotted");
-  var_0 = getent("ally_handsignal", "targetname");
+  var_0 = getEnt("ally_handsignal", "targetname");
   var_0 waittill("trigger", var_1);
 
   if(var_1 == self) {
@@ -2391,7 +2391,7 @@ rooftops_encounter_a_ally_vo_runners() {
 }
 
 rooftops_encounter_a_runners_vo() {
-  getent("skybridge_finished_blocker", "targetname") waittill("trigger");
+  getEnt("skybridge_finished_blocker", "targetname") waittill("trigger");
   var_0 = maps\_utility::get_ai_group_ai("rooftop_runners");
 
   if(var_0[0].target == "rooftop_runner_computer") {
@@ -2429,7 +2429,7 @@ rooftops_encounter_a_runners_escape_vo() {
   level endon("runners_escape");
   self endon("death");
   self waittill("enemy_near", var_0);
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 
   if(isalive(self)) {
     var_1 = maps\_utility::make_array("flood_vz11_enemies", "flood_vz2_americans");
@@ -2466,11 +2466,11 @@ rooftops_encounter_b_ally_vo() {
 }
 
 rooftops_encounter_b_ally_end_vo() {
-  var_0 = getent("clear_rooftops_encounter_b", "targetname");
+  var_0 = getEnt("clear_rooftops_encounter_b", "targetname");
   var_0 endon("trigger");
   maps\_utility::wait_for_targetname_trigger("rooftops_encounter_b_vo_2");
   maps\_utility::battlechatter_off("allies");
-  var_1 = getent("rooftops_encounter_b_vo_3", "targetname");
+  var_1 = getEnt("rooftops_encounter_b_vo_3", "targetname");
 
   if(isDefined(var_1)) {
     wait 0.75;
@@ -2480,19 +2480,19 @@ rooftops_encounter_b_ally_end_vo() {
 
   common_scripts\utility::flag_wait("rooftops_vo_push_forward_hassle");
   self notify("flag_set");
-  var_1 = getent("rooftops_encounter_b_vo_3", "targetname");
+  var_1 = getEnt("rooftops_encounter_b_vo_3", "targetname");
 
   if(isDefined(var_1)) {
     maps\_utility::smart_dialogue("flood_diz_cominginfromabove");
   }
 
-  var_1 = getent("rooftops_encounter_b_vo_3", "targetname");
+  var_1 = getEnt("rooftops_encounter_b_vo_3", "targetname");
 
   if(isDefined(var_1)) {
     var_1 waittill("trigger");
   }
 
-  var_1 = getent("clear_rooftops_encounter_b", "targetname");
+  var_1 = getEnt("clear_rooftops_encounter_b", "targetname");
 
   if(isDefined(var_1)) {
     common_scripts\utility::flag_wait("rooftops_water_vo_fromabove");

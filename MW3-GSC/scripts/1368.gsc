@@ -5,24 +5,24 @@
 
 main() {
   level._id_41A5 = 1;
-  level._id_41A6 = getent("sea", "targetname");
+  level._id_41A6 = getEnt("sea", "targetname");
   level._id_41A7 = spawn("script_origin", level._id_41A6.origin);
   level._id_41A7.offset = level._id_41A6.origin * -1;
   level._id_41A7._id_41A8 = "sway2";
   level._id_41A9 = spawn("script_origin", level._id_41A6.origin);
   level._id_41A9.offset = level._id_41A7.offset;
-  level._id_41A6 linkto(level._id_41A9);
-  level._id_41AA = getent("sea_foam", "targetname");
+  level._id_41A6 linkTo(level._id_41A9);
+  level._id_41AA = getEnt("sea_foam", "targetname");
 
   if(isDefined(level._id_41AA)) {
-    level._id_41AA linkto(level._id_41A9);
+    level._id_41AA linkTo(level._id_41A9);
     level._id_41AA hide();
   }
 
-  level._id_41AB = getent("sea_black", "targetname");
+  level._id_41AB = getEnt("sea_black", "targetname");
 
   if(isDefined(level._id_41AB)) {
-    level._id_41AB linkto(level._id_41A9);
+    level._id_41AB linkTo(level._id_41A9);
   }
   common_scripts\utility::flag_init("_sea_waves");
   common_scripts\utility::flag_init("_sea_viewbob");
@@ -92,7 +92,7 @@ _id_41B8(var_0) {
     var_1 = getEntArray(self.targetname, "target");
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_1[var_2] linkto(self);
+      var_1[var_2] linkTo(self);
     }
   }
 
@@ -172,7 +172,7 @@ _id_41B8(var_0) {
     var_3[var_2] thread _id_41BC(var_6, var_0);
   }
   wait 0.05;
-  self linkto(var_6);
+  self linkTo(var_6);
 
   if(isDefined(self._id_164F)) {}
 
@@ -190,7 +190,7 @@ _id_41BA(var_0, var_1) {
     if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
     }
-    var_1 rotateto(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
+    var_1 rotateTo(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
 
     if(var_0._id_41A8 == "sway1") {
       var_0 waittill("sway2");
@@ -201,13 +201,13 @@ _id_41BA(var_0, var_1) {
     if(!isDefined(var_1.parent)) {
       wait(var_1.waittime);
     }
-    var_1 rotateto(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
+    var_1 rotateTo(var_1._id_41B7, var_0.time, var_0.time * 0.5, var_0.time * 0.5);
   }
 }
 
 _id_41BB(var_0) {
   for(;;) {
-    self moveto(var_0.origin, 0.1);
+    self moveTo(var_0.origin, 0.1);
     wait 0.1;
   }
 }
@@ -216,7 +216,7 @@ _id_41BC(var_0, var_1) {
   if(!isDefined(self.target)) {
     return;
   }
-  var_0.parent = getent(self.target, "targetname");
+  var_0.parent = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0.parent._id_41B9)) {
     var_0.parent waittill("got_link");
@@ -227,16 +227,16 @@ _id_41BC(var_0, var_1) {
   var_4.angles = var_2.angles;
   var_5 = spawn("script_origin", var_0.origin);
   var_5.angles = var_0.angles;
-  var_5 linkto(var_4);
+  var_5 linkTo(var_4);
   var_0 thread _id_41BB(var_5);
 
   for(;;) {
     var_2 waittill("precalcdone1");
     wait(var_2.waittime - 0.05);
-    var_4 rotateto(var_2._id_41B7, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
+    var_4 rotateTo(var_2._id_41B7, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
     var_2 waittill("precalcdone2");
     wait(var_2.waittime - 0.05);
-    var_4 rotateto(var_2._id_41B7, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
+    var_4 rotateTo(var_2._id_41B7, var_1.time, var_1.time * 0.5, var_1.time * 0.5);
   }
 }
 
@@ -256,18 +256,18 @@ _id_41BD() {
     self notify("sway1");
 
     if(common_scripts\utility::flag("_sea_bob")) {
-      level._id_41A9 rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+      level._id_41A9 rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
     }
-    self rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+    self rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
     wait(self.time);
     self._id_41B4 = self._id_41B4 * -1;
     self._id_41A8 = "sway2";
     self notify("sway2");
 
     if(common_scripts\utility::flag("_sea_bob")) {
-      level._id_41A9 rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+      level._id_41A9 rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
     }
-    self rotateto(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
+    self rotateTo(self._id_41B4, self.time, self.time * 0.5, self.time * 0.5);
     wait(self.time);
   }
 }
@@ -285,7 +285,7 @@ _id_41BF() {
   level endon("_sea_bob");
   var_0 = 1.5;
   var_1 = (0, 0, 0);
-  level._id_41A9 rotateto(var_1, var_0, var_0 * 0.5, var_0 * 0.5);
+  level._id_41A9 rotateTo(var_1, var_0, var_0 * 0.5, var_0 * 0.5);
   wait(var_0);
   wait 0.05;
   level._id_41AE = level._id_41AD;
@@ -371,7 +371,7 @@ _id_41C6(var_0, var_1) {
 
 _id_41C7() {
   var_0 = common_scripts\utility::getStructArray("wave_fx", "targetname");
-  var_1 = common_scripts\utility::getstruct("wave_fx_center", "targetname");
+  var_1 = common_scripts\utility::getStruct("wave_fx_center", "targetname");
 
   if(!var_0.size) {
     return undefined;

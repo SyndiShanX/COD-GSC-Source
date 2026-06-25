@@ -134,7 +134,7 @@ mason_intro_cinematic() {
   level.player showviewmodel();
   level.player allowcrouch(1);
   level.player player_enable_weapons();
-  m_scorch_marks = getent("josefina_hall_scorch", "targetname");
+  m_scorch_marks = getEnt("josefina_hall_scorch", "targetname");
   m_scorch_marks show();
   flag_set("dichotomy_complete");
   setmusicstate("NIC_RAID_BATTLE");
@@ -166,7 +166,7 @@ move_squad_into_village() {
 spawn_mason_intro_snipers() {
   trigger_use("mortar_team");
   a_ai_pdf = simple_spawn("mason_intro_pdf_snipers");
-  e_target = getent("mason_intro_pdf_snipers_target", "targetname");
+  e_target = getEnt("mason_intro_pdf_snipers_target", "targetname");
   e_target.health = 100;
 
   foreach(guy in a_ai_pdf) {
@@ -230,7 +230,7 @@ mason_intro_rundown_vo() {
 
 mason_intro_cleanup() {
   trigger_wait("end_mason_intro");
-  o_windowview = getent("mason_intro_scope_view", "targetname");
+  o_windowview = getEnt("mason_intro_scope_view", "targetname");
   o_windowview delete();
   delete_scene("mason_intro");
   delete_scene("mason_intro_window_view");
@@ -316,7 +316,7 @@ transition_text() {
 
 play_bell_rings() {
   wait 6;
-  playsoundatposition("amb_bell_chime", (-3485, -9689, 2306));
+  playSoundAtPosition("amb_bell_chime", (-3485, -9689, 2306));
   wait 2.9;
-  playsoundatposition("amb_bell_chime", (-3485, -9689, 2306));
+  playSoundAtPosition("amb_bell_chime", (-3485, -9689, 2306));
 }

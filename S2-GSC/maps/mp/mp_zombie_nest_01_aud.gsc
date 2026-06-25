@@ -1035,7 +1035,7 @@ func_ABF7() {}
 func_ABF8(param_00, param_01) {
   var_02 = spawn("script_origin", param_00);
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02);
-  var_02 moveto(param_01, 1.9);
+  var_02 moveTo(param_01, 1.9);
   wait(2);
   var_02 delete();
 }
@@ -1299,7 +1299,7 @@ voice_of_god_mix_begin() {
 
 vog_do_earthshake() {
   wait(3);
-  self playrumbleonentity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
   earthquake(0.2, 30, self.var_0116, 900, self);
 }
 
@@ -1599,7 +1599,7 @@ func_17A2() {
   var_04 = 5;
   wait(1);
   var_05 = spawn("script_origin", var_00.var_0116);
-  var_05 linkto(var_00, "tag_origin", (0, 0, -720), (0, 0, 0));
+  var_05 linkTo(var_00, "tag_origin", (0, 0, -720), (0, 0, 0));
   var_06 = lib_0380::func_6846("zmb_blimp_engine_lp", var_01, var_05, var_04, var_03, var_04);
   var_06 = lib_0380::func_6846("zmb_blimp_engine_lfe_lp", var_01, var_05, var_04, var_03, var_04);
   var_00 thread func_179E(var_05);
@@ -1670,7 +1670,7 @@ func_71C5(param_00, param_01) {
 }
 
 func_80DF() {
-  var_00 = getent("scream_trigger_01", "targetname");
+  var_00 = getEnt("scream_trigger_01", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     func_71C5(var_00.var_0116, var_01);
@@ -1679,7 +1679,7 @@ func_80DF() {
 }
 
 func_80E0() {
-  var_00 = getent("scream_trigger_02", "targetname");
+  var_00 = getEnt("scream_trigger_02", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     func_71C5(var_00.var_0116, var_01);
@@ -1688,7 +1688,7 @@ func_80E0() {
 }
 
 func_80E1() {
-  var_00 = getent("scream_trigger_03", "targetname");
+  var_00 = getEnt("scream_trigger_03", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     func_71C5(var_00.var_0116, var_01);

@@ -197,7 +197,7 @@ add_wave_vehicle(wave_num, targetname, type, alt_node, delay) {
 
   temp = spawnStruct();
   temp.targetname = targetname;
-  temp.ent = GetEnt(targetname, "targetname");
+  temp.ent = getEnt(targetname, "targetname");
   temp.type = type;
 
   temp.delay = undefined;
@@ -365,9 +365,9 @@ spawn_functions() {
   array_spawn_function_targetname("jeep_1_guys_alt", ::wave_closing_in, "attack_line_close");
   array_spawn_function_targetname("jeep_1_guys_alt2", ::wave_closing_in, "attack_line_med");
 
-  GetEnt("truck_1", "targetname") add_spawn_function(::setup_base_vehicles);
-  GetEnt("truck_2", "targetname") add_spawn_function(::setup_base_vehicles);
-  GetEnt("jeep_1", "targetname") add_spawn_function(::setup_base_vehicles);
+  getEnt("truck_1", "targetname") add_spawn_function(::setup_base_vehicles);
+  getEnt("truck_2", "targetname") add_spawn_function(::setup_base_vehicles);
+  getEnt("jeep_1", "targetname") add_spawn_function(::setup_base_vehicles);
 }
 level.hostile_count++;
 
@@ -672,7 +672,7 @@ wave_closing_in(start_with) {
 threat_priority_thread() {
   self endon("death");
 
-  roof_point = getstruct("so_roof_point", "targetname");
+  roof_point = getStruct("so_roof_point", "targetname");
 
   while(1) {
     weight = 0;

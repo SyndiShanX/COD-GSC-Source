@@ -92,18 +92,18 @@ fx_spider_exit_b() {
 }
 
 fx_cross_lab_light_on() {
-  var_0 = getent("lab_light_01", "targetname");
+  var_0 = getEnt("lab_light_01", "targetname");
   var_0 setscriptablepartstate("armory_light", "light_on");
 }
 
 fx_cross_lab_light_off() {
-  var_0 = getent("lab_light_01", "targetname");
+  var_0 = getEnt("lab_light_01", "targetname");
   var_0 setscriptablepartstate("armory_light", "light_off");
 }
 
 fx_cross_lab_light_flicker() {
   wait 11.0;
-  var_0 = getent("lab_light_01", "targetname");
+  var_0 = getEnt("lab_light_01", "targetname");
   var_0 setscriptablepartstate("armory_light", "light_flicker");
   common_scripts\utility::exploder(55);
   wait 1;
@@ -143,14 +143,14 @@ fx_snow_watcher() {
 fx_snow_watcher_medium() {
   level endon("game_ended");
   level endon("final_spider_fight");
-  var_0 = getent("fxt_medium_snow", "targetname");
+  var_0 = getEnt("fxt_medium_snow", "targetname");
   var_0 waittill("trigger");
   fx_snow("medium_snow");
 }
 
 fx_snow_watcher_heavy() {
   level endon("game_ended");
-  var_0 = getent("fxt_heavy_snow", "targetname");
+  var_0 = getEnt("fxt_heavy_snow", "targetname");
   var_0 waittill("trigger");
   fx_set_spider_fog_3();
   fx_snow("heavy_snow_no_fog");
@@ -159,7 +159,7 @@ fx_snow_watcher_heavy() {
 fx_snow(var_0) {
   while(!isDefined(level.snow)) {
     wait 0.2;
-    level.snow = getent("scriptable_snow", "targetname");
+    level.snow = getEnt("scriptable_snow", "targetname");
   }
 
   level.snow setscriptablepartstate("alien_armory_snow", var_0);

@@ -207,7 +207,7 @@ astro_zombie_manager() {
   self notify("astro_manager_end");
   self endon("astro_manager_end");
   flag_wait("all_players_connected");
-  spawner = getent("astronaut_zombie", "targetname");
+  spawner = getEnt("astronaut_zombie", "targetname");
   while(true) {
     if(!is_true(level.on_the_moon)) {
       wait(0.5);
@@ -238,7 +238,7 @@ astro_zombie_think() {
   self.ignoreall = false;
   self.pathEnemyFightDist = 64;
   self.meleeAttackDist = 64;
-  self.maxhealth = level.zombie_health * GetPlayers().size * level.astro_zombie_health_mult;
+  self.maxhealth = level.zombie_health * getPlayers().size * level.astro_zombie_health_mult;
   self.health = self.maxhealth;
   self.maxsightdistsqrd = 96 * 96;
   self.zombie_move_speed = "walk";
@@ -293,7 +293,7 @@ astro_zombie_headbutt_think() {
       self thread astro_turn_player();
       headbutt_anim = % ai_zombie_astro_headbutt;
       time = getAnimLength(headbutt_anim);
-      self animscripted("headbutt_anim", self.origin, self.angles, headbutt_anim, "normal", %body, 1, 0.1);
+      self animScripted("headbutt_anim", self.origin, self.angles, headbutt_anim, "normal", %body, 1, 0.1);
       self.player_to_headbutt thread astro_restore_move_speed(time);
       wait(time);
       self.next_headbutt_time = GetTime() + level.astro_headbutt_delay;
@@ -322,7 +322,7 @@ astro_turn_player() {
   }
   _debug_astro_print(player.playername + " locked");
   lerp_time = 0.2;
-  enemy_to_player = VectorNormalize(player.origin - self.origin);
+  enemy_to_player = vectorNormalize(player.origin - self.origin);
   link_org = self.origin + (40 * enemy_to_player);
   player lerp_player_view_to_position(link_org, facing_astro, lerp_time, 1);
   wait(lerp_time);
@@ -377,7 +377,7 @@ astro_zombie_headbutt_release_watcher(animname) {
     player SetMoveSpeedScale(1);
     release_anim = % ai_zombie_astro_headbutt_release;
     time = getAnimLength(release_anim);
-    self animscripted("release_anim", self.origin, self.angles, release_anim, "normal", %body, 1, 0.1);
+    self animScripted("release_anim", self.origin, self.angles, release_anim, "normal", %body, 1, 0.1);
     wait(time);
   }
 }
@@ -477,7 +477,7 @@ astro_zombie_teleport(struct_dest) {
   self DisableOffhandWeapons();
   self DisableWeapons();
   self DontInterpolate();
-  self SetOrigin(destination);
+  self setOrigin(destination);
   self SetPlayerAngles(struct_dest.angles);
   self EnableOffhandWeapons();
   self EnableWeapons();
@@ -500,7 +500,7 @@ astro_zombie_die() {
 }
 astro_delay_delete() {
   self endon("death");
-  self SetPlayerCollision(0);
+  self setPlayerCollision(0);
   self thread maps\_zombiemode_spawner::zombie_eye_glow_stop();
   wait_network_frame();
   self Hide();
@@ -518,7 +518,7 @@ astro_player_pulse() {
     wait_network_frame();
     wait_network_frame();
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!is_player_valid(player)) {
@@ -546,10 +546,10 @@ astro_player_pulse() {
     bonus = (level.astro_explode_pulse_max - level.astro_explode_pulse_min) * scale;
     pulse = level.astro_explode_pulse_min + bonus;
     dir = (player.origin[0] - astro_org[0], player.origin[1] - astro_org[1], 0);
-    dir = VectorNormalize(dir);
+    dir = vectorNormalize(dir);
     dir += (0, 0, 1);
     dir *= pulse;
-    player SetOrigin(player.origin + (0, 0, 1));
+    player setOrigin(player.origin + (0, 0, 1));
     player_velocity = dir;
     player SetVelocity(player_velocity);
     if(isDefined(level.ai_astro_explode)) {
@@ -583,7 +583,7 @@ astro_microwavegun_sizzle(player) {
 }
 astro_zombie_default_enter_level() {
   playFX(level._effect["astro_spawn"], self.origin);
-  playsoundatposition("zmb_bolt", self.origin);
+  playSoundAtPosition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("general", "astro_spawn");

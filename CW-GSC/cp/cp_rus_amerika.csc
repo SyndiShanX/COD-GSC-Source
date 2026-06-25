@@ -88,7 +88,7 @@ function private function_8991ddb4(localclientnum) {
       self.var_f966e7bb.var_b4185011 = spawn(localclientnum, tagorigin, "script_origin");
 
       if(isDefined(self.var_f966e7bb.var_b4185011)) {
-        self.var_f966e7bb.var_b4185011 linkto(self, "tag_flash");
+        self.var_f966e7bb.var_b4185011 linkTo(self, "tag_flash");
       }
     }
 

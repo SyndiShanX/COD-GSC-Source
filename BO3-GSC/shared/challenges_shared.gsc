@@ -727,7 +727,7 @@ function earnedempassistscore(score) {
 }
 
 function teamcompletedchallenge(team, challenge) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].team) && players[i].team == team) {
       players[i] addgametypestat(challenge, 1);

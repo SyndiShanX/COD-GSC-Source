@@ -104,7 +104,7 @@ function onplaceturret(turret) {
     turret.vehicle thread util::ghost_wait_show(0.05);
     turret.vehicle playSound("mpl_turret_startup");
   } else {
-    turret.vehicle = spawnvehicle("sentry_turret", turret.origin, turret.angles, "dynamic_spawn_ai");
+    turret.vehicle = spawnVehicle("sentry_turret", turret.origin, turret.angles, "dynamic_spawn_ai");
     turret.vehicle.owner = player;
     turret.vehicle setowner(player);
     turret.vehicle.ownerentnum = player.entnum;
@@ -190,7 +190,7 @@ function onpickupturret(turret) {
   player = self;
   turret.vehicle ghost();
   turret.vehicle disable(0);
-  turret.vehicle linkto(turret);
+  turret.vehicle linkTo(turret);
   target_remove(turret.vehicle);
   turret clientfield::set("auto_turret_close", 1);
   turret.othermodel clientfield::set("auto_turret_close", 1);

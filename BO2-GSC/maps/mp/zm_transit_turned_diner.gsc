@@ -39,7 +39,7 @@ main() {
 
   collision = spawn("script_model", (-5000, -6700, 0), 1);
   collision setModel("zm_collision_transit_diner_survival");
-  collision disconnectpaths();
+  collision disconnectPaths();
 }
 
 getspawnpoints() {

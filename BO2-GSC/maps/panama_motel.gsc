@@ -38,10 +38,10 @@ main() {
 }
 
 motel_breach_main() {
-  m_motel_tv_broken = getent("m_motel_tv_broken", "targetname");
+  m_motel_tv_broken = getEnt("m_motel_tv_broken", "targetname");
   m_motel_tv_broken hide();
   level thread motel_fail_condition();
-  trig_player_motel_door = getent("trig_player_motel_door", "targetname");
+  trig_player_motel_door = getEnt("trig_player_motel_door", "targetname");
   trig_player_motel_door trigger_off();
   run_scene_first_frame("motel_chair");
   flag_wait("trig_mason_to_motel");
@@ -153,7 +153,7 @@ next_mission(m_player_body) {
 player_breach_fake_fire() {
   while(flag("breach_gun_raised")) {
     if(level.player attackButtonPressed()) {
-      level.player playrumbleonentity("damage_heavy");
+      level.player playRumbleOnEntity("damage_heavy");
       playFXOnTag(getfx("maginified_muzzle_flash"), level.ai_thug_4, "tag_flash");
     }
 
@@ -170,9 +170,9 @@ clear_breach_gun_raised(guy) {
 }
 
 motel_tv_swap(guy) {
-  m_motel_tv_pristine = getent("m_motel_tv_pristine", "targetname");
+  m_motel_tv_pristine = getEnt("m_motel_tv_pristine", "targetname");
   m_motel_tv_pristine hide();
-  m_motel_tv_broken = getent("m_motel_tv_broken", "targetname");
+  m_motel_tv_broken = getEnt("m_motel_tv_broken", "targetname");
   m_motel_tv_broken show();
 }
 
@@ -196,8 +196,8 @@ player_breach_button_press() {
 }
 
 open_motel_door() {
-  m_motel_door = getent("motel_door", "targetname");
-  m_motel_door rotateyaw(120, 0.3, 0.3, 0);
+  m_motel_door = getEnt("motel_door", "targetname");
+  m_motel_door rotateYaw(120, 0.3, 0.3, 0);
   playFX(getfx("door_breach"), m_motel_door.origin);
 }
 
@@ -212,7 +212,7 @@ mason_breach() {
 }
 
 motel_fail_condition() {
-  trig_motel_fail = getent("trig_motel_fail", "targetname");
+  trig_motel_fail = getEnt("trig_motel_fail", "targetname");
   trig_motel_fail trigger_off();
   flag_wait("trig_mason_to_motel");
   trig_motel_fail trigger_on();

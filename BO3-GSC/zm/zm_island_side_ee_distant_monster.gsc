@@ -34,7 +34,7 @@ function autoexec __init__sytem__() {
 function __init__() {}
 
 function main() {
-  var_53564731 = getent("ee_vista_monster", "targetname");
+  var_53564731 = getEnt("ee_vista_monster", "targetname");
   level thread function_e94b80b9();
   level thread function_abe01b4d();
 }
@@ -63,11 +63,11 @@ function function_549b07cb() {
   e_vehicle hide();
   nd_start = getvehiclenode(e_vehicle.target, "targetname");
   e_vehicle attachpath(nd_start);
-  var_53564731 = getent("ee_vista_monster", "targetname");
+  var_53564731 = getEnt("ee_vista_monster", "targetname");
   var_53564731 setforcenocull();
   var_53564731.origin = e_vehicle.origin;
   var_53564731.angles = e_vehicle.angles;
-  var_53564731 linkto(e_vehicle);
+  var_53564731 linkTo(e_vehicle);
   e_vehicle setspeed(5, 100);
   e_vehicle startpath();
   var_53564731 playSound("zmb_distant_monster_mash");

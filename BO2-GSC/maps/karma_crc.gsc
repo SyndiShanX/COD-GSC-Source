@@ -48,13 +48,13 @@ main() {
 crc_objectives() {
   set_objective(level.obj_enter_crc, undefined, "remove");
   flag_wait("spiderbot_transition_done");
-  set_objective(level.obj_enter_crc, getstruct("struct_obj_crc_door"), "breadcrumb");
+  set_objective(level.obj_enter_crc, getStruct("struct_obj_crc_door"), "breadcrumb");
   trigger_wait("t_eye_scan_crc");
   set_objective(level.obj_enter_crc, undefined, "done");
   set_objective(level.obj_id_karma);
   waittill_ai_group_cleared("crc_interior_guards");
   autosave_by_name("crc_guards_cleared");
-  set_objective(level.obj_id_karma, getstruct("struct_obj_computer"), "breadcrumb");
+  set_objective(level.obj_id_karma, getStruct("struct_obj_computer"), "breadcrumb");
   flag_wait("crc_karma_identified");
   set_objective(level.obj_id_karma, undefined, "done");
 }
@@ -65,7 +65,7 @@ crc_flashbang_add_script_noteworthy(ent) {
 
 init_door_clip() {
   foreach(door in getEntArray("script_doors", "script_noteworthy")) {
-    getent(door.target, "targetname") linkto(door);
+    getEnt(door.target, "targetname") linkTo(door);
   }
 }
 
@@ -80,11 +80,11 @@ init_crc_glass_monster_clip() {
 init_tarp_clip() {
   for(i = 1; i <= 12; i++) {
     if(i < 10) {
-      m_tarp = getent("fxanim_tarp_shootdown_0" + i, "targetname");
-      e_clip = getent("tarp_collision_0" + i, "targetname");
+      m_tarp = getEnt("fxanim_tarp_shootdown_0" + i, "targetname");
+      e_clip = getEnt("tarp_collision_0" + i, "targetname");
     } else {
-      m_tarp = getent("fxanim_tarp_shootdown_" + i, "targetname");
-      e_clip = getent("tarp_collision_" + i, "targetname");
+      m_tarp = getEnt("fxanim_tarp_shootdown_" + i, "targetname");
+      e_clip = getEnt("tarp_collision_" + i, "targetname");
     }
 
     if(isDefined(m_tarp) && isDefined(e_clip)) {
@@ -103,13 +103,13 @@ tarp_clip_think(e_clip) {
 }
 
 init_use_trigger_hints() {
-  getent("destroyed_spider_bot_trigger", "targetname") sethintstring(&"KARMA_PICKUP_SPIDERBOT_HINT");
-  getent("trespasser_reward_interact_trigger", "targetname") sethintstring(&"SCRIPT_HINT_HACK");
+  getEnt("destroyed_spider_bot_trigger", "targetname") setHintString(&"KARMA_PICKUP_SPIDERBOT_HINT");
+  getEnt("trespasser_reward_interact_trigger", "targetname") setHintString(&"SCRIPT_HINT_HACK");
 }
 
 crc_glass_monster_clip_think() {
   level endon("offices_cleared");
-  s_start_point = getstruct(self.target, "targetname");
+  s_start_point = getStruct(self.target, "targetname");
   v_endpoint = s_start_point.origin + anglesToForward(s_start_point.angles) * 18;
 
   while(isDefined(self)) {
@@ -137,15 +137,15 @@ spiderbot_transition() {
   init_crc_glass_monster_clip();
   init_tarp_clip();
   level thread trespasser_perk();
-  getent("destroyed_spider_bot", "targetname") show();
+  getEnt("destroyed_spider_bot", "targetname") show();
   level.player notify("depth_of_field_tween");
   level.player depth_of_field_off(0.05);
   level.player maps\createart\karma_art::vision_set_change("sp_karma_construction");
   level.ai_salazar = init_hero("salazar");
-  salazar_start_pos = getstruct("spiderbot_transition_salazar_pos", "targetname");
-  player_start_pos = getstruct("skipto_crc", "targetname");
+  salazar_start_pos = getStruct("spiderbot_transition_salazar_pos", "targetname");
+  player_start_pos = getStruct("skipto_crc", "targetname");
   level.ai_salazar forceteleport(salazar_start_pos.origin, salazar_start_pos.angles);
-  level.player setorigin(player_start_pos.origin);
+  level.player setOrigin(player_start_pos.origin);
   level.player setplayerangles(player_start_pos.angles);
   wait 1.0;
   level.player freezecontrols(0);
@@ -157,7 +157,7 @@ spiderbot_transition() {
 
 crc_breach_event() {
   setsaveddvar("player_standingViewHeight", level.default_player_height);
-  m_crc_door = getent("crc_door", "targetname");
+  m_crc_door = getEnt("crc_door", "targetname");
   level.ai_salazar thread force_goal(getnode("n_salazar_crc_enter", "targetname"), 8);
   level thread crc_objectives();
   level.ai_salazar waittill("goal");
@@ -168,7 +168,7 @@ crc_breach_event() {
   crc_eye_scan();
   m_crc_door thread open_crc_door();
   scene_wait("scene_p_eye_scan");
-  getent(m_crc_door.target, "targetname") connectpaths();
+  getEnt(m_crc_door.target, "targetname") connectpaths();
   level thread crc_breach_flash();
   level thread run_scene_and_delete("crc_breach_flashed_dude");
   level thread run_scene_and_delete("scene_p_eye_scan_breach");
@@ -179,7 +179,7 @@ crc_breach_event() {
 
   foreach(ai_enemy in getEntArray("crc_breach_guards_ai", "targetname")) {
     if(isalive(ai_enemy)) {
-      ai_enemy set_goalradius(128);
+      ai_enemy set_goalRadius(128);
       ai_enemy thread crc_breach_rush();
     }
   }
@@ -201,10 +201,10 @@ open_crc_door() {
 }
 
 close_crc_door() {
-  m_crc_door = getent("crc_door", "targetname");
+  m_crc_door = getEnt("crc_door", "targetname");
   m_crc_door movey(-63, 1.5);
   m_crc_door waittill("movedone");
-  m_crc_door disconnectpaths();
+  m_crc_door disconnectPaths();
 }
 
 crc_salazar_terminal_idle() {
@@ -214,7 +214,7 @@ crc_salazar_terminal_idle() {
 
   level.ai_salazar say_dialog("sala_clear_0", 1.0);
   setmusicstate("KARMA_1_CRC");
-  level.ai_salazar set_goalradius(8);
+  level.ai_salazar set_goalRadius(8);
   level.ai_salazar setgoalnode(getnode("salazar_crc_guard_pos", "script_noteworthy"));
   flag_wait("crc5_started");
   wait 16.0;
@@ -224,7 +224,7 @@ crc_salazar_terminal_idle() {
 
 crc_breach_enemy_fire() {
   a_shooters = simple_spawn("crc_breach_guards");
-  e_shoot_target = getent("crc_breach_fire_target", "targetname");
+  e_shoot_target = getEnt("crc_breach_fire_target", "targetname");
   flag_set("crc_breach_guards_spawned");
   level.player enableinvulnerability();
 
@@ -240,7 +240,7 @@ crc_breach_enemy_fire() {
 
 crc_breach_flash() {
   level thread breach_vo();
-  s_flash_target = getstruct("crc_breach_flash_target", "targetname");
+  s_flash_target = getStruct("crc_breach_flash_target", "targetname");
   flag_wait("crc_flash_out");
   level.ai_salazar magicgrenadetype("flash_grenade_sp", s_flash_target.origin, (0, 0, 0), 0.05);
   exploder(540);
@@ -268,7 +268,7 @@ crc_eye_scan() {
   luinotifyevent(&"begin_retina_scan", 1, 1000);
   wait 3.0;
   luinotifyevent(&"hud_update_vehicle_custom", 1, 0);
-  playsoundatposition("evt_eye_scan_door_open", (5325, -6532, -3504));
+  playSoundAtPosition("evt_eye_scan_door_open", (5325, -6532, -3504));
   delete_exploder(480);
 }
 
@@ -283,7 +283,7 @@ crc_interact() {
   level.player_interactive_model = "c_usa_masonjr_karma_viewbody";
   level.player maps\createart\karma_art::vision_set_change("sp_karma_crc_screens");
   cin_id = start3dcinematic("crc_part01", 0, 0, 0, 0, 1);
-  playsoundatposition("evt_ui_wall_801", (0, 0, 0));
+  playSoundAtPosition("evt_ui_wall_801", (0, 0, 0));
   next_cin_id = start3dcinematic("crc_part01_loop", 1, 0, 0, 0, 1);
   run_scene_and_delete("crc1");
   stop3dcinematic(cin_id);
@@ -293,7 +293,7 @@ crc_interact() {
   wait 3.0;
   wait_for_input("right");
   stop3dcinematic(cin_id);
-  playsoundatposition("evt_ui_wall_803", (0, 0, 0));
+  playSoundAtPosition("evt_ui_wall_803", (0, 0, 0));
   cin_id = next_cin_id;
   next_cin_id = start3dcinematic("crc_part02_loop", 1, 0, 0, 0, 1);
   run_scene_and_delete("crc2");
@@ -304,7 +304,7 @@ crc_interact() {
   wait 3.0;
   wait_for_input("unzoom");
   stop3dcinematic(cin_id);
-  playsoundatposition("evt_ui_wall_805", (0, 0, 0));
+  playSoundAtPosition("evt_ui_wall_805", (0, 0, 0));
   cin_id = next_cin_id;
   next_cin_id = start3dcinematic("crc_part03_loop", 1, 0, 0, 0, 1);
   run_scene_and_delete("crc3");
@@ -315,7 +315,7 @@ crc_interact() {
   wait 3.0;
   wait_for_input("unzoom");
   stop3dcinematic(cin_id);
-  playsoundatposition("evt_ui_wall_807", (0, 0, 0));
+  playSoundAtPosition("evt_ui_wall_807", (0, 0, 0));
   cin_id = next_cin_id;
   next_cin_id = start3dcinematic("crc_part04_loop", 1, 0, 0, 0, 1);
   level thread maps\_audio::switch_music_wait("KARMA_1_KARMA_FOUND", 2);
@@ -327,7 +327,7 @@ crc_interact() {
   wait 3.0;
   wait_for_input("up");
   stop3dcinematic(cin_id);
-  playsoundatposition("evt_ui_wall_809", (0, 0, 0));
+  playSoundAtPosition("evt_ui_wall_809", (0, 0, 0));
   cin_id = next_cin_id;
   run_scene_and_delete("crc5");
   stop3dcinematic(cin_id);
@@ -478,7 +478,7 @@ trespasser_perk() {
     return;
   }
 
-  set_objective_perk(level.obj_trespasser, getstruct("trespasser_obj_marker", "targetname"), undefined, getent("trespasser_volume", "targetname"));
+  set_objective_perk(level.obj_trespasser, getStruct("trespasser_obj_marker", "targetname"), undefined, getEnt("trespasser_volume", "targetname"));
   trigger_wait("trespasser_reward_interact_trigger");
   remove_objective_perk(level.obj_trespasser);
   level thread run_scene_and_delete("trespasser");

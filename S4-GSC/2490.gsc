@@ -149,7 +149,7 @@ _id_9A6F(var_0, var_1) {
   var_6 = var_3 gettagorigin("tag_laser") + (0, 0, 10);
   var_6 = var_6 - var_5 * 20;
   var_7 = spawn("script_model", var_6);
-  var_7 linkto(var_3);
+  var_7 linkTo(var_3);
   var_3.killcament = var_7;
   var_3._id_3A67 = spawn("script_model", var_3.origin);
   var_3._id_3A67.team = var_3.team;
@@ -210,7 +210,7 @@ _id_9A8D(var_0, var_1) {
   var_0._id_3A67 show();
   var_0._id_3A67.angles = var_0.angles;
   var_0._id_3A67.origin = var_0.origin;
-  var_0._id_3A67 linkto(var_0, "tag_aim_pivot");
+  var_0._id_3A67 linkTo(var_0, "tag_aim_pivot");
   var_6 = "icon_minimap_mobileturret";
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "createObjective")) {
@@ -250,7 +250,7 @@ _id_9A8D(var_0, var_1) {
     var_0.useownerobj.origin = var_10;
   }
 
-  var_0.useownerobj linkto(var_0, var_9);
+  var_0.useownerobj linkTo(var_0, var_9);
 
   if(!isDefined(var_0.useotherobj)) {
     var_10 = var_0 gettagorigin(var_9);
@@ -265,7 +265,7 @@ _id_9A8D(var_0, var_1) {
     var_0.useotherobj.origin = var_10;
   }
 
-  var_0.useotherobj linkto(var_0, var_9);
+  var_0.useotherobj linkTo(var_0, var_9);
   var_0 _id_078D::_id_1538(1);
   var_0 _id_0812::_id_C2B2("Killstreak_Static", self);
   var_0 thread _id_9A70(self, var_1);
@@ -746,7 +746,7 @@ _id_9A7E(var_0) {
     thread _id_9A73();
 
     if(scripts\cp_mp\utility\player_utility::_isalive()) {
-      self setorigin(var_0._id_90BD, 1);
+      self setOrigin(var_0._id_90BD, 1);
       self setplayerangles(var_0._id_90BC);
     }
 

@@ -148,20 +148,20 @@ main() {
   rope_splashers = getEntArray("rope_splashers", "script_noteworthy");
   array_thread(rope_splashers, ::add_spawn_function, ::rope_splashers);
 
-  GetEnt("enemy_chase_boat", "targetname") add_spawn_function(::enemy_chase_boat);
+  getEnt("enemy_chase_boat", "targetname") add_spawn_function(::enemy_chase_boat);
 
-  rapids_trigger = GetEnt("rapids_trigger", "targetname");
+  rapids_trigger = getEnt("rapids_trigger", "targetname");
   rapids_trigger thread autosave_boat_chase();
   rapids_trigger thread trigger_set_water_sheating_time("bump_small_after_rapids", "bump_big_after_rapids");
   rapids_trigger thread trigger_rapids();
 
-  on_river_trigger = GetEnt("on_river_trigger", "targetname");
+  on_river_trigger = getEnt("on_river_trigger", "targetname");
   on_river_trigger thread trigger_on_river();
 
-  boat_mount = GetEnt("boat_mount", "targetname");
+  boat_mount = getEnt("boat_mount", "targetname");
   boat_mount thread trigger_boat_mount();
 
-  increase_enemy_boats_mid_lake = GetEnt("increase_enemy_boats_mid_lake", "script_noteworthy");
+  increase_enemy_boats_mid_lake = getEnt("increase_enemy_boats_mid_lake", "script_noteworthy");
   increase_enemy_boats_mid_lake thread trigger_set_max_zodiacs(2);
 
   trigger_multiple_speeds = getEntArray("trigger_multiple_speed", "classname");
@@ -192,7 +192,7 @@ main() {
 
   thread afchase_objectives();
 
-  end_caves_trigger = GetEnt("end_caves_trigger", "targetname");
+  end_caves_trigger = getEnt("end_caves_trigger", "targetname");
   end_caves_trigger thread trigger_end_caves();
   end_caves_trigger thread autosave_boat_chase();
 
@@ -222,13 +222,13 @@ main() {
   crashable_whizby_boats = getEntArray("crashable_whizby_boats", "script_noteworthy");
   array_thread(crashable_whizby_boats, ::add_spawn_function, ::crashable_whizby_boats);
 
-  enemy_zodiacs_wipe_out = GetEnt("enemy_zodiacs_wipe_out", "targetname");
+  enemy_zodiacs_wipe_out = getEnt("enemy_zodiacs_wipe_out", "targetname");
   enemy_zodiacs_wipe_out thread trigger_enemy_zodiacs_wipe_out();
 
   neutral_enemies = getEntArray("neutral_enemies", "targetname");
   array_thread(neutral_enemies, ::trigger_neutral_enemies);
 
-  dialog_cave = GetEnt("dialog_cave", "targetname");
+  dialog_cave = getEnt("dialog_cave", "targetname");
 
   dialog_cave thread dialog_cave();
 
@@ -246,7 +246,7 @@ main() {
     thread maps\af_chase_waterfall::main();
   }
 
-  trigger_out_of_caves = GetEnt("trigger_out_of_caves", "targetname");
+  trigger_out_of_caves = getEnt("trigger_out_of_caves", "targetname");
   if(isDefined(trigger_out_of_caves)) {
     trigger_out_of_caves thread trigger_out_of_caves();
   }
@@ -350,8 +350,8 @@ start_boatdrive_lake_mid() {
   flag_set("exit_caves");
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  player_boat_spawner = GetEnt("players_boat", "targetname");
-  player_boat_spawner_position = getstruct("lake_mid_start_pose", "targetname");
+  player_boat_spawner = getEnt("players_boat", "targetname");
+  player_boat_spawner_position = getStruct("lake_mid_start_pose", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
   player_boat_spawner.angles = player_boat_spawner_position.angles;
 
@@ -375,8 +375,8 @@ start_boatdrive_lake() {
   boat_common();
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  player_boat_spawner = GetEnt("players_boat", "targetname");
-  player_boat_spawner_position = getstruct("lake_start_pose", "targetname");
+  player_boat_spawner = getEnt("players_boat", "targetname");
+  player_boat_spawner_position = getStruct("lake_start_pose", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
   player_boat_spawner.angles = player_boat_spawner_position.angles;
 
@@ -405,8 +405,8 @@ start_boatdrive_rapids() {
 
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  player_boat_spawner = GetEnt("players_boat", "targetname");
-  player_boat_spawner_position = getstruct("rapids_start_position", "targetname");
+  player_boat_spawner = getEnt("players_boat", "targetname");
+  player_boat_spawner_position = getStruct("rapids_start_position", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
   player_boat_spawner.angles = player_boat_spawner_position.angles;
 
@@ -436,8 +436,8 @@ start_boatdrive_river_below_rapids() {
 
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  player_boat_spawner = GetEnt("players_boat", "targetname");
-  player_boat_spawner_position = getstruct("below_rapids_start_position", "targetname");
+  player_boat_spawner = getEnt("players_boat", "targetname");
+  player_boat_spawner_position = getStruct("below_rapids_start_position", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
   player_boat_spawner.angles = player_boat_spawner_position.angles;
 
@@ -459,7 +459,7 @@ start_boatdrive_river_below_rapids() {
 start_boatdrive_end() {
   change_target_on_vehicle_spawner("enemy_chase_boat", "enemy_boat_pos_end");
 
-  seaknight_pickup_boat_spot = GetEnt("seaknight_pickup_boat_spot", "script_noteworthy");
+  seaknight_pickup_boat_spot = getEnt("seaknight_pickup_boat_spot", "script_noteworthy");
 
   thread kill_all_the_ai_and_fx_from_boatride();
 
@@ -469,8 +469,8 @@ start_boatdrive_end() {
 
   vision_set_fog_changes("af_chase_outdoors_2", 0);
 
-  player_boat_spawner = GetEnt("players_boat", "targetname");
-  player_boat_spawner_position = getstruct("end_start_position", "targetname");
+  player_boat_spawner = getEnt("players_boat", "targetname");
+  player_boat_spawner_position = getStruct("end_start_position", "targetname");
   player_boat_spawner.origin = player_boat_spawner_position.origin;
   player_boat_spawner.angles = player_boat_spawner_position.angles;
 

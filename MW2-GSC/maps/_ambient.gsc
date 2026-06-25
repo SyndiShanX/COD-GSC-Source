@@ -338,7 +338,7 @@ start_ambient_event(track) {
 
     lastalias = alias;
     ent.origin = level.player.origin;
-    ent linkto(level.player);
+    ent linkTo(level.player);
 
     timer = gettime();
     if(item["stop"]) {

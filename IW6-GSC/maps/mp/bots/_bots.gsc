@@ -2493,7 +2493,7 @@ bot_think_crate() {
 
           vec_crate_to_nearest_node -= crate_to_take.origin;
           scale = Length(vec_crate_to_nearest_node) * RandomFloat(1.0);
-          crate_dest = (crate_to_take.origin + VectorNormalize(vec_crate_to_nearest_node) * scale) + (0, 0, 12);
+          crate_dest = (crate_to_take.origin + vectorNormalize(vec_crate_to_nearest_node) * scale) + (0, 0, 12);
         }
       } else {
         extra_params.action_thread = ::use_crate;
@@ -3004,21 +3004,21 @@ handle_smoke(final_wait_time) {
 
   wait(next_wait_time);
   next_wait_time = 0.5;
-  smoke_sight_clip_collision_64_short = GetEnt("smoke_grenade_sight_clip_64_short", "targetname");
+  smoke_sight_clip_collision_64_short = getEnt("smoke_grenade_sight_clip_64_short", "targetname");
   if(isDefined(smoke_sight_clip_collision_64_short)) {
     new_sight_clip_origin CloneBrushmodelToScriptmodel(smoke_sight_clip_collision_64_short);
   }
 
   wait(next_wait_time);
   next_wait_time = 0.6;
-  smoke_sight_clip_collision_64_tall = GetEnt("smoke_grenade_sight_clip_64_tall", "targetname");
+  smoke_sight_clip_collision_64_tall = getEnt("smoke_grenade_sight_clip_64_tall", "targetname");
   if(isDefined(smoke_sight_clip_collision_64_tall)) {
     new_sight_clip_origin CloneBrushmodelToScriptmodel(smoke_sight_clip_collision_64_tall);
   }
 
   wait(next_wait_time);
   next_wait_time = final_wait_time;
-  smoke_sight_clip_collision_256 = GetEnt("smoke_grenade_sight_clip_256", "targetname");
+  smoke_sight_clip_collision_256 = getEnt("smoke_grenade_sight_clip_256", "targetname");
   if(isDefined(smoke_sight_clip_collision_256)) {
     new_sight_clip_origin CloneBrushmodelToScriptmodel(smoke_sight_clip_collision_256);
   }

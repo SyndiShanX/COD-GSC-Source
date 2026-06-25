@@ -245,9 +245,9 @@ zombie_think() {
 }
 get_desired_origin() {
   if(isDefined(self.target)) {
-    ent = GetEnt(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     if(!isDefined(ent)) {
-      ent = getstruct(self.target, "targetname");
+      ent = getStruct(self.target, "targetname");
     }
     if(!isDefined(ent)) {
       ent = GetNode(self.target, "targetname");
@@ -402,7 +402,7 @@ tear_into_building() {
       tear_anim = get_tear_anim(chunk, self);
       chunk maps\_zombiemode_blockers::update_states("target_by_zombie");
       self thread maps\_zombiemode_audio::do_zombies_playvocals("teardown", self.animname);
-      self AnimScripted("tear_anim", attacking_spot1a, self.first_node.angles, tear_anim, "normal", undefined, 1, 0.3);
+      self animScripted("tear_anim", attacking_spot1a, self.first_node.angles, tear_anim, "normal", undefined, 1, 0.3);
       if(tear_anim == % ai_zombie_bar_bend_l || tear_anim == % ai_zombie_bar_bend_l_2 || tear_anim == % ai_zombie_bar_bend_r || tear_anim == % ai_zombie_bar_bend_r_2 || tear_anim == % ai_zombie_bar_bend_m_1 || tear_anim == % ai_zombie_bar_bend_m_2) {
         self playSound("zmb_bar_bend");
       }
@@ -434,7 +434,7 @@ do_a_taunt() {
   if(freq >= randomint(100)) {
     anime = random(level._zombie_board_taunt[self.animname]);
     self thread maps\_zombiemode_audio::do_zombies_playvocals("taunt", self.animname);
-    self animscripted("zombie_taunt", self.origin, self.angles, anime, "normal", undefined, 1, 0.4);
+    self animScripted("zombie_taunt", self.origin, self.angles, anime, "normal", undefined, 1, 0.4);
     wait(getanimlength(anime));
     self ForceTeleport(self.old_origin);
   }
@@ -468,19 +468,19 @@ should_attack_player_thru_boards() {
     if(self.attacking_spot_index == 0) {
       if(randomint(100) > 50) {
         self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
+        self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
       } else {
         self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
+        self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
       }
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 2) {
       self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
+      self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 1) {
       self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
+      self animScripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
       self window_notetracks("window_melee");
     }
   } else {
@@ -580,14 +580,14 @@ zombie_tear_notetracks(msg, chunk, node) {
           if(isDefined(chunk.script_string)) {
             if(chunk.script_string == "prestine_bend") {
               bar_bend_left = spawn("script_model", chunk.origin);
-              bar_bend_left RotateTo(chunk.angles, 0.2, 0.1, 0.1);
+              bar_bend_left rotateTo(chunk.angles, 0.2, 0.1, 0.1);
               bar_bend_left waittill("rotatedone");
               bar_bend_left setModel("p_zom_win_cell_bars_01_vert01_bent");
               chunk Hide();
               thread bar_repair_bend_left(bar_bend_left, chunk);
             } else if(chunk.script_string == "bar_bend") {
               bar_bend_left = spawn("script_model", chunk.origin);
-              bar_bend_left RotateTo(chunk.angles, 0.2, 0.1, 0.1);
+              bar_bend_left rotateTo(chunk.angles, 0.2, 0.1, 0.1);
               bar_bend_left waittill("rotatedone");
               bar_bend_left setModel("p_zom_win_cell_bars_bent_01_vert01_bent");
               chunk Hide();
@@ -599,14 +599,14 @@ zombie_tear_notetracks(msg, chunk, node) {
           if(isDefined(chunk.script_string)) {
             if(chunk.script_string == "prestine_bend") {
               bar_bend_right = spawn("script_model", chunk.origin);
-              bar_bend_right RotateTo(chunk.angles, 0.2, 0.1, 0.1);
+              bar_bend_right rotateTo(chunk.angles, 0.2, 0.1, 0.1);
               bar_bend_right waittill("rotatedone");
               bar_bend_right setModel("p_zom_win_cell_bars_01_vert04_bent");
               chunk Hide();
               thread bar_repair_bend_right(bar_bend_right, chunk);
             } else if(chunk.script_string == "bar_bend") {
               bar_bend_right = spawn("script_model", chunk.origin);
-              bar_bend_right RotateTo(chunk.angles, 0.2, 0.1, 0.1);
+              bar_bend_right rotateTo(chunk.angles, 0.2, 0.1, 0.1);
               bar_bend_right waittill("rotatedone");
               bar_bend_right setModel("p_zom_win_cell_bars_bent_01_vert04_bent");
               chunk Hide();
@@ -2088,7 +2088,7 @@ do_zombie_rise() {
   self.in_the_ground = true;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   if(isDefined(self.zone_name)) {
     spots = level.zones[self.zone_name].rise_locations;
   } else if(isDefined(self.rise_target_name)) {
@@ -2119,12 +2119,12 @@ do_zombie_rise() {
     anim_org = anim_org + (0, 0, -45);
   }
   self Hide();
-  self.anchor moveto(anim_org, .05);
+  self.anchor moveTo(anim_org, .05);
   self.anchor waittill("movedone");
   target_org = maps\_zombiemode_spawner::get_desired_origin();
   if(isDefined(target_org)) {
     anim_ang = VectorToAngles(target_org - self.origin);
-    self.anchor RotateTo((0, anim_ang[1], 0), .05);
+    self.anchor rotateTo((0, anim_ang[1], 0), .05);
     self.anchor waittill("rotatedone");
   }
   self unlink();
@@ -2132,7 +2132,7 @@ do_zombie_rise() {
   self thread hide_pop();
   level thread zombie_rise_death(self, spot);
   spot thread zombie_rise_fx(self);
-  self AnimScripted("rise", self.origin, spot.angles, self get_rise_anim());
+  self animScripted("rise", self.origin, spot.angles, self get_rise_anim());
   self animscripts\zombie_shared::DoNoteTracks("rise", ::handle_rise_notetracks, undefined, spot);
   self notify("rise_anim_finished");
   spot notify("stop_zombie_rise_fx");
@@ -2159,12 +2159,12 @@ zombie_rise_death(zombie, spot) {
   }
   spot notify("stop_zombie_rise_fx");
   zombie.deathanim = zombie get_rise_death_anim();
-  zombie StopAnimScripted();
+  zombie StopanimScripted();
 }
 zombie_rise_fx(zombie) {
   self thread zombie_rise_dust_fx(zombie);
   self thread zombie_rise_burst_fx();
-  playsoundatposition("zmb_zombie_spawn", self.origin);
+  playSoundAtPosition("zmb_zombie_spawn", self.origin);
   zombie endon("death");
   self endon("stop_zombie_rise_fx");
   wait 1;

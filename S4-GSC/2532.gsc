@@ -54,7 +54,7 @@ _id_10269(var_0, var_1, var_2) {
   return 0;
 }
 
-vehicle_spawn_spawnvehicle(var_0, var_1, var_2) {
+vehicle_spawn_spawnVehicle(var_0, var_1, var_2) {
   var_3 = vehicle_spawn_getleveldataforvehicle(var_0);
 
   if(_id_1027C()) {
@@ -274,7 +274,7 @@ _id_1028C() {
           var_10.angles = var_9.angles;
           var_10.spawntype = "LEVEL";
           var_11 = spawnStruct();
-          var_12 = vehicle_spawn_spawnvehicle(var_3._id_C189, var_10, var_11);
+          var_12 = vehicle_spawn_spawnVehicle(var_3._id_C189, var_10, var_11);
 
           if(!isDefined(var_12)) {}
 
@@ -485,7 +485,7 @@ _id_10290(var_0, var_1, var_2) {
 
     if(_id_10269(var_0)) {
       if(_id_1026A(var_1.origin, var_0)) {
-        var_6 = vehicle_spawn_spawnvehicle(var_0, var_1, var_2);
+        var_6 = vehicle_spawn_spawnVehicle(var_0, var_1, var_2);
 
         if(!isDefined(var_6)) {
           continue;

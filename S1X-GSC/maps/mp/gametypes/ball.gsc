@@ -468,7 +468,7 @@ ball_spawn(var_0) {
   var_2 setModel("prop_drone_sphere");
   var_2 thread physics_impact_watch();
   var_3 = 24;
-  var_4 = getent("ball_pickup_" + (var_0 + 1), "targetname");
+  var_4 = getEnt("ball_pickup_" + (var_0 + 1), "targetname");
 
   if(isDefined(var_4)) {
     var_4.origin = var_2.origin;
@@ -476,8 +476,8 @@ ball_spawn(var_0) {
     var_4 = spawn("trigger_radius", var_2.origin - (0, 0, var_3 / 2), 0, var_3, var_3);
   }
 
-  var_4 enablelinkto();
-  var_4 linkto(var_2);
+  var_4 enablelinkTo();
+  var_4 linkTo(var_2);
   var_4.no_moving_platfrom_unlink = 1;
   var_5 = [var_2];
   var_6 = maps\mp\gametypes\_gameobjects::createcarryobject("any", var_4, var_5, (0, 0, 32));
@@ -670,15 +670,15 @@ ball_pass_projectile(var_0, var_1, var_2) {
   }
 
   var_3 = (0, 0, 40);
-  var_4 = vectornormalize(var_2 + var_3 - self.visuals[0].origin);
+  var_4 = vectorNormalize(var_2 + var_3 - self.visuals[0].origin);
   var_5 = var_4 * 1000;
   self.projectile = magicgrenademanual("gamemode_ball", self.visuals[0].origin, var_5, 30, var_0, 1);
 
   if(isDefined(var_1)) {
-    self.projectile missile_settargetent(var_1);
+    self.projectile missile_settargetEnt(var_1);
   }
 
-  self.visuals[0] linkto(self.projectile);
+  self.visuals[0] linkTo(self.projectile);
   ball_dont_interpolate();
   ball_create_killcam_ent();
   ball_clear_contents();
@@ -693,7 +693,7 @@ ball_create_killcam_ent() {
   }
 
   self.killcament = spawn("script_model", self.visuals[0].origin);
-  self.killcament linkto(self.visuals[0]);
+  self.killcament linkTo(self.visuals[0]);
   self.killcament setcontents(0);
   self.killcament setscriptmoverkillcam("explosive");
 }
@@ -934,7 +934,7 @@ ball_physics_fake_bounce() {
   }
   var_1 = var_0 physicsgetlinvel();
   var_2 = length(var_1) / 10;
-  var_3 = -1 * vectornormalize(var_1);
+  var_3 = -1 * vectorNormalize(var_1);
   var_0 physicsstop();
   var_0 physicslaunchserver(var_0.origin, var_3 * var_2);
 }
@@ -1046,7 +1046,7 @@ should_record_final_score_cam(var_0, var_1) {
 }
 
 line_interect_sphere(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = vectordot(var_4, var_0 - var_2);
   var_5 = var_5 * var_5;
   var_6 = var_0 - var_2;
@@ -1147,7 +1147,7 @@ ball_score_event(var_0) {
   playsoundatpos(var_0.origin, "uplink_goal_point");
   var_5 = var_2 + var_4;
   var_6 = var_5 + var_3;
-  var_1 moveto(var_0.origin, var_2, 0, var_2);
+  var_1 moveTo(var_0.origin, var_2, 0, var_2);
   var_1 rotatevelocity((1080, 1080, 0), var_6, var_6, 0);
   wait(var_5);
   var_0.ball_in_goal = 0;
@@ -1442,7 +1442,7 @@ player_update_pass_target(var_0) {
         if(var_9 > 1000000) {
           continue;
         }
-        var_10 = vectornormalize(var_8 - var_4);
+        var_10 = vectorNormalize(var_8 - var_4);
         var_11 = vectordot(var_3, var_10);
 
         if(var_11 > var_1) {
@@ -1696,7 +1696,7 @@ ball_on_reset() {
   ball_waypoint_download();
   maps\mp\gametypes\_gameobjects::setposition(var_0.baseorigin + (0, 0, 4000), (0, 0, 0));
   var_4 = 3;
-  var_0 moveto(var_0.baseorigin, var_4, 0, var_4);
+  var_0 moveTo(var_0.baseorigin, var_4, 0, var_4);
   var_0 rotatevelocity((0, 720, 0), var_4, 0, var_4);
   playsoundatpos(var_0.baseorigin, "uplink_ball_reset");
 
@@ -1768,10 +1768,10 @@ ball_create_team_goal(var_0) {
   }
 
   var_2 = 0;
-  var_3 = common_scripts\utility::getstruct("ball_goal_" + var_1, "targetname");
+  var_3 = common_scripts\utility::getStruct("ball_goal_" + var_1, "targetname");
 
   if(!maps\mp\_utility::isaugmentedgamemode()) {
-    var_4 = common_scripts\utility::getstruct("ball_goal_non_augmented_" + var_1, "targetname");
+    var_4 = common_scripts\utility::getStruct("ball_goal_non_augmented_" + var_1, "targetname");
 
     if(isDefined(var_4)) {
       var_3 = var_4;

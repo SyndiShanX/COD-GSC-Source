@@ -104,7 +104,7 @@ cafeteria_clock() {
   players = getlocalplayers();
 
   for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
-    clock = getent(localclientnum, "clock_second_hand", "targetname");
+    clock = getEnt(localclientnum, "clock_second_hand", "targetname");
     clock thread cafeteria_clock_tick();
   }
 }
@@ -139,7 +139,7 @@ golden_gate_lighthouse_rotate() {
   self endon("entity_shutdown");
 
   while(true) {
-    self rotateyaw(360, 25);
+    self rotateYaw(360, 25);
     self waittill("rotatedone");
   }
 }
@@ -731,7 +731,7 @@ rumble_gondola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     while(true) {
       if(isDefined(self) && self islocalplayer() && isDefined(localclientnum)) {
         self earthquake(0.1, 1, self.origin, 1500);
-        self playrumbleonentity(localclientnum, "reload_small");
+        self playRumbleOnEntity(localclientnum, "reload_small");
       }
 
       wait 0.25;
@@ -741,7 +741,7 @@ rumble_gondola(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     if(isDefined(self) && self islocalplayer() && isDefined(localclientnum)) {
       self earthquake(0.25, 0.25, self.origin, 1500);
-      self playrumbleonentity(localclientnum, "damage_heavy");
+      self playRumbleOnEntity(localclientnum, "damage_heavy");
     }
   }
 }
@@ -756,7 +756,7 @@ rumble_fan_trap(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     while(true) {
       if(isDefined(self) && self islocalplayer() && isDefined(localclientnum)) {
         self earthquake(0.15, 1, self.origin, 1500);
-        self playrumbleonentity(localclientnum, "damage_light");
+        self playRumbleOnEntity(localclientnum, "damage_light");
       }
 
       wait 0.25;
@@ -775,7 +775,7 @@ rumble_sq_bg(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     for(i = 0; i <= 10; i++) {
       if(isDefined(self) && self islocalplayer() && isDefined(localclientnum)) {
         self earthquake(0.15, 1, self.origin, 1500);
-        self playrumbleonentity(localclientnum, "damage_heavy");
+        self playRumbleOnEntity(localclientnum, "damage_heavy");
       }
 
       wait 0.1;
@@ -789,6 +789,6 @@ rumble_door_open(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self endon("disconnect");
 
   if(newval == 1) {
-    self playrumbleonentity(localclientnum, "damage_light");
+    self playRumbleOnEntity(localclientnum, "damage_light");
   }
 }

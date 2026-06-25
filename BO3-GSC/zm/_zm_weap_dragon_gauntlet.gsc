@@ -399,7 +399,7 @@ function function_e7fe168a(weapon) {
   self endon("hash_c0a47e94");
   start_time = gettime();
   while((start_time + 1000) > gettime()) {
-    self playrumbleonentity("zod_shield_juke");
+    self playRumbleOnEntity("zod_shield_juke");
     forward = anglesToForward(self getplayerangles());
     velocity = self getvelocity();
     predicted_pos = self.origin + (velocity * 0.1);
@@ -435,7 +435,7 @@ function function_345e492a(var_ebcc1e01, radius) {
         n_random_y = randomfloatrange(-3, 3);
         player thread zm_audio::create_and_play_dialog("whelp", "punch");
         enemy startragdoll(1);
-        enemy launchragdoll(100 * (vectornormalize((enemy.origin - self.origin) + (n_random_x, n_random_y, 100))), "torso_lower");
+        enemy launchragdoll(100 * (vectorNormalize((enemy.origin - self.origin) + (n_random_x, n_random_y, 100))), "torso_lower");
       }
     }
   }
@@ -521,7 +521,7 @@ function function_f5802b55() {
   self.var_cc844f4c = 1;
   spawn_pos = self gettagorigin("tag_dragon_world");
   spawn_angles = self gettagangles("tag_dragon_world");
-  var_42c06d64 = spawnvehicle(self.var_d15b9a33, spawn_pos, spawn_angles);
+  var_42c06d64 = spawnVehicle(self.var_d15b9a33, spawn_pos, spawn_angles);
   if(isDefined(var_42c06d64)) {
     self.var_4bd1ce6b = var_42c06d64;
     var_42c06d64 ai::set_ignoreme(1);
@@ -605,7 +605,7 @@ function function_d775fe77(einflictor, attacker, idamage, smeansofdeath, weapon,
   n_random_x = randomfloatrange(-3, 3);
   n_random_y = randomfloatrange(-3, 3);
   self startragdoll(1);
-  self launchragdoll(100 * (vectornormalize((self.origin - attacker.origin) + (n_random_x, n_random_y, 100))), "torso_lower");
+  self launchragdoll(100 * (vectorNormalize((self.origin - attacker.origin) + (n_random_x, n_random_y, 100))), "torso_lower");
 }
 
 function function_cb6fb97(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
@@ -613,7 +613,7 @@ function function_cb6fb97(einflictor, attacker, idamage, smeansofdeath, weapon, 
   n_random_x = randomfloatrange(-3, 3);
   n_random_y = randomfloatrange(-3, 3);
   self startragdoll(1);
-  self launchragdoll(100 * (vectornormalize((self.origin - attacker.origin) + (n_random_x, n_random_y, 100))), "torso_lower");
+  self launchragdoll(100 * (vectorNormalize((self.origin - attacker.origin) + (n_random_x, n_random_y, 100))), "torso_lower");
 }
 
 function function_a23fb854() {
@@ -637,7 +637,7 @@ function function_a23fb854() {
   while(true) {
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == var_40c4a571.name) {
           player function_99a68dd();
         }
@@ -646,7 +646,7 @@ function function_a23fb854() {
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == var_40c4a571.name) {
           player gadgetpowerset(0, 100);
           player.var_8afc8427 = 100;
@@ -657,7 +657,7 @@ function function_a23fb854() {
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == var_40c4a571.name) {
           player gadgetpowerset(0, 100);
           player.var_8afc8427 = 100;
@@ -668,7 +668,7 @@ function function_a23fb854() {
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(equipment_id == var_40c4a571.name) {
           player.var_9e2dd97 = 0;
         }
@@ -677,14 +677,14 @@ function function_a23fb854() {
     }
     string = getdvarstring("");
     if(string === "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread function_82f11e44();
       }
       setDvar("", "");
     }
     string = getdvarstring("");
     if(string === "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player function_c2e5ffc1();
       }
       setDvar("", "");

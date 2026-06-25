@@ -848,7 +848,7 @@ function function_8aa7d53(entity, mocompanim, mocompanimblendouttime, mocompanim
   }
 
   var_ce870aa5 = 13 + mocompduration getpathfindingradius();
-  mocompduration.var_910c3b2c = mocompduration.traversemantlenode.origin - vectornormalize(forward) * var_ce870aa5;
+  mocompduration.var_910c3b2c = mocompduration.traversemantlenode.origin - vectorNormalize(forward) * var_ce870aa5;
   mocompduration.var_910c3b2c = (mocompduration.var_910c3b2c[0], mocompduration.var_910c3b2c[1], mocompduration.traversalstartpos[2]);
   mocompduration animmode("angle deltas noclip", 0);
   mocompduration orientmode("face angle", vectortoangles(forward)[1]);
@@ -1000,7 +1000,7 @@ function zombieupdategoal(goalpos) {
     }
   }
 
-  if(self function_dd070839() || self isplayinganimscripted()) {
+  if(self function_dd070839() || self isplayinganimScripted()) {
     shouldrepath = 0;
   }
 
@@ -1077,7 +1077,7 @@ function zombieupdategoal(goalpos) {
 
             if(var_570a7c72 || var_eb1c6f1c) {
               remaininglength = deviationdistance - segmentlength;
-              dir = vectornormalize(path[index] - path[index - 1]);
+              dir = vectorNormalize(path[index] - path[index - 1]);
               seedposition = path[index - 1] + dir * remaininglength;
 
               recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x38>", self);

@@ -47,53 +47,53 @@ function function_807ee0b0() {
   self.var_fdb1feb7 = (0, 0, 0);
   self.var_88249cb5 = (0 - self.var_66b5ee1a[0], self.var_66b5ee1a[1], self.var_66b5ee1a[2]);
   self.var_629f3738 = vectorscale((0, 1, 0), 180);
-  self.var_c25552a2 = getent(self.targetname + "_start_switch", "targetname");
-  self.cage = getent(self.targetname + "_cage", "targetname");
+  self.var_c25552a2 = getEnt(self.targetname + "_start_switch", "targetname");
+  self.cage = getEnt(self.targetname + "_cage", "targetname");
   if(isDefined(self.cage)) {
-    self.cage linkto(self);
+    self.cage linkTo(self);
   }
-  self.var_cd74abf8 = getent(self.targetname + "_cage_door", "targetname");
+  self.var_cd74abf8 = getEnt(self.targetname + "_cage_door", "targetname");
   if(isDefined(self.var_cd74abf8)) {
-    self.var_cd74abf8 linkto(self);
+    self.var_cd74abf8 linkTo(self);
     self.var_cd74abf8 notsolid();
   }
-  self.door = getent(self.targetname + "_door", "targetname");
+  self.door = getEnt(self.targetname + "_door", "targetname");
   if(isDefined(self.door)) {
     self.door.closed = 1;
-    self.door.clip = getent(self.targetname + "_door_clip", "targetname");
+    self.door.clip = getEnt(self.targetname + "_door_clip", "targetname");
     self thread function_c379c791(1);
   }
-  self.pusher = getent(self.targetname + "_pusher", "targetname");
+  self.pusher = getEnt(self.targetname + "_pusher", "targetname");
   if(isDefined(self.pusher)) {
     self.pusher.out = 0;
   }
-  self.floor = getent(self.targetname + "_floor", "targetname");
+  self.floor = getEnt(self.targetname + "_floor", "targetname");
   if(isDefined(self.floor)) {
-    self.floor linkto(self);
+    self.floor linkTo(self);
   }
-  self.front = getent(self.targetname + "_front", "targetname");
+  self.front = getEnt(self.targetname + "_front", "targetname");
   if(isDefined(self.front)) {
-    self.front linkto(self);
+    self.front linkTo(self);
   }
   self.var_54b40cc8 = getEntArray(self.targetname + "_front_door", "targetname");
   self.var_ab67891f = 1;
-  self.var_7c850021 = getent(self.targetname + "_front_door_clip", "targetname");
-  self.var_a1647650 = getent(self.targetname + "_start_volume", "targetname");
+  self.var_7c850021 = getEnt(self.targetname + "_front_door_clip", "targetname");
+  self.var_a1647650 = getEnt(self.targetname + "_start_volume", "targetname");
   if(isDefined(self.var_a1647650)) {
     self.var_a1647650.minecart = self;
     self.var_a1647650 thread function_7fec5b68();
   }
-  self.var_be938773 = getent("trigger_minecart_water_splash", "targetname");
+  self.var_be938773 = getEnt("trigger_minecart_water_splash", "targetname");
   if(isDefined(self.var_be938773)) {
     self.var_be938773 thread function_68c61932();
   }
   self.speaker_left = spawn("script_model", self.origin);
   self.speaker_left setModel("tag_origin");
-  self.speaker_left linkto(self, "tag_origin", (0, 32, 40));
+  self.speaker_left linkTo(self, "tag_origin", (0, 32, 40));
   util::wait_network_frame();
   self.speaker_right = spawn("script_model", self.origin);
   self.speaker_right setModel("tag_origin");
-  self.speaker_right linkto(self, "tag_origin", (0, -32, 40));
+  self.speaker_right linkTo(self, "tag_origin", (0, -32, 40));
   blockers = getEntArray(self.targetname + "_blocker", "targetname");
   array::thread_all(blockers, &blocker_think, self);
   level.minecart_force_zone_active = 0;
@@ -119,7 +119,7 @@ function function_742e2b0d(minecart) {
 }
 
 function function_1306489b() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] istouching(self)) {
       return true;
@@ -137,7 +137,7 @@ function function_78442d5() {
 function function_2ae67320(offsetorigin) {
   linkent = spawn("script_model", (0, 0, 0));
   linkent.offsetorigin = offsetorigin;
-  linkent linkto(self, "", linkent.offsetorigin, (0, 0, 0));
+  linkent linkTo(self, "", linkent.offsetorigin, (0, 0, 0));
   linkent setModel("tag_origin");
   linkent.occupied = 0;
   self.linkents[self.linkents.size] = linkent;
@@ -146,7 +146,7 @@ function function_2ae67320(offsetorigin) {
 
 function function_46d092ff() {
   wait(0.5);
-  players = getplayers();
+  players = getPlayers();
   if(isDefined(self.var_cd74abf8)) {
     self.var_cd74abf8 solid();
   }
@@ -220,7 +220,7 @@ function function_3ae7bd53(minecart) {
   pitch_up = 90;
   pitch_down = 75;
   if(self laststand::player_is_in_laststand()) {
-    self setorigin(self.var_68072c39.origin);
+    self setOrigin(self.var_68072c39.origin);
     while(self laststand::player_is_in_laststand()) {
       wait(0.1);
     }
@@ -236,8 +236,8 @@ function function_3ae7bd53(minecart) {
 
 function function_a676846(minecart) {
   level endon("hash_76e3734");
-  self setplayercollision(0);
-  self linkto(self.var_68072c39, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self setPlayerCollision(0);
+  self linkTo(self.var_68072c39, "tag_origin", (0, 0, 0), (0, 0, 0));
   self waittill("death");
   self unlink();
 }
@@ -269,7 +269,7 @@ function function_d7bc1fd8(var_f127a043) {
   if(isDefined(self.front)) {
     self.front notsolid();
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(isDefined(player.var_68072c39)) {
@@ -398,7 +398,7 @@ function function_b1da7b23() {
 }
 
 function function_b02072a5(var_2f6d87e4) {
-  playsoundatposition("evt_mine_cart_bar", self.origin);
+  playSoundAtPosition("evt_mine_cart_bar", self.origin);
   if(self.var_de36bfb8) {
     if(var_2f6d87e4) {
       self setvisibletoall();
@@ -415,26 +415,26 @@ function function_f8358462() {
   }
   self.var_e70591 = 10;
   self.var_de36bfb8 = 0;
-  self setcursorhint("HINT_NOICON");
-  self sethintstring("");
-  self usetriggerrequirelookat();
+  self setCursorHint("HINT_NOICON");
+  self setHintString("");
+  self useTriggerRequireLookAt();
   self.cost = 250;
-  minecart_poi = getent("minecart_poi", "targetname");
+  minecart_poi = getEnt("minecart_poi", "targetname");
   minecart_poi zm_utility::create_zombie_point_of_interest(undefined, 30, 0, 0);
   minecart_poi thread zm_utility::create_zombie_point_of_interest_attractor_positions(4, 45);
   if(isDefined(self.target)) {
-    self.minecart = getent(self.target, "targetname");
+    self.minecart = getEnt(self.target, "targetname");
   } else {
-    self.minecart = getent("minecart", "targetname");
+    self.minecart = getEnt("minecart", "targetname");
   }
   self.minecart function_807ee0b0();
   self function_b02072a5(0);
   wait_for_flags = 1;
   wait_for_flags = getdvarint("") == 0;
   if(wait_for_flags) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     level flag::wait_till("power_on");
-    self sethintstring(&"ZM_TEMPLE_DESTINATION_NOT_OPEN");
+    self setHintString(&"ZM_TEMPLE_DESTINATION_NOT_OPEN");
     level flag::wait_till_any(array("cave_water_to_waterfall", "waterfall_to_tunnel"));
   }
   wait(1);
@@ -450,7 +450,7 @@ function function_f8358462() {
     if(isDefined(self.minecart.front)) {
       self.minecart.front solid();
     }
-    self sethintstring(&"ZM_TEMPLE_MINECART_COST", self.zombie_cost);
+    self setHintString(&"ZM_TEMPLE_MINECART_COST", self.zombie_cost);
     while(true) {
       self waittill("trigger", player);
       if(player zm_score::can_player_purchase(self.zombie_cost)) {
@@ -462,7 +462,7 @@ function function_f8358462() {
     level flag::set("players_riding_minecart");
     level thread function_43dedd2a();
     self triggerenable(0);
-    self sethintstring(&"ZM_TEMPLE_MINECART_UNAVAILABLE");
+    self setHintString(&"ZM_TEMPLE_MINECART_UNAVAILABLE");
     if(isDefined(self.minecart.var_c25552a2)) {
       self.minecart.var_c25552a2 rotateroll(180, 0.3, 0.1, 0.1);
       self.minecart.var_c25552a2 waittill("rotatedone");
@@ -501,7 +501,7 @@ function function_f8358462() {
       minecart_poi zm_utility::deactivate_zombie_point_of_interest();
     }
     if(!getdvarint("scr_minecart_cheat")) {
-      var_246ba808 = spawnvehicle("zombie_minecart", self.minecart.origin, self.minecart.angles, self.minecart.targetname + "_reverse");
+      var_246ba808 = spawnVehicle("zombie_minecart", self.minecart.origin, self.minecart.angles, self.minecart.targetname + "_reverse");
       var_246ba808.drivepath = 0;
       var_246ba808.var_66b5ee1a = self.minecart.var_88249cb5;
       var_246ba808.var_fdb1feb7 = self.minecart.var_629f3738;
@@ -532,7 +532,7 @@ function function_f8358462() {
 
 function function_b56e3436() {
   var_6fbe862f = 1;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] laststand::player_is_in_laststand()) {
       continue;
@@ -549,9 +549,9 @@ function function_59dcb5d1(var_e48fa956, var_8c9fa61, time) {
   model setModel(var_e48fa956.model);
   model.angles = var_e48fa956.angles;
   var_e48fa956 ghost();
-  model moveto(var_8c9fa61.origin, 1, 0.1, 0.1);
+  model moveTo(var_8c9fa61.origin, 1, 0.1, 0.1);
   rotateangles = (0 - var_8c9fa61.angles[0], var_8c9fa61.angles[1] - 180, 0);
-  model rotateto(rotateangles, 1, 0.1, 0.1);
+  model rotateTo(rotateangles, 1, 0.1, 0.1);
   model waittill("movedone");
   model delete();
   var_8c9fa61 show();
@@ -568,7 +568,7 @@ function function_a2aafac6() {
   forwarddist = 370;
   var_f127a043 = (forward * forwarddist) + vectorscale((0, 0, 1), 110);
   time = forwarddist / speed;
-  players = getplayers();
+  players = getPlayers();
   var_e6eabdfa = [];
   if(isDefined(self.front)) {
     self.front notsolid();
@@ -586,7 +586,7 @@ function function_a2aafac6() {
     var_e6eabdfa[var_e6eabdfa.size] = player;
     player notify("hash_aa83d93d");
     player clientfield::set_to_player("minecart_rumble", 0);
-    player playrumbleonentity("damage_heavy");
+    player playRumbleOnEntity("damage_heavy");
     earthquake(0.5, 2, player.origin, 100, player);
     player.var_e4bd94c = gettime() + 2000;
     player.var_68072c39 unlink();
@@ -612,7 +612,7 @@ function function_a2aafac6() {
     e = self.linkents[i];
     e unlink();
     e.origin = (0, 0, 0);
-    e linkto(self, "", e.offsetorigin, (0, 0, 0));
+    e linkTo(self, "", e.offsetorigin, (0, 0, 0));
   }
 }
 
@@ -628,7 +628,7 @@ function function_b65d8973(minecart) {
 }
 
 function function_131c0ce7() {
-  trigger = getent("force_waterfall_active", "script_noteworthy");
+  trigger = getEnt("force_waterfall_active", "script_noteworthy");
   if(isDefined(trigger)) {
     trigger waittill("trigger");
     level.minecart_force_zone_active = 1;
@@ -661,7 +661,7 @@ function function_e42c263d() {
       self.door.clip movez(130, 0.1);
       self.door waittill("movedone");
       self.door.closed = 1;
-      self.door.clip disconnectpaths();
+      self.door.clip disconnectPaths();
     }
   }
 }
@@ -671,7 +671,7 @@ function function_31bd47e5(time) {
     door = undefined;
     for(i = 0; i < self.var_54b40cc8.size; i++) {
       door = self.var_54b40cc8[i];
-      door rotateyaw(door.script_vector[1], time, 0.1, 0.1);
+      door rotateYaw(door.script_vector[1], time, 0.1, 0.1);
     }
     if(isDefined(door)) {
       door waittill("rotatedone");
@@ -691,7 +691,7 @@ function function_290ed469() {
     door = undefined;
     for(i = 0; i < self.var_54b40cc8.size; i++) {
       door = self.var_54b40cc8[i];
-      door rotateyaw(-1 * door.script_vector[1], 1, 0.1, 0.1);
+      door rotateYaw(-1 * door.script_vector[1], 1, 0.1, 0.1);
     }
     if(isDefined(door)) {
       door waittill("rotatedone");
@@ -731,7 +731,7 @@ function function_c716b3b7() {
 
 function function_7fec5b68() {
   height = 0;
-  scale = getent("minecart1_scale", "targetname");
+  scale = getEnt("minecart1_scale", "targetname");
   if(!isDefined(scale)) {
     return;
   }
@@ -740,7 +740,7 @@ function function_7fec5b68() {
   while(true) {
     count = 0;
     if(isDefined(self.minecart) && !self.minecart.away) {
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         if(players[i] istouching(self)) {
           count++;
@@ -833,7 +833,7 @@ function function_82d1ad64(array) {
 }
 
 function function_43dedd2a() {
-  corpse_trig = getent("minecart1_start_volume", "targetname");
+  corpse_trig = getEnt("minecart1_start_volume", "targetname");
   corpses = getcorpsearray();
   if(isDefined(corpses)) {
     for(i = 0; i < corpses.size; i++) {

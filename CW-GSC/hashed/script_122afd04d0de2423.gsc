@@ -56,7 +56,7 @@ function function_dbf2a80e(str_skipto) {
 }
 
 function function_b474f6be(str_skipto, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread function_8896f07c();
   level.woods endon(#"death");
   level.var_7c11765c = 0;
@@ -140,10 +140,10 @@ function main(str_skipto, b_starting) {
 function cleanup(name, starting, direct, player) {
   if(player) {
     s_org = struct::get("tag_align_hotel_breach", "targetname");
-    mdl_door = getent("hotel_breach_door", "targetname");
+    mdl_door = getEnt("hotel_breach_door", "targetname");
     mdl_door.animname = "hotel_breach_door";
     mdl_door useanimtree("generic");
-    mdl_chair = getent("hotel_breach_chair", "targetname");
+    mdl_chair = getEnt("hotel_breach_chair", "targetname");
     mdl_chair.animname = "hotel_breach_chair";
     mdl_chair useanimtree("generic");
     mdl_door util::delay(0.05, undefined, &animation::last_frame, "t9_hit1_sm_tkd_player_door_breach", s_org);
@@ -223,7 +223,7 @@ function function_6f9e6949() {
   level notify(#"hotel_breach_started");
   level flag::set("flag_hotel_breach_started");
   level.woods dialogue::function_47b06180();
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
   level thread namespace_61150688::breach();
   var_841e373 = getspawnerarray("breach_enemies", "script_noteworthy");
@@ -273,11 +273,11 @@ function function_6f9e6949() {
   e_player val::set(#"hash_29302a13c9b142f3", "allow_melee_victim", 0);
   e_player val::set(#"hash_29302a13c9b142f3", "disable_offhand_special", 1);
   e_player val::set(#"hash_29302a13c9b142f3", "disable_offhand_weapons", 1);
-  var_6d32463a = getent("hotel_breach_chair", "targetname");
-  e_door = getent("hotel_breach_door", "targetname");
+  var_6d32463a = getEnt("hotel_breach_chair", "targetname");
+  e_door = getEnt("hotel_breach_door", "targetname");
   var_6d32463a.animname = "hotel_breach_chair";
   e_door.animname = "hotel_breach_door";
-  var_6d32463a thread function_d9ba53a8(getent("breach_enemy_02", "targetname", 1));
+  var_6d32463a thread function_d9ba53a8(getEnt("breach_enemy_02", "targetname", 1));
   a_actors = [e_player, level.woods, var_89597434[0], var_89597434[1], level.var_50a8f4ca, e_door, var_6d32463a];
   level notify(#"hash_6b5c0d1e8b95af4c");
   level thread objectives::complete("hotel_breach");
@@ -330,7 +330,7 @@ function function_d9ba53a8(actor) {
   actor waittill(#"damage", #"death");
   var_d56b7da7 = self getanimtime("t9_hit1_sm_tkd_chair");
   s_org = struct::get("tag_align_hotel_breach", "targetname");
-  self stopanimscripted();
+  self stopanimScripted();
   self useanimtree("generic");
   self animation::play("t9_hit1_sm_tkd_chair", s_org, undefined, undefined, undefined, undefined, undefined, var_d56b7da7, undefined, undefined, undefined, 1);
 }
@@ -406,7 +406,7 @@ function function_c182078c() {
 
 function function_73a5b42a() {
   wait 0.5;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon(#"aldrich_kill_confirmed");
   player endon(#"death");
 
@@ -440,7 +440,7 @@ function function_b1095197() {
 }
 
 function function_6bfbb3e8() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("aldrich_kill_confirmed");
   level spy_camera::function_f91a82ef(1, undefined);
   player waittill(#"end_camera_ads");

@@ -41,11 +41,11 @@ conduit_fx_on_no_ff(var_0) {
     level waittill("spawn_nondeterministic_entities");
   }
 
-  var_1 = getent("ancestor_left_generator_scriptable", "targetname");
+  var_1 = getEnt("ancestor_left_generator_scriptable", "targetname");
   var_1 setscriptablepartstate("base", "on_no_ff");
 }
 
 conduit_fx_destroyed() {
-  var_0 = getent("ancestor_left_generator_scriptable", "targetname");
+  var_0 = getEnt("ancestor_left_generator_scriptable", "targetname");
   var_0 setscriptablepartstate("base", "destroyed");
 }

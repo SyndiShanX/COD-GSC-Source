@@ -2173,7 +2173,7 @@ init_battleChatter() {
     return faDirection;
   }
   forward = anglesToForward(viewerAngles);
-  vFacing = VectorNormalize(forward);
+  vFacing = vectorNormalize(forward);
   anglesToFacing = VectorToAngles(vFacing);
   anglesToPoint = VectorToAngles(targetOrigin - viewerOrigin);
 
@@ -2634,7 +2634,7 @@ createChatPhrase() {
 
 pointInFov(origin) {
   forward = anglesToForward(self.angles);
-  normalVec = VectorNormalize(origin - self.origin);
+  normalVec = vectorNormalize(origin - self.origin);
 
   dot = VectorDot(forward, normalVec);
   return dot > 0.766;
@@ -2853,7 +2853,7 @@ playFlavorBurstLine(burster, alias) {
   }
 
   soundOrg = spawn("script_origin", burster.origin);
-  soundOrg LinkTo(burster);
+  soundOrg linkTo(burster);
 
   soundOrg playSound(alias, alias, true);
   soundOrg waittill(alias);

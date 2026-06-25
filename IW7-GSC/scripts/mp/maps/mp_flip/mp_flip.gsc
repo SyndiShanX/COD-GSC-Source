@@ -33,35 +33,35 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("player32x32x32", "targetname");
+  var_0 = getEnt("player32x32x32", "targetname");
   var_1 = spawn("script_model", (1360, 301, 110));
   var_1.angles = (0, 0, 6.5);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("player32x32x32", "targetname");
+  var_2 = getEnt("player32x32x32", "targetname");
   var_3 = spawn("script_model", (1198, 301, 110));
   var_3.angles = (0, 0, 6.5);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("player64x64x8", "targetname");
+  var_4 = getEnt("player64x64x8", "targetname");
   var_5 = spawn("script_model", (-376, 1300, 29));
   var_5.angles = (0, 0, 115);
   var_5 clonebrushmodeltoscriptmodel(var_4);
-  var_6 = getent("player128x128x128", "targetname");
+  var_6 = getEnt("player128x128x128", "targetname");
   var_7 = spawn("script_model", (1616, 1074, 112));
   var_7.angles = (0, 0, 0);
   var_7 clonebrushmodeltoscriptmodel(var_6);
-  var_8 = getent("player256x256x8", "targetname");
+  var_8 = getEnt("player256x256x8", "targetname");
   var_9 = spawn("script_model", (-1035.5, -1622.5, 387));
   var_9.angles = (360, 55.1, -90);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("player256x256x8", "targetname");
+  var_10 = getEnt("player256x256x8", "targetname");
   var_11 = spawn("script_model", (-1569.5, -1171.5, 387));
   var_11.angles = (360, 34.6, -90);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("player256x256x256", "targetname");
+  var_12 = getEnt("player256x256x256", "targetname");
   var_13 = spawn("script_model", (-576, 336, 800));
   var_13.angles = (0, 0, 0);
   var_13 clonebrushmodeltoscriptmodel(var_12);
-  var_14 = getent("player32x32x128", "targetname");
+  var_14 = getEnt("player32x32x128", "targetname");
   var_15 = spawn("script_model", (1250, -28, -50));
   var_15.angles = (270, 180, 180);
   var_15 clonebrushmodeltoscriptmodel(var_14);
@@ -107,7 +107,7 @@ func_5EE1(var_0) {
   for(;;) {
     var_2 = randomintrange(6, 13);
     var_0.objective_playermask_hidefromall = var_0.areanynavvolumesloaded + (randomintrange(-16, 16), randomintrange(-16, 16), var_1 * randomintrange(4, 16));
-    var_0 moveto(var_0.objective_playermask_hidefromall, var_2, var_2 * 0.4, var_2 * 0.4);
+    var_0 moveTo(var_0.objective_playermask_hidefromall, var_2, var_2 * 0.4, var_2 * 0.4);
     var_1 = var_1 * -1;
     wait(var_2);
   }
@@ -118,7 +118,7 @@ func_5EE9(var_0) {
   for(;;) {
     var_2 = randomintrange(7, 10);
     var_0.energy_getrestorerate = var_0.var_10D6C + (var_1 * randomintrange(1, 3), randomintrange(-2, 2), randomintrange(-3, 3));
-    var_0 rotateto(var_0.energy_getrestorerate, var_2, var_2 * 0.4, var_2 * 0.4);
+    var_0 rotateTo(var_0.energy_getrestorerate, var_2, var_2 * 0.4, var_2 * 0.4);
     var_1 = var_1 * -1;
     wait(var_2);
   }
@@ -134,7 +134,7 @@ func_5EE8() {
   wait(5);
   var_0 = scripts\engine\utility::spawn_tag_origin();
   var_0 show();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   scripts\engine\utility::waitframe();
   if(isDefined(self.var_336)) {
     playFXOnTag(scripts\engine\utility::getfx(self.var_336), var_0, "tag_origin");
@@ -159,7 +159,7 @@ func_E72B(var_0) {
   var_2 = "Custom rotation axis must be one of yaw\pitch\roll";
   for(;;) {
     if(var_1 == "yaw") {
-      self rotateyaw(360, var_0, 0, 0);
+      self rotateYaw(360, var_0, 0, 0);
     } else if(var_1 == "pitch") {
       self rotatepitch(360, var_0, 0, 0);
     } else if(var_1 == "roll") {

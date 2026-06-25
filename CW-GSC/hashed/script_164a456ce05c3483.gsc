@@ -74,7 +74,7 @@ function function_f3143608() {
   self.doa = spawnStruct();
   self function_c17e1c0e();
   self function_fcc90081(1);
-  self enablelinkto();
+  self enablelinkTo();
   self.var_248bd83 = isDefined(level.doa.roundnumber) ? level.doa.roundnumber : 0;
   self.var_90b81208 = self.var_248bd83;
 
@@ -87,7 +87,7 @@ function function_f3143608() {
   entnumber = self getentitynumber();
 
   if(spawn_points.size > entnumber) {
-    self setorigin(spawn_points[entnumber].origin);
+    self setOrigin(spawn_points[entnumber].origin);
   }
 
   self thread function_c0310e2a();
@@ -460,7 +460,7 @@ function function_fcc90081(var_45b95f80 = 0) {
   self.doa.var_ccd8393c = 0;
   self clientfield::set_to_player("showMap", 0);
   self namespace_41cb996::function_6c4d9896(self.doa.var_ed8fde10);
-  self setplayercollision(1);
+  self setPlayerCollision(1);
   self cleardamageindicator();
   self thread function_d690f109();
 
@@ -554,7 +554,7 @@ function function_83fe843d(player) {
 
 function function_7781556b(origin, var_396c606d = 0) {
   valid_player_found = 0;
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size > 1) {
     players = arraysortclosest(players, origin);
@@ -608,7 +608,7 @@ function function_2e8dc9d3(volume) {
 function function_23e1f90f() {
   players = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       continue;
     }
@@ -624,7 +624,7 @@ function function_23e1f90f() {
 function function_518c4c78() {
   players = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       continue;
     }
@@ -703,7 +703,7 @@ function function_519ae1ed(origin, &entarray, maxdist = 2048) {
 function function_b9e8248(origin, var_af6dcc26 = 1024) {
   sqrdist = sqr(var_af6dcc26);
   playersinrange = [];
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     distsq = distancesquared(origin, player.origin);
@@ -817,8 +817,8 @@ function turnplayershieldon(var_b5c21d1f = 1) {
     self.doa.var_9cd55f0c thread namespace_ec06fe4a::function_ae010bb4(self);
     self.doa.var_9cd55f0c thread namespace_ec06fe4a::function_d55f042c(level, "game_over");
     self.doa.var_9cd55f0c.targetname = "turnPlayerShieldOn";
-    self.doa.var_9cd55f0c enablelinkto();
-    self.doa.var_9cd55f0c linkto(self);
+    self.doa.var_9cd55f0c enablelinkTo();
+    self.doa.var_9cd55f0c linkTo(self);
     self.doa.var_9cd55f0c thread function_19f387a(self);
   }
 
@@ -936,7 +936,7 @@ function function_19f387a(player, var_ca85cba1, thresh, boosting = 0) {
       continue;
     }
 
-    guy setplayercollision(0);
+    guy setPlayerCollision(0);
     guy.var_eeaac918 = boosting;
     guy.shieldhit = 1;
 
@@ -992,7 +992,7 @@ function private function_e93fae6f(player) {
 }
 
 function function_a8b57c52(var_2784b779, angles, ignore, var_b498e4b0) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player notify(#"hash_279998c5df86c04d");
@@ -1000,7 +1000,7 @@ function function_a8b57c52(var_2784b779, angles, ignore, var_b498e4b0) {
   }
 
   wait 0.2;
-  players = getplayers();
+  players = getPlayers();
   offset = (8, -8, 0);
 
   foreach(player in players) {
@@ -1020,7 +1020,7 @@ function function_a8b57c52(var_2784b779, angles, ignore, var_b498e4b0) {
       continue;
     }
 
-    player setorigin(var_2784b779);
+    player setOrigin(var_2784b779);
     player setplayerangles(angles);
     var_2784b779 += offset;
     offset *= -1;
@@ -1221,7 +1221,7 @@ function function_513831e1(var_c4b5b87c = 0, spot = undefined) {
     self.revivetrigger delete();
   }
 
-  self setorigin(spot);
+  self setOrigin(spot);
   namespace_1e25ad94::debugmsg("player respawning stage 2 complete");
 
   if(namespace_ec06fe4a::function_a8975c67()) {
@@ -1239,7 +1239,7 @@ function function_513831e1(var_c4b5b87c = 0, spot = undefined) {
     self thread turnplayershieldon(0);
   }
 
-  self setplayercollision(1);
+  self setPlayerCollision(1);
   self namespace_ec06fe4a::freezeplayercontrols(0);
   self.dead = undefined;
   self.var_4a81243b = undefined;
@@ -1344,7 +1344,7 @@ function function_67f054d7(duration = 2) {
   self notify("6c6ed02dd79ce3ab");
   self endon("6c6ed02dd79ce3ab");
   level notify(#"hash_7893364bd228d63e");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread lui::screen_fade_out(duration);
@@ -1361,7 +1361,7 @@ function function_67f054d7(duration = 2) {
 }
 
 function function_ec758d18() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -1385,7 +1385,7 @@ function function_836aeb74(duration = 2) {
   self endon("5404e528969e8691");
   level notify(#"hash_7893364bd228d63e");
   namespace_ec06fe4a::function_445bad70(0);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player.var_d57eeb7f) && player.var_d57eeb7f == 0) {

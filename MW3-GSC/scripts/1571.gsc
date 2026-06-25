@@ -600,14 +600,14 @@ _id_3F7F() {
   var_3 setModel("tag_origin");
   var_3.origin = self.origin;
   var_3.angles = self.angles;
-  self playerlinkto(var_3, undefined, 1, 0, 0, 0, 0);
+  self playerlinkTo(var_3, undefined, 1, 0, 0, 0, 0);
   var_3.angles = (var_3.angles[0] + 89, var_3.angles[1], 0);
-  var_3 moveto(var_2 + (0, 0, 0), var_0, 0, var_0);
+  var_3 moveTo(var_2 + (0, 0, 0), var_0, 0, var_0);
   wait 0.05;
   self playSound("survival_slamzoom_out");
   wait(var_0 - 0.55);
   self visionsetnakedforplayer("coup_sunblind", 0.25);
-  var_3 rotateto((var_3.angles[0] - 89, var_3.angles[1], 0), 0.5, 0.3, 0.2);
+  var_3 rotateTo((var_3.angles[0] - 89, var_3.angles[1], 0), 0.5, 0.3, 0.2);
   wait 0.2;
   self visionsetnakedforplayer("", 1.0);
   wait 0.5;

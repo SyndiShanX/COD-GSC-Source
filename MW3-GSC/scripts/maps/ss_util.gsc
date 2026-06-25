@@ -57,7 +57,7 @@ _id_441F(var_0, var_1) {
 }
 
 _id_4420(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   wait 0.05;
 
   foreach(var_4 in var_0) {

@@ -492,7 +492,7 @@ lockprop() {
 
   self.propanchor unlink();
   self.propanchor.var_0116 = self.var_0116;
-  self playerlinkto(self.propanchor);
+  self playerlinkTo(self.propanchor);
   if(self.slopelocked) {
     self.propent unlink();
     self.propent set_pitch_roll_for_ground_normal(self.var_777D);
@@ -670,9 +670,9 @@ spectateprop() {
   self.spectatingthisplayer = var_00;
   self.propanchor unlink();
   self.propanchor.var_0116 = self.var_0116;
-  self setorigin(var_00.var_0116);
+  self setOrigin(var_00.var_0116);
   self.var_001D = var_00.var_001D;
-  self playerlinkto(var_00.propanchor);
+  self playerlinkTo(var_00.propanchor);
 }
 
 movetonewprop() {
@@ -680,14 +680,14 @@ movetonewprop() {
   self unlink();
   self.var_0116 = var_00.var_0116;
   self.var_001D = var_00.var_001D;
-  self playerlinkto(var_00.propanchor);
+  self playerlinkTo(var_00.propanchor);
 }
 
 returntoprop() {
   self unlink();
-  self setorigin(self.propanchor.var_0116);
+  self setOrigin(self.propanchor.var_0116);
   if(self.var_5E61) {
-    self playerlinkto(self.propanchor);
+    self playerlinkTo(self.propanchor);
     return;
   }
 
@@ -826,7 +826,7 @@ flashenemies(param_00, param_01) {
         var_08 = 1 - var_06 - var_0C / var_07 - var_0C;
       }
 
-      var_09 = vectornormalize(var_04);
+      var_09 = vectorNormalize(var_04);
       var_0A = anglesToForward(var_03 getangles());
       var_0B = vectordot(var_0A, var_09);
       var_03 notify("flashbang", param_01 + (0, 0, 4), var_08, var_0B, param_00, param_00.var_01A7, 2);

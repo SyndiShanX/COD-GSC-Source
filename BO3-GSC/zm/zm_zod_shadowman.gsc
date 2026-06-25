@@ -261,7 +261,7 @@ function function_b6c7fd80() {
       var_685eb707 = randomfloatrange(5, 10);
       self.var_8abfb076 = 0;
       var_5d186a94 = level.var_6e3c8a77.origin;
-      v_dir = vectornormalize(var_5d186a94 - self.s_spawnpoint.origin);
+      v_dir = vectorNormalize(var_5d186a94 - self.s_spawnpoint.origin);
       v_angles = vectortoangles(v_dir);
       function_284b1884(self, self.s_spawnpoint, var_685eb707, v_angles);
       self.var_93dad597 thread animation::play("ai_zombie_zod_shadowman_float_idle_loop", undefined, undefined, 1);
@@ -548,7 +548,7 @@ function function_3803c75b(n_move_duration) {
   level endon("hash_82a23c03");
   self.var_93dad597 thread animation::play("ai_zombie_zod_keeper_give_me_sword_intro", undefined, undefined, n_move_duration);
   wait(n_move_duration);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   v_origin = player getorigin();
   function_ada13668(v_origin, undefined, 0);
 }
@@ -583,7 +583,7 @@ function function_1bd7a0f4(var_8cf7b520, var_cbdd21c0, n_spawn_count, var_58655a
 }
 
 function function_1063429a(s_spawnpoint) {
-  var_42513f6e = getent("ritual_zombie_spawner", "targetname");
+  var_42513f6e = getEnt("ritual_zombie_spawner", "targetname");
   e_fx_origin = spawn("script_model", s_spawnpoint.origin);
   e_fx_origin setModel("tag_origin");
   e_fx_origin clientfield::set("darkportal_fx", 1);
@@ -602,7 +602,7 @@ function function_1063429a(s_spawnpoint) {
 }
 
 function function_4ef376eb(s_spawnpoint) {
-  var_42513f6e = getent("ritual_zombie_spawner", "targetname");
+  var_42513f6e = getEnt("ritual_zombie_spawner", "targetname");
   ai_wasp = zombie_utility::spawn_zombie(level.wasp_spawners[0], "buffed_parasite", s_spawnpoint);
   if(isDefined(ai_wasp)) {
     if(!isDefined(level.var_27fa160f)) {
@@ -675,7 +675,7 @@ function function_9edae260(s_pod) {
 }
 
 function function_7a4cf63(s_spawnpoint, var_8388cfbb) {
-  var_42513f6e = getent("ritual_zombie_spawner", "targetname");
+  var_42513f6e = getEnt("ritual_zombie_spawner", "targetname");
   ai_raps = zombie_utility::spawn_zombie(level.raps_spawners[0], "buffed_elemental", s_spawnpoint);
   if(isDefined(ai_raps)) {
     if(!isDefined(level.var_35fcee79)) {
@@ -915,7 +915,7 @@ function private function_48fccb59(var_7478a6b4 = undefined) {
 function private function_9cfe9b22(v_origin, v_target) {
   e_fx = zm_zod_util::tag_origin_allocate(v_origin, (0, 0, 0));
   e_fx clientfield::set("zod_egg_soul", 1);
-  e_fx moveto(v_target, 1);
+  e_fx moveTo(v_target, 1);
   e_fx waittill("movedone");
   wait(0.25);
   e_fx clientfield::set("zod_egg_soul", 0);
@@ -930,7 +930,7 @@ function function_e4f74672() {
 function function_7b5a1720(n_val) {}
 
 function function_b5732f4d(n_val) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   v_origin = player getorigin();
   function_ada13668(v_origin, undefined, 0);
 }

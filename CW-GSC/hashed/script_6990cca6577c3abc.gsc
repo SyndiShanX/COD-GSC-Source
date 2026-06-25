@@ -395,7 +395,7 @@ function function_1fa698a6(target, view_pos, forward_view_angles, var_ccb70dad, 
     return false;
   }
 
-  v_normal = vectornormalize(target_pos - self.origin);
+  v_normal = vectorNormalize(target_pos - self.origin);
   dot = vectordot(var_ccb70dad, v_normal);
 
   if(is_true(var_3270c905)) {
@@ -445,7 +445,7 @@ function function_f3eae4ba(var_6cd541c6, weapon = level.weaponnone) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
     var_61906722 = randomfloatrange(25, 45);
-    v_ragdoll = vectornormalize(target.origin - self.origin + (n_random_x, n_random_y, var_61906722));
+    v_ragdoll = vectorNormalize(target.origin - self.origin + (n_random_x, n_random_y, var_61906722));
     self thread function_b9b06e2(target, weapon, var_6cd541c6, v_ragdoll, axe_damage);
     var_be07f1d4++;
 
@@ -488,7 +488,7 @@ function function_b9b06e2(e_target, weapon, var_6cd541c6 = level.weaponnone, v_t
     return;
   }
 
-  damage_location = weapon.origin + vectornormalize(self.origin - weapon.origin) * 10 + (0, 0, 60);
+  damage_location = weapon.origin + vectorNormalize(self.origin - weapon.origin) * 10 + (0, 0, 60);
   weapon dodamage(n_damage, damage_location, self, self, "none", "MOD_MELEE", 0, var_6cd541c6);
   self playSound(#"hash_4b89009623a94842");
 
@@ -616,7 +616,7 @@ function private axe_throw_start(weapon, start_origin) {
   var_c5165568.last_origin = var_c5165568.origin;
   var_c5165568.last_hit_target = self;
   var_c5165568.var_cc327795 = self;
-  var_c5165568 moveto(end_position, var_2b94b479);
+  var_c5165568 moveTo(end_position, var_2b94b479);
   var_48ce5c7e = gettime();
   var_11a5ceb4 = 0;
 
@@ -638,7 +638,7 @@ function private axe_throw_start(weapon, start_origin) {
   }
 
   if(is_true(self.var_92188e6b) && isDefined(var_c5165568)) {
-    var_c5165568 moveto(var_c5165568.origin, float(function_60d95f53()) / 1000);
+    var_c5165568 moveTo(var_c5165568.origin, float(function_60d95f53()) / 1000);
     var_2f1545ed = gettime();
     var_946e6de7 = 0;
 
@@ -685,7 +685,7 @@ function private axe_throw_start(weapon, start_origin) {
       travel_time = 0.01;
     }
 
-    var_c5165568 moveto(var_173eb60b, travel_time);
+    var_c5165568 moveTo(var_173eb60b, travel_time);
     self function_28a475cb(var_c5165568.last_origin, var_c5165568.origin, 50, weapon, var_55b935c, paped);
     var_c5165568.last_origin = var_c5165568.origin;
   }
@@ -1076,7 +1076,7 @@ function cmd(cmd) {
 }
 
 function function_4e036cff(item_name) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   direction = player getplayerangles();
   direction_vec = anglesToForward(direction);
   eye = player getplayercamerapos();
@@ -1088,7 +1088,7 @@ function function_4e036cff(item_name) {
 }
 
 function function_c1fdd154(item_name) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player.var_c926b4fc = 5;

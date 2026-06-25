@@ -272,7 +272,7 @@ startFavela() {
 
   flag_clear("give_favela_warning");
   trigger_on("favela_opening_civilians_spawn", "targetname");
-  getent("favela_enter_player_clip", "targetname") delete();
+  getEnt("favela_enter_player_clip", "targetname") delete();
 
   wait 0.05;
 
@@ -364,8 +364,8 @@ favela_gate_dialog() {
 }
 
 torture_sequence() {
-  node = getent("torture_node", "targetname");
-  door = getent("torture_door", "targetname");
+  node = getEnt("torture_node", "targetname");
+  door = getEnt("torture_door", "targetname");
 
   torture_enemy_spawner_targetname = "torture_enemy_spawner";
   if(getdvarint("favela_trailer") > 0) {
@@ -455,12 +455,12 @@ opening_scene() {
   vehNode = getVehicleNode("van_last_node", "script_noteworthy");
   vehNode waittill("trigger");
 
-  animNode = getent("opening_scene_node", "targetname");
+  animNode = getEnt("opening_scene_node", "targetname");
 
-  makarov_spawner = getent("makarov_spawner", "targetname");
-  driver_spawner = getent("opening_driver_spawner", "targetname");
-  gunner1_spawner = getent("opening_gunner1_spawner", "targetname");
-  gunner2_spawner = getent("opening_gunner2_spawner", "targetname");
+  makarov_spawner = getEnt("makarov_spawner", "targetname");
+  driver_spawner = getEnt("opening_driver_spawner", "targetname");
+  gunner1_spawner = getEnt("opening_gunner1_spawner", "targetname");
+  gunner2_spawner = getEnt("opening_gunner2_spawner", "targetname");
 
   wait 1;
 
@@ -490,7 +490,7 @@ opening_scene() {
   guys[2] = gunner1;
   guys[3] = gunner2;
 
-  street_clip = getent("street_civilian_clip", "targetname");
+  street_clip = getEnt("street_civilian_clip", "targetname");
   street_clip connectPaths();
   street_clip delete();
 
@@ -506,7 +506,7 @@ opening_scene() {
   thread break_windshield(player_vehicle);
   makarov makarov_shoot_player(player_vehicle);
   animNode notify("stop_shooting");
-  makarov anim_stopanimscripted();
+  makarov anim_stopanimScripted();
 
   runner_first_node = getnode("runner_first_node", "targetname");
   makarov.goalradius = 32;
@@ -599,12 +599,12 @@ player_exits_vehicle(vehicle) {
 
   vehicle notify("door_open");
 
-  exit_point = getent("player_vehicle_exit_point", "targetname");
+  exit_point = getEnt("player_vehicle_exit_point", "targetname");
 
   dummy = spawn("script_model", level.player.origin);
   dummy.angles = level.player.angles;
   dummy setModel("tag_origin");
-  level.player playerLinkTo(dummy, "tag_player", 1.0, 45, 45, 45, 20);
+  level.player playerlinkTo(dummy, "tag_player", 1.0, 45, 45, 45, 20);
 
   MOVETIME = 1.5;
   ACCEL = 0.3;
@@ -692,7 +692,7 @@ chase() {
   level.soap.pathRandomPercent = 0;
   level.soap thread magic_bullet_shield();
 
-  chase_objective_location = getent("chase_objective_location", "targetname");
+  chase_objective_location = getEnt("chase_objective_location", "targetname");
   objective_add(1, "current", &"FAVELA_OBJ_CATCH_RUNNER", chase_objective_location.origin);
 
   waveNode = getnode("soap_start_node", "targetname");
@@ -788,8 +788,8 @@ legshot_pre_stinger() {
 teleport_runner_for_takedown_1() {
   self endon("death");
 
-  trig = getent("teleport_runner_1", "targetname");
-  teleportLoc = getent(trig.target, "targetname");
+  trig = getEnt("teleport_runner_1", "targetname");
+  teleportLoc = getEnt(trig.target, "targetname");
 
   trig waittill("trigger");
 
@@ -802,8 +802,8 @@ teleport_runner_for_takedown_1() {
 teleport_runner_for_takedown_2() {
   self endon("death");
 
-  trig = getent("teleport_runner_2", "targetname");
-  teleportLoc = getent(trig.target, "targetname");
+  trig = getEnt("teleport_runner_2", "targetname");
+  teleportLoc = getEnt(trig.target, "targetname");
 
   trig waittill("trigger");
 
@@ -1015,8 +1015,8 @@ fade_to_black_alley(fadeInTime, fadeOutTime, duration) {
 
 hotel_doors() {
   rotationAmount = 110;
-  left = getent("hotel_door_left", "targetname");
-  right = getent("hotel_door_right", "targetname");
+  left = getEnt("hotel_door_left", "targetname");
+  right = getEnt("hotel_door_right", "targetname");
   knobs = getEntArray("hotel_knob", "targetname");
 
   left rotateYaw(rotationAmount * -1, 0.05);
@@ -1166,7 +1166,7 @@ opening_death() {
 }
 
 add_top_of_hill_objective() {
-  originEnt = getent("mission_objective_location", "targetname");
+  originEnt = getEnt("mission_objective_location", "targetname");
   objective_add(2, "current", &"FAVELA_OBJ_REACH_TOP", originEnt.origin);
 }
 
@@ -1228,7 +1228,7 @@ favela_opening_civilians_think() {
 
   eNode notify("stop_idle_anim");
   civilian notify("stop_idle_anim");
-  civilian stopAnimScripted();
+  civilian stopanimScripted();
 
   civilian.useChokePoints = true;
 
@@ -1238,8 +1238,8 @@ favela_opening_civilians_think() {
 }
 
 favela_civilians_scream() {
-  soundEnt = getent("favela_civilians_scream_ent", "targetname");
-  soundEntEndPos = getent(soundEnt.target, "targetname");
+  soundEnt = getEnt("favela_civilians_scream_ent", "targetname");
+  soundEntEndPos = getEnt(soundEnt.target, "targetname");
 
   flag_wait("favela_civilians_fleeing");
 
@@ -1348,7 +1348,7 @@ objective_on_faust() {
 
   self waittill("death");
 
-  originEnt = getent("mission_objective_location", "targetname");
+  originEnt = getEnt("mission_objective_location", "targetname");
   objective_position(2, originEnt.origin);
   setsaveddvar("objectiveFadeTooFar", 25);
 }
@@ -1408,7 +1408,7 @@ street_scenes() {
 }
 
 street_scene_civilian_180_runaway() {
-  spawner = getent("civilian_180_runaway", "targetname");
+  spawner = getEnt("civilian_180_runaway", "targetname");
   animNode = spawn("script_origin", spawner.origin);
   animNode.angles = spawner.angles;
   animScene = spawner.animation;
@@ -1425,8 +1425,8 @@ street_scene_civilian_180_runaway() {
 }
 
 street_scene_civilian_wounded_1() {
-  wounded_spawner = getent("wounded_guy_1", "targetname");
-  helper_spawner = getent("wounded_guy_helper_1", "targetname");
+  wounded_spawner = getEnt("wounded_guy_1", "targetname");
+  helper_spawner = getEnt("wounded_guy_helper_1", "targetname");
   woundedAnimScene = wounded_spawner.animation;
   helperAnimScene = helper_spawner.animation;
   animNode = wounded_spawner get_linked_ent();
@@ -1455,9 +1455,9 @@ street_scene_civilian_wounded_1() {
 }
 
 street_scene_destruction() {
-  car1 = getent("force_explosion_car_1", "script_noteworthy");
-  car2 = getent("force_explosion_car_2", "script_noteworthy");
-  car3 = getent("force_explosion_car_3", "script_noteworthy");
+  car1 = getEnt("force_explosion_car_1", "script_noteworthy");
+  car2 = getEnt("force_explosion_car_2", "script_noteworthy");
+  car3 = getEnt("force_explosion_car_3", "script_noteworthy");
 
   thread delayThread(0.0, ::street_scene_gunshots, car1.origin);
   car1 thread delayThread(1.8, ::destructible_force_explosion);
@@ -1710,7 +1710,7 @@ final_bend_dialog() {
 
   radio_dialogue("favela_cmt_motorcycle");
 
-  soundEnt = getent("nohesnot_location", "targetname");
+  soundEnt = getEnt("nohesnot_location", "targetname");
   soundEnt play_sound_in_space("favela_gst_nohesnot");
 
   radio_dialogue("favela_cmt_dontshoothim");
@@ -1759,7 +1759,7 @@ ending_sequence() {
   thread battlechatter_off("allies");
   thread battlechatter_off("axis");
 
-  node = getent("ending_node", "targetname");
+  node = getEnt("ending_node", "targetname");
 
   soap = spawn_targetname("ending_soap_spawner", true);
   soap.animname = "mactavish";
@@ -1775,7 +1775,7 @@ ending_sequence() {
   faust thread faust_mission_fail();
   faust thread objective_on_faust();
 
-  car = getent("ending_car", "targetname");
+  car = getEnt("ending_car", "targetname");
   car useanimtree(level.scr_animtree["car"]);
   car.animname = "car";
 

@@ -89,7 +89,7 @@ function quadrotor_fireupdate() {
   while(true) {
     if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
       self setlookatent(self.enemy);
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
       startaim = gettime();
       while(!self.turretontarget && vehicle_ai::timesince(startaim) < 3) {
         wait(0.2);
@@ -413,7 +413,7 @@ function quadrotor_damage() {
       continue;
     }
     if(type == "MOD_EXPLOSIVE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") {
-      self setvehvelocity(self.velocity + (vectornormalize(dir) * 300));
+      self setvehvelocity(self.velocity + (vectorNormalize(dir) * 300));
       ang_vel = self getangularvelocity();
       ang_vel = ang_vel + (randomfloatrange(-300, 300), randomfloatrange(-300, 300), randomfloatrange(-300, 300));
       self setangularvelocity(ang_vel);
@@ -492,7 +492,7 @@ function quadrotor_crash_movement(attacker, hitdir) {
   side_dir_mag = randomfloatrange(-100, 100);
   side_dir_mag = side_dir_mag + (math::sign(side_dir_mag) * 80);
   side_dir = side_dir * side_dir_mag;
-  self setvehvelocity((self.velocity + vectorscale((0, 0, 1), 100)) + vectornormalize(side_dir));
+  self setvehvelocity((self.velocity + vectorscale((0, 0, 1), 100)) + vectorNormalize(side_dir));
   ang_vel = self getangularvelocity();
   ang_vel = (ang_vel[0] * 0.3, ang_vel[1], ang_vel[2] * 0.3);
   yaw_vel = randomfloatrange(0, 210) * math::sign(ang_vel[1]);
@@ -518,7 +518,7 @@ function quadrotor_crash_movement(attacker, hitdir) {
 
 function qrotor_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
-  dmg_ent linkto(self);
+  dmg_ent linkTo(self);
   dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
   self util::waittill_any("crash_done", "death");
   dmg_ent stoploopsound(1);
@@ -598,7 +598,7 @@ function quadrotor_collision_player() {
     driver = self getseatoccupant(0);
     if(isDefined(driver) && lengthsquared(velocity) > 4900) {
       earthquake(0.25, 0.25, driver.origin, 50);
-      driver playrumbleonentity("damage_heavy");
+      driver playRumbleOnEntity("damage_heavy");
     }
   }
 }
@@ -789,7 +789,7 @@ function set_death_model(smodel, fdelay) {
 }
 
 function player_in_last_stand_within_range(range) {
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     return;
   }
@@ -824,7 +824,7 @@ function kill_fx_if_target_revive(quadrotor, revive_target) {
   e_fx setModel("tag_origin");
   e_fx playSound("zmb_drone_revive_fire");
   e_fx playLoopSound("zmb_drone_revive_loop", 0.2);
-  e_fx moveto(revive_target.origin, 1);
+  e_fx moveTo(revive_target.origin, 1);
   timer = 0;
   while(true) {
     if(isDefined(revive_target) && revive_target laststand::player_is_in_laststand() && isDefined(quadrotor)) {
@@ -851,7 +851,7 @@ function private function_a05da9fb() {
 function private function_d3a31a35(cmd) {
   if(cmd == "") {
     player = level.players[0];
-    quadrotor = spawnvehicle("", player.origin + vectorscale((0, 0, 1), 32), (0, 0, 0));
+    quadrotor = spawnVehicle("", player.origin + vectorscale((0, 0, 1), 32), (0, 0, 0));
     if(isalive(quadrotor)) {
       quadrotor thread follow_ent(player);
       quadrotor.player_owner = player;

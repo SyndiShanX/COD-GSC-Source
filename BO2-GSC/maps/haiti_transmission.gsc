@@ -90,7 +90,7 @@ skipto_find_menendez() {
   model_restore_area("convert_after_trap");
   level thread door_think("control_room_door", undefined, undefined, vectorscale((-1, 0, 0), 65.0), 0.05);
   level thread control_room_closet();
-  m_door = getent("trappedinthecloset", "targetname");
+  m_door = getEnt("trappedinthecloset", "targetname");
   m_door delete();
   setup_harper();
   skipto_teleport("skipto_find_menendez");
@@ -111,13 +111,13 @@ foyer_main() {
   a_ai_defenders = simple_spawn("foyer_defenders", ::enemy_battle_think, 0, 1);
   flag_wait("at_foyer_entrance");
   level.player maps\_fire_direction::_fire_direction_kill();
-  t_perk = getent("t_bruteforce", "targetname");
+  t_perk = getEnt("t_bruteforce", "targetname");
 
   if(isDefined(t_perk)) {
     t_perk delete();
   }
 
-  t_perk = getent("t_intruder", "targetname");
+  t_perk = getEnt("t_intruder", "targetname");
 
   if(isDefined(t_perk)) {
     t_perk delete();
@@ -156,7 +156,7 @@ foyer_main() {
   flag_wait("near_loading_dock");
   level thread autosave_by_name("haiti_ambush");
   level thread loading_dock_dialog();
-  s_defend = getstruct("asd_defend", "targetname");
+  s_defend = getStruct("asd_defend", "targetname");
   vh_asd = spawn_vehicle_from_targetname("loading_dock_asd");
   vh_asd thread ambush_asd_think(s_defend.origin);
   level thread assembly_seals();
@@ -203,7 +203,7 @@ transmission_main() {
   waittill_ai_group_cleared("control_room_defenders");
   setmusicstate("HAITI_PRE_MENENDEZ");
   set_objective(level.obj_goto_control_room, undefined, "delete");
-  t_console = getent("trig_stop_transmission", "targetname");
+  t_console = getEnt("trig_stop_transmission", "targetname");
   set_objective(level.obj_stop_control, t_console);
   t_console waittill("trigger");
   set_objective(level.obj_stop_control, undefined, "done");
@@ -237,7 +237,7 @@ transmission_main() {
 }
 
 its_a_trap_main() {
-  m_door = getent("trappedinthecloset", "targetname");
+  m_door = getEnt("trappedinthecloset", "targetname");
   m_door delete();
   level thread door_think("control_room_door", undefined, undefined, vectorscale((-1, 0, 0), 65.0), 0.05);
 
@@ -279,7 +279,7 @@ celerium_main() {
   level hangar_gump_wait(n_time);
   maps\haiti_anim::endings_anims();
   level thread spin_emergency_light("fxanim_emergency_light", "fxanim_emergency_light_start", "ending_explosions");
-  ending_ceiling = getent("ending_ceiling", "targetname");
+  ending_ceiling = getEnt("ending_ceiling", "targetname");
   ending_ceiling hide();
   level thread autosave_by_name("door_room");
   simple_spawn("menendez_escort", ::guard_think);
@@ -364,7 +364,7 @@ ambient_support_think(s_start, nd_dest, str_target_group, nd_exit) {
 
 get_squadmates_inside() {
   flag_clear("squad_spawning");
-  e_volume = getent("convert_lobby", "script_noteworthy");
+  e_volume = getEnt("convert_lobby", "script_noteworthy");
   a_nd_squadmates = getnodearray("nd_lobby_squadmates", "targetname");
 
   for(i = 0; i < level.a_ai_player_squad.size; i++) {
@@ -428,9 +428,9 @@ ai_toss_flashbang() {
   self.a.allow_shooting = 0;
   flag_wait("throw_flashbangs");
   wait(self.script_float);
-  s_grenade_start = getstruct(self.target, "targetname");
-  s_grenade_end = getstruct(s_grenade_start.target, "targetname");
-  v_velocity = vectornormalize(s_grenade_end.origin - s_grenade_start.origin) * 500;
+  s_grenade_start = getStruct(self.target, "targetname");
+  s_grenade_end = getStruct(s_grenade_start.target, "targetname");
+  v_velocity = vectorNormalize(s_grenade_end.origin - s_grenade_start.origin) * 500;
   self magicgrenadetype("flash_grenade_sp", s_grenade_start.origin, v_velocity, 2.0);
   wait 2.0;
   self.ignoreall = 0;
@@ -441,7 +441,7 @@ ai_toss_flashbang() {
 
 assembly_seals() {
   nd_exit = getnode("nd_assembly_exit", "targetname");
-  s_start = getstruct("s_assembly_seal_start", "targetname");
+  s_start = getStruct("s_assembly_seal_start", "targetname");
   a_sp_support[0] = "seal_assault";
 
   if(level.is_sco_supporting) {
@@ -469,10 +469,10 @@ assembly_seals() {
 
 assembly_line() {
   level endon("cleanup_theater");
-  s_hoist = getstruct("s_assembly_hoist", "targetname");
-  s_dest_hoist = getstruct(s_hoist.target, "targetname");
-  s_bigdog = getstruct("s_assembly_bigdog", "targetname");
-  s_dest_bigdog = getstruct(s_bigdog.target, "targetname");
+  s_hoist = getStruct("s_assembly_hoist", "targetname");
+  s_dest_hoist = getStruct(s_hoist.target, "targetname");
+  s_bigdog = getStruct("s_assembly_bigdog", "targetname");
+  s_dest_bigdog = getStruct(s_bigdog.target, "targetname");
 
   for(i = 0; i < 7; i++) {
     n_fraction = i / 7;
@@ -485,8 +485,8 @@ assembly_line() {
     m_bigdog.angles = s_bigdog.angles;
     m_bigdog setModel("veh_t6_drone_claw_mk2_alt");
     n_interval = lerpfloat(70, 0, n_fraction);
-    m_hoist moveto(s_dest_hoist.origin, n_interval);
-    m_bigdog moveto(s_dest_bigdog.origin, n_interval);
+    m_hoist moveTo(s_dest_hoist.origin, n_interval);
+    m_bigdog moveTo(s_dest_bigdog.origin, n_interval);
     m_hoist thread delete_at_end_of_line(m_bigdog);
     wait 0.05;
   }
@@ -498,8 +498,8 @@ assembly_line() {
     m_bigdog = spawn("script_model", s_bigdog.origin);
     m_bigdog.angles = s_bigdog.angles;
     m_bigdog setModel("veh_t6_drone_claw_mk2_alt");
-    m_hoist moveto(s_dest_hoist.origin, 70);
-    m_bigdog moveto(s_dest_bigdog.origin, 70);
+    m_hoist moveTo(s_dest_hoist.origin, 70);
+    m_bigdog moveTo(s_dest_bigdog.origin, 70);
     m_hoist thread delete_at_end_of_line(m_bigdog);
     wait 10;
   }
@@ -533,7 +533,7 @@ ambush_asd_think(v_defend_spot) {
 
 theater_attack_lookat() {
   level endon("theater_attack_start");
-  s_lookat = getstruct("s_control_room_lookat", "targetname");
+  s_lookat = getStruct("s_control_room_lookat", "targetname");
   level.player waittill_player_looking_at(s_lookat.origin, 45, 1);
   flag_set("theater_attack_start");
 }
@@ -542,7 +542,7 @@ theater_attack() {
   level thread theater_attack_lookat();
   flag_wait("theater_attack_start");
   wait 0.5;
-  s_theater_defend = getstruct("s_theater_defend", "targetname");
+  s_theater_defend = getStruct("s_theater_defend", "targetname");
   a_vh_qr = spawn_vehicles_from_targetname("theater_qr");
   array_thread(a_vh_qr, ::qr_theater_think, s_theater_defend);
 }
@@ -601,7 +601,7 @@ computer_guy_think() {
   self setgoalpos(self.origin);
   self disable_long_death();
   e_origin = spawn("script_origin", self.origin);
-  self linkto(e_origin);
+  self linkTo(e_origin);
   self computer_guy_wait();
   end_scene("guy_at_computer_idle");
   level thread run_scene_and_delete("guy_at_computer_stand");
@@ -618,12 +618,12 @@ computer_guy_wait() {
 }
 
 fill_theater_right(player) {
-  m_door = getent("m_room_aispawn_left", "targetname");
+  m_door = getEnt("m_room_aispawn_left", "targetname");
   m_door movey(-59, 1.0);
-  m_door = getent("m_room_aispawn_right", "targetname");
+  m_door = getEnt("m_room_aispawn_right", "targetname");
   m_door movey(59, 1.0);
   n_start_time = gettime();
-  s_start_loc = getstruct("s_theater_enter_right", "targetname");
+  s_start_loc = getStruct("s_theater_enter_right", "targetname");
   a_s_stage_right = getStructArray("s_theater_right_scout", "targetname");
 
   foreach(s_loc in a_s_stage_right) {
@@ -650,7 +650,7 @@ fill_theater_right(player) {
 
 fill_theater_left(player) {
   n_start_time = gettime();
-  s_start_loc = getstruct("s_theater_enter_left", "targetname");
+  s_start_loc = getStruct("s_theater_enter_left", "targetname");
   a_s_stage_left = getStructArray("s_theater_left_scout", "targetname");
 
   foreach(s_loc in a_s_stage_left) {
@@ -728,7 +728,7 @@ viewmodel_arms_down(m_player) {
 }
 
 theater_light(m_player, str_notetrack) {
-  e_light = getent("theater_light", "targetname");
+  e_light = getEnt("theater_light", "targetname");
 
   switch (str_notetrack) {
     case "red_light_on":
@@ -750,7 +750,7 @@ booby_trap_explode(m_actor) {
   level notify("fxanim_closet_bomb_start");
   level.player playSound("wpn_grenade_explode");
   level.player playSound("evt_closet_explo_swt");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 0.5;
   level.player playSound("wpn_grenade_explode_metal");
   level thread distant_explosions();
@@ -790,7 +790,7 @@ distant_explosions() {
     n_distance = (1 - n_magnitude) * 512;
     v_location = level.player.origin + anglesToForward((0, randomint(360), 0)) * n_distance;
     earthquake(n_magnitude, n_duration, level.player.origin, 100);
-    level.player playrumbleonentity(str_rumble);
+    level.player playRumbleOnEntity(str_rumble);
     level.player playSound("exp_interior_explo");
   }
 }
@@ -799,7 +799,7 @@ triggered_explosion() {
   self waittill("trigger");
   a_sp_guys = getEntArray(self.target, "targetname");
   simple_spawn(a_sp_guys);
-  s_explosion = getstruct(self.target, "targetname");
+  s_explosion = getStruct(self.target, "targetname");
 
   if(isDefined(s_explosion.script_delay)) {
     wait(s_explosion.script_delay);
@@ -812,7 +812,7 @@ triggered_explosion() {
   exploder(self.script_int);
   earthquake(2.0, 0.5, s_explosion.origin, 1000);
   level.player startfadingblur(2.0, 0.5);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   n_radius_squared = s_explosion.radius * s_explosion.radius;
   n_magnitude = 125.0;
 
@@ -925,13 +925,13 @@ harper_celerium_catchup(str_triggername, e_vol) {
 }
 
 hangar_gump_wait(n_door_close_delay) {
-  t_wait = getent("t_ending_transition", "targetname");
+  t_wait = getEnt("t_ending_transition", "targetname");
   t_wait waittill("trigger");
-  e_vol = getent("vol_ending_gump", "targetname");
+  e_vol = getEnt("vol_ending_gump", "targetname");
 
   if(level.is_harper_alive) {
     if(!level.ai_harper istouching(e_vol)) {
-      s_loc = getstruct(t_wait.target, "targetname");
+      s_loc = getStruct(t_wait.target, "targetname");
       level.ai_harper forceteleport(s_loc.origin, s_loc.angles);
     }
 
@@ -960,15 +960,15 @@ guard_think() {
 }
 
 sliding_door_think() {
-  m_sliding_door = getent("slide_door_escape", "targetname");
+  m_sliding_door = getEnt("slide_door_escape", "targetname");
   m_sliding_door movez(108, 0.05);
   flag_wait_or_timeout("sliding_door_start", 30);
   m_sliding_door movez(-78, 10);
-  playsoundatposition("evt_horizontal_doors_02", (-19725, 4528, 864));
+  playSoundAtPosition("evt_horizontal_doors_02", (-19725, 4528, 864));
 }
 
 spin_emergency_light(str_targetname, str_start_notify, str_endon) {
-  m_light = getent(str_targetname, "targetname");
+  m_light = getEnt(str_targetname, "targetname");
   playFXOnTag(level._effect["emergency_light"], m_light, "tag_light_fx");
   level notify(str_start_notify);
 
@@ -980,7 +980,7 @@ spin_emergency_light(str_targetname, str_start_notify, str_endon) {
 }
 
 teleport_harper_to_end() {
-  e_volume = getent("vol_final_hallway", "targetname");
+  e_volume = getEnt("vol_final_hallway", "targetname");
 
   if(!level.ai_harper istouching(e_volume)) {
     a_s_tp_locs = getStructArray("s_harper_skipto_end", "targetname");
@@ -994,7 +994,7 @@ teleport_harper_to_end() {
 }
 
 lockbreaker_perk() {
-  t_perk = getent("t_lockbreaker", "targetname");
+  t_perk = getEnt("t_lockbreaker", "targetname");
   t_perk trigger_off();
   flag_wait("haiti_gump_interior");
   level.vh_lockbreaker_asd = spawn_vehicle_from_targetname("lockbreaker_asd");
@@ -1042,7 +1042,7 @@ friendly_asd_death() {
 
 friendly_asd_in_theater() {
   self endon("death");
-  trig = getent("asd_in_theater", "targetname");
+  trig = getEnt("asd_in_theater", "targetname");
 
   while(!self istouching(trig)) {
     wait 0.05;
@@ -1125,7 +1125,7 @@ find_menendez_dialog() {
   level.player say_dialog("usr3_checkpoint_4_we_ha_0", 10);
   level thread checkpoint_dialog();
   level.player say_dialog("sect_push_checkpoint_4_s_0", 2);
-  s_final_goal = getstruct("menendez_point", "targetname");
+  s_final_goal = getStruct("menendez_point", "targetname");
   set_objective(level.obj_find_menendez, s_final_goal);
 }
 

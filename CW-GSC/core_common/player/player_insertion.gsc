@@ -207,7 +207,7 @@ function function_8dcd8623() {
     return;
   }
 
-  while(getplayers().size == 0) {
+  while(getPlayers().size == 0) {
     wait 0.5;
   }
 
@@ -301,7 +301,7 @@ function function_35742117(insertion) {
       continue;
     }
 
-    player setorigin(player.resurrect_origin);
+    player setOrigin(player.resurrect_origin);
     player setplayerangles(player.resurrect_angles);
     level callback::callback(#"player_insertion_drop", {
       #player: player
@@ -415,7 +415,7 @@ function function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
     timetotarget = distance(finaltargetpos, var_c5f933e4) / level.var_c7f8ccf6 * 17.6;
 
     if(isDefined(startorigin.cameraent[index])) {
-      startorigin.cameraent[index] moveto(finaltargetpos, timetotarget);
+      startorigin.cameraent[index] moveTo(finaltargetpos, timetotarget);
     }
   }
 
@@ -499,7 +499,7 @@ function function_77132caf() {
   }
 
   spawn_point = rotatepoint((radius, 0, 0), (0, randomint(360), 0));
-  self setorigin(center + spawn_point + (0, 0, 30000));
+  self setOrigin(center + spawn_point + (0, 0, 30000));
   self start_freefall((0, 0, 0), 0);
 }
 
@@ -538,7 +538,7 @@ function function_f795bf83(insertion, vehicle, yaw) {
 
   insertion.passengercount++;
   self function_8cf53a19();
-  self stopanimscripted();
+  self stopanimScripted();
   self unlink();
   self setstance("stand");
   self function_648c1f6(vehicle, undefined, 0, 180, 180, 85, 85);
@@ -578,7 +578,7 @@ function private function_7d880672(original_origin, original_yaw, refly) {
   self endon(#"disconnect");
   origin = self.origin;
   origin = (original_origin[0], original_origin[1], function_70dd0500());
-  self setorigin(origin);
+  self setOrigin(origin);
   self dontinterpolate();
   var_cc56f8da = 0;
   var_cc56f8da = getdvarint(#"hash_380d8ae5bfc8f45b", 1);
@@ -599,7 +599,7 @@ function private function_7d880672(original_origin, original_yaw, refly) {
   var_872f085f = (0, var_59526dd5, 0);
   self setplayerangles(var_872f085f);
   direction = anglesToForward(var_872f085f);
-  vectornormalize(direction);
+  vectorNormalize(direction);
 
   if(refly > 2) {
     speed = 1000;
@@ -661,7 +661,7 @@ function function_88c53de8() {
   refly = getdvarint(#"hash_1632f4021ab7a921", 0);
 
   if(refly) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       player thread function_7d880672(player.origin, player.angles[1], refly);
@@ -701,7 +701,7 @@ function private function_e59d879f(insertion, var_cf46aa72) {
   var_872f085f = insertion.var_f253731f;
   var_37362e08 = insertion.var_37362e08;
   var_7743b329 = insertion.var_7743b329;
-  insertion.leadplane = spawnvehicle(var_69f4f44c, startpoint, var_872f085f, "insertion_plane");
+  insertion.leadplane = spawnVehicle(var_69f4f44c, startpoint, var_872f085f, "insertion_plane");
   insertion.leadplane.takedamage = 0;
   insertion.passengercount = 0;
   insertion.var_ef5094f9 = undefined;
@@ -731,7 +731,7 @@ function private function_e59d879f(insertion, var_cf46aa72) {
       spawner::global_spawn_throttle(1);
       rotatedstart = startpoint + rotatepoint(s_formation.var_86cb4eb8[i], var_872f085f);
       var_4875d958 = vehiclespawns[s_formation.var_f5cff63[i]];
-      vehicle = spawnvehicle(var_4875d958, rotatedstart, var_872f085f, "insertion_secondary");
+      vehicle = spawnVehicle(var_4875d958, rotatedstart, var_872f085f, "insertion_secondary");
 
       if(isDefined(vehicle)) {
         vehicle notsolid();
@@ -830,7 +830,7 @@ function private function_7341cc88(insertion, var_cf46aa72) {
   var_872f085f = var_cf46aa72.var_f253731f;
   var_37362e08 = var_cf46aa72.var_37362e08;
   var_7743b329 = var_cf46aa72.var_7743b329;
-  var_cf46aa72.leadplane = spawnvehicle(var_69f4f44c, startpoint, var_872f085f, "insertion_plane");
+  var_cf46aa72.leadplane = spawnVehicle(var_69f4f44c, startpoint, var_872f085f, "insertion_plane");
   var_cf46aa72.leadplane.takedamage = 0;
   var_cf46aa72.passengercount = 0;
   var_cf46aa72.var_ef5094f9 = undefined;
@@ -949,7 +949,7 @@ function function_45b56b0a(insertion, startpoint, endpoint, var_872f085f, vehicl
   goaloffset = (0, 0, -400);
   rotatedstart = startpoint + rotatepoint(offset, var_872f085f);
   var_31e5487a = vehiclespawns[#"vehicle_t8_mil_helicopter_light_transport_wz_infil"];
-  insertion.var_933bdcf2 = spawnvehicle(var_31e5487a, rotatedstart, var_872f085f, "insertion_presentation");
+  insertion.var_933bdcf2 = spawnVehicle(var_31e5487a, rotatedstart, var_872f085f, "insertion_presentation");
 
   if(!isDefined(insertion.var_933bdcf2)) {
     assert(0);
@@ -978,7 +978,7 @@ function function_f87ddcf0(insertion, startpoint, endpoint, var_872f085f, vehicl
     waitframe(1);
     rotatedstart = startpoint + rotatepoint(offset[i], var_872f085f);
     var_31e5487a = vehiclespawns[var_5b967418[i]];
-    vehicle = spawnvehicle(var_31e5487a, rotatedstart, var_872f085f, "insertion_presentation");
+    vehicle = spawnVehicle(var_31e5487a, rotatedstart, var_872f085f, "insertion_presentation");
     vehicle.origin = rotatedstart;
     vehicle.angles = var_872f085f;
     vehicle.startorigin = rotatedstart;
@@ -1273,7 +1273,7 @@ function function_1c06c249(plane) {
 
 function function_25facefd(count, ignore_player) {
   if(isDefined(level.insertionpassenger) && isDefined(level.var_a3c0d635) && isDefined(level.var_ce84dde9)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(level.insertionpassenger[[level.var_a3c0d635]](player)) {
         level.insertionpassenger[[level.var_ce84dde9]](player, ignore_player);
       }
@@ -1297,7 +1297,7 @@ function function_2e54d73e(insertion, passenger, vehicle) {
 }
 
 function private function_ced05c63(note, payload) {
-  teammates = getplayers(self.team);
+  teammates = getPlayers(self.team);
 
   foreach(player in teammates) {
     if(player == self) {
@@ -1309,7 +1309,7 @@ function private function_ced05c63(note, payload) {
 }
 
 function private function_8ab37f3b(aircraft) {
-  friendlies = getplayers(self.team);
+  friendlies = getPlayers(self.team);
   var_d603dbcf = 1;
 
   foreach(friendly in friendlies) {
@@ -1371,8 +1371,8 @@ function function_5b3ac9f2(aircraft) {
 function function_598b7862(aircraft) {
   self endon(#"death");
   self unlink();
-  self setorigin(self.var_df1a9210.origin);
-  self playerlinkto(self.var_df1a9210);
+  self setOrigin(self.var_df1a9210.origin);
+  self playerlinkTo(self.var_df1a9210);
   planeforward = anglesToForward(aircraft.angles);
   planeright = anglestoright(aircraft.angles);
   playerforward = anglesToForward(self getplayerangles());
@@ -1399,7 +1399,7 @@ function function_598b7862(aircraft) {
   self playsoundtoplayer(#"evt_deploy_plr", self);
   self.var_df1a9210 animation::play(anim, aircraft, "tag_player_spawn");
   self unlink();
-  self setorigin(self.var_df1a9210.origin - (0, 0, 215));
+  self setOrigin(self.var_df1a9210.origin - (0, 0, 215));
   self show();
   self solid();
   self.var_df1a9210 delete();
@@ -1892,7 +1892,7 @@ function function_c3c0b24b() {
     thread draw_angles(self.origin, self.angles, 0.05, 5);
     velocity = self getvelocity();
     mag = length(velocity);
-    thread draw_line(self.origin, self.origin + vectornormalize(velocity) * mag, 0.05, (1, 0, 1));
+    thread draw_line(self.origin, self.origin + vectorNormalize(velocity) * mag, 0.05, (1, 0, 1));
     waitframe(1);
   }
 }

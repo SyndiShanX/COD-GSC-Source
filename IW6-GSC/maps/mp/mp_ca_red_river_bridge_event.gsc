@@ -54,10 +54,10 @@ bridge_init() {
     part Hide();
   }
 
-  level.bridgePathNodes = GetEnt("bridgePathNodes", "targetname");
+  level.bridgePathNodes = getEnt("bridgePathNodes", "targetname");
   clearPath(level.bridgePathNodes);
 
-  level.destroyPathNodes = GetEnt("destroyPathNodes", "targetname");
+  level.destroyPathNodes = getEnt("destroyPathNodes", "targetname");
   blockPath(level.destroyPathNodes);
 }
 
@@ -174,7 +174,7 @@ blockPath(blocker) {
   if(isDefined(blocker)) {
     blocker Show();
     blocker Solid();
-    blocker DisconnectPaths();
+    blocker disconnectPaths();
   }
 }
 

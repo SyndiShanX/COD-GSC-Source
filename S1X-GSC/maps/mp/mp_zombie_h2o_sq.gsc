@@ -54,26 +54,26 @@ init_sidequest() {
 }
 
 starth2osidequest() {
-  var_0 = getent("sq_underwater_switch_off", "targetname");
+  var_0 = getEnt("sq_underwater_switch_off", "targetname");
 
   if(isDefined(var_0)) {
     var_0 hide();
   }
 
-  var_0 = getent("sq_underwater_switch_on", "targetname");
+  var_0 = getEnt("sq_underwater_switch_on", "targetname");
 
   if(isDefined(var_0)) {
     var_0 hide();
   }
 
-  var_1 = getent("sqCounterTop0", "targetname");
-  var_2 = getent("sqCounterTop1", "targetname");
-  var_3 = getent("sqCounterTop2", "targetname");
-  var_4 = getent("sqCounterTop3", "targetname");
-  var_5 = getent("sqCounterBottom0", "targetname");
-  var_6 = getent("sqCounterBottom1", "targetname");
-  var_7 = getent("sqCounterBottom2", "targetname");
-  var_8 = getent("sqCounterBottom3", "targetname");
+  var_1 = getEnt("sqCounterTop0", "targetname");
+  var_2 = getEnt("sqCounterTop1", "targetname");
+  var_3 = getEnt("sqCounterTop2", "targetname");
+  var_4 = getEnt("sqCounterTop3", "targetname");
+  var_5 = getEnt("sqCounterBottom0", "targetname");
+  var_6 = getEnt("sqCounterBottom1", "targetname");
+  var_7 = getEnt("sqCounterBottom2", "targetname");
+  var_8 = getEnt("sqCounterBottom3", "targetname");
   var_1 hide();
   var_2 hide();
   var_3 hide();
@@ -190,12 +190,12 @@ trophyshowtoplayer(var_0) {
 }
 
 gettrophy(var_0) {
-  var_1 = getent("sqTrophy" + var_0, "targetname");
+  var_1 = getEnt("sqTrophy" + var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
   }
-  var_2 = getent("sqTrophyNum" + var_0, "targetname");
+  var_2 = getEnt("sqTrophyNum" + var_0, "targetname");
   var_1.id = var_0;
   var_1.trophynum = var_2;
   return var_1;
@@ -224,8 +224,8 @@ setuphardmode() {
     }
 
     level thread onplayerconnecthardmode();
-    var_3 = getent("sqHardModeButton", "targetname");
-    var_4 = getent("sqHardModeTrigger", "targetname");
+    var_3 = getEnt("sqHardModeButton", "targetname");
+    var_4 = getEnt("sqHardModeTrigger", "targetname");
 
     if(isDefined(var_3)) {
       var_3 hide();
@@ -253,8 +253,8 @@ zmbhardmodeintro() {
 }
 
 handlehardmodebutton() {
-  var_0 = getent("sqHardModeButton", "targetname");
-  var_1 = getent("sqHardModeTrigger", "targetname");
+  var_0 = getEnt("sqHardModeButton", "targetname");
+  var_1 = getEnt("sqHardModeTrigger", "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -334,8 +334,8 @@ playershowhardmodebutton(var_0, var_1) {
 
   if(playerhashardmode() && !maps\mp\zombies\_util::is_true(var_0.enabled)) {
     var_0.origin = var_0.origin + (0, 0, -1000);
-    var_0 setcursorhint("HINT_NOICON");
-    var_0 sethintstring(&"ZOMBIE_H2O_START_HARD_MODE");
+    var_0 setCursorHint("HINT_NOICON");
+    var_0 setHintString(&"ZOMBIE_H2O_START_HARD_MODE");
     var_0.enabled = 1;
     var_1 show();
   }
@@ -969,7 +969,7 @@ stage1_end(var_0) {
 }
 
 opendoors() {
-  var_0 = common_scripts\utility::getstruct("sqDoor1", "targetname");
+  var_0 = common_scripts\utility::getStruct("sqDoor1", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -978,8 +978,8 @@ opendoors() {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-    var_4.openpos = common_scripts\utility::getstruct(var_4.target, "targetname");
-    var_5 = getent(var_4.target, "targetname");
+    var_4.openpos = common_scripts\utility::getStruct(var_4.target, "targetname");
+    var_5 = getEnt(var_4.target, "targetname");
     var_5 linktosynchronizedparent(var_4);
 
     if(!common_scripts\utility::array_contains(var_2, var_4.origin)) {
@@ -990,7 +990,7 @@ opendoors() {
   var_7 = 1.0;
 
   foreach(var_4 in var_1) {
-    var_4 moveto(var_4.openpos.origin, var_7);
+    var_4 moveTo(var_4.openpos.origin, var_7);
   }
 
   foreach(var_11 in var_2) {
@@ -1010,7 +1010,7 @@ opendoors() {
 stage2_init() {}
 
 stage2_logic() {
-  var_0 = common_scripts\utility::getstruct("sqComputer", "targetname");
+  var_0 = common_scripts\utility::getStruct("sqComputer", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1120,9 +1120,9 @@ stage2_end(var_0) {
 }
 
 stage3_init() {
-  var_0 = common_scripts\utility::getstruct("sqWaterValveLight", "targetname");
+  var_0 = common_scripts\utility::getStruct("sqWaterValveLight", "targetname");
   activateclientexploder(70);
-  var_1 = getent("sq_underwater_switch_off", "targetname");
+  var_1 = getEnt("sq_underwater_switch_off", "targetname");
 
   if(isDefined(var_1)) {
     var_1 show();
@@ -1130,9 +1130,9 @@ stage3_init() {
 }
 
 stage3_logic() {
-  var_0 = common_scripts\utility::getstruct("sqAirlockUse", "targetname");
-  var_1 = getent("airlockClip1", "targetname");
-  var_2 = getent("sqAirlockUseTrigger", "targetname");
+  var_0 = common_scripts\utility::getStruct("sqAirlockUse", "targetname");
+  var_1 = getEnt("airlockClip1", "targetname");
+  var_2 = getEnt("sqAirlockUseTrigger", "targetname");
 
   if(!isDefined(var_0) || !isDefined(var_2)) {
     return;
@@ -1173,7 +1173,7 @@ stage3_logic() {
 }
 
 useholdthink(var_0, var_1, var_2) {
-  var_0 playerlinkto(self);
+  var_0 playerlinkTo(self);
   var_0 playerlinkedoffsetenable();
 
   if(!isDefined(self.curprogress)) {
@@ -1270,12 +1270,12 @@ stage3_end(var_0) {
 stage4_init() {}
 
 stage4_logic() {
-  var_0 = common_scripts\utility::getstruct("sqAirlockUse", "targetname");
-  var_1 = getent("airlockClip1", "targetname");
-  var_2 = getent("airlockClip2", "targetname");
-  var_3 = getent("sqAirlockTrigger1", "targetname");
-  var_4 = getent("sqAirlockTrigger2", "targetname");
-  var_5 = getent("sqAirlockVolume", "targetname");
+  var_0 = common_scripts\utility::getStruct("sqAirlockUse", "targetname");
+  var_1 = getEnt("airlockClip1", "targetname");
+  var_2 = getEnt("airlockClip2", "targetname");
+  var_3 = getEnt("sqAirlockTrigger1", "targetname");
+  var_4 = getEnt("sqAirlockTrigger2", "targetname");
+  var_5 = getEnt("sqAirlockVolume", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1381,12 +1381,12 @@ stage4_logic() {
 }
 
 dofloaterzombie() {
-  var_0 = common_scripts\utility::getstruct("floater_anim_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("floater_anim_node", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = getent("sq_floater_blocker", "targetname");
+  var_1 = getEnt("sq_floater_blocker", "targetname");
 
   if(!isDefined(var_0.angles)) {
     var_0.angles = (0, 0, 0);
@@ -1422,7 +1422,7 @@ floaterzombiedetecthit() {
         if(var_4 <= var_0) {
           var_5 = anglesToForward(var_3.angles);
           var_6 = self.origin - var_3.origin;
-          var_6 = vectornormalize((var_6[0], var_6[1], 0));
+          var_6 = vectorNormalize((var_6[0], var_6[1], 0));
           var_7 = vectordot(var_5, var_6);
 
           if(var_7 >= var_1) {
@@ -1438,7 +1438,7 @@ floaterzombiedetecthit() {
 }
 
 fillairlockwithwater() {
-  var_0 = getent("sqAirlockWater", "targetname");
+  var_0 = getEnt("sqAirlockWater", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -1449,18 +1449,18 @@ fillairlockwithwater() {
   }
 
   thread maps\mp\mp_zombie_h2o_aud::sndfillwithwater();
-  var_0 moveto(var_0.filledpos, 2, 0.1, 0.1);
+  var_0 moveTo(var_0.filledpos, 2, 0.1, 0.1);
   wait 1.3;
 }
 
 emptywaterfromairlock() {
-  var_0 = getent("sqAirlockWater", "targetname");
+  var_0 = getEnt("sqAirlockWater", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
   thread maps\mp\mp_zombie_h2o_aud::snddrainwater();
-  var_0 moveto(var_0.emptypos, 2, 0.1, 0.1);
+  var_0 moveTo(var_0.emptypos, 2, 0.1, 0.1);
   wait 1.3;
 }
 
@@ -1557,7 +1557,7 @@ teleportoutplayersinairlock(var_0) {
 }
 
 playerteleportoutofairlock() {
-  self setorigin(self.lastgroundposition);
+  self setOrigin(self.lastgroundposition);
   self.inairlock = undefined;
   self.disabletombstonedropinarea = undefined;
 }
@@ -1594,13 +1594,13 @@ createairlockdoor(var_0) {
 waittillactivatedwatervalve(var_0) {
   var_0 endon("disconnect");
   var_0 endon("death");
-  var_1 = common_scripts\utility::getstruct("sqWaterValve", "targetname");
+  var_1 = common_scripts\utility::getStruct("sqWaterValve", "targetname");
 
   if(!isDefined(var_1)) {
     return;
   }
-  var_2 = getent("sq_underwater_switch_off", "targetname");
-  var_3 = getent("sq_underwater_switch_on", "targetname");
+  var_2 = getEnt("sq_underwater_switch_off", "targetname");
+  var_3 = getEnt("sq_underwater_switch_on", "targetname");
   var_1 maps\mp\zombies\_zombies_sidequests::fake_use("water_valve_used", undefined, undefined, "main_stage4_over");
   maps\mp\mp_zombie_h2o_aud::sndunderwaterpanelaccessed(var_1.origin);
   level thread announcerglobalplaysqvo(5, 1);
@@ -1671,18 +1671,18 @@ waittillplayerinairlock(var_0, var_1, var_2, var_3) {
 
 closeairlockdoor(var_0) {
   playsoundatpos(var_0.origin, "trap_security_door_slam");
-  var_0 moveto(var_0.closedpos, 0.1, 0.1);
+  var_0 moveTo(var_0.closedpos, 0.1, 0.1);
   wait 0.2;
 }
 
 openairlockdoor(var_0) {
   playsoundatpos(var_0.origin, "interact_door");
-  var_0 moveto(var_0.openpos, 1.0);
+  var_0 moveTo(var_0.openpos, 1.0);
   wait 2.1;
 }
 
 activatedairlock(var_0) {
-  var_1 = getent("sqAirlockUseTrigger", "targetname");
+  var_1 = getEnt("sqAirlockUseTrigger", "targetname");
   var_2 = 40000;
   level thread doairlockhint(var_1);
   var_3 = undefined;
@@ -1943,9 +1943,9 @@ dochallengehudcomplete() {
 stage7_init() {}
 
 stage7_logic() {
-  var_0 = getent("sqCapacitorCover", "targetname");
-  var_1 = common_scripts\utility::getstruct("sqCapacitors", "targetname");
-  var_2 = common_scripts\utility::getstruct("sqCapacitorFx", "targetname");
+  var_0 = getEnt("sqCapacitorCover", "targetname");
+  var_1 = common_scripts\utility::getStruct("sqCapacitors", "targetname");
+  var_2 = common_scripts\utility::getStruct("sqCapacitorFx", "targetname");
   var_3 = getEntArray("sqCapacitorMeter", "targetname");
 
   if(!isDefined(var_0)) {
@@ -2024,7 +2024,7 @@ runchargecapacitorlogic(var_0, var_1, var_2) {
       foreach(var_11 in var_2) {
         var_12 = (15 - var_4) / 15;
         var_13 = (var_11.end - var_11.start) * var_12 + var_11.start;
-        var_11 moveto(var_13, 0.1);
+        var_11 moveTo(var_13, 0.1);
       }
     }
   }
@@ -2257,7 +2257,7 @@ jumpquest_init() {
   level.jumpquest = spawnStruct();
   level.jumpquest.init = 0;
   common_scripts\utility::flag_init("jumpQuest_final_stage_complete");
-  level.jumpquest.refloc = common_scripts\utility::getstruct("jumpQuest_ref", "targetname");
+  level.jumpquest.refloc = common_scripts\utility::getStruct("jumpQuest_ref", "targetname");
 
   if(!isDefined(level.jumpquest.refloc)) {
     return;
@@ -2273,8 +2273,8 @@ jumpquest_init() {
 }
 
 jumpquest_initgoal() {
-  level.jumpquest.goal = getent("jumpQuest_goal", "targetname");
-  level.jumpquest.goal.angles = common_scripts\utility::getstruct(level.jumpquest.goal.target, "targetname").angles;
+  level.jumpquest.goal = getEnt("jumpQuest_goal", "targetname");
+  level.jumpquest.goal.angles = common_scripts\utility::getStruct(level.jumpquest.goal.target, "targetname").angles;
 }
 
 jumpquest_initreset() {
@@ -2307,7 +2307,7 @@ jumpquest_initplatforms() {
     var_1.visuals = getEntArray(var_1.target, "targetname");
 
     foreach(var_3 in var_1.visuals) {
-      var_3 linkto(var_1);
+      var_3 linkTo(var_1);
       var_3.noteleportgrenade = 1;
     }
 
@@ -2319,7 +2319,7 @@ jumpquest_initplatforms() {
       var_1.fxtype = "large";
     }
 
-    var_1.angles = common_scripts\utility::getstruct(var_1.target, "targetname").angles;
+    var_1.angles = common_scripts\utility::getStruct(var_1.target, "targetname").angles;
     var_1 thread jumpquest_platformwatch();
   }
 }
@@ -2727,7 +2727,7 @@ jumpquest_bounceresetplayer(var_0) {
   var_4 = trajectorycalculateinitialvelocity(var_0.origin, var_1.origin, (0, 0, -800), var_3);
   var_5 = spawn("script_model", var_0.origin);
   var_5 setModel("tag_origin");
-  var_0 playerlinkto(var_5, "tag_origin");
+  var_0 playerlinkTo(var_5, "tag_origin");
   var_5 movegravity(var_4, var_3);
   wait(var_3);
   var_5.origin = var_1.origin;
@@ -3272,7 +3272,7 @@ playerhandleicon() {
   var_0 = newteamhudelem(level.playerteam);
   var_0 setshader("hud_upgrade_reward", 14, 14);
   var_0 setwaypoint(1, 1);
-  var_0 settargetent(self);
+  var_0 settargetEnt(self);
   waittillstage12overordeath(self);
 
   if(isDefined(var_0)) {
@@ -3790,14 +3790,14 @@ stage12_end(var_0) {
 stage13_init() {}
 
 stage13_logic() {
-  var_0 = getent("sqCounterTop0", "targetname");
-  var_1 = getent("sqCounterTop1", "targetname");
-  var_2 = getent("sqCounterTop2", "targetname");
-  var_3 = getent("sqCounterTop3", "targetname");
-  var_4 = getent("sqCounterBottom0", "targetname");
-  var_5 = getent("sqCounterBottom1", "targetname");
-  var_6 = getent("sqCounterBottom2", "targetname");
-  var_7 = getent("sqCounterBottom3", "targetname");
+  var_0 = getEnt("sqCounterTop0", "targetname");
+  var_1 = getEnt("sqCounterTop1", "targetname");
+  var_2 = getEnt("sqCounterTop2", "targetname");
+  var_3 = getEnt("sqCounterTop3", "targetname");
+  var_4 = getEnt("sqCounterBottom0", "targetname");
+  var_5 = getEnt("sqCounterBottom1", "targetname");
+  var_6 = getEnt("sqCounterBottom2", "targetname");
+  var_7 = getEnt("sqCounterBottom3", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -4280,7 +4280,7 @@ playertravelcosts() {
         }
       }
 
-      self playerlinkto(level.zmbsqlinkent);
+      self playerlinkTo(level.zmbsqlinkent);
       self playerlinkedoffsetenable();
       var_1 = 1;
       continue;
@@ -4309,7 +4309,7 @@ stage15_logic() {
   wait 0.5;
   announcerozglobalplaysqwaittilldone(14);
   var_0 = undefined;
-  var_1 = common_scripts\utility::getstruct("sqMemoryDevice", "targetname");
+  var_1 = common_scripts\utility::getStruct("sqMemoryDevice", "targetname");
 
   if(isDefined(var_1)) {
     var_0 = spawn("script_model", var_1.origin);
@@ -4318,7 +4318,7 @@ stage15_logic() {
     maps\mp\zombies\_util::playfxontagnetwork(common_scripts\utility::getfx("sq_memory_machine_off"), var_0, "tag_origin");
   }
 
-  var_2 = common_scripts\utility::getstruct("sqComputer", "targetname");
+  var_2 = common_scripts\utility::getStruct("sqComputer", "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -4413,7 +4413,7 @@ runbussequence() {
 monitorplayersleavebusarena() {
   level endon("main_stage15_over");
   level endon("bus_round_complete");
-  var_0 = getent("sqBusFloorTeleport", "targetname");
+  var_0 = getEnt("sqBusFloorTeleport", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -4870,7 +4870,7 @@ playerteleporttobuszone(var_0) {
   var_0.used = 1;
   maps\mp\zombies\_teleport::teleport_players_through_chute([self], 0, 1);
   thread maps\mp\zombies\_teleport::reset_teleport_flag_after_time([self], 0.75);
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
   self setplayerangles(var_0.angles);
   self setclientomnvar("ui_zm_ee_bool2", 1);
   self.inbuszone = 1;
@@ -4914,7 +4914,7 @@ playerteleportback(var_0) {
   triggerfx(self.memorytunnelfx);
   maps\mp\zombies\_teleport::teleport_players_through_chute([self], 0, 1);
   thread maps\mp\zombies\_teleport::reset_teleport_flag_after_time([self], 0.75);
-  self setorigin(var_0.origin, 1);
+  self setOrigin(var_0.origin, 1);
   self setplayerangles(var_0.angles);
   self setclientomnvar("ui_zm_ee_bool2", 0);
   self.inbuszone = undefined;
@@ -4968,7 +4968,7 @@ carepackagedelayshowhudicon() {
 }
 
 init_song_sidequest() {
-  level.sq_song_ent = getent("sq_song", "targetname");
+  level.sq_song_ent = getEnt("sq_song", "targetname");
 
   if(!isDefined(level.sq_song_ent)) {
     level.sq_song_ent = spawn("script_model", (0, 0, 0));

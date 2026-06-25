@@ -43,10 +43,10 @@ function autoexec __init__sytem__() {
 
 function __init__() {
   level.var_564761a3 = spawnStruct();
-  level.var_564761a3.var_69299ec6 = getent("mdl_side_ee_gt_vine", "targetname");
+  level.var_564761a3.var_69299ec6 = getEnt("mdl_side_ee_gt_vine", "targetname");
   level.var_564761a3.var_978adea0 = getEntArray("mdl_good_thrasher_vines", "targetname");
   level.var_564761a3.var_11c98268 = struct::get("s_side_ee_gt_spore_pos", "targetname");
-  level.var_564761a3.var_ff07b157 = getent("mdl_side_ee_gt_sporeplant", "targetname");
+  level.var_564761a3.var_ff07b157 = getEnt("mdl_side_ee_gt_sporeplant", "targetname");
   level.var_564761a3.var_ff07b157.var_7117876c = level.var_564761a3.var_ff07b157.origin;
   level.var_564761a3.var_ff07b157.v_off_pos = level.var_564761a3.var_ff07b157.origin - vectorscale((0, 0, 1), 50);
   level.var_564761a3.var_ff07b157.var_baeb5712 = 1;
@@ -66,7 +66,7 @@ function __init__() {
 
 function main() {
   level thread function_a0e0b4c2();
-  mdl_goodthrasher_wall_decal = getent("mdl_goodthrasher_wall_decal", "targetname");
+  mdl_goodthrasher_wall_decal = getEnt("mdl_goodthrasher_wall_decal", "targetname");
   mdl_goodthrasher_wall_decal clientfield::set("do_fade_material", 0.5);
   var_199cfb62 = getEntArray("mdl_good_thrasher_wall", "targetname");
   var_c047302 = var_199cfb62[0];
@@ -96,7 +96,7 @@ function function_ad9a2050() {
   var_c047302 = var_199cfb62[0];
   if(isDefined(var_c047302)) {
     exploder::exploder("fxexp_506");
-    mdl_goodthrasher_wall_decal = getent("mdl_goodthrasher_wall_decal", "targetname");
+    mdl_goodthrasher_wall_decal = getEnt("mdl_goodthrasher_wall_decal", "targetname");
     var_c047302 clientfield::set("do_fade_material", 0);
     wait(0.25);
     mdl_goodthrasher_wall_decal clientfield::set("do_fade_material", 0);
@@ -166,11 +166,11 @@ function function_c8310977() {
   self endon("death");
   self notify("hash_1fb62748");
   if(self.origin !== self.var_7117876c) {
-    self moveto(self.var_7117876c, 1);
+    self moveTo(self.var_7117876c, 1);
     self waittill("movedone");
   }
   level.var_564761a3.var_480b39a3 clientfield::set("spore_grows", 3);
-  mdl_mushroom_clip = getent("mdl_mushroom_clip", "targetname");
+  mdl_mushroom_clip = getEnt("mdl_mushroom_clip", "targetname");
   mdl_mushroom_clip setCanDamage(1);
   mdl_mushroom_clip thread function_ecaf0cc6();
   while(true) {
@@ -218,7 +218,7 @@ function function_784ed421() {
   self notify("hash_101ca32e");
   self setCanDamage(0);
   if(self.origin !== self.v_off_pos) {
-    self moveto(self.v_off_pos, 1);
+    self moveTo(self.v_off_pos, 1);
     self waittill("movedone");
   }
   var_5cddf7a = level.var_564761a3.var_1cd02afb;
@@ -254,7 +254,7 @@ function function_4c6beece(var_f9f788a6, b_hero_weapon, e_attacker) {
   }
   s_org = level.var_564761a3.var_11c98268;
   self thread spore_cloud_fx(b_hero_weapon, s_org, var_f9f788a6);
-  playsoundatposition("zmb_spore_eject", self.origin);
+  playSoundAtPosition("zmb_spore_eject", self.origin);
   var_88c0f006 = self function_cc07e4ad(self.var_66bbb0c0, s_org);
   while(self.var_d7bb540a > 0 && (!isDefined(level.var_564761a3.var_1cd02afb) || !isalive(level.var_564761a3.var_1cd02afb))) {
     self.var_d7bb540a = self.var_d7bb540a - 1;

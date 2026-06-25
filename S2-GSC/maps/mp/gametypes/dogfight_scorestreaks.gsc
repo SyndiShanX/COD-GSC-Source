@@ -235,7 +235,7 @@ dogfight_flakrundamage(param_00, param_01) {
       var_0B = var_0B * var_0C;
       var_03 dodamage(var_0B, var_0A, self, undefined, "MOD_UNKNOWN", "killstreak_flak_gun_raids");
       if(1) {
-        var_03.occupied_player playrumbleonentity("artillery_rumble");
+        var_03.occupied_player playRumbleOnEntity("artillery_rumble");
         earthquake(0.7, 0.5, var_03.var_0116, 800, var_03.occupied_player);
       }
     }

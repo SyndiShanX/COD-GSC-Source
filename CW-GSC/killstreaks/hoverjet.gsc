@@ -71,13 +71,13 @@ function function_747544ed(var_6ecb961c, var_46cd15af, var_f3828812, var_2a587e8
   }
 
   var_ca2dc0 = output.var_9b8c05e - var_2a587e81;
-  var_ca2dc0 = vectornormalize((var_ca2dc0[0], var_ca2dc0[1], 0));
+  var_ca2dc0 = vectorNormalize((var_ca2dc0[0], var_ca2dc0[1], 0));
   start_node = helicopter::function_9d99f54c(output.var_9b8c05e, var_ca2dc0);
 
   if(isDefined(start_node.origin)) {
     output.entry_start = isDefined(getclosestpointonnavvolume(start_node.origin, "navvolume_big", 10000)) ? getclosestpointonnavvolume(start_node.origin, "navvolume_big", 10000) : start_node.origin;
     var_b096c883 = output.var_9b8c05e - output.entry_start;
-    var_b096c883 = vectornormalize((var_b096c883[0], var_b096c883[1], 0));
+    var_b096c883 = vectorNormalize((var_b096c883[0], var_b096c883[1], 0));
     output.var_25436c16 = (0, vectortoyaw(var_b096c883), 0);
     output.var_ced649a0 = output.var_9b8c05e + (0, 0, height) + vectorscale(var_b096c883, var_a8adc1bd * -1);
   } else {
@@ -97,7 +97,7 @@ function function_5398ca85(position, yaw, team, killstreak_id, killstreaktype) {
   bundle = killstreaks::get_script_bundle("hoverjet");
   mapcenter = isDefined(level.mapcenter) ? level.mapcenter : player.origin;
   var_da0bd6a0 = function_747544ed(yaw, team, 40, mapcenter);
-  jet = spawnvehicle(bundle.ksvehicle, var_da0bd6a0.entry_start, var_da0bd6a0.var_25436c16, "dynamic_spawn_ai");
+  jet = spawnVehicle(bundle.ksvehicle, var_da0bd6a0.entry_start, var_da0bd6a0.var_25436c16, "dynamic_spawn_ai");
   jet clientfield::set("scorestreakActive", 1);
   jet.var_ced649a0 = var_da0bd6a0.var_ced649a0;
   jet.var_9b8c05e = var_da0bd6a0.var_9b8c05e;
@@ -211,7 +211,7 @@ function function_3588c7d8(einflictor, eattacker, idamage, idflags, smeansofdeat
         missilevelocity = idamage getvelocity();
 
         if(lengthsquared(missilevelocity) > sqr(50)) {
-          effectdir = vectornormalize(missilevelocity);
+          effectdir = vectorNormalize(missilevelocity);
           playFX(bundle.var_888a5ff7, shitloc, effectdir, undefined, undefined, self.team);
         }
       }
@@ -372,8 +372,8 @@ function function_58b50fe4(jet) {
   self val::set(#"hash_8110844715cf5ff", "freezecontrols");
   mover = spawn("script_model", jet.origin);
   mover.angles = jet.angles;
-  jet linkto(mover);
-  mover moveto(jet.var_ced649a0, 3, 0, 1);
+  jet linkTo(mover);
+  mover moveTo(jet.var_ced649a0, 3, 0, 1);
   jet playSound(#"hash_6f66776e9247eccc");
   mover waittill(#"movedone");
   mover delete();
@@ -404,7 +404,7 @@ function function_7725894b() {
   mover = spawn("script_model", self.origin);
   self.mover = mover;
   mover.angles = self.angles;
-  self linkto(mover);
+  self linkTo(mover);
 
   if(sessionmodeiswarzonegame()) {
     var_74e37e01 = getheliheightlockheight(mover.origin);
@@ -417,7 +417,7 @@ function function_7725894b() {
   var_b85efcef = mover.origin + (0, 0, deltaheight);
   ascendspeed = deltaheight / ascendtime;
   mover rotatepitch(mover.angles[0] * -1, ascendtime / 2, 0, 1);
-  mover moveto(var_b85efcef, ascendtime, 0.5, 0.5);
+  mover moveTo(var_b85efcef, ascendtime, 0.5, 0.5);
   mover waittill(#"movedone", #"death");
 
   if(!isDefined(self)) {
@@ -455,7 +455,7 @@ function function_7725894b() {
     }
 
     curspeed = lerpfloat(0, 7040, var_471b7e06);
-    movedelta = vectornormalize(forward) * curspeed * deltatime;
+    movedelta = vectorNormalize(forward) * curspeed * deltatime;
     mover.origin += movedelta;
     newpitch = mover.angles[0];
     newpitch -= 6 * deltatime;

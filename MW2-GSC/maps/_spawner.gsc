@@ -376,7 +376,7 @@ trigger_spawner_reinforcement(trigger) {
     if(!isDefined(spawner.target)) {
       continue;
     }
-    reinforcement_spawner = getent(spawner.target, "targetname");
+    reinforcement_spawner = getEnt(spawner.target, "targetname");
     if(!isDefined(reinforcement_spawner)) {
       if(!isDefined(spawner.script_linkto)) {
         continue;
@@ -486,7 +486,7 @@ trigger_reinforcement_spawn_guys() {
 
 trigger_reinforcement_get_reinforcement_spawner() {
   if(isDefined(self.target)) {
-    reinforcement = getent(self.target, "targetname");
+    reinforcement = getEnt(self.target, "targetname");
     if(isDefined(reinforcement) && isSpawner(reinforcement)) {
       return reinforcement;
     }
@@ -1582,8 +1582,8 @@ set_goal_volume() {
   }
   if(isDefined(volume.target)) {
     node = getnode(volume.target, "targetname");
-    ent = getent(volume.target, "targetname");
-    struct = getstruct(volume.target, "targetname");
+    ent = getEnt(volume.target, "targetname");
+    struct = getStruct(volume.target, "targetname");
     pos = undefined;
 
     if(isDefined(node)) {
@@ -1800,7 +1800,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
     temp = [[get_target_func]](node.target);
 
     if(temp.size == 1) {
-      vec = vectornormalize(temp[0].origin - node.origin);
+      vec = vectorNormalize(temp[0].origin - node.origin);
     } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
@@ -1809,7 +1809,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
 
   vec2 = [];
   foreach(player in level.players) {
-    vec2[vec2.size] = vectornormalize((player.origin - self.origin));
+    vec2[vec2.size] = vectorNormalize((player.origin - self.origin));
   }
 
   foreach(value in vec2) {
@@ -2589,7 +2589,7 @@ friendly_mgTurret(trigger) {
     error("No mg42 for friendly_mg42 trigger's node, origin: " + node.origin);
   }
 
-  mg42 = getent(node.target, "targetname");
+  mg42 = getEnt(node.target, "targetname");
   mg42 setmode("auto_ai");
   mg42 cleartargetentity();
 
@@ -2632,7 +2632,7 @@ friendly_mg42_death_notify(guy, mg42) {
 friendly_mg42_wait_for_use(mg42) {
   mg42 endon("friendly_finished_using_mg42");
   self.useable = true;
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   self setHintString(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
@@ -2722,7 +2722,7 @@ friendly_mg42_think(mg42, node) {
   self useturret(mg42);
 
   if(isDefined(mg42.target)) {
-    stoptrigger = getent(mg42.target, "targetname");
+    stoptrigger = getEnt(mg42.target, "targetname");
     if(isDefined(stoptrigger)) {
       stoptrigger thread friendly_mg42_endtrigger(mg42, self);
     }
@@ -2901,7 +2901,7 @@ friendlySpawnWave() {
     if(!isDefined(startPoint.target)) {
       continue;
     }
-    trigger = getent(startPoint.target, "targetname");
+    trigger = getEnt(startPoint.target, "targetname");
     trigger thread spawnWaveStopTrigger(self);
   }
 }
@@ -3037,7 +3037,7 @@ flood_and_secure_spawner(instantRespawn) {
     possibleSpawners[i].targetname = targetname;
     newTarget = target;
     if(isDefined(possibleSpawners[i].target)) {
-      targetEnt = getent(possibleSpawners[i].target, "targetname");
+      targetEnt = getEnt(possibleSpawners[i].target, "targetname");
       if(!isDefined(targetEnt) || !issubstr(targetEnt.classname, "actor")) {
         newTarget = possibleSpawners[i].target;
       }
@@ -3309,7 +3309,7 @@ flood_and_secure_spawn_goal() {
 }
 
 furniturePushSound() {
-  org = getent(self.target, "targetname").origin;
+  org = getEnt(self.target, "targetname").origin;
   play_sound_in_space("furniture_slide", org);
   wait(0.9);
   if(isDefined(level.whisper)) {
@@ -3582,7 +3582,7 @@ spawnWaveStopTrigger(startTrigger) {
 }
 
 friendlySpawnWave_triggerThink(startTrigger) {
-  org = getent(self.target, "targetname");
+  org = getEnt(self.target, "targetname");
 
   for(;;) {
     self waittill("trigger");
@@ -3710,7 +3710,7 @@ camper_trigger_think(trigger) {
   nodes = [];
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
-    ai = getent(token, "script_linkname");
+    ai = getEnt(token, "script_linkname");
     if(isDefined(ai)) {
       spawners = add_to_array(spawners, ai);
       continue;
@@ -3858,7 +3858,7 @@ trigger_requires_player(trigger) {
 }
 
 two_stage_spawner_think(trigger) {
-  trigger_target = getent(trigger.target, "targetname");
+  trigger_target = getEnt(trigger.target, "targetname");
   assertEx(isDefined(trigger_target), "Trigger with targetname two_stage_spawner that doesnt target anything.");
   assertEx(issubstr(trigger_target.classname, "trigger"), "Triggers with targetname two_stage_spawner must target a trigger");
   assertEx(isDefined(trigger_target.target), "The second trigger of a two_stage_spawner must target at least one spawner");
@@ -3920,7 +3920,7 @@ flood_spawner_think(trigger) {
     }
 
     soldier thread reincrement_count_if_deleted(self);
-    soldier thread expand_goalradius(trigger);
+    soldier thread expand_goalRadius(trigger);
 
     soldier waittill("death", attacker);
 
@@ -4042,7 +4042,7 @@ pyramid_spawn(trigger) {
     spawner.spawn = soldier;
 
     soldier thread reincrement_count_if_deleted(self);
-    soldier thread expand_goalradius(trigger);
+    soldier thread expand_goalRadius(trigger);
     thread pyramid_death_report(spawner);
   }
 
@@ -4089,7 +4089,7 @@ pyramid_spawn(trigger) {
 
       assertEx(isDefined(spawner), "Theoretically impossible.");
       soldier thread reincrement_count_if_deleted(self);
-      soldier thread expand_goalradius(trigger);
+      soldier thread expand_goalRadius(trigger);
       spawner.spawn = soldier;
       thread pyramid_death_report(spawner);
 
@@ -4110,7 +4110,7 @@ pyramid_spawner_reports_death(parent) {
   }
 }
 
-expand_goalradius(trigger) {
+expand_goalRadius(trigger) {
   if(isDefined(self.script_forcegoal)) {
     return;
   }
@@ -4201,7 +4201,7 @@ random_spawn(trigger) {
   if(isDefined(spawner.script_linkto)) {
     links = strTok(spawner.script_linkto, " ");
     for(i = 0; i < links.size; i++) {
-      spawners[spawners.size] = getent(links[i], "script_linkname");
+      spawners[spawners.size] = getEnt(links[i], "script_linkname");
     }
   }
 

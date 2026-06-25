@@ -236,7 +236,7 @@ function function_5145edd2(helicopter, pilot, tag, anim, positionoffset) {
   pilot endon(#"death");
   helicopter endon(#"death", #"crashing");
   pilot useanimtree("all_player");
-  pilot linkto(helicopter, tag);
+  pilot linkTo(helicopter, tag);
 
   if(isDefined(positionoffset)) {
     origin = helicopter gettagorigin(tag);
@@ -282,7 +282,7 @@ function function_711c140b() {
 }
 
 function spawn_helicopter(owner, origin, angles, vehicledef, target_offset, killstreakbundle, killstreak_id) {
-  chopper = spawnvehicle(vehicledef, origin, angles);
+  chopper = spawnVehicle(vehicledef, origin, angles);
   chopper setowner(owner);
   chopper.owner = owner;
   chopper clientfield::set("enemyvehicle", 1);
@@ -445,7 +445,7 @@ function function_9d99f54c(dest, var_3f25aa93, var_aea79ccc = 1) {
 
     foreach(node in level.heli_startnodes) {
       if(!isDefined(airsupport::crossesnoflyzone(node.origin, dest))) {
-        var_d9273cbc = vectornormalize(node.origin - dest);
+        var_d9273cbc = vectorNormalize(node.origin - dest);
         dot = var_d9273cbc[0] * var_3f25aa93[0] + var_d9273cbc[1] * var_3f25aa93[1];
 
         if(dot > best_dot) {
@@ -459,7 +459,7 @@ function function_9d99f54c(dest, var_3f25aa93, var_aea79ccc = 1) {
     best_node = undefined;
 
     foreach(node in level.heli_startnodes) {
-      var_d9273cbc = vectornormalize(node.origin - dest);
+      var_d9273cbc = vectorNormalize(node.origin - dest);
       dot = var_d9273cbc[0] * var_3f25aa93[0] + var_d9273cbc[1] * var_3f25aa93[1];
 
       if(dot > best_dot) {
@@ -517,7 +517,7 @@ function heli_think(owner, startnode, heli_team, protectlocation, killstreakbund
   chopper thread killstreaks::player_killstreak_threat_tracking(chopper.hardpointtype, 0.866025);
   chopper.requireddeathcount = owner.deathcount;
   minigun_snd_ent = spawn("script_origin", chopper gettagorigin("tag_flash"));
-  minigun_snd_ent linkto(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
+  minigun_snd_ent linkTo(chopper, "tag_flash", (0, 0, 0), (0, 0, 0));
   chopper.minigun_snd_ent = minigun_snd_ent;
   minigun_snd_ent thread autostopsound();
   chopper thread heli_existance();
@@ -584,7 +584,7 @@ function heli_existance() {
 function create_flare_ent(offset) {
   self.flare_ent = spawn("script_model", self gettagorigin("tag_origin"));
   self.flare_ent setModel(#"tag_origin");
-  self.flare_ent linkto(self, "tag_origin", offset);
+  self.flare_ent linkTo(self, "tag_origin", offset);
 }
 
 function heli_missile_regen() {
@@ -2648,9 +2648,9 @@ function turret_target_check(turrettarget, attackangle) {
 }
 
 function target_cone_check(target, conecosine) {
-  heli2target_normal = vectornormalize(target.origin - self.origin);
+  heli2target_normal = vectorNormalize(target.origin - self.origin);
   heli2forward = anglesToForward(self.angles);
-  heli2forward_normal = vectornormalize(heli2forward);
+  heli2forward_normal = vectorNormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
 
   if(heli_dot_target >= conecosine) {

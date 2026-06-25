@@ -146,7 +146,7 @@ _id_70F1(var_0, var_1) {
   if(istrue(var_1)) {
     self._id_1772 = spawn("script_origin", var_0.origin);
     self._id_1772.angles = var_0.angles;
-    self linkto(self._id_1772);
+    self linkTo(self._id_1772);
   }
 }
 
@@ -252,7 +252,7 @@ _id_5C63(var_0) {
     var_1 = self.origin[0] + randomintrange(-5, 5);
     var_2 = self.origin[1] + randomintrange(-5, 5);
     var_3 = self.origin[2] - 15;
-    self moveto((var_1, var_2, var_3), 1);
+    self moveTo((var_1, var_2, var_3), 1);
     wait 1;
   }
 }
@@ -324,7 +324,7 @@ _id_CA0E(var_0) {
     var_0.angles = (0, 0, 0);
   }
 
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
 
   if(istrue(var_2._id_1414)) {
     return;
@@ -365,10 +365,10 @@ _id_12F6(var_0) {
 
 _id_140D(var_0, var_1) {
   var_0 makeuseable();
-  var_0 sethintstring(&"CP_STRIKE/TURN_ON_ALARM");
+  var_0 setHintString(&"CP_STRIKE/TURN_ON_ALARM");
   var_0 _meth_84D7("j_handle");
   var_0 _meth_84D4(128);
-  var_0 setcursorhint("HINT_BUTTON");
+  var_0 setCursorHint("HINT_BUTTON");
   var_0 _meth_84DA("icon_electrical_box");
   var_0 sethintdisplayfov(120);
   var_0 _meth_84D9("hide");
@@ -484,7 +484,7 @@ _id_81C5(var_0, var_1) {
     var_1 = 1;
   }
 
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   _id_140D(var_2, var_1);
   var_0._id_140C = var_2;
   var_2 scripts\engine\utility::_id_5473("switch_on");
@@ -564,23 +564,23 @@ _id_38C1() {
 }
 
 _id_1412(var_0) {
-  var_1 = getent(var_0.target, "targetname");
-  var_2 = getent(var_1.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   var_1 setModel("ee_light_mounted_exterior_industrial_caged_02");
   stopFXOnTag(level._effect["alarm_light_flash"], var_1, "tag_origin");
   var_2 stoploopsound();
   self._id_1414 = 0;
-  self sethintstring(&"CP_STRIKE/TURN_ON_ALARM");
+  self setHintString(&"CP_STRIKE/TURN_ON_ALARM");
   var_0 notify("turned_off");
 }
 
 _id_1413(var_0) {
-  var_1 = getent(var_0.target, "targetname");
-  var_2 = getent(var_1.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   var_1 setModel("ee_light_mounted_exterior_industrial_caged_02_on");
   playFXOnTag(level._effect["alarm_light_flash"], var_1, "tag_origin");
   var_2 playLoopSound("milbase_alarm");
-  var_0 sethintstring(&"CP_STRIKE/TURN_OFF_ALARM");
+  var_0 setHintString(&"CP_STRIKE/TURN_OFF_ALARM");
   var_0._id_1414 = 1;
   level notify("alarm_on");
   level notify("weapons_free");

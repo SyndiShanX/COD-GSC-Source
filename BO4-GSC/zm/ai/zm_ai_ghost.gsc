@@ -91,7 +91,7 @@ function_fe6a9772() {
   self.zombie_think_done = 1;
   self setavoidancemask("avoid none");
   self collidewithactors(0);
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self.var_ccefa6dd = 1;
 }
 

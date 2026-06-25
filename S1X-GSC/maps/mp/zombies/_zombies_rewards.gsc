@@ -426,11 +426,11 @@ penalty_powergenerators() {
 }
 
 poweroffpenaltyhint() {
-  self.trigger setcursorhint("HINT_NOICON");
-  self.trigger sethintstring(&"ZOMBIE_CIVILIANS_POWER_OFF_TRIGGER");
+  self.trigger setCursorHint("HINT_NOICON");
+  self.trigger setHintString(&"ZOMBIE_CIVILIANS_POWER_OFF_TRIGGER");
   level waittill("zombie_power_penalty_end");
-  self.trigger setcursorhint("HINT_NOICON");
-  self.trigger sethintstring(&"ZOMBIES_POWER_ON");
+  self.trigger setCursorHint("HINT_NOICON");
+  self.trigger setHintString(&"ZOMBIES_POWER_ON");
 }
 
 penalty_magicbox() {

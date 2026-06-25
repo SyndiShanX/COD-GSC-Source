@@ -173,7 +173,7 @@ createbombsquadmodel(var_0, var_1, var_2) {
   }
   var_3 thread bombsquadvisibilityupdater(var_2);
   var_3 setModel(var_0);
-  var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   var_3 setcontents(0);
   self waittill("death");
 
@@ -1283,7 +1283,7 @@ watchhitbymissile() {
     var_12 = var_11 / 1000.0;
     self.killcament = spawn("script_model", var_1.origin);
     self.killcament.angles = var_1.angles;
-    self.killcament linkto(var_1);
+    self.killcament linkTo(var_1);
     self.killcament setscriptmoverkillcam("rocket_corpse");
     self.killcament setcontents(0);
     self dodamage(1000, self.origin, var_0, var_1);
@@ -1291,8 +1291,8 @@ watchhitbymissile() {
     self.body.origin = var_1.origin;
     self.body.angles = var_1.angles;
     self.body setcorpsefalling(0);
-    self.body enablelinkto();
-    self.body linkto(var_1);
+    self.body enablelinkTo();
+    self.body linkTo(var_1);
     self.body setcontents(0);
 
     if(!isDefined(self.switching_teams)) {
@@ -1300,16 +1300,16 @@ watchhitbymissile() {
     }
 
     self playerhide();
-    var_13 = vectornormalize(anglestoup(var_1.angles));
-    var_14 = vectornormalize(anglesToForward(var_1.angles));
+    var_13 = vectorNormalize(anglestoup(var_1.angles));
+    var_14 = vectorNormalize(anglesToForward(var_1.angles));
     var_15 = var_14 * var_9 + var_13 * var_10;
     var_16 = var_1.origin + var_15;
     var_17 = spawn("script_model", var_16);
     var_17 setModel("tag_origin");
     var_17.angles = vectortoangles(var_1.origin - var_17.origin);
-    var_17 linkto(var_1);
+    var_17 linkTo(var_1);
     var_17 setcontents(0);
-    self cameralinkto(var_17, "tag_origin");
+    self cameralinkTo(var_17, "tag_origin");
 
     if(var_8 > var_12) {
       var_8 = var_12;
@@ -1325,7 +1325,7 @@ watchhitbymissile() {
     self.body unlink();
     self.body setcorpsefalling(1);
     self.body startragdoll();
-    var_17 linkto(self.body);
+    var_17 linkTo(self.body);
     self.isrocketcorpse = undefined;
     self waittill("death_delay_finished");
     self cameraunlink();
@@ -1416,7 +1416,7 @@ flashbangplayer(var_0, var_1, var_2) {
   }
 
   var_13 = var_1 - var_12;
-  var_13 = vectornormalize(var_13);
+  var_13 = vectorNormalize(var_13);
   var_14 = 0.5 * (1.0 + vectordot(var_11, var_13));
   var_0 notify("flashbang", var_1, var_9, var_14, var_2);
 }
@@ -1671,21 +1671,21 @@ equipmentenableuse(var_0) {
   self endon("disconnect");
   self endon("equipmentWatchUse");
   self endon("change_owner");
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
 
   if(self.weaponname == "h1_c4_mp") {
-    self.trigger sethintstring(&"MP_PICKUP_C4");
+    self.trigger setHintString(&"MP_PICKUP_C4");
   } else if(self.weaponname == "h1_claymore_mp") {
-    self.trigger sethintstring(&"MP_PICKUP_CLAYMORE");
+    self.trigger setHintString(&"MP_PICKUP_CLAYMORE");
   } else if(self.weaponname == "bouncingbetty_mp") {
-    self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
+    self.trigger setHintString(&"MP_PICKUP_BOUNCING_BETTY");
   }
 
   self.trigger maps\mp\_utility::setselfusable(var_0);
 }
 
 equipmentdisableuse(var_0) {
-  self.trigger sethintstring("");
+  self.trigger setHintString("");
   self.trigger maps\mp\_utility::setselfunusuable();
 }
 
@@ -1717,7 +1717,7 @@ equipmentwatchuse(var_0, var_1) {
   self endon("disconnect");
   self endon("death");
   self endon("change_owner");
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
   equipmentenableuse(var_0);
 
   if(isDefined(var_1) && var_1) {
@@ -1834,7 +1834,7 @@ shouldaffectclaymore(var_0) {
     return 0;
   }
 
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_5 = vectordot(var_2, var_3);
   return var_5 > level.claymoredetectiondot;
 }
@@ -2333,7 +2333,7 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
     return 1;
   }
 
-  var_6 = vectornormalize(var_5);
+  var_6 = vectorNormalize(var_5);
   var_4 = var_0 + (var_6[0] * var_2, var_6[1] * var_2, var_6[2] * var_2);
   var_7 = bulletTrace(var_4, var_1, 0, var_3);
 
@@ -2865,7 +2865,7 @@ spawnmine(var_0, var_1, var_2, var_3, var_4) {
   var_7 = self getlinkedparent();
 
   if(isDefined(var_7)) {
-    var_6 linkto(var_7);
+    var_6 linkTo(var_7);
   }
 
   var_6 makeexplosivetargetablebyai(!var_4);
@@ -3011,8 +3011,8 @@ minebounce() {
   }
 
   var_0 = self.origin + (0, 0, 64);
-  self moveto(var_0, 0.7, 0, 0.65);
-  self.killcament moveto(var_0 + self.killcamoffset, 0.7, 0, 0.65);
+  self moveTo(var_0, 0.7, 0, 0.65);
+  self.killcament moveTo(var_0 + self.killcamoffset, 0.7, 0, 0.65);
   self rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   thread playspinnerfx();
   wait 0.65;
@@ -3280,7 +3280,7 @@ minethrown(var_0, var_1) {
     var_2["normal"] = var_2["normal"] * -1;
   }
 
-  var_4 = vectornormalize(var_2["normal"]);
+  var_4 = vectorNormalize(var_2["normal"]);
   var_5 = vectortoangles(var_4);
   var_5 = var_5 + (90, 0, 0);
   var_6 = spawnmine(var_3, var_0, undefined, var_5, var_1);

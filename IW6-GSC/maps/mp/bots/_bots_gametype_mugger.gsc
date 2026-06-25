@@ -227,7 +227,7 @@ mugger_pick_up_tag(tag) {
     nearest_node_to_tag = tag.nearest_node;
     if(isDefined(nearest_node_to_tag)) {
       dir_to_nearest_node = nearest_node_to_tag.origin - tag_origin;
-      tag_origin = tag_origin + (VectorNormalize(dir_to_nearest_node) * Length(dir_to_nearest_node) * 0.5);
+      tag_origin = tag_origin + (vectorNormalize(dir_to_nearest_node) * Length(dir_to_nearest_node) * 0.5);
     }
   }
 

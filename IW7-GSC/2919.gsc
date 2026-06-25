@@ -105,7 +105,7 @@ func_DBC3(var_0, var_1, var_2, var_3, var_4) {
   var_7 = vectordot(var_3, var_4);
   var_8 = (var_5, var_6, 0);
   var_9 = length(var_8);
-  var_10 = vectornormalize(var_8);
+  var_10 = vectorNormalize(var_8);
   var_9 = _pow(min(var_9 / 63360, 1.0), 0.5);
   var_11 = var_9 * var_10[1] * (self.var_DBC1.width - var_0.var_DBC2.width * 2.0) / 2.0;
   var_12 = var_9 * var_10[0] * -1.0 * (self.var_DBC1.height - var_0.var_DBC2.height * 2.0) / 2.0;
@@ -132,7 +132,7 @@ func_DBC3(var_0, var_1, var_2, var_3, var_4) {
     var_16 = vectordot(var_15, var_1);
     var_17 = vectordot(var_15, var_3);
     var_18 = vectordot(var_15, var_2);
-    var_19 = vectornormalize(var_1 * var_16 + var_1 * var_17 + var_2 * var_18);
+    var_19 = vectorNormalize(var_1 * var_16 + var_1 * var_17 + var_2 * var_18);
     var_5 = vectordot(var_1, var_19);
     var_6 = vectordot(var_2, var_19);
     var_0.var_DBC2.rotation = acos(var_5) * scripts\engine\utility::sign(var_6);
@@ -144,7 +144,7 @@ func_DBC4(var_0, var_1, var_2, var_3, var_4) {
   var_6 = vectordot(var_1, var_4);
 
   if(var_6 > 0.0) {
-    var_4 = vectornormalize(var_4);
+    var_4 = vectorNormalize(var_4);
   }
 
   var_7 = vectordot(var_2, var_4);
@@ -152,7 +152,7 @@ func_DBC4(var_0, var_1, var_2, var_3, var_4) {
   var_9 = (var_7, var_8, 0);
 
   if(var_6 <= 0.0) {
-    var_9 = vectornormalize(var_9);
+    var_9 = vectorNormalize(var_9);
   }
 
   var_10 = var_9[0] * (self.var_DBC1.width - var_0.var_DBC2.width * 2.0) / 2.0;
@@ -171,7 +171,7 @@ func_DBC4(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(var_6 <= 0.0) {
-    var_0.var_DBC2.alpha = clamp(1.0 + vectordot(var_1, vectornormalize(var_4)), 0.0, 1.0);
+    var_0.var_DBC2.alpha = clamp(1.0 + vectordot(var_1, vectorNormalize(var_4)), 0.0, 1.0);
   }
 
   if(scripts\engine\utility::is_true(var_0.var_DBC2.var_EB9C)) {
@@ -186,7 +186,7 @@ func_DBC4(var_0, var_1, var_2, var_3, var_4) {
     var_15 = vectordot(var_14, var_1);
     var_16 = vectordot(var_14, var_3);
     var_17 = vectordot(var_14, var_2);
-    var_18 = vectornormalize(var_3 * var_15 + var_3 * var_16 + var_2 * var_17);
+    var_18 = vectorNormalize(var_3 * var_15 + var_3 * var_16 + var_2 * var_17);
     var_6 = vectordot(var_3, var_18);
     var_7 = vectordot(var_2, var_18);
     var_0.var_DBC2.rotation = acos(clamp(var_6, -1.0, 1.0)) * scripts\engine\utility::sign(var_7);

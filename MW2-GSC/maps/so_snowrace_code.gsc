@@ -59,10 +59,10 @@ init_snow_race(skipDialog) {
   }
 
   level._effect["extraction_smoke"] = loadfx("smoke/signal_smoke_green");
-  finish_line_smoke = getent("finish_line_smoke", "script_noteworthy");
+  finish_line_smoke = getEnt("finish_line_smoke", "script_noteworthy");
   playFX(getfx("extraction_smoke"), finish_line_smoke.origin);
 
-  finish_line_origin = getent("finish_line_origin", "targetname");
+  finish_line_origin = getEnt("finish_line_origin", "targetname");
   assert(isDefined(level.objective_desc));
   objective_add(1, "current", level.objective_desc, finish_line_origin.origin);
   objective_setpointertextoverride(1, &"SO_SNOWRACE1_CLIFFHANGER_FINISHLINE");
@@ -73,7 +73,7 @@ init_snow_race(skipDialog) {
 
 move_objective(finish_line_origin) {
   assert(isDefined(self.target));
-  originEnt = getent(self.target, "targetname");
+  originEnt = getEnt(self.target, "targetname");
   assert(isDefined(originEnt));
 
   self waittill("trigger");
@@ -320,7 +320,7 @@ speed_balance() {
   assert(isDefined(level.player2));
   assert(isDefined(level.player2.snowmobile));
 
-  level.speed_balance_location = getent("speed_balance_origin", "targetname");
+  level.speed_balance_location = getEnt("speed_balance_origin", "targetname");
   assert(isDefined(level.speed_balance_location));
   level.speed_balance_location = level.speed_balance_location.origin;
 
@@ -361,7 +361,7 @@ speed_balance() {
 
 speed_balance_trigger() {
   assert(isDefined(self.target));
-  org = getent(self.target, "targetname");
+  org = getEnt(self.target, "targetname");
   assert(isDefined(org));
 
   self waittill("trigger");
@@ -434,7 +434,7 @@ put_player_back_on_snowmobile(vehicle) {
 
 player_reset_position_tracking() {
   assert(isDefined(self.target));
-  ent = getent(self.target, "targetname");
+  ent = getEnt(self.target, "targetname");
   assert(isDefined(ent));
 
   for(;;) {
@@ -460,7 +460,7 @@ player_reset_position_tracking() {
 
 init_slope_trees() {
   slope_trees = getEntArray("slope_tree", "targetname");
-  top_of_hill = getstruct("top_of_hill", "targetname");
+  top_of_hill = getStruct("top_of_hill", "targetname");
 
   slope_trees = get_array_of_closest(top_of_hill.origin, slope_trees);
 

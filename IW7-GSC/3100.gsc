@@ -211,7 +211,7 @@ func_4CF9(var_0, var_1) {
   var_2 = scripts\engine\utility::spawn_tag_origin();
   var_2.origin = var_0;
   var_2.angles = self.angles;
-  var_2 linkto(self, "j_mainroot_ship");
+  var_2 linkTo(self, "j_mainroot_ship");
   playFXOnTag(scripts\engine\utility::getfx("fighter_spaceship_damage_med_linger"), var_2, "tag_origin");
   func_0BDC::func_13675(randomfloatrange(2, 4));
 
@@ -289,14 +289,14 @@ death_monitor() {
   var_10 = spawn("script_model", self.origin);
   var_10.angles = self.angles;
   var_10 glinton(#animtree);
-  var_10 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_10 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_10 setModel(self.model);
   var_11 = self.script_team;
 
   if(var_9) {
     func_56FF(var_10.origin, 5000, 39000, 0.24, 0.7);
     _playworldsound("jackal_deathspin_by_plr_init", var_10.origin);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
   }
 
   if(func_FF6C(var_6, var_2, var_5)) {
@@ -355,7 +355,7 @@ death_monitor() {
       _playworldsound("jackal_death_by_plr", var_20);
     }
 
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 
   if(!isDefined(self.var_C045)) {
@@ -596,7 +596,7 @@ func_6174(var_0, var_1, var_2) {
   var_9 = 3;
   var_10 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
   self.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_10);
-  self linkto(var_10);
+  self linkTo(var_10);
 
   for(;;) {
     wait 0.05;
@@ -630,7 +630,7 @@ func_6174(var_0, var_1, var_2) {
 func_7D20(var_0) {
   var_1 = scripts\sp\math::func_6A8E(4, 13, var_0);
   var_2 = (randomfloatrange(0.1, 1), randomfloatrange(0.1, 1), randomfloatrange(0.1, 1));
-  return vectornormalize(var_2) * var_1;
+  return vectorNormalize(var_2) * var_1;
 }
 
 func_6175(var_0) {
@@ -685,7 +685,7 @@ func_D0DB(var_0) {
     playFXOnTag(scripts\engine\utility::getfx("jackal_debris_impact"), level.player func_8473(), "j_mainroot_ship");
   }
 
-  level.player playrumbleonentity("steady_rumble");
+  level.player playRumbleOnEntity("steady_rumble");
   earthquake(0.33, var_2, level.player.origin, 5000);
   _playworldsound(var_1, var_0);
   wait(var_2);
@@ -697,7 +697,7 @@ func_A1DA() {
   var_0 = scripts\engine\utility::getStructArray("jackal_death_node", "targetname");
   func_0BDC::func_19AE("dont_shoot");
   self.var_4E15 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
-  self linkto(self.var_4E15);
+  self linkTo(self.var_4E15);
   thread func_700C();
   thread func_A340(180);
   func_BC89(var_0);
@@ -710,7 +710,7 @@ func_A340(var_0) {
   var_1 = randomfloatrange(0.5, 1.5);
 
   for(;;) {
-    self.var_4E15 rotateyaw(90, 1);
+    self.var_4E15 rotateYaw(90, 1);
     wait(var_1);
 
     if(var_1 - 0.1 > 0.5) {
@@ -722,7 +722,7 @@ func_A340(var_0) {
 func_BC89(var_0) {
   var_1 = func_7A56(var_0);
   var_2 = randomfloatrange(1.5, 3);
-  self.var_4E15 moveto(var_1.origin, var_2, var_2 * 0.9);
+  self.var_4E15 moveTo(var_1.origin, var_2, var_2 * 0.9);
   wait(var_2);
   self notify("reached_flyoff_position");
   var_1.inuse = undefined;

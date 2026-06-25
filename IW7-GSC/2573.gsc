@@ -76,7 +76,7 @@ func_1815(var_0, var_1) {
 func_370C(var_0) {
   var_1 = var_0.origin - self.origin;
   var_2 = length(var_1);
-  var_1 = vectornormalize(var_1);
+  var_1 = vectorNormalize(var_1);
   var_3 = var_1 * (var_2 + 10000.0);
   var_3 = var_3 + self.origin;
   var_4 = _getclosestpointonnavmesh3d(var_3);
@@ -229,7 +229,7 @@ func_3714(var_0) {
 
   var_5 = _getclosestpointonnavmesh3d(var_0.origin, self);
   var_6 = self.origin - var_5;
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_8 = vectortoangles(var_6);
   var_9 = 0;
 
@@ -260,7 +260,7 @@ func_78C3(var_0, var_1) {
       var_7 = var_6 func_8579();
 
       if(distancesquared(var_7, var_0) < var_3) {
-        var_0 = var_0 + vectornormalize(var_0 - var_7) * var_1;
+        var_0 = var_0 + vectorNormalize(var_0 - var_7) * var_1;
         continue;
       }
     }
@@ -303,8 +303,8 @@ func_10E63(var_0) {
   if(self._blackboard.var_2CCD) {
     return;
   }
-  var_1 = vectornormalize(var_0.spaceship_vel);
-  var_2 = vectornormalize(self.spaceship_vel);
+  var_1 = vectorNormalize(var_0.spaceship_vel);
+  var_2 = vectorNormalize(self.spaceship_vel);
   var_3 = vectordot(var_1, var_2);
   var_4 = var_0.origin - self.origin;
 
@@ -337,8 +337,8 @@ func_E7B7(var_0) {
     return;
   }
 
-  var_3 = vectornormalize(var_1);
-  var_4 = vectornormalize(self.spaceship_vel);
+  var_3 = vectorNormalize(var_1);
+  var_4 = vectorNormalize(self.spaceship_vel);
   var_5 = vectordot(var_3, var_4);
 
   if(var_5 > 0) {
@@ -365,7 +365,7 @@ func_E7B7(var_0) {
 func_10029(var_0, var_1) {
   var_2 = func_13D95(self.enemy);
   var_3 = anglesToForward(self.enemy.angles);
-  var_4 = vectornormalize(self.origin - self.enemy.origin);
+  var_4 = vectorNormalize(self.origin - self.enemy.origin);
   var_5 = vectordot(var_3, var_4);
   var_6 = func_9D6A(var_0);
 
@@ -417,7 +417,7 @@ func_1003E(var_0, var_1) {
   }
 
   var_2 = anglesToForward(self.enemy.angles);
-  var_3 = vectornormalize(self.enemy.origin - self.origin);
+  var_3 = vectorNormalize(self.enemy.origin - self.origin);
 
   if(vectordot(var_2, var_3) < 0) {
     return anim.failure;
@@ -610,7 +610,7 @@ func_B4DB(var_0) {
   var_4 = distancesquared(self.origin, self.enemy.origin) > 49000000;
 
   if(var_3 && var_4) {
-    var_5 = vectornormalize(self.origin - self.enemy.origin);
+    var_5 = vectorNormalize(self.origin - self.enemy.origin);
 
     if(var_2) {
       if(vectordot(anglesToForward(self.enemy.angles), self.origin - self.enemy.origin) < 0.34202) {

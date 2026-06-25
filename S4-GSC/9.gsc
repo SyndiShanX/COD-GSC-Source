@@ -991,10 +991,10 @@ _id_BD66(var_0) {
 }
 
 _id_F4F4() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(!isDefined(var_0)) {
-    var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
   }
 
   var_1 = _func_00B2(self.target, "targetname");
@@ -1027,10 +1027,10 @@ _id_F4F4() {
   }
 
   if(isDefined(var_0.target)) {
-    var_3 = getent(var_0.target, "targetname");
+    var_3 = getEnt(var_0.target, "targetname");
 
     if(!isDefined(var_3)) {
-      var_3 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     }
 
     _id_2EDA(var_0.origin, var_1.origin, var_3.origin);
@@ -1099,10 +1099,10 @@ _id_C059(var_0, var_1, var_2, var_3) {
 }
 
 _id_BD86(var_0) {
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   }
 
   self._id_109A0 = spawnStruct();
@@ -1114,14 +1114,14 @@ _id_BD86(var_0) {
   while(isDefined(var_3)) {
     self._id_109A0._id_A576[var_4] = var_3.origin - self.origin;
     var_4++;
-    var_7 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+    var_7 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     scripts\engine\utility::_id_4794(var_3);
     var_3 = var_7;
     self._id_109A0._id_A576[var_4] = var_3.origin - self.origin;
     var_4++;
 
     if(isDefined(var_3.target)) {
-      var_10 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+      var_10 = scripts\engine\utility::getStruct(var_3.target, "targetname");
     } else {
       var_10 = undefined;
     }

@@ -43,14 +43,14 @@ function function_32d297d8(str_objective, b_starting) {
 
   level.ai_woods colors::set_force_color("o");
   namespace_b73b9191::function_ee83e03a("cull_inside_bunkerext");
-  catwalk_rail_1 = getent("catwalk_rail_1", "targetname");
-  catwalk_rail_2 = getent("catwalk_rail_2", "targetname");
-  catwalk_rail_mover_1 = getent("catwalk_rail_mover_1", "targetname");
-  catwalk_rail_mover_2 = getent("catwalk_rail_mover_2", "targetname");
-  catwalk_body_mover = getent("catwalk_body_mover", "targetname");
-  platform_mover = getent("platform_mover", "targetname");
-  e_unstable_catwalk_1 = getent("e_unstable_catwalk_1", "targetname");
-  e_unstable_catwalk_2 = getent("e_unstable_catwalk_2", "targetname");
+  catwalk_rail_1 = getEnt("catwalk_rail_1", "targetname");
+  catwalk_rail_2 = getEnt("catwalk_rail_2", "targetname");
+  catwalk_rail_mover_1 = getEnt("catwalk_rail_mover_1", "targetname");
+  catwalk_rail_mover_2 = getEnt("catwalk_rail_mover_2", "targetname");
+  catwalk_body_mover = getEnt("catwalk_body_mover", "targetname");
+  platform_mover = getEnt("platform_mover", "targetname");
+  e_unstable_catwalk_1 = getEnt("e_unstable_catwalk_1", "targetname");
+  e_unstable_catwalk_2 = getEnt("e_unstable_catwalk_2", "targetname");
   var_cf034495 = getEntArray("scripted_sanim_model", "targetname");
 
   foreach(e_model in var_cf034495) {
@@ -73,9 +73,9 @@ function function_32d297d8(str_objective, b_starting) {
 
   snd::play("evt_catwalk_shift_lr", level.player);
   thread function_e82e21f2(0, e_unstable_catwalk_1, 0.4);
-  platform_mover moveto(platform_mover.origin - (0, 0, 10), 0.5, 0.25, 0.25);
+  platform_mover moveTo(platform_mover.origin - (0, 0, 10), 0.5, 0.25, 0.25);
   platform_mover rotateroll(-5, 0.5, 0.25, 0.25);
-  player_catwalk_collision = getent("player_catwalk_collision", "targetname");
+  player_catwalk_collision = getEnt("player_catwalk_collision", "targetname");
   player_catwalk_collision util::delayed_delete(0.3);
   level flag::wait_till("flg_off_catwalks");
   level flag::clear("no_corpse_pickup");
@@ -137,7 +137,7 @@ function function_32d297d8(str_objective, b_starting) {
 }
 
 function function_9dd6ca05() {
-  var_e08d3dcb = getent("catwalk_jump_watcher", "targetname");
+  var_e08d3dcb = getEnt("catwalk_jump_watcher", "targetname");
   var_e08d3dcb endon(#"death");
 
   while(true) {
@@ -196,7 +196,7 @@ function function_854a1c32() {
 
 function function_490c69f() {
   level flag::wait_till("flg_catwalks_ambush");
-  e_catwalks_floor2_blocker = getent("e_catwalks_floor2_blocker", "targetname");
+  e_catwalks_floor2_blocker = getEnt("e_catwalks_floor2_blocker", "targetname");
   e_catwalks_floor2_blocker delete();
   level.var_7c0c1b3d = spawner::simple_spawn("ai_catwalks_upper", &function_8c4596c);
   var_a38a8f8c = struct::get("ambush_grenade_origin", "targetname");
@@ -246,7 +246,7 @@ function function_9539ca81() {
 }
 
 function function_171d6b6c() {
-  v_woods_catwalks_teleport = getent("v_woods_catwalks_teleport", "targetname");
+  v_woods_catwalks_teleport = getEnt("v_woods_catwalks_teleport", "targetname");
   s_woods_catwalk_jump = struct::get("s_woods_catwalk_jump", "targetname");
   level flag::wait_till("flg_catwalks_woods_check");
 
@@ -261,7 +261,7 @@ function function_e82e21f2(var_f6ffdb5f, var_981fc6aa, n_scale) {
   }
 
   earthquake(n_scale, 1.2, level.player.origin, 150);
-  level.player playrumbleonentity("artillery_rumble_near");
+  level.player playRumbleOnEntity("artillery_rumble_near");
 
   if(var_f6ffdb5f) {
     level.player playgestureviewmodel("ges_t9_blind_reaction");
@@ -283,11 +283,11 @@ function function_8c4596c() {
     level flag::wait_till("flg_catwalks_fallback");
   }
 
-  vol_fallback = getent("vol_catwalks_fallback", "targetname");
+  vol_fallback = getEnt("vol_catwalks_fallback", "targetname");
   self setgoal(vol_fallback, 1);
   level flag::wait_till_any(array("f_catwalks_combat_end", "flg_zipline_snap_approach"));
   self.goalradius = 128;
-  var_e9129078 = getent("vol_catwalks_fallback_2", "targetname");
+  var_e9129078 = getEnt("vol_catwalks_fallback_2", "targetname");
   self setgoal(var_e9129078, 1);
   level waittill(#"hash_61b5e90b3844a5");
   util::delayed_delete(0.5);
@@ -304,13 +304,13 @@ function function_d1a7a369() {
 function function_b12f2f76() {
   self endon(#"death");
   wait 2;
-  var_8e204805 = getent("vol_catwalks_first_floor", "targetname");
+  var_8e204805 = getEnt("vol_catwalks_first_floor", "targetname");
   self setgoal(var_8e204805);
   level flag::wait_till("flg_catwalks_fallback");
-  vol_fallback = getent("vol_catwalks_fallback", "targetname");
+  vol_fallback = getEnt("vol_catwalks_fallback", "targetname");
   self setgoal(vol_fallback);
   level flag::wait_till_any(array("f_catwalks_combat_end", "flg_zipline_snap_approach"));
-  var_e9129078 = getent("vol_catwalks_fallback_2", "targetname");
+  var_e9129078 = getEnt("vol_catwalks_fallback_2", "targetname");
   self setgoal(var_e9129078, 1);
   level waittill(#"hash_61b5e90b3844a5");
   util::delayed_delete(0.5);
@@ -328,7 +328,7 @@ function function_76f8ca3b() {
   self endon(#"death");
   self.grenadeammo = 0;
   level flag::wait_till_any(array("f_catwalks_combat_end", "flg_zipline_snap_approach"));
-  var_e9129078 = getent("vol_catwalks_fallback_2", "targetname");
+  var_e9129078 = getEnt("vol_catwalks_fallback_2", "targetname");
   self setgoal(var_e9129078, 1);
   level waittill(#"hash_61b5e90b3844a5");
   util::delayed_delete(0.5);
@@ -348,8 +348,8 @@ function function_dfe7cd78(str_objective, b_starting, var_aa1a6455, player) {
 
 function function_198e08b8(str_objective, b_starting) {
   level thread function_eeb0dce6();
-  zipline_fall_position_1 = getent("zipline_fall_position_1", "targetname");
-  collapsing_catwalk_mover = getent("collapsing_catwalk_mover", "targetname");
+  zipline_fall_position_1 = getEnt("zipline_fall_position_1", "targetname");
+  collapsing_catwalk_mover = getEnt("collapsing_catwalk_mover", "targetname");
   collapsing_catwalk_end_ref = struct::get("collapsing_catwalk_end_ref", "targetname");
   level thread namespace_8a404420::function_85bd6953();
   level.ai_woods thread function_822e1b52(b_starting);
@@ -415,7 +415,7 @@ function function_822e1b52(b_starting) {
   self pushplayer(1);
 
   if(!is_true(b_starting)) {
-    vol_catwalks_fallback = getent("vol_catwalks_fallback_woods", "targetname");
+    vol_catwalks_fallback = getEnt("vol_catwalks_fallback_woods", "targetname");
     self setgoal(vol_catwalks_fallback);
     level thread namespace_b73b9191::function_5d981106("ai_catwalks", 0, "f_catwalks_combat_dead");
     level flag::wait_till("f_catwalks_combat_dead");
@@ -476,7 +476,7 @@ function function_9539fa90(str_objective) {
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   level thread breadcrumb::function_61037c6c("bc_zipline_fall_2");
   level thread namespace_7468806b::function_ba5a28f(1);
-  e_catwalks_floor2_blocker = getent("e_catwalks_floor2_blocker", "targetname");
+  e_catwalks_floor2_blocker = getEnt("e_catwalks_floor2_blocker", "targetname");
   e_catwalks_floor2_blocker delete();
   level thread namespace_8a404420::function_517fe722();
   level flag::set("flg_satcom_birds_trigger");

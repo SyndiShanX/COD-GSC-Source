@@ -349,7 +349,7 @@ asm_shouldpowerdown(var_0, var_1) {
     return 0;
   }
 
-  if(scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(scripts\asm\asm_bb::bb_isanimScripted()) {
     return 0;
   }
 

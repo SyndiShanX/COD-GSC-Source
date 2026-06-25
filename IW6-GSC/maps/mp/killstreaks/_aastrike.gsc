@@ -18,7 +18,7 @@ init() {
 }
 
 tryUseAAStrike(lifeId, streakName) {
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
   assertEx(isDefined(heightEnt), "NO HEIGHT ENT IN LEVEL:Don't know what this means, ask Ned or Jordan");
 
   if(!isDefined(heightEnt)) {
@@ -214,7 +214,7 @@ doFlyBy(showIcon) {
 
   backDist = 20000;
   forwardDist = 20000;
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   upVector = (0, 0, heightEnt.origin[2] + randomIntRange(-100, 600));
 

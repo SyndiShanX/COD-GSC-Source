@@ -59,7 +59,7 @@ function init(instance) {
     }
 
     wait 0.1;
-    s_instance.var_b8ca9d7 = spawnvehicle(#"hash_d069dee6a0076c8", s_instance.origin, s_instance.angles, "vehicle_payload", 0, undefined, "sensor");
+    s_instance.var_b8ca9d7 = spawnVehicle(#"hash_d069dee6a0076c8", s_instance.origin, s_instance.angles, "vehicle_payload", 0, undefined, "sensor");
     s_instance.var_b8ca9d7.team = "allies";
     s_instance.var_b8ca9d7.s_portal = s_instance.contentgroups[#"portal"][0];
     s_instance.var_b8ca9d7.s_start = s_instance.contentgroups[#"payload_start"][0];
@@ -79,8 +79,8 @@ function init(instance) {
   instance.var_1cd294c7 = util::spawn_model("tag_origin", instance.var_b8ca9d7 gettagorigin("tag_cage_attach"), instance.var_b8ca9d7 gettagangles("tag_cage_attach"));
 
   if(isDefined(instance.var_b8ca9d7.var_43123efe) && isDefined(instance.var_1cd294c7)) {
-    instance.var_1cd294c7 linkto(instance.var_b8ca9d7, "tag_cage_attach", (0, 0, 0), (0, -180, 0));
-    instance.var_b8ca9d7.var_43123efe linkto(instance.var_1cd294c7);
+    instance.var_1cd294c7 linkTo(instance.var_b8ca9d7, "tag_cage_attach", (0, 0, 0), (0, -180, 0));
+    instance.var_b8ca9d7.var_43123efe linkTo(instance.var_1cd294c7);
 
     if(instance.var_b8ca9d7.var_6a4ec994 == 0) {
       instance thread function_98da33e1();
@@ -333,7 +333,7 @@ function function_dc378d61() {
   }
 
   if(isDefined(var_43123efe)) {
-    var_43123efe moveto(v_offset, 0.05);
+    var_43123efe moveTo(v_offset, 0.05);
     var_43123efe waittill(#"movedone");
 
     if(isDefined(var_43123efe)) {
@@ -541,7 +541,7 @@ function function_f5087df2() {
   self waittill(#"objective_ended");
   callback::remove_on_ai_killed(&zombie_death_watcher);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::function_817e4d10(player, 0);
   }
 
@@ -570,14 +570,14 @@ function function_f5087df2() {
 function function_de42eeef(str_model, v_offset, v_ang, n_forward, n_scale) {
   self setbrake(1);
   wait 0.5;
-  v_forward = self.origin + vectornormalize(anglesToForward(self.angles)) * n_forward;
+  v_forward = self.origin + vectorNormalize(anglesToForward(self.angles)) * n_forward;
   var_6d29abb0 = util::spawn_model(str_model, v_forward + v_offset, v_ang);
 
   if(isDefined(var_6d29abb0)) {
     wait 0.1;
     var_6d29abb0.health = int(self.health * 0.4);
     var_6d29abb0 setscale(n_scale);
-    var_6d29abb0 linkto(self);
+    var_6d29abb0 linkTo(self);
     self.var_a04ece6e = var_6d29abb0;
   }
 }
@@ -590,7 +590,7 @@ function function_d137dbd4(instance, activator) {
     instance.var_74ec00fb = 0;
     instance.n_zombies_max = function_23ab0822();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       level.var_31028c5d prototype_hud::function_7491d6c5(player, #"hash_838284821745ec7");
       level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_838284821745ec7");
       level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
@@ -607,7 +607,7 @@ function function_d137dbd4(instance, activator) {
 }
 
 function function_23ab0822() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_spawns = 8;
       break;
@@ -646,7 +646,7 @@ function function_27033bf7(instance) {
   instance.var_1ac40948 playrumblelooponentity(#"hash_1903f70fddbadc53");
   instance.var_1ac40948 scene::play(#"p9_fxanim_sv_payload_delivery_open_bundle", instance.var_1ac40948);
   instance.var_1ac40948 stoprumble(#"hash_1903f70fddbadc53");
-  instance.var_1ac40948 playrumbleonentity(#"sr_canister_damage_vehicle_rumble");
+  instance.var_1ac40948 playRumbleOnEntity(#"sr_canister_damage_vehicle_rumble");
 
   if(isDefined(instance.var_f2af10b2)) {
     instance.var_f2af10b2 delete();
@@ -872,7 +872,7 @@ function function_c9b143b(var_edf7d1ed) {
   self.var_f16db373 stoprumble(#"hash_1903f70fddbadc53");
   self.var_f16db373 clientfield::set("" + #"hash_2a7da9a87ecef87b", 0);
   wait 3;
-  self.var_f16db373 moveto(self.var_fa6b9965[var_edf7d1ed].origin, 0.05);
+  self.var_f16db373 moveTo(self.var_fa6b9965[var_edf7d1ed].origin, 0.05);
 }
 
 function function_4ef90aaa() {
@@ -1026,7 +1026,7 @@ function function_753d6448(instance) {
 }
 
 function function_cb32786d() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -1066,7 +1066,7 @@ function function_9d51d729(instance) {
     var_9df66c84 = (0, 0, 0);
   }
 
-  v_forward = vectornormalize(anglesToForward(self.currentnode.angles)) * self.currentnode.radius + self.currentnode.origin;
+  v_forward = vectorNormalize(anglesToForward(self.currentnode.angles)) * self.currentnode.radius + self.currentnode.origin;
 
   if(!isDefined(v_forward)) {
     return;
@@ -1097,7 +1097,7 @@ function function_9d51d729(instance) {
 }
 
 function function_1fdb6ebc() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -1136,7 +1136,7 @@ function function_d57cb15b(instance) {
 
   while(true) {
     self waittill(#"dogs");
-    n_players = getplayers().size;
+    n_players = getPlayers().size;
 
     if(!isDefined(n_players)) {
       continue;
@@ -1249,9 +1249,9 @@ function function_6d122cef() {
   nd_current = self.currentnode;
 
   if(isDefined(nd_current)) {
-    v_forward = vectornormalize(anglesToForward(nd_current.angles)) * 2400 + nd_current.origin;
+    v_forward = vectorNormalize(anglesToForward(nd_current.angles)) * 2400 + nd_current.origin;
   } else {
-    v_forward = vectornormalize(anglesToForward(self.angles)) * 2400 + self.origin;
+    v_forward = vectorNormalize(anglesToForward(self.angles)) * 2400 + self.origin;
   }
 
   if(isDefined(v_forward)) {
@@ -1502,7 +1502,7 @@ function zombie_death_watcher(params) {
 }
 
 function function_dae1a57b() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -1526,7 +1526,7 @@ function function_dae1a57b() {
 }
 
 function function_ce92dcb0() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -1554,7 +1554,7 @@ function function_7db7fcd5(instance) {
 
   foreach(player in players) {
     targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
-    var_a6470558 = vectornormalize(targetorigin - self.origin);
+    var_a6470558 = vectorNormalize(targetorigin - self.origin);
     player function_bc82f900("damage_heavy");
     player playerknockback(1);
     player applyknockback(100, var_a6470558);
@@ -1589,7 +1589,7 @@ function function_785ea4f4(instance) {
     }
   }
 
-  self playrumbleonentity(#"sr_payload_portal_final_rumble");
+  self playRumbleOnEntity(#"sr_payload_portal_final_rumble");
 
   if(isDefined(self.mdl_portal)) {
     self.mdl_portal delete();
@@ -1603,7 +1603,7 @@ function function_785ea4f4(instance) {
     self.var_edbf8a99 delete();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_d23362c = 0;
     player clientfield::set_to_player("" + #"portal_blur", 0);
   }
@@ -1646,7 +1646,7 @@ function function_bf606a73(var_b8ca9d7, instance) {
   wait 0.1;
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     player = awareness::function_d7fedde2(var_b8ca9d7);
 
     if(!isDefined(self.is_attacking) && isalive(self) && isalive(player)) {
@@ -1696,7 +1696,7 @@ function function_dd677e5d() {
     self.var_3e5ed63d delete();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_d23362c = 0;
     player clientfield::set_to_player("" + #"portal_blur", 0);
   }
@@ -1742,7 +1742,7 @@ function function_6ae999c2(instance) {
   self waittill(#"deployed");
   self thread function_1e88c470(instance);
 
-  if(getplayers().size === 1) {
+  if(getPlayers().size === 1) {
     var_2a9d371 = 5;
   } else {
     var_2a9d371 = 4;
@@ -1751,7 +1751,7 @@ function function_6ae999c2(instance) {
   while(true) {
     self.b_proximity = 0;
     self.n_players = 0;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(distancesquared(self.origin, player.origin) <= sqr(350) && !player laststand::player_is_in_laststand()) {
@@ -1813,7 +1813,7 @@ function function_fa1230e0(instance) {
   self endon(#"hash_76f907c580cdbbc6", #"death");
   self.var_f8edfabd = 1;
   wait 1;
-  self disconnectpaths();
+  self disconnectPaths();
   self.var_59078fae = 1;
   wait 1;
   slots = namespace_85745671::function_bdb2b85b(self, self.origin, self.angles, 64, 4, 300);
@@ -1880,7 +1880,7 @@ function function_49ae80f0(instance) {
 }
 
 function function_4bed5fd6() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_spawns = 8;
       break;
@@ -2073,7 +2073,7 @@ function payload_teleport(instance) {
       self.mdl_portal thread function_fd3059d0(instance);
 
       if(isDefined(self.var_edbf8a99)) {
-        self.var_edbf8a99 moveto(self.mdl_portal.origin, 0.05);
+        self.var_edbf8a99 moveTo(self.mdl_portal.origin, 0.05);
         self.var_edbf8a99 waittill(#"movedone");
         self.var_edbf8a99 solid();
       }
@@ -2127,7 +2127,7 @@ function function_fd3059d0(instance) {
   self endon(#"death");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isalive(player)) {
         if(distance2dsquared(self.origin, player.origin) <= sqr(120) && !is_true(player.var_d23362c)) {
           player dodamage(20, self.origin, self, self, undefined, "MOD_DEATH_CIRCLE");
@@ -2168,9 +2168,9 @@ function function_42fbf5d9(instance, var_f00d1e) {
   instance endon(#"objective_ended");
   self endon(#"death");
   self.var_a0bd9710 = util::spawn_model("tag_origin", self.origin, var_f00d1e.angles);
-  self.var_a0bd9710 rotateto(var_f00d1e.angles + (randomintrange(200, 270), randomintrange(200, 270), randomintrange(200, 270)), 0.05);
+  self.var_a0bd9710 rotateTo(var_f00d1e.angles + (randomintrange(200, 270), randomintrange(200, 270), randomintrange(200, 270)), 0.05);
   wait 0.1;
-  self linkto(self.var_a0bd9710);
+  self linkTo(self.var_a0bd9710);
   wait 0.1;
   n_dist = distance(self.var_a0bd9710.origin, var_f00d1e.origin);
   n_time = n_dist / 1000;
@@ -2178,8 +2178,8 @@ function function_42fbf5d9(instance, var_f00d1e) {
   n_inc = int(n_dist);
   self show();
   objective_setvisibletoall(self.n_objective_id);
-  self.var_a0bd9710 rotateto(var_f00d1e.angles, n_time + 6);
-  self.var_a0bd9710 playrumbleonentity(#"hash_2d43d9987e4a73a8");
+  self.var_a0bd9710 rotateTo(var_f00d1e.angles, n_time + 6);
+  self.var_a0bd9710 playRumbleOnEntity(#"hash_2d43d9987e4a73a8");
   self clientfield::set("" + #"teleport_trail", 1);
   level thread namespace_7589cf5c::play_vo("objectivePayloadRiftCollapseResponse");
 
@@ -2197,21 +2197,21 @@ function function_42fbf5d9(instance, var_f00d1e) {
       break;
     }
 
-    self.var_a0bd9710 moveto(v_dest, n_time);
+    self.var_a0bd9710 moveTo(v_dest, n_time);
     waitframe(1);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_d23362c = 0;
     player clientfield::set_to_player("" + #"portal_blur", 0);
   }
 
   n_dist = distance(self.var_a0bd9710.origin, var_f00d1e.origin);
   n_time = n_dist / 600;
-  self.var_a0bd9710 moveto(var_f00d1e.origin + (0, 0, 40), n_time);
+  self.var_a0bd9710 moveTo(var_f00d1e.origin + (0, 0, 40), n_time);
   self.var_a0bd9710 waittill(#"movedone");
   self clientfield::set("" + #"teleport_trail", 0);
-  self.var_a0bd9710 playrumbleonentity(#"sr_transmitter_impact");
+  self.var_a0bd9710 playRumbleOnEntity(#"sr_transmitter_impact");
   self thread function_de22e1a0();
   self unlink();
   waitframe(1);
@@ -2230,9 +2230,9 @@ function function_42fbf5d9(instance, var_f00d1e) {
 
   if(isDefined(self.var_43123efe)) {
     if(isDefined(self.var_43123efe.v_offset) && isDefined(self.var_43123efe.v_ang)) {
-      self.var_43123efe linkto(self, "tag_cage_attach", self.var_43123efe.v_offset, self.var_43123efe.v_ang);
+      self.var_43123efe linkTo(self, "tag_cage_attach", self.var_43123efe.v_offset, self.var_43123efe.v_ang);
     } else {
-      self.var_43123efe linkto(self, "tag_cage_attach");
+      self.var_43123efe linkTo(self, "tag_cage_attach");
     }
   }
 
@@ -2244,7 +2244,7 @@ function function_de22e1a0() {
 
   foreach(player in players) {
     targetorigin = (player.origin[0], player.origin[1], self.origin[2]);
-    var_a6470558 = vectornormalize(targetorigin - self.origin);
+    var_a6470558 = vectorNormalize(targetorigin - self.origin);
     player playerknockback(1);
     player applyknockback(100, var_a6470558);
     player playerknockback(0);
@@ -2294,11 +2294,11 @@ function function_79ae8e99(instance) {
         zombie.knockdown = 1;
         zombie.knockdown_type = "knockdown_shoved";
         var_7d6a995e = self.origin - zombie.origin;
-        var_1040735c = vectornormalize((var_7d6a995e[0], var_7d6a995e[1], 0));
+        var_1040735c = vectorNormalize((var_7d6a995e[0], var_7d6a995e[1], 0));
         zombie_forward = anglesToForward(zombie.angles);
-        zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+        zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
-        zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+        zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
         dot = vectordot(var_1040735c, zombie_forward_2d);
 
         if(dot >= 0.5) {

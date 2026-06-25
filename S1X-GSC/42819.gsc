@@ -36,7 +36,7 @@ lsr_rocket_think(var_0) {
       var_3 = var_2 + var_1 * 15000;
       var_4 = bulletTrace(var_2, var_3, 1, var_0, 1, 0, 0, 0, 0);
       var_0.lsr_target_ent.origin = var_4["position"];
-      self missile_settargetent(var_0.lsr_target_ent);
+      self missile_settargetEnt(var_0.lsr_target_ent);
     }
 
     wait 0.05;

@@ -140,8 +140,8 @@ isanimdone(var_0, var_1, var_2, var_3) {
 }
 
 ismyenemyinfrontofme(var_0, var_1) {
-  var_2 = vectornormalize(var_0.origin - self.origin * (1, 1, 0));
-  var_3 = vectornormalize(anglesToForward(self.angles) * (1, 1, 0));
+  var_2 = vectorNormalize(var_0.origin - self.origin * (1, 1, 0));
+  var_3 = vectorNormalize(anglesToForward(self.angles) * (1, 1, 0));
   var_4 = vectordot(var_2, var_3);
   if(var_4 > var_1) {
     return 1;
@@ -369,7 +369,7 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 
 doteleporthack(var_0, var_1, var_2, var_3) {
   var_6 = self func_8146();
-  self setorigin(var_6, 0);
+  self setOrigin(var_6, 0);
   var_6 = getgroundposition(var_6, 15);
   self.is_traversing = undefined;
   self notify("traverse_end");
@@ -553,7 +553,7 @@ doalienjumptraversal(var_0, var_1, var_2, var_3) {
     func_D56A(var_0, "turn", var_2);
   }
 
-  var_7 = vectornormalize(var_5 - self.origin * (1, 1, 0));
+  var_7 = vectorNormalize(var_5 - self.origin * (1, 1, 0));
   var_8 = vectortoangles(var_7);
   if(self.agent_type == "alien_phantom") {
     self.bteleporting = 1;

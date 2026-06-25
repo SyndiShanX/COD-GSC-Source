@@ -12,7 +12,7 @@ fxanim_init() {
   a_fxanims = getEntArray("fxanim", "script_noteworthy");
 
   foreach(m_fxanim in a_fxanims) {
-    m_fxanim disableclientlinkto();
+    m_fxanim disableclientlinkTo();
     m_fxanim _fxanim_check_cheap_entity_flag();
 
     if(isDefined(m_fxanim.fxanim_parent)) {
@@ -216,7 +216,7 @@ _fxanim_animate(str_scene) {
   e_align = undefined;
 
   if(isDefined(self.fxanim_align)) {
-    e_align = getent(self.fxanim_align, "targetname");
+    e_align = getEnt(self.fxanim_align, "targetname");
 
     if(!isDefined(e_align)) {
       e_align = get_struct(self.fxanim_align);
@@ -357,7 +357,7 @@ _fxanim_link_child_model() {
       obj_parent attach(str_model_child, str_tag);
     }
   } else if(!b_can_attach && b_parent_is_model)
-    self linkto(obj_parent, self.fxanim_tag);
+    self linkTo(obj_parent, self.fxanim_tag);
 
   if(b_hide_child) {
     if(b_can_attach) {
@@ -377,7 +377,7 @@ _fxanim_link_child_model() {
       obj_parent attach(str_model_child, str_tag);
     } else {
       if(!b_parent_is_model) {
-        self linkto(obj_parent, self.fxanim_tag);
+        self linkTo(obj_parent, self.fxanim_tag);
       }
 
       self show();
@@ -394,7 +394,7 @@ _fxanim_link_child_model() {
         obj_parent attach(str_model_child, str_tag);
       }
     } else
-      self linkto(obj_parent, self.fxanim_tag);
+      self linkTo(obj_parent, self.fxanim_tag);
   }
 
   if(b_should_hide_tag) {
@@ -733,7 +733,7 @@ fxanim_reconstruct(str_fxanim) {
       }
     }
 
-    m_parent_fxanim disableclientlinkto();
+    m_parent_fxanim disableclientlinkTo();
     m_parent_fxanim _fxanim_check_cheap_entity_flag();
     m_parent_fxanim thread _fxanim_setup_parent();
 
@@ -742,7 +742,7 @@ fxanim_reconstruct(str_fxanim) {
         m_child = spawn("script_model", s_child.origin);
         s_child _fxanim_copy_kvps(m_child);
         s_child structdelete();
-        m_child disableclientlinkto();
+        m_child disableclientlinkTo();
         m_child _fxanim_check_cheap_entity_flag();
         m_child thread _fxanim_link_child_model();
       }

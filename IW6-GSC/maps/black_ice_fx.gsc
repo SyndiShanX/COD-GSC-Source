@@ -467,16 +467,16 @@ intro_turn_off_prop_bm21_1_lights_fx() {
 
 intro_detonation_sequence_fx() {
   var_0 = common_scripts\utility::spawn_tag_origin();
-  var_0 linkto(level.breach_mines[1], "tag_fx", (0, 0, 0), (-90, 0, 0));
+  var_0 linkTo(level.breach_mines[1], "tag_fx", (0, 0, 0), (-90, 0, 0));
   playFXOnTag(level._effect["ice_breach_explosion"], var_0, "tag_origin");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.2;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.25;
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(level.breach_mines[0], "tag_fx", (0, 0, 0), (-90, 0, 0));
+  var_1 linkTo(level.breach_mines[0], "tag_fx", (0, 0, 0), (-90, 0, 0));
   playFXOnTag(level._effect["ice_breach_explosion"], var_1, "tag_origin");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.2;
   common_scripts\utility::exploder("underwater_blood_cloud");
 }
@@ -505,7 +505,7 @@ fx_camp_truck_submerge_rear() {
   level.surface_truck_rear = common_scripts\utility::spawn_tag_origin();
   wait 5.0;
   level.surface_truck_rear = common_scripts\utility::spawn_tag_origin();
-  level.surface_truck_rear linkto(level.surface_truck, "tag_wheel_back_left", (0, 0, 0), (-100, 0, 0));
+  level.surface_truck_rear linkTo(level.surface_truck, "tag_wheel_back_left", (0, 0, 0), (-100, 0, 0));
   var_0 = level.surface_truck gettagorigin("tag_wheel_back_left");
   var_1 = anglesToForward(level.surface_truck.angles + (-100, 0, 0));
   var_2 = anglestoup(level.surface_truck.angles + (0, 0, 0));
@@ -663,7 +663,7 @@ turn_off_oil_derrick_lightsfx() {
 refinery_travelling_block_impact_fx() {
   level waittill("notify_debris_ground_fx_1");
   level.chunk_spark_fx_tag = common_scripts\utility::spawn_tag_origin();
-  level.chunk_spark_fx_tag linkto(level._refinery.scripted["derrick_chunk"], "tag_origin", (20, 20, 0), (0, -45, 180));
+  level.chunk_spark_fx_tag linkTo(level._refinery.scripted["derrick_chunk"], "tag_origin", (20, 20, 0), (0, -45, 180));
   playFXOnTag(level._effect["refinery_debris_sparks_01"], level.chunk_spark_fx_tag, "tag_origin");
   thread refinery_stop_chunk_spark_fx();
   var_0 = level._refinery.scripted["traveling_block"] gettagorigin("tag_origin");
@@ -710,10 +710,10 @@ heat_column_fx() {
     var_14 = distance(level.player.origin, var_13.origin);
     var_15 = var_13.origin - level.player.origin;
     var_15 = (var_15[0], var_15[1], 0);
-    var_15 = vectornormalize(var_15);
+    var_15 = vectorNormalize(var_15);
     var_16 = anglesToForward(level.player.angles);
     var_16 = (var_16[0], var_16[1], 0);
-    var_16 = vectornormalize(var_16);
+    var_16 = vectorNormalize(var_16);
     var_17 = vectordot(var_15, var_16);
 
     if(var_14 < var_4) {
@@ -939,7 +939,7 @@ engineroom_turn_off_fx() {
 
 engineroom_headsmoke_fx_start() {
   level.smokehead = level.player common_scripts\utility::spawn_tag_origin();
-  level.smokehead linkto(level.player);
+  level.smokehead linkTo(level.player);
   playFXOnTag(level._effect["obscuring_haze_playerview"], level.smokehead, "tag_origin");
   create_view_particle_source();
   playFXOnTag(common_scripts\utility::getfx("pipedeck_heat_haze3"), level.view_particle_source, "tag_origin");
@@ -1047,7 +1047,7 @@ tanks_bridge_aftershocks() {
 }
 
 turn_on_flarestack_fx() {
-  var_0 = getent("origin_flarestack_fx", "targetname");
+  var_0 = getEnt("origin_flarestack_fx", "targetname");
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.angles = var_0.angles;
   var_1.origin = var_0.origin;
@@ -1074,7 +1074,7 @@ exfil_heli_smoke_fx_01() {
 
   for(var_0 = 0; var_0 < 3; var_0++) {
     level.exfil_heli_tag = common_scripts\utility::spawn_tag_origin();
-    level.exfil_heli_tag linkto(level.heli, "tag_origin", (0, 0, -20), (0, 0, 0));
+    level.exfil_heli_tag linkTo(level.heli, "tag_origin", (0, 0, -20), (0, 0, 0));
     playFXOnTag(level._effect["heli_smoke_01"], level.exfil_heli_tag, "tag_origin");
     wait(randomfloatrange(1, 2));
   }
@@ -1236,31 +1236,31 @@ exfil_oilrig_preboom_fx(var_0) {
   thread exfil_oilrig_explosions_fx(var_0);
   thread exfil_oilrig_shockwave_fx(var_0);
   level.geysertag = common_scripts\utility::spawn_tag_origin();
-  level.geysertag linkto(var_0, "j_rigtop_1", (0, 0, 500), (-90, 0, -55));
+  level.geysertag linkTo(var_0, "j_rigtop_1", (0, 0, 500), (-90, 0, -55));
   level.xplotag1 = common_scripts\utility::spawn_tag_origin();
-  level.xplotag1 linkto(var_0, "j_rigtop_1", (500, -1500, 500), (-79, 0, 0));
+  level.xplotag1 linkTo(var_0, "j_rigtop_1", (500, -1500, 500), (-79, 0, 0));
   level.xplotag2 = common_scripts\utility::spawn_tag_origin();
-  level.xplotag2 linkto(var_0, "j_rigtop_1", (-1000, 0, 100), (0, 0, 0));
+  level.xplotag2 linkTo(var_0, "j_rigtop_1", (-1000, 0, 100), (0, 0, 0));
   level.xplotag3 = common_scripts\utility::spawn_tag_origin();
-  level.xplotag3 linkto(var_0, "j_rigtop_1", (500, 0, 500), (-90, 0, 0));
+  level.xplotag3 linkTo(var_0, "j_rigtop_1", (500, 0, 500), (-90, 0, 0));
   level.xplotag4 = common_scripts\utility::spawn_tag_origin();
-  level.xplotag4 linkto(var_0, "j_rigtop_1", (-1000, -1700, 500), (-90, 0, 0));
+  level.xplotag4 linkTo(var_0, "j_rigtop_1", (-1000, -1700, 500), (-90, 0, 0));
   level.xplotag5 = common_scripts\utility::spawn_tag_origin();
-  level.xplotag5 linkto(var_0, "j_rigtop_1", (500, 1000, 300), (-90, 0, 0));
+  level.xplotag5 linkTo(var_0, "j_rigtop_1", (500, 1000, 300), (-90, 0, 0));
   level.splshtag1 = common_scripts\utility::spawn_tag_origin();
-  level.splshtag1 linkto(var_0, "tag_fx_splash_leg_01", (0, 0, 0), (0, 0, 0));
+  level.splshtag1 linkTo(var_0, "tag_fx_splash_leg_01", (0, 0, 0), (0, 0, 0));
   level.splshtag2 = common_scripts\utility::spawn_tag_origin();
-  level.splshtag2 linkto(var_0, "tag_fx_splash_leg_02", (0, 0, 0), (0, 0, 0));
+  level.splshtag2 linkTo(var_0, "tag_fx_splash_leg_02", (0, 0, 0), (0, 0, 0));
   level.splshtag3 = common_scripts\utility::spawn_tag_origin();
-  level.splshtag3 linkto(var_0, "tag_fx_splash_leg_03", (0, 0, 0), (0, 0, 0));
+  level.splshtag3 linkTo(var_0, "tag_fx_splash_leg_03", (0, 0, 0), (0, 0, 0));
   level.splshtag4 = common_scripts\utility::spawn_tag_origin();
-  level.splshtag4 linkto(var_0, "tag_fx_splash_leg_04", (0, 0, 0), (0, 0, 0));
+  level.splshtag4 linkTo(var_0, "tag_fx_splash_leg_04", (0, 0, 0), (0, 0, 0));
   level.splshtag7 = common_scripts\utility::spawn_tag_origin();
-  level.splshtag7 linkto(var_0, "tag_fx_splash_leg_07", (0, 0, 0), (0, 0, 0));
+  level.splshtag7 linkTo(var_0, "tag_fx_splash_leg_07", (0, 0, 0), (0, 0, 0));
   level.splshtag11 = common_scripts\utility::spawn_tag_origin();
-  level.splshtag11 linkto(var_0, "tag_fx_splash_leg_11", (0, 0, 0), (0, 0, 0));
+  level.splshtag11 linkTo(var_0, "tag_fx_splash_leg_11", (0, 0, 0), (0, 0, 0));
   level.splshtag15 = common_scripts\utility::spawn_tag_origin();
-  level.splshtag15 linkto(var_0, "tag_fx_splash_leg_15", (0, 0, 0), (0, 0, 0));
+  level.splshtag15 linkTo(var_0, "tag_fx_splash_leg_15", (0, 0, 0), (0, 0, 0));
   wait 0.1;
   var_1 = var_0 gettagorigin("j_rigtop_1");
   var_2 = spawnfx(common_scripts\utility::getfx("vfx_rig_fire_exfil_huge"), var_1 + (0, 0, 100), (90, 90, 0));
@@ -1295,10 +1295,10 @@ exfil_oilrig_shockwave_fx(var_0) {
   playFX(level._effect["exfil_xplosion_shockwave"], var_0.origin);
   wait 0.1;
   earthquake(0.15, 0.6, level.player.origin, 3000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 1.1;
   earthquake(0.41, 1.8, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player thread shockwave_dirt_hit(2, 0.1, 7);
   common_scripts\utility::exploder("shockwave_exfil");
 }
@@ -1349,7 +1349,7 @@ shockwave_dirt_hit(var_0, var_1, var_2) {
 exfil_oilrig_ball_drop_fx(var_0) {
   level waittill("notify_sphere_start_fall");
   level.trailtag_sphere = common_scripts\utility::spawn_tag_origin();
-  level.trailtag_sphere linkto(var_0, "j_sphere_01", (0, 0, 0), (0, 0, 0));
+  level.trailtag_sphere linkTo(var_0, "j_sphere_01", (0, 0, 0), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("exfil_sphere_trail"), level.trailtag_sphere, "tag_origin");
   level waittill("notify_sphere_hit_ground");
   stopFXOnTag(common_scripts\utility::getfx("exfil_sphere_trail"), level.trailtag_sphere, "tag_origin");

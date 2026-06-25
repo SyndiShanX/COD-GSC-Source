@@ -22,7 +22,7 @@ function private preinit() {
 }
 
 function private on_begin() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread monitor_loadout();
   }
 }
@@ -31,7 +31,7 @@ function private on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!player.var_53531c80) {
         if(!isDefined(var_696c3b4)) {
           var_696c3b4 = [];
@@ -48,7 +48,7 @@ function private on_end(round_reset) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
     player.var_53531c80 = undefined;
   }

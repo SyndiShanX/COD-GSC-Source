@@ -43,7 +43,7 @@ function register_clientfields() {
 function function_b8bad181() {
   level flag::init("tesla_coil_on");
   level flag::init("tesla_coil_cooldown");
-  var_144aea6c = getent("tesla_coil_activate", "targetname");
+  var_144aea6c = getEnt("tesla_coil_activate", "targetname");
   var_144aea6c thread tesla_coil_activate();
 }
 
@@ -79,7 +79,7 @@ function function_66bab678() {
 
 function function_40bac98d() {
   level thread function_79ce76bb();
-  var_95e2b9fb = getent("tesla_coil_panel", "targetname");
+  var_95e2b9fb = getEnt("tesla_coil_panel", "targetname");
   while(true) {
     var_95e2b9fb clientfield::set("death_ray_status_light", 1);
     level flag::wait_till("tesla_coil_on");
@@ -111,14 +111,14 @@ function function_2f45472d() {
 
 function function_1b068db6(player) {
   if(level flag::get("tesla_coil_on") || player.is_drinking > 0) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(level flag::get("tesla_coil_cooldown")) {
-    self sethintstring(&"ZM_CASTLE_DEATH_RAY_COOLDOWN");
+    self setHintString(&"ZM_CASTLE_DEATH_RAY_COOLDOWN");
     return false;
   }
-  self sethintstring(&"ZM_CASTLE_DEATH_RAY_TRAP", self.stub.hint_parm1);
+  self setHintString(&"ZM_CASTLE_DEATH_RAY_TRAP", self.stub.hint_parm1);
   return true;
 }
 
@@ -140,7 +140,7 @@ function function_3d3feaa2() {
         self.stub.var_42d723eb thread function_f796bd32(e_who);
         level thread function_43b12d8e(self.origin);
         e_who thread function_90df19();
-        e_who playrumbleonentity("zm_castle_interact_rumble");
+        e_who playRumbleOnEntity("zm_castle_interact_rumble");
         level flag::wait_till("tesla_coil_cooldown");
       }
     }
@@ -254,7 +254,7 @@ function function_383d6ca4(var_9ffdb9e2, var_2c11866b) {
         self setelectrified(n_duration);
         self shellshock("castle_electrocution_zm", n_duration);
         self playSound("wpn_teslatrap_zap");
-        self playrumbleonentity("zm_castle_tesla_electrocution");
+        self playRumbleOnEntity("zm_castle_tesla_electrocution");
         self dodamage(n_damage, self.origin, undefined, undefined, undefined, "MOD_ELECTROCUTED");
       }
     }
@@ -265,8 +265,8 @@ function function_383d6ca4(var_9ffdb9e2, var_2c11866b) {
 }
 
 function function_55b881b7(var_2c11866b) {
-  var_94ef9ffe = getent("tesla_coil_zone", "targetname");
-  var_4ca7bb70 = getent("telsa_safety_zone", "targetname");
+  var_94ef9ffe = getEnt("tesla_coil_zone", "targetname");
+  var_4ca7bb70 = getEnt("telsa_safety_zone", "targetname");
   if(isDefined(var_4ca7bb70) && self istouching(var_4ca7bb70)) {
     return false;
   }
@@ -362,10 +362,10 @@ function function_991ffb6c(var_1a8c0e14) {
 }
 
 function function_43b12d8e(v_position) {
-  playsoundatposition("vox_maxis_tesla_pa_begin_1", v_position);
+  playSoundAtPosition("vox_maxis_tesla_pa_begin_1", v_position);
   level flag::wait_till("tesla_coil_cooldown");
   level flag::wait_till_clear("tesla_coil_cooldown");
-  playsoundatposition("vox_maxis_tesla_pa_begin_0", v_position);
+  playSoundAtPosition("vox_maxis_tesla_pa_begin_0", v_position);
 }
 
 function function_90df19() {

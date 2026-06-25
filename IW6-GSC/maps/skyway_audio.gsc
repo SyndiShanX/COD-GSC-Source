@@ -82,8 +82,8 @@ sfx_skyway_land_sweetener_init(var_0, var_1) {
 }
 
 sfx_land_triggers_spawn(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = getent(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = getEnt(var_1, "targetname");
   thread sfx_land_triggers_watcher(var_2, var_3);
 }
 
@@ -240,7 +240,7 @@ skyway_intro_sfx() {
 sfx_noticket(var_0) {
   wait 0.5;
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 playSound("generic_pain_bodyslam_1");
   wait 0.2;
   var_0 playSound("scn_skyway_noticket");
@@ -280,7 +280,7 @@ sfx_heli_crash(var_0) {
 
 sfx_heli_crash_impact(var_0) {
   var_0 playSound("scn_skyway_heli_crash_impact");
-  var_1 = getent("train_derail_sfx", "targetname");
+  var_1 = getEnt("train_derail_sfx", "targetname");
   level.player clearclienttriggeraudiozone(2);
   wait 1;
   var_1 playLoopSound("emt_skyway_derailed_train");

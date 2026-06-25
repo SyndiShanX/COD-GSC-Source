@@ -67,9 +67,9 @@ apache_tutorial_fly_allies() {
     var_3 = undefined;
 
     if(issubstr(var_2.targetname, "apache")) {
-      var_3 = common_scripts\utility::getstruct("apache_ally_fly_in_path_0" + var_2 maps\oilrocks_apache_code::get_apache_ally_id(), "targetname");
+      var_3 = common_scripts\utility::getStruct("apache_ally_fly_in_path_0" + var_2 maps\oilrocks_apache_code::get_apache_ally_id(), "targetname");
     } else {
-      var_3 = common_scripts\utility::getstruct("blackhaw_fly_in_path", "targetname");
+      var_3 = common_scripts\utility::getStruct("blackhaw_fly_in_path", "targetname");
     }
 
     var_2 thread maps\oilrocks_code::chopper_boss_path_override(var_3);

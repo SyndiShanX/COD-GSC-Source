@@ -49,7 +49,7 @@ func_5A38() {
   foreach(var_2 in var_0) {
     var_2 scripts\sp\utility::func_65E0("push_triggered");
     var_2 scripts\sp\utility::func_65E0("pull_triggered");
-    var_2.var_5A3C = getent(var_2.target, "targetname");
+    var_2.var_5A3C = getEnt(var_2.target, "targetname");
     var_2.var_5A3C glinton(#animtree);
     var_2.var_5A3C.var_1FBB = "door";
     var_2.var_5A32 = "notbusy";
@@ -85,9 +85,9 @@ func_5A38() {
     var_2.var_DB15 = var_2.var_DB15 + anglesToForward(var_2.angles) * -24;
     var_2.var_DB14 = var_2.angles;
     var_2.var_5A40 = scripts\engine\utility::spawn_tag_origin(var_2.var_5A3C gettagorigin("interact_push"), var_2.var_5A3C gettagangles("interact_push"));
-    var_2.var_5A40 linkto(var_2.var_5A3C);
+    var_2.var_5A40 linkTo(var_2.var_5A3C);
     var_2.var_5A3F = scripts\engine\utility::spawn_tag_origin(var_2.var_5A3C gettagorigin("interact_pull"), var_2.var_5A3C gettagangles("interact_pull"));
-    var_2.var_5A3F linkto(var_2.var_5A3C);
+    var_2.var_5A3F linkTo(var_2.var_5A3C);
     var_2 func_48C7();
     var_2.var_5A4F = squared(80);
 
@@ -99,7 +99,7 @@ func_5A38() {
           var_2.var_5A30 = var_6;
         }
 
-        var_6 linkto(var_2.var_5A3C, "j_hinge1");
+        var_6 linkTo(var_2.var_5A3C, "j_hinge1");
       }
     }
 
@@ -370,7 +370,7 @@ func_AB71(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0.var_5A30 connectpaths();
   var_0 thread scripts\sp\utility::func_C12D("safe_to_pass", 2.3);
   var_0 func_11EB(var_1, var_2, var_3, var_4, var_5);
-  var_0.var_5A30 disconnectpaths();
+  var_0.var_5A30 disconnectPaths();
 
   if(var_6) {
     level.player enableweapons();

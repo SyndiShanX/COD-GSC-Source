@@ -307,7 +307,7 @@ function_42a1dabd() {
     var_93a62fe = zm_utility::get_closest_valid_player(self.origin, self.ignore_player);
 
     if(isDefined(var_93a62fe)) {
-      angles = vectortoangles(vectornormalize(var_93a62fe.origin - self.origin));
+      angles = vectortoangles(vectorNormalize(var_93a62fe.origin - self.origin));
       self forceteleport(self.origin, angles);
       var_ee3cfcfe.angles = angles;
     }
@@ -394,7 +394,7 @@ function_f78e62a8() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
     close_player = arraygetclosest(tacpoint.origin, players, 120);
 
     if(isDefined(close_player)) {
@@ -413,11 +413,11 @@ function_f78e62a8() {
   if(isDefined(var_51601537) && isDefined(self.var_fab8d6ce)) {
     to_point = var_51601537.origin - self.var_fab8d6ce.origin;
     self.var_fab8d6ce clientfield::set("" + #"spartoi_reassemble_clientfield", 1);
-    self.var_fab8d6ce moveto(self.var_fab8d6ce.origin + to_point / 2 + (0, 0, 20), 1.6, 0.5);
+    self.var_fab8d6ce moveTo(self.var_fab8d6ce.origin + to_point / 2 + (0, 0, 20), 1.6, 0.5);
     wait 1.6;
 
     if(isDefined(self.var_fab8d6ce)) {
-      self.var_fab8d6ce moveto(var_51601537.origin, 1.6, 0, 0.5);
+      self.var_fab8d6ce moveTo(var_51601537.origin, 1.6, 0, 0.5);
       wait 1.6;
     }
   }

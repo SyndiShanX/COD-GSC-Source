@@ -188,7 +188,7 @@ tube_rip_sequence() {
 }
 
 push_player_back_from_thor() {
-  var_0 = getent("player_tube_rip_node", "targetname");
+  var_0 = getEnt("player_tube_rip_node", "targetname");
   var_1 = 0;
   var_2 = getnode("ally_final_node", "targetname");
   level.ally maps\_utility::set_goal_node(var_2);
@@ -232,7 +232,7 @@ push_player_back_from_thor() {
 thor_finale_movement(var_0) {
   var_1 = maps\odin_util::satellite_get_script_mover();
   var_1 unlink();
-  var_2 = getent("sat_barrel_target", "script_noteworthy");
+  var_2 = getEnt("sat_barrel_target", "script_noteworthy");
   var_2 unlink();
   var_3 = getEntArray("spacejump_sat", "targetname");
   var_4 = 700 - var_0 / 5;
@@ -241,8 +241,8 @@ thor_finale_movement(var_0) {
     var_4 = 20;
   }
 
-  var_1 moveto(var_2.origin, var_4, 0, 0);
-  var_1 rotateto((0, 30, 0), var_4 * 0.1, 0, 0);
+  var_1 moveTo(var_2.origin, var_4, 0, 0);
+  var_1 rotateTo((0, 30, 0), var_4 * 0.1, 0, 0);
   var_5 = 0 - var_0 * 2;
   common_scripts\utility::flag_set("clear_to_tweak_player");
 
@@ -255,7 +255,7 @@ thor_finale_movement(var_0) {
 
 sat_location_check(var_0) {
   level endon("start_transition_to_youngblood");
-  var_1 = getent("sat_barrel_bottom", "script_noteworthy");
+  var_1 = getEnt("sat_barrel_bottom", "script_noteworthy");
   var_2 = var_1.origin[2] - 3500;
   var_3 = var_1.origin[2] - 500;
   var_4 = var_1.origin[2] - 2000;
@@ -328,14 +328,14 @@ sat_exploder(var_0, var_1) {
           var_3 rotatepitch(var_14, var_12, var_12 * 0.25, var_12 * 0.25);
           break;
         case 3:
-          var_3 rotateyaw(var_14, var_12, var_12 * 0.25, var_12 * 0.25);
+          var_3 rotateYaw(var_14, var_12, var_12 * 0.25, var_12 * 0.25);
           break;
         default:
           var_3 rotateroll(var_14, var_12, var_12 * 0.25, var_12 * 0.25);
           break;
       }
 
-      var_3 moveto((var_9, var_10, var_11), var_12, 0, var_12 * 0.25);
+      var_3 moveTo((var_9, var_10, var_11), var_12, 0, var_12 * 0.25);
       wait(var_1);
     }
   }
@@ -358,7 +358,7 @@ satellitepieceburnup(var_0) {
 }
 
 rod_firing_sfx() {
-  var_0 = getent("origin_satellite_waypoint", "targetname");
+  var_0 = getEnt("origin_satellite_waypoint", "targetname");
   thread maps\odin_audio::sfx_odin_rog_close(var_0);
   thread maps\odin_audio::sfx_distant_explo(var_0);
   wait 0.6;
@@ -390,28 +390,28 @@ thor_pod_opens() {
   var_0 = getEntArray("pod_that_opens_0", "script_noteworthy");
   var_1 = getEntArray("pod_that_opens_1", "script_noteworthy");
   var_2 = getEntArray("pod_that_opens_2", "script_noteworthy");
-  var_3 = getent("pod_that_opens_origin_0", "script_noteworthy");
-  var_4 = getent("pod_that_opens_origin_1", "script_noteworthy");
-  var_5 = getent("pod_that_opens_origin_2", "script_noteworthy");
-  var_6 = getent("pod_cover_target_0", "script_noteworthy");
-  var_7 = getent("pod_cover_target_1", "script_noteworthy");
-  var_8 = getent("pod_cover_target_2", "script_noteworthy");
+  var_3 = getEnt("pod_that_opens_origin_0", "script_noteworthy");
+  var_4 = getEnt("pod_that_opens_origin_1", "script_noteworthy");
+  var_5 = getEnt("pod_that_opens_origin_2", "script_noteworthy");
+  var_6 = getEnt("pod_cover_target_0", "script_noteworthy");
+  var_7 = getEnt("pod_cover_target_1", "script_noteworthy");
+  var_8 = getEnt("pod_cover_target_2", "script_noteworthy");
 
   foreach(var_10 in var_0) {
     if(var_10.classname == "script_brushmodel") {
-      var_10 linkto(var_3);
+      var_10 linkTo(var_3);
     }
   }
 
   foreach(var_10 in var_1) {
     if(var_10.classname == "script_brushmodel") {
-      var_10 linkto(var_4);
+      var_10 linkTo(var_4);
     }
   }
 
   foreach(var_10 in var_2) {
     if(var_10.classname == "script_brushmodel") {
-      var_10 linkto(var_5);
+      var_10 linkTo(var_5);
     }
   }
 
@@ -419,16 +419,16 @@ thor_pod_opens() {
   thread pod_two_spools_up();
   thread thor_pod_opens_fx();
   wait 3;
-  var_3 moveto(var_6.origin, 15, 0, 10);
-  var_4 moveto(var_7.origin, 15, 0, 10);
-  var_5 moveto(var_8.origin, 15, 0, 10);
+  var_3 moveTo(var_6.origin, 15, 0, 10);
+  var_4 moveTo(var_7.origin, 15, 0, 10);
+  var_5 moveTo(var_8.origin, 15, 0, 10);
   var_5 rotatepitch(-30, 44, 0, 25);
   wait 6;
-  var_3 moveto(var_6.origin, 40, 0, 25);
-  var_4 moveto(var_7.origin, 40, 0, 25);
-  var_5 moveto(var_7.origin, 40, 0, 25);
+  var_3 moveTo(var_6.origin, 40, 0, 25);
+  var_4 moveTo(var_7.origin, 40, 0, 25);
+  var_5 moveTo(var_7.origin, 40, 0, 25);
   var_3 rotateroll(-25, 44, 0, 25);
-  var_4 rotateyaw(-30, 44, 0, 25);
+  var_4 rotateYaw(-30, 44, 0, 25);
 }
 
 thor_pod_opens_fx() {
@@ -444,7 +444,7 @@ pod_two_spools_up() {
   var_2 = 0;
 
   for(var_3 = 0; var_3 < 16; var_3++) {
-    var_4 = getent("second_firing_rod_array_" + var_3, "script_noteworthy");
+    var_4 = getEnt("second_firing_rod_array_" + var_3, "script_noteworthy");
     var_0[var_3] = var_4;
   }
 
@@ -459,13 +459,13 @@ pod_two_spools_up() {
     foreach(var_6 in var_0) {
       if(var_2 != 15) {
         var_9 = var_2 + 1;
-        var_6 moveto(var_1[var_9], 8, 0, 0);
+        var_6 moveTo(var_1[var_9], 8, 0, 0);
         var_2 = var_9;
         continue;
       }
 
       var_9 = 0;
-      var_6 moveto(var_1[var_9], 8, 0, 0);
+      var_6 moveTo(var_1[var_9], 8, 0, 0);
       var_2 = 0;
     }
 
@@ -498,7 +498,7 @@ ending_setup() {
   common_scripts\utility::flag_set("stop_tweaking_player");
   thread ally_finale_movement_setup();
   common_scripts\utility::flag_wait("lgt_flag_spin_over");
-  var_0 = getent("sat_top_collision", "script_noteworthy");
+  var_0 = getEnt("sat_top_collision", "script_noteworthy");
   var_1 = level.odin_animnode;
   var_2 = maps\_utility::spawn_anim_model("player_rig");
   level.sat_ent_del[level.sat_ent_del.size] = var_2;
@@ -508,8 +508,8 @@ ending_setup() {
   var_4["player_rig"] = var_2;
   var_4["odin_ally"] = level.ally;
   wait 0.05;
-  level.animated_sat_part["odin_sat_cover_01"] linkto(var_1);
-  level.animated_sat_part["odin_sat_section_01"] linkto(var_1);
+  level.animated_sat_part["odin_sat_cover_01"] linkTo(var_1);
+  level.animated_sat_part["odin_sat_section_01"] linkTo(var_1);
   common_scripts\utility::flag_wait("kickoff_player_finale");
   thread maps\odin_audio::sfx_sat_approach_plr();
   level.player freezecontrols(1);
@@ -533,11 +533,11 @@ ending_setup() {
   thread maps\odin_audio::sfx_switch_ambzone_to_end();
   common_scripts\utility::flag_set("end_ally_loop_anims");
   wait 0.05;
-  level.ally linkto(var_1);
+  level.ally linkTo(var_1);
   thread player_took_too_long_to_open(var_3);
   common_scripts\utility::flag_wait("ally_at_sat");
-  var_3 setcursorhint("HINT_NOICON");
-  var_3 sethintstring(&"ODIN_RCS_PROMPT");
+  var_3 setCursorHint("HINT_NOICON");
+  var_3 setHintString(&"ODIN_RCS_PROMPT");
   var_3 makeusable();
   var_3 waittill("trigger", var_6);
   level.player springcamdisabled(3);
@@ -560,24 +560,24 @@ ending_setup() {
 give_player_new_ref_ent_look(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::spawn_tag_origin();
   level.player playersetgroundreferenceent(var_3);
-  var_3 rotateto(var_0 gettagangles("tag_player"), var_2, 0, 0);
+  var_3 rotateTo(var_0 gettagangles("tag_player"), var_2, 0, 0);
   wait(var_2);
   level.player freezecontrols(0);
   level.player playersetgroundreferenceent(var_3);
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   level.player playerlinktodelta(var_0, "tag_player", 1, var_1, var_1, var_1, var_1, 1);
   wait 0.1;
   level.player springcamenabled(1.0, 3.2, 1.6);
   common_scripts\utility::flag_wait("reset_ground_to_zip");
   wait 3;
   var_3 unlink();
-  var_3 rotateto((0, 0, 0), 1, 0, 0);
+  var_3 rotateTo((0, 0, 0), 1, 0, 0);
   common_scripts\utility::flag_wait("ref_ent_for_explosion");
   var_3.angles = level.player getplayerangles();
   level.player playersetgroundreferenceent(var_3);
-  var_3 rotateto(var_0 gettagangles("tag_player"), var_2, 0, 0);
+  var_3 rotateTo(var_0 gettagangles("tag_player"), var_2, 0, 0);
   wait(var_2);
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   common_scripts\utility::flag_wait("mus_atmosphere");
   var_3 unlink();
 
@@ -643,7 +643,7 @@ ally_gun_show(var_0) {
 }
 
 ally_finale_logic(var_0) {
-  var_1 = getent("ally_shooting_target", "script_noteworthy");
+  var_1 = getEnt("ally_shooting_target", "script_noteworthy");
   wait 2;
 
   while(!common_scripts\utility::flag("first_finale_stage_done")) {
@@ -666,7 +666,7 @@ odin_finale(var_0, var_1) {
   var_4 = maps\_utility::spawn_anim_model("finale_gun");
   level.sat_ent_del[level.sat_ent_del.size] = var_4;
   var_5 = 25;
-  var_6 = getent("sat_thruster_pipe_target", "script_noteworthy");
+  var_6 = getEnt("sat_thruster_pipe_target", "script_noteworthy");
   level.ally maps\_utility::disable_ai_color();
   level.ally unlink();
   var_7 = [];
@@ -723,11 +723,11 @@ odin_finale(var_0, var_1) {
   var_10 = getEntArray("spacejump_sat", "targetname");
 
   foreach(var_12 in var_9) {
-    var_12 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
+    var_12 linkTo(level.animated_sat_part["odin_sat_section_04_base"]);
   }
 
   foreach(var_15 in var_10) {
-    var_15 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
+    var_15 linkTo(level.animated_sat_part["odin_sat_section_04_base"]);
   }
 
   thread handle_finale_shakes_and_rumbles(var_1);
@@ -745,7 +745,7 @@ odin_finale(var_0, var_1) {
   var_2 maps\_anim::anim_first_frame_solo(var_17, "satellite_end_explosion_02_Sat");
   wait 0.05;
   level.odin_animnode notify("stop_sat_loops");
-  level.animated_sat_part["odin_sat_section_03_rot"] = getent("odin_sat_section_03_rot", "script_noteworthy");
+  level.animated_sat_part["odin_sat_section_03_rot"] = getEnt("odin_sat_section_03_rot", "script_noteworthy");
   var_2 maps\_anim::anim_first_frame(level.animated_sat_part, "satellite_end_explosion_02");
   wait 0.05;
   var_2 thread maps\_anim::anim_single(level.animated_sat_part, "satellite_end_explosion_02");
@@ -754,8 +754,8 @@ odin_finale(var_0, var_1) {
   common_scripts\utility::flag_set("satellite_end_anim_started");
   level notify("finale_completed");
   var_18 = maps\odin_util::earth_get_script_mover();
-  var_19 = getent("space_mover", "targetname");
-  var_19 linkto(var_18);
+  var_19 = getEnt("space_mover", "targetname");
+  var_19 linkTo(var_18);
   var_18 unlink();
   var_18 movex(1200, 15, 5, 0);
   wait 10;
@@ -808,7 +808,7 @@ solar_panel_handling() {
 }
 
 explosion_1() {
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
 }
 
 #using_animtree("player");
@@ -824,7 +824,7 @@ handle_finale_shakes_and_rumbles(var_0) {
       var_3 = randomfloatrange(1, 5);
 
       if(var_3 <= 2) {
-        level.player playrumbleonentity("light_1s");
+        level.player playRumbleOnEntity("light_1s");
         wait(randomfloatrange(0.5, 0.9));
       }
 
@@ -835,7 +835,7 @@ handle_finale_shakes_and_rumbles(var_0) {
       var_3 = randomfloatrange(1, 5);
 
       if(var_3 <= 2) {
-        level.player playrumbleonentity("light_1s");
+        level.player playRumbleOnEntity("light_1s");
         wait(randomfloatrange(0.5, 0.9));
       }
 
@@ -850,12 +850,12 @@ handle_finale_shakes_and_rumbles(var_0) {
       }
 
       if(var_3 == 3) {
-        level.player playrumbleonentity("heavy_1s");
+        level.player playRumbleOnEntity("heavy_1s");
         wait 0.75;
       } else if(var_3 == 1)
         wait 0.55;
       else {
-        level.player playrumbleonentity("light_1s");
+        level.player playRumbleOnEntity("light_1s");
       }
 
       earthquake(0.1, 1, level.player.origin, 2000);
@@ -866,12 +866,12 @@ handle_finale_shakes_and_rumbles(var_0) {
       var_3 = randomfloatrange(1, 5);
 
       if(var_3 == 3 || var_3 == 4) {
-        level.player playrumbleonentity("heavy_1s");
+        level.player playRumbleOnEntity("heavy_1s");
         wait 0.75;
       } else if(var_3 == 1)
         wait 0.55;
       else {
-        level.player playrumbleonentity("light_1s");
+        level.player playRumbleOnEntity("light_1s");
       }
 
       earthquake(0.15, 1, level.player.origin, 2000);
@@ -887,7 +887,7 @@ handle_finale_shakes_and_rumbles(var_0) {
 
 first_explosion_fx() {
   maps\odin_fx::fx_sat_rcs_damage_kill();
-  var_0 = getent("ally_shooting_target", "script_noteworthy");
+  var_0 = getEnt("ally_shooting_target", "script_noteworthy");
   var_1 = var_0.origin;
   var_2 = anglesToForward(var_0.angles);
   var_3 = anglestoup(var_0.angles);
@@ -969,8 +969,8 @@ waittill_damage_done(var_0, var_1) {
   level endon("start_transition_to_youngblood");
   thread finale_timer(var_1);
   var_2 = 0;
-  var_3 = getent("sat_thruster_pipe_target", "script_noteworthy");
-  var_4 = getent("ally_shooting_target", "script_noteworthy");
+  var_3 = getEnt("sat_thruster_pipe_target", "script_noteworthy");
+  var_4 = getEnt("ally_shooting_target", "script_noteworthy");
   var_3 setCanDamage(1);
 
   while(!common_scripts\utility::flag("satellite_end_anim_started")) {
@@ -1011,8 +1011,8 @@ finale_timer(var_0) {
 damage_fx_handling() {
   level endon("start_transition_to_youngblood");
   level thread maps\odin_fx::fx_sat_thrusters_damage();
-  var_0 = getent("sat_thruster_pipe_target", "script_noteworthy");
-  var_1 = getent("ally_shooting_target", "script_noteworthy");
+  var_0 = getEnt("sat_thruster_pipe_target", "script_noteworthy");
+  var_1 = getEnt("ally_shooting_target", "script_noteworthy");
   var_2 = common_scripts\utility::spawn_tag_origin();
   level.sat_ent_del[level.sat_ent_del.size] = var_2;
   var_2.origin = var_1.origin;
@@ -1063,7 +1063,7 @@ finale_fx_handling(var_0) {
     var_4.origin = var_1[var_3].origin;
     var_4.angles = var_1[var_3].angles;
     var_4 unlink();
-    var_4 linkto(var_0);
+    var_4 linkTo(var_0);
   }
 
   foreach(var_4 in var_1) {
@@ -1134,11 +1134,11 @@ player_took_too_long_to_open(var_0) {
 }
 
 cover_lift_rumble_1(var_0) {
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
 }
 
 cover_lift_rumble_2(var_0) {
-  level.player playrumbleonentity("light_3s");
+  level.player playRumbleOnEntity("light_3s");
 }
 
 satellite_cleanup(var_0) {

@@ -123,13 +123,13 @@ function function_f1efe0ab(entity, mocompanim, mocompanimblendouttime, mocompani
 function function_7cf81f38(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity animmode("normal", 0);
   if(isDefined(self.reviving_a_player) && self.reviving_a_player && (isDefined(self.var_1a5b8ffb) && self.var_1a5b8ffb)) {
-    entity orientmode("face direction", vectornormalize(self.var_b46b4189.origin - entity.origin));
+    entity orientmode("face direction", vectorNormalize(self.var_b46b4189.origin - entity.origin));
   } else {
     if(isDefined(entity.var_92aa697) && entity.var_92aa697 && isDefined(entity.var_8cf1ff79)) {
-      entity orientmode("face direction", vectornormalize(entity.var_8cf1ff79 - entity.origin));
+      entity orientmode("face direction", vectorNormalize(entity.var_8cf1ff79 - entity.origin));
     } else {
       if(isDefined(entity.leader)) {
-        entity orientmode("face direction", vectornormalize(entity.leader.origin - entity.origin));
+        entity orientmode("face direction", vectorNormalize(entity.leader.origin - entity.origin));
       } else {
         entity orientmode("face angle", entity.angles[1]);
       }
@@ -141,13 +141,13 @@ function function_8c2af335(entity, mocompanim, mocompanimblendouttime, mocompani
   entity animmode("normal", 0);
   entity orientmode("face motion");
   if(isDefined(self.reviving_a_player) && self.reviving_a_player && (isDefined(self.var_1a5b8ffb) && self.var_1a5b8ffb)) {
-    entity orientmode("face direction", vectornormalize(self.var_b46b4189.origin - entity.origin));
+    entity orientmode("face direction", vectorNormalize(self.var_b46b4189.origin - entity.origin));
   } else {
     if(isDefined(entity.var_92aa697) && entity.var_92aa697 && isDefined(entity.var_8cf1ff79)) {
-      entity orientmode("face direction", vectornormalize(entity.var_8cf1ff79 - entity.origin));
+      entity orientmode("face direction", vectorNormalize(entity.var_8cf1ff79 - entity.origin));
     } else {
       if(isDefined(entity.leader)) {
-        entity orientmode("face direction", vectornormalize(entity.leader.origin - entity.origin));
+        entity orientmode("face direction", vectorNormalize(entity.leader.origin - entity.origin));
       } else {
         entity orientmode("face angle", entity.angles[1]);
       }
@@ -237,7 +237,7 @@ function private function_bd5d4573() {
   self.var_2c553c41 = spawn("script_model", self.origin);
   self.var_2c553c41 setModel("tag_origin");
   self.var_2c553c41 notsolid();
-  self.var_2c553c41 linkto(self, "tag_origin", (0, 0, 0), vectorscale((-1, 0, 0), 90));
+  self.var_2c553c41 linkTo(self, "tag_origin", (0, 0, 0), vectorscale((-1, 0, 0), 90));
   self thread function_5250c5dd();
 }
 
@@ -395,7 +395,7 @@ function private keepercompanionmovementservice(entity) {
       }
       if(isDefined(validenemies) && validenemies.size) {
         averagepoint = get_average_origin(validenemies, entity.leader.origin[2]);
-        var_be4a51b9 = vectornormalize(averagepoint - entity.leader.origin);
+        var_be4a51b9 = vectorNormalize(averagepoint - entity.leader.origin);
         point = entity.leader.origin + vectorscale(var_be4a51b9, 179.2);
         entity.companion_anchor_point = point + vectorscale(anglestoright(entity.leader.angles), 30);
       }
@@ -541,7 +541,7 @@ function function_95adf61c(player) {
     player thread zm_laststand::revive_success(self, 0);
   }
   level.var_46040f3e = 0;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1 && level flag::get("solo_game") && (isDefined(player.waiting_to_revive) && player.waiting_to_revive)) {
     level.solo_game_free_player_quickrevive = 1;
     player thread zm_perks::give_perk("specialty_quickrevive", 0);
@@ -835,9 +835,9 @@ function private function_5c472d67(entity, var_4fd6352b, var_e54db1ed) {
     level.var_fb631584[level.var_fb631584.size] = zombie;
     var_e3b3d13c = (var_13bc5a88 - var_ce2c8115) / var_13bc5a88;
     if(var_e54db1ed == "attack_up") {
-      var_94f0027d = vectornormalize(zombie.origin - (entity.origin + vectorscale((0, 0, 1), 200)));
+      var_94f0027d = vectorNormalize(zombie.origin - (entity.origin + vectorscale((0, 0, 1), 200)));
     } else {
-      var_94f0027d = vectornormalize(zombie.origin - entity.origin);
+      var_94f0027d = vectorNormalize(zombie.origin - entity.origin);
     }
     var_94f0027d = (var_94f0027d[0], var_94f0027d[1], abs(var_94f0027d[2]));
     var_94f0027d = vectorscale(var_94f0027d, 75 + (75 * var_e3b3d13c));

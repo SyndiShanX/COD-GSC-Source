@@ -158,15 +158,15 @@ main() {
 fix_map_holes() {
   level endon("game_ended");
   level waittill("spawn_nondeterministic_entities");
-  var_0 = getent("player256x256x8", "targetname");
-  var_0 moveto((2320, -201, 240), 0.05);
+  var_0 = getEnt("player256x256x8", "targetname");
+  var_0 moveTo((2320, -201, 240), 0.05);
   var_0.angles = (270, 270, 0);
   var_1 = spawn("script_model", (1224, 1600.5, 64));
   var_1.angles = (0, 270, 90);
-  var_1 clonebrushmodeltoscriptmodel(getent("player256x256x8", "targetname"));
+  var_1 clonebrushmodeltoscriptmodel(getEnt("player256x256x8", "targetname"));
   var_2 = spawn("script_model", (-528, 1598.5, 64));
   var_2.angles = (0, 90, 90);
-  var_2 clonebrushmodeltoscriptmodel(getent("player256x256x8", "targetname"));
+  var_2 clonebrushmodeltoscriptmodel(getEnt("player256x256x8", "targetname"));
 }
 
 collectible_easter_egg_setup() {
@@ -208,7 +208,7 @@ init_collectible_spot(var_0) {
   var_1 setModel("tag_origin");
   wait 1;
   var_1 makeusable();
-  var_1 sethintstring("");
+  var_1 setHintString("");
   var_1.used = 0;
   var_1 thread wait_for_player_use();
 
@@ -1439,7 +1439,7 @@ set_flag_when_players_leave_base() {
     common_scripts\utility::flag_init("players_left_starting_area");
   }
 
-  var_0 = getent("main_base", "targetname");
+  var_0 = getEnt("main_base", "targetname");
 
   while(!common_scripts\utility::flag("players_left_starting_area")) {
     foreach(var_2 in level.players) {

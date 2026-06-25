@@ -41,35 +41,35 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("clip32x32x256", "targetname");
+  var_0 = getEnt("clip32x32x256", "targetname");
   var_1 = spawn("script_model", (1438, -463.5, -540.5));
   var_1.angles = (0, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("clip32x32x256", "targetname");
+  var_2 = getEnt("clip32x32x256", "targetname");
   var_3 = spawn("script_model", (1274.5, -672.5, -576));
   var_3.angles = (0, 0, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("clip32x32x256", "targetname");
+  var_4 = getEnt("clip32x32x256", "targetname");
   var_5 = spawn("script_model", (1224.5, -603, -540.5));
   var_5.angles = (0, 0, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
-  var_6 = getent("clip64x64x64", "targetname");
+  var_6 = getEnt("clip64x64x64", "targetname");
   var_7 = spawn("script_model", (1668, -197.5, -391));
   var_7.angles = (0, 6.74088, 0);
   var_7 clonebrushmodeltoscriptmodel(var_6);
-  var_8 = getent("clip256x256x8", "targetname");
+  var_8 = getEnt("clip256x256x8", "targetname");
   var_9 = spawn("script_model", (4965.25, -1589.5, 119.75));
   var_9.angles = (0, 0, -90);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("clip64x64x8", "targetname");
+  var_10 = getEnt("clip64x64x8", "targetname");
   var_11 = spawn("script_model", (4020, -535, -489));
   var_11.angles = (60.1849, 177.372, 179.647);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("clip64x64x8", "targetname");
+  var_12 = getEnt("clip64x64x8", "targetname");
   var_13 = spawn("script_model", (4022, -489, -489));
   var_13.angles = (60.1849, 170.972, 179.647);
   var_13 clonebrushmodeltoscriptmodel(var_12);
-  var_14 = getent("clip64x64x8", "targetname");
+  var_14 = getEnt("clip64x64x8", "targetname");
   var_15 = spawn("script_model", (4076, -506, -492));
   var_15.angles = (55.7869, 357.587, -179.981);
   var_15 clonebrushmodeltoscriptmodel(var_14);

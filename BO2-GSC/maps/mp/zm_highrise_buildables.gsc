@@ -167,7 +167,7 @@ onpickup_keys(player) {}
 escape_pod_key_prompt(player) {
   if(!flag("escape_pod_needs_reset")) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return 0;
   }
 
@@ -228,14 +228,14 @@ elevator_key_prompt(player) {
   if(isDefined(self.stub.elevator)) {
     if(self.stub.elevator maps\mp\zm_highrise_elevators::elevator_is_on_floor(self.stub.floor)) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return 0;
     }
   }
 
   if(!flag("power_on")) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return 0;
   }
 
@@ -264,7 +264,7 @@ onuseplantobject_elevatorkey(player) {
 
 droponelevator(player) {
   if(isDefined(player) && (isDefined(player maps\mp\zm_highrise_elevators::object_is_on_elevator()) && player maps\mp\zm_highrise_elevators::object_is_on_elevator())) {
-    self.model linkto(player.elevator_parent);
+    self.model linkTo(player.elevator_parent);
     self.linked_to_elevator = 1;
     self.unitrigger.link_parent = player.elevator_parent;
   } else

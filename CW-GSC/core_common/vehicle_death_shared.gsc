@@ -337,7 +337,7 @@ function set_death_model(smodel, fdelay) {
     return;
   }
 
-  if(!isDefined(emodel.death_anim) && emodel isplayinganimscripted()) {
+  if(!isDefined(emodel.death_anim) && emodel isplayinganimScripted()) {
     emodel animation::stop(0);
   }
 
@@ -417,7 +417,7 @@ function helicopter_crash_movement(point, dir, explosiondelay) {
     mag = 100;
 
     if(isDefined(dir)) {
-      dir = vectornormalize(dir);
+      dir = vectorNormalize(dir);
     } else {
       dir = (1, 0, 0);
     }
@@ -534,7 +534,7 @@ function helicopter_crash_zone_accel(dir) {
 
     self.crash_vel = self.crash_zone.origin - self.origin;
     self.crash_vel = (self.crash_vel[0], self.crash_vel[1], 0);
-    self.crash_vel = vectornormalize(self.crash_vel);
+    self.crash_vel = vectorNormalize(self.crash_vel);
     self.crash_vel *= self getmaxspeed() * 0.5;
 
     if(self.var_71b64420) {
@@ -599,7 +599,7 @@ function play_crashing_loop() {
 
   ent = spawn("script_origin", self.origin);
   ent function_6e562a77(self);
-  ent linkto(self);
+  ent linkTo(self);
   ent playLoopSound(var_cc04d521);
   self waittill(#"death", #"snd_impact");
   ent playSound(#"hash_626995667a4ff5c");
@@ -652,7 +652,7 @@ function aircraft_crash_move(point, dir) {
 
   if(nodes.size > 0) {
     for(i = 0; i < nodes.size; i++) {
-      dir = vectornormalize(nodes[i] - self.origin);
+      dir = vectorNormalize(nodes[i] - self.origin);
       forward = anglesToForward(self.angles);
       dot = vectordot(dir, forward);
 
@@ -671,7 +671,7 @@ function aircraft_crash_move(point, dir) {
     if(closest_index >= 0) {
       o = nodes[closest_index];
       o = (o[0], o[1], self.origin[2]);
-      dir = vectornormalize(o - self.origin);
+      dir = vectorNormalize(o - self.origin);
       self setvehvelocity(self.velocity + dir * 2000);
     } else {
       self setvehvelocity(self.velocity + anglestoright(self.angles) * randomintrange(-1000, 1000) + (0, 0, randomintrange(0, 1500)));
@@ -716,7 +716,7 @@ function helicopter_crash_move(point, dir) {
   self setturningability(0);
   self setphysacceleration((0, 0, -800));
   vel = self.velocity;
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   ang_vel = self getangularvelocity();
   ang_vel = (0, ang_vel[1] * randomfloatrange(1, 3), 0);
   self setangularvelocity(ang_vel);
@@ -728,10 +728,10 @@ function helicopter_crash_move(point, dir) {
     dir_2d = (dir[0], dir[1], 0);
 
     if(length(dir_2d) > 0.01) {
-      dir_2d = vectornormalize(dir_2d);
-      torque = vectorcross(vectornormalize(local_hit_point), dir);
+      dir_2d = vectorNormalize(dir_2d);
+      torque = vectorcross(vectorNormalize(local_hit_point), dir);
       torque = (0, 0, torque[2]);
-      torque = vectornormalize(torque);
+      torque = vectorNormalize(torque);
       torque = (0, torque[2] * 180, 0);
     }
   }
@@ -773,7 +773,7 @@ function boat_crash_movement(point, dir) {
   self function_d4c687c9();
   self setphysacceleration((0, 0, -50));
   vel = self.velocity;
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   ang_vel = self getangularvelocity();
   ang_vel = (0, 0, 0);
   self setangularvelocity(ang_vel);
@@ -945,7 +945,7 @@ function death_jolt(type, point, dir) {
   self joltbody(self.origin + (23, 33, 64), 3);
 
   if(isDefined(self.death_anim)) {
-    self animscripted("death_anim", self.origin, self.angles, self.death_anim, "normal", "root", 1, 0);
+    self animScripted("death_anim", self.origin, self.angles, self.death_anim, "normal", "root", 1, 0);
     self waittillmatch({
       #notetrack: "end"}, #"death_anim");
     return;
@@ -993,7 +993,7 @@ function deathfx_ent() {
     ent.angles = emodel.angles;
     ent notsolid();
     ent hide();
-    ent linkto(emodel);
+    ent linkTo(emodel);
     self.deathfx_ent = ent;
   } else {
     self.deathfx_ent setModel(self.model);
@@ -1394,7 +1394,7 @@ function vehicle_damage_filter_damage_watcher(driver, heavy_damage_threshold) {
   while(true) {
     waitresult = self waittill(#"damage");
     earthquake(0.25, 0.15, self.origin, 512, self);
-    driver playrumbleonentity("damage_light");
+    driver playRumbleOnEntity("damage_light");
     time = gettime();
 
     if(time - level.n_last_damage_time > 500) {
@@ -1533,7 +1533,7 @@ function random_crash(hitdir) {
     hitdir = (1, 0, 0);
   }
 
-  hitdir = vectornormalize(hitdir);
+  hitdir = vectorNormalize(hitdir);
   side_dir = vectorcross(hitdir, (0, 0, 1));
   side_dir_mag = randomfloatrange(-280, 280);
   side_dir_mag += math::sign(side_dir_mag) * 150;
@@ -1600,7 +1600,7 @@ function flipping_shooting_crash_movement(attacker, hitdir) {
     hitdir = (1, 0, 0);
   }
 
-  hitdir = vectornormalize(hitdir);
+  hitdir = vectorNormalize(hitdir);
   new_vel = self.velocity;
   self.crash_style = getdvarint(#"debug_crash_type", 0);
 
@@ -1623,7 +1623,7 @@ function flipping_shooting_crash_movement(attacker, hitdir) {
 
 function flipping_shooting_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
-  dmg_ent linkto(self);
+  dmg_ent linkTo(self);
   dmg_ent playLoopSound(#"veh_wasp_dmg_loop");
   self waittill(#"crash_done", #"death");
   dmg_ent stoploopsound(1);

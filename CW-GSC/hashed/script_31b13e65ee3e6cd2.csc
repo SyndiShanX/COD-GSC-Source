@@ -188,7 +188,7 @@ function function_f7aa12ff(localclientnum, oldval, newval, bnewent, binitialsnap
 
   player endon(#"death");
   player util::waittill_dobj(bwastimejump);
-  player playrumbleonentity(bwastimejump, #"buzz_high");
+  player playRumbleOnEntity(bwastimejump, #"buzz_high");
   mdl_altar = level.var_b6218854[bwastimejump];
 
   if(!isDefined(mdl_altar)) {
@@ -245,7 +245,7 @@ function function_8452bba2(localclientnum, oldval, newval, bnewent, binitialsnap
 
   player endon(#"death");
   player util::waittill_dobj(bwastimejump);
-  player playrumbleonentity(bwastimejump, #"buzz_high");
+  player playRumbleOnEntity(bwastimejump, #"buzz_high");
   mdl_altar = level.var_b6218854[bwastimejump];
 
   if(!isDefined(mdl_altar)) {
@@ -288,7 +288,7 @@ function function_8452bba2(localclientnum, oldval, newval, bnewent, binitialsnap
         var_8fe85086.var_a6ac630 util::waittill_dobj(bwastimejump);
         var_8fe85086.var_a6ac630 playSound(bwastimejump, #"hash_2caaffe78ba0dc1f");
         var_8fe85086.var_b3673abf = var_8fe85086.var_a6ac630 playLoopSound(#"hash_380ce5cb9c80c45c");
-        player playrumbleonentity(bwastimejump, #"damage_light");
+        player playRumbleOnEntity(bwastimejump, #"damage_light");
         earthquake(bwastimejump, 0.5, 2, player.origin, 64, 1);
         var_cc6df305 beam::launch(var_8fe85086.var_a6ac630, "tag_obelisk_pillar_altar", mdl_altar, "tag_obelisk_altar_in", "beam9_zm_event_final_obelisk");
       }
@@ -395,7 +395,7 @@ function function_8452bba2(localclientnum, oldval, newval, bnewent, binitialsnap
   igcactive(bwastimejump, 0);
   player stoprumble(bwastimejump, #"damage_heavy");
   wait 0.25;
-  player playrumbleonentity(bwastimejump, #"damage_light");
+  player playRumbleOnEntity(bwastimejump, #"damage_light");
   wait 5;
 
   foreach(var_8fe85086 in var_b6b9cd4b) {

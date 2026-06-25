@@ -266,11 +266,11 @@ func_6958() {
 
     var_03.var_480D = var_01;
     if(var_03.var_116 != var_04) {
-      var_03 moveto(var_04, var_00 / 1000);
+      var_03 moveTo(var_04, var_00 / 1000);
     }
 
     if(anglesdelta(var_03.var_1D, var_05) > 1) {
-      var_03 rotateto(var_05, var_00 / 1000);
+      var_03 rotateTo(var_05, var_00 / 1000);
     }
   }
 }
@@ -282,8 +282,8 @@ func_6957() {
     }
 
     var_01.var_480D = undefined;
-    var_01 moveto(var_01.var_116, 0.05);
-    var_01 rotateto(var_01.var_1D, 0.05);
+    var_01 moveTo(var_01.var_116, 0.05);
+    var_01 rotateTo(var_01.var_1D, 0.05);
   }
 }
 
@@ -798,14 +798,14 @@ func_17C6(param_00, param_01) {
   var_03.var_116 = self.var_116 + var_02;
   var_03 setModel("tag_player");
   self method_81E2(var_03, "tag_player");
-  self setorigin(param_00);
+  self setOrigin(param_00);
   self setangles(param_01);
   self setstance("stand");
   self method_8003();
   self method_8322();
   playfxontagforclients(common_scripts\utility::func_44F5("divisions_bayonet_charge"), self, "j_head", self);
-  var_03 moveto(param_00 + var_02, 3, 0, 1.5);
-  var_03 rotateto(param_01, 3, 0, 1.5);
+  var_03 moveTo(param_00 + var_02, 3, 0, 1.5);
+  var_03 rotateTo(param_01, 3, 0, 1.5);
   var_03 waittill("movedone");
   self method_81E3();
   function_0294(common_scripts\utility::func_44F5("divisions_bayonet_charge"), self, "j_head", self);
@@ -2915,8 +2915,8 @@ func_386F(param_00) {
 func_3872(param_00) {
   param_00 method_83EF();
   if(!param_00 islinked()) {
-    param_00 enablelinkto();
-    param_00 linkto(self.var_A2C8);
+    param_00 enablelinkTo();
+    param_00 linkTo(self.var_A2C8);
   }
 
   self.var_A2C8.var_3850 = param_00;
@@ -3214,7 +3214,7 @@ func_237F(param_00) {
 func_3869(param_00) {
   level.var_79BE[level.var_79BE.size] = param_00;
   param_00 method_83EF();
-  param_00 enablelinkto();
+  param_00 enablelinkTo();
   var_01 = 0;
   if(!isDefined(self.var_7D0E)) {
     var_01 = 1;
@@ -3235,7 +3235,7 @@ func_3869(param_00) {
   var_02.var_113F = 0;
   var_02.var_7894 = 1;
   self.var_7D0E[self.var_7D0E.size] = var_02;
-  param_00 linkto(self.var_A2C8);
+  param_00 linkTo(self.var_A2C8);
   if(var_01) {
     thread func_3868();
   }
@@ -3326,7 +3326,7 @@ func_384E(param_00) {
       param_00 maps\mp\gametypes\_gameobjects::func_C30("friendly");
       param_00 maps\mp\gametypes\_gameobjects::func_8A60("any");
       param_00 maps\mp\gametypes\_gameobjects::func_8A57(&"RAIDS_REPAIR_USE");
-      param_00.var_9D65 setcursorhint("HINT_NOICON");
+      param_00.var_9D65 setCursorHint("HINT_NOICON");
       param_00 func_3FCD(self.var_A2C8);
       var_01 makeusable();
       self waittill("repaired");
@@ -3358,7 +3358,7 @@ func_3852() {
 
 func_385B(param_00) {
   var_01 = self.var_A2C8;
-  param_00 linkto(var_01);
+  param_00 linkTo(var_01);
   param_00 thread lib_0502::func_2D1D();
 }
 
@@ -3925,10 +3925,10 @@ func_386E(param_00, param_01, param_02, param_03) {
     case "physics_launch":
       var_08 = param_00.var_116 - param_01.var_116;
       var_08 = (var_08[0], var_08[1], 0);
-      var_08 = vectornormalize(var_08);
+      var_08 = vectorNormalize(var_08);
       var_08 = (var_08[0], var_08[1], 1);
       var_09 = (randomfloat(1), randomfloat(1), randomfloat(1));
-      var_09 = vectornormalize(var_08);
+      var_09 = vectorNormalize(var_08);
       param_02 method_83C9(var_08 * 1000, var_09 * 10000);
       break;
 
@@ -3941,7 +3941,7 @@ func_386E(param_00, param_01, param_02, param_03) {
 
       var_0C = trajectorycalculateinitialvelocity(param_02.var_116, var_0A.var_116, (0, 0, -800), var_0B);
       param_02 gravitymove(var_0C, var_0B);
-      param_02 rotateto(var_0A.var_1D, var_0B, 0, var_0B);
+      param_02 rotateTo(var_0A.var_1D, var_0B, 0, var_0B);
       break;
 
     default:
@@ -3961,7 +3961,7 @@ func_583D(param_00, param_01) {
   if(isDefined(param_00.var_8172)) {
     var_02 = anglesToForward(param_00.var_1D);
     var_03 = param_01.var_116 - param_00.var_116;
-    var_03 = vectornormalize(var_03);
+    var_03 = vectorNormalize(var_03);
     if(vectordot(var_02, var_03) < param_00.var_8172) {
       return 0;
     }
@@ -4014,7 +4014,7 @@ func_3873(param_00) {
 
 func_3874(param_00, param_01) {
   if(param_00.var_3A != "script_model") {
-    param_00 enablelinkto();
+    param_00 enablelinkTo();
     param_00 method_83EF();
   }
 
@@ -4023,7 +4023,7 @@ func_3874(param_00, param_01) {
     return;
   }
 
-  param_00 linkto(self.var_A2C8);
+  param_00 linkTo(self.var_A2C8);
   self.var_A2C8.var_9FA1 = param_00;
   func_386B(param_00);
   lib_0502::isteleportenabled(param_00, param_01, self.var_A2C8.var_9EDD);
@@ -4340,7 +4340,7 @@ func_1900(param_00) {
 func_1904(param_00) {
   var_01 = spawn("script_origin", param_00.var_116);
   var_01.var_1D = param_00.var_1D;
-  var_01 rotateyaw(-45, 0.05);
+  var_01 rotateYaw(-45, 0.05);
   wait 0.05;
   var_02 = param_00.var_116 + (0, 0, 5);
   var_03 = param_00.var_116 + anglesToForward(var_01.var_1D) * 100 + (0, 0, 96);
@@ -5283,7 +5283,7 @@ hostagedoortrigger(param_00, param_01) {
   var_02 = param_00.var_982E;
   var_02.var_9DC2[var_02.var_9DC2.size] = param_00;
   if(param_01) {
-    param_00 enablelinkto();
+    param_00 enablelinkTo();
     lib_0502::func_2084(param_00);
   }
 
@@ -5327,7 +5327,7 @@ hostagedoortrigger(param_00, param_01) {
       return;
     }
 
-    param_00 sethintstring("");
+    param_00 setHintString("");
     var_09 = func_45D0("doorMoveTime");
     wait(var_09);
     var_0A = func_45D0("doorUseCloseTime");
@@ -5338,7 +5338,7 @@ hostagedoortrigger(param_00, param_01) {
     var_02 notify("trigger", "close", var_06);
     var_02.var_6BE1 = 0;
     var_02 notify("close");
-    param_00 sethintstring("");
+    param_00 setHintString("");
     var_09 = func_45D0("doorMoveTime");
     wait(var_09);
   }
@@ -5630,9 +5630,9 @@ func_3FCD(param_00) {
   objective_onentity(self.var_698B, param_00);
   objective_onentity(self.var_698C, param_00);
   if(isDefined(self.var_6996)) {
-    self.var_6996["allies"] settargetent(param_00);
-    self.var_6996["axis"] settargetent(param_00);
-    self.var_6996["broadcaster"] settargetent(param_00);
+    self.var_6996["allies"] settargetEnt(param_00);
+    self.var_6996["axis"] settargetEnt(param_00);
+    self.var_6996["broadcaster"] settargetEnt(param_00);
   }
 }
 

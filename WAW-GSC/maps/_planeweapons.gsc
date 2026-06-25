@@ -120,15 +120,15 @@ attach_bombs() {
     self.bomb[i].dropped = false;
 
     if(i == 0) {
-      self.bomb[i] LinkTo(self, tag_l1, (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, tag_l1, (0, 0, -4), (-10, 0, 0));
     } else if(i == 1) {
-      self.bomb[i] LinkTo(self, tag_r1, (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, tag_r1, (0, 0, -4), (-10, 0, 0));
     } else if(i == 2) {
-      self.bomb[i] LinkTo(self, tag_l2, (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, tag_l2, (0, 0, -4), (-10, 0, 0));
     } else if(i == 3) {
-      self.bomb[i] LinkTo(self, tag_r2, (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, tag_r2, (0, 0, -4), (-10, 0, 0));
     } else {
-      self.bomb[i] LinkTo(self, tag_c, (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, tag_c, (0, 0, -4), (-10, 0, 0));
     }
   }
 }
@@ -253,11 +253,11 @@ bomb_wiggle() {
     time_in_half = time / 3;
 
     self bomb_pitch(time);
-    self RotateTo((self.pitch, (original_angles[1] + (yaw * -2)), (roll * -2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
+    self rotateTo((self.pitch, (original_angles[1] + (yaw * -2)), (roll * -2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
     self waittill("rotatedone");
 
     self bomb_pitch(time);
-    self RotateTo((self.pitch, (original_angles[1] + (yaw * 2)), (roll * 2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
+    self rotateTo((self.pitch, (original_angles[1] + (yaw * 2)), (roll * 2)), (time * 2), (time_in_half * 2), (time_in_half * 2));
     self waittill("rotatedone");
   }
 }

@@ -114,9 +114,9 @@ init_equipment_upgrade() {
 
   for(i = 0; i < equipment_spawns.size; i++) {
     hint_string = get_equipment_hint(equipment_spawns[i].zombie_equipment_upgrade);
-    equipment_spawns[i] sethintstring(hint_string);
-    equipment_spawns[i] setcursorhint("HINT_NOICON");
-    equipment_spawns[i] usetriggerrequirelookat();
+    equipment_spawns[i] setHintString(hint_string);
+    equipment_spawns[i] setCursorHint("HINT_NOICON");
+    equipment_spawns[i] useTriggerRequireLookAt();
     equipment_spawns[i] add_to_equipment_trigger_list(equipment_spawns[i].zombie_equipment_upgrade);
     equipment_spawns[i] thread equipment_spawn_think();
   }
@@ -140,7 +140,7 @@ get_equipment_icon(equipment_name) {
 add_to_equipment_trigger_list(equipment_name) {
   assert(isDefined(level.zombie_equipment[equipment_name]), equipment_name + " was not included or is not registered with the equipment system.");
   level.zombie_equipment[equipment_name].triggers[level.zombie_equipment[equipment_name].triggers.size] = self;
-  level.zombie_equipment[equipment_name].models[level.zombie_equipment[equipment_name].models.size] = getent(self.target, "targetname");
+  level.zombie_equipment[equipment_name].models[level.zombie_equipment[equipment_name].models.size] = getEnt(self.target, "targetname");
 }
 
 equipment_spawn_think() {
@@ -158,7 +158,7 @@ equipment_spawn_think() {
       if(isDefined(level.hacker_tool_positions)) {
         new_pos = random(level.hacker_tool_positions);
         self.origin = new_pos.trigger_org;
-        model = getent(self.target, "targetname");
+        model = getEnt(self.target, "targetname");
         model.origin = new_pos.model_org;
         model.angles = new_pos.model_ang;
       }
@@ -756,8 +756,8 @@ eqstub_get_unitrigger_origin() {
 
 eqstub_on_spawn_trigger(trigger) {
   if(isDefined(self.link_parent)) {
-    trigger enablelinkto();
-    trigger linkto(self.link_parent);
+    trigger enablelinkTo();
+    trigger linkTo(self.link_parent);
     trigger setmovingplatformenabled(1);
   }
 }
@@ -968,7 +968,7 @@ watch_player_visibility(equipment) {
   self setinvisibletoall();
 
   while(isDefined(self)) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player)) {
@@ -1544,7 +1544,7 @@ attack_item(item) {
   }
 
   self orientmode("face point", item.origin);
-  self animscripted(self.origin, flat_angle(vectortoangles(item.origin - self.origin)), melee_anim);
+  self animScripted(self.origin, flat_angle(vectortoangles(item.origin - self.origin)), melee_anim);
   self notify("item_attack");
 
   if(isDefined(self.custom_item_dmg)) {
@@ -1572,7 +1572,7 @@ attack_item_interrupt(item) {
     self waittill("damage");
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
   self.doing_equipment_attack = 0;
   self maps\mp\zombies\_zm_spawner::zombie_history("doing equipment attack 0 from death - " + gettime());
   self.item = undefined;
@@ -1583,7 +1583,7 @@ attack_item_stop(item) {
   self endon("attack_item_stop");
   self endon("death");
   item waittill("death");
-  self stopanimscripted();
+  self stopanimScripted();
   self.doing_equipment_attack = 0;
   self maps\mp\zombies\_zm_spawner::zombie_history("doing equipment attack 0 from death - " + gettime());
   self.item = undefined;

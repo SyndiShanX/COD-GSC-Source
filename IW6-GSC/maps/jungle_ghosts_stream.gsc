@@ -52,7 +52,7 @@ friendly_stream_navigation() {
       if(!common_scripts\utility::flag("stream_backend_start")) {
         if(!common_scripts\utility::flag("ambush_open_fire")) {
           maps\_utility::activate_trigger_with_targetname("waterfall_ambush_setup");
-          var_2 = getent("ambush_area", "targetname");
+          var_2 = getEnt("ambush_area", "targetname");
           badplace_cylinder("axis_badplace", -1, var_2.origin, 353, 200, "axis");
           ambush_stealth_settings();
           var_3 = [];
@@ -104,7 +104,7 @@ friendly_stream_navigation() {
       common_scripts\utility::flag_wait("stream_exit");
 
       if(common_scripts\utility::flag("ambush_open_fire")) {
-        var_12 = getent("stream_backend_moveup_stealth", "targetname");
+        var_12 = getEnt("stream_backend_moveup_stealth", "targetname");
         var_12 delete();
         common_scripts\utility::flag_wait_any("stream_backend_enemies_dead", "stream_backend_moveup");
 
@@ -113,7 +113,7 @@ friendly_stream_navigation() {
         }
       } else {
         common_scripts\utility::array_thread(level.squad, level.ignore_on_func);
-        var_12 = getent("stream_backend_moveup", "targetname");
+        var_12 = getEnt("stream_backend_moveup", "targetname");
 
         if(isDefined(var_12)) {
           var_12 delete();
@@ -391,7 +391,7 @@ stream_close_enemy_logic() {
     wait(randomfloatrange(2, 4));
 
   self setgoalpos(self.origin);
-  self setgoalvolumeauto(getent("stream_runaway_delete_vol", "targetname"));
+  self setgoalvolumeauto(getEnt("stream_runaway_delete_vol", "targetname"));
   wait 3;
   self waittill("goal");
   common_scripts\utility::flag_set("start_removing_stream_guys");
@@ -509,7 +509,7 @@ direct_chopper_crate_anim() {
   level common_scripts\utility::waittill_any("chopper_about_to_leave", "_stealth_spotted", "stream_rush_chopper");
   wait 2;
   var_0 notify("stop_loop");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   common_scripts\utility::waitframe();
   maps\_utility::gun_recall();
 }
@@ -520,26 +520,26 @@ chopper_crash() {
   level endon("stream_heli_out");
   chopper_crash_enemies();
   thread chopper_rumble_earthquake();
-  var_0 = getent("crash_final_collision", "targetname");
+  var_0 = getEnt("crash_final_collision", "targetname");
   var_0 notsolid();
-  var_1 = getent("dest_crate", "targetname");
+  var_1 = getEnt("dest_crate", "targetname");
   var_1 notsolid();
   var_1 connectpaths();
-  var_2 = common_scripts\utility::getstruct("new_crash", "targetname");
+  var_2 = common_scripts\utility::getStruct("new_crash", "targetname");
   var_2.chopper = maps\_vehicle::spawn_vehicle_from_targetname("supply_heli");
   var_2.chopper endon("suspend_drive_anims");
   var_2.chopper setModel("vehicle_aas_72x_destructible");
   var_2.chopper.animname = "aas";
   wait 1;
   var_2.chopper thread chopper_sound();
-  var_2.crate_clip = getent("chopper_clip", "targetname");
+  var_2.crate_clip = getEnt("chopper_clip", "targetname");
   var_2.crate_clip thread kill_player_on_touch();
   var_2.crate_clip.origin = var_2.chopper.origin;
   var_2.crate_clip.angles = var_2.chopper.angles;
-  var_2.crate_clip linkto(var_2.chopper, "tag_origin");
+  var_2.crate_clip linkTo(var_2.chopper, "tag_origin");
   var_2.crate_clip thread notify_on_damage_chopper();
   level.chopper_pilot_ent = var_2.crate_clip;
-  var_3 = getent("chopper_pilot", "targetname");
+  var_3 = getEnt("chopper_pilot", "targetname");
   var_3 setspawnerteam("axis");
   var_2.pristine_crate = maps\_utility::spawn_anim_model("pristine_crate");
   var_2.damaged_crate = maps\_utility::spawn_anim_model("damaged_crate");
@@ -551,7 +551,7 @@ chopper_crash() {
   var_2.pilot thread crash_pilot_logic(var_2.chopper);
   var_2.pilot thread notify_on_damage();
   var_2.actors = [var_2.pristine_crate, var_2.damaged_crate, var_2.chopper];
-  var_2.pilot linkto(var_2.chopper, "tag_pilot1", (0, 0, 0), (0, 0, 0));
+  var_2.pilot linkTo(var_2.chopper, "tag_pilot1", (0, 0, 0), (0, 0, 0));
   var_2.chopper thread maps\_anim::anim_loop_solo(var_2.pilot, "new_crash_idle", "stop_loop", "tag_pilot1");
   var_2 thread maps\_anim::anim_loop(var_2.actors, "new_crash_idle");
   var_2 thread chopper_leaves_after_time();
@@ -570,7 +570,7 @@ chopper_crash() {
   var_2.chopper notify("stop_loop");
   var_2.pilot notify("stop_loop");
   var_2.chopper thread maps\_anim::anim_single_solo(var_2.pilot, "new_crash", "tag_pilot1");
-  var_2.pilot linkto(var_2.chopper, "tag_pilot1");
+  var_2.pilot linkTo(var_2.chopper, "tag_pilot1");
   var_2 maps\_anim::anim_single(var_2.actors, "new_crash");
   level notify("chopper down");
 }
@@ -599,11 +599,11 @@ chopper_leaves_after_time() {
   self.chopper notify("stop_loop");
   self.pilot notify("stop_loop");
   common_scripts\utility::flag_set("stream_heli_out");
-  self.pristine_crate linkto(self.chopper, "tag_origin");
+  self.pristine_crate linkTo(self.chopper, "tag_origin");
   self.chopper thread maps\_anim::anim_loop_solo(self.pilot, "new_crash_idle", "stop_loop", "tag_pilot1");
-  self.chopper stopanimscripted();
+  self.chopper stopanimScripted();
   self.chopper setanim(level.vehicle_driveidle["vehicle_aas_72x"], 1, 0.2, 1);
-  var_0 = getent("supply_chopper_leave", "targetname");
+  var_0 = getEnt("supply_chopper_leave", "targetname");
   var_1 = 20;
   self.chopper setlookatent(var_0);
   self.chopper setvehgoalpos(var_0.origin, 1);
@@ -611,7 +611,7 @@ chopper_leaves_after_time() {
   wait 3;
 
   while(isDefined(var_0.target)) {
-    var_0 = getent(var_0.target, "targetname");
+    var_0 = getEnt(var_0.target, "targetname");
     self.chopper setlookatent(var_0);
     self.chopper setvehgoalpos(var_0.origin, 0);
     wait 8;
@@ -639,10 +639,10 @@ chopper_leaves_after_time() {
 chopper_rumble_earthquake() {
   common_scripts\utility::flag_wait("chopper_impact");
   earthquake(0.6, 0.75, level.player.origin, 800);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.8;
   earthquake(0.4, 0.5, level.player.origin, 800);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 chopper_sound() {
@@ -772,7 +772,7 @@ chopper_crash_guy_logic() {
 stop_anim_on_damage() {
   self endon("death");
   self waittill("damage");
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 watersheet_trig_setup() {
@@ -782,7 +782,7 @@ watersheet_trig_setup() {
   for(;;) {
     self waittill("trigger");
     level.player setwatersheeting(1, 2);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     wait 0.5;
 
     if(level.player istouching(self)) {
@@ -843,7 +843,7 @@ player_ambush_area_monitor(var_0) {
   var_1 = 1;
   var_2 = 0.5;
   var_3 = 10;
-  var_4 = getent("hidden_in_waterfalls", "targetname");
+  var_4 = getEnt("hidden_in_waterfalls", "targetname");
 
   while(!level.player istouching(var_0) && !level.player istouching(var_4)) {
     common_scripts\utility::waitframe();
@@ -962,7 +962,7 @@ follow_on_went_hot_logic() {
 ambush_guy_change_sight_dist() {
   self endon("death");
   level endon("ambush_open_fire");
-  var_0 = getent("hidden_in_waterfalls", "targetname");
+  var_0 = getEnt("hidden_in_waterfalls", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -985,7 +985,7 @@ ambush_guy_outcome_logic() {
 
   if(common_scripts\utility::flag("player_didnt_ambush")) {
     common_scripts\utility::flag_set("waterfall_ambush_begin");
-    self stopanimscripted();
+    self stopanimScripted();
     maps\_utility::disable_cqbwalk();
     self.perfectaim = 1;
     self.favoriteenemy = level.player;
@@ -1000,7 +1000,7 @@ ambush_guy_does_anim(var_0) {
   common_scripts\utility::flag_wait("waterfall_ambush_begin");
   maps\_utility::disable_cqbwalk();
   maps\_utility::set_generic_run_anim("patrol_jog");
-  var_1 = common_scripts\utility::getstruct(var_0, "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct(var_0, "script_noteworthy");
   var_1 maps\_anim::anim_reach_solo(self, var_0);
   var_1 maps\_anim::anim_single_solo(self, var_0);
 }
@@ -1010,7 +1010,7 @@ ambush_damage_notify() {
   common_scripts\utility::waittill_any("damage", "bulletwhizby", "stealth_enemy_endon", "_stealth_enemy_alert_level_change");
   level notify("ambush_enemy_shot");
   common_scripts\utility::flag_set("ambush_open_fire");
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 ambush_kickoff_logic() {
@@ -1028,7 +1028,7 @@ waterfall_goes_hot() {
 ambush_player_ran_ahead() {
   level endon("waterfall_patrollers_passed");
   level endon("waterfall_patrollers_dead");
-  var_0 = getent("ambush_early", "targetname");
+  var_0 = getEnt("ambush_early", "targetname");
   var_0 waittill("trigger");
   thread sky_change();
   common_scripts\utility::flag_set("player_didnt_ambush");
@@ -1250,9 +1250,9 @@ pre_tall_grass_friendly_movement() {
     badplace_cylinder("pre_tall_grass" + var_3, 0, var_2.origin, var_2.radius, 300, "allies");
   }
 
-  var_4 = getent("pre_tall_grass_stealth_move_1", "script_noteworthy");
-  var_5 = getent("pre_tall_grass_stealth_move_2", "script_noteworthy");
-  var_6 = getent("pre_tall_grass_stealth_move_3", "script_noteworthy");
+  var_4 = getEnt("pre_tall_grass_stealth_move_1", "script_noteworthy");
+  var_5 = getEnt("pre_tall_grass_stealth_move_2", "script_noteworthy");
+  var_6 = getEnt("pre_tall_grass_stealth_move_3", "script_noteworthy");
 
   if(level.start_point != "grass chopper") {
     level.squad[0] maps\_utility::ent_flag_wait("at_goal");
@@ -1277,11 +1277,11 @@ pre_tall_grass_friendly_movement() {
 pre_tall_grass_patroller_watcher() {
   level endon("_stealth_spotted");
   level endon("backend_friendlies_go_hot");
-  var_0 = common_scripts\utility::getstruct("pre_tall_grass_patrol_1", "script_noteworthy");
-  var_1 = common_scripts\utility::getstruct("pre_tall_grass_patrol_2", "script_noteworthy");
-  var_2 = common_scripts\utility::getstruct("pre_tall_grass_patrol_3", "script_noteworthy");
-  var_3 = common_scripts\utility::getstruct("pre_tall_grass_patrol_4", "script_noteworthy");
-  var_4 = common_scripts\utility::getstruct("pre_tall_grass_patrol_5", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("pre_tall_grass_patrol_1", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("pre_tall_grass_patrol_2", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("pre_tall_grass_patrol_3", "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct("pre_tall_grass_patrol_4", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("pre_tall_grass_patrol_5", "script_noteworthy");
   var_1 waittill("trigger");
   common_scripts\utility::flag_set("pre_tall_grass_friendly_moveup_1");
   var_3 waittill("trigger");
@@ -1669,7 +1669,7 @@ get_latest_struct() {
   for(;;) {
     if(distancesquared(self.origin, self.goal_struct.origin) <= 22500) {
       if(isDefined(self.goal_struct.target)) {
-        self.goal_struct = common_scripts\utility::getstruct(self.goal_struct.target, "targetname");
+        self.goal_struct = common_scripts\utility::getStruct(self.goal_struct.target, "targetname");
       } else {
         maps\_utility::ent_flag_set("end_of_spline");
       }

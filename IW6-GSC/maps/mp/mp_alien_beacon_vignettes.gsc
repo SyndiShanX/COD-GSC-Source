@@ -39,7 +39,7 @@ hide_wall_pieces() {
     var_1 hide();
   }
 
-  var_3 = getent("miniboss_door_clip", "targetname");
+  var_3 = getEnt("miniboss_door_clip", "targetname");
   var_3 connectpaths();
   var_3 notsolid();
   var_4 = getscriptablearray("miniboss_door", "targetname");
@@ -211,7 +211,7 @@ doornotetrackhandler(var_0, var_1, var_2, var_3) {
 
       foreach(var_8 in level.players) {
         if(distance(var_8.origin, var_6) <= 128) {
-          var_8 setvelocity(vectornormalize(var_8.origin - var_6) * 800);
+          var_8 setvelocity(vectorNormalize(var_8.origin - var_6) * 800);
           var_8 dodamage(var_8.maxhealth / 3, var_6);
         }
       }
@@ -255,9 +255,9 @@ miniboss_wall_swap() {
 miniboss_wall_clip() {
   thread miniboss_wall_knockback(1750);
   wait 1.0;
-  var_0 = getent("miniboss_door_clip", "targetname");
+  var_0 = getEnt("miniboss_door_clip", "targetname");
   var_0 solid();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 miniboss_wall_knockback(var_0) {
@@ -276,12 +276,12 @@ miniboss_wall_knockback(var_0) {
     }
 
     var_8 = var_6 getvelocity();
-    var_9 = vectornormalize((var_6.origin - var_7) * (1, 1, 0)) * var_0;
+    var_9 = vectorNormalize((var_6.origin - var_7) * (1, 1, 0)) * var_0;
     var_10 = (var_8 + var_9) * (1, 1, 0);
     var_11 = length(var_10);
 
     if(var_11 >= var_1) {
-      var_10 = vectornormalize(var_10) * var_1;
+      var_10 = vectorNormalize(var_10) * var_1;
     }
 
     var_6 setvelocity(var_10);
@@ -338,7 +338,7 @@ smashnotetrackhandler(var_0, var_1, var_2, var_3) {
         var_10 = distance(var_7.origin, var_4);
 
         if(var_10 <= 512) {
-          var_7 setvelocity(vectornormalize(var_7.origin - var_4) * ((512 - var_10) * 2));
+          var_7 setvelocity(vectorNormalize(var_7.origin - var_4) * ((512 - var_10) * 2));
           var_7 dodamage(var_7.maxhealth / 10, var_4);
         }
       }
@@ -366,7 +366,7 @@ smashnotetrackhandler(var_0, var_1, var_2, var_3) {
         var_10 = distance(var_7.origin, var_4);
 
         if(var_10 <= 512) {
-          var_7 setvelocity(vectornormalize(var_7.origin - var_4) * ((512 - var_10) * 2));
+          var_7 setvelocity(vectorNormalize(var_7.origin - var_4) * ((512 - var_10) * 2));
           var_7 dodamage(var_7.maxhealth / 10, var_4);
         }
       }
@@ -546,7 +546,7 @@ spawncool() {
 radial_damage(var_0) {
   foreach(var_2 in level.players) {
     if(distance(var_2.origin, var_0) <= 256) {
-      var_2 setvelocity(vectornormalize(var_2.origin - var_0) * 1200);
+      var_2 setvelocity(vectorNormalize(var_2.origin - var_0) * 1200);
       var_2 dodamage(var_2.maxhealth / 6, var_0);
     }
   }
@@ -650,7 +650,7 @@ lift_door_by_index(var_0) {
 
 lift_door() {
   var_0 = self.origin + (0, 0, 200);
-  self moveto(var_0, 5);
+  self moveTo(var_0, 5);
   wait 6.0;
   self delete();
   level notify("blast_door_lifted");
@@ -666,7 +666,7 @@ setup_gas_encounter() {
   thread pre_gas_event_vo();
   thread kill_gas_fog();
   common_scripts\utility::flag_wait("ready_for_gas_event");
-  var_0 = getent("gas_chamber_trigger", "targetname");
+  var_0 = getEnt("gas_chamber_trigger", "targetname");
   thread gas_console_marker(var_0);
   var_1 = spawnfx(level._effect["blinkylight_green"], var_0.origin + (-7, 2, 2));
   triggerfx(var_1);
@@ -782,11 +782,11 @@ gas_exploit_fix() {
   thread maps\mp\mp_alien_beacon::update_override_info((-215.6, 4342.5, 1168), (0, 90, 0));
   var_0 = [];
   var_0 = getEntArray("deck_to_lab_door", "targetname");
-  var_1 = getent("deck_to_lab_door_linker", "targetname");
+  var_1 = getEnt("deck_to_lab_door_linker", "targetname");
 
   foreach(var_3 in var_0) {
     if(isDefined(var_3) && isDefined(var_1)) {
-      var_3 linkto(var_1);
+      var_3 linkTo(var_1);
     }
   }
 
@@ -799,7 +799,7 @@ teleport_player_to_labs(var_0) {
   wait 1;
   self cancelmantle();
   self dontinterpolate();
-  self setorigin(var_0);
+  self setOrigin(var_0);
   var_1 = (0, 90, 0);
   self setplayerangles(var_1);
   self notify("teleport_finished");
@@ -834,7 +834,7 @@ lab_gas_survival_encounter() {
   level.gas_zones = [];
 
   for(var_1 = 0; var_1 < 4; var_1++) {
-    var_2 = getent("gas_attack_point_" + var_1, "targetname");
+    var_2 = getEnt("gas_attack_point_" + var_1, "targetname");
     var_0[var_1] = var_2;
     var_2 thread gas_attak_point_logic();
     level.gas_zones[level.gas_zones.size] = var_2 common_scripts\utility::get_target_ent();
@@ -898,21 +898,21 @@ remove_back_wall(var_0) {
 
 open_doors_to_map_room() {
   wait 4;
-  var_0 = getent("map_room_door_1", "targetname");
+  var_0 = getEnt("map_room_door_1", "targetname");
   var_1 = var_0 common_scripts\utility::get_target_ent();
-  var_1 linkto(var_0);
-  var_2 = getent("map_room_door_2", "targetname");
+  var_1 linkTo(var_0);
+  var_2 = getEnt("map_room_door_2", "targetname");
   var_3 = var_2 common_scripts\utility::get_target_ent();
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_1 connectpaths();
   var_3 connectpaths();
   playsoundatpos((-738, 5825, 1471), "scn_beacon_lab_door_open");
-  var_0 moveto((212, 5848, 1408), 5, 0, 1);
-  var_2 moveto((-788, 5840, 1408), 5, 0, 1);
+  var_0 moveTo((212, 5848, 1408), 5, 0, 1);
+  var_2 moveTo((-788, 5840, 1408), 5, 0, 1);
 }
 
 cross_gas_anims() {
-  var_0 = getent("cross_body", "targetname");
+  var_0 = getEnt("cross_body", "targetname");
   var_1 = spawn("script_model", var_0 gettagorigin("J_spine4"));
   var_1 setModel("head_cross_a");
   var_1.angles = var_0 gettagangles("J_spine4");
@@ -1057,7 +1057,7 @@ play_gas_chamber_fx() {
 gas_pain_logic(var_0) {
   self endon("gas_done");
   var_1 = spawn("script_origin", var_0.origin);
-  var_1 moveto(var_1.origin - (0, -1472, 0), 10, 0, 0);
+  var_1 moveTo(var_1.origin - (0, -1472, 0), 10, 0, 0);
   var_1 thread spot_check_for_gas(10);
 
   for(;;) {
@@ -1472,7 +1472,7 @@ post_miniboss_vo() {
 }
 
 cargo_room_intro_vo() {
-  var_0 = getent("cargo_entrance_vo_trig", "targetname");
+  var_0 = getEnt("cargo_entrance_vo_trig", "targetname");
   var_0 waittill("trigger");
   wait 3;
   delay_vo_until_all_clear();
@@ -1484,7 +1484,7 @@ cargo_room_intro_vo() {
 }
 
 cargo_room_use_ugv_vo() {
-  var_0 = getent("use_ugv_vo_trig", "targetname");
+  var_0 = getEnt("use_ugv_vo_trig", "targetname");
   var_0 waittill("trigger");
   level notify("stop_post_hive_vo");
 
@@ -1606,7 +1606,7 @@ gas_event_nag() {
 }
 
 post_gas_event_vo() {
-  var_0 = getent("post_gas_vo_trig", "targetname");
+  var_0 = getEnt("post_gas_vo_trig", "targetname");
   var_0 waittill("trigger");
   thread maps\mp\alien\_music_and_dialog::pause_vo_system(level.players);
   var_1 = randomintrange(0, 3);
@@ -1653,19 +1653,19 @@ play_sound_on_player(var_0) {
 }
 
 drill_teleport(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   var_3 waittill("trigger");
   level.drill_vehicle vehicle_teleport(var_1, var_2);
 }
 
 drill_swap() {
-  var_0 = getent("drill_boat_spawn", "targetname");
+  var_0 = getEnt("drill_boat_spawn", "targetname");
   var_0.origin = var_0.origin + (0, 0, -10);
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 setModel("mp_laser_drill");
-  var_2 = getent("intro_hovercraft", "targetname");
-  var_1 linkto(var_2);
+  var_2 = getEnt("intro_hovercraft", "targetname");
+  var_1 linkTo(var_2);
   common_scripts\utility::flag_wait("boat_ride_over");
   level notify("spawn_beacon_drill", var_1.origin, var_1.angles);
   var_1 delete();
@@ -1714,7 +1714,7 @@ spawn_model(var_0, var_1, var_2, var_3) {
   var_4 setModel(var_0);
   var_4.origin = var_1 gettagorigin(var_2);
   var_4.angles = var_1 gettagangles(var_2) + var_3;
-  var_4 linkto(var_1, var_2);
+  var_4 linkTo(var_1, var_2);
   return var_4;
 }
 
@@ -1788,7 +1788,7 @@ cargo_room_get_on_container_vo() {
 }
 
 nag_bink_toggle() {
-  var_0 = getent("cargo_room_control_switch", "targetname");
+  var_0 = getEnt("cargo_room_control_switch", "targetname");
   level.no_more_binks_archer = undefined;
 
   while(!common_scripts\utility::flag("everyone_in_cargo_container")) {
@@ -1796,7 +1796,7 @@ nag_bink_toggle() {
       var_0 makeunusable();
     } else {
       var_0 makeusable();
-      var_0 sethintstring(&"MP_ALIEN_BEACON_BINK_BUTTON");
+      var_0 setHintString(&"MP_ALIEN_BEACON_BINK_BUTTON");
     }
 
     wait 0.05;
@@ -1819,7 +1819,7 @@ init_cinematics(var_0, var_1) {
     level.bink_first_play = 1;
     level waittill("trigger_first_archer_bink");
   } else {
-    var_2 = getent("cargo_room_control_switch", "targetname");
+    var_2 = getEnt("cargo_room_control_switch", "targetname");
     var_2 waittill("trigger");
     var_2 makeunusable();
   }

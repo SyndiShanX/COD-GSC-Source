@@ -257,7 +257,7 @@ player_can_see(var_0) {
     var_4 = scripts\engine\trace::ray_trace_passed(var_2, var_1, var_3);
 
     if(!var_4) {
-      var_5 = vectornormalize(var_1 - var_2);
+      var_5 = vectorNormalize(var_1 - var_2);
       var_6 = _func_025B(var_5, (0, 0, 1));
       var_7 = var_1 - 32 * var_6;
       var_4 = scripts\engine\trace::ray_trace_passed(var_2, var_7, var_3);

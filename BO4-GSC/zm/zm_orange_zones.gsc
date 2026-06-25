@@ -158,16 +158,16 @@ function_3b77181c(b_enable = 1) {
 
 function_49054104() {
   level endon(#"end_game");
-  e_blocker = getent("lighthouse_cove_to_lighthouse_level_1_xtra", "targetname");
+  e_blocker = getEnt("lighthouse_cove_to_lighthouse_level_1_xtra", "targetname");
   level flag::wait_till("lighthouse_level_1_doors");
   e_blocker show();
-  e_blocker disconnectpaths();
+  e_blocker disconnectPaths();
 }
 
 grotto_tunnel_watcher() {
   level endon(#"end_game");
-  var_752cf781 = getent("grotto_tunnel_big_blocker", "targetname");
-  var_752cf781 disconnectpaths();
+  var_752cf781 = getEnt("grotto_tunnel_big_blocker", "targetname");
+  var_752cf781 disconnectPaths();
   a_s_spawn_points = struct::get_array("grotto_tunnel", "psuedo_zone");
   var_ef7245fb = struct::get_array("grotto_tunnel_crawl_spawn", "prefabname");
   a_s_spawn_points = arraycombine(a_s_spawn_points, var_ef7245fb, 0, 0);
@@ -193,11 +193,11 @@ cargo_hold_to_artifact_storage_watcher() {
 
 sun_deck_to_bridge_watcher() {
   level endon(#"end_game");
-  e_door_clip = getent("sun_deck_to_bridge_clip", "targetname");
+  e_door_clip = getEnt("sun_deck_to_bridge_clip", "targetname");
   e_door_clip notsolid();
   level flag::wait_till("sun_deck_to_bridge");
   e_door_clip solid();
-  e_door_clip disconnectpaths();
+  e_door_clip disconnectPaths();
   zm_orange_util::function_8a7521db("bridge_hatch_door");
 }
 
@@ -224,7 +224,7 @@ function_8355a4a8() {
 }
 
 function_c3bf42e9() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     str_player_zone = e_player zm_zonemgr::get_player_zone();
 
     if(isDefined(str_player_zone) && function_94b7a4bd(str_player_zone)) {
@@ -257,7 +257,7 @@ function_502f97fa() {
   if(!isDefined(self.favoriteenemy) || isDefined(self.favoriteenemy) && self function_8a80437(self.favoriteenemy) !== 1) {
     a_valid_targets = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(self function_8a80437(player) == 1) {
         if(!isDefined(a_valid_targets)) {
           a_valid_targets = [];
@@ -554,7 +554,7 @@ function_58db1b78() {
 
   while(true) {
     foreach(vol_ext in var_4d44c98e) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player istouching(vol_ext)) {
           b_played = player zm_audio::create_and_play_dialog(#"location_enter", #"lighthouse_ext");
 
@@ -572,10 +572,10 @@ function_58db1b78() {
 function_cbb8e588() {
   level endon(#"end_game");
   level waittill(#"start_zombie_round_logic");
-  blood = getent("mq_blood", "targetname");
+  blood = getEnt("mq_blood", "targetname");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player zm_zonemgr::get_player_zone() === "artifact_storage" && player cansee(blood)) {
         wait 1;
 

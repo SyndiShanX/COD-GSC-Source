@@ -20,7 +20,7 @@ func_72D9(var_0) {
   if(isDefined(var_2)) {
     if(func_9FE2(var_2)) {
       var_3 = var_2.origin - var_1;
-      var_4 = vectornormalize(var_3);
+      var_4 = vectorNormalize(var_3);
       var_5 = length(var_3);
       if(var_5 < 500) {
         var_6 = spawn("script_model", var_0.origin);
@@ -65,7 +65,7 @@ func_72D4(var_0) {
     var_1 stopgestureviewmodel();
     var_1 unlink();
     if(isDefined(var_0)) {
-      var_1 setorigin(var_0);
+      var_1 setOrigin(var_0);
     } else {
       var_0 = self.origin;
     }
@@ -143,7 +143,7 @@ func_72D6() {
 func_5916(var_0, var_1) {
   level endon("game_ended");
   self endon("death");
-  self moveto(var_0, var_1);
+  self moveTo(var_0, var_1);
   scripts\engine\utility::waitframe();
 }
 
@@ -153,8 +153,8 @@ func_9FE2(var_0) {
 
 func_10DE4(var_0, var_1, var_2) {
   self.var_AD30 = var_0;
-  var_0 playerlinkto(self, "tag_origin", 1);
-  self rotateto(self.angles + (0, 180, 0), 0.1);
+  var_0 playerlinkTo(self, "tag_origin", 1);
+  self rotateTo(self.angles + (0, 180, 0), 0.1);
   var_0.var_DB17 = var_1;
   var_0 shellshock("concussion_grenade_mp", var_2);
   var_0 playgestureviewmodel("ges_hold");

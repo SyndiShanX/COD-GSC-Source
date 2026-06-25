@@ -31,11 +31,11 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("clip128x128x8", "targetname");
+  var_0 = getEnt("clip128x128x8", "targetname");
   var_1 = spawn("script_model", (535.5, -727, 72));
   var_1.angles = (90, 37.2594, -7.74062);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("player256x256x8", "targetname");
+  var_2 = getEnt("player256x256x8", "targetname");
   var_3 = spawn("script_model", (-2046, -236, 402));
   var_3.angles = (89.2967, 0, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
@@ -51,39 +51,39 @@ fix_collision() {
   var_7 = spawn("script_model", (0, 0, 0));
   var_7.angles = (0, 0, 0);
   var_7 setModel("mp_metropolis_player_concrete_all");
-  var_8 = getent("clip128x128x128", "targetname");
+  var_8 = getEnt("clip128x128x128", "targetname");
   var_9 = spawn("script_model", (-2192, 452, 184));
   var_9.angles = (0, 0, -14.0003);
   var_9 clonebrushmodeltoscriptmodel(var_8);
-  var_10 = getent("player32x32x128", "targetname");
+  var_10 = getEnt("player32x32x128", "targetname");
   var_11 = spawn("script_model", (-2600, -680, 344));
   var_11.angles = (0, 0, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("clip128x128x8", "targetname");
+  var_12 = getEnt("clip128x128x8", "targetname");
   var_13 = spawn("script_model", (-52, 2032, 64));
   var_13.angles = (0, 0, -99.4002);
   var_13 clonebrushmodeltoscriptmodel(var_12);
-  var_14 = getent("player64x64x256", "targetname");
+  var_14 = getEnt("player64x64x256", "targetname");
   var_15 = spawn("script_model", (-176, -1716, 372));
   var_15.angles = (0, 0, 0);
   var_15 clonebrushmodeltoscriptmodel(var_14);
-  var_10 = getent("player256x256x8", "targetname");
+  var_10 = getEnt("player256x256x8", "targetname");
   var_11 = spawn("script_model", (443, 528, 19));
   var_11.angles = (30, 0, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);
-  var_12 = getent("player32x32x8", "targetname");
+  var_12 = getEnt("player32x32x8", "targetname");
   var_13 = spawn("script_model", (-928, -1881, 202));
   var_13.angles = (330, 0, -90);
   var_13 clonebrushmodeltoscriptmodel(var_12);
-  var_14 = getent("clip256x256x8", "targetname");
+  var_14 = getEnt("clip256x256x8", "targetname");
   var_15 = spawn("script_model", (-712, 706, 32));
   var_15.angles = (0, 0, 90);
   var_15 clonebrushmodeltoscriptmodel(var_14);
-  var_16 = getent("player512x512x8", "targetname");
+  var_16 = getEnt("player512x512x8", "targetname");
   var_17 = spawn("script_model", (-1320, -592, 552));
   var_17.angles = (270, 0, 0);
   var_17 clonebrushmodeltoscriptmodel(var_16);
-  var_18 = getent("player32x32x8", "targetname");
+  var_18 = getEnt("player32x32x8", "targetname");
   var_19 = spawn("script_model", (-2596, -240, 318));
   var_19.angles = (75, 0, 0);
   var_19 clonebrushmodeltoscriptmodel(var_18);
@@ -93,34 +93,34 @@ fix_collision() {
   var_1B = spawn("script_model", (1092, 20, 68));
   var_1B.angles = (0, 90, 0);
   var_1B setModel("mp_desert_uplink_col_01");
-  var_1C = getent("clip32x32x256", "targetname");
+  var_1C = getEnt("clip32x32x256", "targetname");
   var_1D = spawn("script_model", (-146, -472, 252));
   var_1D.angles = (0, 0, -3.00007);
   var_1D clonebrushmodeltoscriptmodel(var_1C);
-  var_1E = getent("clip32x32x256", "targetname");
+  var_1E = getEnt("clip32x32x256", "targetname");
   var_1F = spawn("script_model", (300, 44, 256));
   var_1F.angles = (0, 0, 4.99991);
   var_1F clonebrushmodeltoscriptmodel(var_1E);
   var_20 = spawn("script_model", (-920, 432, 200));
   var_20.angles = (0, 0, 0);
   var_20 setModel("mp_metropolis_missile_clip_1");
-  var_21 = getent("clip256x256x8", "targetname");
+  var_21 = getEnt("clip256x256x8", "targetname");
   var_22 = spawn("script_model", (-3248, 488, 96));
   var_22.angles = (0, 345, 90);
   var_22 clonebrushmodeltoscriptmodel(var_21);
-  var_23 = getent("clip256x256x8", "targetname");
+  var_23 = getEnt("clip256x256x8", "targetname");
   var_24 = spawn("script_model", (-3248, 488, 352));
   var_24.angles = (0, 345, 90);
   var_24 clonebrushmodeltoscriptmodel(var_23);
-  var_25 = getent("clip128x128x8", "targetname");
+  var_25 = getEnt("clip128x128x8", "targetname");
   var_26 = spawn("script_model", (-1792, -64, -84));
   var_26.angles = (0, 0, 0);
   var_26 clonebrushmodeltoscriptmodel(var_25);
-  var_27 = getent("clip512x512x8", "targetname");
+  var_27 = getEnt("clip512x512x8", "targetname");
   var_28 = spawn("script_model", (616, -1748, 124));
   var_28.angles = (270, 180, 180);
   var_28 clonebrushmodeltoscriptmodel(var_27);
-  var_29 = getent("clip64x64x128", "targetname");
+  var_29 = getEnt("clip64x64x128", "targetname");
   var_2A = spawn("script_model", (760, 264, 80));
   var_2A.angles = (0, 0, 0);
   var_2A clonebrushmodeltoscriptmodel(var_29);
@@ -139,7 +139,7 @@ trainanims() {
     var_3 = spawn("script_model", var_2.origin);
     var_3 setModel("veh_civ_train_fn_01");
     var_3 show();
-    var_3 linkto(var_2);
+    var_3 linkTo(var_2);
     var_2 thread animatetraincar();
     if(var_2.var_336 == "train01" || var_2.var_336 == "train03" || var_2.var_336 == "train05") {
       var_2 thread animatetraincaraudio();
@@ -163,7 +163,7 @@ animatetraincar() {
     self show();
     self movez(1000, 0.1);
     wait(1);
-    self moveto(var_0 + (0, randomintrange(-50, 50), 0), 20, 0, 6);
+    self moveTo(var_0 + (0, randomintrange(-50, 50), 0), 20, 0, 6);
     wait(20);
   }
 }
@@ -190,7 +190,7 @@ animatetraincaraudio() {
     self show();
     self movez(1000, 0.1);
     wait(1);
-    self moveto(var_0 + (0, randomintrange(-50, 50), 0), 20, 0, 6);
+    self moveTo(var_0 + (0, randomintrange(-50, 50), 0), 20, 0, 6);
     wait(2);
     self playLoopSound("mp_met_train_move_lp");
     wait(16);
@@ -424,7 +424,7 @@ filterstartspawns() {
           continue;
         }
 
-        var_7 = vectornormalize(var_6.origin - var_3.origin);
+        var_7 = vectorNormalize(var_6.origin - var_3.origin);
         var_8 = vectordot(var_4, var_7);
         if(var_8 > 0.86) {
           var_3.infront = 0;

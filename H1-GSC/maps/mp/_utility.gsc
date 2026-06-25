@@ -180,7 +180,7 @@ orienttonormal(var_0) {
     return (0, 0, 0);
   }
 
-  var_3 = vectornormalize(var_1);
+  var_3 = vectorNormalize(var_1);
   var_4 = var_0[2] * -1;
   var_5 = (var_3[0] * var_4, var_3[1] * var_4, var_2);
   var_6 = vectortoangles(var_5);
@@ -3244,8 +3244,8 @@ findisfacing(var_0, var_1, var_2) {
   var_5 = var_1.origin - var_0.origin;
   var_4 = var_4 * (1, 1, 0);
   var_5 = var_5 * (1, 1, 0);
-  var_5 = vectornormalize(var_5);
-  var_4 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_5);
+  var_4 = vectorNormalize(var_4);
   var_6 = vectordot(var_5, var_4);
 
   if(var_6 >= var_3) {
@@ -4489,8 +4489,8 @@ makegloballyusablebytype(var_0, var_1, var_2, var_3) {
 
   _insertintoglobalusablelist(var_4, var_0, var_2, var_3);
   self makeglobalusable(var_4, var_2, var_3);
-  self sethintstring(var_1);
-  self setcursorhint("HINT_NOICON");
+  self setHintString(var_1);
+  self setCursorHint("HINT_NOICON");
 }
 
 _insertintoglobalusablelist(var_0, var_1, var_2, var_3) {
@@ -4715,7 +4715,7 @@ setmlgicons(var_0, var_1) {
 }
 
 spawnpatchclip(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_3)) {
     return undefined;
@@ -4732,7 +4732,7 @@ hardpointvisualsswap(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     var_5 = var_1 + "_" + var_4.script_noteworthy;
-    var_6 = getent(var_5, "targetname");
+    var_6 = getEnt(var_5, "targetname");
 
     if(!isDefined(var_6)) {
       continue;
@@ -4745,7 +4745,7 @@ hardpointvisualsswap(var_0, var_1) {
 }
 
 hardpointtriggerswap(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_3 = getEntArray("hp_zone_trigger", "targetname");
   var_4 = undefined;
 
@@ -4777,7 +4777,7 @@ hardpointtriggerswap(var_0, var_1) {
 }
 
 headquarterstriggerswap(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_3 = getEntArray("radiotrigger", "targetname");
   var_4 = undefined;
 
@@ -4903,8 +4903,8 @@ demolitionsitemove(var_0, var_1, var_2) {
     return;
   }
   var_12 = getEntArray(var_8.target, "targetname");
-  var_13 = getent(var_12[0].target, "targetname");
-  var_14 = getent("dd_bombzone_clip" + var_0, "targetname");
+  var_13 = getEnt(var_12[0].target, "targetname");
+  var_14 = getEnt("dd_bombzone_clip" + var_0, "targetname");
   var_15 = undefined;
   var_16 = undefined;
 

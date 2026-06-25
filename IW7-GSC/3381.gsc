@@ -49,7 +49,7 @@ func_F9BE(var_0) {
         var_9 = spawn("script_model", var_8 gettagorigin("j_spine4"));
         var_9 setModel("zmb_male_head_01");
         var_9.angles = var_8 gettagangles("j_spine4");
-        var_9 linkto(var_8, "j_spine4");
+        var_9 linkTo(var_8, "j_spine4");
         var_8 scriptmodelplayanim("IW7_cp_zom_wheel_idle_01", 1);
         self.knife_throw_target = var_8;
         break;
@@ -70,7 +70,7 @@ func_F9BE(var_0) {
   set_up_damage_location(self.knife_throw_target, self.var_13CFD, (-566, -1584, 98), "j_ankle_ri", 961);
   set_up_damage_location(self.knife_throw_target, self.var_13CFD, (-597, -1617, 98), "j_ankle_le", 961);
   self.knife_throw_target thread knife_target_damage_monitor(self.knife_throw_target);
-  self.knife_throw_target linkto(self.var_13CFD);
+  self.knife_throw_target linkTo(self.var_13CFD);
   self.var_13CFF = self.var_13CFD.angles;
   var_12 = scripts\engine\utility::istrue(self.requires_power) && isDefined(self.power_area);
   thread interaction_usability_manager_per_wave(self);
@@ -110,7 +110,7 @@ set_up_damage_location(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_origin", var_2);
   var_5.tag_location = var_3;
   var_5.damage_location_range = var_4;
-  var_5 linkto(var_1);
+  var_5 linkTo(var_1);
   var_0.damage_location[var_0.damage_location.size] = var_5;
 }
 
@@ -306,7 +306,7 @@ func_6955(var_0, var_1, var_2) {
 
   stop_wheel_sfx(var_0);
   wait(3);
-  var_0.var_13CFD rotateto(var_0.var_13CFF, 1);
+  var_0.var_13CFD rotateTo(var_0.var_13CFF, 1);
   wait(3);
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_0);
   if(isDefined(var_1)) {

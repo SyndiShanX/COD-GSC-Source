@@ -36,17 +36,17 @@ main() {
   thread scale_juggernaut_enemies();
   thread maps\oilrig::killtrigger_ocean_on();
 
-  door1 = getent("door_deck1", "targetname");
+  door1 = getEnt("door_deck1", "targetname");
   door1 connectPaths();
   door1 delete();
 
-  door2 = getent("door_deck1_opposite", "targetname");
+  door2 = getEnt("door_deck1_opposite", "targetname");
   door2 connectPaths();
   door2 delete();
 
-  eGate = getent("gate_01", "targetname");
+  eGate = getEnt("gate_01", "targetname");
   eGate connectpaths();
-  eGate moveto((eGate.origin - (0, -170, 0)), 1);
+  eGate moveTo((eGate.origin - (0, -170, 0)), 1);
 
   fix_c4_barrels();
 
@@ -83,7 +83,7 @@ fix_c4_barrels() {
 
 save_triggers() {
   array_thread(getEntArray("compassTriggers", "targetname"), ::make_special_op_ent);
-  getent("killtrigger_ocean", "targetname") make_special_op_ent();
+  getEnt("killtrigger_ocean", "targetname") make_special_op_ent();
 }
 
 make_special_op_ent() {

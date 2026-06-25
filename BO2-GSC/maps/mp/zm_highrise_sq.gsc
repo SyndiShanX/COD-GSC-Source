@@ -37,9 +37,9 @@ init() {
   ss_buttons = getEntArray("sq_ss_button", "targetname");
 
   for(i = 0; i < ss_buttons.size; i++) {
-    ss_buttons[i] usetriggerrequirelookat();
-    ss_buttons[i] sethintstring("");
-    ss_buttons[i] setcursorhint("HINT_NOICON");
+    ss_buttons[i] useTriggerRequireLookAt();
+    ss_buttons[i] setHintString("");
+    ss_buttons[i] setCursorHint("HINT_NOICON");
   }
 
   level thread mahjong_tiles_setup();
@@ -95,7 +95,7 @@ sq_highrise_clientfield_init() {
 }
 
 sq_easy_cleanup() {
-  computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
+  computer_buildable_trig = getEnt("sq_common_buildable_trigger", "targetname");
   computer_buildable_trig delete();
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
@@ -309,7 +309,7 @@ tower_punch_watcher() {
   level.sq_leg_punches = 0;
 
   foreach(str_leg in a_leg_trigs) {
-    t_leg = getent(str_leg, "script_noteworthy");
+    t_leg = getEnt(str_leg, "script_noteworthy");
     t_leg thread tower_punch_watch_leg(a_leg_trigs);
   }
 
@@ -334,7 +334,7 @@ tower_punch_watcher() {
 }
 
 tower_in_sync_lightning() {
-  s_tower_top = getstruct("sq_zombie_launch_target", "targetname");
+  s_tower_top = getStruct("sq_zombie_launch_target", "targetname");
   playFX(level._effect["sidequest_tower_bolts"], s_tower_top.origin - vectorscale((0, 0, 1), 88.0), (0, 0, 1));
 }
 
@@ -399,12 +399,12 @@ mahjong_tiles_setup() {
 
   for(i = 0; i < a_winds.size; i++) {
     a_wind_order[a_wind_order.size] = a_winds[i];
-    m_wind_tile = getent("tile_" + a_winds[i] + "_" + a_colors[i], "targetname");
+    m_wind_tile = getEnt("tile_" + a_winds[i] + "_" + a_colors[i], "targetname");
     m_wind_tile.script_noteworthy = undefined;
     s_spot = a_locs[i];
 
     if(a_winds[i] == "north") {
-      s_spot = getstruct("sq_tile_loc_north", "targetname");
+      s_spot = getStruct("sq_tile_loc_north", "targetname");
     }
 
     m_wind_tile.origin = s_spot.origin;
@@ -412,7 +412,7 @@ mahjong_tiles_setup() {
   }
 
   for(i = 0; i < a_colors.size; i++) {
-    m_num_tile = getent("tile_" + (i + 1) + "_" + a_colors[i], "targetname");
+    m_num_tile = getEnt("tile_" + (i + 1) + "_" + a_colors[i], "targetname");
     m_num_tile.script_noteworthy = undefined;
     s_spot = a_locs[i + a_winds.size];
     m_num_tile.origin = s_spot.origin;
@@ -582,19 +582,19 @@ navcomputer_waitfor_navcard() {
   if(!spawn_trigger) {
     return;
   }
-  computer_buildable_trig = getent("sq_common_buildable_trigger", "targetname");
-  trig_pos = getstruct("sq_common_key", "targetname");
+  computer_buildable_trig = getEnt("sq_common_buildable_trigger", "targetname");
+  trig_pos = getStruct("sq_common_key", "targetname");
   navcomputer_use_trig = spawn("trigger_radius_use", trig_pos.origin, 0, 48, 48);
-  navcomputer_use_trig setcursorhint("HINT_NOICON");
-  navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
-  navcomputer_use_trig triggerignoreteam();
+  navcomputer_use_trig setCursorHint("HINT_NOICON");
+  navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_USE");
+  navcomputer_use_trig triggerIgnoreTeam();
 
   while(true) {
     navcomputer_use_trig waittill("trigger", who);
 
     if(isPlayer(who) && is_player_valid(who)) {
       if(does_player_have_correct_navcard(who)) {
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_SUCCESS");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_SUCCESS");
         who playSound("zmb_sq_navcard_success");
         update_sidequest_stats("navcard_applied_zm_highrise");
         who.navcard_grabbed = undefined;
@@ -602,10 +602,10 @@ navcomputer_waitfor_navcard() {
         navcomputer_use_trig delete();
         return;
       } else {
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_FAIL");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_FAIL");
         who playSound("zmb_sq_navcard_fail");
         wait 1;
-        navcomputer_use_trig sethintstring(&"ZOMBIE_NAVCARD_USE");
+        navcomputer_use_trig setHintString(&"ZOMBIE_NAVCARD_USE");
       }
     }
   }
@@ -670,7 +670,7 @@ sq_give_all_perks() {
     n_fireball_exploder = 901;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread sq_give_player_perks(perks, v_fireball_start_loc, n_fireball_exploder);
@@ -686,14 +686,14 @@ sq_give_player_perks(perks, v_fireball_start_loc, n_fireball_exploder) {
 
   do {
     wait_network_frame();
-    v_to_player = vectornormalize(self gettagorigin("J_SpineLower") - m_fireball.origin);
+    v_to_player = vectorNormalize(self gettagorigin("J_SpineLower") - m_fireball.origin);
     v_move_spot = m_fireball.origin + v_to_player * 48;
     m_fireball.origin = v_move_spot;
   }
   while(distancesquared(m_fireball.origin, self gettagorigin("J_SpineLower")) > 2304);
 
   m_fireball.origin = self gettagorigin("J_SpineLower");
-  m_fireball linkto(self, "J_SpineLower");
+  m_fireball linkTo(self, "J_SpineLower");
   wait 1.5;
   playFX(level._effect["sidequest_flash"], m_fireball.origin);
   m_fireball delete();
@@ -831,7 +831,7 @@ vo_maxis_punch_tower() {
 
 vo_weapon_watcher() {
   while(!flag("sq_player_has_sniper") || !flag("sq_player_has_ballistic")) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!flag("sq_player_has_sniper") && isDefined(player.currentweapon) && sq_is_weapon_sniper(player.currentweapon)) {
@@ -928,7 +928,7 @@ maxissay(line) {
 
   iprintlnbold("Maxis Says: " + line);
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player setclientfieldtoplayer("clientfield_sq_vo", level.sq_clientfield_vo[line]);

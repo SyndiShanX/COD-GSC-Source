@@ -27,7 +27,7 @@ main() {
   level thread maps\mp\zm_tomb_vo::watch_one_shot_line("puzzle", "try_puzzle", "vo_try_puzzle_fire2");
   level thread fire_puzzle_1_run();
   flag_wait("fire_puzzle_1_complete");
-  playsoundatposition("zmb_squest_step1_finished", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_step1_finished", (0, 0, 0));
   level thread rumble_players_in_chamber(5, 3.0);
   level thread fire_puzzle_1_cleanup();
   level thread fire_puzzle_2_run();
@@ -99,7 +99,7 @@ init_sacrifice_volume() {
   self.b_gods_pleased = 0;
   self.num_sacrifices_received = 0;
   self.pct_sacrifices_received = 0.0;
-  self.e_ignition_point = getstruct(self.target, "targetname");
+  self.e_ignition_point = getStruct(self.target, "targetname");
   self.e_ignition_point thread run_sacrifice_ignition(self);
 }
 
@@ -229,7 +229,7 @@ fire_sacrifice_death_clone(e_sacrifice_volume) {
   clone endon("death");
   wait(n_anim_time);
   e_sacrifice_volume ent_flag_wait("flame_on");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(e_player in a_players) {
     if(e_player hasweapon("staff_fire_zm")) {
@@ -289,7 +289,7 @@ fire_puzzle_2_run() {
 
   foreach(e_number in a_ternary) {
     e_number show();
-    e_target_torch = getstruct(e_number.target, "targetname");
+    e_target_torch = getStruct(e_number.target, "targetname");
     e_target_torch.b_correct_torch = 1;
     e_target_torch thread puzzle_debug_position();
   }
@@ -339,7 +339,7 @@ fire_puzzle_2_is_complete() {
   }
 
   level.n_torches_lit++;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(e_player in a_players) {
     if(e_player hasweapon("staff_fire_zm")) {
@@ -424,7 +424,7 @@ fire_puzzle_torch_run() {
     if(dist_sq > max_hit_distance_sq) {
       continue;
     }
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(e_player in a_players) {
       if(e_player hasweapon("staff_fire_zm")) {

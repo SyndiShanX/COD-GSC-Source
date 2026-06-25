@@ -19,7 +19,7 @@ function private autoexec __init__system__() {
 function private _preload() {}
 
 function function_2b057725() {
-  level.player = isDefined(level.player) ? level.player : getplayers()[0];
+  level.player = isDefined(level.player) ? level.player : getPlayers()[0];
 
   if(!namespace_61e6d095::exists(#"chopper_display")) {
     namespace_61e6d095::create(#"chopper_display", #"chopper");
@@ -31,7 +31,7 @@ function function_2b057725() {
 }
 
 function function_437dfc97() {
-  level.player = isDefined(level.player) ? level.player : getplayers()[0];
+  level.player = isDefined(level.player) ? level.player : getPlayers()[0];
   self notify("30dbc82404b4037b");
   self endon("30dbc82404b4037b");
 
@@ -70,7 +70,7 @@ function private function_3cc2b159() {
 
 function function_d7c9c129() {
   self endon(#"hash_6f1306832c75c68f", #"death");
-  var_e583559a = getent("vol_ripcord_reticle", "targetname");
+  var_e583559a = getEnt("vol_ripcord_reticle", "targetname");
 
   if(!namespace_61e6d095::exists(#"hash_10ec463196b21e75")) {
     namespace_61e6d095::create(#"hash_10ec463196b21e75", #"hash_1624d8814bab0c71");

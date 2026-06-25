@@ -111,7 +111,7 @@ fxanim_init(localclientnum) {
   }
 
   level thread clientscripts\mp\_fxanim_dlc3::fxanim_init_dlc(localclientnum);
-  radar = getent(localclientnum, "fxanim_dlc3_radar", "targetname");
+  radar = getEnt(localclientnum, "fxanim_dlc3_radar", "targetname");
 
   if(isDefined(radar)) {
     if(!isDefined(level.radar_waits)) {

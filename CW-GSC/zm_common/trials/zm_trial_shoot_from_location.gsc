@@ -25,14 +25,14 @@ function private preinit() {
 
 function private on_begin() {
   if(util::get_map_name() == "zm_office") {
-    elevator1 = getent("elevator1", "targetname");
-    elevator2 = getent("elevator2", "targetname");
+    elevator1 = getEnt("elevator1", "targetname");
+    elevator2 = getEnt("elevator2", "targetname");
     elevator1.cost = 0;
     elevator2.cost = 0;
-    trigger1 = getent(elevator1.targetname + "_buy", "script_noteworthy");
-    trigger2 = getent(elevator2.targetname + "_buy", "script_noteworthy");
-    trigger1 sethintstring(level.var_31560d97, elevator1.cost);
-    trigger2 sethintstring(level.var_31560d97, elevator2.cost);
+    trigger1 = getEnt(elevator1.targetname + "_buy", "script_noteworthy");
+    trigger2 = getEnt(elevator2.targetname + "_buy", "script_noteworthy");
+    trigger1 setHintString(level.var_31560d97, elevator1.cost);
+    trigger2 setHintString(level.var_31560d97, elevator2.cost);
   }
 
   str_targetname = "trials_shoot_from_location";
@@ -40,7 +40,7 @@ function private on_begin() {
   assert(level.var_7f31a12d.size, "<dev string:x38>");
   callback::on_player_loadout_changed(&on_player_loadout_changed);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_3658663();
   }
 }
@@ -49,17 +49,17 @@ function private on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
 
   if(util::get_map_name() == "zm_office") {
-    elevator1 = getent("elevator1", "targetname");
-    elevator2 = getent("elevator2", "targetname");
+    elevator1 = getEnt("elevator1", "targetname");
+    elevator2 = getEnt("elevator2", "targetname");
     elevator1.cost = 500;
     elevator2.cost = 500;
-    trigger1 = getent(elevator1.targetname + "_buy", "script_noteworthy");
-    trigger2 = getent(elevator2.targetname + "_buy", "script_noteworthy");
-    trigger1 sethintstring(level.var_31560d97, elevator1.cost);
-    trigger2 sethintstring(level.var_31560d97, elevator2.cost);
+    trigger1 = getEnt(elevator1.targetname + "_buy", "script_noteworthy");
+    trigger2 = getEnt(elevator2.targetname + "_buy", "script_noteworthy");
+    trigger1 setHintString(level.var_31560d97, elevator1.cost);
+    trigger2 setHintString(level.var_31560d97, elevator2.cost);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_dc0859e();
   }
 

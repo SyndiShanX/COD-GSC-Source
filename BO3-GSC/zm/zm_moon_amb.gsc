@@ -79,7 +79,7 @@ function play_radio_eastereggs() {
   }
   self notify("end_print3d");
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
-  playsoundatposition("vox_story_1_log_" + self.script_int, self.origin);
+  playSoundAtPosition("vox_story_1_log_" + self.script_int, self.origin);
 }
 
 function checkfor_radio_override() {
@@ -114,7 +114,7 @@ function waitfor_eightbit_use() {
     if(!zm_audio_zhd::function_8090042c()) {
       continue;
     }
-    playsoundatposition("zmb_8bit_button_" + n_count, self.origin);
+    playSoundAtPosition("zmb_8bit_button_" + n_count, self.origin);
     n_count++;
     if(n_count >= 3) {
       break;
@@ -130,9 +130,9 @@ function no_intro_vox() {}
 function intro_vox_or_skit() {
   wait(1);
   level flag::wait_till("start_zombie_round_logic");
-  playsoundatposition("evt_warp_in", (0, 0, 0));
+  playSoundAtPosition("evt_warp_in", (0, 0, 0));
   wait(3);
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("general", "start");
 }
 
@@ -215,7 +215,7 @@ function player_4_override() {
 }
 
 function do_player_playvox_custom(sound_to_play, waittime, category, type, override) {
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
@@ -233,7 +233,7 @@ function do_player_playvox_custom(sound_to_play, waittime, category, type, overr
 }
 
 function play_futz_or_not_moonvox(sound_to_play) {
-  players = getplayers();
+  players = getPlayers();
   if(self.sessionstate == "spectator") {
     return;
   }
@@ -354,7 +354,7 @@ function play_mooncomp_vox(alias, digger) {
 }
 
 function do_mooncomp_vox(alias) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] zm_equipment::is_active(level.var_f486078e)) {
       players[i] playsoundtoplayer(alias + "_f", players[i]);
@@ -364,7 +364,7 @@ function do_mooncomp_vox(alias) {
     return;
   }
   foreach(speaker in level.var_2ff0efb3) {
-    playsoundatposition(alias, speaker.origin);
+    playSoundAtPosition(alias, speaker.origin);
     wait(0.05);
   }
 }
@@ -380,7 +380,7 @@ function waitfor_forest_zone_entry() {
   level waittill("forest_zone");
   while(true) {
     zone = level.zones["forest_zone"];
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < zone.volumes.size; i++) {
       for(j = 0; j < players.size; j++) {
         if(players[j] istouching(zone.volumes[i]) && !players[j].sessionstate == "spectator") {
@@ -396,7 +396,7 @@ function waitfor_forest_zone_entry() {
 function setup_moon_visit_vox() {
   wait(5);
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread play_delayed_first_time_vox();
   }
@@ -478,7 +478,7 @@ function function_1d6f553d() {
   self zm_unitrigger::create_unitrigger();
   while(true) {
     self waittill("trigger_activated");
-    playsoundatposition("zmb_zhdmoon_button_" + self.script_int, self.origin);
+    playSoundAtPosition("zmb_zhdmoon_button_" + self.script_int, self.origin);
     level notify("hash_351576b1", self.script_int);
     wait(0.5);
   }

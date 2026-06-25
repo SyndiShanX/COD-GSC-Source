@@ -252,8 +252,8 @@ func_E4B7(var_0, var_1) {
 
 func_E4B5(var_0) {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_47B1["crafted_revocator"].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.var_47B1["crafted_revocator"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);

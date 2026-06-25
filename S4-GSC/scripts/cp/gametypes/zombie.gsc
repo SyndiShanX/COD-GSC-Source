@@ -289,7 +289,7 @@ soak_teleport_player_to_portal(var_0, var_1) {
     var_2 = var_0.origin;
     var_3 = var_0.angles;
     var_4 = var_1.origin;
-    var_0 setorigin(var_4);
+    var_0 setOrigin(var_4);
   }
 }
 
@@ -2061,11 +2061,11 @@ _id_8CDF() {
 }
 
 get_left_stick_dir(var_0) {
-  return vectornormalize((var_0 _meth_869B(), var_0 _meth_869C(), 0.0));
+  return vectorNormalize((var_0 _meth_869B(), var_0 _meth_869C(), 0.0));
 }
 
 get_right_stick_dir(var_0) {
-  return vectornormalize((var_0 _meth_869D(), var_0 _meth_869E(), 0.0));
+  return vectorNormalize((var_0 _meth_869D(), var_0 _meth_869E(), 0.0));
 }
 
 check_for_stick_or_pause_change() {

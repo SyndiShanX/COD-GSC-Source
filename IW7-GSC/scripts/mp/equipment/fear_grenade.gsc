@@ -44,7 +44,7 @@ func_6BBB() {
   var_1 = self.origin;
   playFX(scripts\engine\utility::getfx("fear_mine_vanish"), var_1);
   if(isDefined(self.var_76CF)) {
-    self.var_76CF moveto(var_1 + (0, 0, 72), 0.5);
+    self.var_76CF moveTo(var_1 + (0, 0, 72), 0.5);
   }
 
   var_2 = var_0 scripts\mp\powerloot::func_7FC4("power_fearGrenade", 160);
@@ -188,7 +188,7 @@ func_E853() {
     var_3 = anglestoright(var_1);
     var_4 = var_0 + (0, 0, 60) + var_3 * randomfloatrange(-300, 300);
     var_5 = self.origin + var_2 * 500 + (randomfloatrange(-150, 150), randomfloatrange(-150, 150), 0);
-    var_6 = vectornormalize(var_5 - var_4) * randomfloatrange(500, 900);
+    var_6 = vectorNormalize(var_5 - var_4) * randomfloatrange(500, 900);
     var_6 = (var_6[0], var_6[1], 0) + self getvelocity();
     thread func_108CE(self, var_4, var_6);
     wait(randomfloatrange(0.1, 0.5));
@@ -286,7 +286,7 @@ func_108CE(var_0, var_1, var_2) {
   var_5 hide();
   var_5 showtoplayer(var_0);
   var_5 setModel(var_5.config.model);
-  var_5 linkto(var_4, "tag_origin");
+  var_5 linkTo(var_4, "tag_origin");
   var_4.var_6B4A = var_5;
   var_5 thread func_13A41();
 }

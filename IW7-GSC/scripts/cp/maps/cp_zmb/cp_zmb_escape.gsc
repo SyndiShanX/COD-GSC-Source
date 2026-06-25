@@ -112,10 +112,10 @@ delete_team_door(var_0) {
 }
 
 spawn_escape_entities() {
-  var_0 = getent("escape_1_blocker_brush", "targetname");
+  var_0 = getEnt("escape_1_blocker_brush", "targetname");
   var_0 movez(-1024, 0.1);
   var_0 waittill("movedone");
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_1 = scripts\engine\utility::getStructArray("escape_1_blocker", "targetname");
   level.escape_barriers = [];
   foreach(var_5, var_3 in var_1) {
@@ -166,7 +166,7 @@ remove_team_door_meters() {
 setup_door(var_0) {
   var_0 movez(-1024, 0.05);
   var_0 waittill("movedone");
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_0.panels = [];
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {

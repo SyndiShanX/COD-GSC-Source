@@ -18,7 +18,7 @@ main_start() {
   precachemodel("collision_wall_512x512x10_standard");
   precachemodel("collision_player_32x32x128");
   precachemodel("collision_player_256x256x256");
-  old_roof_trig = getent("bus_roof_watch", "targetname");
+  old_roof_trig = getEnt("bus_roof_watch", "targetname");
   level.roof_trig = spawn("trigger_box", old_roof_trig.origin, 0, 464, 180, 120);
   level.roof_trig.targetname = "bus_roof_watch";
   old_roof_trig delete();

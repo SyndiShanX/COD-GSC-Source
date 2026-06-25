@@ -1624,11 +1624,11 @@ _id_29F7(var_0) {
 
   if(self isonground()) {
     var_2 = (self.origin[0], self.origin[1], self.origin[2] + 20);
-    self setorigin(var_2);
+    self setOrigin(var_2);
   }
 
   var_3 = var_1 - var_0.origin;
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = getdvarfloat("#x3364da11e5eaa161d", 1300);
   var_5 = undefined;
 

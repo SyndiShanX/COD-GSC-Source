@@ -901,7 +901,7 @@ _id_BB24(var_0) {
   self endon("hacked");
   var_1 = spawn("trigger_radius", self.origin - (0, 0, 40), 521, 32, 72);
   var_1 _meth_80DB();
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 _meth_838B(level._id_11056);
   thread _id_BB25(var_1);
   var_2 = 300;
@@ -1272,10 +1272,10 @@ _id_BB22() {
 
     var_1 = self.angles[1] + var_1;
     var_2 = (-60 + randomint(120), var_1, -45 + randomint(90));
-    self rotateto(var_2, var_0, var_0 * 0.5, var_0 * 0.5);
+    self rotateTo(var_2, var_0, var_0 * 0.5, var_0 * 0.5);
 
     if(isDefined(self._id_10F48)) {
-      self._id_10F48 rotateto(var_2, var_0, var_0 * 0.5, var_0 * 0.5);
+      self._id_10F48 rotateTo(var_2, var_0, var_0 * 0.5, var_0 * 0.5);
     }
 
     wait(randomfloat(var_0 - 0.1));

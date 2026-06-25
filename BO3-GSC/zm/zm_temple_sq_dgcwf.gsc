@@ -28,7 +28,7 @@ function plate_counter() {
   self endon("death");
   var_b4264aa6 = 4;
   if(getdvarint("") >= 2) {
-    var_b4264aa6 = getplayers().size;
+    var_b4264aa6 = getPlayers().size;
   }
   while(true) {
     if(level._on_plate >= (var_b4264aa6 - 1) && !level flag::get("dgcwf_on_plate")) {
@@ -124,13 +124,13 @@ function plate_trigger() {
   self thread begin_dgcwf_vox();
   level.var_9fb9bcda = spawn("script_origin", self.origin);
   level.var_9fb9bcda playLoopSound("evt_sq_dgcwf_waterthrash_loop", 2);
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     level flag::set("dgcwf_on_plate");
     return;
   }
   level thread plate_debug();
   self thread plate_counter();
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread plate_monitor(self);
   }
@@ -171,7 +171,7 @@ function function_3ab2e3c3() {
   while(true) {
     if(level flag::get("dgcwf_on_plate")) {
       self.pressed = 0;
-      self moveto(self.on_pos, 0.25);
+      self moveTo(self.on_pos, 0.25);
       self playSound("evt_sq_dgcwf_lever_kachunk");
       self waittill("movedone");
       self.trigger triggerenable(1);
@@ -189,7 +189,7 @@ function function_3ab2e3c3() {
       self.pressed = 0;
       self.trigger triggerenable(0);
       self playSound("evt_sq_dgcwf_lever_dechunk");
-      self moveto(self.off_pos, 0.25);
+      self moveTo(self.off_pos, 0.25);
       self waittill("movedone");
       while(!level flag::get("dgcwf_on_plate")) {
         wait(0.05);
@@ -201,12 +201,12 @@ function function_3ab2e3c3() {
 
 function init_stage() {
   level._on_plate = 0;
-  if(getplayers().size > 1) {
+  if(getPlayers().size > 1) {
     level flag::clear("dgcwf_on_plate");
   }
   level flag::clear("dgcwf_sw1_pressed");
   level flag::clear("dgcwf_plot_vo_done");
-  trig = getent("sq_dgcwf_trig", "targetname");
+  trig = getEnt("sq_dgcwf_trig", "targetname");
   trig triggerenable(1);
   zm_temple_sq_brock::delete_radio();
   level thread delayed_start_skit();
@@ -233,7 +233,7 @@ function stage_logic() {
 
 function slightly_delayed_player_response() {
   wait(2.5);
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest2", 4);
 }
 
@@ -241,7 +241,7 @@ function play_success_audio() {
   level endon("sq_dgcwf_over");
   level flag::wait_till("dgcwf_on_plate");
   level flag::wait_till("dgcwf_sw1_pressed");
-  playsoundatposition("evt_sq_dgcwf_gears", self.origin);
+  playSoundAtPosition("evt_sq_dgcwf_gears", self.origin);
 }
 
 function exit_stage(success) {
@@ -252,7 +252,7 @@ function exit_stage(success) {
     level.on_plate_text destroy();
     level.on_plate_text = undefined;
   }
-  trig = getent("sq_dgcwf_trig", "targetname");
+  trig = getEnt("sq_dgcwf_trig", "targetname");
   trig triggerenable(0);
   if(success) {
     zm_temple_sq_brock::create_radio(3);

@@ -93,8 +93,8 @@ function function_8d4cb2b(localclientnum) {
       }
 
       if(isDefined(shot.targetstruct)) {
-        var_3dbe949b moveto(shot.targetstruct.origin, shot.var_411d90d0);
-        var_3dbe949b rotateto(shot.targetstruct.angles, shot.var_411d90d0);
+        var_3dbe949b moveTo(shot.targetstruct.origin, shot.var_411d90d0);
+        var_3dbe949b rotateTo(shot.targetstruct.angles, shot.var_411d90d0);
       }
 
       wait traveltime;

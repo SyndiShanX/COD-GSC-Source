@@ -263,7 +263,7 @@ function private function_a38f70a1(player, target) {
   orb endon("death");
   target thread function_c8e11a8b(orb, "death");
   player thread function_c8e11a8b(orb, "disconnect");
-  orb moveto(target.origin + vectorscale((0, 0, 1), 45), 0.3);
+  orb moveTo(target.origin + vectorscale((0, 0, 1), 45), 0.3);
   orb waittill("movedone");
   target playSound("gdt_cybercore_rig_prox_imp");
   damage = getdvarint("scr_proximity_stun_damage", 20);

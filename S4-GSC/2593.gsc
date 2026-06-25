@@ -1153,7 +1153,7 @@ _id_64B8(var_0) {
 }
 
 _id_64B7(var_0) {
-  return scripts\engine\utility::getstruct(var_0, "targetname");
+  return scripts\engine\utility::getStruct(var_0, "targetname");
 }
 
 _id_64B6(var_0) {
@@ -1167,7 +1167,7 @@ _id_64B6(var_0) {
 }
 
 _id_D280(var_0) {
-  var_1 = getent(var_0._id_0399, "script_linkname");
+  var_1 = getEnt(var_0._id_0399, "script_linkname");
 
   if(!isDefined(var_1)) {
     return;
@@ -1198,7 +1198,7 @@ _id_AE70() {
       break;
     }
 
-    var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
 
     if(!isDefined(var_2)) {
       break;
@@ -1327,7 +1327,7 @@ _id_5DFA() {
 
   var_3 = spawn("script_model", level._id_5DFB[var_1]);
   var_3 setModel("tag_origin");
-  var_0 cameralinkto(var_3, "tag_origin", 1, 1);
+  var_0 cameralinkTo(var_3, "tag_origin", 1, 1);
   var_0._id_7E74 = var_3;
   var_0 thread _id_C9CA(var_3, var_1);
 }
@@ -1358,6 +1358,6 @@ _id_C9CA(var_0, var_1) {
     }
     var_6 = _func_0016(var_2);
     var_7 = vectortoangles(var_6 - var_0.origin);
-    var_0 rotateto(var_7, 0.5, 0.1, 0.1);
+    var_0 rotateTo(var_7, 0.5, 0.1, 0.1);
   }
 }

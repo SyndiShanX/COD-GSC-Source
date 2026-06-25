@@ -34,13 +34,13 @@ init_scrambler() {
     }
   }
 
-  var_2[0].var_1270F enablelinkto();
-  var_2[0].var_1270F linkto(var_2[0].body);
+  var_2[0].var_1270F enablelinkTo();
+  var_2[0].var_1270F linkTo(var_2[0].body);
   foreach(var_11 in var_2[0].rockets) {
-    var_11 linkto(var_2[0].body);
+    var_11 linkTo(var_2[0].body);
   }
 
-  var_2[0].clip disconnectpaths();
+  var_2[0].clip disconnectPaths();
 }
 
 func_EC9E() {
@@ -55,7 +55,7 @@ func_EC9E() {
     if(var_2 != "power_off") {
       self.powered_on = 1;
       level thread scripts\cp\cp_vo::add_to_nag_vo("dj_traps_use_nag", "zmb_dj_vo", 60, 15, 2, 1);
-      var_3 = getent("escape_velocity_main_ride", "targetname");
+      var_3 = getEnt("escape_velocity_main_ride", "targetname");
       var_3 setscriptablepartstate("model", "on");
       var_3 setscriptablepartstate("fx", "idle");
       scripts\engine\utility::waitframe();
@@ -67,7 +67,7 @@ func_EC9E() {
       }
 
       scripts\engine\utility::waitframe();
-      var_7 = getent("escape_velocity_top_lights", "targetname");
+      var_7 = getEnt("escape_velocity_top_lights", "targetname");
       var_7 setscriptablepartstate("model", "on");
     } else {
       self.powered_on = 0;
@@ -86,11 +86,11 @@ use_scrambler(var_0, var_1) {
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   var_0.trap_kills = 0;
   var_0.var_126A5 = var_1;
-  var_2 = getent("escape_velocity_main_ride", "targetname");
+  var_2 = getEnt("escape_velocity_main_ride", "targetname");
   var_2 setscriptablepartstate("fx", "active");
   var_2 setscriptablepartstate("model", "active");
   var_0.body setModel("zmb_escape_velocity_ride_center_on");
-  var_0.body rotateyaw(3240, 25, 5, 5);
+  var_0.body rotateYaw(3240, 25, 5, 5);
   var_0 thread kill_zombies(var_0, var_1);
   var_0 thread func_6734();
   var_3 = 25;
@@ -110,7 +110,7 @@ use_scrambler(var_0, var_1) {
   }
 
   scripts\engine\utility::waitframe();
-  var_0.clip disconnectpaths();
+  var_0.clip disconnectPaths();
   wait(3);
   scripts\cp\cp_interaction::enable_linked_interactions(var_0);
   scripts\cp\cp_interaction::interaction_cooldown(var_0, max(level.scrambletrapuses * 45, 45));
@@ -131,7 +131,7 @@ kill_zombies(var_0, var_1) {
 
     if(isPlayer(var_3)) {
       var_3 dodamage(25, self.body.origin);
-      var_3 setvelocity(vectornormalize(var_3.origin - self.body.origin) * 500);
+      var_3 setvelocity(vectorNormalize(var_3.origin - self.body.origin) * 500);
       continue;
     }
 
@@ -139,7 +139,7 @@ kill_zombies(var_0, var_1) {
       if(var_3.agent_type == "zombie_brute") {
         var_3 notify("no_path_to_targets");
       } else {
-        var_3 setvelocity(vectornormalize(var_3.origin - self.body.origin) * 500);
+        var_3 setvelocity(vectorNormalize(var_3.origin - self.body.origin) * 500);
       }
 
       continue;
@@ -185,7 +185,7 @@ fling_zombie(var_0, var_1) {
   self.disable_armor = 1;
   playFX(level._effect["blackhole_trap_death"], self.origin, anglesToForward((-90, 0, 0)), anglestoup((-90, 0, 0)));
   wait(0.05);
-  self setvelocity(vectornormalize(self.origin - var_0.origin) * 200 + (0, 0, 300));
+  self setvelocity(vectorNormalize(self.origin - var_0.origin) * 200 + (0, 0, 300));
   wait(0.1);
   if(!isDefined(level.spinner_trap_kills)) {
     level.spinner_trap_kills = 0;
@@ -198,7 +198,7 @@ fling_zombie(var_0, var_1) {
 func_6734() {
   self endon("stop_dmg");
   var_0 = scripts\engine\utility::getStructArray("escape_velocity_attractors", "targetname");
-  var_1 = getent("escape_velocity_volume", "targetname");
+  var_1 = getEnt("escape_velocity_volume", "targetname");
   for(;;) {
     var_2 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
     var_2 = scripts\engine\utility::get_array_of_closest(self.body.origin, var_2);

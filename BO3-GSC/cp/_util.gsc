@@ -38,7 +38,7 @@ function warning(msg) {
 }
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -792,7 +792,7 @@ function missionfailedwrapper(fail_reason, fail_hint, shader, iwidth, iheight, f
     setDvar("ui_deadquote", fail_hint);
   }
   if(isDefined(shader)) {
-    getplayers()[0] thread load::special_death_indicator_hudelement(shader, iwidth, iheight, fdelay, x, y);
+    getPlayers()[0] thread load::special_death_indicator_hudelement(shader, iwidth, iheight, fdelay, x, y);
   }
   level.missionfailed = 1;
   level thread coop::function_5ed5738a(fail_reason, fail_hint);
@@ -850,11 +850,11 @@ function init_hero(name, func_init, arg1, arg2, arg3, arg4, arg5, b_show_in_ev =
     level.heroes = [];
   }
   name = tolower(name);
-  ai_hero = getent(name + "_ai", "targetname", 1);
+  ai_hero = getEnt(name + "_ai", "targetname", 1);
   if(!isalive(ai_hero)) {
-    ai_hero = getent(name, "targetname", 1);
+    ai_hero = getEnt(name, "targetname", 1);
     if(!isalive(ai_hero)) {
-      spawner = getent(name, "targetname");
+      spawner = getEnt(name, "targetname");
       if(!(isDefined(spawner.spawning) && spawner.spawning)) {
         spawner.count++;
         ai_hero = spawner::simple_spawn_single(spawner);
@@ -990,7 +990,7 @@ function teleport_players_igc(str_spots, coop_sort) {
   a_spots = skipto::get_spots(str_spots, coop_sort);
   assert(a_spots.size >= (level.players.size - 1), "");
   for(i = 0; i < (level.players.size - 1); i++) {
-    level.players[i + 1] setorigin(a_spots[i].origin);
+    level.players[i + 1] setOrigin(a_spots[i].origin);
     if(isDefined(a_spots[i].angles)) {
       level.players[i + 1] delay_network_frames(2, "disconnect", &setplayerangles, a_spots[i].angles);
     }
@@ -1112,8 +1112,8 @@ function show_event_message(player_handle, str_message) {
 }
 
 function init_interactive_gameobject(trigger, str_objective, str_hint_text, func_on_use, a_keyline_objects) {
-  trigger sethintstring(str_hint_text);
-  trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  trigger setHintString(str_hint_text);
+  trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   if(!isDefined(a_keyline_objects)) {
     a_keyline_objects = [];
   } else {

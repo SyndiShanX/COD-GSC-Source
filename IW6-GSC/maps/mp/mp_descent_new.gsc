@@ -159,9 +159,9 @@ world_tilt() {
   foreach(ent in vista_ents) {
     if(ent != level.vista) {
       if(isDefined(ent.classname) && IsSubStr(ent.classname, "trigger")) {
-        ent EnableLinkTo();
+        ent EnablelinkTo();
       }
-      ent LinkTo(level.vista);
+      ent linkTo(level.vista);
     }
     if(!isDefined(ent.target)) {
       continue;
@@ -174,7 +174,7 @@ world_tilt() {
 
       switch (target.script_noteworthy) {
         case "link":
-          target LinkTo(ent);
+          target linkTo(ent);
           break;
         default:
           break;
@@ -319,7 +319,7 @@ world_tilt_damage(damage) {
   new_angles = (new_pitch, level.vista.angles[1], level.vista.angles[2]);
 
   move_time = .2;
-  level.vista RotateTo(new_angles, move_time);
+  level.vista rotateTo(new_angles, move_time);
   Earthquake(.2, 1, level.vista.origin, 100000);
   wait move_time;
 }
@@ -420,10 +420,10 @@ world_tilt_move(trans) {
 
   move_time = trans["time"];
   if(trans["origin"] != self.origin) {
-    self MoveTo(trans["origin"], move_time, move_time);
+    self moveTo(trans["origin"], move_time, move_time);
   }
   if(anglesClamp180(trans["angles"]) != anglesClamp180(self.angles)) {
-    self RotateTo(trans["angles"], move_time);
+    self rotateTo(trans["angles"], move_time);
   }
 
   Earthquake(RandomFloatRange(.3, .5), move_time, self.origin, 100000);
@@ -528,7 +528,7 @@ watersheet_trig_setup() {
   self endon("disconnect");
   self endon("above_water");
 
-  trig = getent("watersheet", "targetname");
+  trig = getEnt("watersheet", "targetname");
 
   while(1) {
     trig waittill("trigger", player);
@@ -604,15 +604,15 @@ CONST_DOUBLE_DOOR_VFX = "equipment_explode_big";
 CONST_DOUBLE_DOOR_ANGLE_MAX = 85;
 CONST_DOUBLE_DOOR_EXPLODE_OPEN_TIME = 0.125;
 doubleDoorCreate(doorName) {
-  door = GetEnt(doorName, "targetname");
+  door = getEnt(doorName, "targetname");
   if(isDefined(door)) {
-    door.collision = GetEnt(doorName + "_clip", "targetname");
+    door.collision = getEnt(doorName + "_clip", "targetname");
 
     door.ruins = [];
     door.ruins[0] = getRuin(doorName + "_upper");
     door.ruins[1] = getRuin(doorName + "_lower");
 
-    door.destroyFxPoint = getstruct(door.ruins[0].target, "targetname");
+    door.destroyFxPoint = getStruct(door.ruins[0].target, "targetname");
     Assert(isDefined(door.destroyFxPoint));
 
     waitframe();
@@ -661,7 +661,7 @@ doubleDoorDestroy(attacker, direction_vec, impact_loc) {
 }
 
 getRuin(ruinName) {
-  ruin = GetEnt(ruinName, "targetname");
+  ruin = getEnt(ruinName, "targetname");
   Assert(isDefined(ruin));
   ruin Hide();
 
@@ -669,9 +669,9 @@ getRuin(ruinName) {
 }
 
 trapDoorCreate(doorName) {
-  door = GetEnt(doorName, "targetname");
+  door = getEnt(doorName, "targetname");
   if(isDefined(door)) {
-    self.pathBlocker = GetEnt(door.target, "targetname");
+    self.pathBlocker = getEnt(door.target, "targetname");
 
     waitframe();
     self.pathBlocker blockPath();
@@ -713,7 +713,7 @@ clearPath() {
 blockPath() {
   self Solid();
   self Show();
-  self DisconnectPaths();
+  self disconnectPaths();
 }
 
 GRAVITY_DVAR = "phys_gravity";
@@ -731,11 +731,11 @@ levitateProps(minTime, maxTime) {
 }
 
 moverCreate(moverName, triggerFlag) {
-  mover = GetEnt(moverName, "targetname");
-  mover.collision = GetEnt(moverName + "_collision", "targetname");
+  mover = getEnt(moverName, "targetname");
+  mover.collision = getEnt(moverName + "_collision", "targetname");
 
   if(isDefined(mover.collision)) {
-    mover.collision LinkTo(mover);
+    mover.collision linkTo(mover);
     mover.collision thread moverExplosiveTrigger(triggerFlag);
   }
 
@@ -746,7 +746,7 @@ moverCreate(moverName, triggerFlag) {
   nextKeyFrameName = ent.target;
   i = 0;
   while(isDefined(nextKeyFrameName)) {
-    struct = getstruct(nextKeyFrameName, "targetname");
+    struct = getStruct(nextKeyFrameName, "targetname");
     if(isDefined(struct)) {
       ent.keyframes[i] = struct;
 
@@ -803,8 +803,8 @@ moverDoMove(waitString) {
   for(i = 1; i < self.keyframes.size; i++) {
     kf = self.keyframes[i];
 
-    self MoveTo(kf.origin, kf.script_duration, kf.script_accel, kf.script_decel);
-    self RotateTo(kf.angles, kf.script_duration, kf.script_accel, kf.script_decel);
+    self moveTo(kf.origin, kf.script_duration, kf.script_accel, kf.script_decel);
+    self rotateTo(kf.angles, kf.script_duration, kf.script_accel, kf.script_decel);
 
     if(isDefined(kf.shakeMag)) {
       Earthquake(kf.shakeMag, kf.shakeDuration, self.origin, kf.shakeDistance);
@@ -819,7 +819,7 @@ moverDoMove(waitString) {
 }
 
 animatedMoverCreate(entName, animName, fallSound, impactSound, impactDelay, impactOffset) {
-  mover = GetEnt(entName, "targetname");
+  mover = getEnt(entName, "targetname");
 
   if(isDefined(mover)) {
     level waittill("trigger_movers");
@@ -839,9 +839,9 @@ animatedMoverCreate(entName, animName, fallSound, impactSound, impactDelay, impa
 }
 
 setupCollapsingColumn(entName) {
-  mover = GetEnt(entName, "targetname");
+  mover = getEnt(entName, "targetname");
   if(isDefined(mover)) {
-    rubble = GetEnt(entName + "_debris_clip", "targetname");
+    rubble = getEnt(entName + "_debris_clip", "targetname");
 
     rubble NotSolid();
 
@@ -871,14 +871,14 @@ setupCollapsingColumn(entName) {
 }
 
 setupSniperDuct(entName) {
-  duct = GetEnt(entName, "targetname");
+  duct = getEnt(entName, "targetname");
   if(isDefined(duct)) {
-    rootStruct = getstruct(entName + "_origin", "targetname");
+    rootStruct = getStruct(entName + "_origin", "targetname");
     root = spawn("script_model", rootStruct.origin);
-    duct LinkTo(root);
+    duct linkTo(root);
 
-    duct2 = GetEnt(duct.target, "targetname");
-    duct2 LinkTo(root);
+    duct2 = getEnt(duct.target, "targetname");
+    duct2 linkTo(root);
 
     fallNum = RandomIntRange(1, level.dropNodes.size);
     fallString = "buildingCollapseEnd_" + fallNum;
@@ -959,7 +959,7 @@ setupBuildingCollapse() {
   curSettings["sfx"]["glass_right"] = "scn_bldg_fall5_glass_right";
   level.collapseSettings[level.collapseSettings.size] = curSettings;
 
-  level.vista = GetEnt("vista_test", "targetname");
+  level.vista = getEnt("vista_test", "targetname");
 
   dropNodeOffsets = [];
   dropNodeOffsets[0] = 550;
@@ -967,7 +967,7 @@ setupBuildingCollapse() {
   dropNodeOffsets[2] = 350;
 
   level.dropNodes = [];
-  curNode = getstruct("drop_node2", "targetname");
+  curNode = getStruct("drop_node2", "targetname");
 
   maxPitch = CONST_DEFAULT_MAX_PITCH;
   maxRoll = CONST_DEFAULT_MAX_ROLL;
@@ -982,7 +982,7 @@ setupBuildingCollapse() {
     level.dropNodes[level.dropNodes.size] = curNode;
 
     if(isDefined(curNode.target)) {
-      curNode = getstruct(curNode.target, "targetname");
+      curNode = getStruct(curNode.target, "targetname");
     } else {
       break;
     }
@@ -994,8 +994,8 @@ setupBuildingCollapse() {
   level.facadeConcrete = [];
   for(i = 0; i < level.dropNodes.size; i++) {
     entName = CONST_CONCRETE_FACADE_NAME + i;
-    facade = GetEnt(entName, "targetname");
-    facade LinkTo(level.vista);
+    facade = getEnt(entName, "targetname");
+    facade linkTo(level.vista);
     level.facadeConcrete[i] = facade;
   }
 
@@ -1010,13 +1010,13 @@ setupBuildingCollapse() {
     level.facadeGlass[i] = facades;
 
     foreach(item in facades) {
-      item LinkTo(level.vista);
+      item linkTo(level.vista);
     }
 
     ruinName = CONST_GLASS_FACADE_NAME + "ruin_" + i;
-    ruin = GetEnt(ruinName, "targetname");
+    ruin = getEnt(ruinName, "targetname");
     if(isDefined(ruin)) {
-      ruin LinkTo(level.vista);
+      ruin linkTo(level.vista);
       ruin Hide();
       level.ruinGlass[i] = ruin;
     }
@@ -1065,7 +1065,7 @@ doBuildingFall(nodeIndex) {
   }
 
   targetAngle = (targetPitch, 0, targetRoll);
-  level.vista RotateTo(0.75 * targetAngle, startShockTime, 1.0 * startShockTime, 0.0);
+  level.vista rotateTo(0.75 * targetAngle, startShockTime, 1.0 * startShockTime, 0.0);
 
   level thread destroyAirKillstreaks();
 
@@ -1082,8 +1082,8 @@ doBuildingFall(nodeIndex) {
   level thread animateConcreteBuildingFacade(nodeIndex, moveTime);
   level thread animateGlassBuildingFacade(nodeIndex, moveTime);
 
-  level.vista MoveTo(targetPos.origin, moveTime, 0.25 * moveTime, 0.0);
-  level.vista RotateTo(-1 * targetAngle, moveTime, 0.25 * moveTime, 0.0);
+  level.vista moveTo(targetPos.origin, moveTime, 0.25 * moveTime, 0.0);
+  level.vista rotateTo(-1 * targetAngle, moveTime, 0.25 * moveTime, 0.0);
 
   level notify("shake_props");
   level notify("buildingCollapseStart_" + nodeIndex);
@@ -1104,7 +1104,7 @@ doBuildingFall(nodeIndex) {
 
   settleTime = CONST_DEFAULT_SETTLE_TIME;
   finalAngles = (-0.25 * targetPitch, 0, 0.25 * targetRoll);
-  level.vista RotateTo(finalAngles, settleTime, 0.8 * settleTime, 0.2 * settleTime);
+  level.vista rotateTo(finalAngles, settleTime, 0.8 * settleTime, 0.2 * settleTime);
 
   wait(0.75 * settleTime);
   Earthquake(RandomFloatRange(0.3, 0.5), 0.25 * settleTime + 1.0, level.mapCenter, CONST_EARTHQUAKE_RANGE);
@@ -1127,7 +1127,7 @@ animateConcreteBuildingFacade(nodeIndex, moveTime) {
     upVec = AnglesToUp(oldFace.angles);
 
     endPos = oldFace.origin - 150 * upVec;
-    oldFace MoveTo(endPos, moveTime, moveTime, 0);
+    oldFace moveTo(endPos, moveTime, moveTime, 0);
     oldFace RotateRoll(20, moveTime, moveTime, 0);
 
     wait(movetime);
@@ -1154,7 +1154,7 @@ glassFacadeFall(moveTime) {
   upVec = AnglesToUp(self.angles);
 
   endPos = self.origin - 400 * upVec;
-  self MoveTo(endPos, moveTime, moveTime, 0);
+  self moveTo(endPos, moveTime, moveTime, 0);
   self RotateRoll(-60, moveTime, moveTime, 0);
 
   wait(moveTime);
@@ -1273,7 +1273,7 @@ periodicTremor(minTime, maxTime) {
 }
 
 setupBuildingFx() {
-  fxRig = GetEnt("column_chunk", "targetname");
+  fxRig = getEnt("column_chunk", "targetname");
 
   playFXOnTag(getfx("vfx_building_debris_runner"), fxRig, "tag_03_vfx_building_debris_runner");
   playFXOnTag(getfx("vfx_spark_drip_dec_runner"), fxRig, "tag_02_vfx_spark_drip_dec_runner");
@@ -1296,7 +1296,7 @@ destroyAirKillstreaksForTeam(attacker, victimTeam) {
 
 playRumble(rumbleType) {
   foreach(player in level.players) {
-    player PlayRumbleOnEntity(rumbleType);
+    player playRumbleOnEntity(rumbleType);
   }
 }
 

@@ -92,7 +92,7 @@ guns() {
   iprintlnbold("<dev string:xea>");
 
   level.var_7629d4e2 = 1;
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     e_player.var_679c4d4e = e_player zm_weapons::player_get_loadout();
@@ -108,7 +108,7 @@ guns() {
   level thread function_e5e4c0f9();
 
   while(level.var_7629d4e2) {
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
 
     foreach(e_player in a_e_players) {
       iprintlnbold("<dev string:x116>");
@@ -154,7 +154,7 @@ guns() {
   }
 
   waitframe(1);
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     e_player thread function_a9e83aa6();
@@ -224,7 +224,7 @@ time() {
   iprintlnbold("<dev string:x15f>");
 
   level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   a_e_zombies = getaiteamarray(level.zombie_team);
 
   foreach(e_zombie in a_e_zombies) {
@@ -329,7 +329,7 @@ bank() {
 
   level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
   wait 2;
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     e_player zm_score::add_to_player_score(1000);
@@ -404,7 +404,7 @@ warp() {
 
   level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
   wait 1;
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     if(isalive(e_player) && !e_player laststand::player_is_in_laststand() && e_player.sessionstate != "spectator") {
@@ -416,14 +416,14 @@ warp() {
 warp_player() {
   self clientfield::increment_to_player("teleporter_depart", 1);
   playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_out", self.origin);
+  playSoundAtPosition(#"evt_teleporter_out", self.origin);
   s_destination = self zm_bgb_anywhere_but_here::function_91a62549();
   self zm_fasttravel::function_66d020b0(undefined, undefined, undefined, undefined, s_destination, undefined, "warp");
   self clientfield::increment_to_player("teleporter_transition", 1);
   self thread zm_white_portals::function_c234a5ce();
   self clientfield::increment_to_player("teleporter_arrive", 1);
   playFX(level._effect[#"portal_dest"], self.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_go", self.origin);
+  playSoundAtPosition(#"evt_teleporter_go", self.origin);
   self playsoundtoplayer(#"evt_teleporter_go_plr", self);
   wait 0.5;
   self.teleporting = 0;
@@ -453,7 +453,7 @@ shed() {
   foreach(var_6620353d in a_e_zombie_doors) {
     if(isDefined(var_6620353d.script_flag) && var_6620353d.script_flag == "yellow_backyard_to_ammo_door") {
       if(!(isDefined(var_6620353d.has_been_opened) && var_6620353d.has_been_opened)) {
-        a_e_players = getplayers();
+        a_e_players = getPlayers();
         var_6620353d notify(#"trigger", {
           #activator: a_e_players[0], #is_forced: 1
         });
@@ -482,7 +482,7 @@ nuke() {
 hero() {
   iprintlnbold("<dev string:x3ac>");
 
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     e_player zm_powerup_hero_weapon_power::hero_weapon_power(e_player);
@@ -513,7 +513,7 @@ function_82457e35(params) {
     var_4095cc33 = anglestoup(v_angles);
     v_down = v_origin + var_4095cc33 * -4;
     mdl_fx = util::spawn_model("tag_origin", v_origin, v_angles);
-    mdl_fx linkto(self, "tag_eye", v_down - v_origin, (60, 0, 90));
+    mdl_fx linkTo(self, "tag_eye", v_down - v_origin, (60, 0, 90));
     mdl_fx clientfield::set("" + #"vomit_blade_fx", 1);
 
     while(isDefined(self) && self ai::is_stunned()) {
@@ -530,7 +530,7 @@ club() {
 
   level thread zm_white_util::function_ec34b5ee(#"hash_2c4fa652fb89d231");
   exploder::exploder("fxexp_disco_lgt");
-  playsoundatposition(#"hash_c8d3a1557c42ab7", (1, 1145, -350));
+  playSoundAtPosition(#"hash_c8d3a1557c42ab7", (1, 1145, -350));
   wait 253;
   exploder::stop_exploder("fxexp_disco_lgt");
 

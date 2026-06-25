@@ -80,7 +80,7 @@ do_zombie_fall(spot) {
   self.in_the_ceiling = 1;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
@@ -89,13 +89,13 @@ do_zombie_fall(spot) {
   anim_org = spot.origin;
   anim_ang = spot.angles;
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill("movedone");
   target_org = get_desired_origin();
 
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
 
@@ -116,7 +116,7 @@ do_zombie_fall(spot) {
 
 zombie_faller_do_fall() {
   self endon("death");
-  self animscripted(self.origin, self.zombie_faller_location.angles, "zm_faller_emerge");
+  self animScripted(self.origin, self.zombie_faller_location.angles, "zm_faller_emerge");
   self maps\mp\animscripts\zm_shared::donotetracks("emerge_anim", ::handle_fall_notetracks, self.zombie_faller_location);
   self.zombie_faller_wait_start = gettime();
   self.zombie_faller_should_drop = 0;
@@ -125,7 +125,7 @@ zombie_faller_do_fall() {
 
   while(!self.zombie_faller_should_drop) {
     if(self zombie_fall_should_attack(self.zombie_faller_location)) {
-      self animscripted(self.origin, self.zombie_faller_location.angles, "zm_faller_attack");
+      self animScripted(self.origin, self.zombie_faller_location.angles, "zm_faller_attack");
       self maps\mp\animscripts\zm_shared::donotetracks("attack_anim", ::handle_fall_notetracks, self.zombie_faller_location);
 
       if(!self zombie_faller_always_drop() && randomfloat(1) > 0.5) {
@@ -141,7 +141,7 @@ zombie_faller_do_fall() {
       self.zombie_faller_should_drop = 1;
       break;
     } else {
-      self animscripted(self.origin, self.zombie_faller_location.angles, "zm_faller_attack");
+      self animScripted(self.origin, self.zombie_faller_location.angles, "zm_faller_attack");
       self maps\mp\animscripts\zm_shared::donotetracks("attack_anim", ::handle_fall_notetracks, self.zombie_faller_location);
     }
   }
@@ -149,12 +149,12 @@ zombie_faller_do_fall() {
   self notify("falling");
   spot = self.zombie_faller_location;
   self zombie_faller_enable_location();
-  self animscripted(self.origin, spot.angles, "zm_faller_fall");
+  self animScripted(self.origin, spot.angles, "zm_faller_fall");
   self maps\mp\animscripts\zm_shared::donotetracks("fall_anim", ::handle_fall_notetracks, spot);
   self.deathfunction = maps\mp\zombies\_zm_spawner::zombie_death_animscript;
   self notify("fall_anim_finished");
   spot notify("stop_zombie_fall_fx");
-  self stopanimscripted();
+  self stopanimScripted();
   landanimdelta = 15;
   ground_pos = groundpos_ignore_water_new(self.origin);
   physdist = self.origin[2] - ground_pos[2] + landanimdelta;
@@ -253,7 +253,7 @@ zombie_faller_watch_player(player) {
       if(!incloserange) {
         dirtoplayerenter = player.origin - self.origin;
         dirtoplayerenter = (dirtoplayerenter[0], dirtoplayerenter[1], 0.0);
-        dirtoplayerenter = vectornormalize(dirtoplayerenter);
+        dirtoplayerenter = vectorNormalize(dirtoplayerenter);
       }
 
       incloserange = 1;
@@ -261,7 +261,7 @@ zombie_faller_watch_player(player) {
       if(incloserange) {
         dirtoplayerexit = player.origin - self.origin;
         dirtoplayerexit = (dirtoplayerexit[0], dirtoplayerexit[1], 0.0);
-        dirtoplayerexit = vectornormalize(dirtoplayerexit);
+        dirtoplayerexit = vectorNormalize(dirtoplayerexit);
 
         if(vectordot(dirtoplayerenter, dirtoplayerexit) < 0) {
           self.zombie_faller_should_drop = 1;
@@ -310,7 +310,7 @@ zombie_fall_should_attack(spot) {
 
 zombie_fall_get_vicitims(spot) {
   ret = [];
-  players = getplayers();
+  players = getPlayers();
   checkdist2 = 40.0;
   checkdist2 = checkdist2 * checkdist2;
 
@@ -375,7 +375,7 @@ zombie_fall_death(spot) {
     self waittill("damage", amount, attacker, dir, p, type);
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
   spot notify("stop_zombie_fall_fx");
 }
 
@@ -399,7 +399,7 @@ _damage_mod_to_damage_type(type) {
 zombie_fall_fx(spot) {
   spot thread zombie_fall_dust_fx(self);
   spot thread zombie_fall_burst_fx();
-  playsoundatposition("zmb_zombie_spawn", spot.origin);
+  playSoundAtPosition("zmb_zombie_spawn", spot.origin);
   self endon("death");
   spot endon("stop_zombie_fall_fx");
   wait 1;
@@ -457,11 +457,11 @@ faller_death_ragdoll() {
 in_player_fov(player) {
   playerangles = player getplayerangles();
   playerforwardvec = anglesToForward(playerangles);
-  playerunitforwardvec = vectornormalize(playerforwardvec);
+  playerunitforwardvec = vectorNormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();
   playertobanzaivec = banzaipos - playerpos;
-  playertobanzaiunitvec = vectornormalize(playertobanzaivec);
+  playertobanzaiunitvec = vectorNormalize(playertobanzaivec);
   forwarddotbanzai = vectordot(playerunitforwardvec, playertobanzaiunitvec);
   anglefromcenter = acos(forwarddotbanzai);
   playerfov = getdvarfloat(#"cg_fov");
@@ -481,7 +481,7 @@ potentially_visible(how_close) {
   }
 
   potentiallyvisible = 0;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     dist = distancesquared(self.origin, players[i].origin);
@@ -524,9 +524,9 @@ zombie_faller_emerge(spot) {
   self endon("death");
 
   if(isDefined(self.zombie_faller_location.emerge_bottom) && self.zombie_faller_location.emerge_bottom) {
-    self animscripted(self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_floor");
+    self animScripted(self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_floor");
   } else {
-    self animscripted(self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_ceiling");
+    self animScripted(self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_ceiling");
   }
 
   self maps\mp\animscripts\zm_shared::donotetracks("rise_anim");
@@ -537,7 +537,7 @@ zombie_faller_emerge(spot) {
 
 zombie_emerge_fx(spot) {
   spot thread zombie_emerge_dust_fx(self);
-  playsoundatposition("zmb_zombie_spawn", spot.origin);
+  playSoundAtPosition("zmb_zombie_spawn", spot.origin);
   self endon("death");
   spot endon("stop_zombie_fall_fx");
   wait 1;

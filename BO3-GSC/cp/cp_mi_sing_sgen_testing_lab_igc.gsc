@@ -49,9 +49,9 @@ function skipto_testing_lab_igc_init(str_objective, b_starting) {
   if(isDefined(level.bzm_sgendialogue6callback)) {
     level thread[[level.bzm_sgendialogue6callback]]();
   }
-  level.var_280d5f68 = getent("human_lab_door_l", "targetname");
+  level.var_280d5f68 = getEnt("human_lab_door_l", "targetname");
   level.var_280d5f68.v_start_pos = level.var_280d5f68.origin;
-  level.var_3c301126 = getent("human_lab_door_r", "targetname");
+  level.var_3c301126 = getEnt("human_lab_door_r", "targetname");
   level.var_3c301126.v_start_pos = level.var_3c301126.origin;
   level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh005", &humanlab_3rd_sh005, "play");
   level scene::add_scene_func("cin_sgen_14_humanlab_3rd_sh200", &dni_lab_igc_complete, "done");
@@ -135,7 +135,7 @@ function function_5841c784(a_ents) {
 }
 
 function function_d9cab9d3() {
-  t_hack = getent("trig_testing_lab_door", "targetname");
+  t_hack = getEnt("trig_testing_lab_door", "targetname");
   t_hack triggerenable(0);
   level.ai_hendricks setgoal(getnode("fallen_soldiers_hendricks_hack_door_node", "targetname"), 1);
   level flag::wait_till("lab_door_ready");

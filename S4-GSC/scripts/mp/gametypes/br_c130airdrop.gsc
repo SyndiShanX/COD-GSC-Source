@@ -224,14 +224,14 @@ _id_2E2B(var_0, var_1, var_2, var_3, var_4) {
   var_5.health = var_5.maxhealth;
   var_5._id_E715 = var_0;
   var_5._id_5340 = var_1;
-  var_5._id_49C1 = vectornormalize(var_1 - var_0);
+  var_5._id_49C1 = vectorNormalize(var_1 - var_0);
   var_5.angles = vectortoangles(var_5._id_49C1);
   var_5._id_AED9 = var_2;
   var_5.speed = var_3;
   var_5.lifetime = var_4;
   var_5._id_341E = spawn("script_model", var_0);
   var_5._id_341E setModel("veh8_mil_air_acharlie130_magma_rigid");
-  var_5._id_341E linkto(var_5, "", (0, 0, 0), (0, 0, 0));
+  var_5._id_341E linkTo(var_5, "", (0, 0, 0), (0, 0, 0));
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("game", "createObjective")) {
     var_6 = var_5[[scripts\cp_mp\utility\script_utility::getsharedfunc("game", "createObjective")]]("icon_minimap_dropship", undefined, undefined, 1, 1);
@@ -244,7 +244,7 @@ _id_2E2B(var_0, var_1, var_2, var_3, var_4) {
 
 _id_2E2C(var_0) {
   self setscriptablepartstate("audio_lp_dmz", "on", 0);
-  self moveto(self._id_5340, self.lifetime);
+  self moveTo(self._id_5340, self.lifetime);
   thread _id_2E22();
   thread _id_2E23(var_0);
 }

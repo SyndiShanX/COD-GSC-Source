@@ -870,7 +870,7 @@ zombie_spwaner_trigger_update(var_0, var_1) {
   var_0 endon("game_ended");
   var_0 endon("domination_capture_ended");
   level endon("domination_completed");
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
   for(;;) {
     waittillframeend;
@@ -965,7 +965,7 @@ player_zombie_rune_cluster_resetter(var_0) {
     var_3 = var_1 get_closest_rune(var_0, 1);
 
     if(isDefined(var_3)) {
-      var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_3.target, "targetname");
       check_in_rune_zombie_spawner(var_1, var_4);
     }
   }
@@ -1047,7 +1047,7 @@ do_spawn_idle_rune_zombie() {
     }
 
     if(istrue(var_2)) {
-      var_6 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+      var_6 = scripts\engine\utility::getStruct(var_0.target, "targetname");
       check_in_rune_zombie_spawner(self, var_6);
     } else
       run_spawner_once("none", get_rune_center_spawner_structs(var_0));

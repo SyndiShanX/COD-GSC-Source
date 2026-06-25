@@ -42,10 +42,10 @@ main() {
 }
 
 oil_spill_think() {
-  self.end = getstruct(self.target, "targetname");
-  self.start = getstruct(self.end.target, "targetname");
+  self.end = getStruct(self.target, "targetname");
+  self.start = getStruct(self.end.target, "targetname");
   self.barrel = getClosestEnt(self.start.origin, getEntArray("explodable_barrel", "targetname"));
-  self.extra = getent(self.target, "targetname");
+  self.extra = getEnt(self.target, "targetname");
   self setCanDamage(true);
 
   if(isDefined(self.barrel)) {
@@ -114,7 +114,7 @@ oil_spill_burn_after() {
 }
 
 oil_spill_burn(P, dest) {
-  forward = vectornormalize(dest - P);
+  forward = vectorNormalize(dest - P);
   dist = distance(p, dest);
   range = 8;
   interval = common_scripts\utility::vector_multiply(forward, range);
@@ -331,7 +331,7 @@ explodable_barrel_explode() {
   level.barrelExplodingThisFrame = false;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   if(!isDefined(level.struct_class_names)) {
     return undefined;
   }
@@ -349,7 +349,7 @@ getstruct(name, type) {
 
 breakable_clip() {
   if(isDefined(self.target)) {
-    targ = getent(self.target, "targetname");
+    targ = getEnt(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
       self.remove = targ;
       return;

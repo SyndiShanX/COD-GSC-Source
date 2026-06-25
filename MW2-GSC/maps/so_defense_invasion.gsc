@@ -134,12 +134,12 @@ so_defense_init() {
   thread enable_escape_failure();
   thread enable_challenge_timer("challenge_start", "challenge_success");
 
-  ladder = getent("nates_kitchen_ladder_clip", "targetname");
+  ladder = getEnt("nates_kitchen_ladder_clip", "targetname");
   ladder Delete();
-  ladder = getent("bt_ktichen_ladder_clip", "targetname");
+  ladder = getEnt("bt_ktichen_ladder_clip", "targetname");
   ladder Delete();
 
-  ent = GetEnt("predator_drone_control", "targetname");
+  ent = getEnt("predator_drone_control", "targetname");
   ent Delete();
 
   so_defense_convert_enemies();
@@ -345,9 +345,9 @@ custom_eog_summary() {
     player add_custom_eog_summary_line("@SO_DEFENSE_INVASION_KILLS_HELI", player.helicopter_kills);
   }
 }
-thread fire_off_exploder(getent("north_side_low", "targetname"));
-thread fire_off_exploder(getent("north_side_high", "targetname"));
-thread fire_off_exploder(getent("west_side", "targetname"));
+thread fire_off_exploder(getEnt("north_side_low", "targetname"));
+thread fire_off_exploder(getEnt("north_side_high", "targetname"));
+thread fire_off_exploder(getEnt("west_side", "targetname"));
 }
 create_smoke_wave("magic_smoke_grenade_north", dialog_wait);
 }

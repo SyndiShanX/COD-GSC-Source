@@ -123,17 +123,17 @@ function private function_1d6f6f32(eventstruct) {
 function function_556eed55(trigger) {
   trigger.instance endon(#"cleanup");
   trigger endon(#"death");
-  trigger sethintstring("");
+  trigger setHintString("");
   trigger setinvisibletoall();
   trigger.instance flag::wait_till("first_ambush_complete");
-  trigger sethintstring(#"hash_57baaa534c81e367");
+  trigger setHintString(#"hash_57baaa534c81e367");
   trigger setvisibletoall();
 
   while(true) {
     trigger.instance flag::wait_till("correct_frequencies");
-    trigger sethintstring(#"hash_7c3a9502649aec15");
+    trigger setHintString(#"hash_7c3a9502649aec15");
     trigger.instance flag::wait_till_clear("correct_frequencies");
-    trigger sethintstring(#"hash_57baaa534c81e367");
+    trigger setHintString(#"hash_57baaa534c81e367");
   }
 }
 
@@ -214,10 +214,10 @@ function function_42d1d544(instance) {
   self.var_cb78e59d = 0;
   self.var_e7606911 = 0;
   usetrigger = spawn("trigger_radius_use", self.origin, 0, 96, 96, 1);
-  usetrigger triggerignoreteam();
-  usetrigger setcursorhint("HINT_NOICON");
-  usetrigger usetriggerrequirelookat();
-  usetrigger sethintstring(#"hash_62ab4ca34f5b97d6");
+  usetrigger triggerIgnoreTeam();
+  usetrigger setCursorHint("HINT_NOICON");
+  usetrigger useTriggerRequireLookAt();
+  usetrigger setHintString(#"hash_62ab4ca34f5b97d6");
   self.usetrigger = usetrigger;
   self playLoopSound(#"hash_76a8c4dd7f9da5f3");
   self thread function_35bafcde(instance, "idle");
@@ -231,7 +231,7 @@ function function_42d1d544(instance) {
       var_b61e50f0 = 1;
     }
 
-    usetrigger sethintstring("");
+    usetrigger setHintString("");
     usetrigger setinvisibletoall();
     self stoploopsound();
     self playSound(#"hash_4d16320cccbd00fc");
@@ -277,7 +277,7 @@ function function_42d1d544(instance) {
     }
 
     wait 0.5;
-    usetrigger sethintstring(#"hash_62ab4ca34f5b97d6");
+    usetrigger setHintString(#"hash_62ab4ca34f5b97d6");
     usetrigger setvisibletoall();
   }
 }

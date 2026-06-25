@@ -145,7 +145,7 @@ player_can_earn_talisman(var_0) {
 }
 
 set_up_soul_jar_interaction() {
-  var_0 = getent("pap_machine", "targetname");
+  var_0 = getEnt("pap_machine", "targetname");
   var_1 = var_0.origin;
   var_2 = var_0.angles;
   var_3 = anglesToForward(var_2);
@@ -312,7 +312,7 @@ insert_fuses_into_pap_machine() {
   var_0 = getDvar("ui_mapname");
   switch (var_0) {
     case "cp_zmb":
-      var_1 = getent("pap_machine", "targetname");
+      var_1 = getEnt("pap_machine", "targetname");
       var_1 setscriptablepartstate("door", "close");
       wait(0.5);
       var_1 setscriptablepartstate("machine", "upgraded");
@@ -392,12 +392,12 @@ open_soul_jar(var_0, var_1) {
 }
 
 open_soul_jar_sequence(var_0) {
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_2 = var_1.origin;
   var_3 = var_1.angles;
   var_4 = anglesToForward(var_3);
   var_5 = anglestoup(var_3);
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_2 = var_1.origin;
   var_3 = var_1.angles;
   var_4 = anglesToForward(var_3);
@@ -410,11 +410,11 @@ open_soul_jar_sequence(var_0) {
   var_9 = make_lost_reel(var_0);
   var_10 = make_lost_reel(var_0);
   wait(1);
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_11 = var_1 gettagorigin("j_top_wheel");
   var_12 = var_1 gettagorigin("j_bottom_wheel");
-  var_9 moveto(var_11, 0.8, 0.8);
-  var_10 moveto(var_12, 0.8, 0.8);
+  var_9 moveTo(var_11, 0.8, 0.8);
+  var_10 moveTo(var_12, 0.8, 0.8);
   wait(0.8);
   var_9 delete();
   var_10 delete();
@@ -422,7 +422,7 @@ open_soul_jar_sequence(var_0) {
 }
 
 make_lost_reel(var_0) {
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_2 = var_1.origin;
   var_3 = var_1.angles;
   var_4 = anglesToForward(var_3);
@@ -472,7 +472,7 @@ try_play_lost_reel_vfx_on_machine() {
   }
 
   level.lost_reel_vfx_on_machine = 1;
-  var_0 = getent("pap_machine", "targetname");
+  var_0 = getEnt("pap_machine", "targetname");
   var_1 = var_0 gettagorigin("tag_origin");
   var_2 = var_0.angles;
   playFX(level._effect["directors_cut_golden_film"], var_1, anglesToForward(var_2), anglestoup(var_2));
@@ -672,7 +672,7 @@ dc_wheel_of_misfortune_start_func(var_0, var_1) {
   var_2 hide();
   var_2 setModel("cp_final_talisman_alt");
   var_2.angles = (0, 320, 0);
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_3 = randomfloatrange(0.3, 1);
   wait(var_3);
   var_2 showtoplayer(var_1);
@@ -924,7 +924,7 @@ talisman_start_flying(var_0, var_1) {
     var_3 = var_1[var_2];
     var_4 = distance(var_0.origin, var_3);
     var_5 = var_4 / 85;
-    var_0 moveto(var_3, var_5);
+    var_0 moveTo(var_3, var_5);
     var_0 waittill("movedone");
     if(var_2 < var_1.size - 1) {
       var_6 = randomfloatrange(0.5, 3.5);

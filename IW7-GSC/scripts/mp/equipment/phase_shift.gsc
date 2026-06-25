@@ -193,7 +193,7 @@ func_12EEA(var_0) {
       }
     }
 
-    self moveto(self.owner.origin, var_2);
+    self moveTo(self.owner.origin, var_2);
     wait(var_2);
   }
 }

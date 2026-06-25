@@ -232,7 +232,7 @@ function private function_62c0d32d(index, item_name, stashitem = 0, falling = 2)
   }
 
   if(isDefined(itementry.spawnsound)) {
-    playsoundatposition(itementry.spawnsound, origin);
+    playSoundAtPosition(itementry.spawnsound, origin);
   }
 
   return item;
@@ -1604,7 +1604,7 @@ function function_5eada592(scriptbundlename, linkto = 1) {
     item.origin = self.origin;
 
     if(linkto) {
-      item linkto(self);
+      item linkTo(self);
     }
 
     item.spawning = 0;

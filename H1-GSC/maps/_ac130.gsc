@@ -633,16 +633,16 @@ rotateplane(var_0) {
   if(var_0 == "on") {
     var_1 = 10;
     var_2 = level.ac130_speed["rotate"] / 360 * var_1;
-    level.ac130 rotateyaw(level.ac130.angles[2] + var_1, var_2, var_2, 0);
+    level.ac130 rotateYaw(level.ac130.angles[2] + var_1, var_2, var_2, 0);
 
     for(;;) {
-      level.ac130 rotateyaw(360, level.ac130_speed["rotate"]);
+      level.ac130 rotateYaw(360, level.ac130_speed["rotate"]);
       wait(level.ac130_speed["rotate"]);
     }
   } else if(var_0 == "off") {
     var_3 = 10;
     var_2 = level.ac130_speed["rotate"] / 360 * var_3;
-    level.ac130 rotateyaw(level.ac130.angles[2] + var_3, var_2, 0, var_2);
+    level.ac130 rotateYaw(level.ac130.angles[2] + var_3, var_2, 0, var_2);
   }
 }
 
@@ -679,7 +679,7 @@ getflyingac130anglestopoint(var_0) {
 }
 
 moveplanetowaypoint(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   moveplanetopoint(var_2.origin, var_1);
 }
 
@@ -727,13 +727,13 @@ moveplanetopoint(var_0, var_1) {
         var_10 = 3.0;
       }
 
-      level.ac130 rotateyaw(var_6, var_9, 0, var_10);
+      level.ac130 rotateYaw(var_6, var_9, 0, var_10);
       wait(var_9 - var_10);
       thread ac130_move_out();
     }
   }
 
-  level.ac130 moveto(var_0, var_3, var_4, var_5);
+  level.ac130 moveTo(var_0, var_3, var_4, var_5);
 
   if(var_3 > 2.0) {
     wait(var_3 - 2.0);
@@ -941,7 +941,7 @@ weaponfiredthread() {
 
 ac130_25mm_loop_fire_sound() {
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
 
   for(;;) {
     var_1 = level.player getweaponslistprimaries();
@@ -963,7 +963,7 @@ ac130_25mm_loop_fire_sound() {
 
 ac130_25mm_loop_rumble() {
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   var_1 = 0;
 
   for(;;) {

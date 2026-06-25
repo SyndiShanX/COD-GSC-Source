@@ -65,12 +65,12 @@ function function_87560e1a(str_objective, b_starting) {
   level.player val::reset_all(#"hash_7bed230cd6d62c10");
   level.ai_woods val::reset_all(#"server_slide");
   level.ai_woods.goalradius = 256;
-  vol_server_reveal_backup = getent("vol_server_reveal_backup", "targetname");
+  vol_server_reveal_backup = getEnt("vol_server_reveal_backup", "targetname");
   var_d0d798e3 = spawner::simple_spawn("ai_server_reveal_snipers", &function_6ba86af8, "flg_cleanup_server_approach", vol_server_reveal_backup);
   level scene::stop("scene_yam_8001_srv_slide_approach");
   var_f42f9a55 = getnode("woods_server_descent_start", "targetname");
   level.ai_woods setgoal(var_f42f9a55);
-  vol_server_reveal_upper_left = getent("vol_server_reveal_upper_left", "targetname");
+  vol_server_reveal_upper_left = getEnt("vol_server_reveal_upper_left", "targetname");
   level.ai_woods thread function_8767f7a7();
   level flag::wait_till("flg_server_slide_complete");
   savegame::function_7790f03(1);
@@ -196,7 +196,7 @@ function function_8767f7a7() {
   level thread namespace_7468806b::function_d5600243("stop_server_nag");
   level flag::wait_till_any(array("flg_server_reveal_left", "flg_server_reveal_right"));
   level.ai_woods ai::function_3a5e9945(0);
-  var_8a10ced4 = getent("vol_woods_server_front", "targetname");
+  var_8a10ced4 = getEnt("vol_woods_server_front", "targetname");
   level.ai_woods setgoal(var_8a10ced4);
   level.ai_woods.perfectaim = 1;
   level flag::wait_till_any(array("flg_server_woods_slide", "flg_server_woods_front"));
@@ -234,7 +234,7 @@ function function_4cf852d1() {
 
 function private function_1e5e4f4c() {
   level endon(#"flg_server_woods_slide", #"flg_server_woods_front");
-  t_server_fall_kill = getent("t_server_fall_kill", "targetname");
+  t_server_fall_kill = getEnt("t_server_fall_kill", "targetname");
   t_server_fall_kill waittill(#"trigger");
 
   while(!level.player isonground()) {
@@ -264,7 +264,7 @@ function function_6137f397() {
 function function_7360ee80() {
   e_player = level.player;
   s_server_locker = struct::get("s_server_locker", "targetname");
-  var_f4d1ff11 = getent("server_stims", "script_noteworthy");
+  var_f4d1ff11 = getEnt("server_stims", "script_noteworthy");
   level thread scene::init("scene_server_locker_interact");
   level flag::wait_till("all_players_connected");
   wait 0.2;
@@ -279,7 +279,7 @@ function function_7360ee80() {
 
   s_server_locker util::create_cursor_hint(undefined, undefined, #"hash_17c01a9047648148", undefined, 0.5, undefined, undefined, 400);
   s_server_locker waittill(#"trigger");
-  level.player playrumbleonentity("reload_rechamber");
+  level.player playRumbleOnEntity("reload_rechamber");
   level thread scene::play("scene_server_locker_interact");
   s_server_locker util::remove_cursor_hint();
   level flag::set("flg_server_locker_open");
@@ -335,7 +335,7 @@ function function_e936fbf4(str_objective, b_starting) {
   level.player actions::function_fc288808();
   level thread function_6dcdd6a6();
   level flag::wait_till("flg_server_cable_attached");
-  level.ai_woods linkto(level.var_17d7d4dc.var_121c5e14);
+  level.ai_woods linkTo(level.var_17d7d4dc.var_121c5e14);
   savegame::function_7790f03(1);
   objectives::complete("obj_yamantau_5");
   objectives::scripted("obj_yamantau_6", undefined, #"hash_20bf411b274bfe85");
@@ -409,7 +409,7 @@ function function_b62fff3d() {
 function server_attach_interact() {
   level waittill(#"hash_1d64100e7ce394d");
   wait 1;
-  level.var_dcfe7888 = getent("vol_server_ai_1", "targetname");
+  level.var_dcfe7888 = getEnt("vol_server_ai_1", "targetname");
   var_a6937647 = struct::get("server_attach_interact", "targetname");
   var_ef3d9775 = struct::get("server_attach_anchor", "targetname");
   level.e_server_hook util::create_cursor_hint("tag_link_1_spin", (0, 0, 10), #"hash_4567f6915161496a", 48, 0.5, undefined, undefined, 2000, undefined, undefined, 1, 1, &function_a1ae75fc);
@@ -436,8 +436,8 @@ function server_attach_interact() {
   }
 
   level.player playerlinktodelta(e_anchor, "tag_origin", 1, 95, 95, 45, 45);
-  e_anchor moveto(var_ef3d9775.origin, 0.5);
-  e_anchor rotateto(var_ef3d9775.angles, 0.5);
+  e_anchor moveTo(var_ef3d9775.origin, 0.5);
+  e_anchor rotateTo(var_ef3d9775.angles, 0.5);
   wait 0.5;
   e_anchor delete();
   waitframe(1);
@@ -451,7 +451,7 @@ function server_attach_interact() {
     corpse thread util::deleteaftertime(0.1);
   }
 
-  var_9ac6425b = getent("vault_lift_phys_clip", "targetname");
+  var_9ac6425b = getEnt("vault_lift_phys_clip", "targetname");
   var_9ac6425b delete();
   level flag::set("flg_server_cable_spawn_attackers");
 }
@@ -483,7 +483,7 @@ function function_f5c1bd9b() {
   profilestart();
   var_b8009024 = spawn("script_origin", level.player.origin);
   var_b8009024.angles = level.player.angles;
-  var_b8009024 linkto(level.var_17d7d4dc.var_121c5e14);
+  var_b8009024 linkTo(level.var_17d7d4dc.var_121c5e14);
   level.player playerlinktodelta(var_b8009024);
   earthquake(0.3, 0.2, level.player.origin, 64);
   profilestop();
@@ -501,7 +501,7 @@ function function_f5c1bd9b() {
   wait 0.5;
   magicbullet(var_2478b276, s_server_lift_rpg_1_origin.origin, s_server_lift_rpg_1_target.origin);
   level waittill(#"hash_7fd5b16a8ecf52d6");
-  level.player playrumbleonentity("cp_sgen_c4_explode");
+  level.player playRumbleOnEntity("cp_sgen_c4_explode");
   target_pos = struct::get("s_vault_smash", "targetname");
   exploder::exploder("server_hit");
 
@@ -596,10 +596,10 @@ function function_ce966826(s_params) {
   waitframe(1);
   player_pos = self getplayercamerapos();
   var_cac40761 = self getplayerangles();
-  v_forward = vectornormalize(anglesToForward(var_cac40761)) * 50 + (0, 0, 30);
+  v_forward = vectorNormalize(anglesToForward(var_cac40761)) * 50 + (0, 0, 30);
   e_anchor = util::spawn_model(#"tag_origin", player_pos - v_forward, var_cac40761);
-  var_121c5e14 = getent("vault_lift", "targetname");
-  e_anchor linkto(var_121c5e14);
+  var_121c5e14 = getEnt("vault_lift", "targetname");
+  e_anchor linkTo(var_121c5e14);
 
   for(i = 0; i < 3; i++) {
     waitframe(1);

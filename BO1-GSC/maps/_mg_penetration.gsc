@@ -56,7 +56,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
   while(self canSee(enemy)) {
     angles = vectortoangles(enemy getEye() - ent.origin);
     angles = anglesToForward(angles);
-    ent moveto(ent.origin + vector_scale(angles, 12), 0.1);
+    ent moveTo(ent.origin + vector_scale(angles, 12), 0.1);
     wait(0.1);
   }
   if(isPlayer(enemy)) {
@@ -67,7 +67,7 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
     units_per_second = 150;
     timer = distance(ent.origin, self.last_enemy_sighting_position) / units_per_second;
     if(timer > 0) {
-      ent moveto(self.last_enemy_sighting_position, timer);
+      ent moveTo(self.last_enemy_sighting_position, timer);
       wait(timer);
     }
     org = ent.origin + vector_scale(angles, 180);
@@ -75,9 +75,9 @@ shoot_enemy_until_he_hides_then_shoot_wall(ent) {
     if(!isDefined(oldOrigin)) {
       oldOrigin = ent.origin;
     }
-    ent moveto(ent.origin + vector_scale(angles, 80) + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
+    ent moveTo(ent.origin + vector_scale(angles, 80) + (0, 0, randomfloatrange(15, 50) * -1), 3, 1, 1);
     wait(3.5);
-    ent moveto(oldOrigin + vector_scale(angles, -20), 3, 1, 1);
+    ent moveTo(oldOrigin + vector_scale(angles, -20), 3, 1, 1);
   }
   wait(randomfloatrange(2.5, 4));
   self stop_firing();

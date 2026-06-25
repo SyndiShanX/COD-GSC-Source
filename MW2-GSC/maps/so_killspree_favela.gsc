@@ -173,8 +173,8 @@ thread fade_challenge_out("challenge_success");
 flag_wait("start_so_killspree_favela");
 wait 1;
 flag_set("favela_enemies_spawned");
-original_roof_spawn_trig = getent("favela_spawn_trigger", "script_noteworthy");
-seeker_spawn_trig = getent("so_favela_spawn_trigger", "script_noteworthy");
+original_roof_spawn_trig = getEnt("favela_spawn_trigger", "script_noteworthy");
+seeker_spawn_trig = getEnt("so_favela_spawn_trigger", "script_noteworthy");
 
 first_wave_trigs = [];
 first_wave_trigs[0] = seeker_spawn_trig;
@@ -183,7 +183,7 @@ if(randomint(100) > 66) {
   first_wave_trigs[1] = original_roof_spawn_trig;
 }
 
-favela_spawn_ambush_trigger = getent("so_favela_ambush_spawn_trigger", "script_noteworthy");
+favela_spawn_ambush_trigger = getEnt("so_favela_ambush_spawn_trigger", "script_noteworthy");
 
 spawn_enemy_secondary_wave(favela_spawn_ambush_trigger, int(level.enemy_ambush_wave_size));
 spawn_enemy_secondary_wave(first_wave_trigs, int(level.enemy_seek_wave_size));

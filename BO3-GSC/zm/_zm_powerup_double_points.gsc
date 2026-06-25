@@ -50,7 +50,7 @@ function double_points_powerup(drop_item, player) {
     }
   }
   level.zombie_vars[team]["zombie_point_scalar"] = 2;
-  players = getplayers();
+  players = getPlayers();
   for(player_index = 0; player_index < players.size; player_index++) {
     if(team == players[player_index].team) {
       players[player_index] clientfield::set_player_uimodel("hudItems.doublePointsActive", 1);
@@ -63,7 +63,7 @@ function double_points_powerup(drop_item, player) {
   wait(n_wait);
   level.zombie_vars[team]["zombie_point_scalar"] = 1;
   level._race_team_double_points = undefined;
-  players = getplayers();
+  players = getPlayers();
   for(player_index = 0; player_index < players.size; player_index++) {
     if(team == players[player_index].team) {
       players[player_index] clientfield::set_player_uimodel("hudItems.doublePointsActive", 0);

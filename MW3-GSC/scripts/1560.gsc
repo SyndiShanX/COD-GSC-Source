@@ -116,8 +116,8 @@ _id_3E12() {
     var_2 = maps\_utility::_id_0AE9(var_1, var_0);
     var_3 = var_2.origin;
     var_4 = vectortoangles(var_3 - level._id_3C2C.origin);
-    level.uavrig moveto(level._id_3C2C.origin, 0.1, 0, 0);
-    level.uavrig rotateto(var_4, 0.1, 0, 0);
+    level.uavrig moveTo(level._id_3C2C.origin, 0.1, 0, 0);
+    level.uavrig rotateTo(var_4, 0.1, 0, 0);
     wait 0.05;
   }
 }
@@ -764,7 +764,7 @@ _id_3DCB(var_0, var_1, var_2) {
 }
 
 _id_3DE1(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = _id_061C::_id_3DFA(var_0);
 
   if(isDefined(var_3)) {
@@ -825,7 +825,7 @@ _id_3DCE(var_0, var_1, var_2) {
 _id_3DCC() {
   self endon("death");
   self waittill("unloading");
-  var_0 = self.origin - vectornormalize(anglesToForward(self.angles)) * 145;
+  var_0 = self.origin - vectorNormalize(anglesToForward(self.angles)) * 145;
   var_1 = maps\_utility::_id_1277(var_0);
   magicgrenademanual("smoke_grenade_fast", var_1, (0, 0, -1), 0);
 }
@@ -861,7 +861,7 @@ _id_3E3E(var_0, var_1, var_2) {
     switch (var_2) {
       case "script_unload":
         while(!isDefined(var_9._id_2954)) {
-          var_9 = common_scripts\utility::getstruct(var_9.target, "targetname");
+          var_9 = common_scripts\utility::getStruct(var_9.target, "targetname");
         }
         if(!isDefined(var_9._id_2954)) {
           continue;
@@ -869,7 +869,7 @@ _id_3E3E(var_0, var_1, var_2) {
         break;
       case "script_stopnode":
         while(!isDefined(var_9._id_295D)) {
-          var_9 = common_scripts\utility::getstruct(var_9.target, "targetname");
+          var_9 = common_scripts\utility::getStruct(var_9.target, "targetname");
         }
         if(!isDefined(var_9._id_295D)) {
           continue;
@@ -995,9 +995,9 @@ _id_3E46() {
   var_5 = 60.0;
   var_6 = 60.0;
   var_7 = [];
-  var_7[var_7.size] = getent("armory_weapon", "targetname");
-  var_7[var_7.size] = getent("armory_equipment", "targetname");
-  var_7[var_7.size] = getent("armory_airsupport", "targetname");
+  var_7[var_7.size] = getEnt("armory_weapon", "targetname");
+  var_7[var_7.size] = getEnt("armory_equipment", "targetname");
+  var_7[var_7.size] = getEnt("armory_airsupport", "targetname");
   var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getStructArray("so_claymore_loc", "targetname"));
   var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getStructArray("leader", "script_noteworthy"));
   var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getStructArray("follower", "script_noteworthy"));

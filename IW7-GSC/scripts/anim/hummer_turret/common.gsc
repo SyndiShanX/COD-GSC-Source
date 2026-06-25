@@ -242,7 +242,7 @@ func_873F(var_0, var_1, var_2, var_3) {
   var_6 = var_0 gettagangles(var_4.var_10220);
   var_2 setdefaultdroppitch(0);
   var_2 thread func_129C2(var_2.var_C937);
-  self animscripted("passenger2turret", var_5, var_6, var_3);
+  self animScripted("passenger2turret", var_5, var_6, var_3);
   wait(getanimlength(var_3));
   self givescorefortrophyblocks();
   var_2 func_129BC();
@@ -559,7 +559,7 @@ func_129BD(var_0) {
   var_4 = self gettagorigin("tag_aim") + var_3;
   self.var_116D2 = spawn("script_origin", var_4);
   self.var_116D2.ignoreme = 1;
-  self.var_116D2 linkto(self.var_C841);
+  self.var_116D2 linkTo(self.var_C841);
   self cleartargetentity();
   self settargetentity(self.var_116D2);
   self waittill("turret_on_target");

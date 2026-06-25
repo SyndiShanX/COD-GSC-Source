@@ -981,7 +981,7 @@ function private function_d2f05352() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     time = gettime();
 
     for(playerindex = 0; playerindex < players.size; playerindex++) {
@@ -4693,7 +4693,7 @@ function use_killstreak(networkid, item) {
       spawnorigin = traceresults.hitent.origin + rotatepoint(relativeorigin, anglesdelta);
     }
 
-    vehicle = spawnvehicle(vehicletype, spawnorigin, traceresults.angles);
+    vehicle = spawnVehicle(vehicletype, spawnorigin, traceresults.angles);
 
     if(isDefined(vehicle)) {
       if(isDefined(vehicle.vehicleclass) && vehicle.vehicleclass == #"helicopter") {
@@ -4736,11 +4736,11 @@ function use_killstreak(networkid, item) {
     return;
   }
 
-  self sethintstring(#"weapon/cant_plant_equipment");
+  self setHintString(#"weapon/cant_plant_equipment");
   wait 1.5;
 
   if(isDefined(self)) {
-    self sethintstring(#"");
+    self setHintString(#"");
   }
 }
 
@@ -5058,7 +5058,7 @@ function function_dc5d31be(w_item) {
 }
 
 function private function_eb0c9b9c() {
-  players = getplayers();
+  players = getPlayers();
   var_7bba6210 = 1;
 
   while(var_7bba6210) {
@@ -5075,7 +5075,7 @@ function private function_eb0c9b9c() {
 }
 
 function private function_f58e80e2() {
-  players = getplayers();
+  players = getPlayers();
 
   for(index = 0; index < players.size; index++) {
     player = players[index];

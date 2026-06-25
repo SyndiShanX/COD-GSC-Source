@@ -380,9 +380,9 @@ onplaceturret(turret) {
     turret.vehicle playSound(#"mpl_turret_startup");
   } else {
     if(sessionmodeiscampaigngame()) {
-      turret.vehicle = spawnvehicle("veh_ultimate_turret" + "_cp", turret.origin, turret.angles, "dynamic_spawn_ai");
+      turret.vehicle = spawnVehicle("veh_ultimate_turret" + "_cp", turret.origin, turret.angles, "dynamic_spawn_ai");
     } else {
-      turret.vehicle = spawnvehicle("veh_ultimate_turret", turret.origin, turret.angles, "dynamic_spawn_ai");
+      turret.vehicle = spawnVehicle("veh_ultimate_turret", turret.origin, turret.angles, "dynamic_spawn_ai");
     }
 
     turret.vehicle.owner = player;
@@ -508,7 +508,7 @@ onpickupturret(turret) {
   player = self;
   turret.vehicle ghost();
   turret.vheicle.turret_enabled = 0;
-  turret.vehicle linkto(turret);
+  turret.vehicle linkTo(turret);
   target_remove(turret.vehicle);
   turret clientfield::set("auto_turret_close", 1);
   turret.othermodel clientfield::set("auto_turret_close", 1);
@@ -785,7 +785,7 @@ function_fefefcc4() {
     if(!isDefined(veh.enemy) && !(isDefined(veh.isstunned) && veh.isstunned) && !(isDefined(veh.isjammed) && veh.isjammed)) {
       var_beeadda8 = isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 300;
 
-      nearby_enemies = getplayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
+      nearby_enemies = getPlayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
 
       if(nearby_enemies.size > 0) {
         if(veh.var_3413afc5 != #"hash_2d94a5f22d36fc73") {

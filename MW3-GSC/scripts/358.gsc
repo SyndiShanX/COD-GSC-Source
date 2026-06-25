@@ -190,20 +190,20 @@ _id_2011(var_0) {
 
 _id_2012(var_0, var_1) {
   self clearanim(%body, 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
   self setflaggedanimknoballrestart("drone_anim", var_0, %body, 1, 0.2, var_1);
 }
 
 _id_2013(var_0, var_1) {
   self clearanim(%body, 0.2);
-  self stopanimscripted();
+  self stopanimScripted();
   var_2 = "normal";
 
   if(isDefined(var_1)) {
     var_2 = "deathplant";
   }
   var_3 = "drone_anim";
-  self animscripted(var_3, self.origin, self.angles, var_0, var_2);
+  self animScripted(var_3, self.origin, self.angles, var_0, var_2);
   self waittillmatch("drone_anim", "end");
 }
 
@@ -286,7 +286,7 @@ _id_2036(var_0, var_1, var_2) {
   self.angles = (0, self.angles[1], self.angles[2]);
 
   if(var_0 == "coverprone") {
-    self moveto(self.origin + (0, 0, 8), 0.05);
+    self moveTo(self.origin + (0, 0, 8), 0.05);
   }
   self._id_0EC6 = 1;
   var_4 = level._id_200D[self.team][var_0];
@@ -414,7 +414,7 @@ _id_203D() {
   }
   level._id_1B42[self.target] = 1;
   var_0 = self.target;
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -465,7 +465,7 @@ _id_203D() {
   }
 
   var_0 = self.target;
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_11 = var_1;
   var_3 = [];
 
@@ -582,7 +582,7 @@ _id_2043() {
 
     var_7 = var_0[var_6]["vec"];
     var_8 = self.origin - var_0[var_6]["origin"];
-    var_9 = vectordot(vectornormalize(var_7), var_8);
+    var_9 = vectordot(vectorNormalize(var_7), var_8);
 
     if(!isDefined(var_0[var_6]["dist"])) {
       break;
@@ -596,7 +596,7 @@ _id_2043() {
       self._id_2047 = var_0[var_6];
 
       if(!isDefined(var_0[var_6]["dist"])) {
-        self rotateto(vectortoangles(var_0[var_0.size - 1]["vec"]), var_5);
+        self rotateTo(vectortoangles(var_0[var_0.size - 1]["vec"]), var_5);
         var_11 = distance(self.origin, var_0[var_0.size - 1]["origin"]);
         var_12 = var_11 / (var_3 * self._id_0FC6);
         var_13 = var_0[var_0.size - 1]["origin"] + (0, 0, 100);
@@ -608,7 +608,7 @@ _id_2043() {
           thread common_scripts\utility::draw_line_for_time(self.origin, var_15, 0, 0, 1, var_5);
         }
 
-        self moveto(var_15, var_12);
+        self moveTo(var_15, var_12);
         wait(var_12);
         self notify("goal");
         thread _id_204D();
@@ -660,16 +660,16 @@ _id_2043() {
     }
 
     var_18 = vectortoangles(var_17 - self.origin);
-    self rotateto((0, var_18[1], 0), var_5);
+    self rotateTo((0, var_18[1], 0), var_5);
     var_19 = var_3 * var_5 * self._id_0FC6;
-    var_20 = vectornormalize(var_17 - self.origin);
+    var_20 = vectorNormalize(var_17 - self.origin);
     var_16 = var_20 * var_19;
     var_16 = var_16 + self.origin;
 
     if(getDvar("debug_drones") == "1") {
       thread common_scripts\utility::draw_line_for_time(self.origin, var_16, 0, 0, 1, var_5);
     }
-    self moveto(var_16, var_5);
+    self moveTo(var_16, var_5);
     wait(var_5);
   }
 
@@ -759,7 +759,7 @@ _id_204A(var_0, var_1) {
       var_3[var_10]["script_noteworthy"] = var_12.script_noteworthy;
     }
     var_3[var_10 - 1]["dist"] = distance(var_3[var_10]["origin"], var_3[var_10 - 1]["origin"]);
-    var_3[var_10 - 1]["vec"] = vectornormalize(var_3[var_10]["origin"] - var_3[var_10 - 1]["origin"]);
+    var_3[var_10 - 1]["vec"] = vectorNormalize(var_3[var_10]["origin"] - var_3[var_10 - 1]["origin"]);
 
     if(!isDefined(var_3[var_10 - 1]["target"])) {
       var_3[var_10 - 1]["target"] = var_12.targetname;

@@ -69,11 +69,11 @@ damCustomOSPFunc() {
 
 SetupKillstreakTurrets() {
   Turrets = [];
-  railgun_script_origin = GetEnt("railgun_attachpoint0", "targetname");
+  railgun_script_origin = getEnt("railgun_attachpoint0", "targetname");
   turret = railgun_script_origin SpawnDamTurret("dam_turret_mp", "mp_dam_large_caliber_turret", "tag_player_mp");
   Turrets = array_add(Turrets, turret);
 
-  railgun_script_origin = GetEnt("railgun_attachpoint1", "targetname");
+  railgun_script_origin = getEnt("railgun_attachpoint1", "targetname");
   turret = railgun_script_origin SpawnDamTurret("dam_turret_mp", "mp_dam_large_caliber_turret", "tag_player_mp");
   Turrets = array_add(Turrets, turret);
 
@@ -95,7 +95,7 @@ SpawnDamTurret(turretweaponinfo, modelname, linktotag) {
   spawned_turret setCanRadiusDamage(false);
   spawned_turret SetMode("manual");
 
-  level.DamDefaultAimEnt = GetEnt("DamTurretDefaultTarget", "targetname");
+  level.DamDefaultAimEnt = getEnt("DamTurretDefaultTarget", "targetname");
   spawned_turret SetTargetEntity(level.DamDefaultAimEnt);
 
   return spawned_turret;
@@ -125,9 +125,9 @@ setupCraneAnimations() {
 }
 
 CraneCollisionTest() {
-  Crane2 = getent("Crane_02", "targetname");
-  Crane2PipeCollision = getent("crane2PipeCollision", "targetname");
-  Crane2PipeCollision linkto(Crane2, "j_tube_01_c");
+  Crane2 = getEnt("Crane_02", "targetname");
+  Crane2PipeCollision = getEnt("crane2PipeCollision", "targetname");
+  Crane2PipeCollision linkTo(Crane2, "j_tube_01_c");
 
   while(1) {
     Crane2 ScriptModelPlayAnimDeltaMotion("dam_crane01_collisiontest");
@@ -136,26 +136,26 @@ CraneCollisionTest() {
 }
 
 TempCraneIdleSetup() {
-  Crane1 = getent("Crane_01", "targetname");
-  Crane1PipeCollision = getent("crane1PipeCollision", "targetname");
-  Crane1PipeCollision linkto(Crane1, "j_tube_01_c");
+  Crane1 = getEnt("Crane_01", "targetname");
+  Crane1PipeCollision = getEnt("crane1PipeCollision", "targetname");
+  Crane1PipeCollision linkTo(Crane1, "j_tube_01_c");
 
-  Crane2 = getent("Crane_02", "targetname");
-  Crane2PipeCollision = getent("crane2PipeCollision", "targetname");
-  Crane2PipeCollision linkto(Crane2, "j_tube_01_c");
+  Crane2 = getEnt("Crane_02", "targetname");
+  Crane2PipeCollision = getEnt("crane2PipeCollision", "targetname");
+  Crane2PipeCollision linkTo(Crane2, "j_tube_01_c");
 
   Crane1 ScriptModelPlayAnimDeltaMotion("dam_crane02_idle_l");
   Crane2 ScriptModelPlayAnimDeltaMotion("dam_crane01_idle_l");
 }
 
 Crane1Movement() {
-  Crane1Tag = GetEnt("Crane_01_TagProxy", "targetname");
-  Crane1 = getent("Crane_01", "targetname");
-  Crane1PipeCollision = getent("crane1PipeCollision", "targetname");
-  Crane1PipeBcsTrigger = getent("crane_01_bcs_trigger", "targetname");
+  Crane1Tag = getEnt("Crane_01_TagProxy", "targetname");
+  Crane1 = getEnt("Crane_01", "targetname");
+  Crane1PipeCollision = getEnt("crane1PipeCollision", "targetname");
+  Crane1PipeBcsTrigger = getEnt("crane_01_bcs_trigger", "targetname");
 
-  Crane1TagBase = GetEnt("Crane_01_TagBaseProxy", "targetname");
-  Crane1Collision = getent("crane1Collision", "targetname");
+  Crane1TagBase = getEnt("Crane_01_TagBaseProxy", "targetname");
+  Crane1Collision = getEnt("crane1Collision", "targetname");
 
   Crane1PipeCollision LinkToSynchronizedParent(Crane1Tag, "tag_origin");
   Crane1PipeBcsTrigger handle_trigger_updateto(Crane1PipeCollision);
@@ -194,13 +194,13 @@ Crane1Movement() {
 }
 
 Crane2Movement() {
-  Crane2Tag = GetEnt("Crane_02_TagProxy", "targetname");
-  Crane2 = getent("Crane_02", "targetname");
-  Crane2PipeCollision = getent("crane2PipeCollision", "targetname");
-  Crane2PipeBcsTrigger = getent("crane_02_bcs_trigger", "targetname");
+  Crane2Tag = getEnt("Crane_02_TagProxy", "targetname");
+  Crane2 = getEnt("Crane_02", "targetname");
+  Crane2PipeCollision = getEnt("crane2PipeCollision", "targetname");
+  Crane2PipeBcsTrigger = getEnt("crane_02_bcs_trigger", "targetname");
 
-  Crane2TagBase = GetEnt("Crane_02_TagBaseProxy", "targetname");
-  Crane2Collision = getent("crane2Collision", "targetname");
+  Crane2TagBase = getEnt("Crane_02_TagBaseProxy", "targetname");
+  Crane2Collision = getEnt("crane2Collision", "targetname");
 
   waittime = 20;
   crane2_aud_org = (849, 2315, 1455);
@@ -287,35 +287,35 @@ rotateCrane() {
   level endon("game_ended");
 
   while(1) {
-    self.cab RotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.cab rotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.platform RotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.platform rotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.pipe RotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.pipe rotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.pulley RotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.pulley rotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.hook RotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.hook rotateTo((0, GetDvarInt(self.end_angle_dvar, 180), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.heightOscillator MoveTo((0, 0, GetDvarInt(self.pipe_end_height_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.heightOscillator moveTo((0, 0, GetDvarInt(self.pipe_end_height_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.radiusOscillator MoveTo((0, 0, GetDvarInt(self.pipe_end_radius_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.radiusOscillator moveTo((0, 0, GetDvarInt(self.pipe_end_radius_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
 
     wait(GetDvarInt(self.time_dvar, 10) + 5);
 
-    self.cab RotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.cab rotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.platform RotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.platform rotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.pipe RotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.pipe rotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.pulley RotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.pulley rotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.hook RotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.hook rotateTo((0, GetDvarInt(self.start_angle_dvar, 130), 0), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.heightOscillator MoveTo((0, 0, GetDvarInt(self.pipe_start_height_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.heightOscillator moveTo((0, 0, GetDvarInt(self.pipe_start_height_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
 
-    self.radiusOscillator MoveTo((0, 0, GetDvarInt(self.pipe_start_radius_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
+    self.radiusOscillator moveTo((0, 0, GetDvarInt(self.pipe_start_radius_dvar, 0)), GetDvarInt(self.time_dvar, 10), 1, 1);
 
     wait(GetDvarInt(self.time_dvar, 10) + 5);
   }
@@ -327,11 +327,11 @@ moveCranePipe() {
   while(1) {
     temp_origin_vec = (Cos(self.platform.angles[1] + 90) * self.radiusoscillator.origin[2] + self.cab.origin[0], Sin(self.platform.angles[1] + 90) * self.radiusoscillator.origin[2] + self.cab.origin[1], self.heightOscillator.origin[2]);
 
-    self.pipe MoveTo(temp_origin_vec, 0.05, 0.025, 0.025);
+    self.pipe moveTo(temp_origin_vec, 0.05, 0.025, 0.025);
 
-    self.pulley MoveTo((temp_origin_vec[0], temp_origin_vec[1], self.pulley.origin[2]), 0.05, 0.025, 0.025);
+    self.pulley moveTo((temp_origin_vec[0], temp_origin_vec[1], self.pulley.origin[2]), 0.05, 0.025, 0.025);
 
-    self.hook MoveTo(temp_origin_vec + (0, 0, 270), 0.05, 0.025, 0.025);
+    self.hook moveTo(temp_origin_vec + (0, 0, 270), 0.05, 0.025, 0.025);
 
     wait(0.05);
   }
@@ -390,7 +390,7 @@ handlePowerSurgeDamage() {
       foreach(player in level.players) {
         foreach(trigmult in level.dam_surge_triggers) {
           if(player IsTouching(trigmult)) {
-            player PlayRumbleOnEntity("damage_heavy");
+            player playRumbleOnEntity("damage_heavy");
             player shellshock("orbital_laser_mp", 1);
             player DoDamage(5, player.origin);
           }
@@ -428,7 +428,7 @@ handle_glass_pathing() {
 handle_pathing_on_glass() {
   level endon("game_ended");
 
-  pathing_blocker = GetEnt(self.target, "targetname");
+  pathing_blocker = getEnt(self.target, "targetname");
   if(!isDefined(pathing_blocker)) {
     return false;
   }
@@ -439,7 +439,7 @@ handle_pathing_on_glass() {
   waittill_glass_break(self.glass_id);
 
   pathing_blocker trigger_on();
-  pathing_blocker DisconnectPaths();
+  pathing_blocker disconnectPaths();
   pathing_blocker trigger_off();
 }
 

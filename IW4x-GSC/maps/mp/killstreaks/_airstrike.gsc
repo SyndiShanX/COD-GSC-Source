@@ -369,7 +369,7 @@ airstrikeDamageEntsThread(sWeapon) {
         continue;
       }
       if(!ent.isPlayer || isAlive(ent.entity)) {
-        ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", sWeapon, ent.pos, vectornormalize(ent.damageCenter - ent.pos)
+        ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", sWeapon, ent.pos, vectorNormalize(ent.damageCenter - ent.pos)
 
           level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex] = undefined;
 
@@ -692,7 +692,7 @@ airstrikeDamageEntsThread(sWeapon) {
       }
 
       hitpos = hitpos / repeat + (0, 0, 128);
-      killCamEnt moveto(bomb.killCamEnt.origin * .35 + hitpos * .65, 1.5, 0, .5);
+      killCamEnt moveTo(bomb.killCamEnt.origin * .35 + hitpos * .65, 1.5, 0, .5);
 
       wait(5.0);
       newBomb delete();
@@ -732,7 +732,7 @@ airstrikeDamageEntsThread(sWeapon) {
       planeBombExplodeDistance = 0;
 
       direction = (0, yaw, 0);
-      heightEnt = GetEnt("airstrikeheight", "targetname");
+      heightEnt = getEnt("airstrikeheight", "targetname");
 
       if(self.airStrikeType == "stealth") {
         thread teamPlayerCardSplash("used_stealth_airstrike", owner, owner.team);

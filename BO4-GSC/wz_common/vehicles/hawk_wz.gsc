@@ -100,7 +100,7 @@ spawn_hawk(itemid) {
     return;
   }
 
-  vehicle = spawnvehicle(vehicletype, spawnpos, var_c7588ce0);
+  vehicle = spawnVehicle(vehicletype, spawnpos, var_c7588ce0);
   vehicle setteam(self.team);
   vehicle.team = self.team;
   vehicle.owner = self;

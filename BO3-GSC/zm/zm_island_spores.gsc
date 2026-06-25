@@ -217,7 +217,7 @@ function function_4c6beece(var_f9f788a6, b_hero_weapon, e_attacker) {
     }
   }
   self thread spore_cloud_fx(b_hero_weapon, var_f9f788a6);
-  playsoundatposition("zmb_spore_eject", self.origin);
+  playSoundAtPosition("zmb_spore_eject", self.origin);
   var_6d602035 = self function_cc07e4ad(var_66bbb0c0, s_org);
   while(var_d7bb540a > 0) {
     var_d7bb540a = var_d7bb540a - 0.25;

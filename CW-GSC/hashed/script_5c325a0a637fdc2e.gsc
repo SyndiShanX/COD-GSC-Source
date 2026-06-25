@@ -108,7 +108,7 @@ function function_ec4c365f() {
 }
 
 function function_97c413c1() {
-  e_mountain_warning_vo_source = getent("e_mountain_warning_vo_source", "targetname");
+  e_mountain_warning_vo_source = getEnt("e_mountain_warning_vo_source", "targetname");
   source = spawn("script_model", e_mountain_warning_vo_source.origin);
   level flag::wait_till("flg_mountain_distant_vo");
   source hms_util::dialogue("vox_cp_ymnt_02500_rms3_whoauthorizedth_7c");
@@ -535,7 +535,7 @@ function function_a7286428() {
 
 function function_d32d0447() {
   level.player endon(#"death");
-  e_satcom_radio = getent("e_satcom_radio", "targetname");
+  e_satcom_radio = getEnt("e_satcom_radio", "targetname");
   e_satcom_radio hms_util::dialogue("vox_cp_ymnt_02800_rms2_thecraneisnearl_b3", undefined, "axis");
   e_satcom_radio hms_util::dialogue("vox_cp_ymnt_02800_rms3_copythatthemain_8b", undefined, "axis");
   e_satcom_radio hms_util::dialogue("vox_cp_ymnt_02800_rms2_yescomrade_59", undefined, "axis");
@@ -1032,7 +1032,7 @@ function function_297633ed() {
   }
 
   wait 8;
-  e_survey_radio_vo_source = getent("e_survey_radio_vo_source", "targetname");
+  e_survey_radio_vo_source = getEnt("e_survey_radio_vo_source", "targetname");
   source = spawn("script_model", e_survey_radio_vo_source.origin);
   source hms_util::dialogue("vox_cp_ymnt_01300_rms3_reporttothedata_00");
   level notify(#"hash_6b2091e6c001e49a");
@@ -1046,7 +1046,7 @@ function function_6d020c38(f_delay) {
 
 function function_8d5b3937() {
   level endon(#"flg_excavation_descent_started");
-  e_survey_loudspeaker_source = getent("e_survey_loudspeaker_source", "targetname");
+  e_survey_loudspeaker_source = getEnt("e_survey_loudspeaker_source", "targetname");
   source = spawn("script_model", e_survey_loudspeaker_source.origin);
 
   while(true) {

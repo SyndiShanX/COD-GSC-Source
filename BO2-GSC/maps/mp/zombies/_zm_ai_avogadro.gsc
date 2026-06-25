@@ -140,7 +140,7 @@ avogadro_prespawn() {
   self.ignore_solo_last_stand = 1;
   self.ignore_riotshield = 1;
   self.allowpain = 0;
-  self.core_model = getent("core_model", "targetname");
+  self.core_model = getEnt("core_model", "targetname");
 
   if(isDefined(self.core_model)) {
     if(!isDefined(self.core_model.angles)) {
@@ -164,7 +164,7 @@ avogadro_prespawn() {
   self.anchor.angles = self.angles;
   self.phase_time = 0;
   self.audio_loop_ent = spawn("script_origin", self.origin);
-  self.audio_loop_ent linkto(self, "tag_origin");
+  self.audio_loop_ent linkTo(self, "tag_origin");
   self.hit_by_melee = 0;
   self.damage_absorbed = 0;
   self.ignoreall = 1;
@@ -188,7 +188,7 @@ avogadro_spawning_logic() {
   if(getdvarint(#"_id_FA81816F") == 2 || getdvarint(#"_id_FA81816F") >= 4) {
     return;
   }
-  spawner = getent("avogadro_zombie_spawner", "script_noteworthy");
+  spawner = getEnt("avogadro_zombie_spawner", "script_noteworthy");
 
   if(!isDefined(spawner)) {
     assertmsg("No avogadro spawner in the map.");
@@ -205,8 +205,8 @@ avogadro_spawning_logic() {
   }
 
   ai waittill("zombie_init_done");
-  core_mover = getent("core_mover", "targetname");
-  ai linkto(core_mover, "tag_origin");
+  core_mover = getEnt("core_mover", "targetname");
+  ai linkTo(core_mover, "tag_origin");
   ai.state = "chamber";
   ai setanimstatefromasd("zm_chamber_idle");
   ai thread avogadro_think();
@@ -249,7 +249,7 @@ avogadro_think() {
 }
 
 avogadro_bus_watcher() {
-  plow_trigger = getent("trigger_plow", "targetname");
+  plow_trigger = getEnt("trigger_plow", "targetname");
 
   while(true) {
     if(self.state == "chasing_bus" || self.state == "attacking_bus") {
@@ -303,8 +303,8 @@ player_look() {
   foreach(player in players) {
     vec_enemy = self.origin - player.origin;
     vec_facing = anglesToForward(player.angles);
-    norm_facing = vectornormalize(vec_facing);
-    norm_enemy = vectornormalize(vec_enemy);
+    norm_facing = vectorNormalize(vec_facing);
+    norm_enemy = vectorNormalize(vec_enemy);
     dot = vectordot(norm_facing, norm_enemy);
 
     if(dot > 0.707) {
@@ -469,7 +469,7 @@ attach_to_bus() {
     angles = level.the_bus gettagangles(self.bus_attack_struct.window_tag);
     self show();
     self.shield = 0;
-    self animscripted(origin, angles, "zm_bus_attack", self.bus_attack_struct.substate);
+    self animScripted(origin, angles, "zm_bus_attack", self.bus_attack_struct.substate);
     self.bus_shock_time = 0;
     self.state = "stay_attached";
     return;
@@ -507,7 +507,7 @@ detach_from_bus() {
 
   avogadro_print("unlinking from bus window");
 
-  bus_forward = vectornormalize(anglesToForward(level.the_bus.angles));
+  bus_forward = vectorNormalize(anglesToForward(level.the_bus.angles));
   unlink_pos = level.the_bus.origin + vectorscale(bus_forward, -144);
   unlink_pos = groundpos_ignore_water_new(unlink_pos + vectorscale((0, 0, 1), 60.0));
   self.shield = 1;
@@ -529,11 +529,11 @@ bus_disable(bus_attack_struct) {
   origin = level.the_bus gettagorigin(bus_attack_struct.window_tag);
   angles = level.the_bus gettagangles(bus_attack_struct.window_tag);
   self avogadro_teleport(origin, angles, 0.5, bus_attack_struct.window_tag);
-  self linkto(level.the_bus, bus_attack_struct.window_tag);
+  self linkTo(level.the_bus, bus_attack_struct.window_tag);
   bus_disable_show(0.1);
   origin = level.the_bus gettagorigin(bus_attack_struct.window_tag);
   angles = level.the_bus gettagangles(bus_attack_struct.window_tag);
-  self animscripted(origin, angles, "zm_bus_attack", bus_attack_struct.substate);
+  self animScripted(origin, angles, "zm_bus_attack", bus_attack_struct.substate);
 
   avogadro_print("bus_disable " + bus_attack_struct.substate);
 
@@ -592,25 +592,25 @@ avogadro_exit(from) {
     if(from == "bus") {
       self playSound("zmb_avogadro_death_short");
       playFX(level._effect["avogadro_ascend_aerial"], self.origin);
-      self animscripted(self.origin, self.angles, "zm_bus_win");
+      self animScripted(self.origin, self.angles, "zm_bus_win");
       maps\mp\animscripts\zm_shared::donotetracks("bus_win_anim");
     } else if(from == "chamber") {
       self playSound("zmb_avogadro_death_short");
       playFX(level._effect["avogadro_ascend"], self.origin);
-      self animscripted(self.origin, self.angles, "zm_chamber_out");
+      self animScripted(self.origin, self.angles, "zm_chamber_out");
       wait 0.4;
       self ghost();
       stop_exploder(500);
     } else {
       self playSound("zmb_avogadro_death");
       playFX(level._effect["avogadro_ascend"], self.origin);
-      self animscripted(self.origin, self.angles, "zm_exit");
+      self animScripted(self.origin, self.angles, "zm_exit");
       maps\mp\animscripts\zm_shared::donotetracks("exit_anim");
     }
   } else {
     self playSound("zmb_avogadro_death");
     playFX(level._effect["avogadro_ascend"], self.origin);
-    self animscripted(self.origin, self.angles, "zm_exit");
+    self animScripted(self.origin, self.angles, "zm_exit");
     maps\mp\animscripts\zm_shared::donotetracks("exit_anim");
   }
 
@@ -622,7 +622,7 @@ avogadro_exit(from) {
   self.hit_by_melee = 0;
   self.anchor.origin = self.origin;
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   if(isDefined(from) && from == "exit_idle") {
     self.return_round = level.round_number + 1;
@@ -679,7 +679,7 @@ cloud_update_fx() {
       self.current_region = region_str;
       exploder_num = level.transit_region[region_str].exploder;
       exploder(exploder_num);
-      self.sndent moveto(level.transit_region[region_str].sndorigin, 3);
+      self.sndent moveTo(level.transit_region[region_str].sndorigin, 3);
       cloud_time = gettime() + 30000;
     }
 
@@ -731,12 +731,12 @@ cloud_update() {
 
     if(isDefined(new_origin)) {
       self thread avogadro_update_health();
-      playsoundatposition("zmb_avogadro_spawn_3d", new_origin);
+      playSoundAtPosition("zmb_avogadro_spawn_3d", new_origin);
       self.audio_loop_ent playLoopSound("zmb_avogadro_loop", 0.5);
       self unlink();
       ground_pos = groundpos_ignore_water_new(new_origin + vectorscale((0, 0, 1), 60.0));
       playFX(level._effect["avogadro_descend"], ground_pos);
-      self animscripted(ground_pos, self.anchor.angles, "zm_arrival");
+      self animScripted(ground_pos, self.anchor.angles, "zm_arrival");
       maps\mp\animscripts\zm_shared::donotetracks("arrival_anim");
       self setfreecameralockonallowed(1);
       time_to_leave = gettime() + 30000;
@@ -836,7 +836,7 @@ avogadro_teleport(dest_pos, dest_angles, lerp_time, tag_override) {
   self.is_teleport = 1;
   self.phase_fx = spawn("script_model", self.origin);
   self.phase_fx setModel("tag_origin");
-  self.phase_fx linkto(self);
+  self.phase_fx linkTo(self);
   wait 0.1;
   playFXOnTag(level._effect["avogadro_phase_trail"], self.phase_fx, "tag_origin");
   playFX(level._effect["avogadro_phasing"], self.origin);
@@ -844,8 +844,8 @@ avogadro_teleport(dest_pos, dest_angles, lerp_time, tag_override) {
   self playSound("zmb_avogadro_warp_out");
   self.anchor.origin = self.origin;
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
-  self.anchor moveto(dest_pos, lerp_time);
+  self linkTo(self.anchor);
+  self.anchor moveTo(dest_pos, lerp_time);
   self.anchor waittill("movedone");
   self.anchor.origin = dest_pos;
   self.anchor.angles = dest_angles;
@@ -882,8 +882,8 @@ check_range_attack() {
 
     if(dist_sq > 14400 && dist_sq < 360000) {
       vec_facing = anglesToForward(self.angles);
-      norm_facing = vectornormalize(vec_facing);
-      norm_enemy = vectornormalize(vec_enemy);
+      norm_facing = vectorNormalize(vec_facing);
+      norm_enemy = vectorNormalize(vec_enemy);
       dot = vectordot(norm_facing, norm_enemy);
 
       if(dot > 0.99) {
@@ -908,11 +908,11 @@ range_attack() {
   if(isDefined(enemy)) {
     self thread shoot_bolt_wait("ranged_attack", enemy);
     self show();
-    self animscripted(self.origin, self.angles, "zm_ranged_attack_in");
+    self animScripted(self.origin, self.angles, "zm_ranged_attack_in");
     maps\mp\animscripts\zm_shared::donotetracks("ranged_attack");
-    self animscripted(self.origin, self.angles, "zm_ranged_attack_loop");
+    self animScripted(self.origin, self.angles, "zm_ranged_attack_loop");
     maps\mp\animscripts\zm_shared::donotetracks("ranged_attack");
-    self animscripted(self.origin, self.angles, "zm_ranged_attack_out");
+    self animScripted(self.origin, self.angles, "zm_ranged_attack_out");
     maps\mp\animscripts\zm_shared::donotetracks("ranged_attack");
     self.shield = 1;
     self thread avogadro_update_health();
@@ -942,7 +942,7 @@ shoot_bolt(enemy) {
   wait 0.1;
   self playSound("zmb_avogadro_attack");
   fx = playFXOnTag(level._effect["avogadro_bolt"], bolt, "tag_origin");
-  bolt moveto(target_pos, 0.2);
+  bolt moveTo(target_pos, 0.2);
   bolt waittill("movedone");
   bolt.owner = self;
   bolt check_bolt_impact(enemy);
@@ -979,7 +979,7 @@ region_empty() {
 
     debug_dist_sq = 0;
 
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
@@ -1054,7 +1054,7 @@ play_phase_anim() {
   self endon("phase_anim_done");
   self.phase_fx = spawn("script_model", self.origin);
   self.phase_fx setModel("tag_origin");
-  self.phase_fx linkto(self);
+  self.phase_fx linkTo(self);
   wait 0.05;
   playFXOnTag(level._effect["avogadro_phase_trail"], self.phase_fx, "tag_origin");
   playFX(level._effect["avogadro_phasing"], self.origin);
@@ -1142,7 +1142,7 @@ avogadro_pain(einflictor) {
 
   if(self.hit_by_melee < 4) {
     self thread avogadro_update_health();
-    self animscripted(origin, angles, animstate, substate);
+    self animScripted(origin, angles, animstate, substate);
     maps\mp\animscripts\zm_shared::donotetracks("pain_anim");
     self ghost();
     self.phase_time = gettime() - 1;
@@ -1169,8 +1169,8 @@ avogadro_pain(einflictor) {
 
       self notify("stop_pain_watcher");
       self avogadro_teleport(self.core_model.origin, self.core_model.angles, 1);
-      core_mover = getent("core_mover", "targetname");
-      self linkto(core_mover, "tag_origin");
+      core_mover = getEnt("core_mover", "targetname");
+      self linkTo(core_mover, "tag_origin");
 
       while(flag("power_on")) {
         wait 0.1;
@@ -1224,7 +1224,7 @@ avogadro_update_health_fx() {
     self.health_fx = spawn("script_model", tag_origin);
     self.health_fx.angles = tag_angles;
     self.health_fx setModel("tag_origin");
-    self.health_fx linkto(self);
+    self.health_fx linkTo(self);
     wait 0.1;
   }
 

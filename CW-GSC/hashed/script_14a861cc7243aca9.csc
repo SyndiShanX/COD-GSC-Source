@@ -110,7 +110,7 @@ function function_6456ec2c(localclientnum, newval) {
 }
 
 function function_d024972a(localclientnum, var_1bb0b8aa = 0) {
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     if(isPlayer(player) && player.team !== function_73f4b33(localclientnum)) {
       player renderoverridebundle::function_f4eab437(localclientnum, var_1bb0b8aa, "rob_sonar_set_enemy");
     }

@@ -420,8 +420,8 @@ _id_BA58(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
       }
 
       var_0 thread _id_0814::_id_25B0(var_6, var_2);
-      var_2 playrumbleonentity("defaultweapon_melee");
-      var_0 playrumbleonentity("defaultweapon_melee");
+      var_2 playRumbleOnEntity("defaultweapon_melee");
+      var_0 playRumbleOnEntity("defaultweapon_melee");
     }
   }
 
@@ -576,7 +576,7 @@ _id_BA58(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
 
 _id_9DA4(var_0, var_1) {
   var_2 = anglesToForward((0, var_0 getplayerangles()[1], 0));
-  var_3 = vectornormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
+  var_3 = vectorNormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
   return scripts\engine\math::_id_178D(var_2, var_3, (0, 0, 1));
 }
 
@@ -1255,7 +1255,7 @@ _id_6933(var_0, var_1) {
 }
 
 _id_877C(var_0, var_1) {
-  var_2 = vectornormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
+  var_2 = vectorNormalize((var_1.origin[0], var_1.origin[1], 0) - (var_0.origin[0], var_0.origin[1], 0));
   var_3 = anglesToForward((0, var_1.angles[1], 0));
   return vectordot(var_2, var_3) > 0.4;
 }
@@ -2442,9 +2442,9 @@ _id_B6FA(var_0) {
 
   if(isDefined(level._id_9BDB) && isDefined(var_3) && isPlayer(var_3) && scripts\engine\utility::_id_8794(var_6)) {
     var_10 = var_3.origin - var_2.origin;
-    var_11 = vectornormalize((var_10[0], var_10[1], 0));
+    var_11 = vectorNormalize((var_10[0], var_10[1], 0));
     var_12 = anglesToForward(var_2.angles);
-    var_13 = vectornormalize((var_12[0], var_12[1], 0));
+    var_13 = vectorNormalize((var_12[0], var_12[1], 0));
     var_14 = clamp(var_13[0] * var_11[0] + var_13[1] * var_11[1], -1.0, 1.0);
     var_15 = _func_0002(var_14);
 
@@ -3592,8 +3592,8 @@ _id_7474(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     if(gettime() - self._id_8F90 < 2500) {
       self._id_8F8F thread scripts\mp\gamescore::_id_BD7E(self);
     } else if(isalive(self._id_8F8F) && gettime() - self._id_8F90 < 5000) {
-      var_23 = vectornormalize(anglesToForward(self.angles));
-      var_24 = vectornormalize(self._id_8F8F.origin - self.origin);
+      var_23 = vectorNormalize(anglesToForward(self.angles));
+      var_24 = vectorNormalize(self._id_8F8F.origin - self.origin);
 
       if(vectordot(var_24, var_23) > 0.925) {
         self._id_8F8F thread scripts\mp\gamescore::_id_BD7E(self);
@@ -4411,7 +4411,7 @@ _id_4327(var_0, var_1, var_2, var_3, var_4, var_5) {
   thread scripts\mp\weapons::_id_ABD9(var_0, var_1, var_2, var_3, var_5);
 
   if(!isai(self) && scripts\common\utility::_id_69C4(var_2) != "bullet") {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -4534,7 +4534,7 @@ _id_A0FF(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_18 = scripts\mp\utility\weapon::_id_9ACB(var_18, var_22);
 
     if(var_5) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
 
     if(var_4) {

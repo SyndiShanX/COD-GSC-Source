@@ -59,7 +59,7 @@ c4_location(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7 setModel(var_5);
 
   if(isDefined(var_0)) {
-    var_7 linkto(self, var_0, var_1, var_2);
+    var_7 linkTo(self, var_0, var_1, var_2);
   } else {
     var_7.angles = self.angles;
   }
@@ -67,13 +67,13 @@ c4_location(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_7.trigger = get_use_trigger();
 
   if(isDefined(level.c4_hintstring)) {
-    var_7.trigger sethintstring(level.c4_hintstring);
+    var_7.trigger setHintString(level.c4_hintstring);
   } else {
-    var_7.trigger sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
+    var_7.trigger setHintString(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
   }
 
   if(isDefined(var_0)) {
-    var_7.trigger linkto(self, var_0, var_1, var_2);
+    var_7.trigger linkTo(self, var_0, var_1, var_2);
     var_7.trigger.islinked = 1;
   } else
     var_7.trigger.origin = var_7.origin;
@@ -110,7 +110,7 @@ handle_use(var_0, var_1) {
   }
 
   var_0.c4_count++;
-  self.trigger usetriggerrequirelookat();
+  self.trigger useTriggerRequireLookAt();
   self.trigger waittill("trigger", var_2);
   level notify("c4_in_place", self);
   self.trigger unlink();
@@ -236,7 +236,7 @@ get_use_trigger() {
       continue;
     }
     if(!isDefined(var_0[var_1].inuse)) {
-      var_0[var_1] enablelinkto();
+      var_0[var_1] enablelinkTo();
     }
 
     var_0[var_1].inuse = 1;

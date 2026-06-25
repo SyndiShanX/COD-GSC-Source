@@ -285,7 +285,7 @@ func_BD1E(var_0) {
   }
 
   var_2 = 3;
-  self moveto(var_1, var_2, var_2 * 0.6, var_2 * 0.4);
+  self moveTo(var_1, var_2, var_2 * 0.6, var_2 * 0.4);
   wait(var_2);
   if(var_0 == "entrance") {
     thread func_BB64();
@@ -500,11 +500,11 @@ func_BB98() {
   var_0 = self.origin + anglesToForward(self.angles) * -20;
   var_1 = self.origin;
   var_2 = self.angles;
-  self moveto(var_0, 0.1);
+  self moveTo(var_0, 0.1);
   self rotatepitch(-3, 0.1);
   wait(0.1);
-  self moveto(var_1, 0.15);
-  self rotateto(var_2, 0.15);
+  self moveTo(var_1, 0.15);
+  self rotateTo(var_2, 0.15);
   wait(0.15);
 }
 

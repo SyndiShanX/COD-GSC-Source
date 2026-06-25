@@ -27,7 +27,7 @@ geyser_player_setup_prone(localClientNum, set, newEnt) {
   player = getlocalplayers()[localClientNum];
   if(player GetEntityNumber() == self GetEntityNumber()) {
     if(set) {
-      self PlayRumbleOnEntity(localClientNum, "slide_rumble");
+      self playRumbleOnEntity(localClientNum, "slide_rumble");
     } else {
       self StopRumble(localClientNum, "slide_rumble");
     }
@@ -51,9 +51,9 @@ geyser_player_setup_prone(localClientNum, set, newEnt) {
     } else {
       self thread geyser_weapon_monitor(fake_player.fake_weapon);
     }
-    fake_player.fake_weapon LinkTo(fake_player, "tag_weapon_right");
+    fake_player.fake_weapon linkTo(fake_player, "tag_weapon_right");
     realWait(0.016);
-    fake_player linkto(self, "tag_origin");
+    fake_player linkTo(self, "tag_origin");
     fake_player UseAnimTree(level.geyser_animtree);
     fake_player SetAnim(level.geyser_anims["player_geyser_prone"], 1.0, 0.0, 1.0);
     if(!isDefined(self.fake_player)) {
@@ -84,7 +84,7 @@ geyser_player_setup_stand(localClientNum, set, newEnt) {
   player = getlocalplayers()[localClientNum];
   if(player GetEntityNumber() == self GetEntityNumber()) {
     if(set) {
-      self PlayRumbleOnEntity(localClientNum, "slide_rumble");
+      self playRumbleOnEntity(localClientNum, "slide_rumble");
     } else {
       self StopRumble(localClientNum, "slide_rumble");
     }
@@ -108,9 +108,9 @@ geyser_player_setup_stand(localClientNum, set, newEnt) {
     } else {
       self thread geyser_weapon_monitor(fake_player.fake_weapon);
     }
-    fake_player.fake_weapon LinkTo(fake_player, "tag_weapon_right");
+    fake_player.fake_weapon linkTo(fake_player, "tag_weapon_right");
     realWait(0.016);
-    fake_player linkto(self, "tag_origin");
+    fake_player linkTo(self, "tag_origin");
     fake_player UseAnimTree(level.geyser_animtree);
     fake_player SetAnim(level.geyser_anims["player_geyser_stand_crouch"], 1.0, 0.0, 1.0);
     if(!isDefined(self.fake_player)) {

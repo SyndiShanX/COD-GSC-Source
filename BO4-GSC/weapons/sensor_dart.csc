@@ -85,7 +85,7 @@ function_e3a084cd(localclientnum) {
   localplayer = function_5c10bd79(localclientnum);
   self.var_b44c157f = spawn(localclientnum, self.origin, "script_model", localplayer getentitynumber(), self.team);
   self.var_b44c157f setModel(#"tag_origin");
-  self.var_b44c157f linkto(self);
+  self.var_b44c157f linkTo(self);
   self.var_b44c157f setcompassicon("minimap_sensor_dart_pip");
   self.var_b44c157f function_8e04481f();
   self.var_b44c157f function_5e00861(0.25);

@@ -43,13 +43,13 @@ _id_E386(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("com_plasticcase_beige_big_iw6");
   var_1 makeuseable();
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 setCursorHint("HINT_NOICON");
   var_1 setuseholdduration("duration_medium");
   var_1 sethintrequiresholding(1);
   var_1 sethintdisplayfov(360);
   var_1 setusefov(360);
   var_1 setuserange(150);
-  var_1 sethintstring(&"MP_BR_USE_PLUNDER_CACHE");
+  var_1 setHintString(&"MP_BR_USE_PLUNDER_CACHE");
   var_1 setasgametypeobjective();
   var_1 hide();
   var_2 = (var_0.origin[0], var_0.origin[1], 1000);

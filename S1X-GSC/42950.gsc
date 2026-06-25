@@ -254,7 +254,7 @@ fireorbitalmissile(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4.target)) {
-      var_4.targetent = getent(var_4.target, "targetname");
+      var_4.targetent = getEnt(var_4.target, "targetname");
     }
   }
 
@@ -276,7 +276,7 @@ fireorbitalmissile(var_0, var_1) {
       var_9 = level.remote_missile_height_override;
     }
 
-    var_10 = vectornormalize(var_7 - var_8);
+    var_10 = vectorNormalize(var_7 - var_8);
     var_7 = var_10 * var_9 + var_8;
   } else {
     var_11 = (0, 0, level._missile_strike_setting["Launch_Value"].vert);
@@ -300,8 +300,8 @@ missileeyes(var_0, var_1, var_2) {
   var_0 thread player_cleanuponteamchange(var_1, var_2);
   var_0.clusterdeployed = 0;
   var_0.missileboostused = 0;
-  var_0 cameralinkto(var_1, "tag_origin");
-  var_0 controlslinkto(var_1);
+  var_0 cameralinkTo(var_1, "tag_origin");
+  var_0 controlslinkTo(var_1);
 
   if(getdvarint("camera_thirdPerson")) {
     var_0 maps\mp\_utility::setthirdpersondof(0);
@@ -457,13 +457,13 @@ firebabymissile(var_0, var_1) {
 
   if(isDefined(var_2)) {
     if(isDefined(var_0.targets) && var_0.targets.size) {
-      var_9 missile_settargetent(var_0.targets[0]);
+      var_9 missile_settargetEnt(var_0.targets[0]);
     }
   }
 
   var_9.team = self.team;
   var_9 setmissileminimapvisible(1);
-  self playrumbleonentity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
   earthquake(0.2, 0.2, var_0.origin, 200);
   var_9 thread maps\mp\gametypes\_damage::setentitydamagecallback(10, undefined, ::missilestrikeondeath, undefined, 1);
 }
@@ -512,7 +512,7 @@ split_rocket_hellfire(var_0, var_1) {
     var_2++;
   }
 
-  self playrumbleonentity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
   earthquake(0.2, 0.2, var_0.origin, 200);
   var_0 setmissilecoasting(1);
   thread fade_to_white();
@@ -578,7 +578,7 @@ fire_targeted_bomblet(var_0, var_1, var_2, var_3) {
   var_8.killcament = self;
 
   if(isDefined(var_1)) {
-    var_8 missile_settargetent(var_1);
+    var_8 missile_settargetEnt(var_1);
   }
 
   var_8 setmissileminimapvisible(1);
@@ -664,20 +664,20 @@ spawnclusterchildren(var_0, var_1, var_2, var_3) {
   var_8.rotatinglinkarray[0] = getprespawnedclusterrotationent(var_3, var_7);
   var_8.rotatinglinkarray[0] linktosynchronizedparent(var_8);
   var_9 = magicbullet("remotemissile_projectile_cluster_child_mp", var_6, var_7, self);
-  var_9 missile_settargetent(var_8.rotatinglinkarray[0]);
+  var_9 missile_settargetEnt(var_8.rotatinglinkarray[0]);
   var_9 missile_setflightmodedirect();
   var_9.owner = self;
   var_9.team = self.team;
   var_9 setmissileminimapvisible(1);
   var_9 thread bomblet_explosion_waiter(self, var_3);
   var_10 = var_7 - var_6;
-  var_10 = vectornormalize((var_10[0], var_10[1], 0));
+  var_10 = vectorNormalize((var_10[0], var_10[1], 0));
   var_10 = var_10 * -30;
   var_10 = var_10 + (0, 0, 200);
   var_11 = var_3.prespawnedkillcament;
   var_11.origin = var_6 + var_10;
   var_11.killcamstarttime = gettime();
-  var_11 linkto(var_9);
+  var_11 linkTo(var_9);
   var_11 thread killcamrocketdeath(var_9);
   var_9.killcament = var_11;
   var_12 = 10;
@@ -699,7 +699,7 @@ spawnclusterchildren(var_0, var_1, var_2, var_3) {
     var_7 = var_15.origin;
     var_6 = var_15.randomposition;
     var_16 = magicbullet("remotemissile_projectile_cluster_child_mp", var_6, var_7, self);
-    var_16 missile_settargetent(var_8.rotatinglinkarray[var_13]);
+    var_16 missile_settargetEnt(var_8.rotatinglinkarray[var_13]);
     var_16 missile_setflightmodedirect();
     var_16.owner = self;
     var_16.team = self.team;
@@ -1255,7 +1255,7 @@ hud_watch_for_boost_active(var_0, var_1) {
   var_1 endon("missile_strike_complete");
   var_1 endon("ms_early_exit");
   self waittill("FireButtonPressed");
-  self playrumbleonentity("sniper_fire");
+  self playRumbleOnEntity("sniper_fire");
   self.missileboostused = 1;
   hud_update_fire_text(var_0, var_1);
 }

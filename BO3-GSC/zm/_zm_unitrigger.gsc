@@ -327,7 +327,7 @@ function main() {
       }
     }
     candidate_list = arraycombine(candidate_list, level._unitriggers.dynamic_stubs, 1, 0);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       player = players[i];
       if(!isDefined(player)) {
@@ -459,14 +459,14 @@ function run_visibility_function_for_all_triggers() {
     if(!isDefined(self.playertrigger)) {
       return;
     }
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(self.playertrigger[players[i] getentitynumber()])) {
         self.playertrigger[players[i] getentitynumber()][[self.prompt_and_visibility_func]](players[i]);
       }
     }
   } else if(isDefined(self.trigger)) {
-    self.trigger[[self.prompt_and_visibility_func]](getplayers()[0]);
+    self.trigger[[self.prompt_and_visibility_func]](getPlayers()[0]);
   }
 }
 
@@ -550,29 +550,29 @@ function build_trigger_from_unitrigger_stub(stub, player) {
     }
     if(isDefined(stub.cursor_hint)) {
       if(stub.cursor_hint == "HINT_WEAPON" && isDefined(stub.cursor_hint_weapon)) {
-        trigger setcursorhint(stub.cursor_hint, stub.cursor_hint_weapon);
+        trigger setCursorHint(stub.cursor_hint, stub.cursor_hint_weapon);
       } else {
-        trigger setcursorhint(stub.cursor_hint);
+        trigger setCursorHint(stub.cursor_hint);
       }
     }
-    trigger triggerignoreteam();
+    trigger triggerIgnoreTeam();
     if(isDefined(stub.require_look_at) && stub.require_look_at) {
-      trigger usetriggerrequirelookat();
+      trigger useTriggerRequireLookAt();
     }
     if(isDefined(stub.require_look_toward) && stub.require_look_toward) {
       trigger usetriggerrequirelooktoward(1);
     }
     if(isDefined(stub.hint_string)) {
       if(isDefined(stub.hint_parm2)) {
-        trigger sethintstring(stub.hint_string, stub.hint_parm1, stub.hint_parm2);
+        trigger setHintString(stub.hint_string, stub.hint_parm1, stub.hint_parm2);
       } else {
         if(isDefined(stub.hint_parm1)) {
-          trigger sethintstring(stub.hint_string, stub.hint_parm1);
+          trigger setHintString(stub.hint_string, stub.hint_parm1);
         } else {
           if(isDefined(stub.cost) && (!(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled))) {
-            trigger sethintstring(stub.hint_string, stub.cost);
+            trigger setHintString(stub.hint_string, stub.cost);
           } else {
-            trigger sethintstring(stub.hint_string);
+            trigger setHintString(stub.hint_string);
           }
         }
       }

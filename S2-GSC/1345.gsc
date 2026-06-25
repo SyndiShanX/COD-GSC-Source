@@ -752,8 +752,8 @@ lib_0541::func_903D(param_00, param_01, param_02) {
     var_13 = self gettagangles(var_10);
     var_14 = anglesToForward(var_13);
     var_15 = anglestoup(var_13);
-    var_16 = vectornormalize(var_14 + 4 * param_01);
-    var_17 = vectornormalize(vectorcross(var_16, var_15));
+    var_16 = vectorNormalize(var_14 + 4 * param_01);
+    var_17 = vectorNormalize(vectorcross(var_16, var_15));
     if(lengthsquared(var_17) < 0.5) {
       var_17 = anglestoright(var_13);
     }
@@ -854,7 +854,7 @@ lib_0541::func_AC26(param_00, param_01) {
     var_06 = spawn("script_model", var_05.var_0116);
     var_06 setModel("helmet_collision");
     var_06.var_001D = var_05.var_001D;
-    var_05 linkto(var_06);
+    var_05 linkTo(var_06);
     var_06.var_6292 = var_05;
     if(!isDefined(param_00)) {
       param_00 = anglesToForward(var_06.var_001D);

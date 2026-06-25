@@ -1116,7 +1116,7 @@ snd_air_vehicle_smart_flyby(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 < var_1) {
       var_8 = spawn("script_origin", self.origin);
-      var_8 linkto(self);
+      var_8 linkTo(self);
       var_8 playSound(var_0, "sounddone");
       var_8 thread sndx_air_vehicle_smart_flyby_deathspin(self, var_4);
       var_8 thread sndx_air_vehicle_smart_flyby_sounddone();
@@ -1148,7 +1148,7 @@ sndx_air_vehicle_smart_flyby_deathspin(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = spawn("script_origin", self.origin);
-    var_2 linkto(self);
+    var_2 linkTo(self);
     var_2 playSound(var_1, "sounddone");
     var_2 waittill("sounddone");
     var_2 delete();
@@ -1183,7 +1183,7 @@ snd_advanced_flyby_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
   if(isDefined(var_6)) {
     var_12 = spawn("script_origin", self.origin);
-    var_12 linkto(self);
+    var_12 linkTo(self);
     thread sndx_advanced_flyby_destruct(var_12, var_6, var_10);
   }
 

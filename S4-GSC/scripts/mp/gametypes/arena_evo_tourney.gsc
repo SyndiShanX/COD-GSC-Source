@@ -28,13 +28,13 @@ init() {
   level._id_1A91[level._id_1A91.size] = level._id_1FEF;
   level._id_1A91[level._id_1A91.size] = "mp_dom_spawn";
   level._id_1A91[level._id_1A91.size] = "mp_tdm_spawn";
-  var_0 = getent("arena_evo_spectate_zone", "targetname");
+  var_0 = getEnt("arena_evo_spectate_zone", "targetname");
 
   if(isDefined(var_0)) {
     var_0 thread handle_spectating_players();
   }
 
-  var_1 = getent("arena_evo_full_clip_ent", "targetname");
+  var_1 = getEnt("arena_evo_full_clip_ent", "targetname");
 
   if(isDefined(var_1)) {
     var_1 thread handle_solid_state();
@@ -396,7 +396,7 @@ _id_1ACD() {
     var_1 = var_0 scripts\mp\playerlogic::_id_6D4A();
     var_0 _id_0817::_id_5AA0(var_1._id_E342);
     var_0 _meth_8063();
-    var_0 setorigin(var_1._id_E332, 1);
+    var_0 setOrigin(var_1._id_E332, 1);
     var_0 thread delayedsetplayerangles(var_1._id_E267);
     var_0 setstance("stand");
     var_0 _id_0A11::_id_A046();
@@ -1034,7 +1034,7 @@ _startcameraspectateoverview() {
 
   for(;;) {
     var_0 _meth_8060();
-    var_0 cameralinkto(level._id_1A7A, "tag_origin", 1, 1);
+    var_0 cameralinkTo(level._id_1A7A, "tag_origin", 1, 1);
 
     if(0) {
       foreach(var_2 in level.players) {
@@ -1059,7 +1059,7 @@ _endcameraspectateoverview() {
     }
   }
 
-  var_0 setorigin(var_0 get_spectate_ended_origin());
+  var_0 setOrigin(var_0 get_spectate_ended_origin());
 
   if(scripts\mp\gametypes\arena_evo_tourney_util::_id_86E2(var_0)) {
     var_0 scripts\mp\gametypes\arena_evo_tourney_util::_id_D358();
@@ -1072,7 +1072,7 @@ _endspectatearena() {
   var_0 _id_081A::_id_D6E2();
   var_0 setclientomnvar("ui_arena_evo_spectating_arena", 0);
   var_0 scripts\mp\utility\player::_id_FD26("playing");
-  var_0 setorigin(var_0 get_spectate_ended_origin());
+  var_0 setOrigin(var_0 get_spectate_ended_origin());
 }
 
 get_spectate_ended_origin() {

@@ -111,7 +111,7 @@ mendota_register_recenter_script(var_0, var_1) {
   var_2 show();
 
   foreach(var_5, var_4 in level.mendota_orientation_data) {
-    level.mendota_orientation_data[var_5]._id_5469 linkto(var_2);
+    level.mendota_orientation_data[var_5]._id_5469 linkTo(var_2);
   }
 
   var_6 = 16000;
@@ -119,8 +119,8 @@ mendota_register_recenter_script(var_0, var_1) {
   level thread copy_positions_to_clipboard();
 
   for(;;) {
-    var_8 = level.player getEye() + var_6 * vectornormalize(anglesToForward(level.player getplayerangles()));
-    var_2 moveto(var_8 - (0, 0, var_7), 0.2, 0.1, 0.1);
+    var_8 = level.player getEye() + var_6 * vectorNormalize(anglesToForward(level.player getplayerangles()));
+    var_2 moveTo(var_8 - (0, 0, var_7), 0.2, 0.1, 0.1);
 
     if(level.player fragButtonPressed()) {
       var_2.angles = var_2.angles + (0, 2, 0);

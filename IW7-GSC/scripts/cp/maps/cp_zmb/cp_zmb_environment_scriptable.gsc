@@ -52,7 +52,7 @@ turn_on_main_gate() {
   }
 
   for(var_4 = 1; var_4 <= 5; var_4++) {
-    var_5 = getent("gate_light_0" + var_4, "targetname");
+    var_5 = getEnt("gate_light_0" + var_4, "targetname");
     var_5 setscriptablepartstate("main_gate_light", "turning_on");
   }
 }
@@ -84,30 +84,30 @@ moon_bridge() {}
 
 arcade() {
   turn_on_sign("astrocade_signs");
-  getent("bfp_cabinet", "targetname") setModel("zmb_game_bowling_for_planets_on");
+  getEnt("bfp_cabinet", "targetname") setModel("zmb_game_bowling_for_planets_on");
   wait(1);
-  getent("demon_group", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("demon_group", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_demon");
   wait(1);
-  getent("barnstorming_group", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("barnstorming_group", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_barnstorming");
   wait(1);
-  getent("starmaster_group", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("starmaster_group", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_starmaster");
   wait(1);
-  getent("group_cosmicarc", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("group_cosmicarc", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_cosmic");
   wait(1);
-  getent("group_pitfall", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("group_pitfall", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_pitfall");
   wait(1);
-  getent("group_riverraid", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("group_riverraid", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_riverraid");
   wait(1);
-  getent("spider_arcade_group", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("spider_arcade_group", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_spider");
   wait(1);
-  getent("robottank_group", "targetname") setscriptablepartstate("group", "all_on");
+  getEnt("robottank_group", "targetname") setscriptablepartstate("group", "all_on");
   level thread power_on_arcade_machines("arcade_robottank");
 }
 
@@ -117,7 +117,7 @@ power_on_arcade_machines(var_0) {
     scripts\engine\utility::waitframe();
     var_3.powered_on = 1;
     if(isDefined(var_3.script_index)) {
-      var_4 = getent(var_3.name, "targetname");
+      var_4 = getEnt(var_3.name, "targetname");
       var_5 = var_3.script_index;
       var_4 setscriptablepartstate("cab" + var_5, "idle");
     }
@@ -205,7 +205,7 @@ all_power_vo(var_0) {
 
 power_on_monitor() {
   level endon("game_ended");
-  var_0 = getent("main_portal_sun", "targetname");
+  var_0 = getEnt("main_portal_sun", "targetname");
   var_0 setModel("zmb_center_portal_sun_off");
   for(;;) {
     level waittill("power_on_scriptable_and_light", var_1, var_2);
@@ -314,10 +314,10 @@ turn_on_light(var_0) {
 }
 
 signs_mainst() {
-  var_0 = getent("main_portal_sun", "targetname");
+  var_0 = getEnt("main_portal_sun", "targetname");
   var_0.angles = (0, 0, 0);
-  var_1 = getent("triton_skull_light", "targetname");
-  var_2 = getent("triton_sign_light", "targetname");
+  var_1 = getEnt("triton_skull_light", "targetname");
+  var_2 = getEnt("triton_sign_light", "targetname");
   level thread rotate_center_portal_sun();
   wait(3);
   var_1 setscriptablepartstate("light", "on");
@@ -334,15 +334,15 @@ signs_mainst() {
   turn_on_scriptable("crater_cakes_main_sign");
   turn_on_scriptable("crater_cakes_neon_upper");
   level thread scripts\cp\maps\cp_zmb\cp_zmb_coaster::turn_on_coaster_anims();
-  var_3 = getent("main_street_monster", "targetname");
+  var_3 = getEnt("main_street_monster", "targetname");
   var_3 setscriptablepartstate("main", "idle2");
 }
 
 rotate_center_portal_sun() {
-  var_0 = getent("main_portal_sun", "targetname");
+  var_0 = getEnt("main_portal_sun", "targetname");
   var_0 setModel("zmb_center_portal_sun");
   for(;;) {
-    var_0 rotateyaw(360, 10);
+    var_0 rotateYaw(360, 10);
     wait(9.95);
   }
 }
@@ -374,7 +374,7 @@ signs_kepler() {
   turn_on_sign("chromosphere_sign");
   turn_on_sign("shooting_gallery_sign");
   turn_on_sign("sign_spaceshipsplash");
-  getent("chromosphere_mike", "targetname") setscriptablepartstate("main", "on");
+  getEnt("chromosphere_mike", "targetname") setscriptablepartstate("main", "on");
   var_0 = getEntArray("octonian", "targetname");
   foreach(var_2 in var_0) {
     var_2 setscriptablepartstate("body", "on");

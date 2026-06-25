@@ -22,8 +22,8 @@ GOLF_COURSE_FAKE_CHOPPER_PAUSE_MAX = 20.0;
 
 movePlayerToStartPoint(sTargetname) {
   assert(isDefined(sTargetname));
-  start = getent(sTargetname, "targetname");
-  level.player SetOrigin(start.origin);
+  start = getEnt(sTargetname, "targetname");
+  level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 }
 
@@ -187,8 +187,8 @@ paradropper(plane, animName) {
   self assign_animtree();
 
   chute = spawn_anim_model(animName);
-  self linkto(plane);
-  chute linkto(plane);
+  self linkTo(plane);
+  chute linkTo(plane);
 
   ents = [];
   ents[ents.size] = self;
@@ -253,7 +253,7 @@ fake_creek_choppers() {
 
 fake_chopper() {
   assert(isDefined(self.target));
-  target = getstruct(self.target, "targetname");
+  target = getStruct(self.target, "targetname");
   assert(isDefined(target));
   destination = target.origin;
 
@@ -303,7 +303,7 @@ fake_chopper_create_and_move(moveTime, destination) {
     chopper playLoopSound("veh_helicopter_loop");
   }
 
-  chopper moveto(destination, moveTime, 0, 0);
+  chopper moveTo(destination, moveTime, 0, 0);
   wait moveTime;
   chopper delete();
 }
@@ -552,14 +552,14 @@ laser_artillery(groupNum, forced) {
   soundEnt = undefined;
   if(groupNum == 0) {
     flag_set("lazed_targets_0");
-    soundEnt = getent("artillery_soundent_0", "targetname");
+    soundEnt = getEnt("artillery_soundent_0", "targetname");
     if(!forced) {
       thread radio_dialogue("arcadia_art_missionrec");
     }
   }
   if(groupNum == 1) {
     flag_set("lazed_targets_1");
-    soundEnt = getent("artillery_soundent_1", "targetname");
+    soundEnt = getEnt("artillery_soundent_1", "targetname");
     if(!forced) {
       thread radio_dialogue("arcadia_art_confirmed");
     }
@@ -686,7 +686,7 @@ golf_course_fake_choppers() {
   for(;;) {
     spawners = array_randomize(spawners);
     foreach(spawner in spawners) {
-      target = getstruct(spawner.target, "targetname");
+      target = getStruct(spawner.target, "targetname");
       spawner thread fake_chopper_create_and_move(moveTime, target.origin);
       count++;
       if(count >= numBeforePause) {
@@ -798,11 +798,11 @@ zpu_gunner_dismount(zpu, gunner, trigger) {
 
 zpu_stop_shooting(zpu, gunner) {
   zpu notify("stop_shooting");
-  zpu anim_stopanimscripted();
+  zpu anim_stopanimScripted();
   zpu StopSounds();
   if(isalive(gunner)) {
     gunner notify("stop_shooting");
-    gunner anim_stopanimscripted();
+    gunner anim_stopanimScripted();
   }
   zpu setAnim(level.scr_anim[zpu.animname]["idle"], 1.0, 0, 1);
 }
@@ -969,7 +969,7 @@ harrier_fire_missiles(num) {
 }
 
 vehicle_path_disconnector() {
-  zone = getent(self.target, "targetname");
+  zone = getEnt(self.target, "targetname");
   assert(isDefined(zone));
   zone notsolid();
   zone.origin -= (0, 0, 1024);
@@ -1023,7 +1023,7 @@ evac_chopper_1() {
 
   wait 7;
 
-  rpg = getent("evac_chopper_1_rpg", "targetname");
+  rpg = getEnt("evac_chopper_1_rpg", "targetname");
   d = distance(rpg.origin, self.origin);
   d *= 1.2;
   missile_CreateAttractorEnt(self, 100000, d);
@@ -1045,7 +1045,7 @@ civilian_car() {
 
   car thread civilian_car_luggage();
 
-  clip = getent("civilian_car_clip", "targetname");
+  clip = getEnt("civilian_car_clip", "targetname");
   badplace_brush("civilian_car_badplace", 12, clip, "allies", "axis");
 
   car waittill("reached_end_node");
@@ -1053,24 +1053,24 @@ civilian_car() {
 }
 
 civilian_car_luggage() {
-  civilian_car_dummy = getent("civilian_car_dummy", "targetname");
-  civilian_car_dummy_direction_vec = getent(civilian_car_dummy.target, "targetname");
-  civilian_car_dummy_direction_vec linkto(civilian_car_dummy);
+  civilian_car_dummy = getEnt("civilian_car_dummy", "targetname");
+  civilian_car_dummy_direction_vec = getEnt(civilian_car_dummy.target, "targetname");
+  civilian_car_dummy_direction_vec linkTo(civilian_car_dummy);
 
-  civilian_car_luggage[0] = getent("civilian_car_luggage_1", "targetname");
-  civilian_car_luggage[1] = getent("civilian_car_luggage_2", "targetname");
-  civilian_car_luggage[2] = getent("civilian_car_luggage_3", "targetname");
-  civilian_car_luggage[3] = getent("civilian_car_luggage_4", "targetname");
-  civilian_car_luggage[4] = getent("civilian_car_luggage_5", "targetname");
-  civilian_car_luggage[5] = getent("civilian_car_luggage_6", "targetname");
+  civilian_car_luggage[0] = getEnt("civilian_car_luggage_1", "targetname");
+  civilian_car_luggage[1] = getEnt("civilian_car_luggage_2", "targetname");
+  civilian_car_luggage[2] = getEnt("civilian_car_luggage_3", "targetname");
+  civilian_car_luggage[3] = getEnt("civilian_car_luggage_4", "targetname");
+  civilian_car_luggage[4] = getEnt("civilian_car_luggage_5", "targetname");
+  civilian_car_luggage[5] = getEnt("civilian_car_luggage_6", "targetname");
 
   foreach(piece in civilian_car_luggage) {
-    piece LinkTo(civilian_car_dummy);
+    piece linkTo(civilian_car_dummy);
   }
 
   civilian_car_dummy.origin = self.origin;
   civilian_car_dummy.angles = self.angles;
-  civilian_car_dummy LinkTo(self);
+  civilian_car_dummy linkTo(self);
 
   wait 6.5;
 
@@ -1137,7 +1137,7 @@ delete_ai_trigger() {
   self waittill("trigger");
 
   assert(isDefined(self.target));
-  zone = getent(self.target, "targetname");
+  zone = getEnt(self.target, "targetname");
   assert(isDefined(zone));
 
   enemies = getaiarray("axis");
@@ -1171,7 +1171,7 @@ opening_rpgs() {
   if(issubstr(self.classname, "trigger")) {
     assert(isDefined(self.target));
     self waittill("trigger");
-    nextOrg = getent(self.target, "targetname");
+    nextOrg = getEnt(self.target, "targetname");
   } else {
     wait 6;
     nextOrg = self;
@@ -1185,7 +1185,7 @@ opening_rpgs() {
     if(!isDefined(nextOrg.target)) {
       return;
     }
-    nextOrg = getent(nextOrg.target, "targetname");
+    nextOrg = getEnt(nextOrg.target, "targetname");
 
     wait randomfloatrange(1.0, 2.0);
   }
@@ -1225,7 +1225,7 @@ ai_avoid_stryker() {
 }
 
 pool() {
-  trigger = getent("pool", "targetname");
+  trigger = getEnt("pool", "targetname");
 
   while(1) {
     trigger waittill("trigger", player);

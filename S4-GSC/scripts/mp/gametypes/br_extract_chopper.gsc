@@ -8,12 +8,12 @@ _id_E2E3(var_0, var_1, var_2, var_3) {
   var_5 = var_4;
   var_6 = (0, 0, 0);
   var_7 = 24000;
-  var_8 = getent("airstrikeheight", "targetname");
+  var_8 = getEnt("airstrikeheight", "targetname");
   var_9 = var_8.origin[2];
   var_10 = "jackal";
   var_11 = level._id_9AAC - var_0.origin;
   var_11 = (var_11[0], var_11[1], 0);
-  var_12 = vectornormalize(var_11);
+  var_12 = vectorNormalize(var_11);
   var_13 = var_12 * -10000 + (0, 0, 1) * var_9;
   var_14 = (var_4[0], var_4[1], var_9);
   var_15 = _id_5954();
@@ -78,7 +78,7 @@ _id_24AD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   self notify("called_in_littlebird");
-  var_9 = getent("airstrikeheight", "targetname");
+  var_9 = getEnt("airstrikeheight", "targetname");
 
   if(isDefined(var_9)) {
     var_10 = var_9.origin[2] + 500;
@@ -147,7 +147,7 @@ _id_E319(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_10 setyawspeed(45, 25, 25, 0.5);
   var_10 setotherent(var_1);
   var_10._id_FE90 = spawn("script_model", var_10 gettagorigin("tag_origin"));
-  var_10._id_FE90 linkto(var_10, "tag_origin");
+  var_10._id_FE90 linkTo(var_10, "tag_origin");
 
   if(!isDefined(level._id_8B53)) {
     level._id_8B53 = [];

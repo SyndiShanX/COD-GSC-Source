@@ -573,7 +573,7 @@ function_f10600c(enemy) {
 }
 
 ai_can_see() {
-  players_in_zone = getplayers();
+  players_in_zone = getPlayers();
   var_13324143 = arraysortclosest(players_in_zone, self.origin, 4);
 
   for(i = 0; i < var_13324143.size; i++) {

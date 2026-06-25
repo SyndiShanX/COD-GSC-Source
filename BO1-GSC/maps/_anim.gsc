@@ -435,7 +435,7 @@ anim_first_frame_on_guy(guy, scene, org, angles, animname_override) {
   guy set_start_pos(scene, org, angles, animname);
   animation = guy get_anim(scene, animname);
   if(IsAI(guy)) {
-    guy AnimScripted("anim_first_frame", org, angles, animation, "normal", guy.root_anim, 0, 0);
+    guy animScripted("anim_first_frame", org, angles, animation, "normal", guy.root_anim, 0, 0);
   } else {
     guy SetAnimKnob(animation, 1, 0, 0);
   }
@@ -561,7 +561,7 @@ anim_loop_packet(guyPackets, scene, ender, animname_override) {
           guy SetFlaggedAnimKnobRestart(anim_string, level.scr_anim[animname][scene][idleanim], 1, 0.2, 1);
         } else {
           guy last_anim_time_check();
-          guy AnimScripted(anim_string, org, angles, level.scr_anim[animname][scene][idleanim]);
+          guy animScripted(anim_string, org, angles, level.scr_anim[animname][scene][idleanim]);
         }
         guy notify("_anim_playing");
         animtime = GetAnimLength(level.scr_anim[animname][scene][idleanim]);
@@ -712,17 +712,17 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
         if(isDefined(guy.a) && (guy.a.state == "move")) {
           guy wait_for_foot_sync();
         }
-        guy AnimScripted(anim_string, guy.origin, guy.angles, animation, "normal", undefined, 1, blend_in);
+        guy animScripted(anim_string, guy.origin, guy.angles, animation, "normal", undefined, 1, blend_in);
       } else {
         Assert(isDefined(angles), "Alignment node does not have angles specified.");
-        guy AnimScripted(anim_string, org, angles, animation, "normal", undefined, 1, blend_in);
+        guy animScripted(anim_string, org, angles, animation, "normal", undefined, 1, blend_in);
       }
       guy last_anim_time_check();
       cut_time = 0.0;
       if(isDefined(blend_out)) {
         cut_time = blend_out;
       }
-      guy thread earlyout_animscripted(animation, cut_time);
+      guy thread earlyout_animScripted(animation, cut_time);
     }
     guy notify("_anim_playing");
     thread start_notetrack_wait(guy, anim_string, scene, animname);
@@ -1268,7 +1268,7 @@ anim_ents(ents, scene, tag, animname) {
   for(i = 0; i < ents.size; i++) {
     if(isDefined(parent_model)) {
       assertex(isDefined(ents[i].script_linkto), "_anim::anim_ents() - Entity at " + ents[i].origin + " does not have a script_linkto Key/Value");
-      ents[i] LinkTo(parent_model, ents[i].script_linkto);
+      ents[i] linkTo(parent_model, ents[i].script_linkto);
     } else {
       ents[i] SetAnimTree();
       ents[i] SetFlaggedAnimKnob("ent_anim", get_anim(scene, animname), 1.0, 0.2, 1.0);
@@ -1542,7 +1542,7 @@ pg_sound_exists(animname, scene) {
   }
   return false;
 }
-earlyout_animscripted(animation, cut_time, blend_time) {
+earlyout_animScripted(animation, cut_time, blend_time) {
   DEFAULT_CUT_TIME = 0.3;
   self endon("death");
   self endon("stop_single");
@@ -1557,5 +1557,5 @@ earlyout_animscripted(animation, cut_time, blend_time) {
   }
   anim_time = GetAnimLength(animation);
   wait(anim_time - cut_time);
-  self anim_stopanimscripted(blend_time);
+  self anim_stopanimScripted(blend_time);
 }

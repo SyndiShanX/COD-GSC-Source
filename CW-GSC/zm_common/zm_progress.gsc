@@ -276,7 +276,7 @@ function progress_think(player, params, var_c060d2c8) {
 
   if(!status) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return 0;
   }
 

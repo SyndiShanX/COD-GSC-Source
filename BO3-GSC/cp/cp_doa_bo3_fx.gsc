@@ -16,5 +16,5 @@ function main() {
 
 function raps_explode_fx(origin) {
   playFX(level._effect["raps_gib"], origin);
-  playsoundatposition("zmb_hellhound_explode", origin);
+  playSoundAtPosition("zmb_hellhound_explode", origin);
 }

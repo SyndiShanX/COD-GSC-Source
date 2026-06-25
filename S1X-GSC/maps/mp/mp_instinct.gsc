@@ -86,10 +86,10 @@ river_drilling_animation() {
 
   wait(0.4);
 
-  river_drill_fx LinkTo(self, "poundee", (75, 0, 400), (0, 0, 0));
-  river_drill_exhaust_fx LinkTo(self, "poundee", (75, 0, 400), (90, 0, 90));
-  river_drill_earthquake_fx LinkTo(self, "tag_origin", (0, 0, 100), (0, 0, 0));
-  river_drill_dust_fx LinkTo(self, "tag_origin", (0, 0, -100), (270, 180, 90));
+  river_drill_fx linkTo(self, "poundee", (75, 0, 400), (0, 0, 0));
+  river_drill_exhaust_fx linkTo(self, "poundee", (75, 0, 400), (90, 0, 90));
+  river_drill_earthquake_fx linkTo(self, "tag_origin", (0, 0, 100), (0, 0, 0));
+  river_drill_dust_fx linkTo(self, "tag_origin", (0, 0, -100), (270, 180, 90));
 
   noself_delayCall(1, ::PlayFXOnTag, getfx("diesel_drill_smk_loop"), river_drill_fx, "tag_origin");
   wait(0.1);

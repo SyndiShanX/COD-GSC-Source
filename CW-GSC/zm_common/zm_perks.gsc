@@ -384,7 +384,7 @@ function play_loop_on_machine() {
   sound_ent = spawn("script_origin", self.origin + (0, 0, 50));
   sound_ent playSound(#"hash_1ac5c65e0bb6f52e");
   sound_ent playLoopSound(#"zmb_perkmachine_power_on_lp");
-  sound_ent linkto(self);
+  sound_ent linkTo(self);
   self waittill(#"stop_loopsound");
   sound_ent unlink();
   sound_ent playSound(#"hash_34ea69cde7cc1cd0");
@@ -428,7 +428,7 @@ function electric_perks_dialog() {
   self endon(#"death");
   wait 0.01;
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1) {
     return;
@@ -440,7 +440,7 @@ function electric_perks_dialog() {
 
   while(true) {
     wait 0.5;
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i])) {
@@ -480,7 +480,7 @@ function reset_vending_hint_string() {
   if(isDefined(level._custom_perks)) {
     if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].cost) && isDefined(level._custom_perks[perk].hint_string)) {
       n_cost = function_6f418fda(perk);
-      self sethintstring(level._custom_perks[perk].hint_string, n_cost);
+      self setHintString(level._custom_perks[perk].hint_string, n_cost);
     }
   }
 }
@@ -674,7 +674,7 @@ function vending_trigger_think() {
       #perk: perk
     });
     player playsoundtoplayer(#"hash_70f9bc3fce59c959", player);
-    player playrumbleonentity(#"zm_interact_rumble");
+    player playRumbleOnEntity(#"zm_interact_rumble");
     machine thread namespace_791d0451::function_3e9d8a8e(perk);
 
     if(isDefined(machine.use_func)) {
@@ -957,7 +957,7 @@ function quantum_bomb_give_nearest_perk_result(position) {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
   perk = vending_machines[nearest].script_noteworthy;
 
   for(i = 0; i < players.size; i++) {
@@ -979,7 +979,7 @@ function perk_pause(perk) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player function_e56d8ef4(perk)) {
       continue;
     }
@@ -1025,7 +1025,7 @@ function perk_unpause(perk) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.var_c4890291) && is_true(player.var_c4890291[perk])) {
       player.var_c4890291[perk] = 0;
       player set_perk_clientfield(perk, 1);
@@ -1130,7 +1130,7 @@ function perk_machine_removal(machine, replacement_model) {
     return;
   }
 
-  trig = getent(machine, "script_noteworthy");
+  trig = getEnt(machine, "script_noteworthy");
   machine_model = undefined;
 
   if(isDefined(trig)) {
@@ -1405,7 +1405,7 @@ function check_player_has_perk(perk) {
   dist = 16384;
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) < dist) {
@@ -1614,7 +1614,7 @@ function players_are_in_perk_area(perk_machine) {
   }
 
   in_area = 0;
-  players = getplayers();
+  players = getPlayers();
   dist_check = 9216;
 
   foreach(player in players) {
@@ -1678,7 +1678,7 @@ function check_for_change() {
       level scoreevents::doscoreeventcallback("scoreEventZM", {
         #attacker: player, #scoreevent: "loose_change_zm"});
       zm_utility::play_sound_at_pos("purchase", player.origin);
-      player playrumbleonentity(#"zm_interact_rumble");
+      player playRumbleOnEntity(#"zm_interact_rumble");
       break;
     }
 
@@ -2017,7 +2017,7 @@ function function_8c7cee86() {
       }
 
       foreach(var_7a9ec77b in var_ec770e5d) {
-        e_clip = getent(var_7a9ec77b.target2, "targetname");
+        e_clip = getEnt(var_7a9ec77b.target2, "targetname");
         var_528a3a32 = struct::get(var_7a9ec77b.target2);
 
         if(isDefined(e_clip)) {
@@ -2309,14 +2309,14 @@ function function_d11d4952() {
   self endon(#"death");
   wait 0.01;
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
   self endon(#"warning_dialog");
   level endon(#"switch_flipped");
   timer = 0;
 
   for(;;) {
     wait 0.5;
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i])) {
@@ -3103,7 +3103,7 @@ function function_c99f4d81(var_c188cf87, var_59ad3e22) {
 }
 
 function function_66c0d837(e_player, var_c188cf87, var_59ad3e22) {
-  if(zm_utility::is_player_valid(e_player) && distancesquared(e_player.origin, var_c188cf87) < 562500 && abs(e_player.origin[2] - var_c188cf87[2]) < 85 && vectordot(vectornormalize(e_player.origin - var_c188cf87), anglesToForward(var_59ad3e22)) > 0) {
+  if(zm_utility::is_player_valid(e_player) && distancesquared(e_player.origin, var_c188cf87) < 562500 && abs(e_player.origin[2] - var_c188cf87[2]) < 85 && vectordot(vectorNormalize(e_player.origin - var_c188cf87), anglesToForward(var_59ad3e22)) > 0) {
     return true;
   }
 

@@ -12,7 +12,7 @@ bot_hack_tank_get_goal_origin(tank) {
   nodes = getnodesinradiussorted(tank.origin, 256, 0, 64, "Path");
 
   foreach(node in nodes) {
-    dir = vectornormalize(node.origin - tank.origin);
+    dir = vectorNormalize(node.origin - tank.origin);
     dir = vectorscale(dir, 32);
     goal = tank.origin + dir;
 

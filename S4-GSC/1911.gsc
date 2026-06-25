@@ -267,7 +267,7 @@ _id_34FB(var_0, var_1, var_2) {
 
   foreach(var_8 in var_6) {
     var_9 = anglesToForward(self.angles);
-    var_10 = vectornormalize(var_9) * -25;
+    var_10 = vectorNormalize(var_9) * -25;
     var_11 = 0;
     var_12 = var_8.origin;
     var_13 = scripts\engine\utility::_id_10E76(self getEye() + var_10, self.angles, var_12 + (0, 0, 30), var_3);
@@ -625,7 +625,7 @@ _id_523D() {
 
   if(!isDefined(self._id_2D93)) {
     self._id_2D93 = spawn("script_origin", self.origin);
-    self._id_2D93 linkto(self);
+    self._id_2D93 linkTo(self);
     self._id_2D93 _id_078E::_id_C2B6(1);
     wait 0.05;
   }

@@ -135,7 +135,7 @@ function_d6076798(var_c41947a6 = 0) {
   self.unitrigger_stub.pap_machine zm_pack_a_punch::set_state_initial();
 
   if(self.prefabname === "poop_deck_pap_location") {
-    var_96bd0a5d = getent("poop_deck_PAP_box", "targetname");
+    var_96bd0a5d = getEnt("poop_deck_PAP_box", "targetname");
 
     if(isDefined(var_96bd0a5d)) {
       var_96bd0a5d delete();
@@ -193,7 +193,7 @@ function_5c299a0f(player) {
   self.pap_machine.var_4a7b80c6 = 1;
 
   if(isDefined(player)) {
-    player playrumbleonentity("zm_castle_interact_rumble");
+    player playRumbleOnEntity("zm_castle_interact_rumble");
   }
 
   for(i = 0; i < level.s_pap_quest.a_s_locations.size; i++) {
@@ -238,7 +238,7 @@ function_668e3f89(e_player) {
     b_can_use = self function_afab6169(e_player);
 
     if(isDefined(self.hint_string)) {
-      self sethintstring(self.hint_string);
+      self setHintString(self.hint_string);
     }
 
     return b_can_use;
@@ -253,23 +253,23 @@ function_668e3f89(e_player) {
   }
 
   if(isDefined(level.var_efaaea43) && level.var_efaaea43) {
-    self sethintstring(#"hash_73bbee9df5d3c2b1");
+    self setHintString(#"hash_73bbee9df5d3c2b1");
   } else {
     switch (level.s_pap_quest.a_s_locations[level.s_pap_quest.var_4ee2e2ab].prefabname) {
       case #"stairs_pap_location":
-        self sethintstring(#"hash_15783325b3eeefd5");
+        self setHintString(#"hash_15783325b3eeefd5");
         break;
       case #"poop_deck_pap_location":
-        self sethintstring(#"hash_250613266b9a4223");
+        self setHintString(#"hash_250613266b9a4223");
         break;
       case #"engine_room_pap_location":
-        self sethintstring(#"hash_4c5f8e23d8258199");
+        self setHintString(#"hash_4c5f8e23d8258199");
         break;
       case #"cargo_pap_location":
-        self sethintstring(#"hash_1deb745365a6cfdd");
+        self setHintString(#"hash_1deb745365a6cfdd");
         break;
       default:
-        self sethintstring(#"");
+        self setHintString(#"");
         break;
     }
   }
@@ -389,7 +389,7 @@ function_ef3c219a() {
   function_e19c174f();
   level.var_a8626e72 = 1;
   playrumbleonposition("zm_castle_pap_tp", level.pap_machine.origin);
-  playsoundatposition(#"hash_5944b4f78bf382e8", level.pap_machine.origin);
+  playSoundAtPosition(#"hash_5944b4f78bf382e8", level.pap_machine.origin);
   var_88aa74e = level.s_pap_quest.var_88aa74e;
 
   if(!isDefined(var_88aa74e)) {
@@ -601,7 +601,7 @@ function_765118cf() {
 
 function_83d342c7() {
   level flag::wait_till("<dev string:x93>");
-  var_4c043770 = getent("<dev string:xa9>", "<dev string:xc1>");
+  var_4c043770 = getEnt("<dev string:xa9>", "<dev string:xc1>");
 
   if(!isDefined(var_4c043770)) {
     return;
@@ -634,12 +634,12 @@ function_a2a8d76e(var_c8407ea2) {
 
 function_4944c76f() {
   level endon(#"pap_moved");
-  var_710f09a8 = self.origin + vectornormalize(anglesToForward(self.angles)) * 160 + (0, 0, 100);
-  var_737189c4 = self.origin + vectornormalize(anglesToForward(self.angles)) * 160 + (0, 0, 80);
-  var_c1f4ccaf = self.origin + vectornormalize(anglesToForward(self.angles)) * 160 + (0, 0, 60);
-  var_743fd60c = self.origin + vectornormalize(anglesToForward(self.angles)) * 160 + (0, 0, 40);
-  var_56692417 = self.origin + vectornormalize(anglesToForward(self.angles)) * 160 + (0, 0, 20);
-  var_1e3527a8 = self.origin + vectornormalize(anglesToForward(self.angles)) * 160 + (0, 0, 0);
+  var_710f09a8 = self.origin + vectorNormalize(anglesToForward(self.angles)) * 160 + (0, 0, 100);
+  var_737189c4 = self.origin + vectorNormalize(anglesToForward(self.angles)) * 160 + (0, 0, 80);
+  var_c1f4ccaf = self.origin + vectorNormalize(anglesToForward(self.angles)) * 160 + (0, 0, 60);
+  var_743fd60c = self.origin + vectorNormalize(anglesToForward(self.angles)) * 160 + (0, 0, 40);
+  var_56692417 = self.origin + vectorNormalize(anglesToForward(self.angles)) * 160 + (0, 0, 20);
+  var_1e3527a8 = self.origin + vectorNormalize(anglesToForward(self.angles)) * 160 + (0, 0, 0);
 
   while(true) {
     print3d(var_710f09a8, "<dev string:x10d>" + self getzbarrierpiecestate(0));

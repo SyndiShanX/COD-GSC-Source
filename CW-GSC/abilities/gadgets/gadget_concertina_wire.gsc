@@ -103,7 +103,7 @@ function onplayerkilled(s_params) {
   }
 
   if(var_4fd6205f) {
-    relativepos = vectornormalize(self.origin - s_params.eattacker.origin);
+    relativepos = vectorNormalize(self.origin - s_params.eattacker.origin);
     dir = anglesToForward(s_params.eattacker getplayerangles());
     dotproduct = vectordot(dir, relativepos);
 
@@ -344,16 +344,16 @@ function function_8d89605(var_637dcf3d, traceresults) {
   var_16482870 = 0;
   var_b80b6889 = distance2d(traceresults.origin, traceresults.var_c0e006dc);
   var_65ea35de = distance2d(traceresults.origin, traceresults.var_44cf251d);
-  dirright = vectornormalize(traceresults.var_c0e006dc - traceresults.origin);
-  dirleft = vectornormalize(traceresults.var_44cf251d - traceresults.origin);
+  dirright = vectorNormalize(traceresults.var_c0e006dc - traceresults.origin);
+  dirleft = vectorNormalize(traceresults.var_44cf251d - traceresults.origin);
 
   if(var_b80b6889 < var_65ea35de) {
     var_a66e2af8 = var_b80b6889;
-    movementdirection = vectornormalize(traceresults.var_44cf251d - traceresults.origin);
+    movementdirection = vectorNormalize(traceresults.var_44cf251d - traceresults.origin);
     movedirection = 1;
   } else {
     var_a66e2af8 = var_65ea35de;
-    movementdirection = vectornormalize(traceresults.var_c0e006dc - traceresults.origin);
+    movementdirection = vectorNormalize(traceresults.var_c0e006dc - traceresults.origin);
     movedirection = 0;
   }
 

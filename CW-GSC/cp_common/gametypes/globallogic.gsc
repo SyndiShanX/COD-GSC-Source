@@ -1010,7 +1010,7 @@ function endgame() {
     player closeingamemenu();
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] setclientuivisibilityflag("weapon_hud_visible", 0);
@@ -1020,7 +1020,7 @@ function endgame() {
 
   print("<dev string:x6d>");
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] cameraactivate(0);
@@ -1036,7 +1036,7 @@ function function_7b994f00() {
 }
 
 function private function_9ceb0931(var_a9241d2e = 0) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   setsaveddvar(#"hash_41519202e554dd2c", 1);
   uploadstats(player);
   waitframe(1);
@@ -1469,7 +1469,7 @@ function updateteamstatus() {
 }
 
 function function_2905c18e() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     team = player.team;
     var_c5c29dab = player.curclass;
     level.playercount[team]++;

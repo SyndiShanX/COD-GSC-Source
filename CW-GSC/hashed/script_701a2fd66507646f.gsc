@@ -74,7 +74,7 @@ function private function_db698ba5(dvar) {
     setDvar(#"hash_743976f5cb9fa81c", 0);
 
     if(namespace_61e6d095::exists(#"anagrams")) {
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(isDefined(player)) {
         player endon(#"death");
@@ -85,7 +85,7 @@ function private function_db698ba5(dvar) {
     }
 
     if(namespace_61e6d095::exists(#"coded_message")) {
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(isDefined(player)) {
         player endon(#"death");
@@ -121,7 +121,7 @@ function private function_9eb15176() {
 }
 
 function private function_d444c39c(reset) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   language = getdvarint(#"loc_language");
 
@@ -159,7 +159,7 @@ function private function_5ecf5ec2(oldval, newval) {
 
     for(var_2d96435a = randomint(10000); function_7655bab6(code, var_2d96435a); var_2d96435a = randomint(10000)) {}
 
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     if(!isPlayer(player)) {
       return;
@@ -210,7 +210,7 @@ function private function_b9938441(str_notify) {
 }
 
 function newspaper() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   var_43381ccf = savegame::function_2ee66e93(#"hash_1cec68d3f5bf55f8");
   seed = savegame::function_2ee66e93(#"hash_100ec76505ac8673");
@@ -250,7 +250,7 @@ function newspaper() {
 }
 
 function radio_broadcast(params, num_entries = 10) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   player thread function_8b02e139("vox_cp_chao_01300_sims_youdidgoodfindi_15", #"hash_1a4a28d720563dea");
   var_9487875 = getscriptbundle("operation_chaos_anagrams");
@@ -404,7 +404,7 @@ function private function_a3fafde(uid, var_28ddca2c) {
 }
 
 function coded_message() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   code = savegame::function_2ee66e93(#"hash_35b29e7e753dc631");
   seed = savegame::function_2ee66e93(#"hash_100ec76505ac8673");
@@ -429,7 +429,7 @@ function coded_message() {
 }
 
 function function_af235cd2() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   var_239b86f4 = player_decision::function_ee124ba3();
 
@@ -660,7 +660,7 @@ function function_af235cd2() {
   player clientfield::set_to_player("pstfx_t9_cp_hub_eboard_vignette", var_1464e28f);
   player clientfield::set_to_player("pstfx_t9_cp_hub_eboard_overview", overview);
   player unlink();
-  player playerlinkto(link_ent, "tag_origin");
+  player playerlinkTo(link_ent, "tag_origin");
   waitframe(1);
   player camerasetposition(playerpos, playerangles);
 

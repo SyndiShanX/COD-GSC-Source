@@ -29,7 +29,7 @@ func_00D5() {
   common_scripts\utility::func_0FB2(getEntArray("toggle", "targetname"), ::func_A1F6);
   common_scripts\utility::func_0FB2(getEntArray("sliding_door", "targetname"), ::func_8CA1);
   level thread func_6B6C();
-  var_05 = getent("civilian_jet_origin", "targetname");
+  var_05 = getEnt("civilian_jet_origin", "targetname");
   if(isDefined(var_05)) {
     var_05 thread func_2301();
   }
@@ -73,7 +73,7 @@ func_2301() {
 
 func_5963() {
   self.var_5964 = getEntArray(self.var_01A2, "targetname");
-  self.var_5962 = getent("civilian_jet_flyto", "targetname");
+  self.var_5962 = getEnt("civilian_jet_flyto", "targetname");
   self.var_3776 = getEntArray("engine_fx", "targetname");
   self.var_3D3F = getEntArray("flash_fx", "targetname");
   self.var_595B = loadfx("vfx/test/test_fx");
@@ -81,7 +81,7 @@ func_5963() {
   self.var_595D = loadfx("vfx/lights/aircraft_light_wingtip_green");
   self.var_595C = loadfx("vfx/lights/aircraft_light_red_blink");
   level.var_2304 = undefined;
-  var_00 = vectornormalize(self.var_0116 - self.var_5962.var_0116) * 20000;
+  var_00 = vectorNormalize(self.var_0116 - self.var_5962.var_0116) * 20000;
   self.var_5962.var_0116 = self.var_5962.var_0116 - var_00;
   self.var_0116 = self.var_0116 + var_00;
   foreach(var_02 in self.var_5964) {
@@ -199,15 +199,15 @@ func_5961() {
   }
 
   foreach(var_01 in self.var_5964) {
-    var_01 moveto(var_01.var_0116 + self.var_5960, self.var_595F);
+    var_01 moveTo(var_01.var_0116 + self.var_5960, self.var_595F);
   }
 
   foreach(var_07 in var_03) {
-    var_07 moveto(var_07.var_0116 + self.var_5960, self.var_595F);
+    var_07 moveTo(var_07.var_0116 + self.var_5960, self.var_595F);
   }
 
   foreach(var_0B in var_04) {
-    var_0B moveto(var_0B.var_0116 + self.var_5960, self.var_595F);
+    var_0B moveTo(var_0B.var_0116 + self.var_5960, self.var_595F);
   }
 
   wait(self.var_595F + 1);
@@ -270,11 +270,11 @@ func_74D6(param_00, param_01) {
   if(isDefined(param_01)) {
     var_02.var_0116 = self.var_0116 + param_01;
     var_02.var_001D = self.var_001D;
-    var_02 linkto(self);
+    var_02 linkTo(self);
   } else {
     var_02.var_0116 = self.var_0116;
     var_02.var_001D = self.var_001D;
-    var_02 linkto(self);
+    var_02 linkTo(self);
   }
 
   var_02 method_861D(param_00);
@@ -285,7 +285,7 @@ func_74D6(param_00, param_01) {
 
 func_982C(param_00, param_01) {
   var_02 = anglesToForward(common_scripts\utility::func_3D5C(param_00.var_001D));
-  var_03 = vectornormalize(common_scripts\utility::func_3D5D(param_01) - param_00.var_0116);
+  var_03 = vectorNormalize(common_scripts\utility::func_3D5D(param_01) - param_00.var_0116);
   var_04 = vectordot(var_02, var_03);
   if(var_04 > 0) {
     return 1;
@@ -316,16 +316,16 @@ func_982B(param_00, param_01) {
 func_A403() {
   level endon("game_ended");
   self endon("death");
-  self setcursorhint("HINT_ACTIVATE");
-  self.var_A5B1 = getent(self.var_01A2, "targetname");
-  var_00 = getent(self.var_A5B1.var_01A2, "targetname");
-  var_01 = getent(var_00.var_01A2, "targetname");
-  var_02 = getent(var_01.var_01A2, "targetname");
+  self setCursorHint("HINT_ACTIVATE");
+  self.var_A5B1 = getEnt(self.var_01A2, "targetname");
+  var_00 = getEnt(self.var_A5B1.var_01A2, "targetname");
+  var_01 = getEnt(var_00.var_01A2, "targetname");
+  var_02 = getEnt(var_01.var_01A2, "targetname");
   self.var_A5AC = var_02.var_0116;
-  var_03 = getent(var_02.var_01A2, "targetname");
+  var_03 = getEnt(var_02.var_01A2, "targetname");
   self.var_A5AD = var_03.var_0116;
   if(isDefined(var_03.var_01A2)) {
-    self.var_A5A7 = getent(var_03.var_01A2, "targetname").var_0116;
+    self.var_A5A7 = getEnt(var_03.var_01A2, "targetname").var_0116;
   }
 
   self.var_A5B1 setCanDamage(1);
@@ -418,7 +418,7 @@ func_8FF4() {
 }
 
 func_8ED9(param_00) {
-  param_00 moveto(self.var_A5C4, 0.2);
+  param_00 moveTo(self.var_A5C4, 0.2);
   param_00 method_8617("vending_machine_soda_drop");
   wait(0.2);
   self.var_8EDC = param_00;
@@ -435,7 +435,7 @@ func_8EDA() {
   var_01 = var_00 * -999;
   var_02 = int(-25536);
   var_03 = (int(var_02 / 2), int(var_02 / 2), 0) - (randomint(var_02), randomint(var_02), 0);
-  var_04 = vectornormalize(self.var_A5AD - self.var_A5AC + var_03);
+  var_04 = vectorNormalize(self.var_A5AD - self.var_A5AC + var_03);
   var_05 = var_04 * randomfloatrange(var_01, var_00);
   self.var_8EDC method_82C5(self.var_A5AC, var_05);
   self.var_8EDC.var_35AB = 1;
@@ -458,12 +458,12 @@ func_3E88() {
 
 func_6121() {
   level endon("game_ended");
-  var_00 = getent(self.var_01A2, "targetname");
+  var_00 = getEnt(self.var_01A2, "targetname");
   var_00 method_81AE();
-  var_01 = getent(var_00.var_01A2, "targetname");
-  var_02 = getent(var_01.var_01A2, "targetname");
-  var_03 = getent(var_02.var_01A2, "targetname");
-  var_04 = getent(var_03.var_01A2, "targetname");
+  var_01 = getEnt(var_00.var_01A2, "targetname");
+  var_02 = getEnt(var_01.var_01A2, "targetname");
+  var_03 = getEnt(var_02.var_01A2, "targetname");
+  var_04 = getEnt(var_03.var_01A2, "targetname");
   var_05 = [];
   var_06 = min(var_01.var_0116[0], var_02.var_0116[0]);
   var_05[0] = var_06;
@@ -672,7 +672,7 @@ func_6462() {
   common_scripts\utility::func_6753(["com_two_light_fixture_off", "com_two_light_fixture_on"], ::precachemodel);
   foreach(var_02 in var_00) {
     var_02.var_5D71 = [];
-    var_03 = getent(var_02.var_01A2, "targetname");
+    var_03 = getEnt(var_02.var_01A2, "targetname");
     if(!isDefined(var_03.var_01A2)) {
       continue;
     }
@@ -737,7 +737,7 @@ func_6C69() {
   level endon("game_ended");
   self.var_64DD = 1;
   self.var_5D7C = 0;
-  var_00 = getent(self.var_01A2, "targetname");
+  var_00 = getEnt(self.var_01A2, "targetname");
   var_01 = getEntArray(var_00.var_01A2, "targetname");
   common_scripts\utility::func_6753(["com_two_light_fixture_off", "com_two_light_fixture_on"], ::precachemodel);
   for(;;) {
@@ -786,7 +786,7 @@ func_6C6A(param_00, param_01, param_02) {
 func_3198() {
   level endon("game_ended");
   self.var_64DD = 1;
-  var_00 = getent(self.var_01A2, "targetname");
+  var_00 = getEnt(self.var_01A2, "targetname");
   for(;;) {
     self waittill("trigger_enter", var_01);
     while(func_0F13(self)) {
@@ -809,9 +809,9 @@ func_3198() {
 }
 
 func_9D70() {
-  var_00 = getent(self.var_01A2, "targetname");
+  var_00 = getEnt(self.var_01A2, "targetname");
   self.var_3288 = var_00;
-  self.var_3282 = func_4710(vectornormalize(self getorigin() - var_00 getorigin()));
+  self.var_3282 = func_4710(vectorNormalize(self getorigin() - var_00 getorigin()));
   var_00.var_1631 = var_00.var_001D[1];
   var_01 = 1;
   for(;;) {
@@ -832,9 +832,9 @@ func_9D70() {
 
 func_328D(param_00, param_01) {
   if(param_01) {
-    self rotateto((0, self.var_1631 + 90, 1), param_00, 0.1, 0.75);
+    self rotateTo((0, self.var_1631 + 90, 1), param_00, 0.1, 0.75);
   } else {
-    self rotateto((0, self.var_1631 - 90, 1), param_00, 0.1, 0.75);
+    self rotateTo((0, self.var_1631 - 90, 1), param_00, 0.1, 0.75);
   }
 
   self method_8617("door_generic_house_open");
@@ -842,13 +842,13 @@ func_328D(param_00, param_01) {
 }
 
 func_3285(param_00) {
-  self rotateto((0, self.var_1631, 1), param_00);
+  self rotateTo((0, self.var_1631, 1), param_00);
   self method_8617("door_generic_house_close");
   wait(param_00 + 0.05);
 }
 
 func_44A7(param_00) {
-  return vectordot(self.var_3282, vectornormalize(param_00.var_0116 - self.var_3288 getorigin())) > 0;
+  return vectordot(self.var_3282, vectorNormalize(param_00.var_0116 - self.var_3288 getorigin())) > 0;
 }
 
 func_4710(param_00) {
@@ -891,9 +891,9 @@ func_1762() {}
 func_6F8E(param_00) {
   self.var_2660 = func_4290(param_00);
   if(isDefined(self.var_2660)) {
-    var_01 = getent(self.var_2660.var_01A2, "targetname");
+    var_01 = getEnt(self.var_2660.var_01A2, "targetname");
     if(isDefined(var_01)) {
-      var_02 = getent(var_01.var_01A2, "targetname");
+      var_02 = getEnt(var_01.var_01A2, "targetname");
       if(isDefined(var_02)) {
         var_02.var_00D8 = var_02 method_81DE();
         var_02 method_81DF(0);
@@ -921,7 +921,7 @@ func_4290(param_00) {
       }
     }
   } else {
-    var_02 = getent(var_02.var_01A2, "targetname");
+    var_02 = getEnt(var_02.var_01A2, "targetname");
     if(isDefined(var_02)) {
       var_02 setCanDamage(1);
     }
@@ -983,7 +983,7 @@ func_6F90() {
 }
 
 func_7D2E(param_00) {
-  param_00.var_2664 moveto(param_00.var_9269, 0.2);
+  param_00.var_2664 moveTo(param_00.var_9269, 0.2);
   param_00.var_5CCE method_81DF(0);
 }
 
@@ -994,9 +994,9 @@ func_6F8D() {
   self.var_2660 endon("death");
   var_00 = self.var_2664;
   wait(2);
-  var_00 moveto(self.var_369A, 1.6);
+  var_00 moveTo(self.var_369A, 1.6);
   wait(1.8);
-  var_00 moveto(self.var_9269, 1.6);
+  var_00 moveTo(self.var_9269, 1.6);
   wait(1.6);
   var_01 = self.var_5CCE;
   var_02 = 0.2;
@@ -1081,7 +1081,7 @@ func_3A1E(param_00) {
 
   var_04 = self.var_001D;
   var_05 = anglestoright(self.var_001D) * 100;
-  var_05 = vectornormalize(var_05);
+  var_05 = vectorNormalize(var_05);
   for(;;) {
     var_06 = abs(vectordot(var_05, (1, 0, 0)));
     var_07 = abs(vectordot(var_05, (0, 1, 0)));
@@ -1229,14 +1229,14 @@ func_9FB9() {
 
   if(isDefined(self.var_01A2)) {
     if(isDefined(level.var_2F49)) {
-      var_00 = getent(self.var_01A2, "targetname");
+      var_00 = getEnt(self.var_01A2, "targetname");
       if(isDefined(var_00)) {
         var_00 delete();
       }
     } else {
-      self.var_A241 = getent(self.var_01A2, "targetname");
-      self.var_A241 usetriggerrequirelookat();
-      self.var_A241 setcursorhint("HINT_NOICON");
+      self.var_A241 = getEnt(self.var_01A2, "targetname");
+      self.var_A241 useTriggerRequireLookAt();
+      self.var_A241 setCursorHint("HINT_NOICON");
     }
   }
 
@@ -1345,7 +1345,7 @@ func_8CA1() {
 func_3265(param_00) {
   self.var_926A = self.var_0116;
   self.var_8CA2 = "closed";
-  var_01 = getent(self.var_01A2, "targetname");
+  var_01 = getEnt(self.var_01A2, "targetname");
   self.var_6BF3 = var_01.var_0116;
   self.var_6BF8 = distance(self.var_6BF3, self.var_0116) / param_00;
 }
@@ -1367,7 +1367,7 @@ func_6BE8() {
     var_00 = 0.05;
   }
 
-  self moveto(self.var_6BF3, var_00);
+  self moveTo(self.var_6BF3, var_00);
   self method_8617("glass_door_open");
   wait(var_00);
   self.var_8CA2 = "open";
@@ -1379,7 +1379,7 @@ func_2430(param_00, param_01) {
       continue;
     }
 
-    var_03 moveto(var_03.var_926A, param_01);
+    var_03 moveTo(var_03.var_926A, param_01);
     self method_8617("glass_door_close");
     var_03.var_8CA2 = "closed";
   }

@@ -1247,7 +1247,7 @@ process_fx_rotater() {
     for(i = 0; i < level._createfx.selected_fx_ents.size; i++) {
       rotater[i] = spawn("script_origin", level._createfx.selected_fx_ents[i].v["origin"]);
       rotater[i].angles = level._createfx.selected_fx_ents[i].v["angles"];
-      rotater[i] linkto(org);
+      rotater[i] linkTo(org);
     }
 
     rotate_over_time(org, rotater);

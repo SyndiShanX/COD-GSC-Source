@@ -74,13 +74,13 @@ corpsefind_wait() {
       corpse_in_front = self entity_is_in_front_of_me(corpse);
       if(((dist < 400 && dist > 150) || corpse.fresh == 1) &&
         !isDefined(level.corpsecount[i].marked) && (self cansee(corpse.seeme) || corpse_in_front == true)) {
-        self stopanimscripted();
+        self stopanimScripted();
         self notify("i_found_corpse");
         level.corpsecount[i].marked = true;
         self.animname = "generic";
         self set_run_anim("_stealth_patrol_jog");
         vec = self.origin - corpse.origin;
-        nvec = vectornormalize(vec);
+        nvec = vectorNormalize(vec);
         neg = dist - 146;
         factor = neg / length(nvec);
         animspot = spawn("script_origin", self.origin - (nvec * factor));
@@ -207,7 +207,7 @@ found_corpse_behavior() {
   } else {
     self setgoalentity(get_players()[0]);
     self.pacifist = false;
-    trig = getent("e1_where_u_goin", "targetname");
+    trig = getEnt("e1_where_u_goin", "targetname");
     trig trigger_on();
     trig waittill("trigger");
     shotspot = self gettagorigin("tag_flash");

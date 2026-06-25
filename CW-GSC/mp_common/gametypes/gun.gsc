@@ -528,7 +528,7 @@ function private function_9209a6f8(params) {
 }
 
 function private function_7b2c84d4() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(player)) {
     return;

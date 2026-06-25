@@ -78,8 +78,8 @@ function function_cc21ae2e() {
   self.var_63c8edf4 = util::spawn_model("tag_origin", self.origin, self.angles);
   self.var_6f3293fb = util::spawn_model(#"p9_zm_gold_jumppads_machine_main_lights", self.origin, self.angles);
   self.var_6f3293fb clientfield::set("" + #"hash_6219dce209d171ed", 1);
-  self.var_63c8edf4 linkto(self);
-  self.var_6f3293fb linkto(self);
+  self.var_63c8edf4 linkTo(self);
+  self.var_6f3293fb linkTo(self);
   var_b0c3aec3 = getEntArray("flinger_landing_pad", "targetname");
 
   foreach(flinger_landing_pad in var_b0c3aec3) {
@@ -93,7 +93,7 @@ function function_cc21ae2e() {
     }
   }
 
-  self.vol_fling = getent("flinger_vol" + self.script_int, "targetname");
+  self.vol_fling = getEnt("flinger_vol" + self.script_int, "targetname");
   var_948355ad = self zm_unitrigger::create(&function_679a29cd, 100, &function_23ef27c);
   var_948355ad.origin = self.origin + (0, 0, 30);
   var_948355ad.cost = 500;
@@ -116,7 +116,7 @@ function function_b2a2cce8() {
 
 function function_679a29cd(player) {
   if(self.stub.var_90ddceac flag::get("jump_pad_quest_start")) {
-    self sethintstring("");
+    self setHintString("");
     return 0;
   }
 
@@ -214,7 +214,7 @@ function function_23ef27c() {
       player zm_score::minus_to_player_score(level.var_d99df9f9);
     }
 
-    playsoundatposition(#"hash_1d376319d5304199", self.origin);
+    playSoundAtPosition(#"hash_1d376319d5304199", self.origin);
     player thread function_d9e25369(self.stub.var_90ddceac);
     level notify(#"hash_cb2d8c59ec2fc84", {
       #var_b8e13043: self.stub.var_90ddceac.script_int
@@ -322,7 +322,7 @@ function function_c14f39dc(nd_start, var_b338b8ed) {
 
     self clientfield::set_to_player("" + #"flinger_pad_fling", 1);
     self clientfield::set("" + #"hash_31c153af499657fd", 1);
-    playsoundatposition(#"hash_7ff8d8dbf89e6f0d", self.origin);
+    playSoundAtPosition(#"hash_7ff8d8dbf89e6f0d", self.origin);
     self.var_dc3c3330 = vehicle::spawn(undefined, "player_vehicle", "fake_vehicle", nd_start.origin, nd_start.angles);
     self function_648c1f6(self.var_dc3c3330, undefined, 0, 180, 180, 180, 180, 1, 1);
     self.var_dc3c3330 setignorepauseworld(1);
@@ -344,7 +344,7 @@ function function_c14f39dc(nd_start, var_b338b8ed) {
     self notify(#"flinger_landed");
     self clientfield::set_to_player("" + #"flinger_pad_fling", 0);
     self clientfield::set("" + #"hash_31c153af499657fd", 0);
-    playsoundatposition(#"hash_6062a28f5bf1780", self.origin);
+    playSoundAtPosition(#"hash_6062a28f5bf1780", self.origin);
     self.var_dc3c3330 delete();
     self zm_utility::clear_streamer_hint();
   }
@@ -365,7 +365,7 @@ function function_695ec0(var_b338b8ed) {
 
     if(isPlayer(self)) {
       self unlink();
-      self setorigin(var_15316677);
+      self setOrigin(var_15316677);
     }
 
     if(is_true(self.var_62b63681)) {
@@ -406,8 +406,8 @@ function function_b4913776() {
   self.mdl.targetname = "landing_pad";
   self.var_43032f5e = util::spawn_model("tag_origin", self.origin, self.angles);
   self.var_63c8edf4 = util::spawn_model("tag_origin", self.origin, self.angles);
-  self.var_43032f5e linkto(self);
-  self.var_63c8edf4 linkto(self);
+  self.var_43032f5e linkTo(self);
+  self.var_63c8edf4 linkTo(self);
   level flag::wait_till("power_on" + self.var_b555f02e);
   level flag::set("landing_pad_active" + self.script_int);
   self function_726d8f3a();

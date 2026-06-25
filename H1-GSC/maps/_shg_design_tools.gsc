@@ -151,10 +151,10 @@ arc_point(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
 anim_stop(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
-    var_0 maps\_utility::anim_stopanimscripted();
+    var_0 maps\_utility::anim_stopanimScripted();
   }
 
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 
   if(isDefined(var_0)) {
     var_0 notify("stop_first_frame");
@@ -587,10 +587,10 @@ stopfxontagdelay(var_0, var_1, var_2, var_3) {
 }
 
 waittill_trigger_with_name(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "script_noteworthy");
+    var_1 = getEnt(var_0, "script_noteworthy");
   }
 
   if(!isDefined(var_1)) {
@@ -631,8 +631,8 @@ impulse_wave(var_0, var_1, var_2, var_3) {
     var_11 = var_10 / var_3 * 0.05;
     wait(var_11);
     var_8 = var_6.origin;
-    var_12 = vectornormalize(var_6 gettagorigin("tag_eye") - var_2);
-    var_12 = vectornormalize(var_12 + (0, 0, 0.2));
+    var_12 = vectorNormalize(var_6 gettagorigin("tag_eye") - var_2);
+    var_12 = vectorNormalize(var_12 + (0, 0, 0.2));
     var_6 startragdollfromimpact("torso_lower", var_12 * 7000);
     var_6 thread common_scripts\utility::delaycall(2, ::kill);
   }
@@ -751,13 +751,13 @@ getclosestauto(var_0, var_1, var_2) {
 }
 
 getthing(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;
   }
 
-  var_2 = common_scripts\utility::getstruct(var_0, var_1);
+  var_2 = common_scripts\utility::getStruct(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;

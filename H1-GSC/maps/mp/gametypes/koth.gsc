@@ -646,7 +646,7 @@ makeradiovisible() {
 
   for(var_0 = 0; var_0 < self.visuals.size; var_0++) {
     if(self.visuals[var_0].classname == "script_brushmodel") {
-      self.visuals[var_0] disconnectpaths();
+      self.visuals[var_0] disconnectPaths();
     }
   }
 }

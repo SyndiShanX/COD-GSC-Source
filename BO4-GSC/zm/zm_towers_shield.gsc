@@ -185,7 +185,7 @@ function_22d79d55(player) {
     player zm_weapons::weapon_give(w_shield_upgraded);
     player.weaponriotshield = w_shield_upgraded;
     player.var_5ba94c1e = 1;
-    mdl_shield = getent(self.target, "targetname");
+    mdl_shield = getEnt(self.target, "targetname");
     mdl_shield setinvisibletoplayer(player);
 
     if(!isDefined(self.var_824b5a74)) {
@@ -611,7 +611,7 @@ function_aa1e87dd(b_skipped = 0, var_19e802fa = 0) {
   level endon(#"end_game");
   self endon(#"disconnect");
   self flag::set(#"hash_320a1da5bf925c8b");
-  playsoundatposition(#"hash_3a5be037b504d0f0", (0, 0, 0));
+  playSoundAtPosition(#"hash_3a5be037b504d0f0", (0, 0, 0));
   self thread function_3624f8c8(#"lower");
 }
 
@@ -636,7 +636,7 @@ function_a9311397() {
 
       e_attacker playsoundtoplayer(#"hash_64323339bdb3dfdf", e_attacker);
       self playSound("zmb_bull_hit_ping");
-      mdl_bull = getent(self.target, "targetname");
+      mdl_bull = getEnt(self.target, "targetname");
       mdl_bull clientfield::set("" + #"hash_333e3741e6552db3", 1);
 
       if(e_attacker.var_12c9426e.size >= 3) {

@@ -41,7 +41,7 @@ minigun_nuke_rob(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fiel
 }
 
 minigun_nuke_rumble(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  self playrumbleonentity(localclientnum, "damage_heavy");
+  self playRumbleOnEntity(localclientnum, "damage_heavy");
 
   if(function_65b9eb0f(localclientnum)) {
     return;

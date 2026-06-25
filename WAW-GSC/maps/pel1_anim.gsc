@@ -433,7 +433,7 @@ lvt_tipover() {
     }
   }
 
-  hands AnimScripted("mantle_anim", level.players_lvt.origin, level.players_lvt.angles + (0, 0, 0), mantle_anim);
+  hands animScripted("mantle_anim", level.players_lvt.origin, level.players_lvt.angles + (0, 0, 0), mantle_anim);
 
   hands thread hands_notetrack_watcher();
 
@@ -448,13 +448,13 @@ lvt_tipover() {
     players[i] unlink();
 
     if(i == 1) {
-      point = getstruct("post_lvt_warp1", "script_noteworthy");
+      point = getStruct("post_lvt_warp1", "script_noteworthy");
       players[i] thread warp_a_player(point);
     } else if(i == 2) {
-      point = getstruct("post_lvt_warp2", "script_noteworthy");
+      point = getStruct("post_lvt_warp2", "script_noteworthy");
       players[i] thread warp_a_player(point);
     } else if(i == 3) {
-      point = getstruct("post_lvt_warp3", "script_noteworthy");
+      point = getStruct("post_lvt_warp3", "script_noteworthy");
       players[i] thread warp_a_player(point);
     }
   }
@@ -463,7 +463,7 @@ lvt_tipover() {
 
   thread maps\pel1::set_objective(0.1);
 
-  trig = getent("use_rocket_hint", "targetname");
+  trig = getEnt("use_rocket_hint", "targetname");
   trig notify("trigger");
 
   SetSavedDvar("compass", "1");
@@ -550,7 +550,7 @@ hands_notetrack_watcher() {
 
   model = spawn("script_model", self.origin + (-20, 0, 20));
   model setModel("tag_origin");
-  model linkto(self);
+  model linkTo(self);
   model thread delete_in_a_bit(2.5);
   playFXOnTag(level._effect["splash_bubbles"], model, "tag_origin");
 

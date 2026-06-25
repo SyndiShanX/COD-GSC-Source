@@ -112,10 +112,10 @@ func_103BB() {
       var_0 = getlaserstartpoint();
       self.var_103A9.origin = var_0;
       var_1 = self.var_45E2.var_1A2B;
-      var_2 = vectornormalize(var_1 - var_0);
+      var_2 = vectorNormalize(var_1 - var_0);
       var_3 = getlaserdirection();
-      var_2 = vectornormalize((var_2[0], var_2[1], 0));
-      var_3 = vectornormalize((var_3[0], var_3[1], 0));
+      var_2 = vectorNormalize((var_2[0], var_2[1], 0));
+      var_3 = vectorNormalize((var_3[0], var_3[1], 0));
       var_4 = vectordot(var_2, var_3);
       if(var_4 < 0.996) {
         self.var_103A9.angles = getlaserangles();
@@ -200,7 +200,7 @@ func_E24D(var_0, var_1, var_2, var_3) {
 
       var_9 = var_8 - self.origin;
       var_9 = (var_9[0], var_9[1], 0);
-      var_10 = vectornormalize(var_9);
+      var_10 = vectorNormalize(var_9);
       if(scripts\engine\utility::istrue(var_3)) {
         var_6 = var_8;
         var_6 = var_6 + (0, 0, randomfloatrange(12, 36));
@@ -228,7 +228,7 @@ func_E24D(var_0, var_1, var_2, var_3) {
       }
     }
 
-    self.var_45E2.var_45DE = vectornormalize(var_6 - var_0.pos);
+    self.var_45E2.var_45DE = vectorNormalize(var_6 - var_0.pos);
     self.var_45E2.var_45DC = distance(var_6, var_0.pos);
   }
 }
@@ -245,7 +245,7 @@ func_36DA(var_0) {
     return var_0.pos - (0, 0, 1.3);
   }
 
-  var_2 = vectornormalize(var_1.pos - self.origin);
+  var_2 = vectorNormalize(var_1.pos - self.origin);
   var_3 = vectortoangles(var_2);
   if(self.var_45E2.var_45D8 < 0) {
     self func_857A("interpolate");
@@ -322,7 +322,7 @@ func_45E5(var_0) {
   var_3 = 1;
   var_4 = getlaserstartpoint();
   var_5 = func_36DA(var_0);
-  var_6 = vectornormalize(var_5 - var_4);
+  var_6 = vectorNormalize(var_5 - var_4);
   var_7 = self func_853C();
   if(self.var_45E2.var_45D8 < 0) {
     if(!func_9D30()) {
@@ -335,8 +335,8 @@ func_45E5(var_0) {
       return 0;
     }
 
-    var_6 = vectornormalize((var_6[0], var_6[1], 0));
-    var_7 = vectornormalize((var_7[0], var_7[1], 0));
+    var_6 = vectorNormalize((var_6[0], var_6[1], 0));
+    var_7 = vectorNormalize((var_7[0], var_7[1], 0));
     var_9 = vectordot(var_6, var_7);
     if(var_9 < 0.996) {
       return 0;
@@ -350,8 +350,8 @@ func_45E5(var_0) {
       var_4 = 0;
     }
 
-    var_7 = vectornormalize((var_7[0], var_7[1], 0));
-    var_8 = vectornormalize((var_8[0], var_8[1], 0));
+    var_7 = vectorNormalize((var_7[0], var_7[1], 0));
+    var_8 = vectorNormalize((var_8[0], var_8[1], 0));
     var_9 = vectordot(var_7, var_8);
     if(var_9 < 0.996) {
       var_3 = 0;
@@ -601,10 +601,10 @@ func_11AFB(var_0) {
   if(isDefined(self.var_4792)) {
     var_1 = self.var_4792 getshootatpos();
     if(isDefined(self.var_4796)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643) {
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643) {
       var_1 = undefined;
     }
   }
@@ -612,10 +612,10 @@ func_11AFB(var_0) {
   if(!isDefined(var_1) && isDefined(self.var_478F)) {
     var_1 = self.var_478F;
     if(isDefined(self.var_4795)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643) {
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643) {
       var_1 = undefined;
     }
   }
@@ -686,7 +686,7 @@ func_11AFF(var_0, var_1) {
   var_13 = [80, 91.787, 45, 91.787, 80, 91.787, 45, 91.787, 80];
   var_14 = (var_1, var_0, 0);
   var_15 = length2d(var_14);
-  var_10 = vectornormalize(var_14);
+  var_10 = vectorNormalize(var_14);
   var_11 = vectortoyaw(var_10);
   var_11 = angleclamp180(var_11);
   for(var_12 = 0; var_11 > var_11[var_12]; var_12++) {}

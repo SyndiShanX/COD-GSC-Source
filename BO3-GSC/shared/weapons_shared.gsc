@@ -127,7 +127,7 @@ function weapondamagetrace(from, to, startradius, ignore) {
   if(lengthsquared(diff) < (startradius * startradius)) {
     midpos = to;
   }
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
   if(getdvarint("scr_damage_debug") != 0) {

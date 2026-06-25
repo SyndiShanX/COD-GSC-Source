@@ -96,7 +96,7 @@ function_912b7df6() {
 }
 
 function_99bc766a() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] setclientuivisibilityflag("weapon_hud_visible", 0);
@@ -120,7 +120,7 @@ function_69b9de8b(drop_point) {
 }
 
 function_b5000f75(a_items) {
-  var_87d63a46 = getent("tutorial_forced_shield_part", "targetname");
+  var_87d63a46 = getEnt("tutorial_forced_shield_part", "targetname");
   assert(isDefined(var_87d63a46));
 
   for(i = 0; i < a_items.size; i++) {
@@ -304,7 +304,7 @@ open_door(str_door_name) {
 
 teleport_to(targetname) {
   node = getnode(targetname, "targetname");
-  self setorigin(node.origin);
+  self setOrigin(node.origin);
   self setplayerangles(node.angles);
 }
 
@@ -379,7 +379,7 @@ function_cf5f5964(spawnerstr, ignore = 0, bot = undefined, b_play_fx = 0) {
   if(b_play_fx) {
     v_forward = anglesToForward(s_spawn_pos.angles);
     playFX(level._effect[#"spawn_fx"], s_spawn_pos.origin, v_forward);
-    playsoundatposition(#"hash_5c3c35d4b961c962", s_spawn_pos.origin);
+    playSoundAtPosition(#"hash_5c3c35d4b961c962", s_spawn_pos.origin);
   }
 
   foreach(str in array("tutorial_zm_spawner_barrier")) {
@@ -465,7 +465,7 @@ function_fb2e7309() {
 }
 
 waittill_trigger(trig_name, activator = undefined) {
-  trig = getent(trig_name, "targetname");
+  trig = getEnt(trig_name, "targetname");
 
   while(true) {
     eventstruct = trig waittill(#"trigger");
@@ -627,9 +627,9 @@ function_513e90cf() {
 }
 
 function_5bc503b1() {
-  m_door = getent("tutorial_door", "targetname");
-  m_clip = getent("tutorial_door_clip", "targetname");
-  m_door linkto(m_clip);
+  m_door = getEnt("tutorial_door", "targetname");
+  m_clip = getEnt("tutorial_door_clip", "targetname");
+  m_door linkTo(m_clip);
   m_door setCanDamage(1);
   m_door.health = 10000;
 
@@ -639,10 +639,10 @@ function_5bc503b1() {
   }
   while(s_notify.mod != "MOD_MELEE");
 
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   earthquake(0.2, 0.4, self.origin, 500);
   m_door playSound(#"hash_6a5e0d24e28a2c01");
-  m_clip rotateyaw(97, 1, 0, 0.5);
+  m_clip rotateYaw(97, 1, 0, 0.5);
   level.var_70fed833 = 1;
 }
 
@@ -715,7 +715,7 @@ function_c3b8207f() {
 }
 
 wallbuy() {
-  mdl_wallbuy = getent("shader_wallbuy", "targetname");
+  mdl_wallbuy = getEnt("shader_wallbuy", "targetname");
   mdl_wallbuy clientfield::set("tutorial_keyline_fx", 1);
   s_objective = struct::get("objective_pos_wall_buy", "targetname");
   s_objective function_384bed55();
@@ -1190,7 +1190,7 @@ cooperative() {
 }
 
 crafting() {
-  var_171df470 = getent("tutorial_forced_shield_part", "targetname");
+  var_171df470 = getEnt("tutorial_forced_shield_part", "targetname");
 
   if(isDefined(var_171df470)) {
     var_171df470 clientfield::set("tutorial_keyline_fx", 1);
@@ -1224,7 +1224,7 @@ crafting() {
   function_269d9f82("barrier_pre_shield", 0);
   function_269d9f82("barrier_post_shield");
   level.tutorialbot set_bot_goal("tutorial_bot_crafting");
-  var_6b69f12a = getent("tutorial_table", "targetname");
+  var_6b69f12a = getEnt("tutorial_table", "targetname");
 
   if(isDefined(var_6b69f12a)) {
     var_6b69f12a clientfield::set("tutorial_keyline_fx", 1);
@@ -1249,7 +1249,7 @@ crafting() {
     assert(0, "<dev string:x6a>");
   }
 
-  var_1464a7b = getent("shield_model", "targetname");
+  var_1464a7b = getEnt("shield_model", "targetname");
 
   if(isDefined(var_1464a7b)) {
     var_1464a7b clientfield::set("tutorial_keyline_fx", 1);
@@ -1449,7 +1449,7 @@ function_818a3a72() {
 pap() {
   self.reset_score = self.score;
   self.is_drinking = 1;
-  var_812ed519 = getent("t_use_water_pump_fore", "targetname");
+  var_812ed519 = getEnt("t_use_water_pump_fore", "targetname");
   var_812ed519 hide();
   function_68da8e33(#"hash_223704d87588d3a1", 0.5);
   level thread function_68da8e33(#"hash_7d57e8643f403794", 1);
@@ -1501,7 +1501,7 @@ fast_travel() {
 }
 
 function_edf32a3b(n_round_number) {
-  playsoundatposition(#"hash_58df62ae7fa7b42b", (0, 0, 0));
+  playSoundAtPosition(#"hash_58df62ae7fa7b42b", (0, 0, 0));
   level.zombie_health = zombie_utility::ai_calculate_health(zombie_utility::get_zombie_var(#"zombie_health_start"), n_round_number);
   zm_round_logic::set_round_number(n_round_number);
   setroundsplayed(n_round_number);
@@ -1803,7 +1803,7 @@ function_269d9f82(str_barrier, b_on = 1) {
       s_position.mdl_fx = util::spawn_model(#"p8_zm_power_door_symbol_01", s_position.origin + var_d3c21d73, s_position.angles);
       s_position.mdl_fx clientfield::set("" + #"symbol_blocker_fx", 1);
       s_position.mdl_collision = util::spawn_model("collision_player_wall_128x128x10", s_position.origin + var_d3c21d73, s_position.angles);
-      s_position.mdl_collision disconnectpaths();
+      s_position.mdl_collision disconnectPaths();
       s_position.mdl_collision ghost();
     }
 

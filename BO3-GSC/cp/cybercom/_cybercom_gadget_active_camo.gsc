@@ -67,7 +67,7 @@ function _on(slot, weapon) {
   self.cybercom.oldignore = isDefined(self.ignoreme) && (self.ignoreme ? 1 : 0);
   self.ignoreme = 1;
   self.active_camo = 1;
-  self playrumbleonentity("tank_rumble");
+  self playRumbleOnEntity("tank_rumble");
   self thread function_b4902c73(slot, weapon, "scene_disable_player_stuff", "active_camo_taken");
   self thread _camo_createfalsetarget();
   self thread cybercom::function_c3c6aff4(slot, weapon, "changed_class", "active_camo_off");

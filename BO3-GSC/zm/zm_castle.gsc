@@ -279,7 +279,7 @@ function function_1ba33179(zone_name) {
   }
   zone = level.zones[zone_name];
   for(i = 0; i < zone.volumes.size; i++) {
-    players = getplayers();
+    players = getPlayers();
     for(j = 0; j < players.size; j++) {
       if(players[j] istouching(zone.volumes[i]) && !players[j].sessionstate == "spectator") {
         if(!var_46ac7dc1 || !players[j] laststand::player_is_in_laststand()) {
@@ -305,7 +305,7 @@ function function_e0836624() {
 
 function function_fcfd712e(cmd) {
   cmd_strings = strtok(cmd, " ");
-  var_8ceb4930 = getent("specialty_doubletap2", "script_noteworthy");
+  var_8ceb4930 = getEnt("specialty_doubletap2", "script_noteworthy");
   switch (cmd_strings[0]) {
     case "specialty_deadshot_castle": {
       foreach(player in level.players) {
@@ -585,9 +585,9 @@ function function_632e15ea() {
   level thread function_4da48892();
   level thread function_9c99c6db();
   level thread function_5dd2bbf1();
-  var_b549e63 = getent("great_hall_outer_door", "script_noteworthy");
-  var_8907f940 = getent("great_hall_inner_door", "script_noteworthy");
-  var_8907f940 linkto(var_b549e63);
+  var_b549e63 = getEnt("great_hall_outer_door", "script_noteworthy");
+  var_8907f940 = getEnt("great_hall_inner_door", "script_noteworthy");
+  var_8907f940 linkTo(var_b549e63);
 }
 
 function function_814261d() {
@@ -618,10 +618,10 @@ function function_9c99c6db() {
 
 function function_5dd2bbf1() {
   level flag::wait_till("power_on");
-  e_door_clip = getent("dungeon_door_clip", "targetname");
+  e_door_clip = getEnt("dungeon_door_clip", "targetname");
   e_door_clip delete();
-  e_door_left = getent("dungeon_door_left", "targetname");
-  e_door_right = getent("dungeon_door_right", "targetname");
+  e_door_left = getEnt("dungeon_door_left", "targetname");
+  e_door_right = getEnt("dungeon_door_right", "targetname");
   e_door_left movex(-40, 2, 0, 1);
   e_door_right movex(40, 2, 0, 1);
 }
@@ -676,8 +676,8 @@ function function_d9e1ec4d(var_bbf77908) {
 }
 
 function function_6190ec3f() {
-  var_3592813c = getent("player_tram_car_interior", "targetname");
-  var_a799f077 = getent("docked_tram_car_interior", "targetname");
+  var_3592813c = getEnt("player_tram_car_interior", "targetname");
+  var_a799f077 = getEnt("docked_tram_car_interior", "targetname");
   if(!ispointonnavmesh(self.origin, self) || self istouching(var_3592813c) || self istouching(var_a799f077)) {
     self thread zm_equipment::show_hint_text(&"ZM_CASTLE_GRAVITYSPIKE_BAD_LOCATION", 3);
     return false;
@@ -850,7 +850,7 @@ function function_6058f34d() {
   exploder::exploder("lgt_vending_quick_revive_castle");
   exploder::exploder("lgt_vending_sleight_of_hand_castle");
   exploder::exploder("lgt_vending_stamina_up_castle");
-  playsoundatposition("zmb_castle_poweron", (0, 0, 0));
+  playSoundAtPosition("zmb_castle_poweron", (0, 0, 0));
   exploder::exploder_stop("power_door_lgts");
   level thread scene::play("p7_fxanim_zm_castle_door_sliding_bundle");
 }
@@ -877,9 +877,9 @@ function function_7aae0fb2(a_ents) {
 
 function power_electric_switch() {
   level scene::init("p7_fxanim_zm_power_switch_bundle");
-  trig = getent("use_power_switch", "targetname");
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
-  trig setcursorhint("HINT_NOICON");
+  trig = getEnt("use_power_switch", "targetname");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setCursorHint("HINT_NOICON");
   cheat = 0;
   user = undefined;
   if(cheat != 1) {
@@ -1130,7 +1130,7 @@ function super_sesame() {
 }
 
 function function_e9162f72() {
-  var_1143aa58 = getent(self.target, "");
+  var_1143aa58 = getEnt(self.target, "");
   var_9ca35935 = self.script_noteworthy;
   level flag::set(var_9ca35935);
   var_1143aa58 setModel("");

@@ -47,8 +47,8 @@ function register_clientfields() {
 
 function function_5ecbd7cb() {
   level waittill("start_zombie_round_logic");
-  var_845e036a = getent(self.target, "targetname");
-  vol_fling = getent(var_845e036a.target, "targetname");
+  var_845e036a = getEnt(self.target, "targetname");
+  vol_fling = getEnt(var_845e036a.target, "targetname");
   var_cec95fd7 = struct::get(self.target, "targetname");
   var_cec95fd7 thread function_86ef1da5();
   v_fling = anglesToForward(self.angles) * self.script_int;
@@ -155,7 +155,7 @@ function function_e9d3c391(var_a89f74ed, v_fling, nd_start, var_173065cc) {
     a_ai_enemies = arraysort(a_ai_enemies, nd_start.origin, 1, 99, 768);
     array::thread_all(a_ai_enemies, &ai_delay_cleanup);
     self thread function_44659337(nd_start, var_a89f74ed, v_fling);
-    self playrumbleonentity("zm_castle_flinger_launch");
+    self playRumbleOnEntity("zm_castle_flinger_launch");
     self clientfield::set_to_player("flinger_flying_postfx", 1);
     self thread function_c1f1756a();
     if(isDefined(var_173065cc)) {
@@ -163,11 +163,11 @@ function function_e9d3c391(var_a89f74ed, v_fling, nd_start, var_173065cc) {
       exploder::exploder(level.var_6ad55648[var_173065cc.targetname]["launch"]);
     }
     var_6a7beeb2 = function_cbac68fe(self);
-    var_6a7beeb2 linkto(var_413ea50f);
+    var_6a7beeb2 linkTo(var_413ea50f);
     w_current = self.currentweapon;
     if(w_current != level.weaponnone) {
       var_f5434f17 = zm_utility::spawn_buildkit_weapon_model(self, w_current, undefined, var_6a7beeb2 gettagorigin("tag_weapon_right"), var_6a7beeb2 gettagangles("tag_weapon_right"));
-      var_f5434f17 linkto(var_6a7beeb2, "tag_weapon_right");
+      var_f5434f17 linkTo(var_6a7beeb2, "tag_weapon_right");
       var_f5434f17 setowner(self);
     }
     var_6a7beeb2 thread scene::play("cin_zm_dlc1_jump_pad_air_loop", var_6a7beeb2);
@@ -203,7 +203,7 @@ function function_e9d3c391(var_a89f74ed, v_fling, nd_start, var_173065cc) {
     var_413ea50f waittill("reached_end_node");
     self thread function_3298b25f(var_a89f74ed);
     self thread function_29c06608();
-    self playrumbleonentity("zm_castle_flinger_land");
+    self playRumbleOnEntity("zm_castle_flinger_land");
     self clientfield::set_to_player("flinger_flying_postfx", 0);
     var_6a7beeb2 clientfield::set("player_visibility", 0);
     if(isDefined(var_f5434f17)) {
@@ -234,13 +234,13 @@ function function_e9d3c391(var_a89f74ed, v_fling, nd_start, var_173065cc) {
     } else if(self.archetype === "zombie") {
       self.is_flung = 1;
       self pathmode("dont move");
-      self setplayercollision(0);
+      self setPlayerCollision(0);
       self.mdl_anchor = util::spawn_model("tag_origin", nd_start.origin, nd_start.angles);
-      self linkto(self.mdl_anchor);
+      self linkTo(self.mdl_anchor);
       nd_next = getvehiclenode(nd_start.target, "targetname");
       n_distance = distance(nd_start.origin, nd_next.origin);
       n_time = n_distance / 600;
-      self.mdl_anchor moveto(nd_next.origin, n_time);
+      self.mdl_anchor moveTo(nd_next.origin, n_time);
       self.mdl_anchor waittill("movedone");
       self unlink();
       self pathmode("dont move");
@@ -319,7 +319,7 @@ function function_cbac68fe(e_player) {
 
 function function_c1f1756a() {
   while(isDefined(self.is_flung) && self.is_flung) {
-    self playrumbleonentity("zod_beast_grapple_reel");
+    self playRumbleOnEntity("zod_beast_grapple_reel");
     wait(0.2);
   }
 }
@@ -341,7 +341,7 @@ function function_3298b25f(var_a89f74ed) {
     }
   }
   self unlink();
-  self setorigin(var_16f5c370);
+  self setOrigin(var_16f5c370);
   if(isDefined(self.var_3048ac6d) && self.var_3048ac6d) {
     self freezecontrols(1);
   }
@@ -450,11 +450,11 @@ function function_29c06608() {
 function zombie_slam_direction(ai_zombie) {
   ai_zombie.knockdown = 1;
   v_zombie_to_player = self.origin - ai_zombie.origin;
-  v_zombie_to_player_2d = vectornormalize((v_zombie_to_player[0], v_zombie_to_player[1], 0));
+  v_zombie_to_player_2d = vectorNormalize((v_zombie_to_player[0], v_zombie_to_player[1], 0));
   v_zombie_forward = anglesToForward(ai_zombie.angles);
-  v_zombie_forward_2d = vectornormalize((v_zombie_forward[0], v_zombie_forward[1], 0));
+  v_zombie_forward_2d = vectorNormalize((v_zombie_forward[0], v_zombie_forward[1], 0));
   v_zombie_right = anglestoright(ai_zombie.angles);
-  v_zombie_right_2d = vectornormalize((v_zombie_right[0], v_zombie_right[1], 0));
+  v_zombie_right_2d = vectorNormalize((v_zombie_right[0], v_zombie_right[1], 0));
   v_dot = vectordot(v_zombie_to_player_2d, v_zombie_forward_2d);
   if(v_dot >= 0.5) {
     ai_zombie.knockdown_direction = "front";
@@ -491,7 +491,7 @@ function function_4b3d145d(einflictor, eattacker, idamage, idflags, smeansofdeat
 
 function function_485001bf(e_player) {
   if(isDefined(e_player.var_8dbb72b1) && e_player.var_8dbb72b1[self.stub.script_string] === 1) {
-    self sethintstring(&"ZM_GENESIS_JUMP_PAD_COOLDOWN");
+    self setHintString(&"ZM_GENESIS_JUMP_PAD_COOLDOWN");
     return false;
   }
   return true;

@@ -443,11 +443,11 @@ function init() {
   level.doa.var_50a26b4f = 1;
   level.doa.var_54c5c3e6 = undefined;
   namespace_c501aa2e::init();
-  level.doa.pickups.var_92a02b26 = getent("zombietron_siegebot_spawner", "targetname");
-  level.doa.pickups.var_f20eb59f = getent("zombietron_tank_spawner", "targetname");
-  level.doa.pickups.var_4480248f = getent("zombietron_hind_spawner", "targetname");
-  level.doa.pickups.var_ef3f4447 = getent("zombietron_sentry_spawner", "targetname");
-  level.doa.pickups.var_9eec57e8 = getent("zombietron_grenade_spawner", "targetname");
+  level.doa.pickups.var_92a02b26 = getEnt("zombietron_siegebot_spawner", "targetname");
+  level.doa.pickups.var_f20eb59f = getEnt("zombietron_tank_spawner", "targetname");
+  level.doa.pickups.var_4480248f = getEnt("zombietron_hind_spawner", "targetname");
+  level.doa.pickups.var_ef3f4447 = getEnt("zombietron_sentry_spawner", "targetname");
+  level.doa.pickups.var_9eec57e8 = getEnt("zombietron_grenade_spawner", "targetname");
   function_8cf6a668(13, {
     #var_d266c0d8: "evt_doa_pickup_gem_spawn", #var_2aa68449: "evt_doa_pickup_gem_lp", #var_860ac8be: undefined, #var_9f6d7ee9: "evt_doa_pickup_gem_consumed"});
   function_8cf6a668(1, {
@@ -1139,7 +1139,7 @@ function function_ae609287(pickupdef, origin) {
       return 0;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(is_true(player.doa.var_deaabc77)) {
         return 0;
       }
@@ -1556,7 +1556,7 @@ function function_2ebebd0c() {
           });
           self notify(#"ladder_up");
 
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             player notify(#"hash_279998c5df86c04d");
             player thread namespace_7f5aeb59::turnplayershieldon();
           }
@@ -1714,7 +1714,7 @@ function pickuprotate() {
   time = randomfloatrange(3, 7);
 
   while(isDefined(self)) {
-    self rotateto(self.angles + (0, dir, 0), time);
+    self rotateTo(self.angles + (0, dir, 0), time);
     wait time;
   }
 }
@@ -1768,7 +1768,7 @@ function function_4ecd84a8(player, entnum = player.entnum, var_a3046af4, time = 
 
       self clientfield::set("pickupmoveto", val);
     } else {
-      self moveto(var_a3046af4, time, 0, 0);
+      self moveTo(var_a3046af4, time, 0, 0);
     }
 
     wait time;
@@ -2020,7 +2020,7 @@ function function_32370b0d(timeout = 120) {
     self.doa.var_ad639ebd thread namespace_ec06fe4a::function_d55f042c(self, "lantern_terminated");
   }
 
-  self.doa.var_ad639ebd linkto(self);
+  self.doa.var_ad639ebd linkTo(self);
   self endon(#"lantern_terminated", #"disconnect");
   self.doa.var_ad639ebd namespace_83eb6304::turnofffx("lantern_fade");
   self.doa.var_ad639ebd namespace_83eb6304::function_3ecfde67("lantern");

@@ -301,8 +301,8 @@ func_126A8(var_0, var_1) {
 
 func_126A6(var_0) {
   self setscriptablepartstate("fx", "on");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_47B3["crafted_electric_trap"].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.var_47B3["crafted_electric_trap"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);

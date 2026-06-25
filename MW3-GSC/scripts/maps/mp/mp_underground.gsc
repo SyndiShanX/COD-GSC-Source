@@ -37,7 +37,7 @@ _id_48EC() {
       var_8 = spawn("script_model", var_7.origin);
       var_8.angles = var_7.angles;
       var_8 setModel(var_7.model);
-      var_9 = getent(var_7.target, "targetname");
+      var_9 = getEnt(var_7.target, "targetname");
       var_10 = distance(var_9.origin, var_7.origin);
       var_11 = var_0;
 
@@ -49,7 +49,7 @@ _id_48EC() {
       if(var_12 > var_4) {
         var_4 = var_12;
       }
-      var_8 moveto(var_9.origin, var_12);
+      var_8 moveTo(var_9.origin, var_12);
       var_8 thread _id_48ED(var_12);
       var_5[var_5.size] = var_8;
     }

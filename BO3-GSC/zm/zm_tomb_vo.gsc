@@ -356,7 +356,7 @@ function tomb_custom_zombie_oh_shit_vox() {
     if(isDefined(self.oh_shit_vo_cooldown) && self.oh_shit_vo_cooldown) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     zombs = zombie_utility::get_round_enemy_array();
     if(players.size <= 1) {
       n_distance = 250;
@@ -495,7 +495,7 @@ function easter_egg_song_vo(player) {
     player thread zm_audio::create_and_play_dialog("quest", "find_secret");
   } else {
     while(true) {
-      a_players = getplayers();
+      a_players = getPlayers();
       foreach(player in a_players) {
         if(isalive(player)) {
           if(!(isDefined(player.dontspeak) && player.dontspeak)) {
@@ -591,7 +591,7 @@ function tomb_audio_custom_response_line(player, category, type) {
 }
 
 function play_vo_category_on_closest_player(category, type) {
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size <= 1) {
     return;
   }
@@ -605,7 +605,7 @@ function play_vo_category_on_closest_player(category, type) {
 }
 
 function play_pos_neg_response_on_closest_player(category, type, str_stat) {
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size <= 1) {
     return;
   }
@@ -696,7 +696,7 @@ function maxis_audio_logs() {
 }
 
 function discover_pack_a_punch() {
-  t_pap_intro = getent("pack_a_punch_intro_trigger", "targetname");
+  t_pap_intro = getEnt("pack_a_punch_intro_trigger", "targetname");
   if(!isDefined(t_pap_intro)) {
     return;
   }
@@ -707,10 +707,10 @@ function discover_pack_a_punch() {
       e_player.discover_pap_vo_played = 0;
     }
     if(!e_player.discover_pap_vo_played) {
-      if((vectordot(anglesToForward(e_player getplayerangles()), vectornormalize(s_lookat.origin - e_player.origin))) > 0.8 && e_player can_player_speak()) {
+      if((vectordot(anglesToForward(e_player getplayerangles()), vectorNormalize(s_lookat.origin - e_player.origin))) > 0.8 && e_player can_player_speak()) {
         e_player.discover_pap_vo_played = 1;
         e_player zm_audio::create_and_play_dialog("general", "pap_discovered");
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           if(distance(player.origin, e_player.origin) < 800) {
             player.discover_pap_vo_played = 1;
           }
@@ -878,7 +878,7 @@ function start_samantha_intro_vo() {
 
 function samantha_intro_1() {
   iprintln("");
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(players[0])) {
     return;
   }
@@ -886,7 +886,7 @@ function samantha_intro_1() {
   level flag::set("story_vo_playing");
   set_players_dontspeak(1);
   samanthasay("vox_sam_sam_help_5_0", players[0], 1, 1);
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player.character_name != "Richtofen") {
       player play_category_on_player_character_if_present("hear_samantha_1", player.character_name);
@@ -922,7 +922,7 @@ function samantha_intro_2() {
 
 function samantha_intro_3() {
   iprintln("");
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(players[0])) {
     return;
   }
@@ -930,7 +930,7 @@ function samantha_intro_3() {
   level flag::set("story_vo_playing");
   set_players_dontspeak(1);
   samanthasay("vox_sam_hear_samantha_3_0", players[0], 1, 1);
-  players = getplayers();
+  players = getPlayers();
   player = players[randomintrange(0, players.size)];
   if(isDefined(player)) {
     player play_category_on_player_character_if_present("hear_samantha_3", player.character_name);
@@ -966,7 +966,7 @@ function play_category_on_player_character_if_present(category, character_name) 
 function get_nearest_friend_within_speaking_distance(other_player) {
   distance_nearest = 800;
   nearest_friend = undefined;
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     distance_between_players = distance(player.origin, other_player.origin);
     if(player != other_player && distance_between_players < distance_nearest) {
@@ -992,7 +992,7 @@ function play_line_on_player_character_if_present(vox_line, character_name) {
 }
 
 function get_player_character_if_present(character_name) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player.character_name == character_name) {
       return player;
@@ -1017,7 +1017,7 @@ function game_start_solo_vo() {
   if(level flag::get("story_vo_playing")) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   e_speaker = players[0];
   if(!isDefined(e_speaker)) {
     return;
@@ -1052,7 +1052,7 @@ function build_game_start_solo_convo() {
 }
 
 function game_start_vo() {
-  players = getplayers();
+  players = getPlayers();
   if(players.size <= 1) {
     return;
   }
@@ -1089,7 +1089,7 @@ function game_start_vo() {
   }
   set_players_dontspeak(1);
   for(i = 0; i < a_game_start_convo.size; i++) {
-    players = getplayers();
+    players = getPlayers();
     if(players.size <= 1) {
       set_players_dontspeak(0);
       level flag::clear("story_vo_playing");
@@ -1311,7 +1311,7 @@ function round_one_end_solo_vo() {
   if(level flag::get("story_vo_playing")) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   e_speaker = players[0];
   if(!isDefined(e_speaker)) {
     return;
@@ -1346,7 +1346,7 @@ function build_round_one_end_solo_convo() {
 }
 
 function round_one_end_vo() {
-  players = getplayers();
+  players = getPlayers();
   if(players.size <= 1) {
     return;
   }
@@ -1383,7 +1383,7 @@ function round_one_end_vo() {
   }
   set_players_dontspeak(1);
   for(i = 0; i < a_convo.size; i++) {
-    players = getplayers();
+    players = getPlayers();
     if(players.size <= 1) {
       set_players_dontspeak(0);
       level flag::clear("story_vo_playing");
@@ -1433,7 +1433,7 @@ function round_two_end_solo_vo() {
   if(level flag::get("story_vo_playing")) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   e_speaker = players[0];
   if(!isDefined(e_speaker)) {
     return;
@@ -1470,7 +1470,7 @@ function build_round_two_end_solo_convo() {
 function first_magic_box_seen_vo() {
   level flag::wait_till("start_zombie_round_logic");
   magicbox = level.chests[level.chest_index];
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     player thread wait_and_play_first_magic_box_seen_vo(magicbox.unitrigger_stub);
   }
@@ -1487,7 +1487,7 @@ function wait_and_play_first_magic_box_seen_vo(struct) {
             wait(0.1);
             continue;
           }
-          players = getplayers();
+          players = getPlayers();
           a_speakers = [];
           foreach(player in players) {
             if(isDefined(player) && distance2dsquared(player.origin, self.origin) <= 1000000) {
@@ -1610,12 +1610,12 @@ function get_speaking_location_maxis_drone(player, s_craftable) {
   e_vo_origin = undefined;
   if(isDefined(level.maxis_quadrotor)) {
     e_vo_origin = spawn("script_origin", level.maxis_quadrotor.origin);
-    e_vo_origin linkto(level.maxis_quadrotor);
+    e_vo_origin linkTo(level.maxis_quadrotor);
   } else {
     player = b_player_has_dieseldrone_weapon();
     if(isDefined(player)) {
       e_vo_origin = spawn("script_origin", player.origin);
-      e_vo_origin linkto(player);
+      e_vo_origin linkTo(player);
     } else {
       e_vo_origin = spawn("script_origin", s_craftable.origin);
     }
@@ -1624,7 +1624,7 @@ function get_speaking_location_maxis_drone(player, s_craftable) {
 }
 
 function b_player_has_dieseldrone_weapon() {
-  a_players = getplayers();
+  a_players = getPlayers();
   var_703e6a13 = getweapon("equip_dieseldrone");
   foreach(player in a_players) {
     if(player hasweapon(var_703e6a13)) {
@@ -1635,7 +1635,7 @@ function b_player_has_dieseldrone_weapon() {
 }
 
 function set_players_dontspeak(bool) {
-  players = getplayers();
+  players = getPlayers();
   if(bool) {
     foreach(player in players) {
       if(isDefined(player)) {
@@ -1672,7 +1672,7 @@ function set_player_dontspeak(bool) {
 }
 
 function is_game_solo() {
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     return true;
   }
@@ -1764,7 +1764,7 @@ function watch_one_shot_samantha_clue(str_line, str_notify, str_endon) {
       continue;
     }
     if(!isPlayer(e_player)) {
-      a_players = getplayers();
+      a_players = getPlayers();
       foreach(player in a_players) {
         if(player.zombie_vars["zombie_powerup_zombie_blood_on"]) {
           e_player = player;
@@ -1869,7 +1869,7 @@ function samantha_discourage_think() {
     }
     line = array::random(available_list);
     arrayremovevalue(available_list, line);
-    a_players = getplayers();
+    a_players = getPlayers();
     while(a_players.size > 0) {
       e_player = array::random(a_players);
       arrayremovevalue(a_players, e_player);
@@ -1895,7 +1895,7 @@ function samanthasay(vox_line, e_source, b_wait_for_nearby_speakers = 0, intro_l
   }
   level.sam_talking = 1;
   if(b_wait_for_nearby_speakers) {
-    nearbyplayers = util::get_array_of_closest(e_source.origin, getplayers(), undefined, undefined, 256);
+    nearbyplayers = util::get_array_of_closest(e_source.origin, getPlayers(), undefined, undefined, 256);
     if(isDefined(nearbyplayers) && nearbyplayers.size > 0) {
       foreach(player in nearbyplayers) {
         while(isDefined(player) && (isDefined(player.isspeaking) && player.isspeaking)) {
@@ -1934,7 +1934,7 @@ function maxissay(vox_line, m_spot_override, b_wait_for_nearby_speakers) {
     m_vo_spot = m_spot_override;
   }
   if(isDefined(b_wait_for_nearby_speakers) && b_wait_for_nearby_speakers) {
-    nearbyplayers = util::get_array_of_closest(m_vo_spot.origin, getplayers(), undefined, undefined, 256);
+    nearbyplayers = util::get_array_of_closest(m_vo_spot.origin, getPlayers(), undefined, undefined, 256);
     if(isDefined(nearbyplayers) && nearbyplayers.size > 0) {
       foreach(player in nearbyplayers) {
         while(isDefined(player) && (isDefined(player.isspeaking) && player.isspeaking)) {
@@ -1966,7 +1966,7 @@ function richtofenrespondvoplay(vox_category, b_richtofen_first = 0, str_flag) {
       self playsoundwithnotify(str_vox_line, "rich_done");
       self waittill("rich_done");
       wait(0.5);
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player.character_name != "Richtofen" && distance2d(player.origin, self.origin) < 800) {
           str_vox_line = ((("vox_plr_" + player.characterindex) + "_") + vox_category) + "_0";
           player playsoundwithnotify(str_vox_line, "rich_done");
@@ -1974,7 +1974,7 @@ function richtofenrespondvoplay(vox_category, b_richtofen_first = 0, str_flag) {
         }
       }
     } else {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player.character_name == "Richtofen" && distance2d(player.origin, self.origin) < 800) {
           str_vox_line = ((("vox_plr_" + player.characterindex) + "_") + vox_category) + "_0";
           player playsoundwithnotify(str_vox_line, "rich_done");
@@ -1990,7 +1990,7 @@ function richtofenrespondvoplay(vox_category, b_richtofen_first = 0, str_flag) {
     }
   } else {
     if(self.characterindex == 2) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player.character_name != "Richtofen" && distance2d(player.origin, self.origin) < 800) {
           str_vox_line = ((("vox_plr_" + player.characterindex) + "_") + vox_category) + "_0";
           player playsoundwithnotify(str_vox_line, "rich_done");
@@ -2008,7 +2008,7 @@ function richtofenrespondvoplay(vox_category, b_richtofen_first = 0, str_flag) {
       self playsoundwithnotify(str_vox_line, "rich_response");
       self waittill("rich_response");
       wait(0.5);
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player.character_name == "Richtofen" && distance2d(player.origin, self.origin) < 800) {
           str_vox_line = ((("vox_plr_" + player.characterindex) + "_") + vox_category) + "_0";
           player playsoundwithnotify(str_vox_line, "rich_done");
@@ -2090,7 +2090,7 @@ function sam_promises_watch() {
   level flag::wait_till("samantha_intro_done");
   while(true) {
     level waittill("player_zombie_blood", e_player);
-    a_players = getplayers();
+    a_players = getPlayers();
     if(randomint(100) < 20) {
       e_player thread sam_promises_conversation();
     }
@@ -2160,7 +2160,7 @@ function function_860b0710() {
   if(randomintrange(0, 100) < 20) {
     str_vox_line = "vox_maxi_drone_killed_" + randomintrange(0, 3);
     self maxissay(str_vox_line, self);
-    var_f813a897 = util::get_array_of_closest(self.origin, getplayers(), undefined, undefined, 256);
+    var_f813a897 = util::get_array_of_closest(self.origin, getPlayers(), undefined, undefined, 256);
     if(isDefined(var_f813a897[0])) {
       var_f813a897[0] zm_audio::create_and_play_dialog("quadrotor", "kill_drone");
     }

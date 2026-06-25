@@ -359,8 +359,8 @@ _id_E82F(var_0, var_1) {
     var_15 = anglesToForward(var_14) * var_12;
     var_16 = anglestoright(var_14) * var_13;
     var_17 = var_16 + var_15;
-    var_18 = vectornormalize(var_17) * var_6;
-    var_10 = var_10 + vectornormalize(var_18 - var_10) * level._id_5F3A * var_5;
+    var_18 = vectorNormalize(var_17) * var_6;
+    var_10 = var_10 + vectorNormalize(var_18 - var_10) * level._id_5F3A * var_5;
     var_10 = var_10 - var_10 * length(var_10) * var_8;
     var_19 = var_0._id_10399[2] - var_2 * 39.37 * level._id_5F3A;
     var_19 = max(var_4, var_19);

@@ -278,7 +278,7 @@ include_buildables(buildablesenabledlist) {
   }
 
   if(isinarray(buildablesenabledlist, "headchopper_zm")) {
-    ent = getent("buildable_headchopper", "targetname");
+    ent = getEnt("buildable_headchopper", "targetname");
     ent setModel("t6_wpn_zmb_chopper");
     headchopper = spawnStruct();
     headchopper.name = "headchopper_zm";
@@ -477,7 +477,7 @@ chalkbuildable() {
     stub.building_prompt = &"ZM_BURIED_DRAW";
 
     if(isDefined(stub.target)) {
-      wallbuy = getstruct(stub.target, "targetname");
+      wallbuy = getStruct(stub.target, "targetname");
       stub.origin = wallbuy.origin;
       stub.angles = wallbuy.angles;
 
@@ -540,7 +540,7 @@ onuseplantobject_rtower(player) {
   if(!isDefined(player player_get_buildable_piece(2))) {
     return;
   }
-  m_tower = getent("sq_guillotine", "targetname");
+  m_tower = getEnt("sq_guillotine", "targetname");
 
   switch (player player_get_buildable_piece(2).modelname) {
     case "p6_zm_bu_sq_crystal":
@@ -926,7 +926,7 @@ chalk_prompt(player) {
         self.stub.cost = 1500;
         self.stub.hint_parm1 = 1500;
         self.stub.hint_string = &"ZM_BURIED_RANDOM_WALLBUY";
-        self sethintstring(self.stub.hint_string, self.stub.cost);
+        self setHintString(self.stub.hint_string, self.stub.cost);
         return 1;
       }
     }
@@ -942,7 +942,7 @@ chalk_prompt(player) {
 
       if(isDefined(weapon)) {
         self.stub.hint_string = level.buildable_wallbuy_weapon_hints[weapon];
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     }
   }
@@ -1132,7 +1132,7 @@ ondrop_keys(player) {
 cell_door_key_prompt(player) {
   if(isDefined(level.cell_open) && level.cell_open) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return 0;
   }
 
@@ -1274,15 +1274,15 @@ piece_maker_unitrigger(name, prompt_fn, think_fn) {
 
 piece_maker_update_prompt(player) {
   if(!(isDefined(self.stub.allow_purchase) && self.stub.allow_purchase)) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
 
   if(player.score < 1000) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   } else
-    self sethintstring(self.stub.buy_prompt, 1000);
+    self setHintString(self.stub.buy_prompt, 1000);
 
   return true;
 }
@@ -1302,7 +1302,7 @@ piece_maker_think() {
     if(player.score >= 1000) {
       player.score = player.score - 1000;
       level notify(self.stub.notify_name, player);
-      self sethintstring("");
+      self setHintString("");
     } else {
       self playSound("evt_perk_deny");
       player thread do_player_general_vox("general", "exert_sigh", 10, 50);

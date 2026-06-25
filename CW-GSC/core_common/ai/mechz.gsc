@@ -330,11 +330,11 @@ function private mechzberserkknockdownservice(entity) {
         zombie.knockdown = 1;
         zombie.knockdown_type = "knockdown_shoved";
         var_c255a411 = entity.origin - zombie.origin;
-        var_3355d62f = vectornormalize((var_c255a411[0], var_c255a411[1], 0));
+        var_3355d62f = vectorNormalize((var_c255a411[0], var_c255a411[1], 0));
         zombie_forward = anglesToForward(zombie.angles);
-        zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+        zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
-        zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+        zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
         dot = vectordot(var_3355d62f, zombie_forward_2d);
 
         if(dot >= 0.5) {
@@ -391,8 +391,8 @@ function private function_c01bcef(zombie, mechz, predicted_pos) {
   enemy_vec = mechz.origin - origin;
   var_660d1fec = (enemy_vec[0], enemy_vec[1], 0);
   var_58877074 = (facing_vec[0], facing_vec[1], 0);
-  var_660d1fec = vectornormalize(var_660d1fec);
-  var_58877074 = vectornormalize(var_58877074);
+  var_660d1fec = vectorNormalize(var_660d1fec);
+  var_58877074 = vectorNormalize(var_58877074);
   enemy_dot = vectordot(var_58877074, var_660d1fec);
 
   if(enemy_dot < 0) {
@@ -580,7 +580,7 @@ function private mechzshouldshootflamesweep(entity) {
   }
 
   near_players = 0;
-  players = getplayers(undefined, entity.origin, 100);
+  players = getPlayers(undefined, entity.origin, 100);
 
   if(players.size < 2) {
     return false;
@@ -773,7 +773,7 @@ function private mechzupdateflame(entity) {
   if(isDefined(level.var_27748d3)) {
     [[level.var_27748d3]](entity);
   } else {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       var_86d02e70 = 0;
@@ -962,10 +962,10 @@ function private function_3b8b6e80() {
 
   self.var_1df3d140 = spawn("trigger_box", self.origin, 0, 700, 50, 25);
   self thread deleteondeath(self.var_1df3d140);
-  self.var_1df3d140 enablelinkto();
+  self.var_1df3d140 enablelinkTo();
   self.var_1df3d140.origin = self gettagorigin("tag_flamethrower_fx");
   self.var_1df3d140.angles = self gettagangles("tag_flamethrower_fx");
-  self.var_1df3d140 linkto(self, "tag_flamethrower_fx");
+  self.var_1df3d140 linkTo(self, "tag_flamethrower_fx");
   self thread weaponobjects::watchweaponobjectspawn();
   self.pers = [];
   self.pers[#"team"] = self.team;
@@ -1301,8 +1301,8 @@ function function_923942a7(right_offset, aim_tag, var_40f25562 = 0.5) {
   enemy_vec = enemy.origin - origin;
   var_660d1fec = (enemy_vec[0], enemy_vec[1], 0);
   var_58877074 = (facing_vec[0], facing_vec[1], 0);
-  var_660d1fec = vectornormalize(var_660d1fec);
-  var_58877074 = vectornormalize(var_58877074);
+  var_660d1fec = vectorNormalize(var_660d1fec);
+  var_58877074 = vectorNormalize(var_58877074);
   enemy_dot = vectordot(var_58877074, var_660d1fec);
 
   if(enemy_dot < var_40f25562) {

@@ -25,7 +25,7 @@ h2_randomHarrierMovement() {
 }
 
 beginHarrier(lifeId, startPoint, pos) {
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];
@@ -512,8 +512,8 @@ isReadyToFire(tolerance) {
   harrierForwardVector *= (1, 1, 0);
   harrierToTarget *= (1, 1, 0);
 
-  harrierToTarget = VectorNormalize(harrierToTarget);
-  harrierForwardVector = VectorNormalize(harrierForwardVector);
+  harrierToTarget = vectorNormalize(harrierToTarget);
+  harrierForwardVector = vectorNormalize(harrierForwardVector);
 
   targetCosine = VectorDot(harrierToTarget, harrierForwardVector);
   facingCosine = Cos(tolerance);

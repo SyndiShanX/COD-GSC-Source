@@ -84,7 +84,7 @@ __main__() {
   var_a3101e2f = getEntArray("fasttravel_dropout", "targetname");
 
   foreach(var_d70a9989 in var_a3101e2f) {
-    var_d70a9989 sethintstring(#"hash_499c3242364f1755");
+    var_d70a9989 setHintString(#"hash_499c3242364f1755");
     var_d70a9989 thread function_5165d69();
   }
 
@@ -111,7 +111,7 @@ wormhole_fx(a_ents) {
   do {
     util::wait_network_frame();
   }
-  while(!e_wormhole isplayinganimscripted());
+  while(!e_wormhole isplayinganimScripted());
 
   e_wormhole clientfield::set("" + #"wormhole_fx", zm_utility::get_story());
 }
@@ -362,7 +362,7 @@ function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
         str_notify = str_start_loc + "_end";
       }
 
-      var_5314bd63 = getent("veh_fasttravel_cam", "targetname");
+      var_5314bd63 = getEnt("veh_fasttravel_cam", "targetname");
       self function_66d020b0(var_5314bd63, nd_path_start, undefined, str_notify, undefined, var_12230d08, undefined, undefined);
       break;
     case #"flinger":
@@ -423,7 +423,7 @@ function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
 
 function_2aed1d83(var_f0bbde5, var_b3733073 = 1) {
   self dontinterpolate();
-  self setorigin(var_f0bbde5.origin);
+  self setOrigin(var_f0bbde5.origin);
 
   if(var_b3733073) {
     self setplayerangles(var_f0bbde5.angles);
@@ -442,7 +442,7 @@ function_f86439bc() {
   do {
     util::wait_network_frame();
     var_e9a9a32a = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(e_player in players) {
       if(!isDefined(e_player)) {
@@ -480,7 +480,7 @@ function_de173abb(str_loc) {
 }
 
 get_player_index(e_player) {
-  a_players = getplayers(e_player.team);
+  a_players = getPlayers(e_player.team);
 
   for(i = 0; i < a_players.size; i++) {
     if(e_player == a_players[i]) {
@@ -530,7 +530,7 @@ function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, var_6c365
     level thread function_78e3c2ba(var_5817f611);
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player clientfield::set_player_uimodel("WorldSpaceIndicators.bleedOutModel" + self getentitynumber() + ".hide", 1);
   }
 
@@ -624,7 +624,7 @@ function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, var_6c365
     #var_9fa6220c: var_12230d08
   });
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player clientfield::set_player_uimodel("WorldSpaceIndicators.bleedOutModel" + self getentitynumber() + ".hide", 0);
   }
 
@@ -721,7 +721,7 @@ fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
   self.vh_rail.origin = nd_path_start.origin;
   self.vh_rail.angles = nd_path_start.angles;
   self dontinterpolate();
-  self setorigin(nd_path_start.origin);
+  self setOrigin(nd_path_start.origin);
 
   if(!(isDefined(level.var_9d19ea6d) && level.var_9d19ea6d)) {
     self setplayerangles(nd_path_start.angles);
@@ -749,7 +749,7 @@ fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
 
 function_62686dda(var_6c365dbf) {
   var_a16f5b07 = self.origin;
-  self playrumbleonentity(#"zm_fasttravel_vortex_rumble");
+  self playRumbleOnEntity(#"zm_fasttravel_vortex_rumble");
   wait 0.5;
   self clientfield::set_to_player("player_stargate_fx", 1);
   self clientfield::set_to_player("fasttravel_teleport_sfx", 1);
@@ -764,7 +764,7 @@ function_62686dda(var_6c365dbf) {
     self function_2aed1d83(var_f0bbde5);
   }
 
-  playsoundatposition(#"hash_3388d9809bf60b12", var_a16f5b07);
+  playSoundAtPosition(#"hash_3388d9809bf60b12", var_a16f5b07);
   wait 0.5;
   self clientfield::set_to_player("player_stargate_fx", 0);
   self clientfield::set_to_player("fasttravel_teleport_sfx", 0);
@@ -892,7 +892,7 @@ function_ab80021(var_384528) {
     }
 
     self dontinterpolate();
-    self setorigin(var_384528.origin);
+    self setOrigin(var_384528.origin);
     self setplayerangles(var_384528.angles);
 
     if(isDefined(self.vh_rail)) {
@@ -936,16 +936,16 @@ function_a78584c0(var_6c365dbf) {
 
   util::wait_network_frame();
   self dontinterpolate();
-  self setorigin(s_teleport_room.origin);
+  self setOrigin(s_teleport_room.origin);
   self setplayerangles(s_teleport_room.angles);
   self clientfield::set_to_player("fasttravel_teleport_sfx", 1);
-  playsoundatposition(#"hash_3388d9809bf60b12", var_a16f5b07);
+  playSoundAtPosition(#"hash_3388d9809bf60b12", var_a16f5b07);
   println("<dev string:x25f>" + self getplayercamerapos());
   self.var_805b8325 = spawn("script_origin", self.origin);
   self.var_805b8325.angles = self.angles;
-  self linkto(self.var_805b8325);
+  self linkTo(self.var_805b8325);
   waittillframeend();
-  self playrumbleonentity(#"zm_fasttravel_vortex_rumble");
+  self playRumbleOnEntity(#"zm_fasttravel_vortex_rumble");
   self function_82c1415f();
 
   if(isDefined(self.var_805b8325)) {
@@ -1015,7 +1015,7 @@ function_82c1415f() {
 
 function_d4fbc062(var_6a4c362c) {
   n_index = get_player_index(self);
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(self function_60d91d03(var_6a4c362c[n_index], a_e_players)) {
     return var_6a4c362c[n_index];
@@ -1061,7 +1061,7 @@ fasttravel_flinger(var_6c365dbf, var_12230d08) {
   level endon(#"end_game");
   self endoncallback(&function_672d56c7, #"death");
   self.var_46e13a5f = util::spawn_model("tag_origin", self.origin, self.angles);
-  self playerlinkto(self.var_46e13a5f);
+  self playerlinkTo(self.var_46e13a5f);
 
   if(isDefined(var_6c365dbf)) {
     if(isarray(var_6c365dbf)) {
@@ -1131,6 +1131,6 @@ function_8d419972(b_play_once) {
     }
   }
 
-  player setorigin(var_78e5d9d1);
+  player setOrigin(var_78e5d9d1);
   player setplayerangles(v_start_angles);
 }

@@ -151,7 +151,7 @@ function private function_3e88b567() {
     goal = self.path.pathpoints[self.var_91fc28f4];
   }
 
-  move_direction = vectornormalize(goal - self.origin);
+  move_direction = vectorNormalize(goal - self.origin);
   velocity = move_direction * 10;
   self.origin += velocity;
   self.origin = getclosestpointonnavmesh(self.origin, 200, 32);
@@ -198,7 +198,7 @@ function function_9defb9e0(goal) {
     return;
   }
 
-  move_direction = vectornormalize(var_bdd8bda9 - self.origin);
+  move_direction = vectorNormalize(var_bdd8bda9 - self.origin);
   self.angles = vectortoangles(move_direction);
 }
 

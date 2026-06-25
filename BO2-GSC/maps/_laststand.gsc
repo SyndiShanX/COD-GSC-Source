@@ -269,10 +269,10 @@ laststand_bleedout(delay) {
 revive_trigger_spawn() {
   radius = getdvarint(#"_id_A17166B0");
   self.revivetrigger = spawn("trigger_radius", self.origin, 0, radius, radius);
-  self.revivetrigger sethintstring("");
-  self.revivetrigger setcursorhint("HINT_NOICON");
-  self.revivetrigger enablelinkto();
-  self.revivetrigger linkto(self);
+  self.revivetrigger setHintString("");
+  self.revivetrigger setCursorHint("HINT_NOICON");
+  self.revivetrigger enablelinkTo();
+  self.revivetrigger linkTo(self);
   self.revivetrigger.beingrevived = 0;
   self.revivetrigger.createtime = gettime();
   self thread revive_trigger_think();
@@ -286,14 +286,14 @@ revive_trigger_think() {
   while(true) {
     wait 0.1;
     players = get_players();
-    self.revivetrigger sethintstring("");
+    self.revivetrigger setHintString("");
 
     for(i = 0; i < players.size; i++) {
       d = 0;
       d = self depthinwater();
 
       if(players[i] can_revive(self) || d > 20) {
-        self.revivetrigger sethintstring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
+        self.revivetrigger setHintString(&"GAME_BUTTON_TO_REVIVE_PLAYER");
         break;
       }
     }
@@ -390,10 +390,10 @@ is_facing(facee) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = facee.origin - self.origin;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > 0.9;
 }
@@ -411,7 +411,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
   playerbeingrevived.revivetrigger.beingrevived = 1;
   playerbeingrevived.revive_hud settext(&"GAME_PLAYER_IS_REVIVING_YOU", self);
   playerbeingrevived revive_hud_show_n_fade(3.0);
-  playerbeingrevived.revivetrigger sethintstring("");
+  playerbeingrevived.revivetrigger setHintString("");
   playerbeingrevived startrevive(self);
 
   if(!isDefined(self.reviveprogressbar)) {
@@ -471,7 +471,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
     playerbeingrevived stoprevive(self);
   }
 
-  playerbeingrevived.revivetrigger sethintstring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
+  playerbeingrevived.revivetrigger setHintString(&"GAME_BUTTON_TO_REVIVE_PLAYER");
   playerbeingrevived.revivetrigger.beingrevived = 0;
   return revived;
 }

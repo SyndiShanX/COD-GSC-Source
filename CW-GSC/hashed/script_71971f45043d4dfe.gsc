@@ -72,7 +72,7 @@ function function_a485d734() {
     self.var_8d1d18aa = 1;
     self setblackboardattribute("_run_n_gun_variation", "variation_forward");
   } else {
-    self.maxhealth += 25000 + 7000 * getplayers().size;
+    self.maxhealth += 25000 + 7000 * getPlayers().size;
   }
 
   self.health = self.maxhealth;

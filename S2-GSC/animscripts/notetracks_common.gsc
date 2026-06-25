@@ -307,7 +307,7 @@ func_A6E0(param_00, param_01, param_02) {
 
 func_6FA0(param_00, param_01, param_02, param_03, param_04, param_05) {
   if(func_801F(param_00, param_01)) {
-    var_06 = vectornormalize(param_04) * param_05;
+    var_06 = vectorNormalize(param_04) * param_05;
     var_07 = spawn("script_model", param_02);
     var_07 setModel(param_00);
     var_07.var_001D = param_03;
@@ -511,7 +511,7 @@ func_67C6(param_00, param_01, param_02) {
   var_03 = func_430B("playrumble_", param_00);
   if(isDefined(self)) {
     foreach(var_05 in param_02) {
-      var_05 playrumbleonentity(var_03);
+      var_05 playRumbleOnEntity(var_03);
     }
   }
 }

@@ -1591,7 +1591,7 @@ func_46B7(param_00, param_01) {
 }
 
 func_44BD(param_00, param_01) {
-  var_02 = getent(param_00, param_01);
+  var_02 = getEnt(param_00, param_01);
   if(isDefined(var_02)) {
     return var_02;
   }
@@ -2817,7 +2817,7 @@ func_339D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_08 = -1 * param_04;
   var_09 = undefined;
   for(var_0A = 0; var_0A <= param_05; var_0A++) {
-    var_0B = vectornormalize(rotatevector(param_03, (0, var_08, 0)));
+    var_0B = vectorNormalize(rotatevector(param_03, (0, var_08, 0)));
     var_0C = var_0B * param_01;
     if(var_0A == 0 || var_0A == param_05) {}
 
@@ -3220,7 +3220,7 @@ func_4375(param_00) {
     param_00 = self.var_01A2;
   }
 
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   if(isDefined(var_01)) {
     return var_01;
   }
@@ -3244,7 +3244,7 @@ func_4375(param_00) {
 }
 
 func_424D(param_00) {
-  var_01 = getent(param_00, "script_noteworthy");
+  var_01 = getEnt(param_00, "script_noteworthy");
   if(isDefined(var_01)) {
     return var_01;
   }
@@ -3489,7 +3489,7 @@ func_95AC(param_00, param_01) {
   var_02 = self gettagorigin(param_00);
   var_03 = self gettagangles(param_00);
   var_04 = anglesToForward(var_03);
-  var_04 = vectornormalize(var_04) * param_01;
+  var_04 = vectorNormalize(var_04) * param_01;
   return var_02 + var_04;
 }
 
@@ -3692,7 +3692,7 @@ func_091F(param_00, param_01) {
 }
 
 func_AA4A(param_00, param_01, param_02, param_03) {
-  var_04 = vectornormalize(param_02 - param_00);
+  var_04 = vectorNormalize(param_02 - param_00);
   var_05 = anglesToForward(param_01);
   var_06 = vectordot(var_05, var_04);
   return var_06 >= param_03;
@@ -4235,12 +4235,12 @@ func_33B0(param_00, param_01, param_02, param_03, param_04, param_05) {
 
   var_06 = 1;
   var_07 = 0;
-  param_01 = vectornormalize(param_01);
+  param_01 = vectorNormalize(param_01);
   if(param_01 == (0, 0, 1)) {
     var_08 = (1, 0, 0);
   }
 
-  var_08 = vectornormalize(vectorcross(param_01, (0, 0, 1)));
+  var_08 = vectorNormalize(vectorcross(param_01, (0, 0, 1)));
   var_09 = vectorcross(param_01, var_08);
   var_0A = param_01 * param_03 * cos(param_02);
   var_0B = param_03 * sin(param_02);

@@ -212,7 +212,7 @@ airstrikedamageentsthread(var_0) {
     }
 
     if(!var_1.isplayer || isalive(var_1.issplitscreen)) {
-      var_1 scripts\mp\weapons::damageent(var_1.einflictor, var_1.damageowner, var_1.var_DA, "MOD_PROJECTILE_SPLASH", var_0, var_1.pos, vectornormalize(var_1.damagecenter - var_1.pos));
+      var_1 scripts\mp\weapons::damageent(var_1.einflictor, var_1.damageowner, var_1.var_DA, "MOD_PROJECTILE_SPLASH", var_0, var_1.pos, vectorNormalize(var_1.damagecenter - var_1.pos));
       level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
       if(var_1.isplayer) {
         wait(0.05);
@@ -335,12 +335,12 @@ func_5A60(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_12.turret setModel(var_14);
     var_12.turret.owner = var_1;
     var_12.turret.angles = var_12.angles;
-    var_12.turret linkto(var_12, var_15, (0, 0, 30), (0, 0, 0));
+    var_12.turret linkTo(var_12, var_15, (0, 0, 30), (0, 0, 0));
     var_12.turret setturretmodechangewait(0);
     var_12.turret give_player_session_tokens("manual_target");
     var_12.turret setsentryowner(var_1);
     var_12.turrettarget = spawn("script_model", var_12.origin + anglesToForward(var_12.angles) * 1000 - (0, 0, 10000));
-    var_12.turrettarget linkto(var_12);
+    var_12.turrettarget linkTo(var_12);
     var_12.var_A87B = spawn("script_model", var_12.turrettarget.origin);
     var_12.var_A87B setModel("ks_scorchers_target_mp");
     var_12.var_A87B setentityowner(var_1);
@@ -349,7 +349,7 @@ func_5A60(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, 
     var_12.turret settargetentity(var_12.turrettarget);
   }
 
-  var_12 moveto(var_15, var_7, 0, 0);
+  var_12 moveTo(var_15, var_7, 0, 0);
   if(var_9 == "precision_airstrike") {
     var_12 setscriptablepartstate("thrusters", "idle", 0);
     thread func_3788(var_12, var_15, var_7, var_6 - 1.5, var_1);
@@ -438,11 +438,11 @@ callstrike_bombeffect(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_10.starttime = gettime();
   var_10 thread deleteaftertime(15);
   var_10.angles = var_8;
-  var_10 moveto(var_1 + (0, 0, 100), var_2, 0, 0);
+  var_10 moveTo(var_1 + (0, 0, 100), var_2, 0, 0);
   wait(0.4);
-  var_10 moveto(var_10.origin + var_8 * 4000, 1, 0, 0);
+  var_10 moveTo(var_10.origin + var_8 * 4000, 1, 0, 0);
   wait(0.45);
-  var_10 moveto(var_10.origin + var_8 + (0, 0, -0.2) * 3500, 2, 0, 0);
+  var_10 moveTo(var_10.origin + var_8 + (0, 0, -0.2) * 3500, 2, 0, 0);
   wait(0.15);
   var_11 = spawn("script_model", var_9.origin);
   var_11 setModel("tag_origin");
@@ -459,11 +459,11 @@ callstrike_bombeffect(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   wait(0.05);
-  var_10 moveto(var_10.origin + var_8 + (0, 0, -0.25) * 2500, 2, 0, 0);
+  var_10 moveTo(var_10.origin + var_8 + (0, 0, -0.25) * 2500, 2, 0, 0);
   wait(0.25);
-  var_10 moveto(var_10.origin + var_8 + (0, 0, -0.35) * 2000, 2, 0, 0);
+  var_10 moveTo(var_10.origin + var_8 + (0, 0, -0.35) * 2000, 2, 0, 0);
   wait(0.2);
-  var_10 moveto(var_10.origin + var_8 + (0, 0, -0.45) * 1500, 2, 0, 0);
+  var_10 moveTo(var_10.origin + var_8 + (0, 0, -0.45) * 1500, 2, 0, 0);
   wait(0.5);
   if(isDefined(var_7)) {
     var_7 delete();
@@ -491,7 +491,7 @@ callstrike_bombeffect(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
 
   var_12 = var_12 / var_14 + (0, 0, 128);
-  var_10 moveto(var_9.killcament.origin * 0.35 + var_12 * 0.65, 1.5, 0, 0.5);
+  var_10 moveTo(var_9.killcament.origin * 0.35 + var_12 * 0.65, 1.5, 0, 0.5);
   wait(5);
   var_11 delete();
   var_9 delete();
@@ -513,7 +513,7 @@ func_3788(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = anglesToForward(var_0.angles);
   var_6 = spawn("script_model", var_0.origin - (0, 0, 100) - var_5 * 200);
-  var_6 linkto(var_0);
+  var_6 linkTo(var_0);
   var_0.var_A87B.killcament = var_6;
   wait(0.5);
   var_7 = 50;
@@ -563,7 +563,7 @@ func_D4BD(var_0, var_1, var_2) {
   var_3 = 100;
   if(var_2 != (0, 0, 0)) {
     for(var_4 = 0; var_4 < 3; var_4++) {
-      var_5 = vectornormalize(var_1 - var_2);
+      var_5 = vectorNormalize(var_1 - var_2);
       var_5 = var_5 * var_3;
       playFX(var_0, var_2 + var_5);
       var_3 = var_3 + 100;
@@ -600,7 +600,7 @@ callstrike_explosivebullets(var_0, var_1, var_2, var_3, var_4) {
 
   var_5 = anglesToForward(var_0.angles);
   var_6 = spawn("script_model", var_0.origin - (0, 0, 100) - var_5 * 200);
-  var_6 linkto(var_0);
+  var_6 linkTo(var_0);
   var_0.var_A87B.killcament = var_6;
   wait(0.5);
   var_7 = 50;
@@ -633,7 +633,7 @@ callstrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_7 = undefined;
   var_8 = 0;
   var_9 = (0, var_3, 0);
-  var_7 = getent("airstrikeheight", "targetname");
+  var_7 = getEnt("airstrikeheight", "targetname");
   if(var_4 == "stealth_airstrike") {
     var_10 = 12000;
     var_11 = 4000;
@@ -806,7 +806,7 @@ targetisclose(var_0, var_1, var_2) {
 
 targetisinfront(var_0, var_1) {
   var_2 = anglesToForward(scripts\engine\utility::flat_angle(var_0.angles));
-  var_3 = vectornormalize(scripts\engine\utility::flat_origin(var_1) - var_0.origin);
+  var_3 = vectorNormalize(scripts\engine\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
   if(var_4 > 0) {
     return 1;

@@ -455,7 +455,7 @@ trigger_spawner_reinforcement(var_0) {
     if(!isDefined(var_5.target)) {
       continue;
     }
-    var_6 = getent(var_5.target, "targetname");
+    var_6 = getEnt(var_5.target, "targetname");
 
     if(!isDefined(var_6)) {
       if(!isDefined(var_5.script_linkto)) {
@@ -564,7 +564,7 @@ trigger_reinforcement_spawn_guys() {
 
 trigger_reinforcement_get_reinforcement_spawner() {
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0) && isspawner(var_0)) {
       return var_0;
@@ -1662,8 +1662,8 @@ set_goal_volume() {
   }
   if(isDefined(var_0.target)) {
     var_1 = getnode(var_0.target, "targetname");
-    var_2 = getent(var_0.target, "targetname");
-    var_3 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
+    var_3 = common_scripts\utility::getStruct(var_0.target, "targetname");
     var_4 = undefined;
 
     if(isDefined(var_1)) {
@@ -1887,7 +1887,7 @@ go_to_node_wait_for_player(var_0, var_1, var_2) {
     var_7 = [[var_1]](var_0.target);
 
     if(var_7.size == 1) {
-      var_6 = vectornormalize(var_7[0].origin - var_0.origin);
+      var_6 = vectorNormalize(var_7[0].origin - var_0.origin);
     } else if(isDefined(var_0.angles)) {
       var_6 = anglesToForward(var_0.angles);
     }
@@ -1897,7 +1897,7 @@ go_to_node_wait_for_player(var_0, var_1, var_2) {
   var_8 = [];
 
   foreach(var_4 in level.players) {
-    var_8[var_8.size] = vectornormalize(var_4.origin - self.origin);
+    var_8[var_8.size] = vectorNormalize(var_4.origin - self.origin);
   }
 
   foreach(var_12 in var_8) {
@@ -2643,7 +2643,7 @@ friendly_wave_masterthread() {
 
 friendly_mgturret(var_0) {
   var_1 = getnode(var_0.target, "targetname");
-  var_2 = getent(var_1.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   var_2 setmode("auto_ai");
   var_2 cleartargetentity();
   var_3 = 0;
@@ -2685,11 +2685,11 @@ friendly_mg42_death_notify(var_0, var_1) {
 friendly_mg42_wait_for_use(var_0) {
   var_0 endon("friendly_finished_using_mg42");
   self.useable = 1;
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"PLATFORM_USEAIONMG42");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"PLATFORM_USEAIONMG42");
   self waittill("trigger");
   self.useable = 0;
-  self sethintstring("");
+  self setHintString("");
   self stopuseturret();
   self notify("stopped_use_turret");
   var_0 notify("friendly_finished_using_mg42");
@@ -2764,7 +2764,7 @@ friendly_mg42_think(var_0, var_1) {
   self useturret(var_0);
 
   if(isDefined(var_0.target)) {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
 
     if(isDefined(var_2)) {
       var_2 thread friendly_mg42_endtrigger(var_0, self);
@@ -2944,7 +2944,7 @@ friendlyspawnwave() {
     if(!isDefined(var_3.target)) {
       continue;
     }
-    var_4 = getent(var_3.target, "targetname");
+    var_4 = getEnt(var_3.target, "targetname");
     var_4 thread spawnwavestoptrigger(self);
   }
 }
@@ -3079,7 +3079,7 @@ flood_and_secure_spawner(var_0) {
     var_8 = var_1;
 
     if(isDefined(var_4[var_5].target)) {
-      var_9 = getent(var_4[var_5].target, "targetname");
+      var_9 = getEnt(var_4[var_5].target, "targetname");
 
       if(!isDefined(var_9) || !issubstr(var_9.classname, "actor")) {
         var_8 = var_4[var_5].target;
@@ -3291,7 +3291,7 @@ flood_and_secure_spawn_goal() {
   if(isDefined(var_0)) {
     self setgoalnode(var_0);
   } else {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0)) {
       self setgoalpos(var_0.origin);
@@ -3339,7 +3339,7 @@ flood_and_secure_spawn_goal() {
   }
 
   if(isDefined(var_0.target)) {
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
 
     if(isDefined(var_2) && (var_2.code_classname == "misc_mgturret" || var_2.code_classname == "misc_turret")) {
       self setgoalnode(var_0);
@@ -3373,7 +3373,7 @@ flood_and_secure_spawn_goal() {
 }
 
 furniturepushsound() {
-  var_0 = getent(self.target, "targetname").origin;
+  var_0 = getEnt(self.target, "targetname").origin;
   common_scripts\utility::play_sound_in_space("furniture_slide", var_0);
   wait 0.9;
 
@@ -3611,7 +3611,7 @@ spawnwavestoptrigger(var_0) {
 }
 
 friendlyspawnwave_triggerthink(var_0) {
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
 
   for(;;) {
     self waittill("trigger");
@@ -3744,7 +3744,7 @@ camper_trigger_think(var_0) {
 
   for(var_4 = 0; var_4 < var_1.size; var_4++) {
     var_5 = var_1[var_4];
-    var_6 = getent(var_5, "script_linkname");
+    var_6 = getEnt(var_5, "script_linkname");
 
     if(isDefined(var_6)) {
       var_2 = common_scripts\utility::add_to_array(var_2, var_6);
@@ -3890,7 +3890,7 @@ trigger_requires_player(var_0) {
 }
 
 two_stage_spawner_think(var_0) {
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   waittillframeend;
   var_2 = getEntArray(var_1.target, "targetname");
 
@@ -3970,7 +3970,7 @@ flood_spawner_think(var_0) {
     }
 
     var_4 thread reincrement_count_if_deleted(self);
-    var_4 thread expand_goalradius(var_0);
+    var_4 thread expand_goalRadius(var_0);
     var_4 waittill("death", var_5);
 
     if(!player_saw_kill(var_4, var_5)) {
@@ -4089,7 +4089,7 @@ pyramid_spawn(var_0) {
     self.count--;
     var_5.spawn = var_6;
     var_6 thread reincrement_count_if_deleted(self);
-    var_6 thread expand_goalradius(var_0);
+    var_6 thread expand_goalRadius(var_0);
     thread pyramid_death_report(var_5);
   }
 
@@ -4138,7 +4138,7 @@ pyramid_spawn(var_0) {
       }
 
       var_6 thread reincrement_count_if_deleted(self);
-      var_6 thread expand_goalradius(var_0);
+      var_6 thread expand_goalRadius(var_0);
       var_5.spawn = var_6;
       thread pyramid_death_report(var_5);
 
@@ -4160,7 +4160,7 @@ pyramid_spawner_reports_death(var_0) {
   }
 }
 
-expand_goalradius(var_0) {
+expand_goalRadius(var_0) {
   if(isDefined(self.script_forcegoal)) {
     return;
   }
@@ -4219,7 +4219,7 @@ random_spawn(var_0) {
     var_3 = strtok(var_2.script_linkto, " ");
 
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
-      var_1[var_1.size] = getent(var_3[var_4], "script_linkname");
+      var_1[var_1.size] = getEnt(var_3[var_4], "script_linkname");
     }
   }
 

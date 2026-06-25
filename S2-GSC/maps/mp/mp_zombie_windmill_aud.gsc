@@ -93,7 +93,7 @@ lightning_strike_in_play_space(param_00, param_01) {
     var_03 = spawn("script_origin", param_01);
     var_04 = lib_0380::func_6844("zmb_wm_lightning_strike", undefined, var_03);
     lib_0378::func_8D14(isDefined(var_04), "lightning_strike", 1);
-    var_02 moveto(param_01, 0.2);
+    var_02 moveTo(param_01, 0.2);
   }
 
   level.var_11CB.lightning_strike_counter = level.var_11CB.lightning_strike_counter + 1;
@@ -219,7 +219,7 @@ func_ABF8(param_00, param_01) {
   var_03 = 0;
   var_04 = 0.875;
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02, 0, var_04);
-  var_02 moveto(param_01, 1.9);
+  var_02 moveTo(param_01, 1.9);
   wait(2);
   var_02 delete();
 }

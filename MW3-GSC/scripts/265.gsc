@@ -29,7 +29,7 @@ main(var_0) {
 
 _id_1BB3() {
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
     var_0 delete();
   }
 
@@ -114,7 +114,7 @@ _id_1BC1(var_0) {
   if(!isDefined(var_0.target)) {
     return undefined;
   }
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   return var_1.angles - var_0.angles;
 }
 
@@ -122,7 +122,7 @@ _id_1BC2(var_0) {
   if(!isDefined(var_0.target)) {
     return undefined;
   }
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = var_1.origin[2] - var_0.origin[2];
   var_1 delete();
   return var_2;
@@ -756,8 +756,8 @@ _id_1BEC(var_0, var_1, var_2) {
   if(var_1) {
     var_9 = var_9 + (0, randomfloat(360), 0);
   }
-  var_10 = vectornormalize(anglestoright(var_9));
-  var_11 = vectornormalize(anglestoup(var_9));
+  var_10 = vectorNormalize(anglestoright(var_9));
+  var_11 = vectorNormalize(anglestoup(var_9));
   var_12 = var_8;
   var_12 = var_12 - var_10 * var_5;
   var_12 = var_12 - var_11 * var_5;

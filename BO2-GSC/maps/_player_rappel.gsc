@@ -282,7 +282,7 @@ rappel_play_custom_anim(str_animname, n_blend_time_to_idle) {
   self unlink();
   self _rappel_player_link(self.body, 1);
   self.body maps\_anim::anim_single(self.body, str_animname);
-  self.body anim_stopanimscripted();
+  self.body anim_stopanimScripted();
   wait 0.05;
   self _rappel_enable_weapons_if_allowed();
   self.body setanim(str_idle_loop, 1, n_blend_time_to_idle);
@@ -580,7 +580,7 @@ _rappel_control_start(s_aligned) {
   self _rappel_player_link(self.body);
   self._rappel.ent.origin = self.origin;
   self._rappel.ent.angles = self getplayerangles();
-  self.body linkto(self._rappel.ent);
+  self.body linkTo(self._rappel.ent);
   self.body thread maps\_anim::anim_loop(self.body, self._rappel.anims.idle_loop, self._rappel.anims.idle_stop_notify);
 
   if(isDefined(self._rappel.anims.rappel_viewmodel)) {
@@ -713,7 +713,7 @@ _rappel_descend() {
   n_charge_anim_length = getanimlength(str_charge_anim);
   str_charge_loop_anim = level.scr_anim[self._rappel.anims.body_model][self._rappel.anims.charge_loop][0];
   b_should_charge = self._rappel.movement.should_charge;
-  self.body anim_stopanimscripted();
+  self.body anim_stopanimScripted();
 
   if(b_should_charge) {
     self.body setanim(str_charge_anim, n_charge_anim_length);
@@ -908,7 +908,7 @@ _rappel_do_falling_death() {
 
   v_ground_pos = self._rappel.status.ground_position;
   v_offset = vectorscale((0, 0, 1), 10.0);
-  self._rappel.ent moveto(v_ground_pos + v_offset, 0.05);
+  self._rappel.ent moveTo(v_ground_pos + v_offset, 0.05);
   n_fall_death_length = getanimlength(str_fall_death_splat);
   self.body setanimknoball(str_fall_death_splat, %root, 1, 0, 1);
   earthquake(1.0, 0.5, self.origin, 500);
@@ -1040,7 +1040,7 @@ _rappel_get_wall_vector() {
   v_hit = a_trace["position"];
   v_to_wall = v_hit - self.origin;
   v_from_wall = self.origin - v_hit;
-  v_from_wall_normalized = vectornormalize(v_from_wall);
+  v_from_wall_normalized = vectorNormalize(v_from_wall);
   v_offset = v_from_wall_normalized * 30;
   v_to_wall_final = v_to_wall + v_offset;
   return v_to_wall_final;
@@ -1071,7 +1071,7 @@ _rappel_get_ground_trace_position() {
 _rappel_rotate_origin(n_rotate_angle) {
   self._rappel.status.is_rotating = 1;
   self._rappel.ent.origin = self.origin;
-  self._rappel.ent rotateyaw(n_rotate_angle, 0.5);
+  self._rappel.ent rotateYaw(n_rotate_angle, 0.5);
   self._rappel.ent waittill("rotatedone");
   self._rappel.status.is_rotating = 0;
 }

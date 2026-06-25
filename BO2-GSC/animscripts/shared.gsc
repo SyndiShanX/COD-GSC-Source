@@ -803,7 +803,7 @@ registernotetracks() {
 
           break;
         case "stop anim":
-          anim_stopanimscripted(0.2);
+          anim_stopanimScripted(0.2);
           return note;
         case "stop scene":
           anim_stopscene(0.2);
@@ -980,7 +980,7 @@ registernotetracks() {
       hitenemy = 0;
 
       if(issentient(self.enemy) && isalive(self.enemy) && self canshoot(self.enemy getshootatpos())) {
-        enemydir = vectornormalize(self.enemy getEye() - weaporig);
+        enemydir = vectorNormalize(self.enemy getEye() - weaporig);
 
         if(vectordot(dir, enemydir) > cos(10)) {
           hitenemy = 1;

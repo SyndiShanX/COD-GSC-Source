@@ -233,7 +233,7 @@ script_mortargroup_mortarzone() {
         if(is_lastblast(level.mortars[self.script_mortargroup][i], lastblast)) {
           continue;
         }
-        normalvec = vectornormalize(level.mortars[self.script_mortargroup][i].origin - level.player.origin);
+        normalvec = vectorNormalize(level.mortars[self.script_mortargroup][i].origin - level.player.origin);
         if(vectordot(playerforward, normalvec) > 0.3) {
           points[points.size] = i;
         }
@@ -250,7 +250,7 @@ script_mortargroup_mortarzone() {
 
     if(timed && gettime() > timer) {
       if(isDefined(self.target)) {
-        target = getent(self.target, "targetname");
+        target = getEnt(self.target, "targetname");
         if(isDefined(target)) {
           target notify("trigger");
           level notify("timed barrage finished");
@@ -278,7 +278,7 @@ script_mortargroup_domortar() {
   }
   self waittill("mortar");
   if(isDefined(self.target)) {
-    targ = getent(self.target, "targetname");
+    targ = getEnt(self.target, "targetname");
     if(isDefined(targ)) {
       targ notify("trigger");
     }
@@ -740,9 +740,9 @@ setup_mortar_terrain() {
 
   if(isDefined(self.script_hidden)) {
     if(isDefined(self.script_hidden)) {
-      self.hidden_terrain = getent(self.script_hidden, "targetname");
+      self.hidden_terrain = getEnt(self.script_hidden, "targetname");
     } else if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
-      self.hidden_terrain = getent(self.terrain[0].target, "targetname");
+      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
     }
 
     if(isDefined(self.hidden_terrain)) {
@@ -750,7 +750,7 @@ setup_mortar_terrain() {
     }
   } else if(isDefined(self.has_terrain)) {
     if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
-      self.hidden_terrain = getent(self.terrain[0].target, "targetname");
+      self.hidden_terrain = getEnt(self.terrain[0].target, "targetname");
     }
 
     if(isDefined(self.hidden_terrain)) {

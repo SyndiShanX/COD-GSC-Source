@@ -154,8 +154,8 @@ portableradaruselistener(var_0) {
   self endon("death");
   level endon("game_ended");
   var_0 endon("disconnect");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"MP_PATCH_PICKUP_PORTABLE_RADAR");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"MP_PATCH_PICKUP_PORTABLE_RADAR");
   maps\mp\_utility::setselfusable(var_0);
 
   for(;;) {

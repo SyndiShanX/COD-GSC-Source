@@ -1140,7 +1140,7 @@ friendly_spawner_vision_checker() {
     }
 
     forward = anglesToForward((0, level.player getplayerangles()[1], 0));
-    difference = vectornormalize(difference_vec);
+    difference = vectorNormalize(difference_vec);
     dot = vectordot(forward, difference);
     if(dot < 0.2) {
       player_sees_spawner();

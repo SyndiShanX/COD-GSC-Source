@@ -65,14 +65,14 @@ function stage_logic() {
   level thread sam_reveal_richtofen_vox();
   level waittill("walls_down");
   wait(1);
-  players = getplayers();
+  players = getPlayers();
   array::thread_all(players, &room_sweeper);
   zm_sidequests::stage_completed("sq", "sc");
 }
 
 function sam_reveal_richtofen_vox() {
   wait(8);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     index = zm_utility::get_player_index(players[i]);
     if(index == 3) {
@@ -102,7 +102,7 @@ function exit_stage(success) {}
 
 function sq_sc_switch() {
   level flag::wait_till("first_tanks_charged");
-  var_bf58ee19 = getent("use_tank_switch", "targetname");
+  var_bf58ee19 = getEnt("use_tank_switch", "targetname");
   var_bf58ee19 waittill("trigger");
   self playSound("zmb_switch_flip_no2d");
   self scene::play("p7_fxanim_zmhd_power_switch_bundle", self);
@@ -138,7 +138,7 @@ function place_qualifier() {
 function richtofen_sam_vo() {
   level endon("ss_done");
   level.skit_vox_override = 1;
-  players = getplayers();
+  players = getPlayers();
   richtofen = undefined;
   for(i = 0; i < players.size; i++) {
     ent_num = players[i].characterindex;
@@ -185,7 +185,7 @@ function place_cvg() {
 function play_sam_then_response_line() {
   wait(1);
   sam = undefined;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     ent_num = players[i].characterindex;
     if(isDefined(players[i].zm_random_char)) {
@@ -201,7 +201,7 @@ function play_sam_then_response_line() {
   if(!isDefined(sam)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   player = [];
   for(i = 0; i < players.size; i++) {
     if(players[i] != sam) {

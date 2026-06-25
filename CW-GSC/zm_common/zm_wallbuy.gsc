@@ -218,7 +218,7 @@ function function_26b21477(chalk, new_rarity) {
     cost += zm_weapons::function_5d47055e(new_rarity);
     chalk.trigger.cost = cost;
     hint = function_6e93c5b2(new_rarity);
-    chalk.trigger sethintstring(hint, chalk.trigger.weapon.displayname, cost);
+    chalk.trigger setHintString(hint, chalk.trigger.weapon.displayname, cost);
   }
 }
 
@@ -381,7 +381,7 @@ function function_7a2524b3() {
   self endon(#"death");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2d(player.origin, self.origin) > 64) {
         if(isDefined(player.var_ff409c52) && player.var_ff409c52 == self) {
           player.var_ff409c52 = undefined;
@@ -656,11 +656,11 @@ function init_weapon_upgrade() {
     weapon_spawns[i].weapon = getweapon(weapon_spawns[i].zombie_weapon_upgrade);
     hint_string = zm_weapons::get_weapon_hint(weapon_spawns[i].weapon);
     cost = zm_weapons::get_weapon_cost(weapon_spawns[i].weapon);
-    weapon_spawns[i] sethintstring(hint_string);
-    weapon_spawns[i] setcursorhint("HINT_NOICON");
-    weapon_spawns[i] usetriggerrequirelookat();
+    weapon_spawns[i] setHintString(hint_string);
+    weapon_spawns[i] setCursorHint("HINT_NOICON");
+    weapon_spawns[i] useTriggerRequireLookAt();
     weapon_spawns[i] thread weapon_spawn_think();
-    model = getent(weapon_spawns[i].target, "targetname");
+    model = getEnt(weapon_spawns[i].target, "targetname");
 
     if(isDefined(model)) {
       model useweaponhidetags(weapon_spawns[i].weapon);
@@ -842,28 +842,28 @@ function init_spawnable_weapon_upgrade(s_destination) {
 
 function function_44840c02(str_targetname) {
   level flag::wait_till_all(array(#"zones_initialized", #"finalizeinit"));
-  var_8d0ce13b = getent(str_targetname, "targetname");
+  var_8d0ce13b = getEnt(str_targetname, "targetname");
   var_8d0ce13b clientfield::set("wallbuy_ambient_fx", 1);
 }
 
 function function_c970de50(trigger, parent) {
   if(isDefined(parent)) {
-    trigger enablelinkto();
-    trigger linkto(parent, "", self worldtolocalcoords(trigger.origin), (0, 0, 0));
+    trigger enablelinkTo();
+    trigger linkTo(parent, "", self worldtolocalcoords(trigger.origin), (0, 0, 0));
   }
 
   trigger.weapon = getweapon(trigger.zombie_weapon_upgrade);
-  trigger setcursorhint("HINT_WEAPON_3D", trigger.weapon);
+  trigger setCursorHint("HINT_WEAPON_3D", trigger.weapon);
   trigger.cost = zm_weapons::get_weapon_cost(trigger.weapon);
   trigger.hint_string = zm_weapons::get_weapon_hint(trigger.weapon);
   trigger.hint_parm1 = trigger.cost;
-  trigger sethintstring(trigger.hint_string);
+  trigger setHintString(trigger.hint_string);
   self.buyable_weapon = trigger;
   level._spawned_wallbuys[level._spawned_wallbuys.size] = trigger;
-  weapon_model = getent(trigger.target, "targetname");
+  weapon_model = getEnt(trigger.target, "targetname");
 
   if(isDefined(parent)) {
-    weapon_model linkto(parent, "", self worldtolocalcoords(weapon_model.origin), weapon_model.angles + self.angles);
+    weapon_model linkTo(parent, "", self worldtolocalcoords(weapon_model.origin), weapon_model.angles + self.angles);
     weapon_model setmovingplatformenabled(1);
     weapon_model._linked_ent = trigger;
   }
@@ -1021,7 +1021,7 @@ function wall_weapon_update_prompt(player) {
       if(self.stub.var_8d306e51) {
         self sethintstringforplayer(player, self.stub.hint_string);
       } else {
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     } else if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(player function_8b1a219a()) {
@@ -1033,7 +1033,7 @@ function wall_weapon_update_prompt(player) {
       if(self.stub.var_8d306e51) {
         self sethintstringforplayer(player, self.stub.hint_string);
       } else {
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     } else {
       if(player function_8b1a219a()) {
@@ -1045,7 +1045,7 @@ function wall_weapon_update_prompt(player) {
       if(self.stub.var_8d306e51) {
         self sethintstringforplayer(player, self.stub.hint_string);
       } else {
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     }
   } else {
@@ -1054,7 +1054,7 @@ function wall_weapon_update_prompt(player) {
 
   self.stub.cursor_hint = "HINT_WEAPON";
   self.stub.cursor_hint_weapon = weapon;
-  self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
+  self setCursorHint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
   return true;
 }
 
@@ -1069,7 +1069,7 @@ function reset_wallbuy_internal(set_hint_string) {
     if(set_hint_string) {
       hint_string = zm_weapons::get_weapon_hint(self.weapon);
       cost = zm_weapons::get_weapon_cost(self.weapon);
-      self sethintstring(hint_string);
+      self setHintString(hint_string);
     }
   }
 }
@@ -1124,7 +1124,7 @@ function get_weapon_hint_ammo() {
 }
 
 function weapon_set_first_time_hint(cost, ammo_cost) {
-  self sethintstring(get_weapon_hint_ammo());
+  self setHintString(get_weapon_hint_ammo());
 }
 
 function placeable_mine_can_buy_weapon_extra_check_func(w_weapon) {
@@ -1184,10 +1184,10 @@ function weapon_spawn_think() {
       hint = zm_weapons::get_weapon_hint(self.weapon);
     }
 
-    self sethintstring(hint);
+    self setHintString(hint);
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = self.weapon;
-    self setcursorhint(cursor_hint, cursor_hint_weapon);
+    self setCursorHint(cursor_hint, cursor_hint_weapon);
   } else if(!isDefined(self.first_time_triggered)) {
     self.first_time_triggered = 0;
 
@@ -1374,7 +1374,7 @@ function should_upgrade_weapon(player) {
 }
 
 function show_all_weapon_buys(player, cost, ammo_cost, is_grenade, var_4ee4441d = 0) {
-  model = getent(self.target, "targetname");
+  model = getEnt(self.target, "targetname");
   is_melee = zm_loadout::is_melee_weapon(self.weapon);
 
   if(isDefined(model)) {
@@ -1387,7 +1387,7 @@ function show_all_weapon_buys(player, cost, ammo_cost, is_grenade, var_4ee4441d 
     var_6ff4b667 = struct::get(self.target, "targetname");
 
     if(isDefined(var_6ff4b667) && isDefined(var_6ff4b667.target)) {
-      var_8d0ce13b = getent(var_6ff4b667.target, "targetname");
+      var_8d0ce13b = getEnt(var_6ff4b667.target, "targetname");
       var_8d0ce13b clientfield::set("wallbuy_reveal_fx", 1);
       var_8d0ce13b clientfield::set("wallbuy_ambient_fx", 0);
     }
@@ -1413,11 +1413,11 @@ function show_all_weapon_buys(player, cost, ammo_cost, is_grenade, var_4ee4441d 
           var_6ff4b667 = struct::get(wallbuy.target, "targetname");
 
           if(isDefined(var_6ff4b667) && isDefined(var_6ff4b667.target)) {
-            var_8d0ce13b = getent(var_6ff4b667.target, "targetname");
+            var_8d0ce13b = getEnt(var_6ff4b667.target, "targetname");
             var_8d0ce13b clientfield::set("wallbuy_ambient_fx", 0);
           }
         } else if(isDefined(wallbuy.target)) {
-          model = getent(wallbuy.target, "targetname");
+          model = getEnt(wallbuy.target, "targetname");
 
           if(isDefined(model)) {
             model thread weapon_show(is_grenade);
@@ -1448,7 +1448,7 @@ function weapon_show(player, var_4ee4441d = 0) {
     time = 1;
 
     if(!isDefined(self._linked_ent)) {
-      self moveto(final_pos, time);
+      self moveTo(final_pos, time);
     }
 
     return;
@@ -1478,7 +1478,7 @@ function weapon_show(player, var_4ee4441d = 0) {
   time = 1;
 
   if(!isDefined(self._linked_ent)) {
-    self moveto(self.og_origin, time);
+    self moveTo(self.og_origin, time);
   }
 }
 

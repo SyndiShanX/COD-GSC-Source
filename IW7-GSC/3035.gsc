@@ -31,7 +31,7 @@ func_D1F6() {
     var_7 = var_6.origin;
     var_8 = length(var_4 - var_7);
     var_9 = var_4[2] - var_7[2];
-    var_10 = vectordot(vectornormalize(var_6.origin - level.var_D127.origin), anglesToForward(level.var_D127.angles));
+    var_10 = vectordot(vectorNormalize(var_6.origin - level.var_D127.origin), anglesToForward(level.var_D127.angles));
 
     if(self.spaceship_mode == "fly") {
       if(isDefined(var_6.var_EE10)) {
@@ -191,7 +191,7 @@ func_2658(var_0) {
 
   for(;;) {
     var_10 = distance(level.var_D127.origin, var_7.origin);
-    var_11 = vectordot(anglesToForward(level.var_D127.angles), vectornormalize(var_8.origin - level.var_D127.origin));
+    var_11 = vectordot(anglesToForward(level.var_D127.angles), vectorNormalize(var_8.origin - level.var_D127.origin));
     var_12 = scripts\sp\math::func_C097(var_9, 2000, var_10);
     var_4 = level.var_D127.origin[2] - var_0.origin[2];
 
@@ -204,8 +204,8 @@ func_2658(var_0) {
   func_10FC9();
   func_0BDC::func_A14D();
   var_13 = 1.5;
-  var_7 moveto(var_0.origin, var_13, var_13 * 0.4);
-  var_8 moveto(var_7.origin + anglesToForward(var_0.angles) * var_3, var_13, var_13 * 0.4);
+  var_7 moveTo(var_0.origin, var_13, var_13 * 0.4);
+  var_8 moveTo(var_7.origin + anglesToForward(var_0.angles) * var_3, var_13, var_13 * 0.4);
   func_0BDC::func_D16C(var_7, 1, 0, 1);
   var_14 = undefined;
 
@@ -223,7 +223,7 @@ func_2658(var_0) {
   }
 
   earthquake(0.35, 0.75, level.var_D127.origin, 3000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   func_0BDC::func_A1DD();
   level.var_D127 func_8491("land");
   level.var_D127 notify("jackal_touchdown");
@@ -375,7 +375,7 @@ func_A328() {
   if(isDefined(level.var_A056.var_C8F7)) {
     self.var_C8F7 = spawn("script_model", self.origin);
     self.var_C8F7 setModel(level.var_A056.var_C8F7);
-    self.var_C8F7 linkto(self, "tag_origin", level.var_A056.var_C8F8, (0, 0, 0));
+    self.var_C8F7 linkTo(self, "tag_origin", level.var_A056.var_C8F8, (0, 0, 0));
     self notsolid();
   }
 }
@@ -474,7 +474,7 @@ func_DF4D() {
   }
   foreach(var_1 in self.linked_ents) {
     if(isDefined(var_1)) {
-      var_1 linkto(self, var_1.var_AD42, var_1.var_AD25, var_1.var_AD19);
+      var_1 linkTo(self, var_1.var_AD42, var_1.var_AD25, var_1.var_AD19);
     }
 
     self.linked_ents = scripts\engine\utility::array_remove(self.linked_ents, var_1);
@@ -496,7 +496,7 @@ func_107A1() {
   self.var_AD34 hide();
   self.var_AD34.origin = self gettagorigin("tag_camera") + anglestoup(self gettagangles("tag_camera")) * -60;
   self.var_AD34.angles = self gettagangles("tag_camera");
-  self.var_AD34 linkto(self, "tag_camera");
+  self.var_AD34 linkTo(self, "tag_camera");
 }
 
 func_5698() {
@@ -576,7 +576,7 @@ func_1148A() {
   level.player notify("player_takeoff");
   level.player playSound("jackal_vtol_takeoff_plr");
   scripts\engine\utility::delaythread(4, scripts\engine\utility::flag_clear, "jackal_taking_off");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   earthquake(0.18, 0.6, level.var_D127.origin, 3000);
   func_0BDC::func_A302(1.0, 7, "vtol_turn_takeoff");
   level.player func_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 1, 7);
@@ -631,12 +631,12 @@ func_1147C() {
 func_1147D() {
   scripts\engine\utility::flag_set("jackal_taking_off");
   func_0BDC::jackal_engine_throttle_sfx_volume(0, 0);
-  var_0 = spawnvehicle("veh_mil_air_un_jackal_02", "player_sled", "jackal_un", level.var_D127.origin, level.var_D127.angles);
+  var_0 = spawnVehicle("veh_mil_air_un_jackal_02", "player_sled", "jackal_un", level.var_D127.origin, level.var_D127.angles);
   var_0 func_8184();
   var_0 notsolid();
   var_0.var_AFEB = scripts\engine\utility::spawn_tag_origin();
   var_0.var_AFEB.origin = var_0.origin + anglesToForward(var_0.angles) * 15000;
-  var_0.var_AFEB linkto(var_0);
+  var_0.var_AFEB linkTo(var_0);
   var_0 func_0C24::func_10A49();
   func_0BDC::func_D16C(var_0, 1, 0, 0, 1);
   func_0BDC::func_D16C(var_0, 1, 0, 0);
@@ -666,7 +666,7 @@ func_1147D() {
   func_0BDC::func_A0BE();
   func_0BDC::func_A1DC(400);
   func_0BDC::func_A1DD("hover");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   earthquake(0.18, 0.6, level.var_D127.origin, 3000);
   var_0 func_8479(var_1);
   var_0 func_847B(0.2);
@@ -685,7 +685,7 @@ func_1147D() {
   func_0BDC::func_A1DD(0);
   func_0BDC::func_A0BE(0);
   earthquake(0.29, 1.8, self.origin, 10000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread func_0BDC::func_A287(0.2);
   var_0 waittill("return_player_control");
   level notify("return_player_control");
@@ -697,7 +697,7 @@ func_1147D() {
   func_0BDC::func_D165(var_0.var_AFEB, 0, 1.0, 2.5);
   func_0BDC::func_A1DC(0);
   earthquake(0.27, 1.5, self.origin, 10000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   thread func_0BDC::func_A388(1.0);
   thread func_0BDC::func_D527("jackal_vtol_takeoff_plr", self.origin, undefined, 1.5);
   wait 1.2;
@@ -747,7 +747,7 @@ func_11479() {
   level.player scripts\sp\utility::func_65E1("flag_player_is_flying");
   self notify("notify_player_launch");
   earthquake(0.29, 1.8, self.origin, 10000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.var_D127 waittill("launch_complete");
   func_0BDC::func_A14D(0);
   func_0BDC::func_A155(0);
@@ -1148,7 +1148,7 @@ func_11477() {
   }
 
   scripts\engine\utility::delaythread(4, scripts\engine\utility::flag_clear, "jackal_taking_off");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   earthquake(0.18, 0.6, level.var_D127.origin, 3000);
   func_0BDC::func_A302(1.0, 7, "vtol_turn_takeoff");
   level.player func_8462(level.var_D127.var_BC85, "moveto", "absolute_player", 1, 7);
@@ -1177,7 +1177,7 @@ func_11484() {
   func_0BDC::func_A15B();
   func_0BDC::func_A151();
   var_2 = level.player scripts\engine\utility::spawn_tag_origin();
-  var_1 linkto(var_2);
+  var_1 linkTo(var_2);
   var_3 = var_2.angles[2];
   thread func_11485(var_2, var_3);
   scripts\engine\utility::flag_wait("flag_jackal_can_takeoff");
@@ -1189,8 +1189,8 @@ func_11484() {
 
   self notify("stop_sa_gunner_rotate_think");
   level.player notify("jackal_start_taking_off");
-  var_2 rotateto((var_2.angles[0], var_3, var_2.angles[2]), 0.7, 0.1, 0.2);
-  var_0 moveto(var_0.origin + (0, 0, 100), 1.4, 0.1, 0.2);
+  var_2 rotateTo((var_2.angles[0], var_3, var_2.angles[2]), 0.7, 0.1, 0.2);
+  var_0 moveTo(var_0.origin + (0, 0, 100), 1.4, 0.1, 0.2);
   wait 2.0;
   level.player notify("jackal_taking_off");
   func_0BDC::func_A2DE(0);
@@ -1199,7 +1199,7 @@ func_11484() {
   func_0BDC::func_A1DD("fly");
   func_0BDC::func_D165(var_1.origin, 1, 0, 0.2, 1);
   func_0BDC::func_A0BE(1);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   earthquake(0.18, 0.6, level.var_D127.origin, 3000);
   wait 2.0;
   level.player notify("jackal_done_taking_off");
@@ -1401,7 +1401,7 @@ func_11481() {
     var_3 = getEntArray(var_2.targetname, "target");
 
     foreach(var_5 in var_3) {
-      var_5 linkto(var_2);
+      var_5 linkTo(var_2);
       var_2.cleanup = scripts\engine\utility::array_add(var_2.cleanup, var_5);
 
       if(var_5.targetname == "takeoff_blastshield") {
@@ -1448,7 +1448,7 @@ func_11481() {
     var_5.targetname = var_12.targetname;
     var_2.cleanup = scripts\engine\utility::array_add(var_2.cleanup, var_5);
     var_2.lights = scripts\engine\utility::array_add(var_2.lights, var_5);
-    var_5 linkto(var_2);
+    var_5 linkTo(var_2);
     playFXOnTag(scripts\engine\utility::getfx("vfx_hangar_launch_light_red"), var_5, "tag_origin");
   }
 
@@ -1903,7 +1903,7 @@ func_1ED3(var_0, var_1) {
 }
 
 func_BBCE() {
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.13, 0.5, level.var_D127.origin, 5000);
 }
 
@@ -1988,7 +1988,7 @@ func_BBD7() {
 
 func_BBCB() {
   level.player playSound("jackal_warmup2_plr");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.15, 0.5, level.var_D127.origin, 5000);
 }
 
@@ -2042,7 +2042,7 @@ func_568A() {
 func_5685() {
   var_0 = self gettagorigin("tag_player");
   var_1 = self gettagangles("tag_player");
-  level.player setorigin(var_0);
+  level.player setOrigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
   self func_848E(1);
@@ -2057,7 +2057,7 @@ func_5685() {
 func_56A6() {
   var_0 = self gettagorigin("tag_player");
   var_1 = self gettagangles("tag_player");
-  level.player setorigin(var_0);
+  level.player setOrigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
   self func_848E(1);
@@ -2090,7 +2090,7 @@ func_568B() {
 func_5695() {
   var_0 = self gettagorigin("tag_player");
   var_1 = self gettagangles("tag_player");
-  level.player setorigin(var_0);
+  level.player setOrigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
   self func_848E(1);
@@ -2107,7 +2107,7 @@ func_5695() {
 func_5684() {
   var_0 = self gettagorigin("tag_player");
   var_1 = self gettagangles("tag_player");
-  level.player setorigin(var_0);
+  level.player setOrigin(var_0);
   level.player setplayerangles(var_1);
   func_5699();
   self func_848E(1);
@@ -2209,7 +2209,7 @@ func_88C8(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5 = var_0 getvelocity();
-  var_6 = vectornormalize(var_5);
+  var_6 = vectorNormalize(var_5);
   var_7 = length(var_5);
 
   if(!isDefined(var_2)) {
@@ -2220,7 +2220,7 @@ func_88C8(var_0, var_1, var_2, var_3, var_4) {
   var_9 = var_8;
   var_10 = var_7 * var_9 * 0.5;
   var_11 = var_0.origin + var_10 * var_6;
-  var_6 = vectornormalize(var_11 - var_0.origin);
+  var_6 = vectorNormalize(var_11 - var_0.origin);
   var_0 unlink();
   var_0 giveflagcapturexp(var_6 / var_2);
   thread func_88B2();
@@ -2249,7 +2249,7 @@ func_5689() {
 }
 
 func_568F(var_0) {
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.15, 0.5, level.var_D127.origin, 5000);
 }
 
@@ -2377,7 +2377,7 @@ func_A2F1(var_0) {
   func_A7EE();
   func_DDA7();
   var_2 = var_1.var_102D1.var_5BD7;
-  var_2 linkto(self);
+  var_2 linkTo(self);
   var_2 func_0BD6::func_5C95();
   var_1 thread func_3AC4();
   var_1 func_3AD4(1);
@@ -2433,7 +2433,7 @@ func_E3ED(var_0) {
 
     var_12 = level.var_D127.origin - self.origin;
     var_13 = length(var_12);
-    var_14 = vectornormalize(var_12);
+    var_14 = vectorNormalize(var_12);
     var_15 = -30;
     var_16 = rotatevector(var_14, (0, var_15, 0));
     var_17 = rotatevector(var_14, (0, var_15 - 90, 0));
@@ -2471,9 +2471,9 @@ func_E3ED(var_0) {
     var_32 = anglestoup(var_20);
     var_33 = scripts\sp\math::func_C097(var_1, var_2, var_13);
     var_34 = scripts\sp\math::func_6A8E(0, var_3, var_33);
-    var_16 = vectornormalize(scripts\sp\math::func_AB6F(var_28, var_31, var_34 * self.var_B3D5 * self.var_E708));
-    var_17 = vectornormalize(scripts\sp\math::func_AB6F(var_29, var_26, var_34 * self.var_B3D5 * self.var_E708));
-    var_18 = vectornormalize(scripts\sp\math::func_AB6F(var_30, var_32, var_34 * self.var_B3D5 * self.var_E708));
+    var_16 = vectorNormalize(scripts\sp\math::func_AB6F(var_28, var_31, var_34 * self.var_B3D5 * self.var_E708));
+    var_17 = vectorNormalize(scripts\sp\math::func_AB6F(var_29, var_26, var_34 * self.var_B3D5 * self.var_E708));
+    var_18 = vectorNormalize(scripts\sp\math::func_AB6F(var_30, var_32, var_34 * self.var_B3D5 * self.var_E708));
     var_20 = _axistoangles(var_16, var_17, var_18);
     var_23 = 30;
     var_24 = 20;
@@ -2545,7 +2545,7 @@ func_3AE2() {
     var_0 = 12;
   }
 
-  self.var_C28D linkto(self.segments[var_0], "tag_origin", (0, 0, 0), (0, 0, 0));
+  self.var_C28D linkTo(self.segments[var_0], "tag_origin", (0, 0, 0), (0, 0, 0));
 }
 
 func_3AC2() {
@@ -2565,13 +2565,13 @@ func_3AC2() {
   func_3AE2();
   self.var_DDA8 = scripts\engine\utility::spawn_tag_origin();
   self.var_DDA8 func_0BDC::func_105DB("missile", undefined, "none", undefined, 0, undefined, 1);
-  self.var_DDA8 linkto(self.segments[0], "tag_origin", (15000, 1500, 2000), (0, 0, 0));
+  self.var_DDA8 linkTo(self.segments[0], "tag_origin", (15000, 1500, 2000), (0, 0, 0));
   self.var_A70D = 6;
   self.var_A70C = self.var_11A2A;
   var_0 = (-0, 0, 0);
   self.segments[0].origin = self.origin;
   self.segments[0].angles = self.angles + var_0;
-  self.segments[0] linkto(self);
+  self.segments[0] linkTo(self);
 
   for(var_1 = 1; var_1 < self.var_A70D; var_1++) {
     self.segments[var_1].origin = self.segments[var_1 - 1].origin + anglesToForward(self.segments[var_1 - 1].angles) * self.var_56E9;
@@ -2580,7 +2580,7 @@ func_3AC2() {
 
   for(var_1 = 1; var_1 < self.var_11A2A; var_1++) {
     self.segments[var_1].parent = self.segments[var_1 - 1];
-    self.segments[var_1] linkto(self.segments[var_1].var_AD34);
+    self.segments[var_1] linkTo(self.segments[var_1].var_AD34);
   }
 
   func_3AE3();
@@ -2643,8 +2643,8 @@ func_3AE8(var_0) {
     var_25 = self.segments[self.var_11A2A - 1].origin;
     wait 0.05;
     var_5.var_56EA = distance(var_22, var_5.origin);
-    var_26 = vectordot(vectornormalize(var_5.origin - var_22), anglesToForward(var_23));
-    var_27 = vectornormalize(var_22 - var_25);
+    var_26 = vectordot(vectorNormalize(var_5.origin - var_22), anglesToForward(var_23));
+    var_27 = vectorNormalize(var_22 - var_25);
     var_28 = length(var_22 - var_24);
     var_29 = rotatevectorinverted(var_22 - var_5.origin, var_5.angles);
 
@@ -2661,7 +2661,7 @@ func_3AE8(var_0) {
       self.segments[var_32] unlink();
       self.segments[var_32].origin = self.segments[var_32].parent.origin + anglesToForward(self.segments[var_32].parent.angles) * self.var_56E9;
       self.segments[var_32] func_3AE7(var_23, var_30, var_23, var_5, var_32, self.var_A70C - 1, self.var_A70D, var_31, var_4);
-      self.segments[var_32] linkto(self.segments[var_32].var_AD34);
+      self.segments[var_32] linkTo(self.segments[var_32].var_AD34);
     }
 
     level notify("notify_spline_update");
@@ -2904,8 +2904,8 @@ func_3AD0() {
 
   for(;;) {
     var_4 = length(self.origin - level.var_D127.origin);
-    var_5 = vectordot(vectornormalize(self.segments[15].origin - level.var_D127.origin), anglesToForward(level.var_D127.angles));
-    var_6 = vectordot(anglesToForward(self.segments[15].angles), vectornormalize(level.var_D127.origin - self.segments[15].origin));
+    var_5 = vectordot(vectorNormalize(self.segments[15].origin - level.var_D127.origin), anglesToForward(level.var_D127.angles));
+    var_6 = vectordot(anglesToForward(self.segments[15].angles), vectorNormalize(level.var_D127.origin - self.segments[15].origin));
 
     if(var_4 < var_1 && var_5 > 0.92) {
       if(var_0) {
@@ -3219,7 +3219,7 @@ func_3AE4() {
     level waittill("notify_spline_update");
     var_1 = self.var_6C1E.origin - level.var_D127.origin;
     var_2 = length(self.origin - level.var_D127.origin);
-    var_3 = vectordot(anglesToForward(level.var_D127.angles), vectornormalize(var_1));
+    var_3 = vectordot(anglesToForward(level.var_D127.angles), vectorNormalize(var_1));
 
     if(scripts\engine\utility::flag("flag_player_on_runway") && !var_0) {
       var_0 = 1;
@@ -3263,7 +3263,7 @@ func_3AD7(var_0, var_1) {
 
   for(;;) {
     level waittill("notify_spline_update");
-    var_5 = vectornormalize(var_3.origin - level.var_D127.origin);
+    var_5 = vectorNormalize(var_3.origin - level.var_D127.origin);
     var_6 = anglesToForward(level.var_D127.angles);
     var_7 = vectordot(var_5, var_6);
 
@@ -3380,21 +3380,21 @@ func_3AE7(var_0, var_1, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(var_3 >= var_7) {
     var_1 = self.parent.angles;
   } else {
-    var_8 = vectornormalize(var_1 - self.origin);
+    var_8 = vectorNormalize(var_1 - self.origin);
     var_9 = anglestoup(var_2.angles);
     var_10 = anglestoright(self.parent.angles);
     var_11 = anglesToForward(var_2.angles);
     var_12 = anglestoup(var_2.angles);
     var_13 = anglestoright(self.parent.angles);
     self.var_56EA = distance(self.origin, var_1);
-    self.var_5ABB = vectordot(vectornormalize(self.origin - var_1), anglesToForward(var_1));
+    self.var_5ABB = vectordot(vectorNormalize(self.origin - var_1), anglesToForward(var_1));
     var_14 = scripts\sp\math::func_C097(0, 0.1, self.var_5ABB);
     var_6 = scripts\sp\math::func_6A8E(0.1, 1, var_6);
     var_15 = scripts\sp\math::func_C097(var_5, var_4, var_3);
     var_16 = scripts\sp\math::func_C09B(var_15);
-    var_17 = vectornormalize(var_11 * (1 - var_16) + var_8 * var_16);
-    var_18 = vectornormalize(var_13 * (1 - var_15) + var_10 * var_15);
-    var_19 = vectornormalize(var_12 * (1 - var_15) + var_9 * var_15);
+    var_17 = vectorNormalize(var_11 * (1 - var_16) + var_8 * var_16);
+    var_18 = vectorNormalize(var_13 * (1 - var_15) + var_10 * var_15);
+    var_19 = vectorNormalize(var_12 * (1 - var_15) + var_9 * var_15);
     var_1 = _axistoangles(var_17, var_18, var_19);
   }
 
@@ -3413,7 +3413,7 @@ func_3ADE(var_0) {
     var_3.var_7601 = scripts\engine\utility::spawn_tag_origin();
     var_3.var_7601.origin = var_3.origin;
     var_3.var_7601.angles = _axistoangles(anglestoup(var_3.angles), -1 * anglestoright(var_3.angles), anglesToForward(var_3.angles));
-    var_3.var_7601 linkto(var_3);
+    var_3.var_7601 linkTo(var_3);
     var_2 = scripts\engine\utility::array_add(var_2, var_3);
     var_3.var_AD34 = self;
     self.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_3);
@@ -3432,7 +3432,7 @@ func_3AE3() {
   var_0.var_AB99 = 0.2;
   var_0.active = 0;
   var_0.var_20F1 = scripts\engine\utility::spawn_tag_origin();
-  var_0.var_20F1 linkto(var_0, "tag_origin", (900, 0, 75), (0, 0, 0));
+  var_0.var_20F1 linkTo(var_0, "tag_origin", (900, 0, 75), (0, 0, 0));
 
   if(isDefined(self.var_5BD7)) {
     var_0.var_5BD7 = self.var_5BD7;
@@ -3441,11 +3441,11 @@ func_3AE3() {
     var_0.var_5BD7 = func_0BD6::func_10753();
     var_0.var_5BD7.var_4074 = [];
     var_0.var_5BD7.var_FC28 = scripts\engine\utility::spawn_tag_origin();
-    var_0.var_5BD7.var_FC28 linkto(var_0.var_5BD7, "j_mainroot", (0, 0, 0), (0, 0, 0));
+    var_0.var_5BD7.var_FC28 linkTo(var_0.var_5BD7, "j_mainroot", (0, 0, 0), (0, 0, 0));
     var_0.var_5BD7.var_FB5B = scripts\engine\utility::spawn_tag_origin();
-    var_0.var_5BD7.var_FB5B linkto(var_0.var_5BD7, "j_mainroot", (0, 0, 0), (0, 0, 0));
+    var_0.var_5BD7.var_FB5B linkTo(var_0.var_5BD7, "j_mainroot", (0, 0, 0), (0, 0, 0));
     var_0.var_5BD7.var_FB5C = scripts\engine\utility::spawn_tag_origin();
-    var_0.var_5BD7.var_FB5C linkto(var_0.var_5BD7, "j_mainroot", (0, 0, 0), (0, 0, 0));
+    var_0.var_5BD7.var_FB5C linkTo(var_0.var_5BD7, "j_mainroot", (0, 0, 0), (0, 0, 0));
     var_0.var_5BD7.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_0.var_5BD7.var_FC28);
     var_0.var_5BD7.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_0.var_5BD7.var_FB5B);
     var_0.var_5BD7.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_0.var_5BD7.var_FB5C);
@@ -3453,13 +3453,13 @@ func_3AE3() {
 
   var_0.var_5BD7.origin = var_0.origin + (0, 0, 35);
   var_0.var_5BD7.angles = var_0.angles;
-  var_0.var_5BD7 linkto(var_0);
+  var_0.var_5BD7 linkTo(var_0);
   var_0.var_5BD7.active = 0;
   var_0.var_11AE0 = 1;
   var_0.var_7601 = scripts\engine\utility::spawn_tag_origin();
   var_0.var_7601.origin = var_0.origin;
   var_0.var_7601.angles = _axistoangles(anglestoup(var_0.angles), -1 * anglestoright(var_0.angles), anglesToForward(var_0.angles));
-  var_0.var_7601 linkto(var_0);
+  var_0.var_7601 linkTo(var_0);
   self.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_0);
   self.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_0.var_7601);
   self.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_0.var_5BD7);
@@ -3488,7 +3488,7 @@ func_5BFA() {
   self.var_102D1.var_5BD7.active = 0;
   self.var_102D1.var_5BD7.origin = self.var_102D1.origin + (0, 0, 35);
   self.var_102D1.var_5BD7.angles = self.var_102D1.angles;
-  self.var_102D1.var_5BD7 linkto(self.var_102D1);
+  self.var_102D1.var_5BD7 linkTo(self.var_102D1);
   self.var_102D1.var_5BD7 func_0BD6::func_A7D5();
   self.var_102D1.var_5BD7 func_0BD6::func_5C8D();
 }
@@ -3518,15 +3518,15 @@ func_3AC5(var_0, var_1, var_2) {
       self.angles = var_1.angles;
       break;
     } else {
-      self.origin = self.origin + vectornormalize(var_3) * var_2;
+      self.origin = self.origin + vectorNormalize(var_3) * var_2;
       self.angles = var_1.angles;
     }
 
-    self linkto(self.parent);
+    self linkTo(self.parent);
     wait 0.05;
   }
 
-  self linkto(self.parent);
+  self linkTo(self.parent);
 }
 
 func_3AB6() {
@@ -3539,7 +3539,7 @@ func_3AB6() {
     var_3 = scripts\engine\utility::spawn_tag_origin();
     var_3.origin = var_2.origin;
     var_0 = scripts\engine\utility::array_add(var_0, var_3);
-    var_3 linkto(var_2);
+    var_3 linkTo(var_2);
     self.var_4074 = scripts\engine\utility::array_add(self.var_4074, var_3);
   }
 
@@ -3594,7 +3594,7 @@ func_3ADC(var_0) {
     func_0BDC::func_A38E(33, 9, 3, 2);
   }
 
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.35, 1.3, level.var_D127.origin, 5000);
 
   if(!isDefined(var_0)) {
@@ -3633,7 +3633,7 @@ func_3ACF(var_0) {
   var_4 = rotatevector(var_3, self.var_6C1E.angles);
   self.var_11593.origin = self.var_6C1E.origin + var_4 + anglestoup(self.var_6C1E.angles) * var_2;
   self.var_11593.angles = self.var_6C1E.angles;
-  self.var_11593 linkto(self);
+  self.var_11593 linkTo(self);
   self.var_4074 = scripts\engine\utility::array_add(self.var_4074, self.var_11593);
   self.var_4074 = scripts\engine\utility::array_add(self.var_4074, self.var_11593.var_B017);
   var_5 = length(level.var_D127.spaceship_vel);
@@ -3644,10 +3644,10 @@ func_3ACF(var_0) {
     var_6 = self.var_6C1E.origin + anglestoup(self.var_6C1E.angles) * var_2;
 
     if(!isDefined(var_0)) {
-      var_7 = vectornormalize(var_6 - self.var_11593.origin);
+      var_7 = vectorNormalize(var_6 - self.var_11593.origin);
       var_8 = distance(self.var_11593.origin, var_6);
     } else {
-      var_7 = vectornormalize(var_6 - level.var_D127.origin);
+      var_7 = vectorNormalize(var_6 - level.var_D127.origin);
       var_8 = distance(level.var_D127.origin, var_6);
     }
 
@@ -3660,7 +3660,7 @@ func_3ACF(var_0) {
     self.var_11593 unlink();
     self.var_11593.origin = self.var_11593.origin + var_7 * var_10;
     self.var_11593.angles = self.var_6C1E.angles;
-    self.var_11593 linkto(self);
+    self.var_11593 linkTo(self);
     self.var_102D1.var_5BD7.var_FB5C ghostattack(var_12, 0.05);
     self.var_102D1.var_5BD7.var_FB5C func_8277(var_13, 0.05);
 

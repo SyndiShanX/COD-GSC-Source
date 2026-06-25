@@ -66,7 +66,7 @@ start_map() {
   flag_wait("upper_room_cleared");
 
   level.hostageNodes = getnodearray("node_hostage_scaffolding", "targetname");
-  volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");
+  volume_ambush_room = getEnt("volume_ambush_room", "script_noteworthy");
   thread hostage_evac(volume_ambush_room);
   thread alarm();
 
@@ -114,7 +114,7 @@ dialogue_thermal_hint() {
 }
 
 heli_enters_and_attacks() {
-  heliSpawner = getent("heli_deck2", "targetname");
+  heliSpawner = getEnt("heli_deck2", "targetname");
   heliSpawner.origin = heliSpawner.origin + (0, 0, -250);
   eHeli = spawn_vehicle_from_targetname_and_drive("heli_deck2");
 
@@ -184,7 +184,7 @@ breach_flags() {
 }
 
 alarm() {
-  alarm_org = getent("origin_alarm", "targetname");
+  alarm_org = getEnt("origin_alarm", "targetname");
   alarm_org playLoopSound("emt_oilrig_alarm_alert");
   wait(20);
   alarm_org stopLoopSound("emt_oilrig_alarm_alert");
@@ -297,15 +297,15 @@ obj_main() {
   Objective_SetPointerTextOverride(objective_number);
 
   flag_wait("upper_room_cleared");
-  obj_position = getent("obj_explosives_locate_01", "targetname");
+  obj_position = getEnt("obj_explosives_locate_01", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_at_stairs_to_deck_2");
-  obj_position = getent("obj_explosives_locate_01a", "targetname");
+  obj_position = getEnt("obj_explosives_locate_01a", "targetname");
   objective_position(objective_number, obj_position.origin);
 
   flag_wait("player_at_corener_of_deck2");
-  obj_position = getent("obj_explosives_locate_02", "targetname");
+  obj_position = getEnt("obj_explosives_locate_02", "targetname");
   objective_position(objective_number, obj_position.origin);
 
   flag_wait("player_at_stairs_to_top_deck");

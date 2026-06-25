@@ -171,11 +171,11 @@ light_model_swap(name, model) {
   }
 }
 projector_screen_fx() {
-  projector_struct = getstruct("struct_theater_projector_beam", "targetname");
+  projector_struct = getStruct("struct_theater_projector_beam", "targetname");
   projector_ang = projector_struct.angles;
   projector_up = AnglesToUp(projector_ang);
   projector_forward = anglesToForward(projector_ang);
-  screen_struct = getstruct("struct_theater_screen", "targetname");
+  screen_struct = getStruct("struct_theater_screen", "targetname");
   screen_ang = screen_struct.angles;
   screen_up = AnglesToUp(screen_ang);
   screen_forward = anglesToForward(screen_ang);

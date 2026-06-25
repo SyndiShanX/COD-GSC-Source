@@ -21,7 +21,7 @@ function spawn_player_clone(player, origin = player.origin, forceweapon, forcemo
     }
   }
   weaponmodel = weapon.worldmodel;
-  spawner = getent("fake_player_spawner", "targetname");
+  spawner = getEnt("fake_player_spawner", "targetname");
   if(isDefined(spawner)) {
     clone = spawner spawnfromspawner();
     clone.origin = origin;

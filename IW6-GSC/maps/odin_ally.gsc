@@ -169,7 +169,7 @@ odin_invasion_scene() {
   thread invasion_door_anim();
   thread enemy_infiltration_door();
   var_0 = enemy_squad_spawn("intro_bad_guys_", 5, "intro_bad_guys_tp_");
-  var_1 = getent("invasion_round_hatch", "targetname");
+  var_1 = getEnt("invasion_round_hatch", "targetname");
   var_2 = 1;
 
   foreach(var_4 in var_0) {
@@ -200,7 +200,7 @@ odin_invasion_scene() {
   var_0[3] hidepart("tag_silencer");
   var_6[0].name = "";
   var_6[2].name = "";
-  var_10 = getent("intro_breach_origin", "targetname");
+  var_10 = getEnt("intro_breach_origin", "targetname");
   var_11 = [];
   var_11["odin_invader_01"] = var_0[0];
   var_11["odin_invader_02"] = var_0[1];
@@ -272,7 +272,7 @@ player_invasion_anims() {
   if(common_scripts\utility::flag("invasion_ok_to_anim_player")) {
     var_0 = maps\_utility::spawn_anim_model("player_rig");
     level.ally_ent_del[level.ally_ent_del.size] = var_0;
-    var_1 = getent("anim_entrance_to_infiltrate", "script_noteworthy");
+    var_1 = getEnt("anim_entrance_to_infiltrate", "script_noteworthy");
     var_0 hide();
     var_2 = [];
     var_2["player_rig"] = var_0;
@@ -324,7 +324,7 @@ player_link(var_0) {
 }
 
 post_invasion_push_back() {
-  var_0 = getent("infil_push_back_point", "targetname");
+  var_0 = getEnt("infil_push_back_point", "targetname");
   var_1 = var_0.origin[1];
   var_2 = 0;
   var_3 = 0;
@@ -364,7 +364,7 @@ post_invasion_push_back() {
 }
 
 player_invasion_wipe_flag() {
-  var_0 = getent("intro_breach_origin", "targetname");
+  var_0 = getEnt("intro_breach_origin", "targetname");
   var_1 = maps\_utility::spawn_anim_model("player_rig");
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
   wait 0.01;
@@ -381,7 +381,7 @@ player_invasion_wipe_flag() {
 
 ally_invasion_scene_approach() {
   level.ally pushplayer(1);
-  var_0 = getent("anim_entrance_to_infiltrate", "script_noteworthy");
+  var_0 = getEnt("anim_entrance_to_infiltrate", "script_noteworthy");
   var_0 notify("stop_loop");
   maps\_utility::delaythread(1, maps\odin_util::push_out_of_doorway, "X", "<", 1000, 1000);
   var_0 maps\_anim::anim_single_solo(self, "odin_infiltrate_kyra_to_door");
@@ -412,14 +412,14 @@ invasion_door_shut(var_0) {
 }
 
 invasion_door_anim() {
-  var_0 = getent("infil_main_door", "targetname");
-  var_1 = getent("infil_main_door_org", "targetname");
-  var_2 = getent("scriptednode_door", "targetname");
+  var_0 = getEnt("infil_main_door", "targetname");
+  var_1 = getEnt("infil_main_door_org", "targetname");
+  var_2 = getEnt("scriptednode_door", "targetname");
   var_3 = maps\_utility::spawn_anim_model("space_round_hatch");
   level.ally_ent_del[level.ally_ent_del.size] = var_3;
   var_2 maps\_anim::anim_first_frame_solo(var_3, "odin_infiltrate_hatch");
-  var_1 linkto(var_3, "door_DM");
-  var_0 linkto(var_1);
+  var_1 linkTo(var_3, "door_DM");
+  var_0 linkTo(var_1);
   common_scripts\utility::flag_wait("prepare_anim_round_hatch");
   var_2 maps\_anim::anim_single_solo(var_3, "odin_infiltrate_hatch");
 }
@@ -441,14 +441,14 @@ shut_post_infil_door_flag(var_0) {
 }
 
 post_infil_door() {
-  var_0 = getent("scriptednode_door", "targetname");
+  var_0 = getEnt("scriptednode_door", "targetname");
   var_1 = maps\_utility::spawn_anim_model("space_square_hatch");
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
-  var_2 = getent("post_infil_struggle_clip", "targetname");
-  var_3 = getent("post_infil_struggle_clip_origin", "targetname");
+  var_2 = getEnt("post_infil_struggle_clip", "targetname");
+  var_3 = getEnt("post_infil_struggle_clip_origin", "targetname");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_infiltrate_escape_door");
-  var_3 linkto(var_1, "tag_origin");
-  var_2 linkto(var_3);
+  var_3 linkTo(var_1, "tag_origin");
+  var_2 linkTo(var_3);
   common_scripts\utility::flag_wait("open_post_infil_door");
   thread maps\odin_audio::sfx_post_infil_door();
   var_0 maps\_anim::anim_single_solo(var_1, "odin_infiltrate_escape_door");
@@ -459,7 +459,7 @@ open_enemy_infiltration_door_flag(var_0) {
 }
 
 enemy_infiltration_door() {
-  var_0 = getent("scriptednode_door", "targetname");
+  var_0 = getEnt("scriptednode_door", "targetname");
   var_1 = maps\_utility::spawn_anim_model("space_square_hatch");
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_infiltrate_enemy_door");
@@ -474,26 +474,26 @@ hallway_encounter() {
   level.struggle_guy = var_0;
   level.ally_ent_del[level.ally_ent_del.size] = var_0;
   var_0 setModel("body_fed_space_assault_b");
-  var_1 = getent("struggle_enemy_head", "targetname");
-  var_2 = getent("struggle_enemy_inner_head", "targetname");
+  var_1 = getEnt("struggle_enemy_head", "targetname");
+  var_2 = getEnt("struggle_enemy_inner_head", "targetname");
   var_3 = var_0 gettagorigin("J_Spine4");
   var_4 = var_0 gettagangles("J_Spine4");
   var_1.origin = var_3;
   var_1.angles = var_4;
   var_2.origin = var_3;
   var_2.angles = var_4;
-  var_1 linkto(var_0, "J_Spine4");
+  var_1 linkTo(var_0, "J_Spine4");
   var_0 attach("head_fed_space_head_c", "", 1);
-  var_2 linkto(var_0, "J_Spine4");
+  var_2 linkTo(var_0, "J_Spine4");
   var_1 hide();
   var_2 hide();
-  var_5 = getent("struggle_gun", "targetname");
-  var_6 = getent("struggle_dummygun", "targetname");
-  var_6 linkto(var_5);
+  var_5 = getEnt("struggle_gun", "targetname");
+  var_6 = getEnt("struggle_dummygun", "targetname");
+  var_6 linkTo(var_5);
   var_6 attach("weapon_acog_iw6", "tag_acog_2", 1);
   var_5.origin = var_0 gettagorigin("tag_weapon_right");
   var_5.angles = var_0 gettagangles("tag_weapon_right");
-  var_5 linkto(var_0, "tag_weapon_right");
+  var_5 linkTo(var_0, "tag_weapon_right");
   playFXOnTag(level._effect["flashlight"], var_6, "tag_flash");
   level.player thread maps\odin_util::struggle_flashlight(var_5);
   var_5 hide();
@@ -503,7 +503,7 @@ hallway_encounter() {
   level.ally_ent_del[level.ally_ent_del.size] = var_7;
   var_7 hide();
   thread struggle_rotate(var_0, var_7);
-  var_8 = getent("gun_struggle_intro", "targetname");
+  var_8 = getEnt("gun_struggle_intro", "targetname");
   level.ally.animname = "odin_ally";
   var_0.animname = "odin_opfor";
   var_9 = [];
@@ -566,9 +566,9 @@ struggle_logic(var_0, var_1, var_2) {
   level.ally setgoalpos(level.ally.origin);
   level.player setCanDamage(0);
   thread struggle_grunts();
-  var_3 = getent("struggle_gun", "targetname");
-  var_4 = getent("struggle_gun_target", "targetname");
-  var_5 = getent("acog_scope_struggle", "targetname");
+  var_3 = getEnt("struggle_gun", "targetname");
+  var_4 = getEnt("struggle_gun_target", "targetname");
+  var_5 = getEnt("acog_scope_struggle", "targetname");
   var_6 = 0.01;
   var_7 = 0;
   var_8 = 1;
@@ -595,11 +595,11 @@ struggle_logic(var_0, var_1, var_2) {
   var_3 hidepart("tag_sight_on", "viewmodel_space_tar21");
   var_5.origin = var_3 gettagorigin("tag_acog_2");
   var_5.angles = var_3 gettagangles("tag_acog_2");
-  var_5 linkto(var_3, "tag_acog_2");
-  var_4 linkto(var_3);
+  var_5 linkTo(var_3, "tag_acog_2");
+  var_4 linkTo(var_3);
   var_3.origin = var_0 gettagorigin("tag_weapon");
   var_3.angles = var_0 gettagangles("tag_weapon");
-  var_3 linkto(var_0, "tag_weapon");
+  var_3 linkTo(var_0, "tag_weapon");
   common_scripts\utility::flag_set("struggle_has_started");
   level.sfx_plr_grapple_loop_playing = 0;
   level.player thread maps\odin_audio::sfx_ally_plr_grapple_loop_init();
@@ -642,14 +642,14 @@ struggle_logic(var_0, var_1, var_2) {
       var_14 = 1;
       var_15 = 0;
       var_8 = 0.5;
-      level.player playrumbleonentity("light_1s");
+      level.player playRumbleOnEntity("light_1s");
     }
 
     if(level.struggle_anim_time > 0.574 && level.struggle_anim_time < 0.7 && var_21[1] < -0.15) {
       var_14 = 0;
       var_15 = 1;
       var_8 = 0.5;
-      level.player playrumbleonentity("light_1s");
+      level.player playRumbleOnEntity("light_1s");
     }
 
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55 && var_14 == 1) {
@@ -659,7 +659,7 @@ struggle_logic(var_0, var_1, var_2) {
         var_8 = 3 - var_16;
       }
 
-      level.player playrumbleonentity("heavy_1s");
+      level.player playRumbleOnEntity("heavy_1s");
       common_scripts\utility::flag_set("struggle_grunt");
     }
 
@@ -670,7 +670,7 @@ struggle_logic(var_0, var_1, var_2) {
         var_8 = 3 - var_16;
       }
 
-      level.player playrumbleonentity("heavy_1s");
+      level.player playRumbleOnEntity("heavy_1s");
     }
 
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55) {
@@ -835,9 +835,9 @@ player_struggle_anim(var_0, var_1, var_2) {
 
 space_shotgun_firing(var_0, var_1) {
   level endon("struggle_end");
-  var_2 = getent("struggle_gun", "targetname");
-  var_3 = getent("struggle_gun_target", "targetname");
-  var_3 linkto(var_2);
+  var_2 = getEnt("struggle_gun", "targetname");
+  var_3 = getEnt("struggle_gun_target", "targetname");
+  var_3 linkTo(var_2);
   var_4 = gettime();
   var_5 = var_4 - 500;
   var_6 = 0;
@@ -880,7 +880,7 @@ fire_space_microtar(var_0, var_1) {
   for(var_2 = 0; var_2 < 3; var_2++) {
     magicbullet("microtar_space_interior", var_0 gettagorigin("tag_flash"), var_1.origin, level.player);
     level.player playSound("weap_tar21_fire_plr");
-    level.player playrumbleonentity("smg_fire");
+    level.player playRumbleOnEntity("smg_fire");
     playFXOnTag(common_scripts\utility::getfx("space_microtar_shot"), var_0, "tag_flash");
     level.struggle_bullets = level.struggle_bullets - 1;
     wait 0.05;
@@ -892,14 +892,14 @@ player_failed_struggle(var_0, var_1) {
   level notify("struggle_end");
   common_scripts\utility::flag_set("stop_struggle_rotate");
   level.player thread maps\odin_audio::sfx_ally_plr_grapple_failed();
-  var_2 = getent("struggle_rotate_hinge", "targetname");
-  var_2 rotateto((0, 270, 0), 1.5);
+  var_2 = getEnt("struggle_rotate_hinge", "targetname");
+  var_2 rotateTo((0, 270, 0), 1.5);
   var_3 = [];
   var_3["odin_opfor"] = var_0;
   var_3["player_rig"] = var_1;
 
   foreach(var_5 in var_3) {
-    var_5 maps\_utility::anim_stopanimscripted();
+    var_5 maps\_utility::anim_stopanimScripted();
   }
 
   wait 0.01;
@@ -954,7 +954,7 @@ check_for_layout_change_mid_hint(var_0) {
 
 fire_enemy_gun() {
   level endon("ally_clear");
-  var_0 = getent("struggle_gun", "targetname");
+  var_0 = getEnt("struggle_gun", "targetname");
   level.player playSound("scn_odin_player_grapple_lost");
   wait 0.7;
   playFXOnTag(common_scripts\utility::getfx("spc_explosion_240"), var_0, "tag_flash");
@@ -963,14 +963,14 @@ fire_enemy_gun() {
 
 space_stuggle_enemy_death(var_0) {
   level endon("ally_clear");
-  var_1 = getent("struggle_enemy_head", "targetname");
-  var_2 = getent("struggle_enemy_inner_head", "targetname");
+  var_1 = getEnt("struggle_enemy_head", "targetname");
+  var_2 = getEnt("struggle_enemy_inner_head", "targetname");
 
   if(level.struggle_anim_time > 0.325 && level.struggle_anim_time < 0.635) {
     level notify("struggle_end");
     common_scripts\utility::flag_set("player_shoot_anims");
     common_scripts\utility::flag_set("stop_struggle_rotate");
-    var_3 = getent("struggle_gun", "targetname");
+    var_3 = getEnt("struggle_gun", "targetname");
     stopFXOnTag(common_scripts\utility::getfx("spc_explosion_240"), var_3, "tag_flash");
     playFXOnTag(level._effect["blood_impact_space"], var_2, "tag_eye");
     var_0 setModel(level.scr_model["odin_opfor"] + "_cracked");
@@ -988,7 +988,7 @@ player_wins_struggle(var_0, var_1, var_2) {
   common_scripts\utility::flag_clear("clear_to_tweak_player");
   common_scripts\utility::flag_wait("player_shoot_anims");
   common_scripts\utility::flag_set("saved_ally");
-  var_0 maps\_utility::anim_stopanimscripted();
+  var_0 maps\_utility::anim_stopanimScripted();
   maps\_utility::radio_dialogue_stop();
   thread maps\odin_audio::sfx_ally_plr_grapple_success();
   maps\_utility::radio_dialogue_stop();
@@ -996,21 +996,21 @@ player_wins_struggle(var_0, var_1, var_2) {
   thread struggle_succeed_slowmo();
   thread struggle_succeed_fx(var_0);
   thread z_trans(var_1, var_0, var_2);
-  var_3 = getent("z_trans_hinge_a", "targetname");
+  var_3 = getEnt("z_trans_hinge_a", "targetname");
   var_4 = maps\_utility::spawn_anim_model("player_rig");
   var_4 hide();
   var_3 maps\_anim::anim_first_frame_solo(var_4, "odin_hall_escape_turn01_player");
   thread push_enemy_down(var_0);
   var_1 setanimknob(%odin_hallway_weapon_struggle_shoot_player, 1, 0.05, 1);
-  level.struggle_hinge rotateto((0, 270, 0), 1.25, 0, 1.25);
+  level.struggle_hinge rotateTo((0, 270, 0), 1.25, 0, 1.25);
   wait 1.3;
   var_1 unlink();
-  var_1 moveto((3323.92, 46696.8, 48483.7), 0.75, 0.75, 0);
+  var_1 moveTo((3323.92, 46696.8, 48483.7), 0.75, 0.75, 0);
   wait 0.8;
   var_5 = [];
   var_5["player_rig"] = var_1;
   thread maps\odin_audio::sfx_traversal_01();
-  var_1 maps\_utility::anim_stopanimscripted();
+  var_1 maps\_utility::anim_stopanimScripted();
   thread end_layered_anims(var_1);
   thread z_trans_player(var_1);
   var_3 thread maps\_anim::anim_single_solo(var_1, "odin_hall_escape_turn01_player");
@@ -1034,15 +1034,15 @@ push_enemy_down(var_0) {
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
-  var_2 = getent("z_trans_hinge_a", "targetname");
+  var_2 = getEnt("z_trans_hinge_a", "targetname");
   var_0 setanimknob(%odin_spin_struggling_enemy_01, 1, 0.5, 0.75);
   var_3 = common_scripts\utility::spawn_tag_origin();
   level.ally_ent_del[level.ally_ent_del.size] = var_3;
-  var_4 = getent("struggle_rotate_hinge", "targetname");
+  var_4 = getEnt("struggle_rotate_hinge", "targetname");
   var_3.origin = var_4.origin;
   var_3.angles = level.player.angles;
   var_0 unlink();
-  var_0 linkto(var_3);
+  var_0 linkTo(var_3);
   var_5 = level.player getplayerangles();
   var_6 = anglesToForward(var_5);
   var_7 = anglesToForward(var_2.angles);
@@ -1076,14 +1076,14 @@ end_layered_anims(var_0) {
 
 move_dead_enemy(var_0) {
   var_1 = var_0;
-  var_2 = getent("z_trans_2_1_node", "targetname");
+  var_2 = getEnt("z_trans_2_1_node", "targetname");
   wait 0.05;
   var_1.origin = var_2.origin - (0, -352, 0);
   var_1 setanimknob(%odin_spin_struggling_enemy_01, 1, 0.02, 0.05);
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_0.origin;
-  var_0 linkto(var_3);
+  var_0 linkTo(var_3);
   var_3.angles = var_2.angles + (0, 90, 0);
   var_4 = randomfloatrange(300, 400);
   var_3 rotateby((-10, 10, 10), 60, 0, 0);
@@ -1092,8 +1092,8 @@ move_dead_enemy(var_0) {
 
 struggle_succeed_fx(var_0) {
   level endon("ally_clear");
-  var_1 = getent("struggle_enemy_head", "targetname");
-  var_2 = getent("struggle_enemy_inner_head", "targetname");
+  var_1 = getEnt("struggle_enemy_head", "targetname");
+  var_2 = getEnt("struggle_enemy_inner_head", "targetname");
   playFXOnTag(level._effect["odin_helmet_glass_shatter"], var_2, "tag_eye");
 }
 
@@ -1119,9 +1119,9 @@ struggle_rotate(var_0, var_1) {
   common_scripts\utility::flag_wait("spin_player_and_enemy");
   level.struggle_hinge.origin = var_1 gettagorigin("tag_player");
   level.struggle_hinge.angles = var_1 gettagangles("tag_player");
-  level.struggle_hinge = getent("struggle_rotate_hinge", "targetname");
-  var_0 linkto(level.struggle_hinge);
-  var_1 linkto(level.struggle_hinge);
+  level.struggle_hinge = getEnt("struggle_rotate_hinge", "targetname");
+  var_0 linkTo(level.struggle_hinge);
+  var_1 linkTo(level.struggle_hinge);
   level.struggle_hinge rotatepitch(-90, 1, 1, 0);
   wait 1;
 
@@ -1159,7 +1159,7 @@ struggle_grunts() {
 }
 
 z_trans(var_0, var_1, var_2) {
-  var_3 = getent("ally_doppleganger1", "targetname");
+  var_3 = getEnt("ally_doppleganger1", "targetname");
   var_2 = var_3 maps\_utility::spawn_ai();
   level.ally_ent_del[level.ally_ent_del.size] = var_2;
   level.fake_kyra = var_2;
@@ -1167,10 +1167,10 @@ z_trans(var_0, var_1, var_2) {
   var_2.ignoreall = 1;
   var_2.animname = "odin_ally";
   level.ally maps\_utility::disable_ai_color();
-  var_4 = getent("z_trans_hinge_a", "targetname");
-  var_5 = getent("z_trans_2_1_node", "targetname");
-  var_6 = getent("z_trans_2_2_node", "targetname");
-  var_7 = getent("z_trans_final_node", "targetname");
+  var_4 = getEnt("z_trans_hinge_a", "targetname");
+  var_5 = getEnt("z_trans_2_1_node", "targetname");
+  var_6 = getEnt("z_trans_2_2_node", "targetname");
+  var_7 = getEnt("z_trans_final_node", "targetname");
   var_8 = getEntArray("z_trans_test", "targetname");
   var_9 = [];
   var_10 = [];
@@ -1185,8 +1185,8 @@ z_trans(var_0, var_1, var_2) {
   var_7 thread maps\_anim::anim_single_solo(level.ally, "odin_hall_escape_turn02_ally");
   var_6 maps\_anim::anim_single_solo(var_2, "odin_hall_escape_turn02_ally");
   common_scripts\utility::flag_set("ally_out_of_z");
-  var_12 = common_scripts\utility::getstruct("kyra_move_node01", "targetname");
-  var_6 = getent("ally_kyra_move_node01", "targetname");
+  var_12 = common_scripts\utility::getStruct("kyra_move_node01", "targetname");
+  var_6 = getEnt("ally_kyra_move_node01", "targetname");
   var_6 thread maps\_anim::anim_loop_solo(var_2, "odin_escape_start_first_encounter_loop_ally01", "stop_loops");
   var_12 thread maps\_anim::anim_loop_solo(level.ally, "odin_escape_start_first_encounter_loop_ally01", "stop_loops");
   common_scripts\utility::flag_wait("player_second_z_turn");
@@ -1201,18 +1201,18 @@ z_trans(var_0, var_1, var_2) {
   }
 
   common_scripts\utility::flag_set("ally_clear");
-  var_12 = common_scripts\utility::getstruct("ally_kyra_move_node01", "targetname");
+  var_12 = common_scripts\utility::getStruct("ally_kyra_move_node01", "targetname");
 }
 
 #using_animtree("player");
 
 z_trans_player(var_0) {
   thread early_escape_start();
-  var_1 = getent("z_trans_hinge_a", "targetname");
-  var_2 = getent("z_trans_2_1_node", "targetname");
-  var_3 = getent("z_trans_2_2_node", "targetname");
-  var_4 = getent("z_trans_final_node", "targetname");
-  var_5 = getent("struggle_gun", "targetname");
+  var_1 = getEnt("z_trans_hinge_a", "targetname");
+  var_2 = getEnt("z_trans_2_1_node", "targetname");
+  var_3 = getEnt("z_trans_2_2_node", "targetname");
+  var_4 = getEnt("z_trans_final_node", "targetname");
+  var_5 = getEnt("struggle_gun", "targetname");
   var_6 = maps\_utility::spawn_anim_model("player_rig");
   level.ally_ent_del[level.ally_ent_del.size] = var_6;
   var_7 = maps\_utility::spawn_anim_model("player_rig");
@@ -1228,7 +1228,7 @@ z_trans_player(var_0) {
   var_10 = var_7 gettagorigin("tag_player");
   var_11 = var_7 gettagangles("tag_player");
   level.player setplayerangles(var_11);
-  level.player setorigin(var_10);
+  level.player setOrigin(var_10);
   var_12 = 0;
   level.player playerlinktodelta(var_7, "tag_player", 1, var_12, var_12, var_12, var_12, 1);
   wait 3.03333;
@@ -1268,7 +1268,7 @@ z_trans_player(var_0) {
       var_11 = var_6 gettagangles("tag_player");
       level.player unlink();
       level.player setplayerangles(var_11);
-      level.player setorigin(var_10);
+      level.player setOrigin(var_10);
       level.player playerlinktodelta(var_6, "tag_player", 1, var_12, var_12, var_12, var_12, 1);
     }
 
@@ -1333,7 +1333,7 @@ post_z_push_cancel() {
 
 close_exterior_hatch() {
   level endon("ally_clear");
-  var_0 = getent("scriptednode_pdoor", "targetname");
+  var_0 = getEnt("scriptednode_pdoor", "targetname");
   var_1 = maps\_utility::spawn_anim_model("space_round_hatch");
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_intro_exterior_door_open");
@@ -1341,14 +1341,14 @@ close_exterior_hatch() {
 
 airlock_interior_hatch() {
   level endon("ally_clear");
-  var_0 = getent("scriptednode_squareDoor", "targetname");
+  var_0 = getEnt("scriptednode_squareDoor", "targetname");
   var_1 = maps\_utility::spawn_anim_model("space_square_hatch");
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_infiltrate_door_open");
-  var_2 = getent("intro_airlock_hatch_blocker", "targetname");
-  var_3 = getent("intro_airlock_hatch_blocker_org", "targetname");
-  var_3 linkto(var_1, "tag_origin");
-  var_2 linkto(var_3);
+  var_2 = getEnt("intro_airlock_hatch_blocker", "targetname");
+  var_3 = getEnt("intro_airlock_hatch_blocker_org", "targetname");
+  var_3 linkTo(var_1, "tag_origin");
+  var_2 linkTo(var_3);
   thread maps\odin_audio::sfx_airlock_door();
   var_0 maps\_anim::anim_single_solo(var_1, "odin_infiltrate_door_open");
 }
@@ -1383,7 +1383,7 @@ enemy_squad_spawn(var_0, var_1, var_2) {
   var_4 = 0;
 
   for(var_5 = 0; var_5 < var_1; var_5++) {
-    var_6 = getent(var_0 + var_5, "targetname");
+    var_6 = getEnt(var_0 + var_5, "targetname");
     var_7 = var_6 maps\_utility::spawn_ai();
     var_3[var_5] = var_7;
     var_7 make_swimmer();

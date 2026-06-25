@@ -327,7 +327,7 @@ function function_da4ab728(localclientnum, var_b81de649) {
 
 function function_931fa0e1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "zm_stalingrad_sewer_landing");
+    self playRumbleOnEntity(localclientnum, "zm_stalingrad_sewer_landing");
   }
 }
 
@@ -377,17 +377,17 @@ function function_a96968f2(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_21deab84(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
+  var_1c7b6837 = getEnt(localclientnum, "sophia_eye", "targetname");
   if(!isDefined(var_1c7b6837)) {
     return;
   }
   if(newval) {
-    var_1c7b6837 rotateto((0, 0, 0), 2, 0.5, 0.5);
+    var_1c7b6837 rotateTo((0, 0, 0), 2, 0.5, 0.5);
     var_1c7b6837 mapshaderconstant(localclientnum, 0, "scriptVector2", newval, 0, 0);
   } else {
     level notify("hash_deeb3634");
     wait(0.5);
-    var_1c7b6837 rotateto((0, 0, 0), 0.2);
+    var_1c7b6837 rotateTo((0, 0, 0), 0.2);
     level waittill("outro_done");
     var_1c7b6837 delete();
   }
@@ -395,7 +395,7 @@ function function_21deab84(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_a431bec5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level endon("demo_jump");
-  var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
+  var_1c7b6837 = getEnt(localclientnum, "sophia_eye", "targetname");
   if(!isDefined(var_1c7b6837)) {
     return;
   }
@@ -405,7 +405,7 @@ function function_a431bec5(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
   if(newval == 0) {
-    var_1c7b6837 rotateto((0, 0, 0), 0.5);
+    var_1c7b6837 rotateTo((0, 0, 0), 0.5);
   } else {
     level.var_9a736d20 = 1;
     var_1c7b6837 thread function_36666e11(self);
@@ -431,7 +431,7 @@ function function_36666e11(e_player) {
       var_cf92fd4e = math::clamp(var_933e0d32[1], 0, 27);
       var_933e0d32 = (var_933e0d32[0], var_cf92fd4e, var_933e0d32[2]);
     }
-    self rotateto(var_933e0d32, 0.1);
+    self rotateTo(var_933e0d32, 0.1);
     wait(0.1);
   }
 }
@@ -441,7 +441,7 @@ function function_70b3b237(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_6cfcd54d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_1c7b6837 = getent(localclientnum, "sophia_eye", "targetname");
+  var_1c7b6837 = getEnt(localclientnum, "sophia_eye", "targetname");
   if(!isDefined(var_1c7b6837)) {
     return;
   }
@@ -456,7 +456,7 @@ function function_6cfcd54d(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_bbbdcfd5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "zm_stalingrad_interact_rumble");
+    self playRumbleOnEntity(localclientnum, "zm_stalingrad_interact_rumble");
   }
 }
 

@@ -208,7 +208,7 @@ canmeleeinternal(state) {
 }
 
 ismeleepathclear(vectoenemy, enemypoint) {
-  dirtoenemy = vectornormalize((vectoenemy[0], vectoenemy[1], 0));
+  dirtoenemy = vectorNormalize((vectoenemy[0], vectoenemy[1], 0));
   meleepoint = enemypoint - (dirtoenemy[0] * 28, dirtoenemy[1] * 28, 0);
 
   if(!self isingoal(meleepoint)) {

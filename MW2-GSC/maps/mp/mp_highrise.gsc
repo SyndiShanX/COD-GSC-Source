@@ -31,10 +31,10 @@ main() {
 }
 
 Elevator(elevatorID) {
-  elevator = getent(elevatorID, "targetname");
+  elevator = getEnt(elevatorID, "targetname");
   elevFloors = [];
-  elevFloors[0] = getent(elevatorID + "_floor1", "targetname").origin;
-  elevFloors[1] = getent(elevatorID + "_floor2", "targetname").origin;
+  elevFloors[0] = getEnt(elevatorID + "_floor1", "targetname").origin;
+  elevFloors[1] = getEnt(elevatorID + "_floor2", "targetname").origin;
 
   moveSpeed = 192;
 
@@ -60,14 +60,14 @@ Elevator(elevatorID) {
 SetupRappel() {
   trigs = getEntArray("rappeltrigger", "targetname");
   foreach(trig in trigs) {
-    org = getent(trig.target, "targetname");
+    org = getEnt(trig.target, "targetname");
     trig.rappelPoint = org.origin;
     trig.dir = anglesToForward(org.angles);
     org delete();
     trig thread RappelThink();
   }
   foreach(trig in trigs) {
-    org = getent(trig.target, "targetname");
+    org = getEnt(trig.target, "targetname");
     if(isDefined(org)) {
       org delete();
     }
@@ -110,17 +110,17 @@ Rappel(trig) {
 
   self.rapelling = true;
   self _disableWeapon();
-  self linkto(org);
+  self linkTo(org);
   self PlayerLinkedOffsetEnable();
 
-  org moveto(upPoint, upTime, 0, 0);
+  org moveTo(upPoint, upTime, 0, 0);
   org waittill("movedone");
-  org moveto(overPoint, overTime, 0, 0);
+  org moveTo(overPoint, overTime, 0, 0);
   org waittill("movedone");
 
   downTime = distance(overPoint, downPoint) / downSpeed;
 
-  org moveto(downPoint, downTime, 0, 0);
+  org moveTo(downPoint, downTime, 0, 0);
   org waittill("movedone");
 
   self _enableWeapon();

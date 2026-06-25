@@ -152,7 +152,7 @@ check_water() {
 }
 check_player_freeze() {
   level waittill("all_players_connected");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread water_watch_freeze();
   }
@@ -242,7 +242,7 @@ water_damage_zombie() {
   if(is_true(self.ignore_water_damage)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   if(!isDefined(self.is_freezing)) {
     self.is_freezing = 1;
     wait(3);
@@ -276,8 +276,8 @@ wade_audio(trigger) {
     self.is_wading = true;
     ent1 = spawn("script_origin", self.origin);
     ent2 = spawn("script_origin", self.origin);
-    ent1 LinkTo(self);
-    ent2 LinkTo(self);
+    ent1 linkTo(self);
+    ent2 linkTo(self);
     self thread monitor_player_movement();
     while(self IsTouching(trigger)) {
       if(self.is_wading) {
@@ -379,8 +379,8 @@ water_player_freeze() {
   self FreezeControls(true);
   self StopLoopSound(2);
   ice_trigger = spawn("trigger_damage", self.origin, 0, 15, 72);
-  ice_trigger enablelinkto();
-  ice_trigger linkto(self);
+  ice_trigger enablelinkTo();
+  ice_trigger linkTo(self);
   self.ice_trigger = ice_trigger;
   self SetClientFlag(level._CF_PLAYER_WATER_FREEZE);
   self thread maps\_zombiemode_audio::create_and_play_dialog("general", "water_frozen");

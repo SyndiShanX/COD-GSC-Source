@@ -60,7 +60,7 @@ function function_7023aae4(trap, var_7c56394 = 0, modelname) {
       hazard.targetname = "hazard";
       hazard.var_fd5301f9 = "killbox";
       hazard.angles = trap.angles;
-      hazard enablelinkto();
+      hazard enablelinkTo();
     }
 
     trap.script_model = hazard;
@@ -284,7 +284,7 @@ function function_d1b295d7(trap) {
 
     if(isPlayer(guy)) {
       guy dodamage(isDefined(trap.damage) ? trap.damage : guy.health + 100, guy.origin);
-      guy playrumbleonentity("damage_light");
+      guy playRumbleOnEntity("damage_light");
 
       if(isDefined(trap.var_2e485cc) && guy.birthtime != gettime()) {
         guy thread status_effect::status_effect_apply(trap.var_2e485cc, guy.currentweapon, self, 1);
@@ -319,7 +319,7 @@ function function_d1b295d7(trap) {
 
     if(isPlayer(guy) && is_true(trap.arena) && is_true(trap.teleport)) {
       spot = [[level.doa.var_39e3fa99]] - > function_70fb5745();
-      guy setorigin(spot.origin);
+      guy setOrigin(spot.origin);
     }
   }
 }

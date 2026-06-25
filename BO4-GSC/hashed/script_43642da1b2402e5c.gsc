@@ -33,7 +33,7 @@ on_begin() {
   callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_bf710271(1, 1, 1, 0, 0);
     player thread zm_trial_util::function_dc9ab223(1, 0);
     player thread lock_shield();
@@ -60,7 +60,7 @@ refill_ammo() {
     waitframe(1);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_dc0859e();
     a_w_weapons = player getweaponslist(0);
 

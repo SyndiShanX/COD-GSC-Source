@@ -269,8 +269,8 @@ proximity_detonate(owner) {
   explosionradius = detonateradius * 2;
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateradius), 512 | 4, detonateradius, detonateradius * 1.5);
   damagearea setexcludeteamfortrigger(owner.team);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self.damagearea = damagearea;
 
   while(isDefined(self)) {
@@ -321,7 +321,7 @@ player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_
     e_grenade ghost();
     e_grenade.angles = self.angles;
     e_grenade.mdl_monkey = util::spawn_model(e_grenade.model, e_grenade.origin, e_grenade.angles);
-    e_grenade.mdl_monkey linkto(e_grenade);
+    e_grenade.mdl_monkey linkTo(e_grenade);
     e_grenade.mdl_monkey thread monkey_cleanup(e_grenade);
     e_grenade.mdl_monkey playSound(#"hash_68402c92c838b7f7");
     clone = undefined;
@@ -437,7 +437,7 @@ grenade_stolen_by_sam(e_grenade, e_actor) {
     direction = (direction[0] * -1, direction[1], 0);
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isalive(players[i])) {
@@ -643,7 +643,7 @@ is_on_navmesh(e_player) {
     var_3fb36683 = zm_utility::check_point_in_enabled_zone(v_valid_point, undefined, undefined);
 
     if(!(isDefined(var_3fb36683) && var_3fb36683)) {
-      v_dir = vectornormalize(e_origin - self.origin);
+      v_dir = vectorNormalize(e_origin - self.origin);
       v_pos = self.origin + v_dir * 24;
       v_valid_point = getclosestpointonnavmesh(v_pos, 150, 12);
 

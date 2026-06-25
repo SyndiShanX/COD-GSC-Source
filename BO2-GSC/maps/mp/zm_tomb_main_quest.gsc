@@ -42,10 +42,10 @@ main_quest_init() {
   level.callbackvehicledamage = ::aircrystalbiplanecallback_vehicledamage;
   level.game_mode_custom_onplayerdisconnect = ::player_disconnect_callback;
   onplayerconnect_callback(::onplayerconnect);
-  staff_air = getent("prop_staff_air", "targetname");
-  staff_fire = getent("prop_staff_fire", "targetname");
-  staff_lightning = getent("prop_staff_lightning", "targetname");
-  staff_water = getent("prop_staff_water", "targetname");
+  staff_air = getEnt("prop_staff_air", "targetname");
+  staff_fire = getEnt("prop_staff_fire", "targetname");
+  staff_lightning = getEnt("prop_staff_lightning", "targetname");
+  staff_water = getEnt("prop_staff_water", "targetname");
   staff_air.weapname = "staff_air_zm";
   staff_fire.weapname = "staff_fire_zm";
   staff_lightning.weapname = "staff_lightning_zm";
@@ -58,10 +58,10 @@ main_quest_init() {
   staff_fire.craftable_name = "elemental_staff_fire";
   staff_lightning.craftable_name = "elemental_staff_lightning";
   staff_water.craftable_name = "elemental_staff_water";
-  staff_air.charger = getstruct("staff_air_charger", "script_noteworthy");
-  staff_fire.charger = getstruct("staff_fire_charger", "script_noteworthy");
-  staff_lightning.charger = getstruct("zone_bolt_chamber", "script_noteworthy");
-  staff_water.charger = getstruct("staff_ice_charger", "script_noteworthy");
+  staff_air.charger = getStruct("staff_air_charger", "script_noteworthy");
+  staff_fire.charger = getStruct("staff_fire_charger", "script_noteworthy");
+  staff_lightning.charger = getStruct("zone_bolt_chamber", "script_noteworthy");
+  staff_water.charger = getStruct("staff_ice_charger", "script_noteworthy");
   staff_fire.quest_clientfield = "quest_state1";
   staff_air.quest_clientfield = "quest_state2";
   staff_lightning.quest_clientfield = "quest_state3";
@@ -84,10 +84,10 @@ main_quest_init() {
     staff ghost();
   }
 
-  staff_air_upgraded = getent("prop_staff_air_upgraded", "targetname");
-  staff_fire_upgraded = getent("prop_staff_fire_upgraded", "targetname");
-  staff_lightning_upgraded = getent("prop_staff_lightning_upgraded", "targetname");
-  staff_water_upgraded = getent("prop_staff_water_upgraded", "targetname");
+  staff_air_upgraded = getEnt("prop_staff_air_upgraded", "targetname");
+  staff_fire_upgraded = getEnt("prop_staff_fire_upgraded", "targetname");
+  staff_lightning_upgraded = getEnt("prop_staff_lightning_upgraded", "targetname");
+  staff_water_upgraded = getEnt("prop_staff_water_upgraded", "targetname");
   staff_air_upgraded.weapname = "staff_air_upgraded_zm";
   staff_fire_upgraded.weapname = "staff_fire_upgraded_zm";
   staff_lightning_upgraded.weapname = "staff_lightning_upgraded_zm";
@@ -171,7 +171,7 @@ player_disconnect_callback(player) {
 }
 
 place_staffs_encasement() {
-  s_pos = getstruct("staff_pos_" + self.element, "targetname");
+  s_pos = getStruct("staff_pos_" + self.element, "targetname");
   self.origin = s_pos.origin;
   self.angles = s_pos.angles;
 }
@@ -304,13 +304,13 @@ door_watch_open_sesame() {
   wait 0.5;
 
   if(isDefined(self.trigger)) {
-    self.trigger notify("trigger", getplayers()[0]);
+    self.trigger notify("trigger", getPlayers()[0]);
   }
 }
 
 run_gramophone_door(str_vinyl_record) {
   flag_init(self.targetname + "_opened");
-  trig_position = getstruct(self.targetname + "_position", "targetname");
+  trig_position = getStruct(self.targetname + "_position", "targetname");
   trig_position.has_vinyl = 0;
   trig_position.gramophone_model = undefined;
   trig_position thread watch_gramophone_vinyl_pickup();
@@ -343,7 +343,7 @@ run_gramophone_door(str_vinyl_record) {
 
         t_door trigger_off();
         str_song = trig_position get_gramophone_song();
-        playsoundatposition(str_song, self.origin);
+        playSoundAtPosition(str_song, self.origin);
         self playSound("zmb_crypt_stairs");
         wait 6.0;
         chamber_blocker();
@@ -382,10 +382,10 @@ run_gramophone_door(str_vinyl_record) {
 
 chamber_blocker() {
   a_blockers = getEntArray("junk_nml_chamber", "targetname");
-  m_blocker = getent("junk_nml_chamber", "targetname");
-  s_blocker_end = getstruct(m_blocker.script_linkto, "script_linkname");
+  m_blocker = getEnt("junk_nml_chamber", "targetname");
+  s_blocker_end = getStruct(m_blocker.script_linkto, "script_linkname");
   m_blocker thread maps\mp\zombies\_zm_blockers::debris_move(s_blocker_end);
-  m_blocker_clip = getent("junk_nml_chamber_clip", "targetname");
+  m_blocker_clip = getEnt("junk_nml_chamber_clip", "targetname");
   m_blocker_clip connectpaths();
   m_blocker waittill("movedone");
   m_blocker_clip delete();
@@ -511,7 +511,7 @@ rotate_forever(rotate_time) {
   self endon("death");
 
   while(true) {
-    self rotateyaw(360, 20.0, 0.0, 0.0);
+    self rotateYaw(360, 20.0, 0.0, 0.0);
     self waittill("rotatedone");
   }
 }
@@ -522,14 +522,14 @@ staff_crystal_wait_for_teleport(n_element_enum) {
   self.origin = self.piecespawn.model.origin;
   self.piecespawn.model ghost();
   self.piecespawn.model movez(-1000, 0.05);
-  e_plinth = getent("crystal_plinth" + n_element_enum, "targetname");
+  e_plinth = getEnt("crystal_plinth" + n_element_enum, "targetname");
   e_plinth.v_start = e_plinth.origin;
   e_plinth.v_start = (e_plinth.v_start[0], e_plinth.v_start[1], e_plinth.origin[2] - 78);
   e_plinth.v_crystal = e_plinth.origin;
   e_plinth.v_crystal = (e_plinth.v_crystal[0], e_plinth.v_crystal[1], e_plinth.origin[2] - 40);
   e_plinth.v_staff = e_plinth.origin;
   e_plinth.v_staff = (e_plinth.v_staff[0], e_plinth.v_staff[1], e_plinth.origin[2] + 15);
-  e_plinth moveto(e_plinth.v_start, 0.05);
+  e_plinth moveTo(e_plinth.v_start, 0.05);
 
   while(true) {
     level waittill("player_teleported", e_player, n_teleport_enum);
@@ -539,7 +539,7 @@ staff_crystal_wait_for_teleport(n_element_enum) {
     }
   }
 
-  e_plinth moveto(e_plinth.v_crystal, 6.0);
+  e_plinth moveTo(e_plinth.v_crystal, 6.0);
   e_plinth thread sndmoveplinth(6);
   lookat_dot = cos(90.0);
   dist_sq = 250000.0;
@@ -574,7 +574,7 @@ staff_crystal_wait_for_teleport(n_element_enum) {
     wait_network_frame();
   }
 
-  e_plinth moveto(e_plinth.v_staff, 3.0);
+  e_plinth moveTo(e_plinth.v_staff, 3.0);
   e_plinth thread sndmoveplinth(3);
   e_plinth waittill("movedone");
 }
@@ -599,7 +599,7 @@ staff_mechz_drop_pieces(s_piece) {
   s_piece.piecespawn.canmove = 1;
   maps\mp\zombies\_zm_unitrigger::reregister_unitrigger_as_dynamic(s_piece.piecespawn.unitrigger);
   origin = groundpos_ignore_water_new(origin + vectorscale((0, 0, 1), 40.0));
-  s_piece.piecespawn.model moveto(origin + vectorscale((0, 0, 1), 32.0), 0.05);
+  s_piece.piecespawn.model moveTo(origin + vectorscale((0, 0, 1), 32.0), 0.05);
   s_piece.piecespawn.model waittill("movedone");
 
   if(isDefined(s_piece.piecespawn.model)) {
@@ -615,7 +615,7 @@ mechz_staff_piece_failsafe() {
   wait 120.0;
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     b_anyone_near = 0;
 
     foreach(e_player in a_players) {
@@ -635,7 +635,7 @@ mechz_staff_piece_failsafe() {
 
   a_locations = getStructArray("mechz_location", "script_noteworthy");
   s_location = get_closest_2d(self.origin, a_locations);
-  self moveto(s_location.origin + vectorscale((0, 0, 1), 32.0), 3.0);
+  self moveTo(s_location.origin + vectorscale((0, 0, 1), 32.0), 3.0);
 }
 
 biplane_clue() {
@@ -650,7 +650,7 @@ biplane_clue() {
     }
 
     wait(randomfloatrange(5.0, 15.0));
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(e_player in a_players) {
       level notify("sam_clue_biplane", e_player);
@@ -674,14 +674,14 @@ staff_biplane_drop_pieces(a_staff_pieces) {
     wait 1.0;
   }
 
-  s_biplane_pos = getstruct("air_crystal_biplane_pos", "targetname");
-  vh_biplane = spawnvehicle("veh_t6_dlc_zm_biplane", "air_crystal_biplane", "biplane_zm", s_biplane_pos.origin, s_biplane_pos.angles);
+  s_biplane_pos = getStruct("air_crystal_biplane_pos", "targetname");
+  vh_biplane = spawnVehicle("veh_t6_dlc_zm_biplane", "air_crystal_biplane", "biplane_zm", s_biplane_pos.origin, s_biplane_pos.angles);
   vh_biplane ent_flag_init("biplane_down", 0);
   vh_biplane thread biplane_clue();
-  e_fx_tag = getent("air_crystal_biplane_tag", "targetname");
-  e_fx_tag moveto(vh_biplane.origin, 0.05);
+  e_fx_tag = getEnt("air_crystal_biplane_tag", "targetname");
+  e_fx_tag moveTo(vh_biplane.origin, 0.05);
   e_fx_tag waittill("movedone");
-  e_fx_tag linkto(vh_biplane, "tag_origin");
+  e_fx_tag linkTo(vh_biplane, "tag_origin");
   vh_biplane.health = 10000;
   vh_biplane setCanDamage(1);
   vh_biplane setforcenocull();
@@ -696,7 +696,7 @@ staff_biplane_drop_pieces(a_staff_pieces) {
     staff_piece.e_fx = spawn("script_model", e_fx_tag.origin);
     staff_piece.e_fx setModel("tag_origin");
     staff_piece.e_fx setclientfield("element_glow_fx", 1);
-    staff_piece.e_fx moveto(staff_piece.origin, 5.0);
+    staff_piece.e_fx moveTo(staff_piece.origin, 5.0);
   }
 
   playFX(level._effect["biplane_explode"], vh_biplane.origin);
@@ -731,7 +731,7 @@ zone_capture_clue(str_zone) {
       wait 1.0;
     }
 
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(e_player in a_players) {
       level notify("sam_clue_zonecap", e_player);
@@ -786,7 +786,7 @@ reward_staff_piece(player, s_stat) {
   }
 
   n_dist = 9999;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_players = get_array_of_closest(self.m_box.origin, a_players);
 
   if(isDefined(a_players[0])) {
@@ -831,7 +831,7 @@ show_ice_staff_piece(origin) {
   self.piecespawn.canmove = 1;
   maps\mp\zombies\_zm_unitrigger::reregister_unitrigger_as_dynamic(self.piecespawn.unitrigger);
   vert_offset = 32;
-  self.piecespawn.model moveto(origin + (0, 0, vert_offset), 0.05);
+  self.piecespawn.model moveTo(origin + (0, 0, vert_offset), 0.05);
   self.piecespawn.model waittill("movedone");
   self.piecespawn.model showindemo();
   self.piecespawn.model show();
@@ -967,7 +967,7 @@ waittill_staff_inserted() {
         self.angles = self.charger.angles;
       }
 
-      self moveto(self.charger.origin, 0.05);
+      self moveTo(self.charger.origin, 0.05);
       self waittill("movedone");
       self setclientfield("staff_charger", self.enum);
       self.charger.full = 0;
@@ -1103,7 +1103,7 @@ spawn_upgraded_staff_triggers(n_index) {
   e_staff_standard ghost();
   e_staff_standard_upgraded.trigger = e_staff_standard.charge_trigger;
   e_staff_standard_upgraded.angles = e_staff_standard.angles;
-  e_staff_standard_upgraded moveto(e_staff_standard.origin, 0.05);
+  e_staff_standard_upgraded moveTo(e_staff_standard.origin, 0.05);
   e_staff_standard_upgraded waittill("movedone");
   e_staff_standard_upgraded show();
   e_fx = spawn("script_model", e_staff_standard_upgraded.origin + vectorscale((0, 0, 1), 8.0));

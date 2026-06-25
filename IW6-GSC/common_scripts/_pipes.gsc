@@ -44,7 +44,7 @@ pipesetup() {
   node = undefined;
 
   if(isDefined(self.target)) {
-    node = getstruct(self.target, "targetname");
+    node = getStruct(self.target, "targetname");
     self.A = node.origin;
     vec = anglesToForward(node.angles);
     vec = (vec * 128);
@@ -201,7 +201,7 @@ pipe_damage(P, vec, damageOwner, fx) {
   }
   fx endon("death");
 
-  origin = fx.origin + (VectorNormalize(vec) * 40);
+  origin = fx.origin + (vectorNormalize(vec) * 40);
   dmg = level._pipes._dmg[self.script_noteworthy];
 
   while(1) {
@@ -246,7 +246,7 @@ pipe_calc_ballistic(P, type) {
 }
 
 pipe_calc_splash(P, type) {
-  vec = VectorNormalize(VectorFromLineToPoint(self.A, self.B, P));
+  vec = vectorNormalize(VectorFromLineToPoint(self.A, self.B, P));
   P = PointOnSegmentNearestToPoint(self.A, self.B, P);
   return (P + (vec * 4));
 }

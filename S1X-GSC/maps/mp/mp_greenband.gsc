@@ -97,7 +97,7 @@ test_drone() {
 }
 
 spawn_police_drone_with_anim(droneType, drone_anim, respawn_anim) {
-  anim_node = GetStruct("event_anim_node", "targetname");
+  anim_node = getStruct("event_anim_node", "targetname");
 
   new_drone = spawn_police_drone(droneType);
 

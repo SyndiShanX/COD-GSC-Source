@@ -85,12 +85,12 @@ stop_flashlight_exploder() {
 
 setup_sam_cougar() {
   run_scene_and_delete("sam_cougar_align");
-  vh_sam_cougar = getent("sam_cougar", "targetname");
+  vh_sam_cougar = getEnt("sam_cougar", "targetname");
   level waittill("sam_jump_done");
 }
 
 save_restored_function() {
-  playsoundatposition("vox_blend_post_cougar", (7850, -57200, 680));
+  playSoundAtPosition("vox_blend_post_cougar", (7850, -57200, 680));
 }
 
 sam_main() {
@@ -114,7 +114,7 @@ car_flip() {
   wait 0.65;
   level notify("fxanim_police_car_flip_start");
   wait 1.35;
-  vh_car = getent("after_sam_police_car", "targetname");
+  vh_car = getEnt("after_sam_police_car", "targetname");
   radiusdamage(vh_car.origin, 100, 50000, 40000);
 }
 
@@ -127,7 +127,7 @@ cougar_fall() {
   a_av_axis_spawner_targetnames = array("avenger_fast");
   clientnotify("set_sam_ext_context");
   level thread f35_intro();
-  vh_sam_cougar = getent("sam_cougar", "targetname");
+  vh_sam_cougar = getEnt("sam_cougar", "targetname");
   vh_sam_cougar detachall();
   vh_sam_cougar attach("veh_t6_mil_cougar_turret_sam", "tag_body_animate_jnt", 1);
   level thread run_scene("sam_cougar_fall_player", undefined, undefined, 0);
@@ -160,14 +160,14 @@ hide_player_body_for_courgar_fall() {
 }
 
 vehicle_bullet_collisions() {
-  vh_police_car1 = getent("sam_jump_police_car", "targetname");
-  vh_police_car2 = getent("police_car_flip", "targetname");
-  vh_police_mc1 = getent("upper_freeway_cycle", "targetname");
-  vh_police_mc2 = getent("lower_freeway_cycle1", "targetname");
-  vh_police_mc3 = getent("lower_freeway_cycle2", "targetname");
-  vh_police_mc4 = getent("lower_freeway_cycle3", "targetname");
-  vh_police_mc5 = getent("lower_freeway_cycle4", "targetname");
-  vh_cougar2 = getent("g20_group1_cougar2", "targetname");
+  vh_police_car1 = getEnt("sam_jump_police_car", "targetname");
+  vh_police_car2 = getEnt("police_car_flip", "targetname");
+  vh_police_mc1 = getEnt("upper_freeway_cycle", "targetname");
+  vh_police_mc2 = getEnt("lower_freeway_cycle1", "targetname");
+  vh_police_mc3 = getEnt("lower_freeway_cycle2", "targetname");
+  vh_police_mc4 = getEnt("lower_freeway_cycle3", "targetname");
+  vh_police_mc5 = getEnt("lower_freeway_cycle4", "targetname");
+  vh_cougar2 = getEnt("g20_group1_cougar2", "targetname");
 
   if(isDefined(vh_police_car1)) {
     vh_police_car1 ignorecheapentityflag(1);
@@ -208,8 +208,8 @@ hide_hatch(veh_cougar) {
 }
 
 f38_flyoff() {
-  f38_struct = getstruct("anderson_f38_goto_struct", "targetname");
-  veh_f38 = getent("f35_vtol", "targetname");
+  f38_struct = getStruct("anderson_f38_goto_struct", "targetname");
+  veh_f38 = getEnt("f35_vtol", "targetname");
   veh_f38 setvehicletype("plane_f35_fast_nocockpit");
   veh_f38 setvehgoalpos(f38_struct.origin, 1, 0);
   veh_f38 setspeed(400, 600);
@@ -231,7 +231,7 @@ on_hillary_death(m_hillary) {
     level.sam stop_magic_bullet_shield();
     wait 1.0;
     playFX(level._effect["sam_drone_explode"], level.player.origin - vectorscale((0, 0, 1), 3.0), (0, 0, 1));
-    playsoundatposition("exp_mortar", level.player.origin);
+    playSoundAtPosition("exp_mortar", level.player.origin);
     wait 0.5;
 
     if(!isgodmode(level.player)) {
@@ -247,7 +247,7 @@ on_hillary_death(m_hillary) {
 }
 
 player_hit_ground(m_player_body) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 fa38_intro_car_roof_sparks(veh_car) {
@@ -307,11 +307,11 @@ sam_jump() {
 
 play_explosion_on_cougar_climb() {
   wait 9.5;
-  sam_explosion_struct = getstruct("sam_explosion_struct", "targetname");
+  sam_explosion_struct = getStruct("sam_explosion_struct", "targetname");
   magicbullet("avenger_missile_turret", sam_explosion_struct.origin + vectorscale((0, 0, 1), 10.0), sam_explosion_struct.origin);
   wait 0.1;
-  playsoundatposition("wpn_rocket_explode", sam_explosion_struct.origin);
-  playsoundatposition("evt_turret_shake", (0, 0, 0));
+  playSoundAtPosition("wpn_rocket_explode", sam_explosion_struct.origin);
+  playSoundAtPosition("evt_turret_shake", (0, 0, 0));
   earthquake(0.5, 2, sam_explosion_struct.origin, 1000);
 }
 
@@ -319,14 +319,14 @@ play_stylized_impact_audio() {}
 
 drone_explode_impact(m_fxanim_drone) {
   earthquake(0.8, 0.8, level.player.origin, 200);
-  playsoundatposition("evt_turret_shake", (0, 0, 0));
-  level.player playrumbleonentity("damage_heavy");
+  playSoundAtPosition("evt_turret_shake", (0, 0, 0));
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 fa38_rumble() {
   wait 21;
-  veh_fa38 = getent("f35_vtol", "targetname");
-  veh_fa38 playrumbleonentity("la_1_fa38_intro_rumble");
+  veh_fa38 = getEnt("f35_vtol", "targetname");
+  veh_fa38 playRumbleOnEntity("la_1_fa38_intro_rumble");
 }
 
 autoexec event_funcs() {
@@ -428,16 +428,16 @@ do_triggered_cougar_crawl_squib_struct() {
 after_attack_explosion_launch_drone_1() {
   self endon("death");
   wait 0.7;
-  e_target = getent("after_attack_explosion_launch_target_1", "targetname");
+  e_target = getEnt("after_attack_explosion_launch_target_1", "targetname");
   self maps\_turret::shoot_turret_at_target_once(e_target, undefined, 1);
 }
 
 set_cougar_objective() {
   maps\_objectives::set_objective(level.obj_prom_night, undefined, "done");
   waittillframeend;
-  v_sam_org = getent("sam_cougar", "targetname") gettagorigin("tag_gunner_barrel2");
+  v_sam_org = getEnt("sam_cougar", "targetname") gettagorigin("tag_gunner_barrel2");
   maps\_objectives::set_objective(level.obj_shoot_drones, v_sam_org, "use");
-  v_sam_cougar = getent("sam_cougar", "targetname");
+  v_sam_cougar = getEnt("sam_cougar", "targetname");
   v_sam_cougar attach("veh_t6_mil_cougar_hood_obj", "tag_grill");
   flag_wait("sam_cougar_mount_started");
   v_sam_cougar detach("veh_t6_mil_cougar_hood_obj", "tag_grill");
@@ -463,7 +463,7 @@ get_to_sam_exploders() {
 }
 
 get_on_sam() {
-  sam_cougar = getent("sam_cougar", "targetname");
+  sam_cougar = getEnt("sam_cougar", "targetname");
   sam_cougar makevehicleusable();
   sam_cougar usevehicle(level.player, 2);
   sam_cougar makevehicleunusable();
@@ -540,7 +540,7 @@ show_sam_turret() {
 }
 
 get_off_sam() {
-  sam_cougar = getent("sam_cougar", "targetname");
+  sam_cougar = getEnt("sam_cougar", "targetname");
   screen_fade_out(0);
   sam_cougar cleartargetentity(1);
   sam_cougar useby(level.player);
@@ -556,7 +556,7 @@ get_off_sam() {
 
 cougar_crawl_drone() {
   wait 5;
-  veh_drone = getent("cougar_crawl_drone", "targetname");
+  veh_drone = getEnt("cougar_crawl_drone", "targetname");
 
   if(isDefined(veh_drone)) {
     veh_drone thread fire_turret_for_time(-1, 0);
@@ -569,7 +569,7 @@ f35_intro() {
   flag_wait("sam_cougar_fall_started");
   level thread maps\la_1_amb::snapshot_drone();
   wait 14;
-  veh_drone = getent("cougar_crawl_drone", "targetname");
+  veh_drone = getEnt("cougar_crawl_drone", "targetname");
   s_missile_org = get_struct("f35_intro_missile_org");
   magicbullet("fa38_missile_turret_hero", s_missile_org.origin, s_missile_org.angles, undefined, veh_drone);
 }
@@ -607,19 +607,19 @@ sam_attack_exploders() {
   level waittill("drone_wave_1");
   exploder(223);
   earthquake(0.25, 1.0, self.origin, 512, self);
-  playsoundatposition("evt_turret_shake", (0, 0, 0));
+  playSoundAtPosition("evt_turret_shake", (0, 0, 0));
   level waittill("drone_wave_2");
   exploder(223);
   earthquake(0.25, 1.0, self.origin, 512, self);
-  playsoundatposition("evt_turret_shake", (0, 0, 0));
+  playSoundAtPosition("evt_turret_shake", (0, 0, 0));
   wait 3;
   exploder(224);
   earthquake(0.25, 1.0, self.origin, 512, self);
-  playsoundatposition("evt_turret_shake", (0, 0, 0));
+  playSoundAtPosition("evt_turret_shake", (0, 0, 0));
   level waittill("drone_wave_3");
   exploder(224);
   earthquake(0.25, 1.0, self.origin, 512, self);
-  playsoundatposition("evt_turret_shake", (0, 0, 0));
+  playSoundAtPosition("evt_turret_shake", (0, 0, 0));
 }
 
 get_to_sam_magic_bullets() {
@@ -630,7 +630,7 @@ get_to_sam_magic_bullets() {
       v_player_forward = level.player get_forward(1);
       v_target_offset = random_vector(500);
       v_start = level.player.origin + vectorscale((0, 0, 1), 1024.0);
-      v_end = level.player.origin + vectornormalize(v_player_forward) * 1024 + v_target_offset;
+      v_end = level.player.origin + vectorNormalize(v_player_forward) * 1024 + v_target_offset;
       magicbullet("avenger_side_minigun", v_start, v_end);
       wait 0.05;
     }
@@ -1013,7 +1013,7 @@ plane_fire_weapons() {
 
   while(!facing_player) {
     vec_to_target = level.player.origin - self.origin;
-    vec_to_target = vectornormalize(vec_to_target);
+    vec_to_target = vectorNormalize(vec_to_target);
     forward = anglesToForward(self.angles);
 
     if(vectordot(forward, vec_to_target) > 0.9) {

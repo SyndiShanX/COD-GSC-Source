@@ -16,12 +16,12 @@ bowie_init() {
   }
   bowie_triggers = getEntArray("bowie_upgrade", "targetname");
   for(i = 0; i < bowie_triggers.size; i++) {
-    knife_model = GetEnt(bowie_triggers[i].target, "targetname");
+    knife_model = getEnt(bowie_triggers[i].target, "targetname");
     knife_model hide();
     bowie_triggers[i] thread bowie_think(cost);
-    bowie_triggers[i] SetHintString(&"ZOMBIE_WEAPON_BOWIE_BUY", cost);
+    bowie_triggers[i] setHintString(&"ZOMBIE_WEAPON_BOWIE_BUY", cost);
     bowie_triggers[i] setCursorHint("HINT_NOICON");
-    bowie_triggers[i] UseTriggerRequireLookAt();
+    bowie_triggers[i] useTriggerRequireLookAt();
   }
 }
 bowie_think(cost) {
@@ -65,7 +65,7 @@ bowie_think(cost) {
     if(!player_has_bowie) {
       if(player.score >= cost) {
         if(self.first_time_triggered == false) {
-          model = getent(self.target, "targetname");
+          model = getEnt(self.target, "targetname");
           model thread bowie_show(player);
           self.first_time_triggered = true;
         }
@@ -187,5 +187,5 @@ bowie_show(player) {
   self Show();
   play_sound_at_pos("weapon_show", self.origin, self);
   time = 1;
-  self MoveTo(self.og_origin, time);
+  self moveTo(self.og_origin, time);
 }

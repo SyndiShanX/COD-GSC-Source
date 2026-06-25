@@ -98,8 +98,8 @@ power_switch_run() {
       var_1 show();
     }
 
-    self.trigger setcursorhint("HINT_NOICON");
-    self.trigger sethintstring(&"ZOMBIES_POWER_ON");
+    self.trigger setCursorHint("HINT_NOICON");
+    self.trigger setHintString(&"ZOMBIES_POWER_ON");
 
     for(;;) {
       self.trigger waittill("trigger", var_5);
@@ -122,7 +122,7 @@ power_switch_run() {
     }
 
     level.roundpowerstations[level.roundpowerstations.size] = self.power_switch_index;
-    self.trigger sethintstring("");
+    self.trigger setHintString("");
     self notify("on");
     common_scripts\utility::flag_set(self.script_flag);
 
@@ -179,9 +179,9 @@ power_switch_button_run() {
 
   for(;;) {
     self waittill("on");
-    self.button moveto(var_2, var_0);
+    self.button moveTo(var_2, var_0);
     self waittill("off");
-    self.button moveto(var_1, var_0);
+    self.button moveTo(var_1, var_0);
   }
 }
 

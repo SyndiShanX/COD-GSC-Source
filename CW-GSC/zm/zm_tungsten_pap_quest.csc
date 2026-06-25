@@ -19,7 +19,7 @@ function init() {
 }
 
 function function_68bbfe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  e_portal = getent(fieldname, "portal_fx_helipads_to_main_street", "targetname");
+  e_portal = getEnt(fieldname, "portal_fx_helipads_to_main_street", "targetname");
 
   if(bwasdemojump) {
     if(bwasdemojump == 1) {
@@ -46,10 +46,10 @@ function function_1446ef30(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_34eb3249(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   level endon(#"end_game");
-  e_portal = getent(fieldname, "portal_fx_anytown_usa_to_bunker", "targetname");
+  e_portal = getEnt(fieldname, "portal_fx_anytown_usa_to_bunker", "targetname");
 
   if(bwasdemojump) {
-    var_1da0aee8 = getent(fieldname, "anytown_usa_teleporter", "targetname");
+    var_1da0aee8 = getEnt(fieldname, "anytown_usa_teleporter", "targetname");
 
     if(var_1da0aee8.model !== #"p9_zm_gold_teleporter_b") {
       var_1da0aee8 setModel(#"p9_zm_gold_teleporter_b");
@@ -72,7 +72,7 @@ function function_34eb3249(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_8c88a649(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  e_portal = getent(fieldname, "portal_dmg_spark_fx", "targetname");
+  e_portal = getEnt(fieldname, "portal_dmg_spark_fx", "targetname");
 
   if(bwasdemojump) {
     if(!isDefined(e_portal.fx_portal)) {
@@ -89,7 +89,7 @@ function function_8c88a649(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_2d49baf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  e_portal = getent(fieldname, "portal_fx_bunker_to_observation", "targetname");
+  e_portal = getEnt(fieldname, "portal_fx_bunker_to_observation", "targetname");
 
   if(bwasdemojump) {
     if(bwasdemojump == 1) {
@@ -111,7 +111,7 @@ function function_2d49baf(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function function_794730f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   level endon(#"end_game");
-  e_portal = getent(fieldname, "portal_fx_observation_to_helipads", "targetname");
+  e_portal = getEnt(fieldname, "portal_fx_observation_to_helipads", "targetname");
 
   if(bwasdemojump == 1) {
     function_d93b0fff(fieldname, e_portal);

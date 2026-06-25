@@ -179,7 +179,7 @@ tweakart() {
       setDvar("scr_art_sun_fog_dir_set", "0");
       println("Setting sun fog direction to facing of player");
       players = get_players();
-      dir = vectornormalize(anglesToForward(players[0] getplayerangles()));
+      dir = vectorNormalize(anglesToForward(players[0] getplayerangles()));
       level.fogsundir = [];
       level.fogsundir[0] = dir[0];
       level.fogsundir[1] = dir[1];
@@ -335,7 +335,7 @@ create_reflection_object(model) {
   level.debug_reflectionobject = spawn("script_model", player getEye() + vectorscale(anglesToForward(player.angles), 100));
   level.debug_reflectionobject setModel(model);
   level.debug_reflectionobject.origin = player getEye() + vectorscale(anglesToForward(player getplayerangles()), 100);
-  level.debug_reflectionobject linkto(player);
+  level.debug_reflectionobject linkTo(player);
   thread debug_reflection_buttons();
 }
 
@@ -374,7 +374,7 @@ debug_reflection_buttons() {
     wait 0.05;
 
     if(isDefined(level.debug_reflectionobject)) {
-      level.debug_reflectionobject linkto(players[0]);
+      level.debug_reflectionobject linkTo(players[0]);
     }
   }
 }

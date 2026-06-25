@@ -40,7 +40,7 @@ function init_stage() {
 function stage_logic() {
   iprintln(level._cur_stage_name + "");
   level flag::wait_till("ee_all_staffs_placed");
-  playsoundatposition("zmb_squest_robot_alarm_blast", (-14, -1, 871));
+  playSoundAtPosition("zmb_squest_robot_alarm_blast", (-14, -1, 871));
   wait(3);
   util::wait_network_frame();
   zm_sidequests::stage_completed("little_girl_lost", level._cur_stage_name);
@@ -63,7 +63,7 @@ function exit_stage(success) {
 
 function remove_plinth() {
   playFX(level._effect["teleport_1p"], self.m_plinth.origin);
-  playsoundatposition("zmb_footprintbox_disappear", self.m_plinth.origin);
+  playSoundAtPosition("zmb_footprintbox_disappear", self.m_plinth.origin);
   wait(3);
   if(isDefined(self.m_plinth.m_staff)) {
     self.m_plinth.m_staff unlink();
@@ -79,7 +79,7 @@ function remove_plinth() {
 
 function create_robot_head_trigger(unitrigger_stub) {
   playFX(level._effect["teleport_1p"], unitrigger_stub.origin);
-  playsoundatposition("zmb_footprintbox_disappear", unitrigger_stub.origin);
+  playSoundAtPosition("zmb_footprintbox_disappear", unitrigger_stub.origin);
   wait(3);
   unitrigger_stub.radius = 50;
   unitrigger_stub.height = 256;
@@ -97,7 +97,7 @@ function create_robot_head_trigger(unitrigger_stub) {
   util::wait_network_frame();
   m_sign = spawn("script_model", unitrigger_stub.origin);
   m_sign setModel("p7_zm_ori_runes");
-  m_sign linkto(unitrigger_stub.m_plinth, "tag_origin", (0, 15, 40));
+  m_sign linkTo(unitrigger_stub.m_plinth, "tag_origin", (0, 15, 40));
   m_sign hidepart("j_fire");
   m_sign hidepart("j_ice");
   m_sign hidepart("j_lightning");
@@ -147,12 +147,12 @@ function robot_head_trigger_think() {
 }
 
 function place_staff(m_plinth) {
-  m_staff = getent(("craftable_" + self.name) + "_zm", "targetname");
+  m_staff = getEnt(("craftable_" + self.name) + "_zm", "targetname");
   m_plinth.e_staff = self;
   m_plinth.m_staff = m_staff;
   m_plinth.v_old_angles = m_staff.angles;
   m_plinth.v_old_origin = m_staff.origin;
-  m_staff linkto(m_plinth, "tag_origin", (0, 9, 30), (0, 0, 0));
+  m_staff linkTo(m_plinth, "tag_origin", (0, 9, 30), (0, 0, 0));
   m_staff show();
   m_plinth playSound("zmb_squest_robot_place_staff");
 }

@@ -142,7 +142,7 @@ transit_standard_intermission() {
         speed = point.speed;
       }
 
-      target_point = getstruct(point.target, "targetname");
+      target_point = getStruct(point.target, "targetname");
       dist = distance(point.origin, target_point.origin);
       time = dist / speed;
       q_time = time * 0.25;
@@ -153,8 +153,8 @@ transit_standard_intermission() {
 
       self.game_over_bg fadeovertime(q_time);
       self.game_over_bg.alpha = 0;
-      org moveto(target_point.origin, time, q_time, q_time);
-      org rotateto(target_point.angles, time, q_time, q_time);
+      org moveTo(target_point.origin, time, q_time, q_time);
+      org rotateTo(target_point.angles, time, q_time, q_time);
       wait(time - q_time);
       self.game_over_bg fadeovertime(q_time);
       self.game_over_bg.alpha = 1;
@@ -467,15 +467,15 @@ transit_intermission() {
     }
 
     if(near_bridge) {
-      trig = getent("bridge_trig", "targetname");
+      trig = getEnt("bridge_trig", "targetname");
       trig notify("trigger");
     }
 
     org = spawn("script_model", level.the_bus gettagorigin("tag_camera"));
     org setModel("tag_origin");
     org.angles = level.the_bus gettagangles("tag_camera");
-    org linkto(level.the_bus);
-    self setorigin(org.origin);
+    org linkTo(level.the_bus);
+    self setOrigin(org.origin);
     self.angles = org.angles;
 
     if(!flag("OnPriDoorYar") || !flag("OnPriDoorYar2")) {

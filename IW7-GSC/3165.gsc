@@ -231,7 +231,7 @@ func_3721(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_10 = self.vehicle_getspawnerarray;
   }
 
-  if(vectordot(vectornormalize(var_10 - self.origin), anglesToForward(self.angles)) < 0.707) {
+  if(vectordot(vectorNormalize(var_10 - self.origin), anglesToForward(self.angles)) < 0.707) {
     return undefined;
   }
 

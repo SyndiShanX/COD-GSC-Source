@@ -300,7 +300,7 @@ trymeleeattacks_old(var_0, var_1) {
 
   var_4 = (var_2.origin - self.origin) * (1, 1, 0);
   var_5 = anglesToForward(self.angles);
-  var_6 = vectornormalize(var_4);
+  var_6 = vectorNormalize(var_4);
   var_7 = vectordot(var_5, var_6);
 
   if(var_7 < var_3.stand_melee_attack_dot) {

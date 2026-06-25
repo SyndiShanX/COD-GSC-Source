@@ -81,8 +81,8 @@ electric_trap_fx(name, side) {
 }
 
 zapper_switch_fx(ent) {
-  switchfx = getstruct("zapper_switch_fx_" + ent, "targetname");
-  zapperfx = getstruct("zapper_fx_" + ent, "targetname");
+  switchfx = getStruct("zapper_switch_fx_" + ent, "targetname");
+  zapperfx = getStruct("zapper_fx_" + ent, "targetname");
 
   switch_forward = anglesToForward(switchfx.angles);
   switch_up = anglestoup(switchfx.angles);
@@ -130,7 +130,7 @@ zapper_switch_fx(ent) {
 perk_wire_fx(notify_wait, init_targetname) {
   level waittill(notify_wait);
 
-  targ = getstruct(init_targetname, "targetname");
+  targ = getStruct(init_targetname, "targetname");
 
   while(isDefined(targ)) {
     players = getlocalplayers();
@@ -140,7 +140,7 @@ perk_wire_fx(notify_wait, init_targetname) {
     realwait(0.075);
 
     if(isDefined(targ.target)) {
-      targ = getstruct(targ.target, "targetname");
+      targ = getStruct(targ.target, "targetname");
     } else {
       targ = undefined;
     }
@@ -151,11 +151,11 @@ perk_wire_fx(notify_wait, init_targetname) {
 electric_trap_wire_sparks(side) {
   while(1) {
     level waittill(side);
-    ent = getstruct("trap_wire_sparks_" + side, "targetname");
+    ent = getStruct("trap_wire_sparks_" + side, "targetname");
     ent.fx = 1;
     ent thread electric_trap_wire_sparks_stop();
     while(isDefined(ent.fx)) {
-      targ = getstruct(ent.target, "targetname");
+      targ = getStruct(ent.target, "targetname");
 
       while(isDefined(targ)) {
         players = getlocalplayers();
@@ -167,7 +167,7 @@ electric_trap_wire_sparks(side) {
         realwait(0.075);
 
         if(isDefined(targ.target)) {
-          targ = getstruct(targ.target, "targetname");
+          targ = getStruct(targ.target, "targetname");
         } else {
           targ = undefined;
         }

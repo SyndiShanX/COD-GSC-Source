@@ -223,11 +223,11 @@ function_29305761(s_teleport, var_dad37549, var_b095575e = 0) {
 
   if(isDefined(self._scene_object)) {
     [[self._scene_object]] - > stop();
-  } else if(self isplayinganimscripted()) {
+  } else if(self isplayinganimScripted()) {
     self animation::stop();
   }
 
-  self setorigin(s_teleport.origin);
+  self setOrigin(s_teleport.origin);
   self setplayerangles(s_teleport.angles);
 
   if(isDefined(vehicle)) {

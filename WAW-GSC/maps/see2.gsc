@@ -342,7 +342,7 @@ setup_flak88_guard() {
   self.ignoreall = true;
 }
 wait_for_group_spawn(group) {
-  trigger = GetEnt("group " + group + " spawn", "script_noteworthy");
+  trigger = getEnt("group " + group + " spawn", "script_noteworthy");
   trigger thread inform_on_touch_trigger(trigger.script_noteworthy);
   level waittill(trigger.script_noteworthy);
 
@@ -443,11 +443,11 @@ setup_level() {
 setup_player_tanks() {
   entry_points = [];
   for(i = 0; i < 4; i++) {
-    entry_points = array_add(entry_points, getstruct("orig_enter_tanks" + (i + 1), "targetname"));
+    entry_points = array_add(entry_points, getStruct("orig_enter_tanks" + (i + 1), "targetname"));
   }
 
   for(i = 0; i < entry_points.size; i++) {
-    tank = getent(entry_points[i].target, "targetname");
+    tank = getEnt(entry_points[i].target, "targetname");
     if(isDefined(get_players()[i])) {
       tank.animname = "ot34";
 
@@ -545,7 +545,7 @@ disconnect_paths_around_me_based_on_speed() {
       wait(0.05);
     }
 
-    self DisconnectPaths();
+    self disconnectPaths();
 
     while(self GetSpeed() < 1) {
       wait(0.05);
@@ -712,9 +712,9 @@ vehicle_damage() {
       level.hurtTime = hurtTime;
 
       if(amount < 500) {
-        myPlayer PlayRumbleOnEntity("tank_damage_light_mp");
+        myPlayer playRumbleOnEntity("tank_damage_light_mp");
       } else {
-        myPlayer PlayRumbleOnEntity("tank_damage_heavy_mp");
+        myPlayer playRumbleOnEntity("tank_damage_heavy_mp");
       }
 
       myPlayer viewkick(127, attacker.origin);
@@ -1307,7 +1307,7 @@ update_target_flag(flag) {
           forward = anglesToForward(get_players()[i].angles);
           toVec = (toVec[0], toVec[1], 0);
           forward = (forward[0], forward[1], 0);
-          diff = VectorDot(VectorNormalize(forward), VectorNormalize(toVec));
+          diff = VectorDot(vectorNormalize(forward), vectorNormalize(toVec));
           if(acos(diff) < 65) {
             in_player_sights = true;
           }
@@ -1371,7 +1371,7 @@ update_target_flag(flag) {
       break;
 
     case "panther_activated":
-      trigger = GetEnt("panther activate trigger", "targetname");
+      trigger = getEnt("panther activate trigger", "targetname");
       trigger waittill("trigger");
       wait(8);
       flag_set("panther_activated");
@@ -1389,7 +1389,7 @@ update_target_flag(flag) {
           forward = anglesToForward(get_players()[i].angles);
           toVec = (toVec[0], toVec[1], 0);
           forward = (forward[0], forward[1], 0);
-          diff = VectorDot(VectorNormalize(forward), VectorNormalize(toVec));
+          diff = VectorDot(vectorNormalize(forward), vectorNormalize(toVec));
           if(acos(diff) < 30) {
             in_player_sights = true;
           }
@@ -1451,7 +1451,7 @@ update_target_flag(flag) {
       break;
 
     case "radio_tower_visible":
-      radio_tower = GetEnt("radio tower", "script_noteworthy");
+      radio_tower = getEnt("radio tower", "script_noteworthy");
       visible = false;
       while(!visible) {
         for(i = 0; i < get_players().size && !visible; i++) {
@@ -1465,7 +1465,7 @@ update_target_flag(flag) {
       break;
 
     case "radio_tower_close":
-      radio_tower = GetEnt("radio tower", "script_noteworthy");
+      radio_tower = getEnt("radio tower", "script_noteworthy");
       close = false;
       while(!close) {
         for(i = 0; i < get_players().size && !close; i++) {
@@ -1479,7 +1479,7 @@ update_target_flag(flag) {
       break;
 
     case "radio_tower_destroyed":
-      radio_tower = GetEnt("radio tower", "script_noteworthy");
+      radio_tower = getEnt("radio tower", "script_noteworthy");
       while(1) {
         if(radio_tower.model == "anim_seelow_radiotower_d") {
           break;
@@ -1512,7 +1512,7 @@ check_for_visible(player, object, dist) {
   forward = anglesToForward(player.angles);
   toVec = (toVec[0], toVec[1], 0);
   forward = (forward[0], forward[1], 0);
-  diff = VectorDot(VectorNormalize(forward), VectorNormalize(toVec));
+  diff = VectorDot(vectorNormalize(forward), vectorNormalize(toVec));
   if(acos(diff) < 65 && distanceSquared(player.origin, object.origin) < dist * dist) {
     return true;
   }
@@ -1676,7 +1676,7 @@ do_floodspawners(areaname, time) {
 fuel_depot_infantry_evasion() {
   self endon("death");
 
-  trigger = GetEnt("fuel depot retreat trigger", "script_noteworthy");
+  trigger = getEnt("fuel depot retreat trigger", "script_noteworthy");
 
   trigger waittill("trigger");
 
@@ -1818,7 +1818,7 @@ update_current_targeters() {
     miss_struct.origin = (self.origin[0] + x, self.origin[1] + y, self.origin[2]);
     miss_struct.origin = groundpos(miss_struct.origin);
     self.miss_structs = array_add(self.miss_structs, miss_struct);
-    miss_struct linkto(self);
+    miss_struct linkTo(self);
   }
 
   while(1) {
@@ -1983,7 +1983,7 @@ arcademode_water_tower_give_points() {
 }
 
 move_radio_tower_blocker(proper_position) {
-  radio_tower_blocker = GetEnt("radio_tower_blocker", "targetname");
+  radio_tower_blocker = getEnt("radio_tower_blocker", "targetname");
   if(!proper_position) {
     radio_tower_blocker.origin = radio_tower_blocker.origin - (0, 0, 5000);
   } else {
@@ -1992,7 +1992,7 @@ move_radio_tower_blocker(proper_position) {
 }
 
 field_begin_planes_end() {
-  trig = GetEnt("stop field planes", "targetname");
+  trig = getEnt("stop field planes", "targetname");
   trig waittill("trigger");
 
   level clientNotify("start_distance_planes_field_1_stop");
@@ -2083,12 +2083,12 @@ setup_stuck_event() {
 
   level waittill("controls_active");
 
-  stuck_tanknode = GetEnt("stuck tank node", "script_noteworthy");
+  stuck_tanknode = getEnt("stuck tank node", "script_noteworthy");
   stuck_flee_nodes = GetNodeArray("stuck flee node", "script_noteworthy");
   stuck_flee_panzer_nodes = GetNodeArray("stuck panzer flee node", "script_noteworthy");
-  stuck_trigger = GetEnt("stuck trigger", "script_noteworthy");
+  stuck_trigger = getEnt("stuck trigger", "script_noteworthy");
   stuck_ammo_boxes = getEntArray("stuck ammo crate", "script_noteworthy");
-  stuck_damage_trigger = GetEnt("stuck damage trigger", "script_noteworthy");
+  stuck_damage_trigger = getEnt("stuck damage trigger", "script_noteworthy");
   death_tank_move_trigger = getEnt("death tank move_trigger", "script_noteworthy");
   death_tank_spawn_trigger = getEnt("death tank spawn_trigger", "script_noteworthy");
   target_node = getVehicleNode("start targeting", "script_noteworthy");
@@ -2148,7 +2148,7 @@ setup_stuck_infantry() {
 }
 setup_field_ambushes() {
   for(i = 1;; i++) {
-    trigger = GetEnt("field " + i + " ambush trigger");
+    trigger = getEnt("field " + i + " ambush trigger");
     if(isDefined(trigger)) {
       level thread setup_single_ambush(i, trigger);
     } else {
@@ -2182,7 +2182,7 @@ find_farthest_retreat_point(enemy) {
       tank_dir = level.retreat_reference_points[i].origin - enemy.origin;
       retreat_dir = enemy.origin - self.origin;
 
-      if(VectorDot(VectorNormalize(tank_dir), VectorNormalize(retreat_dir)) > 0) {
+      if(VectorDot(vectorNormalize(tank_dir), vectorNormalize(retreat_dir)) > 0) {
         continue;
       }
 
@@ -2314,7 +2314,7 @@ radio_tower_begin() {
   level thread setup_airstrike_triggers();
 }
 wait_for_area_two_infantry() {
-  trigger = GetEnt("group 1 spawn", "script_noteworthy");
+  trigger = getEnt("group 1 spawn", "script_noteworthy");
   trigger waittill("trigger");
 
   if(flag("radio tower destroyed")) {
@@ -2346,8 +2346,8 @@ add_radio_tower_objective(radiotower) {
   level waittill("begin event 2");
   level notify("radio tower start normal");
 
-  proceed_trigger = GetEnt("radio tower proceed trigger", "targetname");
-  next_proceed_trigger = GetEnt("radio tower next proceed trigger", "targetname");
+  proceed_trigger = getEnt("radio tower proceed trigger", "targetname");
+  next_proceed_trigger = getEnt("radio tower next proceed trigger", "targetname");
 
   thread do_radio_tower_owned_event();
 
@@ -2378,13 +2378,13 @@ add_radio_tower_objective(radiotower) {
 add_radio_tower_objective_alternate(radiotower) {
   level endon("radio tower start normal");
 
-  objective_start_tower = GetEnt("radio tower next proceed trigger", "targetname");
+  objective_start_tower = getEnt("radio tower next proceed trigger", "targetname");
   objective_start_tower waittill("trigger");
 
   level notify("radio tower start alternate");
 
-  proceed_trigger = GetEnt("radio tower proceed trigger", "targetname");
-  next_proceed_trigger = GetEnt("radio tower next proceed trigger", "targetname");
+  proceed_trigger = getEnt("radio tower proceed trigger", "targetname");
+  next_proceed_trigger = getEnt("radio tower next proceed trigger", "targetname");
 
   thread do_radio_tower_owned_event();
 
@@ -2497,7 +2497,7 @@ do_radio_tower_explode() {
 }
 check_for_tower_damage(tower, amt) {
   count = 0;
-  damage_trigger = GetEnt(tower.script_noteworthy + " damage trigger", "script_noteworthy");
+  damage_trigger = getEnt(tower.script_noteworthy + " damage trigger", "script_noteworthy");
   while(1) {
     damage_trigger waittill("damage", damage, other, direction, origin, damage_type);
     if(array_check_for_dupes(get_players(), other) || !explosive_damage(damage_type)) {
@@ -2574,7 +2574,7 @@ fuel_depot_objectives() {
   level thread wait_for_finalbattle();
 }
 wait_for_finalbattle_alternate() {
-  start_trigger = GetEnt("finalbattle_trigger", "script_noteworthy");
+  start_trigger = getEnt("finalbattle_trigger", "script_noteworthy");
   start_trigger waittill("trigger");
 
   wait(0.2);
@@ -2585,7 +2585,7 @@ wait_for_finalbattle_alternate() {
 }
 do_tiger_retreats() {
   for(i = 1;; i++) {
-    retreat_tiger = GetEnt("retreat tiger " + i, "script_noteworthy");
+    retreat_tiger = getEnt("retreat tiger " + i, "script_noteworthy");
     retreat_endpoint = getVehicleNode("end retreat tiger " + i, "script_noteworthy");
     if(!isDefined(retreat_tiger) || !isDefined(retreat_endpoint)) {
       break;
@@ -2600,7 +2600,7 @@ wait_for_retreat_done() {
   self delete();
 }
 wait_for_area_three_infantry() {
-  trigger = GetEnt("group 2 spawn", "script_noteworthy");
+  trigger = getEnt("group 2 spawn", "script_noteworthy");
 
   if(!isDefined(trigger)) {
     return;
@@ -2656,7 +2656,7 @@ air_strike_begin() {
   do_victory_scene(true);
 }
 wait_for_area_four_infantry() {
-  trigger = GetEnt("group 3 spawn", "script_noteworthy");
+  trigger = getEnt("group 3 spawn", "script_noteworthy");
   trigger waittill("trigger");
 
   if(flag("final line breached")) {
@@ -2713,14 +2713,14 @@ setup_airstrike_planes() {
       shreck = spawn("script_model", rocket_planes[i] getTagOrigin(left_tag));
       shreck.angles = rocket_planes[i] getTagAngles(left_tag);
       shreck setModel("katyusha_rocket");
-      shreck linkto(rocket_planes[i], left_tag);
+      shreck linkTo(rocket_planes[i], left_tag);
       rocket_planes[i].rockets = array_add(rocket_planes[i].rockets, shreck);
       rocket_planes[i].rocket_tags = array_add(rocket_planes[i].rocket_tags, left_tag);
       wait_network_frame();
       shreck = spawn("script_model", rocket_planes[i] getTagOrigin(right_tag));
       shreck.angles = rocket_planes[i] getTagAngles(right_tag);
       shreck setModel("katyusha_rocket");
-      shreck linkto(rocket_planes[i], right_tag);
+      shreck linkTo(rocket_planes[i], right_tag);
       rocket_planes[i].rockets = array_add(rocket_planes[i].rockets, shreck);
       rocket_planes[i].rocket_tags = array_add(rocket_planes[i].rocket_tags, right_tag);
       wait_network_frame();
@@ -2758,7 +2758,7 @@ run_airstrike_planes() {
   }
 }
 bomber_planes() {
-  while(distance(self.origin, GetPlayers()[0].origin) > 10000) {
+  while(distance(self.origin, getPlayers()[0].origin) > 10000) {
     wait(.01);
   }
   self playSound("fly_by");
@@ -2827,8 +2827,8 @@ wait_for_finalbattle(skipped_radio) {
 }
 do_victory_scene(jumpto) {
   if(!isDefined(jumpto)) {
-    victory_trigger = GetEnt("victory trigger", "targetname");
-    obj_trigger = GetEnt("special obj trigger", "targetname");
+    victory_trigger = getEnt("victory trigger", "targetname");
+    obj_trigger = getEnt("special obj trigger", "targetname");
 
     Objective_additionalPosition(4, 0, obj_trigger.origin);
     guy = undefined;
@@ -2909,14 +2909,14 @@ do_victory_scene(jumpto) {
 
   wait(0.05);
 
-  link = getent("player_temp_ending_pos", "script_noteworthy");
-  anim_node = getent("temp_center", "targetname");
+  link = getEnt("player_temp_ending_pos", "script_noteworthy");
+  anim_node = getEnt("temp_center", "targetname");
 
   players[0] TakeWeapon("m2_flamethrower");
 
   for(i = 0; i < players.size; i++) {
     players[i] hide();
-    players[i] setorigin(link.origin + (0, 0, 4));
+    players[i] setOrigin(link.origin + (0, 0, 4));
     players[i] setplayerangles(link.angles);
     players[i] notify("stop damage hud");
     players[i] disableWeapons();
@@ -2959,7 +2959,7 @@ clean_up_fadeout_hud() {
   }
 }
 play_center_car_anims_side() {
-  anim_node = getent("temp_center", "targetname");
+  anim_node = getEnt("temp_center", "targetname");
 
   guys = [];
 
@@ -2985,7 +2985,7 @@ play_center_car_anims_side() {
 }
 #using_animtree("generic_human");
 play_center_car_anims_middle() {
-  anim_node = getent("temp_center", "targetname");
+  anim_node = getEnt("temp_center", "targetname");
 
   guys = [];
 

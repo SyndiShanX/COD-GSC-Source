@@ -149,9 +149,9 @@ function function_637fae36() {
   foreach(var_a57773f5 in var_27606155) {
     var_a57773f5 triggerenable(1);
   }
-  var_b957e40 = getent("trigger_apc_reinforce", "targetname");
+  var_b957e40 = getEnt("trigger_apc_reinforce", "targetname");
   var_b957e40 triggerenable(0);
-  var_f3fb06d8 = getent("trigger_pod_lz", "targetname");
+  var_f3fb06d8 = getEnt("trigger_pod_lz", "targetname");
   var_f3fb06d8 triggerenable(0);
   level flag::wait_till("shift_defend");
   var_b957e40 triggerenable(1);
@@ -160,7 +160,7 @@ function function_637fae36() {
 function function_a4e4e77d() {
   level waittill("hash_da66fd91");
   foreach(player in level.activeplayers) {
-    player playrumbleonentity("cp_prologue_rumble_apc_offroad");
+    player playRumbleOnEntity("cp_prologue_rumble_apc_offroad");
   }
   foreach(player in level.players) {
     player shellshock("default", 5);
@@ -253,8 +253,8 @@ function function_633f337() {
 
 function function_ff1a7b45() {
   wait(0.1);
-  vh_truck3 = getent("defend_truck_3_vh", "targetname");
-  var_413044a1 = getent("defend_truck_4_vh", "targetname");
+  vh_truck3 = getEnt("defend_truck_3_vh", "targetname");
+  var_413044a1 = getEnt("defend_truck_4_vh", "targetname");
   var_977a939e = vh_truck3 vehicle::get_rider("gunner1");
   var_d96e2f91 = var_413044a1 vehicle::get_rider("gunner1");
   while(isalive(var_977a939e) || isalive(var_d96e2f91)) {
@@ -306,7 +306,7 @@ function function_54454538() {
   self.grenadeammo = 0;
   self.goalradius = 16;
   self waittill("goal");
-  var_5aebca26 = getent("rpg_target", "targetname");
+  var_5aebca26 = getEnt("rpg_target", "targetname");
   var_5aebca26.health = 1;
   var_90911853 = getweapon("launcher_standard_magic_bullet");
   var_f8e04bb3 = self gettagorigin("tag_flash");
@@ -319,7 +319,7 @@ function function_54454538() {
   e_projectile thread fx::play("rock_explosion", e_projectile.origin);
   wait(1);
   v_offset = (40, 0, 72);
-  var_5aebca26 moveto(level.activeplayers[randomint(level.activeplayers.size)].origin + v_offset, 0.05);
+  var_5aebca26 moveTo(level.activeplayers[randomint(level.activeplayers.size)].origin + v_offset, 0.05);
   self thread ai::shoot_at_target("normal", var_5aebca26, undefined, undefined);
   self waittill("stop_shoot_at_target");
   self util::stop_magic_bullet_shield();
@@ -546,8 +546,8 @@ function function_b0cce50c() {
   s_defend = struct::get("pod_defend");
   wait(2);
   objectives::set("cp_waypoint_breadcrumb", s_pod);
-  var_f3fb06d8 = getent("trigger_pod_lz", "targetname");
-  var_6848ea7f = getent("trigger_apc_reinforce", "targetname");
+  var_f3fb06d8 = getEnt("trigger_pod_lz", "targetname");
+  var_6848ea7f = getEnt("trigger_apc_reinforce", "targetname");
   var_f3fb06d8 triggerenable(1);
   var_6848ea7f thread function_a950a3ec();
   level thread function_a3ac9ae0();
@@ -588,7 +588,7 @@ function function_cd56c2cf(player) {
 }
 
 function pod_handler() {
-  level.e_blocker = getent("brush_pod", "targetname");
+  level.e_blocker = getEnt("brush_pod", "targetname");
   vehicle::add_spawn_function("fxanim_vtol_pod", &function_de0720c1);
   vehicle::add_spawn_function("fxanim_pod", &function_52d9a509);
   level thread scene::play("p7_fxanim_cp_prologue_vtol_pod_drop_off_bundle");
@@ -599,7 +599,7 @@ function pod_handler() {
   level waittill("hash_39aa5979");
   level flag::set("pod_on_ground");
   foreach(player in level.activeplayers) {
-    player playrumbleonentity("cp_prologue_rumble_pod_land");
+    player playRumbleOnEntity("cp_prologue_rumble_pod_land");
   }
   wait(3);
   level flag::set("pod_arrive");
@@ -649,7 +649,7 @@ function function_2063548d() {
   level waittill("hash_7176ec93");
   level util::clientnotify("sndOS2");
   foreach(player in level.players) {
-    player playrumbleonentity("damage_heavy");
+    player playRumbleOnEntity("damage_heavy");
   }
   level thread util::screen_fade_out(0.75, "black", "cinematic_fader");
   level vo_end();
@@ -693,7 +693,7 @@ function function_c794d3c2(n_height = 300, var_7ad049d6 = 100, b_do_rumble = 1, 
   wait(0.25);
   level thread fx::play("rock_explosion", var_f9f8910c);
   if(b_do_rumble) {
-    self playrumbleonentity("cp_prologue_rumble_pod_land");
+    self playRumbleOnEntity("cp_prologue_rumble_pod_land");
   }
   if(var_688fa2d2) {
     self shellshock("default", 7);
@@ -725,18 +725,18 @@ function function_de0720c1() {
 
 function function_52d9a509() {
   self util::magic_bullet_shield();
-  var_a3781dbd = getent("pod_panel", "targetname");
+  var_a3781dbd = getEnt("pod_panel", "targetname");
   var_730a7fb0 = (-1.9, 53.5, 79.5);
   var_162bfcbf = vectorscale((-1, 0, 0), 180);
   var_17250c53 = vectortoangles(var_162bfcbf);
-  var_a3781dbd linkto(self, "tag_origin", var_730a7fb0, var_17250c53);
+  var_a3781dbd linkTo(self, "tag_origin", var_730a7fb0, var_17250c53);
   level flag::wait_till("pod_on_ground");
   radiusdamage(self.origin, 250, 150, 150, undefined, "MOD_EXPLOSIVE");
 }
 
 function function_aba4324() {
   wait(3.5);
-  vh_vtol = getent("fxanim_vtol_pod", "animname");
+  vh_vtol = getEnt("fxanim_vtol_pod", "animname");
   var_dc6cf86c = struct::get_array("rpg_vtol");
   foreach(s_rpg in var_dc6cf86c) {
     vh_vtol thread function_3df1f906(s_rpg);
@@ -755,7 +755,7 @@ function function_3df1f906(s_rpg) {
 
 function function_6947ce3() {
   wait(1);
-  var_f5882947 = getent("fxanim_vtol_pod", "animname");
+  var_f5882947 = getEnt("fxanim_vtol_pod", "animname");
   var_f5882947 thread function_34d9d6a7();
   level waittill("hash_27dfe41d");
   level thread function_94856821();
@@ -869,7 +869,7 @@ function function_6ba94a8() {
   level flag::wait_till("pod_waypoint");
   battlechatter::function_d9f49fba(0);
   level thread function_77fe86ff();
-  var_49b32118 = getent("pa_comm_tower", "targetname");
+  var_49b32118 = getEnt("pa_comm_tower", "targetname");
   var_49b32118 dialog::say("nrcp_infiltrators_cornere_0", 0.2, 1);
   battlechatter::function_d9f49fba(1);
   level flag::wait_till("dropship_return");
@@ -927,7 +927,7 @@ function function_947bfdac(einflictor, eattacker, idamage, idflags, smeansofdeat
 
 function function_45756e82(var_1fd9b48b = "chicken_zone") {
   level endon("robot_defend_done");
-  var_e512db80 = getent(var_1fd9b48b + "_trigger", "targetname");
+  var_e512db80 = getEnt(var_1fd9b48b + "_trigger", "targetname");
   while(true) {
     var_e512db80 waittill("trigger", e_who);
     e_who function_d311c75a(var_1fd9b48b);

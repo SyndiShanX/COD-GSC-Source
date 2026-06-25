@@ -256,7 +256,7 @@ event2_exitgate_action() {
   wait(0.1);
   set_color_chain("trig_script_color_allies_b42");
 
-  trig = GetEnt("trig_subway_exitGateArea", "targetname");
+  trig = getEnt("trig_subway_exitGateArea", "targetname");
   trig waittill("trigger");
 
   spawners = getEntArray("spawner_subway_exitDefenders", "targetname");
@@ -568,7 +568,7 @@ metrowave_rat_runpath() {
         self thread rotate_over_time(newAngles, ratRotateTime);
       }
 
-      self MoveTo(nextpointOrigin, ratMoveTime);
+      self moveTo(nextpointOrigin, ratMoveTime);
 
       wait(ratMoveTime - 0.05);
 
@@ -600,7 +600,7 @@ rat_delete() {
   level.rats = array_remove(level.rats, self);
 
   sinktime = 1;
-  self MoveTo(self.origin + (0, 0, -32), sinktime);
+  self moveTo(self.origin + (0, 0, -32), sinktime);
   wait(sinktime);
 
   self Delete();
@@ -639,7 +639,7 @@ metrowave_move(wave, waveCollisionTrig, waveCollisionTrig_aggressive) {
     arraycount++;
 
     if(isDefined(pathpoint.target)) {
-      pathpoint = GetStruct(pathpoint.target, "targetname");
+      pathpoint = getStruct(pathpoint.target, "targetname");
     } else {
       break;
     }
@@ -647,11 +647,11 @@ metrowave_move(wave, waveCollisionTrig, waveCollisionTrig_aggressive) {
 
   ASSERTEX(isDefined(wavePath) && wavePath.size > 0, "Couldn't find pathpoints for metrowave!");
 
-  waveCollisionTrig EnableLinkTo();
-  waveCollisionTrig LinkTo(wave);
+  waveCollisionTrig EnablelinkTo();
+  waveCollisionTrig linkTo(wave);
 
-  waveCollisionTrig_aggressive EnableLinkTo();
-  waveCollisionTrig_aggressive LinkTo(wave);
+  waveCollisionTrig_aggressive EnablelinkTo();
+  waveCollisionTrig_aggressive linkTo(wave);
 
   playFXOnTag(level._effect["metrowave_base"], wave, "tag_origin");
 
@@ -663,7 +663,7 @@ metrowave_move(wave, waveCollisionTrig, waveCollisionTrig_aggressive) {
     newAngles = undefined;
 
     if(isDefined(org.target)) {
-      nextOrg = GetStruct(org.target, "targetname");
+      nextOrg = getStruct(org.target, "targetname");
 
       waveMoveTime = Distance2D(nextOrg.origin, org.origin) / waveSpeed;
       waveRotateTime = waveMoveTime / 4;
@@ -674,7 +674,7 @@ metrowave_move(wave, waveCollisionTrig, waveCollisionTrig_aggressive) {
         wave thread rotate_over_time(newAngles, waveRotateTime, (0, 90, 0));
       }
 
-      wave MoveTo(nextOrg.origin, waveMoveTime);
+      wave moveTo(nextOrg.origin, waveMoveTime);
       wave waittill("movedone");
     }
   }
@@ -687,7 +687,7 @@ rotate_over_time(newAngles, rotateTime, anglesOffset) {
     angles += anglesOffset;
   }
 
-  self RotateTo(angles, rotateTime);
+  self rotateTo(angles, rotateTime);
 }
 
 metrowave_impact_ais(waveCollisionTrig) {
@@ -760,7 +760,7 @@ metrowave_force_camera() {
   for(i = 0; i < players.size; i++) {
     players[i] EnableInvulnerability(true);
 
-    normal = VectorNormalize(lookTarget.origin - players[i].origin);
+    normal = vectorNormalize(lookTarget.origin - players[i].origin);
     player_angles = players[i] GetPlayerAngles();
     player_forward = anglesToForward(player_angles);
 
@@ -873,7 +873,7 @@ metrowave_blackout(waveCollisionTrig) {
 
     players[i].lock = spawn("script_origin", players[i].origin);
     players[i].lock.angles = players[i].angles;
-    players[i] PlayerLinkTo(players[i].lock, "", 1, 25, 25, 25, 25);
+    players[i] PlayerlinkTo(players[i].lock, "", 1, 25, 25, 25, 25);
   }
 
   level.blackout = NewHudElem();
@@ -984,8 +984,8 @@ metrowave_player_bubbles() {
     spot1 setModel("tag_origin");
     spot2 = spawn("script_model", (self getEye()) + (offset));
     spot2 setModel("tag_origin");
-    spot1 linkto(self);
-    spot2 linkto(self);
+    spot1 linkTo(self);
+    spot2 linkTo(self);
     playFXOnTag(level._effect["limb_bubbles"], spot1, "tag_origin");
     playFXOnTag(level._effect["torso_bubbles"], spot2, "tag_origin");
     if(deleteit == 0) {
@@ -1002,14 +1002,14 @@ metrowave_player_bubbles() {
 drag_bubbles() {
   wait 3;
   self unlink();
-  self moveto(self.origin + (0, 0, -100), 10);
+  self moveTo(self.origin + (0, 0, -100), 10);
 }
 
 wait_and_trigoff(thing, time) {
   wait time;
   if(isDefined(thing)) {
     thing unlink();
-    thing moveto(thing.origin + (0, 0, -10000), 0.01);
+    thing moveTo(thing.origin + (0, 0, -10000), 0.01);
     wait 0.1;
     thing delete();
     thing = "undefined";
@@ -1614,7 +1614,7 @@ metro_exitdoor_anim(animeName) {
   org = spawn("script_model", self.origin);
   org setModel("tag_origin_animate");
 
-  self LinkTo(org, "origin_animate_jnt");
+  self linkTo(org, "origin_animate_jnt");
 
   org UseAnimTree(#animtree);
   org SetFlaggedAnimKnob("metrodoor_anim", anime, 1.0, 0.2, 1.0);

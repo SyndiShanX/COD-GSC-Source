@@ -267,14 +267,14 @@ mute_audio_on_intro() {
 }
 
 init_casual_melee_pickups() {
-  var_00 = getent("casual_knife_pickup_trig", "targetname");
-  var_01 = getent("casual_bat_pickup_trig", "targetname");
-  var_02 = getent("casual_axe_pickup_trig", "targetname");
-  var_03 = getent("shovel_pickup_trig", "targetname");
-  var_00 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_KNIFE");
-  var_01 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_BAT");
-  var_02 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_AXE");
-  var_03 sethintstring(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_SHOVEL");
+  var_00 = getEnt("casual_knife_pickup_trig", "targetname");
+  var_01 = getEnt("casual_bat_pickup_trig", "targetname");
+  var_02 = getEnt("casual_axe_pickup_trig", "targetname");
+  var_03 = getEnt("shovel_pickup_trig", "targetname");
+  var_00 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_KNIFE");
+  var_01 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_BAT");
+  var_02 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_AXE");
+  var_03 setHintString(&"ZOMBIE_BERLIN_HINT_ITEM_CASUAL_SHOVEL");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_01, "bat_casual");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_00, "dagger_casual");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_02, "pickaxe_casual");
@@ -319,7 +319,7 @@ museum_door_listener() {
 
 tether_fakery() {
   level waittill("airship_anchor_courtyard_impact");
-  level.tether_fakery_vol = getent("tether_fakery_vol", "targetname");
+  level.tether_fakery_vol = getEnt("tether_fakery_vol", "targetname");
   var_00 = 225;
   for(;;) {
     foreach(var_02 in level.var_744A) {
@@ -348,8 +348,8 @@ tether_fakery_update(param_00) {
 }
 
 airship_wunderbuss_picker() {
-  var_00 = getent("airship_wunderbuss_pickup_trig", "targetname");
-  var_00 sethintstring(&"ZOMBIE_BERLIN_WEAPON_PICKUP");
+  var_00 = getEnt("airship_wunderbuss_pickup_trig", "targetname");
+  var_00 setHintString(&"ZOMBIE_BERLIN_WEAPON_PICKUP");
   for(;;) {
     var_00 waittill("trigger", var_01);
     var_02 = 0;

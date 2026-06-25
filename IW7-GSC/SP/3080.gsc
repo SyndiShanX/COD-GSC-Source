@@ -378,9 +378,9 @@ func_FE8C(var_0) {
           var_5 = var_4[0];
           var_6 = self.enemy.origin - self.origin;
           var_7 = var_5.origin - self.origin;
-          var_8 = vectornormalize(var_7);
+          var_8 = vectorNormalize(var_7);
           var_9 = self.enemy.origin + var_5.origin * 0.5;
-          var_10 = vectornormalize(var_9 - self.origin);
+          var_10 = vectorNormalize(var_9 - self.origin);
           var_11 = vectortoangles(var_10);
           var_12 = anglesToForward(self.angles);
           if(vectordot(var_10, var_12) > 0) {
@@ -1096,7 +1096,7 @@ func_9EA0(var_0, var_1) {
 }
 
 func_9FFA(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_2 - var_0);
+  var_4 = vectorNormalize(var_2 - var_0);
   var_5 = anglesToForward(var_1);
   var_6 = cos(var_3);
   return vectordot(var_4, var_5) >= var_6;

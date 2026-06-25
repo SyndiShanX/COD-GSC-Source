@@ -256,7 +256,7 @@ powerup_setup() {
   struct = level.zombie_powerups[powerup];
   self setModel(struct.model_name);
 
-  playsoundatposition("spawn_powerup", self.origin);
+  playSoundAtPosition("spawn_powerup", self.origin);
 
   self.powerup_name = struct.powerup_name;
   self.hint = struct.hint;
@@ -313,7 +313,7 @@ powerup_grab() {
 
         wait(0.1);
 
-        playsoundatposition("powerup_grabbed", self.origin);
+        playSoundAtPosition("powerup_grabbed", self.origin);
         self stoploopsound();
 
         self delete();
@@ -377,7 +377,7 @@ powerup_wobble() {
       yaw = 60;
     }
     yaw = self.angles[1] + yaw;
-    self rotateto((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo((-60 + randomint(120), yaw, -45 + randomint(90)), waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }
@@ -433,7 +433,7 @@ nuke_powerup(drop_item) {
     }
 
     zombies[i] dodamage(zombies[i].health + 666, zombies[i].origin);
-    playsoundatposition("nuked", zombies[i].origin);
+    playSoundAtPosition("nuked", zombies[i].origin);
   }
 
   players = get_players();
@@ -445,7 +445,7 @@ nuke_powerup(drop_item) {
 }
 
 nuke_flash() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] play_sound_2d("nuke_flash");
   }

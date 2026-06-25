@@ -16,7 +16,7 @@ func_96F4() {
 
 func_95FC(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
-  var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_0.handle = undefined;
   var_0.var_2F12 = undefined;
   foreach(var_4 in var_1) {

@@ -74,9 +74,9 @@ main() {
   zm_utility::function_2959a3cb(#"werewolf", &function_9ab66ae8);
   level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread defend_areas();
-  var_4ce6fa3d = getent("connect_forest_entrance_to_forest", "script_flag");
+  var_4ce6fa3d = getEnt("connect_forest_entrance_to_forest", "script_flag");
   var_4ce6fa3d.script_noteworthy = "";
-  var_822110ba = getent("ooze_gate_col", "targetname");
+  var_822110ba = getEnt("ooze_gate_col", "targetname");
   var_822110ba delete();
   level thread function_5f03f689();
   level thread zm_blockers::function_6f01c3cf("barricade_start_west_1", "script_string");
@@ -176,7 +176,7 @@ defend_areas() {
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7, undefined, undefined, 35);
   zm_utility::function_fef4b36a(str_next_defend);
-  var_6152b664 = getent("use_elec_switch", "targetname");
+  var_6152b664 = getEnt("use_elec_switch", "targetname");
   var_6152b664 triggerenable(1);
   trigger::use("use_elec_switch");
   wait 10;
@@ -215,7 +215,7 @@ defend_areas() {
       collision.angles = zbarrier.angles;
       collision setModel(#"zm_collision_perks1");
       collision.script_noteworthy = "clip";
-      collision disconnectpaths();
+      collision disconnectPaths();
     }
   }
 
@@ -331,9 +331,9 @@ function_ac904e5e() {
 }
 
 function_f3859095() {
-  var_82c8a927 = getent("pap_lock_main_hall", "targetname");
-  var_a82b1de9 = getent("pap_lock_library", "targetname");
-  var_34cbce37 = getent("pap_lock_greenhouse", "targetname");
+  var_82c8a927 = getEnt("pap_lock_main_hall", "targetname");
+  var_a82b1de9 = getEnt("pap_lock_library", "targetname");
+  var_34cbce37 = getEnt("pap_lock_greenhouse", "targetname");
 
   if(isDefined(var_82c8a927)) {
     var_82c8a927 delete();

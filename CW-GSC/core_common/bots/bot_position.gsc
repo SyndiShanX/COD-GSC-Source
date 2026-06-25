@@ -108,7 +108,7 @@ function think() {
     return;
   }
 
-  if(is_true(self.bot.var_6bea1d82) || self.bot.flashed || self isinexecutionvictim() || self isinexecutionattack() || self isplayinganimscripted() || self arecontrolsfrozen() || self function_5972c3cf()) {
+  if(is_true(self.bot.var_6bea1d82) || self.bot.flashed || self isinexecutionvictim() || self isinexecutionattack() || self isplayinganimScripted() || self arecontrolsfrozen() || self function_5972c3cf()) {
     if(!is_true(info.var_9e404264)) {
       self set_position(self.origin, #"hold");
     }
@@ -240,7 +240,7 @@ function private function_96f55844() {
   }
 
   var_5245725e = (navmeshpoint[0], navmeshpoint[1], self.origin[2]);
-  self setorigin(var_5245725e);
+  self setOrigin(var_5245725e);
   velocity = self getvelocity();
   self setvelocity((0, 0, velocity[2]));
   return true;

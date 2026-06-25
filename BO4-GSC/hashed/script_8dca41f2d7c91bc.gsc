@@ -38,7 +38,7 @@ on_begin() {
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
     player stop_timer();
     player.var_be737ce7 = undefined;
@@ -69,7 +69,7 @@ function_15c362c9() {
   level endon(#"trial_round_end", #"end_game");
   function_2c0a7925(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player bgb_pack::function_59004002(#"zm_bgb_anywhere_but_here", 1);
     player bgb_pack::function_59004002(#"zm_bgb_nowhere_but_there", 1);
   }
@@ -77,7 +77,7 @@ function_15c362c9() {
   wait 12;
   var_a3006a8a = array(#"air", #"death", #"earth", #"light");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(self.var_7881756e)) {
       var_32e3ef04 = self.var_7881756e;
     } else {
@@ -118,7 +118,7 @@ function_d38bb58b(var_32e3ef04) {
     self.var_be737ce7 = 1;
     self zm_trial_util::function_63060af4(1);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!(isDefined(player.var_be737ce7) && player.var_be737ce7)) {
         return;
       }

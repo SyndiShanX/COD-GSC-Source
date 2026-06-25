@@ -136,8 +136,8 @@ function_13c87ace(var_a276c861, var_19e802fa) {}
 
 narrative_room(var_a276c861) {
   level flag::set(#"activate_infirmury");
-  mdl_door = getent("cr_door", "targetname");
-  mdl_door rotateyaw(90, 1.6);
+  mdl_door = getEnt("cr_door", "targetname");
+  mdl_door rotateYaw(90, 1.6);
   var_3400a741 = getEntArray("cr_door_bar", "targetname");
   array::run_all(var_3400a741, &delete);
   level clientfield::set("" + #"narrative_room", 1);
@@ -184,7 +184,7 @@ function_d74dcf11() {
     var_2f217f28 thread function_468c20be();
     var_2f217f28 clientfield::set("powerup_fx", 1);
     s_power_up.var_2f217f28 = var_2f217f28;
-    var_da5e0bea = getent("cell_shock_box_" + i, "script_string");
+    var_da5e0bea = getEnt("cell_shock_box_" + i, "script_string");
     var_da5e0bea thread function_13ee3d14(i, s_power_up);
   }
 }
@@ -194,7 +194,7 @@ function_13ee3d14(n_index, s_power_up) {
   s_power_up.var_2f217f28 notify(#"finish_wobble");
   s_power_up.var_2f217f28 delete();
   spawn_infinite_powerup_drop(s_power_up.origin, s_power_up.var_ce471a57);
-  mdl_door = getent("powerup_cell_door_" + n_index, "targetname");
+  mdl_door = getEnt("powerup_cell_door_" + n_index, "targetname");
 
   if(n_index == 1) {
     mdl_door movex(36, 2, 1);
@@ -202,7 +202,7 @@ function_13ee3d14(n_index, s_power_up) {
     mdl_door movex(-34, 2, 1);
   }
 
-  playsoundatposition(#"hash_2903807228236fbc", mdl_door.origin);
+  playSoundAtPosition(#"hash_2903807228236fbc", mdl_door.origin);
   self notify(#"hash_7f8e7011812dff48");
 }
 
@@ -319,21 +319,21 @@ function_cb19e12a(var_a276c861) {
   }
 
   hidemiscmodels("e_art");
-  var_474ede10 = getent("graphic_01", "targetname");
+  var_474ede10 = getEnt("graphic_01", "targetname");
   var_474ede10 delete();
-  var_e33915d6 = getent("graphic_04", "targetname");
+  var_e33915d6 = getEnt("graphic_04", "targetname");
   var_e33915d6 delete();
-  var_ffa14ea6 = getent("graphic_05", "targetname");
+  var_ffa14ea6 = getEnt("graphic_05", "targetname");
   var_ffa14ea6 delete();
 }
 
 drawings_cleanup(var_a276c861, var_19e802fa) {}
 
 function_35a7187c() {
-  var_474ede10 = getent("graphic_01", "targetname");
+  var_474ede10 = getEnt("graphic_01", "targetname");
   var_474ede10 setscale(0.7);
-  var_3253d8db = getent("graphic_01_mover", "targetname");
-  var_474ede10 linkto(var_3253d8db);
+  var_3253d8db = getEnt("graphic_01_mover", "targetname");
+  var_474ede10 linkTo(var_3253d8db);
   t_damage = spawn("trigger_damage", var_3253d8db.origin, 0, 64, 64);
   v_end_pos = (-1052.89, 8901.02, 1362);
 
@@ -347,12 +347,12 @@ function_35a7187c() {
     }
   }
 
-  var_3253d8db moveto(v_end_pos, 0.4);
+  var_3253d8db moveTo(v_end_pos, 0.4);
   t_damage delete();
 }
 
 function_7f53281f() {
-  var_915a9896 = getent("graphic_02_mover", "targetname");
+  var_915a9896 = getEnt("graphic_02_mover", "targetname");
   t_damage = spawn("trigger_damage", var_915a9896.origin, 0, 64, 64);
 
   while(true) {
@@ -365,12 +365,12 @@ function_7f53281f() {
     }
   }
 
-  var_915a9896 rotateyaw(-65.9, 0.4);
+  var_915a9896 rotateYaw(-65.9, 0.4);
   t_damage delete();
 }
 
 function_62878c3d() {
-  var_a6fa1406 = getent("graphic_03_mover", "targetname");
+  var_a6fa1406 = getEnt("graphic_03_mover", "targetname");
   t_damage = spawn("trigger_damage", var_a6fa1406.origin + (0, 0, -10), 0, 64, 64);
   v_end_pos = (-432, 9110, 1397);
   v_end_angles = (38, 90, 0);
@@ -385,13 +385,13 @@ function_62878c3d() {
     }
   }
 
-  var_a6fa1406 moveto(v_end_pos, 0.4);
-  var_a6fa1406 rotateto(v_end_angles, 0.4);
+  var_a6fa1406 moveTo(v_end_pos, 0.4);
+  var_a6fa1406 rotateTo(v_end_angles, 0.4);
   t_damage delete();
 }
 
 function_83abdd2b() {
-  var_e33915d6 = getent("graphic_04", "targetname");
+  var_e33915d6 = getEnt("graphic_04", "targetname");
   t_damage = spawn("trigger_damage", var_e33915d6.origin - (0, 0, 30), 0, 64, 64);
 
   while(true) {
@@ -409,7 +409,7 @@ function_83abdd2b() {
 }
 
 function_c7c805fa() {
-  var_ffa14ea6 = getent("graphic_05", "targetname");
+  var_ffa14ea6 = getEnt("graphic_05", "targetname");
   v_end_pos = (139.543, 6704.51, 98.597);
 
   while(true) {
@@ -420,7 +420,7 @@ function_c7c805fa() {
     }
   }
 
-  var_ffa14ea6 moveto(v_end_pos, 0.4);
+  var_ffa14ea6 moveTo(v_end_pos, 0.4);
 }
 
 function_bdd1bac8(var_a1a0c2e3) {
@@ -428,7 +428,7 @@ function_bdd1bac8(var_a1a0c2e3) {
   level endon(#"hash_433df71d489240ab");
   level endoncallback(&function_96c2cea0, #"hash_3698278a3a5d8beb");
   self endoncallback(&function_96c2cea0, #"stop_damage", #"hash_6ce63d9afba84f4c");
-  mdl_lock = getent("box_lock", "targetname");
+  mdl_lock = getEnt("box_lock", "targetname");
 
   if(!isDefined(mdl_lock) || mdl_lock != var_a1a0c2e3) {
     return;
@@ -470,7 +470,7 @@ function_bdd1bac8(var_a1a0c2e3) {
 }
 
 function_96c2cea0(str_notify) {
-  mdl_lock = getent("box_lock", "targetname");
+  mdl_lock = getEnt("box_lock", "targetname");
 
   if(!isDefined(mdl_lock)) {
     return;
@@ -498,7 +498,7 @@ function_96c2cea0(str_notify) {
 function_6272b55b() {
   self endoncallback(&function_96c2cea0, #"disconnect");
   level endon(#"hash_3698278a3a5d8beb", #"lock_box_captured");
-  mdl_lock = getent("box_lock", "targetname");
+  mdl_lock = getEnt("box_lock", "targetname");
 
   while(isDefined(mdl_lock)) {
     s_result = self waittill(#"throwing_tomahawk");
@@ -518,7 +518,7 @@ function_6272b55b() {
 }
 
 function_68a561a5(e_grenade, n_grenade_charge_power) {
-  mdl_lock = getent("box_lock", "targetname");
+  mdl_lock = getEnt("box_lock", "targetname");
 
   if(!isDefined(mdl_lock)) {
     return false;
@@ -532,7 +532,7 @@ function_68a561a5(e_grenade, n_grenade_charge_power) {
     mdl_tomahawk = zm_weap_tomahawk::tomahawk_spawn(e_grenade.origin);
     mdl_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
     var_8f83b2f6 = util::spawn_model(level.chest_joker_model, e_grenade.origin, mdl_lock.angles);
-    var_8f83b2f6 linkto(mdl_tomahawk);
+    var_8f83b2f6 linkTo(mdl_tomahawk);
     self thread zm_weap_tomahawk::tomahawk_return_player(mdl_tomahawk, undefined, 800);
     self thread function_8996bf17(mdl_tomahawk, var_8f83b2f6);
     return true;
@@ -645,7 +645,7 @@ function_f8c71bba() {
 function_766c869a(e_tomahawk) {
   self notify(#"hash_381a1d8c3e2bdb50");
   self endon(#"disconnect", #"hash_18c7b52cebad7171", #"hash_381a1d8c3e2bdb50");
-  var_e9d35a09 = getent("t_pebble_is_on_fire", "targetname");
+  var_e9d35a09 = getEnt("t_pebble_is_on_fire", "targetname");
 
   while(true) {
     if(self istouching(var_e9d35a09) || isDefined(e_tomahawk) && e_tomahawk istouching(var_e9d35a09)) {
@@ -878,7 +878,7 @@ function_27ae51c4(e_player) {
     mdl_fx setvisibletoplayer(e_player);
   }
 
-  playsoundatposition(#"hash_6f61076a871fcbab", mdl_fx.origin);
+  playSoundAtPosition(#"hash_6f61076a871fcbab", mdl_fx.origin);
   mdl_fx clientfield::set("" + #"hash_46dbc12bdc275121", 1);
   wait 5;
   mdl_fx delete();
@@ -900,7 +900,7 @@ function_13ebfa5e(var_a276c861, var_19e802fa) {
 }
 
 function_90dac8fa() {
-  var_b2afb550 = getent("zombie_ghost_dog_spawner", "script_noteworthy");
+  var_b2afb550 = getEnt("zombie_ghost_dog_spawner", "script_noteworthy");
 
   while(true) {
     if(!zm_custom::function_901b751c(#"zmspecialroundsenabled")) {
@@ -943,7 +943,7 @@ function_90dac8fa() {
           mdl_tomahawk = util::spawn_model(#"hash_2963eae43f30b9ed", var_3c29eed1.origin);
           mdl_tomahawk.origin = e_dog gettagorigin("tag_mouth_fx");
           mdl_tomahawk.angles = e_dog.angles + (90, 0, 90);
-          mdl_tomahawk linkto(e_dog, "tag_mouth_fx");
+          mdl_tomahawk linkTo(e_dog, "tag_mouth_fx");
           e_dog.mdl_tomahawk = mdl_tomahawk;
           mdl_tomahawk clientfield::set("" + #"hash_504d26c38b96651c", 1);
           mdl_tomahawk clientfield::set("" + #"hash_7327d0447d656234", 1);
@@ -1196,7 +1196,7 @@ function_442fe4d3() {
       }
 
       s_result.activator status_effect::status_effect_apply(getstatuseffect(#"shock_zm_trap"), undefined, self);
-      s_result.activator playrumbleonentity("damage_heavy");
+      s_result.activator playRumbleOnEntity("damage_heavy");
       s_result.activator dodamage(25, self.stub.related_parent.origin);
       s_result.activator playSound(#"hash_7f81f21dc017790d");
       break;
@@ -1214,8 +1214,8 @@ function_27c26acb() {
   level.var_1a50fe78 = 0;
   var_86e0f327 = struct::get("walnut_teleporter_01");
   var_77b254ca = struct::get("walnut_teleporter_02");
-  var_3d2317e9 = getent("mdl_walnut_teleporter_1", "targetname");
-  var_696ff082 = getent("mdl_walnut_teleporter_2", "targetname");
+  var_3d2317e9 = getEnt("mdl_walnut_teleporter_1", "targetname");
+  var_696ff082 = getEnt("mdl_walnut_teleporter_2", "targetname");
   var_86e0f327.var_623f6a70 = 1;
   hidemiscmodels("walnut_02");
   level flag::wait_till("start_zombie_round_logic");
@@ -1266,19 +1266,19 @@ function_ed96eb60(e_activator) {
 
     if(self.targetname == "walnut_teleporter_01") {
       var_3d454522 = struct::get("walnut_teleporter_02");
-      var_1da0aee8 = getent("mdl_walnut_teleporter_1", "targetname");
-      var_e52414d4 = getent("mdl_walnut_teleporter_2", "targetname");
+      var_1da0aee8 = getEnt("mdl_walnut_teleporter_1", "targetname");
+      var_e52414d4 = getEnt("mdl_walnut_teleporter_2", "targetname");
     } else {
       var_3d454522 = struct::get("walnut_teleporter_01");
-      var_1da0aee8 = getent("mdl_walnut_teleporter_2", "targetname");
-      var_e52414d4 = getent("mdl_walnut_teleporter_1", "targetname");
+      var_1da0aee8 = getEnt("mdl_walnut_teleporter_2", "targetname");
+      var_e52414d4 = getEnt("mdl_walnut_teleporter_1", "targetname");
     }
 
     mdl_spark = util::spawn_model("tag_origin", self.origin, self.angles);
-    playsoundatposition(#"wpn_zmb_electrap_zap", self.origin);
+    playSoundAtPosition(#"wpn_zmb_electrap_zap", self.origin);
     waitframe(2);
     mdl_spark clientfield::increment("" + #"walnut_teleporter_fx");
-    e_activator playrumbleonentity(#"zm_escape_walnut");
+    e_activator playRumbleOnEntity(#"zm_escape_walnut");
     var_1da0aee8 setModel(#"p8_zm_esc_teleporter_device_off");
 
     if(self.targetname == "walnut_teleporter_01") {
@@ -1293,7 +1293,7 @@ function_ed96eb60(e_activator) {
 
     if(level.var_1a50fe78 < 3) {
       mdl_spark = util::spawn_model("tag_origin", var_3d454522.origin, var_3d454522.angles);
-      playsoundatposition(#"wpn_zmb_electrap_zap", var_3d454522.origin);
+      playSoundAtPosition(#"wpn_zmb_electrap_zap", var_3d454522.origin);
       waitframe(2);
       mdl_spark clientfield::increment("" + #"walnut_teleporter_fx");
 
@@ -1311,7 +1311,7 @@ function_ed96eb60(e_activator) {
       return;
     }
 
-    playsoundatposition(#"wpn_zmb_electrap_zap", var_3d454522.origin);
+    playSoundAtPosition(#"wpn_zmb_electrap_zap", var_3d454522.origin);
     playFX(level._effect[#"switch_sparks"], var_3d454522.origin);
 
     if(isalive(e_activator)) {
@@ -1342,7 +1342,7 @@ function_8f243ee0() {
 function_71e9c5c6(var_a276c861) {
   var_44ba02ba = struct::get("s_m_b_stat_spawn");
   var_bdd8273d = util::spawn_model(var_44ba02ba.model, var_44ba02ba.origin, var_44ba02ba.angles);
-  var_99b181da = getent("e_m_bomb_q_vol", "targetname");
+  var_99b181da = getEnt("e_m_bomb_q_vol", "targetname");
   level.var_a3781eb3 = 0;
   level.var_99b181da = var_99b181da;
   level.var_bdd8273d = var_bdd8273d;
@@ -1394,7 +1394,7 @@ function_beab34f9(v_origin) {
   var_628578b4 = struct::get("s_m_b_stat_spawn");
   var_628578b4 = struct::get(var_628578b4.target);
   n_time = distance(v_origin, var_628578b4.origin) / 100;
-  mdl_fx moveto(var_628578b4.origin, n_time, n_time * 0.25, n_time * 0.25);
+  mdl_fx moveTo(var_628578b4.origin, n_time, n_time * 0.25, n_time * 0.25);
   mdl_fx waittill(#"movedone");
   mdl_fx playSound(#"zmb_sq_souls_impact");
   mdl_fx delete();
@@ -1404,7 +1404,7 @@ function_beab34f9(v_origin) {
   }
 
   if(isDefined(level.var_a3781eb3) && level.var_a3781eb3 >= 20) {
-    playsoundatposition(#"hash_21967fb66e85ac4e", var_628578b4.origin);
+    playSoundAtPosition(#"hash_21967fb66e85ac4e", var_628578b4.origin);
     level flag::set(#"monkey_bomb_quest_step_1_complete");
   }
 }
@@ -1464,7 +1464,7 @@ function_d2cafe65() {
   level.var_b473a73c = 1;
   s_spawn = struct::get("s_m_b_pick_spawn");
   s_spawn.mdl_monkey = util::spawn_model(s_spawn.model, s_spawn.origin, s_spawn.angles);
-  playsoundatposition(#"wpn_zmb_electrap_zap", s_spawn.origin);
+  playSoundAtPosition(#"wpn_zmb_electrap_zap", s_spawn.origin);
   s_spawn.mdl_monkey clientfield::set("powerup_grabbed_fx", 2);
 
   if(function_8b1a219a()) {
@@ -1518,342 +1518,342 @@ audio_log() {
 
   switch (self.script_int) {
     case 1:
-      playsoundatposition(#"hash_23fe2e98c6c58414", self.origin);
+      playSoundAtPosition(#"hash_23fe2e98c6c58414", self.origin);
       wait soundgetplaybacktime(#"hash_23fe2e98c6c58414") * 0.001;
       function_d61f989(#"hash_6453fd4f9c20993d", self.origin);
-      playsoundatposition(#"hash_23fe2f98c6c585c7", self.origin);
+      playSoundAtPosition(#"hash_23fe2f98c6c585c7", self.origin);
       wait soundgetplaybacktime(#"hash_23fe2f98c6c585c7") * 0.001;
-      playsoundatposition(#"hash_23fe3098c6c5877a", self.origin);
+      playSoundAtPosition(#"hash_23fe3098c6c5877a", self.origin);
       wait soundgetplaybacktime(#"hash_23fe3098c6c5877a") * 0.001;
       function_d61f989(#"hash_6453fb4f9c2095d7", self.origin);
       wait 1;
       function_d61f989(#"hash_6453f84f9c2090be", self.origin);
-      playsoundatposition(#"hash_23fe3198c6c5892d", self.origin);
+      playSoundAtPosition(#"hash_23fe3198c6c5892d", self.origin);
       wait soundgetplaybacktime(#"hash_23fe3198c6c5892d") * 0.001;
       function_d61f989(#"hash_6453f94f9c209271", self.origin);
-      playsoundatposition(#"hash_23fe2a98c6c57d48", self.origin);
+      playSoundAtPosition(#"hash_23fe2a98c6c57d48", self.origin);
       wait soundgetplaybacktime(#"hash_23fe2a98c6c57d48") * 0.001;
       function_d61f989(#"hash_6453f64f9c208d58", self.origin);
-      playsoundatposition(#"hash_23fe2b98c6c57efb", self.origin);
+      playSoundAtPosition(#"hash_23fe2b98c6c57efb", self.origin);
       wait soundgetplaybacktime(#"hash_23fe2b98c6c57efb") * 0.001;
-      playsoundatposition(#"hash_23fe2c98c6c580ae", self.origin);
+      playSoundAtPosition(#"hash_23fe2c98c6c580ae", self.origin);
       wait soundgetplaybacktime(#"hash_23fe2c98c6c580ae") * 0.001;
-      playsoundatposition(#"hash_23fe2d98c6c58261", self.origin);
+      playSoundAtPosition(#"hash_23fe2d98c6c58261", self.origin);
       wait soundgetplaybacktime(#"hash_23fe2d98c6c58261") * 0.001;
       break;
     case 2:
-      playsoundatposition(#"hash_15768d7058a98edb", self.origin);
+      playSoundAtPosition(#"hash_15768d7058a98edb", self.origin);
       wait soundgetplaybacktime(#"hash_15768d7058a98edb") * 0.001;
-      playsoundatposition(#"hash_15768c7058a98d28", self.origin);
+      playSoundAtPosition(#"hash_15768c7058a98d28", self.origin);
       wait soundgetplaybacktime(#"hash_15768c7058a98d28") * 0.001;
-      playsoundatposition(#"hash_21e2aae6a803dce0", self.origin);
+      playSoundAtPosition(#"hash_21e2aae6a803dce0", self.origin);
       wait soundgetplaybacktime(#"hash_21e2aae6a803dce0") * 0.001;
       function_d61f989(#"hash_21c98671572b0a70", self.origin);
-      playsoundatposition(#"hash_21e2abe6a803de93", self.origin);
+      playSoundAtPosition(#"hash_21e2abe6a803de93", self.origin);
       wait soundgetplaybacktime(#"hash_21e2abe6a803de93") * 0.001;
-      playsoundatposition(#"hash_21e2ace6a803e046", self.origin);
+      playSoundAtPosition(#"hash_21e2ace6a803e046", self.origin);
       wait soundgetplaybacktime(#"hash_21e2ace6a803e046") * 0.001;
-      playsoundatposition(#"hash_21e2ade6a803e1f9", self.origin);
+      playSoundAtPosition(#"hash_21e2ade6a803e1f9", self.origin);
       wait soundgetplaybacktime(#"hash_21e2ade6a803e1f9") * 0.001;
-      playsoundatposition(#"hash_21e2aee6a803e3ac", self.origin);
+      playSoundAtPosition(#"hash_21e2aee6a803e3ac", self.origin);
       wait soundgetplaybacktime(#"hash_21e2aee6a803e3ac") * 0.001;
       break;
     case 3:
       function_d61f989(#"hash_23cc07d5d8b05cdf", self.origin);
       wait 1.8;
-      playsoundatposition(#"hash_25bacd9289857a44", self.origin);
+      playSoundAtPosition(#"hash_25bacd9289857a44", self.origin);
       wait soundgetplaybacktime(#"hash_25bacd9289857a44") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4f5eef83174e040a", self.origin);
+        playSoundAtPosition(#"hash_4f5eef83174e040a", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4f5eef83174e040a") * 0.001;
-      playsoundatposition(#"hash_25bacf9289857daa", self.origin);
+      playSoundAtPosition(#"hash_25bacf9289857daa", self.origin);
       wait soundgetplaybacktime(#"hash_25bacf9289857daa") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4f5ee183174dec40", self.origin);
+        playSoundAtPosition(#"hash_4f5ee183174dec40", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4f5ee183174dec40") * 0.001;
-      playsoundatposition(#"hash_25bac192898565e0", self.origin);
+      playSoundAtPosition(#"hash_25bac192898565e0", self.origin);
       wait soundgetplaybacktime(#"hash_25bac192898565e0") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4f695b8317571013", self.origin);
+        playSoundAtPosition(#"hash_4f695b8317571013", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4f695b8317571013") * 0.001;
-      playsoundatposition(#"hash_25b0b992897d03c3", self.origin);
+      playSoundAtPosition(#"hash_25b0b992897d03c3", self.origin);
       wait soundgetplaybacktime(#"hash_25b0b992897d03c3") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4f695d8317571379", self.origin);
+        playSoundAtPosition(#"hash_4f695d8317571379", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4f695d8317571379") * 0.001;
-      playsoundatposition(#"hash_25b0bb92897d0729", self.origin);
+      playSoundAtPosition(#"hash_25b0bb92897d0729", self.origin);
       wait soundgetplaybacktime(#"hash_25b0bb92897d0729") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4f695f83175716df", self.origin);
+        playSoundAtPosition(#"hash_4f695f83175716df", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4f695f83175716df") * 0.001;
       function_d61f989(#"hash_23cc08d5d8b05e92", self.origin);
-      playsoundatposition(#"hash_25b0bd92897d0a8f", self.origin);
+      playSoundAtPosition(#"hash_25b0bd92897d0a8f", self.origin);
       wait soundgetplaybacktime(#"hash_25b0bd92897d0a8f") * 0.001;
-      playsoundatposition(#"hash_29be819f5341e1dc", self.origin);
+      playSoundAtPosition(#"hash_29be819f5341e1dc", self.origin);
       wait soundgetplaybacktime(#"hash_29be819f5341e1dc") * 0.001;
-      playsoundatposition(#"hash_25b0bf92897d0df5", self.origin);
+      playSoundAtPosition(#"hash_25b0bf92897d0df5", self.origin);
       wait soundgetplaybacktime(#"hash_25b0bf92897d0df5") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4f69638317571dab", self.origin);
+        playSoundAtPosition(#"hash_4f69638317571dab", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4f69638317571dab") * 0.001;
-      playsoundatposition(#"hash_29be889f5341edc1", self.origin);
+      playSoundAtPosition(#"hash_29be889f5341edc1", self.origin);
       wait soundgetplaybacktime(#"hash_29be889f5341edc1") * 0.001;
-      playsoundatposition(#"hash_25b3be92897f4219", self.origin);
+      playSoundAtPosition(#"hash_25b3be92897f4219", self.origin);
       wait soundgetplaybacktime(#"hash_25b3be92897f4219") * 0.001;
-      playsoundatposition(#"hash_29c1849f53441ccc", self.origin);
+      playSoundAtPosition(#"hash_29c1849f53441ccc", self.origin);
       wait soundgetplaybacktime(#"hash_29c1849f53441ccc") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4f65f38317542984", self.origin);
+        playSoundAtPosition(#"hash_4f65f38317542984", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4f65f38317542984") * 0.001;
-      playsoundatposition(#"hash_25b3bb92897f3d00", self.origin);
+      playSoundAtPosition(#"hash_25b3bb92897f3d00", self.origin);
       wait soundgetplaybacktime(#"hash_25b3bb92897f3d00") * 0.001;
       break;
     case 4:
-      playsoundatposition(#"hash_15e36767f47d3f8", self.origin);
+      playSoundAtPosition(#"hash_15e36767f47d3f8", self.origin);
       wait soundgetplaybacktime(#"hash_15e36767f47d3f8") * 0.001;
-      playsoundatposition(#"hash_15e37767f47d5ab", self.origin);
+      playSoundAtPosition(#"hash_15e37767f47d5ab", self.origin);
       wait soundgetplaybacktime(#"hash_15e37767f47d5ab") * 0.001;
-      playsoundatposition(#"hash_15e38767f47d75e", self.origin);
+      playSoundAtPosition(#"hash_15e38767f47d75e", self.origin);
       wait soundgetplaybacktime(#"hash_15e38767f47d75e") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_35f3cbfc08f0133e", self.origin);
+        playSoundAtPosition(#"hash_35f3cbfc08f0133e", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_35f3cbfc08f0133e") * 0.001;
-      playsoundatposition(#"hash_15e32767f47cd2c", self.origin);
+      playSoundAtPosition(#"hash_15e32767f47cd2c", self.origin);
       wait soundgetplaybacktime(#"hash_15e32767f47cd2c") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_35f3c5fc08f0090c", self.origin);
+        playSoundAtPosition(#"hash_35f3c5fc08f0090c", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_35f3c5fc08f0090c") * 0.001;
-      playsoundatposition(#"hash_15ab4767f44c13b", self.origin);
+      playSoundAtPosition(#"hash_15ab4767f44c13b", self.origin);
       wait soundgetplaybacktime(#"hash_15ab4767f44c13b") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_35dc45fc08dc50ab", self.origin);
+        playSoundAtPosition(#"hash_35dc45fc08dc50ab", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_35dc45fc08dc50ab") * 0.001;
-      playsoundatposition(#"hash_15ab6767f44c4a1", self.origin);
+      playSoundAtPosition(#"hash_15ab6767f44c4a1", self.origin);
       wait soundgetplaybacktime(#"hash_15ab6767f44c4a1") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_35dc47fc08dc5411", self.origin);
+        playSoundAtPosition(#"hash_35dc47fc08dc5411", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_35dc47fc08dc5411") * 0.001;
-      playsoundatposition(#"hash_15ab8767f44c807", self.origin);
+      playSoundAtPosition(#"hash_15ab8767f44c807", self.origin);
       wait soundgetplaybacktime(#"hash_15ab8767f44c807") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_35dc49fc08dc5777", self.origin);
+        playSoundAtPosition(#"hash_35dc49fc08dc5777", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_35dc49fc08dc5777") * 0.001;
-      playsoundatposition(#"hash_15aba767f44cb6d", self.origin);
+      playSoundAtPosition(#"hash_15aba767f44cb6d", self.origin);
       wait soundgetplaybacktime(#"hash_15aba767f44cb6d") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_35dc4bfc08dc5add", self.origin);
+        playSoundAtPosition(#"hash_35dc4bfc08dc5add", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_35dc4bfc08dc5add") * 0.001;
-      playsoundatposition(#"hash_15aac767f44b3a3", self.origin);
+      playSoundAtPosition(#"hash_15aac767f44b3a3", self.origin);
       wait soundgetplaybacktime(#"hash_15aac767f44b3a3") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_35dc3dfc08dc4313", self.origin);
+        playSoundAtPosition(#"hash_35dc3dfc08dc4313", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_35dc3dfc08dc4313") * 0.001;
-      playsoundatposition(#"hash_1572e767f41a7b2", self.origin);
+      playSoundAtPosition(#"hash_1572e767f41a7b2", self.origin);
       wait soundgetplaybacktime(#"hash_1572e767f41a7b2") * 0.001;
       break;
     case 5:
-      playsoundatposition(#"hash_5bf62e19d6a6a36a", self.origin);
+      playSoundAtPosition(#"hash_5bf62e19d6a6a36a", self.origin);
       wait soundgetplaybacktime(#"hash_5bf62e19d6a6a36a") * 0.001;
-      playsoundatposition(#"hash_5bf62d19d6a6a1b7", self.origin);
+      playSoundAtPosition(#"hash_5bf62d19d6a6a1b7", self.origin);
       wait soundgetplaybacktime(#"hash_5bf62d19d6a6a1b7") * 0.001;
       function_d61f989(#"hash_466d0b7b0866b5a1", self.origin);
       wait 1.5;
-      playsoundatposition(#"hash_3ba33944c02f59c2", self.origin);
+      playSoundAtPosition(#"hash_3ba33944c02f59c2", self.origin);
       wait soundgetplaybacktime(#"hash_3ba33944c02f59c2") * 0.001;
-      playsoundatposition(#"hash_5bf62b19d6a69e51", self.origin);
+      playSoundAtPosition(#"hash_5bf62b19d6a69e51", self.origin);
       wait soundgetplaybacktime(#"hash_5bf62b19d6a69e51") * 0.001;
-      playsoundatposition(#"hash_3ba33344c02f4f90", self.origin);
+      playSoundAtPosition(#"hash_3ba33344c02f4f90", self.origin);
       wait soundgetplaybacktime(#"hash_3ba33344c02f4f90") * 0.001;
       function_d61f989(#"hash_466d087b0866b088", self.origin);
-      playsoundatposition(#"hash_5bf62919d6a69aeb", self.origin);
+      playSoundAtPosition(#"hash_5bf62919d6a69aeb", self.origin);
       wait soundgetplaybacktime(#"hash_5bf62919d6a69aeb") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4bc8176f7ba9f733", self.origin);
+        playSoundAtPosition(#"hash_4bc8176f7ba9f733", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4bc8176f7ba9f733") * 0.001;
-      playsoundatposition(#"hash_5bf62719d6a69785", self.origin);
+      playSoundAtPosition(#"hash_5bf62719d6a69785", self.origin);
       wait soundgetplaybacktime(#"hash_5bf62719d6a69785") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4bc8256f7baa0efd", self.origin);
+        playSoundAtPosition(#"hash_4bc8256f7baa0efd", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4bc8256f7baa0efd") * 0.001;
-      playsoundatposition(#"hash_5bf99519d6a98846", self.origin);
+      playSoundAtPosition(#"hash_5bf99519d6a98846", self.origin);
       wait soundgetplaybacktime(#"hash_5bf99519d6a98846") * 0.001;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4bc5156f7ba7bdf6", self.origin);
+        playSoundAtPosition(#"hash_4bc5156f7ba7bdf6", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4bc5156f7ba7bdf6") * 0.001;
       function_d61f989(#"hash_466d097b0866b23b", self.origin);
-      playsoundatposition(#"hash_5bf99319d6a984e0", self.origin);
+      playSoundAtPosition(#"hash_5bf99319d6a984e0", self.origin);
       wait soundgetplaybacktime(#"hash_5bf99319d6a984e0") * 0.001;
       wait 1;
       function_d61f989(#"hash_466d0e7b0866baba", self.origin);
-      playsoundatposition(#"hash_3b98c944c02646ed", self.origin);
+      playSoundAtPosition(#"hash_3b98c944c02646ed", self.origin);
       wait soundgetplaybacktime(#"hash_3b98c944c02646ed") * 0.001;
       wait 1.3;
       function_d61f989(#"hash_466d0f7b0866bc6d", self.origin);
-      playsoundatposition(#"hash_3b98c244c0263b08", self.origin);
+      playSoundAtPosition(#"hash_3b98c244c0263b08", self.origin);
       wait soundgetplaybacktime(#"hash_3b98c244c0263b08") * 0.001;
       wait 0.6;
       function_d61f989(#"hash_466d0c7b0866b754", self.origin);
-      playsoundatposition(#"hash_5bf99a19d6a990c5", self.origin);
+      playSoundAtPosition(#"hash_5bf99a19d6a990c5", self.origin);
       wait soundgetplaybacktime(#"hash_5bf99a19d6a990c5") * 0.001;
       wait 0.35;
-      playsoundatposition(#"hash_3b98c444c0263e6e", self.origin);
+      playSoundAtPosition(#"hash_3b98c444c0263e6e", self.origin);
       wait soundgetplaybacktime(#"hash_3b98c444c0263e6e") * 0.001;
       wait 0.5;
-      playsoundatposition(#"hash_5bf99819d6a98d5f", self.origin);
+      playSoundAtPosition(#"hash_5bf99819d6a98d5f", self.origin);
       wait soundgetplaybacktime(#"hash_5bf99819d6a98d5f") * 0.001;
       wait 0.6;
 
       if(level.var_a0ddc1d0) {
-        playsoundatposition(#"hash_4bc51e6f7ba7cd41", self.origin);
+        playSoundAtPosition(#"hash_4bc51e6f7ba7cd41", self.origin);
       }
 
       wait soundgetplaybacktime(#"hash_4bc51e6f7ba7cd41") * 0.001;
       wait 0.5;
       function_d61f989(#"hash_466d0d7b0866b907", self.origin);
-      playsoundatposition(#"hash_5bf99e19d6a99791", self.origin);
+      playSoundAtPosition(#"hash_5bf99e19d6a99791", self.origin);
       wait soundgetplaybacktime(#"hash_5bf99e19d6a99791") * 0.001;
       wait 3.1;
-      playsoundatposition(#"hash_5bfd1b19d6aca1cf", self.origin);
+      playSoundAtPosition(#"hash_5bfd1b19d6aca1cf", self.origin);
       wait soundgetplaybacktime(#"hash_5bfd1b19d6aca1cf") * 0.001;
       wait 4.47;
-      playsoundatposition(#"hash_3b9c4b44c02959aa", self.origin);
+      playSoundAtPosition(#"hash_3b9c4b44c02959aa", self.origin);
       wait soundgetplaybacktime(#"hash_3b9c4b44c02959aa") * 0.001;
       break;
     case 6:
-      playsoundatposition(#"hash_2d1d88cf90cfcdfa", self.origin);
+      playSoundAtPosition(#"hash_2d1d88cf90cfcdfa", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d88cf90cfcdfa") * 0.001;
-      playsoundatposition(#"hash_2d1d89cf90cfcfad", self.origin);
+      playSoundAtPosition(#"hash_2d1d89cf90cfcfad", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d89cf90cfcfad") * 0.001;
-      playsoundatposition(#"hash_2d1d82cf90cfc3c8", self.origin);
+      playSoundAtPosition(#"hash_2d1d82cf90cfc3c8", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d82cf90cfc3c8") * 0.001;
-      playsoundatposition(#"hash_2d1d83cf90cfc57b", self.origin);
+      playSoundAtPosition(#"hash_2d1d83cf90cfc57b", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d83cf90cfc57b") * 0.001;
-      playsoundatposition(#"hash_2d1d84cf90cfc72e", self.origin);
+      playSoundAtPosition(#"hash_2d1d84cf90cfc72e", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d84cf90cfc72e") * 0.001;
-      playsoundatposition(#"hash_2d1d85cf90cfc8e1", self.origin);
+      playSoundAtPosition(#"hash_2d1d85cf90cfc8e1", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d85cf90cfc8e1") * 0.001;
-      playsoundatposition(#"hash_2d1d7ecf90cfbcfc", self.origin);
+      playSoundAtPosition(#"hash_2d1d7ecf90cfbcfc", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d7ecf90cfbcfc") * 0.001;
-      playsoundatposition(#"hash_2d1d7fcf90cfbeaf", self.origin);
+      playSoundAtPosition(#"hash_2d1d7fcf90cfbeaf", self.origin);
       wait soundgetplaybacktime(#"hash_2d1d7fcf90cfbeaf") * 0.001;
       break;
     case 7:
-      playsoundatposition(#"hash_50c0423d01c93f52", self.origin);
+      playSoundAtPosition(#"hash_50c0423d01c93f52", self.origin);
       wait soundgetplaybacktime(#"hash_50c0423d01c93f52") * 0.001;
-      playsoundatposition(#"hash_50c0433d01c94105", self.origin);
+      playSoundAtPosition(#"hash_50c0433d01c94105", self.origin);
       wait soundgetplaybacktime(#"hash_50c0433d01c94105") * 0.001;
-      playsoundatposition(#"hash_50c0403d01c93bec", self.origin);
+      playSoundAtPosition(#"hash_50c0403d01c93bec", self.origin);
       wait soundgetplaybacktime(#"hash_50c0403d01c93bec") * 0.001;
-      playsoundatposition(#"hash_50c0413d01c93d9f", self.origin);
+      playSoundAtPosition(#"hash_50c0413d01c93d9f", self.origin);
       wait soundgetplaybacktime(#"hash_50c0413d01c93d9f") * 0.001;
-      playsoundatposition(#"hash_50c03e3d01c93886", self.origin);
+      playSoundAtPosition(#"hash_50c03e3d01c93886", self.origin);
       wait soundgetplaybacktime(#"hash_50c03e3d01c93886") * 0.001;
-      playsoundatposition(#"hash_50c03f3d01c93a39", self.origin);
+      playSoundAtPosition(#"hash_50c03f3d01c93a39", self.origin);
       wait soundgetplaybacktime(#"hash_50c03f3d01c93a39") * 0.001;
-      playsoundatposition(#"hash_50c03c3d01c93520", self.origin);
+      playSoundAtPosition(#"hash_50c03c3d01c93520", self.origin);
       wait soundgetplaybacktime(#"hash_50c03c3d01c93520") * 0.001;
-      playsoundatposition(#"hash_50c03d3d01c936d3", self.origin);
+      playSoundAtPosition(#"hash_50c03d3d01c936d3", self.origin);
       wait soundgetplaybacktime(#"hash_50c03d3d01c936d3") * 0.001;
       break;
     case 8:
-      playsoundatposition(#"hash_56c3c2f784568cad", self.origin);
+      playSoundAtPosition(#"hash_56c3c2f784568cad", self.origin);
       wait soundgetplaybacktime(#"hash_56c3c2f784568cad") * 0.001;
-      playsoundatposition(#"hash_56c3c1f784568afa", self.origin);
+      playSoundAtPosition(#"hash_56c3c1f784568afa", self.origin);
       wait soundgetplaybacktime(#"hash_56c3c1f784568afa") * 0.001;
-      playsoundatposition(#"hash_56c034f78453658c", self.origin);
+      playSoundAtPosition(#"hash_56c034f78453658c", self.origin);
       wait soundgetplaybacktime(#"hash_56c034f78453658c") * 0.001;
-      playsoundatposition(#"hash_56c035f78453673f", self.origin);
+      playSoundAtPosition(#"hash_56c035f78453673f", self.origin);
       wait soundgetplaybacktime(#"hash_56c035f78453673f") * 0.001;
-      playsoundatposition(#"hash_56c036f7845368f2", self.origin);
+      playSoundAtPosition(#"hash_56c036f7845368f2", self.origin);
       wait soundgetplaybacktime(#"hash_56c036f7845368f2") * 0.001;
-      playsoundatposition(#"hash_56c037f784536aa5", self.origin);
+      playSoundAtPosition(#"hash_56c037f784536aa5", self.origin);
       wait soundgetplaybacktime(#"hash_56c037f784536aa5") * 0.001;
-      playsoundatposition(#"hash_56c030f784535ec0", self.origin);
+      playSoundAtPosition(#"hash_56c030f784535ec0", self.origin);
       wait soundgetplaybacktime(#"hash_56c030f784535ec0") * 0.001;
-      playsoundatposition(#"hash_56c031f784536073", self.origin);
+      playSoundAtPosition(#"hash_56c031f784536073", self.origin);
       wait soundgetplaybacktime(#"hash_56c031f784536073") * 0.001;
-      playsoundatposition(#"hash_56c032f784536226", self.origin);
+      playSoundAtPosition(#"hash_56c032f784536226", self.origin);
       wait soundgetplaybacktime(#"hash_56c032f784536226") * 0.001;
       break;
     case 9:
-      playsoundatposition(#"hash_42613a08be275478", self.origin);
+      playSoundAtPosition(#"hash_42613a08be275478", self.origin);
       wait soundgetplaybacktime(#"hash_42613a08be275478") * 0.001;
-      playsoundatposition(#"hash_42613908be2752c5", self.origin);
+      playSoundAtPosition(#"hash_42613908be2752c5", self.origin);
       wait soundgetplaybacktime(#"hash_42613908be2752c5") * 0.001;
-      playsoundatposition(#"hash_42613808be275112", self.origin);
+      playSoundAtPosition(#"hash_42613808be275112", self.origin);
       wait soundgetplaybacktime(#"hash_42613808be275112") * 0.001;
-      playsoundatposition(#"hash_371426db436fcdef", self.origin);
+      playSoundAtPosition(#"hash_371426db436fcdef", self.origin);
       wait soundgetplaybacktime(#"hash_371426db436fcdef") * 0.001;
-      playsoundatposition(#"hash_371425db436fcc3c", self.origin);
+      playSoundAtPosition(#"hash_371425db436fcc3c", self.origin);
       wait soundgetplaybacktime(#"hash_371425db436fcc3c") * 0.001;
-      playsoundatposition(#"hash_371428db436fd155", self.origin);
+      playSoundAtPosition(#"hash_371428db436fd155", self.origin);
       wait soundgetplaybacktime(#"hash_371428db436fd155") * 0.001;
-      playsoundatposition(#"hash_371427db436fcfa2", self.origin);
+      playSoundAtPosition(#"hash_371427db436fcfa2", self.origin);
       wait soundgetplaybacktime(#"hash_371427db436fcfa2") * 0.001;
       break;
     case 10:
-      playsoundatposition(#"hash_15968033f07920d6", self.origin);
+      playSoundAtPosition(#"hash_15968033f07920d6", self.origin);
       wait soundgetplaybacktime(#"hash_15968033f07920d6") * 0.001;
-      playsoundatposition(#"hash_15968133f0792289", self.origin);
+      playSoundAtPosition(#"hash_15968133f0792289", self.origin);
       wait soundgetplaybacktime(#"hash_15968133f0792289") * 0.001;
-      playsoundatposition(#"hash_15967e33f0791d70", self.origin);
+      playSoundAtPosition(#"hash_15967e33f0791d70", self.origin);
       wait soundgetplaybacktime(#"hash_15967e33f0791d70") * 0.001;
-      playsoundatposition(#"hash_15967f33f0791f23", self.origin);
+      playSoundAtPosition(#"hash_15967f33f0791f23", self.origin);
       wait soundgetplaybacktime(#"hash_15967f33f0791f23") * 0.001;
-      playsoundatposition(#"hash_15968c33f079353a", self.origin);
+      playSoundAtPosition(#"hash_15968c33f079353a", self.origin);
       wait soundgetplaybacktime(#"hash_15968c33f079353a") * 0.001;
-      playsoundatposition(#"hash_15968d33f07936ed", self.origin);
+      playSoundAtPosition(#"hash_15968d33f07936ed", self.origin);
       wait soundgetplaybacktime(#"hash_15968d33f07936ed") * 0.001;
       break;
   }
@@ -1874,7 +1874,7 @@ audio_log() {
 }
 
 function_d61f989(str_alias, a_location) {
-  playsoundatposition(str_alias, a_location);
+  playSoundAtPosition(str_alias, a_location);
 }
 
 function_175057ad() {

@@ -85,7 +85,7 @@ _id_1E32() {
   var_0 = getEntArray("intelligence_item", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_0[var_1].item = getent(var_0[var_1].target, "targetname");
+    var_0[var_1].item = getEnt(var_0[var_1].target, "targetname");
     var_0[var_1]._id_1E33 = 0;
   }
 
@@ -118,8 +118,8 @@ _id_1E35() {
   self endon("end_trigger_thread");
 
   if(self.classname == "trigger_use") {
-    self sethintstring(&"SCRIPT_INTELLIGENCE_PICKUP");
-    self usetriggerrequirelookat();
+    self setHintString(&"SCRIPT_INTELLIGENCE_PICKUP");
+    self useTriggerRequireLookAt();
   }
 
   self waittill("trigger", var_0);

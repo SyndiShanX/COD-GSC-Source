@@ -156,7 +156,7 @@ _id_9CE5(var_0, var_1) {
   var_0.modelname = "veh8_mil_lnd_asierra_physics_mp";
   var_0._id_0481 = "medium_transport";
   var_0._id_04DE = "asierra_physics_mp";
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;

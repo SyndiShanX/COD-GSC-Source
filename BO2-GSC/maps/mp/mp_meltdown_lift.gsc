@@ -12,18 +12,18 @@
 init() {
   precachestring(&"MP_LIFT_OPERATE");
   precachestring(&"MP_LIFT_COOLDOWN");
-  trigger = getent("lift_trigger", "targetname");
-  platform = getent("lift_platform", "targetname");
+  trigger = getEnt("lift_trigger", "targetname");
+  platform = getEnt("lift_platform", "targetname");
 
   if(!isDefined(trigger) || !isDefined(platform)) {
     return;
   }
-  trigger enablelinkto();
-  trigger linkto(platform);
-  part = getent("lift_part", "targetname");
+  trigger enablelinkTo();
+  trigger linkTo(platform);
+  part = getEnt("lift_part", "targetname");
 
   if(isDefined(part)) {
-    part linkto(platform);
+    part linkTo(platform);
   }
 
   level thread lift_think(trigger, platform);
@@ -34,9 +34,9 @@ lift_think(trigger, platform) {
   location = 0;
 
   for(;;) {
-    trigger sethintstring(&"MP_LIFT_OPERATE");
+    trigger setHintString(&"MP_LIFT_OPERATE");
     trigger waittill("trigger");
-    trigger sethintstring(&"MP_LIFT_COOLDOWN");
+    trigger setHintString(&"MP_LIFT_COOLDOWN");
 
     if(location == 0) {
       goal = platform.origin + vectorscale((0, 0, 1), 128.0);
@@ -60,7 +60,7 @@ lift_think(trigger, platform) {
 lift_move_think(goal) {
   self endon("movedone");
   timer = 5;
-  self moveto(goal, 5);
+  self moveTo(goal, 5);
 
   while(timer >= 0) {
     self destroy_equipment();
@@ -129,7 +129,7 @@ destroy_supply_crates() {
 
     if(crate istouching(self)) {
       playFX(level._supply_drop_explosion_fx, crate.origin);
-      playsoundatposition("wpn_grenade_explode", crate.origin);
+      playSoundAtPosition("wpn_grenade_explode", crate.origin);
       wait 0.1;
       crate maps\mp\killstreaks\_supplydrop::cratedelete();
     }

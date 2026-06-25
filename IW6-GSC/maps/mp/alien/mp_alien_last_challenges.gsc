@@ -871,7 +871,7 @@ move_challenge_ring(var_0, var_1, var_2, var_3) {
       level.ring_waypoint_icon.alpha = 0;
     }
 
-    var_2.ring_ent moveto(var_8["position"], 2);
+    var_2.ring_ent moveTo(var_8["position"], 2);
     playsoundatpos(var_2.ring_ent.origin, "plr_challenge_ring");
     wait 2.0;
 

@@ -92,7 +92,7 @@ flooding_ext() {
   thread close_loading_dock_doors();
   thread alley_kill_triggers("off");
   thread crush_player_with_floating_lynx();
-  var_0 = getent("inside_loadingdocks", "targetname");
+  var_0 = getEnt("inside_loadingdocks", "targetname");
   var_0 waittill("trigger");
   stopFXOnTag(common_scripts\utility::getfx("bokehdots_and_waterdrops_heavy"), level.flood_source_bokehdots, "tag_origin");
 }
@@ -109,8 +109,8 @@ fade_up_black(var_0) {
 }
 
 setup_missile_launcher() {
-  var_0 = getent("missile_launcher_4", "targetname");
-  var_0 rotateyaw(-180, 0.01);
+  var_0 = getEnt("missile_launcher_4", "targetname");
+  var_0 rotateYaw(-180, 0.01);
 }
 
 player_adjust_speed() {
@@ -205,7 +205,7 @@ block_ally_cornerwaving(var_0) {
 }
 
 allies_dam_vign() {
-  var_0 = common_scripts\utility::getstruct("vignette_dam_break", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_dam_break", "script_noteworthy");
   var_1 = [];
   var_1["ally_0"] = level.allies[0];
   var_1["ally_1"] = level.allies[1];
@@ -243,7 +243,7 @@ ally0_main() {
   maps\_utility::ent_flag_init("started_cornerwaving");
   self.alertlevelint = 1;
   self.moveplaybackrate = self.moveplaybackrate - 0.06;
-  var_0 = common_scripts\utility::getstruct("ally0_flee_face", "targetname");
+  var_0 = common_scripts\utility::getStruct("ally0_flee_face", "targetname");
   var_0 thread maps\_anim::anim_reach_solo(self, "flood_cornerwaving_enter");
   var_1 = distance2d(var_0.origin, self.origin);
 
@@ -274,7 +274,7 @@ ally0_main() {
   maps\_utility::enable_sprint();
   self.prevmovemode = "none";
   self notify("move_loop_restart");
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   thread ally_alley_flood_spawn(var_0);
   var_0 maps\_anim::anim_reach_solo(self, "flood_warehouse_breach");
   thread maps\flood_audio::sfx_stop_alley_water();
@@ -310,17 +310,17 @@ ally1_main() {
 
   common_scripts\utility::flag_set("alley_move_toend");
   var_0 notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self.prevmovemode = "none";
   self notify("move_loop_restart");
   level.allies[1] thread maps\_utility::dialogue_queue("flood_bkr_downthealley");
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_0 = maps\flood_util::block_until_at_struct(var_0, 666);
   common_scripts\utility::flag_set("alley_move_shitfuck");
   level notify("stop_crazyness");
   thread maps\flood_audio::stop_sfx_dam_siren_ext();
   thread maps\flood_audio::start_sfx_dam_siren_int();
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   self.moveplaybackrate = self.moveplaybackrate - 0.1;
   var_0 = maps\flood_util::block_until_at_struct(var_0, 666);
   self.moveplaybackrate = self.moveplaybackrate + 0.1;
@@ -344,14 +344,14 @@ ally2_main() {
   self waittill("goal");
   self.moveplaybackrate = self.moveplaybackrate - 0.04;
   var_1 = gettime();
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   thread ally_turnanim_hack(4);
   block_ally_cornerwaving(88);
   var_1 = gettime() - var_1;
   self.prevmovemode = "none";
   self notify("move_loop_restart");
   var_0 = maps\flood_util::block_until_at_struct(var_0);
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   self.moveplaybackrate = self.moveplaybackrate - 0.1;
   var_0 = maps\flood_util::block_until_at_struct(var_0, 666);
   self.moveplaybackrate = self.moveplaybackrate + 0.1;
@@ -424,7 +424,7 @@ open_loading_dock_doors(var_0) {
   var_3 = 0.3;
 
   foreach(var_5 in var_1) {
-    var_5 rotateyaw(85, var_3, 0, 0.2);
+    var_5 rotateYaw(85, var_3, 0, 0.2);
 
     if(var_5.classname == "script_brushmodel") {
       var_5 connectpaths();
@@ -432,7 +432,7 @@ open_loading_dock_doors(var_0) {
   }
 
   foreach(var_5 in var_2) {
-    var_5 rotateyaw(-85, var_3, 0, 0.2);
+    var_5 rotateYaw(-85, var_3, 0, 0.2);
 
     if(var_5.classname == "script_brushmodel") {
       var_5 connectpaths();
@@ -440,7 +440,7 @@ open_loading_dock_doors(var_0) {
   }
 
   wait 0.2;
-  var_9 = getent("loading_dock_door_hack", "targetname");
+  var_9 = getEnt("loading_dock_door_hack", "targetname");
   var_9 notsolid();
 }
 
@@ -451,18 +451,18 @@ close_loading_dock_doors() {
   var_2 = 0.3;
 
   foreach(var_4 in var_0) {
-    var_4 rotateyaw(-85, var_2, 0, 0.2);
+    var_4 rotateYaw(-85, var_2, 0, 0.2);
 
     if(var_4.classname == "script_brushmodel") {
-      var_4 disconnectpaths();
+      var_4 disconnectPaths();
     }
   }
 
   foreach(var_4 in var_1) {
-    var_4 rotateyaw(85, var_2, 0, 0.2);
+    var_4 rotateYaw(85, var_2, 0, 0.2);
 
     if(var_4.classname == "script_brushmodel") {
-      var_4 disconnectpaths();
+      var_4 disconnectPaths();
     }
   }
 }
@@ -550,7 +550,7 @@ waterball_main_spawn(var_0, var_1, var_2, var_3) {
 
   for(var_12 = 1; isDefined(var_4[var_12]); var_12++) {
     var_13 = distance(var_4[var_9].origin, var_4[var_12].origin) / var_8;
-    var_10 moveto(var_4[var_12].origin + (var_5, var_6, var_7), var_13);
+    var_10 moveTo(var_4[var_12].origin + (var_5, var_6, var_7), var_13);
     wait(var_13);
     var_9++;
   }
@@ -581,7 +581,7 @@ waterball_main_side_spawn(var_0, var_1) {
 
   for(var_5 = 1; isDefined(var_2[var_5]); var_5++) {
     var_6 = distance(var_2[var_3].origin, var_2[var_5].origin) / 1500;
-    var_4 moveto(var_2[var_5].origin + (var_1, 0, 0), var_6);
+    var_4 moveTo(var_2[var_5].origin + (var_1, 0, 0), var_6);
     wait(var_6);
     var_3++;
   }
@@ -615,11 +615,11 @@ waterball_main_stream(var_0) {
 
   for(var_8 = var_6 + 1; isDefined(var_1[var_8]); var_8++) {
     if(var_8 == 4) {
-      var_7 rotateto((-90, 0, 0), 0.25);
+      var_7 rotateTo((-90, 0, 0), 0.25);
     }
 
     var_9 = distance(var_1[var_6].origin, var_1[var_8].origin) / var_5;
-    var_7 moveto(var_1[var_8].origin + (var_2, var_3, var_4), var_9);
+    var_7 moveTo(var_1[var_8].origin + (var_2, var_3, var_4), var_9);
     wait(var_9);
     var_6++;
   }
@@ -629,11 +629,11 @@ waterball_main_stream(var_0) {
 }
 
 waterball_get_pathnodes(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   for(var_2 = 0; isDefined(var_1.target); var_2++) {
     var_3[var_2] = var_1;
-    var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_1.target, "targetname");
   }
 
   var_3[var_2] = var_1;
@@ -670,7 +670,7 @@ waterball_play_bigfx(var_0) {
 waterball_main_startfx(var_0) {
   level endon("enter_loadingdocks");
   level endon("stop_crazyness");
-  var_1 = getent(var_0, "targetname").origin;
+  var_1 = getEnt(var_0, "targetname").origin;
   playFX(level._effect["giant_water_splash"], var_1 + (0, 0, -200));
 
   for(var_2 = 0; var_2 < 12; var_2++) {
@@ -682,8 +682,8 @@ waterball_main_startfx(var_0) {
 waterball_alley_stream_setup() {
   level endon("enter_loadingdocks");
   var_0 = 0.15;
-  var_1 = getent("waterball_path_3", "targetname");
-  var_2 = getent("waterball_path_4", "targetname");
+  var_1 = getEnt("waterball_path_3", "targetname");
+  var_2 = getEnt("waterball_path_4", "targetname");
 
   for(;;) {
     thread waterball_alley_stream_spawn("flood_waterball_mini", var_1, -90, 2);
@@ -703,9 +703,9 @@ waterball_alley_stream_spawn(var_0, var_1, var_2, var_3) {
   var_8 startusinglessfrequentlighting();
   var_8 rotatevelocity((0, 0, randomfloatrange(-50, 0)), 3000);
   var_8 thread waterball_play_smallfx(var_3);
-  var_9 = getent(var_1.target, "targetname");
+  var_9 = getEnt(var_1.target, "targetname");
   var_10 = distance(var_1.origin, var_9.origin) / var_7;
-  var_8 moveto(var_9.origin + (var_4, var_5, var_6), var_10);
+  var_8 moveTo(var_9.origin + (var_4, var_5, var_6), var_10);
   wait(var_10);
   var_8 delete();
 }
@@ -713,8 +713,8 @@ waterball_alley_stream_spawn(var_0, var_1, var_2, var_3) {
 waterball_alley_setup() {
   level endon("breach_start");
   var_0 = 1;
-  var_1 = getent("waterball_path_3", "targetname");
-  var_2 = getent("waterball_path_4", "targetname");
+  var_1 = getEnt("waterball_path_3", "targetname");
+  var_2 = getEnt("waterball_path_4", "targetname");
 
   for(;;) {
     thread waterball_alley_spawn(var_1);
@@ -730,9 +730,9 @@ waterball_alley_spawn(var_0) {
   var_3 setModel("tag_origin");
   var_3 thread waterball_play_fx("medium_water_splash");
   var_3 thread trigger_radius_damage(180, 75);
-  var_4 = getent(var_0.target, "targetname");
+  var_4 = getEnt(var_0.target, "targetname");
   var_5 = distance(var_0.origin, var_4.origin) / var_2;
-  var_3 moveto(var_4.origin + (0, var_1, 0), var_5);
+  var_3 moveTo(var_4.origin + (0, var_1, 0), var_5);
   wait(var_5);
   var_3 delete();
 }
@@ -741,7 +741,7 @@ waterball_loadingdocks_setup() {
   level endon("breach_start");
   wait 4;
   var_0 = 1;
-  var_1 = getent("waterball_path_5", "targetname");
+  var_1 = getEnt("waterball_path_5", "targetname");
 
   for(;;) {
     thread waterball_loadingdocks_spawn(var_1);
@@ -756,9 +756,9 @@ waterball_loadingdocks_spawn(var_0) {
   var_3 setModel("tag_origin");
   var_3 thread waterball_play_fx("medium_water_splash");
   var_3 thread trigger_radius_damage(130, 20);
-  var_4 = getent(var_0.target, "targetname");
+  var_4 = getEnt(var_0.target, "targetname");
   var_5 = distance(var_0.origin, var_4.origin) / var_2;
-  var_3 moveto(var_4.origin + (0, var_1, 0), var_5);
+  var_3 moveTo(var_4.origin + (0, var_1, 0), var_5);
   wait(var_5);
   var_3 delete();
 }
@@ -789,8 +789,8 @@ moving_damage_radius_think_push(var_0) {
 
 trigger_radius_damage(var_0, var_1) {
   var_2 = spawn("trigger_radius", self.origin, 0, var_0, var_0);
-  var_2 enablelinkto();
-  var_2 linkto(self);
+  var_2 enablelinkTo();
+  var_2 linkTo(self);
   var_2 thread moving_damage_radius_think_damage(var_1);
   self waittill("death");
   var_2 delete();
@@ -798,8 +798,8 @@ trigger_radius_damage(var_0, var_1) {
 
 trigger_radius_push(var_0, var_1) {
   var_2 = spawn("trigger_radius", self.origin, 0, var_0, var_0);
-  var_2 enablelinkto();
-  var_2 linkto(self);
+  var_2 enablelinkTo();
+  var_2 linkTo(self);
   var_2 thread moving_damage_radius_think_push(var_1);
   self waittill("death");
   var_2 delete();
@@ -808,20 +808,20 @@ trigger_radius_push(var_0, var_1) {
 damage_vehicles_path1() {
   level endon("enter_loadingdocks");
   level endon("stop_crazyness");
-  var_0 = getent("flood_street_car_1", "script_noteworthy");
+  var_0 = getEnt("flood_street_car_1", "script_noteworthy");
   var_0 thread damage_vehicle_think(1);
-  var_0 = getent("flood_street_car_2", "script_noteworthy");
+  var_0 = getEnt("flood_street_car_2", "script_noteworthy");
   var_0 thread damage_vehicle_think(3);
-  var_0 = getent("flood_street_car_3", "script_noteworthy");
+  var_0 = getEnt("flood_street_car_3", "script_noteworthy");
   var_0 thread damage_vehicle_think(4.5);
-  var_0 = getent("flood_street_car_4", "script_noteworthy");
+  var_0 = getEnt("flood_street_car_4", "script_noteworthy");
   var_0 thread damage_vehicle_think(4.5);
-  var_0 = getent("flood_street_car_5", "script_noteworthy");
+  var_0 = getEnt("flood_street_car_5", "script_noteworthy");
   var_0 thread damage_vehicle_think(5);
 }
 
 damage_vehicles_path2() {
-  var_0 = getent("flood_street_car_path2_1", "script_noteworthy");
+  var_0 = getEnt("flood_street_car_path2_1", "script_noteworthy");
   var_0 thread damage_vehicle_think(1.8);
   wait 2.2;
   thread alley_giantsplashes_right();
@@ -837,11 +837,11 @@ damage_vehicle_think(var_0) {
 
 alley_giantsplashes_left() {
   level endon("enter_loadingdocks");
-  var_0 = getent("alley_splashes", "targetname");
+  var_0 = getEnt("alley_splashes", "targetname");
   var_0 waittill("trigger");
 
   for(;;) {
-    playFX(level._effect["giant_water_splash"], getent("alley_giantsplash_left", "targetname").origin);
+    playFX(level._effect["giant_water_splash"], getEnt("alley_giantsplash_left", "targetname").origin);
     wait 3;
   }
 }
@@ -850,13 +850,13 @@ alley_giantsplashes_right() {
   level endon("enter_loadingdocks");
 
   for(;;) {
-    playFX(level._effect["giant_water_splash"], getent("alley_giantsplash_right", "targetname").origin);
+    playFX(level._effect["giant_water_splash"], getEnt("alley_giantsplash_right", "targetname").origin);
     wait 3;
   }
 }
 
 inside_loadingdocks() {
-  var_0 = getent("inside_loadingdocks", "targetname");
+  var_0 = getEnt("inside_loadingdocks", "targetname");
   var_0 waittill("trigger");
   level notify("enter_loadingdocks");
 }
@@ -869,9 +869,9 @@ setup_loadingdocks_water() {
 }
 
 start_loadingdocks_water() {
-  level.flood_double_door_center = getent("double_door_center_ent", "targetname");
+  level.flood_double_door_center = getEnt("double_door_center_ent", "targetname");
   var_0 = getEntArray("coverwater_warehouse", "targetname");
-  level.flood_double_door_center linkto(var_0[0]);
+  level.flood_double_door_center linkTo(var_0[0]);
   setup_loadingdocks_water();
   thread maps\flood_coverwater::register_coverwater_area("coverwater_warehouse", "swept_away");
   thread start_coverheight_water_rising(1, 0, "coverwater_warehouse");
@@ -934,7 +934,7 @@ flooding_int() {
 }
 
 hide_hole1_pieces() {
-  var_0 = getent("mall_roof_hole1_trig", "targetname");
+  var_0 = getEnt("mall_roof_hole1_trig", "targetname");
   var_0 common_scripts\utility::trigger_off();
 }
 
@@ -948,7 +948,7 @@ ally0_main_int() {
   self endon("death");
   maps\_utility::ent_flag_init("stop_alley_wakes");
   maps\_utility::ent_flag_set("stop_alley_wakes");
-  var_0 = common_scripts\utility::getstruct("ally0_flee_int_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("ally0_flee_int_start", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "flood_warehouse_mantle");
   thread maps\flood_fx::character_make_wet(1, 0);
   thread maps\flood_fx::fx_warehouse_ally_mantle(0.3, 0.3);
@@ -961,7 +961,7 @@ ally0_main_int() {
   level.allies[1] maps\_utility::delaythread(8, maps\_utility::dialogue_queue, "flood_kgn_keepmoving2");
   thread maps\flood_audio::sfx_big_metal_stress();
   thread trigger_warehouse_hallway_vo();
-  var_0 = common_scripts\utility::getstruct("warehouse_stairs", "targetname");
+  var_0 = common_scripts\utility::getStruct("warehouse_stairs", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "warehouse_stairs_start");
   thread maps\flood_fx::character_make_wet(20, 0);
   var_0 maps\_anim::anim_single_solo(self, "warehouse_stairs_start");
@@ -1018,7 +1018,7 @@ ally1_main_int() {
   self.moveplaybackrate = 1.1;
   self.movetransitionrate = 1.1;
   self.animplaybackrate = 1.1;
-  var_0 = common_scripts\utility::getstruct("ally1_flee_int_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("ally1_flee_int_start", "targetname");
   maps\_utility::delaythread(0.1, maps\flood_util::push_player, 0);
   var_0 maps\_anim::anim_reach_solo(self, "flood_warehouse_mantle");
   thread maps\flood_fx::character_make_wet(1, 0);
@@ -1027,7 +1027,7 @@ ally1_main_int() {
   var_0 maps\_anim::anim_single_run_solo(self, "flood_warehouse_mantle");
   thread trigger_splash_wet("warehouse_wet01", 50);
   thread trigger_splash_wet("warehouse_wet02", 40);
-  var_0 = common_scripts\utility::getstruct("warehouse_stairs", "targetname");
+  var_0 = common_scripts\utility::getStruct("warehouse_stairs", "targetname");
   maps\_utility::delaythread(0.1, maps\flood_util::push_player, 0);
   var_0 maps\_anim::anim_reach_solo(self, "warehouse_stairs_start");
   thread maps\flood_fx::character_make_wet(20, 0);
@@ -1049,7 +1049,7 @@ ally2_main_int() {
   maps\_utility::ent_flag_init("stop_alley_wakes");
   maps\_utility::ent_flag_set("stop_alley_wakes");
   self.flood_hasmantled = 0;
-  var_0 = common_scripts\utility::getstruct("ally2_flee_int_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("ally2_flee_int_start", "targetname");
   maps\_utility::delaythread(0.1, maps\flood_util::push_player, 0);
   var_0 maps\_anim::anim_reach_solo(self, "flood_warehouse_mantle");
   self.flood_hasmantled = 1;
@@ -1059,9 +1059,9 @@ ally2_main_int() {
   var_0 maps\_anim::anim_single_run_solo(self, "flood_warehouse_mantle");
   thread trigger_splash_wet("warehouse_wet01", 50);
   thread trigger_splash_wet("warehouse_wet02", 40);
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_0 = maps\flood_util::block_until_at_struct(var_0, 48);
-  var_0 = common_scripts\utility::getstruct("warehouse_stairs", "targetname");
+  var_0 = common_scripts\utility::getStruct("warehouse_stairs", "targetname");
   maps\_utility::delaythread(0.1, maps\flood_util::push_player, 0);
   thread maps\flood_audio::sfx_oldboy_stumble_stairs();
   var_0 maps\_anim::anim_reach_solo(self, "warehouse_stairs_start");
@@ -1078,7 +1078,7 @@ ally2_main_int() {
 
 trigger_warehouse_hallway_vo() {
   self endon("death");
-  var_0 = common_scripts\utility::getstruct("warehouse_hallway_vo", "targetname");
+  var_0 = common_scripts\utility::getStruct("warehouse_hallway_vo", "targetname");
 
   while(distance2d(var_0.origin, self.origin) > 100) {
     common_scripts\utility::waitframe();
@@ -1089,7 +1089,7 @@ trigger_warehouse_hallway_vo() {
 
 trigger_splash_wet(var_0, var_1) {
   self endon("death");
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
 
   while(distance2d(var_2.origin, self.origin) > var_1) {
     common_scripts\utility::waitframe();
@@ -1100,12 +1100,12 @@ trigger_splash_wet(var_0, var_1) {
 
 hallway_blocker() {
   level endon("breach_start");
-  var_0 = getent("flooding_hallway_blocker", "targetname");
+  var_0 = getEnt("flooding_hallway_blocker", "targetname");
   var_0.origin = self.origin;
-  var_0 linkto(self, "tag_origin", (0, 0, 48), (0, 0, 0));
+  var_0 linkTo(self, "tag_origin", (0, 0, 48), (0, 0, 0));
 
   for(;;) {
-    var_0 linkto(self, "tag_origin", (0, 0, 48), (0, self.angles[1] * -1, 0));
+    var_0 linkTo(self, "tag_origin", (0, 0, 48), (0, self.angles[1] * -1, 0));
     wait 0.05;
   }
 }
@@ -1113,13 +1113,13 @@ hallway_blocker() {
 breach_warehouse_doors() {
   var_0 = getEntArray("warehouse_door_int_l", "targetname");
   var_1 = getEntArray("warehouse_door_int_r", "targetname");
-  var_2 = getent("warehouse_door_int_l_lock", "targetname");
-  var_3 = getent("warehouse_door_int_r_lock", "targetname");
-  var_2 linkto(var_0[0]);
-  var_3 linkto(var_1[0]);
+  var_2 = getEnt("warehouse_door_int_l_lock", "targetname");
+  var_3 = getEnt("warehouse_door_int_r_lock", "targetname");
+  var_2 linkTo(var_0[0]);
+  var_3 linkTo(var_1[0]);
 
   foreach(var_5 in var_0) {
-    var_5 rotateyaw(85, 0.2, 0.1, 0.1);
+    var_5 rotateYaw(85, 0.2, 0.1, 0.1);
 
     if(var_5.classname == "script_brushmodel") {
       var_5 connectpaths();
@@ -1127,7 +1127,7 @@ breach_warehouse_doors() {
   }
 
   foreach(var_5 in var_1) {
-    var_5 rotateyaw(-85, 0.2, 0.1, 0.1);
+    var_5 rotateYaw(-85, 0.2, 0.1, 0.1);
 
     if(var_5.classname == "script_brushmodel") {
       var_5 connectpaths();
@@ -1151,7 +1151,7 @@ close_warehouse_doors() {
   var_1 = getEntArray("warehouse_door_int_r", "targetname");
 
   foreach(var_3 in var_0) {
-    var_3 rotateyaw(-85, 0.2, 0.1, 0.1);
+    var_3 rotateYaw(-85, 0.2, 0.1, 0.1);
 
     if(var_3.classname == "script_brushmodel") {
       var_3 connectpaths();
@@ -1159,7 +1159,7 @@ close_warehouse_doors() {
   }
 
   foreach(var_3 in var_1) {
-    var_3 rotateyaw(85, 0.2, 0.1, 0.1);
+    var_3 rotateYaw(85, 0.2, 0.1, 0.1);
 
     if(var_3.classname == "script_brushmodel") {
       var_3 connectpaths();
@@ -1169,7 +1169,7 @@ close_warehouse_doors() {
 
 wait_for_intro_vignette_use() {
   level.player endon("mantle_used");
-  var_0 = getent("train_coupling", "targetname");
+  var_0 = getEnt("train_coupling", "targetname");
   notifyoncommand("mantle", "+gostand");
 
   for(;;) {
@@ -1219,13 +1219,13 @@ loadingdocks_no_jump() {
 
 trigger_warehouse_door_burst() {
   level endon("player_on_mall_roof");
-  var_0 = getent("warehouse_door_burst1", "targetname");
+  var_0 = getEnt("warehouse_door_burst1", "targetname");
   var_0.animname = "warehouse_door_burst";
   var_0 maps\_utility::assign_animtree();
-  var_1 = getent("warehouse_door_burst2", "targetname");
+  var_1 = getEnt("warehouse_door_burst2", "targetname");
   var_1.animname = "warehouse_door_burst";
   var_1 maps\_utility::assign_animtree();
-  var_2 = getent("warehouse_door_burst3", "targetname");
+  var_2 = getEnt("warehouse_door_burst3", "targetname");
   var_2.animname = "warehouse_door_burst";
   var_2 maps\_utility::assign_animtree();
   var_0 thread maps\_anim::anim_loop_solo(var_0, "flood_warehouse_doorbuckling_door_loop1");
@@ -1266,7 +1266,7 @@ teleport_ally2() {
   common_scripts\utility::flag_wait("player_doing_warehouse_mantle");
 
   if(!level.allies[2].flood_hasmantled && distance2d(level.player.origin, level.allies[2].origin) > 169) {
-    var_0 = common_scripts\utility::getstruct("ally2_warehouse_snap", "targetname");
+    var_0 = common_scripts\utility::getStruct("ally2_warehouse_snap", "targetname");
     level.allies[2] forceteleport(var_0.origin, var_0.angles);
     level.allies[2] setgoalpos(var_0.origin);
   }
@@ -1291,8 +1291,8 @@ angry_flood_collision(var_0, var_1, var_2, var_3) {
 
 angry_flood_collision_spawn(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("trigger_radius", var_0 gettagorigin(var_1), 0, var_2, var_2);
-  var_5 enablelinkto();
-  var_5 linkto(var_0, var_1);
+  var_5 enablelinkTo();
+  var_5 linkTo(var_0, var_1);
   var_5 thread angry_flood_collision_dodamage(var_3);
   common_scripts\utility::flag_wait(var_4);
   var_5 delete();
@@ -1360,8 +1360,8 @@ angry_flood_collision_cheater_spawn(var_0, var_1, var_2, var_3, var_4) {
   var_7 = var_2;
   var_8 = spawn("script_model", var_5[var_6].origin + (var_1, 0, 0));
   var_9 = spawn("trigger_radius", var_5[var_6].origin + (var_1, 0, 0), 0, var_7, var_7);
-  var_9 enablelinkto();
-  var_9 linkto(var_8);
+  var_9 enablelinkTo();
+  var_9 linkTo(var_8);
 
   if(isDefined(var_3) && var_3) {
     var_9 thread maps\flood_fx::fx_angry_flood_nearmiss(0);
@@ -1371,7 +1371,7 @@ angry_flood_collision_cheater_spawn(var_0, var_1, var_2, var_3, var_4) {
 
   for(var_10 = 1; isDefined(var_5[var_10]); var_10++) {
     var_11 = distance(var_5[var_6].origin, var_5[var_10].origin) / var_4;
-    var_8 moveto(var_5[var_10].origin + (var_1, 0, 0), var_11);
+    var_8 moveTo(var_5[var_10].origin + (var_1, 0, 0), var_11);
     wait(var_11);
     var_6++;
   }
@@ -1400,9 +1400,9 @@ alley_bokehdots() {
 
 alley_bokehdots_old() {
   level endon("player_on_mall_roof");
-  var_0 = getent("alley_bokehdots", "targetname");
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
-  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_0 = getEnt("alley_bokehdots", "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
   var_1 = var_1.origin;
   var_2 = var_2.origin;
   var_3 = distance2d(var_2, var_1);
@@ -1428,7 +1428,7 @@ alley_bokehdots_old() {
 
 warehouse_double_doors() {
   level endon("player_on_mall_roof");
-  var_0 = common_scripts\utility::getstruct("ware_double_doors", "targetname");
+  var_0 = common_scripts\utility::getStruct("ware_double_doors", "targetname");
   var_1 = maps\_utility::spawn_anim_model("warehouse_double_doorl", var_0.origin);
   var_2 = maps\_utility::spawn_anim_model("warehouse_double_doorr", var_0.origin);
   var_0 thread maps\_anim::anim_loop_solo(var_1, "warehouse_double_door");
@@ -1439,7 +1439,7 @@ enemy_spanish_vo() {
   level endon("swept_away");
   level endon("mall_attack_player");
   common_scripts\utility::flag_wait("mall_spanish_vo");
-  var_0 = getent("flood_mall_roof_opfor", "targetname");
+  var_0 = getEnt("flood_mall_roof_opfor", "targetname");
   common_scripts\utility::flag_wait("event_quaker_big");
   wait 6;
   var_0 maps\_utility::play_sound_on_entity("flood_vs2_everyonecheckyour");
@@ -1466,9 +1466,9 @@ enemy_spanish_vo() {
 }
 
 warehouse_collision_hacks_toggle(var_0) {
-  var_1 = getent("warehouse_big_rollup_collision", "targetname");
-  var_2 = getent("loading_dock_rollup_collision", "targetname");
-  var_3 = getent("warehouse_front_door_collision", "targetname");
+  var_1 = getEnt("warehouse_big_rollup_collision", "targetname");
+  var_2 = getEnt("loading_dock_rollup_collision", "targetname");
+  var_3 = getEnt("warehouse_front_door_collision", "targetname");
 
   if(!isDefined(var_0)) {
     var_0 = "default";
@@ -1507,8 +1507,8 @@ player_set_stairwell_speed() {
 }
 
 alley_kill_triggers(var_0) {
-  var_1 = getent("alley_runback_kill_left", "targetname");
-  var_2 = getent("alley_runback_kill_loadingdocks", "targetname");
+  var_1 = getEnt("alley_runback_kill_left", "targetname");
+  var_2 = getEnt("alley_runback_kill_loadingdocks", "targetname");
 
   switch (var_0) {
     case "on":
@@ -1522,7 +1522,7 @@ alley_kill_triggers(var_0) {
 }
 
 crush_player_with_floating_lynx() {
-  var_0 = getent("flooding_crush_player", "targetname");
+  var_0 = getEnt("flooding_crush_player", "targetname");
   var_0 waittill("trigger");
   level.player kill();
 }
@@ -1537,8 +1537,8 @@ flooding_cleanup() {
 start_coverheight_water_rising(var_0, var_1, var_2) {
   if(var_1) {
     var_3 = getEntArray(var_2, "targetname");
-    var_4 = getent(var_2 + "_above", "targetname");
-    var_5 = getent(var_2 + "_under", "targetname");
+    var_4 = getEnt(var_2 + "_above", "targetname");
+    var_5 = getEnt(var_2 + "_under", "targetname");
     var_3 = common_scripts\utility::array_add(var_3, var_4);
     var_3 = common_scripts\utility::array_add(var_3, var_5);
     var_5 setcontents(33);
@@ -1548,7 +1548,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
     }
 
     if(var_2 == "coverwater_warehouse") {
-      var_9 = getent(var_2 + "_foam", "targetname");
+      var_9 = getEnt(var_2 + "_foam", "targetname");
 
       if(isDefined(var_9)) {
         wait 1.01;
@@ -1564,11 +1564,11 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
     thread maps\flood_fx::fx_wh_splashes();
     var_10 = getEntArray("water_alley", "targetname");
     var_11 = getEntArray("coverwater_warehouse", "targetname");
-    var_12 = getent("coverwater_warehouse_above", "targetname");
-    var_13 = getent("coverwater_warehouse_under", "targetname");
-    var_14 = getent("wh_splashes_upper", "targetname");
-    var_15 = getent("coverwater_warehouse_debris", "targetname");
-    var_16 = getent("coverwater_warehouse_foam", "targetname");
+    var_12 = getEnt("coverwater_warehouse_above", "targetname");
+    var_13 = getEnt("coverwater_warehouse_under", "targetname");
+    var_14 = getEnt("wh_splashes_upper", "targetname");
+    var_15 = getEnt("coverwater_warehouse_debris", "targetname");
+    var_16 = getEnt("coverwater_warehouse_foam", "targetname");
     var_11 = common_scripts\utility::array_add(var_11, var_12);
     var_11 = common_scripts\utility::array_add(var_11, var_13);
     var_11 = common_scripts\utility::array_add(var_11, var_14);
@@ -1579,17 +1579,17 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
     }
 
     var_17 = getEntArray("coverwater_warehouse_premantle", "targetname");
-    var_18 = getent("coverwater_warehouse_premantle_above", "targetname");
-    var_19 = getent("coverwater_warehouse_premantle_under", "targetname");
-    var_20 = getent("wh_splashes_lower", "targetname");
-    var_21 = getent("coverwater_warehouse_premantle_debris_T", "targetname");
+    var_18 = getEnt("coverwater_warehouse_premantle_above", "targetname");
+    var_19 = getEnt("coverwater_warehouse_premantle_under", "targetname");
+    var_20 = getEnt("wh_splashes_lower", "targetname");
+    var_21 = getEnt("coverwater_warehouse_premantle_debris_T", "targetname");
     var_17 = common_scripts\utility::array_add(var_17, var_18);
     var_17 = common_scripts\utility::array_add(var_17, var_19);
     var_17 = common_scripts\utility::array_add(var_17, var_20);
     var_17 = common_scripts\utility::array_add(var_17, var_21);
     var_22 = getEntArray("coverwater_warehouse_postmantle", "targetname");
-    var_23 = getent("coverwater_warehouse_postmantle_above", "targetname");
-    var_24 = getent("coverwater_warehouse_postmantle_under", "targetname");
+    var_23 = getEnt("coverwater_warehouse_postmantle_above", "targetname");
+    var_24 = getEnt("coverwater_warehouse_postmantle_under", "targetname");
     var_22 = common_scripts\utility::array_add(var_22, var_23);
     var_22 = common_scripts\utility::array_add(var_22, var_24);
     var_25 = common_scripts\utility::array_combine(var_11, var_17);
@@ -1604,7 +1604,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
     }
 
     thread start_coverheight_water_swap(var_17, var_22);
-    var_29 = getent("inside_loadingdocks", "targetname");
+    var_29 = getEnt("inside_loadingdocks", "targetname");
     var_29 waittill("trigger");
     maps\flood_util::jkuprint("wr: ld");
     var_30 = 4;
@@ -1702,7 +1702,7 @@ start_coverheight_water_swap(var_0, var_1) {
 }
 
 coverheight_water_rising_lip() {
-  var_0 = getent("warehouse_water_lip_02", "targetname");
+  var_0 = getEnt("warehouse_water_lip_02", "targetname");
   var_0 hide();
   var_0 notsolid();
 }
@@ -1855,7 +1855,7 @@ disable_tired(var_0, var_1) {
   } else {
     var_2 = randomfloatrange(0.65, 1.25);
     var_3 = adjust_angles_to_player((0, 0, 0));
-    self.ground_ref_ent rotateto(var_3, var_2, 0, var_2 / 2);
+    self.ground_ref_ent rotateTo(var_3, var_2, 0, var_2 / 2);
     self.ground_ref_ent waittill("rotatedone");
   }
 
@@ -1929,11 +1929,11 @@ stumble(var_0, var_1, var_2, var_3) {
   self endon("stop_limp");
   var_0 = adjust_angles_to_player(var_0);
   self notify("stumble");
-  self.ground_ref_ent rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  self.ground_ref_ent rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   self.ground_ref_ent waittill("rotatedone");
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = adjust_angles_to_player(var_4);
-  self.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
+  self.ground_ref_ent rotateTo(var_4, var_2, 0, var_2 / 2);
   self.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(var_3)) {
@@ -2018,7 +2018,7 @@ angry_flood_cleanup() {
   var_1[var_1.size] = "flood_shake_tree_right_6";
 
   foreach(var_3 in var_1) {
-    var_3 = getent(var_3, "script_noteworthy");
+    var_3 = getEnt(var_3, "script_noteworthy");
 
     if(isDefined(var_3)) {
       var_3 delete();
@@ -2039,7 +2039,7 @@ angry_flood_rumble() {
       var_0.origin = var_0.origin + (0, 0, -8);
     }
 
-    var_0 linkto(level.player);
+    var_0 linkTo(level.player);
     common_scripts\utility::waitframe();
   }
 
@@ -2058,7 +2058,7 @@ angry_flood_rumble() {
 angry_flood_rumble_loop(var_0) {
   level endon("player_warehouse_mantle");
   level.player endon("death");
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 playrumblelooponentity("steady_rumble");
 
   while(isalive(level.player)) {

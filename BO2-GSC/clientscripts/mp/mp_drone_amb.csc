@@ -141,7 +141,7 @@ snd_start_autofdrone_audio() {
 }
 
 scanner_alert() {
-  scannertrig = getent(0, "scanner_alert", "targetname");
+  scannertrig = getEnt(0, "scanner_alert", "targetname");
 
   if(isDefined(scannertrig)) {
     for(;;) {

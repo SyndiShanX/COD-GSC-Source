@@ -23,7 +23,7 @@ main() {
   common_scripts\utility::array_call(level._exfil.debris, ::show);
   level.player setclienttriggeraudiozone("blackice_exfil_int", 2);
   thread event_pipe_explosions();
-  var_0 = getent("brush_pipe_run_blocker", "targetname");
+  var_0 = getEnt("brush_pipe_run_blocker", "targetname");
 
   if(isDefined(var_0)) {
     var_0 connectpaths();
@@ -60,7 +60,7 @@ main() {
   var_24 = common_scripts\utility::spawn_tag_origin();
   var_24.origin = var_23.origin;
   var_24.angles = var_23.angles;
-  var_25 = common_scripts\utility::getstruct("vignette_exfil_runout", "script_noteworthy");
+  var_25 = common_scripts\utility::getStruct("vignette_exfil_runout", "script_noteworthy");
   common_scripts\utility::flag_set("flag_stop_fire_tower_sfx_logic");
   thread player_sprint();
   thread ally_sprint();
@@ -96,7 +96,7 @@ main() {
   var_26 = common_scripts\utility::array_combine(var_27, var_26);
 
   foreach(var_29 in var_26) {
-    var_29 linkto(var_24);
+    var_29 linkTo(var_24);
   }
 
   var_26 = common_scripts\utility::array_add(var_26, var_1);
@@ -201,7 +201,7 @@ section_precache() {
 section_post_inits() {
   level._exfil = spawnStruct();
   level.jump_distance_allowed = 1;
-  level._exfil.struct = common_scripts\utility::getstruct("struct_exfil", "targetname");
+  level._exfil.struct = common_scripts\utility::getStruct("struct_exfil", "targetname");
 
   if(isDefined(level._exfil.struct)) {
     level._exfil.door = maps\black_ice_util::setup_door("model_exfil_door", "bulkhead_door", "jnt_door");
@@ -255,15 +255,15 @@ ladder_chase_explosion_fx() {
   wait 3.0;
   common_scripts\utility::exploder("exfil_vignette_explosion_perif_c");
   earthquake(0.3, 1, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 0.8;
   common_scripts\utility::exploder("exfil_vignette_explosion_perif_d");
   earthquake(0.2, 1, level.player.origin, 3000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 player_explosion_reaction() {
-  var_0 = common_scripts\utility::getstruct("struct_exfil_explosion_damage", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_exfil_explosion_damage", "targetname");
   var_1 = distance(level.player.origin, var_0.origin);
   player_speed_reaction_distance(750, 1100, var_1);
   player_viewkick_distance(var_0, 30, 750, 1200, var_1);
@@ -283,7 +283,7 @@ player_explosion_reaction() {
 }
 
 player_pipe_explosion_reaction() {
-  var_0 = common_scripts\utility::getstruct("struct_exfil_pipe_explosion", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_exfil_pipe_explosion", "targetname");
   var_1 = distance(level.player.origin, var_0.origin);
   player_viewkick_distance(var_0, 15, 650, 900, var_1);
   player_quake_distance(0.4, 0.8, 650, 900, var_1);
@@ -314,9 +314,9 @@ player_viewkick_distance(var_0, var_1, var_2, var_3, var_4) {
 
 player_rumble_distance(var_0, var_1, var_2, var_3, var_4) {
   if(var_0 < var_2) {
-    level.player playrumbleonentity(var_1);
+    level.player playRumbleOnEntity(var_1);
   } else if(var_0 < var_4) {
-    level.player playrumbleonentity(var_3);
+    level.player playRumbleOnEntity(var_3);
   }
 }
 
@@ -360,7 +360,7 @@ player_view_shake() {
 
 exfil_teleport(var_0) {
   level endon("notify_exfil_fail");
-  var_1 = common_scripts\utility::getstruct("struct_exfil_teleport", "targetname");
+  var_1 = common_scripts\utility::getStruct("struct_exfil_teleport", "targetname");
   level waittill("notify_exfil_player_teleport");
   common_scripts\utility::exploder("flyout_water_fx");
 
@@ -377,15 +377,15 @@ exfil_deck_explosions() {
   level.player playSound("scn_blackice_exfil_explo04");
   common_scripts\utility::exploder("exfil_vignette_explosion_perif_a");
   earthquake(0.3, 1, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   maps\_utility::trigger_wait_targetname("trig_exfil_explode_2");
   common_scripts\utility::exploder("exfil_vignette_explosion_perif_b");
   earthquake(0.3, 1, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1.2;
   common_scripts\utility::exploder("exfil_vignette_explosion_perif_e");
   earthquake(0.3, 1, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 exfil_random_quaker() {
@@ -408,11 +408,11 @@ exfil_random_quaker() {
 exfil_hall_explosions() {
   maps\_utility::trigger_wait_targetname("trig_command_quake_1");
   earthquake(0.4, 1, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   maps\_utility::trigger_wait_targetname("trig_command_quake_2");
   level.player playSound("scn_blackice_exfil_explo02");
   earthquake(0.5, 1.8, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1.3;
   common_scripts\utility::exploder("exfil_light_1");
   wait 1.0;
@@ -423,13 +423,13 @@ exfil_hall_explosions() {
 exfil_light_burst() {
   thread maps\black_ice_anim::runout_group1();
   thread maps\black_ice_anim::runout_group2();
-  var_0 = getent("escape_emergency_1", "targetname");
+  var_0 = getEnt("escape_emergency_1", "targetname");
   var_0 setlightintensity(1.6);
   maps\_utility::trigger_wait_targetname("trig_exfil_light_burst");
   common_scripts\utility::exploder("exfil_light_3");
   level.player playSound("scn_blackice_exfil_explo01");
   earthquake(0.3, 1.1, level.player.origin, 2000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   var_0 setlightintensity(2);
   var_0 maps\black_ice_util::flicker(0.9, 0.5);
 }
@@ -438,7 +438,7 @@ exfil_steam_burst() {
   thread maps\black_ice_anim::runout_group3();
   level waittill("notify_exfil_steam_burst");
   earthquake(0.35, 1.3, level.player.origin, 2000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   common_scripts\utility::exploder("exfil_steam_burst");
   maps\_utility::stop_exploder("fx_command_interior");
 }
@@ -738,7 +738,7 @@ ladder_player_jumpcheck() {
   var_5 = maps\_utility::spawn_anim_model("cam_shake");
   var_5.origin = level.player.origin;
   var_5.angles = level.player.angles;
-  var_5 linkto(level.player);
+  var_5 linkTo(level.player);
 
   while(!common_scripts\utility::flag("flag_ladder_jump")) {
     if(level.player jumpbuttonPressed()) {
@@ -761,7 +761,7 @@ ladder_player_jumpcheck() {
       common_scripts\utility::flag_set("flag_ladder_jump");
       var_5 unlink();
       level.player playersetgroundreferenceent(var_5);
-      level.player playrumbleonentity("pistol_fire");
+      level.player playRumbleOnEntity("pistol_fire");
 
       if(level.jump_distance_allowed == 1) {
         thread maps\black_ice_audio::sfx_exfil_outro();
@@ -884,7 +884,7 @@ player_fail_rigexplode() {
   level.player disableweapons();
   earthquake(0.6, 0.9, level.player.origin, 3000);
   level.player shellshock("blackice_nosound", 1.25);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player thread maps\_gameskill::blood_splat_on_screen("right");
   level.player thread maps\black_ice_audio::sfx_blackice_fail_explo();
   playFXOnTag(common_scripts\utility::getfx("exfil_view_explosion"), var_0, "tag_splode_1");
@@ -892,7 +892,7 @@ player_fail_rigexplode() {
   wait 0.65;
   earthquake(0.5, 0.7, level.player.origin, 3000);
   level.player shellshock("blackice_nosound", 0.75);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level.player thread maps\_gameskill::blood_splat_on_screen("left");
   playFXOnTag(common_scripts\utility::getfx("exfil_view_explosion"), var_0, "tag_splode_2");
   wait 0.8;
@@ -917,7 +917,7 @@ player_fail_rigexplode() {
   }
 
   var_2 = common_scripts\utility::spawn_tag_origin();
-  level.player playerlinkto(var_2, "tag_origin", 1, 0, 0, 0, 0, 0);
+  level.player playerlinkTo(var_2, "tag_origin", 1, 0, 0, 0, 0, 0);
   var_3 = maps\_hud_util::create_client_overlay("black", 0, level.player);
   var_3 fadeovertime(0.2);
   var_3.alpha = 1;
@@ -930,7 +930,7 @@ player_viewkicker(var_0) {
   thread player_viewkicker_timer();
 
   while(!common_scripts\utility::flag("flag_kick_player_to_death")) {
-    level.player playrumbleonentity("grenade_rumble");
+    level.player playRumbleOnEntity("grenade_rumble");
     wait 0.1;
   }
 }
@@ -963,12 +963,12 @@ open_exfil_door() {
 }
 
 notetrack_grab_shake(var_0) {
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 notetrack_shockwave_shake(var_0) {
   earthquake(0.3, 1.0, level.player.origin, 2048);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 event_pipe_explosions() {
@@ -1018,7 +1018,7 @@ flyout_lights() {
 }
 
 retarget_rig() {
-  self retargetscriptmodellighting(getent("rig_lighttarget", "targetname"));
+  self retargetscriptmodellighting(getEnt("rig_lighttarget", "targetname"));
 }
 
 exfil_mblur_changes() {

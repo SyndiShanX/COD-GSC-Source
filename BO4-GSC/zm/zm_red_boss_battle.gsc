@@ -95,25 +95,25 @@ init() {
   level._effect[#"perseus_teleport_boss"] = #"hash_57449588f6051a0d";
   level._effect[#"perseus_death"] = #"hash_6c3beeb5851adca4";
   level.s_boss_battle = spawnStruct();
-  level.s_boss_battle.var_35345d3d = getent("vol_boss_arena_1", "targetname");
-  level.s_boss_battle.var_285e59dd = getent("vol_boss_arena_2", "targetname");
-  level.s_boss_battle.var_76f4f0e9 = getent("vol_boss_arena_3", "targetname");
+  level.s_boss_battle.var_35345d3d = getEnt("vol_boss_arena_1", "targetname");
+  level.s_boss_battle.var_285e59dd = getEnt("vol_boss_arena_2", "targetname");
+  level.s_boss_battle.var_76f4f0e9 = getEnt("vol_boss_arena_3", "targetname");
   level.s_boss_battle.var_2624492f = [];
   level.s_boss_battle.var_2624492f[2] = "fountain_miniboss_ent";
   level.s_boss_battle.var_2624492f[3] = "column_miniboss_ent";
   level.s_boss_battle.var_2624492f[1] = "park_miniboss_ent";
   level.s_boss_battle.s_pinnacle = struct::get("s_pinnacle_center");
-  level.s_boss_battle.var_98ea549b = getent("no_aoe", "targetname");
+  level.s_boss_battle.var_98ea549b = getEnt("no_aoe", "targetname");
   level.s_boss_battle.var_5203fa2b = struct::get_array("boss_attack_point");
   level.s_boss_battle.registersarah_defeated_gore_ = struct::get_array("boss_2_player_respawn");
   level.s_boss_battle.var_415fc88 = 33;
   level.s_boss_battle.n_stage = 0;
   level.s_boss_battle.var_dc656db3 = 0;
-  level.s_boss_battle.mdl_perseus = getent("chaos_bolt_thrower", "targetname");
+  level.s_boss_battle.mdl_perseus = getEnt("chaos_bolt_thrower", "targetname");
   level.s_boss_battle.mdl_perseus hide();
-  level.s_boss_battle.var_c67e8352 = getent("chaos_bolt_thrower_shield", "targetname");
+  level.s_boss_battle.var_c67e8352 = getEnt("chaos_bolt_thrower_shield", "targetname");
   level.s_boss_battle.var_c67e8352 hide();
-  level.s_boss_battle.var_5e9e4c15 = getent("chaos_bolt_thrower_sword", "targetname");
+  level.s_boss_battle.var_5e9e4c15 = getEnt("chaos_bolt_thrower_sword", "targetname");
   level.s_boss_battle.var_5e9e4c15 hide();
   level.s_boss_battle.mdl_perseus val::set("zm_red_boss_fight", "takedamage", 1);
   level.s_boss_battle.mdl_perseus val::set("zm_red_boss_fight", "allowdeath", 1);
@@ -173,7 +173,7 @@ function_3a2efd4e(b_cheated = 0, var_7982b1c8 = 1, var_8ef91a04 = 1) {
   level endon(#"end_game", #"trial_round_end");
   level flag::wait_till("zones_initialized");
   level._zombiemode_check_firesale_loc_valid_func = &return_false;
-  array::thread_all(getplayers(), &function_a4bcce4e);
+  array::thread_all(getPlayers(), &function_a4bcce4e);
   zombie_utility::set_zombie_var(#"zombie_powerup_fire_sale_on", 0);
   level notify(#"fire_sale_off");
   callback::on_spawned(&on_player_spawned);
@@ -195,7 +195,7 @@ function_3a2efd4e(b_cheated = 0, var_7982b1c8 = 1, var_8ef91a04 = 1) {
     chest zm_magicbox::hide_chest(0);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player disableweaponfire();
   }
 
@@ -207,7 +207,7 @@ function_3a2efd4e(b_cheated = 0, var_7982b1c8 = 1, var_8ef91a04 = 1) {
     level scene::play(#"aib_vign_cust_zm_red_boss_intro");
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player enableweaponfire();
   }
 
@@ -229,11 +229,11 @@ function_3a2efd4e(b_cheated = 0, var_7982b1c8 = 1, var_8ef91a04 = 1) {
   zm_zonemgr::enable_zone("zone_boss_plateau_2");
   zm_zonemgr::enable_zone("zone_boss_plateau_3");
   var_9dc587a9 = struct::get_array("s_boss_arena_teleport");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   for(i = 0; i < a_players.size; i++) {
     if(var_8ef91a04) {
-      a_players[i] setorigin(var_9dc587a9[i].origin);
+      a_players[i] setOrigin(var_9dc587a9[i].origin);
       a_players[i] setplayerangles(var_9dc587a9[i].angles);
     }
 
@@ -292,7 +292,7 @@ function_dfaf17c8() {
     var_de3a312c.var_5a099a2d = undefined;
     var_de3a312c.var_151f9e4b = undefined;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread zm_red_fasttravel::function_28deccf1(var_de3a312c, 1);
     }
   }
@@ -544,7 +544,7 @@ chaos_bolt_thrower(e_target) {
   }
 
   if(isDefined(v_pos)) {
-    playsoundatposition(#"hash_2a8cdf7d7ef28efe", v_pos);
+    playSoundAtPosition(#"hash_2a8cdf7d7ef28efe", v_pos);
 
     if(b_annihilator) {
       zm_aoe::function_371b4147(7, #"zm_aoe_chaos_bolt_annihilate", v_pos);
@@ -1440,7 +1440,7 @@ function_b4723f8e(v_origin, e_pegasus) {
   n_radius = 256;
 
   for(n_iterations = int(20); n_iterations > 0; n_iterations--) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(!isalive(e_player)) {
         continue;
       }
@@ -1479,7 +1479,7 @@ function_325b6d95(v_origin) {
   w_fire = getweapon(#"incendiary_fire");
 
   while(n_iterations > 0) {
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(!isalive(e_player)) {
         continue;
       }
@@ -1582,7 +1582,7 @@ teleport_attack(e_perseus) {
       e_perseus thread function_caa7eeb();
       level flag::wait_till(#"oracle_key_picked_up");
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isDefined(player) && player clientfield::get_to_player("" + #"oracle_boon_recieved")) {
           player clientfield::set_to_player("" + #"oracle_boon_recieved", 0);
         }
@@ -1617,7 +1617,7 @@ function_2a866d1a(a_ents) {
     var_bbaa9da2 = var_5287d229 + (0, n_yaw, 0);
     v_direction = anglesToForward(var_bbaa9da2);
     v_target_loc = e_perseus.origin + v_direction;
-    launchvelocity = vectornormalize(v_target_loc - e_perseus.origin) * 800;
+    launchvelocity = vectorNormalize(v_target_loc - e_perseus.origin) * 800;
     projectile = e_perseus magicmissile(level.s_boss_battle.var_5db6ed5f, v_target_loc + (16, 0, 54), launchvelocity);
     projectile clientfield::set("" + #"chaos_bolt_fx", 3);
   }
@@ -1636,7 +1636,7 @@ function_caa7eeb() {
   level flag::clear("spawn_zombies");
   level thread cleanup_final();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::set("game_over_man", "takedamage", 0);
   }
 
@@ -1842,9 +1842,9 @@ function_a3f19534(a_ents) {
   if(isDefined(a_ents[#"boss_1"])) {
     a_ents[#"boss_1"] waittill(#"final_strike_here");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player)) {
-        player playrumbleonentity("zm_red_step_complete_rumble");
+        player playRumbleOnEntity("zm_red_step_complete_rumble");
       }
     }
   }
@@ -2072,7 +2072,7 @@ perseus_teleport_fx(v_destination) {
   playFXOnTag(level._effect[#"hash_661c427afb24e5f2"], e_perseus, "tag_weapon_right");
   playFX(level._effect[#"hash_4d8d2bc22add9939"], var_2ff979fa.origin, v_forward, (1, 0, 0));
   level waittill(#"play_teleport_fx");
-  playsoundatposition(#"hash_5e07cc4ee28c44e7", e_perseus.origin);
+  playSoundAtPosition(#"hash_5e07cc4ee28c44e7", e_perseus.origin);
   playFX(level._effect[#"perseus_teleport_dest"], var_2ff979fa.origin, v_forward, (1, 0, 0));
   playFX(level._effect[#"perseus_teleport_boss"], e_perseus gettagorigin("j_spine4"), v_forward, (1, 0, 0));
   wait 2;

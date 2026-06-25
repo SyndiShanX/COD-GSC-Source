@@ -339,7 +339,7 @@ function_a1b40aa4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_3dadedf8(localclientnum) {
   while(true) {
     origin = getlocalclientpos(localclientnum);
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     players = arraysortclosest(players, origin, undefined, 0, 6000);
     bleeding = 0;
 

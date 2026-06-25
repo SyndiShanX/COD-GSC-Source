@@ -85,7 +85,7 @@ function function_bb1fbc7f() {
 function function_4903bec6(player) {
   var_5d0b57e4 = level clientfield::get("hope_state");
   if(var_5d0b57e4 == 1) {
-    self sethintstring("");
+    self setHintString("");
     return true;
   }
   return false;
@@ -132,11 +132,11 @@ function function_2650d73f(player) {
     return false;
   }
   if(var_5d0b57e4 == 2) {
-    self sethintstring("");
+    self setHintString("");
     return true;
   }
   if(var_5d0b57e4 == 3) {
-    self sethintstring("");
+    self setHintString("");
     return true;
   }
   return false;
@@ -173,14 +173,14 @@ function function_6143b210(e_triggerer) {
   var_8ccfc8c3 clientfield::set("hope_spark", 1);
   wait(2);
   s_target = struct::get(s_start.target);
-  var_8ccfc8c3 moveto(s_target.origin, 2);
+  var_8ccfc8c3 moveTo(s_target.origin, 2);
   wait(3);
   s_target = struct::get(s_target.target);
-  var_8ccfc8c3 moveto(s_target.origin, 2);
+  var_8ccfc8c3 moveTo(s_target.origin, 2);
   var_8ccfc8c3 waittill("movedone");
   level clientfield::set("hope_state", 3);
   level flag::set("hope_done");
-  playsoundatposition("zmb_overachiever_spark_success", (0, 0, 0));
+  playSoundAtPosition("zmb_overachiever_spark_success", (0, 0, 0));
   level.wallbuy_should_upgrade_weapon_override = &function_afddb902;
   level.magicbox_should_upgrade_weapon_override = &function_7e7eb906;
   zm_genesis_timer::function_cc8ae246(200);

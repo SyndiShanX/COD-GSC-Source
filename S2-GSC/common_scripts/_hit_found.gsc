@@ -37,7 +37,7 @@ func_9F90(param_00, param_01, param_02, param_03, param_04) {
   var_14 = 0;
   var_15 = undefined;
   var_10 = anglesToForward(self.var_001D);
-  var_10 = vectornormalize((var_10[0], var_10[1], 0));
+  var_10 = vectorNormalize((var_10[0], var_10[1], 0));
   var_16 = self.var_0116 + var_10 * 15;
   if(param_02) {
     var_17 = 10;
@@ -233,8 +233,8 @@ func_6FAC(param_00, param_01, param_02, param_03, param_04, param_05) {
   }
 
   if(!isDefined(param_01["current_angle"])) {
-    var_0B = vectornormalize(var_0A - var_08);
-    param_05 = vectornormalize(param_05);
+    var_0B = vectorNormalize(var_0A - var_08);
+    param_05 = vectorNormalize(param_05);
     var_0C = vectordot(var_0B, param_05);
     var_0C = clamp(var_0C, -1, 1);
     param_01["current_angle"] = acos(var_0C);
@@ -353,7 +353,7 @@ func_43D8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0C = combineangles(param_03, (0, 180, 0));
   var_0D = (param_01[0], param_01[1], 0) - (param_02[0], param_02[1], 0);
   var_0E = length(var_0D);
-  var_0F = vectornormalize(var_0D);
+  var_0F = vectorNormalize(var_0D);
   var_10 = param_01 + var_0F * param_05 + (0, 0, param_04);
   var_11["right_outer"] = spawnStruct();
   var_11["right_outer"].var_0F40 = var_10;
@@ -392,7 +392,7 @@ func_43D8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_11["left_inner"].var_32D3 = param_0B;
   var_11["left_inner"].trace_type = "arc_single";
   var_11["left_inner"].custom_mask = 377552881;
-  var_13 = vectortoangles(vectornormalize(param_02 - param_01));
+  var_13 = vectortoangles(vectorNormalize(param_02 - param_01));
   if(common_scripts\_plant_weapon::func_8BAF()) {
     var_11["le_top_tag_player"] = spawnStruct();
     var_11["le_top_tag_player"].var_0F40 = param_01;
@@ -454,7 +454,7 @@ func_10D0(param_00, param_01, param_02, param_03, param_04) {
   var_09 = var_07 - var_05;
   var_0A = length(var_09);
   var_0B = combineangles(var_08, (0, 180, 0));
-  var_0C = vectortoangles(vectornormalize(var_05 - var_07));
+  var_0C = vectortoangles(vectorNormalize(var_05 - var_07));
   var_0C = combineangles(var_0C, (0, 0, 90));
   var_0D = combineangles(var_08, (0, 180, 90));
   var_0E = [];
@@ -576,7 +576,7 @@ func_6FAA(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0D = var_0A[2];
   var_0E = anglesToForward(param_01);
   for(var_0F = 0; var_0F < var_0B.size; var_0F++) {
-    var_10 = vectortoangles(vectornormalize(var_0B[var_0F] - param_00));
+    var_10 = vectortoangles(vectorNormalize(var_0B[var_0F] - param_00));
     var_10 = combineangles(var_10, (0, 0, 90));
     if(param_05 > 0) {
       param_05 = param_05 * -1;

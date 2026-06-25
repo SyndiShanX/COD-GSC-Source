@@ -162,7 +162,7 @@ function player_can_see_me(player) {
   v_player_angles = player getplayerangles();
   v_player_forward = anglesToForward(v_player_angles);
   v_player_to_self = self.origin - player getorigin();
-  v_player_to_self = vectornormalize(v_player_to_self);
+  v_player_to_self = vectorNormalize(v_player_to_self);
   n_dot = vectordot(v_player_forward, v_player_to_self);
   if(n_dot < 0.766) {
     return false;
@@ -253,7 +253,7 @@ function private check_player_available() {
 }
 
 function private can_zombie_see_any_player() {
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     if(!zombie_utility::is_player_valid(a_players[i]) || (isDefined(a_players[i].ignoreme) && a_players[i].ignoreme)) {
       continue;

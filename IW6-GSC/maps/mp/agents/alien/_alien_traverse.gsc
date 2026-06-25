@@ -50,7 +50,7 @@ find_attackable_enemy_at_node(nodeToCheck) {
     if(DistanceSquared(player.origin, nodeToCheck.origin) > CLOSE_PLAYER_DIST_SQ) {
       continue;
     }
-    playerToNode = VectorNormalize(nodeToCheck.origin - player.origin);
+    playerToNode = vectorNormalize(nodeToCheck.origin - player.origin);
     playerForward = anglesToForward(player.angles);
     forwardDot = VectorDot(playerToNode, playerForward);
 
@@ -166,10 +166,10 @@ alienRegularTraversal(startNode, animState, animIndexArray, endInOriented, flexH
   self traverseAnimLerp(animEntry, startNode);
 
   if(AnimHasNotetrack(animEntry, "highest_point")) {
-    self.apexTraversalDeathVector = VectorNormalize(self.startNode.origin - self.endNode.origin);
+    self.apexTraversalDeathVector = vectorNormalize(self.startNode.origin - self.endNode.origin);
   }
 
-  scriptable = GetEnt(startnode.target, "targetname");
+  scriptable = getEnt(startnode.target, "targetname");
   if(isDefined(scriptable)) {
     scriptable thread runScriptableTraverse(animTime);
   }
@@ -234,7 +234,7 @@ doTraversalWithFlexibleHeight(animState, animIndex, animEntry, startNotetrack, e
     flex_height_anim_end_time = 1;
   } else {
     AssertEx(isDefined(self.endNode.target), "Traversal " + animState + " " + animIndex + " at " + self.origin + ". Need to link a script struct from the traversal end point to mark the apex point for the animation");
-    flex_height_end_pos = common_scripts\utility::getstruct(self.endNode.target, "targetname");
+    flex_height_end_pos = common_scripts\utility::getStruct(self.endNode.target, "targetname");
     AssertEx(isDefined(flex_height_end_pos), "Traversal " + animState + " " + animIndex + " at " + self.origin + ". Unable to find the apex point struct");
     flex_height_end_pos = flex_height_end_pos.origin;
     apexNotetrackTimes = GetNotetrackTimes(animEntry, "highest_point");
@@ -533,7 +533,7 @@ canDoJumpForEnd(startnode, endNode, startAnim, jumpAnim) {
   jumpAnimDeltaXY = Length2D(jumpAnimDelta);
   jumpAnimDeltaZ = jumpAnimDelta[2] * -1;
 
-  startToEndXY = VectorNormalize((endNode.origin - startnode.origin) * (1, 1, 0));
+  startToEndXY = vectorNormalize((endNode.origin - startnode.origin) * (1, 1, 0));
   startAnimEndPos = startnode.origin + startToEndXY * startAnimDeltaXY - (0, 0, startAnimDeltaZ);
 
   startAnimEndGroundPos = PhysicsTrace(startAnimEndPos, startAnimEndPos + (0, 0, -2000));
@@ -557,7 +557,7 @@ alienWallRun(startNode, endNode, animState) {
 
   startToEnd = endNode.origin - startNode.origin;
   up = AnglesToUp(endNode.angles);
-  forward = VectorNormalize(startToEnd);
+  forward = vectorNormalize(startToEnd);
   left = VectorCross(up, forward);
   forward = VectorCross(left, up);
   right = (0, 0, 0) - left;

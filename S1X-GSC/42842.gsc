@@ -179,7 +179,7 @@ orienttonormal(var_0) {
     return (0, 0, 0);
   }
 
-  var_3 = vectornormalize(var_1);
+  var_3 = vectorNormalize(var_1);
   var_4 = var_0[2] * -1;
   var_5 = (var_3[0] * var_4, var_3[1] * var_4, var_2);
   var_6 = vectortoangles(var_5);
@@ -3368,8 +3368,8 @@ findisfacing(var_0, var_1, var_2) {
   var_5 = var_1.origin - var_0.origin;
   var_4 = var_4 * (1, 1, 0);
   var_5 = var_5 * (1, 1, 0);
-  var_5 = vectornormalize(var_5);
-  var_4 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_5);
+  var_4 = vectorNormalize(var_4);
   var_6 = vectordot(var_5, var_4);
 
   if(var_6 >= var_3) {
@@ -4669,8 +4669,8 @@ makegloballyusablebytype(var_0, var_1, var_2, var_3) {
 
   _insertintoglobalusablelist(var_4, var_0, var_2, var_3);
   self makeglobalusable(var_4, var_2, var_3);
-  self sethintstring(var_1);
-  self setcursorhint("HINT_NOICON");
+  self setHintString(var_1);
+  self setCursorHint("HINT_NOICON");
 }
 
 _insertintoglobalusablelist(var_0, var_1, var_2, var_3) {
@@ -4914,7 +4914,7 @@ setmlgicons(var_0, var_1) {
 }
 
 spawnpatchclip(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_3)) {
     return undefined;

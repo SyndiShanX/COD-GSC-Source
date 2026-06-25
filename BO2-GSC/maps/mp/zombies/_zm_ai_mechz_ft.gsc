@@ -21,7 +21,7 @@ init_flamethrower_triggers() {
   assert(isDefined(level.flamethrower_trigger_array) && level.flamethrower_trigger_array.size >= 4);
 
   for(i = 0; i < level.flamethrower_trigger_array.size; i++) {
-    level.flamethrower_trigger_array[i] enablelinkto();
+    level.flamethrower_trigger_array[i] enablelinkTo();
   }
 }
 
@@ -42,7 +42,7 @@ mechz_flamethrower_initial_setup() {
 
   self.flamethrower_trigger.origin = self gettagorigin("tag_flamethrower_FX");
   self.flamethrower_trigger.angles = self gettagangles("tag_flamethrower_FX");
-  self.flamethrower_trigger linkto(self, "tag_flamethrower_FX");
+  self.flamethrower_trigger linkTo(self, "tag_flamethrower_FX");
   self thread mechz_watch_for_flamethrower_damage();
 }
 
@@ -114,8 +114,8 @@ mechz_play_flamethrower_aim() {
   self endon("arc_change");
 
   if(isDefined(self.curr_aim_anim)) {
-    self stopanimscripted();
-    self animscripted(self.origin, self.angles, self.curr_aim_anim);
+    self stopanimScripted();
+    self animScripted(self.origin, self.angles, self.curr_aim_anim);
     self maps\mp\animscripts\zm_shared::donotetracks("flamethrower_anim");
   } else
     wait 0.05;
@@ -141,9 +141,9 @@ mechz_flamethrower_tank_sweep() {
   self endon("stop_ft");
 
   while(true) {
-    self stopanimscripted();
+    self stopanimScripted();
     self.angles = vectortoangles(level.vh_tank.origin - self.origin);
-    self animscripted(self.origin, self.angles, "zm_flamethrower_sweep_up");
+    self animScripted(self.origin, self.angles, "zm_flamethrower_sweep_up");
     self maps\mp\animscripts\zm_shared::donotetracks("flamethrower_anim");
 
     if(level.vh_tank ent_flag("tank_moving")) {
@@ -178,7 +178,7 @@ mechz_watch_for_flamethrower_damage() {
 
     while(isDefined(self.firing) && self.firing) {
       do_tank_sweep_auto_damage = isDefined(self.doing_tank_sweep) && self.doing_tank_sweep && !level.vh_tank ent_flag("tank_moving");
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(!(isDefined(players[i].is_burning) && players[i].is_burning)) {
@@ -446,7 +446,7 @@ mechz_do_flamethrower_attack(tank_sweep) {
   }
 
   n_nearby_enemies = 0;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(distance2dsquared(player.origin, self.favoriteenemy.origin) < 10000) {
@@ -459,10 +459,10 @@ mechz_do_flamethrower_attack(tank_sweep) {
     self thread mechz_flamethrower_tank_sweep();
   } else if(randomint(100) < level.mechz_ft_sweep_chance && n_nearby_enemies > 1) {
     self.doing_ft_sweep = 1;
-    self animscripted(self.origin, self.angles, "zm_flamethrower_sweep");
+    self animScripted(self.origin, self.angles, "zm_flamethrower_sweep");
     self maps\mp\animscripts\zm_shared::donotetracks("flamethrower_anim");
   } else {
-    self animscripted(self.origin, self.angles, "zm_flamethrower_aim_start");
+    self animScripted(self.origin, self.angles, "zm_flamethrower_aim_start");
     self thread mechz_flamethrower_aim();
     self maps\mp\animscripts\zm_shared::donotetracks("flamethrower_anim");
   }
@@ -476,7 +476,7 @@ mechz_do_flamethrower_attack(tank_sweep) {
     self waittill("stop_ft");
     self mechz_flamethrower_cleanup();
     wait 0.5;
-    self stopanimscripted();
+    self stopanimScripted();
     return;
   }
 

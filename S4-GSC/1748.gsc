@@ -504,10 +504,10 @@ _id_2C40() {
 
     if(isDefined(var_5)) {
       var_6 = var_0.origin;
-      var_7 = vectornormalize(var_5.origin - var_0.origin);
+      var_7 = vectorNormalize(var_5.origin - var_0.origin);
     } else {
       var_6 = self.model.origin;
-      var_7 = vectornormalize(var_3 - self.model.origin);
+      var_7 = vectorNormalize(var_3 - self.model.origin);
     }
 
     var_7 = var_7 * self.v["physics"];
@@ -590,7 +590,7 @@ _id_57C7() {
     return;
   }
   _id_57BE();
-  level.player playrumbleonentity(self.v["rumble"]);
+  level.player playRumbleOnEntity(self.v["rumble"]);
 }
 
 _id_57BE() {

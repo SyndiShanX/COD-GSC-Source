@@ -349,8 +349,8 @@ sort_reactive_ents(var_0, var_1) {
   foreach(var_5 in var_2) {
     var_9 = vector2d(var_5.v["origin"] - level.player.origin);
     var_10 = vector2d(var_0 - level.player.origin);
-    var_11 = vectornormalize(var_9);
-    var_12 = vectornormalize(var_10);
+    var_11 = vectorNormalize(var_9);
+    var_12 = vectorNormalize(var_10);
     var_5.dot = vectordot(var_11, var_12);
   }
 

@@ -23,7 +23,7 @@ function oneinchpunch_impact(localclientnum, oldval, newval, bnewent, binitialsn
     }
     level.var_57220446[self getentitynumber()] = gettime();
     self earthquake(0.5, 0.5, self.origin, 300);
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
     if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element) && self.str_punch_element == "air") {
       var_4383636a = var_4383636a * 2;
     }
@@ -49,7 +49,7 @@ function oneinchpunch_physics_launchragdoll(localclientnum, oldval, newval, bnew
       var_b262e13f = a_players[var_70efc576];
     }
     if(isDefined(var_b262e13f)) {
-      v_launch = (vectornormalize(self.origin - var_b262e13f.origin)) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
+      v_launch = (vectorNormalize(self.origin - var_b262e13f.origin)) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
     }
     if(isDefined(v_launch)) {
       self launchragdoll(v_launch);

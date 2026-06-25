@@ -186,8 +186,8 @@ _fire_noplayer(lifeId, player) {
   rocket.lifeId = lifeId;
   rocket.type = "remote";
 
-  player CameraLinkTo(rocket, "tag_origin");
-  player ControlsLinkTo(rocket);
+  player CameralinkTo(rocket, "tag_origin");
+  player ControlslinkTo(rocket);
 
   rocket thread Rocket_CleanupOnDeath();
 
@@ -225,8 +225,8 @@ MissileEyes(player, rocket) {
   if(isDefined(rocket)) {
     player VisionSetMissilecamForPlayer(game["thermal_vision"], 1.0);
     player thread delayedFOFOverlay();
-    player CameraLinkTo(rocket, "tag_origin");
-    player ControlsLinkTo(rocket);
+    player CameralinkTo(rocket, "tag_origin");
+    player ControlslinkTo(rocket);
 
     if(getDvarInt("camera_thirdPerson")) {
       player setThirdPersonDOF(false);

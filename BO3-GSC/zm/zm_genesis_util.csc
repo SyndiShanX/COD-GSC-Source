@@ -47,26 +47,26 @@ function player_rumble_and_shake(localclientnum, oldval, newval, bnewent, biniti
     case 6: {
       self notify("stop_rumble_and_shake");
       self earthquake(0.6, 1.5, self.origin, 100);
-      self playrumbleonentity(localclientnum, "artillery_rumble");
+      self playRumbleOnEntity(localclientnum, "artillery_rumble");
       break;
     }
     case 4: {
       self earthquake(0.6, 1.5, self.origin, 100);
-      self playrumbleonentity(localclientnum, "artillery_rumble");
+      self playRumbleOnEntity(localclientnum, "artillery_rumble");
       break;
     }
     case 3: {
       self earthquake(0.3, 1.5, self.origin, 100);
-      self playrumbleonentity(localclientnum, "shotgun_fire");
+      self playRumbleOnEntity(localclientnum, "shotgun_fire");
       break;
     }
     case 2: {
       self earthquake(0.1, 1, self.origin, 100);
-      self playrumbleonentity(localclientnum, "damage_light");
+      self playRumbleOnEntity(localclientnum, "damage_light");
       break;
     }
     case 1: {
-      self playrumbleonentity(localclientnum, "reload_large");
+      self playRumbleOnEntity(localclientnum, "reload_large");
       break;
     }
     case 7: {
@@ -96,7 +96,7 @@ function player_continuous_rumble(localclientnum, n_rumble_level, var_10ba4a4c =
           if(var_10ba4a4c) {
             self earthquake(0.2, 1, self.origin, 100);
           }
-          self playrumbleonentity(localclientnum, "reload_small");
+          self playRumbleOnEntity(localclientnum, "reload_small");
           wait(0.05);
           break;
         }
@@ -104,14 +104,14 @@ function player_continuous_rumble(localclientnum, n_rumble_level, var_10ba4a4c =
           if(var_10ba4a4c) {
             self earthquake(0.3, 1, self.origin, 100);
           }
-          self playrumbleonentity(localclientnum, "damage_light");
+          self playRumbleOnEntity(localclientnum, "damage_light");
           break;
         }
         case 3: {
           if(var_10ba4a4c) {
             self earthquake(0.3, 1, self.origin, 100);
           }
-          self playrumbleonentity(localclientnum, "artillery_rumble");
+          self playRumbleOnEntity(localclientnum, "artillery_rumble");
           break;
         }
       }

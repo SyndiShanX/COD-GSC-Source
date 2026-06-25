@@ -89,7 +89,7 @@ function slow_vortex_fx(n_local_client, n_old, n_new, b_new_ent, b_initial_snap,
       self.fx_slow_vortex = playFXOnTag(n_local_client, level._effect["raygun_slow_vortex_small"], self, "tag_origin");
     } else {
       self.fx_slow_vortex = playFXOnTag(n_local_client, level._effect["raygun_slow_vortex_large"], self, "tag_origin");
-      self playrumbleonentity(n_local_client, "artillery_rumble");
+      self playRumbleOnEntity(n_local_client, "artillery_rumble");
     }
     self thread vortex_shake_and_rumble(n_local_client, n_new);
   }
@@ -120,7 +120,7 @@ function vortex_shake_and_rumble(n_local_client, n_damage_level) {
     str_rumble = "raygun_mark3_vortex_lg";
   }
   while(isDefined(self)) {
-    self playrumbleonentity(n_local_client, str_rumble);
+    self playRumbleOnEntity(n_local_client, str_rumble);
     wait(0.083);
   }
 }

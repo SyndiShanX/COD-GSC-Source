@@ -6,8 +6,8 @@
 _id_59C1() {
   level._id_58D2 = maps\hijack_code::_id_594A("commander_tarmac");
   waittillframeend;
-  var_0 = common_scripts\utility::getstruct("player_start_post_tarmac", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = common_scripts\utility::getStruct("player_start_post_tarmac", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   maps\_compass::setupminimap("compass_map_hijack_tarmac", "tarmac_minimap_corner");
   setsaveddvar("compassmaxrange", 3500);
@@ -22,7 +22,7 @@ _id_59C1() {
   thread maps\hijack_tarmac::_id_599A();
   thread _id_59CE();
   level._id_59C2 = getdvarfloat("jump_height");
-  var_1 = common_scripts\utility::getstruct("makarov_heli_end_scene_loop", "targetname");
+  var_1 = common_scripts\utility::getStruct("makarov_heli_end_scene_loop", "targetname");
   level._id_5943 vehicle_teleport(var_1.origin, var_1.angles);
   level._id_5943 thread maps\_vehicle::_id_26A1(var_1);
   wait 2;
@@ -136,7 +136,7 @@ _id_59C5() {
 
 _id_59C8() {
   self endon("death");
-  var_0 = getent("runner_ak74u", "targetname");
+  var_0 = getEnt("runner_ak74u", "targetname");
   var_0 hidepart("tag_acog_2");
   var_0 hidepart("tag_eotech");
   var_0 hidepart("tag_hamr_hybrid");
@@ -148,7 +148,7 @@ _id_59C8() {
   self.ignoreme = 1;
   common_scripts\utility::flag_wait("entered_post_tarmac_area");
   wait 2.5;
-  var_1 = common_scripts\utility::getstruct("agent_grabs_gun_origin", "targetname");
+  var_1 = common_scripts\utility::getStruct("agent_grabs_gun_origin", "targetname");
   var_1 maps\_anim::_id_124A(self, "tarmac_enter_combat_agent");
   var_1 thread maps\_anim::_id_1246(self, "tarmac_enter_combat_agent");
   wait 1.2;
@@ -214,7 +214,7 @@ _id_59CA() {
   maps\_utility::_id_263A("tarmacwave3");
   _id_59D3("tarmac_goal_ret2", "tarmac_goal_ret3");
   common_scripts\utility::flag_set("tarmac_combat_wave4");
-  var_10 = getent("red_leave_tarmac_combat", "targetname");
+  var_10 = getEnt("red_leave_tarmac_combat", "targetname");
 
   if(isDefined(var_10)) {
     var_10 maps\_utility::_id_2703();
@@ -236,7 +236,7 @@ _id_59CB() {
   var_2 = maps\_vehicle::_id_2A99("endsuburban");
   var_2 thread maps\hijack_tarmac::_id_59C7();
   level._id_58D2.ignoresuppression = 1;
-  level._id_59CC = getent("endguytarget", "targetname");
+  level._id_59CC = getEnt("endguytarget", "targetname");
 
   foreach(var_4 in var_0) {
     if(isalive(var_4)) {
@@ -256,8 +256,8 @@ _id_59CB() {
 
 _id_59CD() {
   maps\_utility::_id_263A("endtarmacguys1");
-  var_0 = getent("red_leave_tarmac_combat2", "targetname");
-  var_1 = getent("red_leave_tarmac_combat", "targetname");
+  var_0 = getEnt("red_leave_tarmac_combat2", "targetname");
+  var_1 = getEnt("red_leave_tarmac_combat", "targetname");
 
   if(isDefined(var_0)) {
     var_0 maps\_utility::_id_2703();
@@ -270,7 +270,7 @@ _id_59CD() {
 }
 
 _id_59CE() {
-  var_0 = getent("combat_scene_fail_trigger", "targetname");
+  var_0 = getEnt("combat_scene_fail_trigger", "targetname");
   common_scripts\utility::flag_wait("tarmac_combat_level_fail");
   setDvar("ui_deadquote", &"HIJACK_FAIL_TARMAC");
   level notify("mission failed");
@@ -355,7 +355,7 @@ _id_599B() {
 }
 
 _id_59D2() {
-  var_0 = getent("tarmacrunners_goal2", "targetname");
+  var_0 = getEnt("tarmacrunners_goal2", "targetname");
 
   for(;;) {
     wait 1;
@@ -372,9 +372,9 @@ _id_59D2() {
 }
 
 _id_59D3(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = var_2 maps\_utility::_id_2789("axis");
-  var_4 = getent(var_1, "targetname");
+  var_4 = getEnt(var_1, "targetname");
   var_5 = getnode(var_4.target, "targetname");
 
   foreach(var_7 in var_3) {

@@ -386,19 +386,19 @@ function_548a710a(traceresults) {
     pointleft = traceresults.var_44cf251d;
   } else if(traceresults.var_e2543923 && var_b80b6889 < halfwidth) {
     pointright = traceresults.var_c0e006dc;
-    directionleft = vectornormalize(traceresults.var_44cf251d - traceresults.var_c0e006dc);
+    directionleft = vectorNormalize(traceresults.var_44cf251d - traceresults.var_c0e006dc);
     pointleft = traceresults.var_c0e006dc + level.smartcoversettings.bundle.maxwidth * directionleft;
   } else if(traceresults.var_e2543923 && var_b80b6889 >= halfwidth) {
     return traceresults.origin;
   } else if(traceresults.var_e18fd6c3 && var_65ea35de < halfwidth) {
     pointleft = traceresults.var_44cf251d;
-    directionright = vectornormalize(traceresults.var_c0e006dc - traceresults.var_44cf251d);
+    directionright = vectorNormalize(traceresults.var_c0e006dc - traceresults.var_44cf251d);
     pointright = traceresults.var_44cf251d + level.smartcoversettings.bundle.maxwidth * directionright;
   } else if(traceresults.var_e18fd6c3 && var_65ea35de >= halfwidth) {
     return traceresults.origin;
   }
 
-  direction = vectornormalize(pointright - pointleft);
+  direction = vectorNormalize(pointright - pointleft);
   origin = (pointleft[0], pointleft[1], traceresults.origin[2]) + level.smartcoversettings.bundle.maxwidth * 0.5 * direction;
   return origin;
 }
@@ -445,7 +445,7 @@ function_3b96637(watcher, owner) {
   var_bf2bf1a util::make_sentient();
 
   if(isDefined(level.smartcoversettings.smartcoverweapon.var_414fa79e)) {
-    player playrumbleonentity(level.smartcoversettings.smartcoverweapon.var_414fa79e);
+    player playRumbleOnEntity(level.smartcoversettings.smartcoverweapon.var_414fa79e);
   }
 
   thread function_7ecb04ff(player);
@@ -689,9 +689,9 @@ createsmartcover(watcher, var_5ebbec19, origin, angles, var_796be15d) {
   var_89b6fd44 solid();
 
   if(sessionmodeiswarzonegame()) {
-    var_89b6fd44 disconnectpaths(0);
+    var_89b6fd44 disconnectPaths(0);
   } else {
-    var_89b6fd44 disconnectpaths(1);
+    var_89b6fd44 disconnectPaths(1);
   }
 
   var_89b6fd44 setteam(player getteam());
@@ -1100,7 +1100,7 @@ microwaveentity(entity) {
           var_83cd8106 = level.smartcoversettings.bundle.var_5223868e;
 
           if(isDefined(var_83cd8106)) {
-            entity playrumbleonentity(var_83cd8106);
+            entity playRumbleOnEntity(var_83cd8106);
             entity.var_553267c8 = var_83cd8106;
           }
         }
@@ -1177,14 +1177,14 @@ microwaveturretaffectsentity(entity) {
   forward = anglesToForward(angles);
   origin = realorigin - forward * 50;
   shoot_at_pos = entity getshootatpos(turret);
-  var_29d7e93f = vectornormalize(shoot_at_pos - realorigin);
+  var_29d7e93f = vectorNormalize(shoot_at_pos - realorigin);
   var_2d95367c = vectordot(var_29d7e93f, forward);
 
   if(var_2d95367c < 0) {
     return false;
   }
 
-  entdirection = vectornormalize(shoot_at_pos - origin);
+  entdirection = vectorNormalize(shoot_at_pos - origin);
   dot = vectordot(entdirection, forward);
 
   if(dot < cos(isDefined(level.smartcoversettings.bundle.microwaveconeangle) ? level.smartcoversettings.bundle.microwaveconeangle : 0)) {

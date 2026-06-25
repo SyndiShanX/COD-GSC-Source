@@ -127,7 +127,7 @@ function create_client_ritual_assembly(localclientnum, n_current_ritual) {
   level.main_quest[localclientnum][n_current_ritual].e_memento[localclientnum] = spawn(localclientnum, v_origin, "script_model");
   level.main_quest[localclientnum][n_current_ritual].e_memento[localclientnum].angles = v_angles;
   level.main_quest[localclientnum][n_current_ritual].e_memento[localclientnum] setModel("p7_zm_zod_memento_" + str_charname);
-  level.main_quest[localclientnum][n_current_ritual].e_memento[localclientnum] linkto(level.main_quest[localclientnum][n_current_ritual].e_assembly[localclientnum], "tag_ritual_drop");
+  level.main_quest[localclientnum][n_current_ritual].e_memento[localclientnum] linkTo(level.main_quest[localclientnum][n_current_ritual].e_assembly[localclientnum], "tag_ritual_drop");
   level.main_quest[localclientnum][n_current_ritual].e_memento[localclientnum] function_ae5b7493(localclientnum, 0, 0.025, 1, 1);
   v_tag_origin = level.main_quest[localclientnum][n_current_ritual].e_assembly[localclientnum] gettagorigin("tag_ritual_drop");
   v_tag_angles = level.main_quest[localclientnum][n_current_ritual].e_assembly[localclientnum] gettagangles("tag_ritual_drop");
@@ -137,7 +137,7 @@ function create_client_ritual_assembly(localclientnum, n_current_ritual) {
   level.main_quest[localclientnum][n_current_ritual].e_relic[localclientnum] = spawn(localclientnum, v_tag_origin, "script_model");
   level.main_quest[localclientnum][n_current_ritual].e_relic[localclientnum] setModel("p7_zm_zod_relic_" + str_charname);
   level.main_quest[localclientnum][n_current_ritual].e_relic[localclientnum].angles = v_tag_angles;
-  level.main_quest[localclientnum][n_current_ritual].e_relic[localclientnum] linkto(level.main_quest[localclientnum][n_current_ritual].e_assembly[localclientnum], "tag_ritual_drop");
+  level.main_quest[localclientnum][n_current_ritual].e_relic[localclientnum] linkTo(level.main_quest[localclientnum][n_current_ritual].e_assembly[localclientnum], "tag_ritual_drop");
   level.main_quest[localclientnum][n_current_ritual].var_77504307 = function_9118f74a(localclientnum, n_current_ritual, 1);
   level.main_quest[localclientnum][n_current_ritual].var_b1ece640 = function_9118f74a(localclientnum, n_current_ritual, 0);
   v_tag_origin = level.main_quest[localclientnum][n_current_ritual].e_assembly[localclientnum] gettagorigin("tag_char_jnt");
@@ -427,7 +427,7 @@ function ritual_victim_animation(localclientnum, mdl_ritual, mdl_victim) {
   mdl_victim clearanim("ai_zombie_zod_ritual_sacrifice_intro", 0);
   mdl_victim clearanim("ai_zombie_zod_ritual_sacrifice_loop", 0);
   mdl_victim clearanim("ai_zombie_zod_ritual_sacrifice_outro", 0);
-  mdl_victim linkto(mdl_victim, "tag_char_jnt", (0, 0, 0), (0, 0, 0));
+  mdl_victim linkTo(mdl_victim, "tag_char_jnt", (0, 0, 0), (0, 0, 0));
   mdl_victim thread function_ae5b7493(localclientnum, 0, 0.025, 1);
   mdl_victim animation::play("ai_zombie_zod_ritual_sacrifice_intro", undefined, undefined, 1, 0, 0.2);
   mdl_victim thread animation::play("ai_zombie_zod_ritual_sacrifice_loop", undefined, undefined, 1, 0.2, 0.4);
@@ -600,7 +600,7 @@ function quest_state_magician(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function ritual_state_pap(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_c6f3f6c3 = getent(localclientnum, "pap_portal", "targetname");
+  var_c6f3f6c3 = getEnt(localclientnum, "pap_portal", "targetname");
   var_c6f3f6c3 util::waittill_dobj(localclientnum);
   if(!var_c6f3f6c3 hasanimtree()) {
     var_c6f3f6c3 useanimtree($generic);

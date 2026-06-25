@@ -221,8 +221,8 @@ function function_9fc58738(var_742d8fb5, origin, launch = 0, ondeath = 0, var_b0
     return;
   }
   pickup.trigger.targetname = "pickupTrigger";
-  pickup.trigger enablelinkto();
-  pickup.trigger linkto(pickup);
+  pickup.trigger enablelinkTo();
+  pickup.trigger linkTo(pickup);
   pickup.score = pickup.def.data;
   pickup.def.count++;
   pickup thread namespace_1a381543::function_90118d8c("zmb_spawn_pickup_money");
@@ -397,8 +397,8 @@ function function_92d90e55(var_742d8fb5, location, timeout = 1, rotate = 1, angl
       pickup delete();
       return;
     }
-    pickup.trigger enablelinkto();
-    pickup.trigger linkto(pickup);
+    pickup.trigger enablelinkTo();
+    pickup.trigger linkTo(pickup);
     pickup thread function_d526f0bb();
   }
   pickup.def.count++;
@@ -810,8 +810,8 @@ function function_30768f24(item, time) {
   while(isDefined(item) && time > 0.15) {
     dist = distance(self.origin, item.origin);
     step = (dist / time) / intervals;
-    v_to_target = (vectornormalize(self.origin - item.origin)) * step;
-    item moveto(item.origin + v_to_target, 0.15);
+    v_to_target = (vectorNormalize(self.origin - item.origin)) * step;
+    item moveTo(item.origin + v_to_target, 0.15);
     dist = distance(self.origin, item.origin);
     if(dist < 32) {
       break;
@@ -1325,7 +1325,7 @@ function function_2cd5668() {
   level util::waittill_any_timeout(0.5, "doaGoFPS", "firstPersonForATime");
   setsharedviewport(0);
   if(mayspawnentity()) {
-    playsoundatposition("evt_first_person_slam", (0, 0, 0));
+    playSoundAtPosition("evt_first_person_slam", (0, 0, 0));
   }
   util::clientnotify("fpsg");
 }
@@ -1334,7 +1334,7 @@ function function_851d4a18() {
   level endon("hash_8bf960cf");
   level endon("hash_3b432f18");
   while(isDefined(level.doa.var_2836c8ee) && level.doa.var_2836c8ee) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player.doa)) {
         continue;
       }
@@ -1362,7 +1362,7 @@ function function_8bf960cf(player) {
   level thread function_197694d8();
   level util::waittill_any_timeout(time, "camera_changed", "doa_playerdumpFPS", "exit_taken", "host_migration_begin", "firstPersonForATime");
   level.doa.var_2836c8ee = undefined;
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify("hash_3b432f18");
   }
   doa_utility::debugmsg("" + gettime());
@@ -1379,7 +1379,7 @@ function function_197694d8() {
   level.var_8ebc0a1 playLoopSound("evt_first_person_loop");
   level waittill("atf");
   if(mayspawnentity()) {
-    playsoundatposition("evt_first_person_slam_out", (0, 0, 0));
+    playSoundAtPosition("evt_first_person_slam_out", (0, 0, 0));
   }
   if(isDefined(level.var_8ebc0a1)) {
     level.var_8ebc0a1 stoploopsound();
@@ -1430,7 +1430,7 @@ function function_6b4a5f81(player) {
     wait(0.05);
     if(isDefined(self)) {
       self function_fbc5b316();
-      self moveto(end_pt, 2, 0, 0);
+      self moveTo(end_pt, 2, 0, 0);
       wait(2);
     }
   }
@@ -1464,7 +1464,7 @@ function function_ee036ce4() {
       yaw = 60;
     }
     yaw = self.angles[1] + yaw;
-    self rotateto((-20 + randomint(40), yaw, -90 + randomint(180)), waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo((-20 + randomint(40), yaw, -90 + randomint(180)), waittime, waittime * 0.5, waittime * 0.5);
     wait(randomfloat(waittime - 0.1));
   }
 }
@@ -1481,7 +1481,7 @@ function pickuprotate() {
     }
     time = randomfloatrange(3, 7);
     while(isDefined(self)) {
-      self rotateto(self.angles + (0, dir, 0), time);
+      self rotateTo(self.angles + (0, dir, 0), time);
       wait(time);
     }
   }
@@ -1656,7 +1656,7 @@ function private function_5441452b(maxdistsq) {
       if(self.origin[0] != self.var_18193c2a[0] || self.origin[1] != self.var_18193c2a[1]) {
         trace = bulletTrace(self.origin, self.origin + (vectorscale((0, 0, -1), 500)), 0, undefined);
         self.groundpos = (self.origin[0], self.origin[1], trace["position"][2]) + vectorscale((0, 0, 1), 32);
-        self moveto(self.groundpos, 1);
+        self moveTo(self.groundpos, 1);
         self util::waittill_any_timeout(1.1, "movedone", "picked_up", "pickup_ForceAttractKill", "death");
         self.var_18193c2a = self.origin;
         self.var_3033320e = undefined;
@@ -1678,7 +1678,7 @@ function private function_5441452b(maxdistsq) {
       } else {
         origin = force.origin;
       }
-      var_ad2b0f07 = vectornormalize(origin - self.origin);
+      var_ad2b0f07 = vectorNormalize(origin - self.origin);
       scale = (var_119472f5 - distsq) / var_119472f5;
       movevec = vectorscale(var_ad2b0f07, var_af22fa93 * scale);
       self.origin = self.origin + movevec;
@@ -1875,8 +1875,8 @@ function function_db3e0155() {
     self delete();
     return;
   }
-  self.trigger enablelinkto();
-  self.trigger linkto(self);
+  self.trigger enablelinkTo();
+  self.trigger linkTo(self);
   self notify("hash_c8c0fb8f");
   self thread function_d526f0bb();
   self thread function_b33393b3();

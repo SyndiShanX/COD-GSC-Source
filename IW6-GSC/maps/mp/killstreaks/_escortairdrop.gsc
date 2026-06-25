@@ -84,7 +84,7 @@ tryUseEscortAirdrop(lifeId, streakName) {
     return false;
   }
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
   assertEx(isDefined(heightEnt), "NO HEIGHT ENT IN LEVEL:Don't know what this means, ask Ned or Jordan");
 
   if(!isDefined(heightEnt)) {
@@ -126,7 +126,7 @@ tryUseOspreyGunner(lifeId, streakName) {
     return false;
   }
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
   assertEx(isDefined(heightEnt), "NO HEIGHT ENT IN LEVEL:Don't know what this means, ask Ned or Jordan");
 
   if(!isDefined(heightEnt)) {
@@ -153,7 +153,7 @@ finishSupportEscortUsage(lifeId, location, directionYaw, ospreyType) {
   direction = (0, directionYaw, 0);
   planeHalfDistance = 12000;
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   flyHeight = heightEnt.origin[2];
 
@@ -180,7 +180,7 @@ finishOspreyGunnerUsage(lifeId, location, directionYaw, ospreyType) {
   direction = (0, directionYaw, 0);
   planeHalfDistance = 12000;
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   flyHeight = heightEnt.origin[2];
 
@@ -333,7 +333,7 @@ createAirship(owner, lifeId, pathStart, forward, locIndex, ospreyType) {
     killCamOrigin = (airShip.origin + ((anglesToForward(airShip.angles) * -200) + (AnglesToRight(airShip.angles) * -200))) + (0, 0, 200);
     airShip.killCamEnt = spawn("script_model", killCamOrigin);
     airShip.killCamEnt SetScriptMoverKillCam("explosive");
-    airShip.killCamEnt LinkTo(airShip, "tag_origin");
+    airShip.killCamEnt linkTo(airShip, "tag_origin");
   }
 
   return airShip;
@@ -544,7 +544,7 @@ getBestHeight(centerPoint) {
   self endon("helicopter_removed");
   self endon("heightReturned");
 
-  heightEnt = GetEnt("airstrikeheight", "targetname");
+  heightEnt = getEnt("airstrikeheight", "targetname");
 
   if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];

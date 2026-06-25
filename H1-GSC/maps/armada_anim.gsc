@@ -134,7 +134,7 @@ player_heli_ropeanimoverride() {
   self.attach_model_override = var_5;
   var_6 = spawn("script_model", level.player.origin);
   var_6 setModel(var_1);
-  var_6 linkto(self, var_0, (0, 0, 0), (0, 0, 0));
+  var_6 linkTo(self, var_0, (0, 0, 0), (0, 0, 0));
   var_6 useanimtree(#animtree);
   thread player_heli_ropeanimoverride_idle(var_6, var_0, var_3);
   self waittill("unloading");

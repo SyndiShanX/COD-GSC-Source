@@ -41,10 +41,10 @@ func_00F9() {
 }
 
 func_7EE3() {
-  var_00 = getent("dish_02", "targetname");
-  var_01 = getent("dish_03", "targetname");
-  var_00 rotateyaw(12600, 1800);
-  var_01 rotateyaw(12600, 1800);
+  var_00 = getEnt("dish_02", "targetname");
+  var_01 = getEnt("dish_03", "targetname");
+  var_00 rotateYaw(12600, 1800);
+  var_01 rotateYaw(12600, 1800);
 }
 
 func_542C() {
@@ -155,11 +155,11 @@ func_7025() {
   var_04 = 1;
   for(;;) {
     if(var_04 % 2 == 0) {
-      self rotateto(self.var_1D + (0, 0, var_01), var_03);
+      self rotateTo(self.var_1D + (0, 0, var_01), var_03);
     } else if(var_04 % 3 == 0) {
-      self rotateto(self.var_1D + (0, 0, var_00), var_03);
+      self rotateTo(self.var_1D + (0, 0, var_00), var_03);
     } else {
-      self rotateto(self.var_1D + (0, 0, var_02), var_03);
+      self rotateTo(self.var_1D + (0, 0, var_02), var_03);
     }
 
     wait(var_03);
@@ -194,20 +194,20 @@ func_3CD3() {
     var_04.var_6C48 = var_04.var_1D;
     var_05 = var_04.var_116 - self.var_116;
     var_05 = (var_05[0], var_05[1], 0);
-    var_05 = vectornormalize(var_05);
-    var_04 rotateto(vectortoangles(var_05), var_02);
+    var_05 = vectorNormalize(var_05);
+    var_04 rotateTo(vectortoangles(var_05), var_02);
   }
 
   foreach(var_08 in var_01) {
     var_08.var_6C48 = var_08.var_1D;
     var_09 = getEntArray(var_08.var_1A2, "targetname");
     foreach(var_0B in var_09) {
-      var_0B linkto(var_08);
+      var_0B linkTo(var_08);
     }
 
     var_05 = var_08.var_116 - self.var_116;
-    var_05 = vectornormalize(var_05);
-    var_08 rotateto(vectortoangles(var_05), var_02);
+    var_05 = vectorNormalize(var_05);
+    var_08 rotateTo(vectortoangles(var_05), var_02);
   }
 
   wait(var_02);
@@ -215,13 +215,13 @@ func_3CD3() {
     foreach(var_04 in var_00) {
       var_05 = var_04.var_116 - self.var_116;
       var_05 = (var_05[0], var_05[1], 0);
-      var_05 = vectornormalize(var_05);
+      var_05 = vectorNormalize(var_05);
       var_04.var_1D = vectortoangles(var_05);
     }
 
     foreach(var_11, var_08 in var_01) {
       var_05 = var_08.var_116 - self.var_116;
-      var_05 = vectornormalize(var_05);
+      var_05 = vectorNormalize(var_05);
       var_08.var_1D = vectortoangles(var_05);
       if(var_08.var_1D[0] > 50) {
         var_08.var_1D = (50, var_08.var_1D[1], var_08.var_1D[2]);
@@ -236,11 +236,11 @@ func_3CD3() {
   }
 
   foreach(var_08 in var_01) {
-    var_08 rotateto(var_08.var_6C48, randomfloatrange(1, 2.5));
+    var_08 rotateTo(var_08.var_6C48, randomfloatrange(1, 2.5));
   }
 
   foreach(var_04 in var_00) {
-    var_04 rotateto(var_04.var_6C48, randomfloatrange(1, 2.5));
+    var_04 rotateTo(var_04.var_6C48, randomfloatrange(1, 2.5));
   }
 }
 
@@ -285,7 +285,7 @@ func_2721(param_00) {
 func_7EEA() {
   self endon("death");
   for(;;) {
-    self rotateto(self.var_1D + (randomintrange(10, 20), 0, randomintrange(10, 20)), 0.1);
+    self rotateTo(self.var_1D + (randomintrange(10, 20), 0, randomintrange(10, 20)), 0.1);
     wait(0.1);
   }
 }

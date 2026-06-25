@@ -30,7 +30,7 @@ function main() {
   level thread ice_puzzle_2_init();
   level thread ice_puzzle_1_run();
   level flag::wait_till("ice_puzzle_1_complete");
-  playsoundatposition("zmb_squest_step1_finished", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_step1_finished", (0, 0, 0));
   level thread zm_tomb_utility::rumble_players_in_chamber(5, 3);
   ice_puzzle_1_cleanup();
   level thread ice_puzzle_2_run();
@@ -91,11 +91,11 @@ function ice_tiles_randomize() {
   foreach(v_pos in a_original_positions) {
     e_tile = array::random(a_unused_tiles);
     arrayremovevalue(a_unused_tiles, e_tile, 0);
-    e_tile moveto(v_pos, 0.5);
+    e_tile moveTo(v_pos, 0.5);
     e_tile waittill("movedone");
     str_model_name = "ice_ceiling_tile_model_" + n_index;
-    var_fa4117e3 = getent(str_model_name, "targetname");
-    var_fa4117e3 linkto(e_tile);
+    var_fa4117e3 = getEnt(str_model_name, "targetname");
+    var_fa4117e3 linkTo(e_tile);
     n_index++;
   }
   assert(a_unused_tiles.size == (n_total_tiles - a_original_positions.size));
@@ -129,7 +129,7 @@ function update_ternary_display() {
 }
 
 function change_ice_gem_value() {
-  ice_gem = getent("ice_chamber_gem", "targetname");
+  ice_gem = getEnt("ice_chamber_gem", "targetname");
   if(level.unsolved_tiles.size != 0) {
     correct_tile = array::random(level.unsolved_tiles);
     ice_gem.value = correct_tile.value;
@@ -141,7 +141,7 @@ function change_ice_gem_value() {
 
 function process_gem_shooting() {
   level endon("ice_puzzle_1_complete");
-  ice_gem = getent("ice_chamber_gem", "targetname");
+  ice_gem = getEnt("ice_chamber_gem", "targetname");
   ice_gem.value = -1;
   ice_gem setCanDamage(1);
   var_83560def = level.a_elemental_staffs["staff_water"].w_weapon;
@@ -179,7 +179,7 @@ function ceiling_tile_flip(b_flip_to_tile_side = !self.showing_tile_side) {
 
 function ceiling_tile_process_damage() {
   level endon("ice_puzzle_1_complete");
-  ice_gem = getent("ice_chamber_gem", "targetname");
+  ice_gem = getEnt("ice_chamber_gem", "targetname");
   self setCanDamage(1);
   ice_gem setCanDamage(1);
   while(true) {
@@ -226,7 +226,7 @@ function ice_stone_run() {
   self.e_model = spawn("script_model", v_spawn_pos);
   self.e_model.angles = self.angles;
   self.e_model setModel("p7_zm_ori_note_rock_01_anim_water");
-  self.e_model moveto(self.origin, 1, 0.5, 0.5);
+  self.e_model moveTo(self.origin, 1, 0.5, 0.5);
   playFX(level._effect["digging"], self.origin);
   self.e_model setCanDamage(1);
   self.e_model playLoopSound("zmb_squest_ice_stone_flow", 2);
@@ -244,7 +244,7 @@ function ice_stone_run() {
   }
   self.e_model setModel("p7_zm_ori_note_rock_01_anim");
   self.e_model clientfield::set("stone_frozen", 1);
-  playsoundatposition("zmb_squest_ice_stone_freeze", self.origin);
+  playSoundAtPosition("zmb_squest_ice_stone_freeze", self.origin);
   while(!level flag::get("ice_puzzle_2_complete")) {
     self.e_model waittill("damage", amount, inflictor, direction, point, type, tagname, modelname, partname, weaponname, idflags);
     if(!issubstr(weaponname.name, "staff") && issubstr(type, "BULLET")) {
@@ -256,7 +256,7 @@ function ice_stone_run() {
   }
   self.e_model delete();
   playFX(level._effect["ice_explode"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-  playsoundatposition("zmb_squest_ice_stone_shatter", self.origin);
+  playSoundAtPosition("zmb_squest_ice_stone_shatter", self.origin);
   level.ice_stones_remaining--;
   if(level.ice_stones_remaining <= 0 && !level flag::get("ice_puzzle_2_complete")) {
     level flag::set("ice_puzzle_2_complete");
@@ -265,13 +265,13 @@ function ice_stone_run() {
     level thread zm_tomb_utility::play_puzzle_stinger_on_all_players();
     level.weather_snow = 5;
     level.weather_rain = 0;
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_tomb_utility::set_weather_to_player();
     }
     wait(5);
     level.weather_snow = 0;
     level.weather_rain = 0;
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_tomb_utility::set_weather_to_player();
     }
   }

@@ -247,10 +247,10 @@ function_1edf99df() {
     }
   }
 
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
 
   if(isDefined(e_player)) {
-    e_player setorigin(spawner.origin);
+    e_player setOrigin(spawner.origin);
     e_player setplayerangles(spawner.angles);
   }
 }
@@ -572,7 +572,7 @@ function_18696050() {
     level.var_53c2effb setvalue(level.var_76fdcc3e);
   }
 
-  model = getent(self.target, "targetname");
+  model = getEnt(self.target, "targetname");
   model hide();
   self delete();
 }
@@ -599,7 +599,7 @@ function_bfa522d1(b_looping, n_cycles = 3) {
   while(var_fb1ab1b7 > 0) {
     level.var_5f96112c = 1;
     level notify(#"hash_638cbd8ff39a4183");
-    a_players = getplayers(#"allies");
+    a_players = getPlayers(#"allies");
 
     foreach(e_player in a_players) {
       e_player clientfield::set_to_player("vision_pulse", 1);
@@ -624,7 +624,7 @@ function_bfa522d1(b_looping, n_cycles = 3) {
 }
 
 function_d017bdff(_hash) {
-  a_players = getplayers(#"allies");
+  a_players = getPlayers(#"allies");
 
   foreach(e_player in a_players) {
     e_player clientfield::set_to_player("vision_pulse", 0);
@@ -690,9 +690,9 @@ function_c94d8a8a(var_58d4bf93) {
 
   while(true) {
     while(n_dist > 90) {
-      v_dir = vectornormalize(s_loc.origin - e_fx.origin);
+      v_dir = vectorNormalize(s_loc.origin - e_fx.origin);
       v_target_pos = e_fx.origin + v_dir * 80;
-      e_fx moveto(v_target_pos, 0.05, 0.05);
+      e_fx moveTo(v_target_pos, 0.05, 0.05);
       e_fx waittill(#"movedone");
       n_dist = distance(e_fx.origin, s_loc.origin);
     }
@@ -822,7 +822,7 @@ function_1ca79c02(str_volume, var_7a037bc3, n_max_value, var_c088c2dd) {
   level endon(#"hash_338c5bfa53fbbfe7");
   e_player = get_player();
   e_player thread function_5ccd53d5(var_c088c2dd);
-  e_volume = getent(str_volume, "targetname");
+  e_volume = getEnt(str_volume, "targetname");
   n_total = 0;
   n_mode = -1;
 
@@ -982,7 +982,7 @@ update_glow(var_c386a7d2, var_a97eacb3, var_9c8d914) {
   level endon(#"combattraining_logic_finished");
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(!isalive(e_player)) {
       level.var_867e064b clientfield::set("highlight_sphere_normal", 0);
@@ -1054,7 +1054,7 @@ function_289b4b9f(str_message, var_520123e0, var_8e90b9b5, var_f031f5a, var_9569
     dt = n_time - var_6ee32682;
 
     if(dt > var_8e90b9b5) {
-      e_player = getplayers(#"allies")[0];
+      e_player = getPlayers(#"allies")[0];
       e_player thread function_329f9ba6(str_message, 3, "green");
       var_6ee32682 = n_time;
     }
@@ -1569,7 +1569,7 @@ function_f03da80a() {
 
     if(a_s_start.size > 0) {
       s_start = array::random(a_s_start);
-      self setorigin(s_start.origin);
+      self setOrigin(s_start.origin);
       self setplayerangles(s_start.angles);
       return;
     }
@@ -1579,7 +1579,7 @@ function_f03da80a() {
 
   if(a_s_start.size > 0) {
     s_start = array::random(a_s_start);
-    self setorigin(s_start.origin);
+    self setOrigin(s_start.origin);
     self setplayerangles(s_start.angles);
   }
 }
@@ -1592,7 +1592,7 @@ function_6b71f442() {
   if(var_23537161.size > 0) {
     foreach(s_obj in var_23537161) {
       mdl_obstacle = util::spawn_model(s_obj.model, s_obj.origin, s_obj.angles);
-      mdl_obstacle disconnectpaths();
+      mdl_obstacle disconnectPaths();
       level.var_ab9d8cc4[level.var_ab9d8cc4.size] = mdl_obstacle;
     }
   }
@@ -1697,8 +1697,8 @@ is_facing(facee, requireddot = 0.5, b_2d = 1) {
     v_to_facee_computed = v_to_facee;
   }
 
-  v_unit_forward_computed = vectornormalize(v_forward_computed);
-  v_unit_to_facee_computed = vectornormalize(v_to_facee_computed);
+  v_unit_forward_computed = vectorNormalize(v_forward_computed);
+  v_unit_to_facee_computed = vectorNormalize(v_to_facee_computed);
   dotproduct = vectordot(v_unit_forward_computed, v_unit_to_facee_computed);
   return dotproduct > requireddot;
 }
@@ -1790,7 +1790,7 @@ tutorial_goto(loc, str_waypoint = #"hash_1f1deaa6bff12db8", var_a0b3876d = 64, v
     s_loc = loc;
     v_loc = loc.origin;
   } else if(isstring(loc)) {
-    e_loc = getent(loc, "targetname");
+    e_loc = getEnt(loc, "targetname");
     s_loc = struct::get(loc, "targetname");
 
     if(isDefined(e_loc)) {
@@ -1883,13 +1883,13 @@ function_2cc00dba(var_14fe1698) {
     s_spawn_loc = a_locs[0];
   }
 
-  self setorigin(s_spawn_loc.origin);
+  self setOrigin(s_spawn_loc.origin);
   self setplayerangles(s_spawn_loc.angles);
 }
 
 can_see(v_pos, var_7b20e52b) {
   v_forward = anglesToForward(self.angles);
-  v_dir = vectornormalize(v_pos - self.origin);
+  v_dir = vectorNormalize(v_pos - self.origin);
   dp = vectordot(v_forward, v_dir);
 
   if(dp > 0.7) {
@@ -2193,7 +2193,7 @@ onboarding_complete() {
 }
 
 function_9a022fbc(str_state) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   lui_menu = lui::get_luimenu("FullScreenBlack");
 
   if(str_state == "open") {
@@ -2421,13 +2421,13 @@ function_61d750d4(loc, v_angles) {
     }
   }
 
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   if(isalive(e_player)) {
     v_to_player = e_player.origin - v_origin;
     ex_elevator_overlight_indicator_ = vectortoangles(v_to_player);
     playFX("player/fx8_plyr_spawn_distortion", v_origin, anglesToForward(ex_elevator_overlight_indicator_), anglestoup(ex_elevator_overlight_indicator_));
-    self setorigin(v_origin);
+    self setOrigin(v_origin);
     self setplayerangles(v_angles);
     self playSound(#"hash_fc83e70c477029c");
   }
@@ -2493,7 +2493,7 @@ function_49e0c5bc(var_a9a68bf = 0, b_corpses, b_play_fx = 1) {
 }
 
 function_3e0767e2(b_play_fx = 1) {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   v_to_player = e_player.origin - self.origin;
   ex_elevator_overlight_indicator_ = vectortoangles(v_to_player);
 
@@ -2501,7 +2501,7 @@ function_3e0767e2(b_play_fx = 1) {
     playFX("player/fx8_plyr_spawn_distortion", self.origin, anglesToForward(ex_elevator_overlight_indicator_), anglestoup(ex_elevator_overlight_indicator_));
   }
 
-  self setorigin((-10000, -10000, -10000));
+  self setOrigin((-10000, -10000, -10000));
   self ct_bots::disablebot();
 }
 
@@ -2558,10 +2558,10 @@ player_collisionbox(var_96065dae, var_8d3fbac4 = undefined, n_size = 0) {
   waitresult = var_874f43c3 waittill(#"trigger");
   level.var_33bd6a8 solid();
   triggerfx(level.var_87f7bbf);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player playsoundtoplayer(#"hash_4cc6bcab475eb688", e_player);
   level waittill(#"hash_4c9c5fbc89779e64");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player playsoundtoplayer(#"hash_544d950a45d876e2", e_player);
 
   if(isDefined(level.var_33bd6a8)) {
@@ -2664,7 +2664,7 @@ function_e9ab1003(var_5bdda9b3) {
 
 function_79957328(var_46fa8f90, var_5bdda9b3) {
   level.var_43ac3b33 = 1;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player val::set(#"fade", "freezecontrols");
   level lui::screen_fade_out(0.75);
   self notify(#"hash_6fb2ff47e3ed57eb");
@@ -2691,10 +2691,10 @@ function_8f04870f(var_6988e659 = undefined) {
 
   if(isDefined(var_6988e659)) {
     s_loc = struct::get(var_6988e659, "targetname");
-    e_player setorigin(s_loc.origin);
+    e_player setOrigin(s_loc.origin);
     e_player setplayerangles(s_loc.angles);
   } else if(isDefined(e_player.var_f2bdd0d8)) {
-    e_player setorigin(e_player.var_f2bdd0d8);
+    e_player setOrigin(e_player.var_f2bdd0d8);
     e_player setplayerangles(e_player.var_55ba89f7);
   }
 
@@ -2899,7 +2899,7 @@ function_30e324a1(var_47b0bbb6) {
 
 function_e96cc63f(n_count = 3, spawnpts, var_810b40e6 = 1, var_4837ee77 = 1, var_32df2a60 = 1, b_randomize = 0, str_targetname = "fillspawn_enemies") {
   level endon(#"combattraining_logic_finished", #"hash_3ce5abc259d8b041");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
 
   if(!isDefined(level.var_b6e6a025)) {
@@ -3281,7 +3281,7 @@ colbounds_on(str_id) {
     e_coll solid();
 
     if(isDefined(level.a_s_colbounds[str_id].b_disconnectpaths) && level.a_s_colbounds[str_id].b_disconnectpaths) {
-      e_coll disconnectpaths();
+      e_coll disconnectPaths();
     }
   }
 
@@ -3524,7 +3524,7 @@ function_be7bc7b2(var_eb8df0c3, var_a8d88c43, var_2d222ffc, var_d69032e9) {
       }
     } else {
       if(!(isDefined(var_8e1da8f9) && var_8e1da8f9) && isDefined(var_d69032e9)) {
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         e_player thread function_61c3d59c(var_d69032e9, undefined);
       }
 
@@ -3697,7 +3697,7 @@ function_e44c5b8e(str_killstreak, var_88d2d0b2 = 10, var_baf3556b = 0) {
 
 function_5160be8c() {
   wait 0.1;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
 
   if(isDefined(e_player)) {
     cost = killstreaks::get_killstreak_momentum_cost(e_player, level.var_b4a06c5b);
@@ -3764,7 +3764,7 @@ function_b3b2c91e() {
     return;
   }
 
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   cost = killstreaks::get_killstreak_momentum_cost(e_player, level.var_b4a06c5b);
   var_595e41ee = int(cost / level.var_dd8875fe + 0.5);
 
@@ -3899,7 +3899,7 @@ function_a7a72476() {
   self endon(#"death");
 
   if(!(isDefined(self.canseeplayer) && self.canseeplayer)) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(isalive(e_player)) {
       self.var_2925fedc = e_player.origin;
@@ -3915,7 +3915,7 @@ function_9a4e412e(s_loc, str_notify) {
 
   while(true) {
     e_player = get_player();
-    v_dir = vectornormalize(s_loc.origin - e_player.origin);
+    v_dir = vectorNormalize(s_loc.origin - e_player.origin);
     dp = vectordot(v_forward, v_dir);
 
     if(dp < 0) {
@@ -3959,8 +3959,8 @@ function_c444a920(s_loc, var_9c8d914) {
 
 function_9d1fc273(e_obj, onusefunc, str_objective, var_484df237) {
   e_obj.trigger = spawn("trigger_radius_use", e_obj.origin + (0, 0, 15), 0, 120, 100);
-  e_obj.trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
-  e_obj.trigger triggerignoreteam();
+  e_obj.trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
+  e_obj.trigger triggerIgnoreTeam();
   e_obj.gameobject = gameobjects::create_use_object(#"neutral", e_obj.trigger, [], (0, 0, 60), str_objective);
   e_obj.gameobject gameobjects::set_objective_entity(e_obj.gameobject);
   e_obj.gameobject gameobjects::set_visible_team(#"any");
@@ -4022,12 +4022,12 @@ function_a61ebb46(str_hint) {
   level.var_97aaa7c6 = 1;
   level.var_29c997df = 1;
   function_13c4b855(1);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread function_61c3d59c(str_hint, undefined);
   var_10a60547 = 0;
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(!e_player gamepadusedlast() && !var_10a60547) {
       if(!e_player primarybuttonpressedlocal()) {

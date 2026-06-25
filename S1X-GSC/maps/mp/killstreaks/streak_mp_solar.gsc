@@ -144,9 +144,9 @@ beamSounds(cam_ent, ground_ent) {
 }
 
 runBeam() {
-  cam_pos = GetStruct("solar_cam_pos", "targetname");
-  beam_pos = GetStruct("solar_beam_pos", "targetname");
-  ground_pos = GetStruct("solar_ground_pos", "targetname");
+  cam_pos = getStruct("solar_cam_pos", "targetname");
+  beam_pos = getStruct("solar_beam_pos", "targetname");
+  ground_pos = getStruct("solar_ground_pos", "targetname");
 
   ground_ent = getGroundEnt(ground_pos);
 
@@ -214,7 +214,7 @@ getBeamEnt(beam_pos, ground_pos) {
   offset = (anglesToForward(beam_ent.angles) * 5000) - (0, 0, 100);
   killCamEnt = spawn("script_model", beam_pos.origin + offset);
   killCamEnt.angles = beam_ent.angles;
-  killCamEnt LinkTo(beam_ent);
+  killCamEnt linkTo(beam_ent);
   beam_ent.killCamEnt = killCamEnt;
 
   return beam_ent;
@@ -292,21 +292,21 @@ runBeamUpdate(beam_ent, cam_ent, ground_ent) {
       beam_ent_pos.origin = goal_point;
     } else {
       move_dir = goal_point - beam_ent_pos.origin;
-      move_dir = VectorNormalize(move_dir);
+      move_dir = vectorNormalize(move_dir);
 
       beam_ent_pos.origin += move_dir * speed * 0.05;
     }
 
-    beam_dir = VectorNormalize(beam_ent_pos.origin - beam_ent.origin);
+    beam_dir = vectorNormalize(beam_ent_pos.origin - beam_ent.origin);
 
-    beam_ent RotateTo(VectorToAngles(beam_dir), 0.1);
+    beam_ent rotateTo(VectorToAngles(beam_dir), 0.1);
 
     start = beam_ent.origin;
     end = start + beam_dir * trace_dist;
     results = bulletTrace(start, end, false);
 
     Assert(results["fraction"] < 1.0);
-    ground_ent MoveTo(results["position"], .1);
+    ground_ent moveTo(results["position"], .1);
     ground_ent.surfacetype = results["surfacetype"];
     ground_ent.killCamEnt = beam_ent.killCamEnt;
     ground_ent RadiusDamage(ground_ent.origin, CONST_DAMAGE_RADIUS, CONST_DAMAGE_MAX, CONST_DAMAGE_MIN, self, "MOD_EXPLOSIVE", "killstreak_solar_mp");

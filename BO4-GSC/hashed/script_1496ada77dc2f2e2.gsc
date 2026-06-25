@@ -41,13 +41,13 @@ on_begin(str_style) {
       level thread function_40c7a8fd();
       break;
     case #"hash_5a202c5d6f53d672":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread function_69fa75f8();
       }
 
       break;
     case #"perk_drunk":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread function_6d8cf829();
       }
 
@@ -55,7 +55,7 @@ on_begin(str_style) {
     case #"random_blindness":
       callback::add_callback(#"on_host_migration_end", &function_604ff1eb);
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread function_ad641569();
       }
 
@@ -68,7 +68,7 @@ on_begin(str_style) {
 on_end(round_reset) {
   switch (level.var_4ecf5754) {
     case #"silent_film":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread clientfield::set_to_player("" + #"zm_trial_silent_film", 0);
       }
 
@@ -81,7 +81,7 @@ on_end(round_reset) {
       break;
     case #"hash_5a202c5d6f53d672":
       if(!round_reset) {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           player showcrosshair(1);
           player clientfield::set_to_player("" + #"hash_1b9477ddcf30191f", 0);
         }
@@ -89,7 +89,7 @@ on_end(round_reset) {
 
       break;
     case #"perk_drunk":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_to_player("" + #"zm_trial_perk_drunk", 0);
       }
 
@@ -113,7 +113,7 @@ function_40c7a8fd() {
   level endon(#"trial_round_end", #"end_game");
   wait 3.5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"zm_trial_silent_film", 1);
   }
 
@@ -187,7 +187,7 @@ function_1a109202(str_notify) {
     var_6eabfd9d = getstatuseffect("blind_zm_catalyst");
     var_3caa2c0f = getstatuseffect("deaf_electricity_catalyst");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player status_effect::function_4617032e(var_6eabfd9d.setype)) {
         player status_effect::function_408158ef(var_6eabfd9d.setype, var_6eabfd9d.var_18d16a6b);
       }
@@ -203,7 +203,7 @@ function_604ff1eb() {
   level endon(#"trial_round_end", #"end_game");
   wait 5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_ad641569();
   }
 }

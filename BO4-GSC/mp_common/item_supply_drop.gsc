@@ -64,7 +64,7 @@ function_eaba72c9() {
     }
 
     if(getdvarint(#"hash_40d4ca5923d72b3d", 0) > 0) {
-      players = getplayers();
+      players = getPlayers();
 
       if(isDefined(players[0])) {
         switch (getdvarint(#"hash_40d4ca5923d72b3d", 0)) {
@@ -175,24 +175,24 @@ function private function_c7bd0aa8(point, startpoint) {
   var_49e5fac9 = (startpoint[0], startpoint[1], 0);
 
   if(var_1ccbeeaa[0] < min[0]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+    toend = vectorNormalize(var_1ccbeeaa - var_49e5fac9);
     assert(toend[0] != 0);
     t = (min[0] - var_49e5fac9[0]) / toend[0];
     var_1ccbeeaa = var_49e5fac9 + toend * t;
   } else if(var_1ccbeeaa[0] > max[0]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+    toend = vectorNormalize(var_1ccbeeaa - var_49e5fac9);
     assert(toend[0] != 0);
     t = (max[0] - var_49e5fac9[0]) / toend[0];
     var_1ccbeeaa = var_49e5fac9 + toend * t;
   }
 
   if(var_1ccbeeaa[1] < min[1]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+    toend = vectorNormalize(var_1ccbeeaa - var_49e5fac9);
     assert(toend[1] != 0);
     t = (min[1] - var_49e5fac9[1]) / toend[1];
     var_1ccbeeaa = var_49e5fac9 + toend * t;
   } else if(var_1ccbeeaa[1] > max[1]) {
-    toend = vectornormalize(var_1ccbeeaa - var_49e5fac9);
+    toend = vectorNormalize(var_1ccbeeaa - var_49e5fac9);
     assert(toend[1] != 0);
     t = (max[1] - var_49e5fac9[1]) / toend[1];
     var_1ccbeeaa = var_49e5fac9 + toend * t;
@@ -214,16 +214,16 @@ function_13339b58(istank) {
     var_e1c31bea = #"hash_ac2d4936b932903";
   }
 
-  self animscripted("parachute_open", self.origin, self.angles, open_anim, "normal", "root", 1, 0);
+  self animScripted("parachute_open", self.origin, self.angles, open_anim, "normal", "root", 1, 0);
   self waittill(#"parachute_open");
 
   if(!(isDefined(self.parachute_close) && self.parachute_close)) {
-    self animscripted("parachute_idle", self.origin, self.angles, idle_anim, "normal", "root", 1, 0);
+    self animScripted("parachute_idle", self.origin, self.angles, idle_anim, "normal", "root", 1, 0);
   }
 
   self waittill(#"parachute_close");
   self unlink();
-  self animscripted("parachute_closed", self.origin, self.angles, var_e1c31bea, "normal", "root", 1, 0);
+  self animScripted("parachute_closed", self.origin, self.angles, var_e1c31bea, "normal", "root", 1, 0);
   animlength = getanimlength("parachute_closed");
   wait animlength * 0.35;
   self clientfield::set("supply_drop_parachute_rob", 0);
@@ -263,7 +263,7 @@ function_500a6615(itemspawnlist = #"supply_drop_stash_parent_dlc1") {
       movetime = 1;
     }
 
-    supplydrop moveto(groundpoint, movetime);
+    supplydrop moveTo(groundpoint, movetime);
     supplydrop playSound("evt_supply_drop");
     var_f6dfa3da = isDefined(supplydrop.var_abd32694) && supplydrop.var_abd32694 ? 0.25 : 1;
     wait var_f6dfa3da;
@@ -277,13 +277,13 @@ function_500a6615(itemspawnlist = #"supply_drop_stash_parent_dlc1") {
       supplydropparachute setModel("p8_fxanim_wz_parachute_supplydrop_tank_fade");
       supplydropparachute clientfield::set("supply_drop_parachute_rob", 1);
       supplydropparachute useanimtree("generic");
-      supplydropparachute linkto(supplydrop, "tag_origin", (0, 0, 0));
+      supplydropparachute linkTo(supplydrop, "tag_origin", (0, 0, 0));
       supplydropparachute thread function_13339b58(1);
     } else {
       supplydropparachute setModel("p8_fxanim_wz_parachute_supplydrop_fade");
       supplydropparachute clientfield::set("supply_drop_parachute_rob", 1);
       supplydropparachute useanimtree("generic");
-      supplydropparachute linkto(supplydrop, "tag_origin", (0, 0, 0));
+      supplydropparachute linkTo(supplydrop, "tag_origin", (0, 0, 0));
       supplydropparachute thread function_13339b58();
     }
 
@@ -451,8 +451,8 @@ function_a3832aa0(var_d91c179d, vehicletype) {
   supplydrop setModel("tag_origin");
   supplydrop useanimtree("generic");
   supplydrop.supplydropveh = var_d91c179d;
-  var_d5552131 = spawnvehicle(vehicletype, (0, 0, 0), (0, 0, 0));
-  var_d5552131 linkto(supplydrop, "tag_origin", (0, 0, 0), (0, 90, 0));
+  var_d5552131 = spawnVehicle(vehicletype, (0, 0, 0), (0, 0, 0));
+  var_d5552131 linkTo(supplydrop, "tag_origin", (0, 0, 0), (0, 90, 0));
   var_d5552131.var_b9b5403c = var_d5552131.health * 0.5;
   var_d5552131.overridevehicledamage = &function_9a275b1f;
   var_d5552131.supplydropveh = var_d91c179d;
@@ -530,7 +530,7 @@ function_eafcba42(startpoint, endpoint, droppoint, maxheight, minheight) {
   points = [];
   startpoint = trace_point(startpoint);
   endpoint = trace_point(endpoint);
-  var_bb96e272 = vectornormalize(endpoint - startpoint);
+  var_bb96e272 = vectorNormalize(endpoint - startpoint);
   pathlength = distance2d(startpoint, endpoint);
   var_28021cac = int(pathlength / 5000);
   points[0] = startpoint;
@@ -703,7 +703,7 @@ function_ab6af198() {
 
 function_261b0e67(spawnpoint, endpoint, droppoint, dropflare = 1, vehicleoverride = undefined) {
   var_47736ddd = array(spawnpoint, droppoint, endpoint);
-  var_7366c0ff = spawnvehicle(isDefined(vehicleoverride) ? vehicleoverride : "vehicle_t8_mil_helicopter_transport_dark_wz_infiltration", spawnpoint, vectortoangles(vectornormalize(endpoint - spawnpoint)));
+  var_7366c0ff = spawnVehicle(isDefined(vehicleoverride) ? vehicleoverride : "vehicle_t8_mil_helicopter_transport_dark_wz_infiltration", spawnpoint, vectortoangles(vectorNormalize(endpoint - spawnpoint)));
 
   if(!isDefined(var_7366c0ff)) {
     return;
@@ -781,7 +781,7 @@ function_7d4a448f(var_47d17dcb = 0) {
   var_be734526 = deathcircle.radius - var_4f59c30d;
 
   if(var_be734526 > 0) {
-    dirtocenter = vectornormalize(deathcirclecenter - (deathcircle.origin[0], deathcircle.origin[1], var_94f13d8b));
+    dirtocenter = vectorNormalize(deathcirclecenter - (deathcircle.origin[0], deathcircle.origin[1], var_94f13d8b));
     var_8df04549 = deathcirclecenter - dirtocenter * var_4f59c30d;
     exitpoint = deathcirclecenter + dirtocenter * var_4f59c30d;
   } else {
@@ -794,7 +794,7 @@ function_7d4a448f(var_47d17dcb = 0) {
   droppoint = deathcirclecenter;
   var_8df04549 = function_c7bd0aa8(var_8df04549, droppoint);
   exitpoint = function_c7bd0aa8(exitpoint, droppoint);
-  var_bb96e272 = vectornormalize(exitpoint - var_8df04549);
+  var_bb96e272 = vectorNormalize(exitpoint - var_8df04549);
   var_142db926 = 5000;
   nextcircledistance = distance2d(deathcircle.origin, deathcirclecenter);
   var_6eae2ffb = var_396cbf6e + nextcircledistance + var_142db926;
@@ -806,7 +806,7 @@ function_7d4a448f(var_47d17dcb = 0) {
   endpoint = function_c7bd0aa8(endpoint, droppoint);
   level thread function_261b0e67(spawnpoint, endpoint, droppoint, 1);
   angles = vectortoangles(var_bb96e272);
-  rightoffset = vectornormalize(anglestoright(angles)) * 1024;
+  rightoffset = vectorNormalize(anglestoright(angles)) * 1024;
   leftoffset = rightoffset * -1;
   var_ae85ee87 = var_bb96e272 * -1024;
   vehicleoverride = undefined;
@@ -880,7 +880,7 @@ function_418e26fe(var_2118f785 = undefined, helicopter = 0, voiceevent = 1, var_
   var_8df04549 = trace_point(var_8df04549, undefined, var_f5f2246e, var_729c4495);
   exitpoint = function_c7bd0aa8(exitpoint, droppoint);
   exitpoint = trace_point(exitpoint, undefined, var_f5f2246e, var_729c4495);
-  var_bb96e272 = vectornormalize(exitpoint - var_8df04549);
+  var_bb96e272 = vectorNormalize(exitpoint - var_8df04549);
   var_429b69c0 = max(var_396cbf6e, 15000);
   despawndistance = max(var_396cbf6e, 45000);
   spawnpoint = var_8df04549 - var_bb96e272 * var_429b69c0;
@@ -900,7 +900,7 @@ function_418e26fe(var_2118f785 = undefined, helicopter = 0, voiceevent = 1, var_
 
 function_b8dd1978(startpoint, endpoint, droppoint, var_2118f785 = undefined, voiceevent = 1) {
   var_57e06aea = array(startpoint, droppoint, endpoint);
-  supplydropveh = spawnvehicle("vehicle_t8_mil_air_transport_infiltration", startpoint, vectortoangles(vectornormalize(endpoint - startpoint)));
+  supplydropveh = spawnVehicle("vehicle_t8_mil_air_transport_infiltration", startpoint, vectortoangles(vectorNormalize(endpoint - startpoint)));
 
   if(!isDefined(supplydropveh)) {
     return;
@@ -929,7 +929,7 @@ function_b8dd1978(startpoint, endpoint, droppoint, var_2118f785 = undefined, voi
     return;
   }
 
-  supplydrop linkto(supplydropveh, "tag_origin", (0, 0, -120));
+  supplydrop linkTo(supplydropveh, "tag_origin", (0, 0, -120));
   supplydropveh.supplydrop = supplydrop;
   supplydropveh thread function_c2edbefb(var_57e06aea, droppoint, 0, var_2118f785);
   supplydropveh thread function_9e8348e4();
@@ -946,7 +946,7 @@ function_47ec98c4(startpoint, endpoint, droppoint, var_d91c179d = 0, vehicletype
   assert(var_57e06aea.size >= 2);
   startpoint = var_57e06aea[0];
   endpoint = var_57e06aea[var_57e06aea.size - 1];
-  supplydropveh = spawnvehicle("vehicle_t8_mil_helicopter_transport_dark_wz", startpoint, vectortoangles(vectornormalize(endpoint - startpoint)));
+  supplydropveh = spawnVehicle("vehicle_t8_mil_helicopter_transport_dark_wz", startpoint, vectortoangles(vectorNormalize(endpoint - startpoint)));
 
   if(!isDefined(supplydropveh)) {
     return;
@@ -974,7 +974,7 @@ function_47ec98c4(startpoint, endpoint, droppoint, var_d91c179d = 0, vehicletype
     supplydrop = function_67d7d040(supplydropveh);
   }
 
-  supplydrop linkto(supplydropveh, "tag_cargo_attach", (0, 0, -45));
+  supplydrop linkTo(supplydropveh, "tag_cargo_attach", (0, 0, -45));
   supplydropveh.supplydrop = supplydrop;
   supplydropveh thread function_c2edbefb(var_57e06aea, droppoint);
   supplydropveh thread function_9e8348e4();
@@ -1007,7 +1007,7 @@ drop_supply_drop(droppoint, helicopter = 0, vehicledrop = 0, vehicletype = undef
 
   var_b98da7dd = droppoint - mapcenter;
   var_b98da7dd = (var_b98da7dd[0], var_b98da7dd[1], 0);
-  var_b98da7dd = vectornormalize(var_b98da7dd);
+  var_b98da7dd = vectorNormalize(var_b98da7dd);
   spawnpoint = mapcenter + var_b98da7dd * mapradius;
   spawnpoint = (spawnpoint[0], spawnpoint[1], droppoint[2]);
   spawnpoint = function_c7bd0aa8(spawnpoint, droppoint);

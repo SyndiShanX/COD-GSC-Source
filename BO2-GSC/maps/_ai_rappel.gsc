@@ -38,12 +38,12 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
 
   if(isDefined(rappel_point_struct)) {
     if(isstring(rappel_point_struct)) {
-      rappel_start = getstruct(rappel_point_struct, "targetname");
+      rappel_start = getStruct(rappel_point_struct, "targetname");
     } else {
       rappel_start = rappel_point_struct;
     }
   } else
-    rappel_start = getstruct(self.target, "targetname");
+    rappel_start = getStruct(self.target, "targetname");
 
   assert(isDefined(rappel_start), "No rappel_start struct for rappel is defined.");
 
@@ -54,7 +54,7 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
   rappel_face_player = 0;
 
   if(isDefined(rappel_start.target)) {
-    rappel_end = getstruct(rappel_start.target, "targetname");
+    rappel_end = getStruct(rappel_start.target, "targetname");
   } else {
     rappel_end_pos = physicstrace(rappel_start.origin, rappel_start.origin - vectorscale((0, 0, 1), 10000.0));
     rappel_end = spawnStruct();
@@ -100,12 +100,12 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
 
   self thread debug_in_position(rappel_end.origin);
 
-  self disableclientlinkto();
-  self linkto(move_ent);
+  self disableclientlinkTo();
+  self linkTo(move_ent);
   self thread rappel_move_ai_thread(move_ent, rappel_end, time_to_rappel, rappel_face_player);
   self thread anim_generic_loop(self, "rappel");
   self waittill("start_exit");
-  self stopanimscripted();
+  self stopanimScripted();
   anim_single(self, "rappel_out", "generic");
   self unlink();
   self.a.deathforceragdoll = 0;
@@ -125,10 +125,10 @@ rappel_move_ai_thread(move_ent, rappel_end, time_to_rappel, rappel_face_player) 
   if(rappel_face_player) {
     self thread rappel_face_player(move_ent, time_to_rappel);
   } else {
-    move_ent rotateto(rappel_end.angles, randomfloatrange(1, time_to_rappel));
+    move_ent rotateTo(rappel_end.angles, randomfloatrange(1, time_to_rappel));
   }
 
-  move_ent moveto(self.out_point, time_to_rappel, 1, 1);
+  move_ent moveTo(self.out_point, time_to_rappel, 1, 1);
   move_ent waittill("movedone");
   self notify("start_exit");
 }
@@ -139,7 +139,7 @@ rappel_face_player(move_ent, time_to_rappel) {
   player = get_closest_player(self.origin);
   angles = vectortoangles(player.origin - self.origin);
   angles = (0, angles[1], 0);
-  move_ent rotateto(angles, time_to_rappel / 2);
+  move_ent rotateTo(angles, time_to_rappel / 2);
 }
 
 rappel_move_ent_think(move_ent) {

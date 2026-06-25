@@ -196,7 +196,7 @@ function private bgb_devgui_think() {
 
 function private bgb_devgui_acquire(bgb_name) {
   playerid = getdvarint("");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(playerid != -1 && playerid != i) {
       continue;
@@ -851,7 +851,7 @@ function function_434235f9(var_93eb638b) {
   }
   var_93eb638b ghost();
   var_93eb638b.clone_model = util::spawn_model(var_93eb638b.model, var_93eb638b.origin, var_93eb638b.angles);
-  var_93eb638b.clone_model linkto(var_93eb638b);
+  var_93eb638b.clone_model linkTo(var_93eb638b);
   direction = var_93eb638b.origin;
   direction = (direction[1], direction[0], 0);
   if(direction[1] < 0 || (direction[0] > 0 && direction[1] > 0)) {
@@ -860,7 +860,7 @@ function function_434235f9(var_93eb638b) {
     direction = (direction[0] * -1, direction[1], 0);
   }
   if(!(isDefined(var_93eb638b.sndnosamlaugh) && var_93eb638b.sndnosamlaugh)) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isalive(players[i])) {
         players[i] playlocalsound(level.zmb_laugh_alias);

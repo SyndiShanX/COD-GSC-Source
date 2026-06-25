@@ -158,16 +158,16 @@ function owner_in_line_of_fire() {
   line_of_fire_dot = (dist_squared_to_owner < 9216 ? 0.866 : 0.9848);
   gun_angles = self gettagangles((isDefined(self.avoid_shooting_owner_ref_tag) ? self.avoid_shooting_owner_ref_tag : "tag_flash"));
   gun_forward = anglesToForward(gun_angles);
-  dot = vectordot(gun_forward, vectornormalize(self.owner.origin - self.origin));
+  dot = vectordot(gun_forward, vectorNormalize(self.owner.origin - self.origin));
   return dot > line_of_fire_dot;
 }
 
 function setturrettarget(target, turretidx = 0, offset = (0, 0, 0)) {
   if(isentity(target)) {
     if(turretidx == 0) {
-      self setturrettargetent(target, offset);
+      self setturrettargetEnt(target, offset);
     } else {
-      self setgunnertargetent(target, offset, turretidx - 1);
+      self setgunnertargetEnt(target, offset, turretidx - 1);
     }
   } else {
     if(isvec(target)) {
@@ -246,7 +246,7 @@ function waittill_asm_complete(substate_to_wait, timeout = 10) {
 
 function throw_off_balance(damagetype, hitpoint, hitdirection, hitlocationinfo) {
   if(damagetype == "MOD_EXPLOSIVE" || damagetype == "MOD_GRENADE_SPLASH" || damagetype == "MOD_PROJECTILE_SPLASH") {
-    self setvehvelocity(self.velocity + (vectornormalize(hitdirection) * 300));
+    self setvehvelocity(self.velocity + (vectorNormalize(hitdirection) * 300));
     ang_vel = self getangularvelocity();
     ang_vel = ang_vel + (randomfloatrange(-300, 300), randomfloatrange(-300, 300), randomfloatrange(-300, 300));
     self setangularvelocity(ang_vel);
@@ -1420,7 +1420,7 @@ function positionquery_filter_engagementdist(queryresult, enemy, engagementdista
   engagementdistance = (engagementdistancemin + engagementdistancemax) * 0.5;
   half_engagement_width = abs(engagementdistancemax - engagementdistance);
   enemy_origin = (enemy.origin[0], enemy.origin[1], 0);
-  vec_enemy_to_self = vectornormalize((self.origin[0], self.origin[1], 0) - enemy_origin);
+  vec_enemy_to_self = vectorNormalize((self.origin[0], self.origin[1], 0) - enemy_origin);
   foreach(point in queryresult.data) {
     point.distawayfromengagementarea = 0;
     vec_enemy_to_point = (point.origin[0], point.origin[1], 0) - enemy_origin;
@@ -1509,7 +1509,7 @@ function positionquery_filter_engagementheight(queryresult, enemy, engagementhei
   }
 }
 
-function positionquery_postprocess_removeoutofgoalradius(queryresult, tolerance = 1) {
+function positionquery_postprocess_removeoutofgoalRadius(queryresult, tolerance = 1) {
   for(i = 0; i < queryresult.data.size; i++) {
     point = queryresult.data[i];
     if(point.disttogoal > tolerance) {

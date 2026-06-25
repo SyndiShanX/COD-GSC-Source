@@ -48,7 +48,7 @@ function streamer_wait(n_stream_request_id, n_wait_frames = 0, n_timeout = 0, b_
     do {
       wait_network_frame();
       n_num_streamers_ready = 0;
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if((isDefined(n_stream_request_id) ? player isstreamerready(n_stream_request_id) : player isstreamerready())) {
           n_num_streamers_ready++;
         }
@@ -57,7 +57,7 @@ function streamer_wait(n_stream_request_id, n_wait_frames = 0, n_timeout = 0, b_
         break;
       }
     }
-    while(n_num_streamers_ready < max(1, getplayers().size));
+    while(n_num_streamers_ready < max(1, getPlayers().size));
   } else {
     self endon("disconnect");
     do {
@@ -713,7 +713,7 @@ function orient_to_normal(normal) {
   if(!hor_length) {
     return (0, 0, 0);
   }
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
@@ -768,7 +768,7 @@ function _delay_notify(time_or_notify, str_notify, str_endon, arg1, arg2, arg3, 
 }
 
 function get_closest_player(org, str_team) {
-  players = getplayers(str_team);
+  players = getPlayers(str_team);
   return arraysort(players, org, 1, 1)[0];
 }
 
@@ -941,7 +941,7 @@ function is_player_looking_at(origin, dot, do_trace, ignore_ent) {
     do_trace = 1;
   }
   eye = self get_eye();
-  delta_vec = vectornormalize(origin - eye);
+  delta_vec = vectorNormalize(origin - eye);
   view_vec = anglesToForward(self getplayerangles());
   new_dot = vectordot(delta_vec, view_vec);
   if(new_dot >= dot) {
@@ -1063,7 +1063,7 @@ function wait_till_not_touching(e_to_check, e_to_touch) {
 }
 
 function any_player_is_touching(ent, str_team) {
-  foreach(player in getplayers(str_team)) {
+  foreach(player in getPlayers(str_team)) {
     if(isalive(player) && player istouching(ent)) {
       return true;
     }
@@ -1095,7 +1095,7 @@ function waittill_asset_loaded(str_type, str_name) {}
 function script_wait(called_from_spawner = 0) {
   coop_scalar = 1;
   if(called_from_spawner) {
-    players = getplayers();
+    players = getPlayers();
     if(players.size == 2) {
       coop_scalar = 0.7;
     } else {
@@ -1172,7 +1172,7 @@ function spawn_player_clone(player, animname) {
   playerclone setbodyrenderoptions(bodyrenderoptions, bodyrenderoptions, bodyrenderoptions);
   playerclone useanimtree($all_player);
   if(isDefined(animname)) {
-    playerclone animscripted("clone_anim", playerclone.origin, playerclone.angles, animname);
+    playerclone animScripted("clone_anim", playerclone.origin, playerclone.angles, animname);
   }
   playerclone.health = 100;
   playerclone setowner(player);
@@ -1241,7 +1241,7 @@ function is_round_based() {
 }
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -1673,7 +1673,7 @@ function spawn_array_struct() {
 }
 
 function gethostplayer() {
-  players = getplayers();
+  players = getPlayers();
   for(index = 0; index < players.size; index++) {
     if(players[index] ishost()) {
       return players[index];
@@ -1682,7 +1682,7 @@ function gethostplayer() {
 }
 
 function gethostplayerforbots() {
-  players = getplayers();
+  players = getPlayers();
   for(index = 0; index < players.size; index++) {
     if(players[index] ishostforbots()) {
       return players[index];
@@ -1827,7 +1827,7 @@ function auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_
       b_behind = 0;
       if(n_mode & 2) {
         v_facing = anglesToForward(player getplayerangles());
-        v_to_ent = vectornormalize(self.origin - v_eye);
+        v_to_ent = vectorNormalize(self.origin - v_eye);
         n_dot = vectordot(v_facing, v_to_ent);
         if(n_dot < n_dot_check) {
           b_behind = 1;

@@ -14,7 +14,7 @@ _id_123D(var_0, var_1) {
   var_7 = "wm_eq_ascender_" + var_0 + "_get_off_ascender";
   thread _id_C2F2(var_1);
   var_8 = _id_123A(var_2, var_1);
-  var_8._id_52B0 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_8._id_52B0 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   _id_F2B2(1, var_8);
   thread _id_1237(var_2, var_4, var_3, var_5, var_7, var_6, var_8, var_1, var_0);
   var_1._id_84EF = 0;
@@ -78,10 +78,10 @@ _id_1234(var_0, var_1, var_2, var_3, var_4) {
 _id_1235(var_0, var_1) {
   self._id_1772 = spawn("script_origin", self.origin);
   self._id_1772.angles = self.angles;
-  self linkto(self._id_1772);
-  self._id_1C21 linkto(self._id_1772);
+  self linkTo(self._id_1772);
+  self._id_1C21 linkTo(self._id_1772);
   var_2 = _func_0079(var_0);
-  self._id_1772 moveto(var_1._id_52B0.origin, var_2 * 3);
+  self._id_1772 moveTo(var_1._id_52B0.origin, var_2 * 3);
   self._id_1772 waittill("movedone");
 }
 

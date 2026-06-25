@@ -109,7 +109,7 @@ rotatefan() {
   self endon("death");
 
   for(;;) {
-    self rotateyaw(-360, 5);
+    self rotateYaw(-360, 5);
     wait 5;
   }
 }

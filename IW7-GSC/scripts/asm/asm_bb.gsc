@@ -341,7 +341,7 @@ func_2936(var_0, var_1, var_2, var_3) {
 }
 
 func_9F53(var_0, var_1) {
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
   var_3 = anglesToForward(var_0.angles);
   var_4 = vectorcross(var_3, var_2);
   if(var_4[2] > 0 && var_1 == "left") {
@@ -379,15 +379,15 @@ func_2933(var_0, var_1, var_2, var_3) {
   return self._blackboard.var_1016B.type == "Cover Left" && self._blackboard.shufflenode.type == "Cover Right";
 }
 
-bb_setanimscripted() {
+bb_setanimScripted() {
   self._blackboard.animscriptedactive = 1;
 }
 
-bb_clearanimscripted() {
+bb_clearanimScripted() {
   self._blackboard.animscriptedactive = 0;
 }
 
-bb_isanimscripted() {
+bb_isanimScripted() {
   if(!isDefined(self.script)) {
     return 0;
   }

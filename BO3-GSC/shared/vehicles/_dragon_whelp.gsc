@@ -256,7 +256,7 @@ function state_combat_update(params) {
             }
           }
           vectoowner = point.origin - ownerorigin;
-          dirtoowner = vectornormalize((vectoowner[0], vectoowner[1], 0));
+          dirtoowner = vectorNormalize((vectoowner[0], vectoowner[1], 0));
           if(vectordot(ownerforward, dirtoowner) > 0.34) {
             if(abs(vectoowner[2]) < 100) {
               if(!isDefined(point._scoredebug)) {
@@ -324,7 +324,7 @@ function attack_thread() {
       continue;
     }
     aimoffset = (self.dragonenemy getvelocity() * 0.3) - eyeoffset;
-    self setturrettargetent(self.dragonenemy, aimoffset);
+    self setturrettargetEnt(self.dragonenemy, aimoffset);
     wait(0.2);
     if(isDefined(self.dragonenemy)) {
       self fireweapon(0, self.dragonenemy, (0, 0, 0), self);

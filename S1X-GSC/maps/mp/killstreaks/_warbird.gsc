@@ -234,7 +234,7 @@ SetupWarbirdKillStreak(lifeId, modules) {
 
   if(warbird.hasAI) {
     warbird.UsableEnt = spawn("script_origin", (0, 0, 0));
-    warbird.UsableEnt LinkTo(warbird);
+    warbird.UsableEnt linkTo(warbird);
     warbird.UsableEnt makeGloballyUsableByType("killstreakRemote", &"MP_WARBIRD_PLAYER_PROMPT", self);
   }
 
@@ -456,7 +456,7 @@ spawn_warbird_turret(turretweaponinfo, modelname, linktotag, isBuddy) {
   spawned_turret.angles = self GetTagAngles(linktotag);
   spawned_turret setModel(modelname);
   spawned_turret SetDefaultDropPitch(45.0);
-  spawned_turret LinkTo(self, linktotag, (0, 0, 0), (0, 0, 0));
+  spawned_turret linkTo(self, linktotag, (0, 0, 0), (0, 0, 0));
   spawned_turret.owner = self.owner;
   spawned_turret.health = 99999;
   spawned_turret.maxHealth = 1000;
@@ -779,7 +779,7 @@ FireAi(warbird) {
 
 FireAiRocket(warbird) {
   missile_tag_origin = warbird GetTagOrigin("tag_missile_right");
-  player_forward = VectorNormalize(anglesToForward(warbird.angles));
+  player_forward = vectorNormalize(anglesToForward(warbird.angles));
   warbird_velocity = warbird Vehicle_GetVelocity();
   missile = MagicBullet("warbird_missile_mp", missile_tag_origin + warbird_velocity / 10, self getEye() + warbird_velocity + player_forward * 1000, self);
   missile.killCamEnt = warbird;
@@ -821,7 +821,7 @@ CheckWarbirdTargetLos(warbird) {
   while(true) {
     turret_flash_pos = warbird GetTagOrigin("TAG_FLASH1");
     target_pos = warbird.enemy_target getEye();
-    target_dir = VectorNormalize(target_pos - turret_flash_pos);
+    target_dir = vectorNormalize(target_pos - turret_flash_pos);
     start_pos = turret_flash_pos + (target_dir * 20);
 
     trace = bulletTrace(start_pos, target_pos, false, warbird, false, false, false, false, false);
@@ -904,7 +904,7 @@ PlayerControlWarbirdSetup(warbird) {
   warbird.PlayerAttachPoint.origin = WarbirdPlayerTagOrigin;
   warbird.PlayerAttachPoint.angles = WarbirdPlayerTagAngles;
 
-  warbird.PlayerAttachPoint LinkTo(warbird, "tag_player_mp");
+  warbird.PlayerAttachPoint linkTo(warbird, "tag_player_mp");
 
   self Unlink();
 
@@ -1360,9 +1360,9 @@ FireWarbirdRockets(warbird) {
 
     if(self.current_warbird_weapon == "missiles" || (self.guid == "bot0" || self.guid == "bot1" || self.guid == "bot2" || self.guid == "bot3")) {
       Earthquake(0.4, 1, warbird.origin, 1000);
-      self PlayRumbleOnEntity("ac130_105mm_fire");
+      self playRumbleOnEntity("ac130_105mm_fire");
       missile_tag_origin = warbird GetTagOrigin("tag_missile_right");
-      player_forward = VectorNormalize(anglesToForward(self GetPlayerAngles()));
+      player_forward = vectorNormalize(anglesToForward(self GetPlayerAngles()));
       warbird_velocity = warbird GetEntityVelocity();
       missile = MagicBullet("warbird_missile_mp", missile_tag_origin + warbird_velocity / 10, self getEye() + warbird_velocity + player_forward * 1000, self);
       playFXOnTag(level.chopper_fx["rocketlaunch"]["warbird"], warbird, "tag_missile_right");

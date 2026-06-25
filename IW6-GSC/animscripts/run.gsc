@@ -568,7 +568,7 @@ move_checkstairstransition() {
     }
 
     var_3 = self.origin + (0, 0, 6);
-    var_4 = vectornormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
+    var_4 = vectorNormalize((self.lookaheaddir[0], self.lookaheaddir[1], 0));
     var_5 = var_3 + var_2 * var_4;
     var_6 = self aiphysicstrace(var_3, var_5, 15, 48, 1, 1);
 

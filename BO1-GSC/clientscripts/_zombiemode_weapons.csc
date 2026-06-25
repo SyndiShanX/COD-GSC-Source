@@ -62,8 +62,8 @@ weapon_floats_up() {
     self.weapon_models[lcn] setModel(modelname);
     self.weapon_models[lcn].dw setModel(modelname);
     self.weapon_models[lcn] useweaponhidetags(rand);
-    self.weapon_models[lcn] moveto(self.origin + (0, 0, floatHeight), 3, 2, 0.9);
-    self.weapon_models[lcn].dw MoveTo(self.origin + (0, 0, floatHeight) - (3, 3, 3), 3, 2, 0.9);
+    self.weapon_models[lcn] moveTo(self.origin + (0, 0, floatHeight), 3, 2, 0.9);
+    self.weapon_models[lcn].dw moveTo(self.origin + (0, 0, floatHeight) - (3, 3, 3), 3, 2, 0.9);
   }
   for(i = 0; i < number_cycles; i++) {
     if(i < 20) {

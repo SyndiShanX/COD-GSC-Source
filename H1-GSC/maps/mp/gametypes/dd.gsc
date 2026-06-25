@@ -408,9 +408,9 @@ bombs() {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
     var_3 = getEntArray(var_2.target, "targetname");
-    var_4 = getent(var_3[0].target, "targetname");
+    var_4 = getEnt(var_3[0].target, "targetname");
     var_5 = var_2.script_label;
-    var_6 = getent("dd_bombzone_clip" + var_5, "targetname");
+    var_6 = getEnt("dd_bombzone_clip" + var_5, "targetname");
 
     if(maps\mp\_utility::inovertime()) {
       if(var_5 == "_a" || var_5 == "_b") {
@@ -608,7 +608,7 @@ dropbombmodel(var_0, var_1) {
   var_2 = bulletTrace(var_0.origin + (0, 0, 20), var_0.origin - (0, 0, 2000), 0, var_0);
   var_3 = randomfloat(360);
   var_4 = (cos(var_3), sin(var_3), 0);
-  var_4 = vectornormalize(var_4 - var_2["normal"] * vectordot(var_4, var_2["normal"]));
+  var_4 = vectorNormalize(var_4 - var_2["normal"] * vectordot(var_4, var_2["normal"]));
   var_5 = vectortoangles(var_4);
   level.ddbombmodel[var_1] = spawn("script_model", var_2["position"]);
   level.ddbombmodel[var_1].angles = var_5;

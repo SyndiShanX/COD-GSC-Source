@@ -369,12 +369,12 @@ loki_space_particulates_while_moving() {
 
 fx_infil_rog() {
   wait 2.3;
-  var_0 = common_scripts\utility::getstruct("sat_missle_01", "targetname");
-  var_1 = common_scripts\utility::getstruct("sat_missle_02", "targetname");
-  var_2 = common_scripts\utility::getstruct("sat_missle_03", "targetname");
-  var_3 = common_scripts\utility::getstruct("sat_missle_04", "targetname");
-  var_4 = common_scripts\utility::getstruct("sat_missle_06", "targetname");
-  var_5 = common_scripts\utility::getstruct("sat_missle_05", "targetname");
+  var_0 = common_scripts\utility::getStruct("sat_missle_01", "targetname");
+  var_1 = common_scripts\utility::getStruct("sat_missle_02", "targetname");
+  var_2 = common_scripts\utility::getStruct("sat_missle_03", "targetname");
+  var_3 = common_scripts\utility::getStruct("sat_missle_04", "targetname");
+  var_4 = common_scripts\utility::getStruct("sat_missle_06", "targetname");
+  var_5 = common_scripts\utility::getStruct("sat_missle_05", "targetname");
   playFX(common_scripts\utility::getfx("loki_rog_highres_missile"), var_0.origin, (-1, 0, 0));
   playFX(common_scripts\utility::getfx("loki_rog_highres_missile"), var_1.origin, (-1, 0, 0));
   playFX(common_scripts\utility::getfx("loki_rog_highres_missile"), var_2.origin, (-1, 0, 0));

@@ -118,7 +118,7 @@ function_491101ba(player) {
 
   var_57807cdc = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(var_57807cdc)) {
       var_57807cdc = [];
     } else if(!isarray(var_57807cdc)) {
@@ -176,7 +176,7 @@ set_door_hint_string(e_door, n_cost) {
 
   while(true) {
     if(n_cost > 0 && zm_trial_disable_buys::is_active()) {
-      e_door sethintstring(#"hash_55d25caf8f7bbb2f");
+      e_door setHintString(#"hash_55d25caf8f7bbb2f");
     } else {
       e_door zm_utility::set_hint_string(self, "default_buy_door", n_cost);
     }
@@ -299,7 +299,7 @@ function_9a6b2309() {
     cmd = strtok(string, "<dev string:x3c9>");
 
     if(cmd.size > 0) {
-      zm_trial::fail(undefined, getplayers());
+      zm_trial::fail(undefined, getPlayers());
       setDvar(#"hash_5a32209acb1f54a0", "<dev string:x38>");
     }
 
@@ -307,7 +307,7 @@ function_9a6b2309() {
     cmd = strtok(string, "<dev string:x3c9>");
 
     if(cmd.size > 0) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player zm_stats::function_49469f35("<dev string:x3cd>", 0);
         player zm_stats::function_49469f35("<dev string:x3e8>", 0);
         player zm_stats::function_49469f35("<dev string:x403>", 0);
@@ -323,7 +323,7 @@ function_9a6b2309() {
     if(cmd.size > 0) {
       challenge = function_1201b5da(cmd[0]);
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player luinotifyevent(#"hash_8d33c3be569f08", 1, challenge.row);
         stat_name = challenge.params[1];
         curr_time = gettime();

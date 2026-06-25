@@ -47,7 +47,7 @@ replace_turrets() {
 
 delete_botconnect_clip() {
   for(;;) {
-    var_0 = getent("botconnect_delete_on_load", "targetname");
+    var_0 = getEnt("botconnect_delete_on_load", "targetname");
 
     if(isDefined(var_0)) {
       var_0 delete();

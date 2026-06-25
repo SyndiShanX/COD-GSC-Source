@@ -207,7 +207,7 @@ func_1353A(var_0, var_1) {
   }
 
   var_2 = 1;
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   for(;;) {
     var_4 = getaiarray("axis");
     var_5 = 0;
@@ -302,8 +302,8 @@ func_288C() {
   scripts\engine\utility::flag_wait("goto_vault_door");
   thread func_288F();
   scripts\engine\utility::flag_wait("selfdestruct_ready");
-  var_1 = getent("selfdestruct_console_trigger", "targetname");
-  var_2 = scripts\engine\utility::getstruct("console_self_destruct", "targetname");
+  var_1 = getEnt("selfdestruct_console_trigger", "targetname");
+  var_2 = scripts\engine\utility::getStruct("console_self_destruct", "targetname");
   var_2 lib_0E46::func_48C4(undefined, undefined, undefined, undefined, 5000, 120, 0);
   var_1 waittill("trigger");
   scripts\engine\utility::flag_set("selfdestruct_in_range");
@@ -376,8 +376,8 @@ func_288C() {
 func_10216() {
   scripts\engine\utility::flag_wait("sipes_mount_fspar");
   wait(2.5);
-  var_0 = getent("tram_interact", "script_noteworthy");
-  level.var_EBBB linkto(var_0);
+  var_0 = getEnt("tram_interact", "script_noteworthy");
+  level.var_EBBB linkTo(var_0);
   var_0 scripts\sp\anim::func_1F35(level.var_EBBB, "fspar_boot_intro");
   var_0 thread scripts\sp\anim::func_1EEA(level.var_EBBB, "fspar_boot_idle");
   thread scripts\engine\utility::flag_set_delayed("selfdestruct_anim_done", 1.2);
@@ -403,7 +403,7 @@ func_288E() {
   level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
   level.player.var_E505 hide();
   level.player func_84FE();
-  var_1 = getent("selfdestruct_console", "targetname");
+  var_1 = getEnt("selfdestruct_console", "targetname");
   var_1.var_1FBB = "selfdestruct_console";
   var_1 scripts\sp\anim::func_F64A();
   scripts\engine\utility::flag_set("tram_move");
@@ -948,7 +948,7 @@ trigger_on_when_tram_is_clear() {
 }
 
 is_tram_in_c12_room() {
-  var_0 = getent("c12_room_middle", "targetname");
+  var_0 = getEnt("c12_room_middle", "targetname");
   if(isDefined(level.var_11B30)) {
     return level.var_11B30.var_32D9 istouching(var_0);
   }
@@ -960,7 +960,7 @@ func_35B4() {
   var_1 = gettime() + var_0 * 1000;
   var_2 = 0;
   var_3 = 20;
-  var_4 = scripts\engine\utility::getstruct("c12_lookat", "targetname");
+  var_4 = scripts\engine\utility::getStruct("c12_lookat", "targetname");
   wait(7);
   while(gettime() < var_1) {
     var_5 = distance2dsquared(level.player.origin, var_4.origin) < squared(750);
@@ -986,9 +986,9 @@ func_35B4() {
 }
 
 func_D284(var_0) {
-  var_1 = scripts\engine\utility::getstruct("c12_lookat", "targetname");
+  var_1 = scripts\engine\utility::getStruct("c12_lookat", "targetname");
   var_2 = 0.88;
-  var_3 = vectornormalize(var_1.origin - level.player getEye());
+  var_3 = vectorNormalize(var_1.origin - level.player getEye());
   var_4 = level.player getplayerangles();
   var_5 = anglesToForward(var_4);
   var_6 = 0;
@@ -1024,7 +1024,7 @@ c12_player_exposed_think(var_0) {
     }
 
     level.player_exposed_trigger_count++;
-    var_2 = scripts\engine\utility::getstruct(self.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(self.target, "targetname");
     var_1 lib_0A05::func_3551(0);
     var_1.objective_playermask_showto = var_2.fgetarg;
     var_1 give_mp_super_weapon(getclosestpointonnavmesh(var_2.origin, var_1));
@@ -1188,7 +1188,7 @@ func_E6D1() {
   physics_setgravity((0, 0, -386.09));
   level.player func_8251((0, 0, 0));
   var_0 = 0.25;
-  level.player.var_8632 rotateto((0, 0, 0), var_0, var_0);
+  level.player.var_8632 rotateTo((0, 0, 0), var_0, var_0);
   screenshake(level.player.origin, 5, 1, 1, 1, 0, 1, 5000, 3, 2, 0);
 }
 
@@ -1644,7 +1644,7 @@ func_7398(var_0) {
 }
 
 func_8EAA() {
-  level.var_11B30 = getent("tram_brushmodel", "targetname");
+  level.var_11B30 = getEnt("tram_brushmodel", "targetname");
   level.var_11B30.var_6664 = getEntArray(level.var_11B30.target, "targetname");
   foreach(var_1 in level.var_11B30.var_6664) {
     if(var_1.classname == "script_model") {
@@ -1658,13 +1658,13 @@ func_11B3F() {
     return;
   }
 
-  level.var_11B30 = getent("tram_brushmodel", "targetname");
+  level.var_11B30 = getEnt("tram_brushmodel", "targetname");
   level.var_11B30.var_BCD2 = -400;
   level.var_11B30.var_6664 = getEntArray(level.var_11B30.target, "targetname");
   level.var_11B30.var_2AA2 = undefined;
   var_0 = getEntArray(level.var_11B30.target, "targetname");
   foreach(var_2 in var_0) {
-    var_2 linkto(level.var_11B30);
+    var_2 linkTo(level.var_11B30);
     if(var_2.model == "large_steel_dragon_transport_frame_01") {
       level.var_11B30.var_2AA2 = var_2;
       playFXOnTag(scripts\engine\utility::getfx("vfx_eu_base_hoverrail_distort"), var_0[0], "tag_origin");
@@ -1692,14 +1692,14 @@ func_11B3F() {
     }
   }
 
-  level.var_11B30.var_BE67 = getent("tram_nav_clip", "targetname");
+  level.var_11B30.var_BE67 = getEnt("tram_nav_clip", "targetname");
   level.var_11B30.var_BE67 connectpaths();
-  level.var_11B30.var_BE67 linkto(level.var_11B30);
-  var_4 = scripts\engine\utility::getstruct("steel_dragon_gun_flash", "targetname");
+  level.var_11B30.var_BE67 linkTo(level.var_11B30);
+  var_4 = scripts\engine\utility::getStruct("steel_dragon_gun_flash", "targetname");
   level.var_11B30.var_113F2 = spawn("script_model", var_4.origin);
   level.var_11B30.var_113F2.angles = var_4.angles;
   level.var_11B30.var_113F2 setModel("tag_flash");
-  level.var_11B30.var_113F2 linkto(level.var_11B30);
+  level.var_11B30.var_113F2 linkTo(level.var_11B30);
   var_5 = scripts\engine\utility::getStructArray(level.var_11B30.target, "targetname");
   level.var_11B30.var_C058 = [];
   foreach(var_7 in var_5) {
@@ -1708,7 +1708,7 @@ func_11B3F() {
     level.var_11B30.var_C058[level.var_11B30.var_C058.size] = var_7;
   }
 
-  var_9 = scripts\engine\utility::getstruct("tram_move_start", "targetname");
+  var_9 = scripts\engine\utility::getStruct("tram_move_start", "targetname");
   var_10 = var_9;
   for(;;) {
     if(isDefined(var_9.var_EDA0)) {
@@ -1723,7 +1723,7 @@ func_11B3F() {
       break;
     }
 
-    var_9 = scripts\engine\utility::getstruct(var_9.target, "targetname");
+    var_9 = scripts\engine\utility::getStruct(var_9.target, "targetname");
   }
 
   level.var_11B30 thread func_11B45(var_10);
@@ -1751,12 +1751,12 @@ func_12863(var_0) {
 }
 
 func_496D(var_0) {
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_2 = spawn("script_origin", var_1.origin);
   var_2.angles = var_1.angles;
-  var_2 linkto(level.var_11B30);
+  var_2 linkTo(level.var_11B30);
   var_3 = spawn("script_origin", var_0.origin);
-  var_3 linkto(level.var_11B30);
+  var_3 linkTo(level.var_11B30);
   var_2.var_22E8 = var_3;
   var_2.animation = var_1.animation;
   return var_2;
@@ -1793,7 +1793,7 @@ func_11B45(var_0) {
       }
     }
 
-    var_4 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_4 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_0 scripts\sp\utility::script_delay();
     if(isDefined(var_0.var_EDA0)) {
       if(!scripts\engine\utility::flag(var_0.var_EDA0)) {
@@ -1819,7 +1819,7 @@ func_11B45(var_0) {
   }
 
   self notify("stop_moving");
-  self.var_BE67 disconnectpaths();
+  self.var_BE67 disconnectPaths();
   scripts\engine\utility::flag_set("fspar_ready");
   self stoploopsound("europa_armory_fspar_tram_lp");
 }
@@ -1886,14 +1886,14 @@ func_11B39(var_0, var_1, var_2) {
     func_11B4F(var_2);
   }
 
-  self.missionfailed = vectornormalize(var_0.origin - var_1.origin);
+  self.missionfailed = vectorNormalize(var_0.origin - var_1.origin);
   var_6 = distance(self.var_4C18, var_0.origin);
   var_7 = self.angles;
   while(!func_11B4A(var_1, var_0)) {
     var_8 = func_7C96();
     if(self.var_5F75) {
       var_9 = self.var_4C18 + self.missionfailed * self.var_BCD2;
-      if(vectordot(self.missionfailed, vectornormalize(level.player.origin - var_9)) > 0) {
+      if(vectordot(self.missionfailed, vectorNormalize(level.player.origin - var_9)) > 0) {
         var_10 = func_7D15(self.missionfailed, var_9);
         self.getclosestpointonnavmesh3d = self.getclosestpointonnavmesh3d + var_4 * var_8 * var_10;
         func_11B53(var_8);
@@ -1916,7 +1916,7 @@ func_11B39(var_0, var_1, var_2) {
     }
 
     if(var_3) {
-      self moveto(var_11, self.var_11937);
+      self moveTo(var_11, self.var_11937);
     } else {
       self.origin = var_11;
     }
@@ -1971,8 +1971,8 @@ func_11B4A(var_0, var_1) {
     return 1;
   }
 
-  var_3 = vectornormalize(var_1.origin - var_0.origin);
-  if(vectordot(var_3, vectornormalize(self.var_4C18 - var_1.origin)) > 0) {
+  var_3 = vectorNormalize(var_1.origin - var_0.origin);
+  if(vectordot(var_3, vectorNormalize(self.var_4C18 - var_1.origin)) > 0) {
     return 1;
   }
 
@@ -1996,14 +1996,14 @@ func_11B3E() {
     var_11 = randomfloatrange(var_7, var_8);
     var_12 = var_0 + (var_9, var_10, var_11);
     var_13 = randomfloatrange(var_1, var_2);
-    self.var_90DF moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    self.var_90DF moveTo(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
     wait(var_13);
     var_9 = randomfloatrange(var_3, var_4);
     var_10 = randomfloatrange(var_5, var_6);
     var_11 = randomfloatrange(var_7, var_8) * -1;
     var_12 = var_0 + (var_9, var_10, var_11);
     var_13 = randomfloatrange(var_1, var_2);
-    self.var_90DF moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    self.var_90DF moveTo(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
     wait(var_13);
   }
 }
@@ -2055,7 +2055,7 @@ func_11B48() {
 }
 
 func_79B2(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct("farplane_cap", "targetname");
+  var_2 = scripts\engine\utility::getStruct("farplane_cap", "targetname");
   var_3 = self.origin + var_0 * var_1;
   for(;;) {
     if(!scripts\engine\utility::flag(var_2.var_EDA0)) {
@@ -2067,11 +2067,11 @@ func_79B2(var_0, var_1) {
       break;
     }
 
-    var_2 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   }
 
   if(isDefined(var_2)) {
-    if(vectordot(var_0, vectornormalize(var_3 - var_2.origin)) > 0) {
+    if(vectordot(var_0, vectorNormalize(var_3 - var_2.origin)) > 0) {
       var_3 = var_2.origin;
     }
   }
@@ -2087,7 +2087,7 @@ func_11B47() {
     self.var_BE67 connectpaths();
     var_0 = self.var_4C18;
     wait(0.1);
-    self.var_BE67 disconnectpaths();
+    self.var_BE67 disconnectPaths();
     while(var_0 == self.var_4C18) {
       wait(0.05);
     }
@@ -2110,7 +2110,7 @@ func_11B3C(var_0) {
   for(;;) {
     var_8 = level.var_11B30.var_4C18 + var_6 * var_7;
     if(var_5) {
-      while(vectordot(var_6, vectornormalize(var_1.origin - var_8)) < 0) {
+      while(vectordot(var_6, vectorNormalize(var_1.origin - var_8)) < 0) {
         var_9 = getnodearray(var_1.target, "targetname");
         var_2 = var_1;
         var_1 = scripts\engine\utility::random(var_9);
@@ -2120,7 +2120,7 @@ func_11B3C(var_0) {
       var_1 = var_2;
     }
 
-    if(vectordot(var_6, vectornormalize(var_1.origin - var_8)) < 0) {
+    if(vectordot(var_6, vectorNormalize(var_1.origin - var_8)) < 0) {
       if(!isDefined(var_1.target)) {
         break;
       }
@@ -2165,7 +2165,7 @@ func_11B4C() {
 }
 
 func_11B3B() {
-  var_0 = getent("tram_out_volume", "targetname");
+  var_0 = getEnt("tram_out_volume", "targetname");
   for(;;) {
     wait(0.1);
     var_1 = getaiarray("bad_guys");
@@ -2251,7 +2251,7 @@ func_6474() {
 }
 
 func_A5D9() {
-  var_0 = getent("enemy_flee_volume", "targetname");
+  var_0 = getEnt("enemy_flee_volume", "targetname");
   for(;;) {
     wait(0.05);
     var_1 = getaiarray("axis");
@@ -2290,8 +2290,8 @@ func_F3DB(var_0, var_1) {
     var_1 = 32;
   }
 
-  var_2 = scripts\engine\utility::getstruct(var_0, "targetname");
-  var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_0, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   var_4 = pointonsegmentnearesttopoint(var_2.origin, var_3.origin, self.origin);
   var_4 = scripts\engine\utility::drop_to_ground(var_4, 10, -200);
   self.objective_playermask_showto = var_1;
@@ -2312,7 +2312,7 @@ func_652C() {
     return;
   }
 
-  var_0 = getent("enemy_fallback_room1", "targetname");
+  var_0 = getEnt("enemy_fallback_room1", "targetname");
   if(isDefined(self.var_91EF)) {
     self notify("stop_hunt");
     self give_mp_super_weapon(self.origin);
@@ -2320,7 +2320,7 @@ func_652C() {
 
   self func_82F1(var_0);
   scripts\engine\utility::flag_wait("start_fallback");
-  var_0 = getent("c12_backhalf", "targetname");
+  var_0 = getEnt("c12_backhalf", "targetname");
   wait(randomfloat(1));
   self func_82F1(var_0);
 }
@@ -2483,7 +2483,7 @@ func_5530() {
 func_FED5(var_0) {
   level.player stoprumble("steady_rumble");
   earthquake(0.75, 0.65, level.player.origin, 500);
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   level.player viewkick(25, level.player getEye(), 0);
 }
 
@@ -2646,7 +2646,7 @@ func_137E6(var_0) {
 
 func_D294() {
   level.player endon("death");
-  var_0 = getent("tram_interact", "script_noteworthy");
+  var_0 = getEnt("tram_interact", "script_noteworthy");
   var_1 = scripts\sp\utility::func_10639("player_rig", var_0.origin + (0, 0, 500));
   var_1 hide();
   var_0 scripts\sp\anim::func_1EC3(var_1, "fspar_fire");
@@ -2692,7 +2692,7 @@ func_7468(var_0, var_1, var_2) {
   playFX(scripts\engine\utility::getfx("vfx_eu_bfg_chargeup"), level.var_11B30.var_113F2.origin, anglesToForward(level.var_11B30.var_113F2.angles), anglestoup(level.var_11B30.var_113F2.angles));
   wait(2.5);
   var_4 = var_3.origin + (0, 0, 90);
-  var_5 = vectornormalize(var_4 - level.var_11B30.var_113F2.origin);
+  var_5 = vectorNormalize(var_4 - level.var_11B30.var_113F2.origin);
   var_6 = vectortoangles(var_5);
   level.var_11B30.var_113F2 unlink();
   level.var_11B30.var_113F2.angles = var_6;
@@ -2738,7 +2738,7 @@ func_7459(var_0, var_1, var_2) {
   level endon("removing_mons_cannon");
   var_3 = "tag_flash";
   self.var_38D7 = spawn("script_origin", self.origin);
-  self.var_38D7 linkto(self);
+  self.var_38D7 linkTo(self);
   self.var_38D7 thread func_BA6B();
   if(var_0 > 0) {
     var_4 = gettime();
@@ -2824,7 +2824,7 @@ func_21DA() {
 }
 
 func_111B4() {
-  var_0 = scripts\engine\utility::getstruct("door_sound_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("door_sound_struct", "targetname");
   var_1 = var_0.origin + (0, 0, 60);
   setsaveddvar("r_mbenable", 1);
   setsaveddvar("r_mbRadialOverridePosition", var_1);
@@ -2852,7 +2852,7 @@ func_4F99() {
 func_224B() {
   level thread scripts\engine\utility::play_sound_in_space("scn_europa_window_explosion", (30584, -11739, -298));
   level.var_4FB4 = scripts\engine\utility::play_loopsound_in_space("scn_end_suck_out_door_wind_lr", level.player.origin);
-  level.var_4FB4 linkto(level.player);
+  level.var_4FB4 linkTo(level.player);
   level.player playSound("scn_end_suck_out_room_debris_lr");
   wait(4);
 }
@@ -2864,7 +2864,7 @@ func_224E() {
   playworldsound("scn_euro_guy_impacts_plr_lr", level.player.origin);
   scripts\engine\utility::flag_wait("decompress_blackout");
   thread func_224F();
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 func_224F() {
@@ -2933,7 +2933,7 @@ func_A9E0() {
 }
 
 func_A9E3() {
-  var_0 = scripts\engine\utility::getstruct("lastroom_destruction_train", "targetname");
+  var_0 = scripts\engine\utility::getStruct("lastroom_destruction_train", "targetname");
   var_0.script_fxid = "fireball_med_bridge";
   var_1 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_1.fx = var_0.script_fxid;
@@ -2949,9 +2949,9 @@ func_A9E3() {
     }
 
     var_1.angles = var_0.angles;
-    var_0 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_3 = distance(var_1.origin, var_0.origin) / var_2;
-    var_1 moveto(var_0.origin, var_3);
+    var_1 moveTo(var_0.origin, var_3);
     var_1 waittill("movedone");
     if(isDefined(var_0.getclosestpointonnavmesh3d)) {
       var_2 = var_0.getclosestpointonnavmesh3d;
@@ -2983,16 +2983,16 @@ func_A9E1() {
 }
 
 func_4FAC() {
-  var_0 = scripts\engine\utility::getstruct("decompress_start", "targetname");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
-  var_2 = vectornormalize(var_1.origin - var_0.origin);
+  var_0 = scripts\engine\utility::getStruct("decompress_start", "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
+  var_2 = vectorNormalize(var_1.origin - var_0.origin);
   var_3 = spawn("script_origin", var_0.origin);
   var_3.angles = var_0.angles;
   scripts\sp\utility::func_16AE(var_3, "decompress");
   var_4 = 1100;
   var_5 = distance(var_1.origin, var_3.origin);
   var_6 = var_5 / var_4;
-  var_3 moveto(var_1.origin, var_6);
+  var_3 moveTo(var_1.origin, var_6);
   var_7 = [level.player, level.var_EBBB, level.var_EBBC];
   var_7 = scripts\engine\utility::array_combine(var_7, getaiarray("axis"));
   var_7 = scripts\sp\utility::func_22B9(var_7);
@@ -3003,7 +3003,7 @@ func_4FAC() {
         continue;
       }
 
-      if(vectordot(var_2, vectornormalize(var_3.origin - var_9.origin)) > 0) {
+      if(vectordot(var_2, vectorNormalize(var_3.origin - var_9.origin)) > 0) {
         var_9.var_4FAE = 1;
         var_9 thread func_4F98();
       }
@@ -3063,23 +3063,23 @@ func_4F8E(var_0) {
   }
 
   var_1 = spawn("script_origin", var_0.origin + (0, 0, 40));
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   var_0.precacheleaderboards = 1;
-  var_2 = scripts\engine\utility::getstruct("decompress_doorway", "targetname");
-  var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct("decompress_doorway", "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
   var_4 = pointonsegmentnearesttopoint(var_2.origin, var_3.origin, var_1.origin);
   if(var_0.unittype == "soldier") {
     var_0 thread scripts\sp\anim::func_1ECC(var_0, "decompress");
   }
 
-  var_5 = vectornormalize(var_4 - var_1.origin);
+  var_5 = vectorNormalize(var_4 - var_1.origin);
   var_6 = 1000;
   var_7 = distance(var_1.origin, var_4) / var_6;
-  var_1 moveto(var_4, var_7, var_7 * 0.25, 0);
+  var_1 moveTo(var_4, var_7, var_7 * 0.25, 0);
   wait(var_7);
   var_8 = var_4 + var_5 * 5000;
   var_7 = 5000 / var_6;
-  var_1 moveto(var_8, var_7);
+  var_1 moveTo(var_8, var_7);
   wait(var_7);
   if(isDefined(var_0)) {
     var_0 delete();
@@ -3094,7 +3094,7 @@ func_4FA7() {
     return;
   }
 
-  var_0 = scripts\sp\maps\europa\europa_util::func_5F32(scripts\engine\utility::getstruct("decompress_anim", "targetname"));
+  var_0 = scripts\sp\maps\europa\europa_util::func_5F32(scripts\engine\utility::getStruct("decompress_anim", "targetname"));
   var_0 scripts\sp\anim::func_1F35(level.var_EBBB, "decompress_intro");
   var_0 thread scripts\sp\anim::func_1EEA(level.var_EBBB, "decompress_loop");
   var_0 notify("stop_loop");
@@ -3148,17 +3148,17 @@ func_4FB1() {
 }
 
 func_4FA4() {
-  var_0 = scripts\sp\maps\europa\europa_util::func_5F32(scripts\engine\utility::getstruct("decompress_anim", "targetname"));
+  var_0 = scripts\sp\maps\europa\europa_util::func_5F32(scripts\engine\utility::getStruct("decompress_anim", "targetname"));
   var_1 = 10;
   var_2 = 485;
   var_3 = var_1;
   var_4 = 1;
-  level.player.var_8632 rotateto((0, 0, 0), var_4, var_4 * 0.5, var_4 * 0.5);
+  level.player.var_8632 rotateTo((0, 0, 0), var_4, var_4 * 0.5, var_4 * 0.5);
   var_5 = var_4 * 20;
   var_6 = var_2 - var_1 / var_5;
   for(var_7 = 0; var_7 < var_5; var_7++) {
     var_3 = var_3 + var_6;
-    var_8 = vectornormalize(var_0.origin - level.player.origin) * var_3;
+    var_8 = vectorNormalize(var_0.origin - level.player.origin) * var_3;
     level.player setvelocity(var_8);
     wait(0.05);
   }
@@ -3200,7 +3200,7 @@ func_4FA3() {
       }
 
       var_7 = scripts\engine\utility::drop_to_ground(var_7, 10, -1000);
-      var_8 = vectornormalize(var_7 - level.player.origin) * 800;
+      var_8 = vectorNormalize(var_7 - level.player.origin) * 800;
       level.player.var_102E8 moveslide((0, 0, 15), 15, var_8);
       var_9 = vectortoangles(var_4 - level.player.origin);
       var_10 = angleclamp180(var_9[1] - level.player.var_102E8.angles[1]) * 0.15;
@@ -3251,7 +3251,7 @@ func_95A3() {
         break;
       }
 
-      var_5 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_5.target, "targetname");
     }
 
     var_3.var_D648 = var_4;
@@ -3282,7 +3282,7 @@ func_48CA(var_0) {
 }
 
 func_48EC(var_0) {
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_2 = isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "main_path";
   var_3 = undefined;
   if(var_2) {
@@ -3370,7 +3370,7 @@ func_7AB3(var_0, var_1) {
 
     var_7 = distance(var_3, var_2.var_BF2E.origin);
     if(var_7 > var_4) {
-      var_8 = vectornormalize(var_2.var_BF2E.origin - var_2.origin);
+      var_8 = vectorNormalize(var_2.var_BF2E.origin - var_2.origin);
       var_5 = var_3 + var_8 * var_4;
       break;
     } else {
@@ -3429,7 +3429,7 @@ func_4F9F() {
   level.player.var_E505 hide();
   level.player.var_E505.angles = level.player.angles;
   var_2 = level.player.var_E505 scripts\sp\utility::func_7DC1(var_1);
-  var_3 = scripts\engine\utility::getstruct("decompress_anim", "targetname");
+  var_3 = scripts\engine\utility::getStruct("decompress_anim", "targetname");
   var_4 = getstartorigin(var_3.origin, var_3.angles, var_2);
   var_5 = getstartangles(var_3.origin, var_3.angles, var_2);
   var_6 = var_4;
@@ -3443,16 +3443,16 @@ func_4F9F() {
   level.player playSound("scn_europa_decompression_suck");
   var_7 = distance(level.player.var_E505.origin, var_6);
   var_8 = func_E769(var_7 / var_0);
-  var_9 = scripts\engine\utility::getstruct("decompress_angles", "targetname");
+  var_9 = scripts\engine\utility::getStruct("decompress_angles", "targetname");
   level.player.var_E505 thread func_4FA2(var_6, var_8, var_8 * 0.5);
   var_5 = (0, var_5[1], var_5[2]);
-  level.player.var_E505 rotateto(var_5, var_8 * 0.5, var_8 * 0.25);
+  level.player.var_E505 rotateTo(var_5, var_8 * 0.5, var_8 * 0.25);
   wait(var_8 - 0.2);
   var_10 = scripts\sp\utility::func_10639("player_rig");
   var_10 hide();
   level.player.var_E505 notify("stop_decompress_loop");
   scripts\engine\utility::flag_set("player_holding_on");
-  level.var_EBBB scripts\sp\utility::anim_stopanimscripted();
+  level.var_EBBB scripts\sp\utility::anim_stopanimScripted();
   var_11 = [var_10, level.var_EBBB];
   level.player.var_E505 delete();
   thread func_4FA0(var_10);
@@ -3503,7 +3503,7 @@ func_4FA2(var_0, var_1, var_2) {
       var_9 = var_6;
     }
 
-    var_10 = vectornormalize(var_0 - level.player.var_E505.origin);
+    var_10 = vectorNormalize(var_0 - level.player.var_E505.origin);
     var_11 = var_9 * var_3;
     level.player.var_E505.origin = level.player.var_E505.origin + var_10 * var_11;
     wait(var_3);
@@ -3545,7 +3545,7 @@ func_4FA5(var_0, var_1) {
   }
 
   var_3 = var_1 - gettime() * 0.001;
-  level.player.var_E505 rotateto(var_0.angles, var_3, var_3);
+  level.player.var_E505 rotateTo(var_0.angles, var_3, var_3);
 }
 
 func_4F97() {
@@ -3556,8 +3556,8 @@ func_4F97() {
 }
 
 func_4F96() {
-  self.clip = getent(self.target, "targetname");
-  var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+  self.clip = getEnt(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
   var_1 = self.getclosestpointonnavmesh3d;
   var_2 = undefined;
   var_3 = undefined;
@@ -3566,32 +3566,32 @@ func_4F96() {
     var_5 = var_4 / var_1;
     if(isDefined(var_0.var_EED2)) {
       var_2 = 1;
-      self moveto(var_0.origin, var_5, 0, var_5);
-      self rotateto(var_0.angles, var_5, 0, var_5);
+      self moveTo(var_0.origin, var_5, 0, var_5);
+      self rotateTo(var_0.angles, var_5, 0, var_5);
     } else if(isDefined(var_2)) {
       var_2 = undefined;
-      self moveto(var_0.origin, var_5, var_5, 0);
-      self rotateto(var_0.angles, var_5, var_5, 0);
+      self moveTo(var_0.origin, var_5, var_5, 0);
+      self rotateTo(var_0.angles, var_5, var_5, 0);
     } else {
-      self moveto(var_0.origin, var_5);
-      self rotateto(var_0.angles, var_5);
+      self moveTo(var_0.origin, var_5);
+      self rotateTo(var_0.angles, var_5);
     }
 
     wait(var_5);
     if(!isDefined(var_0.target)) {
-      var_6 = vectornormalize(var_0.origin - var_3.origin);
+      var_6 = vectorNormalize(var_0.origin - var_3.origin);
       var_7 = self.origin + var_6 * 10000;
       var_8 = var_0.angles - var_3.angles;
       break;
     }
 
     var_3 = var_0;
-    var_0 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   }
 
   var_4 = distance(self.origin, var_7);
   var_5 = var_4 / var_1;
-  self moveto(var_7, var_5 * 0.5);
+  self moveTo(var_7, var_5 * 0.5);
   self rotatevelocity(var_8, 50);
   wait(var_5);
   self delete();
@@ -3725,11 +3725,11 @@ func_59B8(var_0) {
     var_1 = self.var_EEE5;
   }
 
-  var_2 = scripts\engine\utility::getstruct(self.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(self.target, "targetname");
   self.var_C390 = self.origin;
-  self.var_BE67 = getent(self.target, "targetname");
+  self.var_BE67 = getEnt(self.target, "targetname");
   if(isDefined(self.var_BE67)) {
-    self.var_BE67 linkto(self);
+    self.var_BE67 linkTo(self);
   }
 
   thread func_59B4(var_2);
@@ -3737,17 +3737,17 @@ func_59B8(var_0) {
   var_4 = distance(var_2.origin, self.origin);
   var_5 = var_3 / var_4;
   var_6 = var_1 * var_5;
-  var_7 = vectornormalize(var_2.origin - self.origin);
+  var_7 = vectorNormalize(var_2.origin - self.origin);
   var_8 = self.origin + var_7 * var_3;
   if(var_0 == 0) {
     thread func_59EA();
   }
 
-  self moveto(var_8, var_6, var_6 * 0.1, var_6 * 0.1);
+  self moveTo(var_8, var_6, var_6 * 0.1, var_6 * 0.1);
   self waittill("movedone");
   wait(0.2);
   var_1 = var_1 - var_6;
-  self moveto(var_2.origin, var_1, var_1 * 0.1, var_1 * 0.1);
+  self moveTo(var_2.origin, var_1, var_1 * 0.1, var_1 * 0.1);
   self waittill("movedone");
   self.var_11083 = 1;
 }
@@ -3785,7 +3785,7 @@ func_59EA() {
 
 func_5986() {
   var_0 = 5;
-  self moveto(self.var_C390, var_0, var_0 * 0.1, var_0 * 0.1);
+  self moveTo(self.var_C390, var_0, var_0 * 0.1, var_0 * 0.1);
   self waittill("movedone");
   if(isDefined(self.var_BE67)) {
     self.var_BE67 connectpaths();
@@ -3804,7 +3804,7 @@ func_59B4(var_0) {
   if(isDefined(self.var_BE67)) {
     while(!isDefined(self.var_11083)) {
       wait(0.1);
-      self.var_BE67 disconnectpaths();
+      self.var_BE67 disconnectPaths();
       wait(1);
       self.var_BE67 connectpaths();
     }

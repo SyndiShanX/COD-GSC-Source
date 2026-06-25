@@ -29,11 +29,11 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("clip512x512x8", "targetname");
+  var_0 = getEnt("clip512x512x8", "targetname");
   var_1 = spawn("script_model", (-43104, 296, 512));
   var_1.angles = (0, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("clip512x512x8", "targetname");
+  var_2 = getEnt("clip512x512x8", "targetname");
   var_3 = spawn("script_model", (-43104, 808, 512));
   var_3.angles = (0, 0, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
@@ -59,86 +59,86 @@ fix_collision() {
   var_9.fgetarg = 128;
   var_9.height = 64;
   thread killtriggerloop(var_9);
-  var_10 = getent("player32x32x8", "targetname");
+  var_10 = getEnt("player32x32x8", "targetname");
   var_11 = spawn("script_model", (-40556, -288, 294));
   var_11.angles = (290, 0, 0);
   var_11 clonebrushmodeltoscriptmodel(var_10);
   var_12 = spawn("script_model", (-39772, 398, 44));
   var_12.angles = (70, 270, 90);
   var_12 setModel("mp_breakneck_missile_patch_01");
-  var_13 = getent("player32x32x256", "targetname");
+  var_13 = getEnt("player32x32x256", "targetname");
   var_14 = spawn("script_model", (-39288, 1136, 448));
   var_14.angles = (0, 45, 0);
   var_14 clonebrushmodeltoscriptmodel(var_13);
-  var_15 = getent("player32x32x256", "targetname");
+  var_15 = getEnt("player32x32x256", "targetname");
   var_10 = spawn("script_model", (-37816, 84, 288));
   var_10.angles = (0, 0, 10);
   var_10 clonebrushmodeltoscriptmodel(var_15);
-  var_11 = getent("player32x32x8", "targetname");
+  var_11 = getEnt("player32x32x8", "targetname");
   var_12 = spawn("script_model", (-40188, -1052, 324));
   var_12.angles = (0, 0, 75);
   var_12 clonebrushmodeltoscriptmodel(var_11);
-  var_13 = getent("clip512x512x8", "targetname");
+  var_13 = getEnt("clip512x512x8", "targetname");
   var_14 = spawn("script_model", (-40656, -1020, -180));
   var_14.angles = (0, 0, 90);
   var_14 clonebrushmodeltoscriptmodel(var_13);
-  var_15 = getent("clip256x256x8", "targetname");
+  var_15 = getEnt("clip256x256x8", "targetname");
   var_16 = spawn("script_model", (-40272, -1020, -52));
   var_16.angles = (0, 0, 90);
   var_16 clonebrushmodeltoscriptmodel(var_15);
-  var_17 = getent("clip32x32x256", "targetname");
+  var_17 = getEnt("clip32x32x256", "targetname");
   var_18 = spawn("script_model", (-39184, -1004, 60));
   var_18.angles = (42, 90, 90);
   var_18 clonebrushmodeltoscriptmodel(var_17);
-  var_19 = getent("clip32x32x128", "targetname");
+  var_19 = getEnt("clip32x32x128", "targetname");
   var_1A = spawn("script_model", (-38952, -1004, 60));
   var_1A.angles = (42, 90, 90);
   var_1A clonebrushmodeltoscriptmodel(var_19);
-  var_1B = getent("player32x32x8", "targetname");
+  var_1B = getEnt("player32x32x8", "targetname");
   var_1C = spawn("script_model", (-41560, 832, 360));
   var_1C.angles = (285, 0, 0);
   var_1C clonebrushmodeltoscriptmodel(var_1B);
-  var_1D = getent("player32x32x8", "targetname");
+  var_1D = getEnt("player32x32x8", "targetname");
   var_1E = spawn("script_model", (-38656, -820, 112));
   var_1E.angles = (285, 123, 0);
   var_1E clonebrushmodeltoscriptmodel(var_1D);
-  var_1F = getent("player32x32x8", "targetname");
+  var_1F = getEnt("player32x32x8", "targetname");
   var_20 = spawn("script_model", (-39596, 1554, 98));
   var_20.angles = (285, 75, 0);
   var_20 clonebrushmodeltoscriptmodel(var_1F);
-  var_21 = getent("player256x256x8", "targetname");
+  var_21 = getEnt("player256x256x8", "targetname");
   var_22 = spawn("script_model", (-42360, 832, 376));
   var_22.angles = (0, 0, 90);
   var_22 clonebrushmodeltoscriptmodel(var_21);
-  var_23 = getent("clip64x64x256", "targetname");
+  var_23 = getEnt("clip64x64x256", "targetname");
   var_24 = spawn("script_model", (-41840, 880, -160));
   var_24.angles = (0, 0, 0);
   var_24 clonebrushmodeltoscriptmodel(var_23);
-  var_25 = getent("player512x512x8", "targetname");
+  var_25 = getEnt("player512x512x8", "targetname");
   var_26 = spawn("script_model", (-41352, 1224, -112));
   var_26.angles = (90, 0, 0);
   var_26 clonebrushmodeltoscriptmodel(var_25);
-  var_27 = getent("player512x512x8", "targetname");
+  var_27 = getEnt("player512x512x8", "targetname");
   var_28 = spawn("script_model", (-41096, 1488, -112));
   var_28.angles = (0, 0, 90);
   var_28 clonebrushmodeltoscriptmodel(var_27);
-  var_29 = getent("clip64x64x256", "targetname");
+  var_29 = getEnt("clip64x64x256", "targetname");
   var_2A = spawn("script_model", (-38732, 1632, 144));
   var_2A.angles = (30, 270, 90);
   var_2A clonebrushmodeltoscriptmodel(var_29);
-  var_2B = getent("player128x128x256", "targetname");
+  var_2B = getEnt("player128x128x256", "targetname");
   var_2C = spawn("script_model", (-37888, 136, 300));
   var_2C.angles = (0, 0, 0);
   var_2C clonebrushmodeltoscriptmodel(var_2B);
-  var_2D = getent("player128x128x256", "targetname");
+  var_2D = getEnt("player128x128x256", "targetname");
   var_2E = spawn("script_model", (-37888, 136, 556));
   var_2E.angles = (0, 0, 0);
   var_2E clonebrushmodeltoscriptmodel(var_2D);
-  var_2F = getent("player256x256x8", "targetname");
+  var_2F = getEnt("player256x256x8", "targetname");
   var_30 = spawn("script_model", (-40264, -920, 424));
   var_30.angles = (90, 0, 0);
   var_30 clonebrushmodeltoscriptmodel(var_2F);
-  var_31 = getent("player256x256x8", "targetname");
+  var_31 = getEnt("player256x256x8", "targetname");
   var_32 = spawn("script_model", (-40264, -920, 680));
   var_32.angles = (90, 0, 0);
   var_32 clonebrushmodeltoscriptmodel(var_31);
@@ -198,15 +198,15 @@ func_2FBC() {
 
 func_226A() {
   scripts\engine\utility::waitframe();
-  if(isDefined(scripts\engine\utility::getstruct("gunrack_up", "targetname")) && isDefined(scripts\engine\utility::getstruct("gunrack_down", "targetname"))) {
+  if(isDefined(scripts\engine\utility::getStruct("gunrack_up", "targetname")) && isDefined(scripts\engine\utility::getStruct("gunrack_down", "targetname"))) {
     level.var_871A = spawnStruct();
     level.var_871A.var_12F6C = spawnStruct();
-    level.var_871A.var_12F6C.start = scripts\engine\utility::getstruct("gunrack_up", "targetname");
-    level.var_871A.var_12F6C.end = scripts\engine\utility::getstruct(level.var_871A.var_12F6C.start.target, "targetname");
+    level.var_871A.var_12F6C.start = scripts\engine\utility::getStruct("gunrack_up", "targetname");
+    level.var_871A.var_12F6C.end = scripts\engine\utility::getStruct(level.var_871A.var_12F6C.start.target, "targetname");
     level.var_871A.var_12F6C.var_871C = func_226B(level.var_871A.var_12F6C.start.origin, 1);
     level.var_871A.var_5AF4 = spawnStruct();
-    level.var_871A.var_5AF4.start = scripts\engine\utility::getstruct("gunrack_down", "targetname");
-    level.var_871A.var_5AF4.end = scripts\engine\utility::getstruct(level.var_871A.var_5AF4.start.target, "targetname");
+    level.var_871A.var_5AF4.start = scripts\engine\utility::getStruct("gunrack_down", "targetname");
+    level.var_871A.var_5AF4.end = scripts\engine\utility::getStruct(level.var_871A.var_5AF4.start.target, "targetname");
     level.var_871A.var_5AF4.var_871C = func_226B(level.var_871A.var_5AF4.start.origin, 0);
     level.var_871A.var_12F6C thread func_2268();
     level.var_871A.var_5AF4 thread func_2268();
@@ -236,7 +236,7 @@ func_226B(var_0, var_1) {
       var_3.var_870F.offsets["weapon_vr_rifle_wm"] = (15.5, 4.8, 2.3);
     }
 
-    var_3.var_870F linkto(var_3);
+    var_3.var_870F linkTo(var_3);
     var_3.origin = var_0;
     var_2[var_2.size] = var_3;
     if(var_2.size == 10) {
@@ -268,8 +268,8 @@ func_2269(var_0) {
       var_0.var_870F.origin = var_0.origin;
     }
 
-    var_0.var_870F linkto(var_0);
-    var_0 moveto(self.end.origin, 80);
+    var_0.var_870F linkTo(var_0);
+    var_0 moveTo(self.end.origin, 80);
     var_0 waittill("movedone");
   }
 }
@@ -281,7 +281,7 @@ func_FA92() {
 
 func_FA94() {
   if(!isDefined(game["roundsPlayed"])) {
-    level.var_2B2F.var_DAE3 = scripts\engine\utility::getstruct("breakneck_blackhole_target_loc", "script_noteworthy");
+    level.var_2B2F.var_DAE3 = scripts\engine\utility::getStruct("breakneck_blackhole_target_loc", "script_noteworthy");
     level.var_2B2F.var_DAE5 = func_FA93(scripts\engine\utility::getStructArray("breakneck_blackhole_spawn_loc", "script_noteworthy"));
     level.var_2B2F.var_DAE4 = getEntArray("breakneck_blackhole_pull", "targetname");
     if(isDefined(level.var_2B2F.var_DAE3)) {
@@ -335,7 +335,7 @@ func_139AE() {
   for(;;) {
     self.angles = (scripts\engine\utility::cointoss() * randomint(360), scripts\engine\utility::cointoss() * randomint(360), scripts\engine\utility::cointoss() * randomint(360));
     self setModel(scripts\engine\utility::random(level.var_2B31));
-    self moveto(level.var_2B2F.var_DAE3.origin, 60 + scripts\engine\utility::cointoss() * randomint(15), 0, 0);
+    self moveTo(level.var_2B2F.var_DAE3.origin, 60 + scripts\engine\utility::cointoss() * randomint(15), 0, 0);
     self ghost_killed_update_func((scripts\engine\utility::cointoss() * randomint(360), scripts\engine\utility::cointoss() * randomint(360), scripts\engine\utility::cointoss() * randomint(360)), 30, 0, 0);
     self waittill("movedone");
     wait(15 + scripts\engine\utility::cointoss() * randomint(15));
@@ -372,9 +372,9 @@ func_2B43() {
   var_0 = scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 32), self.angles);
   var_0 show();
   var_1 = vectortoangles(level.var_2B2F.var_DAE3.origin - self.origin);
-  self rotateto(var_1, 1);
+  self rotateTo(var_1, 1);
   wait(1);
-  self moveto(level.var_2B2F.var_DAE3.origin, 60 + scripts\engine\utility::cointoss() * randomint(15), 0, 0);
+  self moveTo(level.var_2B2F.var_DAE3.origin, 60 + scripts\engine\utility::cointoss() * randomint(15), 0, 0);
   wait(0.1);
   playFXOnTag(level._effect["vfx_breakneck_explosion_01"], var_0, "tag_origin");
   self rotatevelocity((var_1[0] / 4, 0, 0), 30);

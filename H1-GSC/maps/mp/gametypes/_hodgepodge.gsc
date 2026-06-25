@@ -817,7 +817,7 @@ rpgonlymodifyplayerdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
       var_6 = (var_6[0], var_6[1], 0.0);
     }
 
-    var_15 = vectornormalize(var_6);
+    var_15 = vectorNormalize(var_6);
     var_16 = var_0 getvelocity();
     var_0 setvelocity(var_16 + var_15 * var_14);
 

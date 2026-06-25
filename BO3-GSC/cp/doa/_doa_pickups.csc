@@ -110,7 +110,7 @@ function function_ee036ce4() {
       yaw = 60;
     }
     yaw = self.angles[1] + yaw;
-    self rotateto((-20 + randomint(40), yaw, -90 + randomint(180)), waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo((-20 + randomint(40), yaw, -90 + randomint(180)), waittime, waittime * 0.5, waittime * 0.5);
     wait(randomfloat(waittime - 0.1));
   }
 }
@@ -137,7 +137,7 @@ function function_6093755a() {
   }
   time = randomfloatrange(3, 7);
   while(isDefined(self)) {
-    self rotateto(self.angles + (0, dir, 0), time);
+    self rotateTo(self.angles + (0, dir, 0), time);
     wait(time);
   }
 }
@@ -204,7 +204,7 @@ function function_6b4a5f81(player) {
     end_pt = self.origin + vectorscale((0, 0, 1), 3000);
   }
   wait(0.016);
-  self moveto(end_pt, 2, 0, 0);
+  self moveTo(end_pt, 2, 0, 0);
   wait(2);
   self delete();
 }
@@ -221,7 +221,7 @@ function function_474724d7(localclientnum, oldval, newval, bnewent, binitialsnap
   newval = newval - 1;
   if(newval > 0) {
     entnum = (newval >> 1) - 1;
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     foreach(guy in players) {
       if(guy getentitynumber() == entnum) {
         player = guy;

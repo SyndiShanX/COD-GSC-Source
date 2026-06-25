@@ -360,7 +360,7 @@ doteleportout(var_0) {
   var_1 = scripts\mp\agents\karatemaster\karatemaster_agent::getenemy();
   var_2 = self._blackboard.teleportspot;
   self dontinterpolate();
-  self setorigin(var_2);
+  self setOrigin(var_2);
   if(isDefined(var_1)) {
     self.angles = (0, vectortoyaw(var_1.origin - self.origin), 0);
   }

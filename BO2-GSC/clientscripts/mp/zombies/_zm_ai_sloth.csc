@@ -51,7 +51,7 @@ sloth_ragdoll_zombie_cb(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
   dir = self.origin - p;
   force = length(dir) * force_mul;
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   launch = (dir[0], dir[1], 0.15);
   launch = vectorscale(launch, force);
   self launchragdoll(launch);
@@ -85,14 +85,14 @@ loop_buildable_fx(localclientnum) {
   level.benches[level.benches.size] = "headchopper_bench";
   level.benches[level.benches.size] = "springpad_bench";
   closest_dist = undefined;
-  closest = getent(localclientnum, level.benches[0], "targetname");
+  closest = getEnt(localclientnum, level.benches[0], "targetname");
 
   if(isDefined(closest)) {
     closest_dist = distancesquared(self.origin, closest.origin);
   }
 
   for(i = 1; i < level.benches.size; i++) {
-    bench = getent(localclientnum, level.benches[i], "targetname");
+    bench = getEnt(localclientnum, level.benches[i], "targetname");
 
     if(isDefined(bench)) {
       dist = distancesquared(self.origin, bench.origin);

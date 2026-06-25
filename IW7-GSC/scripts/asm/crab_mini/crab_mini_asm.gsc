@@ -66,7 +66,7 @@ isanimdone(var_0, var_1, var_2, var_3) {
 }
 
 ismyenemyinfrontofme(var_0, var_1) {
-  var_2 = vectornormalize(var_0.origin - self.origin * (1, 1, 0));
+  var_2 = vectorNormalize(var_0.origin - self.origin * (1, 1, 0));
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
   if(var_4 > var_1) {
@@ -319,7 +319,7 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 
 doteleporthack(var_0, var_1, var_2, var_3) {
   var_6 = self func_8146();
-  self setorigin(var_6, 0);
+  self setOrigin(var_6, 0);
   var_6 = getgroundposition(var_6, 15);
   self.is_traversing = undefined;
   self notify("traverse_end");

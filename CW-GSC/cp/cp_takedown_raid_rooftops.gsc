@@ -49,7 +49,7 @@ function starting(str_skipto) {
   var_1100faeb = struct::get("raid_roof_woods", "targetname");
   level.adler forceteleport(var_fcbd93e0.origin, var_fcbd93e0.angles);
   level.woods forceteleport(var_1100faeb.origin, var_1100faeb.angles);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_5ca6956f = getweapon(#"ar_accurate_t9", "steadyaim", "reflex");
   var_a3379ef0 = getweapon(#"ar_standard_t9", "steadyaim", "reflex");
   level.woods setweapon(var_a3379ef0);
@@ -82,7 +82,7 @@ function main(str_skipto, b_starting) {
     level thread scene::init("scene_tkd_hit2_adler_alley");
     level thread scene::play("scene_tkd_hit2_adler_alley", "gate_closed");
     getactorarray("apt_blindfire_bathroom", "targetname")[0] delete();
-    var_efac709f = getent("player_breach_clip", "targetname");
+    var_efac709f = getEnt("player_breach_clip", "targetname");
     var_efac709f connectpaths();
     var_efac709f delete();
     level battlechatter::function_2ab9360b(1);
@@ -91,7 +91,7 @@ function main(str_skipto, b_starting) {
   level thread savegame::checkpoint_save(1);
   level.woods.script_accuracy = 1;
   level.adler.script_accuracy = 1;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_6097a10b = getspawnerarray("qasim_vault", "targetname");
   var_6097a10b[0] spawner::add_spawn_function(&function_a1d9cae0);
   level thread takedown_tutorial();
@@ -107,7 +107,7 @@ function main(str_skipto, b_starting) {
 }
 
 function takedown_tutorial() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread function_aec55b72();
   level flag::wait_till("flag_takedown_tutorial_player_mantling");
   player val::set(#"takedown_tutorial", "allow_sprint", 0);
@@ -115,7 +115,7 @@ function takedown_tutorial() {
   level thread scene::play("scene_tkd_hit2_apt_takedown_tutorial");
   player playgestureviewmodel(#"hash_320d152af1fadd63", undefined, 1, 1, 0, 1, 1);
   wait 1.25;
-  player stopanimscripted();
+  player stopanimScripted();
   hint_data = [hint_tutorial::function_f0104b5([#"hash_5f8c7ca0a178e810", #"hash_46b1d4bb698b8298"])];
   hint_tutorial::function_4c2d4fc4(#"hash_e67c810a4c45083", #"hash_4f8907e75463e084", undefined, undefined, undefined, undefined, undefined, 1, hint_data);
   hint_tutorial::pause("+melee_zoom;+melee", #"hash_2b84cc72687b168a");
@@ -164,7 +164,7 @@ function function_aec55b72() {
 }
 
 function function_c39dde0e() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.var_d6f941c8 = 1;
   level endon(#"hash_34688d2980137bca");
   player notifyonplayercommand("tutorial_pressed_jump", "+gostand");
@@ -181,7 +181,7 @@ function function_c39dde0e() {
 }
 
 function function_fb0dffdf() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level scene::init("scene_tkd_hit2_roof_chase_enemy_spawn_01");
   level scene::init("scene_tkd_hit2_roof_chase_enemy_spawn_03");
@@ -235,7 +235,7 @@ function function_fb0dffdf() {
 }
 
 function function_4ae05934() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self endon(#"death");
   self endon(#"finished_slide");
   self.health = 999;
@@ -258,7 +258,7 @@ function function_4ae05934() {
 }
 
 function function_5d9afea9() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self endon(#"death");
   self endon(#"finished_slide");
   self.health = 999;
@@ -334,7 +334,7 @@ function function_a1d9cae0() {
 
 function function_8ddafa22(array, trigger, var_cc856f8d, var_c550e48f) {
   if(isDefined(var_cc856f8d)) {
-    var_bb96f34c = getent(var_cc856f8d, "targetname");
+    var_bb96f34c = getEnt(var_cc856f8d, "targetname");
   }
 
   function_1eaaceab(array);
@@ -356,7 +356,7 @@ function function_8ddafa22(array, trigger, var_cc856f8d, var_c550e48f) {
 
 function function_29f2624a(aigroup, trigger, var_cc856f8d, var_c550e48f, delay) {
   if(isDefined(var_cc856f8d)) {
-    var_bb96f34c = getent(var_cc856f8d, "targetname");
+    var_bb96f34c = getEnt(var_cc856f8d, "targetname");
   }
 
   aienemies = getaiarray(aigroup, "script_aigroup");

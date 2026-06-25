@@ -235,11 +235,11 @@ lerp_player_view_to_tag_internal(ent, tag, lerptime, fraction, right_arc, left_a
     return;
   }
   if(isDefined(right_arc)) {
-    self playerlinkto(ent, tag, fraction, right_arc, left_arc, top_arc, bottom_arc);
+    self playerlinkTo(ent, tag, fraction, right_arc, left_arc, top_arc, bottom_arc);
   } else if(isDefined(fraction)) {
-    self playerlinkto(ent, tag, fraction);
+    self playerlinkTo(ent, tag, fraction);
   } else {
-    self playerlinkto(ent);
+    self playerlinkTo(ent);
   }
 }
 
@@ -276,7 +276,7 @@ lerp_player_view_to_moving_tag_oldstyle_internal(ent, tag, lerptime, fraction, r
   if(hit_geo) {
     return;
   }
-  self playerlinkto(ent, tag, fraction, right_arc, left_arc, top_arc, bottom_arc, 0);
+  self playerlinkTo(ent, tag, fraction, right_arc, left_arc, top_arc, bottom_arc, 0);
 }
 
 function_stack_proc(caller, func, param1, param2, param3, param4) {
@@ -559,7 +559,7 @@ exploder_rumble() {
     n_player_dist_squared = distancesquared(a_players[i].origin, self.v["origin"]);
 
     if(n_player_dist_squared < n_rumble_threshold_squared) {
-      a_players[i] playrumbleonentity(self.v["rumble"]);
+      a_players[i] playRumbleOnEntity(self.v["rumble"]);
     }
   }
 }
@@ -613,7 +613,7 @@ trail_effect() {
   } else {
     temp_ent = spawn("script_model", self.model.origin);
     temp_ent setModel("tag_origin");
-    temp_ent linkto(self.model, self.v["trailfxtag"]);
+    temp_ent linkTo(self.model, self.v["trailfxtag"]);
     playFXOnTag(level._effect[self.v["trailfx"]], temp_ent, "tag_origin");
   }
 

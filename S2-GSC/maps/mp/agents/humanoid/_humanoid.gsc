@@ -441,7 +441,7 @@ func_60EA(param_00, param_01, param_02) {
     var_07 = 1;
     var_08 = vectorlerp(self.var_0116, var_05, var_07);
     var_09 = angleslerp(self.var_001D, var_06, var_07);
-    self setorigin(var_08, 0);
+    self setOrigin(var_08, 0);
     self scragentsetorientmode("face angle abs", var_09);
     wait 0.05;
     var_04 = var_04 + 0.05;
@@ -452,7 +452,7 @@ func_6ADB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   self.var_99FC = gettime();
   self.var_99FB = param_09;
   if(isDefined(self.var_0117)) {
-    self.var_29BC = vectornormalize(self.var_0116 - self.var_0117.var_0116);
+    self.var_29BC = vectorNormalize(self.var_0116 - self.var_0117.var_0116);
   }
 
   if(func_8B9D(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09)) {

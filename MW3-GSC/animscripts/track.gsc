@@ -113,10 +113,10 @@ _id_0CB6(var_0) {
     var_1 = self._id_0CB7 getshootatpos();
 
     if(isDefined(self._id_0CB8)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643) {
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643) {
       var_1 = undefined;
     }
   }
@@ -125,10 +125,10 @@ _id_0CB6(var_0) {
     var_1 = self._id_0CB9;
 
     if(isDefined(self._id_0CBA)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643) {
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643) {
       var_1 = undefined;
     }
   }

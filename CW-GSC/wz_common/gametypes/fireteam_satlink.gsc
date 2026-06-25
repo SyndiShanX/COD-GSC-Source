@@ -181,7 +181,7 @@ function function_a893466c() {
             objective_setgamemodeflags(satlink.objectiveid, 0);
           }
 
-          teamplayers = getplayers(satlink.team);
+          teamplayers = getPlayers(satlink.team);
 
           foreach(player in teamplayers) {
             if(is_true(player.var_8c9cccf2)) {
@@ -193,7 +193,7 @@ function function_a893466c() {
         globallogic_score::giveteamscoreforobjective(satlink.team, scoreearned);
 
         if(level.var_97ed7379 === 1) {
-          teammembers = getplayers(satlink.team);
+          teammembers = getPlayers(satlink.team);
 
           foreach(player in teammembers) {
             if(!isPlayer(player)) {
@@ -289,14 +289,14 @@ function function_db7c16c8() {
 
 function function_481bca8a() {
   self.trigger = spawn("trigger_radius", self.origin + (0, 0, 12), 0, 120, 90, 1);
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger triggerenable(1);
   self.trigger callback::on_trigger(&function_bd096dfe);
   self.trigger.satlink = self;
   self.var_b20bc5cc = spawn("trigger_radius", self.origin + (0, 0, 12), 0, 120, 90, 1);
-  self.var_b20bc5cc triggerignoreteam();
+  self.var_b20bc5cc triggerIgnoreTeam();
   self.var_b20bc5cc triggerenable(1);
-  self.var_b20bc5cc sethintstring("SCRIPT/ACTIVATE_SATLINK");
+  self.var_b20bc5cc setHintString("SCRIPT/ACTIVATE_SATLINK");
   self.var_b20bc5cc setinvisibletoall();
   self.var_b20bc5cc callback::on_trigger(&function_75623a73);
   self.var_b20bc5cc.satlink = self;
@@ -606,7 +606,7 @@ function private function_f60cbb01() {
   }
 
   if(self.var_e305235f <= gettime()) {
-    captureteam = getplayers(self.team);
+    captureteam = getPlayers(self.team);
 
     foreach(player in captureteam) {
       if(is_true(player.var_8c9cccf2)) {
@@ -688,7 +688,7 @@ function private function_d9f345c3(activator) {
   self.activator = activator;
   self.var_b20bc5cc setinvisibletoall();
   self.var_b20bc5cc setvisibletoplayer(activator);
-  self.var_b20bc5cc sethintstring(#"");
+  self.var_b20bc5cc setHintString(#"");
   self.model playLoopSound(#"hash_5093c3a0e7047aa", 0.5);
 
   if(isDefined(self.objectiveid)) {
@@ -720,7 +720,7 @@ function private function_50e94589() {
     }
   }
 
-  self.var_b20bc5cc sethintstring("SCRIPT/ACTIVATE_SATLINK");
+  self.var_b20bc5cc setHintString("SCRIPT/ACTIVATE_SATLINK");
   self.var_b20bc5cc setinvisibletoall();
   self.activator = undefined;
   self.model stoploopsound(0.25);
@@ -938,7 +938,7 @@ function private function_962baacc() {
   level endon(#"game_ended");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!is_true(player.var_8c9cccf2) || !isalive(player) || player inlaststand()) {
         continue;
       }

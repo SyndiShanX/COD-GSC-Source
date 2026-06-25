@@ -249,7 +249,7 @@ function function_c28bc3eb(var_9ba84610, set = 1, delay = 0) {
     wait delay;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player showhint(var_9ba84610, set);
   }
 }

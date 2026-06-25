@@ -352,7 +352,7 @@ function function_5efb4f48(localclientnum, str_rumble) {
   delta_time = 0.1;
   n_max_time = 10;
   while(isDefined(self)) {
-    self playrumbleonentity(localclientnum, str_rumble);
+    self playRumbleOnEntity(localclientnum, str_rumble);
     wait(0.1);
   }
 }
@@ -421,7 +421,7 @@ function function_1ee903c(localclientnum, oldval, newval, bnewent, binitialsnap,
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
   e_fx playLoopSound("zmb_squest_charge_soul_lp");
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(v_dest + vectorscale((0, 0, 1), 5), 0.5);
+  e_fx moveTo(v_dest + vectorscale((0, 0, 1), 5), 0.5);
   e_fx waittill("movedone");
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_impact");
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
@@ -706,15 +706,15 @@ function player_rumble_and_shake(localclientnum, oldval, newval, bnewent, biniti
     } else {
       if(newval == 3) {
         self earthquake(0.6, 1.5, self.origin, 100);
-        self playrumbleonentity(localclientnum, "artillery_rumble");
+        self playRumbleOnEntity(localclientnum, "artillery_rumble");
       } else {
         if(newval == 2) {
           self earthquake(0.3, 1.5, self.origin, 100);
-          self playrumbleonentity(localclientnum, "shotgun_fire");
+          self playRumbleOnEntity(localclientnum, "shotgun_fire");
         } else {
           if(newval == 1) {
             self earthquake(0.1, 1, self.origin, 100);
-            self playrumbleonentity(localclientnum, "damage_heavy");
+            self playRumbleOnEntity(localclientnum, "damage_heavy");
           } else {
             if(newval == 6) {
               self thread player_continuous_rumble(localclientnum, 1, 0);
@@ -738,13 +738,13 @@ function player_continuous_rumble(localclientnum, rumble_level, shake_camera = 1
         if(shake_camera) {
           self earthquake(0.2, 1, self.origin, 100);
         }
-        self playrumbleonentity(localclientnum, "reload_small");
+        self playRumbleOnEntity(localclientnum, "reload_small");
         wait(0.05);
       } else {
         if(shake_camera) {
           self earthquake(0.3, 1, self.origin, 100);
         }
-        self playrumbleonentity(localclientnum, "damage_light");
+        self playRumbleOnEntity(localclientnum, "damage_light");
       }
     }
     wait(0.1);
@@ -1033,7 +1033,7 @@ function foot_print_box_fx(localclientnum, oldval, newval, bnewent, binitialsnap
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
   e_fx playLoopSound("zmb_squest_charge_soul_lp");
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(s_box.origin, 1);
+  e_fx moveTo(s_box.origin, 1);
   e_fx waittill("movedone");
   playSound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");

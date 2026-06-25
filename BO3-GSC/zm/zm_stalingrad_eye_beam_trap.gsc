@@ -49,22 +49,22 @@ function __init__() {
 
 function function_a2abac9c(e_player) {
   if(e_player.is_drinking > 0) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     return false;
   }
   if(self.stub flag::get("beam_on")) {
-    self sethintstring(&"ZOMBIE_TRAP_ACTIVE");
+    self setHintString(&"ZOMBIE_TRAP_ACTIVE");
     return false;
   }
   if(self.stub flag::get("beam_cooldown")) {
-    self sethintstring(&"ZM_STALINGRAD_TRAP_COOLDOWN");
+    self setHintString(&"ZM_STALINGRAD_TRAP_COOLDOWN");
     return false;
   }
-  self sethintstring(&"ZM_STALINGRAD_EYE_BEAM_TRAP", self.stub.hint_parm1);
+  self setHintString(&"ZM_STALINGRAD_EYE_BEAM_TRAP", self.stub.hint_parm1);
   return true;
 }
 
@@ -91,7 +91,7 @@ function function_fd8775a2() {
 function function_3ae55c2d(var_f2bd831, var_9bafc533) {
   foreach(s_target in var_9bafc533) {
     s_target.s_unitrigger flag::set("beam_on");
-    playsoundatposition("zmb_robo_eye_beam_start", s_target.origin);
+    playSoundAtPosition("zmb_robo_eye_beam_start", s_target.origin);
   }
   s_target zm_stalingrad_util::function_903f6b36(1);
   self thread function_8bc8cc13(var_f2bd831, var_9bafc533);
@@ -103,7 +103,7 @@ function function_8bc8cc13(var_f2bd831, var_9bafc533) {
   e_kill_zone = self.var_4ae7f8db;
   var_cbf27250 = self.var_cbf27250;
   exploder::exploder(var_cbf27250);
-  var_f7261317 = getent("eye_beam_volume_" + e_kill_zone.script_string, "targetname");
+  var_f7261317 = getEnt("eye_beam_volume_" + e_kill_zone.script_string, "targetname");
   var_f2bd831 thread zm_stalingrad_vo::function_176ac3fa();
   level clientfield::set("eye_beam_rumble_" + e_kill_zone.script_string, 1);
   level thread function_78f79e79(1);
@@ -147,7 +147,7 @@ function function_8bc8cc13(var_f2bd831, var_9bafc533) {
   foreach(s_target in var_9bafc533) {
     s_target.s_unitrigger flag::clear("beam_on");
     s_target.s_unitrigger flag::set("beam_cooldown");
-    playsoundatposition("zmb_robo_eye_beam_stop", s_target.origin);
+    playSoundAtPosition("zmb_robo_eye_beam_stop", s_target.origin);
   }
   level clientfield::set("eye_beam_rumble_" + e_kill_zone.script_string, 0);
   wait(60);
@@ -158,7 +158,7 @@ function function_8bc8cc13(var_f2bd831, var_9bafc533) {
 }
 
 function function_78f79e79(var_66a9cd70) {
-  mdl_head = getent("robot_head_clocktower", "targetname");
+  mdl_head = getEnt("robot_head_clocktower", "targetname");
   if(var_66a9cd70) {
     mdl_head playSound("zmb_robo_eye_head_start");
     mdl_head playLoopSound("zmb_robo_eye_head_lp", 1.5);
@@ -179,7 +179,7 @@ function function_6009178e(e_kill_zone) {
     n_cur_time = gettime();
     if(!isDefined(self.var_6850f846) || (n_cur_time - self.var_6850f846) > 200) {
       self.var_6850f846 = n_cur_time;
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       self dodamage(40, self.origin, undefined, undefined, undefined, "MOD_BURNED");
     }
     wait(0.2);

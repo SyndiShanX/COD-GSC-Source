@@ -146,18 +146,18 @@ fire_in_the_hole() {
   self endon("caught");
   self.dropped = true;
   self Unlink();
-  dest = getstruct(self.target, "targetname");
+  dest = getStruct(self.target, "targetname");
   level.catch_trig = spawn("trigger_radius", self.origin, 0, 24, 10);
-  level.catch_trig EnableLinkTo();
-  level.catch_trig LinkTo(self);
+  level.catch_trig EnablelinkTo();
+  level.catch_trig linkTo(self);
   level.catch_trig.owner_ent = self;
   level.catch_trig thread butter_fingers();
   self NotSolid();
-  self MoveTo(dest.origin, 1.4, 0.2, 0);
+  self moveTo(dest.origin, 1.4, 0.2, 0);
   self waittill("movedone");
   players = get_players();
   players[randomintrange(0, players.size)] thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest8", undefined, 5);
-  playsoundatposition("evt_sq_bag_dynamite_explosion", dest.origin);
+  playSoundAtPosition("evt_sq_bag_dynamite_explosion", dest.origin);
   level.catch_trig notify("boom");
   level.catch_trig Delete();
   level.catch_trig = undefined;
@@ -182,7 +182,7 @@ butter_fingers() {
 }
 give_me_the_boom_stick() {
   level endon("sq_BaG_over");
-  wall = GetEnt("sq_wall", "targetname");
+  wall = getEnt("sq_wall", "targetname");
   wall Solid();
   flag_wait("meteorite_shrunk");
   player_close = false;
@@ -201,7 +201,7 @@ give_me_the_boom_stick() {
   level bag_story_vox_pt1(player);
   flag_set("dynamite_chat");
   level._give_trig = spawn("trigger_radius_use", wall.origin, 0, 56, 72);
-  level._give_trig SetCursorHint("HINT_NOICON");
+  level._give_trig setCursorHint("HINT_NOICON");
   level._give_trig.radius = 48;
   level._give_trig.height = 72;
   not_given = true;
@@ -246,7 +246,7 @@ exit_stage(success) {
   } else {
     maps\zombie_temple_sq_brock::create_radio(8);
     flag_clear("meteorite_shrunk");
-    ent = GetEnt("sq_meteorite", "targetname");
+    ent = getEnt("sq_meteorite", "targetname");
     ent.origin = ent.original_origin;
     ent.angles = ent.original_angles;
     ent setModel("p_ztem_meteorite");
@@ -392,7 +392,7 @@ dud_gong_handler() {
 }
 bag_story_vox_pt1(player) {
   level endon("sq_StD_over");
-  struct = getstruct("sq_location_bag", "targetname");
+  struct = getStruct("sq_location_bag", "targetname");
   if(!isDefined(struct)) {
     return;
   }
@@ -418,7 +418,7 @@ bag_story_vox_pt1(player) {
 }
 bag_story_vox_pt2() {
   level endon("sq_StD_over");
-  struct = getstruct("sq_location_bag", "targetname");
+  struct = getStruct("sq_location_bag", "targetname");
   if(!isDefined(struct)) {
     return;
   }

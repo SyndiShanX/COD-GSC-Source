@@ -25,7 +25,7 @@ function private on_begin() {
   level zm_trial::function_2b3a3307(1);
   level zm_trial::function_19a1098f(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player bgb::take();
     player bgb_pack::function_ac9cb612(1);
   }
@@ -35,7 +35,7 @@ function private on_end(round_reset) {
   level zm_trial::function_2b3a3307(0);
   level zm_trial::function_19a1098f(0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player bgb_pack::function_ac9cb612(0);
   }
 }

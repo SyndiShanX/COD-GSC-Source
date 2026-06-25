@@ -82,7 +82,7 @@ function private function_6162a853(var_26fc4461 = 0) {
         level thread doa_utility::function_37fb5c23(&"DOA_RIGHTEOUS_ROOM_CHOOSE_HURRY");
       }
     }
-    players = getplayers();
+    players = getPlayers();
     allfated = 1;
     for(i = 0; i < players.size; i++) {
       if(!var_26fc4461) {
@@ -128,8 +128,8 @@ function function_fd0b8976(text, holdtime = 4, color = (1, 0, 0), reset = 0) {
 function function_77ed1bae() {
   level notify("hash_e2918623");
   level.doa.fates_have_been_chosen = 0;
-  guardian = getent("temple_guardian", "targetname");
-  var_526b2f85 = getent("temple_guardian_clip", "targetname");
+  guardian = getEnt("temple_guardian", "targetname");
+  var_526b2f85 = getEnt("temple_guardian_clip", "targetname");
   guardian.origin = guardian.origin + (vectorscale((0, 0, -1), 1000));
   var_526b2f85.origin = var_526b2f85.origin + (vectorscale((0, 0, -1), 1000));
   level thread doa_pickups::function_c1869ec8();
@@ -138,7 +138,7 @@ function function_77ed1bae() {
   level notify("hash_a50a72db");
   locs = struct::get_array("fate_player_spawn", "targetname");
   if(isDefined(locs) && locs.size == 4) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       spot = locs[player.entnum];
       player namespace_cdb9a8fe::function_fe0946ac(spot.origin);
       player setplayerangles((0, spot.angles[1], 0));
@@ -164,8 +164,8 @@ function function_77ed1bae() {
     trigger.id = i;
     trigger thread function_271ba816();
     level.doa.var_b1698a42.var_cadf4b04[level.doa.var_b1698a42.var_cadf4b04.size] = trigger;
-    trigger enablelinkto();
-    trigger linkto(rock);
+    trigger enablelinkTo();
+    trigger linkTo(rock);
   }
   doa_utility::function_390adefe(0);
   level thread doa_utility::function_c5f3ece8(&"DOA_FATE_ROOM", undefined, 6);
@@ -174,7 +174,7 @@ function function_77ed1bae() {
   level thread doa_utility::function_37fb5c23(&"DOA_FATE_ROOM_CHOOSE");
   level notify("hash_4213cffb");
   wait(4);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] freezecontrols(0);
   }
@@ -311,7 +311,7 @@ function private function_271ba816(var_26fc4461 = 0) {
             self notify("hash_fad6c90b");
           }
           allfated = 1;
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             if(!isDefined(player.doa) || (!(isDefined(player.doa.var_2219ffc9) && player.doa.var_2219ffc9))) {
               allfated = 0;
               break;
@@ -493,7 +493,7 @@ function function_17fb777b(player, model, modelscale, fate_cb) {
   object.angles = (0, yaw, 25);
   object setModel(model);
   object setscale(modelscale);
-  object setplayercollision(0);
+  object setPlayerCollision(0);
   object thread doa_utility::function_a625b5d3(player);
   while(isPlayer(player)) {
     if(object.origin[2] < player.origin[2]) {
@@ -506,7 +506,7 @@ function function_17fb777b(player, model, modelscale, fate_cb) {
   }
   if(isPlayer(player)) {
     object thread namespace_eaa992c::function_285a2999("fate_explode");
-    player playrumbleonentity("artillery_rumble");
+    player playRumbleOnEntity("artillery_rumble");
     if(mayspawnentity()) {
       player playsoundtoplayer("zmb_doa_receive_fate", player);
     }
@@ -531,7 +531,7 @@ function private function_46575fe6() {
 function function_c631d045() {
   var_de2c598 = undefined;
   candidates = [];
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.doa)) {
       continue;
     }
@@ -574,8 +574,8 @@ function function_c631d045() {
 function function_833dad0d() {
   level notify("hash_e2918623");
   level endon("hash_d1f5acf7");
-  guardian = getent("temple_guardian", "targetname");
-  var_526b2f85 = getent("temple_guardian_clip", "targetname");
+  guardian = getEnt("temple_guardian", "targetname");
+  var_526b2f85 = getEnt("temple_guardian_clip", "targetname");
   guardian.origin = guardian.origin + (vectorscale((0, 0, -1), 1000));
   var_526b2f85.origin = var_526b2f85.origin + (vectorscale((0, 0, -1), 1000));
   level thread function_be1e2cfc(guardian, var_526b2f85);
@@ -587,7 +587,7 @@ function function_833dad0d() {
   level thread doa_utility::set_lighting_state(3);
   namespace_cdb9a8fe::function_691ef36b();
   namespace_cdb9a8fe::function_703bb8b2(30);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i].doa.var_eb1cd159 = 0;
     players[i].doa.var_2219ffc9 = undefined;
@@ -600,7 +600,7 @@ function function_833dad0d() {
   level thread doa_utility::function_c5f3ece8(&"DOA_TRIAL_OF_JUDGEMENT", undefined, 6);
   wait(1);
   level thread doa_utility::function_37fb5c23(&"DOA_RIGHTEOUS_ROOM_BATTLE");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] freezecontrols(0);
   }
@@ -641,13 +641,13 @@ function function_833dad0d() {
     trigger.rock = rock;
     trigger.id = i;
     trigger thread function_271ba816(1);
-    trigger enablelinkto();
-    trigger linkto(rock);
+    trigger enablelinkTo();
+    trigger linkTo(rock);
     level.doa.var_b1698a42.var_cadf4b04[level.doa.var_b1698a42.var_cadf4b04.size] = trigger;
   }
   locs = struct::get_array("fate_player_spawn", "targetname");
   if(isDefined(locs) && locs.size == 4) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       spot = locs[player.entnum];
       player namespace_cdb9a8fe::function_fe0946ac(spot.origin);
       player setplayerangles((0, spot.angles[1], 0));
@@ -667,7 +667,7 @@ function function_833dad0d() {
   }
   level notify("hash_4213cffb");
   wait(4);
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player freezecontrols(0);
     player thread namespace_831a4a7c::function_4519b17(0);
   }
@@ -745,7 +745,7 @@ function private function_60a14daa(boss) {
   self.boss = boss;
   self endon("death");
   while(true) {
-    self rotateto(self.angles + vectorscale((0, 1, 0), 180), 2);
+    self rotateTo(self.angles + vectorscale((0, 1, 0), 180), 2);
     wait(2);
   }
 }
@@ -756,8 +756,8 @@ function private function_b1d23a45(boss) {
   self.angles = vectorscale((0, 0, 1), 180);
   self.trigger = spawn("trigger_radius", self.origin, 0, 30, 50);
   self.trigger.targetname = "boss_shieldThink";
-  self.trigger enablelinkto();
-  self.trigger linkto(self);
+  self.trigger enablelinkTo();
+  self.trigger linkTo(self);
   self.trigger thread function_5aaa5a64(self);
   self.health = 100000;
   self.maxhealth = self.health;
@@ -822,7 +822,7 @@ function private function_4d69c061(org) {
     org delete();
     return;
   }
-  wait(12 - (getplayers().size * 2));
+  wait(12 - (getPlayers().size * 2));
   shield = spawn("script_model", self.origin);
   shield.targetname = "_shieldRegenerate";
   shield.org = org;
@@ -836,10 +836,10 @@ function private function_4d69c061(org) {
   if(isDefined(org.var_e34a8df9)) {
     shield setModel("veh_t7_drone_insanity_elemental");
     shield.var_e34a8df9 = org.var_e34a8df9;
-    shield linkto(shield.org, "tag_origin", (0, 164 - (org.regenerated * 8), 60), vectorscale((0, 0, 1), 180));
+    shield linkTo(shield.org, "tag_origin", (0, 164 - (org.regenerated * 8), 60), vectorscale((0, 0, 1), 180));
   } else {
     shield setModel("zombietron_boss_shield_full_size" + org.regenerated);
-    shield linkto(shield.org, "tag_origin", (0, 164 - (org.regenerated * 8), 30), vectorscale((0, 0, 1), 180));
+    shield linkTo(shield.org, "tag_origin", (0, 164 - (org.regenerated * 8), 30), vectorscale((0, 0, 1), 180));
   }
   shield thread function_b1d23a45(org.boss);
   org.boss.shields[org.index] = shield;
@@ -874,12 +874,12 @@ function private function_51f0dd2c() {
     org.shield = shield;
     if(!isinarray(var_7383e7dd, i)) {
       shield setModel("zombietron_boss_shield_full_size1");
-      shield linkto(shield.org, "tag_origin", (0, 164, 30), vectorscale((0, 0, 1), 180));
+      shield linkTo(shield.org, "tag_origin", (0, 164, 30), vectorscale((0, 0, 1), 180));
     } else {
       shield setModel("veh_t7_drone_insanity_elemental");
-      org.var_e34a8df9 = getent("spawner_meatball", "targetname");
+      org.var_e34a8df9 = getEnt("spawner_meatball", "targetname");
       shield.var_e34a8df9 = org.var_e34a8df9;
-      shield linkto(shield.org, "tag_origin", (0, 164, 60), vectorscale((0, 0, 1), 180));
+      shield linkTo(shield.org, "tag_origin", (0, 164, 60), vectorscale((0, 0, 1), 180));
     }
     shield thread function_b1d23a45(self);
     self.shields[self.shields.size] = shield;
@@ -911,7 +911,7 @@ function private function_cb98790d() {
 
 function private function_c492e72d() {
   level endon("hash_d1f5acf7");
-  self.health = doa_utility::clamp((level.doa.round_number * 20000) + (getplayers().size * 250000), 250000, 2250000);
+  self.health = doa_utility::clamp((level.doa.round_number * 20000) + (getPlayers().size * 250000), 250000, 2250000);
   self.maxhealth = self.health;
   self.boss = 1;
   self.takedamage = 0;
@@ -989,7 +989,7 @@ function private function_ae21464b() {
   level endon("hash_d1f5acf7");
   level endon("hash_cb54277d");
   while(true) {
-    wait(randomintrange(10, 20) - (getplayers().size * 1.2));
+    wait(randomintrange(10, 20) - (getPlayers().size * 1.2));
     self thread namespace_1a381543::function_90118d8c("zmb_boss_sound_minion_summon");
     level notify("hash_55acdab7");
     if(getdvarint("", 0)) {
@@ -1099,7 +1099,7 @@ function function_3caf8e2(endtime) {
   self clientfield::set("fated_boost", 1);
   while(gettime() < endtime) {
     wait(0.2);
-    normal = vectornormalize(self.origin - lastposition);
+    normal = vectorNormalize(self.origin - lastposition);
     step = normal * stepsize;
     dist = distance(self.origin, lastposition);
     if(dist < 10) {

@@ -238,7 +238,7 @@ get_best_locking_target() {
   foreach(target in targets) {
     if(!array_contains(self.stingerm7_info.locked_targets, target)) {
       target_origin = stingerm7_get_target_pos(target);
-      dot = VectorDot(VectorNormalize(target_origin - eye_origin), eye_dir);
+      dot = VectorDot(vectorNormalize(target_origin - eye_origin), eye_dir);
       if(dot > best_target_dot) {
         result = undefined;
         can_target = !CONST_lock_require_los;
@@ -271,7 +271,7 @@ locking_target_still_valid(target) {
     return false;
   }
 
-  if(VectorDot(VectorNormalize(target_origin - eye_origin), eye_dir) > Cos(CONST_lock_angle)) {
+  if(VectorDot(vectorNormalize(target_origin - eye_origin), eye_dir) > Cos(CONST_lock_angle)) {
     if(!CONST_lock_require_los || BulletTracePassed(eye_origin, target_origin, false, target)) {
       return true;
     }
@@ -341,7 +341,7 @@ locking_feedback() {
     }
 
     self playLocalSound("wpn_stingerm7_locking");
-    self PlayRumbleOnEntity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
 
     wait 0.6;
   }
@@ -368,7 +368,7 @@ locked_feedback() {
     }
 
     self playLocalSound("wpn_stingerm7_locked");
-    self PlayRumbleOnEntity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
 
     wait 0.25;
   }

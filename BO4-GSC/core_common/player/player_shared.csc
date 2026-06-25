@@ -51,7 +51,7 @@ on_player_spawned(localclientnum) {
     return;
   }
 
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
 
   foreach(player in players) {
     player function_8656d7d1(localclientnum);
@@ -95,7 +95,7 @@ function_c98e67ae(localclientnum) {
 
   while(true) {
     wait 0.2;
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     var_f3108b8 = function_5c10bd79(localclientnum);
 
     foreach(player in players) {

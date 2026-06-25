@@ -210,7 +210,7 @@ function function_eec2fa5b(var_bd98a2b8) {
   level scene::play("scene_amk_7010_esc_apc_enter", "woods_enter_apc", a_scene_ents);
   level thread scene::play("scene_amk_7010_esc_apc_enter", "woods_loop_apc", a_scene_ents);
   waitframe(1);
-  level.woods linkto(level.vh_escape_apc);
+  level.woods linkTo(level.vh_escape_apc);
   level.woods val::reset(#"apc_enter", "ignoreall");
   level.woods val::reset(#"apc_enter", "ignoreme");
   level flag::set("flg_escape_woods_driving_apc");
@@ -258,7 +258,7 @@ function function_7da641f5(str_objective) {
 
   level.vh_escape_apc usevehicle(level.player, 1);
   level flag::set("flg_escape_player_in_apc");
-  level.woods linkto(level.vh_escape_apc);
+  level.woods linkTo(level.vh_escape_apc);
   level flag::set("flg_escape_woods_driving_apc");
   namespace_b61bbd82::music("12.1_exit");
 }
@@ -306,14 +306,14 @@ function function_a668e580(str_objective, b_starting) {
   level flag::wait_till("flg_apc_ride_exit_fade_start");
   level.var_7ddd2b02 = 0;
   lui::screen_fade_out(1, "black");
-  level_end_player_teleport_pos = getent("level_end_player_teleport_pos", "targetname");
+  level_end_player_teleport_pos = getEnt("level_end_player_teleport_pos", "targetname");
 
   if(isDefined(level_end_player_teleport_pos)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     util::stop_magic_bullet_shield(level.vh_escape_apc);
     waitframe(1);
     level.vh_escape_apc freevehicle();
-    player setorigin(level_end_player_teleport_pos.origin);
+    player setOrigin(level_end_player_teleport_pos.origin);
   }
 
   level flag::wait_till("flg_apc_ride_duck_audio");
@@ -388,7 +388,7 @@ function function_24b65377(str_objective) {
       if(!level flag::get("flg_apc_ride_apc_destroyed")) {
         var_b6d2feca[#"apc"] = level.vh_escape_apc;
         var_b6d2feca[#"enemy_apc"] = level.vh_town_square_apc;
-        var_b6d2feca[#"gate"] = getent("e_motor_pool_gate_anim", "targetname");
+        var_b6d2feca[#"gate"] = getEnt("e_motor_pool_gate_anim", "targetname");
         level scene::play("scene_amk_7020_apc_townsquare", var_b6d2feca);
       }
     case #"apc_mall":
@@ -421,7 +421,7 @@ function function_bb8ce128() {
   v_fwd = anglesToForward(level.vh_escape_apc.angles);
   var_2386f8a6 = level.vh_escape_apc.origin + (0, 0, 48) + v_fwd * 200;
   level.vh_escape_apc.var_dd39434b = spawn("script_origin", var_2386f8a6);
-  level.vh_escape_apc.var_dd39434b linkto(level.vh_escape_apc);
+  level.vh_escape_apc.var_dd39434b linkTo(level.vh_escape_apc);
   level flag::wait_till_any(["flg_apc_ride_town_square_crash", "flg_apc_ride_mall_transition_start"]);
   playFXOnTag(level._effect[#"hash_7a068d4f89c57a66"], level.vh_escape_apc, "tag_origin");
   level flag::wait_till("flg_apc_ride_mall_car_hit_3");
@@ -478,7 +478,7 @@ function private function_db8b1513(var_5c400ae2, var_ba6a6060 = 1, str_exploder)
   s_event = self waittill(#"trigger", #"delete");
 
   if(s_event._notify == "trigger") {
-    var_1b9cc75d = vectornormalize(s_event.activator.origin - self.origin);
+    var_1b9cc75d = vectorNormalize(s_event.activator.origin - self.origin);
     v_offset = var_1b9cc75d * 7 - (0, 0, 30);
     physicsexplosionsphere(self.origin + v_offset, 80, 10, 3);
 
@@ -544,8 +544,8 @@ function function_78b9f6d2() {
 
 function function_50940288() {
   level flag::wait_till("flg_apc_ride_town_square_enter");
-  var_53953eb3 = getent("e_motor_pool_gate_anim", "targetname");
-  e_motor_pool_gate_clip = getent("e_motor_pool_gate_clip", "targetname");
+  var_53953eb3 = getEnt("e_motor_pool_gate_anim", "targetname");
+  e_motor_pool_gate_clip = getEnt("e_motor_pool_gate_clip", "targetname");
   e_motor_pool_gate_clip connectpaths();
   e_motor_pool_gate_clip delete();
 }
@@ -614,7 +614,7 @@ function function_448bf40() {
 function function_d88afd7(var_697fc91a) {
   foreach(ai_enemy in var_697fc91a) {
     if(isDefined(ai_enemy)) {
-      vol = getent("vol_apc_ride_town_square_road", "targetname");
+      vol = getEnt("vol_apc_ride_town_square_road", "targetname");
       ai_enemy ai::force_goal(vol, math::cointoss(75), undefined, 0, math::cointoss(75));
       wait randomfloatrange(0.1, 0.3);
     }
@@ -798,37 +798,37 @@ function function_f010ec55() {
 }
 
 function function_611d14b4() {
-  e_town_square_exit_gate_right = getent("e_town_square_exit_gate_right", "targetname");
-  e_town_square_exit_gate_left = getent("e_town_square_exit_gate_left", "targetname");
-  e_town_square_exit_gate_right_clip = getent("e_town_square_exit_gate_right_clip", "targetname");
-  e_town_square_exit_gate_left_clip = getent("e_town_square_exit_gate_left_clip", "targetname");
-  e_town_square_exit_gate_right_clip linkto(e_town_square_exit_gate_right);
-  e_town_square_exit_gate_right_clip disconnectpaths();
-  e_town_square_exit_gate_left_clip linkto(e_town_square_exit_gate_left);
-  e_town_square_exit_gate_left_clip disconnectpaths();
+  e_town_square_exit_gate_right = getEnt("e_town_square_exit_gate_right", "targetname");
+  e_town_square_exit_gate_left = getEnt("e_town_square_exit_gate_left", "targetname");
+  e_town_square_exit_gate_right_clip = getEnt("e_town_square_exit_gate_right_clip", "targetname");
+  e_town_square_exit_gate_left_clip = getEnt("e_town_square_exit_gate_left_clip", "targetname");
+  e_town_square_exit_gate_right_clip linkTo(e_town_square_exit_gate_right);
+  e_town_square_exit_gate_right_clip disconnectPaths();
+  e_town_square_exit_gate_left_clip linkTo(e_town_square_exit_gate_left);
+  e_town_square_exit_gate_left_clip disconnectPaths();
 }
 
 function function_e71e5cb2() {
-  e_town_square_exit_gate_right = getent("e_town_square_exit_gate_right", "targetname");
-  e_town_square_exit_gate_left = getent("e_town_square_exit_gate_left", "targetname");
+  e_town_square_exit_gate_right = getEnt("e_town_square_exit_gate_right", "targetname");
+  e_town_square_exit_gate_left = getEnt("e_town_square_exit_gate_left", "targetname");
   s_town_square_exit_gate_right_pivot = struct::get("s_town_square_exit_gate_right_pivot", "targetname");
   s_town_square_exit_gate_left_pivot = struct::get("s_town_square_exit_gate_left_pivot", "targetname");
   var_1517cc89 = spawn("script_model", s_town_square_exit_gate_right_pivot.origin);
   var_439358df = spawn("script_model", s_town_square_exit_gate_left_pivot.origin);
   var_1517cc89.angles = e_town_square_exit_gate_right.angles;
   var_439358df.angles = e_town_square_exit_gate_left.angles;
-  e_town_square_exit_gate_right linkto(var_1517cc89);
-  e_town_square_exit_gate_left linkto(var_439358df);
+  e_town_square_exit_gate_right linkTo(var_1517cc89);
+  e_town_square_exit_gate_left linkTo(var_439358df);
   level flag::wait_till("flg_apc_ride_town_square_near_exit");
   var_530affd4 = (var_1517cc89.angles[0], var_1517cc89.angles[1], var_1517cc89.angles[2]);
   var_7d640957 = (var_439358df.angles[0], var_439358df.angles[1], var_439358df.angles[2]);
   var_2a13e805 = (var_1517cc89.angles[0], var_1517cc89.angles[1] - 120, var_1517cc89.angles[2]);
   var_c8c0f18f = (var_439358df.angles[0], var_439358df.angles[1] + 120, var_439358df.angles[2]);
-  var_1517cc89 rotateto(var_2a13e805, 3, 0.2, 0.5);
-  var_439358df rotateto(var_c8c0f18f, 3, 0.2, 0.5);
+  var_1517cc89 rotateTo(var_2a13e805, 3, 0.2, 0.5);
+  var_439358df rotateTo(var_c8c0f18f, 3, 0.2, 0.5);
   level flag::wait_till("flg_apc_ride_mall_transition_rpg");
-  var_1517cc89 rotateto(var_530affd4, 1.5, 0.1, 0.25);
-  var_439358df rotateto(var_7d640957, 1.5, 0.1, 0.25);
+  var_1517cc89 rotateTo(var_530affd4, 1.5, 0.1, 0.25);
+  var_439358df rotateTo(var_7d640957, 1.5, 0.1, 0.25);
   level flag::wait_till("flg_apc_ride_mall_transition_end");
   var_1517cc89 delete();
   var_439358df delete();
@@ -843,7 +843,7 @@ function function_32ac3f51() {
 
 function function_3d7d695c(str_gate, str_exploder) {
   s_gate = struct::get(str_gate);
-  var_9d8fad40 = getent(str_gate + "_clip", "targetname");
+  var_9d8fad40 = getEnt(str_gate + "_clip", "targetname");
   e_trigger = spawn("trigger_radius", s_gate.origin, 16, 160, 160);
   e_trigger thread function_db8b1513(var_9d8fad40, 0, str_exploder);
 }
@@ -968,7 +968,7 @@ function function_5584d0eb() {
     var_c8d3d75e = var_ec588ec8[index];
     self aimatposik(var_c8d3d75e.origin);
     level flag::wait_till(flag);
-    var_50880411 = vectornormalize(var_c8d3d75e.origin - var_6ca2e6d1) * 300;
+    var_50880411 = vectorNormalize(var_c8d3d75e.origin - var_6ca2e6d1) * 300;
     missile = self magicmissile(weapon, var_6ca2e6d1, var_50880411);
     playFXOnTag(level._effect[#"hash_5b89c053ca995f2f"], self, "tag_flash");
     missile thread function_4c48fcfd(var_c8d3d75e.script_noteworthy);

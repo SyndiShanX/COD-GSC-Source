@@ -8,7 +8,7 @@ _id_436C() {
   level._id_436D = -2000;
   level._id_436E = 6;
   level._id_436F = spawn("script_origin", level.player.origin + (0, 0, 88));
-  level._id_436F linkto(level.player);
+  level._id_436F linkTo(level.player);
   level._id_2AFC = _id_4371();
   common_scripts\utility::flag_init("ai_snowmobiles_ram_player");
   common_scripts\utility::flag_set("ai_snowmobiles_ram_player");
@@ -40,7 +40,7 @@ _id_4374() {
 }
 
 _id_4375() {
-  var_0 = getent("spawner", "targetname");
+  var_0 = getEnt("spawner", "targetname");
   var_0.count = 1;
   var_0.origin = self.origin;
   var_0.angles = (0, self.angles[1], 0);
@@ -130,7 +130,7 @@ _id_4383(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_4384() {
-  var_0 = common_scripts\utility::getstruct("road_path_left", "targetname");
+  var_0 = common_scripts\utility::getStruct("road_path_left", "targetname");
   var_1 = [];
   var_0.origin = (var_0.origin[0], var_0.origin[1], 0);
   var_2 = 0;
@@ -140,7 +140,7 @@ _id_4384() {
     var_4 = var_0;
 
     if(isDefined(var_0.target)) {
-      var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
     }
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
     var_1[var_1.size] = var_0;
@@ -164,7 +164,7 @@ _id_4384() {
     var_0 = var_4;
   }
 
-  var_0 = common_scripts\utility::getstruct("road_path_right", "targetname");
+  var_0 = common_scripts\utility::getStruct("road_path_right", "targetname");
   var_0.origin = (var_0.origin[0], var_0.origin[1], 0);
   var_5 = 0;
 
@@ -172,7 +172,7 @@ _id_4384() {
     var_4 = var_0;
 
     if(isDefined(var_0.target)) {
-      var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
     }
     var_4.origin = (var_4.origin[0], var_4.origin[1], 0);
     var_6 = var_1[var_5];
@@ -227,7 +227,7 @@ _id_438B(var_0) {
 
   foreach(var_3 in var_1) {
     var_3.origin = (var_3.origin[0], var_3.origin[1], 0);
-    var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_3.target, "targetname");
     var_3._id_4381 = var_4;
     var_4._id_4381 = var_3;
   }
@@ -281,7 +281,7 @@ _id_438D(var_0, var_1) {
   if(distance(var_1.origin, var_0._id_437B._id_437C) > var_2 * 1.5) {
     return;
   }
-  var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1.target, "targetname");
   var_4 = _id_4392(var_1.origin, var_0._id_437C, var_0._id_437B._id_437C);
   var_5 = var_4["progress"];
   var_6 = _id_4392(var_3.origin, var_0._id_437C, var_0._id_437B._id_437C);
@@ -402,16 +402,16 @@ _id_4392(var_0, var_1, var_2) {
   var_4 = vectortoangles(var_2 - var_1);
   var_5 = anglesToForward(var_4);
   var_6 = var_1;
-  var_7 = vectornormalize(var_6 - var_0);
+  var_7 = vectorNormalize(var_6 - var_0);
   var_8 = vectordot(var_5, var_7);
-  var_9 = vectornormalize(var_2 - var_1);
+  var_9 = vectorNormalize(var_2 - var_1);
   var_10 = var_0 - var_1;
   var_11 = vectordot(var_10, var_9);
   var_12 = var_1 + var_5 * var_11;
   var_3["progress"] = var_11;
   var_3["offset"] = distance(var_12, var_0);
   var_13 = anglestoright(var_4);
-  var_7 = vectornormalize(var_12 - var_0);
+  var_7 = vectorNormalize(var_12 - var_0);
   var_8 = vectordot(var_13, var_7);
   var_3["dot"] = var_8;
 
@@ -526,7 +526,7 @@ _id_439A() {
   }
 
   var_4 = maps\_utility::_id_2281(var_4);
-  var_6 = getent("snowmobile_spawner", "targetname");
+  var_6 = getEnt("snowmobile_spawner", "targetname");
   var_7 = var_3["targ"];
   var_6.origin = var_4;
   var_6.angles = vectortoangles(var_7._id_437B._id_437C - var_7._id_437C);
@@ -890,7 +890,7 @@ _id_43B6(var_0) {
   self endon("track_player_progress");
   self._id_4394 = maps\_vehicle::_id_2AFB(var_0);
   self._id_3F42 = 0;
-  var_1 = getent("player_sweep_trigger", "targetname");
+  var_1 = getEnt("player_sweep_trigger", "targetname");
   var_2 = isDefined(var_1);
 
   if(var_2) {
@@ -1154,10 +1154,10 @@ _id_43C1() {
     var_0 = (self.origin[0], self.origin[1], 0);
     var_1 = (self._id_4394._id_437C[0], self._id_4394._id_437C[1], 0);
     var_2 = (self._id_43C2._id_437C[0], self._id_43C2._id_437C[1], 0);
-    var_3 = vectornormalize(var_1 - var_0);
+    var_3 = vectorNormalize(var_1 - var_0);
     var_4 = anglesToForward(self.angles);
     var_5 = vectordot(var_4, var_3);
-    var_6 = vectornormalize(var_2 - var_1);
+    var_6 = vectorNormalize(var_2 - var_1);
     var_7 = var_0 - var_1;
     self._id_3F42 = vectordot(var_7, var_6);
     wait 0.05;

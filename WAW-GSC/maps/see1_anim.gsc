@@ -333,7 +333,7 @@ monitor_other_guys_death(otherguy, cover_node) {
 
   otherguy waittill("death");
 
-  self StopAnimScripted();
+  self StopanimScripted();
 
   if(isDefined(cover_node)) {
     self setgoalnode(cover_node);
@@ -389,7 +389,7 @@ play_player_anim_intro(index, player, anim_node, lerp_node) {
   hands.origin = anim_node.origin;
   hands.angles = anim_node.angles;
 
-  player PlayerLinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
+  player PlayerlinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
 
   player hide();
 
@@ -411,10 +411,10 @@ play_player_lerp_to_pos(index, lerp_node) {
     org = spawn("script_origin", self.origin);
     org.angles = self.angles;
 
-    self PlayerLinkTo(org, "", 1, 5, 5, 5, 5);
+    self PlayerlinkTo(org, "", 1, 5, 5, 5, 5);
 
-    org MoveTo(lerp_node.origin + (0, 0, 5), 3, 0, 1.5);
-    org RotateTo(lerp_node.angles, 3, 0, 1.5);
+    org moveTo(lerp_node.origin + (0, 0, 5), 3, 0, 1.5);
+    org rotateTo(lerp_node.angles, 3, 0, 1.5);
 
     wait(3);
 
@@ -458,7 +458,7 @@ play_player_anim_outro(i, player, anim_node) {
   hands.origin = anim_node.origin;
   hands.angles = anim_node.angles;
 
-  player PlayerLinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
+  player PlayerlinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
 
   anim_node anim_single_solo(hands, "outro");
 
@@ -476,13 +476,13 @@ fire_bullet(guy) {
 }
 
 barn_door_kick_spawn() {
-  level.barn_door_kick = getent("wii_barn_door_back", "targetname");
+  level.barn_door_kick = getEnt("wii_barn_door_back", "targetname");
 
   level.barn_door_kick.animname = "barn_door_kick";
 }
 
 barn_door_tank_spawn() {
-  level.barn_door_tank = getent("wii_barn_door_front", "targetname");
+  level.barn_door_tank = getEnt("wii_barn_door_front", "targetname");
 
   level.barn_door_tank.animname = "barn_door_tank";
 }
@@ -500,20 +500,20 @@ anim_barn_door_rattle(guy) {
   playFXOnTag(level._effect["rifle_shelleject"], guy, "tag_brass");
 
   level.barn_door_kick UseAnimTree(#animtree);
-  level.barn_door_kick stopanimscripted();
+  level.barn_door_kick stopanimScripted();
   level.barn_door_kick anim_single_solo(level.barn_door_kick, "shake");
 }
 
 anim_barn_door_kick_open(guy) {
-  blocker = getent("ev2_barn_door_out", "targetname");
+  blocker = getEnt("ev2_barn_door_out", "targetname");
   blocker notsolid();
   blocker connectpaths();
   blocker delete();
 
   level.barn_door_kick UseAnimTree(#animtree);
-  level.barn_door_kick stopanimscripted();
+  level.barn_door_kick stopanimScripted();
 
-  colors_barn = getent("ev2_barn_fc", "targetname");
+  colors_barn = getEnt("ev2_barn_fc", "targetname");
   colors_barn trigger_on();
 
   level.barn_door_kick anim_single_solo(level.barn_door_kick, "open_barn_door");
@@ -527,17 +527,17 @@ anim_barn_door_tank_setup() {
 }
 
 tank_open_door() {
-  blocker = getent("ev2_barn_door_in_2", "targetname");
+  blocker = getEnt("ev2_barn_door_in_2", "targetname");
   blocker notsolid();
   blocker connectpaths();
   blocker delete();
 
-  blocker = getent("ev2_barn_door_in_21", "targetname");
+  blocker = getEnt("ev2_barn_door_in_21", "targetname");
   blocker notsolid();
   blocker connectpaths();
   blocker delete();
 
-  blocker = getent("ev2_barn_door_in_22", "targetname");
+  blocker = getEnt("ev2_barn_door_in_22", "targetname");
   blocker notsolid();
   blocker connectpaths();
   blocker delete();
@@ -555,7 +555,7 @@ anim_explosion_truck_setup() {
 }
 
 play_truck_crash_anim(truck) {
-  origin = getstruct("ev2_truck_crash_origin4", "targetname");
+  origin = getStruct("ev2_truck_crash_origin4", "targetname");
 
   truck_new = spawn("script_model", truck.origin);
   truck_new.animname = "truck";
@@ -596,7 +596,7 @@ anim_explosion_tree_setup() {
 
 play_tree_crash_anim(tree) {
   tree.animname = "tree";
-  origin = getstruct("ev2_truck_crash_origin", "targetname");
+  origin = getStruct("ev2_truck_crash_origin", "targetname");
   tree UseAnimTree(#animtree);
 
   tree thread tree_loop_idle_anim(origin);

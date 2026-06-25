@@ -95,8 +95,8 @@ function anystub_get_unitrigger_origin() {
 
 function anystub_on_spawn_trigger(trigger) {
   if(isDefined(self.link_parent)) {
-    trigger enablelinkto();
-    trigger linkto(self.link_parent);
+    trigger enablelinkTo();
+    trigger linkTo(self.link_parent);
     trigger setmovingplatformenabled(1);
   }
 }
@@ -405,7 +405,7 @@ function piecetrigger_update_prompt(player) {
   }
   can_use = self.stub piecestub_update_prompt(player);
   self setinvisibletoplayer(player, !can_use);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
   return can_use;
 }
 
@@ -461,7 +461,7 @@ function piece_unitrigger_think() {
     status = player player_can_take_piece(self.stub.piece);
     if(!status) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     } else {
       player thread player_take_piece(self.stub.piece);
     }
@@ -501,7 +501,7 @@ function player_throw_piece(piece, origin, dir, return_to_spawn, return_time, en
       }
       altmodel.origin = grenade.angles;
       altmodel.angles = grenade.angles;
-      altmodel linkto(grenade, "", (0, 0, 0), (0, 0, 0));
+      altmodel linkTo(grenade, "", (0, 0, 0), (0, 0, 0));
       grenade.altmodel = altmodel;
       grenade waittill("stationary");
       grenade_origin = grenade.origin;
@@ -964,12 +964,12 @@ function craftable_piece_unitriggers(craftable_name, origin) {
 }
 
 function hide_craftable_table_model(trigger_targetname) {
-  trig = getent(trigger_targetname, "targetname");
+  trig = getEnt(trigger_targetname, "targetname");
   if(!isDefined(trig)) {
     return;
   }
   if(isDefined(trig.target)) {
-    model = getent(trig.target, "targetname");
+    model = getEnt(trig.target, "targetname");
     if(isDefined(model)) {
       model ghost();
       model notsolid();
@@ -978,7 +978,7 @@ function hide_craftable_table_model(trigger_targetname) {
 }
 
 function setup_unitrigger_craftable(trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
-  trig = getent(trigger_targetname, "targetname");
+  trig = getEnt(trigger_targetname, "targetname");
   if(!isDefined(trig)) {
     return;
   }
@@ -1066,7 +1066,7 @@ function setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
     unitrigger_stub.zombie_weapon_upgrade = getweapon(trig.zombie_weapon_upgrade);
   }
   if(isDefined(unitrigger_stub.target)) {
-    unitrigger_stub.model = getent(unitrigger_stub.target, "targetname");
+    unitrigger_stub.model = getEnt(unitrigger_stub.target, "targetname");
     if(isDefined(unitrigger_stub.model)) {
       if(isDefined(unitrigger_stub.zombie_weapon_upgrade)) {
         unitrigger_stub.model useweaponhidetags(unitrigger_stub.zombie_weapon_upgrade);
@@ -1451,7 +1451,7 @@ function player_finish_craftable(craftablespawn) {
 function complete_craftable(str_craftable_name) {
   foreach(uts_craftable in level.a_uts_craftables) {
     if(uts_craftable.craftablestub.name == str_craftable_name) {
-      player = getplayers()[0];
+      player = getPlayers()[0];
       player player_finish_craftable(uts_craftable.craftablespawn);
       thread zm_unitrigger::unregister_unitrigger(uts_craftable);
       if(isDefined(uts_craftable.craftablestub.onfullycrafted)) {
@@ -1468,7 +1468,7 @@ function craftablestub_remove() {
 
 function craftabletrigger_update_prompt(player) {
   can_use = self.stub craftablestub_update_prompt(player);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
   return can_use;
 }
 
@@ -1580,7 +1580,7 @@ function choose_open_craftable(player) {
     if(b_got_input) {
       self.equipname = self.a_uts_open_craftables_available[self.n_open_craftable_choice].equipname;
       self.hint_string = self.a_uts_open_craftables_available[self.n_open_craftable_choice].hint_string;
-      self.playertrigger[n_playernum] sethintstring(self.hint_string);
+      self.playertrigger[n_playernum] setHintString(self.hint_string);
       b_got_input = 0;
       wait(0.5);
     }
@@ -1833,7 +1833,7 @@ function craftable_place_think() {
     status = player player_can_craft(self.stub.craftablespawn, 0);
     if(!status) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       if(isDefined(self.stub.oncantuse)) {
         self.stub[[self.stub.oncantuse]](player);
       }
@@ -1855,7 +1855,7 @@ function craftable_place_think() {
       prompt = player player_craft(self.stub.craftablespawn);
       player_crafted = player;
       self.stub.hint_string = prompt;
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
   }
   if(isDefined(self.stub.craftablestub.onfullycrafted)) {
@@ -1882,12 +1882,12 @@ function craftable_place_think() {
     }
     if(!zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
       self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return;
     }
     if(isDefined(self.stub.str_taken) && self.stub.str_taken) {
       self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return;
     }
     if(isDefined(self.stub.model)) {
@@ -1920,7 +1920,7 @@ function craftable_place_think() {
       }
       if(!(isDefined(self.stub.crafted) && self.stub.crafted)) {
         self.stub.hint_string = "";
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
         return;
       }
       if(player != self.parent_player) {
@@ -1945,7 +1945,7 @@ function craftable_place_think() {
       } else {
         self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
       }
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       player track_craftables_pickedup(self.stub.craftablespawn);
     }
   } else if(!isDefined(player_crafted) || self craftabletrigger_update_prompt(player_crafted)) {
@@ -1971,7 +1971,7 @@ function craftable_place_think() {
       }
       if(!(isDefined(self.stub.crafted) && self.stub.crafted)) {
         self.stub.hint_string = "";
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
         return;
       }
       if(player != self.parent_player) {
@@ -2012,18 +2012,18 @@ function craftable_place_think() {
         } else {
           self.stub.hint_string = "";
         }
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
         player track_craftables_pickedup(self.stub.craftablespawn);
       } else {
         self.stub.hint_string = "";
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     }
   }
 }
 
 function model_fly_away(unitrigger) {
-  self moveto(self.origin + vectorscale((0, 0, 1), 40), 3);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 40), 3);
   direction = self.origin;
   direction = (direction[1], direction[0], 0);
   if(direction[1] < 0 || (direction[0] > 0 && direction[1] > 0)) {
@@ -2136,7 +2136,7 @@ function craftable_trigger_think_array(trigger_targetname, equipname, weaponname
 }
 
 function setup_vehicle_unitrigger_craftable(parent, trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
-  trig = getent(trigger_targetname, "targetname");
+  trig = getEnt(trigger_targetname, "targetname");
   if(!isDefined(trig)) {
     return;
   }
@@ -2679,7 +2679,7 @@ function run_craftables_devgui() {
     }
     equipment_id = getdvarstring("");
     if(equipment_id != "") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(zm_equipment::is_included(equipment_id)) {
           player zm_equipment::buy(equipment_id);
         }
@@ -2697,7 +2697,7 @@ function run_craftables_devgui() {
       queryresult = positionquery_source_navigation(v_pos, 100, 200, 200, 15);
       if(queryresult.data.size) {
         point = arraygetclosest(v_pos, queryresult.data);
-        level.players[0] setorigin(point.origin);
+        level.players[0] setOrigin(point.origin);
         level.players[0] setplayerangles(vectortoangles(v_pos - point.origin));
       } else {
         iprintlnbold("");
@@ -2722,7 +2722,7 @@ function run_craftables_devgui() {
         queryresult = positionquery_source_navigation(v_pos, 100, 200, 200, 15);
         if(queryresult.data.size) {
           point = arraygetclosest(v_pos, queryresult.data);
-          level.players[0] setorigin(point.origin);
+          level.players[0] setOrigin(point.origin);
           level.players[0] setplayerangles(vectortoangles(v_pos - point.origin));
         } else {
           iprintlnbold("");

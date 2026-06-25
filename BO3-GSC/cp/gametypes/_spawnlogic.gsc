@@ -41,12 +41,12 @@ function __init__() {
 function function_4489f2c9() {
   foreach(spawn_point in get_all_spawn_points()) {
     if(isDefined(spawn_point.linkto)) {
-      e_linkto = getent(spawn_point.linkto, "linkname");
+      e_linkto = getEnt(spawn_point.linkto, "linkname");
       spawn_point function_98b48204(e_linkto);
       continue;
     }
     if(isDefined(spawn_point.script_linkto)) {
-      e_linkto = getent(spawn_point.script_linkto, "targetname");
+      e_linkto = getEnt(spawn_point.script_linkto, "targetname");
       spawn_point function_98b48204(e_linkto);
     }
   }
@@ -60,7 +60,7 @@ function function_98b48204(e_linkto) {
   var_14497229.scriptgroup_playerspawns_disable = self.scriptgroup_playerspawns_disable;
   var_14497229.scriptgroup_playerspawns_enable = self.scriptgroup_playerspawns_enable;
   if(isDefined(e_linkto)) {
-    var_14497229 linkto(e_linkto);
+    var_14497229 linkTo(e_linkto);
   }
   self struct::delete();
 }
@@ -1323,7 +1323,7 @@ function is_point_vulnerable(playerorigin) {
   distsqrd = distancesquared(pos, playerpos);
   forward = anglesToForward(self.angles);
   if(distsqrd < (level.bettydetectionradius * level.bettydetectionradius)) {
-    playerdir = vectornormalize(playerpos - pos);
+    playerdir = vectorNormalize(playerpos - pos);
     angle = acos(vectordot(playerdir, forward));
     if(angle < level.bettydetectionconeangle) {
       return true;

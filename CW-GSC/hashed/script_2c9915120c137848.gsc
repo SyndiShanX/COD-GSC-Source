@@ -214,7 +214,7 @@ function function_1efdf194(var_705bb15a, totaltime, totaldist) {
   }
 
   timedelta = math::clamp(deltaz / totaldist * totaltime, 0.05, totaltime);
-  self.script_model moveto(desiredpos, timedelta);
+  self.script_model moveTo(desiredpos, timedelta);
 }
 
 function function_92bae57c() {
@@ -276,7 +276,7 @@ function function_4b059395(var_705bb15a, totaltime, totaldist) {
   }
 
   timedelta = math::clamp(deltaz / totaldist * totaltime, 0.05, totaltime);
-  self moveto(desiredpos, timedelta);
+  self moveTo(desiredpos, timedelta);
 }
 
 function function_2efb907a() {

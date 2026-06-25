@@ -252,9 +252,9 @@ level_fx() {
 
 intro_birds() {
   level waittill("load_finished");
-  var_0 = getent("perch_trees_opening", "target");
+  var_0 = getEnt("perch_trees_opening", "target");
   var_1 = var_0 maps\interactive_models\_birds::birds_savetostruct();
-  var_0 = getent("perch_ground_first_encounter", "target");
+  var_0 = getEnt("perch_ground_first_encounter", "target");
   var_2 = var_0 maps\interactive_models\_birds::birds_savetostruct();
   level.player waittill("start_falling_anim");
   wait 1;
@@ -269,7 +269,7 @@ field_birds() {
 
   foreach(var_2 in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]) {
     var_3 = "perch_tallgrass_" + var_2;
-    var_4 = getent(var_3, "target");
+    var_4 = getEnt(var_3, "target");
 
     if(isDefined(var_4)) {
       var_0[var_2] = var_4 maps\interactive_models\_birds::birds_savetostruct();

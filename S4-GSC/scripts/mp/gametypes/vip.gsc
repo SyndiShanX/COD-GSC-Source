@@ -240,7 +240,7 @@ _id_583C() {
       }
 
       var_12 = (cos(var_10), sin(var_10), 0);
-      var_12 = vectornormalize(var_12 - var_9["normal"] * vectordot(var_12, var_9["normal"]));
+      var_12 = vectorNormalize(var_12 - var_9["normal"] * vectordot(var_12, var_9["normal"]));
       var_13 = vectortoangles(var_12);
       var_4[0].origin = var_11;
       var_4[0] setModel("cop_marker_scriptable");
@@ -543,7 +543,7 @@ _id_4064() {
 _id_E3A5() {
   level endon("game_ended");
   wait 2;
-  var_0 = getent("sd_bomb_pickup_trig", "targetname");
+  var_0 = getEnt("sd_bomb_pickup_trig", "targetname");
   var_1 = undefined;
   var_2 = undefined;
   level._id_15BB = 1;
@@ -556,7 +556,7 @@ _id_E3A5() {
       var_0 delete();
       var_1 thread[[var_1 _id_09EF::_id_1215("spawn")]](var_2, (0, 0, 0));
       var_3 = var_1 _meth_815E();
-      var_1 setorigin(var_3.origin);
+      var_1 setOrigin(var_3.origin);
       var_1.team = game["attackers"];
       var_1 scripts\mp\bots\bots_util::_id_28C4("recruit");
       var_1._id_ACE5 = scripts\mp\utility\outline::_id_ACD2(var_1, var_1.team, "outline_nodepth_green", "lowest");
@@ -566,9 +566,9 @@ _id_E3A5() {
       var_4 = spawn("script_model", var_1.origin + (0, 0, 30));
       var_4.team = game["attackers"];
       var_4._id_4823 = var_1.origin;
-      var_4 linkto(var_1);
+      var_4 linkTo(var_1);
       var_4 scripts\mp\utility\usability::_id_9A0F(var_4.team);
-      var_4 sethintstring(&"MP/HOLD_TO_ESCORT_VIP");
+      var_4 setHintString(&"MP/HOLD_TO_ESCORT_VIP");
       var_4 _meth_83A1(-300);
       var_1.trigger = var_4;
       var_1._id_ADAE = var_4.team;

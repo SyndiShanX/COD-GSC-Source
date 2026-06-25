@@ -12,6 +12,6 @@ rumble_garrote() {
   while(true) {
     level waittill("garrote_stand");
     player = GetLocalPlayers()[0];
-    player PlayRumbleOnEntity(0, "melee_garrote");
+    player playRumbleOnEntity(0, "melee_garrote");
   }
 }

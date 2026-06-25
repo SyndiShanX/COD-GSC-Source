@@ -283,7 +283,7 @@ waittill_combat() {
   self.disablearrivals = 0;
   self.disableexits = 0;
   self.disableturns = 0;
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("stop_animmode");
   self.allowdeath = 0;
 

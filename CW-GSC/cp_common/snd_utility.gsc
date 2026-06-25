@@ -504,7 +504,7 @@ function waittilldistance(target, range) {
       randgreen = randomfloatrange(0.5, 1);
       randblue = randomfloatrange(0.5, 1);
       randomcolor = (randred, randgreen, randblue);
-      randomcolor = vectornormalize(randomcolor);
+      randomcolor = vectorNormalize(randomcolor);
       disttext = function_d6053a8f(current_distance, 0) + "<dev string:x128>" + armin;
 
       if(isfloat(rmax)) {
@@ -536,7 +536,7 @@ function isplayersafe(player) {
 
 function getplayerssafe(team) {
   if(is_true(level._snd.var_8c37ff34)) {
-    players = getplayers(0, team);
+    players = getPlayers(0, team);
 
     foreach(player in players) {
       if(!isplayersafe(player)) {
@@ -548,7 +548,7 @@ function getplayerssafe(team) {
   }
 
   if(is_true(level._snd.var_2dd09170)) {
-    players = getplayers(team);
+    players = getPlayers(team);
     return players;
   }
 

@@ -176,10 +176,10 @@ function callback_hostmigration() {
       if(isDefined(zombie._host_migration_link_entity)) {
         ent = spawn("script_origin", zombie.origin);
         ent.angles = zombie.angles;
-        zombie linkto(ent);
-        ent linkto(zombie._host_migration_link_entity, "tag_origin", zombie._host_migration_link_entity worldtolocalcoords(ent.origin), ent.angles + zombie._host_migration_link_entity.angles);
+        zombie linkTo(ent);
+        ent linkTo(zombie._host_migration_link_entity, "tag_origin", zombie._host_migration_link_entity worldtolocalcoords(ent.origin), ent.angles + zombie._host_migration_link_entity.angles);
         zombie._host_migration_link_helper = ent;
-        zombie linkto(zombie._host_migration_link_helper);
+        zombie linkTo(zombie._host_migration_link_helper);
       }
     }
   }
@@ -258,7 +258,7 @@ function host_migration_respawn() {
     }
 
     self dontinterpolate();
-    self setorigin(new_origin.origin);
+    self setOrigin(new_origin.origin);
     self setplayerangles(angles);
   }
 
@@ -313,8 +313,8 @@ function hostmigrationtimerthink_internal() {
   if(isDefined(self._host_migration_link_entity)) {
     ent = spawn("script_origin", self.origin);
     ent.angles = self.angles;
-    self linkto(ent);
-    ent linkto(self._host_migration_link_entity, "tag_origin", self._host_migration_link_entity worldtolocalcoords(ent.origin), ent.angles + self._host_migration_link_entity.angles);
+    self linkTo(ent);
+    ent linkTo(self._host_migration_link_entity, "tag_origin", self._host_migration_link_entity worldtolocalcoords(ent.origin), ent.angles + self._host_migration_link_entity.angles);
     self._host_migration_link_helper = ent;
     println("<dev string:xd5>" + self._host_migration_link_entity.targetname);
   }
@@ -521,6 +521,6 @@ function hostmigration_put_player_in_better_place() {
   }
 
   if(isDefined(spawnpoint)) {
-    self setorigin(spawnpoint.origin);
+    self setOrigin(spawnpoint.origin);
   }
 }

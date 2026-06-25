@@ -262,7 +262,7 @@ run_red_skull_mode() {
   var_04 = wait_for_a_max_ranked_player();
   if(common_scripts\utility::func_562E(var_04)) {
     foreach(var_02 in var_00) {
-      var_02 sethintstring(&"ZOMBIE_DLC3_RED_SKULL_MODEL");
+      var_02 setHintString(&"ZOMBIE_DLC3_RED_SKULL_MODEL");
     }
 
     level thread maps\mp\_utility::func_6F74(::spawn_client_hc_opt_in, var_00, "zmb_darkened_path_unavailable");
@@ -577,7 +577,7 @@ collect_souls_to_unlock_pack_a_punch() {
 }
 
 wait_for_pap_available() {
-  var_00 = getent("pack_a_punch_weapon_display", "targetname");
+  var_00 = getEnt("pack_a_punch_weapon_display", "targetname");
   var_00 method_8511();
   for(var_01 = 0; var_01 < 3; var_01++) {
     common_scripts\utility::func_3C9F("zmb_sg_soul_collect_flag_" + var_01 + 1);
@@ -1678,7 +1678,7 @@ zmb_shattered_boss_nerfs(param_00, param_01, param_02) {
 ________the_classic________() {}
 
 shotgun_classic_init() {
-  var_00 = getent("the_classic_jolt_volume", "targetname");
+  var_00 = getEnt("the_classic_jolt_volume", "targetname");
   for(;;) {
     level waittill("zombie_airdrop_inbound");
     var_00 thread shotgun_classic_listen_for_jolts();

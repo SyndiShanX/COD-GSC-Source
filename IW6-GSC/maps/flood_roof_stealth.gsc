@@ -91,7 +91,7 @@ ally0_main() {
   common_scripts\utility::flag_wait_any("stealth_kill_01_done", "player_start_stealth_kill_02");
 
   if(!common_scripts\utility::flag("player_start_stealth_kill_02")) {
-    var_0 = getent("stealth_kill_01", "targetname");
+    var_0 = getEnt("stealth_kill_01", "targetname");
     var_0 thread maps\_anim::anim_loop_solo(self, "stealth_kill_idle", "stop_idle");
     level waittill("player_start_stealth_kill_02");
     var_0 notify("stop_idle");
@@ -178,17 +178,17 @@ ally0_instruction_vo_holdup(var_0) {
 }
 
 roof_stealth_create_enemies() {
-  var_0 = getent("stealth_enemy_1", "targetname");
+  var_0 = getEnt("stealth_enemy_1", "targetname");
   var_0 maps\_utility::add_spawn_function(::roof_stealth_enemy_spawn_func, "stealth_kill_02_done");
   var_1 = var_0 maps\_utility::spawn_ai();
   level.stealth_enemy_1 = var_1;
   var_1.animname = "stealth_enemy_flash";
-  var_2 = getent("stealth_enemy_2", "targetname");
+  var_2 = getEnt("stealth_enemy_2", "targetname");
   var_2 maps\_utility::add_spawn_function(::roof_stealth_enemy_spawn_func, "stealth_kill_02_done");
   var_3 = var_2 maps\_utility::spawn_ai();
   level.stealth_enemy_2 = var_3;
   var_3.animname = "stealth_enemy_debris";
-  var_4 = getent("stealth_enemy_3", "targetname");
+  var_4 = getEnt("stealth_enemy_3", "targetname");
   var_4 maps\_utility::add_spawn_function(::roof_stealth_enemy_spawn_func, "stealth_enemy_3_dead");
   var_5 = var_4 maps\_utility::spawn_ai();
   level.stealth_enemy_3 = var_5;
@@ -216,7 +216,7 @@ roof_stealth_enemy_flashlight() {
   level endon("stealth_attack_player");
   self.allowdeath = 1;
   self.health = 150;
-  var_0 = getent("stealth_kill_02", "targetname");
+  var_0 = getEnt("stealth_kill_02", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "stealth_kill_02_idle");
   thread enemy_debris_vo();
   var_0 thread check_break_stealth(210, "debris");
@@ -235,7 +235,7 @@ roof_stealth_enemy_debris() {
   self endon("death");
   level endon("stealth_attack_player");
   take_flashlight();
-  var_0 = getent("stealth_kill_02", "targetname");
+  var_0 = getEnt("stealth_kill_02", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "stealth_kill_02_idle");
   thread drop_grenade_bag();
   maps\_utility::gun_remove();
@@ -260,7 +260,7 @@ check_for_weapon_pickup() {
 
 stealth_door_traverse_think() {
   level.player endon("mantle_used");
-  var_0 = getent("stealth_mantle_lookat", "targetname");
+  var_0 = getEnt("stealth_mantle_lookat", "targetname");
   notifyoncommand("mantle", "+gostand");
 
   for(;;) {
@@ -300,7 +300,7 @@ player_mantle_wait() {
   var_0 = maps\_utility::spawn_anim_model("player_rig");
   var_1 = [];
   var_1["player_rig"] = var_0;
-  var_2 = getent("stealth_kill_02", "targetname");
+  var_2 = getEnt("stealth_kill_02", "targetname");
   var_2 maps\_anim::anim_first_frame(var_1, "stealth_traverse");
   level.player playerlinktoblend(var_0, "tag_player", 0.25, 0.1, 0.1, 1);
   thread maps\flood_audio::sfx_plr_vault();
@@ -368,11 +368,11 @@ floater_logic(var_0) {
         var_1 = 2;
         var_2 = 1;
         var_3 = 1.25;
-        self moveto(self.origin - (0, 0, var_1), var_3, 0.2, 0.2);
-        self rotateto(self.angles - (var_2, 0, var_2), var_3, 0.4, 0.4);
+        self moveTo(self.origin - (0, 0, var_1), var_3, 0.2, 0.2);
+        self rotateTo(self.angles - (var_2, 0, var_2), var_3, 0.4, 0.4);
         wait(var_3);
-        self moveto(self.origin + (0, 0, var_1), var_3, 0.2, 0.2);
-        self rotateto(self.angles + (var_2, 0, var_2), var_3, 0.4, 0.4);
+        self moveTo(self.origin + (0, 0, var_1), var_3, 0.2, 0.2);
+        self rotateTo(self.angles + (var_2, 0, var_2), var_3, 0.4, 0.4);
         wait(var_3);
       }
   }
@@ -443,7 +443,7 @@ ai_alert_player_break_stealth() {
   level notify("stealth_attack_player");
   level.allies[0] thread maps\_utility::dialogue_queue("flood_diz_theyseeyou");
   level.allies[0] thread take_hatchet();
-  level.allies[0] stopanimscripted();
+  level.allies[0] stopanimScripted();
 
   if(!isDefined(level.allies[0].magic_bullet_shield)) {
     level.allies[0] maps\_utility::stop_magic_bullet_shield();
@@ -452,21 +452,21 @@ ai_alert_player_break_stealth() {
   level.allies[0].health = 1;
   var_0 = getnode("ally_stealth_break_01_node", "targetname");
   level.allies[0] allowedstances("crouch");
-  var_1 = getent("stealth_kill_01", "targetname");
+  var_1 = getEnt("stealth_kill_01", "targetname");
   var_1 notify("stop_idle");
   waittillframeend;
   level.allies[0] thread maps\_anim::anim_loop_solo(level.allies[0], "stealth_busted_idle", "stop_loop");
   level maps\_utility::delaythread(5, maps\_utility::missionfailedwrapper);
 
   if(isalive(level.stealth_enemy_1)) {
-    level.stealth_enemy_1 stopanimscripted();
+    level.stealth_enemy_1 stopanimScripted();
     level.stealth_enemy_1 drop_flashlight();
     level.stealth_enemy_1.ignoreall = 0;
     level.stealth_enemy_1.goalradius = 8;
     level.stealth_enemy_1 setgoalpos(level.player.origin);
   }
 
-  level.stealth_enemy_2 stopanimscripted();
+  level.stealth_enemy_2 stopanimScripted();
   level.stealth_enemy_2 drop_flashlight();
   level.stealth_enemy_2.ignoreall = 0;
   level.stealth_enemy_2.goalradius = 64;
@@ -474,7 +474,7 @@ ai_alert_player_break_stealth() {
   level.stealth_enemy_2 maps\_utility::gun_recall();
 
   if(!common_scripts\utility::flag("hatchet_linked")) {
-    level.stealth_enemy_3 stopanimscripted();
+    level.stealth_enemy_3 stopanimScripted();
     level.stealth_enemy_3 drop_flashlight();
     level.stealth_enemy_3.ignoreall = 0;
     level.stealth_enemy_3 setgoalpos(level.player.origin);
@@ -597,36 +597,36 @@ check_for_melee_stab() {
 }
 
 firstframe_stealth_debris() {
-  var_0 = getent("stealth_kill_02", "targetname");
-  var_1 = getent("firstframe_test", "targetname");
+  var_0 = getEnt("stealth_kill_02", "targetname");
+  var_1 = getEnt("firstframe_test", "targetname");
   level.stealth_filecab1 = maps\_utility::spawn_anim_model("flood_stealthkill_02_filecabinet_01");
   level.stealth_filecab1.origin = var_1.origin;
-  var_2 = getent("stealth_door_filecab1", "targetname");
-  var_2 linkto(level.stealth_filecab1);
+  var_2 = getEnt("stealth_door_filecab1", "targetname");
+  var_2 linkTo(level.stealth_filecab1);
   level.stealth_filecab2 = maps\_utility::spawn_anim_model("flood_stealthkill_02_filecabinet_02");
   level.stealth_filecab2.origin = var_1.origin;
-  var_2 = getent("stealth_door_filecab2", "targetname");
-  var_2 linkto(level.stealth_filecab2);
+  var_2 = getEnt("stealth_door_filecab2", "targetname");
+  var_2 linkTo(level.stealth_filecab2);
   level.stealth_photocopier = maps\_utility::spawn_anim_model("stealthkill_photocopier");
   level.stealth_photocopier.origin = var_1.origin;
-  var_2 = getent("stealth_door_copier", "targetname");
-  var_2 linkto(level.stealth_photocopier);
+  var_2 = getEnt("stealth_door_copier", "targetname");
+  var_2 linkTo(level.stealth_photocopier);
   var_3 = [];
   var_3["flood_stealthkill_02_filecabinet_01"] = level.stealth_filecab1;
   var_3["flood_stealthkill_02_filecabinet_02"] = level.stealth_filecab2;
   var_3["stealthkill_photocopier"] = level.stealth_photocopier;
   var_0 maps\_anim::anim_first_frame(var_3, "stealth_kill_02");
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
 }
 
 stealth_debris_collision(var_0) {
   switch (var_0) {
     case "on":
-      var_1 = getent("stealth_door_filecab1", "targetname");
+      var_1 = getEnt("stealth_door_filecab1", "targetname");
       var_1 solid();
       break;
     case "off":
-      var_1 = getent("stealth_door_filecab1", "targetname");
+      var_1 = getEnt("stealth_door_filecab1", "targetname");
       var_1 notsolid();
       break;
   }
@@ -645,7 +645,7 @@ no_crouch_hint() {
 }
 
 remove_kill1_collision() {
-  var_0 = getent("stealth kill1 collision", "targetname");
+  var_0 = getEnt("stealth kill1 collision", "targetname");
   var_0 notsolid();
 }
 
@@ -680,14 +680,14 @@ detect_player_touching() {
 
 stealth_kill_01() {
   roof_stealth_create_enemies();
-  var_0 = getent("stealth_kill_01", "targetname");
+  var_0 = getEnt("stealth_kill_01", "targetname");
   level.stealth_enemy_1 thread stealth_kill_01_enemy1(var_0);
   level.stealth_enemy_2 thread stealth_kill_01_enemy2(var_0);
   var_1 = maps\_utility::spawn_anim_model("stealth_axebox");
-  var_2 = getent("axbox_collision", "targetname");
+  var_2 = getEnt("axbox_collision", "targetname");
   var_2.origin = var_1 gettagorigin("j_bone_door_1") + (13.5, 0, 2.5);
   var_2.angles = var_1 gettagangles("j_bone_door_1");
-  var_2 linkto(var_1, "j_bone_door_1");
+  var_2 linkTo(var_1, "j_bone_door_1");
   level.allies[0] thread create_hatchet();
   var_3 = [];
   var_3["ally_0"] = level.allies[0];
@@ -728,7 +728,7 @@ give_flashlight() {
   self.flashlight = maps\_utility::spawn_anim_model("stealth_flashlight");
   self.flashlight.origin = self gettagorigin("tag_inhand");
   self.flashlight.angles = self gettagangles("tag_inhand");
-  self.flashlight linkto(self, "tag_inhand");
+  self.flashlight linkTo(self, "tag_inhand");
   playFXOnTag(level._effect["flood_swept_flashlight"], self.flashlight, "tag_light");
 }
 
@@ -778,8 +778,8 @@ drop_flashlight() {
     var_2 = [];
     var_2[0] = 90;
     var_2[1] = -90;
-    self.flashlight moveto(var_0 + (0, 0, 1), var_1);
-    self.flashlight rotateto((common_scripts\utility::random(var_2), self.flashlight.angles[0], common_scripts\utility::random(var_2)), var_1);
+    self.flashlight moveTo(var_0 + (0, 0, 1), var_1);
+    self.flashlight rotateTo((common_scripts\utility::random(var_2), self.flashlight.angles[0], common_scripts\utility::random(var_2)), var_1);
   }
 }
 
@@ -830,7 +830,7 @@ hatchet_linked(var_0) {
 }
 
 stealth_kill_02_player() {
-  var_0 = getent("stealth_kill_02", "targetname");
+  var_0 = getEnt("stealth_kill_02", "targetname");
   level.player freezecontrols(1);
   level.player allowcrouch(0);
   level.player disableweapons();
@@ -841,7 +841,7 @@ stealth_kill_02_player() {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_1 gettagorigin("tag_player") + (0, 0, 20);
   var_2.angles = var_1 gettagangles("tag_player");
-  var_2 linkto(var_1, "tag_player");
+  var_2 linkTo(var_1, "tag_player");
   var_3 = [];
   var_3["vignette_stealth_kill2_opfor1"] = level.stealth_enemy_1;
   var_3["player_rig"] = var_1;
@@ -866,13 +866,13 @@ stealth_kill_02_player() {
   level.player allowcrouch(1);
   level.player enableweapons();
   level.cw_no_waterwipe = 0;
-  var_4 = getent("stealth_hall_clip", "targetname");
+  var_4 = getEnt("stealth_hall_clip", "targetname");
   var_4 hide();
   var_4 notsolid();
 }
 
 stealth_kill_02_ally() {
-  var_0 = getent("stealth_kill_02", "targetname");
+  var_0 = getEnt("stealth_kill_02", "targetname");
   var_1 = [];
   var_1["flood_stealthkill_02_filecabinet_01"] = level.stealth_filecab1;
   var_1["flood_stealthkill_02_filecabinet_02"] = level.stealth_filecab2;

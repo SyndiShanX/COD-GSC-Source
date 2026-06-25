@@ -71,7 +71,7 @@ function function_319c73b1(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwastimejump == 1) {
     self.var_47b256ef.origin = self.origin;
-    self.var_47b256ef linkto(self);
+    self.var_47b256ef linkTo(self);
     return;
   }
 
@@ -112,7 +112,7 @@ function function_2eee13af() {
 
   while(true) {
     toppos = self.origin + (0, 0, 12);
-    self.var_47b256ef moveto(toppos, 0.5, 0, 0);
+    self.var_47b256ef moveTo(toppos, 0.5, 0, 0);
     self.var_47b256ef waittill(#"movedone");
 
     if(isDefined(self.clientnum) && self.clientnum > -1) {
@@ -120,7 +120,7 @@ function function_2eee13af() {
     }
 
     bottompos = self.origin;
-    self.var_47b256ef moveto(bottompos, 0.5, 0, 0);
+    self.var_47b256ef moveTo(bottompos, 0.5, 0, 0);
     self.var_47b256ef waittill(#"movedone");
 
     if(isDefined(self.clientnum) && self.clientnum > -1) {

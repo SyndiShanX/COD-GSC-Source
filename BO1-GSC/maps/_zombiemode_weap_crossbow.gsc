@@ -105,7 +105,7 @@ monkey_bolt_taunts(ent_grenade) {
         return;
       }
       self.allowdeath = 1;
-      self animscripted("zombie_taunt", self.origin, self.angles, taunt_anim, "normal", undefined, 1, 0.4);
+      self animScripted("zombie_taunt", self.origin, self.angles, taunt_anim, "normal", undefined, 1, 0.4);
       if(!IsAlive(self)) {
         return;
       }

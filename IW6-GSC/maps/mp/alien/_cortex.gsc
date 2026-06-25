@@ -90,7 +90,7 @@ wait_for_player_to_place_cortex() {
         self.player_action_disabled = undefined;
         turn_on_cortex();
         self forceusehintoff();
-        level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
+        level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
         level notify("cortex_dropped");
       }
     }
@@ -408,7 +408,7 @@ drop_cortex_on_death() {
     drop_cortex(self.origin, (0, 0, 0));
 
   level.cortex_use_trigger makeusable();
-  level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
+  level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
   maps\mp\alien\_outline_proto::add_to_drill_preplant_watch_list(level.cortex);
 }
 
@@ -433,5 +433,5 @@ drop_cortex_on_disconnect() {
   drop_cortex(var_1.origin, var_1.angles);
   maps\mp\alien\_outline_proto::add_to_drill_preplant_watch_list(level.cortex);
   level.cortex_use_trigger makeusable();
-  level.cortex_use_trigger sethintstring(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
+  level.cortex_use_trigger setHintString(&"MP_ALIEN_DESCENT_PICKUP_CORTEX");
 }

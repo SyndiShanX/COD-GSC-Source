@@ -263,7 +263,7 @@ enemy_corpse_logic() {
         origin = self getEye();
 
         sight = anglesToForward(angles);
-        vec_to_corpse = vectornormalize(corpse.origin - origin);
+        vec_to_corpse = vectorNormalize(corpse.origin - origin);
 
         if(vectordot(sight, vec_to_corpse) > .55) {
           if(self cansee(corpse)) {

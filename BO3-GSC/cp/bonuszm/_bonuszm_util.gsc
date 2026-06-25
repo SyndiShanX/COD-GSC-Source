@@ -262,9 +262,9 @@ function function_ae0beba6(var_28b84d73, closestplayer, data) {
   score = 0;
   var_4d45bcdc = 0;
   if(isDefined(closestplayer) && isDefined(closestplayer.v_current_active_breadcrumb)) {
-    var_c54cd263 = vectornormalize((closestplayer.v_current_active_breadcrumb[0], closestplayer.v_current_active_breadcrumb[1], 0) - (closestplayer.origin[0], closestplayer.origin[1], 0));
+    var_c54cd263 = vectorNormalize((closestplayer.v_current_active_breadcrumb[0], closestplayer.v_current_active_breadcrumb[1], 0) - (closestplayer.origin[0], closestplayer.origin[1], 0));
     fov = cos(70);
-    var_a9f2c7c7 = vectornormalize((data.origin[0], data.origin[1], 0) - (closestplayer.origin[0], closestplayer.origin[1], 0));
+    var_a9f2c7c7 = vectorNormalize((data.origin[0], data.origin[1], 0) - (closestplayer.origin[0], closestplayer.origin[1], 0));
     dot = vectordot(var_c54cd263, var_a9f2c7c7);
     if(dot >= fov) {
       score = randomfloatrange(1, 2);

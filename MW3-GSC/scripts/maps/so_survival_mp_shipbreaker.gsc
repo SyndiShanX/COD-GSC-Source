@@ -24,8 +24,8 @@ main() {
 
 dog_at_ladder() {
   level endon("special_op_terminated");
-  var_0 = getent("dog_at_ladder", "targetname");
-  var_1 = getent("ladder_clip", "targetname");
+  var_0 = getEnt("dog_at_ladder", "targetname");
+  var_1 = getEnt("ladder_clip", "targetname");
   var_1 maps\_utility::_id_27C5();
   var_1 connectpaths();
 
@@ -34,7 +34,7 @@ dog_at_ladder() {
 
     if(isDefined(var_2) && isDefined(var_2.type) && var_2.type == "dog") {
       var_1 maps\_utility::_id_27C6();
-      var_1 disconnectpaths();
+      var_1 disconnectPaths();
       wait 3.0;
       var_1 maps\_utility::_id_27C5();
       var_1 connectpaths();

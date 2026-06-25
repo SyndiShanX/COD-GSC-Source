@@ -48,7 +48,7 @@ function_afce0cdb(spawn_loc) {
   }
 
   zone.name = parms[0];
-  zone.volume = getent(zone.name, "targetname");
+  zone.volume = getEnt(zone.name, "targetname");
   zone.mins = zone.volume.origin + zone.volume.mins;
   zone.maxs = zone.volume.origin + zone.volume.maxs;
   zone.var_c6328f73 = int(parms[1]);
@@ -71,7 +71,7 @@ function_afce0cdb(spawn_loc) {
 
     if(!isDefined(patroller)) {
       if(isDefined(zone.is_vehicle) && zone.is_vehicle) {
-        patroller = spawnvehicle(spawn_loc.script_noteworthy, spawn_loc.origin, (0, 0, 0), "wz_patrol_veh_ai");
+        patroller = spawnVehicle(spawn_loc.script_noteworthy, spawn_loc.origin, (0, 0, 0), "wz_patrol_veh_ai");
       } else {
         patroller = spawnactor(spawn_loc.script_noteworthy, spawn_loc.origin, (0, 0, 0), "wz_patrol_ai");
       }
@@ -129,7 +129,7 @@ function_77a4c7ab() {
   while(true) {
     self.is_occupied = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player) || !isalive(player)) {
         continue;
       }

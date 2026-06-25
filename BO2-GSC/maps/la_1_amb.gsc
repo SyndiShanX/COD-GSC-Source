@@ -73,7 +73,7 @@ get_wait_max() {
 
 play_post_cougar_blend() {
   level waittill("cougar_blend_go");
-  playsoundatposition("vox_blend_post_cougar", (7780, -57300, 670));
+  playSoundAtPosition("vox_blend_post_cougar", (7780, -57300, 670));
 }
 
 snapshot_drone() {

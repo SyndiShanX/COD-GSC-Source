@@ -132,7 +132,7 @@ death_shock_launch(param_00) {
   var_02 = self;
   var_03 = var_02.giest_shield_origin - var_02.var_0116;
   var_03 = (var_03[0], var_03[1], 0);
-  var_03 = var_01 * vectornormalize(var_03) + (0, 0, var_01);
+  var_03 = var_01 * vectorNormalize(var_03) + (0, 0, var_01);
   var_04 = var_02.giest_shield_origin;
   if(isDefined(var_02.geistshieldattacker)) {
     if(!isDefined(var_02.geistshieldattacker.lastexplodetime)) {

@@ -109,7 +109,7 @@ spawn_enemies(var_0) {
   if(getDvar("ac130_gameplay_enabled") == "0") {
     return;
   }
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   var_1 notify("trigger");
 }
 
@@ -117,7 +117,7 @@ stop_enemies(var_0) {
   if(getDvar("ac130_gameplay_enabled") == "0") {
     return;
   }
-  var_1 = getent(var_0, "script_noteworthy");
+  var_1 = getEnt(var_0, "script_noteworthy");
   thread maps\_spawner::kill_spawnernum(var_1.script_killspawner_group);
 }
 
@@ -140,12 +140,12 @@ spawn_friendlies(var_0) {
 }
 
 spawn_ac130_vehicle(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 notify("trigger");
 }
 
 move_friendlies(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(common_scripts\utility::flag("ignore_friendly_move_commands")) {
     return;
@@ -214,7 +214,7 @@ hintprint(var_0, var_1) {
 }
 
 getenemiesinzone(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = getaiarray("axis");
   var_3 = [];
 
@@ -449,7 +449,7 @@ civilian_car_riders_spawn_and_idle_start(var_0, var_1, var_2) {
   var_0.edriver.tracksuit_ignore = 1;
   var_0.edriver.animname = var_2;
   var_0.edriver maps\_utility::set_run_anim("runaway", 1, 1);
-  var_0.edriver linkto(var_0);
+  var_0.edriver linkTo(var_0);
   var_0.edriver.animname = var_2;
   var_0.edriver thread maps\_anim::anim_loop_solo(var_0.edriver, "idle", "tag_driver", "stop_idle", var_0);
   var_0.edriver thread civilian_car_riders_mission_fail();
@@ -487,7 +487,7 @@ hijack_friendlies_force_position() {
 
 do_hijack(var_0, var_1, var_2, var_3) {
   common_scripts\utility::array_thread(var_1, maps\ac130::dontshoot, 1);
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   common_scripts\utility::array_thread(var_1, ::hijack_friendlies_force_position);
   var_0 maps\_anim::anim_reach(var_1, "hijack", "tag_detach", undefined, var_0);
   maps\_utility::array_notify(var_1, "hijack_friendlies_in_position");
@@ -524,7 +524,7 @@ hijack_driver_flee() {
   self.edriver waittillmatch("single anim", "end");
   self.edriver maps\_anim::anim_single_queue(self.edriver, "runaway");
   var_0 = getnode(self.edriver.target, "targetname");
-  self.edriver stopanimscripted();
+  self.edriver stopanimScripted();
   self.edriver setgoalnode(var_0);
 }
 
@@ -541,7 +541,7 @@ do_hijack_vehicle_anim(var_0) {
 
 do_car_idle_after_hijack(var_0) {
   self waittillmatch("single anim", "end");
-  self linkto(var_0);
+  self linkTo(var_0);
   var_0 thread maps\_anim::anim_loop_solo(self, "idle", self.sittag, "stop_idle", var_0);
   var_0 waittill("getout");
   maps\_utility::set_force_color("r");
@@ -650,7 +650,7 @@ destructible_building() {
       var_2[var_4] show();
       var_12 = var_2[var_4].origin;
       var_13 = var_2[var_4].angles;
-      var_14 = getent(var_2[var_4].target, "targetname");
+      var_14 = getEnt(var_2[var_4].target, "targetname");
       var_15 = var_14.origin - var_12;
       var_16 = var_15[0];
       var_17 = var_15[1];
@@ -668,8 +668,8 @@ destructible_building() {
     var_22 = 5.0;
     var_23 = 2.0;
     var_24 = 2.0;
-    var_1[var_4] moveto(var_1[var_4].origin - (0, 0, 512), var_22, var_23, var_24);
-    var_1[var_4] rotateto(var_1[var_4].angles + (var_19, var_20, var_21), var_22 / 2, var_23 / 2, var_24 / 2);
+    var_1[var_4] moveTo(var_1[var_4].origin - (0, 0, 512), var_22, var_23, var_24);
+    var_1[var_4] rotateTo(var_1[var_4].angles + (var_19, var_20, var_21), var_22 / 2, var_23 / 2, var_24 / 2);
     var_1[var_4] thread maps\_utility::delaythread(5.0, maps\_utility::self_delete);
   }
 

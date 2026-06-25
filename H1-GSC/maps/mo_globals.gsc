@@ -413,7 +413,7 @@ friendly_spawner_think() {
 
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "repel_friendlies") {
-      var_1 = common_scripts\utility::getstruct(self.targetname, "target");
+      var_1 = common_scripts\utility::getStruct(self.targetname, "target");
       var_0 thread friendly_repel_spawner_think(var_1);
     }
   }
@@ -581,7 +581,7 @@ interactive_wallthink() {
   var_1 = undefined;
 
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
 
     if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "doorframe") {
       var_2 = self getorigin();
@@ -675,7 +675,7 @@ interactive_cratethink() {
   self setCanDamage(1);
 
   if(isDefined(self.target)) {
-    self.debri = getent(self.target, "targetname");
+    self.debri = getEnt(self.target, "targetname");
     self.debri hide();
   }
 
@@ -742,15 +742,15 @@ auto_save_think() {
 wall_breach_think() {
   var_0 = spawnStruct();
   var_0.on = self;
-  var_0.off = getent(var_0.on.target, "targetname");
+  var_0.off = getEnt(var_0.on.target, "targetname");
   var_0.obj_glow = getEntArray(var_0.off.target, "targetname");
   var_0.obj_mdl = getEntArray(var_0.obj_glow[0].target, "targetname");
   var_0.use_trig = getEntArray(var_0.obj_mdl[0].target, "targetname");
-  var_0.whole = getent(var_0.use_trig[0].target, "targetname");
-  var_0.broken = getent(var_0.whole.target, "targetname");
+  var_0.whole = getEnt(var_0.use_trig[0].target, "targetname");
+  var_0.broken = getEnt(var_0.whole.target, "targetname");
 
   if(isDefined(var_0.broken.target)) {
-    var_0.chain = getent(var_0.broken.target, "targetname");
+    var_0.chain = getEnt(var_0.broken.target, "targetname");
   }
 
   var_0.obj_glow[0] hide();
@@ -758,10 +758,10 @@ wall_breach_think() {
   var_0.obj_mdl[0] hide();
   var_0.obj_mdl[1] hide();
   var_0.broken hide();
-  var_0.whole disconnectpaths();
+  var_0.whole disconnectPaths();
   var_0.use_trig[0].time = 4;
-  var_0.use_trig[0] sethintstring(level.strings["hint_detpack"]);
-  var_0.use_trig[1] sethintstring(level.strings["hint_detpack"]);
+  var_0.use_trig[0] setHintString(level.strings["hint_detpack"]);
+  var_0.use_trig[1] setHintString(level.strings["hint_detpack"]);
   var_0 endon("used");
   var_0 thread wall_breach_think2();
 
@@ -792,7 +792,7 @@ wall_breach_think2() {
     self.broken show();
 
     if(self.broken.spawnflags & 1) {
-      self.broken disconnectpaths();
+      self.broken disconnectPaths();
     }
 
     return;
@@ -815,7 +815,7 @@ wall_breach_think2() {
   self.broken show();
 
   if(self.broken.spawnflags & 1) {
-    self.broken disconnectpaths();
+    self.broken disconnectPaths();
   }
 
   self.on delete();

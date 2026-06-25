@@ -154,8 +154,8 @@ function private function_fa4f5603(statemachine, var_9e3df858) {
     }
   }
 
-  blackboard.mdl_bulb_left = getent("mdl_bulb_left", "script_noteworthy");
-  blackboard.mdl_bulb_right = getent("mdl_bulb_right", "script_noteworthy");
+  blackboard.mdl_bulb_left = getEnt("mdl_bulb_left", "script_noteworthy");
+  blackboard.mdl_bulb_right = getEnt("mdl_bulb_right", "script_noteworthy");
   blackboard.var_3c3d8c0b = [];
   var_d771858a = function_f98394d8(var_625dd793, blackboard.var_3cb3ede5);
 
@@ -291,7 +291,7 @@ function private function_e768ae1e(var_d771858a, var_663c51cb, var_3cb3ede5) {
     var_d771858a[var_d771858a.size] = e;
   }
 
-  t = getent(var_663c51cb, "script_noteworthy");
+  t = getEnt(var_663c51cb, "script_noteworthy");
 
   if(!isDefined(var_d771858a)) {
     var_d771858a = [];
@@ -309,7 +309,7 @@ function private function_e768ae1e(var_d771858a, var_663c51cb, var_3cb3ede5) {
       }
 
       if(isDefined(evidencedata.tagname)) {
-        e = getent(evidencedata.tagname, "script_noteworthy");
+        e = getEnt(evidencedata.tagname, "script_noteworthy");
 
         if(!isDefined(var_d771858a)) {
           var_d771858a = [];
@@ -328,7 +328,7 @@ function private function_e768ae1e(var_d771858a, var_663c51cb, var_3cb3ede5) {
 function private function_1e294fd9(var_625dd793, var_3cb3ede5) {
   foreach(mapname in var_625dd793) {
     clusterdata = var_3cb3ede5[mapname];
-    var_4ff3b76c = getent(clusterdata.var_4ff3b76c, "script_noteworthy");
+    var_4ff3b76c = getEnt(clusterdata.var_4ff3b76c, "script_noteworthy");
     var_4ff3b76c show();
     var_f215acc = 1;
 
@@ -742,7 +742,7 @@ function private function_f77a1784(params) {
 }
 
 function private function_fb5a7ab1(var_5a02549b) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player notify(#"evidence_board_mission_selected");
 }
 
@@ -752,7 +752,7 @@ function private function_4b717253(var_5a02549b) {
 
 function private function_e976f5d3() {
   missionname = self.script_noteworthy;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   statemachine = player function_1bb19090();
   blackboard = statemachine.blackboard;
   blackboard.var_c5bde695 = missionname;
@@ -798,7 +798,7 @@ function private function_e976f5d3() {
 }
 
 function private function_cab79d7e() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   statemachine = player function_1bb19090();
   statemachine.blackboard.var_c5bde695 = undefined;
   interactive_map::function_23036faa(#"cursor", "year", 0);
@@ -1081,7 +1081,7 @@ function private function_5058b4e9(params) {
 }
 
 function private function_1c9f3744(nextmission) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player notify(#"hash_3ac28b014653cac6");
   skipto::function_1c2dfc20(nextmission);
 }
@@ -1212,7 +1212,7 @@ function private function_54e62ef2(oldindex, newindex) {
 }
 
 function private function_85225ecb() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player notify(#"hash_6508d37e574b09be");
 }
 
@@ -1655,7 +1655,7 @@ function private function_aa81758f(var_520cb95d, isvisible) {
   assert(isDefined(var_520cb95d.isunlocked));
 
   if(var_520cb95d.isunlocked) {
-    var_afbac09f = getent(var_520cb95d.tagname, "script_noteworthy");
+    var_afbac09f = getEnt(var_520cb95d.tagname, "script_noteworthy");
 
     if(isDefined(var_afbac09f)) {
       if(isvisible) {
@@ -1669,7 +1669,7 @@ function private function_aa81758f(var_520cb95d, isvisible) {
 }
 
 function private function_b3f7df56(var_38d97d58) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   assert(isDefined(var_38d97d58.var_5eeb1ad0));
   namespace_c8e236da::function_ebf737f8(#"hash_412ac8802ccc592d");

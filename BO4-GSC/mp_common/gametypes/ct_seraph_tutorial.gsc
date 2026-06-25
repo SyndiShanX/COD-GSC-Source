@@ -79,7 +79,7 @@ function_c9ff0dce() {
               }
             }
 
-            self setorigin(v_loc);
+            self setOrigin(v_loc);
             self setplayerangles(v_ang);
             break;
           case 10:
@@ -360,13 +360,13 @@ function_f624b4a4() {
   level.var_bf847351 = undefined;
 
   while(true) {
-    e_trigger = getent("t_damage_vase", "targetname");
+    e_trigger = getEnt("t_damage_vase", "targetname");
     e_trigger trigger::wait_till();
     level.var_7b83b757 = undefined;
     level.var_bf847351 = undefined;
     s_loc = struct::get("s_vase_loc", "targetname");
     physicsexplosionsphere(s_loc.origin, 192, 100, 32);
-    playsoundatposition(#"hash_3b38c48f1faa172b", (0, -1588, 60));
+    playSoundAtPosition(#"hash_3b38c48f1faa172b", (0, -1588, 60));
     level.var_96358ab6 = 1;
     e_player = ct_utils::get_player();
 
@@ -459,7 +459,7 @@ function_9f3fe320() {
     b_success = 0;
 
     while(true) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       a_bots = e_player ct_bots::function_dde6edbd();
 
       if(!level.var_30f6fd66 && a_bots.size == 2) {
@@ -481,7 +481,7 @@ function_9f3fe320() {
         if(level.var_30f6fd66 == 2) {
           if(a_bots.size == 1 && !(isDefined(a_bots[0].var_5f67e634) && a_bots[0].var_5f67e634)) {
             v_forward = anglesToForward(e_player.angles);
-            v_dir = vectornormalize(a_bots[0].origin - e_player.origin);
+            v_dir = vectorNormalize(a_bots[0].origin - e_player.origin);
             dp = vectordot(v_forward, v_dir);
 
             if(dp > 0.996) {
@@ -748,7 +748,7 @@ function_95e6fae3() {
   e_player thread ct_utils::function_61c3d59c(#"hash_276c71244969e7f5", undefined);
   e_player clientfield::set_player_uimodel("hudItems.spawnSelectHidePrompt", 1);
   s_chopper = struct::get("s_vh_chopper", "targetname");
-  vh_chopper = spawnvehicle(#"veh_t8_helicopter_gunship_mp", s_chopper.origin, s_chopper.angles);
+  vh_chopper = spawnVehicle(#"veh_t8_helicopter_gunship_mp", s_chopper.origin, s_chopper.angles);
   util::magic_bullet_shield(vh_chopper);
   vh_chopper setteam(#"axis");
   vh_chopper setrotorspeed(1);
@@ -819,7 +819,7 @@ function_c8e681c8() {
   ct_vo::function_3ca1b77d();
   level.var_4a4cff9b = 0;
   level.var_f3fb470f = 1;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread function_b23a52d(2.25, 1);
   var_f1f44cd4 = e_player gamepadusedlast() ? #"hash_6704e759add72c61" : #"hash_5d01463c800741a7";
   var_8193e12c = e_player gamepadusedlast() ? #"hash_51ec0cddcf9bf540" : #"hash_39b5d3b515e5b36c";
@@ -846,7 +846,7 @@ function_c8e681c8() {
     waitframe(1);
   }
 
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player notify(#"menu_closed");
   s_loc = struct::get("s_chopper_attack_loc", "targetname");
   e_player = ct_utils::get_player();
@@ -879,7 +879,7 @@ function_c8e681c8() {
   level.var_32ae304 = level.temp_disable;
   level notify(#"hash_4c9c5fbc89779e64");
   ct_utils::function_e9ab1003("s_seraph_soldier_loc_5_2");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread function_b23a52d(2.25, 0);
   var_5140744e = function_8b1a219a() ? #"hash_10c1ccd08be6e1f9" : #"hash_50a34cf1332e24f";
   var_eb32d4fd = e_player gamepadusedlast() ? #"hash_4b8f067f2ba3cf59" : #"hash_4a0ed54a946ba43f";
@@ -922,7 +922,7 @@ function_283155c3() {
   level.var_fa06889a = 0;
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(isDefined(e_player)) {
       if(e_player actionbuttonPressed() || e_player reloadbuttonPressed()) {
@@ -939,7 +939,7 @@ function_1234c415() {
   level.var_fa06889a = 0;
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     waitresult = e_player waittill(#"menuresponse");
     menu = waitresult.menu;
     response = waitresult.response;
@@ -1150,7 +1150,7 @@ function_d4bbc142() {
             break;
           }
 
-          e_player = getplayers()[0];
+          e_player = getPlayers()[0];
           n_dist = distance(e_player.origin, e_beacon.origin);
 
           if(n_dist > 350) {
@@ -1191,8 +1191,8 @@ function_d4bbc142() {
 function_6afc7a47(e_player) {
   self endon(#"death");
   self.t_use = spawn("trigger_radius_use", self.origin + (0, 0, 20), 0, 80, 80);
-  self.t_use sethintstring(#"hash_33c0a447b3903430");
-  self.t_use setcursorhint("HINT_NOICON");
+  self.t_use setHintString(#"hash_33c0a447b3903430");
+  self.t_use setCursorHint("HINT_NOICON");
   self.t_use setteamfortrigger(e_player.team);
   self.t_use setvisibletoplayer(e_player);
   self.t_use waittill(#"trigger");
@@ -1220,7 +1220,7 @@ function_20380fe4() {
       n_dist = distance(e_player.origin, beacon.origin);
 
       if(n_dist < 700) {
-        v_dir = vectornormalize(e_player.origin - beacon.origin);
+        v_dir = vectorNormalize(e_player.origin - beacon.origin);
         v_pos = beacon.origin + v_dir * 50;
 
         if(e_player ct_utils::can_see(v_pos, 1)) {
@@ -1247,7 +1247,7 @@ function_a623876e() {
 function_ffdd31e0() {
   level endon(#"combattraining_logic_finished");
   self waittill(#"death");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player util::show_hit_marker(1);
   level thread ct_vo::function_41e59aeb(array(#"hash_16d8d45fbc20d9a1"), 1);
   playFX(#"explosions/fx_exp_robot_stage3_evb", self.origin);
@@ -1480,7 +1480,7 @@ function_c43189cd() {
         ct_vo::function_3ca1b77d();
         level.var_de284b17 = 0;
         level thread ct_vo::function_831e0584(array(#"hash_d186ec624023680"), 1);
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
 
         while(!isalive(e_player)) {
           waitframe(1);
@@ -1492,7 +1492,7 @@ function_c43189cd() {
       break;
     }
 
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(e_player.health < 150) {
       e_player.health = 150;
@@ -1520,7 +1520,7 @@ function_c43189cd() {
     globallogic_score::_setplayermomentum(e_player, 0);
 
     while(true) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
 
       if(isalive(e_player)) {
         wpn = e_player getcurrentweapon();
@@ -1593,7 +1593,7 @@ function_f75fee23(n_max_bots) {
   level.var_da5432a2 = 0;
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     a_bots = e_player ct_bots::function_dde6edbd();
 
     if(a_bots.size < n_max_bots) {
@@ -1613,7 +1613,7 @@ gunship_event() {
   level.var_43da6545 = 1;
   level.var_e190d640 = 1;
   level.var_e6db911d = 0;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player hide();
   wait 4;
   e_player = ct_utils::get_player();
@@ -1708,7 +1708,7 @@ gunship_event() {
 
   level.var_74bfba73 = undefined;
   level notify(#"gunship_event_complete");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player show();
   ac130::function_8721028e(level.ac130.owner, 1);
   level.var_e190d640 = 0;
@@ -1923,7 +1923,7 @@ function_1866eabf(s_loc) {
   self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 32);
   self bot_stance::crouch();
   mdl_anchor = util::spawn_model("tag_origin", s_loc.origin, s_loc.angles);
-  self linkto(mdl_anchor);
+  self linkTo(mdl_anchor);
   self waittill(#"death");
   mdl_anchor delete();
 }
@@ -2001,7 +2001,7 @@ function_85d8bdb0(s_spawn_loc) {
       waitframe(1);
     }
 
-    self setorigin(s_target.origin);
+    self setOrigin(s_target.origin);
     self.b_stationary = 1;
     e_player = ct_utils::get_player();
     a_bots = e_player ct_bots::function_dde6edbd();
@@ -2090,7 +2090,7 @@ function_2232d333(b_is_on) {
 
 function_2fa4efc2(waitresult) {
   var_c481f7e6 = 0;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   waitframe(1);
   n_time = gettime() / 1000;
   dt = n_time - level.var_fa06889a;
@@ -2164,7 +2164,7 @@ function_7e060369() {
       }
 
       if(var_e9af190e) {
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
         n_height_diff = abs(e_player.origin[2] - e_beacon.origin[2]);
 
         if(n_height_diff > 5) {
@@ -2210,7 +2210,7 @@ function_2b612805(var_47a6e8d, var_caad9028) {
       v_loc = level.var_2b87f134.origin;
     }
 
-    v_dir = vectornormalize(level.var_2b87f134.origin - v_loc);
+    v_dir = vectorNormalize(level.var_2b87f134.origin - v_loc);
     v_angles = vectortoangles(v_dir);
     v_angles = (v_angles[0], v_angles[1], 0);
 
@@ -2224,7 +2224,7 @@ function_2b612805(var_47a6e8d, var_caad9028) {
         self thread ct_utils::function_5b59f3b7(var_637b6a7e.origin, var_637b6a7e.angles, var_caad9028);
       }
     } else if(isDefined(level.var_79cf1332) && level.var_79cf1332) {
-      self setorigin(v_loc);
+      self setOrigin(v_loc);
       self setplayerangles(v_angles);
     } else {
       var_da6ce0d5 = 0;
@@ -2242,7 +2242,7 @@ function_2b612805(var_47a6e8d, var_caad9028) {
 
 function_7746c49c(n_radius) {
   if(!isDefined(level.var_8dc0019e)) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     level.var_8dc0019e = util::spawn_model("tag_origin", e_player.origin, e_player.angles);
   }
 
@@ -2288,7 +2288,7 @@ function_99a579e2() {
     level.var_1937cf8e = 0;
   }
 
-  self setorigin(s_loc.origin);
+  self setOrigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
   self thread function_d832af02(s_loc);
 }

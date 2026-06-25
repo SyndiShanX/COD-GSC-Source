@@ -66,8 +66,8 @@ section_post_inits() {
   level._refinery = spawnStruct();
   level._refinery.destroyed_derrick_models = getEntArray("model_derrick_collapsed", "script_noteworthy");
   common_scripts\utility::array_call(level._refinery.destroyed_derrick_models, ::hide);
-  level._refinery.derrick_struct = common_scripts\utility::getstruct("struct_derrick", "targetname");
-  level._refinery.enemy_struct = common_scripts\utility::getstruct("struct_refinery_explosion_scene", "targetname");
+  level._refinery.derrick_struct = common_scripts\utility::getStruct("struct_derrick", "targetname");
+  level._refinery.enemy_struct = common_scripts\utility::getStruct("struct_refinery_explosion_scene", "targetname");
 
   if(isDefined(level._refinery.enemy_struct)) {
     event_derrick_explode_debris_setup();
@@ -122,7 +122,7 @@ allies() {
 }
 
 allies_baker_hold() {
-  var_0 = common_scripts\utility::getstruct("struct_refinery_baker_hold", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_refinery_baker_hold", "targetname");
   maps\_utility::trigger_wait_targetname("trig_refinery_color_stairs");
   thread dialogue_baker_waitforit();
   level.player thread util_player_rubber_banding_solo(self);
@@ -362,7 +362,7 @@ spawnfunc_enemy_elevator_damage_interrupt() {
 encounter_start() {
   level.player.ignoreme = 1;
   thread player_interrupt_watcher();
-  var_0 = getent("trig_refinery_flood_1", "script_noteworthy");
+  var_0 = getEnt("trig_refinery_flood_1", "script_noteworthy");
   level common_scripts\utility::waittill_any("notify_refinery_scene_complete", "flag_refinery_player_started_encounter", "flag_refinery_engagement_start");
   common_scripts\utility::flag_set("flag_refinery_engagement_start");
   maps\_utility::delaythread(4, ::enemies_flood, var_0);
@@ -410,7 +410,7 @@ enemies_right_door() {
 }
 
 event_derrick_explode() {
-  var_0 = getent("origin_derrick_lookat", "targetname");
+  var_0 = getEnt("origin_derrick_lookat", "targetname");
   thread event_derrick_explode_debris_bomb();
   thread event_derrick_explode_setup();
   thread vision_set_refinery_visionsets();
@@ -434,11 +434,11 @@ event_derrick_explode_stack_setup() {
 
   for(var_3 = 0; var_3 < var_0; var_3++) {
     var_4 = getEntArray("refinery_stack_anim_" + var_3, "targetname");
-    var_5 = getent("refinery_stack_anim_node_" + var_3, "script_noteworthy");
+    var_5 = getEnt("refinery_stack_anim_node_" + var_3, "script_noteworthy");
     var_6 = var_5 common_scripts\utility::spawn_tag_origin();
 
     foreach(var_8 in var_4) {
-      var_8 linkto(var_6);
+      var_8 linkTo(var_6);
     }
 
     thread event_derrick_explode_stack_motion(var_6, var_1[var_3], var_2[var_3]);
@@ -461,7 +461,7 @@ event_derrick_explode_stack_motion(var_0, var_1, var_2) {
   var_4 = var_0.origin - var_3;
   var_4 = (var_4[0], var_4[1], 0);
   var_5 = length(var_4);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_6 = 3000.0;
   var_7 = 1.0;
   wait(var_5 / var_6 * var_7);
@@ -484,7 +484,7 @@ event_derrick_explode_debris_bomb() {
     var_3 hide();
   }
 
-  var_5 = getent("origin_refinery_debris_explosion", "targetname");
+  var_5 = getEnt("origin_refinery_debris_explosion", "targetname");
   level waittill("notify_traveling_block_impact");
 
   foreach(var_7 in var_0) {
@@ -512,7 +512,7 @@ event_derrick_explode_debris_bomb() {
 
   thread event_derrick_explode_debris_bomb_tank_player_quake();
   physicsexplosionsphere(var_5.origin, 1024, 1023, 3);
-  var_15 = getent("refinery_tank_fire_1", "targetname");
+  var_15 = getEnt("refinery_tank_fire_1", "targetname");
   var_15 setlightintensity(2.0);
   thread maps\black_ice_util::black_ice_geyser_pulse();
   thread maps\black_ice_util::black_ice_geyser2_pulse();
@@ -620,9 +620,9 @@ event_derrick_explode_large(var_0) {
   thread fx_snow_shockwave();
   wait 1.0;
   earthquake(0.35, 2, level.player.origin, 128);
-  var_1 = vectornormalize(level.player.origin - var_0.origin);
+  var_1 = vectorNormalize(level.player.origin - var_0.origin);
   thread maps\black_ice_util::push_player_impulse(var_1, 21, 0.9);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level notify("notify_derrick_explode_done");
 }
 
@@ -654,7 +654,7 @@ event_derrick_explode_debris_oiltank(var_0) {
 
   foreach(var_8 in level._refinery.scripted) {
     foreach(var_13 in var_8._col) {
-      var_13 disconnectpaths();
+      var_13 disconnectPaths();
     }
   }
 
@@ -667,7 +667,7 @@ event_derrick_explode_debris_oiltank(var_0) {
 
 event_derrick_explode_catwalk_break(var_0) {
   var_1 = maps\_utility::spawn_anim_model("oiltank_catwalk");
-  var_2 = getent("model_refinery_tank_catwalk", "targetname");
+  var_2 = getEnt("model_refinery_tank_catwalk", "targetname");
   level waittill("notify_derrick_large_explosion");
   var_0 thread maps\_anim::anim_single_solo(var_1, "oiltank_catwalk");
   var_1 hide();
@@ -727,7 +727,7 @@ event_derrick_explode_debris_main(var_0) {
 event_derrick_explode_debris_main_fx_runner(var_0, var_1, var_2) {
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_0.origin;
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   playFXOnTag(common_scripts\utility::getfx(var_1), var_3, "tag_origin");
   self waittill("hitground");
   stopFXOnTag(common_scripts\utility::getfx(var_1), var_3, "tag_origin");
@@ -736,7 +736,7 @@ event_derrick_explode_debris_main_fx_runner(var_0, var_1, var_2) {
 
 event_derrick_explode_debris_setup() {
   var_0 = level._refinery.derrick_struct;
-  level._refinery.derrick_model = getent("model_blackice_derrick", "targetname");
+  level._refinery.derrick_model = getEnt("model_blackice_derrick", "targetname");
   level._refinery.derrick_model maps\_utility::assign_animtree("derrick");
   var_0 maps\_anim::anim_first_frame_solo(level._refinery.derrick_model, "collapse");
   level._refinery.barrel_model_1 = maps\_utility::spawn_anim_model("barrel_crush", var_0.origin);
@@ -767,18 +767,18 @@ event_derrick_explode_debris_setup_collision(var_0) {
   if(var_0 == "traveling_block") {
     foreach(var_2 in self._col) {
       if(issubstr(var_2.script_noteworthy, "hook")) {
-        var_2 linkto(self, "tag_hook");
+        var_2 linkTo(self, "tag_hook");
         continue;
       }
 
       if(issubstr(var_2.script_noteworthy, "block")) {
-        var_2 linkto(self, "tag_base");
+        var_2 linkTo(self, "tag_base");
         continue;
       }
     }
   } else {
     foreach(var_2 in self._col) {
-      var_2 linkto(self);
+      var_2 linkTo(self);
     }
   }
 }

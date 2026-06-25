@@ -179,7 +179,7 @@ GetTargetEntPos() {
     return self.targetEntPos;
   }
 
-  targetEnt = GetEnt(self.target, "targetname");
+  targetEnt = getEnt(self.target, "targetname");
   if(!isDefined(targetEnt)) {
     return undefined;
   }

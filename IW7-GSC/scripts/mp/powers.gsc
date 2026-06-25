@@ -888,7 +888,7 @@ unsetcomlink(var_0) {
 }
 
 func_13055() {
-  scripts\mp\equipment\commlink::setturrettargetent();
+  scripts\mp\equipment\commlink::setturrettargetEnt();
 }
 
 func_F87F(var_0) {

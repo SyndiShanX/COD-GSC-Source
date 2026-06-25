@@ -68,12 +68,12 @@ shield_run(e_victim, str_volume, str_scene_name) {
   wait 0.1;
   a_rigs = getEntArray("player_body", "targetname");
   m_player_rig = a_rigs[0];
-  end_pos = getstruct("meat_shield_end_struct", "targetname");
+  end_pos = getStruct("meat_shield_end_struct", "targetname");
   max_turn_dot = cos(40);
   turning_center_vec = anglesToForward(end_pos.angles);
   level.m_shield.player_rig = m_player_rig;
   level.m_shield.victim = e_victim;
-  level.m_shield.weapon = getent("shield_gun", "targetname");
+  level.m_shield.weapon = getEnt("shield_gun", "targetname");
   scene_wait(str_scene_name);
   flag_set("meat_shield_start");
   level.m_shield.fwd = 0.0;
@@ -85,10 +85,10 @@ shield_run(e_victim, str_volume, str_scene_name) {
   shield_anim_stand();
   wait_network_frame();
   link_offset = (0, 0, 0);
-  e_victim linkto(level.m_shield.player_rig, "tag_origin", link_offset);
-  level.m_shield.weapon linkto(level.m_shield.player_rig, "tag_origin", link_offset);
+  e_victim linkTo(level.m_shield.player_rig, "tag_origin", link_offset);
+  level.m_shield.weapon linkTo(level.m_shield.player_rig, "tag_origin", link_offset);
   align_ent = get_align_ent();
-  level.m_shield.player_rig linkto(align_ent);
+  level.m_shield.player_rig linkTo(align_ent);
   level.player hideviewmodel();
   level.player disableweapons();
   level.player playerlinktodelta(level.m_shield.player_rig, "tag_player", 1, 0, 0, 30, 0, 0);
@@ -111,22 +111,22 @@ shield_run(e_victim, str_volume, str_scene_name) {
       new_vec_dot = vectordot(new_vec, turning_center_vec);
 
       if(new_vec_dot > max_turn_dot) {
-        align_ent rotateyaw(level.m_shield.turn, 0.05);
+        align_ent rotateYaw(level.m_shield.turn, 0.05);
       }
     }
 
     if(level.m_shield.fwd != 0.0) {
       rvec = anglestoright(level.player.angles);
-      fvec = vectornormalize(end_pos.origin - level.player.origin);
+      fvec = vectorNormalize(end_pos.origin - level.player.origin);
       dist_sq_to_end = distance2dsquared(align_ent.origin, end_pos.origin);
 
       if(dist_sq_to_end < 256) {
         shield_anim_move();
         flag_set("meat_shield_done");
-        end_pos = getstruct("meat_shield_end_struct", "targetname");
+        end_pos = getStruct("meat_shield_end_struct", "targetname");
         align_node = get_align_ent();
-        align_node moveto(end_pos.origin, 3.0);
-        align_node rotateto(end_pos.angles, 3.0);
+        align_node moveTo(end_pos.origin, 3.0);
+        align_node rotateTo(end_pos.angles, 3.0);
         wait 3.2;
         shield_anim_stand();
         invalid_space_fwd = 1;
@@ -139,7 +139,7 @@ shield_run(e_victim, str_volume, str_scene_name) {
       }
 
       if(!invalid_space_fwd) {
-        align_ent moveto(v_newpos, 0.05);
+        align_ent moveTo(v_newpos, 0.05);
       }
     }
 

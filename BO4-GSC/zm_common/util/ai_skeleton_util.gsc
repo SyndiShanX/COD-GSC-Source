@@ -76,7 +76,7 @@ function_1ea880bd(b_force_spawn = 0, var_eb3a8721, round_number, b_spear, b_helm
     return undefined;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(var_eb3a8721)) {
     s_spawn_loc = var_eb3a8721;
@@ -149,7 +149,7 @@ function_bdd7ec59() {
 }
 
 function_d3195b0c() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       return 3;
     case 2:
@@ -213,7 +213,7 @@ function_d325f6a4(entity) {
 }
 
 get_favorite_enemy() {
-  var_8637c743 = getplayers();
+  var_8637c743 = getPlayers();
   e_least_hunted = var_8637c743[0];
 
   for(i = 0; i < var_8637c743.size; i++) {
@@ -256,7 +256,7 @@ function_ad4293a8() {
     return true;
   }
 
-  var_31f7011a = arraycopy(getplayers());
+  var_31f7011a = arraycopy(getPlayers());
   var_31f7011a = arraysortclosest(var_31f7011a, self.origin);
   i = 0;
   var_b2aa54a9 = a_s_spawn_locs[0];

@@ -39,7 +39,7 @@ main() {
   }
 
   s_cougar_spawner = get_vehicle_spawner("intro_cougar");
-  veh_cougar = spawnvehicle("veh_t6_mil_cougar_interior", "intro_cougar", "apc_cougar_nophysics", s_cougar_spawner.origin, s_cougar_spawner.angles);
+  veh_cougar = spawnVehicle("veh_t6_mil_cougar_interior", "intro_cougar", "apc_cougar_nophysics", s_cougar_spawner.origin, s_cougar_spawner.angles);
   veh_cougar setModel("veh_t6_mil_cougar_interior");
   veh_cougar thread intro_cougar();
   n_fov = getdvarint(#"cg_fov");
@@ -109,7 +109,7 @@ intro_cougar() {
   self attach("veh_t6_mil_cougar_interior_shadow");
   self attach("veh_t6_mil_cougar_interior_attachment", "tag_body_animate_jnt");
   fxanim_la_cougar_interior_static_mod = spawn_model("fxanim_la_cougar_interior_static_mod");
-  fxanim_la_cougar_interior_static_mod linkto(self, "tag_body_animate_jnt", (0, 0, 0), (0, 0, 0));
+  fxanim_la_cougar_interior_static_mod linkTo(self, "tag_body_animate_jnt", (0, 0, 0), (0, 0, 0));
   self hidepart("tag_windshield_blood");
   self hidepart("tag_windshield_crack");
   self play_fx("cougar_dashboard", undefined, undefined, -1, 1, "tag_body_animate_jnt");
@@ -118,7 +118,7 @@ intro_cougar() {
   self play_fx("intro_dust", undefined, undefined, -1, 1, "tag_body_animate_jnt");
   self thread cougar_godrays();
   flag_wait("intro_fxanim_loop_started");
-  m_fxanims = getent("intro_fxanims", "targetname");
+  m_fxanims = getEnt("intro_fxanims", "targetname");
   m_fxanims attach("fxanim_gp_secret_serv_backpack_mod", "backpack_jnt");
   m_fxanims attach("fxanim_gp_secret_serv_gasmask_mod", "gasmask_jnt");
   scene_wait("intro");
@@ -127,7 +127,7 @@ intro_cougar() {
 }
 
 set_chopper_dof(m_player_body) {
-  veh_cougar = getent("intro_cougar", "targetname");
+  veh_cougar = getEnt("intro_cougar", "targetname");
   veh_cougar setclientflag(13);
 }
 
@@ -160,7 +160,7 @@ fade_out(m_player_body) {
 }
 
 run_reflection_scene() {
-  m_reflection_cougar = getent("cougar_reflection_scene", "targetname");
+  m_reflection_cougar = getEnt("cougar_reflection_scene", "targetname");
   level thread run_scene_and_delete("intro_reflection");
 
   if(!flag("harper_dead")) {
@@ -196,7 +196,7 @@ warp(m_player_body) {
   self notify("stop_godrays");
   wait 1;
   node = getvehiclenode("intro_cougar_path", "targetname");
-  level.player setorigin(node.origin);
+  level.player setOrigin(node.origin);
   self thread go_path(node);
   wait 2;
   self notify("start_godrays");
@@ -204,7 +204,7 @@ warp(m_player_body) {
 
 turn_on_reflection_cam() {
   setsaveddvar("r_extracam_custom_aspectratio", 1.89479);
-  level.sm_cam_ent = getent("reflection_cam", "targetname");
+  level.sm_cam_ent = getEnt("reflection_cam", "targetname");
   level.sm_cam_ent setclientflag(1);
 }
 
@@ -280,16 +280,16 @@ intro_scene_misc() {
   flag_wait("intro_started");
   setup_argus();
   level thread policecar_lights();
-  veh_blackhawk = getent("intro_blackhawk", "targetname");
+  veh_blackhawk = getEnt("intro_blackhawk", "targetname");
   veh_blackhawk play_fx("blackhawk_groundfx", undefined, undefined, "missile_hit", 1, "body_animate_jnt");
-  veh_drone1 = getent("intro_drone1", "targetname");
-  veh_drone2 = getent("intro_drone2", "targetname");
-  veh_drone3 = getent("intro_drone3", "targetname");
-  veh_drone4 = getent("intro_drone4", "targetname");
-  e_missile_target1 = getent("intro_missile_target1", "targetname");
-  e_missile_target2 = getent("intro_missile_target2", "targetname");
-  e_missile_target3 = getent("intro_missile_target3", "targetname");
-  e_missile_target4 = getent("intro_missile_target4", "targetname");
+  veh_drone1 = getEnt("intro_drone1", "targetname");
+  veh_drone2 = getEnt("intro_drone2", "targetname");
+  veh_drone3 = getEnt("intro_drone3", "targetname");
+  veh_drone4 = getEnt("intro_drone4", "targetname");
+  e_missile_target1 = getEnt("intro_missile_target1", "targetname");
+  e_missile_target2 = getEnt("intro_missile_target2", "targetname");
+  e_missile_target3 = getEnt("intro_missile_target3", "targetname");
+  e_missile_target4 = getEnt("intro_missile_target4", "targetname");
   veh_drone1 maps\_turret::set_turret_target(e_missile_target4, undefined, 1);
   veh_drone1 maps\_turret::set_turret_target(e_missile_target4, undefined, 2);
   veh_drone2 maps\_turret::set_turret_target(e_missile_target1, undefined, 1);
@@ -318,15 +318,15 @@ intro_windshield_swap(vh_cougar) {
 
 setup_argus() {
   if(!flag("harper_dead")) {
-    level.harper = getent("harper_drone", "targetname");
+    level.harper = getEnt("harper_drone", "targetname");
     addargus(level.harper, "harper", "harper");
   }
 
-  level.hillary = getent("hillary_drone", "targetname");
+  level.hillary = getEnt("hillary_drone", "targetname");
   addargus(level.hillary, "hillary", "hillary");
-  level.sam = getent("sam_drone", "targetname");
+  level.sam = getEnt("sam_drone", "targetname");
   addargus(level.sam, "sam", "sam");
-  level.jones = getent("jones_drone", "targetname");
+  level.jones = getEnt("jones_drone", "targetname");
   addargus(level.jones, "jones", "jones");
 }
 
@@ -336,15 +336,15 @@ sec_spit_and_drool(m_secretary) {
 }
 
 policecar_lights() {
-  getent("intro_copcar1", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
-  getent("intro_copcar2", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
-  getent("intro_copcar3", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
-  getent("intro_copcar4", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
-  getent("intro_copcar5", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
-  getent("intro_bike1", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
-  getent("intro_bike2", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
-  getent("intro_bike3", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
-  getent("intro_bike4", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
+  getEnt("intro_copcar1", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
+  getEnt("intro_copcar2", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
+  getEnt("intro_copcar3", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
+  getEnt("intro_copcar4", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
+  getEnt("intro_copcar5", "targetname") thread play_fx_when_shown("siren_light_intro", "tag_fx_siren_lights");
+  getEnt("intro_bike1", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
+  getEnt("intro_bike2", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
+  getEnt("intro_bike3", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
+  getEnt("intro_bike4", "targetname") thread play_fx_when_shown("siren_light_bike_intro", "tag_fx_lights_front");
 }
 
 play_fx_when_shown(str_fx, str_tag) {
@@ -359,8 +359,8 @@ play_fx_when_shown(str_fx, str_tag) {
 }
 
 cougar3_aim(veh_cougar) {
-  veh_cougar3 = getent("intro_cougar3", "targetname");
-  veh_drone2 = getent("intro_drone2", "targetname");
+  veh_cougar3 = getEnt("intro_cougar3", "targetname");
+  veh_drone2 = getEnt("intro_drone2", "targetname");
   veh_cougar3 maps\_turret::set_turret_target(veh_drone2, undefined, 2);
 }
 

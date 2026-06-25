@@ -17,7 +17,7 @@ treefall() {
     return;
   }
 
-  tree = getent(self.target, "targetname");
+  tree = getEnt(self.target, "targetname");
 
   if(!isDefined(tree)) {
     println("no tree");
@@ -26,7 +26,7 @@ treefall() {
 
   treecol = undefined;
   if(isDefined(tree.target)) {
-    treecol = getent(tree.target, "targetname");
+    treecol = getEnt(tree.target, "targetname");
   }
   self waittill("trigger", triggerer);
 
@@ -46,7 +46,7 @@ treefall() {
   org = tree.origin;
   pos2 = (org[0], org[1], 0);
   treeorg.angles = vectortoangles(pos1 - pos2);
-  tree linkto(treeorg);
+  tree linkTo(treeorg);
 
   if(isDefined(treecol)) {
     treecol delete();

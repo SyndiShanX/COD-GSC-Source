@@ -36,75 +36,75 @@ function function_77b5283a(player) {
 
 function function_976c341d(player, zone) {
   player playsoundtoplayer("veh_vtol_open", player);
-  playsoundatposition("veh_vtol_land", zone.origin);
+  playSoundAtPosition("veh_vtol_land", zone.origin);
 }
 
 function function_c800052a() {
-  playerlist = getplayers();
+  playerlist = getPlayers();
   foreach(player in playerlist) {
     player playsoundtoplayer("amb_cockpit", player);
   }
 }
 
 function function_fc716128() {
-  playsoundatposition("evt_water_vo_lyr_01", (0, 0, 0));
+  playSoundAtPosition("evt_water_vo_lyr_01", (0, 0, 0));
 }
 
 function function_6e78d063() {
-  playsoundatposition("evt_water_vo_lyr_02", (0, 0, 0));
+  playSoundAtPosition("evt_water_vo_lyr_02", (0, 0, 0));
 }
 
 function function_487655fa() {
-  playsoundatposition("evt_water_vo_lyr_03", (0, 0, 0));
+  playSoundAtPosition("evt_water_vo_lyr_03", (0, 0, 0));
 }
 
 function function_decbd389() {
-  playsoundatposition("evt_drown_blink_01", (0, 0, 0));
+  playSoundAtPosition("evt_drown_blink_01", (0, 0, 0));
 }
 
 function function_4ce4df2() {
-  playsoundatposition("evt_drown_blink_02", (0, 0, 0));
+  playSoundAtPosition("evt_drown_blink_02", (0, 0, 0));
 }
 
 function function_2ad0c85b() {
-  playsoundatposition("evt_drown_blink_03", (0, 0, 0));
+  playSoundAtPosition("evt_drown_blink_03", (0, 0, 0));
 }
 
 function function_69386a6b() {
-  playsoundatposition("evt_drown", (0, 0, 0));
+  playSoundAtPosition("evt_drown", (0, 0, 0));
 }
 
 function function_ed6114d2() {
-  playsoundatposition("evt_door_kick", (12620, 836, 2979));
+  playSoundAtPosition("evt_door_kick", (12620, 836, 2979));
 }
 
 function function_ceaeaa5a() {
-  playsoundatposition("evt_door_bomb_exp", (12295, -721, 2971));
+  playSoundAtPosition("evt_door_bomb_exp", (12295, -721, 2971));
   level util::clientnotify("sndWR");
 }
 
 function function_c3d203d6() {
-  playsoundatposition("evt_lower_combat_exp_snap", (17220.8, -3074.75, 3528.5));
+  playSoundAtPosition("evt_lower_combat_exp_snap", (17220.8, -3074.75, 3528.5));
 }
 
 function function_5dcd1d9() {
-  playsoundatposition("evt_scripted_jet", (17220.8, -3074.75, 3528.5));
+  playSoundAtPosition("evt_scripted_jet", (17220.8, -3074.75, 3528.5));
 }
 
 function function_4e875e0d() {
-  playsoundatposition("evt_breach_gunfire", (0, 0, 0));
+  playSoundAtPosition("evt_breach_gunfire", (0, 0, 0));
   wait(3.24);
-  playsoundatposition("evt_breach_missile_zip", (15047, 13, 3121));
+  playSoundAtPosition("evt_breach_missile_zip", (15047, 13, 3121));
   wait(0.8);
-  playsoundatposition("evt_breach_exp", (15088, 19, 2942));
+  playSoundAtPosition("evt_breach_exp", (15088, 19, 2942));
   wait(1.2);
-  playsoundatposition("evt_breach_debris_left", (15286, 391, 2913));
-  playsoundatposition("evt_breach_debris_right", (15308, -453, 2914));
+  playSoundAtPosition("evt_breach_debris_left", (15286, 391, 2913));
+  playSoundAtPosition("evt_breach_debris_right", (15308, -453, 2914));
 }
 
 function function_16a46955() {
   wait(4.1);
-  playsoundatposition("evt_breach_slowmo", (0, 0, 0));
+  playSoundAtPosition("evt_breach_slowmo", (0, 0, 0));
 }
 
 function function_ad15f6f5() {
@@ -151,24 +151,24 @@ function function_e76f158() {
 
 function function_30d6c739() {
   wait(1.5);
-  playsoundatposition("evt_boss_exp_elec", (16678, 2893, 2276));
+  playSoundAtPosition("evt_boss_exp_elec", (16678, 2893, 2276));
 }
 
 function function_56d941a2() {
   wait(1.5);
-  playsoundatposition("evt_boss_exp_elec", (16126, 4352, 2279));
+  playSoundAtPosition("evt_boss_exp_elec", (16126, 4352, 2279));
 }
 
 function function_f8835fe9() {
-  playsoundatposition("evt_escape_exp_sml", (0, 0, 0));
+  playSoundAtPosition("evt_escape_exp_sml", (0, 0, 0));
 }
 
 function function_5d0cee98() {
-  playsoundatposition("evt_escape_exp_lrg", (0, 0, 0));
+  playSoundAtPosition("evt_escape_exp_lrg", (0, 0, 0));
 }
 
 function function_b01c9f8() {
-  playsoundatposition("evt_runout_first_exp", (0, 0, 0));
+  playSoundAtPosition("evt_runout_first_exp", (0, 0, 0));
   wait(0.5);
   var_1d84d980 = spawn("script_origin", (16357, 1454, 2140));
   var_1d84d980 playLoopSound("evt_runout_alarm_01");
@@ -189,30 +189,30 @@ function function_b01c9f8() {
   var_6754449b = spawn("script_origin", (15755, 1298, 2164));
   var_6754449b playLoopSound("evt_runout_large_fire");
   level waittill("hash_92f048cf");
-  playsoundatposition("evt_runout_corridor_exp", (15862, 1444, 2090));
+  playSoundAtPosition("evt_runout_corridor_exp", (15862, 1444, 2090));
 }
 
 function function_850c7ab7() {
   wait(0.5);
-  playsoundatposition("evt_exfil_elec_exp", (15827, 139, 3144));
+  playSoundAtPosition("evt_exfil_elec_exp", (15827, 139, 3144));
   wait(0.5);
-  playsoundatposition("evt_exfil_exp_01", (15930, 978, 2815));
+  playSoundAtPosition("evt_exfil_exp_01", (15930, 978, 2815));
   wait(14.2);
-  playsoundatposition("evt_exfil_exp_02", (15725, 56, 2889));
+  playSoundAtPosition("evt_exfil_exp_02", (15725, 56, 2889));
   wait(0.6);
-  playsoundatposition("evt_exfil_exp_03", (15425, 287, 2846));
+  playSoundAtPosition("evt_exfil_exp_03", (15425, 287, 2846));
   wait(0.9);
-  playsoundatposition("evt_exfil_exp_04", (15039, 820, 3270));
+  playSoundAtPosition("evt_exfil_exp_04", (15039, 820, 3270));
   wait(0.7);
-  playsoundatposition("evt_exfil_exp_05", (14347, 2257, 2468));
+  playSoundAtPosition("evt_exfil_exp_05", (14347, 2257, 2468));
   wait(1.3);
-  playsoundatposition("evt_exfil_exp_06", (15038, 4150, 2915));
+  playSoundAtPosition("evt_exfil_exp_06", (15038, 4150, 2915));
   wait(0.4);
-  playsoundatposition("evt_exfil_exp_07", (15180, 2305, 3093));
+  playSoundAtPosition("evt_exfil_exp_07", (15180, 2305, 3093));
   wait(2.2);
-  playsoundatposition("evt_exfil_exp_08", (14142, 6656, 3856));
+  playSoundAtPosition("evt_exfil_exp_08", (14142, 6656, 3856));
   wait(0.4);
-  playsoundatposition("evt_exfil_exp_09", (15063, 6200, 3213));
+  playSoundAtPosition("evt_exfil_exp_09", (15063, 6200, 3213));
 }
 
 function function_fbfb4dae() {

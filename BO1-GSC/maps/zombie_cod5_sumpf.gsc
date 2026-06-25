@@ -72,7 +72,7 @@ main() {
 }
 setup_water_physics() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] SetClientDvars("phys_buoyancy", 1);
   }
@@ -232,13 +232,13 @@ include_powerups() {
 init_zombie_sumpf() {
   thread maps\zombie_cod5_sumpf_magic_box::magic_box_init();
   level thread maps\zombie_cod5_sumpf_trap_perk_electric::init_elec_trap_trigs();
-  zipHintDeactivated = getent("zipline_deactivated_hint_trigger", "targetname");
-  zipHintDeactivated sethintstring(&"WAW_ZOMBIE_ZIPLINE_DEACTIVATED");
-  zipHintDeactivated SetCursorHint("HINT_NOICON");
+  zipHintDeactivated = getEnt("zipline_deactivated_hint_trigger", "targetname");
+  zipHintDeactivated setHintString(&"WAW_ZOMBIE_ZIPLINE_DEACTIVATED");
+  zipHintDeactivated setCursorHint("HINT_NOICON");
   penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
   if(!level.mutators["mutator_noTraps"]) {
     for(i = 0; i < penBuyTrigger.size; i++) {
-      penBuyTrigger[i] sethintstring(&"WAW_ZOMBIE_CLEAR_DEBRIS");
+      penBuyTrigger[i] setHintString(&"WAW_ZOMBIE_CLEAR_DEBRIS");
       penBuyTrigger[i] setCursorHint("HINT_NOICON");
     }
     level thread maps\zombie_cod5_sumpf::turnLightRed("pendulum_light");
@@ -249,7 +249,7 @@ turnLightGreen(name) {
   for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("zombie_zapper_cagelight_green");
     if(isDefined(zapper_lights[i].target)) {
-      old_light_effect = getent(zapper_lights[i].target, "targetname");
+      old_light_effect = getEnt(zapper_lights[i].target, "targetname");
       light_effect = spawn("script_model", zapper_lights[i].origin + (0, 0, 10));
       light_effect setModel("tag_origin");
       light_effect.angles = (0, 270, 0);
@@ -265,7 +265,7 @@ turnLightRed(name) {
   for(i = 0; i < zapper_lights.size; i++) {
     zapper_lights[i] setModel("zombie_zapper_cagelight_red");
     if(isDefined(zapper_lights[i].target)) {
-      old_light_effect = getent(zapper_lights[i].target, "targetname");
+      old_light_effect = getEnt(zapper_lights[i].target, "targetname");
       light_effect = spawn("script_model", zapper_lights[i].origin + (0, 0, 10));
       light_effect setModel("tag_origin");
       light_effect.angles = (0, 270, 0);
@@ -278,12 +278,12 @@ turnLightRed(name) {
 }
 book_useage() {
   book_counter = 0;
-  book_trig = getent("book_trig", "targetname");
-  book_trig SetCursorHint("HINT_NOICON");
-  book_trig UseTriggerRequireLookAt();
+  book_trig = getEnt("book_trig", "targetname");
+  book_trig setCursorHint("HINT_NOICON");
+  book_trig useTriggerRequireLookAt();
   if(isDefined(book_trig)) {
-    maniac_l = getent("maniac_l", "targetname");
-    maniac_r = getent("maniac_r", "targetname");
+    maniac_l = getEnt("maniac_l", "targetname");
+    maniac_r = getEnt("maniac_r", "targetname");
     book_trig waittill("trigger", player);
     if(isDefined(maniac_l)) {
       maniac_l playSound("maniac_l");
@@ -295,9 +295,9 @@ book_useage() {
 }
 toilet_useage() {
   toilet_counter = 0;
-  toilet_trig = getent("toilet", "targetname");
-  toilet_trig SetCursorHint("HINT_NOICON");
-  toilet_trig UseTriggerRequireLookAt();
+  toilet_trig = getEnt("toilet", "targetname");
+  toilet_trig setCursorHint("HINT_NOICON");
+  toilet_trig useTriggerRequireLookAt();
   toilet_trig playLoopSound("phone_hook");
   if(!isDefined(level.music_override)) {
     level.music_override = false;
@@ -322,7 +322,7 @@ toilet_useage() {
   wait(1);
   toilet_trig playSound("toilet_flush", "sound_done");
   toilet_trig waittill("sound_done");
-  playsoundatposition("zmb_cha_ching", toilet_trig.origin);
+  playSoundAtPosition("zmb_cha_ching", toilet_trig.origin);
   level thread play_music_easter_egg(player);
 }
 play_music_easter_egg(player) {
@@ -337,10 +337,10 @@ play_music_easter_egg(player) {
   level thread maps\_zombiemode_audio::change_zombie_music("wave_loop");
 }
 play_radio_sounds() {
-  radio_one = getent("radio_one_origin", "targetname");
-  radio_two = getent("radio_two_origin", "targetname");
-  radio_three = getent("radio_three_origin", "targetname");
-  pa_system = getent("speaker_in_attic", "targetname");
+  radio_one = getEnt("radio_one_origin", "targetname");
+  radio_two = getEnt("radio_two_origin", "targetname");
+  radio_three = getEnt("radio_three_origin", "targetname");
+  pa_system = getEnt("speaker_in_attic", "targetname");
   radio_one stoploopsound(2);
   radio_two stoploopsound(2);
   radio_three stoploopsound(2);
@@ -364,10 +364,10 @@ superegg_one() {
   if(!isDefined(level.superegg_counter)) {
     level.superegg_counter = 0;
   }
-  superegg_one_trig = getent("superegg_radio_trigger_1", "targetname");
-  superegg_one_trig UseTriggerRequireLookAt();
-  superegg_one_trig SetCursorHint("HINT_NOICON");
-  superegg_radio_one = getent("superegg_radio_origin_1", "targetname");
+  superegg_one_trig = getEnt("superegg_radio_trigger_1", "targetname");
+  superegg_one_trig useTriggerRequireLookAt();
+  superegg_one_trig setCursorHint("HINT_NOICON");
+  superegg_radio_one = getEnt("superegg_radio_origin_1", "targetname");
   superegg_one_trig waittill("trigger");
   level.superegg_counter = level.superegg_counter + 1;
   superegg_radio_one playLoopSound("static_loop");
@@ -376,10 +376,10 @@ superegg_two() {
   if(!isDefined(level.superegg_counter)) {
     level.superegg_counter = 0;
   }
-  superegg_two_trig = getent("superegg_radio_trigger_2", "targetname");
-  superegg_two_trig UseTriggerRequireLookAt();
-  superegg_two_trig SetCursorHint("HINT_NOICON");
-  superegg_radio_two = getent("superegg_radio_origin_2", "targetname");
+  superegg_two_trig = getEnt("superegg_radio_trigger_2", "targetname");
+  superegg_two_trig useTriggerRequireLookAt();
+  superegg_two_trig setCursorHint("HINT_NOICON");
+  superegg_radio_two = getEnt("superegg_radio_origin_2", "targetname");
   superegg_two_trig waittill("trigger");
   level.superegg_counter = level.superegg_counter + 1;
   superegg_radio_two playLoopSound("static_loop");
@@ -388,19 +388,19 @@ superegg_three() {
   if(!isDefined(level.superegg_counter)) {
     level.superegg_counter = 0;
   }
-  superegg_three_trig = getent("superegg_radio_trigger_3", "targetname");
-  superegg_three_trig UseTriggerRequireLookAt();
-  superegg_three_trig SetCursorHint("HINT_NOICON");
-  superegg_radio_three = getent("superegg_radio_origin_3", "targetname");
+  superegg_three_trig = getEnt("superegg_radio_trigger_3", "targetname");
+  superegg_three_trig useTriggerRequireLookAt();
+  superegg_three_trig setCursorHint("HINT_NOICON");
+  superegg_radio_three = getEnt("superegg_radio_origin_3", "targetname");
   superegg_three_trig waittill("trigger");
   level.superegg_counter = level.superegg_counter + 1;
   superegg_radio_three playLoopSound("static_loop");
 }
 play_super_egg_radio_pa_sounds() {
-  superegg_radio_one = getent("radio_one_origin", "targetname");
-  superegg_radio_two = getent("radio_two_origin", "targetname");
-  superegg_radio_three = getent("radio_three_origin", "targetname");
-  pa_system = getent("speaker_in_attic", "targetname");
+  superegg_radio_one = getEnt("radio_one_origin", "targetname");
+  superegg_radio_two = getEnt("radio_two_origin", "targetname");
+  superegg_radio_three = getEnt("radio_three_origin", "targetname");
+  pa_system = getEnt("speaker_in_attic", "targetname");
   superegg_radio_one stoploopsound(2);
   superegg_radio_two stoploopsound(2);
   superegg_radio_three stoploopsound(2);
@@ -424,10 +424,10 @@ battle_radio() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  battle_radio_trig = getent("battle_radio_trigger", "targetname");
-  battle_radio_trig UseTriggerRequireLookAt();
-  battle_radio_trig SetCursorHint("HINT_NOICON");
-  battle_radio_origin = getent("battle_radio_origin", "targetname");
+  battle_radio_trig = getEnt("battle_radio_trigger", "targetname");
+  battle_radio_trig useTriggerRequireLookAt();
+  battle_radio_trig setCursorHint("HINT_NOICON");
+  battle_radio_origin = getEnt("battle_radio_origin", "targetname");
   battle_radio_trig waittill("trigger", player);
   battle_radio_origin playSound("battle_message");
 }
@@ -435,10 +435,10 @@ whisper_radio() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  whisper_radio_trig = getent("whisper_radio_trigger", "targetname");
-  whisper_radio_trig UseTriggerRequireLookAt();
-  whisper_radio_trig SetCursorHint("HINT_NOICON");
-  whisper_radio_origin = getent("whisper_radio_origin", "targetname");
+  whisper_radio_trig = getEnt("whisper_radio_trigger", "targetname");
+  whisper_radio_trig useTriggerRequireLookAt();
+  whisper_radio_trig setCursorHint("HINT_NOICON");
+  whisper_radio_origin = getEnt("whisper_radio_origin", "targetname");
   whisper_radio_trig waittill("trigger");
   whisper_radio_origin playSound("whisper_message");
 }
@@ -446,10 +446,10 @@ radio_one() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  radio_one_trig = getent("radio_one", "targetname");
-  radio_one_trig UseTriggerRequireLookAt();
-  radio_one_trig SetCursorHint("HINT_NOICON");
-  radio_one = getent("radio_one_origin", "targetname");
+  radio_one_trig = getEnt("radio_one", "targetname");
+  radio_one_trig useTriggerRequireLookAt();
+  radio_one_trig setCursorHint("HINT_NOICON");
+  radio_one = getEnt("radio_one_origin", "targetname");
   radio_one_trig waittill("trigger");
   level.radio_counter = level.radio_counter + 1;
   radio_one playLoopSound("static_loop");
@@ -458,10 +458,10 @@ radio_two() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  radio_two_trig = getent("radio_two", "targetname");
-  radio_two_trig UseTriggerRequireLookAt();
-  radio_two_trig SetCursorHint("HINT_NOICON");
-  radio_two = getent("radio_two_origin", "targetname");
+  radio_two_trig = getEnt("radio_two", "targetname");
+  radio_two_trig useTriggerRequireLookAt();
+  radio_two_trig setCursorHint("HINT_NOICON");
+  radio_two = getEnt("radio_two_origin", "targetname");
   radio_two_trig waittill("trigger", players);
   level.radio_counter = level.radio_counter + 1;
   radio_two playLoopSound("static_loop");
@@ -470,17 +470,17 @@ radio_three() {
   if(!isDefined(level.radio_counter)) {
     level.radio_counter = 0;
   }
-  radio_three_trig = getent("radio_three_trigger", "targetname");
-  radio_three_trig UseTriggerRequireLookAt();
-  radio_three_trig SetCursorHint("HINT_NOICON");
-  radio_three = getent("radio_three_origin", "targetname");
+  radio_three_trig = getEnt("radio_three_trigger", "targetname");
+  radio_three_trig useTriggerRequireLookAt();
+  radio_three_trig setCursorHint("HINT_NOICON");
+  radio_three = getEnt("radio_three_origin", "targetname");
   radio_three_trig waittill("trigger", players);
   level.radio_counter = level.radio_counter + 1;
   radio_three playLoopSound("static_loop");
 }
 meteor_trigger() {
   level endon("meteor_triggered");
-  dmgtrig = GetEnt("meteor", "targetname");
+  dmgtrig = getEnt("meteor", "targetname");
   while(1) {
     dmgtrig waittill("trigger", player);
     if(distancesquared(player.origin, dmgtrig.origin) < 1096 * 1096) {
@@ -510,11 +510,11 @@ sumpf_exit_level() {
 }
 sumpf_find_exit_point() {
   self endon("death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = VectorNormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endPos = self.origin + vector_scale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
   for(i = 0; i < locs.size; i++) {
@@ -541,7 +541,7 @@ sumpf_player_spawn_placement() {
   flag_wait("all_players_connected");
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setorigin(structs[i].origin);
+    players[i] setOrigin(structs[i].origin);
     players[i] setplayerangles(structs[i].angles);
     players[i].spectator_respawn = structs[i];
   }

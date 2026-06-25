@@ -75,7 +75,7 @@ function event_handler[missile_fire] function_8cd77cf6(eventstruct) {
     if(isDefined(waitresult.normal)) {
       fxforward = waitresult.normal;
     } else {
-      fxforward = vectornormalize(missile.var_59ba00f5) * -1;
+      fxforward = vectorNormalize(missile.var_59ba00f5) * -1;
     }
 
     position = missile.origin;

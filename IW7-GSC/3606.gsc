@@ -149,7 +149,7 @@ func_13AE1() {
 
   level.var_C7F2[var_2] = var_0;
   var_5 = spawn("script_origin", var_0.origin);
-  var_0 linkto(var_5);
+  var_0 linkTo(var_5);
   thread func_13AEF(var_0);
   thread func_13AF0(var_5);
   scripts\engine\utility::waittill_any("death", "disconnect", "overdriveEnd");
@@ -166,7 +166,7 @@ func_13AF0(var_0) {
   self endon("disconnect");
   self endon("overdriveEnd");
   for(;;) {
-    var_0 moveto(self.origin, 0.1);
+    var_0 moveTo(self.origin, 0.1);
     wait(0.1);
   }
 }
@@ -182,7 +182,7 @@ func_13AEF(var_0) {
     if(lengthsquared(var_2) < var_1) {
       var_0 physics_volumeenable(0);
     } else {
-      var_3 = vectornormalize(var_2);
+      var_3 = vectorNormalize(var_2);
       var_4 = self.origin + var_3 * 25;
       var_0 physics_volumesetasfocalforce(1, var_4, 325);
       var_0 physics_volumesetactivator(1);

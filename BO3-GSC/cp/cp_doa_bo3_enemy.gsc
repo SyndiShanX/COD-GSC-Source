@@ -97,7 +97,7 @@ function function_65762352(classname, var_3a9f2119) {
                   function_45849d81(var_3a9f2119, loc, def);
                 } else {
                   if(issubstr(classname, "skeleton")) {
-                    doa_enemy::function_a4e16560(getent("spawner_zombietron_skeleton", "targetname"), loc, (isDefined(def) ? def.forcespawn : 0));
+                    doa_enemy::function_a4e16560(getEnt("spawner_zombietron_skeleton", "targetname"), loc, (isDefined(def) ? def.forcespawn : 0));
                   } else {
                     if(issubstr(classname, "collector")) {
                       function_53b44cb7(spawner, loc, def, 1);
@@ -106,7 +106,7 @@ function function_65762352(classname, var_3a9f2119) {
                         function_92159541(spawner, loc, def);
                       } else {
                         if(issubstr(classname, "basic")) {
-                          doa_enemy::function_a4e16560(getent("doa_basic_spawner", "targetname"), loc, (isDefined(def) ? def.forcespawn : 0));
+                          doa_enemy::function_a4e16560(getEnt("doa_basic_spawner", "targetname"), loc, (isDefined(def) ? def.forcespawn : 0));
                         } else {
                           if(issubstr(classname, "warlord")) {
                             function_a0d7d949(var_3a9f2119, loc, def);
@@ -120,7 +120,7 @@ function function_65762352(classname, var_3a9f2119) {
                                 if(issubstr(classname, "silverback")) {
                                   function_36aa8b6c(loc);
                                 } else if(issubstr(classname, "margwa")) {
-                                  doa_enemy::function_a4e16560(getent("doa_margwa_spawner", "targetname"), loc, (isDefined(def) ? def.forcespawn : 0));
+                                  doa_enemy::function_a4e16560(getEnt("doa_margwa_spawner", "targetname"), loc, (isDefined(def) ? def.forcespawn : 0));
                                 }
                               }
                             }
@@ -249,8 +249,8 @@ function function_8b898788() {
   self.damage_trigger = spawn("trigger_radius", self.origin, 3, 40, 50);
   self.damage_trigger endon("death");
   self.damage_trigger thread doa_utility::function_981c685d(self);
-  self.damage_trigger enablelinkto();
-  self.damage_trigger linkto(self);
+  self.damage_trigger enablelinkTo();
+  self.damage_trigger linkTo(self);
   while(isDefined(self)) {
     self.damage_trigger waittill("trigger", guy);
     if(!isDefined(guy)) {
@@ -275,7 +275,7 @@ function function_8b898788() {
     guy thread namespace_eaa992c::function_285a2999("hazard_electric");
     if(!isPlayer(guy)) {
       dir = guy.origin - self.damage_trigger.origin;
-      dir = vectornormalize(dir);
+      dir = vectorNormalize(dir);
       guy launchragdoll(dir * 100);
     }
     util::wait_network_frame();
@@ -349,8 +349,8 @@ function function_7517e6b7(origin) {
   hazard.def = level.doa.var_f6ba7ed2;
   hazard.var_d05d7e08 = 3;
   hazard thread function_b3a0f63();
-  hazard moveto(origin, 2);
-  playsoundatposition("evt_pole", hazard.origin);
+  hazard moveTo(origin, 2);
+  playSoundAtPosition("evt_pole", hazard.origin);
   if(isDefined(level.doa.var_f6ba7ed2.width) && isDefined(level.doa.var_f6ba7ed2.height)) {
     hazard.trigger = spawn("trigger_radius", origin, 3, level.doa.var_f6ba7ed2.width, level.doa.var_f6ba7ed2.height);
     if(!isDefined(hazard.trigger)) {
@@ -438,10 +438,10 @@ function droptoground(origin, trailfx, var_b8f99479 = "turret_impact", var_96214
     org thread namespace_eaa992c::function_285a2999(trailfx);
   }
   org thread doa_utility::function_1bd67aef(2);
-  self enablelinkto();
-  org enablelinkto();
-  self linkto(org, "tag_origin");
-  org moveto(dst.origin, 1.2);
+  self enablelinkTo();
+  org enablelinkTo();
+  self linkTo(org, "tag_origin");
+  org moveTo(dst.origin, 1.2);
   org thread namespace_1a381543::function_90118d8c("zmb_enemy_incoming");
   org util::waittill_any_timeout(1.5, "movedone");
   org thread namespace_1a381543::function_90118d8c("zmb_enemy_impact");
@@ -565,8 +565,8 @@ function function_7ebf419e() {
   }
   if(!isDefined(level.doa.var_b2669ad0)) {
     level.doa.var_b2669ad0 = [];
-    level.doa.var_b2669ad0["medium"] = getent("spawner_meatball_med", "targetname");
-    level.doa.var_b2669ad0["small"] = getent("spawner_meatball_small", "targetname");
+    level.doa.var_b2669ad0["medium"] = getEnt("spawner_meatball_med", "targetname");
+    level.doa.var_b2669ad0["small"] = getEnt("spawner_meatball_small", "targetname");
   }
   loc = spawnStruct();
   loc.angles = self.angles;
@@ -651,7 +651,7 @@ function function_ee2c4b95(spawner = level.doa.var_4720602e, loc, def) {
 
 function function_e59bd7c5(carrier) {
   if(!isDefined(level.doa.var_4720602e)) {
-    level.doa.var_4720602e = getent("doa_spider", "targetname");
+    level.doa.var_4720602e = getEnt("doa_spider", "targetname");
   }
   loc = spawnStruct();
   loc.origin = carrier.origin;
@@ -771,7 +771,7 @@ function function_4c047459() {
     return;
   }
   egg = function_ecbf1358(self.origin, self.angles, 1);
-  egg linkto(self, "tag_origin", vectorscale((0, 0, 1), 54));
+  egg linkTo(self, "tag_origin", vectorscale((0, 0, 1), 54));
   egg thread function_45f23318(self);
   self doa_enemy::function_d30fe558(self.var_8f12ed02, 1);
   self waittill("goal");
@@ -947,9 +947,9 @@ function shadowteleportmenow(initial = 0) {
   wait(0.3);
   self ghost();
   self notsolid();
-  self setplayercollision(0);
-  self linkto(org);
-  org moveto(goal.origin + vectorscale((0, 0, 1), 40), 2);
+  self setPlayerCollision(0);
+  self linkTo(org);
+  org moveTo(goal.origin + vectorscale((0, 0, 1), 40), 2);
   org util::waittill_any_timeout(2.1, "movedone");
   org thread namespace_eaa992c::function_285a2999("shadow_appear");
   wait(1);
@@ -960,7 +960,7 @@ function shadowteleportmenow(initial = 0) {
   self forceteleport(org.origin);
   self show();
   self solid();
-  self setplayercollision(1);
+  self setPlayerCollision(1);
   self thread namespace_eaa992c::function_285a2999("spawnZombie");
   org delete();
   wait(1);
@@ -1108,7 +1108,7 @@ function private function_b6d31d3a(spot, hold = 0, fx = "zombie_riser_fx", var_3
   self.anchor = spawn("script_origin", self.origin);
   self.anchor thread doa_utility::function_981c685d(self);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
@@ -1126,7 +1126,7 @@ function private function_b6d31d3a(spot, hold = 0, fx = "zombie_riser_fx", var_3
   level thread function_7c9f5521(self, spot);
   self clientfield::set(fx, 1);
   self orientmode("face default");
-  self animscripted("rise_anim", self.origin, self.angles, var_3d98e879);
+  self animScripted("rise_anim", self.origin, self.angles, var_3d98e879);
   self waittill("end");
   self solid();
   self notify("rise_anim_finished");
@@ -1148,7 +1148,7 @@ function private function_7c9f5521(zombie, spot) {
   }
   if(isDefined(zombie)) {
     zombie.deathanim = "zm_rise_death_in";
-    zombie stopanimscripted();
+    zombie stopanimScripted();
   }
 }
 
@@ -1173,7 +1173,7 @@ function function_57aea19e() {
   waittillframeend();
   if(isalive(self) && !self isragdoll()) {
     self.var_30fc80e6 = 1;
-    self animscripted("plant_anim", self.origin, self.angles, "ai_wrlrd_stn_combat_doa_plant_mine");
+    self animScripted("plant_anim", self.origin, self.angles, "ai_wrlrd_stn_combat_doa_plant_mine");
     self waittillmatch("hash_eecd4c04");
   }
   self.var_55361ee6 = self.var_55361ee6 - 1;
@@ -1311,7 +1311,7 @@ function function_772a04fe() {
   trashcan = spawn("script_model", self.origin);
   trashcan.targetname = "trashcan";
   trashcan setModel("zombietron_trashcan");
-  trashcan linkto(self, "tag_origin", vectorscale((0, 0, 1), 54));
+  trashcan linkTo(self, "tag_origin", vectorscale((0, 0, 1), 54));
   trashcan thread function_45f23318(self);
   self doa_enemy::function_d30fe558(self.var_8f12ed02, 1);
   trashcan thread namespace_d88e3a06::function_d8d20160();
@@ -1344,7 +1344,7 @@ function function_7e51c1d2() {
 }
 
 function margwaspawn(loc, bossbattle = 0) {
-  margwa = doa_enemy::function_a4e16560(getent("doa_margwa_spawner", "targetname"), loc, 1);
+  margwa = doa_enemy::function_a4e16560(getEnt("doa_margwa_spawner", "targetname"), loc, 1);
   margwa.ignorevortices = 1;
   margwa.boss = 1;
   margwa notify("hash_6e8326fc");
@@ -1374,7 +1374,7 @@ function function_4ce6d0ea() {
   loc.angles = (0, 0, 0);
   loc.origin = var_60de7d19 + vectorscale((0, 0, 1), 3000);
   level.doa.margwa = margwaspawn(loc, 1);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] freezecontrols(0);
   }
@@ -1433,7 +1433,7 @@ function private function_c0147a11() {
   wait(0.05);
   self endon("death");
   self.takedamage = 1;
-  self.health = (getplayers().size * 250000) + ((1 + level.doa.var_da96f13c) * 300000);
+  self.health = (getPlayers().size * 250000) + ((1 + level.doa.var_da96f13c) * 300000);
   self.maxhealth = self.health;
   self.var_d3627554 = int(self.health * 0.8);
   self.var_b220d777 = int(self.health * 0.5);
@@ -1526,8 +1526,8 @@ function private margwaupdatemovespeed() {
 function private function_1c99c7cd() {
   trigger = spawn("trigger_radius", self.origin, 2, 40, 50);
   trigger.targetname = "margwaDamag";
-  trigger enablelinkto();
-  trigger linkto(self, "tag_origin");
+  trigger enablelinkTo();
+  trigger linkTo(self, "tag_origin");
   trigger endon("death");
   trigger thread doa_utility::function_783519c1("exit_taken", 1);
   trigger thread doa_utility::function_981c685d(self);

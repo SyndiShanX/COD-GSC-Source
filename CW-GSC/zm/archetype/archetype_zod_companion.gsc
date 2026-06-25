@@ -292,7 +292,7 @@ function zodcompanioncanpreemptivejuke(entity) {
       enemyangles = entity.enemy getgunangles();
       toenemy = entity.enemy.origin - entity.origin;
       forward = anglesToForward(enemyangles);
-      dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
+      dotproduct = abs(vectordot(vectorNormalize(toenemy), forward));
 
       record3dtext(acos(dotproduct), entity.origin + (0, 0, 10), (0, 1, 0), "<dev string:x49>");
 
@@ -385,7 +385,7 @@ function private zodcompaniontargetservice(entity) {
   aienemies = [];
   playerenemies = [];
   ais = getactorteamarray("axis", "team3");
-  players = getplayers();
+  players = getPlayers();
 
   if(is_true(entity.("prioritize_target_near_leader")) && isDefined(entity.leader)) {
     positiononnavmesh = getclosestpointonnavmesh(entity.leader.origin);
@@ -508,7 +508,7 @@ function private zodcompaniontryreacquireservice(entity) {
     return false;
   }
 
-  dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forward = anglesToForward(entity.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {
@@ -960,7 +960,7 @@ function zod_companion_revive_player(player) {
     var_4ac740f2.beingrevived = 1;
     player.being_revived_by_robot = 1;
     player.var_c6a6f334 = 1;
-    vector = vectornormalize(target_point - self.origin);
+    vector = vectorNormalize(target_point - self.origin);
     angles = vectortoangles(vector);
     angles = (0, angles[1], 0);
     self teleport(self.origin, angles);
@@ -1006,7 +1006,7 @@ function zod_companion_revive_player(player) {
     }
 
     level.var_ee623e8 = 0;
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 1 && level flag::get("solo_game") && is_true(player.waiting_to_revive)) {
       level.solo_game_free_player_quickrevive = 1;
@@ -1754,7 +1754,7 @@ function get_potential_leaders(companion, var_4266300b) {
   a_potential_leaders = [];
   potential_targets = [];
   var_8d6705e8 = [];
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!zodcompanionbehavior::_isvalidplayer(player)) {

@@ -87,7 +87,7 @@ aud_start_demo_checkpoint(var_0) {
 
 aud_wind_door_mix_manager() {
   common_scripts\utility::flag_wait("wind_zone_active");
-  var_0 = getent("zone_wind", "targetname");
+  var_0 = getEnt("zone_wind", "targetname");
   var_0 thread update_wind_mix();
 }
 

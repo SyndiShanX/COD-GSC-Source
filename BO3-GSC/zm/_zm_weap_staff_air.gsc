@@ -129,7 +129,7 @@ function staff_air_position_source(v_detonate, w_weapon) {
   e_whirlwind setModel("tag_origin");
   e_whirlwind.angles = vectorscale((-1, 0, 0), 90);
   e_whirlwind thread zm_tomb_utility::puzzle_debug_position("X", vectorscale((1, 1, 0), 255));
-  e_whirlwind moveto(zm_utility::groundpos_ignore_water_new(e_whirlwind.origin), 0.05);
+  e_whirlwind moveTo(zm_utility::groundpos_ignore_water_new(e_whirlwind.origin), 0.05);
   e_whirlwind waittill("movedone");
   e_whirlwind clientfield::set("whirlwind_play_fx", 1);
   e_whirlwind thread zm_tomb_utility::whirlwind_rumble_nearby_players("whirlwind_active");
@@ -166,10 +166,10 @@ function whirlwind_timeout(n_time) {
 }
 
 function move_along_ground_position(v_position, n_time) {
-  v_diff = vectornormalize(v_position - self.origin);
+  v_diff = vectorNormalize(v_position - self.origin);
   v_newpos = (self.origin + (v_diff * 50)) + vectorscale((0, 0, 1), 50);
   v_ground = zm_utility::groundpos_ignore_water_new(v_newpos);
-  self moveto(v_ground, n_time);
+  self moveTo(v_ground, n_time);
 }
 
 function whirlwind_kill_zombies(n_level, w_weapon) {
@@ -232,7 +232,7 @@ function whirlwind_move_zombie(e_whirlwind) {
   self.e_linker = spawn("script_origin", (0, 0, 0));
   self.e_linker.origin = self.origin;
   self.e_linker.angles = self.angles;
-  self linkto(self.e_linker);
+  self linkTo(self.e_linker);
   self thread whirlwind_unlink(e_whirlwind);
   if(isDefined(e_whirlwind)) {
     n_dist_sq = distance2dsquared(e_whirlwind.origin, self.origin);
@@ -352,7 +352,7 @@ function zombie_launch(e_attacker, w_weapon) {
 }
 
 function determine_launch_vector(e_attacker, ai_target) {
-  v_launch = (vectornormalize(ai_target.origin - e_attacker.origin)) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
+  v_launch = (vectorNormalize(ai_target.origin - e_attacker.origin)) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
   return v_launch;
 }
 
@@ -444,7 +444,7 @@ function whirlwind_attract_anim_watch_cancel() {
     util::wait_network_frame();
   }
   self.deathanim = undefined;
-  self stopanimscripted();
+  self stopanimScripted();
   self._whirlwind_attract_anim = 0;
 }
 

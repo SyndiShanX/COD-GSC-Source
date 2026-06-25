@@ -55,12 +55,12 @@ function_84139b27() {
 }
 
 function_1716cce9() {
-  vol_light_side = getent("vol_light_side", "targetname");
+  vol_light_side = getEnt("vol_light_side", "targetname");
   return self istouching(vol_light_side);
 }
 
 function_fbb4cc60() {
-  vol_dark_side = getent("vol_dark_side", "targetname");
+  vol_dark_side = getEnt("vol_dark_side", "targetname");
   return self istouching(vol_dark_side);
 }
 
@@ -244,7 +244,7 @@ defend_areas() {
 function_bdb9652f() {
   iprintlnbold("<dev string:x38>");
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
     default:
       level.var_71bc2e8f = 2.5;
@@ -262,7 +262,7 @@ function_bdb9652f() {
 function_cf680b18() {
   iprintlnbold("<dev string:x5f>");
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
     default:
       level.var_cd345b49 = 1.5;

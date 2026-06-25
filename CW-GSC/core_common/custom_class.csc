@@ -1052,7 +1052,7 @@ function function_f1216c02(localclientnum, var_8a4ba442, str_rarity) {
   self endon("18582112b5a71f57");
 
   if(!isDefined(level.var_5caba701)) {
-    level.var_5caba701 = getent(localclientnum, "weapon_inspect_background", "targetname");
+    level.var_5caba701 = getEnt(localclientnum, "weapon_inspect_background", "targetname");
   }
 
   if(isDefined(level.var_5caba701)) {

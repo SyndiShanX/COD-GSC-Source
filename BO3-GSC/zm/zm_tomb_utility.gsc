@@ -175,7 +175,7 @@ function watch_for_upgraded_staffs() {
   while(true) {
     wait(0.25);
     if(!isDefined(level.zombie_devgui_gun) || level.zombie_devgui_gun != cmd) {
-      a_players = getplayers();
+      a_players = getPlayers();
       foreach(player in a_players) {
         has_upgraded_staff = 0;
         a_w_weapons = player getweaponslist();
@@ -222,11 +222,11 @@ function function_d88b52e6() {
     }
     if(getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "" || getdvarstring("") == "") {
       level flag::set("");
-      var_5e72b36d = getent("", "");
+      var_5e72b36d = getEnt("", "");
       if(isDefined(var_5e72b36d)) {
         var_5e72b36d delete();
       }
-      t_hole = getent("", "");
+      t_hole = getEnt("", "");
       if(isDefined(t_hole)) {
         t_hole delete();
       }
@@ -408,7 +408,7 @@ function watch_devgui_quadrotor() {
   while(getdvarstring("") != "") {
     wait(0.1);
   }
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     player zm_equipment::set_player_equipment("");
     player giveweapon("");
@@ -901,7 +901,7 @@ function placeholder_puzzle_delete_ent(str_flag_name) {
 function placeholder_puzzle_spin_model() {
   self endon("death");
   while(true) {
-    self rotateyaw(360, 10, 0, 0);
+    self rotateYaw(360, 10, 0, 0);
     wait(9.9);
   }
 }
@@ -922,7 +922,7 @@ function setting_tutorial_hud() {
 }
 
 function tomb_trigger_update_message(func_per_player_msg) {
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(e_player in a_players) {
     n_player = e_player getentitynumber();
     if(!isDefined(self.stub.playertrigger[n_player])) {
@@ -930,7 +930,7 @@ function tomb_trigger_update_message(func_per_player_msg) {
     }
     new_msg = self[[func_per_player_msg]](e_player);
     self.stub.playertrigger[n_player].stored_hint_string = new_msg;
-    self.stub.playertrigger[n_player] sethintstring(new_msg);
+    self.stub.playertrigger[n_player] setHintString(new_msg);
   }
 }
 
@@ -1103,7 +1103,7 @@ function weather_manager() {
     level clientfield::set("rain_level", level.weather_rain);
     level clientfield::set("snow_level", level.weather_snow);
     wait(2);
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(zombie_utility::is_player_valid(player, 0, 1)) {
         player set_weather_to_player();
       }
@@ -1150,7 +1150,7 @@ function puzzle_orb_move(v_to_pos) {
     return;
   }
   movetime = dist / 300;
-  self moveto(v_to_pos, movetime, 0, 0);
+  self moveTo(v_to_pos, movetime, 0, 0);
   self waittill("movedone");
 }
 
@@ -1212,13 +1212,13 @@ function puzzle_orb_pillar_show() {
 }
 
 function any_player_looking_at_plinth(min_lookat_dot, n_near_dist_sq) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     dist_sq = distance2dsquared(player.origin, self.origin);
     if(dist_sq < n_near_dist_sq) {
       fvec = anglesToForward(player.angles);
       to_self = self.origin - player.origin;
-      to_self = vectornormalize(to_self);
+      to_self = vectorNormalize(to_self);
       dot_to_self = vectordot(to_self, fvec);
       if(dot_to_self > min_lookat_dot) {
         return true;
@@ -1273,7 +1273,7 @@ function puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   e_model ghost();
   s_descend_start = struct::get("orb_crypt_descent_path", "targetname");
   v_pos_above_gem = s_descend_start.origin + vectorscale((0, 0, 1), 3000);
-  e_model moveto(v_pos_above_gem, 0.05, 0, 0);
+  e_model moveTo(v_pos_above_gem, 0.05, 0, 0);
   e_model waittill("movedone");
   level flag::wait_till(a_puzzle_flags[1]);
   e_model show();
@@ -1370,7 +1370,7 @@ function capture_zombie_spawn_init(animname_set = 0) {
 }
 
 function rumble_players_in_chamber(n_rumble_enum, n_rumble_time = 0.1) {
-  a_players = getplayers();
+  a_players = getPlayers();
   a_rumbled_players = [];
   foreach(e_player in a_players) {
     if(zm_tomb_chamber::is_point_in_chamber(e_player.origin)) {
@@ -1386,7 +1386,7 @@ function rumble_players_in_chamber(n_rumble_enum, n_rumble_time = 0.1) {
 
 function rumble_nearby_players(v_center, n_range, n_rumble_enum) {
   n_range_sq = n_range * n_range;
-  a_players = getplayers();
+  a_players = getPlayers();
   a_rumbled_players = [];
   foreach(e_player in a_players) {
     if(distancesquared(v_center, e_player.origin) < n_range_sq) {
@@ -1436,7 +1436,7 @@ function whirlwind_rumble_player(e_whirlwind, str_active_flag) {
 function whirlwind_rumble_nearby_players(str_active_flag) {
   range_sq = 90000;
   while(isDefined(self) && level flag::get(str_active_flag)) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       dist_sq = distancesquared(self.origin, player.origin);
       if(dist_sq < range_sq) {
@@ -1509,7 +1509,7 @@ function zone_capture_powerup() {
 
 function traversal_blocker() {
   level flag::init("player_near_traversal");
-  m_traversal_blocker = getent("traversal_blocker", "targetname");
+  m_traversal_blocker = getEnt("traversal_blocker", "targetname");
   m_traversal_blocker thread traversal_blocker_disabler();
   level flag::wait_till_any(array("activate_zone_nml", "player_near_traversal"));
   m_traversal_blocker connectpaths();
@@ -1522,7 +1522,7 @@ function traversal_blocker_disabler() {
   pos2 = (672, 3720, -179);
   b_too_close = 0;
   while(level.round_number < 10 && !b_too_close) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       if(distancesquared(player.origin, pos1) < 4096 || distancesquared(player.origin, pos2) < 4096) {
         b_too_close = 1;

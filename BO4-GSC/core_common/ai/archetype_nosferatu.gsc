@@ -397,8 +397,8 @@ function_e9819a23(entity) {
 
     if(distancesq >= 100 * 100) {
       if(entity.enemy issprinting()) {
-        enemyvelocity = vectornormalize(entity.enemy getvelocity());
-        var_7a61ad67 = vectornormalize(entity getvelocity());
+        enemyvelocity = vectorNormalize(entity.enemy getvelocity());
+        var_7a61ad67 = vectorNormalize(entity getvelocity());
 
         if(vectordot(var_7a61ad67, enemyvelocity) > cos(20)) {
           record3dtext("<dev string:x38>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x53>");
@@ -465,8 +465,8 @@ function_85d8b15d(entity) {
 
     if(distancesq >= 100 * 100) {
       if(entity.enemy issprinting()) {
-        enemyvelocity = vectornormalize(entity.enemy getvelocity());
-        var_7a61ad67 = vectornormalize(entity getvelocity());
+        enemyvelocity = vectorNormalize(entity.enemy getvelocity());
+        var_7a61ad67 = vectorNormalize(entity getvelocity());
 
         if(vectordot(var_7a61ad67, enemyvelocity) > cos(20)) {
           record3dtext("<dev string:x38>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:x53>");
@@ -647,7 +647,7 @@ function_1ad502a0(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   entity collidewithactors(0);
 
   if(isDefined(entity.enemy)) {
-    dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+    dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
     entity forceteleport(entity.origin, vectortoangles(dirtoenemy));
   }
 
@@ -689,7 +689,7 @@ function_3511ecd1(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     var_535d098c = 0;
 
     if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
-      var_cc075bd0 = vectornormalize(entity.origin - entity.meleeinfo.adjustedendpos);
+      var_cc075bd0 = vectorNormalize(entity.origin - entity.meleeinfo.adjustedendpos);
       entity.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
       var_535d098c = 1;
     }
@@ -722,7 +722,7 @@ function_3511ecd1(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       var_776ddabf = distancesquared(entity.meleeinfo.var_cb28f380, entity.meleeinfo.adjustedendpos);
       myforward = anglesToForward(entity.angles);
       var_1c3641f2 = (entity.enemy.origin[0], entity.enemy.origin[1], entity.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - entity.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - entity.origin);
       zdiff = entity.meleeinfo.var_cb28f380[2] - entity.enemy.origin[2];
       withinzrange = abs(zdiff) <= 64;
       withinfov = vectordot(myforward, dirtoenemy) > cos(50);
@@ -746,7 +746,7 @@ function_3511ecd1(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
         starttime = ceil(starttime / timestep);
         stoptime = ceil(stoptime / timestep);
         adjustduration = stoptime - starttime;
-        entity.meleeinfo.var_10b8b6d1 = vectornormalize(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
+        entity.meleeinfo.var_10b8b6d1 = vectorNormalize(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
         entity.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
         entity.meleeinfo.var_425c4c8b = 1;
         entity.meleeinfo.adjustmentstarted = 1;

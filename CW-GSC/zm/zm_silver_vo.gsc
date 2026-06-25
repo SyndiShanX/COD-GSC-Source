@@ -762,7 +762,7 @@ function function_aa918663() {
     level waittill(#"end_of_round");
     level.var_1f38ef9f = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!is_true(level.var_909c3262)) {
         player thread function_6a3c98be();
       }
@@ -841,7 +841,7 @@ function function_daafb798() {
 
 function function_71299b6e() {
   level endon(#"end_game", #"game_ended");
-  var_25e4248d = getent("observation_room_trigger", "targetname");
+  var_25e4248d = getEnt("observation_room_trigger", "targetname");
   var_25e4248d waittill(#"trigger");
 
   switch (level.var_4d16d15f) {
@@ -877,8 +877,8 @@ function function_ee2c526b() {
       case #"hash_395eb3958f40a0cd":
         level zm_vo::function_d6f8bbd9(#"hash_2c81383a9069770f", 1, function_a1ef346b());
         wait 15;
-        var_448b5a02 = getent("vol_medical_lab_ctrlrm", "script_noteworthy");
-        players = getplayers();
+        var_448b5a02 = getEnt("vol_medical_lab_ctrlrm", "script_noteworthy");
+        players = getPlayers();
 
         foreach(player in players) {
           if(isDefined(var_448b5a02)) {
@@ -940,7 +940,7 @@ function function_6276b243() {
 }
 
 function function_5bd32264(str_vo_alias, n_delay, b_wait_if_busy) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player zm_zonemgr::is_player_in_zone(level.var_65c43c31, 0)) {
       player thread zm_vo::function_c4303dda(str_vo_alias, n_delay, b_wait_if_busy);
     }
@@ -955,7 +955,7 @@ function private function_3b2016d3() {
 function private function_c5b386e2(cmd) {
   switch (cmd) {
     case #"hash_4d542c9d3f4bb89b":
-      level array::thread_all(getplayers(), &zm_vo::function_d342796e, "<dev string:x78>", 1, 0, 0, 1);
+      level array::thread_all(getPlayers(), &zm_vo::function_d342796e, "<dev string:x78>", 1, 0, 0, 1);
       break;
     case #"hash_5eb39a0fff2ee528":
       level thread function_14a92dc6(#"hash_28272cdbefb5f54d");

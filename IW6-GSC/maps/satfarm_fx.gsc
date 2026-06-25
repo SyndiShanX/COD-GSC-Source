@@ -161,7 +161,7 @@ rotateobject() {
   var_0 = 5;
 
   for(;;) {
-    self rotateyaw(-360, var_0);
+    self rotateYaw(-360, var_0);
     wait 5;
   }
 }

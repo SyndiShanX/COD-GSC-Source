@@ -209,7 +209,7 @@ function init_challenge_boards() {
   level.a_e_challenge_boards = [];
   for(x = 0; x < 4; x++) {
     str_name = "challenge_board_" + x;
-    var_df95c68b = getent(str_name, "targetname");
+    var_df95c68b = getEnt(str_name, "targetname");
     if(!isDefined(level.a_e_challenge_boards)) {
       level.a_e_challenge_boards = [];
     } else if(!isarray(level.a_e_challenge_boards)) {
@@ -292,7 +292,7 @@ function function_424b6fe8() {
             continue;
           }
         }
-        e_who playrumbleonentity("zm_stalingrad_interact_rumble");
+        e_who playRumbleOnEntity("zm_stalingrad_interact_rumble");
         self.s_unitrigger.playertrigger[e_who.entity_num] sethintstringforplayer(e_who, "");
         e_who player_give_reward(self.var_30ff0d6c, n_entity);
         if(isDefined(self.var_30ff0d6c)) {
@@ -305,7 +305,7 @@ function function_424b6fe8() {
               break;
             }
             if(e_who flag::get("flag_player_completed_challenge_" + i) && !e_who flag::get("flag_player_collected_reward_" + i)) {
-              e_who playrumbleonentity("zm_stalingrad_interact_rumble");
+              e_who playRumbleOnEntity("zm_stalingrad_interact_rumble");
               self.s_unitrigger.playertrigger[e_who.entity_num] sethintstringforplayer(e_who, "");
               self function_1d22626(e_who, i);
               break;
@@ -413,7 +413,7 @@ function function_b1f54cb4(e_player, s_reward, var_17b3dc96, var_21d0cf95) {
     }
   }
   self.var_30ff0d6c movez(var_21d0cf95, 1);
-  playsoundatposition("evt_prize_rise", self.origin);
+  playSoundAtPosition("evt_prize_rise", self.origin);
   self.var_30ff0d6c waittill("movedone");
 }
 
@@ -525,7 +525,7 @@ function player_give_reward(var_30ff0d6c, n_entity) {
   switch (var_30ff0d6c.n_challenge) {
     case 1: {
       level thread zm_powerups::specific_powerup_drop("full_ammo", self.origin);
-      playsoundatposition("evt_grab_powerup", self.origin);
+      playSoundAtPosition("evt_grab_powerup", self.origin);
       break;
     }
     case 2: {
@@ -533,12 +533,12 @@ function player_give_reward(var_30ff0d6c, n_entity) {
         var_e564b69e = getweapon(var_30ff0d6c.str_weapon_name);
       }
       self thread swap_weapon(var_e564b69e);
-      playsoundatposition("evt_grab_weapon", self.origin);
+      playSoundAtPosition("evt_grab_weapon", self.origin);
       break;
     }
     case 3: {
       self thread function_6131520e();
-      playsoundatposition("evt_grab_perk", self.origin);
+      playSoundAtPosition("evt_grab_perk", self.origin);
       break;
     }
   }
@@ -773,7 +773,7 @@ function function_ab16b01() {
   level flagsys::wait_till("start_zombie_round_logic");
   self endon("flag_player_completed_challenge_2");
   self endon("disconnect");
-  var_259ad2d8 = getent("apothicon_island", "targetname");
+  var_259ad2d8 = getEnt("apothicon_island", "targetname");
   level flag::wait_till_all(array("power_on1", "power_on2", "power_on3", "power_on4"));
   while(true) {
     self waittill("hash_a8c34632");

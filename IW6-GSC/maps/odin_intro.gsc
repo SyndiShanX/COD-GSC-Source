@@ -150,7 +150,7 @@ intro_setup() {
 }
 
 intro_ally_idle() {
-  var_0 = getent("scriptednode_player", "script_noteworthy");
+  var_0 = getEnt("scriptednode_player", "script_noteworthy");
   var_0 thread maps\_anim::anim_loop_solo(level.ally, "odin_intro_kyra_idle", "stop_loop");
   level waittill("intro_stop_ally_idle");
   var_0 notify("stop_loop");
@@ -214,7 +214,7 @@ nag_check_dialogue(var_0) {
 
 player_near_station_checker() {
   level endon("start_transition_to_youngblood");
-  var_0 = getent("ally_airlock_touch", "targetname");
+  var_0 = getEnt("ally_airlock_touch", "targetname");
   thread player_too_far_death();
   wait 1;
 
@@ -255,7 +255,7 @@ player_too_far_death() {
 
 intro_vignette() {
   common_scripts\utility::flag_set("no_push_zone");
-  var_0 = getent("scriptednode_player", "script_noteworthy");
+  var_0 = getEnt("scriptednode_player", "script_noteworthy");
   thread ally_intro_anims_and_logic(var_0);
   thread manage_exterior_hatch_lights();
   common_scripts\utility::flag_set("begin_dof_rack_fade");
@@ -265,7 +265,7 @@ intro_vignette() {
   common_scripts\utility::flag_wait("ally_at_exterior_hatch");
   level notify("stop_nag");
   var_0 notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   waittillframeend;
 }
 
@@ -304,7 +304,7 @@ rubber_band_kyra(var_0, var_1, var_2) {
   var_5 = 0;
   level.random_nag_line = 99;
   thread idle_nag_counter();
-  var_6 = getent("intro_hatch_door_blocker_org", "targetname");
+  var_6 = getEnt("intro_hatch_door_blocker_org", "targetname");
 
   for(;;) {
     var_7 = self getanimtime(%odin_intro_kyra);
@@ -368,7 +368,7 @@ rubber_band_kyra(var_0, var_1, var_2) {
 player_intro_anim() {
   common_scripts\utility::flag_clear("clear_to_tweak_player");
   var_0 = maps\_utility::spawn_anim_model("player_rig");
-  var_1 = getent("scriptednode_player", "script_noteworthy");
+  var_1 = getEnt("scriptednode_player", "script_noteworthy");
   var_1 maps\_anim::anim_first_frame_solo(var_0, "intro_exterior_scene");
   var_2 = 0;
   level.player playerlinktodelta(var_0, "tag_player", 1, var_2, var_2, var_2, var_2, 1);
@@ -420,15 +420,15 @@ wait_for_player_movement_or_time() {
 }
 
 shuttle_docking() {
-  var_0 = getent("shuttle_stop_movement_vol", "targetname");
+  var_0 = getEnt("shuttle_stop_movement_vol", "targetname");
   var_1 = maps\_utility::spawn_anim_model("shuttle");
   level.intro_ent_del[level.intro_ent_del.size] = var_1;
   var_1 thread shuttle_fx();
-  var_2 = getent("scriptednode_player", "script_noteworthy");
+  var_2 = getEnt("scriptednode_player", "script_noteworthy");
   var_3 = [];
   var_3["shuttle"] = var_1;
   var_2 maps\_anim::anim_first_frame_solo(var_1, "odin_intro_shuttle");
-  var_0 linkto(var_1);
+  var_0 linkTo(var_1);
   maps\_anim::anim_set_rate(var_3, "odin_intro_shuttle", 5);
   wait 7;
   thread maps\odin_audio::sfx_shuttle_passby(var_1);
@@ -441,27 +441,27 @@ shuttle_fx() {
   level.intro_ent_del[level.intro_ent_del.size] = level.shuttle_thrust_brake;
   level.shuttle_thrust_brake.origin = self.origin + (720, 0, 30);
   level.shuttle_thrust_brake.angles = self.angles;
-  level.shuttle_thrust_brake linkto(self);
+  level.shuttle_thrust_brake linkTo(self);
   level.shuttle_thrust_fl = common_scripts\utility::spawn_tag_origin();
   level.intro_ent_del[level.intro_ent_del.size] = level.shuttle_thrust_fl;
   level.shuttle_thrust_fl.origin = self.origin + (620, 95, 5);
   level.shuttle_thrust_fl.angles = self.angles + (0, 90, 0);
-  level.shuttle_thrust_fl linkto(self);
+  level.shuttle_thrust_fl linkTo(self);
   level.shuttle_thrust_fr = common_scripts\utility::spawn_tag_origin();
   level.intro_ent_del[level.intro_ent_del.size] = level.shuttle_thrust_fr;
   level.shuttle_thrust_fr.origin = self.origin + (620, -95, 5);
   level.shuttle_thrust_fr.angles = self.angles + (0, -90, 0);
-  level.shuttle_thrust_fr linkto(self);
+  level.shuttle_thrust_fr linkTo(self);
   level.shuttle_thrust_rl = common_scripts\utility::spawn_tag_origin();
   level.intro_ent_del[level.intro_ent_del.size] = level.shuttle_thrust_rl;
   level.shuttle_thrust_rl.origin = self.origin + (-57, 80, 10);
   level.shuttle_thrust_rl.angles = self.angles + (0, 90, 0);
-  level.shuttle_thrust_rl linkto(self);
+  level.shuttle_thrust_rl linkTo(self);
   level.shuttle_thrust_rr = common_scripts\utility::spawn_tag_origin();
   level.intro_ent_del[level.intro_ent_del.size] = level.shuttle_thrust_rr;
   level.shuttle_thrust_rr.origin = self.origin + (-57, -80, 10);
   level.shuttle_thrust_rr.angles = self.angles + (0, -90, 0);
-  level.shuttle_thrust_rr linkto(self);
+  level.shuttle_thrust_rr linkTo(self);
   common_scripts\utility::flag_wait("shuttle_starts_moving");
   wait 4.7;
   maps\_utility::delaythread(1, ::shuttle_thrust, "CW", 3);
@@ -609,10 +609,10 @@ shuttle_thrust(var_0, var_1) {
   level.intro_ent_del[level.intro_ent_del.size] = var_10;
   var_10.origin = level.shuttle_thrust_fr.origin;
   var_10.angles = level.shuttle_thrust_fr.angles;
-  var_7 linkto(level.shuttle_thrust_rl, "tag_origin", (0, 0, 0), (var_2, 0, 0));
-  var_8 linkto(level.shuttle_thrust_rr, "tag_origin", (0, 0, 0), (var_3, 0, 0));
-  var_9 linkto(level.shuttle_thrust_fl, "tag_origin", (0, 0, 0), (var_4, 0, 0));
-  var_10 linkto(level.shuttle_thrust_fr, "tag_origin", (0, 0, 0), (var_5, 0, 0));
+  var_7 linkTo(level.shuttle_thrust_rl, "tag_origin", (0, 0, 0), (var_2, 0, 0));
+  var_8 linkTo(level.shuttle_thrust_rr, "tag_origin", (0, 0, 0), (var_3, 0, 0));
+  var_9 linkTo(level.shuttle_thrust_fl, "tag_origin", (0, 0, 0), (var_4, 0, 0));
+  var_10 linkTo(level.shuttle_thrust_fr, "tag_origin", (0, 0, 0), (var_5, 0, 0));
 
   for(var_6 = 0; var_6 < var_1; var_6++) {
     playFXOnTag(level._effect["vfx_shuttle_manuvr_thrust"], var_7, "tag_origin");
@@ -755,21 +755,21 @@ idle_nag_counter() {
 }
 
 open_exterior_hatch() {
-  var_0 = getent("scriptednode_pdoor", "targetname");
-  var_1 = getent("intro_airlock_door", "targetname");
+  var_0 = getEnt("scriptednode_pdoor", "targetname");
+  var_1 = getEnt("intro_airlock_door", "targetname");
   var_1.animname = "space_round_hatch";
   var_1 maps\_utility::assign_animtree("space_round_hatch");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_intro_exterior_door_open");
-  var_2 = getent("intro_hatch_door_blocker", "targetname");
-  var_3 = getent("intro_hatch_door_blocker_org", "targetname");
-  var_3 linkto(var_1, "door_DM");
-  var_2 linkto(var_3);
+  var_2 = getEnt("intro_hatch_door_blocker", "targetname");
+  var_3 = getEnt("intro_hatch_door_blocker_org", "targetname");
+  var_3 linkTo(var_1, "door_DM");
+  var_2 linkTo(var_3);
   common_scripts\utility::flag_wait("open_exterior_hatch");
   thread maps\odin_ally::odin_invasion_scene();
   var_0 maps\_anim::anim_single_solo(var_1, "odin_intro_exterior_door_open");
 
   for(;;) {
-    if(level.ally istouching(getent("ally_airlock_touch", "targetname")) && level.player istouching(getent("ally_airlock_touch", "targetname"))) {
+    if(level.ally istouching(getEnt("ally_airlock_touch", "targetname")) && level.player istouching(getEnt("ally_airlock_touch", "targetname"))) {
       break;
     }
 
@@ -792,7 +792,7 @@ open_exterior_hatch() {
 }
 
 airlock_interior_hatch() {
-  var_0 = getent("scriptednode_squareDoor", "targetname");
+  var_0 = getEnt("scriptednode_squareDoor", "targetname");
   var_1 = maps\_utility::spawn_anim_model("space_square_hatch");
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("tag_origin");
@@ -800,10 +800,10 @@ airlock_interior_hatch() {
   var_1 retargetscriptmodellighting(var_2);
   level.intro_ent_del[level.intro_ent_del.size] = var_1;
   var_0 maps\_anim::anim_first_frame_solo(var_1, "odin_infiltrate_door_open");
-  var_3 = getent("intro_airlock_hatch_blocker", "targetname");
-  var_4 = getent("intro_airlock_hatch_blocker_org", "targetname");
-  var_4 linkto(var_1, "tag_origin");
-  var_3 linkto(var_4);
+  var_3 = getEnt("intro_airlock_hatch_blocker", "targetname");
+  var_4 = getEnt("intro_airlock_hatch_blocker_org", "targetname");
+  var_4 linkTo(var_1, "tag_origin");
+  var_3 linkTo(var_4);
   common_scripts\utility::flag_wait("open_airlock_door");
   thread maps\odin_audio::sfx_airlock_door();
   common_scripts\utility::flag_set("airlock_pressurized_and_open");
@@ -816,7 +816,7 @@ manage_exterior_hatch_lights() {
   var_1 = getEntArray("intro_exterior_hatch_lights_beams", "targetname");
   var_0 = common_scripts\utility::array_combine(var_0, var_1);
   var_2 = getEntArray("intro_exterior_hatch_lights", "targetname");
-  var_3 = getent("intro_exterior_hatch_light", "targetname");
+  var_3 = getEnt("intro_exterior_hatch_light", "targetname");
 
   foreach(var_5 in var_0) {
     var_5 hide();
@@ -841,7 +841,7 @@ manage_exterior_hatch_lights() {
 }
 
 station_entrance_to_infiltration() {
-  var_0 = getent("anim_entrance_to_infiltrate", "script_noteworthy");
+  var_0 = getEnt("anim_entrance_to_infiltrate", "script_noteworthy");
   common_scripts\utility::flag_set("remove_temp_blocker");
   var_0 maps\_anim::anim_single_solo(self, "odin_infiltrate_kyra_entrance");
   var_0 thread maps\_anim::anim_loop_solo(self, "odin_infiltrate_kyra_midpoint_idle", "stop_loop");
@@ -874,7 +874,7 @@ ally_movement() {
   level endon("airlock_pressurized_and_open");
   maps\_utility::delaythread(10.0, common_scripts\utility::flag_set, "get_intro_moving");
 
-  while(level.player istouching(getent("vol_player_at_satellite", "script_noteworthy")) && !common_scripts\utility::flag("get_intro_moving")) {
+  while(level.player istouching(getEnt("vol_player_at_satellite", "script_noteworthy")) && !common_scripts\utility::flag("get_intro_moving")) {
     wait 0.1;
   }
 }
@@ -906,7 +906,7 @@ tweak_off_axis_player() {
       var_2 = randomfloatrange(0 - level.rndrollhmax, level.rndrollhmax);
       var_3 = randomfloatrange(10, 30);
       var_4 = var_3 * 0.25;
-      level.view_ref_base_rotator rotateto((var_1, 0, var_2), var_3, var_4, var_4);
+      level.view_ref_base_rotator rotateTo((var_1, 0, var_2), var_3, var_4, var_4);
       level.view_ref_base_rotator waittill("rotatedone");
     } else
       wait 1.0;
@@ -916,8 +916,8 @@ tweak_off_axis_player() {
 
   level.view_ref_base_rotator notify("rotatedone");
   level.view_ref_ent notify("rotatedone");
-  level.view_ref_ent rotateto((0, 0, 0), 2, 0, 0);
-  level.view_ref_base_rotator rotateto((0, 0, 0), 2, 0, 0);
+  level.view_ref_ent rotateTo((0, 0, 0), 2, 0, 0);
+  level.view_ref_base_rotator rotateTo((0, 0, 0), 2, 0, 0);
   wait 2;
   level.player playersetgroundreferenceent(undefined);
   level.view_ref_ent delete();
@@ -933,15 +933,15 @@ rotation_reset(var_0) {
     common_scripts\utility::flag_waitopen("clear_to_tweak_player");
     level.view_ref_base_rotator notify("rotatedone");
     level.view_ref_ent notify("rotatedone");
-    level.view_ref_ent rotateto((0, 0, 0), 2, 0, 0);
-    level.view_ref_base_rotator rotateto((0, 0, 0), 2, 0, 0);
+    level.view_ref_ent rotateTo((0, 0, 0), 2, 0, 0);
+    level.view_ref_base_rotator rotateTo((0, 0, 0), 2, 0, 0);
     wait 2;
 
     while(!common_scripts\utility::flag("clear_to_tweak_player")) {
       level.view_ref_base_rotator notify("rotatedone");
       level.view_ref_ent notify("rotatedone");
-      level.view_ref_ent rotateto((0, 0, 0), 2, 0, 0);
-      level.view_ref_base_rotator rotateto((0, 0, 0), 2, 0, 0);
+      level.view_ref_ent rotateTo((0, 0, 0), 2, 0, 0);
+      level.view_ref_base_rotator rotateTo((0, 0, 0), 2, 0, 0);
       wait 1;
     }
   }
@@ -1013,7 +1013,7 @@ tweak_player_view_based_on_movement() {
         var_3 = randomfloatrange(1.5, 2.2);
         var_4 = level.view_ref_base_rotator.angles[0] + level.desired_bob_pitch;
         var_5 = level.view_ref_base_rotator.angles[2] + level.desired_bob_roll;
-        level.view_ref_ent rotateto((var_4, 0, var_5), var_3, var_3 * 0.2, var_3 * 0.8);
+        level.view_ref_ent rotateTo((var_4, 0, var_5), var_3, var_3 * 0.2, var_3 * 0.8);
         level.view_ref_ent waittill("rotatedone");
       }
     }
@@ -1027,7 +1027,7 @@ tweak_player_view_based_on_movement() {
 tweak_player_view_do_rotate() {
   var_0 = level.view_ref_base_rotator.angles[0] + level.desired_bob_pitch;
   var_1 = level.view_ref_base_rotator.angles[2] + level.desired_bob_roll;
-  level.view_ref_ent rotateto((var_0, 0, var_1), 1.6, 0.8, 0.8);
+  level.view_ref_ent rotateTo((var_0, 0, var_1), 1.6, 0.8, 0.8);
   level.view_ref_ent waittill("rotatedone");
 }
 
@@ -1107,7 +1107,7 @@ tweak_player_wall_push() {
       }
 
       var_2 = randomfloatrange(2.3, 3.8);
-      level.view_ref_ent rotateto((var_0, 0, var_1), var_2, 0, var_2 * 0.8);
+      level.view_ref_ent rotateTo((var_0, 0, var_1), var_2, 0, var_2 * 0.8);
       wait(var_2);
       common_scripts\utility::flag_clear("wall_push_tweak_player");
       level.view_ref_base_rotator.angles = level.view_ref_ent.angles;

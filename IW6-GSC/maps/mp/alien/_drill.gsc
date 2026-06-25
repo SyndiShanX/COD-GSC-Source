@@ -36,7 +36,7 @@ init_drill() {
   flag_init("drill_destroyed");
   flag_init("drill_drilling");
 
-  level.drill_use_trig = getent("drill_pickup_trig", "targetname");
+  level.drill_use_trig = getEnt("drill_pickup_trig", "targetname");
   if(isDefined(level.drill_use_trig)) {
     level.drill_use_trig.original_origin = level.drill_use_trig.origin;
   }
@@ -116,7 +116,7 @@ drill_think() {
   level thread drill_threat_think();
 
   drop_loc = (2822.27, -196, 524.068);
-  drop_loc_struct = getstruct("drill_loc", "targetname");
+  drop_loc_struct = getStruct("drill_loc", "targetname");
 
   if(isDefined(drop_loc_struct)) {
     drop_loc = drop_loc_struct.origin;
@@ -227,8 +227,8 @@ drill_pickup_listener(marker) {
     }
   }
 
-  use_trig SetCursorHint("HINT_ACTIVATE");
-  use_trig SetHintString(&"ALIEN_COLLECTIBLES_PICKUP_BOMB");
+  use_trig setCursorHint("HINT_ACTIVATE");
+  use_trig setHintString(&"ALIEN_COLLECTIBLES_PICKUP_BOMB");
 
   while(true) {
     use_trig waittill("trigger", owner);
@@ -477,16 +477,16 @@ watch_to_repair(hive_struct) {
     self MakeUsable();
 
     if(isDefined(level.drill_repair)) {
-      self SetHintString(level.drill_repair);
+      self setHintString(level.drill_repair);
     } else {
-      self SetHintString(&"ALIEN_COLLECTIBLES_DRILL_REPAIR");
+      self setHintString(&"ALIEN_COLLECTIBLES_DRILL_REPAIR");
     }
     self waittill("trigger", player);
 
     if(is_true(player.iscarrying)) {
       continue;
     }
-    self SetHintString("");
+    self setHintString("");
 
     player_count = level.players.size;
     player.isRepairing = true;
@@ -665,7 +665,7 @@ set_drill_state_run(owner) {
 
   level.drill setCanDamage(true);
   level.drill MakeUnUsable();
-  level.drill SetHintString("");
+  level.drill setHintString("");
 
   health = CONST_DRILL_HEALTH;
   if(use_alternate_drill()) {
@@ -862,8 +862,8 @@ set_drill_state_offline() {
   level.drill ScriptModelPlayAnim("alien_drill_nonoperate");
 
   level.drill MakeUsable();
-  level.drill SetCursorHint("HINT_ACTIVATE");
-  level.drill SetHintString(&"ALIEN_COLLECTIBLES_PLANT_BOMB");
+  level.drill setCursorHint("HINT_ACTIVATE");
+  level.drill setHintString(&"ALIEN_COLLECTIBLES_PLANT_BOMB");
 
   level.drill setCanDamage(false);
   level.drill FreeEntitySentient();
@@ -1008,7 +1008,7 @@ sfx_overheat() {
 
   if(!isDefined(level.drill_overheat_lp_02)) {
     level.drill_overheat_lp_02 = spawn("script_origin", level.drill.origin);
-    level.drill_overheat_lp_02 LinkTo(level.drill);
+    level.drill_overheat_lp_02 linkTo(level.drill);
 
     if(level.script == "mp_alien_last") {
       level.drill_sfx_lp StopLoopSound("alien_conduit_on_lp");
@@ -1033,7 +1033,7 @@ drill_detonate() {
   self maps\mp\alien\_hive::destroy_hive_icon();
 
   self MakeUnusable();
-  self SetHintString("");
+  self setHintString("");
 
   if(alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::remove_from_outline_drill_watch_list(level.drill);
@@ -1295,9 +1295,9 @@ angles_to_ground(pos, ang, offset) {
   trace_angles = VectorToAngles(trace_vec);
   angle_delta = VectorToAngles(AnglesToUp(trace_angles))[1] - VectorToAngles(anglesToForward(ang))[1];
 
-  up = VectorNormalize(trace_vec);
-  forward = VectorNormalize(AnglesToUp(VectorToAngles(trace_vec)));
-  right = VectorNormalize(AnglesToRight(VectorToAngles(trace_vec)));
+  up = vectorNormalize(trace_vec);
+  forward = vectorNormalize(AnglesToUp(VectorToAngles(trace_vec)));
+  right = vectorNormalize(AnglesToRight(VectorToAngles(trace_vec)));
   forward = RotatePointAroundVector(up, forward, angle_delta - 90);
   right = RotatePointAroundVector(up, right, angle_delta - 90);
 
@@ -1514,12 +1514,12 @@ sfx_drill_on(door) {
 
   if(!isDefined(level.drill_sfx_lp)) {
     level.drill_sfx_lp = spawn("script_origin", drill.origin);
-    level.drill_sfx_lp LinkTo(drill);
+    level.drill_sfx_lp linkTo(drill);
   }
 
   if(!isDefined(level.drill_sfx_dist_lp)) {
     level.drill_sfx_dist_lp = spawn("script_origin", drill.origin);
-    level.drill_sfx_dist_lp LinkTo(drill);
+    level.drill_sfx_dist_lp linkTo(drill);
   }
 
   wait 0.1;
@@ -1742,7 +1742,7 @@ slide_open() {
   if(!isDefined(self.script_angles)) {
     self delete();
   } else {
-    self moveto(self.origin + self.script_angles, 1);
+    self moveTo(self.origin + self.script_angles, 1);
   }
 }
 
@@ -1772,7 +1772,7 @@ wait_for_drill_plant() {
         }
 
         self MakeUnusable();
-        self SetHintString("");
+        self setHintString("");
         maps\mp\alien\_drill::remove_headicons_from_players();
       }
 

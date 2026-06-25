@@ -39,39 +39,39 @@ function function_8e05c407() {
   }
 
   level flag::wait_till("flg_intro_ride_in_progress");
-  fill = getent("fill_cin_intro", "targetname");
-  key = getent("key_cin_intro", "targetname");
+  fill = getEnt("fill_cin_intro", "targetname");
+  key = getEnt("key_cin_intro", "targetname");
 
   if(isDefined(level.var_77be18d2)) {
-    key linkto(level.var_77be18d2, "tag_body_animate", (-90, 0, 106.1), (0, 0, 0));
-    fill linkto(level.var_77be18d2, "tag_body_animate", (17, 20, 53.1), (160, 0, 0));
+    key linkTo(level.var_77be18d2, "tag_body_animate", (-90, 0, 106.1), (0, 0, 0));
+    fill linkTo(level.var_77be18d2, "tag_body_animate", (17, 20, 53.1), (160, 0, 0));
   }
 
   while(!isDefined(level.var_5d798cf2)) {
     waitframe(1);
   }
 
-  vh_ally_fav_right_tail_light_a = getent("vh_ally_fav_right_tail_light_a", "targetname");
-  vh_ally_fav_right_tail_light_b = getent("vh_ally_fav_right_tail_light_b", "targetname");
-  vh_ally_fav_right_head_light_a = getent("vh_ally_fav_right_head_light_a", "targetname");
-  vh_ally_fav_right_head_light_b = getent("vh_ally_fav_right_head_light_b", "targetname");
-  vh_ally_fav_right_tail_light_a linkto(level.var_5d798cf2, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_right_tail_light_b linkto(level.var_5d798cf2, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_right_head_light_a linkto(level.var_5d798cf2, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_right_head_light_b linkto(level.var_5d798cf2, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_right_tail_light_a = getEnt("vh_ally_fav_right_tail_light_a", "targetname");
+  vh_ally_fav_right_tail_light_b = getEnt("vh_ally_fav_right_tail_light_b", "targetname");
+  vh_ally_fav_right_head_light_a = getEnt("vh_ally_fav_right_head_light_a", "targetname");
+  vh_ally_fav_right_head_light_b = getEnt("vh_ally_fav_right_head_light_b", "targetname");
+  vh_ally_fav_right_tail_light_a linkTo(level.var_5d798cf2, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_right_tail_light_b linkTo(level.var_5d798cf2, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_right_head_light_a linkTo(level.var_5d798cf2, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_right_head_light_b linkTo(level.var_5d798cf2, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
 
   while(!isDefined(level.var_7b278a4f)) {
     waitframe(1);
   }
 
-  vh_ally_fav_left_tail_light_a = getent("vh_ally_fav_left_tail_light_a", "targetname");
-  vh_ally_fav_left_tail_light_b = getent("vh_ally_fav_left_tail_light_b", "targetname");
-  vh_ally_fav_left_head_light_a = getent("vh_ally_fav_left_head_light_a", "targetname");
-  vh_ally_fav_left_head_light_b = getent("vh_ally_fav_left_head_light_b", "targetname");
-  vh_ally_fav_left_tail_light_a linkto(level.var_7b278a4f, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_left_tail_light_b linkto(level.var_7b278a4f, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_left_head_light_a linkto(level.var_7b278a4f, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_left_head_light_b linkto(level.var_7b278a4f, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_left_tail_light_a = getEnt("vh_ally_fav_left_tail_light_a", "targetname");
+  vh_ally_fav_left_tail_light_b = getEnt("vh_ally_fav_left_tail_light_b", "targetname");
+  vh_ally_fav_left_head_light_a = getEnt("vh_ally_fav_left_head_light_a", "targetname");
+  vh_ally_fav_left_head_light_b = getEnt("vh_ally_fav_left_head_light_b", "targetname");
+  vh_ally_fav_left_tail_light_a linkTo(level.var_7b278a4f, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_left_tail_light_b linkTo(level.var_7b278a4f, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_left_head_light_a linkTo(level.var_7b278a4f, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_left_head_light_b linkTo(level.var_7b278a4f, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
 
   while(!isDefined(level.var_82e50b77)) {
     waitframe(1);
@@ -81,23 +81,23 @@ function function_8e05c407() {
   vh_ally_fav_tail_light_b = getEntArray("vh_ally_fav_tail_light_b", "targetname");
   vh_ally_fav_head_light_a = getEntArray("vh_ally_fav_head_light_a", "targetname");
   vh_ally_fav_head_light_b = getEntArray("vh_ally_fav_head_light_b", "targetname");
-  vh_ally_fav_tail_light_a[0] linkto(level.var_82e50b77, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_tail_light_b[0] linkto(level.var_82e50b77, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_head_light_a[0] linkto(level.var_82e50b77, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_head_light_b[0] linkto(level.var_82e50b77, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_tail_light_a[0] linkTo(level.var_82e50b77, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_tail_light_b[0] linkTo(level.var_82e50b77, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_head_light_a[0] linkTo(level.var_82e50b77, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_head_light_b[0] linkTo(level.var_82e50b77, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
   level waittill(#"hash_29db583983db73c");
 
   for(i = 1; i < level.var_a1030c4e.size; i++) {
-    vh_ally_fav_tail_light_a[i] linkto(level.var_a1030c4e[i - 1], "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
-    vh_ally_fav_tail_light_b[i] linkto(level.var_a1030c4e[i - 1], "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
-    vh_ally_fav_head_light_a[i] linkto(level.var_a1030c4e[i - 1], "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
-    vh_ally_fav_head_light_b[i] linkto(level.var_a1030c4e[i - 1], "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
+    vh_ally_fav_tail_light_a[i] linkTo(level.var_a1030c4e[i - 1], "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
+    vh_ally_fav_tail_light_b[i] linkTo(level.var_a1030c4e[i - 1], "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
+    vh_ally_fav_head_light_a[i] linkTo(level.var_a1030c4e[i - 1], "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
+    vh_ally_fav_head_light_b[i] linkTo(level.var_a1030c4e[i - 1], "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
   }
 
-  vh_ally_fav_tail_light_a[i] linkto(level.var_77be18d2, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_tail_light_b[i] linkto(level.var_77be18d2, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_head_light_a[i] linkto(level.var_77be18d2, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
-  vh_ally_fav_head_light_b[i] linkto(level.var_77be18d2, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_tail_light_a[i] linkTo(level.var_77be18d2, "tag_fx_tail_light_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_tail_light_b[i] linkTo(level.var_77be18d2, "tag_fx_tail_light_right", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_head_light_a[i] linkTo(level.var_77be18d2, "tag_fx_headlight_left", (0, 0, 0), (0, 0, 0));
+  vh_ally_fav_head_light_b[i] linkTo(level.var_77be18d2, "tag_fx_headlight_right", (0, 0, 0), (0, 0, 0));
 }
 
 function function_ff11843e() {
@@ -105,20 +105,20 @@ function function_ff11843e() {
     waitframe(1);
   }
 
-  fill = getent("fill_cin_intro", "targetname");
-  key = getent("key_cin_intro", "targetname");
+  fill = getEnt("fill_cin_intro", "targetname");
+  key = getEnt("key_cin_intro", "targetname");
   vh_ally_fav_tail_light_a = getEntArray("vh_ally_fav_tail_light_a", "targetname");
   vh_ally_fav_tail_light_b = getEntArray("vh_ally_fav_tail_light_b", "targetname");
-  vh_ally_fav_left_tail_light_a = getent("vh_ally_fav_left_tail_light_a", "targetname");
-  vh_ally_fav_left_tail_light_b = getent("vh_ally_fav_left_tail_light_b", "targetname");
-  vh_ally_fav_left_head_light_a = getent("vh_ally_fav_left_head_light_a", "targetname");
-  vh_ally_fav_left_head_light_b = getent("vh_ally_fav_left_head_light_b", "targetname");
+  vh_ally_fav_left_tail_light_a = getEnt("vh_ally_fav_left_tail_light_a", "targetname");
+  vh_ally_fav_left_tail_light_b = getEnt("vh_ally_fav_left_tail_light_b", "targetname");
+  vh_ally_fav_left_head_light_a = getEnt("vh_ally_fav_left_head_light_a", "targetname");
+  vh_ally_fav_left_head_light_b = getEnt("vh_ally_fav_left_head_light_b", "targetname");
   vh_ally_fav_head_light_a = getEntArray("vh_ally_fav_head_light_a", "targetname");
   vh_ally_fav_head_light_b = getEntArray("vh_ally_fav_head_light_b", "targetname");
-  vh_ally_fav_right_tail_light_a = getent("vh_ally_fav_right_tail_light_a", "targetname");
-  vh_ally_fav_right_tail_light_b = getent("vh_ally_fav_right_tail_light_b", "targetname");
-  vh_ally_fav_right_head_light_a = getent("vh_ally_fav_right_head_light_a", "targetname");
-  vh_ally_fav_right_head_light_b = getent("vh_ally_fav_right_head_light_b", "targetname");
+  vh_ally_fav_right_tail_light_a = getEnt("vh_ally_fav_right_tail_light_a", "targetname");
+  vh_ally_fav_right_tail_light_b = getEnt("vh_ally_fav_right_tail_light_b", "targetname");
+  vh_ally_fav_right_head_light_a = getEnt("vh_ally_fav_right_head_light_a", "targetname");
+  vh_ally_fav_right_head_light_b = getEnt("vh_ally_fav_right_head_light_b", "targetname");
   fill setlightintensity(0.01);
   fill setlightradius(0.01);
   key setlightintensity(0.01);
@@ -191,7 +191,7 @@ function function_1a690b0e() {
 }
 
 function function_99fed945() {
-  var_f796c5fc = getent("nuke_trail_trigger_fx", "targetname");
+  var_f796c5fc = getEnt("nuke_trail_trigger_fx", "targetname");
   var_f796c5fc trigger::wait_till();
   exploder::exploder("fxexp_nuke_trail_fx");
 }
@@ -210,38 +210,38 @@ function function_dabce745() {
 }
 
 function function_19de36c9() {
-  var_43c0fe92 = getent("nuke_trigger", "targetname");
+  var_43c0fe92 = getEnt("nuke_trigger", "targetname");
   var_43c0fe92 trigger::wait_till();
-  var_11196acd = getent("nuke_altostratus_cloud_a", "targetname");
+  var_11196acd = getEnt("nuke_altostratus_cloud_a", "targetname");
   var_107ad8f5 = (41769.5, 100569, -21784.3);
-  var_a2de0e58 = getent("nuke_altostratus_cloud_b", "targetname");
+  var_a2de0e58 = getEnt("nuke_altostratus_cloud_b", "targetname");
   var_9350951 = (41654.1, -32697.4, -17409.6);
-  var_ac9f21da = getent("nuke_altostratus_cloud_c", "targetname");
+  var_ac9f21da = getEnt("nuke_altostratus_cloud_c", "targetname");
   var_dda2c547 = (10988.9, 375.336, -6354.21);
-  var_11196acd moveto(var_107ad8f5, 16, 5, 0.01);
-  var_a2de0e58 moveto(var_9350951, 16, 5, 0.01);
-  var_ac9f21da moveto(var_dda2c547, 16, 5, 0.01);
+  var_11196acd moveTo(var_107ad8f5, 16, 5, 0.01);
+  var_a2de0e58 moveTo(var_9350951, 16, 5, 0.01);
+  var_ac9f21da moveTo(var_dda2c547, 16, 5, 0.01);
 }
 
 function post_nuke_power_on_01() {
-  var_143ff068 = getent("post_nuke_power_on_01", "targetname");
+  var_143ff068 = getEnt("post_nuke_power_on_01", "targetname");
   var_143ff068 trigger::wait_till();
   exploder::exploder("lgt_exp_post_nuke_power_on_01");
 }
 
 function post_nuke_power_on_02() {
-  var_143ff068 = getent("post_nuke_power_on_02", "targetname");
+  var_143ff068 = getEnt("post_nuke_power_on_02", "targetname");
   var_143ff068 trigger::wait_till();
   exploder::exploder("lgt_exp_post_nuke_power_on_02");
   exploder::exploder("lgt_exp_post_nuke_power_on_03_lightpost");
 }
 
 function post_nuke_power_on_03() {
-  var_143ff068 = getent("post_nuke_power_on_03", "targetname");
+  var_143ff068 = getEnt("post_nuke_power_on_03", "targetname");
   var_143ff068 trigger::wait_till();
 }
 
 function post_nuke_power_on_04() {
-  var_143ff068 = getent("post_nuke_power_on_04", "targetname");
+  var_143ff068 = getEnt("post_nuke_power_on_04", "targetname");
   var_143ff068 trigger::wait_till();
 }

@@ -181,7 +181,7 @@ func_107E9(var_0, var_1) {
 }
 
 func_BC7A(var_0, var_1) {
-  var_0 moveto(var_0.origin + (0, 0, var_1), 0.2, 0.2, 0);
+  var_0 moveTo(var_0.origin + (0, 0, var_1), 0.2, 0.2, 0);
   var_0 playSound("shooting_gallery_sign_up");
 }
 
@@ -245,7 +245,7 @@ func_FEB6(var_0, var_1) {
   var_2 = scripts\engine\utility::get_array_of_closest(var_1.origin, level.var_FEB7);
   var_3 = var_2[0];
   for(;;) {
-    var_1 moveto(var_3.origin, 0.6);
+    var_1 moveTo(var_3.origin, 0.6);
     var_4 = var_1 scripts\cp\utility::waittill_any_ents_return(var_1, "movedone", var_1, "moving_target_hit", var_0, "shooting_gallery_game_over");
     if(var_4 == "movedone") {
       if(var_2[0] != var_3 && isDefined(var_3.script_parameters) && var_3.script_parameters == "shooting_gallery_path_end") {
@@ -259,7 +259,7 @@ func_FEB6(var_0, var_1) {
     break;
   }
 
-  var_1 moveto(var_3.origin + (0, 0, 150), 0.6);
+  var_1 moveTo(var_3.origin + (0, 0, 150), 0.6);
   var_1 waittill("movedone");
   var_1 delete();
   func_12DF7(var_0, -1);
@@ -267,7 +267,7 @@ func_FEB6(var_0, var_1) {
 }
 
 func_BC79(var_0, var_1) {
-  var_0 moveto(var_0.origin - (0, 0, var_1), 0.2, 0.2, 0);
+  var_0 moveTo(var_0.origin - (0, 0, var_1), 0.2, 0.2, 0);
   var_0 waittill("movedone");
 }
 

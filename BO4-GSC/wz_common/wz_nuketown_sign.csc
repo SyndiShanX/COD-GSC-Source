@@ -22,9 +22,9 @@ on_gameplay_started(localclientnum) {
 }
 
 nuked_population_sign_think(localclientnum) {
-  tens_model = getent(localclientnum, "counter_tens", "targetname");
-  ones_model = getent(localclientnum, "counter_ones", "targetname");
-  zone = getent(localclientnum, "nuketown_island_zone", "targetname");
+  tens_model = getEnt(localclientnum, "counter_tens", "targetname");
+  ones_model = getEnt(localclientnum, "counter_ones", "targetname");
+  zone = getEnt(localclientnum, "nuketown_island_zone", "targetname");
   time = set_dvar_float_if_unset("scr_dial_rotate_time", "0.5");
 
   level thread function_102a701c(tens_model, ones_model);
@@ -57,7 +57,7 @@ nuked_population_sign_think(localclientnum) {
 
     players = [];
 
-    foreach(player in getplayers(localclientnum)) {
+    foreach(player in getPlayers(localclientnum)) {
       if(istouching(player.origin, zone) && !player isplayerswimming()) {
         if(!isDefined(players)) {
           players = [];

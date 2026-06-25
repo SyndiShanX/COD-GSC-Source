@@ -8,7 +8,7 @@ main() {
 }
 
 _id_D82A(var_0) {
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1 scripts\cp\utility::_id_D5A6("j_handle", "HINT_BUTTON", "icon_electrical_box", &"CP_STRIKE/TURN_ON_ALARM", 25, "duration_short", "hide", 128, 120, 70, 45);
   var_2 = spawnStruct();
   var_1._id_CBD0 = var_0;
@@ -40,7 +40,7 @@ _id_EC26() {
 
       if(var_3) {
         scripts\engine\utility::_id_5474("switch_on");
-        self sethintstring(&"CP_STRIKE/TURN_OFF_ALARM");
+        self setHintString(&"CP_STRIKE/TURN_OFF_ALARM");
       }
     } else {
       var_2 _id_0788::_id_182E(1, "interact", 1);
@@ -48,7 +48,7 @@ _id_EC26() {
 
       if(var_3) {
         scripts\engine\utility::_id_5470("switch_on");
-        self sethintstring(&"CP_STRIKE/TURN_ON_ALARM");
+        self setHintString(&"CP_STRIKE/TURN_ON_ALARM");
       }
     }
 

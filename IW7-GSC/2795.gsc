@@ -73,9 +73,9 @@ bloodeffect(var_0) {
   if(!scripts\mp\utility\game::isreallyalive(self)) {
     return;
   }
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
 
@@ -137,7 +137,7 @@ c4_earthquake() {
   thread endondeath();
   self endon("end_explode");
   self waittill("explode", var_0);
-  playrumbleonentity("grenade_rumble", var_0);
+  playRumbleOnEntity("grenade_rumble", var_0);
   earthquake(0.4, 0.75, var_0, 512);
 
   foreach(var_2 in level.players) {
@@ -172,7 +172,7 @@ func_22FF(var_0, var_1, var_2) {
 }
 
 func_10F44(var_0) {
-  playrumbleonentity("grenade_rumble", var_0);
+  playRumbleOnEntity("grenade_rumble", var_0);
   earthquake(1.0, 0.6, var_0, 2000);
 
   foreach(var_2 in level.players) {
@@ -205,7 +205,7 @@ func_DAF3(var_0) {
     var_1 = self.origin;
   }
 
-  playrumbleonentity("grenade_rumble", var_1);
+  playRumbleOnEntity("grenade_rumble", var_1);
   earthquake(0.3, 0.35, var_1, 800);
 
   foreach(var_3 in level.players) {
@@ -232,7 +232,7 @@ func_65C4(var_0) {
     var_1 = self.origin;
   }
 
-  playrumbleonentity("grenade_rumble", var_1);
+  playRumbleOnEntity("grenade_rumble", var_1);
   earthquake(0.3, 0.35, var_1, 800);
 
   foreach(var_3 in level.players) {

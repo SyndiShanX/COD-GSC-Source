@@ -65,7 +65,7 @@ ape_prespawn() {
   self setTeamForEntity("axis");
   self.is_activated = false;
   if(self.targetname != "ape_taunt_ai") {
-    self.maxhealth = level.zombie_vars["ape_zombie_health"] * GetPlayers().size;
+    self.maxhealth = level.zombie_vars["ape_zombie_health"] * getPlayers().size;
     self.health = self.maxhealth;
     flag_set("boss_is_spawned");
     flag_clear("boss_is_dead");
@@ -294,19 +294,19 @@ ape_think() {
   VisionSetNaked("huey_city", 1);
   maps\createart\zombietron_art::do_single_lightning();
   playFX(level._effect["ape_lightning_spawn"], spawnOrigin);
-  playsoundatposition("zmb_ape_prespawn", spawnOrigin);
+  playSoundAtPosition("zmb_ape_prespawn", spawnOrigin);
   wait(.5);
   playFX(level._effect["ape_lightning_spawn"], spawnOrigin);
   wait(.5);
   playFX(level._effect["ape_lightning_spawn"], spawnOrigin);
-  playsoundatposition("zmb_ape_prespawn", spawnOrigin);
+  playSoundAtPosition("zmb_ape_prespawn", spawnOrigin);
   wait(1.5);
   self notify("drop_me");
   self forceteleport(spawnOrigin);
-  playsoundatposition("zmb_ape_bolt", spawnOrigin);
+  playSoundAtPosition("zmb_ape_bolt", spawnOrigin);
   Earthquake(0.5, 0.75, spawnOrigin, 1000);
   PlayRumbleOnPosition("explosion_generic", spawnOrigin);
-  playsoundatposition("zmb_ape_spawn", spawnOrigin);
+  playSoundAtPosition("zmb_ape_spawn", spawnOrigin);
   time = getAnimLength(%ai_zombie_simianaut_chest_beat);
   self SetFlaggedAnimKnobAllRestart("chestbeat_anim", %ai_zombie_simianaut_chest_beat, %body, 1, .1, 1);
   time = time / 2.0;
@@ -335,8 +335,8 @@ ape_think() {
         PlayRumbleOnPosition("explosion_generic", self.origin);
         curdir = anglesToForward(self.angles);
         trigger = spawn("trigger_radius", self.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 65, 50);
-        trigger EnableLinkTo();
-        trigger LinkTo(self, "", curdir * 50);
+        trigger EnablelinkTo();
+        trigger linkTo(self, "", curdir * 50);
         trigger thread maps\_zombietron_pickups::shield_trigger_think(self);
         self move_to_position_over_time(self.favoriteenemy.origin, 500);
         trigger Delete();
@@ -363,8 +363,8 @@ ape_think() {
         height = 800;
         timeMS = height / 1000 * 3000;
         trigger = spawn("trigger_radius", self.origin, level.SPAWNFLAG_TRIGGER_AI_AXIS, 65, 50);
-        trigger EnableLinkTo();
-        trigger LinkTo(self);
+        trigger EnablelinkTo();
+        trigger linkTo(self);
         trigger thread maps\_zombietron_pickups::shield_trigger_think(self);
         self move_to_position_over_time(self.favoriteenemy.origin, timeMS, height);
         self playSound("zmb_simianaut_groundpound");
@@ -382,7 +382,7 @@ ape_think() {
         continue;
       }
     } else {
-      players = GetPlayers();
+      players = getPlayers();
       self.favoriteenemy = players[RandomInt(players.size)];
     }
     wait(1);
@@ -516,7 +516,7 @@ ape_taunt_go(destination, player, boss_battle) {
   }
   ape thread maps\_anim::anim_single(ape, "chest_beat");
   wait 2.3;
-  ape anim_stopanimscripted(0.15);
+  ape anim_stopanimScripted(0.15);
   if(isDefined(boss_battle)) {}
   numTargets = RandomIntRange(2, 4);
   ape thread ape_KillOnProximity();
@@ -565,7 +565,7 @@ ape_taunt_player() {
       lastRound = level.round_number;
       runToTarget = level.arenas[level.current_arena] + "_pickup";
       run_locations = getStructArray(runToTarget, "targetname");
-      players = GetPlayers();
+      players = getPlayers();
       if(players.size > 1) {
         player = players[RandomInt(players.size)];
       } else {

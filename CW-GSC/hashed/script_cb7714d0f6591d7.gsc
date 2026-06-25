@@ -146,11 +146,11 @@ function function_34a64026(var_c79d614f) {
     var_5d7cba12 = struct::get("struct_lookat_caves", "targetname");
     var_cccff3af = (2630, 3920, -231);
     wait 1;
-    playsoundatposition("vox_cp_prsn_29500_rms1_c5", var_cccff3af);
+    playSoundAtPosition("vox_cp_prsn_29500_rms1_c5", var_cccff3af);
     wait 6;
-    playsoundatposition("vox_cp_prsn_29500_rms1_report_9d", var_cccff3af);
+    playSoundAtPosition("vox_cp_prsn_29500_rms1_report_9d", var_cccff3af);
     wait 3;
-    playsoundatposition("vox_cp_prsn_29500_rms2_entryissecuresi_70", var_cccff3af);
+    playSoundAtPosition("vox_cp_prsn_29500_rms2_entryissecuresi_70", var_cccff3af);
   } else if(level.var_baa7cf92 == "village" || level.var_baa7cf92 == "sniper_overlook") {
     level flag::wait_till("flag_river_progression");
     thread namespace_b6fe1dbe::function_1e0e9b39(var_c79d614f);
@@ -229,13 +229,13 @@ function function_5dece0a6() {
 
   if(level.var_731c10af.paths[#"rat_tunnels"].count == 1) {
     a_ents = [];
-    a_ents[#"hatch"] = getent("rat_tunnel_hatch", "targetname");
+    a_ents[#"hatch"] = getEnt("rat_tunnel_hatch", "targetname");
     level thread scene::init("scene_pri_rat_tunnel_reveal", a_ents);
     return;
   }
 
   a_ents = [];
-  a_ents[#"hatch"] = getent("rat_tunnel_hatch", "targetname");
+  a_ents[#"hatch"] = getEnt("rat_tunnel_hatch", "targetname");
   level thread scene::init("scene_pri_rat_tunnel_reveal", a_ents);
   level flag::wait_till("flag_open_rat_tunnels");
   level thread scene::play("scene_pri_rat_tunnel_reveal", a_ents);

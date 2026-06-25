@@ -270,7 +270,7 @@ _id_B198(var_0, var_1) {
   }
 
   if(isDefined(var_5)) {
-    var_0 linkto(var_5);
+    var_0 linkTo(var_5);
   }
 
   return 1;

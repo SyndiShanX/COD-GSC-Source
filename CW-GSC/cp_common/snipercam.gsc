@@ -32,7 +32,7 @@ function set_enabled(enabled, on_damage = 0, var_895878e1 = 3) {
 }
 
 function function_5d276f5b(var_895878e1, victim) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   victim.var_ca3bd64e = var_895878e1;
   victim thread function_856a28c3(0, player);
 }

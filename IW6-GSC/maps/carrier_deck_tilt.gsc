@@ -71,15 +71,15 @@ deck_tilt_pre_load() {
   common_scripts\utility::array_thread(level.deck_damage, maps\_utility::hide_entity);
   var_1 = getEntArray("tower_panel_clean", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::hide_entity);
-  var_2 = getent("deck_tilt_tugger_1", "targetname");
+  var_2 = getEnt("deck_tilt_tugger_1", "targetname");
   var_2 maps\_utility::hide_entity();
-  var_3 = getent("deck_tilt_tugger_1_clip", "targetname");
+  var_3 = getEnt("deck_tilt_tugger_1_clip", "targetname");
   var_3 maps\_utility::hide_entity();
-  var_4 = getent("deck_tilt_tugger_1_mantle", "targetname");
+  var_4 = getEnt("deck_tilt_tugger_1_mantle", "targetname");
   var_4 hide();
   var_5 = getEntArray("tower_damage", "targetname");
   common_scripts\utility::array_thread(var_5, maps\_utility::hide_entity);
-  level.exploding_heli = getent("exploding_heli", "targetname");
+  level.exploding_heli = getEnt("exploding_heli", "targetname");
   level.exploding_heli maps\_utility::hide_entity();
   var_6 = getEntArray("barrel_alpha", "targetname");
 
@@ -88,19 +88,19 @@ deck_tilt_pre_load() {
   }
 
   common_scripts\utility::array_thread(var_6, maps\_utility::hide_entity);
-  var_10 = getent("tilt_osprey_clip", "targetname");
-  var_11 = getent("tilt_osprey_left_engine_clip", "targetname");
-  var_12 = getent("tilt_osprey_right_engine_clip", "targetname");
+  var_10 = getEnt("tilt_osprey_clip", "targetname");
+  var_11 = getEnt("tilt_osprey_left_engine_clip", "targetname");
+  var_12 = getEnt("tilt_osprey_right_engine_clip", "targetname");
   var_10 maps\_utility::hide_entity();
   var_11 maps\_utility::hide_entity();
   var_12 maps\_utility::hide_entity();
-  var_13 = getent("e_heli_clip_body", "targetname");
-  var_14 = getent("e_heli_clip_nose", "targetname");
-  var_15 = getent("e_heli_clip_tail", "targetname");
-  var_16 = getent("e_heli_clip_tail_rotor", "targetname");
-  var_17 = getent("e_heli_clip_rotor", "targetname");
-  var_18 = getent("e_heli_clip_rotor_blade", "targetname");
-  var_19 = getent("e_heli_clip_door", "targetname");
+  var_13 = getEnt("e_heli_clip_body", "targetname");
+  var_14 = getEnt("e_heli_clip_nose", "targetname");
+  var_15 = getEnt("e_heli_clip_tail", "targetname");
+  var_16 = getEnt("e_heli_clip_tail_rotor", "targetname");
+  var_17 = getEnt("e_heli_clip_rotor", "targetname");
+  var_18 = getEnt("e_heli_clip_rotor_blade", "targetname");
+  var_19 = getEnt("e_heli_clip_door", "targetname");
   var_13 maps\_utility::hide_entity();
   var_14 maps\_utility::hide_entity();
   var_15 maps\_utility::hide_entity();
@@ -120,11 +120,11 @@ setup_deck_tilt() {
   maps\carrier_code::spawn_allies();
   thread maps\carrier_defend_sparrow::sparrow_handle_ps4_ssao(1);
   thread maps\carrier_audio::aud_check("deck_tilt");
-  var_0 = getent("blast_shield1_clip", "targetname");
+  var_0 = getEnt("blast_shield1_clip", "targetname");
   var_0 delete();
-  var_1 = getent("blast_shield2_clip", "targetname");
+  var_1 = getEnt("blast_shield2_clip", "targetname");
   var_1 delete();
-  var_2 = getent("water_wake_intro", "targetname");
+  var_2 = getEnt("water_wake_intro", "targetname");
   var_2 delete();
   level.player takeallweapons();
   level.player giveweapon("msbs+eotech_sp");
@@ -151,7 +151,7 @@ begin_deck_tilt() {
   thread maps\carrier_audio::tilt_odin_impact();
   var_1 = maps\_utility::spawn_anim_model("player_rig");
   var_1 hide();
-  var_2 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_2 maps\_anim::anim_first_frame_solo(var_1, "carrier_deck_tilt_ladder_player");
   maps\carrier_code::cinematic_on();
   level.player playerlinktoblend(var_1, "tag_player", 0.5);
@@ -283,12 +283,12 @@ player_fade_out() {
 
 tilt_player_stumble() {
   level.player endon("death");
-  var_0 = getent("antenna_stumble_volume", "targetname");
+  var_0 = getEnt("antenna_stumble_volume", "targetname");
 
   if(!level.player istouching(var_0) || common_scripts\utility::flag("player_vaulting_active")) {
     return;
   }
-  var_0 = getent("antenna_kill_2", "targetname");
+  var_0 = getEnt("antenna_kill_2", "targetname");
 
   if(level.player istouching(var_0)) {
     return;
@@ -304,14 +304,14 @@ tilt_player_stumble() {
   var_3 hide();
   var_3.origin = var_1 gettagorigin("tag_weapon_right");
   var_3.angles = var_1 gettagangles("tag_weapon_right");
-  var_3 linkto(var_1, "tag_weapon_right");
+  var_3 linkTo(var_1, "tag_weapon_right");
   var_4 = spawn("script_model", (0, 0, 0));
   var_4 setModel("viewmodel_eotech_iw6");
   var_4 hide();
   var_4.origin = var_3 gettagorigin("tag_sight_on");
   var_4.angles = var_3 gettagangles("tag_sight_on");
   var_4.angles = var_4.angles + (0, 180, 0);
-  var_4 linkto(var_3, "tag_sight_on");
+  var_4 linkTo(var_3, "tag_sight_on");
   maps\carrier_code::cinematic_on();
   level.pause_death_wave = 1;
   common_scripts\utility::flag_set("player_tower_stumble");
@@ -346,7 +346,7 @@ tilt_player_rog_stumble() {
   if(level.player.origin[2] < 1400) {
     return;
   }
-  var_0 = getent("stumble_volume", "targetname");
+  var_0 = getEnt("stumble_volume", "targetname");
   var_1 = getEntArray("exfil_close_volume", "targetname");
   var_2 = undefined;
   var_3 = undefined;
@@ -361,7 +361,7 @@ tilt_player_rog_stumble() {
 
     foreach(var_0 in var_1) {
       if(level.player istouching(var_0)) {
-        var_4 = getent(var_0.target, "targetname");
+        var_4 = getEnt(var_0.target, "targetname");
         var_4 maps\_anim::anim_first_frame_solo(var_5, "carrier_deck_tilt_stumble_knockback_player");
         var_3 = 1;
       }
@@ -381,18 +381,18 @@ tilt_player_rog_stumble() {
   var_8 hide();
   var_8.origin = var_5 gettagorigin("tag_weapon_right");
   var_8.angles = var_5 gettagangles("tag_weapon_right");
-  var_8 linkto(var_5, "tag_weapon_right");
+  var_8 linkTo(var_5, "tag_weapon_right");
   var_9 = spawn("script_model", (0, 0, 0));
   var_9 setModel("viewmodel_eotech_iw6");
   var_9 hide();
   var_9.origin = var_8 gettagorigin("tag_sight_on");
   var_9.angles = var_8 gettagangles("tag_sight_on");
   var_9.angles = var_9.angles + (0, 180, 0);
-  var_9 linkto(var_8, "tag_sight_on");
+  var_9 linkTo(var_8, "tag_sight_on");
   maps\carrier_code::cinematic_on();
   level.pause_death_wave = 1;
   level.player playerlinktoblend(var_5, "tag_player", 0.4, 0.2, 0);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   screenshake(level.player.origin, 3, 2, 2, 2.5, 0, 2.0, 256, 8, 15, 12, 5.0);
   thread maps\carrier_audio::aud_carr_elevator_exp();
 
@@ -430,7 +430,7 @@ tilt_player_vault() {
   var_2 = level.hesh_tugger gettagangles("tag_origin");
   var_0.origin = var_1;
   var_0.angles = var_2 + (0, 180, 0);
-  var_0 linkto(level.hesh_tugger, "tag_origin");
+  var_0 linkTo(level.hesh_tugger, "tag_origin");
   var_3 = maps\_utility::spawn_anim_model("player_rig");
   var_3 hide();
   var_4 = maps\_utility::spawn_anim_model("player_legs_rig");
@@ -442,17 +442,17 @@ tilt_player_vault() {
   var_6 hide();
   var_6.origin = var_3 gettagorigin("tag_weapon_right");
   var_6.angles = var_3 gettagangles("tag_weapon_right");
-  var_6 linkto(var_3, "tag_weapon_right");
+  var_6 linkTo(var_3, "tag_weapon_right");
   var_7 = spawn("script_model", (0, 0, 0));
   var_7 setModel("viewmodel_eotech_iw6");
   var_7 hide();
   var_7.origin = var_6 gettagorigin("tag_sight_on");
   var_7.angles = var_6 gettagangles("tag_sight_on");
   var_7.angles = var_7.angles + (0, 180, 0);
-  var_7 linkto(var_6, "tag_sight_on");
+  var_7 linkTo(var_6, "tag_sight_on");
   common_scripts\utility::flag_wait("player_vault_tugger");
-  var_8 = getent("vault_volume", "targetname");
-  var_9 = common_scripts\utility::getstruct(var_8.target, "targetname");
+  var_8 = getEnt("vault_volume", "targetname");
+  var_9 = common_scripts\utility::getStruct(var_8.target, "targetname");
   var_9 thread maps\carrier_code::player_check_mantle_lookat();
 
   while(!common_scripts\utility::flag("stop_player_vault") && !common_scripts\utility::flag("player_vaulting")) {
@@ -661,7 +661,7 @@ vault_hide_hint_check() {
 tilt_player_slide() {
   level.player endon("death");
   level endon("e_heli_done");
-  var_0 = getent("allow_player_slide", "targetname");
+  var_0 = getEnt("allow_player_slide", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -678,7 +678,7 @@ tilt_player_slide() {
 }
 
 tilt_allies() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = getnode("hesh_deck_tilt_start", "targetname");
   level.hesh maps\_utility::set_archetype("deck_tilt_ally");
   level.hesh.moveplaybackrate = 1.25;
@@ -712,7 +712,7 @@ tilt_allies() {
   var_0 maps\_anim::anim_single_solo(level.hesh, "carrier_deck_tilt_rog_reaction_hesh");
   level.hesh maps\_utility::enable_sprint();
   level.hesh thread maps\_utility::follow_path_and_animate(var_1, 9000);
-  level.hesh maps\_utility::set_goalradius(32);
+  level.hesh maps\_utility::set_goalRadius(32);
   level.hesh.moveplaybackrate = 1.04;
   level.hesh waittill("path_end_reached");
   common_scripts\utility::flag_set("ally_at_silenthawk");
@@ -846,11 +846,11 @@ tilt_odin_strike() {
   maps\_utility::stop_exploder(5501);
   thread tilt_props_life_rafts();
   level.player thread maps\carrier_fx::handle_onplayer_debris();
-  var_4 = getent("deck_node_blocker", "targetname");
+  var_4 = getEnt("deck_node_blocker", "targetname");
   badplace_brush("deck_node_blocker", -1, var_4, "allies", "axis");
-  var_5 = getent("antenna_badplace", "targetname");
+  var_5 = getEnt("antenna_badplace", "targetname");
   badplace_brush("antenna_badplace", -1, var_5, "allies", "axis");
-  var_6 = getent("crr_phalanx_01", "targetname");
+  var_6 = getEnt("crr_phalanx_01", "targetname");
   var_6 delete();
   wait 0.5;
   thread tilt_props_odin_phys();
@@ -871,12 +871,12 @@ tilt_odin_strike() {
 }
 
 tilt_island_glass() {
-  var_0 = getent("island_glass_01", "targetname");
-  var_1 = getent("island_glass_02", "targetname");
-  var_2 = getent("island_glass_03", "targetname");
-  var_3 = getent("island_glass_lights_01", "targetname");
-  var_4 = getent("island_glass_lights_02", "targetname");
-  var_5 = getent("island_glass_lights_03", "targetname");
+  var_0 = getEnt("island_glass_01", "targetname");
+  var_1 = getEnt("island_glass_02", "targetname");
+  var_2 = getEnt("island_glass_03", "targetname");
+  var_3 = getEnt("island_glass_lights_01", "targetname");
+  var_4 = getEnt("island_glass_lights_02", "targetname");
+  var_5 = getEnt("island_glass_lights_03", "targetname");
   var_6 = getEntArray("carrier_tower_lights_off_01", "targetname");
   var_7 = getEntArray("carrier_tower_lights_off_02", "targetname");
   var_8 = getEntArray("carrier_tower_lights_off_03", "targetname");
@@ -912,24 +912,24 @@ tilt_island_glass() {
 }
 
 tilt_props_island_antenna() {
-  var_0 = getent("deck_tilt_radar", "targetname");
+  var_0 = getEnt("deck_tilt_radar", "targetname");
   var_0.animname = "tilt_radar";
   var_0 maps\_anim::setanimtree();
   var_0 thread maps\carrier_fx::handle_radar_dish_fx();
-  var_1 = getent("island_antenna", "targetname");
+  var_1 = getEnt("island_antenna", "targetname");
   var_1.animname = "tilt_tower";
   var_1 maps\_anim::setanimtree();
   var_1 thread maps\carrier_fx::handle_antenna_fx();
   level.antenna = var_1;
-  var_2 = getent("island_antenna_cables", "targetname");
+  var_2 = getEnt("island_antenna_cables", "targetname");
   var_2.animname = "tilt_tower";
   var_2 maps\_anim::setanimtree();
-  var_3 = getent("antenna_ground_clip", "targetname");
-  var_4 = getent("antenna_kill_1", "targetname");
-  var_5 = getent("antenna_kill_2", "targetname");
+  var_3 = getEnt("antenna_ground_clip", "targetname");
+  var_4 = getEnt("antenna_kill_1", "targetname");
+  var_5 = getEnt("antenna_kill_2", "targetname");
   common_scripts\utility::flag_wait("start_main_odin_strike");
   common_scripts\utility::flag_set("antenna_start");
-  var_6 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_6 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_6 thread maps\_anim::anim_single_solo(var_0, "carrier_deck_tilt_satdish");
   thread maps\carrier_audio::aud_dish_crash();
   thread maps\carrier_audio::aud_tower_collapse();
@@ -937,7 +937,7 @@ tilt_props_island_antenna() {
   var_6 thread maps\_anim::anim_single_solo(var_1, "carrier_deck_tilt_tower_b");
   var_6 thread maps\_anim::anim_single_solo(var_2, "carrier_deck_tilt_tower_b");
   var_1 waittillmatch("single anim", "impact_building");
-  level.player playrumbleonentity("carrier_tower_fall");
+  level.player playRumbleOnEntity("carrier_tower_fall");
   var_1 waittillmatch("single anim", "impact_deck1");
   var_4 thread antenna_kill();
   screenshake(level.player.origin, 3, 2, 2, 2.5, 0, 2.0, 256, 8, 15, 12, 5.0);
@@ -965,12 +965,12 @@ antenna_kill() {
 }
 
 tilt_props_island_corner() {
-  var_0 = getent("tower_corner", "targetname");
+  var_0 = getEnt("tower_corner", "targetname");
   var_1 = maps\_utility::spawn_anim_model("tilt_tower_corner");
-  var_2 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 hide();
   var_2 maps\_anim::anim_first_frame_solo(var_1, "carrier_deck_tilt_island_corner");
-  var_3 = getent("island_glass_lights_04", "targetname");
+  var_3 = getEnt("island_glass_lights_04", "targetname");
   common_scripts\utility::flag_wait("tower_corner_hit");
   var_3 delete();
   var_0 delete();
@@ -979,7 +979,7 @@ tilt_props_island_corner() {
 }
 
 tilt_deck_impact() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = [];
   var_1[0] = maps\_utility::spawn_anim_model("tilt_deck1");
   var_1[1] = maps\_utility::spawn_anim_model("tilt_deck2");
@@ -1008,18 +1008,18 @@ tilt_props_life_rafts() {
 
 tilt_props_elevator() {
   var_0 = maps\_utility::spawn_anim_model("tilt_props");
-  var_1 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_1 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 maps\_anim::anim_first_frame_solo(var_0, "carrier_deck_tilt_elevator");
   level.dmg_rear_elevator.origin = var_0 gettagorigin("j_prop_1");
   level.dmg_rear_elevator.angles = var_0 gettagangles("j_prop_1");
-  level.dmg_rear_elevator linkto(var_0, "j_prop_1");
+  level.dmg_rear_elevator linkTo(var_0, "j_prop_1");
 
   foreach(var_3 in level.elevator_dmg_models) {
-    var_3 linkto(var_0, "j_prop_1");
+    var_3 linkTo(var_0, "j_prop_1");
   }
 
   foreach(var_3 in level.elevator_ac130_dmg_02) {
-    var_3 linkto(var_0, "j_prop_1");
+    var_3 linkTo(var_0, "j_prop_1");
   }
 
   common_scripts\utility::flag_wait("start_main_odin_strike");
@@ -1056,7 +1056,7 @@ tilt_props_impact_x30() {
   var_2 = getEntArray("odin_impact_objects_2", "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
   common_scripts\utility::array_thread(var_2, maps\_utility::show_entity);
-  var_3 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_3 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_3 maps\_anim::anim_first_frame_solo(var_0, "carrier_deck_tilt_prop_sim_gp");
 
   foreach(var_5 in var_1) {
@@ -1075,8 +1075,8 @@ tilt_props_impact_x30() {
     }
   }
 
-  level.odin_fac_cart_clip linkto(level.odin_fac_cart);
-  level.odin_fac_cart_mantle linkto(level.odin_fac_cart);
+  level.odin_fac_cart_clip linkTo(level.odin_fac_cart);
+  level.odin_fac_cart_mantle linkTo(level.odin_fac_cart);
 
   foreach(var_5 in var_1) {
     if(var_5.script_noteworthy == "clip" || var_5.script_noteworthy == "mantle") {
@@ -1093,7 +1093,7 @@ tilt_props_impact_x30() {
     var_9 = var_0 gettagangles("J_prop_" + var_5.script_parameters);
     var_5.origin = var_8;
     var_5.angles = var_9;
-    var_5 linkto(var_0, "J_prop_" + var_5.script_parameters);
+    var_5 linkTo(var_0, "J_prop_" + var_5.script_parameters);
   }
 
   foreach(var_5 in var_1) {
@@ -1110,7 +1110,7 @@ tilt_props_barrels_x30() {
   var_0 = maps\_utility::spawn_anim_model("tilt_impact_30");
   var_1 = getEntArray("barrel_alpha", "targetname");
   common_scripts\utility::array_thread(var_1, maps\_utility::show_entity);
-  var_2 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_2 maps\_anim::anim_first_frame_solo(var_0, "carrier_deck_tilt_barrel_alpha");
   var_3 = [];
   var_4 = [];
@@ -1201,24 +1201,24 @@ x30_hookup(var_0, var_1) {
   }
 
   if(isDefined(var_3)) {
-    var_3 linkto(var_2);
+    var_3 linkTo(var_2);
   }
 
   if(isDefined(var_4)) {
-    var_4 linkto(var_2);
+    var_4 linkTo(var_2);
   }
 
   var_8 = var_1 gettagorigin("J_prop_" + var_2.script_parameters);
   var_9 = var_1 gettagangles("J_prop_" + var_2.script_parameters);
   var_2.origin = var_8;
   var_2.angles = var_9;
-  var_2 linkto(var_1, "J_prop_" + var_2.script_parameters);
+  var_2 linkTo(var_1, "J_prop_" + var_2.script_parameters);
 }
 
 tilt_props_barrels_x3(var_0, var_1) {
   var_2 = maps\_utility::spawn_anim_model("tilt_barrel_3x");
   var_3 = getEntArray(var_0, "targetname");
-  var_4 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_4 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_4 maps\_anim::anim_first_frame_solo(var_2, var_1);
   var_5 = [];
   var_6 = [];
@@ -1265,17 +1265,17 @@ tilt_props_barrels_x3(var_0, var_1) {
   var_15 = var_2 gettagangles("J_prop_1");
   var_5.origin = var_14;
   var_5.angles = var_15;
-  var_5 linkto(var_2, "J_prop_1");
+  var_5 linkTo(var_2, "J_prop_1");
   var_16 = var_2 gettagorigin("J_prop_2");
   var_17 = var_2 gettagangles("J_prop_2");
   var_6.origin = var_16;
   var_6.angles = var_17;
-  var_6 linkto(var_2, "J_prop_2");
+  var_6 linkTo(var_2, "J_prop_2");
   var_18 = var_2 gettagorigin("J_prop_3");
   var_19 = var_2 gettagangles("J_prop_3");
   var_7.origin = var_18;
   var_7.angles = var_19;
-  var_7 linkto(var_2, "J_prop_3");
+  var_7 linkTo(var_2, "J_prop_3");
   common_scripts\utility::flag_wait("tilt_part_23");
   var_4 maps\_anim::anim_single_solo(var_2, var_1);
 }
@@ -1348,7 +1348,7 @@ tilt_props_odin_jet() {
   var_5 maps\_anim::setanimtree();
   var_9.animname = "sliding_jet";
   var_9 maps\_anim::setanimtree();
-  var_15 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_15 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_15 maps\_anim::anim_first_frame_solo(var_5, "carrier_deck_tilt_f18_a");
   var_15 maps\_anim::anim_first_frame_solo(var_9, "carrier_deck_tilt_f18_b");
   common_scripts\utility::flag_wait("start_main_odin_strike");
@@ -1359,9 +1359,9 @@ tilt_props_odin_jet() {
 }
 
 tilt_props_aircraft() {
-  var_0 = common_scripts\utility::getstruct("deck_run_struct", "targetname");
-  var_1 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
-  level.tilt_osprey_1 = getent("tilt_osprey_1", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_run_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
+  level.tilt_osprey_1 = getEnt("tilt_osprey_1", "targetname");
   level.tilt_osprey_1 maps\_utility::hide_entity();
   level.tilt_osprey_1 thread tilt_osprey_clip();
   level.exploding_heli thread tilt_exp_heli_clip();
@@ -1403,12 +1403,12 @@ tilt_props_aircraft() {
 }
 
 tilt_osprey_clip() {
-  var_0 = getent("tilt_osprey_clip", "targetname");
-  var_1 = getent("tilt_osprey_left_engine_clip", "targetname");
-  var_2 = getent("tilt_osprey_right_engine_clip", "targetname");
-  var_0 linkto(self, "body_animate_jnt");
-  var_1 linkto(self, "j_pivot_le");
-  var_2 linkto(self, "j_pivot_ri");
+  var_0 = getEnt("tilt_osprey_clip", "targetname");
+  var_1 = getEnt("tilt_osprey_left_engine_clip", "targetname");
+  var_2 = getEnt("tilt_osprey_right_engine_clip", "targetname");
+  var_0 linkTo(self, "body_animate_jnt");
+  var_1 linkTo(self, "j_pivot_le");
+  var_2 linkTo(self, "j_pivot_ri");
   var_0 thread player_hit_detect(800, "tilt_part_15", "osprey_done");
   var_1 thread player_hit_detect(800, "tilt_part_15", "osprey_done");
   var_2 thread player_hit_detect(800, "tilt_part_15", "osprey_done");
@@ -1419,20 +1419,20 @@ tilt_osprey_clip() {
 }
 
 tilt_exp_heli_clip() {
-  var_0 = getent("e_heli_clip_body", "targetname");
-  var_1 = getent("e_heli_clip_nose", "targetname");
-  var_2 = getent("e_heli_clip_tail", "targetname");
-  var_3 = getent("e_heli_clip_tail_rotor", "targetname");
-  var_4 = getent("e_heli_clip_rotor", "targetname");
-  var_5 = getent("e_heli_clip_rotor_blade", "targetname");
-  var_6 = getent("e_heli_clip_door", "targetname");
-  var_0 linkto(self, "j_body");
-  var_1 linkto(self, "j_nose");
-  var_2 linkto(self, "j_tail");
-  var_3 linkto(self, "j_tail_rotor");
-  var_4 linkto(self, "j_rotor");
-  var_5 linkto(self, "j_rotor_blade");
-  var_6 linkto(self, "j_door");
+  var_0 = getEnt("e_heli_clip_body", "targetname");
+  var_1 = getEnt("e_heli_clip_nose", "targetname");
+  var_2 = getEnt("e_heli_clip_tail", "targetname");
+  var_3 = getEnt("e_heli_clip_tail_rotor", "targetname");
+  var_4 = getEnt("e_heli_clip_rotor", "targetname");
+  var_5 = getEnt("e_heli_clip_rotor_blade", "targetname");
+  var_6 = getEnt("e_heli_clip_door", "targetname");
+  var_0 linkTo(self, "j_body");
+  var_1 linkTo(self, "j_nose");
+  var_2 linkTo(self, "j_tail");
+  var_3 linkTo(self, "j_tail_rotor");
+  var_4 linkTo(self, "j_rotor");
+  var_5 linkTo(self, "j_rotor_blade");
+  var_6 linkTo(self, "j_door");
   var_0 thread player_hit_detect(800, "tilt_part_35", "e_heli_done");
   var_1 thread player_hit_detect(800, "tilt_part_35", "e_heli_done");
   var_2 thread player_hit_detect(800, "tilt_part_35", "e_heli_done");
@@ -1451,25 +1451,25 @@ tilt_exp_heli_clip() {
 }
 
 tilt_props_tugger() {
-  var_0 = getent("deck_tilt_tugger_1", "targetname");
+  var_0 = getEnt("deck_tilt_tugger_1", "targetname");
   var_0.animname = "tilt_tugger";
   var_0 maps\_anim::setanimtree();
   var_0 maps\_utility::show_entity();
-  var_1 = getent("deck_tilt_tugger_1_clip", "targetname");
+  var_1 = getEnt("deck_tilt_tugger_1_clip", "targetname");
   var_1 maps\_utility::show_entity();
-  var_2 = getent("deck_tilt_tugger_1_mantle", "targetname");
+  var_2 = getEnt("deck_tilt_tugger_1_mantle", "targetname");
   var_2 show();
-  var_1 linkto(var_0);
-  var_2 linkto(var_0);
+  var_1 linkTo(var_0);
+  var_2 linkTo(var_0);
   common_scripts\utility::flag_wait("start_main_odin_strike");
-  var_3 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_3 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 thread player_hit_detect(300);
   var_3 maps\_anim::anim_single_solo(var_0, "carrier_deck_tilt_tugger1");
   var_1 notify("done_moving");
 }
 
 tilt_props_tugger_vault() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = getEntArray("large_tugger3", "targetname");
   var_2 = [];
   var_3 = [];
@@ -1492,7 +1492,7 @@ tilt_props_tugger_vault() {
   var_2.animname = "tilt_tugger";
   var_2 maps\_anim::setanimtree();
   level.hesh_tugger = var_2;
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   level.hesh_tugger_clip = var_3;
   var_4 delete();
   thread vault_pick_anim();
@@ -1502,7 +1502,7 @@ tilt_props_tugger_vault() {
 }
 
 tilt_props_tugger3() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = getEntArray("large_tugger2", "targetname");
   var_2 = [];
   var_3 = [];
@@ -1522,8 +1522,8 @@ tilt_props_tugger3() {
     var_4 = var_6;
   }
 
-  var_3 linkto(var_2);
-  var_4 linkto(var_2);
+  var_3 linkTo(var_2);
+  var_4 linkTo(var_2);
   var_2.animname = "tilt_tugger";
   var_2 maps\_anim::setanimtree();
   var_0 maps\_anim::anim_first_frame_solo(var_2, "carrier_deck_tilt_tugger3");
@@ -1532,7 +1532,7 @@ tilt_props_tugger3() {
 }
 
 tilt_props_tugger4() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = getEntArray("large_tugger4", "targetname");
   var_2 = [];
   var_3 = [];
@@ -1552,8 +1552,8 @@ tilt_props_tugger4() {
     var_4 = var_6;
   }
 
-  var_3 linkto(var_2);
-  var_4 linkto(var_2);
+  var_3 linkTo(var_2);
+  var_4 linkTo(var_2);
   var_2.animname = "tilt_tugger";
   var_2 maps\_anim::setanimtree();
   var_0 maps\_anim::anim_first_frame_solo(var_2, "carrier_deck_tilt_tugger4");
@@ -1562,7 +1562,7 @@ tilt_props_tugger4() {
 }
 
 tilt_props_large() {
-  var_0 = common_scripts\utility::getstruct("deck_run_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_run_struct", "targetname");
   var_1 = [];
   var_2 = getEntArray("barrel_small2", "targetname");
 
@@ -1630,7 +1630,7 @@ tilt_props_large() {
     var_1 = common_scripts\utility::array_add(var_1, var_4);
   }
 
-  var_21 = getent("forklift", "targetname");
+  var_21 = getEnt("forklift", "targetname");
   var_21 thread tilt_anim_solo("forklift", "carrier_exfil_takeoff_forklift", "exfil_go", undefined, undefined, "scn_tilt_misc_debris_05", undefined, undefined);
   common_scripts\utility::flag_wait("tilt_part_1");
   maps\_utility::array_delete(var_1);
@@ -1648,7 +1648,7 @@ test_connect_paths() {
 }
 
 tilt_props_medium() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = getEntArray("sliding_cart_01b", "targetname");
 
   foreach(var_3 in var_1) {
@@ -1725,10 +1725,10 @@ tilt_props_medium() {
     var_26 = var_28;
   }
 
-  var_25 linkto(var_24);
-  var_26 linkto(var_24);
+  var_25 linkTo(var_24);
+  var_26 linkTo(var_24);
   var_0 maps\_anim::anim_first_frame_solo(var_22, "carrier_deck_tilt_rollercart_a");
-  var_24 linkto(var_22, "j_prop_2");
+  var_24 linkTo(var_22, "j_prop_2");
   common_scripts\utility::flag_wait("start_main_odin_strike");
   wait 1.25;
   var_0 maps\_anim::anim_single_solo(var_22, "carrier_deck_tilt_rollercart_a");
@@ -1758,8 +1758,8 @@ tilt_props_jet11_cart() {
     var_4 = var_9;
   }
 
-  var_3 linkto(var_2);
-  var_4 linkto(var_2);
+  var_3 linkTo(var_2);
+  var_4 linkTo(var_2);
 
   foreach(var_9 in var_1) {
     if(var_9.script_noteworthy == "item") {
@@ -1772,9 +1772,9 @@ tilt_props_jet11_cart() {
     }
   }
 
-  var_6 linkto(var_5);
+  var_6 linkTo(var_5);
   var_13 = maps\_utility::spawn_anim_model("tilt_cart");
-  var_14 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_14 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_14 maps\_anim::anim_first_frame_solo(var_13, "carrier_deck_tilt_missile_cart1");
   var_15 = var_13 gettagorigin("J_prop_1");
   var_16 = var_13 gettagangles("J_prop_1");
@@ -1785,8 +1785,8 @@ tilt_props_jet11_cart() {
   var_2.angles = var_16;
   var_5.origin = var_17;
   var_5.angles = var_18;
-  var_2 linkto(var_13, "J_prop_1");
-  var_5 linkto(var_13, "J_prop_2");
+  var_2 linkTo(var_13, "J_prop_1");
+  var_5 linkTo(var_13, "J_prop_2");
   common_scripts\utility::flag_wait("tilt_part_35");
   wait 1.0;
   var_14 maps\_anim::anim_single_solo(var_13, "carrier_deck_tilt_missile_cart1");
@@ -1815,7 +1815,7 @@ tilt_props_odin_phys() {
 }
 
 tilt_front_deck_impact() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = [];
   var_1[0] = maps\_utility::spawn_anim_model("tilt_deck1");
   var_1[1] = maps\_utility::spawn_anim_model("tilt_deck2");
@@ -1824,18 +1824,18 @@ tilt_front_deck_impact() {
 }
 
 tilt_exfil() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname("deck_tilt_heli");
   level.exfil_chopper = var_1;
   maps\_utility::delaythread(0.15, maps\_vehicle::gopath, var_1);
-  var_2 = getent("exfil_player_clip", "targetname");
+  var_2 = getEnt("exfil_player_clip", "targetname");
   var_2.origin = var_1.origin;
   var_2.angles = var_1.angles;
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   var_3 = var_1 common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_1 gettagorigin("tag_light_cargo01");
   var_3.angles = var_1 gettagangles("tag_light_cargo01");
-  var_3 linkto(var_1);
+  var_3 linkTo(var_1);
   playFXOnTag(common_scripts\utility::getfx("aircraft_light_cockpit_white_300"), var_3, "tag_origin");
   thread tilt_exfil_player();
   thread maps\carrier_audio::aud_carr_exfil_heli(var_1);
@@ -1870,7 +1870,7 @@ tilt_exfil() {
   wait 0.5;
   thread tilt_exfil_planes();
   var_1 waittillmatch("single anim", "queue_rog");
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   screenshake(level.player.origin, 3, 2, 2, 2.5, 0, 2.0, 256, 8, 15, 12, 5.0);
   thread maps\carrier_code::rod_of_god_carrier_front();
   thread tilt_front_deck_impact();
@@ -1881,7 +1881,7 @@ tilt_exfil() {
 }
 
 tilt_exfil_props() {
-  var_0 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
+  var_0 = common_scripts\utility::getStruct("deck_tilt_animnode", "targetname");
   thread maps\carrier_code::generic_prop_raven_anim(var_0, "tilt_cart", "carrier_exfil_takeoff_carts", "exfil_rog_cart_1", "exfil_rog_cart_2", 1, "exfil_go");
   var_1 = getEntArray("exfil_rog_barrels_1", "targetname");
 
@@ -1914,8 +1914,8 @@ tilt_exfil_planes() {
 
   foreach(var_3 in var_1) {
     var_4 = randomfloatrange(13.25, 14.5);
-    var_5 = common_scripts\utility::getstruct(var_3.target, "targetname");
-    var_3 moveto(var_5.origin, var_4);
+    var_5 = common_scripts\utility::getStruct(var_3.target, "targetname");
+    var_3 moveTo(var_5.origin, var_4);
   }
 
   wait 3;
@@ -1929,8 +1929,8 @@ tilt_exfil_player() {
   var_1 = maps\_utility::spawn_anim_model("player_legs_rig");
   var_0 hide();
   var_1 hide();
-  var_0 linkto(level.exfil_chopper, "tag_doorgun_player");
-  var_1 linkto(level.exfil_chopper, "tag_doorgun_player");
+  var_0 linkTo(level.exfil_chopper, "tag_doorgun_player");
+  var_1 linkTo(level.exfil_chopper, "tag_doorgun_player");
   var_2 = [var_0, var_1];
   level.exfil_chopper thread maps\_anim::anim_single(var_2, "carrier_exfil_takeoff", "tag_doorgun_player");
   level.player enableinvulnerability();
@@ -1947,7 +1947,7 @@ tilt_exfil_player() {
 }
 
 bg_rog_hit(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 thread bg_rog_impact();
 }
 
@@ -1999,7 +1999,7 @@ tilt_anim_gen_prop_raven(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   self.origin = var_8.origin;
   self.angles = (0, 0, 0);
-  var_8 linkto(self, var_1);
+  var_8 linkTo(self, var_1);
 
   if(isDefined(var_5)) {
     foreach(var_12 in var_7) {
@@ -2008,7 +2008,7 @@ tilt_anim_gen_prop_raven(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
 
-    var_9 linkto(var_8);
+    var_9 linkTo(var_8);
   }
 
   common_scripts\utility::flag_wait(var_3);
@@ -2044,7 +2044,7 @@ tilt_anim_solo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   maps\_anim::setanimtree();
 
   if(isDefined(var_3)) {
-    var_10 = common_scripts\utility::getstruct(var_3, "targetname");
+    var_10 = common_scripts\utility::getStruct(var_3, "targetname");
   } else {
     var_10 = common_scripts\utility::spawn_tag_origin();
   }
@@ -2059,7 +2059,7 @@ tilt_anim_solo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
   var_10 thread maps\_anim::anim_single_solo(self, var_1);
 
   if(isDefined(var_9)) {
-    self playrumbleonentity(var_9);
+    self playRumbleOnEntity(var_9);
   }
 
   if(isDefined(var_5)) {

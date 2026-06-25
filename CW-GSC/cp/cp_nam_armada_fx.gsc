@@ -34,7 +34,7 @@ function function_82a143d2() {
 
 function function_d54bb61() {
   level flag::wait_till("all_players_spawned");
-  getplayers()[0] endon(#"death");
+  getPlayers()[0] endon(#"death");
   level waittill(#"hash_7bfe2feb57babd0b");
   level.player clientfield::set_to_player("postfx_bundle_explosive_damage", 1);
   level waittill(#"hash_291826dce45def2d");
@@ -77,16 +77,16 @@ function function_ee673d3d() {
   level notify(#"hash_1849624165c8255f");
   level.var_7466d419.var_6bbdd0a5 = spawn("script_model", level.var_7466d419.origin);
   level.var_7466d419.var_6bbdd0a5 setModel(#"tag_origin");
-  level.var_7466d419.var_6bbdd0a5 enablelinkto();
-  level.var_7466d419.var_6bbdd0a5 linkto(level.var_7466d419, "tag_fire_extinguisher_attach", (0, 0, 35), (90, 0, 0));
+  level.var_7466d419.var_6bbdd0a5 enablelinkTo();
+  level.var_7466d419.var_6bbdd0a5 linkTo(level.var_7466d419, "tag_fire_extinguisher_attach", (0, 0, 35), (90, 0, 0));
   level.var_7466d419.var_585ee020 = #"hash_7401be881ac98bd9";
   level waittill(#"hash_227cc8ce5802e6b5");
   level.var_7466d419.var_6bbdd0a5 delete();
   level waittill(#"hash_1849624165c8255f");
   level.var_7466d419.var_6bbdd0a5 = spawn("script_model", level.var_7466d419.origin);
   level.var_7466d419.var_6bbdd0a5 setModel(#"tag_origin");
-  level.var_7466d419.var_6bbdd0a5 enablelinkto();
-  level.var_7466d419.var_6bbdd0a5 linkto(level.var_7466d419, "tag_fire_extinguisher_attach", (0, 0, 35), (90, 0, 0));
+  level.var_7466d419.var_6bbdd0a5 enablelinkTo();
+  level.var_7466d419.var_6bbdd0a5 linkTo(level.var_7466d419, "tag_fire_extinguisher_attach", (0, 0, 35), (90, 0, 0));
   playFXOnTag(level.var_7466d419.var_585ee020, level.var_7466d419.var_6bbdd0a5, "tag_origin");
 }
 

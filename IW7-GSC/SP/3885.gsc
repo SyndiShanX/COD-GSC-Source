@@ -194,7 +194,7 @@ func_E542(var_0, var_1, var_2) {
   level endon("reset_vr");
   func_E53E("active");
   self rotateroll(90, var_1, var_2, var_2);
-  self moveto(self.origin + anglestoright(self.angles) * var_0, var_1, var_2, var_2);
+  self moveTo(self.origin + anglestoright(self.angles) * var_0, var_1, var_2, var_2);
   wait(var_1 + 0.05);
   func_E53E("passive");
   if(self == level.var_13563.var_E546[0]) {
@@ -447,9 +447,9 @@ func_12B95(var_0, var_1, var_2, var_3, var_4) {
   var_8 = self.segments[var_3];
   var_9 = self.var_466A[var_4];
   var_8.var_CBFA unlink();
-  var_8.var_CBFA linkto(var_7, "tag_segment", (0, 0, 0), (0, 0, 0));
+  var_8.var_CBFA linkTo(var_7, "tag_segment", (0, 0, 0), (0, 0, 0));
   var_9.var_CBFA unlink();
-  var_9.var_CBFA linkto(var_7, "tag_corner_bottom", (0, 0, 0), (0, 0, 0));
+  var_9.var_CBFA linkTo(var_7, "tag_corner_bottom", (0, 0, 0), (0, 0, 0));
   func_E53E("active");
   scripts\sp\utility::func_65E1("ring_unfolding");
   var_7 scripts\sp\anim::func_1F35(var_7, "vr_unfold");
@@ -639,7 +639,7 @@ func_6B72() {
   func_F188(level.var_13563.var_BF5A, 0, self.var_7595, var_1, self.var_7587, anglestoup(self.angles));
   self unlink();
   self show();
-  self moveto(var_1, 0.25);
+  self moveTo(var_1, 0.25);
 }
 
 func_2F0A(var_0) {
@@ -692,11 +692,11 @@ func_4D97(var_0, var_1, var_2, var_3) {
 
   if(var_3) {
     self waittill("vr_flicker_done");
-    self moveto(var_0, 0.05);
+    self moveTo(var_0, 0.05);
     return;
   }
 
-  self moveto(var_0, 0.5, 0.125, 0.125);
+  self moveTo(var_0, 0.5, 0.125, 0.125);
 }
 
 func_3108(var_0, var_1) {
@@ -1046,7 +1046,7 @@ func_643D() {
     var_5 = self gettagangles(var_3);
     var_6 = self.var_DC;
     if(var_6 == (0, 0, 0)) {
-      var_7 = getent("start_vr_chamber", "targetname");
+      var_7 = getEnt("start_vr_chamber", "targetname");
       var_6 = anglesToForward(var_7.angles);
     }
 
@@ -1086,7 +1086,7 @@ func_643C() {
     var_4 = self gettagangles(var_2);
     var_5 = self.var_DC;
     if(var_5 == (0, 0, 0)) {
-      var_6 = getent("start_vr_chamber", "targetname");
+      var_6 = getEnt("start_vr_chamber", "targetname");
       var_5 = anglesToForward(var_6.angles);
     }
 
@@ -1230,7 +1230,7 @@ func_85AC() {
   self endon("death");
   self endon("entitydeleted");
   level endon("reset_vr");
-  var_0 = getent("vr_thrown_grenade_trigger", "targetname");
+  var_0 = getEnt("vr_thrown_grenade_trigger", "targetname");
   for(;;) {
     if(self istouching(var_0)) {
       scripts\engine\utility::waitframe();
@@ -1383,7 +1383,7 @@ func_A5BD(var_0) {
 
 func_A5D0() {
   level endon("reset_vr");
-  var_0 = getent("vr_trigger_kill_equipment", "targetname");
+  var_0 = getEnt("vr_trigger_kill_equipment", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(var_1.unittype == "seeker") {
@@ -1475,7 +1475,7 @@ func_653A() {
     }
   }
 
-  self.utility_triggers linkto(self, "tag_origin", (0, 0, 8), (0, 0, 0));
+  self.utility_triggers linkTo(self, "tag_origin", (0, 0, 8), (0, 0, 0));
   scripts\engine\utility::waitframe();
   self.utility_triggers setlightintensity(self.utility_triggers.var_10C89);
   self.utility_triggers give_player_explosive_armor(37);
@@ -1606,7 +1606,7 @@ func_E241() {
   func_A62B();
   foreach(var_7 in level.var_13563.var_E546) {
     if(var_7.var_EDD5 == 0) {
-      var_7.var_D958 linkto(var_7, "tag_origin", (0, 0, 0), (0, 90, 0));
+      var_7.var_D958 linkTo(var_7, "tag_origin", (0, 0, 0), (0, 90, 0));
     }
 
     foreach(var_9 in var_7.var_466A) {
@@ -1634,7 +1634,7 @@ func_465F(var_0, var_1) {
   var_0.var_6128 hide();
   var_0.var_6123 hide();
   var_0 hide();
-  var_0.var_CBFA linkto(var_1, "j_corner" + var_0.script_index, (0, 0, 0), (0, 0, 0));
+  var_0.var_CBFA linkTo(var_1, "j_corner" + var_0.script_index, (0, 0, 0), (0, 0, 0));
   func_6B73(var_0, 1);
 }
 
@@ -1662,10 +1662,10 @@ func_F189(var_0, var_1) {
     }
 
     var_0.var_6E86 hide();
-    var_0.var_6E86 linkto(var_0.var_CBFA, "", var_0.var_6E86.var_D6A0, var_0.var_6E86.var_42);
+    var_0.var_6E86 linkTo(var_0.var_CBFA, "", var_0.var_6E86.var_D6A0, var_0.var_6E86.var_42);
   }
 
-  var_0.var_CBFA linkto(var_1, "j_segment" + var_0.script_index, (0, 0, 0), (0, 0, 0));
+  var_0.var_CBFA linkTo(var_1, "j_segment" + var_0.script_index, (0, 0, 0), (0, 0, 0));
   func_6B73(var_0, 1);
 }
 
@@ -1673,12 +1673,12 @@ func_6B73(var_0, var_1) {
   if(isDefined(var_0.var_6B71)) {
     foreach(var_3 in var_0.var_6B71) {
       if(var_1) {
-        var_3 linkto(var_0.var_CBFA, "", var_3.var_D6A0, var_3.var_42);
+        var_3 linkTo(var_0.var_CBFA, "", var_3.var_D6A0, var_3.var_42);
         var_3 hide();
         continue;
       }
 
-      var_3 linkto(var_0.var_CBFA);
+      var_3 linkTo(var_0.var_CBFA);
     }
   }
 }
@@ -1699,33 +1699,33 @@ func_12B92() {
 func_E1A2() {
   level.var_13563.var_9B3D.var_CBFA.origin = level.var_13563.var_9B3D.var_CBFA.start_pos;
   foreach(var_1 in level.var_13563.var_E546) {
-    var_1 moveto(var_1.start_pos, 0.05);
-    var_1 rotateto(var_1.var_10BA1, 0.05);
+    var_1 moveTo(var_1.start_pos, 0.05);
+    var_1 rotateTo(var_1.var_10BA1, 0.05);
     foreach(var_3 in var_1.var_466A) {
       if(isDefined(var_3.var_6B71)) {
         foreach(var_5 in var_3.var_6B71) {
-          var_5 moveto(var_5.origin, 0.05);
-          var_5 rotateto(var_5.angles, 0.05);
+          var_5 moveTo(var_5.origin, 0.05);
+          var_5 rotateTo(var_5.angles, 0.05);
         }
       }
     }
 
     foreach(var_9 in var_1.segments) {
       if(isDefined(var_9.var_6E86)) {
-        var_9.var_6E86 rotateto(var_9.var_6E86.angles, 0.05);
+        var_9.var_6E86 rotateTo(var_9.var_6E86.angles, 0.05);
       }
 
       if(isDefined(var_9.var_6B71)) {
         foreach(var_5 in var_9.var_6B71) {
-          var_5 moveto(var_5.origin, 0.05);
-          var_5 rotateto(var_5.angles, 0.05);
+          var_5 moveTo(var_5.origin, 0.05);
+          var_5 rotateTo(var_5.angles, 0.05);
         }
       }
     }
   }
 
   foreach(var_15 in level.var_13563.var_4D95) {
-    var_15 moveto(var_15.origin, 0.05);
+    var_15 moveTo(var_15.origin, 0.05);
     var_15 hide();
     if(isDefined(var_15.var_A645)) {
       var_15.var_A645 hide();
@@ -1815,7 +1815,7 @@ func_13598() {
 }
 
 func_F61F() {
-  level.player playerlinktoabsolute(getent("start_vr_chamber", "targetname"));
+  level.player playerlinktoabsolute(getEnt("start_vr_chamber", "targetname"));
   scripts\sp\utility::func_28D7("axis");
   level.player scripts\sp\utility::func_11428();
   level.player func_8559(0);

@@ -48,7 +48,7 @@ sidequest_complete_watch() {
 sidequest_complete_fx(story, skiprunners) {
   level endon("sq_kfx");
   electric_structs = getStructArray("sq_common_pole_fx", "targetname");
-  electric_struct = getstruct("sq_common_tower_fx", "targetname");
+  electric_struct = getStruct("sq_common_tower_fx", "targetname");
   players = getlocalplayers();
 
   if(isDefined(electric_struct)) {
@@ -83,7 +83,7 @@ sidequest_complete_fx_lightning(electric_struct) {
 }
 
 sidequest_complete_pyramid_watch() {
-  electric_struct = getstruct("sq_common_tower_fx", "targetname");
+  electric_struct = getStruct("sq_common_tower_fx", "targetname");
 
   while(true) {
     event = level waittill_any_return8("zsd", "zsf", "zsb", "zsbd", "zsbt", "zsh", "zsp", "zsc");
@@ -126,12 +126,12 @@ sidequest_complete_fx_triangle_runner(story, event, end_struct) {
 
 sidequest_complete_fx_runner_move_origins(origin1, origin2) {
   if(isDefined(origin1)) {
-    self moveto(origin1, 1.4);
+    self moveTo(origin1, 1.4);
     self waittill("movedone");
   }
 
   if(isDefined(origin2)) {
-    self moveto(origin2, 1.4);
+    self moveTo(origin2, 1.4);
     self waittill("movedone");
   }
 
@@ -154,8 +154,8 @@ sidequest_complete_fx_runner(story, struct) {
 
 sidequest_complete_fx_runner_move(struct) {
   while(isDefined(struct.target)) {
-    struct = getstruct(struct.target, "targetname");
-    self moveto(struct.origin, 1.4);
+    struct = getStruct(struct.target, "targetname");
+    self moveTo(struct.origin, 1.4);
     self waittill("movedone");
   }
 

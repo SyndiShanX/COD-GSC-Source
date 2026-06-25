@@ -19,7 +19,7 @@ func_6EDC(var_0) {
   self notify("flash_rumble_loop");
   var_1 = gettime() + var_0 * 1000;
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }

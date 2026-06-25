@@ -58,10 +58,10 @@ function trap_audio(trap) {
   self thread play_fire_sound(trap);
   trap util::waittill_any_timeout(trap._trap_duration, "trap_done");
   if(isDefined(sound_origin)) {
-    playsoundatposition("wpn_zmb_inlevel_fire_trap_stop", sound_origin.origin);
+    playSoundAtPosition("wpn_zmb_inlevel_fire_trap_stop", sound_origin.origin);
     sound_origin stoploopsound();
     wait(0.05);
-    playsoundatposition("zmb_fire_trap_cooldown", sound_origin.origin);
+    playSoundAtPosition("zmb_fire_trap_cooldown", sound_origin.origin);
     sound_origin delete();
   }
 }
@@ -70,7 +70,7 @@ function play_fire_sound(trap) {
   trap endon("trap_done");
   while(true) {
     wait(randomfloatrange(0.1, 0.5));
-    playsoundatposition("amb_flame", self.origin);
+    playSoundAtPosition("amb_flame", self.origin);
   }
 }
 
@@ -118,7 +118,7 @@ function damage(trap) {
       refs[5] = "no_legs";
       refs[6] = "head";
       self.a.gib_ref = refs[randomint(refs.size)];
-      playsoundatposition("zmb_ignite", self.origin);
+      playSoundAtPosition("zmb_ignite", self.origin);
       wait(randomfloat(1.25));
       self playSound("zmb_vocals_zombie_death_fire");
     }

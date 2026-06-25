@@ -4,15 +4,15 @@
 *****************************************************/
 
 player_move_to_checkpoint_start(var_0) {
-  var_1 = getent(var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = getEnt(var_0, "targetname");
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
 }
 
 allies_move_to_checkpoint_start(var_0, var_1) {
   for(var_2 = 0; var_2 < 3; var_2++) {
     var_3 = var_0 + "_ally_" + var_2;
-    var_4 = common_scripts\utility::getstruct(var_3, "targetname");
+    var_4 = common_scripts\utility::getStruct(var_3, "targetname");
     level.allies[var_2] forceteleport(var_4.origin, var_4.angles);
 
     if(isDefined(var_1)) {
@@ -55,8 +55,8 @@ spawn_ally(var_0, var_1) {
 }
 
 spawn_targetname_at_struct_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2 maps\_utility::add_spawn_function(maps\_space_ai::enable_space);
@@ -130,7 +130,7 @@ spawn_space_ai_from_targetname(var_0, var_1) {
     var_1 = 0;
   }
 
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = spawn_space_ai(var_2, var_1);
   return var_3;
 }
@@ -335,7 +335,7 @@ reassign_goal_volume(var_0, var_1) {
   }
 
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   foreach(var_4 in var_0) {
     var_4 setgoalvolumeauto(var_2);
@@ -705,7 +705,7 @@ watch_input_infil(var_0, var_1) {
 
         if(distance2d(var_4, var_1.origin) <= level.infil_allowed_slide) {
           var_0.origin = var_4;
-          var_0 linkto(var_1, "tag_player");
+          var_0 linkTo(var_1, "tag_player");
         }
       }
     } else if(var_2[1] <= -0.15) {
@@ -719,7 +719,7 @@ watch_input_infil(var_0, var_1) {
 
         if(distance2d(var_4, var_1.origin) <= level.infil_allowed_slide) {
           var_0.origin = var_4;
-          var_0 linkto(var_1, "tag_player");
+          var_0 linkTo(var_1, "tag_player");
         }
       }
     } else {
@@ -772,7 +772,7 @@ spawn_and_link_models_to_tags(var_0, var_1, var_2) {
       }
 
       var_8.angles = self gettagangles(var_6);
-      var_8 linkto(self, var_6);
+      var_8 linkTo(self, var_6);
 
       if(isDefined(var_0)) {
         var_8.targetname = var_0;
@@ -874,7 +874,7 @@ loki_drop_weapon(var_0, var_1) {
     var_3 hide();
     var_3.origin = self gettagorigin("tag_weapon");
     var_3.angles = self gettagangles("tag_weapon");
-    var_3 linkto(self, "tag_weapon");
+    var_3 linkTo(self, "tag_weapon");
 
     if(isDefined(var_1)) {
       common_scripts\utility::waittill_any("death", "damage");
@@ -922,8 +922,8 @@ loki_drop_weapon(var_0, var_1) {
 
 create_drop_weapon_trigger(var_0, var_1) {
   var_2 = spawn("trigger_radius", var_0.origin, 0, 20, 20);
-  var_2 enablelinkto();
-  var_2 linkto(var_0);
+  var_2 enablelinkTo();
+  var_2 linkTo(var_0);
   var_2 thread loki_drop_weapon_trigger(var_0, var_1);
   return var_2;
 }
@@ -1036,7 +1036,7 @@ create_rumble_ent(var_0, var_1, var_2) {
 
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = level.player.origin + (0, 0, var_0);
-  var_3 linkto(level.player);
+  var_3 linkTo(level.player);
 
   if(isDefined(var_1)) {
     var_3.script_noteworthy = var_1;
@@ -1094,7 +1094,7 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
 
   if(isDefined(var_4)) {
     var_9 = var_0 common_scripts\utility::spawn_tag_origin();
-    var_9 linkto(var_0, var_4, (0, 0, 0), (0, 0, 0));
+    var_9 linkTo(var_0, var_4, (0, 0, 0), (0, 0, 0));
   }
 
   if(!isDefined(var_5)) {

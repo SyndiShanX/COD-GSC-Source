@@ -39,7 +39,7 @@ func_E4E9(var_0) {
   var_6 = var_5 * var_6;
   var_7 = var_3.origin + var_6;
   var_3.trigger = spawn("script_origin", var_7);
-  var_3.trigger linkto(var_3);
+  var_3.trigger linkTo(var_3);
   var_3 setCanDamage(1);
   var_3 thread func_E4E0(self);
   var_3 thread[[level.var_E4DF[var_0.weapon_name].var_B9DC]](self);

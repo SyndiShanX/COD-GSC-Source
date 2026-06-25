@@ -711,7 +711,7 @@ anim_first_frame_on_guy(guy, scene, org, angles, animname_override) {
   self thread anim_info_render_thread(guy, scene, org, angles, animname, scene, 0, 1);
 
   animation = anim_ent get_anim(scene, animname);
-  anim_ent animscripted("anim_first_frame", org, angles, animation, "normal", anim_ent.root_anim, 0, 0);
+  anim_ent animScripted("anim_first_frame", org, angles, animation, "normal", anim_ent.root_anim, 0, 0);
 }
 
 anim_custom_animmode_on_guy(guy, custom_animmode, scene, org, angles, animname_override) {
@@ -879,7 +879,7 @@ anim_loop_packet(guypackets, scene, ender, animname_override, n_lerp_time) {
           guy setflaggedanimknobrestart(anim_string, level.scr_anim[animname][scene][idleanim], 1, blend_in, 1);
         } else {
           guy last_anim_time_check();
-          guy animscripted(anim_string, org, angles, level.scr_anim[animname][scene][idleanim], "normal", undefined, undefined, blend_in, n_lerp_time);
+          guy animScripted(anim_string, org, angles, level.scr_anim[animname][scene][idleanim], "normal", undefined, undefined, blend_in, n_lerp_time);
         }
 
         guy notify("_anim_playing");
@@ -1102,13 +1102,13 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
     } else {
       if(isDefined(aligned) && aligned) {
         assert(isDefined(angles), "Alignment node does not have angles specified.");
-        guy animscripted(anim_string, org, angles, animation, "normal", undefined, n_rate, blend_in, n_lerp_time);
+        guy animScripted(anim_string, org, angles, animation, "normal", undefined, n_rate, blend_in, n_lerp_time);
       } else {
         if(isDefined(guy.a) && (!isDefined(guy.a.script) && !isDefined("move") || isDefined(guy.a.script) && isDefined("move") && guy.a.script == "move")) {
           guy wait_for_foot_sync();
         }
 
-        guy animscripted(anim_string, guy.origin, guy.angles, animation, "normal", undefined, n_rate, blend_in);
+        guy animScripted(anim_string, guy.origin, guy.angles, animation, "normal", undefined, n_rate, blend_in);
       }
 
       guy last_anim_time_check();
@@ -1118,7 +1118,7 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
         cut_time = blend_out;
       }
 
-      guy thread earlyout_animscripted(animation, cut_time);
+      guy thread earlyout_animScripted(animation, cut_time);
     }
 
     guy notify("_anim_playing");
@@ -1875,7 +1875,7 @@ anim_ents(ents, scene, tag, animname) {
   for(i = 0; i < ents.size; i++) {
     if(isDefined(parent_model)) {
       assert(isDefined(ents[i].script_linkto), "_anim::anim_ents() - Entity at " + ents[i].origin + " does not have a script_linkto Key/Value");
-      ents[i] linkto(parent_model, ents[i].script_linkto);
+      ents[i] linkTo(parent_model, ents[i].script_linkto);
     } else {
       ents[i] setanimtree();
       ents[i] setflaggedanimknob("ent_anim", get_anim(scene, animname), 1.0, 0.2, 1.0);
@@ -2205,7 +2205,7 @@ pg_sound_exists(animname, scene) {
   return false;
 }
 
-earlyout_animscripted(animation, cut_time, blend_time) {
+earlyout_animScripted(animation, cut_time, blend_time) {
   if(!isDefined(cut_time)) {
     cut_time = 0.3;
   }
@@ -2222,7 +2222,7 @@ earlyout_animscripted(animation, cut_time, blend_time) {
   }
   anim_time = getanimlength(animation);
   wait(anim_time - cut_time);
-  self anim_stopanimscripted(blend_time);
+  self anim_stopanimScripted(blend_time);
 }
 
 anim_origin_render(org, angles, line_length, str_label) {

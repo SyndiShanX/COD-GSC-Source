@@ -57,7 +57,7 @@ function function_5836955d() {
   self.var_5112b4b1 = 1;
   self setavoidancemask("avoid none");
   self collidewithactors(0);
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self.overrideactordamage = &function_b8c581fb;
   self thread function_d8e8920a();
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_ghost_spawn");

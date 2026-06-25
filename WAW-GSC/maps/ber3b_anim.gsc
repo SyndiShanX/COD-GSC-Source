@@ -308,14 +308,14 @@ reichstag_dooranim(animName, animeName, msg, doConnectPaths) {
 
   self.isDoingAnim = true;
 
-  self LinkTo(org, "origin_animate_jnt");
+  self linkTo(org, "origin_animate_jnt");
 
   org UseAnimTree(#animtree);
   org SetFlaggedAnimKnob(msg, anime, 1.0, 0.2, 1.0);
   org waittillmatch(msg, "end");
 
   if(doConnectPaths) {
-    self DisconnectPaths();
+    self disconnectPaths();
   }
 
   self Unlink();
@@ -326,10 +326,10 @@ reichstag_dooranim(animName, animeName, msg, doConnectPaths) {
 #using_animtree("generic_human");
 
 preview_anim_single(triggerTN, animname, anime, isAxis) {
-  trig = GetEnt(triggerTN, "targetname");
+  trig = getEnt(triggerTN, "targetname");
   ASSERTEX(isDefined(trig), "trigger can't be found.");
 
-  animSpot = GetStruct(trig.target, "targetname");
+  animSpot = getStruct(trig.target, "targetname");
   ASSERTEX(isDefined(animSpot), "anim spot (targetname " + trig.target + ") can't be found.");
 
   trig waittill("trigger");

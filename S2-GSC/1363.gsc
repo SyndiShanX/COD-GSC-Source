@@ -483,8 +483,8 @@ lib_0553::func_5BF1(param_00, param_01, param_02, param_03, param_04) {
   thread laststandmonitordeath();
   var_06 = spawn("script_model", self.var_0116);
   var_06 setModel("tag_origin");
-  var_06 setcursorhint("HINT_NOICON");
-  var_06 sethintstring(&"PLATFORM_REVIVE");
+  var_06 setCursorHint("HINT_NOICON");
+  var_06 setHintString(&"PLATFORM_REVIVE");
   var_06 makeusable();
   var_06.var_54F5 = 0;
   var_06.var_28D5 = 0;
@@ -493,7 +493,7 @@ lib_0553::func_5BF1(param_00, param_01, param_02, param_03, param_04) {
   var_06.var_502A = "last_stand";
   var_06.var_01A5 = "revive_trigger";
   var_06.var_0117 = self;
-  var_06 linkto(self, "tag_origin", (0, 0, 20), (0, 0, 0));
+  var_06 linkTo(self, "tag_origin", (0, 0, 20), (0, 0, 0));
   var_06 thread maps\mp\gametypes\_damage::func_2D44();
   self.var_7E5D = lib_0553::func_2826("hint_health_zm", 8, 8, (0.5, 1, 0.99));
   thread lib_0553::func_5BF7(var_06, var_05);
@@ -542,7 +542,7 @@ lib_0553::func_2826(param_00, param_01, param_02, param_03) {
   var_04 = newteamhudelem(self.var_01A7);
   var_04 setshader(param_00, param_01, param_02);
   var_04 setwaypoint(1, 1);
-  var_04 settargetent(self);
+  var_04 settargetEnt(self);
   var_04.var_0056 = param_03;
   return var_04;
 }

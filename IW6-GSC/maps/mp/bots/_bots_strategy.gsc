@@ -97,7 +97,7 @@ bot_set_ambush_trap(trap_item, ambush_entrances, ambush_node, ambush_yaw, trap_n
       if(!isDefined(fwd)) {
         choose_set[choose_set.size] = entrance;
       } else if(DistanceSquared(entrance.origin, ambush_node.origin) > 300 * 300) {
-        if(VectorDot(fwd, VectorNormalize(entrance.origin - ambush_node.origin)) < 0.4) {
+        if(VectorDot(fwd, vectorNormalize(entrance.origin - ambush_node.origin)) < 0.4) {
           choose_set[choose_set.size] = entrance;
         }
       }
@@ -374,7 +374,7 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
       defend_center = self defend_valid_center();
       nodes = GetNodesInRadiusSorted(defend_center, 256, 0);
       for(i = 0; i < nodes.size; i++) {
-        center_to_node = VectorNormalize(nodes[i].origin - defend_center);
+        center_to_node = vectorNormalize(nodes[i].origin - defend_center);
         trace_start = defend_center + center_to_node * 15;
         if(SightTracePassed(trace_start, nodes[i].origin, false, undefined)) {
           nearest_node = nodes[i];
@@ -738,8 +738,8 @@ defense_cautious_approach() {
                 last_player_pos = self.bot_defend_player_guarding.origin;
                 should_reset_player_base_pos_when_still = true;
 
-                player_to_script_goal = VectorNormalize(script_goal - self.bot_defend_player_guarding.origin);
-                normalized_velocity = VectorNormalize(player_guarding_velocity);
+                player_to_script_goal = vectorNormalize(script_goal - self.bot_defend_player_guarding.origin);
+                normalized_velocity = vectorNormalize(player_guarding_velocity);
                 if(VectorDot(player_to_script_goal, normalized_velocity) < 0.1) {
                   self notify("defend_force_node_recalculation");
                   wait(0.25);
@@ -781,10 +781,10 @@ defense_cautious_approach() {
 
         if(isDefined(node)) {
           if(isDefined(entrance_point)) {
-            node_to_entrance = VectorNormalize(entrance_point - node.origin);
+            node_to_entrance = vectorNormalize(entrance_point - node.origin);
             self.cur_defend_angle_override = VectorToAngles(node_to_entrance);
           } else {
-            center_to_node = VectorNormalize(node.origin - self defend_valid_center());
+            center_to_node = vectorNormalize(node.origin - self defend_valid_center());
             self.cur_defend_angle_override = VectorToAngles(center_to_node);
           }
           self.cur_defend_node = node;
@@ -804,10 +804,10 @@ defense_cautious_approach() {
 
         if(isDefined(node)) {
           if(isDefined(entrance_point)) {
-            node_to_entrance = VectorNormalize(entrance_point - node.origin);
+            node_to_entrance = vectorNormalize(entrance_point - node.origin);
             self.cur_defend_angle_override = VectorToAngles(node_to_entrance);
           } else {
-            center_to_node = VectorNormalize(node.origin - self defend_valid_center());
+            center_to_node = vectorNormalize(node.origin - self defend_valid_center());
             self.cur_defend_angle_override = VectorToAngles(center_to_node);
           }
           self.cur_defend_node = node;
@@ -824,7 +824,7 @@ defense_cautious_approach() {
         node = self bot_find_node_that_protects_point(self defend_valid_center(), self.bot_defending_radius);
 
         if(isDefined(node)) {
-          node_to_center = VectorNormalize(self defend_valid_center() - node.origin);
+          node_to_center = vectorNormalize(self defend_valid_center() - node.origin);
           self.cur_defend_angle_override = VectorToAngles(node_to_center);
           self.cur_defend_node = node;
         } else {
@@ -871,10 +871,10 @@ defense_cautious_approach() {
         }
 
         if(isDefined(face_towards_point)) {
-          angle_dir = VectorNormalize(face_towards_point - self.cur_defend_point_override);
+          angle_dir = vectorNormalize(face_towards_point - self.cur_defend_point_override);
           self.cur_defend_angle_override = VectorToAngles(angle_dir);
         } else if(isDefined(face_away_from_point)) {
-          angle_dir = VectorNormalize(self.cur_defend_point_override - face_away_from_point);
+          angle_dir = vectorNormalize(self.cur_defend_point_override - face_away_from_point);
           self.cur_defend_angle_override = VectorToAngles(angle_dir);
         }
       }

@@ -66,7 +66,7 @@ function private preinit() {
 }
 
 function private function_c30fad9a() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.takedown)) {
       player.takedown = spawnStruct();
     }
@@ -474,7 +474,7 @@ function takedown_prompt_monitor(action, var_d426470, var_72612ea0) {
 
 function function_146a3d56(enemy) {
   assert(isPlayer(self));
-  return vectornormalize(enemy.var_97e2c0da.check_origin - self getplayercamerapos());
+  return vectorNormalize(enemy.var_97e2c0da.check_origin - self getplayercamerapos());
 }
 
 function function_5ca78f5a(action) {
@@ -489,7 +489,7 @@ function function_5ca78f5a(action) {
 
   if(self.takedown.potential_victims.size > 0) {
     fwd = anglesToForward(self getplayerangles());
-    var_e3cd155d = vectornormalize((fwd[0], fwd[1], 0));
+    var_e3cd155d = vectorNormalize((fwd[0], fwd[1], 0));
     playereye = self getplayercamerapos();
     best_dot = -1;
 
@@ -534,7 +534,7 @@ function function_5ca78f5a(action) {
           } else if(isDefined(enemy.var_d3f0031c) || isDefined(enemy.var_59212ad0)) {
             var_ee55055 = -0.707107;
             victimfwd = anglesToForward(enemy.angles);
-            playerdelta = vectornormalize(self.origin - enemy.origin);
+            playerdelta = vectorNormalize(self.origin - enemy.origin);
             dot = vectordot(playerdelta, victimfwd);
             useprompt = #"hash_6a4c1594be34b79f";
 
@@ -621,7 +621,7 @@ function function_be279d34(action, takedown, enemy) {
   }
 
   dir = self function_146a3d56(enemy);
-  dir_2d = vectornormalize((dir[0], dir[1], 0));
+  dir_2d = vectorNormalize((dir[0], dir[1], 0));
 
   if(vectordot(dir_2d, anglesToForward((0, self getplayerangles()[1], 0))) < 0.7) {
     return false;
@@ -755,7 +755,7 @@ function function_a4e4cef5(action_name, player) {
     distclamp = math::clamp(distance(self getEye(), playereye) - 30, 0, 120);
     dotcheck = 0.5 + 0.44 * (distclamp / 150 - 30);
 
-    if(vectordot(vectornormalize(delta), playerfwd) < dotcheck) {
+    if(vectordot(vectorNormalize(delta), playerfwd) < dotcheck) {
       self.var_b87cdd12 = 0;
     }
 
@@ -865,7 +865,7 @@ function function_970b3d76(action, scene, player) {
       [[self._scene_object._o_scene]] - > stop();
     }
 
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   if(!isalive(self)) {
@@ -997,7 +997,7 @@ function function_64852b21(guy) {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   guy.skipdeathanim = 1;
   guy.noragdoll = 1;
   guy pushplayer(0);
@@ -1025,7 +1025,7 @@ function function_64852b21(guy) {
 }
 
 function function_caa295ea(guy) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(guy) && isDefined(player.takedown.kill_origin)) {
     foreach(corpse in getcorpsearray(player.origin, 500)) {
@@ -1073,13 +1073,13 @@ function function_8c04a084(player) {
     tagfwd = anglesToForward(tagangles);
     var_b6db82af = player.origin - tagpos;
     var_b6db82af = (var_b6db82af[0], var_b6db82af[1], 0);
-    var_b6db82af = vectornormalize(var_b6db82af);
+    var_b6db82af = vectorNormalize(var_b6db82af);
     dotup = abs(vectordot(tagfwd, (0, 0, 1)));
 
     if(dotup > 0.7) {
-      tagfwd = vectornormalize((tagright[0], tagright[1], 0));
+      tagfwd = vectorNormalize((tagright[0], tagright[1], 0));
     } else {
-      tagfwd = vectornormalize((tagfwd[0], tagfwd[1], 0));
+      tagfwd = vectorNormalize((tagfwd[0], tagfwd[1], 0));
     }
 
     entfwd = anglesToForward(self.angles);
@@ -1153,7 +1153,7 @@ function takedown_cleanup(action, var_949a9f8b, originalorigin, var_d8ba335a) {
   }
 
   if(isalive(self.var_edbc8698) && !is_true(self.var_edbc8698.var_69defa17)) {
-    self.var_edbc8698 stopanimscripted();
+    self.var_edbc8698 stopanimScripted();
     self.var_edbc8698 kill(self.origin, self, self);
     self.var_edbc8698 = undefined;
   }

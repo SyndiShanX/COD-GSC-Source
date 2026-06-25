@@ -95,7 +95,7 @@ function deployempturret(emp) {
 function doneempfx(fxtagorigin) {
   params = getscriptbundle("killstreak_bundle");
   playFX(params.ksexplosionfx, fxtagorigin);
-  playsoundatposition(#"mpl_emp_turret_deactivate", fxtagorigin);
+  playSoundAtPosition(#"mpl_emp_turret_deactivate", fxtagorigin);
 }
 
 function playempfx() {

@@ -132,14 +132,14 @@ func_973A(var_0, var_1) {
       switch (var_6.var_EE52) {
         case "jackal_runway":
           var_4.var_E8AD = var_6;
-          var_4.var_E8AD linkto(var_4);
+          var_4.var_E8AD linkTo(var_4);
           break;
         case "jackal_runway_r":
           var_4.var_E8CB = var_6;
-          var_4.var_E8CB linkto(var_4);
+          var_4.var_E8CB linkTo(var_4);
           break;
         case "refl_probe":
-          var_6 linkto(var_4);
+          var_6 linkTo(var_4);
           break;
       }
     }
@@ -167,16 +167,16 @@ func_973A(var_0, var_1) {
           break;
         case "jackal_runway_final_dest":
           var_4.var_E8AD.var_6C1E = var_6;
-          var_4.var_E8AD.var_6C1E linkto(var_4);
+          var_4.var_E8AD.var_6C1E linkTo(var_4);
           var_4.var_E8CB.var_6C1E = var_6;
           break;
         case "runway_hangar_light":
           var_13 = scripts\engine\utility::array_add(var_13, var_6);
-          var_6 linkto(var_4);
+          var_6 linkTo(var_4);
           break;
         case "trigger_flag_on_runway":
           var_6 getrankxp();
-          var_6 linkto(var_4);
+          var_6 linkTo(var_4);
           var_4.var_E8AD.var_12713 = var_6;
           break;
         case "runway_light":
@@ -190,17 +190,17 @@ func_973A(var_0, var_1) {
           var_14 = scripts\engine\utility::array_add(var_14, var_6);
           var_6 glinton(#animtree);
           var_6 give_attacker_kill_rewards(%machinery_landing_drone_recovery, 1, 0, 0);
-          var_6 linkto(var_4);
+          var_6 linkTo(var_4);
           break;
         case "ret_hangar_door":
           var_16 = var_6;
-          var_6 linkto(var_4);
+          var_6 linkTo(var_4);
           break;
         case "ret_hangar_door_end":
           var_15 = var_6;
           var_6 notsolid();
           var_6 hide();
-          var_6 linkto(var_4);
+          var_6 linkTo(var_4);
           break;
       }
     }
@@ -213,7 +213,7 @@ func_973A(var_0, var_1) {
 
     foreach(var_23 in var_21) {
       if(var_23.code_classname == "light") {
-        var_23 linkto(var_20, "j_spin");
+        var_23 linkTo(var_20, "j_spin");
         var_23.var_9C2E = 1;
         var_20.lights[var_20.lights.size] = var_23;
       }
@@ -221,7 +221,7 @@ func_973A(var_0, var_1) {
       if(var_23.code_classname == "script_model") {
         var_20.var_A6EC = var_23;
         var_23.var_9C2E = 1;
-        var_23 linkto(var_20);
+        var_23 linkTo(var_20);
       }
     }
 
@@ -233,7 +233,7 @@ func_973A(var_0, var_1) {
     var_16.start = scripts\engine\utility::spawn_tag_origin();
     var_16.start.origin = var_16.origin;
     var_16.start.angles = var_16.angles;
-    var_16.start linkto(var_4);
+    var_16.start linkTo(var_4);
     var_16.end = var_15;
   }
 
@@ -262,7 +262,7 @@ func_973A(var_0, var_1) {
         if(isDefined(var_6.var_9C2E)) {
           break;
         }
-        var_6 linkto(var_4);
+        var_6 linkTo(var_4);
         break;
     }
   }
@@ -281,15 +281,15 @@ func_973A(var_0, var_1) {
           var_4.var_A0CC = var_32;
           break;
         case "door_end_top":
-          var_33 = getent(var_32.target, "targetname");
-          var_33 linkto(var_32);
-          var_32 rotateto(var_32.angles + (110, 0, 0), 0.05);
+          var_33 = getEnt(var_32.target, "targetname");
+          var_33 linkTo(var_32);
+          var_32 rotateTo(var_32.angles + (110, 0, 0), 0.05);
           var_4.var_A0CB = var_32;
           break;
         case "door_end_bottom":
-          var_33 = getent(var_32.target, "targetname");
-          var_33 linkto(var_32);
-          var_32 rotateto(var_32.angles + (-110, 0, 0), 0.05);
+          var_33 = getEnt(var_32.target, "targetname");
+          var_33 linkTo(var_32);
+          var_32 rotateTo(var_32.angles + (-110, 0, 0), 0.05);
           var_4.var_A0CA = var_32;
           break;
       }
@@ -352,7 +352,7 @@ func_10635() {
   self.var_74A1 = scripts\engine\utility::spawn_tag_origin();
   self.var_74A1.origin = self.var_74A1.origin + anglesToForward(self.angles) * 13000;
   self.var_74A1.origin = self.var_74A1.origin + anglestoup(self.angles) * 1500;
-  self.var_74A1 linkto(self);
+  self.var_74A1 linkTo(self);
 
   if(isDefined(self.var_E505)) {
     var_0 = self.var_E505;
@@ -370,7 +370,7 @@ func_10635() {
       var_5 = spawn("script_model", self gettagorigin(var_3));
       var_5 glinton(#animtree);
       var_5.angles = self gettagangles(var_3);
-      var_5 linkto(self, var_3);
+      var_5 linkTo(self, var_3);
       var_6 = getsubstr(var_3, var_3.size - 4, var_3.size);
       self.var_747F[var_6] = var_5;
 
@@ -400,7 +400,7 @@ func_10635() {
       }
 
       self.var_747F[var_6].var_7601.angles = self.var_747F[var_6].var_7601.angles + (90, 0, 90);
-      self.var_747F[var_6].var_7601 linkto(var_5, "bone_door_hinge_main");
+      self.var_747F[var_6].var_7601 linkTo(var_5, "bone_door_hinge_main");
     }
   }
 

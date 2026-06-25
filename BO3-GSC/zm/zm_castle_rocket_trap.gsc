@@ -64,7 +64,7 @@ function function_713600fe(var_44f606ad = 0) {
   exploder::exploder("fx_rocket_trap_01");
   level clientfield::set("sndRocketTrap", 1);
   if(!(isDefined(level.sndoutro) && level.sndoutro)) {
-    playsoundatposition("vox_maxis_rocket_pa_begin_0", (5231, -2514, -2150));
+    playSoundAtPosition("vox_maxis_rocket_pa_begin_0", (5231, -2514, -2150));
   }
   wait(7);
   exploder::exploder("fx_rocket_trap_02");
@@ -72,7 +72,7 @@ function function_713600fe(var_44f606ad = 0) {
   level thread function_fe2fe879("zm_castle_rocket_trap_warning_rumble", var_69192d95.origin, 0.125);
   level clientfield::set("sndRocketTrap", 2);
   if(!(isDefined(level.sndoutro) && level.sndoutro)) {
-    playsoundatposition("vox_maxis_rocket_pa_doors_0", (5231, -2514, -2150));
+    playSoundAtPosition("vox_maxis_rocket_pa_doors_0", (5231, -2514, -2150));
   }
   level thread function_447a5d62();
   wait(2);
@@ -103,7 +103,7 @@ function function_713600fe(var_44f606ad = 0) {
     level thread flag::set_for_time(7.5, "rune_prison_obelisk_magma_enabled");
   }
   if(!(isDefined(level.sndoutro) && level.sndoutro)) {
-    playsoundatposition("vox_maxis_rocket_pa_complete_0", (5231, -2514, -2150));
+    playSoundAtPosition("vox_maxis_rocket_pa_complete_0", (5231, -2514, -2150));
   }
   level waittill("hash_c009e96d");
   level flag::clear("rocket_firing");
@@ -127,9 +127,9 @@ function function_e52f317f(is_left_door, n_time) {
   }
   while(true) {
     level waittill("hash_d6ba1e76");
-    self moveto(self.origin + (n_move_x, var_80b1884b, 0), n_time);
+    self moveTo(self.origin + (n_move_x, var_80b1884b, 0), n_time);
     level waittill("open_a10_doors");
-    self moveto(v_original_origin, n_time * 0.75);
+    self moveTo(v_original_origin, n_time * 0.75);
   }
 }
 
@@ -140,7 +140,7 @@ function function_34ad16fc() {
 function function_3a4d6d70() {
   for(i = 0; i < level.var_66385c9a.size; i++) {
     if(!(isDefined(level.sndoutro) && level.sndoutro)) {
-      playsoundatposition(level.var_66385c9a[i], (5231, -2514, -2150));
+      playSoundAtPosition(level.var_66385c9a[i], (5231, -2514, -2150));
     }
     wait(1);
   }
@@ -176,8 +176,8 @@ function function_60a8040b(var_d15b8c83) {
 
 function function_92008f69(var_ec7cc126) {
   level endon("hash_1b4db1d1");
-  var_5f1ce845 = getent("rocket_trap_blast_damage_vol", "targetname");
-  var_f38730c7 = getent("rocket_trap_side_blast_damage_vol", "targetname");
+  var_5f1ce845 = getEnt("rocket_trap_blast_damage_vol", "targetname");
+  var_f38730c7 = getEnt("rocket_trap_side_blast_damage_vol", "targetname");
   while(true) {
     if(var_ec7cc126) {
       array::thread_all(level.activeplayers, &function_76de618f, var_5f1ce845, 1);
@@ -217,7 +217,7 @@ function function_76de618f(vol_area, var_ec7cc126 = 0) {
         }
         if(isDefined(a_s_points)) {
           s_point = array::random(a_s_points);
-          self setorigin(s_point.origin);
+          self setOrigin(s_point.origin);
           self setplayerangles(s_point.angles);
         }
         util::wait_network_frame();
@@ -239,7 +239,7 @@ function function_76de618f(vol_area, var_ec7cc126 = 0) {
             }
             if(isDefined(a_s_points)) {
               s_point = array::random(a_s_points);
-              self setorigin(s_point.origin);
+              self setOrigin(s_point.origin);
               self setplayerangles(s_point.angles);
             }
             util::wait_network_frame();
@@ -290,7 +290,7 @@ function function_5acfb0f() {
   if(!isalive(self)) {
     return;
   }
-  var_2d8a543 = getent("zone_v10_pad", "targetname");
+  var_2d8a543 = getEnt("zone_v10_pad", "targetname");
   if(self.archetype === "mechz") {
     self.zone_name = zm_utility::get_current_zone();
   }

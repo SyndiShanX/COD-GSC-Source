@@ -667,7 +667,7 @@ loopidlesound(var_0) {
   self endon("killanimscript");
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   self.idlesoundorigin = var_1;
   self.idlesound = var_0;
 

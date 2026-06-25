@@ -88,7 +88,7 @@ function function_3ea85f63() {
     }
   }
   if(!isDefined(attacker)) {
-    attacker = getplayers()[0];
+    attacker = getPlayers()[0];
   }
   self notify("spiked", attacker);
   self stoploopsound(1);
@@ -116,7 +116,7 @@ function player_hint_line() {
   level endon("sq_std_hint_given");
   level waittill("sq_std_hint_line");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(self.origin) && distancesquared(self.origin, players[i].origin) <= 10000) {
         players[i] thread zm_audio::create_and_play_dialog("eggs", "quest5", 0);
@@ -132,7 +132,7 @@ function begin_std_story_vox() {
   self endon("death");
   level endon("sq_std_story_vox_begun");
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(distancesquared(self.origin, players[i].origin) <= 10000) {
         level thread std_story_vox(players[i]);
@@ -149,10 +149,10 @@ function stage_logic() {
   level flag::wait_till("std_target_2");
   level flag::wait_till("std_target_3");
   level flag::wait_till("std_target_4");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest5", 2);
   level waittill("waterfall");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].used_waterfall) && players[i].used_waterfall == 1) {
       players[i] thread zm_audio::create_and_play_dialog("eggs", "quest5", 3);

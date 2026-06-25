@@ -49,7 +49,7 @@ function temple_powerup_grab(powerup) {
 function monkey_swarm(powerup) {
   monkey_count_per_player = 2;
   level flag::clear("spawn_zombies");
-  players = getplayers();
+  players = getPlayers();
   level.monkeys_left_to_spawn = players.size * monkey_count_per_player;
   for(i = 0; i < players.size; i++) {
     players[i] thread player_monkey_think(monkey_count_per_player);
@@ -117,14 +117,14 @@ function player_monkey_think(nummonkeys) {
     spawns[i].last_spawn_time = gettime();
     monkey.attacking_zombie = 0;
     monkey.no_shrink = 1;
-    monkey setplayercollision(0);
+    monkey setPlayerCollision(0);
     monkey zm_ai_monkey::monkey_prespawn();
     monkey forceteleport(spawnloc, spawnangles);
     if(bloodfx) {
       playFX(level._effect["zombie_kill"], spawnloc);
     }
     playFX(level._effect["monkey_death"], spawnloc);
-    playsoundatposition("zmb_bolt", spawnloc);
+    playSoundAtPosition("zmb_bolt", spawnloc);
     monkey util::magic_bullet_shield();
     monkey.allowpain = 0;
     monkey thread zm_ai_monkey::monkey_zombie_choose_run();
@@ -143,7 +143,7 @@ function monkey_powerup_timeout() {
     self.zombie.monkey_claimed = 0;
   }
   playFX(level._effect["monkey_death"], self.origin);
-  playsoundatposition("zmb_bolt", self.origin);
+  playSoundAtPosition("zmb_bolt", self.origin);
   self notify("timeout");
   self delete();
 }
@@ -205,7 +205,7 @@ function monkey_attack_zombie(zombie) {
     zombie.no_powerups = 1;
     zombie.a.gib_ref = "head";
     zombie dodamage(zombie.health + 666, zombie.origin);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       players[i] zm_score::player_add_points("nuke_powerup", 20);
     }

@@ -334,9 +334,9 @@ create_pillage_spots(pillage_spot_array) {
     } else {
       spot.pillage_trigger setModel("tag_origin");
     }
-    spot.pillage_trigger SetCursorHint("HINT_NOICON");
+    spot.pillage_trigger setCursorHint("HINT_NOICON");
     spot.pillage_trigger MakeUsable();
-    spot.pillage_trigger SetHintString(&"ALIEN_COLLECTIBLES_OPEN");
+    spot.pillage_trigger setHintString(&"ALIEN_COLLECTIBLES_OPEN");
 
     if(isDefined(spot.is_locker) && spot.is_locker) {
       spot.pillage_trigger.angles = spot.angles;
@@ -407,7 +407,7 @@ pillage_spot_think() {
             } else {
               self.pillage_trigger setModel(level.pillageInfo.money_stack);
               string = get_hintstring_for_item_pickup(pillaged_item.type);
-              self.pillage_trigger SetHintString(string);
+              self.pillage_trigger setHintString(string);
               self.pillage_trigger makeUsable();
               self.pillageinfo.type = "money";
               self.pillageinfo.amount = pillaged_item.count;
@@ -425,7 +425,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(level.pillageInfo.leash_model);
             string = get_hintstring_for_item_pickup(pillaged_item.type);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "pet_leash";
             self.pillageinfo.item = "alienthrowingknife_mp";
@@ -438,7 +438,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(GetWeaponModel(pillaged_item.explosive_type));
             string = get_hintstring_for_item_pickup(pillaged_item.explosive_type);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "explosive";
             self.pillageinfo.item = pillaged_item.explosive_type;
@@ -450,7 +450,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(GetWeaponModel("aliensemtex_mp"));
             string = get_hintstring_for_item_pickup("aliensemtex_mp");
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "explosive";
             self.pillageinfo.item = "aliensemtex_mp";
@@ -462,7 +462,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(level.pillageInfo.flare_model);
             string = get_hintstring_for_item_pickup(pillaged_item.type);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "flare";
             self.pillageinfo.item = "alienflare_mp";
@@ -489,7 +489,7 @@ pillage_spot_think() {
             }
 
             string = get_hintstring_for_item_pickup(attach_found);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "attachment";
             self.pillageinfo.attachment = attach_found;
@@ -500,7 +500,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(level.pillageInfo.maxammo_model);
             string = get_hintstring_for_item_pickup("maxammo");
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "maxammo";
             level thread maps\mp\alien\_music_and_dialog::playVOForPillage(user);
@@ -511,7 +511,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(level.pillageInfo.clip_model);
             string = get_hintstring_for_item_pickup(pillaged_item.type);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "clip";
             break;
@@ -536,7 +536,7 @@ pillage_spot_think() {
               self.pillageinfo.type = random(["ap_ammo", "explosive_ammo", "incendiary_ammo", "stun_ammo"]);
             }
             string = get_hintstring_for_item_pickup(self.pillageinfo.type);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             break;
 
           case "soflam":
@@ -544,7 +544,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(level.pillageInfo.soflam_model);
             string = get_hintstring_for_item_pickup(pillaged_item.type);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "soflam";
             level thread maps\mp\alien\_music_and_dialog::playVOForPillage(user);
@@ -555,7 +555,7 @@ pillage_spot_think() {
             user thread show_pillage_text(string);
             self.pillage_trigger setModel(level.pillageInfo.trophy_model);
             string = get_hintstring_for_item_pickup(pillaged_item.type);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "trophy";
             self.pillageinfo.item = "alientrophy_mp";
@@ -570,7 +570,7 @@ pillage_spot_think() {
             self.pillage_trigger setModel(get_crafting_model(crafting_item));
 
             string = get_hintstring_for_item_pickup(crafting_item);
-            self.pillage_trigger SetHintString(string);
+            self.pillage_trigger setHintString(string);
             self.pillage_trigger makeUsable();
             self.pillageinfo.type = "crafting";
             self.pillageinfo.craftingitem = crafting_item;
@@ -1041,7 +1041,7 @@ try_to_give_player_explosives(pillage_spot) {
 
       pillage_spot.pillage_trigger setModel(GetWeaponModel(weapon_to_swap));
       string = get_hintstring_for_item_pickup(weapon_to_swap);
-      pillage_spot.pillage_trigger SetHintString(string);
+      pillage_spot.pillage_trigger setHintString(string);
       pillage_spot.pillage_trigger makeUsable();
       pillage_spot.pillageinfo = spawnStruct();
       pillage_spot.pillageinfo.type = "explosive";
@@ -1090,7 +1090,7 @@ try_to_give_player_flares(pillage_spot) {
       self SetWeaponAmmoClip(flare, ammo_count);
 
       string = get_hintstring_for_item_pickup(weapon_to_swap);
-      pillage_spot.pillage_trigger SetHintString(string);
+      pillage_spot.pillage_trigger setHintString(string);
       pillage_spot.pillage_trigger makeUsable();
       pillage_spot.pillageinfo = spawnStruct();
 
@@ -1145,7 +1145,7 @@ try_to_give_player_trophy(pillage_spot) {
       self SetWeaponAmmoClip(trophy, 1);
 
       string = get_hintstring_for_item_pickup(weapon_to_swap);
-      pillage_spot.pillage_trigger SetHintString(string);
+      pillage_spot.pillage_trigger setHintString(string);
       pillage_spot.pillage_trigger makeUsable();
       pillage_spot.pillageinfo = spawnStruct();
 
@@ -1206,7 +1206,7 @@ try_to_give_player_the_leash(pillage_spot) {
       self SetWeaponAmmoClip(leash, ammo_count);
 
       string = get_hintstring_for_item_pickup(weapon_to_swap);
-      pillage_spot.pillage_trigger SetHintString(string);
+      pillage_spot.pillage_trigger setHintString(string);
       pillage_spot.pillage_trigger makeUsable();
       pillage_spot.pillageinfo = spawnStruct();
 
@@ -1531,7 +1531,7 @@ swap_attachment(attachment, pillage_spot) {
   pillage_spot.pillage_trigger.origin = location;
   info_string = get_hintstring_for_pillaged_item("attachment");
   hint_string = get_hintstring_for_item_pickup(attachment);
-  pillage_spot.pillage_trigger SetHintString(hint_string);
+  pillage_spot.pillage_trigger setHintString(hint_string);
   pillage_spot.pillage_trigger makeUsable();
   self thread show_pillage_text(info_string);
 
@@ -1634,8 +1634,7 @@ debug_pillage_spots() {
           text = "easy";
           color = (1, 1, 1);
         }
-        if(Distance(level.players[0].origin, spot.origin) < 1500) {
-        }
+        if(Distance(level.players[0].origin, spot.origin) < 1500) {}
         Print3d(spot.origin + (0, 0, 20), text, color, 1, 1, 20);
       }
 

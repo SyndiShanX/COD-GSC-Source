@@ -90,7 +90,7 @@ fxanim_init(localclientnum) {
   }
 
   level thread clientscripts\mp\_fxanim_dlc4::fxanim_init_dlc(localclientnum);
-  radar = getent(localclientnum, "fxanim_dlc4_radar", "targetname");
+  radar = getEnt(localclientnum, "fxanim_dlc4_radar", "targetname");
 
   if(isDefined(radar)) {
     if(!isDefined(level.radar_waits)) {
@@ -104,7 +104,7 @@ fxanim_init(localclientnum) {
     radar thread fxanim_radar_think(localclientnum);
   }
 
-  decont_blasters = getent(localclientnum, "fxanim_dlc4_blasters", "targetname");
+  decont_blasters = getEnt(localclientnum, "fxanim_dlc4_blasters", "targetname");
 
   if(isDefined(decont_blasters)) {
     decont_blasters thread fxanim_decontamination_think(localclientnum);

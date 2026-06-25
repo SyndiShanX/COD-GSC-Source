@@ -22,7 +22,7 @@ node_connect_to_path() {
       nd_test = a_near_nodes[nn];
 
       if(nd_test != self) {
-        v_dir = vectornormalize(nd_test.origin - self.origin);
+        v_dir = vectorNormalize(nd_test.origin - self.origin);
         dot = vectordot(v_forward, v_dir);
 
         if(dot >= 0.3) {
@@ -136,7 +136,7 @@ entity_connect_nodes() {
 
       if(!reject) {
         v_forward = anglesToForward(nd_dynamic.angles);
-        v_dir = vectornormalize(nd_test.origin - nd_dynamic.origin);
+        v_dir = vectorNormalize(nd_test.origin - nd_dynamic.origin);
         dot = vectordot(v_forward, v_dir);
 
         if(dot > 0.05) {

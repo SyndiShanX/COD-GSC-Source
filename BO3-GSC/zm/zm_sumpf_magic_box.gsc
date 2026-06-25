@@ -98,8 +98,8 @@ function waitfor_flag_open_chest_location(which) {
 function function_a0db1fb9() {
   penbuytrigger = getEntArray("pendulum_buy_trigger", "targetname");
   foreach(var_d8a7af6f in penbuytrigger) {
-    var_d8a7af6f sethintstring(&"ZOMBIE_CLEAR_DEBRIS");
-    var_d8a7af6f setcursorhint("HINT_NOICON");
+    var_d8a7af6f setHintString(&"ZOMBIE_CLEAR_DEBRIS");
+    var_d8a7af6f setCursorHint("HINT_NOICON");
   }
   level flag::wait_till("nw_magic_box");
   zm_sumpf_trap_pendulum::initpendulumtrap();

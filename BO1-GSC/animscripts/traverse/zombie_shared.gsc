@@ -7,12 +7,12 @@
 #using_animtree("generic_human");
 
 init_traverse() {
-  point = GetEnt(self.target, "targetname");
+  point = getEnt(self.target, "targetname");
   if(isDefined(point)) {
     self.traverse_height = point.origin[2];
     point Delete();
   } else {
-    point = getstruct(self.target, "targetname");
+    point = getStruct(self.target, "targetname");
     if(isDefined(point)) {
       self.traverse_height = point.origin[2];
     }

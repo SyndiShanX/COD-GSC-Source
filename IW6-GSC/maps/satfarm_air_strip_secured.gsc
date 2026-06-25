@@ -57,7 +57,7 @@ air_strip_secured_begin() {
     }
   }
 
-  var_11 = getent("hangar_door_breakable", "targetname");
+  var_11 = getEnt("hangar_door_breakable", "targetname");
 
   if(isDefined(var_11)) {
     var_11 delete();
@@ -110,7 +110,7 @@ ally_chopper_unload() {
   common_scripts\utility::flag_wait("player_landed");
   wait 1;
   common_scripts\utility::flag_set("ghost2_landed");
-  var_0 = getent("control_room_balcony_clip", "targetname");
+  var_0 = getEnt("control_room_balcony_clip", "targetname");
   var_0 notsolid();
   var_0 connectpaths();
   common_scripts\utility::flag_wait("ghost2_littlebird_path_end");
@@ -195,30 +195,30 @@ air_strip_to_chopper() {
   thread maps\_utility::autosave_by_name("chopper_ride_in");
   common_scripts\utility::flag_set("chopper_flyin_begin");
   level.player thread maps\_utility::vision_set_fog_changes("satfarm_helicopter", 0.5);
-  level.player_chopper_anim_struct = common_scripts\utility::getstruct("player_chopper_anim_struct", "targetname");
+  level.player_chopper_anim_struct = common_scripts\utility::getStruct("player_chopper_anim_struct", "targetname");
   maps\_utility::array_spawn_function_targetname("air_strip_secured_ambient_enemies_wave_1", ::air_strip_secured_ambient_enemies_setup);
   level.air_strip_secured_ambient_enemies_wave_1 = maps\_utility::array_spawn_targetname("air_strip_secured_ambient_enemies_wave_1", 1);
-  var_0 = getent("air_strip_secured_ac_unit_damage_brush", "targetname");
+  var_0 = getEnt("air_strip_secured_ac_unit_damage_brush", "targetname");
   var_0 setCanDamage(1);
   var_1 = common_scripts\utility::getStructArray("air_strip_secured_ac_unit_damage_struct", "targetname");
   var_0 thread watch_damage_to_rooftop_destructibles(var_1, 250, "air_strip_secured_ambient_enemies_volume_3");
-  var_2 = getent("air_strip_secured_gas_tank_damage_brush", "targetname");
+  var_2 = getEnt("air_strip_secured_gas_tank_damage_brush", "targetname");
   var_2 setCanDamage(1);
   var_3 = common_scripts\utility::getStructArray("air_strip_secured_gas_tank_damage_struct", "targetname");
   var_2 thread watch_damage_to_rooftop_destructibles(var_3, 300, "air_strip_secured_ambient_enemies_volume_1");
   thread chopper_drive_in_vo();
   thread control_room_combat();
   common_scripts\utility::flag_wait("start_first_rpg");
-  var_4 = common_scripts\utility::getstruct("first_rpg_magicbullet_start", "targetname");
-  var_5 = common_scripts\utility::getstruct("first_rpg_magicbullet_end", "targetname");
+  var_4 = common_scripts\utility::getStruct("first_rpg_magicbullet_start", "targetname");
+  var_5 = common_scripts\utility::getStruct("first_rpg_magicbullet_end", "targetname");
   magicbullet("rpg_straight", var_4.origin, var_5.origin);
   common_scripts\utility::flag_wait("start_rpg");
-  var_4 = common_scripts\utility::getstruct("rpg_magicbullet1_start", "targetname");
-  var_5 = common_scripts\utility::getstruct("rpg_magicbullet1_end", "targetname");
+  var_4 = common_scripts\utility::getStruct("rpg_magicbullet1_start", "targetname");
+  var_5 = common_scripts\utility::getStruct("rpg_magicbullet1_end", "targetname");
   magicbullet("rpg_straight", var_4.origin, var_5.origin);
   wait 0.5;
-  var_4 = common_scripts\utility::getstruct("rpg_magicbullet2_start", "targetname");
-  var_5 = common_scripts\utility::getstruct("rpg_magicbullet2_end", "targetname");
+  var_4 = common_scripts\utility::getStruct("rpg_magicbullet2_start", "targetname");
+  var_5 = common_scripts\utility::getStruct("rpg_magicbullet2_end", "targetname");
   magicbullet("rpg_straight", var_4.origin, var_5.origin);
   common_scripts\utility::flag_wait("enable_player_rappel");
   level.player_littlebird thread littlebird_hover();
@@ -351,7 +351,7 @@ player_jump_to_tower() {
   }
 
   wait 0.5;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 1.5;
   level.player enableweapons();
   level.player enableoffhandweapons();
@@ -461,7 +461,7 @@ control_room_combat() {
     wait 0.05;
   }
 
-  var_1 = getent("control_room_back_volume", "targetname");
+  var_1 = getEnt("control_room_back_volume", "targetname");
 
   if(!level.player istouching(var_1)) {
     var_2 = maps\_utility::array_spawn_targetname("control_room_enemies_wave_3", 1);
@@ -475,7 +475,7 @@ control_room_combat() {
 
   common_scripts\utility::flag_set("control_room_three_left");
   level.control_room_enemies = maps\_utility::array_removedead_or_dying(level.control_room_enemies);
-  var_1 = getent("control_room_lower_volume", "targetname");
+  var_1 = getEnt("control_room_lower_volume", "targetname");
 
   foreach(var_4 in level.control_room_enemies) {
     var_4 maps\_utility::set_fixednode_false();
@@ -534,7 +534,7 @@ control_room_enemy_setup() {
     self.ignoreall = 0;
     common_scripts\utility::flag_wait("start_control_room_combat");
     wait(randomfloatrange(0.3, 1.0));
-    var_0 = common_scripts\utility::getstruct("rooftop_rpg_magicbullet_start", "targetname");
+    var_0 = common_scripts\utility::getStruct("rooftop_rpg_magicbullet_start", "targetname");
     var_1 = self gettagorigin("j_head");
     magicbullet(level.tower_redshirt.weapon, var_0.origin, var_1);
     wait 0.3;
@@ -547,7 +547,7 @@ control_room_enemy_setup() {
     maps\_utility::stop_magic_bullet_shield();
     self.ignoreall = 1;
     maps\_utility::set_fixednode_false();
-    var_2 = getent("control_room_lower_volume", "targetname");
+    var_2 = getEnt("control_room_lower_volume", "targetname");
     self setgoalvolumeauto(var_2);
     self waittill("goal");
     self.ignoreall = 0;
@@ -559,7 +559,7 @@ control_room_enemy_setup() {
     self.ignoreme = 0;
     self.ignoreall = 1;
     maps\_utility::set_fixednode_false();
-    var_2 = getent("control_room_lower_volume", "targetname");
+    var_2 = getEnt("control_room_lower_volume", "targetname");
     self setgoalvolumeauto(var_2);
     self waittill("goal");
     self.ignoreall = 0;
@@ -573,14 +573,14 @@ control_room_enemy_setup() {
     wait 1.25;
     self.ignoreall = 1;
     maps\_utility::set_fixednode_false();
-    var_2 = getent("control_room_lower_volume", "targetname");
+    var_2 = getEnt("control_room_lower_volume", "targetname");
     self setgoalvolumeauto(var_2);
     self waittill("goal");
     self.ignoreall = 0;
   }
 
   common_scripts\utility::flag_wait("player_landed");
-  var_2 = getent("control_room_upper_volume", "targetname");
+  var_2 = getEnt("control_room_upper_volume", "targetname");
 
   if(self istouching(var_2)) {
     wait(randomfloatrange(0.3, 1.5));
@@ -609,7 +609,7 @@ control_room_enemies_upper_setup() {
   common_scripts\utility::flag_wait_any("control_room_three_left", "player_leaving_control_room");
   self.ignoreall = 1;
   wait(randomfloatrange(0.3, 0.8));
-  var_0 = getent("upper_delete_volume", "targetname");
+  var_0 = getEnt("upper_delete_volume", "targetname");
   self setgoalvolumeauto(var_0);
 
   for(;;) {
@@ -620,7 +620,7 @@ control_room_enemies_upper_setup() {
     wait 0.05;
   }
 
-  var_0 = getent("upper_volume", "targetname");
+  var_0 = getEnt("upper_volume", "targetname");
 
   if(level.player istouching(var_0)) {
     self.ignoreall = 0;
@@ -688,10 +688,10 @@ sat_view_spawn_ally_choppers() {
   level.tower_redshirt thread allies_ride_chopper(level.ally_littlebird_1, "ghost2_start_firing");
   level.ally_littlebird_1 thread ally_chopper_unload();
   level.ally_littlebird_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("ally_littlebird_2");
-  var_0 = getent("air_strip_secured_delete_volume_1", "targetname");
+  var_0 = getEnt("air_strip_secured_delete_volume_1", "targetname");
   level.ally_littlebird_2 thread victory_choppers_land(var_0);
   level.ally_littlebird_3 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("ally_littlebird_3");
-  var_0 = getent("air_strip_secured_delete_volume_2", "targetname");
+  var_0 = getEnt("air_strip_secured_delete_volume_2", "targetname");
   level.ally_littlebird_3 thread victory_choppers_land(var_0);
 }
 
@@ -714,7 +714,7 @@ tower_redshirt_setup() {
 
 allies_ride_chopper(var_0, var_1) {
   if(self.animname == "hesh") {
-    self linkto(var_0, "tag_detach_left", (0, 0, 0), (0, 0, 0));
+    self linkTo(var_0, "tag_detach_left", (0, 0, 0), (0, 0, 0));
     var_0 thread maps\_anim::anim_loop_solo(self, "little_bird_casual_idle_hesh", "stop_loop", "tag_detach_left");
 
     while(!isDefined(level.cinematic_over)) {
@@ -741,13 +741,13 @@ allies_ride_chopper(var_0, var_1) {
 
     self waittillmatch("single anim", "end");
     var_3 = getnode("ghost1_control_room_node", "targetname");
-    maps\_utility::set_goalradius(16);
+    maps\_utility::set_goalRadius(16);
     self setgoalnode(var_3);
     maps\_utility::set_fixednode_true();
     self waittill("goal");
     maps\_utility::set_fixednode_false();
   } else {
-    self linkto(var_0, "tag_detach_right", (0, 0, 0), (0, 0, 0));
+    self linkTo(var_0, "tag_detach_right", (0, 0, 0), (0, 0, 0));
     var_0 thread maps\_anim::anim_loop_solo(self, "little_bird_casual_idle_merrick", "stop_loop", "tag_detach_right");
     common_scripts\utility::flag_wait(var_1);
     var_0 notify("stop_loop");

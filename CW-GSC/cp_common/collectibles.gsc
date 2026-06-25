@@ -153,7 +153,7 @@ function function_293d81b4(UnlockType = 0, key) {
 
 function function_c57acbc9(var_2a51713, value = 1) {
   assert(isDefined(var_2a51713));
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(isPlayer(player));
   player stats::set_stat(#"collectibles", var_2a51713 - 1, value);
   uploadstats(player);
@@ -161,7 +161,7 @@ function function_c57acbc9(var_2a51713, value = 1) {
 
 function function_ab921f3d(var_2a51713) {
   assert(isDefined(var_2a51713));
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(isPlayer(player));
 
   if(isPlayer(player)) {
@@ -175,7 +175,7 @@ function function_ab921f3d(var_2a51713) {
 function function_316c48a3(var_d13a0347, var_28c9f917, var_bfb1faa4 = 1) {
   assert(isDefined(var_d13a0347));
   assert(isDefined(var_28c9f917));
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(isPlayer(player));
 
   if(var_bfb1faa4 == function_1fe63475(var_d13a0347, var_28c9f917)) {
@@ -190,7 +190,7 @@ function function_316c48a3(var_d13a0347, var_28c9f917, var_bfb1faa4 = 1) {
 function function_1fe63475(var_d13a0347, var_28c9f917) {
   assert(isDefined(var_d13a0347));
   assert(isDefined(var_28c9f917));
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(isPlayer(player));
   isunlocked = is_true(player stats::get_stat(#"mapdata", var_d13a0347, #"evidence", var_28c9f917));
   return isunlocked;
@@ -199,7 +199,7 @@ function function_1fe63475(var_d13a0347, var_28c9f917) {
 function function_ee216b9e(var_d13a0347, var_28c9f917) {
   assert(isDefined(var_d13a0347));
   assert(isDefined(var_28c9f917));
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(isPlayer(player));
   isnew = is_true(player stats::get_stat(#"mapdata", var_d13a0347, #"hash_42b984266100b32", var_28c9f917));
   return isnew;
@@ -208,7 +208,7 @@ function function_ee216b9e(var_d13a0347, var_28c9f917) {
 function function_55fb73ea(var_d13a0347, var_28c9f917) {
   assert(isDefined(var_d13a0347));
   assert(isDefined(var_28c9f917));
-  player = getplayers()[0];
+  player = getPlayers()[0];
   assert(isPlayer(player));
 
   if(!function_ee216b9e(var_d13a0347, var_28c9f917)) {

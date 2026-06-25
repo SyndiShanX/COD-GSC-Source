@@ -135,7 +135,7 @@ set_scanner_state_scan(var_0, var_1) {
   level.drill setthreatbiasgroup("drill");
   level.drill setCanDamage(1);
   level.drill makeunusable();
-  level.drill sethintstring("");
+  level.drill setHintString("");
   level.drill.threatbias = -3000;
   level.drill scriptmodelplayanim("alien_drill_scan_loop");
   level.drill thread sfx_scanner_on(level.drill);
@@ -293,7 +293,7 @@ obelisk_damage_listener(var_0, var_1, var_2, var_3) {
 
 spawn_sfx_and_play(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_origin", var_0);
-  var_4 linkto(var_1);
+  var_4 linkTo(var_1);
   var_4 thread play_sfx(var_4, var_2, var_3);
   return var_4;
 }

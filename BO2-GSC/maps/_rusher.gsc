@@ -57,7 +57,7 @@ rush(endon_flag, timeout) {
   player = get_closest_player(self.origin);
   self.favoriteenemy = player;
   self.rushing_goalent = spawn("script_origin", player.origin);
-  self.rushing_goalent linkto(player);
+  self.rushing_goalent linkTo(player);
   self thread keep_rushing_player();
   self thread rusher_yelling();
 

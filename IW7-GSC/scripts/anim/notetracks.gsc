@@ -733,7 +733,7 @@ registernotetracks() {
                               self.rocketlauncherammo setModel("projectile_rpg7");
                             }
 
-                            self.rocketlauncherammo linkto(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
+                            self.rocketlauncherammo linkTo(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
                             thread handlerocketlauncherammoondeath();
                           }
 
@@ -829,7 +829,7 @@ registernotetracks() {
                                 break;
 
                               case "stop anim":
-                                scripts\sp\utility::anim_stopanimscripted();
+                                scripts\sp\utility::anim_stopanimScripted();
                                 return var_0;
 
                               case "break glass":
@@ -1066,7 +1066,7 @@ registernotetracks() {
                               if(self.unittype == "c8") {
                                 if(!isDefined(self.var_6BC7)) {
                                   self.var_6BC7 = spawn("script_origin", self.origin);
-                                  self.var_6BC7 linkto(self);
+                                  self.var_6BC7 linkTo(self);
                                 }
 
                                 self.var_6BC7 playsurfacesound(var_6, var_2);
@@ -1095,7 +1095,7 @@ registernotetracks() {
                                 var_8 = 900;
                               }
 
-                              self playrumbleonentity(var_7);
+                              self playRumbleOnEntity(var_7);
                               screenshake(self.origin, var_9, var_9, var_9, 0.3, 0, -1, var_8, 5, 0.2, 2);
                               var_10 = self gettagorigin(var_3);
                               var_11 = self.angles;
@@ -1106,7 +1106,7 @@ registernotetracks() {
                               if(!level.player isjumping() && distancesquared(level.player.origin, var_10) <= squared(var_13)) {
                                 level.player dodamage(level.player.maxhealth * 0.5, var_10, self);
                                 level.player viewkick(1, var_10, 0);
-                                var_14 = vectornormalize(level.player.origin - var_10);
+                                var_14 = vectorNormalize(level.player.origin - var_10);
                                 level.player setvelocity(150 * var_14);
                               }
                             }
@@ -1253,7 +1253,7 @@ registernotetracks() {
 
                             var_6 = 0;
                             if(isalive(self.enemy) && issentient(self.enemy) && self canshootenemy()) {
-                              var_7 = vectornormalize(self.enemy getEye() - var_3);
+                              var_7 = vectorNormalize(self.enemy getEye() - var_3);
                               if(vectordot(var_4, var_7) > cos(var_5)) {
                                 var_6 = 1;
                               }

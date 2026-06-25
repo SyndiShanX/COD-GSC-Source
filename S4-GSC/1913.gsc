@@ -363,7 +363,7 @@ _id_E14A(var_0, var_1) {
   var_3 setModel(scripts\engine\utility::random(var_2));
   var_4 = 100;
   var_5 = getgroundposition(var_1.origin, 4);
-  var_3 moveto(var_5 + (0, 0, 1), 0.25);
+  var_3 moveTo(var_5 + (0, 0, 1), 0.25);
 
   foreach(var_7 in level._id_3182) {
     if(distancesquared(var_7.origin, var_3.origin) < 100) {

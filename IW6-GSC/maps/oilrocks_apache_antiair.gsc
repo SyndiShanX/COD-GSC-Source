@@ -38,13 +38,13 @@ apache_chase_allies_apache() {
 
 apache_chase_ally_apache_think() {
   var_0 = maps\oilrocks_apache_code::get_apache_ally_id();
-  var_1 = common_scripts\utility::getstruct("apache_chase_ally_path_start_0" + var_0, "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("apache_chase_ally_path_start_0" + var_0, "script_noteworthy");
   maps\_vehicle::vehicle_paths(var_1);
 }
 
 apache_chase_enemies() {
   var_0 = ["apache_gunboats_main_area", "apache_chase_gaz_road", "apache_chase_gunboat_hvt"];
-  getent("apache_chase_gunboat_hvt", "targetname").script_vehicle_selfremove = 1;
+  getEnt("apache_chase_gunboat_hvt", "targetname").script_vehicle_selfremove = 1;
 
   foreach(var_2 in var_0) {
     maps\_utility::array_spawn_function_targetname(var_2, ::apache_chase_enemies_turret_think_delay);
@@ -110,5 +110,5 @@ apache_chase_enemies_turret_think_delay() {
 apache_chase_ally_blackhawk_think() {
   wait 5.0;
   var_0 = maps\oilrocks_apache_code::get_blackhawk_ally();
-  var_0 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct("path_blackhawk_chase", "script_noteworthy"));
+  var_0 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct("path_blackhawk_chase", "script_noteworthy"));
 }

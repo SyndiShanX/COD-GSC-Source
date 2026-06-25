@@ -78,6 +78,6 @@ locked_crafting_table_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
 function_b334fc71(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!function_65b9eb0f(localclientnum)) {
-    self playrumbleonentity(localclientnum, #"hash_2be72209069697d0");
+    self playRumbleOnEntity(localclientnum, #"hash_2be72209069697d0");
   }
 }

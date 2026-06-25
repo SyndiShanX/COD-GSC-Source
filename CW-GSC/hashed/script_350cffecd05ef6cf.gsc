@@ -424,10 +424,10 @@ function function_11463552() {
   self notify("1ed5031487f7073d");
   self endon("1ed5031487f7073d");
   level clientfield::set("banner_eventplayer", 0);
-  var_637c4df = getent("room_of_fate_shaft_trigger", "targetname");
+  var_637c4df = getEnt("room_of_fate_shaft_trigger", "targetname");
   result = var_637c4df waittill(#"trigger");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.doa.vehicle)) {
       player notify(#"hash_279998c5df86c04d");
       continue;
@@ -442,7 +442,7 @@ function function_11463552() {
 
   util::wait_network_frame();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread namespace_7f5aeb59::turnplayershieldon(0);
 
     if(player === result.activator) {
@@ -453,12 +453,12 @@ function function_11463552() {
       player namespace_7f5aeb59::function_513831e1();
     }
 
-    player setorigin(var_637c4df.origin);
+    player setOrigin(var_637c4df.origin);
   }
 
   objective_setstate(12, "invisible");
   level util::set_lighting_state(3, 0);
-  var_b01b0395 = getent("room_of_fate_trigger", "targetname");
+  var_b01b0395 = getEnt("room_of_fate_trigger", "targetname");
   result = var_b01b0395 waittill(#"trigger");
   level flag::set("doa_rof_visited");
   var_7f432780 = array::randomize(struct::get_array("room_of_fate_origin", "targetname"));
@@ -569,7 +569,7 @@ function function_11463552() {
     }
 
     if(isDefined(var_7f432780[i].model)) {
-      var_7f432780[i].model moveto(var_7f432780[i].model.origin + (0, 0, 1500), 1);
+      var_7f432780[i].model moveTo(var_7f432780[i].model.origin + (0, 0, 1500), 1);
       var_7f432780[i].model waittill(#"movedone");
 
       if(isDefined(var_7f432780[i].model)) {
@@ -588,7 +588,7 @@ function function_11463552() {
 function function_e4867f1d(fate, roj = 0) {
   self endon(#"death");
   level endon(#"hash_60341577c9ac6277");
-  self moveto(self.dest, 1);
+  self moveTo(self.dest, 1);
   self thread namespace_ec06fe4a::function_d55f042c(level, "game_over");
   wait 0.9;
   self namespace_83eb6304::function_3ecfde67("fate_landing");
@@ -775,7 +775,7 @@ function function_41d66855(var_419d3eb7 = 0) {
     }
 
     if(isDefined(var_7f432780[i].model)) {
-      var_7f432780[i].model moveto(var_7f432780[i].model.origin + (0, 0, 1500), 1);
+      var_7f432780[i].model moveTo(var_7f432780[i].model.origin + (0, 0, 1500), 1);
       var_7f432780[i].model waittill(#"movedone");
 
       if(isDefined(var_7f432780[i].model)) {

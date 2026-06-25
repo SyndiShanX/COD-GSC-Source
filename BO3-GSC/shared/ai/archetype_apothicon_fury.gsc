@@ -379,7 +379,7 @@ function private runbamfreadjustmentanalysis(entity, mocompanim, mocompanimblend
       record3dtext((("" + entity.animationadjustmentinfoz2.stepsize) + "") + adjustduration, landposonground, (1, 0.5, 0), "");
     }
     meleeendposition = (meleeendposition[0], meleeendposition[1], landpos[2]);
-    xydirection = vectornormalize(meleeendposition - landpos);
+    xydirection = vectorNormalize(meleeendposition - landpos);
     xydistance = distance(meleeendposition, landpos);
     entity.animationadjustmentinfoxy = new animationadjustmentinfoxy();
     entity.animationadjustmentinfoxy.starttime = starttime;
@@ -742,8 +742,8 @@ function private apothiconzombieeligibleforknockdown(zombie, thrasher, predicted
   enemy_vec = zombie.origin - origin;
   enemy_yaw_vec = (enemy_vec[0], enemy_vec[1], 0);
   facing_yaw_vec = (facing_vec[0], facing_vec[1], 0);
-  enemy_yaw_vec = vectornormalize(enemy_yaw_vec);
-  facing_yaw_vec = vectornormalize(facing_yaw_vec);
+  enemy_yaw_vec = vectorNormalize(enemy_yaw_vec);
+  facing_yaw_vec = vectorNormalize(facing_yaw_vec);
   enemy_dot = vectordot(facing_yaw_vec, enemy_yaw_vec);
   if(enemy_dot < 0) {
     return false;
@@ -755,11 +755,11 @@ function apothiconknockdownzombie(entity, zombie) {
   zombie.knockdown = 1;
   zombie.knockdown_type = "knockdown_shoved";
   zombie_to_thrasher = entity.origin - zombie.origin;
-  zombie_to_thrasher_2d = vectornormalize((zombie_to_thrasher[0], zombie_to_thrasher[1], 0));
+  zombie_to_thrasher_2d = vectorNormalize((zombie_to_thrasher[0], zombie_to_thrasher[1], 0));
   zombie_forward = anglesToForward(zombie.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(zombie.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_thrasher_2d, zombie_forward_2d);
   if(dot >= 0.5) {
     zombie.knockdown_direction = "front";
@@ -957,7 +957,7 @@ function private calculatejukeinfo(entity) {
   if(isDefined(entity.jukeinfo)) {
     return entity.jukeinfo;
   }
-  directiontoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  directiontoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forwarddir = anglesToForward(entity.angles);
   possiblejukes = [];
   jukevaliddistancetype = [];

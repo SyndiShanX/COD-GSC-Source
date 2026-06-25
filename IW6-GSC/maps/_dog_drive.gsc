@@ -170,7 +170,7 @@ dog_drive_indirect(var_0) {
   var_0 pushplayer(1);
   var_3 = spawn("script_model", (0, 0, 0));
   var_3 setModel("tag_player");
-  var_3 linkto(var_0, "tag_camera", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_0, "tag_camera", (0, 0, 0), (0, 0, 0));
   var_0.camera_tag = var_3;
 
   if(!var_1) {
@@ -185,7 +185,7 @@ dog_drive_indirect(var_0) {
   var_0 setdogautoattackwhendriven(0);
   var_3 playLoopSound("ambient_dog_camera");
   var_4 = var_0 common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(var_0, "tag_camera", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0, "tag_camera", (0, 0, 0), (0, 0, 0));
   var_0.cam_sound_sources = [];
   var_0.cam_sound_sources = common_scripts\utility::array_add(var_0.cam_sound_sources, var_4);
   thread dog_wait_for_attack(var_0);
@@ -876,7 +876,7 @@ check_for_enemies(var_0, var_1, var_2) {
 
   if(isDefined(var_0.favoriteenemy)) {
     var_7 = anglesToForward(var_5);
-    var_8 = vectornormalize(var_0.favoriteenemy.origin - var_0.origin);
+    var_8 = vectorNormalize(var_0.favoriteenemy.origin - var_0.origin);
     var_9 = vectordot(var_7, var_8);
 
     if(var_9 > 0.8 || distance(var_0.origin, var_0.favoriteenemy.origin) < 64) {

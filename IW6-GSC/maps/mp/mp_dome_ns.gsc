@@ -87,7 +87,7 @@ anim_precache() {
 }
 
 alien_weapon_setup() {
-  trigger = GetEnt("alien_weapon_trigger", "targetname");
+  trigger = getEnt("alien_weapon_trigger", "targetname");
 
   thread alien_weapon_trigger_watcher(trigger);
 }
@@ -95,11 +95,11 @@ alien_weapon_setup() {
 alien_weapon_trigger_watcher(trigger) {
   trigger MakeUnusable();
   flag_wait("crane_usable");
-  platform_origin = GetEnt("platform_origin", "targetname");
+  platform_origin = getEnt("platform_origin", "targetname");
   trigger MakeUsable();
-  trigger EnableLinkTo();
-  trigger LinkTo(platform_origin);
-  trigger SetHintString(&"MP_DOME_NS_GET_ALIEN_GUN");
+  trigger EnablelinkTo();
+  trigger linkTo(platform_origin);
+  trigger setHintString(&"MP_DOME_NS_GET_ALIEN_GUN");
 
   while(1) {
     if(level.remaining_alien_weapons == 0) {
@@ -110,47 +110,47 @@ alien_weapon_trigger_watcher(trigger) {
     triggerer maps\mp\mp_alien_weapon::give_alien_weapon();
   }
 
-  alien_gun_model = GetEnt("alien_gun_model", "targetname");
+  alien_gun_model = getEnt("alien_gun_model", "targetname");
   alien_gun_model hide();
 
   trigger MakeUnusable();
-  trigger SetHintString("");
+  trigger setHintString("");
 }
 
 #using_animtree("animated_props_dlc2");
 crane_platform() {
   thread crane_available_check();
 
-  test_bed = GetEnt("het_bed_proxy", "targetname");
+  test_bed = getEnt("het_bed_proxy", "targetname");
   test_bed delete();
 
   cooldown_time = 2;
   level.platform_lights = [];
 
-  platform_origin = GetEnt("platform_origin", "targetname");
-  platform_model = GetEnt("moving_platform_model", "targetname");
-  alien_gun_model = GetEnt("alien_gun_model", "targetname");
-  platform_sfx_origin = GetEnt("platform_sfx_origin", "targetname");
-  platform_death_trigger = GetEnt("platform_death_trigger", "targetname");
-  crane = GetEnt("dome_crane", "targetname");
+  platform_origin = getEnt("platform_origin", "targetname");
+  platform_model = getEnt("moving_platform_model", "targetname");
+  alien_gun_model = getEnt("alien_gun_model", "targetname");
+  platform_sfx_origin = getEnt("platform_sfx_origin", "targetname");
+  platform_death_trigger = getEnt("platform_death_trigger", "targetname");
+  crane = getEnt("dome_crane", "targetname");
   platforms = getEntArray("moving_platform", "targetname");
 
   platforms[platforms.size] = platform_model;
   platforms[platforms.size] = alien_gun_model;
 
-  side_blockerB = GetEnt("side_blockerB", "targetname");
+  side_blockerB = getEnt("side_blockerB", "targetname");
 
-  arm_base_jnt_collision = GetEnt("arm_base_jnt_collision", "targetname");
-  arm_mid_jnt_collision = GetEnt("arm_mid_jnt_collision", "targetname");
-  arm_end_jnt_collision = GetEnt("arm_end_jnt_collision", "targetname");
-  operators_cab_jnt_collision = GetEnt("operators_cab_jnt_collision", "targetname");
-  hook_jnt_collision = GetEnt("hook_jnt_collision", "targetname");
+  arm_base_jnt_collision = getEnt("arm_base_jnt_collision", "targetname");
+  arm_mid_jnt_collision = getEnt("arm_mid_jnt_collision", "targetname");
+  arm_end_jnt_collision = getEnt("arm_end_jnt_collision", "targetname");
+  operators_cab_jnt_collision = getEnt("operators_cab_jnt_collision", "targetname");
+  hook_jnt_collision = getEnt("hook_jnt_collision", "targetname");
 
-  arm_base_jnt_collision LinkTo(crane, "arm_base_jnt");
-  arm_mid_jnt_collision LinkTo(crane, "arm_mid_jnt");
-  arm_end_jnt_collision LinkTo(crane, "arm_end_jnt");
-  operators_cab_jnt_collision LinkTo(crane, "operators_cab_jnt");
-  hook_jnt_collision LinkTo(crane, "hook_jnt");
+  arm_base_jnt_collision linkTo(crane, "arm_base_jnt");
+  arm_mid_jnt_collision linkTo(crane, "arm_mid_jnt");
+  arm_end_jnt_collision linkTo(crane, "arm_end_jnt");
+  operators_cab_jnt_collision linkTo(crane, "operators_cab_jnt");
+  hook_jnt_collision linkTo(crane, "hook_jnt");
 
   arm_base_jnt_collision.destroyAirdropOnCollision = true;
   arm_mid_jnt_collision.destroyAirdropOnCollision = true;
@@ -165,17 +165,17 @@ crane_platform() {
   hook_jnt_collision.no_moving_platfrom_death = true;
 
   gate_watchers = getEntArray("gate_watcher", "targetname");
-  crane_occupied_watcher = GetEnt("crane_occupied_watcher", "targetname");
+  crane_occupied_watcher = getEnt("crane_occupied_watcher", "targetname");
   foreach(gate_watcher in gate_watchers) {
-    gate_watcher EnableLinkTo();
-    gate_watcher LinkTo(platform_origin);
+    gate_watcher EnablelinkTo();
+    gate_watcher linkTo(platform_origin);
   }
 
-  platform_death_trigger EnableLinkTo();
-  platform_death_trigger LinkTo(platform_origin);
+  platform_death_trigger EnablelinkTo();
+  platform_death_trigger linkTo(platform_origin);
 
-  crane_occupied_watcher EnableLinkTo();
-  crane_occupied_watcher LinkTo(platform_origin);
+  crane_occupied_watcher EnablelinkTo();
+  crane_occupied_watcher linkTo(platform_origin);
   thread disable_drones_watcher(crane_occupied_watcher);
 
   waitframe();
@@ -186,20 +186,20 @@ crane_platform() {
   wait 1;
 
   foreach(platform in platforms) {
-    platform LinkTo(platform_origin, "tag_origin");
+    platform linkTo(platform_origin, "tag_origin");
     platform.destroyAirdropOnCollision = true;
   }
-  platform_sfx_origin LinkTo(platform_origin, "tag_origin");
+  platform_sfx_origin linkTo(platform_origin, "tag_origin");
 
   side_blockerB Solid();
   side_blockerB ConnectPaths();
   side_blockerB NotSolid();
 
-  crane_gate_blocker = GetEnt("crane_gate_blocker", "targetname");
-  crane_gate_blocker LinkTo(platform_origin);
+  crane_gate_blocker = getEnt("crane_gate_blocker", "targetname");
+  crane_gate_blocker linkTo(platform_origin);
   crane_gate_blocker.no_moving_platfrom_death = true;
 
-  crane_audio_org = GetEnt("crane_audio_org", "targetname");
+  crane_audio_org = getEnt("crane_audio_org", "targetname");
 
   trip = 1;
 
@@ -212,13 +212,13 @@ crane_platform() {
   crane_gate_blocker NotSolid();
 
   wait 0.1;
-  crane_gate_blocker LinkTo(platform_origin);
+  crane_gate_blocker linkTo(platform_origin);
 
-  triggerA = GetEnt("platform_toggle_triggerA", "targetname");
-  triggerA SetHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
+  triggerA = getEnt("platform_toggle_triggerA", "targetname");
+  triggerA setHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
   triggerA MakeUsable();
-  triggerB = GetEnt("platform_toggle_triggerB", "targetname");
-  triggerB SetHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
+  triggerB = getEnt("platform_toggle_triggerB", "targetname");
+  triggerB setHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
   triggerB MakeUnusable();
 
   thread gate_watcher(gate_watchers, triggerA);
@@ -281,7 +281,7 @@ crane_platform() {
 
     if(trip == 1) {
       side_blockerB Solid();
-      side_blockerB DisConnectPaths();
+      side_blockerB disconnectPaths();
       side_blockerB NotSolid();
 
       sfx_time = anim_length - time;
@@ -298,10 +298,10 @@ crane_platform() {
     wait cooldown_time;
 
     if(trip == 1) {
-      triggerB SetHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
+      triggerB setHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
       triggerB MakeUsable();
     } else {
-      triggerA SetHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
+      triggerA setHintString(&"MP_DOME_NS_ACTIVATE_CRANE");
       triggerA MakeUsable();
     }
 
@@ -407,9 +407,9 @@ crane_gate_move(crane_gate_blocker, platform_origin, direction) {
 }
 
 crane_available_check() {
-  platform_model = GetEnt("moving_platform_model", "targetname");
-  platform_origin = GetEnt("platform_origin", "targetname");
-  crane = GetEnt("dome_crane", "targetname");
+  platform_model = getEnt("moving_platform_model", "targetname");
+  platform_origin = getEnt("platform_origin", "targetname");
+  crane = getEnt("dome_crane", "targetname");
 
   level.crane_targets = 3;
   thread crane_target_setup("crane_target_1", "arm_base_jnt", 5);
@@ -513,10 +513,10 @@ man_cage_button_fx() {
 }
 
 crane_target_setup(targetname, joint, exploderID) {
-  crane_target = GetEnt(targetname, "targetname");
-  crane = GetEnt("dome_crane", "targetname");
+  crane_target = getEnt(targetname, "targetname");
+  crane = getEnt("dome_crane", "targetname");
 
-  crane_target LinkTo(crane, joint);
+  crane_target linkTo(crane, joint);
 
   if(level.gameType == "oic" || level.gameType == "gun" || level.gameType == "infect" || level.gameType == "horde" || level.gameType == "sotf" || level.gameType == "sotf_ffa" || isMLGMatch()) {
     crane_target delete();
@@ -551,7 +551,7 @@ crane_damage_manager(hitEnt) {
 }
 
 clean_tube_watcher() {
-  trigger = GetEnt("trigger_clean_tube_spray", "targetname");
+  trigger = getEnt("trigger_clean_tube_spray", "targetname");
   while(1) {
     agents_in_trigger = [];
 
@@ -611,8 +611,8 @@ door_trigger_watcher(trigger) {
 }
 
 always_open_door() {
-  door_model_r = GetEnt("door_open_right", "targetname");
-  door_model_l = GetEnt("door_open_left", "targetname");
+  door_model_r = getEnt("door_open_right", "targetname");
+  door_model_l = getEnt("door_open_left", "targetname");
   door_model_r ScriptModelPlayAnimDeltaMotion("mp_dome_ns_showerdoor_open_l");
   door_model_l ScriptModelPlayAnimDeltaMotion("mp_dome_ns_showerdoor_open_r");
 }
@@ -694,8 +694,8 @@ auto_door_manager(trigger) {
 
   closed = closed_right.origin;
 
-  left_door LinkTo(closed_left);
-  right_door LinkTo(closed_right);
+  left_door linkTo(closed_left);
+  right_door linkTo(closed_right);
 
   while(1) {
     trigger waittill("occupied");
@@ -703,8 +703,8 @@ auto_door_manager(trigger) {
     {
       left_door maps\mp\_movers::notify_moving_platform_invalid();
       right_door maps\mp\_movers::notify_moving_platform_invalid();
-      closed_left MoveTo(open_left.origin, .5);
-      closed_right MoveTo(open_right.origin, .5);
+      closed_left moveTo(open_left.origin, .5);
+      closed_right moveTo(open_right.origin, .5);
       door_animated_left ScriptModelPlayAnimDeltaMotion("mp_dome_ns_showerdoor_open_r");
       door_animated_right ScriptModelPlayAnimDeltaMotion("mp_dome_ns_showerdoor_open_l");
       door_animated_left playSound("scn_dome_ns_glass_door_open");
@@ -716,8 +716,8 @@ auto_door_manager(trigger) {
     trigger waittill("unoccupied");
 
     {
-      closed_left MoveTo(closed, .5);
-      closed_right MoveTo(closed, .5);
+      closed_left moveTo(closed, .5);
+      closed_right moveTo(closed, .5);
       door_animated_left ScriptModelPlayAnimDeltaMotion("mp_dome_ns_showerdoor_close_r");
       door_animated_right ScriptModelPlayAnimDeltaMotion("mp_dome_ns_showerdoor_close_l");
       door_animated_left playSound("scn_dome_ns_glass_door_close");

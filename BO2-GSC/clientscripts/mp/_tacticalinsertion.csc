@@ -11,7 +11,7 @@ init() {
   level._effect["tacticalInsertionFriendly"] = loadfx("misc/fx_equip_tac_insert_light_grn");
   level._effect["tacticalInsertionEnemy"] = loadfx("misc/fx_equip_tac_insert_light_red");
   level._client_flag_callbacks["scriptmover"][2] = ::spawned;
-  latlongstruct = getstruct("lat_long", "targetname");
+  latlongstruct = getStruct("lat_long", "targetname");
 
   if(isDefined(latlongstruct)) {
     mapx = latlongstruct.origin[0];

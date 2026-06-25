@@ -32,7 +32,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     if(charindexarray[0] == 2) {

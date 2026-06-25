@@ -86,7 +86,7 @@ main() {
   level.foley magic_bullet_shield();
   level.foley make_hero();
 
-  level.dunn = getent("dunn", "script_noteworthy");
+  level.dunn = getEnt("dunn", "script_noteworthy");
   assert(isAlive(level.dunn));
   level.dunn.animname = "dunn";
   level.dunn magic_bullet_shield();
@@ -126,7 +126,7 @@ main() {
   level.stryker thread stryker_threats_eliminated_dialog_2();
   level.stryker setVehicleLookAtText("Honey Badger", &"");
   level.stryker.missileAttractor = spawn("script_origin", level.stryker.origin + (0, 0, 70));
-  level.stryker.missileAttractor LinkTo(level.stryker);
+  level.stryker.missileAttractor linkTo(level.stryker);
   missile_CreateAttractorEnt(level.stryker.missileAttractor, 10000, 3000);
   thread stryker_run_over_player_monitor();
 
@@ -204,7 +204,7 @@ undo_culldist_mansion() {
 
 activate_second_half_destructibles() {
   wait 1;
-  volume = getent("volume_second_half", "targetname");
+  volume = getEnt("volume_second_half", "targetname");
   volume activate_destructibles_in_volume();
   volume activate_interactives_in_volume();
 }
@@ -346,7 +346,7 @@ startCheckpoint() {
 
   activate_trigger("checkpoint_vision_trigger", "script_noteworthy");
 
-  getent("friendlyspawn_trigger_checkpoint", "script_noteworthy") notify("trigger", level.player);
+  getEnt("friendlyspawn_trigger_checkpoint", "script_noteworthy") notify("trigger", level.player);
 
   movePlayerToStartPoint("playerstart_checkpoint");
   thread objective_aa_guns();
@@ -374,7 +374,7 @@ startGolf() {
     guy forceTeleport(locations[i].origin, locations[i].angles);
   }
 
-  trig = getent("start_golf_friendly_trigger", "script_noteworthy");
+  trig = getEnt("start_golf_friendly_trigger", "script_noteworthy");
   trig notify("trigger", level.player);
 
   exploder("tanker_explosion_tall");
@@ -404,7 +404,7 @@ startCrash() {
     guy setGoalPos(locations[i].origin);
   }
 
-  trig = getent("start_crash_friendly_respawn_trigger", "script_noteworthy");
+  trig = getEnt("start_crash_friendly_respawn_trigger", "script_noteworthy");
   trig notify("trigger", level.player);
 
   thread objective_brookmere_road();
@@ -428,8 +428,8 @@ objective_laze_golfcourse() {
   thread objective_brookmere_road();
 
   objective_position(0, (0, 0, 0));
-  objective_additionalposition(0, 0, getent("obj_location_stealth_0", "targetname").origin);
-  objective_additionalposition(0, 1, getent("obj_location_stealth_1", "targetname").origin);
+  objective_additionalposition(0, 0, getEnt("obj_location_stealth_0", "targetname").origin);
+  objective_additionalposition(0, 1, getEnt("obj_location_stealth_1", "targetname").origin);
 
   thread laser_golf_hint_print();
 
@@ -450,7 +450,7 @@ objective_brookmere_road() {
 
   thread brookmere_road_dialog();
 
-  location = getent("objective_brookmere_location", "targetname");
+  location = getEnt("objective_brookmere_location", "targetname");
   objective_add(1, "current", &"ARCADIA_OBJECTIVE_BROOKMERE", location.origin);
 
   flag_wait("brookmere_house");
@@ -461,7 +461,7 @@ objective_brookmere_road() {
 }
 
 objective_intel() {
-  location = getent("objective_intel_location", "targetname");
+  location = getEnt("objective_intel_location", "targetname");
   objective_add(2, "current", &"ARCADIA_OBJECTIVE_INTEL", location.origin);
 }
 
@@ -705,7 +705,7 @@ fridge_guy() {
   guy disable_surprise();
   thread fridge_guy_death_wait(guy);
 
-  fridge = getent("fridge", "targetname");
+  fridge = getEnt("fridge", "targetname");
   assert(isDefined(fridge));
   fridge.animname = "fridge";
   fridge setAnimTree();
@@ -794,7 +794,7 @@ level_ending_sequence() {
   hallnode_foley = getnode("hallnode_foley", "targetname");
   hallnode_dunn = getnode("hallnode_dunn", "targetname");
   node_foley = getnode("ending_node_foley", "targetname");
-  node_dunn = getent("ending_node_dunn", "targetname");
+  node_dunn = getEnt("ending_node_dunn", "targetname");
   node_dunn_guard = getnode("node_dunn_guard", "targetname");
 
   thread ending_sequence_deadguy("hvi_spawner", "ending_node_hvi", "panicroom_hvi", "ending_pose");
@@ -864,10 +864,10 @@ ending_sequence_deadguy(spawner_targetname, node_targetname, animName, anime) {
   assert(isDefined(animName));
   assert(isDefined(anime));
 
-  spawner = getent(spawner_targetname, "targetname");
+  spawner = getEnt(spawner_targetname, "targetname");
   assert(isDefined(spawner));
 
-  node = getent(node_targetname, "targetname");
+  node = getEnt(node_targetname, "targetname");
   assert(isDefined(node));
 
   guy = ending_sequence_deadguy_create(spawner);
@@ -947,10 +947,10 @@ level_ending_sequence_dialog() {
 }
 
 player_picks_up_briefcase() {
-  use_trig = getent("briefcase_trigger", "targetname");
+  use_trig = getEnt("briefcase_trigger", "targetname");
   use_trig setHintString(&"ARCADIA_PICK_UP_BRIEFCASE_HINT");
 
-  briefcase = getent("briefcase", "targetname");
+  briefcase = getEnt("briefcase", "targetname");
 
   use_trig trigger_off();
 

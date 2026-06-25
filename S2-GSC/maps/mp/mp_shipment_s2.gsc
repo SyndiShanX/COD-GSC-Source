@@ -57,7 +57,7 @@ animate_tanks() {
 
 movetriggerhurt() {
   var_00 = getEntArray("ball_out_of_bounds_triggers", "targetname");
-  var_01 = getent("trigger_hurt_moveto", "targetname");
+  var_01 = getEnt("trigger_hurt_moveto", "targetname");
   if(!isDefined(var_00) || !isDefined(var_01) || var_00.size == 0) {
     return;
   }

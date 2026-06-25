@@ -81,9 +81,9 @@ function function_5ea427bf(player) {
     }
   }
   if(isDefined(param1)) {
-    self sethintstring(str_msg, param1);
+    self setHintString(str_msg, param1);
   } else {
-    self sethintstring(str_msg);
+    self setHintString(str_msg);
   }
   return b_visible;
 }
@@ -124,7 +124,7 @@ function function_7448e472(e_target) {
           }
         } else if(self getammocount(level.var_c003f5b)) {
           if(self keeper_skull::function_3f3f64e9(e_target) && self keeper_skull::function_5fa274c1(e_target)) {
-            self playrumbleonentity("zm_island_skull_reveal");
+            self playRumbleOnEntity("zm_island_skull_reveal");
             n_count = 0;
             while(self util::ads_button_held()) {
               wait(1);
@@ -136,7 +136,7 @@ function function_7448e472(e_target) {
             if(n_count >= 2) {
               e_target.var_f0b65c0a = self;
               var_c2b47c7a = 1;
-              playsoundatposition("zmb_wpn_skullgun_discover", e_target.origin);
+              playSoundAtPosition("zmb_wpn_skullgun_discover", e_target.origin);
               self notify("skullweapon_revealed_location");
               self thread function_4aedb20b();
               foreach(player in level.players) {
@@ -198,9 +198,9 @@ function is_facing(target, n_tolerance = 0.707) {
     v_target = target;
   }
   var_7ef98cb2 = v_target - self.origin;
-  var_7ec36342 = vectornormalize(var_7ef98cb2);
+  var_7ec36342 = vectorNormalize(var_7ef98cb2);
   var_bedf3d47 = anglesToForward(self.angles);
-  var_c67c7281 = vectornormalize(var_bedf3d47);
+  var_c67c7281 = vectorNormalize(var_bedf3d47);
   n_dot = vectordot(var_7ec36342, var_c67c7281);
   return n_dot >= n_tolerance;
 }

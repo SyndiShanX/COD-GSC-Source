@@ -20,7 +20,7 @@ function geyser_player_setup_prone(localclientnum, oldval, newval, bnewent, bini
   player = getlocalplayers()[localclientnum];
   if(player getentitynumber() == self getentitynumber()) {
     if(newval) {
-      self playrumbleonentity(localclientnum, "slide_rumble");
+      self playRumbleOnEntity(localclientnum, "slide_rumble");
     } else {
       self stoprumble(localclientnum, "slide_rumble");
     }
@@ -43,9 +43,9 @@ function geyser_player_setup_prone(localclientnum, oldval, newval, bnewent, bini
     } else {
       self thread geyser_weapon_monitor(fake_player.fake_weapon);
     }
-    fake_player.fake_weapon linkto(fake_player, "tag_weapon_right");
+    fake_player.fake_weapon linkTo(fake_player, "tag_weapon_right");
     waitrealtime(0.016);
-    fake_player linkto(self, "tag_origin");
+    fake_player linkTo(self, "tag_origin");
     if(!isDefined(self.fake_player)) {
       self.fake_player = [];
     }
@@ -74,7 +74,7 @@ function geyser_player_setup_stand(localclientnum, oldval, newval, bnewent, bini
   player = getlocalplayers()[localclientnum];
   if(player getentitynumber() == self getentitynumber()) {
     if(newval) {
-      self playrumbleonentity(localclientnum, "slide_rumble");
+      self playRumbleOnEntity(localclientnum, "slide_rumble");
     } else {
       self stoprumble(localclientnum, "slide_rumble");
     }
@@ -97,10 +97,10 @@ function geyser_player_setup_stand(localclientnum, oldval, newval, bnewent, bini
     } else {
       self thread geyser_weapon_monitor(fake_player.fake_weapon);
     }
-    fake_player.fake_weapon linkto(fake_player, "tag_weapon_right");
+    fake_player.fake_weapon linkTo(fake_player, "tag_weapon_right");
     waitrealtime(0.016);
     fake_player.origin = self.origin;
-    fake_player linkto(self, "tag_origin");
+    fake_player linkTo(self, "tag_origin");
     if(!isDefined(self.fake_player)) {
       self.fake_player = [];
     }

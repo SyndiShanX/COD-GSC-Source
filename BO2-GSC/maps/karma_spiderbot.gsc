@@ -37,7 +37,7 @@ init_flags() {
 init_spawn_funcs() {}
 
 spiderbot_teleport(str_location) {
-  s_tp_spot = getstruct(str_location, "targetname");
+  s_tp_spot = getStruct(str_location, "targetname");
   level.vh_spiderbot.origin = s_tp_spot.origin;
   level.vh_spiderbot.angles = s_tp_spot.angles;
   level.vh_spiderbot useby(level.player);
@@ -72,7 +72,7 @@ skipto_gulliver() {
   a_m_fans = getEntArray("spiderbot_fan", "targetname");
   array_thread(a_m_fans, ::spin_fan);
   level thread fan_death();
-  level thread setup_proximity_scan_and_alarm(getent("trig_bug_zapper", "targetname"), "zapped", "spiderbot_end", 75);
+  level thread setup_proximity_scan_and_alarm(getEnt("trig_bug_zapper", "targetname"), "zapped", "spiderbot_end", 75);
   level thread gulliver_walkin();
   exploder(447);
 }
@@ -86,9 +86,9 @@ vents() {
   prep_spiderbot();
   level thread spiderbot_patrol();
   level thread run_scene_and_delete("scene_guard_loop_comp");
-  getent("destroyed_spider_bot", "targetname") hide();
+  getEnt("destroyed_spider_bot", "targetname") hide();
   level.player setstance("stand");
-  level.player setorigin(level.vh_spiderbot.origin);
+  level.player setOrigin(level.vh_spiderbot.origin);
   level.vh_spiderbot show();
   level.vh_spiderbot useby(level.player);
   level.vh_spiderbot makevehicleunusable();
@@ -112,11 +112,11 @@ vents() {
   run_scene_first_frame("planting_bombs");
   flag_wait("bomb_found");
   level thread run_scene_and_delete("planting_bombs");
-  level thread setup_proximity_scan_and_alarm(getent("trig_bug_zapper", "targetname"), "zapped", "spiderbot_end", 75);
-  getent("zapper_proximity_trigger", "targetname") thread zapper_proximity_warning_think();
+  level thread setup_proximity_scan_and_alarm(getEnt("trig_bug_zapper", "targetname"), "zapped", "spiderbot_end", 75);
+  getEnt("zapper_proximity_trigger", "targetname") thread zapper_proximity_warning_think();
   level thread zapper_power_box();
   set_objective(level.obj_enter_crc, undefined, "deactivate");
-  set_objective(level.obj_disable_zapper, getent("trig_zapper_power", "targetname"));
+  set_objective(level.obj_disable_zapper, getEnt("trig_zapper_power", "targetname"));
   flag_wait("bug_zapper_disabled");
   set_objective(level.obj_enter_crc, undefined, "reactivate");
   set_objective(level.obj_disable_zapper, undefined, "delete");
@@ -143,7 +143,7 @@ spiderbot_patrol() {
   ai_patrol.disableexits = 1;
   ai_patrol change_movemode("walk");
   trigger_wait("spiderbot_patrol_trigger");
-  ai_patrol set_goalradius(4);
+  ai_patrol set_goalRadius(4);
   ai_patrol set_goal_node(getnode("spiderbot_patrol_target", "targetname"));
   ai_patrol waittill("goal");
   ai_patrol delete();
@@ -163,8 +163,8 @@ gulliver() {
   maps\createart\karma_art::spiderbot_security_dof();
   level.player freezecontrols(1);
 
-  if(level.vh_spiderbot istouching(getent("spiderbot_vent_touch_trigger", "targetname"))) {
-    level.vh_spiderbot linkto(getent("crc_vent", "targetname"));
+  if(level.vh_spiderbot istouching(getEnt("spiderbot_vent_touch_trigger", "targetname"))) {
+    level.vh_spiderbot linkTo(getEnt("crc_vent", "targetname"));
     level.vh_spiderbot notsolid();
   }
 
@@ -173,7 +173,7 @@ gulliver() {
   level.player playSound("evt_spiderbot_jumpdown");
   level.player playSound("evt_spiderbot_land");
   level thread maps\_audio::switch_music_wait("KARMA_1_GULLIVER", 2);
-  getent("it_mgr_tablet", "targetname") delete();
+  getEnt("it_mgr_tablet", "targetname") delete();
   level.ai_gulliver thread gulliver_viewmodel_render_flag_set();
   run_scene_and_delete("it_mgr_surprise", 0.5);
 
@@ -216,7 +216,7 @@ spider_bot_light_off(ent, endon_string) {
 
 spider_bot_light_on(ent) {
   level.vh_spiderbot maps\_vehicle::lights_on();
-  getent("spiderbot_light_trigger", "targetname") thread spiderbot_light_trigger_think();
+  getEnt("spiderbot_light_trigger", "targetname") thread spiderbot_light_trigger_think();
 }
 
 prep_spiderbot() {
@@ -253,7 +253,7 @@ spin_fan() {
   }
 
   while(true) {
-    self rotateyaw(3600, 10.0);
+    self rotateYaw(3600, 10.0);
     wait 10.0;
   }
 }
@@ -276,7 +276,7 @@ suspicious_guys_leaving_pip() {
 
 zapper_power_box() {
   exploder(445);
-  t_zapper_field = getent("trig_bug_zapper", "targetname");
+  t_zapper_field = getEnt("trig_bug_zapper", "targetname");
   t_zapper_field thread zap_player();
   t_zapper_field playLoopSound("amb_spiderbot_trap_looper");
   audio_player_origin = t_zapper_field.origin;
@@ -288,7 +288,7 @@ zapper_power_box() {
   t_zapper_field notify("zapped");
   t_zapper_field delete();
   clientnotify("frcx");
-  playsoundatposition("amb_spiderbot_trap_off", (5754, -7475, -3334));
+  playSoundAtPosition("amb_spiderbot_trap_off", (5754, -7475, -3334));
   delete_exploder(445);
 }
 
@@ -512,9 +512,9 @@ spiderbot_dialog() {
   self say_dialog("sala_watch_the_gap_coming_0");
   self say_dialog("sala_ziggy_can_jump_acros_0");
   flag_wait("bomb_found");
-  level.bomb_planter1 = getent("bomb_planter1_ai", "targetname");
-  level.bomb_planter2 = getent("bomb_planter2_ai", "targetname");
-  level.bomb_planter3 = getent("bomb_planter3_ai", "targetname");
+  level.bomb_planter1 = getEnt("bomb_planter1_ai", "targetname");
+  level.bomb_planter2 = getEnt("bomb_planter2_ai", "targetname");
+  level.bomb_planter3 = getEnt("bomb_planter3_ai", "targetname");
   self say_dialog("sala_wait_0");
   self say_dialog("sala_what_are_they_doing_0");
   level.bomb_planter1 say_dialog("pmc1_hurry_it_up_0");
@@ -563,7 +563,7 @@ zapper_proximity_warning_activate(ent, str_endon) {
 zapper_proximity_warning_deactivate(ent, str_endon) {
   level endon("kill_zapper_proximity_warning");
   maps\_glasses::remove_visor_text("KARMA_ZAPPER_PROXIMITY_WARNING");
-  getent("zapper_proximity_trigger", "targetname") thread zapper_proximity_warning_think();
+  getEnt("zapper_proximity_trigger", "targetname") thread zapper_proximity_warning_think();
 }
 
 bug_zapper_done_dialog() {
@@ -574,8 +574,8 @@ bug_zapper_done_dialog() {
 it_manager_dialog() {
   level endon("gulliver_reached");
   ai_it_manager = get_ais_from_scene("it_mgr_walkin", "it_mgr");
-  s_security = getent("spiderbot_security_speaker", "targetname");
-  s_pmc = getent("spiderbot_pmc_speaker", "targetname");
+  s_security = getEnt("spiderbot_security_speaker", "targetname");
+  s_pmc = getEnt("spiderbot_pmc_speaker", "targetname");
   ai_it_manager say_dialog("supe_you_tell_him_0");
   s_security say_dialog("tech_i_told_him_he_sai_0", 0.5);
   ai_it_manager say_dialog("supe_dammit_smith_you_0", 0.5);
@@ -601,7 +601,7 @@ gulliver_dialog() {
   flag_wait("scanning_eye");
   self say_dialog("sect_scanning_now_0");
   scene_wait("spiderbot_smash");
-  getent("spiderbot_security_speaker", "targetname") say_dialog("pmc2_seal_the_door_0", 1.0);
+  getEnt("spiderbot_security_speaker", "targetname") say_dialog("pmc2_seal_the_door_0", 1.0);
   self say_dialog("sect_it_s_the_pmcs_0");
   self say_dialog("sect_harper_you_were_ri_0");
   self say_dialog("sect_let_s_go_0");

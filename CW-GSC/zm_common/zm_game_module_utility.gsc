@@ -14,7 +14,7 @@ function move_ring(ring) {
 
   while(true) {
     foreach(position in positions) {
-      self moveto(position.origin, randomintrange(30, 45));
+      self moveTo(position.origin, randomintrange(30, 45));
       self waittill(#"movedone");
     }
   }
@@ -29,7 +29,7 @@ function rotate_ring(forward) {
   }
 
   while(true) {
-    self rotateyaw(dir, 9);
+    self rotateYaw(dir, 9);
     wait 9;
   }
 }

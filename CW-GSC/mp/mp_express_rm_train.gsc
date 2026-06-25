@@ -27,7 +27,7 @@ function main() {
   level.var_1bc40e6c = getweapon(#"turret_boct_train");
   var_82b681fa = getEntArray("train_gate_rail", "targetname");
   var_207f7dc3 = getEntArray("train_gate_rail_brush", "targetname");
-  var_c7129cae = getent("train_kill_trigger", "targetname");
+  var_c7129cae = getEnt("train_kill_trigger", "targetname");
   n_wait_time = 0.05;
 
   foreach(mdl_gate in var_82b681fa) {
@@ -35,25 +35,25 @@ function main() {
     n_wait_time += 0.05;
     mdl_gate.var_2154608a = mdl_gate.origin;
     mdl_gate.mdl_clip = arraygetclosest(mdl_gate.origin, var_207f7dc3);
-    mdl_gate.mdl_clip linkto(mdl_gate);
+    mdl_gate.mdl_clip linkTo(mdl_gate);
   }
 
   nd_start = getvehiclenode("train_start", "targetname");
-  var_2f5e0848 = getent("train_gate_rail_start", "script_noteworthy");
-  var_1011159c = getent("train_gate_rail_end", "script_noteworthy");
+  var_2f5e0848 = getEnt("train_gate_rail_start", "script_noteworthy");
+  var_1011159c = getEnt("train_gate_rail_end", "script_noteworthy");
   var_e79162ea = [];
-  var_e79162ea[0] = spawnvehicle("veh_boct_train", nd_start.origin, nd_start.angles);
+  var_e79162ea[0] = spawnVehicle("veh_boct_train", nd_start.origin, nd_start.angles);
   var_e79162ea[0] vehicle::god_on();
   var_e79162ea[0] ghost();
   var_e79162ea[0].script_cheap = 1;
   var_d639b2ee = struct::get("train_killcam_pos");
   var_1d019ea8 = spawn("script_model", var_d639b2ee.origin);
   var_1d019ea8.angles = var_e79162ea[0].angles + (0, -10, 0);
-  var_1d019ea8 linkto(var_e79162ea[0]);
+  var_1d019ea8 linkTo(var_e79162ea[0]);
   var_1d019ea8 setweapon(getweapon("turret_boct_train"));
   var_e79162ea[0].killcament = var_1d019ea8;
-  var_c7129cae enablelinkto();
-  var_c7129cae linkto(var_e79162ea[0]);
+  var_c7129cae enablelinkTo();
+  var_c7129cae linkTo(var_e79162ea[0]);
   var_e79162ea[0].kill_trigger = var_c7129cae;
 
   for(i = 1; i < 20; i++) {
@@ -104,9 +104,9 @@ function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40a
     level thread function_e121c532(var_2f5e0848, var_1011159c, var_82b681fa, 0);
 
     foreach(mdl_gate in var_82b681fa) {
-      playsoundatposition("amb_train_incomming_beep", (1358, 2396, 163));
-      playsoundatposition("amb_train_incomming_beep", (2, 81, 268));
-      playsoundatposition("amb_train_incomming_beep", (1368, -2341, 180));
+      playSoundAtPosition("amb_train_incomming_beep", (1358, 2396, 163));
+      playSoundAtPosition("amb_train_incomming_beep", (2, 81, 268));
+      playSoundAtPosition("amb_train_incomming_beep", (1368, -2341, 180));
     }
 
     var_6a3e5efa = getdvarfloat(#"hash_26a82847c1444a57", 3.6);
@@ -357,7 +357,7 @@ function function_141b453d(var_fb3621dd) {
   }
 
   if(!isDefined(var_fb3621dd)) {
-    self moveto(self.var_2154608a, 5);
+    self moveTo(self.var_2154608a, 5);
     return;
   }
 
@@ -430,7 +430,7 @@ function destroy_supply_crates() {
     if(distancesquared(var_1e313899.origin, self.origin) < 10000) {
       if(var_1e313899 istouching(self)) {
         playFX(#"hash_4eb3ad36c639abd8", var_1e313899.origin);
-        playsoundatposition("wpn_frag_explode", var_1e313899.origin);
+        playSoundAtPosition("wpn_frag_explode", var_1e313899.origin);
         pixendevent();
         wait 0.1;
         var_1e313899[[level.var_f90e0e29]](0);

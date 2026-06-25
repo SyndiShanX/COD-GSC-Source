@@ -107,7 +107,7 @@ function function_11e1fa9a(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_2929e754(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
     util::playFXOnTag(fieldname, #"hash_46c19b70a3135f71", self, "tag_origin");
-    self playrumbleonentity(fieldname, #"hash_24058bbba58fef26");
+    self playRumbleOnEntity(fieldname, #"hash_24058bbba58fef26");
   }
 }
 
@@ -177,7 +177,7 @@ function function_be9e97b1(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_d23b3778(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     earthquake(fieldname, 0.5, 4, self.origin, 10000);
-    self playrumbleonentity(fieldname, #"hash_1b4cf825c3b2cc7f");
+    self playRumbleOnEntity(fieldname, #"hash_1b4cf825c3b2cc7f");
   }
 }
 

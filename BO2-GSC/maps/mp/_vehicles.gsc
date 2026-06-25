@@ -1011,9 +1011,9 @@ respawn_vehicle(respawn_parameters) {
     iprintln("Vehicle can't respawn because MAX_VEHICLES has been reached and none of the vehicles could be cleaned up.");
   } else {
     if(isDefined(respawn_parameters.destructibledef)) {
-      vehicle = spawnvehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.destructibledef);
+      vehicle = spawnVehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.destructibledef);
     } else {
-      vehicle = spawnvehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles);
+      vehicle = spawnVehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles);
     }
 
     vehicle.vehicletype = respawn_parameters.vehicletype;
@@ -1171,14 +1171,14 @@ vehicle_damage_t() {
         if(damage > 100.0) {
           println("Playing heavy rumble.");
 
-          players[i] playrumbleonentity("tank_damage_heavy_mp");
+          players[i] playRumbleOnEntity("tank_damage_heavy_mp");
           continue;
         }
 
         if(damage > 10.0) {
           println("Playing light rumble.");
 
-          players[i] playrumbleonentity("tank_damage_light_mp");
+          players[i] playRumbleOnEntity("tank_damage_light_mp");
         }
       }
     }
@@ -1346,7 +1346,7 @@ vehicle_disconnect_paths() {
   while(isDefined(self)) {
     if(self getspeed() < 1) {
       if(!isDefined(self.dontdisconnectpaths)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       self notify("speed_zero_path_disconnect");

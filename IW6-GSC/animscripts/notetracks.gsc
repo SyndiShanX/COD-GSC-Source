@@ -684,7 +684,7 @@ notetrackrocketlauncherammoattach() {
     self.rocketlauncherammo setModel("projectile_rpg7");
   }
 
-  self.rocketlauncherammo linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  self.rocketlauncherammo linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
   thread handlerocketlauncherammoondeath();
 }
 
@@ -777,7 +777,7 @@ handlenotetrack(var_0, var_1, var_2) {
 
       break;
     case "stop anim":
-      maps\_utility::anim_stopanimscripted();
+      maps\_utility::anim_stopanimScripted();
       return var_0;
     case "break glass":
       level notify("glass_break", self);
@@ -1039,7 +1039,7 @@ notetrackfirespray(var_0, var_1) {
   var_6 = 0;
 
   if(isalive(self.enemy) && issentient(self.enemy) && self canshootenemy()) {
-    var_7 = vectornormalize(self.enemy getEye() - var_3);
+    var_7 = vectorNormalize(self.enemy getEye() - var_3);
 
     if(vectordot(var_4, var_7) > cos(var_5)) {
       var_6 = 1;

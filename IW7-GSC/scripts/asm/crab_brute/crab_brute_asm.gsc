@@ -137,7 +137,7 @@ doflash() {
 
     var_4 = var_2 getplayerangles();
     var_5 = anglesToForward(var_4);
-    var_6 = vectornormalize(self.origin - var_2.origin * (1, 1, 0));
+    var_6 = vectorNormalize(self.origin - var_2.origin * (1, 1, 0));
     var_7 = vectordot(var_5, var_6);
     if(var_7 < var_0.flash_dot) {
       continue;
@@ -179,7 +179,7 @@ func_6EDC(var_0) {
   self notify("flash_rumble_loop");
   var_1 = gettime() + var_0 * 1000;
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }
@@ -256,7 +256,7 @@ play_burrow_loop_sfx() {
   var_0 = self gettagorigin("j_lure_5", 1);
   if(isDefined(var_0)) {
     self.burrow_loop_obj = spawn("script_origin", var_0);
-    self.burrow_loop_obj linkto(self, "j_lure_5");
+    self.burrow_loop_obj linkTo(self, "j_lure_5");
     self.burrow_loop_obj playLoopSound("brute_crog_move_underground_lp");
   }
 }
@@ -306,7 +306,7 @@ playmovingpainanim(var_0, var_1, var_2, var_3) {
 
 doteleporthack(var_0, var_1, var_2, var_3) {
   var_6 = self func_8146();
-  self setorigin(var_6, 0);
+  self setOrigin(var_6, 0);
   var_6 = getgroundposition(var_6, 15);
   self.is_traversing = undefined;
   self notify("traverse_end");
@@ -330,7 +330,7 @@ shoulddoshield(var_0, var_1, var_2, var_3) {
 }
 
 ismyenemyinfrontofme(var_0, var_1) {
-  var_2 = vectornormalize(var_0.origin - self.origin * (1, 1, 0));
+  var_2 = vectorNormalize(var_0.origin - self.origin * (1, 1, 0));
   var_3 = anglesToForward(self.angles);
   var_4 = vectordot(var_2, var_3);
   if(var_4 > var_1) {
@@ -385,7 +385,7 @@ domeleedamageoncontact(var_0, var_1) {
         var_3 = 1;
         break;
       } else {
-        var_7 = vectornormalize(var_5.origin - self.origin * (1, 1, 0));
+        var_7 = vectorNormalize(var_5.origin - self.origin * (1, 1, 0));
         var_8 = anglesToForward(self.angles);
         var_9 = vectordot(var_7, var_8);
         if(var_9 < var_2.charge_abort_dot) {
@@ -474,12 +474,12 @@ playchargeintro(var_0, var_1, var_2, var_3) {
   if(isDefined(self.vehicle_getspawnerarray)) {
     var_4 = self getposonpath(50);
     if(isDefined(var_4)) {
-      var_5 = vectornormalize(var_4 - self.origin) * (1, 1, 0);
+      var_5 = vectorNormalize(var_4 - self.origin) * (1, 1, 0);
       var_6 = vectortoangles(var_5);
       self orientmode("face angle abs", var_6);
     }
   } else if(isDefined(self.curmeleetarget)) {
-    var_5 = vectornormalize(self.curmeleetarget.origin - self.origin) * (1, 1, 0);
+    var_5 = vectorNormalize(self.curmeleetarget.origin - self.origin) * (1, 1, 0);
     var_6 = vectortoangles(var_5);
     self orientmode("face angle abs", var_6);
   }

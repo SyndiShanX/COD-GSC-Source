@@ -42,10 +42,10 @@ function plate_thread() {
     if(!isDefined(time)) {
       time = 1;
     }
-    self moveto(struct.origin, time, time / 10);
-    self rotateto(struct.angles, time, time / 10);
+    self moveTo(struct.origin, time, time / 10);
+    self rotateTo(struct.angles, time, time / 10);
     self waittill("movedone");
-    playsoundatposition("evt_clank", self.origin);
+    playSoundAtPosition("evt_clank", self.origin);
     target = struct.target;
   }
   level notify("stage_1_done");
@@ -55,7 +55,7 @@ function build_init() {}
 
 function plates() {
   plates = getEntArray("sq_cassimir_plates", "targetname");
-  trig = getent("sq_cassimir_trigger", "targetname");
+  trig = getEnt("sq_cassimir_trigger", "targetname");
   while(true) {
     trig waittill("damage", amount, attacker, direction, point, dmg_type, modelname, tagname);
     if(isPlayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
@@ -81,7 +81,7 @@ function plates() {
   level._ctvg_pos = targs[0].origin;
   level waittill("ctvg_validation");
   zm_weap_quantum_bomb::quantum_bomb_deregister_result("ctvg");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest5", randomintrange(4, 6));
   for(i = 0; i < plates.size; i++) {
     plates[i] ghost();
@@ -201,14 +201,14 @@ function teleport_target(grenade, models) {
   wait(1);
   time = 3;
   for(i = 0; i < models.size; i++) {
-    models[i] moveto(grenade.origin + vectorscale((0, 0, 1), 50), time, time - 0.05);
+    models[i] moveTo(grenade.origin + vectorscale((0, 0, 1), 50), time, time - 0.05);
   }
   wait(time);
   teleport_targets = struct::get_array("sq_ctvg_tp", "targetname");
   for(i = 0; i < models.size; i++) {
     models[i] ghost();
   }
-  playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + vectorscale((0, 0, 1), 50));
+  playSoundAtPosition("zmb_gersh_teleporter_out", grenade.origin + vectorscale((0, 0, 1), 50));
   wait(0.5);
   for(i = 0; i < models.size; i++) {
     models[i] dontinterpolate();
@@ -251,7 +251,7 @@ function speak_charge_lines(lines) {
     sound_ent = undefined;
     switch (l.who) {
       case "rictofen": {
-        players = getplayers();
+        players = getPlayers();
         for(j = 0; j < players.size; j++) {
           ent_num = players[j].characterindex;
           if(isDefined(players[j].zm_random_char)) {
@@ -290,7 +290,7 @@ function charge_init() {
   level._charge_stages = array(build_charge_stage(1, array("rictofen", "vox_plr_2_quest_step5_12")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_13", "rictofen", "vox_plr_2_quest_step5_14")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_15", "maxis", "vox_xcomp_quest_step5_16", "rictofen", "vox_plr_2_quest_step5_17")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_18", "rictofen", "vox_plr_2_quest_step5_19")), build_charge_stage(15, array("maxis", "vox_xcomp_quest_step5_20", "rictofen", "vox_plr_2_quest_step5_21", "maxis", "vox_xcomp_quest_step5_22", "rictofen", "vox_plr_2_quest_step5_23")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_24", "rictofen", "vox_plr_2_quest_step5_25", "computer", "vox_mcomp_quest_step5_26")));
   sound_struct = struct::get("sq_charge_terminal", "targetname");
   level._charge_sound_ent = spawn("script_origin", sound_struct.origin);
-  level._charge_terminal = getent("sq_ctvg_terminal", "targetname");
+  level._charge_terminal = getEnt("sq_ctvg_terminal", "targetname");
   level._charge_terminal setModel("p7_zm_moo_computer_rocket_launch_red");
 }
 
@@ -337,7 +337,7 @@ function typing_sound_thread() {
 
 function do_bucket_fill(target) {
   presses = 0;
-  players = getplayers();
+  players = getPlayers();
   richtofen = undefined;
   level thread typing_sound_thread();
   for(i = 0; i < players.size; i++) {

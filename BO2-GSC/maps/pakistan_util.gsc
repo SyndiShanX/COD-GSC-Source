@@ -316,7 +316,7 @@ skipto_market_exit_deconstruct_ents() {
   level.a_str_behind_bus_names = deconstruct_fxanims_in_trigger("street_behind_bus_trig");
   level.a_str_bus_dam_names = deconstruct_fxanims_in_trigger("bus_dam_fxanim_cleanup_trig");
   level.a_str_sewer_names = deconstruct_fxanims_in_trigger("sewer_fxanim_cleanup_trig");
-  vol_market_exit = getent("zone_market_exit", "script_noteworthy");
+  vol_market_exit = getEnt("zone_market_exit", "script_noteworthy");
   vol_market_exit delete();
   pakistan_deconstruct_models();
   bus_dam_reconstruct_ents();
@@ -328,9 +328,9 @@ skipto_frogger_deconstruct_ents() {
   level.a_str_behind_bus_names = deconstruct_fxanims_in_trigger("street_behind_bus_trig");
   level.a_str_bus_dam_names = deconstruct_fxanims_in_trigger("bus_dam_fxanim_cleanup_trig");
   level.a_str_sewer_names = deconstruct_fxanims_in_trigger("sewer_fxanim_cleanup_trig");
-  vol_market_exit = getent("zone_market_exit", "script_noteworthy");
+  vol_market_exit = getEnt("zone_market_exit", "script_noteworthy");
   vol_market_exit delete();
-  vol_frogger = getent("zone_frogger", "script_noteworthy");
+  vol_frogger = getEnt("zone_frogger", "script_noteworthy");
   vol_frogger delete();
   pakistan_deconstruct_models();
   pakistan_reconstruct_ents();
@@ -340,9 +340,9 @@ skipto_bus_dam_deconstruct_ents() {
   level.a_str_behind_bus_names = deconstruct_fxanims_in_trigger("street_behind_bus_trig");
   level.a_str_bus_dam_names = deconstruct_fxanims_in_trigger("bus_dam_fxanim_cleanup_trig");
   level.a_str_sewer_names = deconstruct_fxanims_in_trigger("sewer_fxanim_cleanup_trig");
-  vol_market_exit = getent("zone_market_exit", "script_noteworthy");
+  vol_market_exit = getEnt("zone_market_exit", "script_noteworthy");
   vol_market_exit delete();
-  vol_frogger = getent("zone_frogger", "script_noteworthy");
+  vol_frogger = getEnt("zone_frogger", "script_noteworthy");
   vol_frogger delete();
   pakistan_deconstruct_models();
   bus_dam_reconstruct_ents();
@@ -352,13 +352,13 @@ skipto_bus_dam_deconstruct_ents() {
 
 skipto_stealth_deconstruct_ents() {
   level.a_str_sewer_names = deconstruct_fxanims_in_trigger("sewer_fxanim_cleanup_trig");
-  vol_market_exit = getent("zone_market_exit", "script_noteworthy");
+  vol_market_exit = getEnt("zone_market_exit", "script_noteworthy");
   vol_market_exit delete();
-  vol_frogger = getent("zone_frogger", "script_noteworthy");
+  vol_frogger = getEnt("zone_frogger", "script_noteworthy");
   vol_frogger delete();
-  vol_bus_dam = getent("zone_bus_dam", "script_noteworthy");
+  vol_bus_dam = getEnt("zone_bus_dam", "script_noteworthy");
   vol_bus_dam delete();
-  vol_bus_dam = getent("zone_stealth", "script_noteworthy");
+  vol_bus_dam = getEnt("zone_stealth", "script_noteworthy");
   vol_bus_dam delete();
   pakistan_deconstruct_models();
   sewer_reconstruct_ents();
@@ -794,7 +794,7 @@ spotlight_search_path(e_start_pos, n_speed, do_face, do_loop, e_target) {
   self set_turret_target(e_target, undefined, 0);
 
   while(true) {
-    e_target moveto(e_current_pos.origin, n_target_time);
+    e_target moveTo(e_current_pos.origin, n_target_time);
     e_target waittill("movedone");
 
     if(isDefined(e_current_pos.script_int)) {
@@ -803,7 +803,7 @@ spotlight_search_path(e_start_pos, n_speed, do_face, do_loop, e_target) {
 
     if(isDefined(e_current_pos.target)) {
       e_previous_pos = e_current_pos;
-      e_current_pos = getent(e_current_pos.target, "targetname");
+      e_current_pos = getEnt(e_current_pos.target, "targetname");
     } else if(do_loop) {
       e_previous_pos = e_current_pos;
       e_current_pos = e_start_pos;
@@ -913,7 +913,7 @@ watch_to_turn_off_water_sheeting() {
 
 watch_water_vision() {
   level endon("start_defend_convoy");
-  t_firewater = getent("trigger_firewater_room", "targetname");
+  t_firewater = getEnt("trigger_firewater_room", "targetname");
 
   while(true) {
     self waittill("underwater");
@@ -934,9 +934,9 @@ watch_water_vision() {
     if(self istouching(t_firewater)) {
       level thread maps\createart\pakistan_2_art::above_water_fire_vision();
       self thread encourage_player_to_dive(t_firewater);
-    } else if(self istouching(getent("millibar_vision_trigger", "targetname")))
+    } else if(self istouching(getEnt("millibar_vision_trigger", "targetname")))
       level thread maps\createart\pakistan_2_art::vision_millibar_room();
-    else if(self istouching(getent("interrogation_vision_trigger", "targetname"))) {
+    else if(self istouching(getEnt("interrogation_vision_trigger", "targetname"))) {
       level thread maps\createart\pakistan_2_art::vision_torture_room();
     } else {
       level thread maps\createart\pakistan_2_art::turn_back_to_default();
@@ -965,12 +965,12 @@ encourage_player_to_dive(t_firewater) {
 
 trainyard_light_on() {
   flag_wait("railyard_player_millibar_approach");
-  e_light = getent("grate_light", "targetname");
+  e_light = getEnt("grate_light", "targetname");
   e_light setlightintensity(level.n_intensity);
 }
 
 trainyard_light_off() {
-  e_light = getent("grate_light", "targetname");
+  e_light = getEnt("grate_light", "targetname");
   level.n_intensity = e_light getlightintensity();
   e_light setlightintensity(0);
 }
@@ -1020,7 +1020,7 @@ follow_path(nd_path) {
         nd_path = getvehiclenode(nd_path.target, "targetname");
       }
 
-      e_trig = getent(nd_path.targetname, "target");
+      e_trig = getEnt(nd_path.targetname, "target");
 
       if(isDefined(e_trig)) {
         nd_path thread follow_path_node_trigger_wait(e_trig);
@@ -1209,7 +1209,7 @@ anim_magic_bullet_shield(ai) {
 }
 
 play_light_rumble(e_entity) {
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.3, 0.5, level.player.origin, 1000, level.player);
 }
 
@@ -1218,7 +1218,7 @@ datapad_rumble(m_player_body) {
     m_player_body = undefined;
   }
 
-  level.player playrumbleonentity("reload_clipout");
+  level.player playRumbleOnEntity("reload_clipout");
 }
 
 spawn_grenades_at_structs(str_struct) {
@@ -1327,7 +1327,7 @@ drone_punisher_logic(s_goal) {
   self waittill("goal");
   self play_fx("drone_spotlight_cheap", self gettagorigin("tag_spotlight"), self gettagangles("tag_spotlight"), undefined, 1, "tag_spotlight");
   self set_turret_target(level.player, undefined, 0);
-  self setvehgoalpos(getstruct(s_goal, "targetname").origin, 1);
+  self setvehgoalpos(getStruct(s_goal, "targetname").origin, 1);
   self waittill("goal");
   self setlookatent(level.player);
   self thread drone_punisher_fire();
@@ -1368,7 +1368,7 @@ kill_player_after_time() {
 }
 
 delete_ents_inside_trigger(str_trigger) {
-  t_touching = getent(str_trigger, "targetname");
+  t_touching = getEnt(str_trigger, "targetname");
   t_touching delete_fxanims_touching();
   t_touching delete_vehicles_touching();
   t_touching delete_ents_touching("script_model");
@@ -1427,7 +1427,7 @@ delete_spawners_touching() {
 deconstruct_fxanims_in_trigger(str_trigger) {
   i = 0;
   a_str_fxanim_names = [];
-  t_touching = getent(str_trigger, "targetname");
+  t_touching = getEnt(str_trigger, "targetname");
   a_m_fxanims = getEntArray("fxanim", "script_noteworthy");
 
   foreach(m_fxanim in a_m_fxanims) {
@@ -1457,7 +1457,7 @@ reconstruct_fxanims_from_list(a_str_names) {
 
 skipt_model_convert_area(str_area) {
   level._struct_models = [];
-  vol_area = getent(str_area, "targetname");
+  vol_area = getEnt(str_area, "targetname");
   model_convert_area(vol_area);
 }
 
@@ -1496,7 +1496,7 @@ _claw_scripted_set_turret_target(e_target) {
 
 _get_fake_target(e_target) {
   o_target = spawn("script_origin", e_target.origin);
-  o_target linkto(e_target);
+  o_target linkTo(e_target);
   return o_target;
 }
 
@@ -1513,7 +1513,7 @@ _claw_scripted_fire_turret_at_target(str_notify) {
   }
 
   n_fire_time = weaponfiretime(self.turret.weaponinfo);
-  o_target = getent(self.script_noteworthy + "_target", "targetname");
+  o_target = getEnt(self.script_noteworthy + "_target", "targetname");
 
   while(true) {
     if(self.turret can_turret_hit_target(o_target, 1)) {
@@ -1525,7 +1525,7 @@ _claw_scripted_fire_turret_at_target(str_notify) {
 }
 
 _claw_scripted_stop_turret() {
-  o_target = getent(self.script_noteworthy + "_target", "targetname");
+  o_target = getEnt(self.script_noteworthy + "_target", "targetname");
   self.scripted_target = undefined;
   self.turret maps\_turret::stop_turret();
   wait_network_frame();
@@ -1719,7 +1719,7 @@ radial_damage_from_spot(str_spot, n_delay) {
   }
 
   if(isDefined(str_spot)) {
-    center = getstruct(str_spot, "targetname");
+    center = getStruct(str_spot, "targetname");
     n_radius = center.radius;
   }
 
@@ -1734,7 +1734,7 @@ radial_damage_from_spot(str_spot, n_delay) {
 dont_prone_while_touching(str_ent) {
   self endon("allow_prone");
   player_flag_init("player_in_water");
-  e_no_prone = getent(str_ent, "targetname");
+  e_no_prone = getEnt(str_ent, "targetname");
 
   while(true) {
     if(!self istouching(e_no_prone) && player_flag("player_in_water")) {
@@ -1759,7 +1759,7 @@ dont_prone_while_touching(str_ent) {
 
 dont_prone_while_touching_kill() {
   self notify("allow_prone");
-  t_no_prone = getent("no_prone_trigger", "targetname");
+  t_no_prone = getEnt("no_prone_trigger", "targetname");
   player_flag_clear("player_in_water");
   self allow_prone(1);
   wait_network_frame();
@@ -1784,7 +1784,7 @@ ambient_flight_path(s_start) {
   self waittill("goal");
 
   if(isDefined(s_start.target)) {
-    s_next_pos = getstruct(s_start.target, "targetname");
+    s_next_pos = getStruct(s_start.target, "targetname");
   }
 
   if(isDefined(s_next_pos)) {
@@ -1796,7 +1796,7 @@ ambient_flight_path(s_start) {
       self waittill("goal");
 
       if(isDefined(s_next_pos.target)) {
-        s_next_pos = getstruct(s_next_pos.target, "targetname");
+        s_next_pos = getStruct(s_next_pos.target, "targetname");
         v_next_pos = s_next_pos.origin;
       } else {
         self.spotlight delete();
@@ -1814,7 +1814,7 @@ ambient_flight_path(s_start) {
 ambient_drone_searchlight() {
   e_spotlight_target = spawn("script_model", self.origin);
   e_spotlight_target setModel("tag_origin");
-  e_spotlight_target linkto(self, "tag_origin");
+  e_spotlight_target linkTo(self, "tag_origin");
   self.spotlight = e_spotlight_target;
   self set_turret_target(e_spotlight_target, anglesToForward(self.angles) * 800 + vectorscale((0, 0, -1), 500.0), 0);
   self play_fx("drone_spotlight_cheap", self gettagorigin("tag_spotlight"), self gettagangles("tag_spotlight"), "kill_spotlight", 1, "tag_spotlight");
@@ -1877,7 +1877,7 @@ sewer_reconstruct_ents() {
 sewer_gate_clip_setup() {
   bm_gate_clip = get_ent("sewer_gate_clip", "targetname", 1);
   m_gate = get_ent("sewer_entry_gate", "targetname", 1);
-  bm_gate_clip linkto(m_gate, "j_hinge");
+  bm_gate_clip linkTo(m_gate, "j_hinge");
 }
 
 market_corpse_control() {
@@ -1904,8 +1904,8 @@ market_corpse_control() {
 }
 
 frogger_corpse_control() {
-  t_sinkhole = getent("sinkhole_kill_trigger", "targetname");
-  t_behind_bus = getent("street_behind_bus_trig", "targetname");
+  t_sinkhole = getEnt("sinkhole_kill_trigger", "targetname");
+  t_behind_bus = getEnt("street_behind_bus_trig", "targetname");
 
   while(true) {
     if(flag("bus_dam_gate_push_setup_started")) {
@@ -1959,7 +1959,7 @@ disable_player_weapon_fire_for_time(n_wait) {
 
 claw_data_glove_on(m_player_body) {
   e_hint = createstreamerhint(level.player.origin, 1.0);
-  e_hint linkto(m_player_body, "tag_origin", vectorscale((0, 0, 1), 8.0));
+  e_hint linkTo(m_player_body, "tag_origin", vectorscale((0, 0, 1), 8.0));
   m_player_body attach("c_usa_cia_claw_viewbody_vson", "J_WristTwist_LE");
   wait 5;
   e_hint delete();

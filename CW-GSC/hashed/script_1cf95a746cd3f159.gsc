@@ -32,7 +32,7 @@ function main(str_objective, b_starting) {
     wait 1;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::set(#"temp_intro", "show_hud", 0);
   player val::set(#"temp_intro", "freezecontrols");
   player val::set(#"temp_intro", "disable_weapons");

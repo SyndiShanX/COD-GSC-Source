@@ -300,7 +300,7 @@ activate_emergency_lights() {
     var_4 = common_scripts\utility::spawn_tag_origin();
     var_4.origin = var_3.origin;
     var_4.angles = var_3.angles;
-    var_4 linkto(var_3);
+    var_4 linkTo(var_3);
     playFXOnTag(common_scripts\utility::getfx("emergency_light"), var_4, "tag_origin");
   }
 
@@ -312,7 +312,7 @@ activate_emergency_lights() {
     var_8 = undefined;
 
     if(isDefined(var_7.script_linkto)) {
-      var_8 = getent(var_7.script_linkto, "script_linkname");
+      var_8 = getEnt(var_7.script_linkto, "script_linkname");
     }
 
     if(!isDefined(var_8)) {

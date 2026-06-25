@@ -654,7 +654,7 @@ function function_26374d3f() {
 
   if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
     var_8d59d673 = 1;
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 2) {
       var_8d59d673 = 0.7;
@@ -685,7 +685,7 @@ function function_42a4d0d8(spawner) {
   }
 
   radius = isDefined(spawner.var_3717c478) ? spawner.var_3717c478 : 0;
-  players = getplayers();
+  players = getPlayers();
 
   if(!isDefined(players) || players.size == 0) {
     return true;
@@ -739,7 +739,7 @@ function function_3c035c82(var_2594900) {
 
 function function_883b9499(var_368d405d, trig_name, var_66d7c971, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, var_66d7c971);
+    trigger = getEnt(trig_name, var_66d7c971);
     assert(isDefined(trigger), "<dev string:x21f>" + var_66d7c971 + "<dev string:x22f>" + trig_name + "<dev string:x236>");
     trigger endon(#"trigger");
   }
@@ -755,7 +755,7 @@ function function_883b9499(var_368d405d, trig_name, var_66d7c971, once_only) {
 
 function function_fc60286c(var_368d405d, trig_name, var_66d7c971, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, var_66d7c971);
+    trigger = getEnt(trig_name, var_66d7c971);
     assert(isDefined(trigger), "<dev string:x21f>" + var_66d7c971 + "<dev string:x22f>" + trig_name + "<dev string:x236>");
     trigger endon(#"trigger");
   }
@@ -771,7 +771,7 @@ function function_fc60286c(var_368d405d, trig_name, var_66d7c971, once_only) {
 
 function function_eba7c12(var_368d405d, trig_name, var_66d7c971, once_only) {
   if(isDefined(once_only) && once_only) {
-    trigger = getent(trig_name, var_66d7c971);
+    trigger = getEnt(trig_name, var_66d7c971);
     assert(isDefined(trigger), "<dev string:x21f>" + var_66d7c971 + "<dev string:x22f>" + trig_name + "<dev string:x236>");
     trigger endon(#"trigger");
   }

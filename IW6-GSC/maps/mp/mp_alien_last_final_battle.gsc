@@ -59,19 +59,19 @@ do_return_to_base() {
     return;
   }
   common_scripts\utility::flag_set("all_outposts_completed");
-  var_0 = common_scripts\utility::getstruct("ancestor_dr_cross", "targetname");
+  var_0 = common_scripts\utility::getStruct("ancestor_dr_cross", "targetname");
   level.dr_cross = spawn("script_model", var_0.origin);
   level.dr_cross setModel("body_cross_a");
   level.dr_cross.angles = (0, 0, 0);
   level.dr_cross.crosshead = spawn_model("head_cross_a", level.dr_cross, "J_spine4", (0, 0, 0));
   level.dr_cross.shield = spawn("script_model", level.dr_cross.origin + (0, 0, 100));
   level.dr_cross.shield setModel("alien_shield_bubble_ancestor_col");
-  level.dr_cross.shield linkto(level.dr_cross, "tag_origin", (0, 0, 100), (0, 0, 0));
+  level.dr_cross.shield linkTo(level.dr_cross, "tag_origin", (0, 0, 100), (0, 0, 0));
   thread sfx_cross_shield_lp();
-  level.canister = getent("cortex_canister", "targetname");
+  level.canister = getEnt("cortex_canister", "targetname");
   level.canister.origin = (390, -542, 17);
   level.canister.angles = (0, 180, 0);
-  level.core = getent("cortex_core", "targetname");
+  level.core = getEnt("cortex_core", "targetname");
   level.core.origin = (400, -664, 16);
   level.core.angles = (0, 0, 0);
   level.dr_cross scriptmodelplayanimdeltamotion("alien_last_cross_vignette_idle");
@@ -146,7 +146,7 @@ cross_vignette_unstuck() {
   level endon("cross_vignette_complete");
   var_0 = (532, -516, 16);
   self waittill("unresolved_collision");
-  self setorigin(var_0);
+  self setOrigin(var_0);
 }
 
 turn_off_cortex_fx() {
@@ -211,7 +211,7 @@ spawn_model(var_0, var_1, var_2, var_3) {
   var_4 setModel(var_0);
   var_4.origin = var_1 gettagorigin(var_2);
   var_4.angles = var_1 gettagangles(var_2) + var_3;
-  var_4 linkto(var_1, var_2);
+  var_4 linkTo(var_1, var_2);
   return var_4;
 }
 
@@ -235,7 +235,7 @@ wait_for_very_close_player() {
 
 wait_for_all_close_players() {
   level endon("start_cross_vignette");
-  var_0 = getent("main_base", "targetname");
+  var_0 = getEnt("main_base", "targetname");
 
   for(;;) {
     var_1 = 0;
@@ -297,7 +297,7 @@ final_battle_left_ancestor() {
   level.current_area_name = "ancestor_lane_left";
   wait 5.0;
   setup_final_battle_encounter("main_base", "ancestor_left", 24);
-  var_0 = common_scripts\utility::getstruct("ancestor_left_lane", "targetname");
+  var_0 = common_scripts\utility::getStruct("ancestor_left_lane", "targetname");
   level.left_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_0.origin, level.players[0].angles);
 
   if(level.left_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
@@ -324,7 +324,7 @@ left_ancestor_event() {
 
   if(!level.left_generator_destroyed) {
     level.left_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_left_attack_generator");
-    var_0 = getent("ancestor_left_generator_pos", "targetname");
+    var_0 = getEnt("ancestor_left_generator_pos", "targetname");
     level.left_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_align_to_angles(var_0.angles);
     level.left_ancestor thread maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::force_blast_attack(var_0.origin);
     level.left_ancestor maps\mp\alien\_utility::disable_alien_scripted();
@@ -339,7 +339,7 @@ left_ancestor_event() {
     level thread left_ancestor_restore_traps();
   }
 
-  var_1 = getent("ancestor_left_gate_grab_pos", "targetname");
+  var_1 = getEnt("ancestor_left_gate_grab_pos", "targetname");
   level.left_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_left_traverse_1");
   var_2 = getnode("ancestor_left_resume_path_1", "targetname");
   level.left_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::assign_path_node(var_2);
@@ -402,15 +402,15 @@ left_destruction() {
   common_scripts\utility::exploder(101);
   level.left_gate_destroyed = 1;
   wait 0.2;
-  var_4 = getent("left_connector", "targetname");
+  var_4 = getEnt("left_connector", "targetname");
   var_4 connectpaths();
   var_4 delete();
 }
 
 start_trap_gen_sfx() {
-  var_0 = getent("ancestor_left_generator_scriptable", "targetname");
+  var_0 = getEnt("ancestor_left_generator_scriptable", "targetname");
   level.trap_gen_sfx_lp = spawn("script_origin", var_0.origin);
-  level.trap_gen_sfx_lp linkto(var_0);
+  level.trap_gen_sfx_lp linkTo(var_0);
   wait 0.1;
 
   if(isDefined(level.trap_gen_sfx_lp)) {
@@ -420,9 +420,9 @@ start_trap_gen_sfx() {
 
 dmg_trap_gen_sfx() {
   level.trap_gen_sfx_lp stoploopsound("alien_conduit_on_lp");
-  var_0 = getent("ancestor_left_generator_scriptable", "targetname");
+  var_0 = getEnt("ancestor_left_generator_scriptable", "targetname");
   level.trap_gen_dmg_sfx_lp = spawn("script_origin", var_0.origin);
-  level.trap_gen_dmg_sfx_lp linkto(var_0);
+  level.trap_gen_dmg_sfx_lp linkTo(var_0);
   wait 0.1;
 
   if(isDefined(level.trap_gen_dmg_sfx_lp)) {
@@ -457,7 +457,7 @@ final_battle_middle_ancestor() {
   level.current_area_name = "ancestor_lane_middle";
   wait 5.0;
   setup_final_battle_encounter("main_base", "ancestor_middle", 25);
-  var_0 = common_scripts\utility::getstruct("ancestor_middle_lane", "targetname");
+  var_0 = common_scripts\utility::getStruct("ancestor_middle_lane", "targetname");
   level.middle_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_0.origin, level.players[0].angles);
 
   if(level.middle_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
@@ -501,7 +501,7 @@ middle_ancestor_event() {
 
   level.middle_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_enter_scripted();
   level.middle_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_front_gate_traverse");
-  var_1 = getent("ancestor_front_gate_grab_pos", "targetname");
+  var_1 = getEnt("ancestor_front_gate_grab_pos", "targetname");
   level.middle_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_play_traversal(var_1.angles, "traverse_gate");
   level.middle_ancestor maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_enter_scripted();
   wait 0.5;
@@ -520,7 +520,7 @@ middle_destruction() {
   level notify("main_base_front_gate");
   wait 0.2;
   var_0.gate_clip delete();
-  var_1 = getent("front_gate_mantle", "targetname");
+  var_1 = getEnt("front_gate_mantle", "targetname");
   var_1 movez(200, 0.1);
 }
 
@@ -528,7 +528,7 @@ final_battle_right_ancestor() {
   level.current_area_name = "ancestor_lane_right";
   wait 5.0;
   setup_final_battle_encounter("main_base", "ancestor_right", 26);
-  var_0 = common_scripts\utility::getstruct("ancestor_right_lane", "targetname");
+  var_0 = common_scripts\utility::getStruct("ancestor_right_lane", "targetname");
   level.right_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_0.origin, level.players[0].angles);
 
   if(level.right_ancestor maps\mp\alien\_utility::ent_flag_exist("activate_shield_health_check")) {
@@ -595,7 +595,7 @@ right_destruction() {
   common_scripts\utility::exploder(100);
   level.right_gate_destroyed = 1;
   wait 0.2;
-  var_4 = getent("right_connector", "targetname");
+  var_4 = getEnt("right_connector", "targetname");
   var_4 connectpaths();
   var_4 delete();
 }
@@ -657,7 +657,7 @@ left_ancestor_respawn() {
     }
   }
 
-  var_1 = common_scripts\utility::getstruct("ancestor_left_lane", "targetname");
+  var_1 = common_scripts\utility::getStruct("ancestor_left_lane", "targetname");
   level.left_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_1.origin, (0, 0, 0));
   level thread left_ancestor_event();
 }
@@ -674,7 +674,7 @@ middle_ancestor_respawn() {
     }
   }
 
-  var_1 = common_scripts\utility::getstruct("ancestor_middle_lane", "targetname");
+  var_1 = common_scripts\utility::getStruct("ancestor_middle_lane", "targetname");
   level.middle_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_1.origin, (0, 0, 0));
   level thread middle_ancestor_event();
 }
@@ -691,7 +691,7 @@ right_ancestor_respawn() {
     }
   }
 
-  var_1 = common_scripts\utility::getstruct("ancestor_right_lane", "targetname");
+  var_1 = common_scripts\utility::getStruct("ancestor_right_lane", "targetname");
   level.right_ancestor = maps\mp\agents\alien\alien_ancestor\_alien_ancestor::addancestoragent("axis", var_1.origin, (0, 0, 0));
   level thread right_ancestor_event();
 }
@@ -715,7 +715,7 @@ do_ending() {
   thread medusa_100_state_fx();
 
   foreach(var_1 in level.players) {
-    var_1 playrumbleonentity("heavy_3s");
+    var_1 playRumbleOnEntity("heavy_3s");
   }
 
   var_8 = gettime() - level.final_battle_start_time;
@@ -788,15 +788,15 @@ mp_alien_last_camera_fly() {
   self.anchor = spawn("script_model", self getEye());
   self.anchor.angles = self.angles;
   self.anchor setModel("tag_origin");
-  self cameralinkto(self.anchor, "tag_origin");
-  var_0 = getent("cortex_base", "targetname");
+  self cameralinkTo(self.anchor, "tag_origin");
+  var_0 = getEnt("cortex_base", "targetname");
   var_1 = 1;
 
   if(self getEye()[0] > var_0.origin[0]) {
     var_1 = -1;
   }
 
-  var_2 = common_scripts\utility::getstruct("fly_cam_init", "targetname");
+  var_2 = common_scripts\utility::getStruct("fly_cam_init", "targetname");
   var_2.angles = (angleclamp180(var_2.angles[0]), angleclamp180(var_2.angles[1]), angleclamp180(var_2.angles[2]));
   self playerlinkweaponviewtodelta(self.anchor, "tag_player", 1.0, 10, 10, 10, 10, 1);
   var_3 = spawnStruct();
@@ -863,14 +863,14 @@ run_cortex_logic() {
     wait 1.0;
   }
 
-  var_0 = getent("cortex_use_trigger", "targetname");
+  var_0 = getEnt("cortex_use_trigger", "targetname");
 
   if(!isDefined(var_0)) {
     return;
   }
   if(!isDefined(level.jump_to_final_battle) || !level.jump_to_final_battle) {
     var_0 thread maps\mp\alien\_hive::set_hive_icon("waypoint_alien_cortex_activate", 1300);
-    var_1 = getent("cortex_canister", "targetname");
+    var_1 = getEnt("cortex_canister", "targetname");
 
     if(isDefined(var_1)) {
       maps\mp\alien\_outline_proto::add_to_outline_hive_watch_list(var_1);
@@ -898,7 +898,7 @@ run_cortex_logic() {
   setomnvar("ui_alien_boss_status", 2);
   setomnvar("ui_alien_boss_icon", 5);
   setomnvar("ui_alien_boss_progression", 100);
-  var_5 = getent("cortex_base", "targetname");
+  var_5 = getEnt("cortex_base", "targetname");
   var_5 cortex_attack_point_logic();
   level.cortex_base_origin = var_5.origin;
   level.num_cortex_players = level.players.size;
@@ -935,7 +935,7 @@ run_cortex_logic() {
   level notify("dlc_vo_notify", "last_vo", "cortex_full");
   var_0 maps\mp\alien\_hive::destroy_hive_icon();
   var_0 thread maps\mp\alien\_hive::set_hive_icon("waypoint_alien_cortex_detonate", 1300);
-  var_1 = getent("cortex_canister", "targetname");
+  var_1 = getEnt("cortex_canister", "targetname");
 
   if(isDefined(var_1)) {
     maps\mp\alien\_outline_proto::add_to_outline_hive_watch_list(var_1);
@@ -964,7 +964,7 @@ run_cortex_logic() {
 
   common_scripts\utility::flag_set("cortex_detonated");
   var_0 maps\mp\alien\_hive::destroy_hive_icon();
-  var_0 sethintstring("");
+  var_0 setHintString("");
 
   if(isDefined(var_1)) {
     maps\mp\alien\_outline_proto::remove_from_outline_hive_watch_list(var_1);
@@ -1246,7 +1246,7 @@ shut_base_gates() {
 
   destroy_equipment_near_base_gates();
   var_3 = getEntArray("garage_front_gate_model", "targetname");
-  var_4 = getent("garage_front_gate_clip", "targetname");
+  var_4 = getEnt("garage_front_gate_clip", "targetname");
 
   foreach(var_6 in var_3) {
     var_6 movez(-101, 2.0, 0.3, 0.1);
@@ -1254,7 +1254,7 @@ shut_base_gates() {
 
   var_4 movez(-101, 2.0, 0.3, 0.1);
   wait 2.2;
-  var_4 disconnectpaths();
+  var_4 disconnectPaths();
 }
 
 show_return_to_base_objective() {
@@ -1397,31 +1397,31 @@ play_godfather_vo(var_0, var_1) {
 }
 
 medusa_on_state_fx() {
-  var_0 = getent("medusa_scriptable", "targetname");
+  var_0 = getEnt("medusa_scriptable", "targetname");
   var_0 setscriptablepartstate("base", "on");
 }
 
 medusa_25_state_fx() {
   thread cortex_sfx_25per();
-  var_0 = getent("medusa_scriptable", "targetname");
+  var_0 = getEnt("medusa_scriptable", "targetname");
   var_0 setscriptablepartstate("base", "25percent");
 }
 
 medusa_50_state_fx() {
   thread cortex_sfx_50per();
-  var_0 = getent("medusa_scriptable", "targetname");
+  var_0 = getEnt("medusa_scriptable", "targetname");
   var_0 setscriptablepartstate("base", "50percent");
 }
 
 medusa_75_state_fx() {
   thread cortex_sfx_75per();
-  var_0 = getent("medusa_scriptable", "targetname");
+  var_0 = getEnt("medusa_scriptable", "targetname");
   var_0 setscriptablepartstate("base", "75percent");
 }
 
 medusa_100_state_fx() {
   thread cortex_sfx_100per();
-  var_0 = getent("medusa_scriptable", "targetname");
+  var_0 = getEnt("medusa_scriptable", "targetname");
   var_0 setscriptablepartstate("base", "100percent");
 }
 
@@ -1463,7 +1463,7 @@ medusa_shock_behavior() {
   var_1 = 5;
   var_2 = 10;
   var_3 = (400, -656, 1203.5);
-  var_4 = getent("cortex_base", "targetname");
+  var_4 = getEnt("cortex_base", "targetname");
   var_4.attack_bolt = spawn("script_model", var_3);
   var_4.attack_bolt setModel("tag_origin");
   var_5 = 2250000;
@@ -1700,7 +1700,7 @@ check_for_room_exploit() {
   var_0 = 0;
   var_1 = 5000;
   level.room_exploit_threat_active = 0;
-  var_2 = getent("main_base_threat_volume", "targetname");
+  var_2 = getEnt("main_base_threat_volume", "targetname");
 
   if(!isDefined(var_2)) {
     return;
@@ -1731,9 +1731,9 @@ check_for_room_exploit() {
 }
 
 initial_entity_setup() {
-  var_0 = getent("front_gate_mantle", "targetname");
+  var_0 = getEnt("front_gate_mantle", "targetname");
   var_0 movez(-200, 0.1);
-  var_1 = getent("node_shelf", "targetname");
+  var_1 = getEnt("node_shelf", "targetname");
   var_1 delete();
   var_2 = getEntArray("main_base_right_gate", "targetname");
 

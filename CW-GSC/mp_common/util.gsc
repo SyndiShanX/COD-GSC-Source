@@ -9,7 +9,7 @@
 #namespace util;
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -726,7 +726,7 @@ function function_a3f7de13(var_e0dd85aa, s_team, n_clientnum, extradata = 0) {
     n_clientnum = -1;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player luinotifyevent(#"announcement_event", 4, var_e0dd85aa, n_team, n_clientnum, extradata);

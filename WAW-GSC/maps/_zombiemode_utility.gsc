@@ -437,9 +437,9 @@ get_zombie_hint(ref) {
 }
 set_hint_string(ent, default_ref) {
   if(isDefined(ent.script_hint)) {
-    self SetHintString(get_zombie_hint(ent.script_hint));
+    self setHintString(get_zombie_hint(ent.script_hint));
   } else {
-    self SetHintString(get_zombie_hint(default_ref));
+    self setHintString(get_zombie_hint(default_ref));
   }
 }
 
@@ -454,7 +454,7 @@ add_sound(ref, alias) {
 play_sound_at_pos(ref, pos, ent) {
   if(isDefined(ent)) {
     if(isDefined(ent.script_soundalias)) {
-      PlaySoundAtPosition(ent.script_soundalias, pos);
+      playSoundAtPosition(ent.script_soundalias, pos);
       return;
     }
 
@@ -472,7 +472,7 @@ play_sound_at_pos(ref, pos, ent) {
     return;
   }
 
-  PlaySoundAtPosition(level.zombie_sounds[ref], pos);
+  playSoundAtPosition(level.zombie_sounds[ref], pos);
 }
 
 play_sound_on_ent(ref) {

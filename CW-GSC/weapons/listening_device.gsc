@@ -214,7 +214,7 @@ function function_d993c135() {
 
   while(true) {
     now = gettime();
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player)) {
@@ -396,7 +396,7 @@ function function_f38fc2a8(data) {
     disttovictim = var_a8d3770f - var_48b7953.origin;
 
     if(bundle.var_b060dd0c < 180) {
-      var_fa4e3cfc = vectornormalize((disttovictim[0], disttovictim[1], 0));
+      var_fa4e3cfc = vectorNormalize((disttovictim[0], disttovictim[1], 0));
 
       if(!isDefined(var_48b7953.var_fa4e3cfc)) {
         var_48b7953.var_2a5aebad = anglesToForward((0, var_48b7953.angles[1], 0));

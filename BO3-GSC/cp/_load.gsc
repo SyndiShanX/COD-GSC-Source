@@ -207,7 +207,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
   if(idamage < self.health) {
     return finaldamage;
   }
-  players = getplayers();
+  players = getPlayers();
   count = 0;
   for(i = 0; i < players.size; i++) {
     if(players[i] == self || players[i] laststand::player_is_in_laststand() || players[i].sessionstate == "spectator") {
@@ -290,7 +290,7 @@ function footsteps() {
 }
 
 function init_traverse() {
-  point = getent(self.target, "targetname");
+  point = getEnt(self.target, "targetname");
   if(isDefined(point)) {
     self.traverse_height = point.origin[2];
     point delete();
@@ -326,7 +326,7 @@ function end_game() {
   check_end_game_intermission_delay();
   println("");
   util::clientnotify("zesn");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     util::setclientsysstate("lsm", "0", players[i]);
   }
@@ -340,7 +340,7 @@ function end_game() {
   wait(0.1);
   game_over = [];
   survived = [];
-  players = getplayers();
+  players = getPlayers();
   setmatchflag("disableIngameMenu", 1);
   foreach(player in players) {
     player closeingamemenu();
@@ -391,9 +391,9 @@ function end_game() {
     wait(15);
     level notify("stop_intermission");
   }
-  array::thread_all(getplayers(), &player_exit_level);
+  array::thread_all(getPlayers(), &player_exit_level);
   wait(1.5);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] cameraactivate(0);
   }
@@ -404,7 +404,7 @@ function end_game() {
 function intermission() {
   level.intermission = 1;
   level notify("intermission");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     util::setclientsysstate("levelNotify", "zi", players[i]);
     players[i] setclientthirdperson(0);
@@ -414,7 +414,7 @@ function intermission() {
     players[i] stopsounds();
   }
   wait(0.25);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     util::setclientsysstate("lsm", "0", players[i]);
   }
@@ -459,8 +459,8 @@ function player_intermission() {
         }
         org.origin = points[i].origin;
         org.angles = points[i].angles;
-        for(j = 0; j < getplayers().size; j++) {
-          player = getplayers()[j];
+        for(j = 0; j < getPlayers().size; j++) {
+          player = getPlayers()[j];
           player camerasetposition(org);
           player camerasetlookat();
           player cameraactivate(1);
@@ -478,8 +478,8 @@ function player_intermission() {
         }
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
-        org moveto(target_point.origin, time, q_time, q_time);
-        org rotateto(target_point.angles, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait(time - q_time);
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 1;

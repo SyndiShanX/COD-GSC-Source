@@ -336,7 +336,7 @@ func_6B21(var_0, var_1, var_2, var_3) {
       var_14 = var_9 - var_4[var_7 - 1]["origin"];
       var_4[var_7 - 1]["dist"] = length(var_14);
       var_4[0]["total_dist"] = var_4[0]["total_dist"] + var_4[var_7 - 1]["dist"];
-      var_4[var_7 - 1]["to_next_node"] = vectornormalize(var_14);
+      var_4[var_7 - 1]["to_next_node"] = vectorNormalize(var_14);
       if(isDefined(var_8.fgetarg)) {
         var_4[var_7 - 1]["radius"] = var_8.fgetarg;
       } else {

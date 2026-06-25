@@ -64,7 +64,7 @@ enemy_try_180_turn(var_0) {
     return;
   }
   var_1 = anglesToForward(self.angles);
-  var_2 = vectornormalize(var_0 - self.origin);
+  var_2 = vectorNormalize(var_0 - self.origin);
 
   if(vectordot(var_1, var_2) < -0.8) {
     var_3 = self.origin + (0, 0, 16);
@@ -140,7 +140,7 @@ ai_clear_custom_animation_reaction_and_idle() {
     return;
   }
   self._stealth.behavior.event.custom_animation.node notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   ai_clear_custom_animation_reaction();
 }
 
@@ -857,7 +857,7 @@ enemy_alert_level_alerted_once(var_0) {
     self.disableexits = 1;
   }
 
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
   var_3 = distance(var_0.origin, self.origin);
   var_3 = var_3 * 0.25;
 
@@ -1079,7 +1079,7 @@ enemy_saw_corpse_logic() {
 
 enemy_stop_current_behavior() {
   if(!maps\_utility::ent_flag("_stealth_behavior_reaction_anim")) {
-    self stopanimscripted();
+    self stopanimScripted();
     self notify("stop_animmode");
     self notify("stop_loop");
   }
@@ -1299,7 +1299,7 @@ friendly_state_spotted() {
   self.accuracy = self._stealth.behavior.badaccuracy;
   self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
   self allowedstances("prone", "crouch", "stand");
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = 0;
   self.ignoreme = 0;
   maps\_utility::disable_cqbwalk();
@@ -1477,7 +1477,7 @@ friendly_stance_handler_set_stance_up() {
 
 friendly_stance_handler_return_ai_sight(var_0, var_1) {
   var_2 = anglesToForward(var_0.angles);
-  var_3 = vectornormalize(self.origin - var_0.origin);
+  var_3 = vectorNormalize(self.origin - var_0.origin);
   var_4 = vectordot(var_2, var_3);
   var_5 = level._stealth.logic.detection_level;
 

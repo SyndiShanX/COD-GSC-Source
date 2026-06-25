@@ -38,5 +38,5 @@ func_position_player() {
   var_0[0] = getdvarint("createfx_playerpos_x");
   var_0[1] = getdvarint("createfx_playerpos_y");
   var_0[2] = getdvarint("createfx_playerpos_z");
-  level.player setorigin((var_0[0], var_0[1], var_0[2]));
+  level.player setOrigin((var_0[0], var_0[1], var_0[2]));
 }

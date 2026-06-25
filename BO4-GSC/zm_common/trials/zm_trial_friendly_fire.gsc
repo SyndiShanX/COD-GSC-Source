@@ -68,7 +68,7 @@ on_begin(var_9e0a2a85 = 1) {
   zm_custom::function_928be07c(var_9e0a2a85);
   callback::on_player_damage(&on_player_damage);
   level.var_edae191d = 1;
-  var_6a94fd5e = 4 - getplayers().size;
+  var_6a94fd5e = 4 - getPlayers().size;
   var_be33ceec = #"allies";
   level notify(#"hash_d3e36871aa6829f");
 
@@ -86,7 +86,7 @@ on_begin(var_9e0a2a85 = 1) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isbot(player)) {
       player thread function_e2c5e34c();
       player thread function_6aa8dd73();
@@ -104,7 +104,7 @@ on_end(round_reset) {
   callback::remove_on_player_damage(&on_player_damage);
   level.var_edae191d = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isbot(player)) {
       player val::reset("zm_trial_friendly_fire", "ignoreall");
       player val::reset("zm_trial_friendly_fire", "ignoreme");
@@ -154,7 +154,7 @@ function_e2c5e34c() {
 }
 
 function_e1378d07() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player) && !isbot(player) && !player laststand::player_is_in_laststand()) {
       return true;
     }

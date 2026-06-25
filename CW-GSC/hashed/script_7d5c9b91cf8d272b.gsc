@@ -315,7 +315,7 @@ function function_2038df41(entity) {
   tag_origin = entity gettagorigin("j_head");
   tag_angles = entity gettagangles("j_head");
   model = util::spawn_model(#"hash_5329fae525fc210", tag_origin, tag_angles);
-  model linkto(entity, "j_head", origin_offset, angle_offset);
+  model linkTo(entity, "j_head", origin_offset, angle_offset);
   model ghost();
   model.parent = entity;
   entity.head_collision = model;
@@ -347,7 +347,7 @@ function private function_3ee90301() {
       var_a4b0369c = 0;
 
       while(!var_a4b0369c && isDefined(self.parent)) {
-        players = getplayers(undefined, self.parent.origin, 80);
+        players = getPlayers(undefined, self.parent.origin, 80);
         var_a4b0369c = players.size <= 0;
         wait 1;
       }
@@ -387,7 +387,7 @@ function function_a1e5b1db(einflictor, eattacker, idamage, idflags, smeansofdeat
     if(isDefined(damage_origin) && function_1c713d40(self)) {
       to_damage = damage_origin - self.origin;
       to_damage = (to_damage[0], to_damage[1], 0);
-      dot = vectordot(anglesToForward(self.angles), vectornormalize(to_damage));
+      dot = vectordot(anglesToForward(self.angles), vectorNormalize(to_damage));
 
       if(dot > 0.5) {
         var_c5a8cbf7 = 1;
@@ -1012,7 +1012,7 @@ function function_132c087b(behaviortreeentity, asmstatename) {
   var_1cdbb377 = 40;
   var_b76d460e = (var_1cdbb377 * -1, var_1cdbb377 * -1, -5);
   var_d7c27d70 = (var_1cdbb377, var_1cdbb377, 5);
-  trace_point = var_9a4357f2 + vectornormalize(velocity) * 30;
+  trace_point = var_9a4357f2 + vectorNormalize(velocity) * 30;
   trace_point = (trace_point[0], trace_point[1], max(var_9a4357f2[2], asmstatename.origin[2]));
   trace = physicstraceex(asmstatename.origin + trace_z_offset, trace_point + trace_z_offset, var_b76d460e, var_d7c27d70);
   trace_hit = isDefined(trace[#"fraction"]) && trace[#"fraction"] < 1;
@@ -1098,7 +1098,7 @@ function function_132c087b(behaviortreeentity, asmstatename) {
       var_885a3974 = distance(enemy.origin, asmstatename.origin);
     }
 
-    players = getplayers();
+    players = getPlayers();
     var_89cc0335 = function_72d3bca6(players, asmstatename.origin, undefined, 0, var_885a3974 + 1500);
     var_7bafb710 = [];
     var_1142e3f3 = 1;
@@ -1284,8 +1284,8 @@ function private function_4a332962(zombie, target) {
   enemy_vec = zombie.origin - origin;
   var_660d1fec = (enemy_vec[0], enemy_vec[1], 0);
   var_58877074 = (facing_vec[0], facing_vec[1], 0);
-  var_660d1fec = vectornormalize(var_660d1fec);
-  var_58877074 = vectornormalize(var_58877074);
+  var_660d1fec = vectorNormalize(var_660d1fec);
+  var_58877074 = vectorNormalize(var_58877074);
   enemy_dot = vectordot(var_58877074, var_660d1fec);
 
   if(enemy_dot < 0) {
@@ -1305,8 +1305,8 @@ function private function_13ba4731(zombie, target) {
   enemy_vec = zombie.origin - origin;
   var_660d1fec = (enemy_vec[0], enemy_vec[1], 0);
   var_58877074 = (facing_vec[0], facing_vec[1], 0);
-  var_660d1fec = vectornormalize(var_660d1fec);
-  var_58877074 = vectornormalize(var_58877074);
+  var_660d1fec = vectorNormalize(var_660d1fec);
+  var_58877074 = vectorNormalize(var_58877074);
   enemy_dot = vectordot(var_58877074, var_660d1fec);
 
   if(enemy_dot < 0.5) {
@@ -1317,7 +1317,7 @@ function private function_13ba4731(zombie, target) {
 }
 
 function private function_849b329(entity, var_9a4357f2) {
-  players = getplayers();
+  players = getPlayers();
   var_9ce867db = 1.6;
   var_89cc0335 = function_72d3bca6(players, var_9a4357f2, undefined, 0, 40 * var_9ce867db);
 
@@ -1360,7 +1360,7 @@ function private function_a768119c(entity, player, hit_point) {
   }
 
   player playerknockback(1);
-  knock_dir = vectornormalize(player.origin - hit_point);
+  knock_dir = vectorNormalize(player.origin - hit_point);
   knock_dir = (knock_dir[0], knock_dir[1], 0.1);
   player applyknockback(int(100), knock_dir);
   player playerknockback(0);
@@ -1434,7 +1434,7 @@ function private function_6ccdd373(entity, vehicle, hit_point) {
     return;
   }
 
-  knock_dir = vectornormalize(vehicle.origin - hit_point);
+  knock_dir = vectorNormalize(vehicle.origin - hit_point);
   knock_dir = (knock_dir[0], knock_dir[1], 0.1);
   vehicle launchvehicle(knock_dir * 100, hit_point, 0);
   var_54fdcc2b = vehicle getvehoccupants();
@@ -2289,7 +2289,7 @@ function private function_e1a54e93(entity) {
         }
 
         if(!isDefined(hit_ent) && isDefined(trace[#"position"]) && is_true(self.var_1fa24724)) {
-          var_89cc0335 = getplayers(undefined, trace[#"position"], 150);
+          var_89cc0335 = getPlayers(undefined, trace[#"position"], 150);
 
           if(isDefined(var_89cc0335[0])) {
             hit_ent = var_89cc0335[0];
@@ -2478,7 +2478,7 @@ function private function_18fd18de(entity) {
   }
 
   ent = util::spawn_model("tag_origin", entity.origin, (0, 0, 0), undefined, 1);
-  ent linkto(entity);
+  ent linkTo(entity);
   entity.var_ee2440ac = ent;
   util::wait_network_frame(1);
 
@@ -2887,7 +2887,7 @@ function private launch_ragdoll() {
 
   foreach(abom in aboms) {
     if(isDefined(level.var_8f1e0b55)) {
-      abom[[level.var_8f1e0b55]]((0, 0, 300), getplayers()[0]);
+      abom[[level.var_8f1e0b55]]((0, 0, 300), getPlayers()[0]);
     }
   }
 }

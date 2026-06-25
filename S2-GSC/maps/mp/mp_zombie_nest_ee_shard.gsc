@@ -28,8 +28,8 @@ func_7852() {
 
 func_786A() {
   if(1) {
-    var_00 = getent("nest_ee_shard_intro_start_trig", "targetname");
-    var_01 = getent("hilt_altar_model", "targetname");
+    var_00 = getEnt("nest_ee_shard_intro_start_trig", "targetname");
+    var_01 = getEnt("hilt_altar_model", "targetname");
     if(isDefined(var_00)) {
       var_02 = undefined;
       if(1) {
@@ -38,10 +38,10 @@ func_786A() {
       }
 
       var_00.var_4D91 = lib_0559::func_7BE3(var_00, "hilt");
-      var_00 sethintstring(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
+      var_00 setHintString(&"ZOMBIE_NEST_SHARD_INTRO_TRIG");
       level thread func_2E79();
       var_00 waittill("trigger", var_03);
-      var_04 = getent("hilt_control", "targetname");
+      var_04 = getEnt("hilt_control", "targetname");
       if(isDefined(var_04)) {
         var_04 thread maps\mp\mp_zombie_nest_ee_util::func_4D76();
         var_04 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("green");
@@ -103,7 +103,7 @@ func_7866() {
   if(!common_scripts\utility::func_3C77("flag_com_valve_turned")) {
     lib_0378::func_8D74("aud_claw_move_stop", level.var_3571);
     if(0) {
-      var_00 = getent("shard_valve", "targetname");
+      var_00 = getEnt("shard_valve", "targetname");
       var_01 = lib_0557::func_782F(undefined, var_00);
       lib_0557::func_781D("3 shard", var_01);
     }
@@ -239,12 +239,12 @@ func_52EA() {
   level.var_3572 lib_0547::func_A283(["s2_zom_shroud_cover_lift_open", "s2_zom_shroud_cover_lift_close", "s2_zom_shroud_cover_lift_stuck_idle"], ::func_2022);
   level.var_3595.var_9EC3 = ::func_2718;
   level.var_3595.var_9EC2 = ::func_2717;
-  var_00 = getent("shard_valve_light", "targetname");
+  var_00 = getEnt("shard_valve_light", "targetname");
   if(isDefined(var_00)) {
     var_00 thread func_2021();
   }
 
-  var_01 = getent("hilt_control", "targetname");
+  var_01 = getEnt("hilt_control", "targetname");
   if(isDefined(var_01)) {
     var_01 thread maps\mp\mp_zombie_nest_ee_util::func_4D77("red");
   }
@@ -253,7 +253,7 @@ func_52EA() {
 }
 
 func_8A10(param_00, param_01) {
-  var_02 = getent(param_00, "targetname");
+  var_02 = getEnt(param_00, "targetname");
   var_02.var_0BBE = param_01;
   var_03 = var_02 lib_0547::func_4315();
   var_02 func_8A12(var_03);
@@ -275,7 +275,7 @@ func_8A12(param_00) {
 }
 
 func_8A45(param_00, param_01) {
-  var_02 = getent(param_00, "targetname");
+  var_02 = getEnt(param_00, "targetname");
   var_02.var_0BBE = common_scripts\utility::func_46B5(param_01, "targetname");
   var_02.var_6C4E = var_02.var_0116;
   return var_02;
@@ -304,7 +304,7 @@ func_2E88(param_00) {
 
 func_2E79() {
   level endon("flag_shard_souls_collected");
-  var_00 = getent("hilt_altar_model", "targetname");
+  var_00 = getEnt("hilt_altar_model", "targetname");
   var_00 setCanDamage(1);
   for(;;) {
     var_00 waittill("damage", var_01, var_02);

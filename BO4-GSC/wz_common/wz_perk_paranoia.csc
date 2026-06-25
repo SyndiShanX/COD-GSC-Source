@@ -68,7 +68,7 @@ function_3e9077b(localclientnum) {
 
   while(true) {
     var_7cefa3dc = undefined;
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
 
     foreach(player in players) {
       if(!isDefined(player)) {
@@ -105,7 +105,7 @@ function_3e9077b(localclientnum) {
 
       player_angles = player getplayerangles();
       player_forward = anglesToForward(player_angles);
-      var_e1a2a16a = vectornormalize(to_self);
+      var_e1a2a16a = vectorNormalize(to_self);
 
       if(vectordot(player_forward, var_e1a2a16a) < var_81f254ba) {
         continue;

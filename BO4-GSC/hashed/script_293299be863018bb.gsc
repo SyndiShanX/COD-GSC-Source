@@ -23,7 +23,7 @@ init_flags() {
 }
 
 init_quest() {
-  level.var_51acdb19 = getent("dempsey_grenade", "targetname");
+  level.var_51acdb19 = getEnt("dempsey_grenade", "targetname");
   level.var_a7a99ef1 = struct::get(#"dempsey_audio");
   level.var_cd51aa28 = 0;
   level.var_440b230b = 0;
@@ -51,7 +51,7 @@ function_37518cc4(var_5ea5c94d, ended_early) {
   }
 
   level.var_cd51aa28 = 1;
-  playsoundatposition(#"hash_259ff339b748935e", level.var_a7a99ef1.origin);
+  playSoundAtPosition(#"hash_259ff339b748935e", level.var_a7a99ef1.origin);
   level waittill(#"groom_lake_empty");
 }
 
@@ -70,7 +70,7 @@ function_44101788(var_5ea5c94d, ended_early) {
   }
 
   level.var_cd51aa28 = 2;
-  playsoundatposition(#"hash_68bbb4ef1a9d22af", level.var_a7a99ef1.origin);
+  playSoundAtPosition(#"hash_68bbb4ef1a9d22af", level.var_a7a99ef1.origin);
   level waittill(#"groom_lake_empty");
 }
 
@@ -89,7 +89,7 @@ function_cc61f0a3(var_5ea5c94d, ended_early) {
   }
 
   level.var_cd51aa28 = 3;
-  playsoundatposition(#"hash_5c206c7dd64ec92c", level.var_a7a99ef1.origin);
+  playSoundAtPosition(#"hash_5c206c7dd64ec92c", level.var_a7a99ef1.origin);
   level waittill(#"groom_lake_empty");
 }
 
@@ -108,7 +108,7 @@ function_4cf57214(var_5ea5c94d, ended_early) {
   }
 
   level.var_cd51aa28 = 4;
-  playsoundatposition(#"hash_2c8959d200afc735", level.var_a7a99ef1.origin);
+  playSoundAtPosition(#"hash_2c8959d200afc735", level.var_a7a99ef1.origin);
   level waittill(#"groom_lake_empty");
 }
 

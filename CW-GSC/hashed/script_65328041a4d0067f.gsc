@@ -21,7 +21,7 @@ function function_f554eb14(str_objective, b_starting) {
   level.player namespace_534279a::function_a3c3a2b0();
   level thread function_a7bfc002();
   level thread function_596aab36();
-  var_c31a6f62 = getent("aa_parapet", "targetname");
+  var_c31a6f62 = getEnt("aa_parapet", "targetname");
 
   if(!isDefined(objectives::function_285e460(#"hash_75d3caceed12ab7d", var_c31a6f62))) {
     level objectives::kill(#"hash_75d3caceed12ab7d", var_c31a6f62, #"hash_5c22b5de1fc16f25", undefined, 0, 1);
@@ -44,7 +44,7 @@ function function_6ea2cd94() {
 }
 
 function function_7e171808() {
-  var_80d256bf = getent("aa_parapet", "targetname");
+  var_80d256bf = getEnt("aa_parapet", "targetname");
   var_80d256bf namespace_534279a::function_2a8ee50f("parapet");
   level flag::set("flg_aa_parapet_destroyed");
   level notify(#"hash_7797b485016eeeed");

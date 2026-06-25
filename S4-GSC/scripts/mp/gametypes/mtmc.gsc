@@ -168,7 +168,7 @@ _id_8294() {
       continue;
     }
 
-    var_7 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+    var_7 = scripts\engine\utility::getStruct(var_5.target, "targetname");
     var_8 = spawnStruct();
     var_8.origin = var_7.origin;
     var_8.angles = var_7.angles;
@@ -314,7 +314,7 @@ _id_1D1A() {
   var_9 = undefined;
 
   foreach(var_11 in level._id_A8E8) {
-    var_12 = vectornormalize(var_11.trigger.origin - var_0);
+    var_12 = vectorNormalize(var_11.trigger.origin - var_0);
     var_13 = vectordot(var_2, var_12);
     var_14 = distancesquared(var_11.trigger.origin, var_0);
 

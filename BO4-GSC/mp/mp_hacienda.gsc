@@ -64,13 +64,13 @@ function_2cdcf5c3() {
 
 function_d839264a() {
   a_s_buttons = struct::get_array("car_platform_button");
-  mdl_platform = getent("car_platform", "targetname");
-  var_90fcac95 = getent("car_platform_clip", "targetname");
+  mdl_platform = getEnt("car_platform", "targetname");
+  var_90fcac95 = getEnt("car_platform_clip", "targetname");
   var_a9f61c2f = getEntArray("car_platform", "script_linkto");
   var_ebd977d = getEntArray("car_platform_panel", "script_interact_group");
   mdl_platform.a_nd_traversals = getnodearray("car_platform_traverse", "targetname");
-  var_90fcac95 linkto(mdl_platform);
-  var_90fcac95 disconnectpaths();
+  var_90fcac95 linkTo(mdl_platform);
+  var_90fcac95 disconnectPaths();
 
   foreach(nd_traverse in mdl_platform.a_nd_traversals) {
     linktraversal(nd_traverse);
@@ -102,7 +102,7 @@ function_45cfd64e(e_activator) {
     unlinktraversal(nd_traverse);
   }
 
-  self.mdl_platform rotateyaw(360, getdvarfloat(#"hash_42b74e55d98810b6", 20));
+  self.mdl_platform rotateYaw(360, getdvarfloat(#"hash_42b74e55d98810b6", 20));
   self.mdl_platform playSound("amb_car_platform_start");
   self.mdl_platform playLoopSound("amb_car_platform_loop", 0.5);
   self.mdl_platform waittill(#"rotatedone");
@@ -183,7 +183,7 @@ function_f5a4a3eb() {
     mdl_door.v_close = mdl_door.origin;
     mdl_door.v_open = s_open.origin + vectorscale(anglesToForward(mdl_door.v_forward) * -1, 2);
     mdl_door.b_closed = 1;
-    mdl_door disconnectpaths();
+    mdl_door disconnectPaths();
 
     if(true) {
       mdl_door thread function_dd0b407b();
@@ -211,17 +211,17 @@ function_dd0b407b() {
   } else {
     v_moveto = self.v_close + vectorscale(anglesToForward(self.v_forward) * -1, 2);
     self.b_closed = 1;
-    self disconnectpaths();
+    self disconnectPaths();
   }
 
   if(b_closed) {
     var_1db0beb5 = self.origin + vectorscale(anglesToForward(self.v_forward) * -1, 2);
-    self moveto(var_1db0beb5, 0.75);
+    self moveTo(var_1db0beb5, 0.75);
     self waittill(#"movedone");
   }
 
   self thread function_e0954c11();
-  self moveto(v_moveto, 1.2);
+  self moveTo(v_moveto, 1.2);
   str_sound = "amb_stone_door_open";
 
   if(self.script_side === 2) {
@@ -232,7 +232,7 @@ function_dd0b407b() {
   self waittill(#"movedone");
 
   if(!b_closed) {
-    self moveto(self.v_close, 0.75);
+    self moveTo(self.v_close, 0.75);
     self waittill(#"movedone");
   }
 

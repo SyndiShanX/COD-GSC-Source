@@ -27,7 +27,7 @@ flashrumbleloop(duration) {
   goaltime = gettime() + duration * 1000;
 
   while(gettime() < goaltime) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -159,7 +159,7 @@ playflashsound(duration) {
   self endon("disconnect");
   flashsound = spawn("script_origin", (0, 0, 1));
   flashsound.origin = self.origin;
-  flashsound linkto(self);
+  flashsound linkTo(self);
   flashsound thread deleteentonownerdeath(self);
   flashsound playSound(level.sound_flash_start);
   flashsound playLoopSound(level.sound_flash_loop);

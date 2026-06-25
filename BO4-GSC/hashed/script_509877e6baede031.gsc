@@ -101,8 +101,8 @@ phone_init() {
     self.e_phone scene::play("blinking");
   }
 
-  self usetriggerrequirelookat();
-  self setcursorhint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
   self thread function_a546fd97();
 }
 
@@ -114,7 +114,7 @@ function_a546fd97() {
     add_outtime = s_notify.attacker aat::getaatonweapon(s_notify.weapon);
 
     if(isDefined(add_outtime) && add_outtime.name === "zm_aat_kill_o_watt") {
-      getplayers()[0] iprintln("<dev string:x38>");
+      getPlayers()[0] iprintln("<dev string:x38>");
 
       level.var_2363fbdb += 1;
       self.e_phone scene::play("ring");

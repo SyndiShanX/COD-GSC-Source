@@ -128,7 +128,7 @@ curtain_fx(var_0) {
 bully_shoots(var_0) {
   var_0 shoot();
   wait 1;
-  var_0 stopanimscripted();
+  var_0 stopanimScripted();
   var_0 maps\_utility::enable_cqbwalk();
 }
 
@@ -214,7 +214,7 @@ script_model_anims() {
 }
 
 door_kick_func(var_0) {
-  var_1 = getent("kicked_door", "targetname");
+  var_1 = getEnt("kicked_door", "targetname");
   var_1 rotatepitch(-110, 0.5, 0.1, 0.4);
   thread common_scripts\utility::play_sound_in_space("physics_ammobox_default", var_0.origin);
   var_1 connectpaths();
@@ -222,8 +222,8 @@ door_kick_func(var_0) {
 
 wall_kick_func(var_0) {
   var_1 = getEntArray("wall_rebar", "targetname");
-  var_2 = getent("wall_clip", "targetname");
-  var_3 = getent("player_kick_blocker", "targetname");
+  var_2 = getEnt("wall_clip", "targetname");
+  var_3 = getEnt("player_kick_blocker", "targetname");
   var_4 = (-13707.5, 14076, -195.5);
   var_5 = (-13707.5, 14076, -223);
   physicsexplosionsphere(var_4, 50, 30, 0.5);
@@ -242,7 +242,7 @@ wall_kick_func(var_0) {
 
 rebar_rotate() {
   var_0 = randomfloatrange(0.2, 0.4);
-  self rotateto(self.angles + (150, 0, 0), var_0, 0.1, var_0 - 0.1);
+  self rotateTo(self.angles + (150, 0, 0), var_0, 0.1, var_0 - 0.1);
 }
 
 #using_animtree("vehicles");

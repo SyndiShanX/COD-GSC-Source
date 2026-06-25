@@ -222,8 +222,8 @@ proximity_detonate(owner) {
   explosionradius = detonateradius * 2;
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateradius), 4, detonateradius, detonateradius * 1.5);
   damagearea setexcludeteamfortrigger(owner.team);
-  damagearea enablelinkto();
-  damagearea linkto(self);
+  damagearea enablelinkTo();
+  damagearea linkTo(self);
   self.damagearea = damagearea;
 
   while(isDefined(self)) {
@@ -274,7 +274,7 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
     model endon("weapon_beacon_timeout");
     model setModel("t6_wpn_zmb_homing_beacon_world");
     model useanimtree(#animtree);
-    model linkto(grenade);
+    model linkTo(grenade);
     model.angles = grenade.angles;
     model thread beacon_cleanup(grenade);
     model.owner = self;
@@ -802,7 +802,7 @@ wait_and_do_weapon_beacon_damage(index) {
   if(index == 0) {
     radiusdamage(self.origin + vectorscale((0, 0, 1), 12.0), 10, 1, 1, self.owner, "MOD_GRENADE_SPLASH", "beacon_zm");
     self ghost();
-    self stopanimscripted(0);
+    self stopanimScripted(0);
   }
 
   level thread weap_beacon_zombie_death(self, a_zombies_to_kill);
@@ -870,7 +870,7 @@ weap_beacon_gib(ai_zombie) {
 }
 
 weap_beacon_rumble() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isalive(player) && isDefined(player)) {

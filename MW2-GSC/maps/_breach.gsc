@@ -43,11 +43,11 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   assertEx((aVolumes.size == 1), "There are multiple room volumes with the same targetname: " + self.targetname);
   sRoomName = self.targetname;
   self.sBadplaceName = "badplace_" + sRoomName;
-  self.badplace = getent("badplace_" + sRoomName, "targetname");
+  self.badplace = getEnt("badplace_" + sRoomName, "targetname");
   if(isDefined(self.badplace)) {
     assertEx((self.badplace.classname == "script_origin"), "The badplace entity for volume " + self.targetname + " needs to be a script_origin");
   }
-  self.breachtrigger = getent("trigger_" + sRoomName, "targetname");
+  self.breachtrigger = getEnt("trigger_" + sRoomName, "targetname");
   if(!isDefined(bPlayDefaultFx)) {
     bPlayDefaultFx = true;
   }
@@ -84,31 +84,31 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
       break;
   }
   if(self.hasDoor == true) {
-    self.eDoor = getent(self.script_linkto, "script_linkname");
+    self.eDoor = getEnt(self.script_linkto, "script_linkname");
     assertEx((isDefined(self.eDoor)), "Explosive breach room volume " + self.targetname + " needs to scriptLinkto a single door");
     if(self.eDoor.classname == "script_model") {
       self.animEnt = spawn("script_origin", self.eDoor.origin);
       self.animEnt.angles = self.eDoor.angles;
     } else if(self.eDoor.classname == "script_brushmodel") {
-      self.animEnt = getent(self.eDoor.target, "targetname");
+      self.animEnt = getEnt(self.eDoor.target, "targetname");
       assertEx((isDefined(self.animEnt)), "Room volume " + self.targetname + " needs it's script_brushmodel door door to target a script_origin in the lower right hand corner of the door frame. Make this script_origin point in towards the room being breached.");
       assertEx((self.animEnt.classname == "script_origin"), "Room volume " + self.targetname + " needs it's script_brushmodel door door to target a script_origin in the lower right hand corner of the door frame. Make this script_origin point in towards the room being breached.");
       self.eDoor.vector = anglesToForward(self.animEnt.angles);
     }
     self.animEnt.type = "Cover Right";
-    self.eExploderOrigin = getent(self.eDoor.script_linkto, "script_linkname");
+    self.eExploderOrigin = getEnt(self.eDoor.script_linkto, "script_linkname");
     assertex(isDefined(self.eExploderOrigin), "A script_brushmodel / script_model door needs to script_linkTo an exploder( script_origin ) to play particles when opened. Targetname:" + self.targetname);
     assertEx((self.eExploderOrigin.classname == "script_origin"), "The exploder for this room volume needs to be a script_origin: " + self.targetname);
     self.iExploderNum = self.eExploderOrigin.script_exploder;
     assertEx((isDefined(self.iExploderNum)), "There is no exploder number in the key 'script_exploder' for volume " + self.targetname);
   } else if(self.hasDoor == false) {
-    self.animEnt = getent(self.script_linkto, "script_linkname");
+    self.animEnt = getEnt(self.script_linkto, "script_linkname");
     assertEx((isDefined(self.animEnt)), "If there is no door to be breached, you must have the room volume scriptLinkTo a script_origin instead where the AI will play their idle and enter anims.");
   }
   if(self.hasFlashbangs == true) {
-    self.grenadeOrigin = getent("flashthrow_" + sRoomName, "targetname");
+    self.grenadeOrigin = getEnt("flashthrow_" + sRoomName, "targetname");
     assertEx((isDefined(self.grenadeOrigin)), "Breaches that have AI throwing flashbangs need a script origin in the center of the door frame with a targetname of: flashthrow_" + sRoomName);
-    self.grenadeDest = getent(self.grenadeOrigin.target, "targetname");
+    self.grenadeDest = getEnt(self.grenadeOrigin.target, "targetname");
     assertEx((isDefined(self.grenadeDest)), "script_origin 'flashthrow_" + sRoomName + "' needs to target another script_origin where you want the flashbang to be thrown to");
   }
 
@@ -555,7 +555,7 @@ door_connectpaths() {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
   } else {
-    blocker = getent(self.target, "targetname");
+    blocker = getEnt(self.target, "targetname");
     assertex(isDefined(blocker), "A script_model door needs to target a script_brushmodel that blocks the door.");
     blocker hide();
     blocker notsolid();
@@ -575,7 +575,7 @@ door_fall_over(animEnt) {
   }
   dist = (vector[0] * 20, vector[1] * 20, vector[2] * 20);
 
-  self moveto(self.origin + dist, .5, 0, .5);
+  self moveTo(self.origin + dist, .5, 0, .5);
 
   rotationDummy = spawn("script_origin", (0, 0, 0));
   rotationDummy.angles = animEnt.angles;

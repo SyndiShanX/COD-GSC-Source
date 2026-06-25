@@ -730,7 +730,7 @@ function init(vehicle) {
   callback::callback("hash_bae82b92");
   vehicle useanimtree($generic);
   if(isDefined(vehicle.e_dyn_path)) {
-    vehicle.e_dyn_path linkto(vehicle);
+    vehicle.e_dyn_path linkTo(vehicle);
   }
   vehicle flag::init("waiting_for_flag");
   vehicle.takedamage = !(isDefined(vehicle.script_godmode) && vehicle.script_godmode);
@@ -796,7 +796,7 @@ function init(vehicle) {
     if(isDefined(vehicle.target)) {
       path_start = getvehiclenode(vehicle.target, "targetname");
       if(!isDefined(path_start)) {
-        path_start = getent(vehicle.target, "targetname");
+        path_start = getEnt(vehicle.target, "targetname");
         if(!isDefined(path_start)) {
           path_start = struct::get(vehicle.target, "targetname");
         }
@@ -1390,7 +1390,7 @@ function _vehicle_bad_place() {
 function get_vehiclenode_any_dynamic(target) {
   path_start = getvehiclenode(target, "targetname");
   if(!isDefined(path_start)) {
-    path_start = getent(target, "targetname");
+    path_start = getEnt(target, "targetname");
   } else if(isDefined(self.vehicleclass) && self.vehicleclass == "plane") {
     println("" + path_start.targetname);
     println("" + self.vehicletype);
@@ -1577,7 +1577,7 @@ function spawn(modelname, targetname, vehicletype, origin, angles, destructibled
   assert(isDefined(vehicletype));
   assert(isDefined(origin));
   assert(isDefined(angles));
-  return spawnvehicle(vehicletype, origin, angles, targetname, destructibledef);
+  return spawnVehicle(vehicletype, origin, angles, targetname, destructibledef);
 }
 
 function aircraft_dust_kickup(model) {
@@ -1841,7 +1841,7 @@ function get_from_spawnStruct(target) {
 }
 
 function get_from_entity(target) {
-  return getent(target, "targetname");
+  return getEnt(target, "targetname");
 }
 
 function get_from_spawnstruct_target(target) {
@@ -1849,7 +1849,7 @@ function get_from_spawnstruct_target(target) {
 }
 
 function get_from_entity_target(target) {
-  return getent(target, "target");
+  return getEnt(target, "target");
 }
 
 function is_destructible() {
@@ -1897,7 +1897,7 @@ function attack_group_think() {
         continue;
         continue;
       }
-      self setturrettargetent(current_target, vectorscale((0, 0, 1), 50));
+      self setturrettargetEnt(current_target, vectorscale((0, 0, 1), 50));
       if(isDefined(self.fire_delay_min) && isDefined(self.fire_delay_max)) {
         if(self.fire_delay_max < self.fire_delay_min) {
           self.fire_delay_max = self.fire_delay_min;
@@ -2111,7 +2111,7 @@ function private _watch_for_hijacked_vehicles() {
 }
 
 function disconnect_paths(detail_level = 2, move_allowed = 1) {
-  self disconnectpaths(detail_level, move_allowed);
+  self disconnectPaths(detail_level, move_allowed);
   self enableobstacle(0);
 }
 
@@ -2175,7 +2175,7 @@ function get_closest_attacker_with_missile_locked_on_to_me(monitored_entity) {
     if(isDefined(attacker)) {
       client_flag = 1 << attacker getentitynumber();
       if(client_flag &remaining_locked_on_flags) {
-        to_attacker = vectornormalize(attacker.origin - view_origin);
+        to_attacker = vectorNormalize(attacker.origin - view_origin);
         attacker_dot = vectordot(view_forward, to_attacker);
         if(attacker_dot > closest_attacker_dot) {
           closest_attacker = attacker;
@@ -2251,27 +2251,27 @@ function vehicle_spawner_tool() {
     vehicletypes[veh.vehicletype] = veh.model;
   }
   if(isassetloaded("", "")) {
-    veh = spawnvehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
+    veh = spawnVehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
   if(isassetloaded("", "")) {
-    veh = spawnvehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
+    veh = spawnVehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
   if(isassetloaded("", "")) {
-    veh = spawnvehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
+    veh = spawnVehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
   if(isassetloaded("", "")) {
-    veh = spawnvehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
+    veh = spawnVehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
   if(isassetloaded("", "")) {
-    veh = spawnvehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
+    veh = spawnVehicle("", vectorscale((0, 0, 1), 10000), (0, 0, 0), "");
     vehicletypes[veh.vehicletype] = veh.model;
     veh delete();
   }
@@ -2282,7 +2282,7 @@ function vehicle_spawner_tool() {
   type_index = 0;
   while(true) {
     if(getdvarint("") > 0) {
-      player = getplayers()[0];
+      player = getPlayers()[0];
       dynamic_spawn_hud = newclienthudelem(player);
       dynamic_spawn_hud.alignx = "";
       dynamic_spawn_hud.x = 20;
@@ -2294,7 +2294,7 @@ function vehicle_spawner_tool() {
         origin = origin + vectorscale((0, 0, 1), 40);
         if(player useButtonPressed()) {
           dynamic_spawn_dummy_model hide();
-          vehicle = spawnvehicle(types[type_index], origin, player.angles, "");
+          vehicle = spawnVehicle(types[type_index], origin, player.angles, "");
           vehicle makevehicleusable();
           if(getdvarint("") == 1) {
             setDvar("", "");

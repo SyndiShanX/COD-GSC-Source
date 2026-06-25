@@ -764,7 +764,7 @@ HandleNoteTrack(note, flagName, customFunction) {
       }
       break;
     case "stop anim":
-      anim_stopanimscripted();
+      anim_stopanimScripted();
       return note;
     case "break glass":
       level notify("glass_break", self);
@@ -1053,7 +1053,7 @@ noteTrackFireSpray(note, flagName) {
   hitenemy = false;
 
   if(isalive(self.enemy) && issentient(self.enemy) && self canShootEnemy()) {
-    enemydir = vectornormalize(self.enemy getEye() - weaporig);
+    enemydir = vectorNormalize(self.enemy getEye() - weaporig);
     if(vectordot(dir, enemydir) > cos(ang)) {
       hitenemy = true;
     }

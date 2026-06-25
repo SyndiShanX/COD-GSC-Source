@@ -11,7 +11,7 @@
 
 function function_d22ceb57(angles, min_dist, max_dist = 0) {
   if(isDefined(angles)) {
-    vectornormalize(angles);
+    vectorNormalize(angles);
     level.doa.camera_angles = angles;
     level.var_eb70931a = anglesToForward(angles) * -1;
     level.var_7a2e3b7d = anglestoup(angles);
@@ -106,7 +106,7 @@ function function_d207ecc1(localclientnum, delta_time) {
     }
   }
   if(var_44509e49 == 1) {
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     if(players.size == 0) {
       return;
     }

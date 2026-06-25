@@ -47,7 +47,7 @@ function __init__() {
 function __main__() {
   level flag::init("low_grav_countdown");
   level flag::init("low_grav_on");
-  level.var_e3f239e5 = getent("undercroft_zone_lowgrav_trig", "targetname");
+  level.var_e3f239e5 = getEnt("undercroft_zone_lowgrav_trig", "targetname");
   level.var_4fb25bb9 = [];
   level.var_4fb25bb9["walk"] = 4;
   level.var_4fb25bb9["run"] = 4;
@@ -70,15 +70,15 @@ function function_3fa7f11a() {
   level.var_eca8388c = [];
   foreach(var_3b9a12e0 in var_15ed352b) {
     var_3b9a12e0 thread function_e49e9c09();
-    var_4de8678a = getent(var_3b9a12e0.target, "targetname");
-    var_e3260cf = getent(var_4de8678a.target, "targetname");
+    var_4de8678a = getEnt(var_3b9a12e0.target, "targetname");
+    var_e3260cf = getEnt(var_4de8678a.target, "targetname");
     array::add(level.var_eca8388c, var_e3260cf);
   }
   while(level.var_4a455ac4 < var_15ed352b.size) {
     wait(0.05);
   }
   foreach(var_3b9a12e0 in var_15ed352b) {
-    var_544a882 = getent(var_3b9a12e0.target, "targetname");
+    var_544a882 = getEnt(var_3b9a12e0.target, "targetname");
   }
   level thread function_ed0d48ca();
   level flag::set("pressure_pads_activated");
@@ -93,17 +93,17 @@ function function_ed0d48ca() {
 }
 
 function function_e49e9c09() {
-  var_4de8678a = getent(self.target, "targetname");
-  var_4de8678a enablelinkto();
-  var_e3260cf = getent(var_4de8678a.target, "targetname");
-  var_e3260cf enablelinkto();
-  var_e3260cf linkto(var_4de8678a);
+  var_4de8678a = getEnt(self.target, "targetname");
+  var_4de8678a enablelinkTo();
+  var_e3260cf = getEnt(var_4de8678a.target, "targetname");
+  var_e3260cf enablelinkTo();
+  var_e3260cf linkTo(var_4de8678a);
   var_2e8e2853 = var_4de8678a.origin - vectorscale((0, 0, 1), 2);
   var_93f2a402 = var_4de8678a.origin;
   while(true) {
     self waittill("trigger", e_who);
-    var_4de8678a moveto(var_2e8e2853, 0.5);
-    playsoundatposition("evt_stone_plate_down", var_4de8678a.origin);
+    var_4de8678a moveTo(var_2e8e2853, 0.5);
+    playSoundAtPosition("evt_stone_plate_down", var_4de8678a.origin);
     var_4de8678a waittill("movedone");
     var_e3260cf clientfield::set("undercroft_emissives", 1);
     n_start_time = gettime();
@@ -113,14 +113,14 @@ function function_e49e9c09() {
       if(n_time >= n_end_time) {
         level.var_4a455ac4++;
         exploder::exploder("lgt_" + self.script_string);
-        playsoundatposition("evt_stone_plate_up", var_4de8678a.origin);
-        e_who playrumbleonentity("zm_castle_low_grav_panel_rumble");
+        playSoundAtPosition("evt_stone_plate_up", var_4de8678a.origin);
+        e_who playRumbleOnEntity("zm_castle_low_grav_panel_rumble");
         return;
       }
       wait(0.05);
     }
-    var_4de8678a moveto(var_93f2a402, 0.5);
-    playsoundatposition("evt_stone_plate_down", var_4de8678a.origin);
+    var_4de8678a moveTo(var_93f2a402, 0.5);
+    playSoundAtPosition("evt_stone_plate_down", var_4de8678a.origin);
     var_e3260cf clientfield::set("undercroft_emissives", 0);
     var_e3260cf clientfield::increment("undercroft_wall_panel_shutdown");
   }
@@ -262,8 +262,8 @@ function function_573a448e() {
     self waittill("jump_begin");
     var_5ed20759 = spawn("script_model", self.origin);
     var_5ed20759 setModel("tag_origin");
-    var_5ed20759 enablelinkto();
-    var_5ed20759 linkto(self, "j_spineupper");
+    var_5ed20759 enablelinkTo();
+    var_5ed20759 linkTo(self, "j_spineupper");
     playFXOnTag(level._effect["low_grav_player_jump"], var_5ed20759, "tag_origin");
     while(!self isonground() || self iswallrunning() && level flag::get("low_grav_on")) {
       wait(0.5);
@@ -274,7 +274,7 @@ function function_573a448e() {
 }
 
 function function_ba48ca38() {
-  e_trig = getent("low_grav_tp_return", "targetname");
+  e_trig = getEnt("low_grav_tp_return", "targetname");
   while(true) {
     e_trig waittill("trigger", e_who);
     if(!isDefined(e_who.var_ee422cb0)) {
@@ -286,7 +286,7 @@ function function_ba48ca38() {
 function function_23f211e9() {
   self.var_ee422cb0 = 1;
   self playlocalsound("zmb_teleporter_teleport_2d");
-  playsoundatposition("zmb_teleporter_teleport_out", self.origin);
+  playSoundAtPosition("zmb_teleporter_teleport_out", self.origin);
   a_s_port_locs = struct::get_array("temple_portal_top", "targetname");
   self zm_genesis_portals::portal_teleport_player(1, a_s_port_locs, undefined, self.origin, "temple_portal_top");
   self.var_ee422cb0 = undefined;

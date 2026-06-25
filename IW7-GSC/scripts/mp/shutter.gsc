@@ -19,7 +19,7 @@ main() {
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
-    var_3 rotateto((var_3.angles[0], var_3.angles[1] + 180, var_3.angles[2]), 0.1);
+    var_3 rotateTo((var_3.angles[0], var_3.angles[1] + 180, var_3.angles[2]), 0.1);
   }
 
   wait(0.2);
@@ -72,7 +72,7 @@ func_101A1(var_0, var_1) {
   }
 
   var_3 = 0.2;
-  var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
+  var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3);
   wait(var_3 + 0.1);
   for(;;) {
     var_4 = randomint(80);
@@ -92,7 +92,7 @@ func_101A1(var_0, var_1) {
       var_3 = 0.3;
     }
 
-    var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
+    var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
   }
 }
@@ -106,7 +106,7 @@ func_101A2(var_0, var_1) {
   }
 
   var_3 = 0.2;
-  var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
+  var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3);
   wait(var_3 + 0.1);
   for(;;) {
     var_4 = randomint(80);
@@ -126,7 +126,7 @@ func_101A2(var_0, var_1) {
       var_3 = 0.3;
     }
 
-    var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
+    var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
   }
 }
@@ -139,7 +139,7 @@ func_13D8E(var_0) {
   var_5 = spawn("script_model", (0, 0, 0));
   var_5.origin = var_2 * 0.5 + var_3 * 0.5;
   var_5.angles = var_4;
-  var_0 linkto(var_5);
+  var_0 linkTo(var_5);
   var_6 = 2;
   var_7 = 0.9;
   var_8 = 4 + randomfloat(2);

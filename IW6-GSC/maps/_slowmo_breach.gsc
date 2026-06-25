@@ -327,7 +327,7 @@ check_missing_animation() {
     return;
   }
   if(will_be_manhandled() && self.script_noteworthy == "manhandled") {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
     level.manhandled_spawners[self.export] = var_0;
   }
 
@@ -685,9 +685,9 @@ create_slowmo_breaches_from_entities() {
   foreach(var_39 in var_13) {
     var_18 = var_39.script_slowmo_breach;
     var_0[var_18].lookat_triggers[var_0[var_18].lookat_triggers.size] = var_39;
-    var_40 = getent(var_39.target, "targetname");
+    var_40 = getEnt(var_39.target, "targetname");
     var_39.breach_origin = var_40.origin;
-    var_41 = getent(var_40.target, "targetname");
+    var_41 = getEnt(var_40.target, "targetname");
     var_41.breached = 0;
     var_0[var_18].room_volume = var_41;
     var_40 thread breach_icon_think(var_39, var_18, var_41);
@@ -696,7 +696,7 @@ create_slowmo_breaches_from_entities() {
   }
 
   foreach(var_39 in var_14) {
-    var_39 usetriggerrequirelookat();
+    var_39 useTriggerRequireLookAt();
     var_18 = var_39.script_slowmo_breach;
     var_0[var_18].trigger = var_39;
 
@@ -949,7 +949,7 @@ slowmo_breach_think(var_0, var_1) {
   common_scripts\utility::array_thread(var_11, maps\_utility::add_spawn_function, ::breach_hostage_spawner_think);
   common_scripts\utility::array_thread(var_12, maps\_utility::add_spawn_function, ::breach_enemy_spawner_think);
   common_scripts\utility::array_thread(var_13, maps\_utility::add_spawn_function, ::breach_hostage_spawner_think);
-  var_6 sethintstring(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+  var_6 setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
 
   if(!isDefined(level.breach_use_triggers)) {
     level.breach_use_triggers = [];
@@ -1270,7 +1270,7 @@ breach_hint_cleanup() {
 
   foreach(var_1 in level.breach_use_triggers) {
     if(isDefined(var_1)) {
-      var_1 sethintstring("");
+      var_1 setHintString("");
     }
   }
 
@@ -1279,7 +1279,7 @@ breach_hint_cleanup() {
 
   foreach(var_1 in level.breach_use_triggers) {
     if(isDefined(var_1)) {
-      var_1 sethintstring(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
+      var_1 setHintString(&"SCRIPT_PLATFORM_BREACH_ACTIVATE");
     }
   }
 }
@@ -1570,7 +1570,7 @@ get_grouped_doorvolumes(var_0) {
 sort_breachers(var_0, var_1) {
   var_2 = var_1["active"];
   var_3 = anglestoright(self.angles);
-  var_4 = vectornormalize(var_2.origin - var_0.trigger.origin);
+  var_4 = vectorNormalize(var_2.origin - var_0.trigger.origin);
   var_5 = vectordot(var_3, var_4);
 
   if(var_5 < 0) {
@@ -2165,7 +2165,7 @@ breach_enemy_spawner_think() {
   level thread breach_enemy_track_status(self);
 
   if(isDefined(self.script_parameters) && common_scripts\utility::string_starts_with(self.script_parameters, "reference")) {
-    var_0 = getent(self.script_parameters, "targetname");
+    var_0 = getEnt(self.script_parameters, "targetname");
   }
 
   self.reference = var_0;
@@ -2529,7 +2529,7 @@ breach_explosion(var_0) {
 breach_rumble(var_0) {
   var_1 = spawn("script_origin", var_0);
   var_1.origin = var_0;
-  var_1 playrumbleonentity("grenade_rumble");
+  var_1 playRumbleOnEntity("grenade_rumble");
   wait 4;
   var_1 delete();
 }
@@ -2669,7 +2669,7 @@ knife_guy_stabs_player() {
   var_1 = distance(var_0.origin, self.origin);
 
   if(var_1 <= 50) {
-    var_0 playrumbleonentity("grenade_rumble");
+    var_0 playRumbleOnEntity("grenade_rumble");
     var_0 thread maps\_utility::play_sound_on_entity("melee_knife_hit_body");
     var_0 enablehealthshield(0);
     var_0 enabledeathshield(0);
@@ -2842,7 +2842,7 @@ get_manhandled() {
   var_0 = undefined;
 
   if(self.script_noteworthy == "manhandled") {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
   }
 
   var_1 = undefined;
@@ -2936,7 +2936,7 @@ special_gulag_adjustment() {
   var_3.angles = var_0;
   level.player playerlinktodelta(var_3, "tag_origin", 1, 45, 45, 90, 45, 1);
   var_4 = 0.45;
-  var_3 moveto(var_3.origin + var_1 * 32 + var_2 * -14, var_4, var_4 * 0.4, var_4 * 0.4);
+  var_3 moveTo(var_3.origin + var_1 * 32 + var_2 * -14, var_4, var_4 * 0.4, var_4 * 0.4);
   wait(var_4);
   level.player setmovespeedscale(0.5);
   thread player_slows_down();
@@ -2956,7 +2956,7 @@ price_breach_ent_movesto_player() {
   wait 1.5;
 
   for(;;) {
-    self moveto(level.player.origin, 2, 0, 0);
+    self moveTo(level.player.origin, 2, 0, 0);
     wait 0.05;
   }
 }
@@ -2989,7 +2989,7 @@ price_breach_ent_rotatesto_player() {
       var_0 addyaw(var_9 * -1);
     }
 
-    self rotateto(var_0.angles, 0.15);
+    self rotateTo(var_0.angles, 0.15);
     wait 0.15;
   }
 }

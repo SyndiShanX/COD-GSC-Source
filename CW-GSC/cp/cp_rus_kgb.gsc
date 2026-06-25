@@ -261,7 +261,7 @@ function armor_player_damage(einflictor, eattacker, idamage, idflags, smeansofde
   if(isDefined(shitloc) && shitloc == "MOD_GRENADE_SPLASH") {
     if(isDefined(var_fd90b0bb) && is_true(var_fd90b0bb.var_83323dfb)) {
       screenshake(modelindex, 0.5, 0.5, 0.5, 0.5);
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       damage = 0;
       return damage;
     } else {
@@ -272,7 +272,7 @@ function armor_player_damage(einflictor, eattacker, idamage, idflags, smeansofde
 
   if(isDefined(psoffsettime) && (psoffsettime == "head" || psoffsettime == "helmet" || psoffsettime == "torso_upper" || psoffsettime == "torso_lower" || psoffsettime == "torso_mid" || psoffsettime == "neck")) {
     screenshake(modelindex, randomfloatrange(0.05, 0.5), randomfloatrange(0.05, 0.5), randomfloatrange(0.05, 0.5), randomfloatrange(0.05, 0.2));
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     damage = 0;
     return damage;
   }
@@ -339,13 +339,13 @@ function function_e876a652(var_18cf1709, var_79a934ad = 1) {
 }
 
 function function_ff99024a(str_skipto, b_starting) {
-  car = getent("escape_vehicle", "targetname");
+  car = getEnt("escape_vehicle", "targetname");
   car delete();
   level.adler = namespace_e77bf565::function_52fe0eb3(b_starting);
   waitframe(1);
   tag = spawn("script_model", level.adler.origin);
   tag setModel("tag_origin");
-  level.adler linkto(tag);
+  level.adler linkTo(tag);
 }
 
 function function_4f53a5d1() {

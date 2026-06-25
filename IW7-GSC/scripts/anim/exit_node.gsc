@@ -236,7 +236,7 @@ func_371A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     var_11 = (0, var_3 + var_8 * var_7[var_10] + var_9, 0);
-    var_12 = vectornormalize(anglesToForward(var_11));
+    var_12 = vectorNormalize(anglesToForward(var_11));
     var_0.transitions[var_10] = vectordot(var_4, var_12);
   }
 }

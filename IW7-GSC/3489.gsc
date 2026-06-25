@@ -93,7 +93,7 @@ func_49E1(var_0) {
   var_8.targetpos = var_6;
   var_8.var_4BF7 = var_4;
   var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].weaponinfo);
-  var_9 linkto(var_8, level.heliheight[var_0].weaponswitchendedsupportbox, (0, 0, 0), (0, 0, 0));
+  var_9 linkTo(var_8, level.heliheight[var_0].weaponswitchendedsupportbox, (0, 0, 0), (0, 0, 0));
   var_9 setModel(level.heliheight[var_0].var_13CA9);
   var_9.angles = var_8.angles;
   var_9.owner = var_8.owner;
@@ -105,9 +105,9 @@ func_49E1(var_0) {
   var_10 = var_8.origin + (anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * -100) + (0, 0, 50);
   var_9.killcament = spawn("script_model", var_10);
   var_9.killcament setscriptmoverkillcam("explosive");
-  var_9.killcament linkto(var_8, "tag_origin");
+  var_9.killcament linkTo(var_8, "tag_origin");
   var_9 = spawnturret("misc_turret", var_8.origin, level.heliheight[var_0].weaponinfo);
-  var_9 linkto(var_8, level.heliheight[var_0].weaponswitchendedtomastrike, (0, 0, 0), (0, 0, 0));
+  var_9 linkTo(var_8, level.heliheight[var_0].weaponswitchendedtomastrike, (0, 0, 0), (0, 0, 0));
   var_9 setModel(level.heliheight[var_0].var_13CAA);
   var_9.angles = var_8.angles;
   var_9.owner = var_8.owner;
@@ -119,7 +119,7 @@ func_49E1(var_0) {
   var_10 = var_8.origin + (anglesToForward(var_8.angles) * -100 + anglestoright(var_8.angles) * 100) + (0, 0, 50);
   var_9.killcament = spawn("script_model", var_10);
   var_9.killcament setscriptmoverkillcam("explosive");
-  var_9.killcament linkto(var_8, "tag_origin");
+  var_9.killcament linkTo(var_8, "tag_origin");
 
   if(level.teambased) {
     var_8.mgturretleft setturretteam(self.team);
@@ -466,7 +466,7 @@ func_AADF(var_0, var_1, var_2, var_3) {
 
       for(var_6 = 0; var_6 < var_3.size; var_6++) {
         if(isDefined(var_3[var_6])) {
-          var_3[var_6] missile_settargetent(var_5);
+          var_3[var_6] missile_settargetEnt(var_5);
         }
       }
 
@@ -490,7 +490,7 @@ func_AAE0(var_0, var_1, var_2) {
     var_3.angles = var_2.angles;
     var_3 movegravity(anglestoright(self.angles) * -1000, 0.05);
     var_3 thread scripts\mp\killstreaks\flares::func_6E9F(5.0);
-    self missile_settargetent(var_3);
+    self missile_settargetEnt(var_3);
     var_4 = var_2.origin + anglestoright(self.angles) * 200;
     var_2 vehicle_setspeed(var_2.speed, 100, 40);
     var_2 setvehgoalpos(var_4, 1);
@@ -569,7 +569,7 @@ func_AAD3() {
     var_1 = scripts\engine\utility::get_links();
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_3 = scripts\engine\utility::getstruct(var_1[var_2], "script_linkname");
+      var_3 = scripts\engine\utility::getStruct(var_1[var_2], "script_linkname");
 
       if(isDefined(var_3)) {
         var_0[var_0.size] = var_3;

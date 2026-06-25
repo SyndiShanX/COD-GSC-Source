@@ -89,7 +89,7 @@ function function_a21082e5() {
   n_player = 0;
   zm_stalingrad_util::function_4da6e8(1);
   foreach(player in level.players) {
-    player setorigin(var_5b2e05a8[n_player].origin);
+    player setOrigin(var_5b2e05a8[n_player].origin);
     player setplayerangles(var_5b2e05a8[n_player].angles);
     n_player++;
   }
@@ -109,10 +109,10 @@ function function_885ea49f() {
   var_77857680 = getEntArray("dragon_boss_blocker", "targetname");
   var_3e7d18ce = getEntArray("dragon_boss_blocker_clip", "targetname");
   foreach(var_9c1f0837 in var_3e7d18ce) {
-    var_9c1f0837 disconnectpaths();
+    var_9c1f0837 disconnectPaths();
   }
-  var_c341c732 = getent("dragon_boss_blocker_clip_vehicle", "targetname");
-  var_c341c732 disconnectpaths();
+  var_c341c732 = getEnt("dragon_boss_blocker_clip_vehicle", "targetname");
+  var_c341c732 disconnectPaths();
   var_c341c732 notsolid();
   level flag::wait_till("nikolai_start");
   foreach(var_9c1f0837 in var_3e7d18ce) {
@@ -131,7 +131,7 @@ function function_6afa5293() {
   level.var_cf6e9729.ignore_nuke = 1;
   level.var_cf6e9729.ignore_round_robbin_death = 1;
   level.var_cf6e9729.b_ignore_mark3_pulse_damage = 1;
-  level.var_cf6e9729 enablelinkto();
+  level.var_cf6e9729 enablelinkTo();
   var_729f9335 = level.var_cf6e9729 gettagorigin("tag_driver");
   var_febde835 = level.var_cf6e9729 gettagangles("tag_driver");
   level.var_cf6e9729.var_fa4643fb = util::spawn_model("c_zom_dlc_waw_nikolai_fb", var_729f9335, var_febde835);
@@ -164,91 +164,91 @@ function function_6afa5293() {
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_trench_northeast", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_trench_northeast", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_trench_northwest", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_trench_northwest", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_trench_southwest", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_trench_southwest", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_trench_southeast", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_trench_southeast", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_balcony_south", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_balcony_south", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_balcony_west", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_balcony_west", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_balcony_east", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_balcony_east", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_ruins_south", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_ruins_south", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_ruins_west", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_ruins_west", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_ruins_east", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_ruins_east", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_center_northeast", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_center_northeast", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_center_northwest", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_center_northwest", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_center_southwest", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_center_southwest", "targetname");
   if(!isDefined(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = [];
   } else if(!isarray(level.var_cf6e9729.var_9310b6ba)) {
     level.var_cf6e9729.var_9310b6ba = array(level.var_cf6e9729.var_9310b6ba);
   }
-  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getent("boss_center_southeast", "targetname");
+  level.var_cf6e9729.var_9310b6ba[level.var_cf6e9729.var_9310b6ba.size] = getEnt("boss_center_southeast", "targetname");
   level.var_cf6e9729 function_c291114d();
   util::wait_network_frame();
   var_41b8920e = struct::get_array("s_nikolai_debug_player", "targetname");
   n_player = 0;
   foreach(player in level.activeplayers) {
-    player setorigin(var_41b8920e[n_player].origin);
+    player setOrigin(var_41b8920e[n_player].origin);
     player setplayerangles(var_41b8920e[n_player].angles);
     n_player++;
     player.ignoreme = 0;

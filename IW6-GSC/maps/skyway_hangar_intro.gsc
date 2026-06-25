@@ -20,13 +20,13 @@ section_precache() {
 }
 
 section_post_inits() {
-  var_0 = getent("player_start_hangar", "targetname");
+  var_0 = getEnt("player_start_hangar", "targetname");
 
   if(isDefined(var_0)) {
     level._hangar = spawnStruct();
     level._hangar.player_start = var_0;
-    level._hangar.ally_start = getent("ally1_start_hangar", "targetname");
-    var_1 = getent("origin_hangar_intro", "targetname");
+    level._hangar.ally_start = getEnt("ally1_start_hangar", "targetname");
+    var_1 = getEnt("origin_hangar_intro", "targetname");
     var_2 = getEntArray("model_hangar_pip_screen_broken", "targetname");
     common_scripts\utility::array_thread(var_2, maps\skyway_util::hidenoshow);
     var_3 = maps\skyway_util::setup_door("model_hangar_door", "hangar_door");
@@ -35,10 +35,10 @@ section_post_inits() {
     var_3.original_pos.origin = var_3.origin;
     var_3.original_pos.angles = var_3.angles;
     var_3.original_pos maps\skyway_util::linktotrain("train_hangar");
-    var_4 = getent("brush_hangar_ally_wedge", "targetname");
-    var_5 = getent("origin_hangar_ally_wedge_trigger", "targetname");
-    var_5.col = getent(var_5.target, "targetname");
-    var_5.col linkto(var_5);
+    var_4 = getEnt("brush_hangar_ally_wedge", "targetname");
+    var_5 = getEnt("origin_hangar_ally_wedge_trigger", "targetname");
+    var_5.col = getEnt(var_5.target, "targetname");
+    var_5.col linkTo(var_5);
     level._hangar.intro_node = var_1;
     level._hangar.intro_door = var_3;
     level._hangar.intro_tv_broken = var_2;
@@ -80,7 +80,7 @@ main() {
   thread dialogue();
   thread maps\skyway_util::ambient_airbursts();
   thread maps\skyway_util::flag_wait_func("flag_hangar_door_open", common_scripts\utility::flag_set, "flag_hangar_end");
-  getent("intelligence_item", "targetname") thread maps\skyway_util::waittill_notify_func("end_trigger_thread", ::delete_intel);
+  getEnt("intelligence_item", "targetname") thread maps\skyway_util::waittill_notify_func("end_trigger_thread", ::delete_intel);
   maps\skyway_util::setup_player_for_animated_sequence(1, 0);
 
   if(!isDefined(level.debug_no_move) || !level.debug_no_move) {
@@ -111,7 +111,7 @@ event_intro() {
   wait 0.1;
   var_0 thread event_intro_player_anims(var_3);
   var_5 = common_scripts\utility::array_combine([var_2, var_3], var_4);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   common_scripts\utility::array_call(var_5, ::linkto, var_0);
   var_3 thread maps\skyway_util::start_nt_rumbles();
   level.player setclienttriggeraudiozone("skyway_train_int", 0.5);
@@ -172,11 +172,11 @@ player_push_impulse(var_0, var_1) {
 }
 
 event_intro_tv_pip() {
-  var_0 = common_scripts\utility::getstruct("struct_hangar_pip", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_hangar_pip", "targetname");
   var_1 = level._boss;
   var_2 = maps\_utility::spawn_anim_model("hangar_pip_camera");
   var_3 = level._hangar.intro_tv_broken;
-  var_4 = getent("actor_hangar_enemy_pip", "targetname");
+  var_4 = getEnt("actor_hangar_enemy_pip", "targetname");
   var_4 maps\_utility::add_spawn_function(::spawnfunc_intro);
   var_5 = var_4 maps\_utility::spawn_ai(1);
   var_6 = [var_1, var_2, var_5];
@@ -196,9 +196,9 @@ event_intro_tv_pip() {
   level.pip.visionsetnaked = "skyway_pip";
   level.pip.rendertotexture = 1;
   level.pip.enable = 1;
-  var_7 = getent("origin_hangar_tv_static", "targetname");
+  var_7 = getEnt("origin_hangar_tv_static", "targetname");
   var_8 = var_7 common_scripts\utility::spawn_tag_origin();
-  var_8 linkto(var_7);
+  var_8 linkTo(var_7);
   playFXOnTag(common_scripts\utility::getfx("pip_static"), var_8, "tag_origin");
   common_scripts\utility::flag_wait("flag_hangar_screen_smash");
   thread maps\_art::dof_disable_script(3);
@@ -215,9 +215,9 @@ event_intro_tv_pip() {
 }
 
 fx_blood_splatter() {
-  var_0 = getent("origin_hangar_bloodsplatter", "targetname");
+  var_0 = getEnt("origin_hangar_bloodsplatter", "targetname");
   var_1 = var_0 common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   wait 2;
   playFXOnTag(common_scripts\utility::getfx("bloodsplatter_wall"), var_1, "tag_origin");
   wait 100;
@@ -246,7 +246,7 @@ event_intro_player_anims(var_0) {
 }
 
 hangar_door_opens() {
-  var_0 = getent("trig_hangar_inside", "targetname");
+  var_0 = getEnt("trig_hangar_inside", "targetname");
   common_scripts\utility::flag_wait("flag_hangar_door_open");
 
   for(;;) {
@@ -275,7 +275,7 @@ event_sat_1_rog_hit() {
   var_2 = [];
 
   for(var_3 = 0; var_3 < 1; var_3++) {
-    var_2[var_3] = getent("model_rog_hit_ref_" + (var_3 + 1), "targetname");
+    var_2[var_3] = getEnt("model_rog_hit_ref_" + (var_3 + 1), "targetname");
   }
 
   thread maps\skyway_util::waittill_nt(level._allies[0] maps\_utility::getanim("hangar_intro"), "open_door", -0.5, "flag_hangar_rog_hit");
@@ -296,7 +296,7 @@ event_sat_1_rog_impact(var_0, var_1) {
   thread maps\skyway_fx::fx_playerview_fieryflash_01();
   thread maps\skyway_util::rog_flash(0.5, 0.5, 1);
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_rog_ent, 0.5, 0.0, 0.3, 0.0, 6.0, "notify_rog_rumble");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread maps\skyway_util::player_wind_bump(0.2, 0.0, 2.0, 0.9);
   thread maps\skyway_util::train_quake(0.7, 0.8, level.player.origin, 2000);
   wait 1.5;
@@ -311,16 +311,16 @@ event_jet_flyby() {
 
 track_support() {
   level endon("notify_hangar_stop_track_support");
-  var_0 = getent("origin_hangar_track_support_1", "targetname");
-  var_1 = getent("origin_hangar_track_support_2", "targetname");
-  var_2 = getent("model_hangar_track_support", "targetname");
+  var_0 = getEnt("origin_hangar_track_support_1", "targetname");
+  var_1 = getEnt("origin_hangar_track_support_2", "targetname");
+  var_2 = getEnt("model_hangar_track_support", "targetname");
 
   while(!common_scripts\utility::flag("flag_hangar_door_open")) {
     var_2 hide();
     var_2.origin = var_0.origin;
     wait 0.05;
     var_2 show();
-    var_2 moveto(var_1.origin, 1);
+    var_2 moveTo(var_1.origin, 1);
     wait 3;
   }
 
@@ -353,7 +353,7 @@ cleanup_hangar() {
   }
 
   var_0 = level._hangar.intro_door;
-  var_0 linkto(var_0.original_pos, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(var_0.original_pos, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   foreach(var_2 in level._train.cars["train_hangar"].other_linked_parts["script_model"]) {
     if(issubstr(var_2.model, "cargo") || issubstr(var_2.model, "stacker") || issubstr(var_2.model, "lynx") || issubstr(var_2.model, "tool_cabinet")) {

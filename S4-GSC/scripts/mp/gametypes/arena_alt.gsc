@@ -1910,11 +1910,11 @@ _id_E3A7(var_0, var_1) {
     var_7.equipment = var_1;
     var_7 makeuseable();
     var_7 _meth_84D7("tag_origin");
-    var_7 setcursorhint("HINT_BUTTON");
+    var_7 setCursorHint("HINT_BUTTON");
     var_7 _meth_84DA(var_10);
     var_7 setuseholdduration("duration_none");
     var_7 _meth_84D1(1);
-    var_7 sethintstring(var_9);
+    var_7 setHintString(var_9);
     var_7 _meth_83A1(0);
     var_7 _meth_84D4(var_8);
     var_7 sethintdisplayfov(120);
@@ -2282,7 +2282,7 @@ _id_E2F3(var_0) {
   var_2 = var_1[0];
 
   if(isDefined(var_2.target)) {
-    var_3[0] = getent(var_2.target, "targetname");
+    var_3[0] = getEnt(var_2.target, "targetname");
   } else {
     var_3[0] = spawn("script_model", var_2.origin);
     var_3[0].angles = var_2.angles;
@@ -2498,7 +2498,7 @@ _id_D868() {
 
 _id_3FC6(var_0) {
   if(isDefined(self.target)) {
-    var_1[0] = getent(self.target, "targetname");
+    var_1[0] = getEnt(self.target, "targetname");
   } else {
     var_1[0] = spawn("script_model", self.origin);
     var_1[0].angles = self.angles;

@@ -174,10 +174,10 @@ newRadialButtonGroup(group_name, view_start, view_end) {
     assertex(!isDefined(level.radial_button_group[group_name]), "Radial button group: " + group_name + " is already defined.");
   }
 
-  player_view_ent = getent(view_end, "targetname");
+  player_view_ent = getEnt(view_end, "targetname");
   assertex(isDefined(player_view_ent), "Missing player view entity, can not setup radial menu in space");
 
-  extruded_vec = vector_multiply(VectorNormalize(anglesToForward(player_view_ent.angles)), CONST_radial_center_extrude_dist);
+  extruded_vec = vector_multiply(vectorNormalize(anglesToForward(player_view_ent.angles)), CONST_radial_center_extrude_dist);
 
   level.radial_button_group[group_name] = [];
   level.radial_button_group_info[group_name]["view_start"] = view_start;
@@ -189,7 +189,7 @@ newRadialButtonGroup(group_name, view_start, view_end) {
 newRadialButton(button_group, button_label, button_ent_name, action_func) {
   assertex(isDefined(level.radial_button_group[button_group]), "Radial button group: " + button_group + " does not exist.");
 
-  ent = getent(button_ent_name, "targetname");
+  ent = getEnt(button_ent_name, "targetname");
   new_button_angle = getRadialAngleFromEnt(button_group, ent);
 
   button = spawnStruct();
@@ -387,14 +387,14 @@ getRadialAngleFromEnt(button_group, ent) {
 
   rAngle = level.radial_button_group_info[button_group]["view_angles"];
   rPos = level.radial_button_group_info[button_group]["view_pos"];
-  rPos += vector_multiply(VectorNormalize(anglesToForward(rAngle)), CONST_radial_center_extrude_dist);
+  rPos += vector_multiply(vectorNormalize(anglesToForward(rAngle)), CONST_radial_center_extrude_dist);
   rForward = anglesToForward(rAngle);
-  rUpwardNorm = VectorNormalize(AnglesToUp(rAngle));
+  rUpwardNorm = vectorNormalize(AnglesToUp(rAngle));
 
   eAngle = ent.angles;
   ePos = ent.origin;
 
-  projNorm = VectorNormalize(VectorFromLineToPoint(rPos, (rPos + rForward), ePos));
+  projNorm = vectorNormalize(VectorFromLineToPoint(rPos, (rPos + rForward), ePos));
   radial_angle = Acos(VectorDot(projNorm, rUpwardNorm));
 
   if(VectorDot(AnglesToRight(rAngle), projNorm) < 0) {
@@ -406,7 +406,7 @@ getRadialAngleFromEnt(button_group, ent) {
 radial_angle_to_vector(angle, scaler) {
   b_angles = (270 - (angle), 0, 0);
   b_vec = anglesToForward(b_angles);
-  b_vec_norm = VectorNormalize(b_vec);
+  b_vec_norm = vectorNormalize(b_vec);
   b_vec_final = vector_multiply(b_vec_norm, scaler);
 
   return b_vec_final;
@@ -474,11 +474,11 @@ view_path_setup() {
 build_path_by_targetname(path_name) {
   level.view_paths[path_name] = [];
 
-  path_node = getent(path_name, "targetname");
+  path_node = getEnt(path_name, "targetname");
   level.view_paths[path_name][level.view_paths[path_name].size] = path_node;
 
   while(isDefined(path_node) && isDefined(path_node.target)) {
-    next_node = getent(path_node.target, "targetname");
+    next_node = getEnt(path_node.target, "targetname");
     level.view_paths[path_name][level.view_paths[path_name].size] = next_node;
     path_node = next_node;
   }
@@ -516,8 +516,8 @@ go_path_by_targetname(path_name) {
       }
     }
 
-    level.dummy_mover MoveTo(node.origin, travel_speed, travel_speed * 0.5, 0);
-    level.dummy_mover RotateTo(node.angles, travel_speed, travel_speed * 0.5, 0);
+    level.dummy_mover moveTo(node.origin, travel_speed, travel_speed * 0.5, 0);
+    level.dummy_mover rotateTo(node.angles, travel_speed, travel_speed * 0.5, 0);
     wait travel_speed;
   }
 }
@@ -539,8 +539,8 @@ go_path_by_targetname_reverse(path_name, back_to_button_group) {
   if(!CONST_direct_travel) {
     for(idx = level.view_paths[path_name].size - 1; idx >= 0; idx--) {
       node = level.view_paths[path_name][idx];
-      level.dummy_mover MoveTo(node.origin, travel_speed);
-      level.dummy_mover RotateTo(node.angles, travel_speed);
+      level.dummy_mover moveTo(node.origin, travel_speed);
+      level.dummy_mover rotateTo(node.angles, travel_speed);
 
       wait travel_speed;
     }
@@ -551,8 +551,8 @@ go_path_by_targetname_reverse(path_name, back_to_button_group) {
   pos = level.radial_button_group_info[back_to_button_group]["player_view_pos"];
   angle = level.radial_button_group_info[back_to_button_group]["view_angles"];
 
-  level.dummy_mover MoveTo(pos, travel_speed, travel_speed * 0.5, 0);
-  level.dummy_mover RotateTo(angle, travel_speed, travel_speed * 0.5, 0);
+  level.dummy_mover moveTo(pos, travel_speed, travel_speed * 0.5, 0);
+  level.dummy_mover rotateTo(angle, travel_speed, travel_speed * 0.5, 0);
   wait travel_speed;
 }
 

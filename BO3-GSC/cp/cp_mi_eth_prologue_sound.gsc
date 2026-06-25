@@ -20,14 +20,14 @@ function main() {
 }
 
 function function_b3c510e0() {
-  soundstruct = getent("amb_garbled_screen", "targetname");
+  soundstruct = getEnt("amb_garbled_screen", "targetname");
   if(isDefined(soundstruct)) {
     soundstruct playLoopSound("amb_garbled_voice");
   }
 }
 
 function function_96d9cac5() {
-  sound_org = getent("amb_offices", "targetname");
+  sound_org = getEnt("amb_offices", "targetname");
   if(isDefined(sound_org)) {
     sound_org playLoopSound("amb_offices");
   }
@@ -35,7 +35,7 @@ function function_96d9cac5() {
   level thread namespace_21b2c1f2::function_973b77f9();
   if(isDefined(sound_org)) {
     sound_org stoploopsound();
-    playsoundatposition("amb_power_down", sound_org.origin);
+    playSoundAtPosition("amb_power_down", sound_org.origin);
   }
 }
 
@@ -60,7 +60,7 @@ function function_a4815b6c() {
   level waittill("siren");
   while(true) {
     wait(2);
-    playsoundatposition("amb_troop_alarm", (3529, 427, -334));
+    playSoundAtPosition("amb_troop_alarm", (3529, 427, -334));
   }
 }
 
@@ -70,7 +70,7 @@ function function_44ee5cb7() {
   level waittill("hash_5ea48ae9");
   while(true) {
     wait(1);
-    playsoundatposition("amb_troop_alarm", (5945, -2320, -119));
+    playSoundAtPosition("amb_troop_alarm", (5945, -2320, -119));
   }
 }
 
@@ -79,7 +79,7 @@ function function_a4312bfe() {
   level waittill("hash_fc089399");
   while(true) {
     wait(1);
-    playsoundatposition("amb_phone_ring", (-1760, -1624, 384));
+    playSoundAtPosition("amb_phone_ring", (-1760, -1624, 384));
     wait(2);
   }
 }

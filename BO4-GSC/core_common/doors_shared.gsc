@@ -265,11 +265,11 @@ class cdoor {
           m_e_trigger = spawn("trigger_radius_use", v_pos, 16384 | 4096, n_radius, m_n_trigger_height);
         }
 
-        m_e_trigger triggerignoreteam();
+        m_e_trigger triggerIgnoreTeam();
         m_e_trigger setvisibletoall();
         m_e_trigger setteamfortrigger(#"none");
-        m_e_trigger usetriggerrequirelookat();
-        m_e_trigger setcursorhint("HINT_NOICON");
+        m_e_trigger useTriggerRequireLookAt();
+        m_e_trigger setCursorHint("HINT_NOICON");
       } else if(isDefined(t_radius_or_multiple)) {
         m_e_trigger = t_radius_or_multiple;
       } else {
@@ -285,8 +285,8 @@ class cdoor {
 
   function function_cde3a4b3() {
     m_e_door makeusable();
-    m_e_door setcursorhint("HINT_NOICON");
-    m_e_door sethintstring(#"hash_1cc0220a2ef3e6d6");
+    m_e_door setCursorHint("HINT_NOICON");
+    m_e_door setHintString(#"hash_1cc0220a2ef3e6d6");
     thread function_2190a0ee(1, 0);
   }
 
@@ -295,7 +295,7 @@ class cdoor {
     m_e_door.func_custom_gameobject_position = &function_4fe7d9d5;
     m_e_door.v_trigger_offset = m_s_bundle.v_trigger_offset;
     m_e_door gameobjects::init_game_objects(m_s_bundle.door_interact);
-    m_e_door.mdl_gameobject.t_interact usetriggerrequirelookat();
+    m_e_door.mdl_gameobject.t_interact useTriggerRequireLookAt();
     thread function_2190a0ee(isDefined(m_s_bundle.door_closes) && m_s_bundle.door_closes, 1);
   }
 
@@ -349,7 +349,7 @@ class cdoor {
 
         unlock();
         set_player_who_opened(e_player);
-        e_player playrumbleonentity("damage_light");
+        e_player playRumbleOnEntity("damage_light");
 
         if(is_open()) {
           if(isDefined(m_s_bundle.var_b8824800)) {
@@ -496,7 +496,7 @@ class cdoor {
 
     if(isDefined(m_s_bundle.b_loop_sound) && m_s_bundle.b_loop_sound) {
       sndent = spawn("script_origin", m_e_door.origin);
-      sndent linkto(m_e_door);
+      sndent linkTo(m_e_door);
       sndent playLoopSound(m_s_bundle.door_loop_sound, 1);
     }
 
@@ -506,7 +506,7 @@ class cdoor {
       }
 
       var_7256682e = function_f1a2a15f(b_malfunction, 1);
-      m_e_door moveto(var_7256682e, var_1b13d203);
+      m_e_door moveTo(var_7256682e, var_1b13d203);
       m_e_door waittill(#"movedone");
     } else if(m_s_bundle.door_open_method == "swing_away_from_player") {
       if(!isDefined(m_e_trigger_player)) {
@@ -537,16 +537,16 @@ class cdoor {
 
       if(var_cd167873 > 0) {
         v_angle = function_d36318ad(b_malfunction, 1, 0, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b);
-        m_e_door rotateto(v_angle, var_1b13d203);
+        m_e_door rotateTo(v_angle, var_1b13d203);
         m_e_door waittill(#"rotatedone");
       } else {
         v_angle = function_d36318ad(b_malfunction, 1, 1, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b);
-        m_e_door rotateto(v_angle, var_1b13d203);
+        m_e_door rotateTo(v_angle, var_1b13d203);
         m_e_door waittill(#"rotatedone");
       }
     } else if(m_s_bundle.door_open_method == "swing") {
       v_angle = function_d36318ad(b_malfunction, 1, 0, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b);
-      m_e_door rotateto(v_angle, var_1b13d203);
+      m_e_door rotateTo(v_angle, var_1b13d203);
       m_e_door waittill(#"rotatedone");
     } else if(m_s_bundle.door_open_method == "animated" && isDefined(m_s_bundle.door_animated_open_bundle)) {
       if(scene::get_player_count(m_s_bundle.door_animated_open_bundle) > 0) {
@@ -716,7 +716,7 @@ class cdoor {
     if(isDefined(m_s_bundle.b_loop_sound) && m_s_bundle.b_loop_sound) {
       m_e_door playSound(m_s_bundle.door_start_sound);
       sndent = spawn("script_origin", m_e_door.origin);
-      sndent linkto(m_e_door);
+      sndent linkTo(m_e_door);
       sndent playLoopSound(m_s_bundle.door_loop_sound, 1);
     } else if(isDefined(m_s_bundle.door_stop_sound) && m_s_bundle.door_stop_sound != "") {
       m_e_door playSound(m_s_bundle.door_stop_sound);
@@ -728,15 +728,15 @@ class cdoor {
       }
 
       var_ce02fcb7 = function_f1a2a15f(b_malfunction, 0);
-      m_e_door moveto(var_ce02fcb7, var_1b13d203);
+      m_e_door moveTo(var_ce02fcb7, var_1b13d203);
       m_e_door waittill(#"movedone");
     } else if(m_s_bundle.door_open_method == "swing_away_from_player") {
       v_angle = function_d36318ad(b_malfunction, 0, 0, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b);
-      m_e_door rotateto(v_angle, var_1b13d203);
+      m_e_door rotateTo(v_angle, var_1b13d203);
       m_e_door waittill(#"rotatedone");
     } else if(m_s_bundle.door_open_method == "swing") {
       v_angle = function_d36318ad(b_malfunction, 0, 0, m_s_bundle.var_16a4e229, m_s_bundle.var_16e3e29b);
-      m_e_door rotateto(v_angle, var_1b13d203);
+      m_e_door rotateTo(v_angle, var_1b13d203);
       m_e_door waittill(#"rotatedone");
     } else if(m_s_bundle.door_open_method == "animated" && isDefined(m_s_bundle.door_animated_close_bundle)) {
       if(scene::get_player_count(m_s_bundle.door_animated_close_bundle) > 0) {
@@ -854,7 +854,7 @@ class cdoor {
     v_angles = m_e_door.angles;
 
     if(isDefined(var_a2f96f78.target)) {
-      e_target = getent(var_a2f96f78.target, "targetname");
+      e_target = getEnt(var_a2f96f78.target, "targetname");
 
       if(isDefined(e_target)) {
         return e_target.angles;
@@ -870,7 +870,7 @@ class cdoor {
     v_pos = (v_pos[0], v_pos[1], v_pos[2] + 50);
 
     if(isDefined(var_a2f96f78.target)) {
-      e_target = getent(var_a2f96f78.target, "targetname");
+      e_target = getEnt(var_a2f96f78.target, "targetname");
 
       if(isDefined(e_target)) {
         return e_target.origin;

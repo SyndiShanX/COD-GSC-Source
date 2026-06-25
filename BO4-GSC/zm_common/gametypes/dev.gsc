@@ -82,7 +82,7 @@ warpalltohost(team) {
 }
 
 warpalltoplayer(team, player) {
-  players = getplayers();
+  players = getPlayers();
   target = undefined;
 
   for(i = 0; i < players.size; i++) {
@@ -120,17 +120,17 @@ warpalltoplayer(team, player) {
       }
 
       if(isDefined(spawn_origin)) {
-        players[i] setorigin(spawn_origin);
+        players[i] setOrigin(spawn_origin);
         continue;
       }
 
       if(nodes.size > 0) {
         node = array::random(nodes);
-        players[i] setorigin(node.origin);
+        players[i] setOrigin(node.origin);
         continue;
       }
 
-      players[i] setorigin(origin);
+      players[i] setOrigin(origin);
     }
   }
 
@@ -197,7 +197,7 @@ updatedevsettingszm() {
       }
 
       level.players[0] setplayerangles(averageangles);
-      level.players[0] setorigin(averageorigin);
+      level.players[0] setOrigin(averageorigin);
       waitframe(1);
       setDvar(#"r_streamdumpdistance", 2);
     }
@@ -247,7 +247,7 @@ updatedevsettings() {
 
   if(level.players.size > 0) {
     if(getdvarstring(#"scr_player_ammo") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       if(!isDefined(level.devgui_unlimited_ammo)) {
         level.devgui_unlimited_ammo = 1;
@@ -291,7 +291,7 @@ updatedevsettings() {
       level thread devgui_increase_momentum(getdvarint(#"scr_give_player_score", 0));
       setDvar(#"scr_give_player_score", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_zero_ammo") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         player = players[i];
@@ -310,7 +310,7 @@ updatedevsettings() {
 
       setDvar(#"scr_player_zero_ammo", "<dev string:x38>");
     } else if(getdvarstring(#"scr_emp_jammed") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         player = players[i];
@@ -382,7 +382,7 @@ updatedevsettings() {
         }
 
         level.players[0] setplayerangles(averageangles);
-        level.players[0] setorigin(averageorigin);
+        level.players[0] setOrigin(averageorigin);
         waitframe(1);
         setDvar(#"r_streamdumpdistance", 2);
       }
@@ -390,7 +390,7 @@ updatedevsettings() {
   }
 
   if(getdvarstring(#"scr_giveperk") == "<dev string:x229>") {
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x22d>");
 
     for(i = 0; i < players.size; i++) {
@@ -403,7 +403,7 @@ updatedevsettings() {
   if(getdvarstring(#"scr_giveperk") != "<dev string:x38>") {
     perk = getdvarstring(#"scr_giveperk");
     specialties = strtok(perk, "<dev string:x251>");
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x255>" + perk + "<dev string:x272>");
 
     foreach(player in players) {
@@ -424,7 +424,7 @@ updatedevsettings() {
   if(getdvarstring(#"scr_toggleperk") != "<dev string:x38>") {
     perk = getdvarstring(#"scr_toggleperk");
     specialties = strtok(perk, "<dev string:x251>");
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x276>" + perk + "<dev string:x272>");
 
     foreach(player in players) {
@@ -575,7 +575,7 @@ devgui_unlimited_momentum() {
 
   for(;;) {
     wait 1;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player)) {
@@ -596,7 +596,7 @@ devgui_unlimited_momentum() {
 }
 
 devgui_increase_momentum(score) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -1264,7 +1264,7 @@ drawpath(linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endon
   entfirsttarget = ent.targetname;
 
   while(isDefined(ent.target)) {
-    enttarget = getent(ent.target, "<dev string:x122>");
+    enttarget = getEnt(ent.target, "<dev string:x122>");
     ent thread drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endonmsg);
 
     if(ent.targetname == "<dev string:x482>") {

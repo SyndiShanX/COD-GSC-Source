@@ -187,7 +187,7 @@ _id_D846() {
 }
 
 _id_3B8F(var_0, var_1) {
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_2.target)) {
     var_3 = getEntArray(var_2.target, "targetname");
@@ -207,7 +207,7 @@ _id_3B8F(var_0, var_1) {
             break;
           }
 
-          var_7 = getent(var_7.target, "targetname");
+          var_7 = getEnt(var_7.target, "targetname");
         }
       }
     }
@@ -405,9 +405,9 @@ _id_D5A4(var_0) {
   var_2 = var_1 / 150;
   var_3 = 0.25;
   var_4 = 0.25;
-  level._id_1DE6 moveto(var_0, var_2, var_3, var_4);
+  level._id_1DE6 moveTo(var_0, var_2, var_3, var_4);
   var_5 = anglesToForward(level._id_1DE6.angles);
-  var_6 = vectornormalize(var_0 - level._id_1DE6.origin);
+  var_6 = vectorNormalize(var_0 - level._id_1DE6.origin);
   thread _id_33DD(var_5, var_6, 2.0);
   return var_2;
 }
@@ -566,7 +566,7 @@ _id_FBFD() {
 
 _id_54CD(var_0) {
   self waittill("spawned_player");
-  self playerlinkto(var_0, "tag_origin");
+  self playerlinkTo(var_0, "tag_origin");
   self _meth_828F(var_0._id_F81F);
   var_0._id_E330 = 1;
   _id_FBFD();
@@ -584,7 +584,7 @@ _id_10AD5(var_0) {
   var_1 = scripts\engine\utility::_id_B433(var_0.origin, 32, 0, -1500, (0, 0, 1));
   self unlink();
   self dontinterpolate();
-  self setorigin(var_1);
+  self setOrigin(var_1);
   var_2 = anglesToForward(var_0.angles);
   var_2 = var_2 * (1, 1, 0);
   var_3 = (0, 0, 1);

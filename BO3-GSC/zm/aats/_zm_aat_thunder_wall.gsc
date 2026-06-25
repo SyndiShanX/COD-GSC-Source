@@ -61,7 +61,7 @@ function thunder_wall_blast(attacker) {
     } else {
       v_curr_zombie_origin = a_ai_zombies[i] getcentroid();
       v_curr_zombie_origin_sq = distancesquared(v_thunder_wall_blast_pos, v_curr_zombie_origin);
-      v_curr_zombie_to_thunder_wall = vectornormalize(v_curr_zombie_origin - v_thunder_wall_blast_pos);
+      v_curr_zombie_to_thunder_wall = vectorNormalize(v_curr_zombie_origin - v_thunder_wall_blast_pos);
       v_curr_zombie_facing_dot = vectordot(v_attacker_facing, v_curr_zombie_to_thunder_wall);
       if(v_curr_zombie_facing_dot < 0) {
         continue;
@@ -80,7 +80,7 @@ function thunder_wall_blast(attacker) {
         n_random_x = randomfloatrange(-3, 3);
         n_random_y = randomfloatrange(-3, 3);
         a_ai_zombies[i] startragdoll(1);
-        a_ai_zombies[i] launchragdoll(100 * (vectornormalize((v_curr_zombie_origin - v_thunder_wall_blast_pos) + (n_random_x, n_random_y, 30))), "torso_lower");
+        a_ai_zombies[i] launchragdoll(100 * (vectorNormalize((v_curr_zombie_origin - v_thunder_wall_blast_pos) + (n_random_x, n_random_y, 30))), "torso_lower");
       }
       n_flung_zombies++;
     }

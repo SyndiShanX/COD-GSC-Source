@@ -4,7 +4,7 @@
 ***********************************************/
 
 func_2A6A(var_0, var_1, var_2) {
-  var_3 = getent("airstrikeheight", "targetname");
+  var_3 = getEnt("airstrikeheight", "targetname");
   if(isDefined(var_3)) {
     var_4 = var_3.origin[2];
   } else if(isDefined(level.airstrikeheightscale)) {
@@ -425,7 +425,7 @@ fireontarget(var_0, var_1) {
     }
   }
 
-  self setturrettargetent(self.besttarget, (0, 0, 50));
+  self setturrettargetEnt(self.besttarget, (0, 0, 50));
   var_5 = 25;
   for(;;) {
     if(var_5 == 25) {
@@ -454,8 +454,8 @@ isreadytofire(var_0) {
   var_2 = self.besttarget.origin - self.origin;
   var_1 = var_1 * (1, 1, 0);
   var_2 = var_2 * (1, 1, 0);
-  var_2 = vectornormalize(var_2);
-  var_1 = vectornormalize(var_1);
+  var_2 = vectorNormalize(var_2);
+  var_1 = vectorNormalize(var_1);
   var_3 = vectordot(var_2, var_1);
   var_4 = cos(var_0);
   if(var_3 >= var_4) {
@@ -476,7 +476,7 @@ func_1570(var_0) {
 
   func_2737(0);
   self notify("acquiringTarget");
-  self setturrettargetent(self.besttarget);
+  self setturrettargetEnt(self.besttarget);
   self setlookatent(self.besttarget);
   var_1 = getnewpoint(self.origin, 1);
   if(!isDefined(var_1)) {
@@ -734,7 +734,7 @@ firemissile(var_0) {
   }
 
   var_2 missile_setflightmodedirect();
-  var_2 missile_settargetent(var_0);
+  var_2 missile_settargetEnt(var_0);
 }
 
 func_3E13(var_0, var_1) {
@@ -914,7 +914,7 @@ func_6D7C() {
   self.besttarget endon("death");
   var_0 = gettime();
   if(isDefined(self.besttarget) && self.besttarget.classname == "script_vehicle") {
-    self setturrettargetent(self.besttarget);
+    self setturrettargetEnt(self.besttarget);
     for(;;) {
       var_1 = distance2d(self.origin, self.besttarget.origin);
       if(gettime() - var_0 > 2500 && var_1 > 1000) {
@@ -936,7 +936,7 @@ func_1574(var_0) {
   self setlookatent(self.besttarget);
   thread func_13B9E();
   thread func_13B9D();
-  self setturrettargetent(self.besttarget);
+  self setturrettargetEnt(self.besttarget);
 }
 
 func_13B9D() {

@@ -114,11 +114,11 @@ init_2() {
 
 function_f1749965() {
   s_player_start = struct::get("ring_player_start");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     e_player.var_1547e779 = 1;
-    e_player setorigin(s_player_start.origin);
+    e_player setOrigin(s_player_start.origin);
     e_player setplayerangles(s_player_start.angles);
   }
 
@@ -147,7 +147,7 @@ function_af9fb8d1() {
 
   while(true) {
     n_radius_sqr = self.n_radius * self.n_radius;
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
 
     foreach(e_player in a_e_players) {
       if(distancesquared(self.origin, e_player.origin) > n_radius_sqr) {
@@ -208,7 +208,7 @@ lava_control() {
 
 function_7922664f() {
   level.var_5d5b7e8e = spawnStruct();
-  level.var_5d5b7e8e.var_5ca15e11 = getent("hell_floor", "targetname");
+  level.var_5d5b7e8e.var_5ca15e11 = getEnt("hell_floor", "targetname");
   level.var_5d5b7e8e.var_5ca15e11 notsolid();
   level.var_5d5b7e8e.s_sc_lantern = struct::get("sc_lantern");
   level.var_5d5b7e8e.nd_start = getvehiclenode("hell_path_start", "targetname");
@@ -220,14 +220,14 @@ function_7922664f() {
 spawn_guide() {
   level endon(#"end_game");
 
-  for(var_a41818b5 = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(var_a41818b5); var_a41818b5 = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
+  for(var_a41818b5 = spawner::simple_spawn_single(getEnt("virgil", "targetname")); !isDefined(var_a41818b5); var_a41818b5 = spawner::simple_spawn_single(getEnt("virgil", "targetname"))) {
     waitframe(1);
   }
 
   var_a41818b5.origin = level.var_5d5b7e8e.nd_start.origin;
   var_a41818b5.angles = level.var_5d5b7e8e.nd_start.angles;
   var_a41818b5.mdl_lantern = util::spawn_model("p8_zm_ora_elemental_vessel", var_a41818b5.origin + (0, 0, -10));
-  var_a41818b5.mdl_lantern linkto(var_a41818b5);
+  var_a41818b5.mdl_lantern linkTo(var_a41818b5);
   var_a41818b5.mdl_lantern thread rotate_forever((0, 45, 0));
   var_a41818b5.mdl_lantern clientfield::set("" + #"lantern_outline", 1);
   var_a41818b5 val::set(#"mq_hell", "takedamage", 0);
@@ -256,7 +256,7 @@ function_a31d9184(n_points) {
 function_a340f5a2() {
   level endon(#"end_game");
   level clientfield::set("" + #"hash_72b5b0359ca48427", 1);
-  playsoundatposition(#"hash_431cadb65b1777ce", (0, 0, 0));
+  playSoundAtPosition(#"hash_431cadb65b1777ce", (0, 0, 0));
   level.var_5d5b7e8e.var_a41818b5 setspeed(2);
   level.var_5d5b7e8e.var_a41818b5 thread vehicle::get_on_and_go_path(level.var_5d5b7e8e.nd_start);
   level.var_5d5b7e8e.var_a41818b5 waittill(#"stop");
@@ -290,9 +290,9 @@ function_a340f5a2() {
   music::setmusicstate("hell_on_earth_1");
   level.var_5d5b7e8e.var_a41818b5.e_ring = util::spawn_model("p8_fxp_hell_sphere", level.var_5d5b7e8e.var_a41818b5.origin);
   function_5c135d54(500);
-  level.var_5d5b7e8e.var_a41818b5.e_ring linkto(level.var_5d5b7e8e.var_a41818b5);
+  level.var_5d5b7e8e.var_a41818b5.e_ring linkTo(level.var_5d5b7e8e.var_a41818b5);
   level.var_5d5b7e8e.var_a41818b5.e_ring thread function_93a18905();
-  array::run_all(getplayers(), &clientfield::set_to_player, "" + #"hell_burn_fx", 1);
+  array::run_all(getPlayers(), &clientfield::set_to_player, "" + #"hell_burn_fx", 1);
   level.var_5d5b7e8e.var_a41818b5 clientfield::set("" + #"lantern_fx", 1);
 
   foreach(s_altar in level.var_76a7ad28) {
@@ -329,10 +329,10 @@ function_25c6ed8d() {
   self endon(#"death");
   self waittill(#"fling");
   self setspeed(5);
-  vol_fling = getent("hell_start", "str_location");
+  vol_fling = getEnt("hell_start", "str_location");
   var_d49079c = 0;
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(zombie_utility::is_player_valid(e_player, 0, 0)) {
       e_player thread zm_orange_fasttravel_flinger::fling_player(vol_fling);
       e_player playSound(#"hash_7f08b47352413d9a");
@@ -368,7 +368,7 @@ function_93a18905() {
   while(true) {
     n_radius_sqr = self.n_radius * self.n_radius;
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(distancesquared(self.origin, e_player.origin) > n_radius_sqr) {
         if(e_player.var_8ec9550d !== 1) {
           e_player thread function_87b541aa();
@@ -404,7 +404,7 @@ function_2649e7fc() {
 }
 
 function_c1189522(s_notify) {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player.var_8ec9550d = 0;
     e_player clientfield::set_to_player("" + #"hell_burn_fx", 0);
   }
@@ -423,9 +423,9 @@ function_36eb3c96(var_88206a50, ent) {
 function_defd8c26(var_f0e6c7a2, ent) {
   n_souls_required = var_f0e6c7a2.var_bc07224f;
 
-  if(getplayers().size > 2) {
+  if(getPlayers().size > 2) {
     n_souls_required = var_f0e6c7a2.var_71561996;
-  } else if(getplayers().size > 1) {
+  } else if(getPlayers().size > 1) {
     n_souls_required = var_f0e6c7a2.var_d4fada4a;
   }
 
@@ -445,8 +445,8 @@ function_f578fb22(var_f0e6c7a2, ent) {}
 function_5e3a92e() {
   zm_sq_modules::function_2a94055d(self.var_5f9f040);
   level thread function_a4210fd2(6);
-  playsoundatposition(#"evt_nuke_flash", (0, 0, 0));
-  a_e_players = getplayers();
+  playSoundAtPosition(#"evt_nuke_flash", (0, 0, 0));
+  a_e_players = getPlayers();
 
   if(a_e_players.size > 1) {
     array::thread_all(a_e_players, &zm_player::spectator_respawn_player);
@@ -533,7 +533,7 @@ function_3c3bee91() {
   zm_sq_modules::function_2a94055d(#"sc_lantern_end");
   zm_hms_util::pause_zombies(1);
 
-  if(getplayers().size > 1) {
+  if(getPlayers().size > 1) {
     level thread zm_player::spectators_respawn();
   }
 
@@ -541,7 +541,7 @@ function_3c3bee91() {
   level.var_d555ff19 = 1;
   level.musicsystemoverride = 0;
   music::setmusicstate("none");
-  playsoundatposition(#"hash_2b86a75118ae1608", (0, 0, 0));
+  playSoundAtPosition(#"hash_2b86a75118ae1608", (0, 0, 0));
   level.var_5d5b7e8e.var_a41818b5.e_ring delete();
   level flag::clear(#"hell_on_earth");
   level.var_5d5b7e8e.var_a41818b5 setspeed(2);
@@ -553,14 +553,14 @@ function_3c3bee91() {
 }
 
 function_27c3d40f() {
-  playsoundatposition(#"evt_last_stand", (0, 0, 0));
+  playSoundAtPosition(#"evt_last_stand", (0, 0, 0));
   wait 1;
   music::setmusicstate("hell_on_earth_2");
 }
 
 function_199360fe() {
   wait 6;
-  playsoundatposition(#"evt_last_stand_riser", (0, 0, 0));
+  playSoundAtPosition(#"evt_last_stand_riser", (0, 0, 0));
 }
 
 function_d12badc3(n_radius) {
@@ -574,7 +574,7 @@ function_d12badc3(n_radius) {
 
 function_2855a4fc(e_item, e_player) {
   level flag::set(#"agarthan_device_collected");
-  e_player playrumbleonentity("zm_mansion_atlas_interact_rumble");
+  e_player playRumbleOnEntity("zm_mansion_atlas_interact_rumble");
   e_item.mdl_lantern delete();
 
   iprintlnbold("<dev string:xc0>");
@@ -606,7 +606,7 @@ function_a8fd16d0() {
 function_8a1356b6() {
   self endon(#"death");
   self waittill(#"trigger");
-  self.e_rock moveto(self.e_rock.var_3a161b40, 0.5);
+  self.e_rock moveTo(self.e_rock.var_3a161b40, 0.5);
   self.e_rock playSound(#"hash_7d258d025446af9");
   self delete();
 }
@@ -632,7 +632,7 @@ function_7a57c14(s_notify) {
 function_737be926() {
   zm_hms_util::function_3c173d37();
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player playsoundtoplayer(#"hash_5742cfb2660b4d62", e_player);
   }
 
@@ -651,12 +651,12 @@ function_c5bf1974() {
   }
 
   a_s_start_pos = struct::get_array("<dev string:xf0>");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_index = 0;
 
   foreach(e_player in a_e_players) {
     s_pos = a_s_start_pos[n_index];
-    e_player setorigin(s_pos.origin);
+    e_player setOrigin(s_pos.origin);
     e_player setplayerangles(s_pos.angles);
     n_index++;
   }
@@ -666,12 +666,12 @@ function_c5bf1974() {
 
 function_405f867d() {
   a_s_start_pos = struct::get_array("<dev string:x103>");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_index = 0;
 
   foreach(e_player in a_e_players) {
     s_pos = a_s_start_pos[n_index];
-    e_player setorigin(s_pos.origin);
+    e_player setOrigin(s_pos.origin);
     e_player setplayerangles(s_pos.angles);
     n_index++;
   }

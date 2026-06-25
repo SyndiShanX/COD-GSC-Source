@@ -51,7 +51,7 @@ function function_73c2b700() {
 }
 
 function main(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   namespace_5ceacc03::music("2.0_tracks");
 
@@ -61,7 +61,7 @@ function main(str_objective, b_starting) {
   } else {
     util::unmake_hero("lazar", 1);
     util::unmake_hero("park", 1);
-    getplayers()[0] val::set("stakeout_intro", "disable_oob", 0);
+    getPlayers()[0] val::set("stakeout_intro", "disable_oob", 0);
   }
 
   level thread namespace_11998b8f::function_81fce913();
@@ -92,9 +92,9 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     trigger::use("cleanup_ghost_station_spawners", "targetname", undefined, 0);
     level.var_71550d76 = util::spawn_model("tag_origin");
-    level.var_71550d76.var_62b1eb0a = getent("post_teleport_train_a", "targetname");
-    level.var_71550d76.var_fba19ceb = getent("post_teleport_train_b", "targetname");
-    level.var_71550d76.var_55fb067 = getent("post_teleport_train_c", "targetname");
+    level.var_71550d76.var_62b1eb0a = getEnt("post_teleport_train_a", "targetname");
+    level.var_71550d76.var_fba19ceb = getEnt("post_teleport_train_b", "targetname");
+    level.var_71550d76.var_55fb067 = getEnt("post_teleport_train_c", "targetname");
     level.var_71550d76.a_e_lights = getEntArray("light_train_jump_off", "targetname");
     level.var_71550d76.var_49b85ad8 = getEntArray(level.var_71550d76.var_55fb067.script_linkto, "script_linkname");
     level thread namespace_4dd4b998::function_48b8f4be();
@@ -128,7 +128,7 @@ function function_1a1fde95() {
 }
 
 function function_c737b7bd() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   self endon(#"death");
 
@@ -184,17 +184,17 @@ function function_8d9229cb() {
       }
 
       if(!level flag::get("ally_on_left_platform") && (!level flag::get("ghost_station_left_platform_enemies_stealth_spotted") || !level flag::get("ghost_station_left_platform_enemies_cleared"))) {
-        self.var_b7bd887 = getent("ghost_station_ally_combat_volume_1", "targetname");
+        self.var_b7bd887 = getEnt("ghost_station_ally_combat_volume_1", "targetname");
       } else if(!level flag::get("ally_on_left_platform") && level flag::get("ghost_station_left_platform_enemies_stealth_spotted") && !level flag::get("ghost_station_left_platform_enemies_cleared")) {
         self function_cbc5c328();
-        self.var_b7bd887 = getent("ghost_station_ally_combat_volume_2", "targetname");
+        self.var_b7bd887 = getEnt("ghost_station_ally_combat_volume_2", "targetname");
       } else if(level flag::get("ally_on_left_platform") && level flag::get_any(array("guard_station_doors_opened", "player_in_guard_room")) && (!level flag::get("ghost_station_right_platform_enemies_stealth_spotted") || level flag::get("ghost_station_right_platform_enemies_cleared"))) {
         node = getnode("ghost_station_adler_start_node_left_platform_2", "targetname");
         self.goalradius = 32;
         self thread spawner::go_to_node(node);
         self.var_b7bd887 = undefined;
       } else {
-        self.var_b7bd887 = getent("ghost_station_ally_combat_volume_2", "targetname");
+        self.var_b7bd887 = getEnt("ghost_station_ally_combat_volume_2", "targetname");
       }
 
       if(isDefined(self.var_b7bd887)) {
@@ -272,7 +272,7 @@ function function_851df264() {
   self endon("13cc3e0dbbae2d94");
   level endon(#"ghost_station_done");
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   self thread function_18b65165();
 
@@ -286,7 +286,7 @@ function function_851df264() {
 
   level endon(#"ghost_station_right_platform_enemies_stealth_spotted", #"ghost_station_left_platform_enemies_stealth_spotted");
   self.goalradius = 256;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_bf8b2610 = self scene::function_c935c42();
 
   if(var_bf8b2610) {
@@ -362,14 +362,14 @@ function function_b30a2f32() {
 }
 
 function function_a6e974cb() {
-  e_vol = getent("ghost_station_right_platform_player_closet_volume", "targetname");
+  e_vol = getEnt("ghost_station_right_platform_player_closet_volume", "targetname");
   level flag::wait_till("right_platform_closet_closed");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 }
 
 function function_9ff740ab(a_ents) {
   mdl_door = level.guard_station_door_left doors::function_73f09315();
-  mdl_door linkto(a_ents[#"door_prop"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  mdl_door linkTo(a_ents[#"door_prop"], "j_prop_1", (0, 0, 0), (0, 0, 0));
 }
 
 function function_b1f03033(var_2a7f2052) {
@@ -378,7 +378,7 @@ function function_b1f03033(var_2a7f2052) {
   level flag::set("guard_station_door_left_stop_animating");
   level flag::set("guard_station_doors_opened");
   wait 0.3;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_5e98e1e4 = player flag::get("body_shield_active");
 
   if(self.c_door.var_c4c3fa39 === 1) {
@@ -416,7 +416,7 @@ function function_9a500e88(var_2a7f2052, var_721023c5) {
 function function_c08d83ac() {
   level endon(#"guard_station_doors_opened");
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
 
   while(true) {
@@ -505,7 +505,7 @@ function function_a6b0904f() {
   if(level flag::get("ghost_station_left_platform_enemies_stealth_spotted")) {
     self thread function_834020c7();
   } else {
-    vol = getent("ghost_station_right_platform_enemy_combat_volume", "targetname");
+    vol = getEnt("ghost_station_right_platform_enemy_combat_volume", "targetname");
     self setgoal(vol, 1);
   }
 
@@ -521,13 +521,13 @@ function function_834020c7() {
   level flag::clear("ghost_station_right_platform_enemies_stealth_spotted");
   waitframe(1);
   self thread function_8354d781();
-  vol = getent("ghost_station_right_platform_enemy_closet_volume", "targetname");
+  vol = getEnt("ghost_station_right_platform_enemy_closet_volume", "targetname");
   self setgoal(vol, 1);
 }
 
 function function_8354d781() {
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(true) {
     if(distancesquared(player.origin, self.origin) < 147456) {
@@ -547,8 +547,8 @@ function function_f2f99070() {
 
 function function_9da6d59e() {
   level endon(#"ghost_station_right_platform_enemies_cleared");
-  e_vol = getent("ghost_station_right_platform_enemy_closet_volume", "targetname");
-  player = getplayers()[0];
+  e_vol = getEnt("ghost_station_right_platform_enemy_closet_volume", "targetname");
+  player = getPlayers()[0];
 
   while(true) {
     function_1eaaceab(level.ghost_station_right_platform_enemies);
@@ -613,7 +613,7 @@ function function_7219a1eb() {
 function function_5c001093() {
   self endon(#"death");
   s_result = level flag::wait_till_any(array("guard_station_doors_opened", "stealth_spotted", "player_in_guard_room"));
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isDefined(level.var_da677ee8) && level.var_da677ee8 == self) {
     if(scene::is_active("aib_vign_stakeout_ghost_station_platform_scene_enemy_1")) {
@@ -636,18 +636,18 @@ function function_5c001093() {
 
   if(s_result._notify == #"guard_station_doors_opened" || s_result._notify == #"player_in_guard_room") {
     if(self.targetname == "left_platform_guy_1" || self.targetname == "left_platform_guy_2") {
-      vol = getent("ghost_station_left_platform_enemy_combat_volume", "targetname");
+      vol = getEnt("ghost_station_left_platform_enemy_combat_volume", "targetname");
       self setgoal(vol, 1);
     }
 
     wait 4;
   } else {
-    vol = getent("ghost_station_left_platform_enemy_combat_volume2", "targetname");
+    vol = getEnt("ghost_station_left_platform_enemy_combat_volume2", "targetname");
     self setgoal(vol, 1);
     wait 6;
   }
 
-  vol = getent("ghost_station_left_platform_enemy_combat_volume2", "targetname");
+  vol = getEnt("ghost_station_left_platform_enemy_combat_volume2", "targetname");
   self setgoal(vol, 1);
 }
 
@@ -716,7 +716,7 @@ function function_c5a054db() {
   struct = struct::get("left_platform_guy_3_start_node", "targetname");
   self.goalradius = 32;
   self thread spawner::go_to_node(struct);
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(isalive(player) && distancesquared(player.origin, self.origin) > 40000) {
     wait 0.25;
@@ -738,7 +738,7 @@ function function_1ac563ed() {
   }
 
   level function_7d87c283();
-  guard_room_shelf_clip = getent("guard_room_shelf_clip", "targetname");
+  guard_room_shelf_clip = getEnt("guard_room_shelf_clip", "targetname");
 
   if(isDefined(guard_room_shelf_clip)) {
     guard_room_shelf_clip delete();
@@ -746,7 +746,7 @@ function function_1ac563ed() {
 
   level util::delay(0.7, undefined, &scene::play, "p9_fxanim_cp_stakeout_subway_door_breach_bundle");
   level scene::play("aib_vign_stakeout_ghost_station_guard_station_enemy", "react");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(isalive(level.var_f3608e6d)) {
     level.var_f3608e6d function_a3fcf9e0("attack", player, player.origin);
@@ -795,9 +795,9 @@ function function_48695888() {
   level namespace_b4dbc583::function_26c67eeb(struct::get("train_car_03_caboose"), struct::get("train_car_03_start_org"), struct::get("train_car_03_audio_org"));
   var_116e3c5f = namespace_b4dbc583::function_d02dc0ba();
   waitframe(1);
-  var_116e3c5f[#"vehicle 2"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_116e3c5f[#"hash_5c059914188784d8"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_116e3c5f[#"hash_5c05961418877fbf"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_116e3c5f[#"vehicle 2"] playRumbleOnEntity(#"hash_2df4857520a49abc");
+  var_116e3c5f[#"hash_5c059914188784d8"] playRumbleOnEntity(#"hash_2df4857520a49abc");
+  var_116e3c5f[#"hash_5c05961418877fbf"] playRumbleOnEntity(#"hash_2df4857520a49abc");
   level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_01_bundle", var_116e3c5f);
   level flag::wait_till("start_ghost_station_left_platform_enemies_anims");
   wait 14;
@@ -805,9 +805,9 @@ function function_48695888() {
   level flag::set("start_second_trains");
   var_44fda395 = namespace_b4dbc583::function_9e2e1f19();
   waitframe(1);
-  var_44fda395[#"vehicle 2"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_44fda395[#"hash_5c059914188784d8"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_44fda395[#"hash_5c05961418877fbf"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_44fda395[#"vehicle 2"] playRumbleOnEntity(#"hash_2df4857520a49abc");
+  var_44fda395[#"hash_5c059914188784d8"] playRumbleOnEntity(#"hash_2df4857520a49abc");
+  var_44fda395[#"hash_5c05961418877fbf"] playRumbleOnEntity(#"hash_2df4857520a49abc");
   level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_02_bundle", var_44fda395);
   wait 2;
   var_116e3c5f namespace_b4dbc583::function_61fc8e84(1);
@@ -850,7 +850,7 @@ function function_a6dfa615(skipto) {
   }
 
   level thread scene::play("p9_fxanim_cp_stakeout_rats_subway_01_bundle");
-  guard_room_light = getent("ghost_station_guard_room_light", "targetname");
+  guard_room_light = getEnt("ghost_station_guard_room_light", "targetname");
   guard_room_light clientfield::set("guard_room_light", 1);
   level flag::wait_till("ghost_station_exit_done");
   guard_room_light clientfield::set("guard_room_light", 0);
@@ -945,10 +945,10 @@ function private function_2fb578af() {
 }
 
 function function_9cd9dd8c() {
-  e_vol = getent("vol_touching_tracks", "targetname");
+  e_vol = getEnt("vol_touching_tracks", "targetname");
   level flag::wait_till("start_second_trains");
   wait 4;
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(player istouching(e_vol)) {
     dialogue::radio("vox_cp_stkt_03025_adlr_traincominggeto_0e");
@@ -975,7 +975,7 @@ function private function_51069703() {
   level.var_9872ce3b thread function_d8910c69();
   level.var_59b550c1 endon(#"death", #"stealth_combat", #"hash_7bbdc350f2b82c6");
   level.var_9872ce3b endon(#"death", #"stealth_combat", #"hash_7bbdc350f2b82c6");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"takedown_active");
   var_6ca67914 = snd::play("vox_cp_stkt_03040_gms1_squad3report_67", [level.var_59b550c1, "j_head"]);
   wait 2.5;
@@ -1008,7 +1008,7 @@ function private function_b21f1c1b() {
   level.var_a8b99b8d thread function_d8910c69();
   level.var_da677ee8 endon(#"death", #"stealth_combat", #"hash_7bbdc350f2b82c6");
   level.var_a8b99b8d endon(#"death", #"stealth_combat", #"hash_7bbdc350f2b82c6");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"takedown_active");
   level.var_a8b99b8d dialogue::queue("vox_cp_stkt_03022_gms2_thesedamnbootsa_3b");
   level.var_da677ee8 dialogue::queue("vox_cp_stkt_03022_gms1_iknowbutspringw_87");
@@ -1039,7 +1039,7 @@ function private function_3286873a() {
   level.var_247ff0ab thread function_d8910c69();
   level.var_f3608e6d endon(#"death", #"stealth_combat", #"hash_7bbdc350f2b82c6");
   level.var_247ff0ab endon(#"death", #"stealth_combat", #"hash_7bbdc350f2b82c6");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"takedown_active");
   level.var_f3608e6d dialogue::queue("vox_cp_stkt_03065_gms2_whenarewesuppos_80");
   level.var_247ff0ab dialogue::queue("vox_cp_stkt_03065_gms3_in15minutes_90");

@@ -385,7 +385,7 @@ createfxlogic() {
     }
     for(var_3 = 0; var_3 < level.createfxent.size; var_3++) {
       var_12 = level.createfxent[var_3];
-      var_24 = vectornormalize(var_12.v["origin"] - (level.player.origin + (0, 0, 55)));
+      var_24 = vectorNormalize(var_12.v["origin"] - (level.player.origin + (0, 0, 55)));
       var_25 = vectordot(var_16, var_24);
 
       if(var_25 < var_18) {
@@ -1456,7 +1456,7 @@ process_fx_rotater() {
     for(var_3 = 0; var_3 < level.selected_fx_ents.size; var_3++) {
       var_2[var_3] = spawn("script_origin", level.selected_fx_ents[var_3].v["origin"]);
       var_2[var_3].angles = level.selected_fx_ents[var_3].v["angles"];
-      var_2[var_3] linkto(var_1);
+      var_2[var_3] linkTo(var_1);
     }
 
     rotate_over_time(var_1, var_2);

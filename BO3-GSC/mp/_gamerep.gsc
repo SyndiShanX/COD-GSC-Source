@@ -270,7 +270,7 @@ function gamerepupdateinformationforround() {
   if(!isgamerepenabled()) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     player gamerepupdatenonpersistentplayerinformation();
@@ -281,7 +281,7 @@ function gamerepanalyzeandreport() {
   if(!isgamerepenabled()) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     player gamerepupdatepersistentplayerinformation();

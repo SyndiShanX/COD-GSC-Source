@@ -58,7 +58,7 @@ shock_rumble_loop(duration) {
   goaltime = gettime() + int(duration * 1000);
 
   while(gettime() < goaltime && isDefined(self.owner)) {
-    self.owner playrumbleonentity("proximity_grenade");
+    self.owner playRumbleOnEntity("proximity_grenade");
     wait 1;
   }
 }

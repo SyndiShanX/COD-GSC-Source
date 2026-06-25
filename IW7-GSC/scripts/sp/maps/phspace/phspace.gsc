@@ -125,8 +125,8 @@ func_CAE4() {
   thread scripts\sp\utility::func_241F(1);
   scripts\engine\utility::array_thread(getEntArray("animated_models", "script_noteworthy"), scripts\sp\maps\pearlharbor\pearlharbor_util::func_1F8A);
   scripts\engine\utility::array_thread(getEntArray("player_disable_stance", "script_noteworthy"), scripts\sp\maps\pearlharbor\pearlharbor_util::func_D024);
-  var_0 = getent("jackal_callin_player_clip", "targetname");
-  var_1 = getent("jackal_callin_salter_clip", "targetname");
+  var_0 = getEnt("jackal_callin_player_clip", "targetname");
+  var_1 = getEnt("jackal_callin_salter_clip", "targetname");
 
   if(isDefined(var_0)) {
     var_0 notsolid();
@@ -140,12 +140,12 @@ func_CAE4() {
   level.player scripts\engine\utility::allow_wallrun(0);
   thread scripts\sp\maps\pearlharbor\pearlharbor_util::func_1028E();
   thread func_B8C5();
-  var_2 = getent("viz_ret", "targetname");
+  var_2 = getEnt("viz_ret", "targetname");
 
   if(isDefined(var_2)) {
     var_2 hide();
     var_2 notsolid();
-    var_3 = getent("viz_tigris", "targetname");
+    var_3 = getEnt("viz_tigris", "targetname");
     var_3 hide();
     var_3 notsolid();
   }
@@ -176,8 +176,8 @@ func_CAE4() {
     thread scripts\sp\maps\pearlharbor\pearlharbor_util::func_48BF();
   }
 
-  var_4 = getent("tower_left_door", "targetname");
-  var_5 = getent("tower_right_door", "targetname");
+  var_4 = getEnt("tower_left_door", "targetname");
+  var_5 = getEnt("tower_right_door", "targetname");
 
   if(isDefined(var_4)) {
     var_4.clip = var_4 scripts\engine\utility::get_target_ent();
@@ -200,17 +200,17 @@ func_CAE4() {
     _setsaveddvar("r_umbraMinObjectContribution", 0);
   }
 
-  var_6 = scripts\engine\utility::getstruct("e3_door_struct", "targetname");
+  var_6 = scripts\engine\utility::getStruct("e3_door_struct", "targetname");
 
   if(isDefined(var_6)) {
-    var_7 = getent(var_6.target, "targetname");
-    var_8 = getent(var_7.target, "targetname");
+    var_7 = getEnt(var_6.target, "targetname");
+    var_8 = getEnt(var_7.target, "targetname");
     var_7 delete();
     var_8 delete();
   }
 
-  var_9 = getent("runway_hangar_door", "targetname");
-  var_7 = getent(var_9.target, "targetname");
+  var_9 = getEnt("runway_hangar_door", "targetname");
+  var_7 = getEnt(var_9.target, "targetname");
 
   if(isDefined(var_9)) {
     var_9 delete();
@@ -360,7 +360,7 @@ func_107B6() {
   if(isDefined(level.var_12B67)) {
     return;
   }
-  var_0 = getent("un_retribution", "targetname");
+  var_0 = getEnt("un_retribution", "targetname");
   var_0.var_EEF9 = "missile_cluster_turret_un cannon_small_un,1,1,amb_turret_sml_t_l_1,amb_turret_sml_t_l_2,amb_turret_sml_t_l_3,amb_turret_sml_t_l_4,amb_turret_sml_t_r_1,amb_turret_sml_t_r_2,amb_turret_sml_t_r_3,amb_turret_sml_t_r_4";
   level.var_12B67 = scripts\sp\vehicle::func_1080C("un_retribution");
   level.var_12B67 scripts\sp\vehicle::playgestureviewmodel();
@@ -375,7 +375,7 @@ func_107B6() {
 func_FBFB() {
   wait 3;
   var_0 = spawn("script_origin", level.var_12B67.origin);
-  var_0 linkto(level.var_12B67);
+  var_0 linkTo(level.var_12B67);
   var_0 thread scripts\sp\utility::func_10461("scn_phparade_capital_ship_close_lp", 1, 5, 1);
   level.player waittill("sfx_retr_loop_stop");
   wait 6;
@@ -401,13 +401,13 @@ func_10801() {
 }
 
 func_CA28() {
-  var_0 = getent("periph_mountains1", "targetname");
+  var_0 = getEnt("periph_mountains1", "targetname");
 
   if(isDefined(var_0)) {
     var_0 delete();
   }
 
-  var_1 = getent("geneva_periph", "targetname");
+  var_1 = getEnt("geneva_periph", "targetname");
 
   if(isDefined(var_1)) {
     var_1 delete();

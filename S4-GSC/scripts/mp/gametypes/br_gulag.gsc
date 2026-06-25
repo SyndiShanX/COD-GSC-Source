@@ -1693,7 +1693,7 @@ _id_7278() {
 
 _id_B7F5(var_0, var_1) {
   self _meth_8063();
-  self setorigin(var_0, 1);
+  self setOrigin(var_0, 1);
   self setplayerangles(var_1);
 }
 
@@ -2086,7 +2086,7 @@ _id_7270(var_0, var_1) {
   var_5 = scripts\mp\gametypes\br_circle::_id_69C5();
   var_6 = scripts\mp\gametypes\br_circle::_id_69C6();
   var_7 = length(var_5 - var_3);
-  var_8 = vectornormalize(var_5 - var_3);
+  var_8 = vectorNormalize(var_5 - var_3);
   var_9 = level._id_C69B;
   var_10 = var_3 + var_8 * var_7 * var_9;
   var_11 = var_4 + (var_6 - var_4) * var_9;
@@ -2236,7 +2236,7 @@ _id_B6B5(var_0, var_1) {
 _id_6D04(var_0, var_1, var_2) {
   var_3 = 3.14159;
   var_4 = scripts\mp\gametypes\br_circle::_id_6D02();
-  var_5 = vectornormalize(var_0 - var_4);
+  var_5 = vectorNormalize(var_0 - var_4);
   var_6 = vectortoangles(var_5);
   var_7 = randomfloatrange(getdvarfloat("#x32922a0bb9f930b54", 10.0), getdvarfloat("#x329458ebb9fb92b76", 60.0));
   var_8 = var_5;
@@ -2253,7 +2253,7 @@ _id_6D04(var_0, var_1, var_2) {
     return var_9;
   }
 
-  var_8 = vectornormalize(var_4 - var_0);
+  var_8 = vectorNormalize(var_4 - var_0);
   var_9 = var_0 + var_8 * var_1;
 
   if(_id_7270(var_9, var_2)) {
@@ -3113,7 +3113,7 @@ _id_FC14(var_0, var_1) {
         continue;
       }
       var_9 = var_8.origin + (0, 0, 30);
-      var_10 = vectornormalize(var_9 - var_5);
+      var_10 = vectorNormalize(var_9 - var_5);
       var_11 = vectordot(var_6, var_10);
 
       if(var_11 < var_2 || var_11 < var_4) {
@@ -3482,7 +3482,7 @@ _id_6DB7(var_0, var_1, var_2) {
     var_13 = (var_8 * var_4 + var_5 * var_3 * _func_0218(var_6 + var_7 - var_8)) / (var_6 + var_7);
     var_10 = (var_12, var_13, var_2[2]) + (var_0[0], var_0[1], 0);
   } else {
-    var_14 = vectornormalize((var_3, var_4, 0));
+    var_14 = vectorNormalize((var_3, var_4, 0));
     var_15 = var_0 + var_14 * var_1;
     var_10 = (var_15[0], var_15[1], var_2[2]);
     var_11 = 0;
@@ -3537,7 +3537,7 @@ _id_E25A() {
 
   if(var_7 <= 0) {
     var_9 = var_4 - level._id_2A73._id_2A7A;
-    var_10 = vectornormalize((var_9[0], var_9[1], 0));
+    var_10 = vectorNormalize((var_9[0], var_9[1], 0));
     var_11 = vectortoangles(var_10);
     level._id_7262._id_0E18 unlink();
     level._id_7262._id_0E18.angles = (0, var_11[1] + 90, 0);
@@ -3561,7 +3561,7 @@ _id_0E3D(var_0, var_1) {
   self playLoopSound("br_ac130_lp");
 
   if(var_1 > 0) {
-    self moveto(var_0, var_1, 0, 0);
+    self moveTo(var_0, var_1, 0, 0);
     wait(var_1);
   }
 
@@ -3576,13 +3576,13 @@ _id_0E41() {
   var_1 = scripts\mp\gametypes\br_c130::_id_6940();
   var_2 = level._id_7262._id_0E42._id_0359;
   var_3 = var_0 * var_2 / var_1;
-  self linkto(level._id_7262._id_0E42, "tag_origin");
+  self linkTo(level._id_7262._id_0E42, "tag_origin");
 
   if(var_3 <= 0) {
     return;
   }
   for(;;) {
-    level._id_7262._id_0E42 rotateyaw(360, var_3);
+    level._id_7262._id_0E42 rotateYaw(360, var_3);
     wait(var_3);
   }
 }
@@ -3643,7 +3643,7 @@ _id_99D9() {
   var_10 = var_9 / scripts\mp\gametypes\br_c130::_id_6940();
   level._id_7262._id_0E18 notify("ac130LinkAndSpin");
   level._id_7262._id_0E18 unlink();
-  level._id_7262._id_0E18 moveto(var_8, var_10, 0, 0);
+  level._id_7262._id_0E18 moveTo(var_8, var_10, 0, 0);
   wait(var_10);
   scripts\mp\gametypes\br_public::_id_383E(level._id_7262._id_0E18._id_18E7);
 
@@ -3667,7 +3667,7 @@ _id_F492(var_0, var_1) {
   var_0 = var_0 - 100;
 
   if(level._id_7262._id_0E42._id_0359 != var_0) {
-    var_3 = vectornormalize(level._id_7262._id_0E42.origin - level._id_7262._id_0E18.origin);
+    var_3 = vectorNormalize(level._id_7262._id_0E42.origin - level._id_7262._id_0E18.origin);
     var_4 = level._id_7262._id_0E18.origin + var_3 * var_0;
     level._id_7262._id_0E18 unlink();
     level._id_7262._id_0E42.origin = var_4;
@@ -3676,7 +3676,7 @@ _id_F492(var_0, var_1) {
     level._id_7262._id_0E18 thread _id_0E41();
   }
 
-  level._id_7262._id_0E42 moveto(var_2, var_1);
+  level._id_7262._id_0E42 moveTo(var_2, var_1);
   wait(var_1);
 }
 
@@ -4559,11 +4559,11 @@ _id_D856(var_0, var_1) {
   if(var_2.size > 1) {
     level._id_7262._id_FE30 = 0;
   } else {
-    var_1._id_4DBA = getent(var_1.target, "targetname");
+    var_1._id_4DBA = getEnt(var_1.target, "targetname");
 
     if(isDefined(var_1._id_4DBA)) {
       var_1._id_4DBA._id_39D3 = 1;
-      var_3 = getent(var_1._id_4DBA.target, "targetname");
+      var_3 = getEnt(var_1._id_4DBA.target, "targetname");
       var_3 delete();
       var_4 = anglesToForward(var_1._id_4DBA.angles);
       var_1._id_4DBA._id_39DC = var_1._id_4DBA.origin;

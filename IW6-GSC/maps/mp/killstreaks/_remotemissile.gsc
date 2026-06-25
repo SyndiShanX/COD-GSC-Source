@@ -98,7 +98,7 @@ _fire(lifeId, player) {
 
   foreach(spawn in remoteMissileSpawnArray) {
     if(isDefined(spawn.target)) {
-      spawn.targetEnt = GetEnt(spawn.target, "targetname");
+      spawn.targetEnt = getEnt(spawn.target, "targetname");
     }
   }
 
@@ -112,7 +112,7 @@ _fire(lifeId, player) {
     startPos = remoteMissileSpawn.origin;
     targetPos = remoteMissileSpawn.targetEnt.origin;
 
-    vector = VectorNormalize(startPos - targetPos);
+    vector = vectorNormalize(startPos - targetPos);
     startPos = (vector * 14000) + targetPos;
 
     rocket = MagicBullet("remotemissile_projectile_mp", startpos, targetPos, player);
@@ -161,8 +161,8 @@ _fire_noplayer(lifeId, player) {
   rocket.lifeId = lifeId;
   rocket.type = "remote";
 
-  player CameraLinkTo(rocket, "tag_origin");
-  player ControlsLinkTo(rocket);
+  player CameralinkTo(rocket, "tag_origin");
+  player ControlslinkTo(rocket);
 
   rocket thread rocket_CleanupOnDeath();
 
@@ -201,8 +201,8 @@ missileEyes(player, rocket) {
     player VisionSetMissilecamForPlayer(game["thermal_vision"], 1.0);
     player ThermalVisionOn();
     player thread delayedFOFOverlay();
-    player CameraLinkTo(rocket, "tag_origin");
-    player ControlsLinkTo(rocket);
+    player CameralinkTo(rocket, "tag_origin");
+    player ControlslinkTo(rocket);
 
     if(GetDvarInt("camera_thirdPerson")) {
       player SetThirdPersonDOF(false);

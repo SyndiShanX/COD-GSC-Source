@@ -478,7 +478,7 @@ function spawninterroundintermission() {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
   self globallogic_defaults::default_onspawnintermission();
-  self setorigin(self.origin);
+  self setOrigin(self.origin);
   self setplayerangles(self.angles);
   self clientfield::set_to_player("player_dof_settings", 2);
 }

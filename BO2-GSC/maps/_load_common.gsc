@@ -306,10 +306,10 @@ setupexploders() {
     }
 
     if(isDefined(exploder.target)) {
-      e_target = getent(ent.v["target"], "targetname");
+      e_target = getEnt(ent.v["target"], "targetname");
 
       if(!isDefined(e_target)) {
-        e_target = getstruct(ent.v["target"], "targetname");
+        e_target = getStruct(ent.v["target"], "targetname");
       }
 
       org = e_target.origin;
@@ -357,7 +357,7 @@ playerdamagerumble() {
     if(isDefined(self.specialdamage)) {
       continue;
     }
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -702,7 +702,7 @@ special_death_death_indicator_hudelement_cleanup(overlay) {
 
 waterthink() {
   assert(isDefined(self.target));
-  targeted = getent(self.target, "targetname");
+  targeted = getEnt(self.target, "targetname");
   assert(isDefined(targeted));
   waterheight = targeted.origin[2];
   targeted = undefined;
@@ -922,7 +922,7 @@ trigger_notify(trigger, msg) {
   other = trigger trigger_wait();
 
   if(isDefined(trigger.target)) {
-    notify_ent = getent(trigger.target, "targetname");
+    notify_ent = getEnt(trigger.target, "targetname");
 
     if(isDefined(notify_ent)) {
       notify_ent notify(msg, other);
@@ -1498,7 +1498,7 @@ get_script_linkto_targets() {
 
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
-    target = getent(token, "script_linkname");
+    target = getEnt(token, "script_linkname");
 
     if(isDefined(target)) {
       targets[targets.size] = target;
@@ -1803,7 +1803,7 @@ adjust_placed_weapons() {
 
 explodable_volume() {
   self thread explodable_volume_think();
-  exploder = getent(self.target, "targetname");
+  exploder = getEnt(self.target, "targetname");
 
   if(isDefined(exploder) && isDefined(exploder.script_exploder)) {
     level waittill("exploder" + exploder.script_exploder);
@@ -1816,7 +1816,7 @@ explodable_volume() {
 
 explodable_volume_think() {
   assert(isDefined(self.target), "Explodable Volume must be targeting an exploder or an explodable object.");
-  target = getent(self.target, "targetname");
+  target = getEnt(self.target, "targetname");
   assert(isDefined(target), "Explodable Volume has an invalid target.");
 
   if(isDefined(target.remove)) {

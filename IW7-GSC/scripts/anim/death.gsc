@@ -144,8 +144,8 @@ func_C703() {
   if(self.var_DE == "MOD_MELEE" && isDefined(self.opcode::OP_EvalLocalVariableRefCached)) {
     var_0 = self.origin - self.var_4F.origin;
     var_1 = anglesToForward(self.angles);
-    var_2 = vectornormalize((var_0[0], var_0[1], 0));
-    var_3 = vectornormalize((var_1[0], var_1[1], 0));
+    var_2 = vectorNormalize((var_0[0], var_0[1], 0));
+    var_3 = vectorNormalize((var_1[0], var_1[1], 0));
     var_4 = func_B60C(var_3, var_2);
     var_5 = var_4 * 90;
     var_6 = (-1 * var_2[0], -1 * var_2[1], 0);

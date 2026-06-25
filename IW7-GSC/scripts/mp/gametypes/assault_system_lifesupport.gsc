@@ -26,7 +26,7 @@ func_FACA(var_0) {
 func_AC73(var_0) {
   var_1 = undefined;
   if(isDefined(var_0.script_noteworthy)) {
-    var_1 = getent(var_0.script_noteworthy, "targetname");
+    var_1 = getEnt(var_0.script_noteworthy, "targetname");
   }
 
   if(!isDefined(var_1)) {
@@ -42,7 +42,7 @@ func_AC73(var_0) {
   var_2.id = "use";
   var_2 func_113A7(undefined);
   if(isDefined(var_0.target)) {
-    var_2.var_1157D = getent(var_0.target, "targetname");
+    var_2.var_1157D = getEnt(var_0.target, "targetname");
   }
 
   return var_2;

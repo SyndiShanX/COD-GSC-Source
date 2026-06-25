@@ -130,7 +130,7 @@ function private stalingrad_validate_last_closest_player(players) {
 }
 
 function private function_6d4522d4() {
-  targets = getplayers();
+  targets = getPlayers();
   for(i = 0; i < targets.size; i++) {
     if(!function_a796c73f(targets[i])) {
       arrayremovevalue(targets, targets[i]);

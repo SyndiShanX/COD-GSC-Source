@@ -52,12 +52,12 @@ watch_weapon_changes(localclientnum) {
 
 zm_shield_damage_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "zm_shield_damage");
+    self playRumbleOnEntity(localclientnum, "zm_shield_damage");
   }
 }
 
 zm_shield_break_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "zm_shield_break");
+    self playRumbleOnEntity(localclientnum, "zm_shield_break");
   }
 }

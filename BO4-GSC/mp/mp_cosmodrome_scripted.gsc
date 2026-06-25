@@ -184,18 +184,18 @@ function_84d0eb82(a_ents) {
   waitframe(2);
 
   if(isDefined(cradle)) {
-    cradle_clip = getent("rocket_cradle_clip", "targetname");
+    cradle_clip = getEnt("rocket_cradle_clip", "targetname");
     link = util::spawn_model(#"tag_origin", cradle gettagorigin("tag_link_all"), cradle gettagangles("tag_link_all"));
     cradle_clip setmovingplatformenabled(1, 0);
-    link linkto(cradle, "tag_link_all");
-    cradle_clip linkto(link);
+    link linkTo(cradle, "tag_link_all");
+    cradle_clip linkTo(link);
   }
 }
 
 function_e3ec98e4(a_ents) {
   level.var_578a0ca4 = spawnStruct();
   level.var_578a0ca4.scene_ents = self.scene_ents;
-  self.rocket_kill_trig = getent("rocket_kill_trig", "targetname");
+  self.rocket_kill_trig = getEnt("rocket_kill_trig", "targetname");
   rumble_locs = struct::get_array("rocket_gantry_rumble");
   rumbles = [];
 
@@ -219,7 +219,7 @@ function_e3ec98e4(a_ents) {
   array::run_all(rumbles, &stoprumble, "mp_cosdmodrome_rocket_ready_rumble");
 
   if(isDefined(a_ents[#"prop 2"])) {
-    a_ents[#"prop 2"] playrumbleonentity("mp_cosdmodrome_rocket_ready_rumble");
+    a_ents[#"prop 2"] playRumbleOnEntity("mp_cosdmodrome_rocket_ready_rumble");
   }
 
   array::run_all(rumbles, &playrumblelooponentity, "mp_cosdmodrome_rocket_ready_gantry_rumble");
@@ -235,7 +235,7 @@ function_269c793(a_ents) {
     level endon(#"game_ended");
     a_ents[#"prop 3"] endon(#"death");
     rumble_ent = util::spawn_model(#"tag_origin", self.rocket_kill_trig.origin);
-    rumble_ent linkto(a_ents[#"prop 3"]);
+    rumble_ent linkTo(a_ents[#"prop 3"]);
     a_ents[#"prop 3"] waittill(#"start_damage");
     a_ents[#"prop 3"] util::delay("line_23", undefined, &function_aa8af5cd, level.var_40263d6, "vox_rupa_pa_rocket_sequence_23");
     level.var_578a0ca4 thread function_7be405f8();
@@ -332,7 +332,7 @@ function_e940bcf9() {
 
 function_aa8af5cd(locs, line) {
   foreach(loc in locs) {
-    playsoundatposition(line, loc);
+    playSoundAtPosition(line, loc);
 
     level thread function_cd7664d5(loc, line);
   }
@@ -348,7 +348,7 @@ function_6c6d4350() {
   level thread function_56b1158f(locs, (1, 1, 0));
 
   foreach(loc in locs) {
-    playsoundatposition("evt_gantry_alarm", loc);
+    playSoundAtPosition("evt_gantry_alarm", loc);
 
     level thread function_cd7664d5(loc, "<dev string:x38>", (1, 1, 0));
   }

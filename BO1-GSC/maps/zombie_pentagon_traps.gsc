@@ -32,10 +32,10 @@ pickup_trap_piece() {
     return;
   }
   trap_piece = self spawn_trap_piece();
-  self SetHintString(&"ZOMBIE_PENTAGON_GRAB_MISSING_PIECE");
-  self SetCursorHint("HINT_NOICON");
+  self setHintString(&"ZOMBIE_PENTAGON_GRAB_MISSING_PIECE");
+  self setCursorHint("HINT_NOICON");
   self.picked_up = 0;
-  self UseTriggerRequireLookAt();
+  self useTriggerRequireLookAt();
   while(self.picked_up == 0) {
     self waittill("trigger", user);
     if(is_player_valid(user)) {
@@ -59,7 +59,7 @@ pickup_trap_piece() {
   }
 }
 spawn_trap_piece() {
-  spawn_struct = getstruct(self.target, "targetname");
+  spawn_struct = getStruct(self.target, "targetname");
   trap_model = spawn("script_model", spawn_struct.origin);
   trap_model setModel("zombie_sumpf_power_switch");
   trap_model.angles = spawn_struct.angles;
@@ -87,12 +87,12 @@ pentagon_fix_electric_trap() {
   if(!isDefined(self.script_string)) {
     PrintLn("trap at " + self.origin + " missing script string");
   }
-  self SetHintString(&"ZOMBIE_PENTAGON_MISSING_PIECE");
-  self SetCursorHint("HINT_NOICON");
-  self UseTriggerRequireLookAt();
+  self setHintString(&"ZOMBIE_PENTAGON_MISSING_PIECE");
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
   trap_trigger = getEntArray(self.script_flag_wait, "targetname");
   array_thread(trap_trigger, ::electric_hallway_trap_piece_hide, self.script_flag_wait);
-  trap_cover = GetEnt(self.script_string, "targetname");
+  trap_cover = getEnt(self.script_string, "targetname");
   level thread pentagon_trap_cover_remove(trap_cover, self.script_flag_wait);
   while(!flag(self.script_flag_wait)) {
     self waittill("trigger", who);
@@ -109,7 +109,7 @@ pentagon_fix_electric_trap() {
       }
     }
   }
-  self SetHintString("");
+  self setHintString("");
   self trigger_off();
 }
 pentagon_show_piece_triggers() {
@@ -132,7 +132,7 @@ electric_hallway_trap_piece_hide(str_flag) {
     return;
   }
   if(self.classname == "trigger_use") {
-    self SetHintString(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     self thread electric_hallway_trap_piece_show(str_flag);
     self trigger_off();
   }

@@ -89,7 +89,7 @@ GetAnimScaleFactors(delta, animDelta, bAnimInWorldSpace) {
   scaleZ = 1;
   if(isDefined(bAnimInWorldSpace) && bAnimInWorldSpace) {
     animDelta2D = (animDelta[0], animDelta[1], 0);
-    animDeltaDir = VectorNormalize(animDelta2D);
+    animDeltaDir = vectorNormalize(animDelta2D);
     if(VectorDot(animDeltaDir, delta) < 0) {
       scaleXY = 0;
     } else if(animXY > 0) {

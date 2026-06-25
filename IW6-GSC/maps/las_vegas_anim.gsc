@@ -169,11 +169,11 @@ elias_death_fail(var_0) {
   maps\_anim::anim_set_rate_single(level.player.rig, "elias_death_start", 0.01);
   common_scripts\utility::flag_wait("elias_death_rorke_fail");
   common_scripts\utility::flag_set("elias_death_player_failed");
-  var_2 = common_scripts\utility::getstruct("elias_death_struct", "targetname");
+  var_2 = common_scripts\utility::getStruct("elias_death_struct", "targetname");
   var_3 = var_2 maps\las_vegas_code::makestruct();
   var_4 = [level.elias, level.hesh];
   maps\_anim::anim_set_rate(var_4, "elias_death_start_b", 0.01);
-  var_0 stopanimscripted();
+  var_0 stopanimScripted();
   var_3 maps\_anim::anim_single_solo(var_0, "elias_death_fail");
 }
 
@@ -234,7 +234,7 @@ rorke_scripted_fire(var_0) {
 
     var_6 = anglesToForward(var_5);
     var_1 = var_9 + var_6 * var_10;
-    var_6 = vectornormalize(var_9 - var_1);
+    var_6 = vectorNormalize(var_9 - var_1);
     playFX(common_scripts\utility::getfx("blood_impact"), var_1, var_6);
   }
 
@@ -291,10 +291,10 @@ rorke_shoots_player() {
   level.player common_scripts\utility::delaycall(10, ::lerpfov, 50, 15);
   maps\_utility::delaythread(10, ::blood_overlay_thread, var_1);
   level.player shellshock("vegas_chair_shot", 999);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   var_5 = level.player.origin + (0, 0, 50);
   var_6 = level.rorke gettagorigin("tag_flash");
-  var_7 = vectornormalize(var_6 - var_5);
+  var_7 = vectorNormalize(var_6 - var_5);
   playFX(common_scripts\utility::getfx("blood_impact"), var_5, var_7);
   common_scripts\utility::flag_wait("elias_death_done");
 
@@ -416,7 +416,7 @@ rescue_pickup_gun(var_0) {
 }
 
 rescue_grab_rifle(var_0) {
-  var_1 = getent("rescue_enemy2", "targetname");
+  var_1 = getEnt("rescue_enemy2", "targetname");
   var_2 = var_1.weapon;
   var_1 maps\_utility::gun_remove();
   var_0 maps\_utility::forceuseweapon(var_2, "primary");
@@ -435,12 +435,12 @@ rescue_kick_gun(var_0) {
   var_1 itemweaponsetammo(var_3, var_4, var_3, 0);
   var_1.angles = level.rescue_gun.ent.angles;
   var_5 = spawn("script_origin", var_1.origin);
-  var_1 linkto(var_5);
-  var_6 = vectornormalize(var_1.origin - level.player.origin);
+  var_1 linkTo(var_5);
+  var_6 = vectorNormalize(var_1.origin - level.player.origin);
   var_7 = level.player.origin + var_6 * 35;
   var_8 = 1;
-  var_5 moveto(var_7, var_8, 0, var_8);
-  var_5 rotateyaw(randomfloatrange(60, 130), var_8, 0, var_8);
+  var_5 moveTo(var_7, var_8, 0, var_8);
+  var_5 rotateYaw(randomfloatrange(60, 130), var_8, 0, var_8);
   var_1 common_scripts\utility::delaycall(var_8 * 0.5, ::makeusable);
   level.rescue_gun.ent delete();
   level.rescue_gun = undefined;
@@ -496,21 +496,21 @@ gun_2_right(var_0) {
 }
 
 bar_link_door(var_0) {
-  var_1 = getent("bar_left_entry_door", "targetname");
-  var_1 linkto(var_0, "tag_inhand", (0, 12, -2), (0, -90, 0));
+  var_1 = getEnt("bar_left_entry_door", "targetname");
+  var_1 linkTo(var_0, "tag_inhand", (0, 12, -2), (0, -90, 0));
 }
 
 bar_unlink_door(var_0) {
-  var_1 = getent("bar_left_entry_door", "targetname");
+  var_1 = getEnt("bar_left_entry_door", "targetname");
   var_1 unlink();
 }
 
 radio_grab(var_0) {
-  level.enemy_radio linkto(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  level.enemy_radio linkTo(var_0, "tag_inhand", (0, 0, 0), (0, 0, 0));
 }
 
 radio_holster(var_0) {
-  level.enemy_radio linkto(var_0, "tag_stowed_hip_rear", (6, -8, 10), (90, 20, -5));
+  level.enemy_radio linkTo(var_0, "tag_stowed_hip_rear", (6, -8, 10), (90, 20, -5));
 }
 
 kitchen_entry_doors_open(var_0) {
@@ -930,13 +930,13 @@ ai_dropweapon(var_0) {
 
 rappelers_stop(var_0) {
   var_0 endon("death");
-  var_0 stopanimscripted();
+  var_0 stopanimScripted();
   var_0 notify("rappel_done");
 }
 
 hallway_roll_flash(var_0) {
   var_1 = var_0 gettagorigin("tag_weapon_left");
-  var_2 = common_scripts\utility::getstruct("hallway_flash_end", "targetname");
+  var_2 = common_scripts\utility::getStruct("hallway_flash_end", "targetname");
   var_2.origin = var_2.origin + (0, -50, 0);
   var_3 = var_2.origin - var_1;
   var_4 = vectortoangles(var_3);
@@ -995,12 +995,12 @@ show_clip(var_0) {
 
 radio_to_hand(var_0) {
   var_0.radio unlink();
-  var_0.radio linkto(level.keegan, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  var_0.radio linkTo(level.keegan, "tag_inhand", (0, 0, 0), (0, 0, 0));
 }
 
 radio_to_hip(var_0) {
   var_0.radio unlink();
-  var_0.radio linkto(level.keegan, "tag_stowed_hip_rear", (0, 0, 0), (0, 0, 0));
+  var_0.radio linkTo(level.keegan, "tag_stowed_hip_rear", (0, 0, 0), (0, 0, 0));
 }
 
 #using_animtree("animated_props");
@@ -1101,7 +1101,7 @@ tree_random_rotate() {
       var_2 = randomfloatrange(-15, 15);
       var_3 = randomfloatrange(-10, 10);
       var_4 = randomfloatrange(8, 15);
-      self rotateto(var_0 + (var_3, var_2, 0), var_4, var_4 * 0.4, var_4 * 0.5);
+      self rotateTo(var_0 + (var_3, var_2, 0), var_4, var_4 * 0.4, var_4 * 0.5);
       var_1 = gettime() + var_4 * 1000;
     }
   }

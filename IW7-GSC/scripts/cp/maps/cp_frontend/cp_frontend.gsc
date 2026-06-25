@@ -30,12 +30,12 @@ func_1067E(var_0, var_1, var_2) {
   var_6.head = spawn("script_model", var_6 gettagorigin("j_spine4"));
   var_6.head.angles = var_6 gettagangles("j_spine4");
   var_6.head setModel(var_5);
-  var_6.head linkto(var_6, "j_spine4");
+  var_6.head linkTo(var_6, "j_spine4");
   if(isDefined(var_1)) {
     var_6.gun = spawn("script_model", var_6 gettagorigin("tag_weapon_left"));
     var_6.gun.angles = var_6 gettagangles("tag_weapon_left");
     var_6.gun setModel("weapon_revolver_wm");
-    var_6.gun linkto(var_6, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_6.gun linkTo(var_6, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   }
 
   return var_6;
@@ -83,10 +83,10 @@ func_10823(var_0, var_1) {
     var_6.var_8861 = spawn("script_model", var_6.head gettagorigin(var_7));
     var_6.var_8861.angles = var_6.head gettagangles(var_7);
     var_6.var_8861 setModel(var_5);
-    var_6.var_8861 linkto(var_6.head, var_7);
+    var_6.var_8861 linkTo(var_6.head, var_7);
   }
 
-  var_6.head linkto(var_6, "j_spine4");
+  var_6.head linkTo(var_6, "j_spine4");
   wait(1);
   playFXOnTag(level._effect["yellow_eye_glow"], var_6.head, "j_eyeball_ri");
   playFXOnTag(level._effect["yellow_eye_glow"], var_6.head, "j_eyeball_le");
@@ -94,9 +94,9 @@ func_10823(var_0, var_1) {
 }
 
 setup_interact() {
-  level.var_13F40 = getent("mugging_01", "targetname");
-  level.var_13F41 = getent("mugging_02", "targetname");
-  level.var_13F42 = getent("mugging_03", "targetname");
+  level.var_13F40 = getEnt("mugging_01", "targetname");
+  level.var_13F41 = getEnt("mugging_02", "targetname");
+  level.var_13F42 = getEnt("mugging_03", "targetname");
   func_F9DC();
   level thread func_107F1();
   wait(0.05);
@@ -106,7 +106,7 @@ setup_interact() {
   wait(0.05);
   level thread func_1067F();
   wait(1);
-  var_0 = getent("pap_machine", "targetname");
+  var_0 = getEnt("pap_machine", "targetname");
   var_0 setscriptablepartstate("machine", "upgraded");
   var_0 setscriptablepartstate("reels", "on_frontend");
   wait(1);
@@ -177,7 +177,7 @@ func_71A4() {
 
   wait(0.1);
   triggerfx(level.var_71A3);
-  var_0 = getent("fnf_jaw", "targetname");
+  var_0 = getEnt("fnf_jaw", "targetname");
   var_0.origin = (1881, 173.5, -882.2);
   for(;;) {
     wait(randomintrange(1, 3));
@@ -203,8 +203,8 @@ func_F47A(var_0) {
     var_1 = "map_select_" + var_1;
   }
 
-  var_2 = getent(var_1, "targetname").origin;
-  var_3 = getent(var_1, "targetname").angles;
+  var_2 = getEnt(var_1, "targetname").origin;
+  var_3 = getEnt(var_1, "targetname").angles;
   var_4 = scripts\engine\utility::istrue(level.var_B329);
   if(var_4) {
     frontendscenecamerafade(0, 0.2);
@@ -257,16 +257,16 @@ func_F61A() {
     level.var_3CAD = spawn("script_character", (0, 0, 0), 0, 0, 0);
   }
 
-  level.weapon = spawn("script_weapon", getent("weapon_loc", "targetname").origin, 0, 0, 0);
+  level.weapon = spawn("script_weapon", getEnt("weapon_loc", "targetname").origin, 0, 0, 0);
   self.opened_weapon_select = 1;
-  level.weapon.angles = getent("weapon_loc", "targetname").angles;
+  level.weapon.angles = getEnt("weapon_loc", "targetname").angles;
   level.weapon setotherent(level.var_3CAD);
   frontendscenecamerafov(65);
   func_F522("player_weapon_cam");
 }
 
 func_F619() {
-  var_0 = getent("gun_light", "targetname");
+  var_0 = getEnt("gun_light", "targetname");
   var_0 setlightintensity(10);
   frontendscenecamerafov(65);
   self setdepthoffield(0, 15, 50, 80, 10, 8);
@@ -675,7 +675,7 @@ func_F41D() {
 }
 
 func_6F0C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = getent(var_0, "targetname");
+  var_7 = getEnt(var_0, "targetname");
   if(var_7 != undefined) {
     for(;;) {
       var_7 setlightintensity(var_1);
@@ -687,7 +687,7 @@ func_6F0C(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 func_10672() {
-  var_0 = getent("cashier_zombie_spawn", "targetname");
+  var_0 = getEnt("cashier_zombie_spawn", "targetname");
   var_1 = func_10823(var_0);
   var_1.angles = var_0.angles;
   var_1.origin = var_0.origin;
@@ -763,7 +763,7 @@ func_BDA9(var_0) {
 func_FEC4() {
   var_0 = "zmb_male_fullbody_outfit_01";
   var_1 = "zmb_male_fullbody_outfit_01";
-  var_2 = getent("shooting_01", "targetname");
+  var_2 = getEnt("shooting_01", "targetname");
   var_2.origin = (-550, -2010, -5);
   var_2.angles = (0, 0, 0);
   var_3 = func_10823(var_2);
@@ -793,7 +793,7 @@ func_5133(var_0, var_1, var_2) {
 }
 
 func_5B17() {
-  var_0 = getent("dragging_02", "targetname");
+  var_0 = getEnt("dragging_02", "targetname");
   var_0.origin = (-550, -2010, -5);
   var_0.angles = (0, 0, 0);
   var_1 = func_10823(var_0, "male");
@@ -811,7 +811,7 @@ func_5B17() {
 }
 
 func_5B18() {
-  var_0 = getent("dragging_01", "targetname");
+  var_0 = getEnt("dragging_01", "targetname");
   var_0.origin = (-550, -2010, -5);
   var_0.angles = (0, 0, 0);
   var_1 = func_10823(var_0, "male");
@@ -1074,7 +1074,7 @@ fadeoutfrontendcamera() {
 zm_map_select_watcher() {
   level endon("game_ended");
   self endon("disconnect");
-  var_0 = getent("map_select_poster", "targetname");
+  var_0 = getEnt("map_select_poster", "targetname");
   for(;;) {
     self waittill("luinotifyserver", var_1, var_2);
     if(var_1 == "soulKey" && var_2 > 0) {
@@ -1193,7 +1193,7 @@ show_soul_key(var_0) {
 func_13EFE() {
   level endon("game_ended");
   self endon("disconnect");
-  self cameralinkto(level.camera_anchor, "tag_origin");
+  self cameralinkTo(level.camera_anchor, "tag_origin");
   func_F41D();
   level.active_section = frontendscenegetactivesection();
   func_37BA(level.active_section);
@@ -1212,7 +1212,7 @@ func_13EFE() {
 
 func_13EFF(var_0, var_1, var_2, var_3) {
   level endon("camera_position_requested");
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   scripts\cp_mp\frontendutils::frontend_camera_move(var_4, var_1, 1, 0, var_2);
 }
 
@@ -1234,7 +1234,7 @@ main() {
 }
 
 update_theater_signs() {
-  var_0 = getent("front_marquee_sign", "targetname");
+  var_0 = getEnt("front_marquee_sign", "targetname");
   var_0 setModel("cp_final_fe_theater_beast_from_beyond");
   var_1 = getEntArray("frontend_poster", "targetname");
   foreach(var_3 in var_1) {
@@ -1243,8 +1243,8 @@ update_theater_signs() {
 }
 
 setup_fnf_machine() {
-  var_0 = getent("fnf_jaw", "targetname");
-  var_1 = getent("fnf_machine", "targetname");
+  var_0 = getEnt("fnf_jaw", "targetname");
+  var_1 = getEnt("fnf_machine", "targetname");
   if(should_use_alt_machine()) {
     var_1 setscriptablepartstate("teller", "default_on");
     var_0 setModel("zmb_fortune_teller_machine_jaw_02");
@@ -1257,8 +1257,8 @@ setup_fnf_machine() {
 
 func_F522(var_0) {
   level.camera_anchor dontinterpolate();
-  level.camera_anchor.origin = getent(var_0, "targetname").origin;
-  level.camera_anchor.angles = getent(var_0, "targetname").angles;
+  level.camera_anchor.origin = getEnt(var_0, "targetname").origin;
+  level.camera_anchor.angles = getEnt(var_0, "targetname").angles;
 }
 
 func_A8E7(var_0) {

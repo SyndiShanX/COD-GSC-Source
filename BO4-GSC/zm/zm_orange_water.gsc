@@ -364,8 +364,8 @@ water_player_freeze() {
   self clientfield::set("" + #"water_player_freeze_fx", 1);
   self clientfield::set_to_player("" + #"water_player_freeze_sfx", 1);
   t_ice = spawn("trigger_damage", self.origin, 0, 15, 72);
-  t_ice enablelinkto();
-  t_ice linkto(self);
+  t_ice enablelinkTo();
+  t_ice linkTo(self);
   self.t_ice = t_ice;
   self thread function_872ec0b2(t_ice);
 
@@ -541,22 +541,22 @@ function_6cadbaff() {
 
   if(level flag::get(#"break_freeze_faster")) {
     self waittill(#"weapon_melee", #"weapon_melee_power");
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     self clientfield::set_to_player("" + #"hash_67340426cd141891", 0);
     self notify(#"water_player_freeze_broken");
     return;
   }
 
   self waittill(#"weapon_melee", #"weapon_melee_power");
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   self clientfield::set_to_player("" + #"hash_67340426cd141891", 2);
   self playSound(#"hash_1a3cd046cb0b437f");
   self waittill(#"weapon_melee", #"weapon_melee_power");
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   self clientfield::set_to_player("" + #"hash_67340426cd141891", 1);
   self playSound(#"hash_1a3cd146cb0b4532");
   self waittill(#"weapon_melee", #"weapon_melee_power");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   self clientfield::set_to_player("" + #"hash_67340426cd141891", 0);
   self notify(#"water_player_freeze_broken");
 }
@@ -608,8 +608,8 @@ function_34e1762b() {
   self function_d793c8ff();
   self function_bad6907c();
   t_ice = spawn("trigger_damage", self.origin, 0, 15, 72);
-  t_ice enablelinkto();
-  t_ice linkto(self);
+  t_ice enablelinkTo();
+  t_ice linkTo(self);
   self.t_ice = t_ice;
   self thread function_872ec0b2(t_ice);
   self thread function_6cadbaff();
@@ -692,7 +692,7 @@ function_615d3be0() {
 
   while(true) {
     var_7c1bf084 = self function_e2d41c8d(var_98698d94);
-    self.e_tag moveto(var_98698d94.origin, var_7c1bf084);
+    self.e_tag moveTo(var_98698d94.origin, var_7c1bf084);
     self.e_tag waittill(#"movedone");
 
     if(isDefined(var_98698d94.target)) {

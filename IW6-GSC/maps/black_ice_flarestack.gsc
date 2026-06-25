@@ -23,7 +23,7 @@ hint_button_press() {
 
 section_post_inits() {
   level._flarestack = spawnStruct();
-  level._flarestack.scene_struct = common_scripts\utility::getstruct("struct_flarestack_ally1", "targetname");
+  level._flarestack.scene_struct = common_scripts\utility::getStruct("struct_flarestack_ally1", "targetname");
 
   if(isDefined(level._flarestack.scene_struct)) {
     level._flarestack.door_in = maps\black_ice_util::setup_door("model_flarestack_inside_door", "flarestack_door_in");
@@ -159,8 +159,8 @@ allies_baker_flarestack_exit() {
   var_1.col_brush connectpaths();
   maps\_utility::enable_ai_color();
   wait 0.2;
-  var_3 = getent("brush_flarestack_player_door_blocker", "targetname");
-  var_3 moveto(var_3.origin + (0, 0, 1024), 0.05);
+  var_3 = getEnt("brush_flarestack_player_door_blocker", "targetname");
+  var_3 moveTo(var_3.origin + (0, 0, 1024), 0.05);
 }
 
 event_flarestack_enter() {
@@ -170,7 +170,7 @@ event_flarestack_enter() {
   level waittill("notify_dialogue_baker_enter_complete");
   common_scripts\utility::flag_wait("flag_flarestack_scene_start");
   maps\black_ice_util::ignore_everything();
-  var_2 = getent("enemy_flarestack", "targetname") maps\_utility::spawn_ai(1, 1);
+  var_2 = getEnt("enemy_flarestack", "targetname") maps\_utility::spawn_ai(1, 1);
   var_2.animname = "flarestack_guy";
   var_2.v.nogun = 1;
   var_2.v.invincible = 1;
@@ -195,7 +195,7 @@ event_flarestack_enter() {
   self playSound("scn_blackice_command_baker_pullout");
   var_3 = maps\_utility::spawn_anim_model("baker_sidearm", self gettagorigin("TAG_INHAND"));
   var_3.angles = self gettagangles("TAG_INHAND");
-  var_3 linkto(self, "TAG_INHAND");
+  var_3 linkTo(self, "TAG_INHAND");
   level waittill("notify_flarestack_baker_pistol_fire");
   playFXOnTag(common_scripts\utility::getfx("headshot_blood"), var_3, "tag_flash");
   playFXOnTag(common_scripts\utility::getfx("pistol_shot_smoke"), var_3, "tag_flash");
@@ -236,12 +236,12 @@ event_flarestack_enter_close_door() {
   self.angles = self.original_angles;
   self.origin = level._flarestack.door_in.original_origin;
   wait 0.05;
-  self.col_brush disconnectpaths();
+  self.col_brush disconnectPaths();
 }
 
 event_player_turns_key() {
   thread audio_start_pressure();
-  var_0 = common_scripts\utility::getstruct("struct_flarestack_player", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_flarestack_player", "targetname");
   var_1 = maps\_utility::spawn_anim_model("player_rig", level.player.origin);
   var_0 maps\_anim::anim_first_frame_solo(var_1, "turn_off_flare_stack");
   var_1 hide();
@@ -277,7 +277,7 @@ fx_console_button_light(var_0) {
   playFXOnTag(common_scripts\utility::getfx("console_light_blink"), var_0, "tag_fx_button");
   level waittill("notify_flare_stack_button_press");
   stopFXOnTag(common_scripts\utility::getfx("console_light_blink"), var_0, "tag_fx_button");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 util_show_rig_after_blend(var_0, var_1) {
@@ -305,7 +305,7 @@ light_alarm_lights() {
     var_6 = common_scripts\utility::spawn_tag_origin();
     var_6.origin = var_5 gettagorigin("TAG_fx_main");
     var_6.angles = var_5 gettagangles("TAG_fx_main");
-    var_6 linkto(var_5, "TAG_fx_main");
+    var_6 linkTo(var_5, "TAG_fx_main");
     var_2[var_3] = var_6;
     var_5 hide();
     var_3++;
@@ -364,7 +364,7 @@ audio_start_pressure() {
 }
 
 flamestack_godrays() {
-  var_0 = getent("origin_flarestack_fx", "targetname");
+  var_0 = getEnt("origin_flarestack_fx", "targetname");
 
   if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_flarestack_scene_start", "flag_flarestack_player_pressed_button", "black_ice_flamestack", undefined);
@@ -372,7 +372,7 @@ flamestack_godrays() {
 }
 
 light_flamestack() {
-  var_0 = getent("flarestack_window_1", "targetname");
+  var_0 = getEnt("flarestack_window_1", "targetname");
   var_0 setlightintensity(2.5);
   common_scripts\utility::flag_wait("flag_flarestack_scene_start");
   var_0 light_flamestack_flicker();
@@ -416,7 +416,7 @@ event_pressure_buildup() {
 }
 
 event_pressure_buildup_start(var_0) {
-  var_1 = common_scripts\utility::getstruct("struct_rumble_dist", "targetname");
+  var_1 = common_scripts\utility::getStruct("struct_rumble_dist", "targetname");
   var_2 = 0.0;
 
   if(!isDefined(var_0)) {
@@ -492,7 +492,7 @@ event_scan_manager() {
 }
 
 event_switch_animation() {
-  var_0 = getent("flarestack_shutoff_button", "targetname");
+  var_0 = getEnt("flarestack_shutoff_button", "targetname");
   level._flarestack.console = var_0;
   var_0 maps\_utility::assign_animtree("flare_stack_console");
   var_0 maps\_anim::anim_first_frame_solo(var_0, "console_open");
@@ -506,11 +506,11 @@ event_switch_animation() {
 
 fx_flarestack_motion() {
   var_0 = getEntArray("flamestack_anim", "targetname");
-  var_1 = getent("flarestack_anim_node", "script_noteworthy");
+  var_1 = getEnt("flarestack_anim_node", "script_noteworthy");
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
 
   foreach(var_4 in var_0) {
-    var_4 linkto(var_2);
+    var_4 linkTo(var_2);
   }
 
   wait 0.5;

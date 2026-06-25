@@ -1029,7 +1029,7 @@ _id_8996(var_0, var_1) {
   var_4 = istrue(var_0._id_42EC);
 
   if(var_3 < 96) {
-    if(vectordot(anglesToForward(var_0.angles), vectornormalize(var_1.origin - var_0.origin)) > 0) {
+    if(vectordot(anglesToForward(var_0.angles), vectorNormalize(var_1.origin - var_0.origin)) > 0) {
       return 1;
     }
   }

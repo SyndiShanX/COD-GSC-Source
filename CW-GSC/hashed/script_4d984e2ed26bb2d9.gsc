@@ -12,10 +12,10 @@
 function postload() {
   level.var_17d7d4dc = spawnStruct();
   level.var_17d7d4dc.var_d337de55 = 1;
-  var_121c5e14 = getent("vault_lift", "targetname");
+  var_121c5e14 = getEnt("vault_lift", "targetname");
   level.var_17d7d4dc.var_121c5e14 = var_121c5e14;
-  var_5a8a0179 = getent(var_121c5e14.target, "targetname");
-  var_5a8a0179 linkto(var_121c5e14);
+  var_5a8a0179 = getEnt(var_121c5e14.target, "targetname");
+  var_5a8a0179 linkTo(var_121c5e14);
   var_5a8a0179 notsolid();
   level.var_17d7d4dc.var_5a8a0179 = var_5a8a0179;
   var_1c0f5f3 = struct::get(var_121c5e14.target2, "targetname");
@@ -24,11 +24,11 @@ function postload() {
 }
 
 function function_3b57a70e() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player.var_37936369 = 1;
   e_player function_f1218e92();
   snd::client_msg("audio_server_lift_start");
-  level.ai_woods linkto(level.var_17d7d4dc.var_121c5e14);
+  level.ai_woods linkTo(level.var_17d7d4dc.var_121c5e14);
   level.ai_woods thread scene::play("scene_yam_8020_sra_server_ascent_woods");
   level scene::play("scene_yam_8015_sra_server_ascent", array(level.e_server_cable, level.var_ebbd5cf8, level.e_server_hook, level.var_17d7d4dc.var_121c5e14));
   level notify(#"hash_3c878f4d1248ed7f");
@@ -118,8 +118,8 @@ function private function_8d2ab330(var_2c00bd33 = 1, var_8c0ade1d = undefined, v
     n_move_time = var_1c0f5f3.n_move_time * var_2c00bd33;
   }
 
-  self moveto(var_1c0f5f3.origin, n_move_time, n_move_time * var_2c9a2558, n_move_time * var_993f10a2);
-  self rotateto(var_1c0f5f3.angles + level.var_17d7d4dc.v_angle_offset, n_move_time);
+  self moveTo(var_1c0f5f3.origin, n_move_time, n_move_time * var_2c9a2558, n_move_time * var_993f10a2);
+  self rotateTo(var_1c0f5f3.angles + level.var_17d7d4dc.v_angle_offset, n_move_time);
   self waittill(#"movedone");
 }
 

@@ -57,7 +57,7 @@ start_bonfire_sale(item) {
 
   zombie_utility::set_zombie_var(#"zombie_powerup_bonfire_sale_on", 0);
   level notify(#"bonfire_sale_off");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] playSound(#"zmb_points_loop_off");

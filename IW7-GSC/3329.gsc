@@ -158,8 +158,8 @@ fling_zombie_from_meteor(var_0, var_1, var_2) {
   self.do_immediate_ragdoll = 1;
   self.customdeath = 1;
   var_3 = (self.origin - var_0) * (1, 1, 0);
-  var_3 = vectornormalize(var_3);
-  var_3 = vectornormalize(var_3 + (0, 0, 1)) * 600;
+  var_3 = vectorNormalize(var_3);
+  var_3 = vectorNormalize(var_3 + (0, 0, 1)) * 600;
   self giveflagcapturexp(var_3);
   wait 0.5;
   self.fling_from_meteor = 0;
@@ -177,7 +177,7 @@ init_armageddon_areas() {
 
   foreach(var_2 in var_0) {
     var_3 = [];
-    var_4 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_3[var_3.size] = var_2.origin;
     var_3[var_3.size] = var_4.origin;
     level.armageddon_areas[level.armageddon_areas.size] = var_3;

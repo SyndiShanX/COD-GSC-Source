@@ -53,13 +53,13 @@ _id_10281() {
   var_0 = scripts\cp_mp\utility\game_utility::_id_6B2D();
 
   if(var_0 == "mp_downtown_gw") {
-    self setorigin((22314, -13059, -128), 1, 1);
+    self setOrigin((22314, -13059, -128), 1, 1);
     self setplayerangles((0, 36, 0));
   } else if(var_0 == "mp_farms2_gw") {
-    self setorigin((45073, -11307, 18), 1, 1);
+    self setOrigin((45073, -11307, 18), 1, 1);
     self setplayerangles((0, 315, 0));
   } else if(var_0 == "mp_quarry2") {
-    self setorigin((29048, 35035, 560), 1, 1);
+    self setOrigin((29048, 35035, 560), 1, 1);
     self setplayerangles((0, 0, 0));
   }
 

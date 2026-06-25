@@ -56,7 +56,7 @@ laughing_clown(var_0, var_1) {
     var_15.origin = var_6.origin + scripts\cp\utility::vec_multiply(anglesToForward(var_6.angles), 3) + (0, 0, 0.2);
   }
 
-  var_15 physicslaunchserver(var_14, vectornormalize(anglesToForward(var_6.angles)) * 65);
+  var_15 physicslaunchserver(var_14, vectorNormalize(anglesToForward(var_6.angles)) * 65);
   var_10 = undefined;
   var_11 = 0;
   for(;;) {
@@ -69,7 +69,7 @@ laughing_clown(var_0, var_1) {
     }
 
     if(distancesquared(var_12, var_15.origin) < 0.05) {
-      var_15 physicslaunchserver(var_15.origin + (randomintrange(20, 35), randomintrange(20, 35), 0), vectornormalize(anglesToForward(var_6.angles)) * 5);
+      var_15 physicslaunchserver(var_15.origin + (randomintrange(20, 35), randomintrange(20, 35), 0), vectorNormalize(anglesToForward(var_6.angles)) * 5);
     }
 
     var_11++;
@@ -217,8 +217,8 @@ func_9655() {
     }
   }
 
-  var_3 linkto(var_2);
-  var_2 linkto(var_1);
+  var_3 linkTo(var_2);
+  var_2 linkTo(var_1);
   if(isDefined(var_1)) {
     var_1 thread func_42D6(self, var_0);
   }
@@ -248,7 +248,7 @@ func_42D6(var_0, var_1) {
     level scripts\engine\utility::waittill_any("power_on", var_0.power_area + " power_on");
   }
 
-  self rotateyaw(-30, 0.75);
+  self rotateYaw(-30, 0.75);
   for(;;) {
     var_2 = randomfloatrange(0.5, 1.25);
     var_3 = randomfloat(var_2);
@@ -262,9 +262,9 @@ func_42D6(var_0, var_1) {
 
     wait(randomfloatrange(0.1, 0.25));
     self playSound("arcade_blackhole_mvmt");
-    self rotateyaw(60, var_2, var_3, var_4);
+    self rotateYaw(60, var_2, var_3, var_4);
     self waittill("rotatedone");
     wait(randomfloatrange(0.1, 0.25));
-    self rotateyaw(-60, var_2, var_3, var_4);
+    self rotateYaw(-60, var_2, var_3, var_4);
   }
 }

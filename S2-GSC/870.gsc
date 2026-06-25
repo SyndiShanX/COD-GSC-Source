@@ -1979,7 +1979,7 @@ wunderbuss_bolt_charge_beam(param_00, param_01) {
   var_03 = 0;
   var_04 = 1;
   lib_0380::func_288E("wpn_wunderbuss_charge_beam", undefined, var_02, 0, var_04, 1, "aud_stop_beam_charge");
-  var_02 moveto(param_01, 0.9);
+  var_02 moveTo(param_01, 0.9);
   self waittill("aud_stop_beam_charge");
   var_02 delete();
 }

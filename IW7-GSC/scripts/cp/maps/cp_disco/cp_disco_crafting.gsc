@@ -30,7 +30,7 @@ is_valid_tile_spot() {
 }
 
 init_crafting_station(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct(var_0, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct(var_0, "script_noteworthy");
   var_2.targets = getEntArray(var_2.target, "targetname");
   foreach(var_4 in var_2.targets) {
     if(issubstr(var_4.model, "tile")) {

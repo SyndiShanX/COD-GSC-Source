@@ -28,7 +28,7 @@ func_D4D7(var_0, var_1, var_2, var_3) {
     self scragentsetorientmode("face enemy");
   } else {
     var_5 = var_4.origin - self.origin;
-    var_6 = vectornormalize(var_5);
+    var_6 = vectorNormalize(var_5);
     var_7 = vectortoangles(var_6);
     self scragentsetorientmode("face angle abs", var_7);
   }
@@ -134,7 +134,7 @@ func_F5FE(var_0) {
 
 func_3D95(var_0) {
   var_1 = anglesToForward(var_0.angles);
-  var_2 = vectornormalize(self.origin - var_0.origin);
+  var_2 = vectorNormalize(self.origin - var_0.origin);
   var_3 = vectordot(var_2, var_1);
 
   if(var_0 meleeButtonPressed() && isDefined(var_0.meleestrength) && var_0.meleestrength == 1 && var_3 > 0.5) {

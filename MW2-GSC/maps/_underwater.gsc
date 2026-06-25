@@ -67,7 +67,7 @@ player_scuba_bubbles() {
   playerFxOrg setModel("tag_origin");
   playerFxOrg.angles = self.angles;
   playerFxOrg.origin = level.player.origin + (0, 0, 0);
-  playerFxOrg linkto(self, "", (15, 0, 54), (0, 0, 0));
+  playerFxOrg linkTo(self, "", (15, 0, 54), (0, 0, 0));
   playerFxOrg hide();
   self thread scuba_fx_cleanup(playerFxOrg);
 

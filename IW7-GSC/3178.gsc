@@ -191,7 +191,7 @@ func_CEC8(var_0, var_1, var_2, var_3) {
         var_12 = anglesToForward(self.angles);
         var_13 = anglestoup(self.angles);
         var_13 = var_13 * 0.6;
-        var_14 = vectornormalize(var_12 + var_13);
+        var_14 = vectorNormalize(var_12 + var_13);
         var_15 = var_14 * var_11;
         var_10 = magicgrenademanual(self.grenadeweapon, var_10, var_15, 2);
         if(isDefined(var_10)) {
@@ -251,7 +251,7 @@ func_57E0(var_0, var_1) {
   thread scripts\engine\utility::delete_on_death(self.var_F174);
   self.var_F174 endon("death");
   self.var_F174.angles = self gettagangles(var_0);
-  self.var_F174 linkto(self, var_0, (0, 0, 0), (0, 0, 0));
+  self.var_F174 linkTo(self, var_0, (0, 0, 0), (0, 0, 0));
   self.var_F174 setModel("seeker_grenade_wm");
   self.var_F174 glinton(#animtree);
   self.var_F174 func_82EA("thrown", var_1, 1, 0.2);

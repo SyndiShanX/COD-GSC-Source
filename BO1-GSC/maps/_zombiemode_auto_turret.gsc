@@ -27,9 +27,9 @@ init() {
     level.auto_turret_timeout = 30;
   }
   for(i = 0; i < level.auto_turret_array.size; i++) {
-    level.auto_turret_array[i] SetCursorHint("HINT_NOICON");
-    level.auto_turret_array[i] sethintstring(&"ZOMBIE_NEED_POWER");
-    level.auto_turret_array[i] UseTriggerRequireLookAt();
+    level.auto_turret_array[i] setCursorHint("HINT_NOICON");
+    level.auto_turret_array[i] setHintString(&"ZOMBIE_NEED_POWER");
+    level.auto_turret_array[i] useTriggerRequireLookAt();
     level.auto_turret_array[i].curr_time = -1;
     level.auto_turret_array[i].turret_active = false;
     level.auto_turret_array[i] thread auto_turret_think();
@@ -60,7 +60,7 @@ auto_turret_think() {
   flag_wait("power_on");
   for(;;) {
     cost = level.auto_turret_cost;
-    self SetHintString(&"ZOMBIE_AUTO_TURRET", cost);
+    self setHintString(&"ZOMBIE_AUTO_TURRET", cost);
     self waittill("trigger", player);
     index = maps\_zombiemode_weapons::get_player_index(player);
     if(player maps\_laststand::player_is_in_laststand()) {
@@ -87,7 +87,7 @@ auto_turret_think() {
     if(isDefined(player)) {
       player maps\_zombiemode_audio::create_and_play_dialog("general", "turret_inactive");
     }
-    playsoundatposition("zmb_turret_down", self.audio_origin);
+    playSoundAtPosition("zmb_turret_down", self.audio_origin);
     self enable_trigger();
   }
 }

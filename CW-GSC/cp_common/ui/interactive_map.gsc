@@ -27,7 +27,7 @@ function private preinit() {
 
 function open(var_738a6265, top_left, bottom_right, var_879505e1 = 1, var_ff0f9714 = 1, map_x, map_y, map_width, map_height, var_7ec0800f) {
   if(!namespace_61e6d095::exists(#"interactive_map")) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     player actions::function_6c59e78f(0);
     player thread namespace_61e6d095::block_kbm_pause_menu("close_interactive_map");
     player val::set(#"hash_46ef83540c23a2f7", "freezecontrols", 1);
@@ -36,7 +36,7 @@ function open(var_738a6265, top_left, bottom_right, var_879505e1 = 1, var_ff0f97
     namespace_61e6d095::function_24e5fa63(#"interactive_map", [#"ui_confirm", #"ui_cancel"], 1);
 
     if(!isDefined(top_left)) {
-      top_left = getent("interactive_map_top_left", "targetname");
+      top_left = getEnt("interactive_map_top_left", "targetname");
 
       if(!isDefined(top_left)) {
         top_left = struct::get("interactive_map_top_left", "targetname");
@@ -44,7 +44,7 @@ function open(var_738a6265, top_left, bottom_right, var_879505e1 = 1, var_ff0f97
     }
 
     if(!isDefined(bottom_right)) {
-      bottom_right = getent("interactive_map_bottom_right", "targetname");
+      bottom_right = getEnt("interactive_map_bottom_right", "targetname");
 
       if(!isDefined(bottom_right)) {
         bottom_right = struct::get("interactive_map_bottom_right", "targetname");
@@ -173,7 +173,7 @@ function function_9e8d4999(title = #"", descriptions, interactions, object) {
   }
 
   var_fadf668d = 0;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player prompts::remove_group(#"cursor");
 
   foreach(prompt, interaction in interactions) {
@@ -202,14 +202,14 @@ function function_8b43da33() {
       function_dcedf7f(#"cursor", index, "descriptionList");
     }
 
-    getplayers()[0] prompts::remove_group(#"cursor");
+    getPlayers()[0] prompts::remove_group(#"cursor");
     level.interactive_map.var_2c15274b = undefined;
   }
 }
 
 function function_2fb5abd8() {
   level notify(#"hash_546b1fe54ba63887");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player clientfield::set_to_player("toggle_interactive_map", 0);
   util::wait_network_frame(2);
   player prompts::remove_group(#"cursor");
@@ -524,7 +524,7 @@ function function_4b1a5235(prompt) {
 
 function close(cleanup) {
   level notify(#"close_interactive_map");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player notify(#"close_interactive_map");
   player clientfield::set_to_player("toggle_interactive_map", 0);
   util::wait_network_frame(2);
@@ -550,8 +550,8 @@ function function_fabe437a(prompt_struct) {
 
   if(isDefined(waypoint.target)) {
     if(isstring(waypoint.target)) {
-      if(isDefined(getent(waypoint.target, "targetname"))) {
-        waypoint = getent(waypoint.target, "targetname");
+      if(isDefined(getEnt(waypoint.target, "targetname"))) {
+        waypoint = getEnt(waypoint.target, "targetname");
       } else if(isDefined(struct::get(waypoint.target, "targetname"))) {
         waypoint = struct::get(waypoint.target, "targetname");
       }
@@ -647,7 +647,7 @@ function private function_8e91c74c(uid) {
 
 function private update_cursor(var_ff0f9714) {
   level endon(#"hash_546b1fe54ba63887", #"close_interactive_map", #"hash_64a3b02565bdf75f");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level.interactive_map.cursor_object = undefined;
   level.interactive_map.var_1896103a = undefined;

@@ -546,9 +546,9 @@ function_7913d068(hideduration) {
     var_4dd94c4c = int(n_current_time);
 
     if(var_4dd94c4c <= 5 && var_4dd94c4c > 0) {
-      playsoundatposition("uin_timer_5", (0, 0, 0));
+      playSoundAtPosition("uin_timer_5", (0, 0, 0));
     } else if(var_4dd94c4c == 0 && n_current_time >= 0) {
-      playsoundatposition("uin_ph_ready", (0, 0, 0));
+      playSoundAtPosition("uin_ph_ready", (0, 0, 0));
     }
 
     wait 1;
@@ -1096,7 +1096,7 @@ propwhistle() {
         }
 
         if(player util::isprop() && isalive(player)) {
-          playsoundatposition("mpl_phunt_char_whistle", player.origin + (0, 0, 60));
+          playSoundAtPosition("mpl_phunt_char_whistle", player.origin + (0, 0, 60));
           hostmigration::waitlongdurationwithhostmigrationpause(1.5);
         }
       }
@@ -1250,7 +1250,7 @@ propwatchdeath() {
   self endon(#"disconnect");
   self waittill(#"death");
   corpse = self.body;
-  playsoundatposition("wpn_flash_grenade_explode", self.prop.origin + (0, 0, 4));
+  playSoundAtPosition("wpn_flash_grenade_explode", self.prop.origin + (0, 0, 4));
   var_7659ae6f = function_d43d7033(self.prop.info.propsize);
   playFX(fx::get(var_7659ae6f), self.prop.origin + (0, 0, 4));
 
@@ -1460,7 +1460,7 @@ setupprop() {
     self setcontents(0);
   }
 
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   propinfo = self.propinfo;
 
   if(!isDefined(self.propinfo)) {
@@ -1469,16 +1469,16 @@ setupprop() {
 
   self.propanchor = spawn("script_model", self.origin);
   self.propanchor.targetname = "propAnchor";
-  self.propanchor linkto(self);
+  self.propanchor linkTo(self);
   self.propanchor setcontents(0);
   self.propanchor notsolid();
-  self.propanchor setplayercollision(0);
+  self.propanchor setPlayerCollision(0);
   self.propent = spawn("script_model", self.origin);
   self.propent.targetname = "propEnt";
-  self.propent linkto(self.propanchor);
+  self.propent linkTo(self.propanchor);
   self.propent setcontents(0);
   self.propent notsolid();
-  self.propent setplayercollision(0);
+  self.propent setPlayerCollision(0);
   self.prop = spawn("script_model", self.propent.origin);
   self.prop.targetname = "prop";
   self.prop setModel(propinfo.modelname);
@@ -1489,10 +1489,10 @@ setupprop() {
   self.prop.anglesoffset = propinfo.anglesoffset;
   self applyxyzoffset();
   self applyanglesoffset();
-  self.prop linkto(self.propent);
+  self.prop linkTo(self.propent);
   self.prop.owner = self;
   self.prop.health = 10000;
-  self.prop setplayercollision(0);
+  self.prop setPlayerCollision(0);
   self.prop clientfield::set("enemyequip", 1);
 
   if(function_5a6214bd()) {
@@ -1554,7 +1554,7 @@ function_63d4897() {
       self.prop.origin = self.origin;
       self applyxyzoffset();
       self applyanglesoffset();
-      self.prop linkto(self.propent);
+      self.prop linkTo(self.propent);
     }
 
     var_d0a5fa3b = 0;
@@ -1581,7 +1581,7 @@ function_63d4897() {
       self.prop unlink();
       self.prop.anglesoffset = var_309e583f.anglesoffset;
       self applyanglesoffset();
-      self.prop linkto(self.propent);
+      self.prop linkTo(self.propent);
     }
 
     height = getdvarint(#"prop_height", -1);
@@ -2200,7 +2200,7 @@ function_bfc79664(var_167fb943, remainingtime) {
     self.var_650b1469 = self.origin;
     self.var_9d62f0b2 = self.angles;
     gameobject_link = util::spawn_model("tag_origin", self.origin, self.angles);
-    self playerlinkto(gameobject_link, "tag_origin", 0, 30, 30, 30, 30);
+    self playerlinkTo(gameobject_link, "tag_origin", 0, 30, 30, 30, 30);
     result = self function_1ee6f124(var_ed3bdaed);
 
     if(isDefined(self)) {
@@ -2601,7 +2601,7 @@ round(value) {
 }
 
 function_ef516d85(winner, endtype, endreasontext, outcometext, team, winnerenum, notifyroundendtoui, matchbonus) {
-  var_20b7e349 = getplayers(game.defenders);
+  var_20b7e349 = getPlayers(game.defenders);
 
   foreach(player in var_20b7e349) {
     if(mp_prop_controls::is_open(player)) {
@@ -2753,7 +2753,7 @@ onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, v
   self thread function_cd48b338(eattacker, einflictor, weapon, smeansofdeath, idamage, vpoint);
 
   if(!self util::isusingremote()) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 
   return idamage;
@@ -2974,7 +2974,7 @@ function_416db484(isvisible) {
     self function_d25cfae3(1);
 
     if(isDefined(self.var_650b1469)) {
-      self setorigin(self.var_650b1469);
+      self setOrigin(self.var_650b1469);
       self setplayerangles(self.var_9d62f0b2);
     }
 
@@ -3144,7 +3144,7 @@ function_d5c899f5(origin, model) {
   target.health = 99999;
   target.maxhealth = 99999;
   target thread function_aa8db165(&function_c3c0cc83);
-  target setplayercollision(0);
+  target setPlayerCollision(0);
   target makesentient();
   target setteam(game.defenders);
   target hidefromteam(game.defenders);
@@ -3389,7 +3389,7 @@ s_teleport_start_decaystartsupersprint() {
   origin = getclosestpointonnavmesh(origin, 600);
   clone = spawnactor("spawner_bo3_robot_grunt_assault_mp", origin, self.angles, "", 1);
   clone.var_297617fa = function_944a25ed(origin + (0, 0, 40));
-  clone.var_297617fa linkto(clone);
+  clone.var_297617fa linkTo(clone);
   level.var_23661cff[level.var_23661cff.size] = clone;
   function_2a7250f0(clone, self, forward);
 }
@@ -3556,7 +3556,7 @@ function_944a25ed(origin) {
   target.health = 99999;
   target.maxhealth = 99999;
   target thread function_aa8db165(&function_80334286);
-  target setplayercollision(0);
+  target setPlayerCollision(0);
   target makesentient();
   target setteam(game.defenders);
   target hidefromteam(game.defenders);

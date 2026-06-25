@@ -18,9 +18,9 @@ sndmaskoff(elduderino) {
 
 sndf38snapshot(hisdudeness) {
   level clientnotify("sndF38Snapshot_on");
-  player_f38 = getent("F35", "targetname");
+  player_f38 = getEnt("F35", "targetname");
   sound_ent = spawn("script_origin", player_f38.origin);
-  sound_ent linkto(player_f38, "tag_canopy");
+  sound_ent linkTo(player_f38, "tag_canopy");
   sound_ent playLoopSound("veh_f38_steady", 4);
   level waittill("f35_rewind_start");
   sound_ent stoploopsound(0.1);

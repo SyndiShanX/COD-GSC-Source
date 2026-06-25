@@ -255,7 +255,7 @@ function_88fdd1ff() {
 
   while(self.var_cdb19015) {
     var_a69bb213 = audio::scale_speed(0.5, 1, 0.1, 1000, self.var_f809ca21);
-    self.var_2591ed7c moveto(self.origin + (0, 0, 1000 - var_a69bb213), 0.01);
+    self.var_2591ed7c moveTo(self.origin + (0, 0, 1000 - var_a69bb213), 0.01);
     var_41b4b0fa = audio::scale_speed(0.5, 1, 0.6, 1, self.var_f809ca21);
     setsoundpitch(self.var_2591ed7c.var_2e95bcd3, var_41b4b0fa);
     wait 0.2;

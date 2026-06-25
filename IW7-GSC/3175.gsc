@@ -21,7 +21,7 @@ func_C9A0(var_0, var_1, var_2, var_3) {
     var_5 = 0;
     if(isDefined(self.var_10E6D.var_C998)) {
       var_6 = self.var_10E6D.var_C998 - self.origin;
-      var_6 = vectornormalize((var_6[0], var_6[1], 0));
+      var_6 = vectorNormalize((var_6[0], var_6[1], 0));
       var_7 = vectortoangles(var_6);
       self.var_10E6D.var_C99A = var_7[1];
       var_5 = self.angles[1] - var_7[1];
@@ -117,7 +117,7 @@ func_6A71(var_0, var_1) {
 
     if(issentient(var_2) && self cansee(var_2)) {
       var_3 = var_2.origin - self.origin;
-      var_3 = vectornormalize((var_3[0], var_3[1], 0));
+      var_3 = vectorNormalize((var_3[0], var_3[1], 0));
       var_4 = vectortoangles(var_3);
       var_1 = var_4[1];
     }

@@ -743,8 +743,8 @@ set_goal_volume() {
   }
   if(isDefined(volume.target)) {
     node = getnode(volume.target, "targetname");
-    ent = getent(volume.target, "targetname");
-    struct = getstruct(volume.target, "targetname");
+    ent = getEnt(volume.target, "targetname");
+    struct = getStruct(volume.target, "targetname");
     pos = undefined;
 
     if(isDefined(node)) {
@@ -1096,7 +1096,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
     temp = [[get_target_func]](node.target);
 
     if(temp.size == 1) {
-      vec = vectornormalize(temp[0].origin - node.origin);
+      vec = vectorNormalize(temp[0].origin - node.origin);
     } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
@@ -1107,7 +1107,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
 
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    vec2[vec2.size] = vectornormalize(player.origin - self.origin);
+    vec2[vec2.size] = vectorNormalize(player.origin - self.origin);
   }
 
   for(i = 0; i < vec2.size; i++) {

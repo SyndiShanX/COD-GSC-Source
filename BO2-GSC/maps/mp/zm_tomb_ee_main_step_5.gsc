@@ -36,8 +36,8 @@ exit_stage(success) {
 }
 
 spawn_zombie_blood_plane() {
-  s_biplane_pos = getstruct("air_crystal_biplane_pos", "targetname");
-  vh_biplane = spawnvehicle("veh_t6_dlc_zm_biplane", "zombie_blood_biplane", "biplane_zm", (0, 0, 0), (0, 0, 0));
+  s_biplane_pos = getStruct("air_crystal_biplane_pos", "targetname");
+  vh_biplane = spawnVehicle("veh_t6_dlc_zm_biplane", "zombie_blood_biplane", "biplane_zm", (0, 0, 0), (0, 0, 0));
   vh_biplane ent_flag_init("biplane_down", 0);
   vh_biplane maps\mp\zombies\_zm_powerup_zombie_blood::make_zombie_blood_entity();
   vh_biplane playLoopSound("zmb_zombieblood_3rd_plane_loop", 1);
@@ -64,8 +64,8 @@ spawn_zombie_blood_plane() {
   a_start_pos = get_array_of_closest(ai_pilot.origin, a_start_pos);
   linker = spawn("script_model", ai_pilot.origin);
   linker setModel("tag_origin");
-  ai_pilot linkto(linker);
-  linker moveto(a_start_pos[0].origin, 3);
+  ai_pilot linkTo(linker);
+  linker moveTo(a_start_pos[0].origin, 3);
   linker waittill("movedone");
   linker delete();
   ai_pilot stop_magic_bullet_shield();
@@ -93,7 +93,7 @@ zombie_pilot_sound(ai_pilot) {
 pilot_loop_logic(s_start) {
   self endon("death");
 
-  for(s_goal = s_start; isalive(self); s_goal = getstruct(s_goal.target, "targetname")) {
+  for(s_goal = s_start; isalive(self); s_goal = getStruct(s_goal.target, "targetname")) {
     self setgoalpos(s_goal.origin);
     self waittill("goal");
   }
@@ -131,7 +131,7 @@ spawn_quadrotor_pickup(v_origin, v_angles) {
 
 quadrotor_pickup_think() {
   self endon("kill_trigger");
-  m_quadrotor = getent("quadrotor_pickup", "targetname");
+  m_quadrotor = getEnt("quadrotor_pickup", "targetname");
 
   while(true) {
     self waittill("trigger", player);

@@ -75,7 +75,7 @@ function function_63fe1ddd() {
 function monitor_robot_power() {
   level waittill("hash_5b9acfd8");
   level flag::set("police_box_ready");
-  var_6f73bd35 = getent("police_box", "targetname");
+  var_6f73bd35 = getEnt("police_box", "targetname");
   if(isDefined(var_6f73bd35)) {
     var_6f73bd35 playSound("zmb_bm_interaction_machine_start");
   }
@@ -112,7 +112,7 @@ function robot_callbox_trigger_visibility(player) {
   b_is_invis = isDefined(player.beastmode) && player.beastmode || level flag::get("police_box_hide");
   self setinvisibletoplayer(player, b_is_invis);
   if(!level flag::get("police_box_ready")) {
-    self sethintstring(&"ZM_ZOD_ROBOT_NEEDS_POWER");
+    self setHintString(&"ZM_ZOD_ROBOT_NEEDS_POWER");
   } else {
     if(isDefined(level.ai_robot)) {
       switch (level.ai_robot_area_called) {
@@ -133,12 +133,12 @@ function robot_callbox_trigger_visibility(player) {
           break;
         }
       }
-      self sethintstring(&"ZM_ZOD_ROBOT_ONCALL_IN", hintstring_areaname);
+      self setHintString(&"ZM_ZOD_ROBOT_ONCALL_IN", hintstring_areaname);
     } else {
       if(player.score < level.ai_robot_remaining_cost) {
-        self sethintstring(&"ZM_ZOD_ROBOT_PAY_TOWARDS");
+        self setHintString(&"ZM_ZOD_ROBOT_PAY_TOWARDS");
       } else {
-        self sethintstring(&"ZM_ZOD_ROBOT_SUMMON");
+        self setHintString(&"ZM_ZOD_ROBOT_SUMMON");
       }
     }
   }
@@ -173,7 +173,7 @@ function robot_callbox_trigger_think() {
       level thread update_readouts_for_remaining_robot_cost();
     } else {
       level flag::set("police_box_in_use");
-      self sethintstring("");
+      self setHintString("");
       player zm_score::minus_to_player_score(level.ai_robot_remaining_cost);
       if(!player bgb::is_enabled("zm_bgb_shopping_free")) {
         level.ai_robot_remaining_cost = 0;
@@ -243,12 +243,12 @@ function spawn_robot(player, trig_stub, n_spawn_delay) {
   level.ai_robot setCanDamage(1);
   if(isDefined(level.o_zod_train)) {
     if([[level.o_zod_train]] - > is_touching_train_volume(level.ai_robot)) {
-      level.ai_robot linkto([[level.o_zod_train]] - > get_train_vehicle());
+      level.ai_robot linkTo([[level.o_zod_train]] - > get_train_vehicle());
     }
   }
   level.ai_robot scene::play("cin_zod_robot_companion_exit_death");
   level.ai_robot = undefined;
-  players = getplayers();
+  players = getPlayers();
   if(players.size != 1 || !level flag::get("solo_game") || (!(isDefined(players[0].waiting_to_revive) && players[0].waiting_to_revive))) {
     level zm::checkforalldead();
   }
@@ -271,7 +271,7 @@ function function_ab4d9ece(var_21e230b7, e_player) {
   var_329d5820 = 5;
   for(i = 0; i < var_329d5820; i++) {
     foreach(player in level.players) {
-      player playrumbleonentity("damage_heavy");
+      player playRumbleOnEntity("damage_heavy");
     }
     wait(0.1);
   }
@@ -281,7 +281,7 @@ function robot_sky_trail() {
   var_8d888091 = spawn("script_model", self.origin);
   var_8d888091 setModel("tag_origin");
   playFXOnTag(level._effect["robot_sky_trail"], var_8d888091, "tag_origin");
-  var_8d888091 linkto(self);
+  var_8d888091 linkTo(self);
   level waittill("hash_10a36fa2");
   var_8d888091 delete();
 }
@@ -311,7 +311,7 @@ function function_fa1df614(v_origin, eattacker, n_radius) {
     n_dist_mult = n_distance_sqr / n_radius_sqr;
     v_fling = ai_zombie.origin - v_origin;
     v_fling = v_fling + vectorscale((0, 0, 1), 15);
-    v_fling = vectornormalize(v_fling);
+    v_fling = vectorNormalize(v_fling);
     n_size = 50 + (20 * n_dist_mult);
     v_fling = (v_fling[0], v_fling[1], abs(v_fling[2]));
     v_fling = vectorscale(v_fling, n_size);

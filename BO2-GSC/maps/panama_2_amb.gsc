@@ -13,7 +13,7 @@ docks_glass_smash() {
 
   while(true) {
     level waittill("glass_smash", pos);
-    playsoundatposition("dst_docks_window_shatter", pos);
+    playSoundAtPosition("dst_docks_window_shatter", pos);
   }
 }
 
@@ -26,6 +26,6 @@ amb_radio_chatter() {
 
   while(true) {
     wait 4;
-    playsoundatposition("amb_radio_chatter_oneshots", (22386, 23435, 381));
+    playSoundAtPosition("amb_radio_chatter_oneshots", (22386, 23435, 381));
   }
 }

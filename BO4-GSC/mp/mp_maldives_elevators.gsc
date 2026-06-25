@@ -44,8 +44,8 @@ on_game_playing() {
         interact.mdl_gameobject.move_to = move_to;
 
         if(interact.script_noteworthy === "link_to") {
-          interact.mdl_gameobject.trigger enablelinkto();
-          interact.mdl_gameobject.trigger linkto(elevator);
+          interact.mdl_gameobject.trigger enablelinkTo();
+          interact.mdl_gameobject.trigger linkTo(elevator);
         }
 
         if(!isDefined(elevator.gameobjects)) {
@@ -64,8 +64,8 @@ on_game_playing() {
 
     foreach(part in parts) {
       if(part trigger::is_trigger_of_type("trigger_multiple", "trigger_multiple_new")) {
-        part enablelinkto();
-        part linkto(elevator);
+        part enablelinkTo();
+        part linkTo(elevator);
         part callback::on_trigger(&function_339478f4);
         elevator.zone = part;
         continue;
@@ -89,7 +89,7 @@ on_game_playing() {
       door.open_to = struct::get(door.var_856b91cc.target);
 
       if(door.script_noteworthy !== "top" && door.script_noteworthy !== "bottom") {
-        door linkto(elevator);
+        door linkTo(elevator);
       }
     }
 
@@ -144,7 +144,7 @@ function_65509998(activator) {
   elevator playSound("evt_elevator_start");
   elevator playLoopSound("evt_elevator_move", 0);
   elevator.align thread scene::play(#"p8_fxanim_mal_elevator_car_bundle", shot);
-  elevator moveto(move_to.origin, 1.25, 0.2, 0.2);
+  elevator moveTo(move_to.origin, 1.25, 0.2, 0.2);
   elevator waittill(#"movedone");
   elevator.align thread scene::play(#"p8_fxanim_mal_elevator_car_bundle", shot + "_idle");
   elevator playSound("evt_elevator_button_bell");
@@ -178,7 +178,7 @@ open_door(location) {
   self.state = "opened";
   open_to = self.open_to;
   self unlink();
-  self moveto((open_to.origin[0], open_to.origin[1], self.origin[2]), 0.37);
+  self moveTo((open_to.origin[0], open_to.origin[1], self.origin[2]), 0.37);
   self waittill(#"movedone", #"death");
 
   if(isDefined(self)) {
@@ -189,14 +189,14 @@ open_door(location) {
 close_door(elevator) {
   self.state = "closed";
   var_856b91cc = self.var_856b91cc;
-  self moveto((var_856b91cc.origin[0], var_856b91cc.origin[1], self.origin[2]), 0.37);
+  self moveTo((var_856b91cc.origin[0], var_856b91cc.origin[1], self.origin[2]), 0.37);
   self waittill(#"movedone", #"death");
 
   if(isDefined(self)) {
     self thread function_e0954c11();
 
     if(self.script_noteworthy == "elevator") {
-      self linkto(elevator);
+      self linkTo(elevator);
     }
   }
 }

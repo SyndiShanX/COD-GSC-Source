@@ -24,7 +24,7 @@
 #namespace namespace_4973e019;
 
 function init() {
-  level.doa.var_55dddb3a = getent("doa_silverback_spawner", "targetname");
+  level.doa.var_55dddb3a = getEnt("doa_silverback_spawner", "targetname");
   if(isDefined(level.doa.var_55dddb3a)) {
     level thread function_d95d34bd(level.doa.var_55dddb3a);
   }
@@ -109,15 +109,15 @@ function private function_555608c7() {
   self.anchor = spawn("script_origin", self.origin);
   self.anchor thread doa_utility::function_981c685d(self);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   anim_ang = vectortoangles(attacker.origin - self.origin);
-  self.anchor rotateto((0, anim_ang[1], 0), 0.5);
+  self.anchor rotateTo((0, anim_ang[1], 0), 0.5);
   self.anchor waittill("rotatedone");
   self thread namespace_1a381543::function_90118d8c("zmb_simianaut_roar");
   self forceteleport(self.origin, (0, anim_ang[1], 0));
   self unlink();
   self orientmode("face enemy");
-  self animscripted("pissedoff", self.origin, self.angles, "ai_zombie_doa_simianaut_ground_pound");
+  self animScripted("pissedoff", self.origin, self.angles, "ai_zombie_doa_simianaut_ground_pound");
   self waittillmatch("pissedoff");
   playFX(level._effect["ground_pound"], self.origin);
   self waittillmatch("pissedoff");
@@ -162,8 +162,8 @@ function private function_a2756e92() {
 function function_ce73145c() {
   trigger = spawn("trigger_radius", self.origin, 2, 32, 50);
   trigger.targetname = "_doaBossDamageShield";
-  trigger enablelinkto();
-  trigger linkto(self, "tag_origin");
+  trigger enablelinkTo();
+  trigger linkTo(self, "tag_origin");
   trigger endon("death");
   trigger thread doa_utility::function_783519c1("exit_taken", 1);
   trigger thread doa_utility::function_981c685d(self);
@@ -178,7 +178,7 @@ function function_ce73145c() {
     }
     if(isDefined(self)) {
       if(!isPlayer(guy)) {
-        self animscripted("pissedoff", self.origin, self.angles, "ai_zombie_doa_simianaut_attack_v1");
+        self animScripted("pissedoff", self.origin, self.angles, "ai_zombie_doa_simianaut_attack_v1");
         self waittillmatch("pissedoff");
         if(isDefined(guy)) {
           playFX(level._effect["ground_pound"], guy.origin);
@@ -197,7 +197,7 @@ function function_ce73145c() {
       guy dodamage(666, guy.origin, self, self);
       if(isDefined(guy.doa)) {
         guy.doa.var_1db1e638 = gettime() + 10000;
-        self animscripted("pissedoff", self.origin, self.angles, "ai_zombie_doa_simianaut_chestbeat");
+        self animScripted("pissedoff", self.origin, self.angles, "ai_zombie_doa_simianaut_chestbeat");
         self waittillmatch("pissedoff");
       }
     }
@@ -344,7 +344,7 @@ function private function_2ca4656() {
     org thread doa_utility::function_981c685d(self);
     org.targetname = "_doaBossCollectPickups";
     org setModel("tag_origin");
-    self linkto(org, "tag_origin");
+    self linkTo(org, "tag_origin");
     org thread namespace_eaa992c::function_285a2999("boss_takeoff");
     spot = self.origin + vectorscale((0, 0, 1), 2000);
     org thread doa_utility::function_a98c85b2(spot, 0.8);

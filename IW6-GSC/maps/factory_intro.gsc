@@ -126,7 +126,7 @@ intro() {
 
 intro_infil() {
   maps\_friendlyfire::turnoff();
-  var_0 = getent("PLAYERkill_start_teleport", "targetname");
+  var_0 = getEnt("PLAYERkill_start_teleport", "targetname");
   level.squad["ALLY_ALPHA"] thread ally_knife();
   thread loop_train(2.38, 8000, 30.0);
   thread maps\_weather::rainhard(10);
@@ -148,12 +148,12 @@ intro_infil() {
   wait 2.5;
   thread maps\factory_util::god_rays_intro();
   thread maps\factory_fx::rain_on_actor(level.squad["ALLY_ALPHA"], "player_at_first_reveal", 0.1);
-  var_4 = common_scripts\utility::getstruct("drop_kill_node", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("drop_kill_node", "script_noteworthy");
   var_4 maps\_anim::anim_first_frame_solo(level.squad["ALLY_ALPHA"], "factory_intro_jungle_drop_ally01");
-  var_5 = getent("startkill_enemy2", "targetname");
+  var_5 = getEnt("startkill_enemy2", "targetname");
   var_5 maps\_utility::add_spawn_function(::start_enemy_enemy_logic, "introkill_enemy2", "stop_loop2", "factory_intro_jungle_drop_opfor02", "factory_intro_jungle_drop_opfor02_loop");
   level.infil_dropkill_player_enemy = var_5 maps\_utility::spawn_ai();
-  var_5 = getent("startkill_enemy1", "targetname");
+  var_5 = getEnt("startkill_enemy1", "targetname");
   var_5 maps\_utility::add_spawn_function(::start_enemy_enemy_logic, "introkill_enemy1", "stop_loop1", "factory_intro_jungle_drop_opfor01", "factory_intro_jungle_drop_opfor01_loop", "factory_intro_jungle_drop_kill_opfor01");
   level.infil_dropkill_ally_enemy = var_5 maps\_utility::spawn_ai();
   common_scripts\utility::flag_set("factory_introkill_jungle");
@@ -191,14 +191,14 @@ lightning_flashes() {
   setsaveddvar("sm_sunSampleSizeNear", 0.025);
   thread maps\factory_fx::lightning_flash(var_0, 3, 0);
   wait 2.7;
-  var_1 = getent("lightning_flash_01", "script_noteworthy");
+  var_1 = getEnt("lightning_flash_01", "script_noteworthy");
   maps\factory_fx::lightning_flash(var_0, randomintrange(2, 4), 1);
   wait 1.0;
   maps\factory_fx::lightning_flash(var_0, randomintrange(4, 6), 0);
   wait 0.6;
   thread maps\factory_fx::lightning_flash(var_0, 3);
   wait 1.8;
-  var_1 = getent("lightning_flash_02", "script_noteworthy");
+  var_1 = getEnt("lightning_flash_02", "script_noteworthy");
   thread maps\factory_fx::lightning_flash_primary(var_1, randomintrange(3, 5));
   setsaveddvar("sm_sunSampleSizeNear", 0.25);
 
@@ -335,7 +335,7 @@ intro_infil_part2_dialog() {
 
 ally_introkill_knife_anim() {
   level endon("playerkill_jump_from_ledge");
-  var_0 = common_scripts\utility::getstruct("drop_kill_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("drop_kill_node", "script_noteworthy");
   var_0 maps\_anim::anim_single_solo(self, "factory_intro_jungle_drop_ally01_ptr02");
   var_0 thread maps\_anim::anim_loop_solo(self, "factory_intro_jungle_drop_ally01_loop02", "stop_loop02");
 }
@@ -390,7 +390,7 @@ check_for_infil_kill() {
       thread introkill_player_splash();
       level.player.in_stab_animation = 1;
       var_0 = player_start_stabbing();
-      var_1 = common_scripts\utility::getstruct("drop_kill_node", "script_noteworthy");
+      var_1 = common_scripts\utility::getStruct("drop_kill_node", "script_noteworthy");
       var_2 = [];
       var_2[0] = var_0;
       var_2[1] = level.infil_dropkill_player_enemy;
@@ -517,7 +517,7 @@ introkill_player_splash() {
   wait 1.05;
   wait 0.33;
   common_scripts\utility::exploder("intro_kill_splash_01");
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait 0.97;
   var_0 = (45, 45, 0);
   thread maps\factory_fx::lightning_flash(var_0, 4);
@@ -556,7 +556,7 @@ start_enemy_enemy_logic(var_0, var_1, var_2, var_3, var_4) {
     thread introkill_player_enemy_killcheck();
   }
 
-  var_5 = common_scripts\utility::getstruct("drop_kill_node", "script_noteworthy");
+  var_5 = common_scripts\utility::getStruct("drop_kill_node", "script_noteworthy");
   maps\_utility::delaythread(0.5, maps\_anim::anim_set_rate_single, self, var_2, 0.6);
 
   if(!isDefined(var_4)) {
@@ -569,7 +569,7 @@ start_enemy_enemy_logic(var_0, var_1, var_2, var_3, var_4) {
   thread start_enemy_anims(var_5, var_2, var_3, var_1);
   self waittill("stop_animating");
   var_5 notify(var_1);
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 start_enemy_anims(var_0, var_1, var_2, var_3) {
@@ -583,9 +583,9 @@ introkill_ally_enemy_killcheck() {
   common_scripts\utility::flag_wait("playerkill_jump_from_ledge");
   level.infil_dropkill_ally_enemy.health = 1000;
   thread introkill_ally_splash();
-  var_0 = common_scripts\utility::getstruct("drop_kill_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("drop_kill_node", "script_noteworthy");
   var_0 notify("stop_loop02");
-  level.squad["ALLY_ALPHA"] stopanimscripted();
+  level.squad["ALLY_ALPHA"] stopanimScripted();
   var_0 notify("stop_loop");
 
   if(common_scripts\utility::flag("playerkill_R3_Pressed")) {
@@ -607,12 +607,12 @@ introkill_player_enemy_killcheck() {
   common_scripts\utility::flag_wait("playerkill_jump_from_ledge");
 
   if(!common_scripts\utility::flag("playerkill_R3_Pressed")) {
-    var_0 = common_scripts\utility::getstruct("drop_kill_node", "script_noteworthy");
+    var_0 = common_scripts\utility::getStruct("drop_kill_node", "script_noteworthy");
     wait 0.5;
     var_0 notify("stop_loop2");
     waittillframeend;
     level.infil_dropkill_player_enemy thread flashlight_drop_detail();
-    level.infil_dropkill_player_enemy stopanimscripted();
+    level.infil_dropkill_player_enemy stopanimScripted();
     level.infil_dropkill_player_enemy.ignoreall = 0;
     level.infil_dropkill_player_enemy.ignoreme = 0;
     level.infil_dropkill_player_enemy.attackeraccuracy = 10000;
@@ -678,7 +678,7 @@ ally_slide_now() {
   thread maps\factory_fx::rain_on_actor(level.squad["ALLY_ALPHA"], "player_entered_awning", 0.1);
   thread maps\factory_fx::rain_on_actor(level.squad["ALLY_BRAVO"], "player_entered_awning", 0.1);
   thread maps\factory_fx::rain_on_actor(level.squad["ALLY_CHARLIE"], "player_entered_awning", 0.1);
-  var_0 = common_scripts\utility::getstruct("factory_baker_slidestart", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("factory_baker_slidestart", "script_noteworthy");
   level.squad["ALLY_ALPHA"] setgoalpos(level.squad["ALLY_ALPHA"].origin);
   level.squad["ALLY_ALPHA"] maps\_utility::clear_run_anim();
   level.squad["ALLY_ALPHA"] maps\_utility::disable_sprint();
@@ -704,7 +704,7 @@ intro_allied_entrance() {
 
 intro_allied_entrance_bravo() {
   level endon("player_entered_awning");
-  var_0 = common_scripts\utility::getstruct("factory_infil_wallhop_03", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("factory_infil_wallhop_03", "script_noteworthy");
   var_0 maps\_anim::anim_first_frame_solo(self, "factory_intro_jungle_wallhop");
   common_scripts\utility::flag_wait("player_near_train_kill");
   var_0 maps\_anim::anim_single_solo(self, "factory_intro_jungle_wallhop");
@@ -716,7 +716,7 @@ intro_allied_entrance_bravo() {
 
 intro_allied_entrance_charlie() {
   level endon("player_entered_awning");
-  var_0 = common_scripts\utility::getstruct("factory_infil_wallhop_01", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("factory_infil_wallhop_01", "script_noteworthy");
   var_0 maps\_anim::anim_first_frame_solo(self, "factory_intro_jungle_wallhop");
   var_0 maps\_anim::anim_single_solo(self, "factory_intro_jungle_wallhop");
   maps\_utility::enable_ai_color();
@@ -726,7 +726,7 @@ intro_allied_entrance_charlie() {
 intro_allied_entrance_echo() {
   self endon("death");
   level endon("player_entered_awning");
-  var_0 = common_scripts\utility::getstruct("factory_infil_wallhop_02", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("factory_infil_wallhop_02", "script_noteworthy");
   var_0 maps\_anim::anim_first_frame_solo(self, "factory_intro_jungle_wallhop");
   common_scripts\utility::flag_wait("player_near_train_kill");
   var_0 maps\_anim::anim_single_solo(self, "factory_intro_jungle_wallhop");
@@ -741,19 +741,19 @@ loop_train(var_0, var_1, var_2) {
   thread maps\factory_audio::audio_train_constant_loop();
   thread maps\factory_audio::audio_start_train_click_clacks();
   var_4 = [];
-  var_4[0] = getent("train_reveal_01_org", "targetname");
-  var_4[1] = getent("train_reveal_02_org", "targetname");
-  var_4[2] = getent("train_reveal_03_org", "targetname");
-  var_4[3] = getent("train_reveal_04_org", "targetname");
-  var_4[4] = getent("train_reveal_05_org", "targetname");
-  var_4[5] = getent("train_reveal_06_org", "targetname");
-  var_4[6] = getent("train_reveal_07_org", "targetname");
-  var_4[7] = getent("train_reveal_08_org", "targetname");
-  var_4[8] = getent("train_reveal_09_org", "targetname");
-  var_4[9] = getent("train_reveal_10_org", "targetname");
-  var_4[10] = getent("train_reveal_11_org", "targetname");
-  var_4[11] = getent("train_reveal_12_org", "targetname");
-  var_4[12] = getent("train_reveal_13_org", "targetname");
+  var_4[0] = getEnt("train_reveal_01_org", "targetname");
+  var_4[1] = getEnt("train_reveal_02_org", "targetname");
+  var_4[2] = getEnt("train_reveal_03_org", "targetname");
+  var_4[3] = getEnt("train_reveal_04_org", "targetname");
+  var_4[4] = getEnt("train_reveal_05_org", "targetname");
+  var_4[5] = getEnt("train_reveal_06_org", "targetname");
+  var_4[6] = getEnt("train_reveal_07_org", "targetname");
+  var_4[7] = getEnt("train_reveal_08_org", "targetname");
+  var_4[8] = getEnt("train_reveal_09_org", "targetname");
+  var_4[9] = getEnt("train_reveal_10_org", "targetname");
+  var_4[10] = getEnt("train_reveal_11_org", "targetname");
+  var_4[11] = getEnt("train_reveal_12_org", "targetname");
+  var_4[12] = getEnt("train_reveal_13_org", "targetname");
   thread train_car_rumble_generator(var_4);
   var_5 = var_4[0];
 
@@ -781,13 +781,13 @@ set_up_train_car(var_0, var_1, var_2, var_3, var_4) {
 
   foreach(var_7 in var_5) {
     if(var_7.classname == "trigger_hurt") {
-      var_7 enablelinkto();
+      var_7 enablelinkTo();
     }
 
-    var_7 linkto(var_0);
+    var_7 linkTo(var_0);
   }
 
-  var_0 moveto(var_1.origin, 0.1, 0, 0);
+  var_0 moveTo(var_1.origin, 0.1, 0, 0);
   var_0 waittill("go");
   var_0 thread loop_train_car(var_2, var_3, 0.1, var_4);
 }
@@ -873,9 +873,9 @@ wiggle_train_car() {
   self endon("stop_wiggle");
 
   for(;;) {
-    self rotateto((0, 0, randomfloatrange(0.8, 2.5)), randomfloatrange(0.3, 1.2));
+    self rotateTo((0, 0, randomfloatrange(0.8, 2.5)), randomfloatrange(0.3, 1.2));
     wait(randomfloatrange(0.3, 1.5));
-    self rotateto((0, 0, randomfloatrange(0.8, 2.5) * -1), randomfloatrange(0.3, 1.2));
+    self rotateTo((0, 0, randomfloatrange(0.8, 2.5) * -1), randomfloatrange(0.3, 1.2));
     wait(randomfloatrange(0.3, 1.5));
   }
 }
@@ -942,14 +942,14 @@ detect_player_shot() {
 }
 
 intro_animated_chopper() {
-  var_0 = getent("trig_intro_ally_moveto_reveal", "targetname");
+  var_0 = getEnt("trig_intro_ally_moveto_reveal", "targetname");
   var_0 waittill("trigger");
   level thread maps\factory_anim::intro_chopper();
   thread maps\factory_fx::fx_set_wind(4.0, 3.5, 1.8, 1);
   common_scripts\utility::exploder("intro_helicopter_debris");
   playFXOnTag(level._effect["factory_intro_helicopter_raindrops"], level.screenrain, "tag_origin");
   wait 1.2;
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait 1.0;
   thread maps\factory_fx::fx_set_wind(2.0, 2.0, 1.0, 1);
   wait 2.2;
@@ -960,7 +960,7 @@ intro_animated_chopper_spotlight() {
   self endon("death");
   vehicle_scripts\_attack_heli::heli_default_target_setup();
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("intro_heli_spotlight_target");
-  self setturrettargetent(var_0);
+  self setturrettargetEnt(var_0);
   self.targetdefault = var_0;
 }
 
@@ -1014,7 +1014,7 @@ intro_train_pass() {
   }
 
   wait 0.7;
-  var_0 = getent("infil_kill", "targetname");
+  var_0 = getEnt("infil_kill", "targetname");
   var_0 maps\_utility::add_spawn_function(::trainyard_enemy_logic);
   level.train_kill = var_0 maps\_utility::spawn_ai();
   thread factory_entrance_setup();
@@ -1082,7 +1082,7 @@ trainyard_enemy_logic() {
   self.ignoreall = 1;
   self.ignoreme = 1;
   maps\factory_powerstealth::attach_flashlight(1, undefined, 1);
-  var_0 = common_scripts\utility::getstruct("opfor_trainyard_walk", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("opfor_trainyard_walk", "script_noteworthy");
   thread trainyard_enemy_breakout_early();
   thread trainyard_enemy_logic_wait_too_long();
   trainyard_enemy_logic_start(var_0);
@@ -1111,7 +1111,7 @@ trainyard_enemy_breakout_early() {
 trainyard_enemy_wake_up() {
   thread maps\_utility::smart_dialogue("factory_sp1_enlamadre");
   level.player allowmelee(1);
-  var_0 = common_scripts\utility::getstruct("opfor_trainyard_walk", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("opfor_trainyard_walk", "script_noteworthy");
   self.ignoreme = 0;
   self.ignoreall = 0;
   self.favoriteenemy = level.player;
@@ -1120,7 +1120,7 @@ trainyard_enemy_wake_up() {
   self.aggressivemode = 1;
   self.attackeraccuracy = 10000;
   var_0 notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   thread flashlight_drop_detail();
   common_scripts\utility::flag_set("trainyard_enemy_alerted");
 }
@@ -1207,7 +1207,7 @@ trainyard_enemy_logic_wait(var_0) {
       var_1 = player_start_stabbing();
       level.player setstance("stand");
       level.player allowcrouch(0);
-      var_2 = common_scripts\utility::getstruct("opfor_trainyard_walk", "script_noteworthy");
+      var_2 = common_scripts\utility::getStruct("opfor_trainyard_walk", "script_noteworthy");
       var_3 = [];
       var_3[0] = var_1;
       var_3[1] = self;
@@ -1276,7 +1276,7 @@ intro_ally_moveout() {
 }
 
 intro_ally_charlie_train_rollout() {
-  var_0 = common_scripts\utility::getstruct("factory_intro", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("factory_intro", "script_noteworthy");
   level.squad["ALLY_CHARLIE"].a.pose = "crouch";
   var_0 maps\_anim::anim_first_frame_solo(level.squad["ALLY_CHARLIE"], "factory_intro_ally03");
   common_scripts\utility::flag_wait("trainyard_enemy_dead");
@@ -1287,7 +1287,7 @@ intro_ally_charlie_train_rollout() {
 
   var_0 maps\_anim::anim_single_solo(level.squad["ALLY_CHARLIE"], "factory_intro_ally03");
   waittillframeend;
-  level.squad["ALLY_CHARLIE"] stopanimscripted();
+  level.squad["ALLY_CHARLIE"] stopanimScripted();
   level.squad["ALLY_CHARLIE"] maps\_utility::enable_ai_color();
   level.squad["ALLY_CHARLIE"] maps\_utility::disable_cqbwalk();
   maps\factory_util::safe_trigger_by_targetname("sca_post_rollout_charlie");
@@ -1303,8 +1303,8 @@ intro_kill_vignette() {
     var_1 maps\_utility::disable_cqbwalk();
   }
 
-  level.squad["ALLY_BRAVO"] stopanimscripted();
-  level.squad["ALLY_ECHO"] stopanimscripted();
+  level.squad["ALLY_BRAVO"] stopanimScripted();
+  level.squad["ALLY_ECHO"] stopanimScripted();
   maps\factory_util::actor_teleport(level.squad["ALLY_BRAVO"], "ALLY_BRAVO_intro_teleport");
   maps\factory_util::actor_teleport(level.squad["ALLY_ECHO"], "ALLY_ECHO_intro_teleport");
   common_scripts\utility::flag_wait_all("trainyard_enemy_dead", "trig_intro_vignette");
@@ -1369,7 +1369,7 @@ delta_splitup() {
   level endon("truck_kill_timed_out");
   level endon("deleting_echo");
   thread buddy_boost_echo();
-  var_0 = getent("vol_delete_squad_splinter", "targetname");
+  var_0 = getEnt("vol_delete_squad_splinter", "targetname");
 
   while(!level.squad["ALLY_ECHO"] istouching(var_0)) {
     wait 0.1;
@@ -1439,10 +1439,10 @@ intro_truck_setup() {
   thread maps\factory_audio::audio_sfx_truck_pull_away_start();
   var_0 startpath();
   var_1 startpath();
-  var_3 = getent("truck_sequence_node", "script_noteworthy");
-  var_4 = getent("intro_truck_driver", "script_noteworthy");
+  var_3 = getEnt("truck_sequence_node", "script_noteworthy");
+  var_4 = getEnt("intro_truck_driver", "script_noteworthy");
   var_5 = var_4 maps\_utility::spawn_ai();
-  var_5 linkto(var_3);
+  var_5 linkTo(var_3);
   var_5.ignoreall = 1;
   var_5 allowedstances("stand");
   var_5.animname = "enemy";
@@ -1460,7 +1460,7 @@ intro_truck_setup() {
 handle_driver_death() {
   self endon("entered_factory_1");
   self waittill("damage", var_0, var_1);
-  self linkto(level.intro_truck_cab);
+  self linkTo(level.intro_truck_cab);
 }
 
 factory_truck_entrance(var_0, var_1, var_2) {
@@ -1504,7 +1504,7 @@ factory_ingress_start() {
   maps\_utility::battlechatter_off();
   thread intro_truck_setup();
   common_scripts\utility::flag_set("factory_exterior_reveal");
-  var_3 = getent("sca_trainyard_exit", "targetname");
+  var_3 = getEnt("sca_trainyard_exit", "targetname");
   var_3 common_scripts\utility::trigger_off();
 }
 
@@ -1677,7 +1677,7 @@ eliminate_my_target() {
 }
 
 detect_ally_at_entrance() {
-  var_0 = getent("vol_entrance_squad_count", "script_noteworthy");
+  var_0 = getEnt("vol_entrance_squad_count", "script_noteworthy");
 
   while(!self istouching(var_0)) {
     wait 0.1;
@@ -1693,7 +1693,7 @@ fire_on_target(var_0, var_1, var_2) {
 
 detect_allies_at_entrance() {
   level endon("truck_kills_done");
-  var_0 = getent("vol_entrance_squad_count", "script_noteworthy");
+  var_0 = getEnt("vol_entrance_squad_count", "script_noteworthy");
 
   for(;;) {
     var_1 = var_0 maps\_utility::get_ai_touching_volume("allies");
@@ -1747,13 +1747,13 @@ bravo_post_truck_sequence() {
 }
 
 factory_door_kill() {
-  var_0 = getent("factory_door_kill_stationary", "script_noteworthy");
-  var_1 = getent("factory_door_kill_mobile", "script_noteworthy");
+  var_0 = getEnt("factory_door_kill_stationary", "script_noteworthy");
+  var_1 = getEnt("factory_door_kill_mobile", "script_noteworthy");
   var_0 maps\_utility::add_spawn_function(::factory_door_guard_stationary);
   var_1 maps\_utility::add_spawn_function(::factory_door_guard_mobile);
   var_2 = var_0 maps\_utility::spawn_ai(1);
   var_3 = var_1 maps\_utility::spawn_ai(1);
-  var_4 = getent("agv_fac_entry_right", "targetname");
+  var_4 = getEnt("agv_fac_entry_right", "targetname");
   var_4 maps\_utility::add_spawn_function(maps\factory_util::forklift_run_over_monitor);
   var_4 maps\_vehicle::spawn_vehicle_and_gopath();
   thread forklift_far();
@@ -1789,29 +1789,29 @@ factory_door_kill() {
 }
 
 forklift_far() {
-  var_0 = getent("agv_fac_entry_far_crate", "targetname");
-  var_1 = getent("col_agv_fac_entry_far_crate", "targetname");
-  var_2 = getent("agv_fac_entry_far", "targetname");
+  var_0 = getEnt("agv_fac_entry_far_crate", "targetname");
+  var_1 = getEnt("col_agv_fac_entry_far_crate", "targetname");
+  var_2 = getEnt("agv_fac_entry_far", "targetname");
   var_2 maps\_utility::add_spawn_function(maps\factory_util::forklift_run_over_monitor);
   var_3 = var_2 maps\_vehicle::spawn_vehicle_and_gopath();
   var_0.angles = var_3.angles;
-  var_0 linkto(var_3);
-  var_1 linkto(var_3);
+  var_0 linkTo(var_3);
+  var_1 linkTo(var_3);
 }
 
 forklift_lifting() {
-  var_0 = getent("agv_fac_entry_far_lifting", "targetname");
-  var_1 = getent("col_agv_fac_entry_far_lifting", "targetname");
-  var_2 = getent("agv_fac_entry_lifting", "targetname");
+  var_0 = getEnt("agv_fac_entry_far_lifting", "targetname");
+  var_1 = getEnt("col_agv_fac_entry_far_lifting", "targetname");
+  var_2 = getEnt("agv_fac_entry_lifting", "targetname");
   var_2 maps\_utility::add_spawn_function(maps\factory_util::forklift_run_over_monitor);
   var_3 = var_2 maps\_vehicle::spawn_vehicle_and_gopath();
   var_0.angles = var_3.angles;
-  var_0 linkto(var_3);
-  var_1 linkto(var_3);
+  var_0 linkTo(var_3);
+  var_1 linkTo(var_3);
 }
 
 forklift_parking() {
-  var_0 = getent("agv_fac_entry_parking", "targetname");
+  var_0 = getEnt("agv_fac_entry_parking", "targetname");
   var_0 maps\_utility::add_spawn_function(maps\factory_util::forklift_run_over_monitor);
   var_1 = var_0 maps\_vehicle::spawn_vehicle_and_gopath();
 }
@@ -1860,7 +1860,7 @@ factory_door_guard_stationary() {
   self.ignoreall = 1;
   self.allowdeath = 1;
   self.health = 1;
-  var_0 = getent("factory_door_kill_stationary_node", "targetname");
+  var_0 = getEnt("factory_door_kill_stationary_node", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "factory_truck_enemy02_loop");
   var_0 thread maps\_anim::anim_loop_solo(self, "factory_truck_enemy02_loop", "stop_loop");
   self waittill("damage", var_1, var_2);
@@ -1882,7 +1882,7 @@ factory_door_guard_mobile() {
   self.ignoreall = 1;
   self.allowdeath = 1;
   self.health = 1;
-  var_0 = getent("factory_door_kill_mobile_node", "targetname");
+  var_0 = getEnt("factory_door_kill_mobile_node", "targetname");
   thread maps\_anim::anim_single_solo(self, "factory_truck_enemy01_enter");
   self waittill("damage", var_1, var_2);
   common_scripts\utility::flag_set("first_door_guard_shot");
@@ -1896,7 +1896,7 @@ factory_door_guard_mobile() {
 
 factory_door_guard_player_spotted() {
   self endon("death");
-  var_0 = getent("factory_door_kill_stationary_node", "targetname");
+  var_0 = getEnt("factory_door_kill_stationary_node", "targetname");
   common_scripts\utility::flag_wait("entered_factory_1");
   wait(randomfloatrange(0, 0.25));
 
@@ -1904,7 +1904,7 @@ factory_door_guard_player_spotted() {
     return;
   }
   var_0 notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   level.player.ignoreme = 0;
   self.ignoreall = 0;
   self getenemyinfo(level.player);
@@ -1927,7 +1927,7 @@ strafe_entrance() {
 charlie_search_body(var_0) {
   level endon("entered_factory_1");
   self pushplayer(1);
-  var_1 = getent("truck_sequence_node_alt", "script_noteworthy");
+  var_1 = getEnt("truck_sequence_node_alt", "script_noteworthy");
   var_0.animname = "enemy";
   self.goalradius = 8;
   var_1 maps\_anim::anim_reach_solo(self, "factory_truck_ally02_search");
@@ -1938,9 +1938,9 @@ charlie_search_body(var_0) {
   common_scripts\utility::exploder("body_roll_dust");
   wait 1.5;
   thread maps\_utility::smart_dialogue("factory_rgs_gotone");
-  var_2 = getent("security_card", "targetname");
+  var_2 = getEnt("security_card", "targetname");
   var_2.origin = level.squad["ALLY_CHARLIE"] gettagorigin("tag_inhand");
-  var_2 linkto(level.squad["ALLY_CHARLIE"], "tag_inhand", (0.6, 0, 1), (-50, 0, 0));
+  var_2 linkTo(level.squad["ALLY_CHARLIE"], "tag_inhand", (0.6, 0, 1), (-50, 0, 0));
   self.goalradius = 8;
   thread charlie_ingress_go();
   wait 1.7;
@@ -1980,7 +1980,7 @@ handle_player_exposing(var_0) {
       var_2.favoriteenemy = level.player;
 
       if(var_2.team == "axis") {
-        var_2 stopanimscripted();
+        var_2 stopanimScripted();
       }
 
       var_2 setgoalpos(var_2.origin);
@@ -1988,7 +1988,7 @@ handle_player_exposing(var_0) {
     }
   }
 
-  var_4 = getent("truck_sequence_node_alt", "script_noteworthy");
+  var_4 = getEnt("truck_sequence_node_alt", "script_noteworthy");
   var_4 thread maps\_anim::anim_single_solo(level.clipboard, "factory_truck_enemy02_death");
   wait 1.0;
   maps\_utility::battlechatter_off();
@@ -2014,7 +2014,7 @@ ingress_enc_think_enemy01() {
   self.noragdoll = 1;
   self.animname = "enemy";
   self.fixednode = 1;
-  var_0 = getent("truck_sequence_node", "script_noteworthy");
+  var_0 = getEnt("truck_sequence_node", "script_noteworthy");
   var_0 maps\_anim::anim_single_solo(self, "factory_truck_enemy01");
   var_0 thread maps\_anim::anim_loop_solo(self, "factory_truck_enemy01_loop", "stop_loop");
 }
@@ -2044,7 +2044,7 @@ ingress_enc_think_enemy02() {
   var_0 = [];
   var_0[0] = self;
   var_0[1] = level.clipboard;
-  var_1 = getent("truck_sequence_node_alt", "script_noteworthy");
+  var_1 = getEnt("truck_sequence_node_alt", "script_noteworthy");
   thread ingress_enc_enemy02_kill(var_0, var_1);
   var_1 thread maps\_anim::anim_single(var_0, "factory_truck_enemy02");
   wait 0.05;
@@ -2091,7 +2091,7 @@ ingress_enc_think_enemy03() {
   self.allowdeath = 1;
   self.animname = "enemy";
   self.fixednode = 1;
-  var_0 = getent("truck_sequence_node", "script_noteworthy");
+  var_0 = getEnt("truck_sequence_node", "script_noteworthy");
   var_0 maps\_anim::anim_single_solo(self, "factory_truck_enemy03");
   var_0 thread maps\_anim::anim_loop_solo(self, "factory_truck_enemy03_loop", "stop_loop");
 }
@@ -2101,7 +2101,7 @@ intro_truck_failsafe() {
   common_scripts\utility::flag_wait("intro_truck_driver_dead");
 
   if(isalive(self)) {
-    self stopanimscripted();
+    self stopanimScripted();
     level.squad["ALLY_ALPHA"] shootblank();
     level.squad["ALLY_ALPHA"] safe_magic_bullet(level.squad["ALLY_ALPHA"] gettagorigin("tag_flash"), self getshootatpos());
     self kill();
@@ -2109,7 +2109,7 @@ intro_truck_failsafe() {
 }
 
 open_factory_door() {
-  var_0 = getent("factory_entrance_door", "script_noteworthy");
+  var_0 = getEnt("factory_entrance_door", "script_noteworthy");
   var_0 movez(184, 8, 1, 3);
   common_scripts\utility::exploder("door_open");
   thread maps\factory_audio::sfx_garage_reveal_crane();
@@ -2117,7 +2117,7 @@ open_factory_door() {
   var_0 connectpaths();
   common_scripts\utility::flag_wait("exited_conveyor");
   var_0 movez(-184, 5, 1, 1);
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 factory_entrance_reveal() {
@@ -2200,7 +2200,7 @@ alpha_ingress_go() {
 
 manage_ally_cqb() {
   self endon("stop_cqb_management");
-  var_0 = getent("vol_ps_staircase", "targetname");
+  var_0 = getEnt("vol_ps_staircase", "targetname");
 
   while(self istouching(var_0)) {
     maps\_utility::enable_cqbwalk();

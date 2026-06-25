@@ -65,7 +65,7 @@ function chamber_disc_run() {
   }
   self useanimtree($generic);
   if(!isDefined(self.script_int)) {
-    self animscripted("disc_idle", self.origin, self.angles, "p7_fxanim_zm_ori_chamber_mid_ring_idle_anim");
+    self animScripted("disc_idle", self.origin, self.angles, "p7_fxanim_zm_ori_chamber_mid_ring_idle_anim");
     return;
   }
   level.var_6d86123b[self.script_int] = self;
@@ -98,17 +98,17 @@ function function_746282b3(a_ents) {
       break;
     }
   }
-  var_4316fdf6 linkto(level.var_6d86123b[n_index]);
+  var_4316fdf6 linkTo(level.var_6d86123b[n_index]);
   level.var_6d86123b[n_index].var_b1c02d8a = var_4316fdf6;
   wait(0.05);
   level.var_6d86123b[n_index] ghost();
 }
 
 function init_crypt_gems() {
-  disc = getent("crypt_puzzle_disc_main", "targetname");
+  disc = getEnt("crypt_puzzle_disc_main", "targetname");
   gems = getEntArray("crypt_gem", "script_noteworthy");
   foreach(gem in gems) {
-    gem linkto(disc);
+    gem linkTo(disc);
     gem thread run_crypt_gem_pos();
   }
 }
@@ -167,8 +167,8 @@ function run_crypt_gem_pos() {
     }
   }
   e_gem_model = zm_tomb_utility::puzzle_orb_chamber_to_crypt(str_orb_path, self);
-  e_main_disc = getent("crypt_puzzle_disc_main", "targetname");
-  e_gem_model linkto(e_main_disc);
+  e_main_disc = getEnt("crypt_puzzle_disc_main", "targetname");
+  e_gem_model linkTo(e_main_disc);
   str_targetname = self.targetname;
   self delete();
   e_gem_model setCanDamage(1);
@@ -221,7 +221,7 @@ function run_crypt_gem_pos() {
 
 function chamber_disc_move_to_position() {
   new_angles = (self.angles[0], self.position * 90, self.angles[2]);
-  self rotateto(new_angles, 1, 0, 0);
+  self rotateTo(new_angles, 1, 0, 0);
   self playSound("zmb_crypt_disc_turn");
   wait(1 * 0.75);
   self bryce_cake_light_update(0);
@@ -240,7 +240,7 @@ function chamber_discs_move_all_to_position(discs = getEntArray("chamber_puzzle_
 }
 
 function chamber_disc_get_gem_position(gem_name) {
-  disc = getent("crypt_puzzle_disc_main", "targetname");
+  disc = getEnt("crypt_puzzle_disc_main", "targetname");
   return (disc.position + level.gem_start_pos[gem_name]) % 4;
 }
 
@@ -308,7 +308,7 @@ function chamber_disc_trigger_run(e_disc, e_lever, b_clockwise) {
     self waittill("trigger", e_triggerer);
     if(!level flag::get("disc_rotation_active")) {
       level flag::set("disc_rotation_active");
-      e_lever animscripted("lever_switch", e_lever.origin, e_lever.angles, "p7_fxanim_zm_ori_puzzle_switch_anim");
+      e_lever animScripted("lever_switch", e_lever.origin, e_lever.angles, "p7_fxanim_zm_ori_puzzle_switch_anim");
       e_lever playSound("zmb_crypt_lever");
       wait(n_anim_time * 0.5);
       e_lever thread chamber_disc_switch_spark();

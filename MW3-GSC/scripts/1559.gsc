@@ -215,7 +215,7 @@ callstrike(var_0, var_1, var_2, var_3) {
   var_4 = undefined;
   var_5 = 0;
   var_6 = (0, var_2, 0);
-  var_4 = getent("airstrikeheight", "targetname");
+  var_4 = getEnt("airstrikeheight", "targetname");
 
   if(var_3 == "stealth") {
     var_7 = 12000;
@@ -336,7 +336,7 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_12.angles = var_6;
   var_13 = anglesToForward(var_6);
   var_12 thread playplanefx();
-  var_12 moveto(var_11, var_5, 0, 0);
+  var_12 moveTo(var_11, var_5, 0, 0);
   thread callstrike_bombeffect(var_12, var_11, var_5, var_4 - 1.0, var_0, var_7);
   wait(var_5);
   var_12 notify("delete");
@@ -487,7 +487,7 @@ dobomberstrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11 setModel("vehicle_b2_bomber");
   var_11.angles = var_6;
   var_12 = anglesToForward(var_6);
-  var_11 moveto(var_10, var_5, 0, 0);
+  var_11 moveTo(var_10, var_5, 0, 0);
   thread bomberdropbombs(var_11, var_1, var_0);
   wait(var_5);
   var_11 notify("delete");
@@ -545,7 +545,7 @@ targetisclose(var_0, var_1, var_2) {
 
 targetisinfront(var_0, var_1) {
   var_2 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
-  var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {

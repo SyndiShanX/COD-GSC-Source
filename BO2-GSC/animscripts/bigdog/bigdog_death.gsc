@@ -77,7 +77,7 @@ self_destruct() {
 
   radiusdamage(fxorigin, 256, 200, 50, level.player);
   playFX(anim._effect["bigdog_explosion"], fxorigin);
-  playsoundatposition("wpn_bigdog_explode", fxorigin);
+  playSoundAtPosition("wpn_bigdog_explode", fxorigin);
   self notsolid();
   self hide();
 }

@@ -20,7 +20,7 @@ dialogue(dialoguename, look_target) {
   self waittill("dialogue_sound_done");
 }
 watersheet_on_trigger(targetname) {
-  trig = getent(targetname, "targetname");
+  trig = getEnt(targetname, "targetname");
   while(true) {
     trig waittill("trigger", who);
 
@@ -293,14 +293,14 @@ enable_friendly_color_gradual(delay) {
 }
 
 players_enable_rain() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] setwaterdrops(25);
   }
 }
 
 players_disable_rain() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] setwaterdrops(0);
   }
@@ -308,14 +308,14 @@ players_disable_rain() {
 trigger_noteworthy_if_player0(trigger, end_notify) {
   self endon(end_notify);
 
-  trigger = getent(trigger, "targetname");
+  trigger = getEnt(trigger, "targetname");
   if(isDefined(trigger)) {
     okiPrint("trigger_noteworthy_if_player0 found trigger: " + trigger.targetname);
   }
 
   while(isDefined(trigger)) {
     if(isDefined(trigger.script_noteworthy)) {
-      target = getent(trigger.script_noteworthy, "targetname");
+      target = getEnt(trigger.script_noteworthy, "targetname");
       if(isDefined(target)) {
         target.script_color_auto_disable = false;
         trigger waittill("trigger");
@@ -342,7 +342,7 @@ move_players(spots) {
   points = getStructArray(spots, "targetname");
 
   for(x = 0; x < players.size; x++) {
-    players[x] setorigin(points[x].origin);
+    players[x] setOrigin(points[x].origin);
     players[x] setplayerangles(points[x].angles);
   }
 }
@@ -368,7 +368,7 @@ spawn_array_once(targetname, fieldname) {
 maintain_mg_guy(endmsg, spawntargetname, guytargetname, threatbiasgroup) {
   level endon(endmsg);
 
-  spawner = getent(spawntargetname, "targetname");
+  spawner = getEnt(spawntargetname, "targetname");
   okiPrint("maintain_mg_guy found " + spawner.targetname);
   spawner add_spawn_function(::guy_to_goal_blind);
 
@@ -513,8 +513,8 @@ move_ai(spots) {
     okiPrint("move_ai: Moving AI to " + points[x].origin);
 
     ai[x].anchor = spawn("script_origin", ai[x].origin);
-    ai[x] linkto(ai[x].anchor);
-    ai[x].anchor moveto(points[x].origin, .02);
+    ai[x] linkTo(ai[x].anchor);
+    ai[x].anchor moveTo(points[x].origin, .02);
     ai[x].anchor waittill("movedone");
     if(isDefined(points[x].angles)) {
       ai[x].anchor.angles = points[x].angles;
@@ -527,11 +527,11 @@ move_ai(spots) {
 }
 
 move_ai_single(guy, nodename) {
-  node = getstruct(nodename, "targetname");
+  node = getStruct(nodename, "targetname");
 
   guy.anchor = spawn("script_origin", guy.origin);
-  guy linkto(guy.anchor);
-  guy.anchor moveto(node.origin, .02);
+  guy linkTo(guy.anchor);
+  guy.anchor moveTo(node.origin, .02);
   guy.anchor waittill("movedone");
   if(isDefined(node.angles)) {
     guy.anchor.angles = node.angles;
@@ -545,7 +545,7 @@ notify_when_trigger_hit(triggername, notifystring, endmsg) {
     level endon(endmsg);
   }
 
-  trig = getent(triggername, "targetname");
+  trig = getEnt(triggername, "targetname");
   trig waittill("trigger");
   level notify(notifystring);
 }
@@ -647,11 +647,11 @@ spawn_array(strSquadName) {
 }
 
 cleanup_trigger_disable(triggername) {
-  trig = getent(triggername, "targetname");
+  trig = getEnt(triggername, "targetname");
   trig trigger_off();
 }
 cleanup_trigger_enable(triggername) {
-  trig = getent(triggername, "targetname");
+  trig = getEnt(triggername, "targetname");
   trig trigger_on();
 
   to_delete = [];

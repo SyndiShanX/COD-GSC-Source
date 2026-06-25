@@ -26,12 +26,12 @@ __init__() {
 }
 
 on_begin() {
-  var_a2c75164 = getent("mannequin_ally_door", "targetname");
+  var_a2c75164 = getEnt("mannequin_ally_door", "targetname");
   var_a2c75164 zm_white_private_mannequin::function_a51b6403(1);
   wait 1;
-  level.companion_leader = getplayers()[0];
+  level.companion_leader = getPlayers()[0];
   level.companion_leader.eligible_leader = 1;
-  mannequin_ally_spawner = getent("mannequin_american_spawner", "targetname");
+  mannequin_ally_spawner = getEnt("mannequin_american_spawner", "targetname");
 
   if(isDefined(mannequin_ally_spawner)) {
     level.mannequin_ally = mannequin_ally_spawner spawnfromspawner();
@@ -45,7 +45,7 @@ on_begin() {
   level zm_trial::function_25ee130(1);
 
   if(isDefined(level.mannequin_ally)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread function_545d53bf();
     }
   }
@@ -55,7 +55,7 @@ on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
   level zm_trial::function_25ee130(0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_dc0859e();
   }
 

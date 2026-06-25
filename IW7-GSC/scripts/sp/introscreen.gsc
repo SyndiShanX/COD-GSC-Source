@@ -153,7 +153,7 @@ func_9AF3(var_0, var_1) {
   level.var_3F69.var_1175D = 0;
   level.var_3F69.var_11152 = 0;
   level.var_3F69.var_10466 = spawn("script_origin", level.player.origin);
-  level.var_3F69.var_10466 linkto(level.player);
+  level.var_3F69.var_10466 linkTo(level.player);
   level.var_3F69.var_BFE0 = var_0;
   if(!var_0) {
     level.player freezecontrols(1);
@@ -882,7 +882,7 @@ func_7664() {
   level.var_7661.var_A917 = [];
   level.var_7661.var_22FD = [];
   level.var_7661.var_10466 = spawn("script_origin", level.player.origin);
-  level.var_7661.var_10466 linkto(level.player);
+  level.var_7661.var_10466 linkTo(level.player);
 }
 
 func_7663() {

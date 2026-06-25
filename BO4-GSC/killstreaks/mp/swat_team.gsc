@@ -114,11 +114,11 @@ createremoteweapontrigger(hintstring) {
   weapon.remoteowner = player;
   weapon.inittime = gettime();
   weapon.usetrigger = spawn("trigger_radius_use", player.origin, 0, 32, 32);
-  weapon.usetrigger enablelinkto();
-  weapon.usetrigger linkto(player);
+  weapon.usetrigger enablelinkTo();
+  weapon.usetrigger linkTo(player);
   weapon.usetrigger sethintlowpriority(1);
-  weapon.usetrigger setcursorhint("HINT_NOICON");
-  weapon.usetrigger sethintstring(hintstring);
+  weapon.usetrigger setCursorHint("HINT_NOICON");
+  weapon.usetrigger setHintString(hintstring);
   weapon.usetrigger setteamfortrigger(player.team);
   weapon.usetrigger.team = player.team;
   player clientclaimtrigger(weapon.usetrigger);
@@ -130,7 +130,7 @@ createremoteweapontrigger(hintstring) {
 
 function_944f0911(hintstring) {
   assert(isDefined(self.usetrigger));
-  self.usetrigger sethintstring(hintstring);
+  self.usetrigger setHintString(hintstring);
 }
 
 duf47(player) {
@@ -440,7 +440,7 @@ function_fb9f1f3b(entity) {
   }
 
   if(nextstate != entity.ai.var_5cb410bc.currentstate) {
-    dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+    dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
     angles = vectortoangles(dirtoenemy);
     angles = (0, angles[1], 0);
     newspot = undefined;
@@ -517,7 +517,7 @@ function_994477c0(entity) {
     return false;
   }
 
-  dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forward = anglesToForward(entity.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {
@@ -715,7 +715,7 @@ function_ace0a9bc() {
   self.ai.var_3af1add3 = &function_3863cd9;
   self laseron();
   self collidewithactors(0);
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self ai::set_behavior_attribute("useGrenades", 0);
   self function_e69272bf();
 
@@ -1106,7 +1106,7 @@ swat_helicopter_explode(helicopter) {
 }
 
 spawn_swat_helicopter(owner, origin, angles, context) {
-  helicopter = spawnvehicle("vehicle_t8_mil_helicopter_swat_transport", origin, angles, "swat_helicopter");
+  helicopter = spawnVehicle("vehicle_t8_mil_helicopter_swat_transport", origin, angles, "swat_helicopter");
   helicopter setowner(owner);
   helicopter thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile("crashing", "death");
   helicopter.spawntime = gettime();
@@ -1167,7 +1167,7 @@ function_ab26fd70(helicopter) {
   assert(isDefined(helicopter.rope));
   helicopter.rope useanimtree("generic");
   helicopter.rope setModel("p8_fxanim_gp_vehicle_lb_swat_rappel_mod");
-  helicopter.rope linkto(helicopter, "tag_origin");
+  helicopter.rope linkTo(helicopter, "tag_origin");
   helicopter.rope hide();
 }
 
@@ -1277,7 +1277,7 @@ function_ab667e1c(owner, helicopter) {
   owner.var_e60e2941 = [];
   helicopter.var_e60e2941 = [];
   swat_gunner = spawnactor(aitypes[0], helicopter.origin, (0, 0, 0), "swat_gunner");
-  swat_gunner linkto(helicopter, "tag_driver", (0, 0, 0), (0, 0, 0));
+  swat_gunner linkTo(helicopter, "tag_driver", (0, 0, 0), (0, 0, 0));
   swat_gunner.ai.var_f185cb34 = 1;
 
   if(!isDefined(owner.var_e60e2941)) {
@@ -1368,7 +1368,7 @@ function_18a9058c() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!function_a543b380(player)) {
@@ -1664,7 +1664,7 @@ function_820e7c92(owner, var_1c996690, nodes, context) {
   foreach(swat in owner.swat_team) {
     if(isDefined(swat) && !isremovedentity(swat)) {
       aiutility::addaioverridedamagecallback(swat, &function_e588f057);
-      swat linkto(helicopter, "tag_origin", (0, 0, 0), (0, 0, 0));
+      swat linkTo(helicopter, "tag_origin", (0, 0, 0), (0, 0, 0));
       swat thread function_8fa2faa5(swat, helicopter, position);
       swat thread function_ab6f69a1(swat);
       swat thread function_18a9058c();
@@ -2109,7 +2109,7 @@ function_2d44c54f(var_eca4744a, var_56bd1bef, nodes) {
   tacpoint = getclosesttacpoint(var_56bd1bef);
 
   foreach(node in nodes) {
-    withinfov = vectordot(var_eca4744a, vectornormalize(node.origin - var_56bd1bef) > cos(30));
+    withinfov = vectordot(var_eca4744a, vectorNormalize(node.origin - var_56bd1bef) > cos(30));
 
     if(withinfov && function_96c81b85(tacpoint, node.origin)) {
       node.score = 100;
@@ -2188,7 +2188,7 @@ function_4c2ed78d(owner, forced = 0) {
     return;
   }
 
-  enemies = getplayers();
+  enemies = getPlayers();
   potentialenemies = [];
 
   foreach(enemy in enemies) {
@@ -2201,12 +2201,12 @@ function_4c2ed78d(owner, forced = 0) {
     velocity = owner getvelocity();
 
     if(length(velocity) >= 20) {
-      velocity = vectornormalize(velocity);
+      velocity = vectorNormalize(velocity);
       owner.var_546b8137 = velocity;
     }
 
     if(isDefined(owner.var_546b8137)) {
-      var_56bd1bef = owner_origin + vectorscale(vectornormalize(owner.var_546b8137), 200);
+      var_56bd1bef = owner_origin + vectorscale(vectorNormalize(owner.var_546b8137), 200);
     } else {
       var_56bd1bef = owner_origin + vectorscale(anglesToForward(owner.angles), 200);
     }
@@ -2297,7 +2297,7 @@ function_4c2ed78d(owner, forced = 0) {
       continue;
     }
 
-    var_eca4744a = vectornormalize(var_56bd1bef - owner_origin);
+    var_eca4744a = vectorNormalize(var_56bd1bef - owner_origin);
     tacpoint = getclosesttacpoint(var_56bd1bef);
     shouldmove = 0;
 
@@ -2409,7 +2409,7 @@ function_d524c2b8(str_notify) {
 }
 
 function_a38d2d73(tacpoint) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(distancesquared(tacpoint.origin, player.origin) <= 200 * 200) {
@@ -2421,7 +2421,7 @@ function_a38d2d73(tacpoint) {
 }
 
 function_4670789f(tacpoint) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(function_96c81b85(tacpoint, player.origin)) {
@@ -2505,7 +2505,7 @@ function_ac0e6696() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     canbeseen = 0;
 
     foreach(player in players) {

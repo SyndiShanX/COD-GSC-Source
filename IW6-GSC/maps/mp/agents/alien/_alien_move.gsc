@@ -483,7 +483,7 @@ WaitForDodgeChance() {
 
     if(IsAlive(self.enemy)) {
       currentTime = GetTime();
-      enemyToMe = VectorNormalize(self.origin - self.enemy.origin);
+      enemyToMe = vectorNormalize(self.origin - self.enemy.origin);
       enemyFacing = anglesToForward(self.enemy.angles);
 
       if(VectorDot(enemytoMe, enemyFacing) < DODGE_CHANCE_ENEMY_FACING_TOLERANCE) {
@@ -636,7 +636,7 @@ stuckLerp() {
   self ScrAgentDoAnimLerp(self.origin, endPos, LERP_TIME);
   wait LERP_TIME;
 
-  self SetOrigin(self.origin);
+  self setOrigin(self.origin);
 }
 
 doWalkStart() {

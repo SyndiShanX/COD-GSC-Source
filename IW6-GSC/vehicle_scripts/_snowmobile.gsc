@@ -72,7 +72,7 @@ init_local() {
   if(issubstr(self.vehicletype, "player")) {
     var_0 = spawn("script_model", (0, 0, 0));
     var_0 setModel("viewmodel_glock");
-    var_0 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_0 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_0 hideallparts();
   }
 }

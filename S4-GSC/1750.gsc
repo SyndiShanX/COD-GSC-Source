@@ -378,8 +378,8 @@ _id_E025(var_0, var_1) {
   foreach(var_5 in var_2) {
     var_9 = _id_FFD8(var_5.v["origin"] - level.player.origin);
     var_10 = _id_FFD8(var_0 - level.player.origin);
-    var_11 = vectornormalize(var_9);
-    var_12 = vectornormalize(var_10);
+    var_11 = vectorNormalize(var_9);
+    var_12 = vectorNormalize(var_10);
     var_5._id_4E80 = vectordot(var_11, var_12);
   }
 
@@ -558,7 +558,7 @@ _id_103B9(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3._id_F3CD)) {
     var_3._id_F3CD = (0, 0, -1);
   } else {
-    var_3._id_F3CD = vectornormalize(var_3._id_F3CD);
+    var_3._id_F3CD = vectorNormalize(var_3._id_F3CD);
   }
 
   var_4 = var_3._id_F3CD * var_3._id_F3C8;
@@ -629,7 +629,7 @@ _id_0DC1(var_0, var_1, var_2, var_3, var_4) {
   var_5 = scripts\engine\utility::spawn_tag_origin();
   var_5.origin = var_2;
   var_5.angles = vectortoangles(var_3);
-  var_5 linkto(self, "tag_origin");
+  var_5 linkTo(self, "tag_origin");
   waitframe();
   playFXOnTag(scripts\engine\utility::getfx(var_0), var_5, "tag_origin");
   wait(var_1);

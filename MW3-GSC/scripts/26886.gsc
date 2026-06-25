@@ -172,10 +172,10 @@ _id_68EC(var_0) {
 
   if(isDefined(var_0.target)) {
     var_3 = var_0.target;
-    var_1 = getent(var_0.target, "targetname");
+    var_1 = getEnt(var_0.target, "targetname");
 
     if(isDefined(var_1) && isDefined(var_1.target)) {
-      var_2 = getent(var_1.target, "targetname");
+      var_2 = getEnt(var_1.target, "targetname");
     }
   }
 
@@ -390,7 +390,7 @@ _id_68F9(var_0, var_1) {
   var_3 = var_2["position"];
   var_4 = distance(self.origin, var_3);
   var_5 = var_4 / var_0;
-  self moveto(var_3, var_5, 0, 0);
+  self moveTo(var_3, var_5, 0, 0);
 
   if(var_1) {
     var_6 = randomfloatrange(-4, 4);
@@ -509,7 +509,7 @@ _id_68FE(var_0) {
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
   var_0._id_3DB0 = var_1;
-  var_0 linkto(var_1, "tag_origin");
+  var_0 linkTo(var_1, "tag_origin");
 
   if(!isDefined(level._id_68FF)) {
     level._id_68FF[0] = var_0;

@@ -106,7 +106,7 @@ _id_3D10() {
   self.mgturret[1] delete();
   var_0 = self.mgturret[0];
   var_0 unlink();
-  var_0 linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_turret", (0, 0, 0), (0, 0, 0));
   var_0 setleftarc(45);
   var_0 setrightarc(45);
   var_0 settoparc(45);

@@ -253,8 +253,8 @@ function delete_rider_asap(entity) {
 function kill_rider(entity) {
   if(isDefined(entity)) {
     if(isalive(entity) && !gibserverutils::isgibbed(entity, 2)) {
-      if(entity isplayinganimscripted()) {
-        entity stopanimscripted();
+      if(entity isplayinganimScripted()) {
+        entity stopanimScripted();
       }
       if(getdvarint("tu1_vehicleRidersInvincibility", 1)) {
         util::stop_magic_bullet_shield(entity);
@@ -457,7 +457,7 @@ function private forward_euler_integration(e_move, v_target_landing, n_initial_s
     }
     recordline(previousposition, position, (1, 0.5, 0), "", self);
     hostmigration::waittillhostmigrationdone();
-    e_move moveto(position, integrationstep);
+    e_move moveTo(position, integrationstep);
     if(!landed) {
       wait(integrationstep);
     }

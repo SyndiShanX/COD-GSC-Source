@@ -276,8 +276,8 @@ sentry_smg_default_settings(var_0) {
 sentry_pickup_init(var_0) {
   self setModel(self.model);
   self.sentrytype = var_0;
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"SENTRY_PICKUP");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"SENTRY_PICKUP");
   self makeusable();
   thread folded_sentry_use_wait(var_0);
 }

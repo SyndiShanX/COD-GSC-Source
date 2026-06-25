@@ -213,7 +213,7 @@ bird_flywaway(var_0, var_1) {
   var_3 = spawn("script_origin", var_0);
   var_4 = spawn("script_origin", var_1);
   var_3 thread maps\_utility::play_sound_on_entity("anml_bird_startle_flyaway");
-  var_3 moveto(var_4.origin, 2, 0.5);
+  var_3 moveTo(var_4.origin, 2, 0.5);
   wait 2;
   var_3 delete();
   var_4 delete();
@@ -235,11 +235,11 @@ bird_flyaway_sound03() {
 aud_start_graveyard_heli_scripted_sequence(var_0) {
   soundscripts\_audio_mix_manager::mm_add_submix("graveyard_hind_mix");
   var_1 = spawn("script_origin", self.origin);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 playSound("scn_scoutsniper_graveyard_hind_passby");
   var_2 = spawn("script_origin", self.origin);
   var_3 = (0, 0, -400);
-  var_2 linkto(self, "tag_origin", var_3, (0, 0, 0));
+  var_2 linkTo(self, "tag_origin", var_3, (0, 0, 0));
   var_2 playrumblelooponentity("heli_loop");
   var_0 thread monitor_end_node_reached();
   common_scripts\utility::waittill_any("end_node_reached", "enemy", "restart_avm");
@@ -267,7 +267,7 @@ monitor_end_node_reached() {
 }
 
 aud_start_dash_heli_flyby_sequence() {
-  var_0 = getent("start_heli", "script_noteworthy");
+  var_0 = getEnt("start_heli", "script_noteworthy");
   var_0 waittill("trigger");
   wait 0.1;
   soundscripts\_audio_mix_manager::mm_add_submix("dash_heli_flyby_mix");
@@ -285,7 +285,7 @@ aud_start_dash_heli_flyby_sequence() {
 }
 
 aud_start_dash_heli_idle(var_0) {
-  var_1 = getent("land_heli_start_node", "script_noteworthy");
+  var_1 = getEnt("land_heli_start_node", "script_noteworthy");
   var_1 waittill("trigger");
   soundscripts\_audio_mix_manager::mm_clear_submix("dash_heli_flyby_mix");
   var_0 scalevolume(0.5, 0.5);

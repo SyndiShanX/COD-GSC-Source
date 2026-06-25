@@ -59,7 +59,7 @@ init() {
 init_components() {
   level.a_mdl_pics = [];
   level.player_out_of_playable_area_override = &function_8b12e689;
-  mdl_stone = getent("health_stone", "targetname");
+  mdl_stone = getEnt("health_stone", "targetname");
   mdl_stone setinvisibletoall();
   mdl_stone.v_start_org = mdl_stone.origin;
   var_fe0f27ef = getEntArray("living_tree", "targetname");
@@ -96,7 +96,7 @@ register_steps() {
 }
 
 init_step_1(var_a276c861) {
-  mdl_stone = getent("gazing_stone_cellar", "targetname");
+  mdl_stone = getEnt("gazing_stone_cellar", "targetname");
   var_47323b73 = mdl_stone zm_unitrigger::create(undefined, 64, &function_55b79f54);
   var_47323b73.str_loc = "greenhouse";
   var_47323b73.var_f0e6c7a2 = mdl_stone;
@@ -117,7 +117,7 @@ init_step_1(var_a276c861) {
 cleanup_step_1(var_a276c861, var_19e802fa) {
   level flag::set(#"gazed_greenhouse");
   level flag::set(#"stick_done");
-  e_bush = getent("burning_man_shrub", "targetname");
+  e_bush = getEnt("burning_man_shrub", "targetname");
 
   if(isDefined(e_bush)) {
     e_bush delete();
@@ -227,7 +227,7 @@ function_1ca135cf(n_int) {
   s_scene scene::play("Shot 2");
 
   if(level.n_sticks == 1) {
-    e_bush = getent("burning_man_shrub", "targetname");
+    e_bush = getEnt("burning_man_shrub", "targetname");
     e_bush clientfield::set("" + #"stick_fire", 1);
     wait 1;
     e_bush clientfield::set("" + #"stick_fire", 0);
@@ -343,10 +343,10 @@ function_2345b68a() {
     mdl_pic.mdl_bd setModel(mdl_pic.var_3916fb8b);
   }
 
-  var_6adbf325 = getent("pic_gypsy", "targetname");
-  var_1b2ca394 = getent("pic_brigadier", "targetname");
-  var_3c9ce3a9 = getent("pic_butler", "targetname");
-  var_36ebb951 = getent("pic_gunslinger", "targetname");
+  var_6adbf325 = getEnt("pic_gypsy", "targetname");
+  var_1b2ca394 = getEnt("pic_brigadier", "targetname");
+  var_3c9ce3a9 = getEnt("pic_butler", "targetname");
+  var_36ebb951 = getEnt("pic_gunslinger", "targetname");
   level.stick_player = function_8a51807c();
   level.stick_player thread function_4aa24b78();
   level.stick_player thread function_c5c7d880();
@@ -433,7 +433,7 @@ sacrifice_player_reset() {
 
   level.stick_player = undefined;
   level function_2345b68a();
-  mdl_stone = getent("health_stone", "targetname");
+  mdl_stone = getEnt("health_stone", "targetname");
 
   if(mdl_stone.origin !== mdl_stone.v_start_org) {
     mdl_stone.origin = mdl_stone.v_start_org;
@@ -492,7 +492,7 @@ sacrifice_player_reset() {
 function_8a51807c() {
   level flag::wait_till(#"all_players_spawned");
   player = undefined;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size > 1) {
     a_active_players = util::get_active_players();
@@ -579,14 +579,14 @@ function_959fcbff(player) {
 
   if(!isDefined(player.e_linkto)) {
     player.e_linkto = util::spawn_model("tag_origin", player.origin, player.angles);
-    player playerlinkto(player.e_linkto, "tag_origin", 0, 0, 0, 0, 0);
+    player playerlinkTo(player.e_linkto, "tag_origin", 0, 0, 0, 0, 0);
   }
 
   player.e_linkto clientfield::set("" + #"hash_69b312bcaae6308b", 1);
   player clientfield::set("" + #"sacrifice_player_dragged", 1);
   player.e_linkto movez(-80, 1.5);
   wait 0.375;
-  a_players = getplayers();
+  a_players = getPlayers();
   arrayremovevalue(a_players, player);
 
   foreach(e_player in a_players) {
@@ -599,7 +599,7 @@ function_959fcbff(player) {
   player clientfield::set("" + #"sacrifice_player_dragged", 0);
   s_pos = struct::get("wm_ht_pos", "targetname");
   player.e_linkto.origin = s_pos.origin;
-  player setorigin(player.e_linkto.origin);
+  player setOrigin(player.e_linkto.origin);
   player.e_linkto.angles = s_pos.angles;
   player setplayerangles(player.e_linkto.angles);
   player thread function_3b71b7a7();
@@ -611,12 +611,12 @@ function_959fcbff(player) {
 
   if(!isDefined(player.e_linkto)) {
     player.e_linkto = util::spawn_model("tag_origin", player.origin, player.angles);
-    player playerlinkto(player.e_linkto, "tag_origin", 0, 0, 0, 0, 0);
+    player playerlinkTo(player.e_linkto, "tag_origin", 0, 0, 0, 0, 0);
   }
 
   exploder::exploder("exp_lgt_hell_tunnel");
   player thread lui::screen_fade_in(1, (0.8, 0.24, 0.15));
-  player.e_linkto moveto(s_end_pos.origin, 3);
+  player.e_linkto moveTo(s_end_pos.origin, 3);
   player.e_linkto rotateroll(120, 3);
   player thread function_e84d4271();
   wait 2;
@@ -627,7 +627,7 @@ function_959fcbff(player) {
 
   if(!isDefined(player.e_linkto)) {
     player.e_linkto = util::spawn_model("tag_origin", player.origin, player.angles);
-    player playerlinkto(player.e_linkto, "tag_origin", 0, 0, 0, 0, 0);
+    player playerlinkTo(player.e_linkto, "tag_origin", 0, 0, 0, 0, 0);
   }
 
   s_rise = struct::get(player.var_d62b4d4.target);
@@ -637,7 +637,7 @@ function_959fcbff(player) {
   player.e_linkto.origin = s_rise.origin + (0, 0, -32);
   player.e_linkto.angles = s_rise.angles;
   player thread lui::screen_fade_in(1.35, (0.8, 0.24, 0.15));
-  player.e_linkto moveto(s_rise.origin, 1.5);
+  player.e_linkto moveTo(s_rise.origin, 1.5);
   player.e_linkto waittilltimeout(1.5, #"movedone");
   player unlink();
   player.e_linkto delete();
@@ -660,7 +660,7 @@ function_3b71b7a7() {
   self endon(#"disconnect");
   self setvisibletoall();
   wait 0.25;
-  a_players = getplayers();
+  a_players = getPlayers();
   arrayremovevalue(a_players, self);
 
   foreach(e_player in a_players) {
@@ -679,7 +679,7 @@ function_25a79bc1() {
       return;
     }
 
-    a_players = getplayers();
+    a_players = getPlayers();
     arrayremovevalue(a_players, self);
 
     foreach(e_player in a_players) {
@@ -704,7 +704,7 @@ function_eabb32ca() {
 }
 
 function_9e01297e() {
-  var_7e2d2356 = getent("stick_guide", "targetname");
+  var_7e2d2356 = getEnt("stick_guide", "targetname");
 
   while(!isDefined(level.e_guide)) {
     level.e_guide = util::spawn_model("c_t8_zmb_dlc1_catherine_ghost_body", var_7e2d2356.origin, var_7e2d2356.angles);
@@ -712,11 +712,11 @@ function_9e01297e() {
   }
 
   level.e_guide.mdl_head = util::spawn_model("c_t8_zmb_dlc1_catherine_ghost_head", level.e_guide.origin, level.e_guide.angles);
-  level.e_guide.mdl_head linkto(level.e_guide);
+  level.e_guide.mdl_head linkTo(level.e_guide);
   level.e_guide clientfield::set("" + #"ghost_trail", 1);
   level.e_guide playSound(#"hash_4826261b01f96036");
   level.e_guide playLoopSound(#"hash_298631572be3dd79");
-  a_players = getplayers();
+  a_players = getPlayers();
   arrayremovevalue(a_players, level.stick_player);
 
   foreach(e_player in a_players) {
@@ -740,7 +740,7 @@ function_e84d4271() {
   self endon(#"disconnect", #"tunnel_complete");
 
   while(true) {
-    self playrumbleonentity("hell_tube_rumble");
+    self playRumbleOnEntity("hell_tube_rumble");
     wait 0.3;
   }
 }
@@ -807,8 +807,8 @@ stick_guide() {
     var_3387e30b delete();
   }
 
-  level.e_guide moveto(s_loc.origin, 0.05);
-  level.e_guide rotateto(s_loc.angles, 0.05);
+  level.e_guide moveTo(s_loc.origin, 0.05);
+  level.e_guide rotateTo(s_loc.angles, 0.05);
   level.e_guide waittill(#"movedone");
   level.e_guide thread lead_player(nd_start, player);
 }
@@ -816,7 +816,7 @@ stick_guide() {
 function_6f6fef08() {
   level endon(#"cemetery_open");
   level flag::wait_till(#"stone_visible");
-  mdl_stone = getent("health_stone", "targetname");
+  mdl_stone = getEnt("health_stone", "targetname");
   mdl_stone setvisibletoall();
   mdl_stone clientfield::set("" + #"force_stream_model", 1);
   util::wait_network_frame();
@@ -841,7 +841,7 @@ function_31e641f5() {
     self playSound(#"hash_2e899e1ff9bec306");
 
     while(n_time < 3) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(!player useButtonPressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
           b_using = 0;
           n_time = 0;
@@ -876,8 +876,8 @@ function_31e641f5() {
   self clientfield::set("" + #"stone_soul", 1);
   self playLoopSound(#"hash_1e42374c33473899");
   s_dest = struct::get(self.target);
-  self rotateto(s_dest.angles, 3);
-  self moveto(s_dest.origin, 3);
+  self rotateTo(s_dest.angles, 3);
+  self moveTo(s_dest.origin, 3);
   self waittill(#"movedone");
   self clientfield::set("" + #"stone_pickup", 1);
   level thread function_e3eb2cfd();
@@ -892,13 +892,13 @@ function_e3eb2cfd() {
   level endon(#"cemetery_open");
   level flag::wait_till(#"cemetery_done");
   wait 2;
-  mdl_stone = getent("health_stone", "targetname");
+  mdl_stone = getEnt("health_stone", "targetname");
   mdl_stone notify(#"stop_spin");
   mdl_stone stoploopsound();
   mdl_stone playSound(#"hash_3eaae008a56e81e8");
   wait 0.5;
-  mdl_stone rotateto(mdl_stone.v_start_angles, 2);
-  mdl_stone moveto(mdl_stone.v_start_origin, 3);
+  mdl_stone rotateTo(mdl_stone.v_start_angles, 2);
+  mdl_stone moveTo(mdl_stone.v_start_origin, 3);
   mdl_stone waittill(#"movedone");
   mdl_stone clientfield::set("" + #"stone_soul", 0);
   var_47323b73 = mdl_stone zm_unitrigger::create(undefined, 96, &function_c9ebaa3);
@@ -920,7 +920,7 @@ function_c9ebaa3() {
 }
 
 function_78a99a79() {
-  mdl_stone = getent("health_stone", "targetname");
+  mdl_stone = getEnt("health_stone", "targetname");
 
   if(isDefined(mdl_stone)) {
     v_loc = mdl_stone.origin + (0, 0, 32);
@@ -1134,28 +1134,28 @@ lead_player(nd_start, player) {
   self endon(#"death");
   player endon(#"disconnect");
   player thread function_45cfa31(self);
-  self.var_c176969a = spawner::simple_spawn_single(getent("veh_power_on_projectile", "targetname"));
+  self.var_c176969a = spawner::simple_spawn_single(getEnt("veh_power_on_projectile", "targetname"));
   self.var_c176969a.team = #"allies";
   self.var_c176969a.var_6353e3f1 = 1;
   self.var_c176969a setspeed(7);
   self.var_c176969a.origin = nd_start.origin;
   self.var_c176969a.angles = nd_start.angles;
-  self linkto(self.var_c176969a);
+  self linkTo(self.var_c176969a);
   self thread mansion_pap::function_900b7dca(getallvehiclenodes(), 0, player);
   self.var_c176969a vehicle::get_on_and_go_path(nd_start);
   self.var_c176969a waittill(#"reached_end_node");
   self unlink();
   var_dafa2b89 = util::spawn_model("tag_origin", self.var_c176969a.origin, self.var_c176969a.angles);
-  self linkto(var_dafa2b89);
+  self linkTo(var_dafa2b89);
   self.var_c176969a thread scene::stop();
   self thread scene::stop();
   var_dafa2b89 thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", self);
   self thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", self.mdl_head);
-  var_dafa2b89 rotateyaw(180, 1.5);
+  var_dafa2b89 rotateYaw(180, 1.5);
   var_dafa2b89 waittill(#"rotatedone");
-  mdl_stone = getent("health_stone", "targetname");
+  mdl_stone = getEnt("health_stone", "targetname");
   mdl_stone clientfield::set("" + #"force_stream_model", 1);
-  var_dafa2b89 moveto(mdl_stone.origin + (0, 0, 8), 1);
+  var_dafa2b89 moveTo(mdl_stone.origin + (0, 0, 8), 1);
   var_dafa2b89 waittill(#"movedone");
   self ghost();
   self.mdl_head ghost();
@@ -1163,7 +1163,7 @@ lead_player(nd_start, player) {
   wait 1;
   var_dafa2b89 thread scene::stop();
   self thread scene::stop();
-  playsoundatposition(#"hash_72a28324d62874cc", self.origin);
+  playSoundAtPosition(#"hash_72a28324d62874cc", self.origin);
   self clientfield::set("" + #"stick_fire", 0);
   mdl_stone setvisibletoplayer(player);
   mdl_stone playSound(#"hash_7a3af4224e706aa8");
@@ -1252,7 +1252,7 @@ function_48aadc5d() {
     player thread function_aad579ef();
     player playSound(#"hash_40fdafd4806ca427");
     level flag::set(#"stone_visible");
-    playsoundatposition(#"hash_571ef9dff083fec7", self.origin);
+    playSoundAtPosition(#"hash_571ef9dff083fec7", self.origin);
     level thread zm_unitrigger::unregister_unitrigger(self.stub);
   }
 }
@@ -1261,8 +1261,8 @@ function_aad579ef() {
   self endon(#"death");
   self zm_vo::function_a2bd5a0c(#"hash_4790127983f61eff", 0, 1, 9999);
 
-  if(getplayers().size > 1) {
-    foreach(e_player in getplayers()) {
+  if(getPlayers().size > 1) {
+    foreach(e_player in getPlayers()) {
       if(e_player != self && e_player util::is_player_looking_at(self getEye())) {
         var_4653950 = e_player zm_audio::create_and_play_dialog(#"plr_ghost", #"revive", undefined, 1);
 
@@ -1311,7 +1311,7 @@ cleanup_step_3(var_5ea5c94d, ended_early) {
     mdl_relic clientfield::set("" + #"stone_glow", 1);
   }
 
-  mdl_stone = getent("health_stone", "targetname");
+  mdl_stone = getEnt("health_stone", "targetname");
 
   if(isDefined(mdl_stone)) {
     mdl_stone delete();
@@ -1359,7 +1359,7 @@ function_cdacc87c() {
 }
 
 wave_1() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_num = 10;
       n_current = 8;
@@ -1426,7 +1426,7 @@ function_2bffa0a5() {
 }
 
 wave_2() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_num = 12;
       n_active = 5;
@@ -1459,7 +1459,7 @@ wave_2() {
     level flag::set(#"hash_29b12646045186fa");
     function_9c6147b1();
 
-    if(randomint(100) > 65 && var_9f9ebbe8 < getplayers().size * 2) {
+    if(randomint(100) > 65 && var_9f9ebbe8 < getPlayers().size * 2) {
       b_crimson = 1;
       var_9f9ebbe8++;
     } else {
@@ -1475,7 +1475,7 @@ wave_2() {
       ai_nos zm_score::function_acaab828();
       ai_nos callback::function_d8abfc3d(#"on_ai_killed", &function_d1027329);
       level flag::clear(#"hash_29b12646045186fa");
-      ai_nos waittilltimeout(5 - getplayers().size, #"death");
+      ai_nos waittilltimeout(5 - getPlayers().size, #"death");
       level flag::set(#"hash_29b12646045186fa");
     } else {
       i--;
@@ -1498,7 +1498,7 @@ function_d1027329(params) {
 function_93b1a1a4() {
   level endon(#"cemetery_done");
 
-  while(level.var_3c6f81fe > 3 + getplayers().size) {
+  while(level.var_3c6f81fe > 3 + getPlayers().size) {
     wait 1;
   }
 
@@ -1510,7 +1510,7 @@ wave_3() {
   level.var_50b2aa84 = 0;
   x = 0;
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_num = 4;
       break;
@@ -1579,7 +1579,7 @@ wave_4() {
     wait 0.25;
   }
 
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -1737,10 +1737,10 @@ function_97ea199a() {
 function_2c554640() {
   level flag::wait_till(#"all_players_spawned");
   a_s_locs = array::randomize(struct::get_array("portrait_loc"));
-  var_6adbf325 = getent("pic_gypsy", "targetname");
-  var_1b2ca394 = getent("pic_brigadier", "targetname");
-  var_3c9ce3a9 = getent("pic_butler", "targetname");
-  var_36ebb951 = getent("pic_gunslinger", "targetname");
+  var_6adbf325 = getEnt("pic_gypsy", "targetname");
+  var_1b2ca394 = getEnt("pic_brigadier", "targetname");
+  var_3c9ce3a9 = getEnt("pic_butler", "targetname");
+  var_36ebb951 = getEnt("pic_gunslinger", "targetname");
   var_6adbf325.var_3916fb8b = #"p8_zm_headstone_engraving_1950";
   var_1b2ca394.var_3916fb8b = #"p8_zm_headstone_engraving_1918";
   var_3c9ce3a9.var_3916fb8b = #"p8_zm_headstone_engraving_1927";

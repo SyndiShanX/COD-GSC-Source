@@ -169,7 +169,7 @@ _id_58B2(var_0, var_1) {
       thread _id_5937();
       break;
     case "intro_door1_open":
-      var_3 = getent("intro_door1", "targetname");
+      var_3 = getEnt("intro_door1", "targetname");
       common_scripts\utility::play_sound_in_space("hijk_door1open", var_3.origin);
       break;
     case "pres_drops_paper":
@@ -336,7 +336,7 @@ _id_58B2(var_0, var_1) {
       break;
     case "suitcase_prop_sound_impact":
       var_4 = spawn("script_origin", level.player.origin);
-      var_4 linkto(level.player);
+      var_4 linkTo(level.player);
       var_4 playSound("hijk_luggage_fall", "soundone");
       var_4 waittill("sounddone");
       var_4 delete();
@@ -590,7 +590,7 @@ _id_58B3() {
 _id_58B4() {
   wait 0.5;
   level._id_58B5.audio = spawn("script_origin", level._id_58B5.origin);
-  level._id_58B5.audio linkto(level._id_58B5);
+  level._id_58B5.audio linkTo(level._id_58B5);
   level._id_58B5.audio playLoopSound("hijk_jet_engine_intro_lfe");
   level._id_58B5.audio scalevolume(0.2);
   var_0 = spawn("script_origin", (-31000, 15536, 7360));
@@ -598,13 +598,13 @@ _id_58B4() {
   var_0 playLoopSound("hijk_jet_engine_intro");
   var_0 scalevolume(0.2);
   wait 4.5;
-  var_0 moveto(var_1, 30.0);
+  var_0 moveTo(var_1, 30.0);
   wait 3;
   level._id_58B5.audio scalevolume(1, 10);
   var_0 scalevolume(1, 10);
   wait 8.0;
   level._id_58B6.audio = spawn("script_origin", level._id_58B6.origin);
-  level._id_58B6.audio linkto(level._id_58B6);
+  level._id_58B6.audio linkTo(level._id_58B6);
   level._id_58B6.audio playSound("hijk_jet_by_pullup");
   wait 5.0;
   var_0 scalevolume(0.707, 8);
@@ -625,7 +625,7 @@ _id_58B4() {
 _id_58B7() {
   wait 0.5;
   level._id_58B8.audio = spawn("script_origin", level._id_58B8.origin);
-  level._id_58B8.audio linkto(level._id_58B8);
+  level._id_58B8.audio linkTo(level._id_58B8);
   level._id_58B8.audio playSound("hijk_hallway_flyby");
 }
 
@@ -1938,7 +1938,7 @@ _id_5942() {
   }
   if(!isDefined(level._id_55CA)) {
     level._id_55CA = spawn("script_origin", level._id_5943.origin);
-    level._id_55CA linkto(level._id_5943, "tag_origin", (0, 0, 64), (0, 0, 0));
+    level._id_55CA linkTo(level._id_5943, "tag_origin", (0, 0, 64), (0, 0, 0));
   }
 
   thread _id_592F();
@@ -1966,7 +1966,7 @@ _id_5944() {
   }
   if(!isDefined(level._id_55CA)) {
     level._id_55CA = spawn("script_origin", level._id_5943.origin);
-    level._id_55CA linkto(level._id_5943, "tag_origin", (0, 0, 64), (0, 0, 0));
+    level._id_55CA linkTo(level._id_5943, "tag_origin", (0, 0, 64), (0, 0, 0));
   }
 
   if(!isDefined(level._id_55CA._id_5624)) {
@@ -2061,7 +2061,7 @@ _id_562B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
       self._id_5607.velocity = (self.origin - self._id_5607._id_562C) / 2;
 
       if(isDefined(self) && isDefined(self._id_5607.velocity)) {
-        var_8 = vectornormalize(level.player.origin - self.origin);
+        var_8 = vectorNormalize(level.player.origin - self.origin);
         var_9 = vectordot(self._id_5607.velocity, var_8);
         var_10 = var_9;
 

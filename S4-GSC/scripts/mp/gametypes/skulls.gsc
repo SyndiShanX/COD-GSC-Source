@@ -155,7 +155,7 @@ resourceused(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     var_3 thread scripts\mp\rank::_id_CC00("resource_collected");
-    var_3 playrumbleonentity("damage_light");
+    var_3 playRumbleOnEntity("damage_light");
     var_3 playsoundtoplayer("mp_hit_air_3d", var_3);
     var_3.skullcount++;
 

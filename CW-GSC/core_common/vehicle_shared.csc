@@ -223,7 +223,7 @@ function watch_vehicle_damage(localclientnum, rumble) {
 
     if(isDefined(rumble) && self function_979020fe() && (mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET")) {
       occupant = function_5c10bd79(localclientnum);
-      occupant playrumbleonentity(localclientnum, rumble);
+      occupant playRumbleOnEntity(localclientnum, rumble);
     }
   }
 }
@@ -238,7 +238,7 @@ function function_f8e7ae58(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   occupant = function_5c10bd79(bwastimejump);
-  occupant playrumbleonentity(bwastimejump, self.settings.var_2cc03de3);
+  occupant playRumbleOnEntity(bwastimejump, self.settings.var_2cc03de3);
 }
 
 function function_a87e7c22(subtarget) {
@@ -1686,7 +1686,7 @@ function field_do_standarddeathfx(localclientnum, oldval, newval, bnewent, binit
     }
 
     if(isDefined(self.var_d0569e25) && self.var_d0569e25 != "") {
-      self playrumbleonentity(binitialsnap, self.var_d0569e25);
+      self playRumbleOnEntity(binitialsnap, self.var_d0569e25);
     }
   }
 }

@@ -288,7 +288,7 @@ plane_position_updater(miliseconds, soundalias_1, soundalias_2) {
       if(length(dx) > 0.01) {
         velocity = dx / (gettime() - last_time);
         assert(isDefined(velocity));
-        players = getplayers();
+        players = getPlayers();
         assert(isDefined(players));
         other_point = self.origin + velocity * 100000;
         point = closest_point_on_line_to_point(players[0].origin, self.origin, other_point);
@@ -325,7 +325,7 @@ plane_position_updater(miliseconds, soundalias_1, soundalias_2) {
 closest_point_on_line_to_point(point, linestart, lineend) {
   linesegment = lineend - linestart;
   dist = length(linesegment);
-  dir = vectornormalize(lineend - linestart);
+  dir = vectorNormalize(lineend - linestart);
   delta = point - linestart;
   t = vectordot(delta, dir) / dist;
 

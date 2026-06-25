@@ -8,9 +8,9 @@ func_19FA(param_00, param_01, param_02, param_03) {
   var_05 = [];
   var_06 = self getnearestnode();
   var_07 = anglesToForward(self getangles());
-  var_08 = vectornormalize(var_07 * (1, 1, 0));
+  var_08 = vectorNormalize(var_07 * (1, 1, 0));
   foreach(var_0A in var_04) {
-    var_0B = vectornormalize(var_0A.var_0116 - self.var_0116 * (1, 1, 0));
+    var_0B = vectorNormalize(var_0A.var_0116 - self.var_0116 * (1, 1, 0));
     var_0C = vectordot(var_0B, var_08);
     if(var_0C > param_02) {
       if(!param_03 || isDefined(var_06) && function_01F4(var_0A, var_06, 1)) {
@@ -441,9 +441,9 @@ func_19CE(param_00, param_01, param_02) {
   if(lengthsquared(var_04) > 100) {
     var_05 = getnodesinradius(param_00, param_01 * 1.75, param_01 * 0.5, 500);
     var_06 = [];
-    var_07 = vectornormalize(var_04);
+    var_07 = vectorNormalize(var_04);
     for(var_08 = 0; var_08 < var_05.size; var_08++) {
-      var_09 = vectornormalize(var_05[var_08].var_0116 - self.var_19A1.var_0116);
+      var_09 = vectorNormalize(var_05[var_08].var_0116 - self.var_19A1.var_0116);
       if(vectordot(var_09, var_07) > 0.1) {
         var_06[var_06.size] = var_05[var_08];
       }
@@ -453,11 +453,11 @@ func_19CE(param_00, param_01, param_02) {
   }
 
   if(isDefined(param_02) && param_02) {
-    var_0A = vectornormalize(self.var_19A1.var_0116 - self.var_0116);
+    var_0A = vectorNormalize(self.var_19A1.var_0116 - self.var_0116);
     var_0B = var_06;
     var_06 = [];
     foreach(var_0D in var_0B) {
-      var_09 = vectornormalize(var_0D.var_0116 - self.var_19A1.var_0116);
+      var_09 = vectorNormalize(var_0D.var_0116 - self.var_19A1.var_0116);
       if(vectordot(var_0A, var_09) > 0.2) {
         var_06[var_06.size] = var_0D;
       }
@@ -577,7 +577,7 @@ func_1A98(param_00, param_01, param_02) {
   if(!isDefined(var_03)) {
     var_04 = common_scripts\utility::func_7A33(param_01);
     var_05 = var_04.var_0116 - param_00;
-    var_03 = param_00 + vectornormalize(var_05) * length(var_05) * randomfloat(1);
+    var_03 = param_00 + vectorNormalize(var_05) * length(var_05) * randomfloat(1);
   }
 
   return var_03;
@@ -873,7 +873,7 @@ func_1B2A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
       }
 
       var_0F = self getEye();
-      var_10 = vectordot((0, 0, 1), vectornormalize(var_0D.var_0116 + var_0B - var_0F));
+      var_10 = vectordot((0, 0, 1), vectorNormalize(var_0D.var_0116 + var_0B - var_0F));
       if(abs(var_10) > 0.92) {
         var_0E = 1;
       }
@@ -898,13 +898,13 @@ func_1B2A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_14 = [];
   for(var_15 = 0; var_15 < self.var_A8C9.size; var_15++) {
     var_14[var_15] = [];
-    var_16 = vectornormalize(self.var_A8C9[var_15].var_0116 - self.var_0116);
+    var_16 = vectorNormalize(self.var_A8C9[var_15].var_0116 - self.var_0116);
     for(var_17 = 0; var_17 < self.var_A8C9.size; var_17++) {
       if(var_15 == var_17) {
         continue;
       }
 
-      var_18 = vectornormalize(self.var_A8C9[var_17].var_0116 - self.var_0116);
+      var_18 = vectorNormalize(self.var_A8C9[var_17].var_0116 - self.var_0116);
       var_19 = vectordot(var_16, var_18);
       if(var_19 > 0.94) {
         var_14[var_15] = common_scripts\utility::func_0F6F(var_14[var_15], var_17);
@@ -977,10 +977,10 @@ func_1B2A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
         var_26 = self lastknownpos(self.var_0088);
         var_27 = self lastknowntime(self.var_0088);
         if(var_27 && var_23 - var_27 < 5000) {
-          var_28 = vectornormalize(var_26 - self.var_0116);
+          var_28 = vectorNormalize(var_26 - self.var_0116);
           var_29 = 0;
           for(var_15 = 0; var_15 < self.var_A8C9.size; var_15++) {
-            var_2A = vectornormalize(self.var_A8C9[var_15].var_0116 - self.var_0116);
+            var_2A = vectorNormalize(self.var_A8C9[var_15].var_0116 - self.var_0116);
             var_19 = vectordot(var_28, var_2A);
             if(var_19 > var_29) {
               var_29 = var_19;

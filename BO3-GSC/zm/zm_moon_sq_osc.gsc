@@ -342,8 +342,8 @@ function moon_open_access() {
   for(i = 0; i < level._osc_rbs.size; i++) {
     trig = spawn("trigger_radius_use", level._osc_rbs[i].origin, 0, 48, 32);
     trig.radius = 48;
-    trig setcursorhint("HINT_NOICON");
-    trig triggerignoreteam();
+    trig setCursorHint("HINT_NOICON");
+    trig triggerIgnoreTeam();
     trig._hit_already = 0;
     trig thread moon_hit_reaction();
     array::add(button_triggers, trig, 0);
@@ -443,7 +443,7 @@ function play_moon_jolie_access_vox(who) {
 }
 
 function play_moon_pass_vox(who) {
-  playsoundatposition("vox_mcomp_quest_step5_26", self.origin);
+  playSoundAtPosition("vox_mcomp_quest_step5_26", self.origin);
   for(i = 0; i < level._osc_rbs.size; i++) {
     level._osc_rbs[i].cover playsoundwithnotify("vox_mcomp_quest_step5_26", "rbs_sounddone");
   }

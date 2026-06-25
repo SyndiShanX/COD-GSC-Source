@@ -108,9 +108,9 @@ _id_658A() {
   common_scripts\utility::exploder(6000);
   thread maps\payback_streets_const::_id_658B();
   maps\payback_util::_id_64D4();
-  var_0 = getent("sslight_01", "targetname");
+  var_0 = getEnt("sslight_01", "targetname");
   var_0 setlightintensity(7);
-  var_1 = getent("street_light_gate", "targetname");
+  var_1 = getEnt("street_light_gate", "targetname");
   var_1 setlightintensity(3);
   level._id_1F19 = "s2_sandstorm";
   var_2 = getEntArray("strconst_fallkill", "targetname");
@@ -158,7 +158,7 @@ sandstorm_turnoff_ssao() {
 }
 
 _id_658D() {
-  getent("compoundexit_vista", "targetname") delete();
+  getEnt("compoundexit_vista", "targetname") delete();
   thread _id_6509();
   thread _id_65B9();
   level._id_658E = 0;
@@ -234,8 +234,8 @@ _id_658F() {
 
     if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "the_flare_guy") {
       var_2 = var_4;
-      var_5 = getent("uaz_fight_volume", "targetname");
-      var_6 = common_scripts\utility::getstruct("sstorm_flare_anim", "targetname");
+      var_5 = getEnt("uaz_fight_volume", "targetname");
+      var_6 = common_scripts\utility::getStruct("sstorm_flare_anim", "targetname");
       var_4 setgoalpos(var_6.origin);
       var_4 setgoalvolume(var_5);
       continue;
@@ -253,12 +253,12 @@ _id_6592(var_0) {
   var_0 endon("death");
   var_0 maps\_utility::_id_26F7("payback_pmc_sandstorm_stumble_2");
   var_0 thread maps\_anim::_id_11C1(var_0, "deploy_flare");
-  var_1 = getent("sand_flare_01", "targetname");
+  var_1 = getEnt("sand_flare_01", "targetname");
   common_scripts\utility::waitframe();
   level._id_6593 = spawn("script_model", var_0.origin);
   level._id_6593.owner = var_0;
   level._id_6593 setModel("mil_emergency_flare");
-  level._id_6593 linkto(var_0, "TAG_INHAND", (0, 0, 0), (0, 0, 0));
+  level._id_6593 linkTo(var_0, "TAG_INHAND", (0, 0, 0), (0, 0, 0));
   playFXOnTag(common_scripts\utility::getfx("flare_ambient"), level._id_6593, "TAG_ORIGIN");
   var_1 thread maps\_utility::_id_2765(level._id_6593);
   var_0 thread _id_6594();
@@ -274,7 +274,7 @@ _id_6594() {
   self waittill("ai_event", var_0);
   var_1 = maps\_utility::_id_1277(level._id_6593.origin);
   level._id_6593 unlink();
-  level._id_6593 moveto(var_1, 0.5, 0.05, 0);
+  level._id_6593 moveTo(var_1, 0.5, 0.05, 0);
 }
 
 _id_6595() {
@@ -325,8 +325,8 @@ _id_6599() {
   if(var_1 < 600) {
     return 0;
   }
-  var_0 = vectornormalize(var_0);
-  var_2 = vectornormalize(self.goalpos - self.origin);
+  var_0 = vectorNormalize(var_0);
+  var_2 = vectorNormalize(self.goalpos - self.origin);
   var_3 = vectordot(var_2, var_0);
 
   if(var_3 < -0.5) {
@@ -363,7 +363,7 @@ _id_659B() {
   thread _id_65BA();
   thread _id_65C0();
   thread _id_65BF();
-  var_0 = getent("sandstorm_runners_clear_volume", "targetname");
+  var_0 = getEnt("sandstorm_runners_clear_volume", "targetname");
   level._id_659C = maps\_utility::_id_272C("sandstorm_runner");
   thread _id_65A0(level._id_659C);
   thread _id_659D();
@@ -392,7 +392,7 @@ _id_659B() {
 }
 
 _id_659D() {
-  var_0 = common_scripts\utility::getstruct("sandstorm_runner_vo_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("sandstorm_runner_vo_spot", "targetname");
   common_scripts\utility::play_sound_in_space("payback_mrc1_foundchopper", var_0.origin);
   maps\_utility::_id_11F4("payback_pri_getdown_r");
   wait 1;
@@ -404,7 +404,7 @@ _id_659D() {
 }
 
 _id_659E() {
-  var_0 = common_scripts\utility::getstruct("sandstorm_runner_vo_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("sandstorm_runner_vo_spot", "targetname");
   common_scripts\utility::play_sound_in_space("payback_mrc1_foundchopper", var_0.origin);
   wait 0.5;
 
@@ -482,7 +482,7 @@ _id_65A2(var_0) {
     if(isDefined(self) && isalive(self)) {
       self setgoalpos(self.origin);
     }
-    var_1 = getent("fight_zone", "targetname");
+    var_1 = getEnt("fight_zone", "targetname");
     var_2 = getnode(var_1.target, "targetname");
 
     if(isDefined(self) && isalive(self) && self istouching(var_1)) {
@@ -562,7 +562,7 @@ _id_65A7() {
 
 _id_65A8(var_0) {
   level endon("sandstorm_section_end");
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1._id_1032 = "marketstall";
   var_1 maps\_anim::_id_1244();
   var_1 thread maps\_anim::_id_124E(var_1, "payback_sstorm_market_stall_loop", "end_market_stall_loop");
@@ -588,8 +588,8 @@ _id_65A9() {
 
 _id_65AA(var_0, var_1) {
   level endon("sandstorm_section_end");
-  var_2 = common_scripts\utility::getstruct(var_1, "targetname");
-  var_3 = getent(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   var_3._id_1032 = "watertower";
   var_3 maps\_anim::_id_1244();
   var_2 thread maps\_anim::_id_124E(var_3, "payback_sstorm_water_tower_idle", "end_water_tower");
@@ -602,8 +602,8 @@ _id_65AA(var_0, var_1) {
 _id_65AB() {
   level endon("sandstorm_section_end");
   common_scripts\utility::flag_wait("sandstorm_scaffold_fall");
-  var_0 = common_scripts\utility::getstruct("sandstorm_construction_anim_origin", "targetname");
-  var_1 = getent("sandstorm_scaffolding_collapse", "targetname");
+  var_0 = common_scripts\utility::getStruct("sandstorm_construction_anim_origin", "targetname");
+  var_1 = getEnt("sandstorm_scaffolding_collapse", "targetname");
   var_1._id_1032 = "payback_scaffolding_collapse";
   var_1 useanimtree(level._id_1245[var_1._id_1032]);
   maps\_audio::aud_send_msg("payback_scaffolding_collapse", var_1);
@@ -632,9 +632,9 @@ _id_65AD() {
       var_1._id_1032 = "moroccan_lamp";
       var_1 maps\_anim::_id_1244();
       var_1 thread maps\_anim::_id_124E(var_1, "wind_heavy", "end_lamp_swing");
-      var_2 = getent(var_1.target, "targetname");
+      var_2 = getEnt(var_1.target, "targetname");
       var_3 = common_scripts\utility::spawn_tag_origin();
-      var_3 linkto(var_1, "tag_light", (0, 0, 0), (0, 0, 0));
+      var_3 linkTo(var_1, "tag_light", (0, 0, 0), (0, 0, 0));
       var_2 thread maps\_utility::_id_2765(var_3);
       playFXOnTag(level._effect["lights_point_white_payback"], var_1, "tag_light");
       wait(randomfloatrange(0.1, 0.25));
@@ -730,15 +730,15 @@ _id_65B2() {
   self addaieventlistener("projectile_impact");
   self waittill("ai_event", var_0);
   level._id_65AF = 1;
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::_id_140C();
   self setgoalpos(self.origin);
   self.ignoreall = 0;
   self.ignoreme = 0;
   self._id_20AF = 0.25;
   wait 0.1;
-  var_1 = getent("uaz_fight_volume", "targetname");
-  var_2 = common_scripts\utility::getstruct("sstorm_flare_anim", "targetname");
+  var_1 = getEnt("uaz_fight_volume", "targetname");
+  var_2 = common_scripts\utility::getStruct("sstorm_flare_anim", "targetname");
   self setgoalpos(var_2.origin);
   self setgoalvolume(var_1);
   level notify("uaz1_guys_fighting");
@@ -749,7 +749,7 @@ _id_65B3(var_0) {
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2) && isalive(var_2)) {
-      var_2 stopanimscripted();
+      var_2 stopanimScripted();
       var_2 orientmode("face default");
       var_2 maps\_utility::_id_2686();
       var_2.ignoreall = 0;
@@ -776,7 +776,7 @@ _id_65B5() {
   common_scripts\utility::flag_wait("sandstorm_uaz1_vo_ready");
   maps\_utility::_id_25F3("see_jeep");
   _id_6598();
-  var_0 = getent("sandstorm_intro_after_vehicle", "targetname");
+  var_0 = getEnt("sandstorm_intro_after_vehicle", "targetname");
   thread maps\_utility::_id_11F4("payback_pri_vehiclecoming_r");
   _id_6584(var_0);
   thread _id_65B8();
@@ -839,20 +839,20 @@ _id_65BA() {
   common_scripts\utility::flag_wait("sandstorm_runner_see_you");
   thread _id_65BC();
   thread _id_65BB();
-  var_0 = getent("ss_window_guy_c", "targetname");
+  var_0 = getEnt("ss_window_guy_c", "targetname");
   var_1 = var_0 maps\_utility::_id_166F(1);
   var_1 thread maps\payback_sandstorm_code::_id_648A();
   var_1._id_1032 = "generic";
   var_1 maps\_utility::_id_26F7("payback_pmc_sandstorm_stumble_3");
   var_2 = getnode("ss_middle_search_node", "targetname");
-  var_0 = getent("ss_window_guy_l", "targetname");
+  var_0 = getEnt("ss_window_guy_l", "targetname");
   var_3 = var_0 maps\_utility::_id_166F(1);
   var_3 thread maps\payback_sandstorm_code::_id_5387("alley_fight");
-  var_4 = getent("ss_left_search_guy", "targetname");
-  var_0 = getent("ss_window_guy_r", "targetname");
+  var_4 = getEnt("ss_left_search_guy", "targetname");
+  var_0 = getEnt("ss_window_guy_r", "targetname");
   var_5 = var_0 maps\_utility::_id_166F(1);
   var_5 thread maps\payback_sandstorm_code::_id_5387("alley_fight");
-  var_6 = getent("ss_right_search_guy", "targetname");
+  var_6 = getEnt("ss_right_search_guy", "targetname");
   var_7 = [var_1, var_3, var_5];
   thread _id_65C5(var_7, "alley_fight");
   var_1 setgoalnode(var_2);
@@ -928,7 +928,7 @@ _id_65C0() {
   common_scripts\utility::array_thread(var_4, ::_id_65C2, var_3);
   thread maps\payback_util::_id_596C(var_2, var_2.size, "end_runners_dead");
   thread _id_65C1("end_runners_fight", "end_runners_dead");
-  var_5 = common_scripts\utility::getstruct("sandstorm_waver_vo_spot", "targetname");
+  var_5 = common_scripts\utility::getStruct("sandstorm_waver_vo_spot", "targetname");
   thread common_scripts\utility::play_sound_in_space("payback_afm_hurry", var_5.origin);
   wait 1.5;
   level._id_4877 maps\_utility::_id_168C("payback_mct_headingfornik");
@@ -974,7 +974,7 @@ _id_65C2(var_0) {
 _id_65C3(var_0) {
   self endon("death");
   self endon("end_runners_fight");
-  var_1 = common_scripts\utility::getstruct(self.script_noteworthy, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.script_noteworthy, "targetname");
   var_1 maps\_anim::_id_122F(self, self.animation);
   var_1 maps\_anim::_id_11C1(self, self.animation);
   _id_65C4(var_0, "end_runners_fight");
@@ -1039,7 +1039,7 @@ _id_65C7(var_0) {
     self.ignoreme = 0;
     self.ignoreall = 0;
     self._id_20AF = 0.2;
-    self stopanimscripted();
+    self stopanimScripted();
     self setgoalpos(self.origin);
 
     if(isDefined(var_0)) {

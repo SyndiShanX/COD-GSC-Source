@@ -53,9 +53,9 @@ function function_df48a6b6() {
   level flag::wait_till("<dev string:x3c>");
   rootclear = "<dev string:x53>";
   adddebugcommand(rootclear);
-  players = getplayers();
+  players = getPlayers();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     rootclear = "<dev string:x73>" + player.playername + "<dev string:x8d>";
     adddebugcommand(rootclear);
   }
@@ -64,7 +64,7 @@ function function_df48a6b6() {
   util::waittill_can_add_debug_command();
   level.player_devgui_base = "<dev string:x94>";
   devgui_add_player_commands(level.player_devgui_base, "<dev string:xab>", 0);
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     ip1 = i + 1;
@@ -77,7 +77,7 @@ function devgui_player_connect() {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i] != self) {
@@ -163,7 +163,7 @@ function devgui_handle_player_command(cmd, playercallback, pcb_param) {
   pid = getdvarint(#"hash_3fbd408cc23e2ec5", 0);
 
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
 
     if(isDefined(player)) {
       if(isDefined(pcb_param)) {
@@ -173,7 +173,7 @@ function devgui_handle_player_command(cmd, playercallback, pcb_param) {
       }
     }
   } else {
-    array::thread_all(getplayers(), playercallback, pcb_param);
+    array::thread_all(getPlayers(), playercallback, pcb_param);
   }
 
   setDvar(#"hash_3fbd408cc23e2ec5", "<dev string:x487>");
@@ -515,7 +515,7 @@ function devgui_player_weapons() {
   level thread devgui_add_player_weapons(var_92724e9c, "<dev string:xab>", 0, var_8a678090, "<dev string:x5eb>");
   level thread devgui_add_player_weapons(var_92724e9c, "<dev string:xab>", 0, var_b972bcd9, "<dev string:x5f3>");
   function_131c6ccd(var_92724e9c, "<dev string:xab>", 0, var_8a678090, "<dev string:x5fb>");
-  players = getplayers();
+  players = getPlayers();
   size = players.size;
 
   if(size > 2) {
@@ -910,14 +910,14 @@ function private function_57edec18() {
         continue;
       }
 
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(!isDefined(player)) {
         waitframe(1);
         continue;
       }
 
-      drone_camera = spawnvehicle("<dev string:x8fb>", player.origin + (0, 0, 150), player.angles, "<dev string:x912>");
+      drone_camera = spawnVehicle("<dev string:x8fb>", player.origin + (0, 0, 150), player.angles, "<dev string:x912>");
       drone_camera.ignoreme = 1;
       drone_camera usevehicle(player, 0);
       level.drone_camera = drone_camera;

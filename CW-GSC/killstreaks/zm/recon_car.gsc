@@ -161,7 +161,7 @@ function function_48170f5e(vehicle) {
   vehicle waittill(#"death", #"shutdown");
 
   if(isPlayer(self)) {
-    self sethintstring("");
+    self setHintString("");
     self val::reset(#"recon_car", "disable_weapon_cycling");
   }
 
@@ -211,7 +211,7 @@ function function_86e8d9af(n_radius = 200) {
   foreach(ai_zombie in a_zombies) {
     if(isalive(ai_zombie)) {
       if(ai_zombie.zm_ai_category === #"normal") {
-        v_dir = vectornormalize(ai_zombie.origin - self.origin);
+        v_dir = vectorNormalize(ai_zombie.origin - self.origin);
         v_launch = v_dir * randomintrange(80, 100) + (0, 0, 150);
         ai_zombie zm_utility::function_ffc279(v_launch, self.owner, ai_zombie.health, self.weapon);
         continue;
@@ -290,7 +290,7 @@ function function_2087b17f() {
     playFX(explosionfx, fxorigin, (0, 0, 1));
   }
 
-  playsoundatposition(#"hash_7723f91638b2361f", self.origin + (0, 0, 25));
+  playSoundAtPosition(#"hash_7723f91638b2361f", self.origin + (0, 0, 25));
 }
 
 function function_76817ccc() {

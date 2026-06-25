@@ -889,7 +889,7 @@ get_alive_players(disconnected_player) {
   a_alive_players = [];
 
   foreach(team in level.teams) {
-    var_22d28a75 = getplayers(team);
+    var_22d28a75 = getPlayers(team);
 
     foreach(player in var_22d28a75) {
       if(player === disconnected_player) {
@@ -974,7 +974,7 @@ function_5648f82(team) {
   teamsize = getgametypesetting("maxTeamPlayers");
 
   if(isDefined(team)) {
-    foreach(player in getplayers(team)) {
+    foreach(player in getPlayers(team)) {
       if(level.gametype != #"warzone_bigteam_quad" && level.gametype != #"warzone_bigteam_dbno_quad") {
         player increment_wz_contract(#"contract_wz_win_match");
       }

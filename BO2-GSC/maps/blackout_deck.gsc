@@ -26,7 +26,7 @@ skipto_mason_deck() {
   level.harper = init_hero("harper", ::set_force_color, "r");
   level.ai_redshirt1 = init_hero("redshirt1", ::set_force_color, "r");
   level.ai_redshirt2 = init_hero("redshirt2", ::set_force_color, "r");
-  m_mason_elevator = getent("mason_elevator", "targetname");
+  m_mason_elevator = getEnt("mason_elevator", "targetname");
   m_mason_elevator setmovingplatformenabled(1);
   m_mason_elevator movez(576, 0.05);
   level.num_seals_saved = 3;
@@ -236,8 +236,8 @@ start_aggressive_ai(str_script_noteworthy) {
 
 deck_danger_zone() {
   self endon("death");
-  e_danger_zone = getent("deck_danger_zone", "targetname");
-  e_kill_zone = getent("deck_kill_zone", "targetname");
+  e_danger_zone = getEnt("deck_danger_zone", "targetname");
+  e_kill_zone = getEnt("deck_kill_zone", "targetname");
 
   while(isalive(self)) {
     if(self istouching(e_danger_zone)) {} else if(self istouching(e_kill_zone)) {
@@ -383,7 +383,7 @@ deck_event_menendez_takeoff_vo() {
 
 deck_event_menendez_takeoff_sound() {
   sound_ent = spawn("script_origin", self.origin);
-  sound_ent linkto(self, "tag_canopy");
+  sound_ent linkTo(self, "tag_canopy");
   sound_ent playLoopSound("evt_menendez_takeoff");
   wait 27;
   sound_ent delete();
@@ -399,7 +399,7 @@ deck_event_pip_drones() {
   play_fx("fx_la_drones_above_city", s_planes.origin, s_planes.angles);
   autosave_by_name("drone_attack");
   wait 5;
-  playsoundatposition("evt_deck_fake_flyby", (0, 0, 0));
+  playSoundAtPosition("evt_deck_fake_flyby", (0, 0, 0));
   flag_set("drones_at_deck");
 }
 
@@ -412,7 +412,7 @@ dialog_menendez_escaping() {
 }
 
 deck_event_crashed_drone_cover() {
-  m_cover = getent("deck_drone_debris_cover", "targetname");
+  m_cover = getEnt("deck_drone_debris_cover", "targetname");
   m_cover trigger_off();
   drone_cover_show();
   flag_wait("create_falling_debris_cover");
@@ -442,23 +442,23 @@ deck_event_f38_crash() {
   level notify("fxanim_f38_launch_fail_start");
   level.player thread deck_event_f38_crash_rumble();
   wait 1.5;
-  explosion_launch(getstruct("jet_crash_kill_1", "targetname").origin, 400);
+  explosion_launch(getStruct("jet_crash_kill_1", "targetname").origin, 400);
   wait 0.5;
-  explosion_launch(getstruct("jet_crash_kill_2", "targetname").origin, 400);
+  explosion_launch(getStruct("jet_crash_kill_2", "targetname").origin, 400);
   wait 0.5;
-  explosion_launch(getstruct("jet_crash_kill_3", "targetname").origin, 400);
+  explosion_launch(getStruct("jet_crash_kill_3", "targetname").origin, 400);
 }
 
 deck_event_f38_crash_rumble() {
   wait 1.5;
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.8, 0.5, self.origin, 256, self);
   wait 0.2;
   self playrumblelooponentity("tank_rumble");
   earthquake(0.4, 2, self.origin, 256, self);
   wait 1.2;
   self stoprumble("tank_rumble");
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   earthquake(0.6, 0.3, self.origin, 256, self);
 }
 
@@ -482,16 +482,16 @@ drone_missile_earthquake() {
 
 run_mason_deck_final() {
   maps\blackout_anim::vtol_escape();
-  m_vtol_elevator = getent("vtol_elevator", "targetname");
+  m_vtol_elevator = getEnt("vtol_elevator", "targetname");
   m_vtol_elevator setmovingplatformenabled(1);
   sp_crosby = get_ent("crosby", "targetname");
   sp_crosby add_spawn_function(::crosby_setup);
   veh_player_vtol = spawn_vehicle_from_targetname("player_vtol");
   veh_player_vtol veh_magic_bullet_shield();
   veh_player_vtol hidepart("tag_autopilot_off");
-  veh_player_vtol linkto(m_vtol_elevator);
+  veh_player_vtol linkTo(m_vtol_elevator);
   veh_player_vtol notsolid();
-  t_player_board = getent("player_board_vtol", "targetname");
+  t_player_board = getEnt("player_board_vtol", "targetname");
   veh_player_vtol thread board_vtol_audio();
   level thread run_scene_and_delete("exit_vtol_crosby_wait");
   m_vtol_elevator movez(576, 15, 3, 3);
@@ -588,7 +588,7 @@ get_outro_ai_target() {
   e_target = spawn("script_origin", v_fire);
   e_target.health = 99999;
   e_target setCanDamage(1);
-  e_target linkto(vh_vtol);
+  e_target linkTo(vh_vtol);
   return e_target;
 }
 
@@ -607,7 +607,7 @@ func_outro_enemy_attacker(s_goalpos, e_target) {
   self endon("death");
 
   if(self.targetname != "exit_enemy_ai") {
-    self set_goalradius(512);
+    self set_goalRadius(512);
     self set_goal_pos(s_goalpos.origin);
     self thread magic_bullet_shield();
     self thread shoot_at_target_untill_dead(e_target);
@@ -653,7 +653,7 @@ run_mason_deck_final_fadeout(player_body) {
 }
 
 run_mason_deck_final_manual(player_body) {
-  veh_player_vtol = getent("player_vtol", "targetname");
+  veh_player_vtol = getEnt("player_vtol", "targetname");
   veh_player_vtol hidepart("tag_autopilot_on");
   veh_player_vtol showpart("tag_autopilot_off");
 }
@@ -661,8 +661,8 @@ run_mason_deck_final_manual(player_body) {
 board_vtol_audio() {
   sound_ent_1 = spawn("script_origin", self.origin);
   sound_ent_2 = spawn("script_origin", self.origin);
-  sound_ent_1 linkto(self, "tag_origin", (-75, 300, 0));
-  sound_ent_2 linkto(self, "tag_origin", (75, -300, 0));
+  sound_ent_1 linkTo(self, "tag_origin", (-75, 300, 0));
+  sound_ent_2 linkTo(self, "tag_origin", (75, -300, 0));
   sound_ent_1 playLoopSound("veh_side_engine");
   sound_ent_2 playLoopSound("veh_side_engine");
 }
@@ -705,12 +705,12 @@ spawn_drone_to_fire(index) {
 
   if(drone.vehicletype == "drone_pegasus") {
     tag_origin = drone gettagorigin("TAG_MISSILE_LEFT");
-    end_missile = getstruct("drone_fire_missiles_end_" + index, "targetname");
+    end_missile = getStruct("drone_fire_missiles_end_" + index, "targetname");
     magicbullet("avenger_missile_turret_blackout", tag_origin, end_missile.origin);
 
     if(index == 5) {
       tag_origin = drone gettagorigin("TAG_MISSILE_Right");
-      end_missile = getstruct("drone_fire_missiles_end_" + index + "_2", "targetname");
+      end_missile = getStruct("drone_fire_missiles_end_" + index + "_2", "targetname");
       magicbullet("avenger_missile_turret_blackout", tag_origin, end_missile.origin);
     }
   } else
@@ -1082,16 +1082,16 @@ sky_cowbell_get_ratio_total() {
 }
 
 brute_force_perk() {
-  t_brute_force = getent("brute_force_debris_trigger", "targetname");
-  t_brute_force setcursorhint("HINT_NOICON");
-  t_brute_force sethintstring(&"SCRIPT_HINT_BRUTE_FORCE");
+  t_brute_force = getEnt("brute_force_debris_trigger", "targetname");
+  t_brute_force setCursorHint("HINT_NOICON");
+  t_brute_force setHintString(&"SCRIPT_HINT_BRUTE_FORCE");
   t_brute_force trigger_off();
-  t_console = getent("brute_force_computer", "targetname");
-  t_console setcursorhint("HINT_NOICON");
-  t_console sethintstring(&"BLACKOUT_PHALANX_TERMINAL");
+  t_console = getEnt("brute_force_computer", "targetname");
+  t_console setCursorHint("HINT_NOICON");
+  t_console setHintString(&"BLACKOUT_PHALANX_TERMINAL");
   t_console trigger_off();
-  m_debris = getent("brute_force_debris", "targetname");
-  m_debris_clip = getent("brute_force_debris_clip", "targetname");
+  m_debris = getEnt("brute_force_debris", "targetname");
+  m_debris_clip = getEnt("brute_force_debris_clip", "targetname");
   level.player waittill_player_has_brute_force_perk();
   t_brute_force trigger_on();
   set_objective(level.obj_interact, t_brute_force, "interact");
@@ -1108,9 +1108,9 @@ brute_force_perk() {
 
 clip_off_brute_force_debris(delay) {
   wait(delay);
-  e_clip = getent("brute_force_moved_player_clip", "targetname");
+  e_clip = getEnt("brute_force_moved_player_clip", "targetname");
   v_new_pos = (e_clip.origin[0], e_clip.origin[1], e_clip.origin[2] + 50);
-  e_clip moveto(v_new_pos, 0.1);
+  e_clip moveTo(v_new_pos, 0.1);
 }
 
 brute_force_kill_jetpacks() {
@@ -1125,15 +1125,15 @@ brute_force_kill_jetpacks() {
 
 brute_force_rumble() {
   wait 1;
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   wait 1;
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 0.5, self.origin, 1000, self);
   wait 0.5;
-  self playrumbleonentity("tank_rumble");
+  self playRumbleOnEntity("tank_rumble");
   earthquake(0.1, 1, self.origin, 1000, self);
   wait 1.5;
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 0.5, self.origin, 1000, self);
 }
 
@@ -1229,7 +1229,7 @@ find_missile_fire_at_target_the_player_is_looking_at() {
 
 run_dev_drones() {
   level.player set_ignoreme(1);
-  o_link_spot = getent("menendez_plane_pip_org", "targetname");
+  o_link_spot = getEnt("menendez_plane_pip_org", "targetname");
   level.player playerlinktodelta(o_link_spot, undefined, 1, 90, 90, 90, 90);
   level thread dev_drones_ambience();
 
@@ -1336,7 +1336,7 @@ _claw_fire_direction_grenades(v_position) {
     b_can_fire_safely = self _can_hit_target_safely(v_position, v_start_pos);
 
     if(b_can_fire_safely) {
-      v_grenade_velocity = vectornormalize(v_position - v_start_pos) * 2000;
+      v_grenade_velocity = vectorNormalize(v_position - v_start_pos) * 2000;
       self magicgrenadetype("claw_grenade_impact_explode_sp", v_start_pos, v_grenade_velocity);
     }
 
@@ -1433,8 +1433,8 @@ _can_hit_target_safely(v_position, v_start_pos) {
     }
   }
 
-  v_to_player = vectornormalize(level.player.origin - v_start_pos);
-  v_to_target = vectornormalize(v_position - v_start_pos);
+  v_to_player = vectorNormalize(level.player.origin - v_start_pos);
+  v_to_target = vectorNormalize(v_position - v_start_pos);
   n_dot = vectordot(v_to_player, v_to_target);
   b_player_in_grenade_path = n_dot > 0.9;
   b_should_fire_grenades = b_can_hit_target && !b_will_hit_player && !b_will_hit_self && !b_will_hit_friendly && !b_player_in_grenade_path;
@@ -1454,7 +1454,7 @@ claw_pathing() {
 
   while(isDefined(nd_node.target)) {
     while(true) {
-      v_player_dir = vectornormalize(level.player.origin - self.origin);
+      v_player_dir = vectorNormalize(level.player.origin - self.origin);
       v_forward = anglesToForward(self.angles);
       dp = vectordot(v_player_dir, v_forward);
 
@@ -1512,5 +1512,5 @@ _fire_outro_magic_bullet_at_bridge() {
   e_missile = magicbullet("avenger_missile_turret_blackout", s_start.origin, s_end.origin);
   e_missile waittill("death");
   earthquake(0.3, 0.5, s_end.origin, 1024);
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
 }

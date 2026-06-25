@@ -318,7 +318,7 @@ _id_D89E() {
   var_0 = _id_6C21();
   var_1 = scripts\engine\utility::spawn_tag_origin(var_0[0].origin);
   self _meth_80DB();
-  self linkto(var_1);
+  self linkTo(var_1);
   return var_1;
 }
 
@@ -358,7 +358,7 @@ _id_CA6A() {
       var_1 = var_2;
 
     if(isDefined(var_1._id_039B) && var_1._id_039B != "patrol_route" && var_1._id_039B != "patrol_route_start" && !isDefined(var_3) && getdvarint("#x36c624d438ba8277e", 1)) {
-      var_4 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
       if(isDefined(var_4._id_039B) && var_4._id_039B == var_1._id_039B) {
         var_5 = scripts\engine\utility::getStructArray(var_1._id_039B, "script_noteworthy");
@@ -373,10 +373,10 @@ _id_CA6A() {
         }
       }
     } else if(getDvar("#x33bf51b15e16e3935", "") != "" && isDefined(var_1._id_0481) && var_1._id_0481 == "patrol_route_start") {
-      var_2 = scripts\engine\utility::getstruct("pf0_" + getDvar("#x33bf51b15e16e3935", ""), "targetname");
+      var_2 = scripts\engine\utility::getStruct("pf0_" + getDvar("#x33bf51b15e16e3935", ""), "targetname");
       var_1 = var_2;
     } else {
-      var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
       if(isDefined(var_3)) {
         var_3 = undefined;
@@ -419,7 +419,7 @@ _id_CA6A() {
 
     if(var_6 > 0 && level._id_AEE8._id_110EE > 0) {
       var_12 = var_6 / level._id_AEE8._id_110EE;
-      level._id_AF45 moveto(var_2.origin, var_12, 0, 0);
+      level._id_AF45 moveTo(var_2.origin, var_12, 0, 0);
       _id_FC46();
       wait(var_12);
     }
@@ -497,14 +497,14 @@ _id_AF4B(var_0, var_1) {
   level endon("game_ended");
 
   if(var_1 < 0) {
-    self moveto(self.origin, 1, 0, 0);
+    self moveTo(self.origin, 1, 0, 0);
     return;
   }
 
   var_2 = distance(self.origin, var_0);
 
   if(var_2 > 1) {
-    self moveto(var_0, var_1, 0, 0);
+    self moveTo(var_0, var_1, 0, 0);
     wait(var_1);
   }
 
@@ -1039,7 +1039,7 @@ runtdmspawns() {}
 _id_D858() {
   foreach(var_1 in level._id_110CF._id_3572) {
     var_1 _meth_80DB();
-    var_1 linkto(level._id_AF45);
+    var_1 linkTo(level._id_AF45);
   }
 }
 

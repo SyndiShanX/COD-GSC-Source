@@ -118,10 +118,10 @@ func_11AFB(var_0) {
   if(isDefined(self.var_4792)) {
     var_1 = self.var_4792 getshootatpos();
     if(isDefined(self.var_4796)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643) {
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643) {
       var_1 = undefined;
     }
   }
@@ -129,10 +129,10 @@ func_11AFB(var_0) {
   if(!isDefined(var_1) && isDefined(self.var_478F)) {
     var_1 = self.var_478F;
     if(isDefined(self.var_4795)) {
-      if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.177) {
+      if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.177) {
         var_1 = undefined;
       }
-    } else if(vectordot(vectornormalize(var_1 - var_0), var_2) < 0.643) {
+    } else if(vectordot(vectorNormalize(var_1 - var_0), var_2) < 0.643) {
       var_1 = undefined;
     }
   }

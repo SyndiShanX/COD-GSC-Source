@@ -45,7 +45,7 @@ function function_6ac3689a(player) {
   if(player zm_magicbox::can_buy_weapon() && !player bgb::is_enabled("zm_bgb_disorderly_combat") && level flag::get("time_attack_weapon_awarded")) {
     self setvisibletoplayer(player);
     self.stub.hint_string = zm_weapons::get_weapon_hint(self.weapon);
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return true;
   }
   self setinvisibletoplayer(player);
@@ -175,7 +175,7 @@ function function_86419da() {
     if((var_99870abd % 5) == 0) {
       if(isDefined(var_ec31aba8) && n_current_time < var_ec31aba8) {
         luinotifyevent(&"zombie_time_attack_notification", 2, zm::get_round_number() - 1, level.players.size);
-        playsoundatposition("zmb_stalingrad_time_trial_complete", (0, 0, 0));
+        playSoundAtPosition("zmb_stalingrad_time_trial_complete", (0, 0, 0));
         level thread function_cc8ae246(var_99870abd);
         if(var_99870abd == 20) {
           level notify("hash_399599c1");

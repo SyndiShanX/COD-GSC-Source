@@ -98,7 +98,7 @@ func_9309(var_0, var_1) {
 }
 
 func_9307(var_0) {
-  if(scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(scripts\asm\asm_bb::bb_isanimScripted()) {
     return anim.success;
   }
 

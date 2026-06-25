@@ -40,7 +40,7 @@ hanging_light_off() {
     var_10 = [];
 
     if(var_9 == "splash") {
-      var_7 = vectornormalize(var_7);
+      var_7 = vectorNormalize(var_7);
       var_8 = (randomfloatrange(-100, 100), randomfloatrange(-100, 100), -400);
       var_8 = var_8 * var_4;
       var_8 = var_8 + self.origin;
@@ -74,7 +74,7 @@ hanging_light_swing(var_0, var_1, var_2, var_3) {
     var_5 = 0.1;
   }
 
-  self rotateto(var_4, var_5 * 3 / 2, 0, var_5);
+  self rotateTo(var_4, var_5 * 3 / 2, 0, var_5);
   wait(var_5 * 3 / 2);
   var_0 = var_4 - var_1;
   var_6 = max(max(abs(var_0[0]), abs(var_0[1])), abs(var_0[2]));
@@ -89,7 +89,7 @@ hanging_light_swing(var_0, var_1, var_2, var_3) {
     var_6 = var_6 * var_7;
     var_0 = var_0 * (var_7 * -1);
     var_4 = var_1 + var_0;
-    self rotateto(var_4, var_2 * 3, var_2, var_2);
+    self rotateTo(var_4, var_2 * 3, var_2, var_2);
     wait(var_2 * 3);
   }
 }

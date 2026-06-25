@@ -4,8 +4,8 @@
 *****************************************************/
 
 spawn_targetname_at_struct_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
 
   if(isDefined(var_2) && isDefined(var_3)) {
     var_2.origin = var_3.origin;
@@ -101,9 +101,9 @@ ehq_color_trigger_listener() {
 }
 
 retreat_from_vol_to_vol(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
   var_5 = var_4 maps\_utility::get_ai_touching_volume("axis");
-  var_6 = getent(var_1, "targetname");
+  var_6 = getEnt(var_1, "targetname");
   var_7 = getnode(var_6.target, "targetname");
 
   foreach(var_9 in var_5) {
@@ -152,7 +152,7 @@ set_move_rate(var_0) {
 
 safe_activate_trigger_with_targetname(var_0) {
   var_1 = 64;
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(isDefined(var_2) && !isDefined(var_2.trigger_off)) {
     var_2 maps\_utility::activate_trigger();
@@ -200,7 +200,7 @@ safe_activate_triggers_with_targetname(var_0, var_1) {
 }
 
 safe_disable_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 common_scripts\utility::trigger_off();
@@ -208,7 +208,7 @@ safe_disable_trigger_with_targetname(var_0) {
 }
 
 safe_delete_trigger_with_targetname(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 delete();
@@ -329,7 +329,7 @@ ambient_animate(var_0, var_1, var_2, var_3) {
       }
 
       if(isDefined(self.target)) {
-        var_4 = common_scripts\utility::getstruct(self.target, "targetname");
+        var_4 = common_scripts\utility::getStruct(self.target, "targetname");
 
         if(!isDefined(var_4)) {
           var_5 = getnode(self.target, "targetname");
@@ -373,7 +373,7 @@ ambient_animate(var_0, var_1, var_2, var_3) {
 
 physics_fountain(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   var_8 = length(var_2);
-  var_9 = vectornormalize(var_2);
+  var_9 = vectorNormalize(var_2);
   var_1 endon("death");
 
   if(!isDefined(level.phys_fountain)) {
@@ -481,7 +481,7 @@ prepare_to_be_shot(var_0, var_1) {
   level waittill(var_0);
   self.ignoreme = 0;
   self.ignoreall = 0;
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 
   if(var_1 == 1) {
     maps\_utility::set_generic_idle_anim("scientist_idle");
@@ -498,7 +498,7 @@ reassign_goal_volume(var_0, var_1) {
   }
 
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
 
   foreach(var_4 in var_0) {
     var_4 setgoalvolumeauto(var_2);
@@ -601,9 +601,9 @@ keegan_swap_head_to_mask() {
 }
 
 player_enter_truck_progression(var_0) {
-  var_1 = getent("TRIG_get_in_truck", "targetname");
-  var_1 sethintstring(&"ENEMY_HQ_GETINTRUCK");
-  var_2 = common_scripts\utility::getstruct("STRUCT_get_in_truck", "targetname");
+  var_1 = getEnt("TRIG_get_in_truck", "targetname");
+  var_1 setHintString(&"ENEMY_HQ_GETINTRUCK");
+  var_2 = common_scripts\utility::getStruct("STRUCT_get_in_truck", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_1, var_2);
   common_scripts\utility::flag_set("FLAG_player_enter_truck");
   thread keegan_enter_truck_scene();
@@ -640,7 +640,7 @@ player_enter_truck_func(var_0) {
   level.player enabledeathshield(1);
   level.player allowsprint(0);
   thread maps\enemyhq_atrium::wall_chunks_hide();
-  var_1 = common_scripts\utility::getstruct("player_teleport_atrium", "targetname");
+  var_1 = common_scripts\utility::getStruct("player_teleport_atrium", "targetname");
   level.truck_player_arms = maps\_utility::spawn_anim_model("player_rig");
   level.truck_player_arms.animname = "player_rig";
   level.grenades = level.player getweaponammoclip("fraggrenade");
@@ -656,7 +656,7 @@ player_enter_truck_func(var_0) {
   var_0.animname = "truck";
   level.truck_player_arms setModel("viewhands_player_us_rangers");
   level.truck_player_arms hide();
-  level.truck_player_arms linkto(var_0, "tag_passenger");
+  level.truck_player_arms linkTo(var_0, "tag_passenger");
   level.truck_player_arms thread maps\_anim::anim_first_frame_solo(level.truck_player_arms, "player_enter_truck");
   level.player playerlinktoblend(level.truck_player_arms, "tag_player", 0.5);
   level.player forcemovingplatformentity(var_0);
@@ -690,13 +690,13 @@ player_enter_truck_func(var_0) {
   thread maps\enemyhq_audio::aud_bust_windshield();
   var_2 = spawn("script_model", level.truck_player_arms gettagorigin("tag_weapon_right"));
   var_2.angles = level.truck_player_arms gettagangles("tag_weapon_right");
-  var_2 linkto(level.truck_player_arms, "tag_weapon_right");
+  var_2 linkTo(level.truck_player_arms, "tag_weapon_right");
   var_2 setModel("weapon_sc2010");
   var_3 = spawn("script_model", var_2 gettagorigin("tag_red_dot"));
   var_3 setModel("viewmodel_reddot_reflex_iw6");
   var_3.origin = var_2 gettagorigin("tag_red_dot");
   var_3.angles = var_2 gettagangles("tag_red_dot");
-  var_3 linkto(var_2, "tag_red_dot");
+  var_3 linkTo(var_2, "tag_red_dot");
   var_4 = [];
   var_4[0] = level.truck_player_arms;
   var_4[1] = var_0;
@@ -743,11 +743,11 @@ call_flag_when_clacked() {
 }
 
 player_enter_truck_atrium_startpoint(var_0) {
-  var_1 = common_scripts\utility::getstruct("player_teleport_atrium", "targetname");
+  var_1 = common_scripts\utility::getStruct("player_teleport_atrium", "targetname");
   level.truck_player_arms = maps\_utility::spawn_anim_model("player_rig");
   level.truck_player_arms.animname = "player_rig";
   var_0.animname = "truck";
-  level.truck_player_arms linkto(var_0, "tag_passenger");
+  level.truck_player_arms linkTo(var_0, "tag_passenger");
   level.player playerlinktodelta(level.truck_player_arms, "tag_player", 1, 70, 70, 35, 35, 1);
   level.player disableweapons();
   level.truck_player_arms setModel("viewhands_player_us_rangers");
@@ -817,7 +817,7 @@ handle_hesh_teleport() {
   var_0 = getnode("NODE_ally2_teleport_atrium", "targetname");
   level.allies[2] unlink();
   level.player_truck notify("stop_baker_loop");
-  level.allies[2] maps\_utility::anim_stopanimscripted();
+  level.allies[2] maps\_utility::anim_stopanimScripted();
   common_scripts\utility::waitframe();
   level.allies[2] forceteleport(var_0.origin, var_0.angles);
 }
@@ -1073,7 +1073,7 @@ screenshakefade(var_0, var_1, var_2, var_3) {
 
 play_rumble_seconds(var_0, var_1) {
   for(var_2 = 0; var_2 < var_1 * 20; var_2++) {
-    level.player playrumbleonentity(var_0);
+    level.player playRumbleOnEntity(var_0);
     wait 0.05;
   }
 }
@@ -1119,7 +1119,7 @@ carry_bishop() {
   maps\_utility::set_generic_run_anim("wounded_carry_carrier", 1);
   maps\_utility::set_idle_anim("wounded_carry_idle");
   thread maps\_anim::anim_generic_loop(level.bishop, "wounded_carry_wounded", "stop_anim", "tag_origin");
-  level.bishop linkto(self, "tag_origin");
+  level.bishop linkTo(self, "tag_origin");
   thread sync_carry_walk_anims();
 }
 
@@ -1177,7 +1177,7 @@ gasmask_on_npc(var_0) {
   } else {
     self.gasmask = spawn("script_model", (0, 0, 0));
     self.gasmask setModel("prop_sas_gasmask_attach");
-    self.gasmask linkto(self, "tag_eye", (-4.027, 0, -2.948), (-90, -90, 180));
+    self.gasmask linkTo(self, "tag_eye", (-4.027, 0, -2.948), (-90, -90, 180));
   }
 
   self.gasmask_on = 1;

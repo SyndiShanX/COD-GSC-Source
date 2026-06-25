@@ -76,7 +76,7 @@ function_798820a9(item) {
 
 function_4ac25840(params) {
   foreach(team in params.teams_alive) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     foreach(player in players) {
       if(player character_unlock::function_f0406288(#"prophet_unlock")) {

@@ -384,7 +384,7 @@ func_5781(var_0) {
     return;
   }
 
-  if(scripts\asm\asm_bb::bb_isanimscripted() || self func_81A6() || isDefined(self.script) && self.script == "pain" || scripts\sp\utility::isactorwallrunning()) {
+  if(scripts\asm\asm_bb::bb_isanimScripted() || self func_81A6() || isDefined(self.script) && self.script == "pain" || scripts\sp\utility::isactorwallrunning()) {
     return;
   }
 
@@ -508,7 +508,7 @@ func_3D26(var_0, var_1) {
   for(var_3 = 0; var_3 < 2; var_3++) {
     var_4 = scripts\engine\utility::random(var_1);
     var_5 = self gettagorigin(var_4);
-    var_6 = vectornormalize(var_5 - var_2);
+    var_6 = vectorNormalize(var_5 - var_2);
     var_7 = vectortoangles(var_6);
     playfxbetweenpoints(level.var_7649["emp_energy_strand_ptp"], var_2, var_7, var_5, level.player);
   }
@@ -870,7 +870,7 @@ func_10209(var_0, var_1) {
   }
 
   var_1 = var_1 + (0, 0, 25);
-  var_2 = vectornormalize(var_1 - var_0);
+  var_2 = vectorNormalize(var_1 - var_0);
   var_3 = vectortoangles(var_2);
   if(getdvarint("debug_emp")) {}
 
@@ -1142,7 +1142,7 @@ func_106C3(var_0) {
 
     var_6 = self.var_378E[var_4].origin;
     var_7 = self.var_378E[var_5].origin;
-    var_8 = scripts\engine\utility::flatten_vector(vectornormalize(var_7 - var_6));
+    var_8 = scripts\engine\utility::flatten_vector(vectorNormalize(var_7 - var_6));
     var_9 = rotatevector(var_8, (0, -90, 0));
     if(var_0) {
       self.var_378E[var_3].var_5F15 = 1;
@@ -1160,7 +1160,7 @@ func_106C3(var_0) {
       }
 
       var_12 = distance(self.var_378E[var_3].origin, var_1);
-      var_13 = vectornormalize(self.var_378E[var_3].origin - var_1);
+      var_13 = vectorNormalize(self.var_378E[var_3].origin - var_1);
       if(self.var_378E[var_3].origin[2] < var_1[2]) {
         var_13 = scripts\engine\utility::flatten_vector(var_13);
       }
@@ -1232,7 +1232,7 @@ func_106C2(var_0, var_1, var_2, var_3) {
     var_3 = 0;
   }
 
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = var_1;
   var_6 = var_0 + (0, 0, 2);
   var_7 = spawn("script_model", var_6);
@@ -1278,7 +1278,7 @@ func_6197(var_0, var_1, var_2) {
 
 func_6195(var_0, var_1, var_2, var_3) {
   var_0 endon("death");
-  var_4 = vectornormalize(var_2 - var_1);
+  var_4 = vectorNormalize(var_2 - var_1);
   var_5 = distance(var_2, var_1);
   var_6 = var_1 + var_4 * var_5;
   var_7 = randomfloatrange(30, 70);
@@ -1292,20 +1292,20 @@ func_6195(var_0, var_1, var_2, var_3) {
   }
 
   var_0 ghost_killed_update_func((randomfloatrange(360, 900), 0, randomfloatrange(360, 900)), var_3 - 0.05);
-  var_0 moveto(var_8, var_3 / 4, 0, 0);
+  var_0 moveTo(var_8, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_9, var_3 / 4, 0, 0);
+  var_0 moveTo(var_9, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_10, var_3 / 4, 0, 0);
+  var_0 moveTo(var_10, var_3 / 4, 0, 0);
   wait(var_3 / 4);
-  var_0 moveto(var_11, var_3 / 4, 0, 0);
+  var_0 moveTo(var_11, var_3 / 4, 0, 0);
   wait(var_3 / 4);
   var_13 = 0.2;
   var_14 = randomfloat(5);
   var_0 ghost_killed_update_func((randomfloatrange(-40, 40), 0, randomfloatrange(-40, 40)), var_13 - 0.05);
-  var_0 moveto(var_11 + var_4 * var_14 / 2 + (0, 0, var_14), var_13 / 2, 0, var_13 / 2);
+  var_0 moveTo(var_11 + var_4 * var_14 / 2 + (0, 0, var_14), var_13 / 2, 0, var_13 / 2);
   wait(var_13 / 2);
-  var_0 moveto(var_11 + var_4 * var_14, var_13 / 2, var_13 / 2, 0);
+  var_0 moveTo(var_11 + var_4 * var_14, var_13 / 2, var_13 / 2, 0);
   wait(var_13 / 2);
   func_DFFF(var_0);
 }

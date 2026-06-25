@@ -835,7 +835,7 @@ attach_dust_to_mover(var_0, var_1) {
 }
 
 church_fall() {
-  var_0 = getent("church_cliff", "targetname");
+  var_0 = getEnt("church_cliff", "targetname");
   var_0.no_delete = 1;
   var_1 = spawnStruct();
   var_1.origin = var_0.origin;
@@ -955,9 +955,9 @@ post_crater_dog_setup() {
   var_1 makeusable();
 
   if(!level.console && !level.player usinggamepad()) {
-    var_1 sethintstring(&"NML_HINT_SYNC_KB");
+    var_1 setHintString(&"NML_HINT_SYNC_KB");
   } else {
-    var_1 sethintstring(&"NML_HINT_SYNC");
+    var_1 setHintString(&"NML_HINT_SYNC");
   }
 
   var_1 waittill("trigger");
@@ -1028,12 +1028,12 @@ player_drive_dog_pc() {
   thread hint_for_first_attack();
   var_4 = common_scripts\utility::get_target_ent("dog_pc_drive_start");
   level.dog notify("stop_loop");
-  level.dog stopanimscripted();
+  level.dog stopanimScripted();
   level.dog.pushplayer = 1;
   level.dog pushplayer(1);
   level.dog.goalradius = 32;
   var_5 = common_scripts\utility::get_target_ent("pc_player_teleport");
-  level.player setorigin(var_5.origin);
+  level.player setOrigin(var_5.origin);
   level.dog setgoalpos(var_4.origin);
   level.dog maps\_utility::disable_arrivals();
   level.dog maps\_utility::disable_exits();
@@ -1402,7 +1402,7 @@ post_crater_end() {
   thread delete_cracked_glass();
   var_8 = spawn("script_model", level.dog.origin);
   var_8 setModel("tag_origin");
-  var_8 linkto(level.dog, "tag_camera", (0, 0, 0), (0, 0, 0));
+  var_8 linkTo(level.dog, "tag_camera", (0, 0, 0), (0, 0, 0));
   var_8 common_scripts\utility::delaycall(0.5, ::playsound, "scn_nml_house_enemy_mvmt_chaos");
   var_0 maps\_anim::anim_generic(level.dog, "iw6_dog_traverse_over_36");
   level.dog setgoalpos(level.dog.origin);
@@ -1482,7 +1482,7 @@ hesh_breach_wait() {
 
 delete_cracked_glass() {
   maps\_utility::trigger_wait("house_prebreach_glass_destroy", "script_noteworthy");
-  var_0 = getent("house_prebreach_glass", "script_noteworthy");
+  var_0 = getEnt("house_prebreach_glass", "script_noteworthy");
   var_0 delete();
 }
 
@@ -1699,8 +1699,8 @@ door_nudge() {
   var_0.origin = self.origin;
   var_0.angles = self.angles;
   var_1 = common_scripts\utility::get_target_ent();
-  maps\nml_util::moveto_rotateto(var_1, 0.1, 0.1, 0);
-  maps\nml_util::moveto_rotateto(var_0, 0.2, 0, 0.1);
+  maps\nml_util::moveto_rotateTo(var_1, 0.1, 0.1, 0);
+  maps\nml_util::moveto_rotateTo(var_0, 0.2, 0, 0.1);
 }
 
 door_knockdown() {
@@ -1819,15 +1819,15 @@ tunnel_slide() {
 sat_crane_arm() {
   var_0 = common_scripts\utility::get_target_ent("sat_crane_arm");
   common_scripts\utility::flag_wait("satellite_overlook_1");
-  var_0 rotateyaw(-45, 5, 1, 2);
+  var_0 rotateYaw(-45, 5, 1, 2);
   var_0 waittill("rotatedone");
   wait 2;
 
   for(;;) {
-    var_0 rotateyaw(90, 5, 1, 2);
+    var_0 rotateYaw(90, 5, 1, 2);
     var_0 waittill("rotatedone");
     wait(randomfloatrange(3, 10));
-    var_0 rotateyaw(-90, 5, 1, 2);
+    var_0 rotateYaw(-90, 5, 1, 2);
     var_0 waittill("rotatedone");
   }
 }
@@ -1843,7 +1843,7 @@ tunnel_enter() {
   level.baker maps\_utility::smart_dialogue("nml_hsh_youhearthat");
   wait 2.75;
   level.baker thread maps\_utility::smart_dialogue("nml_hsh_enemyconvoygetto");
-  level.baker stopanimscripted();
+  level.baker stopanimScripted();
   level.baker notify("stop_path");
   level.baker maps\_utility::disable_cqbwalk();
   maps\nml_util::team_unset_colors(32);
@@ -1935,7 +1935,7 @@ tunnel_pipe_logic() {
     common_scripts\utility::flag_waitopen("player_on_tunnel_pipes");
     level.player thread maps\_utility::player_speed_percent(100, 2);
     var_0 notify("stop_sway");
-    var_0 rotateto((0, 0, 0), 0.5);
+    var_0 rotateTo((0, 0, 0), 0.5);
     wait 0.5;
     level.player playersetgroundreferenceent(undefined);
     var_0 delete();
@@ -1959,9 +1959,9 @@ tunnel_pipe_sway(var_0) {
   var_3 = 3;
 
   if(level.player istouching(var_1)) {
-    var_0 rotateto((var_2, 0, 0), var_3, var_3 * 0.3, var_3 * 0.3);
+    var_0 rotateTo((var_2, 0, 0), var_3, var_3 * 0.3, var_3 * 0.3);
   } else {
-    var_0 rotateto((0, 0, var_2), var_3, var_3 * 0.3, var_3 * 0.3);
+    var_0 rotateTo((0, 0, var_2), var_3, var_3 * 0.3, var_3 * 0.3);
   }
 
   var_0 waittill("rotatedone");
@@ -1975,7 +1975,7 @@ tunnel_pipe_sway(var_0) {
       var_5 = (0, 0, 2 * var_2);
     }
 
-    var_0 rotateto(var_4, var_3, var_3 * 0.3, var_3 * 0.3);
+    var_0 rotateTo(var_4, var_3, var_3 * 0.3, var_3 * 0.3);
     var_0 waittill("rotatedone");
 
     if(level.player istouching(var_1)) {
@@ -1986,7 +1986,7 @@ tunnel_pipe_sway(var_0) {
       var_5 = (0, 0, 2 * var_2);
     }
 
-    var_0 rotateto(var_5, var_3, var_3 * 0.3, var_3 * 0.3);
+    var_0 rotateTo(var_5, var_3, var_3 * 0.3, var_3 * 0.3);
     var_0 waittill("rotatedone");
   }
 }
@@ -2095,7 +2095,7 @@ pipe_warning_shift() {
 
   foreach(var_1 in self.brushmodels) {
     var_1 movez(-1 * randomfloatrange(1, 2), randomfloatrange(0.1, 0.2));
-    var_1 rotateto((randomfloatrange(-1.5, 1.5), 0, randomfloatrange(-1, 1)), randomfloatrange(0.1, 0.2));
+    var_1 rotateTo((randomfloatrange(-1.5, 1.5), 0, randomfloatrange(-1, 1)), randomfloatrange(0.1, 0.2));
     wait 0.05;
   }
 }
@@ -2162,7 +2162,7 @@ tunnel_convoy() {
   foreach(var_5 in var_1) {
     if(isDefined(var_5.script_noteworthy)) {
       if(var_5.script_noteworthy == "tunnel_lead_vehicle") {
-        var_3 linkto(var_5);
+        var_3 linkTo(var_5);
       }
     }
   }
@@ -2228,7 +2228,7 @@ dlight_on_me(var_0) {
   self.dlight_org.tag = var_0;
   var_2 = anglesToForward(var_1.angles);
   var_1.origin = var_1.origin + var_2 * 350;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   playFXOnTag(common_scripts\utility::getfx("btr_light_fadein"), var_1, "tag_origin");
   wait 3;
   stopFXOnTag(common_scripts\utility::getfx("btr_light_fadein"), var_1, "tag_origin");
@@ -2262,7 +2262,7 @@ tunnel_vehicle_think() {
 
 tunnel_tank_crush() {
   level endon("_stealth_spotted");
-  var_0 = getent("tankcrush_car", "targetname");
+  var_0 = getEnt("tankcrush_car", "targetname");
   var_1 = self;
   var_1 maps\_vehicle::godon();
   var_2 = getvehiclenode("tunnel_tankcrush", "script_noteworthy");
@@ -2280,9 +2280,9 @@ tunnel_tank_crush() {
 
 link_dlight_to_dummy() {
   common_scripts\utility::waitframe();
-  self.dlight_org linkto(self.modeldummy, self.dlight_org.tag);
+  self.dlight_org linkTo(self.modeldummy, self.dlight_org.tag);
   self waittill("dummy_2_model");
-  self.dlight_org linkto(self, self.dlight_org.tag);
+  self.dlight_org linkTo(self, self.dlight_org.tag);
 }
 
 mall_spotted() {
@@ -2497,9 +2497,9 @@ mall_lookout() {
   var_1 makeusable();
 
   if(!level.console && !level.player usinggamepad()) {
-    var_1 sethintstring(&"NML_HINT_SYNC_KB");
+    var_1 setHintString(&"NML_HINT_SYNC_KB");
   } else {
-    var_1 sethintstring(&"NML_HINT_SYNC");
+    var_1 setHintString(&"NML_HINT_SYNC");
   }
 
   var_1 waittill("trigger");
@@ -2567,7 +2567,7 @@ mall_dog_init() {
   level.dog pushplayer(1);
   level.dog.goalradius = 32;
   var_1 = common_scripts\utility::get_target_ent("mall_player_teleport");
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   level.dog setgoalpos(var_0.origin);
   level.dog waittill("goal");
   level.dog thread maps\_anim::anim_generic_gravity(level.dog, "iw6_dog_sneak_runin_8");
@@ -2575,7 +2575,7 @@ mall_dog_init() {
   level.dog setdogcommand("driven");
   level.dog maps\_utility::enable_arrivals();
   level.dog.ignoreme = 1;
-  var_2 = getent("boat_range_trigger", "script_noteworthy");
+  var_2 = getEnt("boat_range_trigger", "script_noteworthy");
   var_2 common_scripts\utility::trigger_off();
   wait 0.5;
   level.dog.ignoreme = 0;
@@ -2802,7 +2802,7 @@ vargas_scene_save() {
 vargas_scene_dialogue() {
   level.vargas.animname = "vargas";
   level.dog.v_static = common_scripts\utility::spawn_tag_origin();
-  level.dog.v_static linkto(level.dog, "tag_camera", (0, 0, 0), (0, 0, 0));
+  level.dog.v_static linkTo(level.dog, "tag_camera", (0, 0, 0), (0, 0, 0));
   level.dog.v_static playLoopSound("dogcam_radiostatic");
   thread vargas_scene_save();
   maps\_utility::delaythread(3, maps\_utility::smart_radio_dialogue, "nml_hsh_youseethatguys");
@@ -3038,7 +3038,7 @@ mall_exit() {
   level.dog.melee = undefined;
   level.dog thread maps\_utility::magic_bullet_shield();
   level.dog maps\_utility_dogs::set_dog_model(level.dog.model);
-  level.player setorigin(level.adam.origin);
+  level.player setOrigin(level.adam.origin);
   level.player setplayerangles(level.adam.angles);
   level.adam delete();
   var_2 = common_scripts\utility::get_target_ent("chase_dog_dog_teleport");

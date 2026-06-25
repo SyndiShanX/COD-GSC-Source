@@ -32,7 +32,7 @@ skipto_lab() {
 }
 
 skipto_lab_battle() {
-  s_glass_hallway_damage_pulse = getstruct("glass_hallway_damage_pulse", "targetname");
+  s_glass_hallway_damage_pulse = getStruct("glass_hallway_damage_pulse", "targetname");
   radiusdamage(s_glass_hallway_damage_pulse.origin, 128, 300, 300);
   level.harper = init_hero("harper");
   level.salazar = init_hero("salazar");
@@ -46,7 +46,7 @@ skipto_lab_battle() {
   trigger_use("trig_color_lobby_mid");
   level thread asd_lobby_guys();
   level thread lab_doors();
-  m_asd_intro_tile_fall = getent("asd_intro_tile_fall", "targetname");
+  m_asd_intro_tile_fall = getEnt("asd_intro_tile_fall", "targetname");
   m_asd_intro_tile_fall delete();
   level thread challenge_kill_challenge_watch();
 
@@ -64,31 +64,31 @@ skipto_fight_to_isaac() {
   level.harper = init_hero("harper");
   level.salazar = init_hero("salazar");
   level.crosby = init_hero("crosby");
-  e_player_elevator_bottom_clip = getent("player_elevator_bottom_clip", "targetname");
+  e_player_elevator_bottom_clip = getEnt("player_elevator_bottom_clip", "targetname");
   e_player_elevator_bottom_clip connectpaths();
   e_player_elevator_bottom_clip delete();
-  m_lift = getent("lift_interior_m", "targetname");
-  m_lift = getent("lift_interior_m", "targetname");
+  m_lift = getEnt("lift_interior_m", "targetname");
+  m_lift = getEnt("lift_interior_m", "targetname");
   m_lift.a_left_nodes = getnodearray("interior_lift_left_nodes", "targetname");
-  bm_door_south_l = getent("lift_interior_door_1_left", "targetname");
+  bm_door_south_l = getEnt("lift_interior_door_1_left", "targetname");
   bm_door_south_l connectpaths();
   bm_door_south_l delete();
-  bm_door_south_r = getent("lift_interior_door_1_right", "targetname");
+  bm_door_south_r = getEnt("lift_interior_door_1_right", "targetname");
   bm_door_south_r connectpaths();
   bm_door_south_r delete();
-  bm_door_north_l = getent("lift_interior_door_2_left", "targetname");
+  bm_door_north_l = getEnt("lift_interior_door_2_left", "targetname");
   bm_door_north_l connectpaths();
   bm_door_north_l delete();
-  bm_door_north_r = getent("lift_interior_door_2_right", "targetname");
+  bm_door_north_r = getEnt("lift_interior_door_2_right", "targetname");
   bm_door_north_r connectpaths();
   bm_door_north_r delete();
-  m_door_south_l = getent("lift_interior_door_2_left_m", "targetname");
+  m_door_south_l = getEnt("lift_interior_door_2_left_m", "targetname");
   m_door_south_l connectpaths();
-  m_door_south_r = getent("lift_interior_door_2_right_m", "targetname");
+  m_door_south_r = getEnt("lift_interior_door_2_right_m", "targetname");
   m_door_south_r connectpaths();
-  m_door_north_l = getent("lift_interior_door_1_left_m", "targetname");
+  m_door_north_l = getEnt("lift_interior_door_1_left_m", "targetname");
   m_door_north_l connectpaths();
-  m_door_north_r = getent("lift_interior_door_1_right_m", "targetname");
+  m_door_north_r = getEnt("lift_interior_door_1_right_m", "targetname");
   m_door_north_r connectpaths();
   m_door_north_l movey(60, 2, 0.5);
   m_door_north_r movey(-60, 2, 0.5);
@@ -104,7 +104,7 @@ skipto_fight_to_isaac() {
   level thread maps\monsoon_celerium_chamber::turn_off_all_lab_trigs();
   level thread maps\monsoon_lab::remove_hallway_ai_clip();
   level thread maps\monsoon_lab::lab_doors();
-  s_glass_hallway_damage_pulse = getstruct("glass_hallway_damage_pulse", "targetname");
+  s_glass_hallway_damage_pulse = getStruct("glass_hallway_damage_pulse", "targetname");
   radiusdamage(s_glass_hallway_damage_pulse.origin, 128, 300, 300);
   level thread challenge_kill_challenge_watch();
   nd_harper_titus_node = getnode("harper_titus_node", "targetname");
@@ -245,14 +245,14 @@ init_lab_interior() {
 
   wait 0.05;
   wait 0.05;
-  m_lift = getent("lift_interior_m", "targetname");
+  m_lift = getEnt("lift_interior_m", "targetname");
   m_lift setmovingplatformenabled(1);
   wait 0.05;
-  trig_elevator_panel = getent("trig_elevator_panel", "targetname");
-  trig_elevator_panel enablelinkto();
-  trig_elevator_panel linkto(m_lift);
-  trig_elevator_panel sethintstring("");
-  trig_elevator_panel setcursorhint("HINT_NOICON");
+  trig_elevator_panel = getEnt("trig_elevator_panel", "targetname");
+  trig_elevator_panel enablelinkTo();
+  trig_elevator_panel linkTo(m_lift);
+  trig_elevator_panel setHintString("");
+  trig_elevator_panel setCursorHint("HINT_NOICON");
   wait 0.05;
   a_defend_crash_show = getEntArray("defend_crash_show", "targetname");
 
@@ -268,29 +268,29 @@ init_lab_interior() {
   }
 
   wait 0.05;
-  e_escape_blast_doors = getent("escape_blast_doors", "targetname");
+  e_escape_blast_doors = getEnt("escape_blast_doors", "targetname");
   e_escape_blast_doors hide();
   e_escape_blast_doors notsolid();
   e_escape_blast_doors connectpaths();
   wait 0.05;
-  e_lab_blast_doors = getent("lab_blast_doors", "targetname");
+  e_lab_blast_doors = getEnt("lab_blast_doors", "targetname");
   e_lab_blast_doors hide();
   e_lab_blast_doors notsolid();
   e_lab_blast_doors connectpaths();
   wait 0.05;
-  e_celerium_shield_screen = getent("celerium_shield_screen", "targetname");
+  e_celerium_shield_screen = getEnt("celerium_shield_screen", "targetname");
   e_celerium_shield_screen hide();
   wait 0.05;
-  e_lab_stair_blocker_m = getent("lab_stair_blocker_m", "targetname");
+  e_lab_stair_blocker_m = getEnt("lab_stair_blocker_m", "targetname");
   e_lab_stair_blocker_m hide();
   e_lab_stair_blocker_m notsolid();
-  e_player_chair_clip = getent("player_chair_clip", "targetname");
+  e_player_chair_clip = getEnt("player_chair_clip", "targetname");
   e_player_chair_clip hide();
   e_player_chair_clip notsolid();
-  e_lab_shelf_clip_show = getent("lab_shelf_clip_show", "targetname");
+  e_lab_shelf_clip_show = getEnt("lab_shelf_clip_show", "targetname");
   e_lab_shelf_clip_show hide();
   e_lab_shelf_clip_show notsolid();
-  e_harpers_shield = getent("harper_shield", "targetname");
+  e_harpers_shield = getEnt("harper_shield", "targetname");
   e_harpers_shield hide();
 }
 
@@ -314,29 +314,29 @@ lab_entrance() {
   level.harper idle_at_cover(1);
   level.salazar idle_at_cover(1);
   wait 1;
-  trig_player_at_lab = getent("trig_player_at_lab", "targetname");
+  trig_player_at_lab = getEnt("trig_player_at_lab", "targetname");
   trig_player_at_lab trigger_on();
   flag_wait("player_at_lab_entrance");
   level thread run_scene("salazar_lab_entry_intro");
   flag_wait("open_lab_entrance");
   trigger_use("trig_color_clean_room");
-  m_lab_door_right_rear = getent("lab_door_right_rear", "targetname");
-  m_lab_door_left_rear = getent("lab_door_left_rear", "targetname");
-  m_lab_door_left = getent("lab_door_left", "targetname");
-  m_lab_door_right = getent("lab_door_right", "targetname");
-  bm_lab_door_left_clip = getent("lab_door_left_clip", "targetname");
-  bm_lab_door_right_clip = getent("lab_door_right_clip", "targetname");
-  bm_lab_door_left_clip linkto(m_lab_door_left);
-  bm_lab_door_right_clip linkto(m_lab_door_right);
-  bm_lab_door_left_rear_clip = getent("lab_door_left_rear_clip", "targetname");
-  bm_lab_door_right_rear_clip = getent("lab_door_right_rear_clip", "targetname");
-  bm_lab_door_left_rear_clip linkto(m_lab_door_left_rear);
-  bm_lab_door_right_rear_clip linkto(m_lab_door_right_rear);
-  s_front_lab_door_rumble_dist = getstruct("s_front_lab_door_rumble_dist", "targetname");
+  m_lab_door_right_rear = getEnt("lab_door_right_rear", "targetname");
+  m_lab_door_left_rear = getEnt("lab_door_left_rear", "targetname");
+  m_lab_door_left = getEnt("lab_door_left", "targetname");
+  m_lab_door_right = getEnt("lab_door_right", "targetname");
+  bm_lab_door_left_clip = getEnt("lab_door_left_clip", "targetname");
+  bm_lab_door_right_clip = getEnt("lab_door_right_clip", "targetname");
+  bm_lab_door_left_clip linkTo(m_lab_door_left);
+  bm_lab_door_right_clip linkTo(m_lab_door_right);
+  bm_lab_door_left_rear_clip = getEnt("lab_door_left_rear_clip", "targetname");
+  bm_lab_door_right_rear_clip = getEnt("lab_door_right_rear_clip", "targetname");
+  bm_lab_door_left_rear_clip linkTo(m_lab_door_left_rear);
+  bm_lab_door_right_rear_clip linkTo(m_lab_door_right_rear);
+  s_front_lab_door_rumble_dist = getStruct("s_front_lab_door_rumble_dist", "targetname");
   s_front_lab_door_rumble_dist.is_moving = 1;
   s_front_lab_door_rumble_dist.is_big_door = 1;
   s_front_lab_door_rumble_dist thread player_door_rumble();
-  s_rear_lab_door_rumble_dist = getstruct("s_rear_lab_door_rumble_dist", "targetname");
+  s_rear_lab_door_rumble_dist = getStruct("s_rear_lab_door_rumble_dist", "targetname");
   s_rear_lab_door_rumble_dist.is_moving = 1;
   s_rear_lab_door_rumble_dist.is_big_door = 1;
   s_rear_lab_door_rumble_dist thread player_door_rumble();
@@ -351,7 +351,7 @@ lab_entrance() {
   n_distance = distance2d(s_rear_lab_door_rumble_dist.origin, level.player.origin);
 
   if(n_distance < 500) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 
   level.player setlowready(0);
@@ -362,7 +362,7 @@ lab_entrance() {
   n_distance = distance2d(s_rear_lab_door_rumble_dist.origin, level.player.origin);
 
   if(n_distance < 500) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 
   m_lab_door_left_rear movey(83, 5, 1);
@@ -373,7 +373,7 @@ lab_entrance() {
   n_distance = distance2d(s_front_lab_door_rumble_dist.origin, level.player.origin);
 
   if(n_distance < 500) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 
   m_lab_door_left_rear waittill("movedone");
@@ -381,7 +381,7 @@ lab_entrance() {
   n_distance = distance2d(s_rear_lab_door_rumble_dist.origin, level.player.origin);
 
   if(n_distance < 500) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 
   flag_set("lab_entrance_open");
@@ -392,65 +392,65 @@ lab_entrance() {
 }
 
 make_model_not_cheap() {
-  m_lab_door_right_rear = getent("lab_door_right_rear", "targetname");
+  m_lab_door_right_rear = getEnt("lab_door_right_rear", "targetname");
   m_lab_door_right_rear ignorecheapentityflag(1);
   wait 0.05;
-  m_lab_door_left_rear = getent("lab_door_left_rear", "targetname");
+  m_lab_door_left_rear = getEnt("lab_door_left_rear", "targetname");
   m_lab_door_right_rear ignorecheapentityflag(1);
-  m_lab_door_left = getent("lab_door_left", "targetname");
+  m_lab_door_left = getEnt("lab_door_left", "targetname");
   m_lab_door_left ignorecheapentityflag(1);
-  m_lab_door_right = getent("lab_door_right", "targetname");
+  m_lab_door_right = getEnt("lab_door_right", "targetname");
   m_lab_door_right ignorecheapentityflag(1);
   wait 0.05;
-  bm_celerium_door_front_l = getent("celerium_door_front_l", "targetname");
+  bm_celerium_door_front_l = getEnt("celerium_door_front_l", "targetname");
   bm_celerium_door_front_l ignorecheapentityflag(1);
-  bm_celerium_door_front_r = getent("celerium_door_front_r", "targetname");
+  bm_celerium_door_front_r = getEnt("celerium_door_front_r", "targetname");
   bm_celerium_door_front_r ignorecheapentityflag(1);
   wait 0.05;
-  bm_celerium_door_rear_l = getent("celerium_door_rear_l", "targetname");
+  bm_celerium_door_rear_l = getEnt("celerium_door_rear_l", "targetname");
   bm_celerium_door_rear_l ignorecheapentityflag(1);
-  bm_celerium_door_rear_r = getent("celerium_door_rear_r", "targetname");
+  bm_celerium_door_rear_r = getEnt("celerium_door_rear_r", "targetname");
   bm_celerium_door_rear_r ignorecheapentityflag(1);
-  bm_player_asd_window = getent("player_asd_window", "targetname");
+  bm_player_asd_window = getEnt("player_asd_window", "targetname");
   bm_player_asd_window ignorecheapentityflag(1);
   wait 0.05;
-  m_escape_door_01l = getent("escape_door_01l", "targetname");
+  m_escape_door_01l = getEnt("escape_door_01l", "targetname");
   m_escape_door_01l ignorecheapentityflag(1);
-  m_escape_door_01r = getent("escape_door_01r", "targetname");
+  m_escape_door_01r = getEnt("escape_door_01r", "targetname");
   m_escape_door_01r ignorecheapentityflag(1);
-  m_escape_door_02l = getent("escape_door_02l", "targetname");
+  m_escape_door_02l = getEnt("escape_door_02l", "targetname");
   m_escape_door_02l ignorecheapentityflag(1);
-  m_escape_door_02r = getent("escape_door_02r", "targetname");
+  m_escape_door_02r = getEnt("escape_door_02r", "targetname");
   m_escape_door_02r ignorecheapentityflag(1);
   wait 0.05;
-  e_fxanim_defend_room_door = getent("fxanim_defend_room_door", "targetname");
+  e_fxanim_defend_room_door = getEnt("fxanim_defend_room_door", "targetname");
   e_fxanim_defend_room_door ignorecheapentityflag(1);
-  e_ddm_1 = getent("DDM_1", "targetname");
+  e_ddm_1 = getEnt("DDM_1", "targetname");
   e_ddm_1 ignorecheapentityflag(1);
-  e_ddm_2 = getent("DDM_2", "targetname");
+  e_ddm_2 = getEnt("DDM_2", "targetname");
   e_ddm_2 ignorecheapentityflag(1);
   wait 0.05;
-  m_defend_door_01r = getent("defend_door_01r", "targetname");
+  m_defend_door_01r = getEnt("defend_door_01r", "targetname");
   m_defend_door_01r ignorecheapentityflag(1);
-  m_defend_door_01l = getent("defend_door_01l", "targetname");
+  m_defend_door_01l = getEnt("defend_door_01l", "targetname");
   m_defend_door_01l ignorecheapentityflag(1);
-  m_defend_door_02l = getent("defend_door_02l", "targetname");
+  m_defend_door_02l = getEnt("defend_door_02l", "targetname");
   m_defend_door_02l ignorecheapentityflag(1);
-  m_defend_door_02r = getent("defend_door_02r", "targetname");
+  m_defend_door_02r = getEnt("defend_door_02r", "targetname");
   m_defend_door_02r ignorecheapentityflag(1);
   wait 0.05;
-  e_defend_door_3l = getent("defend_door_03l", "targetname");
+  e_defend_door_3l = getEnt("defend_door_03l", "targetname");
   e_defend_door_3l ignorecheapentityflag(1);
-  e_defend_door_03r = getent("defend_door_03r", "targetname");
+  e_defend_door_03r = getEnt("defend_door_03r", "targetname");
   e_defend_door_03r ignorecheapentityflag(1);
-  m_lift = getent("lift_interior_m", "targetname");
+  m_lift = getEnt("lift_interior_m", "targetname");
   m_lift ignorecheapentityflag(1);
   wait 0.05;
-  bm_asd_garage_1 = getent("bm_asd_garage_1", "targetname");
+  bm_asd_garage_1 = getEnt("bm_asd_garage_1", "targetname");
   bm_asd_garage_1 ignorecheapentityflag(1);
-  bm_asd_garage_2 = getent("bm_asd_garage_2", "targetname");
+  bm_asd_garage_2 = getEnt("bm_asd_garage_2", "targetname");
   bm_asd_garage_2 ignorecheapentityflag(1);
-  e_isaac_container = getent("isaac_container", "targetname");
+  e_isaac_container = getEnt("isaac_container", "targetname");
   e_isaac_container ignorecheapentityflag(1);
 }
 
@@ -506,31 +506,31 @@ clean_room_doors() {
   autosave_now("player_at_entrance");
   make_model_not_cheap();
   init_lab_interior();
-  e_clip_clean_room_door = getent("clip_clean_room_door", "targetname");
+  e_clip_clean_room_door = getEnt("clip_clean_room_door", "targetname");
   e_clip_clean_room_door notsolid();
   e_clip_clean_room_door hide();
-  m_clean_room_door_01_l = getent("clean_room_door_01_l", "targetname");
+  m_clean_room_door_01_l = getEnt("clean_room_door_01_l", "targetname");
   m_clean_room_door_01_l ignorecheapentityflag(1);
-  m_clean_room_door_01_l_clip = getent("clean_room_door_01_l_clip", "targetname");
-  m_clean_room_door_01_l_clip linkto(m_clean_room_door_01_l);
-  m_clean_room_door_01_r = getent("clean_room_door_01_r", "targetname");
+  m_clean_room_door_01_l_clip = getEnt("clean_room_door_01_l_clip", "targetname");
+  m_clean_room_door_01_l_clip linkTo(m_clean_room_door_01_l);
+  m_clean_room_door_01_r = getEnt("clean_room_door_01_r", "targetname");
   m_clean_room_door_01_r ignorecheapentityflag(1);
-  m_clean_room_door_01_r_clip = getent("clean_room_door_01_r_clip", "targetname");
-  m_clean_room_door_01_r_clip linkto(m_clean_room_door_01_r);
+  m_clean_room_door_01_r_clip = getEnt("clean_room_door_01_r_clip", "targetname");
+  m_clean_room_door_01_r_clip linkTo(m_clean_room_door_01_r);
   m_clean_room_door_01_l connectpaths();
   m_clean_room_door_01_r connectpaths();
   m_clean_room_door_01_l_clip connectpaths();
   m_clean_room_door_01_r_clip connectpaths();
-  m_clean_room_door_02_l = getent("clean_room_door_02_l", "targetname");
+  m_clean_room_door_02_l = getEnt("clean_room_door_02_l", "targetname");
   m_clean_room_door_02_l ignorecheapentityflag(1);
-  m_clean_room_door_02_r = getent("clean_room_door_02_r", "targetname");
+  m_clean_room_door_02_r = getEnt("clean_room_door_02_r", "targetname");
   m_clean_room_door_02_r ignorecheapentityflag(1);
   trigger_wait("trig_clean_room_doors");
-  playsoundatposition("evt_clean_room_doors_open", (8220, 55198, -931));
+  playSoundAtPosition("evt_clean_room_doors_open", (8220, 55198, -931));
   m_clean_room_door_01_l movey(58, 1);
   m_clean_room_door_01_r movey(-58, 1);
   flag_wait("player_at_clean_room");
-  trig_clean_room_player = getent("trig_clean_room_player", "script_noteworthy");
+  trig_clean_room_player = getEnt("trig_clean_room_player", "script_noteworthy");
 
   while(true) {
     if(level.player istouching(trig_clean_room_player) && level.harper istouching(trig_clean_room_player) && level.salazar istouching(trig_clean_room_player) && level.crosby istouching(trig_clean_room_player)) {
@@ -544,25 +544,25 @@ clean_room_doors() {
   e_clip_clean_room_door show();
   m_clean_room_door_01_l movey(-58, 1);
   m_clean_room_door_01_r movey(58, 1);
-  playsoundatposition("evt_clean_room_doors_close", (8220, 55198, -931));
+  playSoundAtPosition("evt_clean_room_doors_close", (8220, 55198, -931));
   flag_set("close_entrance_doors");
   m_clean_room_door_01_r waittill("movedone");
   wait 2;
   exploder(1350);
   spray_ent = spawn("script_origin", (8382, 55196, -887));
-  playsoundatposition("evt_spray_start", (8382, 55196, -887));
+  playSoundAtPosition("evt_spray_start", (8382, 55196, -887));
   spray_ent playLoopSound("evt_spray_loop", 0.5);
   wait 5;
   spray_ent stoploopsound(0.5);
-  playsoundatposition("evt_spray_stop", (8382, 55196, -887));
+  playSoundAtPosition("evt_spray_stop", (8382, 55196, -887));
   spray_ent delete();
   wait 1;
   flag_set("lab_clean_room_open");
-  playsoundatposition("evt_clean_room_door_2_open", (8538, 55207, -945));
-  m_clean_room_door_02_l_clip = getent("clean_room_door_02_l_clip", "targetname");
-  m_clean_room_door_02_l_clip linkto(m_clean_room_door_02_l);
-  m_clean_room_door_02_r_clip = getent("clean_room_door_02_r_clip", "targetname");
-  m_clean_room_door_02_r_clip linkto(m_clean_room_door_02_r);
+  playSoundAtPosition("evt_clean_room_door_2_open", (8538, 55207, -945));
+  m_clean_room_door_02_l_clip = getEnt("clean_room_door_02_l_clip", "targetname");
+  m_clean_room_door_02_l_clip linkTo(m_clean_room_door_02_l);
+  m_clean_room_door_02_r_clip = getEnt("clean_room_door_02_r_clip", "targetname");
+  m_clean_room_door_02_r_clip linkTo(m_clean_room_door_02_r);
   m_clean_room_door_02_l movey(58, 1);
   m_clean_room_door_02_r movey(-58, 1);
   m_clean_room_door_02_r waittill("movedone");
@@ -599,12 +599,12 @@ player_asd_intro() {
   earthquake(0.75, 2, level.player.origin, 1000);
   level.player shellshock("default", 8.5);
   level.player playSound("evt_lab_entrance_exp");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level.player setCanDamage(0);
   level clientnotify("snd_alarm");
   setsaveddvar("bg_fallDamageMinHeight", 512);
   setsaveddvar("bg_fallDamageMaxHeight", 850);
-  m_asd_intro_tile_fall = getent("asd_intro_tile_fall", "targetname");
+  m_asd_intro_tile_fall = getEnt("asd_intro_tile_fall", "targetname");
   m_asd_intro_tile_fall delete();
   setmusicstate("MONSOON_BASE_FIGHT_1");
 
@@ -613,9 +613,9 @@ player_asd_intro() {
   }
 
   level.player stopsounds();
-  bm_player_asd_window = getent("player_asd_window", "targetname");
-  bm_player_asd_window_2 = getent("player_asd_window_2", "targetname");
-  e_player_asd_window_clip = getent("player_asd_window_clip", "targetname");
+  bm_player_asd_window = getEnt("player_asd_window", "targetname");
+  bm_player_asd_window_2 = getEnt("player_asd_window_2", "targetname");
+  e_player_asd_window_clip = getEnt("player_asd_window_clip", "targetname");
   bm_player_asd_window connectpaths();
   bm_player_asd_window_2 connectpaths();
   e_player_asd_window_clip connectpaths();
@@ -626,8 +626,8 @@ player_asd_intro() {
   flag_set("end_player_asd_anim");
   autosave_by_name("asd_intro");
   level.player setCanDamage(1);
-  s_hallway_rockets_start = getstruct("hallway_rockets_start", "targetname");
-  s_asd_hallway_target = getstruct("asd_hallway_target", "targetname");
+  s_hallway_rockets_start = getStruct("hallway_rockets_start", "targetname");
+  s_asd_hallway_target = getStruct("asd_hallway_target", "targetname");
   magicbullet("metalstorm_launcher", s_hallway_rockets_start.origin, s_asd_hallway_target.origin);
   wait 0.25;
   magicbullet("metalstorm_launcher", s_hallway_rockets_start.origin, s_asd_hallway_target.origin);
@@ -635,10 +635,10 @@ player_asd_intro() {
 
 asd_fall_back_think() {
   self endon("death");
-  s_asd_2_spot = getstruct("asd_2_spot", "targetname");
+  s_asd_2_spot = getStruct("asd_2_spot", "targetname");
   self maps\_vehicle::defend(s_asd_2_spot.origin, 128);
   flag_wait("spawn_lobby_guys");
-  s_asd_fallback_pos = getstruct("asd_fallback_pos", "targetname");
+  s_asd_fallback_pos = getStruct("asd_fallback_pos", "targetname");
   self thread maps\_vehicle::defend(s_asd_fallback_pos.origin, 128);
   waittill_ai_group_ai_count("lobby_guys", 5);
   self notify("death");
@@ -649,10 +649,10 @@ harper_grenade_launch(guy) {
 }
 
 asd_grenade_defense(guy) {
-  s_midair_nade_explosion = getstruct("midair_nade_explosion", "targetname");
+  s_midair_nade_explosion = getStruct("midair_nade_explosion", "targetname");
   playFX(getfx("c4_explode"), s_midair_nade_explosion.origin);
   level notify("fxanim_metal_storm_enter02_start");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   earthquake(0.2, 0.5, level.player.origin, 1000);
 }
 
@@ -756,12 +756,12 @@ asd_hallway_vo() {
 }
 
 rpg_hallway_destruction() {
-  s_asd_rpg_start = getstruct("asd_rpg_start", "targetname");
-  s_asd_rpg_end = getstruct(s_asd_rpg_start.target, "targetname");
-  s_asd_rpg_start_2 = getstruct("asd_rpg_start_2", "targetname");
-  s_asd_rpg_end_2 = getstruct(s_asd_rpg_start_2.target, "targetname");
-  s_asd_rpg_start_4 = getstruct("asd_rpg_start_4", "targetname");
-  s_asd_rpg_end_4 = getstruct(s_asd_rpg_start_4.target, "targetname");
+  s_asd_rpg_start = getStruct("asd_rpg_start", "targetname");
+  s_asd_rpg_end = getStruct(s_asd_rpg_start.target, "targetname");
+  s_asd_rpg_start_2 = getStruct("asd_rpg_start_2", "targetname");
+  s_asd_rpg_end_2 = getStruct(s_asd_rpg_start_2.target, "targetname");
+  s_asd_rpg_start_4 = getStruct("asd_rpg_start_4", "targetname");
+  s_asd_rpg_end_4 = getStruct(s_asd_rpg_start_4.target, "targetname");
   magicbullet("metalstorm_launcher", s_asd_rpg_start.origin, s_asd_rpg_end.origin);
   magicbullet("metalstorm_launcher", s_asd_rpg_start_2.origin, s_asd_rpg_end_2.origin);
   magicbullet("metalstorm_launcher", s_asd_rpg_start_4.origin, s_asd_rpg_end_4.origin);
@@ -772,13 +772,13 @@ rpg_hallway_destruction() {
 asd_hallway_gunfire() {
   self endon("death");
   wait 2;
-  e_asd_turret_target = getent("asd_turret_target", "targetname");
-  s_asd_turret_target_end = getstruct("asd_turret_target_end", "targetname");
-  self setturrettargetent(e_asd_turret_target);
+  e_asd_turret_target = getEnt("asd_turret_target", "targetname");
+  s_asd_turret_target_end = getStruct("asd_turret_target_end", "targetname");
+  self setturrettargetEnt(e_asd_turret_target);
   self thread metalstorm_fire_for_time(5);
-  e_asd_turret_target moveto(s_asd_turret_target_end.origin, 5);
+  e_asd_turret_target moveTo(s_asd_turret_target_end.origin, 5);
   wait 3;
-  s_asd_hallway_target = getstruct("asd_hallway_target", "targetname");
+  s_asd_hallway_target = getStruct("asd_hallway_target", "targetname");
   magicbullet("metalstorm_launcher", self gettagorigin("TAG_MISSILE1"), s_asd_hallway_target.origin);
   wait 0.5;
   magicbullet("metalstorm_launcher", self gettagorigin("TAG_MISSILE1"), s_asd_hallway_target.origin);
@@ -787,19 +787,19 @@ asd_hallway_gunfire() {
 vo_player_asd() {
   level endon("stop_shelf_fxanim");
   trigger_wait("asd_flank_explosions");
-  e_lab_shelf_clip_show = getent("lab_shelf_clip_show", "targetname");
+  e_lab_shelf_clip_show = getEnt("lab_shelf_clip_show", "targetname");
   e_lab_shelf_clip_show show();
   e_lab_shelf_clip_show solid();
-  e_lab_shelf_clip_hide = getent("lab_shelf_clip_hide", "targetname");
+  e_lab_shelf_clip_hide = getEnt("lab_shelf_clip_hide", "targetname");
   e_lab_shelf_clip_hide hide();
   e_lab_shelf_clip_hide notsolid();
   level notify("fxanim_flank_start");
-  s_flank_physics = getstruct("s_flank_physics", "targetname");
+  s_flank_physics = getStruct("s_flank_physics", "targetname");
   physicsexplosionsphere(s_flank_physics.origin, 64, 32, 0.3);
   earthquake(0.2, 0.3, level.player.origin, 128);
-  level.player playrumbleonentity("damage_heavy");
-  s_asd_rpg_start_3 = getstruct("asd_rpg_start_3", "targetname");
-  s_asd_rpg_end_3 = getstruct(s_asd_rpg_start_3.target, "targetname");
+  level.player playRumbleOnEntity("damage_heavy");
+  s_asd_rpg_start_3 = getStruct("asd_rpg_start_3", "targetname");
+  s_asd_rpg_end_3 = getStruct(s_asd_rpg_start_3.target, "targetname");
   magicbullet("metalstorm_launcher", s_asd_rpg_start_3.origin, s_asd_rpg_end_3.origin);
 }
 
@@ -818,7 +818,7 @@ asd_lobby_think() {
   self setCanDamage(1);
   self veh_magic_bullet_shield(0);
   self thread asd_health_watch();
-  s_asd_tutorial_spot = getstruct("asd_tutorial_spot", "targetname");
+  s_asd_tutorial_spot = getStruct("asd_tutorial_spot", "targetname");
   self setvehgoalpos(s_asd_tutorial_spot.origin, 1, 2, 1);
   self waittill_any("goal", "near_goal");
   self maps\_vehicle::defend(s_asd_tutorial_spot.origin, 128);
@@ -890,13 +890,13 @@ asd_battle_dialog() {
 
 color_trig_cleanup() {
   trigger_wait("trig_color_lobby_mid");
-  trig_left_lobby_guy = getent("trig_left_lobby_guy", "targetname");
+  trig_left_lobby_guy = getEnt("trig_left_lobby_guy", "targetname");
 
   if(isDefined(trig_left_lobby_guy)) {
     trig_left_lobby_guy delete();
   }
 
-  trig_right_lobby_guy = getent("trig_right_lobby_guy", "targetname");
+  trig_right_lobby_guy = getEnt("trig_right_lobby_guy", "targetname");
 
   if(isDefined(trig_left_lobby_guy)) {
     trig_right_lobby_guy delete();
@@ -904,20 +904,20 @@ color_trig_cleanup() {
 }
 
 remove_hallway_ai_clip() {
-  e_asd_hallway_clip = getent("asd_hallway_clip", "targetname");
+  e_asd_hallway_clip = getEnt("asd_hallway_clip", "targetname");
   e_asd_hallway_clip connectpaths();
   e_asd_hallway_clip delete();
 }
 
 lobby_upstairs_doors() {
-  e_right_lobby_top_door = getent("right_lobby_top_door", "targetname");
+  e_right_lobby_top_door = getEnt("right_lobby_top_door", "targetname");
   e_right_lobby_top_door ignorecheapentityflag(1);
-  bm_right_lobby_top_door_clip = getent("right_lobby_top_door_clip", "targetname");
-  e_left_lobby_top_door = getent("left_lobby_top_door", "targetname");
+  bm_right_lobby_top_door_clip = getEnt("right_lobby_top_door_clip", "targetname");
+  e_left_lobby_top_door = getEnt("left_lobby_top_door", "targetname");
   e_left_lobby_top_door ignorecheapentityflag(1);
-  bm_left_lobby_top_door_clip = getent("left_lobby_top_door_clip", "targetname");
-  bm_right_lobby_top_door_clip linkto(e_right_lobby_top_door);
-  bm_left_lobby_top_door_clip linkto(e_left_lobby_top_door);
+  bm_left_lobby_top_door_clip = getEnt("left_lobby_top_door_clip", "targetname");
+  bm_right_lobby_top_door_clip linkTo(e_right_lobby_top_door);
+  bm_left_lobby_top_door_clip linkTo(e_left_lobby_top_door);
   bm_right_lobby_top_door_clip connectpaths();
   e_right_lobby_top_door connectpaths();
   bm_left_lobby_top_door_clip connectpaths();
@@ -928,10 +928,10 @@ lobby_upstairs_doors() {
 }
 
 left_lobby_door() {
-  e_left_lobby_door = getent("left_lobby_door", "targetname");
+  e_left_lobby_door = getEnt("left_lobby_door", "targetname");
   e_left_lobby_door ignorecheapentityflag(1);
-  bm_left_lobby_door_clip = getent("left_lobby_door_clip", "targetname");
-  bm_left_lobby_door_clip linkto(e_left_lobby_door);
+  bm_left_lobby_door_clip = getEnt("left_lobby_door_clip", "targetname");
+  bm_left_lobby_door_clip linkTo(e_left_lobby_door);
   bm_left_lobby_door_clip connectpaths();
   e_left_lobby_door connectpaths();
   trigger_wait("trig_left_lobby_door");
@@ -939,10 +939,10 @@ left_lobby_door() {
 }
 
 right_lobby_door() {
-  e_right_lobby_door = getent("right_lobby_door", "targetname");
+  e_right_lobby_door = getEnt("right_lobby_door", "targetname");
   e_right_lobby_door ignorecheapentityflag(1);
-  bm_right_lobby_door_clip = getent("right_lobby_door_clip", "targetname");
-  bm_right_lobby_door_clip linkto(e_right_lobby_door);
+  bm_right_lobby_door_clip = getEnt("right_lobby_door_clip", "targetname");
+  bm_right_lobby_door_clip linkTo(e_right_lobby_door);
   bm_right_lobby_door_clip connectpaths();
   e_right_lobby_door connectpaths();
   trigger_wait("trig_right_lobby_door");
@@ -958,10 +958,10 @@ lab_doors() {
 }
 
 lab_2_1_left_door() {
-  e_left_2_1_door = getent("left_2_1_door", "targetname");
+  e_left_2_1_door = getEnt("left_2_1_door", "targetname");
   e_left_2_1_door ignorecheapentityflag(1);
-  bm_left_2_1_door_clip = getent("left_2_1_door_clip", "targetname");
-  bm_left_2_1_door_clip linkto(e_left_2_1_door);
+  bm_left_2_1_door_clip = getEnt("left_2_1_door_clip", "targetname");
+  bm_left_2_1_door_clip linkTo(e_left_2_1_door);
   e_left_2_1_door connectpaths();
   bm_left_2_1_door_clip connectpaths();
   trigger_wait("trig_left_2_1_door");
@@ -969,10 +969,10 @@ lab_2_1_left_door() {
 }
 
 lab_2_1_right_door() {
-  e_right_2_1_door = getent("right_2_1_door", "targetname");
+  e_right_2_1_door = getEnt("right_2_1_door", "targetname");
   e_right_2_1_door ignorecheapentityflag(1);
-  bm_right_2_1_door_clip = getent("right_2_1_door_clip", "targetname");
-  bm_right_2_1_door_clip linkto(e_right_2_1_door);
+  bm_right_2_1_door_clip = getEnt("right_2_1_door_clip", "targetname");
+  bm_right_2_1_door_clip linkTo(e_right_2_1_door);
   e_right_2_1_door connectpaths();
   bm_right_2_1_door_clip connectpaths();
   trigger_wait("trig_right_2_1_door");
@@ -1077,22 +1077,22 @@ lab_color_triggers() {
 
 notify_targeted_trigger() {
   self waittill("trigger");
-  e_trig_split_path = getent(self.target, "targetname");
+  e_trig_split_path = getEnt(self.target, "targetname");
   e_trig_split_path useby(level.player);
 }
 
 lab_spawn_funcs() {
-  ai_isaac = getent("isaac", "targetname");
+  ai_isaac = getEnt("isaac", "targetname");
   ai_isaac add_spawn_function(::setup_isaac);
-  ai_window_jumper = getent("window_jumper", "targetname");
+  ai_window_jumper = getEnt("window_jumper", "targetname");
   ai_window_jumper add_spawn_function(::init_window_jumper);
   a_lab_scientist = getEntArray("ambient_lab_scientists", "script_noteworthy");
   array_thread(a_lab_scientist, ::add_spawn_function, ::init_lab_scientists);
-  ai_left_lobby_guy = getent("left_lobby_guy", "script_noteworthy");
+  ai_left_lobby_guy = getEnt("left_lobby_guy", "script_noteworthy");
   ai_left_lobby_guy add_spawn_function(::trigger_left_lobby_color);
-  ai_right_lobby_guy = getent("right_lobby_guy", "script_noteworthy");
+  ai_right_lobby_guy = getEnt("right_lobby_guy", "script_noteworthy");
   ai_right_lobby_guy add_spawn_function(::trigger_right_lobby_color);
-  ai_escape_stair_guy = getent("escape_stair_guy", "targetname");
+  ai_escape_stair_guy = getEnt("escape_stair_guy", "targetname");
   ai_escape_stair_guy add_spawn_function(::init_escape_stair_guy);
   add_spawn_function_veh("nitrogen_asd", ::init_nitrogen_asd);
   add_spawn_function_veh("right_path_asd", ::init_right_path_asd);
@@ -1104,7 +1104,7 @@ lab_spawn_funcs() {
   array_thread(a_guy_ragdoll_death, ::add_spawn_function, ::init_guy_ragdoll_death);
   a_corpse_guy = getEntArray("corpse_guy", "script_noteworthy");
   array_thread(a_corpse_guy, ::add_spawn_function, ::init_guy_ragdoll_death);
-  e_crawl_back_guy = getent("crawl_back_guy", "targetname");
+  e_crawl_back_guy = getEnt("crawl_back_guy", "targetname");
   e_crawl_back_guy add_spawn_function(::init_crawl_back_guy);
   a_ending_friendlies = getEntArray("ending_friendlies", "script_noteworthy");
   array_thread(a_ending_friendlies, ::add_spawn_function, ::init_ending_friendlies);
@@ -1181,7 +1181,7 @@ init_nitrogen_asd() {
   self maps\_vehicle::vehicle_pathdetach();
   self.ignoreme = 0;
   flag_wait("nitrogen_asd_fallback_1");
-  s_nitrogen_asd_elevator_pos = getstruct("nitrogen_asd_fallback_pos_1", "targetname");
+  s_nitrogen_asd_elevator_pos = getStruct("nitrogen_asd_fallback_pos_1", "targetname");
   self setvehgoalpos(s_nitrogen_asd_elevator_pos.origin, 1, 2, 1);
   self waittill_any("goal", "near_goal");
   self maps\_vehicle::defend(self.origin, 128);
@@ -1189,36 +1189,36 @@ init_nitrogen_asd() {
 
 asd_fire_on_lift() {
   self endon("death");
-  s_asd_elevator_target = getstruct("asd_elevator_target", "targetname");
+  s_asd_elevator_target = getStruct("asd_elevator_target", "targetname");
   e_asd_target_origin = spawn("script_origin", s_asd_elevator_target.origin);
   e_asd_target_origin.angles = s_asd_elevator_target.angles;
-  s_end_asd_lift_target = getstruct("end_asd_lift_target", "targetname");
-  self setturrettargetent(e_asd_target_origin);
+  s_end_asd_lift_target = getStruct("end_asd_lift_target", "targetname");
+  self setturrettargetEnt(e_asd_target_origin);
   level thread lift_destruction();
   flag_wait("start_shooting_lift");
   level notify("fxanim_elevator_asd_dmg_start");
   self thread metalstorm_fire_for_time(4);
-  e_asd_target_origin moveto(s_end_asd_lift_target.origin, 3.5);
-  s_lift_asd_target_1 = getstruct("lift_asd_target_1", "targetname");
-  s_lift_asd_target_2 = getstruct("lift_asd_target_2", "targetname");
-  s_lift_asd_target_3 = getstruct("lift_asd_target_3", "targetname");
+  e_asd_target_origin moveTo(s_end_asd_lift_target.origin, 3.5);
+  s_lift_asd_target_1 = getStruct("lift_asd_target_1", "targetname");
+  s_lift_asd_target_2 = getStruct("lift_asd_target_2", "targetname");
+  s_lift_asd_target_3 = getStruct("lift_asd_target_3", "targetname");
   e_asd_target_origin waittill("movedone");
   wait 0.4;
   self thread metalstorm_fire_for_time(4);
-  e_asd_target_origin moveto(s_asd_elevator_target.origin, 3.5);
+  e_asd_target_origin moveTo(s_asd_elevator_target.origin, 3.5);
   e_asd_target_origin waittill("movedone");
   self clearturrettarget();
   self thread metalstorm_weapon_think();
 }
 
 lift_destruction() {
-  e_left_window = getent("lift_interior_window_1_left_m", "targetname");
+  e_left_window = getEnt("lift_interior_window_1_left_m", "targetname");
   e_left_window thread elevator_damage_watch("p6_monsoon_ext_elevator_glass_lft_broken", 3401);
-  e_right_window = getent("lift_interior_window_1_right_m", "targetname");
+  e_right_window = getEnt("lift_interior_window_1_right_m", "targetname");
   e_right_window thread elevator_damage_watch("p6_monsoon_ext_elevator_glass_rt_broken", 3404);
-  m_door_north_r = getent("lift_interior_door_1_right_m", "targetname");
+  m_door_north_r = getEnt("lift_interior_door_1_right_m", "targetname");
   m_door_north_r thread elevator_damage_watch("p6_monsoon_ext_elevator_door_broken", 3402);
-  m_door_north_l = getent("lift_interior_door_1_left_m", "targetname");
+  m_door_north_l = getEnt("lift_interior_door_1_left_m", "targetname");
   m_door_north_l thread elevator_damage_watch("p6_monsoon_ext_elevator_door_broken", 3403);
 }
 
@@ -1248,10 +1248,10 @@ init_right_path_asd() {
   self thread metalstorm_weapon_think();
   self waittill("reached_end_node");
   self maps\_vehicle::vehicle_pathdetach();
-  s_right_path_asd_attack_pos = getstruct("right_path_asd_attack_pos", "targetname");
+  s_right_path_asd_attack_pos = getStruct("right_path_asd_attack_pos", "targetname");
   self maps\_vehicle::defend(s_right_path_asd_attack_pos.origin, 128);
   flag_wait("right_path_asd_fallback");
-  s_right_path_asd_fallback = getstruct("right_path_asd_fallback", "targetname");
+  s_right_path_asd_fallback = getStruct("right_path_asd_fallback", "targetname");
   self setvehgoalpos(s_right_path_asd_fallback.origin, 1, 2, 1);
   self waittill_any("goal", "near_goal");
   self maps\_vehicle::defend(self.origin, 128);
@@ -1304,8 +1304,8 @@ lab_scientist_screams() {
 window_jumper() {
   level endon("end_ambient_asd");
   trigger_wait("trig_window_jumper");
-  s_window_jumper_target = getstruct("window_jumper_target", "targetname");
-  s_window_jumper_target_end = getstruct(s_window_jumper_target.target, "targetname");
+  s_window_jumper_target = getStruct("window_jumper_target", "targetname");
+  s_window_jumper_target_end = getStruct(s_window_jumper_target.target, "targetname");
   magicbullet("scar_sp", s_window_jumper_target.origin, s_window_jumper_target_end.origin);
   magicbullet("scar_sp", s_window_jumper_target.origin, s_window_jumper_target_end.origin);
   magicbullet("scar_sp", s_window_jumper_target.origin, s_window_jumper_target_end.origin);
@@ -1339,7 +1339,7 @@ first_floor_lab_main() {
 
 first_floor_kill_trig() {
   flag_wait("player_crosby_path");
-  first_floor_kill_trig = getent("first_floor_kill_trig", "targetname");
+  first_floor_kill_trig = getEnt("first_floor_kill_trig", "targetname");
   a_axis_ai = getaiarray("axis");
 
   foreach(ai in a_axis_ai) {
@@ -1352,7 +1352,7 @@ first_floor_kill_trig() {
 
 second_floor_kill_trig() {
   flag_wait("player_first_floor_path");
-  second_floor_kill_trig = getent("second_floor_kill_trig", "targetname");
+  second_floor_kill_trig = getEnt("second_floor_kill_trig", "targetname");
   a_axis_ai = getaiarray("axis");
 
   foreach(ai in a_axis_ai) {
@@ -1365,7 +1365,7 @@ second_floor_kill_trig() {
 
 right_path_kill_trig() {
   flag_wait("player_harps_path");
-  right_path_kill_trig = getent("right_path_kill_trig", "targetname");
+  right_path_kill_trig = getEnt("right_path_kill_trig", "targetname");
   a_axis_ai = getaiarray("axis");
 
   foreach(ai in a_axis_ai) {
@@ -1378,7 +1378,7 @@ right_path_kill_trig() {
 
 harp_path_kill_trig() {
   flag_wait("player_at_right_path");
-  harp_path_kill_trig = getent("harp_path_kill_trig", "targetname");
+  harp_path_kill_trig = getEnt("harp_path_kill_trig", "targetname");
   a_axis_ai = getaiarray("axis");
 
   foreach(ai in a_axis_ai) {
@@ -1396,7 +1396,7 @@ harper_speed_up() {
   kill_spawnernum(205);
   kill_spawnernum(206);
   kill_spawnernum(207);
-  trig_top_floor_volume = getent("trig_top_floor_volume", "targetname");
+  trig_top_floor_volume = getEnt("trig_top_floor_volume", "targetname");
   a_axis_ai = getaiarray("axis");
 
   foreach(ai in a_axis_ai) {
@@ -1408,7 +1408,7 @@ harper_speed_up() {
 
   simple_spawn_single("harper_speed_up_victim", ::weaken_harper_victim);
   level.harper disable_ai_color(1);
-  s_harper_speed_up_pos = getstruct("harper_speed_up_pos", "targetname");
+  s_harper_speed_up_pos = getStruct("harper_speed_up_pos", "targetname");
   level.harper teleport(s_harper_speed_up_pos.origin, s_harper_speed_up_pos.angles);
   nd_harper_pre_lift = getnode("harper_pre_lift", "targetname");
   level.harper.goalradius = 32;
@@ -1429,7 +1429,7 @@ salazar_crosby_speed_up() {
   kill_spawnernum(209);
   kill_spawnernum(210);
   kill_spawnernum(211);
-  trig_bottom_floor_volume = getent("trig_bottom_floor_volume", "targetname");
+  trig_bottom_floor_volume = getEnt("trig_bottom_floor_volume", "targetname");
   a_axis_ai = getaiarray("axis");
 
   foreach(ai in a_axis_ai) {
@@ -1441,8 +1441,8 @@ salazar_crosby_speed_up() {
 
   level.salazar disable_ai_color(1);
   level.crosby disable_ai_color(1);
-  s_salazar_speed_up_pos = getstruct("salazar_speed_up_pos", "targetname");
-  s_crosby_speed_up_pos = getstruct("crosby_speed_up_pos", "targetname");
+  s_salazar_speed_up_pos = getStruct("salazar_speed_up_pos", "targetname");
+  s_crosby_speed_up_pos = getStruct("crosby_speed_up_pos", "targetname");
   level.salazar teleport(s_salazar_speed_up_pos.origin, s_salazar_speed_up_pos.angles);
   level.crosby teleport(s_crosby_speed_up_pos.origin, s_crosby_speed_up_pos.angles);
   nd_salazar_pre_lift = getnode("salazar_pre_lift", "targetname");
@@ -1457,10 +1457,10 @@ harper_railing_throw() {
   level endon("stop_harper_throw");
   trigger_wait("trig_harper_railing_throw");
   kill_spawnernum(206);
-  trig_bottom_floor_volume = getent("trig_bottom_floor_volume", "targetname");
+  trig_bottom_floor_volume = getEnt("trig_bottom_floor_volume", "targetname");
 
   if(level.player istouching(trig_bottom_floor_volume)) {
-    trig_volume_harper_throw = getent("trig_volume_harper_throw", "targetname");
+    trig_volume_harper_throw = getEnt("trig_volume_harper_throw", "targetname");
     a_axis_ai = getaiarray("axis");
 
     foreach(axis in a_axis_ai) {
@@ -1617,11 +1617,11 @@ elevator_transition() {
   level.salazar thread salazar_elevator_ride();
   level.crosby thread crosby_elevator_ride();
   flag_set("elevator_is_ready");
-  e_trig_elevator_panel = getent("trig_elevator_panel", "targetname");
-  e_trig_elevator_panel sethintstring(&"MONSOON_LIFT_PROMPT");
-  e_trig_elevator_panel setcursorhint("HINT_NOICON");
+  e_trig_elevator_panel = getEnt("trig_elevator_panel", "targetname");
+  e_trig_elevator_panel setHintString(&"MONSOON_LIFT_PROMPT");
+  e_trig_elevator_panel setCursorHint("HINT_NOICON");
   e_trig_elevator_panel waittill("trigger");
-  e_trig_elevator_panel sethintstring("");
+  e_trig_elevator_panel setHintString("");
   level thread lift_hack_visor_text();
   end_scene("harper_elevator_enter");
   end_scene("harper_elevator_idle");
@@ -1710,8 +1710,8 @@ salazar_elevator_ride() {
   flag_wait("start_elevator_exits");
   end_scene("salazar_elevator_idle");
   delete_scene("salazar_elevator_idle");
-  e_elevator_regroup = getent("elevator_regroup", "targetname");
-  self linkto(e_elevator_regroup);
+  e_elevator_regroup = getEnt("elevator_regroup", "targetname");
+  self linkTo(e_elevator_regroup);
   run_scene("salazar_elevator_exit");
   nd_lift_salazar = getnode("nd_lift_salazar", "targetname");
   self setgoalnode(nd_lift_salazar);
@@ -1728,8 +1728,8 @@ crosby_elevator_ride() {
   flag_wait("start_elevator_exits");
   end_scene("crosby_elevator_idle");
   delete_scene("crosby_elevator_idle");
-  e_elevator_regroup = getent("elevator_regroup", "targetname");
-  self linkto(e_elevator_regroup);
+  e_elevator_regroup = getEnt("elevator_regroup", "targetname");
+  self linkTo(e_elevator_regroup);
   run_scene("crosby_elevator_exit");
   nd_lift_crosby = getnode("nd_lift_crosby", "targetname");
   self setgoalnode(nd_lift_crosby);
@@ -1737,48 +1737,48 @@ crosby_elevator_ride() {
 }
 
 inside_lift_init() {
-  m_lift = getent("lift_interior_m", "targetname");
-  e_lift_scanner = getent("lift_scanner", "targetname");
-  e_lift_scanner linkto(m_lift);
-  e_interior_lift_red_light = getent("interior_lift_red_light", "targetname");
-  e_interior_lift_red_light linkto(m_lift);
-  a_m_doors[0] = getent("lift_interior_door_2_left_m", "targetname");
-  a_m_doors[1] = getent("lift_interior_door_2_right_m", "targetname");
-  a_m_doors[2] = getent("lift_interior_door_1_left_m", "targetname");
-  a_m_doors[3] = getent("lift_interior_door_1_right_m", "targetname");
+  m_lift = getEnt("lift_interior_m", "targetname");
+  e_lift_scanner = getEnt("lift_scanner", "targetname");
+  e_lift_scanner linkTo(m_lift);
+  e_interior_lift_red_light = getEnt("interior_lift_red_light", "targetname");
+  e_interior_lift_red_light linkTo(m_lift);
+  a_m_doors[0] = getEnt("lift_interior_door_2_left_m", "targetname");
+  a_m_doors[1] = getEnt("lift_interior_door_2_right_m", "targetname");
+  a_m_doors[2] = getEnt("lift_interior_door_1_left_m", "targetname");
+  a_m_doors[3] = getEnt("lift_interior_door_1_right_m", "targetname");
 
   foreach(m_door in a_m_doors) {
     m_door ignorecheapentityflag(1);
     m_door setforcenocull();
-    m_door linkto(m_lift);
+    m_door linkTo(m_lift);
   }
 
-  a_m_glass[0] = getent("lift_interior_window_1_left_m", "targetname");
-  a_m_glass[1] = getent("lift_interior_window_1_right_m", "targetname");
-  a_m_glass[2] = getent("lift_interior_window_2_left_m", "targetname");
-  a_m_glass[3] = getent("lift_interior_window_2_right_m", "targetname");
-  a_m_glass[4] = getent("lift_interior_window_2_left_m", "targetname");
-  a_m_glass[5] = getent("lift_interior_window_2_right_m", "targetname");
+  a_m_glass[0] = getEnt("lift_interior_window_1_left_m", "targetname");
+  a_m_glass[1] = getEnt("lift_interior_window_1_right_m", "targetname");
+  a_m_glass[2] = getEnt("lift_interior_window_2_left_m", "targetname");
+  a_m_glass[3] = getEnt("lift_interior_window_2_right_m", "targetname");
+  a_m_glass[4] = getEnt("lift_interior_window_2_left_m", "targetname");
+  a_m_glass[5] = getEnt("lift_interior_window_2_right_m", "targetname");
 
   foreach(m_glass in a_m_glass) {
     m_glass ignorecheapentityflag(1);
-    m_glass linkto(m_lift);
+    m_glass linkTo(m_lift);
   }
 
-  a_bm_doors[0] = getent("lift_interior_door_2_left", "targetname");
-  a_bm_doors[1] = getent("lift_interior_door_2_right", "targetname");
-  a_bm_doors[2] = getent("lift_interior_door_1_left", "targetname");
-  a_bm_doors[3] = getent("lift_interior_door_1_right", "targetname");
+  a_bm_doors[0] = getEnt("lift_interior_door_2_left", "targetname");
+  a_bm_doors[1] = getEnt("lift_interior_door_2_right", "targetname");
+  a_bm_doors[2] = getEnt("lift_interior_door_1_left", "targetname");
+  a_bm_doors[3] = getEnt("lift_interior_door_1_right", "targetname");
 
   for(i = 0; i < a_bm_doors.size; i++) {
     a_bm_doors[i] ignorecheapentityflag(1);
-    a_bm_doors[i] linkto(a_m_doors[i]);
+    a_bm_doors[i] linkTo(a_m_doors[i]);
   }
 
   m_lift.a_right_nodes = getnodearray("interior_lift_right_nodes", "targetname");
   m_lift.a_left_nodes = getnodearray("interior_lift_left_nodes", "targetname");
   m_lift.v_lift_bottom = m_lift.origin;
-  m_lift.v_lift_top = (m_lift.origin[0], m_lift.origin[1], getstruct("interior_lift_up", "targetname").origin[2]);
+  m_lift.v_lift_top = (m_lift.origin[0], m_lift.origin[1], getStruct("interior_lift_up", "targetname").origin[2]);
   wait 0.05;
   level thread inside_lift_move_up();
   level thread inside_lift_move_down();
@@ -1813,23 +1813,23 @@ inside_lift_move_down() {
   level thread lower_lab_level_vo();
   flag_wait("start_lift_move_down");
   level thread lower_lab_enemy_vo();
-  playsoundatposition("evt_elevator_close_2d", (0, 0, 0));
-  e_player_elevator_top_clip = getent("player_elevator_top_clip", "targetname");
-  e_player_elevator_top_clip disconnectpaths();
+  playSoundAtPosition("evt_elevator_close_2d", (0, 0, 0));
+  e_player_elevator_top_clip = getEnt("player_elevator_top_clip", "targetname");
+  e_player_elevator_top_clip disconnectPaths();
   e_player_elevator_top_clip solid();
-  m_lift = getent("lift_interior_m", "targetname");
+  m_lift = getEnt("lift_interior_m", "targetname");
   interior_lift_top_connect_left = getnodearray("interior_lift_top_connect_left", "targetname");
   interior_lift_top_connect_right = getnodearray("interior_lift_top_connect_right", "targetname");
   array_func(m_lift.a_right_nodes, ::_interior_elevator_disconnect_nodes, interior_lift_top_connect_right);
   array_func(m_lift.a_left_nodes, ::_interior_elevator_disconnect_nodes, interior_lift_top_connect_left);
-  bm_door_south_l = getent("lift_interior_door_1_left", "targetname");
-  bm_door_south_r = getent("lift_interior_door_1_right", "targetname");
-  bm_door_north_l = getent("lift_interior_door_2_left", "targetname");
-  bm_door_north_r = getent("lift_interior_door_2_right", "targetname");
-  m_door_south_l = getent("lift_interior_door_2_left_m", "targetname");
-  m_door_south_r = getent("lift_interior_door_2_right_m", "targetname");
-  m_door_north_l = getent("lift_interior_door_1_left_m", "targetname");
-  m_door_north_r = getent("lift_interior_door_1_right_m", "targetname");
+  bm_door_south_l = getEnt("lift_interior_door_1_left", "targetname");
+  bm_door_south_r = getEnt("lift_interior_door_1_right", "targetname");
+  bm_door_north_l = getEnt("lift_interior_door_2_left", "targetname");
+  bm_door_north_r = getEnt("lift_interior_door_2_right", "targetname");
+  m_door_south_l = getEnt("lift_interior_door_2_left_m", "targetname");
+  m_door_south_r = getEnt("lift_interior_door_2_right_m", "targetname");
+  m_door_north_l = getEnt("lift_interior_door_1_left_m", "targetname");
+  m_door_north_r = getEnt("lift_interior_door_1_right_m", "targetname");
   m_door_south_l unlink();
   m_door_south_r unlink();
   m_door_north_l unlink();
@@ -1847,29 +1847,29 @@ inside_lift_move_down() {
   bm_door_north_l movey(-60, 2, 0.5);
   bm_door_north_r movey(60, 2, 0.5);
   bm_door_north_r waittill("movedone");
-  playsoundatposition("evt_elevator_start", (0, 0, 0));
+  playSoundAtPosition("evt_elevator_start", (0, 0, 0));
   level thread elevator_loop_n_stop_sounds();
-  m_door_south_l linkto(m_lift);
-  m_door_south_r linkto(m_lift);
-  m_door_north_l linkto(m_lift);
-  m_door_north_r linkto(m_lift);
-  bm_door_north_l linkto(m_lift);
-  bm_door_north_r linkto(m_lift);
-  bm_door_south_l linkto(m_lift);
-  bm_door_south_r linkto(m_lift);
-  level.player playrumbleonentity("damage_heavy");
+  m_door_south_l linkTo(m_lift);
+  m_door_south_r linkTo(m_lift);
+  m_door_north_l linkTo(m_lift);
+  m_door_north_r linkTo(m_lift);
+  bm_door_north_l linkTo(m_lift);
+  bm_door_north_r linkTo(m_lift);
+  bm_door_south_l linkTo(m_lift);
+  bm_door_south_r linkTo(m_lift);
+  level.player playRumbleOnEntity("damage_heavy");
   level.player playrumblelooponentity("tank_rumble");
   level.player setCanDamage(0);
   delay_thread(1, ::flag_set, "lift_pre_ambush_fire");
   delay_thread(2, ::flag_set, "spawn_nitrogen_guys");
   delay_thread(6, ::flag_set, "start_shooting_lift");
   delay_thread(5, ::flag_set, "start_elevator_exits");
-  m_lift moveto(m_lift.v_lift_bottom, 8, 1.6, 1.6);
+  m_lift moveTo(m_lift.v_lift_bottom, 8, 1.6, 1.6);
   m_lift waittill("movedone");
   level.player stoprumble("tank_rumble");
-  level.player playrumbleonentity("damage_heavy");
-  playsoundatposition("evt_elevator_open_2d", (0, 0, 0));
-  e_player_elevator_bottom_clip = getent("player_elevator_bottom_clip", "targetname");
+  level.player playRumbleOnEntity("damage_heavy");
+  playSoundAtPosition("evt_elevator_open_2d", (0, 0, 0));
+  e_player_elevator_bottom_clip = getEnt("player_elevator_bottom_clip", "targetname");
   e_player_elevator_bottom_clip connectpaths();
   e_player_elevator_bottom_clip delete();
   bm_door_north_l unlink();
@@ -1891,14 +1891,14 @@ inside_lift_move_down() {
   bm_door_south_r waittill("movedone");
   flag_set("lift_at_bottom");
   level.player setCanDamage(1);
-  bm_door_south_l linkto(m_lift);
-  bm_door_south_r linkto(m_lift);
-  bm_door_north_l linkto(m_lift);
-  bm_door_north_r linkto(m_lift);
-  m_door_south_l linkto(m_lift);
-  m_door_south_r linkto(m_lift);
-  m_door_north_l linkto(m_lift);
-  m_door_north_r linkto(m_lift);
+  bm_door_south_l linkTo(m_lift);
+  bm_door_south_r linkTo(m_lift);
+  bm_door_north_l linkTo(m_lift);
+  bm_door_north_r linkTo(m_lift);
+  m_door_south_l linkTo(m_lift);
+  m_door_south_r linkTo(m_lift);
+  m_door_north_l linkTo(m_lift);
+  m_door_north_r linkTo(m_lift);
   interior_lift_bottom_connect_left = getnodearray("interior_lift_bottom_connect_left", "targetname");
   interior_lift_bottom_connect_right = getnodearray("interior_lift_bottom_connect_right", "targetname");
   array_func(m_lift.a_right_nodes, ::_interior_elevator_connect_nodes, interior_lift_bottom_connect_right);
@@ -1910,32 +1910,32 @@ elevator_loop_n_stop_sounds() {
   elevator_ent_2 playLoopSound("evt_elevator_loop", 2.5);
   wait 6;
   elevator_ent_2 stoploopsound(1);
-  playsoundatposition("evt_elevator_stop", (9277, 57793, -943));
+  playSoundAtPosition("evt_elevator_stop", (9277, 57793, -943));
   elevator_ent_2 delete();
 }
 
 inside_lift_move_up() {
-  m_lift = getent("lift_interior_m", "targetname");
+  m_lift = getEnt("lift_interior_m", "targetname");
   flag_wait("start_lift_move_up");
   elevator_ent = spawn("script_origin", (9385, 57792, -987));
   elevator_ent playLoopSound("evt_elevator_loop_3d", 0.5);
   level thread elevator_stop_1_sound(elevator_ent);
   m_lift play_fx("lift_light", m_lift.origin, m_lift.angles, undefined, 1);
-  s_elevator_spotight_struct = getstruct("elevator_spotight_struct", "targetname");
+  s_elevator_spotight_struct = getStruct("elevator_spotight_struct", "targetname");
   array_func(m_lift.a_right_nodes, ::node_disconnect_from_path);
   array_func(m_lift.a_left_nodes, ::node_disconnect_from_path);
-  bm_door_south_l = getent("lift_interior_door_1_left", "targetname");
-  bm_door_south_r = getent("lift_interior_door_1_right", "targetname");
-  bm_door_north_l = getent("lift_interior_door_2_left", "targetname");
-  bm_door_north_r = getent("lift_interior_door_2_right", "targetname");
-  m_door_south_l = getent("lift_interior_door_2_left_m", "targetname");
-  m_door_south_r = getent("lift_interior_door_2_right_m", "targetname");
-  m_door_north_l = getent("lift_interior_door_1_left_m", "targetname");
-  m_door_north_r = getent("lift_interior_door_1_right_m", "targetname");
-  m_lift moveto(m_lift.v_lift_top, 8, 1.6, 1.6);
+  bm_door_south_l = getEnt("lift_interior_door_1_left", "targetname");
+  bm_door_south_r = getEnt("lift_interior_door_1_right", "targetname");
+  bm_door_north_l = getEnt("lift_interior_door_2_left", "targetname");
+  bm_door_north_r = getEnt("lift_interior_door_2_right", "targetname");
+  m_door_south_l = getEnt("lift_interior_door_2_left_m", "targetname");
+  m_door_south_r = getEnt("lift_interior_door_2_right_m", "targetname");
+  m_door_north_l = getEnt("lift_interior_door_1_left_m", "targetname");
+  m_door_north_r = getEnt("lift_interior_door_1_right_m", "targetname");
+  m_lift moveTo(m_lift.v_lift_top, 8, 1.6, 1.6);
   m_lift waittill("movedone");
-  playsoundatposition("evt_elevator_open", (9403, 57800, -929));
-  e_player_elevator_top_clip = getent("player_elevator_top_clip", "targetname");
+  playSoundAtPosition("evt_elevator_open", (9403, 57800, -929));
+  e_player_elevator_top_clip = getEnt("player_elevator_top_clip", "targetname");
   e_player_elevator_top_clip connectpaths();
   e_player_elevator_top_clip notsolid();
   m_door_south_l unlink();
@@ -1955,17 +1955,17 @@ inside_lift_move_up() {
   bm_door_south_l movey(60, 2, 0.5);
   bm_door_south_r movey(-60, 2, 0.5);
   bm_door_north_r waittill("movedone");
-  bm_door_north_l linkto(m_lift);
-  bm_door_north_r linkto(m_lift);
-  bm_door_south_l linkto(m_lift);
-  bm_door_south_r linkto(m_lift);
-  m_door_north_l linkto(m_lift);
-  m_door_north_r linkto(m_lift);
-  m_door_south_l linkto(m_lift);
-  m_door_south_r linkto(m_lift);
+  bm_door_north_l linkTo(m_lift);
+  bm_door_north_r linkTo(m_lift);
+  bm_door_south_l linkTo(m_lift);
+  bm_door_south_r linkTo(m_lift);
+  m_door_north_l linkTo(m_lift);
+  m_door_north_r linkTo(m_lift);
+  m_door_south_l linkTo(m_lift);
+  m_door_south_r linkTo(m_lift);
   flag_set("lift_at_top");
-  e_elevator_regroup = getent("elevator_regroup", "targetname");
-  e_elevator_regroup linkto(m_lift);
+  e_elevator_regroup = getEnt("elevator_regroup", "targetname");
+  e_elevator_regroup linkTo(m_lift);
   interior_lift_top_connect_left = getnodearray("interior_lift_top_connect_left", "targetname");
   interior_lift_top_connect_right = getnodearray("interior_lift_top_connect_right", "targetname");
   array_func(m_lift.a_right_nodes, ::_interior_elevator_connect_nodes, interior_lift_top_connect_right);
@@ -1975,7 +1975,7 @@ inside_lift_move_up() {
 elevator_stop_1_sound(elevator_ent) {
   wait 6;
   elevator_ent stoploopsound(0.5);
-  playsoundatposition("evt_elevator_stop_3d", (9277, 57793, -943));
+  playSoundAtPosition("evt_elevator_stop_3d", (9277, 57793, -943));
 }
 
 _interior_elevator_connect_nodes(a_nodes) {
@@ -1993,13 +1993,13 @@ _interior_elevator_disconnect_nodes(a_nodes) {
 }
 
 ddm_machines() {
-  e_ddm_machine_1 = getent("DDM_1", "targetname");
+  e_ddm_machine_1 = getEnt("DDM_1", "targetname");
   e_ddm_machine_1.animname = "ddm_1";
   e_ddm_machine_1 useanimtree(level.scr_animtree["ddm_1"]);
   e_ddm_machine_1 thread anim_loop(e_ddm_machine_1, "ddm_machine_1_loop");
   n_rand_wait = randomintrange(2, 4);
   wait(n_rand_wait);
-  e_ddm_machine_2 = getent("DDM_2", "targetname");
+  e_ddm_machine_2 = getEnt("DDM_2", "targetname");
   e_ddm_machine_2.animname = "ddm_2";
   e_ddm_machine_2 useanimtree(level.scr_animtree["ddm_2"]);
   e_ddm_machine_2 thread anim_loop(e_ddm_machine_2, "ddm_machine_2_loop");
@@ -2009,10 +2009,10 @@ ddm_machines() {
 }
 
 server_and_modem_machines() {
-  e_fxanim_server_arm_loop = getent("fxanim_server_arm_loop", "targetname");
+  e_fxanim_server_arm_loop = getEnt("fxanim_server_arm_loop", "targetname");
   e_fxanim_server_arm_loop.animname = "server_arm";
   e_fxanim_server_arm_loop useanimtree(level.scr_animtree["server_arm"]);
-  e_fxanim_server_arm_modems = getent("fxanim_server_arm_modems", "targetname");
+  e_fxanim_server_arm_modems = getEnt("fxanim_server_arm_modems", "targetname");
   e_fxanim_server_arm_modems.animname = "modem";
   e_fxanim_server_arm_modems useanimtree(level.scr_animtree["modem"]);
   level notify("fxanim_server_arm_loop_start");
@@ -2023,7 +2023,7 @@ ddm_start_harpers_shield(ddm_machine) {
     ddm_machine attach("t6_wpn_shield_carry_world", "J_shield_extend_attach_tag");
     ddm_machine anim_single(ddm_machine, "ddm_machine_1_extend");
     ddm_machine detach("t6_wpn_shield_carry_world", "J_shield_extend_attach_tag");
-    e_harpers_shield = getent("harper_shield", "targetname");
+    e_harpers_shield = getEnt("harper_shield", "targetname");
     e_harpers_shield show();
     flag_set("harper_shield_is_ready");
     scene_wait("harper_shield_plant");
@@ -2094,7 +2094,7 @@ fight_to_isaac_main() {
   level thread run_scene("lab_cower_1_loop");
   level thread monitor_lower_level_ai_groups("3_1_left_path", "3_1_left_path_cleared");
   level thread monitor_lower_level_ai_groups("3_1_right_path", "3_1_right_path_cleared");
-  vh_left_path_turret = getent("left_path_turret", "script_noteworthy");
+  vh_left_path_turret = getEnt("left_path_turret", "script_noteworthy");
 
   if(isDefined(vh_left_path_turret)) {
     vh_left_path_turret thread maps\_cic_turret::cic_turret_on();
@@ -2158,7 +2158,7 @@ fight_to_isaac_main() {
 watch_harp_at_turret() {
   level endon("start_lab_defend");
   flag_wait("harper_at_turret");
-  vh_left_path_turret = getent("left_path_turret", "script_noteworthy");
+  vh_left_path_turret = getEnt("left_path_turret", "script_noteworthy");
 
   if(isDefined(vh_left_path_turret)) {
     vh_left_path_turret notify("death");
@@ -2173,7 +2173,7 @@ watch_sal_at_asd() {
     level.vh_right_path_asd notify("death");
   }
 
-  trig_sal_at_asd_vol = getent("sal_at_asd_vol", "targetname");
+  trig_sal_at_asd_vol = getEnt("sal_at_asd_vol", "targetname");
   a_axis_ai = getaiarray("axis");
 
   foreach(ai in a_axis_ai) {
@@ -2273,7 +2273,7 @@ asd_nitrogen_challenge_watch() {
 }
 
 harper_titus_asd(ai_harper) {
-  s_harper_titus_target = getstruct("harper_titus_target", "targetname");
+  s_harper_titus_target = getStruct("harper_titus_target", "targetname");
   e_titus_target = spawn("script_origin", s_harper_titus_target.origin);
   e_titus_target.angles = s_harper_titus_target.angles;
 
@@ -2301,31 +2301,31 @@ challenge_freeze_asds(str_notify) {
 }
 
 struct_1_spark(guy) {
-  s_struct_1_spark = getstruct("struct_1_spark", "targetname");
+  s_struct_1_spark = getStruct("struct_1_spark", "targetname");
   play_fx("fx_mon_heli_blade_sparks_sm", s_struct_1_spark.origin, s_struct_1_spark.angles);
 }
 
 struct_2_spark(guy) {
-  s_struct_2_spark = getstruct("struct_2_spark", "targetname");
+  s_struct_2_spark = getStruct("struct_2_spark", "targetname");
   play_fx("fx_mon_heli_blade_sparks_sm", s_struct_2_spark.origin, s_struct_2_spark.angles);
 }
 
 struct_3_spark(guy) {
-  s_struct_3_spark = getstruct("struct_3_spark", "targetname");
+  s_struct_3_spark = getStruct("struct_3_spark", "targetname");
   play_fx("fx_mon_heli_blade_sparks_sm", s_struct_3_spark.origin, s_struct_3_spark.angles);
 }
 
 struct_4_spark(guy) {
-  s_struct_4_spark = getstruct("struct_4_spark", "targetname");
+  s_struct_4_spark = getStruct("struct_4_spark", "targetname");
   play_fx("fx_mon_heli_blade_sparks_sm", s_struct_4_spark.origin, s_struct_4_spark.angles);
 }
 
 struct_5_spark(guy) {
-  s_struct_5_spark = getstruct("struct_5_spark", "targetname");
+  s_struct_5_spark = getStruct("struct_5_spark", "targetname");
   play_fx("fx_mon_heli_blade_sparks_sm", s_struct_5_spark.origin, s_struct_5_spark.angles);
 }
 
 struct_6_spark(guy) {
-  s_struct_6_spark = getstruct("struct_6_spark", "targetname");
+  s_struct_6_spark = getStruct("struct_6_spark", "targetname");
   play_fx("fx_mon_heli_blade_sparks_sm", s_struct_6_spark.origin, s_struct_6_spark.angles);
 }

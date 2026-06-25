@@ -38,7 +38,7 @@ try_to_activate_artifact_defense_system(var_0) {
 
 is_hit_on_the_back(var_0) {
   var_1 = self.origin - var_0.origin;
-  var_1 = vectornormalize((var_1[0], var_1[1], 0));
+  var_1 = vectorNormalize((var_1[0], var_1[1], 0));
   var_2 = anglesToForward(self.angles);
   var_3 = vectordot(var_2, var_1);
   return var_3 > 0;

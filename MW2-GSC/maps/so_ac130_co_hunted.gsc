@@ -191,7 +191,7 @@ start_specop() {
 initial_ac130_move() {
   level endon("ac130_reposition");
   wait 5;
-  ent = getent("initial_ac130_location", "targetname");
+  ent = getEnt("initial_ac130_location", "targetname");
   thread movePlaneToPoint(ent.origin);
 }
 
@@ -303,7 +303,7 @@ delete_vehicle_think() {
 move_ac130_think() {
   self waittill("trigger");
 
-  point = (getent(self.target, "targetname")).origin;
+  point = (getEnt(self.target, "targetname")).origin;
 
   thread movePlaneToPoint(point);
 }
@@ -311,17 +311,17 @@ move_ac130_think() {
 open_all_doors() {
   array_thread(getEntArray("doorknob", "targetname"), ::doorknob);
 
-  door = getent("farmer_front_door", "targetname");
-  door rotateyaw(95, 0.7, 0.5, 0.2);
+  door = getEnt("farmer_front_door", "targetname");
+  door rotateYaw(95, 0.7, 0.5, 0.2);
   door connectpaths();
 
-  gate = getent("creek_gate", "targetname");
+  gate = getEnt("creek_gate", "targetname");
   gate hunted_style_door_open("door_gate_chainlink_slow_open");
 }
 
 doorknob() {
-  ent = getent(self.target, "targetname");
-  self linkto(ent);
+  ent = getEnt(self.target, "targetname");
+  self linkTo(ent);
 }
 
 enemy_monitor() {
@@ -593,17 +593,17 @@ objective(gametype) {
   switch (level.gameskill) {
     case 2:
       objective_add(1, "current", &"SO_AC130_CO_HUNTED_OBJ_HARDENED");
-      checkpoint_ent = getent("checkpoint_c", "targetname");
+      checkpoint_ent = getEnt("checkpoint_c", "targetname");
       flag_name = "checkpoint_c";
       break;
     case 3:
       objective_add(1, "current", &"SO_AC130_CO_HUNTED_OBJ_VETERAN");
-      checkpoint_ent = getent("checkpoint_barn", "targetname");
+      checkpoint_ent = getEnt("checkpoint_barn", "targetname");
       flag_name = "checkpoint_barn";
       break;
     default:
       objective_add(1, "current", &"SO_AC130_CO_HUNTED_OBJ_REGULAR");
-      checkpoint_ent = getent("checkpoint_b", "targetname");
+      checkpoint_ent = getEnt("checkpoint_b", "targetname");
       flag_name = "checkpoint_b";
       break;
   }

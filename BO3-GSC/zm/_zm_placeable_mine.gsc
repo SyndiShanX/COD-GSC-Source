@@ -211,7 +211,7 @@ function private pickup_placeable_mine_trigger_listener_enable(trigger, player) 
       return;
     }
     trigger triggerenable(1);
-    trigger linkto(self);
+    trigger linkTo(self);
   }
 }
 
@@ -277,7 +277,7 @@ function private replenish_after_rounds() {
       continue;
     }
     if(!level flag::exists("teleporter_used") || !level flag::get("teleporter_used")) {
-      players = getplayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         foreach(mine in level.placeable_mines) {
           if(players[i] zm_utility::is_player_placeable_mine(mine) && is_true_placeable_mine(mine.name)) {

@@ -360,8 +360,8 @@ function function_a1e57b34(localclientnum, oldval, newval, bnewent, binitialsnap
     if(isDefined(self.var_31574a7) && isDefined(self.var_de6c5ff9)) {
       beam::function_47deed80(fieldname, self.var_6152b139);
       self.var_6152b139 = level beam::function_cfb2f62a(fieldname, self.var_31574a7, "tag_origin", self.var_de6c5ff9, "tag_origin", self.var_d34c8bb);
-      self.var_31574a7 linkto(self);
-      self.var_de6c5ff9 linkto(self);
+      self.var_31574a7 linkTo(self);
+      self.var_de6c5ff9 linkTo(self);
       self notify(#"hash_2196551ad754e921");
     }
 
@@ -378,13 +378,13 @@ function function_a1e57b34(localclientnum, oldval, newval, bnewent, binitialsnap
 
       if(trace[#"fraction"] < 1) {
         v_target_pos = trace[#"position"] - trace[#"normal"];
-        self.var_de6c5ff9 moveto(v_target_pos, 0.1);
+        self.var_de6c5ff9 moveTo(v_target_pos, 0.1);
       }
 
       time = distance(self.var_31574a7.origin, v_target_pos) / 1200;
 
       if(time > 0) {
-        self.var_31574a7 moveto(v_target_pos, time);
+        self.var_31574a7 moveTo(v_target_pos, time);
       }
     }
 

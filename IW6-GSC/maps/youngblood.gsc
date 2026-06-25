@@ -274,8 +274,8 @@ setup_mansion() {
 
 setup_chaos_a() {
   level.player setclienttriggeraudiozone("youngblood_slomo_impact", 0.0);
-  var_0 = common_scripts\utility::getstruct("player_setup_chaos_pos", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = common_scripts\utility::getStruct("player_setup_chaos_pos", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   common_scripts\utility::flag_set("new_treefall");
   common_scripts\utility::flag_set("transition_from_odin_to_yb_done");

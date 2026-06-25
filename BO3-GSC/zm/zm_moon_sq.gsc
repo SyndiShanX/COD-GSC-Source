@@ -37,9 +37,9 @@
 function init() {
   ss_buttons = getEntArray("sq_ss_button", "targetname");
   for(i = 0; i < ss_buttons.size; i++) {
-    ss_buttons[i] usetriggerrequirelookat();
-    ss_buttons[i] sethintstring("");
-    ss_buttons[i] setcursorhint("HINT_NOICON");
+    ss_buttons[i] useTriggerRequireLookAt();
+    ss_buttons[i] setHintString("");
+    ss_buttons[i] setCursorHint("HINT_NOICON");
   }
   level flag::init("first_tanks_charged");
   level flag::init("second_tanks_charged");
@@ -91,7 +91,7 @@ function init_clientfields() {
 
 function reward() {
   level notify("moon_sidequest_achieved");
-  players = getplayers();
+  players = getPlayers();
   array::thread_all(players, &give_perk_reward);
 }
 
@@ -141,7 +141,7 @@ function start_moon_sidequest() {
 }
 
 function init_sidequest() {
-  players = getplayers();
+  players = getPlayers();
   level._all_previous_done = 0;
   level._zombiemode_sidequest_icon_offset = -32;
   for(i = 0; i < players.size; i++) {
@@ -293,7 +293,7 @@ function function_7aca917c() {
 
 function play_end_lines_in_order() {
   level.skit_vox_override = 1;
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 7);
   wait(12);
   player = get_specific_player(0);
@@ -324,7 +324,7 @@ function play_end_lines_in_order() {
 }
 
 function get_specific_player(num) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     ent_num = players[i].characterindex;
     if(isDefined(players[i].zm_random_char)) {
@@ -518,7 +518,7 @@ function function_948d4e7d() {
     } else {
       level flag::set("sd_large_complete");
       function_cff1fcfb();
-      var_51aa97ed moveto(var_9f30ae72.origin, 1.5, 0.1, 0.1);
+      var_51aa97ed moveTo(var_9f30ae72.origin, 1.5, 0.1, 0.1);
       var_51aa97ed waittill("movedone");
       var_51aa97ed delete();
       return;
@@ -541,7 +541,7 @@ function function_66951281() {
     } else {
       level flag::set("sd_small_complete");
       function_cff1fcfb();
-      var_51aa97ed moveto(var_e7c6777b.origin, 1.5, 0.1, 0.1);
+      var_51aa97ed moveTo(var_e7c6777b.origin, 1.5, 0.1, 0.1);
       var_51aa97ed waittill("movedone");
       var_51aa97ed delete();
       return;
@@ -581,7 +581,7 @@ function function_cff1fcfb() {
   if(level flag::get("sd_large_complete") && level flag::get("sd_small_complete")) {
     level flag::clear("sd_active");
     level thread function_93878170();
-    playsoundatposition("zmb_k9_ee_bling", (0, 0, 0));
+    playSoundAtPosition("zmb_k9_ee_bling", (0, 0, 0));
   }
 }
 

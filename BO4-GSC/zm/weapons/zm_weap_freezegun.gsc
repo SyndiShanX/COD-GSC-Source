@@ -164,7 +164,7 @@ freezegun_get_enemies_in_range(is_upgraded) {
       return;
     }
 
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
 
     if(0 > dot) {
@@ -307,13 +307,13 @@ mp_dom_flag_d_captured_byinterfaceattributes() {
 
   self thread function_cd5a6d8();
   shatter_trigger = spawn("trigger_damage", self.origin, 0, 15, 72);
-  shatter_trigger enablelinkto();
-  shatter_trigger linkto(self);
+  shatter_trigger enablelinkTo();
+  shatter_trigger linkTo(self);
   shatter_trigger thread function_e31780b1();
   spawnflags = 512 | 1 | 512 | 2 | 512 | 4 | 16;
   crumple_trigger = spawn("trigger_radius", self.origin, spawnflags, 15, 72);
-  crumple_trigger enablelinkto();
-  crumple_trigger linkto(self);
+  crumple_trigger enablelinkTo();
+  crumple_trigger linkTo(self);
   crumple_trigger thread function_e31780b1();
   self.shatter_trigger = shatter_trigger;
   self.crumple_trigger = crumple_trigger;

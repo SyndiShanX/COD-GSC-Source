@@ -17,13 +17,13 @@ _id_8156(var_0) {
   }
 
   level._id_2FFD = spawnStruct();
-  level._id_2FFD._id_22B1 = getent("camera_mp_broshot", "targetname");
-  level._id_2FFD._id_33F6[0] = getent("character_loc_broshot", "targetname");
-  level._id_2FFD._id_33F6[2] = getent("character_loc_broshot_a", "targetname");
-  level._id_2FFD._id_33F6[1] = getent("character_loc_broshot_b", "targetname");
-  level._id_2FFD._id_33F6[3] = getent("character_loc_broshot_c", "targetname");
-  level._id_2FFD._id_33F6[4] = getent("character_loc_broshot_d", "targetname");
-  level._id_2FFD._id_33F6[5] = getent("character_loc_broshot_e", "targetname");
+  level._id_2FFD._id_22B1 = getEnt("camera_mp_broshot", "targetname");
+  level._id_2FFD._id_33F6[0] = getEnt("character_loc_broshot", "targetname");
+  level._id_2FFD._id_33F6[2] = getEnt("character_loc_broshot_a", "targetname");
+  level._id_2FFD._id_33F6[1] = getEnt("character_loc_broshot_b", "targetname");
+  level._id_2FFD._id_33F6[3] = getEnt("character_loc_broshot_c", "targetname");
+  level._id_2FFD._id_33F6[4] = getEnt("character_loc_broshot_d", "targetname");
+  level._id_2FFD._id_33F6[5] = getEnt("character_loc_broshot_e", "targetname");
 
   if((!isDefined(self) || !isDefined(level._id_2FFD._id_22B1) || !scripts\mp\utility\teams::_id_6DCA("allies", "teamCount") == 0 || !scripts\mp\utility\teams::_id_6DCA("axis", "teamCount")) && !istrue(level._id_5E7E)) {
     return 0;
@@ -441,7 +441,7 @@ _id_E684(var_0) {
     if(isbot(var_3)) {
       continue;
     }
-    var_3 cameralinkto(level._id_2FF9, "tag_origin", 1);
+    var_3 cameralinkTo(level._id_2FF9, "tag_origin", 1);
     var_3 thread scripts\mp\utility\game::_id_D73A(0.0);
     scripts\mp\utility\player::_id_0DC2("", 0);
 
@@ -935,8 +935,8 @@ _id_3072(var_0, var_1, var_2, var_3) {
   }
 
   level._id_2FF9._id_A203 = var_0;
-  level._id_2FF9 moveto(var_0.origin, var_5);
-  level._id_2FF9 rotateto(var_0.angles, var_5);
+  level._id_2FF9 moveTo(var_0.origin, var_5);
+  level._id_2FF9 rotateTo(var_0.angles, var_5);
 
   if(isDefined(var_3)) {
     wait(var_5 - var_3);
@@ -1508,7 +1508,7 @@ _id_3081(var_0, var_1, var_2) {
         continue;
       }
       var_6 _meth_8060();
-      var_6 cameralinkto(var_3._id_2FF9, "tag_origin", 1);
+      var_6 cameralinkTo(var_3._id_2FF9, "tag_origin", 1);
     }
 
     level._id_8F82 = var_3._id_2FF9;
@@ -1543,11 +1543,11 @@ _id_3097(var_0, var_1, var_2) {
         continue;
       }
       var_7 _meth_8060();
-      var_7 cameralinkto(level._id_F045, "tag_origin", 1);
+      var_7 cameralinkTo(level._id_F045, "tag_origin", 1);
     }
 
-    level._id_F045 moveto(var_0.origin, var_2, 0, var_2 / 2.0);
-    level._id_F045 rotateto(var_0.angles, var_2, 0, var_2 / 2.0);
+    level._id_F045 moveTo(var_0.origin, var_2, 0, var_2 / 2.0);
+    level._id_F045 rotateTo(var_0.angles, var_2, 0, var_2 / 2.0);
     level._id_8F82 = level._id_F045;
     wait(var_2);
     setDvar("#x394d1da38be4893e7", var_3);
@@ -1559,7 +1559,7 @@ _id_3097(var_0, var_1, var_2) {
       continue;
     }
     var_7 _meth_8060();
-    var_7 cameralinkto(var_1, "tag_origin", 1);
+    var_7 cameralinkTo(var_1, "tag_origin", 1);
   }
 
   level._id_8F82 = var_1;
@@ -2000,7 +2000,7 @@ onplayerconnect() {
 _id_E6E0(var_0) {
   var_0 endon("disconnect");
   wait 0.25;
-  var_0 cameralinkto(level._id_2FF9, "tag_origin", 1);
+  var_0 cameralinkTo(level._id_2FF9, "tag_origin", 1);
   var_1 = var_0 getentitynumber();
   _func_033B(var_1, self._id_A366);
 }

@@ -438,7 +438,7 @@ func_D14F() {
 
 func_D150() {
   level.var_D127 playSound("jackal_flare_empty_plr");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   wait 0.1;
 }
 
@@ -482,7 +482,7 @@ func_D151() {
 
 func_D182(var_0) {
   earthquake(0.25, 0.9, level.var_D127.origin, 10000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.var_D127 playSound("jackal_flare_deploy_plr");
   thread func_D181(var_0, -1);
   thread func_D181(var_0, 1);
@@ -615,7 +615,7 @@ func_D181(var_0, var_1) {
 
     var_5 = var_4.origin;
     var_4.origin = var_34;
-    var_38 = vectornormalize(var_4.origin - var_5);
+    var_38 = vectorNormalize(var_4.origin - var_5);
     var_39 = anglestoright(var_4.angles);
     var_40 = anglestoup(var_4.angles);
     var_4.angles = _axistoangles(var_38, var_39, var_40);
@@ -794,7 +794,7 @@ func_D14C() {
 
     var_5 = scripts\sp\math::func_AB6F(var_5, var_26, var_27);
     var_28 = anglesToForward(level.var_D127.angles);
-    var_29 = vectornormalize(var_23);
+    var_29 = vectorNormalize(var_23);
     var_30 = 1 - scripts\sp\math::func_C097(0.5, 1, vectordot(var_28, var_29));
     var_30 = var_30 * var_3;
 
@@ -1068,11 +1068,11 @@ func_D19A() {
 
 func_5D09(var_0, var_1) {
   wait(var_0);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.1, 0.75, level.var_D127.origin, 20000);
   wait(var_1);
   earthquake(0.13, 0.75, level.var_D127.origin, 20000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 func_D157(var_0) {
@@ -1345,7 +1345,7 @@ func_D170() {
   level.player notify("jackal_stop_firing");
   setomnvar("ui_jackal_weapon_overheat", 1);
   level.var_D127.var_C7FA = scripts\engine\utility::spawn_tag_origin();
-  level.var_D127.var_C7FA linkto(level.var_D127, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
+  level.var_D127.var_C7FA linkTo(level.var_D127, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
   level.var_D127.var_C7FA playLoopSound("jackal_overheat_lp");
   func_0BDC::func_A112("jackal_hud_overheated_generic", 0.5);
   level.var_D127.var_A929 = gettime();
@@ -1444,13 +1444,13 @@ func_D128() {
 
 func_13C51() {
   wait 0.8;
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.12, 1, level.var_D127.origin, 5000);
 }
 
 func_13C52() {
   wait 1.0;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.18, 1, level.var_D127.origin, 5000);
 }
 
@@ -1458,14 +1458,14 @@ func_1023D() {
   self.var_10239 = spawnStruct();
   self.var_10239.var_10240 = 0;
   self.var_10239.var_FB87 = scripts\engine\utility::spawn_tag_origin();
-  self.var_10239.var_FB87 linkto(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
+  self.var_10239.var_FB87 linkTo(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
   self.var_FB88 = scripts\engine\utility::array_add(self.var_FB88, self.var_10239.var_FB87);
 }
 
 func_DBA4() {
   self.var_DBA2 = spawnStruct();
   self.var_DBA2.var_FB87 = scripts\engine\utility::spawn_tag_origin();
-  self.var_DBA2.var_FB87 linkto(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
+  self.var_DBA2.var_FB87 linkTo(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
   self.var_DBA2.var_FB87 ghostattack(0, 0);
   self.var_DBA2.var_FB87 playLoopSound("jackal_airbrake_lp");
   self.var_DBA2.var_E7BA = scripts\engine\utility::spawn_tag_origin((100000, 100000, 100000));
@@ -1476,7 +1476,7 @@ func_DBA4() {
   self.var_4074 = scripts\engine\utility::array_add(self.var_4074, self.var_DBA2.var_E7BA);
   self.var_74BD = spawnStruct();
   self.var_74BD.var_FB87 = scripts\engine\utility::spawn_tag_origin();
-  self.var_74BD.var_FB87 linkto(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
+  self.var_74BD.var_FB87 linkTo(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
   self.var_74BD.var_FB87 ghostattack(0, 0);
   self.var_74BD.var_FB87 playLoopSound("jackal_plr_full_throttle");
   self.engine_master_volume = 0;
@@ -2130,7 +2130,7 @@ func_1049D() {
   var_1 = var_0;
 
   for(;;) {
-    var_2 = rotatevectorinverted(vectornormalize(level.player.origin - self.origin), self.angles);
+    var_2 = rotatevectorinverted(vectorNormalize(level.player.origin - self.origin), self.angles);
 
     if(var_2[1] > 0) {
       if(self.var_99F5.var_AB4B) {
@@ -2268,7 +2268,7 @@ func_D16E() {
       var_2 = self.spaceship_vel;
 
       if(length(var_2) > 5) {
-        var_3 = vectornormalize(var_2);
+        var_3 = vectorNormalize(var_2);
         var_4 = self.origin + var_3 * var_0;
         var_5 = bulletTrace(var_1, var_4, 1, self);
 
@@ -2310,7 +2310,7 @@ func_D175(var_0) {
       }
 
       var_8 = var_7.origin - self.origin;
-      var_8 = vectornormalize(var_8);
+      var_8 = vectorNormalize(var_8);
       var_9 = vectordot(var_2, var_8);
       var_10 = distance(var_7.origin, self.origin);
 
@@ -2447,7 +2447,7 @@ func_7A32(var_0) {
     if(length(var_3) > 12000) {
       continue;
     }
-    var_6 = vectordot(vectornormalize(var_3), anglesToForward(var_2.angles));
+    var_6 = vectordot(vectorNormalize(var_3), anglesToForward(var_2.angles));
 
     if(var_6 < 0.1) {
       continue;
@@ -2482,7 +2482,7 @@ func_90E7() {
 func_90E9() {
   if(gettime() - self._blackboard.var_90ED > 3000) {
     var_0 = self.origin - level.var_D127.origin;
-    var_1 = vectornormalize(var_0);
+    var_1 = vectorNormalize(var_0);
     var_2 = rotatevectorinverted(var_1, level.var_D127.angles);
 
     if(var_2[0] > 0) {
@@ -2677,7 +2677,7 @@ func_D174() {
     foreach(var_7 in var_3) {
       var_8 = var_7.origin - self.origin;
       var_9 = length(var_8);
-      var_8 = vectornormalize(var_8);
+      var_8 = vectorNormalize(var_8);
       var_10 = vectordot(var_2, var_8);
 
       if(var_10 > 0.96 && var_9 < 30000) {
@@ -2849,7 +2849,7 @@ func_5883(var_0) {
   _setsaveddvar("spaceshipForceSetFovBlendStrength", var_5 / 2);
   _setsaveddvar("spaceshipForceSetFov", var_4);
   wait(var_7);
-  level.var_D127 playrumbleonentity("heavy_3s");
+  level.var_D127 playRumbleOnEntity("heavy_3s");
   _setsaveddvar("spaceshipForceSetFov", var_3);
   _setsaveddvar("spaceshipForceSetFovBlendStrength", var_5);
   wait(var_2 / 2);
@@ -2886,7 +2886,7 @@ func_F559(var_0) {
   }
   self.var_D827 = 1;
   earthquake(0.22, 0.55, level.var_D127.origin, 5000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   func_5894(1);
   func_F80C();
   var_1 = 0.3;
@@ -2957,7 +2957,7 @@ func_58B4() {
           var_14 = 0;
           var_15 = anglesToForward(level.var_D127.angles);
           var_16 = vectordot(var_15, anglesToForward(var_11.angles));
-          var_17 = vectordot(var_15, vectornormalize(var_11.origin - level.var_D127.origin));
+          var_17 = vectordot(var_15, vectorNormalize(var_11.origin - level.var_D127.origin));
 
           if(!var_11.var_AEDF.var_9405) {
             var_11 func_F41A();
@@ -3015,7 +3015,7 @@ func_58B4() {
 
             if(!isDefined(level.var_D127.var_58B6)) {
               level.var_D127.var_58B6 = spawn("script_origin", level.var_D127.origin);
-              level.var_D127.var_58B6 linkto(level.var_D127);
+              level.var_D127.var_58B6 linkTo(level.var_D127);
               level.var_D127.var_58B6 ghostattack(0);
             }
 
@@ -3024,7 +3024,7 @@ func_58B4() {
             func_0BDC::func_A0BE();
             thread func_589E();
             earthquake(0.33, 0.75, level.var_D127.origin, 5000);
-            level.player playrumbleonentity("damage_heavy");
+            level.player playRumbleOnEntity("damage_heavy");
             var_11 playLoopSound("jackal_sdf_locked_lp");
             level.var_D127.var_58B6 playLoopSound("jackal_plr_locked_lp");
             level.player setsoundsubmix("jackal_dogfight");
@@ -3096,7 +3096,7 @@ func_588F() {
   setomnvar("ui_jackal_lock_broke", gettime());
   level.player playSound("jackal_dogfight_lockbroke");
   earthquake(0.23, 0.75, level.var_D127.origin, 5000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 func_587B() {

@@ -142,8 +142,8 @@ _id_AB55(var_0) {
     self[[var_1._id_AB56]](var_0);
   }
 
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(var_1._id_0224);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(var_1._id_0224);
   var_2 = self.owner;
   var_2 _meth_80FC();
   var_2._id_87A7 = undefined;

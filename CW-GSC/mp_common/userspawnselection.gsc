@@ -308,7 +308,7 @@ function function_fed7687f() {
 }
 
 function closespawnselectionmenuforallplayers() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player closespawnselect();

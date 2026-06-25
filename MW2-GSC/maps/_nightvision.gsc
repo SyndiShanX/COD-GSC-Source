@@ -82,7 +82,7 @@ nightVision_On() {
     assert(!isDefined(level.nightVision_DLight));
     level.nightVision_DLight = spawn("script_model", self getEye());
     level.nightVision_DLight setModel("tag_origin");
-    level.nightVision_DLight linkto(self);
+    level.nightVision_DLight linkTo(self);
     playFXOnTag(level.nightVision_DLight_Effect, level.nightVision_DLight, "tag_origin");
   }
 

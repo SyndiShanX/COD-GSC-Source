@@ -308,7 +308,7 @@ func_5845() {
     var_12 = var_12;
   }
 
-  var_13 = vectornormalize(anglesToForward(var_12));
+  var_13 = vectorNormalize(anglesToForward(var_12));
   var_14 = bulletTrace(var_10, var_10 + var_13 * var_1, 1, self, 1, 0, 0, 0, 0);
   var_15 = getaiarray("axis");
   var_10 = self getcurrentweapon();
@@ -329,12 +329,12 @@ func_5845() {
 
   foreach(var_14 in var_15) {
     var_15 = var_14 func_819D();
-    var_16 = var_14 getstruct(var_3);
+    var_16 = var_14 getStruct(var_3);
     if(!var_15 && !var_16) {
       continue;
     }
 
-    var_17 = vectornormalize(var_14.origin - var_10);
+    var_17 = vectorNormalize(var_14.origin - var_10);
     var_18 = vectordot(var_13, var_17);
     if(var_18 < 0.923) {
       continue;
@@ -383,7 +383,7 @@ func_A43D(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 2400;
   var_7 = 2400;
   for(var_8 = 0; var_8 < var_1.size; var_8++) {
-    var_9 = vectornormalize(var_1[var_8].origin - var_2);
+    var_9 = vectorNormalize(var_1[var_8].origin - var_2);
     var_10 = vectordot(var_3, var_9);
     if(var_10 < 0.923) {
       continue;

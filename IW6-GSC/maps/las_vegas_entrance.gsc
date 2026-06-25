@@ -23,7 +23,7 @@ spawn_functions() {
 
 start_entrance() {
   maps\las_vegas_code::set_player_speed();
-  var_0 = common_scripts\utility::getstruct("casino_player_slide_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("casino_player_slide_start", "targetname");
   maps\las_vegas_code::set_start_locations("entrance_startspot");
   common_scripts\utility::flag_set("start_outside_animated_props");
 }
@@ -56,8 +56,8 @@ start_exfil() {
 }
 
 change_chopper_spawner(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
-  var_3 = common_scripts\utility::getstruct(var_1, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct(var_1, "script_noteworthy");
   var_2.origin = var_3.origin;
   var_4 = var_3 common_scripts\utility::get_target_ent();
   var_2.angles = vectortoangles(var_4.origin - var_3.origin);
@@ -112,7 +112,7 @@ getup() {
   level.player allowcrouch(0);
   level.player allowprone(0);
   level.player setstance("stand");
-  var_0 = common_scripts\utility::getstruct("bottom_anim_entrance", "targetname");
+  var_0 = common_scripts\utility::getStruct("bottom_anim_entrance", "targetname");
   var_1 = spawnStruct();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
@@ -369,7 +369,7 @@ start_walk(var_0, var_1) {
   maps\_utility::set_force_color(var_1);
   maps\_utility::disable_ai_color();
   maps\_utility::walkdist_zero();
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
   maps\_utility::follow_path(var_2, undefined, ::follow_path_node_anim);
   maps\_utility::walkdist_reset();
   maps\_utility::enable_ai_color();
@@ -406,12 +406,12 @@ courtyard_sniper() {
 
   while(!common_scripts\utility::flag("dog_down")) {
     var_3 = vectortoangles(level.dog.origin + (0, 0, 20) - var_1.origin);
-    var_1 rotateto(var_3, var_2);
+    var_1 rotateTo(var_3, var_2);
     wait(var_2);
   }
 
   var_0 setCanDamage(1);
-  var_1 rotateto(var_1.angles + (30, 0, 0), 0.5);
+  var_1 rotateTo(var_1.angles + (30, 0, 0), 0.5);
   wait 0.5;
   var_1 laserforceoff();
   var_1 delete();
@@ -448,7 +448,7 @@ courtyard_dog_intro(var_0) {
   self.fixednode = 1;
   maps\_utility::forceuseweapon("lsat", "primary");
   maps\_utility::clear_archetype();
-  var_1 = common_scripts\utility::getstruct("courtyard_dog_spawn_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("courtyard_dog_spawn_struct", "targetname");
   var_2 = maps\las_vegas_code::spawn_hero("riley", var_1);
   var_2.ignoreall = 1;
   var_2.ignoreme = 1;
@@ -456,9 +456,9 @@ courtyard_dog_intro(var_0) {
   var_2 setCanDamage(0);
   self waittill("reached_path_end");
   maps\_utility::set_archetype("creepwalk");
-  var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_1.target, "targetname");
   var_2 thread maps\_utility::follow_path(var_1);
-  var_0 = common_scripts\utility::getstruct("dog_kill_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("dog_kill_struct", "targetname");
   var_0.origin = common_scripts\utility::drop_to_ground(var_0.origin, 10, -100);
   self notify("stop_alert_thread");
   self.ignoreall = 1;
@@ -497,7 +497,7 @@ dog_hack() {
 dog_friendly_react() {
   level.keegan.baseaccuracy = 500;
   dog_friendly_react_wait();
-  var_0 = common_scripts\utility::getstruct("riley_hurt_struct_hesh", "targetname");
+  var_0 = common_scripts\utility::getStruct("riley_hurt_struct_hesh", "targetname");
   level.hesh.alertlevelint = 0;
   level.hesh maps\_utility::disable_ai_color();
   var_0 maps\_anim::anim_reach_solo(level.hesh, "dog_hurt_enter");
@@ -506,7 +506,7 @@ dog_friendly_react() {
   var_0 maps\_anim::anim_single_solo(level.hesh, "dog_hurt_enter");
   level.hesh thread maps\_anim::anim_single_solo(level.hesh, "dog_hurt_loop");
   level notify("stop_dog_hurt_anim");
-  var_0 maps\las_vegas_code::struct_stopanimscripted();
+  var_0 maps\las_vegas_code::struct_stopanimScripted();
   level.hesh maps\_anim::anim_single_solo(level.hesh, "dog_hurt_exit");
   level.hesh maps\_utility::enable_ai_color();
   maps\_utility::activate_trigger_with_targetname("entrance_battle_colors");
@@ -530,7 +530,7 @@ keegan_cover_dog() {
   level.keegan maps\_utility::disable_ai_color();
   level.keegan.goalradius = 32;
   level.keegan setgoalnode(var_0);
-  var_1 = getent("courtyard_sniper_ai", "targetname");
+  var_1 = getEnt("courtyard_sniper_ai", "targetname");
 
   if(isDefined(var_1)) {
     level.keegan.favoriteenemy = var_1;
@@ -538,7 +538,7 @@ keegan_cover_dog() {
 }
 
 dog_friendly_react_wait() {
-  var_0 = getent("courtyard_entry_volume", "targetname");
+  var_0 = getEnt("courtyard_entry_volume", "targetname");
 
   for(;;) {
     wait 0.05;
@@ -568,20 +568,20 @@ dog_friendly_dialogue() {
 }
 
 dog_intro_pain() {
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   common_scripts\utility::flag_set("dog_down");
-  var_0 = getent("courtyard_laser", "targetname");
+  var_0 = getEnt("courtyard_laser", "targetname");
   thread common_scripts\utility::play_sound_in_space("weap_gm6_fire_npc", var_0.origin);
   var_1 = self.origin + (0, 0, 20);
   thread common_scripts\utility::play_sound_in_space("bullet_ap_flesh", var_1);
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
   playFX(common_scripts\utility::getfx("blood_spurt"), var_1, var_2);
   maps\_utility_dogs::set_dog_model("fullbody_dog_b_hurt");
   self playSound("vegas_riley_shot");
   var_3 = maps\las_vegas_code::makestruct();
   var_3.origin = common_scripts\utility::drop_to_ground(var_3.origin + (0, 0, 10), 10, -100);
   var_3 maps\_anim::anim_single_solo(self, "dog_pain");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   thread dog_friendly_react();
   thread maps\_anim::anim_single_solo(self, "hurt_idle_single");
   wait 0.5;
@@ -613,7 +613,7 @@ init_courtyard() {
     return;
   }
   level.courtyard = spawnStruct();
-  level.courtyard.enemy_volume = getent("courtyard_volume", "targetname");
+  level.courtyard.enemy_volume = getEnt("courtyard_volume", "targetname");
   level.courtyard.enemies = [];
   level.courtyard.chopper_shooter_count = 0;
   level.courtyard.chopper_shooter_total = 0;
@@ -681,7 +681,7 @@ postspawn_courtyard_enemy() {
 #using_animtree("script_model");
 
 train_fall() {
-  var_0 = common_scripts\utility::getstruct("courtyard_train_spot", "targetname");
+  var_0 = common_scripts\utility::getStruct("courtyard_train_spot", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
   var_2 = getEntArray("trainfall_spark_spots", "targetname");
 
@@ -707,7 +707,7 @@ train_fall() {
 
     foreach(var_9 in var_2) {
       if(var_9.script_noteworthy == var_4.script_noteworthy) {
-        var_9 linkto(var_4, "train1_jnt");
+        var_9 linkTo(var_4, "train1_jnt");
         var_4 thread train_crash_fx(var_9);
       }
     }
@@ -864,7 +864,7 @@ exfil() {
 }
 
 f18_sidewinder(var_0) {
-  var_1 = getent("sidewinder", "targetname");
+  var_1 = getEnt("sidewinder", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel(var_1.model);
   playFXOnTag(common_scripts\utility::getfx("smoke_geotrail_rpg"), var_2, "tag_fx");
@@ -887,10 +887,10 @@ f18_sidewinder(var_0) {
       break;
     }
 
-    var_8 = vectornormalize(var_7 + var_6 - var_2.origin);
+    var_8 = vectorNormalize(var_7 + var_6 - var_2.origin);
     var_7 = var_2.origin + var_8 * var_4;
     var_9 = var_4 / var_5;
-    var_2 moveto(var_7, var_9);
+    var_2 moveTo(var_7, var_9);
     wait(var_9);
   }
 
@@ -921,7 +921,7 @@ postspawn_exfil_chopper() {
 
 postspawn_exfil_f18() {
   var_0 = spawn("script_origin", self.origin + (-1000, 0, 0));
-  var_0 linkto(self);
+  var_0 linkTo(self);
 
   if(isDefined(self.script_index)) {
     var_0 playSound("veh_f18_long_flyby2");
@@ -939,7 +939,7 @@ exfil_silenthawk() {
   var_1 waittillmatch("noteworthy", "land");
   var_1 notify("newpath");
   var_2 = var_1.currentnode;
-  var_2 = common_scripts\utility::getstruct(var_2.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_2.target, "targetname");
   var_1 setgoalyaw(var_2.angles[1]);
   var_1 setvehgoalpos(var_2.origin, 1);
   var_1 sethoverparams(10, 5, 15);
@@ -1030,7 +1030,7 @@ get_hover_point(var_0, var_1) {
 
 get_hover_points() {
   var_0 = [];
-  var_1 = common_scripts\utility::getstruct("exfil_hover_struct", "targetname");
+  var_1 = common_scripts\utility::getStruct("exfil_hover_struct", "targetname");
 
   for(var_2 = 0; var_2 < 15; var_2++) {
     var_0[var_2] = get_hover_point(var_1, var_2);

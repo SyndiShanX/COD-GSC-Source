@@ -60,8 +60,8 @@ AA_crash_site_init() {
 }
 
 dialogue_crash_site() {
-  crash_chatter_org_left = getent("crash_chatter_org_left", "targetname");
-  crash_chatter_org_right = getent("crash_chatter_org_right", "targetname");
+  crash_chatter_org_left = getEnt("crash_chatter_org_left", "targetname");
+  crash_chatter_org_right = getEnt("crash_chatter_org_right", "targetname");
 
   flag_wait("crash_actors_ready");
 
@@ -132,8 +132,8 @@ dialogue_crash_site() {
 
   flag_wait("end_sequence_starting");
 
-  crash_chatter_org_left = getent("crash_chatter_org_left", "targetname");
-  crash_chatter_org_right = getent("crash_chatter_org_right", "targetname");
+  crash_chatter_org_left = getEnt("crash_chatter_org_left", "targetname");
+  crash_chatter_org_right = getEnt("crash_chatter_org_right", "targetname");
 
   crash_chatter_org_right delaycall(0, ::playsound, "dcburn_ar1_newtarget");
 
@@ -159,7 +159,7 @@ AAA_sequence_player_crash_site() {
   level.playerMortarFovOffset = (0, 0, 0);
   level._effect["mortar"]["dirt"] = loadfx("explosions/grenadeExp_dirt");
 
-  crash_node = getent("crash_node", "targetname");
+  crash_node = getEnt("crash_node", "targetname");
 
   movement_grid = crash_site_player_and_heli_setup();
 
@@ -212,7 +212,7 @@ AAA_sequence_player_crash_site() {
   level.friendly02 set_flavorbursts(false);
   level.friendly03 set_flavorbursts(false);
 
-  crash_node = getent("crash_node", "targetname");
+  crash_node = getEnt("crash_node", "targetname");
 
   ePlayer_rig = spawn_anim_model("player_rig");
 
@@ -233,7 +233,7 @@ AAA_sequence_player_crash_site() {
   level.m4 HidePart("TAG_SILENCER");
   level.m4.origin = level.friendly03 gettagorigin("tag_inhand");
   level.m4.angles = level.friendly03 gettagangles("tag_inhand");
-  level.m4 linkto(level.friendly03, "tag_inhand");
+  level.m4 linkTo(level.friendly03, "tag_inhand");
   level.m4 thread delete_on_flag("redshirt_headshot");
 
   level.player freezecontrols(true);
@@ -386,7 +386,7 @@ waittill_player_fires_empty_gun() {
 }
 
 crash_site_player_and_heli_setup() {
-  crash_node = getent("crash_node", "targetname");
+  crash_node = getEnt("crash_node", "targetname");
 
   level.player allowstand(true);
   level.player allowprone(false);
@@ -394,29 +394,29 @@ crash_site_player_and_heli_setup() {
   level.player allowjump(false);
   level.player allowcrouch(false);
 
-  player_crash_heli = getent("crash_site", "targetname");
+  player_crash_heli = getEnt("crash_site", "targetname");
   dummy = player_crash_heli;
 
-  crash_site_clip = getent("crash_site_clip", "targetname");
-  heli_clip = getent("intro_heli_after_emp_clip", "targetname");
-  crash_site_top_bar = getent("crash_site_top_bar", "targetname");
-  crash_site_bot_bar = getent("crash_site_bot_bar", "targetname");
-  movement_grid_top_left = getent("movement_grid_top_left", "targetname");
-  movement_grid_bot_right = getent("movement_grid_bot_right", "targetname");
-  movement_grid_exit = getent("movement_grid_exit", "targetname");
+  crash_site_clip = getEnt("crash_site_clip", "targetname");
+  heli_clip = getEnt("intro_heli_after_emp_clip", "targetname");
+  crash_site_top_bar = getEnt("crash_site_top_bar", "targetname");
+  crash_site_bot_bar = getEnt("crash_site_bot_bar", "targetname");
+  movement_grid_top_left = getEnt("movement_grid_top_left", "targetname");
+  movement_grid_bot_right = getEnt("movement_grid_bot_right", "targetname");
+  movement_grid_exit = getEnt("movement_grid_exit", "targetname");
 
   crash_site_clip show();
   heli_clip notsolid();
 
-  crash_site_clip linkto(dummy);
-  movement_grid_top_left linkto(dummy);
-  movement_grid_bot_right linkto(dummy);
-  movement_grid_exit linkto(dummy);
-  heli_clip linkto(dummy);
+  crash_site_clip linkTo(dummy);
+  movement_grid_top_left linkTo(dummy);
+  movement_grid_bot_right linkTo(dummy);
+  movement_grid_exit linkTo(dummy);
+  heli_clip linkTo(dummy);
 
   if(level.script == "dcburning") {
-    crash_site_top_bar linkto(dummy);
-    crash_site_bot_bar linkto(dummy);
+    crash_site_top_bar linkTo(dummy);
+    crash_site_bot_bar linkTo(dummy);
   } else {
     level.plank2 = spawn_anim_model("plank2", crash_site_top_bar getorigin());
     level.plank1 = spawn_anim_model("plank1", crash_site_bot_bar getorigin());
@@ -424,8 +424,8 @@ crash_site_player_and_heli_setup() {
     level.planks[0] = level.plank1;
     level.planks[1] = level.plank2;
 
-    crash_site_top_bar linkto(level.plank2);
-    crash_site_bot_bar linkto(level.plank1);
+    crash_site_top_bar linkTo(level.plank2);
+    crash_site_bot_bar linkTo(level.plank1);
 
     crash_node anim_first_frame(level.planks, "dcemp_BHrescue");
   }
@@ -649,7 +649,7 @@ player_crash_movement(movement_grid_top_left, movement_grid_bot_right, ePlayer_r
 
   ePlayer_rig hide();
   zoffset = (0, 0, 0);
-  crash_node = getent("crash_node", "targetname");
+  crash_node = getEnt("crash_node", "targetname");
   playerOrg = spawn_tag_origin();
 
   playerOrg.origin = level.player.origin + zoffset;
@@ -731,19 +731,19 @@ heli_crash_site_spotlight_think(btr80s_end) {
   wait(2.5);
 
   heli_crash_site_spotlight thread maps\_attack_heli::heli_spotlight_on("tag_spotlight", false);
-  heli_crash_site_spotlight setturrettargetent(btr80s_end[0]);
+  heli_crash_site_spotlight setturrettargetEnt(btr80s_end[0]);
 
   wait(1.5);
 
-  target2 = getent("btr80s_old_end", "targetname");
-  heli_crash_site_spotlight setturrettargetent(target2);
+  target2 = getEnt("btr80s_old_end", "targetname");
+  heli_crash_site_spotlight setturrettargetEnt(target2);
 
   heli_crash_site_spotlight SetLookAtEnt(level.player);
   wait(2);
   heli_crash_site_spotlight vehicle_setSpeed(10);
   heli_crash_site_spotlight notify("stop_spotlight_random_targets");
   wait(.1);
-  heli_crash_site_spotlight setturrettargetent(level.player);
+  heli_crash_site_spotlight setturrettargetEnt(level.player);
   wait(2);
 }
 obj_crash_site() {
@@ -929,7 +929,7 @@ notetrack_friendly_02_is_wounded(guy) {
 
   level.teamleader thread dialogue_queue("dcburn_mcy_hangon");
 
-  crash_chatter_org_right = getent("crash_chatter_org_right", "targetname");
+  crash_chatter_org_right = getEnt("crash_chatter_org_right", "targetname");
 
   crash_chatter_org_right delaythread(1, ::play_sound_in_space, "dcburn_ar1_loading");
 
@@ -1040,10 +1040,10 @@ drone_flood_start_crashsite(aSpawners, groupName) {
 }
 
 spawn_trigger_dummy_crashsite(sDummyTargetname) {
-  ent = getent(sDummyTargetname, "targetname");
+  ent = getEnt(sDummyTargetname, "targetname");
   assert(isDefined(ent));
   assert(isDefined(ent.script_linkTo));
-  trig = getent(ent.script_linkTo, "script_linkname");
+  trig = getEnt(ent.script_linkTo, "script_linkname");
   assert(isDefined(trig));
   trig notify("trigger", level.player);
 }

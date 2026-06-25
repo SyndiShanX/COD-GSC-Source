@@ -1422,10 +1422,10 @@ _id_FC95(var_0) {
 _id_6AC9(var_0) {
   var_1 = anglesToForward(self getplayerangles());
   var_2 = (var_1[0], var_1[1], var_1[2]);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_0.origin - self.origin;
   var_4 = (var_3[0], var_3[1], var_3[2]);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_5 = vectordot(var_2, var_4);
 
   if(var_5 >= 0.92388) {
@@ -2995,7 +2995,7 @@ _id_10B9F() {
     var_7 thread _id_10BA3(var_6);
     var_7 thread _id_10B9E(var_6);
     var_6 thread _id_7B11();
-    var_6 rotateyaw(1000, 30, 0.2, 0.2);
+    var_6 rotateYaw(1000, 30, 0.2, 0.2);
     var_6 thread _id_10BA0(10, var_7);
     var_6 thread _id_10BA2();
 
@@ -3090,9 +3090,9 @@ _id_7B11() {
   var_0 = self.origin;
 
   for(;;) {
-    self moveto(var_0 + (0, 0, 15), 1, 0.2, 0.2);
+    self moveTo(var_0 + (0, 0, 15), 1, 0.2, 0.2);
     wait 1;
-    self moveto(var_0, 1, 0.2, 0.2);
+    self moveTo(var_0, 1, 0.2, 0.2);
     wait 1;
   }
 }
@@ -3243,7 +3243,7 @@ _id_1DBD(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_6.angles = self.angles;
-  var_6 linkto(self, var_0, var_7, var_8);
+  var_6 linkTo(self, var_0, var_7, var_8);
   var_6 thread _id_10C20(self);
   var_6 thread _id_10C1C();
   return var_6;
@@ -3259,7 +3259,7 @@ _id_D72F(var_0, var_1, var_2, var_3) {
     var_4 setModel(level._id_2D3A["section"]._id_5420);
   }
 
-  var_4 linkto(self, "tag_origin", var_1, (0, 90 * (var_2 + 1), 0));
+  var_4 linkTo(self, "tag_origin", var_1, (0, 90 * (var_2 + 1), 0));
   var_4 hide();
   var_4 thread _id_10C20(self.owner);
   var_4 thread _id_10C1C();
@@ -3603,7 +3603,7 @@ _id_DD70(var_0, var_1, var_2, var_3) {
 
 _id_DD71(var_0, var_1, var_2) {
   var_3 = var_2 - var_1;
-  var_4 = vectordot(var_0, vectornormalize(var_3));
+  var_4 = vectordot(var_0, vectorNormalize(var_3));
 
   if(var_4 < 0.382683) {
     return 1;
@@ -3773,10 +3773,10 @@ _id_FD2C(var_0) {
 _id_6D2D(var_0) {
   var_1 = anglesToForward(self getplayerangles());
   var_2 = (var_1[0], var_1[1], var_1[2]);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_0.origin - self.origin;
   var_4 = (var_3[0], var_3[1], var_3[2]);
-  var_4 = vectornormalize(var_4);
+  var_4 = vectorNormalize(var_4);
   var_5 = vectordot(var_2, var_4);
 
   if(var_5 >= 0.92388) {
@@ -3829,8 +3829,8 @@ _id_D4B0() {
       if(var_7 <= 0) {
         continue;
       }
-      var_8 = vectornormalize(var_5);
-      var_9 = vectornormalize(var_6);
+      var_8 = vectorNormalize(var_5);
+      var_9 = vectorNormalize(var_6);
       var_7 = vectordot(var_8, var_9);
 
       if(var_7 < 12) {
@@ -4662,7 +4662,7 @@ _id_CA1F() {
 
 _id_B854(var_0) {
   self setscriptablepartstate("heightened_senses", "scrn_pulse");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_0 playsoundtoplayer("ghost_senses_ping", self);
   wait 0.2;
 
@@ -4670,7 +4670,7 @@ _id_B854(var_0) {
     self setscriptablepartstate("heightened_senses", "default");
 
     if(scripts\cp_mp\utility\player_utility::_isalive()) {
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
 
       if(isDefined(var_0) && var_0 scripts\cp_mp\utility\player_utility::_isalive()) {
         var_0 playsoundtoplayer("ghost_senses_ping", self);
@@ -5374,7 +5374,7 @@ _id_23A3() {
   var_0 setModel("weapon_shinguard_wm");
   var_0 setCanDamage(1);
   var_0.health = 250;
-  var_0 linkto(self, "tag_origin", (30, 0, 0), (0, 90, 0));
+  var_0 linkTo(self, "tag_origin", (30, 0, 0), (0, 90, 0));
   var_0 show();
   self._id_2395 = var_0;
   thread _id_239A(var_0);
@@ -5579,7 +5579,7 @@ _id_F1D5() {
   waitframe();
 
   for(;;) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     earthquake(0.1, 0.3, self.origin, 120);
     var_0 = _func_019A(self.origin + (0, 0, 10), self.origin - (0, 0, 600)) + (0, 0, 1);
     self._id_F1D8.origin = var_0;
@@ -5647,7 +5647,7 @@ _id_56ED() {
   self allowjump(0);
   self playlocalsound("ghost_wall_attach");
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  self playerlinkto(var_0);
+  self playerlinkTo(var_0);
   thread _id_9A33(var_0);
 }
 

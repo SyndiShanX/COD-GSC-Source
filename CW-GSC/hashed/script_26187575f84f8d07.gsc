@@ -554,7 +554,7 @@ function private function_64d94faa() {
     level.var_aa6b51f5 = isDefined(getgametypesetting(#"hash_5d04a19b625d7300")) ? getgametypesetting(#"hash_5d04a19b625d7300") : 0;
     level.var_35b75d82 = isDefined(getgametypesetting(#"hash_371e83f096bf0548")) ? getgametypesetting(#"hash_371e83f096bf0548") : 0;
     level.var_380f7d22 = getdvarint(#"hash_59bc959721744fcb", 200);
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player useButtonPressed() && !is_true(level.var_a0cb7a38[level.var_8c48fd1])) {

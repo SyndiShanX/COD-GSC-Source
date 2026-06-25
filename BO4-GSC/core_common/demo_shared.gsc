@@ -143,7 +143,7 @@ watch_actor_bookmarks() {
     waittillframeend();
     now = gettime();
     oldest_allowed = now - level.actor_bookmark_kill_times_msec;
-    players = getplayers();
+    players = getPlayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
       player = players[player_index];

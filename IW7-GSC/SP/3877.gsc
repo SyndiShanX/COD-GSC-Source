@@ -281,7 +281,7 @@ func_113EC() {
         foreach(var_15 in var_6) {
           var_10 = vectorlerp(var_9.origin, var_11, var_15);
           var_11 = var_10 - var_1;
-          var_12 = vectornormalize(var_11);
+          var_12 = vectorNormalize(var_11);
           var_13 = vectordot(var_12, var_2);
           if(var_13 > var_13) {
             if(func_1140D()) {

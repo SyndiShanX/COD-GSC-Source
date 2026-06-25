@@ -50,7 +50,7 @@ function lightninggun_start_damage_effects(eattacker) {
   }
   self setelectrifiedstate(1);
   self.electrifiedby = eattacker;
-  self playrumbleonentity("lightninggun_victim");
+  self playRumbleOnEntity("lightninggun_victim");
   wait(2);
   self.electrifiedby = undefined;
   self setelectrifiedstate(0);
@@ -86,8 +86,8 @@ function lightninggun_arc_fx(arc_source_pos, arc_target, arc_target_pos, distanc
   fxorg = spawn("script_model", arc_source_pos);
   fxorg setModel("tag_origin");
   fx = playFXOnTag(level._effect["lightninggun_arc"], fxorg, "tag_origin");
-  playsoundatposition("wpn_lightning_gun_bounce", fxorg.origin);
-  fxorg moveto(arc_target_pos, waittime);
+  playSoundAtPosition("wpn_lightning_gun_bounce", fxorg.origin);
+  fxorg moveTo(arc_target_pos, waittime);
   fxorg waittill("movedone");
   util::wait_network_frame();
   util::wait_network_frame();
@@ -160,12 +160,12 @@ function create_killcam_entity(origin, angles, weapon) {
 function killcam_move(start_origin, end_origin, time) {
   delta = end_origin - start_origin;
   dist = length(delta);
-  delta = vectornormalize(delta);
+  delta = vectorNormalize(delta);
   move_to_dist = dist - level.weaponlightninggunkillcamoffset;
   end_angles = (0, 0, 0);
   if(move_to_dist > 0) {
     move_to_pos = start_origin + (delta * move_to_dist);
-    self moveto(move_to_pos, time, 0, time * level.weaponlightninggunkillcamdecelpercent);
+    self moveTo(move_to_pos, time, 0, time * level.weaponlightninggunkillcamdecelpercent);
     end_angles = vectortoangles(delta);
   } else {
     delta = end_origin - self.origin;

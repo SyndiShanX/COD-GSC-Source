@@ -609,7 +609,7 @@ update_explored_start_spawn_points_for_team(team) {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
     allplayersspawned = 0;
 
     if(players.size >= getdvarint(#"com_maxclients", 0)) {
@@ -655,7 +655,7 @@ update_explored_spawn_points_for_team(team, explored_radius_sq) {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     foreach(spawnpoint in level.teamspawnpoints[team]) {
       if(!isDefined(spawnpoint.explored)) {
@@ -688,7 +688,7 @@ should_update_exploration_for_player(spawnpoint, player) {
     return false;
   }
 
-  if(!player flag::get("spawn_exploration_active") || player isplayinganimscripted() || player.sessionstate != "playing") {
+  if(!player flag::get("spawn_exploration_active") || player isplayinganimScripted() || player.sessionstate != "playing") {
     return false;
   }
 
@@ -1185,7 +1185,7 @@ spawnpoint_debug() {
         }
 
         nextbestspawnpoint = getbestspawnpoint(point_team, influencer_team, vis_team_mask, selectedplayer, 0);
-        selectedplayer setorigin(nextbestspawnpoint[#"origin"]);
+        selectedplayer setOrigin(nextbestspawnpoint[#"origin"]);
         selectedplayer setplayerangles(nextbestspawnpoint[#"angles"]);
         break;
       case #"refresh":

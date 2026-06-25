@@ -20,7 +20,7 @@ loadbombfx() {
 }
 
 getcarrybombvisuals(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1)) {
     var_1 setModel("wpn_h1_briefcase_bomb_npc");
@@ -144,7 +144,7 @@ resetbombzone(var_0, var_1, var_2, var_3) {
 setupkillcament(var_0) {
   var_1 = spawn("script_origin", self.origin);
   var_1.angles = self.angles;
-  var_1 rotateyaw(-45, 0.05);
+  var_1 rotateYaw(-45, 0.05);
   wait 0.05;
   var_2 = self.origin + (0, 0, 5);
   var_3 = self.origin + anglesToForward(var_1.angles) * 100 + (0, 0, 128);

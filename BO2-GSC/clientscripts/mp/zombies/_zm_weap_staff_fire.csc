@@ -48,7 +48,7 @@ zombie_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
     self.torso_fire_fx = playFXOnTag(localclientnum, level._effect["character_fire_death_torso"], self, "j_spinelower");
     self.head_fire_fx = playFXOnTag(localclientnum, level._effect["character_fire_death_sm"], self, "j_head");
     self.sndent = spawn(0, self.origin, "script_origin");
-    self.sndent linkto(self);
+    self.sndent linkTo(self);
     self.sndent playLoopSound("zmb_fire_loop", 0.5);
     self.sndent thread snddeleteent(self);
 

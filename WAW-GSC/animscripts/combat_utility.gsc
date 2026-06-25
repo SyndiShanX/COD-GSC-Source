@@ -29,7 +29,7 @@ MyGetEnemySqDist() {
 getTargetAngleOffset(target) {
   pos = self getshootatpos() + (0, 0, -3);
   dir = (pos[0] - target[0], pos[1] - target[1], pos[2] - target[2]);
-  dir = VectorNormalize(dir);
+  dir = vectorNormalize(dir);
   fact = dir[2] * -1;
   return fact;
 }
@@ -139,7 +139,7 @@ shootUntilShootBehaviorChange() {
   self endon("stopShooting");
 
   if(self weaponAnims() == "rocketlauncher" || self isSniper()) {
-    players = GetPlayers();
+    players = getPlayers();
 
     if(isDefined(players) && players.size > 0) {
       if(isDefined(self.enemy) && !isPlayer(self.enemy) && isSentient(self.enemy)) {
@@ -463,7 +463,7 @@ tryWeaponThrowDown() {
     return false;
   }
 
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size > 0 && distance(players[0].origin, self.origin) > 350) {
     return false;
   }
@@ -635,7 +635,7 @@ setActiveGrenadeTimer(throwingAt) {
 
 considerChangingTarget(throwingAt) {
   if(!isPlayer(throwingAt) && self.team == "axis") {
-    players = GetPlayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       player = players[i];
       if(gettime() < anim.grenadeTimers[self.activeGrenadeTimer]) {
@@ -1195,7 +1195,7 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
     giveUpRadiusSqrd = 1300 * 1300;
   }
 
-  players = GetPlayers();
+  players = getPlayers();
 
   prevorigin = grenade.origin;
   while(1) {
@@ -1512,7 +1512,7 @@ getPitchToEnemy() {
   }
 
   vectorToEnemy = self.enemy getshootatpos() - self getshootatpos();
-  vectorToEnemy = vectornormalize(vectortoenemy);
+  vectorToEnemy = vectorNormalize(vectortoenemy);
   pitchDelta = 360 - vectortoangles(vectorToEnemy)[0];
 
   return AngleClamp180(pitchDelta);
@@ -1524,7 +1524,7 @@ getPitchToSpot(spot) {
   }
 
   vectorToEnemy = spot - self getshootatpos();
-  vectorToEnemy = vectornormalize(vectortoenemy);
+  vectorToEnemy = vectorNormalize(vectortoenemy);
   pitchDelta = 360 - vectortoangles(vectorToEnemy)[0];
 
   return AngleClamp180(pitchDelta);

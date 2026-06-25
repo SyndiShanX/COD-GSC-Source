@@ -8,7 +8,7 @@
 function preinit() {}
 
 function think() {
-  if(isDefined(self.bot.traversal) || self isplayinganimscripted() || self arecontrolsfrozen() || self function_5972c3cf()) {
+  if(isDefined(self.bot.traversal) || self isplayinganimScripted() || self arecontrolsfrozen() || self function_5972c3cf()) {
     return;
   }
 

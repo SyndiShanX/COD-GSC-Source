@@ -46,7 +46,7 @@ main() {
   maps\mp\gametypes\_spawning::level_use_unified_spawning(1);
   level thread dog_jump_think();
   level.disableoutrovisionset = 1;
-  level.mptakeoffrocket = getent("takeoff_rocket", "targetname");
+  level.mptakeoffrocket = getEnt("takeoff_rocket", "targetname");
   assert(isDefined(level.mptakeoffrocket), "Unable to find entity with targetname: 'takeoff_rocket'");
   level.endgamefunction = ::takeoff_end_game;
   level.preendgamefunction = ::takeoff_pre_end_game;
@@ -79,7 +79,7 @@ setuprocketcamera() {
 }
 
 getrocketcamera() {
-  camerastruct = getstruct("endgame_first_camera", "targetname");
+  camerastruct = getStruct("endgame_first_camera", "targetname");
   assert(isDefined(camerastruct), "Unable to find entity with targetname: 'endgame_first_camera'");
 
   if(!isDefined(level.rocketcamera)) {
@@ -276,7 +276,7 @@ rocket_move() {
   self.origin = self.origin + (0, 0, heightincrease);
   movetime = getdvarintdefault("mp_takeoff_moveTime", 17);
   moveaccelratio = getdvarfloatdefault("mp_takeoff_moveAccel", 1.0);
-  self moveto(self.origin + vectorscale((0, 0, 1), 50000.0), movetime, movetime * moveaccelratio);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 50000.0), movetime, movetime * moveaccelratio);
   self waittill("movedone");
   origin = self.origin;
 }
@@ -295,9 +295,9 @@ vibrateaftertime(waittime) {
   for(;;) {
     angles0 = (originalangles[0] - pitchvibrateamplitude, originalangles[1], originalangles[2] - vibrateamplitude);
     angles1 = (originalangles[0] + pitchvibrateamplitude, originalangles[1], originalangles[2] + vibrateamplitude);
-    self rotateto(angles0, vibratetime);
+    self rotateTo(angles0, vibratetime);
     self waittill("rotatedone");
-    self rotateto(angles1, vibratetime);
+    self rotateTo(angles1, vibratetime);
     self waittill("rotatedone");
     vibrateamplitude = vibrateamplitude * getdvarfloatdefault("mp_takeoff_amp_vredux", 1.12);
     pitchvibrateamplitude = 0 - pitchvibrateamplitude;

@@ -60,8 +60,8 @@ function function_835fd6d8() {
       switch (a_e_parts[i].script_noteworthy) {
         case "pendulum": {
           self.var_4b6ad173 = a_e_parts[i];
-          self enablelinkto();
-          self linkto(self.var_4b6ad173);
+          self enablelinkTo();
+          self linkTo(self.var_4b6ad173);
           break;
         }
         case "gears": {
@@ -134,22 +134,22 @@ function function_38d940ac(var_60532813) {
 
 function function_dc9dafb8(e_player) {
   if(isDefined(e_player.zombie_vars["zombie_powerup_minigun_on"]) && e_player.zombie_vars["zombie_powerup_minigun_on"]) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(isDefined(self.stub.script_int) && !level flag::get("power_on" + self.stub.script_int)) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     return false;
   }
   if(self.stub.var_60532813 flag::get("trap_active")) {
-    self sethintstring(&"ZOMBIE_TRAP_ACTIVE");
+    self setHintString(&"ZOMBIE_TRAP_ACTIVE");
     return false;
   }
   if(self.stub.var_60532813 flag::get("trap_cooldown")) {
-    self sethintstring(&"ZOMBIE_TRAP_COOLDOWN");
+    self setHintString(&"ZOMBIE_TRAP_COOLDOWN");
     return false;
   }
-  self sethintstring(&"ZOMBIE_BUTTON_BUY_TRAP", 1000);
+  self setHintString(&"ZOMBIE_BUTTON_BUY_TRAP", 1000);
   return true;
 }
 
@@ -197,8 +197,8 @@ function trap_lights_green() {
 function function_157a698(var_c4f1ee44, e_player) {
   self triggerenable(1);
   self flag::set("trap_active");
-  playsoundatposition("zmb_flogger_motor_start_l", self.var_f1693315.origin);
-  playsoundatposition("zmb_flogger_motor_start_r", self.var_736c69e7.origin);
+  playSoundAtPosition("zmb_flogger_motor_start_l", self.var_f1693315.origin);
+  playSoundAtPosition("zmb_flogger_motor_start_r", self.var_736c69e7.origin);
   wait(0.5);
   self thread function_bb59d4d9(var_c4f1ee44, e_player);
   self waittill("trap_done");

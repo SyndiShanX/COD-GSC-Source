@@ -17,7 +17,7 @@ sat_camera_monitor() {
   setup_camera_feedback_system();
   common_scripts\utility::flag_wait("sat_begin_looking_for_B");
   level.player thread camera_disabled_nag();
-  var_0 = getent("sat_target_B", "targetname");
+  var_0 = getEnt("sat_target_B", "targetname");
   level.sat_current_target = var_0;
   level.player thread sat_camera_proximity_scan(var_0);
   level.player thread sat_camera_feedback(var_0);
@@ -48,7 +48,7 @@ sat_camera_proximity_scan(var_0) {
   for(;;) {
     var_1 = level.player getEye();
     var_2 = level.player getplayerangles();
-    var_3 = vectornormalize(var_0.origin - var_1);
+    var_3 = vectorNormalize(var_0.origin - var_1);
     var_4 = anglestoup(var_2);
     var_5 = anglestoright(level.player.angles);
     var_6 = anglesToForward(level.player.angles);
@@ -654,7 +654,7 @@ binoculars_unlock_from_target() {
     self.binoculars_linked_to_target = 0;
 
     if(isDefined(self.prev_origin)) {
-      self setorigin(self.prev_origin);
+      self setOrigin(self.prev_origin);
       self.prev_origin = undefined;
     }
 
@@ -889,7 +889,7 @@ binoculars_monitor_scanning() {
     var_0 = 1;
 
     if(var_0 && common_scripts\utility::flag("sat_allow_scan")) {
-      var_1 = getent(level.sat_lock_target, "targetname");
+      var_1 = getEnt(level.sat_lock_target, "targetname");
       thread binoculars_lock_to_target(var_1);
       self notify("scanning_target");
 
@@ -1213,12 +1213,12 @@ setup_tagged_entities() {
   if(!common_scripts\utility::flag("cam_B_confirmed")) {
     level waittill("found_sat_target");
     var_0 = [];
-    var_0[var_0.size] = getent("satellite_ROG_01", "targetname");
-    var_0[var_0.size] = getent("satellite_ROG_02", "targetname");
-    var_0[var_0.size] = getent("satellite_ROG_03", "targetname");
-    var_0[var_0.size] = getent("satellite_ROG_04", "targetname");
-    var_0[var_0.size] = getent("satellite_ROG_05", "targetname");
-    var_0[var_0.size] = getent("satellite_ROG_06", "targetname");
+    var_0[var_0.size] = getEnt("satellite_ROG_01", "targetname");
+    var_0[var_0.size] = getEnt("satellite_ROG_02", "targetname");
+    var_0[var_0.size] = getEnt("satellite_ROG_03", "targetname");
+    var_0[var_0.size] = getEnt("satellite_ROG_04", "targetname");
+    var_0[var_0.size] = getEnt("satellite_ROG_05", "targetname");
+    var_0[var_0.size] = getEnt("satellite_ROG_06", "targetname");
 
     foreach(var_3, var_2 in var_0) {
       var_2 thread add_tag(35);

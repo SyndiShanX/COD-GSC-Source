@@ -136,7 +136,7 @@ function function_8f86441a() {
 
 function function_df01587c() {
   wait(2);
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("general", "napalm_spawn");
 }
 
@@ -184,7 +184,7 @@ function napalm_zombie_spawn(animname_set) {
   self.animname = "napalm_zombie";
   self thread napalm_zombie_client_flag();
   self.napalm_zombie_glowing = 0;
-  self.maxhealth = self.maxhealth * (getplayers().size * level.napalmhealthmultiplier);
+  self.maxhealth = self.maxhealth * (getPlayers().size * level.napalmhealthmultiplier);
   self.health = self.maxhealth;
   self.no_gib = 1;
   self.rising = 1;
@@ -273,7 +273,7 @@ function private napalmcanexplode(entity) {
   napalmexploderadiussqr = level.napalmexploderadius * level.napalmexploderadius;
   napalmplayerwarningradius = level.napalmexplodedamageradius;
   napalmplayerwarningradiussqr = napalmplayerwarningradius * napalmplayerwarningradius;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     player = players[i];
     if(!zombie_utility::is_player_valid(player)) {
@@ -358,7 +358,7 @@ function napalm_zombie_death(einflictor, attacker, idamage, smeansofdeath, weapo
 
 function napalm_delay_delete() {
   self endon("death");
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self thread zombie_utility::zombie_eye_glow_stop();
   util::wait_network_frame();
   self hide();
@@ -409,7 +409,7 @@ function _napalm_damage_players() {
   footorigin = self.origin + vectorscale((0, 0, 1), 8);
   midorigin = (footorigin[0], footorigin[1], (footorigin[2] + eyeorigin[2]) / 2);
   players_damaged_by_explosion = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!zombie_utility::is_player_valid(players[i])) {
       continue;
@@ -593,7 +593,7 @@ function _zombie_setupfxonjoint(jointname, fxname, offset) {
   if(!isDefined(offset)) {
     offset = (0, 0, 0);
   }
-  effectent linkto(self, jointname, offset);
+  effectent linkTo(self, jointname, offset);
   playFXOnTag(level._effect[fxname], effectent, "tag_origin");
   return effectent;
 }
@@ -645,7 +645,7 @@ function napalm_zombie_count_watch() {
 }
 
 function napalm_clear_radius_fx_all_players() {
-  players = getplayers();
+  players = getPlayers();
   for(j = 0; j < players.size; j++) {
     player_to_clear = players[j];
     if(!isDefined(player_to_clear)) {

@@ -63,7 +63,7 @@ start_teleport_ai(start_name) {
 start_trick_teleport_player() {
   players = get_players();
 
-  orig = getstruct("orig_fake_test", "targetname");
+  orig = getStruct("orig_fake_test", "targetname");
 
   for(i = 0; i < players.size; i++) {
     players[i] setOrigin(orig.origin);
@@ -77,14 +77,14 @@ start_teleport(start_name) {
 }
 
 set_color_chain(name) {
-  color_trigger = getent(name, "targetname");
+  color_trigger = getEnt(name, "targetname");
   assertex(isDefined(color_trigger), "color_trigger: " + name + " isn't defined!");
 
   color_trigger notify("trigger");
 }
 
 set_color_chain_safe(name) {
-  color_trigger = getent(name, "targetname");
+  color_trigger = getEnt(name, "targetname");
   color_trigger notify("trigger");
 }
 
@@ -95,7 +95,7 @@ trigger_wait_or_timeout(trig_name, time, key) {
     key = "targetname";
   }
 
-  trig = getent(trig_name, key);
+  trig = getEnt(trig_name, key);
   assertex((trig.classname == "trigger_multiple" || trig.classname == "trigger_lookat"), "trigger must be a trigger_multiple or trigger_lookat to use this function!");
 
   level thread trigger_wait_or_timeout_helper(trig_name, time, key);
@@ -104,7 +104,7 @@ trigger_wait_or_timeout(trig_name, time, key) {
 }
 
 trigger_wait_or_timeout_helper(trig_name, time, key) {
-  trig = getent(trig_name, key);
+  trig = getEnt(trig_name, key);
 
   trig endon("trigger");
 
@@ -113,11 +113,11 @@ trigger_wait_or_timeout_helper(trig_name, time, key) {
 }
 
 trig_override(original_trig_name) {
-  original_trig = getent(original_trig_name, "targetname");
+  original_trig = getEnt(original_trig_name, "targetname");
   assertex((original_trig.classname == "trigger_multiple" || original_trig.classname == "trigger_lookat"), "trigger must be a trigger_multiple or trigger_lookat to use this function!");
   original_trig endon("trigger");
 
-  override_trig = getent(original_trig.target, "targetname");
+  override_trig = getEnt(original_trig.target, "targetname");
   override_trig waittill("trigger");
 
   quick_text(original_trig.targetname + " overridden!", 3, true);
@@ -456,18 +456,18 @@ flame_move_target(orig, move_time) {
   orig endon("stop_fakefire_mover");
 
   targ_1 = orig.origin;
-  targ_2 = getstruct(orig.target, "targetname").origin;
+  targ_2 = getStruct(orig.target, "targetname").origin;
 
   while(1) {
-    orig MoveTo(targ_2, move_time);
+    orig moveTo(targ_2, move_time);
     orig waittill("movedone");
-    orig MoveTo(targ_1, move_time);
+    orig moveTo(targ_1, move_time);
     orig waittill("movedone");
   }
 }
 
 convert_aiming_struct_to_origin(struct_name) {
-  aim_struct = getstruct(struct_name, "targetname");
+  aim_struct = getStruct(struct_name, "targetname");
 
   orig = spawn("script_origin", aim_struct.origin);
   orig.target = aim_struct.target;
@@ -519,7 +519,7 @@ tank_move(pathstart) {
     arraycount++;
 
     if(isDefined(pathpoint.target)) {
-      pathpoint = getent(pathpoint.target, "targetname");
+      pathpoint = getEnt(pathpoint.target, "targetname");
     } else {
       break;
     }
@@ -557,7 +557,7 @@ tank_fire_at_ent(ent_name, timeout) {
     timeout = 5;
   }
 
-  spot = getent(ent_name, "targetname");
+  spot = getEnt(ent_name, "targetname");
 
   self SetTurretTargetEnt(spot);
   self waittill_notify_or_timeout("turret_on_target", timeout);
@@ -765,7 +765,7 @@ mg_sandbag_cleanup(mg_name, killspawner_num) {
     maps\_spawner::kill_spawnernum(killspawner_num);
   }
 
-  mg = getent(mg_name, "targetname");
+  mg = getEnt(mg_name, "targetname");
 
   mg_owner = mg getturretowner();
 
@@ -1053,9 +1053,9 @@ drawline_from_ent(ent) {
 
 show_tag(ent_name, tag_name, noteworthy) {
   if(isDefined(noteworthy)) {
-    ent = getent(ent_name, "script_noteworthy");
+    ent = getEnt(ent_name, "script_noteworthy");
   } else {
-    ent = getent(ent_name, "targetname");
+    ent = getEnt(ent_name, "targetname");
   }
 
   while(1) {

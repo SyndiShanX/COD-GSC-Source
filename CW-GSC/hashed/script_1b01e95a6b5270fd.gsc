@@ -537,7 +537,7 @@ function spawnai(spawnparams, spawnloc) {
         ai forceteleport(ai.origin, ai.angles + (0, randomint(360), 0));
       }
 
-      var_6b57b559 = (getplayers().size - 1) * 0.1;
+      var_6b57b559 = (getPlayers().size - 1) * 0.1;
 
       if(var_6b57b559 > 0) {
         ai.maxhealth += int(ai.maxhealth * var_6b57b559);

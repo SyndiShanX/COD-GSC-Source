@@ -114,7 +114,7 @@ function_dca53f1f(player_index) {
 }
 
 function_303ab700() {
-  players = getplayers();
+  players = getPlayers();
   player_index = 0;
 
   if(players.size > 0 && isDefined(level.var_8a8728c6) && isDefined(level.var_8a8728c6[0])) {
@@ -129,7 +129,7 @@ function_303ab700() {
 
         if(isDefined(player) && isDefined(player.var_fa2d1151)) {
           player dontinterpolate();
-          player setorigin(var_16a2c824);
+          player setOrigin(var_16a2c824);
           player setplayerangles(samantha.angles);
           waitframe(1);
           println("<dev string:xe6>" + player.name + "<dev string:x106>");
@@ -146,7 +146,7 @@ function_303ab700() {
 }
 
 function_8e56bb21(player, script_model, origin, angles) {
-  player setorigin(origin);
+  player setOrigin(origin);
   player setplayerangles(angles);
   player playerlinktodelta(script_model, undefined, 0, 30, 30, 15, 15);
 }
@@ -164,7 +164,7 @@ function_ddbe2dbb(distance) {
 }
 
 function_ae4d6b1b() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player unlink();
@@ -178,7 +178,7 @@ function_2165e851() {
 
   while(true) {
     waitframe(1);
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size > 0 && isDefined(level.var_8a8728c6) && isDefined(level.var_41c80f7d) && level.var_41c80f7d) {
       var_2e35e6c1 = 0;
@@ -208,7 +208,7 @@ function_2165e851() {
       foreach(player in players) {
         if(isDefined(player.var_fa2d1151)) {
           var_9a149315 = player function_dca53f1f(player_index);
-          player.var_fa2d1151 moveto(var_9a149315, 0.15);
+          player.var_fa2d1151 moveTo(var_9a149315, 0.15);
         }
 
         player_index++;

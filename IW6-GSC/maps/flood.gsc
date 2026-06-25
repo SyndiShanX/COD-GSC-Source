@@ -553,7 +553,7 @@ mission_object_control() {
       var_9 = [];
 
       for(var_10 = 0; var_10 < 5; var_10++) {
-        var_11 = getent("debris_bridge_car_" + var_10, "targetname");
+        var_11 = getEnt("debris_bridge_car_" + var_10, "targetname");
         var_9 = common_scripts\utility::add_to_array(var_9, var_11);
       }
 
@@ -565,7 +565,7 @@ mission_object_control() {
       thread maps\flood_swept::swept_water_toggle("swim", "hide");
       thread maps\flood_swept::swept_water_toggle("ending_water", "hide");
       thread maps\flood_util::show_models_by_targetname("ending_window_frame");
-      var_12 = getent("debris_ending_show", "targetname");
+      var_12 = getEnt("debris_ending_show", "targetname");
       var_12 show();
       common_scripts\utility::flag_wait("vignette_ending_crash_flag");
       thread maps\flood_swept::swept_water_toggle("ending_water", "show");
@@ -586,7 +586,7 @@ mission_hide_at_start() {
   thread maps\flood_swept::swept_water_toggle("ending_water", "hide");
   thread maps\flood_util::hide_models_by_targetname("swept_underwater_cleanup");
   thread maps\flood_util::hide_models_by_targetname("rooftops_ambient_cars");
-  var_0 = getent("debris_ending_show", "targetname");
+  var_0 = getEnt("debris_ending_show", "targetname");
   var_0 hide();
 }
 
@@ -611,7 +611,7 @@ infil_object_hide() {
   thread maps\flood_util::hide_models_by_targetname("destructible_vehicle");
   thread script_noteworthy_hide_and_show("infil_optimize");
   thread script_noteworthy_hide_and_show("infil_optimize_delay_delete");
-  var_0 = getent("coverwater_rooftop_above", "targetname");
+  var_0 = getEnt("coverwater_rooftop_above", "targetname");
   var_0 hide();
   thread planter_hide_and_show("planter_06");
   thread planter_hide_and_show("planter_08");
@@ -638,7 +638,7 @@ infil_object_hide() {
   thread maps\flood_util::show_models_by_targetname("dam_break_delete");
   thread script_noteworthy_hide_and_show("infil_optimize", 1);
   thread script_noteworthy_hide_and_show("infil_optimize_delay_delete", 1);
-  var_0 = getent("coverwater_rooftop_above", "targetname");
+  var_0 = getEnt("coverwater_rooftop_above", "targetname");
   var_0 show();
   thread planter_hide_and_show("planter_06", 1);
   thread planter_hide_and_show("planter_08", 1);
@@ -679,12 +679,12 @@ script_noteworthy_hide_and_show(var_0, var_1) {
 
 streets_vehicle_hide_at_start() {
   var_0 = [];
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("streets_static_iveco_01", "script_noteworthy"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_street_car_5", "script_noteworthy"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("crashed_truck", "targetname"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_street_truck_01", "script_noteworthy"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_street_car_1_cleanup", "targetname"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_ally_car", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("streets_static_iveco_01", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_street_car_5", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("crashed_truck", "targetname"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_street_truck_01", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_street_car_1_cleanup", "targetname"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_ally_car", "script_noteworthy"));
   var_1 = getEntArray("flood_street_car_1", "script_noteworthy");
 
   foreach(var_3 in var_1) {
@@ -698,12 +698,12 @@ streets_vehicle_hide_at_start() {
 
 streets_vehicle_show_after_knife_kill() {
   var_0 = [];
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("streets_static_iveco_01", "script_noteworthy"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_street_car_5", "script_noteworthy"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("crashed_truck", "targetname"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_street_truck_01", "script_noteworthy"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_street_car_1_cleanup", "targetname"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("flood_ally_car", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("streets_static_iveco_01", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_street_car_5", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("crashed_truck", "targetname"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_street_truck_01", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_street_car_1_cleanup", "targetname"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("flood_ally_car", "script_noteworthy"));
   var_1 = getEntArray("flood_street_car_1", "script_noteworthy");
 
   foreach(var_3 in var_1) {
@@ -717,8 +717,8 @@ streets_vehicle_show_after_knife_kill() {
 
 streets_script_vehicle_cleanup() {
   var_0 = [];
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("streets_static_iveco_01", "script_noteworthy"));
-  var_0 = common_scripts\utility::add_to_array(var_0, getent("crashed_truck", "targetname"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("streets_static_iveco_01", "script_noteworthy"));
+  var_0 = common_scripts\utility::add_to_array(var_0, getEnt("crashed_truck", "targetname"));
   maps\_utility::array_delete(var_0);
 }
 
@@ -752,7 +752,7 @@ palm_tree_control(var_0) {
 
   if(isDefined(var_0)) {
     foreach(var_5 in var_3) {
-      var_5 = getent(var_5, "script_noteworthy");
+      var_5 = getEnt(var_5, "script_noteworthy");
 
       if(isDefined(var_5)) {
         var_5 hide();
@@ -766,7 +766,7 @@ palm_tree_control(var_0) {
     level waittill("end_streets");
 
     foreach(var_5 in var_3) {
-      var_5 = getent(var_5, "script_noteworthy");
+      var_5 = getEnt(var_5, "script_noteworthy");
 
       if(isDefined(var_5)) {
         var_5 show();
@@ -823,7 +823,7 @@ hotel_parking_car_hide() {
 }
 
 hotel_parking_facade() {
-  var_0 = getent("rooftops_encounter_b_vo_3", "targetname");
+  var_0 = getEnt("rooftops_encounter_b_vo_3", "targetname");
   var_0 waittill("trigger");
   thread maps\flood_util::hide_models_by_targetname("garage_facade");
 

@@ -36,7 +36,7 @@ mygetenemysqdist() {
 gettargetangleoffset(target) {
   pos = self getshootatpos() + vectorscale((0, 0, -1), 3.0);
   dir = (pos[0] - target[0], pos[1] - target[1], pos[2] - target[2]);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   fact = dir[2] * -1;
   return fact;
 }
@@ -135,7 +135,7 @@ shootuntilshootbehaviorchange() {
   self animscripts\debug::debugpushstate("shootUntilShootBehaviorChange", "shootStyle: " + self.shootstyle);
 
   if(self weaponanims() == "rocketlauncher" || self issniper()) {
-    players = getplayers();
+    players = getPlayers();
 
     if(self weaponanims() == "rocketlauncher" && issentient(self.enemy)) {
       wait(randomfloat(2.0));
@@ -546,7 +546,7 @@ setactivegrenadetimer(throwingat) {
 
 considerchangingtarget(throwingat) {
   if(!isPlayer(throwingat) && self.team == "axis" || self.team == "team3") {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       player = players[i];
@@ -1121,7 +1121,7 @@ watchgrenadetowardsplayerinternal(nextgrenadetimetouse) {
     giveupradiussqrd = 1690000;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(prevorigin = grenade.origin; 1; prevorigin = grenade.origin) {
     wait 0.1;
@@ -1386,7 +1386,7 @@ getpitchtoenemy() {
   }
 
   vectortoenemy = self.enemy getshootatpos() - self getshootatpos();
-  vectortoenemy = vectornormalize(vectortoenemy);
+  vectortoenemy = vectorNormalize(vectortoenemy);
   pitchdelta = 360 - vectortoangles(vectortoenemy)[0];
   return angleclamp180(pitchdelta);
 }
@@ -1397,7 +1397,7 @@ getpitchtospot(spot) {
   }
 
   vectortoenemy = spot - self getshootatpos();
-  vectortoenemy = vectornormalize(vectortoenemy);
+  vectortoenemy = vectorNormalize(vectortoenemy);
   pitchdelta = 360 - vectortoangles(vectortoenemy)[0];
   return angleclamp180(pitchdelta);
 }

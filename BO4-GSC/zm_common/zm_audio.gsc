@@ -171,7 +171,7 @@ oh_shit_vox() {
   while(true) {
     wait 1;
     a_ai_enemies = getaiteamarray(level.zombie_team);
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 0) {
       continue;
@@ -746,7 +746,7 @@ timer_actual(kills, time) {
   while(gettime() < timer) {
     if(self.killcounter > kills) {
       if(math::cointoss() && level.players.size > 1 && isDefined(self.var_eee02beb)) {
-        players = getplayers();
+        players = getPlayers();
 
         foreach(e_player in players) {
           if(!isDefined(e_player)) {

@@ -107,7 +107,7 @@ function function_496d0824(sweep_start, var_e8456387, team, killstreak_id) {
   height = getplaneflyheight(bundle);
   plane_start = (level.mapcenter[0], level.mapcenter[1], height);
   team_center = self getteamcenter(self.team);
-  var_d1769adf = vectornormalize((team_center[0], team_center[1], height) - (level.mapcenter[0], level.mapcenter[1], height));
+  var_d1769adf = vectorNormalize((team_center[0], team_center[1], height) - (level.mapcenter[0], level.mapcenter[1], height));
   var_675219e7 = (level.mapcenter[0], level.mapcenter[1], height) + vectorscale(var_d1769adf, var_9bed4193);
   var_aff95821 = vectorcross((0, 0, 1), var_d1769adf);
   plane_start = var_675219e7 - vectorscale(var_aff95821, var_6c36c4dd);
@@ -118,7 +118,7 @@ function function_496d0824(sweep_start, var_e8456387, team, killstreak_id) {
     var_fe427c32 = (var_fe427c32[0], var_fe427c32[1], bundle.var_c28c2429 * 0.75);
   }
 
-  plane = spawnvehicle(bundle.var_f8ca3420, plane_start, var_fe427c32);
+  plane = spawnVehicle(bundle.var_f8ca3420, plane_start, var_fe427c32);
   plane setowner(owner);
   plane notsolid();
   plane killstreaks::configure_team("artillery_barrage", killstreak_id, owner, undefined, undefined, &configurechopperteampost);
@@ -166,7 +166,7 @@ function getteamcenter(team) {
     return self.origin;
   }
 
-  teamplayers = getplayers(team);
+  teamplayers = getPlayers(team);
   totalaliveplayers = 0;
   var_f44bf438 = (0, 0, 0);
 
@@ -411,7 +411,7 @@ function function_598dc586(plane, position, yaw, team, killstreak_id, fly_height
   for(sweep = 0; sweep < bundle.var_b88f3e5a && function_1f3792ee(position); sweep++) {
     for(var_41c99c37 = 0; var_41c99c37 < bundle.var_b32c8349 && function_1f3792ee(position); var_41c99c37++) {
       startpoint = position.origin;
-      var_47b0cb83 = vectornormalize(var_dc88ed1e - startpoint);
+      var_47b0cb83 = vectorNormalize(var_dc88ed1e - startpoint);
       var_aab835e2 = anglestoright(var_37bb8781);
       rightoffset = vectorscale(var_aab835e2, bundle.var_ed4e0bcc + util::function_a1281365(bundle.var_64e90954));
       leftoffset = vectorscale(var_aab835e2, bundle.var_ed4e0bcc * -1 + util::function_a1281365(bundle.var_64e90954));
@@ -452,8 +452,8 @@ function function_598dc586(plane, position, yaw, team, killstreak_id, fly_height
         sphere(var_3fddb9e8, 20, (0, 1, 0), 0.9, 1, 10, 120);
       }
 
-      var_9bba3fcb = vectornormalize((var_5bbbb605[0], var_5bbbb605[1], startpoint[2]) - var_71d1c0cb);
-      var_126a2ae4 = vectornormalize((var_3fddb9e8[0], var_3fddb9e8[1], startpoint[2]) - var_8cdd6f66);
+      var_9bba3fcb = vectorNormalize((var_5bbbb605[0], var_5bbbb605[1], startpoint[2]) - var_71d1c0cb);
+      var_126a2ae4 = vectorNormalize((var_3fddb9e8[0], var_3fddb9e8[1], startpoint[2]) - var_8cdd6f66);
       var_d8497bd7 = var_5bbbb605 - vectorscale(var_9bba3fcb, bundle.var_bd3080e0);
       var_d8497bd7 = (var_d8497bd7[0], var_d8497bd7[1], var_71d1c0cb[2]);
       var_6bd2a8a7 = var_3fddb9e8 - vectorscale(var_126a2ae4, bundle.var_bd3080e0);
@@ -501,7 +501,7 @@ function function_5a0d2864(startpoint, endpoint, targetpoint, angles, team, kill
   shell thread watchforemp(self);
   var_c786830e = max(bundle.var_98a3d82c - 0.1, 0.1);
   var_c786830e = min(var_c786830e, 1.5);
-  shell moveto(endpoint, bundle.var_98a3d82c, 0, var_c786830e);
+  shell moveTo(endpoint, bundle.var_98a3d82c, 0, var_c786830e);
   wait bundle.var_98a3d82c * 0.5;
   velocity = shell getvelocity();
   wait bundle.var_98a3d82c * 0.5;
@@ -511,7 +511,7 @@ function function_5a0d2864(startpoint, endpoint, targetpoint, angles, team, kill
   dz = endpoint[2] - targetpoint[2];
   droptime = sqrt(dz / halfgravity);
   dvxy = dxy / droptime;
-  nvel = vectornormalize(velocity);
+  nvel = vectorNormalize(velocity);
   launchvel = nvel * dvxy;
   bomb = self magicmissile(bundle.ksweapon, shell.origin, launchvel);
   target_set(bomb);

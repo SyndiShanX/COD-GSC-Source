@@ -439,7 +439,7 @@ _id_0D2A(var_0, var_1, var_2, var_3) {
       var_4 = var_1;
     }
 
-    var_0 linkto(var_2, var_3, var_4, var_5);
+    var_0 linkTo(var_2, var_3, var_4, var_5);
 
     if(!_func_0107(var_2._id_0D72)) {
       var_2._id_0D72 = [];
@@ -1009,7 +1009,7 @@ _id_0D25(var_0, var_1, var_2, var_3, var_4) {
   while(isent(self) && isDefined(var_0) && isDefined(var_0.origin)) {
     var_11 = _id_0D24(var_0);
     var_12 = _id_0850::_id_AC5D(var_11, var_1, var_2, var_3);
-    self moveto(var_12, var_9, 0.0, 0.0);
+    self moveTo(var_12, var_9, 0.0, 0.0);
     var_2 = var_2 + var_10;
     wait(var_9);
   }

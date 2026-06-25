@@ -374,7 +374,7 @@ coverapproachlastminutecheck(var_0, var_1, var_2, var_3, var_4) {
     return 0;
   }
 
-  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.8) {
+  if(abs(self getmotionangle()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectorNormalize(self.enemy.origin - self.origin)) > 0.8) {
     return 0;
   }
 
@@ -414,7 +414,7 @@ approachwaittillclose(var_0, var_1, var_2) {
       var_5 = calculateapproachdir();
       var_6 = calculatedesiredfacingyaw(var_5);
       var_7 = calculatelastminuteanimdistance(var_5, var_6, var_0, 1, var_2.approachtype);
-      var_8 = vectornormalize(var_2.approachpoint - self.origin);
+      var_8 = vectorNormalize(var_2.approachpoint - self.origin);
       var_3 = checkarrivalenterpositions(var_2.approachpoint, var_2.approachfinalyaw, var_2.approachtype, var_8, var_2.maxdirections, var_2.excludedir, var_2.arrivalfromfront);
 
       if(var_3.approachnumber > 0) {
@@ -475,7 +475,7 @@ startcoverapproach(var_0, var_1, var_2, var_3, var_4) {
     }
 
     approachwaittillclose(var_5, self.arrivalstartdist);
-    var_11 = vectornormalize(var_1 - self.origin);
+    var_11 = vectorNormalize(var_1 - self.origin);
     var_6 = checkarrivalenterpositions(var_1, var_3, var_0, var_11, var_7, var_8, var_9);
     self.arrivalstartdist = length(animscripts\utility::lookuptransitionanim("cover_trans_dist", var_0, var_10));
     var_12 = spawnStruct();
@@ -554,7 +554,7 @@ checkarrivalenterpositions(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(!var_6) {
-      var_14 = vectornormalize(self.coverenterpos - self.origin);
+      var_14 = vectorNormalize(self.coverenterpos - self.origin);
       var_15 = var_1 - animscripts\utility::lookuptransitionanim("cover_trans_angles", var_2, var_8.approachnumber);
       var_16 = anglesToForward((0, var_15, 0));
       var_17 = vectordot(var_14, var_16);
@@ -744,7 +744,7 @@ calculatelastminuterequireddistsq(var_0) {
 }
 
 calculateapproachdir() {
-  var_0 = vectornormalize(self.pathgoalpos - self.origin);
+  var_0 = vectorNormalize(self.pathgoalpos - self.origin);
   return var_0;
 }
 
@@ -860,7 +860,7 @@ dolastminuteexposedapproach() {
       var_10 = self.angles[1];
 
     var_14 = var_8 - var_6;
-    var_11 = self.origin + vectornormalize(self.pathgoalpos - self.origin) * var_14;
+    var_11 = self.origin + vectorNormalize(self.pathgoalpos - self.origin) * var_14;
   } else {
     var_10 = self.angles[1];
     var_11 = self.origin;

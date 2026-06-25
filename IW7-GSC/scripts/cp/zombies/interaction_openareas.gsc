@@ -38,8 +38,8 @@ func_102F3(var_0, var_1) {
   var_2 = getEntArray(var_0.target, "targetname");
   foreach(var_4 in var_2) {
     var_4 connectpaths();
-    var_5 = scripts\engine\utility::getstruct(var_4.target, "targetname");
-    var_4 moveto(var_5.origin, 1);
+    var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
+    var_4 moveTo(var_5.origin, 1);
   }
 
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
@@ -185,8 +185,8 @@ sliding_power_door() {
   var_0 = getEntArray(self.target, "targetname");
   foreach(var_2 in var_0) {
     var_2 connectpaths();
-    var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
-    var_2 moveto(var_3.origin, 1);
+    var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
+    var_2 moveTo(var_3.origin, 1);
   }
 
   scripts\cp\cp_interaction::disable_linked_interactions(self);
@@ -196,8 +196,8 @@ sliding_power_door() {
 
 func_8FDE(var_0, var_1) {
   playsoundatpos(var_0.origin, "zmb_gate_open");
-  var_2 = getent(var_0.target, "targetname");
-  var_2 rotateyaw(160, 1);
+  var_2 = getEnt(var_0.target, "targetname");
+  var_2 rotateYaw(160, 1);
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
 }
 
@@ -242,7 +242,7 @@ move_up_and_delete(var_0) {
   self endon("death");
   wait(var_0 * 0.2);
   self movez(10, 0.5);
-  self rotateto(self.angles + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(-10, 10)), 0.5);
+  self rotateTo(self.angles + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(-10, 10)), 0.5);
   wait(0.5);
   self movez(1000, 3, 2, 1);
   wait(2);

@@ -381,7 +381,7 @@ function private ai_monitor_doors() {
           doororigin = possibledoor.c_door doors::get_door_bottom_center();
 
           if(distancesquared(self.origin, doororigin) < 400) {
-            var_da7ac3f6 = vectornormalize(doororigin - self.origin);
+            var_da7ac3f6 = vectorNormalize(doororigin - self.origin);
 
             if(vectordot(self.lookaheaddir, var_da7ac3f6) < -0.707) {
               wait 2;

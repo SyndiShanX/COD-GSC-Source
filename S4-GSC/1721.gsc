@@ -510,7 +510,7 @@ _id_5AE6(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 }
 
 _id_8513(var_0, var_1) {
-  var_2 = vectornormalize(var_0 - self.origin);
+  var_2 = vectorNormalize(var_0 - self.origin);
   var_3 = var_1 - self.origin;
   var_4 = length(var_3);
 
@@ -527,7 +527,7 @@ _id_8513(var_0, var_1) {
 
 _id_8504(var_0) {
   var_1 = var_0 - self.origin;
-  var_2 = var_0 - vectornormalize(var_1) * 32;
+  var_2 = var_0 - vectorNormalize(var_1) * 32;
   var_2 = _func_02AB(var_2, self);
   return var_2;
 }
@@ -538,9 +538,9 @@ _id_8505() {
 
   if(isDefined(self._id_0408._id_8511)) {
     var_2 = _func_02AB(var_1._id_8512, self);
-    var_3 = vectornormalize(self._id_0200 - self.origin);
+    var_3 = vectorNormalize(self._id_0200 - self.origin);
     var_4 = anglesToForward(self.angles);
-    var_5 = vectornormalize(var_2 - self.origin);
+    var_5 = vectorNormalize(var_2 - self.origin);
 
     if(isPlayer(var_1._id_019B) && !isPlayer(self._id_0408._id_8502)) {
       var_0 = 1;

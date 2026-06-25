@@ -307,7 +307,7 @@ _id_0B32(var_0) {
       }
 
       var_2._id_019B unlink();
-      var_2._id_019B setorigin(var_2._id_019B.origin + (0, 0, 1));
+      var_2._id_019B setOrigin(var_2._id_019B.origin + (0, 0, 1));
       var_2._id_B5A4 delete();
       var_2._id_B5A4 = undefined;
     }
@@ -397,7 +397,7 @@ _id_0B36(var_0, var_1, var_2) {
 
           var_5._id_019B _meth_8655();
           var_5._id_019B unlink();
-          var_5._id_019B setorigin(var_5._id_019B.origin + (0, 0, 1));
+          var_5._id_019B setOrigin(var_5._id_019B.origin + (0, 0, 1));
         }
 
         if(var_2 || var_5._id_5EA1 || var_9) {

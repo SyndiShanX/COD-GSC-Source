@@ -1063,7 +1063,7 @@ stun_bolt_death(player, iDamage, sMeansofDeath) {
   }
 
   if(isDefined(move_spot)) {
-    player.stun_struct.attack_bolt moveto(move_spot, .05);
+    player.stun_struct.attack_bolt moveTo(move_spot, .05);
     wait(.05);
 
     if(isDefined(self) && sMeansofDeath == "MOD_MELEE") {

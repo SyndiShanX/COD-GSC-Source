@@ -327,7 +327,7 @@ waittill_combat() {
     self allowedStances("stand", "crouch", "prone");
     self.disableArrivals = false;
     self.disableExits = false;
-    self stopanimscripted();
+    self stopanimScripted();
     self notify("stop_animmode");
 
     self.script_nobark = undefined;
@@ -462,7 +462,7 @@ pet_patrol() {
 
   positions = pet_patrol_create_positions();
 
-  forward = vectornormalize(self.origin - self.patrol_master.origin);
+  forward = vectorNormalize(self.origin - self.patrol_master.origin);
   right = anglestoright(self.patrol_master.angles);
 
   curr_pos = "left";

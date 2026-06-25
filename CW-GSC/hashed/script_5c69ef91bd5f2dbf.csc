@@ -378,7 +378,7 @@ function function_7d380ea9(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_92095d05(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self playrumbleonentity(fieldname, "damage_heavy");
+    self playRumbleOnEntity(fieldname, "damage_heavy");
 
     if(self postfx::function_556665f2("pstfx_slowed")) {
       self postfx::stoppostfxbundle("pstfx_slowed");

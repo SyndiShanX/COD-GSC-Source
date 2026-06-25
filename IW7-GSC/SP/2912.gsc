@@ -141,8 +141,8 @@ main() {
     var_10 = level.player.origin - level.player getEye() + (0, 0, 35);
     var_11 = spawn("script_model", level.player.origin + (0, 0, var_10[2]));
     var_11.angles = (-10, level.player.angles[2], 30);
-    var_11 linkto(var_3);
-    level.player playerlinkto(var_11);
+    var_11 linkTo(var_3);
+    level.player playerlinkTo(var_11);
   }
 
   if(!scripts\sp\utility::func_93A6()) {
@@ -392,12 +392,12 @@ func_F32B(var_0) {
       return;
     }
 
-    var_3 rotateto(var_7, 1, 0.5, 0.5);
+    var_3 rotateTo(var_7, 1, 0.5, 0.5);
   }
 }
 
 func_79F3(var_0) {
-  var_0 = vectornormalize(var_0);
+  var_0 = vectorNormalize(var_0);
   var_1 = (0, 0, 60);
   var_2 = 15 * var_0;
   var_3 = scripts\common\trace::ray_trace(self.origin + var_2 + var_1, self.origin + var_2 - var_1, [self]);
@@ -442,10 +442,10 @@ func_77B0(var_0, var_1) {
   var_2 = 1.5;
   var_0.anchor = level.player scripts\engine\utility::spawn_tag_origin();
   if(isDefined(var_1)) {
-    var_0.anchor linkto(var_1);
+    var_0.anchor linkTo(var_1);
   }
 
-  level.player playerlinkto(var_0.anchor, "tag_origin", 0, 20, 20, 20, 20);
+  level.player playerlinkTo(var_0.anchor, "tag_origin", 0, 20, 20, 20, 20);
   level.player lerpviewangleclamp(var_2, var_2 * 0.5, var_2 * 0.5, 0, 0, 0, 0);
 }
 

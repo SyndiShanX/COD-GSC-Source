@@ -1308,7 +1308,7 @@ function private function_c416ba8f() {
           objective_add(var_3b16e9b8.var_349e0ec6, "active", var_3b16e9b8, #"hash_11f265c9fb8d6ec2", var_3b16e9b8);
           objective_setinvisibletoall(var_3b16e9b8.var_349e0ec6);
 
-          foreach(checkplayer in getplayers()) {
+          foreach(checkplayer in getPlayers()) {
             if(isDefined(checkplayer) && isalive(checkplayer) && checkplayer spy::function_da8679c7() == 1) {
               objective_setinvisibletoplayer(var_3b16e9b8.var_73a2057c, checkplayer);
               objective_setvisibletoplayer(var_3b16e9b8.var_349e0ec6, checkplayer);

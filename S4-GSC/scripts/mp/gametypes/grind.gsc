@@ -209,7 +209,7 @@ _id_E38B(var_0) {
   var_13._id_10430.team = var_13.team;
   var_13._id_83B6 = "any";
   var_13.trigger show();
-  var_13.trigger linkto(var_13._id_10430, "tag_origin");
+  var_13.trigger linkTo(var_13._id_10430, "tag_origin");
   playsoundatpos(var_3, "mp_grind_token_drop");
   var_13 thread _id_ED6C(var_2, var_6, var_12, var_10);
   return var_13;

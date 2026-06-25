@@ -41,17 +41,17 @@ sq_atd_dragon_icon_setup() {
 
   foreach(m_icon in a_dragon_icons) {
     m_icon notsolid();
-    m_icon.m_elevator = getent("elevator_" + m_icon.script_noteworthy + "_body", "targetname");
+    m_icon.m_elevator = getEnt("elevator_" + m_icon.script_noteworthy + "_body", "targetname");
     m_icon.origin = m_icon.m_elevator.origin + vectorscale((0, 0, 1), 134.0);
     m_icon.angles = m_icon.m_elevator.angles;
-    m_icon linkto(m_icon.m_elevator);
-    m_icon.m_lit_icon = getent(m_icon.script_noteworthy + "_elevator_lit", "script_noteworthy");
+    m_icon linkTo(m_icon.m_elevator);
+    m_icon.m_lit_icon = getEnt(m_icon.script_noteworthy + "_elevator_lit", "script_noteworthy");
 
     if(isDefined(m_icon.m_lit_icon)) {
       m_icon.m_lit_icon notsolid();
       m_icon.m_lit_icon.origin = m_icon.origin - vectorscale((0, 0, 1), 2.0);
       m_icon.m_lit_icon.angles = m_icon.angles;
-      m_icon.m_lit_icon linkto(m_icon.m_elevator);
+      m_icon.m_lit_icon linkTo(m_icon.m_elevator);
     }
   }
 
@@ -70,7 +70,7 @@ sq_atd_elevators() {
   a_elevator_flags = array("sq_atd_elevator0", "sq_atd_elevator1", "sq_atd_elevator2", "sq_atd_elevator3");
 
   for(i = 0; i < a_elevators.size; i++) {
-    trig_elevator = getent(a_elevators[i], "targetname");
+    trig_elevator = getEnt(a_elevators[i], "targetname");
     trig_elevator thread sq_atd_watch_elevator(a_elevator_flags[i]);
   }
 
@@ -89,8 +89,8 @@ sq_atd_elevators() {
     m_icon unlink();
     m_icon.m_lit_icon.origin = m_icon.origin;
     m_icon.origin = v_off_pos;
-    m_icon.m_lit_icon linkto(m_icon.m_elevator);
-    m_icon linkto(m_icon.m_elevator);
+    m_icon.m_lit_icon linkTo(m_icon.m_elevator);
+    m_icon linkTo(m_icon.m_elevator);
     m_icon playSound("zmb_sq_symbol_light");
   }
 
@@ -141,7 +141,7 @@ sq_atd_drg_puzzle() {
 
 drg_puzzle_trig_think(n_order_id) {
   self.drg_active = 0;
-  m_unlit = getent(self.target, "targetname");
+  m_unlit = getEnt(self.target, "targetname");
   m_lit = m_unlit.lit_icon;
   v_top = m_unlit.origin;
   v_hidden = m_lit.origin;

@@ -79,7 +79,7 @@ drop_pod_spawn_drop() {
   var_08 = var_06 * (var_07, var_07, 0);
   var_03 gravitymove(var_08, var_05);
   if(isDefined(var_02)) {
-    var_03 rotateto(var_02, var_05);
+    var_03 rotateTo(var_02, var_05);
   }
 
   wait(var_05);
@@ -136,11 +136,11 @@ drop_pod_set_drop_point_active() {
       if(isPlayer(var_06)) {
         var_07 = self.spawned_model.var_116;
         if(canspawn(var_07)) {
-          var_06 setorigin(var_07);
+          var_06 setOrigin(var_07);
         } else {
           var_08 = getclosestpointonnavmesh(var_07);
           if(canspawn(var_08)) {
-            var_06 setorigin(var_08);
+            var_06 setOrigin(var_08);
           } else {
             maps\mp\_movers::func_A047(var_06, 0);
           }
@@ -190,11 +190,11 @@ drop_pod_clip_exploit_listener() {
       if(isDefined(var_02) && var_02 == self.clip_shell) {
         var_03 = self.spawned_model.var_116;
         if(canspawn(var_03)) {
-          var_01 setorigin(var_03);
+          var_01 setOrigin(var_03);
         } else {
           var_04 = getclosestpointonnavmesh(var_03);
           if(canspawn(var_04)) {
-            var_01 setorigin(var_04);
+            var_01 setOrigin(var_04);
           } else {
             maps\mp\_movers::func_A047(var_01, 0);
           }

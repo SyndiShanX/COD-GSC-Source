@@ -313,7 +313,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     if(charindexarray[0] == 2) {
@@ -565,15 +565,15 @@ function rolling_door_think() {
     str_exploder = "fxexp_1";
   }
   level flag::wait_till(self.door_wait);
-  playsoundatposition("evt_door_stone_disc", self.origin);
+  playSoundAtPosition("evt_door_stone_disc", self.origin);
   self zm_utility::play_sound_on_ent("purchase");
   exploder::exploder(str_exploder);
   pi = 3.141593;
   endorigin = self.origin + (self.door_movedir * self.door_movedist);
-  self moveto(endorigin, self.door_movetime, 0.1, 0.1);
+  self moveTo(endorigin, self.door_movetime, 0.1, 0.1);
   cir = (2 * pi) * self.door_radius;
   rotate = (self.door_movedist / cir) * 360;
-  self rotateto(self.angles + (rotate, 0, 0), self.door_movetime, 0.1, 0.1);
+  self rotateTo(self.angles + (rotate, 0, 0), self.door_movetime, 0.1, 0.1);
   self connectpaths();
 }
 

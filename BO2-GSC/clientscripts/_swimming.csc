@@ -374,7 +374,7 @@ swimmingdrowndamage(phase) {
     rumble = "damage_heavy";
 
   while(isDefined(rumble)) {
-    self playrumbleonentity(self getlocalclientnumber(), rumble);
+    self playRumbleOnEntity(self getlocalclientnumber(), rumble);
     wait(pause);
   }
 }

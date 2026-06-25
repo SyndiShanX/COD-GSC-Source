@@ -58,7 +58,7 @@ doMagnet() {
   if(radius <= 0) {
     return;
   }
-  magnet = getent("magnetorg", "targetname");
+  magnet = getEnt("magnetorg", "targetname");
   Missile_CreateAttractorEnt(magnet, strength, radius);
 }
 

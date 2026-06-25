@@ -237,9 +237,9 @@ function bgb_machine_trigger_update_prompt(player) {
   can_use = self bgb_machine_stub_update_prompt(player);
   if(isDefined(self.hint_string)) {
     if(isDefined(self.hint_parm1)) {
-      self sethintstring(self.hint_string, self.hint_parm1);
+      self setHintString(self.hint_string, self.hint_parm1);
     } else {
-      self sethintstring(self.hint_string);
+      self setHintString(self.hint_string);
     }
   }
   return can_use;
@@ -291,10 +291,10 @@ function bgb_machine_stub_update_prompt(player) {
     }
     cursor_hint = "HINT_BGB";
     cursor_hint_bgb = level.bgb[self.stub.trigger_target.selected_bgb].item_index;
-    self setcursorhint(cursor_hint, cursor_hint_bgb);
+    self setCursorHint(cursor_hint, cursor_hint_bgb);
     self.hint_string = str_hint;
   } else {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
     if(player.bgb_machine_uses_this_round < level.bgb_machine_max_uses_per_round) {
       if(isDefined(level.var_42792b8b) && level.var_42792b8b) {
         self.hint_string = &"ZOMBIE_BGB_MACHINE_AVAILABLE_CFILL";

@@ -627,7 +627,7 @@ getProjectionData(inVector, outVector, surfaceNormal) {
   outVectorNoNormal = vectorNormalize(projectVectorToPlane(outVector, surfaceNormal));
 
   outVectorRight = VectorCross(outVectorNoNormal, surfaceNormal);
-  outVectorRightNoNormal = VectorNormalize(projectVectorToPlane(outVectorRight, surfaceNormal));
+  outVectorRightNoNormal = vectorNormalize(projectVectorToPlane(outVectorRight, surfaceNormal));
   projInToOutRight = VectorDot(inVectorNoNormal * -1, outVectorRightNoNormal);
 
   ratio = vectorDot(outVectorNoNormal, inVectorNoNormal);
@@ -725,13 +725,13 @@ getSpecialDeathAnimIndex(state) {
 }
 
 resetScriptable(scriptableName, endPos) {
-  scriptable_obj = GetEnt(scriptableName, "targetname");
+  scriptable_obj = getEnt(scriptableName, "targetname");
   AssertEx(isDefined(scriptable_obj), "Unable to find a scriptable object with targetname: " + scriptableName + " at location " + endPos);
   scriptable_obj SetScriptablePartState(0, 0);
 }
 
 playAnimOnScriptable(scriptableName, endPos, scriptableState) {
-  scriptable_obj = GetEnt(scriptableName, "targetname");
+  scriptable_obj = getEnt(scriptableName, "targetname");
   AssertEx(isDefined(scriptable_obj), "Unable to find a scriptable object with targetname: " + scriptableName + " at location " + endPos);
 
   if(!isDefined(scriptableState)) {

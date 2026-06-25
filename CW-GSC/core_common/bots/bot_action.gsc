@@ -71,7 +71,7 @@ function function_a0b0f487(actionparams) {
 }
 
 function function_2c3ea0c6(actionparams) {
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     actionparams.debug[actionparams.debug.size] = #"hash_5cbefc6b234455fc";
 
     return true;

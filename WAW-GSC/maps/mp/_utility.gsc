@@ -229,7 +229,7 @@ brush_throw() {
   ent = undefined;
 
   if(isDefined(self.v["target"])) {
-    ent = getent(self.v["target"], "targetname");
+    ent = getEnt(self.v["target"], "targetname");
   }
 
   if(!isDefined(ent)) {
@@ -330,7 +330,7 @@ orientToNormal(normal) {
     return (0, 0, 0);
   }
 
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
@@ -666,12 +666,12 @@ dvarFloatValue(dVar, defVal, minVal, maxVal) {
 play_sound_on_tag(alias, tag) {
   if(isDefined(tag)) {
     org = spawn("script_origin", self getTagOrigin(tag));
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org = spawn("script_origin", (0, 0, 0));
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
 
   org playSound(alias);
@@ -1150,7 +1150,7 @@ get_players() {
   return players;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
   array = level.struct_class_names[type][name];

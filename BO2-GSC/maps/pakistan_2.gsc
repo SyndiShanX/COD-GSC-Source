@@ -255,12 +255,12 @@ challenge_claw_burn(str_notify) {
 }
 
 setup_level() {
-  t_dmg = getent("trigger_dmg_start", "targetname");
+  t_dmg = getEnt("trigger_dmg_start", "targetname");
   t_dmg trigger_off();
   add_spawn_function_ai_group("courtyard_guards", maps\pakistan_anthem::courtyard_logic);
-  m_exit_door = getent("exit_door", "targetname");
+  m_exit_door = getEnt("exit_door", "targetname");
   m_exit_door hide();
   m_exit_door trigger_off();
-  m_exit_clip = getent("door_closed_clip", "targetname");
+  m_exit_clip = getEnt("door_closed_clip", "targetname");
   m_exit_clip trigger_off();
 }

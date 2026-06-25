@@ -31,8 +31,8 @@ enable_linkto_on_all_triggers() {
 
   var_0 = scripts\engine\utility::getStructArray("sonic_ring_controlling_struct", "targetname");
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
-    var_3 enablelinkto();
+    var_3 = getEnt(var_2.target, "targetname");
+    var_3 enablelinkTo();
   }
 
   level.sonic_beam_trigger_enable_link_to = 1;
@@ -149,10 +149,10 @@ terminate_sonic_ring() {
 }
 
 func_15F1(var_0, var_1) {
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2.original_pos = var_2.origin;
   var_1.sonic_ring_trigger = var_2;
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   var_2 thread player_touch_monitor(var_2);
 }
 
@@ -163,7 +163,7 @@ activate_vfx_ent(var_0, var_1) {
     var_6 = spawn("script_model", var_5.origin);
     var_6 setModel("crab_boss_origin");
     var_6.activation_order = int(var_5.script_noteworthy);
-    var_6 linkto(var_1);
+    var_6 linkTo(var_1);
     var_2[var_2.size] = var_6;
     scripts\engine\utility::waitframe();
   }
@@ -182,7 +182,7 @@ player_touch_monitor(var_0) {
 }
 
 activate_controlling_ent(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct("sonic_ring_start", "targetname");
+  var_2 = scripts\engine\utility::getStruct("sonic_ring_start", "targetname");
   var_3 = var_2.origin;
   var_0 dontinterpolate();
   var_0.origin = var_3;

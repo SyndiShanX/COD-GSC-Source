@@ -8,7 +8,7 @@ main(objective_number, objective_text, array_targetname, activate_notify) {
   println(array_targetname, " documents.size: ", documents.size);
 
   for(i = 0; i < documents.size; i++) {
-    documents[i].document = getent(documents[i].target, "targetname");
+    documents[i].document = getEnt(documents[i].target, "targetname");
     documents[i].used = 0;
     documents[i] thread document_think(activate_notify, array_targetname);
   }

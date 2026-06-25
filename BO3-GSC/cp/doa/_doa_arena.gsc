@@ -255,7 +255,7 @@ function private function_1c54aa82(room) {
   }
   points = struct::get_array(function_d2d75f5d() + "_player_spawnpoint");
   if(isDefined(points) && points.size) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
         if(isDefined(points[i])) {
@@ -318,7 +318,7 @@ function private function_1c54aa82(room) {
     }
     case 6: {
       flag::set("doa_bonusroom_active");
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player notify("hash_d28ba89d");
       }
       level thread doa_pickups::spawnmoneyglob(0, 2, randomfloatrange(2, 4));
@@ -431,8 +431,8 @@ function function_b0e9983(name) {
     }
   }
   count = count + (level.doa.var_da96f13c * 4);
-  if(getplayers().size > 1) {
-    count = count - (int(getplayers().size * 1.5));
+  if(getPlayers().size > 1) {
+    count = count - (int(getPlayers().size * 1.5));
   }
   count = math::clamp(count, 0, 40);
   return count;
@@ -503,7 +503,7 @@ function private function_b7dafa0c(name, center, valid) {
   struct.var_160ae6c6 = function_9b67513c(name);
   struct.exits = getEntArray(name + "_doa_exit", "targetname");
   struct.var_63b4dab3 = valid;
-  struct.safezone = getent(name + "_safezone", "targetname");
+  struct.safezone = getEnt(name + "_safezone", "targetname");
   struct.var_2ac7f133 = vectorscale((0, 0, 1), 2000) + center;
   struct.var_5a97f5e9 = vectorscale((0, 0, 1), 2000) + center;
   struct.entity = self;
@@ -731,7 +731,7 @@ function function_a50a72db() {
   safezone = function_dc34896f();
   wait(1);
   while(!level flag::get("doa_game_is_over")) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!isDefined(player.doa)) {
         continue;
       }
@@ -770,16 +770,16 @@ function function_573ad24e() {
   }
   switch (self.script_noteworthy) {
     case "move_to_target": {
-      target = getent(self.target, "targetname");
+      target = getEnt(self.target, "targetname");
       if(!isDefined(target)) {
         target = struct::get(self.target, "targetname");
       }
       assert(isDefined(target));
       while(true) {
-        self moveto(target.origin, self.script_parameters);
+        self moveTo(target.origin, self.script_parameters);
         self util::waittill_any_timeout(self.script_parameters + 2, "movedone");
         wait(1);
-        self moveto(var_febfbf3a, self.script_parameters);
+        self moveTo(var_febfbf3a, self.script_parameters);
         self util::waittill_any_timeout(self.script_parameters + 2, "movedone");
       }
       break;
@@ -790,8 +790,8 @@ function function_573ad24e() {
 function function_852998f1(trigger) {
   level endon("hash_ec7ca67b");
   wait(0.4);
-  trigger enablelinkto();
-  trigger linkto(self);
+  trigger enablelinkTo();
+  trigger linkTo(self);
   self.var_10d9457b = [];
   nodes = getnodearray(function_d2d75f5d() + "_platform_traversal_node", "targetname");
   foreach(node in nodes) {
@@ -890,7 +890,7 @@ function function_f64e4b70(specific) {
     }
   }
   opened_exits = 0;
-  playsoundatposition("zmb_exit_open", (0, 0, 0));
+  playSoundAtPosition("zmb_exit_open", (0, 0, 0));
   namespace_74ae326f::function_471d1403();
   if(!isDefined(level.doa.forced_magical_room)) {
     function_46b3be09();
@@ -918,7 +918,7 @@ function function_f64e4b70(specific) {
   level.doa.exits_open = [];
   if(isDefined(exit_trigger)) {
     doa_utility::function_44eb090b();
-    playsoundatposition("zmb_exit_taken", exit_trigger.origin);
+    playSoundAtPosition("zmb_exit_taken", exit_trigger.origin);
     level.doa.previous_exit_taken = exit_trigger.script_noteworthy;
   }
   level clientfield::set("roundMenu", 0);
@@ -952,7 +952,7 @@ function function_a8b0c139(trigger, objective_id) {
   objective_delete(objective_id);
   wait(0.1);
   level notify("exit_taken", trigger);
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify("exit_taken");
   }
 }
@@ -960,7 +960,7 @@ function function_a8b0c139(trigger, objective_id) {
 function rotate() {
   self endon("death");
   while(true) {
-    self rotateto(self.angles + vectorscale((0, 1, 0), 180), 4);
+    self rotateTo(self.angles + vectorscale((0, 1, 0), 180), 4);
     wait(4);
   }
 }
@@ -996,9 +996,9 @@ function function_4586479a(var_57e102cb = 1) {
   level.doa.teleporter = spawn("script_model", start_point);
   level.doa.teleporter endon("death");
   level.doa.teleporter setModel("zombietron_teleporter");
-  level.doa.teleporter enablelinkto();
+  level.doa.teleporter enablelinkTo();
   level.doa.teleporter thread namespace_eaa992c::function_285a2999("teleporter");
-  level.doa.teleporter moveto(location + vectorscale((0, 0, 1), 5), 3, 0, 0);
+  level.doa.teleporter moveTo(location + vectorscale((0, 0, 1), 5), 3, 0, 0);
   level.doa.teleporter thread rotate();
   physicsexplosionsphere(start_point, 200, 128, 4);
   level.doa.teleporter util::waittill_any_timeout(4, "movedone");
@@ -1014,7 +1014,7 @@ function function_4586479a(var_57e102cb = 1) {
   level.doa.teleporter.trigger waittill("trigger", player);
   level notify("hash_6df89d17");
   level notify("hash_3b432f18");
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify("hash_d28ba89d");
   }
   if(var_57e102cb) {

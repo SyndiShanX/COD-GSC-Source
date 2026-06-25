@@ -44,7 +44,7 @@ function play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_i
 
 function stop(n_blend = 0.2) {
   flagsys::clear("scriptedanim");
-  self stopanimscripted(n_blend);
+  self stopanimScripted(n_blend);
 }
 
 function debug_print(str_animation, str_msg) {
@@ -80,7 +80,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
     n_rate = self.n_script_anim_rate;
   }
   if(isvec(v_origin_or_ent) && isvec(v_angles_or_tag)) {
-    self animscripted(animation, v_origin_or_ent, v_angles_or_tag, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
+    self animScripted(animation, v_origin_or_ent, v_angles_or_tag, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
   } else {
     if(isstring(v_angles_or_tag)) {
       assert(isDefined(v_origin_or_ent.model), ((("" + animation) + "") + v_angles_or_tag) + "");
@@ -101,7 +101,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
         self.angles = v_ang;
       }
       b_link = 1;
-      self linkto(v_origin_or_ent, v_angles_or_tag, (0, 0, 0), (0, 0, 0));
+      self linkTo(v_origin_or_ent, v_angles_or_tag, (0, 0, 0), (0, 0, 0));
       if(n_lerp > 0) {
         if(isactor(self)) {
           self forceteleport(prevorigin, prevangles);
@@ -110,10 +110,10 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
           self.angles = prevangles;
         }
       }
-      self animscripted(animation, v_pos, v_ang, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
+      self animScripted(animation, v_pos, v_ang, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
     } else {
       v_angles = (isDefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0));
-      self animscripted(animation, v_origin_or_ent.origin, v_angles, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
+      self animScripted(animation, v_origin_or_ent.origin, v_angles, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon);
     }
   }
   if(isPlayer(self)) {
@@ -151,7 +151,7 @@ function _blend_out(animation, n_blend, n_rate, n_start_time) {
     n_current_time = self getanimtime(animation) * n_server_length;
     n_time_left = n_server_length - n_current_time;
     if(n_time_left <= n_blend) {
-      self stopanimscripted(n_blend);
+      self stopanimScripted(n_blend);
       break;
     }
     wait(0.05);
@@ -220,7 +220,7 @@ function _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disabl
   goal = getstartorigin(s.origin, s.angles, animation);
   n_delta = distancesquared(goal, self.origin);
   if(n_delta > 16) {
-    self stopanimscripted(0.2);
+    self stopanimScripted(0.2);
     if(b_disable_arrivals) {
       if(ai::has_behavior_attribute("disablearrivals")) {
         ai::set_behavior_attribute("disablearrivals", 1);

@@ -28,7 +28,7 @@ setup_finale() {
   maps\enemyhq::setup_common();
   thread maps\enemyhq_audio::aud_check("finale");
   common_scripts\utility::flag_set("hvt_done");
-  var_0 = getent("bishop", "targetname");
+  var_0 = getEnt("bishop", "targetname");
   level.bishop = var_0 maps\_utility::spawn_ai(1, 1);
   level.bishop.animname = "bishop";
   level.bishop maps\_utility::make_hero();
@@ -52,17 +52,17 @@ begin_new_finale() {
 #using_animtree("player");
 
 begin_finale() {
-  var_0 = getent("dog_chopper_clip", "targetname");
+  var_0 = getEnt("dog_chopper_clip", "targetname");
   var_0 notsolid();
   var_0 connectpaths();
   level.sniper_vision_override = "enemyhq_sniper_view_b";
-  var_1 = getent("finale_dead_truck_clip", "targetname");
+  var_1 = getEnt("finale_dead_truck_clip", "targetname");
 
   if(isDefined(var_1)) {
     var_1 solid();
   }
 
-  var_1 = getent("finale_dead_truck", "targetname");
+  var_1 = getEnt("finale_dead_truck", "targetname");
 
   if(isDefined(var_1)) {
     var_1 show();
@@ -87,7 +87,7 @@ begin_finale() {
   common_scripts\utility::flag_wait("open_finale_doors");
   thread maps\enemyhq_audio::aud_door_bust_open();
   thread open_exit_doors();
-  level.remote_sniper_return_struct = common_scripts\utility::getstruct("butchdance_return_struct", "targetname");
+  level.remote_sniper_return_struct = common_scripts\utility::getStruct("butchdance_return_struct", "targetname");
   maps\enemyhq_code::safe_activate_trigger_with_targetname("to_exit");
   common_scripts\utility::flag_wait("start_butchdance");
   var_3 = common_scripts\utility::array_combine(level.allies, maps\_utility::make_array(level.bishop, level.dog));
@@ -104,7 +104,7 @@ begin_finale() {
   level.allies[1] maps\_utility::teleport_ai(var_4);
   common_scripts\utility::flag_wait("finale_asplode");
   var_5 = maps\_utility::spawn_anim_model("player_rig");
-  var_5 linkto(level.finale_chopper, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(level.finale_chopper, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_5 thread maps\_anim::anim_first_frame_solo(var_5, "get_in_chopper");
   var_5 hide();
   wait 0.1;
@@ -197,16 +197,16 @@ digital_out(var_0, var_1) {
 
 keegan_idle_with_bishop() {
   level.allies[1] maps\_utility::disable_ai_color();
-  var_0 = common_scripts\utility::getstruct("keegan_putdown_bishop_org", "targetname");
+  var_0 = common_scripts\utility::getStruct("keegan_putdown_bishop_org", "targetname");
   var_0 maps\_anim::anim_reach_solo(level.allies[1], "wounded_carry_putdown");
   level.allies[1] notify("stop_anim");
   level.bishop notify("stop_anim");
-  level.bishop maps\_utility::anim_stopanimscripted();
+  level.bishop maps\_utility::anim_stopanimScripted();
   waittillframeend;
   level.allies[1] thread maps\_anim::anim_loop_solo(level.allies[1], "wounded_carry_idle");
   level.bishop thread bishop_loop_carry_pose();
   common_scripts\utility::flag_wait("butchdance_sniping");
-  level.allies[1] maps\_utility::anim_stopanimscripted();
+  level.allies[1] maps\_utility::anim_stopanimScripted();
   common_scripts\utility::waitframe();
   level.allies[1] maps\_utility::enable_ai_color();
   level.allies[1] maps\enemyhq_code::carry_bishop();
@@ -215,13 +215,13 @@ keegan_idle_with_bishop() {
 bishop_loop_carry_pose() {
   level.bishop thread maps\_anim::anim_loop_solo(level.bishop, "wounded_carry_idle");
   common_scripts\utility::flag_wait("butchdance_sniping");
-  level.bishop maps\_utility::anim_stopanimscripted();
+  level.bishop maps\_utility::anim_stopanimScripted();
 }
 
 hesh_ride_chopper() {
   var_0 = level.allies[0];
   var_0.ignoreme = 0;
-  var_0 linkto(level.finale_chopper);
+  var_0 linkTo(level.finale_chopper);
   var_0 maps\_utility::gun_remove();
   level.finale_chopper maps\_anim::anim_single_solo(var_0, "get_in_chopper", "tag_origin");
   var_0.script_startingposition = 0;
@@ -258,29 +258,29 @@ super_guy(var_0) {
 }
 
 new_finale_dog_hijack() {
-  var_0 = common_scripts\utility::getstruct("finale_dog_scene", "targetname");
+  var_0 = common_scripts\utility::getStruct("finale_dog_scene", "targetname");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname("new_finale_chopper");
   var_1.animname = "heli";
   level.finale_chopper = var_1;
   level.finale_chopper maps\_vehicle::godon();
   thread maps\enemyhq_audio::aud_chopper_second(var_1);
   common_scripts\utility::flag_wait("end_of_sniping");
-  var_2 = getent("dog_chopper_clip", "targetname");
+  var_2 = getEnt("dog_chopper_clip", "targetname");
   var_2 solid();
-  var_2 disconnectpaths();
-  var_3 = getent("amazing_crate", "targetname");
-  var_4 = getent("amazing_crate_clip", "targetname");
-  var_4 linkto(var_3);
+  var_2 disconnectPaths();
+  var_3 = getEnt("amazing_crate", "targetname");
+  var_4 = getEnt("amazing_crate_clip", "targetname");
+  var_4 linkTo(var_3);
   var_4 connectpaths();
-  var_5 = common_scripts\utility::getstruct("amazing_crate_loc", "targetname");
+  var_5 = common_scripts\utility::getStruct("amazing_crate_loc", "targetname");
   var_3.origin = var_5.origin;
-  var_4 disconnectpaths();
-  var_6 = getent("dog_hijackee", "targetname");
+  var_4 disconnectPaths();
+  var_6 = getEnt("dog_hijackee", "targetname");
   var_7 = var_6 maps\_utility::spawn_ai(1, 1);
   var_7.ignoreall = 1;
   var_7.ignoreme = 1;
   var_7.animname = "generic";
-  level.dog maps\_utility::anim_stopanimscripted();
+  level.dog maps\_utility::anim_stopanimScripted();
   level.dog unlink();
   wait 0.1;
   level.allies[0].animname = "hesh";
@@ -290,7 +290,7 @@ new_finale_dog_hijack() {
   var_1 waittillmatch("single anim", "end");
   var_2 connectpaths();
   var_2 notsolid();
-  var_10 = getent("dog_chopper_player_clip", "targetname");
+  var_10 = getEnt("dog_chopper_player_clip", "targetname");
   var_10 notsolid();
   var_1 setcontents(var_9);
   var_1 thread maps\_vehicle_code::animate_drive_idle();
@@ -299,7 +299,7 @@ new_finale_dog_hijack() {
 }
 
 finale_flyaway() {
-  var_0 = common_scripts\utility::getstruct("finale_chopper_path", "targetname");
+  var_0 = common_scripts\utility::getStruct("finale_chopper_path", "targetname");
   level.finale_chopper.attachedpath = undefined;
   level.finale_chopper notify("newpath");
   level.finale_chopper thread maps\_vehicle::vehicle_paths(var_0);
@@ -311,11 +311,11 @@ finale_flyaway() {
 }
 
 open_exit_doors() {
-  var_0 = getent("dugout_exit_door_left", "targetname");
-  var_1 = getent("dugout_exit_door_right", "targetname");
-  var_0 rotateyaw(-105, 0.2, 0.1, 0.1);
+  var_0 = getEnt("dugout_exit_door_left", "targetname");
+  var_1 = getEnt("dugout_exit_door_right", "targetname");
+  var_0 rotateYaw(-105, 0.2, 0.1, 0.1);
   var_0 connectpaths();
-  var_1 rotateyaw(105, 0.2, 0.1, 0.1);
+  var_1 rotateYaw(105, 0.2, 0.1, 0.1);
   var_1 connectpaths();
   wait 1;
   level.allies[1] maps\enemyhq_code::char_dialog_add_and_go("enemyhq_kgn_incomingbackdown");
@@ -360,7 +360,7 @@ clear_lmgs() {
 
 handle_agressive_player() {
   level endon("death");
-  var_0 = common_scripts\utility::getstruct("killer_org", "targetname");
+  var_0 = common_scripts\utility::getStruct("killer_org", "targetname");
   common_scripts\utility::flag_wait("open_finale_doors");
   wait 1;
 
@@ -442,7 +442,7 @@ butchdance_combat() {
   common_scripts\utility::flag_wait_or_timeout("ghosts_exfil2", 10);
 
   if(!common_scripts\utility::flag("ghosts_exfil2")) {
-    var_10 = common_scripts\utility::getstruct("ghost_kill", "targetname");
+    var_10 = common_scripts\utility::getStruct("ghost_kill", "targetname");
     level.allies[0] maps\_utility::stop_magic_bullet_shield();
     level.allies[1] maps\_utility::stop_magic_bullet_shield();
     magicbullet("m27", var_10.origin, level.allies[0].origin);
@@ -458,8 +458,8 @@ butchdance_combat() {
   var_12 = getnode("keegan_node", "targetname");
   level.allies[0] maps\_utility::disable_ai_color();
   level.allies[1] maps\_utility::disable_ai_color();
-  level.allies[0] maps\_utility::set_goalradius(20);
-  level.allies[1] maps\_utility::set_goalradius(20);
+  level.allies[0] maps\_utility::set_goalRadius(20);
+  level.allies[1] maps\_utility::set_goalRadius(20);
   level.allies[0] maps\_utility::set_goal_node(var_11);
   level.allies[1] maps\_utility::set_goal_node(var_12);
   level.allies[0] maps\_utility::set_ignoresuppression(1);
@@ -485,7 +485,7 @@ butchdance_combat() {
   level.allies[1] maps\enemyhq_code::die_quietly();
   level.bishop maps\enemyhq_code::die_quietly();
   level.allies = maps\_utility::make_array(level.allies[2]);
-  var_13 = common_scripts\utility::getstruct("ghost_chopper_path", "targetname");
+  var_13 = common_scripts\utility::getStruct("ghost_chopper_path", "targetname");
   level.ghost_chopper.attachedpath = undefined;
   level.ghost_chopper notify("newpath");
   level.ghost_chopper thread maps\_vehicle::vehicle_paths(var_13);
@@ -615,7 +615,7 @@ handle_truck_shooting() {
   }
 
   self waittill("reached_dynamic_path_end");
-  self setturrettargetent(level.finale_chopper);
+  self setturrettargetEnt(level.finale_chopper);
 }
 
 flyaway_lynx_death_watcher() {
@@ -655,7 +655,7 @@ handle_flyaway_fail() {
   if(!common_scripts\utility::flag("killed_trucks")) {
     level.finale_chopper notify("going_down");
     playFXOnTag(level._effect["vfx_heli_fire"], level.finale_chopper, "tag_engine_right");
-    var_0 = common_scripts\utility::getstruct("finale_crash_path", "targetname");
+    var_0 = common_scripts\utility::getStruct("finale_crash_path", "targetname");
     level.finale_chopper thread maps\_vehicle_code::helicopter_crash_rotate();
     thread truck_turret_fail();
     level.finale_chopper maps\_vehicle_code::helicopter_crash_path(var_0);
@@ -765,11 +765,11 @@ finale_sniping() {
 
 spawn_player_dummy() {
   wait 1;
-  var_0 = getent("player_dummy", "targetname");
+  var_0 = getEnt("player_dummy", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
   var_1 maps\_utility::magic_bullet_shield();
   var_1.animname = "generic";
-  var_1 linkto(level.finale_chopper, "tag_guy4", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(level.finale_chopper, "tag_guy4", (0, 0, 0), (0, 0, 0));
 }
 
 finale_vo() {
@@ -839,8 +839,8 @@ hurry_lines() {
 }
 
 enable_finale_and_ghost_chopper_clips() {
-  var_0 = getent("new_finale_chopper_ai_clip", "targetname");
-  var_1 = getent("ghost_chopper_ai_clip", "targetname");
+  var_0 = getEnt("new_finale_chopper_ai_clip", "targetname");
+  var_1 = getEnt("ghost_chopper_ai_clip", "targetname");
   level waittill("ghost_chopper_taking_off");
   var_1 notsolid();
   var_1 connectpaths();

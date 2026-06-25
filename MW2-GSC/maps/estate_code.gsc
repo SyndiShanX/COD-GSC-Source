@@ -438,8 +438,8 @@ flags() {
 }
 
 intro_angles() {
-  startPoint = getent("player_view_start_1", "targetname");
-  endPoint = getent("player_view_start_2", "targetname");
+  startPoint = getEnt("player_view_start_1", "targetname");
+  endPoint = getEnt("player_view_start_2", "targetname");
 
   vec = endPoint.origin - startPoint.origin;
   ang = vectorToAngles(vec);
@@ -501,7 +501,7 @@ ghost_intro_nav() {
 
   level notify("ghost_leaving_start_area_on_cue");
 
-  starter = getent("ghost_starter", "targetname");
+  starter = getEnt("ghost_starter", "targetname");
 
   if(isDefined(starter)) {
     starter notify("trigger");
@@ -514,7 +514,7 @@ ghost_intro_interrupt() {
   level endon("ghost_leaving_start_area_on_cue");
   level notify("ghost_leaving_start_area_early");
 
-  starter = getent("ghost_starter", "targetname");
+  starter = getEnt("ghost_starter", "targetname");
 
   if(isDefined(starter)) {
     starter waittill("trigger");
@@ -875,7 +875,7 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
       }
     }
 
-    level.player PlayRumbleOnEntity("artillery_rumble");
+    level.player playRumbleOnEntity("artillery_rumble");
 
     setplayerignoreradiusdamage(false);
 
@@ -893,7 +893,7 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
     if(gameplay) {
       dist = length(level.player.origin - self.origin);
 
-      level.player PlayRumbleOnEntity("artillery_rumble");
+      level.player playRumbleOnEntity("artillery_rumble");
 
       if(dist <= self.radius) {
         if(level.player getstance() == "prone") {
@@ -955,7 +955,7 @@ bouncing_betty_fx(specialPlayerCase, gameplayOn, skipFX) {
 }
 
 bb_autosave() {
-  trig = getent("forestfight_start_redshirts", "targetname");
+  trig = getEnt("forestfight_start_redshirts", "targetname");
   trig waittill("trigger");
 
   autosave_by_name("bb_autosave");
@@ -1040,7 +1040,7 @@ bouncing_betty_throwplayer(mineOrg) {
   level.player freezeControls(true);
 
   vec = (level.player.origin + (0, 0, 40)) - mineOrg;
-  baseThrust = vectornormalize(vec);
+  baseThrust = vectorNormalize(vec);
   boost = 2000;
 
   thread bouncing_betty_shellshock();
@@ -1049,7 +1049,7 @@ bouncing_betty_throwplayer(mineOrg) {
 
   touchingVol = false;
 
-  antiSliderVol = getent("no_sliding_allowed", "targetname");
+  antiSliderVol = getEnt("no_sliding_allowed", "targetname");
   if(!(level.player istouching(antiSliderVol))) {
     touchingVol = true;
     level.player thread BeginSliding(baseThrust * boost, 10, 0.25);
@@ -1137,7 +1137,7 @@ ambush_fake_rpg_barrage() {
 
   foreach(index, fakeRpg in fakeRpgs) {
     repulsor = Missile_CreateRepulsorEnt(level.player, 1000, 512);
-    fakeRpgTarget = getstruct(fakeRpg.target, "targetname");
+    fakeRpgTarget = getStruct(fakeRpg.target, "targetname");
 
     MagicBullet("rpg", fakeRpg.origin, fakeRpgTarget.origin);
 
@@ -1411,18 +1411,18 @@ forest_enemy_groundlevel_magicsnipe_cleanup() {
 
   wait randomfloatrange(1.5, 2.25);
 
-  ent = getent("futilejeep_javelin_sourcepoint1", "targetname");
+  ent = getEnt("futilejeep_javelin_sourcepoint1", "targetname");
 
   self kill();
 }
 
 house_guestroom_breach_flee() {
-  openDoors = getent("recroom_open_doors", "targetname");
+  openDoors = getEnt("recroom_open_doors", "targetname");
   openDoors hide();
 
   level waittill("breaching_number_" + "4");
 
-  closedDoors = getent("recroom_closed_doors", "targetname");
+  closedDoors = getEnt("recroom_closed_doors", "targetname");
   closedDoors delete();
 
   openDoors show();
@@ -1435,10 +1435,10 @@ house_guestroom_breach_flee() {
 }
 
 house_guestroom_door_remove() {
-  openDoors = getent("recroom_open_doors", "targetname");
+  openDoors = getEnt("recroom_open_doors", "targetname");
   openDoors hide();
 
-  closedDoors = getent("recroom_closed_doors", "targetname");
+  closedDoors = getEnt("recroom_closed_doors", "targetname");
   closedDoors delete();
 
   openDoors show();
@@ -1454,7 +1454,7 @@ house_armory_breach_windowtrick() {
 
   wait 2;
 
-  window_sightblocker = getent("paper_window_sightblocker", "targetname");
+  window_sightblocker = getEnt("paper_window_sightblocker", "targetname");
   window_sightblocker delete();
 
   window_newspapers = getEntArray("window_newspaper", "targetname");
@@ -1487,7 +1487,7 @@ house_furniture_sounds() {
 
   level endon("breaching_number_" + "5");
 
-  speaker = getent("furniture_moving_sounds_speaker", "targetname");
+  speaker = getEnt("furniture_moving_sounds_speaker", "targetname");
 
   speaker play_sound_on_entity("scn_estate_furniture_knock_over");
 
@@ -1663,7 +1663,7 @@ house_extras_spawncontrol(spawntrigname, customEndonMsg, unlockMsg, battleplan) 
 
   level waittill(unlockMsg);
 
-  trig = getent(spawntrigname, "targetname");
+  trig = getEnt(spawntrigname, "targetname");
   trig waittill("trigger");
 
   thread house_extras_spawn(battleplan);
@@ -2120,7 +2120,7 @@ house_autosaves() {
 
   level waittill_any("breaching_number_0", "breaching_number_1", "breaching_number_2");
 
-  saveTrig = getent("house_clearing_autosave_trigger", "targetname");
+  saveTrig = getEnt("house_clearing_autosave_trigger", "targetname");
 
   while(1) {
     if(level.interiorRoomsBreached > 0) {
@@ -2181,7 +2181,7 @@ house_ghost_sweep() {
 
     level.ghost.goalradius = 64;
 
-    magicSpot = getent("ghost_slowmo_entry_teleport", "targetname");
+    magicSpot = getEnt("ghost_slowmo_entry_teleport", "targetname");
     level.ghost forceTeleport(magicSpot.origin, magicSpot.angles);
 
     level.ghost enable_heat_behavior(1);
@@ -2265,7 +2265,7 @@ house_ghost_sweep() {
     }
   }
 
-  ent = getent("ghost_fake_lookat", "targetname");
+  ent = getEnt("ghost_fake_lookat", "targetname");
   level.ghost cqb_aim(ent);
 
   flag_set("ghost_at_bottom_of_stairs");
@@ -2291,7 +2291,7 @@ house_ghost_sweep_trigger_timeout() {
 house_ghost_sweep_trigger_manual() {
   level endon("house_reset_ghost");
 
-  manualTrig = getent("ghost_manual_trig", "targetname");
+  manualTrig = getEnt("ghost_manual_trig", "targetname");
   manualTrig waittill("trigger");
 
   flag_set("ghost_begins_sweep");
@@ -2324,7 +2324,7 @@ solar_panels_rotate() {
 
   wait 3;
 
-  self RotateYaw(-95, 60, 3, 3);
+  self rotateYaw(-95, 60, 3, 3);
 }
 
 estate_music() {
@@ -2554,13 +2554,13 @@ defense_schedule_control() {
 
   level.enemyTotalPop = 0;
 
-  badsave_volume = getent("no_autosave_in_basement", "targetname");
+  badsave_volume = getEnt("no_autosave_in_basement", "targetname");
   safeDSMhealth = level.dsmHealthMax * 0.7;
 
   while(1) {
     randomStrikePackage(level.playerZone);
 
-    dsm_real = getent("dsm", "targetname");
+    dsm_real = getEnt("dsm", "targetname");
     playerDSMdist = length(level.player.origin - dsm_real.origin);
 
     if(flag("can_save") && playerDSMdist <= level.playerDSMsafedist) {
@@ -2777,7 +2777,7 @@ birchfield_exfil() {
     level.scarecrow enable_ai_color();
   }
 
-  trig = getent("ghost_exfil", "targetname");
+  trig = getEnt("ghost_exfil", "targetname");
   trig notify("trigger");
 
   flag_wait("point_of_no_return");
@@ -2863,7 +2863,7 @@ birchfield_knockout() {
   playFX(level._effect["mortar"]["dirt"], mortarHitOrg);
   detorg = spawn("script_origin", mortarHitOrg);
   detorg playSound("clusterbomb_explode_default");
-  level.player PlayRumbleOnEntity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait 0.15;
 
   flag_set("play_ending_sequence");
@@ -2876,7 +2876,7 @@ birchfield_knockout() {
 mortar_in_face_killplayer() {
   mortarHitOrg = playerFovGroundSpot();
   playFX(level._effect["mortar"]["dirt"], mortarHitOrg);
-  level.player PlayRumbleOnEntity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait 0.15;
   level.player kill();
 }
@@ -2964,7 +2964,7 @@ strike_package_birchfield_smokeassault() {
   }
 
   if(!flag("fence_removed")) {
-    fence = getent("final_area_fence", "targetname");
+    fence = getEnt("final_area_fence", "targetname");
     fence delete();
     flag_set("fence_removed");
   }
@@ -3665,7 +3665,7 @@ terminal_guidance() {
   self endon("death");
 
   if(!flag("player_is_escaping")) {
-    dsm = getent("dsm", "targetname");
+    dsm = getEnt("dsm", "targetname");
 
     dsmKillNode = getnode("dsm_killnode", "targetname");
     self setgoalnode(dsmKillNode);
@@ -3713,7 +3713,7 @@ terminal_blockers() {
 terminal_hillchasers() {
   flag_wait("point_of_no_return");
 
-  trig = getent("hillchaser_trigger", "targetname");
+  trig = getEnt("hillchaser_trigger", "targetname");
   trig waittill("trigger");
 
   exfil_hillchasers = getEntArray("player_exfil_hillchaser", "targetname");
@@ -3854,7 +3854,7 @@ dsm_setup() {
 
   level.dsmDestructionController = spawnStruct();
 
-  dsm = getent("dsm", "targetname");
+  dsm = getEnt("dsm", "targetname");
 
   dsm MakeEntitySentient("allies");
   dsm.threatbias = 50;
@@ -3868,16 +3868,16 @@ dsm_setup() {
 }
 
 dsm_display_control() {
-  dsm_real = getent("dsm", "targetname");
-  dsm_obj = getent("dsm_obj", "targetname");
+  dsm_real = getEnt("dsm", "targetname");
+  dsm_obj = getEnt("dsm_obj", "targetname");
 
   dsm_real hide();
   dsm_obj hide();
 
   flag_wait("dsm_ready_to_use");
 
-  trig = getent("dsm_usetrigger", "targetname");
-  trig sethintstring(&"ESTATE_DSM_USE_HINT");
+  trig = getEnt("dsm_usetrigger", "targetname");
+  trig setHintString(&"ESTATE_DSM_USE_HINT");
 
   dsm_obj show();
 
@@ -3893,7 +3893,7 @@ dsm_display_control() {
 
   flag_clear("dsm_ready_to_use");
 
-  trig sethintstring(&"ESTATE_DSM_PICKUP_HINT");
+  trig setHintString(&"ESTATE_DSM_PICKUP_HINT");
 
   flag_wait("download_complete");
   flag_set("dsm_ready_to_use");
@@ -3905,7 +3905,7 @@ dsm_display_control() {
   level.player thread play_sound_on_entity("dsm_pickup");
 
   if(!flag("fence_removed")) {
-    fence = getent("final_area_fence", "targetname");
+    fence = getEnt("final_area_fence", "targetname");
     fence delete();
     flag_set("fence_removed");
   }
@@ -4219,10 +4219,10 @@ download_update(fileSegment, segment, rateTime, marker) {
     level.currentfiles++;
     level.hudelem_status Setvalue(level.currentfiles);
 
-    dsm_real = getent("dsm", "targetname");
+    dsm_real = getEnt("dsm", "targetname");
     playerDSMdist = length(level.player.origin - dsm_real.origin);
 
-    badsave_volume = getent("no_autosave_in_basement", "targetname");
+    badsave_volume = getEnt("no_autosave_in_basement", "targetname");
 
     safeDSMhealth = level.dsmHealthMax * 0.7;
 
@@ -4366,7 +4366,7 @@ dsm_health_regen() {
 dsm_health_regen_calc() {
   flag_wait("download_started");
 
-  dsm_real = getent("dsm", "targetname");
+  dsm_real = getEnt("dsm", "targetname");
   dsm_org = dsm_real.origin;
 
   while(!flag("dsm_recovered")) {
@@ -4390,7 +4390,7 @@ dsm_destruction_damage_detect() {
 
   flag_wait("download_started");
 
-  trig = getent("dsm_dmg_trigger", "targetname");
+  trig = getEnt("dsm_dmg_trigger", "targetname");
 
   while(!flag("dsm_recovered")) {
     trig waittill("damage", amount, attacker);
@@ -4467,7 +4467,7 @@ friendly_death_bullet() {
 
   flag_wait("birchfield_cleared_sector2");
 
-  source = getent("breach_tweak_start", "targetname");
+  source = getEnt("breach_tweak_start", "targetname");
   sourceOrg = source.origin;
 
   MagicBullet("cheytac", sourceOrg, self.origin + (0, 0, 60));

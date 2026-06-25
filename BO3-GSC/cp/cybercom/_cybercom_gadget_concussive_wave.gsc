@@ -92,7 +92,7 @@ function ai_activateconcussivewave(damage, var_9bc2efcb = 1) {
   if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
-    self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
+    self animScripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self waittillmatch("ai_cybercom_anim");
   }
   self create_concussion_wave(damage);
@@ -175,7 +175,7 @@ function create_damage_wave(damage, attacker) {
         attacker thread challenges::function_96ed590f("cybercom_uses_concussive");
         if(!isalive(enemy)) {
           enemy startragdoll();
-          launchdir = vectornormalize(enemy.origin - attacker.origin);
+          launchdir = vectorNormalize(enemy.origin - attacker.origin);
           enemy launchragdoll((launchdir[0] * 70, launchdir[1] * 70, 120));
         }
       }
@@ -192,7 +192,7 @@ function function_74fb2002(n_time, attacker, weapon) {
 function function_f98dd1a9(enemy, attacker) {
   v_to_enemy = enemy.origin - attacker.origin;
   var_2e3e72d7 = anglesToForward(attacker.angles);
-  return vectordot(var_2e3e72d7, vectornormalize(v_to_enemy));
+  return vectordot(var_2e3e72d7, vectorNormalize(v_to_enemy));
 }
 
 function function_78e146a3() {
@@ -231,7 +231,7 @@ function create_concussion_wave(damage, slot, weapon) {
   } else {
     wait(0.6);
   }
-  self playrumbleonentity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
   earthquake(0.6, 0.5, self.origin, 256);
   if(isDefined(spikeweapon) && self hasweapon(spikeweapon)) {
     self takeweapon(spikeweapon);

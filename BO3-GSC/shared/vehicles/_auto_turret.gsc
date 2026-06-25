@@ -40,7 +40,7 @@ function turret_initialze() {
   self.fovcosine = cos(sightfov - 0.1);
   self.fovcosinebusy = cos(sightfov - 0.1);
   if(self.settings.disconnectpaths === 1) {
-    self disconnectpaths();
+    self disconnectPaths();
   }
   if(self.settings.ignoreme === 1) {
     self.ignoreme = 1;
@@ -174,13 +174,13 @@ function state_combat_update(params) {
     if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
       self.turretrotscale = 1;
       if(isDefined(self.enemy) && self haspart("tag_minigun_spin")) {
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
         self setturretspinning(1);
         wait(0.5);
       }
       for(i = 0; i < 3; i++) {
         if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
-          self setturrettargetent(self.enemy);
+          self setturrettargetEnt(self.enemy);
           wait(0.1);
           waittime = randomfloatrange(0.4, 1.5);
           if(self.settings.disablefiring !== 1) {
@@ -256,7 +256,7 @@ function rest_turret(resting_pitch = 0) {
 
 function state_emped_enter(params) {
   self vehicle_ai::defaultstate_emped_enter(params);
-  playsoundatposition("veh_sentry_turret_emp_down", self.origin);
+  playSoundAtPosition("veh_sentry_turret_emp_down", self.origin);
   self.turretrotscale = 0.5;
   self rest_turret(params.resting_pitch);
   params.laseron = islaseron(self);
@@ -318,7 +318,7 @@ function sentry_turret_alert_sound() {
 function turret_idle_sound() {
   if(!isDefined(self.sndloop_ent)) {
     self.sndloop_ent = spawn("script_origin", self.origin);
-    self.sndloop_ent linkto(self);
+    self.sndloop_ent linkTo(self);
     self.sndloop_ent playLoopSound("veh_turret_idle");
   }
 }

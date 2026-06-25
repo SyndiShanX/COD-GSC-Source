@@ -41,7 +41,7 @@ function event_handler[level_init] main(eventstruct) {
     return;
   }
 
-  e_clip = getent("jack_in_box_1_clip", "targetname");
+  e_clip = getEnt("jack_in_box_1_clip", "targetname");
   e_clip delete();
 }
 
@@ -145,11 +145,11 @@ function function_161cff4d(opener) {
   }
 
   var_1abb653e = anglestoright(self.angles);
-  var_84398427 = vectornormalize(opener.origin - self.origin);
+  var_84398427 = vectorNormalize(opener.origin - self.origin);
   var_a6336ae5 = vectordot(var_1abb653e, var_84398427);
   var_23a90bc3 = opener getplayerangles();
   var_e920c899 = anglesToForward(var_23a90bc3);
-  var_4cf1d42e = vectornormalize(self.origin - opener.origin);
+  var_4cf1d42e = vectorNormalize(self.origin - opener.origin);
   var_4cf02165 = vectordot(var_e920c899, var_4cf1d42e);
 
   if(var_a6336ae5 < -0.76 && var_4cf02165 > 0.76) {
@@ -164,8 +164,8 @@ function function_dc41f225(player) {
   v_to_player = player.origin - var_6a798feb;
   v_angles = vectortoangles(v_to_player);
   var_b7c784c2 = util::spawn_model("tag_origin", var_6a798feb, v_angles);
-  var_b7c784c2 enablelinkto();
-  var_b7c784c2 linkto(player);
+  var_b7c784c2 enablelinkTo();
+  var_b7c784c2 linkTo(player);
   player setstance("stand");
   v_player_angles = player getplayerangles();
 
@@ -254,12 +254,12 @@ function function_50485659(var_10d5f200) {
   player = var_10d5f200.activator;
   player endon(#"disconnect");
   var_84c3c19d = anglestoright(self.var_d238f3be.angles);
-  var_c2b2b58d = vectornormalize(player.origin - self.var_d238f3be.origin);
+  var_c2b2b58d = vectorNormalize(player.origin - self.var_d238f3be.origin);
   var_7eac4a0b = vectordot(var_84c3c19d, var_c2b2b58d);
   v_player_angles = player getplayerangles();
   var_de09d1fc = anglesToForward(v_player_angles);
   v_eye = player getEye();
-  var_81c7d7ca = vectornormalize(self.var_d238f3be.origin - v_eye);
+  var_81c7d7ca = vectorNormalize(self.var_d238f3be.origin - v_eye);
   var_9fa2a0a0 = vectordot(var_de09d1fc, var_81c7d7ca);
 
   if(var_7eac4a0b < -0.5 && var_9fa2a0a0 > 0.76) {

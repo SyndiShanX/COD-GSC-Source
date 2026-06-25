@@ -66,7 +66,7 @@ function init() {
 
     for(i = 0; i < 6; i++) {
       trigger = spawn("trigger_damage", (0, 0, 0), 0, 40, 40);
-      trigger enablelinkto();
+      trigger enablelinkTo();
       trigger.inuse = 0;
       trigger triggerenable(0);
       trigger.targetname = "blightfather_chaos_missile";
@@ -182,7 +182,7 @@ function function_b78adc65(entity) {
 
   if(isDefined(entity.gib_model)) {
     entity.gib_model clientfield::set("blight_father_gib_explosion", 1);
-    entity.gib_model stopanimscripted(0, 1);
+    entity.gib_model stopanimScripted(0, 1);
     entity.gib_model startragdoll();
   }
 
@@ -357,7 +357,7 @@ function private blightfatherdeathstart(entity) {
       return;
     }
 
-    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"hash_3e937fff0e0a4362", "normal");
+    gib_model animScripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"hash_3e937fff0e0a4362", "normal");
     gib_model thread function_529b7fb9();
     entity.gib_model = gib_model;
   }
@@ -368,7 +368,7 @@ function private function_ac921de9(entity) {
   meleerangesq = sqr(meleerange);
   potential_players = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(meleerangesq < distancesquared(entity.origin, player.origin)) {
       continue;
     }
@@ -391,7 +391,7 @@ function private function_ac921de9(entity) {
   var_9b246038 = entity ai::function_9139c839().var_4e8d4c24;
 
   foreach(player in potential_players) {
-    vec_to_player = vectornormalize(player.origin - entity.origin);
+    vec_to_player = vectorNormalize(player.origin - entity.origin);
 
     if(vectordot(vec_to_player, registernotice_walla) < var_9b246038) {
       continue;
@@ -460,7 +460,7 @@ function private function_cacd1506(var_84ed9a13, entity, inflictor, attacker, da
       entity[[level.var_c2981ce9[var_84ed9a13.hittag1]]](entity, inflictor, attacker, damage, flags, meansofdamage, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex);
     }
 
-    if(!entity isplayinganimscripted()) {
+    if(!entity isplayinganimScripted()) {
       entity.var_fbec06fa = var_84ed9a13.hittag1;
       entity setblackboardattribute("_blight_father_weak_point", var_84ed9a13.hittag1);
     }
@@ -639,9 +639,9 @@ function private function_19249d10(entity) {
   }
 
   forward = anglesToForward(entity.angles);
-  forward2d = vectornormalize((forward[0], forward[1], 0));
+  forward2d = vectorNormalize((forward[0], forward[1], 0));
   dirtotarget = entity.favoriteenemy.origin - entity.origin;
-  dirtotarget2d = vectornormalize((dirtotarget[0], dirtotarget[1], 0));
+  dirtotarget2d = vectorNormalize((dirtotarget[0], dirtotarget[1], 0));
   dot = vectordot(forward2d, dirtotarget2d);
 
   if(dot < entity ai::function_9139c839().var_aa503e5a) {
@@ -742,7 +742,7 @@ function private blightfatherlaunchchaosmissile(var_f794172e, var_61622673, var_
 
   var_a9494306.origin = var_892397fd.origin;
   var_a9494306.angles = var_892397fd.angles;
-  var_a9494306 linkto(var_892397fd, "tag_origin");
+  var_a9494306 linkTo(var_892397fd, "tag_origin");
   var_892397fd.trigger = var_a9494306;
   var_892397fd thread function_b2be1340(self ai::function_9139c839().var_a2519bb8);
   var_892397fd thread function_ebd22bba();
@@ -758,7 +758,7 @@ function private blightfatherlaunchchaosmissile(var_f794172e, var_61622673, var_
   max_trail_iterations = int(self ai::function_9139c839().var_652a36f2 / self ai::function_9139c839().var_52bddd4 * self ai::function_9139c839().var_9e5ebf3c);
   var_892397fd.missile_target = var_f794172e;
   var_892397fd thread function_5f3390fd(var_61622673, 40);
-  var_892397fd moveto(self gettagorigin(var_f3486358) + var_61622673, self ai::function_9139c839().var_20c6e4ca);
+  var_892397fd moveTo(self gettagorigin(var_f3486358) + var_61622673, self ai::function_9139c839().var_20c6e4ca);
   var_eb325a79 = self ai::function_9139c839().var_9e5ebf3c;
   var_b446b077 = self ai::function_9139c839().var_94fefe66;
   var_3fa92868 = self ai::function_9139c839().var_52bddd4;
@@ -767,7 +767,7 @@ function private blightfatherlaunchchaosmissile(var_f794172e, var_61622673, var_
   while(isDefined(var_892397fd)) {
     if(!is_player_valid(var_892397fd.missile_target, 1)) {
       var_892397fd.missile_target = undefined;
-      players = getplayers();
+      players = getPlayers();
       players = arraysortclosest(players, var_892397fd.origin);
 
       foreach(player in players) {
@@ -812,7 +812,7 @@ function function_b2be1340(starting_health) {
 
 function private function_581a06c7(forward_dir, var_ced3ec54, var_27e1ee12, max_angle) {
   vec_to_enemy = var_27e1ee12 - var_ced3ec54;
-  vec_to_enemy_normal = vectornormalize(vec_to_enemy);
+  vec_to_enemy_normal = vectorNormalize(vec_to_enemy);
   angle_to_enemy = vectordot(forward_dir, vec_to_enemy_normal);
 
   if(angle_to_enemy >= max_angle) {
@@ -831,7 +831,7 @@ function private function_5f3390fd(var_61622673, var_4fee43d4) {
 
   while(isDefined(var_892397fd)) {
     player_origins = [];
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player_origins)) {
@@ -868,7 +868,7 @@ function private function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
     }
 
     vector_to_target = var_6d0a510 - self.origin;
-    normal_vector = vectornormalize(vector_to_target);
+    normal_vector = vectorNormalize(vector_to_target);
     dot = vectordot(normal_vector, self.var_209ff2fa);
 
     if(dot >= 1) {
@@ -896,7 +896,7 @@ function private function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
 
     new_vector *= ratio;
     new_vector += self.var_209ff2fa;
-    normal_vector = vectornormalize(new_vector);
+    normal_vector = vectorNormalize(new_vector);
   } else {
     normal_vector = self.var_209ff2fa;
   }
@@ -916,7 +916,7 @@ function private function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   }
 
   self.var_209ff2fa = normal_vector;
-  self moveto(move_to_point, var_eb325a79);
+  self moveTo(move_to_point, var_eb325a79);
 }
 
 function private function_124486ee(delay) {
@@ -937,7 +937,7 @@ function private function_124486ee(delay) {
 
   if(isDefined(var_892397fd)) {
     var_892397fd notify(#"detonated");
-    var_892397fd moveto(var_892397fd.origin, 0.05);
+    var_892397fd moveTo(var_892397fd.origin, 0.05);
     var_892397fd clientfield::set("blight_father_chaos_missile_explosion_clientfield", 1);
     e_blightfather = var_892397fd.var_52334e8c;
     w_weapon = getweapon(#"none");
@@ -954,7 +954,7 @@ function private function_124486ee(delay) {
     }
 
     util::wait_network_frame();
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       player.var_c29c44ca = player.health;
@@ -980,7 +980,7 @@ function private function_124486ee(delay) {
 }
 
 function private function_44e3e0d1(var_51a7ab9c) {
-  players = getplayers();
+  players = getPlayers();
   v_length = sqr(100);
 
   for(i = 0; i < players.size; i++) {
@@ -1019,7 +1019,7 @@ function private function_44e3e0d1(var_51a7ab9c) {
     if(n_distance < v_length) {
       v_dir = player.origin - var_51a7ab9c;
       v_dir = (v_dir[0], v_dir[1], 0.1);
-      v_dir = vectornormalize(v_dir);
+      v_dir = vectorNormalize(v_dir);
       n_push_strength = getdvarint(#"blightfather_n_push_strength", 500);
       n_push_strength = 200 + randomint(n_push_strength - 200);
       v_player_velocity = player getvelocity();

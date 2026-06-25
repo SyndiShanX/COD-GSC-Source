@@ -112,7 +112,7 @@ function_cb512dd4(var_5ea5c94d) {
 function_f615b0f(var_5ea5c94d, ended_early) {}
 
 play_outro() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(a_e_players.size > 1) {
     foreach(e_player in a_e_players) {
@@ -144,11 +144,11 @@ function_d4147875(var_5ea5c94d) {
   veh_start = getvehiclenode("mq_gehen_01", "targetname");
   veh_end = getvehiclenode("mq_gehen_02", "targetname");
   println("<dev string:x71>");
-  sam_spawner = getent("mq_gehen_s", "targetname");
+  sam_spawner = getEnt("mq_gehen_s", "targetname");
   level.sam = sam_spawner spawnfromspawner("sam", 1);
   level.sam.team = #"allies";
   util::magic_bullet_shield(level.sam);
-  eddie_spawner = getent("mq_gehen_e", "targetname");
+  eddie_spawner = getEnt("mq_gehen_e", "targetname");
   eddie = eddie_spawner spawnfromspawner("eddie", 1);
   eddie.team = #"allies";
   util::magic_bullet_shield(eddie);
@@ -160,7 +160,7 @@ function_d4147875(var_5ea5c94d) {
   println("<dev string:xd1>");
   array::thread_all(level.var_d1cf60c8, &function_74963add);
   println("<dev string:x109>");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_player = 1;
 
   foreach(player in a_e_players) {
@@ -185,7 +185,7 @@ function_d4147875(var_5ea5c94d) {
 
   while(true) {
     waitframe(1);
-    _attack_barrier_sprint = vectornormalize(veh_end.origin - level.sam.origin);
+    _attack_barrier_sprint = vectorNormalize(veh_end.origin - level.sam.origin);
     var_7d910a84 = vectordot(_attack_barrier_sprint, anglesToForward(level.sam.angles));
 
     if(var_7d910a84 < 0) {
@@ -222,7 +222,7 @@ function_895265b1(var_5ea5c94d, ended_early) {
 function_74963add() {
   while(true) {
     waitframe(1);
-    _attack_barrier_sprint = vectornormalize(self.origin - level.sam.origin);
+    _attack_barrier_sprint = vectorNormalize(self.origin - level.sam.origin);
     var_7d910a84 = vectordot(_attack_barrier_sprint, anglesToForward(level.sam.angles));
 
     if(var_7d910a84 < 0) {
@@ -230,11 +230,11 @@ function_74963add() {
     }
   }
 
-  playsoundatposition(self.script_string, self.origin);
+  playSoundAtPosition(self.script_string, self.origin);
 }
 
 hud_disable() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player showcrosshair(0);
     player allowcrouch(0);
     player thread function_b20c4898();
@@ -244,7 +244,7 @@ hud_disable() {
 }
 
 hud_enable() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player showcrosshair(1);
     player allowcrouch(1);
     player clientfield::set_to_player("" + #"gehen_clear_hud", 0);

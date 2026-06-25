@@ -82,12 +82,12 @@ function dogleg_1_main(str_objective, b_starting) {
   level thread function_842de716();
   level.lineup_kill_scripted_node = struct::get("lineup_kill_scripted_node", "targetname");
   level.lineup_kill_scripted_node thread scene::init("cin_ven_03_20_storelineup_vign_exit");
-  storelineup_door3_clip = getent("storelineup_door3_clip", "targetname");
+  storelineup_door3_clip = getEnt("storelineup_door3_clip", "targetname");
   if(isDefined(storelineup_door3_clip)) {
     storelineup_door3_clip solid();
-    storelineup_door3_clip disconnectpaths();
+    storelineup_door3_clip disconnectPaths();
   }
-  var_eac6b54b = getent("storelineup_door3_open_clip", "targetname");
+  var_eac6b54b = getEnt("storelineup_door3_open_clip", "targetname");
   var_eac6b54b delete();
   triggers = getEntArray("dogleg_1_stealth_checkpoint_trigger", "targetname");
   foreach(trigger in triggers) {
@@ -174,22 +174,22 @@ function function_798b0fec() {
 
 function function_d45f757d() {
   level waittill("hash_73c7894d");
-  var_58cff577 = getent("molotov_civilian", "targetname");
+  var_58cff577 = getEnt("molotov_civilian", "targetname");
   if(isDefined(var_58cff577)) {
     var_58cff577 thread vengeance_util::set_civilian_on_fire();
   }
-  var_b2db52d7 = getent("molotov_civilian2", "targetname");
+  var_b2db52d7 = getEnt("molotov_civilian2", "targetname");
   if(isDefined(var_b2db52d7)) {
     var_b2db52d7 thread vengeance_util::set_civilian_on_fire();
   }
-  var_8cd8d86e = getent("molotov_civilian3", "targetname");
+  var_8cd8d86e = getEnt("molotov_civilian3", "targetname");
   if(isDefined(var_8cd8d86e)) {
     var_8cd8d86e thread vengeance_util::set_civilian_on_fire();
   }
 }
 
 function function_842de716() {
-  var_a47f76cc = getent("dogleg_1_entrance_door_clip", "targetname");
+  var_a47f76cc = getEnt("dogleg_1_entrance_door_clip", "targetname");
   if(isDefined(var_a47f76cc)) {
     var_a47f76cc notsolid();
     var_a47f76cc connectpaths();
@@ -227,7 +227,7 @@ function function_4326839a() {
 }
 
 function function_b5dfff73() {
-  var_a896d541 = getent("dogleg_1_wasp_gv", "targetname");
+  var_a896d541 = getEnt("dogleg_1_wasp_gv", "targetname");
   if(isDefined(var_a896d541)) {
     self clearforcedgoal();
     self cleargoalvolume();
@@ -244,10 +244,10 @@ function cafe_execution_setup() {
   while(!level scene::is_ready("cin_ven_04_20_cafeexecution_vign_intro")) {
     wait(0.05);
   }
-  level.var_f7d1a350 = getent("cafe_execution_54i_thug_a_ai", "targetname", 1);
-  level.var_3848e5e1 = getent("cafe_execution_civ_01_ai", "targetname", 1);
-  level.var_1836a85c = getent("cafe_execution_civ_02_ai", "targetname", 1);
-  level.var_f6f4fc0b = getent("cafe_execution_civ_03_ai", "targetname", 1);
+  level.var_f7d1a350 = getEnt("cafe_execution_54i_thug_a_ai", "targetname", 1);
+  level.var_3848e5e1 = getEnt("cafe_execution_civ_01_ai", "targetname", 1);
+  level.var_1836a85c = getEnt("cafe_execution_civ_02_ai", "targetname", 1);
+  level.var_f6f4fc0b = getEnt("cafe_execution_civ_03_ai", "targetname", 1);
   level thread function_dbe2f523();
 }
 
@@ -265,7 +265,7 @@ function cafe_execution_civ_spawn_func() {
     self.allowdeath = 1;
     self kill();
   } else {
-    self stopanimscripted();
+    self stopanimScripted();
     self.civilian = 1;
     self ai::set_ignoreme(0);
     self ai::set_ignoreall(0);
@@ -288,7 +288,7 @@ function cafe_exeuction_thug_death_watcher_spawn_func() {
   self waittill("death");
   level flag::set("cafe_execution_thug_dead");
   for(i = 1; i < 6; i++) {
-    guy = getent(("cafe_execution_civ_0" + i) + "_ai", "targetname");
+    guy = getEnt(("cafe_execution_civ_0" + i) + "_ai", "targetname");
     if(isDefined(guy) && isalive(guy)) {
       guy notify("try_to_escape");
     }
@@ -302,7 +302,7 @@ function function_dbe2f523() {
   level.var_f6f4fc0b endon("death");
   level.var_f7d1a350 endon("alert");
   level.var_f7d1a350 endon("hash_da6a4775");
-  trigger = getent("cafeexecution_vign_vo_trigger", "targetname");
+  trigger = getEnt("cafeexecution_vign_vo_trigger", "targetname");
   trigger waittill("trigger");
   level.var_f7d1a350 vengeance_util::function_5fbec645("ffim1_all_your_money_won_t_1");
   wait(0.5);
@@ -330,11 +330,11 @@ function function_e9e34547() {
   scene::add_scene_func("cin_ven_04_20_cafeburning_vign_loop", &function_924af258, "play");
   level.cafe_burning_org thread scene::play("cin_ven_04_20_cafeburning_vign_loop");
   wait(1);
-  level.var_b6fadac7 = getent("cafe_burning_54i_thug_a_ai", "targetname", 1);
-  level.var_2e6fdc0e = getent("cafe_burning_54i_thug_b_ai", "targetname", 1);
-  level.var_3a5715c2 = getent("cafe_burning_civ_01_ai", "targetname", 1);
-  level.var_4e5d9a0c = getent("cafe_burning_civ_02_ai", "targetname", 1);
-  level.var_96a3037b = getent("cafe_burning_civ_03_ai", "targetname", 1);
+  level.var_b6fadac7 = getEnt("cafe_burning_54i_thug_a_ai", "targetname", 1);
+  level.var_2e6fdc0e = getEnt("cafe_burning_54i_thug_b_ai", "targetname", 1);
+  level.var_3a5715c2 = getEnt("cafe_burning_civ_01_ai", "targetname", 1);
+  level.var_4e5d9a0c = getEnt("cafe_burning_civ_02_ai", "targetname", 1);
+  level.var_96a3037b = getEnt("cafe_burning_civ_03_ai", "targetname", 1);
   level thread function_558e4ac8();
   level.var_b6fadac7 thread vengeance_util::function_394ba9b5(level.var_2e6fdc0e);
   level.var_2e6fdc0e thread vengeance_util::function_394ba9b5(level.var_b6fadac7);
@@ -357,7 +357,7 @@ function function_558e4ac8() {
   level.var_2e6fdc0e endon("alert");
   level.var_b6fadac7 endon("hash_da6a4775");
   level.var_2e6fdc0e endon("hash_da6a4775");
-  trigger = getent("cafeburning_vign_vo_trigger", "targetname");
+  trigger = getEnt("cafeburning_vign_vo_trigger", "targetname");
   trigger waittill("trigger");
   level.var_b6fadac7 vengeance_util::function_5fbec645("ffim1_now_we_re_the_ones_w_1");
   wait(1);
@@ -388,14 +388,14 @@ function function_8b8b9516() {
   self endon("death");
   self ai::set_behavior_attribute("can_melee", 0);
   var_ccf9b73f = util::spawn_anim_model("p7_ven_gascan_static");
-  var_ccf9b73f linkto(self, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  var_ccf9b73f linkTo(self, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   self thread function_78c388c0(var_ccf9b73f);
   self thread vengeance_util::function_57b69bd6(var_ccf9b73f);
   self waittill("hash_da6a4775");
   if(isDefined(self.silenced) && self.silenced) {
     return;
   }
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 function function_78c388c0(var_ccf9b73f) {
@@ -453,7 +453,7 @@ function function_97ac3293() {
 function function_a44271e3() {
   level endon("hash_e9ff59d5");
   while(isalive(self)) {
-    var_dd18437 = getent("cafe_burning_flare", "targetname", 1);
+    var_dd18437 = getEnt("cafe_burning_flare", "targetname", 1);
     if(isDefined(var_dd18437)) {
       break;
     }
@@ -481,7 +481,7 @@ function cafe_burning_civ_spawn_func() {
   self.goalradius = 32;
   msg = level util::waittill_any_return("cafeburning_flare_enemy_alert", "cafeburning_flare_enemy_dead");
   if(msg == "cafeburning_flare_enemy_dead") {
-    self stopanimscripted();
+    self stopanimScripted();
     self.civilian = 1;
     self ai::set_ignoreme(0);
     self ai::set_ignoreall(0);
@@ -493,7 +493,7 @@ function cafe_burning_civ_spawn_func() {
     self ai::set_behavior_attribute("panic", 1);
   } else {
     self waittill("cafe_burning_check_for_escape");
-    playsoundatposition("evt_civ_group_burn", (21564, -86, 136));
+    playSoundAtPosition("evt_civ_group_burn", (21564, -86, 136));
     self vengeance_util::set_civilian_on_fire(0);
     self vengeance_util::set_civilian_on_fire(0);
     self vengeance_util::set_civilian_on_fire(0);
@@ -537,49 +537,49 @@ function cafe_molotov_setup() {
   wait(14);
   level.cafe_molotov_org thread scene::play("cin_ven_04_20_cafemolotovflush_vign_civa");
   wait(0.05);
-  guy = getent("cafe_molotov_civ_01_ai", "targetname");
+  guy = getEnt("cafe_molotov_civ_01_ai", "targetname");
   if(isDefined(guy)) {
     guy thread vengeance_util::set_civilian_on_fire();
   }
   wait(randomfloatrange(4, 8));
   level.cafe_molotov_org thread scene::play("cin_ven_04_20_cafemolotovflush_vign_civb");
   wait(0.05);
-  guy = getent("cafe_molotov_civ_02_ai", "targetname");
+  guy = getEnt("cafe_molotov_civ_02_ai", "targetname");
   if(isDefined(guy)) {
     guy thread vengeance_util::set_civilian_on_fire();
   }
   wait(randomfloatrange(4, 8));
   level.cafe_molotov_org thread scene::play("cin_ven_04_20_cafemolotovflush_vign_civc");
   wait(0.05);
-  guy = getent("cafe_molotov_civ_03_ai", "targetname");
+  guy = getEnt("cafe_molotov_civ_03_ai", "targetname");
   if(isDefined(guy)) {
     guy thread vengeance_util::set_civilian_on_fire();
   }
   wait(randomfloatrange(4, 8));
   level.cafe_molotov_org thread scene::play("cin_ven_04_20_cafemolotovflush_vign_civd");
   wait(0.05);
-  guy = getent("cafe_molotov_civ_04_ai", "targetname");
+  guy = getEnt("cafe_molotov_civ_04_ai", "targetname");
   if(isDefined(guy)) {
     guy thread vengeance_util::set_civilian_on_fire();
   }
   wait(randomfloatrange(4, 8));
   level.cafe_molotov_org thread scene::play("cin_ven_04_20_cafemolotovflush_vign_cive");
   wait(0.05);
-  guy = getent("cafe_molotov_civ_05_ai", "targetname");
+  guy = getEnt("cafe_molotov_civ_05_ai", "targetname");
   if(isDefined(guy)) {
     guy thread vengeance_util::set_civilian_on_fire();
   }
   wait(randomfloatrange(4, 8));
   level.cafe_molotov_org thread scene::play("cin_ven_04_20_cafemolotovflush_vign_civf");
   wait(0.05);
-  guy = getent("cafe_molotov_civ_06_ai", "targetname");
+  guy = getEnt("cafe_molotov_civ_06_ai", "targetname");
   if(isDefined(guy)) {
     guy thread vengeance_util::set_civilian_on_fire();
   }
   wait(randomfloatrange(4, 8));
   level.cafe_molotov_org thread scene::play("cin_ven_04_20_cafemolotovflush_vign_civg");
   wait(0.05);
-  guy = getent("cafe_molotov_civ_07_ai", "targetname");
+  guy = getEnt("cafe_molotov_civ_07_ai", "targetname");
   if(isDefined(guy)) {
     guy thread vengeance_util::set_civilian_on_fire();
   }
@@ -598,7 +598,7 @@ function function_6236563e() {
   wait(3);
   var_4d665055 = struct::get("goto_quadtank_alley_obj_org", "targetname");
   objectives::set("cp_level_vengeance_goto_quadtank_alley", var_4d665055);
-  var_23b47afc = getent("quadtank_alley_intro_trigger", "script_noteworthy");
+  var_23b47afc = getEnt("quadtank_alley_intro_trigger", "script_noteworthy");
   var_23b47afc triggerenable(0);
   msg = level util::waittill_any_return("goto_quadtank_alley_trigger_touched", "stealth_discovered");
   if(msg == "stealth_discovered") {

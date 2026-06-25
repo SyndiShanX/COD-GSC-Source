@@ -55,7 +55,7 @@ main2() {
 
 dudes_in_place_cover() {
   var_0 = [level.merrick, level.hesh];
-  var_1 = common_scripts\utility::getstruct("panic_room_node", "targetname");
+  var_1 = common_scripts\utility::getStruct("panic_room_node", "targetname");
   level.merrick thread announce_past_those_doors();
   common_scripts\utility::flag_wait("FLAG_enemies_at_breach_vacated");
   level.merrick thread guy_goes_to_struct_animates("breach_stance_right_one", "pre_breach_set");
@@ -63,9 +63,9 @@ dudes_in_place_cover() {
 }
 
 guy_goes_to_struct_animates(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0, "targetname");
   self.idle_struct_animating_node = var_3;
-  getent("payer_in_breach_zone", "targetname") endon("trigger");
+  getEnt("payer_in_breach_zone", "targetname") endon("trigger");
 
   if(isDefined(var_2)) {
     return;
@@ -76,7 +76,7 @@ guy_goes_to_struct_animates(var_0, var_1, var_2) {
 
 dude_kicks_in_the_door_setup(var_0) {
   level.keegan thread guy_goes_to_struct_animates("breach_stance", "pre_breach_set", var_0);
-  getent("payer_in_breach_zone", "targetname") waittill("trigger");
+  getEnt("payer_in_breach_zone", "targetname") waittill("trigger");
   dude_kicks_in_the_door();
 }
 
@@ -84,7 +84,7 @@ dude_kicks_in_the_door() {
   level.merrick.idle_struct_animating_node notify("dude_kicking_in_door");
   level.hesh.idle_struct_animating_node notify("dude_kicking_in_door");
   level.keegan.idle_struct_animating_node notify("dude_kicking_in_door");
-  var_0 = common_scripts\utility::getstruct("door_kick_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("door_kick_node", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "dude_door_kick");
   common_scripts\utility::flag_set("FLAG_dude_kicked_the_door");
   level.player common_scripts\utility::delaycall(0.8, ::setclienttriggeraudiozonepartial, "oilrocks_ground_end_hallway_scene", "mix");
@@ -93,7 +93,7 @@ dude_kicks_in_the_door() {
 
 announce_past_those_doors() {
   common_scripts\utility::flag_wait("FLAG_enemies_at_breach_vacated");
-  var_0 = common_scripts\utility::getstruct("door_kick_node", "targetname");
+  var_0 = common_scripts\utility::getStruct("door_kick_node", "targetname");
 
   while(distance(self.origin, var_0.origin) > 500) {
     wait 0.05;
@@ -103,14 +103,14 @@ announce_past_those_doors() {
 }
 
 blackhawk_into_position() {
-  var_0 = common_scripts\utility::getstruct("blackhawk_panic_room_entrance", "targetname");
+  var_0 = common_scripts\utility::getStruct("blackhawk_panic_room_entrance", "targetname");
   var_1 = maps\oilrocks_apache_code::get_blackhawk_ally();
 
   if(!isDefined(var_1)) {
     var_1 = maps\oilrocks_apache_code::spawn_blackhawk_ally("blackhawk_panic_room_entrance", undefined, undefined, 0);
   }
 
-  var_2 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_1 vehicle_teleport(var_0.origin, vectortoangles(var_2.origin - var_0.origin));
   var_1 vehicle_turnengineoff();
 }
@@ -127,7 +127,7 @@ choppers_setup() {
 }
 
 chopper_start_at_path(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_2 = spawnStruct();
   var_2.origin = var_1.origin;
   maps\_vehicle::vehicle_paths(var_2);
@@ -147,7 +147,7 @@ stop_chopper_bosses() {
 }
 
 choppers_fly_in() {
-  var_0 = common_scripts\utility::getstruct("blackhawk_panic_room_entrance", "targetname");
+  var_0 = common_scripts\utility::getStruct("blackhawk_panic_room_entrance", "targetname");
   var_1 = maps\oilrocks_apache_code::get_blackhawk_ally();
 
   if(!isDefined(level.testingapache_animations)) {
@@ -162,8 +162,8 @@ choppers_fly_in() {
   var_3 vehicle_turnengineon();
 
   if(!isDefined(level.testingapache_animations)) {
-    var_2 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct("apache_panic_room_ally01", "targetname"));
-    var_3 maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct("apache_panic_room_ally02", "targetname"));
+    var_2 thread maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct("apache_panic_room_ally01", "targetname"));
+    var_3 maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct("apache_panic_room_ally02", "targetname"));
     common_scripts\utility::flag_set("FLAG_choppers_arrived");
     return;
   }
@@ -172,7 +172,7 @@ choppers_fly_in() {
   var_1.animname = "silenthawk";
   var_2.animname = "apache_1";
   var_3.animname = "apache_2";
-  var_5 = common_scripts\utility::getstruct("chopper_fly_in_node", "targetname");
+  var_5 = common_scripts\utility::getStruct("chopper_fly_in_node", "targetname");
   common_scripts\utility::array_thread(var_4, maps\_vehicle_code::suspend_drive_anims);
   var_6 = var_1 maps\_utility::getanim("choppers_fly_in");
   var_7 = getanimlength(var_6);
@@ -201,7 +201,7 @@ spawn_rorke() {
   level.rorke.flashbangimmunity = 1;
   level.rorke thread fail_mission_on_death();
   var_0 = "panic_room";
-  var_1 = common_scripts\utility::getstruct("panic_room_node", "targetname");
+  var_1 = common_scripts\utility::getStruct("panic_room_node", "targetname");
   var_1 maps\_anim::anim_first_frame([level.rorke], var_0);
 }
 
@@ -261,7 +261,7 @@ rorke_take_down() {
   level.rorke setCanDamage(1);
   thread keegan_stands_behind_desk();
   var_4 = "panic_room";
-  var_5 = common_scripts\utility::getstruct("panic_room_node", "targetname");
+  var_5 = common_scripts\utility::getStruct("panic_room_node", "targetname");
   var_5 thread anim_reach_failsafe_hideprint(var_0, 10);
   var_6 = spawnStruct();
   var_6.origin = maps\_utility::add_z(var_5.origin, -10);
@@ -363,14 +363,14 @@ stop_notetracks() {
 
 keegan_goes_behind_the_door() {
   var_0 = "panic_room";
-  var_1 = common_scripts\utility::getstruct("panic_room_node", "targetname");
+  var_1 = common_scripts\utility::getStruct("panic_room_node", "targetname");
   var_1 maps\_anim::anim_reach([level.keegan], "keegan_jumps_out_window");
   wait 20;
   var_1 maps\_anim::anim_single([level.keegan], "keegan_jumps_out_window");
 }
 
 keegan_stands_behind_desk() {
-  var_0 = common_scripts\utility::getstruct("keegan_stands_here", "targetname");
+  var_0 = common_scripts\utility::getStruct("keegan_stands_here", "targetname");
   level.keegan maps\_utility::set_goal_pos(var_0.origin);
   level.keegan maps\_utility::set_goal_radius(128);
   level.keegan waittill("goal");
@@ -412,7 +412,7 @@ vacate_enemies() {
   maps\_utility::array_delete(getEntArray("trigger_multiple_spawn", "classname"));
   maps\_utility::array_delete(getspawnerteamarray("axis"));
   thread maps\_utility::ai_delete_when_out_of_sight(getaiarray("axis"), 750);
-  getent("enemy_clearance", "targetname") maps\_utility::waittill_volume_dead_or_dying();
+  getEnt("enemy_clearance", "targetname") maps\_utility::waittill_volume_dead_or_dying();
   wait 0.05;
   common_scripts\utility::flag_set("FLAG_enemies_at_breach_vacated");
 }

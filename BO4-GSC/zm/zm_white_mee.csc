@@ -53,8 +53,8 @@ play_spark(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwa
 
 function_5850fbee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"disconnect");
-  var_17b2e8dd = getent(localclientnum, "mee_3_body", "targetname");
-  var_f6289db0 = getent(localclientnum, "mee_3_head", "targetname");
+  var_17b2e8dd = getEnt(localclientnum, "mee_3_body", "targetname");
+  var_f6289db0 = getEnt(localclientnum, "mee_3_head", "targetname");
 
   if(newval == 1 || !zm_utility::is_classic()) {
     var_17b2e8dd hide();
@@ -67,14 +67,14 @@ function_5850fbee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_bb4b8cd2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_17b2e8dd = getent(localclientnum, "mee_3_body", "targetname");
-  var_f6289db0 = getent(localclientnum, "mee_3_head", "targetname");
+  var_17b2e8dd = getEnt(localclientnum, "mee_3_body", "targetname");
+  var_f6289db0 = getEnt(localclientnum, "mee_3_head", "targetname");
 
   if(newval) {
     player_pos = (self.origin[0], self.origin[1], 0) + (0, 0, var_f6289db0.origin[2]);
     player_vec = player_pos - var_f6289db0.origin;
     angles = vectortoangles(player_vec);
-    var_f6289db0 rotateto(angles, 0.2);
+    var_f6289db0 rotateTo(angles, 0.2);
     wait 0.2;
 
     if(isDefined(self)) {

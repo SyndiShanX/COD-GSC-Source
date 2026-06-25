@@ -49,7 +49,7 @@ validation() {
 }
 
 activation() {
-  playsoundatposition(#"zmb_bgb_phoenix_activate", (0, 0, 0));
+  playSoundAtPosition(#"zmb_bgb_phoenix_activate", (0, 0, 0));
   players = level.players;
 
   foreach(player in players) {

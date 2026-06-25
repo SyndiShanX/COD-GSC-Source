@@ -206,7 +206,7 @@ function private function_77b24e0e() {
   level.player util::function_749362d7(0);
   level.player util::blend_movespeedscale_default(1);
   level.player namespace_fc3e8cb::function_112aa648(0);
-  var_507573c7 = getent("t_arcade_gun_low_ready_volume", "targetname");
+  var_507573c7 = getEnt("t_arcade_gun_low_ready_volume", "targetname");
   var_507573c7 delete();
   level thread scene::play("scene_amk_3025_arc_exit", "exit_close_door");
   level thread scene::play("p9_fxanim_cp_amk_4010_heli_rappel_rope_bundle", "post");
@@ -265,7 +265,7 @@ function function_61dadea0() {
   var_f1f393cc = getaiarray("sp_streets_rappel_group", "targetname");
   function_1eaaceab(var_f1f393cc);
   level thread namespace_fc3e8cb::function_18e5080e("flg_video_store_start", var_f1f393cc);
-  var_31a7069 = getent("vol_amerika_video_store_heli_vignette", "targetname");
+  var_31a7069 = getEnt("vol_amerika_video_store_heli_vignette", "targetname");
 
   foreach(ai in var_f1f393cc) {
     ai namespace_fc3e8cb::function_aa5f0d6b();

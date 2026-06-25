@@ -48,7 +48,7 @@ function function_828240c9() {
 }
 
 function function_e7c75cf0() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     e_player = players[i];
     e_player zm::spectator_respawn_player();
@@ -66,9 +66,9 @@ function function_3fbe7d5f() {
     }
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     if(isDefined(self.worldgundw)) {
-      self.worldgundw rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+      self.worldgundw rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     }
     wait(randomfloat(waittime - 0.1));
   }
@@ -104,7 +104,7 @@ function function_2f621485(b_disable = 1) {
   if(b_disable && level flag::get("pack_machine_in_use")) {
     level flag::wait_till_clear("pack_machine_in_use");
   }
-  var_1ac74da9 = getent("pack_a_punch", "script_noteworthy");
+  var_1ac74da9 = getEnt("pack_a_punch", "script_noteworthy");
   var_1ac74da9 triggerenable(!b_disable);
 }
 
@@ -476,7 +476,7 @@ function function_4334972f(str_endon, str_notify_end, var_1d9f5031) {
 }
 
 function function_432cdad9(a_spawnpoints, var_e41e673a) {
-  players = getplayers();
+  players = getPlayers();
   var_19764360 = zm_ai_raz::get_favorite_enemy();
   if(isDefined(level.var_a3559c05)) {
     s_spawn_loc = [[level.var_a3559c05]](level.var_6bca5baa, var_19764360);
@@ -504,7 +504,7 @@ function function_432cdad9(a_spawnpoints, var_e41e673a) {
     if(isDefined(var_e41e673a)) {
       ai thread[[var_e41e673a]]();
     }
-    playsoundatposition("zmb_raz_spawn", s_spawn_loc.origin);
+    playSoundAtPosition("zmb_raz_spawn", s_spawn_loc.origin);
     return ai;
   }
   return undefined;
@@ -825,7 +825,7 @@ function function_eda4b163() {
 }
 
 function function_4da6e8(b_open) {
-  var_2e1f1409 = getent("dept_occluder", "targetname");
+  var_2e1f1409 = getEnt("dept_occluder", "targetname");
   if(b_open) {
     var_2e1f1409 ghost();
     var_2e1f1409 notsolid();

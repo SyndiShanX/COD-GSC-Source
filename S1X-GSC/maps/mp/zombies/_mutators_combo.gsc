@@ -124,7 +124,7 @@ mutatorcombospikeblast(var_0) {
   self.spikeblastready = 0;
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = self gettagorigin("J_Spine4");
-  var_1 linkto(self, "J_Spine4");
+  var_1 linkTo(self, "J_Spine4");
   wait 0.05;
 
   if(maps\mp\zombies\_util::checkactivemutator("combo_emz_spike")) {
@@ -286,7 +286,7 @@ mutatorcomboaddhelmet() {
   self.helmet = var_3;
   var_3.angles = var_2;
   var_3 setModel("zombie_helmet");
-  var_3 linkto(self, var_0, (-0.2, -0.45, -4.7), (0, 90, 0));
+  var_3 linkTo(self, var_0, (-0.2, -0.45, -4.7), (0, 90, 0));
   thread mutatorcombohelmetdetach(var_3);
   self waittill("death");
   self.hashelmet = undefined;

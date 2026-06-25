@@ -62,7 +62,7 @@ func_F918(var_0) {
         self.setminimap setlightintensity(2);
       }
 
-      getent("cryptid_attack_arcade", "targetname") setModel("park_game_cryptid_attack");
+      getEnt("cryptid_attack_arcade", "targetname") setModel("park_game_cryptid_attack");
     } else {
       self.powered_on = 0;
       if(isDefined(self.setminimap)) {
@@ -135,7 +135,7 @@ func_F917(var_0, var_1) {
   foreach(var_3 in self.var_115FB) {
     if(var_3.angles != var_3.var_12D72) {
       var_3 playSound("arcade_tooth_reset");
-      var_3 rotateto(var_3.var_12D72, 0.1);
+      var_3 rotateTo(var_3.var_12D72, 0.1);
     }
 
     var_3 setCanDamage(1);
@@ -168,7 +168,7 @@ func_13633(var_0, var_1) {
     }
 
     setomnvar("zombie_arcade_clowntooth_score_" + var_0.script_location, var_0.score * 10);
-    self rotateto(scripts\engine\utility::getstruct(self.target, "targetname").angles, 0.1);
+    self rotateTo(scripts\engine\utility::getStruct(self.target, "targetname").angles, 0.1);
     var_0.remaining_teeth = scripts\engine\utility::array_remove(var_0.remaining_teeth, self);
     var_1 notify("hit_a_cryptid_tooth", self);
   }

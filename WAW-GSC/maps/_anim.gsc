@@ -385,7 +385,7 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
           guy setflaggedanimknob(anim_string, level.scr_anim[animname][anime][idleanim], 1, 0.2, 1);
         } else {
           guy last_anim_time_check();
-          guy animscripted(anim_string, org, angles, level.scr_anim[animname][anime][idleanim]);
+          guy animScripted(anim_string, org, angles, level.scr_anim[animname][anime][idleanim]);
         }
 
         animtime = getanimlength(level.scr_anim[animname][anime][idleanim]);
@@ -548,7 +548,7 @@ anim_single(guys, anime, tag, node, tag_entity, animname_override) {
         guy setflaggedanimknob(anim_string, level.scr_anim[animname][anime], 1, 0.2, 1);
       } else {
         guy last_anim_time_check();
-        guy animscripted(anim_string, org, angles, level.scr_anim[animname][anime]);
+        guy animScripted(anim_string, org, angles, level.scr_anim[animname][anime]);
       }
 
       animtime = getanimlength(level.scr_anim[animname][anime]);
@@ -1722,7 +1722,7 @@ anim_ents(ents, anime, tag, node, tag_entity, animname) {
 
     if(isDefined(parent_model)) {
       assertEx(isDefined(ents[i].script_linkto), "_anim::anim_ents() - Entity at " + ents[i].origin + " does not have a script_linkto Key/Value");
-      ents[i] LinkTo(parent_model, ents[i].script_linkto);
+      ents[i] linkTo(parent_model, ents[i].script_linkto);
     } else {
       ents[i] SetAnimTree();
 
@@ -2226,13 +2226,13 @@ pg_sound_exists(animname, anime) {
   return false;
 }
 play_anim_end_early(the_anim, how_early) {
-  self animscripted("anim single", self.origin, self.angles, the_anim);
+  self animScripted("anim single", self.origin, self.angles, the_anim);
   animtime = getanimlength(the_anim);
 
   animtime -= how_early;
   wait(animtime);
 
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 anim_single_solo_earlyout(guy, anime, tag, node, tag_entity, animname_override, time) {
@@ -2243,13 +2243,13 @@ anim_single_solo_earlyout(guy, anime, tag, node, tag_entity, animname_override, 
 
 anim_single_earlyout(guys, anime, tag, node, tag_entity, animname_override, time) {
   for(i = 0; i < guys.size; i++) {
-    self thread earlyout_animscripted(guys[i], anime, time);
+    self thread earlyout_animScripted(guys[i], anime, time);
   }
 
   self anim_single(guys, anime, tag, node, tag_entity, animname_override);
 }
 
-earlyout_animscripted(guy, anime, cut_time) {
+earlyout_animScripted(guy, anime, cut_time) {
   guy endon("death");
 
   if(!isDefined(cut_time)) {
@@ -2259,7 +2259,7 @@ earlyout_animscripted(guy, anime, cut_time) {
   anim_time = GetAnimLength(level.scr_anim[guy.animname][anime]);
   wait(anim_time - cut_time);
 
-  guy anim_stopanimscripted();
+  guy anim_stopanimScripted();
 
   guy notify("anim_early_out");
 }

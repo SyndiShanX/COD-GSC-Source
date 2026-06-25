@@ -71,10 +71,10 @@ init_escort_sequence() {
   }
 
   var_4 = getvehiclenode("bomb_vehicle_start", "targetname");
-  var_5 = spawnvehicle("cp_town_bomb_delivery_vehicle", "bomb_vehicle", "cp_town_bomb_vehicle", var_4.origin, var_4.angles);
+  var_5 = spawnVehicle("cp_town_bomb_delivery_vehicle", "bomb_vehicle", "cp_town_bomb_vehicle", var_4.origin, var_4.angles);
   var_5 attachpath(var_4);
-  var_6 = getent("bomb_vehicle_clip", "targetname");
-  var_6 linkto(var_5);
+  var_6 = getEnt("bomb_vehicle_clip", "targetname");
+  var_6 linkTo(var_5);
   var_5.escort_vehicle_clip = var_6;
   var_5 startpath();
   var_5 vehicle_setspeedimmediate(0, 1, 1);
@@ -92,7 +92,7 @@ equip_bomb() {
   var_2 setModel("cp_town_nuke");
   var_2.angles = var_0.angles;
   var_0.escort_vehicle_bomb = var_2;
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
 }
 
 player_nearby_monitor() {
@@ -198,7 +198,7 @@ spawn_push_origins() {
   var_2 = scripts\engine\utility::getStructArray("vehicle_push_origin", "targetname");
   foreach(var_4 in var_2) {
     var_5 = spawn("script_origin", var_4.origin);
-    var_5 linkto(var_1);
+    var_5 linkTo(var_1);
     var_0[var_0.size] = var_5;
   }
 
@@ -363,7 +363,7 @@ bomb_launching_sequence() {
   var_0.escort_vehicle_bomb unlink();
   level.escort_vehicle = var_1;
   level.escort_vehicle.escort_vehicle_bomb = var_0.escort_vehicle_bomb;
-  level.escort_vehicle.escort_vehicle_bomb linkto(var_1, "tag_bomb");
+  level.escort_vehicle.escort_vehicle_bomb linkTo(var_1, "tag_bomb");
   var_0 delete();
   level.escort_vehicle setscriptablepartstate("launch", "active");
   level.escort_vehicle.escort_vehicle_bomb scriptmodelplayanim("iw7_cp_bosscrab_emerge_slingshot_nuke_01");
@@ -384,7 +384,7 @@ delete_push_origins() {
 
 enter_bomb_push(var_0, var_1) {
   var_0 play_bomb_push_gesture(var_0);
-  var_0 playerlinkto(var_1.push_origin);
+  var_0 playerlinkTo(var_1.push_origin);
   var_0 playerlinkedoffsetenable();
   var_0 scripts\cp\powers\coop_powers::power_disablepower();
   var_0.is_pushing_bomb = 1;
@@ -401,7 +401,7 @@ exit_bomb_push(var_0) {
 teleport_out_of_geo(var_0) {
   var_1 = scripts\engine\utility::drop_to_ground(var_0.origin, 100, -200);
   if(var_1[2] > var_0.origin[2]) {
-    var_0 setorigin(var_1);
+    var_0 setOrigin(var_1);
   }
 }
 
@@ -573,7 +573,7 @@ do_radius_damage(var_0, var_1) {
 
     var_3 dodamage(50, var_1);
     var_4 = var_3.origin - var_1 * (1, 1, 0);
-    var_5 = vectornormalize(var_4);
+    var_5 = vectorNormalize(var_4);
     var_6 = 3000 * 1 - length(var_4) / 130;
   }
 }
@@ -754,7 +754,7 @@ calculate_egg_sac_spawn_pos() {
   if(var_1 > 0) {
     var_2 = level.escort_vehicle;
     var_3 = level.crab_boss;
-    var_4 = vectornormalize(var_3.origin - var_2.origin * (1, 1, 0));
+    var_4 = vectorNormalize(var_3.origin - var_2.origin * (1, 1, 0));
     var_5 = vectortoangles(var_4);
     var_6 = 180 / var_1;
     var_7 = var_5[1] - 90 + var_6 / 2;

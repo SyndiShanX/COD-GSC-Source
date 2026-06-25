@@ -282,7 +282,7 @@ build_assets() {
       switch (asset.script_noteworthy) {
         case "trigger_radius_use":
           use_trigger = spawn("trigger_radius_use", asset.origin + trigger_offset, trigger_spawnflags, trigger_radius, trigger_height);
-          use_trigger SetCursorHint("HINT_NOICON");
+          use_trigger setCursorHint("HINT_NOICON");
           if(isDefined(asset.radius)) {
             use_trigger.radius = asset.radius;
           }
@@ -594,10 +594,10 @@ is_facing(facee) {
   orientation = self getPlayerAngles();
   forwardVec = anglesToForward(orientation);
   forwardVec2D = (forwardVec[0], forwardVec[1], 0);
-  unitForwardVec2D = VectorNormalize(forwardVec2D);
+  unitForwardVec2D = vectorNormalize(forwardVec2D);
   toFaceeVec = facee.origin - self.origin;
   toFaceeVec2D = (toFaceeVec[0], toFaceeVec[1], 0);
-  unitToFaceeVec2D = VectorNormalize(toFaceeVec2D);
+  unitToFaceeVec2D = vectorNormalize(toFaceeVec2D);
   dotProduct = VectorDot(unitForwardVec2D, unitToFaceeVec2D);
   return (dotProduct > 0.9);
 }

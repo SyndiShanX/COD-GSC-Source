@@ -264,7 +264,7 @@ _id_1357(var_0, var_1) {
 _id_135A() {
   var_0 = [];
 
-  for(var_1 = self; isDefined(var_1); var_1 = getent(var_1.targetname, "target")) {
+  for(var_1 = self; isDefined(var_1); var_1 = getEnt(var_1.targetname, "target")) {
     var_0[var_0.size] = var_1;
 
     if(!isDefined(var_1.targetname)) {
@@ -1071,7 +1071,7 @@ _id_13A7() {
     }
 
     var_2 = anglesToForward((0, level.player getplayerangles()[1], 0));
-    var_3 = vectornormalize(var_1);
+    var_3 = vectorNormalize(var_1);
     var_4 = vectordot(var_2, var_3);
 
     if(var_4 < 0.2) {

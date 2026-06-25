@@ -12,11 +12,11 @@
 #using_animtree("generic_human");
 
 whitehouse_spotlight_create(str_targetname, health) {
-  damage_ent = getent(str_targetname, "targetname");
+  damage_ent = getEnt(str_targetname, "targetname");
   damage_ent setCanDamage(true);
   damage_ent.health = health;
 
-  spotlight_origin = getstruct(damage_ent.target, "targetname");
+  spotlight_origin = getStruct(damage_ent.target, "targetname");
 
   spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight");
   spotlight setModel("cod3mg42");
@@ -35,7 +35,7 @@ whitehouse_spotlight_create(str_targetname, health) {
 whitehouse_spotlight() {
   self endon("death");
 
-  target_struct = getstruct(self.target, "targetname");
+  target_struct = getStruct(self.target, "targetname");
   target_struct.ent = spawn("script_origin", target_struct.origin);
 
   self settargetentity(target_struct.ent);
@@ -186,7 +186,7 @@ manual_mg_path(start_target, noloop) {
   if(isDefined(start_target)) {
     self.current_target = start_target;
   } else {
-    self.current_target = getstruct(self.target, "targetname");
+    self.current_target = getStruct(self.target, "targetname");
   }
 
   target_ent = spawn("script_origin", self.current_target.origin);
@@ -206,9 +206,9 @@ manual_mg_path(start_target, noloop) {
     self turret_on_target(self.current_target);
 
     if(isDefined(self.current_target.target)) {
-      self.current_target = getstruct(self.current_target.target, "targetname");
+      self.current_target = getStruct(self.current_target.target, "targetname");
     } else if(isDefined(self.target)) {
-      self.current_target = getstruct(self.target, "targetname");
+      self.current_target = getStruct(self.target, "targetname");
     } else {
       break;
     }
@@ -252,7 +252,7 @@ manual_mg_threat_trigger(turret) {
   turret SetConvergenceTime(0.25, "pitch");
 
   flag_set("mg_threat");
-  start_target = getstruct(self.target, "targetname");
+  start_target = getStruct(self.target, "targetname");
   target_ent = spawn("script_origin", start_target.origin);
 
   turret settargetentity(target_ent);
@@ -303,7 +303,7 @@ sandbag_group_setup(str_targetname) {
     group_array[group_id][index] = sandbag;
   }
 
-  force_struct = getstruct(str_targetname, "script_noteworthy");
+  force_struct = getStruct(str_targetname, "script_noteworthy");
 
   foreach(group in group_array) {
     level thread sandbag_group(group, force_struct);
@@ -410,7 +410,7 @@ whitehouse_cleanup_approach() {
   flag_wait("whitehouse_entrance_init");
 
   mg_array = getEntArray("manual_mg", "script_noteworthy");
-  mg_array = array_add(mg_array, getent("west_side_mg", "script_noteworthy"));
+  mg_array = array_add(mg_array, getEnt("west_side_mg", "script_noteworthy"));
 
   for(i = 0; i < mg_array.size; i++) {
     mg_array[i] thread manual_mg_stop(i + 1);
@@ -443,7 +443,7 @@ whitehouse_mg_setup() {
   mg_array = getEntArray("manual_mg", "script_noteworthy");
   array_thread(mg_array, ::manual_mg_init, true);
 
-  turret = getent("threat_mg", "targetname");
+  turret = getEnt("threat_mg", "targetname");
   trigger_array = getEntArray("mg_threat_trigger", "targetname");
   array_thread(trigger_array, ::manual_mg_threat_trigger, turret);
 
@@ -501,7 +501,7 @@ whitehouse_rappel_setup() {
 
 whitehouse_rappel(data_struct) {
   self endon("death");
-  anim_ent = getent(self.target, "targetname");
+  anim_ent = getEnt(self.target, "targetname");
 
   self enable_achievement_harder_they_fall();
 
@@ -522,13 +522,13 @@ whitehouse_rappel(data_struct) {
 
   anim_ent script_delay();
 
-  anim_ent anim_stopanimscripted();
+  anim_ent anim_stopanimScripted();
 
   anim_ent anim_single(ents, "rappel_drop", undefined, 4.3);
 
   self disable_achievement_harder_they_fall();
 
-  ent = getent("rappel_goal", "targetname");
+  ent = getEnt("rappel_goal", "targetname");
   self setgoalpos(ent.origin);
   self.goalradius = 1024;
   self.goalheight = 128;
@@ -546,7 +546,7 @@ fake_flare(delay, tag, origin_offset, angles_offset) {
 
   flare = spawn("script_model", (0, 0, 0));
   flare setModel("mil_emergency_flare");
-  flare LinkTo(self, tag, origin_offset, angles_offset);
+  flare linkTo(self, tag, origin_offset, angles_offset);
   playFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
   wait 12;
   stopFXOnTag(level._effect["green_flare"], flare, "tag_fire_fx");
@@ -565,7 +565,7 @@ flare_fx_start(guy) {
 
   flare = spawn("script_model", (0, 0, 0));
   flare setModel("mil_emergency_flare");
-  flare LinkTo(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  flare linkTo(guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 
   flare thread play_flare_fx(guy);
   guy thread play_flare_fx(guy);
@@ -642,11 +642,11 @@ door_open_kick() {
   self playSound("door_wood_double_kick");
 
   self ConnectPaths();
-  self RotateTo(self.angles + (0, 90, 0), .5, .1, 0);
+  self rotateTo(self.angles + (0, 90, 0), .5, .1, 0);
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, -10, 0), .3, 0, .3);
+  self rotateTo(self.angles + (0, -10, 0), .3, 0, .3);
   self waittill("rotatedone");
-  self RotateTo(self.angles + (0, 5, 0), .3, 0.15, 0.15);
+  self rotateTo(self.angles + (0, 5, 0), .3, 0.15, 0.15);
 }
 
 waittill_player_damage(damage_limit) {
@@ -695,7 +695,7 @@ turret_on_target(target_ent) {
   self waittill("turret_on_target");
   while(true) {
     aim_vector = anglesToForward(self gettagangles("tag_flash"));
-    target_vector = vectornormalize(target_ent.origin - self.origin);
+    target_vector = vectorNormalize(target_ent.origin - self.origin);
 
     dot = vectordot(aim_vector, target_vector);
     if(dot > 0.9999) {
@@ -746,7 +746,7 @@ chandelier() {
   }
 
   if(isDefined(self.wire.target)) {
-    ceiling_struct = getstruct(self.wire.target, "targetname");
+    ceiling_struct = getStruct(self.wire.target, "targetname");
     ceiling = ceiling_struct.origin;
   } else
     ceiling = PhysicsTrace(self.origin, self.origin + (0, 0, 80));
@@ -754,8 +754,8 @@ chandelier() {
   self.swing_origin = spawn("script_origin", ceiling);
   self.swing = false;
 
-  self linkto(self.swing_origin);
-  self.wire linkto(self.swing_origin);
+  self linkTo(self.swing_origin);
+  self.wire linkTo(self.swing_origin);
   self thread chandelier_link_light();
 
   self.light SetLightIntensity(1.5);
@@ -793,22 +793,22 @@ chandelier_swing(damage, direction_vec) {
   angle = 75 * multiplier;
   swing_speed = 0.4;
 
-  weight_vector = vectornormalize((direction_vec[0] * -1, direction_vec[1], 0));
+  weight_vector = vectorNormalize((direction_vec[0] * -1, direction_vec[1], 0));
   rotation = (angle * weight_vector[0], 0, angle * weight_vector[1]);
 
-  self.swing_origin rotateto(rotation, swing_speed, 0, swing_speed);
+  self.swing_origin rotateTo(rotation, swing_speed, 0, swing_speed);
   self.swing_origin waittill("rotatedone");
 
   while(abs(angle) > 2) {
     angle *= -0.75;
     rotation = (angle * weight_vector[0], 0, angle * weight_vector[1]);
 
-    self.swing_origin rotateto(rotation, swing_speed * 2, swing_speed, swing_speed);
+    self.swing_origin rotateTo(rotation, swing_speed * 2, swing_speed, swing_speed);
     self.swing_origin waittill("rotatedone");
     self notify("chandelier_turn");
   }
 
-  self.swing_origin rotateto((0, 0, 0), swing_speed * 2, swing_speed, swing_speed);
+  self.swing_origin rotateTo((0, 0, 0), swing_speed * 2, swing_speed, swing_speed);
   self.swing_origin waittill("rotatedone");
   self.swing = false;
   self notify("chandelier_turn");
@@ -860,7 +860,7 @@ chandelier_link_light() {
   self endon("chandelier_fall");
 
   self.light_origin = spawn("script_origin", self.light.origin);
-  self.light_origin linkto(self);
+  self.light_origin linkTo(self);
 
   while(true) {
     self waittill("chandelier_swing");
@@ -893,8 +893,8 @@ chandelier_force_swing(damage, direction_vec) {
 player_attached_use(hintstring) {
   ent = spawn("script_origin", level.player.origin + (0, 0, 32));
   ent makeusable();
-  ent sethintstring(hintstring);
-  ent linkto(level.player);
+  ent setHintString(hintstring);
+  ent linkTo(level.player);
 
   level thread set_flag_on_trigger(ent, "remove_use_hint");
   flag_wait("remove_use_hint");

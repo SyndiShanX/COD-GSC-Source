@@ -302,7 +302,7 @@ missilewatchproximity(var_0, var_1, var_2) {
           level thread handleflarestimer(var_2, var_7, var_3);
         }
 
-        self missile_settargetent(var_7);
+        self missile_settargetEnt(var_7);
         return;
       }
     }
@@ -332,11 +332,11 @@ deployflares(var_0) {
 
 vehiclemodifyflarevector(var_0) {
   if(self.vehicletype == "warbird") {
-    return vectornormalize(var_0 + (0, 0, -0.2)) * 300;
+    return vectorNormalize(var_0 + (0, 0, -0.2)) * 300;
   } else if(self.vehicletype == "paladin") {
-    return vectornormalize(var_0 + (0, 0, -0.5)) * 2000;
+    return vectorNormalize(var_0 + (0, 0, -0.5)) * 2000;
   } else {
-    return vectornormalize(var_0 + (0, 0, -0.4)) * 1000;
+    return vectorNormalize(var_0 + (0, 0, -0.4)) * 1000;
   }
 }
 
@@ -392,8 +392,8 @@ doproximityalarm(var_0, var_1) {
 }
 
 playerfakeshootpaintmissile(var_0) {
-  var_1 = vectornormalize(anglesToForward(self getplayerangles()));
-  var_2 = vectornormalize(anglestoright(self getplayerangles()));
+  var_1 = vectorNormalize(anglesToForward(self getplayerangles()));
+  var_2 = vectorNormalize(anglestoright(self getplayerangles()));
   var_3 = self getEye() + var_1 * 100;
   var_4 = var_3 + var_1 * 20000;
   var_5 = bulletTrace(var_3, var_4, 0);
@@ -413,24 +413,24 @@ playerfakeshootpaintmissile(var_0) {
 playerfakeshootpaintgrenadeattarget(var_0, var_1, var_2, var_3, var_4) {
   var_5 = 5000;
   earthquake(0.2, 1, self getvieworigin(), 300);
-  var_6 = vectornormalize(var_2 - var_1);
+  var_6 = vectorNormalize(var_2 - var_1);
   var_7 = var_6 * var_5;
   var_8 = magicgrenademanual("paint_grenade_killstreak_mp", var_1, var_7, 2, self);
   var_8.owner = self;
   var_8 thread watchpaintgrenade(var_3, var_4);
   thread playerfiresounds(var_0, "recon_drn_launcher_shot_plr", "recon_drn_launcher_shot_npc");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 playerfakeshootempgrenadeattarget(var_0, var_1, var_2) {
   var_3 = 5000;
   earthquake(0.2, 1, self getvieworigin(), 300);
-  var_4 = vectornormalize(var_2 - var_1);
+  var_4 = vectorNormalize(var_2 - var_1);
   var_5 = var_4 * var_3;
   var_6 = magicgrenademanual("emp_grenade_killstreak_mp", var_1, var_5, 2, self);
   var_6.owner = self;
   thread playerfiresounds(var_0, "recon_drn_launcher_shot_plr", "recon_drn_launcher_shot_npc");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 playerfiresounds(var_0, var_1, var_2) {
@@ -505,7 +505,7 @@ detectiongrenadewatch(var_0, var_1) {
       var_0 thread maps\mp\_events::killstreaktagevent();
     }
 
-    var_0 playrumbleonentity("damage_heavy");
+    var_0 playRumbleOnEntity("damage_heavy");
   }
 
   if(!isagent(self)) {
@@ -1003,13 +1003,13 @@ playershowstreakstaticforrange(var_0) {
 }
 
 getentorstruct(var_0, var_1) {
-  var_2 = getent(var_0, var_1);
+  var_2 = getEnt(var_0, var_1);
 
   if(isDefined(var_2)) {
     return var_2;
   }
 
-  return common_scripts\utility::getstruct(var_0, var_1);
+  return common_scripts\utility::getStruct(var_0, var_1);
 }
 
 getentorstructarray(var_0, var_1) {

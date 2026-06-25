@@ -184,17 +184,17 @@ warpalltohost(team) {
     }
 
     if(isDefined(spawn_origin)) {
-      players[i] setorigin(spawn_origin);
+      players[i] setOrigin(spawn_origin);
       continue;
     }
 
     if(nodes.size > 0) {
       node = random(nodes);
-      players[i] setorigin(node.origin);
+      players[i] setOrigin(node.origin);
       continue;
     }
 
-    players[i] setorigin(origin);
+    players[i] setOrigin(origin);
   }
 
   setDvar("scr_playerwarp", "");
@@ -258,7 +258,7 @@ updatedevsettingszm() {
         }
 
         level.players[0] setplayerangles(averageangles);
-        level.players[0] setorigin(averageorigin);
+        level.players[0] setOrigin(averageorigin);
         wait 0.05;
         setDvar("r_streamDumpDistance", "2");
       }
@@ -331,7 +331,7 @@ updatedevsettings() {
         return;
       }
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_start_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_start_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_start_spawn_index].angles);
       }
 
@@ -355,7 +355,7 @@ updatedevsettings() {
         return;
       }
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_start_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_start_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_start_spawn_index].angles);
       }
 
@@ -379,7 +379,7 @@ updatedevsettings() {
         return;
       }
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_spawn_index].angles);
       }
 
@@ -403,7 +403,7 @@ updatedevsettings() {
         return;
       }
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_spawn_index].angles);
       }
 
@@ -602,7 +602,7 @@ updatedevsettings() {
         }
 
         level.players[0] setplayerangles(averageangles);
-        level.players[0] setorigin(averageorigin);
+        level.players[0] setOrigin(averageorigin);
         wait 0.05;
         setDvar("r_streamDumpDistance", "2");
       }
@@ -1134,10 +1134,10 @@ drawminimapbounds(viewpos, mincorner, maxcorner) {
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   diaglen = length(mincorner - maxcorner);
   mincorneroffset = mincorner - viewpos;
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800);
   maxcorneroffset = maxcorner - viewpos;
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800);
   diagonal = maxcorner - mincorner;
   side = vecscale(north, vectordot(diagonal, north));
@@ -2035,7 +2035,7 @@ larry_ai_thread(larry, origin, angles) {
     larry.menu[larry.menu_hitloc] settext("");
     larry.menu[larry.menu_weapon] settext("");
     larry.menu[larry.menu_perks] settext("");
-    self setorigin(origin);
+    self setOrigin(origin);
     self setplayerangles(angles);
     self clearperks();
   }
@@ -2431,7 +2431,7 @@ force_grenade_throw(weapon) {
   angles = host getplayerangles();
   angles = (0, angles[1], 0);
   dir = anglesToForward(angles);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   origin = host getEye() + vectorscale(dir, 256);
   velocity = vectorscale(dir, -1024);
   grenade = bot magicgrenade(weapon, origin, velocity);
@@ -2777,7 +2777,7 @@ drawpath(linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endon
   entfirsttarget = ent.targetname;
 
   while(isDefined(ent.target)) {
-    enttarget = getent(ent.target, "targetname");
+    enttarget = getEnt(ent.target, "targetname");
     ent thread drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endonmsg);
 
     if(ent.targetname == "heli_loop_start") {

@@ -25,7 +25,7 @@ function private preinit() {
 function private on_begin(var_49d0b42a, var_d2d5c522, var_17d04dfe, var_6a68f1d6) {
   n_variant = getgametypesetting(#"zmtrialsvariant");
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       level.var_88bac0b7 = zm_trial::function_5769f26a(var_49d0b42a);
       level.var_e34a018e = level.var_88bac0b7 + (n_variant ? 15 : 15);

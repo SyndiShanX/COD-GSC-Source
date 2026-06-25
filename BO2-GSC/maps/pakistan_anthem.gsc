@@ -58,7 +58,7 @@ crosby_behavior() {
   self endon("death");
   self.animname = "crosby";
   self setgoalpos(self.origin);
-  e_target = getent("grapple_target", "targetname");
+  e_target = getEnt("grapple_target", "targetname");
   self thread aim_at_target(e_target);
 }
 
@@ -89,14 +89,14 @@ monitor_player_weaponfire() {
   self endon("death");
   self waittill_any("damage", "bulletwhizby", "grenade_fire", "pain", "alert_drones");
   flag_set("alert_drones");
-  self stopanimscripted(1);
+  self stopanimScripted(1);
   self set_ignoreall(0);
 }
 
 courtyard_guards_alerted() {
   self endon("death");
   flag_wait("alert_drones");
-  self stopanimscripted(1);
+  self stopanimScripted(1);
   self set_ignoreall(0);
 }
 
@@ -117,14 +117,14 @@ courtyard_logic() {
   self endon("death");
   self set_ignoreall(1);
   self set_ignoreme(1);
-  self set_goalradius(8);
+  self set_goalRadius(8);
 }
 
 btr_scene_spawn_func() {
   scene_wait("courtyard_btr_entrance");
   self set_ignoreme(1);
   self set_ignoreall(1);
-  self set_goalradius(8);
+  self set_goalRadius(8);
   self waittill("goal");
   self delete();
 }
@@ -135,7 +135,7 @@ courtyard_btrs() {
   a_start_nodes = [];
 
   for(i = 1; i < 5; i++) {
-    a_s_spawnpts[i] = getstruct("courtyard_btr_spawnpt" + i, "targetname");
+    a_s_spawnpts[i] = getStruct("courtyard_btr_spawnpt" + i, "targetname");
   }
 
   for(i = 1; i < 5; i++) {
@@ -159,7 +159,7 @@ courtyard_btr_logic() {
   level.a_vh_btrs[2] headlights_on();
   wait 0.3;
   level.a_vh_btrs[4] headlights_on();
-  playsoundatposition("amb_anthem_btr_multiples", (-19497, 40017, 659));
+  playSoundAtPosition("amb_anthem_btr_multiples", (-19497, 40017, 659));
 
   for(i = 1; i < 5; i++) {
     level.a_vh_btrs[i] pathfixedoffset((0, randomfloatrange(-24, 24), 0));
@@ -214,10 +214,10 @@ vtol_spawn_func() {
   vtol_launch_ent = spawn("script_origin", self.origin);
   vtol_launch_ent playSound("evt_launch_sweet");
   vtol_launch_ent playLoopSound("evt_launch_up");
-  s_goal1 = getstruct("vtol_goal1", "targetname");
-  s_goal2 = getstruct("vtol_goal2", "targetname");
-  s_goal3 = getstruct("vtol_goal3", "targetname");
-  s_goal4 = getstruct("vtol_goal4", "targetname");
+  s_goal1 = getStruct("vtol_goal1", "targetname");
+  s_goal2 = getStruct("vtol_goal2", "targetname");
+  s_goal3 = getStruct("vtol_goal3", "targetname");
+  s_goal4 = getStruct("vtol_goal4", "targetname");
   self veh_toggle_exhaust_fx(1);
   self veh_toggle_tread_fx(1);
   self lights_on();
@@ -260,17 +260,17 @@ anthem_objectives() {
   set_objective(level.obj_get_to_base, undefined, undefined, undefined, 0);
   set_objective(level.obj_get_to_base, undefined, "done", undefined, 0);
   flag_wait("anthem_grapple_idle_body_started");
-  set_objective(level.obj_grapple, getent("grapple_anchor", "targetname"), "target");
+  set_objective(level.obj_grapple, getEnt("grapple_anchor", "targetname"), "target");
   flag_wait("delete_rope_harper");
   wait 2;
-  set_objective(level.obj_grapple, getent("grapple_anchor", "targetname"), "remove");
+  set_objective(level.obj_grapple, getEnt("grapple_anchor", "targetname"), "remove");
   set_objective(level.obj_grapple, undefined, "done");
   set_objective(level.obj_grapple, undefined, "delete");
   flag_wait("spawn_rooftop_guard");
   wait 1;
-  set_objective(level.obj_id_menendez, getent("id_melee_guard_ai", "targetname"), "");
+  set_objective(level.obj_id_menendez, getEnt("id_melee_guard_ai", "targetname"), "");
   flag_wait_any("id_melee_success_started", "rooftop_clear");
-  set_objective(level.obj_id_menendez, getent("id_melee_guard_ai", "targetname"), "remove");
+  set_objective(level.obj_id_menendez, getEnt("id_melee_guard_ai", "targetname"), "remove");
   flag_wait("anthem_facial_recognition_complete");
   set_objective(level.obj_id_menendez, undefined, "done");
   wait 1;
@@ -281,16 +281,16 @@ anthem_objectives() {
   set_objective(level.obj_reacquire, level.harper, "follow");
   flag_wait("rooftop_meeting_convoy_start");
   set_objective(level.obj_reacquire, level.harper, "remove");
-  set_objective(level.obj_reacquire, getstruct("railyard_melee_objective_marker", "targetname"), "breadcrumb");
+  set_objective(level.obj_reacquire, getStruct("railyard_melee_objective_marker", "targetname"), "breadcrumb");
   flag_wait("trigger_jump_down");
-  set_objective(level.obj_reacquire, getstruct("railyard_melee_objective_marker", "targetname"), "remove");
+  set_objective(level.obj_reacquire, getStruct("railyard_melee_objective_marker", "targetname"), "remove");
   flag_wait("trainyard_melee_finished");
   set_objective(level.obj_reacquire, level.harper, "follow");
   flag_wait("trainyard_melee_harper_door_idle_started");
   set_objective(level.obj_reacquire, level.harper, "remove");
-  set_objective(level.obj_reacquire, getstruct("railyard_drone_meeting_obj_marker", "targetname"), "breadcrumb");
+  set_objective(level.obj_reacquire, getStruct("railyard_drone_meeting_obj_marker", "targetname"), "breadcrumb");
   flag_wait("trainyard_drone_meeting_started");
-  set_objective(level.obj_reacquire, getstruct("railyard_drone_meeting_obj_marker", "targetname"), "remove");
+  set_objective(level.obj_reacquire, getStruct("railyard_drone_meeting_obj_marker", "targetname"), "remove");
   set_objective(level.obj_reacquire, undefined, "done");
   set_objective(level.obj_reacquire, undefined, "delete");
   set_objective(level.obj_record_menendez, undefined, "delete");
@@ -300,9 +300,9 @@ anthem_objectives() {
   set_objective(level.obj_reacquire_again, level.harper, "follow");
   flag_wait("trainyard_drone_meeting_harper_exit_done");
   set_objective(level.obj_reacquire_again, level.harper, "remove");
-  set_objective(level.obj_reacquire_again, getstruct("railyard_millibar_meeting_obj_marker", "targetname"), "breadcrumb");
+  set_objective(level.obj_reacquire_again, getStruct("railyard_millibar_meeting_obj_marker", "targetname"), "breadcrumb");
   flag_wait("railyard_player_millibar_start");
-  set_objective(level.obj_reacquire_again, getstruct("railyard_millibar_meeting_obj_marker", "targetname"), "remove");
+  set_objective(level.obj_reacquire_again, getStruct("railyard_millibar_meeting_obj_marker", "targetname"), "remove");
   set_objective(level.obj_reacquire_again, undefined, "done");
   set_objective(level.obj_reacquire_again, undefined, "delete");
   flag_wait("trainyard_millibar_grenades_warp_done");
@@ -317,7 +317,7 @@ anthem_objectives() {
   set_objective(level.obj_clear_railyard, undefined, "done");
   set_objective(level.obj_clear_railyard, undefined, "delete");
   wait 3;
-  set_objective(level.obj_escape, getstruct("soct_mount_objective_marker", "targetname"), "enter");
+  set_objective(level.obj_escape, getStruct("soct_mount_objective_marker", "targetname"), "enter");
   flag_wait("mount_soct_player_started");
   set_objective(level.obj_escape, undefined, "done");
 }
@@ -358,16 +358,16 @@ argus_disable() {
 
 setup_doors() {
   foreach(e_door in getEntArray("animated_door", "script_noteworthy")) {
-    getent(e_door.target, "targetname") linkto(e_door, "door_hinge_jnt");
+    getEnt(e_door.target, "targetname") linkTo(e_door, "door_hinge_jnt");
   }
 
   run_scene_first_frame("rooftop_entrance_open");
   run_scene_first_frame("tower_chair");
   run_scene_first_frame("rooftop_exit_open");
   run_scene_first_frame("trainyard_melee_door_door_open");
-  e_door = getent("drone_entrance", "targetname");
+  e_door = getEnt("drone_entrance", "targetname");
   e_door notsolid();
-  e_door_clip = getent("drone_entrance_collision", "targetname");
+  e_door_clip = getEnt("drone_entrance_collision", "targetname");
   e_door_clip notsolid();
 }
 
@@ -404,7 +404,7 @@ wall_grapple_event() {
   }
 
   screen_message_create(&"PAKISTAN_SHARED_GRENADE_GRAPPLE");
-  e_grapple_target = getent("grapple_target", "targetname");
+  e_grapple_target = getEnt("grapple_target", "targetname");
 
   while(!level.player fragButtonPressed()) {
     wait 0.05;
@@ -419,7 +419,7 @@ wall_grapple_event() {
     remove_visor_text("PAKISTAN_SHARED_GRAPPLE_SCAN");
     remove_visor_text("PAKISTAN_SHARED_GRAPPLE_LOCATED");
     remove_visor_text("PAKISTAN_SHARED_GRAPPLE_STANDBY");
-    level.player playrumbleonentity("pistol_fire");
+    level.player playRumbleOnEntity("pistol_fire");
 
     if(getdvarint(#"cg_BallisticArc_ForceHitIndicator")) {
       break;
@@ -447,7 +447,7 @@ wall_grapple_event() {
   level thread take_train_car();
   level thread run_courtyard_scenes();
   level thread vo_pa_announcement();
-  t_dmg = getent("trigger_dmg_start", "targetname");
+  t_dmg = getEnt("trigger_dmg_start", "targetname");
   t_dmg trigger_on();
   level.player thread waterdrops_on_visor();
   wait 0.05;
@@ -480,7 +480,7 @@ grapple_hud_text() {
 
 check_grapple_target() {
   level endon("anthem_player_grapple_started");
-  e_grapple_target = getent("grapple_anchor", "targetname");
+  e_grapple_target = getEnt("grapple_anchor", "targetname");
   n_angle = 8;
 
   while(true) {
@@ -583,7 +583,7 @@ grapple_rope(e_grenade) {
   start = level.player getweaponmuzzlepoint();
   forward = level.player getweaponforwarddir();
   end = start + forward * 8000;
-  s_grapple_point = getstruct("anthem_grapple_point");
+  s_grapple_point = getStruct("anthem_grapple_point");
   len = distance(start, s_grapple_point.origin);
 
   if(len > 400) {
@@ -595,7 +595,7 @@ grapple_rope(e_grenade) {
   ropesetparam(rope_id, "width", 0.2);
   e_grenade waittill("death");
   v_player_offset = vectorscale((0, -1, 0), 24.0);
-  playsoundatposition("evt_grapple_gun_imp", s_grapple_point.origin);
+  playSoundAtPosition("evt_grapple_gun_imp", s_grapple_point.origin);
   level thread grapple_rope_run(rope_id, s_grapple_point.origin);
 }
 
@@ -637,11 +637,11 @@ rumble_player() {
   self stoprumble("rappel_falling");
   stop_exploder(501);
   wait 0.5;
-  self playrumbleonentity("shotgun_fire");
+  self playRumbleOnEntity("shotgun_fire");
 }
 
 pregrappel_drone_flyby() {
-  s_spawnpt = getstruct("pregrappel_drone_spawnpt");
+  s_spawnpt = getStruct("pregrappel_drone_spawnpt");
   vh_osprey = spawn_vehicle_from_targetname("isi_osprey");
   vh_osprey.origin = s_spawnpt.origin;
   vh_osprey.angles = s_spawnpt.angles;
@@ -676,7 +676,7 @@ pregrappel_osprey_flyby() {
 pregrappel_drone_flyby_logic() {
   e_spotlight_target = spawn("script_model", self.origin);
   e_spotlight_target setModel("tag_origin");
-  e_spotlight_target linkto(self, "tag_origin");
+  e_spotlight_target linkTo(self, "tag_origin");
   self setforcenocull();
   self set_turret_target(e_spotlight_target, anglesToForward(self.angles) * 800 + vectorscale((0, 0, -1), 500.0), 0);
   wait 0.5;
@@ -695,18 +695,18 @@ pregrappel_drone_flyby_logic() {
 }
 
 wall_climb_drone() {
-  s_spawnpt = getstruct("grapple_drone_spawnpt");
-  s_goal1 = getstruct("grapple_drone_goal1");
-  s_goal2 = getstruct("grapple_drone_goal2");
-  s_goal3 = getstruct("grapple_drone_goal3");
-  s_goal4 = getstruct("grapple_drone_goal4");
+  s_spawnpt = getStruct("grapple_drone_spawnpt");
+  s_goal1 = getStruct("grapple_drone_goal1");
+  s_goal2 = getStruct("grapple_drone_goal2");
+  s_goal3 = getStruct("grapple_drone_goal3");
+  s_goal4 = getStruct("grapple_drone_goal4");
   wait 4;
   vh_drone = spawn_vehicle_from_targetname("isi_drone");
   vh_drone.origin = s_spawnpt.origin;
   vh_drone.angles = s_spawnpt.angles;
   e_spotlight_target = spawn("script_model", vh_drone.origin + anglesToForward(vh_drone.angles) * 500);
   e_spotlight_target setModel("tag_origin");
-  e_spotlight_target linkto(vh_drone, "tag_origin", vectorscale((0, 0, -1), 500.0));
+  e_spotlight_target linkTo(vh_drone, "tag_origin", vectorscale((0, 0, -1), 500.0));
   vh_drone set_turret_target(e_spotlight_target, anglesToForward(vh_drone.angles) * 800 + vectorscale((0, 0, -1), 500.0), 0);
   vh_drone play_fx("drone_spotlight_cheap", vh_drone gettagorigin("tag_spotlight"), vh_drone gettagangles("tag_spotlight"), "kill_spotlight", 1, "tag_spotlight");
   vh_drone setneargoalnotifydist(300);
@@ -730,10 +730,10 @@ wall_climb_drone() {
 
 grapple_drone_flyby() {
   vh_drone = spawn_vehicle_from_targetname("grapple_flyby_drone");
-  e_spotlight_target = getent("grapple_flyby_spotlight_target", "targetname");
-  e_salazar_spotlight_start = getent("grapple_salazar_spotlight_target", "targetname");
+  e_spotlight_target = getEnt("grapple_flyby_spotlight_target", "targetname");
+  e_salazar_spotlight_start = getEnt("grapple_salazar_spotlight_target", "targetname");
   vh_drone play_fx("drone_spotlight_cheap", vh_drone gettagorigin("tag_spotlight"), vh_drone gettagangles("tag_spotlight"), "kill_spotlight", 1, "tag_spotlight");
-  e_spotlight_target linkto(vh_drone, "tag_origin");
+  e_spotlight_target linkTo(vh_drone, "tag_origin");
   vh_drone set_turret_target(e_spotlight_target, undefined, 0);
   flag_wait("delete_rope_harper");
   level clientnotify("clck");
@@ -756,7 +756,7 @@ grapple_drone_flyby() {
 }
 
 ground_drone_landing() {
-  s_spawnpt = getstruct("anthem_drone_landing_end", "targetname");
+  s_spawnpt = getStruct("anthem_drone_landing_end", "targetname");
   vh_drone = spawn_vehicle_from_targetname("anthem_courtyard_drone_ground");
   vh_drone.origin = s_spawnpt.origin;
   vh_drone.angles = s_spawnpt.angles;
@@ -794,10 +794,10 @@ vehicles_rollout() {
 }
 
 drone_searchlight() {
-  e_spotlight_target = getent("anthem_ground_drone_spotlight_target", "targetname");
+  e_spotlight_target = getEnt("anthem_ground_drone_spotlight_target", "targetname");
   self play_fx("drone_spotlight_cheap", self gettagorigin("tag_spotlight"), self gettagangles("tag_spotlight"), "spotlight_off", 1, "tag_spotlight");
   self set_turret_target(e_spotlight_target, anglesToForward(self.angles) * 800 + vectorscale((0, 0, -1), 500.0), 0);
-  e_spotlight_target linkto(self, "tag_origin");
+  e_spotlight_target linkTo(self, "tag_origin");
 }
 
 #using_animtree("animated_props");
@@ -826,7 +826,7 @@ ambient_drone_start(n_drone) {
   vh_drone.origin = nd_start.origin;
   e_spotlight_target = spawn("script_model", vh_drone.origin);
   e_spotlight_target setModel("tag_origin");
-  e_spotlight_target linkto(vh_drone, "tag_origin");
+  e_spotlight_target linkTo(vh_drone, "tag_origin");
   vh_drone setforcenocull();
   vh_drone set_turret_target(e_spotlight_target, anglesToForward(vh_drone.angles) * 800 + vectorscale((0, 0, -1), 500.0), 0);
   vh_drone play_fx("drone_spotlight_cheap", vh_drone gettagorigin("tag_spotlight"), vh_drone gettagangles("tag_spotlight"), "spotlight_off", 1, "tag_spotlight");
@@ -915,15 +915,15 @@ setup_menendez_and_crew() {
   level.militia_leader set_run_anim("militia_leader_walk");
 
   if(level.str_align_menendez == "menendez_align_1") {
-    s_pos = getstruct("menendez_startpos_1", "targetname");
+    s_pos = getStruct("menendez_startpos_1", "targetname");
     level.menendez forceteleport(s_pos.origin, s_pos.angles);
     level.militia_leader forceteleport(s_pos.origin + vectorscale((-1, 0, 0), 100.0), s_pos.angles);
   } else if(level.str_align_menendez == "menendez_align_2") {
-    s_pos = getstruct("menendez_startpos_2", "targetname");
+    s_pos = getStruct("menendez_startpos_2", "targetname");
     level.menendez forceteleport(s_pos.origin, s_pos.angles);
     level.militia_leader forceteleport(s_pos.origin + vectorscale((-1, 0, 0), 100.0), s_pos.angles);
   } else {
-    s_pos = getstruct("menendez_startpos_3", "targetname");
+    s_pos = getStruct("menendez_startpos_3", "targetname");
     level.menendez forceteleport(s_pos.origin, s_pos.angles);
     level.militia_leader forceteleport(s_pos.origin + (-50, -100, 0), s_pos.angles);
   }
@@ -938,7 +938,7 @@ setup_menendez_and_crew() {
   level thread run_scene("confirm_menendez_crew_idle");
   level thread run_scene("confirm_menendez_militia_idle");
   flag_wait("confirm_menendez_crew_done");
-  s_stairs = getstruct("menendez_stairs", "targetname");
+  s_stairs = getStruct("menendez_stairs", "targetname");
   level.menendez.goalradius = 16;
   level.menendez setgoalpos(s_stairs.origin + vectorscale((1, 0, 0), 100.0));
   level.militia_leader.goalradius = 16;
@@ -946,8 +946,8 @@ setup_menendez_and_crew() {
   level.menendez thread hide_ai_until_bridgewalk();
   level.militia_leader thread hide_ai_until_bridgewalk();
   flag_wait("show_menendez_bridge");
-  s_menendez = getstruct("menendez_bridge", "targetname");
-  s_militia_leader = getstruct("militia_leader_bridge", "targetname");
+  s_menendez = getStruct("menendez_bridge", "targetname");
+  s_militia_leader = getStruct("militia_leader_bridge", "targetname");
   level.menendez forceteleport(s_menendez.origin, s_menendez.angles);
   level.militia_leader forceteleport(s_militia_leader.origin, s_militia_leader.angles);
 }
@@ -992,19 +992,19 @@ hide_ai_until_bridgewalk() {
 take_train_car() {
   level thread ambient_drone_start(1);
   train_cars = getEntArray("courtyard_train_cars", "targetname");
-  script_car = getent("courtyard_cin_train", "targetname");
-  engine = getent("courtyard_train_engine", "targetname");
+  script_car = getEnt("courtyard_cin_train", "targetname");
+  engine = getEnt("courtyard_train_engine", "targetname");
   engine playSound("evt_anthem_train_hookup");
-  engine moveto((-20540, 39160, 515.5), 10, 0, 5);
+  engine moveTo((-20540, 39160, 515.5), 10, 0, 5);
   engine waittill("movedone");
-  script_car linkto(engine);
+  script_car linkTo(engine);
 
   for(i = 0; i < train_cars.size; i++) {
-    train_cars[i] linkto(engine);
+    train_cars[i] linkTo(engine);
   }
 
   level thread courtyard_btr_logic();
-  playsoundatposition("evt_anthem_train_depart", engine.origin);
+  playSoundAtPosition("evt_anthem_train_depart", engine.origin);
   engine movey(-6000, 30, 5, 0);
   engine waittill("movedone");
   engine delete();
@@ -1032,7 +1032,7 @@ id_melee() {
   level thread id_melee_guards_alerted();
   level thread guard_alerted_by_touch();
   level thread alerted_by_gunfire();
-  t_melee = getent("id_melee_trigger", "targetname");
+  t_melee = getEnt("id_melee_trigger", "targetname");
 
   while(!flag("rooftop_melee")) {
     trigger_wait("id_melee_trigger");
@@ -1065,13 +1065,13 @@ id_melee_success() {
   wait 0.5;
   ai_guard = get_ais_from_scene("id_melee_approach_idle_guard", "id_melee_guard2");
   ai_guard gun_remove();
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   wait 1.5;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1;
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 }
 
 id_melee_fail() {
@@ -1162,7 +1162,7 @@ alerted_by_gunfire() {
 id_melee_approach(str_anim, str_idle) {
   run_scene(str_anim);
 
-  if(isalive(getent("id_melee_guard_ai", "targetname"))) {
+  if(isalive(getEnt("id_melee_guard_ai", "targetname"))) {
     run_scene(str_idle);
   }
 }
@@ -1179,8 +1179,8 @@ spawn_courtyard_runners() {
 }
 
 confirm_menendez_gaz_driveaway() {
-  veh_gaz = getent("confirm_menendez_gaz", "targetname");
-  sp_guy = getent("confirm_menendez_soldiers", "targetname");
+  veh_gaz = getEnt("confirm_menendez_gaz", "targetname");
+  sp_guy = getEnt("confirm_menendez_soldiers", "targetname");
   level thread gaz_tigers_go();
   guy2 = sp_guy spawn_ai(1);
   guy2.animname = "generic";
@@ -1205,12 +1205,12 @@ confirm_menendez_gaz_driveaway() {
 
 gaz_tigers_go() {
   wait 6;
-  vh_gaz1 = getent("courtyard_gaz_1", "targetname");
-  vh_gaz2 = getent("courtyard_gaz_2", "targetname");
-  ai_guy0 = getent("anthem_courtyard_soldiers0_ai", "targetname");
-  ai_guy1 = getent("anthem_courtyard_soldiers1_ai", "targetname");
-  ai_guy2 = getent("anthem_courtyard_soldiers2_ai", "targetname");
-  ai_guy3 = getent("anthem_courtyard_soldiers3_ai", "targetname");
+  vh_gaz1 = getEnt("courtyard_gaz_1", "targetname");
+  vh_gaz2 = getEnt("courtyard_gaz_2", "targetname");
+  ai_guy0 = getEnt("anthem_courtyard_soldiers0_ai", "targetname");
+  ai_guy1 = getEnt("anthem_courtyard_soldiers1_ai", "targetname");
+  ai_guy2 = getEnt("anthem_courtyard_soldiers2_ai", "targetname");
+  ai_guy3 = getEnt("anthem_courtyard_soldiers3_ai", "targetname");
   ai_guy0.animname = "generic";
   ai_guy0 set_run_anim("combat_jog");
   ai_guy0 thread run_to_vehicle_load(vh_gaz1, 0, "tag_driver");
@@ -1301,8 +1301,8 @@ menendez_crew_pathing() {
   level thread run_scene("militia_leader_path3");
   level thread run_scene("menendez_path3");
   flag_wait("menendez_path3_done");
-  s_menendez_end = getstruct("menendez_bridge_end", "targetname");
-  s_militia_leader_end = getstruct("militia_leader_bridge_end", "targetname");
+  s_menendez_end = getStruct("menendez_bridge_end", "targetname");
+  s_militia_leader_end = getStruct("militia_leader_bridge_end", "targetname");
   level.militia_leader setgoalpos(s_militia_leader_end.origin);
   level.militia_leader set_ignoreall(1);
   level.menendez setgoalpos(s_menendez_end.origin);
@@ -1325,17 +1325,17 @@ surveillance_mark_menendez() {
 
 dropdown_drone() {
   flag_wait("player_jumpdown_ac");
-  level.player playrumbleonentity("damage_light");
-  s_spawnpt = getstruct("dropdown_drone_spawnpt");
-  s_goal1 = getstruct("dropdown_drone_goal1");
-  s_goal2 = getstruct("dropdown_drone_goal2");
-  s_goal3 = getstruct("dropdown_drone_goal3");
-  s_goal4 = getstruct("dropdown_drone_goal4");
-  s_goal5 = getstruct("dropdown_drone_goal5");
+  level.player playRumbleOnEntity("damage_light");
+  s_spawnpt = getStruct("dropdown_drone_spawnpt");
+  s_goal1 = getStruct("dropdown_drone_goal1");
+  s_goal2 = getStruct("dropdown_drone_goal2");
+  s_goal3 = getStruct("dropdown_drone_goal3");
+  s_goal4 = getStruct("dropdown_drone_goal4");
+  s_goal5 = getStruct("dropdown_drone_goal5");
   vh_drone = spawn_vehicle_from_targetname("isi_drone");
   vh_drone.origin = s_spawnpt.origin;
   vh_drone.angles = s_spawnpt.angles;
-  e_spotlight_target = getent("isi_vtol", "targetname");
+  e_spotlight_target = getEnt("isi_vtol", "targetname");
   vh_drone set_turret_target(e_spotlight_target, undefined, 0);
   vh_drone setneargoalnotifydist(300);
   vh_drone setspeed(25, 20, 10);
@@ -1365,7 +1365,7 @@ dropdown_drone() {
 drop_down_invulnerability_think() {
   trigger_wait("drop_invuln_trigger");
   level.player enableinvulnerability();
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   level thread run_scene("rooftop_meeting_idle");
   level thread run_scene("rooftop_meeting_talkers_idle");
   level thread run_scene("rooftop_meeting_soldiers2_idle");
@@ -1399,11 +1399,11 @@ menendez_surveillance_bypass_fail() {
 }
 
 fake_spotlight_movement() {
-  e_spotlight = getent("fake_spotlight", "targetname");
+  e_spotlight = getEnt("fake_spotlight", "targetname");
   e_spotlight setforcenocull();
-  e_target = spawn("script_origin", getent("fake_search_path1", "targetname").origin);
+  e_target = spawn("script_origin", getEnt("fake_search_path1", "targetname").origin);
   e_spotlight play_fx("big_spotlight_cheap", e_spotlight gettagorigin("tag_flash"), e_spotlight gettagangles("tag_flash"), "kill_spotlight", 1, "tag_flash");
-  e_spotlight thread spotlight_search_path(getent("fake_search_path1", "targetname"), 512, 0, 0, e_target);
+  e_spotlight thread spotlight_search_path(getEnt("fake_search_path1", "targetname"), 512, 0, 0, e_target);
 }
 
 surveillance_harper_pathing() {
@@ -1445,7 +1445,7 @@ surveillance_harper_pathing() {
 }
 
 close_automatic_door() {
-  e_clip = getent("guard_entrance_clip", "targetname");
+  e_clip = getEnt("guard_entrance_clip", "targetname");
   e_clip trigger_off();
   trigger_wait("trigger_control_door");
   e_clip trigger_on();
@@ -1454,8 +1454,8 @@ close_automatic_door() {
 
 surveillance_spotlight_movement() {
   level endon("player_detected");
-  e_spotlight = getent("courtyard_spotlight", "targetname");
-  e_spotlight.spotlight_target = getent("spotlight_target_rooftop", "targetname");
+  e_spotlight = getEnt("courtyard_spotlight", "targetname");
+  e_spotlight.spotlight_target = getEnt("spotlight_target_rooftop", "targetname");
   e_spotlight setforcenocull();
   e_spotlight thread spotlight_on_player();
   e_spotlight thread spotlight_done();
@@ -1474,18 +1474,18 @@ surveillance_spotlight_movement() {
   e_spotlight notify("kill_spotlight");
   e_spotlight play_fx("big_spotlight_targeting", e_spotlight gettagorigin("tag_flash"), e_spotlight gettagangles("tag_flash"), "kill_spotlight", 1, "tag_flash");
   e_spotlight play_fx("spotlight_lens_flare", e_spotlight gettagorigin("tag_flash"), e_spotlight gettagangles("tag_flash"), "kill_spotlight", 1, "tag_flash");
-  e_spotlight.spotlight_target moveto((-17990, 40751, 960), 4);
+  e_spotlight.spotlight_target moveTo((-17990, 40751, 960), 4);
   e_spotlight.spotlight_target waittill("movedone");
   flag_wait("spawn_rooftop_guard");
   wait 3;
-  s_target1 = getstruct("spotlight_blocker1", "targetname");
-  s_target2 = getstruct("spotlight_blocker2", "targetname");
-  e_spotlight.spotlight_target moveto(s_target1.origin, 5);
+  s_target1 = getStruct("spotlight_blocker1", "targetname");
+  s_target2 = getStruct("spotlight_blocker2", "targetname");
+  e_spotlight.spotlight_target moveTo(s_target1.origin, 5);
   e_spotlight.spotlight_target waittill("movedone");
   e_spotlight.spotlight_target thread rooftop_blocker_logic();
 
   while(!flag("anthem_harper_vo_surveillance")) {
-    e_spotlight.spotlight_target moveto(s_target2.origin, 5);
+    e_spotlight.spotlight_target moveTo(s_target2.origin, 5);
     e_spotlight.spotlight_target waittill("movedone");
 
     if(flag("anthem_harper_vo_surveillance")) {
@@ -1493,7 +1493,7 @@ surveillance_spotlight_movement() {
     }
 
     wait 0.5;
-    e_spotlight.spotlight_target moveto(s_target1.origin, 5);
+    e_spotlight.spotlight_target moveTo(s_target1.origin, 5);
     e_spotlight.spotlight_target waittill("movedone");
 
     if(flag("anthem_harper_vo_surveillance")) {
@@ -1504,17 +1504,17 @@ surveillance_spotlight_movement() {
   }
 
   flag_set("searchlight_focus_off");
-  getent("spotlight_jump_down_wait", "targetname").target = undefined;
+  getEnt("spotlight_jump_down_wait", "targetname").target = undefined;
   e_spotlight notify("stop_searching");
-  e_rooftop_target = getent("surveillance_search_path2", "targetname");
-  e_spotlight.spotlight_target moveto(e_rooftop_target.origin, 3);
+  e_rooftop_target = getEnt("surveillance_search_path2", "targetname");
+  e_spotlight.spotlight_target moveTo(e_rooftop_target.origin, 3);
   e_spotlight.spotlight_target waittill("movedone");
   e_spotlight clear_turret_target(0);
   e_spotlight set_turret_target(e_rooftop_target, undefined, 0);
   e_rooftop_target thread rooftop_spotlight_target_move();
   flag_wait("player_dropdown_bridge");
   wait 3;
-  e_rooftop_target = getent("surveillance_search_path3", "targetname");
+  e_rooftop_target = getEnt("surveillance_search_path3", "targetname");
   e_spotlight set_turret_target(level.player, vectorscale((0, 0, 1), 100.0), 0);
   e_spotlight waittill("turret_on_target");
   level.player thread surveillance_prone_hint();
@@ -1523,12 +1523,12 @@ surveillance_spotlight_movement() {
   e_spotlight set_turret_target(e_rooftop_target, undefined, 0);
   e_rooftop_target thread spotlight_move_away();
   v_lightpos1 = e_rooftop_target.origin;
-  v_lightpos2 = getent(e_rooftop_target.target, "targetname").origin;
+  v_lightpos2 = getEnt(e_rooftop_target.target, "targetname").origin;
 
   while(!flag("anthem_harper_stand")) {
-    e_rooftop_target moveto(v_lightpos2, 6);
+    e_rooftop_target moveTo(v_lightpos2, 6);
     e_rooftop_target waittill("movedone");
-    e_rooftop_target moveto(v_lightpos1, 6);
+    e_rooftop_target moveTo(v_lightpos1, 6);
     e_rooftop_target waittill("movedone");
   }
 
@@ -1572,7 +1572,7 @@ spotlight_detection() {
     v_spotlight_origin = self gettagorigin("tag_flash");
     v_spotlight_angles = self gettagangles("tag_flash");
     v_player_trace_origin = level.player get_eye();
-    v_to_player = vectornormalize(v_player_trace_origin - v_spotlight_origin);
+    v_to_player = vectorNormalize(v_player_trace_origin - v_spotlight_origin);
     v_forward = anglesToForward(v_spotlight_angles);
     n_dot = vectordot(v_forward, v_to_player);
     n_sight_trace = level.player sightconetrace(v_spotlight_origin, self, v_forward, 10);
@@ -1616,7 +1616,7 @@ spotlight_done() {
 }
 
 rooftop_spotlight_target_move() {
-  e_spotlight = getent("courtyard_spotlight", "targetname");
+  e_spotlight = getEnt("courtyard_spotlight", "targetname");
   self thread detect_player_on_rooftop();
   self movex(-200, 2);
   self waittill("movedone");
@@ -1678,14 +1678,14 @@ spotlight_move_away() {
   flag_wait("anthem_harper_stand");
   self movey(1200, 7);
   flag_wait("harper_rooftop_door_close_done");
-  self moveto(getstruct("searchlight_control_tower", "targetname").origin, 3);
+  self moveTo(getStruct("searchlight_control_tower", "targetname").origin, 3);
   self waittill("movedone");
   level thread monitor_control_tower_fail();
 
   while(true) {
-    self moveto(getstruct("searchlight_control_tower2", "targetname").origin, 3);
+    self moveTo(getStruct("searchlight_control_tower2", "targetname").origin, 3);
     self waittill("movedone");
-    self moveto(getstruct("searchlight_control_tower", "targetname").origin, 3);
+    self moveTo(getStruct("searchlight_control_tower", "targetname").origin, 3);
     self waittill("movedone");
   }
 }
@@ -1698,7 +1698,7 @@ monitor_control_tower_fail() {
     level.harper say_dialog("harp_you_re_gonna_give_aw_0", 0.5);
     wait 4;
 
-    if(level.player istouching(getent("trigger_outside_control", "targetname"))) {
+    if(level.player istouching(getEnt("trigger_outside_control", "targetname"))) {
       flag_set("alert_drones");
       break;
     }
@@ -1710,7 +1710,7 @@ spotlight_dodge_fail_think() {
   wait 3;
 
   while(true) {
-    e_spotlight_prone_trigger = getent("spotlight_prone_trigger", "targetname");
+    e_spotlight_prone_trigger = getEnt("spotlight_prone_trigger", "targetname");
 
     if(level.player istouching(e_spotlight_prone_trigger) && level.player getstance() != "prone") {
       self set_turret_target(level.player, undefined, 0);
@@ -1843,7 +1843,7 @@ vo_grapple() {
 }
 
 vo_pa_announcement() {
-  e_pa_vo = getent("fake_pa_vo", "targetname");
+  e_pa_vo = getEnt("fake_pa_vo", "targetname");
   e_pa_vo say_dialog("pa_attention_attentio_0", 0, 1);
   e_pa_vo say_dialog("pa_this_is_a_level_4_se_0", 0.5, 1);
   e_pa_vo say_dialog("pa_patrols_detected_a_b_0", 1, 1);
@@ -1978,35 +1978,35 @@ turn_off_xcam() {
 }
 
 start_courtyard_ambient_drones() {
-  s_spawn_drone1 = getstruct("ambient_drone1_spawnpt", "targetname");
+  s_spawn_drone1 = getStruct("ambient_drone1_spawnpt", "targetname");
   vh_drone1 = spawn_vehicle_from_targetname("isi_drone");
   vh_drone1.origin = s_spawn_drone1.origin;
   vh_drone1.angles = s_spawn_drone1.angles;
-  vh_drone1 thread ambient_flight_path(getstruct(s_spawn_drone1.target, "targetname"));
-  s_delete = getstruct("ambient_drone1_delete", "targetname");
+  vh_drone1 thread ambient_flight_path(getStruct(s_spawn_drone1.target, "targetname"));
+  s_delete = getStruct("ambient_drone1_delete", "targetname");
   vh_drone1 thread delete_drone(s_delete);
   s_spawn_drone1 structdelete();
-  s_spawn_drone2 = getstruct("ambient_drone2_spawnpt", "targetname");
+  s_spawn_drone2 = getStruct("ambient_drone2_spawnpt", "targetname");
   vh_drone2 = spawn_vehicle_from_targetname("isi_drone");
   vh_drone2.origin = s_spawn_drone2.origin;
   vh_drone2.angles = s_spawn_drone2.angles;
-  vh_drone2 thread ambient_flight_path(getstruct(s_spawn_drone2.target, "targetname"));
-  s_delete = getstruct("ambient_drone2_delete", "targetname");
+  vh_drone2 thread ambient_flight_path(getStruct(s_spawn_drone2.target, "targetname"));
+  s_delete = getStruct("ambient_drone2_delete", "targetname");
   vh_drone2 thread delete_drone(s_delete);
   s_spawn_drone2 structdelete();
   flag_wait("heading_to_ac");
-  s_spawn_drone3 = getstruct("ambient_drone3_spawnpt", "targetname");
+  s_spawn_drone3 = getStruct("ambient_drone3_spawnpt", "targetname");
   vh_drone3 = spawn_vehicle_from_targetname("isi_drone");
   vh_drone3.origin = s_spawn_drone3.origin;
   vh_drone3.angles = s_spawn_drone3.angles;
-  vh_drone3 thread ambient_flight_path(getstruct(s_spawn_drone3.target, "targetname"));
+  vh_drone3 thread ambient_flight_path(getStruct(s_spawn_drone3.target, "targetname"));
   s_spawn_drone3 structdelete();
   wait 1;
-  s_spawn_drone4 = getstruct("ambient_drone4_spawnpt", "targetname");
+  s_spawn_drone4 = getStruct("ambient_drone4_spawnpt", "targetname");
   vh_drone4 = spawn_vehicle_from_targetname("isi_drone");
   vh_drone4.origin = s_spawn_drone4.origin;
   vh_drone4.angles = s_spawn_drone4.angles;
-  vh_drone4 thread ambient_flight_path(getstruct(s_spawn_drone4.target, "targetname"));
+  vh_drone4 thread ambient_flight_path(getStruct(s_spawn_drone4.target, "targetname"));
   s_spawn_drone4 structdelete();
 }
 
@@ -2086,7 +2086,7 @@ anthem_saves() {
 }
 
 rooftop_light() {
-  e_light = getent("harper_light", "targetname");
+  e_light = getEnt("harper_light", "targetname");
   flag_wait("anthem_player_grapple_done");
   e_light setlightintensity(0);
 }

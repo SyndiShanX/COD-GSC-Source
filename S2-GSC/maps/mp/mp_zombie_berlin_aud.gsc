@@ -484,7 +484,7 @@ player_falls_into_sewer() {
 
 play_radio_tuner_idle_static() {
   wait(0.5);
-  var_00 = getent("radio_tuner_link_org", "targetname");
+  var_00 = getEnt("radio_tuner_link_org", "targetname");
   level.var_11CB.radio_tuner_idle_static_lp = lib_0380::func_6844("zmb_berl_radio_idle_lp", undefined, var_00, 0.2);
 }
 
@@ -494,7 +494,7 @@ player_using_radio() {
 }
 
 radio_tuning(param_00, param_01) {
-  var_02 = getent("radio_tuner_link_org", "targetname");
+  var_02 = getEnt("radio_tuner_link_org", "targetname");
   switch (param_00) {
     case "tuning":
       lib_0380::func_684E(level.var_11CB.radio_tuner_idle_static_lp, 0, 0.4);
@@ -608,7 +608,7 @@ radio_stop_using_watcher() {
   self endon("death");
   self endon("disconnect");
   var_00 = self;
-  var_01 = getent("radio_tuner_link_org", "targetname");
+  var_01 = getEnt("radio_tuner_link_org", "targetname");
   self waittill("stop_using_station");
   var_00 method_8627("radio_interact_mix");
   lib_0380::func_684E(level.var_11CB.radio_tuner_idle_static_lp, 1, 0.2);
@@ -1011,7 +1011,7 @@ func_ABF8(param_00, param_01) {
   var_03 = 0;
   var_04 = 0.875;
   lib_0380::func_288B("zombie_soul_suck", undefined, var_02, 0, var_04);
-  var_02 moveto(param_01, 1.9);
+  var_02 moveTo(param_01, 1.9);
   wait(2);
   var_02 delete();
 }
@@ -1358,7 +1358,7 @@ place_bird(param_00) {
 }
 
 sword_reveal() {
-  var_00 = getent("bird_statue_sword_bit", "targetname");
+  var_00 = getEnt("bird_statue_sword_bit", "targetname");
   wait(0.6);
   lib_0380::func_2889("zmb_berl_barb_statue_swrd_reveal", undefined, var_00.var_116);
 }

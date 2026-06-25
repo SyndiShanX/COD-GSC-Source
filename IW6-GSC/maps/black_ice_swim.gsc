@@ -23,9 +23,9 @@ start() {
 main() {
   level.g_friendlynamedist_old = getdvarint("g_friendlyNameDist");
   setsaveddvar("g_friendlyNameDist", 0);
-  level.breach_anim_node = common_scripts\utility::getstruct("breach_anim_node", "script_noteworthy");
-  level.allies_breach_anim_node = common_scripts\utility::getstruct("vignette_introbreach_allies", "script_noteworthy");
-  level.snake_cam_anim_node = common_scripts\utility::getstruct("Intro_Snake", "script_noteworthy");
+  level.breach_anim_node = common_scripts\utility::getStruct("breach_anim_node", "script_noteworthy");
+  level.allies_breach_anim_node = common_scripts\utility::getStruct("vignette_introbreach_allies", "script_noteworthy");
+  level.snake_cam_anim_node = common_scripts\utility::getStruct("Intro_Snake", "script_noteworthy");
   ally_setup();
   player_setup();
   enemy_setup();
@@ -91,7 +91,7 @@ ally_setup() {
     level._allies_swim[var_0] thread maps\_underwater::friendly_bubbles();
     level._allies_swim[var_0] thread maps\black_ice_fx::fx_intro_friendly_glowsticks();
     level._allies_swim[var_0].launcher = maps\_utility::spawn_anim_model("ascend_launcher_non_anim");
-    level._allies_swim[var_0].launcher linkto(level._allies_swim[var_0], "TAG_STOWED_BACK", (0, 1, 5), (0, 0, 30));
+    level._allies_swim[var_0].launcher linkTo(level._allies_swim[var_0], "TAG_STOWED_BACK", (0, 1, 5), (0, 0, 30));
   }
 }
 
@@ -115,7 +115,7 @@ enemy_setup() {
 }
 
 player_setup() {
-  level.snake_cam_dummy = getent("snake_terrain_cam", "targetname");
+  level.snake_cam_dummy = getEnt("snake_terrain_cam", "targetname");
   level.snake_cam_dummy.animname = "snake_cam";
   level.snake_cam_dummy maps\_anim::setanimtree();
   maps\black_ice_util::player_animated_sequence_restrictions();
@@ -503,7 +503,7 @@ borescope_pip() {
   level.pip.entity.origin = level.borescope gettagorigin("tag_camera");
   level.pip.entity.angles = level.borescope gettagangles("tag_camera");
   level.pip.visionsetnaked = "black_ice_snakecam";
-  level.pip.entity linkto(level.borescope, "tag_camera", (0, 0, 5), (0, 0, 0));
+  level.pip.entity linkTo(level.borescope, "tag_camera", (0, 0, 5), (0, 0, 0));
   wait(level.timestep);
   level.pip.tag = "tag_origin";
   level.pip.fov = 45;
@@ -523,7 +523,7 @@ borescope_pip() {
 player_swim_setup() {
   level.spring_cam_max_clamp = 30;
   level.spring_cam_min_clamp = 20;
-  level.breach_pt = common_scripts\utility::getstruct("breach_point", "script_noteworthy");
+  level.breach_pt = common_scripts\utility::getStruct("breach_point", "script_noteworthy");
   level.breach_pos = level.breach_pt.origin + (0, 0, 0);
   maps\black_ice_util::setup_player_for_animated_sequence(0, undefined, undefined, level.player.angles, 0);
   var_0 = maps\_utility::spawn_anim_model("player_scuba", level.player_rig.origin);
@@ -694,7 +694,7 @@ props_setup() {
 }
 
 prop_attach_coll() {
-  var_0 = getent(self.coll, "targetname");
+  var_0 = getEnt(self.coll, "targetname");
 
   if(isDefined(var_0)) {
     var_1 = (0, 0, 0);
@@ -721,7 +721,7 @@ prop_attach_coll() {
 
     var_0.origin = self.origin + var_1;
     var_0.angles = self.angles;
-    var_0 linkto(self);
+    var_0 linkTo(self);
   }
 }
 
@@ -743,10 +743,10 @@ create_persistent_ice_breach_props(var_0) {
   }
 
   level.breach_props["introbreach_props"] = var_1;
-  level.breach_props["ice_chunks1"] = getent("ice_chunks1", "targetname");
+  level.breach_props["ice_chunks1"] = getEnt("ice_chunks1", "targetname");
   level.breach_props["ice_chunks1"].animname = "ice_chunks1";
   level.breach_props["ice_chunks1"] maps\_utility::assign_animtree();
-  level.breach_props["ice_chunks2"] = getent("ice_chunks2", "targetname");
+  level.breach_props["ice_chunks2"] = getEnt("ice_chunks2", "targetname");
   level.breach_props["ice_chunks2"].animname = "ice_chunks2";
   level.breach_props["ice_chunks2"] maps\_utility::assign_animtree();
   level.breach_props["breach_water"] = maps\_utility::spawn_anim_model("breach_water");
@@ -1258,7 +1258,7 @@ check_analog_movement() {
 }
 
 retarget_breach_water() {
-  self retargetscriptmodellighting(getent("infil_lighttarget", "targetname"));
+  self retargetscriptmodellighting(getEnt("infil_lighttarget", "targetname"));
 }
 
 set_snakecam_dof() {
@@ -1280,7 +1280,7 @@ set_snakecam_dof() {
 }
 
 swim_godrays() {
-  var_0 = getent("swim_gr_origin", "targetname");
+  var_0 = getEnt("swim_gr_origin", "targetname");
 
   if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_swim_breach_detonate", "player_water_breach", undefined, undefined);

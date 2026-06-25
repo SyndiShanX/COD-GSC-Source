@@ -331,7 +331,7 @@ _id_3321() {
         var_7 = self._id_37E7.origin - self.origin;
 
         if(length(var_7) > 100) {
-          var_7 = vectornormalize(var_7);
+          var_7 = vectorNormalize(var_7);
           var_8 = abs(_func_000B(_func_0002(clamp(vectordot(var_4, var_7), -1.0, 1.0))));
 
           if(var_8 > 30 && gettime() < var_2 + 1500) {
@@ -353,7 +353,7 @@ _id_3321() {
           if(var_1 && self._id_0192 == var_0) {
             var_9 = self._id_0192;
             var_10 = self._id_0192.origin - self.origin;
-            var_10 = vectornormalize(var_10);
+            var_10 = vectorNormalize(var_10);
             var_11 = clamp(vectordot(var_4, var_10), -1.0, 1.0);
             var_12 = abs(_func_000B(_func_0002(var_11)));
 
@@ -363,7 +363,7 @@ _id_3321() {
               if(isDefined(var_13)) {
                 foreach(var_15 in var_13) {
                   var_7 = var_15.origin - self.origin;
-                  var_7 = vectornormalize(var_7);
+                  var_7 = vectorNormalize(var_7);
                   var_8 = abs(_func_000B(_func_0002(clamp(vectordot(var_4, var_7), -1.0, 1.0))));
 
                   if(var_8 < var_12) {
@@ -463,7 +463,7 @@ _id_3320() {
       var_20 = self _meth_84A6(self _meth_8644());
       var_21 = var_11 - var_20;
       var_21 = (var_21[0], var_21[1], 0);
-      var_22 = vectornormalize(var_21);
+      var_22 = vectorNormalize(var_21);
       var_23 = self._id_0275;
 
       if(!istrue(var_12)) {
@@ -503,7 +503,7 @@ _id_3320() {
 
     var_21 = var_11 - var_17;
     var_25 = length(var_21);
-    var_22 = vectornormalize(var_21);
+    var_22 = vectorNormalize(var_21);
     var_24 = abs(_func_000B(_func_0002(clamp(vectordot(var_16, var_22), -1.0, 1.0))));
     var_26 = _func_0017(var_22, anglestoright(self.angles), anglestoup(self.angles));
     var_27 = var_26[1];

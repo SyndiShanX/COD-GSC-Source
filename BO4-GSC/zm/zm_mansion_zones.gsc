@@ -82,7 +82,7 @@ zone_init() {
 function_18b016d2() {
   level endon(#"end_game");
   level flag::wait_till("start_zombie_round_logic");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size <= 2) {
     if(randomint(100) > 50) {
@@ -111,7 +111,7 @@ function_d274c574() {
     }
   }
 
-  self setorigin(s_start.origin);
+  self setOrigin(s_start.origin);
   self setplayerangles(s_start.angles);
 }
 

@@ -119,7 +119,7 @@ watch_round_two_complete_vo() {
 
 check_players_get_close_to_zombie_fountain() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("mq_step_five_empty_fountain_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_step_five_empty_fountain_loc", "script_noteworthy");
   var_1 = var_0.origin;
 
   for(;;) {
@@ -151,10 +151,10 @@ check_players_get_close_to_traps() {
   }
 
   var_0 = (0, 0, -150);
-  var_1 = scripts\engine\utility::getstruct("electric_trap_comm", "targetname");
-  var_2 = scripts\engine\utility::getstruct("electric_trap_fishing", "targetname");
-  var_3 = scripts\engine\utility::getstruct("electric_trap_doctors", "targetname");
-  var_4 = scripts\engine\utility::getstruct("electric_trap_storage", "targetname");
+  var_1 = scripts\engine\utility::getStruct("electric_trap_comm", "targetname");
+  var_2 = scripts\engine\utility::getStruct("electric_trap_fishing", "targetname");
+  var_3 = scripts\engine\utility::getStruct("electric_trap_doctors", "targetname");
+  var_4 = scripts\engine\utility::getStruct("electric_trap_storage", "targetname");
   var_5 = [level.flogger.logs.origin + var_0, var_1.origin, var_2.origin, var_3.origin, var_4.origin];
 
   for(;;) {

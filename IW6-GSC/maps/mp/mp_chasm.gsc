@@ -47,7 +47,7 @@ initExtraCollision() {
   gryphonTrig1Ent.angles = (0, 0, 0);
   gryphonTrig1Ent.targetname = "remote_heli_range";
 
-  collision1 = GetEnt("clip256x256x8", "targetname");
+  collision1 = getEnt("clip256x256x8", "targetname");
   collision1Ent = spawn("script_model", (-1216, 2112, 1376));
   collision1Ent.angles = (0, 0, 0);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
@@ -56,7 +56,7 @@ initExtraCollision() {
   placeableBarrier setModel("placeable_barrier");
   placeableBarrier.angles = (0, 0, 12);
 
-  collision2 = GetEnt("clip32x32x32", "targetname");
+  collision2 = getEnt("clip32x32x32", "targetname");
   collision2Ent = spawn("script_model", (-1438, -1424, 1030));
   collision2Ent.angles = (0, 0, 0);
   collision2Ent CloneBrushmodelToScriptmodel(collision2);
@@ -64,20 +64,20 @@ initExtraCollision() {
 
 BUS_FALL_DELAY = 1.0;
 setupBus() {
-  bus = GetEnt("falling_bus", "targetname");
-  busCol = GetEnt("bus_collision", "targetname");
+  bus = getEnt("falling_bus", "targetname");
+  busCol = getEnt("bus_collision", "targetname");
   bus.collision = busCol;
 
   busInterior = getEntArray("falling_bus_parts", "targetname");
 
   foreach(item in busInterior) {
-    item LinkTo(bus);
+    item linkTo(bus);
   }
   bus.unresolved_collision_func = maps\mp\_movers::unresolved_collision_void;
 
   bus thread explosive_damage_watch(bus, "bus_start_fall");
   if(isDefined(busCol)) {
-    busCol LinkTo(bus);
+    busCol linkTo(bus);
     bus thread explosive_damage_watch(busCol, "bus_start_fall");
   }
 
@@ -86,7 +86,7 @@ setupBus() {
   keyframeName = ent.target;
   i = 0;
   while(isDefined(keyframeName)) {
-    struct = getstruct(keyframeName, "targetname");
+    struct = getStruct(keyframeName, "targetname");
     if(isDefined(struct)) {
       ent.keyframes[i] = struct;
 
@@ -110,7 +110,7 @@ setupBus() {
     ent.keyframes[2].script_decel = 0;
   }
 
-  bus.pathBlocker = GetEnt("pathBlocker", "targetname");
+  bus.pathBlocker = getEnt("pathBlocker", "targetname");
   wait(0.05);
   bus.pathBlocker elevatorClearPath();
 
@@ -133,8 +133,8 @@ moverDoMove(waitString) {
   for(i = 1; i < self.keyframes.size; i++) {
     kf = self.keyframes[i];
 
-    self MoveTo(kf.origin, kf.script_duration, kf.script_accel, kf.script_decel);
-    self RotateTo(kf.angles, kf.script_duration, kf.script_accel, kf.script_decel);
+    self moveTo(kf.origin, kf.script_duration, kf.script_accel, kf.script_decel);
+    self rotateTo(kf.angles, kf.script_duration, kf.script_accel, kf.script_decel);
 
     if(isDefined(kf.shakeMag)) {
       Earthquake(kf.shakeMag, kf.shakeDuration, self.origin, kf.shakeDistance);
@@ -154,13 +154,13 @@ moverDoMove(waitString) {
 }
 
 busSlidingEffect() {
-  busDust = GetEnt("busDustEffect2", "targetname");
+  busDust = getEnt("busDustEffect2", "targetname");
   busDust setModel("tag_origin");
-  busDust LinkTo(self);
+  busDust linkTo(self);
   playFXOnTag(getfx("vfx_bus_fall_dust"), busDust, "tag_origin");
   self.busDust = busDust;
 
-  scrapeDustLoc = GetEnt("busDustEffect", "targetname");
+  scrapeDustLoc = getEnt("busDustEffect", "targetname");
   if(isDefined(scrapeDustLoc)) {
     playFX(getFX("vfx_bus_scrape_dust"), scrapeDustLoc.origin, anglesToForward(scrapeDustLoc.angles));
     scrapeDustLoc playSound("scn_bus_slide");
@@ -177,10 +177,10 @@ killLinkedEntities(attacker) {
 }
 
 falling_elevator() {
-  elevator = GetEnt("falling_elevator", "targetname");
-  cables = GetEnt("falling_elevator_cables", "targetname");
+  elevator = getEnt("falling_elevator", "targetname");
+  cables = getEnt("falling_elevator_cables", "targetname");
 
-  elevatorPathBlocker1 = GetEnt("elevatorBlockPaths1", "targetname");
+  elevatorPathBlocker1 = getEnt("elevatorBlockPaths1", "targetname");
   elevatorPathBlocker1 elevatorBlockPath();
 
   if(!isDefined(elevator) || !isDefined(cables)) {
@@ -201,17 +201,17 @@ falling_elevator() {
   cablePos = cables.origin;
 
   wait(0.05);
-  elevatorPathBlocker2 = GetEnt("elevatorBlockPaths2", "targetname");
+  elevatorPathBlocker2 = getEnt("elevatorBlockPaths2", "targetname");
   elevatorPathBlocker2 elevatorClearPath();
   elevatorPathBlocker2 SetContents(0);
 
   elevator.dustEffect = getEntArray("dustEffect", "targetname");
   foreach(ent in elevator.dustEffect) {
-    ent LinkTo(cables);
+    ent linkTo(cables);
   }
   elevator.sparkEffect = getEntArray("sparkEffect", "targetname");
   foreach(ent in elevator.sparkEffect) {
-    ent LinkTo(cables);
+    ent linkTo(cables);
   }
 
   while(1) {
@@ -329,5 +329,5 @@ elevatorClearPath() {
 
 elevatorBlockPath() {
   self Show();
-  self DisconnectPaths();
+  self disconnectPaths();
 }

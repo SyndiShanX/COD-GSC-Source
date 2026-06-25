@@ -196,7 +196,7 @@ func_10770() {
   self hidepart("tag_main_cannon_hood");
   self.cannon = spawnturret("misc_turret", self gettagorigin("tag_main_cannon"), "cap_turret_cannon_large_ca");
   self.cannon.angles = self gettagangles("tag_main_cannon");
-  self.cannon linkto(self, "tag_main_cannon");
+  self.cannon linkTo(self, "tag_main_cannon");
   self.cannon setdefaultdroppitch(0);
   self.cannon setModel("veh_mil_air_ca_olympus_mons_gun_rig");
   self.cannon give_player_session_tokens("manual");
@@ -224,7 +224,7 @@ func_E058() {
   var_2 = anglesToForward(self gettagangles("tag_main_cannon"));
   var_3 = var_1 + var_2 * 10000;
   var_4 = spawn("script_origin", var_3);
-  var_4 linkto(self);
+  var_4 linkTo(self);
   self.cannon func_8535(0);
   self clearanim(%veh_mil_air_ca_mons_main_cannon_open, 0);
   self give_attacker_kill_rewards(%veh_mil_air_ca_mons_main_cannon_close);
@@ -275,7 +275,7 @@ func_BA6A(var_0, var_1, var_2) {
 
   if(!isDefined(self.var_38D7)) {
     self.var_38D7 = spawn("script_origin", self.cannon gettagorigin(var_3));
-    self.var_38D7 linkto(self.cannon, "tag_fx");
+    self.var_38D7 linkTo(self.cannon, "tag_fx");
     self.var_38D7 thread func_B2DF();
     self.var_38D7 thread func_BA6B();
   }

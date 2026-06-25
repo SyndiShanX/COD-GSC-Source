@@ -219,7 +219,7 @@ play_door_bang() {
 
 wait_to_start_club_crowd() {
   level waittill("scle");
-  struct = getstruct("blk_mus_club", "targetname");
+  struct = getStruct("blk_mus_club", "targetname");
   ent1 = spawn(0, struct.origin, "script_origin");
   ent1 playLoopSound("blk_karma_club_bg", 2);
   level waittill("scm2");

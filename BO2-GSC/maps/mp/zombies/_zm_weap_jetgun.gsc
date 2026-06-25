@@ -262,7 +262,7 @@ is_jetgun_firing() {
 jetgun_firing() {
   if(!isDefined(self.jetsound_ent)) {
     self.jetsound_ent = spawn("script_origin", self.origin);
-    self.jetsound_ent linkto(self, "tag_origin");
+    self.jetsound_ent linkTo(self, "tag_origin");
   }
 
   jetgun_fired = 0;
@@ -363,7 +363,7 @@ try_pull_powerups(powerups) {
     if(distancesquared(view_pos, powerup.origin) > powerup_range_squared) {
       continue;
     }
-    normal = vectornormalize(powerup.origin - view_pos);
+    normal = vectorNormalize(powerup.origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
 
     if(abs(dot) < 0.7) {
@@ -435,7 +435,7 @@ jetgun_check_enemies_in_range(zombie, view_pos, drag_range_squared, gib_range_sq
     return;
   }
 
-  normal = vectornormalize(test_origin - view_pos);
+  normal = vectorNormalize(test_origin - view_pos);
   dot = vectordot(forward_view_angles, normal);
 
   if(abs(dot) < 0.7) {

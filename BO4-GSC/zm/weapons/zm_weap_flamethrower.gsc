@@ -315,7 +315,7 @@ function_99207e4d(w_flamethrower) {
   var_560ef51 = [];
   v_view_pos = self getweaponmuzzlepoint();
   v_forward_angles = self getweaponforwarddir();
-  self playrumbleonentity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
   a_ai_zombies = util::get_array_of_closest(v_view_pos, getaispeciesarray(level.zombie_team), undefined, undefined, 614);
 
   foreach(ai_zombie in a_ai_zombies) {
@@ -427,7 +427,7 @@ function_ea906434(e_player, w_flamethrower) {
     }
 
     v_dir = self.origin - e_player.origin;
-    var_eb0d0f20 = 75 * vectornormalize(v_dir);
+    var_eb0d0f20 = 75 * vectorNormalize(v_dir);
     var_eb0d0f20 = (var_eb0d0f20[0], var_eb0d0f20[1], 20);
     self startragdoll();
     self launchragdoll(var_eb0d0f20);
@@ -480,8 +480,8 @@ function_3be93b07(w_flamethrower) {
 
   if(!isDefined(self.var_be72e7c2.t_damage)) {
     self.var_be72e7c2.t_damage = spawn("trigger_radius_new", self.var_be72e7c2.origin, 512 | 1, 80, 128);
-    self.var_be72e7c2.t_damage enablelinkto();
-    self.var_be72e7c2.t_damage linkto(self.var_be72e7c2);
+    self.var_be72e7c2.t_damage enablelinkTo();
+    self.var_be72e7c2.t_damage linkTo(self.var_be72e7c2);
   }
 
   self thread function_10c91a46();
@@ -587,7 +587,7 @@ function_6c891578(v_forward_angles, var_a85d39a2) {
       n_time = 0.5;
     }
 
-    self moveto(v_target_pos, n_time);
+    self moveTo(v_target_pos, n_time);
 
     if(isDefined(ai_zombie)) {
       level util::waittill_any_ents(self, "movedone", ai_zombie, "death");
@@ -749,7 +749,7 @@ function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_lift_spe
 
   if(level.n_zombies_lifted_for_ragdoll < 9) {
     self thread track_lifted_for_ragdoll_count();
-    self setplayercollision(0);
+    self setPlayerCollision(0);
     self zm_spawner::zombie_flame_damage("MOD_BURNED", e_player);
 
     if(isDefined(var_ab287846) && var_ab287846 function_58942bba(self)) {
@@ -773,7 +773,7 @@ function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_lift_spe
 
     self playSound(#"zmb_zombie_head_gib");
     self zombie_utility::gib_random_parts();
-    v_away_from_source = vectornormalize(self.origin - v_origin);
+    v_away_from_source = vectorNormalize(self.origin - v_origin);
     v_away_from_source *= n_push_away;
     v_away_from_source = (v_away_from_source[0], v_away_from_source[1], n_lift_height);
 

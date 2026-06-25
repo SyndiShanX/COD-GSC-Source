@@ -257,7 +257,7 @@ function function_c9c3556c(str_objective) {
   wait(2);
   level thread util::screen_fade_in(1);
   array::thread_all(level.players, &clientfield::increment_to_player, "postfx_transition");
-  playsoundatposition("evt_clearing_trans_in", (0, 0, 0));
+  playSoundAtPosition("evt_clearing_trans_in", (0, 0, 0));
   level zurich_util::function_c90e23b6(str_objective, "breadcrumb_singroot_3");
   level.ai_taylor ai::set_ignoreall(1);
   array::run_all(level.players, &freezecontrols, 0);
@@ -291,7 +291,7 @@ function function_eb271a4b(str_objective) {
   var_b1cdbf1d = 0;
   while(true) {
     var_f6e695c0 = struct::get("breadcrumb_singroot_" + var_b1cdbf1d, "targetname");
-    var_b1fe230f = getent("t_singroot_" + var_b1cdbf1d, "script_noteworthy");
+    var_b1fe230f = getEnt("t_singroot_" + var_b1cdbf1d, "script_noteworthy");
     if(!isDefined(var_f6e695c0) || !isDefined(var_b1fe230f)) {
       return;
     }
@@ -353,12 +353,12 @@ function function_375f158a() {
 
 function function_14bb726e() {
   n_move_time = randomfloatrange(0.5, 1.25);
-  self moveto(self.var_1069f2d4.origin, n_move_time);
-  self rotateto(self.var_1069f2d4.angles, n_move_time);
+  self moveTo(self.var_1069f2d4.origin, n_move_time);
+  self rotateTo(self.var_1069f2d4.angles, n_move_time);
   self waittill("movedone");
   self solid();
-  self playrumbleonentity("damage_heavy");
-  playsoundatposition("evt_floor_debris_big", self.origin);
+  self playRumbleOnEntity("damage_heavy");
+  playSoundAtPosition("evt_floor_debris_big", self.origin);
   if(isDefined(self.script_fxid)) {
     playFXOnTag(level._effect[self.script_fxid], self, "tag_origin");
   } else {
@@ -398,8 +398,8 @@ function function_514e0b2e() {
     self show();
     self movez(-1024, n_move_time);
     self waittill("movedone");
-    self playrumbleonentity("damage_heavy");
-    playsoundatposition("evt_floor_debris_big", self.origin);
+    self playRumbleOnEntity("damage_heavy");
+    playSoundAtPosition("evt_floor_debris_big", self.origin);
     playFXOnTag(level._effect["dirt_impact_md"], self, "tag_origin");
   }
 }
@@ -415,11 +415,11 @@ function function_4402ab63() {
   level thread scene::play("p7_fxanim_cp_zurich_ferris_wheel_bundle");
   level thread scene::play("p7_fxanim_cp_zurich_ferris_wheel_wave_bundle");
   foreach(player in level.activeplayers) {
-    player playrumbleonentity("damage_heavy");
+    player playRumbleOnEntity("damage_heavy");
   }
   level waittill("hash_55a06ec6");
   foreach(player in level.activeplayers) {
-    player playrumbleonentity("cp_zurich_ferris_wheel_fall");
+    player playRumbleOnEntity("cp_zurich_ferris_wheel_fall");
   }
 }
 
@@ -428,8 +428,8 @@ function function_8fbe0681(a_ents) {
   str_joint = "zur_wave_jnt";
   t_start = spawn("trigger_box", e_wave gettagorigin(str_joint), 0, 128, 1200, 128);
   t_start.angles = e_wave gettagangles(str_joint);
-  t_start enablelinkto();
-  t_start linkto(e_wave, str_joint, (0, 0, 0), vectorscale((0, 1, 0), 30));
+  t_start enablelinkTo();
+  t_start linkTo(e_wave, str_joint, (0, 0, 0), vectorscale((0, 1, 0), 30));
   foreach(player in level.players) {
     t_start thread surge_player_tracker(player);
   }
@@ -476,7 +476,7 @@ function surge_player_rumble(t_wave) {
   self endon("death");
   t_wave endon("wave_stop");
   while(true) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.1);
   }
 }
@@ -506,14 +506,14 @@ function enemy_surge_tracker() {
 
 function enemy_surge_hit(t_surge) {
   self endon("death");
-  v_dir = vectornormalize(self.origin - t_surge.origin);
+  v_dir = vectorNormalize(self.origin - t_surge.origin);
   self startragdoll();
   self launchragdoll(v_dir * 75);
   self kill();
 }
 
 function function_95353712() {
-  var_c44abb6a = getent("t_singroot_car1", "targetname");
+  var_c44abb6a = getEnt("t_singroot_car1", "targetname");
   level thread scene::init("p7_fxanim_cp_zurich_car_slide_bundle");
   var_c44abb6a waittill("trigger");
   level thread scene::play("p7_fxanim_cp_zurich_car_slide_bundle");
@@ -592,7 +592,7 @@ function handle_movement(s_target, should_ignore_player) {
   while(isDefined(s_target)) {
     n_distance = distance(self.origin, s_target.origin);
     n_time = n_distance / 100;
-    self moveto(s_target.origin, n_time);
+    self moveTo(s_target.origin, n_time);
     self waittill("movedone");
     if(isDefined(s_target.target)) {
       s_target = struct::get(s_target.target, "targetname");
@@ -628,7 +628,7 @@ function detonate_depth_charge(should_chain = 0) {
   self notify("exploded");
   if(self.classname === "script_model") {
     playFX(level._effect["depth_charge_explosion"], v_origin);
-    playsoundatposition("exp_drone_underwater", v_origin);
+    playSoundAtPosition("exp_drone_underwater", v_origin);
     self util::self_delete();
   }
   wait(0.1);

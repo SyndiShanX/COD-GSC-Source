@@ -33,7 +33,7 @@ function function_c65468ef(var_2d1ee75a, var_ac9c0ee1, var_f965fa7, var_556c090f
     level.var_6f754d87 = 1;
 
     if(isDefined(level.var_1ea1d494)) {
-      level.var_1ea1d494 sethintstring("");
+      level.var_1ea1d494 setHintString("");
     }
 
     var_8b9e1fe4 = spawnStruct();
@@ -49,7 +49,7 @@ function function_c65468ef(var_2d1ee75a, var_ac9c0ee1, var_f965fa7, var_556c090f
     if(!b_debug) {
       var_2d1ee75a thread function_287ce935(var_8b9e1fe4, 1);
     } else {
-      a_e_players = getplayers();
+      a_e_players = getPlayers();
     }
 
     foreach(e_player in a_e_players) {
@@ -66,7 +66,7 @@ function function_c65468ef(var_2d1ee75a, var_ac9c0ee1, var_f965fa7, var_556c090f
       b_passed = 0;
 
       if(isDefined(level.var_1ea1d494)) {
-        level.var_1ea1d494 sethintstring(level.var_1ea1d494.var_9d7362a4);
+        level.var_1ea1d494 setHintString(level.var_1ea1d494.var_9d7362a4);
       }
 
       level thread popups::displayteammessagetoall(var_f965fa7, var_2d1ee75a);
@@ -75,7 +75,7 @@ function function_c65468ef(var_2d1ee75a, var_ac9c0ee1, var_f965fa7, var_556c090f
     callback::remove_on_spawned(&function_287ce935);
     callback::remove_on_disconnect(&function_3728d19b);
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       e_player clientfield::set_player_uimodel("sr_vote_prompt.show", 0);
     }
 
@@ -126,7 +126,7 @@ function function_4b4f57db(var_556c090f = 0) {
     function_1eaaceab(self.var_e6ae7b0);
     var_162efdd8 = var_33a40292 - self.var_96d8430e.size;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clientfield::set_player_uimodel("sr_vote_prompt.numPlayersNeeded", math::clamp(var_162efdd8, 0, var_d46eae05));
     }
 

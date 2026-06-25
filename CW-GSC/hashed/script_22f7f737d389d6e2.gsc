@@ -64,8 +64,8 @@ function function_8dbbde01(player, origin) {
   coat namespace_e32bb68::function_3a59ec34("evt_doa_pickup_coatofarms_active_lp");
   trigger.owner = player;
   trigger.targetname = "timeShifterUpdate";
-  trigger enablelinkto();
-  trigger linkto(coat);
+  trigger enablelinkTo();
+  trigger linkTo(coat);
   trigger.opentime = 3000;
   trigger.var_6de1c43b = gettime() + trigger.opentime;
   trigger.radiussq = sqr(245);

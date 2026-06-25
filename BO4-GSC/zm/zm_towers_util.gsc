@@ -67,10 +67,10 @@ function_48f49769() {
 
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
 
     if(isDefined(self.worldgundw)) {
-      self.worldgundw rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+      self.worldgundw rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     }
 
     wait randomfloat(waittime - 0.1);
@@ -84,7 +84,7 @@ function_6408c105() {
     s_target = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(s_target) && isDefined(s_target.target)) {
-      fx_wallbuy = getent(s_target.target, "targetname");
+      fx_wallbuy = getEnt(s_target.target, "targetname");
 
       if(isDefined(fx_wallbuy)) {
         fx_wallbuy ghost();
@@ -94,7 +94,7 @@ function_6408c105() {
     model = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(model) && isDefined(model.target)) {
-      var_393a819e = getent(model.target, "targetname");
+      var_393a819e = getEnt(model.target, "targetname");
 
       if(isDefined(var_393a819e)) {
         var_393a819e ghost();
@@ -127,7 +127,7 @@ show_zbarriers() {
     target_struct = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(target_struct) && isDefined(target_struct.target)) {
-      wallbuy_fx = getent(target_struct.target, "targetname");
+      wallbuy_fx = getEnt(target_struct.target, "targetname");
 
       if(isDefined(wallbuy_fx)) {
         wallbuy_fx show();
@@ -137,7 +137,7 @@ show_zbarriers() {
     model = struct::get(wallbuy.target, "targetname");
 
     if(isDefined(model) && isDefined(model.target)) {
-      var_393a819e = getent(model.target, "targetname");
+      var_393a819e = getEnt(model.target, "targetname");
 
       if(isDefined(var_393a819e)) {
         var_393a819e show();

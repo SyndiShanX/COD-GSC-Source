@@ -19,7 +19,7 @@ event_handler[gametype_init] main(eventstruct) {
 function_fd78da38(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     if(self getlocalclientnumber() === localclientnum) {
-      foreach(player in getplayers(localclientnum)) {
+      foreach(player in getPlayers(localclientnum)) {
         if(player.team !== self.team && !player function_21c0fa55()) {
           if(player flag::exists(#"friendly")) {
             player renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendly_cp" : #"rob_sonar_set_friendly_mp", 0);

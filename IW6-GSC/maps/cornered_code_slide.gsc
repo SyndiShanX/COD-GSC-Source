@@ -15,7 +15,7 @@ building_fall_anim_rig() {
   level.base_falling_legs_anim = % cornered_building_fall_slide_player_viewleg;
   var_0 = level.fall_arms_and_legs[0];
   var_1 = level.fall_arms_and_legs[1];
-  var_2 = common_scripts\utility::getstruct("fall_animnode", "targetname");
+  var_2 = common_scripts\utility::getStruct("fall_animnode", "targetname");
   var_3 = maps\_utility::spawn_anim_model("player_bldg_fall");
   var_2 thread maps\_anim::anim_first_frame_solo(var_3, "cornered_building_fall_slide_player");
   var_3 hide();

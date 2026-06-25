@@ -175,7 +175,7 @@ function spawnclones() {
   self._clone = [];
   velocity = self getvelocity();
   velocity = velocity + (0, 0, velocity[2] * -1);
-  velocity = vectornormalize(velocity);
+  velocity = vectorNormalize(velocity);
   origin = (self.origin + (velocity * 17)) + vectorscale(anglesToForward(self getangles()), 17);
   validspawns = calculatespawnorigin(origin, self getangles(), 60);
   if(validspawns.validpositions.size < 3) {
@@ -271,7 +271,7 @@ function _cloneorbfx(endpos, traveltime) {
   fx = playFXOnTag("player/fx_plyr_clone_reaper_orb", fxorg, "tag_origin");
   fx.team = self.team;
   fxendpos = endpos + (0, 0, 35);
-  fxorg moveto(fxendpos, traveltime);
+  fxorg moveTo(fxendpos, traveltime);
   self util::waittill_any_timeout(traveltime, "death", "disconnect");
   fxorg delete();
 }
@@ -349,7 +349,7 @@ function private _playdematerialization() {
   if(isDefined(self)) {
     fx = playFX("player/fx_plyr_clone_vanish", self.origin);
     fx.team = self.team;
-    playsoundatposition("mpl_clone_holo_death", self.origin);
+    playSoundAtPosition("mpl_clone_holo_death", self.origin);
   }
 }
 
@@ -474,7 +474,7 @@ function _clonefakefire() {
     wait(waittime);
     shotsfired = randomintrange(1, 4);
     if(isDefined(clone.fakefireweapon) && clone.fakefireweapon != level.weaponnone) {
-      players = getplayers();
+      players = getPlayers();
       foreach(player in players) {
         if(isDefined(player) && isalive(player) && player getteam() != clone.team) {
           if(distancesquared(player.origin, clone.origin) < 562500) {

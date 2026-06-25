@@ -129,7 +129,7 @@ player_start_path_hint() {
 }
 
 player_heading_upstairs() {
-  trig = getent("trig_player_heading_upstairs", "targetname");
+  trig = getEnt("trig_player_heading_upstairs", "targetname");
   trig waittill("trigger");
 
   flag_set("player_found_balcony_stairs");
@@ -258,7 +258,7 @@ first_balcony_action() {
   opener clear_force_color();
   opener SetGoalNode(waitNode);
 
-  trig = GetEnt("trig_script_color_allies_b10", "targetname");
+  trig = getEnt("trig_script_color_allies_b10", "targetname");
   if(isDefined(trig)) {
     trig thread scr_delete();
   }
@@ -291,7 +291,7 @@ first_balcony_action() {
     set_color_chain("trig_script_color_allies_b11");
   }
 
-  ogMarker = GetStruct("struct_objective9_marker", "targetname");
+  ogMarker = getStruct("struct_objective9_marker", "targetname");
   Objective_Position(3, trig1.origin);
 
   lines[0] = "RU_0_order_move_forward_05";
@@ -359,12 +359,12 @@ waittill_player_downstairs_2(trig2) {
 balcony_player_using_parliament_backentrance() {
   flag_set("parliament_backdoor_used");
 
-  trig = GetEnt("trig_script_color_allies_b10", "targetname");
+  trig = getEnt("trig_script_color_allies_b10", "targetname");
   if(isDefined(trig)) {
     trig thread scr_delete();
   }
 
-  trig = GetEnt("trig_script_color_allies_b12", "targetname");
+  trig = getEnt("trig_script_color_allies_b12", "targetname");
   if(isDefined(trig)) {
     trig thread scr_delete();
   }
@@ -381,7 +381,7 @@ balcony_player_using_parliament_backentrance() {
 }
 
 parliament_mg_adjust() {
-  mg = getent("auto788", "targetname");
+  mg = getEnt("auto788", "targetname");
   mg.yawconvergencetime = 2.25;
   mg.convergencetime = 2.25;
   mg.suppressionTime = 2.0;
@@ -472,8 +472,8 @@ downstairs_doors_open(opener) {
   doorLeft ConnectPaths();
   doorRight ConnectPaths();
 
-  doorLeft RotateYaw(85, rotateTime, accelTime, decelTime);
-  doorRight RotateYaw(-85, rotateTime, accelTime, decelTime);
+  doorLeft rotateYaw(85, rotateTime, accelTime, decelTime);
+  doorRight rotateYaw(-85, rotateTime, accelTime, decelTime);
   wait(rotateTime);
 
   flag_set("downstairs_doors_opened");
@@ -756,8 +756,8 @@ balcony_doors_open(opener) {
   doorLeft ConnectPaths();
   doorRight ConnectPaths();
 
-  doorLeft RotateYaw(110, rotateTime, accelTime, decelTime);
-  doorRight RotateYaw(-110, rotateTime, accelTime, decelTime);
+  doorLeft rotateYaw(110, rotateTime, accelTime, decelTime);
+  doorRight rotateYaw(-110, rotateTime, accelTime, decelTime);
   wait(rotateTime);
 
   flag_set("balcony_doors_opened");
@@ -998,7 +998,7 @@ falling_eagle() {
   keys = GetArrayKeys(pieces);
 
   for(i = 0; i < pieces.size; i++) {
-    pieces[keys[i]] LinkTo(eagle, keys[i]);
+    pieces[keys[i]] linkTo(eagle, keys[i]);
   }
 
   rocketStart = (1144, 17688, 984);
@@ -1015,7 +1015,7 @@ falling_eagle() {
 
   eagle_fall_wait();
 
-  killtrig = GetEnt("trig_killspawner_22", "targetname");
+  killtrig = getEnt("trig_killspawner_22", "targetname");
   if(isDefined(killtrig)) {
     killtrig notify("trigger");
   }
@@ -1120,8 +1120,8 @@ parliament_podiumdoor_clean_rogue_ai() {
 parliament_doors_open() {
   setmusicstate("PARLIAMENT_CLEARED");
 
-  doorLeft = GetEnt("sbmodel_pment_door_left", "targetname");
-  doorRight = GetEnt("sbmodel_pment_door_right", "targetname");
+  doorLeft = getEnt("sbmodel_pment_door_left", "targetname");
+  doorRight = getEnt("sbmodel_pment_door_right", "targetname");
 
   doorNodeLeft = getnode_safe("node_parliament_door_left", "targetname");
   doorNodeRight = getnode_safe("node_parliament_door_right", "targetname");
@@ -1285,7 +1285,7 @@ door_runner_think() {
   self SetGoalPos(self.origin);
 
   org = spawn("script_origin", self.origin);
-  self LinkTo(org);
+  self linkTo(org);
 
   level waittill("parliament_doors_opening");
   wait(8.75);

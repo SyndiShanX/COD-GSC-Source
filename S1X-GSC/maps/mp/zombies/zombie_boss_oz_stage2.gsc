@@ -106,7 +106,7 @@ bossozstage2teleportout() {
   self hide();
   self scragentsetphysicsmode("noclip");
   var_0 = common_scripts\utility::getStructArray("boss_oz_spot", "targetname");
-  self setorigin(var_0[0].origin, 1);
+  self setOrigin(var_0[0].origin, 1);
   self scragentsetgoalpos(self.origin);
 }
 
@@ -119,7 +119,7 @@ bossozstage2teleportbackin(var_0) {
   playsoundatpos(var_1.origin, "oz_s1_location_destroyed");
   earthquake(0.6, 1.0, var_1.origin, 10000);
   wait 0.5;
-  self setorigin(var_2.origin, 1);
+  self setOrigin(var_2.origin, 1);
   var_3 = common_scripts\utility::random(level.players);
   var_4 = vectortoangles(var_3.origin - var_2.origin);
   self setplayerangles(var_4);
@@ -373,7 +373,7 @@ setupbossozstage2state() {
   self.meleeradiusbasesq = squared(self.meleeradiusbase);
   maps\mp\zombies\_util::setmeleeradius(self.meleeradiusbase);
   self.defaultgoalradius = self.radius + 1;
-  self scragentsetgoalradius(self.defaultgoalradius);
+  self scragentsetgoalRadius(self.defaultgoalradius);
   self.meleedot = 0.5;
   self.ignoreexpiretime = 1;
   self.ignorezombierecycling = 1;
@@ -626,7 +626,7 @@ bossozstage2attackstandard(var_0, var_1) {
     var_3 = "enemy";
     self.meleemovemode = undefined;
   } else {
-    var_5 = vectortoyaw(vectornormalize(self.curmeleetarget.origin - self.origin));
+    var_5 = vectortoyaw(vectorNormalize(self.curmeleetarget.origin - self.origin));
     var_6 = angleclamp180(var_5 - self.angles[1]);
 
     if(abs(var_6 - 180) < 45) {
@@ -1037,7 +1037,7 @@ collidewithnearbyzombies() {
       if(vectordot(var_5, var_1) < 0) {
         continue;
       }
-      var_5 = vectornormalize(var_5);
+      var_5 = vectorNormalize(var_5);
       collidewithagent(var_4, var_5);
     }
   }
@@ -1130,7 +1130,7 @@ firemissile(var_0) {
   var_3 = (randomintrange(-1 * var_1, var_1), randomintrange(-1 * var_1, var_1), randomintrange(-1 * var_1, var_1));
   var_4 = var_0 getEye() + var_3;
   var_5 = magicbullet("boss_oz_rocket_mp", var_2, var_4, self);
-  var_5 missile_settargetent(var_0, (0, 0, 32));
+  var_5 missile_settargetEnt(var_0, (0, 0, 32));
   var_5.owner = self;
   var_5 thread empmissile();
 }

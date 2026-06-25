@@ -151,10 +151,10 @@ depth_charge_use() {
   level.depth_charge_default_pitch = 30;
   level.depth_charge_pitch_up_allowance = 25;
   level.depth_charge_pitch_down_allowance = 25;
-  self setorigin(level.defend_zodiac_osprey gettagorigin("tag_ground") - anglestoup(level.defend_zodiac_osprey.angles) * 60);
+  self setOrigin(level.defend_zodiac_osprey gettagorigin("tag_ground") - anglestoup(level.defend_zodiac_osprey.angles) * 60);
   self setplayerangles((level.depth_charge_default_pitch, level.defend_zodiac_osprey.angles[1], level.defend_zodiac_osprey.angles[2]));
   self enableslowaim(0.25, 0.25);
-  thread depth_charge_linkto();
+  thread depth_charge_linkTo();
   self.osprey_turret = spawnturret("misc_turret", level.defend_zodiac_osprey gettagorigin("tag_player"), "osprey_minigun");
   self.osprey_turret.angles = self getplayerangles();
   self.osprey_turret maketurretinoperable();
@@ -167,7 +167,7 @@ depth_charge_use() {
   self.osprey_turret.turret_target = common_scripts\utility::spawn_tag_origin();
   self.osprey_turret.turret_target.origin = self getEye() + anglesToForward(self getplayerangles()) * 2000;
   self.osprey_turret settargetentity(self.osprey_turret.turret_target);
-  self.osprey_turret linkto(level.defend_zodiac_osprey);
+  self.osprey_turret linkTo(level.defend_zodiac_osprey);
 
   if(!isDefined(self.osprey_minigun_ammo)) {
     self.osprey_minigun_ammo = 9999;
@@ -197,7 +197,7 @@ depth_charge_use() {
   thread depth_charge_monitor_wet();
 }
 
-depth_charge_linkto() {
+depth_charge_linkTo() {
   self playerlinktodelta(level.defend_zodiac_osprey, "tag_ground", 0.85, 70, 70, level.depth_charge_pitch_up_allowance, level.depth_charge_pitch_down_allowance, 0);
   self playerlinkedoffsetenable();
 }
@@ -279,7 +279,7 @@ depth_charge_exit() {
   }
 
   self setstance(self.prev_stance);
-  self setorigin(level.old_player_origin);
+  self setOrigin(level.old_player_origin);
   self setplayerangles(level.old_player_angles);
   setsaveddvar("ammoCounterHide", "0");
   setsaveddvar("actionSlotsHide", "0");
@@ -668,7 +668,7 @@ depth_charge_drop() {
 
   var_0 = anglesToForward(level.defend_zodiac_osprey.angles) * 200;
   var_1 = magicbullet("osprey_missile", level.defend_zodiac_osprey gettagorigin(common_scripts\utility::ter_op(level.osprey_missile_side_left, "tag_light_l_wing1", "tag_light_r_wing1")) + anglesToForward(level.defend_zodiac_osprey.angles) * 100 - anglestoup(level.defend_zodiac_osprey.angles) * 50 + anglestoright(level.defend_zodiac_osprey.angles) * common_scripts\utility::ter_op(level.osprey_missile_side_left, -200, 200), level.depth_charge_target.origin + var_0, self);
-  self playrumbleonentity("heavy_1s");
+  self playRumbleOnEntity("heavy_1s");
   thread maps\carrier_audio::aud_osprey_fire();
   thread hud_missile_active();
   var_1 thread depth_charge_lockon_to_target();
@@ -691,7 +691,7 @@ depth_charge_lockon_to_target() {
   wait 0.25;
 
   if(isvalidmissile(self) && var_0 > 0) {
-    self missile_settargetent(var_1);
+    self missile_settargetEnt(var_1);
   }
 
   while(isDefined(self) && isvalidmissile(self) && self.origin[2] > level.water_level) {
@@ -741,7 +741,7 @@ depth_charge_explode(var_0, var_1, var_2) {
   var_5 = common_scripts\utility::spawn_tag_origin();
   var_5.origin = var_0;
   var_5 screenshakeonentity(4.5, 2, 3.5, 3, 0, 3, 25000, 5, 2, 7, 2.6);
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   maps\_utility::delaythread(0.25, maps\carrier_code_zodiac::explode_zodiacs, var_0, 1300, 200);
   maps\_utility::delaythread(0.1, maps\carrier_code::explode_gunboats, var_0, 1000, 200);
   maps\_utility::delaythread(0.1, ::explode_fake_targets, var_0, 1000);
@@ -756,12 +756,12 @@ depth_charge_explode(var_0, var_1, var_2) {
 }
 
 depth_charge_replay() {
-  var_0 = common_scripts\utility::getstruct("defend_zodiac_osprey_replay", "targetname");
+  var_0 = common_scripts\utility::getStruct("defend_zodiac_osprey_replay", "targetname");
   level.defend_zodiac_osprey vehicle_teleport(var_0.origin, var_0.angles);
   level.defend_zodiac_osprey thread maps\_vehicle::vehicle_paths(var_0);
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = level.defend_zodiac_osprey.origin;
-  var_1 linkto(level.defend_zodiac_osprey);
+  var_1 linkTo(level.defend_zodiac_osprey);
   var_1 screenshakeonentity(0.2, 0.17, 0.1, 5, 1, 2, 5000, 12, 8, 5);
 
   if(maps\carrier_code::eval(self.rain)) {
@@ -1027,7 +1027,7 @@ monitor_machine_gun() {
 
       thread hud_mg_active();
       level.defend_zodiac_osprey playLoopSound("scn_carr_osprey_gun_loop");
-      self playrumbleonentity("minigun_rumble");
+      self playRumbleOnEntity("minigun_rumble");
       self.osprey_turret shootturret();
       var_2 = 250;
       var_3 = bulletTrace(self getEye(), self.osprey_turret.turret_target.origin, 0);
@@ -1166,7 +1166,7 @@ explode_single_fake_target(var_0) {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "big") {
     playFX(common_scripts\utility::getfx("vfx_destroyer_vert_missile_impact"), self.origin);
     screenshake(self.origin, 3.5, 2, 2.5, 2, 0, 2, 10000, 5, 2, 7, 2.6);
-    level.player playrumbleonentity("heavy_1s");
+    level.player playRumbleOnEntity("heavy_1s");
     thread common_scripts\utility::play_sound_in_space("exp_armor_vehicle", self.origin);
     level notify("stop_fed_destroyer_guns");
     common_scripts\utility::flag_set("destroyed_fed_destroyer_guns");

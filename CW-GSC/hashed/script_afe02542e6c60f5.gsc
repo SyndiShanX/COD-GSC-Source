@@ -60,8 +60,8 @@ function timeshifterupdate(player, origin) {
   clock namespace_e32bb68::function_3a59ec34("evt_doa_pickup_clock_active_lp");
   clock playLoopSound("zmb_pwup_clock_loop", 2);
   trigger.targetname = "timeShifterUpdate";
-  trigger enablelinkto();
-  trigger linkto(clock);
+  trigger enablelinkTo();
+  trigger linkTo(clock);
   trigger.opentime = 3000;
   trigger.var_6de1c43b = gettime() + trigger.opentime;
   trigger.radiussq = sqr(245);

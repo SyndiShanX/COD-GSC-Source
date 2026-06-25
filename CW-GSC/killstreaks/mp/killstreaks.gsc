@@ -175,7 +175,7 @@ function private function_d3106952() {
   var_e9414fa = 0;
 
   while(!level.gameended) {
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size == 0) {
       wait 1;

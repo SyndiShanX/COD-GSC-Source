@@ -309,8 +309,8 @@ func_126A8(var_0, var_1, var_2) {
 }
 
 func_126A6(var_0) {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(level.var_47B3["crafted_trap_balloon"].hintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(level.var_47B3["crafted_trap_balloon"].hintstring);
   self makeusable();
   self func_84A7("tag_fx");
   self setusefov(120);

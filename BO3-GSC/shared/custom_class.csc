@@ -255,21 +255,21 @@ function set_attachment_cosmetic_variants(localclientnum, acv_param) {
 }
 
 function hide_paintshop_bg(localclientnum) {
-  paintshop_bg = getent(localclientnum, "paintshop_black", "targetname");
+  paintshop_bg = getEnt(localclientnum, "paintshop_black", "targetname");
   if(isDefined(paintshop_bg)) {
     if(!isDefined(level.paintshophiddenposition[localclientnum])) {
       level.paintshophiddenposition[localclientnum] = paintshop_bg.origin;
     }
     paintshop_bg hide();
-    paintshop_bg moveto(level.paintshophiddenposition[localclientnum], 0.01);
+    paintshop_bg moveTo(level.paintshophiddenposition[localclientnum], 0.01);
   }
 }
 
 function show_paintshop_bg(localclientnum) {
-  paintshop_bg = getent(localclientnum, "paintshop_black", "targetname");
+  paintshop_bg = getEnt(localclientnum, "paintshop_black", "targetname");
   if(isDefined(paintshop_bg)) {
     paintshop_bg show();
-    paintshop_bg moveto(level.paintshophiddenposition[localclientnum] + vectorscale((0, 0, 1), 227), 0.01);
+    paintshop_bg moveTo(level.paintshophiddenposition[localclientnum] + vectorscale((0, 0, 1), 227), 0.01);
   }
 }
 

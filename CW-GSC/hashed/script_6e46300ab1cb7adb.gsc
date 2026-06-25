@@ -32,7 +32,7 @@ function private add(var_4bf53b01, var_76e98c1f, var_2a015e7e, var_f8f020e3) {
   namespace_61e6d095::function_9ade1d9b(#"hash_2c29a54813fff877", "image", var_76e98c1f);
   namespace_61e6d095::function_9ade1d9b(#"hash_2c29a54813fff877", "earnedCount", var_2a015e7e);
   namespace_61e6d095::function_9ade1d9b(#"hash_2c29a54813fff877", "maxCount", var_f8f020e3);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player playSound(#"hash_1d0d39163d572a71");
 }
 

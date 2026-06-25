@@ -49,7 +49,7 @@ _give_player_rocket_launcher() {
 }
 
 main() {
-  level.vh_vtol = getent("defalco_osprey", "targetname");
+  level.vh_vtol = getEnt("defalco_osprey", "targetname");
   flag_wait("start_end_sequence");
   init_heroes(array("harper", "salazar"));
   add_trigger_function("run_escape_scene", ::run_escape_scene);
@@ -259,7 +259,7 @@ defalco_zoom(ai_defalco) {
   e_cam hide();
   sndent = spawn("script_origin", (0, 0, 0));
   sndent playLoopSound("evt_timeslow_loop", 0.25);
-  level.player disableclientlinkto();
+  level.player disableclientlinkTo();
   level.player playerlinktoabsolute(e_cam, "tag_origin");
   e_cam zoom_in(1, 0.5, 0.2, 0.3);
   e_cam zoom_in(2, 0.7, 0.2, 0.2);
@@ -274,7 +274,7 @@ defalco_zoom(ai_defalco) {
   wait 0.05;
   sndent stoploopsound(1.5);
   delay_thread(3, ::delete_sndent, sndent);
-  level.player setorigin(level.player.v_player_before_zoom_org);
+  level.player setOrigin(level.player.v_player_before_zoom_org);
   level.player setplayerangles(level.player.v_player_before_zoom_ang);
   level.player showviewmodel();
   level.player enableweapons();
@@ -330,7 +330,7 @@ update_cam(n_fraction, v_offset) {
   v_target = level.ai_defalco gettagorigin("j_spine4");
   v_to_end = v_target - level.player.v_player_before_zoom_eye;
   n_vec_length = length(v_to_end);
-  v_path = vectornormalize(v_to_end) * (n_vec_length - 40);
+  v_path = vectorNormalize(v_to_end) * (n_vec_length - 40);
   self dontinterpolate();
   self.origin = lerpvector(level.player.v_player_before_zoom_eye, level.player.v_player_before_zoom_eye + v_path, n_fraction) + v_offset;
   self.angles = vectortoangles(v_target - self.origin);
@@ -397,7 +397,7 @@ escort_react() {
   disable_react();
   disable_pain();
   v_to_player = level.player.origin - self.origin;
-  n_dot_to_player = vectordot(vectornormalize(v_to_player), anglesToForward(self.angles));
+  n_dot_to_player = vectordot(vectorNormalize(v_to_player), anglesToForward(self.angles));
 
   if(n_dot_to_player < -0.3) {
     v_goal_angles = vectortoangles(v_to_player * -1);
@@ -531,7 +531,7 @@ launch_escape_vehicle(delay) {
 
   if(isDefined(level.ai_defalco)) {
     level.ai_defalco hide();
-    level.ai_defalco linkto(level.vh_vtol);
+    level.ai_defalco linkTo(level.vh_vtol);
   }
 
   nd_escape_path = getvehiclenode("escape_plane_path_start", "targetname");
@@ -549,7 +549,7 @@ do_vtol_escape(ent) {
     level thread pip_karma_event("pip_helipad");
   }
 
-  level.vh_vtol = getent("defalco_osprey", "targetname");
+  level.vh_vtol = getEnt("defalco_osprey", "targetname");
   level.vh_vtol endon("death");
 
   if(isDefined(level.ai_defalco_escort2)) {

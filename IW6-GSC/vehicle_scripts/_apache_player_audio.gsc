@@ -50,20 +50,20 @@ start_player_apache_engine_audio() {
   self.roll_other_mult = 1.0;
   self.audio_entities = [];
   self.audio_entities["low_front"] = spawn("script_origin", var_0.origin);
-  self.audio_entities["low_front"] linkto(var_0);
+  self.audio_entities["low_front"] linkTo(var_0);
   self.audio_entities["low_front"] playLoopSound("apache_int_slow_fronts");
   self.audio_entities["low_rear"] = spawn("script_origin", var_0.origin);
-  self.audio_entities["low_rear"] linkto(var_0);
+  self.audio_entities["low_rear"] linkTo(var_0);
   self.audio_entities["high_front"] = spawn("script_origin", var_0.origin);
-  self.audio_entities["high_front"] linkto(var_0);
+  self.audio_entities["high_front"] linkTo(var_0);
   self.audio_entities["high_front"] playLoopSound("apache_int_fast_fronts");
   self.audio_entities["high_rear"] = spawn("script_origin", var_0.origin);
-  self.audio_entities["high_rear"] linkto(var_0);
+  self.audio_entities["high_rear"] linkTo(var_0);
   self.audio_entities["high_bank_front"] = spawn("script_origin", var_0.origin);
-  self.audio_entities["high_bank_front"] linkto(var_0);
+  self.audio_entities["high_bank_front"] linkTo(var_0);
   self.audio_entities["high_bank_front"] playLoopSound("apache_int_bank_fronts");
   self.audio_entities["high_bank_rear"] = spawn("script_origin", var_0.origin);
-  self.audio_entities["high_bank_rear"] linkto(var_0);
+  self.audio_entities["high_bank_rear"] linkTo(var_0);
 
   for(;;) {
     self.audio_speed = var_1 vehicle_getspeed();

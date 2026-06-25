@@ -82,19 +82,19 @@ function_4b104fc5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 clock_interact_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "damage_light");
+    self playRumbleOnEntity(localclientnum, "damage_light");
   }
 }
 
 server_carry_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "damage_light");
+    self playRumbleOnEntity(localclientnum, "damage_light");
   }
 }
 
 server_carry_fail_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
   }
 }
 

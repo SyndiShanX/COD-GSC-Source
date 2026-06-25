@@ -593,7 +593,7 @@ removeAC130Player(player, disconnected) {
   ac130model moveTo(destPoint, 40.0, 0.0, 0.0);
 
   planeAngles = (0, ac130model.angles[1], -20);
-  ac130model RotateTo(planeAngles, 30, 1, 1);
+  ac130model rotateTo(planeAngles, 30, 1, 1);
 
   ac130model thread deployFlares(true);
 
@@ -760,16 +760,16 @@ rotatePlane(toggle) {
   if(toggle == "on") {
     rampupDegrees = 10;
     rotateTime = (level.ac130_Speed["rotate"] / 360) * rampupDegrees;
-    level.ac130 rotateyaw(level.ac130.angles[2] + rampupDegrees, rotateTime, rotateTime, 0);
+    level.ac130 rotateYaw(level.ac130.angles[2] + rampupDegrees, rotateTime, rotateTime, 0);
 
     for(;;) {
-      level.ac130 rotateyaw(360, level.ac130_Speed["rotate"]);
+      level.ac130 rotateYaw(360, level.ac130_Speed["rotate"]);
       wait level.ac130_Speed["rotate"];
     }
   } else if(toggle == "off") {
     slowdownDegrees = 10;
     rotateTime = (level.ac130_Speed["rotate"] / 360) * slowdownDegrees;
-    level.ac130 rotateyaw(level.ac130.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
+    level.ac130 rotateYaw(level.ac130.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
   }
 }
 
@@ -790,7 +790,7 @@ debug_AC130() {
 
 attachPlayer(player) {
   if(IsBot(player)) {
-    player CameraLinkTo(level.ac130, "tag_player");
+    player CameralinkTo(level.ac130, "tag_player");
   }
 
   self PlayerLinkWeaponviewToDelta(level.ac130.cameramodel, "tag_player", 1.0, 35, 35, 35, 35);

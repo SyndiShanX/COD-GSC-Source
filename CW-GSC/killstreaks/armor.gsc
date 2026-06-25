@@ -36,7 +36,7 @@ function use_armor(killstreaktype) {
   }
 
   var_f721af54 = spawn("script_origin", self.origin);
-  var_f721af54 linkto(self);
+  var_f721af54 linkTo(self);
   self.var_f721af54 = var_f721af54;
   var_f721af54 killstreaks::configure_team("weapon_armor", self.var_c79fb13d, self);
   self playlocalsound(#"hash_1e84a47d66834c73");

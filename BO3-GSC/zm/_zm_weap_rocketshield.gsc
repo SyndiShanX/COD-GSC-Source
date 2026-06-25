@@ -176,7 +176,7 @@ function riotshield_melee_juke(weapon) {
     level.riotshield_fling_vecs = [];
   }
   while((start_time + 3000) > gettime()) {
-    self playrumbleonentity("zod_shield_juke");
+    self playRumbleOnEntity("zod_shield_juke");
     forward = anglesToForward(self getplayerangles());
     shield_damage = 0;
     enemies = riotshield_get_juke_enemies_in_range();
@@ -201,10 +201,10 @@ function riotshield_melee_juke(weapon) {
 
 function function_92debe0a() {
   level waittill("start_of_round");
-  foreach(player in getplayers()) {}
+  foreach(player in getPlayers()) {}
   while(true) {
     level waittill("start_of_round");
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player.hasriotshield) && player.hasriotshield) {
         player givestartammo(player.weaponriotshield);
       }
@@ -328,7 +328,7 @@ function function_fc8bb1d(a_spawnpoints) {
 }
 
 function bottle_trigger_visibility(player) {
-  self sethintstring(&"ZM_ZOD_PICKUP_BOTTLE");
+  self setHintString(&"ZM_ZOD_PICKUP_BOTTLE");
   if(!(isDefined(player.hasriotshield) && player.hasriotshield) || player getammocount(player.weaponriotshield) == player.weaponriotshield.maxammo) {
     b_is_invis = 1;
   } else {
@@ -374,14 +374,14 @@ function function_3f94d6cf() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     ip1 = i + 1;
   }
 }
 
 function function_e2f5a93(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
   switch (cmd) {
     case "": {

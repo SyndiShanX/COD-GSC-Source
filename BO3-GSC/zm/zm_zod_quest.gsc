@@ -94,7 +94,7 @@ function __init__() {
   visionset_mgr::register_info("visionset", "zod_ritual_dim", 1, 1, 15, 1, &visionset_mgr::ramp_in_out_thread_per_player, 0);
   a_str_names = array("boxer", "detective", "femme", "magician");
   foreach(str_name in a_str_names) {
-    relic_placed = getent(("quest_ritual_relic_" + str_name) + "_placed", "targetname");
+    relic_placed = getEnt(("quest_ritual_relic_" + str_name) + "_placed", "targetname");
     relic_placed ghost();
     a_e_clip = getEntArray("ritual_clip_" + str_name, "targetname");
     foreach(e_clip in a_e_clip) {
@@ -198,7 +198,7 @@ function start_zod_quest() {
 
 function prevent_theater_mode_spoilers() {
   level flag::wait_till("initial_blackscreen_passed");
-  mdl_key = getent("quest_key_pickup", "targetname");
+  mdl_key = getEnt("quest_key_pickup", "targetname");
   mdl_key ghost();
 }
 
@@ -211,7 +211,7 @@ function function_ffcfbd77() {
 }
 
 function setup_quest_key() {
-  mdl_key = getent("quest_key_pickup", "targetname");
+  mdl_key = getEnt("quest_key_pickup", "targetname");
   mdl_key show();
   mdl_key useanimtree($generic);
   mdl_key clientfield::set("item_glow_fx", 1);
@@ -240,7 +240,7 @@ function create_quest_key_pickup_unitrigger(mdl_key) {
 function quest_key_trigger_visibility(player) {
   b_is_invis = isDefined(player.beastmode) && player.beastmode || (!(isDefined(level.quest_key_can_be_picked_up) && level.quest_key_can_be_picked_up));
   self setinvisibletoplayer(player, b_is_invis);
-  self sethintstring(&"ZM_ZOD_QUEST_RITUAL_PICKUP_QUEST_KEY");
+  self setHintString(&"ZM_ZOD_QUEST_RITUAL_PICKUP_QUEST_KEY");
   return !b_is_invis;
 }
 
@@ -295,25 +295,25 @@ function personal_item_canal() {
   a_e_door = getEntArray("quest_personal_item_canal_door", "targetname");
   level flag::wait_till("power_on" + 23);
   foreach(e_door in a_e_door) {
-    e_door moveto(e_door.origin - vectorscale((0, 0, 1), 64), 1);
+    e_door moveTo(e_door.origin - vectorscale((0, 0, 1), 64), 1);
   }
 }
 
 function function_af9ab682() {
   level flag::wait_till("power_on" + 21);
-  e_door_left = getent("deco_door_left", "targetname");
-  e_door_right = getent("deco_door_right", "targetname");
-  e_door_clip = getent("deco_door_clip", "targetname");
-  e_door_left rotateyaw(135, 3);
-  e_door_right rotateyaw(-135, 3);
+  e_door_left = getEnt("deco_door_left", "targetname");
+  e_door_right = getEnt("deco_door_right", "targetname");
+  e_door_clip = getEnt("deco_door_clip", "targetname");
+  e_door_left rotateYaw(135, 3);
+  e_door_right rotateYaw(-135, 3);
   e_door_clip connectpaths();
   e_door_clip delete();
   level flag::set("connect_theater_to_burlesque");
 }
 
 function keeper_sword_locker() {
-  e_door = getent("keeper_sword_locker", "targetname");
-  e_door_clip = getent("keeper_sword_locker_clip", "targetname");
+  e_door = getEnt("keeper_sword_locker", "targetname");
+  e_door_clip = getEnt("keeper_sword_locker_clip", "targetname");
   e_door clientfield::set("set_subway_wall_dissolve", 1);
   level flag::wait_till("keeper_sword_locker");
   e_door clientfield::set("set_subway_wall_dissolve", 0);
@@ -326,7 +326,7 @@ function keeper_sword_locker() {
 }
 
 function reveal_personal_item(str_id) {
-  mdl_phrase = getent(str_id + "_phrase", "targetname");
+  mdl_phrase = getEnt(str_id + "_phrase", "targetname");
   if(isDefined(mdl_phrase)) {
     mdl_phrase delete();
   }
@@ -359,7 +359,7 @@ function reveal_personal_item(str_id) {
 }
 
 function function_984725d6(str_name) {
-  var_d16bd3a3 = getent("ritual_zombie_spawner", "targetname");
+  var_d16bd3a3 = getEnt("ritual_zombie_spawner", "targetname");
   level flag::wait_till(("memento_" + str_name) + "_found");
   if(level.var_a80c1a9a !== 1) {
     level.var_a80c1a9a = 0;
@@ -394,8 +394,8 @@ function function_984725d6(str_name) {
 }
 
 function function_58fe842c() {
-  e_spawner = getent("ritual_zombie_spawner", "targetname");
-  var_eb09d2ff = getent("keeper_subway_welcome", "targetname");
+  e_spawner = getEnt("ritual_zombie_spawner", "targetname");
+  var_eb09d2ff = getEnt("keeper_subway_welcome", "targetname");
   b_triggered = 0;
   while(!b_triggered) {
     var_eb09d2ff waittill("trigger", e_triggerer);
@@ -591,7 +591,7 @@ function ritual_start(str_name, e_triggerer) {
   if(str_name === "pap") {
     level.pap_altar_filled = 1;
     level.pap_altar_active = 1;
-    mdl_key = getent("quest_key_pickup", "targetname");
+    mdl_key = getEnt("quest_key_pickup", "targetname");
     s_altar = struct::get("defend_area_pap", "targetname");
     mdl_key.origin = s_altar.origin;
     mdl_key show();
@@ -857,9 +857,9 @@ function ritual_pap_succeed() {
   }
   a_str_gateworm_held = array("relic_boxer", "relic_detective", "relic_femme", "relic_magician");
   foreach(str_gateworm_held in a_str_gateworm_held) {
-    mdl_gateworm = getent(("quest_ritual_" + str_gateworm_held) + "_placed", "targetname");
+    mdl_gateworm = getEnt(("quest_ritual_" + str_gateworm_held) + "_placed", "targetname");
     mdl_gateworm movez(64, 3);
-    mdl_gateworm rotateyaw(180, 3);
+    mdl_gateworm rotateYaw(180, 3);
   }
   level notify("ritual_pap_succeed");
   level flag::set("ritual_pap_complete");
@@ -909,10 +909,10 @@ function get_completed_ritual_count() {
 }
 
 function setup_pap_door() {
-  e_pap_door = getent("pap_door", "targetname");
-  e_pap_door_brick_chunk1 = getent("e_pap_door_brick_chunk1", "targetname");
-  e_pap_door_brick_chunk2 = getent("e_pap_door_brick_chunk2", "targetname");
-  e_pap_door_clip = getent("pap_door_clip", "targetname");
+  e_pap_door = getEnt("pap_door", "targetname");
+  e_pap_door_brick_chunk1 = getEnt("e_pap_door_brick_chunk1", "targetname");
+  e_pap_door_brick_chunk2 = getEnt("e_pap_door_brick_chunk2", "targetname");
+  e_pap_door_clip = getEnt("pap_door_clip", "targetname");
   e_pap_door_brick_chunk1 thread clientfield::set("set_subway_wall_dissolve", 1);
   e_pap_door_brick_chunk2 thread clientfield::set("set_subway_wall_dissolve", 1);
   e_pap_door hidepart("tag_ritual_key_on");
@@ -957,7 +957,7 @@ function pap_door_watch_for_ritual(str_name) {
 function pap_door_watch_for_explosion() {
   level notify("pap_door_watch_for_explosion");
   level endon("pap_door_watch_for_explosion");
-  t_pap_door = getent("pap_door_trigger", "targetname");
+  t_pap_door = getEnt("pap_door_trigger", "targetname");
   while(true) {
     foreach(player in level.activeplayers) {
       if(zombie_utility::is_player_valid(player) && player istouching(t_pap_door)) {
@@ -1023,9 +1023,9 @@ function basin_trigger_visibility(player) {
     str_gateworm_held = function_7839dceb();
   }
   if(isDefined(str_gateworm_held)) {
-    self sethintstring(&"ZM_ZOD_QUEST_RITUAL_PLACE_RELIC");
+    self setHintString(&"ZM_ZOD_QUEST_RITUAL_PLACE_RELIC");
   } else {
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
   }
   return !b_is_invis;
 }
@@ -1036,12 +1036,12 @@ function altar_trigger_visibility(player) {
   all_basins_filled = are_all_basins_filled();
   if(!all_basins_filled) {
     if(isDefined(level.pap_altar_filled)) {
-      self sethintstring(&"ZM_ZOD_QUEST_RITUAL_PAP_REPLACE");
+      self setHintString(&"ZM_ZOD_QUEST_RITUAL_PAP_REPLACE");
     } else {
-      self sethintstring(&"ZM_ZOD_QUEST_RITUAL_PAP_NOT_READY");
+      self setHintString(&"ZM_ZOD_QUEST_RITUAL_PAP_NOT_READY");
     }
   } else {
-    self sethintstring(&"ZM_ZOD_QUEST_RITUAL_PAP_KICKOFF");
+    self setHintString(&"ZM_ZOD_QUEST_RITUAL_PAP_KICKOFF");
   }
   return !b_is_invis;
 }
@@ -1162,7 +1162,7 @@ function basin_trigger_thread() {
 }
 
 function function_5eb042a7(str_flag, str_gateworm_held, b_is_active) {
-  mdl_gateworm = getent(("quest_ritual_" + str_gateworm_held) + "_placed", "targetname");
+  mdl_gateworm = getEnt(("quest_ritual_" + str_gateworm_held) + "_placed", "targetname");
   if(b_is_active) {
     e_basin = get_worm_basin(str_flag);
     var_16e322eb = str_flag + "_pos";
@@ -1201,10 +1201,10 @@ function watch_wallrun(var_e7fbc48, str_flag) {
   }
   str_wallrun = "quest_ritual_pap_wallrun_" + str_side;
   str_model = "quest_ritual_pap_frieze_" + str_side;
-  t_wallrun = getent(str_wallrun, "targetname");
+  t_wallrun = getEnt(str_wallrun, "targetname");
   t_wallrun triggerenable(0);
   t_wallrun thread monitor_wallrun_trigger();
-  mdl_frieze = getent(str_model, "targetname");
+  mdl_frieze = getEnt(str_model, "targetname");
   mdl_frieze useanimtree($generic);
   while(true) {
     flag::wait_till(str_flag);
@@ -1229,15 +1229,15 @@ function set_frieze_power(var_e7fbc48, b_on) {
   } else {
     str_side = "right";
   }
-  t_wallrun = getent("quest_ritual_pap_wallrun_" + str_side, "targetname");
-  mdl_frieze = getent("quest_ritual_pap_frieze_" + str_side, "targetname");
+  t_wallrun = getEnt("quest_ritual_pap_wallrun_" + str_side, "targetname");
+  mdl_frieze = getEnt("quest_ritual_pap_frieze_" + str_side, "targetname");
   if(b_on) {
     var_4539ae4a = struct::get("quest_ritual_pap_wallimpacts_" + str_side, "targetname");
     level thread function_7107ea51(mdl_frieze, var_4539ae4a);
     mdl_frieze animation::play("p7_fxanim_zm_zod_frieze_anim");
     mdl_frieze animation::first_frame("p7_fxanim_zm_zod_frieze_fall_anim");
     t_wallrun triggerenable(1);
-    t_wallrun sethintstring("");
+    t_wallrun setHintString("");
     exploder::exploder(("fx_exploder_ritual_frieze_" + str_side) + "_wallrun");
     level notify("hash_7107ea51");
   } else {
@@ -1331,9 +1331,9 @@ function watch_island(var_f7225255, str_flag) {
   } else {
     str_side = "far";
   }
-  e_island = getent("pap_chamber_middle_island_" + str_side, "targetname");
+  e_island = getEnt("pap_chamber_middle_island_" + str_side, "targetname");
   e_island ghost();
-  e_clip = getent(("pap_chamber_middle_island_" + str_side) + "_clip", "targetname");
+  e_clip = getEnt(("pap_chamber_middle_island_" + str_side) + "_clip", "targetname");
   e_clip setinvisibletoall();
   while(true) {
     flag::wait_till(str_flag);
@@ -1355,9 +1355,9 @@ function function_c3e5d4f(var_f7225255, b_on) {
     str_side = "far";
     var_ea5390b2 = 2;
   }
-  e_island = getent("pap_chamber_middle_island_" + str_side, "targetname");
+  e_island = getEnt("pap_chamber_middle_island_" + str_side, "targetname");
   e_island useanimtree($generic);
-  e_clip = getent(("pap_chamber_middle_island_" + str_side) + "_clip", "targetname");
+  e_clip = getEnt(("pap_chamber_middle_island_" + str_side) + "_clip", "targetname");
   if(b_on) {
     var_4539ae4a = struct::get("quest_ritual_pap_bridgeimpacts_" + str_side, "targetname");
     level thread function_7107ea51(e_island, var_4539ae4a);
@@ -1378,19 +1378,19 @@ function watch_central_traversal(a_flags) {
   self endon("watch_central_traversal");
   str_traversal = "pap_mid_jump_72";
   nd_traversal = getnode(str_traversal, "targetname");
-  e_monster_clip = getent("pap_chamber_middle_island_monster_clip", "targetname");
+  e_monster_clip = getEnt("pap_chamber_middle_island_monster_clip", "targetname");
   while(true) {
     flag::wait_till_all(a_flags);
-    e_monster_clip moveto(e_monster_clip.origin - vectorscale((0, 0, 1), 5000), 0.1);
+    e_monster_clip moveTo(e_monster_clip.origin - vectorscale((0, 0, 1), 5000), 0.1);
     e_monster_clip connectpaths();
     flag::wait_till_clear_any(a_flags);
-    e_monster_clip moveto(e_monster_clip.origin + vectorscale((0, 0, 1), 5000), 0.1);
-    e_monster_clip disconnectpaths();
+    e_monster_clip moveTo(e_monster_clip.origin + vectorscale((0, 0, 1), 5000), 0.1);
+    e_monster_clip disconnectPaths();
   }
 }
 
 function pap_chasm_killtrigger() {
-  t_kill = getent("pap_chasm_killtrigger", "targetname");
+  t_kill = getEnt("pap_chasm_killtrigger", "targetname");
   level thread function_64cb1f9b("pap_chasm_side_far", 1);
   level thread function_64cb1f9b("pap_chasm_side_near", 0);
   while(true) {
@@ -1405,14 +1405,14 @@ function pap_chasm_killtrigger() {
         var_38feb4f6 = struct::get_array("pap_chasm_return_point_near", "targetname");
       }
       var_8f51a1d6 = arraygetclosest(e_triggerer.origin, var_38feb4f6);
-      e_triggerer setorigin(var_8f51a1d6.origin);
+      e_triggerer setOrigin(var_8f51a1d6.origin);
       e_triggerer setplayerangles(var_8f51a1d6.angles);
     }
   }
 }
 
 function function_64cb1f9b(str_trigger_name, var_f8826470) {
-  var_b354bc3b = getent(str_trigger_name, "targetname");
+  var_b354bc3b = getEnt(str_trigger_name, "targetname");
   while(true) {
     var_b354bc3b waittill("trigger", e_triggerer);
     if(isPlayer(e_triggerer)) {
@@ -1530,19 +1530,19 @@ function function_dc59b750(n_val) {
 function function_83c8b6e8() {
   zm_pap_util::set_move_in_func(&function_5630c228);
   zm_pap_util::set_move_out_func(&function_ea272f07);
-  var_de243c38 = getent("vending_packapunch", "targetname");
+  var_de243c38 = getEnt("vending_packapunch", "targetname");
   var_de243c38 ghost();
   var_4197ca83 = zm_pap_util::get_triggers();
   foreach(trigger in var_4197ca83) {
-    trigger sethintstring("");
+    trigger setHintString("");
   }
-  var_eadb7e53 = getent("pap_tentacle", "targetname");
+  var_eadb7e53 = getEnt("pap_tentacle", "targetname");
   var_eadb7e53 useanimtree($generic);
   var_eadb7e53 ghost();
 }
 
 function function_a6838c4f() {
-  var_eadb7e53 = getent("pap_tentacle", "targetname");
+  var_eadb7e53 = getEnt("pap_tentacle", "targetname");
   if(!isDefined(var_eadb7e53.org_angles)) {
     var_eadb7e53.org_angles = var_eadb7e53.angles;
   }
@@ -1554,7 +1554,7 @@ function function_5630c228(player, trigger, origin_offset, angles_offset) {
   level endon("pack_a_punch_off");
   trigger endon("pap_player_disconnected");
   var_c7c7077b = struct::get("pap_portal_center", "targetname");
-  var_eadb7e53 = getent("pap_tentacle", "targetname");
+  var_eadb7e53 = getEnt("pap_tentacle", "targetname");
   if(!isDefined(var_eadb7e53.org_angles)) {
     var_eadb7e53.org_angles = var_eadb7e53.angles;
   }
@@ -1564,7 +1564,7 @@ function function_5630c228(player, trigger, origin_offset, angles_offset) {
   temp_ent.angles = var_eadb7e53.angles;
   temp_ent setModel("tag_origin_animate");
   temp_ent useanimtree($generic);
-  playsoundatposition("zmb_zod_pap_activate", var_c7c7077b.origin);
+  playSoundAtPosition("zmb_zod_pap_activate", var_c7c7077b.origin);
   offsetdw = vectorscale((1, 1, 1), 3);
   weoptions = 0;
   trigger.worldgun = zm_utility::spawn_buildkit_weapon_model(player, trigger.current_weapon, undefined, self.origin, self.angles);
@@ -1573,10 +1573,10 @@ function function_5630c228(player, trigger, origin_offset, angles_offset) {
     worldgundw = zm_utility::spawn_buildkit_weapon_model(player, trigger.current_weapon, undefined, self.origin + offsetdw, self.angles);
   }
   trigger.worldgun.worldgundw = worldgundw;
-  trigger.worldgun linkto(temp_ent, "tag_origin", (0, 0, 0), angles_offset);
+  trigger.worldgun linkTo(temp_ent, "tag_origin", (0, 0, 0), angles_offset);
   offsetdw = vectorscale((1, 1, 1), 3);
   if(isDefined(trigger.worldgun.worldgundw)) {
-    trigger.worldgun.worldgundw linkto(temp_ent, "tag_origin", offsetdw, angles_offset);
+    trigger.worldgun.worldgundw linkTo(temp_ent, "tag_origin", offsetdw, angles_offset);
   }
   wait(0.5);
   temp_ent thread animation::play("o_zombie_zod_packapunch_tentacle_worldgun_taken");
@@ -1594,7 +1594,7 @@ function function_ea272f07(player, t_trigger, origin_offset, interact_offset) {
   level endon("pack_a_punch_off");
   t_trigger endon("pap_player_disconnected");
   var_c7c7077b = struct::get("pap_portal_center", "targetname");
-  var_eadb7e53 = getent("pap_tentacle", "targetname");
+  var_eadb7e53 = getEnt("pap_tentacle", "targetname");
   var_eadb7e53.origin = var_c7c7077b.origin;
   var_3acfce06 = spawn("script_model", var_eadb7e53.origin);
   var_3acfce06.angles = var_eadb7e53.angles;
@@ -1611,9 +1611,9 @@ function function_ea272f07(player, t_trigger, origin_offset, interact_offset) {
   if(!isDefined(t_trigger.worldgun)) {
     return;
   }
-  t_trigger.worldgun linkto(var_3acfce06, "tag_origin", (0, 0, 0), vectorscale((0, 1, 0), 90));
+  t_trigger.worldgun linkTo(var_3acfce06, "tag_origin", (0, 0, 0), vectorscale((0, 1, 0), 90));
   if(isDefined(t_trigger.worldgun.worldgundw)) {
-    t_trigger.worldgun.worldgundw linkto(var_3acfce06, "tag_origin", var_aa51a9ae, vectorscale((0, 1, 0), 90));
+    t_trigger.worldgun.worldgundw linkTo(var_3acfce06, "tag_origin", var_aa51a9ae, vectorscale((0, 1, 0), 90));
   }
   t_trigger thread function_4de2af97(var_eadb7e53, var_3acfce06);
   t_trigger util::waittill_any("pap_timeout", "pap_taken");

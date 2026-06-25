@@ -92,7 +92,7 @@ function function_59042f87(params) {
     recordstar(params.player.var_4ded0009, (1, 0, 1), "<dev string:x38>");
     record3dtext("<dev string:x42>", params.player.var_4ded0009, (1, 0, 1), "<dev string:x38>");
 
-    params.player setorigin(params.player.var_4ded0009);
+    params.player setOrigin(params.player.var_4ded0009);
   }
 
   params.player.var_4ded0009 = undefined;

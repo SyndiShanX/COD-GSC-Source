@@ -710,7 +710,7 @@ func_2832(param_00, param_01) {
   param_00.var_A98D[var_02].var_01D7 = param_00.var_0116[1];
   param_00.var_A98D[var_02].var_01D9 = param_00.var_0116[2] - 400;
   param_00.var_A98D[var_02] setwaypoint(1, 1, 1);
-  param_00.var_A98D[var_02] settargetent(param_00);
+  param_00.var_A98D[var_02] settargetEnt(param_00);
   param_00.var_A98D[var_02] method_8514(0);
   param_00.var_A98D[var_02].var_0180 = 0;
   param_00.var_A98D[var_02].var_001F = 0;
@@ -722,7 +722,7 @@ func_2832(param_00, param_01) {
   param_00.var_A991[var_02].var_01D7 = param_00.var_0116[1];
   param_00.var_A991[var_02].var_01D9 = param_00.var_0116[2];
   param_00.var_A991[var_02] setwaypoint(0, 1, 0);
-  param_00.var_A991[var_02] settargetent(param_00);
+  param_00.var_A991[var_02] settargetEnt(param_00);
   param_00.var_A991[var_02].var_0180 = 0;
   param_00.var_A991[var_02].var_001F = 0;
   level thread func_7CFF(self, param_00, param_00.var_A98D[var_02], param_00.var_A991[var_02]);

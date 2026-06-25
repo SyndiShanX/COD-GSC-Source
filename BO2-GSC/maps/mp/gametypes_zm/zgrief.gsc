@@ -229,7 +229,7 @@ zgrief_main() {
   }
 
   wait 1;
-  playsoundatposition("vox_zmba_grief_intro_0", (0, 0, 0));
+  playSoundAtPosition("vox_zmba_grief_intro_0", (0, 0, 0));
 }
 
 move_team_icons() {
@@ -241,7 +241,7 @@ move_team_icons() {
 kill_start_chest() {
   flag_wait("initial_blackscreen_passed");
   wait 2;
-  start_chest = getstruct("start_chest", "script_noteworthy");
+  start_chest = getStruct("start_chest", "script_noteworthy");
   start_chest maps\mp\zombies\_zm_magicbox::hide_chest();
 }
 
@@ -304,7 +304,7 @@ meat_bounce_override(pos, normal, ent) {
       }
     }
   } else {
-    players = getplayers();
+    players = getPlayers();
     closest_player = undefined;
     closest_player_dist = 10000.0;
 
@@ -378,7 +378,7 @@ meat_stink_player_create() {
   tagname = "J_SpineLower";
   self.meat_stink_3p = spawn("script_model", self gettagorigin(tagname));
   self.meat_stink_3p setModel("tag_origin");
-  self.meat_stink_3p linkto(self, tagname);
+  self.meat_stink_3p linkTo(self, tagname);
   wait 0.5;
   playFXOnTag(level._effect["meat_stink_torso"], self.meat_stink_3p, "tag_origin");
   self setclientfieldtoplayer("meat_stink", 1);

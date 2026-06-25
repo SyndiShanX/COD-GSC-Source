@@ -35,7 +35,7 @@ func_554E() {
   level.player notify("stop_limp");
   if(isDefined(level.player.var_8632)) {
     var_0 = level.player func_186F((0, 0, 0));
-    level.player.var_8632 rotateto(var_0, 0.05, 0, 0.05);
+    level.player.var_8632 rotateTo(var_0, 0.05, 0, 0.05);
     level.player.var_8632 waittill("rotatedone");
     level.player getwholescenedurationmin(undefined);
     level.player.var_8632 delete();
@@ -225,7 +225,7 @@ func_11182(var_0, var_1, var_2, var_3) {
   self endon("stop_stumble");
   self endon("stop_limp");
   var_0 = func_186F(var_0);
-  self.var_8632 rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  self.var_8632 rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   self.var_8632 waittill("rotatedone");
   if(isDefined(self.var_883D) && self.var_883D != "none") {
     thread func_D0E5(var_3);
@@ -235,7 +235,7 @@ func_11182(var_0, var_1, var_2, var_3) {
 
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = func_186F(var_4);
-  self.var_8632 rotateto(var_4, var_2, 0, var_2 / 2);
+  self.var_8632 rotateTo(var_4, var_2, 0, var_2 / 2);
   self.var_8632 waittill("rotatedone");
 }
 
@@ -252,7 +252,7 @@ func_D0E5(var_0) {
 
 func_D0E6(var_0) {
   if(var_0 > randomfloatrange(0.7, 1)) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     thread scripts\engine\utility::play_sound_in_space("breathing_limp");
     scripts\engine\utility::play_sound_in_space("breathing_heartbeat");
     return;

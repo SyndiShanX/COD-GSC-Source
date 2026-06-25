@@ -154,7 +154,7 @@ function function_91528afa(localclientnum, oldval, newval, bnewent, binitialsnap
   if(!isDefined(level.scriptbundles["scene"]["p7_fxanim_cp_aqu_war_groundassault_bundle"])) {
     return;
   }
-  pos = getent(localclientnum, "dogfighting_scene_client_side", "targetname");
+  pos = getEnt(localclientnum, "dogfighting_scene_client_side", "targetname");
   pos scene::play("p7_fxanim_cp_aqu_war_groundassault_bundle");
   pos scene::stop("p7_fxanim_cp_aqu_war_groundassault_bundle", 1);
   waittillframeend();

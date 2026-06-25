@@ -125,7 +125,7 @@ function function_15c21657() {
   level endon(#"hash_5e7f7bd30640b0f8");
   level.var_362ad52e = undefined;
   level.var_8a164bbe = undefined;
-  level.test_player = getplayers()[0];
+  level.test_player = getPlayers()[0];
   var_d5ae2adf = -1;
   var_e8343926 = undefined;
 

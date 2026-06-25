@@ -162,7 +162,7 @@ function function_6ea9a113(params) {
         offset = (item.origin[0], item.origin[1], item.origin[2]);
         function_55e20e75(params._id, offset);
         forward = item.origin - offset;
-        angle = vectornormalize(forward);
+        angle = vectorNormalize(forward);
         angles = (item.angles[0], item.angles[1], item.angles[2]);
         function_55e20e75(params._id, angles);
       }
@@ -235,7 +235,7 @@ function function_ea4b3f00(params) {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(skip) {
@@ -362,7 +362,7 @@ function function_782c6850(params) {
 }
 
 function function_3d37c034(params) {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     if(isDefined(e_player.intermission) || e_player.sessionstate == "<dev string:x402>" || e_player.sessionstate == "<dev string:x40f>") {

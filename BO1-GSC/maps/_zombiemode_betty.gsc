@@ -10,7 +10,7 @@
 init() {
   trigs = getEntArray("betty_purchase", "targetname");
   for(i = 0; i < trigs.size; i++) {
-    model = getent(trigs[i].target, "targetname");
+    model = getEnt(trigs[i].target, "targetname");
     model hide();
   }
   array_thread(trigs, ::buy_bouncing_betties);
@@ -18,7 +18,7 @@ init() {
 }
 buy_bouncing_betties() {
   self.zombie_cost = 1000;
-  self sethintstring(&"ZOMBIE_BETTY_PURCHASE");
+  self setHintString(&"ZOMBIE_BETTY_PURCHASE");
   self setCursorHint("HINT_NOICON");
   level thread set_betty_visible();
   self.betties_triggered = false;
@@ -36,7 +36,7 @@ buy_bouncing_betties() {
           who thread bouncing_betty_setup();
           who thread show_betty_hint("betty_purchased");
           if(self.betties_triggered == false) {
-            model = getent(self.target, "targetname");
+            model = getEnt(self.target, "targetname");
             model thread maps\_zombiemode_weapons::weapon_show(who);
             self.betties_triggered = true;
           }
@@ -50,7 +50,7 @@ buy_bouncing_betties() {
   }
 }
 set_betty_visible() {
-  players = getplayers();
+  players = getPlayers();
   trigs = getEntArray("betty_purchase", "targetname");
   while(1) {
     for(j = 0; j < players.size; j++) {
@@ -61,7 +61,7 @@ set_betty_visible() {
       }
     }
     wait(1);
-    players = getplayers();
+    players = getPlayers();
   }
 }
 bouncing_betty_watch() {
@@ -101,9 +101,9 @@ betty_think() {
   self hide();
   tag_origin = spawn("script_model", self.origin);
   tag_origin setModel("tag_origin");
-  tag_origin linkto(fake_model);
+  tag_origin linkTo(fake_model);
   playFXOnTag(level._effect["betty_trail"], tag_origin, "tag_origin");
-  fake_model moveto(fake_model.origin + (0, 0, 32), .2);
+  fake_model moveTo(fake_model.origin + (0, 0, 32), .2);
   fake_model waittill("movedone");
   playFX(level._effect["betty_explode"], fake_model.origin);
   earthquake(1, .4, fake_model.origin, 512);
@@ -129,7 +129,7 @@ betty_smoke_trail() {
   self.tag_origin = spawn("script_model", self.origin);
   self.tag_origin setModel("tag_origin");
   playFXOnTag(level._effect["betty_trail"], self.tag_origin, "tag_origin");
-  self.tag_origin moveto(self.tag_origin.origin + (0, 0, 100), .15);
+  self.tag_origin moveTo(self.tag_origin.origin + (0, 0, 100), .15);
 }
 give_betties_after_rounds() {
   while(1) {

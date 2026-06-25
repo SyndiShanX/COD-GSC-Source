@@ -91,7 +91,7 @@ _id_5387(var_0) {
   var_2.origin = self gettagorigin(var_1);
   var_2.angles = self gettagangles(var_1);
   var_2 setModel("com_flashlight_on");
-  var_2 linkto(self, var_1);
+  var_2 linkTo(self, var_1);
   var_3 = "tag_light";
   var_4 = level._effect["lights_flashlight_sandstorm"];
   playFXOnTag(var_4, var_2, var_3);

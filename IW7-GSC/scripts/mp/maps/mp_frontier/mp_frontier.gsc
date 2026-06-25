@@ -46,7 +46,7 @@ fix_collision() {
   var_3 = spawn("script_model", (-256, -1432, 745));
   var_3.angles = (0, 0, 90);
   var_3 setModel("beacon_metal_panel_wall_double_mp_frontier_patch");
-  var_4 = getent("player512x512x8", "targetname");
+  var_4 = getEnt("player512x512x8", "targetname");
   var_5 = spawn("script_model", (416, -72, 768));
   var_5.angles = (0, 0, 90);
   var_5 clonebrushmodeltoscriptmodel(var_4);
@@ -54,7 +54,7 @@ fix_collision() {
   var_6.fgetarg = 2500;
   var_6.height = 128;
   var_6 thread kill_trigger_loop("script_vehicle");
-  var_7 = getent("clip512x512x8", "targetname");
+  var_7 = getEnt("clip512x512x8", "targetname");
   var_8 = spawn("script_model", (0, 592, 240));
   var_8.angles = (0, 0, -90);
   var_8 clonebrushmodeltoscriptmodel(var_7);
@@ -106,7 +106,7 @@ func_A3FF() {
     level notify("elevator_open");
     wait(0.1);
     level notify("platform_raise");
-    var_0 moveto(var_0.var_6106.origin, 10, 2.5, 2.5);
+    var_0 moveTo(var_0.var_6106.origin, 10, 2.5, 2.5);
     wait(10);
     var_1 func_A3FD();
     var_0 thread func_A403();
@@ -119,7 +119,7 @@ func_A3FF() {
     level notify("elevator_open");
     wait(0.1);
     level notify("platform_raise");
-    var_1 moveto(var_1.var_6106.origin, 10, 2.5, 2.5);
+    var_1 moveTo(var_1.var_6106.origin, 10, 2.5, 2.5);
     wait(10);
     var_0 func_A3FD();
     var_0 func_A3FE();
@@ -137,21 +137,21 @@ func_A403() {
   playFXOnTag(scripts\engine\utility::getfx("taxiThrust"), self, "tag_thrust_rear_ri");
   thread func_A252();
   var_0 = abs(distance(self.origin, self.var_BE1B.origin) * 0.01);
-  self moveto(self.var_BE1B.origin, var_0, 2, 0);
+  self moveTo(self.var_BE1B.origin, var_0, 2, 0);
   wait(var_0);
-  self.var_BF7A = scripts\engine\utility::getstruct(self.var_BE1B.target, "targetname");
+  self.var_BF7A = scripts\engine\utility::getStruct(self.var_BE1B.target, "targetname");
   while(isDefined(self.var_BF7A)) {
     var_0 = abs(distance(self.origin, self.var_BF7A.origin) * 0.01);
     if(isDefined(self.var_BF7A.target)) {
-      self moveto(self.var_BF7A.origin, var_0, 0, 0);
-      self rotateto(self.var_BF7A.angles, var_0, 0, 0);
+      self moveTo(self.var_BF7A.origin, var_0, 0, 0);
+      self rotateTo(self.var_BF7A.angles, var_0, 0, 0);
       wait(var_0);
-      self.var_BF7A = scripts\engine\utility::getstruct(self.var_BF7A.target, "targetname");
+      self.var_BF7A = scripts\engine\utility::getStruct(self.var_BF7A.target, "targetname");
       continue;
     }
 
-    self moveto(self.var_BF7A.origin, var_0, 0, var_0 * 0.5);
-    self rotateto(self.var_BF7A.angles, var_0, 0, var_0 * 0.5);
+    self moveTo(self.var_BF7A.origin, var_0, 0, var_0 * 0.5);
+    self rotateTo(self.var_BF7A.angles, var_0, 0, var_0 * 0.5);
     wait(var_0);
     self.var_BF7A = undefined;
   }
@@ -215,17 +215,17 @@ func_A3FD() {
   playFXOnTag(scripts\engine\utility::getfx("takeoffThrust2"), self, "tag_thrust_rear_le");
   playFXOnTag(scripts\engine\utility::getfx("takeoffThrust2"), self, "tag_thrust_rear_ri");
   self playsoundonmovingent("frontier_jackal_launch_02");
-  self rotateto(self.var_6F24.angles, 6, 2.5);
-  self moveto(self.var_AAA7.origin, 2.5, 0.625);
+  self rotateTo(self.var_6F24.angles, 6, 2.5);
+  self moveTo(self.var_AAA7.origin, 2.5, 0.625);
   wait(2.5);
   playFXOnTag(scripts\engine\utility::getfx("takeoffThrust"), self, "tag_thrust_rear_le");
   playFXOnTag(scripts\engine\utility::getfx("takeoffThrust"), self, "tag_thrust_rear_ri");
   self playsoundonmovingent("frontier_jackal_launch_03");
-  self moveto(self.var_6F24.origin, 3.5, 0.7);
+  self moveTo(self.var_6F24.origin, 3.5, 0.7);
   wait(3.5);
   playFXOnTag(scripts\engine\utility::getfx("takeoffThrust"), self, "tag_thrust_rear_le");
   playFXOnTag(scripts\engine\utility::getfx("takeoffThrust"), self, "tag_thrust_rear_ri");
-  self moveto(self.var_6F26.origin, 3.5, 0.7);
+  self moveTo(self.var_6F26.origin, 3.5, 0.7);
   wait(3.5);
 }
 
@@ -235,34 +235,34 @@ func_A3FE() {
 }
 
 func_A402(var_0) {
-  var_1 = getent(var_0, "targetname");
-  var_1.areanynavvolumesloaded = scripts\engine\utility::getstruct("jackal_startPos", "targetname");
-  var_1.var_BE12 = getent(var_0 + "_col", "targetname");
-  var_1.var_BE12 linkto(var_1);
+  var_1 = getEnt(var_0, "targetname");
+  var_1.areanynavvolumesloaded = scripts\engine\utility::getStruct("jackal_startPos", "targetname");
+  var_1.var_BE12 = getEnt(var_0 + "_col", "targetname");
+  var_1.var_BE12 linkTo(var_1);
   var_1.var_BE12 hide();
-  var_1.var_BE1D = getent(var_0 + "_thrusters", "targetname");
-  var_1.var_BE1D linkto(var_1);
+  var_1.var_BE1D = getEnt(var_0 + "_thrusters", "targetname");
+  var_1.var_BE1D linkTo(var_1);
   var_1.var_BE1D hide();
-  var_1.var_6106 = scripts\engine\utility::getstruct("jackal_elevatorTopPos", "targetname");
-  var_1.var_BE1B = scripts\engine\utility::getstruct(var_0 + "_path", "targetname");
-  var_1.var_AAA7 = scripts\engine\utility::getstruct(var_0 + "_launch", "targetname");
-  var_1.var_6F24 = scripts\engine\utility::getstruct(var_0 + "_flight", "targetname");
-  var_1.var_6F26 = scripts\engine\utility::getstruct(var_0 + "_flightEnd", "targetname");
+  var_1.var_6106 = scripts\engine\utility::getStruct("jackal_elevatorTopPos", "targetname");
+  var_1.var_BE1B = scripts\engine\utility::getStruct(var_0 + "_path", "targetname");
+  var_1.var_AAA7 = scripts\engine\utility::getStruct(var_0 + "_launch", "targetname");
+  var_1.var_6F24 = scripts\engine\utility::getStruct(var_0 + "_flight", "targetname");
+  var_1.var_6F26 = scripts\engine\utility::getStruct(var_0 + "_flightEnd", "targetname");
   return var_1;
 }
 
 func_A401() {
-  var_0["platform"] = getent("elevator_platform", "targetname");
-  var_1 = scripts\engine\utility::getstruct("elevatorBot", "targetname");
-  var_2 = scripts\engine\utility::getstruct("elevatorTop", "targetname");
+  var_0["platform"] = getEnt("elevator_platform", "targetname");
+  var_1 = scripts\engine\utility::getStruct("elevatorBot", "targetname");
+  var_2 = scripts\engine\utility::getStruct("elevatorTop", "targetname");
   var_0["platform"].var_2EEA = var_1.origin;
   var_0["platform"].var_11A06 = var_2.origin;
-  var_0["door_left"] = getent("elevator_doorLeft", "targetname");
-  var_0["door_right"] = getent("elevator_doorRight", "targetname");
+  var_0["door_left"] = getEnt("elevator_doorLeft", "targetname");
+  var_0["door_right"] = getEnt("elevator_doorRight", "targetname");
   var_0["door_left"].areanynavvolumesloaded = var_0["door_left"].origin;
   var_0["door_right"].areanynavvolumesloaded = var_0["door_right"].origin;
-  var_3 = scripts\engine\utility::getstruct("elevatorOpenLeft", "targetname");
-  var_4 = scripts\engine\utility::getstruct("elevatorOpenRight", "targetname");
+  var_3 = scripts\engine\utility::getStruct("elevatorOpenLeft", "targetname");
+  var_4 = scripts\engine\utility::getStruct("elevatorOpenRight", "targetname");
   var_0["door_left"].var_C630 = var_3.origin;
   var_0["door_right"].var_C630 = var_4.origin;
   return var_0;
@@ -273,11 +273,11 @@ func_A400() {
   self["platform"] thread func_BCB8();
   for(;;) {
     level waittill("elevator_open");
-    self["door_left"] moveto(self["door_left"].var_C630, 2, 0.5, 0.5);
-    self["door_right"] moveto(self["door_right"].var_C630, 2, 0.5, 0.5);
+    self["door_left"] moveTo(self["door_left"].var_C630, 2, 0.5, 0.5);
+    self["door_right"] moveTo(self["door_right"].var_C630, 2, 0.5, 0.5);
     level waittill("elevator_close");
-    self["door_left"] moveto(self["door_left"].areanynavvolumesloaded, 2, 0.5, 0.5);
-    self["door_right"] moveto(self["door_right"].areanynavvolumesloaded, 2, 0.5, 0.5);
+    self["door_left"] moveTo(self["door_left"].areanynavvolumesloaded, 2, 0.5, 0.5);
+    self["door_right"] moveTo(self["door_right"].areanynavvolumesloaded, 2, 0.5, 0.5);
   }
 }
 
@@ -286,11 +286,11 @@ func_BCB8() {
   for(;;) {
     var_0 = level scripts\engine\utility::waittill_any_return("platform_raise", "platform_lower");
     if(var_0 == "platform_raise") {
-      self moveto(self.var_11A06, 10, 2.5, 2.5);
+      self moveTo(self.var_11A06, 10, 2.5, 2.5);
       continue;
     }
 
-    self moveto(self.var_2EEA, 10, 2.5, 2.5);
+    self moveTo(self.var_2EEA, 10, 2.5, 2.5);
   }
 }
 
@@ -333,7 +333,7 @@ func_E835() {
     foreach(var_7 in var_2) {
       foreach(var_4 in var_1[var_0]) {
         if(isDefined(var_4.target)) {
-          var_4 linkto(var_2[var_4.target]);
+          var_4 linkTo(var_2[var_4.target]);
         }
       }
     }
@@ -352,7 +352,7 @@ func_1F9E() {
 func_E836() {
   level endon("game_ended");
   var_0 = getscriptablearray("animating_cover", "targetname");
-  var_1 = getent("trig_animating_cover", "targetname");
+  var_1 = getEnt("trig_animating_cover", "targetname");
   foreach(var_3 in var_0) {
     switch (var_3.script_noteworthy) {
       case "green":
@@ -401,7 +401,7 @@ func_BD66() {
 }
 
 func_10CB4() {
-  var_0 = scripts\engine\utility::getstruct("opsmap_org", "targetname");
+  var_0 = scripts\engine\utility::getStruct("opsmap_org", "targetname");
   var_1 = var_0.origin + (0, 0, 48);
   var_2 = spawn("script_model", var_1);
   var_2.angles = var_0.angles;

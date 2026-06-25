@@ -52,7 +52,7 @@ init_door_buys() {
 }
 
 func_95B5(var_0) {
-  var_0 sethintstring(level.interaction_hintstrings[var_0.script_noteworthy]);
+  var_0 setHintString(level.interaction_hintstrings[var_0.script_noteworthy]);
   var_1 = [];
   foreach(var_3 in level.current_interaction_structs) {
     if(!isDefined(var_3.target)) {
@@ -312,7 +312,7 @@ capture_soul(var_0, var_1) {
   }
 
   foreach(var_5 in self.progress_meters) {
-    var_5 moveto(var_5.start_pos + (0, 0, 16 / self.kill_goal) * self.kill_captured, 0.1);
+    var_5 moveTo(var_5.start_pos + (0, 0, 16 / self.kill_goal) * self.kill_captured, 0.1);
   }
 
   if(self.kill_captured >= self.kill_goal) {
@@ -331,7 +331,7 @@ soul_to_door(var_0) {
       var_4 = 0.05;
     }
 
-    var_1 moveto(var_2, var_4);
+    var_1 moveTo(var_2, var_4);
     wait(0.05);
     if(!self.var_E0E2 && distancesquared(var_1.origin, var_2) > 256) {
       continue;
@@ -425,7 +425,7 @@ chi_door_think() {
     return;
   }
 
-  self sethintstring(level.interaction_hintstrings[self.script_noteworthy]);
+  self setHintString(level.interaction_hintstrings[self.script_noteworthy]);
   var_7 = func_7E81(var_3[0].script_noteworthy);
   if(isDefined(level.enter_area_hint)) {
     self sethintstringparams(level.enter_area_hint, var_7);

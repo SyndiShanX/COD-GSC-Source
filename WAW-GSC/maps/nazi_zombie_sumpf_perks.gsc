@@ -12,10 +12,10 @@ randomize_vending_machines() {
   vending_machines = getEntArray("zombie_vending", "targetname");
 
   start_locations = [];
-  start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
-  start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
-  start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
-  start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+  start_locations[0] = getEnt("random_vending_start_location_0", "script_noteworthy");
+  start_locations[1] = getEnt("random_vending_start_location_1", "script_noteworthy");
+  start_locations[2] = getEnt("random_vending_start_location_2", "script_noteworthy");
+  start_locations[3] = getEnt("random_vending_start_location_3", "script_noteworthy");
 
   level.start_locations = [];
   level.start_locations[level.start_locations.size] = start_locations[0].origin;
@@ -42,14 +42,14 @@ randomize_vending_machines() {
 }
 
 get_vending_machine(start_location) {
-  machine = GetEnt(self.target, "targetname");
+  machine = getEnt(self.target, "targetname");
 
   start_location.origin = machine.origin;
   start_location.angles = machine.angles;
 
-  self enablelinkto();
+  self enablelinkTo();
 
-  self linkto(start_location);
+  self linkTo(start_location);
 
   return machine;
 }
@@ -234,7 +234,7 @@ vending_randomization_effect(index) {
   machines = [];
 
   for(j = 0; j < vending_triggers.size; j++) {
-    machines[j] = getent(vending_triggers[j].target, "targetname");
+    machines[j] = getEnt(vending_triggers[j].target, "targetname");
   }
 
   for(j = 0; j < machines.size; j++) {
@@ -253,10 +253,10 @@ vending_randomization_effect(index) {
         }
 
         start_locations = [];
-        start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
-        start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
-        start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
-        start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+        start_locations[0] = getEnt("random_vending_start_location_0", "script_noteworthy");
+        start_locations[1] = getEnt("random_vending_start_location_1", "script_noteworthy");
+        start_locations[2] = getEnt("random_vending_start_location_2", "script_noteworthy");
+        start_locations[3] = getEnt("random_vending_start_location_3", "script_noteworthy");
 
         target_index = undefined;
         switch_index = undefined;
@@ -288,16 +288,16 @@ vending_randomization_effect(index) {
     }
   }
 
-  playsoundatposition("rando_start", machines[j].origin);
+  playSoundAtPosition("rando_start", machines[j].origin);
 
   origin = machines[j].origin;
 
   if(level.vending_model_info.size > 1) {
     playFXOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
-    playsoundatposition("rando_perk", machines[j].origin);
+    playSoundAtPosition("rando_perk", machines[j].origin);
   } else {
     playFXOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
-    playsoundatposition("rando_perk", machines[j].origin);
+    playSoundAtPosition("rando_perk", machines[j].origin);
   }
 
   true_model = machines[j].model;
@@ -309,11 +309,11 @@ vending_randomization_effect(index) {
 
   level thread play_sound_2D("perk_lottery");
 
-  machines[j] moveto(origin + (0, 0, floatHeight), 5, 3, 0.5);
+  machines[j] moveTo(origin + (0, 0, floatHeight), 5, 3, 0.5);
 
   tag_fx = spawn("script_model", machines[j].origin + (0, 0, 40));
   tag_fx setModel("tag_origin");
-  tag_fx LinkTo(machines[j]);
+  tag_fx linkTo(machines[j]);
 
   modelindex = 0;
   machines[j] Vibrate(machines[j].angles, 2, 1, 4);
@@ -343,9 +343,9 @@ vending_randomization_effect(index) {
   modelname = true_model;
   machines[j] setModel(modelname);
 
-  machines[j] moveto(origin, 0.3, 0.3, 0);
+  machines[j] moveTo(origin, 0.3, 0.3, 0);
   playFXOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
-  playsoundatposition("perks_rattle", machines[j].origin);
+  playSoundAtPosition("perks_rattle", machines[j].origin);
   maps\nazi_zombie_sumpf_perks::activate_vending_machine(true_model, origin);
   for(i = 0; i < machines.size; i++) {
     if(isDefined(level.vending_model_info[i])) {
@@ -363,10 +363,10 @@ randomize_weapons(list) {
   vending_machine_list = getEntArray("zombie_vending", "targetname");
 
   start_locations = [];
-  start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
-  start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
-  start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
-  start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+  start_locations[0] = getEnt("random_vending_start_location_0", "script_noteworthy");
+  start_locations[1] = getEnt("random_vending_start_location_1", "script_noteworthy");
+  start_locations[2] = getEnt("random_vending_start_location_2", "script_noteworthy");
+  start_locations[3] = getEnt("random_vending_start_location_3", "script_noteworthy");
 
   for(i = 0; i < vending_machines_with_weights.size; i++) {
     vending_machine = strTok(vending_machines_with_weights[i], ":");
@@ -379,7 +379,7 @@ randomize_weapons(list) {
     }
 
     weaponList = strTok(vending_machine[1], ",");
-    vending_location = getent(vending_machine_list[index].target, "targetname");
+    vending_location = getEnt(vending_machine_list[index].target, "targetname");
 
     location = 0;
     for(; location < start_locations.size; location++) {

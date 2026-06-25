@@ -347,7 +347,7 @@ build_assets() {
       switch (var_1.script_noteworthy) {
         case "trigger_radius_use":
           var_7 = spawn("trigger_radius_use", var_1.origin + var_6, var_5, var_3, var_4);
-          var_7 setcursorhint("HINT_NOICON");
+          var_7 setCursorHint("HINT_NOICON");
 
           if(isDefined(var_1.radius)) {
             var_7.radius = var_1.radius;
@@ -713,10 +713,10 @@ is_facing(var_0) {
   var_1 = self getplayerangles();
   var_2 = anglesToForward(var_1);
   var_3 = (var_2[0], var_2[1], 0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = var_0.origin - self.origin;
   var_6 = (var_5[0], var_5[1], 0);
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_8 = vectordot(var_4, var_7);
   return var_8 > 0.9;
 }
@@ -724,9 +724,9 @@ is_facing(var_0) {
 is_facing_3d(var_0) {
   var_1 = self getplayerangles();
   var_2 = anglesToForward(var_1);
-  var_3 = vectornormalize(var_2);
+  var_3 = vectorNormalize(var_2);
   var_4 = var_0.origin - self getEye();
-  var_5 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_4);
   var_6 = vectordot(var_3, var_5);
   return var_6 > 0.9;
 }

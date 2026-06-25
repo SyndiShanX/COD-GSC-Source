@@ -130,8 +130,8 @@ func_7604() {
       var_04 method_805B();
     }
 
-    self.var_9D65 setcursorhint("HINT_NOICON");
-    self.var_9D65 sethintstring(&"ZOMBIES_POWER_ON");
+    self.var_9D65 setCursorHint("HINT_NOICON");
+    self.var_9D65 setHintString(&"ZOMBIES_POWER_ON");
     if(isDefined(var_00)) {
       var_00 delete();
     }
@@ -162,7 +162,7 @@ func_7604() {
     level.var_7F21[level.var_7F21.size] = self.var_7602;
     level notify("power_on");
     level.var_75FD = 1;
-    self.var_9D65 sethintstring("");
+    self.var_9D65 setHintString("");
     self notify("on");
     common_scripts\utility::func_3C8F(self.var_819A);
     lib_0378::func_8D74("generator_power_switch_state", "starting");
@@ -175,7 +175,7 @@ func_7604() {
       var_02.var_001D = self.var_5105.var_001D;
       var_02 setModel("tag_origin");
       if(isDefined(self.var_5105.var_81C7)) {
-        var_02 linkto(self.var_6298, self.var_5105.var_81C7);
+        var_02 linkTo(self.var_6298, self.var_5105.var_81C7);
       }
 
       var_00 = spawnlinkedfx(common_scripts\utility::func_44F5(self.var_5105.var_81BB), var_02, "tag_origin");
@@ -231,9 +231,9 @@ func_7600() {
   var_02 = var_01 + (0, 0, 16);
   for(;;) {
     self waittill("on");
-    self.var_1DC7 moveto(var_02, var_00);
+    self.var_1DC7 moveTo(var_02, var_00);
     self waittill("off");
-    self.var_1DC7 moveto(var_01, var_00);
+    self.var_1DC7 moveTo(var_01, var_00);
   }
 }
 

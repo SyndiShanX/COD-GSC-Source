@@ -73,7 +73,7 @@ vehicle_spawn(var_0) {
 }
 
 waittill_vehiclespawn(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isspawner(var_1)) {
     var_1 waittill("spawned", var_1);
@@ -555,16 +555,16 @@ move_truck_junk_here(var_0, var_1) {
     var_3 unlink();
 
     if(isDefined(var_3.script_ghettotag)) {
-      var_3 linkto(var_0, var_3.script_ghettotag, var_3.base_origin, var_3.base_angles);
+      var_3 linkTo(var_0, var_3.script_ghettotag, var_3.base_origin, var_3.base_angles);
       continue;
     }
 
     if(isDefined(var_1)) {
-      var_3 linkto(var_0, var_1);
+      var_3 linkTo(var_0, var_1);
       continue;
     }
 
-    var_3 linkto(var_0);
+    var_3 linkTo(var_0);
   }
 }
 
@@ -609,7 +609,7 @@ move_riders_here(var_0) {
       continue;
     }
     var_3 unlink();
-    var_3 linkto(var_0, var_4.sittag, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, var_4.sittag, (0, 0, 0), (0, 0, 0));
 
     if(isai(var_3)) {
       var_3 forceteleport(var_0 gettagorigin(var_4.sittag));
@@ -1506,7 +1506,7 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     level thread common_scripts\utility::play_sound_in_space(var_5, var_15);
   }
 
-  var_8 linkto(var_32);
+  var_8 linkTo(var_32);
   var_0 useanimtree(var_4);
   var_8 useanimtree(var_4);
   var_34 = tank_crush_fx_validation(level._vehicle_effect["tankcrush"]["window_med_left"], level._vehicle_effect["tankcrush"]["window_med"]);
@@ -1526,15 +1526,15 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_0 thread tank_crush_fx_on_tag("tag_windshield_front_glass_fx", var_37, "veh_glass_break_large", 1.5);
   }
 
-  var_0 animscripted("tank_crush_anim", var_15, var_16, var_3);
-  var_8 animscripted("tank_crush_anim", var_32.origin, var_32.angles, var_2);
+  var_0 animScripted("tank_crush_anim", var_15, var_16, var_3);
+  var_8 animScripted("tank_crush_anim", var_32.origin, var_32.angles, var_2);
 
   if(isDefined(var_7)) {
     thread[[var_7]](var_0);
   }
 
-  var_32 moveto(var_15, var_13, var_13 / 2, var_13 / 2);
-  var_32 rotateto(var_16, var_13, var_13 / 2, var_13 / 2);
+  var_32 moveTo(var_15, var_13, var_13 / 2, var_13 / 2);
+  var_32 rotateTo(var_16, var_13, var_13 / 2, var_13 / 2);
   wait(var_13);
   var_12 = var_12 - var_13;
   var_12 = var_12 - var_14;
@@ -1583,8 +1583,8 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     self vehicle_setspeed(var_47, var_47 * 0.05);
   }
 
-  var_32 moveto(var_32.final_origin, var_14, var_14 / 2, var_14 / 2);
-  var_32 rotateto(var_32.final_angles, var_14, var_14 / 2, var_14 / 2);
+  var_32 moveTo(var_32.final_origin, var_14, var_14 / 2, var_14 / 2);
+  var_32 rotateTo(var_32.final_angles, var_14, var_14 / 2, var_14 / 2);
   wait(var_14);
   self attachpath(var_1);
 

@@ -51,7 +51,7 @@ _id_13C9(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   var_7 = var_1 + var_2 * var_3;
   var_8 = scripts\engine\utility::_id_E1E9(var_1);
-  var_8 moveto(var_7, var_4);
+  var_8 moveTo(var_7, var_4);
   var_9 = _id_0847::_id_DF08(var_6, var_8);
   thread airstrike_plane_explode_watcher(var_0, var_8, var_4);
   thread airstrike_death_sfx_org_watcher(var_8, var_4);

@@ -68,14 +68,14 @@ on_player_connect() {
 }
 
 function_4e68b0f4() {
-  var_baa069fa = getent("t_v_o_exam", "targetname");
+  var_baa069fa = getEnt("t_v_o_exam", "targetname");
   s_info = var_baa069fa waittill(#"trigger");
   e_player = s_info.activator;
   e_player thread zm_audio::create_and_play_dialog(#"exam_room", #"react", undefined, 1);
 }
 
 function_29543c() {
-  var_baa069fa = getent("t_v_o_docks", "targetname");
+  var_baa069fa = getEnt("t_v_o_docks", "targetname");
   s_info = var_baa069fa waittill(#"trigger");
   e_player = s_info.activator;
   b_say = e_player zm_audio::create_and_play_dialog(#"zone_dock", #"react_0", undefined, 1);
@@ -148,7 +148,7 @@ function_f1da2bd5() {
 
 function_480ec8c(player) {
   if(!(isDefined(player.var_b5fbfab4) && player.var_b5fbfab4)) {
-    self sethintstring(#"");
+    self setHintString(#"");
     return 1;
   }
 
@@ -175,7 +175,7 @@ function_4f89089b() {
 
 function_963edada() {
   level endoncallback(&function_19af3d1b, #"hash_59cfca3c898df56d", #"hash_732657441f7793dc", #"end_game");
-  var_d98d7f94 = getent("t_cell_block_vista_vo", "targetname");
+  var_d98d7f94 = getEnt("t_cell_block_vista_vo", "targetname");
 
   while(isDefined(var_d98d7f94)) {
     s_result = var_d98d7f94 waittill(#"trigger");
@@ -190,7 +190,7 @@ function_963edada() {
 }
 
 function_19af3d1b(str_notify) {
-  var_d98d7f94 = getent("t_cell_block_vista_vo", "targetname");
+  var_d98d7f94 = getEnt("t_cell_block_vista_vo", "targetname");
 
   if(isDefined(var_d98d7f94)) {
     var_d98d7f94 delete();
@@ -198,7 +198,7 @@ function_19af3d1b(str_notify) {
 }
 
 function_bdc25d1b() {
-  var_73707aab = getent("power_house_power_switch", "script_noteworthy");
+  var_73707aab = getEnt("power_house_power_switch", "script_noteworthy");
   var_73707aab endon(#"death");
   s_info = var_73707aab waittill(#"trigger");
   e_player = s_info.activator;
@@ -252,7 +252,7 @@ function_5860fce9() {
 }
 
 function_49189399() {
-  var_e5bf9843 = getent("t_reached_cellbock_vo", "targetname");
+  var_e5bf9843 = getEnt("t_reached_cellbock_vo", "targetname");
   var_e5bf9843 endon(#"death");
 
   while(true) {
@@ -278,7 +278,7 @@ function_49189399() {
 }
 
 function_22101968() {
-  var_d756a0b4 = getent("t_infir_full_react", "targetname");
+  var_d756a0b4 = getEnt("t_infir_full_react", "targetname");
   var_d756a0b4 endon(#"death");
 
   while(true) {
@@ -317,7 +317,7 @@ function_a78a3261() {
       level waittill(#"gondola_moving");
       var_be632f74 = 1;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(player zm_escape_travel::function_9a8ab327()) {
           var_be632f74 = 0;
           break;

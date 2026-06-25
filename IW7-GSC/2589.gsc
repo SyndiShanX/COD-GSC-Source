@@ -189,7 +189,7 @@ func_237F(var_0) {
       var_1 = self func_8150();
       if(isDefined(var_1)) {
         var_2 = var_1 - self.origin;
-        var_3 = vectornormalize(var_2);
+        var_3 = vectorNormalize(var_2);
         var_4 = vectortoangles(var_3);
         self orientmode("face angle abs", var_4);
         break;

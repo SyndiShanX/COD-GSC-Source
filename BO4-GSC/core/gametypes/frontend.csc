@@ -559,8 +559,8 @@ function_c9f8c5e9(localclientnum) {
 }
 
 function_da10fc8f(localclientnum, imagepath) {
-  var_38b900c2 = getent(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
-  var_51a0f339 = getent(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
+  var_38b900c2 = getEnt(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
+  var_51a0f339 = getEnt(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
   var_38b900c2 show();
   var_51a0f339 hide();
   function_45180840(localclientnum);
@@ -692,8 +692,8 @@ function_4920c25a(localclientnum, menu_name, state) {
   self notify("<dev string:x154>");
   self endon("<dev string:x154>");
   function_25485718();
-  var_38b900c2 = getent(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
-  var_51a0f339 = getent(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
+  var_38b900c2 = getEnt(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
+  var_51a0f339 = getEnt(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
   var_38b900c2 show();
   var_51a0f339 hide();
   args = strtok(state, "<dev string:x167>");
@@ -923,8 +923,8 @@ function_f2c538de(localclientnum, menu_name, state) {
   var_c58c03de = int(args[2]);
   filter = args[3];
   function_25485718();
-  var_38b900c2 = getent(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
-  var_51a0f339 = getent(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
+  var_38b900c2 = getEnt(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
+  var_51a0f339 = getEnt(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
   var_38b900c2 show();
   var_51a0f339 hide();
   weapon = getweapon(weapon_name);
@@ -1093,7 +1093,7 @@ function_ea9a5e69(localclientnum) {
     adddebugcommand(localclientnum, "<dev string:x66>" + "<dev string:x3cb>" + name + "<dev string:x369>" + "<dev string:x42e>" + "<dev string:x167>" + -1 + "<dev string:x167>" + type + "<dev string:x9a>");
   }
 
-  assert(isDefined(getent(localclientnum, "<dev string:x43f>", "<dev string:xb6>")));
+  assert(isDefined(getEnt(localclientnum, "<dev string:x43f>", "<dev string:xb6>")));
   assert(isDefined(struct::get(#"fx_trail_start")));
   assert(isDefined(struct::get(#"fx_trail_end")));
   jumpkits = player_free_fall_util::get_jumpkits();
@@ -1135,8 +1135,8 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
   jumpkit = int(args[0]);
   type = int(args[1]);
   function_25485718();
-  var_38b900c2 = getent(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
-  var_51a0f339 = getent(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
+  var_38b900c2 = getEnt(localclientnum, "<dev string:x9f>", "<dev string:xb6>");
+  var_51a0f339 = getEnt(localclientnum, "<dev string:xc3>", "<dev string:xb6>");
   var_38b900c2 show();
   var_51a0f339 hide();
 
@@ -1156,7 +1156,7 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
     types[type] = type_data;
   }
 
-  var_351da865 = getent(localclientnum, "<dev string:x43f>", "<dev string:xb6>");
+  var_351da865 = getEnt(localclientnum, "<dev string:x43f>", "<dev string:xb6>");
   fx_start = struct::get(#"fx_trail_start");
   fx_end = struct::get(#"fx_trail_end");
 
@@ -1480,7 +1480,7 @@ function_f2e7abdc(localclientnum, notifyname) {
 }
 
 open_character_menu(localclientnum, menu_data) {
-  character_ent = getent(localclientnum, menu_data.target_name, "targetname");
+  character_ent = getEnt(localclientnum, menu_data.target_name, "targetname");
 
   if(isDefined(character_ent)) {
     character_ent show();
@@ -1488,7 +1488,7 @@ open_character_menu(localclientnum, menu_data) {
 }
 
 close_character_menu(localclientnum, menu_data) {
-  character_ent = getent(localclientnum, menu_data.target_name, "targetname");
+  character_ent = getEnt(localclientnum, menu_data.target_name, "targetname");
 
   if(isDefined(character_ent)) {
     character_ent hide();
@@ -2619,7 +2619,7 @@ function_98088878(localclientnum, menu_data) {
   level endon(menu_data.menu_name + "_closed");
   season = getdvarstring(#"mtx_seasonal_exploder");
   playradiantexploder(localclientnum, "fxexp_mtx_ambient" + season);
-  weapon_model = getent(localclientnum, "quartermaster_weapon", "targetname");
+  weapon_model = getEnt(localclientnum, "quartermaster_weapon", "targetname");
   var_7ef44086 = struct::get("tag_align_quartermaster_weapon");
 
   while(true) {
@@ -2652,7 +2652,7 @@ function_98088878(localclientnum, menu_data) {
 
 function_837446a8(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
-  weapon_model = getent(localclientnum, "quartermaster_weapon", "targetname");
+  weapon_model = getEnt(localclientnum, "quartermaster_weapon", "targetname");
   level notify("end_character_rotating" + localclientnum);
 
   switch (state) {

@@ -67,7 +67,7 @@ function gas_volume() {
 }
 
 function play_line_on_nearby_player() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(distancesquared(self.origin, players[i].origin) <= 62500) {
       players[i] thread zm_audio::create_and_play_dialog("eggs", "quest4", randomintrange(2, 5));
@@ -78,7 +78,7 @@ function play_line_on_nearby_player() {
 
 function function_d9c0ed6() {
   self endon("death");
-  self triggerignoreteam();
+  self triggerIgnoreTeam();
   while(true) {
     while(level.var_4e4c9791.size == 0) {
       if(getdvarint("") == 2) {
@@ -126,7 +126,7 @@ function player_line_thread() {
 function init_stage() {
   level notify("ptt_start");
   level flag::clear("sq_ptt_dial_dialed");
-  dial = getent("sq_ptt_dial", "targetname");
+  dial = getEnt("sq_ptt_dial", "targetname");
   dial thread ptt_dial();
   jets = getEntArray("sq_ptt_trig", "targetname");
   level._ptt_jets = jets.size;
@@ -173,8 +173,8 @@ function ptt_lever() {
     self waittill("rotatedone");
   }
   use_trigger = spawn("trigger_radius_use", self.origin, 0, 32, 72);
-  use_trigger triggerignoreteam();
-  use_trigger setcursorhint("HINT_NOICON");
+  use_trigger triggerIgnoreTeam();
+  use_trigger setCursorHint("HINT_NOICON");
   use_trigger waittill("trigger");
   use_trigger delete();
   self playSound("evt_sq_ptt_lever_pull");
@@ -265,7 +265,7 @@ function remove_exploders() {
 function exit_stage(success) {
   level flag::clear("sq_ptt_dial_dialed");
   level flag::clear("ptt_plot_vo_done");
-  dial = getent("sq_ptt_dial", "targetname");
+  dial = getEnt("sq_ptt_dial", "targetname");
   dial thread dud_dial_handler();
   ents = getaiarray();
   for(i = 0; i < ents.size; i++) {
@@ -308,7 +308,7 @@ function ptt_dial() {
   level endon("sq_ptt_over");
   num_turned = 0;
   who = undefined;
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger thread dial_trigger();
   while(num_turned < 4) {
     self waittill("triggered", who);
@@ -319,14 +319,14 @@ function ptt_dial() {
   }
   level thread ptt_story_vox(who);
   self playSound("evt_sq_ptt_gas_release");
-  lever = getent("sq_ptt_lever", "targetname");
+  lever = getEnt("sq_ptt_lever", "targetname");
   lever thread ptt_lever();
   level flag::set("sq_ptt_dial_dialed");
 }
 
 function dud_dial_handler() {
   level endon("ptt_start");
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger thread dial_trigger();
   while(true) {
     self waittill("triggered");

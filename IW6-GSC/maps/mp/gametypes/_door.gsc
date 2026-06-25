@@ -56,9 +56,9 @@ door_setup() {
         ent trigger_parse_parameters(ent.script_parameters);
       }
       if(isDefined(ent.script_linkTo)) {
-        linked_door = GetEnt(ent.script_linkTo, "script_linkname");
-        ent EnableLinkTo();
-        ent LinkTo(linked_door);
+        linked_door = getEnt(ent.script_linkTo, "script_linkname");
+        ent EnablelinkTo();
+        ent linkTo(linked_door);
       }
 
       button.trigBlock[button.trigBlock.size] = ent;
@@ -105,7 +105,7 @@ door_setup() {
   foreach(door in button.doors) {
     AssertEx(isDefined(door.target), "door_setup() found door without a close position struct target.");
     door.posClosed = door.origin;
-    door.posOpen = getstruct(door.target, "targetname").origin;
+    door.posOpen = getStruct(door.target, "targetname").origin;
     door.distMove = Distance(door.posOpen, door.posClosed);
     door.origin = door.posOpen;
     door.no_moving_unresolved_collisions = false;
@@ -193,7 +193,7 @@ door_state_update(noSound) {
         }
 
         if(door.spawnflags &SPAWNFLAG_DYNAMIC_PATH) {
-          door DisconnectPaths();
+          door disconnectPaths();
         }
       } else {
         if(isDefined(button.ai_sight_brushes)) {
@@ -205,7 +205,7 @@ door_state_update(noSound) {
 
         if(door.spawnflags &SPAWNFLAG_DYNAMIC_PATH) {
           if(isDefined(door.script_noteworthy) && (door.script_noteworthy == "always_disconnect")) {
-            door DisconnectPaths();
+            door disconnectPaths();
           } else {
             door ConnectPaths();
           }
@@ -224,7 +224,7 @@ door_state_update(noSound) {
     }
 
     hintString = ter_op(button.stateCurr == STATE_DOOR_CLOSED, &"MP_DOOR_USE_OPEN", &"MP_DOOR_USE_CLOSE");
-    button SetHintString(hintString);
+    button setHintString(hintString);
     button MakeUsable();
     button waittill("trigger");
     if(isDefined(button.button_sound)) {
@@ -295,7 +295,7 @@ door_state_update(noSound) {
       if(door.origin != posGoal) {
         time = max(0.1, Distance(door.origin, posGoal) / door.distMove * timeMove);
         timeEase = max(time * 0.25, 0.05);
-        door MoveTo(posGoal, time, timeEase, timeEase);
+        door moveTo(posGoal, time, timeEase, timeEase);
         door maps\mp\_movers::notify_moving_platform_invalid();
 
         if(door.no_moving_unresolved_collisions) {
@@ -313,7 +313,7 @@ door_state_update(noSound) {
     }
   } else if(button.stateCurr == STATE_DOOR_PAUSED) {
     foreach(door in button.doors) {
-      door MoveTo(door.origin, 0.05, 0.0, 0.0);
+      door moveTo(door.origin, 0.05, 0.0, 0.0);
       door maps\mp\_movers::notify_moving_platform_invalid();
 
       if(door.no_moving_unresolved_collisions) {
@@ -493,8 +493,8 @@ return_triggerer(trigger) {
         if(stance != "prone") {
           continue;
         } else {
-          norm_facing_vec = VectorNormalize(anglesToForward(ent.angles));
-          norm_vec_to_trig = VectorNormalize(trigger.origin - ent.origin);
+          norm_facing_vec = vectorNormalize(anglesToForward(ent.angles));
+          norm_vec_to_trig = vectorNormalize(trigger.origin - ent.origin);
           dot = VectorDot(norm_facing_vec, norm_vec_to_trig);
 
           if(dot > 0) {

@@ -81,7 +81,7 @@ function is_target_valid(target) {
 
 function get_targets() {
   targets = [];
-  targets = arraycombine(getplayers(), getactorarray(), 0, 0);
+  targets = arraycombine(getPlayers(), getactorarray(), 0, 0);
   valid_targets = [];
 
   foreach(target in targets) {

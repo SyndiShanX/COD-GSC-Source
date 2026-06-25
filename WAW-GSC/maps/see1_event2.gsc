@@ -66,7 +66,7 @@ event2_main() {
   maps\see1_anim::barn_door_kick_spawn();
   maps\see1_anim::barn_door_tank_spawn();
 
-  end_trigger = getent("ev2_ends", "targetname");
+  end_trigger = getEnt("ev2_ends", "targetname");
   end_trigger waittill("trigger");
   level notify("event_2b_ends");
 
@@ -74,8 +74,8 @@ event2_main() {
 }
 
 ev2_detect_player() {
-  trigger_1 = getent("ev2_shot_at_enemies", "targetname");
-  trigger_2 = getent("ev2_got_close_to_enemies", "targetname");
+  trigger_1 = getEnt("ev2_shot_at_enemies", "targetname");
+  trigger_2 = getEnt("ev2_got_close_to_enemies", "targetname");
 
   level thread ev2_wait_for_player_to_damage(trigger_1, "fire_trigger");
   level thread wait_for_trigger_and_notify(trigger_2, "move_trigger");
@@ -98,7 +98,7 @@ ev2_wait_for_player_to_damage(trigger, msg) {
 }
 
 ev2_delayed_trigger_wait(time, msg) {
-  trigger = getent("ev2_spawn_battle_1", "targetname");
+  trigger = getEnt("ev2_spawn_battle_1", "targetname");
   trigger waittill("trigger");
   wait(time);
   level notify(msg);
@@ -115,7 +115,7 @@ ev2_ignore_players_initially() {
   self waittill("goal");
 
   self resume_fire();
-  fake_target = getent("ev2_enemy_fake_fire_1", "targetname");
+  fake_target = getEnt("ev2_enemy_fake_fire_1", "targetname");
   self SetEntityTarget(fake_target, 1);
 }
 
@@ -129,7 +129,7 @@ ev2_react_to_players() {
 }
 
 ev2_objectives() {
-  regroup_trigger = getent("ev2_regroup_barn", "targetname");
+  regroup_trigger = getEnt("ev2_regroup_barn", "targetname");
   regroup_trigger trigger_off();
 
   flag_wait("ev2_tank2_spawned");
@@ -227,16 +227,16 @@ ev1_tank_5_obj(obj_num, tank, msg) {
 }
 
 ev2_ambient_t34_actions() {
-  trigger = getent("ev2_spawn_t34s", "targetname");
+  trigger = getEnt("ev2_spawn_t34s", "targetname");
   trigger waittill("trigger");
 
   wait(1);
 
-  tank1 = getent("ev2_t34_1", "targetname");
-  tank2 = getent("ev2_t34_2", "targetname");
-  tank3 = getent("ev2_t34_3", "targetname");
-  tank4 = getent("ev2_t34_4", "targetname");
-  tank5 = getent("ev2_t34_5", "targetname");
+  tank1 = getEnt("ev2_t34_1", "targetname");
+  tank2 = getEnt("ev2_t34_2", "targetname");
+  tank3 = getEnt("ev2_t34_3", "targetname");
+  tank4 = getEnt("ev2_t34_4", "targetname");
+  tank5 = getEnt("ev2_t34_5", "targetname");
 
   tank1.health = 99999;
   tank2.health = 99999;
@@ -313,12 +313,12 @@ ev2_ambient_tank_hits_enemy() {
 }
 
 ev2_throw_guy_out_window() {
-  trigger = getent("house_throw_damage_trigger", "targetname");
+  trigger = getEnt("house_throw_damage_trigger", "targetname");
   trigger waittill("trigger");
 
   level notify("shreck_guy_killed");
 
-  spawner = getent("house_throw_guy", "targetname");
+  spawner = getEnt("house_throw_guy", "targetname");
   spawnedGuy = spawner Stalingradspawn();
   spawn_failed(spawnedGuy);
 
@@ -333,18 +333,18 @@ ev2_throw_guy_out_window() {
 }
 
 ev2_battle_tank_1_and_2() {
-  trigger = getent("ev2_spawn_battle_1", "targetname");
+  trigger = getEnt("ev2_spawn_battle_1", "targetname");
   trigger waittill("trigger");
 
   level thread dialog_panzershreck();
   level thread dialog_tank_1_success();
 
-  drone_trigger_1 = getent("ev2_tank_1_fire_drones", "script_noteworthy");
-  drone_trigger_2 = getent("ev2_tank_2_fire_drones", "script_noteworthy");
+  drone_trigger_1 = getEnt("ev2_tank_1_fire_drones", "script_noteworthy");
+  drone_trigger_2 = getEnt("ev2_tank_2_fire_drones", "script_noteworthy");
 
   wait(0.5);
-  level.ev2_tank1 = getent("ev2_tank1", "targetname");
-  level.ev2_tank2 = getent("ev2_tank2", "targetname");
+  level.ev2_tank1 = getEnt("ev2_tank1", "targetname");
+  level.ev2_tank2 = getEnt("ev2_tank2", "targetname");
 
   flag_set("ev2_tank1_spawned");
   flag_set("ev2_tank2_spawned");
@@ -354,7 +354,7 @@ ev2_battle_tank_1_and_2() {
   level.ev2_tank2 thread ev2_tank_think("ev2_tank_2_start_1", "ev2_tank_2_targets", 4, "ev2_tank_2_start_2", "ev2_tank_2_start_3", level.ev2_tank1, 700);
   level.ev2_tank2 ev2_tank_start_on_path();
 
-  trigger2 = getent("ev2_move_tank_1", "targetname");
+  trigger2 = getEnt("ev2_move_tank_1", "targetname");
   trigger2 waittill("trigger");
 
   level thread dialog_tanks_appear();
@@ -366,17 +366,17 @@ ev2_battle_tank_1_and_2() {
 }
 
 ev2_battle_tank_3_and_4() {
-  trigger = getent("ev2_tank_battle_2", "targetname");
+  trigger = getEnt("ev2_tank_battle_2", "targetname");
   trigger waittill("trigger");
 
   level thread dialog_tank_2_success();
 
-  drone_trigger_3 = getent("ev2_tank_3_fire_drones", "script_noteworthy");
-  drone_trigger_4 = getent("ev2_tank_4_fire_drones", "script_noteworthy");
+  drone_trigger_3 = getEnt("ev2_tank_3_fire_drones", "script_noteworthy");
+  drone_trigger_4 = getEnt("ev2_tank_4_fire_drones", "script_noteworthy");
 
   wait(0.5);
-  level.ev2_tank3 = getent("ev2_tank3", "targetname");
-  level.ev2_tank4 = getent("ev2_tank4", "targetname");
+  level.ev2_tank3 = getEnt("ev2_tank3", "targetname");
+  level.ev2_tank4 = getEnt("ev2_tank4", "targetname");
 
   flag_set("ev2_tank3_spawned");
   flag_set("ev2_tank4_spawned");
@@ -387,7 +387,7 @@ ev2_battle_tank_3_and_4() {
 
   level thread ev2_tank_battle_4_force_start();
 
-  trigger = getent("ev2_tank_battle_3", "targetname");
+  trigger = getEnt("ev2_tank_battle_3", "targetname");
   trigger waittill("trigger");
 
   level.ev2_tank4 thread ev2_tank_think("ev2_tank_4_advance", "ev2_tank_4_targets", 6, "ev2_tank_4_retreat_1", "ev2_tank_4_retreat_2", level.ev2_tank2);
@@ -397,13 +397,13 @@ ev2_battle_tank_3_and_4() {
 
 ev2_tank_battle_3_force_start() {
   flag_wait_all("ev2_tank1_destroyed", "ev2_tank2_destroyed");
-  trigger = getent("ev2_tank_battle_2", "targetname");
+  trigger = getEnt("ev2_tank_battle_2", "targetname");
   trigger notify("trigger");
 }
 
 ev2_tank_battle_4_force_start() {
   flag_wait("ev2_tank3_destroyed");
-  trigger = getent("ev2_tank_battle_3", "targetname");
+  trigger = getEnt("ev2_tank_battle_3", "targetname");
   trigger waittill("trigger");
 }
 
@@ -412,7 +412,7 @@ ev2_regroup_at_the_barn() {
 
   autosave_by_name("End Tanks");
 
-  flood_stop = getent("ev2_stop_last_flood", "targetname");
+  flood_stop = getEnt("ev2_stop_last_flood", "targetname");
   flood_stop notify("trigger");
 
   all_friends = getaiarray("allies");
@@ -449,7 +449,7 @@ ev2_regroup_at_the_barn() {
   level thread dialog_regroup_at_barn();
 
   wait(0.5);
-  level.ev2_tank5 = getent("ev2_tank5", "targetname");
+  level.ev2_tank5 = getEnt("ev2_tank5", "targetname");
   level.ev2_tank5 maps\_vehicle::mgoff();
 
   level waittill("move_tank_5");
@@ -520,7 +520,7 @@ ev2_regroup_at_the_barn() {
 
   level waittill("barn_door_opened");
 
-  colors_barn = getent("ev2_barn_fc", "targetname");
+  colors_barn = getEnt("ev2_barn_fc", "targetname");
 
   all_friends = getaiarray("allies");
 
@@ -538,7 +538,7 @@ anim_open_barn_door(guy1, guy2, node1, node2) {
 
   wait(5);
 
-  anim_struct = getstruct("ev2_barn_door_kick_origin", "targetname");
+  anim_struct = getStruct("ev2_barn_door_kick_origin", "targetname");
   anim_struct anim_reach(guys, "open_barn_door");
   flag_wait("barn_door_anim_ready");
   anim_struct anim_single(guys, "open_barn_door");
@@ -548,7 +548,7 @@ anim_open_barn_door(guy1, guy2, node1, node2) {
 ev2_battle_tank_5() {
   level waittill("move_tank_5");
   wait(0.5);
-  level.ev2_tank5 = getent("ev2_tank5", "targetname");
+  level.ev2_tank5 = getEnt("ev2_tank5", "targetname");
 
   level.ev2_tank5 maps\_vehicle::mgoff();
   level waittill("move_tank_5_for_real");
@@ -566,22 +566,22 @@ ev2_battle_tank_5() {
   exploder(201);
   maps\see1_anim::tank_open_door();
 
-  colors_barn = getent("ev2_barn_fc", "targetname");
+  colors_barn = getEnt("ev2_barn_fc", "targetname");
   colors_barn trigger_off();
 
   players = get_players();
   level.ev2_tank5.see1_tank_current_target = players[0];
 
-  spawn_trigger = getent("ev2_barn_inside", "script_noteworthy");
+  spawn_trigger = getEnt("ev2_barn_inside", "script_noteworthy");
   spawn_trigger notify("trigger");
   wait(0.05);
 
-  spawn_trigger2 = getent("ev2_barn_inside_2", "script_noteworthy");
+  spawn_trigger2 = getEnt("ev2_barn_inside_2", "script_noteworthy");
   spawn_trigger2 notify("trigger");
 
-  door = getent("ev2_barn_door_in", "targetname");
+  door = getEnt("ev2_barn_door_in", "targetname");
   door connectpaths();
-  door rotateyaw(90, 0.4, 0.3, .1);
+  door rotateYaw(90, 0.4, 0.3, .1);
   level notify("start_pacing");
 }
 
@@ -612,7 +612,7 @@ ev2_pacing() {
 
 pacing_tank4_wait() {
   wait(1);
-  tank4 = getent("ev2_t34_24", "targetname");
+  tank4 = getEnt("ev2_t34_24", "targetname");
   tank4.health = 999999;
   tank4 waittill("reached_end_node");
   level notify("pacing_ready");
@@ -622,9 +622,9 @@ pacing_tank1_3_wait() {
   level endon("tanks_at_destination");
 
   wait(1);
-  tank1 = getent("ev2_t34_21", "targetname");
-  tank2 = getent("ev2_t34_22", "targetname");
-  tank3 = getent("ev2_t34_23", "targetname");
+  tank1 = getEnt("ev2_t34_21", "targetname");
+  tank2 = getEnt("ev2_t34_22", "targetname");
+  tank3 = getEnt("ev2_t34_23", "targetname");
 
   tank1.health = 999999;
   tank2.health = 999999;
@@ -693,10 +693,10 @@ pacing_tank1_3_wait() {
 fire_at_target_at_end_tank1(target_name, delay) {
   level endon("event_2b_ends");
 
-  target_point = getstruct(target_name, "targetname");
+  target_point = getStruct(target_name, "targetname");
   self waittill("reached_end_node");
 
-  trigger = getent("start_tank1_fire", "targetname");
+  trigger = getEnt("start_tank1_fire", "targetname");
   trigger waittill("trigger");
 
   self.turretrotscale = 0.7;
@@ -714,7 +714,7 @@ fire_at_target_at_end_tank1(target_name, delay) {
 }
 
 fire_at_target_at_end(target_name, delay) {
-  target_point = getstruct(target_name, "targetname");
+  target_point = getStruct(target_name, "targetname");
   self waittill("reached_end_node");
 
   wait(delay);
@@ -736,12 +736,12 @@ fire_at_target_at_end(target_name, delay) {
 }
 
 pacing_planes(plane_id) {
-  plane_trigger = getent(plane_id, "targetname");
+  plane_trigger = getEnt(plane_id, "targetname");
   plane_trigger waittill("trigger");
 
   start_node = getvehiclenode(plane_id, "script_noteworthy");
 
-  plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
+  plane = spawnVehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
 
   plane attachPath(start_node);
   plane startpath();
@@ -769,7 +769,7 @@ ev2_guys_at_door() {
 
   wait(1);
 
-  ev2_door_trigger = getent("ev2_door_trigger", "targetname");
+  ev2_door_trigger = getEnt("ev2_door_trigger", "targetname");
 
   if(isDefined(level.door_guys_1) && isDefined(level.door_guys_2)) {
     while(1) {
@@ -880,11 +880,11 @@ death_if_not_moving() {
 }
 
 ev2_loop_ambient_mg_burst() {
-  trigger = getent("ev2_start_mg_burst", "targetname");
+  trigger = getEnt("ev2_start_mg_burst", "targetname");
   trigger waittill("trigger");
 
-  start = getstruct("ev2_mg_roof_pos", "targetname");
-  end = getstruct("ev2_mg_roof_target", "targetname");
+  start = getStruct("ev2_mg_roof_pos", "targetname");
+  end = getStruct("ev2_mg_roof_target", "targetname");
   play_burst_fake_fire(20, start.origin, end.origin);
 
   wait(3);
@@ -1030,7 +1030,7 @@ pacing_get_on_tank_3(tank) {
 
     origin_linker = spawn("script_origin", tank gettagorigin("tag_passenger9"));
     origin_linker.angles = tank gettagangles("tag_passenger9");
-    origin_linker linkto(tank, "tag_passenger9", (0, 0, -10));
+    origin_linker linkTo(tank, "tag_passenger9", (0, 0, -10));
     player playerlinktodelta(origin_linker, undefined, 1.0);
 
     player AllowStand(false);
@@ -1186,7 +1186,7 @@ ev2_player_get_on_tank(player, tank) {
     if(take_spot == 1) {
       origin_linker = spawn("script_origin", tank gettagorigin("tag_passenger8"));
       origin_linker.angles = tank gettagangles("tag_passenger8");
-      origin_linker linkto(tank, "tag_passenger8", (0, 0, -10));
+      origin_linker linkTo(tank, "tag_passenger8", (0, 0, -10));
 
       player playerlinktodelta(origin_linker, undefined, 1.0);
       player AllowStand(false);
@@ -1196,7 +1196,7 @@ ev2_player_get_on_tank(player, tank) {
     } else if(take_spot == 2) {
       origin_linker = spawn("script_origin", tank gettagorigin("tag_passenger9"));
       origin_linker.angles = tank gettagangles("tag_passenger9");
-      origin_linker linkto(tank, "tag_passenger9", (0, 0, -10));
+      origin_linker linkTo(tank, "tag_passenger9", (0, 0, -10));
 
       player playerlinktodelta(origin_linker, undefined, 1.0);
       player AllowStand(false);
@@ -1316,7 +1316,7 @@ get_player_pressing_use_button() {
 ev2_panzershreck_barrage(start, end) {
   level endon(start);
 
-  start_struct = getstruct(start, "targetname");
+  start_struct = getStruct(start, "targetname");
 
   ends = getStructArray(end, "targetname");
 
@@ -1349,7 +1349,7 @@ ev2_tank_think(start_node, init_target, init_delay, retreat_node_1, retreat_node
 
   self.cook_off_chance = 80;
 
-  self.see1_tank_current_target = getent(init_target, "targetname");
+  self.see1_tank_current_target = getEnt(init_target, "targetname");
 
   self.see1_tank_start_nodes[0] = getvehiclenode(start_node, "targetname");
   if(isDefined(getvehiclenode(retreat_node_1, "targetname"))) {
@@ -1377,7 +1377,7 @@ ev2_tank_think(start_node, init_target, init_delay, retreat_node_1, retreat_node
     self thread ev2_wait_for_player_to_get_close(450, 450);
   }
 
-  init_target_ent = getent(init_target, "targetname");
+  init_target_ent = getEnt(init_target, "targetname");
   self thread ev2_tank_loop_fire(init_delay, "stop_looping_fire", init_target_ent);
   self thread ev2_tank_movement();
   self thread ev2_tank_end_node_detection();
@@ -1567,10 +1567,10 @@ ev2_road_ai_side() {
   self endon("death");
   self.goalradius = 16;
 
-  fake_target = getent("ev2_pacing_firing_target", "targetname");
+  fake_target = getEnt("ev2_pacing_firing_target", "targetname");
   self SetEntityTarget(fake_target, 1);
 
-  trigger = getent("ev2_pacing_plane_2", "targetname");
+  trigger = getEnt("ev2_pacing_plane_2", "targetname");
   trigger waittill("trigger");
   wait(2);
 
@@ -1623,13 +1623,13 @@ ev2_cleanup() {
 }
 
 dialog_lead_charge() {
-  trigger = getent("ev2_spawn_t34s", "targetname");
+  trigger = getEnt("ev2_spawn_t34s", "targetname");
   trigger waittill("trigger");
   level.hero1 say_dialogue("reznov", "lead_charge");
 }
 
 dialog_panzershreck() {
-  trigger = getent("ev2_initial_ai_spawn_extra", "targetname");
+  trigger = getEnt("ev2_initial_ai_spawn_extra", "targetname");
   trigger waittill("trigger");
 
   level.hero1 say_dialogue("reznov", "over_balcony");
@@ -1724,7 +1724,7 @@ wait_play_text_on_screen() {
 }
 
 dialog_pacing_shoot_enemies() {
-  trigger = getent("ev2_pacing_plane_1", "targetname");
+  trigger = getEnt("ev2_pacing_plane_1", "targetname");
   trigger waittill("trigger");
 }
 
@@ -1737,7 +1737,7 @@ ev2_panzershreck_respawns() {
 }
 
 ev2_panzershreck_single_respawn(rocket_name) {
-  respawn_schrek = getent(rocket_name, "targetname");
+  respawn_schrek = getEnt(rocket_name, "targetname");
   respawn_origin = respawn_schrek.origin;
   respawn_angles = respawn_schrek.angles;
 
@@ -1761,7 +1761,7 @@ ev2_panzershreck_single_respawn(rocket_name) {
 
 #using_animtree("generic_human");
 collectible_corpse() {
-  orig = getstruct("see1_collect_anim", "targetname");
+  orig = getStruct("see1_collect_anim", "targetname");
 
   corpse = spawn("script_model", orig.origin);
   corpse.angles = orig.angles;

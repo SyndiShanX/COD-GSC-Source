@@ -54,10 +54,10 @@ init() {
   array::thread_all(level.var_1f856570, &spawner::add_spawn_function, &zm_behavior::function_57d3b5eb);
 
   if(!zm_utility::is_ee_enabled()) {
-    getent("ee_head", "targetname") delete();
+    getEnt("ee_head", "targetname") delete();
   }
 
-  level.var_22569770 = getent("e_spy", "targetname");
+  level.var_22569770 = getEnt("e_spy", "targetname");
   level.var_22569770 hide();
   init_quests();
 }
@@ -67,7 +67,7 @@ init_quests() {
   level flag::init("mee_projectile_count_reached");
   zm_sq::register(#"mee_projectile", #"step_1", #"mee_projectile_step1", &mee_projectile_step1_setup, &mee_projectile_step1_cleanup);
   level flag::init("mee_melee_count_reached");
-  e_partner = getent("mee_2_female", "targetname");
+  e_partner = getEnt("mee_2_female", "targetname");
   e_partner hide();
   var_e979d075 = getEntArray("e_mee_2_weeper_final", "targetname");
 
@@ -140,7 +140,7 @@ mee_galvaknuckle_step1_setup(var_5ea5c94d) {
 
 mee_galvaknuckle_step1_cleanup(var_5ea5c94d, ended_early) {
   if(var_5ea5c94d || ended_early) {
-    level.var_f5624728 = getplayers()[0];
+    level.var_f5624728 = getPlayers()[0];
   }
 
   s_look = struct::get("mee_3_look_target", "targetname");
@@ -159,7 +159,7 @@ mee_galvaknuckle_step1_cleanup(var_5ea5c94d, ended_early) {
 
   level.var_f5624728 clientfield::set_to_player("" + #"hash_72a33f6d2cc925c5", 0);
   watcher delete();
-  var_74370e46 = getent("mee3_reward", "targetname");
+  var_74370e46 = getEnt("mee3_reward", "targetname");
   level thread trigger::look_trigger(var_74370e46);
   b_saw_the_wth = 0;
 
@@ -303,7 +303,7 @@ function_8d3f2364(waitresult) {
         }
       }
 
-      playsoundatposition(#"hash_8b7db1eb1a3365b", (0, 0, 0));
+      playSoundAtPosition(#"hash_8b7db1eb1a3365b", (0, 0, 0));
       zm_sq::start(#"mee_mixed");
       level.var_e80139f = 4;
       waitresult.attacker zm_audio::create_and_play_dialog("generic", "response_negative");
@@ -320,7 +320,7 @@ function_8d3f2364(waitresult) {
   }
 
   if(level.var_561ae1f8 <= 0) {
-    playsoundatposition(#"hash_a24b8d649da9f00", (0, 0, 0));
+    playSoundAtPosition(#"hash_a24b8d649da9f00", (0, 0, 0));
 
     if(zm_utility::is_trials()) {
       waitresult.attacker zm_audio::create_and_play_dialog("generic", "response_positive");
@@ -402,7 +402,7 @@ function_edcadf04() {
 
     angles = e_head.angles;
     origin = e_head.origin;
-    force = vectornormalize(origin - waitresult.position);
+    force = vectorNormalize(origin - waitresult.position);
     force += (0, 0, randomfloatrange(0.4, 0.6));
     force *= randomfloatrange(0.4, 0.6);
     head_model = "p8_zm_white_mannequin_female_01_head_dyn";
@@ -434,7 +434,7 @@ function_edcadf04() {
 function_f05235a0() {
   self endon(#"death");
   self clientfield::set("" + #"hash_5e1264789183cde1", 1);
-  playsoundatposition(#"hash_452b9f142d5f6352", self.origin);
+  playSoundAtPosition(#"hash_452b9f142d5f6352", self.origin);
   wait 1;
   self delete();
 }
@@ -474,12 +474,12 @@ function_6e678915() {
       if(math::cointoss(10)) {
         if(math::cointoss(20)) {
           angles = function_794aee3c(player.origin, self);
-          self rotateto(angles, 0.1);
+          self rotateTo(angles, 0.1);
         } else {
           for(i = 0; i < 5; i++) {
             if(isDefined(self) && isDefined(player)) {
               angles = function_794aee3c(player.origin, self, 1);
-              self rotateto(angles, 1);
+              self rotateTo(angles, 1);
               wait 1;
             }
           }
@@ -555,7 +555,7 @@ mee_cleanup() {
 }
 
 function_1025a301() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   if(a_players.size < 2) {
     level.var_5edd153f = 0;
@@ -564,7 +564,7 @@ function_1025a301() {
 }
 
 function_fd846a91() {
-  spawner = getent("mannequin_zombie_spawner", "script_noteworthy");
+  spawner = getEnt("mannequin_zombie_spawner", "script_noteworthy");
   return spawner;
 }
 
@@ -584,7 +584,7 @@ function_bc9a7799(var_d25bbdd5) {
 }
 
 function_b76df747() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_max = 10;
 
   switch (a_e_players.size) {
@@ -612,13 +612,13 @@ function_6af32608() {
   if(!zm_utility::is_standard()) {
     drop_point = struct::get("mee_perk_drop");
     var_c9e07c3e = drop_point.origin;
-    level.var_dcd1e798 = getent("perk_machine_mover", "targetname");
+    level.var_dcd1e798 = getEnt("perk_machine_mover", "targetname");
     level.var_dcd1e798 useanimtree("generic");
     var_2379bb0e = spawn("script_model", var_c9e07c3e);
     var_2379bb0e setModel("zombie_pickup_perk_bottle");
     var_2379bb0e hide();
     level.var_dcd1e798.origin = var_c9e07c3e;
-    var_2379bb0e linkto(level.var_dcd1e798, "tag_animate_origin");
+    var_2379bb0e linkTo(level.var_dcd1e798, "tag_animate_origin");
     level.var_dcd1e798 thread animation::play("p8_fxanim_zm_white_perk_machine_dummy_fly_in");
     waitframe(2);
     var_2379bb0e show();
@@ -689,20 +689,20 @@ function_800ff39e() {
     waitframe(1);
   }
 
-  spawner = getent("weeping_spawner", "script_noteworthy");
+  spawner = getEnt("weeping_spawner", "script_noteworthy");
   level.e_weeper = zombie_utility::spawn_zombie(spawner, spawner.targetname, undefined, level.round_number);
   level.e_weeper setModel("c_t8_zmb_dlc3_mannequin_male");
   level.e_weeper.var_72411ccf = &function_589845fe;
   level.e_weeper val::set(#"mee_2", "takedamage", 0);
   level.e_weeper val::set(#"mee_2", "ignoreme", 1);
   level.e_weeper.team = #"team3";
-  var_83302022 = getent("t_mee_2_activate", "targetname");
+  var_83302022 = getEnt("t_mee_2_activate", "targetname");
   level thread trigger::look_trigger(var_83302022);
   waitresult = var_83302022 waittill(#"trigger_look");
   var_83302022 delete();
   level.e_weeper.var_72411ccf = undefined;
   level.e_weeper thread function_d10bf985();
-  level.e_partner = getent("mee_2_female", "targetname");
+  level.e_partner = getEnt("mee_2_female", "targetname");
   level.e_partner show();
   level.var_7b22edab = spawn("script_origin", level.e_partner.origin + (0, 0, 10));
 
@@ -723,9 +723,9 @@ function_800ff39e() {
 
   level.e_partner notify(#"follow_complete");
   level.e_weeper.var_3d366381 = undefined;
-  e_door = getent("mee_2_door", "targetname");
+  e_door = getEnt("mee_2_door", "targetname");
   e_door playSound("zmb_shed_door_open");
-  e_door rotateto((0, 202, 0), 1);
+  e_door rotateTo((0, 202, 0), 1);
   wait 2;
   var_e979d075 = getEntArray("e_mee_2_weeper_final", "targetname");
 
@@ -749,15 +749,15 @@ function_800ff39e() {
   level.e_partner.origin = var_881f5a41.origin;
   level.e_partner.angles = var_881f5a41.angles;
   var_1d15513c = struct::get("s_mee_2_partner_final_head", "targetname");
-  var_1ccba54f = getent("e_mee_2_partner_head", "targetname");
+  var_1ccba54f = getEnt("e_mee_2_partner_head", "targetname");
   var_1ccba54f.origin = var_1d15513c.origin;
   var_1ccba54f.angles = var_1d15513c.angles;
-  var_c3a00a1a = getent("t_mee_2_shed", "targetname");
+  var_c3a00a1a = getEnt("t_mee_2_shed", "targetname");
   level thread trigger::look_trigger(var_c3a00a1a);
   waitresult = var_c3a00a1a waittill(#"trigger_look");
   var_c3a00a1a delete();
   e_door playSound("zmb_shed_door_close");
-  e_door rotateto((0, 340, 0), 1);
+  e_door rotateTo((0, 340, 0), 1);
   wait 2;
   e_player = waitresult.activator;
   s_reward = struct::get("s_mee_2_reward", "targetname");
@@ -799,7 +799,7 @@ function_d857924d() {
   self endoncallback(&function_33e0a5d1, #"death");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player istouching(self) && player clientfield::get_to_player("zm_zone_out_of_bounds") == 0) {
         player clientfield::set_to_player("zm_zone_out_of_bounds", 1);
         continue;
@@ -815,7 +815,7 @@ function_d857924d() {
 }
 
 function_33e0a5d1(str_notify) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("zm_zone_out_of_bounds", 0);
   }
 }
@@ -830,7 +830,7 @@ function_589845fe(behaviortreeentity) {
 }
 
 function_5ebeab8c() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     dist = distancesquared(self.origin, player.origin);
 
     if(dist <= 262144) {
@@ -843,9 +843,9 @@ function_5ebeab8c() {
 
 function_ce3168e6(e_player) {
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_59a1cf82de6de51");
+    self setHintString(#"hash_59a1cf82de6de51");
   } else {
-    self sethintstring(#"hash_69320c1b3c0f8fdb");
+    self setHintString(#"hash_69320c1b3c0f8fdb");
   }
 
   return true;
@@ -854,7 +854,7 @@ function_ce3168e6(e_player) {
 function_50aeeeff() {
   self endon(#"death");
   self waittill(#"trigger_activated");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(player in a_e_players) {
     player zm_laststand::function_3a00302e();
@@ -875,7 +875,7 @@ powerup_wobble_fx() {
 }
 
 is_near(str_info) {
-  t_proximity = getent(str_info, "targetname");
+  t_proximity = getEnt(str_info, "targetname");
 
   if(isDefined(self)) {
     b_near = self istouching(t_proximity);
@@ -891,7 +891,7 @@ function_6fa00342(e_follow) {
 
   while(true) {
     var_9d88bc68 = anglesToForward(e_follow.angles);
-    var_9d88bc68 = 15 * vectornormalize(var_9d88bc68);
+    var_9d88bc68 = 15 * vectorNormalize(var_9d88bc68);
     goal_pos = e_follow.origin - var_9d88bc68;
     goal_pos = getnearestpathpoint(goal_pos, 64);
     level.var_7b22edab.origin = goal_pos + (0, 0, 15);
@@ -912,7 +912,7 @@ function_6fa00342(e_follow) {
 }
 
 function_66a7e20a() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player cansee(self)) {
       return false;
     }

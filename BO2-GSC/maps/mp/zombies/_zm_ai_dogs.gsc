@@ -87,7 +87,7 @@ dog_spawner_init() {
 
 dog_round_spawning() {
   level endon("intermission");
-  level.dog_targets = getplayers();
+  level.dog_targets = getPlayers();
 
   for(i = 0; i < level.dog_targets.size; i++) {
     level.dog_targets[i].hunted_by = 0;
@@ -106,7 +106,7 @@ dog_round_spawning() {
   players = get_players();
   array_thread(players, ::play_dog_round);
   wait 1;
-  playsoundatposition("vox_zmba_event_dogstart_0", (0, 0, 0));
+  playSoundAtPosition("vox_zmba_event_dogstart_0", (0, 0, 0));
   wait 6;
 
   if(level.dog_round_count < 3) {
@@ -194,12 +194,12 @@ dog_spawn_fx(ai, ent) {
   ai endon("death");
   ai setfreecameralockonallowed(0);
   playFX(level._effect["lightning_dog_spawn"], ent.origin);
-  playsoundatposition("zmb_hellhound_prespawn", ent.origin);
+  playSoundAtPosition("zmb_hellhound_prespawn", ent.origin);
   wait 1.5;
-  playsoundatposition("zmb_hellhound_bolt", ent.origin);
+  playSoundAtPosition("zmb_hellhound_bolt", ent.origin);
   earthquake(0.5, 0.75, ent.origin, 1000);
   playrumbleonposition("explosion_generic", ent.origin);
-  playsoundatposition("zmb_hellhound_spawn", ent.origin);
+  playSoundAtPosition("zmb_hellhound_spawn", ent.origin);
   angle = vectortoangles(ai.favoriteenemy.origin - ent.origin);
   angles = (ai.angles[0], angle[1], ai.angles[2]);
   ai forceteleport(ent.origin, angles);
@@ -256,7 +256,7 @@ dog_spawn_factory_logic(dog_array, favorite_enemy) {
 }
 
 get_favorite_enemy() {
-  dog_targets = getplayers();
+  dog_targets = getPlayers();
   least_hunted = dog_targets[0];
 
   for(i = 0; i < dog_targets.size; i++) {
@@ -281,7 +281,7 @@ get_favorite_enemy() {
 }
 
 dog_health_increase() {
-  players = getplayers();
+  players = getPlayers();
 
   if(level.dog_round_count == 1) {
     level.dog_health = 400;
@@ -370,7 +370,7 @@ play_dog_round() {
   self playlocalsound("zmb_dog_round_start");
   variation_count = 5;
   wait 4.5;
-  players = getplayers();
+  players = getPlayers();
   num = randomintrange(0, players.size);
   players[num] maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "dog_spawn");
 }
@@ -439,7 +439,7 @@ dog_fx_eye_glow() {
   assert(isDefined(self.fx_dog_eye));
   self.fx_dog_eye.angles = self gettagangles("J_EyeBall_LE");
   self.fx_dog_eye setModel("tag_origin");
-  self.fx_dog_eye linkto(self, "J_EyeBall_LE");
+  self.fx_dog_eye linkTo(self, "J_EyeBall_LE");
 }
 
 dog_fx_trail() {
@@ -456,7 +456,7 @@ dog_fx_trail() {
   assert(isDefined(self.fx_dog_trail));
   self.fx_dog_trail.angles = self gettagangles("tag_origin");
   self.fx_dog_trail setModel("tag_origin");
-  self.fx_dog_trail linkto(self, "tag_origin");
+  self.fx_dog_trail linkTo(self, "tag_origin");
 }
 
 dog_death() {
@@ -503,7 +503,7 @@ dog_death() {
 
 dog_explode_fx(origin) {
   playFX(level._effect["dog_gib"], origin);
-  playsoundatposition("zmb_hellhound_explode", origin);
+  playSoundAtPosition("zmb_hellhound_explode", origin);
 }
 
 zombie_setup_attack_properties_dog() {
@@ -563,7 +563,7 @@ dog_clip_monitor() {
     }
     for(i = 0; i < level.dog_clips.size; i++) {
       level.dog_clips[i] trigger_on();
-      level.dog_clips[i] disconnectpaths();
+      level.dog_clips[i] disconnectPaths();
       wait_network_frame();
     }
 

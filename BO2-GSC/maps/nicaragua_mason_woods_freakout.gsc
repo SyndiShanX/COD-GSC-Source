@@ -58,7 +58,7 @@ main() {
 }
 
 mason_woods_freakout_objectives() {
-  set_objective(level.obj_mason_up_hill, getstruct("woodsfreakout_objective_1"), "");
+  set_objective(level.obj_mason_up_hill, getStruct("woodsfreakout_objective_1"), "");
   trigger_wait("woods_freakout_balcony_trigger");
   set_objective(level.obj_mason_up_hill, undefined, "done");
 }
@@ -71,9 +71,9 @@ mason_woods_freakout_precleanup() {
 
 mason_woods_freakout_setup() {
   nd_goal = getnode("woods_freakout_goalnode", "targetname");
-  sp_pdf = getent("woods_freakout_pdf", "targetname");
+  sp_pdf = getEnt("woods_freakout_pdf", "targetname");
   sp_pdf add_spawn_function(::woods_freakout_pdf_run_to_mission, nd_goal);
-  e_stables_clip = getent("clip_barn_door", "targetname");
+  e_stables_clip = getEnt("clip_barn_door", "targetname");
 
   if(isDefined(e_stables_clip)) {
     e_stables_clip delete();
@@ -133,7 +133,7 @@ wait_for_player_to_drop_off_balcony() {
 }
 
 woods_freakout_remove_set_low_ready() {
-  e_trigger = getent("mason_near_woods_freakout", "targetname");
+  e_trigger = getEnt("mason_near_woods_freakout", "targetname");
 
   while(!flag("menendez_scene_complete")) {
     if(self istouching(e_trigger)) {
@@ -170,7 +170,7 @@ woods_freakout_menendez(e_woods) {
 }
 
 balcony_door_open(e_woods) {
-  e_clip = getent("woods_freakout_door_clip", "targetname");
+  e_clip = getEnt("woods_freakout_door_clip", "targetname");
   e_clip delete();
 }
 
@@ -183,7 +183,7 @@ menendez_opens_stables_door(e_menendez) {
 
 menendez_stables_explosion(e_menendez) {
   exploder(10326);
-  playsoundatposition("evt_barn_explo_woods", (-3802, 2784, 1823));
+  playSoundAtPosition("evt_barn_explo_woods", (-3802, 2784, 1823));
 }
 
 donkeykong_end_vo() {
@@ -200,7 +200,7 @@ donkeykong_end_nag_vo() {
 
 mason_point_of_no_return_cleanup() {
   fxanim_deconstructions_for_mason_side1();
-  vh_truck = getent("mason_truck", "targetname");
+  vh_truck = getEnt("mason_truck", "targetname");
 
   if(isDefined(vh_truck)) {
     vh_truck delete();

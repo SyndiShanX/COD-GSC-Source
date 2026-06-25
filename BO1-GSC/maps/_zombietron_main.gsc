@@ -167,7 +167,7 @@ post_all_players_connected() {
   flag_wait("all_players_connected");
   bbPrint("sessions: mapname %s gametype zt isserver 1 player_count %d", level.script, get_players().size);
   level thread fade_in(1);
-  players = GetPlayers();
+  players = getPlayers();
   wait 0.2;
   move_players_to_start();
   level thread end_game();
@@ -178,17 +178,17 @@ mini_boss_spawn_think() {
   level endon("round_spawning_done");
   while(1) {
     time = randomFloatRange(level.zombie_vars["mini_boss_interval_min"], level.zombie_vars["mini_boss_interval_max"]);
-    time = time / GetPlayers().size;
+    time = time / getPlayers().size;
     time -= (level.round_number / 10);
     if(time < 1) {
       time = 1;
     }
     wait(time);
-    if(RandomInt(100) < (level.zombie_vars["mini_boss_spawn_percentage"] + (level.round_number * GetPlayers().size))) {
+    if(RandomInt(100) < (level.zombie_vars["mini_boss_spawn_percentage"] + (level.round_number * getPlayers().size))) {
       spawn_locations = level.current_spawners[level.current_wave.spawn_side];
       spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
       maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point);
-      if(GetPlayers().size == 4) {
+      if(getPlayers().size == 4) {
         spawn_locations = level.current_spawners[level.current_wave.spawn_side];
         spawn_point = spawn_locations[RandomInt(spawn_locations.size)];
         maps\_zombietron_spawner::spawn_a_mini_boss(spawn_point, "engineer", true);
@@ -357,7 +357,7 @@ setup_spawn_sequence() {
   }
 }
 player_basic_needs() {
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!isAlive(players[i]) && players[i].lives == 0) {
       players[i] player_respawn_now();
@@ -399,7 +399,7 @@ update_next_arena() {
 }
 end_of_round_cleanup() {
   if(level.arenas[level.current_arena] == "prison") {
-    players = GetPlayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i].heli)) {
         players[i] notify("heli_abort");
@@ -592,7 +592,7 @@ end_game() {
   wait(4.5);
   fade_out();
   for(i = 0; i < players.size; i++) {
-    players[i] SetOrigin(players[i].origin + (0, 0, 500));
+    players[i] setOrigin(players[i].origin + (0, 0, 500));
   }
   if(level.onlineGame || level.systemLink) {
     ExitLevel(false);
@@ -602,13 +602,13 @@ end_game() {
   wait(666);
 }
 update_leaderboards() {
-  if(GetPlayers().size <= 1) {
+  if(getPlayers().size <= 1) {
     return;
   }
   if(level.systemLink) {
     return;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return;
   }
   zombietron_upload_highscore();
@@ -633,11 +633,11 @@ get_player_spawn_point() {
     return camera_center + (x, y, 0);
   }
   spawnPointTarget = level.arenas[level.current_arena] + "_spawnpoint";
-  return GetStruct(spawnPointTarget, "targetname").origin;
+  return getStruct(spawnPointTarget, "targetname").origin;
 }
 get_camera_center_point() {
   cameraTarget = level.arenas[level.current_arena] + "_center";
-  return GetStruct(cameraTarget, "targetname").origin;
+  return getStruct(cameraTarget, "targetname").origin;
 }
 move_players_to_start() {
   spawn_origin = get_player_spawn_point();
@@ -666,7 +666,7 @@ move_players_to_start() {
     } else if(isDefined(players[i].heli)) {
       players[i].heli.origin = hitp + (0, 0, level.heli_height);
     } else {
-      players[i] SetOrigin(hitp);
+      players[i] setOrigin(hitp);
     }
     players[i] breadcrumb_point_clear();
     players[i] SetPlayerAngles(angles);
@@ -701,7 +701,7 @@ life_link(source, dest) {
   orb thread destroy_me_on_player_notify(dest, "disconnect");
   orb thread destroy_me_on_player_notify(source, "end_life_link");
   while(isDefined(orb)) {
-    orb moveto(dest.origin, 0.2, 0, 0);
+    orb moveTo(dest.origin, 0.2, 0, 0);
     wait 0.2;
     if(isDefined(orb)) {
       orb.origin = source.origin;
@@ -741,7 +741,7 @@ steal_life_from(source, dest) {
   pickup setModel(level.extra_life_model);
   playFXOnTag(level._effect[source.light_playFX], pickup, "tag_origin");
   source thread maps\_zombietron_pickups::turn_shield_on(true);
-  pickup moveto(dest.origin, 1, 0, 0);
+  pickup moveTo(dest.origin, 1, 0, 0);
   pickup playLoopSound("zmb_pickup_life_shimmer");
   pickup waittill("movedone");
   pickup Delete();
@@ -805,7 +805,7 @@ player_steal_life() {
     if(isDefined(self.next_life_steal) && GetTime() < self.next_life_steal) {
       continue;
     }
-    players = GetPlayers();
+    players = getPlayers();
     richestPlayer = undefined;
     biggestLives = 0;
     for(i = 0; i < players.size; i++) {
@@ -830,7 +830,7 @@ player_respawn_now() {
   RadiusDamage(self.origin, 200, 10000, 10000, self);
   self spawn(self.origin, (0, 0, 0));
   self thread maps\_zombietron_pickups::turn_shield_on();
-  self SetPlayerCollision(1);
+  self setPlayerCollision(1);
   self TakeAllWeapons();
   self GiveWeapon(self.default_weap);
   self switchToWeapon(self.default_weap);
@@ -892,7 +892,7 @@ is_exit_open(label) {
   return false;
 }
 open_exit(trigger, objective_id) {
-  blocker = GetEnt(trigger.target, "targetname");
+  blocker = getEnt(trigger.target, "targetname");
   blocker.origin -= (0, 0, 500);
   trigger.exit_open = true;
   trigger thread exit_cleanup();
@@ -966,7 +966,7 @@ open_exits(specific) {
     }
     level thread open_exit(exit_triggers[i], i);
     opened_exits++;
-    PlaySoundAtPosition("zmb_exit_open", exit_triggers[i].origin);
+    playSoundAtPosition("zmb_exit_open", exit_triggers[i].origin);
     wait .2;
   }
   if(opened_exits > 1) {
@@ -983,7 +983,7 @@ open_exits(specific) {
   level.survived_msg.alpha = 0;
   level.msg_t3.alpha = 0;
   level notify("exit_taken_fadeout");
-  PlaySoundAtPosition("zmb_exit_taken", exit_trigger.origin);
+  playSoundAtPosition("zmb_exit_taken", exit_trigger.origin);
   wait 1.7;
   level.previous_exit_taken = exit_trigger.script_parameters;
   level.teleporter_spawned = false;
@@ -1019,41 +1019,41 @@ spawn_teleporter(boss_battle) {
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
-    lights[next] thread fake_linkto(teleporter, (0, 0, 50));
+    lights[next] thread fake_linkTo(teleporter, (0, 0, 50));
     playFXOnTag(level._effect["white_light"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
-    lights[next] thread fake_linkto(teleporter, (0, 72, 50));
+    lights[next] thread fake_linkTo(teleporter, (0, 72, 50));
     playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
-    lights[next] thread fake_linkto(teleporter, (72, 0, 50));
+    lights[next] thread fake_linkTo(teleporter, (72, 0, 50));
     playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
-    lights[next] thread fake_linkto(teleporter, (0, -72, 50));
+    lights[next] thread fake_linkTo(teleporter, (0, -72, 50));
     playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
     next = lights.size;
     lights[next] = spawn("script_model", start_point);
     lights[next] setModel("tag_origin");
-    lights[next] thread fake_linkto(teleporter, (-72, 0, 50));
+    lights[next] thread fake_linkTo(teleporter, (-72, 0, 50));
     playFXOnTag(level._effect["coconut"], lights[next], "tag_origin");
   }
-  teleporter MoveTo(dest_point + (0, 0, 5), 3, 0, 0);
+  teleporter moveTo(dest_point + (0, 0, 5), 3, 0, 0);
   teleporter thread Rotate();
   physicsExplosionSphere(start_point, 200, 128, 4);
   teleporter waittill("movedone");
   physicsExplosionSphere(start_point, 200, 128, 3);
-  playsoundatposition("zmb_teleporter_spawn", teleporter.origin);
+  playSoundAtPosition("zmb_teleporter_spawn", teleporter.origin);
   trigger = spawn("trigger_radius", location.origin + (0, 0, -100), 0, 20, 200);
   trigger playLoopSound("zmb_teleporter_loop", .5);
   trigger waittill("trigger", player);
   PlayRumbleOnPosition("artillery_rumble", location.origin);
   trigger StopLoopSound(.5);
-  PlaySoundAtPosition("zmb_teleporter_tele_out", (0, 0, 0));
+  playSoundAtPosition("zmb_teleporter_tele_out", (0, 0, 0));
   level.survived_msg FadeOverTime(1);
   level.msg_t3 FadeOverTime(1);
   level.survived_msg.alpha = 0;
@@ -1075,7 +1075,7 @@ spawn_teleporter(boss_battle) {
   level.teleporter_spawned = false;
 }
 setup_random_environment() {
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(level.xenon && level.arenas[level.current_arena] == "island") {
       players[i] SetClientDvars("phys_buoyancy", 1, "phys_ragdoll_buoyancy", 1);
@@ -1127,7 +1127,7 @@ show_model() {
       self.hidden = undefined;
     }
     self.origin -= (0, 0, 2000);
-    self DisconnectPaths();
+    self disconnectPaths();
   }
 }
 setup_script_models() {
@@ -1145,7 +1145,7 @@ setup_script_models() {
   }
 }
 setup_ambient_fx() {
-  vespa_smoke = getent("vespa_1", "targetname");
+  vespa_smoke = getEnt("vespa_1", "targetname");
   assertex(isDefined(vespa_smoke), "vespa_smoke is missing");
   playFX(level._effect["vespa_smoke_fx"], vespa_smoke.origin);
   capacitors = getEntArray("capacitor", "targetname");
@@ -1262,7 +1262,7 @@ Callback_PlayerKilledZT(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, v
   self playSound("zmb_player_death");
   self notify("player_died");
   self.headshots = 0;
-  self SetPlayerCollision(0);
+  self setPlayerCollision(0);
   self maps\_zombietron_score::update_multiplier_bar(0);
   if(isDefined(level.round_end_time) && level.round_start_time < level.round_end_time) {
     self.zombification_time = level.round_end_time - level.round_start_time;
@@ -1437,7 +1437,7 @@ zombieStatGet(dataName) {
   if(level.systemLink) {
     return 0;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return 0;
   }
   return (self getdstat("PlayerStatsList", dataName));
@@ -1446,7 +1446,7 @@ zombieStatSet(dataName, value) {
   if(level.systemLink) {
     return;
   }
-  if(GetDvarInt(#"splitscreen_playerCount") == GetPlayers().size) {
+  if(GetDvarInt(#"splitscreen_playerCount") == getPlayers().size) {
     return;
   }
   if(!isDefined(value)) {

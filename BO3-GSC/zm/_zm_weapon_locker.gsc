@@ -94,18 +94,18 @@ function triggerweaponslockerisvalidweaponpromptupdate(player, weapon) {
   if(!retrievingweapon) {
     weapon = player zm_weapons::get_nonalternate_weapon(weapon);
     if(weapon == level.weaponnone) {
-      self setcursorhint("HINT_NOICON");
+      self setCursorHint("HINT_NOICON");
       if(!triggerweaponslockerisvalidweapon(weapon)) {
-        self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY");
+        self setHintString(&"ZOMBIE_WEAPON_LOCKER_DENY");
       } else {
-        self sethintstring(&"ZOMBIE_WEAPON_LOCKER_STORE");
+        self setHintString(&"ZOMBIE_WEAPON_LOCKER_STORE");
       }
     } else {
-      self setcursorhint("HINT_WEAPON", weapon);
+      self setCursorHint("HINT_WEAPON", weapon);
       if(!triggerweaponslockerisvalidweapon(weapon)) {
-        self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY_FILL");
+        self setHintString(&"ZOMBIE_WEAPON_LOCKER_DENY_FILL");
       } else {
-        self sethintstring(&"ZOMBIE_WEAPON_LOCKER_STORE_FILL");
+        self setHintString(&"ZOMBIE_WEAPON_LOCKER_STORE_FILL");
       }
     }
   } else {
@@ -120,17 +120,17 @@ function triggerweaponslockerisvalidweaponpromptupdate(player, weapon) {
     if(isDefined(primaries) && primaries.size >= maxweapons || weapontogive == weapon) {
       if(!triggerweaponslockerisvalidweapon(weapon)) {
         if(weapon == level.weaponnone) {
-          self setcursorhint("HINT_NOICON", weapon);
-          self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY");
+          self setCursorHint("HINT_NOICON", weapon);
+          self setHintString(&"ZOMBIE_WEAPON_LOCKER_DENY");
         } else {
-          self setcursorhint("HINT_WEAPON", weapon);
-          self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY_FILL");
+          self setCursorHint("HINT_WEAPON", weapon);
+          self setHintString(&"ZOMBIE_WEAPON_LOCKER_DENY_FILL");
         }
         return;
       }
     }
-    self setcursorhint("HINT_WEAPON", weapontogive);
-    self sethintstring(&"ZOMBIE_WEAPON_LOCKER_GRAB_FILL");
+    self setCursorHint("HINT_WEAPON", weapontogive);
+    self setHintString(&"ZOMBIE_WEAPON_LOCKER_GRAB_FILL");
   }
 }
 
@@ -180,7 +180,7 @@ function triggerweaponslockerthink() {
       curweap_base = zm_weapons::get_base_weapon(curweapon);
       weap_base = zm_weapons::get_base_weapon(weapontogive);
       if(player zm_weapons::has_weapon_or_upgrade(weap_base) && weap_base != curweap_base) {
-        self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY");
+        self setHintString(&"ZOMBIE_WEAPON_LOCKER_DENY");
         wait(3);
         self triggerweaponslockerisvalidweaponpromptupdate(player, player getcurrentweapon());
         continue;
@@ -189,7 +189,7 @@ function triggerweaponslockerthink() {
       if(isDefined(primaries) && primaries.size >= maxweapons || weapontogive == curweapon) {
         curweapon = player zm_weapons::switch_from_alt_weapon(curweapon);
         if(!triggerweaponslockerisvalidweapon(curweapon)) {
-          self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY");
+          self setHintString(&"ZOMBIE_WEAPON_LOCKER_DENY");
           wait(3);
           self triggerweaponslockerisvalidweaponpromptupdate(player, player getcurrentweapon());
           continue;

@@ -147,7 +147,7 @@ ondrivingfxcollision(localclientnum, player, hip, hitn, hit_intensity) {
 
     id = playSound(0, alias, self.origin, volume);
     earthquake(localclientnum, 0.7, 0.25, player.origin, 1500);
-    player playrumbleonentity(localclientnum, "damage_heavy");
+    player playRumbleOnEntity(localclientnum, "damage_heavy");
   }
 }
 

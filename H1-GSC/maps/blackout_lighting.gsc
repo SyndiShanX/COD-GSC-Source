@@ -75,11 +75,11 @@ update_fade_angle_lights() {
   var_5 = var_1 / 180.0;
   var_6 = (var_1 - var_0) / 180.0;
   var_7 = anglesToForward(self.angles);
-  var_8 = vectornormalize((var_7[0], var_7[1], 0.0));
+  var_8 = vectorNormalize((var_7[0], var_7[1], 0.0));
 
   for(;;) {
     var_9 = level.player.origin - (self.origin + var_7 * self.radius * 0.75);
-    var_9 = vectornormalize((var_9[0], var_9[1], 0.0));
+    var_9 = vectorNormalize((var_9[0], var_9[1], 0.0));
     var_10 = vectordot(var_8, var_9);
     var_11 = (clamp((var_10 + 1.0) * 0.5, var_4, var_5) - var_4) / var_6;
     self setlightintensity(var_2 * var_11);
@@ -210,7 +210,7 @@ handle_blackout_spotlights_off() {
 
 handle_blackout_upstairs_spotlight() {
   common_scripts\utility::flag_wait("blackout_upstairs_spotlight_turn_on");
-  var_0 = getent("blackout_upstairs_spotlight", "script_noteworthy");
+  var_0 = getEnt("blackout_upstairs_spotlight", "script_noteworthy");
   var_0 setlightintensity(var_0.old_intensity);
 }
 

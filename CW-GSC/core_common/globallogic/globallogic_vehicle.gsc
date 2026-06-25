@@ -76,7 +76,7 @@ function callback_vehiclespawned(spawner) {
 function function_a8f929b0() {
   if(isDefined(self.ai_forceslots) && self.ai_forceslots >= 0 && self.ai_forceslots < 2) {
     level flag::wait_till("all_players_spawned");
-    a_e_players = getplayers(self.team);
+    a_e_players = getPlayers(self.team);
 
     if(isDefined(a_e_players[self.ai_forceslots])) {
       self.owner = a_e_players[self.ai_forceslots];
@@ -325,7 +325,7 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
         var_74d40edb = einflictor getvelocity();
 
         if(lengthsquared(var_74d40edb) > sqr(50)) {
-          var_29edfc10 = vectornormalize(var_74d40edb);
+          var_29edfc10 = vectorNormalize(var_74d40edb);
           playFX(self.settings.var_45b17e9c, vpoint, var_29edfc10);
         }
       }
@@ -552,15 +552,15 @@ function function_621234f9(eattacker, einflictor) {
 
     velocity = function_67e86f71(vehicle getvelocity());
     speedscale = length(velocity) / 30;
-    forwardvec = vectornormalize(velocity);
+    forwardvec = vectorNormalize(velocity);
     upvec = (0, 0, 1);
-    leftvec = vectornormalize(vectorcross(upvec, forwardvec));
+    leftvec = vectorNormalize(vectorcross(upvec, forwardvec));
     forwardscale = speedscale * randomfloatrange(50, 65);
     upscale = speedscale * randomfloatrange(35, 55);
     leftscale = speedscale * randomfloatrange(-25, 25);
     force = velocity + forwardvec * forwardscale + upvec * upscale + leftvec * leftscale;
     var_3e6c815d = length(force);
-    force = vectornormalize(force) * math::clamp(var_3e6c815d, 5, 250);
+    force = vectorNormalize(force) * math::clamp(var_3e6c815d, 5, 250);
     waitframe(2);
 
     if(isDefined(self)) {

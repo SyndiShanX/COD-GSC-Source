@@ -64,7 +64,7 @@ function function_41018429() {
   self.is_underwater = 1;
   self hazard::function_459e5eff("o2", 0);
   var_dd075cd2 = 1;
-  e_volume = getent("subway_water", "targetname");
+  e_volume = getEnt("subway_water", "targetname");
   if(isDefined(e_volume) && self istouching(e_volume)) {
     self thread function_c6b38f1e();
   }
@@ -139,10 +139,10 @@ function toggle_player_anchor(b_anchor) {
       level notify("disable_cybercom", self, 1);
       if(!self isonground()) {
         self.e_anchor = spawn("script_origin", self.origin);
-        self playerlinkto(self.e_anchor);
+        self playerlinkTo(self.e_anchor);
         v_ground = groundpos_ignore_water(self.origin);
         n_speed = distance(v_ground, self.origin) * 0.002;
-        self.e_anchor moveto(v_ground, n_speed);
+        self.e_anchor moveTo(v_ground, n_speed);
         self.e_anchor waittill("movedone");
         self unlink();
         self.e_anchor delete();
@@ -251,7 +251,7 @@ function function_72b35612() {
 }
 
 function setup_wind_storm() {
-  t_intro_storm = getent("anchor_intro_wind", "targetname");
+  t_intro_storm = getEnt("anchor_intro_wind", "targetname");
   t_intro_storm trigger::wait_till();
   self thread player_wind_trigger_tracker(t_intro_storm);
   self thread player_wind_sound_tracker(t_intro_storm);
@@ -270,9 +270,9 @@ function player_wind_trigger_tracker(t_storm) {
       if(!(isDefined(t_storm.is_gusting) && t_storm.is_gusting)) {
         self setmovespeedscale(0.7);
         if(self.is_anchored) {
-          self playrumbleonentity("bs_wind_rumble_low");
+          self playRumbleOnEntity("bs_wind_rumble_low");
         } else {
-          self playrumbleonentity("bs_wind_rumble");
+          self playRumbleOnEntity("bs_wind_rumble");
         }
       } else {
         self setmovespeedscale(0.5);
@@ -386,10 +386,10 @@ function create_gust(t_storm) {
           }
         }
         if(player.is_anchored) {
-          player playrumbleonentity("bs_gust_rumble_low");
+          player playRumbleOnEntity("bs_gust_rumble_low");
           continue;
         }
-        player playrumbleonentity("bs_gust_rumble");
+        player playRumbleOnEntity("bs_gust_rumble");
       }
     }
     wait(0.05);
@@ -407,7 +407,7 @@ function debris_at_players() {
     foreach(player in level.activeplayers) {
       e_debris = spawn("script_model", s_debris.origin);
       e_debris get_debris_model();
-      e_debris setplayercollision(0);
+      e_debris setPlayerCollision(0);
       if(isDefined(player)) {
         player fling_player_debris(e_debris);
       }
@@ -422,7 +422,7 @@ function boat_fly() {
   var_c6dce143 = struct::get("objective_port_assault_ai");
   foreach(player in level.activeplayers) {
     if(distance2dsquared(player.origin, var_c6dce143.origin) <= 640000) {
-      player playrumbleonentity("cp_blackstation_shelter_rumble");
+      player playRumbleOnEntity("cp_blackstation_shelter_rumble");
     }
   }
 }
@@ -462,7 +462,7 @@ function debris_embedded_trigger() {
     e_debris1 thread debris_rotate();
     e_debris1 thread check_player_hit();
   }
-  e_fridge = getent("debris_fridge", "targetname");
+  e_fridge = getEnt("debris_fridge", "targetname");
   a_e_debris2 = getEntArray("debris_stage_2", "targetname");
   arrayinsert(a_e_debris2, e_fridge, 0);
   foreach(e_debris2 in a_e_debris2) {
@@ -476,7 +476,7 @@ function debris_embedded_trigger() {
     e_debris2 thread debris_rotate();
     e_debris2 thread check_player_hit();
   }
-  e_tree = getent("debris_tree", "targetname");
+  e_tree = getEnt("debris_tree", "targetname");
   e_tree thread debris_shake();
   trigger::wait_till("trigger_stage_3");
   level waittill("wind_warning");
@@ -501,9 +501,9 @@ function debris_shake() {
 
 function debris_launch() {
   self notify("launch");
-  self moveto(self.origin + vectorscale((0, 1, 0), 200), 0.5);
+  self moveTo(self.origin + vectorscale((0, 1, 0), 200), 0.5);
   self waittill("movedone");
-  self moveto(self.origin + (0, 6000, 1200), 8);
+  self moveTo(self.origin + (0, 6000, 1200), 8);
   self waittill("movedone");
   self delete();
 }
@@ -513,7 +513,7 @@ function fling_random_debris() {
   self waittill("movedone");
   self thread debris_rotate();
   self thread check_player_hit();
-  self moveto(self.origin + (0, 6000, randomintrange(20, 60)), 4);
+  self moveTo(self.origin + (0, 6000, randomintrange(20, 60)), 4);
   self waittill("movedone");
   self delete();
 }
@@ -524,7 +524,7 @@ function fling_player_debris(e_debris) {
   e_debris thread check_player_hit();
   e_debris movez(240, 0.1);
   e_debris waittill("movedone");
-  e_debris moveto(self.origin + (randomint(100), 1000, randomintrange(80, 100)), 3);
+  e_debris moveTo(self.origin + (randomint(100), 1000, randomintrange(80, 100)), 3);
   e_debris waittill("movedone");
   e_debris delete();
 }
@@ -598,7 +598,7 @@ function check_player_hit() {
       if(distancesquared(self.origin, player getcentroid()) < n_hit_dist_sq) {
         player dodamage(player.health / 8, self.origin, undefined, undefined, undefined, "MOD_FALLING");
         player shellshock("default", 1.5);
-        player playrumbleonentity("artillery_rumble");
+        player playRumbleOnEntity("artillery_rumble");
         break;
       }
     }
@@ -655,7 +655,7 @@ function hendricks_anchor(str_warning, str_flag, str_endon) {
 
 function hendricks_safe_area_tracker() {
   level endon("kill_hendricks_anchor");
-  t_safe_area = getent(self.targetname + "_hero_safety", "script_noteworthy");
+  t_safe_area = getEnt(self.targetname + "_hero_safety", "script_noteworthy");
   if(!isDefined(t_safe_area)) {
     return;
   }
@@ -723,9 +723,9 @@ function function_8fbe0681(a_ents, str_endon, a_e_debris, t_start) {
   e_debris = a_ents[var_e7610d59 + "_debris"];
   e_debris thread function_1168d325(t_start);
   str_joint = "wave_trigger_jnt";
-  t_start enablelinkto();
+  t_start enablelinkTo();
   t_start.origin = e_wave gettagorigin(str_joint);
-  t_start linkto(e_wave, str_joint, (0, 120, -35), vectorscale((0, -1, 0), 90));
+  t_start linkTo(e_wave, str_joint, (0, 120, -35), vectorscale((0, -1, 0), 90));
   level flag::set("surge_active");
   foreach(player in level.players) {
     t_start thread surge_player_tracker(player);
@@ -745,7 +745,7 @@ function function_8fbe0681(a_ents, str_endon, a_e_debris, t_start) {
   level flag::clear("surging_inward");
   level flag::clear("surge_active");
   level flag::clear("end_surge");
-  e_wave stopanimscripted();
+  e_wave stopanimScripted();
   e_wave clientfield::set("water_disturbance", 0);
 }
 
@@ -811,7 +811,7 @@ function enemy_surge_tracker() {
 
 function enemy_surge_hit(t_surge) {
   self endon("death");
-  v_dir = vectornormalize(self.origin - t_surge.origin);
+  v_dir = vectorNormalize(self.origin - t_surge.origin);
   self startragdoll();
   self launchragdoll(v_dir * 75);
   self kill();
@@ -830,8 +830,8 @@ function function_c1eab89b(t_surge) {
     n_speed = distance(s_goal.origin, self.origin) * n_factor;
     self clientfield::increment("water_splash_lrg");
     self playSound("evt_surge_impact_debris");
-    self moveto(s_goal.origin, n_speed);
-    self rotateto(s_goal.angles, n_speed);
+    self moveTo(s_goal.origin, n_speed);
+    self rotateTo(s_goal.angles, n_speed);
     self waittill("movedone");
     level flag::wait_till_clear("surging_inward");
     while(isDefined(s_goal.target)) {
@@ -842,8 +842,8 @@ function function_c1eab89b(t_surge) {
       }
       n_speed = distance(s_goal.origin, self.origin) * n_factor;
       self clientfield::increment("water_splash_lrg");
-      self moveto(s_goal.origin, n_speed);
-      self rotateto(s_goal.angles, n_speed);
+      self moveTo(s_goal.origin, n_speed);
+      self rotateTo(s_goal.angles, n_speed);
       self waittill("movedone");
       if(isDefined(s_goal.target)) {
         level flag::wait_till_clear("surging_inward");
@@ -956,7 +956,7 @@ function surge_player_rumble(t_wave) {
   t_wave endon("wave_stop");
   earthquake(0.5, 2, self.origin, 100);
   while(true) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.1);
   }
 }
@@ -1004,7 +1004,7 @@ function player_surge_trigger_tracker() {
   self notify("hash_8af17fe2");
   self endon("hash_8af17fe2");
   self endon("death");
-  t_storm = getent("port_assault_low_surge", "targetname");
+  t_storm = getEnt("port_assault_low_surge", "targetname");
   t_storm endon("death");
   self.is_surge_affected = 0;
   while(true) {
@@ -1074,9 +1074,9 @@ function prep_waves() {
   a_waves = arraycombine(a_waves_left, a_waves_right, 0, 0);
   foreach(wave in a_waves) {
     wave ghost();
-    t_wave = getent(wave.target, "targetname");
-    t_wave enablelinkto();
-    t_wave linkto(wave);
+    t_wave = getEnt(wave.target, "targetname");
+    t_wave enablelinkTo();
+    t_wave linkTo(wave);
   }
 }
 
@@ -1138,7 +1138,7 @@ function create_wave(t_storm) {
   a_waves = arraycombine(a_waves_left, a_waves_right, 0, 0);
   e_wave = a_waves[randomintrange(0, a_waves.size)];
   s_wave = struct::get(e_wave.target, "targetname");
-  t_wave = getent(e_wave.target, "targetname");
+  t_wave = getEnt(e_wave.target, "targetname");
   e_wave playSound("evt_wave_dist");
   t_wave playSound("evt_wave_splash");
   array::thread_all(getEntArray("wave_fodder", "script_noteworthy"), &enemy_wave_tracker, t_wave, s_wave);
@@ -1160,10 +1160,10 @@ function create_wave(t_storm) {
           player setvelocity(v_dir * n_push_strength);
         }
         if(player.is_anchored) {
-          player playrumbleonentity("bs_wave_anchored");
+          player playRumbleOnEntity("bs_wave_anchored");
           continue;
         }
-        player playrumbleonentity("bs_wave");
+        player playRumbleOnEntity("bs_wave");
       }
     }
     wait(0.05);
@@ -1176,7 +1176,7 @@ function enemy_wave_tracker(t_wave, s_wave) {
   level endon("kill_wave");
   while(true) {
     if(self istouching(t_wave)) {
-      v_dir = vectornormalize(self.origin - (s_wave.origin[0], self.origin[1], s_wave.origin[2]));
+      v_dir = vectorNormalize(self.origin - (s_wave.origin[0], self.origin[1], s_wave.origin[2]));
       self startragdoll();
       self launchragdoll(v_dir * 100);
       self kill();
@@ -1187,7 +1187,7 @@ function enemy_wave_tracker(t_wave, s_wave) {
 
 function move_wave(e_wave) {
   s_wave = struct::get(e_wave.target, "targetname");
-  e_wave.t_wave = getent(e_wave.target, "targetname");
+  e_wave.t_wave = getEnt(e_wave.target, "targetname");
   e_wave.origin = s_wave.origin;
   e_wave.angles = s_wave.angles;
   if(e_wave.script_noteworthy == "pier_wave_left") {
@@ -1195,15 +1195,15 @@ function move_wave(e_wave) {
   } else {
     n_dist = 450;
   }
-  e_wave moveto(e_wave.origin + vectorscale((0, 0, 1), 150), 0.1);
+  e_wave moveTo(e_wave.origin + vectorscale((0, 0, 1), 150), 0.1);
   e_wave waittill("movedone");
-  e_wave moveto(e_wave.origin + (n_dist, 0, 150), 2.5);
+  e_wave moveTo(e_wave.origin + (n_dist, 0, 150), 2.5);
   foreach(player in level.players) {
     e_wave thread player_wave_protect(player);
   }
   e_wave thread play_temp_wave_fx();
   e_wave waittill("movedone");
-  e_wave moveto(e_wave.origin + (n_dist, 0, -150), 0.5);
+  e_wave moveTo(e_wave.origin + (n_dist, 0, -150), 0.5);
   e_wave waittill("movedone");
   e_wave notify("wave_passed");
   level flag::set("kill_wave");
@@ -1330,7 +1330,7 @@ function protect_riders() {
 
 function play_temp_wave_fx() {
   self.e_fx = util::spawn_model("tag_origin", self.origin);
-  self.e_fx linkto(self);
+  self.e_fx linkTo(self);
   self.e_fx fx::play("wave_pier", self.e_fx.origin + (vectorscale((0, 0, -1), 32)), undefined, 2, 1);
   self waittill("movedone");
   if(isDefined(self.e_fx)) {
@@ -1396,7 +1396,7 @@ function lightning_flashes(str_exploder, str_endon) {
       level exploder::stop_exploder(str_exploder);
       wait(0.05);
     }
-    playsoundatposition("amb_2d_thunder_hits", (0, 0, 0));
+    playSoundAtPosition("amb_2d_thunder_hits", (0, 0, 0));
     level exploder::exploder_duration(str_exploder, 1);
     wait(randomfloatrange(8, 11.5));
   }
@@ -1455,7 +1455,7 @@ function function_eef51bcb(e_proj, e_shooter) {
   self endon("death");
   e_target = e_shooter.enemy;
   n_dist = distancesquared(e_shooter.origin, e_target.origin);
-  var_c003c84d = getent("wind_target", "targetname");
+  var_c003c84d = getEnt("wind_target", "targetname");
   while(isDefined(e_proj)) {
     if(isDefined(e_target) && distancesquared(e_proj.origin, e_target.origin) < (0.5 * n_dist)) {
       e_proj missile_settarget(var_c003c84d);
@@ -1569,7 +1569,7 @@ function function_da77906f(a_ents, str_state) {
         continue;
       }
       if(str_state === "disconnect") {
-        e_ent disconnectpaths(2, 0);
+        e_ent disconnectPaths(2, 0);
       }
     }
   }
@@ -1642,15 +1642,15 @@ function function_7b145e0b(t_water, str_endon, var_cca258db, var_ab7d99d) {
   self playerlinktodelta(e_linkto, "tag_origin", 1, 45, 45, 45, 45);
   self clientfield::set_to_player("player_water_swept", 1);
   e_linkto thread scene::play("cin_blackstation_24_01_ride_vign_body_player_flail", self);
-  e_linkto moveto((e_linkto.origin[0], e_linkto.origin[1], var_cca258db), 0.3);
+  e_linkto moveTo((e_linkto.origin[0], e_linkto.origin[1], var_cca258db), 0.3);
   e_linkto waittill("movedone");
   s_pos = struct::get(t_water.target);
   n_dist = distance(e_linkto.origin, s_pos.origin);
   n_time = n_dist / var_ab7d99d;
   e_linkto thread spin_player(3);
-  e_linkto moveto((s_pos.origin[0], s_pos.origin[1], var_cca258db), n_time);
+  e_linkto moveTo((s_pos.origin[0], s_pos.origin[1], var_cca258db), n_time);
   e_linkto waittill("movedone");
-  e_linkto moveto(s_pos.origin, 1);
+  e_linkto moveTo(s_pos.origin, 1);
   e_linkto waittill("movedone");
   e_linkto scene::stop("cin_blackstation_24_01_ride_vign_body_player_flail");
   self unlink();
@@ -1669,7 +1669,7 @@ function function_7b145e0b(t_water, str_endon, var_cca258db, var_ab7d99d) {
 function spin_player(n_rate) {
   self endon("death");
   while(true) {
-    self rotateyaw(-180, n_rate);
+    self rotateYaw(-180, n_rate);
     wait(0.9);
   }
 }
@@ -1699,7 +1699,7 @@ function function_4f96504c(ai_target) {
   type = self cybercom::function_5e3d3aa();
   var_1eba5cf1 = vectortoangles(ai_target.origin - self.origin);
   var_1eba5cf1 = (0, var_1eba5cf1[1], 0);
-  self animscripted("ai_cybercom_anim", self.origin, var_1eba5cf1, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate", "normal", undefined, undefined, 0.3, 0.3);
+  self animScripted("ai_cybercom_anim", self.origin, var_1eba5cf1, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate", "normal", undefined, undefined, 0.3, 0.3);
   self cybercom::cybercom_armpulse(0);
   self waittillmatch("ai_cybercom_anim");
 }
@@ -1710,7 +1710,7 @@ function function_dccf6ccc() {
     wait(randomfloatrange(5, 7));
     if(isDefined(self.enemy) && !isDefined(self.enemy.current_scene) && !isDefined(self.enemy._o_scene) && self.enemy.archetype != "warlord") {
       ai_target = self.enemy;
-      if(isalive(ai_target) && !self isplayinganimscripted()) {
+      if(isalive(ai_target) && !self isplayinganimScripted()) {
         if(ai_target.archetype == "human") {
           var_3e2155a7 = "cybercom_immolation";
         } else {
@@ -1749,7 +1749,7 @@ function function_46dd77b0() {
 }
 
 function function_70aaf37b(b_active) {
-  e_blocker = getent("hotel_blocker", "targetname");
+  e_blocker = getEnt("hotel_blocker", "targetname");
   if(b_active) {
     e_blocker solid();
   } else {

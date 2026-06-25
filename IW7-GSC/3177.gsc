@@ -122,11 +122,11 @@ func_2371() {
     }
 
     func_11B5C(var_0, var_1, var_2, var_3) {
-      return !scripts\asm\asm_bb::bb_isanimscripted() && isDefined(self.asm.var_4C86.var_697F);
+      return !scripts\asm\asm_bb::bb_isanimScripted() && isDefined(self.asm.var_4C86.var_697F);
     }
 
     func_11B68(var_0, var_1, var_2, var_3) {
-      return !scripts\asm\asm_bb::bb_isanimscripted() && isDefined(self.asm.var_4C86.var_92FA);
+      return !scripts\asm\asm_bb::bb_isanimScripted() && isDefined(self.asm.var_4C86.var_92FA);
     }
 
     func_122AF(var_0, var_1, var_2, var_3) {

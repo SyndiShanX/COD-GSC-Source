@@ -270,7 +270,7 @@ player_is_behind_me() {
   var_1 = anglesToForward(var_0);
   var_2 = self.origin - (0, 0, self.origin[2]);
   var_3 = level.player.origin - (0, 0, level.player.origin[2]);
-  var_4 = vectornormalize(var_3 - var_2);
+  var_4 = vectorNormalize(var_3 - var_2);
   var_5 = vectordot(var_4, var_1);
   return var_5 < -0.1;
 }

@@ -110,7 +110,7 @@ objective_breadcrumb_to_salazar() {
     t_current waittill("trigger");
 
     if(isDefined(t_current.target)) {
-      t_current = getent(t_current.target, "targetname");
+      t_current = getEnt(t_current.target, "targetname");
     } else {
       t_current = undefined;
     }
@@ -150,11 +150,11 @@ pip_ai_think() {
 }
 
 dialog_mason_elevator() {
-  playsoundatposition("vox_bla_13_03_001b_sect", (1136, -2172, -519));
+  playSoundAtPosition("vox_bla_13_03_001b_sect", (1136, -2172, -519));
   level.player say_dialog("sect_attention_all_on_thi_1");
-  playsoundatposition("vox_bla_13_03_002b_sect", (1136, -2172, -519));
+  playSoundAtPosition("vox_bla_13_03_002b_sect", (1136, -2172, -519));
   level.player say_dialog("sect_all_hands_prep_for_e_0");
-  playsoundatposition("vox_bla_13_03_003b_sect", (1136, -2172, -519));
+  playSoundAtPosition("vox_bla_13_03_003b_sect", (1136, -2172, -519));
   level.player say_dialog("sect_i_say_again_abando_0");
   level thread dialog_combat_mason_elevator();
 }
@@ -174,15 +174,15 @@ dialog_combat_mason_elevator() {
 }
 
 mason_elevator() {
-  m_mason_elevator = getent("mason_elevator", "targetname");
+  m_mason_elevator = getEnt("mason_elevator", "targetname");
   m_mason_elevator setmovingplatformenabled(1);
   m_mason_elevator elevator_connect_paths();
   elevator_waittill_squad_boarded();
   level clientnotify("loud_alarm_on");
   trigger_wait("mason_elevator_trig");
-  m_clip = getent("mason_elevator_clip", "targetname");
+  m_clip = getEnt("mason_elevator_clip", "targetname");
   m_clip solid();
-  m_clip linkto(m_mason_elevator);
+  m_clip linkTo(m_mason_elevator);
   flag_set("mason_elevator_started");
   flag_clear("distant_explosions_on");
   clean_up_super_kill_blood();
@@ -240,7 +240,7 @@ hack_moving_platform() {
 }
 
 elevator_waittill_squad_boarded() {
-  t_elevator = getent("mason_elevator_trig", "targetname");
+  t_elevator = getEnt("mason_elevator_trig", "targetname");
   a_elevator_squad = array(level.harper, level.redshirt1, level.redshirt2);
   a_elevator_squad = remove_undefined_from_array(a_elevator_squad);
   b_all_boarded = 0;
@@ -259,28 +259,28 @@ elevator_waittill_squad_boarded() {
 }
 
 elevator_debris_rumble(m_debris) {
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 1, self.origin, 1000, level.player);
 }
 
 elevator_rumble() {
   self endon("death");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 1, self.origin, 1000, self);
   wait 1.5;
 
   while(!flag("reached_top_elevator")) {
-    self playrumbleonentity("tank_rumble");
+    self playRumbleOnEntity("tank_rumble");
     earthquake(0.1, 0.1, self.origin, 1000, self);
     wait 0.1;
   }
 
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 1, self.origin, 1000, self);
 }
 
 elevator_audio() {
-  playsoundatposition("evt_elev_alarm", (815, -2177, -400));
+  playSoundAtPosition("evt_elev_alarm", (815, -2177, -400));
   wait 1;
   self playSound("evt_elev_start");
   wait 1;
@@ -297,8 +297,8 @@ play_pip_dradis() {
 }
 
 menendez_riding_elevator() {
-  menendez_elevator = getent("menendez_elevator", "targetname");
-  landing_gears = getent("landing_gear_hanger", "targetname");
+  menendez_elevator = getEnt("menendez_elevator", "targetname");
+  landing_gears = getEnt("landing_gear_hanger", "targetname");
 
   if(isDefined(landing_gears)) {
     landing_gears delete();
@@ -348,7 +348,7 @@ run_mason_elevator() {
 
   move_ai_to_pre_elevator_positions();
   wait 1;
-  set_objective(level.obj_find_menen, getent("mason_elevator_trig", "targetname"));
+  set_objective(level.obj_find_menen, getEnt("mason_elevator_trig", "targetname"));
   trigger_wait("trigger_dead_body_fall");
   level thread fxanim_debris_fx();
   level notify("fxanim_black_elevator_debris_start");
@@ -362,7 +362,7 @@ fxanim_debris_fx() {
   level waittill("fxanim_black_elevator_debris_start");
   wait 0.05;
   earthquake(0.3, 1.5, level.player.origin, 128);
-  fxanim_model = getent("black_elevator_debris", "targetname");
+  fxanim_model = getEnt("black_elevator_debris", "targetname");
   playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_3"), fxanim_model, "link_cockpit_debris_jnt");
   playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_l_debris_jnt");
   playFXOnTag(getfx("fx_com_elev_fa38_debri_trail_2"), fxanim_model, "link_wing_r_debris_jnt");
@@ -371,8 +371,8 @@ fxanim_debris_fx() {
   earthquake(0.3, 1.5, level.player.origin, 128);
   trigger_use("color_trigger_hangar");
   wait 3;
-  mason_elevator = getent("mason_elevator", "targetname");
-  fxanim_model linkto(mason_elevator);
+  mason_elevator = getEnt("mason_elevator", "targetname");
+  fxanim_model linkTo(mason_elevator);
 }
 
 move_ai_to_pre_elevator_positions() {

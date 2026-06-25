@@ -218,12 +218,12 @@ function function_49d2af47(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function interact_rumble_small(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, #"hash_4d00b479eeadce8d");
+    self playRumbleOnEntity(fieldname, #"hash_4d00b479eeadce8d");
   }
 }
 
 function function_83c1bbf4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, #"hash_a8e842ba4e72dc5");
+    self playRumbleOnEntity(fieldname, #"hash_a8e842ba4e72dc5");
   }
 }

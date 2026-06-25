@@ -33,7 +33,7 @@ function function_61037c6c(kvp) {
     var_6638ee82 = struct::get(var_6638ee82.target, "targetname");
   }
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     var_a067b105 function_c3c3607b(e_player);
   }
 
@@ -47,7 +47,7 @@ function function_e261021e(kvp) {
       var_6638ee82.b_active = undefined;
     }
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       objective_setinvisibletoplayer(mission.var_650ffa70[e_player getentitynumber()], e_player);
     }
   }
@@ -58,7 +58,7 @@ function show(e_player) {
     if(isDefined(e_player)) {
       a_e_players = array(e_player);
     } else {
-      a_e_players = getplayers();
+      a_e_players = getPlayers();
     }
 
     foreach(e_player in a_e_players) {
@@ -73,7 +73,7 @@ function hide(e_player) {
     if(isDefined(e_player)) {
       a_e_players = array(e_player);
     } else {
-      a_e_players = getplayers();
+      a_e_players = getPlayers();
     }
 
     foreach(e_player in a_e_players) {
@@ -102,7 +102,7 @@ function private function_c3c3607b(e_player) {
 
 function private watch_trigger() {
   if(isDefined(self.script_breadcrumb_trigger)) {
-    trigger = getent(self.script_breadcrumb_trigger, "script_breadcrumb_trigger");
+    trigger = getEnt(self.script_breadcrumb_trigger, "script_breadcrumb_trigger");
     self.trigger = trigger;
     assert(!self.trigger trigger::is_trigger_once(), "<dev string:x38>");
   }

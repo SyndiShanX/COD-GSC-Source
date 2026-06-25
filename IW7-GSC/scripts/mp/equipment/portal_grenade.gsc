@@ -166,9 +166,9 @@ func_11663(var_0) {
 
   var_4 = self.origin;
   var_5 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
-  self playerlinkto(var_5);
+  self playerlinkTo(var_5);
   self setclientdvar("cg_fovScale", 1.7);
-  var_5 moveto(var_0, 0.15, 0, 0);
+  var_5 moveTo(var_0, 0.15, 0, 0);
   self playanimscriptevent("power_active", "teleport");
   scripts\mp\utility::adddamagemodifier("teleport", 0, 0);
   self motionblurhqenable();
@@ -178,7 +178,7 @@ func_11663(var_0) {
   self motionblurhqdisable();
   scripts\mp\utility::removedamagemodifier("teleport", 0);
   self unlink();
-  self setorigin(var_0, 1);
+  self setOrigin(var_0, 1);
   self setclientdvar("cg_fovScale", 1);
   scripts\engine\utility::waitframe();
   self playanimscriptevent("power_exit", "teleport");
@@ -198,7 +198,7 @@ func_E852(var_0, var_1) {
   var_3 setModel("tag_origin");
   wait(0.1);
   playFXOnTag(scripts\engine\utility::getfx("vfx_tele_trail"), var_3, "tag_origin");
-  var_3 moveto(var_2, 0.1, 0.05, 0);
+  var_3 moveTo(var_2, 0.1, 0.05, 0);
   wait(0.2);
   stopFXOnTag(scripts\engine\utility::getfx("vfx_tele_trail"), var_3, "tag_origin");
   var_3 delete();

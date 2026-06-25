@@ -407,7 +407,7 @@ function function_1e2a0690(var_59483212, var_53914167, var_fa359e06) {
   }
 
   ai_enemy = undefined;
-  var_c31a6f62 = getent(var_59483212, "targetname");
+  var_c31a6f62 = getEnt(var_59483212, "targetname");
 
   while(!isDefined(ai_enemy)) {
     var_c31a6f62 namespace_534279a::function_c77b8a08();
@@ -479,7 +479,7 @@ function function_beb5d779(var_c31a6f62, ai_enemy, var_fa359e06) {
   var_c31a6f62 thread function_e01fd728();
 
   if(distance2dsquared(level.player.origin, ai_enemy.origin) < sqr(1100)) {
-    level.player playrumbleonentity("artillery_rumble");
+    level.player playRumbleOnEntity("artillery_rumble");
   }
 
   level scene::play(var_fa359e06, "fire", a_actors);
@@ -504,7 +504,7 @@ function function_c09d041f(var_c31a6f62, ai_enemy, var_fa359e06) {
 
 function function_b9170a35(var_59483212) {
   level endon(var_59483212 + "_endon");
-  var_c31a6f62 = getent(var_59483212, "targetname");
+  var_c31a6f62 = getEnt(var_59483212, "targetname");
 
   while(true) {
     var_c31a6f62 namespace_534279a::function_c77b8a08();

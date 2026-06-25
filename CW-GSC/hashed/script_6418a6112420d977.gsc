@@ -54,7 +54,7 @@ function function_4f8b33df(instance) {
   util::wait_network_frame();
 
   if(isDefined(self.mdl_orb.e_fx)) {
-    self.mdl_orb.e_fx linkto(self, "tag_cage_attach", (0, 0, 17));
+    self.mdl_orb.e_fx linkTo(self, "tag_cage_attach", (0, 0, 17));
   }
 }
 
@@ -90,7 +90,7 @@ function function_540c0d15(instance) {
 
   wait 1;
   self clientfield::set("" + #"hash_1e59af4706036a79", 1);
-  self playrumbleonentity(#"hash_2d43d9987e4a73a8");
+  self playRumbleOnEntity(#"hash_2d43d9987e4a73a8");
   self thread function_3c40b07a();
   self thread function_1e4eea8e(instance);
   self thread function_d30f71c4(instance);
@@ -125,14 +125,14 @@ function function_206ee608() {
 }
 
 function function_a528be11() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_37c638fd5c6acd16");
     level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
   }
 
   self waittill(#"objective_ended");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d thread prototype_hud::function_817e4d10(player, 0);
   }
 }
@@ -151,7 +151,7 @@ function function_c8b3217e(instance) {
   self endon(#"death");
 
   while(true) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(player.origin, self.origin) <= 250000) {
         player.b_ignore_fow_damage = 1;
         continue;
@@ -216,7 +216,7 @@ function function_7ae500b2(instance) {
     self.b_proximity = 1;
     self.n_players = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(distance2dsquared(player.origin, self.origin) > 250000 || player laststand::player_is_in_laststand()) {
         self.b_proximity = 0;
       }
@@ -265,7 +265,7 @@ function function_2db63909(instance) {
   exploder::exploder("fxexp_mq_phase_amb");
   level flag::set(#"in_dark_side");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"hash_34af381c063f6611", 1);
     player.var_e5f956c5 = 1;
   }
@@ -280,7 +280,7 @@ function function_2db63909(instance) {
   exploder::stop_exploder("fxexp_mq_phase_amb");
   level flag::clear(#"in_dark_side");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_e5f956c5 = undefined;
     player.var_41c16555 = undefined;
   }
@@ -325,12 +325,12 @@ function function_2db63909(instance) {
   wait 0.25;
   level notify(#"hash_62901a3385d3e7af");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.b_ignore_fow_damage = 0;
   }
 
   level flag::set(#"hash_1558183088c6ccff");
-  self playrumbleonentity(#"hash_2d43d9987e4a73a8");
+  self playRumbleOnEntity(#"hash_2d43d9987e4a73a8");
   self kill();
 }
 
@@ -344,7 +344,7 @@ function function_174dde71() {
   self endon(#"hash_d2f2236898d7b64", #"death");
   self.var_f8edfabd = 1;
   wait 1;
-  self disconnectpaths();
+  self disconnectPaths();
   self.var_59078fae = 1;
   wait 1;
   slots = namespace_85745671::function_bdb2b85b(self, self.origin, self.angles, 64, 4, 300);
@@ -453,9 +453,9 @@ function function_6d122cef() {
   nd_current = self.currentnode;
 
   if(isDefined(nd_current)) {
-    v_forward = vectornormalize(anglesToForward(nd_current.angles)) * 2400 + nd_current.origin;
+    v_forward = vectorNormalize(anglesToForward(nd_current.angles)) * 2400 + nd_current.origin;
   } else {
-    v_forward = vectornormalize(anglesToForward(self.angles)) * 2400 + self.origin;
+    v_forward = vectorNormalize(anglesToForward(self.angles)) * 2400 + self.origin;
   }
 
   if(isDefined(v_forward)) {
@@ -517,7 +517,7 @@ function function_dd9b1007(instance, v_spawnpt, v_ang) {
 }
 
 function function_dae1a57b() {
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
 
   switch (n_players) {
     case 1:
@@ -541,7 +541,7 @@ function function_dae1a57b() {
 }
 
 function function_e677fbe0() {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       n_spawns = 8;
       n_spawns = min(12, int(level.var_b48509f9 * 0.5 + n_spawns));
@@ -604,7 +604,7 @@ function function_bf606a73(var_29611f04, instance) {
   wait 0.1;
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     player = awareness::function_d7fedde2(self);
 
     if(!isDefined(self.is_attacking) && isalive(self) && isalive(player)) {
@@ -652,11 +652,11 @@ function function_79ae8e99(instance) {
         zombie.knockdown = 1;
         zombie.knockdown_type = "knockdown_shoved";
         var_7d6a995e = self.origin - zombie.origin;
-        var_1040735c = vectornormalize((var_7d6a995e[0], var_7d6a995e[1], 0));
+        var_1040735c = vectorNormalize((var_7d6a995e[0], var_7d6a995e[1], 0));
         zombie_forward = anglesToForward(zombie.angles);
-        zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+        zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
         zombie_right = anglestoright(zombie.angles);
-        zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+        zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
         dot = vectordot(var_1040735c, zombie_forward_2d);
 
         if(dot >= 0.5) {
@@ -736,10 +736,10 @@ function function_1b4b0c63(var_b8ca9d7) {
 function player_rover_pos() {
   level flag::wait_till("all_players_spawned");
   a_s_pos = struct::get_array("player_rover_pos");
-  a_players = getplayers();
+  a_players = getPlayers();
 
   for(i = 0; i < a_players.size; i++) {
-    a_players[i] setorigin(a_s_pos[i].origin);
+    a_players[i] setOrigin(a_s_pos[i].origin);
     a_players[i] setplayerangles(a_s_pos[i].angles);
   }
 
@@ -883,7 +883,7 @@ function function_6312130f(instance) {
   self endon(#"death");
   level flag::wait_till("all_players_spawned");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     self setinvisibletoplayer(player);
     self thread function_aa475e00(instance, player);
   }
@@ -1079,7 +1079,7 @@ function private function_1cabf2e9(s_result) {
   if(isPlayer(s_result.attacker) || isai(s_result.attacker) || isvehicle(s_result.attacker)) {
     ping::function_9455917d(self);
     self namespace_58949729::function_8ef626e3();
-    playsoundatposition(#"hash_54c5c342b84cf845", self.origin);
+    playSoundAtPosition(#"hash_54c5c342b84cf845", self.origin);
 
     if(isPlayer(s_result.attacker) && s_result.attacker isinvehicle()) {
       vh_player = s_result.attacker getvehicleoccupied();
@@ -1145,9 +1145,9 @@ function spawn_orb() {
   v_offset = (0, 0, -5);
   str_tag = "tag_cage_attach";
   var_ec6068b9 = level.var_c39a4b8f gettagorigin(str_tag);
-  mdl_orb moveto(var_ec6068b9 + v_offset, 0.75);
+  mdl_orb moveTo(var_ec6068b9 + v_offset, 0.75);
   mdl_orb waittill(#"movedone");
   level.var_c39a4b8f.mdl_orb = mdl_orb;
-  mdl_orb linkto(level.var_c39a4b8f, str_tag, v_offset, (0, 0, 0));
+  mdl_orb linkTo(level.var_c39a4b8f, str_tag, v_offset, (0, 0, 0));
   mdl_orb bobbing((0, 0, 1), 5, 3);
 }

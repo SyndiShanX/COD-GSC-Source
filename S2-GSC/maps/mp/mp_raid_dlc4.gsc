@@ -267,7 +267,7 @@ func_54D7(param_00) {
     var_13.var_267E = [2, 1, 2, 2, 2, 0];
     var_13 setcostumemodels(var_13.var_267E, "axis");
     var_14 = spawn("weapon_" + var_10, (0, 0, 0), 1);
-    var_14 linkto(var_13, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_14 linkTo(var_13, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_0F[var_0F.size] = var_14;
     var_13 method_8495(var_12 + "_shot_01", var_02, var_03);
     var_0E[var_0E.size] = var_13;
@@ -491,7 +491,7 @@ func_54E1() {
   var_00 thread continue_multi_shot_anims(var_05, var_04, 5, "_shot0", "axis");
   var_03[1].forceweaponless = 1;
   var_09 = spawn("weapon_teslagunmtx_mp", (0, 0, 0), 1);
-  var_09 linkto(var_04[1], "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_09 linkTo(var_04[1], "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   var_0A = ["mp_raids_dlc4_axis_intro_guy07", "mp_raids_dlc4_axis_intro_guy08"];
   var_0B = [];
   var_0C = [];
@@ -503,7 +503,7 @@ func_54E1() {
     var_10.var_267E = function_0283();
     var_10 setcostumemodels(var_10.var_267E, "axis");
     var_09 = spawn("weapon_" + var_0D, (0, 0, 0), 1);
-    var_09 linkto(var_10, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+    var_09 linkTo(var_10, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
     var_0C[var_0C.size] = var_09;
     var_10 method_8495(var_0F, var_01, var_02);
     var_0B[var_0B.size] = var_10;
@@ -609,11 +609,11 @@ func_54D9() {
 func_7FB4() {
   thread bellanimationthink();
   var_00 = common_scripts\utility::func_46B5("truck_push_node", "targetname");
-  var_01 = getent("truck_push", "script_noteworthy");
-  var_02 = getent(var_01.var_1A2, "targetname");
-  var_02 linkto(var_01, "truck");
-  var_03 = getent("tank_push_trigger", "script_noteworthy");
-  var_04 = getent("obj1_tankpush_kill", "targetname");
+  var_01 = getEnt("truck_push", "script_noteworthy");
+  var_02 = getEnt(var_01.var_1A2, "targetname");
+  var_02 linkTo(var_01, "truck");
+  var_03 = getEnt("tank_push_trigger", "script_noteworthy");
+  var_04 = getEnt("obj1_tankpush_kill", "targetname");
   level waittill("tank_push");
   foreach(var_06 in level.var_744A) {
     if(isalive(var_06) && var_06 istouching(var_04)) {
@@ -777,7 +777,7 @@ func_6C8D() {
     var_0C.var_9EDD method_805C();
   }
 
-  var_0E = getent("axis_outro_bell", "targetname");
+  var_0E = getEnt("axis_outro_bell", "targetname");
   var_0E animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_ally_outro_bell", var_01, var_02);
   var_0E thread outrovignette_allies_switch_model();
   var_0F = ["mp_raids_dlc4_ally_outro_cable_front", "mp_raids_dlc4_ally_outro_cable_rear", "mp_raids_dlc4_ally_outro_cable_right", "mp_raids_dlc4_ally_outro_cable_left"];
@@ -801,7 +801,7 @@ outrovignette_allies_spawn_weapon(param_00) {
 }
 
 outrovignette_allies_assign_weapon(param_00, param_01) {
-  param_00 linkto(param_01, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  param_00 linkTo(param_01, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
 }
 
 outrovignette_allies_switch_model() {
@@ -942,10 +942,10 @@ func_6C94() {
   var_11 setModel("zom_hero_straub_wholebody");
   var_11.color = spawn("script_model", var_01);
   var_11.color setModel("mp_head_joyce_hub");
-  var_11.color linkto(var_11, "J_Neck", (-13.2, 0, 0), (0, 0, 0));
+  var_11.color linkTo(var_11, "J_Neck", (-13.2, 0, 0), (0, 0, 0));
   var_11.goggles = spawn("script_model", var_01);
   var_11.goggles setModel("zom_auergog_org1");
-  var_11.goggles linkto(var_11.color, "J_Head", (0, 0, 0), (0, 0, 0));
+  var_11.goggles linkTo(var_11.color, "J_Head", (0, 0, 0), (0, 0, 0));
   var_12 = "mp_raids_dlc4_axis_outro_shot_01_axis_03";
   var_11 animscripts\notetracks_common::give_player_xp(var_12, var_01, var_02);
   var_0B[var_0B.size] = var_11;
@@ -960,7 +960,7 @@ func_6C94() {
     var_14[var_14.size] = var_17;
   }
 
-  var_19 = getent("axis_outro_door", "targetname");
+  var_19 = getEnt("axis_outro_door", "targetname");
   var_19 method_805C();
   level.outrovignette_axis_struct.ally_soldiers = var_04;
   level.outrovignette_axis_struct.axis_soldiers = var_0B;
@@ -974,7 +974,7 @@ func_6C92() {
   common_scripts\utility::func_F71(var_00, ::delete);
   common_scripts\utility::func_F71(var_01, ::delete);
   common_scripts\utility::func_F71(var_02, ::delete);
-  var_03 = getent("axis_outro_door", "targetname");
+  var_03 = getEnt("axis_outro_door", "targetname");
   var_03 method_805B();
   level.var_A4B5["intensity"] = 0.2;
   level.var_A4B5["falloff"] = 1.2;
@@ -1167,7 +1167,7 @@ monitorsecretweaponunlock() {
 }
 
 activatepickupbox(param_00) {
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   var_02 = common_scripts\utility::func_46B7("special_weapon", "targetname");
   foreach(var_04 in level.var_744A) {
     var_04 method_8512("teslagun_war_regular_mp");
@@ -1181,7 +1181,7 @@ activatepickupbox(param_00) {
 }
 
 deactivatepickupbox(param_00) {
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   var_02 = common_scripts\utility::func_46B7("special_weapon", "targetname");
   foreach(var_04 in var_02) {
     if(var_04.var_272F istouching(var_01)) {
@@ -1491,12 +1491,12 @@ bellanimationthink() {
   var_00 = common_scripts\utility::func_46B5("bell_arena_animorg", "targetname");
   var_01 = var_00.var_116;
   var_02 = var_00.var_1D;
-  var_03 = getent("bell01", "targetname");
+  var_03 = getEnt("bell01", "targetname");
   var_03 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_bell_idle", var_01, var_02);
-  var_04 = getent("bell_cable_front", "targetname");
-  var_05 = getent("bell_cable_left", "targetname");
-  var_06 = getent("bell_cable_right", "targetname");
-  var_07 = getent("bell_cable_rear", "targetname");
+  var_04 = getEnt("bell_cable_front", "targetname");
+  var_05 = getEnt("bell_cable_left", "targetname");
+  var_06 = getEnt("bell_cable_right", "targetname");
+  var_07 = getEnt("bell_cable_rear", "targetname");
   var_04 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_bell_cable_front_idle", var_01, var_02);
   var_05 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_bell_cable_left_idle", var_01, var_02);
   var_06 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_bell_cable_right_idle", var_01, var_02);
@@ -1506,7 +1506,7 @@ bellanimationthink() {
   }
 
   var_08 = level.var_97C5[0];
-  var_09 = getent("flakTarget3", "targetname");
+  var_09 = getEnt("flakTarget3", "targetname");
   while(!isDefined(var_08.var_9696) || !isDefined(var_08.var_9696.var_1A4) || var_08.var_9696.var_1A4 != var_09) {
     wait(0.25);
   }
@@ -1533,7 +1533,7 @@ finalebellthink() {
   var_00 = common_scripts\utility::func_46B5("anim_allies_win_outro", "targetname");
   var_01 = var_00.var_116;
   var_02 = var_00.var_1D;
-  var_03 = getent("axis_outro_bell", "targetname");
+  var_03 = getEnt("axis_outro_bell", "targetname");
   var_03 animscripts\notetracks_common::give_player_xp("mp_raids_dlc4_bell_idle_2", var_01, var_02);
   var_04 = ["mp_raids_dlc4_bell_cable_front_idle_2", "mp_raids_dlc4_bell_cable_left_idle_2", "mp_raids_dlc4_bell_cable_right_idle_2", "mp_raids_dlc4_bell_cable_rear_idle_2"];
   var_05 = [];

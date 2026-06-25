@@ -54,7 +54,7 @@ quadrotor_medallions() {
   level.n_ee_medallions = 4;
   flag_wait("ee_medallions_collected");
   level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("side_sting_4");
-  s_mg_spawn = getstruct("mgspawn", "targetname");
+  s_mg_spawn = getStruct("mgspawn", "targetname");
   v_spawnpt = s_mg_spawn.origin;
   v_spawnang = s_mg_spawn.angles;
   player = get_players()[0];
@@ -117,7 +117,7 @@ swap_mg(e_player) {
 }
 
 wall_hole_poster() {
-  m_poster = getent("hole_poster", "targetname");
+  m_poster = getEnt("hole_poster", "targetname");
   m_poster setCanDamage(1);
   m_poster.health = 1000;
   m_poster.maxhealth = m_poster.health;
@@ -134,7 +134,7 @@ wall_hole_poster() {
 wagon_fire_challenge() {
   flag_init("ee_wagon_timer_start");
   flag_init("ee_wagon_challenge_complete");
-  s_powerup = getstruct("wagon_powerup", "targetname");
+  s_powerup = getStruct("wagon_powerup", "targetname");
   flag_wait("start_zombie_round_logic");
   wagon_fire_start();
 
@@ -216,7 +216,7 @@ onplayerconnect_ee_jump_scare() {
   self endon("disconnect");
 
   if(!isDefined(level.jump_scare_lookat_point)) {
-    level.jump_scare_lookat_point = getstruct("struct_gg_look", "targetname");
+    level.jump_scare_lookat_point = getStruct("struct_gg_look", "targetname");
   }
 
   if(!isDefined(level.b_saw_jump_scare)) {
@@ -310,12 +310,12 @@ sq_one_inch_punch() {
     a_tablets[n_player_id] = spawn_tablet_model(n_player_id + 1, "bunker", "muddy");
   }
 
-  t_bunker = getent("trigger_oneinchpunch_bunker_table", "targetname");
+  t_bunker = getEnt("trigger_oneinchpunch_bunker_table", "targetname");
   t_bunker thread bunker_trigger_thread();
-  t_bunker setcursorhint("HINT_NOICON");
-  t_birdbath = getent("trigger_oneinchpunch_church_birdbath", "targetname");
+  t_bunker setCursorHint("HINT_NOICON");
+  t_birdbath = getEnt("trigger_oneinchpunch_church_birdbath", "targetname");
   t_birdbath thread birdbath_trigger_thread();
-  t_birdbath setcursorhint("HINT_NOICON");
+  t_birdbath setCursorHint("HINT_NOICON");
 }
 
 bunker_trigger_thread() {
@@ -329,7 +329,7 @@ bunker_trigger_thread() {
       player playSound("zmb_squest_oiptablet_pickup");
       player thread sq_one_inch_punch_disconnect_watch();
       player thread sq_one_inch_punch_death_watch();
-      m_tablet = getent("tablet_bunker_" + level.n_tablets_remaining, "targetname");
+      m_tablet = getEnt("tablet_bunker_" + level.n_tablets_remaining, "targetname");
       m_tablet delete();
       level.n_tablets_remaining--;
 
@@ -453,7 +453,7 @@ bunker_volume_death_check() {
     return;
   }
   volume_name = "oneinchpunch_bunker_volume";
-  volume = getent(volume_name, "targetname");
+  volume = getEnt(volume_name, "targetname");
   assert(isDefined(volume), volume_name + " does not exist");
   attacker = self.attacker;
 
@@ -492,7 +492,7 @@ church_volume_death_check() {
     return;
   }
   volume_name = "oneinchpunch_church_volume";
-  volume = getent(volume_name, "targetname");
+  volume = getEnt(volume_name, "targetname");
   assert(isDefined(volume), volume_name + " does not exist");
   attacker = self.attacker;
 
@@ -519,7 +519,7 @@ church_volume_death_check() {
 }
 
 spawn_tablet_model(n_player_id, str_location, str_state) {
-  s_tablet_spawn = getstruct("oneinchpunch_" + str_location + "_tablet_" + n_player_id, "targetname");
+  s_tablet_spawn = getStruct("oneinchpunch_" + str_location + "_tablet_" + n_player_id, "targetname");
   v_spawnpt = s_tablet_spawn.origin;
   v_spawnang = s_tablet_spawn.angles;
   m_tablet = spawn("script_model", v_spawnpt);

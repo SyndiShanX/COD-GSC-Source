@@ -664,7 +664,7 @@ _id_7361() {
   foreach(var_4 in var_2) {
     var_5 = level._id_E371[var_4][var_0]._id_1782.origin;
     var_6 = var_5 + var_1 * -8500 + (0, 0, 7000);
-    var_7 = vectornormalize(var_5 - var_6);
+    var_7 = vectorNormalize(var_5 - var_6);
     var_8 = scripts\mp\utility\script::_id_FFE3(var_7, (0, 0, 1));
 
     if(istrue(level._id_FEF0)) {
@@ -688,7 +688,7 @@ _id_7361() {
   foreach(var_4 in var_2) {
     var_5 = level._id_E371[var_4][var_0]._id_1782.origin;
     var_6 = var_5 + var_1 * -8500 + (0, 0, 7000);
-    var_7 = vectornormalize(var_5 - var_6);
+    var_7 = vectorNormalize(var_5 - var_6);
     var_8 = scripts\mp\utility\script::_id_FFE3(var_7, (0, 0, 1));
 
     if(istrue(level._id_FEF0)) {
@@ -781,8 +781,8 @@ _id_D5A9() {
   level._id_7346._id_1512._id_541F = var_2;
   level._id_F935[level._id_F935.size] = var_2;
   level._id_E377 = [];
-  level._id_E377["allies"] = vectornormalize(level._id_7346._id_1FE7.trigger.origin - level._id_7346._id_1512.trigger.origin);
-  level._id_E377["axis"] = vectornormalize(level._id_7346._id_1512.trigger.origin - level._id_7346._id_1FE7.trigger.origin);
+  level._id_E377["allies"] = vectorNormalize(level._id_7346._id_1FE7.trigger.origin - level._id_7346._id_1512.trigger.origin);
+  level._id_E377["axis"] = vectorNormalize(level._id_7346._id_1512.trigger.origin - level._id_7346._id_1FE7.trigger.origin);
 }
 
 _id_E36C() {
@@ -1505,7 +1505,7 @@ _id_E727() {
   var_6.angles = var_5;
   self._id_E3E9 = var_6;
   self._id_8AD7 = 1;
-  self cameralinkto(var_6, "tag_origin", 1);
+  self cameralinkTo(var_6, "tag_origin", 1);
   thread _id_4CF1();
   var_6 _id_A227(self, var_4, var_5);
 }
@@ -1528,15 +1528,15 @@ _id_A227(var_0, var_1, var_2) {
   var_0 endon("spawned_player");
   var_3 = 1.0;
   var_4 = 1.0;
-  self moveto(var_1, 2.0, 1.0, 1.0);
+  self moveTo(var_1, 2.0, 1.0, 1.0);
   var_0 _meth_82FD("spawn_cam", 0.5, "mix");
-  self rotateto(var_2, 2.0, 1.0, 1.0);
+  self rotateTo(var_2, 2.0, 1.0, 1.0);
   wait 1.1;
   var_5 = anglesToForward(var_2) * 300;
   var_5 = var_5 * (1, 1, 0);
 
   if(isDefined(var_0) && isDefined(var_0._id_E3E9)) {
-    self moveto(var_1 + var_5, 15.0, 1.0, 1.0);
+    self moveTo(var_1 + var_5, 15.0, 1.0, 1.0);
     var_0 earthquakeforplayer(0.03, 15.0, var_1 + var_5, 1000);
   }
 }
@@ -1546,11 +1546,11 @@ _id_CA72() {
   var_0 = self getEye();
   var_1 = self.angles;
   scripts\mp\utility\player::_id_FD26("spectator");
-  self cameralinkto(self._id_E3E9, "tag_origin", 1);
+  self cameralinkTo(self._id_E3E9, "tag_origin", 1);
   self visionsetnakedforplayer("tac_ops_slamzoom", 0.2);
-  self._id_E3E9 moveto(var_0, 0.5);
+  self._id_E3E9 moveTo(var_0, 0.5);
   self _meth_8078(0.5);
-  self._id_E3E9 rotateto(var_1, 0.5, 0.5);
+  self._id_E3E9 rotateTo(var_1, 0.5, 0.5);
   wait 0.5;
 
   if(!isDefined(self)) {
@@ -1719,7 +1719,7 @@ _id_3FA0(var_0, var_1) {
 }
 
 _id_7426(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = distance(var_1, var_0);
   var_6 = var_0 + var_4 * var_5 * 0.425;
   var_7 = var_0 + var_4 * var_5 * 0.55;
@@ -1728,11 +1728,11 @@ _id_7426(var_0, var_1, var_2, var_3) {
   var_10 = var_2 * 0.1;
   self._id_318D = 1;
   self._id_31A7 = 0;
-  var_11 = vectornormalize(var_1 - var_0);
+  var_11 = vectorNormalize(var_1 - var_0);
   self.angles = vectortoangles(var_11);
   self.origin = var_0;
   _id_620F();
-  self moveto(var_1, var_8 + var_9 + var_10, var_8 * 0.25);
+  self moveTo(var_1, var_8 + var_9 + var_10, var_8 * 0.25);
   wait(var_8);
   self._id_31A7 = 1;
 
@@ -1894,12 +1894,12 @@ _id_AE18(var_0, var_1) {
     var_2 = level._id_2E3B._id_9E8E;
   }
 
-  var_3 = vectornormalize(var_2 - var_0.origin);
+  var_3 = vectorNormalize(var_2 - var_0.origin);
   var_0.players = scripts\engine\utility::array_remove(var_0.players, self);
 
   if(isDefined(var_0._id_B72B) && isDefined(var_0._id_41E2)) {
     var_4 = var_0._id_B72B[var_0._id_41E2];
-    self setorigin(var_0.origin + var_4, 1, 1);
+    self setOrigin(var_0.origin + var_4, 1, 1);
     var_0._id_41E2++;
 
     if(var_0._id_41E2 == var_0._id_B72B.size) {
@@ -1907,7 +1907,7 @@ _id_AE18(var_0, var_1) {
     }
   } else {
     var_5 = anglesToForward(var_0.angles) * var_0._id_2ACC;
-    self setorigin(var_0.origin + var_5, 1, 1);
+    self setOrigin(var_0.origin + var_5, 1, 1);
   }
 
   waitframe();
@@ -1977,7 +1977,7 @@ _id_2E19() {
   level._id_2358 = _func_025E(level._id_2E3B._id_9E8E, level._id_2E3C._id_9E8E, 0.5);
   level._id_2E37 = _func_025E(level._id_2E3B._id_E715, level._id_2E3C._id_5340, var_4);
   level._id_2E37 = level._id_2E37 - level._id_2E3B._id_E715;
-  level._id_2E37 = vectornormalize(level._id_2E37) * level._id_2E30 / 10;
+  level._id_2E37 = vectorNormalize(level._id_2E37) * level._id_2E30 / 10;
   level._id_2E37 = (level._id_2E37[0], level._id_2E37[1], 0);
 }
 
@@ -2055,7 +2055,7 @@ _id_2E11() {
     level._id_2E37 = _func_025E(level._id_2358, var_9, 0.5);
     level._id_2E37 = level._id_2E37 - level._id_2358;
     var_10 = distance2d(level._id_2358, var_9);
-    level._id_2E37 = vectornormalize(level._id_2E37) * var_10 / 4;
+    level._id_2E37 = vectorNormalize(level._id_2E37) * var_10 / 4;
     level._id_2E37 = (level._id_2E37[0], level._id_2E37[1], 0);
 
     if(_id_1B08(level._id_2E37)) {
@@ -2347,7 +2347,7 @@ _id_1034F(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("technical", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("technical", var_2, var_1);
 }
 
 _id_10349(var_0, var_1) {
@@ -2356,7 +2356,7 @@ _id_10349(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("little_bird", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird", var_2, var_1);
 }
 
 _id_10342(var_0, var_1) {
@@ -2365,7 +2365,7 @@ _id_10342(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("cop_car", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("cop_car", var_2, var_1);
 }
 
 _id_10340(var_0, var_1) {
@@ -2374,7 +2374,7 @@ _id_10340(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("atv", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("atv", var_2, var_1);
 }
 
 _id_10341(var_0, var_1) {
@@ -2383,7 +2383,7 @@ _id_10341(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("cargo_truck", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("cargo_truck", var_2, var_1);
 }
 
 _id_10344(var_0, var_1) {
@@ -2392,7 +2392,7 @@ _id_10344(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("hoopty", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("hoopty", var_2, var_1);
 }
 
 _id_10345(var_0, var_1) {
@@ -2401,7 +2401,7 @@ _id_10345(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("hoopty_truck", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("hoopty_truck", var_2, var_1);
 }
 
 _id_10347(var_0, var_1) {
@@ -2410,7 +2410,7 @@ _id_10347(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("jeep", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("jeep", var_2, var_1);
 }
 
 _id_1033F(var_0, var_1) {
@@ -2419,7 +2419,7 @@ _id_1033F(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("apc_russian", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("apc_russian", var_2, var_1);
 }
 
 _id_1034E(var_0, var_1) {
@@ -2428,7 +2428,7 @@ _id_1034E(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("light_tank", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("light_tank", var_2, var_1);
 }
 
 _id_10348(var_0, var_1) {
@@ -2437,7 +2437,7 @@ _id_10348(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("large_transport", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("large_transport", var_2, var_1);
 }
 
 _id_1034A(var_0, var_1) {
@@ -2446,7 +2446,7 @@ _id_1034A(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("medium_transport", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("medium_transport", var_2, var_1);
 }
 
 _id_1034B(var_0, var_1) {
@@ -2455,7 +2455,7 @@ _id_1034B(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("pickup_truck", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("pickup_truck", var_2, var_1);
 }
 
 _id_1034C(var_0, var_1) {
@@ -2464,7 +2464,7 @@ _id_1034C(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("tac_rover", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("tac_rover", var_2, var_1);
 }
 
 _id_10350(var_0, var_1) {
@@ -2473,7 +2473,7 @@ _id_10350(var_0, var_1) {
   }
 
   var_2 = _id_10343(var_0);
-  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("van", var_2, var_1);
+  return scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("van", var_2, var_1);
 }
 
 _id_1034D(var_0, var_1) {
@@ -2504,7 +2504,7 @@ _id_1034D(var_0, var_1) {
     level._id_A789++;
   }
 
-  var_2 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("light_tank", var_3, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("light_tank", var_3, var_1);
 
   if(istrue(level._id_DCF1)) {
     _id_1002A(var_2, var_2.team);
@@ -2752,7 +2752,7 @@ _id_8081() {
       }
 
       var_4 = _id_10343(var_2);
-      var_6 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("little_bird", var_4, undefined);
+      var_6 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird", var_4, undefined);
       level thread _id_10029(var_6, "neutral");
     }
   }
@@ -2923,9 +2923,9 @@ _id_3FF0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_1)) {
-    var_12 setcursorhint(var_1);
+    var_12 setCursorHint(var_1);
   } else {
-    var_12 setcursorhint("HINT_NOICON");
+    var_12 setCursorHint("HINT_NOICON");
   }
 
   if(isDefined(var_2)) {
@@ -2933,7 +2933,7 @@ _id_3FF0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_3)) {
-    var_12 sethintstring(var_3);
+    var_12 setHintString(var_3);
   }
 
   if(isDefined(var_4)) {

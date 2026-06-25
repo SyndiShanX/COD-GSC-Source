@@ -260,7 +260,7 @@ torpedo_fire(var_0, var_1) {
   var_10.angles = var_9.angles;
   var_10 setModel("tag_origin");
   var_11 = 0;
-  var_10 linkto(var_9, "tag_body", (-1.5, 0, -6.5), (var_11, 0, 0));
+  var_10 linkTo(var_9, "tag_body", (-1.5, 0, -6.5), (var_11, 0, 0));
   self playerlinktodelta(var_10, "tag_origin", 1.0, 0, 0, 0, 0, 1);
   self.dom.player_ent = var_10;
   lock_player_controls(1);
@@ -342,7 +342,7 @@ torpedo_fire(var_0, var_1) {
       }
 
       var_19 = vectortoangles(var_6 - var_9.origin);
-      var_13 rotateto(var_19, var_18);
+      var_13 rotateTo(var_19, var_18);
       var_9.angles = var_13.angles;
     }
 
@@ -472,7 +472,7 @@ detonate_dominator(var_0, var_1) {
   thread dominator_earthquake(1.0, 1);
   thread common_scripts\utility::play_sound_in_space("underwater_explosion", self.origin);
   maps\_hud_util::fade_out(0.1, "white");
-  self setorigin(self.start_origin);
+  self setOrigin(self.start_origin);
   self setplayerangles(self.start_angles);
   self.dom.ref_ent delete();
   self.dom.player_ent delete();
@@ -490,13 +490,13 @@ dominator_earthquake(var_0, var_1) {
   }
 
   if(var_0 < 0.2) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   } else {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.2;
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait 0.2;
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
   }
 }
 

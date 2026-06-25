@@ -57,7 +57,7 @@ new_dialogue() {
 #using_animtree("generic_human");
 do_collectible_corpse() {
   wait_for_first_player();
-  spot = getstruct("collectible_body_align", "targetname");
+  spot = getStruct("collectible_body_align", "targetname");
   corpse = spawn("script_model", spot.origin);
   corpse character\char_jap_makpel_rifle::main();
   corpse UseAnimTree(#animtree);
@@ -144,9 +144,9 @@ event4() {
   level.scr_sound["polonsky"]["hara_kiri"] = "Pel1A_G1A_POLO_026A";
 }
 event4_kick_door_open(guy) {
-  door = GetEnt("kick_door1", "targetname");
+  door = getEnt("kick_door1", "targetname");
   door ConnectPaths();
-  door RotateTo((0, -115, 0), 0.5, 0, 0.1);
+  door rotateTo((0, -115, 0), 0.5, 0, 0.1);
 
   node = GetNode("event4_kicker_spot1", "targetname");
   guy SetGoalNode(node);

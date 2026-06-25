@@ -88,11 +88,11 @@ floaty() {
   self.var_6C53 = self.var_116;
   wait 0.05;
   for(;;) {
-    self moveto(self.var_6C53 + (0, 0, 3), 3, 1, 1);
-    self rotateyaw(180, 3);
+    self moveTo(self.var_6C53 + (0, 0, 3), 3, 1, 1);
+    self rotateYaw(180, 3);
     wait(3);
-    self moveto(self.var_6C53 + (0, 0, -3), 3, 1, 1);
-    self rotateyaw(180, 3);
+    self moveTo(self.var_6C53 + (0, 0, -3), 3, 1, 1);
+    self rotateYaw(180, 3);
     wait(3);
   }
 }

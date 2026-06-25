@@ -41,7 +41,7 @@ box_lock_condition() {
 }
 
 box_get_ground_offset() {
-  vec_right = vectornormalize(anglestoright(self.angles));
+  vec_right = vectorNormalize(anglestoright(self.angles));
   box_pos = self.origin - vec_right * 36;
   ground_pos = groundpos(box_pos);
   return ground_pos;
@@ -111,7 +111,7 @@ common_move_to_box(box, range, ignore_open, asd_name) {
     self setgoalpos(start_org);
     ground_pos = start_org;
   } else {
-    vec_right = vectornormalize(anglestoright(box.angles));
+    vec_right = vectorNormalize(anglestoright(box.angles));
     box_pos = box.origin - vec_right * 36;
     ground_pos = groundpos(box_pos);
     self setgoalpos(ground_pos);
@@ -167,7 +167,7 @@ box_lock_action() {
   if(!self common_move_to_box(box, 1024)) {
     return;
   }
-  self animscripted(box.origin, box.angles, "zm_lock_magicbox");
+  self animScripted(box.origin, box.angles, "zm_lock_magicbox");
   maps\mp\animscripts\zm_shared::donotetracks("lock_magicbox_anim", ::box_notetracks, box);
 
   if(flag("moving_chest_now")) {
@@ -247,7 +247,7 @@ box_move_action() {
   if(!self common_move_to_box(self.box_move, 1024, 0, "zm_magicbox_point")) {
     return;
   }
-  self maps\mp\zombies\_zm_ai_sloth::action_animscripted("zm_magicbox_point", "magicbox_point_anim", self.box_move.origin, self.box_move.angles);
+  self maps\mp\zombies\_zm_ai_sloth::action_animScripted("zm_magicbox_point", "magicbox_point_anim", self.box_move.origin, self.box_move.angles);
 
   if(is_true(self.box_current_in_maze)) {
     if(!is_true(self.box_move_in_maze)) {
@@ -264,7 +264,7 @@ box_move_action() {
   if(!self common_move_to_box(self.box_current, 1024, 0, "zm_pull_magicbox")) {
     return;
   }
-  self animscripted(self.box_current.origin, self.box_current.angles, "zm_pull_magicbox");
+  self animScripted(self.box_current.origin, self.box_current.angles, "zm_pull_magicbox");
   maps\mp\animscripts\zm_shared::donotetracks("pull_magicbox_anim", ::box_notetracks, self.box_current);
 
   if(self common_abort_box(self.box_current)) {
@@ -300,7 +300,7 @@ box_move_action() {
     return;
   }
 
-  self animscripted(self.box_move.origin, self.box_move.angles, "zm_place_magicbox");
+  self animScripted(self.box_move.origin, self.box_move.angles, "zm_place_magicbox");
   maps\mp\animscripts\zm_shared::donotetracks("place_magicbox_anim", ::box_notetracks, self.box_move);
   self.box_current = undefined;
   self.context_done = 1;
@@ -326,7 +326,7 @@ box_notetracks(note, box) {
       self.box_model = spawn("script_model", twr_origin);
       self.box_model.angles = twr_angles;
       self.box_model setModel(level.small_magic_box);
-      self.box_model linkto(self, tag_name);
+      self.box_model linkTo(self, tag_name);
       self.box_model_visible = 1;
     } else {
       self.box_model show();
@@ -405,7 +405,7 @@ box_spin_action() {
   if(!self box_spin_qualifier(hackable)) {
     return;
   }
-  self animscripted(box.origin, box.angles, "zm_cycle_magicbox");
+  self animScripted(box.origin, box.angles, "zm_cycle_magicbox");
   maps\mp\animscripts\zm_shared::donotetracks("cycle_magicbox_anim", ::box_kick, hackable);
   self.context_done = 1;
 }

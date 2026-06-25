@@ -33,10 +33,10 @@
 function function_157fc984() {}
 
 function function_6d9e84ea(str_objective, b_starting) {
-  level.e_steiner_radio = getent("e_steiner_radio", "targetname");
+  level.e_steiner_radio = getEnt("e_steiner_radio", "targetname");
 
   if(!isDefined(level.player)) {
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
     level.player = a_e_players[0];
   }
 
@@ -95,7 +95,7 @@ function function_6d9e84ea(str_objective, b_starting) {
 
 function function_855a3a3(var_835b8c00) {
   var_835b8c00 endon(#"trigger");
-  var_8b5f46a0 = getent("elevator_descent_kill_volume", "targetname");
+  var_8b5f46a0 = getEnt("elevator_descent_kill_volume", "targetname");
   var_8b5f46a0 waittill(#"trigger");
 
   while(!level.player isonground()) {
@@ -117,17 +117,17 @@ function function_b9dad1c1() {
 function function_304a7d6e() {
   self endon(#"death");
   self waittill(#"hash_2830681ee8fe59f4");
-  self playrumbleonentity(#"jump_rumble_start");
+  self playRumbleOnEntity(#"jump_rumble_start");
   self playrumblelooponentity(#"buzz_high");
   self waittill(#"hash_68eb97f9e822041a");
   snd::client_msg("audio_level_triton_verb_enable");
   self stoprumble(#"buzz_high");
-  self playrumbleonentity(#"jump_rumble_end");
+  self playRumbleOnEntity(#"jump_rumble_end");
   earthquake(0.5, 0.25, self.origin, 100);
 }
 
 function function_e81d76a6(s_info) {
-  var_57da8476 = getent("elevator_descent_interact_volume", "targetname");
+  var_57da8476 = getEnt("elevator_descent_interact_volume", "targetname");
   return level.player istouching(var_57da8476);
 }
 
@@ -140,7 +140,7 @@ function function_c4c96ccc() {
 }
 
 function function_9e2d774a() {
-  vol_charlie_turret_intro_high = getent("vol_charlie_turret_intro_high", "targetname");
+  vol_charlie_turret_intro_high = getEnt("vol_charlie_turret_intro_high", "targetname");
   level flag::wait_till("flg_excavation_barrel_trigger");
   var_41eff203 = spawner::simple_spawn_single("excavation_bravo_hallway_rpg", &function_794d84a9, "flg_breadcrumb_excavation_alpha", vol_charlie_turret_intro_high);
 
@@ -161,7 +161,7 @@ function function_9e2d774a() {
 function function_d210173f(var_3c97f36d, var_5442a320) {
   self endon(#"death");
   self val::set(#"hash_722c2bad015d62bc", "ignoreall", 1);
-  self thread ai::shoot_at_target("normal", getent(var_5442a320, "targetname"), "tag_origin", 10, 100, 1);
+  self thread ai::shoot_at_target("normal", getEnt(var_5442a320, "targetname"), "tag_origin", 10, 100, 1);
   self waittill(#"shoot");
   self ai::stop_shoot_at_target();
   self val::set(#"hash_722c2bad015d62bc", "ignoreall", 0);
@@ -184,9 +184,9 @@ function function_21b8d590() {
 }
 
 function function_83dd8b4() {
-  vol_alpha_greeter_2_attack = getent("vol_alpha_greeter_2_attack", "targetname");
+  vol_alpha_greeter_2_attack = getEnt("vol_alpha_greeter_2_attack", "targetname");
   nd_alpha_greeter_1_attack = getnode("nd_alpha_greeter_1_attack", "targetname");
-  vol_alpha_reinforce_push = getent("vol_alpha_reinforce_push", "targetname");
+  vol_alpha_reinforce_push = getEnt("vol_alpha_reinforce_push", "targetname");
   var_f43dffab = spawner::simple_spawn_single("excavation_alpha_greeter_initial_1", &function_794d84a9, "flg_excavation_alpha_greeters_alerted_early", nd_alpha_greeter_1_attack, "flg_excavation_alpha_greeter_1_move", nd_alpha_greeter_1_attack, 0, 1);
   var_74037f30 = spawner::simple_spawn_single("excavation_alpha_greeter_initial_2", &function_794d84a9, "flg_excavation_alpha_greeters_alerted_early", vol_alpha_greeter_2_attack, "flg_excavation_alpha_greeters_alerted", vol_alpha_reinforce_push, 0, 1);
 
@@ -257,14 +257,14 @@ function function_a19b1bc2(var_af285262 = 0) {
 }
 
 function function_f456ec34() {
-  vol_alpha_initial_camper = getent("vol_alpha_initial_camper", "targetname");
-  vol_alpha_front_upper_attack = getent("vol_alpha_front_upper_attack", "targetname");
-  vol_alpha_greeter_retreat = getent("vol_alpha_greeter_retreat", "targetname");
-  vol_alpha_rear_low_retreat = getent("vol_alpha_rear_low_retreat", "targetname");
-  vol_alpha_front_upper_retreat = getent("vol_alpha_front_upper_retreat", "targetname");
-  vol_alpha_front_upper_safe = getent("vol_alpha_front_upper_safe", "targetname");
-  vol_alpha_rear_low_push = getent("vol_alpha_rear_low_push", "targetname");
-  vol_alpha_bunker_overpass = getent("vol_alpha_bunker_overpass", "targetname");
+  vol_alpha_initial_camper = getEnt("vol_alpha_initial_camper", "targetname");
+  vol_alpha_front_upper_attack = getEnt("vol_alpha_front_upper_attack", "targetname");
+  vol_alpha_greeter_retreat = getEnt("vol_alpha_greeter_retreat", "targetname");
+  vol_alpha_rear_low_retreat = getEnt("vol_alpha_rear_low_retreat", "targetname");
+  vol_alpha_front_upper_retreat = getEnt("vol_alpha_front_upper_retreat", "targetname");
+  vol_alpha_front_upper_safe = getEnt("vol_alpha_front_upper_safe", "targetname");
+  vol_alpha_rear_low_push = getEnt("vol_alpha_rear_low_push", "targetname");
+  vol_alpha_bunker_overpass = getEnt("vol_alpha_bunker_overpass", "targetname");
   level thread function_71ad7c6d();
   level thread function_38c1ecf4();
   wait 3;
@@ -306,7 +306,7 @@ function function_f456ec34() {
   level.var_f2996ecc = arraycombine(level.var_f2996ecc, var_fa7eec03);
   level thread function_ae455ff1();
   level thread function_baed84e2();
-  vol_alpha_reinforce_push = getent("vol_alpha_reinforce_push", "targetname");
+  vol_alpha_reinforce_push = getEnt("vol_alpha_reinforce_push", "targetname");
   var_5c69badc = spawner::simple_spawn("excavation_alpha_right_rein", &function_794d84a9, "flg_excavation_rein_push", vol_alpha_reinforce_push);
   level.var_f2996ecc = arraycombine(level.var_f2996ecc, var_5c69badc, 0);
   level flag::wait_till("flg_excavation_alpha_zipline_spawn");
@@ -343,7 +343,7 @@ function function_38c1ecf4() {
 }
 
 function function_df54f77c() {
-  vol_alpha_catwalk_upper_fallback = getent("vol_alpha_catwalk_upper_fallback", "targetname");
+  vol_alpha_catwalk_upper_fallback = getEnt("vol_alpha_catwalk_upper_fallback", "targetname");
   level flag::wait_till("flg_excavation_alpha_camping_react");
   var_7c6b9967 = spawner::simple_spawn_single("excavation_alpha_zipliner_1", &function_794d84a9, "flg_excavation_alpha_zipliners_fallback", vol_alpha_catwalk_upper_fallback);
 
@@ -437,10 +437,10 @@ function function_499f139a(var_1036ae3a, var_30bf7246 = 0) {
 
 function function_baed84e2() {
   level endon(#"hash_335b505b6d880c1e");
-  vol_alpha_bunker_1_advance = getent("vol_alpha_bunker_1_advance", "targetname");
-  vol_alpha_bunker_1_retreat = getent("vol_alpha_bunker_1_retreat", "targetname");
-  vol_alpha_bunker_2_advance = getent("vol_alpha_bunker_2_advance", "targetname");
-  vol_alpha_bunker_2_retreat = getent("vol_alpha_bunker_2_retreat", "targetname");
+  vol_alpha_bunker_1_advance = getEnt("vol_alpha_bunker_1_advance", "targetname");
+  vol_alpha_bunker_1_retreat = getEnt("vol_alpha_bunker_1_retreat", "targetname");
+  vol_alpha_bunker_2_advance = getEnt("vol_alpha_bunker_2_advance", "targetname");
+  vol_alpha_bunker_2_retreat = getEnt("vol_alpha_bunker_2_retreat", "targetname");
   var_e6592d4 = [];
   level flag::wait_till("flg_excavation_alpha_right_rein_spawn");
   var_f51302a1 = spawner::simple_spawn_single("excavation_alpha_bunker_initial_1", &function_794d84a9, "flg_excavation_alpha_bunker_advance", vol_alpha_bunker_1_advance, "flg_excavation_alpha_bunker_retreat", vol_alpha_bunker_1_retreat);
@@ -500,7 +500,7 @@ function function_baed84e2() {
 
 function function_5bf481a4() {
   self endon(#"death");
-  vol_alpha_catwalk_upper_fallback = getent("vol_alpha_catwalk_upper_fallback", "targetname");
+  vol_alpha_catwalk_upper_fallback = getEnt("vol_alpha_catwalk_upper_fallback", "targetname");
   var_604e7f32 = self.health;
   self.health = 1;
   self val::set(#"zipline_excavation_7", "ignoreall", 1);
@@ -566,10 +566,10 @@ function function_7ad3ec4() {
 }
 
 function function_17e23a7f() {
-  vol_excavation_bunker_rooftop = getent("vol_excavation_bunker_rooftop", "targetname");
-  vol_bravo_rear_rein_lower = getent("vol_bravo_rear_rein_lower", "targetname");
-  vol_charlie_island_push = getent("vol_charlie_island_push", "targetname");
-  vol_bravo_upper_retreat = getent("vol_bravo_upper_retreat", "targetname");
+  vol_excavation_bunker_rooftop = getEnt("vol_excavation_bunker_rooftop", "targetname");
+  vol_bravo_rear_rein_lower = getEnt("vol_bravo_rear_rein_lower", "targetname");
+  vol_charlie_island_push = getEnt("vol_charlie_island_push", "targetname");
+  vol_bravo_upper_retreat = getEnt("vol_bravo_upper_retreat", "targetname");
   level flag::wait_till("flg_excavation_bravo_upper_spawn");
   var_5168c041 = spawner::simple_spawn_single("excavation_bravo_bunker_upper", &function_794d84a9, "flg_excavation_bravo_overhead_zipliners_start", vol_bravo_upper_retreat);
   var_255319fb = spawner::simple_spawn("excavation_bravo_exit_lower", &function_794d84a9, "flg_excavation_alpha_rear_rein_lower_retreat", vol_bravo_rear_rein_lower);
@@ -631,7 +631,7 @@ function function_c0f9e627() {
 function function_67b7e01e() {
   self endon(#"death");
   var_475dc8a0 = getnode("negotiation_node_zipline_excavation_1_begin", "targetname");
-  var_4eff0b93 = getent("vol_excavation_bunker_rooftop", "targetname");
+  var_4eff0b93 = getEnt("vol_excavation_bunker_rooftop", "targetname");
 
   if(level.var_a6ff982 == 1) {
     wait 3;
@@ -706,9 +706,9 @@ function function_794d84a9(var_2ec9696a, var_8dea88af, fallback_flag, var_8a12da
 }
 
 function function_c45206f5() {
-  var_4bacbbbe = getent("excavation_crane_mover", "targetname");
+  var_4bacbbbe = getEnt("excavation_crane_mover", "targetname");
   level flag::wait_till("flg_excavation_alpha_crane_rotate");
-  var_4bacbbbe rotateyaw(-30, 10);
+  var_4bacbbbe rotateYaw(-30, 10);
 }
 
 function function_ab15a34c(str_objective) {
@@ -743,9 +743,9 @@ function function_e30ea9da(str_objective, b_starting) {
 }
 
 function function_ee32da2d() {
-  vol_charlie_zipliners_2_fallback = getent("vol_charlie_zipliners_2_fallback", "targetname");
-  vol_charlie_exit_fallback = getent("vol_charlie_exit_fallback", "targetname");
-  vol_charlie_zipliners_fallback = getent("vol_charlie_zipliners_fallback", "targetname");
+  vol_charlie_zipliners_2_fallback = getEnt("vol_charlie_zipliners_2_fallback", "targetname");
+  vol_charlie_exit_fallback = getEnt("vol_charlie_exit_fallback", "targetname");
+  vol_charlie_zipliners_fallback = getEnt("vol_charlie_zipliners_fallback", "targetname");
 
   if(!isDefined(level.var_b1e6de87)) {
     level.var_b1e6de87 = [];
@@ -836,7 +836,7 @@ function function_2955f0c2() {
 
 function function_bfec36a3() {
   self endon(#"death");
-  vol_charlie_zipliners_fallback = getent("vol_charlie_zipliners_fallback", "targetname");
+  vol_charlie_zipliners_fallback = getEnt("vol_charlie_zipliners_fallback", "targetname");
   self setgoal(level.player, 1);
   level flag::wait_till("flg_excavation_charlie_zipliners_fallback");
   self cleargoalvolume();
@@ -881,7 +881,7 @@ function function_9e39e5ab() {
 function function_f8d17019() {
   self endon(#"death");
   level endon(#"flg_excavation_turret_detach");
-  var_a4df412f = getent("excavation_mg_nest_damage_detection", "targetname");
+  var_a4df412f = getEnt("excavation_mg_nest_damage_detection", "targetname");
 
   while(true) {
     var_7b1b5529 = var_a4df412f waittill(#"damage");
@@ -901,7 +901,7 @@ function function_78407bf8(veh_turret) {
   veh_turret makeunusable();
   setenablenode(getnode("nd_excavation_turret_1", "targetname"), 0);
   self.goalradius = 32;
-  self setgoal(getent("vol_turret_redeploy", "targetname"), 1, 32);
+  self setgoal(getEnt("vol_turret_redeploy", "targetname"), 1, 32);
 }
 
 function function_fed0bc04() {
@@ -928,7 +928,7 @@ function function_9602cb9e() {
   level.var_602cf102 = var_b3294f70[0];
 
   while(true) {
-    if(vectordot(vectornormalize(anglesToForward(level.player getplayerangles())), vectornormalize(self.origin + (0, 0, 30) - level.player getEye())) > 0.999) {
+    if(vectordot(vectorNormalize(anglesToForward(level.player getplayerangles())), vectorNormalize(self.origin + (0, 0, 30) - level.player getEye())) > 0.999) {
       break;
     } else {
       var_efff4c42 = 0;
@@ -936,7 +936,7 @@ function function_9602cb9e() {
       var_947b4032 = (0, 0, 0);
 
       foreach(v in var_b3294f70) {
-        var_3b1efaa4 = vectordot(vectornormalize(level.player getEye() - self.origin), vectornormalize(v - self.origin));
+        var_3b1efaa4 = vectordot(vectorNormalize(level.player getEye() - self.origin), vectorNormalize(v - self.origin));
 
         if(var_3b1efaa4 > var_efff4c42) {
           var_efff4c42 = var_3b1efaa4;
@@ -954,8 +954,8 @@ function function_9602cb9e() {
 
 function function_2624afa1() {
   level endon(#"hash_2c8120c2c4f90067");
-  a_vol[0] = getent("vol_charlie_turret_intro_high", "targetname");
-  a_vol[1] = getent("vol_charlie_turret_intro_low", "targetname");
+  a_vol[0] = getEnt("vol_charlie_turret_intro_high", "targetname");
+  a_vol[1] = getEnt("vol_charlie_turret_intro_low", "targetname");
 
   while(true) {
     foreach(vol in a_vol) {
@@ -1115,16 +1115,16 @@ function function_4a1a74fe(str_objective) {
 function function_888e9b6b(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_f5ae4873() {
-  e_bunker_survey_exit_door_closed = getent("e_bunker_survey_exit_door_closed", "targetname");
+  e_bunker_survey_exit_door_closed = getEnt("e_bunker_survey_exit_door_closed", "targetname");
   e_bunker_survey_exit_door_closed movez(-1024, 0.1);
 }
 
 function function_8cf4172f() {
-  e_excavation_gate_l_open = getent("e_excavation_gate_l_open", "targetname");
-  e_excavation_gate_r_open = getent("e_excavation_gate_r_open", "targetname");
-  e_excavation_gate_l_close = getent("e_excavation_gate_l_close", "targetname");
-  e_excavation_gate_r_close = getent("e_excavation_gate_r_close", "targetname");
-  e_excavation_gate_close_clip = getent("e_excavation_gate_close_clip", "targetname");
+  e_excavation_gate_l_open = getEnt("e_excavation_gate_l_open", "targetname");
+  e_excavation_gate_r_open = getEnt("e_excavation_gate_r_open", "targetname");
+  e_excavation_gate_l_close = getEnt("e_excavation_gate_l_close", "targetname");
+  e_excavation_gate_r_close = getEnt("e_excavation_gate_r_close", "targetname");
+  e_excavation_gate_close_clip = getEnt("e_excavation_gate_close_clip", "targetname");
   e_excavation_gate_l_open show();
   e_excavation_gate_r_open show();
   e_excavation_gate_l_close hide();
@@ -1143,8 +1143,8 @@ function function_f2797a4(b_skipto = 0) {
     wait 2;
   }
 
-  e_excavation_gate_l_open = getent("e_excavation_gate_l_open", "targetname");
-  e_excavation_gate_r_open = getent("e_excavation_gate_r_open", "targetname");
+  e_excavation_gate_l_open = getEnt("e_excavation_gate_l_open", "targetname");
+  e_excavation_gate_r_open = getEnt("e_excavation_gate_r_open", "targetname");
   e_excavation_gate_l_open hide();
   e_excavation_gate_r_open hide();
 }
@@ -1155,11 +1155,11 @@ function function_d73f8d00() {
   var_5c7316ba val::set("support_heli", "ignoreme", 1);
   var_5c7316ba val::set("support_heli", "takedamage", 0);
   var_5c7316ba thread vehicle::get_on_and_go_path(var_48a64d70);
-  var_dce05631 = getent("excavation_chopper_strafe_target_1_start", "targetname");
+  var_dce05631 = getEnt("excavation_chopper_strafe_target_1_start", "targetname");
   var_ccf127c3 = struct::get(var_dce05631.target, "targetname");
   level flag::wait_till("chopper_strafe_run_fire_guns");
   level flag::set("flg_excavation_rein_push");
-  var_dce05631 moveto(var_ccf127c3.origin, 2);
+  var_dce05631 moveTo(var_ccf127c3.origin, 2);
 
   while(level flag::get("chopper_strafe_run_fire_guns")) {
     var_5c7316ba thread namespace_b73b9191::function_887fdde7("front", var_dce05631, 0.25);
@@ -1229,11 +1229,11 @@ function function_9340ffe4(heli_targetname) {
 }
 
 function function_ba45b49() {
-  e_target = getent("excavation_chopper_strafe_target_2_start", "targetname");
+  e_target = getEnt("excavation_chopper_strafe_target_2_start", "targetname");
   var_8969e152 = struct::get(e_target.target, "targetname");
   s_end = struct::get(var_8969e152.target, "targetname");
   level flag::wait_till("flg_excavation_charlie_chopper_shoot");
-  e_target moveto(var_8969e152.origin, 1);
+  e_target moveTo(var_8969e152.origin, 1);
 
   while(level flag::get("flg_excavation_charlie_chopper_shoot")) {
     level.var_ebbd5cf8 thread namespace_b73b9191::function_887fdde7("front", e_target, 0.25);
@@ -1242,18 +1242,18 @@ function function_ba45b49() {
 
   level flag::wait_till("flg_excavation_charlie_chopper_shoot");
   level thread function_85afb2d2();
-  e_target moveto(s_end.origin, 2);
+  e_target moveTo(s_end.origin, 2);
 
   while(level flag::get("flg_excavation_charlie_chopper_shoot")) {
     level.var_ebbd5cf8 thread namespace_b73b9191::function_887fdde7("front", e_target, 0.25);
     wait 0.25;
   }
 
-  e_target = getent("excavation_chopper_strafe_target_3_start", "targetname");
+  e_target = getEnt("excavation_chopper_strafe_target_3_start", "targetname");
   s_end = struct::get(e_target.target, "targetname");
   level flag::wait_till("flg_excavation_charlie_chopper_shoot");
   level flag::set("flg_excavation_charlie_rooftop_strafe");
-  e_target moveto(s_end.origin, 6);
+  e_target moveTo(s_end.origin, 6);
 
   while(level flag::get("flg_excavation_charlie_chopper_shoot")) {
     level.var_ebbd5cf8 thread namespace_b73b9191::function_887fdde7("front", e_target, 0.25);

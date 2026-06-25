@@ -1274,7 +1274,7 @@ function callback_playerlaststand(einflictor, attacker, idamage, smeansofdeath, 
 
 function damageshellshockandrumble(eattacker, einflictor, weapon, smeansofdeath, idamage) {
   self thread weapons::onweapondamage(eattacker, einflictor, weapon, smeansofdeath, idamage);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 }
 
 function createdeadbody(idamage, smeansofdeath, weapon, shitloc, vdir, vattackerorigin, deathanimduration, einflictor, ragdoll_jib, body) {

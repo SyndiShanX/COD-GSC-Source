@@ -57,16 +57,16 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_0 thread tank_crush_fx_on_tag("tag_window_right_glass_fx", level._vehicle_effect["tankcrush"]["window_med"], "veh_glass_break_small", 0.4);
   var_0 thread tank_crush_fx_on_tag("tag_windshield_back_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 0.7);
   var_0 thread tank_crush_fx_on_tag("tag_windshield_front_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 1.5);
-  var_0 animscripted("tank_crush_anim", var_11, var_12, var_3);
-  var_7 animscripted("tank_crush_anim", var_28.origin, var_28.angles, var_2);
+  var_0 animScripted("tank_crush_anim", var_11, var_12, var_3);
+  var_7 animScripted("tank_crush_anim", var_28.origin, var_28.angles, var_2);
 
   if(var_6 != 1) {
     var_0 setflaggedanim("tank_crush_anim", var_3, 1, 0, var_6);
     var_7 setflaggedanim("tank_crush_anim", var_2, 1, 0, var_6);
   }
 
-  var_28 moveto(var_11, var_9, var_9 / 2, var_9 / 2);
-  var_28 rotateto(var_12, var_9, var_9 / 2, var_9 / 2);
+  var_28 moveTo(var_11, var_9, var_9 / 2, var_9 / 2);
+  var_28 rotateTo(var_12, var_9, var_9 / 2, var_9 / 2);
   wait(var_9);
   var_8 = var_8 - var_9;
   var_8 = var_8 - var_10;
@@ -99,8 +99,8 @@ tank_crush(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_29 = var_29 + var_22 * var_26;
   var_29 = var_29 + var_23 * var_27;
   var_28.final_angles = vectortoangles(var_29);
-  var_28 moveto(var_28.final_origin, var_10, var_10 / 2, var_10 / 2);
-  var_28 rotateto(var_28.final_angles, var_10, var_10 / 2, var_10 / 2);
+  var_28 moveTo(var_28.final_origin, var_10, var_10 / 2, var_10 / 2);
+  var_28 rotateTo(var_28.final_angles, var_10, var_10 / 2, var_10 / 2);
   wait(var_10);
   self attachpath(var_1);
   common_scripts\utility::waitframe();

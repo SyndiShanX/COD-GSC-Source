@@ -70,7 +70,7 @@ function stealth_noteworthy_thread(enabled, callouts) {
         }
 
         tgteye = tgt stealth_noteworthy_get_eye();
-        dir = vectornormalize(tgteye - eye);
+        dir = vectorNormalize(tgteye - eye);
         dot = vectordot(eye_dir, dir);
 
         if(dot > level.stealth.noteworthy.stealth_noteworthy_min_dot && dot > bestdot) {
@@ -270,7 +270,7 @@ function private stealth_noteworthy_delayed(eventname, target, var_78a2f9b6, del
 
     foreach(ent in self.stealth.stealth_note_pending_targets) {
       tgteye = ent stealth_noteworthy_get_eye();
-      dir = vectornormalize(tgteye - eye);
+      dir = vectorNormalize(tgteye - eye);
       dot = vectordot(eye_dir, dir);
 
       if(dot < level.stealth.noteworthy.stealth_noteworthy_min_dot || !sighttracepassed(tgteye, eye, 0, self)) {
@@ -323,7 +323,7 @@ function private stealth_noteworthy_priority(eventname) {
 
 function private function_1e099116() {
   while(true) {
-    wait_result = getplayers()[0] waittill("<dev string:x54>");
+    wait_result = getPlayers()[0] waittill("<dev string:x54>");
     eventname = wait_result.event;
     subjectlist = wait_result.targets;
 
@@ -490,7 +490,7 @@ function private stealth_noteworthy_callout_type(ent) {
   type = undefined;
   self_fwd = anglesToForward(self.angles);
   self_right = vectorcross(self_fwd, (0, 0, 1));
-  dir = vectornormalize(ent.origin - self.origin);
+  dir = vectorNormalize(ent.origin - self.origin);
   dot_fwd = vectordot(self_fwd, dir);
 
   if(dot_fwd > 0.7) {

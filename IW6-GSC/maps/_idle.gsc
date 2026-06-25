@@ -36,8 +36,8 @@ idle() {
     var_0 = self;
   } else {
     var_0 = getnode(self.target, "targetname");
-    var_1 = getent(self.target, "targetname");
-    var_2 = common_scripts\utility::getstruct(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
+    var_2 = common_scripts\utility::getStruct(self.target, "targetname");
     var_3 = undefined;
 
     if(isDefined(var_0)) {
@@ -218,7 +218,7 @@ reaction_proc(var_0, var_1, var_2, var_3) {
   }
 
   if(var_4 == "stop_idle_proc") {
-    maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
     return;
   }
 
@@ -327,7 +327,7 @@ check_animation(var_0, var_1) {
 }
 
 get_ent(var_0, var_1) {
-  return getent(var_0, var_1);
+  return getEnt(var_0, var_1);
 }
 
 get_node(var_0, var_1) {

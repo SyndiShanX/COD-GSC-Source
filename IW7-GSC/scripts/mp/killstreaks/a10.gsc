@@ -171,7 +171,7 @@ attachturret(var_0) {
   var_1 = level.planeconfigs[var_0];
   var_2 = self gettagorigin(var_1.turretattachpoint);
   var_3 = spawnturret("misc_turret", self.origin + var_2, var_1.turretname, 0);
-  var_3 linkto(self, var_1.turretattachpoint, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_1.turretattachpoint, (0, 0, 0), (0, 0, 0));
   var_3 setModel("vehicle_ugv_talon_gun_mp");
   var_3.angles = self.angles;
   var_3.owner = self.owner;
@@ -347,7 +347,7 @@ missileisgoodtarget(var_0) {
 }
 
 missiletargetangle(var_0) {
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
   var_2 = anglesToForward(self.angles);
   return vectordot(var_1, var_2);
 }
@@ -469,7 +469,7 @@ onfirerocket(var_0) {
 a10_missile_set_target(var_0, var_1) {
   thread a10_missile_cleanup();
   wait(0.2);
-  self missile_settargetent(var_0, var_1);
+  self missile_settargetEnt(var_0, var_1);
 }
 
 a10_missile_cleanup() {
@@ -520,7 +520,7 @@ updatecannonshake(var_0) {
     self.ammocount = self.ammocount - 10;
     var_2 = self gettagorigin("tag_flash_attach") + 20 * anglesToForward(self.angles);
     playFX(var_1.cannonfirevfx, var_2);
-    self playrumbleonentity(var_1.cannonrumble);
+    self playRumbleOnEntity(var_1.cannonrumble);
     wait(0.1);
   }
 

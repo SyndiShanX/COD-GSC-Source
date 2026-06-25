@@ -272,7 +272,7 @@ function_605da720(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_2312778c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(!isDefined(self.var_cf369100)) {
     self.var_cf369100 = util::spawn_model(localclientnum, "tag_origin", self.origin);
-    self.var_cf369100 linkto(self);
+    self.var_cf369100 linkTo(self);
   }
 
   if(newval) {
@@ -361,7 +361,7 @@ function_70e21be0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     level flag::set(#"hash_3f632a7ca8c645e9");
     callback::on_spawned(&function_345ea423);
-    a_e_players = getplayers(localclientnum);
+    a_e_players = getPlayers(localclientnum);
     a_e_players = array::remove_dead(a_e_players);
     array::thread_all(a_e_players, &function_345ea423, localclientnum);
     return;
@@ -373,7 +373,7 @@ function_70e21be0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   level flag::clear(#"hash_3f632a7ca8c645e9");
   callback::remove_on_spawned(&function_345ea423);
-  array::notify_all(getplayers(localclientnum), #"hash_5f06618b8c668b18");
+  array::notify_all(getPlayers(localclientnum), #"hash_5f06618b8c668b18");
 }
 
 function_345ea423(localclientnum) {
@@ -1683,7 +1683,7 @@ function_a7b41dea(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     v_angles = var_30f4bba7 gettagangles("j_lid");
     v_angles += (0, 90, 0);
     level.var_25faefd0 = util::spawn_model(localclientnum, "tag_origin", v_origin, v_angles);
-    level.var_25faefd0 linkto(var_30f4bba7, "j_lid");
+    level.var_25faefd0 linkTo(var_30f4bba7, "j_lid");
   }
 
   if(newval) {

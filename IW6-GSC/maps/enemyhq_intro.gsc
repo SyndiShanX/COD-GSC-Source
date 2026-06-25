@@ -98,10 +98,10 @@ drive_in_handle_ps4_ssao() {
 }
 
 fly_by_01() {
-  var_0 = getent("intro_transport_01", "targetname");
-  var_1 = getent("intro_transport_02", "targetname");
-  var_2 = getent("intro_transport_01b", "targetname");
-  var_3 = getent("intro_transport_02b", "targetname");
+  var_0 = getEnt("intro_transport_01", "targetname");
+  var_1 = getEnt("intro_transport_02", "targetname");
+  var_2 = getEnt("intro_transport_01b", "targetname");
+  var_3 = getEnt("intro_transport_02b", "targetname");
   var_4 = getEntArray("flyby_hide_on_load", "script_noteworthy");
   common_scripts\utility::array_call(var_4, ::show);
   var_0 thread intro_transport_mover(65000, 15);
@@ -119,7 +119,7 @@ fly_by_01() {
 intro_transport_mover(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
   var_3 = self.origin + var_2 * var_0;
-  self moveto(var_3, var_1, 1, 1);
+  self moveTo(var_3, var_1, 1, 1);
   wait(var_1);
   self delete();
 }
@@ -136,10 +136,10 @@ get_in_truck_nag_vo() {
 }
 
 dead_guys_near_truck() {
-  var_0 = common_scripts\utility::getstruct("dog_scratch_truck", "targetname");
+  var_0 = common_scripts\utility::getStruct("dog_scratch_truck", "targetname");
   var_1 = [];
-  var_2 = getent("intro_truck_dead_guy1", "targetname");
-  var_3 = getent("intro_truck_dead_guy2", "targetname");
+  var_2 = getEnt("intro_truck_dead_guy1", "targetname");
+  var_3 = getEnt("intro_truck_dead_guy2", "targetname");
   var_2 thread maps\enemyhq_code::corpse_setup(var_0, "truck_enter_dead_body1", "bring_up_clacker");
   var_3 thread maps\enemyhq_code::corpse_setup(var_0, "truck_enter_dead_body2", "bring_up_clacker");
 }
@@ -150,7 +150,7 @@ gold_door_on_player_truck() {
   level.gold_player_door = spawn("script_model", level.player_truck.origin);
   level.gold_player_door setModel("vehicle_man_7t_front_door_RI_obj");
   level.gold_player_door.angles = level.player_truck.angles;
-  level.gold_player_door linkto(level.player_truck);
+  level.gold_player_door linkTo(level.player_truck);
   common_scripts\utility::flag_wait("FLAG_player_enter_truck");
   maps\_utility::disable_trigger_with_targetname("TRIG_get_in_truck");
   wait 1;
@@ -191,14 +191,14 @@ guy_goto_veh_and_enter(var_0, var_1, var_2, var_3) {
   if(var_0.animname == "baker") {
     wait 2;
     var_0 maps\_utility::teleport_ai(var_2);
-    var_0 linkto(level.player_truck, "tag_detach");
+    var_0 linkTo(level.player_truck, "tag_detach");
     var_1 thread maps\_anim::anim_loop_solo(var_0, "enter_truck_loop", "stop_baker_loop", "tag_detach");
   }
 
   if(var_0.animname == "hesh") {
     wait 2;
     var_0 maps\_utility::teleport_ai(var_2);
-    var_0 linkto(level.player_truck, "tag_detach");
+    var_0 linkTo(level.player_truck, "tag_detach");
     var_1 thread maps\_anim::anim_loop_solo(var_0, "enter_truck_loop", "stop_hesh_loop", "tag_detach");
   }
 
@@ -213,7 +213,7 @@ merrick_goto_veh_and_enter(var_0, var_1, var_2) {
   common_scripts\utility::flag_wait("FLAG_player_enter_truck");
   wait 2;
   var_0 maps\_utility::teleport_ai(var_1);
-  var_0 linkto(level.player_truck, "tag_detach");
+  var_0 linkTo(level.player_truck, "tag_detach");
   level.player_truck thread maps\_anim::anim_loop_solo(var_0, "enter_truck_loop", "stop_baker_loop", "tag_detach");
   common_scripts\utility::flag_set(var_2);
 }
@@ -222,10 +222,10 @@ keegan_enter_veh() {
   common_scripts\utility::flag_wait("picked_up_mk32");
   self notify("stop_intro_loop");
   level notify("stop_intro_loop");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   waittillframeend;
   maps\_utility::gun_remove();
-  self linkto(level.player_truck, "tag_driver");
+  self linkTo(level.player_truck, "tag_driver");
   level.player_truck thread maps\_anim::anim_loop_solo(self, "enter_truck_loop", "stop_keegan_loop", "tag_driver");
   thread truck_starts_up();
   thread keegan_additional_drivein_anims();
@@ -350,7 +350,7 @@ dog_goto_veh_and_enter(var_0, var_1, var_2) {
   var_0 thread dog_scratch_and_path();
   common_scripts\utility::flag_wait("FLAG_player_enter_truck");
   var_1 maps\_anim::anim_single_solo(var_0, "enter_truck", "tag_dog");
-  var_0 linkto(level.player_truck, "tag_dog");
+  var_0 linkTo(level.player_truck, "tag_dog");
   var_1 thread maps\_anim::anim_loop_solo(var_0, "veh_idle", "stop_dog_loop", "tag_dog");
   common_scripts\utility::flag_set(var_2);
 }
@@ -359,7 +359,7 @@ dog_scratch_and_path() {
   level endon("end_truck_nag");
   level.dog maps\_utility::disable_ai_color();
   level.dog maps\enemyhq_code::set_dog_scripted_mode(level.player);
-  var_0 = common_scripts\utility::getstruct("dog_scratch_truck", "targetname");
+  var_0 = common_scripts\utility::getStruct("dog_scratch_truck", "targetname");
   var_0 maps\_anim::anim_reach_solo(self, "found_door");
   self playSound("anml_dog_whine");
   thread maps\enemyhq_audio::aud_dog_scratch();
@@ -422,11 +422,11 @@ handle_phys_debris() {
   maps\_utility::delaythread(4, common_scripts\utility::flag_clear, "FLAG_VO_hang_on_again");
   var_0 = [];
   var_1 = [];
-  var_0[0] = vectornormalize((100, 0, 60));
+  var_0[0] = vectorNormalize((100, 0, 60));
   var_1[0] = 28000;
-  var_0[1] = vectornormalize((150, 0, 20));
+  var_0[1] = vectorNormalize((150, 0, 20));
   var_1[1] = 42000;
-  var_0[2] = vectornormalize((80, 0, 80));
+  var_0[2] = vectorNormalize((80, 0, 80));
   var_1[2] = 20000;
   wait 0.2;
 
@@ -533,9 +533,9 @@ spawn_player_truck() {
 }
 
 handle_truck_windshield_break() {
-  level.truck_broke_glass = getent("mdl_truck_broken_glass", "targetname");
+  level.truck_broke_glass = getEnt("mdl_truck_broken_glass", "targetname");
   level.truck_broke_glass notsolid();
-  level.truck_broke_glass linkto(level.player_truck, "tag_window_front_right");
+  level.truck_broke_glass linkTo(level.player_truck, "tag_window_front_right");
   level.truck_broke_glass hide();
   common_scripts\utility::flag_wait("FLAG_truck_bash");
   level.truck_broke_glass show();
@@ -564,7 +564,7 @@ spawn_checkpoint_guys() {
     if(isDefined(var_2) && isalive(var_2)) {
       var_2 maps\_utility::gun_recall();
       var_2 notify("stop_loop");
-      var_2 maps\_utility::anim_stopanimscripted();
+      var_2 maps\_utility::anim_stopanimScripted();
       var_6 = var_4[randomint(var_4.size)];
       var_2.animname = "generic";
       var_2 thread maps\_anim::anim_generic(var_2, var_6);
@@ -600,8 +600,8 @@ sticky_grenade_01() {
   thread maps\enemyhq_audio::aud_blow_vehicle_low(level.convoy_veh_01);
   level.allies[1] thread maps\enemyhq_code::char_dialog_add_and_go("enemyhq_mrk_detonating");
   level.player thread maps\_c4::remove_detonator();
-  var_0 = common_scripts\utility::getstruct("convoy_veh_01_exp", "targetname");
-  var_1 = common_scripts\utility::getstruct("convoy_veh_02_exp", "targetname");
+  var_0 = common_scripts\utility::getStruct("convoy_veh_01_exp", "targetname");
+  var_1 = common_scripts\utility::getStruct("convoy_veh_02_exp", "targetname");
   physicsexplosionsphere(var_1.origin, 50, 40, 85);
   radiusdamage(level.convoy_veh_01a.origin, 50, 4000, 1000, level.player, "MOD_EXPLOSIVE");
   playFXOnTag(level._effect["vfx_fire_truck"], level.convoy_veh_01a, "tag_origin");
@@ -618,13 +618,13 @@ sticky_grenade_01() {
 sticky_grenade_02() {
   common_scripts\utility::flag_wait("FLAG_blow_sticky_02");
   common_scripts\utility::flag_wait("FLAG_clacked_the_clacker");
-  var_0 = getent("convoy_veh_02_blow_spot", "targetname");
+  var_0 = getEnt("convoy_veh_02_blow_spot", "targetname");
 
   foreach(var_2 in level.truck_bash_guys) {
     var_2 kill();
   }
 
-  var_4 = getent("truck_bash_jeep", "targetname");
+  var_4 = getEnt("truck_bash_jeep", "targetname");
   thread maps\enemyhq_audio::aud_blow_vehicle_low(var_4);
   var_5 = var_4.origin;
   var_4 dodamage(9999, var_5);
@@ -650,16 +650,16 @@ sticky_grenade_02() {
 }
 
 truck_flip_moment() {
-  var_0 = common_scripts\utility::getstruct("truck_flip_blocker", "targetname");
+  var_0 = common_scripts\utility::getStruct("truck_flip_blocker", "targetname");
   common_scripts\utility::flag_wait("bring_up_clacker");
   var_1 = maps\_utility::spawn_anim_model("flip_light_prop", var_0.origin);
   var_2 = maps\_utility::spawn_anim_model("flip_light", var_0.origin);
-  var_2 linkto(var_1, "J_prop_1");
+  var_2 linkTo(var_1, "J_prop_1");
   var_1.animname = "flip_light_prop";
   var_0 maps\_anim::anim_first_frame_solo(var_1, "jeep_flip");
   common_scripts\utility::flag_wait("start_truck_flip_scene");
   wait 0.3;
-  var_3 = getent("flip_jeep", "targetname");
+  var_3 = getEnt("flip_jeep", "targetname");
   var_3 maps\_utility::assign_animtree("drive_jeep_flip");
   thread maps\enemyhq_audio::aud_blow_vehicle(var_3);
   var_4 = var_3.origin;
@@ -690,8 +690,8 @@ truck_bash_moment() {
   if(common_scripts\utility::flag("FLAG_clacked_the_clacker")) {
     thread maps\enemyhq_code::screen_shake_vehicles();
     thread maps\enemyhq_code::reaction_anims();
-    var_0 = getent("convoy_veh_02_blow_spot", "targetname");
-    var_1 = getent("truck_bash_jeep", "targetname");
+    var_0 = getEnt("convoy_veh_02_blow_spot", "targetname");
+    var_1 = getEnt("truck_bash_jeep", "targetname");
     var_1.animname = "intro_jeep_ram";
     var_1 useanimtree(level.scr_animtree[var_1.animname]);
     var_0 thread maps\_anim::anim_single_solo(var_1, "jeep_ram");
@@ -701,8 +701,8 @@ truck_bash_moment() {
   } else {
     thread maps\enemyhq_code::screen_shake_vehicles();
     thread maps\enemyhq_code::reaction_anims();
-    var_0 = getent("convoy_veh_02_blow_spot", "targetname");
-    var_1 = getent("truck_bash_jeep", "targetname");
+    var_0 = getEnt("convoy_veh_02_blow_spot", "targetname");
+    var_1 = getEnt("truck_bash_jeep", "targetname");
     var_1.animname = "intro_jeep_ram";
     var_1 useanimtree(level.scr_animtree[var_1.animname]);
     var_0 thread maps\_anim::anim_single_solo(var_1, "jeep_ram");
@@ -713,7 +713,7 @@ truck_bash_moment() {
 }
 
 silent_magic_bullet_windshield() {
-  var_0 = getent("drivein_magic_bullet_start", "targetname");
+  var_0 = getEnt("drivein_magic_bullet_start", "targetname");
   magicbullet("nosound_magicbullet", var_0.origin, level.player.origin);
   wait 0.125;
   magicbullet("nosound_magicbullet", var_0.origin, level.player.origin);
@@ -726,8 +726,8 @@ sticky_grenade_03() {
   common_scripts\utility::flag_wait("FLAG_blow_sticky_03");
   thread maps\enemyhq_audio::aud_blow_vehicle(level.convoy_veh_03);
   var_0 = level.convoy_veh_03.origin;
-  var_1 = common_scripts\utility::getstruct("convoy_veh_03_exp", "targetname");
-  var_2 = common_scripts\utility::getstruct("convoy_veh_03b_exp", "targetname");
+  var_1 = common_scripts\utility::getStruct("convoy_veh_03_exp", "targetname");
+  var_2 = common_scripts\utility::getStruct("convoy_veh_03b_exp", "targetname");
   radiusdamage(level.convoy_veh_03.origin, 350, 4000, 1000, level.player, "MOD_EXPLOSIVE");
   physicsexplosionsphere(var_1.origin, 300, 250, 34);
   common_scripts\utility::exploder(357);
@@ -789,7 +789,7 @@ sticky_grenade_07() {
   thread maps\enemyhq_audio::aud_blow_vehicle(level.convoy_veh_07);
   var_0 = level.convoy_veh_07.origin;
   level.convoy_veh_07 dodamage(9999, var_0);
-  var_1 = common_scripts\utility::getstruct("convoy_veh_07_exp", "targetname");
+  var_1 = common_scripts\utility::getStruct("convoy_veh_07_exp", "targetname");
   physicsexplosionsphere(var_1.origin, 300, 250, 100);
   radiusdamage(level.convoy_veh_07.origin, 350, 4000, 1000, level.player, "MOD_EXPLOSIVE");
 }

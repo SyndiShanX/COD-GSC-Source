@@ -263,7 +263,7 @@ _id_F194() {
   var_3 = "weapon_" + getcompleteweaponname(self._id_04F6);
   var_4 = spawn(var_3, var_0.origin);
   var_4.angles = self gettagangles("tag_weapon_right");
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   var_5 = var_0.origin;
 
   while(isDefined(var_4) && isDefined(var_4.origin)) {

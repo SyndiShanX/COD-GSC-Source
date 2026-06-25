@@ -38,12 +38,12 @@ show_territories_conquered(str_end_msg) {
 
 scene_pre_briefing_models(str_endon) {
   level waittill("map_up");
-  e_surface = getent("holo_table_surface", "targetname");
+  e_surface = getEnt("holo_table_surface", "targetname");
   level.e_surface_default_origin = e_surface.origin;
   level.e_surface_default_angles = e_surface.angles;
   e_surface.angles = vectorscale((0, 1, 0), 240.0);
   e_surface.origin = (43, 471, 480);
-  e_angled = getent("holo_table_angled", "targetname");
+  e_angled = getEnt("holo_table_angled", "targetname");
   e_angled.origin = (e_surface.origin[0], e_surface.origin[1], e_angled.origin[2]);
   e_angled.angles = (0, 240, 20);
   prop_base = spawn_model("p6_hologram_so_base_map", e_surface.origin, e_surface.angles);
@@ -57,7 +57,7 @@ scene_pre_briefing_models(str_endon) {
     prop_origin = prop_base gettagorigin(tag_name);
     prop_angles = prop_base gettagangles(tag_name);
     prop_building = spawn_model("p6_hologram_so_target_bldg_0" + i, prop_origin, prop_angles);
-    prop_building linkto(prop_base, tag_name);
+    prop_building linkTo(prop_base, tag_name);
     prop_buildings[prop_buildings.size] = prop_building;
     prop_building setclientflag(15);
   }
@@ -65,7 +65,7 @@ scene_pre_briefing_models(str_endon) {
   prop_origin = prop_base gettagorigin("j_target_rock_01");
   prop_angles = prop_base gettagangles("j_target_rock_01");
   prop_rock = spawn_model("p6_hologram_so_target_rock_01", prop_origin, prop_base.angles);
-  prop_rock linkto(prop_base, "j_target_rock_01");
+  prop_rock linkTo(prop_base, "j_target_rock_01");
   prop_rock setclientflag(15);
   holo_table_exploder_switch(115);
   level waittill("map_down");
@@ -146,7 +146,7 @@ scene_pre_briefing_phase4() {
 }
 
 scene_socotra_models() {
-  e_surface = getent("holo_table_surface", "targetname");
+  e_surface = getEnt("holo_table_surface", "targetname");
 
   if(isDefined(level.e_surface_default_origin)) {
     e_surface.origin = level.e_surface_default_origin;
@@ -161,8 +161,8 @@ scene_socotra_models() {
   prop_base play_fx("fx_dockside_base", prop_base.origin, prop_base.angles, "stop_geo_fx", 1, "tag_origin");
   prop_base ignorecheapentityflag(1);
   prop_base setclientflag(15);
-  prop_base rotateto(angles2, 60.0, 0.5, 0.5);
-  prop_base moveto(position2, 60.0, 0.5, 0.5);
+  prop_base rotateTo(angles2, 60.0, 0.5, 0.5);
+  prop_base moveTo(position2, 60.0, 0.5, 0.5);
   wait_network_frame();
   prop_buildings = [];
 
@@ -172,7 +172,7 @@ scene_socotra_models() {
     prop_angles = prop_base gettagangles(tag_name);
     prop_building = spawn_model("p6_hologram_so_target_bldg_0" + i, prop_origin, prop_angles);
     prop_building ignorecheapentityflag(1);
-    prop_building linkto(prop_base, tag_name);
+    prop_building linkTo(prop_base, tag_name);
     prop_buildings[prop_buildings.size] = prop_building;
     prop_building setclientflag(15);
   }
@@ -180,14 +180,14 @@ scene_socotra_models() {
   prop_origin = prop_base gettagorigin("j_target_rock_01");
   prop_angles = prop_base gettagangles("j_target_rock_01");
   prop_rock = spawn_model("p6_hologram_so_target_rock_01", prop_origin, prop_base.angles);
-  prop_rock linkto(prop_base, "j_target_rock_01");
+  prop_rock linkTo(prop_base, "j_target_rock_01");
   prop_rock ignorecheapentityflag(1);
   prop_rock setclientflag(15);
   prop_enter_path = spawn_model("p6_hologram_so_enter_path", prop_base gettagorigin("j_enter_path"), prop_base.angles);
-  prop_enter_path linkto(prop_base, "j_enter_path");
+  prop_enter_path linkTo(prop_base, "j_enter_path");
   prop_enter_path hide();
   prop_exit_path = spawn_model("p6_hologram_so_exit_path", prop_base gettagorigin("j_exit_path"), prop_base.angles);
-  prop_exit_path linkto(prop_base, "j_exit_path");
+  prop_exit_path linkTo(prop_base, "j_exit_path");
   prop_exit_path hide();
   holo_table_exploder_switch(115);
   wait 3.0;
@@ -253,8 +253,8 @@ scene_overflow_briefing() {
 
 scene_overflow_models() {
   have_intel = level.player get_story_stat("ALL_PAKISTAN_RECORDINGS") != 0;
-  e_surface = getent("holo_table_surface", "targetname");
-  e_angled = getent("holo_table_angled", "targetname");
+  e_surface = getEnt("holo_table_surface", "targetname");
+  e_angled = getEnt("holo_table_angled", "targetname");
 
   if(isDefined(level.e_surface_default_origin)) {
     e_surface.origin = level.e_surface_default_origin;
@@ -266,9 +266,9 @@ scene_overflow_models() {
   level thread holo_table_feature_prop("p6_hologram_zhao_text_01", "pakistan_briefing_done", 0.5, undefined, vectorscale((0, 0, -1), 30.0), "zhao_text1", 0);
   level thread holo_table_feature_prop("p6_hologram_zhao_text_02", "pakistan_briefing_done", 0.5, undefined, vectorscale((0, 0, -1), 30.0), "zhao_text2", 0);
   wait_network_frame();
-  zhao = getent("zhao", "targetname");
-  zhao_text1 = getent("zhao_text1", "targetname");
-  zhao_text2 = getent("zhao_text2", "targetname");
+  zhao = getEnt("zhao", "targetname");
+  zhao_text1 = getEnt("zhao_text1", "targetname");
+  zhao_text2 = getEnt("zhao_text2", "targetname");
   zhao clearclientflag(14);
   zhao_text1 clearclientflag(14);
   zhao_text2 clearclientflag(14);
@@ -286,7 +286,7 @@ scene_overflow_models() {
     holo_table_exploder_switch(112);
     show_globe(1);
     globe_show_map("so_rts_mp_overflow");
-    pakistan = getent("pakistan", "script_noteworthy");
+    pakistan = getEnt("pakistan", "script_noteworthy");
     pakistan setclientflag(14);
     pakistan show();
     scene_wait("pakistan_no_intel");

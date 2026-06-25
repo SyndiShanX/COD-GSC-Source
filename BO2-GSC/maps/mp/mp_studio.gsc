@@ -29,19 +29,19 @@ main() {
   game["strings_menu"]["war_callsign_d"] = "@MPUI_CALLSIGN_MAPNAME_D";
   game["strings_menu"]["war_callsign_e"] = "@MPUI_CALLSIGN_MAPNAME_E";
   level.destructible_callbacks["remove_streamers"] = ::death_streamer_think;
-  alleytrigger = getent("alleyTrigger", "targetname");
-  windowtrigger = getent("triggerwindowTarget", "targetname");
-  target7 = getent("trailerTarget_Window", "targetname");
-  target8 = getent("alleyTarget_Cover", "targetname");
-  target9 = getent("alleyTarget_Path", "targetname");
-  targetlight1_off = getent("steelBuildingTargetLight1_off", "targetname");
-  targetlight1_on = getent("steelBuildingTargetLight1_on", "targetname");
-  targetlight2_off = getent("steelBuildingTargetLight2_off", "targetname");
-  targetlight2_on = getent("steelBuildingTargetLight2_on", "targetname");
+  alleytrigger = getEnt("alleyTrigger", "targetname");
+  windowtrigger = getEnt("triggerwindowTarget", "targetname");
+  target7 = getEnt("trailerTarget_Window", "targetname");
+  target8 = getEnt("alleyTarget_Cover", "targetname");
+  target9 = getEnt("alleyTarget_Path", "targetname");
+  targetlight1_off = getEnt("steelBuildingTargetLight1_off", "targetname");
+  targetlight1_on = getEnt("steelBuildingTargetLight1_on", "targetname");
+  targetlight2_off = getEnt("steelBuildingTargetLight2_off", "targetname");
+  targetlight2_on = getEnt("steelBuildingTargetLight2_on", "targetname");
   level.const_fx_exploder_red_light_1 = 1001;
   level.const_fx_exploder_red_light_2 = 1002;
-  speaker1 = getent("loudspeaker1", "targetname");
-  speaker2 = getent("loudspeaker2", "targetname");
+  speaker1 = getEnt("loudspeaker1", "targetname");
+  speaker2 = getEnt("loudspeaker2", "targetname");
   targetlight1_on hide();
   targetlight2_on hide();
   target8 setCanDamage(1);
@@ -108,7 +108,7 @@ damagetarget(dir) {
           }
         }
 
-        self rotateyaw(self.angles[2] + 180 * rotation, 0.3);
+        self rotateYaw(self.angles[2] + 180 * rotation, 0.3);
         self playSound("amb_target_twirl");
         self waittill("rotatedone");
         break;
@@ -160,7 +160,7 @@ movetarget(dir, dis, speed) {
   startpos = self.origin;
   farpos = self.origin;
   sound = spawn("script_origin", self.origin);
-  sound linkto(self);
+  sound linkTo(self);
   sound playLoopSound("amb_target_chain");
 
   switch (dir) {
@@ -202,7 +202,7 @@ movetarget(dir, dis, speed) {
       self.preferrednextpos = 0;
     }
 
-    self moveto(nextpos, speed);
+    self moveTo(nextpos, speed);
     self waittill_either("movedone", "targetStopMoving");
     self playSound("amb_target_stop");
   }
@@ -214,18 +214,18 @@ rotatetarget(dir, deg, speed, pausetime) {
   while(true) {
     switch (dir) {
       case 1:
-        self rotateyaw(self.angles[2] + deg, speed);
+        self rotateYaw(self.angles[2] + deg, speed);
         self playSound("amb_target_rotate");
         wait(pausetime);
-        self rotateyaw(self.angles[2] - deg, speed);
+        self rotateYaw(self.angles[2] - deg, speed);
         self playSound("amb_target_rotate");
         wait(pausetime);
         break;
       case 2:
-        self rotateyaw(self.angles[2] - deg, speed);
+        self rotateYaw(self.angles[2] - deg, speed);
         self playSound("amb_target_rotate");
         wait(pausetime);
-        self rotateyaw(self.angles[2] + deg, speed);
+        self rotateYaw(self.angles[2] + deg, speed);
         self playSound("amb_target_rotate");
         wait(pausetime);
         break;
@@ -260,9 +260,9 @@ rotatetarget(dir, deg, speed, pausetime) {
         wait(pausetime);
         break;
       case 7:
-        self rotateto((self.angles[0] + 90, self.angles[1] - 90, self.angles[2] + 45), speed);
+        self rotateTo((self.angles[0] + 90, self.angles[1] - 90, self.angles[2] + 45), speed);
         wait(pausetime);
-        self rotateto((self.angles[0] - 90, self.angles[1] + 90, self.angles[2] - 45), speed);
+        self rotateTo((self.angles[0] - 90, self.angles[1] + 90, self.angles[2] - 45), speed);
         wait(pausetime);
     }
   }

@@ -13,7 +13,7 @@ function move_ring(ring) {
   level endon("end_game");
   while(true) {
     foreach(position in positions) {
-      self moveto(position.origin, randomintrange(30, 45));
+      self moveTo(position.origin, randomintrange(30, 45));
       self waittill("movedone");
     }
   }
@@ -26,7 +26,7 @@ function rotate_ring(forward) {
     dir = 360;
   }
   while(true) {
-    self rotateyaw(dir, 9);
+    self rotateYaw(dir, 9);
     wait(9);
   }
 }

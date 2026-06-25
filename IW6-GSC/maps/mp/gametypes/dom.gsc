@@ -538,8 +538,7 @@ giveFlagCaptureXP(touchList) {
 
     player setExtraScore0(player.pers["captures"]);
 
-    if(player != first_player) {
-    }
+    if(player != first_player) {}
     player maps\mp\_events::giveObjectivePointStreaks();
 
     wait(0.05);

@@ -15,7 +15,7 @@ func_5910(var_0) {
   var_0 missileoutline();
   scripts\mp\utility::_launchgrenade("domeshield_plant_mp", var_0.origin, (0, 0, 0), 100, 1, var_0);
   if(isDefined(var_1)) {
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
   }
 
   var_2 = domeshield_getplacementinfo(self, var_0.origin);
@@ -52,7 +52,7 @@ func_590C(var_0, var_1, var_2) {
   var_6 setModel("prop_mp_domeshield_col");
   var_6 setnonstick(1);
   var_6 give_player_tickets(1);
-  var_6 linkto(var_0);
+  var_6 linkTo(var_0);
   var_6.var_2B0E = 1;
   var_6.owner = self;
   var_6.var_7734 = var_0;

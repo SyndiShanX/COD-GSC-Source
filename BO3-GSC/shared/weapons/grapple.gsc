@@ -176,7 +176,7 @@ function get_a_target(weapon) {
     if(test_range > weapon.lockonmaxrange || test_range < weapon.lockonminrange) {
       continue;
     }
-    normal = vectornormalize(testorigin - origin);
+    normal = vectorNormalize(testorigin - origin);
     dot = vectordot(forward, normal);
     if(0 > dot) {
       continue;
@@ -230,7 +230,7 @@ function get_target_score(target, origin, forward, min_range, max_range) {
   }
   if(is_valid_target(target)) {
     testorigin = get_target_lock_on_origin(target);
-    normal = vectornormalize(testorigin - origin);
+    normal = vectorNormalize(testorigin - origin);
     dot = vectordot(forward, normal);
     targetdistance = distance(self.origin, testorigin);
     distance_score = 1 - (targetdistance - min_range) / (max_range - min_range);

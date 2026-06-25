@@ -45,7 +45,7 @@ func_5AD1(var_0) {
     earthquake(0.1, var_7 * 0.5, self.origin, 512);
     self setstance("stand");
     thread scripts\sp\utility::play_sound_on_entity("player_jet");
-    self playerlinkto(var_4, "tag_origin", 1);
+    self playerlinkTo(var_4, "tag_origin", 1);
     earthquake(0.3, 0.75, self.origin, 256);
     self.var_AD32 = var_4;
     wait(var_7);

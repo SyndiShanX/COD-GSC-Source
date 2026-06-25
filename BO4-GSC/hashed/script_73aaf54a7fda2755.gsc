@@ -66,7 +66,7 @@ function_1a47fb39(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 
 function_25c6cba0(entity, origin) {
   entity clientfield::increment("zombie_electric_burst_clientfield");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     distance_sq = distancesquared(origin, players[i] getcentroid());
@@ -103,7 +103,7 @@ function_79e38cc4(origin) {
   time_step = 0.5;
 
   while(var_74d136f5 <= 1.5) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       distance_sq = distancesquared(origin, players[i] getcentroid());

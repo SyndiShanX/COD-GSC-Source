@@ -132,8 +132,8 @@ disable_gameplay() {
 }
 
 moveplayertolocation(var_0) {
-  var_1 = getent(var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = getEnt(var_0, "targetname");
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles((0, var_1.angles[1], 0));
 }
 
@@ -294,7 +294,7 @@ friendly_stance(var_0, var_1, var_2) {
 }
 
 distracted_guys_spawn() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = spawnStruct();
   var_2 = getEntArray(var_0.target, "targetname");
   var_1.alert_triggers = [];
@@ -385,7 +385,7 @@ distractedguys_alert(var_0) {
       continue;
     }
 
-    var_0.guys[var_1] stopanimscripted();
+    var_0.guys[var_1] stopanimScripted();
   }
 }
 
@@ -479,7 +479,7 @@ assasination_think(var_0) {
   for(var_1 = 0; var_1 < var_0.executioners.size; var_1++) {
     var_0.executioners[var_1] setthreatbiasgroup("executioner");
     var_0.executioners[var_1] notify("stop_idle");
-    var_0.executioners[var_1] stopanimscripted();
+    var_0.executioners[var_1] stopanimScripted();
     var_0.executioners[var_1].goalradius = 16;
     var_0.executioners[var_1] setgoalnode(var_0.executioners[var_1].animnode);
     var_0.executioners[var_1].old_baseaccuracy = var_0.executioners[var_1].baseaccuracy;
@@ -607,7 +607,7 @@ seek_player() {
 enemy_color_hint_trigger_think() {
   for(;;) {
     self waittill("trigger");
-    getent(self.target, "targetname") notify("trigger");
+    getEnt(self.target, "targetname") notify("trigger");
     level.seekersusingcolors = 1;
 
     while(level.player istouching(self)) {
@@ -648,7 +648,7 @@ seek_player_dog() {
 indoor_enemy() {}
 
 waittill_ai_in_volume_dead(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = getaiarray("axis");
   var_3 = [];
 
@@ -954,8 +954,8 @@ chopper_air_support_call_chopper(var_0) {
 
   level.chopper = maps\_vehicle::spawn_vehicle_from_targetname("chopper");
   level.chopper endon("death");
-  var_2 = getent("chopper_pilot", "targetname");
-  var_3 = getent("chopper_gunner", "targetname");
+  var_2 = getEnt("chopper_pilot", "targetname");
+  var_3 = getEnt("chopper_gunner", "targetname");
   level.chopper.pilot = var_2 maps\_utility::spawn_ai();
   level.chopper.gunner = var_3 maps\_utility::spawn_ai();
   level.chopper thread chopper_air_support_friendlyfire();
@@ -1121,7 +1121,7 @@ chopper_ai_mode_aim_turret(var_0) {
       var_2 = (0, 0, 32);
     }
 
-    self setturrettargetent(var_0, var_2);
+    self setturrettargetEnt(var_0, var_2);
     wait(randomfloatrange(0.2, 1.0));
   }
 }
@@ -1209,8 +1209,8 @@ vehicle_c4_think() {
   level.vehicle_c4_models[1] = maps\_c4::c4_location("tag_origin", var_3, var_4);
   self.rearc4location = spawn("script_origin", self.origin);
   self.frontc4location = spawn("script_origin", self.origin);
-  self.rearc4location linkto(self, "rear_hatch_open_jnt_left", var_1, var_2);
-  self.frontc4location linkto(self, "tag_origin", var_3, var_4);
+  self.rearc4location linkTo(self, "rear_hatch_open_jnt_left", var_1, var_2);
+  self.frontc4location linkTo(self, "tag_origin", var_3, var_4);
   self waittill("c4_detonation");
   self.frontc4location delete();
   self.rearc4location delete();
@@ -1429,7 +1429,7 @@ vehicle_turret_think() {
     var_0 = maps\_helicopter_globals::getenemytarget(3000, undefined, 1, 1, 0, 1);
 
     if(isDefined(var_0)) {
-      self setturrettargetent(var_0, (0, 0, 32));
+      self setturrettargetEnt(var_0, (0, 0, 32));
       common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", randomfloatrange(2.0, 3.0));
       var_1 = weaponfiretime("bmp_turret");
       var_2 = randomintrange(3, 8);
@@ -1475,7 +1475,7 @@ timedautosaves() {
 }
 
 genocide_audio_trigger() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self waittill("trigger");
 
   if(isDefined(self.script_delay)) {
@@ -1592,7 +1592,7 @@ air_support_hint_print_call() {
 }
 
 trigger_upstairs_guys() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = getnode(var_0.target, "targetname");
   self waittill("trigger");
   wait(randomfloatrange(5.0, 10.0));
@@ -1651,12 +1651,12 @@ alasad_deletable_show() {
   self.origin = self.origin + (0, 0, 5000);
 
   if(isDefined(self.spawnflags) && self.spawnflags & 1) {
-    self disconnectpaths();
+    self disconnectPaths();
   }
 }
 
 spawn_ai_and_make_dumb(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(isDefined(var_2.script_drone)) {
     var_3 = maps\_utility::dronespawn(var_2);
@@ -1673,7 +1673,7 @@ spawn_ai_and_make_dumb(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_4 = spawn("script_origin", var_2.origin);
-    var_3 linkto(var_4);
+    var_3 linkTo(var_4);
   }
 
   return var_3;
@@ -1723,7 +1723,7 @@ do_alasad(var_0) {
     var_1.aitodeleteareatargetname = "area_barn";
     var_1.door_offset_origin = (-3, 0, 0);
     var_1.door_offset_angle = (0, -10, 0);
-    level.alasad_flashbang_location = getent("alasad_barn_flash_location", "targetname").origin;
+    level.alasad_flashbang_location = getEnt("alasad_barn_flash_location", "targetname").origin;
     level.alasad_objective_location = "6";
   } else if(var_0 == "house") {
     var_1.nodetargetname1 = "alasad_house_node";
@@ -1743,7 +1743,7 @@ do_alasad(var_0) {
     var_1.aitodeleteareatargetname = "area_grandmas_house";
     var_1.door_offset_origin = (0, -2, 2);
     var_1.door_offset_angle = (0, -8, 0);
-    level.alasad_flashbang_location = getent("alasad_house_flash_location", "targetname").origin;
+    level.alasad_flashbang_location = getEnt("alasad_house_flash_location", "targetname").origin;
     level.alasad_objective_location = "2";
   }
 
@@ -1751,8 +1751,8 @@ do_alasad(var_0) {
 }
 
 alasad_sequence_init(var_0) {
-  var_0.alasad_area_exterior = getent(var_0.setupareaexteriortriggertargetname, "targetname");
-  var_0.alasad_area_interior = getent(var_0.setupareainteriortriggertargetname, "targetname");
+  var_0.alasad_area_exterior = getEnt(var_0.setupareaexteriortriggertargetname, "targetname");
+  var_0.alasad_area_interior = getEnt(var_0.setupareainteriortriggertargetname, "targetname");
 
   while(level.player istouching(var_0.alasad_area_interior)) {
     wait 0.05;
@@ -1762,20 +1762,20 @@ alasad_sequence_init(var_0) {
   var_0.node = getnode(var_0.nodetargetname1, "targetname");
   var_0.door = maps\_utility::spawn_anim_model("door");
   var_0.node thread maps\_anim::anim_first_frame_solo(var_0.door, "interrogationA");
-  var_0.brushmodel_door = getent(var_0.brushdoortargetname, "targetname");
-  var_0.brushmodel_door linkto(var_0.door, "door_hinge_jnt");
+  var_0.brushmodel_door = getEnt(var_0.brushdoortargetname, "targetname");
+  var_0.brushmodel_door linkTo(var_0.door, "door_hinge_jnt");
   var_0.door hide();
   var_0.brushmodel_door hide();
   var_1 = spawn("script_model", var_0.brushmodel_door.origin);
   var_1 setModel("h1_ch_interior_door_02");
-  var_1 linkto(var_0.brushmodel_door, "", var_0.door_offset_origin, var_0.door_offset_angle);
+  var_1 linkTo(var_0.brushmodel_door, "", var_0.door_offset_origin, var_0.door_offset_angle);
 
   if(isDefined(var_0.spawnerstodeletekillspawner)) {
     thread maps\_spawner::kill_spawnernum(var_0.spawnerstodeletekillspawner);
   }
 
   if(isDefined(var_0.aitodeleteareatargetname)) {
-    var_2 = getent(var_0.aitodeleteareatargetname, "targetname");
+    var_2 = getEnt(var_0.aitodeleteareatargetname, "targetname");
     var_3 = getaiarray("axis");
 
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
@@ -1793,7 +1793,7 @@ alasad_sequence_init(var_0) {
 alasad_sequence_wait(var_0) {
   level endon("alasad_sequence_started");
   common_scripts\utility::flag_init("price_ready_for_interrogation");
-  var_0.color_trigger = getent(var_0.friendlycolortriggertargetname1, "targetname");
+  var_0.color_trigger = getEnt(var_0.friendlycolortriggertargetname1, "targetname");
 
   for(;;) {
     if(level.player istouching(var_0.alasad_area_interior)) {
@@ -1822,7 +1822,7 @@ alasad_sequence_wait(var_0) {
 alasad_sequence_ready(var_0) {
   level endon("alasad_sequence_canceled");
   var_0.node thread h1_do_price_reach_interrogation();
-  getent(var_0.startsequencetriggertargetname, "targetname") waittill("trigger");
+  getEnt(var_0.startsequencetriggertargetname, "targetname") waittill("trigger");
   common_scripts\utility::flag_wait("price_ready_for_interrogation");
   alasad_sequence_start(var_0);
 }
@@ -2122,7 +2122,7 @@ opening_head_tracking() {
   var_0 = common_scripts\utility::array_remove(var_0, level.price);
   var_0 = common_scripts\utility::array_remove(var_0, level.opening_guy);
   common_scripts\utility::array_thread(var_0, maps\_headtracking::player_head_tracking);
-  getent("pushplayer_off", "targetname") waittill("trigger");
+  getEnt("pushplayer_off", "targetname") waittill("trigger");
   common_scripts\utility::array_thread(var_0, maps\_headtracking::head_tracking_end);
 }
 
@@ -2224,7 +2224,7 @@ flashlight_light(var_0) {
     var_2 = spawn("script_model", (0, 0, 0));
     var_2 setModel("tag_origin");
     var_2 hide();
-    var_2 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
     thread flashlight_light_death(var_2);
     playFXOnTag(level._effect["flashlight"], var_2, "tag_origin");
   } else

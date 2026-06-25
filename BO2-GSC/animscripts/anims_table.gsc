@@ -384,7 +384,7 @@ storereportbestsplittime(arrayname, covertype, index, bestsplit, bestdelta) {
             if(!isDefined(throwanim) || !isanimleaf(throwanim) || !isassetloaded("xanim", throwanimname)) {
               continue;
             }
-            tempmodel animscripted("grenadetest", tempmodel.origin, tempmodel.angles, throwanim, "normal", %root, 1.0);
+            tempmodel animScripted("grenadetest", tempmodel.origin, tempmodel.angles, throwanim, "normal", %root, 1.0);
 
             for(;;) {
               tempmodel waittill("grenadetest", notetrack);

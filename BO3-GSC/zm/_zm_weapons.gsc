@@ -499,7 +499,7 @@ function limited_weapon_below_quota(weapon, ignore_player, pap_triggers) {
     if(isDefined(level.zombie_weapons[weapon]) && isDefined(level.zombie_weapons[weapon].upgrade)) {
       upgradedweapon = level.zombie_weapons[weapon].upgrade;
     }
-    players = getplayers();
+    players = getPlayers();
     count = 0;
     limit = level.limited_weapons[weapon];
     for(i = 0; i < players.size; i++) {
@@ -809,19 +809,19 @@ function wall_weapon_update_prompt(player) {
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
         self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL_BGB_SECRET_SHOPPER";
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       } else {
         self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY_CFILL";
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
         self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL_BGB_SECRET_SHOPPER";
         n_bgb_cost = player get_ammo_cost_for_weapon(player.currentweapon);
-        self sethintstring(self.stub.hint_string, cost, n_bgb_cost);
+        self setHintString(self.stub.hint_string, cost, n_bgb_cost);
       } else {
         self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLYFILL";
-        self sethintstring(self.stub.hint_string, cost);
+        self setHintString(self.stub.hint_string, cost);
       }
     }
   } else {
@@ -841,29 +841,29 @@ function wall_weapon_update_prompt(player) {
         } else {
           self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL_BGB_SECRET_SHOPPER";
         }
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       } else {
         if(isDefined(self.stub.hacked) && self.stub.hacked) {
           self.stub.hint_string = &"ZOMBIE_WEAPONAMMOHACKED_CFILL";
         } else {
           self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY_CFILL";
         }
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
       }
     } else {
       if(player bgb::is_enabled("zm_bgb_secret_shopper") && !is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
         self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY_BGB_SECRET_SHOPPER";
         n_bgb_cost = player get_ammo_cost_for_weapon(player.currentweapon);
-        self sethintstring(self.stub.hint_string, ammo_cost, n_bgb_cost);
+        self setHintString(self.stub.hint_string, ammo_cost, n_bgb_cost);
       } else {
         self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
-        self sethintstring(self.stub.hint_string, ammo_cost);
+        self setHintString(self.stub.hint_string, ammo_cost);
       }
     }
   }
   self.stub.cursor_hint = "HINT_WEAPON";
   self.stub.cursor_hint_weapon = weapon;
-  self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
+  self setCursorHint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
   return true;
 }
 
@@ -877,9 +877,9 @@ function reset_wallbuy_internal(set_hint_string) {
       hint_string = get_weapon_hint(self.weapon);
       cost = get_weapon_cost(self.weapon);
       if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
-        self sethintstring(hint_string);
+        self setHintString(hint_string);
       } else {
-        self sethintstring(hint_string, cost);
+        self setHintString(hint_string, cost);
       }
     }
   }
@@ -934,14 +934,14 @@ function init_weapon_upgrade() {
     hint_string = get_weapon_hint(weapon_spawns[i].weapon);
     cost = get_weapon_cost(weapon_spawns[i].weapon);
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
-      weapon_spawns[i] sethintstring(hint_string);
+      weapon_spawns[i] setHintString(hint_string);
     } else {
-      weapon_spawns[i] sethintstring(hint_string, cost);
+      weapon_spawns[i] setHintString(hint_string, cost);
     }
-    weapon_spawns[i] setcursorhint("HINT_NOICON");
-    weapon_spawns[i] usetriggerrequirelookat();
+    weapon_spawns[i] setCursorHint("HINT_NOICON");
+    weapon_spawns[i] useTriggerRequireLookAt();
     weapon_spawns[i] thread weapon_spawn_think();
-    model = getent(weapon_spawns[i].target, "targetname");
+    model = getEnt(weapon_spawns[i].target, "targetname");
     if(isDefined(model)) {
       model useweaponhidetags(weapon_spawns[i].weapon);
       model hide();
@@ -1285,12 +1285,12 @@ function get_weapon_hint_ammo() {
 function weapon_set_first_time_hint(cost, ammo_cost) {
   if(!(isDefined(level.obsolete_prompt_format_needed) && level.obsolete_prompt_format_needed)) {
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
-      self sethintstring(get_weapon_hint_ammo());
+      self setHintString(get_weapon_hint_ammo());
     } else {
-      self sethintstring(get_weapon_hint_ammo(), cost, ammo_cost);
+      self setHintString(get_weapon_hint_ammo(), cost, ammo_cost);
     }
   } else {
-    self sethintstring(get_weapon_hint_ammo(), cost, ammo_cost);
+    self setHintString(get_weapon_hint_ammo(), cost, ammo_cost);
   }
 }
 
@@ -1327,13 +1327,13 @@ function weapon_spawn_think() {
     self.first_time_triggered = 0;
     hint = get_weapon_hint(self.weapon);
     if(isDefined(level.weapon_cost_client_filled) && level.weapon_cost_client_filled) {
-      self sethintstring(hint);
+      self setHintString(hint);
     } else {
-      self sethintstring(hint, cost);
+      self setHintString(hint, cost);
     }
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = self.weapon;
-    self setcursorhint(cursor_hint, cursor_hint_weapon);
+    self setCursorHint(cursor_hint, cursor_hint_weapon);
   } else if(!isDefined(self.first_time_triggered)) {
     self.first_time_triggered = 0;
     if(isDefined(self.stub)) {
@@ -1517,7 +1517,7 @@ function should_upgrade_weapon(player) {
 }
 
 function show_all_weapon_buys(player, cost, ammo_cost, is_grenade) {
-  model = getent(self.target, "targetname");
+  model = getEnt(self.target, "targetname");
   is_melee = zm_utility::is_melee_weapon(self.weapon);
   if(isDefined(model)) {
     model thread weapon_show(player);
@@ -1541,7 +1541,7 @@ function show_all_weapon_buys(player, cost, ammo_cost, is_grenade) {
         if(isDefined(wallbuy.trigger_stub) && isDefined(wallbuy.trigger_stub.clientfieldname)) {
           level clientfield::set(wallbuy.trigger_stub.clientfieldname, 1);
         } else if(isDefined(wallbuy.target)) {
-          model = getent(wallbuy.target, "targetname");
+          model = getEnt(wallbuy.target, "targetname");
           if(isDefined(model)) {
             model thread weapon_show(player);
           }
@@ -1584,7 +1584,7 @@ function weapon_show(player) {
   zm_utility::play_sound_at_pos("weapon_show", self.origin, self);
   time = 1;
   if(!isDefined(self._linked_ent)) {
-    self moveto(self.og_origin, time);
+    self moveTo(self.og_origin, time);
   }
 }
 

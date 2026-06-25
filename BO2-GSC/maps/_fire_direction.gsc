@@ -416,7 +416,7 @@ _get_aim_position() {
     v_player_eye = level.player getplayerangles();
   }
 
-  v_player_eye = vectornormalize(anglesToForward(v_player_eye));
+  v_player_eye = vectorNormalize(anglesToForward(v_player_eye));
   v_trace_to_point = v_eye_pos + v_player_eye * 4000;
   a_trace = bulletTrace(v_eye_pos, v_trace_to_point, 0, level.player);
   return a_trace["position"];
@@ -509,7 +509,7 @@ _quadrotor_attacks_player_target(v_shoot_pos, a_enemies) {
 
   if(isDefined(e_enemy)) {
     self vehsetentitytarget(e_enemy);
-    self setturrettargetent(e_enemy);
+    self setturrettargetEnt(e_enemy);
     self.goalpos = e_enemy.origin;
   } else {
     self setturrettargetvec(v_shoot_pos);
@@ -546,7 +546,7 @@ _quadrotor_update_enemy(v_shoot_pos, firetime, e_enemy) {
 
         if(isDefined(e_enemy)) {
           self vehsetentitytarget(e_enemy);
-          self setturrettargetent(e_enemy);
+          self setturrettargetEnt(e_enemy);
         }
       }
     }
@@ -607,7 +607,7 @@ _rod_impact() {
   }
   v_to_player = missile.origin - level.player.origin;
   v_to_player = (v_to_player[0], v_to_player[1], 0);
-  v_to_player = vectornormalize(v_to_player);
+  v_to_player = vectorNormalize(v_to_player);
   playFX(level._effect["rod_impact"], missile.origin, v_to_player);
   weaponinfo = level._fire_direction.a_weapons["god_rod_glove_sp"];
   weaponinfo.a_e_rod_victims = [];

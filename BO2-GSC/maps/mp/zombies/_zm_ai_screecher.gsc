@@ -87,7 +87,7 @@ screecher_spawning_logic() {
     valid_players = [];
 
     while(valid_players_in_screecher_zone <= 0) {
-      players = getplayers();
+      players = getPlayers();
       valid_players_in_screecher_zone = 0;
 
       for(p = 0; p < players.size; p++) {
@@ -127,11 +127,11 @@ screecher_spawning_logic() {
       }
 
       if(isDefined(spawn_point)) {
-        playsoundatposition("zmb_vocals_screecher_spawn", spawn_point.origin);
+        playSoundAtPosition("zmb_vocals_screecher_spawn", spawn_point.origin);
       }
 
       delay_time = gettime() + 5000;
-      now_zone = getent("screecher_spawn_now", "targetname");
+      now_zone = getEnt("screecher_spawn_now", "targetname");
 
       while(gettime() < delay_time) {
         in_zone = 0;
@@ -301,7 +301,7 @@ zombie_pathing_home() {
   playFX(level._effect["screecher_spawn_b"], self.origin, (0, 0, 1));
   self.no_powerups = 1;
   self setfreecameralockonallowed(0);
-  self animscripted(self.origin, self.angles, "zm_burrow");
+  self animScripted(self.origin, self.angles, "zm_burrow");
   self playSound("zmb_screecher_dig");
   maps\mp\animscripts\zm_shared::donotetracks("burrow_anim");
   self delete();
@@ -432,7 +432,7 @@ play_screecher_breathing_audio() {
   }
   if(!isDefined(self.loopsoundent)) {
     self.loopsoundent = spawn("script_origin", self.origin);
-    self.loopsoundent linkto(self, "tag_origin");
+    self.loopsoundent linkTo(self, "tag_origin");
   }
 
   self.loopsoundent playLoopSound("zmb_vocals_screecher_breath");
@@ -440,7 +440,7 @@ play_screecher_breathing_audio() {
 
 screecher_rise() {
   self endon("death");
-  self animscripted(self.origin, self.angles, "zm_rise");
+  self animScripted(self.origin, self.angles, "zm_rise");
   maps\mp\animscripts\zm_shared::donotetracks("rise_anim");
   self notify("risen");
   self setfreecameralockonallowed(1);
@@ -521,16 +521,16 @@ screecher_attack() {
   self setanimstatefromasd("zm_jump_up");
   maps\mp\animscripts\zm_shared::donotetracks("jump_up_anim");
   asd_state = self screecher_fly_to_player(player);
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self setclientfield("render_third_person", 1);
-  self linkto(self.favoriteenemy, "tag_origin");
-  self animscripted(self.favoriteenemy.origin, self.favoriteenemy.angles, asd_state);
+  self linkTo(self.favoriteenemy, "tag_origin");
+  self animScripted(self.favoriteenemy.origin, self.favoriteenemy.angles, asd_state);
   maps\mp\animscripts\zm_shared::donotetracks("jump_land_success_anim");
   org = self.favoriteenemy gettagorigin("j_head");
   angles = self.favoriteenemy gettagangles("j_head");
   self forceteleport(org, angles);
-  self linkto(self.favoriteenemy, "j_head");
-  self animscripted(self.origin, self.angles, "zm_headpull");
+  self linkTo(self.favoriteenemy, "j_head");
+  self animScripted(self.origin, self.angles, "zm_headpull");
   self.linked_ent = self.favoriteenemy;
   self.linked_ent setmovespeedscale(0.5);
   self thread screecher_melee_button_watcher();
@@ -542,7 +542,7 @@ screecher_fly_to_player(player) {
   self setanimstatefromasd("zm_jump_loop");
   self.anchor.origin = self.origin;
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   anim_id_back = self getanimfromasd("zm_jump_land_success_fromback", 0);
   anim_id_front = self getanimfromasd("zm_jump_land_success_fromfront", 0);
   end_time = gettime() + 2500;
@@ -581,9 +581,9 @@ screecher_fly_to_player(player) {
     }
 
     self.anchor.angles = facing_angles;
-    unit_facing_vec = vectornormalize(facing_vec);
+    unit_facing_vec = vectorNormalize(facing_vec);
     new_pos = self.anchor.origin + vectorscale(unit_facing_vec, dist_update);
-    self.anchor moveto(new_pos, 0.1);
+    self.anchor moveTo(new_pos, 0.1);
     wait 0.1;
   }
 
@@ -734,7 +734,7 @@ screecher_runaway() {
   playFX(level._effect["screecher_spawn_b"], self.origin, (0, 0, 1));
   self.no_powerups = 1;
   self setfreecameralockonallowed(0);
-  self animscripted(self.origin, self.angles, "zm_burrow");
+  self animScripted(self.origin, self.angles, "zm_burrow");
   self playSound("zmb_screecher_dig");
   maps\mp\animscripts\zm_shared::donotetracks("burrow_anim");
   self delete();
@@ -794,7 +794,7 @@ screecher_detach(player) {
   maps\mp\_visionset_mgr::vsmgr_deactivate("overlay", "zm_ai_screecher_blur", player);
   self animmode("normal");
   self.ignoreall = 1;
-  self setplayercollision(1);
+  self setPlayerCollision(1);
 
   if(isDefined(level.screecher_should_burrow)) {
     if(self[[level.screecher_should_burrow]]()) {

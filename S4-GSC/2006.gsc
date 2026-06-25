@@ -780,7 +780,7 @@ _id_D684(var_0, var_1) {
   self.trigger.origin = var_0;
 
   if(scripts\mp\utility\game::getgametype() == "ball" || scripts\mp\utility\game::getgametype() == "tdef") {
-    self.trigger linkto(self._id_10430[0]);
+    self.trigger linkTo(self._id_10430[0]);
   }
 
   self._id_4140 = self.trigger.origin;
@@ -893,7 +893,7 @@ _id_D537(var_0) {
     }
 
     var_21 = (cos(var_19), sin(var_19), 0);
-    var_21 = vectornormalize(var_21 - var_14["normal"] * vectordot(var_21, var_14["normal"]));
+    var_21 = vectorNormalize(var_21 - var_14["normal"] * vectordot(var_21, var_14["normal"]));
     var_22 = 0;
 
     if(scripts\mp\utility\game::getgametype() == "ctf" || _id_8785()) {
@@ -938,10 +938,10 @@ _id_D537(var_0) {
         self._id_C627 = 1;
       } else {
         for(var_24 = 0; var_24 < self._id_10430.size; var_24++) {
-          self._id_10430[var_24] linkto(var_25);
+          self._id_10430[var_24] linkTo(var_25);
         }
 
-        self.trigger linkto(var_25);
+        self.trigger linkTo(var_25);
         var_28 = spawnStruct();
         var_28._id_32EC = self;
         var_28._id_43F7 = ::_id_32ED;
@@ -3765,7 +3765,7 @@ _id_D719(var_0, var_1) {
 }
 
 _id_D8D0(var_0) {
-  self.trigger sethintstring(var_0);
+  self.trigger setHintString(var_0);
 }
 
 _id_159C(var_0) {
@@ -4391,9 +4391,9 @@ _id_3FF0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   var_11 makeuseable();
 
   if(isDefined(var_1)) {
-    var_11 setcursorhint(var_1);
+    var_11 setCursorHint(var_1);
   } else {
-    var_11 setcursorhint("HINT_NOICON");
+    var_11 setCursorHint("HINT_NOICON");
   }
 
   if(isDefined(var_2)) {
@@ -4401,7 +4401,7 @@ _id_3FF0(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_3)) {
-    var_11 sethintstring(var_3);
+    var_11 setHintString(var_3);
   }
 
   if(isDefined(var_4)) {
@@ -4461,9 +4461,9 @@ _id_D5A6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_1)) {
-    self setcursorhint(var_1);
+    self setCursorHint(var_1);
   } else {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 
   if(isDefined(var_2)) {
@@ -4471,7 +4471,7 @@ _id_D5A6(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   if(isDefined(var_3)) {
-    self sethintstring(var_3);
+    self setHintString(var_3);
   }
 
   if(isDefined(var_4)) {

@@ -156,7 +156,7 @@ iidz(activator) {
 
 function_97eb71f0(activator) {
   if(isDefined(activator.var_8a022726)) {
-    activator.var_8a022726 sethintstring(#"");
+    activator.var_8a022726 setHintString(#"");
   }
 
   activator clientfield::set_player_uimodel("hudItems.depositing", 1);
@@ -188,7 +188,7 @@ function_7c5a1e82(activator, stateindex, var_9bdcfcd8) {
 
     if(var_22aec194.count < initialcount) {
       [[level._setteamscore]](activator.team, [[level._getteamscore]](activator.team) + scoreamount);
-      playsoundatposition(#"fly_cash_deposit", self.origin);
+      playSoundAtPosition(#"fly_cash_deposit", self.origin);
       globallogic_score::function_889ed975(activator, scoreamount, 0, 0);
       activator stats::function_bb7eedf0(#"score", scoreamount);
       activator stats::function_b7f80d87(#"score", scoreamount);

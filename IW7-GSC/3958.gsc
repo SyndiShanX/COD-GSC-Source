@@ -414,7 +414,7 @@ func_311E(var_0, var_1) {
         }
         var_8 = var_3.origin - self.origin;
         var_8 = (var_8[0], var_8[1], 0);
-        var_9 = vectornormalize(var_8);
+        var_9 = vectorNormalize(var_8);
 
         if(var_7 < 60) {
           var_7 = 60;
@@ -448,7 +448,7 @@ func_311E(var_0, var_1) {
               var_7 = var_11;
             }
 
-            var_9 = vectornormalize(var_13);
+            var_9 = vectorNormalize(var_13);
           }
         }
 
@@ -599,13 +599,13 @@ func_1164D() {
   var_0.origin = self.origin;
   scripts\cp\zombies\zombies_spawning::func_3115(var_0);
   self.ignoreall = 1;
-  var_1 = scripts\engine\utility::getstruct("brute_hide_org", "targetname");
-  self setorigin(var_1.origin, 1);
+  var_1 = scripts\engine\utility::getStruct("brute_hide_org", "targetname");
+  self setOrigin(var_1.origin, 1);
   self give_mp_super_weapon(self.origin);
   wait 3;
   var_2 = func_6CA4();
   scripts\cp\zombies\zombies_spawning::func_3115(var_2);
-  self setorigin(var_2.origin + (0, 0, 3), 1);
+  self setOrigin(var_2.origin + (0, 0, 3), 1);
   self.ignoreall = 0;
   wait 3;
 }

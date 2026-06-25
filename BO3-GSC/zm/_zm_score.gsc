@@ -261,7 +261,7 @@ function get_points_multiplier(player) {
 }
 
 function get_zombie_death_player_points() {
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     points = level.zombie_vars["zombie_score_kill_1player"];
   } else {
@@ -420,7 +420,7 @@ function add_to_team_score(points) {}
 function minus_to_team_score(points) {}
 
 function player_died_penalty() {
-  players = getplayers(self.team);
+  players = getPlayers(self.team);
   for(i = 0; i < players.size; i++) {
     if(players[i] != self && !players[i].is_zombie) {
       players[i] player_reduce_points("no_revive_penalty");

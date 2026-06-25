@@ -201,7 +201,7 @@ _id_2EFD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   }
 
   var_14 = var_13 - self.origin;
-  var_14 = vectornormalize((var_14[0], var_14[1], 0));
+  var_14 = vectorNormalize((var_14[0], var_14[1], 0));
   var_15 = vectordot(var_14, anglesToForward(self.angles));
 
   if(var_15 < 0) {

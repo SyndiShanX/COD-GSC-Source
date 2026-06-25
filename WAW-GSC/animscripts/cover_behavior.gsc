@@ -99,7 +99,7 @@ main(behaviorCallbacks) {
     }
 
     if(isDefined(anim.throwGrenadeAtPlayerASAP) && self.team == "axis") {
-      players = GetPlayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         if(isAlive(players[i])) {
           if(tryThrowingGrenade(players[i], 200)) {
@@ -260,7 +260,7 @@ suppressedBehavior(behaviorCallbacks) {
     }
 
     if(canThrowGrenade && isDefined(anim.throwGrenadeAtPlayerASAP) && self.team == "axis") {
-      players = GetPlayers();
+      players = getPlayers();
       for(i = 0; i < players.size; i++) {
         if(isAlive(players[i])) {
           if(tryThrowingGrenade(players[i], 200)) {

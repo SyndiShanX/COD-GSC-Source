@@ -86,7 +86,7 @@ func_8947(var_0) {
         self.powered_on = 1;
         self.portal_can_be_started = 1;
         turn_on_exit_portal_fx(0);
-        getent("center_portal", "targetname") setscriptablepartstate("model", "on");
+        getEnt("center_portal", "targetname") setscriptablepartstate("model", "on");
         continue;
       }
 
@@ -167,22 +167,22 @@ pap_timer_start() {
 }
 
 func_172F() {
-  var_0 = getent("fast_travel_tube_start", "targetname");
+  var_0 = getEnt("fast_travel_tube_start", "targetname");
   var_1 = anglesToForward(var_0.angles);
   var_2 = spawnfx(level._effect["vfx_zmb_portal_base_01"], var_0.origin + (0, 0, 15), var_1);
   triggerfx(var_2);
-  var_0 = getent("fast_travel_tube_end", "targetname");
+  var_0 = getEnt("fast_travel_tube_end", "targetname");
   var_1 = anglesToForward(var_0.angles);
   var_2 = spawnfx(level._effect["vfx_zmb_portal_centhub"], var_0.origin + (0, 0, 15), var_1);
   triggerfx(var_2);
 }
 
 func_172E() {
-  var_0 = getent("hidden_travel_tube_start", "targetname");
+  var_0 = getEnt("hidden_travel_tube_start", "targetname");
   var_1 = anglesToForward(var_0.angles);
   var_2 = spawnfx(level._effect["vfx_zmb_portal_centhub"], var_0.origin + (0, 0, 15), var_1);
   triggerfx(var_2);
-  var_0 = getent("hidden_travel_tube_end", "targetname");
+  var_0 = getEnt("hidden_travel_tube_end", "targetname");
   var_1 = anglesToForward(var_0.angles + (0, 180, 0));
   var_2 = spawnfx(level._effect["hidden_room_portal"], var_0.origin + (0, 0, 15), var_1);
   triggerfx(var_2);
@@ -412,8 +412,8 @@ is_in_pap_room(var_0) {
 
 move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 earthquakeforplayer(0.3, 0.2, var_0.origin, 200);
-  var_4 = getent(var_1, "targetname");
-  var_5 = getent(var_2, "targetname");
+  var_4 = getEnt(var_1, "targetname");
+  var_5 = getEnt(var_2, "targetname");
   var_0 cancelmantle();
   var_0.no_outline = 1;
   var_0.no_team_outlines = 1;
@@ -423,15 +423,15 @@ move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 scripts\cp\utility::adddamagemodifier("fast_travel", 0, 0);
   var_0 scripts\cp\utility::allow_player_ignore_me(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_6);
+  var_0 setOrigin(var_6);
   var_0 setplayerangles(var_4.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_8 = spawn("script_origin", var_6);
-  var_0 playerlinkto(var_8);
+  var_0 playerlinkTo(var_8);
   var_0 getweaponrankxpmultiplier();
   wait(0.1);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
-  var_8 moveto(var_7, 1);
+  var_8 moveTo(var_7, 1);
   wait(1);
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
@@ -448,7 +448,7 @@ move_through_tube(var_0, var_1, var_2, var_3) {
 
 func_B23A() {
   var_0 = 0;
-  var_1 = getent("center_portal", "targetname");
+  var_1 = getEnt("center_portal", "targetname");
   while(var_0 < 4) {
     level waittill("turn_on_portal_light", var_2);
     var_3 = undefined;
@@ -494,7 +494,7 @@ teleport_to_safe_spot(var_0) {
   var_0 playershow();
   var_0 unlink();
   var_0 dontinterpolate();
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
   var_0 setplayerangles(var_1.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();
@@ -585,15 +585,15 @@ func_15B6() {
 
 turn_on_exit_portal_fx(var_0) {
   if(var_0) {
-    getent("center_portal", "targetname") setscriptablepartstate("portal", "active");
+    getEnt("center_portal", "targetname") setscriptablepartstate("portal", "active");
     return;
   }
 
-  getent("center_portal", "targetname") setscriptablepartstate("portal", "powered_on");
+  getEnt("center_portal", "targetname") setscriptablepartstate("portal", "powered_on");
 }
 
 turn_on_room_exit_portal() {
-  var_0 = getent("hidden_room_portal", "targetname");
+  var_0 = getEnt("hidden_room_portal", "targetname");
   var_1 = anglesToForward(var_0.angles);
   var_2 = spawnfx(level._effect["vfx_zmb_portal_centhub"], var_0.origin, var_1);
   triggerfx(var_2);
@@ -602,7 +602,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(var_0) {
   var_0 makeusable();
-  var_0 sethintstring(&"CP_ZMB_INTERACTIONS_HIDDEN_LEAVE");
+  var_0 setHintString(&"CP_ZMB_INTERACTIONS_HIDDEN_LEAVE");
   var_0.portal_is_open = 1;
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -622,11 +622,11 @@ teleport_to_hidden_room() {
   scripts\cp\utility::adddamagemodifier("papRoom", 0, 0);
   self.is_off_grid = 1;
   self.disable_consumables = undefined;
-  var_0 = scripts\engine\utility::getstruct("hidden_room_spot", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hidden_room_spot", "targetname");
   self unlink();
   self dontinterpolate();
   scripts\cp\powers\coop_powers::power_enablepower();
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   self setplayerangles(var_0.angles);
   self playershow();
   level notify("hidden_room_portal_used");

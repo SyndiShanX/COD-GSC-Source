@@ -358,7 +358,7 @@ trophy_getbesttag(var_0) {
     var_6 = self gettagorigin(var_5);
     var_7 = self gettagangles(var_5);
     var_8 = anglesToForward(var_7);
-    var_9 = vectordot(vectornormalize(var_0 - var_6), var_8);
+    var_9 = vectordot(vectorNormalize(var_0 - var_6), var_8);
     if(var_10 == 0 || var_9 > var_2) {
       var_2 = var_9;
       var_3 = var_5;

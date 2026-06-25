@@ -210,7 +210,7 @@ function private function_9ffae104(entity) {
 
       if(entity isatgoal()) {
         var_bf3a521d = entity.attackable.origin - entity.origin;
-        var_bf3a521d = vectornormalize(var_bf3a521d);
+        var_bf3a521d = vectorNormalize(var_bf3a521d);
 
         if(vectordot(var_bf3a521d, anglesToForward(entity.angles)) < 0.99) {
           var_ae7100d7 = vectortoangles(var_bf3a521d);

@@ -249,7 +249,7 @@ function get_valid_powerup() {
 }
 
 function minigun_no_drop() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i].zombie_vars["zombie_powerup_minigun_on"] == 1) {
       return true;
@@ -272,11 +272,11 @@ function watch_for_drop() {
   level flag::wait_till("start_zombie_round_logic");
   level flag::wait_till("begin_spawning");
   wait(0.05);
-  players = getplayers();
+  players = getPlayers();
   score_to_drop = (players.size * (level.zombie_vars[("zombie_score_start_" + players.size) + "p"])) + level.zombie_vars["zombie_powerup_drop_increment"];
   while(true) {
     level flag::wait_till("zombie_drop_powerups");
-    players = getplayers();
+    players = getPlayers();
     curr_total_score = 0;
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i].score_total)) {
@@ -507,7 +507,7 @@ function powerup_setup(powerup_override, powerup_team, powerup_location, powerup
   }
   demo::bookmark("zm_powerup_dropped", gettime(), undefined, undefined, 1);
   if(isDefined(shouldplaysound) && shouldplaysound) {
-    playsoundatposition("zmb_spawn_powerup", self.origin);
+    playSoundAtPosition("zmb_spawn_powerup", self.origin);
   }
   if(isDefined(powerup_team)) {
     self.powerup_team = powerup_team;
@@ -545,11 +545,11 @@ function special_drop_setup() {
   }
   if(isDefined(powerup)) {
     playFX(level._effect["lightning_dog_spawn"], self.origin);
-    playsoundatposition("zmb_hellhound_prespawn", self.origin);
+    playSoundAtPosition("zmb_hellhound_prespawn", self.origin);
     wait(1.5);
-    playsoundatposition("zmb_hellhound_bolt", self.origin);
+    playSoundAtPosition("zmb_hellhound_bolt", self.origin);
     earthquake(0.5, 0.75, self.origin, 1000);
-    playsoundatposition("zmb_hellhound_spawn", self.origin);
+    playSoundAtPosition("zmb_hellhound_spawn", self.origin);
     self powerup_setup(powerup);
     self thread powerup_timeout();
     self thread powerup_wobble();
@@ -569,8 +569,8 @@ function powerup_zombie_grab(powerup_team) {
   self endon("powerup_grabbed");
   self endon("hacked");
   zombie_grab_trigger = spawn("trigger_radius", self.origin - vectorscale((0, 0, 1), 40), 9, 32, 72);
-  zombie_grab_trigger enablelinkto();
-  zombie_grab_trigger linkto(self);
+  zombie_grab_trigger enablelinkTo();
+  zombie_grab_trigger linkTo(self);
   zombie_grab_trigger setteamfortrigger(level.zombie_team);
   self thread powerup_zombie_grab_trigger_cleanup(zombie_grab_trigger);
   poi_dist = 300;
@@ -605,7 +605,7 @@ function powerup_zombie_grab(powerup_team) {
     }
     level thread zm_audio::sndannouncerplayvox(self.powerup_name);
     wait(0.1);
-    playsoundatposition("zmb_powerup_grabbed", self.origin);
+    playSoundAtPosition("zmb_powerup_grabbed", self.origin);
     self stoploopsound();
     self thread powerup_delete_delayed();
     self notify("powerup_grabbed");
@@ -628,7 +628,7 @@ function powerup_grab(powerup_team) {
       if(isDefined(level.powerup_grab_get_players_override)) {
         grabbers = [[level.powerup_grab_get_players_override]]();
       } else {
-        grabbers = getplayers();
+        grabbers = getPlayers();
       }
     }
     for(i = 0; i < grabbers.size; i++) {
@@ -712,7 +712,7 @@ function powerup_grab(powerup_team) {
         self.claimed = 1;
         self.power_up_grab_player = player;
         wait(0.1);
-        playsoundatposition("zmb_powerup_grabbed", self.origin);
+        playSoundAtPosition("zmb_powerup_grabbed", self.origin);
         self stoploopsound();
         self hide();
         if(self.powerup_name != "fire_sale") {
@@ -824,9 +824,9 @@ function powerup_wobble() {
     }
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     if(isDefined(self.worldgundw)) {
-      self.worldgundw rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+      self.worldgundw rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     }
     wait(randomfloat(waittime - 0.1));
   }
@@ -978,7 +978,7 @@ function time_remaining_on_point_doubler_powerup(player_team) {
     level.zombie_vars[player_team]["zombie_powerup_double_points_time"] = level.zombie_vars[player_team]["zombie_powerup_double_points_time"] - 0.05;
   }
   level.zombie_vars[player_team]["zombie_powerup_double_points_on"] = 0;
-  players = getplayers(player_team);
+  players = getPlayers(player_team);
   for(i = 0; i < players.size; i++) {
     players[i] playSound("zmb_points_loop_off");
   }
@@ -999,7 +999,7 @@ function check_for_rare_drop_override(pos) {
 }
 
 function tesla_powerup_active() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i].zombie_vars["zombie_powerup_tesla_on"]) {
       return true;
@@ -1063,7 +1063,7 @@ function powerup_move() {
     drag_vector = moveto - self.origin;
     range_squared = lengthsquared(drag_vector);
     if(range_squared > (distance * distance)) {
-      drag_vector = vectornormalize(drag_vector);
+      drag_vector = vectorNormalize(drag_vector);
       drag_vector = distance * drag_vector;
       moveto = self.origin + drag_vector;
     }
@@ -1144,7 +1144,7 @@ function time_remaining_on_powerup(player_team, str_powerup) {
     level.zombie_vars[player_team][str_index_time] = level.zombie_vars[player_team][str_index_time] - 0.05;
   }
   level.zombie_vars[player_team][str_index_on] = 0;
-  getplayers()[0] playsoundtoteam(str_sound_off, player_team);
+  getPlayers()[0] playsoundtoteam(str_sound_off, player_team);
   temp_ent stoploopsound(2);
   level.zombie_vars[player_team][str_index_time] = 30;
   temp_ent delete();

@@ -85,7 +85,7 @@ function function_7e0f72a5() {
     distsq = distancesquared(self.origin, result.origin);
 
     if(distsq < sqr(256)) {
-      dir = vectornormalize(self.origin - result.origin);
+      dir = vectorNormalize(self.origin - result.origin);
       impulse = dir + (0, 0, 10);
       impulse = vectorscale(dir, 60);
       self physicslaunch(self.origin, impulse);
@@ -106,7 +106,7 @@ function function_ed0bfdae() {
     distsq = distancesquared(self.origin, result.origin);
 
     if(distsq < sqr(72)) {
-      dir = vectornormalize(self.origin - result.origin);
+      dir = vectorNormalize(self.origin - result.origin);
       impulse = dir + (0, 0, 15);
       impulse = dir + (0, 0, 15);
       impulse = vectorscale(impulse, 5);
@@ -225,7 +225,7 @@ function function_f1ca69a7(model, var_639facc4, origin, angles, disconnect = 1) 
     hazard solid();
 
     if(disconnect) {
-      hazard disconnectpaths();
+      hazard disconnectPaths();
     }
 
     hazard enableaimassist();

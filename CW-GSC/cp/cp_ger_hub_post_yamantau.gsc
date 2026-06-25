@@ -28,7 +28,7 @@ function main(str_skipto, b_starting) {
   level thread namespace_31c67f6d::function_29279de1("post_yamantau");
   level thread namespace_31c67f6d::function_b0558ba2("5");
   s_player_start = struct::get("s_post_yamantau_player_start", "targetname");
-  level.player setorigin(s_player_start.origin);
+  level.player setOrigin(s_player_start.origin);
   level.player setplayerangles(s_player_start.angles);
   level thread function_f84afd22();
   scene::init("scene_hub_post_yamantau_dialog_park");
@@ -45,7 +45,7 @@ function function_f84afd22() {
 }
 
 function function_cfce0b24() {
-  clip = getent("clip_post_yamantau_briefing", "script_string");
+  clip = getEnt("clip_post_yamantau_briefing", "script_string");
   wait 46;
   clip delete();
   transient = savegame::function_6440b06b(#"transient");
@@ -323,7 +323,7 @@ function function_6b03a78e(str_skipto) {
   level thread function_81c3adaf();
   setlightingstate(2);
   level notify(#"eboard_ready");
-  clip = getent("clip_post_yamantau_briefing", "script_string");
+  clip = getEnt("clip_post_yamantau_briefing", "script_string");
 
   if(isDefined(clip)) {
     clip hide();

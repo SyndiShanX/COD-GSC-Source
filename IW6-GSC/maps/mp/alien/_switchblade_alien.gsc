@@ -16,7 +16,7 @@ init() {
   level.droneMissileSpawnArray = getEntArray("remoteMissileSpawn", "targetname");
 
   foreach(missileSpawn in level.droneMissileSpawnArray) {
-    missileSpawn.targetEnt = GetEnt(missileSpawn.target, "targetname");
+    missileSpawn.targetEnt = getEnt(missileSpawn.target, "targetname");
   }
 }
 
@@ -61,7 +61,7 @@ runDroneHive(player, rank, num_missiles, missile_name, altitude, baby_missile_na
 
   startPos = remoteMissileSpawn.origin;
   targetPos = player.origin;
-  vector = VectorNormalize(startPos - targetPos);
+  vector = vectorNormalize(startPos - targetPos);
   startPos = (vector * altitude) + targetPos;
 
   if(CONST_DRONE_HIVE_DEBUG) {
@@ -199,8 +199,8 @@ missileEyes(player, rocket, rank) {
     player thread delayedFOFOverlay();
   }
 
-  player CameraLinkTo(rocket, "tag_origin");
-  player ControlsLinkTo(rocket);
+  player CameralinkTo(rocket, "tag_origin");
+  player ControlslinkTo(rocket);
   player VisionSetMissilecamForPlayer("default", delayTime);
   player set_visionset_for_watching_players("default", delayTime, undefined, true);
   player VisionSetMissilecamForPlayer(game["thermal_vision_trinity"], 0.0);

@@ -22,7 +22,7 @@ function init() {
 }
 
 function function_cb5a4b1a() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 
@@ -77,7 +77,7 @@ function function_3c734339() {
   level endon(#"game_over");
   level flag::wait_till("start_zombie_round_logic");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 0);
   }
 }
@@ -129,14 +129,14 @@ function function_2c40648c(b_active = 1) {
 
 function function_26113358() {
   if(function_e840d5a5()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clientfield::set_to_player("" + #"music_underscore", 3);
     }
   }
 }
 
 function function_e2901362() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 }

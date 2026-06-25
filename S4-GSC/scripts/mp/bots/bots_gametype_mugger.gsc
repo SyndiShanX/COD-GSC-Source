@@ -217,7 +217,7 @@ _id_A2E3(var_0) {
 
     if(isDefined(var_2)) {
       var_3 = var_2.origin - var_1;
-      var_1 = var_1 + vectornormalize(var_3) * length(var_3) * 0.5;
+      var_1 = var_1 + vectorNormalize(var_3) * length(var_3) * 0.5;
     }
   }
 

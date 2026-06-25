@@ -86,7 +86,7 @@ function get_players_in_zone(zone_name, return_players) {
   zone = level.zones[zone_name];
   num_in_zone = 0;
   players_in_zone = [];
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < zone.volumes.size; i++) {
     for(j = 0; j < players.size; j++) {
       if(players[j] istouching(zone.volumes[i])) {
@@ -107,7 +107,7 @@ function any_player_in_zone(zone_name) {
   }
   zone = level.zones[zone_name];
   for(i = 0; i < zone.volumes.size; i++) {
-    players = getplayers();
+    players = getPlayers();
     for(j = 0; j < players.size; j++) {
       if(players[j] istouching(zone.volumes[i]) && !players[j].sessionstate == "spectator") {
         return true;
@@ -255,7 +255,7 @@ function zone_init(zone_name, zone_tag) {
       }
     }
     for(i = 0; i < box_locs.size; i++) {
-      chest_ent = getent(box_locs[i].script_noteworthy + "_zbarrier", "script_noteworthy");
+      chest_ent = getEnt(box_locs[i].script_noteworthy + "_zbarrier", "script_noteworthy");
       if(chest_ent entity_in_zone(zone_name, 1)) {
         if(!isDefined(zone.magic_boxes)) {
           zone.magic_boxes = [];

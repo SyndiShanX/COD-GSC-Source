@@ -216,10 +216,10 @@ function dobombrun(position, yaw, team) {
   plane.killcament util::deleteaftertime(2 * 3);
   plane.killcament.angles = (15, yaw, 0);
   plane.killcament.starttime = gettime();
-  plane.killcament linkto(plane);
+  plane.killcament linkTo(plane);
   start = (position[0], position[1], plane.origin[2]);
   impact = bulletTrace(start, start + (vectorscale((0, 0, -1), 100000)), 1, plane);
-  plane moveto(endpoint, (2 * 5) / 4, 0, 0);
+  plane moveTo(endpoint, (2 * 5) / 4, 0, 0);
   plane.killcament thread followbomb(plane, position, direction, impact, player);
   wait(2 / 2);
   if(isDefined(self)) {
@@ -233,12 +233,12 @@ function followbomb(plane, position, direction, impact, player) {
   player endon("emp_jammed");
   wait((2 * 5) / 12);
   plane.killcament unlink();
-  plane.killcament moveto((impact["position"] + vectorscale((0, 0, 1), 1000)) + (vectorscale(direction, -600)), 0.8, 0, 0.2);
+  plane.killcament moveTo((impact["position"] + vectorscale((0, 0, 1), 1000)) + (vectorscale(direction, -600)), 0.8, 0, 0.2);
 }
 
 function lookatexplosion(bomb) {
   while(isDefined(self) && isDefined(bomb)) {
-    angles = vectortoangles(vectornormalize(bomb.origin - self.origin));
+    angles = vectortoangles(vectorNormalize(bomb.origin - self.origin));
     self.angles = (max(angles[0], 15), angles[1], angles[2]);
     wait(0.05);
   }
@@ -272,7 +272,7 @@ function dropbomb(plane, bombposition) {
   if(!isDefined(plane.owner)) {
     return;
   }
-  targets = getplayers();
+  targets = getPlayers();
   foreach(target in targets) {
     if(plane.owner util::isenemyplayer(target) && distance2dsquared(target.origin, bombposition) < 250000) {
       if(bullettracepassed((target.origin[0], target.origin[1], plane.origin[2]), target.origin, 0, plane)) {

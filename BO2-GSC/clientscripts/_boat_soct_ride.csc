@@ -46,7 +46,7 @@ driving_anims() {
     if(!isDefined(level.vh_player_soct.steering_wheel)) {
       level.vh_player_soct.steering_wheel = spawn(player getlocalclientnumber(), player getorigin() + vectorscale((0, 0, -1), 1000.0), "script_model");
       level.vh_player_soct.steering_wheel setModel("veh_t6_mil_soc_t_steeringwheel");
-      level.vh_player_soct.steering_wheel linkto(level.vh_player_soct.viewarms, "tag_weapon");
+      level.vh_player_soct.steering_wheel linkTo(level.vh_player_soct.viewarms, "tag_weapon");
     }
 
     self thread steering_loop(level.vh_player_soct.viewarms);
@@ -75,7 +75,7 @@ steering_loop(viewarms) {
   wait 0.05;
   viewarms useanimtree(#animtree);
   viewarms setanim(viewarms_anim, 1, 0, 0);
-  viewarms linkto(self, "tag_driver", (-20, -15, -9));
+  viewarms linkTo(self, "tag_driver", (-20, -15, -9));
   time = 0.5;
   max_delta_t = 0.00375;
 
@@ -176,16 +176,16 @@ update_rumble() {
     vr = abs(self getspeed() / self getmaxspeed());
 
     if(vr < 0.1) {
-      level.localplayers[0] playrumbleonentity(0, "pullout_small");
+      level.localplayers[0] playRumbleOnEntity(0, "pullout_small");
       wait 0.3;
     } else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
       level.localplayers[0] earthquake(0.1, 0.1, self.origin, 200);
-      level.localplayers[0] playrumbleonentity(0, "pullout_small");
+      level.localplayers[0] playRumbleOnEntity(0, "pullout_small");
       wait 0.1;
     } else if(vr > 0.8) {
       time = randomfloatrange(0.15, 0.2);
       level.localplayers[0] earthquake(randomfloatrange(0.1, 0.15), time, self.origin, 200);
-      level.localplayers[0] playrumbleonentity(0, "pullout_small");
+      level.localplayers[0] playRumbleOnEntity(0, "pullout_small");
       wait(time);
     } else
       wait 0.1;

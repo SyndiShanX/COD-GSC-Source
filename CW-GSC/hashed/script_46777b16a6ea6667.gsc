@@ -127,7 +127,7 @@ function function_d48ae962() {
 
         while(shots && isDefined(self.var_c4e19d3) && namespace_ec06fe4a::function_a8975c67()) {
           shots--;
-          fwd = vectorscale(vectornormalize(anglesToForward(self.angles)), 20);
+          fwd = vectorscale(vectorNormalize(anglesToForward(self.angles)), 20);
           start = self.origin + fwd + (0, 0, 20);
           dest = self.var_c4e19d3.origin + (randomintrange(-15, 15), randomintrange(-15, 15), 48);
           magicbullet(weapon, start, dest, self);
@@ -175,7 +175,7 @@ function private istargetvalid(target) {
 }
 
 function private gettarget() {
-  targets = getplayers();
+  targets = getPlayers();
   leasthunted = targets[0];
 
   for(i = 0; i < targets.size; i++) {
@@ -231,7 +231,7 @@ function private function_776e45e5() {
   self waittilltimeout(10, #"reached_end_node");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     var_3ada9d08 = 0;
 
     foreach(player in players) {

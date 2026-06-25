@@ -14,7 +14,7 @@ vfxBatCaveWaitInit(triggername, exploderID, audioAnim, pos, emptyRoomCooldown) {
 
   level endon("game_ended");
 
-  trigger = GetEnt(triggername, "targetname");
+  trigger = getEnt(triggername, "targetname");
   if(isDefined(trigger)) {
     trigger childthread vfxBatCaveTrigger(exploderID, audioAnim, pos);
     trigger childthread vfxBatCaveWatchForEmpty(emptyRoomCoolDown);
@@ -89,7 +89,7 @@ vfxBatsFly(exploderID, audioAnim, pos) {
     soundrig setModel("vulture_circle_rig");
     soundrig ScriptModelPlayAnim(audioAnim);
     dummy = spawn("script_model", soundrig GetTagOrigin("tag_attach"));
-    dummy LinkTo(soundrig, "tag_attach");
+    dummy linkTo(soundrig, "tag_attach");
     wait(0.1);
     dummy PlaySoundOnMovingEnt("scn_mp_swamp_bat_cave_big");
   }

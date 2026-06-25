@@ -109,13 +109,13 @@ function giant_robot_initial_spawns() {
   level.a_giant_robots = [];
   for(i = 0; i < 3; i++) {
     level.gr_foot_hatch_closed[i] = 1;
-    trig_stomp_kill_right = getent("trig_stomp_kill_right_" + i, "targetname");
-    trig_stomp_kill_left = getent("trig_stomp_kill_left_" + i, "targetname");
-    trig_stomp_kill_right enablelinkto();
-    trig_stomp_kill_left enablelinkto();
-    clip_foot_right = getent("clip_foot_right_" + i, "targetname");
-    clip_foot_left = getent("clip_foot_left_" + i, "targetname");
-    ai = getent("giant_robot_" + i, "targetname");
+    trig_stomp_kill_right = getEnt("trig_stomp_kill_right_" + i, "targetname");
+    trig_stomp_kill_left = getEnt("trig_stomp_kill_left_" + i, "targetname");
+    trig_stomp_kill_right enablelinkTo();
+    trig_stomp_kill_left enablelinkTo();
+    clip_foot_right = getEnt("clip_foot_right_" + i, "targetname");
+    clip_foot_left = getEnt("clip_foot_left_" + i, "targetname");
+    ai = getEnt("giant_robot_" + i, "targetname");
     ai setignorepauseworld(1);
     ai.v_start_origin = ai.origin;
     ai.is_giant_robot = 1;
@@ -133,9 +133,9 @@ function giant_robot_initial_spawns() {
     trig_stomp_kill_left.origin = tag_left_foot + (0, 0, n_offset);
     trig_stomp_kill_left.angles = ai gettagangles("TAG_ATTACH_HATCH_LE");
     wait(0.1);
-    trig_stomp_kill_right linkto(ai, "tag_attach_hatch_ri", (0, 0, n_offset));
+    trig_stomp_kill_right linkTo(ai, "tag_attach_hatch_ri", (0, 0, n_offset));
     util::wait_network_frame();
-    trig_stomp_kill_left linkto(ai, "tag_attach_hatch_le", (0, 0, n_offset));
+    trig_stomp_kill_left linkTo(ai, "tag_attach_hatch_le", (0, 0, n_offset));
     util::wait_network_frame();
     ai.trig_stomp_kill_right = trig_stomp_kill_right;
     ai.trig_stomp_kill_left = trig_stomp_kill_left;
@@ -144,9 +144,9 @@ function giant_robot_initial_spawns() {
     clip_foot_right.angles = ai gettagangles("TAG_ATTACH_HATCH_RI");
     clip_foot_left.angles = ai gettagangles("TAG_ATTACH_HATCH_LE");
     wait(0.1);
-    clip_foot_right linkto(ai, "tag_attach_hatch_ri", (0, 0, 0));
+    clip_foot_right linkTo(ai, "tag_attach_hatch_ri", (0, 0, 0));
     util::wait_network_frame();
-    clip_foot_left linkto(ai, "tag_attach_hatch_le", (0, 0, 0));
+    clip_foot_left linkTo(ai, "tag_attach_hatch_le", (0, 0, 0));
     util::wait_network_frame();
     ai.clip_foot_right = clip_foot_right;
     ai.clip_foot_left = clip_foot_left;
@@ -158,7 +158,7 @@ function giant_robot_initial_spawns() {
     ai.ignoreme = 1;
     ai.ignore_game_over_death = 1;
     ai setCanDamage(0);
-    ai setplayercollision(1);
+    ai setPlayerCollision(1);
     ai setforcenocull();
     ai clientfield::set("register_giant_robot", 1);
     ai ghost();
@@ -230,14 +230,14 @@ function robot_cycling() {
 }
 
 function giant_robot_intro_walk(n_robot_id) {
-  ai = getent("giant_robot_" + n_robot_id, "targetname");
+  ai = getEnt("giant_robot_" + n_robot_id, "targetname");
   ai attach("veh_t7_zhd_robot_foot_hatch", "TAG_ATTACH_HATCH_LE");
   ai attach("veh_t7_zhd_robot_foot_hatch", "TAG_ATTACH_HATCH_RI");
   ai thread giant_robot_think(ai.trig_stomp_kill_right, ai.trig_stomp_kill_left, ai.clip_foot_right, ai.clip_foot_left, undefined, 3);
-  playsoundatposition("evt_footfall_robot_intro", (0, 0, 0));
+  playSoundAtPosition("evt_footfall_robot_intro", (0, 0, 0));
   wait(0.5);
   exploder::exploder("fxexp_420");
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     player clientfield::set_to_player("giant_robot_rumble_and_shake", 3);
     player thread turn_clientside_rumble_off();
@@ -247,13 +247,13 @@ function giant_robot_intro_walk(n_robot_id) {
 }
 
 function giant_robot_start_walk(n_robot_id, b_has_hatch = 1) {
-  ai = getent("giant_robot_" + n_robot_id, "targetname");
+  ai = getEnt("giant_robot_" + n_robot_id, "targetname");
   level.gr_foot_hatch_closed[n_robot_id] = 1;
   ai.b_has_hatch = b_has_hatch;
   ai flag::clear("kill_trigger_active");
   ai flag::clear("robot_head_entered");
   if(isDefined(ai.b_has_hatch) && ai.b_has_hatch) {
-    m_sole = getent("target_sole_" + n_robot_id, "targetname");
+    m_sole = getEnt("target_sole_" + n_robot_id, "targetname");
   }
   if(isDefined(m_sole) && (isDefined(ai.b_has_hatch) && ai.b_has_hatch)) {
     m_sole setCanDamage(1);
@@ -287,7 +287,7 @@ function giant_robot_start_walk(n_robot_id, b_has_hatch = 1) {
     m_sole.origin = n_sole_origin;
     m_sole.angles = v_sole_angles;
     wait(0.1);
-    m_sole linkto(ai, str_sole_tag, (0, 0, 0));
+    m_sole linkTo(ai, str_sole_tag, (0, 0, 0));
     m_sole show();
   }
   if(!(isDefined(ai.b_has_hatch) && ai.b_has_hatch)) {
@@ -334,7 +334,7 @@ function giant_robot_think(trig_stomp_kill_right, trig_stomp_kill_left, clip_foo
   if(isDefined(m_sole) && level.gr_foot_hatch_closed[n_robot_id] && (isDefined(self.b_has_hatch) && self.b_has_hatch)) {
     self thread giant_robot_foot_waittill_sole_shot(m_sole);
   }
-  a_players = getplayers();
+  a_players = getPlayers();
   if(n_robot_id != 3 && (!(isDefined(level.giant_robot_discovered) && level.giant_robot_discovered))) {
     foreach(player in a_players) {
       player thread giant_robot_discovered_vo(self);
@@ -351,7 +351,7 @@ function giant_robot_think(trig_stomp_kill_right, trig_stomp_kill_left, clip_foo
   }
   self waittill("giant_robot_stop");
   self.is_walking = 0;
-  self stopanimscripted();
+  self stopanimScripted();
   self.origin = self.v_start_origin;
   level clientfield::set("play_foot_open_fx_robot_" + self.giant_robot_id, 0);
   self clientfield::set("light_foot_fx_robot", 0);
@@ -366,7 +366,7 @@ function sole_cleanup(m_sole) {
   util::wait_network_frame();
   m_sole clearanim(%generic::root, 0);
   util::wait_network_frame();
-  m_sole animscripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_close");
+  m_sole animScripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_close");
 }
 
 function giant_robot_foot_waittill_sole_shot(m_sole) {
@@ -385,10 +385,10 @@ function giant_robot_foot_waittill_sole_shot(m_sole) {
   m_sole.health = 99999;
   level.gr_foot_hatch_closed[self.giant_robot_id] = 0;
   level clientfield::set("play_foot_open_fx_robot_" + self.giant_robot_id, n_foot);
-  m_sole animscripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_open");
+  m_sole animScripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_open");
   n_time = getanimlength(%generic::ai_zm_dlc5_zombie_giant_robot_hatch_open);
   wait(n_time);
-  m_sole animscripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_open_idle");
+  m_sole animScripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_open_idle");
 }
 
 function giant_robot_close_head_entrance(foot_side) {
@@ -396,9 +396,9 @@ function giant_robot_close_head_entrance(foot_side) {
   wait(5);
   level.gr_foot_hatch_closed[self.giant_robot_id] = 1;
   level clientfield::set("play_foot_open_fx_robot_" + self.giant_robot_id, 0);
-  m_sole = getent("target_sole_" + self.giant_robot_id, "targetname");
+  m_sole = getEnt("target_sole_" + self.giant_robot_id, "targetname");
   if(isDefined(m_sole)) {
-    m_sole animscripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_close");
+    m_sole animScripted("hatch_anim", m_sole.origin, m_sole.angles, "ai_zm_dlc5_zombie_giant_robot_hatch_close");
     self clientfield::set("light_foot_fx_robot", 0);
   }
 }
@@ -528,7 +528,7 @@ function monitor_shadow_notetracks(foot_side) {
 }
 
 function rumble_and_shake(robot) {
-  a_players = getplayers();
+  a_players = getPlayers();
   wait(0.2);
   foreach(player in a_players) {
     if(zombie_utility::is_player_valid(player)) {
@@ -636,7 +636,7 @@ function activate_kill_trigger(robot, foot_side) {
         m_box notify("robot_foot_stomp");
       }
     }
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(zombie_utility::is_player_valid(players[i], 0, 1)) {
         if(!players[i] istouching(self)) {
@@ -813,14 +813,14 @@ function toggle_tank_bunker_collision() {
 }
 
 function handle_wind_tunnel_bunker_collision() {
-  e_collision = getent("clip_foot_bottom_wind", "targetname");
+  e_collision = getEnt("clip_foot_bottom_wind", "targetname");
   e_collision notsolid();
   e_collision connectpaths();
   while(true) {
     level waittill("wind_bunker_collision_on");
     wait(0.1);
     e_collision solid();
-    e_collision disconnectpaths();
+    e_collision disconnectPaths();
     level waittill("wind_bunker_collision_off");
     e_collision notsolid();
     e_collision connectpaths();
@@ -828,14 +828,14 @@ function handle_wind_tunnel_bunker_collision() {
 }
 
 function handle_tank_bunker_collision() {
-  e_collision = getent("clip_foot_bottom_tank", "targetname");
+  e_collision = getEnt("clip_foot_bottom_tank", "targetname");
   e_collision notsolid();
   e_collision connectpaths();
   while(true) {
     level waittill("tank_bunker_collision_on");
     wait(0.1);
     e_collision solid();
-    e_collision disconnectpaths();
+    e_collision disconnectPaths();
     level waittill("tank_bunker_collision_off");
     e_collision notsolid();
     e_collision connectpaths();
@@ -921,7 +921,7 @@ function gr_head_exit_trigger_start(s_origin) {
 function gr_head_eject_trigger_visibility(player) {
   b_is_invis = !(isDefined(self.stub.is_available) && self.stub.is_available);
   self setinvisibletoplayer(player, b_is_invis);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
   return !b_is_invis;
 }
 
@@ -958,7 +958,7 @@ function init_player_eject_logic(s_unitrigger, player, b_timeout = 0) {
   }
   tube_clone = player zm_clone::spawn_player_clone(player, player.origin, undefined);
   player thread giant_robot_eject_disconnect_watcher(m_linkpoint, tube_clone);
-  tube_clone linkto(m_linkpoint);
+  tube_clone linkTo(m_linkpoint);
   tube_clone.ignoreme = 1;
   tube_clone show();
   tube_clone detachall();
@@ -999,17 +999,17 @@ function giant_robot_head_player_eject_thread(m_linkpoint, str_tube, b_timeout =
   self playsoundtoplayer("zmb_giantrobot_exit", self);
   self notify("end_in_tube_rumble");
   self thread exit_gr_manual_looping_rumble();
-  m_linkpoint moveto(m_linkpoint.origin + vectorscale((0, 0, 1), 2000), 2.5);
+  m_linkpoint moveTo(m_linkpoint.origin + vectorscale((0, 0, 1), 2000), 2.5);
   self thread hud::fade_to_black_for_x_sec(0, 2, 0.5, 0, "white");
   wait(1);
-  m_linkpoint moveto(self.teleport_initial_origin + vectorscale((0, 0, 1), 3000), 0.05);
+  m_linkpoint moveTo(self.teleport_initial_origin + vectorscale((0, 0, 1), 3000), 0.05);
   self thread scene::play("cin_zm_gen_player_fall_loop", self);
   self setinvisibletoall();
   self setvisibletoplayer(self);
   wait(1);
   self playsoundtoplayer("zmb_giantrobot_fall", self);
   self playerlinktodelta(m_linkpoint, "tag_origin", 1, 180, 180, 20, 20);
-  m_linkpoint moveto(self.teleport_initial_origin, 3, 1);
+  m_linkpoint moveTo(self.teleport_initial_origin, 3, 1);
   m_linkpoint thread play_gr_eject_impact_player_fx(self);
   m_linkpoint notify("start_gr_eject_fall_to_earth");
   self thread player_screams_while_falling();
@@ -1113,7 +1113,7 @@ function gr_eject_landing_rumble() {
 function gr_eject_landing_rumble_on_position() {
   self endon("death");
   self endon("disconnect");
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(player == self) {
       continue;
@@ -1134,7 +1134,7 @@ function teleport_player_to_gr_footprint_safe_spot() {
     a_s_orgs = struct::get_array("tank_platform_safe_spots", "targetname");
     foreach(struct in a_s_orgs) {
       if(!positionwouldtelefrag(struct.origin)) {
-        self setorigin(struct.origin);
+        self setOrigin(struct.origin);
         break;
       }
     }
@@ -1159,7 +1159,7 @@ function teleport_player_to_gr_footprint_safe_spot() {
     v_trace_start = v_origin + vectorscale((0, 0, 1), 100);
     v_final = playerphysicstrace(v_trace_start, v_origin);
     if(!positionwouldtelefrag(v_final)) {
-      self setorigin(v_final);
+      self setOrigin(v_final);
       break;
     }
   }
@@ -1182,7 +1182,7 @@ function giant_robot_head_teleport_timeout(n_robot_id) {
   level thread play_timeout_warning_vo(n_robot_id);
   zm_tomb_vo::reset_maxis_audiolog_unitrigger(n_robot_id);
   level clientfield::set("eject_warning_fx_robot_" + n_robot_id, 1);
-  a_players = getplayers();
+  a_players = getPlayers();
   a_players[0] clientfield::set("all_tubes_play_eject_steam_fx", 1);
   level waittill("timeout_warning_vo_complete_" + n_robot_id);
   a_gr_head_triggers = struct::get_array("giant_robot_head_exit_trigger", "script_noteworthy");
@@ -1195,7 +1195,7 @@ function giant_robot_head_teleport_timeout(n_robot_id) {
       }
     }
   }
-  a_players = getplayers();
+  a_players = getPlayers();
   a_m_linkspots = [];
   foreach(player in a_players) {
     if(isDefined(player.in_giant_robot_head) && player.in_giant_robot_head == n_robot_id) {
@@ -1233,7 +1233,7 @@ function giant_robot_head_teleport_timeout(n_robot_id) {
   wait(10);
   zm_tomb_vo::restart_maxis_audiolog_unitrigger(n_robot_id);
   level clientfield::set("eject_warning_fx_robot_" + n_robot_id, 0);
-  a_players = getplayers();
+  a_players = getPlayers();
   a_players[0] clientfield::set("all_tubes_play_eject_steam_fx", 0);
   foreach(trigger in a_shutdown_triggers) {
     if(trigger.script_int == n_robot_id) {
@@ -1275,7 +1275,7 @@ function move_player_to_eject_tube(m_linkspot, s_tube, trigger) {
   n_speed = 500;
   n_dist = distance(m_linkspot.origin, s_tube.origin);
   n_time = n_dist / n_speed;
-  m_linkspot moveto(s_tube.origin, n_time);
+  m_linkspot moveTo(s_tube.origin, n_time);
   m_linkspot waittill("movedone");
   m_linkspot delete();
   level thread init_player_eject_logic(trigger.unitrigger_stub, self, 1);
@@ -1340,7 +1340,7 @@ function spawn_model(model_name, origin = (0, 0, 0), angles, n_spawnflags = 0) {
 
 function count_players_in_gr_head(n_robot_id) {
   n_players_in_robot = 0;
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(isDefined(player.in_giant_robot_head) && player.in_giant_robot_head == n_robot_id) {
       n_players_in_robot++;
@@ -1352,12 +1352,12 @@ function count_players_in_gr_head(n_robot_id) {
 function setup_giant_robots_intermission() {
   level waittill("intermission");
   for(i = 0; i < 3; i++) {
-    ai_giant_robot = getent("giant_robot_" + i, "targetname");
+    ai_giant_robot = getEnt("giant_robot_" + i, "targetname");
     if(!isDefined(ai_giant_robot)) {
       continue;
     }
     ai_giant_robot ghost();
-    ai_giant_robot stopanimscripted(0.05);
+    ai_giant_robot stopanimScripted(0.05);
     ai_giant_robot notify("giant_robot_stop");
     if(i == 2) {
       util::wait_network_frame();
@@ -1449,7 +1449,7 @@ function start_robot_stomp_warning_vo(foot_side) {
   }
   a_s_footprint = util::get_array_of_closest(v_origin, a_s_footprint);
   s_footprint = a_s_footprint[0];
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(distance2dsquared(player.origin, s_footprint.origin) < 160000) {
       player thread play_robot_stomp_warning_vo();
@@ -1458,7 +1458,7 @@ function start_robot_stomp_warning_vo(foot_side) {
 }
 
 function play_robot_stomp_warning_vo() {
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(player == self) {
       continue;
@@ -1482,7 +1482,7 @@ function zombie_stomped_by_gr_vo(foot_side) {
     str_tag = "TAG_ATTACH_HATCH_LE";
   }
   v_origin = self gettagorigin(str_tag);
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(distancesquared(v_origin, player.origin) < 640000) {
       if(player zm_utility::is_player_looking_at(v_origin, 0.25)) {
@@ -1513,7 +1513,7 @@ function play_timeout_warning_vo(n_robot_id) {
   e_vo_origin = spawn_model("tag_origin", s_origin.origin);
   e_vo_origin playsoundwithnotify("vox_maxi_purge_robot_0", "vox_maxi_purge_robot_0_done");
   e_vo_origin waittill("vox_maxi_purge_robot_0_done");
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     if(isDefined(player.in_giant_robot_head) && player.in_giant_robot_head == n_robot_id) {
       if(!(isDefined(player.giant_robot_transition) && player.giant_robot_transition)) {
@@ -1552,7 +1552,7 @@ function footprint_check_for_nearby_players(ai_giant_robot) {
   level endon("footprint_warning_vo");
   ai_giant_robot endon("giant_robot_stop");
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     foreach(player in a_players) {
       if(distance2dsquared(player.origin, self.origin) < 90000) {
         if(distance2dsquared(player.origin, ai_giant_robot.origin) < 16000000) {

@@ -706,11 +706,11 @@ function player_scene_skip_completed(localclientnum, oldval, newval, bnewent, bi
 }
 
 function get_existing_ent(clientnum, str_name) {
-  e = getent(clientnum, str_name, "animname");
+  e = getEnt(clientnum, str_name, "animname");
   if(!isDefined(e)) {
-    e = getent(clientnum, str_name, "script_animname");
+    e = getEnt(clientnum, str_name, "script_animname");
     if(!isDefined(e)) {
-      e = getent(clientnum, str_name, "targetname");
+      e = getEnt(clientnum, str_name, "targetname");
       if(!isDefined(e)) {
         e = struct::get(str_name, "targetname");
       }

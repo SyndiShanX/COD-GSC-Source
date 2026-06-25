@@ -67,7 +67,7 @@ section_hint_string_init() {
 main() {
   maps\_utility::autosave_by_name("ambush");
   thread break_ambush_glass();
-  var_0 = common_scripts\utility::getstruct("ambush_anim_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("ambush_anim_node", "script_noteworthy");
   level thread maps\factory_anim::ambush_cables(var_0);
   level thread ambush_dialogue();
   thread maps\factory_rooftop::rooftop_heli();
@@ -115,7 +115,7 @@ ambush_setup() {
     var_10 hide();
   }
 
-  var_12 = getent("ambush_breach_player_pda", "targetname");
+  var_12 = getEnt("ambush_breach_player_pda", "targetname");
   var_12 hide();
   maps\_utility::set_custom_gameskill_func(::factory_ambush_grenade_params);
   var_13 = getEntArray("ambush_window_mantle", "targetname");
@@ -140,7 +140,7 @@ ambush_setup() {
 
   setlasermaterial("fac_gfx_laser", "fac_gfx_laser_light");
   maps\factory_anim::setup_smoke_archetype();
-  var_21 = getent("ambush_smoke_volume", "targetname");
+  var_21 = getEnt("ambush_smoke_volume", "targetname");
   maps\_utility::array_spawn_function_targetname("ambush_groundtroops_01", ::enemy_smoke_reaction, var_21);
   maps\_utility::array_spawn_function_targetname("ambush_groundtroops_02", ::enemy_smoke_reaction, var_21);
   maps\_utility::array_spawn_function_noteworthy("ambush_fastropers", ::enemy_smoke_reaction, var_21);
@@ -152,7 +152,7 @@ ambush_setup() {
 
 ambush_dialogue() {
   common_scripts\utility::flag_wait("start_ambush_moment");
-  var_0 = getent("ambush_office_volume", "targetname");
+  var_0 = getEnt("ambush_office_volume", "targetname");
 
   while(!level.squad["ALLY_ALPHA"] istouching(var_0)) {
     wait 0.2;
@@ -328,9 +328,9 @@ ambush_moment_logic() {
 setup_computer_use_hint() {
   common_scripts\utility::flag_wait("enable_ambush_use");
   level notify("show_ambush_use_hint");
-  var_0 = getent("ambush_console_use", "targetname");
-  var_0 usetriggerrequirelookat();
-  var_0 sethintstring(&"FACTORY_HINT_AMBUSH_TRIGGER");
+  var_0 = getEnt("ambush_console_use", "targetname");
+  var_0 useTriggerRequireLookAt();
+  var_0 setHintString(&"FACTORY_HINT_AMBUSH_TRIGGER");
   var_0 common_scripts\utility::trigger_off();
   var_0 thread ambush_use_loop();
 
@@ -354,8 +354,8 @@ setup_computer_use_hint() {
 
 ambush_use_loop(var_0) {
   var_1 = 0;
-  var_2 = getent("ambush_use_volume", "targetname");
-  var_3 = getent("ambush_office_volume", "targetname");
+  var_2 = getEnt("ambush_use_volume", "targetname");
+  var_3 = getEnt("ambush_office_volume", "targetname");
 
   while(isDefined(self)) {
     if(level.player istouching(var_2) && !var_1) {
@@ -405,7 +405,7 @@ ambush_slowmo() {
   maps\_utility::slowmo_setspeed_slow(0.15);
   maps\_utility::slowmo_setlerptime_in(0.2);
   thread maps\_utility::slowmo_lerp_in();
-  level.player playrumbleonentity("artillery_rumble");
+  level.player playRumbleOnEntity("artillery_rumble");
   wait 0.1;
   thread maps\_utility::vision_set_fog_changes("factory_ambush_breach_explosion_2", 0.1);
   wait 0.15;
@@ -427,7 +427,7 @@ ambush_slowmo() {
 
 breach_door() {
   level waittill("ambush_start_fx");
-  var_0 = getent("ambush_breach_door_connector", "targetname");
+  var_0 = getEnt("ambush_breach_door_connector", "targetname");
   var_0 connectpaths();
   var_0 notsolid();
   var_0 delete();
@@ -465,7 +465,7 @@ break_ambush_glass() {
 ambush_door_breacher() {
   level waittill("ambush_door_breached");
   wait 0.45;
-  var_0 = getent("door_breach_guy", "targetname");
+  var_0 = getEnt("door_breach_guy", "targetname");
   var_1 = var_0 maps\_utility::spawn_ai();
 
   if(!maps\_utility::spawn_failed(var_1)) {
@@ -526,7 +526,7 @@ ambush_fastropers_01() {
 }
 
 ambush_fastrope(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = getent(var_0, "targetname");
+  var_5 = getEnt(var_0, "targetname");
   var_6 = var_5 maps\_utility::spawn_ai(1, 0);
 
   if(maps\_utility::spawn_failed(var_6)) {
@@ -614,7 +614,7 @@ thermal_battle_logic() {
   common_scripts\utility::flag_wait("walking_cough_guy_done");
 
   foreach(var_1 in level.squad) {
-    var_1 stopanimscripted();
+    var_1 stopanimScripted();
     var_1 maps\factory_util::enable_awareness();
     var_1 maps\_utility::enable_ai_color();
     var_1.usechokepoints = 1;
@@ -633,7 +633,7 @@ thermal_battle_logic() {
   thread ambush_allies_move_down_lanes();
   wait 5;
   common_scripts\utility::flag_wait_any("ambush_progress_flag_1", "ambush_groundtroops_02_clear");
-  var_3 = getent("assembly_lanes_backstab_prevention", "targetname");
+  var_3 = getEnt("assembly_lanes_backstab_prevention", "targetname");
   badplace_brush("assembly_lane_backstab_preventer", 0, var_3, "axis");
   wait 3.0;
   thread ambush_cleanup_left_room();
@@ -693,7 +693,7 @@ safety_to_prevent_rushing() {
     if(isDefined(var_2) && isalive(var_2)) {
       level.player dodamage(30, var_2.origin, var_2, var_2, "MOD_RIFLE_BULLET");
     } else {
-      var_3 = getent("ambush_fastroper_mid_5_node", "targetname");
+      var_3 = getEnt("ambush_fastroper_mid_5_node", "targetname");
       level.player dodamage(30, var_3.origin, undefined, undefined, "MOD_RIFLE_BULLET");
     }
 
@@ -768,7 +768,7 @@ ambush_allies_move_down_lanes() {
 ambush_set_lower_back_clear() {
   level endon("ambush_lower_back_clear");
   level endon("thermal_battle_clear");
-  var_0 = getent("ambush_back_corner_lower", "targetname");
+  var_0 = getEnt("ambush_back_corner_lower", "targetname");
   var_1 = [];
 
   for(;;) {
@@ -800,7 +800,7 @@ ambush_allies_move_up_stairs() {
 }
 
 ambush_groundtroops_02_fallback() {
-  var_0 = getent("ambush_groundtroops_02_cleanup_a", "targetname");
+  var_0 = getEnt("ambush_groundtroops_02_cleanup_a", "targetname");
   var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
   thread maps\factory_util::safe_set_goal_volume(var_1, "ambush_groundtroops_02_cleanup_b");
 }
@@ -811,7 +811,7 @@ ambush_wave_03_killcounter() {
   maps\_utility::waittill_aigroupcount("ambush_wave_035", 2);
   maps\_utility::waittill_aigroupcount("ambush_wave_03", 1);
   maps\factory_util::safe_trigger_by_targetname("ambush_groundtroops_03_killspawner");
-  var_0 = getent("ambush_back_corner_volume", "targetname");
+  var_0 = getEnt("ambush_back_corner_volume", "targetname");
   var_1 = var_0 maps\_utility::get_ai_touching_volume("axis");
   common_scripts\utility::array_thread(var_1, maps\factory_util::playerseek);
   wait 2.0;
@@ -843,7 +843,7 @@ ambush_thermal_off_flashbangs() {
   var_0 = getEntArray("flash_node_start", "targetname");
 
   foreach(var_4, var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
+    var_3 = getEnt(var_2.target, "targetname");
     thread wait_and_flashbang(var_2, var_3);
   }
 
@@ -891,7 +891,7 @@ ambush_riotshield_smoke() {
 
   foreach(var_3 in var_0) {
     var_4 = var_3 maps\_utility::spawn_ai(1);
-    var_4.destination = getent(var_3.target, "targetname");
+    var_4.destination = getEnt(var_3.target, "targetname");
     var_4.health = 100;
     var_1[var_1.size] = var_4;
   }
@@ -1022,8 +1022,8 @@ thermal_off_tooltip_handler() {
 
 ambush_smoke_penalty() {
   level endon("stop_smoke_penalty");
-  var_0 = getent("ambush_smoke_volume", "targetname");
-  var_1 = getent("ambush_cleanup_volume", "targetname");
+  var_0 = getEnt("ambush_smoke_volume", "targetname");
+  var_1 = getEnt("ambush_cleanup_volume", "targetname");
   var_2 = "ambush_stop_smoke";
   var_3 = level.player.maxvisibledist;
   var_4 = level.player.attackeraccuracy;
@@ -1203,7 +1203,7 @@ wait_and_kill_guys_in_volume(var_0, var_1) {
     wait(var_0);
   }
 
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_3 = var_2 maps\_utility::get_ai_touching_volume("axis");
 
   foreach(var_5 in var_3) {
@@ -1255,7 +1255,7 @@ ally_end_aggressive_advance() {
 
 ambush_cleanup(var_0) {
   if(!isDefined(var_0)) {
-    var_1 = getent("ambush_cleanup_volume", "targetname");
+    var_1 = getEnt("ambush_cleanup_volume", "targetname");
     var_2 = var_1 maps\_utility::get_ai_touching_volume("axis");
 
     foreach(var_4 in var_2) {
@@ -1319,7 +1319,7 @@ attach_mover_prefab() {
       level.mover_prefabs[var_0].in_use = 1;
       var_1 = self gettagorigin("J_anim_jnt_top_arm_holder");
       level.mover_prefabs[var_0].origin = var_1;
-      level.mover_prefabs[var_0] linkto(self, "J_anim_jnt_top_arm_holder");
+      level.mover_prefabs[var_0] linkTo(self, "J_anim_jnt_top_arm_holder");
       self.mover_prefab_id = var_0;
       return;
     }
@@ -1366,11 +1366,11 @@ create_mover_prefab(var_0, var_1) {
   }
 
   foreach(var_11 in var_4) {
-    var_11 linkto(var_2);
+    var_11 linkTo(var_2);
   }
 
   if(isDefined(var_3)) {
-    var_3 linkto(var_2);
+    var_3 linkTo(var_2);
     var_2.audio_org = var_3;
   }
 
@@ -1432,7 +1432,7 @@ flood_spawner_limited_think(var_0) {
 
     var_2 = getaiarray("axis");
     var_3 thread maps\_spawner::reincrement_count_if_deleted(self);
-    var_3 thread maps\_spawner::expand_goalradius(var_0);
+    var_3 thread maps\_spawner::expand_goalRadius(var_0);
     var_3 waittill("death", var_4);
 
     if(!maps\_spawner::player_saw_kill(var_3, var_4)) {

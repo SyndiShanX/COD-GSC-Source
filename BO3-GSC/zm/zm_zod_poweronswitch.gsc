@@ -27,7 +27,7 @@ class cpoweronswitch {
   destructor() {}
 
   function local_power_on() {
-    m_t_switch sethintstring(&"ZM_ZOD_POWERSWITCH_POWERED");
+    m_t_switch setHintString(&"ZM_ZOD_POWERSWITCH_POWERED");
     do {
       m_t_switch waittill("trigger", player);
     }
@@ -69,14 +69,14 @@ class cpoweronswitch {
     a_t_switch = getEntArray("stair_control_usetrigger", "targetname");
     a_t_switch = array::filter(a_t_switch, 0, &filter_areaname, str_areaname);
     m_t_switch = a_t_switch[n_iter];
-    m_t_switch sethintstring(&"ZM_ZOD_POWERSWITCH_UNPOWERED");
+    m_t_switch setHintString(&"ZM_ZOD_POWERSWITCH_UNPOWERED");
     m_n_power_index = script_int;
     m_func = func;
     m_arg1 = arg1;
-    m_t_switch enablelinkto();
-    m_t_switch linkto(m_mdl_switch);
+    m_t_switch enablelinkTo();
+    m_t_switch linkTo(m_mdl_switch);
     if(isDefined(linkto_target)) {
-      m_mdl_switch linkto(linkto_target);
+      m_mdl_switch linkTo(linkto_target);
     }
     self thread poweronswitch_think();
   }

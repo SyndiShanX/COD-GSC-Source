@@ -46,7 +46,7 @@ main() {
 angola_jungle_ending_objectives() {
   wait 0.25;
   flag_set("enemy_vo_final_retreat");
-  defend_obj_struct = getstruct("defend_beach_obj_struct", "targetname");
+  defend_obj_struct = getStruct("defend_beach_obj_struct", "targetname");
   set_objective(level.obj_protect_hudson_and_woods_on_way_to_beach, undefined, "reactivate");
   set_objective(level.obj_protect_hudson_and_woods_on_way_to_beach, level.ai_hudson, "follow");
   wait 0.5;
@@ -57,7 +57,7 @@ angola_jungle_ending_objectives() {
   level thread run_scene("evac_to_beach_hudson");
   flag_wait("evac_to_beach_hudson_started");
   run_scene("evac_to_beach_woods");
-  org = getstruct("org_final_objective_location", "targetname");
+  org = getStruct("org_final_objective_location", "targetname");
   set_objective(level.obj_protect_hudson_and_woods_on_way_to_beach, org.origin, "breadcrumb");
   level thread run_scene("hudson_and_woods_jungle_escape_beach_collapse");
   level thread final_scene_vo();
@@ -154,8 +154,8 @@ je_trigger_hind_beach_evacuation(str_category) {
   level thread make_ai_ignore_all_to_stop_firing();
   flag_wait("hind_attack_end_scene_started");
   level.woods_weapon = spawn_model("t6_wpn_pistol_browninghp_prop_view", level.ai_woods gettagorigin("TAG_WEAPON_LEFT"), level.ai_woods gettagangles("TAG_WEAPON_LEFT"));
-  level.woods_weapon linkto(level.ai_woods, "TAG_WEAPON_LEFT");
-  ai_enemy = getent("hind_dummy_pilot_ai", "targetname");
+  level.woods_weapon linkTo(level.ai_woods, "TAG_WEAPON_LEFT");
+  ai_enemy = getEnt("hind_dummy_pilot_ai", "targetname");
   ai_enemy.health = 666666;
 
   if(!level.ai_hudson is_model_attached("c_usa_angola_hudson_glasses")) {
@@ -171,9 +171,9 @@ je_trigger_hind_beach_evacuation(str_category) {
 
 handle_hind_interior() {
   wait 0.05;
-  hind = getent("hind_end_level", "targetname");
+  hind = getEnt("hind_end_level", "targetname");
   interior = spawn_anim_model("hind_interior", hind gettagorigin("tag_body"), hind gettagangles("tag_body"));
-  interior linkto(hind, "tag_body");
+  interior linkTo(hind, "tag_body");
   hind anim_loop_aligned(interior, "hind_interior_loop", "tag_body");
 }
 
@@ -226,28 +226,28 @@ jungle_explosions(vh_hind) {
   radius_small = 200;
   mindamage = 100;
   maxdamage = 300;
-  s_exp1 = getstruct("je_end_explosion1", "targetname");
+  s_exp1 = getStruct("je_end_explosion1", "targetname");
   pos = s_exp1.origin;
   playFX(level._effect["def_explosion"], pos);
-  playsoundatposition("exp_heli_rocket", s_exp1.origin);
+  playSoundAtPosition("exp_heli_rocket", s_exp1.origin);
   radiusdamage(pos, radius_big, maxdamage, mindamage);
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   earthquake(0.5, 0.5, level.player.origin, 128);
   wait 1.3;
-  s_exp2 = getstruct("je_end_explosion2", "targetname");
+  s_exp2 = getStruct("je_end_explosion2", "targetname");
   pos = s_exp2.origin;
   playFX(level._effect["def_explosion"], pos);
-  playsoundatposition("exp_heli_rocket", s_exp2.origin);
+  playSoundAtPosition("exp_heli_rocket", s_exp2.origin);
   radiusdamage(pos, radius_big, maxdamage, mindamage);
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   earthquake(0.5, 0.5, level.player.origin, 128);
   wait 0.5;
-  s_exp3 = getstruct("je_end_explosion3", "targetname");
+  s_exp3 = getStruct("je_end_explosion3", "targetname");
   pos = s_exp3.origin;
   playFX(level._effect["def_explosion"], pos);
-  playsoundatposition("exp_heli_rocket", s_exp3.origin);
+  playSoundAtPosition("exp_heli_rocket", s_exp3.origin);
   radiusdamage(pos, radius_small, maxdamage, mindamage);
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   earthquake(0.5, 0.5, level.player.origin, 128);
 }
 
@@ -300,7 +300,7 @@ forest_enemy_damage_override_func(einflictor, e_attacker, idamage, idflags, smea
 }
 
 play_outro_vo() {
-  hind = getent("hind_end_level", "targetname");
+  hind = getEnt("hind_end_level", "targetname");
   hind vehicle_toggle_sounds(0);
   guys = getaiarray("axis");
 

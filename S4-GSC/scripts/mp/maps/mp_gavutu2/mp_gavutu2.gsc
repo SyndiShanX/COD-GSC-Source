@@ -122,15 +122,15 @@ _id_98D7() {
   _func_01B4(&"MP/ELEVATOR_USE");
   _func_01B4(&"MP_GAVUTU2/MOVE_PLATFORM");
   _func_01B4(&"MP_GAVUTU2/PLATFORM_IN_USE");
-  var_0 = getent("platform_ent_01", "targetname");
+  var_0 = getEnt("platform_ent_01", "targetname");
   level.lst_platform = var_0;
-  var_0.triggerplatformhurt = getent("trigger_platform", "targetname");
+  var_0.triggerplatformhurt = getEnt("trigger_platform", "targetname");
   var_0.triggerplatformhurt._id_AD49 = 1;
-  var_0.platform_bottom = getent("platform_bottom", "targetname");
+  var_0.platform_bottom = getEnt("platform_bottom", "targetname");
   var_0.platform_bottom._id_A1C0 = 1;
   var_1 = getEntArray("elevator_button", "targetname");
   var_0._id_2DCF = var_1;
-  var_0._id_AED6 = getent("boat_path_blocker", "targetname");
+  var_0._id_AED6 = getEnt("boat_path_blocker", "targetname");
   var_2 = _func_00B4((-1866.25, 406.25, 1133.88), 90, 1, 96);
 
   foreach(var_4 in var_2) {
@@ -152,7 +152,7 @@ _id_98D7() {
   var_0._id_AED6.origin = var_0._id_AED6.origin + (0, 0, -2000);
 
   foreach(var_8 in var_6) {
-    var_8 linkto(var_0);
+    var_8 linkTo(var_0);
     var_8._id_F9A8 = 1;
     var_8._id_A1C0 = 1;
   }
@@ -160,7 +160,7 @@ _id_98D7() {
   var_12 = getEntArray("tank_01", "targetname");
 
   foreach(var_8 in var_12) {
-    var_8 linkto(var_0);
+    var_8 linkTo(var_0);
     var_8._id_F9A8 = 1;
     var_8._id_A1C0 = 1;
   }
@@ -177,7 +177,7 @@ _id_98D7() {
   if(!isDefined(level.dynamicmapelementsdisabled) || !level.dynamicmapelementsdisabled) {
     foreach(var_16 in var_1) {
       var_16._id_FEE7 = int(50.0);
-      var_16 sethintstring(&"MP_GAVUTU2/MOVE_PLATFORM");
+      var_16 setHintString(&"MP_GAVUTU2/MOVE_PLATFORM");
       var_16 thread _id_F62F(var_0);
     }
 
@@ -196,7 +196,7 @@ attachdombtoplatform(var_0) {
       level._id_A8E8["_b"]._id_A97E = var_0.flag_offset3d;
 
       if(isDefined(level._id_A8E8["_b"]._id_03A9)) {
-        level._id_A8E8["_b"]._id_03A9 linkto(var_0);
+        level._id_A8E8["_b"]._id_03A9 linkTo(var_0);
       }
 
       if(isDefined(level._id_A8E8["_b"]._id_10430)) {
@@ -206,7 +206,7 @@ attachdombtoplatform(var_0) {
             thread setdombhudheight();
           }
 
-          var_2 linkto(var_0);
+          var_2 linkTo(var_0);
         }
       }
 
@@ -248,14 +248,14 @@ _id_F62F(var_0) {
       thread updatehurttrigger(var_0);
 
       if(var_0._id_E747 == 0) {
-        var_0 moveto(var_0.move_up_pos, var_0._id_B1DE, 0.5, 0.5);
+        var_0 moveTo(var_0.move_up_pos, var_0._id_B1DE, 0.5, 0.5);
         var_0 _meth_827E("interact_platform_move");
         var_0 waittill("movedone");
         wait 1;
         var_0._id_E747 = 1;
         var_0._id_A280 = 0;
       } else {
-        var_0 moveto(var_0._id_E9C4, var_0._id_B1DE, 0.5, 0.5);
+        var_0 moveTo(var_0._id_E9C4, var_0._id_B1DE, 0.5, 0.5);
         var_0 _meth_827E("interact_platform_move");
         var_0 waittill("movedone");
         wait 1;
@@ -389,6 +389,6 @@ snd_platform_start(var_0) {
 
 _id_F63A(var_0, var_1) {
   foreach(var_3 in var_0) {
-    var_3 sethintstring(var_1);
+    var_3 setHintString(var_1);
   }
 }

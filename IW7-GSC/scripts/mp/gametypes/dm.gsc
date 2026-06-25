@@ -587,7 +587,7 @@ use_gesture_weapon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
           firejackalmissiles(var_12, 1);
         } else if(var_0 == "ges_plyr_gesture040") {
           self.projectile = scripts\mp\utility::_magicbullet("iw7_blackholegun_mp", self gettagorigin("j_wrist_le"), var_12 gettagorigin("j_spine4"), self);
-          self.projectile missile_settargetent(var_12, var_12 gettargetoffset());
+          self.projectile missile_settargetEnt(var_12, var_12 gettargetoffset());
         } else if(var_0 == "ges_plyr_gesture010") {
           scripts\mp\utility::_magicbullet("iw7_atomizer_mp", self gettagorigin("j_wrist_le"), var_12 gettagorigin("j_spine4"), self);
           thread dogesturedamage(var_12, "iw7_atomizer_mp", var_0, 1);
@@ -722,9 +722,9 @@ firejackalmissiles(var_0, var_1, var_2) {
     var_8 = var_2 gettagorigin("j_spineupper");
     var_9 = var_1 getEye();
     var_10 = scripts\mp\utility::_magicbullet("iw7_lockon_mp", var_4, var_7, self);
-    var_10 missile_settargetent(var_0, var_0 gettargetoffset());
+    var_10 missile_settargetEnt(var_0, var_0 gettargetoffset());
     var_11 = scripts\mp\utility::_magicbullet("iw7_lockon_mp", var_5, var_8, self);
-    var_11 missile_settargetent(var_0, var_0 gettargetoffset());
+    var_11 missile_settargetEnt(var_0, var_0 gettargetoffset());
   }
 
   if(var_1 == 3) {
@@ -740,14 +740,14 @@ getdumbfirepos(var_0) {
   var_1 = (clamp(var_1[0], -85, 85), var_1[1], var_1[2]);
   var_2 = anglesToForward(var_1);
   var_3 = var_0 gettagorigin("j_wrist_le");
-  var_4 = vectornormalize(var_2) * 500;
+  var_4 = vectorNormalize(var_2) * 500;
   var_5 = ["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid", "physicscontents_vehicle", "physicscontents_player", "physicscontents_actor", "physicscontents_glass", "physicscontents_itemclip"];
   var_6 = physics_createcontents(var_5);
   var_7 = scripts\common\trace::ray_trace(var_3, var_3 + var_4, var_0, var_6);
   if(var_7["fraction"] < 1) {
-    var_4 = vectornormalize(var_2) * 500 * var_7["fraction"];
+    var_4 = vectorNormalize(var_2) * 500 * var_7["fraction"];
   } else {
-    var_4 = vectornormalize(var_2) * 500;
+    var_4 = vectorNormalize(var_2) * 500;
   }
 
   return var_3 + var_4;
@@ -820,14 +820,14 @@ dogesturedamage(var_0, var_1, var_2, var_3) {
   if(var_2 == "ges_plyr_gesture051" || var_2 == "ges_plyr_gesture041" || var_2 == "ges_plyr_gesture001") {
     var_4 = vectortoangles(var_0.origin - self.origin);
     var_5 = anglestoright(var_4);
-    var_6 = vectornormalize(var_5) * 500;
+    var_6 = vectorNormalize(var_5) * 500;
     if(var_2 == "ges_plyr_gesture041" || var_2 == "ges_plyr_gesture001" && var_3 == 2 || var_2 == "ges_plyr_gesture001" && var_3 == 4) {
       var_6 = var_6 * -1;
     }
 
     var_0 func_84DC(var_6 + (0, 0, 500), 750);
   } else {
-    var_0 func_84DC(vectornormalize(var_0.origin - self.origin) * 500 + (0, 0, 800), 750);
+    var_0 func_84DC(vectorNormalize(var_0.origin - self.origin) * 500 + (0, 0, 800), 750);
   }
 
   wait(0.05);
@@ -846,7 +846,7 @@ get_enemies_within_fov(var_0, var_1, var_2) {
   var_4 = level.players;
   var_5 = scripts\engine\utility::get_array_of_closest(self.origin, var_4, undefined, 17, var_1, 1);
   var_6 = anglesToForward(self.angles);
-  var_7 = vectornormalize(var_6) * -35;
+  var_7 = vectorNormalize(var_6) * -35;
   var_8 = 0;
   var_9 = 50;
   if(isDefined(var_0)) {

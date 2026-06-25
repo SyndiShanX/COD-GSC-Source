@@ -261,10 +261,10 @@ func_BFC1(var_0, var_1) {
     var_3 = var_2 - var_0.origin;
 
     if(lengthsquared(var_3) > 1024) {
-      var_0 moveto(var_2, 0.1, 0, 0);
+      var_0 moveTo(var_2, 0.1, 0, 0);
     }
 
-    var_0 rotateto(vectortoangles(var_3), 0.1);
+    var_0 rotateTo(vectortoangles(var_3), 0.1);
     wait 0.1;
 
     if(isDefined(var_1)) {
@@ -282,10 +282,10 @@ func_BFC2(var_0, var_1) {
     var_3 = var_2 - var_0.origin;
 
     if(lengthsquared(var_3) > 65536) {
-      var_0 moveto(var_2, 0.15, 0, 0);
+      var_0 moveTo(var_2, 0.15, 0, 0);
     }
 
-    var_0 rotateto(vectortoangles(var_3), 0.15);
+    var_0 rotateTo(vectortoangles(var_3), 0.15);
     wait 0.15;
     var_2 = func_BFB9(var_1);
 

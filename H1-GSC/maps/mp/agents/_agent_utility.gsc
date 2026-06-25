@@ -254,7 +254,7 @@ getvalidspawnpathnodenearplayer(var_0, var_1) {
     if(!var_14 doesnodeallowstance("stand")) {
       continue;
     }
-    var_15 = vectornormalize(var_14.origin - self.origin);
+    var_15 = vectorNormalize(var_14.origin - self.origin);
     var_16 = vectordot(var_7, var_15);
 
     for(var_17 = 0; var_17 < var_12.size; var_17++) {

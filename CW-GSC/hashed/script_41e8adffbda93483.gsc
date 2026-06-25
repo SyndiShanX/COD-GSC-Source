@@ -127,7 +127,7 @@ function function_802a0aed(str_objective, b_starting) {
   objectives::update_position(#"hash_7956ac3690b300bb", var_5b3c6590.origin);
   namespace_534279a::function_bd1a75b("courtyard_chapel_group", 0, "flg_right_path_cathedral_fallback");
   level flag::set("flg_west_wing_dialog");
-  var_935774e6 = getent("courtyard_door_advance", "targetname");
+  var_935774e6 = getEnt("courtyard_door_advance", "targetname");
   var_935774e6 trigger::use();
   savegame::checkpoint_save();
   level.player val::reset("courtyard_encounter", "attackeraccuracy");
@@ -242,7 +242,7 @@ function function_488f070b() {
   level flag::wait_till("flg_player_entering_courtyard");
   objectives::remove(#"hash_2f798f965e783781");
   level.adler thread hms_util::dialogue("vox_cp_seig_01200_adlr_aagunstraightah_b2");
-  var_667bdbcd = [getent("aa_courtyard", "targetname")];
+  var_667bdbcd = [getEnt("aa_courtyard", "targetname")];
   objectives::kill(#"hash_1408f7418b622890", var_667bdbcd, #"hash_596228abde0d7286", undefined, 0, 1);
   objectives_ui::function_49dec5b(#"hash_1408f7418b622890", var_667bdbcd[0], #"hash_7056653275b7909e");
   wait 2;
@@ -284,28 +284,28 @@ function function_b7e649c0(var_ddab8604) {
     return;
   }
 
-  var_643a73f4 = getent("chapel_door_left", "targetname");
-  var_a0d4ecdf = getent("chapel_door_right", "targetname");
-  var_643a73f4 rotateyaw(-105, 0.3);
-  var_a0d4ecdf rotateyaw(95, 0.3);
-  var_643a73f4 disconnectpaths();
-  var_a0d4ecdf disconnectpaths();
+  var_643a73f4 = getEnt("chapel_door_left", "targetname");
+  var_a0d4ecdf = getEnt("chapel_door_right", "targetname");
+  var_643a73f4 rotateYaw(-105, 0.3);
+  var_a0d4ecdf rotateYaw(95, 0.3);
+  var_643a73f4 disconnectPaths();
+  var_a0d4ecdf disconnectPaths();
 }
 
 function function_1ede49cc() {
   var_7bacf73f = level spawner::simple_spawn("courtyard_chapel_breach_group");
-  var_643a73f4 = getent("chapel_door_left", "targetname");
-  var_a0d4ecdf = getent("chapel_door_right", "targetname");
+  var_643a73f4 = getEnt("chapel_door_left", "targetname");
+  var_a0d4ecdf = getEnt("chapel_door_right", "targetname");
   a_actors = [];
   a_actors[#"actor 1"] = var_7bacf73f[0];
   level thread scene::play("scene_rev_0000_door_entry_single_soldier_kick_02_siege", "Shot 1", a_actors);
   a_actors[#"actor 1"] waittill(#"hash_553184e6c2383c0d");
-  var_643a73f4 rotateyaw(-95, 0.3);
-  var_a0d4ecdf rotateyaw(85, 0.3);
+  var_643a73f4 rotateYaw(-95, 0.3);
+  var_a0d4ecdf rotateYaw(85, 0.3);
   snd::client_msg("audio_church_doors_kick_open");
   wait 0.5;
-  var_643a73f4 disconnectpaths();
-  var_a0d4ecdf disconnectpaths();
+  var_643a73f4 disconnectPaths();
+  var_a0d4ecdf disconnectPaths();
   wait 0.5;
   level.adler thread hms_util::dialogue("vox_cp_seig_01300_adlr_cutemdown_11");
 }
@@ -325,7 +325,7 @@ function function_1eb17b46() {
   }
 
   wait 1.5;
-  vol_goal = getent("courtyard_chapel_entrance", "targetname");
+  vol_goal = getEnt("courtyard_chapel_entrance", "targetname");
   a_ai = spawner::get_ai_group_ai("courtyard_enemies");
   array::run_all(a_ai, &setgoal, vol_goal);
 
@@ -354,7 +354,7 @@ function function_1eb17b46() {
 
 function function_6ea2cd94() {
   level thread namespace_604e2e22::scene_sge_4020_per_bomb_plant("courtyard");
-  var_f9e27979 = getent("aa_courtyard", "targetname");
+  var_f9e27979 = getEnt("aa_courtyard", "targetname");
   var_f9e27979 namespace_534279a::function_2a8ee50f("courtyard");
   namespace_95f223d5::music("deactivate_2.0_courtyard");
   var_f9e27979 notify(#"remove_objective");
@@ -413,7 +413,7 @@ function private function_f40bfd86() {}
 function private function_9dc2e510() {
   var_3e3877e9 = spawner::get_ai_group_ai("courtyard_allies");
   a_ai_enemies = spawner::get_ai_group_ai("courtyard_enemies");
-  vol_goal = getent("courtyard_right_rear", "targetname");
+  vol_goal = getEnt("courtyard_right_rear", "targetname");
 
   for(i = 0; i < var_3e3877e9.size; i++) {
     var_3e3877e9[i] setgoal(vol_goal);
@@ -496,7 +496,7 @@ function private function_68675239() {
 }
 
 function private function_e4a6ccc2() {
-  vol_goal = getent("courtyard_chapel_entrance", "targetname");
+  vol_goal = getEnt("courtyard_chapel_entrance", "targetname");
   a_ai = spawner::get_ai_group_ai("courtyard_enemies");
   array::run_all(a_ai, &setgoal, vol_goal);
 
@@ -529,7 +529,7 @@ function private function_ae6a9244() {
   level spawn_manager::disable("courtyard_wave_1_manager");
   var_92b71fdd = spawner::get_ai_group_ai("courtyard_enemies");
   a_ai_enemies = getaiarray("courtyard_left", "script_string");
-  vol_goal = getent("courtyard_left_front", "targetname");
+  vol_goal = getEnt("courtyard_left_front", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_2_left", "targetname");
 
@@ -538,7 +538,7 @@ function private function_ae6a9244() {
   }
 
   a_ai_enemies = getaiarray("courtyard_rear", "script_string");
-  vol_goal = getent("courtyard_aa_platform", "targetname");
+  vol_goal = getEnt("courtyard_aa_platform", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_2_rear", "targetname");
 
@@ -547,7 +547,7 @@ function private function_ae6a9244() {
   }
 
   a_ai_enemies = getaiarray("courtyard_right", "script_string");
-  vol_goal = getent("courtyard_right_front", "targetname");
+  vol_goal = getEnt("courtyard_right_front", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_2_right", "targetname");
 
@@ -580,7 +580,7 @@ function private function_c4a7bebe() {
   level spawn_manager::disable("courtyard_wave_2_manager_rear");
   level spawn_manager::disable("courtyard_wave_2_manager_right");
   var_3e3877e9 = spawner::get_ai_group_ai("courtyard_allies");
-  vol_goal = getent("courtyard_allies_front", "targetname");
+  vol_goal = getEnt("courtyard_allies_front", "targetname");
   array::run_all(var_3e3877e9, &setgoal, vol_goal);
 
   if(var_3e3877e9.size < 4) {
@@ -589,7 +589,7 @@ function private function_c4a7bebe() {
   }
 
   a_ai_enemies = getaiarray("courtyard_left", "script_string");
-  vol_goal = getent("courtyard_left_mid", "targetname");
+  vol_goal = getEnt("courtyard_left_mid", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_3_left", "targetname");
 
@@ -598,7 +598,7 @@ function private function_c4a7bebe() {
   }
 
   a_ai_enemies = getaiarray("courtyard_rear", "script_string");
-  vol_goal = getent("courtyard_left_rear", "targetname");
+  vol_goal = getEnt("courtyard_left_rear", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_3_rear", "targetname");
 
@@ -607,7 +607,7 @@ function private function_c4a7bebe() {
   }
 
   a_ai_enemies = getaiarray("courtyard_right", "script_string");
-  vol_goal = getent("courtyard_aa_platform", "targetname");
+  vol_goal = getEnt("courtyard_aa_platform", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_3_right", "targetname");
 
@@ -632,7 +632,7 @@ function private function_f886eda8() {
   var_3e3877e9 = spawner::get_ai_group_ai("courtyard_allies");
   array::run_all(var_3e3877e9, &function_f8fdc218);
   a_ai_enemies = getaiarray("courtyard_left", "script_string");
-  vol_goal = getent("courtyard_left_rear", "targetname");
+  vol_goal = getEnt("courtyard_left_rear", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_3_5_left", "targetname");
 
@@ -641,7 +641,7 @@ function private function_f886eda8() {
   }
 
   a_ai_enemies = getaiarray("courtyard_rear", "script_string");
-  vol_goal = getent("courtyard_aa_platform", "targetname");
+  vol_goal = getEnt("courtyard_aa_platform", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_3_5_rear", "targetname");
 
@@ -650,7 +650,7 @@ function private function_f886eda8() {
   }
 
   a_ai_enemies = getaiarray("courtyard_right", "script_string");
-  vol_goal = getent("courtyard_rear_full", "targetname");
+  vol_goal = getEnt("courtyard_rear_full", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_3_5_right", "targetname");
 
@@ -680,7 +680,7 @@ function private function_7afaab65() {
   level spawn_manager::disable("courtyard_wave_3_5_manager_rear");
   level spawn_manager::disable("courtyard_wave_3_5_manager_right");
   a_ai_enemies = getaiarray("courtyard_left", "script_string");
-  vol_goal = getent("courtyard_left_rear", "targetname");
+  vol_goal = getEnt("courtyard_left_rear", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_4_left", "targetname");
 
@@ -689,7 +689,7 @@ function private function_7afaab65() {
   }
 
   a_ai_enemies = getaiarray("courtyard_rear", "script_string");
-  vol_goal = getent("courtyard_aa_platform", "targetname");
+  vol_goal = getEnt("courtyard_aa_platform", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_4_rear", "targetname");
 
@@ -698,7 +698,7 @@ function private function_7afaab65() {
   }
 
   a_ai_enemies = getaiarray("courtyard_right", "script_string");
-  vol_goal = getent("courtyard_rear_full", "targetname");
+  vol_goal = getEnt("courtyard_rear_full", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_4_right", "targetname");
 
@@ -738,7 +738,7 @@ function private function_47c5954d() {
   level namespace_534279a::function_bd1a75b("courtyard_enemies", 4, "flg_courtyard_assault_fallback_2");
   level.player val::set("courtyard_encounter", "attackeraccuracy", 0.2);
   a_ai_enemies = getaiarray("courtyard_left", "script_string");
-  vol_goal = getent("courtyard_chapel_yard", "targetname");
+  vol_goal = getEnt("courtyard_chapel_yard", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_4_left", "targetname");
 
@@ -747,7 +747,7 @@ function private function_47c5954d() {
   }
 
   a_ai_enemies = getaiarray("courtyard_rear", "script_string");
-  vol_goal = getent("courtyard_chapel_yard", "targetname");
+  vol_goal = getEnt("courtyard_chapel_yard", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_4_rear", "targetname");
 
@@ -756,7 +756,7 @@ function private function_47c5954d() {
   }
 
   a_ai_enemies = getaiarray("courtyard_right", "script_string");
-  vol_goal = getent("courtyard_chapel_yard", "targetname");
+  vol_goal = getEnt("courtyard_chapel_yard", "targetname");
   array::run_all(a_ai_enemies, &setgoal, vol_goal);
   var_ee755f4d = getEntArray("courtyard_reinforcement_4_right", "targetname");
 
@@ -814,10 +814,10 @@ function function_4b8cec86(str_objective) {
   level.var_77be18d2 = vehicle::simple_spawn_single("player_fav");
   level.var_77be18d2 val::set(#"hash_533b89b2c3072f64", "takedamage", 0);
   level.var_c88d2182 = [];
-  level.var_c88d2182[0] = getent("e_radar_1_rotation", "targetname");
-  level.var_c88d2182[1] = getent("e_radar_2_rotation", "targetname");
-  level.var_c88d2182[2] = getent("e_radar_3_rotation", "targetname");
-  level.var_c88d2182[3] = getent("e_radar_4_rotation", "targetname");
+  level.var_c88d2182[0] = getEnt("e_radar_1_rotation", "targetname");
+  level.var_c88d2182[1] = getEnt("e_radar_2_rotation", "targetname");
+  level.var_c88d2182[2] = getEnt("e_radar_3_rotation", "targetname");
+  level.var_c88d2182[3] = getEnt("e_radar_4_rotation", "targetname");
   namespace_95f223d5::music("6.0_danger_close");
 }
 
@@ -826,7 +826,7 @@ function outro_main(str_objective, b_starting) {
     namespace_9940c067::function_a5083d9c();
     level thread namespace_604e2e22::function_f2f9526e();
     a = [];
-    a[0] = getent("aa_parapet", "targetname");
+    a[0] = getEnt("aa_parapet", "targetname");
     level thread scene::play("scene_sge_0000_ambient_aa_gun_graveyard", "idle", a);
   }
 
@@ -910,7 +910,7 @@ function function_50680202(var_8f33990e) {
   level waittill(#"hash_523968c9e8e5864");
 
   if(!isalive(var_8f33990e)) {
-    var_62a1bc5f = getent("aa_courtyard", "targetname");
+    var_62a1bc5f = getEnt("aa_courtyard", "targetname");
     a_corpses = getcorpsearray(var_62a1bc5f.origin, 96);
     array::run_all(a_corpses, &function_e7956bb6);
   }
@@ -923,12 +923,12 @@ function function_e7956bb6() {
 function function_fba8776c(var_8f33990e) {
   var_8f33990e endon(#"death");
   var_8f33990e waittill(#"hash_771d89dbae9683d1");
-  vol_goal = getent("courtyard_chapel_entrance", "targetname");
+  vol_goal = getEnt("courtyard_chapel_entrance", "targetname");
   var_8f33990e setgoal(vol_goal);
 }
 
 function private function_c9d72e76() {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player districts::function_930f8c81("catacombs");
 }
 
@@ -948,7 +948,7 @@ function function_eaba0b8b() {
 
   while(true) {
     level waittill(#"plane_flyover");
-    level.player playrumbleonentity(var_c2908af1);
+    level.player playRumbleOnEntity(var_c2908af1);
   }
 }
 
@@ -1012,14 +1012,14 @@ function rumble_delay(n_delay = 0) {
   wait n_seconds;
 
   if(n_delay > 4000) {
-    level.player playrumbleonentity(var_ee24a2d3);
+    level.player playRumbleOnEntity(var_ee24a2d3);
     return;
   }
 
   if(n_delay > 2000) {
-    level.player playrumbleonentity(var_2ff88def);
+    level.player playRumbleOnEntity(var_2ff88def);
     return;
   }
 
-  level.player playrumbleonentity(var_9bd259fa);
+  level.player playRumbleOnEntity(var_9bd259fa);
 }

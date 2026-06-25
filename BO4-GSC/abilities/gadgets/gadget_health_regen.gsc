@@ -129,7 +129,7 @@ function_bc0ce7d5(slot, weapon) {
 
 function_941ed5d6() {
   if(isDefined(self.team)) {
-    var_1594ab5 = getplayers(self.team, self.origin, 1500);
+    var_1594ab5 = getPlayers(self.team, self.origin, 1500);
   } else {
     var_1594ab5 = array(self);
   }

@@ -169,7 +169,7 @@ function private function_f4a61e6a(entity) {
 
 function private function_85e8940a(entity) {
   var_aa6baab8 = entity ai::function_9139c839().var_1709a39;
-  players = getplayers(#"all", entity.origin, var_aa6baab8);
+  players = getPlayers(#"all", entity.origin, var_aa6baab8);
   entity clientfield::increment("brutus_shock_attack", 1);
 
   foreach(player in players) {

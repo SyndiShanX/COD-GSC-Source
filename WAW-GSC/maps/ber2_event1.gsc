@@ -48,7 +48,7 @@ event1_start_atrium() {
   level thread event1_setup(false);
 }
 event1_start_loadingdock() {
-  GetEnt("trig_script_color_allies_b13", "targetname") Delete();
+  getEnt("trig_script_color_allies_b13", "targetname") Delete();
 
   warp_players_underworld();
   warp_friendlies("struct_start_loadingdock_friends", "targetname");
@@ -58,7 +58,7 @@ event1_start_loadingdock() {
   level thread event1_setup(false);
 }
 event1_start_outside() {
-  GetEnt("trig_script_color_allies_b18", "targetname") Delete();
+  getEnt("trig_script_color_allies_b18", "targetname") Delete();
 
   warp_players_underworld();
   warp_friendlies("struct_event1_outside_friends", "targetname");
@@ -246,7 +246,7 @@ event1_intro_execution_vignette() {
 
   animSpot notify("stop_idle_loop");
   array_thread(guys, ::anim_stopanimscripted);
-  victim anim_stopanimscripted();
+  victim anim_stopanimScripted();
 
   allGuys = guys;
   guy2 = guys[0];
@@ -289,11 +289,11 @@ introIGC_victim_playerkill(redshirts) {
   level notify("intro_execution_interrupted");
 
   arcademode_assignpoints("arcademode_score_assist", attacker);
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self startragdoll();
 
   for(i = 0; i < redshirts.size; i++) {
-    redshirts[i] anim_stopanimscripted();
+    redshirts[i] anim_stopanimScripted();
     redshirts[i] SetGoalPos(self.origin);
     redshirts[i] notify("single anim", "end");
   }
@@ -578,14 +578,14 @@ event1_fallingsign() {
   event1_fallingsign_fire_rocket(startOrg, startAngles, endOrg, 1.5);
 
   playFX(level._effect["fallingsign_exp"], endOrg);
-  explosion = getstruct("struct_fallingsign_rocketImpact", "targetname");
-  playsoundatposition("explosion", explosion.origin);
+  explosion = getStruct("struct_fallingsign_rocketImpact", "targetname");
+  playSoundAtPosition("explosion", explosion.origin);
   level thread event1_fallingsign_playersquake(startOrg);
   Earthquake(0.4, 3, endOrg, 2048);
 
-  letter1 = GetEnt("e1_rooftopsign_letter1", "targetname");
-  letter2 = GetEnt("e1_rooftopsign_letter2", "targetname");
-  letter3 = GetEnt("e1_rooftopsign_letter3", "targetname");
+  letter1 = getEnt("e1_rooftopsign_letter1", "targetname");
+  letter2 = getEnt("e1_rooftopsign_letter2", "targetname");
+  letter3 = getEnt("e1_rooftopsign_letter3", "targetname");
 
   ASSERTEX(isDefined(letter1), "Can't find rooftop letter 1!");
   ASSERTEX(isDefined(letter2), "Can't find rooftop letter 2!");
@@ -682,7 +682,7 @@ event1_fallingsign_fire_rocket(startOrg, startAngles, endOrg, moveTime) {
   thread play_sound_in_space("katyusha_launch", rocket.origin);
 
   rocket notify("rocket_fired");
-  rocket MoveTo(endOrg, moveTime);
+  rocket moveTo(endOrg, moveTime);
   rocket waittill("movedone");
   thread play_sound_in_space("katy_explode_dirt", rocket.origin);
   rocket Delete();
@@ -733,14 +733,14 @@ fallingsign_rumble() {
   self endon("death");
   self endon("disconnect");
 
-  self PlayRumbleOnEntity("explosion_generic");
+  self playRumbleOnEntity("explosion_generic");
   wait(0.2);
 
   duration = 2;
   stopTime = GetTime() + (duration * 1000);
 
   while(GetTime() <= stopTime) {
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }
@@ -888,8 +888,8 @@ event1_fallingdebris_dialogue() {
 event1_smoky_hallway() {
   level endon("subway_gate_closed");
 
-  playervisiontrig = GetEnt("trig_e1_hallway_smoke_hurt", "targetname");
-  areatrig = GetEnt("trig_e1_hallway_smoke_area", "targetname");
+  playervisiontrig = getEnt("trig_e1_hallway_smoke_hurt", "targetname");
+  areatrig = getEnt("trig_e1_hallway_smoke_area", "targetname");
 
   ASSERTEX(isDefined(playervisiontrig), "Can't find the smoky hallway player vision changer trigger!");
   ASSERTEX(isDefined(areatrig), "Can't find the smoky hallway area trigger!");
@@ -1352,7 +1352,7 @@ aisneak_rifleman_anim() {
 }
 
 aisneak_setup_telegrapher() {
-  telegrapher_spawner = GetEnt("spawner_aisneak_telegrapher_apt1", "script_noteworthy");
+  telegrapher_spawner = getEnt("spawner_aisneak_telegrapher_apt1", "script_noteworthy");
   ASSERTEX(isDefined(telegrapher_spawner), "couldn't find the telegrapher spawner!");
   telegrapher_spawner thread aisneak_telegrapher_setup();
   telegrapher_spawner waittill("spawned", telegrapher);
@@ -1418,7 +1418,7 @@ fire_at_targets(targets, ender) {
       self SetEntityTarget(org);
       wait(1);
 
-      org MoveTo(targets[i].origin, 5);
+      org moveTo(targets[i].origin, 5);
       org waittill("movedone");
     }
   }
@@ -1483,7 +1483,7 @@ aisneak_telegrapher_anims(guy) {
 
   chair NotSolid();
 
-  telegraph = GetEnt("telegraph", "targetname");
+  telegraph = getEnt("telegraph", "targetname");
   telegraph playLoopSound("morse_code");
 
   guy.animname = "telegrapher";
@@ -1518,12 +1518,12 @@ telegrapher_stoptapping() {
 }
 
 event1_knees_execution(triggerTN) {
-  trig = GetEnt(triggerTN, "targetname");
+  trig = getEnt(triggerTN, "targetname");
   ASSERTEX(isDefined(trig), "trigger can't be found.");
 
-  animSpot = GetStruct(trig.target, "targetname");
+  animSpot = getStruct(trig.target, "targetname");
   ASSERTEX(isDefined(animSpot), "anim spot (targetname " + trig.target + ") can't be found.");
-  watcherSpot = GetStruct(animSpot.target, "targetname");
+  watcherSpot = getStruct(animSpot.target, "targetname");
   ASSERTEX(isDefined(watcherSpot), "anim spot (targetname " + animSpot.target + ") can't be found.");
 
   trig waittill("trigger");
@@ -1531,9 +1531,9 @@ event1_knees_execution(triggerTN) {
 
   thread event1_knees_execution_interruptflag();
 
-  victim_spawner = GetEnt("e1_execution_friendly_spawner", "targetname");
-  executioner_spawner = GetEnt("e1_execution_enemy_spawner", "targetname");
-  watcher_spawner = GetEnt("e1_execution_enemy_watcher_spawner", "targetname");
+  victim_spawner = getEnt("e1_execution_friendly_spawner", "targetname");
+  executioner_spawner = getEnt("e1_execution_enemy_spawner", "targetname");
+  watcher_spawner = getEnt("e1_execution_enemy_watcher_spawner", "targetname");
 
   victim = victim_spawner spawn_ai();
   if(spawn_failed(victim)) {
@@ -1637,7 +1637,7 @@ event1_knees_execution_victim_saved(executioner, animSpot) {
     executioner thread event1_knees_executioner_reset();
   }
 
-  self StopAnimScripted();
+  self StopanimScripted();
   animSpot anim_single_solo(self, "saved_getup");
 
   self.pathenemyfightdist = self.og_pathenemyfightdist;
@@ -1669,7 +1669,7 @@ event1_knees_execution_victim_saved(executioner, animSpot) {
 
 event1_knees_executioner_reset() {
   self endon("death");
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self.goalradius = self.og_goalradius;
   self.health = self.og_health;
@@ -1815,11 +1815,11 @@ event1_atrium_mger_friendlies(mger, alertNotify) {
 
   level.sarge playsound_generic_facial("Ber2_IGD_050A_REZN");
 
-  if(isDefined(GetEnt("trig_script_color_allies_b13", "targetname"))) {
+  if(isDefined(getEnt("trig_script_color_allies_b13", "targetname"))) {
     set_color_chain("trig_script_color_allies_b13");
   }
 
-  chaintrig = GetEnt("trig_script_color_allies_b12", "targetname");
+  chaintrig = getEnt("trig_script_color_allies_b12", "targetname");
   if(isDefined(chaintrig)) {
     chaintrig Delete();
   }
@@ -2075,7 +2075,7 @@ tank1_strat() {
   self tank_fire_at_struct(bldgTarget1, 1.3, 2);
   wait(0.2);
 
-  playsoundatposition("explosion2", bldgTarget1.origin);
+  playSoundAtPosition("explosion2", bldgTarget1.origin);
 
   playFX(level._effect["building_t34_impact"], bldgTarget1.origin);
   flag_set("building_hit1");
@@ -2084,7 +2084,7 @@ tank1_strat() {
   wait(0.4);
   self tank_fire_at_struct(bldgTarget2, 1.2, 2);
   wait(0.2);
-  playsoundatposition("explosion", bldgTarget2.origin);
+  playSoundAtPosition("explosion", bldgTarget2.origin);
 
   playFX(level._effect["building_t34_impact"], bldgTarget2.origin);
   flag_set("building_critical_hit");
@@ -2349,7 +2349,7 @@ player_look_wait_timeout(lookatOrg, timeout, timerIDString, reqDot) {
     foundOne = false;
     for(i = 0; i < players.size; i++) {
       if(SightTracePassed(players[i] getEye(), lookatOrg, false, undefined)) {
-        normal = VectorNormalize(lookatOrg - players[i].origin);
+        normal = vectorNormalize(lookatOrg - players[i].origin);
         player_angles = players[i] GetPlayerAngles();
         player_forward = anglesToForward(player_angles);
 
@@ -2668,7 +2668,7 @@ building_collapse_think() {
 
   flag_wait("building_tower_fall");
 
-  tower_impact = getent("tower_impact", "targetname");
+  tower_impact = getEnt("tower_impact", "targetname");
   tower_impact playSound("tower_impact1");
 
   thread tower_fx(pieces);
@@ -2835,7 +2835,7 @@ tower_fx_piece() {
   org = spawn("script_model", self.origin);
   org setModel("tag_origin");
 
-  org LinkTo(self);
+  org linkTo(self);
 
   playFXOnTag(level._effect["tower_dust_trail"], org, "tag_origin");
 
@@ -3183,7 +3183,7 @@ rocket_wave_rocket(expOrg) {
   playFXOnTag(level._effect["katyusha_rocket_trail"], rocket, "tag_origin");
   thread play_sound_in_space("katyusha_launch", rocket.origin);
 
-  rocket MoveTo(expOrg, RandomFloatRange(1, 2));
+  rocket moveTo(expOrg, RandomFloatRange(1, 2));
   rocket waittill("movedone");
   rocket Delete();
 
@@ -3194,7 +3194,7 @@ rocket_wave_rocket(expOrg) {
 }
 
 tank_rocket_hit() {
-  tank = GetEnt("e1_street_tank", "targetname");
+  tank = getEnt("e1_street_tank", "targetname");
   if(!isDefined(tank) || !IsAlive(tank)) {
     return;
   }
@@ -3332,12 +3332,12 @@ street_execution_abort(executioner, victim, executionNum, notifystring) {
 
   executioner notify("execution_abort");
 
-  victim anim_stopanimscripted();
+  victim anim_stopanimScripted();
   self notify(notifystring);
   victim StartRagdoll();
 
   if(isDefined(executioner.isExecuting) && executioner.isExecuting) {
-    executioner StopAnimScripted();
+    executioner StopanimScripted();
   }
 }
 
@@ -3449,7 +3449,7 @@ metrogate_execution(guys) {
   flag_init("molotovs_throw");
   flag_init("molotovs_cancel");
 
-  gate = GetEnt("subway_entrance_gate", "targetname");
+  gate = getEnt("subway_entrance_gate", "targetname");
   ASSERTEX(isDefined(gate), "Can't find the subway gate!");
 
   sarge = level.sarge;
@@ -3516,7 +3516,7 @@ metrogate_execution(guys) {
 
   flag_wait("metrogate_reach_done");
 
-  close_trigger = getent("metro_gate_approaching", "targetname");
+  close_trigger = getEnt("metro_gate_approaching", "targetname");
   close_trigger waittill("trigger");
 
   enable_trigger_with_noteworthy("trig_coop_warp_metrogate_execution");
@@ -3605,8 +3605,8 @@ metrogate_scene_heroes_reset() {
 
   flag_wait_either("molotovs_cancel", "molotovs_throw");
 
-  level.sarge StopAnimScripted();
-  level.hero1 StopAnimScripted();
+  level.sarge StopanimScripted();
+  level.hero1 StopanimScripted();
 }
 
 metrogate_reach_watcher(requiredReaches) {
@@ -3675,20 +3675,20 @@ anim_light_molotov() {
   self.molotov = spawn("script_model", self GetTagOrigin(molotov_linkTag));
   self.molotov.angles = self GetTagAngles(molotov_linkTag);
   self.molotov setModel(molotov);
-  self.molotov LinkTo(self, molotov_linkTag);
+  self.molotov linkTo(self, molotov_linkTag);
 
   self waittillmatch("single anim", "attach_zippo");
   self.zippo = spawn("script_model", self GetTagOrigin(zippo_linkTag));
   self.zippo.angles = self GetTagAngles(zippo_linkTag);
   self.zippo setModel(zippo);
-  self.zippo LinkTo(self, zippo_linkTag);
+  self.zippo linkTo(self, zippo_linkTag);
   playFXOnTag(zippo_flameFX, self.zippo, zippo_flameTag);
 
   self waittillmatch("single anim", "light");
   self.molotov_fxOrg = spawn("script_model", self.molotov GetTagOrigin(molotov_flameTag));
   self.molotov_fxOrg setModel("tag_origin");
   self.molotov_fxOrg.angles = self.molotov GetTagAngles(molotov_flameTag);
-  self.molotov_fxOrg LinkTo(self.molotov, molotov_flameTag);
+  self.molotov_fxOrg linkTo(self.molotov, molotov_flameTag);
   playFXOnTag(molotov_flameFX, self.molotov_fxOrg, "tag_origin");
 
   self waittillmatch("single anim", "detach_zippo");
@@ -3890,8 +3890,8 @@ subway_gate_action() {
 }
 
 open_subway_gate(opener, holder) {
-  gate = GetEnt("subway_entrance_gate", "targetname");
-  gateclip = GetEnt("subway_entrance_gate_clip", "targetname");
+  gate = getEnt("subway_entrance_gate", "targetname");
+  gateclip = getEnt("subway_entrance_gate_clip", "targetname");
   ASSERTEX(isDefined(gate), "Can't find the subway gate!");
   ASSERTEX(isDefined(gateclip), "Can't find the subway gate clip!");
 
@@ -3927,7 +3927,7 @@ open_subway_gate(opener, holder) {
 
   gateclip ConnectPaths();
   gateclip.og_origin = gateclip.origin;
-  gateclip MoveTo(gateclip.origin + (0, 0, -10000), 0.05);
+  gateclip moveTo(gateclip.origin + (0, 0, -10000), 0.05);
   gateclip waittill("movedone");
 
   level notify("subway_gate_opened");
@@ -4017,9 +4017,9 @@ open_subway_gate(opener, holder) {
     }
   }
 
-  gateclip MoveTo(gateclip.og_origin, 0.05);
+  gateclip moveTo(gateclip.og_origin, 0.05);
   gateclip waittill("movedone");
-  gateclip DisconnectPaths();
+  gateclip disconnectPaths();
 
   gate notify("stop_holding_gate");
   gate thread subway_gate_closeanim();

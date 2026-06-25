@@ -180,7 +180,7 @@ enemy_alert_level_warning1() {
     self.disableexits = 1;
   }
 
-  var_1 = vectornormalize(self.enemy.origin - self.origin);
+  var_1 = vectorNormalize(self.enemy.origin - self.origin);
   var_2 = distance(self.enemy.origin, self.origin);
   var_2 = var_2 * 0.25;
   var_2 = clamp(var_2, 64, 128);

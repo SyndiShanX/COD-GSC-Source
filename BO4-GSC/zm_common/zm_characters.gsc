@@ -49,7 +49,7 @@ function_9436b105(cmd) {
     tokens = strtok(cmd, "<dev string:x47>");
     player = int(getsubstr(tokens[0], "<dev string:x4b>".size));
     character = int(tokens[tokens.size - 1]);
-    players = getplayers();
+    players = getPlayers();
     players[player - 1] thread zombie_force_char(character);
   }
 }

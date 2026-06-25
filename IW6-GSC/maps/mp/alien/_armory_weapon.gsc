@@ -260,7 +260,7 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 give_special_gun() {
   self makeusable();
-  self sethintstring(&"MP_ALIEN_ARMORY_SPECIAL_WEAPON_PICKUP");
+  self setHintString(&"MP_ALIEN_ARMORY_SPECIAL_WEAPON_PICKUP");
   maps\mp\alien\_outline_proto::add_to_outline_weapon_watch_list(self, 0);
 
   for(;;) {
@@ -369,7 +369,7 @@ spitter_ammo_think() {
   self endon("death");
   var_0 = 30;
   self makeusable();
-  self sethintstring(&"MP_ALIEN_ARMORY_SPITTER_AMMO_PICKUP");
+  self setHintString(&"MP_ALIEN_ARMORY_SPITTER_AMMO_PICKUP");
   thread spitter_ammo_delete(var_0);
 
   for(;;) {
@@ -405,7 +405,7 @@ spitter_ammo_rotate() {
   self endon("death");
 
   for(;;) {
-    self rotateyaw(360, 5);
+    self rotateYaw(360, 5);
     wait 5;
   }
 }

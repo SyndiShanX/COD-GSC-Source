@@ -56,7 +56,7 @@ ambient_lightning_strikes_forvfx() {
   wait 0.05;
   wait 0.05;
   var_01 method_8449(var_00);
-  var_02 = getent("lightning_strike_vol_test", "targetname");
+  var_02 = getEnt("lightning_strike_vol_test", "targetname");
   var_03 = 4900;
   for(;;) {
     if(getdvarint("snd_zmb_debug_lighting_strike")) {
@@ -202,7 +202,7 @@ windmill_play_anim_on_gear() {
 windmill_rotateby_speed(param_00) {
   level notify("windmill_starting_rotation");
   level endon("windmill_starting_rotation");
-  var_01 = getent("windmill_fan", "targetname");
+  var_01 = getEnt("windmill_fan", "targetname");
   if(!isDefined(var_01.current_speed)) {
     var_01.current_speed = 0;
   }

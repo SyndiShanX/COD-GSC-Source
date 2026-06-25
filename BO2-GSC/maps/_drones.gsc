@@ -636,9 +636,9 @@ get_drone_spawn_pos(required_distance) {
       return spawn_pos;
     }
 
-    next_node = getstruct(node.target, "targetname");
+    next_node = getStruct(node.target, "targetname");
     dir = next_node.origin - node.origin;
-    dir_norm = vectornormalize(dir);
+    dir_norm = vectorNormalize(dir);
     dist_to_next_node = distance(node.origin, next_node.origin);
 
     if(dist_so_far + dist_to_next_node > required_distance) {
@@ -766,7 +766,7 @@ spawnpoint_playersview() {
 
   for(i = 0; i < players.size; i++) {
     forwardvec = anglesToForward(players[i].angles);
-    normalvec = vectornormalize(self.origin - players[i] getorigin());
+    normalvec = vectorNormalize(self.origin - players[i] getorigin());
     vecdot = vectordot(forwardvec, normalvec);
 
     if(vecdot > level.cos80) {
@@ -858,7 +858,7 @@ drone_think(firstnode, override_target_node) {
 
   if(isDefined(level.drones_mg_target)) {
     self.turrettarget = spawn("script_origin", self.origin + vectorscale((0, 0, 1), 50.0));
-    self.turrettarget linkto(self);
+    self.turrettarget linkTo(self);
   }
 
   self endon("drone_death");
@@ -909,12 +909,12 @@ drone_loop_anim(s_reference) {
 
   if(!isDefined(anim_idle)) {
     while(isDefined(self)) {
-      self animscripted("drone_idle_anim", self.origin, self.angles, level.drones.anim_idle[randomint(level.drones.anim_idle.size)]);
+      self animScripted("drone_idle_anim", self.origin, self.angles, level.drones.anim_idle[randomint(level.drones.anim_idle.size)]);
       self waittillmatch("drone_idle_anim", "end");
     }
   } else {
     while(isDefined(self)) {
-      self animscripted("drone_idle_anim", self.origin, self.angles, anim_idle[randomint(anim_idle.size)]);
+      self animScripted("drone_idle_anim", self.origin, self.angles, anim_idle[randomint(anim_idle.size)]);
       self waittillmatch("drone_idle_anim", "end");
     }
   }
@@ -1067,7 +1067,7 @@ drone_dodeath(deathanim, deathremovenotify) {
     self.dead = 1;
   }
 
-  self moveto(self.origin, 0.05, 0, 0);
+  self moveTo(self.origin, 0.05, 0, 0);
   tracedeath = 0;
 
   if(isDefined(self.running) && self.running) {
@@ -1113,7 +1113,7 @@ drone_dodeath(deathanim, deathremovenotify) {
     deathanim = % ai_death_collapse_in_place;
   }
 
-  self animscripted("drone_death_anim", self.origin, self.angles, deathanim, "deathplant");
+  self animScripted("drone_death_anim", self.origin, self.angles, deathanim, "deathplant");
   self thread drone_drop_weapon("drone_death_anim", deathanim);
   self thread drone_ragdoll("drone_death_anim", deathanim);
   self waittillmatch("drone_death_anim", "end");
@@ -1133,7 +1133,7 @@ drone_dodeath(deathanim, deathremovenotify) {
     return;
   }
   if(!isDefined(self.no_death_sink) || isDefined(self.no_death_sink) && !self.no_death_sink) {
-    self moveto(self.origin - vectorscale((0, 0, 1), 100.0), 7);
+    self moveTo(self.origin - vectorscale((0, 0, 1), 100.0), 7);
     wait 3;
   }
 
@@ -1425,7 +1425,7 @@ process_event(s_start) {
     endpos = physicstrace(endpos + vectorscale((0, 0, 1), 64.0), endpos - (0, 0, level.drones.trace_height));
     t = getanimlength(anim_custom);
     assert(t > 0);
-    self moveto(endpos, t, 0, 0);
+    self moveTo(endpos, t, 0, 0);
     self clearanim(self.drone_run_cycle, 0.2);
     self notify("stop_drone_loop_run_anim");
     self setflaggedanimknobrestart("drone_custom_anim", anim_custom);
@@ -1462,7 +1462,7 @@ drone_runto() {
     }
 
     oldz = percentagemark[2];
-    self moveto(percentagemark, self.n_travel_time * 0.1, 0, 0);
+    self moveTo(percentagemark, self.n_travel_time * 0.1, 0, 0);
     wait(self.n_travel_time * 0.1);
   }
 }
@@ -1485,7 +1485,7 @@ drone_event_shoot(s_start, b_shoot_bullets, b_shoot_burst) {
   e_target = undefined;
 
   if(isDefined(s_start.script_string)) {
-    e_target = getent(s_start.script_string, "targetname");
+    e_target = getEnt(s_start.script_string, "targetname");
     assert(isDefined(e_target), "No target for drone event @ " + s_start.origin + ".GetEnt failed looking for \"" + s_start.script_string + "\"");
   } else {
     target_offset = anglesToForward(self.angles) * 300;
@@ -1692,7 +1692,7 @@ drone_event_looped_anim(s_start, v_destination) {
     endpos = physicstrace(endpos + vectorscale((0, 0, 1), 64.0), endpos - (0, 0, level.drones.trace_height));
     t = getanimlength(anim_custom);
     assert(t > 0);
-    self moveto(endpos, t, 0, 0);
+    self moveTo(endpos, t, 0, 0);
     self clearanim(self.drone_run_cycle, 0.2);
     self notify("stop_drone_loop_run_anim");
     self setanim(anim_custom, 1, 0.2);
@@ -1750,7 +1750,7 @@ turn_to_face_point(point, n_time) {
   if(n_time < 0.1) {
     return;
   }
-  self rotateto((0, desiredangles[1], 0), n_time, 0, 0);
+  self rotateTo((0, desiredangles[1], 0), n_time, 0, 0);
 }
 
 set3flaggedanimknobs(animflag, animarray, pose, weight, blendtime, rate) {
@@ -1815,7 +1815,7 @@ drone_aim_at_target(target, stopstring) {
 }
 
 get_target_vertical_offset(v_target_pos) {
-  dir = vectornormalize(v_target_pos - self.origin);
+  dir = vectorNormalize(v_target_pos - self.origin);
   return dir[2];
 }
 
@@ -1939,15 +1939,15 @@ drone_get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) 
     return "up";
   }
 
-  p1 = self_pos - vectornormalize(anglesToForward(self_angle)) * 10000;
-  p2 = self_pos + vectornormalize(anglesToForward(self_angle)) * 10000;
+  p1 = self_pos - vectorNormalize(anglesToForward(self_angle)) * 10000;
+  p2 = self_pos + vectorNormalize(anglesToForward(self_angle)) * 10000;
   p_intersect = pointonsegmentnearesttopoint(p1, p2, explosion_pos);
   side_away_dist = distance2d(p_intersect, explosion_pos);
   side_close_dist = distance2d(p_intersect, self_pos);
 
   if(side_close_dist != 0) {
     angle = atan(side_away_dist / side_close_dist);
-    dot_product = vectordot(anglesToForward(self_angle), vectornormalize(explosion_pos - self_pos));
+    dot_product = vectordot(anglesToForward(self_angle), vectorNormalize(explosion_pos - self_pos));
 
     if(dot_product < 0) {
       angle = 180 - angle;
@@ -1960,7 +1960,7 @@ drone_get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) 
     }
   }
 
-  self_right_angle = vectornormalize(anglestoright(self_angle));
+  self_right_angle = vectorNormalize(anglestoright(self_angle));
   right_point = self_pos + self_right_angle * (up_distance * 0.5);
 
   if(distance2d(right_point, explosion_pos) < distance2d(self_pos, explosion_pos)) {
@@ -2226,9 +2226,9 @@ calc_drone_path_size(node) {
 
   if(isDefined(node.target)) {
     while(true) {
-      next_node_struct = getstruct(node.target, "targetname");
+      next_node_struct = getStruct(node.target, "targetname");
       size = size + distance(node.origin, next_node_struct.origin);
-      node = getstruct(node.target, "targetname");
+      node = getStruct(node.target, "targetname");
 
       if(!isDefined(node.target)) {
         break;

@@ -284,7 +284,7 @@ homecoming_recruits_fx() {
 
 lgt_init() {
   common_scripts\utility::flag_init("lgt_random_intensity_stop");
-  var_0 = getent("chopper_sun", "script_noteworthy");
+  var_0 = getEnt("chopper_sun", "script_noteworthy");
 
   if(isDefined(var_0)) {
     if(maps\_utility::is_gen4()) {
@@ -428,13 +428,13 @@ setup_volumetric_lights() {
   level.volumetric_window_fx = [];
   level.volumetric_window_fx_ents = [];
   level.recruits_godrays = getEntArray("recruits_god_ray_emitter", "targetname");
-  level.recruits_anim_light = getent("chopper_sun", "targetname");
+  level.recruits_anim_light = getEnt("chopper_sun", "targetname");
 
   if(isDefined(level.recruits_anim_light)) {
     level.recruits_anim_light_source_pos = level.recruits_anim_light.origin;
   }
 
-  level.recruits_anim_light_struct = common_scripts\utility::getstruct("recruit_anim_node_l", "script_noteworthy");
+  level.recruits_anim_light_struct = common_scripts\utility::getStruct("recruit_anim_node_l", "script_noteworthy");
   level.recruits_anim_light_smodel = spawn("script_model", level.recruits_anim_light_struct.origin);
   level.recruits_anim_light_smodel setModel("tag_origin_animate");
   level.recruits_anim_light_smodel.animname = "recruits_sunlight";
@@ -449,7 +449,7 @@ setup_volumetric_lights() {
     playFXOnTag(common_scripts\utility::getfx("window_volumetric_open"), var_3, "tag_origin");
     var_4 = common_scripts\utility::spawn_tag_origin();
     var_4.origin = var_3.origin;
-    var_3 linkto(var_4);
+    var_3 linkTo(var_4);
     level.volumetric_window_fx_ents[level.volumetric_window_fx_ents.size] = var_3;
     level.volumetric_window_fx[level.volumetric_window_fx.size] = var_4;
   }
@@ -458,7 +458,7 @@ setup_volumetric_lights() {
 
   for(;;) {
     foreach(var_2 in level.recruits_godrays) {
-      var_2 rotateto(level.recruits_anim_light_smodel.angles, 0.1);
+      var_2 rotateTo(level.recruits_anim_light_smodel.angles, 0.1);
     }
 
     if(isDefined(level.recruits_anim_light)) {}

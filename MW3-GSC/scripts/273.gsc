@@ -351,13 +351,13 @@ elevator_move(var_0) {
   var_3 = level.elevator_speed;
   var_4 = abs(distance(self.e["floor" + var_0 + "_pos"], var_1.origin));
   var_5 = var_4 / var_3;
-  var_1 moveto(var_1.origin + var_2, var_5, var_5 * level.elevator_accel, var_5 * level.elevator_decel);
+  var_1 moveTo(var_1.origin + var_2, var_5, var_5 * level.elevator_accel, var_5 * level.elevator_decel);
 
   foreach(var_7 in get_housing_children()) {
     var_8 = var_7.origin + var_2;
 
     if(!issubstr(var_7.classname, "trigger_")) {
-      var_7 moveto(var_8, var_5, var_5 * level.elevator_accel, var_5 * level.elevator_decel);
+      var_7 moveTo(var_8, var_5, var_5 * level.elevator_accel, var_5 * level.elevator_decel);
       continue;
     }
 
@@ -380,8 +380,8 @@ close_inner_doors() {
   var_5 = level.elevator_innerdoorspeed;
   var_6 = abs(distance(var_0.origin, var_4));
   var_7 = var_6 / var_5;
-  var_0 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
-  var_1 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_0 moveTo(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_1 moveTo(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
   waittill_finish_moving(var_0, var_4, var_1, var_4);
   self notify("closed_inner_doors");
 }
@@ -399,8 +399,8 @@ open_inner_doors() {
   var_7 = level.elevator_innerdoorspeed;
   var_8 = abs(distance(var_5, var_6) * 0.5);
   var_9 = var_8 / var_7 * 0.5;
-  var_0 moveto(var_5, var_9, var_9 * 0.1, var_9 * 0.25);
-  var_1 moveto(var_6, var_9, var_9 * 0.1, var_9 * 0.25);
+  var_0 moveTo(var_5, var_9, var_9 * 0.1, var_9 * 0.25);
+  var_1 moveTo(var_6, var_9, var_9 * 0.1, var_9 * 0.25);
   waittill_finish_moving(var_0, var_5, var_1, var_6);
   self notify("opened_inner_doors");
 }
@@ -416,8 +416,8 @@ close_outer_doors(var_0) {
   var_5 = level.elevator_outterdoorspeed;
   var_6 = abs(distance(var_3, var_4));
   var_7 = var_6 / var_5;
-  var_1 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
-  var_2 moveto(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_1 moveTo(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
+  var_2 moveTo(var_4, var_7, var_7 * 0.1, var_7 * 0.25);
   waittill_finish_moving(var_1, var_4, var_2, var_4);
   self notify("closed_floor_" + var_0 + "_outer_doors");
 }
@@ -434,8 +434,8 @@ open_outer_doors(var_0) {
   var_6 = level.elevator_outterdoorspeed;
   var_7 = abs(distance(var_3, var_5));
   var_8 = var_7 / var_6 * 0.5;
-  var_1 moveto(var_3, var_8, var_8 * 0.1, var_8 * 0.25);
-  var_2 moveto(var_4, var_8, var_8 * 0.1, var_8 * 0.25);
+  var_1 moveTo(var_3, var_8, var_8 * 0.1, var_8 * 0.25);
+  var_2 moveTo(var_4, var_8, var_8 * 0.1, var_8 * 0.25);
   waittill_finish_moving(var_1, var_3, var_2, var_4);
   self notify("opened_floor_" + var_0 + "_outer_doors");
 }
@@ -446,7 +446,7 @@ build_elevators() {
   var_2 = getEntArray("elevator_doorset", "targetname");
 
   foreach(var_4 in var_0) {
-    var_5 = getent(var_4.target, "targetname");
+    var_5 = getEnt(var_4.target, "targetname");
     var_6 = [];
     var_6[0] = min(var_4.origin[0], var_5.origin[0]);
     var_6[1] = max(var_4.origin[0], var_5.origin[0]);
@@ -467,17 +467,17 @@ build_elevators() {
         if(var_9.code_classname == "light") {
           continue;
         }
-        var_10 = getent(var_9.target, "targetname");
+        var_10 = getEnt(var_9.target, "targetname");
         var_7.e["housing"]["left_door"] = var_10;
         var_7.e["housing"]["left_door_opened_pos"] = var_10.origin;
-        var_11 = getent(var_10.target, "targetname");
+        var_11 = getEnt(var_10.target, "targetname");
         var_7.e["housing"]["right_door"] = var_11;
         var_7.e["housing"]["right_door_opened_pos"] = var_11.origin;
         var_12 = (var_10.origin - var_11.origin) * (0.5, 0.5, 0.5) + var_11.origin;
         var_7.e["housing"]["door_closed_pos"] = var_12;
-        var_13 = getent(var_11.target, "targetname");
+        var_13 = getEnt(var_11.target, "targetname");
         var_7.e["housing"]["door_trigger"] = var_13;
-        var_14 = getent(var_13.target, "targetname");
+        var_14 = getEnt(var_13.target, "targetname");
         var_7.e["housing"]["inside_trigger"] = var_14;
         var_14 make_discrete_trigger();
         var_14.motion_trigger = spawn("trigger_radius", var_9.origin, 0, 64, 128);
@@ -492,10 +492,10 @@ build_elevators() {
         var_19 = var_7.e["outer_doorset"].size;
         var_7.e["outer_doorset"][var_19] = [];
         var_7.e["outer_doorset"][var_19]["door_closed_pos"] = var_17.origin;
-        var_20 = getent(var_17.target, "targetname");
+        var_20 = getEnt(var_17.target, "targetname");
         var_7.e["outer_doorset"][var_19]["left_door"] = var_20;
         var_7.e["outer_doorset"][var_19]["left_door_opened_pos"] = var_20.origin;
-        var_21 = getent(var_20.target, "targetname");
+        var_21 = getEnt(var_20.target, "targetname");
         var_7.e["outer_doorset"][var_19]["right_door"] = var_21;
         var_7.e["outer_doorset"][var_19]["right_door_opened_pos"] = var_21.origin;
 
@@ -602,19 +602,19 @@ setup_hints() {
     var_2 = var_1 get_housing_inside_trigger();
     var_3 = var_1 get_outer_doorsets();
     var_4 = var_3.size;
-    var_2 setcursorhint("HINT_NOICON");
+    var_2 setCursorHint("HINT_NOICON");
 
     if(var_4 > 2) {
-      var_2 sethintstring(&"ELEVATOR_FLOOR_SELECT_HINT");
+      var_2 setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
       continue;
     }
 
-    var_2 sethintstring(&"ELEVATOR_USE_HINT");
+    var_2 setHintString(&"ELEVATOR_USE_HINT");
   }
 
   foreach(var_7 in level.elevator_callbuttons) {
-    var_7 setcursorhint("HINT_NOICON");
-    var_7 sethintstring(&"ELEVATOR_CALL_HINT");
+    var_7 setCursorHint("HINT_NOICON");
+    var_7 setHintString(&"ELEVATOR_CALL_HINT");
   }
 }
 

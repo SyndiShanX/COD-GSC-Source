@@ -172,10 +172,10 @@ function function_752582be(ascender) {
   if(isDefined(ascender)) {
     ascender.inuse = 0;
     hint = #"hash_4079b1df1f035718";
-    ascender.trigger sethintstring(hint);
+    ascender.trigger setHintString(hint);
 
     if(isDefined(ascender.ascendstructend) && isDefined(ascender.ascendstructend.trigger)) {
-      ascender.ascendstructend.trigger sethintstring(hint);
+      ascender.ascendstructend.trigger setHintString(hint);
       ascender.ascendstructend.inuse = 0;
     }
   }
@@ -214,13 +214,13 @@ function function_c487f6c0(ascendstart) {
 
   var_3d783ef7 = spawn("trigger_radius_use", ascendstart.origin + (0, 0, 16), 0, ascendstart.radius, 128);
   var_3d783ef7.ascendstart = ascendstart;
-  var_3d783ef7 triggerignoreteam();
+  var_3d783ef7 triggerIgnoreTeam();
   var_3d783ef7 setvisibletoall();
   var_3d783ef7 setteamfortrigger(#"none");
-  var_3d783ef7 setcursorhint("HINT_NOICON");
+  var_3d783ef7 setCursorHint("HINT_NOICON");
   var_3d783ef7 function_95c6df5a();
   hint = #"hash_4079b1df1f035718";
-  var_3d783ef7 sethintstring(hint);
+  var_3d783ef7 setHintString(hint);
   var_3d783ef7 callback::on_trigger(&function_4945d10b);
 
   if(sessionmodeiszombiesgame()) {
@@ -250,7 +250,7 @@ function function_731b9325(struct, dir) {
     struct.cooldown = [];
 
     if(isDefined(struct.script_string)) {
-      struct.clip = getent(struct.script_string, "targetname");
+      struct.clip = getEnt(struct.script_string, "targetname");
     }
   }
 
@@ -316,7 +316,7 @@ function private function_2f037a69(ascender) {
 function private function_28a2f589(inuse) {
   self.inuse += inuse ? 1 : -1;
   assert(self.inuse >= 0 && self.inuse <= 4);
-  array::thread_all(getplayers(), &function_2f037a69, self);
+  array::thread_all(getPlayers(), &function_2f037a69, self);
 }
 
 function function_4945d10b(trigger_info) {
@@ -368,10 +368,10 @@ function function_4945d10b(trigger_info) {
 function function_8c46de17(ascendstart, ascendend) {
   wait 0.2;
   hint = #"hash_607b12b5d5733b3e";
-  ascendstart.trigger sethintstring(hint);
+  ascendstart.trigger setHintString(hint);
 
   if(isDefined(ascendend) && isDefined(ascendend.trigger)) {
-    ascendend.trigger sethintstring(hint);
+    ascendend.trigger setHintString(hint);
   }
 }
 

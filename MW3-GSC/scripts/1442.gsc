@@ -4,12 +4,12 @@
 **************************************/
 
 move_player_to_start(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
+  level.player setOrigin(var_1.origin);
   var_2 = undefined;
 
   if(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
   }
   if(isDefined(var_2)) {
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
@@ -25,7 +25,7 @@ _id_166B(var_0) {
 
   for(;;) {
     if(isDefined(var_1) && var_1.health > 0) {
-      self setturrettargetent(var_1, (randomintrange(-64, 64), randomintrange(-64, 64), randomintrange(-16, 100)));
+      self setturrettargetEnt(var_1, (randomintrange(-64, 64), randomintrange(-64, 64), randomintrange(-16, 100)));
 
       if(sighttracepassed(self.origin + (0, 0, 100), var_1.origin + (0, 0, 40), 0, self)) {
         self._id_166C++;
@@ -89,7 +89,7 @@ _id_166E(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_11 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_11 = common_scripts\utility::getStruct(var_0, "targetname");
   var_12 = 0;
 
   foreach(var_14 in var_5) {
@@ -589,7 +589,7 @@ _id_16A0(var_0) {
     }
     if(var_3 <= var_2.radius && var_4 <= var_2.height && var_4 >= 0) {
       level._id_16A1 = common_scripts\utility::array_remove(level._id_16A1, var_2);
-      return getent(var_2.target, "script_noteworthy");
+      return getEnt(var_2.target, "script_noteworthy");
     }
   }
 
@@ -669,7 +669,7 @@ _id_16A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   }
   var_9 = 57;
   var_10 = maps\_hud_util::createclientprogressbar(var_0, var_9);
-  var_0 playerlinkto(self);
+  var_0 playerlinkTo(self);
   var_0 playerlinkedoffsetenable();
   var_0 disableweapons();
   var_0 disableoffhandweapons();
@@ -797,7 +797,7 @@ _id_16B1() {
   var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = vectornormalize(self.origin - var_2.origin);
+    var_3 = vectorNormalize(self.origin - var_2.origin);
     var_2._id_16B2 = var_3;
   }
 
@@ -1346,7 +1346,7 @@ _id_16EB(var_0, var_1, var_2) {
         var_26 = level._id_0C59[var_24][var_1];
         var_9 setflaggedanim(var_14, var_26, 1, 0.2);
       } else {
-        var_9 animscripted(var_14, var_12, var_13, level._id_0C59[var_24][var_1]);
+        var_9 animScripted(var_14, var_12, var_13, level._id_0C59[var_24][var_1]);
       }
       thread maps\_anim::_id_0C61(var_9, var_14, var_1, var_24);
       thread maps\_anim::_id_0C62(var_9, var_14, var_1);
@@ -1445,7 +1445,7 @@ _id_16EF(var_0, var_1, var_2, var_3) {
 
   if(var_3 > 0 && var_2 > 0) {
     var_0 maps\_utility::_id_11E4("single anim", "end", var_2);
-    var_0 stopanimscripted();
+    var_0 stopanimScripted();
   } else {
     var_0 waittillmatch("single anim", "end");
   }

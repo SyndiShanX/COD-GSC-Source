@@ -55,7 +55,7 @@ function_fbb8f1d1() {
 update_targets() {
   possibletargets = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player clientfield::get("ishighvaluetarget")) {
       player clientfield::set("ishighvaluetarget", 0);
 
@@ -91,7 +91,7 @@ update_targets() {
       player luinotifyevent(#"game_update_notification", 1, 10);
       indicatorarray[#"clientnum"] = player getentitynumber();
 
-      foreach(other_player in getplayers()) {
+      foreach(other_player in getPlayers()) {
         if(!indicatorarray[#"indicator"] spectrerisingindicator::is_open(other_player)) {
           indicatorarray[#"indicator"] spectrerisingindicator::open(other_player);
         }
@@ -116,14 +116,14 @@ update_targets() {
     indicatorarray = level.var_45c1873e[i];
     indicatorarray[#"clientnum"] = -1;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(indicatorarray[#"indicator"] spectrerisingindicator::is_open(player)) {
         indicatorarray[#"indicator"] spectrerisingindicator::close(player);
       }
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player function_fbb8f1d1()) {
       foreach(target in targetplayers) {
         if(target.team != player.team) {
@@ -175,7 +175,7 @@ function_3f8e4156(params) {
 
   foreach(indicatorarray in level.var_45c1873e) {
     if(clientnum == indicatorarray[#"clientnum"]) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         indicatorarray[#"indicator"] spectrerisingindicator::set_isalive(player, 0);
       }
 
@@ -212,7 +212,7 @@ on_player_disconnect() {
 
   foreach(indicatorarray in level.var_45c1873e) {
     if(clientnum == indicatorarray[#"clientnum"]) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         indicatorarray[#"indicator"] spectrerisingindicator::set_isalive(player, 0);
       }
 

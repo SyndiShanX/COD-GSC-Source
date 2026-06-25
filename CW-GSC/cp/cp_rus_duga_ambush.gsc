@@ -63,7 +63,7 @@ function starting(str_objective) {
 }
 
 function main(str_objective, b_skipto) {
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player namespace_ac5221d7::function_292592aa();
   e_player actions::function_b0868791("body_shield_grenade", 0);
   level thread spawn_funcs();
@@ -348,7 +348,7 @@ function function_c8e55c36() {
 }
 
 function combat() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   level waittill(#"start_combat");
   level.var_8d67230a = spawner::simple_spawn("spawners_us_forces");
@@ -557,7 +557,7 @@ function function_7369d400() {
 
 function function_d5f016b9() {
   animation::add_notetrack_func("duga_ambush::post_rpg_setdress", &function_8eb5cf53);
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player val::set(#"hash_74901644ca8bb461", "freezecontrols", 1);
   e_player val::set(#"hash_74901644ca8bb461", "ignoreme", 1);
   e_player val::set(#"hash_74901644ca8bb461", "allow_melee", 0);
@@ -653,7 +653,7 @@ function function_e8412d98(a_ents) {
   var_1b36c4d5 = spawnweapon(w, a_ents[#"hash_4165e2ff74a48a3d"].origin, a_ents[#"hash_4165e2ff74a48a3d"].angles, 0);
   a_ents[#"hash_4165e2ff74a48a3d"] hide();
   a_ents[#"hash_4165e2ff74a48a3d"] setcontents(0);
-  var_1b36c4d5 linkto(a_ents[#"hash_4165e2ff74a48a3d"]);
+  var_1b36c4d5 linkTo(a_ents[#"hash_4165e2ff74a48a3d"]);
 }
 
 function function_3524b1f1(a_ents) {

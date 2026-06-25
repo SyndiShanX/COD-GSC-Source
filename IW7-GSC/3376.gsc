@@ -11,7 +11,7 @@ init_blackhole_trap() {
   var_3 = scripts\engine\utility::getStructArray("blackhole_trap", "script_noteworthy");
   foreach(var_5 in var_3) {
     var_5 thread func_2B36();
-    var_5.body = getent(var_5.target, "targetname");
+    var_5.body = getEnt(var_5.target, "targetname");
     var_6 = scripts\engine\utility::getStructArray(var_5.target, "targetname");
     foreach(var_8 in var_6) {
       if(isDefined(var_8.fgetarg)) {
@@ -57,7 +57,7 @@ use_blackhole_trap(var_0, var_1) {
   level.angry_mike_trap_kills = 0;
   var_0.trap_kills = 0;
   var_2 = gettime() + 20000;
-  var_0.body rotateyaw(10800, int(21), 5, 5);
+  var_0.body rotateYaw(10800, int(21), 5, 5);
   var_0 thread kill_zombies(var_1);
   earthquake(0.28, int(21), var_0.body.origin, 500);
   var_0 thread func_2B35(int(21), var_0.body.origin);
@@ -79,7 +79,7 @@ use_blackhole_trap(var_0, var_1) {
 }
 
 func_2B34(var_0) {
-  var_1 = getent("chromosphere_sign", "targetname");
+  var_1 = getEnt("chromosphere_sign", "targetname");
   var_1 setscriptablepartstate("quake", "on");
   while(gettime() < var_0) {
     var_1 setscriptablepartstate("rumble", "rumble1");
@@ -141,7 +141,7 @@ suck_zombie(var_0, var_1) {
   wait(randomfloatrange(0, 1));
   var_4 = 16384;
   while(distancesquared(self.origin, var_3.origin) > var_4) {
-    self setvelocity(vectornormalize(var_3.origin - self.origin) * 150 + (0, 0, 30));
+    self setvelocity(vectorNormalize(var_3.origin - self.origin) * 150 + (0, 0, 30));
     wait(0.05);
   }
 
@@ -156,15 +156,15 @@ suck_zombie(var_0, var_1) {
   self.precacheleaderboards = 1;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
-  self.anchor rotateto((-90, 0, 0), 0.2);
+  self linkTo(self.anchor);
+  self.anchor rotateTo((-90, 0, 0), 0.2);
   var_6 = 360;
   if(randomint(100) > 50) {
     var_6 = -360;
   }
 
   self.anchor rotateroll(var_6, 1.5);
-  self.anchor moveto(var_2.origin, 1.5);
+  self.anchor moveTo(var_2.origin, 1.5);
   wait(1.5);
   playsoundatpos(self.origin, "trap_blackhole_body_gore");
   playFX(level._effect["blackhole_trap_death"], self.origin, anglesToForward((-90, 0, 0)), anglestoup((-90, 0, 0)));

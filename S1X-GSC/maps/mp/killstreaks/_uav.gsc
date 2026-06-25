@@ -90,7 +90,7 @@ onPlayerSpawned() {
 
 rotateUAVRig() {
   for(;;) {
-    self rotateyaw(-360, 60);
+    self rotateYaw(-360, 60);
     wait(60);
   }
 }
@@ -284,10 +284,10 @@ flyIn(UAVModel) {
   xOffset = Cos(angle) * radiusOffset;
   yOffset = Sin(angle) * radiusOffset;
 
-  angleVector = VectorNormalize((xOffset, yOffset, zOffset));
+  angleVector = vectorNormalize((xOffset, yOffset, zOffset));
   angleVector = (angleVector * RandomIntRange(6000, 7000));
 
-  UAVModel LinkTo(level.UAVRig, "tag_origin", angleVector, (0, angle - 90, 135));
+  UAVModel linkTo(level.UAVRig, "tag_origin", angleVector, (0, angle - 90, 135));
 
   waitframe();
 
@@ -295,11 +295,11 @@ flyIn(UAVModel) {
   UAVModel Unlink();
 
   UAVModel.origin = destination + (anglesToForward(UAVModel.angles) * -20000);
-  UAVModel MoveTo(destination, 4, 0, 2);
+  UAVModel moveTo(destination, 4, 0, 2);
   wait 4;
 
   if(isDefined(UAVModel)) {
-    UAVModel LinkTo(level.UAVRig, "tag_origin");
+    UAVModel linkTo(level.UAVRig, "tag_origin");
   }
 }
 

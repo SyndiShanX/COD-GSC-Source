@@ -112,7 +112,7 @@ enemy_stealth() {
   self.diequietly = 1;
   self.fovcosine = 0.5;
   self.fovcosinebusy = 0.1;
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(!common_scripts\utility::flag("_stealth_spotted")) {
     maps\_utility::ent_flag_wait("_stealth_spotted");
@@ -305,7 +305,7 @@ stealth_idle(var_0, var_1) {
     if(isDefined(level.scr_anim[var_6]) && isDefined(level.scr_anim[var_6][var_1 + "_idle"])) {
       var_5 = common_scripts\utility::array_add(var_5, self.prop);
     } else {
-      self.prop linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
+      self.prop linkTo(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
     }
   }
 
@@ -327,14 +327,14 @@ stealth_idle_ender(var_0, var_1, var_2) {
   }
 
   var_0 notify("stop_loop");
-  self stopanimscripted();
-  var_2 stopanimscripted();
+  self stopanimScripted();
+  var_2 stopanimScripted();
 }
 
 prop_drop(var_0) {
   var_0 unlink();
   var_1 = 1;
-  var_0 moveto(var_0.origin - (0, 0, 1000), 60, 0, 60);
+  var_0 moveTo(var_0.origin - (0, 0, 1000), 60, 0, 60);
 
   if(var_0.animname == "bangstick") {
     var_0 thread bang_stick_rotate();
@@ -352,7 +352,7 @@ prop_drop(var_0) {
   }
 
   var_0 notify("stopped_dropping");
-  var_0 moveto(var_0.origin - (0, 0, 1), 1, 0, 1);
+  var_0 moveTo(var_0.origin - (0, 0, 1), 1, 0, 1);
   wait 100;
 
   while(level.player maps\_utility::can_see_origin(var_0.origin)) {
@@ -368,8 +368,8 @@ bang_stick_rotate() {
   var_1 = 7;
 
   if(self.animname == "bangstick") {
-    self moveto((342, -63295, -53), var_1, var_1 / 2, var_1 / 2);
-    self rotateto((354.461, 26.61, 160.045), var_0, var_0 - 0.1, 0.1);
+    self moveTo((342, -63295, -53), var_1, var_1 / 2, var_1 / 2);
+    self rotateTo((354.461, 26.61, 160.045), var_0, var_0 - 0.1, 0.1);
   }
 }
 
@@ -377,13 +377,13 @@ torch_rotate() {
   var_0 = 10;
   self rotateby((randomintrange(1, 180), randomintrange(1, 180), randomintrange(1, 180)), var_0, 0, var_0);
   self waittill("stopped_dropping");
-  self rotateto(self.angles, 0.1);
+  self rotateTo(self.angles, 0.1);
 }
 
 stealth_melee() {
   self.melee_trigger = spawn("trigger_radius", self.origin - (0, 0, 32), 0, 96, 64);
-  self.melee_trigger enablelinkto();
-  self.melee_trigger linkto(self);
+  self.melee_trigger enablelinkTo();
+  self.melee_trigger linkTo(self);
   thread common_scripts\utility::delete_on_death(self.melee_trigger);
   self.melee_trigger endon("death");
 
@@ -435,7 +435,7 @@ player_wait_for_melee_command() {
     var_6 = common_scripts\utility::spawn_tag_origin();
     var_6.origin = var_5.origin;
     var_6.angles = var_5.angles;
-    var_6 linkto(var_5, "tag_player", var_4, (0, 0, 0));
+    var_6 linkTo(var_5, "tag_player", var_4, (0, 0, 0));
     thread melee_death_fx();
     var_0 thread maps\_anim::anim_generic(self, "stealth_kill");
     level.player disableweapons();

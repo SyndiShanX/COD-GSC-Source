@@ -121,7 +121,7 @@ blind_animate() {
     self waittill("blind", note);
 
     if(note == "end") {
-      self animscripted(level.scr_anim["fxanim_props_dlc"]["blinds_idle"], 1.0, 0.0, 1.0);
+      self animScripted(level.scr_anim["fxanim_props_dlc"]["blinds_idle"], 1.0, 0.0, 1.0);
       return;
     }
   }

@@ -118,7 +118,7 @@ zombie_devgui_give_money() {
 }
 
 zombie_devgui_give_power() {
-  trigger = GetEnt("use_master_switch", "targetname");
+  trigger = getEnt("use_master_switch", "targetname");
   player = get_players()[0];
 
   if(!isDefined(trigger)) {

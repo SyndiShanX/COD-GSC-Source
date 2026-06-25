@@ -16,8 +16,8 @@ main() {
     var_4 = level.player.origin - level.player getEye() + (0, 0, 35);
     var_5 = spawn("script_model", level.player.origin + (0, 0, var_4[2]));
     var_5.angles = (-10, level.player.angles[2], 30);
-    var_5 linkto(var_3);
-    level.player playerlinkto(var_5);
+    var_5 linkTo(var_3);
+    level.player playerlinkTo(var_5);
   }
 
   special_death_hint(var_0, var_1, var_2);

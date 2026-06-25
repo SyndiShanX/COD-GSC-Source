@@ -75,7 +75,7 @@ trigger_when_player_close_by() {
   self.trigger endon("death");
   self.start_point_name = self.script_noteworthy;
   self.end_point_name = self.script_parameters;
-  self.end_point = scripts\engine\utility::getstruct(self.end_point_name, "script_noteworthy");
+  self.end_point = scripts\engine\utility::getStruct(self.end_point_name, "script_noteworthy");
   if(self.start_point_name == "left_alley") {
     self.trigger.origin = self.trigger.origin + (0, -15, 0);
   }
@@ -128,7 +128,7 @@ trigger_when_player_close_by() {
     }
 
     var_6 = anglesToForward(var_5.angles);
-    if(vectordot(vectornormalize(self.portal_spot.origin - var_5.origin), var_6) < 0.66) {
+    if(vectordot(vectorNormalize(self.portal_spot.origin - var_5.origin), var_6) < 0.66) {
       scripts\engine\utility::waitframe();
       continue;
     }
@@ -220,7 +220,7 @@ crack_portal_doors() {
     if(isDefined(var_3)) {
       var_4 = var_3.origin - var_1.origin;
       var_5 = scripts\cp\utility::vec_multiply(var_4, 0.2) + var_1.origin;
-      var_1 moveto(var_5, 0.5, 0.1, 0.1);
+      var_1 moveTo(var_5, 0.5, 0.1, 0.1);
     }
   }
 
@@ -232,7 +232,7 @@ crack_portal_doors() {
     if(isDefined(var_3)) {
       var_4 = var_3.origin - var_7.origin;
       var_5 = scripts\cp\utility::vec_multiply(var_4, 0.2) + var_7.origin;
-      var_7 moveto(var_5, 0.5, 0.1, 0.1);
+      var_7 moveTo(var_5, 0.5, 0.1, 0.1);
     }
   }
 
@@ -245,7 +245,7 @@ open_portal_doors() {
   if(isDefined(var_1)) {
     var_2 = scripts\engine\utility::getStructArray("portal_door_left_pos", "targetname");
     var_3 = scripts\engine\utility::getclosest(self.origin, var_2, 500);
-    var_1 moveto(var_3.origin, 0.5, 0.1, 0.1);
+    var_1 moveTo(var_3.origin, 0.5, 0.1, 0.1);
   }
 
   var_4 = getEntArray("portal_door_right", "targetname");
@@ -253,7 +253,7 @@ open_portal_doors() {
   if(isDefined(var_5)) {
     var_2 = scripts\engine\utility::getStructArray("portal_door_right_pos", "targetname");
     var_3 = scripts\engine\utility::getclosest(self.origin, var_2, 500);
-    var_5 moveto(var_3.origin, 0.5, 0.1, 0.1);
+    var_5 moveTo(var_3.origin, 0.5, 0.1, 0.1);
   }
 
   wait(0.5);
@@ -339,14 +339,14 @@ debug_portal_door_open() {
 
 portal_gun_init_func(var_0, var_1) {
   level.portal_gun_activated = 0;
-  level.portal_gun = getent("portal_gun", "targetname");
-  var_2 = scripts\engine\utility::getstruct("portal_gun_cargo_pos", "targetname");
+  level.portal_gun = getEnt("portal_gun", "targetname");
+  var_2 = scripts\engine\utility::getStruct("portal_gun_cargo_pos", "targetname");
   level.portal_gun.start_pos = level.portal_gun.origin;
   level.portal_gun.var_10B9F = level.portal_gun.angles;
   level.portal_gun.var_62EE = var_2.origin;
   level.portal_gun.end_ang = var_2.angles;
-  level.portal_gun_crane = getent("laser_cannon_crane", "targetname");
-  var_2 = scripts\engine\utility::getstruct("laser_cannon_crane_cargo_pos", "targetname");
+  level.portal_gun_crane = getEnt("laser_cannon_crane", "targetname");
+  var_2 = scripts\engine\utility::getStruct("laser_cannon_crane_cargo_pos", "targetname");
   level.portal_gun_crane.start_pos = level.portal_gun_crane.origin;
   level.portal_gun_crane.var_10B9F = level.portal_gun_crane.angles;
   level.portal_gun_crane.var_62EE = var_2.origin;
@@ -359,7 +359,7 @@ portal_gun_init_func(var_0, var_1) {
     wait(0.5);
     var_6.angles = var_5.angles;
     level.portal_gun.barrel_ents[level.portal_gun.barrel_ents.size] = var_6;
-    var_6 linkto(level.portal_gun);
+    var_6 linkTo(level.portal_gun);
   }
 
   level.portal_gun_init_done = 1;
@@ -371,15 +371,15 @@ portal_gun_hint_func(var_0, var_1) {
 
 portal_gun_activate_func(var_0, var_1) {
   if(scripts\engine\utility::flag("power_on")) {
-    var_2 = getent("portal_gun_button", "targetname");
+    var_2 = getEnt("portal_gun_button", "targetname");
     var_2 setModel("mp_frag_button_on_green");
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
-    level.portal_gun moveto(level.portal_gun.var_62EE, 5, 0.1, 0.1);
-    level.portal_gun_crane moveto(level.portal_gun_crane.var_62EE, 5, 0.1, 0.1);
+    level.portal_gun moveTo(level.portal_gun.var_62EE, 5, 0.1, 0.1);
+    level.portal_gun_crane moveTo(level.portal_gun_crane.var_62EE, 5, 0.1, 0.1);
     level.portal_gun_crane thread play_move_sounds(5);
     level.portal_gun waittill("movedone");
     level thread play_charge_up_sounds();
-    level.portal_gun rotateto(level.portal_gun.end_ang, 3, 0.1, 0.1);
+    level.portal_gun rotateTo(level.portal_gun.end_ang, 3, 0.1, 0.1);
     level.portal_gun waittill("rotatedone");
     level.portal_gun_activated = 1;
     scripts\cp\maps\cp_final\cp_final_mpq::deactivateinteractionsbynoteworthy("portal_gun_button");
@@ -497,8 +497,8 @@ move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 endon("disconnect");
   var_0 endon("move_through_tube");
   var_0 earthquakeforplayer(0.3, 0.2, var_0.origin, 200);
-  var_4 = getent(var_1, "targetname");
-  var_5 = getent(var_2, "targetname");
+  var_4 = getEnt(var_1, "targetname");
+  var_5 = getEnt(var_2, "targetname");
   var_0 cancelmantle();
   var_0.no_outline = 1;
   var_0.no_team_outlines = 1;
@@ -508,15 +508,15 @@ move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 scripts\cp\utility::adddamagemodifier("fast_travel", 0, 0);
   var_0 scripts\cp\utility::allow_player_ignore_me(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_6);
+  var_0 setOrigin(var_6);
   var_0 setplayerangles(var_4.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_8 = spawn("script_origin", var_6);
-  var_0 playerlinkto(var_8);
+  var_0 playerlinkTo(var_8);
   var_0 getweaponrankxpmultiplier();
   wait(0.1);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
-  var_8 moveto(var_7, 1);
+  var_8 moveTo(var_7, 1);
   wait(1);
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
@@ -535,8 +535,8 @@ ai_move_through_tube(var_0, var_1, var_2, var_3) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("move_through_tube");
-  var_4 = getent(var_1, "targetname");
-  var_5 = getent(var_2, "targetname");
+  var_4 = getEnt(var_1, "targetname");
+  var_5 = getEnt(var_2, "targetname");
   var_0.no_outline = 1;
   var_0.no_team_outlines = 1;
   var_6 = var_4.origin + (0, 0, -45);
@@ -544,12 +544,12 @@ ai_move_through_tube(var_0, var_1, var_2, var_3) {
   var_0.is_fast_traveling = 1;
   var_0 scripts\cp\utility::adddamagemodifier("fast_travel", 0, 0);
   var_0 dontinterpolate();
-  var_0 setorigin(var_6);
+  var_0 setOrigin(var_6);
   var_0 setplayerangles(var_4.angles);
   var_8 = spawn("script_origin", var_6);
-  var_0 linkto(var_8);
+  var_0 linkTo(var_8);
   wait(0.1);
-  var_8 moveto(var_7, 1);
+  var_8 moveTo(var_7, 1);
   wait(1);
   var_0.is_fast_traveling = undefined;
   var_0.is_fast_traveling = undefined;
@@ -611,7 +611,7 @@ teleport_to_portal_safe_spot(var_0, var_1) {
   }
 
   var_0 dontinterpolate();
-  var_0 setorigin(var_3.origin);
+  var_0 setOrigin(var_3.origin);
   var_0 setplayerangles(var_3.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();
@@ -658,7 +658,7 @@ teleport_ai_to_portal_safe_spot(var_0) {
   var_6 = getclosestpointonnavmesh(var_2.origin) + (0, 0, 5);
   var_0 unlink();
   var_0 dontinterpolate();
-  var_0 setorigin(var_6);
+  var_0 setOrigin(var_6);
   var_0 setplayerangles(var_2.angles);
   var_0.portal_end_origin = var_6;
   playFX(level._effect["vfx_zmb_portal_exit_burst"], var_6, var_2.angles);
@@ -692,8 +692,8 @@ portal_cooldown_monitor() {
 func_15B6() {
   level endon("game_ended");
   level thread turn_on_room_exit_portal();
-  var_0 = scripts\engine\utility::getstruct("spawn_portal_fx", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("spawn_portal_fx", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("pap_portal", "script_noteworthy");
   level.pap_portal_scriptable = spawn("script_model", var_0.origin);
   level.pap_portal_scriptable setModel("prop_zm_scriptable_portal_fx_final");
   level.pap_portal_scriptable.angles = var_0.angles;
@@ -769,7 +769,7 @@ turn_on_exit_portal_fx(var_0) {
 }
 
 turn_on_room_exit_portal() {
-  var_0 = scripts\engine\utility::getstruct("hidden_room_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hidden_room_portal", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("tag_origin");
   var_1.angles = var_0.angles;
@@ -782,7 +782,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(var_0) {
   var_0 makeusable();
-  var_0 sethintstring(&"CP_FINAL_INTERACTIONS_EXIT_PAP_ROOM");
+  var_0 setHintString(&"CP_FINAL_INTERACTIONS_EXIT_PAP_ROOM");
   var_0.portal_is_open = 1;
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -853,7 +853,7 @@ hidden_room_exit_tube(var_0) {
   var_0 notify("delete_equipment");
   var_0 scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
   var_1 = move_through_tube(var_0, "hidden_travel_tube_end", "hidden_travel_tube_start", 1);
-  scripts\engine\utility::getstruct("pap_portal", "script_noteworthy") teleport_to_safe_spot(var_0);
+  scripts\engine\utility::getStruct("pap_portal", "script_noteworthy") teleport_to_safe_spot(var_0);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
   wait(0.1);
   var_1 delete();
@@ -896,7 +896,7 @@ teleport_to_safe_spot(var_0) {
   var_0 playershow();
   var_0 unlink();
   var_0 dontinterpolate();
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
   var_0 setplayerangles(var_1.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();

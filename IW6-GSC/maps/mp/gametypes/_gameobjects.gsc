@@ -118,7 +118,7 @@ createCarryObject(ownerTeam, trigger, visuals, offset) {
 
   if(!isDefined(trigger.linkToEnabledFlag)) {
     trigger.linkToEnabledFlag = true;
-    trigger EnableLinkTo();
+    trigger EnablelinkTo();
   }
 
   carryObject.useWeapon = undefined;
@@ -570,7 +570,7 @@ setDropped() {
     dropOrigin = trace;
     if(angleTrace["fraction"] < 1 && distance(angleTrace["position"], trace) < 10.0) {
       forward = (cos(tempAngle), sin(tempAngle), 0);
-      forward = VectorNormalize(forward - (angleTrace["normal"] * VectorDot(forward, angleTrace["normal"])));
+      forward = vectorNormalize(forward - (angleTrace["normal"] * VectorDot(forward, angleTrace["normal"])));
       dropAngles = vectortoangles(forward);
     } else {
       dropAngles = (0, tempAngle, 0);
@@ -596,10 +596,10 @@ setDropped() {
         self.resetNow = true;
       } else {
         for(index = 0; index < self.visuals.size; index++) {
-          self.visuals[index] LinkTo(mover);
+          self.visuals[index] linkTo(mover);
         }
 
-        self.trigger LinkTo(mover);
+        self.trigger linkTo(mover);
 
         data = spawnStruct();
         data.carryobject = self;
@@ -1464,9 +1464,9 @@ updateUseRate() {
 useHoldThink(player) {
   player notify("use_hold");
   if(isPlayer(player)) {
-    player playerLinkTo(self.trigger);
+    player playerlinkTo(self.trigger);
   } else {
-    player LinkTo(self.trigger);
+    player linkTo(self.trigger);
   }
 
   player PlayerLinkedOffsetEnable();

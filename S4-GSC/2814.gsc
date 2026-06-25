@@ -74,7 +74,7 @@ _id_DB30(var_0) {
     return undefined;
   }
 
-  var_3 = vectornormalize((var_2[0], var_2[1], 0));
+  var_3 = vectorNormalize((var_2[0], var_2[1], 0));
   var_4 = anglesToForward(var_0.angles);
   var_5 = vectordot(var_4, var_3);
 
@@ -149,7 +149,7 @@ _id_57F9(var_0, var_1, var_2) {
     return;
   }
   var_3 = self._id_012F _meth_8122();
-  self linkto(var_3);
+  self linkTo(var_3);
   self _meth_82B4(var_0, var_1, var_2);
 }
 

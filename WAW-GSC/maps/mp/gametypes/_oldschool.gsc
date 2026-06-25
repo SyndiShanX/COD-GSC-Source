@@ -127,7 +127,7 @@ deletePickups() {
 
   for(i = 0; i < pickups.size; i++) {
     if(isDefined(pickups[i].target)) {
-      getent(pickups[i].target, "targetname") delete();
+      getEnt(pickups[i].target, "targetname") delete();
     }
     pickups[i] delete();
   }
@@ -218,7 +218,7 @@ trackPickup(pickup, id) {
       maps\mp\_utility::error("oldschool_pickup with classname script_model does not have script_noteworthy set to a valid perk");
       return;
     }
-    trig = getent(pickup.target, "targetname");
+    trig = getEnt(pickup.target, "targetname");
     respawnTime = level.pickupPerkRespawnTime;
 
     if(!getDvarInt("scr_game_perks")) {
@@ -414,11 +414,11 @@ spinPickup() {
     org = spawn("script_origin", self.origin);
     org endon("death");
 
-    self linkto(org);
+    self linkTo(org);
     self thread deleteOnDeath(org);
 
     while(1) {
-      org rotateyaw(360, 3, 0, 0);
+      org rotateYaw(360, 3, 0, 0);
       wait 2.9;
     }
   }

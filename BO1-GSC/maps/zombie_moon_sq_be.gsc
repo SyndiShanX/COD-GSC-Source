@@ -14,7 +14,7 @@ init() {
   PrecacheVehicle("misc_freefall");
   level.scr_anim["_be_"]["to_the_right"][0] = % fxanim_zom_ztem_crystal_small_anim;
   level.scr_anim["_be_"]["to_the_left"][0] = % fxanim_zom_ztem_crystal_small_anim;
-  level.motivational_struct = getstruct("struct_motivation", "targetname");
+  level.motivational_struct = getStruct("struct_motivation", "targetname");
   Assert(isDefined(level.motivational_struct.name));
   if(!isDefined(level.motivational_struct)) {
     PrintLn("$$$$ No structs, reBSP $$$$");
@@ -41,7 +41,7 @@ stage_logic_2() {
   angles = level._be.angles;
   exploder(405);
   level._be playSound("evt_be_insert");
-  level._be StopAnimScripted();
+  level._be StopanimScripted();
   level._be Unlink();
   level._be DontInterpolate();
   level._be.origin = org;
@@ -51,14 +51,14 @@ stage_logic_2() {
     level._be_vehicle Delete();
   }
   if(isDefined(level._be_origin_animate)) {
-    level._be_origin_animate StopAnimScripted();
+    level._be_origin_animate StopanimScripted();
     level._be_origin_animate Delete();
   }
   maps\_zombiemode_weap_quantum_bomb::quantum_bomb_register_result("be2", undefined, 100, ::be2_validation);
   level._be_pos = level._be.origin;
   level waittill("be2_validation");
   maps\_zombiemode_weap_quantum_bomb::quantum_bomb_deregister_result("be2");
-  s = getstruct("be2_pos", "targetname");
+  s = getStruct("be2_pos", "targetname");
   level._be DontInterpolate();
   level._be.origin = s.origin;
   level.teleport_target_trigger = spawn("trigger_radius", s.origin + (0, 0, -70), 0, 125, 100);
@@ -100,11 +100,11 @@ teleport_target(grenade, model) {
   level.teleport_target_trigger = undefined;
   wait(1.0);
   time = 3.0;
-  model MoveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
+  model moveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
   wait(time);
   teleport_targets = getEntArray("vista_rocket", "targetname");
   model Hide();
-  playsoundatposition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
+  playSoundAtPosition("zmb_gersh_teleporter_out", grenade.origin + (0, 0, 50));
   wait(0.5);
   model StopLoopSound(1);
   wait(0.5);
@@ -146,7 +146,7 @@ moon_be_start_capture() {
   level thread moon_be_activate();
 }
 moon_be_activate() {
-  start = getstruct("struct_be_start", "targetname");
+  start = getStruct("struct_be_start", "targetname");
   road_start = GetVehicleNode("vs_stage_1a", "targetname");
   if(!isDefined(road_start)) {
     PrintLn("$$$$ Missing road_start, rebsp the level $$$$");
@@ -164,11 +164,11 @@ moon_be_activate() {
   level._be thread waittill_player_is_close();
   origin_animate = spawn("script_model", level._be.origin);
   origin_animate setModel("tag_origin_animate");
-  level._be LinkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
-  level._be_vehicle = SpawnVehicle("tag_origin", "be_mover", "misc_freefall", road_start.origin, road_start.angles);
+  level._be linkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  level._be_vehicle = spawnVehicle("tag_origin", "be_mover", "misc_freefall", road_start.origin, road_start.angles);
   level._be_vehicle._be_model = level._be;
   level._be_vehicle._be_org_anim = origin_animate;
-  origin_animate LinkTo(level._be_vehicle);
+  origin_animate linkTo(level._be_vehicle);
   level._be_origin_animate = origin_animate;
   level._be_vehicle maps\_vehicle::getonpath(road_start);
   d_trig = spawn("trigger_damage", level._be_vehicle.origin, 0, 32, 72);
@@ -370,7 +370,7 @@ get_closest_index_2d(org, array, dist) {
 }
 moon_be_anim_swap(int_anim) {
   self endon("death");
-  self._be_model StopAnimScripted();
+  self._be_model StopanimScripted();
   if(int_anim == 0) {
     self._be_org_anim thread maps\_anim::anim_loop_aligned(self._be_model, "to_the_left", "tag_origin_animate_jnt");
   } else {
@@ -379,7 +379,7 @@ moon_be_anim_swap(int_anim) {
 }
 moon_be_stop_anim() {
   self endon("death");
-  self._be_model StopAnimScripted();
+  self._be_model StopanimScripted();
 }
 moon_be_resume_anim() {
   self endon("death");

@@ -52,9 +52,9 @@ _id_40A5(var_0, var_1, var_2) {
   wait 0.1;
 
   if(isDefined(level._id_40A6)) {
-    var_0 playerlinkto(var_3, "tag_player", 0.35, 120, 28, 30, 30, 0);
+    var_0 playerlinkTo(var_3, "tag_player", 0.35, 120, 28, 30, 30, 0);
   } else {
-    var_0 playerlinkto(var_3, "tag_player", 0.35, 60, 28, 30, 30, 0);
+    var_0 playerlinkTo(var_3, "tag_player", 0.35, 60, 28, 30, 30, 0);
   }
   var_0 freezecontrols(0);
   var_3 hide();
@@ -102,7 +102,7 @@ _id_40A7(var_0) {
 
   if(self == level.player) {
     for(var_1 = 0; var_1 < 24; var_1++) {
-      self setorigin(self.origin + (2, 0, 0));
+      self setOrigin(self.origin + (2, 0, 0));
       wait 0.05;
     }
   }

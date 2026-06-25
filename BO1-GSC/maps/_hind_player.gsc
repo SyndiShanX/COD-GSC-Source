@@ -56,7 +56,7 @@ watch_for_cockpit_switch() {
         self setModel(self.cockpit_models[self.current_cockpit_state]);
         self.console_model = maps\_utility::spawn("script_model", self.origin);
         self.console_model setModel("t5_veh_helo_hind_ckpitdmg0");
-        self.console_model linkto(self, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+        self.console_model linkTo(self, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
         self HidePart("tag_window_l_dmg_0a", "t5_veh_helo_hind_cockpitview");
         self HidePart("tag_window_l_dmg_0b", "t5_veh_helo_hind_cockpitview");
         self HidePart("tag_window_c_dmg_0", "t5_veh_helo_hind_cockpitview");
@@ -340,9 +340,9 @@ arm_rockets() {
             self.armed_rockets = armed_rockets.size;
             self notify("charged_rocket");
             advance_pod_index();
-            playsoundatposition("wpn_rocket_prime_chopper_trigger", (0, 0, 0));
+            playSoundAtPosition("wpn_rocket_prime_chopper_trigger", (0, 0, 0));
             if(armed_rockets.size > 1) {
-              playsoundatposition("wpn_rocket_prime_chopper", (0, 0, 0));
+              playSoundAtPosition("wpn_rocket_prime_chopper", (0, 0, 0));
             }
             break;
           } else {
@@ -361,10 +361,10 @@ reload_chopper_sounds() {
     level.reload_string = "left";
   }
   if(level.reload_string == "left") {
-    playsoundatposition("wpn_rocket_reload_chopper_left_battery", (0, 0, 0));
+    playSoundAtPosition("wpn_rocket_reload_chopper_left_battery", (0, 0, 0));
     level.reload_string = "right";
   } else {
-    playsoundatposition("wpn_rocket_reload_chopper_right_battery", (0, 0, 0));
+    playSoundAtPosition("wpn_rocket_reload_chopper_right_battery", (0, 0, 0));
     level.reload_string = "left";
   }
 }
@@ -451,7 +451,7 @@ rocket_reload() {
         wait(0.5);
       }
       self ent_flag_clear("reloading_rockets");
-      playsoundatposition("wpn_rocket_reload_chopper_reloaded_buzzer", (0, 0, 0));
+      playSoundAtPosition("wpn_rocket_reload_chopper_reloaded_buzzer", (0, 0, 0));
     }
   }
 }
@@ -476,7 +476,7 @@ rocket_reload_button() {
         wait(0.5);
       }
       self ent_flag_clear("reloading_rockets");
-      playsoundatposition("wpn_rocket_reload_chopper_reloaded_buzzer", (0, 0, 0));
+      playSoundAtPosition("wpn_rocket_reload_chopper_reloaded_buzzer", (0, 0, 0));
     }
   }
 }
@@ -494,7 +494,7 @@ create_right_rocket_pod() {
   rocket_pod_offset = self.origin - rocket_pod_origin;
   rocket_pod = spawn("script_origin", rocket_pod_origin);
   rocket_pod.origin = (self.origin[0] + rocket_pod_offset[0], self.origin[1] + rocket_pod_offset[1], rocket_pod_origin[2]);
-  rocket_pod LinkTo(self);
+  rocket_pod linkTo(self);
   return rocket_pod;
 }
 get_rocket_pod_fire_pos(pod_index) {
@@ -520,7 +520,7 @@ fire_rocket(rocket) {
   } else {
     end_origin = start_origin + (forward * 1000);
   }
-  get_players()[0] PlayRumbleOnEntity("damage_light");
+  get_players()[0] playRumbleOnEntity("damage_light");
   MagicBullet("hind_rockets", start_origin, end_origin, self);
   rocket.is_armed = false;
   self notify("fired_rocket");
@@ -832,7 +832,7 @@ make_player_usable() {
         who FreezeControls(false);
       }
       self notify("animated_switch");
-      playsoundatposition("evt_hind_climb_1", (0, 0, 0));
+      playSoundAtPosition("evt_hind_climb_1", (0, 0, 0));
       level.animating_helicopter = self;
       self player_enter_animation(who);
       self notify("player_entered");
@@ -870,7 +870,7 @@ player_enter_animation(player) {
   player_body = spawn_anim_model("hind_body", player.origin, player.angles);
   self.player_body = player_body;
   player_body Hide();
-  player_body LinkTo(self, "origin_animate_jnt");
+  player_body linkTo(self, "origin_animate_jnt");
   self notify("playing takeoff animation");
   self thread maps\_anim::anim_single_aligned(player_body, "playable_hind_climbin", "origin_animate_jnt");
   self thread exterior_window_anim();
@@ -893,7 +893,7 @@ player_exit_animation(player) {
     player_body = spawn_anim_model("hind_body", player.origin, player.angles);
     self.player_body = player_body;
     player_body Hide();
-    player_body LinkTo(self, "origin_animate_jnt");
+    player_body linkTo(self, "origin_animate_jnt");
   } else {
     player_body = self.player_body;
     self.player_body.animname = "hind_body";
@@ -914,7 +914,7 @@ player_exit_animation(player) {
   trace_start = player.origin + (0, 0, 200);
   trace_end = player.origin + (0, 0, -100);
   player_trace = bulletTrace(trace_start, trace_end, false, self);
-  player SetOrigin(player_trace["position"]);
+  player setOrigin(player_trace["position"]);
 }
 init_player_anims() {
   AssertEX(isDefined(level.player_interactive_model), "The playable hind requires that you set a player_interactive_model in _loadout.gsc");
@@ -946,12 +946,12 @@ interior_window_anim() {
 }
 interior_window_anim_exit() {
   self ClearAnim(level.scr_anim["hind"]["landed"], 0);
-  self AnimScripted("hind_exit_anim", self.origin, self.angles, level.scr_anim["hind"]["climbout_interior"]);
+  self animScripted("hind_exit_anim", self.origin, self.angles, level.scr_anim["hind"]["climbout_interior"]);
   self waittill("playable_hind_climbout");
   self exterior_window_anim_exit();
 }
 exterior_window_anim_exit() {
-  self AnimScripted("hind_exit_anim", self.origin, self.angles, level.scr_anim["hind"]["climbout_exterior"]);
+  self animScripted("hind_exit_anim", self.origin, self.angles, level.scr_anim["hind"]["climbout_exterior"]);
 }
 landed_animation() {
   self SetAnim(level.scr_anim["hind"]["landed"], 1);

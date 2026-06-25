@@ -220,15 +220,15 @@ func_1205A(var_0, var_1, var_2, var_3) {
 }
 
 func_11B5C(var_0, var_1, var_2, var_3) {
-  return !scripts\asm\asm_bb::bb_isanimscripted() && isDefined(self.asm.var_4C86.var_697F);
+  return !scripts\asm\asm_bb::bb_isanimScripted() && isDefined(self.asm.var_4C86.var_697F);
 }
 
 func_11B63(var_0, var_1, var_2, var_3) {
-  return !scripts\asm\asm_bb::bb_isanimscripted() && isDefined(self.asm.var_4C86.var_92FA);
+  return !scripts\asm\asm_bb::bb_isanimScripted() && isDefined(self.asm.var_4C86.var_92FA);
 }
 
 func_11B59(var_0, var_1, var_2, var_3) {
-  return !scripts\asm\asm_bb::bb_isanimscripted();
+  return !scripts\asm\asm_bb::bb_isanimScripted();
 }
 
 func_12376(var_0, var_1, var_2, var_3) {

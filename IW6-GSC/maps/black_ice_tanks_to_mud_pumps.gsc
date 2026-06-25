@@ -37,14 +37,14 @@ section_post_inits() {
   level._tanks = spawnStruct();
   level._engine_room = spawnStruct();
   level._engine_room.damage_smoke_ent = common_scripts\utility::spawn_tag_origin();
-  level._tanks.struct_bridge = common_scripts\utility::getstruct("struct_tanks_bridge_fall_scene", "targetname");
+  level._tanks.struct_bridge = common_scripts\utility::getStruct("struct_tanks_bridge_fall_scene", "targetname");
 
   if(isDefined(level._tanks.struct_bridge)) {
-    level._tanks.pipe = getent("model_tanks_pipe", "targetname");
+    level._tanks.pipe = getEnt("model_tanks_pipe", "targetname");
     level._tanks.pipe maps\_utility::assign_animtree("tanks_pipe");
-    level._tanks.bridge = getent("model_tanks_bridge", "targetname");
+    level._tanks.bridge = getEnt("model_tanks_bridge", "targetname");
     level._tanks.bridge maps\_utility::assign_animtree("tanks_bridge");
-    level._tanks.bridge_destroyed = getent("model_tanks_bridge_damaged", "targetname");
+    level._tanks.bridge_destroyed = getEnt("model_tanks_bridge_damaged", "targetname");
     level._tanks.bridge_destroyed maps\_utility::assign_animtree("tanks_bridge");
     level._tanks.bridge_destroyed hide();
 
@@ -54,7 +54,7 @@ section_post_inits() {
 
     var_0 = [level._tanks.pipe, level._tanks.bridge_destroyed, level._tanks.bridge];
     level._tanks.struct_bridge maps\_anim::anim_first_frame(var_0, "tanks_bridge_fall_scene");
-    level._engine_room.baker_enter_struct = common_scripts\utility::getstruct("struct_engine_room_baker_enter", "targetname");
+    level._engine_room.baker_enter_struct = common_scripts\utility::getStruct("struct_engine_room_baker_enter", "targetname");
     level._engine_room.door = maps\black_ice_util::setup_door("model_engine_room_door", undefined, "jnt_door");
   } else
     iprintln("black_ice_tanks_to_mud_pumps.gsc: Warning - Tanks bridge struct missing (compiled out?)");
@@ -390,8 +390,8 @@ event_tanks_bridge_fall_scene() {
   thread maps\black_ice_audio::sfx_blackice_catwalk_explode();
   thread maps\black_ice_fx::tanks_bridge_fall_explosions();
   thread maps\black_ice_fx::tanks_bridge_fall_fx();
-  var_0 = getent("enemy_tanks_catwalk_scene_1", "targetname") maps\_utility::spawn_ai(1);
-  var_1 = getent("enemy_tanks_catwalk_scene_2", "targetname") maps\_utility::spawn_ai(1);
+  var_0 = getEnt("enemy_tanks_catwalk_scene_1", "targetname") maps\_utility::spawn_ai(1);
+  var_1 = getEnt("enemy_tanks_catwalk_scene_2", "targetname") maps\_utility::spawn_ai(1);
   var_0.animname = "tanks_guy_1";
   var_1.animname = "tanks_guy_2";
   var_0.v.nogun = 1;
@@ -435,10 +435,10 @@ enemies_engineroom_entry() {
   var_1 = ["ai0", "ai1"];
   var_2 = ["blackice_ru1_cough", "blackice_ru2_cough", "blackice_ru3_cough"];
   var_3 = [];
-  var_4 = common_scripts\utility::getstruct("vignette_engineroom_workers", "script_noteworthy");
+  var_4 = common_scripts\utility::getStruct("vignette_engineroom_workers", "script_noteworthy");
 
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
-    var_6 = getent(var_0[var_5], "targetname") maps\_utility::spawn_ai(1);
+    var_6 = getEnt(var_0[var_5], "targetname") maps\_utility::spawn_ai(1);
     var_6.animname = var_1[var_5];
     var_6.v.death_anim_anytime = 1;
     var_3 = common_scripts\utility::array_add(var_3, var_6);
@@ -479,9 +479,9 @@ enemies_engineroom_extinguisher(var_0) {
   level._enemies["engine_room_extinguisher"] = [];
   var_1 = getEntArray("spawner_engine_room_extinguish", "targetname");
   var_2 = [];
-  var_2[0] = getent("origin_engine_room_extinguish_2", "targetname");
-  var_2[1] = getent("origin_engine_room_extinguish_3", "targetname");
-  var_2[2] = getent("origin_engine_room_extinguish_1", "targetname");
+  var_2[0] = getEnt("origin_engine_room_extinguish_2", "targetname");
+  var_2[1] = getEnt("origin_engine_room_extinguish_3", "targetname");
+  var_2[2] = getEnt("origin_engine_room_extinguish_1", "targetname");
   common_scripts\utility::flag_wait("flag_engineroom_player_start");
   var_3 = [];
 
@@ -549,12 +549,12 @@ spawnfunc_engine_room_reinforcements_2() {
 }
 
 event_topdrive_fall(var_0) {
-  var_1 = common_scripts\utility::getstruct("vignette_topdrive", "script_noteworthy");
-  var_2 = common_scripts\utility::getstruct("struct_mudpumps_topdrive_duck", "targetname");
+  var_1 = common_scripts\utility::getStruct("vignette_topdrive", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("struct_mudpumps_topdrive_duck", "targetname");
   maps\black_ice_util::array_thread_targetname("trig_mudpumps_player_spawn_heli", maps\black_ice_util::waittill_trigger, "notify_spawn_pipedeck_heli");
   thread maps\black_ice_util::waittill_trigger_ent_targetname("trig_mudpumps_player_spawn_heli", level.player, common_scripts\utility::flag_set, "flag_player_at_topdrive");
   var_1 thread heli_spawn();
-  var_3 = getent("model_mudpmps_topdrive", "targetname");
+  var_3 = getEnt("model_mudpmps_topdrive", "targetname");
   var_3 maps\_utility::assign_animtree("top_drive");
   var_4 = maps\_utility::spawn_anim_model("drill_pipe1", level.player.origin);
   var_5 = maps\_utility::spawn_anim_model("drill_pipe2", level.player.origin);
@@ -595,7 +595,7 @@ event_topdrive_fall_ally2_duck(var_0) {
 }
 
 cleanup_topdrive() {
-  var_0 = getent("brush_topdrive_blocker", "targetname");
+  var_0 = getEnt("brush_topdrive_blocker", "targetname");
   var_1 = getEntArray("topdrive_debris", "targetname");
   common_scripts\utility::array_call(var_1, ::hide);
 
@@ -604,7 +604,7 @@ cleanup_topdrive() {
   }
 
   common_scripts\utility::array_call(var_1, ::show);
-  var_0 moveto(var_0.origin - (0, 0, 136), 0.05);
+  var_0 moveTo(var_0.origin - (0, 0, 136), 0.05);
 }
 
 heli_spawn() {
@@ -629,7 +629,7 @@ heli_spawn() {
   var_1.turret_aim = maps\_utility::spawn_anim_model("pipedeck_heli_target");
   var_1.turret_aim hide();
   var_1.turret_aim.origin = var_1 gettagorigin("tag_flash") + (anglesToForward(var_1 gettagangles("tag_flash")) + -1 * anglestoup(var_1 gettagangles("tag_flash")) * 256);
-  var_1.turret_aim linkto(var_1);
+  var_1.turret_aim linkTo(var_1);
   var_1.turret_impact = common_scripts\utility::spawn_tag_origin();
   var_1.turret_aim unlink();
   var_1 thread heli_turret_and_spotlight_aim(1.5);
@@ -650,7 +650,7 @@ heli_spawn() {
     thread heli_loop(var_1);
     common_scripts\utility::flag_wait("flag_mudpumps_end");
     self notify("stop_loop");
-    var_1 stopanimscripted();
+    var_1 stopanimScripted();
     var_1 thread maps\_vehicle_code::animate_drive_idle();
   }
 
@@ -689,7 +689,7 @@ heli_turret_and_spotlight_aim(var_0) {
 
   for(;;) {
     var_1 = (randomfloatrange(-1 * var_0, var_0), randomfloatrange(-1 * var_0, var_0), randomfloatrange(-1 * var_0, var_0));
-    self setturrettargetent(self.turret_aim, var_1);
+    self setturrettargetEnt(self.turret_aim, var_1);
     wait 0.1;
   }
 }

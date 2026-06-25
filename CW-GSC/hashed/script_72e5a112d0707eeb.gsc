@@ -103,7 +103,7 @@ function main(str_objective, b_starting) {
   foreach(guy in var_ef4e7fe0) {
     if(guy.script_noteworthy === "balloon_shooter") {
       if(isalive(guy)) {
-        guy thread ai::shoot_at_target("normal", getent("balloon_shooters_shootat", "targetname"), "tag_origin", 20, 100, 1);
+        guy thread ai::shoot_at_target("normal", getEnt("balloon_shooters_shootat", "targetname"), "tag_origin", 20, 100, 1);
       }
 
       continue;
@@ -190,7 +190,7 @@ function main(str_objective, b_starting) {
   foreach(guy in var_cf35de07) {
     if(guy.script_noteworthy === "balloon_shooter") {
       if(isalive(guy)) {
-        guy thread ai::shoot_at_target("normal", getent("balloon_shooters_shootat", "targetname"), "tag_origin", 20, 100, 1);
+        guy thread ai::shoot_at_target("normal", getEnt("balloon_shooters_shootat", "targetname"), "tag_origin", 20, 100, 1);
       }
 
       continue;
@@ -262,7 +262,7 @@ function function_860ecc4b() {
 
 function function_afc01eb9() {
   level endon(#"flg_defend_complete");
-  var_77b3f074 = getent("back_left_gl_splash_trig", "targetname");
+  var_77b3f074 = getEnt("back_left_gl_splash_trig", "targetname");
   var_81d24c08 = struct::get("gl_splash_damage_origin", "targetname");
 
   while(true) {

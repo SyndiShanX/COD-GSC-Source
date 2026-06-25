@@ -165,7 +165,7 @@ turn_off_trigger_for_time(var_0) {
 }
 
 delete_trigger_with_linkname(var_0) {
-  var_1 = getent(var_0, "script_linkname");
+  var_1 = getEnt(var_0, "script_linkname");
 
   if(!isDefined(var_1)) {
     return;
@@ -396,7 +396,7 @@ enemy_accuracy_assignment() {
 
     for(var_2 = 0; var_2 < var_0.size; var_2++) {
       var_11 = var_0[var_2];
-      var_12 = vectornormalize(var_11.origin - level.player.origin);
+      var_12 = vectorNormalize(var_11.origin - level.player.origin);
       var_13 = vectordot(var_4, var_12);
       var_11.dot = var_13;
       var_14 = var_13 > 0.8;
@@ -505,9 +505,9 @@ play_sound_on_price(var_0) {
     return;
   }
   if(isalive(level.price)) {
-    self linkto(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
+    self linkTo(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
   } else {
-    self linkto(level.player, "", (0, 0, 60), (0, 0, 0));
+    self linkTo(level.player, "", (0, 0, 60), (0, 0, 0));
   }
 
   maps\_utility::play_sound_on_tag(var_0, "", 1);
@@ -610,12 +610,12 @@ heli_trigger() {
 }
 
 block_path() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_0 connectpaths();
   var_0 notsolid();
   self waittill("trigger");
   var_0 solid();
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   var_1 = 0.25;
 
   if(isDefined(self.script_delay)) {
@@ -650,7 +650,7 @@ patrol_guy() {
   var_0 = get_patrol_anims();
   self.allowdeath = 1;
   maps\_utility::set_generic_run_anim("patrol_jog");
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
   maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
   maps\_utility::add_wait(maps\_utility::waittill_msg, "enemy");
   level maps\_utility::add_func(common_scripts\utility::flag_set, "wounding_enemy_detected");
@@ -662,7 +662,7 @@ patrol_guy() {
     self.disablearrivals = 1;
 
     if(!isDefined(self.enemy)) {
-      var_2 = getent(var_1.target, "targetname");
+      var_2 = getEnt(var_1.target, "targetname");
       thread maps\_spawner::go_to_origin(var_2);
     }
   }
@@ -699,7 +699,7 @@ delete_wounding_sight_blocker() {
   if(common_scripts\utility::flag("wounding_sight_blocker_deleted")) {
     return;
   }
-  var_0 = getent("wounding_sight_blocker", "targetname");
+  var_0 = getEnt("wounding_sight_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   common_scripts\utility::flag_set("wounding_sight_blocker_deleted");
@@ -743,7 +743,7 @@ countdown(var_0) {
 
 defend_heat_area_until_enemies_leave() {
   level endon("heat_area_cleared");
-  var_0 = getent("price_death_org", "targetname").origin;
+  var_0 = getEnt("price_death_org", "targetname").origin;
   var_1 = getnode("enemy_flee_node", "targetname");
   var_2 = 1250;
 
@@ -865,7 +865,7 @@ kills_enemies_then_wounds_price_then_leaves() {
   level.price thread price_heli_hit_detection();
   kill_all_visible_enemies();
   common_scripts\utility::flag_set("price_heli_moves_on");
-  self setturrettargetent(level.price);
+  self setturrettargetEnt(level.price);
   maps\sniperescape_wounding::heli_fires();
 }
 
@@ -920,7 +920,7 @@ kill_all_visible_enemies() {
     var_1 thread die_soon();
 
     while(isalive(var_1)) {
-      self setturrettargetent(var_1, common_scripts\utility::randomvector(15) + (0, 0, 16));
+      self setturrettargetEnt(var_1, common_scripts\utility::randomvector(15) + (0, 0, 16));
       self fireweapon();
       wait 0.15;
     }
@@ -999,7 +999,7 @@ price_flees_grenades() {
     }
 
     var_5 = anglesToForward(level.price.angles);
-    var_6 = vectornormalize(var_1.origin - level.price.origin);
+    var_6 = vectorNormalize(var_1.origin - level.price.origin);
     var_7 = vectordot(var_5, var_6);
 
     if(var_7 > 0.2) {
@@ -1037,8 +1037,8 @@ price_flees_grenades() {
 
 price_teleports_to_player() {
   var_0 = spawn("script_origin", level.price.origin);
-  level.price linkto(var_0);
-  var_0 moveto(level.player.origin, 1);
+  level.price linkTo(var_0);
+  var_0 moveTo(level.player.origin, 1);
   wait 1;
   var_0 delete();
 
@@ -1072,8 +1072,8 @@ price_teleports_to_spot(var_0) {
 
 price_teleports_to_org(var_0) {
   var_1 = spawn("script_origin", level.price.origin);
-  level.price linkto(var_1);
-  var_1 moveto(var_0 + (0, 0, 2), 2);
+  level.price linkTo(var_1);
+  var_1 moveTo(var_0 + (0, 0, 2), 2);
   wait 2;
   var_1 delete();
 }
@@ -1156,7 +1156,7 @@ price_targets_guy(var_0) {
   }
 
   var_1 = spawn("script_origin", (0, 0, 0));
-  var_1 linkto(var_0, "TAG_EYE", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "TAG_EYE", (0, 0, 0), (0, 0, 0));
   level.price_target_guy = var_0;
   level.price_target_time = gettime();
   level.price.targetorg = var_1;
@@ -1176,7 +1176,7 @@ price_turns_towards_guy(var_0) {
 
 should_turn_right(var_0) {
   var_1 = anglestoright((0, self.angles[1], 0));
-  var_2 = vectornormalize(var_0 - self.origin);
+  var_2 = vectorNormalize(var_0 - self.origin);
   return vectordot(var_1, var_2) > 0;
 }
 
@@ -1236,7 +1236,7 @@ get_array_within_fov(var_0, var_1, var_2, var_3) {
 
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
     var_7 = var_2[var_6];
-    var_8 = vectornormalize(var_7.origin - var_0);
+    var_8 = vectorNormalize(var_7.origin - var_0);
     var_9 = vectordot(var_1, var_8);
     var_7.dot = var_9;
     var_10 = var_9 >= var_3;
@@ -1297,7 +1297,7 @@ get_cansee_array(var_0) {
 }
 
 price_moves_to_sniping_position() {
-  var_0 = getent("price_gnoll", "targetname");
+  var_0 = getEnt("price_gnoll", "targetname");
   var_1 = var_0.origin;
   var_2 = (-3039.22, -3567.34, 117.2);
   level.price notify("stop_loop");
@@ -1306,7 +1306,7 @@ price_moves_to_sniping_position() {
     var_3 = anglesToForward(level.price.angles);
     var_4 = var_1 - level.price.origin;
     var_4 = (var_4[0], var_4[1], 0);
-    var_5 = vectornormalize(var_4);
+    var_5 = vectorNormalize(var_4);
     var_6 = vectordot(var_3, var_5);
     var_7 = distance(level.price.origin, var_1);
 
@@ -1338,12 +1338,12 @@ price_moves_to_sniping_position() {
     break;
   }
 
-  var_8 = getent("park_reinforce", "targetname");
+  var_8 = getEnt("park_reinforce", "targetname");
   price_aims_at(var_8.origin);
 
   for(;;) {
     var_3 = anglesToForward(level.price.angles);
-    var_5 = vectornormalize(var_8.origin - level.price.origin);
+    var_5 = vectorNormalize(var_8.origin - level.price.origin);
     var_6 = vectordot(var_3, var_5);
 
     if(var_6 < 0.7) {
@@ -1360,7 +1360,7 @@ price_moves_to_sniping_position() {
   }
 
   var_3 = anglesToForward(level.price.angles);
-  var_5 = vectornormalize(var_8.origin - level.price.origin);
+  var_5 = vectorNormalize(var_8.origin - level.price.origin);
   var_6 = vectordot(var_3, var_5);
   waittillframeend;
   level.price thread maps\_anim::anim_loop_solo(level.price, "wounded_idle", undefined, "stop_loop");
@@ -1436,7 +1436,7 @@ idle_until_price_has_target() {
 
       while(var_0) {
         var_2 = anglesToForward(level.price.angles);
-        var_3 = vectornormalize(level.player.origin - level.price.origin);
+        var_3 = vectorNormalize(level.player.origin - level.price.origin);
         var_4 = vectordot(var_2, var_3);
 
         if(var_4 < 0.5) {
@@ -1510,7 +1510,7 @@ price_fends_off_attacker(var_0) {
 
   for(;;) {
     var_1 = anglesToForward(level.price.angles);
-    var_2 = vectornormalize(var_0.origin - level.price.origin);
+    var_2 = vectorNormalize(var_0.origin - level.price.origin);
     var_3 = vectordot(var_1, var_2);
 
     if(var_3 < 0.8) {
@@ -1644,7 +1644,7 @@ wait_for_player_to_drop_price(var_0) {
 
 wait_for_player_to_drop_price_func(var_0) {
   var_0 endon("trigger");
-  var_1 = getent("price_gnoll", "targetname");
+  var_1 = getEnt("price_gnoll", "targetname");
 
   for(;;) {
     var_2 = 0;
@@ -1758,9 +1758,9 @@ price_slides_into_proper_putdown_position() {
   }
   var_0 = spawn("script_origin", (0, 0, 0));
   var_0.origin = level.price.origin;
-  level.price linkto(var_0);
+  level.price linkTo(var_0);
   level.price thread maps\_anim::anim_first_frame_solo(level.price, "wounded_idle_reach");
-  var_0 moveto(level.price_drop_point, 0.5, 0.2, 0.2);
+  var_0 moveTo(level.price_drop_point, 0.5, 0.2, 0.2);
   level.price_drop_point = undefined;
   wait 0.5;
   var_0 delete();
@@ -2019,7 +2019,7 @@ player_picks_up_price() {
     var_2 delete();
 
     if(getDvar("no_heli_protection") == "") {
-      level.player setorigin((3577, -8420, 0.125));
+      level.player setOrigin((3577, -8420, 0.125));
     }
 
     if(getdvarint("use_old_crash_pickup") != 1) {
@@ -2067,7 +2067,7 @@ player_picks_up_price() {
   var_6.origin = var_6.origin + var_10;
 
   if(getdvarint("use_old_crash_pickup") == 1) {
-    level.player playerlinkto(var_2, "tag_player", 1.0, 0, 0, 0, 0);
+    level.player playerlinkTo(var_2, "tag_player", 1.0, 0, 0, 0, 0);
   } else {
     level.player playerlinktodelta(var_2, "tag_player", 1.0, 0, 0, 0, 0);
   }
@@ -2093,7 +2093,7 @@ player_picks_up_price() {
   var_8 = bulletTrace(level.player.origin + (0, 0, 32), level.player.origin, 0, undefined);
 
   if(var_8["fraction"] < 1) {
-    var_2 moveto(var_2.origin + (var_8["position"] - level.player.origin), 0.1);
+    var_2 moveTo(var_2.origin + (var_8["position"] - level.player.origin), 0.1);
     wait 0.1;
   }
 
@@ -2102,7 +2102,7 @@ player_picks_up_price() {
 
   if(getdvarint("use_old_crash_pickup") == 1) {
     var_2 delete();
-    level.player setorigin(var_9);
+    level.player setOrigin(var_9);
   } else {
     level.eplayerview = var_2;
     var_11.origin = level.player.origin;
@@ -2151,7 +2151,7 @@ player_puts_down_price() {
   }
 
   var_4 = level.player.origin;
-  var_5 = getent("price_spawner", "targetname");
+  var_5 = getEnt("price_spawner", "targetname");
   var_5.animname = "price";
   var_5 maps\_anim::set_start_pos("wounded_putdown", var_0.origin, var_0.angles);
   var_5.count = 1;
@@ -2167,7 +2167,7 @@ player_puts_down_price() {
   thread price_talks_as_he_is_picked_up(1);
 
   if(getdvarint("use_old_crash_pickup") == 1) {
-    level.player playerlinkto(var_1, "tag_player", 0.5, 1.0, 0, 0, 0, 0);
+    level.player playerlinkTo(var_1, "tag_player", 0.5, 1.0, 0, 0, 0, 0);
   } else {
     level.player playerlinktodelta(var_1, "tag_player", 1.0, 0, 0, 0, 0, 0);
   }
@@ -2186,7 +2186,7 @@ player_puts_down_price() {
   level.player allowsprint(1);
   level.player allowjump(1);
   level.player allowlean(1);
-  level.player setorigin(var_4);
+  level.player setOrigin(var_4);
 
   if(common_scripts\utility::flag("to_the_pool") && sufficient_time_remaining()) {
     common_scripts\utility::flag_set("can_save");
@@ -2445,8 +2445,8 @@ player_carries_price_until_he_drops_him() {
     level.price delete();
   }
 
-  var_0 = getent("price_drop_trigger", "targetname");
-  var_0 sethintstring(&"SNIPERESCAPE_HOLD_1_TO_PUT_CPT_MACMILLAN");
+  var_0 = getEnt("price_drop_trigger", "targetname");
+  var_0 setHintString(&"SNIPERESCAPE_HOLD_1_TO_PUT_CPT_MACMILLAN");
   level endon("player_made_it_to_seaknight");
   wait_for_player_to_drop_price(var_0);
   var_0.origin = (0, 0, -1500);
@@ -2551,7 +2551,7 @@ wounded_setup() {
   level.price.allowdeath = 1;
   level.price thread regen();
   level.price.a.pose = "prone";
-  level.price sethintstring(&"SNIPERESCAPE_HOLD_1_TO_PICK_UP_CPT");
+  level.price setHintString(&"SNIPERESCAPE_HOLD_1_TO_PICK_UP_CPT");
   level.price setthreatbiasgroup("price");
   level.price setgoalpos(level.price.origin);
   level.price.fastfire = 0;
@@ -2637,7 +2637,7 @@ enemy_spawn_zone() {
   var_1 = [];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
-    var_3 = getent(var_0[var_2], "script_linkname");
+    var_3 = getEnt(var_0[var_2], "script_linkname");
 
     if(isDefined(var_3)) {
       var_1[var_1.size] = var_3;
@@ -2798,7 +2798,7 @@ spawn_limited_number_from_spawners(var_0, var_1, var_2, var_3) {
 
 dog_attacks_fence() {
   var_0 = getnode("dog_fence_node", "targetname");
-  var_1 = getent("fence_dog_spawner", "targetname");
+  var_1 = getEnt("fence_dog_spawner", "targetname");
   var_2 = var_1 stalingradspawn();
 
   if(maps\_utility::spawn_failed(var_2)) {
@@ -2844,11 +2844,11 @@ set_objective_pos_to_extraction_point(var_0) {
 
 extraction_point() {
   if(!common_scripts\utility::flag("player_moves_through_burnt_apartment")) {
-    var_0 = getent("objective_burnt_babystep", "targetname");
+    var_0 = getEnt("objective_burnt_babystep", "targetname");
     return var_0.origin;
   }
 
-  return getent("enemy_fair_dest", "targetname").origin;
+  return getEnt("enemy_fair_dest", "targetname").origin;
 }
 
 on_the_run_enemies() {
@@ -2875,13 +2875,13 @@ fairground_enemies() {
 
 tracks_ent(var_0) {
   self endon("stop_tracking_weapon");
-  var_1 = getent("pool_trigger", "targetname");
+  var_1 = getEnt("pool_trigger", "targetname");
 
   for(;;) {
     if(level.player istouching(var_1) || sighttracepassed(self gettagorigin("tag_barrel"), level.player getEye(), 0, undefined)) {
-      self setturrettargetent(level.player, (0, 0, 24));
+      self setturrettargetEnt(level.player, (0, 0, 24));
     } else {
-      self setturrettargetent(var_0);
+      self setturrettargetEnt(var_0);
     }
 
     var_2 = vectortoangles(var_0.origin - self.origin);
@@ -2892,7 +2892,7 @@ tracks_ent(var_0) {
 
 shoot_at_entity_chain(var_0) {
   var_1 = spawn("script_model", var_0.origin);
-  self setturrettargetent(var_1);
+  self setturrettargetEnt(var_1);
   thread maps\sniperescape_wounding::heli_fires();
   thread tracks_ent(var_1);
 
@@ -2901,14 +2901,14 @@ shoot_at_entity_chain(var_0) {
       break;
     }
 
-    var_2 = getent(var_0.target, "targetname");
+    var_2 = getEnt(var_0.target, "targetname");
     var_3 = distance(var_2.origin, var_0.origin) * 0.0035;
 
     if(var_3 < 0.05) {
       var_3 = 0.05;
     }
 
-    var_1 moveto(var_2.origin, var_3);
+    var_1 moveTo(var_2.origin, var_3);
     wait(var_3);
     var_0 = var_2;
   }
@@ -2936,7 +2936,7 @@ incoming_heli_exists() {
 }
 
 seaknight_badplace() {
-  var_0 = getent("seaknight_badplace", "targetname");
+  var_0 = getEnt("seaknight_badplace", "targetname");
 
   for(;;) {
     if(distance(self.origin, var_0.origin) < 800) {
@@ -3101,7 +3101,7 @@ shoots_down(var_0, var_1) {
 }
 
 create_apartment_badplace() {
-  var_0 = getent("apartment_bad_place", "targetname");
+  var_0 = getEnt("apartment_bad_place", "targetname");
   badplace_cylinder("apartment_badplace", 0, var_0.origin, var_0.radius, 200, "axis");
 }
 
@@ -3132,14 +3132,14 @@ burnt_spawners() {
 }
 
 spooky_dog() {
-  var_0 = getent("spooky_dog_spawner", "targetname");
+  var_0 = getEnt("spooky_dog_spawner", "targetname");
   common_scripts\utility::flag_wait("spawn_spooky_dog");
 
   if(getDvar("player_hasnt_been_spooked") == "") {
     setDvar("player_hasnt_been_spooked", "1");
     var_0 thread maps\_utility::add_spawn_function(::spooky_dog_spawns);
   } else {
-    var_1 = getent("dog_tele", "targetname");
+    var_1 = getEnt("dog_tele", "targetname");
     var_0.origin = var_1.origin;
     var_0.script_moveoverride = 1;
     var_0 thread maps\_utility::add_spawn_function(::spooky_dog_spawns_hidden);
@@ -3149,9 +3149,9 @@ spooky_dog() {
 }
 
 spooky_dog_spawns_hidden() {
-  var_0 = getent("spooky_dog_trigger", "targetname");
+  var_0 = getEnt("spooky_dog_trigger", "targetname");
   self.goalradius = 64;
-  var_1 = getent("dog_end_goal", "script_noteworthy");
+  var_1 = getEnt("dog_end_goal", "script_noteworthy");
   self.favoriteenemy = level.player;
   thread maps\_spawner::go_to_origin(var_1);
   var_0 maps\_utility::add_wait(maps\_utility::waittill_msg, "trigger");
@@ -3164,7 +3164,7 @@ spooky_dog_spawns() {
   self endon("death");
   self.pathenemyfightdist = 0;
   self.pathenemylookahead = 0;
-  var_0 = getent("spooky_dog_trigger", "targetname");
+  var_0 = getEnt("spooky_dog_trigger", "targetname");
   common_scripts\utility::flag_wait("spooky_waits");
   common_scripts\utility::flag_set("price_wants_apartment_cleared");
 
@@ -3210,7 +3210,7 @@ spooky_deletes_on_trigger(var_0, var_1) {
 }
 
 spooky_sighting() {
-  var_0 = getent("spooky_sighting", "targetname");
+  var_0 = getEnt("spooky_sighting", "targetname");
   var_0 thread maps\_utility::add_spawn_function(::spooky_dog_is_sighted);
 }
 
@@ -3219,7 +3219,7 @@ spooky_dog_is_sighted() {
   self waittill("reached_path_end");
   self setgoalpos(self.origin);
   self.goalradius = 32;
-  var_0 = getent("spooky_dog_trigger", "targetname");
+  var_0 = getEnt("spooky_dog_trigger", "targetname");
   spooky_deletes_on_trigger(var_0, 0.1);
 }
 
@@ -3256,10 +3256,10 @@ waittill_noteworthy_dies(var_0) {
 }
 
 door_opens(var_0) {
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
 
   if(isDefined(var_1)) {
-    var_1 linkto(self);
+    var_1 linkTo(self);
   }
 
   self playSound("wood_door_kick");
@@ -3269,7 +3269,7 @@ door_opens(var_0) {
     var_2 = var_2 * var_0;
   }
 
-  self rotateyaw(var_2, 0.3, 0, 0.3);
+  self rotateYaw(var_2, 0.3, 0, 0.3);
   self connectpaths();
 }
 
@@ -3304,7 +3304,7 @@ force_patrol_think() {
     self.allowdeath = 1;
     self.disablearrivals = 1;
     var_0 = get_patrol_anims();
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
     var_1 maps\_anim::anim_generic_reach(self, var_0[self.script_index]);
     self.a.movement = "run";
     maps\_anim::anim_generic(self, var_0[self.script_index]);
@@ -3319,7 +3319,7 @@ flicker_light() {
 }
 
 price_fair_defendspot() {
-  var_0 = getent("price_gnoll", "targetname");
+  var_0 = getEnt("price_gnoll", "targetname");
   return var_0.origin;
 }
 
@@ -3329,7 +3329,7 @@ enemy_door_trigger() {
   var_1 = 1;
 
   if(isDefined(self.script_linkto)) {
-    var_2 = getent(self.script_linkto, "script_linkname");
+    var_2 = getEnt(self.script_linkto, "script_linkname");
 
     if(isDefined(var_2)) {
       if(level.player istouching(var_2)) {
@@ -3480,7 +3480,7 @@ fair_guy_responds_to_invisible_attack() {
   maps\_utility::do_wait_any();
   wait 1;
   self notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   var_0 = randomfloatrange(3, 4);
   maps\_utility::add_wait(maps\_utility::ent_flag_wait, "reached_run_point");
   maps\_utility::add_wait(maps\_utility::_wait, var_0);
@@ -3561,7 +3561,7 @@ fair_guy_moves_in(var_0) {
     thread maps\_spawner::go_to_struct(var_1);
     wait_until_near_player_or_run_point();
     self.disablearrivals = 0;
-    var_2 = getent("park_reinforce", "targetname");
+    var_2 = getEnt("park_reinforce", "targetname");
     self setgoalpos(var_2.origin);
   }
 
@@ -3798,7 +3798,7 @@ fairground_generic_attack_behavior() {
   }
 
   for(;;) {
-    var_0 = getent("enemy_fair_dest", "targetname");
+    var_0 = getEnt("enemy_fair_dest", "targetname");
     self setgoalpos(var_0.origin);
     self.goalradius = 3000;
 
@@ -4144,7 +4144,7 @@ fairground_battle() {
   thread fairground_force_high_intensity();
   level.fair_paths = common_scripts\utility::getStructArray("fair_path", "targetname");
   level.fair_paths_alt = common_scripts\utility::getStructArray("fair_path_alt", "targetname");
-  var_4 = getent("field_ref_spot", "targetname");
+  var_4 = getEnt("field_ref_spot", "targetname");
   level.fair_paths = common_scripts\utility::get_array_of_closest(var_4.origin, level.fair_paths);
   common_scripts\utility::array_thread(level.fair_paths, ::init_fair_paths);
   level.fair_paths_alt = common_scripts\utility::get_array_of_closest(var_4.origin, level.fair_paths_alt);
@@ -4191,7 +4191,7 @@ fairground_pre_detection() {
 }
 
 get_fair_spawners() {
-  var_0 = getent("alt_fair_trigger", "targetname");
+  var_0 = getEnt("alt_fair_trigger", "targetname");
 
   if(level.player istouching(var_0)) {
     return getEntArray("fair_spawner_alt", "targetname");
@@ -4702,7 +4702,7 @@ kill_heli_logic() {
     for(var_4 = 0; var_4 < 30; var_4++) {
       var_10 = vectortoangles(level.player.origin - var_7.origin);
       var_7 setgoalyaw(var_10[1]);
-      var_7 setturrettargetent(level.player, common_scripts\utility::randomvector(15) + (0, 0, 16));
+      var_7 setturrettargetEnt(level.player, common_scripts\utility::randomvector(15) + (0, 0, 16));
       var_7 fireweapon();
       wait 0.05;
     }
@@ -4820,8 +4820,8 @@ c4_hint() {
 }
 
 burnt_blocker() {
-  var_0 = getent("burnt_retreat_blocker_trigger", "targetname");
-  var_1 = getent("burnt_retreat_blocker", "targetname");
+  var_0 = getEnt("burnt_retreat_blocker_trigger", "targetname");
+  var_1 = getEnt("burnt_retreat_blocker", "targetname");
   var_1 notsolid();
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("player_moves_through_burnt_apartment");

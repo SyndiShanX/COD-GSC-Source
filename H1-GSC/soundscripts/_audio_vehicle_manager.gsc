@@ -1419,14 +1419,14 @@ avm_compute_doppler_pitch(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(var_4 != 1) {
     var_7 = var_1 - var_3;
-    var_8 = vectornormalize(var_7);
+    var_8 = vectorNormalize(var_7);
     var_9 = var_2 - var_0;
     var_10 = var_8 * vectordot(var_8, var_9);
     var_11 = var_9 - var_10;
     var_2 = var_0 + var_10 + var_11 / var_4;
   }
 
-  var_12 = vectornormalize(var_0 - var_2);
+  var_12 = vectorNormalize(var_0 - var_2);
   var_13 = vectordot(var_1, var_12);
   var_14 = vectordot(var_3, var_12);
   var_15 = (var_6 + var_14) / (var_6 + var_13);
@@ -1656,7 +1656,7 @@ avmx_start_oneshot_alias(var_0, var_1) {
   if(isstring(var_5)) {
     var_6 = var_2 avmx_get_vehicle_entity();
     var_4 = spawn("script_origin", var_6.origin);
-    var_4 linkto(var_6, "tag_origin", var_2.sound_offset, (0, 0, 0));
+    var_4 linkTo(var_6, "tag_origin", var_2.sound_offset, (0, 0, 0));
     var_4 scalevolume(0);
     var_4 soundscripts\_snd_playsound::snd_play(var_5, "sound_done");
     var_4 thread avmx_monitor_oneshot_done("sound_done");
@@ -1925,7 +1925,7 @@ avmx_start_loop(var_0) {
   for(var_9 = 0; var_9 < var_5; var_9++) {
     var_10 = var_1 avmx_get_sound_alias(var_4, var_9);
     var_11 = spawn("script_origin", var_3.origin);
-    var_11 linkto(var_3, "tag_origin", var_6, (0, 0, 0));
+    var_11 linkTo(var_3, "tag_origin", var_6, (0, 0, 0));
     var_11 scalevolume(0);
     var_11 soundscripts\_snd_playsound::snd_play_loop(var_10);
     var_0.snd_ents[var_10] = var_11;

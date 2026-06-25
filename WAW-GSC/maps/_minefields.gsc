@@ -50,7 +50,7 @@ minefield_kill(trigger) {
     mindamage = 50;
 
     playFX(level._effect["mine_explosion"], origin);
-    playsoundatposition("mortar_dirt", origin);
+    playSoundAtPosition("mortar_dirt", origin);
 
     self enableHealthShield(false);
     radiusDamage(origin, range, maxdamage, mindamage);

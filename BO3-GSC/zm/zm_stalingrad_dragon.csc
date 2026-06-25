@@ -312,8 +312,8 @@ function function_2d57594b(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_b4311e07(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    var_c2e32e84 = getent(localclientnum, "dh_fountain_banner_01", "targetname");
-    var_34ea9dbf = getent(localclientnum, "dh_fountain_banner_02", "targetname");
+    var_c2e32e84 = getEnt(localclientnum, "dh_fountain_banner_01", "targetname");
+    var_34ea9dbf = getEnt(localclientnum, "dh_fountain_banner_02", "targetname");
     level thread scene::init("p7_fxanim_zm_stal_dragon_hazard_fountain_banner_01_idle_bundle", var_c2e32e84);
     level thread scene::init("p7_fxanim_zm_stal_dragon_hazard_fountain_banner_02_idle_bundle", var_34ea9dbf);
   }
@@ -327,7 +327,7 @@ function function_50d62870(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_fa043827(localclientnum) {
-  var_c2e32e84 = getent(localclientnum, "dh_fountain_banner_01", "targetname");
+  var_c2e32e84 = getEnt(localclientnum, "dh_fountain_banner_01", "targetname");
   level scene::stop("p7_fxanim_zm_stal_dragon_hazard_fountain_banner_01_idle_bundle");
   level thread scene::play("p7_fxanim_zm_stal_dragon_hazard_fountain_banner_01_gusty_bundle", var_c2e32e84);
   wait(13.63);
@@ -336,7 +336,7 @@ function function_fa043827(localclientnum) {
 }
 
 function function_87fcc8ec(localclientnum) {
-  var_34ea9dbf = getent(localclientnum, "dh_fountain_banner_02", "targetname");
+  var_34ea9dbf = getEnt(localclientnum, "dh_fountain_banner_02", "targetname");
   level scene::stop("p7_fxanim_zm_stal_dragon_hazard_fountain_banner_02_idle_bundle");
   level thread scene::play("p7_fxanim_zm_stal_dragon_hazard_fountain_banner_02_gusty_bundle", var_34ea9dbf);
   wait(13.63);

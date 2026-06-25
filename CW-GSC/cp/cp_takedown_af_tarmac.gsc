@@ -51,7 +51,7 @@ function starting(str_skipto) {
 
 function main(str_skipto, b_starting) {
   level util::delay(0.1, undefined, &namespace_979752dc::disable_stealth_system);
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   level.player endon(#"death");
   snd::client_msg(#"hash_1e58e46360c0a83b");
   vehs = getvehiclearray("af_chase_veh", "targetname");
@@ -112,8 +112,8 @@ function function_b3df3ebf() {
   level.af_plane clientfield::set("clf_cargoplane_door_sparks", 1);
 
   if(!level flag::get("af_tarmac_complete")) {
-    level.plane_mover moveto(start_pos.origin, 20, 20, 0);
-    level.plane_mover rotateto(start_pos.angles, 20, 20, 0);
+    level.plane_mover moveTo(start_pos.origin, 20, 20, 0);
+    level.plane_mover rotateTo(start_pos.angles, 20, 20, 0);
   }
 
   level clientfield::set("prop_wash", 1);
@@ -138,7 +138,7 @@ function function_565588e1() {
   }
 
   level.chase_truck scene::play("scene_tkd_hit3_pre_chase", "enter", [level.woods]);
-  level.woods stopanimscripted();
+  level.woods stopanimScripted();
   level.woods ai::force_goal(level.woods.origin, 0, "never");
   level flag::set("woods_waiting_at_truck");
   level.woods val::set(#"chase", "ignoreall", 1);

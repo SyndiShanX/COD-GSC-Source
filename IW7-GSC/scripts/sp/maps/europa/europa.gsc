@@ -12,7 +12,7 @@ main() {
       var_3 setModel(var_2.model);
     }
 
-    var_5 = getent("base_door", "targetname");
+    var_5 = getEnt("base_door", "targetname");
     if(isDefined(var_5)) {
       var_5 hide();
     }
@@ -121,7 +121,7 @@ func_49C4() {
   wait(0.2);
   thread scripts\sp\utility::func_12641("europa_fatty_tr");
   level.player dontinterpolate();
-  level.player setorigin((29050, -4630, 4020), 1);
+  level.player setOrigin((29050, -4630, 4020), 1);
 }
 
 func_5000() {

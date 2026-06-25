@@ -1488,7 +1488,7 @@ function_5c293c05(entity) {
   potential_targets = [];
   var_8d6705e8 = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!wz_ai_utils::is_player_valid(player)) {
       continue;
     }
@@ -2109,7 +2109,7 @@ function_34eacecd() {
   if(isDefined(self.var_5ed989c7) && self.var_5ed989c7) {
     if(isDefined(self.var_31a789c0) && self.var_31a789c0 && isDefined(self.var_db912cfe) && self.var_db912cfe) {
       players_in_zone = [];
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(isDefined(players[i].ai_zone) && players[i].ai_zone === self.ai_zone) {
@@ -2196,7 +2196,7 @@ ai_cleanup_state() {
 
     while(isDefined(self.var_381e689e) && self.var_381e689e) {
       players_in_zone = [];
-      players = getplayers();
+      players = getPlayers();
       var_fcf24551 = undefined;
 
       for(i = 0; i < players.size; i++) {
@@ -2254,7 +2254,7 @@ function_936718a8() {
     head_pos = self.origin + (0, 0, 60);
     var_1b7d301e = self.favoriteenemy.origin + (0, 0, 60);
     vec_to_enemy = var_1b7d301e - head_pos;
-    vec_to_enemy_norm = vectornormalize(vec_to_enemy);
+    vec_to_enemy_norm = vectorNormalize(vec_to_enemy);
     self.angles_to_enemy = vectortoangles(vec_to_enemy_norm);
     self.var_11c3e0a6 = head_pos;
 
@@ -2351,7 +2351,7 @@ function turretthink() {
 
     if(dodamage) {
       players_in_zone = [];
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(isDefined(players[i].ai_zone) && players[i].ai_zone == self.ai_zone) {
@@ -2409,7 +2409,7 @@ microwaveturretaffectsentity(entity) {
   angles = turret.angles_to_enemy;
   origin = turret.var_11c3e0a6;
   shoot_at_pos = entity getshootatpos(turret);
-  entdirection = vectornormalize(shoot_at_pos - origin);
+  entdirection = vectorNormalize(shoot_at_pos - origin);
   forward = anglesToForward(angles);
   dot = vectordot(entdirection, forward);
 
@@ -3045,7 +3045,7 @@ powerup_wobble() {
 
     yaw = self.angles[1] + yaw;
     new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-    self rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+    self rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
     wait randomfloat(waittime - 0.1);
   }
 }

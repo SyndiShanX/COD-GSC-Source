@@ -871,7 +871,7 @@ setupExploders() {
     exploder_id_set = false;
 
     if(isDefined(exploder.target)) {
-      temp_ent = GetEnt(ent.v["target"], "targetname");
+      temp_ent = getEnt(ent.v["target"], "targetname");
       if(isDefined(temp_ent)) {
         exploder_id_set = true;
         temp_ent setexploderid(exploderId);
@@ -880,7 +880,7 @@ setupExploders() {
         org = temp_ent.origin;
         temp_ent transmittargetname();
       } else {
-        temp_ent = GetStruct(ent.v["target"], "targetname");
+        temp_ent = getStruct(ent.v["target"], "targetname");
         org = temp_ent.origin;
         exploderId++;
       }
@@ -948,7 +948,7 @@ playerDamageRumble() {
       continue;
     }
 
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -1195,13 +1195,13 @@ triggered_playerseek(trig) {
   }
 }
 traverseThink() {
-  ent = GetEnt(self.target, "targetname");
+  ent = getEnt(self.target, "targetname");
 
   if(isDefined(ent)) {
     self.traverse_height = ent.origin[2];
     ent Delete();
   } else {
-    struct = GetStruct(self.target, "targetname");
+    struct = getStruct(self.target, "targetname");
 
     if(isDefined(struct)) {
       self.traverse_height = struct.origin[2];
@@ -1235,7 +1235,7 @@ pianoDamageThink() {
 pianoThink() {
   org = self GetOrigin();
   note = "piano_" + self.script_noteworthy;
-  self SetHintString(&"SCRIPT_PLATFORM_PIANO");
+  self setHintString(&"SCRIPT_PLATFORM_PIANO");
   for(;;) {
     self waittill("trigger");
     thread play_sound_in_space(note, org);
@@ -1294,7 +1294,7 @@ bcTrigger(trigger) {
 }
 waterThink() {
   assert(isDefined(self.target));
-  targeted = GetEnt(self.target, "targetname");
+  targeted = getEnt(self.target, "targetname");
   assert(isDefined(targeted));
   waterHeight = targeted.origin[2];
   targeted = undefined;
@@ -1522,7 +1522,7 @@ trigger_lookat_think(trigger, endOnFlag) {
         continue;
       }
 
-      normal = VectorNormalize(target_origin - other.origin);
+      normal = vectorNormalize(target_origin - other.origin);
       player_angles = other GetPlayerAngles();
       player_forward = anglesToForward(player_angles);
 
@@ -1986,7 +1986,7 @@ flag_unset_trigger(trigger) {
 eq_trigger(trigger) {
   level.set_eq_func[true] = ::set_eq_on;
   level.set_eq_func[false] = ::set_eq_off;
-  targ = GetEnt(trigger.target, "targetname");
+  targ = getEnt(trigger.target, "targetname");
   for(;;) {
     trigger waittill("trigger");
     ai = GetAiArray("allies");
@@ -2785,7 +2785,7 @@ get_script_linkto_targets() {
   tokens = Strtok(self.script_linkto, " ");
   for(i = 0; i < tokens.size; i++) {
     token = tokens[i];
-    target = GetEnt(token, "script_linkname");
+    target = getEnt(token, "script_linkname");
     if(isDefined(target)) {
       targets[targets.size] = target;
     }

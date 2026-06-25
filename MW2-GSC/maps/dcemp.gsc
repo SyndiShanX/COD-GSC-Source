@@ -274,11 +274,11 @@ global_inits() {
 
   array_thread(getEntArray("flickerlight1", "script_noteworthy"), ::flickerlight_flares);
   fire_lights = getEntArray("light_street_fire", "script_noteworthy");
-  light = getclosest(getstruct("runner_light", "targetname").origin, fire_lights);
+  light = getclosest(getStruct("runner_light", "targetname").origin, fire_lights);
   light setlightintensity(3.5);
   array_thread(fire_lights, ::light_street_fire);
 
-  door = getent("meetup_door_left", "targetname");
+  door = getEnt("meetup_door_left", "targetname");
 
   door delaycall(.1, ::rotateyaw, 90, .1);
   door delaycall(.2, ::disconnectpaths);
@@ -299,11 +299,11 @@ intro_main() {
 
 intro_crash_vehicle_setup() {
   if(level.start_point == "emp") {
-    getent("heli_crash_site_spotlight_emp_start", "targetname") add_spawn_function(::emp_heli_spotlight);
-    getent("btr80s_end_emp_start", "targetname") add_spawn_function(::emp_btr);
+    getEnt("heli_crash_site_spotlight_emp_start", "targetname") add_spawn_function(::emp_heli_spotlight);
+    getEnt("btr80s_end_emp_start", "targetname") add_spawn_function(::emp_btr);
   } else {
-    getent("heli_crash_site_spotlight", "targetname") add_spawn_function(::emp_heli_spotlight);
-    getent("btr80s_end", "targetname") add_spawn_function(::emp_btr);
+    getEnt("heli_crash_site_spotlight", "targetname") add_spawn_function(::emp_heli_spotlight);
+    getEnt("btr80s_end", "targetname") add_spawn_function(::emp_btr);
   }
 
   array_thread(getEntArray("helis_crash_rappel", "targetname"), ::add_spawn_function, ::emp_heli_rappel);
@@ -492,7 +492,7 @@ iss_nuke_scene() {
 
   thread maps\_utility::set_vision_set("dcemp_iss_death", .5);
 
-  earth = getent("earth_model", "targetname");
+  earth = getEnt("earth_model", "targetname");
   level.nuke_water_tag = spawn("script_model", earth.origin + (5000, 56500, 700 + 300));
   level.nuke_water_tag.angles = (-90, -90, 0);
   level.nuke_water_tag setModel("tag_origin");
@@ -521,7 +521,7 @@ iss_nuke_scene() {
 
   level.rumble = spawn("script_origin", level.player.origin);
   level.rumble PlayRumbleLoopOnEntity("steady_rumble");
-  level.rumble linkto(level.player);
+  level.rumble linkTo(level.player);
 
   level.white_overlay fadeOverTime(4);
   level.white_overlay.alpha = .15;
@@ -550,9 +550,9 @@ iss_temp_satelite_anim() {
   node2.angles += (0, angle, 0);
   node2.origin += (dist, 0, 0);
 
-  node rotateyaw(angle * -1, time);
+  node rotateYaw(angle * -1, time);
   node movex(dist * -1, time);
-  node2 rotateyaw(angle * -1, time);
+  node2 rotateYaw(angle * -1, time);
   node2 movex(dist * -1, time);
 
   level.player lerpViewAngleClamp(.1, .1, 0, 20, 20, 20, 20);
@@ -587,8 +587,8 @@ iss_temp_satelite_anim() {
   node2 notify("stop_loop");
   level.iss_sat["camera"].node = spawn("script_origin", level.iss_sat["camera"].origin);
   level.iss_sat["camera"].node.angles = level.iss_sat["camera"].angles;
-  level.iss_sat["camera"].node linkto(node);
-  level.iss_sat["camera"] linkto(level.iss_sat["camera"].node);
+  level.iss_sat["camera"].node linkTo(node);
+  level.iss_sat["camera"] linkTo(level.iss_sat["camera"].node);
   level.iss_sat["camera"].node thread anim_single_solo(level.iss_sat["camera"], "ISS_float_away");
 }
 
@@ -746,7 +746,7 @@ emp_allies_animate() {
 }
 
 emp_foley() {
-  link = getstruct(self.target, "targetname");
+  link = getStruct(self.target, "targetname");
   node = getnode(link.target, "targetname");
   self.goalradius = 16;
   self setgoalnode(node);
@@ -777,8 +777,8 @@ emp_foley() {
 }
 
 emp_dunn() {
-  node = getstruct(self.target, "targetname");
-  link = getstruct(node.target, "targetname");
+  node = getStruct(self.target, "targetname");
+  link = getStruct(node.target, "targetname");
   node = getnode(link.target, "targetname");
   self.goalradius = 16;
   self setgoalnode(node);
@@ -800,7 +800,7 @@ emp_dunn() {
 }
 
 emp_marine1() {
-  node = getstruct("intro_heli_free_start", "targetname");
+  node = getStruct("intro_heli_free_start", "targetname");
   self teleport_actor(node);
   self setgoalpos(node.origin);
   self.goalradius = 8;
@@ -813,7 +813,7 @@ emp_marine1() {
   wait 2.5;
   wait level.EMPWAIT_BETA;
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "dcemp_BHrescue_soldier");
   delaythread(5.5, ::emp_free_player);
   actors = array_add(level.planks, self);
@@ -825,7 +825,7 @@ emp_marine1() {
   length = getanimlength(getanim_generic("dcemp_BHrescue_soldier"));
   wait length - .6;
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   node = spawn("script_origin", self.origin);
   node.angles = self.angles + (0, -7, 0);
   node anim_generic_gravity_run(self, "corner_standR_trans_IN_3");
@@ -847,7 +847,7 @@ emp_marine1() {
 }
 
 emp_free_player() {
-  crash_site_clip = getent("crash_site_clip", "targetname");
+  crash_site_clip = getEnt("crash_site_clip", "targetname");
   crash_site_clip delete();
 
   level notify("player_unlinked");
@@ -856,10 +856,10 @@ emp_free_player() {
 
   rig = level.player.playerrig;
 
-  end = getent("movement_grid_exit", "targetname");
+  end = getEnt("movement_grid_exit", "targetname");
 
   time = 1;
-  rig moveto(end.origin, time, time * .5, time * .5);
+  rig moveTo(end.origin, time, time * .5, time * .5);
   rig waittill("movedone");
 
   level.player unlink();
@@ -869,7 +869,7 @@ emp_free_player() {
   level.player allowsprint(true);
   level.player allowjump(true);
 
-  heli_clip = getent("intro_heli_after_emp_clip", "targetname");
+  heli_clip = getEnt("intro_heli_after_emp_clip", "targetname");
   heli_clip solid();
 
   setsaveddvar("ui_hidemap", 0);
@@ -933,7 +933,7 @@ street_main() {
 }
 
 street_gohide_marine1() {
-  node = getent("street_marine2_anim0a", "targetname");
+  node = getEnt("street_marine2_anim0a", "targetname");
 
   self enable_heat_behavior();
 
@@ -943,21 +943,21 @@ street_gohide_marine1() {
   temp thread anim_generic_gravity(self, "corner_standR_trans_OUT_6");
 
   wait .5;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  self linkto(node);
+  self linkTo(node);
   node delaycall(.25, ::movez, 8, .5);
   node thread anim_generic(self, "gulag_sewer_slide");
   length = getanimlength(getanim_generic("gulag_sewer_slide"));
   wait length * .28;
   self unlink();
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   temp.origin = self.origin;
   temp.angles = (0, 80, 0);
   temp anim_generic_gravity_run(self, "stand_2_run_F_2");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_turn_R45");
   node anim_generic_run(self, "run_turn_R45");
@@ -973,34 +973,34 @@ street_gohide_marine1() {
   self setanimtime(getanim_generic("bog_b_spotter_react"), .1);
   length = getanimlength(getanim_generic("bog_b_spotter_react"));
   wait length * .72 - .05;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self delaythread(.5, ::dialogue_queue, "dcemp_ar1_whatsgoinon");
 
   link = spawn("script_origin", self.origin);
   link.angles = self.angles;
-  self linkto(link);
+  self linkTo(link);
   link delaycall(.25, ::rotateyaw, 25, .5);
   link anim_generic_run(self, "crouch_2run_F");
   self unlink();
   link delete();
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_turn_R45");
   node anim_generic_run(self, "run_turn_R45");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_react_flinch_non_loop");
   node anim_generic_run(self, "run_react_flinch_non_loop");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "traverse_window_M_2_dive");
   link = spawn("script_origin", node.origin);
   link.angles = node.angles;
-  self linkto(link);
+  self linkTo(link);
   link delaycall(.25, ::movez, 8, 1);
   link delaycall(1.5, ::movez, 8, 1.5);
 
@@ -1009,7 +1009,7 @@ street_gohide_marine1() {
 
   length = getanimlength(getanim_generic("traverse_window_M_2_dive"));
   wait length * .73;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self unlink();
   link delete();
@@ -1029,26 +1029,26 @@ street_gohide_marine1() {
 }
 
 street_gohide_dunn() {
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self delaythread(2.25 + CONST_FOLEY_LINE_TIME, ::dialogue_queue, "dcemp_cpd_notgood");
 
   self enable_heat_behavior();
   self anim_generic_gravity_run(self, "CornerCrR_trans_OUT_F");
 
-  node = getstruct("street_marine1_anim0", "targetname");
+  node = getStruct("street_marine1_anim0", "targetname");
 
   node anim_generic_reach(self, "run_reaction_L_quick");
 
   self delaythread(0, ::dialogue_queue, "dcemp_cpd_whoa");
   node anim_generic_run(self, "run_reaction_L_quick");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node.origin = self.origin;
   node anim_generic_run(self, "run_turn_R45");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_reaction_R_quick");
 
@@ -1056,21 +1056,21 @@ street_gohide_dunn() {
 
   node anim_generic_run(self, "run_reaction_R_quick");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node.origin = self.origin;
   node anim_generic_run(self, "run_turn_L45");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "exposed_idle_reactB");
   node thread anim_generic(self, "exposed_idle_reactB");
   length = getanimlength(getanim_generic("exposed_idle_reactB"));
   self playSound("generic_pain_american_" + randomintrange(1, 9));
   wait length - .75;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_pain_fallonknee_03");
 
@@ -1080,7 +1080,7 @@ street_gohide_dunn() {
   self delaythread(length - .5, ::dialogue_queue, "dcemp_cpd_lookout");
   node anim_generic_run(self, "run_pain_fallonknee_03");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   self disable_heat_behavior();
 
@@ -1088,7 +1088,7 @@ street_gohide_dunn() {
 
   link = spawn("script_origin", node.origin);
   link.angles = node.angles;
-  self linkto(link);
+  self linkTo(link);
   link delaycall(.25, ::movez, 12, 1);
 
   self playSound("generic_meleecharge_american_" + randomintrange(1, 9));
@@ -1113,9 +1113,9 @@ street_gohide_dunn() {
 }
 
 street_gohide_foley() {
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  node = getstruct("street_macey_anim0", "targetname");
+  node = getStruct("street_macey_anim0", "targetname");
 
   self enable_heat_behavior();
   self anim_generic_gravity_run(self, "corner_standR_trans_OUT_6");
@@ -1130,9 +1130,9 @@ street_gohide_foley() {
   self delaythread(length - 1.0, ::dialogue_queue, "dcemp_fly_dontstop");
 
   wait length - .75;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_pain_fallonknee");
   self playSound("generic_pain_american_" + randomintrange(1, 9));
@@ -1140,7 +1140,7 @@ street_gohide_foley() {
 
   self delaythread(0, ::dialogue_queue, "dcemp_fly_gogogo");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "slide_across_car");
   self playSound("generic_pain_american_" + randomintrange(1, 9));
@@ -1148,13 +1148,13 @@ street_gohide_foley() {
 
   level.dunn delaythread(1.0, ::dialogue_queue, "dcemp_cpd_EMP");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "run_react_duck_non_loop");
   self playSound("generic_pain_american_" + randomintrange(1, 9));
   node anim_generic_run(self, "run_react_duck_non_loop");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   node anim_generic_reach(self, "exposed_idle_reactB");
   node thread anim_generic(self, "exposed_idle_reactB");
@@ -1162,7 +1162,7 @@ street_gohide_foley() {
   self playSound("generic_pain_american_" + randomintrange(1, 9));
 
   wait length - .75;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self delaythread(0.5, ::dialogue_queue, "dcemp_fly_gogo");
 
@@ -1186,9 +1186,9 @@ street_gohide_foley() {
 street_setup_stuff() {
   array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::street_meetup_allies);
 
-  getent("street_btr", "targetname") add_spawn_function(::street_btr_scene);
-  getent("street_crash_motorcycle", "targetname") thread street_crash_motorcycle();
-  level.fallguy = getent("street_guy_fall_guy", "targetname");
+  getEnt("street_btr", "targetname") add_spawn_function(::street_btr_scene);
+  getEnt("street_crash_motorcycle", "targetname") thread street_crash_motorcycle();
+  level.fallguy = getEnt("street_guy_fall_guy", "targetname");
   level.fallguy add_spawn_function(::street_guy_fall_guy);
 
   array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
@@ -1197,7 +1197,7 @@ street_setup_stuff() {
   array_thread(getEntArray("corner_truck_engine_crash", "targetname"), ::corner_truck_engine_crash);
   thread corner_plane_crash();
 
-  clip = getent("hide_clip", "targetname");
+  clip = getEnt("hide_clip", "targetname");
   clip connectpaths();
   clip notsolid();
 
@@ -1215,7 +1215,7 @@ street_meetup_allies() {
   }
 
   self.team = "neutral";
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
   node anim_generic_first_frame(self, "favela_run_and_wave");
 
   flag_wait("street_marine2_hide");
@@ -1317,21 +1317,21 @@ corner_dialogue() {
 corner_foley_go() {
   self enable_cqbwalk();
 
-  door = GetEnt("corner_door", "targetname");
+  door = getEnt("corner_door", "targetname");
   door thread corner_palm_style_door_open("door_wood_slow_creaky_open");
 
-  node = getent("corner_doornode", "targetname");
-  self linkto(node);
+  node = getEnt("corner_doornode", "targetname");
+  self linkTo(node);
   node delaycall(3.25, ::movez, -8, .25);
   node anim_generic_run(self, "hunted_open_barndoor_flathand");
 
-  node = getent("corner_lookout", "targetname");
+  node = getEnt("corner_lookout", "targetname");
 
   node.angles = self.angles;
   node.origin = self.origin;
-  self linkto(node);
+  self linkTo(node);
 
-  node rotateyaw(-5, .5);
+  node rotateYaw(-5, .5);
   node delaycall(1.5, ::movez, -7, .25);
   node anim_generic(self, "combatwalk_F_spin");
   self unlink();
@@ -1351,11 +1351,11 @@ corner_foley_go() {
 
   node anim_generic_run(self, "cqb_stand_signal_move_out");
 
-  node = getstruct("corner_anim2a", "targetname");
+  node = getStruct("corner_anim2a", "targetname");
   node anim_generic_reach(self, "patrol_jog_360_once");
   node anim_generic_run(self, "CQB_walk_turn_9");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "patrol_jog_360_once");
   node thread anim_generic_gravity(self, "patrol_jog_360_once");
 
@@ -1368,7 +1368,7 @@ corner_foley_go() {
 
   self.alertlevel = "noncombat";
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_reach_solo(self, "hunted_woundedhostage_check");
 
   guys = [];
@@ -1391,17 +1391,17 @@ corner_foley_go() {
 corner_marine1_go() {
   self enable_cqbwalk();
 
-  node = getstruct("corner_doorexit", "targetname");
+  node = getStruct("corner_doorexit", "targetname");
   node anim_generic_reach(self, "CQB_walk_turn_6");
   node anim_generic_run(self, "CQB_walk_turn_6");
   self anim_generic_gravity_run(self, "CQB_walk_turn_9");
 
-  node = getstruct("corner_anim1", "targetname");
+  node = getStruct("corner_anim1", "targetname");
   node anim_generic_reach(self, "patrol_jog_look_up_once");
 
   node anim_generic_run(self, "patrol_jog_look_up_once");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "CQB_walk_turn_9");
   node anim_generic_run(self, "CQB_walk_turn_9");
 
@@ -1410,7 +1410,7 @@ corner_marine1_go() {
 
   self.alertlevel = "noncombat";
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "casual_killer_jog_stop");
 
   level endon("meetup_go");
@@ -1423,7 +1423,7 @@ corner_marine1_go() {
 corner_marine2_go() {
   self enable_cqbwalk();
 
-  node = getstruct("corner_doorexit3", "targetname");
+  node = getStruct("corner_doorexit3", "targetname");
   node anim_generic_reach(self, "CQB_walk_turn_7");
   node anim_generic_run(self, "CQB_walk_turn_7");
   self anim_generic_gravity_run(self, "CQB_walk_turn_9");
@@ -1434,12 +1434,12 @@ corner_marine2_go() {
   waittillframeend;
   self set_generic_run_anim("combat_jog");
 
-  node = getstruct("corner_anim1", "targetname");
+  node = getStruct("corner_anim1", "targetname");
   node anim_generic_reach(self, "patrol_jog_360_once");
 
   node anim_generic_run(self, "patrol_jog_360_once");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "CQB_walk_turn_9");
 
   self notify("corner_at_plane");
@@ -1458,7 +1458,7 @@ corner_marine2_go() {
 corner_marine3_go() {
   self enable_cqbwalk();
 
-  node = getstruct("corner_doorexit2", "targetname");
+  node = getStruct("corner_doorexit2", "targetname");
   node anim_generic_reach(self, "CQB_walk_turn_6");
   node anim_generic_run(self, "CQB_walk_turn_6");
 
@@ -1468,7 +1468,7 @@ corner_marine3_go() {
   waittillframeend;
   self set_generic_run_anim("combat_jog");
 
-  node = getstruct("corner_anim5b", "targetname");
+  node = getStruct("corner_anim5b", "targetname");
   node anim_generic_reach(self, "CQB_walk_turn_9");
   node anim_generic_run(self, "CQB_walk_turn_9");
 
@@ -1486,12 +1486,12 @@ corner_marine3_go() {
 corner_dunn_go() {
   self enable_cqbwalk();
 
-  node = getstruct("corner_doorexit", "targetname");
+  node = getStruct("corner_doorexit", "targetname");
   node anim_generic_reach(self, "CQB_walk_turn_6");
   node anim_generic_run(self, "CQB_walk_turn_6");
   self anim_generic_gravity_run(self, "CQB_walk_turn_9");
 
-  node = getstruct("corner_anim3", "targetname");
+  node = getStruct("corner_anim3", "targetname");
   node anim_generic_reach(self, "combatwalk_F_spin");
   node anim_generic_run(self, "combatwalk_F_spin");
 
@@ -1502,7 +1502,7 @@ corner_dunn_go() {
 
   self thread dialogue_queue("dcemp_cpd_checkitout");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "casual_killer_jog_stop");
 
   level endon("meetup_go");
@@ -1513,11 +1513,11 @@ corner_dunn_go() {
 }
 
 corner_plane_crash() {
-  getent("corner_engine", "targetname") thread corner_engine_crash();
+  getEnt("corner_engine", "targetname") thread corner_engine_crash();
 
   flag_wait("street_crash_heli_done");
 
-  node = getent("corner_crash_plane_link", "targetname");
+  node = getEnt("corner_crash_plane_link", "targetname");
   node playSound("scn_dcemp_jet_crash_offscreen");
 
   wait 2.5;
@@ -1538,7 +1538,7 @@ corner_plane_crash() {
   setsaveddvar("r_spotlightexponent", "0");
   setsaveddvar("r_spotlightBrightness", "16");
 
-  node = getstruct("corner_plane_fx_light", "targetname");
+  node = getStruct("corner_plane_fx_light", "targetname");
   model = spawn("script_model", node.origin);
   model.angles = node.angles;
   model setModel("tag_origin");
@@ -1564,7 +1564,7 @@ corner_plane_crash() {
 }
 
 meetup_main() {
-  getent("meetup_runner", "targetname") add_spawn_function(::meetup_runner);
+  getEnt("meetup_runner", "targetname") add_spawn_function(::meetup_runner);
 
   flag_wait("meetup_main");
 
@@ -1607,7 +1607,7 @@ meetup_main() {
   flag_wait("meetup_challenge_start");
 
   aimobj = spawn("script_origin", level.runner getEye() + (0, 0, 16));
-  aimobj linkto(level.runner);
+  aimobj linkTo(level.runner);
   level.dunn setentitytarget(aimobj);
   level.dunn enable_dontevershoot();
   level.dunn set_ignoreall(false);
@@ -1687,7 +1687,7 @@ meetup_marine3() {
 }
 
 meetup_walk_to_guys(node, name) {
-  struct = getstruct(name, "targetname");
+  struct = getStruct(name, "targetname");
 
   node.origin = self.origin;
   node.angles = vectortoangles(struct.origin - self.origin);
@@ -1730,11 +1730,11 @@ meetup_moveout(name) {
   ent = spawn("script_origin", self.origin);
   ent.angles = self.angles;
 
-  self linkto(ent);
+  self linkTo(ent);
   self disable_exits();
 
   time = .75;
-  ent rotateto(vectortoangles(node.origin - ent.origin), time, time);
+  ent rotateTo(vectortoangles(node.origin - ent.origin), time, time);
   ent thread anim_generic_run(self, "casual_killer_jog_start");
 
   ent waittill("rotatedone");
@@ -1752,9 +1752,9 @@ meetup_runner() {
   self thread magic_bullet_shield();
   self.name = "";
 
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
-  door = getent("meetup_door_left", "targetname");
+  door = getEnt("meetup_door_left", "targetname");
   door connectpaths();
 
   time = 1.25;
@@ -1771,20 +1771,20 @@ meetup_runner() {
 
   node anim_generic_run(self, "cargoship_open_cargo_guyL");
 
-  node = getent(node.target, "targetname");
+  node = getEnt(node.target, "targetname");
   self.goalradius = 80;
   self setgoalpos(node.origin);
   self waittill("goal");
 
   flag_set("meetup_challenge_start");
 
-  node = getent(node.target, "targetname");
+  node = getEnt(node.target, "targetname");
 
   node anim_generic_reach(self, "run_pain_fallonknee");
   node thread anim_generic_gravity(self, "run_pain_fallonknee");
   length = getanimlength(getanim_generic("run_pain_fallonknee"));
   wait length * .77;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self anim_generic_gravity(self, "run_2_crouch_90R");
   self setgoalpos(self.origin);
@@ -1792,7 +1792,7 @@ meetup_runner() {
   flag_wait("meetup_runner_safe");
   self.name = "Pvt. Vaughan";
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "DCemp_run_sequence_runner");
 
   flag_set("meetup_do_scripted_scene");
@@ -1803,9 +1803,9 @@ meetup_runner() {
 
   node anim_generic_gravity_run(self, "DCemp_run_sequence_runner");
 
-  node = getent(node.target, "targetname");
+  node = getEnt(node.target, "targetname");
   node anim_generic_reach(self, "unarmed_climb_wall");
-  self linkto(node);
+  self linkTo(node);
   self gun_remove();
 
   node thread anim_generic_run(self, "unarmed_climb_wall");
@@ -1821,7 +1821,7 @@ meetup_runner() {
   vec = anglesToForward(node.angles);
   vec *= 16;
 
-  node moveto(node.origin + vec, .5);
+  node moveTo(node.origin + vec, .5);
 
   node waittill("unarmed_climb_wall");
   self gun_recall();
@@ -1969,11 +1969,11 @@ lobby_go_dunn(node) {
 
   self enable_cqbwalk();
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   self thread anim_generic(self, "corner_standR_trans_CQB_OUT_8");
   wait 2.3;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   node thread anim_generic_run(self, "combatwalk_F_spin");
   length = getanimlength(getanim_generic("combatwalk_F_spin"));
@@ -2006,9 +2006,9 @@ lobby_go_dunn(node) {
   self thread anim_generic(self, "corner_standR_flinchB");
   length = getanimlength(getanim_generic("corner_standR_flinchB"));
   wait length * .65;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  node = getstruct("lobby_door_open2a", "targetname");
+  node = getStruct("lobby_door_open2a", "targetname");
 
   link = spawn("script_origin", self.origin);
   link.angles = (0, 225, 0);
@@ -2067,13 +2067,13 @@ lobby_go_foley(node) {
 
   wait 2;
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "patrol_jog_360_once");
   node thread anim_generic(self, "patrol_jog_360_once");
   length = getanimlength(getanim_generic("patrol_jog_360_once"));
   wait(length * .68) - .05;
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   node = getnode(node.target, "targetname");
 
@@ -2082,7 +2082,7 @@ lobby_go_foley(node) {
   flag_set("lobby_door_ready");
   self disable_cqbwalk();
 
-  temp = getstruct("lobby_arrive_foley", "targetname");
+  temp = getStruct("lobby_arrive_foley", "targetname");
   temp anim_generic_reach(self, "run_2_stand_90R");
   temp anim_generic(self, "run_2_stand_90R");
 
@@ -2115,7 +2115,7 @@ lobby_go_foley(node) {
   length = getanimlength(getanim_generic("stand_2_run_F_2"));
   wait length * .82;
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self thread anim_generic_run(self, "run_turn_R45");
 
@@ -2166,8 +2166,8 @@ lobby_go_robo(node) {
   }
   wait .5;
 
-  node = getstruct("lobby_door_open", "targetname");
-  door = getent("lobby_door_left", "targetname");
+  node = getStruct("lobby_door_open", "targetname");
+  door = getEnt("lobby_door_left", "targetname");
   parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
 
@@ -2278,9 +2278,9 @@ office_main() {
   array_thread(getEntArray("office_enemies_wave1", "script_noteworthy"), ::add_spawn_function, ::office_enemies_wave1);
   array_thread(getEntArray("office_enemies_wave1_runner", "targetname"), ::add_spawn_function, ::office_enemies_wave1_runner);
   array_thread(getEntArray("office_enemies_wave3", "targetname"), ::add_spawn_function, ::flag_set, "office_enemies_wave3");
-  getent("office_flickerlight1", "targetname") thread flickerlight_flares();
+  getEnt("office_flickerlight1", "targetname") thread flickerlight_flares();
 
-  snd = getent("office_suppressive_fire_target", "targetname");
+  snd = getEnt("office_suppressive_fire_target", "targetname");
   add_wait(::flag_wait, "office_ally_color_1");
   add_func(::activate_trigger_with_targetname, "office_ally_color_1");
   snd add_call(::playsound, "scn_dcemp_interior_movement");
@@ -2588,7 +2588,7 @@ parking_start_moveup(node) {
 parking_open_fire() {
   flag_wait_either("parking_moveout3", "parking_open_fire");
 
-  node = getent("parking_btr_aim_node", "targetname");
+  node = getEnt("parking_btr_aim_node", "targetname");
   self setentitytarget(node);
   self enable_dontevershoot();
   self set_ignoreall(false);
@@ -2604,7 +2604,7 @@ parking_open_fire() {
 
   while(!flag("parking_btr_guys_dead")) {
     flashorigin = self gettagorigin("TAG_FLASH");
-    vec1 = vectornormalize(node.origin - flashorigin);
+    vec1 = vectorNormalize(node.origin - flashorigin);
     vec2 = anglesToForward(self gettagAngles("TAG_FLASH"));
     if(vectordot(vec1, vec2) > .7) {
       self shoot();
@@ -2641,7 +2641,7 @@ parking_go_marine1(node) {
 
   wait 1.0;
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   self enable_cqbwalk();
 
@@ -2757,7 +2757,7 @@ parking_go_dunn(node) {
 
   flag_wait("parking_player_jumped_down");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
 
   level.foley thread dialogue_queue("dcemp_fly_checkvitals");
 
@@ -2809,12 +2809,12 @@ parking_backup_marine1(node) {
 
   flag_wait("parking_open_fire");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node = getnode(node.target, "targetname");
   node = getnode(node.target, "targetname");
   node = getnode(node.target, "targetname");
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self setgoalnode(node);
   self.goalradius = 8;
 }
@@ -2828,7 +2828,7 @@ parking_backup_foley(node) {
   node = getnode(node.target, "targetname");
   node = getnode(node.target, "targetname");
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self setgoalnode(node);
   self.goalradius = node.radius;
 }
@@ -2838,18 +2838,18 @@ parking_backup_dunn(node) {
 
   flag_wait("parking_open_fire");
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node = getnode(node.target, "targetname");
   node = getnode(node.target, "targetname");
   node = getnode("parking_moveup2_marine1", "targetname");
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self setgoalnode(node);
   self.goalradius = node.radius;
 }
 
 parking_btr_guys_dialogue() {
-  struct = getstruct("parking_btr_anim_node", "targetname");
+  struct = getStruct("parking_btr_anim_node", "targetname");
   level.parking_btr_guys[3] = spawn("script_origin", struct.origin + (0, 0, 40));
   level.parking_btr_guys[4] = spawn("script_origin", struct.origin + (0, 0, 40000));
   guys = level.parking_btr_guys;
@@ -2905,7 +2905,7 @@ parking_btr_guys_dialogue() {
 }
 
 parking_btr_guys() {
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
 
   self.a.nodeath = true;
   self.skipdeathanim = true;
@@ -2942,7 +2942,7 @@ parking_btr_guys() {
       flag_wait("parking_btr_shot_at");
       self notify("stop_loop");
 
-      self stopanimscripted();
+      self stopanimScripted();
 
       node thread anim_generic(self, self.script_animation);
       break;
@@ -2956,7 +2956,7 @@ parking_btr_guys() {
       flag_wait("parking_btr_shot_at");
       self notify("stop_loop");
 
-      self stopanimscripted();
+      self stopanimScripted();
 
       node thread anim_generic(self, self.script_animation);
       break;
@@ -2972,7 +2972,7 @@ parking_btr_guys() {
       flag_wait("parking_btr_shot_at");
       self notify("stop_loop");
 
-      self stopanimscripted();
+      self stopanimScripted();
 
       node thread anim_generic(self, self.script_animation);
       break;
@@ -3042,7 +3042,7 @@ plaza_main2() {
     thread plaza_dialogue();
     flag_wait("plaza_player_ready_for_throw");
 
-    node = getstruct("plaza_lookat_node", "targetname");
+    node = getStruct("plaza_lookat_node", "targetname");
     node add_wait(::waittill_player_lookat_for_time, .5);
     add_wait(::_wait, 10);
     add_func(::flag_set, "plaza_show_enemies");
@@ -3178,11 +3178,11 @@ plaza_moveup_marine1_backup() {
   if(isDefined(self.refnode)) {
     self.refnode notify("stop_loop");
   }
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self.moveplaybackrate = 1.25;
   self unlink();
 
-  node = getstruct("parking_jumpdown_stairs2", "targetname");
+  node = getStruct("parking_jumpdown_stairs2", "targetname");
   node = getnode(node.target, "targetname");
   node = getnode(node.target, "targetname");
   self setgoalnode(node);
@@ -3202,11 +3202,11 @@ plaza_moveup_dunn_backup() {
   if(isDefined(self.refnode)) {
     self.refnode notify("stop_loop");
   }
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self.moveplaybackrate = 1.25;
   self unlink();
 
-  node = getstruct("park_lookup_foley", "targetname");
+  node = getStruct("park_lookup_foley", "targetname");
   node = getnode(node.target, "targetname");
   self setgoalnode(node);
   self.goalradius = 8;
@@ -3221,11 +3221,11 @@ plaza_moveup_foley_backup() {
   if(isDefined(self.refnode)) {
     self.refnode notify("stop_loop");
   }
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self.moveplaybackrate = 1.25;
   self unlink();
 
-  node = getstruct("street_flarethrow_node", "targetname");
+  node = getStruct("street_flarethrow_node", "targetname");
   node anim_generic_reach(self, "street_flare_throw");
   self plaza_moveup_foley_end();
 }
@@ -3256,29 +3256,29 @@ plaza_moveup_marine1() {
 
   length = getanimlength(getanim_generic("coverstand_trans_OUT_R"));
   wait length * .84;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node thread anim_generic(self, "gulag_sewer_slide");
 
   length = getanimlength(getanim_generic("gulag_sewer_slide"));
   wait length * .30;
 
-  self anim_stopanimscripted();
-  node = getstruct(node.target, "targetname");
+  self anim_stopanimScripted();
+  node = getStruct(node.target, "targetname");
   node thread anim_generic(self, "favela_civ_warning_landing");
 
   length = getanimlength(getanim_generic("favela_civ_warning_landing"));
   wait length * .1;
 
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self anim_generic_run(self, "stand_2_run_R");
   self thread anim_generic(self, "run_turn_R45");
 
   length = getanimlength(getanim_generic("run_turn_R45"));
   wait length - .3;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   node = getnode(node.target, "targetname");
 
@@ -3341,14 +3341,14 @@ plaza_moveup_dunn() {
   self enable_cqbwalk();
 
   link = spawn("script_origin", self.origin);
-  self linkto(link);
-  link rotateyaw(-6.6, .5);
+  self linkTo(link);
+  link rotateYaw(-6.6, .5);
   link anim_generic_run(self, "corner_standR_trans_CQB_OUT_8");
 
   self unlink();
   link delete();
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node.origin = self.origin;
   node anim_generic_gravity_run(self, "patrol_jog_look_up_once");
 
@@ -3405,8 +3405,8 @@ plaza_moveup_foley_trans_out() {
   thread do_wait();
 
   node = spawn("script_origin", self.origin);
-  self linkto(node);
-  node rotateyaw(17.9, .5);
+  self linkTo(node);
+  node rotateYaw(17.9, .5);
   node anim_generic_run(self, "corner_standR_trans_CQB_OUT_9");
 
   self unlink();
@@ -3416,7 +3416,7 @@ plaza_moveup_foley_trans_out() {
 }
 
 plaza_moveup_foley_end() {
-  node = getstruct("street_flarethrow_node", "targetname");
+  node = getStruct("street_flarethrow_node", "targetname");
   node anim_generic(self, "street_flare_throw");
   flag_set("plaza_flare_thrown");
 
@@ -3489,8 +3489,8 @@ plaza_moveout_dunn() {
 
     link = spawn("script_origin", self.origin);
     link.angles = self.angles;
-    self linkto(link);
-    link rotateyaw(15, 1);
+    self linkTo(link);
+    link rotateYaw(15, 1);
     link anim_generic_run(self, "crouch_2run_R");
     self unlink();
     link delete();
@@ -3508,7 +3508,7 @@ plaza_moveout_dunn() {
 
   wait .5;
 
-  node = getstruct(node.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node anim_generic_reach(self, "jump_across_100_lunge");
   node anim_generic_run(self, "jump_across_100_lunge");
 
@@ -3536,7 +3536,7 @@ plaza_moveout_marine1() {
     wait .5;
 
     self notify("stop_loop");
-    self anim_stopanimscripted();
+    self anim_stopanimScripted();
 
     self anim_generic_gravity_run(self, "corner_standR_trans_OUT_9");
   }
@@ -3590,20 +3590,20 @@ plaza_moveout_foley() {
 
   wait 1;
 
-  node = getent(node.target, "targetname");
+  node = getEnt(node.target, "targetname");
 
   self thread anim_generic(self, "corner_standR_trans_OUT_6");
   length = getanimlength(getanim_generic("corner_standR_trans_OUT_6"));
   wait length - .61;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
-  self linkto(node);
+  self linkTo(node);
   node delaycall(.25, ::movez, 8, .5);
   node thread anim_generic(self, "gulag_sewer_slide");
   length = getanimlength(getanim_generic("gulag_sewer_slide"));
   wait length * .28;
   self unlink();
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
 
   self anim_generic_gravity_run(self, "stand_2_run_F_2");
 
@@ -3625,7 +3625,7 @@ start_iss() {
   ePlayer_rig = spawn_anim_model("player_rig");
   anim_actors_rescue[0] = ePlayer_rig;
 
-  crash_node = getent("crash_node", "targetname");
+  crash_node = getEnt("crash_node", "targetname");
   crash_node anim_first_frame(anim_actors_rescue, "dcburning_BHrescue");
 
   level.player freezecontrols(true);
@@ -3647,7 +3647,7 @@ start_emp() {
   thread vision_set_intro(0);
   thread intro_crash_vehicle_setup();
 
-  heli = getent("heli_crash_site_spotlight", "targetname");
+  heli = getEnt("heli_crash_site_spotlight", "targetname");
   heli.target = "emp_start_crash_heli_spot_node";
 
   heli_crash_site_spotlight = spawn_vehicle_from_targetname_and_drive("heli_crash_site_spotlight_emp_start");
@@ -3665,7 +3665,7 @@ start_emp() {
   ePlayer_rig = spawn_anim_model("player_rig");
   anim_actors_rescue[0] = ePlayer_rig;
 
-  crash_node = getent("crash_node", "targetname");
+  crash_node = getEnt("crash_node", "targetname");
   crash_node thread anim_single(anim_actors_rescue, "dcburning_BHrescue");
   ePlayer_rig setanimtime(ePlayer_rig getanim("dcburning_BHrescue"), 1);
 
@@ -3718,14 +3718,14 @@ start_street() {
 
   wait .1;
 
-  node = getstruct(level.foley.target, "targetname");
+  node = getStruct(level.foley.target, "targetname");
   node = getnode(node.target, "targetname");
   level.foley teleport_actor(node);
   level.foley.goalradius = 16;
   level.foley setgoalnode(node);
 
-  node = getstruct(level.dunn.target, "targetname");
-  node = getstruct(node.target, "targetname");
+  node = getStruct(level.dunn.target, "targetname");
+  node = getStruct(node.target, "targetname");
   node = getnode(node.target, "targetname");
   level.dunn teleport_actor(node);
   level.dunn.goalradius = 16;
@@ -3760,8 +3760,8 @@ start_corner() {
 
   wait .05;
 
-  getent("street_btr", "targetname") add_spawn_function(::street_btr_scene);
-  getent("street_crash_motorcycle", "targetname") thread street_crash_motorcycle();
+  getEnt("street_btr", "targetname") add_spawn_function(::street_btr_scene);
+  getEnt("street_crash_motorcycle", "targetname") thread street_crash_motorcycle();
   array_thread(getEntArray("street_crash_car", "script_noteworthy"), ::street_crash_cars);
   array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
 
@@ -3800,7 +3800,7 @@ start_corner() {
   thread flag_set_delayed("corner_main", .5);
   thread flag_set_delayed("street_crash_heli_done", .5);
 
-  objective_add(level.objnum, "active", &"DCEMP_OBJ_FIND_SHELTER", getstruct("hide_obj", "targetname").origin);
+  objective_add(level.objnum, "active", &"DCEMP_OBJ_FIND_SHELTER", getStruct("hide_obj", "targetname").origin);
   objective_current(level.objnum);
 }
 
@@ -3861,20 +3861,20 @@ start_lobby() {
   array_thread(level.team, ::walkdist_zero);
 
   nodes = [];
-  nodes = array_add(nodes, getstruct("meetup_runner_dunn", "targetname"));
-  nodes = array_add(nodes, getstruct("meetup_runner_foley", "targetname"));
-  nodes = array_add(nodes, getstruct("meetup_runner_1", "targetname"));
-  nodes = array_add(nodes, getstruct("meetup_runner_2", "targetname"));
-  nodes = array_add(nodes, getstruct("meetup_runner_3", "targetname"));
+  nodes = array_add(nodes, getStruct("meetup_runner_dunn", "targetname"));
+  nodes = array_add(nodes, getStruct("meetup_runner_foley", "targetname"));
+  nodes = array_add(nodes, getStruct("meetup_runner_1", "targetname"));
+  nodes = array_add(nodes, getStruct("meetup_runner_2", "targetname"));
+  nodes = array_add(nodes, getStruct("meetup_runner_3", "targetname"));
 
   emp_teleport_team_specific(level.team, nodes);
-  node = getstruct("meetup_runner_anim_node", "targetname");
+  node = getStruct("meetup_runner_anim_node", "targetname");
   level.dunn teleport_actor(node);
   emp_teleport_player();
 
   thread flag_set_delayed("lobby_main", .5);
 
-  door = getent("meetup_door_left", "targetname");
+  door = getEnt("meetup_door_left", "targetname");
   door delaycall(.5, ::connectpaths);
   door delaycall(1, ::rotateyaw, -90, .5);
   door delaycall(2.0, ::disconnectpaths);
@@ -3914,12 +3914,12 @@ start_office() {
   level.team = array_removedead(level.team);
   array_thread(level.team, ::set_force_color, "red");
 
-  door = getent("lobby_door_left", "targetname");
+  door = getEnt("lobby_door_left", "targetname");
   parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
   door thread hunted_style_door_open("door_wood_slow_creaky_open");
 
-  door = getent("lobby_door_right", "targetname");
+  door = getEnt("lobby_door_right", "targetname");
   parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
   door connectpaths();
@@ -4024,7 +4024,7 @@ start_common_dcemp() {
 
   flag_wait("team_initialized");
 
-  volume = getent("mask_ents", "targetname");
+  volume = getEnt("mask_ents", "targetname");
   volume activate_destructibles_in_volume();
   volume activate_interactives_in_volume();
 }

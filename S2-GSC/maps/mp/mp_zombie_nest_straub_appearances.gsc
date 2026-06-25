@@ -18,7 +18,7 @@ func_00F9() {
   level.var_943B.var_38E6["s2_zom_straub_table_cleaver_exit_4"] = % s2_zom_straub_table_cleaver_exit_4;
   level.var_943B.var_38E6["s2_zom_straub_table_cleaver_exit_6"] = % s2_zom_straub_table_cleaver_exit_6;
   level.var_943B.var_38E6["s2_zom_straub_table_hacksaw_exit_6"] = % s2_zom_straub_table_hacksaw_exit_6;
-  level.var_943B.var_241F = getent("straub_bullet_clip", "targetname");
+  level.var_943B.var_241F = getEnt("straub_bullet_clip", "targetname");
   level.var_0611["temp_straub_radius"] = loadfx("vfx/weaponimpact/zmb_straub_impact");
   level.var_943B.var_9097 = func_9442();
   if(!isDefined(level.var_943B.var_9097) || level.var_943B.var_9097.size <= 0) {
@@ -151,7 +151,7 @@ func_9448() {
   self.var_18A8 setModel("zom_hero_straub_wholebody");
   self.var_00B9 = spawn("script_model", self.var_0116);
   self.var_00B9 setModel("zom_head_kier_org1");
-  self.var_00B9 linkto(self.var_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
+  self.var_00B9 linkTo(self.var_18A8, "j_spineupper", (0, 0, 0), (0, 0, 0));
   if(isDefined(level.var_943B.var_241F)) {
     thread func_943F();
   }
@@ -169,7 +169,7 @@ func_9448() {
   if(isDefined(var_00)) {
     self.var_9A8E = spawn("script_model", self.var_0116);
     self.var_9A8E setModel(var_00);
-    self.var_9A8E linkto(self.var_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
+    self.var_9A8E linkTo(self.var_18A8, "TAG_WEAPON_RIGHT", (0, 0, 0), (0, 0, 0));
   }
 
   while(!self.var_65F8.var_565E) {
@@ -210,7 +210,7 @@ func_9448() {
 func_943F() {
   self endon("straub_destroyed");
   level.var_943B.var_241F.var_0116 = self.var_18A8.var_0116;
-  level.var_943B.var_241F linkto(self.var_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
+  level.var_943B.var_241F linkTo(self.var_18A8, "tag_origin", (0, 0, 32), (0, 0, 0));
   level.var_943B.var_241F setCanDamage(1);
   level.var_943B.var_241F thread maps\mp\gametypes\_damage::func_8676(1, undefined, ::func_9440, ::func_943E);
 }
@@ -264,9 +264,9 @@ func_9444(param_00) {
 
 func_9441(param_00) {
   var_01 = self.var_5EB4 - param_00 getEye();
-  var_02 = vectornormalize((var_01[0], var_01[1], 0));
+  var_02 = vectorNormalize((var_01[0], var_01[1], 0));
   var_03 = anglesToForward(param_00.var_001D);
-  var_04 = vectornormalize((var_03[0], var_03[1], 0));
+  var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = vectordot(var_02, var_04);
   var_05 = clamp(var_05, -1, 1);
   var_06 = acos(var_05);

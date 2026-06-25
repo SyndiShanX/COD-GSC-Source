@@ -127,7 +127,7 @@ func_F661(var_0, var_1) {
     var_7 = 1 - clamp(var_6 * 0.00003, 0, 1);
     var_2[var_3] = var_2[var_3] + 2.0 * var_7;
     var_8 = anglesToForward(var_5.angles);
-    var_9 = vectordot(var_8, vectornormalize(var_4.origin - var_5.origin));
+    var_9 = vectordot(var_8, vectorNormalize(var_4.origin - var_5.origin));
     var_2[var_3] = var_2[var_3] + var_9 * 1.0;
   }
 
@@ -177,7 +177,7 @@ func_F660(var_0, var_1) {
     var_7 = distance(var_4.origin, var_6.origin);
     var_8 = 1 - clamp(var_7 * 0.00001, 0, 1);
     var_2[var_3] = var_2[var_3] + 1.5 * var_8;
-    var_9 = vectornormalize(var_4.origin - var_6.origin);
+    var_9 = vectorNormalize(var_4.origin - var_6.origin);
     var_10 = anglesToForward(var_6.angles);
     var_11 = vectordot(var_10, var_9);
     var_2[var_3] = var_2[var_3] + var_11 * 1.0;

@@ -267,7 +267,7 @@ save_restored_function() {
   }
 
   if(flag("dogfights_story_done")) {
-    start_spot = getstruct("checkpoint_restart_spot", "targetname");
+    start_spot = getStruct("checkpoint_restart_spot", "targetname");
     level.f35.origin = start_spot.origin;
     level.f35 setphysangles(start_spot.angles);
   }
@@ -331,8 +331,8 @@ f35_fire_guns() {
     }
 
     if(b_has_target) {
-      self setgunnertargetent(e_target, v_offset, 0);
-      self setgunnertargetent(e_target, v_offset, 1);
+      self setgunnertargetEnt(e_target, v_offset, 0);
+      self setgunnertargetEnt(e_target, v_offset, 1);
     } else {
       self setgunnertargetvec(v_aim_pos, 0);
       self setgunnertargetvec(v_aim_pos, 1);
@@ -440,7 +440,7 @@ player_boards_f35() {
   level.f35 hidepart("tag_gear");
   attach_model = spawn_model("veh_t6_air_fa38_low", (0, 0, 0), (0, 0, 0));
   attach_model setforcenocull();
-  attach_model linkto(level.f35, "tag_origin", (0, 0, 0), (0, 0, 0));
+  attach_model linkTo(level.f35, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.player setclientdvar("cg_fov", 70);
   level.player setclientdvar("compass", 0);
   level.player setclientdvar("cg_tracerSpeed", 25000);
@@ -465,7 +465,7 @@ update_ember_fx(str_fx_name) {
   if(isDefined(str_fx_name) && getdvarint(#"_id_13510208") != 1) {
     self.e_temp_fx = spawn("script_model", self.origin);
     self.e_temp_fx.angles = self.angles;
-    self.e_temp_fx linkto(self);
+    self.e_temp_fx linkTo(self);
     self.e_temp_fx setModel("tag_origin");
     playFXOnTag(level._effect[str_fx_name], self.e_temp_fx, "tag_origin");
   }
@@ -618,13 +618,13 @@ setup_approach_points() {
       v_temp_approach_point = a_base_grid[a_keys_row[i]][a_keys_col[j]] + v_forward * n_distance_behind;
       e_temp_approach = spawn("script_origin", v_temp_approach_point);
       e_temp_approach.angles = level.f35.angles;
-      e_temp_approach linkto(self);
+      e_temp_approach linkTo(self);
       a_approach_ents[a_keys_row[i]][a_keys_col[j]] = e_temp_approach;
       a_approach_ents_index[i + j] = e_temp_approach;
       v_temp_goal_point = a_base_grid[a_keys_row[i]][a_keys_col[j]] + v_forward * n_distance_goal;
       e_temp_goal = spawn("script_origin", v_temp_goal_point);
       e_temp_goal.angles = level.f35.angles;
-      e_temp_goal linkto(self);
+      e_temp_goal linkTo(self);
       a_goal_ents[a_keys_row[i]][a_keys_col[j]] = e_temp_goal;
     }
   }
@@ -936,7 +936,7 @@ f35_wait_until_path_clear(b_require_push_forward) {
 _f35_stop_from_collision() {
   e_temp = spawn("script_origin", self.origin);
   e_temp.angles = self.angles;
-  self linkto(e_temp);
+  self linkTo(e_temp);
   self waittill("f35_switch_modes_now");
   self unlink();
   e_temp delete();
@@ -1094,7 +1094,7 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
   }
 
   if(idamage > 0) {
-    level.player playrumbleonentity(str_rumble);
+    level.player playRumbleOnEntity(str_rumble);
     earthquake(n_earthquake_magnitude, n_earthquake_duration, level.player.origin, 512, level.player);
     self f35_try_to_play_damage_bink();
   }
@@ -1200,11 +1200,11 @@ f35_scale_speed_to_min() {
 
 flyby_feedback_watcher() {
   t_flyby = get_ent("flyby_feedback_trigger", "targetname", 1);
-  t_flyby enablelinkto();
+  t_flyby enablelinkTo();
   n_z_offset = t_flyby.height * 0.5;
   v_link_offset = (0, 0, n_z_offset);
   t_flyby.origin = self.origin - v_link_offset;
-  t_flyby linkto(self);
+  t_flyby linkTo(self);
 
   while(true) {
     t_flyby waittill("trigger", e_triggered);
@@ -1459,7 +1459,7 @@ f35_damage_bink() {
 anim_f35_mode_switch() {
   level.player.body = spawn_anim_model("player_body", level.player.origin);
   level.player.body.angles = level.player.angles;
-  level.player.body linkto(level.f35, "tag_driver");
+  level.player.body linkTo(level.f35, "tag_driver");
   level.player.body maps\_anim::anim_single(level.player.body, "F35_mode_switch");
 
   if(isDefined(level.player.body)) {
@@ -1845,7 +1845,7 @@ _watch_for_boost() {
           boost_effect_active = 1;
         }
 
-        level.player playrumbleonentity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
         earthquake(0.15, 0.5, level.player.origin, 1000, level.player);
         self.boosting = 1;
       }
@@ -1891,7 +1891,7 @@ do_flight_feedback() {
   level endon("dogfight_done");
 
   while(true) {
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     earthquake(0.1, 0.15, level.player.origin, 1000, level.player);
     wait 0.15;
   }
@@ -1939,16 +1939,16 @@ plane_rumble() {
     vr = abs(self getspeed() / self getmaxspeed());
 
     if(vr < 0.1) {
-      level.player playrumbleonentity("pullout_small");
+      level.player playRumbleOnEntity("pullout_small");
       wait 0.3;
     } else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
       earthquake(0.15, 0.25, self.origin, 200);
-      level.player playrumbleonentity("pullout_small");
+      level.player playRumbleOnEntity("pullout_small");
       wait 0.1;
     } else if(vr > 0.8) {
       time = randomfloatrange(0.1, 0.15);
       earthquake(0.35, time, self.origin, 200);
-      level.player playrumbleonentity("pullout_small");
+      level.player playRumbleOnEntity("pullout_small");
       wait(time);
     } else
       wait 0.1;

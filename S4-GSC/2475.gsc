@@ -570,11 +570,11 @@ _id_2FD8(var_0, var_1, var_2) {
   var_9 = anglestoright(var_0.angles);
   var_10 = 0;
   var_11 = [var_6 + var_8 * 100, var_6 - var_8 * 100, var_6 + var_9 * 100, var_6 - var_9 * 100, var_6 + (var_8 + var_9) * 100, var_6 + (var_8 - var_9) * 100, var_6 + (var_9 - var_8) * 100, var_6 + (-1 * var_8 - var_9) * 100];
-  var_12 = vectornormalize(var_11[0] - var_6);
+  var_12 = vectorNormalize(var_11[0] - var_6);
   var_13 = 0;
 
   foreach(var_15 in var_11) {
-    var_16 = vectornormalize(var_15 - var_6);
+    var_16 = vectorNormalize(var_15 - var_6);
     var_17 = var_6 + (0, 0, var_7) - var_16 * 25000;
     var_18 = [var_6, var_6 - var_16 * 512, var_6 - var_16 * 256, var_6 + var_16 * 256, var_6 + var_16 * 512];
     var_19 = 0;
@@ -642,7 +642,7 @@ _id_4E65(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_13._id_F81F = spawn("script_model", var_13 gettagorigin("tag_turret"));
     var_13._id_F81F setModel("plane_wm_dalpha_turret_front");
     var_13._id_F81F.angles = var_13 gettagangles("TAG_TURRET");
-    var_13._id_F81F linkto(var_13, "tag_turret");
+    var_13._id_F81F linkTo(var_13, "tag_turret");
   }
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("killstreak", "addToActiveKillstreakList")) {
@@ -705,7 +705,7 @@ _id_4E65(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   }
 
   if(var_5.streakname == "toma_strike") {
-    var_13 moveto(var_19, 14);
+    var_13 moveTo(var_19, 14);
     var_13 thread bombingrunroll();
     wait 14;
   }
@@ -930,7 +930,7 @@ _id_2FD7(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_15._id_0200 = var_3 + var_6 * 5 + var_16;
 
     if(!isDefined(var_12)) {
-      var_12 = vectornormalize(var_15._id_0200 - var_15._id_E06F) * 500 + anglesToForward(var_0.angles) * 256;
+      var_12 = vectorNormalize(var_15._id_0200 - var_15._id_E06F) * 500 + anglesToForward(var_0.angles) * 256;
     }
 
     var_15._id_82B5 = var_12;
@@ -987,13 +987,13 @@ _id_2FDC(var_0, var_1, var_2, var_3, var_4) {
       var_29 = var_16[var_25] + scripts\engine\utility::ter_op(var_14 % 2 == 0, var_28, -1 * var_28);
       var_30 = scripts\engine\utility::ter_op(var_14 % 2 == 0, "TAG_MUZZLE_FX_1", "TAG_MUZZLE_FX_2");
       var_31 = var_0._id_F81F gettagorigin(var_30) * (1, 1, 0) + (0, 0, var_24) + var_5 * 1000;
-      var_33 = vectornormalize(var_29 - var_31);
+      var_33 = vectorNormalize(var_29 - var_31);
       var_34 = var_29 + var_33 * 30000;
       var_35 = scripts\engine\trace::ray_trace(var_31, var_34, undefined, scripts\engine\trace::_id_3EE5(0, 1, 0, 1, 0, 1, 0));
       var_36 = var_35["position"];
       var_37 = var_35["normal"];
       var_38 = var_36 + var_37 * 10;
-      var_39 = vectornormalize(var_36 - var_0._id_F81F gettagorigin(var_30) + (0, 0, 64));
+      var_39 = vectorNormalize(var_36 - var_0._id_F81F gettagorigin(var_30) + (0, 0, 64));
       var_40 = _func_025B(var_39, (0, 0, 1));
       var_41 = _func_025B(var_40, var_39);
       var_0 thread _id_2FDB(scripts\engine\utility::getfx("airstrike_tracer"), var_38, var_39, var_41);
@@ -1291,7 +1291,7 @@ _id_13D4(var_0) {
     self setscriptablepartstate("marker_scope", "off", 0);
     var_2 = anglesToForward(var_0 getplayerangles());
     var_3 = var_0 getEye();
-    var_4 = vectornormalize(self.origin - var_3);
+    var_4 = vectorNormalize(self.origin - var_3);
     var_5 = self.origin + var_4 * 20;
     var_6 = scripts\engine\trace::ray_trace(var_3, var_5, var_0);
     var_7 = var_6["normal"];
@@ -1356,9 +1356,9 @@ _id_13C0(var_0) {
 _id_13C5(var_0, var_1, var_2) {
   self endon("death");
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(var_0);
-  self moveto(var_1, 4);
+  self moveTo(var_1, 4);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(3.95);
-  self moveto(var_2, 5);
+  self moveTo(var_2, 5);
 }
 
 _id_13D7(var_0) {

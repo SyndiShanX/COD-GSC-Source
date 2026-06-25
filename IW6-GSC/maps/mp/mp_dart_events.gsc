@@ -97,7 +97,7 @@ gas_station_init() {
 
   if(isDefined(self.animated_model)) {
     foreach(ent in self.linked_ents) {
-      ent LinkTo(self.animated_model, "j_awning_main");
+      ent linkTo(self.animated_model, "j_awning_main");
     }
   }
 
@@ -173,7 +173,7 @@ gas_station_run_func_on_notify(note, func, param1) {
 }
 
 gas_station_update_clip() {
-  killcam_struct = getstruct("gas_station_killcam", "targetname");
+  killcam_struct = getStruct("gas_station_killcam", "targetname");
 
   foreach(clip in self.clip_up) {
     clip SetAISightLineVisible(0);
@@ -187,7 +187,7 @@ gas_station_update_clip() {
 
     clip trigger_on();
     if(!isDefined(clip.nodisconnect) || !clip.nodisconnect) {
-      clip DisconnectPaths();
+      clip disconnectPaths();
     }
 
     foreach(character in level.characters) {
@@ -384,7 +384,7 @@ broken_wall_init(requires_explosive) {
         self.trigger_show[self.trigger_show.size] = target;
         break;
       case "trigger_use_touch":
-        target UseTriggerRequireLookAt();
+        target useTriggerRequireLookAt();
         target.script_noteworthy = "trigger_use";
         break;
       default:
@@ -437,7 +437,7 @@ breach() {
     if(!isDefined(p.target)) {
       continue;
     }
-    breach = getstruct(p.target, "targetname");
+    breach = getStruct(p.target, "targetname");
     if(!isDefined(breach)) {
       continue;
     }
@@ -509,7 +509,7 @@ breach_init() {
         break;
       case "triggers_with":
         if(isDefined(target.target)) {
-          other_breach = getstruct(target.target, "targetname");
+          other_breach = getStruct(target.target, "targetname");
           if(isDefined(other_breach)) {
             self thread breach_other_watch(other_breach);
           }
@@ -519,7 +519,7 @@ breach_init() {
         self.care_packages[self.care_packages.size] = target;
         break;
       case "animated_door":
-        door = GetEnt(target.target, "targetname");
+        door = getEnt(target.target, "targetname");
         self.animated_doors[self.animated_doors.size] = door;
         self breach_animated_door_init(door);
         break;
@@ -679,7 +679,7 @@ breach_door_init(door) {
   link_ent.angles = pivot.angles;
 
   foreach(ent in door_parts) {
-    ent LinkTo(link_ent);
+    ent linkTo(link_ent);
   }
 
   door.link_ent = link_ent;
@@ -773,7 +773,7 @@ breach_move_door(door, pos, time) {
       door.link_ent RotateBy(pos.move_angles, time, time);
     }
     if(isDefined(origin) && origin != door.link_ent.origin) {
-      door.link_ent MoveTo(origin, time);
+      door.link_ent moveTo(origin, time);
     }
   } else {
     if(isDefined(angles)) {
@@ -963,8 +963,8 @@ search_bot() {
       continue;
     }
 
-    search_bot RotateTo(dir_angles, min(0.5, time));
-    search_bot MoveTo(goal_node.origin, time);
+    search_bot rotateTo(dir_angles, min(0.5, time));
+    search_bot moveTo(goal_node.origin, time);
     search_bot waittill("movedone");
     current_node = goal_node;
   }
@@ -996,7 +996,7 @@ hide_gas_station_physics_pieces() {
 care_package_watch() {
   self endon("end");
 
-  watch_volume = GetEnt("care_package_volume", "targetname");
+  watch_volume = getEnt("care_package_volume", "targetname");
 
   flag_wait("gas_station_exploded");
 
@@ -1036,7 +1036,7 @@ care_package_watch() {
 
 deleteOnOwnerDeath(owner) {
   wait(0.25);
-  self LinkTo(owner, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(owner, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   owner waittill("death");
 

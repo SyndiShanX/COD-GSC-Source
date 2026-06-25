@@ -119,9 +119,9 @@ _id_C436(var_0) {
   var_1 = var_0 _meth_812D(var_0.origin);
 
   if(isDefined(var_1)) {
-    var_0 setorigin(var_1);
+    var_0 setOrigin(var_1);
   } else {
-    var_0 setorigin(var_0.origin + (0, 0, 100));
+    var_0 setOrigin(var_0.origin + (0, 0, 100));
   }
 
   var_0._id_B5A4 delete();
@@ -150,8 +150,8 @@ _id_B16B(var_0, var_1) {
   var_0 thread _id_10BD6(var_1);
   var_1._id_9515 = var_1 scripts\engine\utility::spawn_tag_origin();
   var_1 playerlinktodelta(var_1._id_9515, "tag_origin", 1, 0, 0, 0, 0, 0);
-  var_1._id_9515 moveto(var_0._id_CBD0.origin, 0.25, 0.1, 0.1);
-  var_1._id_9515 rotateto(var_0._id_CBD0.angles, 0.25, 0.1, 0.1);
+  var_1._id_9515 moveTo(var_0._id_CBD0.origin, 0.25, 0.1, 0.1);
+  var_1._id_9515 rotateTo(var_0._id_CBD0.angles, 0.25, 0.1, 0.1);
   var_1 setstance("stand");
   wait 0.25;
 
@@ -162,7 +162,7 @@ _id_B16B(var_0, var_1) {
   var_1 unlink();
   var_1._id_9515 delete();
   var_1._id_9515 = undefined;
-  var_1 setorigin(var_0._id_CBD0.origin);
+  var_1 setOrigin(var_0._id_CBD0.origin);
   var_1 setplayerangles(var_0._id_CBD0.angles);
   var_2 = "place";
   var_2 = scripts\engine\utility::ter_op(istrue(var_0._id_88A3), "place_high", "place");
@@ -171,7 +171,7 @@ _id_B16B(var_0, var_1) {
   var_0._id_CBD0 thread _id_0706::_id_17FD(var_1, var_1._id_B5A4, var_2);
 
   if(isDefined(var_0.target)) {
-    getent(var_0.target, "targetname").origin = getent(var_0.target, "targetname").origin + (0, 5000, 0);
+    getEnt(var_0.target, "targetname").origin = getEnt(var_0.target, "targetname").origin + (0, 5000, 0);
   }
 
   var_3 = spawn("script_model", var_0._id_CBD0.origin);

@@ -13,13 +13,13 @@ start() {
   }
 
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_ignoresuppression, 1);
-  var_0 = getent("vignette_alpha_team_rigascend", "script_noteworthy");
+  var_0 = getEnt("vignette_alpha_team_rigascend", "script_noteworthy");
 
   if(level._bravo.size < 2) {
     level maps\black_ice_util::spawn_bravo();
   }
 
-  var_1 = common_scripts\utility::getstruct("vignette_beta_rig_ascend", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("vignette_beta_rig_ascend", "script_noteworthy");
   var_2 = getnode("bc_node_ascend_ally1", "targetname");
   level._allies[0] forceteleport(var_2.origin, var_2.angles);
   level._allies[0] thread maps\_utility::follow_path(var_2);
@@ -43,16 +43,16 @@ start() {
 }
 
 main() {
-  level.ascend_launch_pos = common_scripts\utility::getstruct("ascend_launch_pos", "script_noteworthy");
+  level.ascend_launch_pos = common_scripts\utility::getStruct("ascend_launch_pos", "script_noteworthy");
 
   if(!isDefined(level.ascend_anim_node)) {
-    level.ascend_anim_node = getent("vignette_alpha_team_rigascend", "script_noteworthy");
+    level.ascend_anim_node = getEnt("vignette_alpha_team_rigascend", "script_noteworthy");
   }
 
-  level.bravo_ascend_anim_node = common_scripts\utility::getstruct("vignette_beta_rig_ascend", "script_noteworthy");
+  level.bravo_ascend_anim_node = common_scripts\utility::getStruct("vignette_beta_rig_ascend", "script_noteworthy");
   level.bravo_ascend_anim_node.origin = level.ascend_anim_node.origin;
   level.bravo_ascend_anim_node.angles = level.ascend_anim_node.angles;
-  level.player_ascend_anim_node = getent("vignette_alpha_player_rigascend", "script_noteworthy");
+  level.player_ascend_anim_node = getEnt("vignette_alpha_player_rigascend", "script_noteworthy");
   level.sfx_ascend_check = "stop";
   level.sfx_ascend_node = spawn("script_origin", (1414, 3969, 4069));
   init_ascend_vars();
@@ -103,7 +103,7 @@ player_setup(var_0, var_1, var_2) {
 play_falling_enemy() {
   var_0 = level.ascend_anim_node common_scripts\utility::spawn_tag_origin();
   level.ascend_enemy = maps\_vignette_util::vignette_actor_spawn("ascend_enemy", "opfor");
-  level.ascend_enemy linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.ascend_enemy linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 maps\_anim::anim_single_solo(level.ascend_enemy, "alpha_rig_ascend");
   var_0 maps\_anim::anim_last_frame_solo(level.ascend_enemy, "alpha_rig_ascend");
   common_scripts\utility::flag_wait("flag_ascend_end");
@@ -416,7 +416,7 @@ ascend_logic() {
   level.ascend_anim_node notify("stop_loop");
 
   foreach(var_9 in var_3) {
-    var_9 linkto(level.player_ascend_anim_node);
+    var_9 linkTo(level.player_ascend_anim_node);
   }
 
   thread maps\black_ice_audio::sfx_rig_ascend_logic("go");
@@ -443,12 +443,12 @@ ascend_logic() {
   thread alpha_ascend_rubberband(var_0);
   thread alpha_ascend_rubberband_cleanup(var_0);
   maps\_utility::delaythread(0.05, ::post_ascend_cleanup);
-  var_12 = getent("vignette_alpha_team_rigascend", "script_noteworthy");
+  var_12 = getEnt("vignette_alpha_team_rigascend", "script_noteworthy");
   var_12 maps\_anim::anim_single(var_0, "alpha_rig_ascend");
   level notify("notify_alpha_ascend_complete");
   common_scripts\utility::flag_set("flag_alpha_ascend_complete");
-  level._allies[0] stopanimscripted();
-  level._allies[1] stopanimscripted();
+  level._allies[0] stopanimScripted();
+  level._allies[1] stopanimScripted();
 }
 
 ascend_aim_logic() {
@@ -986,7 +986,7 @@ hanging_cargo_motion() {
   var_1 = spawn("script_model", (-1449, 3698, 1490));
 
   for(var_2 = 0; var_2 < var_0; var_2++) {
-    var_3 = getent("hanging_cargo_node_" + var_2, "script_noteworthy");
+    var_3 = getEnt("hanging_cargo_node_" + var_2, "script_noteworthy");
     var_4 = getEntArray("hanging_cargo_" + var_2, "targetname");
     var_5 = 0.0;
 
@@ -994,11 +994,11 @@ hanging_cargo_motion() {
       var_6 = 0.0;
 
       for(var_7 = 0; var_7 < var_4.size; var_7++) {
-        var_4[var_7] linkto(var_3);
+        var_4[var_7] linkTo(var_3);
 
         if(isDefined(var_4[var_7].target)) {
-          var_8 = getent(var_4[var_7].target, "targetname");
-          var_8 linkto(var_4[var_7]);
+          var_8 = getEnt(var_4[var_7].target, "targetname");
+          var_8 linkTo(var_4[var_7]);
         }
 
         var_6 = var_6 + var_4[var_7].origin[2];
@@ -1026,15 +1026,15 @@ hanging_cargo_ascension(var_0) {
   common_scripts\utility::flag_wait("flag_mid_start");
   var_1 = var_0.origin + (0, 0, 1000);
   var_2 = 30.0;
-  var_0 moveto(var_1, var_2, 1.0, 0.0);
+  var_0 moveTo(var_1, var_2, 1.0, 0.0);
   thread maps\black_ice_audio::sfx_cargo_lift(var_0);
   wait(var_2 / 2.0);
   thread maps\black_ice_audio::sfx_cargo_hatch();
   var_3 = 5.0;
-  var_4 = getent("left_cargo_elevator_door_1", "targetname");
-  var_5 = getent("left_cargo_elevator_door_2", "targetname");
-  var_4 moveto(var_4.origin + (0, 226, 0), var_3, 0.0, 0.0);
-  var_5 moveto(var_5.origin + (0, -226, 0), var_3, 0.0, 0.0);
+  var_4 = getEnt("left_cargo_elevator_door_1", "targetname");
+  var_5 = getEnt("left_cargo_elevator_door_2", "targetname");
+  var_4 moveTo(var_4.origin + (0, 226, 0), var_3, 0.0, 0.0);
+  var_5 moveTo(var_5.origin + (0, -226, 0), var_3, 0.0, 0.0);
 }
 
 hanging_cargo_cleanup(var_0, var_1) {
@@ -1081,12 +1081,12 @@ hint_ascend_func() {
 
 notetrack_fire_shake(var_0) {
   earthquake(0.4, 0.5, level.player.origin, 2048);
-  level.player playrumbleonentity("pistol_fire");
+  level.player playRumbleOnEntity("pistol_fire");
 }
 
 notetrack_takeoff(var_0) {
   earthquake(0.3, 1.0, level.player.origin, 2048);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 notetrack_shake_start(var_0) {}

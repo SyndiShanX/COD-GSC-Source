@@ -58,7 +58,7 @@ sliding_power_door() {
 
     if(var_2.classname == "script_model") {
       var_2.moved = 1;
-      var_2 moveto(var_2.origin + var_2.script_angles, 0.5);
+      var_2 moveTo(var_2.origin + var_2.script_angles, 0.5);
     }
   }
 

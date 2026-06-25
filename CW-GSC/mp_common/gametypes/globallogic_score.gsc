@@ -2012,7 +2012,7 @@ function updatewinlossstats() {
 
     foreach(team, ranking in level.var_eed7c027) {
       if(ranking <= var_96974d12) {
-        winners = getplayers(team);
+        winners = getPlayers(team);
 
         foreach(winner in winners) {
           updatewinstats(winner);
@@ -2538,7 +2538,7 @@ function function_c2ea00b2(attacker, inflictor, weapon) {
     #players: [], #attacker: attacker, #inflictor: inflictor, #weapon: weapon
   };
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(util::function_fbce7263(player.team, attacker.team)) {
       continue;
     }

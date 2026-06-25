@@ -37,7 +37,7 @@ zombiespawnsetup() {
 get_closest_valid_player(origin, ignore_player, ignore_laststand_players = 0) {
   pixbeginevent(#"get_closest_valid_player");
   valid_player_found = 0;
-  targets = getplayers();
+  targets = getPlayers();
 
   if(isDefined(level.closest_player_targets_override)) {
     targets = [[level.closest_player_targets_override]]();
@@ -1257,7 +1257,7 @@ zombie_spawn_failed(spawn) {
 
 get_desired_origin() {
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
 
     if(!isDefined(ent)) {
       ent = struct::get(self.target, "targetname");
@@ -1316,7 +1316,7 @@ zombie_rise_death(zombie, spot) {
 
   if(isDefined(zombie)) {
     zombie.deathanim = zombie get_rise_death_anim();
-    zombie stopanimscripted();
+    zombie stopanimScripted();
   }
 }
 
@@ -1767,7 +1767,7 @@ function_f9c50a93(move_speed, is_easy) {
 }
 
 setup_zombie_knockdown(var_5f02306b, var_43b3242) {
-  if(!isactor(self) || isDefined(self.missinglegs) && self.missinglegs || isDefined(self.var_5dd07a80) && self.var_5dd07a80 || isDefined(self.isinmantleaction) && self.isinmantleaction || self isplayinganimscripted() || self function_dd070839() && !(isDefined(var_43b3242) && var_43b3242)) {
+  if(!isactor(self) || isDefined(self.missinglegs) && self.missinglegs || isDefined(self.var_5dd07a80) && self.var_5dd07a80 || isDefined(self.isinmantleaction) && self.isinmantleaction || self isplayinganimScripted() || self function_dd070839() && !(isDefined(var_43b3242) && var_43b3242)) {
     return;
   }
 
@@ -1783,11 +1783,11 @@ setup_zombie_knockdown(var_5f02306b, var_43b3242) {
     zombie_to_entity = var_5f02306b.origin - self.origin;
   }
 
-  zombie_to_entity_2d = vectornormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
+  zombie_to_entity_2d = vectorNormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
   zombie_forward = anglesToForward(self.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(self.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_entity_2d, zombie_forward_2d);
 
   if(dot >= 0.5) {
@@ -1822,9 +1822,9 @@ setup_zombie_knockdown(var_5f02306b, var_43b3242) {
 function_fc0cb93d(entity) {
   self.pushed = 1;
   zombie_to_entity = entity.origin - self.origin;
-  zombie_to_entity_2d = vectornormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
+  zombie_to_entity_2d = vectorNormalize((zombie_to_entity[0], zombie_to_entity[1], 0));
   zombie_right = anglestoright(self.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_entity_2d, zombie_right_2d);
 
   if(dot < 0) {
@@ -2429,7 +2429,7 @@ gib_random_part() {
     return;
   }
 
-  playsoundatposition(#"zmb_death_gibss", self.origin);
+  playSoundAtPosition(#"zmb_death_gibss", self.origin);
   gib_index = randomint(5);
 
   if(gib_index == 3 && gibserverutils::isgibbed(self, 32) || gib_index == 4 && gibserverutils::isgibbed(self, 16)) {
@@ -2462,7 +2462,7 @@ gib_random_parts() {
     return;
   }
 
-  playsoundatposition(#"zmb_death_gibss", self.origin);
+  playSoundAtPosition(#"zmb_death_gibss", self.origin);
   val = randomint(100);
 
   if(val > 50) {

@@ -166,7 +166,7 @@ function_aef0aaa4() {
 }
 
 function_7b10e526(index, multival, target) {
-  normal = vectornormalize(target.origin - self.origin);
+  normal = vectorNormalize(target.origin - self.origin);
   pitch = randomfloatrange(15, 30);
   var_a978e158 = randomfloatrange(-10, 10);
   yaw = -180 + 360 / multival * index + var_a978e158;
@@ -176,7 +176,7 @@ function_7b10e526(index, multival, target) {
   f = vectorcross(c, normal);
   theta = 90 - pitch;
   dir = normal * cos(theta) + f * sin(theta);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   return dir;
 }
 
@@ -204,7 +204,7 @@ function_d13a21cb(entity, projectile) {
 
     recordsphere(var_c6b637a5, 15, (1, 0.5, 0), "<dev string:x38>");
 
-    launchvelocity = vectornormalize(var_c6b637a5 - projectile.origin) * 1400;
+    launchvelocity = vectorNormalize(var_c6b637a5 - projectile.origin) * 1400;
     grenade = entity magicmissile(entity.ai.var_a05929e4, projectile.origin, launchvelocity);
     grenade thread function_7d162bd0(grenade);
   }

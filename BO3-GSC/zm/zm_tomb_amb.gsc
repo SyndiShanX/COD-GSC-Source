@@ -104,7 +104,7 @@ function sndlocationshouldplay(array, activezone) {
     return shouldplay;
   }
   playersinlocal = 0;
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(player zm_zonemgr::entity_in_zone(activezone)) {
       if(!(isDefined(player.afterlife) && player.afterlife)) {
@@ -162,7 +162,7 @@ function sndlocationbetweenrounds() {
     if(isDefined(level.sndlastzone) && zone == level.sndlastzone) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(player zm_zonemgr::entity_in_zone(zone)) {
         wait(0.1);
@@ -219,14 +219,14 @@ function snddoormusic() {
     }
   }
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     ent notify("snddoormusic_triggered");
   }
   level thread sndplaystingerwithoverride(self.script_sound);
 }
 
 function sndmaelstrom() {
-  trig = getent("sndMaelstrom", "targetname");
+  trig = getEnt("sndMaelstrom", "targetname");
   if(!isDefined(trig)) {
     return;
   }
@@ -274,7 +274,7 @@ function function_89a607c3() {
   var_169695f4 = array(1, 1, 5);
   self thread zm_sidequests::fake_use("115_trig_activated", &function_f36e092d);
   self waittill("115_trig_activated");
-  playsoundatposition("zmb_ee_mus_activate", self.origin);
+  playSoundAtPosition("zmb_ee_mus_activate", self.origin);
   level.var_69a8687++;
   level notify("hash_34d7d690");
 }
@@ -365,7 +365,7 @@ function function_b8227f87() {
 }
 
 function function_231d9741() {
-  playsoundatposition("zmb_sam_egg_success", (0, 0, 0));
+  playSoundAtPosition("zmb_sam_egg_success", (0, 0, 0));
   wait(3);
   s_ballerina_end = struct::get("s_ballerina_end", "targetname");
   s_ballerina_end thread function_69f032ca();
@@ -382,7 +382,7 @@ function function_69f032ca() {
   self.var_ac086ffb playLoopSound("mus_musicbox_lp", 2);
   var_209d26c2 = struct::get(self.target, "targetname");
   self thread function_bec55ee6();
-  self.var_ac086ffb moveto(var_209d26c2.origin, 25, 10);
+  self.var_ac086ffb moveTo(var_209d26c2.origin, 25, 10);
   self.var_ac086ffb waittill("movedone");
   self notify("hash_3a53ac43");
   self.var_ac086ffb clientfield::set("snd_zhdegg", 0);

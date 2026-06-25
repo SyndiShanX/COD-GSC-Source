@@ -39,7 +39,7 @@ function ai_puppeteer_think() {
 function ai_puppeteer() {
   player = undefined;
   while(!isPlayer(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     wait(0.05);
   }
   ai_puppeteer_create_hud();
@@ -212,7 +212,7 @@ function ai_puppet_set() {
   level.ai_puppet.ispuppet = 1;
   level.ai_puppet.old_goalradius = level.ai_puppet.goalradius;
   level.ai_puppet.goalradius = 16;
-  level.ai_puppet stopanimscripted();
+  level.ai_puppet stopanimScripted();
 }
 
 function ai_puppet_release(restore) {
@@ -326,11 +326,11 @@ function ai_puppeteer_destroy_hud() {
 
 function ai_puppeteer_render_point(point, normal, forward, color) {
   surface_vector = vectorcross(forward, normal);
-  surface_vector = vectornormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vectorscale(surface_vector, 5), color, 1, 1);
   line(point, point + (vectorscale(surface_vector, -5)), color, 1, 1);
   surface_vector = vectorcross(normal, surface_vector);
-  surface_vector = vectornormalize(surface_vector);
+  surface_vector = vectorNormalize(surface_vector);
   line(point, point + vectorscale(surface_vector, 5), color, 1, 1);
   line(point, point + (vectorscale(surface_vector, -5)), color, 1, 1);
 }

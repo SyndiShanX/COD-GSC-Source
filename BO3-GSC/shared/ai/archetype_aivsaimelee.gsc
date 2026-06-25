@@ -154,9 +154,9 @@ function private hasaivsaienemy(behaviortreeentity) {
     behaviortreeentity._ai_melee_initiator = undefined;
     return false;
   }
-  forwardvec = vectornormalize(anglesToForward(behaviortreeentity.angles));
-  rightvec = vectornormalize(anglestoright(behaviortreeentity.angles));
-  toenemyvec = vectornormalize(enemy.origin - behaviortreeentity.origin);
+  forwardvec = vectorNormalize(anglesToForward(behaviortreeentity.angles));
+  rightvec = vectorNormalize(anglestoright(behaviortreeentity.angles));
+  toenemyvec = vectorNormalize(enemy.origin - behaviortreeentity.origin);
   fdot = vectordot(toenemyvec, forwardvec);
   if(fdot < 0) {
     record3dtext("", behaviortreeentity.origin, (1, 0.5, 0), "", behaviortreeentity, 0.4);
@@ -273,8 +273,8 @@ function private chooseaivsaimeleeanimations(behaviortreeentity) {
     if(abs(yawtoenemy) < 60) {
       possiblemelees[possiblemelees.size] = &chooseaivsaimeleebackanimations;
     } else {
-      rightvec = vectornormalize(anglestoright(behaviortreeentity.enemy.angles));
-      toattackervec = vectornormalize(behaviortreeentity.origin - behaviortreeentity.enemy.origin);
+      rightvec = vectorNormalize(anglestoright(behaviortreeentity.enemy.angles));
+      toattackervec = vectorNormalize(behaviortreeentity.origin - behaviortreeentity.enemy.origin);
       rdot = vectordot(toattackervec, rightvec);
       if(rdot > 0) {
         possiblemelees[possiblemelees.size] = &chooseaivsaimeleerightanimations;
@@ -347,13 +347,13 @@ function playscriptedmeleeanimations() {
     return false;
   }
   if(isDefined(opponent._ai_melee_attacker_loser) && opponent._ai_melee_attacker_loser) {
-    opponent animscripted("aivsaimeleeloser", self gettagorigin("tag_sync"), self gettagangles("tag_sync"), opponent._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
-    self animscripted("aivsaimeleewinner", self gettagorigin("tag_sync"), self gettagangles("tag_sync"), self._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
+    opponent animScripted("aivsaimeleeloser", self gettagorigin("tag_sync"), self gettagangles("tag_sync"), opponent._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
+    self animScripted("aivsaimeleewinner", self gettagorigin("tag_sync"), self gettagangles("tag_sync"), self._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
     recordcircle(self gettagorigin(""), 2, (1, 0.5, 0), "");
     recordline(self gettagorigin(""), opponent.origin, (1, 0.5, 0), "");
   } else {
-    self animscripted("aivsaimeleewinner", opponent gettagorigin("tag_sync"), opponent gettagangles("tag_sync"), self._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
-    opponent animscripted("aivsaimeleeloser", opponent gettagorigin("tag_sync"), opponent gettagangles("tag_sync"), opponent._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
+    self animScripted("aivsaimeleewinner", opponent gettagorigin("tag_sync"), opponent gettagangles("tag_sync"), self._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
+    opponent animScripted("aivsaimeleeloser", opponent gettagorigin("tag_sync"), opponent gettagangles("tag_sync"), opponent._ai_melee_animname, "normal", undefined, 1, 0.2, 0.3);
     recordcircle(opponent gettagorigin(""), 2, (1, 0.5, 0), "");
     recordline(opponent gettagorigin(""), self.origin, (1, 0.5, 0), "");
   }
@@ -482,7 +482,7 @@ function processinterrupteddeath() {
       opponent.skipdeath = 1;
       opponent notify("interrupteddeath");
       opponent notify("meleecompleted");
-      opponent stopanimscripted();
+      opponent stopanimScripted();
       opponent killwrapper();
       opponent startragdoll();
     } else {
@@ -494,14 +494,14 @@ function processinterrupteddeath() {
       aiutility::cleanupchargemeleeattack(opponent);
       opponent notify("interrupteddeath");
       opponent notify("meleecompleted");
-      opponent stopanimscripted();
+      opponent stopanimScripted();
     }
   }
   if(isDefined(self)) {
     self.diedinscriptedanim = 1;
     self.skipdeath = 1;
     self notify("interrupteddeath");
-    self stopanimscripted();
+    self stopanimScripted();
     self killwrapper();
     self startragdoll();
   }

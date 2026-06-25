@@ -154,7 +154,7 @@ linktocustomcharacter(menu_name, localclientnum, target_name, alt_render_mode = 
   assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
   assert(!isDefined(menu_data.custom_character));
-  model = getent(localclientnum, target_name, "targetname");
+  model = getEnt(localclientnum, target_name, "targetname");
 
   if(!isDefined(model)) {
     model = util::spawn_model(localclientnum, "tag_origin");

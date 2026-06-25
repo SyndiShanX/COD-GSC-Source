@@ -142,7 +142,7 @@ function function_591138a4() {
   while(true) {
     waitresult = self waittill(#"menuresponse");
 
-    if(getplayers().size == 1) {
+    if(getPlayers().size == 1) {
       continue;
     }
 
@@ -254,7 +254,7 @@ function function_cf969eb1(timeout = 5) {
 
   self.var_c2fe0818 = 1;
 
-  if(!isDefined(level.var_9dab87f7) && getplayers().size > 1 && level.var_3fd55ae0 != level.var_5c6783e9) {
+  if(!isDefined(level.var_9dab87f7) && getPlayers().size > 1 && level.var_3fd55ae0 != level.var_5c6783e9) {
     level doa_banner::function_7a0e5387(50);
     level.var_65efe052 = 1;
   }
@@ -279,7 +279,7 @@ function on_player_spawned() {
     spot = [[level.doa.var_4e554b79]](self.entnum);
 
     if(isDefined(spot)) {
-      self setorigin(spot.origin);
+      self setOrigin(spot.origin);
       self setplayerangles(spot.angles);
     }
   }
@@ -309,7 +309,7 @@ function function_fc61ee02() {
     spot = level.doa.var_187ed224;
 
     if(isDefined(spot)) {
-      self setorigin(spot.origin);
+      self setOrigin(spot.origin);
       self setplayerangles(spot.angles);
       setloc = 1;
     }
@@ -317,7 +317,7 @@ function function_fc61ee02() {
     spot = [[level.doa.var_a77e6349]] - > function_5dfb6d67()[0];
 
     if(isDefined(spot)) {
-      self setorigin(spot.origin);
+      self setOrigin(spot.origin);
       self setplayerangles(spot.angles);
       setloc = 1;
     }
@@ -332,21 +332,21 @@ function function_fc61ee02() {
     self function_a48eea2b(level.doa.var_ecff3871);
 
     if(isDefined(spot)) {
-      self setorigin(spot.origin);
+      self setOrigin(spot.origin);
       self setplayerangles(spot.angles);
       setloc = 1;
     }
   }
 
   if(!is_true(setloc)) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player == self) {
         continue;
       }
 
-      self setorigin(player.origin + (randomint(10), randomint(10), 4));
+      self setOrigin(player.origin + (randomint(10), randomint(10), 4));
       self setplayerangles(player.angles);
       break;
     }
@@ -403,7 +403,7 @@ function main() {
 
   while(true) {
     waitframe(1);
-    players = getplayers();
+    players = getPlayers();
     curcount = players.size;
 
     if(curcount != level.doa.var_e09e5160) {
@@ -672,7 +672,7 @@ function givealifetoplayer(target, forced = 0) {
       model thread namespace_83eb6304::function_3ecfde67("glow_" + self.doa.color);
       distsq = distancesquared(target.origin, self.origin);
       time = mapfloat(0, sqr(1000), 0.25, 1, distsq);
-      model moveto(target.origin, time);
+      model moveTo(target.origin, time);
       wait time;
       model delete();
     }
@@ -898,8 +898,8 @@ function function_ba8327d7() {
 
       if(isDefined(self.doa.boosttrigger)) {
         self.doa.boosttrigger.targetname = "triggerBoost";
-        self.doa.boosttrigger enablelinkto();
-        self.doa.boosttrigger linkto(self, undefined, (200, 0, 0), self.angles);
+        self.doa.boosttrigger enablelinkTo();
+        self.doa.boosttrigger linkTo(self, undefined, (200, 0, 0), self.angles);
         self.doa.boosttrigger.activetime = gettime() + 300;
         self.doa.boosttrigger thread namespace_7f5aeb59::function_19f387a(self, undefined, undefined, 1);
         self.doa.boosttrigger thread namespace_ec06fe4a::function_ae010bb4(self);
@@ -1005,7 +1005,7 @@ function function_a34cf3fb() {
     guys = getaiteamarray();
   }
 
-  updir = vectornormalize(origin - player_org);
+  updir = vectorNormalize(origin - player_org);
   var_182c1d00 = 0.3;
 
   foreach(guy in guys) {
@@ -1209,7 +1209,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
     idamage = originaldamage;
   }
 
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
 
   if(isDefined(self.doa.var_ccd8393c) && self.doa.var_ccd8393c > 0) {
     self.doa.var_ccd8393c--;
@@ -1349,7 +1349,7 @@ function callback_playerlaststand(einflictor, attacker, idamage, smeansofdeath, 
     }
   }
 
-  if(getplayers().size > 1) {
+  if(getPlayers().size > 1) {
     self thread namespace_7f5aeb59::function_52392bd1(bleedout_time == 60);
   }
 

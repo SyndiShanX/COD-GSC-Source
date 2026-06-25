@@ -26,7 +26,7 @@ wait_for_puppet_pickup() {
       self.barricade_enter = 0;
     }
 
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     if(isDefined(player) && player buttonPressed("<dev string:x38>")) {
       if(self.iscurrentlypuppet) {

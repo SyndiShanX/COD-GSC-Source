@@ -1119,7 +1119,7 @@ friendly_spawner_vision_checker() {
     }
 
     var_2 = anglesToForward((0, level.player getplayerangles()[1], 0));
-    var_3 = vectornormalize(var_1);
+    var_3 = vectorNormalize(var_1);
     var_4 = vectordot(var_2, var_3);
 
     if(var_4 < 0.2) {

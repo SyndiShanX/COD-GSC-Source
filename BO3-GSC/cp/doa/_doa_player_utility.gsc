@@ -40,7 +40,7 @@ function function_138c35de() {
   self setcharacterbodystyle(0);
   self setcharacterhelmetstyle(0);
   self.doa = spawnStruct();
-  self enablelinkto();
+  self enablelinkTo();
   self thread turnplayershieldon(0);
   self thread function_bbb1254c(1);
   if(isDefined(level.doa) && isDefined(level.doa.var_bc9b7c71)) {
@@ -159,7 +159,7 @@ function function_bbb1254c(var_44eb97b0 = 0) {
   self thread function_e6b2517f();
   self thread function_a36ffe73();
   self thread function_2fee362e();
-  self setplayercollision(1);
+  self setPlayerCollision(1);
   self cleardamageindicator();
   self.health = self.maxhealth;
   self.ignoreme = 0;
@@ -271,14 +271,14 @@ function function_7e372abd() {
 }
 
 function function_4db260cb() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_7e372abd();
   }
 }
 
 function function_895845f9(origin, ignore_player) {
   valid_player_found = 0;
-  players = getplayers();
+  players = getPlayers();
   if(isDefined(ignore_player)) {
     for(i = 0; i < ignore_player.size; i++) {
       if(isDefined(ignore_player[i])) {
@@ -357,8 +357,8 @@ function turnplayershieldon(short_shield = 1) {
     trigger = spawn("trigger_radius", self.origin, 17, 50, 50);
     trigger.targetname = "turnPlayerShieldOn";
     self.doa.shield_is_on = trigger;
-    trigger enablelinkto();
-    trigger linkto(self);
+    trigger enablelinkTo();
+    trigger linkTo(self);
     trigger thread shield_trigger_think(self);
     self thread function_5bcae97c(trigger);
     trigger thread doa_utility::function_1bd67aef(9.85);
@@ -422,7 +422,7 @@ function shield_trigger_think(player, var_c1ff53d9, thresh) {
     if(!ok) {
       continue;
     }
-    guy setplayercollision(0);
+    guy setPlayerCollision(0);
     if(!isvehicle(guy)) {
       if(!(isDefined(guy.no_ragdoll) && guy.no_ragdoll)) {
         guy.launched = 1;
@@ -754,8 +754,8 @@ function function_ab0e2cf3() {
         if(mayspawnfakeentity()) {
           trigger = spawn("trigger_radius", self.origin, 1, 85, 50);
           trigger.targetname = "triggerBoost1";
-          trigger enablelinkto();
-          trigger linkto(self, "tag_origin", curdir * 200, self.angles);
+          trigger enablelinkTo();
+          trigger linkTo(self, "tag_origin", curdir * 200, self.angles);
           trigger thread shield_trigger_think(self);
           trigger thread doa_utility::function_a625b5d3(self);
           trigger thread doa_utility::function_75e76155(self, "boosterThink");
@@ -764,8 +764,8 @@ function function_ab0e2cf3() {
         if(mayspawnfakeentity()) {
           trigger2 = spawn("trigger_radius", self.origin, 1, 85, 50);
           trigger2.targetname = "triggerBoost2";
-          trigger2 enablelinkto();
-          trigger2 linkto(self, "tag_origin", curdir * 50, self.angles);
+          trigger2 enablelinkTo();
+          trigger2 linkTo(self, "tag_origin", curdir * 50, self.angles);
           trigger2 thread shield_trigger_think(self);
           trigger2 thread doa_utility::function_a625b5d3(self);
           trigger2 thread doa_utility::function_75e76155(self, "boosterThink");
@@ -777,7 +777,7 @@ function function_ab0e2cf3() {
         boost_vector = boost_vector + vectorscale((0, 0, 1), 200);
         self setvelocity(boost_vector);
         boost_vector = boost_vector - vectorscale((0, 0, 1), 200);
-        self playrumbleonentity("zombietron_booster_rumble");
+        self playRumbleOnEntity("zombietron_booster_rumble");
         if(self.doa.fate == 13 || (isDefined(self.doa.var_480b6280) && self.doa.var_480b6280)) {
           self thread doa_fate::function_3caf8e2(endtime);
         }
@@ -947,7 +947,7 @@ function function_4eabae51() {
         level notify("hash_8817f58");
         enemies = doa_utility::function_fb2ad2fb();
         camerapos = namespace_3ca3c537::function_5147636f();
-        var_307c0d3 = vectornormalize(camerapos - player_org);
+        var_307c0d3 = vectorNormalize(camerapos - player_org);
         var_adc420e5 = 0.3;
         foreach(guy in enemies) {
           if(isDefined(guy)) {
@@ -1293,7 +1293,7 @@ function function_3682cfe4(einflictor, attacker, idamage, smeansofdeath, sweapon
   self thread namespace_1a381543::function_90118d8c("zmb_player_death");
   self notify("player_died");
   self freezecontrols(1);
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self thread function_7e85dbee();
   self.doa.var_91c268dc = 0;
   self.doa.weaponlevel = 0;
@@ -1493,7 +1493,7 @@ function private function_ad1d5fcb(var_243f32c0 = 0) {
   if(!isDefined(spot)) {
     spot = self.origin;
   }
-  self setorigin(spot);
+  self setOrigin(spot);
   if(!var_243f32c0) {
     if(mayspawnentity()) {
       self playSound("zmb_player_respawn");
@@ -1505,7 +1505,7 @@ function private function_ad1d5fcb(var_243f32c0 = 0) {
   self thread function_b5843d4f(level.doa.arena_round_number == 3);
   wait(0.05);
   self thread function_bbb1254c(var_243f32c0);
-  self setplayercollision(1);
+  self setPlayerCollision(1);
   self freezecontrols(0);
   self.dead = undefined;
   self notify("player_respawned");
@@ -1527,7 +1527,7 @@ function private function_bbdc9bc0() {
 
 function function_1c683070(distsq = 1296) {
   count = 0;
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player == self) {
       continue;
     }
@@ -1599,7 +1599,7 @@ function function_b1958e58() {
   level endon("doa_game_is_over");
   self endon("player_respawned");
   self thread function_285fe1ad();
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player == self) {
       continue;
     }
@@ -1663,7 +1663,7 @@ function function_27202201() {
     if(self.doa.var_22d93250 > 0) {
       amount = int(math::clamp((self.doa.var_22d93250 - 1) + 3, 3, 5));
       if(mayspawnentity()) {
-        playsoundatposition("evt_revive", self.origin);
+        playSoundAtPosition("evt_revive", self.origin);
       }
       self thread namespace_eaa992c::function_285a2999("reviveCredit");
       self.var_9ea856f6 = self.var_9ea856f6 - amount;
@@ -1754,7 +1754,7 @@ function private function_c240f40e(source, dest, orb) {
   orb thread doa_utility::function_1bd67aef(4);
   end = dest.origin + vectorscale((0, 0, 1), 50);
   while(isDefined(orb)) {
-    orb moveto(end, 0.2, 0, 0);
+    orb moveTo(end, 0.2, 0, 0);
     wait(0.5);
     if(isDefined(orb)) {
       orb.origin = self.origin + vectorscale((0, 0, 1), 50);
@@ -1791,7 +1791,7 @@ function private function_2f150493(source, dest) {
   pickup thread doa_utility::function_a625b5d3(source);
   pickup thread doa_utility::function_a625b5d3(dest);
   pickup thread doa_utility::function_75e76155(level, "doa_game_is_over");
-  pickup moveto(dest.origin, 1, 0, 0);
+  pickup moveTo(dest.origin, 1, 0, 0);
   pickup thread namespace_1a381543::function_90118d8c("zmb_pickup_life_shimmer");
   pickup thread doa_utility::function_1bd67aef(3);
   pickup util::waittill_any_timeout(2, "movedone");
@@ -1969,7 +1969,7 @@ function function_ee495f41(num) {
 
 function function_5eb6e4d1() {
   players = [];
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player)) {
       continue;
     }

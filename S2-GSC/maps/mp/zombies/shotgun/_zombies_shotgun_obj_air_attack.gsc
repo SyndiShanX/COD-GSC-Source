@@ -212,7 +212,7 @@ aa_gun_trap_prep() {
         self.var_9D65.hint_string_available = &"ZOMBIE_ISLAND_BUY_FLAK";
         self.var_9D65.hint_string_unavailable = &"ZOMBIE_ISLAND_FLAK_DISABLED";
         self.var_9D65.hint_string_no_power = &"ZOMBIES_REQUIRES_POWER";
-        var_02 sethintstring(self.var_9D65.hint_string_unavailable);
+        var_02 setHintString(self.var_9D65.hint_string_unavailable);
         var_02 common_scripts\utility::func_9D9F();
         break;
 
@@ -239,10 +239,10 @@ aa_gun_use_think() {
   self.var_9D65.var_267B = 750;
   level waittill("air_attack_start");
   self.var_9D65 common_scripts\utility::func_9DA3();
-  self.var_9D65 sethintstring(self.var_9D65.hint_string_no_power);
+  self.var_9D65 setHintString(self.var_9D65.hint_string_no_power);
   common_scripts\utility::func_3C9F("flag_flak_cannons_powered_on");
   self.wall_model thread aa_gun_open_gate();
-  self.var_9D65 sethintstring(self.var_9D65.hint_string_available);
+  self.var_9D65 setHintString(self.var_9D65.hint_string_available);
   thread aa_gun_wait_for_use();
   var_00 = undefined;
   for(;;) {
@@ -256,7 +256,7 @@ aa_gun_use_think() {
         aa_gun_set_locked();
       }
 
-      self.var_9D65 sethintstring(self.var_9D65.hint_string_available);
+      self.var_9D65 setHintString(self.var_9D65.hint_string_available);
       continue;
     } else {
       var_00 = var_01;
@@ -279,10 +279,10 @@ aa_gun_use_think() {
       self.wall_model thread aa_gun_open_gate();
       wait(1);
       self.var_9D65 common_scripts\utility::func_9DA3();
-      self.var_9D65 sethintstring(self.var_9D65.hint_string_unavailable);
+      self.var_9D65 setHintString(self.var_9D65.hint_string_unavailable);
       wait(12.5);
       aa_gun_set_locked();
-      self.var_9D65 sethintstring(self.var_9D65.hint_string_available);
+      self.var_9D65 setHintString(self.var_9D65.hint_string_available);
     }
   }
 }
@@ -309,7 +309,7 @@ aa_gun_power_switch_init() {
     switch (var_03.var_165) {
       case "use_trigger":
         self.var_9D65 = var_03;
-        self.var_9D65 sethintstring(&"ZOMBIES_POWER_ON");
+        self.var_9D65 setHintString(&"ZOMBIES_POWER_ON");
         self.var_9D65 common_scripts\utility::func_9D9F();
         break;
     }
@@ -323,7 +323,7 @@ aa_gun_power_switch_think() {
     self.var_9D65 waittill("trigger", var_00);
     level.aagun_switches_on++;
     self.var_9D65 common_scripts\utility::func_9D9F();
-    self.var_9D65 sethintstring(&"ZOMBIES_EMPTY_STRING");
+    self.var_9D65 setHintString(&"ZOMBIES_EMPTY_STRING");
     self.computer_panels setscriptablepartstate("cbreaker", "ready");
     self.computer_panels setscriptablepartstate("light_red", "off");
     self.computer_panels setscriptablepartstate("light_green", "on");
@@ -335,7 +335,7 @@ aa_gun_power_switch_think() {
 
 aa_gun_set_locked() {
   while(common_scripts\utility::func_562E(level.aa_guns_locked)) {
-    self.var_9D65 sethintstring(self.var_9D65.hint_string_unavailable);
+    self.var_9D65 setHintString(self.var_9D65.hint_string_unavailable);
     wait(0.125);
   }
 }
@@ -495,7 +495,7 @@ plane_cleanup() {
 
 plane_damage_player() {
   self endon("death");
-  var_00 = getent("vol_plane_damage_area", "targetname");
+  var_00 = getEnt("vol_plane_damage_area", "targetname");
   while(common_scripts\utility::func_3794("turret_on")) {
     var_01 = self.var_116;
     var_02 = anglesToForward(self gettagangles("TAG_MUZZLE_FX_1"));

@@ -217,12 +217,12 @@ air_support_draw_arrow(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_5) {
     var_6 = (0, 0, 1);
-    var_7 = vectornormalize(vectorcross(var_2, var_6));
+    var_7 = vectorNormalize(vectorcross(var_2, var_6));
     var_8 = axistoangles(var_2, var_7, var_6);
   } else {
     var_6 = common_scripts\utility::ter_op(var_2[2] > 0, var_2, -1 * var_2);
     var_7 = -1 * var_3;
-    var_9 = vectornormalize(vectorcross(var_6, var_7));
+    var_9 = vectorNormalize(vectorcross(var_6, var_7));
     var_8 = axistoangles(var_9, var_7, var_6);
   }
 
@@ -231,7 +231,7 @@ air_support_draw_arrow(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(var_4 > 0) {
-    var_0 rotateto(var_8, var_4);
+    var_0 rotateTo(var_8, var_4);
   } else {
     var_0.angles = var_8;
   }

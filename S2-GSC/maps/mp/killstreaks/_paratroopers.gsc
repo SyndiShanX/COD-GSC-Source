@@ -330,12 +330,12 @@ func_1132(param_00, param_01) {
 
   if(isscriptmodel(self)) {
     vm_model_linkto_if_needed();
-    self linkto(self.var_6E4F, "tag_attach");
+    self linkTo(self.var_6E4F, "tag_attach");
   } else if(function_01EF(self)) {
     self method_8388(self.var_6E4F, "tag_attach", 1);
   } else {
     vm_model_linkto_if_needed();
-    self playerlinkto(self.var_6E4F, "tag_attach", 0, 180, 180, 180, 180, 1);
+    self playerlinkTo(self.var_6E4F, "tag_attach", 0, 180, 180, 180, 180, 1);
   }
 
   if(!common_scripts\utility::func_562E(param_01)) {
@@ -570,16 +570,16 @@ watchforhostmigrationparachutemove(param_00) {
 
   level waittill("host_migration_begin");
   var_01 = gettime() * 0.001;
-  self moveto(self.var_0116, 0.05);
+  self moveTo(self.var_0116, 0.05);
   if(1 && isDefined(self.parachute_model_vm)) {
-    self.parachute_model_vm moveto(self.var_0116, 0.05);
+    self.parachute_model_vm moveTo(self.var_0116, 0.05);
   }
 
   level waittill("host_migration_end");
   var_02 = param_00 - var_01;
-  self moveto(self.var_4805, var_02);
+  self moveTo(self.var_4805, var_02);
   if(1 && isDefined(self.parachute_model_vm)) {
-    self.parachute_model_vm moveto(self.var_4805, var_02);
+    self.parachute_model_vm moveTo(self.var_4805, var_02);
   }
 }
 
@@ -597,9 +597,9 @@ watchforparachutemovegoalchange(param_00) {
   self.var_4805 = var_01 - self.var_0116 * 2 + self.var_0116;
   var_02 = gettime() * 0.001;
   var_03 = param_00 - var_02;
-  self moveto(self.var_4805, var_03);
+  self moveTo(self.var_4805, var_03);
   if(1 && isDefined(self.parachute_model_vm)) {
-    self.parachute_model_vm moveto(self.var_4805, var_03);
+    self.parachute_model_vm moveTo(self.var_4805, var_03);
   }
 }
 
@@ -671,9 +671,9 @@ func_64B8(param_00) {
       }
 
       self.var_4805 = self.var_0116 + var_02;
-      self moveto(self.var_4805, var_03);
+      self moveTo(self.var_4805, var_03);
       if(1 && isDefined(self.parachute_model_vm)) {
-        self.parachute_model_vm moveto(self.var_4805, var_03);
+        self.parachute_model_vm moveTo(self.var_4805, var_03);
       }
 
       thread watchforhostmigrationparachutemove(gettime() * 0.001 + var_03);
@@ -999,7 +999,7 @@ script_model_fake_gravity_fall_if_parachute_gone(param_00) {
 
   var_03 = abs(var_01 / var_02) * 0.05;
   var_04 = (self.var_0116[0], self.var_0116[1], param_00);
-  self moveto(var_04, var_03);
+  self moveTo(var_04, var_03);
 }
 
 paratroopers_beacon() {
@@ -1099,7 +1099,7 @@ player_paratrooper(param_00, param_01, param_02) {
 
   var_05 = var_03 + (0, 0, var_04);
   var_06 = verify_player_paratrooper_position(var_05);
-  self setorigin(var_06);
+  self setOrigin(var_06);
   dontinterpolatesafe();
   var_07 = randomint(level.var_6E61.size);
   changeweaponusagestatewrapper(0);

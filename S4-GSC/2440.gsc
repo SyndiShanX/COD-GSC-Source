@@ -189,8 +189,8 @@ _id_800F() {
   self._id_AC5B._id_9DE5 = spawn("script_model", var_0);
   self._id_AC5B._id_9DE5 setModel("s4_zm_orb_follow_01");
   self._id_AC5B._id_9DE5 _meth_81B0("outline_objective");
-  self._id_AC5B._id_9DE5 linkto(self._id_AC5B, "tag_origin", (0, 0, -8), (0, 0, 0));
-  var_1 = scripts\engine\utility::getstruct(self.pathtravelstarts[0].target, "targetname");
+  self._id_AC5B._id_9DE5 linkTo(self._id_AC5B, "tag_origin", (0, 0, -8), (0, 0, 0));
+  var_1 = scripts\engine\utility::getStruct(self.pathtravelstarts[0].target, "targetname");
   var_2 = var_1.origin - var_0;
   var_3 = vectortoangles(var_2);
   var_4 = (0, 0, 0);
@@ -257,7 +257,7 @@ init_moving_loop_sound() {
     return;
   }
   self._id_AC5B.activesfx = scripts\engine\utility::_id_E1E9();
-  self._id_AC5B.activesfx linkto(self._id_AC5B, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self._id_AC5B.activesfx linkTo(self._id_AC5B, "tag_origin", (0, 0, 0), (0, 0, 0));
   self._id_AC5B.activesfx._id_89AA = 0;
 }
 
@@ -355,7 +355,7 @@ init_paths() {
 
   foreach(var_2, var_1 in self._id_AEE4) {
     if(isDefined(var_1._id_039B) && var_1._id_039B != "") {
-      self.pathtravelstarts[var_2] = ::scripts\engine\utility::getstruct(var_1._id_039B, "targetname");
+      self.pathtravelstarts[var_2] = ::scripts\engine\utility::getStruct(var_1._id_039B, "targetname");
     }
   }
 
@@ -385,7 +385,7 @@ init_paths() {
         break;
       }
 
-      var_14 = scripts\engine\utility::getstruct(var_13.target, "targetname");
+      var_14 = scripts\engine\utility::getStruct(var_13.target, "targetname");
 
       if(!isDefined(var_14)) {
         break;
@@ -476,7 +476,7 @@ _id_A1EC(var_0) {
   if(!isDefined(self._id_F4C3.target) && distancesquared(self._id_F4C3.origin, self._id_AC5B.origin) <= _func_0219(var_0)) {
     var_1 = self._id_F4C3.origin;
   } else {
-    var_1 = self._id_AC5B.origin + vectornormalize(self._id_F4C3.origin - self._id_AC5B.origin) * var_0;
+    var_1 = self._id_AC5B.origin + vectorNormalize(self._id_F4C3.origin - self._id_AC5B.origin) * var_0;
   }
 
   _id_0C6A(var_1);
@@ -526,7 +526,7 @@ _update_travel_target(var_0) {
 
   while(distancesquared(self._id_F4C3.origin, self._id_AC5B.origin) <= _func_0219(var_0)) {
     if(isDefined(self._id_F4C3.target)) {
-      self._id_F4C3 = scripts\engine\utility::getstruct(self._id_F4C3.target, "targetname");
+      self._id_F4C3 = scripts\engine\utility::getStruct(self._id_F4C3.target, "targetname");
       continue;
     }
 

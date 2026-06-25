@@ -16,7 +16,7 @@ spawnsniperent(var_0, var_1) {
   var_2.start_angles = var_0.angles;
   var_2 setModel("tag_laser");
   var_2 laseron("trap_zm");
-  var_3 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_3 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2.lasertargetent = var_3;
   var_2 thread lerplasertotarget(var_1);
   var_2 thread findvalidtargets(var_3, var_1);
@@ -100,7 +100,7 @@ sniperthink(var_0, var_1) {
     var_3 = randomfloatrange(1.5, 5.0);
     var_0 common_scripts\utility::waittill_any_timeout(var_3, "death");
     var_4 = var_0 gettagorigin(common_scripts\utility::random(snipercheckaitype(var_0))) + common_scripts\utility::randomvectorrange(-5, 5);
-    var_5 = vectornormalize(var_4 - var_2);
+    var_5 = vectorNormalize(var_4 - var_2);
     playFX(common_scripts\utility::getfx("trap_sniper_tracer"), var_2, var_5, (0, 0, 1));
     magicbullet("trap_sniper_zm_mp", var_2, var_4, var_1.owner);
     playsoundatpos(self.origin, "sniper_shot_extra_report");

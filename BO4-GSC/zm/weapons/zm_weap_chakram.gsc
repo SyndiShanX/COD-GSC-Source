@@ -274,7 +274,7 @@ chop_zombies(first_time = 1, leftswing, weapon = level.weaponnone) {
 
     test_origin = e_target getcentroid();
     dist_sq = distancesquared(view_pos, test_origin);
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
 
     if(dot <= 0) {
@@ -410,11 +410,11 @@ function_e3ad524a() {
     }
 
     self.e_seeker.angles = vectortoangles(v_forward);
-    self.e_seeker moveto(v_end, var_c5eb6fda);
+    self.e_seeker moveTo(v_end, var_c5eb6fda);
     var_5b08cfa = gettime() / 1000;
   } else {
     self.e_seeker.angles = vectortoangles(v_forward);
-    self.e_seeker moveto(v_end, var_afbf7a56);
+    self.e_seeker moveTo(v_end, var_afbf7a56);
   }
 
   n_time_started = gettime() / 1000;
@@ -429,7 +429,7 @@ function_e3ad524a() {
     if(isDefined(e_target)) {
       if(isDefined(e_target.powerup_name)) {
         e_target.origin = self.e_seeker.origin;
-        e_target linkto(self.e_seeker);
+        e_target linkTo(self.e_seeker);
 
         if(!isDefined(self.e_seeker.var_fee68611)) {
           self.e_seeker.var_fee68611 = [];
@@ -478,7 +478,7 @@ function_e3ad524a() {
         }
 
         self.e_seeker.angles = vectortoangles(v_forward);
-        self.e_seeker moveto(v_end, var_c5eb6fda);
+        self.e_seeker moveTo(v_end, var_c5eb6fda);
       }
     }
 
@@ -541,7 +541,7 @@ function_46f125d(v_start, var_4d1ea1ad, v_forward) {
     }
 
     if(isDefined(v_forward)) {
-      v_to_target = vectornormalize(e_target.origin - v_start);
+      v_to_target = vectorNormalize(e_target.origin - v_start);
 
       if(vectordot(v_to_target, v_forward) < 0.7) {
         continue;
@@ -607,7 +607,7 @@ function_3adb0798(e_target, n_kills) {
     if(distancesquared(self.e_seeker.origin, v_target) > 2304) {
       var_81b38250 = distance(self.e_seeker.origin, v_target);
       n_travel_time = var_81b38250 * var_ece935b3 / var_e68de849;
-      self.e_seeker moveto(v_target, n_travel_time);
+      self.e_seeker moveTo(v_target, n_travel_time);
     } else if(isPlayer(e_target)) {
       self playSound(#"hash_2c86fd203e33ce7c");
       self.e_seeker.origin = self gettagorigin("tag_weapon_left");
@@ -752,7 +752,7 @@ function_b475223e(weapon) {
 function_7d1739b8(notify_hash) {
   assert(notify_hash == #"round_reset");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_892bdee2();
   }
 }
@@ -837,13 +837,13 @@ chakram_rumble(var_b2e05bae) {
   if(isalive(self) && var_b2e05bae) {
     switch (var_b2e05bae) {
       case 1:
-        self playrumbleonentity("zm_weap_special_activate_rumble");
+        self playRumbleOnEntity("zm_weap_special_activate_rumble");
         break;
       case 2:
         self clientfield::increment_to_player("" + #"chakram_rumble", 2);
         break;
       case 3:
-        self playrumbleonentity("zm_weap_chakram_melee_hit_rumble");
+        self playRumbleOnEntity("zm_weap_chakram_melee_hit_rumble");
         break;
       case 4:
         self clientfield::increment_to_player("" + #"chakram_rumble", 4);

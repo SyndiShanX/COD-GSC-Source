@@ -106,7 +106,7 @@ function function_d511e678() {
   s_door_2 = struct::get("prologue_nrc_kocking_door2", "targetname");
   [[s_door_2.c_door]] - > unlock();
   [[s_door_2.c_door]] - > open();
-  e_sight_block = getent("nrc_knocking_door_sight_clip", "targetname");
+  e_sight_block = getEnt("nrc_knocking_door_sight_clip", "targetname");
   e_sight_block delete();
 }
 
@@ -114,7 +114,7 @@ function function_b206d9a7() {
   cp_prologue_util::function_d1f1caad("trig_control_room_exit");
   level thread scene::play("cin_pro_03_01_blendin_vign_vtol_sweep");
   level thread scene::play("p7_fxanim_cp_prologue_control_tower_ceiling_tiles_02_bundle");
-  e_vtol = getent("sp_vtol_sweep_at_start_ai", "targetname");
+  e_vtol = getEnt("sp_vtol_sweep_at_start_ai", "targetname");
   if(isDefined(e_vtol)) {
     e_vtol thread cp_prologue_util::function_c56034b7();
   }
@@ -188,7 +188,7 @@ function function_bc06f066() {
   level thread function_3eb38d8d();
   level waittill("explosion_blast");
   level.ai_hendricks dialog::say("hend_shit_keep_your_hea_0");
-  var_49b32118 = getent("pa_vox_tarmac", "targetname");
+  var_49b32118 = getEnt("pa_vox_tarmac", "targetname");
   var_49b32118 thread dialog::say("nrcp_all_available_person_0", 2);
   level thread enter_tunnel_nag();
 }
@@ -214,7 +214,7 @@ function function_e5670bf5() {
 
 function function_bf532adb() {
   level endon("objective_take_out_guards_done");
-  var_46100e43 = getent("t_tarmac_vo_firetruck", "targetname");
+  var_46100e43 = getEnt("t_tarmac_vo_firetruck", "targetname");
   var_46100e43 endon("death");
   var_46100e43 trigger::wait_till();
   var_46100e43 playSound("nrcm0_put_out_that_fire_w_0");
@@ -223,7 +223,7 @@ function function_bf532adb() {
 function function_bafd79f6(str_triggername, a_vo_lines, var_61ae76d5, var_9e3b0b67) {
   self endon("death");
   level endon("objective_take_out_guards_done");
-  var_46100e43 = getent(str_triggername, "targetname");
+  var_46100e43 = getEnt(str_triggername, "targetname");
   var_a939b0c9 = var_46100e43.origin;
   level trigger::wait_till(str_triggername, "targetname", undefined, 0);
   function_f9be6553(var_a939b0c9, a_vo_lines, var_61ae76d5, var_9e3b0b67);
@@ -252,9 +252,9 @@ function function_3eb38d8d() {
   v_forward = anglesToForward(s_struct.angles);
   start_time = gettime();
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     for(i = 0; i < a_players.size; i++) {
-      v_dir = vectornormalize(s_struct.origin - a_players[i].origin);
+      v_dir = vectorNormalize(s_struct.origin - a_players[i].origin);
       dp = vectordot(v_forward, v_dir);
       if(dp < 0) {
         return;
@@ -405,10 +405,10 @@ function function_be42a33f() {
 
 function function_ae8c8b7b() {
   level waittill("hash_c4d700a5");
-  var_280d5f68 = getent("controltower_exitdoor_l", "targetname");
-  var_3c301126 = getent("controltower_exitdoor_r", "targetname");
-  var_280d5f68 rotateto(var_280d5f68.angles + (vectorscale((0, -1, 0), 90)), 0.75);
-  var_3c301126 rotateto(var_3c301126.angles + vectorscale((0, 1, 0), 90), 0.75);
+  var_280d5f68 = getEnt("controltower_exitdoor_l", "targetname");
+  var_3c301126 = getEnt("controltower_exitdoor_r", "targetname");
+  var_280d5f68 rotateTo(var_280d5f68.angles + (vectorscale((0, -1, 0), 90)), 0.75);
+  var_3c301126 rotateTo(var_3c301126.angles + vectorscale((0, 1, 0), 90), 0.75);
   var_3c301126 playSound("evt_towerdoor_open");
   level thread cp_prologue_util::rumble_all_players("damage_light", 0.05, 2, var_3c301126);
   level flag::set("tower_doors_open");
@@ -422,7 +422,7 @@ function setgoal_then_delete(node, var_143df2c2 = "none") {
 }
 
 function tunnel_entrance_guard() {
-  sp_tunnel_entrance_guard = getent("tunnel_entrance_guard", "targetname");
+  sp_tunnel_entrance_guard = getEnt("tunnel_entrance_guard", "targetname");
   level.ai_tunnel_entrance_guard = sp_tunnel_entrance_guard spawner::spawn(1);
   level.ai_tunnel_entrance_guard.ignoreme = 1;
   level.ai_tunnel_entrance_guard.ignoreall = 1;
@@ -476,7 +476,7 @@ function function_92e75cce(n_range, var_b0ecff80 = 1) {
 }
 
 function blend_in_tsa_guard(str_scene) {
-  var_e4d0f603 = getent("spawner_tsa_guard", "targetname");
+  var_e4d0f603 = getEnt("spawner_tsa_guard", "targetname");
   ai_victim = spawner::simple_spawn_single(var_e4d0f603);
   ai_victim disableaimassist();
   ai_victim ai::set_ignoreall(1);
@@ -498,9 +498,9 @@ function function_b79bfbce() {
 }
 
 function function_d5fbb820(str_scene) {
-  var_e4d0f603 = getent("tarmac_soldier", "targetname");
+  var_e4d0f603 = getEnt("tarmac_soldier", "targetname");
   if(randomint(100) > 70) {
-    var_e4d0f603 = getent("tarmac_soldier_f", "targetname");
+    var_e4d0f603 = getEnt("tarmac_soldier_f", "targetname");
   }
   ai_victim = spawner::simple_spawn_single(var_e4d0f603);
   ai_victim disableaimassist();
@@ -603,7 +603,7 @@ function function_63075f1d() {
 
 function function_3f3cae8c() {
   self endon("death");
-  var_1dd38210 = getent("info_crouch_tutorial", "targetname");
+  var_1dd38210 = getEnt("info_crouch_tutorial", "targetname");
   self flag::wait_till("tutorial_allowed");
   self flag::set_val("tutorial_allowed", 0);
   while(!self istouching(var_1dd38210)) {
@@ -661,7 +661,7 @@ function fxanim_plane_explosion() {
 
 function function_4febd2da() {
   wait(2);
-  playsoundatposition("amb_tower_shake", (0, 0, 0));
+  playSoundAtPosition("amb_tower_shake", (0, 0, 0));
 }
 
 function function_6bad1a34() {
@@ -681,7 +681,7 @@ function function_11ec608d() {
   while(!level flag::get("tower_doors_open")) {
     wait(randomfloatrange(5, 12));
     level thread cp_prologue_util::function_2a0bc326(level.ai_hendricks.origin, 0.4, 0.5, 800, 2);
-    playsoundatposition("amb_tower_shake", (0, 0, 0));
+    playSoundAtPosition("amb_tower_shake", (0, 0, 0));
     level notify("hash_c988e5af");
   }
   level notify("hash_f8e975b8");
@@ -691,7 +691,7 @@ function function_809b0d82() {
   trigger_hit = trigger::wait_till("t_glass_floor_cracks");
   level notify("hash_809b0d82");
   level notify("hash_fc089399");
-  trigger_hit.who playrumbleonentity("damage_heavy");
+  trigger_hit.who playRumbleOnEntity("damage_heavy");
 }
 
 function function_3e901e16() {
@@ -747,11 +747,11 @@ function hendricks_take_out_guard() {
 
 function function_eb28ee9b() {
   level waittill("hash_eb28ee9b");
-  var_7e130296 = getent("blend_security_door_lt", "targetname");
-  var_2a3f9df8 = getent("blend_security_door_rt", "targetname");
-  var_7e130296 rotateyaw(89, 0.5);
-  var_2a3f9df8 rotateyaw(90 * -1, 0.5);
-  playsoundatposition("evt_tunnel_gate_open", var_2a3f9df8.origin);
+  var_7e130296 = getEnt("blend_security_door_lt", "targetname");
+  var_2a3f9df8 = getEnt("blend_security_door_rt", "targetname");
+  var_7e130296 rotateYaw(89, 0.5);
+  var_2a3f9df8 rotateYaw(90 * -1, 0.5);
+  playSoundAtPosition("evt_tunnel_gate_open", var_2a3f9df8.origin);
   level thread function_60b83ce9();
   level waittill("hash_2170cc63");
   level thread objectives::breadcrumb("blending_in_breadcrumb_4");
@@ -760,16 +760,16 @@ function function_eb28ee9b() {
 }
 
 function function_60b83ce9() {
-  t_door = getent("kiosk_guard_door", "targetname");
+  t_door = getEnt("kiosk_guard_door", "targetname");
   level thread cp_prologue_util::function_21f52196("kiosk_doors", t_door, "t_regroup_past_guards");
   while(!cp_prologue_util::function_cdd726fb("kiosk_doors")) {
     wait(0.5);
   }
-  var_7e130296 = getent("blend_security_door_lt", "targetname");
-  var_2a3f9df8 = getent("blend_security_door_rt", "targetname");
-  var_7e130296 rotateyaw(89 * -1, 0.25);
-  var_2a3f9df8 rotateyaw(90, 0.25);
-  playsoundatposition("evt_tunnel_gate_open", var_2a3f9df8.origin);
+  var_7e130296 = getEnt("blend_security_door_lt", "targetname");
+  var_2a3f9df8 = getEnt("blend_security_door_rt", "targetname");
+  var_7e130296 rotateYaw(89 * -1, 0.25);
+  var_2a3f9df8 rotateYaw(90, 0.25);
+  playSoundAtPosition("evt_tunnel_gate_open", var_2a3f9df8.origin);
   level notify("hash_b5e3e8ba");
   level notify("hash_f3f03044");
 }
@@ -802,14 +802,14 @@ function function_d095f82f() {
 
 function function_927f3ae0(delete_delay) {
   self turret::enable_laser(0, 0);
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     a_players[i].ignoreme = 1;
   }
   level.ai_hendricks.ignoreme = 1;
   level thread function_3d9b2dbc();
   level waittill("minister_located");
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     a_players[i].ignoreme = 0;
   }
@@ -822,7 +822,7 @@ function function_3d9b2dbc() {
   level endon("objective_take_out_guards_done");
   while(true) {
     level waittill("hash_25ea191a");
-    a_players = getplayers();
+    a_players = getPlayers();
     for(i = 0; i < a_players.size; i++) {
       a_players[i].ignoreme = 1;
     }
@@ -868,27 +868,27 @@ function function_790e40ec() {
 }
 
 function function_173d3769(str_state, var_abf03d83 = 0) {
-  var_3c301126 = getent("tunnel_vault_door_r", "targetname");
-  var_280d5f68 = getent("tunnel_vault_door_l", "targetname");
+  var_3c301126 = getEnt("tunnel_vault_door_r", "targetname");
+  var_280d5f68 = getEnt("tunnel_vault_door_l", "targetname");
   if(!var_abf03d83) {
     var_3c301126 playSound("evt_tunnel_door_start");
     var_3c301126 playLoopSound("evt_tunnel_door_loop", 1);
   }
   if(str_state == "open") {
     if(var_abf03d83) {
-      var_3c301126 rotateyaw(90, 0.05);
-      var_280d5f68 rotateyaw(90 * -1, 0.05);
+      var_3c301126 rotateYaw(90, 0.05);
+      var_280d5f68 rotateYaw(90 * -1, 0.05);
     } else {
-      var_3c301126 rotateyaw(90, 6, 1, 1);
-      var_280d5f68 rotateyaw(90 * -1, 6, 1, 1);
+      var_3c301126 rotateYaw(90, 6, 1, 1);
+      var_280d5f68 rotateYaw(90 * -1, 6, 1, 1);
     }
   } else {
     if(var_abf03d83) {
-      var_3c301126 rotateyaw(90 * -1, 0.05);
-      var_280d5f68 rotateyaw(90, 0.05);
+      var_3c301126 rotateYaw(90 * -1, 0.05);
+      var_280d5f68 rotateYaw(90, 0.05);
     } else {
-      var_3c301126 rotateyaw(90 * -1, 6, 1, 1);
-      var_280d5f68 rotateyaw(90, 6, 1, 1);
+      var_3c301126 rotateYaw(90 * -1, 6, 1, 1);
+      var_280d5f68 rotateYaw(90, 6, 1, 1);
     }
   }
   var_3c301126 waittill("rotatedone");
@@ -931,7 +931,7 @@ function function_f126566f() {
 function hend_taylor_dialog(a_ents) {
   level waittill("hash_1a725b50");
   wait(10);
-  e_ent = getent("pa_vox_security_cameras", "targetname");
+  e_ent = getEnt("pa_vox_security_cameras", "targetname");
   e_ent dialog::say("nrcp_emergency_protocol_0");
 }
 
@@ -949,27 +949,27 @@ function tunnel_balcony_guys() {
 }
 
 function function_21dd3be1() {
-  t_door = getent("tunnel_keycard_door", "targetname");
+  t_door = getEnt("tunnel_keycard_door", "targetname");
   level thread cp_prologue_util::function_21f52196("keycard_doors", t_door);
-  e_left_door = getent("tunnel_vault_upperdoor_L", "targetname");
+  e_left_door = getEnt("tunnel_vault_upperdoor_L", "targetname");
   v_side = anglestoright(e_left_door.angles);
-  e_right_door = getent("tunnel_vault_upperdoor_R", "targetname");
+  e_right_door = getEnt("tunnel_vault_upperdoor_R", "targetname");
   move_amount = 52;
   v_pos_left = e_left_door.origin + (v_side * (move_amount * -1));
-  e_left_door moveto(v_pos_left, 0.1);
+  e_left_door moveTo(v_pos_left, 0.1);
   v_pos_right = e_right_door.origin + (v_side * move_amount);
-  e_right_door moveto(v_pos_right, 0.1);
+  e_right_door moveTo(v_pos_right, 0.1);
   level waittill("hash_2170cc63");
-  playsoundatposition("evt_tunnel_upper_door", e_left_door.origin);
+  playSoundAtPosition("evt_tunnel_upper_door", e_left_door.origin);
   v_pos_left = e_left_door.origin + (v_side * move_amount);
-  e_left_door moveto(v_pos_left, 1.5);
+  e_left_door moveTo(v_pos_left, 1.5);
   v_pos_right = e_right_door.origin + (v_side * (move_amount * -1));
-  e_right_door moveto(v_pos_right, 1.5);
+  e_right_door moveTo(v_pos_right, 1.5);
   while(!cp_prologue_util::function_cdd726fb("keycard_doors")) {
     wait(0.5);
   }
   v_pos_left = e_left_door.origin + (v_side * (move_amount * -1));
-  e_left_door moveto(v_pos_left, 0.1);
+  e_left_door moveTo(v_pos_left, 0.1);
   v_pos_right = e_right_door.origin + (v_side * move_amount);
-  e_right_door moveto(v_pos_right, 0.1);
+  e_right_door moveTo(v_pos_right, 0.1);
 }

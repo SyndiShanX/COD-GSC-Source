@@ -247,12 +247,12 @@ function function_b6b75a5c(params) {
 
   if(isDefined(currentweapon) && currentweapon != level.weaponnone) {
     if(is_true(currentweapon.isdualwield)) {
-      self sethintstring(#"hash_4fa63eab89b31f78");
+      self setHintString(#"hash_4fa63eab89b31f78");
       b_disabled = 1;
     }
 
     if(killstreaks::is_killstreak_weapon(currentweapon)) {
-      self sethintstring(#"hash_4472fef41a24bd14");
+      self setHintString(#"hash_4472fef41a24bd14");
       b_disabled = 1;
     }
 
@@ -265,7 +265,7 @@ function function_b6b75a5c(params) {
       while(player getcurrentweapon() === currentweapon);
 
       if(isDefined(self.str_hint)) {
-        self sethintstring(self.str_hint);
+        self setHintString(self.str_hint);
       }
 
       player.var_586fcf0e = self;
@@ -302,7 +302,7 @@ function function_b6b75a5c(params) {
     player playSound(#"hash_60c6324926a9a3ed");
     wait 0.2;
 
-    foreach(other_player in getplayers()) {
+    foreach(other_player in getPlayers()) {
       if(player !== other_player) {
         player hidefromplayer(other_player);
       }
@@ -323,7 +323,7 @@ function function_b6b75a5c(params) {
     wait 0.75;
     player playSound(#"hash_5a08feddb80a9164");
     v_origin = player.origin;
-    player setorigin(s_teleport.origin);
+    player setOrigin(s_teleport.origin);
     player setplayerangles(s_teleport.angles);
     player playboast("boast_zm_final_quest_interact");
     player.var_aa980bc4 = util::spawn_model(#"collision_player_cylinder_32x256", v_origin + (0, 0, 30));
@@ -342,7 +342,7 @@ function function_b6b75a5c(params) {
       player.var_aa980bc4 delete();
     }
 
-    player setorigin(v_origin);
+    player setOrigin(v_origin);
     playFXOnTag(#"hash_2563ac540861f176", player, "j_spine4");
     player playSound(#"hash_3f58b91175fd1c25");
     wait 0.2;
@@ -452,7 +452,7 @@ function function_b8a3efea() {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     foreach(str_map in array("<dev string:x67>", "<dev string:x74>", "<dev string:x7f>", "<dev string:x8e>", "<dev string:x9d>", "<dev string:xaa>")) {
       n_progress = getdvarint("<dev string:xbb>" + str_map, 0);
 

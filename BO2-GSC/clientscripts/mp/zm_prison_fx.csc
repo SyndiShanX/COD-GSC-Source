@@ -180,7 +180,7 @@ fan_trap_blood_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 sq_bg_reward_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  s_reward_fx = getstruct("sq_bg_reward_fx", "targetname");
+  s_reward_fx = getStruct("sq_bg_reward_fx", "targetname");
 
   if(newval == 1) {
     v_forward = anglestoright(self.angles);
@@ -222,12 +222,12 @@ play_fx_prop_anims(localclientnum) {
 
 play_quest_prop_anims(localclientnum) {
   fxanim_props = getEntArray(localclientnum, "fxanim", "targetname");
-  m_dryer = getent(localclientnum, "dryer_model", "targetname");
+  m_dryer = getEnt(localclientnum, "dryer_model", "targetname");
   m_dryer waittill_dobj(localclientnum);
 
   for(i = 0; i < fxanim_props.size; i++) {
     if(fxanim_props[i].model == "fxanim_zom_al_industrial_dryer_mod") {
-      m_dryer linkto(fxanim_props[i], "dryer_jnt");
+      m_dryer linkTo(fxanim_props[i], "dryer_jnt");
     }
   }
 }
@@ -254,10 +254,10 @@ fxanim_setup_pulley(localclientnum, oldval, newval, bnewent, binitialsnap, field
         fxanim_props[i] waittill_dobj(localclientnum);
         fx_key_glint = playFXOnTag(localclientnum, level._effect["key_glint"], fxanim_props[i], "tag_key");
         origin_tag_key = fxanim_props[i] gettagorigin("tag_key");
-        m_master_key_attachment = getent(localclientnum, "master_key_attachment", "targetname");
+        m_master_key_attachment = getEnt(localclientnum, "master_key_attachment", "targetname");
         m_master_key_attachment waittill_dobj(localclientnum);
         m_master_key_attachment.origin = origin_tag_key;
-        m_master_key_attachment linkto(fxanim_props[i], "tag_key");
+        m_master_key_attachment linkTo(fxanim_props[i], "tag_key");
         m_master_key_attachment playLoopSound("amb_electrical_fence", 1);
         break;
       }
@@ -369,13 +369,13 @@ rumble_electric_chair(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     if(isDefined(localclientnum)) {
       if(newval == 1) {
         self earthquake(0.1, 0.25, self.origin, 1500);
-        self playrumbleonentity(localclientnum, "damage_light");
+        self playRumbleOnEntity(localclientnum, "damage_light");
       } else if(newval == 2) {
         self earthquake(0.1, 0.25, self.origin, 1500);
-        self playrumbleonentity(localclientnum, "damage_light");
+        self playRumbleOnEntity(localclientnum, "damage_light");
         wait 0.25;
         self earthquake(1, 5, self.origin, 1500);
-        self playrumbleonentity(localclientnum, "explosion_generic");
+        self playRumbleOnEntity(localclientnum, "explosion_generic");
         wait 5;
         self stoprumble(localclientnum, "explosion_generic");
       }
@@ -403,74 +403,74 @@ rumble_escape_flight(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
       switch (newval) {
         case 1:
           for(i = 0; i < 20; i++) {
-            self playrumbleonentity(localclientnum, "buzz_high");
+            self playRumbleOnEntity(localclientnum, "buzz_high");
             wait 0.2;
           }
 
           for(i = 0; i < 60; i++) {
-            self playrumbleonentity(localclientnum, "buzz_high");
+            self playRumbleOnEntity(localclientnum, "buzz_high");
             wait 0.1;
           }
 
           break;
         case 2:
-          self playrumbleonentity(localclientnum, "damage_heavy");
+          self playRumbleOnEntity(localclientnum, "damage_heavy");
 
           for(i = 0; i < 6; i++) {
-            self playrumbleonentity(localclientnum, "damage_light");
+            self playRumbleOnEntity(localclientnum, "damage_light");
             wait 0.2;
           }
 
           for(i = 0; i < 16; i++) {
-            self playrumbleonentity(localclientnum, "damage_heavy");
+            self playRumbleOnEntity(localclientnum, "damage_heavy");
             wait 0.05;
           }
 
           for(i = 0; i < 40; i++) {
-            self playrumbleonentity(localclientnum, "damage_light");
+            self playRumbleOnEntity(localclientnum, "damage_light");
             wait 0.05;
           }
 
           for(i = 0; i < 20; i++) {
-            self playrumbleonentity(localclientnum, "slide_rumble");
+            self playRumbleOnEntity(localclientnum, "slide_rumble");
             wait 0.05;
           }
 
           wait 1.5;
 
           for(i = 0; i < 20; i++) {
-            self playrumbleonentity(localclientnum, "buzz_high");
+            self playRumbleOnEntity(localclientnum, "buzz_high");
             wait 0.3;
           }
 
           break;
         case 3:
           for(i = 0; i < 3; i++) {
-            self playrumbleonentity(localclientnum, "damage_heavy");
+            self playRumbleOnEntity(localclientnum, "damage_heavy");
             wait 0.1;
           }
 
           for(i = 0; i < 10; i++) {
-            self playrumbleonentity(localclientnum, "damage_light");
+            self playRumbleOnEntity(localclientnum, "damage_light");
             wait(randomfloatrange(0.1, 0.2));
           }
 
           for(i = 0; i < 15; i++) {
-            self playrumbleonentity(localclientnum, "buzz_high");
+            self playRumbleOnEntity(localclientnum, "buzz_high");
             wait(randomfloatrange(0.4, 0.5));
           }
 
           break;
         case 4:
           for(i = 0; i < 3; i++) {
-            self playrumbleonentity(localclientnum, "damage_heavy");
+            self playRumbleOnEntity(localclientnum, "damage_heavy");
             wait 0.05;
           }
 
           break;
         case 5:
           for(i = 0; i < 5; i++) {
-            self playrumbleonentity(localclientnum, "brutus_footsteps");
+            self playRumbleOnEntity(localclientnum, "brutus_footsteps");
             wait 0.05;
           }
 

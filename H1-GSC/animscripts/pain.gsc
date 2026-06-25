@@ -1423,7 +1423,7 @@ enemyisingeneraldirection(var_0) {
     var_1 = self.enemy getshootatpos();
   }
 
-  var_2 = vectornormalize(var_1 - self getEye());
+  var_2 = vectorNormalize(var_1 - self getEye());
   return vectordot(var_2, var_0) > 0.5;
 }
 

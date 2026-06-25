@@ -362,9 +362,9 @@ removefromdogkillstreaklistondeath(var_0) {
 
 _id_D5D2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self makeuseable();
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self _meth_84D9("show");
-  self sethintstring(var_1);
+  self setHintString(var_1);
   self sethintdisplayfov(var_2);
   self setusefov(var_3);
   self _meth_84D4(var_4);
@@ -650,7 +650,7 @@ _id_B38B(var_0, var_1) {
 
   self._id_6088 = spawn("script_model", self.origin);
   self._id_6088 setModel("tag_origin");
-  self._id_6088 linkto(self, "tag_origin", var_0, var_1);
+  self._id_6088 linkTo(self, "tag_origin", var_0, var_1);
   self._id_6088 thread _id_477C(self);
   wait 0.1;
   playFXOnTag(var_2, self._id_6088, "tag_origin");

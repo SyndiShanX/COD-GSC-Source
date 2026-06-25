@@ -66,7 +66,7 @@ function function_7858899c(var_37473ebc) {
 }
 
 function function_3fbfa2de() {
-  diving_board_trig = getent("diving_board_trig", "targetname");
+  diving_board_trig = getEnt("diving_board_trig", "targetname");
 
   if(isDefined(diving_board_trig)) {
     diving_board_trig callback::on_trigger(&function_2e1e9186);

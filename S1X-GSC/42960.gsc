@@ -71,7 +71,7 @@ onplayerspawned() {
 
 rotateuavrig() {
   for(;;) {
-    self rotateyaw(-360, 60);
+    self rotateYaw(-360, 60);
     wait 60;
   }
 }
@@ -152,14 +152,14 @@ launchuav(var_0, var_1, var_2, var_3) {
   if(var_4.damagetaken < var_4.maxhealth) {
     var_4 unlink();
     var_10 = var_4.origin + anglesToForward(var_4.angles) * 20000;
-    var_4 moveto(var_10, 60);
+    var_4 moveTo(var_10, 60);
     playFXOnTag(common_scripts\utility::getfx("uav_exit"), var_4, "tag_origin");
     var_4 waittill_notify_or_timeout_hostmigration_pause("death", 3);
 
     if(var_4.damagetaken < var_4.maxhealth) {
       var_4 notify("leaving");
       var_4.isleaving = 1;
-      var_4 moveto(var_10, 4, 4, 0.0);
+      var_4 moveTo(var_10, 4, 4, 0.0);
     }
 
     var_4 waittill_notify_or_timeout_hostmigration_pause("death", 4 + var_4.timetoadd);
@@ -211,18 +211,18 @@ flyin(var_0) {
   var_11 = randomint(2000) + 5000;
   var_12 = cos(var_10) * var_11;
   var_13 = sin(var_10) * var_11;
-  var_14 = vectornormalize((var_12, var_13, var_1));
+  var_14 = vectorNormalize((var_12, var_13, var_1));
   var_14 = var_14 * randomintrange(6000, 7000);
-  var_0 linkto(level.uavrig, "tag_origin", var_14, (0, var_10 - 90, 135));
+  var_0 linkTo(level.uavrig, "tag_origin", var_14, (0, var_10 - 90, 135));
   waitframe();
   var_15 = var_0.origin;
   var_0 unlink();
   var_0.origin = var_15 + anglesToForward(var_0.angles) * -20000;
-  var_0 moveto(var_15, 4, 0, 2);
+  var_0 moveTo(var_15, 4, 0, 2);
   wait 4;
 
   if(isDefined(var_0)) {
-    var_0 linkto(level.uavrig, "tag_origin");
+    var_0 linkTo(level.uavrig, "tag_origin");
   }
 }
 

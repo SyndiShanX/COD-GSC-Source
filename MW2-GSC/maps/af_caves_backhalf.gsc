@@ -99,7 +99,7 @@ main_af_caves_backhalf_postload() {
   array_thread(camo_right_damaged, ::hide_entity);
   array_thread(camo_left_damaged, ::hide_entity);
 
-  rock_rubble1 = GetEnt("rock_rubble1", "targetname");
+  rock_rubble1 = getEnt("rock_rubble1", "targetname");
   rock_rubble1 NotSolid();
   rock_rubble1 Hide();
   rock_rubble1 ConnectPaths();
@@ -135,10 +135,10 @@ main_af_caves_backhalf_postload() {
   array_spawn_function_targetname("airstrip_runners", ::AI_airstrip_runners_think);
   array_spawn_function_noteworthy("ignored", ::AI_ignored_think);
 
-  littlebird_airstrip = GetEnt("littlebird_airstrip", "targetname");
+  littlebird_airstrip = getEnt("littlebird_airstrip", "targetname");
   littlebird_airstrip thread add_spawn_function(::littlebird_airstrip_think);
 
-  blackhawk_airstrip = GetEnt("blackhawk_airstrip", "targetname");
+  blackhawk_airstrip = getEnt("blackhawk_airstrip", "targetname");
   blackhawk_airstrip thread add_spawn_function(::blackhawk_airstrip_think);
 
   thread fx_management();
@@ -524,7 +524,7 @@ AAA_sequence_overlook_to_breach() {
 
   flag_set("unload_skylight_dudes");
 
-  volume_overlook = GetEnt("volume_overlook", "targetname");
+  volume_overlook = getEnt("volume_overlook", "targetname");
   aAI = volume_overlook get_ai_touching_volume("axis");
   array_thread(aAI, ::AI_player_seek);
 
@@ -542,7 +542,7 @@ AAA_sequence_overlook_to_breach() {
   flag_wait("obj_overlook_to_skylight_complete");
 
   if(isDefined(blackhawk_skylight_01)) {
-    skylight1_heli_depart = getstruct("skylight1_heli_depart", "targetname");
+    skylight1_heli_depart = getStruct("skylight1_heli_depart", "targetname");
     blackhawk_skylight_01 thread vehicle_paths_then_delete(skylight1_heli_depart);
   }
 }
@@ -672,7 +672,7 @@ dialougue_nag_smokefight() {
     return;
   }
 
-  skylight_flanker = GetEnt("skylight_flanker", "script_noteworthy");
+  skylight_flanker = getEnt("skylight_flanker", "script_noteworthy");
   skylight_flanker notify("trigger", level.player);
 
   if(flag("can_talk")) {
@@ -768,7 +768,7 @@ blackhawk_overlook_rappel_think() {
   wait(5);
 
   if(isDefined(blackhawk_overlook_rappel)) {
-    overlook_heli_depart = getstruct("overlook_heli_depart", "targetname");
+    overlook_heli_depart = getStruct("overlook_heli_depart", "targetname");
     blackhawk_overlook_rappel thread vehicle_paths_then_delete(overlook_heli_depart);
   }
 }
@@ -808,8 +808,8 @@ leftover_skylight_enemies_seek_player() {
 
 leftover_skylight_enemies_think() {
   self endon("death");
-  volume_skylight_defend = getent("volume_skylight_defend", "targetname");
-  volume_skylight_breach_hall = getent("volume_skylight_breach_hall", "targetname");
+  volume_skylight_defend = getEnt("volume_skylight_defend", "targetname");
+  volume_skylight_breach_hall = getEnt("volume_skylight_breach_hall", "targetname");
 
   while(true) {
     wait(1);
@@ -835,7 +835,7 @@ AAA_sequence_breach_to_airstrip() {
   flag_set("stop_smoke");
   flag_set("obj_overlook_to_skylight_complete");
 
-  breach_safe_volume = GetEnt("breach_safe_volume", "targetname");
+  breach_safe_volume = getEnt("breach_safe_volume", "targetname");
   aAI = breach_safe_volume get_ai_touching_volume("axis");
   array_thread(aAI, ::AI_player_seek);
 
@@ -929,7 +929,7 @@ price_control_room_think() {
   level.price cqb_walk("off");
   level.price.neverEnableCQB = true;
   level.price PushPlayer(true);
-  price_computer_node = getent("price_computer_node", "targetname");
+  price_computer_node = getEnt("price_computer_node", "targetname");
   price_computer_node anim_reach_solo(level.price, "laptop_stand_idle_start");
 
   thread price_keyboard_anim();
@@ -939,13 +939,13 @@ price_control_room_think() {
 
   level.price disable_ai_color();
   price_computer_node notify("stop_idle");
-  level.price anim_stopanimscripted();
+  level.price anim_stopanimScripted();
   node_price_escape_cover = GetNode("node_price_escape_cover", "targetname");
   level.price SetGoalNode(node_price_escape_cover);
 }
 
 price_keyboard_anim() {
-  price_computer_node = getent("price_computer_node", "targetname");
+  price_computer_node = getEnt("price_computer_node", "targetname");
   level.price endon("stop_loop");
   while(!flag("control_room_door_opened")) {
     price_computer_node thread anim_loop_solo(level.price, "laptop_stand_idle", "stop_idle");
@@ -986,7 +986,7 @@ pre_self_destruct_explosions() {
   while(true) {
     thread exploder("escape_tunnel_pre_explosion");
     thread play_sound_in_space("af_caves_selfdestruct", level.player.origin);
-    level.player PlayRumbleOnEntity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
 
     if(flag("player_touching_cave_exit")) {
       break;
@@ -1019,7 +1019,7 @@ keyboard_think() {
   self glow();
   self MakeUsable();
 
-  self SetHintString(&"AF_CAVES_USE_KEYBOARD");
+  self setHintString(&"AF_CAVES_USE_KEYBOARD");
 
   self waittill("trigger");
 
@@ -1057,7 +1057,7 @@ dialogue_breach_to_airstrip() {
 
   radio_dialogue("afcaves_shp_directive116");
 
-  control_room_volume = getent("control_room_volume", "script_noteworthy");
+  control_room_volume = getEnt("control_room_volume", "script_noteworthy");
   if(level.player istouching(control_room_volume)) {
     thread autosave_by_name("timer_start");
   }
@@ -1107,7 +1107,7 @@ breach_nags() {
 control_door_open(side, sFlagToSet) {
   angles = self.openangles;
   time = 4;
-  self RotateTo(self.angles + (0, angles, 0), 4, 1.5, 1.5);
+  self rotateTo(self.angles + (0, angles, 0), 4, 1.5, 1.5);
   self thread play_sound_on_entity("af_caves_escape_door_open");
   wait(time);
   if(isDefined(sFlagToSet)) {
@@ -1118,7 +1118,7 @@ control_door_open(side, sFlagToSet) {
 control_door_close(side, sFlagToSet) {
   angles = self.closeangles;
   time = 7;
-  self RotateTo(self.angles + (0, angles, 0), time, .5, .5);
+  self rotateTo(self.angles + (0, angles, 0), time, .5, .5);
   wait(time - 1);
   if(side == "left") {
     self thread play_sound_on_entity("af_caves_escape_door_close");
@@ -1129,7 +1129,7 @@ control_door_close(side, sFlagToSet) {
 }
 
 dialogue_nag_control_room_door() {
-  price_computer_node = getent("price_computer_node", "targetname");
+  price_computer_node = getEnt("price_computer_node", "targetname");
   level.player endon("death");
   while(true) {
     wait(6);
@@ -1184,7 +1184,7 @@ music_control_room() {
 }
 
 controlroom_sheppard_close_the_door() {
-  icon_trigger = GetEnt("trigger_breach_icon", "targetname");
+  icon_trigger = getEnt("trigger_breach_icon", "targetname");
   icon_trigger trigger_off();
 
   wait(2);
@@ -1192,11 +1192,11 @@ controlroom_sheppard_close_the_door() {
   breach_door = level.breach_doors[2];
   breach_door Hide();
 
-  breach_path_clip = GetEnt("breach_solid", "targetname");
+  breach_path_clip = getEnt("breach_solid", "targetname");
   breach_path_clip NotSolid();
   breach_path_clip ConnectPaths();
 
-  old_door = GetEnt("blast_door_slam", "targetname");
+  old_door = getEnt("blast_door_slam", "targetname");
   old_door.origin = breach_door.origin;
   startAngles = old_door.angles;
   old_door.angles += (0, -74, 0);
@@ -1215,12 +1215,12 @@ controlroom_sheppard_close_the_door() {
 
   flag_set("breach_door_closed");
 
-  old_door RotateYaw(74, .50);
+  old_door rotateYaw(74, .50);
 
   old_door thread play_sound_in_space("scn_afcaves_doorslam_brace", old_door.origin);
 
   breach_path_clip Solid();
-  breach_path_clip DisconnectPaths();
+  breach_path_clip disconnectPaths();
 
   wait(.66);
 
@@ -1270,7 +1270,7 @@ AA_airstrip_init() {
 
 tower_explosion() {
   flag_wait("tower_explosion");
-  trig = GetEnt("tower_trigger", "targetname");
+  trig = getEnt("tower_trigger", "targetname");
   trig notify("trigger");
 }
 
@@ -1308,8 +1308,8 @@ AAA_sequence_airstrip() {
 
   level.player PlayLocalSound("af_caves_selfdestruct");
 
-  cave_exit_playerview_02 = GetEnt("cave_exit_playerview_02", "targetname");
-  cave_exit_playerview_01 = GetEnt("cave_exit_playerview_01", "targetname");
+  cave_exit_playerview_02 = getEnt("cave_exit_playerview_02", "targetname");
+  cave_exit_playerview_01 = getEnt("cave_exit_playerview_01", "targetname");
   dummy = spawn_tag_origin();
   dummy.origin = level.player.origin;
   dummy.angles = cave_exit_playerview_01.angles;
@@ -1359,15 +1359,15 @@ AAA_sequence_airstrip() {
 
   thread airstrip_heli_crash_destruction();
 
-  rock_rubble1 = GetEnt("rock_rubble1", "targetname");
+  rock_rubble1 = getEnt("rock_rubble1", "targetname");
   rock_rubble1 Solid();
   rock_rubble1 Show();
-  rock_rubble1 DisconnectPaths();
+  rock_rubble1 disconnectPaths();
 
   level.price.moveplaybackrate = .5;
   SetSavedDvar("g_friendlyNameDist", 0);
 
-  price_fighting_cave_exit = GetEnt("price_fighting_cave_exit", "targetname");
+  price_fighting_cave_exit = getEnt("price_fighting_cave_exit", "targetname");
   price_fighting_cave_exit anim_first_frame_solo(level.price, price_fighting_cave_exit.animation);
 
   wait(.1);
@@ -1376,7 +1376,7 @@ AAA_sequence_airstrip() {
   playerOrg.origin = cave_exit_playerview_01.origin;
   level.player unlink();
   level.player.origin = playerOrg.origin;
-  level.player SetOrigin(playerOrg.origin);
+  level.player setOrigin(playerOrg.origin);
   level.player PlayerLinkToBlend(playerOrg, "tag_player", 1);
   flag_set("danger_close_dialogue_start");
   wait(1);
@@ -1396,7 +1396,7 @@ AAA_sequence_airstrip() {
   SetBlur(.2, 1.5);
 
   wait(1);
-  playerOrg RotateTo(playerOrg.angles + (40, 0, -70), 12, 5, 5);
+  playerOrg rotateTo(playerOrg.angles + (40, 0, -70), 12, 5, 5);
   SetBlur(2, 1.5);
   wait(1.5);
   SetBlur(.2, 1);
@@ -1413,7 +1413,7 @@ AAA_sequence_airstrip() {
 
   wait(2);
   level.player Unlink();
-  level.player SetOrigin(cave_exit_playerview_01.origin);
+  level.player setOrigin(cave_exit_playerview_01.origin);
   level.player SetPlayerAngles(cave_exit_playerview_01.angles);
   level.player FreezeControls(true);
   level.player AllowStand(true);
@@ -1422,8 +1422,8 @@ AAA_sequence_airstrip() {
   level.player AllowCrouch(true);
   level.player AllowProne(true);
 
-  price_fallback = GetEnt("price_fallback", "targetname");
-  level.price anim_stopanimscripted();
+  price_fallback = getEnt("price_fallback", "targetname");
+  level.price anim_stopanimScripted();
   price_fallback anim_first_frame_solo(level.price, "launchfacility_a_c4_plant_short");
 
   flag_wait("danger_close_dialogue_end");
@@ -1532,7 +1532,7 @@ blackhawk_airstrip_think() {
 
   self waittill("unloaded");
 
-  blackhawk_airstrip_heli_depart = getstruct("blackhawk_airstrip_heli_depart", "targetname");
+  blackhawk_airstrip_heli_depart = getStruct("blackhawk_airstrip_heli_depart", "targetname");
   self thread vehicle_paths(blackhawk_airstrip_heli_depart);
   self Vehicle_SetSpeed(50);
   self waittill("reached_dynamic_path_end");
@@ -1566,7 +1566,7 @@ littlebird_airstrip_think() {
   wait(2);
   self Vehicle_SetSpeed(50);
 
-  airstrip_littlebird_01_depart = getstruct("airstrip_littlebird_01_depart", "targetname");
+  airstrip_littlebird_01_depart = getStruct("airstrip_littlebird_01_depart", "targetname");
   self thread vehicle_paths(airstrip_littlebird_01_depart);
   self waittill("reached_dynamic_path_end");
   self Delete();
@@ -1595,7 +1595,7 @@ danger_close_firestorm() {
   i = 0;
   foreach(missileOrg in missileOrgs) {
     i++;
-    targetOrg = GetEnt(missileOrg.target, "targetname");
+    targetOrg = getEnt(missileOrg.target, "targetname");
     missile = MagicBullet("hellfire_missile_af_caves_end", missileOrg.origin, targetOrg.origin);
     missile thread play_sound_on_entity("scn_afcaves_incoming");
     if(i == missileOrgs.size) {
@@ -1612,7 +1612,7 @@ danger_close_firestorm() {
 
 missile_impact_think(lastMissile) {
   dummy = spawn("script_origin", self.origin);
-  dummy LinkTo(self);
+  dummy linkTo(self);
   self waittill("death");
 
   if(isDefined(lastMissile)) {
@@ -1626,7 +1626,7 @@ missile_impact_think(lastMissile) {
     Earthquake(.2, 2.5, level.player.origin, 5000);
   }
 
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
 
   wait(0.05);
   dummy Delete();
@@ -1701,18 +1701,18 @@ dialogue_airstrip() {
 music_airstrip() {}
 
 airstrip_tower_destruction() {
-  trig = GetEnt("tower_trigger", "targetname");
+  trig = getEnt("tower_trigger", "targetname");
   trig waittill("trigger");
 
   RadiusDamage(trig.origin, 256, 1000, 900);
   Earthquake(0.2, 1, level.player.origin, 1024);
-  level.player PlayRumbleOnEntity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 
   trig thread play_sound_in_space("explo_wood_tower", trig.origin);
 
-  volume = GetEnt("tower_victims", "targetname");
+  volume = getEnt("tower_victims", "targetname");
 
-  mg = GetEnt("tower_mg", "script_noteworthy");
+  mg = getEnt("tower_mg", "script_noteworthy");
   owner = mg GetTurretOwner();
   if(IsAlive(owner)) {
     owner notify("stop_using_built_in_burst_fire");
@@ -1720,7 +1720,7 @@ airstrip_tower_destruction() {
 
   mg Hide();
 
-  volume = GetEnt("tower_victims", "targetname");
+  volume = getEnt("tower_victims", "targetname");
   array_thread(GetCorpseArray(), ::delete_corpse_in_volume, volume);
 }
 
@@ -1734,7 +1734,7 @@ littlebird_on_fire() {
 
 airstrip_heli_crash_destruction() {
   littlebird_crasher = spawn_vehicle_from_targetname_and_drive("littlebird_crasher");
-  littlebird_crasher.perferred_crash_location = GetEnt("airstip_crash", "script_noteworthy");
+  littlebird_crasher.perferred_crash_location = getEnt("airstip_crash", "script_noteworthy");
 
   littlebird_crasher SetLookAtEnt(level.player);
   littlebird_crasher godon();
@@ -1749,7 +1749,7 @@ airstrip_heli_crash_destruction() {
 
   exploder("helicrash_01");
   Earthquake(0.3, 1, level.player.origin, 1024);
-  level.player PlayRumbleOnEntity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 
   pristine_netting = getEntArray("netting_pristine", "targetname");
   foreach(nondestroyed_piece in pristine_netting) {
@@ -1776,7 +1776,7 @@ obj_ledge_traverse() {
 
   Objective_Position(objective_number, (0, 0, 0));
 
-  obj_position = GetEnt("obj_ledge_gunners", "targetname");
+  obj_position = getEnt("obj_ledge_gunners", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait("player_ledge_end");
@@ -1802,12 +1802,12 @@ obj_overlook_to_skylight() {
   Objective_String_NoMessage(objective_number, &"AF_CAVES_OBJ_FLANK_AND_KILL");
 
   Objective_Position(objective_number, (0, 0, 0));
-  obj_position = GetEnt("obj_flank_skylight_01", "targetname");
+  obj_position = getEnt("obj_flank_skylight_01", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait_any("player_going_around_skylight_flank", "player_on_other_side_skylight", "obj_overlook_to_skylight_complete");
 
-  obj_position = GetEnt("obj_flank_skylight_02", "targetname");
+  obj_position = getEnt("obj_flank_skylight_02", "targetname");
   Objective_Position(objective_number, obj_position.origin);
 
   flag_wait_any("skylight_dudes_dead", "player_right_near_breach", "obj_overlook_to_skylight_complete");
@@ -1848,7 +1848,7 @@ obj_breach() {
 obj_door_controls() {
   objective_number = 7;
 
-  obj_position = GetEnt("keyboard", "targetname");
+  obj_position = getEnt("keyboard", "targetname");
 
   Objective_Add(objective_number, "active", &"AF_CAVES_OBJ_DOOR_CONTROLS", obj_position.origin);
   Objective_Current(objective_number);
@@ -2208,10 +2208,10 @@ make_door_from_prefab(sTargetname) {
   door_org.angles = door_brushes[0].angles;
 
   foreach(model in door_models) {
-    model LinkTo(door_org);
+    model linkTo(door_org);
   }
   foreach(brush in door_brushes) {
-    brush LinkTo(door_org);
+    brush linkTo(door_org);
   }
 
   door = door_org;
@@ -2349,7 +2349,7 @@ AI_ambient_airstrip_think() {
   }
 
   self.deathanim = undefined;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   self.skipDeathAnim = true;
   self Kill();
 }
@@ -2401,8 +2401,8 @@ backhalf_loadout() {
 
 debug() {
   wait(.2);
-  airstrip_player = GetEnt("airstrip_player", "targetname");
-  level.player SetOrigin(airstrip_player.origin);
+  airstrip_player = getEnt("airstrip_player", "targetname");
+  level.player setOrigin(airstrip_player.origin);
   level.player SetPlayerAngles(airstrip_player.angles);
   wait(1);
   ambient_airstrip = getEntArray("ambient_airstrip", "targetname");
@@ -2507,8 +2507,8 @@ fx_management() {
   level.fx_start_to_ledge = [];
   level.fx_ledge_to_airstrip = [];
 
-  fx_volume_start_to_ledge = getent("fx_volume_start_to_ledge", "targetname");
-  fx_volume_ledge_to_airstrip = getent("fx_volume_ledge_to_airstrip", "targetname");
+  fx_volume_start_to_ledge = getEnt("fx_volume_start_to_ledge", "targetname");
+  fx_volume_ledge_to_airstrip = getEnt("fx_volume_ledge_to_airstrip", "targetname");
 
   dummy = spawn("script_origin", (0, 0, 0));
   for(i = 0; i < level.createfxent.size; i++) {

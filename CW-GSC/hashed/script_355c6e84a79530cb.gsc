@@ -121,7 +121,7 @@ function function_d9ea0e09(eventstruct) {
   scriptmodel = self.scriptmodel;
 
   if(isPlayer(player) && player zm_score::can_player_purchase(0) && !is_true(self.var_c1e1d9cb)) {
-    foreach(spectator in getplayers()) {
+    foreach(spectator in getPlayers()) {
       if(spectator.sessionstate === "spectator") {
         spectator notify(#"force_spawn");
       }
@@ -156,7 +156,7 @@ function function_d9ea0e09(eventstruct) {
     return;
   }
 
-  playsoundatposition(#"hash_331360fb3bc61a2e", scriptmodel.origin + (0, 0, 50));
+  playSoundAtPosition(#"hash_331360fb3bc61a2e", scriptmodel.origin + (0, 0, 50));
 }
 
 function function_e1fab6a9(instance, v_center) {
@@ -182,7 +182,7 @@ function function_e1fab6a9(instance, v_center) {
 
       foreach(ai in a_ai) {
         if(isalive(ai) && ai.zm_ai_category === #"normal" && distance(ai.origin, v_center) < 600) {
-          v_dir = vectornormalize(ai.origin - v_center);
+          v_dir = vectorNormalize(ai.origin - v_center);
           v_launch = v_dir * randomintrange(80, 100) + (0, 0, 150);
           ai thread zm_utility::function_ffc279(v_launch);
         }
@@ -301,19 +301,19 @@ function function_f1bc8a08(player) {
   if(isDefined(player.armortier)) {
     switch (player.armortier) {
       case 0:
-        self sethintstring(#"hash_5a07d4e777cd962a", "Armor Lv. 1", 500);
+        self setHintString(#"hash_5a07d4e777cd962a", "Armor Lv. 1", 500);
         break;
       case 1:
-        self sethintstring(#"hash_5a07d4e777cd962a", "Armor Lv. 2", 1000);
+        self setHintString(#"hash_5a07d4e777cd962a", "Armor Lv. 2", 1000);
         break;
       case 2:
-        self sethintstring(#"hash_5a07d4e777cd962a", "Armor Lv. 3", 1500);
+        self setHintString(#"hash_5a07d4e777cd962a", "Armor Lv. 3", 1500);
         break;
       case 3:
         if(player armor::at_peak_armor_bars()) {
-          self sethintstring(#"hash_7dfea1c8f4ee103");
+          self setHintString(#"hash_7dfea1c8f4ee103");
         } else {
-          self sethintstring(#"hash_3ed2de51f2aea0ff", 1000);
+          self setHintString(#"hash_3ed2de51f2aea0ff", 1000);
         }
 
         break;
@@ -363,7 +363,7 @@ function function_83b6d24a() {
 
     if(isDefined(safehouse.contentgroups[#"claim_interact"][0].claimtrigger)) {
       trigger = safehouse.contentgroups[#"claim_interact"][0].claimtrigger;
-      trigger sethintstring(#"hash_6d645426c03ab096");
+      trigger setHintString(#"hash_6d645426c03ab096");
     }
   }
 }
@@ -374,7 +374,7 @@ function function_2b1da4a6() {
 
     if(isDefined(safehouse.contentgroups[#"claim_interact"][0].claimtrigger)) {
       trigger = safehouse.contentgroups[#"claim_interact"][0].claimtrigger;
-      trigger sethintstring(#"hash_5ecd49cccca29d87", 0);
+      trigger setHintString(#"hash_5ecd49cccca29d87", 0);
     }
   }
 }
@@ -446,8 +446,8 @@ function function_dab40c5f() {
       instance = level.contentmanager.var_c4181ea;
 
       if(isDefined(instance)) {
-        foreach(player in getplayers()) {
-          player setorigin(instance.origin);
+        foreach(player in getPlayers()) {
+          player setOrigin(instance.origin);
         }
       }
     }

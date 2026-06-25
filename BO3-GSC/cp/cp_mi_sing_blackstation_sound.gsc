@@ -101,7 +101,7 @@ function function_6048af60() {
 }
 
 function function_a339da70() {
-  playerlist = getplayers();
+  playerlist = getPlayers();
   foreach(player in playerlist) {
     player playsoundtoplayer("evt_takedown_slowmo_02", player);
     player playLoopSound("evt_time_slow_loop");
@@ -110,7 +110,7 @@ function function_a339da70() {
 }
 
 function function_69fc18eb() {
-  playerlist = getplayers();
+  playerlist = getPlayers();
   foreach(player in playerlist) {
     player playsoundtoplayer("evt_takedown_slowmo_exit", player);
     player stoploopsound();

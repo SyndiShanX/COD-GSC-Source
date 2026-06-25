@@ -79,7 +79,7 @@ register_coverwater_area(var_0, var_1) {
 
   common_scripts\utility::array_thread(getEntArray(var_0 + "_above", "targetname"), ::water_surface_think, var_1);
   common_scripts\utility::array_thread(getEntArray(var_0 + "_under", "targetname"), ::water_surface_think, var_1);
-  var_2 = getent(var_0 + "_trigger", "targetname");
+  var_2 = getEnt(var_0 + "_trigger", "targetname");
   var_2 thread trigger_volume_think(var_1);
   level.cw_trigger_volumes = common_scripts\utility::array_add(level.cw_trigger_volumes, var_2);
 }
@@ -586,7 +586,7 @@ fx_water_surface_floater(var_0, var_1, var_2, var_3, var_4) {
   var_6.angles = (-90, 0, 0);
 
   if(!isDefined(var_4)) {
-    var_6 linkto(var_2);
+    var_6 linkTo(var_2);
   }
 
   playFXOnTag(var_1, var_6, "tag_origin");
@@ -1077,7 +1077,7 @@ setup_player_view_water_fx_source() {
     level.cw_player_view_fx_source linktoplayerviewattachwatersurfacetransitioneffects(level.player);
     level.cw_player_view_bubble_source = spawn("script_model", level.cw_player_view_fx_source.origin + (10, 0, -60));
     level.cw_player_view_bubble_source setModel("tag_origin");
-    level.cw_player_view_bubble_source linkto(level.cw_player_view_fx_source);
+    level.cw_player_view_bubble_source linkTo(level.cw_player_view_fx_source);
   }
 }
 
@@ -1282,7 +1282,7 @@ audio_underwater_breath_bubbles() {
 audio_underwater_choke() {
   if(!isDefined(level.underwater_choke_node)) {
     level.underwater_choke_node = spawn("script_origin", level.player.origin);
-    level.underwater_choke_node linkto(level.player);
+    level.underwater_choke_node linkTo(level.player);
     level.underwater_choke_node playSound("breath_underwater_choke");
   }
 }

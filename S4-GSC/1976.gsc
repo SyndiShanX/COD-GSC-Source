@@ -312,7 +312,7 @@ _id_BD6B(var_0, var_1, var_2) {
       var_34.angles = var_4 + var_31;
       var_34 notsolid();
       var_34 dontinterpolate();
-      var_34 linkto(var_32, var_9[var_29][var_33], (0, 0, 0), (0, 0, 0));
+      var_34 linkTo(var_32, var_9[var_29][var_33], (0, 0, 0), (0, 0, 0));
       level._id_2C25[var_1][var_33] = var_34;
     }
   }
@@ -357,7 +357,7 @@ _id_BD6B(var_0, var_1, var_2) {
 
   for(var_29 = 0; var_29 < var_25.size; var_29++) {
     var_37 = anglesToForward(level._id_2FFD._id_22B1.angles);
-    var_38 = vectornormalize((var_37[0], var_37[1], 0));
+    var_38 = vectorNormalize((var_37[0], var_37[1], 0));
     var_39 = _func_025B(var_38, (0, 0, 1));
     var_40 = var_38 * var_25[var_29][1];
     var_41 = var_39 * var_25[var_29][0];

@@ -530,7 +530,7 @@ function spawninterroundintermission() {
   self.spectatekillcam = 0;
   self.friendlydamage = undefined;
   self globallogic_defaults::default_onspawnintermission();
-  self setorigin(self.origin);
+  self setOrigin(self.origin);
   self setplayerangles(self.angles);
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 }

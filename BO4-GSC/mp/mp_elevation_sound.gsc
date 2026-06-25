@@ -10,7 +10,7 @@ main() {
 }
 
 function_14f3a3c2() {
-  trigger = getent("snd_bell", "targetname");
+  trigger = getEnt("snd_bell", "targetname");
 
   if(!isDefined(trigger)) {
     return;

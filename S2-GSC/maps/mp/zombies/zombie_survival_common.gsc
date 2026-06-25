@@ -160,7 +160,7 @@ collect_souls_to_unlock_pack_a_punch() {
 }
 
 wait_for_pap_available() {
-  var_00 = getent("pack_a_punch_weapon_display", "targetname");
+  var_00 = getEnt("pack_a_punch_weapon_display", "targetname");
   var_00 method_8511();
   for(var_01 = 0; var_01 < 3; var_01++) {
     common_scripts\utility::func_3C9F("zmb_sg_soul_collect_flag_" + var_01 + 1);

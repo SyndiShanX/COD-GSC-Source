@@ -40,7 +40,7 @@ auto_turret_think() {
     return;
   }
 
-  self.turret = GetEnt(self.target, "targetname");
+  self.turret = getEnt(self.target, "targetname");
 
   if(!isDefined(self.turret)) {
     return;
@@ -51,8 +51,8 @@ auto_turret_think() {
 
   for(;;) {
     cost = level.auto_turret_cost;
-    self SetHintString(&"ZOMBIE_AUTO_TURRET", cost);
-    self SetCursorHint("HINT_NOICON");
+    self setHintString(&"ZOMBIE_AUTO_TURRET", cost);
+    self setCursorHint("HINT_NOICON");
 
     self waittill("trigger", player);
     index = maps\_zombiemode_weapons::get_player_index(player);

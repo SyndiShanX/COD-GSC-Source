@@ -56,17 +56,17 @@ function intro_cyber_soldiers_main() {
 
 function function_55b2b7ce() {
   level waittill("hash_999aab74");
-  var_771bcc8f = getent("cyber_solider_intro_lift_clip", "targetname");
+  var_771bcc8f = getEnt("cyber_solider_intro_lift_clip", "targetname");
   var_771bcc8f delete();
 }
 
 function cyber_hangar_gate_close() {
   wait(20);
   level thread scene::play("p7_fxanim_cp_prologue_hangar_doors_02_bundle");
-  cyber_hangar_gate_r_pos = getent("cyber_hangar_gate_r_pos", "targetname");
+  cyber_hangar_gate_r_pos = getEnt("cyber_hangar_gate_r_pos", "targetname");
   cyber_hangar_gate_r_pos playSound("evt_hangar_start_r");
   cyber_hangar_gate_r_pos playLoopSound("evt_hangar_loop_r");
-  cyber_hangar_gate_l_pos = getent("cyber_hangar_gate_l_pos", "targetname");
+  cyber_hangar_gate_l_pos = getEnt("cyber_hangar_gate_l_pos", "targetname");
   cyber_hangar_gate_l_pos playSound("evt_hangar_start_l");
   cyber_hangar_gate_l_pos playLoopSound("evt_hangar_loop_l");
   level waittill("hash_8e385112");
@@ -142,8 +142,8 @@ function function_ac290386() {
   callback::on_spawned(&cp_mi_eth_prologue::function_4d4f1d4f);
   array::thread_all(level.players, &cp_mi_eth_prologue::function_7072c5d8);
   level waittill("hash_af43d596");
-  playsoundatposition("evt_soldierintro_walla_panic_1", (6859, 886, 191));
-  playsoundatposition("evt_soldierintro_walla_panic_2", (6870, 598, 197));
+  playSoundAtPosition("evt_soldierintro_walla_panic_1", (6859, 886, 191));
+  playSoundAtPosition("evt_soldierintro_walla_panic_2", (6870, 598, 197));
 }
 
 function function_89f840a1(a_ents) {
@@ -224,7 +224,7 @@ function link_traversals() {
 function function_e3957b4() {
   if(!isDefined(level.var_3dce3f88)) {
     level.var_3dce3f88 = spawn("script_model", level.e_lift.origin);
-    level.e_lift linkto(level.var_3dce3f88);
+    level.e_lift linkTo(level.var_3dce3f88);
   }
   level.var_3dce3f88 movez(220, 12.3);
   level.var_3dce3f88 waittill("movedone");
@@ -237,10 +237,10 @@ function function_e3957b4() {
 }
 
 function function_f9753551() {
-  level.e_lift = getent("freight_lift", "targetname");
+  level.e_lift = getEnt("freight_lift", "targetname");
   level.e_lift playSound("evt_freight_lift_start");
   level.snd_lift = spawn("script_origin", level.e_lift.origin);
-  level.snd_lift linkto(level.e_lift);
+  level.snd_lift linkTo(level.e_lift);
   level.snd_lift playLoopSound("evt_freight_lift_loop");
   level.var_1dd14818 = 1;
   level.var_3dce3f88 movez(-354, 0.05);

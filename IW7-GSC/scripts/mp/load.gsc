@@ -117,9 +117,9 @@ main() {
         var_5 = var_4[var_1];
         var_5 func_84C0(1);
         if(isDefined(var_5.target)) {
-          var_6 = getent(var_5.target, "targetname");
-          var_5 enablelinkto();
-          var_5 linkto(var_6);
+          var_6 = getEnt(var_5.target, "targetname");
+          var_5 enablelinkTo();
+          var_5 linkTo(var_6);
         }
       }
     }
@@ -271,7 +271,7 @@ setupexploders() {
     }
 
     if(isDefined(var_6.target)) {
-      var_8 = getent(var_7.v["target"], "targetname").origin;
+      var_8 = getEnt(var_7.v["target"], "targetname").origin;
       var_7.v["angles"] = vectortoangles(var_8 - var_7.v["origin"]);
     }
 

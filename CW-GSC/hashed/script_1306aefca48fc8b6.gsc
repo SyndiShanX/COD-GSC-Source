@@ -410,7 +410,7 @@ function function_9df20e11() {
 }
 
 function function_a4c07e18(name) {
-  playercount = getplayers().size;
+  playercount = getPlayers().size;
   gridsize = math::clamp(3 + playercount, 4, 6);
   var_5d3143fb = math::clamp(7 + playercount, 8, 12);
 

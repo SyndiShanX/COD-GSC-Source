@@ -200,7 +200,7 @@ _id_F998() {
 
 _id_D2AF(var_0, var_1) {
   self._id_7604 = var_0;
-  var_0 linkto(self, self._id_760D, self._id_7607, self._id_7606);
+  var_0 linkTo(self, self._id_760D, self._id_7607, self._id_7606);
   var_0 _meth_8338(1);
   var_0 _meth_833B(500);
   var_0 _meth_8340("forceshadowon");
@@ -261,7 +261,7 @@ toggle_optimized_headlight_ent(var_0, var_1) {
 }
 
 _id_D2B0(var_0) {
-  var_0 linkto(self, self._id_ED7C, self._id_ED7B, self._id_ED7A);
+  var_0 linkTo(self, self._id_ED7C, self._id_ED7B, self._id_ED7A);
   var_0 _meth_8334((1, 0, 0));
   var_0 _meth_8338(0);
   var_0 _meth_833B(150);
@@ -284,9 +284,9 @@ _id_D240(var_0) {
     self._id_7609 = self._id_760A;
 
     if(isDefined(self._id_7608) && var_0 == self._id_7608) {
-      self._id_7604 linkto(self, self._id_7605, (0, 0, 0), (20, 0, 0));
+      self._id_7604 linkTo(self, self._id_7605, (0, 0, 0), (20, 0, 0));
     } else if(isDefined(self._id_7605) && var_0 == self._id_7605) {
-      self._id_7604 linkto(self, self._id_7608, (0, 0, 0), (20, 0, 0));
+      self._id_7604 linkTo(self, self._id_7608, (0, 0, 0), (20, 0, 0));
     }
 
     self._id_7604 _meth_8338(0.1);

@@ -9,7 +9,7 @@
 #namespace bot;
 
 callback_botentereduseredge(startnode, endnode, mantlenode, startpos, endpos, mantlepos) {
-  if(self isplayinganimscripted()) {
+  if(self isplayinganimScripted()) {
     self botprinterror("<dev string:x38>");
 
     waitframe(1);
@@ -160,7 +160,7 @@ analyze(params) {
   params.targetpos = isDefined(params.mantlepos) ? params.mantlepos : params.endtrace;
   params.targetheight = params.targetpos[2] - params.starttrace[2];
   normal = params.startpos - params.endpos;
-  params.normal = vectornormalize((normal[0], normal[1], 0));
+  params.normal = vectorNormalize((normal[0], normal[1], 0));
 
   if(distance2dsquared(params.starttrace, params.targetpos) == 0) {
     params.var_5aacf42 = 0;
@@ -186,7 +186,7 @@ function_51cbae24(params) {
     return false;
   }
 
-  dir = vectornormalize(params.endpos - params.startpos);
+  dir = vectorNormalize(params.endpos - params.startpos);
   result = bulletTrace(params.startpos, params.startpos + dir * 512, 0, self);
 
   if(result[#"surfacetype"] == "ladder") {
@@ -278,7 +278,7 @@ teleport(endpos, reason) {
     record3dtext("<dev string:x1c6>" + reason, self.origin, (1, 1, 1), "<dev string:x163>", undefined, 0.5);
   }
 
-  self setorigin(endpos);
+  self setOrigin(endpos);
   self dontinterpolate();
   waitframe(1);
 }

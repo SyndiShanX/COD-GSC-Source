@@ -37,10 +37,10 @@ function_9fc8cc9c(localclientnum) {
   do {
     wait 1;
   }
-  while(!isDefined(getent(localclientnum, "altar_icon_0", "targetname")));
+  while(!isDefined(getEnt(localclientnum, "altar_icon_0", "targetname")));
 
   for(i = 0; i < 4; i++) {
-    mdl_icon = getent(localclientnum, "altar_icon_" + i, "targetname");
+    mdl_icon = getEnt(localclientnum, "altar_icon_" + i, "targetname");
 
     if(isDefined(mdl_icon)) {
       switch (i) {
@@ -66,7 +66,7 @@ tutorial_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
     self playrenderoverridebundle(#"hash_2ef4d8e5fdbc8a08");
 
     if(self.model == "p8_fxanim_zm_vapor_altar_zeus_mod") {
-      mdl_bird = getent(0, "zeus_bird_head", "targetname");
+      mdl_bird = getEnt(0, "zeus_bird_head", "targetname");
       mdl_bird playrenderoverridebundle(#"hash_2ef4d8e5fdbc8a08");
     }
 
@@ -77,7 +77,7 @@ tutorial_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
     self stoprenderoverridebundle(#"hash_2ef4d8e5fdbc8a08");
 
     if(self.model == "p8_fxanim_zm_vapor_altar_zeus_mod") {
-      mdl_bird = getent(0, "zeus_bird_head", "targetname");
+      mdl_bird = getEnt(0, "zeus_bird_head", "targetname");
       mdl_bird stoprenderoverridebundle(#"hash_2ef4d8e5fdbc8a08");
     }
   }

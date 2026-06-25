@@ -268,7 +268,7 @@ reconSpawnTurret(vehicle) {
   mgTurret.angles = vehicle GetTagAngles(turretLinkTag);
   mgTurret setModel(turretModelName);
   mgTurret SetDefaultDropPitch(45.0);
-  mgTurret LinkTo(vehicle, turretLinkTag, (0, 0, 0), (0, 0, 0));
+  mgTurret linkTo(vehicle, turretLinkTag, (0, 0, 0), (0, 0, 0));
   mgTurret.owner = vehicle.owner;
   mgTurret.health = 99999;
   mgTurret.maxHealth = 1000;
@@ -381,7 +381,7 @@ StartUsingReconVehicle(ReconVeh) {
 
   owner playerSaveAngles();
 
-  owner CameraLinkTo(ReconVeh, "tag_origin");
+  owner CameralinkTo(ReconVeh, "tag_origin");
   owner RemoteControlVehicle(ReconVeh);
 
   owner thread setDroneVisionAndLightSetPerMap(1.5, ReconVeh);

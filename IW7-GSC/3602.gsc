@@ -69,8 +69,8 @@ func_ABFD(var_0, var_1) {
     var_0.var_10DD9 = self.origin + (0, 0, 12);
   }
 
-  self playerlinkto(var_0);
-  var_0 moveto(var_0.var_10DD9, 0.45, 0.1, 0.1);
+  self playerlinkTo(var_0);
+  var_0 moveTo(var_0.var_10DD9, 0.45, 0.1, 0.1);
   var_6 = 0;
   var_7 = int(var_2 / 2);
   var_8 = int(var_2 / 4);
@@ -132,14 +132,14 @@ func_20FE(var_0) {
   self endon("dropGravWave");
   self endon("death");
   var_1 = randomintrange(90, 270);
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   self setplayerangles(var_0.angles);
   self setworldupreference(var_0);
   var_2 = var_0.angles;
   var_2 = var_2 * (1, 1, 0);
   var_2 = var_2 + (0, 0, var_1);
   var_3 = 1.5;
-  var_0 rotateto(var_2, var_3, 0.1, 0.1);
+  var_0 rotateTo(var_2, var_3, 0.1, 0.1);
 }
 
 func_853F() {

@@ -124,9 +124,9 @@ main() {
         var_5 _meth_84E8(1);
 
         if(isDefined(var_5.target)) {
-          var_6 = getent(var_5.target, "targetname");
+          var_6 = getEnt(var_5.target, "targetname");
           var_5 _meth_80DB();
-          var_5 linkto(var_6);
+          var_5 linkTo(var_6);
         }
       }
     }

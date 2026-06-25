@@ -10,10 +10,10 @@
 #include maps\mp\zombies\_zm_perks;
 
 electric_switch() {
-  trig = getent("use_elec_switch", "targetname");
-  master_switch = getent("elec_switch", "targetname");
+  trig = getEnt("use_elec_switch", "targetname");
+  master_switch = getEnt("elec_switch", "targetname");
   master_switch notsolid();
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
   trig setvisibletoall();
   trig waittill("trigger", user);
   trig setinvisibletoall();

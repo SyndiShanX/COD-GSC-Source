@@ -312,7 +312,7 @@ spawn_think_action(spawner) {
     }
 
     if(!var_8e8b0300) {
-      e_goal = getent(self.target, "targetname");
+      e_goal = getEnt(self.target, "targetname");
 
       if(isDefined(e_goal)) {
         self setgoal(e_goal);
@@ -331,7 +331,7 @@ function_27fb21d8(s_scene) {
   self endon(#"death");
   waittillframeend();
   s_scene scene::play(self);
-  e_goal = getent(self.target, "targetname");
+  e_goal = getEnt(self.target, "targetname");
 
   if(isDefined(e_goal)) {
     self setgoal(e_goal);
@@ -514,7 +514,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
 }
 
 go_to_node_wait_for_player(node, get_target_func, dist) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -530,7 +530,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
     temp = [[get_target_func]](node.target);
 
     if(temp.size == 1) {
-      vec = vectornormalize(temp[0].origin - node.origin);
+      vec = vectorNormalize(temp[0].origin - node.origin);
     } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
@@ -542,7 +542,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
 
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    vec2[vec2.size] = vectornormalize(player.origin - self.origin);
+    vec2[vec2.size] = vectorNormalize(player.origin - self.origin);
   }
 
   for(i = 0; i < vec2.size; i++) {

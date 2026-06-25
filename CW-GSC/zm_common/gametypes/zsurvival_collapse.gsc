@@ -99,7 +99,7 @@ function function_c8fb4513(var_63c85287 = 600, var_1f7b3936 = int(600 / 5)) {
   level thread objective_manager::start_timer(var_63c85287, "collapse");
   level thread function_ab0f88ca();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::set_active_objective_string(player, #"hash_513d77a3a7ff9312");
     level.var_31028c5d prototype_hud::function_817e4d10(player, 2);
   }
@@ -194,27 +194,27 @@ function function_8c6ab347() {
     }
   }
 
-  array::thread_all(getplayers(), &val::set, #"hash_7a406b91ff079d07", "takedamage", 0);
-  array::thread_all(getplayers(), &val::set, #"hash_7a406b91ff079d07", "ignoreme", 1);
+  array::thread_all(getPlayers(), &val::set, #"hash_7a406b91ff079d07", "takedamage", 0);
+  array::thread_all(getPlayers(), &val::set, #"hash_7a406b91ff079d07", "ignoreme", 1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player playlocalsound(#"evt_nuke_flash");
   }
 
   level thread zm_utility::function_9ad5aeb1(0, 1, 1, 1);
   level thread function_ec609754(level.var_b48509f9);
   wait 3;
-  array::thread_all(getplayers(), &val::reset, #"hash_7a406b91ff079d07", "takedamage");
-  array::thread_all(getplayers(), &val::reset, #"hash_7a406b91ff079d07", "ignoreme");
+  array::thread_all(getPlayers(), &val::reset, #"hash_7a406b91ff079d07", "takedamage");
+  array::thread_all(getPlayers(), &val::reset, #"hash_7a406b91ff079d07", "ignoreme");
   level thread function_4b10f2d6();
   level flag::clear("spawn_zombies");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, 2, level.var_b48509f9, 0);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player namespace_d4ecbbf0::function_a2d61378(level.var_b48509f9 - 1, 3);
     player namespace_d4ecbbf0::function_e32813ee(level.var_b48509f9 - 1, 3, 1);
   }
@@ -316,7 +316,7 @@ function function_ec609754(n_difficulty) {
 }
 
 function private revive_players() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_player::spectator_respawn_player();
   }
 }
@@ -387,7 +387,7 @@ function function_ab0f88ca() {
 
       var_6b6b0446 = player.origin + anglesToForward(player.angles) * 300;
       v_mod = namespace_591b4396::function_411bb920(player);
-      v_dir = vectornormalize(var_6b6b0446 - player.origin + v_mod);
+      v_dir = vectorNormalize(var_6b6b0446 - player.origin + v_mod);
       v_spawn = player.origin + v_dir * var_2a291abf;
 
       if(level.script === #"mp_black_sea" || level.script === #"wz_forest") {

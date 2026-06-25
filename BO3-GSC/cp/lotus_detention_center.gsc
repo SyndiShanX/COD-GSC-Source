@@ -56,7 +56,7 @@ function vtol_hallway_main(str_objective, b_starting) {
     load::function_a2995f22();
   }
   level.ai_hendricks ai::set_behavior_attribute("useGrenades", 0);
-  level thread lotus_util::function_e577c596("vtol_hallway_ravens", getent("trig_vtol_hallway_ravens", "targetname"), "vtol_hallway_raven_decals", "cp_lotus_projection_ravengrafitti3");
+  level thread lotus_util::function_e577c596("vtol_hallway_ravens", getEnt("trig_vtol_hallway_ravens", "targetname"), "vtol_hallway_raven_decals", "cp_lotus_projection_ravengrafitti3");
   if(sessionmodeiscampaignzombiesgame()) {
     thread function_383b165b();
   }
@@ -71,7 +71,7 @@ function vtol_hallway_main(str_objective, b_starting) {
   spawner::add_spawn_function_group("landing_area_ally_victim", "targetname", &function_959c5937);
   vehicle::add_spawn_function("detention_center_vtol", &detention_center_vtol);
   vehicle::add_spawn_function("lotus_vtol_hallway_destruction_vtol", &function_d3a1377e);
-  t_vtol_hallway_door = getent("vtol_hallway_open_door", "targetname");
+  t_vtol_hallway_door = getEnt("vtol_hallway_open_door", "targetname");
   t_vtol_hallway_door triggerenable(0);
   level flag::set("prometheus_otr_cleared");
   level thread vtol_hallway_objectives(b_starting);
@@ -81,7 +81,7 @@ function vtol_hallway_main(str_objective, b_starting) {
   spawn_manager::enable("sm_vtol_hallway_robot_spawns");
   level flag::wait_till("hendricks_reached_vtol_hallway_door");
   level thread function_bad9594a();
-  t_vtol_hallway_door = getent("vtol_hallway_open_door", "targetname");
+  t_vtol_hallway_door = getEnt("vtol_hallway_open_door", "targetname");
   t_vtol_hallway_door triggerenable(1);
   t_vtol_hallway_door waittill("trigger");
   level thread vtol_zipline();
@@ -105,9 +105,9 @@ function vtol_hallway_main(str_objective, b_starting) {
 }
 
 function function_bad9594a() {
-  playsoundatposition("evt_vtolhallway_walla", (-5564, 2906, 4158));
+  playSoundAtPosition("evt_vtolhallway_walla", (-5564, 2906, 4158));
   level waittill("hash_e54c697");
-  playsoundatposition("evt_vtolhallway_walla_death", (-5564, 2906, 4158));
+  playSoundAtPosition("evt_vtolhallway_walla_death", (-5564, 2906, 4158));
 }
 
 function function_ec8c4d64() {
@@ -118,8 +118,8 @@ function function_ec8c4d64() {
 }
 
 function function_383b165b() {
-  mdl_door_left = getent("vtol_hallway_door_left", "targetname");
-  mdl_door_right = getent("vtol_hallway_door_right", "targetname");
+  mdl_door_left = getEnt("vtol_hallway_door_left", "targetname");
+  mdl_door_right = getEnt("vtol_hallway_door_right", "targetname");
   mdl_door_left movey(100, 1);
   mdl_door_right movey(-100, 1);
   mdl_door_right waittill("movedone");
@@ -134,14 +134,14 @@ function function_80318e87(b_wait_for_flag = 0) {
   }
   level thread function_9e1bef17();
   trigger::wait_till("vtol_fly_by");
-  playsoundatposition("evt_vtolhallway_flyby", (-7235, 3447, 4079));
+  playSoundAtPosition("evt_vtolhallway_flyby", (-7235, 3447, 4079));
   level scene::add_scene_func("p7_fxanim_cp_lotus_vtol_hallway_flyby_bundle", &function_bb4e63f9, "play");
   level thread scene::play("p7_fxanim_cp_lotus_vtol_hallway_flyby_bundle");
 }
 
 function function_bb4e63f9(a_ents) {
   foreach(player in level.players) {
-    player playrumbleonentity("cp_lotus_rumble_vtol_hallway_flyby");
+    player playRumbleOnEntity("cp_lotus_rumble_vtol_hallway_flyby");
   }
 }
 
@@ -167,9 +167,9 @@ function vtol_zipline() {
   trigger::use("zipline_guys_start_color_trigger");
   level thread scene::play("cin_lot_07_02_detcenter_vign_zipline");
   level waittill("hash_facd74a1");
-  e_scene_vtol = getent("zipline_vtol", "targetname");
+  e_scene_vtol = getEnt("zipline_vtol", "targetname");
   v_angles = e_scene_vtol.angles;
-  e_scene_vtol stopanimscripted();
+  e_scene_vtol stopanimScripted();
   wait(0.05);
   e_scene_vtol animation::play("v_lot_07_02_detcenter_vign_zipline_vtol_depart", struct::get("align_event_7_2_zipline"), undefined, undefined, undefined, undefined, undefined, undefined, undefined, 0);
   e_scene_vtol.angles = v_angles;
@@ -234,7 +234,7 @@ function function_613df5d9(var_9597a744) {
     n_index = (int((n_shoot_time - 2.4) / var_6356aeef)) + 1;
     n_index = math::clamp(n_index, 1, 13);
     var_e4b1b0d6 = (n_index < 10 ? "vtol_shooting_area0" : "vtol_shooting_area");
-    var_5003a2bd = getent(var_e4b1b0d6 + n_index, "targetname");
+    var_5003a2bd = getEnt(var_e4b1b0d6 + n_index, "targetname");
     a_ai = [];
     a_ai = getaiteamarray("axis");
     a_e_vtol_shooting_aoe_victims = array::filter(a_ai, 0, &filter_istouching, var_5003a2bd);
@@ -259,7 +259,7 @@ function function_613df5d9(var_9597a744) {
     var_a8364a58 = array::filter(level.players, 0, &filter_istouching, var_ade4e252);
     foreach(player in var_a8364a58) {
       earthquake(1, 0.1, player.origin, 32, player);
-      player playrumbleonentity("slide_loop");
+      player playRumbleOnEntity("slide_loop");
     }
     wait(0.1);
     n_shoot_time = n_shoot_time + 0.1;
@@ -296,7 +296,7 @@ function function_dbfa70cf(var_65346df) {
   var_46fcd4c = [];
   for(var_f852a368 = 2; var_65346df > 0 && var_f852a368 > 0; var_f852a368--) {
     var_84f20f7 = (var_65346df < 10 ? "vtol_shooting_area0" : "vtol_shooting_area");
-    var_e318ffa6 = getent(var_84f20f7 + var_65346df, "targetname");
+    var_e318ffa6 = getEnt(var_84f20f7 + var_65346df, "targetname");
     if(!isDefined(var_46fcd4c)) {
       var_46fcd4c = [];
     } else if(!isarray(var_46fcd4c)) {
@@ -391,7 +391,7 @@ function function_2143f8c4() {
 
 function vtol_hallway_done(str_objective, b_starting, b_direct, player) {
   level thread util::delay(1, undefined, &lotus_util::function_6fc3995f);
-  getent("pursuit_oob", "targetname") triggerenable(0);
+  getEnt("pursuit_oob", "targetname") triggerenable(0);
 }
 
 function mobile_shop_ride2_main(str_objective, b_starting) {
@@ -452,10 +452,10 @@ function function_29458b95(b_starting = 0) {
   if(isDefined(level.bzm_lotusdialogue11callback)) {
     level thread[[level.bzm_lotusdialogue11callback]]();
   }
-  e_playerclip = getent("mobile_ride_2_playerclip", "targetname");
-  e_playerclip moveto(e_playerclip.origin + vectorscale((0, 0, 1), 100), 0.05);
+  e_playerclip = getEnt("mobile_ride_2_playerclip", "targetname");
+  e_playerclip moveTo(e_playerclip.origin + vectorscale((0, 0, 1), 100), 0.05);
   level clientfield::set("vtol_hallway_destruction_cleanup", 1);
-  var_d26fd6e5 = getent("lotus_vtol_hallway_destruction01", "targetname");
+  var_d26fd6e5 = getEnt("lotus_vtol_hallway_destruction01", "targetname");
   var_d26fd6e5 delete();
   level.ai_hendricks ai::set_ignoreall(1);
   level thread scene::play("cin_lot_07_05_detcenter_vign_observation", level.ai_hendricks);
@@ -468,19 +468,19 @@ function function_29458b95(b_starting = 0) {
   sndent playSound("veh_mobile_shop_ride_start");
   sndent playLoopSound("veh_mobile_shop_ride_loop");
   foreach(player in level.activeplayers) {
-    player playrumbleonentity("cp_lotus_rumble_mobile_shop_ride_2");
+    player playRumbleOnEntity("cp_lotus_rumble_mobile_shop_ride_2");
   }
   level thread scene::play("cin_merch_interior_lower", "targetname");
   level waittill("hash_4e6f08ff");
   foreach(player in level.activeplayers) {
-    player playrumbleonentity("explosion_generic_no_broadcast");
+    player playRumbleOnEntity("explosion_generic_no_broadcast");
   }
   level notify("hash_a6da966f");
   sndent stoploopsound(0.3);
   sndent delete();
   wait(0.3);
   foreach(player in level.players) {
-    player playrumbleonentity("explosion_generic_no_broadcast");
+    player playRumbleOnEntity("explosion_generic_no_broadcast");
   }
   trigger::use("bridge_battle_more_enemies_here", "script_flag_set");
 }
@@ -521,7 +521,7 @@ function function_c92f487e() {
 function function_36957bfb(var_44f2aa45) {
   foreach(player in level.activeplayers) {
     player.var_d75e3361 = player.origin + var_44f2aa45;
-    player setorigin(player.var_d75e3361);
+    player setOrigin(player.var_d75e3361);
   }
   wait(0.15);
   foreach(player in level.activeplayers) {
@@ -535,23 +535,23 @@ function function_36957bfb(var_44f2aa45) {
 function function_7a2fdad9(var_8c7da3ec) {
   self endon("death");
   while(self.origin[2] < var_8c7da3ec) {
-    self setorigin(self.var_d75e3361);
+    self setOrigin(self.var_d75e3361);
     wait(0.05);
   }
 }
 
 function function_97787d8d(var_7f0b037 = "open") {
-  var_5b3fe023 = getent("mobile_door_left", "targetname");
-  var_d758a83d = getent("mobile_door_right", "targetname");
+  var_5b3fe023 = getEnt("mobile_door_left", "targetname");
+  var_d758a83d = getEnt("mobile_door_right", "targetname");
   var_50de9d38 = 100;
   if(isDefined(var_5b3fe023) && isDefined(var_d758a83d)) {
     if(var_7f0b037 === "open") {
-      var_5b3fe023 moveto(var_5b3fe023.origin + (var_50de9d38 * -1, 0, 0), 2, 0.1, 0.1);
-      var_d758a83d moveto(var_d758a83d.origin + (var_50de9d38, 0, 0), 2, 0.1, 0.1);
+      var_5b3fe023 moveTo(var_5b3fe023.origin + (var_50de9d38 * -1, 0, 0), 2, 0.1, 0.1);
+      var_d758a83d moveTo(var_d758a83d.origin + (var_50de9d38, 0, 0), 2, 0.1, 0.1);
       var_5b3fe023 playSound("evt_mobile_shop_doors_open");
     } else {
-      var_5b3fe023 moveto(var_5b3fe023.origin + (var_50de9d38, 0, 0), 1, 0.1, 0.1);
-      var_d758a83d moveto(var_d758a83d.origin + (var_50de9d38 * -1, 0, 0), 1, 0.1, 0.1);
+      var_5b3fe023 moveTo(var_5b3fe023.origin + (var_50de9d38, 0, 0), 1, 0.1, 0.1);
+      var_d758a83d moveTo(var_d758a83d.origin + (var_50de9d38 * -1, 0, 0), 1, 0.1, 0.1);
       var_5b3fe023 playSound("evt_mobile_shop_doors_close");
     }
   } else {
@@ -563,7 +563,7 @@ function function_9a0b8bc1() {
   foreach(player in level.players) {
     player clientfield::set_to_player("frost_post_fx", 0);
   }
-  e_hatch = getent("mobile_shop_hatchdoor", "targetname");
+  e_hatch = getEnt("mobile_shop_hatchdoor", "targetname");
   e_hatch playSound("wpn_rocket_explode_mobile_shop");
   self thread fx::play("mobile_shop_fall_explosion", e_hatch.origin, (0, 0, 0));
   wait(0.3);
@@ -617,7 +617,7 @@ function mobile_shop_ride2_done(str_objective, b_starting, b_direct, player) {
 }
 
 function remove_gates_for_spawning() {
-  mdl_gate = getent("hallway_gate_06", "targetname");
+  mdl_gate = getEnt("hallway_gate_06", "targetname");
   mdl_gate connectpaths();
   mdl_gate delete();
 }
@@ -637,7 +637,7 @@ function auto_delete() {
       b_can_see = 0;
       v_eye = player getEye();
       v_facing = anglesToForward(player getplayerangles());
-      v_to_ent = vectornormalize(self.origin - v_eye);
+      v_to_ent = vectorNormalize(self.origin - v_eye);
       n_dot = vectordot(v_facing, v_to_ent);
       if(n_dot > 0.67) {
         b_in_front = 1;
@@ -684,7 +684,7 @@ function bridge_battle_main(str_objective, b_starting) {
   level thread function_32049a32(b_starting);
   level thread function_44dd1b45();
   level thread function_94f75664();
-  sp_enemy = getent("dc4_enemy_sponge", "script_noteworthy");
+  sp_enemy = getEnt("dc4_enemy_sponge", "script_noteworthy");
   sp_enemy spawner::add_spawn_function(&dc4_enemy_sponge);
   level thread scene::play("bridge_battle_falling_shop1", "targetname");
   level flag::wait_till("bridge_battle_done");
@@ -693,7 +693,7 @@ function bridge_battle_main(str_objective, b_starting) {
 
 function function_94f75664() {
   level flag::wait_till("player_crossed_bridge");
-  var_9008f0c7 = getent("bridge_battle_across_gv", "targetname");
+  var_9008f0c7 = getEnt("bridge_battle_across_gv", "targetname");
   a_enemies = spawner::get_ai_group_ai("bridge_end_enemies");
   foreach(enemy in a_enemies) {
     enemy setgoal(var_9008f0c7);
@@ -728,19 +728,19 @@ function function_32049a32(b_starting) {
 
 function function_44dd1b45() {
   spawner::waittill_ai_group_amount_killed("bb_start_enemies", 2);
-  var_67ac5172 = getent("cult_center_door_left", "targetname");
-  var_43ecc01c = getent("cult_center_door_right", "targetname");
+  var_67ac5172 = getEnt("cult_center_door_left", "targetname");
+  var_43ecc01c = getEnt("cult_center_door_right", "targetname");
   var_46f41a3b = 100;
   var_7d6af5ea = 1;
-  var_67ac5172 moveto(var_67ac5172.origin + (0, var_46f41a3b, 0), var_7d6af5ea, 0.1, 0.1);
-  var_43ecc01c moveto(var_43ecc01c.origin + (0, var_46f41a3b * -1, 0), var_7d6af5ea, 0.1, 0.1);
+  var_67ac5172 moveTo(var_67ac5172.origin + (0, var_46f41a3b, 0), var_7d6af5ea, 0.1, 0.1);
+  var_43ecc01c moveTo(var_43ecc01c.origin + (0, var_46f41a3b * -1, 0), var_7d6af5ea, 0.1, 0.1);
   wait(var_7d6af5ea);
   spawn_manager::enable("bb_nolull_spawn_manager");
   iprintlnbold("");
   level flag::wait_till("player_crossed_bridge");
   spawn_manager::disable("bb_nolull_spawn_manager");
-  var_67ac5172 moveto(var_67ac5172.origin + (0, var_46f41a3b * -1, 0), var_7d6af5ea, 0.1, 0.1);
-  var_43ecc01c moveto(var_43ecc01c.origin + (0, var_46f41a3b, 0), var_7d6af5ea, 0.1, 0.1);
+  var_67ac5172 moveTo(var_67ac5172.origin + (0, var_46f41a3b * -1, 0), var_7d6af5ea, 0.1, 0.1);
+  var_43ecc01c moveTo(var_43ecc01c.origin + (0, var_46f41a3b, 0), var_7d6af5ea, 0.1, 0.1);
   iprintlnbold("");
 }
 
@@ -759,15 +759,15 @@ function function_2c257bff() {
 }
 
 function function_f423b892(str_position, var_7fadc70c, var_e7daaecc) {
-  var_a6ebc7b = getent(var_e7daaecc, "targetname");
-  var_f43c5188 = getent(var_e7daaecc + "_col", "targetname");
-  var_f43c5188 linkto(var_a6ebc7b);
+  var_a6ebc7b = getEnt(var_e7daaecc, "targetname");
+  var_f43c5188 = getEnt(var_e7daaecc + "_col", "targetname");
+  var_f43c5188 linkTo(var_a6ebc7b);
   struct_pos = struct::get(str_position, "targetname");
   var_b429251f = spawner::simple_spawn_single(var_7fadc70c);
   struct_pos scene::init("cin_gen_aie_push_cover_sideways_no_dynpath", array(var_b429251f, var_a6ebc7b));
   struct_pos scene::play("cin_gen_aie_push_cover_sideways_no_dynpath");
   var_f43c5188 unlink();
-  var_f43c5188 disconnectpaths(0, 0);
+  var_f43c5188 disconnectPaths(0, 0);
 }
 
 function function_10a2b6f2() {
@@ -796,7 +796,7 @@ function function_e90c24f8() {
 }
 
 function function_87c91b1b() {
-  volume = getent("bridge_battle_ge_gv", "targetname");
+  volume = getEnt("bridge_battle_ge_gv", "targetname");
   self setgoal(volume);
 }
 
@@ -823,10 +823,10 @@ function friendly_sacrifice() {
 function open_police_station(b_trigger_wait) {
   if(!(isDefined(level.var_38c1711f) && level.var_38c1711f)) {
     level.var_38c1711f = 1;
-    var_a7b48bf5 = getent("police_door_01", "targetname");
-    var_a7b48bf5 moveto(var_a7b48bf5.origin + (vectorscale((0, 0, -1), 144)), 3);
-    var_cdb7065e = getent("police_door_02", "targetname");
-    var_cdb7065e moveto(var_cdb7065e.origin + (vectorscale((0, 0, -1), 144)), 3);
+    var_a7b48bf5 = getEnt("police_door_01", "targetname");
+    var_a7b48bf5 moveTo(var_a7b48bf5.origin + (vectorscale((0, 0, -1), 144)), 3);
+    var_cdb7065e = getEnt("police_door_02", "targetname");
+    var_cdb7065e moveTo(var_cdb7065e.origin + (vectorscale((0, 0, -1), 144)), 3);
   }
   if(isDefined(b_trigger_wait) && b_trigger_wait) {
     trigger::wait_till("trig_kill_sniper");
@@ -842,7 +842,7 @@ function dc3_rollunder() {
   level thread closing_rollunder_door();
   ai_rollunder = spawner::simple_spawn_single("rollunder_smg");
   level scene::play("detention_center3_rollunder", "targetname", ai_rollunder);
-  volume = getent("bridge_battle_ge_gv", "targetname");
+  volume = getEnt("bridge_battle_ge_gv", "targetname");
   ai_rollunder setgoal(volume);
 }
 
@@ -850,15 +850,15 @@ function dc3_slide() {
   trigger::wait_till("trig_slide");
   ai_slide = spawner::simple_spawn_single("slide_smg");
   level scene::play("detention_center3_slide", "targetname", ai_slide);
-  volume = getent("bridge_battle_ge_gv", "targetname");
+  volume = getEnt("bridge_battle_ge_gv", "targetname");
   ai_slide setgoal(volume);
 }
 
 function closing_rollunder_door() {
-  mdl_door = getent("spawn_door7_5_1", "targetname");
-  mdl_door moveto(mdl_door.origin + (vectorscale((0, 0, -1), 136)), 6);
+  mdl_door = getEnt("spawn_door7_5_1", "targetname");
+  mdl_door moveTo(mdl_door.origin + (vectorscale((0, 0, -1), 136)), 6);
   mdl_door waittill("movedone");
-  mdl_door disconnectpaths();
+  mdl_door disconnectPaths();
 }
 
 function bridge_battle_done(str_objective, b_starting, b_direct, player) {
@@ -874,7 +874,7 @@ function up_to_detention_center_main(str_objective, b_starting) {
     load::function_73adcefc();
     level.ai_hendricks = util::get_hero("hendricks");
     skipto::teleport_ai(str_objective);
-    sp_enemy = getent("dc4_enemy_sponge", "script_noteworthy");
+    sp_enemy = getEnt("dc4_enemy_sponge", "script_noteworthy");
     sp_enemy spawner::add_spawn_function(&dc4_enemy_sponge);
     level thread open_police_station();
     level thread closing_rollunder_door();
@@ -932,7 +932,7 @@ function function_2ff2c34() {
 function function_3604a049() {
   v_start = struct::get("s_dc_phalanx_start").origin;
   v_end = struct::get("s_dc_phalanx_end").origin;
-  var_f835ddae = getent("sp_dc_phalanx", "targetname");
+  var_f835ddae = getEnt("sp_dc_phalanx", "targetname");
   var_de3c864 = new phalanx();
   [[var_de3c864]] - > initialize("phalanx_reverse_wedge", v_start, v_end, 2, 5, var_f835ddae, var_f835ddae);
   level flag::wait_till("dc4_dead_siegebots");
@@ -1080,7 +1080,7 @@ function function_e7a8c6b() {
   level thread scene::play("cin_lot_07_05_detcenter_vign_wallrun_hendricks");
   level.ai_hendricks waittill("goal");
   util::delay(randomfloat(2), undefined, &lotus_util::function_fe64b86b, "falling_nrc", struct::get("wallrun_corpse3"), 0);
-  t_up_to_detention = getent("trig_dc4_hendricks", "targetname");
+  t_up_to_detention = getEnt("trig_dc4_hendricks", "targetname");
   if(isDefined(t_up_to_detention)) {
     t_up_to_detention trigger::use();
   }
@@ -1169,31 +1169,31 @@ function dc4_fleeing_enemy() {
 }
 
 function function_dcd3f360() {
-  mdl_door = getent("spawn_door7_5_2", "targetname");
-  mdl_door moveto(mdl_door.origin - (0, 0, 144), 0.1);
+  mdl_door = getEnt("spawn_door7_5_2", "targetname");
+  mdl_door moveTo(mdl_door.origin - (0, 0, 144), 0.1);
   trigger::wait_till("trig_dc4_door");
   level exploder::exploder("fx_interior_sentry_reveal");
-  mdl_door = getent("spawn_door7_5_2", "targetname");
-  mdl_door moveto(mdl_door.origin + (0, 0, 12), 1);
+  mdl_door = getEnt("spawn_door7_5_2", "targetname");
+  mdl_door moveTo(mdl_door.origin + (0, 0, 12), 1);
   mdl_door waittill("movedone");
   mdl_door playSound("evt_siegebot_door_buzz");
   wait(1.25);
   mdl_door playSound("evt_siegebot_door");
-  mdl_door moveto(mdl_door.origin + (0, 0, 144 - 12), 3);
+  mdl_door moveTo(mdl_door.origin + (0, 0, 144 - 12), 3);
   mdl_door waittill("movedone");
   level flag::set("hospital_door_up");
 }
 
 function dc4_upper_gate() {
-  mdl_door = getent("hosp_hall_gate_10", "targetname");
+  mdl_door = getEnt("hosp_hall_gate_10", "targetname");
   if(isDefined(mdl_door)) {
-    mdl_door moveto(mdl_door.origin + vectorscale((0, 0, 1), 145), 1);
+    mdl_door moveTo(mdl_door.origin + vectorscale((0, 0, 1), 145), 1);
   }
   var_50de9d38 = 100;
-  mdl_door_left = getent("hosp_hall_gate_10_L", "targetname");
-  mdl_door_left moveto(mdl_door_left.origin + (0, var_50de9d38 * -1, 0), 1);
-  mdl_door_right = getent("hosp_hall_gate_10_R", "targetname");
-  mdl_door_right moveto(mdl_door_right.origin + (0, var_50de9d38, 0), 1);
+  mdl_door_left = getEnt("hosp_hall_gate_10_L", "targetname");
+  mdl_door_left moveTo(mdl_door_left.origin + (0, var_50de9d38 * -1, 0), 1);
+  mdl_door_right = getEnt("hosp_hall_gate_10_R", "targetname");
+  mdl_door_right moveTo(mdl_door_right.origin + (0, var_50de9d38, 0), 1);
 }
 
 function detention_center_main(str_objective, b_starting) {
@@ -1206,17 +1206,17 @@ function detention_center_main(str_objective, b_starting) {
   }
   lotus_util::function_3b6587d6(0, "lotus2_standdown_igc_umbra_gate");
   namespace_f4ff722a::function_a2c4c634();
-  var_d6cea0d7 = getent("trig_kick_door", "targetname");
+  var_d6cea0d7 = getEnt("trig_kick_door", "targetname");
   if(isDefined(var_d6cea0d7)) {
     var_d6cea0d7 triggerenable(0);
   }
   level thread function_3699620f();
   level thread function_896c40b9();
   level thread function_ab3d9328();
-  mdl_door_left = getent("det_door_prometheus_01_L", "targetname");
-  mdl_door_right = getent("det_door_prometheus_01_R", "targetname");
-  mdl_door_left moveto(mdl_door_left.origin + vectorscale((0, 1, 0), 54), 1, 0.25, 0.25);
-  mdl_door_right moveto(mdl_door_right.origin + (vectorscale((0, -1, 0), 54)), 1, 0.25, 0.25);
+  mdl_door_left = getEnt("det_door_prometheus_01_L", "targetname");
+  mdl_door_right = getEnt("det_door_prometheus_01_R", "targetname");
+  mdl_door_left moveTo(mdl_door_left.origin + vectorscale((0, 1, 0), 54), 1, 0.25, 0.25);
+  mdl_door_right moveTo(mdl_door_right.origin + (vectorscale((0, -1, 0), 54)), 1, 0.25, 0.25);
   battlechatter::function_d9f49fba(0);
   level thread function_14273be5();
   level thread detention_center_fallback("dc_fallback_0");
@@ -1229,11 +1229,11 @@ function detention_center_main(str_objective, b_starting) {
   wait(1);
   level thread function_19cafdb6();
   level notify("raining_men");
-  var_c77d7d8e = getent("trig_go_hendricks_after_kick", "targetname");
+  var_c77d7d8e = getEnt("trig_go_hendricks_after_kick", "targetname");
   if(isDefined(var_c77d7d8e)) {
     var_c77d7d8e trigger::use();
   }
-  e_door_clip = getent("detention_center_door_clip", "targetname");
+  e_door_clip = getEnt("detention_center_door_clip", "targetname");
   e_door_clip notsolid();
   level scene::init("cin_lot_08_01_standdown_sh010");
   trigger::wait_till("trig_all_players_at_stand_down", "targetname", level.ai_hendricks);
@@ -1241,8 +1241,8 @@ function detention_center_main(str_objective, b_starting) {
     player clientfield::set_to_player("siegebot_fans", 0);
   }
   e_door_clip solid();
-  mdl_door_left moveto(mdl_door_left.origin + (vectorscale((0, -1, 0), 54)), 1, 0.25, 0.25);
-  mdl_door_right moveto(mdl_door_right.origin + vectorscale((0, 1, 0), 54), 1, 0.25, 0.25);
+  mdl_door_left moveTo(mdl_door_left.origin + (vectorscale((0, -1, 0), 54)), 1, 0.25, 0.25);
+  mdl_door_right moveTo(mdl_door_right.origin + vectorscale((0, 1, 0), 54), 1, 0.25, 0.25);
   mdl_door_right playSound("evt_standdown_door_close");
   skipto::objective_completed("detention_center");
   level notify("detention_center_done");
@@ -1294,7 +1294,7 @@ function function_ab3d9328() {
 }
 
 function function_fefb4f44() {
-  var_87248a54 = getent("trig_end_enemies", "targetname");
+  var_87248a54 = getEnt("trig_end_enemies", "targetname");
   var_87248a54 endon("trigger");
   spawner::waittill_ai_group_cleared("dc_wave_1");
   trigger::use("trig_end_enemies");
@@ -1308,9 +1308,9 @@ function detention_center_fallback(str_trigger) {
   if(sessionmodeiscampaignzombiesgame()) {
     return;
   }
-  t_fallback = getent(str_trigger, "targetname");
+  t_fallback = getEnt(str_trigger, "targetname");
   t_fallback waittill("trigger");
-  e_goal_volume = getent(t_fallback.target, "targetname");
+  e_goal_volume = getEnt(t_fallback.target, "targetname");
   a_enemies = getaiarray("dc_bottom", "script_noteworthy");
   foreach(ai_enemy in a_enemies) {
     ai_enemy setgoal(e_goal_volume, 1);
@@ -1320,17 +1320,17 @@ function detention_center_fallback(str_trigger) {
 function detention_center_force_stairs() {
   trigger::wait_till("trig_dc_pamws_enemies");
   wait(2);
-  mdl_clip = getent("dc_stair_2_monster_clip", "targetname");
+  mdl_clip = getEnt("dc_stair_2_monster_clip", "targetname");
   mdl_clip connectpaths();
   mdl_clip delete();
 }
 
 function detention_center_pamws() {
   trigger::wait_till("trig_dc_pamws");
-  mdl_door_left = getent("detention_security_door_01_L", "targetname");
-  mdl_door_right = getent("detention_security_door_01_R", "targetname");
-  mdl_door_left moveto(mdl_door_left.origin + (vectorscale((-1, 0, 0), 100)), 3);
-  mdl_door_right moveto(mdl_door_right.origin + vectorscale((1, 0, 0), 100), 3);
+  mdl_door_left = getEnt("detention_security_door_01_L", "targetname");
+  mdl_door_right = getEnt("detention_security_door_01_R", "targetname");
+  mdl_door_left moveTo(mdl_door_left.origin + (vectorscale((-1, 0, 0), 100)), 3);
+  mdl_door_right moveTo(mdl_door_right.origin + vectorscale((1, 0, 0), 100), 3);
 }
 
 function detention_center_phalanx() {
@@ -1341,8 +1341,8 @@ function detention_center_phalanx() {
   if(level.players.size > 2) {
     n_phalanx = 5;
   }
-  var_7947347f = getent("phalanx_spawner_01", "targetname", 0);
-  var_73fc544 = getent("phalanx_spawner_02", "targetname", 0);
+  var_7947347f = getEnt("phalanx_spawner_01", "targetname", 0);
+  var_73fc544 = getEnt("phalanx_spawner_02", "targetname", 0);
   phalanx_left = new robotphalanx();
   [[phalanx_left]] - > initialize("phanalx_wedge", v_start, v_end, 1, n_phalanx, var_7947347f, var_73fc544);
 }
@@ -1352,8 +1352,8 @@ function detention_center_control_panel_guy() {
   self.goalradius = 16;
   self waittill("goal");
   wait(1);
-  e_detention_center_robot_door = getent("detention_security_door_01", "targetname");
-  e_detention_center_robot_door moveto(e_detention_center_robot_door getorigin() - vectorscale((0, 0, 1), 128), 1);
+  e_detention_center_robot_door = getEnt("detention_security_door_01", "targetname");
+  e_detention_center_robot_door moveTo(e_detention_center_robot_door getorigin() - vectorscale((0, 0, 1), 128), 1);
   e_detention_center_robot_door connectpaths();
   spawn_manager::enable("sm_detention_center_control_panel_cobra");
 }

@@ -93,7 +93,7 @@ begin_attack_heli_behavior(eHeli, heli_points) {
 
   if((level.gameskill == 0) || (level.gameskill == 1)) {
     org = spawn("script_origin", eHeli.origin + (0, 0, -20));
-    org LinkTo(eHeli);
+    org linkTo(eHeli);
     eHeli thread delete_on_death(org);
     strength = undefined;
     if(level.gameskill == 0) {
@@ -196,7 +196,7 @@ heli_default_target_setup() {
   ent.forward = forward_offset;
   ent.up = up_offset;
   ent translate_local();
-  self.targetdefault LinkTo(self);
+  self.targetdefault linkTo(self);
   self.targetdefault thread heli_default_target_cleanup(self);
 }
 
@@ -930,7 +930,7 @@ turret_minigun_target_track(eTarget, eHeli) {
 
   if((!isPlayer(eTarget)) && (IsAI(eTarget)) && (level.attackHeliKillsAI == false)) {
     eFake_AI_Target = spawn("script_origin", eTarget.origin + (0, 0, 100));
-    eFake_AI_Target LinkTo(eTarget);
+    eFake_AI_Target linkTo(eTarget);
     self thread minigun_AI_target_cleanup(eFake_AI_Target);
     eTarget = eFake_AI_Target;
   }
@@ -1224,13 +1224,13 @@ heli_spotlight_think() {
   ent.entity = self.left_ent;
   ent.right = 250;
   ent translate_local();
-  self.left_ent LinkTo(self);
+  self.left_ent linkTo(self);
 
   ent2 = spawnStruct();
   ent2.entity = self.right_ent;
   ent2.right = -250;
   ent2 translate_local();
-  self.right_ent LinkTo(self);
+  self.right_ent linkTo(self);
 
   aim_ents = [];
   aim_ents[0] = original_ent;

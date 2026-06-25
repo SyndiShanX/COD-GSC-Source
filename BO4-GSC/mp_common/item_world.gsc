@@ -121,11 +121,11 @@ function_e0b64358(player, item) {
 function_f3b6e182(player) {
   assert(isPlayer(player));
   usetrigger = spawn("trigger_radius_use", (0, 0, -10000), 0, 128, 72);
-  usetrigger triggerignoreteam();
+  usetrigger triggerIgnoreTeam();
   usetrigger setinvisibletoall();
   usetrigger setvisibletoplayer(self);
   usetrigger setteamfortrigger(#"none");
-  usetrigger setcursorhint("HINT_NOICON");
+  usetrigger setCursorHint("HINT_NOICON");
   usetrigger triggerenable(0);
   usetrigger function_89fca53b(0);
   usetrigger function_49462027(1, 1 | 16 | 8388608 | 65536 | 4194304);
@@ -145,19 +145,19 @@ function_b516210b(var_889058cc, origin, activator) {
 
   if(isDefined(level.var_9cddbf4e[var_889058cc])) {
     mapping = level.var_9cddbf4e[var_889058cc];
-    open_sound = playsoundatposition(mapping.open_sound, origin + (0, 0, 50));
+    open_sound = playSoundAtPosition(mapping.open_sound, origin + (0, 0, 50));
 
     if(isDefined(open_sound)) {
       open_sound hide();
     }
 
-    var_b9492c6 = playsoundatposition(mapping.var_b9492c6, origin + (0, 0, 50));
+    var_b9492c6 = playSoundAtPosition(mapping.var_b9492c6, origin + (0, 0, 50));
 
     if(isDefined(var_b9492c6)) {
       var_b9492c6 hide();
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(var_cde95668 && !player hasperk(#"specialty_loudenemies")) {
         if(isDefined(var_b9492c6)) {
           var_b9492c6 showtoplayer(player);
@@ -361,7 +361,7 @@ function_e1965ae1() {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isPlayer(player)) {
       player weaponobjects::function_ac7c2bf9();
     }
@@ -385,17 +385,17 @@ function_e1965ae1() {
 
   if((isDefined(getgametypesetting(#"hash_7d8c969e384dd1c9")) ? getgametypesetting(#"hash_7d8c969e384dd1c9") : 0) || (isDefined(getgametypesetting(#"wzheavymetalheroes")) ? getgametypesetting(#"wzheavymetalheroes") : 0)) {
     if(isDefined(level.var_5c14d2e6)) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread[[level.var_5c14d2e6]]();
       }
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread item_inventory::function_461de298();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_76eb9bd7();
   }
 }
@@ -844,7 +844,7 @@ function_9aefb438(params) {
       members = [];
 
       foreach(team in teams) {
-        foreach(member in getplayers(team)) {
+        foreach(member in getPlayers(team)) {
           member function_b00db06(msgtype, networkid, self getentitynumber());
         }
       }
@@ -852,7 +852,7 @@ function_9aefb438(params) {
       return;
     }
 
-    members = getplayers(self.team);
+    members = getPlayers(self.team);
 
     foreach(member in members) {
       member function_b00db06(msgtype, networkid, self getentitynumber());
@@ -888,7 +888,7 @@ function_df1098a() {
   level endon(#"game_ended");
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     for(index = 0; index < players.size; index++) {
       player = players[index];
@@ -945,7 +945,7 @@ function_ad7ad6ce(trigger_struct) {
   }
 
   if(var_91d3170d == 1 || var_91d3170d == 0 && usetrigger.itemstruct.hidetime === -1) {
-    usetrigger sethintstring(#"");
+    usetrigger setHintString(#"");
     activator clientfield::set_player_uimodel("hudItems.multiItemPickup.status", 2);
     activator thread function_eb900758(item_world_util::function_31f5aa51(usetrigger.itemstruct));
     function_a54d07e6(usetrigger.itemstruct, activator);
@@ -953,7 +953,7 @@ function_ad7ad6ce(trigger_struct) {
   }
 
   if(var_91d3170d == 2) {
-    usetrigger sethintstring(#"");
+    usetrigger setHintString(#"");
     return;
   }
 
@@ -1210,9 +1210,9 @@ function_a54d07e6(item, activator) {
         stash callback::callback(#"on_stash_open", params);
 
         if(isDefined(stash.var_a76e4941) && stash.var_a76e4941) {
-          stash animscripted("death_stash_open", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_used_anim", "normal", "root", 1, 0);
+          stash animScripted("death_stash_open", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_used_anim", "normal", "root", 1, 0);
         } else if(isDefined(stash.var_a64ed253) && stash.var_a64ed253) {
-          stash animscripted("supply_drop_open", stash.origin, stash.angles, "p8_fxanim_wz_supply_stash_04_open_anim", "normal", "root", 1, 0);
+          stash animScripted("supply_drop_open", stash.origin, stash.angles, "p8_fxanim_wz_supply_stash_04_open_anim", "normal", "root", 1, 0);
         }
 
         stash.var_bad13452 = 1;
@@ -1237,9 +1237,9 @@ function_a54d07e6(item, activator) {
         }
 
         if(isDefined(stash.var_a76e4941) && stash.var_a76e4941) {
-          stash animscripted("death_stash_empty", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_empty_anim", "normal", "root", 1, 0);
+          stash animScripted("death_stash_empty", stash.origin, stash.angles, "p8_fxanim_wz_death_stash_empty_anim", "normal", "root", 1, 0);
         } else if(isDefined(stash.var_a64ed253) && stash.var_a64ed253) {
-          stash animscripted("supply_drop_empty", stash.origin, stash.angles, "p8_fxanim_wz_supply_stash_04_used_anim", "normal", "root", 1, 0);
+          stash animScripted("supply_drop_empty", stash.origin, stash.angles, "p8_fxanim_wz_supply_stash_04_used_anim", "normal", "root", 1, 0);
         }
 
         stash.var_bad13452 = 2;
@@ -1267,7 +1267,7 @@ function_7c84312d(origin, angles) {
   }
 
   var_512ddf16 = self clientfield::get_player_uimodel("hudItems.multiItemPickup.status") == 2;
-  forward = vectornormalize(anglesToForward(angles));
+  forward = vectorNormalize(anglesToForward(angles));
   maxdist = util::function_16fb0a3b();
 
   if(var_512ddf16) {
@@ -1288,7 +1288,7 @@ function_7c84312d(origin, angles) {
         continue;
       }
 
-      var_1777205e = vectordot(var_75f6d739, vectornormalize((toitem[0], toitem[1], 0)));
+      var_1777205e = vectordot(var_75f6d739, vectorNormalize((toitem[0], toitem[1], 0)));
 
       if(var_1777205e >= 0.5 && distancesquared(itemdef.origin, self.var_d7abc784) <= 12 * 12) {
         if(item_world_util::function_2eb2c17c(origin, itemdef)) {
@@ -1342,8 +1342,8 @@ function_7c84312d(origin, angles) {
     }
 
     if(stashitem) {
-      usetrigger setcursorhint("HINT_NOICON");
-      usetrigger sethintstring(#"");
+      usetrigger setCursorHint("HINT_NOICON");
+      usetrigger setHintString(#"");
       usetrigger function_89fca53b(1);
       usetrigger function_49462027(0);
       stash = item_world_util::function_31f5aa51(var_9b882d22);
@@ -1371,7 +1371,7 @@ function_7c84312d(origin, angles) {
 
       if(isDefined(itementry.weapon) && itementry.weapon != level.weaponnone) {
         if(itementry.itemtype != #"ammo") {
-          usetrigger setcursorhint("HINT_WEAPON_3D", item_inventory_util::function_2b83d3ff(var_9b882d22));
+          usetrigger setCursorHint("HINT_WEAPON_3D", item_inventory_util::function_2b83d3ff(var_9b882d22));
           var_caafaa25 = #"";
 
           if(isDefined(itementry.weapon)) {
@@ -1380,16 +1380,16 @@ function_7c84312d(origin, angles) {
             var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"weapon/pickupnewweapon";
           }
 
-          usetrigger sethintstring(var_caafaa25);
+          usetrigger setHintString(var_caafaa25);
         } else {
-          usetrigger setcursorhint("HINT_3D");
+          usetrigger setCursorHint("HINT_3D");
           var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
-          usetrigger sethintstring(var_caafaa25);
+          usetrigger setHintString(var_caafaa25);
         }
       } else {
-        usetrigger setcursorhint("HINT_3D");
+        usetrigger setCursorHint("HINT_3D");
         var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : #"";
-        usetrigger sethintstring(var_caafaa25);
+        usetrigger setHintString(var_caafaa25);
       }
     }
 
@@ -1947,7 +1947,7 @@ function_160294c7(supplystash) {
 }
 
 function_eb0c9b9c() {
-  players = getplayers();
+  players = getPlayers();
   var_7bba6210 = 1;
 
   while(var_7bba6210) {
@@ -1968,7 +1968,7 @@ reset_item_world() {
   level.var_ab396c31 = 1;
   util::wait_network_frame(1);
   assert(level.var_703d32de == 0);
-  players = getplayers();
+  players = getPlayers();
 
   for(index = 0; index < players.size; index++) {
     player = players[index];

@@ -17,7 +17,7 @@ _id_D87B(var_0) {
   }
 
   var_1 playLoopSound("veh_apache_killstreak_amb_lr");
-  var_1 linkto(self, "tag_origin", self._id_B72B[self._id_B7C6.size], (0, 90, 0));
+  var_1 linkTo(self, "tag_origin", self._id_B72B[self._id_B7C6.size], (0, 90, 0));
   var_0 setstance("stand");
   var_0 setCanDamage(0);
   var_0 _meth_8063();
@@ -42,7 +42,7 @@ _id_AC5E(var_0) {
   var_3 = anglesToForward(var_2) * var_1 * -1;
   var_0._id_2ACC = var_3 + (150, 150, 0);
   self.angles = var_0.angles;
-  self playerlinkto(var_0, "tag_origin");
+  self playerlinkTo(var_0, "tag_origin");
   self playerhide();
   scripts\mp\utility\player::_id_0DC2("", 0);
 
@@ -52,7 +52,7 @@ _id_AC5E(var_0) {
 
   var_4 = spawn("script_model", var_0.origin);
   var_4 setModel("tag_player");
-  var_4 linkto(var_0, "tag_origin", (0, 0, 50), (0, 0, 0));
+  var_4 linkTo(var_0, "tag_origin", (0, 0, 50), (0, 0, 0));
   self._id_2A82 = var_4;
   self _meth_8697("camera_custom_orbit_2");
 }
@@ -91,9 +91,9 @@ _id_8CA2(var_0, var_1) {
   var_10 = spawn("script_model", self.origin);
   var_10.angles = self.angles;
   var_10 setModel("tag_origin");
-  self playerlinkto(var_10);
-  var_10 moveto(var_7 + (0, 0, 24), var_1, 0, 1.0);
-  self playerlinkto(var_10);
+  self playerlinkTo(var_10);
+  var_10 moveTo(var_7 + (0, 0, 24), var_1, 0, 1.0);
+  self playerlinkTo(var_10);
   var_11 = spawn("script_model", self.origin + (0, 0, 300));
   var_11 setModel("ctl_parachute_player");
   var_11 notsolid();
@@ -272,12 +272,12 @@ _id_5772() {
   _id_8CE1();
   self notify("begin_exit");
   self._id_916C = 1;
-  var_0 = getent("airstrikeheight", "targetname");
+  var_0 = getEnt("airstrikeheight", "targetname");
   var_1 = var_0.origin[2];
   var_2 = (level._id_2A73._id_2A78[0] + level._id_2A73._id_2A78[1]) * 0.5;
   var_3 = self.origin - var_2;
   var_3 = (var_3[0], var_3[1], 0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = self.origin + var_4 * 10000 + (0, 0, 1) * var_1;
   var_6 = 150;
   var_7 = 50;

@@ -366,7 +366,7 @@ on_begin(var_e097dc07, var_f5300808) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(var_e097dc07 === #"spear_only") {
       player allowmelee(0);
     }
@@ -409,7 +409,7 @@ on_begin(var_e097dc07, var_f5300808) {
       function_da7940a3(n_obj_id, 1);
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread monitor_objective(self);
     }
   }
@@ -433,7 +433,7 @@ on_end(round_reset) {
     callback::function_824d206(&function_10c80e10);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     foreach(weapon in player getweaponslist(1)) {
       player unlockweapon(weapon);
 
@@ -458,7 +458,7 @@ on_end(round_reset) {
   }
 
   if(round_reset && self.var_e097dc07 == #"equipment") {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player function_f66032dd();
     }
   }
@@ -549,7 +549,7 @@ disable_offhand_weapons() {
 
 function_e20ebcfd() {
   if(self.var_e097dc07 != #"equipment") {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread disable_offhand_weapons();
 
       if(isarray(player.mini_turrets)) {

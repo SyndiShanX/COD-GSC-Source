@@ -474,7 +474,7 @@ movecovertocover() {
   if(lengthsquared(movedir) < 1) {
     return;
   }
-  movedir = vectornormalize(movedir);
+  movedir = vectorNormalize(movedir);
   forward = anglesToForward(node.angles);
   shuffleleft = forward[0] * movedir[1] - forward[1] * movedir[0] > 0;
 
@@ -605,7 +605,7 @@ movedoorsidetoside(shuffleleft, startnode, endnode) {
   self animscripts\shared::donotetracks("sideToSide", ::handlesidetosidenotetracks);
   slidestarttime = self getanimtime(sidetosideanim);
   slidedir = endnode.origin - startnode.origin;
-  slidedir = vectornormalize((slidedir[0], slidedir[1], 0));
+  slidedir = vectorNormalize((slidedir[0], slidedir[1], 0));
   animdelta = getmovedelta(sidetosideanim, slidestarttime, 1);
   remainingvec = endnode.origin - self.origin;
   remainingvec = (remainingvec[0], remainingvec[1], 0);

@@ -475,7 +475,7 @@ showLastEnemySightPos(string) {
   }
 }
 tryTurret(targetname) {
-  turret = getent(targetname, "targetname");
+  turret = getEnt(targetname, "targetname");
   if(!isDefined(turret)) {
     return false;
   }

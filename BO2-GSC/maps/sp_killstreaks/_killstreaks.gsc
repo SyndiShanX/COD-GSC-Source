@@ -46,7 +46,7 @@ init() {
   maps\sp_killstreaks\_remotemissile::init();
   level.overrideactorkilled = ::callback_killstreakactorkilled;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread onplayerspawned();
   }
 

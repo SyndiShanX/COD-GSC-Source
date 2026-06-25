@@ -95,7 +95,7 @@ function findcurposonroute(curpos, route) {
     }
 
     var_bb8e7f0d = (starttoend[1], -1 * starttoend[0], 0);
-    var_bb8e7f0d = vectornormalize(var_bb8e7f0d);
+    var_bb8e7f0d = vectorNormalize(var_bb8e7f0d);
     var_c79274d2 = abs(vectordot(var_bb8e7f0d, var_4fbaae92));
 
     if(bestscore <= 0 || var_c79274d2 < bestscore) {
@@ -544,7 +544,7 @@ function huntcomputeaiindependentregionscores(group, group_data) {
     region.shared_data.player_in_region = 0;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!player flag::exists("stealth_enabled") || !player flag::get("stealth_enabled")) {
       continue;
     }

@@ -69,7 +69,7 @@ func_B711(var_0, var_1, var_2) {
   }
 
   var_3.var_1A4A = scripts\engine\utility::spawn_tag_origin(var_3.origin, var_3.angles);
-  var_3.var_1A4A linkto(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_3.var_1A4A linkTo(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
   microturret_addtoarrays(var_3, self);
   var_3 thread func_B71E();
   var_3 thread func_B71C();
@@ -270,7 +270,7 @@ func_B717() {
       }
 
       var_11 = var_10.origin - self gettagorigin("tag_dummy");
-      var_12 = vectornormalize(var_11);
+      var_12 = vectorNormalize(var_11);
       var_13 = vectordot(var_11, var_12);
       var_14 = scripts\engine\utility::anglebetweenvectorsunit(var_0, var_12);
       var_15 = 1 - var_13 / 800;
@@ -566,7 +566,7 @@ func_B6F3(var_0) {
   var_2 = spawn("script_model", var_0.origin + anglestoup(var_0.angles) * 30);
   var_2 setModel("tag_origin");
   var_2 setscriptmoverkillcam("explosive");
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_2 thread func_B6F0(var_0);
   return var_2;
 }
@@ -629,13 +629,13 @@ func_B70D(var_0, var_1) {
 
   self.var_1A4A.var_23EA = var_0;
   self.var_1A4A.var_23EB = var_1;
-  self.var_1A4A linkto(var_0, var_1, (0, 0, 0), (0, 0, 0));
+  self.var_1A4A linkTo(var_0, var_1, (0, 0, 0), (0, 0, 0));
   self settargetentity(self.var_1A4A);
 }
 
 func_B6F1() {
   if(isDefined(self.var_1A4A)) {
-    self.var_1A4A linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    self.var_1A4A linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     self.var_1A4A.var_23EA = undefined;
     self.var_1A4A.var_23EB = undefined;
   }

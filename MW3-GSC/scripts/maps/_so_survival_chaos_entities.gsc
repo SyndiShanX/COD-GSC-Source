@@ -104,15 +104,15 @@ chaos_entities_place() {
       var_7 = var_4 + (0, 6, 0);
       var_3.weapon_models[0] = spawn("script_model", var_3.origin);
       var_3.weapon_models[0] setModel(var_2);
-      var_3.weapon_models[0] linkto(var_3, "tag_origin", var_6, var_5 + (15, 0, 0));
+      var_3.weapon_models[0] linkTo(var_3, "tag_origin", var_6, var_5 + (15, 0, 0));
       var_3.weapon_models[1] = spawn("script_model", var_3.origin);
       var_3.weapon_models[1] setModel(var_2);
-      var_3.weapon_models[1] linkto(var_3, "tag_origin", var_7, var_5 + (15, 0, 0));
+      var_3.weapon_models[1] linkTo(var_3, "tag_origin", var_7, var_5 + (15, 0, 0));
     } else {
       var_3.akimbo = 0;
       var_3.weapon_models[0] = spawn("script_model", var_3.origin);
       var_3.weapon_models[0] setModel(var_2);
-      var_3.weapon_models[0] linkto(var_3, "tag_origin", var_4, var_5);
+      var_3.weapon_models[0] linkTo(var_3, "tag_origin", var_4, var_5);
     }
 
     var_3 thread chaos_entity_rotate();
@@ -314,7 +314,7 @@ chaos_entity_rotate() {
   self endon("death");
 
   for(;;) {
-    self rotateyaw(360, 3, 0, 0);
+    self rotateYaw(360, 3, 0, 0);
     wait 3.0;
   }
 }

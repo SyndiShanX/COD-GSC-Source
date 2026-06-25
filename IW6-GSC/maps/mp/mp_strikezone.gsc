@@ -63,8 +63,8 @@ main() {
     setDvar("sm_sunShadowScale", "0.7");
   }
 
-  level.pre_org = getstruct("world_origin_pre", "targetname");
-  level.post_org = getstruct("world_origin_post", "targetname");
+  level.pre_org = getStruct("world_origin_pre", "targetname");
+  level.post_org = getStruct("world_origin_post", "targetname");
   level.mid_z = 0;
   if(isDefined(level.post_org) && isDefined(level.pre_org)) {
     level.mid_z = (level.pre_org.origin[2] + level.post_org.origin[2]) / 2;
@@ -104,28 +104,28 @@ vision_set_stage_test() {
 }
 
 initExtraCollision() {
-  collision1 = GetEnt("clip128x128x128", "targetname");
+  collision1 = getEnt("clip128x128x128", "targetname");
   collision1Ent = spawn("script_model", (1488, 448, 34992));
   collision1Ent.angles = (0, 0, 0);
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
 
-  collision2 = GetEnt("clip256x256x8", "targetname");
+  collision2 = getEnt("clip256x256x8", "targetname");
   collision2Ent = spawn("script_model", (-1589.73, 167.941, 34846));
   collision2Ent.angles = (7.64427, 359.534, -40.4325);
   collision2Ent CloneBrushmodelToScriptmodel(collision2);
 
   if(is_gen4()) {
-    collision3 = GetEnt("player256x256x128", "targetname");
+    collision3 = getEnt("player256x256x128", "targetname");
     collision3Ent = spawn("script_model", (1091.96, -1218, 35088));
     collision3Ent.angles = (0, 60, -90);
     collision3Ent CloneBrushmodelToScriptmodel(collision3);
 
-    collision4 = GetEnt("player256x256x128", "targetname");
+    collision4 = getEnt("player256x256x128", "targetname");
     collision4Ent = spawn("script_model", (1314.31, -727.89, 34967.3));
     collision4Ent.angles = (345.369, 351.123, 18.9223);
     collision4Ent CloneBrushmodelToScriptmodel(collision4);
 
-    collision5 = GetEnt("player256x256x128", "targetname");
+    collision5 = getEnt("player256x256x128", "targetname");
     collision5Ent = spawn("script_model", (955.98, 485.142, 34875.7));
     collision5Ent.angles = (336.26, 306.702, -30.7675);
     collision5Ent CloneBrushmodelToScriptmodel(collision5);
@@ -133,7 +133,7 @@ initExtraCollision() {
 }
 
 flip_sky() {
-  sky = GetEnt("after_sky", "targetname");
+  sky = getEnt("after_sky", "targetname");
   if(isDefined(sky)) {
     sky.angles = (180, 0, 0);
   }
@@ -433,7 +433,7 @@ nuke_sounds() {
   sound_mover setModel("tag_origin");
   sound_mover delayCall(0.05, ::PlaySoundOnMovingEnt, "kem_incoming");
 
-  sound_mover MoveTo(end_point, move_time);
+  sound_mover moveTo(end_point, move_time);
   maps\mp\gametypes\_hostmigration::waitLongDurationWithHostMigrationPause(move_time);
 
   if(!isDefined(level.nuke_soundObject)) {
@@ -458,11 +458,11 @@ nuke_ground_tilt() {
     player PlayerSetGroundReferenceEnt(ground_ent);
   }
 
-  ground_ent Rotateto((kick_angle, 0, 0), kick_time, 0, kick_time);
+  ground_ent rotateTo((kick_angle, 0, 0), kick_time, 0, kick_time);
 
   wait kick_time;
 
-  ground_ent Rotateto((0, 0, 0), unkick_time, 0, unkick_time);
+  ground_ent rotateTo((0, 0, 0), unkick_time, 0, unkick_time);
 
   wait unkick_time;
 
@@ -488,7 +488,7 @@ rumble_all_players(rumble, loop) {
     if(loop) {
       player PlayRumbleLoopOnEntity(rumble);
     } else {
-      player PlayRumbleOnEntity(rumble);
+      player playRumbleOnEntity(rumble);
     }
   }
 
@@ -526,7 +526,7 @@ generic_swing_ents() {
     pivot.angles = swing.angles;
     pivot setModel("generic_prop_raven");
 
-    swing linkto(pivot, "j_prop_1");
+    swing linkTo(pivot, "j_prop_1");
 
     anim_name = "small";
     if(isDefined(swing.script_noteworthy) && isDefined(swing_anims[swing.script_noteworthy])) {
@@ -577,7 +577,7 @@ fall_object_init() {
         self.start = thing;
         break;
       case "link":
-        thing linkto(self);
+        thing linkTo(self);
         break;
       default:
         break;
@@ -657,7 +657,7 @@ fall_object_run() {
 
   self moveTo(fall_to_origin, time, time, 0);
   if(fall_to_angles != self.angles) {
-    self RotateTo(fall_to_angles, time, 0, 0);
+    self rotateTo(fall_to_angles, time, 0, 0);
   }
 
   wait time;

@@ -133,10 +133,10 @@ func_4994(var_0, var_1) {
   var_3.var_EB9C = 3;
   var_3.inheliproximity = 0;
   var_3 thread func_3AFE();
-  var_3.rangetrigger = getent("remote_uav_range", "targetname");
+  var_3.rangetrigger = getEnt("remote_uav_range", "targetname");
 
   if(!isDefined(var_3.rangetrigger)) {
-    var_4 = getent("airstrikeheight", "targetname");
+    var_4 = getEnt("airstrikeheight", "targetname");
     var_3.maxheight = var_4.origin[2];
     var_3.maxdistance = 3600;
   }
@@ -144,7 +144,7 @@ func_4994(var_0, var_1) {
   var_3.soundent = spawn("script_origin", var_3.origin);
   var_3.soundent.angles = var_3.angles;
   var_3.soundent.origin = var_3.origin;
-  var_3.soundent linkto(var_3);
+  var_3.soundent linkTo(var_3);
   var_3.soundent playLoopSound("recondrone_idle_high");
   return var_3;
 }
@@ -412,7 +412,7 @@ func_4A07(var_0, var_1, var_2, var_3, var_4) {
   var_5 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_1);
   var_5.maxhealth = 250;
   var_5.scrambler = spawn("script_model", var_3);
-  var_5.scrambler linkto(var_5, "tag_origin", (0, 0, -160), (0, 0, 0));
+  var_5.scrambler linkTo(var_5, "tag_origin", (0, 0, -160), (0, 0, 0));
   var_5.scrambler makescrambler(var_1);
   var_5.var_1037E = 0;
   var_5.inheliproximity = 0;
@@ -445,7 +445,7 @@ remoteuav_ride(var_0, var_1, var_2) {
     scripts\mp\utility\game::setthirdpersondof(0);
   }
 
-  self cameralinkto(var_1, "tag_origin");
+  self cameralinkTo(var_1, "tag_origin");
   self remotecontrolvehicle(var_1);
   thread remoteuav_playerexit(var_1);
   thread func_DFAA(var_1);
@@ -643,7 +643,7 @@ func_DFAB(var_0, var_1, var_2) {
         var_0.markedplayers[var_6]["icon"].shader = "veh_hud_target_marked";
 
         if(!isDefined(var_5.sentrytype) || !isDefined(var_5.var_12A9A)) {
-          var_0.markedplayers[var_6]["icon"] settargetent(var_5);
+          var_0.markedplayers[var_6]["icon"] settargetEnt(var_5);
         }
       } else if(isDefined(var_0.markedplayers[var_6]) && isDefined(var_0.markedplayers[var_6]["icon"]) && isDefined(var_0.markedplayers[var_6]["icon"].shader) && var_0.markedplayers[var_6]["icon"].shader != "veh_hud_target_marked") {
         var_0.markedplayers[var_6]["icon"].shader = "veh_hud_target_marked";
@@ -673,7 +673,7 @@ func_DFAB(var_0, var_1, var_2) {
       var_0.markedplayers[var_6]["icon"].shader = var_8;
 
       if(!isDefined(var_5.sentrytype) || !isDefined(var_5.var_12A9A)) {
-        var_0.markedplayers[var_6]["icon"] settargetent(var_5);
+        var_0.markedplayers[var_6]["icon"] settargetEnt(var_5);
       }
     }
 
@@ -693,7 +693,7 @@ func_DFAB(var_0, var_1, var_2) {
 remoteuav_cantargetuav(var_0, var_1) {
   if(isDefined(var_1.uavtype)) {
     var_2 = anglesToForward(self getplayerangles());
-    var_3 = vectornormalize(var_1.origin - var_0 gettagorigin("tag_turret"));
+    var_3 = vectorNormalize(var_1.origin - var_0 gettagorigin("tag_turret"));
     var_4 = vectordot(var_2, var_3);
 
     if(var_4 > 0.985) {
@@ -738,7 +738,7 @@ remoteuav_rumble(var_0, var_1) {
   var_0 endon("end_rumble");
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -892,17 +892,17 @@ remoteuav_operationrumble(var_0) {
   var_0 endon("end_remote");
 
   for(;;) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait 0.5;
   }
 }
 
 func_DFAD() {
   self endon("death");
-  self.rangetrigger = getent("remote_uav_range", "targetname");
+  self.rangetrigger = getEnt("remote_uav_range", "targetname");
 
   if(!isDefined(self.rangetrigger)) {
-    var_0 = getent("airstrikeheight", "targetname");
+    var_0 = getEnt("airstrikeheight", "targetname");
     self.maxheight = var_0.origin[2];
     self.maxdistance = 12800;
   }
@@ -1124,8 +1124,8 @@ remoteuav_handleincomingsam() {
 watchstingerproximity(var_0) {
   level endon("game_ended");
   self endon("death");
-  self missile_settargetent(var_0);
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  self missile_settargetEnt(var_0);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
 
   while(isDefined(var_0)) {
     var_2 = var_0 getpointinbounds(0, 0, 0);
@@ -1133,10 +1133,10 @@ watchstingerproximity(var_0) {
 
     if(var_0.numflares > 0 && var_3 < 4000) {
       var_4 = var_0 deployflares();
-      self missile_settargetent(var_4);
+      self missile_settargetEnt(var_4);
       return;
     } else {
-      var_5 = vectornormalize(var_0.origin - self.origin);
+      var_5 = vectorNormalize(var_0.origin - self.origin);
 
       if(vectordot(var_5, var_1) < 0) {
         self playSound("exp_stinger_armor_destroy");
@@ -1166,8 +1166,8 @@ watchsamproximity(var_0, var_1) {
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3)) {
-      var_3 missile_settargetent(var_0);
-      var_3.lastvectotarget = vectornormalize(var_0.origin - var_3.origin);
+      var_3 missile_settargetEnt(var_0);
+      var_3.lastvectotarget = vectorNormalize(var_0.origin - var_3.origin);
     }
   }
 
@@ -1189,7 +1189,7 @@ watchsamproximity(var_0, var_1) {
 
             foreach(var_10 in var_1) {
               if(isDefined(var_10)) {
-                var_10 missile_settargetent(var_8);
+                var_10 missile_settargetEnt(var_8);
               }
             }
 
@@ -1199,7 +1199,7 @@ watchsamproximity(var_0, var_1) {
           continue;
         }
 
-        var_12 = vectornormalize(var_0.origin - var_3.origin);
+        var_12 = vectorNormalize(var_0.origin - var_3.origin);
 
         if(vectordot(var_12, var_3.lastvectotarget) < 0) {
           var_3 playSound("exp_stinger_armor_destroy");
@@ -1277,7 +1277,7 @@ remoteuav_clearincomingwarning() {
 }
 
 missile_isincoming(var_0, var_1) {
-  var_2 = vectornormalize(var_1.origin - var_0.origin);
+  var_2 = vectorNormalize(var_1.origin - var_0.origin);
   var_3 = anglesToForward(var_0.angles);
   return vectordot(var_2, var_3) > 0;
 }

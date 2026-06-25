@@ -63,7 +63,7 @@ function function_78933fc2() {
 function clone_devgui_callback(cmd) {
   switch (cmd) {
     case "": {
-      players = getplayers();
+      players = getPlayers();
       queryresult = positionquery_source_navigation(players[0].origin, 128, 256, 128, 20);
       if(isDefined(queryresult) && queryresult.data.size > 0) {
         clone = spawnactor("", queryresult.data[0].origin, (0, 0, 0), "", 1);

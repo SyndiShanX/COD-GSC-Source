@@ -19,8 +19,8 @@ _id_594A(var_0, var_1) {
 }
 
 _id_594B(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
-  var_3 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_2 = getEnt(var_0, "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct(var_1, "targetname");
   var_2.origin = var_3.origin;
 
   if(isDefined(var_3.angles)) {
@@ -31,7 +31,7 @@ _id_594B(var_0, var_1) {
 }
 
 _id_594C(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(isDefined(var_1) && !isDefined(var_1.trigger_off)) {
     var_1 maps\_utility::_id_2703();
@@ -57,7 +57,7 @@ _id_594E(var_0, var_1) {
 }
 
 _id_594F() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = var_0.script_noteworthy;
   self.allowdeath = 1;
   self._id_1032 = "generic";
@@ -176,7 +176,7 @@ _id_5959(var_0, var_1, var_2, var_3) {
 }
 
 _id_595A(var_0, var_1, var_2, var_3) {
-  self rotateto(var_0, var_1, var_2, var_3);
+  self rotateTo(var_0, var_1, var_2, var_3);
 }
 
 _id_595B(var_0, var_1, var_2) {
@@ -207,7 +207,7 @@ _id_595C(var_0, var_1, var_2) {
   if(var_4) {
     var_3 playerlinktodelta(var_5, undefined, 0);
   } else {
-    var_3 playerlinkto(var_5, undefined, 0, 180, 180, 180, 180, 1);
+    var_3 playerlinkTo(var_5, undefined, 0, 180, 180, 180, 180, 1);
   }
   if(!isDefined(level._id_595D)) {
     var_3 allowprone(0);
@@ -273,13 +273,13 @@ _id_4B52(var_0) {
   level endon("stop_rocking");
   thread _id_4B53();
   var_1 = 0;
-  var_2 = common_scripts\utility::getstruct("jolter", "targetname");
+  var_2 = common_scripts\utility::getStruct("jolter", "targetname");
 
   for(;;) {
     var_3 = anglestoup(var_0.angles);
     var_4 = -1 * var_3;
     var_5 = var_4 * (1, 10, 0.75);
-    var_6 = vectornormalize(var_5);
+    var_6 = vectorNormalize(var_5);
     setphysicsgravitydir(var_6);
     var_1++;
 
@@ -305,24 +305,24 @@ _id_4B54() {
   var_0 = getEntArray("sub_pressuredoor_rocker", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
-    var_2 linkto(var_3);
+    var_3 = getEnt(var_2.target, "targetname");
+    var_2 linkTo(var_3);
     level._id_4B55[level._id_4B55.size] = var_3;
   }
 
   var_0 = getEntArray("sub_pressuredoor_rocker_opposite", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
-    var_2 linkto(var_3);
+    var_3 = getEnt(var_2.target, "targetname");
+    var_2 linkTo(var_3);
     level._id_4B56[level._id_4B56.size] = var_3;
   }
 
   var_7 = getEntArray("dyn_hanger", "targetname");
 
   foreach(var_9 in var_7) {
-    var_3 = getent(var_9.target, "targetname");
-    var_9 linkto(var_3);
+    var_3 = getEnt(var_9.target, "targetname");
+    var_9 linkTo(var_3);
     level._id_4B57[level._id_4B57.size] = var_3;
   }
 }
@@ -333,7 +333,7 @@ _id_5962(var_0) {
   wait(var_1);
   common_scripts\utility::flag_set("stop_turbulence");
   var_2 = abs(level._id_5963[0]) / 8;
-  level._id_5960 rotateto((0, 0, 0), var_2, 0, 0);
+  level._id_5960 rotateTo((0, 0, 0), var_2, 0, 0);
   wait(var_2);
 }
 
@@ -353,7 +353,7 @@ _id_5964() {
     var_0 = -1 * var_0;
     level._id_5963 = (var_2, var_3, var_4);
     earthquake(0.1, var_1, level.player.origin, 80000);
-    level._id_5960 rotateto(level._id_5963, var_1, var_1 / 3, var_1 / 3);
+    level._id_5960 rotateTo(level._id_5963, var_1, var_1 / 3, var_1 / 3);
     wait(var_1);
   }
 }
@@ -413,7 +413,7 @@ _id_5969() {
   self._id_596A = spawn("script_origin", self.origin + (0, 0, 30));
   self._id_596A.angles = level._id_5960.angles;
   level._id_5961 = maps\_utility::_id_0BC3(level._id_5961, self._id_596A);
-  self linkto(self._id_596A);
+  self linkTo(self._id_596A);
   self._id_596A movez(45, 0.1);
   self hide();
 }

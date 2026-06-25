@@ -294,7 +294,7 @@ _id_D0DE(var_0, var_1, var_2, var_3) {
       self setdefaultdroppitch(-89.0);
       self._id_8EF7 = 0;
       var_4 = spawn("script_model", self gettagorigin("tag_laser"));
-      var_4 linkto(self);
+      var_4 linkTo(self);
       self.killcament = var_4;
       self.killcament _meth_8375("explosive");
       break;
@@ -304,7 +304,7 @@ _id_D0DE(var_0, var_1, var_2, var_3) {
       var_6 = self gettagorigin("tag_laser") + (0, 0, 10);
       var_6 = var_6 - var_5 * 20;
       var_4 = spawn("script_model", var_6);
-      var_4 linkto(self);
+      var_4 linkTo(self);
       self.killcament = var_4;
       break;
     case "manual_turret":
@@ -312,7 +312,7 @@ _id_D0DE(var_0, var_1, var_2, var_3) {
       var_6 = self gettagorigin("tag_laser") + (0, 0, 10);
       var_6 = var_6 - var_5 * 20;
       var_4 = spawn("script_model", var_6);
-      var_4 linkto(self);
+      var_4 linkTo(self);
       self.killcament = var_4;
       break;
     default:
@@ -696,7 +696,7 @@ _id_F841() {
         var_3._id_F85B scripts\mp\hud_util::destroyelem();
         var_3 _id_C70E();
         var_3 _id_C715();
-        self sethintstring(level._id_D0FA[self._id_D11F]._id_0224);
+        self setHintString(level._id_D0FA[self._id_D11F]._id_0224);
         self setmode(level._id_D0FA[self._id_D11F]._id_D0F7);
         _id_D0EC(self._id_AC8F);
         self setmode(level._id_D0FA[self._id_D11F]._id_D0F8);
@@ -826,7 +826,7 @@ _id_D0ED(var_0) {
 
         self._id_ADB1 = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 105, 64);
         self._id_ADB1 _meth_80DB();
-        self._id_ADB1 linkto(self);
+        self._id_ADB1 linkTo(self);
         self._id_AC8F thread _id_F840(self);
         thread _id_F841();
       }
@@ -1001,8 +1001,8 @@ _id_D0E8(var_0) {
   self setmode(level._id_D0FA[self._id_D11F]._id_D0F8);
 
   if(var_0) {
-    self setcursorhint("HINT_NOICON");
-    self sethintstring(level._id_D0FA[self._id_D11F]._id_0224);
+    self setCursorHint("HINT_NOICON");
+    self setHintString(level._id_D0FA[self._id_D11F]._id_0224);
     self makeuseable();
   }
 
@@ -1060,7 +1060,7 @@ _id_D0E8(var_0) {
 
 _id_D0EB() {
   if(self._id_D11F == "manual_turret") {
-    self sethintstring("");
+    self setHintString("");
     self makeunusable();
   }
 
@@ -1516,7 +1516,7 @@ _id_CB0E() {
       }
       self _meth_83C1();
       var_3 = scripts\cp_mp\utility\weapon_utility::_magicbullet(makeweapon("sam_projectile_mp"), var_0[var_2], self._id_CB18.origin, self.owner);
-      var_3 missile_settargetent(self._id_CB18);
+      var_3 missile_settargetEnt(self._id_CB18);
       var_3 _meth_8231();
       var_3._id_CB19 = self;
       var_3._id_CB16 = var_1;
@@ -1736,7 +1736,7 @@ _id_D0FD() {
   level endon("game_ended");
   thread _id_10BF8();
   self._id_13B2 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
-  self._id_13B2 linkto(self, "tag_flash");
+  self._id_13B2 linkTo(self, "tag_flash");
 
   for(;;) {
     var_0 = scripts\engine\utility::_id_108A7(1, "turret_on_target");
@@ -1803,7 +1803,7 @@ _id_EF12(var_0) {
   var_1 = 0;
   var_2 = self gettagorigin("tag_flash");
   var_3 = var_0.origin;
-  var_4 = vectornormalize(var_3 - var_2);
+  var_4 = vectorNormalize(var_3 - var_2);
   var_5 = anglesToForward(self.angles);
   var_6 = [self, self.owner, var_0];
   var_7 = physics_createcontents(["physicscontents_clipshot", "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
@@ -1836,7 +1836,7 @@ _id_DA36(var_0, var_1) {
   while(isDefined(var_0) && _id_EF12(var_0)) {
     var_4 = self gettagorigin("tag_flash");
     var_5 = scripts\cp_mp\utility\weapon_utility::_magicbullet(makeweapon("sentry_shock_missile_mp"), var_4, var_0.origin, self.owner);
-    var_5 missile_settargetent(var_0);
+    var_5 missile_settargetEnt(var_0);
     var_5 _meth_8231();
     var_5.killcament = self.killcament;
     var_5.streakinfo = self.streakinfo;
@@ -1855,7 +1855,7 @@ _id_DA36(var_0, var_1) {
   self notify("sentry_lost_target");
   var_1 unlink();
   var_1.origin = self gettagorigin("tag_flash");
-  var_1 linkto(self, "tag_flash");
+  var_1 linkTo(self, "tag_flash");
   self setmode("sentry");
   self _meth_8086();
   self setscriptablepartstate("coil", "idle");
@@ -1889,7 +1889,7 @@ _id_D0D7(var_0) {
   self.owner notifyonplayercommand("maunal_sentry_pickup", "+weapnext");
   self._id_9A68 = spawn("trigger_radius", self.origin, 0, 128, 128);
   self._id_9A68 _meth_80DB();
-  self._id_9A68 linkto(self, "tag_origin");
+  self._id_9A68 linkTo(self, "tag_origin");
 
   for(;;) {
     if(isDefined(self._id_32CA)) {
@@ -1917,11 +1917,11 @@ _id_D6C7(var_0, var_1) {
   for(;;) {
     var_2 = self gettagorigin("tag_aim");
     var_3 = var_0.origin;
-    var_4 = vectornormalize(var_3 - var_2);
+    var_4 = vectorNormalize(var_3 - var_2);
     var_5 = var_2 + var_4 * 500;
     var_1 unlink();
     var_1.origin = var_5;
-    var_1 linkto(self);
+    var_1 linkTo(self);
     self _meth_8389(var_1);
     waitframe();
   }
@@ -1984,7 +1984,7 @@ _id_9F6B(var_0) {
       return;
     }
     var_3 = scripts\cp_mp\utility\weapon_utility::_magicbullet(makeweapon("sentry_shock_grenade_mp"), self gettagorigin("tag_flash"), var_0.origin, self.owner);
-    var_3 missile_settargetent(var_0, _id_6DC1(var_0));
+    var_3 missile_settargetEnt(var_0, _id_6DC1(var_0));
     var_3.killcament = self.killcament;
     var_3.streakinfo = self.streakinfo;
     self setscriptablepartstate("muzzle", "fire" + var_2, 0);
@@ -2025,7 +2025,7 @@ _id_10C12(var_0) {
 
   for(;;) {
     if(!scripts\mp\utility\player::isreallyalive(var_0)) {
-      self missile_settargetent(var_0 _meth_8122());
+      self missile_settargetEnt(var_0 _meth_8122());
       break;
     }
 

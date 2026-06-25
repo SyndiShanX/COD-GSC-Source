@@ -7,7 +7,7 @@ func_E814() {
   if(!isDefined(self.hasrearguardshield)) {
     var_0 = self gettagorigin("tag_shield_back");
     var_1 = spawn("script_origin", var_0);
-    var_1 linkto(self, "tag_shield_back");
+    var_1 linkTo(self, "tag_shield_back");
     self attachshieldmodel("weapon_rearguard_shield_wm_mp", "tag_shield_back");
     self.hasrearguardshield = 1;
     self.rearguardattackers = [];

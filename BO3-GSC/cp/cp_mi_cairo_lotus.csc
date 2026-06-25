@@ -46,7 +46,7 @@ function on_player_spawned(localclientnum) {
 function function_f61f00f(localclientnum) {
   self notify("hash_78bd6500");
   self endon("hash_78bd6500");
-  e_trigger = getent(localclientnum, "mobile_shop_1_final_ascent", "targetname");
+  e_trigger = getEnt(localclientnum, "mobile_shop_1_final_ascent", "targetname");
   if(sessionmodeiscampaignzombiesgame() && !isDefined(e_trigger)) {
     return;
   }
@@ -85,11 +85,11 @@ function function_448b79a2(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_29c8893e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self playrumbleonentity(localclientnum, "cp_lotus_rumble_mobile_shop_shift");
+    self playRumbleOnEntity(localclientnum, "cp_lotus_rumble_mobile_shop_shift");
     self playrumblelooponentity(localclientnum, "cp_lotus_rumble_mobile_shop_ride");
   } else {
     self stoprumble(localclientnum, "cp_lotus_rumble_mobile_shop_ride");
-    self playrumbleonentity(localclientnum, "cp_lotus_rumble_mobile_shop_shift");
+    self playRumbleOnEntity(localclientnum, "cp_lotus_rumble_mobile_shop_shift");
   }
 }
 

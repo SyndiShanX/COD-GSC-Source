@@ -68,7 +68,7 @@ func_10856(var_0) {
   var_1 = spawn("script_model", var_0.origin);
   var_1 setModel("prop_mp_pulse_grenade_temp");
   var_1.angles = var_0.angles;
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1.objective_position = var_0;
   var_1.owner = var_0.owner;
   var_1 setotherent(var_0.owner);

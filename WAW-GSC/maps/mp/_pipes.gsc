@@ -59,7 +59,7 @@ pipe_calc_ballistic(P, type) {
 }
 
 pipe_calc_splash(P, type) {
-  vec = vectornormalize(vectorFromLineToPoint(self.A, self.B, P));
+  vec = vectorNormalize(vectorFromLineToPoint(self.A, self.B, P));
   P = pointOnSegmentNearestToPoint(self.A, self.B, P);
   return (P + vector_scale(vec, 4));
 }
@@ -149,7 +149,7 @@ pipebreakInit(pipes) {
     self[j].fxnode.up = anglesToForward(self[j].angles);
 
     if(self[j].script_noteworthy == "fueltanker") {
-      node = getstruct(self[j].whole.target, "targetname");
+      node = getStruct(self[j].whole.target, "targetname");
       self[j].fxnode.origin = node.origin;
       self[j].fxnode.forward = anglestoup(node.angles);
       self[j].fxnode.up = anglesToForward(node.angles);
@@ -399,7 +399,7 @@ pipesetup() {
   node = undefined;
 
   if(isDefined(self.target)) {
-    node = getstruct(self.target, "targetname");
+    node = getStruct(self.target, "targetname");
     self.A = node.origin;
     vec = anglesToForward(node.angles);
     vec = vector_scale(vec, 128);

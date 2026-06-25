@@ -48,7 +48,7 @@ function function_d5926b26() {
   level endon(#"game_ended");
   level flag::wait_till(#"main_quest_completed");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_e6a712db(1);
   }
 }
@@ -232,7 +232,7 @@ function function_37c1c391(eventstruct) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_73cddc69();
@@ -1058,7 +1058,7 @@ function function_868c9a6e() {
         var_a4a3ca3a = arr[0];
         amount = arr[1];
         var_e1f0e492 = [#"hash_65febbdf3f1ab4d7", hash(var_a4a3ca3a)];
-        players = getplayers();
+        players = getPlayers();
 
         foreach(player in players) {
           player function_2ea9419c(hash(var_a4a3ca3a), int(amount));

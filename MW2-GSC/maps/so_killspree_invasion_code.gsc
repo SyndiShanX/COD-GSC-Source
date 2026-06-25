@@ -15,7 +15,7 @@ while(1) {
   if(!isDefined(current.target)) {
     break;
   }
-  next = getent(current.target, "targetname");
+  next = getEnt(current.target, "targetname");
   if(!isDefined(next)) {
     break;
   }
@@ -171,7 +171,7 @@ btr80_fire_at_player(player) {
   burstsize = randomintrange(3, 5);
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
+    self setturrettargetEnt(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
@@ -188,7 +188,7 @@ btr80_miss_player(player) {
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
     offset = randomvector(15) + miss_vec + (0, 0, 64);
-    self setturrettargetent(player, offset);
+    self setturrettargetEnt(player, offset);
     self fireweapon();
     wait fireTime;
   }
@@ -291,7 +291,7 @@ btr80_new_target_think() {
     }
     vehicle notify("new_target");
 
-    vehicle setturrettargetent(targets[0]);
+    vehicle setturrettargetEnt(targets[0]);
 
     thread btr80_fire_at_targets(vehicle);
   }
@@ -1127,22 +1127,22 @@ hud_create_kill_splash_default(player, message) {
 
   return hudelem;
 }
-diner_back_door = getent("diner_back_door", "targetname");
-diner_back_door rotateyaw(85, .3);
+diner_back_door = getEnt("diner_back_door", "targetname");
+diner_back_door rotateYaw(85, .3);
 diner_back_door playSound("diner_backdoor_slams_open");
 diner_back_door connectpaths();
 }
 
 door_nates_locker_open() {
-  nates_meat_locker_door = getent("nates_meat_locker_door", "targetname");
-  nates_meat_locker_door_model = getent(nates_meat_locker_door.target, "targetname");
-  nates_meat_locker_door_model LinkTo(nates_meat_locker_door);
-  nates_meat_locker_door rotateyaw(-82, .1, 0, 0);
+  nates_meat_locker_door = getEnt("nates_meat_locker_door", "targetname");
+  nates_meat_locker_door_model = getEnt(nates_meat_locker_door.target, "targetname");
+  nates_meat_locker_door_model linkTo(nates_meat_locker_door);
+  nates_meat_locker_door rotateYaw(-82, .1, 0, 0);
   nates_meat_locker_door connectpaths();
 }
 
 door_bt_locker_open() {
-  BT_locker_door = getent("BT_locker_door", "targetname");
-  BT_locker_door rotateyaw(-172, .1, 0, 0);
+  BT_locker_door = getEnt("BT_locker_door", "targetname");
+  BT_locker_door rotateYaw(-172, .1, 0, 0);
   BT_locker_door connectpaths();
 }

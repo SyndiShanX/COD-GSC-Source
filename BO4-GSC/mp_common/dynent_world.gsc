@@ -50,11 +50,11 @@ on_player_killed() {
 
 create_use_trigger() {
   usetrigger = spawn("trigger_radius_use", (0, 0, -10000), 0, 128, 64, 1);
-  usetrigger triggerignoreteam();
+  usetrigger triggerIgnoreTeam();
   usetrigger setinvisibletoall();
   usetrigger setvisibletoplayer(self);
   usetrigger setteamfortrigger(#"none");
-  usetrigger setcursorhint("HINT_NOICON");
+  usetrigger setCursorHint("HINT_NOICON");
   usetrigger triggerenable(0);
   usetrigger usetriggerignoreuseholdtime();
   usetrigger function_4bf6de9a(0);
@@ -70,7 +70,7 @@ update_loop() {
   updatepass = 0;
 
   while(true) {
-    foreach(i, player in getplayers()) {
+    foreach(i, player in getPlayers()) {
       if(i % 5 == updatepass) {
         if(!isDefined(player.var_8a022726)) {
           continue;
@@ -113,7 +113,7 @@ function_2f394f36() {
   foreach(dynent in var_e86a4d9) {
     centroid = function_c5689a6a(dynent);
     var_966ddbb9 = centroid - vieworigin;
-    var_966ddbb9 = vectornormalize((var_966ddbb9[0], var_966ddbb9[1], 0));
+    var_966ddbb9 = vectorNormalize((var_966ddbb9[0], var_966ddbb9[1], 0));
     var_755fcbbd = vectordot(viewforward, var_966ddbb9);
 
     if(debug) {
@@ -184,7 +184,7 @@ function_836af3b3(bundle, state) {
     hintstring = bundle.dynentstates[state].hintstring;
   }
 
-  self sethintstring(hintstring);
+  self setHintString(hintstring);
 }
 
 function_46502841(trigger_struct) {

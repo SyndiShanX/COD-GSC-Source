@@ -43,7 +43,7 @@ activation(var_fad9ed02 = 1) {
   }
 
   if(ispointonnavmesh(self.origin)) {
-    playsoundatposition(#"zmb_bgb_abh_teleport_out", self.origin);
+    playSoundAtPosition(#"zmb_bgb_abh_teleport_out", self.origin);
   }
 
   if(isDefined(level.var_f44e37f7)) {
@@ -69,9 +69,9 @@ activation(var_fad9ed02 = 1) {
   if(isDefined(self.var_b520496e) && self.var_b520496e) {
     e_link = util::spawn_model("tag_origin", s_respawn_point.origin, s_respawn_point.angles);
     self setplayerangles(s_respawn_point.angles);
-    self linkto(e_link);
+    self linkTo(e_link);
   } else {
-    self setorigin(s_respawn_point.origin);
+    self setOrigin(s_respawn_point.origin);
     self setplayerangles(s_respawn_point.angles);
   }
 

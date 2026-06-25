@@ -90,7 +90,7 @@ play_hit_by_vehicle_anim() {
   return false;
 }
 goSlowMo() {
-  if(GetPlayers().size > 1) {
+  if(getPlayers().size > 1) {
     return;
   }
   if(!isPlayer(self.attacker)) {
@@ -1086,7 +1086,7 @@ try_gib_extended_death(chance) {
 do_extended_death(deathSeq) {
   self animscripts\shared::DropAllAIWeapons();
   self thread do_gib();
-  self SetPlayerCollision(false);
+  self setPlayerCollision(false);
   self thread death_anim_short_circuit();
   self setFlaggedAnimKnobAllRestart("deathhitanim", deathSeq[0], %body, 1, .1);
   self animscripts\shared::DoNoteTracks("deathhitanim");
@@ -1342,7 +1342,7 @@ do_gib() {
         pos2[pos2.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
       for(i = 0; i < pos1.size; i++) {
-        forward = VectorNormalize(pos2[i] - pos1[i]);
+        forward = vectorNormalize(pos2[i] - pos1[i]);
         velocities[i] = forward * RandomIntRange(600, 1000);
         velocities[i] = velocities[i] + (0, 0, RandomIntRange(400, 700));
       }
@@ -1356,7 +1356,7 @@ do_gib() {
       playFXOnTag(anim._effect[limb_data["fx"]], self, limb_data["spawn_tags"][i]);
     }
   }
-  PlaySoundAtPosition("chr_death_gibs", self.origin);
+  playSoundAtPosition("chr_death_gibs", self.origin);
   self thread maps\_dds::dds_notify("gib", (self.team != "allies"));
   self thread throw_gib(limb_data["spawn_models"], limb_data["spawn_tags"], velocities);
   self setModel(limb_data["body_model"]);

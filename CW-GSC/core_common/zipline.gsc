@@ -63,7 +63,7 @@ function private function_d271a025(inflictor, attacker, damage, meansofdeath, we
         var_d07dd667 = "ZIPLINE_DEATH_BACK";
 
         if(isDefined(self.var_662e279c)) {
-          var_b5785e55 = vectornormalize(anglesToForward(self.angles) * (1, 1, 0));
+          var_b5785e55 = vectorNormalize(anglesToForward(self.angles) * (1, 1, 0));
           var_f5509951 = offsettime * (1, 1, 0);
           var_b7cd5898 = vectordot(var_f5509951, var_b5785e55);
 
@@ -177,8 +177,8 @@ function private function_daabc8cc(entity) {
       recordline(entity.origin, entity.var_a4d91a0d.origin, (1, 0, 0));
       recordline(entity.var_a4d91a0d.origin, var_6d7d599e, (1, 1, 0));
 
-      entity.var_a4d91a0d moveto(var_6d7d599e, move_time);
-      entity.var_a4d91a0d rotateto(var_4fa6735c, move_time);
+      entity.var_a4d91a0d moveTo(var_6d7d599e, move_time);
+      entity.var_a4d91a0d rotateTo(var_4fa6735c, move_time);
       entity.var_a4d91a0d thread function_11a51c07();
     }
   }
@@ -206,7 +206,7 @@ function private function_f5e4c85b(entity, asmstatename) {
 
       record3dtext("<dev string:x61>", self.origin, (1, 0.5, 0), "<dev string:x8d>");
 
-      asmstatename linkto(asmstatename.var_a4d91a0d);
+      asmstatename linkTo(asmstatename.var_a4d91a0d);
       asmstatename.var_a4d91a0d.var_14e53eac = 1;
     }
   }
@@ -226,7 +226,7 @@ function private function_3564615d(zipline_start) {
 
 function private function_85ce22b4() {
   self endon(#"death");
-  self.var_b20b0960 = spawner::simple_spawn_single(getent("veh_zipline", "targetname"));
+  self.var_b20b0960 = spawner::simple_spawn_single(getEnt("veh_zipline", "targetname"));
   self.var_b20b0960.origin = self.zipline_start.origin;
   var_9f9bac58 = function_3564615d(self.zipline_start);
   var_8bb667c1 = var_9f9bac58.origin - self.zipline_start.origin;
@@ -234,7 +234,7 @@ function private function_85ce22b4() {
 
   if(isDefined(self.var_e8f98e9d)) {
     var_a7a79831 = length(var_8bb667c1);
-    var_b00e3ead = vectornormalize(var_8bb667c1);
+    var_b00e3ead = vectorNormalize(var_8bb667c1);
     self.var_b20b0960.var_da287758 = self.zipline_start.origin + var_b00e3ead * var_a7a79831 * self.var_e8f98e9d;
     self.var_e8f98e9d = undefined;
   }
@@ -328,7 +328,7 @@ function private function_aeb6539c() {
 
   self.var_f22c83f5 = 1;
   self.var_e75517b1 = 1;
-  self linkto(self.var_b20b0960, "tag_origin", (0, 0, 72 * -1));
+  self linkTo(self.var_b20b0960, "tag_origin", (0, 0, 72 * -1));
 }
 
 function private function_25f7c630() {
@@ -348,7 +348,7 @@ function private function_9dac9d34() {
   self.var_b20b0960 endon(#"death");
   var_9f9bac58 = getvehiclenode(self.zipline_start.target, "targetname");
   var_8bb667c1 = var_9f9bac58.origin - self.zipline_start.origin;
-  var_b00e3ead = vectornormalize(var_8bb667c1);
+  var_b00e3ead = vectorNormalize(var_8bb667c1);
 
   while(true) {
     waitframe(1);
@@ -497,7 +497,7 @@ function private function_c0a3f837(entity, asmstatename) {
 
 function function_61418721(point, line_start, line_end) {
   var_13d62e0a = point - line_start;
-  var_1ad356b8 = vectornormalize(line_end - line_start);
+  var_1ad356b8 = vectorNormalize(line_end - line_start);
   var_f6451fc1 = vectordot(var_13d62e0a, var_1ad356b8);
   closest_point = line_start + var_1ad356b8 * var_f6451fc1;
   return closest_point;

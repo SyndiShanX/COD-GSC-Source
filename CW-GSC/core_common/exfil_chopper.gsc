@@ -53,13 +53,13 @@ function private function_c5347667(origin, var_f389af4f, hintstring) {
   trigger = spawn(var_7c47eaa3, triggerorigin, 0, triggerradius, 100);
 
   if(var_f389af4f) {
-    trigger setcursorhint("HINT_NOICON");
-    trigger sethintstring(hintstring);
+    trigger setCursorHint("HINT_NOICON");
+    trigger setHintString(hintstring);
     trigger function_268e4500();
     trigger function_682f34cf(-800);
     trigger usetriggerignoreuseholdtime();
     trigger setvisibletoall();
-    trigger triggerignoreteam();
+    trigger triggerIgnoreTeam();
   }
 
   return trigger;
@@ -72,7 +72,7 @@ function function_f76880c5() {
   playFX(#"hash_39f9530da901280", fx.origin);
   fx playSound(#"hash_7e287e6b6da3c9cd");
   fx.sndent = spawn("script_origin", fx.origin);
-  fx.sndent linkto(fx);
+  fx.sndent linkTo(fx);
   fx.sndent playLoopSound(#"hash_686d0823355faccd");
   self.smokefx = fx;
 }
@@ -93,7 +93,7 @@ function function_7f1fe6f8(var_8e875f24) {
 }
 
 function function_d4774e31(origin, angles) {
-  helicopter = spawnvehicle(#"hash_58cc8ce25d32031f", origin, angles, "exfil_chopper_vehicle");
+  helicopter = spawnVehicle(#"hash_58cc8ce25d32031f", origin, angles, "exfil_chopper_vehicle");
   helicopter setdrawinfrared(1);
   helicopter.soundmod = "heli";
   helicopter.takedamage = 0;
@@ -142,9 +142,9 @@ function function_71f99527() {
 function private function_1c85a66(helicopter) {
   helicopter endon(#"death");
   var_46d7c629 = spawn("script_model", helicopter.origin);
-  var_46d7c629 linkto(helicopter);
+  var_46d7c629 linkTo(helicopter);
   operator = util::spawn_anim_model(#"hash_71aea3bbaef3e00c", helicopter.origin);
-  operator linkto(var_46d7c629);
+  operator linkTo(var_46d7c629);
   operator useanimtree("all_player");
   var_a3476af7 = helicopter gettagorigin("tag_passenger3");
   var_eb72be15 = helicopter gettagangles("tag_passenger3");
@@ -157,7 +157,7 @@ function private function_eae9cdce(helicopter) {
   helicopter.rope useanimtree("generic");
   helicopter.rope setModel(#"p9_fxanim_gp_vehicle_heli_lrg_vip_rope_mod");
   helicopter.rope notsolid();
-  helicopter.rope linkto(helicopter, "tag_origin_animate");
+  helicopter.rope linkTo(helicopter, "tag_origin_animate");
   helicopter.rope hide();
 }
 

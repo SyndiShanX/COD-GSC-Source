@@ -180,7 +180,7 @@ function private waitfordooropen(var_91fea62e) {
 
       if(!self shouldfacemotion()) {
         lookaheaddir = self.lookaheaddir;
-        lookaheaddir = vectornormalize((lookaheaddir[0], lookaheaddir[1], 0));
+        lookaheaddir = vectorNormalize((lookaheaddir[0], lookaheaddir[1], 0));
         facingdir = anglesToForward(self.angles);
 
         if(vectordot(lookaheaddir, facingdir) < 0.966) {

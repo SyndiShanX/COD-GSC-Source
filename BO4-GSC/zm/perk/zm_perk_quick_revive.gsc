@@ -161,7 +161,7 @@ unhide_quickrevive() {
 
   if(isDefined(level.quick_revive_machine_clip)) {
     level.quick_revive_machine_clip show();
-    level.quick_revive_machine_clip disconnectpaths();
+    level.quick_revive_machine_clip disconnectPaths();
   }
 
   if(isDefined(level.quick_revive_final_pos)) {
@@ -202,7 +202,7 @@ unhide_quickrevive() {
   }
 
   if(!(isDefined(level.quick_revive_linked_ent_moves) && level.quick_revive_linked_ent_moves) && level.quick_revive_machine.origin != org) {
-    level.quick_revive_machine moveto(org, 3);
+    level.quick_revive_machine moveTo(org, 3);
     level.quick_revive_machine vibrate(direction, 10, 0.5, 2.9);
     level.quick_revive_machine waittill(#"movedone");
     level.quick_revive_machine.angles = level.quick_revive_default_angles;
@@ -221,7 +221,7 @@ unhide_quickrevive() {
   }
 
   if(isDefined(level.quick_revive_linked_ent)) {
-    level.quick_revive_machine linkto(level.quick_revive_linked_ent);
+    level.quick_revive_machine linkTo(level.quick_revive_linked_ent);
   }
 
   level.quick_revive_machine.ishidden = 0;

@@ -685,7 +685,7 @@ squadmove(squadid) {
   }
 }
 
-executesquadmoveto(squadid) {
+executesquadmoveTo(squadid) {
   notifysquadmembersofneworders(squadid);
 
   if(level.rts.squads[squadid].state != level.rts.squads[squadid].nextstate) {
@@ -697,7 +697,7 @@ executesquadmoveto(squadid) {
   level.rts.squads[squadid].nextstate = 0;
 }
 
-ordersquadmoveto(point, squadid) {
+ordersquadmoveTo(point, squadid) {
   if(!isDefined(point)) {
     point = maps\_so_rts_support::playerlinkobj_gettargetgroundpos();
   }
@@ -1336,7 +1336,7 @@ squadthink() {
 
           println("$$$$$$ SQUAD (" + squad.id + ") SQUAD_STATE_MOVE");
 
-          executesquadmoveto(squad.id);
+          executesquadmoveTo(squad.id);
           break;
         case 3:
 

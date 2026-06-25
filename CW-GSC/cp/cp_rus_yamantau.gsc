@@ -190,9 +190,9 @@ function function_2675a176() {
 
 function function_dce9f3d4() {
   callback::on_ai_killed(&on_ai_killed);
-  level.e_server_hook = getent("e_server_hook", "targetname");
-  level.e_server_cable = getent("e_server_cable", "targetname");
-  level.e_server_cable_simmed = getent("e_server_cable_simmed", "targetname");
+  level.e_server_hook = getEnt("e_server_hook", "targetname");
+  level.e_server_cable = getEnt("e_server_cable", "targetname");
+  level.e_server_cable_simmed = getEnt("e_server_cable_simmed", "targetname");
   level.e_server_cable_simmed hide();
   s_situation_room_glass = struct::get_array("s_situation_room_glass", "targetname");
 

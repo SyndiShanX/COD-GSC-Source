@@ -445,7 +445,7 @@ func_FFCA(var_0, var_1, var_2, var_3) {
   var_4 = lib_0A1E::func_235D(var_2);
   var_5 = scripts\asm\asm::asm_lookupanimfromalias(var_2, var_4);
   var_6 = self._blackboard.shufflenode.origin - self.origin;
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_8 = getmovedelta(var_5, 0, 1);
   var_9 = length(var_8);
   var_10 = self._blackboard.shufflenode.origin - var_7 * var_9;

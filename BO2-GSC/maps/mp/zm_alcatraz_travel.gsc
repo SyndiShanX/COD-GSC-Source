@@ -20,16 +20,16 @@ init_alcatraz_zipline() {
   flag_init("gondola_at_docks");
   flag_init("gondola_in_motion");
   flag_init("gondola_initialized");
-  e_gondola = getent("zipline_gondola", "targetname");
+  e_gondola = getEnt("zipline_gondola", "targetname");
   level.e_gondola = e_gondola;
   e_gondola.location = "roof";
   e_gondola.destination = undefined;
   e_gondola setmovingplatformenabled(1);
   playFXOnTag(level._effect["light_gondola"], e_gondola, "tag_origin");
   flag_set("gondola_at_roof");
-  level.e_gondola.t_ride = getent("gondola_ride_trigger", "targetname");
-  level.e_gondola.t_ride enablelinkto();
-  level.e_gondola.t_ride linkto(e_gondola);
+  level.e_gondola.t_ride = getEnt("gondola_ride_trigger", "targetname");
+  level.e_gondola.t_ride enablelinkTo();
+  level.e_gondola.t_ride linkTo(e_gondola);
   t_move_triggers = getEntArray("gondola_move_trigger", "targetname");
   t_call_triggers = getEntArray("gondola_call_trigger", "targetname");
   a_t_gondola_triggers = arraycombine(t_move_triggers, t_call_triggers, 1, 0);
@@ -41,7 +41,7 @@ init_alcatraz_zipline() {
   a_gondola_doors = getEntArray("gondola_doors", "targetname");
 
   foreach(m_door in a_gondola_doors) {
-    m_door linkto(e_gondola);
+    m_door linkTo(e_gondola);
     e_gondola establish_gondola_door_definition(m_door);
     m_door setmovingplatformenabled(1);
   }
@@ -49,7 +49,7 @@ init_alcatraz_zipline() {
   a_gondola_gates = getEntArray("gondola_gates", "targetname");
 
   foreach(m_gate in a_gondola_gates) {
-    m_gate linkto(e_gondola);
+    m_gate linkTo(e_gondola);
     e_gondola establish_gondola_gate_definition(m_gate);
     m_gate setmovingplatformenabled(1);
   }
@@ -70,7 +70,7 @@ init_alcatraz_zipline() {
   m_chains.origin = level.e_gondola.origin;
   m_chains.angles = level.e_gondola.angles;
   m_chains setModel("fxanim_zom_al_gondola_chains_mod");
-  m_chains linkto(level.e_gondola);
+  m_chains linkTo(level.e_gondola);
   level.e_gondola.fxanim_chains = m_chains;
   level.gondola_chains_fxanims = [];
   level.gondola_chains_fxanims["gondola_chains_start"] = % fxanim_zom_al_gondola_chains_start_anim;
@@ -257,7 +257,7 @@ zipline_call_trigger_think() {
   }
 
   while(true) {
-    self sethintstring("");
+    self setHintString("");
     flag_wait("gondola_at_" + str_gondola_loc);
     self notify("available");
     self hint_string(&"ZM_PRISON_CALL_GONDOLA");
@@ -313,11 +313,11 @@ move_gondola(b_suppress_doors_close) {
   e_gondola.is_moving = 1;
 
   if(e_gondola.location == "roof") {
-    s_moveloc = getstruct("gondola_struct_docks", "targetname");
+    s_moveloc = getStruct("gondola_struct_docks", "targetname");
     e_gondola.destination = "docks";
     level thread gondola_outofbounds_trigger_stop();
   } else if(e_gondola.location == "docks") {
-    s_moveloc = getstruct("gondola_struct_roof", "targetname");
+    s_moveloc = getStruct("gondola_struct_roof", "targetname");
     e_gondola.destination = "roof";
     level thread gondola_outofbounds_trigger_enabled();
   }
@@ -338,17 +338,17 @@ move_gondola(b_suppress_doors_close) {
   a_t_move = getEntArray("gondola_move_trigger", "targetname");
 
   foreach(trigger in a_t_move) {
-    trigger sethintstring("");
+    trigger setHintString("");
   }
 
   a_t_call = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call) {
-    trigger sethintstring(&"ZM_PRISON_GONDOLA_ACTIVE");
+    trigger setHintString(&"ZM_PRISON_GONDOLA_ACTIVE");
   }
 
   check_when_gondola_moves_if_groundent_is_undefined(e_gondola);
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player is_player_on_gondola()) {
@@ -366,7 +366,7 @@ move_gondola(b_suppress_doors_close) {
   e_gondola thread create_gondola_poi();
   level thread gondola_moving_vo();
   e_gondola thread gondola_physics_explosion(10);
-  e_gondola moveto(s_moveloc.origin, 10, 1, 1);
+  e_gondola moveTo(s_moveloc.origin, 10, 1, 1);
   flag_set("gondola_in_motion");
   e_gondola thread gondola_chain_fx_anim();
   e_gondola playSound("zmb_gondola_start");
@@ -377,7 +377,7 @@ move_gondola(b_suppress_doors_close) {
   e_gondola thread sndcooldown();
   e_gondola playSound("zmb_gondola_stop");
   player_escaped_gondola_failsafe();
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player.is_on_gondola) && player.is_on_gondola) {
@@ -474,27 +474,27 @@ gondola_doors_move(str_side, n_state) {
   }
 
   foreach(m_model in a_doors_and_gates) {
-    m_model linkto(self);
+    m_model linkTo(self);
   }
 }
 
 gondola_gate_moves(n_state, n_side_modifier, m_gate_left, m_gate_right, m_landing_gate_left, m_landing_gate_right) {
-  m_gate_left moveto(m_gate_left.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  m_gate_right moveto(m_gate_right.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  m_landing_gate_left moveto(m_landing_gate_left.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  m_landing_gate_right moveto(m_landing_gate_right.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  m_gate_left moveTo(m_gate_left.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  m_gate_right moveTo(m_gate_right.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  m_landing_gate_left moveTo(m_landing_gate_left.origin + (22.5 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  m_landing_gate_right moveTo(m_landing_gate_right.origin + (22.5 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
   m_gate_right waittill("movedone");
 }
 
 gondola_gate_and_door_moves(n_state, n_side_modifier, m_gate_left, m_door_left, m_gate_right, m_door_right, m_landing_gate_left, m_landing_door_left, m_landing_gate_right, m_landing_door_right) {
-  m_door_left moveto(m_door_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  m_gate_left moveto(m_gate_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  m_door_right moveto(m_door_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  m_gate_right moveto(m_gate_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  m_landing_door_left moveto(m_landing_door_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  m_landing_gate_left moveto(m_landing_gate_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
-  m_landing_door_right moveto(m_landing_door_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
-  m_landing_gate_right moveto(m_landing_gate_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  m_door_left moveTo(m_door_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  m_gate_left moveTo(m_gate_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  m_door_right moveTo(m_door_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  m_gate_right moveTo(m_gate_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  m_landing_door_left moveTo(m_landing_door_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  m_landing_gate_left moveTo(m_landing_gate_left.origin + (24 * n_side_modifier * n_state, 0, 0), 0.5, 0.05, 0.05);
+  m_landing_door_right moveTo(m_landing_door_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
+  m_landing_gate_right moveTo(m_landing_gate_right.origin + (24 * n_side_modifier * n_state * -1, 0, 0), 0.5, 0.05, 0.05);
   m_gate_right waittill("movedone");
 }
 
@@ -504,19 +504,19 @@ check_for_death_on_gondola(e_gondola) {
   e_gondola endon("movedone");
   self waittill("player_fake_corpse_created");
   self.e_afterlife_corpse endon("player_revived");
-  self.e_afterlife_corpse linkto(e_gondola);
+  self.e_afterlife_corpse linkTo(e_gondola);
 }
 
 link_corpses_to_gondola(e_gondola) {
   e_gondola endon("movedone");
 
   if(isDefined(self)) {
-    self linkto(e_gondola);
+    self linkTo(e_gondola);
   }
 }
 
 create_gondola_poi() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(!(isDefined(player.is_on_gondola) && player.is_on_gondola)) {
@@ -524,7 +524,7 @@ create_gondola_poi() {
     }
   }
 
-  s_poi = getstruct("gondola_poi_" + self.destination, "targetname");
+  s_poi = getStruct("gondola_poi_" + self.destination, "targetname");
   e_poi = spawn("script_origin", s_poi.origin);
   e_poi create_zombie_point_of_interest(10000, 30, 5000, 1);
   e_poi thread create_zombie_point_of_interest_attractor_positions();
@@ -567,13 +567,13 @@ gondola_cooldown() {
   a_t_call = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call) {
-    trigger sethintstring(&"ZM_PRISON_GONDOLA_COOLDOWN");
+    trigger setHintString(&"ZM_PRISON_GONDOLA_COOLDOWN");
   }
 
   a_t_move = getEntArray("gondola_move_trigger", "targetname");
 
   foreach(trigger in a_t_move) {
-    trigger sethintstring(&"ZM_PRISON_GONDOLA_COOLDOWN");
+    trigger setHintString(&"ZM_PRISON_GONDOLA_COOLDOWN");
   }
 
   wait 10;
@@ -596,12 +596,12 @@ gondola_moving_vo() {
 
 hint_string(string, cost) {
   if(isDefined(cost)) {
-    self sethintstring(string, cost);
+    self setHintString(string, cost);
   } else {
-    self sethintstring(string);
+    self setHintString(string);
   }
 
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 }
 
 gondola_lights_red() {
@@ -634,7 +634,7 @@ is_player_on_gondola() {
 
 array_players_on_gondola() {
   a_players_on_gondola = [];
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(player is_player_on_gondola()) {
@@ -657,14 +657,14 @@ gondola_hostmigration() {
   while(true) {
     level waittill("host_migration_begin");
     level.hm_link_origins = [];
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player thread link_player_to_gondola();
     }
 
     level waittill("host_migration_end");
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       player unlink();
@@ -697,8 +697,8 @@ link_player_to_gondola() {
     e_origin = spawn("script_origin", self.origin);
     e_origin.angles = self.angles;
     level.hm_link_origins[level.hm_link_origins.size] = e_origin;
-    e_origin linkto(level.e_gondola);
-    self playerlinkto(e_origin);
+    e_origin linkTo(level.e_gondola);
+    self playerlinkTo(e_origin);
   }
 }
 
@@ -782,7 +782,7 @@ zombie_alcatraz_player_intersection_tracker_override(other_player) {
 }
 
 player_escaped_gondola_failsafe() {
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(isDefined(player.is_on_gondola) && player.is_on_gondola) {
@@ -792,7 +792,7 @@ player_escaped_gondola_failsafe() {
 
           foreach(struct in a_s_orgs) {
             if(!positionwouldtelefrag(struct.origin)) {
-              player setorigin(struct.origin);
+              player setOrigin(struct.origin);
               break;
             }
           }

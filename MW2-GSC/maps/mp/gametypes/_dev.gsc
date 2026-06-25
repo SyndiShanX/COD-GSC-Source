@@ -700,7 +700,7 @@ updateMinimapSetting() {
           if(znear < 16) znear = 16;
           if(znear > 10000) znear = 10000;
 
-          player playerlinkto(origin);
+          player playerlinkTo(origin);
           origin.origin = viewpos + (0, 0, -62);
           origin.angles = (90, getnorthyaw(), 0);
 
@@ -762,10 +762,10 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   diaglen = length(mincorner - maxcorner);
 
   mincorneroffset = (mincorner - viewpos);
-  mincorneroffset = vectornormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800);
   maxcorneroffset = (maxcorner - viewpos);
-  maxcorneroffset = vectornormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800);
 
   diagonal = maxcorner - mincorner;

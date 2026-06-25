@@ -64,8 +64,8 @@ AttachToTrain() {
     link_to_origin = level.train_attach_points[index];
     ASSERTEX(isDefined(link_to_origin), "Could not locate script_origin train_player_link_origin");
 
-    self setorigin(link_to_origin.origin);
-    self PlayerLinkTo(link_to_origin);
+    self setOrigin(link_to_origin.origin);
+    self PlayerlinkTo(link_to_origin);
 
     self flag_wait("loadout_given");
 

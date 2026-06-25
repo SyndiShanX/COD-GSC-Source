@@ -101,7 +101,7 @@ barrel_trigger_fire(var_0) {
           }
         }
       } else if(isDefined(var_0.target)) {
-        var_6 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+        var_6 = scripts\engine\utility::getStruct(var_0.target, "targetname");
         var_5 = var_6.origin;
 
         if(isDefined(var_6._id_03A0)) {
@@ -122,9 +122,9 @@ barrel_trigger_fire(var_0) {
     var_4 dodamage(var_3, var_5, self, self, "MOD_FIRE", undefined);
 
     if(var_3 < 6) {
-      var_4 playrumbleonentity("damage_light");
+      var_4 playRumbleOnEntity("damage_light");
     } else {
-      var_4 playrumbleonentity("damage_heavy");
+      var_4 playRumbleOnEntity("damage_heavy");
     }
 
     var_0 scripts\engine\utility::_id_0393();

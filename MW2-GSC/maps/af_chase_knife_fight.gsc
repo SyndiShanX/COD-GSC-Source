@@ -211,9 +211,9 @@ wakeup_after_crash() {
   array_spawn_targetname("crawling_spawner");
 
   time = 1;
-  level.eq_ent MoveTo((0.0, 0, 0), time, time * 0.5, time * 0.5);
+  level.eq_ent moveTo((0.0, 0, 0), time, time * 0.5, time * 0.5);
 
-  damaged_pavelow = getent("damaged_pavelow", "targetname");
+  damaged_pavelow = getEnt("damaged_pavelow", "targetname");
   damaged_pavelow thread play_sound_on_entity("scn_afchase_heli_cookoff");
 
   if(do_wakeup_anim) {
@@ -276,7 +276,7 @@ fight_turnbuckle() {
   lookat_ent = spawn("script_model", level.player.origin + (0, 0, 32));
   lookat_ent setModel("viewhands_player_tf141");
   lookat_ent Hide();
-  lookat_ent LinkTo(level.player);
+  lookat_ent linkTo(level.player);
 
   wait_for_player_to_melee_shepherd();
   level notify("stop_drunk_walk");
@@ -377,7 +377,7 @@ shepherd_gloats() {
   remove_fences();
 
   dof_target_ent = get_dof_targetEnt();
-  dof_target_ent LinkTo(level.shepherd, "tag_eye", (0, 0, 0), (0, 0, 0));
+  dof_target_ent linkTo(level.shepherd, "tag_eye", (0, 0, 0), (0, 0, 0));
 
   guys = [];
   guys["shepherd"] = level.shepherd;
@@ -426,7 +426,7 @@ gun_drop() {
   guys["price"] = level.price;
 
   dof_target_ent = get_dof_targetEnt();
-  dof_target_ent LinkTo(level.shepherd, "tag_origin", (0, 0, 0), (0, 0, 0));
+  dof_target_ent linkTo(level.shepherd, "tag_origin", (0, 0, 0), (0, 0, 0));
 
   animation = level.shepherd getanim("gun_drop");
   animation_length = GetAnimLength(animation);
@@ -449,11 +449,11 @@ gun_drop() {
   wait .05;
 
   foreach(guy in guys) {
-    guy LinkTo(anim_node_ent);
+    guy linkTo(anim_node_ent);
   }
 
   wait wait_to_blendout - .05;
-  anim_node_ent MoveTo(anim_node_ent.origin + (200, 0, 0), blendout_time + 1, 0, 0);
+  anim_node_ent moveTo(anim_node_ent.origin + (200, 0, 0), blendout_time + 1, 0, 0);
   wait blendout_time - .05;
 
   wait player_length_after_gun_drop - .05;
@@ -597,9 +597,9 @@ wounded_show() {
 
   level notify("stop_idle_crawl_fight");
 
-  fight_b_animnode = GetEnt("end_scene_org_fight_B", "targetname");
-  fight_c_animnode = GetEnt("end_scene_org_fight_C", "targetname");
-  wrestle_c_animnode = GetStruct("end_scene_org_wrestle_C", "targetname");
+  fight_b_animnode = getEnt("end_scene_org_fight_B", "targetname");
+  fight_c_animnode = getEnt("end_scene_org_fight_C", "targetname");
+  wrestle_c_animnode = getStruct("end_scene_org_wrestle_C", "targetname");
 
   anim_node = get_anim_node_rotated();
   player_body = get_player_body();
@@ -626,7 +626,7 @@ wounded_show() {
   fighters["price"] = level.price;
 
   dof_target_ent = get_dof_targetEnt();
-  dof_target_ent LinkTo(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
+  dof_target_ent linkTo(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
 
   level.player ShellShock("af_chase_ending_no_control_lowkick", 6000);
 
@@ -692,7 +692,7 @@ knife_pullout() {
 
   thread spawn_fake_wrestlers();
 
-  fight_c_animnode = GetEnt("end_scene_org_fight_C", "targetname");
+  fight_c_animnode = getEnt("end_scene_org_fight_C", "targetname");
   anim_node = get_anim_node_rotated();
   player_rig = get_player_rig();
   knife = get_knife();
@@ -718,7 +718,7 @@ knife_pullout() {
   level notify("player_has_min_arc");
 
   dof_target_ent = get_dof_targetEnt();
-  dof_target_ent LinkTo(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
+  dof_target_ent linkTo(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
 
   scene = "fight_C";
   animation = level.price getanim(scene);
@@ -837,7 +837,7 @@ knife_kill() {
   maps\af_chase_anim::add_fighte_animsounds();
   flag_set("player_heartbeat_sound");
   SaveGame("kill", &"AUTOSAVE_LEVELSTART", "shot", true);
-  fight_c_animnode = GetEnt("end_scene_org_fight_C", "targetname");
+  fight_c_animnode = getEnt("end_scene_org_fight_C", "targetname");
   anim_node = get_anim_node_rotated();
   player_rig = get_player_rig();
   knife = get_knife();
@@ -880,7 +880,7 @@ knife_kill() {
   level notify("pull_back_knife_anim_starts");
 
   blend_out_time = 1.2;
-  level.fov_ent moveto((52, 0, 0), blend_out_time, blend_out_time * 0.5, blend_out_time * 0.5);
+  level.fov_ent moveTo((52, 0, 0), blend_out_time, blend_out_time * 0.5, blend_out_time * 0.5);
 
   player_rig thread play_sound_on_entity("scn_afchase_player_knife_breath");
   anim_node anim_single(guys, "knifepull_throw");
@@ -925,7 +925,7 @@ price_wakeup() {
   wait(1.8);
   fovtime = 8.5;
   blend_to_ending_dof(fovtime);
-  level.fov_ent moveto((65, 0, 0), fovtime, fovtime * 0.5, fovtime * 0.5);
+  level.fov_ent moveTo((65, 0, 0), fovtime, fovtime * 0.5, fovtime * 0.5);
 
   set_vision_set("aftermath_nodesat", 0);
 
@@ -997,7 +997,7 @@ walkoff() {
   delaythread(0.8, ::expand_player_view);
 
   ground_ref = spawn_tag_origin();
-  ground_ref linkto(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
+  ground_ref linkTo(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player PlayerSetGroundReferenceEnt(ground_ref);
 
   scene = "price_wakeup";
@@ -1037,7 +1037,7 @@ walkoff() {
 
   thread scene_walk_off_dialog();
   anim_node = get_anim_node();
-  anim_node_chopper = getstruct("anim_node_chopper", "targetname");
+  anim_node_chopper = getStruct("anim_node_chopper", "targetname");
 
   scene = "walk_off";
   animation = level.price getanim(scene);
@@ -1056,7 +1056,7 @@ walkoff() {
   wait_for_buffer_time_to_pass(start_time, timer - 10);
 
   time = 5;
-  level.eq_ent MoveTo((0.85, 0, 0), time, time * 0.5, time * 0.5);
+  level.eq_ent moveTo((0.85, 0, 0), time, time * 0.5, time * 0.5);
 }
 
 end_credits() {
@@ -1065,7 +1065,7 @@ end_credits() {
   black_overlay = get_black_overlay();
   black_overlay.alpha = 1;
 
-  level.eq_ent MoveTo((1.0, 0, 0), fade_out_time, fade_out_time * 0.5, fade_out_time * 0.5);
+  level.eq_ent moveTo((1.0, 0, 0), fade_out_time, fade_out_time * 0.5, fade_out_time * 0.5);
 
   delaythread(4, ::nextmission);
 

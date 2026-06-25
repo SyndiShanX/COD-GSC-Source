@@ -400,7 +400,7 @@ function function_2d527091(var_a4084657) {
       break;
     case #"flag_rat_tunnels_backtrack_blocker":
       a_ents = [];
-      a_ents[#"hatch"] = getent("rat_tunnel_hatch", "targetname");
+      a_ents[#"hatch"] = getEnt("rat_tunnel_hatch", "targetname");
       level thread scene::play("scene_pri_rat_tunnel_hatch_close", a_ents);
       break;
   }
@@ -497,7 +497,7 @@ function player_teleport(var_2cb02b2f, var_880840af = 1, var_b9a81537 = 0.5) {
   self freezecontrols(1);
   self setstance("stand");
   self dontinterpolate();
-  self setorigin(org.origin);
+  self setOrigin(org.origin);
   self setplayerangles(org.angles);
 
   if(is_true(var_880840af)) {
@@ -2170,7 +2170,7 @@ function function_be6f6790(var_7bd31922, flag) {
     level thread scene::play(struct.targetname, "init");
   }
 
-  damage_trigger = getent(var_7bd31922 + "_damage_trigger", "targetname");
+  damage_trigger = getEnt(var_7bd31922 + "_damage_trigger", "targetname");
 
   if(isDefined(flag)) {
     util::waittill_any_ents(level, flag, level, "flag_in_end_path", damage_trigger, "trigger");

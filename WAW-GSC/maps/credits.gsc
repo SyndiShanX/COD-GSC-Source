@@ -153,7 +153,7 @@ play_scenes() {
   ent setModel("tag_origin");
   ent Hide();
 
-  player PlayerLinkTo(ent, "tag_origin", 1, 10, 10, 10, 10, false);
+  player PlayerlinkTo(ent, "tag_origin", 1, 10, 10, 10, 10, false);
   player.linked_object = ent;
 
   fadein_fog();
@@ -205,8 +205,8 @@ player_movement(player, struct) {
 
     for(i = 0; i < structs.size; i++) {
       time = structs[i].dist / structs[i].speed;
-      player.linked_object MoveTo(structs[i].origin - (0, 0, 66), time);
-      player.linked_object RotateTo(structs[i].angles, time);
+      player.linked_object moveTo(structs[i].origin - (0, 0, 66), time);
+      player.linked_object rotateTo(structs[i].angles, time);
       wait(time - 0.1);
     }
   }
@@ -216,7 +216,7 @@ get_targeted_structs(struct) {
   structs = [];
 
   while(isDefined(struct.target)) {
-    next_struct = getstruct(struct.target, "targetname");
+    next_struct = getStruct(struct.target, "targetname");
 
     if(!isDefined(next_struct)) {
       break;
@@ -414,7 +414,7 @@ tree_sniper_spawner() {
   }
 
   anim_node = GetNode(self.target, "targetname");
-  anim_point = getent(anim_node.target, "targetname");
+  anim_point = getEnt(anim_node.target, "targetname");
 
   self.animname = "tree_guy";
 

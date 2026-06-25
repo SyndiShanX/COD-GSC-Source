@@ -132,7 +132,7 @@ function function_69cfc912() {
 
 function function_788efb3b() {
   self waittill("disconnect_paths");
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 function function_8db0ac1a(a_ents) {
@@ -146,7 +146,7 @@ function function_8db0ac1a(a_ents) {
 
 function function_94d27(a_ents) {
   level.ai_diaz waittill("unfreeze");
-  e_clip = getent("snow_umbrella_factory_intro_igc", "targetname");
+  e_clip = getEnt("snow_umbrella_factory_intro_igc", "targetname");
   e_clip delete();
   setpauseworld(0);
   newworld_util::player_snow_fx();
@@ -181,9 +181,9 @@ function skipto_factory_exterior_init(str_objective, b_starting) {
     level intro_area_threatgroups_setup();
     level scene::skipto_end_noai("cin_new_02_01_pallasintro_vign_appear");
     level scene::skipto_end("p7_fxanim_cp_newworld_truck_flip_factory_igc_bundle");
-    mdl_truck = getent("factory_intro_truck_01", "targetname");
+    mdl_truck = getEnt("factory_intro_truck_01", "targetname");
     mdl_truck setModel("veh_t7_civ_truck_pickup_tech_zdf_dead");
-    mdl_truck disconnectpaths();
+    mdl_truck disconnectPaths();
     spawn_manager::enable("sm_intro_area_ally_skipto");
     load::function_a2995f22();
   }
@@ -283,7 +283,7 @@ function skipto_vat_room_init(str_objective, b_starting) {
   battlechatter::function_d9f49fba(0);
   umbragate_set("umbra_gate_vat_room_door_01", 0);
   if(sessionmodeiscampaignzombiesgame()) {
-    e_clip = getent("vat_room_flank_route_monster_clip", "targetname");
+    e_clip = getEnt("vat_room_flank_route_monster_clip", "targetname");
     e_clip delete();
   }
   vat_room();
@@ -304,7 +304,7 @@ function intro_area() {
   spawner::add_spawn_function_group("friendly_right", "script_string", &set_threat_bias);
   spawner::add_spawn_function_group("left_flank", "script_string", &set_threat_bias);
   spawner::add_spawn_function_group("right_flank", "script_string", &set_threat_bias);
-  var_f91ba6e1 = getent("diaz_factory_first_target", "script_noteworthy");
+  var_f91ba6e1 = getEnt("diaz_factory_first_target", "script_noteworthy");
   var_f91ba6e1 spawner::add_spawn_function(&function_e9ba1a28);
   spawn_manager::enable("sm_intro_area_ally");
   spawn_manager::enable("sm_intro_initial_enemies_left");
@@ -328,7 +328,7 @@ function function_6cc0f04e() {
       ai_friendly thread function_900831e2();
     }
   }
-  e_goal = getent("intro_factory_retreat", "targetname");
+  e_goal = getEnt("intro_factory_retreat", "targetname");
   a_ai_enemy = spawner::get_ai_group_ai("intro_area_enemy");
   foreach(ai_enemy in a_ai_enemy) {
     if(isalive(ai_enemy) && !ai_enemy istouching(e_goal) && ai_enemy.script_noteworthy !== "no_retreat") {
@@ -465,7 +465,7 @@ function function_b9d42d14() {
   foreach(ai_friendly in spawner::get_ai_group_ai("factory_allies")) {
     ai_friendly thread function_900831e2();
   }
-  e_goal = getent("back_of_alley", "targetname");
+  e_goal = getEnt("back_of_alley", "targetname");
   a_ai_enemy = spawner::get_ai_group_ai("alley_enemies");
   foreach(ai_enemy in a_ai_enemy) {
     if(isalive(ai_enemy) && !ai_enemy istouching(e_goal)) {
@@ -613,7 +613,7 @@ function function_ff4d4f4e() {
   foreach(node in var_10d6597a) {
     setenablenode(node, 0);
   }
-  e_target = getent("diaz_wallrun_target_ai", "targetname");
+  e_target = getEnt("diaz_wallrun_target_ai", "targetname");
   if(isDefined(e_target) && isalive(e_target)) {
     e_target ai::set_ignoreme(1);
   }
@@ -813,7 +813,7 @@ function function_43764348(a_ents) {
   ai_enemy = a_ents["ai_warehouse_startup"];
   ai_enemy endon("death");
   level endon("hash_a495f22c");
-  e_goalvolume = getent("warehouse_end_goalvolume", "targetname");
+  e_goalvolume = getEnt("warehouse_end_goalvolume", "targetname");
   ai_enemy setgoal(e_goalvolume);
   ai_enemy util::waittill_any("damage", "bulletwhizby");
   level flag::set("trigger_warehouse_worker_vignettes");
@@ -827,18 +827,18 @@ function function_b11050e5(a_ents) {
 }
 
 function function_8c12b9e9() {
-  e_door_right = getent("warehouse_exit_door_right", "targetname");
-  e_door_left = getent("warehouse_exit_door_left", "targetname");
-  e_door_right rotateyaw(75 * -1, 0.05);
-  e_door_left rotateyaw(75, 0.05);
+  e_door_right = getEnt("warehouse_exit_door_right", "targetname");
+  e_door_left = getEnt("warehouse_exit_door_left", "targetname");
+  e_door_right rotateYaw(75 * -1, 0.05);
+  e_door_left rotateYaw(75, 0.05);
   umbragate_set("umbra_gate_factory_door_01", 1);
-  var_cecf22e2 = getent("ug_factory_hideme", "targetname");
+  var_cecf22e2 = getEnt("ug_factory_hideme", "targetname");
   var_cecf22e2 hide();
 }
 
 function function_7ed63742() {
   a_ai = spawner::get_ai_group_ai("warehouse_enemy");
-  e_goalvolume = getent("warehouse_end_goalvolume", "targetname");
+  e_goalvolume = getEnt("warehouse_end_goalvolume", "targetname");
   var_c873bdb2 = 0;
   foreach(ai in a_ai) {
     if(isalive(ai) && !ai istouching(e_goalvolume)) {
@@ -854,13 +854,13 @@ function function_7ed63742() {
 }
 
 function close_heavy_doors(is_for_skipto = 0) {
-  e_door_right = getent("warehouse_exit_door_right", "targetname");
-  e_door_left = getent("warehouse_exit_door_left", "targetname");
-  e_door_right rotateyaw(75, 5, 0.25, 0.3);
-  e_door_left rotateyaw(75 * -1, 5, 0.25, 0.3);
+  e_door_right = getEnt("warehouse_exit_door_right", "targetname");
+  e_door_left = getEnt("warehouse_exit_door_left", "targetname");
+  e_door_right rotateYaw(75, 5, 0.25, 0.3);
+  e_door_left rotateYaw(75 * -1, 5, 0.25, 0.3);
   e_door_right waittill("rotatedone");
   umbragate_set("umbra_gate_factory_door_01", 0);
-  var_cecf22e2 = getent("ug_factory_hideme", "targetname");
+  var_cecf22e2 = getEnt("ug_factory_hideme", "targetname");
   var_cecf22e2 show();
   var_cecf22e2 solid();
 }
@@ -898,7 +898,7 @@ function function_d4b28fef() {
 }
 
 function function_29f8003e() {
-  var_1066b4e5 = getent("foundry_generator_dmg", "targetname");
+  var_1066b4e5 = getEnt("foundry_generator_dmg", "targetname");
   var_1066b4e5 ghost();
 }
 
@@ -1051,7 +1051,7 @@ function player_hijack_watcher() {
     while(true) {
       self waittill("clonedentity", e_clone);
       if(e_clone.targetname === "foundry_hackable_vehicle_ai") {
-        self cybercom_gadget_security_breach::setanchorvolume(getent("hijacked_vehicle_range", "targetname"));
+        self cybercom_gadget_security_breach::setanchorvolume(getEnt("hijacked_vehicle_range", "targetname"));
         e_clone.overridevehicledamage = &callback_foundry_vehicle_damage;
         e_clone thread hijacked_vehicle_death_watch();
         level flag::set("flag_hijack_complete");
@@ -1172,19 +1172,19 @@ function diaz_wasp_controller() {
   wait(0.05);
   self setgoal(struct::get("diaz_wasp_start_pos", "targetname").origin, 1);
   level flag::wait_till("junkyard_door_open");
-  self setgoal(getent("diaz_wasp_junkyard_goalvolume", "targetname"));
+  self setgoal(getEnt("diaz_wasp_junkyard_goalvolume", "targetname"));
   level flag::wait_till("foundry_junkyard_enemies_retreat");
-  self setgoal(getent("foundry_diaz_wasp_area_1", "targetname"));
+  self setgoal(getEnt("foundry_diaz_wasp_area_1", "targetname"));
   self ai::set_ignoreall(0);
   self ai::set_ignoreme(0);
   self thread function_d0cde060();
   function_83d084fe("foundry_area_1_moveup");
-  self setgoal(getent("foundry_diaz_wasp_area_2", "targetname"));
+  self setgoal(getEnt("foundry_diaz_wasp_area_2", "targetname"));
   function_83d084fe("foundry_area_2_moveup");
-  self setgoal(getent("foundry_diaz_wasp_area_3", "targetname"));
+  self setgoal(getEnt("foundry_diaz_wasp_area_3", "targetname"));
   function_83d084fe("foundry_area_3_moveup");
   self function_9f084580();
-  self setgoal(getent("foundry_diaz_wasp_area_4", "targetname"));
+  self setgoal(getEnt("foundry_diaz_wasp_area_4", "targetname"));
   level flag::wait_till("foundry_objective_complete");
   self clientfield::set("name_diaz_wasp", 0);
   util::stop_magic_bullet_shield(self);
@@ -1198,7 +1198,7 @@ function function_d0cde060() {
     return;
   }
   function_83d084fe("foundry_entered");
-  e_vat = getent("s1_01", "script_string");
+  e_vat = getEnt("s1_01", "script_string");
   if(e_vat.b_destroyed !== 1) {
     self ai::shoot_at_target("normal", e_vat, "fx_spill_middle_jnt", 3);
     e_vat dodamage(500, self.origin, self);
@@ -1211,7 +1211,7 @@ function function_9f084580() {
   if(level.activeplayers.size > 1) {
     return;
   }
-  e_vat = getent("bridge", "script_string");
+  e_vat = getEnt("bridge", "script_string");
   if(e_vat.b_destroyed !== 1) {
     self ai::shoot_at_target("normal", e_vat, "fx_spill_middle_jnt", 5);
     e_vat dodamage(500, self.origin, self);
@@ -1220,7 +1220,7 @@ function function_9f084580() {
 
 function open_door_to_junkyard_after_hijack() {
   level waittill("hash_fa1f139b");
-  var_9b668c87 = getent("fake_foundry_door", "targetname");
+  var_9b668c87 = getEnt("fake_foundry_door", "targetname");
   var_9b668c87 movez(128, 3, 1, 0.5);
   var_9b668c87 playSound("evt_junkyard_door_open");
   var_9b668c87 waittill("movedone");
@@ -1275,7 +1275,7 @@ function function_ff59cf8(nd_goal) {
 }
 
 function function_83d084fe(str_targetname) {
-  t_to_check = getent(str_targetname, "targetname");
+  t_to_check = getEnt(str_targetname, "targetname");
   t_to_check endon("death");
   while(true) {
     t_to_check waittill("trigger", var_4161ad80);
@@ -1307,7 +1307,7 @@ function function_763f6f1c(s_warp_pos) {
   self freezecontrols(1);
   self waittill("return_to_body");
   self waittill("transition_done");
-  self setorigin(s_warp_pos.origin);
+  self setOrigin(s_warp_pos.origin);
   self setplayerangles(s_warp_pos.angles);
   self setstance("stand");
   util::wait_network_frame();
@@ -1359,10 +1359,10 @@ function foundry_heavy_door_and_generator() {
   level.ai_diaz ai::set_behavior_attribute("sprint", 0);
   level.ai_diaz ai::set_behavior_attribute("cqb", 1);
   level thread scene::play("cin_new_03_03_factoryraid_vign_pry_open");
-  e_clip = getent("warehouse_door_clip", "targetname");
+  e_clip = getEnt("warehouse_door_clip", "targetname");
   e_clip delete();
   umbragate_set("umbra_gate_factory_door_01", 1);
-  var_cecf22e2 = getent("ug_factory_hideme", "targetname");
+  var_cecf22e2 = getEnt("ug_factory_hideme", "targetname");
   var_cecf22e2 hide();
   level.ai_diaz sethighdetail(0);
   level thread function_777a44b6();
@@ -1378,8 +1378,8 @@ function generator_damage_watch() {
   level flag::init("player_destroyed_foundry");
   objectives::set("cp_level_newworld_foundry_subobj_destroy_generator", struct::get("foundry_generator_objective_struct", "targetname"));
   n_damage = 0;
-  var_5c2b0988 = getent("foundry_generator", "targetname");
-  var_1066b4e5 = getent("foundry_generator_dmg", "targetname");
+  var_5c2b0988 = getEnt("foundry_generator", "targetname");
+  var_1066b4e5 = getEnt("foundry_generator_dmg", "targetname");
   var_5c2b0988 clientfield::set("weakpoint", 1);
   var_5c2b0988 globallogic_ui::createweakpointwidget(&"tag_weakpoint", 2600, 5000);
   var_5c2b0988 setCanDamage(1);
@@ -1424,10 +1424,10 @@ function function_11114c92(a_ents) {
 
 function function_29537dff() {
   umbragate_set("umbra_gate_foundry_door_01", 1);
-  var_cecf22e2 = getent("ug_foundry_hideme", "targetname");
+  var_cecf22e2 = getEnt("ug_foundry_hideme", "targetname");
   var_cecf22e2 hide();
-  e_door_right = getent("foundry_exit_door_right", "targetname");
-  e_door_right rotateyaw(-55, 3, 1.5, 0.5);
+  e_door_right = getEnt("foundry_exit_door_right", "targetname");
+  e_door_right rotateYaw(-55, 3, 1.5, 0.5);
 }
 
 function function_3fd07e2f() {
@@ -1451,14 +1451,14 @@ function function_ff771cc8(str_door, str_spawn_manager, n_delay) {
   if(isDefined(n_delay)) {
     wait(n_delay);
   }
-  mdl_door = getent(str_door, "targetname");
+  mdl_door = getEnt(str_door, "targetname");
   mdl_door movez(98, 1);
   mdl_door waittill("movedone");
   spawn_manager::enable(str_spawn_manager);
 }
 
 function vat_room() {
-  var_e0da8e0f = getent("vat_room_exit_door_trigger", "targetname");
+  var_e0da8e0f = getEnt("vat_room_exit_door_trigger", "targetname");
   var_e0da8e0f triggerenable(0);
   if(isDefined(level.bzm_newworlddialogue2_4callback)) {
     level thread[[level.bzm_newworlddialogue2_4callback]]();
@@ -1486,7 +1486,7 @@ function function_fc0bd7c9() {
 
 function function_b83baf6f(str_trigger, str_turret) {
   trigger::wait_till(str_trigger);
-  var_c316ad54 = getent(str_turret, "script_noteworthy", 1);
+  var_c316ad54 = getEnt(str_turret, "script_noteworthy", 1);
   if(isalive(var_c316ad54)) {
     level.ai_diaz ai::shoot_at_target("normal", var_c316ad54, "tag_barrel_animate", 3);
     if(isalive(var_c316ad54)) {
@@ -1506,7 +1506,7 @@ function function_1ad208() {
   trigger::wait_till("vat_room_spawn_closet");
   level thread function_f2c01307();
   level thread function_d9482ef9();
-  var_9b15e92e = getent("gv_vat_room_back", "targetname");
+  var_9b15e92e = getEnt("gv_vat_room_back", "targetname");
   foreach(ai in spawner::get_ai_group_ai("vat_room_enemy")) {
     if(isalive(ai)) {
       ai setgoal(var_9b15e92e);
@@ -1531,12 +1531,12 @@ function function_b56ffd69() {
 }
 
 function function_f2c01307() {
-  e_door = getent("vat_room_spawn_door", "targetname");
+  e_door = getEnt("vat_room_spawn_door", "targetname");
   e_door movez(136, 2, 0.5, 0.3);
   e_door waittill("movedone");
   spawn_manager::enable("sm_vat_room_closet");
   spawn_manager::wait_till_complete("sm_vat_room_closet");
-  var_13cfcc3e = getent("gv_vat_room_spawn_closet", "targetname");
+  var_13cfcc3e = getEnt("gv_vat_room_spawn_closet", "targetname");
   var_13cfcc3e endon("death");
   b_clear = 0;
   while(!b_clear) {
@@ -1648,7 +1648,7 @@ function skipto_inside_man_igc_init(str_objective, b_starting) {
   hidemiscmodels("charging_station_robot");
   e_player = function_61a9d0c7();
   level notify("hash_ecac2aac");
-  var_cecf22e2 = getent("ug_vat_room_hide_me", "targetname");
+  var_cecf22e2 = getEnt("ug_vat_room_hide_me", "targetname");
   var_cecf22e2 hide();
   umbragate_set("umbra_gate_vat_room_door_01", 1);
   inside_man_igc(e_player);
@@ -1750,7 +1750,7 @@ function inside_man_igc(e_player) {
   scene::add_scene_func("cin_new_04_01_insideman_1st_hack_sh320", &newworld_util::function_43dfaf16, "skip_started");
   level thread scene::play("cin_new_04_01_insideman_1st_hack_sh010", e_player);
   wait(1);
-  var_f5bb3a9b = getent("vat_room_exit_door", "targetname");
+  var_f5bb3a9b = getEnt("vat_room_exit_door", "targetname");
   var_f5bb3a9b movez(98, 1, 0.3, 0.3);
   var_f5bb3a9b playSound("evt_insider_door_open");
   level waittill("hash_51eebdcb");
@@ -1958,27 +1958,27 @@ function function_aef915b2() {
   switch (self.script_string) {
     case "s1_01": {
       e_vat = util::spawn_model("p7_fxanim_cp_newworld_cauldron_fall_01_mod", self.origin, self.angles);
-      e_vat.var_f3e8791a = getent("cauldron_1_hang", "targetname");
-      e_vat.var_8406755b = getent("cauldron_1_fall", "targetname");
+      e_vat.var_f3e8791a = getEnt("cauldron_1_hang", "targetname");
+      e_vat.var_8406755b = getEnt("cauldron_1_fall", "targetname");
       e_vat.str_exploder = "fx_interior_cauldron_right";
-      e_vat.var_84d67e66 = getent("fire_hazard_right_cauldron", "targetname");
+      e_vat.var_84d67e66 = getEnt("fire_hazard_right_cauldron", "targetname");
       break;
     }
     case "s1_02": {
       e_vat = util::spawn_model("p7_fxanim_cp_newworld_cauldron_fall_02_mod", self.origin, self.angles);
-      e_vat.var_f3e8791a = getent("cauldron_2_hang", "targetname");
-      e_vat.var_8406755b = getent("cauldron_2_fall", "targetname");
+      e_vat.var_f3e8791a = getEnt("cauldron_2_hang", "targetname");
+      e_vat.var_8406755b = getEnt("cauldron_2_fall", "targetname");
       e_vat.str_exploder = "fx_interior_cauldron_left";
-      e_vat.var_84d67e66 = getent("fire_hazard_left_cauldron", "targetname");
+      e_vat.var_84d67e66 = getEnt("fire_hazard_left_cauldron", "targetname");
       break;
     }
     case "bridge": {
       e_vat = util::spawn_model("p7_fxanim_cp_newworld_cauldron_bridge_mod", self.origin, self.angles);
-      e_vat.var_f3e8791a = getent("cauldron_bridge_hang", "targetname");
-      e_vat.var_8406755b = getent("cauldron_bridge_fall", "targetname");
-      e_vat.var_3d0b54ab = getent("foundry_catwalk_clip", "targetname");
-      e_vat.var_cb14c98c = getent("foundry_catwalk_ai_clip", "targetname");
-      e_vat.var_84d67e66 = getent("fire_hazard_bridge", "targetname");
+      e_vat.var_f3e8791a = getEnt("cauldron_bridge_hang", "targetname");
+      e_vat.var_8406755b = getEnt("cauldron_bridge_fall", "targetname");
+      e_vat.var_3d0b54ab = getEnt("foundry_catwalk_clip", "targetname");
+      e_vat.var_cb14c98c = getEnt("foundry_catwalk_ai_clip", "targetname");
+      e_vat.var_84d67e66 = getEnt("fire_hazard_bridge", "targetname");
       var_77f0f8f6 = getEntArray("cauldron_bridge_fxanim_clip", "targetname");
       foreach(e_clip in var_77f0f8f6) {
         e_clip notsolid();
@@ -2014,11 +2014,11 @@ function conveyor_belt_vat_spawner(str_location) {
 
 function function_35fa6de(var_b3db89e0) {
   e_mover = util::spawn_model("tag_origin", self.origin, self.angles);
-  self linkto(e_mover);
+  self linkTo(e_mover);
   e_mover playLoopSound("evt_vat_move_loop");
   s_move_to = struct::get(var_b3db89e0, "targetname");
   n_move_time = distance(self.origin, s_move_to.origin) / 80;
-  e_mover moveto(s_move_to.origin, n_move_time);
+  e_mover moveTo(s_move_to.origin, n_move_time);
   e_mover waittill("movedone");
   e_mover delete();
   self delete();
@@ -2251,9 +2251,9 @@ function diaz_wasp_spawner(a_ents) {
 function function_738d040b() {
   level.ai_diaz dialog::say("diaz_okay_weapons_hot_1");
   level flag::init("diaz_factory_exterior_follow_up_vo");
-  t_left = getent("factory_exterior_left_path_vo", "targetname");
-  t_right = getent("factory_exterior_right_path_vo", "targetname");
-  var_7d32135d = getent("factory_exterior_center_path_vo", "targetname");
+  t_left = getEnt("factory_exterior_left_path_vo", "targetname");
+  t_right = getEnt("factory_exterior_right_path_vo", "targetname");
+  var_7d32135d = getEnt("factory_exterior_center_path_vo", "targetname");
   level thread function_e8db2799(t_left, "left");
   level thread function_e8db2799(t_right, "right");
   level thread function_e8db2799(var_7d32135d, "center");

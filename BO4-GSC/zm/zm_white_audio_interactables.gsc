@@ -37,17 +37,17 @@ function_f339b159() {
 
   foreach(s_punch_card in level.var_5a599dbf) {
     s_punch_card.is_collected = 0;
-    s_punch_card.var_453ce50f = getent(s_punch_card.target, "targetname");
+    s_punch_card.var_453ce50f = getEnt(s_punch_card.target, "targetname");
     s_unitrigger = s_punch_card zm_unitrigger::create("", 64);
     s_punch_card thread function_c7d4845();
   }
 
   level.var_b53764f7 = 0;
-  level.var_af224340 = getent("punch_card_screen", "targetname");
+  level.var_af224340 = getEnt("punch_card_screen", "targetname");
   level.var_af224340 hide();
   level thread function_19daa1b1();
   level flag::init(#"punch_card_inserted");
-  level.var_da4b53f8 = getent("punch_card_anim", "targetname");
+  level.var_da4b53f8 = getEnt("punch_card_anim", "targetname");
   level.var_da4b53f8 hide();
 }
 
@@ -103,7 +103,7 @@ function_7a70f281() {
   v_forward = anglesToForward(self.angles);
   wait 0.5;
   self playSound("evt_punch_card_insert");
-  self moveto(self.origin + v_forward * -14, 3);
+  self moveTo(self.origin + v_forward * -14, 3);
   wait 1;
   level flag::set(#"punch_card_inserted");
   self waittill(#"movedone");
@@ -195,7 +195,7 @@ function_626095c1(object) {
     v_origin = object.var_eb397f67;
   }
 
-  v_delta = vectornormalize(self getEye() - v_origin);
+  v_delta = vectorNormalize(self getEye() - v_origin);
   v_view = anglesToForward(self getplayerangles());
   v_cross = vectorcross(v_view, v_delta);
   var_35b81369 = vectordot(v_cross, anglestoup(object.angles));
@@ -238,7 +238,7 @@ function_488e39dc() {
 }
 
 function_462cd7c0() {
-  self.device = getent(self.target, "targetname");
+  self.device = getEnt(self.target, "targetname");
   self.unitrigger_stub = self zm_unitrigger::create("", (32, 32, 32));
   self thread function_b4dbbdd1();
   zm_unitrigger::function_89380dda(self.unitrigger_stub, 1);
@@ -249,7 +249,7 @@ function_938d4207() {
   self endon(#"death");
   level endon(#"insanity_mode_triggered");
   pixbeginevent(#"hash_12312acd8fd62f9e");
-  e_trigger = getent(self.target, "targetname");
+  e_trigger = getEnt(self.target, "targetname");
   s_result = e_trigger waittill(#"damage");
   self thread function_8c80503();
   pixendevent();
@@ -298,7 +298,7 @@ function_d4c6dc0d() {
   }
 
   var_df4e73a7[0] stoploopsound(0.5);
-  playsoundatposition(#"hash_1f7edbf8f3a60766", self.origin);
+  playSoundAtPosition(#"hash_1f7edbf8f3a60766", self.origin);
 }
 
 uin_kls_counteruavdefeated() {
@@ -371,9 +371,9 @@ function_6fb01110(player) {
   }
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_4a6b20a71fb9496b");
+    self setHintString(#"hash_4a6b20a71fb9496b");
   } else {
-    self sethintstring(#"hash_68d7ac4aedcba8f5");
+    self setHintString(#"hash_68d7ac4aedcba8f5");
   }
 
   return true;
@@ -481,7 +481,7 @@ function_6b2499f9() {
   while(n_index < a_variants.size) {
     self waittill(#"play_audio");
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       zm_hms_util::function_e308175e("vox_tv_message_avog_" + a_variants[n_index], self.origin, player);
     }
 
@@ -498,7 +498,7 @@ function_a0b040d4() {
   s_unitrigger = level.var_215e60c4 zm_unitrigger::create(&function_c9271718, 64, &function_ee32c750);
   s_unitrigger thread function_4bda6193();
   level waittill(#"lounge_revoked");
-  vol = getent("vol_soul_lounge", "targetname");
+  vol = getEnt("vol_soul_lounge", "targetname");
   exploder::exploder("fxexp_elec_lounge");
   vol thread function_cf1b4a16();
   wait 60;
@@ -513,14 +513,14 @@ function_c9271718(player) {
 
   if(level.var_215e60c4.is_on === 1) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_5da008b5fb1b3d");
+      self setHintString(#"hash_5da008b5fb1b3d");
     } else {
-      self sethintstring(#"hash_57516d7d358e63df");
+      self setHintString(#"hash_57516d7d358e63df");
     }
   } else if(function_8b1a219a()) {
-    self sethintstring(#"hash_5678e908d228814e");
+    self setHintString(#"hash_5678e908d228814e");
   } else {
-    self sethintstring(#"hash_7dca7ee995ad3d4a");
+    self setHintString(#"hash_7dca7ee995ad3d4a");
   }
 
   return true;
@@ -564,7 +564,7 @@ function_93040a5d() {
       level.var_5da5aff4 = 1;
     }
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       zm_hms_util::function_e308175e(alias, level.var_215e60c4.origin, player);
 
       if(level.var_5da5aff4) {
@@ -591,9 +591,9 @@ function_cf1b4a16() {
   shock_status_effect = getstatuseffect(#"hash_320c81d91eb89d73");
 
   while(level flag::get(#"lounge_revoked")) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player istouching(self)) {
-        player playrumbleonentity("damage_heavy");
+        player playRumbleOnEntity("damage_heavy");
         player playSound(#"hash_5af2a9d11f007b9");
         player status_effect::status_effect_apply(shock_status_effect, undefined, self, 1);
       }
@@ -632,14 +632,14 @@ function_4bda6193() {
         wait 1;
         level.var_215e60c4.is_on = 1;
 
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           zm_hms_util::function_e308175e("vox_tedd_interact_first_tedd_0", level.var_215e60c4.origin, player);
         }
 
-        level.var_215e60c4.body = getent("ee_tedd", "targetname");
+        level.var_215e60c4.body = getEnt("ee_tedd", "targetname");
         level.var_215e60c4.body thread function_93040a5d();
       } else {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           zm_hms_util::function_e308175e("vox_tedd_interact_tedd_" + a_variants[n_index], level.var_215e60c4.origin, player);
         }
 

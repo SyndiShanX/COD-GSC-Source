@@ -284,20 +284,20 @@ trap_trigger_hint(var_0) {
 
     switch (var_1) {
       case "no_power":
-        var_0 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+        var_0 setHintString(&"ZOMBIES_REQUIRES_POWER");
         var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
         var_0 maps\mp\zombies\_util::tokenhintstring(0);
         break;
       case "active":
-        var_0 sethintstring(&"ZOMBIES_EMPTY_STRING");
+        var_0 setHintString(&"ZOMBIES_EMPTY_STRING");
         var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
         var_0 maps\mp\zombies\_util::tokenhintstring(0);
         break;
       case "cooldown":
         if(isDefined(self.hint_strings)) {
-          var_0 sethintstring(self.hint_strings["hint_cooldown"]);
+          var_0 setHintString(self.hint_strings["hint_cooldown"]);
         } else {
-          var_0 sethintstring(&"ZOMBIES_TRAP_COOLDOWN");
+          var_0 setHintString(&"ZOMBIES_TRAP_COOLDOWN");
         }
 
         var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
@@ -305,9 +305,9 @@ trap_trigger_hint(var_0) {
         break;
       case "ready":
         if(isDefined(self.hint_strings)) {
-          var_0 sethintstring(self.hint_strings["hint_ready"]);
+          var_0 setHintString(self.hint_strings["hint_ready"]);
         } else {
-          var_0 sethintstring(&"ZOMBIES_TRAP_READY");
+          var_0 setHintString(&"ZOMBIES_TRAP_READY");
         }
 
         var_2 = self.cost;
@@ -323,7 +323,7 @@ trap_trigger_hint(var_0) {
         var_0 maps\mp\zombies\_util::tokenhintstring(1);
         break;
       case "deactivate":
-        var_0 sethintstring(&"ZOMBIES_REQUIRES_POWER");
+        var_0 setHintString(&"ZOMBIES_REQUIRES_POWER");
         var_0 setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
         var_0 maps\mp\zombies\_util::tokenhintstring(0);
         break;
@@ -355,8 +355,8 @@ trap_fx_move(var_0) {
     switch (var_6.script_noteworthy) {
       case "damage_over_time":
       case "damage":
-        var_6 enablelinkto();
-        var_6 linkto(var_1);
+        var_6 enablelinkTo();
+        var_6 linkTo(var_1);
         thread trap_damage_trigger(var_6, var_6.script_noteworthy == "damage_over_time", "fx_trap_move");
         break;
       case "moveto":
@@ -404,7 +404,7 @@ trap_laser_move_list(var_0) {
     self.movelist[self.movelist.size] = var_0;
 
     if(isDefined(var_0.target)) {
-      var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+      var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
       continue;
     }
 
@@ -434,8 +434,8 @@ trap_laser(var_0) {
     switch (var_6.script_noteworthy) {
       case "damage_over_time":
       case "damage":
-        var_6 enablelinkto();
-        var_6 linkto(var_1);
+        var_6 enablelinkTo();
+        var_6 linkTo(var_1);
         thread trap_damage_trigger(var_6, var_6.script_noteworthy == "damage_over_time", "laser");
         break;
       case "moveto":
@@ -576,11 +576,11 @@ trap_laser_move(var_0) {
     }
 
     if(var_6 > 0) {
-      var_0 moveto(var_4.origin, var_5);
+      var_0 moveTo(var_4.origin, var_5);
     }
 
     if(var_7 > 0) {
-      var_0 rotateto(var_4.angles, var_5);
+      var_0 rotateTo(var_4.angles, var_5);
     }
 
     if(var_5 > 0) {
@@ -946,7 +946,7 @@ trap_zomboni(var_0) {
     var_11 = spawn("script_model", var_10);
     var_11.angles = var_1 gettagangles(var_8);
     var_11 setModel("tag_origin");
-    var_11 linkto(var_1, var_8);
+    var_11 linkTo(var_1, var_8);
     var_11.grab_radius = var_2;
     var_11.jump_radius = var_3;
     var_11.attack_radius = var_4;
@@ -972,17 +972,17 @@ trap_zomboni(var_0) {
         var_17.zomboni = var_1;
         var_17.noturretplacement = 1;
         var_1.clip = var_17;
-        var_17 linkto(var_1);
+        var_17 linkTo(var_1);
         break;
       case "mantle":
         var_1.mantle = var_17;
         var_1.mantle hide();
         var_1.mantlecontents = var_1.mantle setcontents(0);
-        var_17 linkto(var_1);
+        var_17 linkTo(var_1);
         break;
       case "kill_trigger":
-        var_17 enablelinkto();
-        var_17 linkto(var_1);
+        var_17 enablelinkTo();
+        var_17 linkTo(var_1);
         var_1.killtrigger = var_17;
         break;
       case "door":
@@ -1095,7 +1095,7 @@ trap_zomboni_show_unresoloved_collision_locs(var_0) {
 trap_zomboni_get_unresolved_collision_locs(var_0, var_1) {
   var_2 = [];
   var_3 = [(-16, 16, 56), (0, 16, 56), (18, 16, 56), (-16, -22, 56), (0, -22, 56), (18, -22, 56), (-16, -60, 56), (0, -60, 56), (18, -60, 56)];
-  var_4 = getent("zomboni_room_volume", "targetname");
+  var_4 = getEnt("zomboni_room_volume", "targetname");
   var_5 = var_0 gettagorigin("body_animate_jnt");
   var_5 = (var_5[0], var_5[1], var_0.origin[2]);
 
@@ -1112,7 +1112,7 @@ trap_zomboni_get_unresolved_collision_locs(var_0, var_1) {
   var_11 = anglesToForward(var_0.angles);
 
   foreach(var_13 in var_10) {
-    var_14 = vectornormalize(var_13.origin - var_5);
+    var_14 = vectorNormalize(var_13.origin - var_5);
 
     if(vectordot(var_11, var_14) < 0) {
       var_2[var_2.size] = var_13;
@@ -1282,7 +1282,7 @@ trap_zomboni_zombies_attack(var_0) {
         if(vectordot(var_11, var_9) < 0.1) {
           continue;
         }
-        var_12 = vectornormalize(var_0.origin - var_5.origin);
+        var_12 = vectorNormalize(var_0.origin - var_5.origin);
 
         if(vectordot(var_12, var_11) < 0.1) {
           continue;
@@ -1512,11 +1512,11 @@ trap_zomboni_animated_distraction(var_0, var_1) {
 
 trap_zomboni_door_open(var_0, var_1) {
   var_0 playSound("chompy_hatch");
-  var_0 moveto(var_0.open_origin, var_1);
+  var_0 moveTo(var_0.open_origin, var_1);
 }
 
 trap_zomboni_door_close(var_0, var_1) {
-  var_0 moveto(var_0.close_origin, var_1);
+  var_0 moveTo(var_0.close_origin, var_1);
 }
 
 trap_zomboni_kill_zone(var_0) {
@@ -1847,7 +1847,7 @@ trap_zomboni_path_get_linked_ents(var_0, var_1) {
     var_3 = strtok(var_0.script_linkto, " ");
 
     for(var_4 = 0; var_4 < var_3.size; var_4++) {
-      var_5 = getent(var_3[var_4], "script_linkname");
+      var_5 = getEnt(var_3[var_4], "script_linkname");
 
       if(isDefined(var_5)) {
         if(!isDefined(var_1) || isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == var_1) {

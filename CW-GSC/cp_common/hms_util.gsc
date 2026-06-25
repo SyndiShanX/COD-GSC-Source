@@ -87,7 +87,7 @@ function function_d2913eb6(str_value, str_key = "targetname") {
   assert(isstring(str_key), "<dev string:x16d>");
   var_39a8d367 = struct::get(str_value, str_key);
   assert(isDefined(var_39a8d367), "<dev string:x1ae>" + str_key + "<dev string:x1ef>" + str_value + "<dev string:x1f9>");
-  self setorigin(var_39a8d367.origin);
+  self setOrigin(var_39a8d367.origin);
   self setplayerangles(var_39a8d367.angles);
 }
 
@@ -391,7 +391,7 @@ function set_demeanor(var_5207b7a8) {
 }
 
 function function_53531f27(str_trigger_name, str_val = "targetname") {
-  trig = getent(str_trigger_name, str_val);
+  trig = getEnt(str_trigger_name, str_val);
 
   if(isDefined(trig) && trig istriggerenabled()) {
     trig trigger::use();
@@ -698,10 +698,10 @@ function function_d370236e(target, var_7b23aa51 = 500, var_e544dc47 = 400, tacqu
     var_9a396209 = isDefined(self.combatstate) && self.combatstate == "combat_state_in_combat";
 
     if(var_9a396209 && isDefined(self.enemy) && isalive(self.enemy)) {
-      coverdirection = vectornormalize(self.enemy.origin - self.origin);
+      coverdirection = vectorNormalize(self.enemy.origin - self.origin);
       var_5134ce37 = 1;
     } else if(!var_5134ce37) {
-      coverdirection = vectornormalize(target.origin - self.origin);
+      coverdirection = vectorNormalize(target.origin - self.origin);
     }
 
     if(var_9a396209) {
@@ -808,7 +808,7 @@ function function_8b562a1(target, pickedpoint) {
     var_7aeb1d95 = target.origin - pickedpoint;
   }
 
-  var_7aeb1d95 = vectornormalize((var_7aeb1d95[0], var_7aeb1d95[1], 0));
+  var_7aeb1d95 = vectorNormalize((var_7aeb1d95[0], var_7aeb1d95[1], 0));
   faceangles = vectortoangles(var_7aeb1d95);
   self setgoal(pickedpoint, 1, undefined, undefined, faceangles);
 }
@@ -1332,7 +1332,7 @@ function function_ca8302de() {
   light_origin = self gettagorigin(var_7f025395);
   light_angles = self gettagangles(var_7f025395);
   self.var_21c17c08 = spawn("script_model", light_origin);
-  self.var_21c17c08 linkto(self, var_7f025395);
+  self.var_21c17c08 linkTo(self, var_7f025395);
   self.var_21c17c08.team = "axis";
   self.var_21c17c08.name = "APC loudspeaker";
   self.var_21c17c08.speaking = 0;

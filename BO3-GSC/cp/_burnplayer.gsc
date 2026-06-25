@@ -436,7 +436,7 @@ function doburningsound() {
   self endon("disconnect");
   self endon("death");
   fire_sound_ent = spawn("script_origin", self.origin);
-  fire_sound_ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+  fire_sound_ent linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
   fire_sound_ent playLoopSound("mpl_player_burn_loop");
   self thread firesounddeath(fire_sound_ent);
   self waittill("stopburnsound");

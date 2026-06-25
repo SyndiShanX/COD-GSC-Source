@@ -209,7 +209,7 @@ _id_9563(var_0, var_1) {
   var_0._id_0481 = "little_bird";
   var_0._id_04DE = "lbravo_physics_mp";
   var_0._id_31A0 = 1;
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;
@@ -328,7 +328,7 @@ _id_3A62() {
 
 _id_9564(var_0) {
   var_1 = spawnturret("misc_turret", var_0 gettagorigin("tag_origin"), "tur_gun_lighttank_mp", 0);
-  var_1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_1 setModel("veh8_mil_lnd_coscar_west_turret_gun");
   var_1 setmode("sentry_offline");
   var_1 setsentryowner(undefined);
@@ -628,7 +628,7 @@ _id_100D1(var_0) {
           }
 
           scripts\cp_mp\utility\weapon_utility::_id_3971(var_3);
-          var_3 missile_settargetent(var_1);
+          var_3 missile_settargetEnt(var_1);
           var_3 notify("missile_pairedWithFlare");
         }
       }

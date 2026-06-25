@@ -125,8 +125,8 @@ setup_ambush() {
   common_scripts\utility::flag_set("checkpoint_taken");
   thread delay_keegan_color();
   maps\_utility::disable_trigger_with_targetname("trig_get_in_jeep");
-  level.pre_ambush_scene_org = common_scripts\utility::getstruct("ambush_scene_org", "targetname");
-  level.ambush_jeep_scene = common_scripts\utility::getstruct("ambush_jeep_scene", "targetname");
+  level.pre_ambush_scene_org = common_scripts\utility::getStruct("ambush_scene_org", "targetname");
+  level.ambush_jeep_scene = common_scripts\utility::getStruct("ambush_jeep_scene", "targetname");
   thread maps\clockwork_audio::checkpoint_start_ambush();
   maps\clockwork_code::spawn_allies();
 
@@ -169,8 +169,8 @@ setup_checkpoint() {
   maps\clockwork_code::dog_setup();
   level.start_point = "checkpoint";
   maps\clockwork_code::setup_player();
-  level.pre_ambush_scene_org = common_scripts\utility::getstruct("ambush_scene_org", "targetname");
-  level.ambush_jeep_scene = common_scripts\utility::getstruct("ambush_jeep_scene", "targetname");
+  level.pre_ambush_scene_org = common_scripts\utility::getStruct("ambush_scene_org", "targetname");
+  level.ambush_jeep_scene = common_scripts\utility::getStruct("ambush_jeep_scene", "targetname");
   maps\_utility::vision_set_changes("clockwork", 0);
   maps\clockwork_code::spawn_allies();
   maps\_utility::disable_trigger_with_targetname("trig_get_in_jeep");
@@ -343,7 +343,7 @@ give_back_offhands() {
 
 intro_anims() {
   thread maps\clockwork_audio::intro_black();
-  var_0 = common_scripts\utility::getstruct("intro2_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("intro2_start", "targetname");
   var_1 = maps\_utility::spawn_anim_model("player_view");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "clock_prepare");
   var_2 = level.player getweaponslistprimaries();
@@ -430,7 +430,7 @@ hide_at_end_anim(var_0) {
 }
 
 intro_anims_enemies() {
-  var_0 = common_scripts\utility::getstruct("intro2_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("intro2_start", "targetname");
   var_1 = maps\_utility::spawn_anim_model("sm_body1", var_0.origin);
   var_1.animname = "sm_body1";
   var_2 = maps\_utility::spawn_anim_model("sm_body2", var_0.origin);
@@ -445,8 +445,8 @@ intro_anims_enemies() {
 setup_checkpoint_combat() {
   common_scripts\utility::flag_wait("spawn_checkpoint_guards");
   thread player_failcase_tunnel();
-  level.pre_ambush_scene_org = common_scripts\utility::getstruct("ambush_scene_org", "targetname");
-  level.ambush_jeep_scene = common_scripts\utility::getstruct("ambush_jeep_scene", "targetname");
+  level.pre_ambush_scene_org = common_scripts\utility::getStruct("ambush_scene_org", "targetname");
+  level.ambush_jeep_scene = common_scripts\utility::getStruct("ambush_jeep_scene", "targetname");
   maps\_utility::array_spawn_function_targetname("introcp_guy_radio", ::handle_radio_alert);
   maps\_utility::array_spawn_function_targetname("introcp_guys_tower", ::handle_tower_alert);
   maps\_utility::array_spawn_function_targetname("introcp_guys_remaining", ::handle_remaining_alert);
@@ -471,10 +471,10 @@ handle_radiotower_guy() {
   level.introcp_guy_radio maps\_utility::gun_remove();
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("com_hand_radio");
-  var_0 linkto(level.introcp_guy_radio, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(level.introcp_guy_radio, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("weapon_binocular");
-  var_1 linkto(level.introcp_guy_radio, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(level.introcp_guy_radio, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   level.pre_ambush_scene_org thread maps\_anim::anim_loop_solo(level.introcp_guy_radio, "lookout");
   thread delete_accessories_on_death(var_1, var_0);
   common_scripts\utility::flag_wait("start_enemies_provoked_early");
@@ -587,7 +587,7 @@ approach_anims(var_0, var_1, var_2, var_3, var_4) {
 handle_approach_anims_end(var_0) {
   common_scripts\utility::flag_wait_any("intro_finished", "start_enemies_provoked_early");
   var_0 notify("stop_loop");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 cipher_approach_anims(var_0, var_1, var_2, var_3, var_4) {
@@ -608,7 +608,7 @@ handle_ciper_approach_anims_end(var_0) {
   }
 
   var_0 notify("stop_loop");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 cipher_ambush_approach(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -680,7 +680,7 @@ look_at_tower_early_vo() {
   level endon("player_shot_someone_on_radio");
   level endon("player_shot_target_on_tower");
   level endon("start_enemies_provoked_early");
-  var_0 = getent("towerorg", "targetname");
+  var_0 = getEnt("towerorg", "targetname");
 
   for(;;) {
     if(level.player maps\_utility::isads() && level.player adsButtonPressed()) {
@@ -713,7 +713,7 @@ look_for_last_guy() {
   thread look_for_last_guy_timeout();
   level endon("last_guy_out_building");
   level endon("player_shot_someone_on_radio");
-  var_0 = getent("lastguyorg", "targetname");
+  var_0 = getEnt("lastguyorg", "targetname");
 
   for(;;) {
     var_0 maps\_utility::waittill_player_lookat_for_time(0.6, 0.98);
@@ -734,7 +734,7 @@ look_at_tower_vo() {
   level endon("player_looking_at_tower");
   level endon("start_enemies_provoked_early");
   var_0 = cos(7);
-  var_1 = getent("towerorg", "targetname");
+  var_1 = getEnt("towerorg", "targetname");
   var_1 maps\_utility::waittill_player_lookat_for_time(0.05, var_0);
   common_scripts\utility::flag_set("player_looking_at_tower");
 }
@@ -911,9 +911,9 @@ handle_remaining_alert() {
       level.pre_ambush_scene_org thread maps\_anim::anim_single_solo(self, "spotlight_enemy_a");
       var_2 = maps\_utility::spawn_anim_model("cp_ammo_jt", var_0.origin);
       var_3 = maps\_utility::spawn_anim_model("cp_ammo_mdl", var_0.origin);
-      var_3 linkto(var_2, "J_prop_1");
+      var_3 linkTo(var_2, "J_prop_1");
       var_4 = maps\_utility::spawn_anim_model("cp_ammo_mdl", var_0.origin);
-      var_4 linkto(var_2, "J_prop_2");
+      var_4 linkTo(var_2, "J_prop_2");
       var_0 thread maps\_anim::anim_single_solo(var_2, "cp_ammo_joint");
       var_2 thread ammo_crate_failsafe(var_1, var_3, var_4);
     }
@@ -979,13 +979,13 @@ kill_on_failsafe() {
 
 ammo_crate_failsafe(var_0, var_1, var_2) {
   common_scripts\utility::flag_wait("drop_ammo_crates");
-  maps\_utility::anim_stopanimscripted();
-  var_0 maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
+  var_0 maps\_utility::anim_stopanimScripted();
   var_3 = randomfloatrange(10, 100);
-  var_4 = vectornormalize(var_1.origin - 1 - var_1.origin);
+  var_4 = vectorNormalize(var_1.origin - 1 - var_1.origin);
   var_1 unlink();
   var_1 physicslaunchclient(var_1.origin, var_4 * var_3);
-  var_5 = vectornormalize(var_2.origin - 1 - var_2.origin);
+  var_5 = vectorNormalize(var_2.origin - 1 - var_2.origin);
   var_2 unlink();
   var_2 physicslaunchclient(var_2.origin, var_5 * var_3);
 }
@@ -997,12 +997,12 @@ handle_spotlight_enemy_b() {
   var_0 thread maps\_anim::anim_loop_solo(self, "spotlight_enemy_b_loop", "stop_spotlight_enemy_b_loop");
   var_1 = maps\_utility::spawn_anim_model("cp_light_jt", var_0.origin);
   var_2 = maps\_utility::spawn_anim_model("cp_light_mdl", var_0.origin);
-  var_2 linkto(var_1, "J_prop_2");
+  var_2 linkTo(var_1, "J_prop_2");
   var_0 thread maps\_anim::anim_first_frame_solo(var_1, "cp_light_joint");
   common_scripts\utility::flag_wait("start_spotlight_b");
   var_0 notify("stop_spotlight_enemy_b_loop");
-  var_3 = getent("clip_checkpoint_searchlight", "targetname");
-  var_3 linkto(var_2);
+  var_3 = getEnt("clip_checkpoint_searchlight", "targetname");
+  var_3 linkTo(var_2);
 
   if(isDefined(self) && isalive(self)) {
     var_0 thread maps\_anim::anim_single_solo(self, "spotlight_enemy_b");
@@ -1060,7 +1060,7 @@ alert_enemies() {
 
 alert_enemies_early() {
   self endon("death");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   wait(randomfloatrange(1.5, 2.5));
   self.baseaccuracy = 1;
   self.ignoreall = 0;
@@ -1090,7 +1090,7 @@ handle_tower_enemy_provoked_early() {
   common_scripts\utility::waittill_any("ai_event", "flashbang");
   wait 0.25;
   common_scripts\utility::flag_set("start_enemies_provoked_early");
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = 0;
   self.ignoreme = 0;
   self.fixednode = 0;
@@ -1118,7 +1118,7 @@ handle_remaining_enemy_provoked_early() {
   thread someone_please_kill_me_now();
   common_scripts\utility::waittill_any("ai_event", "flashbang", "death", "going_in_hot");
   common_scripts\utility::flag_set("start_enemies_provoked_early");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   self.ignoreall = 0;
   self.ignoreme = 0;
 }
@@ -1199,7 +1199,7 @@ handle_baker_ambush_anims(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_0 thread maps\_anim::anim_loop_solo(var_1, "clock_ambush_hut_wait", "stop_clock_ambush_hut_wait");
   common_scripts\utility::flag_wait("FLAG_baker_out_of_hut");
   var_0 notify("stop_clock_ambush_hut_wait");
-  var_1 maps\_utility::anim_stopanimscripted();
+  var_1 maps\_utility::anim_stopanimScripted();
   var_0 maps\_anim::anim_single_solo(var_6[0], "clock_ambush_hut_walkout");
 }
 
@@ -1248,7 +1248,7 @@ failsafe_c_k_bags(var_0) {
   common_scripts\utility::flag_wait("destroy_player_ambush");
 
   foreach(var_2 in var_0) {
-    var_2 maps\_utility::anim_stopanimscripted();
+    var_2 maps\_utility::anim_stopanimScripted();
     var_2 hide();
     var_3 = maps\_utility::spawn_anim_model("keegan_bag", var_2.origin);
     var_3.animname = "keegan_bag";
@@ -1288,7 +1288,7 @@ obj_enterbase() {
 obj_bodydrag() {
   common_scripts\utility::flag_wait("FLAG_obj_bodydrag");
   var_0 = maps\_utility::obj("CleanupCheckpoint");
-  var_1 = getent("obj_dragbody", "targetname");
+  var_1 = getEnt("obj_dragbody", "targetname");
   objective_add(var_0, "active", &"CLOCKWORK_OBJ_CHECKPOINT");
   objective_current(var_0);
   objective_position(var_0, var_1.origin);
@@ -1307,13 +1307,13 @@ obj_getinjeep() {
   level.gold_jeep_player_door = spawn("script_model", level.jeep.origin);
   level.gold_jeep_player_door setModel("chinese_brave_warrior_obj_door_back_LE");
   level.gold_jeep_player_door.angles = level.jeep.angles;
-  level.gold_jeep_player_door linkto(level.jeep);
+  level.gold_jeep_player_door linkTo(level.jeep);
   common_scripts\utility::flag_wait("FLAG_obj_getinjeep_complete");
 }
 
 obj_stabdriver() {
   var_0 = maps\_utility::obj("stab");
-  var_1 = getent("obj_stabdriver", "targetname");
+  var_1 = getEnt("obj_stabdriver", "targetname");
   objective_add(var_0, "current", &"CLOCKWORK_OBJ_DRIVER");
   objective_current(var_0);
   thread complete_stabdriver(var_0);
@@ -1334,7 +1334,7 @@ spawn_ambush_vehicles() {
   level.jeep hidepart("back_door_left_jnt");
   wait 0.25;
   level.player_door = maps\_utility::spawn_anim_model("jeep_left_door");
-  level.player_door linkto(level.jeep, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
+  level.player_door linkTo(level.jeep, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
   level.jeep2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("intro_jeep2");
   level.jeep maps\_vehicle::vehicle_lights_on("headlights");
   level.jeep2 maps\_vehicle::vehicle_lights_on("headlights");
@@ -1392,14 +1392,14 @@ swap_head(var_0) {
 
 spawn_jeep_riders() {
   level.jeep.dontunloadonend = 1;
-  level.ambush_jeep_driver = getent("ambush_jeep_driver", "targetname") maps\_utility::spawn_ai(1);
+  level.ambush_jeep_driver = getEnt("ambush_jeep_driver", "targetname") maps\_utility::spawn_ai(1);
   level.ambush_jeep_driver maps\_utility::magic_bullet_shield();
   level.ambush_jeep_driver maps\_utility::gun_remove();
   level.ambush_jeep_driver.animname = "ambush_jeep_driver";
   level.ambush_jeep_driver.script_startingposition = 0;
   level.jeep thread maps\_vehicle_aianim::guy_enter(level.ambush_jeep_driver);
   level.ambush_jeep_driver thread swap_head("head_fed_army_c_arctic");
-  level.ambush_jeep_passenger = getent("ambush_jeep_passenger", "targetname") maps\_utility::spawn_ai(1);
+  level.ambush_jeep_passenger = getEnt("ambush_jeep_passenger", "targetname") maps\_utility::spawn_ai(1);
   level.ambush_jeep_passenger maps\_utility::magic_bullet_shield();
   level.ambush_jeep_passenger maps\_utility::gun_remove();
   level.ambush_jeep_passenger.animname = "ambush_jeep_passenger";
@@ -1413,17 +1413,17 @@ spawn_jeep_riders() {
 
 spawn_jeep2_riders() {
   level.jeep2.dontunloadonend = 1;
-  level.ambush_jeep2_driver = getent("ambush_jeep2_driver", "targetname") maps\_utility::spawn_ai(1);
+  level.ambush_jeep2_driver = getEnt("ambush_jeep2_driver", "targetname") maps\_utility::spawn_ai(1);
   level.ambush_jeep2_driver maps\_utility::gun_remove();
   level.ambush_jeep2_driver.animname = "ambush_jeep2_driver";
   level.ambush_jeep2_driver.script_startingposition = 0;
   level.jeep2 thread maps\_vehicle_aianim::guy_enter(level.ambush_jeep2_driver);
-  level.ambush_jeep2_passenger = getent("ambush_jeep2_passenger", "targetname") maps\_utility::spawn_ai(1);
+  level.ambush_jeep2_passenger = getEnt("ambush_jeep2_passenger", "targetname") maps\_utility::spawn_ai(1);
   level.ambush_jeep2_passenger maps\_utility::gun_remove();
   level.ambush_jeep2_passenger.animname = "ambush_jeep2_passenger";
   level.ambush_jeep2_passenger.script_startingposition = 1;
   level.jeep2 thread maps\_vehicle_aianim::guy_enter(level.ambush_jeep2_passenger);
-  level.ambush_jeep2_backr = getent("ambush_jeep2_backR", "targetname") maps\_utility::spawn_ai(1);
+  level.ambush_jeep2_backr = getEnt("ambush_jeep2_backR", "targetname") maps\_utility::spawn_ai(1);
   level.ambush_jeep2_backr maps\_utility::gun_remove();
   level.ambush_jeep2_backr.animname = "ambush_jeep2_backR";
   level.ambush_jeep2_backr.script_startingposition = 3;
@@ -1432,14 +1432,14 @@ spawn_jeep2_riders() {
 
 handle_player_bodydrag_death() {
   var_0 = level.pre_ambush_scene_org;
-  var_1 = getent("intro_bodydrag_enemy", "targetname");
+  var_1 = getEnt("intro_bodydrag_enemy", "targetname");
   level.intro_bodydrag_guy = var_1 maps\_utility::spawn_ai(1);
   level.intro_bodydrag_guy.animname = "playerdrag";
   level.intro_bodydrag_guy.allowdeath = 1;
   level.intro_bodydrag_guy.nodrop = 1;
   var_2 = maps\_utility::spawn_anim_model("cp_key_jt", var_0.origin);
   var_3 = maps\_utility::spawn_anim_model("cp_key_mdl", var_0.origin);
-  var_3 linkto(var_2, "J_prop_1");
+  var_3 linkTo(var_2, "J_prop_1");
   var_2 thread key_failsafe(var_3);
   var_0 thread maps\_anim::anim_single_solo(var_2, "cp_key_joint");
   level.pre_ambush_scene_org thread maps\_anim::anim_single_solo(level.intro_bodydrag_guy, "keytoss_enemy_b");
@@ -1463,9 +1463,9 @@ handle_player_bodydrag_death() {
 
 key_failsafe(var_0) {
   common_scripts\utility::flag_wait_any("start_enemies_provoked_early", "bodydrag1_fakedead", "bodydrag2_fakedead");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   var_1 = randomfloatrange(10, 100);
-  var_2 = vectornormalize(var_0.origin - 1 - var_0.origin);
+  var_2 = vectorNormalize(var_0.origin - 1 - var_0.origin);
   var_0 unlink();
   var_0 physicslaunchclient(var_0.origin, var_2 * var_1);
   var_0 delete();
@@ -1514,7 +1514,7 @@ handle_backpack_objective() {
 }
 
 handle_keegandrag_death() {
-  var_0 = getent("intro_bodydrag2_enemy", "targetname");
+  var_0 = getEnt("intro_bodydrag2_enemy", "targetname");
   level.intro_keegandrag_guy = var_0 maps\_utility::spawn_ai(1);
   level.intro_keegandrag_guy.animname = "keegandrag";
   level.intro_keegandrag_guy.allowdeath = 1;
@@ -1542,8 +1542,8 @@ handle_keegandrag_death() {
 
 keegan_body_door_close() {
   common_scripts\utility::flag_wait("FLAG_keegan_drag_door");
-  var_0 = getent("keegan_body_door_close", "targetname");
-  var_0 rotateyaw(-50, 2.5);
+  var_0 = getEnt("keegan_body_door_close", "targetname");
+  var_0 rotateYaw(-50, 2.5);
 }
 
 keegandrag_death_damage_watcher() {
@@ -1579,7 +1579,7 @@ keegandrag_death_damage_watcher() {
 
 setup_bodydrag_startpoint() {
   thread handle_backpack_objective();
-  var_0 = getent("intro_bodydrag_enemy", "targetname");
+  var_0 = getEnt("intro_bodydrag_enemy", "targetname");
   level.intro_bodydrag_guy = var_0 maps\_utility::spawn_ai(1);
   level.intro_bodydrag_guy.animname = "playerdrag";
   level.intro_bodydrag_guy.dontmelee = 1;
@@ -1589,7 +1589,7 @@ setup_bodydrag_startpoint() {
   level.intro_bodydrag_guy maps\_utility::gun_remove();
   level.pre_ambush_scene_org maps\_anim::anim_first_frame_solo(level.intro_bodydrag_guy, "clock_bodydrag_drag");
   thread player_body_drag();
-  var_0 = getent("intro_bodydrag2_enemy", "targetname");
+  var_0 = getEnt("intro_bodydrag2_enemy", "targetname");
   level.intro_keegandrag_guy = var_0 maps\_utility::spawn_ai(1);
   level.intro_keegandrag_guy.animname = "keegandrag";
   level.intro_keegandrag_guy.dontmelee = 1;
@@ -1598,7 +1598,7 @@ setup_bodydrag_startpoint() {
   level.intro_keegandrag_guy setcontents(0);
   level.intro_keegandrag_guy maps\_utility::gun_remove();
   level.pre_ambush_scene_org maps\_anim::anim_first_frame_solo(level.intro_keegandrag_guy, "clock_intro");
-  var_0 = getent("balcony_death_guy", "targetname");
+  var_0 = getEnt("balcony_death_guy", "targetname");
   level.intro_balcony_guy = var_0 maps\_utility::spawn_ai(1);
   level.intro_balcony_guy.animname = "bakerdrag";
   level.intro_balcony_guy.dontmelee = 1;
@@ -1612,9 +1612,9 @@ setup_bodydrag_startpoint() {
 player_body_drag() {
   common_scripts\utility::flag_wait("FLAG_obj_bodydrag");
   thread btr_sees_body();
-  var_0 = getent("trig_intro_bodydrag_scene", "targetname");
-  var_0 sethintstring(&"CLOCKWORK_HINT_DRAG");
-  var_1 = common_scripts\utility::getstruct("body_drag_look_at", "targetname");
+  var_0 = getEnt("trig_intro_bodydrag_scene", "targetname");
+  var_0 setHintString(&"CLOCKWORK_HINT_DRAG");
+  var_1 = common_scripts\utility::getStruct("body_drag_look_at", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_0, var_1, undefined, undefined, 1);
   common_scripts\utility::flag_set("FLAG_obj_bodydrag_complete");
   level notify("player_triggered_body_drag");
@@ -1743,8 +1743,8 @@ player_looking_at_stabguy() {
   level endon("ambush_keegan_kill");
   thread handle_weapon_melee_toggle();
   var_0 = undefined;
-  var_1 = getent("trig_player_stab", "script_noteworthy");
-  var_2 = getent(var_1.target, "targetname");
+  var_1 = getEnt("trig_player_stab", "script_noteworthy");
+  var_2 = getEnt(var_1.target, "targetname");
 
   for(;;) {
     wait 0.05;
@@ -1831,7 +1831,7 @@ waittill_player_triggers_stealth_kill() {
 }
 
 handle_balcony_death() {
-  var_0 = getent("balcony_death_guy", "targetname");
+  var_0 = getEnt("balcony_death_guy", "targetname");
   level.intro_balcony_guy = var_0 maps\_utility::spawn_ai(1);
   level.intro_balcony_guy.animname = "bakerdrag";
   level.intro_balcony_guy.nodrop = 1;
@@ -2001,7 +2001,7 @@ animate_ambush_scene_enemies() {
   }
 
   foreach(var_4 in level.ambush_enemies) {
-    var_4 maps\_utility::anim_stopanimscripted();
+    var_4 maps\_utility::anim_stopanimScripted();
   }
 
   level.jeep notify("stop_loop");
@@ -2090,7 +2090,7 @@ anim_clockambush_finished(var_0) {
   self waittillmatch("single anim", "end");
   common_scripts\utility::flag_set(var_0);
   var_1 = maps\_vehicle_aianim::anim_pos(level.jeep, self.script_startingposition);
-  self linkto(level.jeep, var_1.sittag, (0, 0, 0), (0, 0, 0));
+  self linkTo(level.jeep, var_1.sittag, (0, 0, 0), (0, 0, 0));
   thread maps\_anim::anim_loop_solo(self, "jeep_idle", "stop_idle");
 }
 
@@ -2114,7 +2114,7 @@ vehicle_play_guy_anim(var_0, var_1, var_2, var_3, var_4) {
 
 link_bag_to_jeep_after_anim() {
   self waittillmatch("single anim", "end");
-  self linkto(level.jeep);
+  self linkTo(level.jeep);
   common_scripts\utility::flag_wait("jeep_intro_ride_done");
   self delete();
 }
@@ -2176,8 +2176,8 @@ get_in_jeep_nag_vo() {
 intro_drive() {
   var_0 = 66;
   level waittill("enable_look_jeep_door_trigger");
-  var_1 = getent("trig_get_in_jeep", "targetname");
-  var_1 sethintstring(&"CLOCKWORK_HINT_VEHICLE");
+  var_1 = getEnt("trig_get_in_jeep", "targetname");
+  var_1 setHintString(&"CLOCKWORK_HINT_VEHICLE");
   var_2 = spawnStruct();
   var_2.origin = (-38223, 9545, 3545);
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_1, var_2, undefined, undefined, 1);
@@ -2217,7 +2217,7 @@ intro_drive() {
   var_7[0] = level.jeep_player_arms;
   var_7[1] = maps\_utility::spawn_anim_model("player_bag");
   var_7[1] hide();
-  level.jeep_player_arms linkto(level.jeep, "tag_guy0", (50, 0, 0), (0, 0, 0));
+  level.jeep_player_arms linkTo(level.jeep, "tag_guy0", (50, 0, 0), (0, 0, 0));
   level.jeep thread maps\_anim::anim_single_solo(level.jeep_player_arms, "ambush_jeep_enter_player", "tag_guy0");
   common_scripts\utility::waitframe();
   level.jeep_player_arms setanim(level.scr_anim[level.jeep_player_arms.animname]["ambush_jeep_enter_player"], 1.0, 0, 0);
@@ -2232,7 +2232,7 @@ intro_drive() {
   level.jeep_player_arms waittillmatch("single anim", "end");
   level.player freezecontrols(0);
   level.jeep_player_arms hide();
-  var_7[1] linkto(level.jeep);
+  var_7[1] linkTo(level.jeep);
   level.player allowcrouch(0);
   level.player allowprone(0);
   level.player playerlinktodelta(level.jeep_player_arms, "tag_player", 1, 130, 130, 40, 15);
@@ -2248,7 +2248,7 @@ intro_drive() {
   common_scripts\utility::exploder(850);
   level.jeep.attachedpath = undefined;
   level.jeep notify("newpath");
-  level.jeep stopanimscripted();
+  level.jeep stopanimScripted();
   var_8 = getvehiclenode("intro_road_path", "targetname");
   level.jeep thread maps\_vehicle::vehicle_paths(var_8);
   level.jeep startpath(var_8);
@@ -2311,7 +2311,7 @@ allies_jeep_sync_anim() {
 }
 
 vehicle_play_jeep_anim(var_0) {
-  level.jeep stopanimscripted();
+  level.jeep stopanimScripted();
   var_1 = getanimlength(level.scr_anim[level.jeep.animname][var_0]);
   level.jeep setflaggedanim("jeep_anim", level.scr_anim[level.jeep.animname][var_0]);
   wait(var_1);
@@ -2402,8 +2402,8 @@ handle_dog_leaving_jeep() {
   wait 2;
   level.jeep notify("stop_dog_loop");
   level.dog unlink();
-  level.dog stopanimscripted();
-  var_0 = common_scripts\utility::getstruct("interior_dog", "targetname");
+  level.dog stopanimScripted();
+  var_0 = common_scripts\utility::getStruct("interior_dog", "targetname");
   level.dog forceteleport(var_0.origin, var_0.angles);
   maps\_utility::delaythread(7, maps\clockwork_code::safe_activate_trigger_with_targetname, "no_dog_left_behind");
   thread maps\clockwork_code::dog_walk_until_flag("nvgs_on");
@@ -2596,14 +2596,14 @@ destroy_player_ambush() {
 
   level.allies[0].ignoreall = 0;
   level.allies[0].ignoreme = 0;
-  level.allies[0] maps\_utility::anim_stopanimscripted();
+  level.allies[0] maps\_utility::anim_stopanimScripted();
   level.allies[1] unlink();
   level.allies[1].ignoreall = 0;
   level.allies[1].ignoreme = 0;
-  level.allies[1] maps\_utility::anim_stopanimscripted();
+  level.allies[1] maps\_utility::anim_stopanimScripted();
   level.allies[2].ignoreall = 0;
   level.allies[2].ignoreme = 0;
-  level.allies[2] maps\_utility::anim_stopanimscripted();
+  level.allies[2] maps\_utility::anim_stopanimScripted();
 }
 
 fail_mission_ambush() {
@@ -2616,7 +2616,7 @@ fail_mission_ambush() {
 wait_anim_finished() {
   self waittillmatch("anim single", "end");
   self unlink();
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
 }
 
 handle_grenade_thrown_failcase() {

@@ -31,7 +31,7 @@ func_9FDD(param_00, param_01) {
     var_07 = level.var_28BA;
   }
 
-  param_00 linkto(var_07, "tag_origin", (var_05, var_06, var_03), (0, var_02 - 90, 0));
+  param_00 linkTo(var_07, "tag_origin", (var_05, var_06, var_03), (0, var_02 - 90, 0));
   param_00 method_805C();
   param_00 method_808C();
   wait 0.05;
@@ -52,13 +52,13 @@ func_9FDD(param_00, param_01) {
   }
 
   param_00.var_0116 = param_00.var_0116 + -1 * anglesToForward(param_00.var_001D) * var_09;
-  param_00 moveto(var_08, 3);
+  param_00 moveTo(var_08, 3);
   param_00 rotateroll(20, 0.05);
   param_00 method_808C();
   level notify("uav_update");
   param_00 maps\mp\gametypes\_hostmigration::func_A74C("death", 3);
   if(isDefined(param_00)) {
-    param_00 linkto(var_07, "tag_origin");
+    param_00 linkTo(var_07, "tag_origin");
   }
 }
 
@@ -81,7 +81,7 @@ func_9FDE(param_00, param_01) {
     param_00.var_620D method_8352(3000, 0);
   }
 
-  param_00 moveto(var_03, 3);
+  param_00 moveTo(var_03, 3);
   param_00 rotateroll(-20, 1);
   param_00 maps\mp\gametypes\_hostmigration::func_A74C("death", 2);
   var_04 = func_46FB(param_00.var_01C8, param_00.var_01A7);
@@ -772,7 +772,7 @@ func_7EF0(param_00) {
   var_01 = 60;
   var_02 = -1 * param_00 * var_01;
   for(;;) {
-    self rotateyaw(var_02, var_01);
+    self rotateYaw(var_02, var_01);
     wait(var_01);
   }
 }
@@ -1280,7 +1280,7 @@ func_2695(param_00, param_01) {
   var_05 = gettime();
   for(var_06 = 0; var_06 < var_04 * 1000; var_06 = gettime() - var_05) {
     var_07 = anglesToForward(self.var_001D);
-    var_08 = vectornormalize(param_00.var_0116 - self.var_0116);
+    var_08 = vectorNormalize(param_00.var_0116 - self.var_0116);
     var_09 = vectordot(var_07, var_08);
     var_0A = self.var_0116 + rotatevector(var_02, self.var_001D);
     var_0B = var_0A + var_07 * 8000;

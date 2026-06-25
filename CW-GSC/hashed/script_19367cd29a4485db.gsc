@@ -261,7 +261,7 @@ function function_8cf627fd(params) {
       level.var_f662b93f = !is_true(level.var_f662b93f);
 
       if(level.var_f662b93f) {
-        getplayers()[0] thread function_df5be8b2();
+        getPlayers()[0] thread function_df5be8b2();
       } else {
         level notify(#"hash_624d34392463b628");
       }
@@ -316,7 +316,7 @@ function function_8cf627fd(params) {
       level thread function_254bafc6();
       break;
     case #"hash_790736a92ac26568":
-      v_origin = getplayers()[0] function_7ae85497();
+      v_origin = getPlayers()[0] function_7ae85497();
       actor = arraygetclosest(v_origin, getactorarray());
 
       if(isDefined(actor)) {
@@ -375,7 +375,7 @@ function function_8cf627fd(params) {
 
       break;
     case #"hash_5c8627bc3cc0e4ef":
-      target_player = getplayers()[0];
+      target_player = getPlayers()[0];
       var_8a3f16c6 = target_player;
       spawn = var_8a3f16c6 squad_spawn::function_e402b74e(var_8a3f16c6, target_player);
 
@@ -445,7 +445,7 @@ function function_e77b67f(params, show) {
 }
 
 function function_f9023d3a() {
-  v_origin = getplayers()[0] function_7ae85497();
+  v_origin = getPlayers()[0] function_7ae85497();
   v_origin = getclosestpointonnavmesh(v_origin, 64, 32);
 
   if(!isDefined(v_origin)) {
@@ -465,7 +465,7 @@ function function_f9023d3a() {
 }
 
 function function_c78fe37a() {
-  v_origin = getplayers()[0] function_7ae85497();
+  v_origin = getPlayers()[0] function_7ae85497();
   v_origin = getclosestpointonnavmesh(v_origin, 64, 32);
 
   if(!isDefined(v_origin)) {
@@ -495,7 +495,7 @@ function function_dabc0bfe() {
 }
 
 function function_71797cab() {
-  v_origin = getplayers()[0] function_7ae85497();
+  v_origin = getPlayers()[0] function_7ae85497();
   points = [];
 
   if(isDefined(level.var_29cf6901.start)) {
@@ -658,12 +658,12 @@ function function_7ae85497(dist) {
   v_forward = vectorscale(v_forward, 4000);
   var_5927a215 = (10, 10, 10);
   v_eye = self getplayercamerapos();
-  var_abd03397 = physicstrace(v_eye, v_eye + v_forward, -1 * var_5927a215, var_5927a215, getplayers()[0], 64 | 2);
+  var_abd03397 = physicstrace(v_eye, v_eye + v_forward, -1 * var_5927a215, var_5927a215, getPlayers()[0], 64 | 2);
   return var_abd03397[#"position"];
 }
 
 function spawn_aitype(aitype) {
-  host = getplayers()[0];
+  host = getPlayers()[0];
   v_origin = host function_7ae85497();
   ai = spawnactor(aitype, v_origin, host.angles + (0, 180, 0), "<dev string:x71d>", 1);
 
@@ -709,7 +709,7 @@ function private function_51403488() {
   level endon(#"hash_275c4bf3f697b9e", #"end_game", #"game_ended");
 
   while(true) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
 
     if(!isDefined(player)) {
       return;
@@ -820,17 +820,17 @@ function private function_42d3c9f5(params) {
 
   if(isDefined(var_a75f9486)) {
     var_a75f9486 = int(var_a75f9486);
-    player = getplayers()[0];
-    player setorigin(a_s_spawns[var_a75f9486].origin);
+    player = getPlayers()[0];
+    player setOrigin(a_s_spawns[var_a75f9486].origin);
     player setplayerangles(a_s_spawns[var_a75f9486].angles);
     return;
   }
 
-  foreach(n_index, player in getplayers()) {
+  foreach(n_index, player in getPlayers()) {
     s_spawn = a_s_spawns[n_index];
 
     if(isDefined(s_spawn)) {
-      player setorigin(s_spawn.origin);
+      player setOrigin(s_spawn.origin);
       player setplayerangles(s_spawn.angles);
     }
   }
@@ -865,7 +865,7 @@ function function_afb25532(str_type, b_enable) {
 
   if(b_enable) {
     while(true) {
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(!isDefined(player)) {
         return;
@@ -963,10 +963,10 @@ function function_34f85f1b(str_flag, var_1303e212) {
     var_842cdacd = [];
 
     if(var_1303e212) {
-      hotzone = arraygetclosest(getplayers()[0].origin, level.hotzones);
+      hotzone = arraygetclosest(getPlayers()[0].origin, level.hotzones);
       var_842cdacd = struct::get_array(hotzone.targetname, "<dev string:x131>");
     } else {
-      trigger = arraygetclosest(getplayers()[0].origin, getEntArray("<dev string:x9c5>", "<dev string:x6c3>"));
+      trigger = arraygetclosest(getPlayers()[0].origin, getEntArray("<dev string:x9c5>", "<dev string:x6c3>"));
 
       if(isDefined(trigger.target)) {
         var_842cdacd = struct::get_array(trigger.target, "<dev string:x6c3>");
@@ -1097,13 +1097,13 @@ function function_46997bdf(spawn_points, var_e6c99abc) {
 function function_70e877d7(spawn_points) {
   level.var_135a36f7 = undefined;
   var_d610cbe2 = sqr(1000);
-  player = getplayers()[0];
-  player_vec = vectornormalize(anglesToForward(player getplayerangles()));
+  player = getPlayers()[0];
+  player_vec = vectorNormalize(anglesToForward(player getplayerangles()));
   var_167af5ff = undefined;
   best_dot = 0.707;
 
   foreach(spawn_point in spawn_points) {
-    var_a9944b6 = vectornormalize(spawn_point.origin - player.origin);
+    var_a9944b6 = vectorNormalize(spawn_point.origin - player.origin);
     dot = vectordot(player_vec, var_a9944b6);
 
     if(dot > best_dot && distancesquared(spawn_point.origin, player.origin) < var_d610cbe2) {

@@ -66,7 +66,7 @@ function function_1cdbb1e5(owner, weapon) {
 }
 
 function function_462c8632(owner, origin, normal, velocity, weapon, team, customsettings) {
-  playsoundatposition("", origin);
+  playSoundAtPosition("", origin);
   self thread function_e8ad1d81(origin, owner, normal, velocity, weapon, team, customsettings);
 }
 
@@ -105,7 +105,7 @@ function function_7cbeb2f0(normal) {
 function function_e8ad1d81(position, owner, normal, velocity, weapon, team, customsettings) {
   originalposition = position;
   var_493d36f9 = normal;
-  var_77261b6 = vectornormalize(velocity);
+  var_77261b6 = vectorNormalize(velocity);
   var_1f254a06 = vectorscale(var_77261b6, -1);
   var_d6d43109 = 1;
   var_e76400c0 = undefined;
@@ -632,7 +632,7 @@ function getpotentialtargets(owner, customsettings) {
 
     foreach(team, _ in level.teams) {
       if(customsettings.var_14e16318 === 1 || util::function_fbce7263(team, owner_team)) {
-        potential_targets = arraycombine(potential_targets, getplayers(team), 0, 0);
+        potential_targets = arraycombine(potential_targets, getPlayers(team), 0, 0);
       }
     }
 
@@ -858,7 +858,7 @@ function sndfiredamage() {
     self.sndfireent = spawn("script_origin", self.origin);
 
     if(self haspart("tag_origin")) {
-      self.sndfireent linkto(self, "tag_origin");
+      self.sndfireent linkTo(self, "tag_origin");
     }
 
     self.sndfireent playSound(#"chr_burn_start");

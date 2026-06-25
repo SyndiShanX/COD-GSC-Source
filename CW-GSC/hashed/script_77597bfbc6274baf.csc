@@ -167,10 +167,10 @@ function function_bb5d646a(localclientnum, oldval, newval, bnewent, binitialsnap
   e_fx.sound_id = e_fx playLoopSound(#"hash_20b1d2b1a7ca4646");
   var_29eb5284 = struct::get("ww_soul_charge");
   util::playFXOnTag(bwasdemojump, #"hash_61e3c7a179d7cdfb", e_fx, "tag_origin");
-  e_fx moveto(e_fx.origin + (0, 0, 40), 0.8);
+  e_fx moveTo(e_fx.origin + (0, 0, 40), 0.8);
   wait 0.75;
   n_time = distance(e_fx.origin, var_29eb5284.origin) / 400;
-  e_fx moveto(var_29eb5284.origin, n_time);
+  e_fx moveTo(var_29eb5284.origin, n_time);
   e_fx waittill(#"movedone");
   util::playFXOnTag(bwasdemojump, #"hash_4d1d38d5da4d929b", e_fx, "tag_origin");
   e_fx stoploopsound(e_fx.sound_id);

@@ -66,10 +66,10 @@ function function_771e686b() {
 
 function function_9b596d4d() {
   level.player endon(#"death");
-  level.var_a21e79c9 = getent("vol_recruitmentoffice", "targetname");
+  level.var_a21e79c9 = getEnt("vol_recruitmentoffice", "targetname");
 
   if(!function_11b2b847()) {
-    var_9dce83fe = getent("sm_informant_file_model", "targetname");
+    var_9dce83fe = getEnt("sm_informant_file_model", "targetname");
 
     if(isDefined(var_9dce83fe)) {
       var_9dce83fe delete();
@@ -140,7 +140,7 @@ function function_429cb29f() {
   level thread scene::play("scene_kgb_office_informant");
   self namespace_979752dc::function_2324f175(0);
   self.threatsight = 0;
-  chair = getent("informant_chair", "targetname");
+  chair = getEnt("informant_chair", "targetname");
   self.var_a08ba405 = chair;
   self.var_c681e4c1 = 0;
   self.propername = #"hash_32ec1ebb26836258";
@@ -183,7 +183,7 @@ function function_7fb0c444() {
   self endon(#"death", #"deleted", #"entitydeleted", #"takedown_begin");
   level endon(#"flag_player_swap");
   var_bb3b46c7 = 1;
-  var_a21e79c9 = getent("vol_recruitmentoffice", "targetname");
+  var_a21e79c9 = getEnt("vol_recruitmentoffice", "targetname");
 
   while(var_bb3b46c7) {
     wait 0.5;
@@ -207,7 +207,7 @@ function function_7fb0c444() {
 function function_72472b59() {
   self endon(#"death", #"deleted", #"entitydeleted", #"takedown_begin");
   level endon(#"flag_player_swap");
-  door = getent("recruitment_office_door", "targetname");
+  door = getEnt("recruitment_office_door", "targetname");
   door doors::waittill_door_opened();
   self thread function_67c8f49b();
   var_1db7eb00 = 1;
@@ -284,19 +284,19 @@ function function_11b2b847() {
 }
 
 function function_aa622b93() {
-  var_9dce83fe = getent("sm_informant_file_model", "targetname");
+  var_9dce83fe = getEnt("sm_informant_file_model", "targetname");
 
   if(isDefined(var_9dce83fe)) {
     var_9dce83fe delete();
   }
 
-  chair = getent("informant_chair", "targetname");
+  chair = getEnt("informant_chair", "targetname");
 
   if(isDefined(chair)) {
     chair delete();
   }
 
-  var_a21e79c9 = getent("vol_recruitmentoffice", "targetname");
+  var_a21e79c9 = getEnt("vol_recruitmentoffice", "targetname");
 
   if(isDefined(var_a21e79c9)) {
     var_a21e79c9 delete();

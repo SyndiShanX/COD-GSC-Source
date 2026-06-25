@@ -1996,7 +1996,7 @@ sword_geist_bomb_detonate_pick_bomb() {
     }
 
     var_07 = var_06.var_8203.var_116 - var_00 getEye();
-    var_08 = vectordot(vectornormalize(var_07), var_04);
+    var_08 = vectordot(vectorNormalize(var_07), var_04);
     if(var_08 >= var_03 && var_08 > var_02) {
       var_02 = var_08;
       var_01 = var_06;
@@ -2498,7 +2498,7 @@ sword_post_ee_complete_handler() {
     return;
   }
 
-  var_01 = getent(var_00.var_1A2, "targetname");
+  var_01 = getEnt(var_00.var_1A2, "targetname");
   var_02 = 0;
   if(function_02A3()) {
     foreach(var_04 in level.var_744A) {
@@ -2528,7 +2528,7 @@ sword_post_ee_complete_handler() {
       var_08 showtoclient(var_04);
       var_01 enableplayeruse(var_04);
       var_01 usetouchtriggerrequirefacingposition(1, var_00.var_116);
-      var_01 sethintstring(&"ZOMBIE_DLC3_PICKUP_SWORD");
+      var_01 setHintString(&"ZOMBIE_DLC3_PICKUP_SWORD");
       level thread sword_post_ee_complete_trig_think(var_01, var_00, var_04);
       continue;
     }

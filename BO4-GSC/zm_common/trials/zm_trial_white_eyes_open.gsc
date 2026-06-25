@@ -29,23 +29,23 @@ __init__() {
 }
 
 on_begin() {
-  spawner = getent("weeping_spawner", "script_noteworthy");
+  spawner = getEnt("weeping_spawner", "script_noteworthy");
   level.disable_nuke_delay_spawning = 1;
   level flag::clear("spawn_zombies");
   level thread lui::screen_flash(0.2, 1.3, 0.5, 1, "black");
   wait 0.2;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player setmovespeedscale(0);
     player thread teleport_player();
   }
 
   wait 0.1;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.e_weeper = zombie_utility::spawn_zombie(spawner, spawner.targetname, undefined, level.round_number);
     var_9d88bc68 = anglesToForward(player.angles);
-    var_9d88bc68 = 50 * vectornormalize(var_9d88bc68);
+    var_9d88bc68 = 50 * vectorNormalize(var_9d88bc68);
     goal_pos = player.origin + var_9d88bc68;
     goal_pos = getclosestpointonnavmesh(goal_pos, 128, 32);
     player.e_weeper forceteleport(goal_pos, player.angles - (0, 180, 0), 1);
@@ -66,7 +66,7 @@ on_begin() {
   level.disable_nuke_delay_spawning = 0;
   level flag::set("spawn_zombies");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player setmovespeedscale(1);
     player.e_weeper.var_72411ccf = undefined;
     player.e_weeper zombie_utility::set_zombie_run_cycle("super_sprint");
@@ -80,7 +80,7 @@ on_begin() {
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player callback::remove_on_player_damage(&on_player_damage);
     player.e_weeper val::reset(#"mee_2", "takedamage");
     player.e_weeper val::reset(#"mee_2", "ignoreme");

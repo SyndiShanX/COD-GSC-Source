@@ -1118,7 +1118,7 @@ isPointVulnerable(playerorigin) {
   forward = anglesToForward(self.angles);
 
   if(distsqrd < level.claymoreDetectionRadius * level.claymoreDetectionRadius) {
-    playerdir = vectornormalize(playerpos - pos);
+    playerdir = vectorNormalize(playerpos - pos);
     angle = acos(vectordot(playerdir, forward));
     if(angle < level.claymoreDetectionConeAngle) {
       return true;

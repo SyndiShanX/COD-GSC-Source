@@ -66,9 +66,9 @@ function main() {
   level.frgame.tracks = [];
   for(i = 0; i < 1; i++) {
     level.frgame.tracks[i] = spawnStruct();
-    level.frgame.tracks[i].starttrigger = getent("fr_start_0" + i, "targetname");
+    level.frgame.tracks[i].starttrigger = getEnt("fr_start_0" + i, "targetname");
     assert(isDefined(level.frgame.tracks[i].starttrigger));
-    level.frgame.tracks[i].goaltrigger = getent("fr_end_0" + i, "targetname");
+    level.frgame.tracks[i].goaltrigger = getEnt("fr_end_0" + i, "targetname");
     assert(isDefined(level.frgame.tracks[i].goaltrigger));
     level.frgame.tracks[i].highscores = [];
   }
@@ -272,7 +272,7 @@ function activatetrack(trackindex) {
   level clientfield::set("freerun_checkpointIndex", 0);
   self readhighscores();
   self givecustomloadout();
-  self setorigin(level.frgame.activetrack.playerstart.origin);
+  self setOrigin(level.frgame.activetrack.playerstart.origin);
   self setplayerangles(level.frgame.activetrack.playerstart.angles);
   self setvelocity((0, 0, 0));
   self recordgameevent("start");
@@ -470,7 +470,7 @@ function setup_weapon_targets() {
     }
   }
   foreach(target in self.weaponobject.targets) {
-    target.blocker = getent(target.target, "targetname");
+    target.blocker = getEnt(target.target, "targetname");
     if(isDefined(target.blocker)) {
       if(!isDefined(target.blocker.targetcount)) {
         target.blocker.targetcount = 0;
@@ -510,7 +510,7 @@ function turn_off_target(weapon) {
   self.visual notsolid();
   self.blocker blocker_disable();
   playFX(level.fr_target_disable_fx, self.origin);
-  playsoundatposition(level.fr_target_disable_sound, self.origin);
+  playSoundAtPosition(level.fr_target_disable_sound, self.origin);
 }
 
 function blocker_enable() {
@@ -734,17 +734,17 @@ function respawnatactivecheckpoint() {
   take_players_out_of_tutorial_mode();
   self playsoundtoplayer("evt_freerun_respawn", self);
   if(isDefined(self.respawn_position)) {
-    self setorigin(self.respawn_position);
+    self setOrigin(self.respawn_position);
     self setvelocity((0, 0, 0));
   } else {
     if(isDefined(level.frgame.activespawnpoint.spawnpoint)) {
-      self setorigin(level.frgame.activespawnpoint.spawnpoint.origin);
+      self setOrigin(level.frgame.activespawnpoint.spawnpoint.origin);
       self setplayerangles(level.frgame.activespawnpoint.spawnpoint.angles);
       self setvelocity((0, 0, 0));
     } else {
       spawn_origin = level.frgame.activespawnlocation;
       spawn_origin = spawn_origin + vectorscale((0, 0, 1), 5);
-      self setorigin(spawn_origin);
+      self setOrigin(spawn_origin);
       self setplayerangles(level.frgame.activespawnangles);
       self setvelocity((0, 0, 0));
     }

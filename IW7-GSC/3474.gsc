@@ -149,7 +149,7 @@ func_E2B7(var_0) {
 
   if(isDefined(self.moving_platform)) {
     var_1 getrankxp();
-    var_1 linkto(self.moving_platform);
+    var_1 linkTo(self.moving_platform);
   }
 
   var_2 = var_0.var_127C8 * var_0.var_127C8;

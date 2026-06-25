@@ -474,7 +474,7 @@ bcsDebugWaiter() {
 enableBattleChatter() {
   init_battleChatter();
 
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread animscripts\battleChatter_ai::addToSystem();
   }
@@ -557,7 +557,7 @@ delayed_notify(n, time, end) {
 }
 
 nearestPlayer() {
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 0) {
     return undefined;
   }
@@ -1219,7 +1219,7 @@ bcPlayPhrase(eventAction, eventType, chatPhrase, decCallCount) {
 filter(potentialThreats, isThreat) {
   threats = [];
   for(i = 0; i < potentialThreats.size; i++) {
-    players = GetPlayers();
+    players = getPlayers();
 
     for(p = 0; p < players.size; p++) {
       if(potentialThreats[i][[isThreat]](players[p])) {
@@ -1232,7 +1232,7 @@ filter(potentialThreats, isThreat) {
 }
 
 getThreat(team, threats, threatDistance, callCount) {
-  players = GetPlayers();
+  players = getPlayers();
 
   closest = threatDistance;
   threat = undefined;
@@ -1257,7 +1257,7 @@ getThreat(team, threats, threatDistance, callCount) {
 }
 
 getClosestToPlayer(list) {
-  players = GetPlayers();
+  players = getPlayers();
 
   closest = 0;
   obj = undefined;
@@ -1485,7 +1485,7 @@ isSurpressed(player) {
 }
 
 trySurpressed(team) {
-  players = GetPlayers();
+  players = getPlayers();
 
   sp = filter(team, ::isSurpressed);
 

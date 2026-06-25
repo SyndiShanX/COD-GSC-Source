@@ -204,7 +204,7 @@ is_normal_a_wall(param_00, param_01, param_02) {
   }
 
   var_03 = 0;
-  var_04 = asin(vectornormalize(param_00)[2]);
+  var_04 = asin(vectorNormalize(param_00)[2]);
   if(var_04 > param_02 || var_04 < -1 * param_02) {
     var_03 = 0;
   } else {
@@ -348,7 +348,7 @@ tripwire_place_anywhere_handler(param_00) {
   var_03 = check_wall_under_player_reticle_think(var_01, var_02);
   var_04 = var_03[2];
   var_05 = var_03[1] - var_03[0];
-  var_06 = vectornormalize(var_05);
+  var_06 = vectorNormalize(var_05);
   var_01.hitdir = var_05;
   var_01.startpoint = var_03[0];
   self notify("kill_player_reticle_think");
@@ -405,7 +405,7 @@ tripwire_place_anywhere_placed_handler(param_00, param_01, param_02) {
   self notify("kill_player_reticle_think");
   self notify("placed_tripwire_complete");
   var_03 = param_00[0] - param_00[1];
-  var_04 = vectornormalize(var_03);
+  var_04 = vectorNormalize(var_03);
   var_05 = length(var_03);
   var_06 = spawn("trigger_box", param_00[0], 0, (2, 2, var_05));
   var_07 = var_04 * -1;
@@ -467,7 +467,7 @@ tripwire_monitor_placed_location(param_00, param_01) {
   param_00 endon("tripwire_triggered");
   waittillframeend;
   var_02 = anglesToForward(param_00.var_001D);
-  var_03 = vectornormalize(var_02);
+  var_03 = vectorNormalize(var_02);
   var_04 = param_00.var_0116 + 2 * var_03;
   var_05 = param_00.var_0116 - 2 * var_03;
   while(isDefined(param_00)) {
@@ -532,7 +532,7 @@ tripwire_disarm(param_00) {
   self endon("joined_spectators");
   param_00 endon("tripwire_triggered");
   param_00 makeusable();
-  param_00 sethintstring(&"RAIDS_TRIPWIRE_DISARM");
+  param_00 setHintString(&"RAIDS_TRIPWIRE_DISARM");
   thread disarm_enable_use_watcher(param_00);
   for(;;) {
     param_00 waittill("trigger", var_01);

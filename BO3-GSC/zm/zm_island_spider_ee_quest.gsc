@@ -155,10 +155,10 @@ function function_6dff284c() {
 
 function function_89826011() {
   level endon("hash_d8d0f829");
-  e_clip = getent("clip_spider_cage", "targetname");
+  e_clip = getEnt("clip_spider_cage", "targetname");
   e_clip setCanDamage(1);
   e_clip.health = 100000;
-  var_a2176993 = getent("jungle_lab_ee_control_panel_elf", "targetname");
+  var_a2176993 = getEnt("jungle_lab_ee_control_panel_elf", "targetname");
   while(true) {
     e_clip waittill("damage", n_damage, e_attacker, v_direction, v_point, str_mod, str_tag_name, str_model_name, str_part_name, w_weapon);
     if(!level.var_1dbad94a && !level flag::get("power_on")) {
@@ -191,7 +191,7 @@ function function_69f5a9c5(var_1cdfa0f4) {
 function function_901514b1() {
   level._powerup_timeout_custom_time = &function_3321a018;
   var_93eb638b = zm_powerups::specific_powerup_drop(undefined, level.var_1a139831.origin - vectorscale((0, 0, 1), 110));
-  var_93eb638b linkto(level.var_1a139831);
+  var_93eb638b linkTo(level.var_1a139831);
   level._powerup_timeout_custom_time = undefined;
 }
 
@@ -254,10 +254,10 @@ function function_2176e192() {
   level flag::clear("spiders_from_mars_round");
   callback::remove_on_ai_spawned(&function_49fac1ac);
   var_30ff0d6c = util::spawn_model("p7_zm_isl_cocoon_standing", level.var_1a139831.origin - vectorscale((0, 0, 1), 110), level.var_1a139831.angles);
-  var_30ff0d6c linkto(level.var_1a139831);
+  var_30ff0d6c linkTo(level.var_1a139831);
   level.var_f5ad590f = undefined;
   level waittill("hash_35cee1df");
-  var_db6efb17 = getent("venom_extractor", "targetname");
+  var_db6efb17 = getEnt("venom_extractor", "targetname");
   var_db6efb17 thread scene::play("p7_fxanim_zm_island_venom_extractor_red_bundle", var_db6efb17);
   level waittill("hash_e48828c5");
   var_1f71eb1 = struct::get("spider_ee_quest_reward", "targetname");
@@ -279,10 +279,10 @@ function function_2176e192() {
 
 function function_bf0f2293(player) {
   if(player hasweapon(level.w_controllable_spider)) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
-  self sethintstring("ZM_ISLAND_SPIDER_EQUIPMENT_PICKUP");
+  self setHintString("ZM_ISLAND_SPIDER_EQUIPMENT_PICKUP");
   return true;
 }
 

@@ -191,7 +191,7 @@ electric_cherry_stun() {
   self.ignoreall = 1;
 
   for(i = 0; i < 2; i++) {
-    self animscripted(self.origin, self.angles, "zm_afterlife_stun");
+    self animScripted(self.origin, self.angles, "zm_afterlife_stun");
     self maps\mp\animscripts\shared::donotetracks("stunned");
   }
 

@@ -372,10 +372,10 @@ _id_400A(var_0, var_1) {
   var_2 _meth_84D4(200);
   var_2 setusefov(120);
   var_2 sethintdisplayfov(120);
-  var_2 setcursorhint("HINT_BUTTON");
+  var_2 setCursorHint("HINT_BUTTON");
 
   if(!scripts\cp_mp\utility\game_utility::_id_89EC()) {
-    var_2 sethintstring(&"MP/LIGHT_SWITCH");
+    var_2 setHintString(&"MP/LIGHT_SWITCH");
     var_2 _meth_84DA("icon_electrical_box");
   }
 
@@ -534,9 +534,9 @@ _id_C436(var_0) {
   var_1 = var_0 _meth_812D(var_0.origin);
 
   if(isDefined(var_1)) {
-    var_0 setorigin(var_1);
+    var_0 setOrigin(var_1);
   } else {
-    var_0 setorigin(var_0.origin + (0, 0, 100));
+    var_0 setOrigin(var_0.origin + (0, 0, 100));
   }
 
   var_0._id_B5A4 delete();

@@ -65,7 +65,7 @@ function function_27e6ca54() {
   foreach(e_corpse in var_ec39b8a8) {
     e_corpse thread function_62437267();
   }
-  var_40eadcd7 = getent("subway_corpse_3", "targetname");
+  var_40eadcd7 = getEnt("subway_corpse_3", "targetname");
   var_40eadcd7 thread function_62437267();
 }
 
@@ -169,45 +169,45 @@ function subway_floating_bodies_move() {
 function subway_scare_scene_01() {
   level endon("out_of_water");
   level endon("cancel_scare");
-  e_corpse = getent("subway_corpse", "targetname");
+  e_corpse = getEnt("subway_corpse", "targetname");
   e_linkto = util::spawn_model("tag_origin", e_corpse.origin, e_corpse.angles);
-  e_corpse linkto(e_linkto);
+  e_corpse linkTo(e_linkto);
   e_corpse thread scene::play("cin_bla_08_02_subway_vign_dead_body_scare", e_corpse);
-  t_trigger = getent("trig_subway_scare", "targetname");
+  t_trigger = getEnt("trig_subway_scare", "targetname");
   t_trigger waittill("trigger", player);
-  playsoundatposition("mus_subway_scare", (0, 0, 0));
+  playSoundAtPosition("mus_subway_scare", (0, 0, 0));
   level notify("scare_happened");
   level thread corpse_dialog(player);
   e_linkto movey(-60, 0.5);
   e_linkto rotateroll(50, 2);
-  e_linkto rotateyaw(90, 1);
+  e_linkto rotateYaw(90, 1);
   e_linkto waittill("movedone");
-  e_linkto moveto(e_corpse.origin - (0, 50, 25), 5);
+  e_linkto moveTo(e_corpse.origin - (0, 50, 25), 5);
 }
 
 function subway_scare_scene_02() {
   level endon("out_of_water");
-  t_trigger = getent("trig_subway_scare_2", "targetname");
-  e_corpse = getent("subway_corpse_2", "targetname");
+  t_trigger = getEnt("trig_subway_scare_2", "targetname");
+  e_corpse = getEnt("subway_corpse_2", "targetname");
   level waittill("scare_happened");
   e_corpse endon("death");
   t_trigger waittill("trigger", player);
   e_corpse movex(-80, 2);
   e_corpse rotatepitch(60, 5);
   e_corpse waittill("movedone");
-  e_corpse moveto(e_corpse.origin - (0, -50, 50), 5);
+  e_corpse moveTo(e_corpse.origin - (0, -50, 50), 5);
 }
 
 function subway_scare_scene_03() {
   level endon("out_of_water");
-  t_trigger = getent("trig_subway_scare_3", "targetname");
-  e_corpse = getent("subway_corpse_3", "targetname");
+  t_trigger = getEnt("trig_subway_scare_3", "targetname");
+  e_corpse = getEnt("subway_corpse_3", "targetname");
   e_corpse endon("death");
   t_trigger waittill("trigger", player);
   e_corpse movez(-24, 0.75);
   e_corpse rotateroll(60, 5);
   e_corpse waittill("movedone");
-  e_corpse moveto(e_corpse.origin - (25, 25, 75), 5);
+  e_corpse moveTo(e_corpse.origin - (25, 25, 75), 5);
 }
 
 function corpse_dialog(player) {

@@ -81,7 +81,7 @@ ss_play_jumptoground_clean(var_0, var_1, var_2) {
   self gib_fx_override("gravity");
   self._blackboard.buninterruptibleanim = undefined;
   if(isDefined(self._blackboard.bjumptogroundborked) || self.origin[2] > -116) {
-    self setorigin(level.superslashergotogroundspot + (0, 0, 24));
+    self setOrigin(level.superslashergotogroundspot + (0, 0, 24));
     self._blackboard.bjumptogroundborked = undefined;
   }
 }
@@ -132,7 +132,7 @@ ss_play_jumptoroof_clean(var_0, var_1, var_2) {
   self gib_fx_override("gravity");
   self._blackboard.buninterruptibleanim = undefined;
   if(isDefined(self._blackboard.bjumptogroundborked) || self.origin[2] < 340) {
-    self setorigin(level.superslasherrooftopspot);
+    self setOrigin(level.superslasherrooftopspot);
     self._blackboard.bjumptogroundborked = undefined;
   }
 

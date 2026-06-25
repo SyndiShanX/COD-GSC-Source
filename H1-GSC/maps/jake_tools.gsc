@@ -98,7 +98,7 @@ get_all_ents_in_chain(var_0) {
           var_2 = getnode(var_2.target, "targetname");
           break;
         case "ent":
-          var_2 = getent(var_2.target, "targetname");
+          var_2 = getEnt(var_2.target, "targetname");
           break;
         default:
       }
@@ -178,7 +178,7 @@ vehicle_go_to_end_and_delete(var_0, var_1) {
     default:
   }
 
-  var_4 = spawnvehicle(var_3, "plane", "truck", var_2.origin, var_2.angles);
+  var_4 = spawnVehicle(var_3, "plane", "truck", var_2.origin, var_2.angles);
 
   if(var_1 == "truck") {
     var_4 truck_headlights_on();
@@ -200,7 +200,7 @@ set_goalvolume(var_0, var_1) {
   self endon("death");
 
   if(isDefined(var_0)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   }
 
   var_2 = getnode(var_1.target, "targetname");
@@ -306,7 +306,7 @@ trigarraywait2(var_0) {
 }
 
 trigwait(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
   var_1 common_scripts\utility::trigger_off();
 }
@@ -322,7 +322,7 @@ triggersenable(var_0, var_1, var_2) {
 }
 
 triggeractivate(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 notify("trigger", level.player);
   var_1 common_scripts\utility::trigger_off();
 }
@@ -426,7 +426,7 @@ reset_threatbiasgroup() {
   self.old_threatbiasgroupname = undefined;
 }
 
-setgoalradius(var_0) {
+setgoalRadius(var_0) {
   if(!isDefined(self.old_goalradius)) {
     self.old_goalradius = self.goalradius;
   }
@@ -434,7 +434,7 @@ setgoalradius(var_0) {
   self.goalradius = var_0;
 }
 
-resetgoalradius() {
+resetgoalRadius() {
   if(isDefined(self.old_goalradius)) {
     self.goalradius = self.old_goalradius;
   }
@@ -509,7 +509,7 @@ groupwarp(var_0, var_1) {
 
 getaiarraytouchingvolume(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
-    var_2 = getent(var_1, "targetname");
+    var_2 = getEnt(var_1, "targetname");
   }
 
   if(var_0 == "all") {
@@ -535,7 +535,7 @@ npcdelete(var_0, var_1, var_2, var_3) {
     var_3[0] = level.price;
   }
 
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_2)) {
     var_2 = 0;
@@ -604,10 +604,10 @@ getdudesfromarray(var_0, var_1) {
 gotonode(var_0) {
   self endon("death");
   var_1 = getnode(var_0, "targetname");
-  setgoalradius(var_1.radius);
+  setgoalRadius(var_1.radius);
   self setgoalnode(var_1);
   self waittill("goal");
-  resetgoalradius();
+  resetgoalRadius();
 }
 
 gotonodeanddelete(var_0) {
@@ -620,7 +620,7 @@ gotonodeanddelete(var_0) {
   self endon("death");
   var_1 = getnode(var_0, "targetname");
   self setgoalnode(var_1);
-  setgoalradius(var_1.radius);
+  setgoalRadius(var_1.radius);
   self waittill("goal");
   self delete();
 }
@@ -635,11 +635,11 @@ gotonodeandwait(var_0) {
   self endon("death");
   var_1 = getnode(var_0, "targetname");
   self setgoalnode(var_1);
-  setgoalradius(var_1.radius);
+  setgoalRadius(var_1.radius);
   self waittill("goal");
   set_animname("guy");
   self waittill("stop_waiting_at_node");
-  resetgoalradius();
+  resetgoalRadius();
 }
 
 forcetonode(var_0) {
@@ -649,7 +649,7 @@ forcetonode(var_0) {
   self setgoalnode(var_1);
   self waittill("goal");
   self pushplayer(0);
-  resetgoalradius();
+  resetgoalRadius();
 }
 
 setposture(var_0) {
@@ -687,7 +687,7 @@ killentity() {
 
 gotovolume(var_0) {
   self endon("death");
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = getnode(var_1.target, "targetname");
   self setgoalnode(var_2);
   self setgoalvolume(var_1);
@@ -723,10 +723,10 @@ door_open(var_0, var_1, var_2) {
   }
 
   if(self.classname == "script_brushmodel") {
-    var_3 = getent(self.target, "targetname");
+    var_3 = getEnt(self.target, "targetname");
   } else {
-    var_4 = getent(self.target, "targetname");
-    var_3 = getent(var_4.script_linkto, "script_linkname");
+    var_4 = getEnt(self.target, "targetname");
+    var_3 = getEnt(var_4.script_linkto, "script_linkname");
   }
 
   switch (var_0) {
@@ -738,7 +738,7 @@ door_open(var_0, var_1, var_2) {
       radiusdamage(self.origin, 56, level.maxdetpackdamage, level.mindetpackdamage);
       break;
     case "kicked":
-      self rotateyaw(-175, 0.5);
+      self rotateYaw(-175, 0.5);
       door_connectpaths(var_2);
       break;
     case "kicked_down":
@@ -746,7 +746,7 @@ door_open(var_0, var_1, var_2) {
       door_connectpaths(var_2);
       break;
     default:
-      self rotateyaw(-175, 0.5);
+      self rotateYaw(-175, 0.5);
       door_connectpaths();
       break;
   }
@@ -759,7 +759,7 @@ door_connectpaths(var_0) {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
   } else {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
     var_1 hide();
     var_1 notsolid();
     var_1 connectpaths();
@@ -769,7 +769,7 @@ door_connectpaths(var_0) {
 door_fall_over() {
   var_0 = anglesToForward(self.angles);
   var_1 = (var_0[0] * 20, var_0[1] * 20, var_0[2] * 20);
-  self moveto(self.origin + var_1, 0.5, 0, 0.5);
+  self moveTo(self.origin + var_1, 0.5, 0, 0.5);
   self rotatepitch(90, 0.45, 0.4);
   wait 0.449;
   self rotatepitch(-4, 0.2, 0, 0.2);

@@ -38,10 +38,10 @@ init() {
   var_0.playerschargingcircle = [];
   level.debugdlc4boss = ::start_boss_fight;
   level.debugdlc4bossstart = ::start;
-  var_4 = getent("rockwall_clip", "targetname");
-  var_5 = getent("rockwall_trig", "targetname");
-  var_5 enablelinkto();
-  var_5 linkto(var_4);
+  var_4 = getEnt("rockwall_clip", "targetname");
+  var_5 = getEnt("rockwall_trig", "targetname");
+  var_5 enablelinkTo();
+  var_5 linkTo(var_4);
 }
 
 bossfight_loadout() {
@@ -73,19 +73,19 @@ bossfight_loadout() {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_11);
   }
 
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy"));
-  var_13 = getent("bossfight_ala_clip", "targetname");
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getStruct("afterlife_spectate_door", "script_noteworthy"));
+  var_13 = getEnt("bossfight_ala_clip", "targetname");
   var_13 solid();
   var_14 = scripts\engine\utility::getStructArray("afterlife_arcade", "targetname");
   var_14 = scripts\engine\utility::array_randomize(var_14);
   foreach(var_10, var_1 in level.players) {
     var_1.ability_invulnerable = 1;
-    var_1 setorigin(var_14[var_10].origin);
+    var_1 setOrigin(var_14[var_10].origin);
     var_1 setplayerangles(var_14[var_10].angles);
   }
 
-  scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("meph_perks", "script_noteworthy"));
-  scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("start_meph_battle", "script_noteworthy"));
+  scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getStruct("meph_perks", "script_noteworthy"));
+  scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getStruct("start_meph_battle", "script_noteworthy"));
 }
 
 auto_start_boss_fight(var_0) {
@@ -137,8 +137,8 @@ arcade_game_cleanup() {
 }
 
 spawn_perk_pickup() {
-  var_0 = scripts\engine\utility::getstruct("meph_perks", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_0 = scripts\engine\utility::getStruct("meph_perks", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   level.perk_pickup = spawnfx(level._effect["vfx_mep_perk_buy"], var_1.origin);
   wait(0.1);
   triggerfx(level.perk_pickup);
@@ -189,10 +189,10 @@ pre_bossfight_init() {
   init_bossfight_magicwheel();
   disable_bossfight_fnf();
   disable_bossfight_magicwheel();
-  var_0 = getent("bossfight_ala_clip", "targetname");
+  var_0 = getEnt("bossfight_ala_clip", "targetname");
   var_0 notsolid();
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("meph_perks", "script_noteworthy"));
-  scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("start_meph_battle", "script_noteworthy"));
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getStruct("meph_perks", "script_noteworthy"));
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getStruct("start_meph_battle", "script_noteworthy"));
 }
 
 disable_bossfight_fnf() {
@@ -223,7 +223,7 @@ enable_bossfight_fnf() {
 }
 
 init_bossfight_fnf() {
-  var_0 = scripts\engine\utility::getstruct("jaroslav_machine_meph", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("jaroslav_machine_meph", "script_noteworthy");
   var_1 = getEntArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     if(var_3.script_noteworthy == "fnf_machine") {
@@ -285,7 +285,7 @@ enable_bossfight_magicwheel() {
   level.bossfight_magicwheel setusefov(60);
   level.bossfight_magicwheel setuserange(72);
   level.current_active_wheel = level.bossfight_magicwheel;
-  level.bossfight_magicwheel sethintstring(&"CP_FINAL_SPIN_WHEEL_FREE");
+  level.bossfight_magicwheel setHintString(&"CP_FINAL_SPIN_WHEEL_FREE");
 }
 
 start_boss_fight() {
@@ -381,7 +381,7 @@ spawn_meph() {
       }
 
       var_1.ability_invulnerable = undefined;
-      var_1 setorigin(var_7);
+      var_1 setOrigin(var_7);
       var_1 enableusability();
       var_1 setplayerangles(vectortoangles((-13314, -337, -48) - var_1.origin));
     }
@@ -420,8 +420,8 @@ persistent_flame_damage() {
   level endon("game_ended");
   var_0 = getbosstunedata();
   var_1 = spawn("trigger_radius", self.origin, 0, 128, 128);
-  var_1 enablelinkto();
-  var_1 linkto(self, "tag_origin");
+  var_1 enablelinkTo();
+  var_1 linkTo(self, "tag_origin");
   for(;;) {
     var_1 waittill("trigger", var_2);
     if(!var_2 scripts\cp\utility::is_valid_player()) {
@@ -1105,7 +1105,7 @@ setupweakspot(var_0) {
   var_1.boss setscriptablepartstate("circle_" + var_0.index, "on");
   var_5 = spawn("script_model", var_4);
   var_5 setModel(var_2.weak_spot_model);
-  var_5 linkto(var_1.boss, var_3.var_332, var_3.modeloffset, var_3.angleoffset);
+  var_5 linkTo(var_1.boss, var_3.var_332, var_3.modeloffset, var_3.angleoffset);
   var_5 getrandomweaponfromcategory();
   var_5.health = var_3.health;
   var_3.model = var_5;
@@ -1235,7 +1235,7 @@ frenzyprogressmonitor() {
     var_5.talisman setscriptablepartstate("effects", "charge_complete_raised");
     var_6 = vectortoangles(var_0.boss.arenacenter - var_5.talisman.origin);
     var_5.talisman movez(60, 1, 0.25, 0.25);
-    var_5.talisman rotateto((0, 0, 0) + var_6, 0.8);
+    var_5.talisman rotateTo((0, 0, 0) + var_6, 0.8);
     thread talismanmovementmonitor(var_5.talisman);
   }
 
@@ -1276,7 +1276,7 @@ frenzyprogressmonitor() {
   wait(3);
   foreach(var_5 in var_0.circles) {
     var_10 = self.origin + (0, 0, 250) - var_5.talisman.origin;
-    var_5.talisman rotateto(vectortoangles(var_10), 0.25, 0.08, 0.08);
+    var_5.talisman rotateTo(vectortoangles(var_10), 0.25, 0.08, 0.08);
   }
 
   wait(0.3);

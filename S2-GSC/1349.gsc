@@ -219,7 +219,7 @@ lib_0545::func_955F() {
     }
 
     if(isDefined(var_00)) {
-      self.var_9D65 sethintstring(var_00);
+      self.var_9D65 setHintString(var_00);
       self.var_9D65 makeusable();
     } else {
       self.var_9D65 makeunusable();
@@ -306,7 +306,7 @@ lib_0545::func_954D(param_00) {
     param_00.var_5DA5 = spawn("script_model", param_00.var_0116);
     param_00.var_5DA5.var_001D = param_00.var_001D;
     param_00.var_5DA5 setModel("tag_origin");
-    param_00.var_5DA5 linkto(self.var_6298, param_00.var_81C7);
+    param_00.var_5DA5 linkTo(self.var_6298, param_00.var_81C7);
     param_00.var_3F3F = spawnlinkedfx(common_scripts\utility::func_44F5(param_00.var_81BB), param_00.var_5DA5, "tag_origin");
   } else {
     param_00.var_3F3F = spawnfx(common_scripts\utility::func_44F5(param_00.var_81BB), param_00.var_0116, anglesToForward(param_00.var_001D), anglestoup(param_00.var_001D));

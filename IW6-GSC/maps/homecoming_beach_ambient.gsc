@@ -175,7 +175,7 @@ beach_ship_phalanx_think() {
   var_0 thread phalanx_fire();
   var_3 = randomfloatrange(0.4, 0.8);
   var_0 thread phalanx_incoming_hit(var_3);
-  var_0 rotateto(var_1, var_3);
+  var_0 rotateTo(var_1, var_3);
   var_0 waittill("rotatedone");
   var_0 notify("stop_fire");
   var_0 common_scripts\utility::delaycall(2, ::delete);
@@ -206,7 +206,7 @@ beach_ship_phalanx_system_complex() {
     var_2.used = 0;
   }
 
-  var_4 = getent("anti_battleship_missiles", "targetname");
+  var_4 = getEnt("anti_battleship_missiles", "targetname");
   var_5 = getvehiclenodearray("anti_battleship_missile_starts", "targetname");
   var_6 = undefined;
 
@@ -262,13 +262,13 @@ phalanx_missile_think(var_0) {
   var_7 = randomintrange(-13500, -10500);
 
   while(var_1.origin[0] > var_7) {
-    var_6 = vectornormalize(var_1.origin - var_4.origin + (-500, 0, 0));
+    var_6 = vectorNormalize(var_1.origin - var_4.origin + (-500, 0, 0));
     var_1 thread phalanx_fire(var_5, var_4.origin, var_6);
     var_5 = var_5 + randomfloatrange(0, 0.05);
     wait 0.05;
   }
 
-  playFX(common_scripts\utility::getfx("phalanx_tracer"), var_4.origin, vectornormalize(var_1.origin - var_4.origin));
+  playFX(common_scripts\utility::getfx("phalanx_tracer"), var_4.origin, vectorNormalize(var_1.origin - var_4.origin));
   playFX(common_scripts\utility::getfx("phalanx_missile_explosion"), var_1.origin);
   var_1 delete();
   var_4.used = 0;

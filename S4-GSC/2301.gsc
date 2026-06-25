@@ -229,7 +229,7 @@ _id_DB92(var_0, var_1, var_2, var_3) {
   if(self._id_0280 > 12) {
     var_6 = self._id_027F;
   } else {
-    var_6 = vectornormalize(self _meth_84A6(36) - self.origin);
+    var_6 = vectorNormalize(self _meth_84A6(36) - self.origin);
   }
 
   return vectordot(var_6, var_5) < 0.5;
@@ -1306,7 +1306,7 @@ _id_DB90(var_0, var_1, var_2, var_3) {
   self _meth_86DE();
 
   if(isDefined(self._id_0192) && isDefined(self._id_026E) && self._id_0192 == self._id_026E) {
-    var_5 = vectornormalize(self.origin - self._id_0192.origin);
+    var_5 = vectorNormalize(self.origin - self._id_0192.origin);
 
     if(vectordot(var_5, self._id_0147) > 0.866) {
       return 1;

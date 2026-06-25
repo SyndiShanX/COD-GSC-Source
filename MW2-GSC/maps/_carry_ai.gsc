@@ -77,7 +77,7 @@ link_wounded(wounded) {
   self endon("death");
   wounded endon("death");
 
-  wounded linkto(self, "tag_origin");
+  wounded linkTo(self, "tag_origin");
 
   wait 0.05;
   wounded thread anim_generic_loop(wounded, "wounded_walk_loop", "stop_carried_loop");
@@ -125,7 +125,7 @@ carry_to_and_putdown_wounded(wounded, eNode) {
   while(isDefined(eNode.target)) {
     self.ignoresuppression = true;
     self.disablearrivals = true;
-    goal = getent(eNode.target, "targetname");
+    goal = getEnt(eNode.target, "targetname");
     if(!isDefined(goal.target)) {
       eNode = goal;
       break;

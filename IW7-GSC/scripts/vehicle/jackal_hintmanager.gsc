@@ -375,7 +375,7 @@ hint_dogfight_conditions(var_0) {
     return 0;
   }
 
-  var_1 = vectordot(anglesToForward(level.var_D127.angles), vectornormalize(level.player.var_4BE7.origin - level.var_D127.origin));
+  var_1 = vectordot(anglesToForward(level.var_D127.angles), vectorNormalize(level.player.var_4BE7.origin - level.var_D127.origin));
   var_2 = distance(level.player.var_4BE7.origin, level.var_D127.origin);
   if(var_2 > 18000 || var_1 < 0.85) {
     return 0;
@@ -453,7 +453,7 @@ common_ascend_descend_conditions() {
     return 0;
   }
 
-  var_0 = vectordot(anglesToForward(level.var_D127.angles), vectornormalize(level.var_A056.target_capitalship.origin - level.var_D127.origin));
+  var_0 = vectordot(anglesToForward(level.var_D127.angles), vectorNormalize(level.var_A056.target_capitalship.origin - level.var_D127.origin));
   var_1 = distance(level.var_A056.target_capitalship.origin, level.var_D127.origin);
   if(var_1 > 30000 || var_0 < 0.75) {
     return 0;

@@ -160,7 +160,7 @@ orienttonormal(var_0) {
     return (0, 0, 0);
   }
 
-  var_3 = vectornormalize(var_1);
+  var_3 = vectorNormalize(var_1);
   var_4 = var_0[2] * -1;
   var_5 = (var_3[0] * var_4, var_3[1] * var_4, var_2);
   var_6 = vectortoangles(var_5);
@@ -3914,8 +3914,8 @@ findisfacing(var_0, var_1, var_2) {
   var_5 = var_1.origin - var_0.origin;
   var_4 = var_4 * (1, 1, 0);
   var_5 = var_5 * (1, 1, 0);
-  var_5 = vectornormalize(var_5);
-  var_4 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_5);
+  var_4 = vectorNormalize(var_4);
   var_6 = vectordot(var_5, var_4);
   if(var_6 >= var_3) {
     return 1;
@@ -7623,7 +7623,7 @@ initarbitraryuptriggers() {
       var_4.var_2857 = undefined;
       var_4.entsinside = [];
       if(isDefined(var_2.target)) {
-        var_4.var_2857 = getent(var_2.target, "targetname");
+        var_4.var_2857 = getEnt(var_2.target, "targetname");
         var_4.blinkloc = var_4.var_2857.origin + (0, 0, -175);
       }
 

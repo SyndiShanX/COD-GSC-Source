@@ -44,7 +44,7 @@ airlock_fx(localClientNum) {
   level waittill("power_on");
   airlock_fx = getEntArray(localClientNum, "airlock_jambs_fx", "targetname");
   for(i = 0; i < airlock_fx.size; i++) {
-    forwardVec = VectorNormalize(anglesToForward(airlock_fx[i].angles));
+    forwardVec = vectorNormalize(anglesToForward(airlock_fx[i].angles));
     playFX(localClientNum, level._effect["airlock_fx"], airlock_fx[i].origin, forwardVec);
   }
 }

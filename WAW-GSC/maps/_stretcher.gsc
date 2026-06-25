@@ -36,8 +36,8 @@ main() {
 }
 
 move_stretcher(front_point, front_angles, rear_point, rear_angles) {
-  flat_vector = vectornormalize(front_point - rear_point);
-  rough_vector = vectornormalize(flat_origin(front_point) - flat_origin(rear_point));
+  flat_vector = vectorNormalize(front_point - rear_point);
+  rough_vector = vectorNormalize(flat_origin(front_point) - flat_origin(rear_point));
 
   front_point = ground_origin(front_point);
 
@@ -52,20 +52,20 @@ move_stretcher(front_point, front_angles, rear_point, rear_angles) {
   stretcher_front_origin = front_point + vector_multiply(flat_vector, level.stretcher_front_offset);
 
   tmp_origin = ground_origin(stretcher_front_origin + vector_multiply(rough_vector, level.rear_offset));
-  stretcher_vector = vectornormalize(stretcher_front_origin - tmp_origin);
+  stretcher_vector = vectorNormalize(stretcher_front_origin - tmp_origin);
   stretcher_rear_origin = stretcher_front_origin + vector_multiply(stretcher_vector, level.stretcher_length);
   rear_guy_origin = stretcher_rear_origin + vector_multiply(flat_vector, level.stretcher_rear_offset);
 
   stretcher_angles = vectortoangles(stretcher_vector);
 
-  self moveto(stretcher_front_origin, step_time);
-  self rotateto(stretcher_angles, step_time);
+  self moveTo(stretcher_front_origin, step_time);
+  self rotateTo(stretcher_angles, step_time);
 
-  self.drone[0] moveto(front_guy_origin, step_time);
-  self.drone[0] rotateto(guy_angles, step_time);
+  self.drone[0] moveTo(front_guy_origin, step_time);
+  self.drone[0] rotateTo(guy_angles, step_time);
 
-  self.drone[1] moveto(rear_guy_origin, step_time);
-  self.drone[1] rotateto(guy_angles, step_time);
+  self.drone[1] moveTo(rear_guy_origin, step_time);
+  self.drone[1] rotateTo(guy_angles, step_time);
 
   front_angle_dif = adjust_angle(front_angles[1] - guy_angles[1]);
   rear_angle_dif = adjust_angle(rear_angles[1] - guy_angles[1]);
@@ -123,7 +123,7 @@ follow_path(start_struct) {
     self.last_point = current_point;
   }
 
-  next_struct = getstruct(start_struct.target, "targetname");
+  next_struct = getStruct(start_struct.target, "targetname");
   start_struct notify("trigger");
 
   original_origin = start_struct.origin;
@@ -168,7 +168,7 @@ follow_path(start_struct) {
         break;
       }
       original_origin = next_struct.origin;
-      next_struct = getstruct(next_struct.target, "targetname");
+      next_struct = getStruct(next_struct.target, "targetname");
       step = 0;
     }
   }
@@ -183,7 +183,7 @@ draw_path(start_struct, line_color, knot_color) {
 
   current_point = start_struct.origin;
 
-  next_struct = getstruct(start_struct.target, "targetname");
+  next_struct = getStruct(start_struct.target, "targetname");
   start_struct notify("trigger");
 
   original_origin = start_struct.origin;
@@ -229,7 +229,7 @@ draw_path(start_struct, line_color, knot_color) {
         break;
       }
       original_origin = next_struct.origin;
-      next_struct = getstruct(next_struct.target, "targetname");
+      next_struct = getStruct(next_struct.target, "targetname");
       step = 0;
     }
   }
@@ -247,7 +247,7 @@ path_math(current_angles, current_point, next_point, main_dist) {
   height_dif = next_point[2] - current_point[2];
   next_point = (next_point[0], next_point[1], current_point[2]);
 
-  vector = vectornormalize(next_point - current_point);
+  vector = vectorNormalize(next_point - current_point);
   next_angles = vectortoangles(vector);
   angle_dif = adjust_angle((vectortoangles(vector) - current_angles)[1]);
 
@@ -357,17 +357,17 @@ spawn_stretcher(point, start_angles) {
   model UseAnimTree(#animtree);
   model.animname = "stretcher";
 
-  stretcher_clip = getent("stretcher_clip", "targetname");
+  stretcher_clip = getEnt("stretcher_clip", "targetname");
   stretcher_clip.origin = model.origin;
-  stretcher_clip linkto(model);
+  stretcher_clip linkTo(model);
 
   ent.stretcher = model;
-  ent.stretcher linkto(ent);
-  anim_ent linkto(ent);
+  ent.stretcher linkTo(ent);
+  anim_ent linkTo(ent);
   ent.angles = start_angles;
   ent.a.ent = anim_ent;
   wait .1;
-  stretcher_clip linkto(ent.a.ent);
+  stretcher_clip linkTo(ent.a.ent);
   return ent;
 }
 
@@ -382,7 +382,7 @@ create_drone(ai, animname) {
   drone.angles = flat_angle(ai.angles);
   drone.animname = animname;
 
-  drone linkto(ai);
+  drone linkTo(ai);
 
   if(isDefined(weapon)) {
     weapon_model = getweaponmodel(weapon);
@@ -500,16 +500,16 @@ pickup_stretcher(ai, reach) {
 freeze(ai) {
   ai endon("thaw");
   ai hide();
-  ai linkto(self);
+  ai linkTo(self);
   while(true) {
-    ai animscripted("frozen", ai.origin, ai.angles, %standunarmed_idle_loop);
+    ai animScripted("frozen", ai.origin, ai.angles, %standunarmed_idle_loop);
     ai waittillmatch("frozen", "end");
   }
 }
 
 thaw(ai) {
   ai notify("thaw");
-  ai stopanimscripted();
+  ai stopanimScripted();
   ai unlink();
   ai show();
 }
@@ -521,7 +521,7 @@ draw_structs(struct) {
     if(!isDefined(struct.target)) {
       break;
     }
-    struct = getstruct(struct.target, "targetname");
+    struct = getStruct(struct.target, "targetname");
   }
 }
 

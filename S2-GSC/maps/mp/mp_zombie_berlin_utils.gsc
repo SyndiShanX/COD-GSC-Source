@@ -450,8 +450,8 @@ radio_system_setup() {
   level.radio_codes["dahme_spreewald"]["Model"]["1"] = 90;
   level.radio_codes["dahme_spreewald"]["Model"]["2"] = 94.9;
   level.radio_codes["dahme_spreewald"]["Model"]["3"] = 98.1;
-  var_00 = getent("map_pushpin", "script_noteworthy");
-  var_01 = getent("map_pushpin_origin", "script_noteworthy");
+  var_00 = getEnt("map_pushpin", "script_noteworthy");
+  var_01 = getEnt("map_pushpin_origin", "script_noteworthy");
   var_00 method_8449(var_01);
   var_02 = common_scripts\utility::func_46B7("map_pinpoint", "script_noteworthy");
   var_03 = common_scripts\utility::func_7A33(var_02);
@@ -506,11 +506,11 @@ radio_system_setup() {
 }
 
 radio_system_init() {
-  var_00 = getent("radio_tuner_use_trig", "targetname");
+  var_00 = getEnt("radio_tuner_use_trig", "targetname");
   var_01 = (0, 0, 0);
   var_02 = (0, 0, 0);
-  var_03 = getent("radio_tuner_link_org", "targetname");
-  var_04 = getent("radio_tuner_player_org", "targetname");
+  var_03 = getEnt("radio_tuner_link_org", "targetname");
+  var_04 = getEnt("radio_tuner_player_org", "targetname");
   var_05 = undefined;
   if(!isDefined(level.tuner_values)) {
     level.tuner_values = [];
@@ -548,15 +548,15 @@ radio_system_init() {
     var_02 = var_06.var_1D;
     var_04.var_116 = var_05.var_116;
     var_04.var_1D = var_05.var_1D;
-    var_05 playerlinkto(var_04, undefined, 0.1, 0, 0, 0, 0);
-    var_04 moveto(var_03.var_116, 0.5, 0, 0);
-    var_04 rotateto(var_03.var_1D, 0.5, 0, 0);
+    var_05 playerlinkTo(var_04, undefined, 0.1, 0, 0, 0, 0);
+    var_04 moveTo(var_03.var_116, 0.5, 0, 0);
+    var_04 rotateTo(var_03.var_1D, 0.5, 0, 0);
     wait(0.5);
     var_05 thread radio_system_start_tuning();
     var_05 waittill("stop_using_station");
     var_05 method_8323();
-    var_04 moveto(var_01 + (0, 0, 1), 0.5);
-    var_04 rotateto(var_02, 0.5);
+    var_04 moveTo(var_01 + (0, 0, 1), 0.5);
+    var_04 rotateTo(var_02, 0.5);
     wait(0.5);
     var_05 unlink();
     var_05 method_812C(1);
@@ -620,15 +620,15 @@ radio_system_start_tuning() {
     var_01 = ::radio_right_tuner_input_pc;
   }
 
-  var_02 = getent("radio_tuner_left", "targetname");
-  var_03 = getent("radio_tuner_left_knob", "targetname");
+  var_02 = getEnt("radio_tuner_left", "targetname");
+  var_03 = getEnt("radio_tuner_left_knob", "targetname");
   var_03 method_8449(var_02);
-  var_04 = getent("radio_tuner_left_needle", "targetname");
+  var_04 = getEnt("radio_tuner_left_needle", "targetname");
   thread radio_system_handle_tuner(var_02, "left", 1, level.tuner_values["radio_tuner"]["left"], "radio_tuner", var_00, var_04);
-  var_05 = getent("radio_tuner_right", "targetname");
-  var_06 = getent("radio_tuner_right_knob", "targetname");
+  var_05 = getEnt("radio_tuner_right", "targetname");
+  var_06 = getEnt("radio_tuner_right_knob", "targetname");
   var_06 method_8449(var_05);
-  var_07 = getent("radio_tuner_right_needle", "targetname");
+  var_07 = getEnt("radio_tuner_right_needle", "targetname");
   thread radio_system_handle_tuner(var_05, "right", 1, level.tuner_values["radio_tuner"]["right"], "radio_tuner", var_01, var_07);
 }
 
@@ -721,7 +721,7 @@ radio_system_handle_tuner(param_00, param_01, param_02, param_03, param_04, para
   lib_0378::func_8D74("radio_stop_using_watcher");
   var_0D = undefined;
   if(isDefined(param_06)) {
-    var_0D = getent(param_06.var_1A2, "targetname");
+    var_0D = getEnt(param_06.var_1A2, "targetname");
     param_06 method_8449(var_0D);
   }
 
@@ -934,9 +934,9 @@ airship_camera_sway() {
   for(;;) {
     var_00 = randomfloatrange(0.25, 1);
     var_01 = randomfloatrange(3, 4);
-    level.var_953D rotateto((var_00, var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
+    level.var_953D rotateTo((var_00, var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
     wait(var_01);
-    level.var_953D rotateto((0 - var_00, 0 - var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
+    level.var_953D rotateTo((0 - var_00, 0 - var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
     wait(var_01);
   }
 }
@@ -946,9 +946,9 @@ airship_camera_sway_extreme() {
   for(;;) {
     var_00 = randomfloatrange(1, 2);
     var_01 = randomfloatrange(4, 6);
-    level.var_953D rotateto((var_00, var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
+    level.var_953D rotateTo((var_00, var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
     wait(var_01);
-    level.var_953D rotateto((0 - var_00, 0 - var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
+    level.var_953D rotateTo((0 - var_00, 0 - var_00, 0), var_01, var_01 * 0.5, var_01 * 0.5);
     wait(var_01);
   }
 }
@@ -1120,7 +1120,7 @@ airship_turret_shoot_target(param_00) {
   var_03 = level.straub_airship.siz_cannon gettagorigin("TAG_AIM");
   var_04 = level.straub_airship.siz_cannon gettagangles("TAG_AIM");
   var_05 = anglesToForward(var_04);
-  var_06 = vectornormalize(param_00.var_116 - var_03);
+  var_06 = vectorNormalize(param_00.var_116 - var_03);
   var_07 = vectordot(var_05, var_06);
   level.var_8C4C = level.straub_airship.siz_cannon gettagorigin("TAG_AIM");
   level.var_8C46 = param_00.var_116;
@@ -1154,7 +1154,7 @@ airship_turret_set_target(param_00) {
 }
 
 airship_turret_get_target() {
-  return level.straub_airship.siz_cannon getturrettargetent();
+  return level.straub_airship.siz_cannon getturrettargetEnt();
 }
 
 airship_turret_clear_target() {
@@ -1233,7 +1233,7 @@ airship_distant_handler(param_00) {
 }
 
 airship_animation_master_handler() {
-  var_00 = getent("zeppelin_animation_node", "targetname");
+  var_00 = getEnt("zeppelin_animation_node", "targetname");
   thread airship_animation_straub_entrance(var_00);
   common_scripts\utility::func_3C9F("flag_airship_summoned");
   thread airship_animation_enter_and_shoot_tethers(var_00);
@@ -1277,7 +1277,7 @@ airship_animation_straub_entrance_play_rumble_for_time(param_00, param_01, param
   }
 
   while(param_01 > 0) {
-    self playrumbleonentity(param_00);
+    self playRumbleOnEntity(param_00);
     wait(param_02);
     param_01 = param_01 - param_02;
   }
@@ -1295,14 +1295,14 @@ playzeppelinfx() {
 
 airship_animation_enter_and_shoot_tethers(param_00) {
   var_01 = getEntArray("airship_anchor_model", "script_noteworthy");
-  var_02 = getent("drop_pod_cable", "script_noteworthy");
-  var_03 = getent("drop_pod_model", "script_noteworthy");
+  var_02 = getEnt("drop_pod_cable", "script_noteworthy");
+  var_03 = getEnt("drop_pod_model", "script_noteworthy");
   level.anchor_courtyard = undefined;
   level.anchor_museum = undefined;
   level.anchor_refuge = undefined;
   level.anchor_underbelly = undefined;
   if(!isDefined(level.straub_airship_model)) {
-    level.straub_airship_model = getent("straub_airship_exterior_model", "script_noteworthy");
+    level.straub_airship_model = getEnt("straub_airship_exterior_model", "script_noteworthy");
   }
 
   level.straub_airship lib_0378::func_8D74("start_straub_airship_loop");
@@ -1378,7 +1378,7 @@ play_tether_impact_shake(param_00, param_01, param_02) {
   wait(var_03);
   if(self == level.anchor_courtyard) {
     level notify("airship_anchor_courtyard_impact");
-    var_05 = getent("anchor_a_clip", "targetname");
+    var_05 = getEnt("anchor_a_clip", "targetname");
     var_05.var_116 = var_05.var_116 + (0, 0, 512);
     var_05 method_805F();
     var_06 = lib_0547::func_408F();
@@ -1393,8 +1393,8 @@ play_tether_impact_shake(param_00, param_01, param_02) {
 }
 
 airship_animation_pull_down_airship(param_00) {
-  var_01 = getent("drop_pod_cable", "script_noteworthy");
-  var_02 = getent("drop_pod_model", "script_noteworthy");
+  var_01 = getEnt("drop_pod_cable", "script_noteworthy");
+  var_02 = getEnt("drop_pod_model", "script_noteworthy");
   if(!isDefined(level.airship_anchor_flag_array)) {
     level.airship_anchor_flag_array = ["flag_airship_anchor_a_reeled", "flag_airship_anchor_b_reeled", "flag_airship_anchor_c_reeled", "flag_airship_anchor_d_reeled"];
   }
@@ -1506,30 +1506,30 @@ airship_animation_pull_down_airship(param_00) {
   level.cable_refuge method_8495("s2_zom_zep_tether_scene_tether_bolt_bl_cable_down_04_idle", param_00.var_116, param_00.var_1D);
   var_01 method_8495("s2_zom_zep_tether_scene_zep_drop_pod_cable_down_04_idle", param_00.var_116, param_00.var_1D);
   var_02 method_8495("s2_zom_zep_tether_scene_zep_drop_pod_down_04_idle", param_00.var_116, param_00.var_1D);
-  var_0F = getent("clip_drop_pod_nav_blocker", "script_noteworthy");
+  var_0F = getEnt("clip_drop_pod_nav_blocker", "script_noteworthy");
   var_0F solid();
   var_0F method_805F();
-  var_10 = getent("clip_door", "script_noteworthy");
+  var_10 = getEnt("clip_door", "script_noteworthy");
   var_10 notsolid();
   var_10 method_8060();
   var_02 scriptmodelclearanim();
   var_02 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "drop_pod_door_open");
-  var_02 = getent("drop_pod_model", "script_noteworthy");
+  var_02 = getEnt("drop_pod_model", "script_noteworthy");
   triggerfx(var_02.lightfx);
-  var_11 = getent("dropcage_push_trigger", "targetname");
+  var_11 = getEnt("dropcage_push_trigger", "targetname");
   var_11 delete();
-  var_12 = getent("pod_underneath_clip", "targetname");
+  var_12 = getEnt("pod_underneath_clip", "targetname");
   var_12 solid();
   var_12 method_805F();
 }
 
 airship_animation_drop_pod_movement(param_00) {
   level endon("drop_pod_reached_airship");
-  var_01 = getent("drop_pod_model", "script_noteworthy");
-  var_02 = getent("drop_pod_cable", "script_noteworthy");
-  var_03 = getent("clip_drop_pod_nav_blocker", "script_noteworthy");
-  var_04 = getent("clip_door", "script_noteworthy");
-  var_05 = getent("quest_trig_enter_dropcage", "targetname");
+  var_01 = getEnt("drop_pod_model", "script_noteworthy");
+  var_02 = getEnt("drop_pod_cable", "script_noteworthy");
+  var_03 = getEnt("clip_drop_pod_nav_blocker", "script_noteworthy");
+  var_04 = getEnt("clip_door", "script_noteworthy");
+  var_05 = getEnt("quest_trig_enter_dropcage", "targetname");
   var_06 = getanimlength(%s2_zom_zep_tether_scene_zep_drop_pod_up);
   level.drop_pod_up_start_time = gettime();
   for(;;) {
@@ -1570,12 +1570,12 @@ airship_animation_drop_pod_movement(param_00) {
 }
 
 airship_drop_pod_push_players() {
-  var_00 = getent("dropcage_push_trigger", "targetname");
+  var_00 = getEnt("dropcage_push_trigger", "targetname");
   var_01 = common_scripts\utility::func_46B5("pull_players_here", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_02);
     if(var_02 == self) {
-      var_03 = getent("quest_trig_enter_dropcage", "targetname");
+      var_03 = getEnt("quest_trig_enter_dropcage", "targetname");
       wait 0.05;
       player_pulls_towards(var_01.var_116, 500);
     }
@@ -1585,11 +1585,11 @@ airship_drop_pod_push_players() {
 }
 
 pull_players_inside() {
-  var_00 = getent("pod_door_trigger", "targetname");
-  var_01 = getent("org_tp_plaza", "script_noteworthy");
-  var_02 = getent("clip_door", "script_noteworthy");
+  var_00 = getEnt("pod_door_trigger", "targetname");
+  var_01 = getEnt("org_tp_plaza", "script_noteworthy");
+  var_02 = getEnt("clip_door", "script_noteworthy");
   if(self istouching(var_00)) {
-    self setorigin(var_01.var_116);
+    self setOrigin(var_01.var_116);
   }
 
   wait(1);
@@ -1599,7 +1599,7 @@ pull_players_inside() {
 
 player_pulls_towards(param_00, param_01) {
   var_02 = param_00 - self.var_116;
-  var_03 = param_01 * vectornormalize(var_02);
+  var_03 = param_01 * vectorNormalize(var_02);
   var_03 = (var_03[0], var_03[1], 250);
   if(param_01 > 0) {
     self setvelocity(var_03);
@@ -1607,14 +1607,14 @@ player_pulls_towards(param_00, param_01) {
 }
 
 airship_animation_airship_drop_pod_open() {
-  var_00 = getent("model_airship_drop_pod", "script_noteworthy");
+  var_00 = getEnt("model_airship_drop_pod", "script_noteworthy");
   var_00 scriptmodelplayanim("s2_zmb_drop_pod_open_front", "airship_drop_pod_door_open");
 }
 
 airship_animation_airship_drop_pod_move_down(param_00) {
   level waittill("airship_drop_pod_moving_down");
   var_01 = getanimlength(%s2_zom_zep_tether_scene_zep_drop_pod_up_reversed);
-  var_02 = getent("drop_pod_model", "script_noteworthy");
+  var_02 = getEnt("drop_pod_model", "script_noteworthy");
   var_02 scriptmodelclearanim();
   var_02 method_8495("s2_zom_zep_tether_scene_zep_drop_pod_up_reversed", param_00.var_116, param_00.var_1D);
   var_02 lib_0378::func_8D74("droppod_winch_down");
@@ -1772,17 +1772,17 @@ hack_station_think(param_00) {
     var_0B = var_08.var_1D;
     var_03.var_116 = var_0A;
     var_03.var_1D = var_0B;
-    var_09 playerlinkto(var_03, undefined, 0.1, 0, 0, 0, 0);
-    var_03 moveto(var_04.var_116, 0.5, 0, 0);
-    var_03 rotateto(var_04.var_1D, 0.5, 0, 0);
+    var_09 playerlinkTo(var_03, undefined, 0.1, 0, 0, 0, 0);
+    var_03 moveTo(var_04.var_116, 0.5, 0, 0);
+    var_03 rotateTo(var_04.var_1D, 0.5, 0, 0);
     wait(0.5);
     level notify("player_activated_hack_console");
     var_09 thread hack_station_start_hacking(param_00, var_02);
     var_09 waittill("stop_using_station");
     thread hack_station_cleanup(param_00);
     var_09 method_8323();
-    var_03 moveto(var_0A + (0, 0, 1), 0.5);
-    var_03 rotateto(var_0B, 0.5);
+    var_03 moveTo(var_0A + (0, 0, 1), 0.5);
+    var_03 rotateTo(var_0B, 0.5);
     wait(0.5);
     var_09 unlink();
     var_09 method_812C(1);
@@ -1917,7 +1917,7 @@ hack_station_update_light_positions(param_00, param_01, param_02, param_03) {
 hack_station_node_notify_linked_interactable(param_00, param_01, param_02) {
   level endon("flag_override_electroschnell_complete");
   if(isDefined(level.hack_station_current_node.var_165)) {
-    var_03 = getent(level.hack_station_current_node.var_165, "targetname");
+    var_03 = getEnt(level.hack_station_current_node.var_165, "targetname");
     var_03 notify(param_02);
   }
 }
@@ -1980,18 +1980,18 @@ hack_station_update_spark_along_path() {
   level.hackstationdata = [];
   level.hackstationdata["right"] = [];
   level.hackstationdata["forward"] = [];
-  hack_station_reset_data(getent("airship_node_03_01", "targetname").var_116);
+  hack_station_reset_data(getEnt("airship_node_03_01", "targetname").var_116);
   for(;;) {
-    var_00 = getent(level.hack_station_current_node.var_165, "targetname");
+    var_00 = getEnt(level.hack_station_current_node.var_165, "targetname");
     var_01 = hack_station_get_all_nodes_connected_to_node(var_00);
     var_02 = level.hack_station_current_node.var_1A5;
     var_03 = common_scripts\utility::func_4461(level.hack_station_current_node.var_116, getEntArray("hack_station_light", "script_noteworthy"));
     hack_station_hack_station_data_populate(var_01, var_00, var_03, var_02);
     level.hackstationdata["previous_org"] = var_00.var_116 + (level.hackstationdata["forward"]["offset_from_in_world_node"], level.hackstationdata["right"]["offset_from_in_world_node"], 0);
-    var_04 = getent("airship_node_03_02", "targetname");
+    var_04 = getEnt("airship_node_03_02", "targetname");
     var_05 = distance2d(var_04.var_116, level.hackstationdata["previous_org"]);
     if(var_05 < 500) {
-      var_06 = getent("airship_node_03_03", "targetname");
+      var_06 = getEnt("airship_node_03_03", "targetname");
       var_07 = distance2d(var_06.var_116, var_04.var_116);
       if(var_05 < var_07) {
         level.hackstationdata["previous_org"] = (level.hackstationdata["previous_org"][0], level.hackstationdata["previous_org"][1], var_04.var_116[2]);
@@ -2205,7 +2205,7 @@ hack_station_check_color_against_triggers(param_00) {
 }
 
 hack_station_attempt_soul_collection_on_node(param_00) {
-  var_01 = getent(param_00.var_165, "targetname");
+  var_01 = getEnt(param_00.var_165, "targetname");
   var_01 notify("kill_extra_soulbucket_threads");
   var_01 endon("kill_extra_soulbucket_threads");
   if(isDefined(var_01.soul_charged) && var_01.soul_charged) {
@@ -2267,7 +2267,7 @@ hack_station_interactable_handler() {
 
 hack_station_interactable_bay_door() {
   level endon("flag_override_electroschnell_complete");
-  var_00 = getent("airship_node_03_03", "targetname");
+  var_00 = getEnt("airship_node_03_03", "targetname");
   var_01 = 0;
   if(!var_01) {
     var_00 waittill("hack_interact");
@@ -2284,7 +2284,7 @@ hack_station_interactable_bay_door() {
 
 hack_station_interactable_lab_door_left() {
   level endon("flag_override_electroschnell_complete");
-  var_00 = getent("airship_node_01_02", "targetname");
+  var_00 = getEnt("airship_node_01_02", "targetname");
   var_01 = 0;
   if(!var_01) {
     var_00 waittill("hack_interact");
@@ -2301,7 +2301,7 @@ hack_station_interactable_lab_door_left() {
 
 hack_station_interactable_lab_door_left_back() {
   level endon("flag_override_electroschnell_complete");
-  var_00 = getent("airship_node_02_01", "targetname");
+  var_00 = getEnt("airship_node_02_01", "targetname");
   var_01 = 0;
   if(!var_01) {
     var_00 waittill("hack_interact");
@@ -2318,7 +2318,7 @@ hack_station_interactable_lab_door_left_back() {
 
 hack_station_interactable_lab_door_right() {
   level endon("flag_override_electroschnell_complete");
-  var_00 = getent("airship_node_05_02", "targetname");
+  var_00 = getEnt("airship_node_05_02", "targetname");
   var_01 = 0;
   if(!var_01) {
     var_00 waittill("hack_interact");
@@ -2335,7 +2335,7 @@ hack_station_interactable_lab_door_right() {
 
 hack_station_interactable_lab_door_right_back() {
   level endon("flag_override_electroschnell_complete");
-  var_00 = getent("airship_node_04_01", "targetname");
+  var_00 = getEnt("airship_node_04_01", "targetname");
   var_01 = 0;
   if(!var_01) {
     var_00 waittill("hack_interact");
@@ -2351,7 +2351,7 @@ hack_station_interactable_lab_door_right_back() {
 }
 
 hack_station_interactable_straub_node() {
-  var_00 = getent("airship_node_03_05", "targetname");
+  var_00 = getEnt("airship_node_03_05", "targetname");
   if(!isDefined(var_00.var_A203)) {
     var_00 waittill("hack_interact");
     var_00.var_A203 = 1;
@@ -2361,7 +2361,7 @@ hack_station_interactable_straub_node() {
 
 hack_station_moving_spark_handler() {
   level endon("flag_override_electroschnell_complete");
-  var_00 = getent("airship_node_03_01", "targetname");
+  var_00 = getEnt("airship_node_03_01", "targetname");
   level.in_world_spark = spawn("script_model", var_00.var_116);
   level.in_world_spark setModel("tag_origin");
   thread hack_station_moving_spark_fx_swap();
@@ -2377,7 +2377,7 @@ hack_station_moving_spark_handler() {
 }
 
 power_source_effects() {
-  var_00 = getent("power_source_bottom_model", "targetname");
+  var_00 = getEnt("power_source_bottom_model", "targetname");
   var_01 = spawnfx(level.var_611["zmb_ber_zep_power_source_on"], var_00.var_116, anglesToForward(var_00.var_1D));
   triggerfx(var_01);
   common_scripts\utility::func_3C9F("flag_override_electroschnell_complete");
@@ -2399,7 +2399,7 @@ power_source_effects() {
 
 hack_station_moving_spark_fx_swap() {
   level endon("flag_override_electroschnell_complete");
-  var_00 = getent("airship_node_03_01", "targetname");
+  var_00 = getEnt("airship_node_03_01", "targetname");
   var_01 = spawn("script_model", var_00.var_116);
   var_01 setModel("tag_origin");
   thread hack_station_moving_spark_fx_kill(var_01);
@@ -2448,7 +2448,7 @@ hack_station_interactable_generic_node_think() {
 
 hack_station_cleanup(param_00) {
   if(isDefined(level.hack_station_current_node.var_165)) {
-    var_01 = getent(level.hack_station_current_node.var_165, "targetname");
+    var_01 = getEnt(level.hack_station_current_node.var_165, "targetname");
     var_01 notify("hack_interact");
   }
 }
@@ -2617,7 +2617,7 @@ vo_straub_death() {
 }
 
 vo_church_reaction() {
-  var_00 = getent("church_vo", "targetname");
+  var_00 = getEnt("church_vo", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(var_01 == self) {
@@ -2631,7 +2631,7 @@ vo_church_reaction() {
 }
 
 vo_cabaret_reaction() {
-  var_00 = getent("cabaret_vo", "targetname");
+  var_00 = getEnt("cabaret_vo", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(var_01 == self) {
@@ -2645,7 +2645,7 @@ vo_cabaret_reaction() {
 }
 
 vo_museum_reaction() {
-  var_00 = getent("museum_vo", "targetname");
+  var_00 = getEnt("museum_vo", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(var_01 == self) {
@@ -2659,7 +2659,7 @@ vo_museum_reaction() {
 }
 
 vo_radio_code() {
-  var_00 = getent("radio_code_vo", "targetname");
+  var_00 = getEnt("radio_code_vo", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(var_01 == self) {
@@ -2750,8 +2750,8 @@ vo_say_hello_to_my_little_bob() {
 zombies_look_at(param_00) {
   var_01 = param_00.var_116;
   var_02 = self getEye();
-  var_03 = vectornormalize(var_01 - var_02);
-  var_04 = vectornormalize(anglesToForward(self geteyeangles()));
+  var_03 = vectorNormalize(var_01 - var_02);
+  var_04 = vectorNormalize(anglesToForward(self geteyeangles()));
   var_05 = vectordot(var_03, var_04);
   wait 0.05;
   var_06 = acos(clamp(var_05, -1, 1));

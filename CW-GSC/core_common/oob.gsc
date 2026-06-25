@@ -54,7 +54,7 @@ function private preinit() {
     trigger thread run_oob_trigger();
 
     if(is_true(trigger.script_disconnectpaths)) {
-      trigger disconnectpaths();
+      trigger disconnectPaths();
     }
   }
 
@@ -103,7 +103,7 @@ function function_802adb65(var_f90fc07b) {
   level.var_f90fc07b = var_f90fc07b;
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player)) {
@@ -144,7 +144,7 @@ function private function_c1e8a50a(origin, radius) {
   };
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player)) {
@@ -436,7 +436,7 @@ function function_637edff(trigger_struct) {
     if(is_true(entity.var_50e3187f)) {
       return;
     }
-  } else if(isactor(entity) && isDefined(entity.isaiclone) && entity.isaiclone && !entity isplayinganimscripted()) {
+  } else if(isactor(entity) && isDefined(entity.isaiclone) && entity.isaiclone && !entity isplayinganimScripted()) {
     entity notify(#"clone_shutdown");
     return;
   } else {
@@ -469,7 +469,7 @@ function enter_oob(entity) {
   }
 
   player.oob_lastvalidplayerloc = entity.origin;
-  player.oob_lastvalidplayerdir = vectornormalize(entity getvelocity());
+  player.oob_lastvalidplayerdir = vectorNormalize(entity getvelocity());
   player clientfield::set_to_player("nonplayer_oob_usage", 0);
   player val::set(#"oob", "show_hud", 0);
   player thread watchforleave(entity);

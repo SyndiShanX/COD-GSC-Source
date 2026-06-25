@@ -312,7 +312,7 @@ function private function_6fc38155() {
 function private function_70aa9a2e() {
   level endon(#"end_game");
   level flag::wait_till(#"start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(e_player in players) {
     e_player thread function_53882e5e();
@@ -884,7 +884,7 @@ function function_b7e4011() {
     var_462905d9 = array(var_462905d9);
   }
 
-  var_462905d9[var_462905d9.size] = getent("computer_in_safe", "targetname");
+  var_462905d9[var_462905d9.size] = getEnt("computer_in_safe", "targetname");
 
   foreach(e_computer in var_462905d9) {
     e_computer playSound(#"hash_4970b7fd84d4afea");
@@ -1283,7 +1283,7 @@ function function_5cdffd1d() {
   level endon(#"end_game");
   s_audiolog = struct::get("s_omega_audiolog_3");
   var_a4318688 = struct::get(s_audiolog.target);
-  var_6de806b5 = getent(s_audiolog.target, "targetname");
+  var_6de806b5 = getEnt(s_audiolog.target, "targetname");
   var_9e87f151 = util::spawn_model(s_audiolog.model, s_audiolog.origin, s_audiolog.angles);
 
   while(true) {
@@ -1353,7 +1353,7 @@ function function_5a98963a(v_location) {
     }
   }
 
-  var_96611cee = getent("stop_train_check_volume", "targetname");
+  var_96611cee = getEnt("stop_train_check_volume", "targetname");
 
   if(istouching(v_location, var_96611cee)) {
     return true;

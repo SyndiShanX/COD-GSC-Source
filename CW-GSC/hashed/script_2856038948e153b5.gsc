@@ -195,7 +195,7 @@ function function_36e68765(str_skipto) {
   level thread scene::play("scene_kgb_inside_man_on_knees", "Outro", level.gas_guards);
   level flag::wait_till("enable_inside_man_interact");
   level.var_a910b1a = util::spawn_model("tag_origin", (0, 0, 0), (0, 0, 0));
-  level.var_a910b1a linkto(level.inside_man, "j_spine4", (0, 0, 0), (0, 0, 0));
+  level.var_a910b1a linkTo(level.inside_man, "j_spine4", (0, 0, 0), (0, 0, 0));
   level.var_a910b1a dontinterpolate();
   level flag::set("enable_inside_man_rescue_objective");
   level flag::wait_till("inside_man_use_tag_obj_created");
@@ -210,7 +210,7 @@ function function_36e68765(str_skipto) {
     level.player val::set(#"scene_kgb_inside_man_on_knees", "disable_weapons", 1);
     level flag::set("inside_man_rescued");
     level.inside_man scene::stop();
-    level.inside_man stopanimscripted(0.2);
+    level.inside_man stopanimScripted(0.2);
     level thread scene::play("scene_kgb_inside_man_rescue", "rescue");
     level.inside_man ai::set_behavior_attribute("demeanor", "combat");
     level.inside_man colors::set_force_color("g");

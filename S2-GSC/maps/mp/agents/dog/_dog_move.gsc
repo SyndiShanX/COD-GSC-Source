@@ -217,7 +217,7 @@ func_92E9() {
   var_03 = vectortoangles(var_02);
   var_04 = self getvelocity();
   if(length2dsquared(var_04) > 16) {
-    var_04 = vectornormalize(var_04);
+    var_04 = vectorNormalize(var_04);
     if(vectordot(var_04, var_02) > 0.707) {
       return;
     }

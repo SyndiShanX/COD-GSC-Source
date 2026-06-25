@@ -244,7 +244,7 @@ init_dj_quest_part(var_0, var_1) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_7);
   }
 
-  var_9 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+  var_9 = scripts\engine\utility::getStruct(var_5.target, "targetname");
   var_10 = spawn("script_model", var_9.origin);
   var_10 setModel(var_1);
   if(isDefined(var_9.angles)) {
@@ -384,7 +384,7 @@ init_first_speaker_defense() {
   level.selected_speaker_defense_locations = [];
   level.speaker_defense_length = 60;
   level.use_dj_door_func = ::use_dj_door_to_request_defense;
-  level.frequency_device_clip = getent("frequency_device_clip", "targetname");
+  level.frequency_device_clip = getEnt("frequency_device_clip", "targetname");
   level.frequency_device_clip.originalloc = level.frequency_device_clip.origin;
 }
 
@@ -753,7 +753,7 @@ playstaticsoundinarea(var_0) {
     var_1 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.players, undefined, 4, 96);
     foreach(var_3 in var_1) {
       var_3 setclientomnvar("ui_hud_shake", 1);
-      var_3 playrumbleonentity("artillery_rumble");
+      var_3 playRumbleOnEntity("artillery_rumble");
     }
 
     playsoundatpos(var_0.origin, "tone_placement_close");
@@ -1363,7 +1363,7 @@ defense_sequence_success(var_0) {
   clear_defense_sequence_zombie_model();
   level.frequency_device_clip freeentitysentient();
   var_2 = &"CP_QUEST_WOR_PART";
-  var_0 sethintstring(var_2);
+  var_0 setHintString(var_2);
   var_0 makeusable();
   if(isDefined(level.current_speaker)) {
     level.current_speaker = undefined;
@@ -1469,7 +1469,7 @@ blank() {}
 setup_dj_booth(var_0) {
   if(!isDefined(level.dj)) {
     level scripts\engine\utility::waittill_any("power_on", "moon power_on");
-    level.active_dj_spot = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    level.active_dj_spot = scripts\engine\utility::getStruct(var_0.target, "targetname");
     level.active_dj_door = scripts\engine\utility::getclosest(level.active_dj_spot.origin, getEntArray("dj_doors", "targetname"));
     level.vo_functions["zmb_dj_vo"] = ::dj_broadcast_vo_handler;
     spawn_dj();
@@ -1484,7 +1484,7 @@ setup_dj_booth(var_0) {
     return;
   }
 
-  level.active_dj_spot = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  level.active_dj_spot = scripts\engine\utility::getStruct(var_0.target, "targetname");
   level.active_dj_door = scripts\engine\utility::getclosest(level.active_dj_spot.origin, getEntArray("dj_doors", "targetname"));
   set_dj_state("open_window");
 }

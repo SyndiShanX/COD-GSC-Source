@@ -210,7 +210,7 @@ function_123bcbcf() {
         a_str_rewards[a_str_rewards.size] = #"insta_kill";
       }
 
-      a_players = getplayers();
+      a_players = getPlayers();
 
       if(a_players.size == 1 && !(isDefined(self.var_6482c679) && self.var_6482c679) && !zm_utility::is_trials()) {
         a_str_rewards[a_str_rewards.size] = #"extra_life";
@@ -311,7 +311,7 @@ function_123bcbcf() {
         a_str_rewards[a_str_rewards.size] = #"free_perk";
       }
 
-      a_players = getplayers();
+      a_players = getPlayers();
 
       if(a_players.size == 1 && !(isDefined(self.var_17d719b9) && self.var_17d719b9) && zm_custom::function_901b751c(#"zmpowerupsactive") && !zm_utility::is_trials()) {
         a_str_rewards[a_str_rewards.size] = #"extra_life";
@@ -1017,7 +1017,7 @@ function_51fd2597(var_b9b24 = 1) {
   self endon(#"death");
   v_center = self getcentroid();
   var_4e7cc086 = util::spawn_model(#"tag_origin", v_center, self.angles);
-  self linkto(var_4e7cc086);
+  self linkTo(var_4e7cc086);
   var_4e7cc086 thread function_57b8a4e9(self);
 
   while(isDefined(self)) {
@@ -1033,13 +1033,13 @@ function_51fd2597(var_b9b24 = 1) {
 
       yaw = self.angles[1] + yaw;
       new_angles = (-60 + randomint(120), yaw, -45 + randomint(90));
-      var_4e7cc086 rotateto(new_angles, waittime, waittime * 0.5, waittime * 0.5);
+      var_4e7cc086 rotateTo(new_angles, waittime, waittime * 0.5, waittime * 0.5);
       wait randomfloat(waittime - 0.1);
       continue;
     }
 
     new_angles = (self.angles[0], self.angles[1] + 45, self.angles[2]);
-    var_4e7cc086 rotateto(new_angles, 2, 2 * 0.05, 2 * 0.05);
+    var_4e7cc086 rotateTo(new_angles, 2, 2 * 0.05, 2 * 0.05);
     wait 2;
   }
 }
@@ -1342,7 +1342,7 @@ function_c45635c7(mdl_reward, b_rotate, var_b9b24, n_fx_type = 1) {
 
   while(!(isDefined(mdl_reward.b_timeout) && mdl_reward.b_timeout)) {
     e_collision = undefined;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       n_dist = distance2d(player.origin, mdl_reward.origin);

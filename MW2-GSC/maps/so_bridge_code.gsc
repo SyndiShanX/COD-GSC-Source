@@ -162,11 +162,11 @@ foreach(ent in ents) {
   }
 }
 
-taxi = GetEnt("missile_taxi", "script_noteworthy");
+taxi = getEnt("missile_taxi", "script_noteworthy");
 taxi.finalOrg = taxi.origin;
 taxi.finalAng = taxi.angles;
 
-clip = GetEnt("missile_taxi_clip", "script_noteworthy");
+clip = getEnt("missile_taxi_clip", "script_noteworthy");
 
 taxi.origin += (80, 200, 0);
 taxi.angles = (0, 180, 0);
@@ -182,8 +182,8 @@ clip Delete();
 
 taxi thread destructible_force_explosion();
 moveTime = 1.0;
-taxi MoveTo(taxi.finalOrg, moveTime, 0, moveTime / 2);
-taxi RotateTo(taxi.finalAng, moveTime, 0, moveTime / 2);
+taxi moveTo(taxi.finalOrg, moveTime, 0, moveTime / 2);
+taxi rotateTo(taxi.finalAng, moveTime, 0, moveTime / 2);
 }
 
 missile_taxi_get_hit_by_hellfire() {
@@ -223,7 +223,7 @@ radio_dialogue("so_bridge_hqr_enemy_helo");
 }
 
 collapsed_section_shakes() {
-  trigger = GetEnt("collapsed_bridge_effects", "targetname");
+  trigger = getEnt("collapsed_bridge_effects", "targetname");
   targets = getEntArray(trigger.target, "targetname");
 
   trigger waittill("trigger");
@@ -261,7 +261,7 @@ bridge_collapse_prep() {
 
   level waittill("bridge_collapse");
 
-  bridge_collapse_sound = GetEnt("bridge_collapse_sound", "targetname");
+  bridge_collapse_sound = getEnt("bridge_collapse_sound", "targetname");
   Assert(isDefined(bridge_collapse_sound));
   bridge_collapse_sound thread play_sound_on_entity("scn_bridge_collapse");
 
@@ -282,8 +282,8 @@ bridge_collapse_prep() {
 }
 
 bridge_collapse_earthquake() {
-  ent = GetEnt("bridge_collapse_sound", "targetname");
-  ent PlayRumbleOnEntity("so_bridge_collapse");
+  ent = getEnt("bridge_collapse_sound", "targetname");
+  ent playRumbleOnEntity("so_bridge_collapse");
 
   time = 1;
   Earthquake(0.7, time, ent.origin, 5000);
@@ -317,13 +317,13 @@ reveal_details() {
 
 reveal_details_slide() {
   self Show();
-  self MoveTo(self.finalOrigin, 2.0, 0.0, 0.5);
+  self moveTo(self.finalOrigin, 2.0, 0.0, 0.5);
   wait 2.0;
   self.origin = self.finalOrigin;
 }
 
 road_piece_1() {
-  part = GetEnt("bridge_piece_1", "targetname");
+  part = getEnt("bridge_piece_1", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -341,12 +341,12 @@ road_piece_1() {
 
   moveTime = 0.75 * BRIDGE_COLLAPSE_SPEED;
 
-  part RotateTo(nextPosAngle, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0 * BRIDGE_COLLAPSE_SPEED);
-  part MoveTo(nextPosOrigin, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(nextPosAngle, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(nextPosOrigin, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0 * BRIDGE_COLLAPSE_SPEED);
   wait moveTime;
 
-  part RotateTo(part.landingSpotAng, moveTime, 0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
-  part MoveTo(part.landingSpotOrg, moveTime, 0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(part.landingSpotAng, moveTime, 0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, moveTime, 0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
   wait moveTime;
 
   thread array_call(details, ::Show);
@@ -355,7 +355,7 @@ road_piece_1() {
 }
 
 road_piece_2() {
-  part = GetEnt("bridge_piece_2", "targetname");
+  part = getEnt("bridge_piece_2", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -370,8 +370,8 @@ road_piece_2() {
 
   moveTime = 1.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part RotateTo(part.landingSpotAng, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
-  part MoveTo(part.landingSpotOrg, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(part.landingSpotAng, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, moveTime, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
   wait moveTime;
 
   thread array_call(details, ::Show);
@@ -382,7 +382,7 @@ road_piece_2() {
 road_piece_3() {
   PART_SPEED = 0.75;
 
-  part = GetEnt("bridge_piece_3", "targetname");
+  part = getEnt("bridge_piece_3", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -394,11 +394,11 @@ road_piece_3() {
 
   wait 2.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
 
   wait 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
-  part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
 
   wait 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
@@ -408,7 +408,7 @@ road_piece_3() {
 road_piece_4() {
   PART_SPEED = 0.75;
 
-  part = GetEnt("bridge_piece_4", "targetname");
+  part = getEnt("bridge_piece_4", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -420,11 +420,11 @@ road_piece_4() {
 
   wait 3.0 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part moveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
-  part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part rotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
@@ -434,7 +434,7 @@ road_piece_4() {
 road_piece_5() {
   PART_SPEED = 0.75;
 
-  part = GetEnt("bridge_piece_5", "targetname");
+  part = getEnt("bridge_piece_5", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -446,11 +446,11 @@ road_piece_5() {
 
   wait 2.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part moveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
-  part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part rotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
@@ -460,7 +460,7 @@ road_piece_5() {
 road_piece_6() {
   PART_SPEED = 0.75;
 
-  part = GetEnt("bridge_piece_6", "targetname");
+  part = getEnt("bridge_piece_6", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -472,11 +472,11 @@ road_piece_6() {
 
   wait 1.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part moveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
-  part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part rotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
@@ -486,7 +486,7 @@ road_piece_6() {
 road_piece_7() {
   PART_SPEED = 0.75;
 
-  part = GetEnt("bridge_piece_7", "targetname");
+  part = getEnt("bridge_piece_7", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -498,11 +498,11 @@ road_piece_7() {
 
   wait 2.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part moveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
-  part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part rotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
@@ -512,7 +512,7 @@ road_piece_7() {
 road_piece_8() {
   PART_SPEED = 0.75;
 
-  part = GetEnt("bridge_piece_8", "targetname");
+  part = getEnt("bridge_piece_8", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -524,11 +524,11 @@ road_piece_8() {
 
   wait 1.5 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part moveTo(part.landingSpotOrg, 1.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
-  part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
+  part rotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED * PART_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED * PART_SPEED);
 
   wait 0.8 * BRIDGE_COLLAPSE_SPEED * PART_SPEED;
 
@@ -536,7 +536,7 @@ road_piece_8() {
 }
 
 bridge_collapse_van() {
-  part = GetEnt("bridge_collapse_van", "targetname");
+  part = getEnt("bridge_collapse_van", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -546,15 +546,15 @@ bridge_collapse_van() {
   level waittill("bridge_collapse_start");
 
   nextPosOrigin = part.origin - (0, 0, 280);
-  part MoveTo(nextPosOrigin, 1.4 * BRIDGE_COLLAPSE_SPEED, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(nextPosOrigin, 1.4 * BRIDGE_COLLAPSE_SPEED, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
 
   wait 1.4 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.2 * BRIDGE_COLLAPSE_SPEED, 0.7 * BRIDGE_COLLAPSE_SPEED, 0.5 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, 1.2 * BRIDGE_COLLAPSE_SPEED, 0.7 * BRIDGE_COLLAPSE_SPEED, 0.5 * BRIDGE_COLLAPSE_SPEED);
 }
 
 bridge_collapse_suv() {
-  part = GetEnt("bridge_collapse_suv", "targetname");
+  part = getEnt("bridge_collapse_suv", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -567,16 +567,16 @@ bridge_collapse_suv() {
   wait 1.8 * BRIDGE_COLLAPSE_SPEED;
 
   nextPosOrigin = part.origin - (0, 0, 200);
-  part MoveTo(nextPosOrigin, 0.5 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(nextPosOrigin, 0.5 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
 
   wait 0.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 0.5 * BRIDGE_COLLAPSE_SPEED, 0.1 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
-  part RotateTo(part.landingSpotAng, 0.5 * BRIDGE_COLLAPSE_SPEED, 0.1 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, 0.5 * BRIDGE_COLLAPSE_SPEED, 0.1 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(part.landingSpotAng, 0.5 * BRIDGE_COLLAPSE_SPEED, 0.1 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
 }
 
 bridge_collapse_truck_1() {
-  part = GetEnt("bridge_collapse_truck_1", "targetname");
+  part = getEnt("bridge_collapse_truck_1", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -588,18 +588,18 @@ bridge_collapse_truck_1() {
 
   wait 2.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg + (0, 0, 84), 1.0 * BRIDGE_COLLAPSE_SPEED, 0.9 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg + (0, 0, 84), 1.0 * BRIDGE_COLLAPSE_SPEED, 0.9 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
 
   wait 1.0 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 0.8 * BRIDGE_COLLAPSE_SPEED, 0.8 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
-  part RotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, 0.8 * BRIDGE_COLLAPSE_SPEED, 0.8 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(part.landingSpotAng, 0.8 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
 
   wait 1.0 * BRIDGE_COLLAPSE_SPEED;
 }
 
 bridge_collapse_truck_2() {
-  part = GetEnt("bridge_collapse_truck_2", "targetname");
+  part = getEnt("bridge_collapse_truck_2", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -612,13 +612,13 @@ bridge_collapse_truck_2() {
   wait 0.5 * BRIDGE_COLLAPSE_SPEED;
 
   moveTime = 1.0 * BRIDGE_COLLAPSE_SPEED;
-  part MoveTo(part.landingSpotOrg + (0, 0, 80), moveTime, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg + (0, 0, 80), moveTime, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
 
   wait 0.2 * BRIDGE_COLLAPSE_SPEED;
 
   moveTime = 0.75 * BRIDGE_COLLAPSE_SPEED;
-  part MoveTo(part.landingSpotOrg, moveTime, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
-  part RotateTo(part.landingSpotAng, moveTime, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, moveTime, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(part.landingSpotAng, moveTime, 0.0 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
 
   wait moveTime;
 
@@ -626,7 +626,7 @@ bridge_collapse_truck_2() {
 }
 
 bridge_collapse_sedan_1() {
-  part = GetEnt("bridge_collapse_sedan_1", "targetname");
+  part = getEnt("bridge_collapse_sedan_1", "targetname");
   Assert(isDefined(part));
   part.landingSpotOrg = part.origin;
   part.landingSpotAng = part.angles;
@@ -639,12 +639,12 @@ bridge_collapse_sedan_1() {
   level waittill("bridge_collapse_start");
 
   nextPosOrigin = part.origin - (0, 0, 50);
-  part MoveTo(nextPosOrigin, 1.5 * BRIDGE_COLLAPSE_SPEED, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
-  part RotateTo(part.landingSpotAng, 1.5 * BRIDGE_COLLAPSE_SPEED, 0.1 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(nextPosOrigin, 1.5 * BRIDGE_COLLAPSE_SPEED, 0.3 * BRIDGE_COLLAPSE_SPEED, 0.2 * BRIDGE_COLLAPSE_SPEED);
+  part rotateTo(part.landingSpotAng, 1.5 * BRIDGE_COLLAPSE_SPEED, 0.1 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED);
 
   wait 1.5 * BRIDGE_COLLAPSE_SPEED;
 
-  part MoveTo(part.landingSpotOrg, 1.2 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 1.0 * BRIDGE_COLLAPSE_SPEED);
+  part moveTo(part.landingSpotOrg, 1.2 * BRIDGE_COLLAPSE_SPEED, 0.0 * BRIDGE_COLLAPSE_SPEED, 1.0 * BRIDGE_COLLAPSE_SPEED);
 
   wait 1.2 * BRIDGE_COLLAPSE_SPEED;
 
@@ -665,13 +665,13 @@ part_rummble(finalOrg, finalAng) {
     offsetAng = (RandomIntRange(0, MAX_RUMBLE_ANG_OFFSET) - (MAX_RUMBLE_ANG_OFFSET / 2), RandomIntRange(0, MAX_RUMBLE_ANG_OFFSET) - (MAX_RUMBLE_ANG_OFFSET / 2), RandomIntRange(0, MAX_RUMBLE_ANG_OFFSET) - (MAX_RUMBLE_ANG_OFFSET / 2));
     offsetOrg = (RandomIntRange(0, MAX_RUMBLE_ORG_OFFSET) - (MAX_RUMBLE_ORG_OFFSET / 2), RandomIntRange(0, MAX_RUMBLE_ORG_OFFSET) - (MAX_RUMBLE_ORG_OFFSET / 2), RandomIntRange(0, MAX_RUMBLE_ORG_OFFSET) - (MAX_RUMBLE_ORG_OFFSET / 2));
 
-    self RotateTo(self.angles + offsetAng, moveTime, accel_decel, accel_decel);
-    self MoveTo(self.origin + offsetOrg, moveTime, accel_decel, accel_decel);
+    self rotateTo(self.angles + offsetAng, moveTime, accel_decel, accel_decel);
+    self moveTo(self.origin + offsetOrg, moveTime, accel_decel, accel_decel);
 
     wait moveTime;
 
-    self RotateTo(finalAng, moveTime, accel_decel, accel_decel);
-    self MoveTo(finalOrg, moveTime, accel_decel, accel_decel);
+    self rotateTo(finalAng, moveTime, accel_decel, accel_decel);
+    self moveTo(finalOrg, moveTime, accel_decel, accel_decel);
 
     wait moveTime;
   }
@@ -681,11 +681,11 @@ part_rummble(finalOrg, finalAng) {
 }
 
 view_tilt() {
-  view_angle_controller_entity = GetEnt("view_angle_controller_entity", "targetname");
+  view_angle_controller_entity = getEnt("view_angle_controller_entity", "targetname");
   Assert(isDefined(view_angle_controller_entity));
-  direction_ent = GetEnt(view_angle_controller_entity.target, "targetname");
+  direction_ent = getEnt(view_angle_controller_entity.target, "targetname");
   Assert(isDefined(direction_ent));
-  gravity_vec = VectorNormalize(direction_ent.origin - view_angle_controller_entity.origin);
+  gravity_vec = vectorNormalize(direction_ent.origin - view_angle_controller_entity.origin);
 
   level waittill("bridge_sway_start");
 
@@ -697,22 +697,22 @@ view_tilt() {
   }
 
   moveTime = 1.5;
-  view_angle_controller_entity RotateTo((10, 13, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
+  view_angle_controller_entity rotateTo((10, 13, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
   wait(moveTime - 0.5);
 
   SetPhysicsGravityDir(gravity_vec);
   wait(1.5);
 
   moveTime = 1.0;
-  view_angle_controller_entity RotateTo((-3, -1, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
+  view_angle_controller_entity rotateTo((-3, -1, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
   wait(moveTime);
 
   moveTime = 1.0;
-  view_angle_controller_entity RotateTo((4, 5, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
+  view_angle_controller_entity rotateTo((4, 5, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
   wait(moveTime);
 
   moveTime = 2.0;
-  view_angle_controller_entity RotateTo((0, 2, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
+  view_angle_controller_entity rotateTo((0, 2, 0), moveTime, moveTime * 0.5, moveTime * 0.5);
   wait(moveTime);
 
   SetPhysicsGravityDir((0, 0, -1));
@@ -735,15 +735,15 @@ car_slide(carName, startName) {
     break;
   }
 
-  clip = GetEnt(carName + "_clip", "script_noteworthy");
+  clip = getEnt(carName + "_clip", "script_noteworthy");
   clip.origin = car.origin;
   clip.angles = car.angles;
 
-  clip LinkTo(car);
+  clip linkTo(car);
 
   Assert(isDefined(car));
 
-  start = GetEnt(startName, "script_noteworthy");
+  start = getEnt(startName, "script_noteworthy");
   Assert(isDefined(car));
   Assert(isDefined(start));
 
@@ -758,7 +758,7 @@ car_slide(carName, startName) {
 
   wait 1;
 
-  car MoveTo(car.finalOrg, moveTime, accel_decel, accel_decel);
+  car moveTo(car.finalOrg, moveTime, accel_decel, accel_decel);
 
   car waittill("movedone");
   clip Delete();

@@ -699,7 +699,7 @@ _id_240C(var_0, var_1) {
   var_6 = 0;
 
   if(isalive(self.enemy) && issentient(self.enemy) && self canshootenemy()) {
-    var_7 = vectornormalize(self.enemy getEye() - var_3);
+    var_7 = vectorNormalize(self.enemy getEye() - var_3);
 
     if(vectordot(var_4, var_7) > cos(var_5)) {
       var_6 = 1;

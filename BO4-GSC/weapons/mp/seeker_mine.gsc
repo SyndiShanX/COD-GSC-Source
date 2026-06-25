@@ -203,7 +203,7 @@ function_d573e71(grenade, weapon) {
 function_3019d870(origin, angles) {
   originalowner = self;
   originalownerentnum = originalowner.entnum;
-  mine = spawnvehicle("veh_seeker_mine_mp", origin, angles, "dynamic_spawn_ai");
+  mine = spawnVehicle("veh_seeker_mine_mp", origin, angles, "dynamic_spawn_ai");
   mine.arcweapon = getweapon("seeker_mine_arc");
   mine.weapon = getweapon("eq_seeker_mine");
   mine setweapon(mine.weapon);
@@ -356,7 +356,7 @@ shock_rumble_loop() {
   }
 
   while(isDefined(self) && (isDefined(self.var_dda9b735.isshocked) ? self.var_dda9b735.isshocked : 0)) {
-    self playrumbleonentity("shock_rumble");
+    self playRumbleOnEntity("shock_rumble");
     wait 0.1;
   }
 }
@@ -453,7 +453,7 @@ function_9a66b97b(target, tag, offset = (0, 0, 0), tagpos, seekermine) {
     pos += offset;
     self.origin = pos;
     dir = pos - tagpos;
-    dir = vectornormalize(dir);
+    dir = vectorNormalize(dir);
     self.angles = vectortoangles(dir);
 
     if(isDefined(target.var_dda9b735.state) && (target.var_dda9b735.state == 4 || target.var_dda9b735.state == 2)) {
@@ -725,7 +725,7 @@ function_f6f0c876(var_26b2b1bb, seekermine) {
       self playsoundtoplayer(#"uin_seeker_qte_fail", self);
 
       if(isDefined(level.var_9d47488.tunables.failrumble)) {
-        self playrumbleonentity(level.var_9d47488.tunables.failrumble);
+        self playRumbleOnEntity(level.var_9d47488.tunables.failrumble);
       }
 
       self battlechatter::pain_vox("MOD_ELECTROCUTED", self.arcweapon);

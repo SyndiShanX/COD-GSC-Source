@@ -224,7 +224,7 @@ global_vehicle_spawn_func(veh) {
 }
 
 cleanup() {
-  getent("shadow_cougar", "targetname") delete();
+  getEnt("shadow_cougar", "targetname") delete();
   add_flag_function("rappel_option", ::cleanup_kvp, "cougarfalls_f35intro_car01", "targetname");
   add_flag_function("rappel_option", ::cleanup_kvp, "cougarfalls_f35intro_car02", "targetname");
   add_flag_function("rappel_option", ::cleanup_kvp, "cougarfalls_f35intro_van", "targetname");
@@ -237,7 +237,7 @@ cleanup() {
 }
 
 setup_clips() {
-  t_clip = getent("clip_freeway_debris_pile", "targetname");
+  t_clip = getEnt("clip_freeway_debris_pile", "targetname");
   t_clip trigger_off();
   t_clip connectpaths();
 }

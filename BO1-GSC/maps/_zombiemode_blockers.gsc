@@ -59,17 +59,17 @@ door_init() {
   if(isDefined(self.zombie_cost)) {
     cost = self.zombie_cost;
   }
-  self SetCursorHint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self thread door_think();
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "electric_door" || self.script_noteworthy == "electric_buyable_door") {
-      self sethintstring(&"ZOMBIE_NEED_POWER");
+      self setHintString(&"ZOMBIE_NEED_POWER");
       if(isDefined(level.door_dialog_function)) {
         self thread[[level.door_dialog_function]]();
       }
       return;
     } else if(self.script_noteworthy == "kill_counter_door") {
-      self sethintstring(&"ZOMBIE_DOOR_ACTIVATE_COUNTER", cost);
+      self setHintString(&"ZOMBIE_DOOR_ACTIVATE_COUNTER", cost);
       return;
     }
   }
@@ -113,7 +113,7 @@ door_classify(parent_trig) {
     }
   }
   if(self.classname == "script_brushmodel") {
-    self DisconnectPaths();
+    self disconnectPaths();
   }
   parent_trig.doors[parent_trig.doors.size] = self;
 }
@@ -173,7 +173,7 @@ door_delay() {
 }
 kill_countdown() {
   kills_remaining = self.kill_goal - level.total_zombies_killed;
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(is_true(level.player_4_vox_override)) {
       players[i] playlocalsound("zmb_laugh_rich");
@@ -239,7 +239,7 @@ kill_countdown() {
     level.kill_counter_hud SetValue(kills_remaining);
     level waittill("zom_kill");
   }
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] playlocalsound("zmb_perks_packa_ready");
   }
@@ -260,7 +260,7 @@ door_kill_counter() {
     counter = 5;
   } else {
     counter = self.script_int;
-    players = GetPlayers();
+    players = getPlayers();
     if(players.size < 4) {
       fraction = int(counter * 0.2);
       counter -= fraction * (4 - players.size);
@@ -333,7 +333,7 @@ door_activate(time, open) {
   switch (self.script_string) {
     case "rotate":
       if(isDefined(self.script_angles)) {
-        self RotateTo(self.script_angles, time, 0, 0);
+        self rotateTo(self.script_angles, time, 0, 0);
         self thread door_solid_thread();
       }
       wait(randomfloat(.15));
@@ -343,9 +343,9 @@ door_activate(time, open) {
       if(isDefined(self.script_vector)) {
         vector = vector_scale(self.script_vector, scale);
         if(time >= 0.5) {
-          self MoveTo(self.origin + vector, time, time * 0.25, time * 0.25);
+          self moveTo(self.origin + vector, time, time * 0.25, time * 0.25);
         } else {
-          self MoveTo(self.origin + vector, time);
+          self moveTo(self.origin + vector, time);
         }
         self thread door_solid_thread();
         if(!open) {
@@ -426,8 +426,8 @@ door_opened() {
   }
 }
 physics_launch_door(door_trig) {
-  vec = vector_scale(VectorNormalize(self.script_vector), 5);
-  self MoveTo(self.origin + vec, 0.1);
+  vec = vector_scale(vectorNormalize(self.script_vector), 5);
+  self moveTo(self.origin + vec, 0.1);
   self waittill("movedone");
   self PhysicsLaunch(self.origin, self.script_vector * 10);
   wait(0.1);
@@ -475,7 +475,7 @@ door_solid_thread_anim() {
 }
 disconnect_paths_when_done() {
   self waittill_either("rotatedone", "movedone");
-  self DisconnectPaths();
+  self disconnectPaths();
 }
 debris_init() {
   cost = 1000;
@@ -540,7 +540,7 @@ debris_think() {
         }
         struct = undefined;
         if(isDefined(junk[i].script_linkTo)) {
-          struct = getstruct(junk[i].script_linkTo, "script_linkname");
+          struct = getStruct(junk[i].script_linkTo, "script_linkname");
           if(isDefined(struct)) {
             move_ent = junk[i];
             junk[i] thread debris_move(struct);
@@ -569,7 +569,7 @@ debris_move(struct) {
   self script_delay();
   self notsolid();
   self play_sound_on_ent("debris_move");
-  playsoundatposition("zmb_lightning_l", self.origin);
+  playSoundAtPosition("zmb_lightning_l", self.origin);
   if(isDefined(self.script_firefx)) {
     playFX(level._effect[self.script_firefx], self.origin);
   }
@@ -580,7 +580,7 @@ debris_move(struct) {
       for(i = 0; i < num; i++) {
         angles = og_angles + (-5 + RandomFloat(10), -5 + RandomFloat(10), -5 + RandomFloat(10));
         time = RandomFloatRange(0.1, 0.4);
-        self Rotateto(angles, time);
+        self rotateTo(angles, time);
         wait(time - 0.05);
       }
     }
@@ -589,12 +589,12 @@ debris_move(struct) {
   if(isDefined(self.script_transition_time)) {
     time = self.script_transition_time;
   }
-  self MoveTo(struct.origin, time, time * 0.5);
-  self RotateTo(struct.angles, time * 0.75);
+  self moveTo(struct.origin, time, time * 0.5);
+  self rotateTo(struct.angles, time * 0.75);
   self waittill("movedone");
   if(isDefined(self.script_fxid)) {
     playFX(level._effect[self.script_fxid], self.origin);
-    playsoundatposition("zmb_zombie_spawn", self.origin);
+    playSoundAtPosition("zmb_zombie_spawn", self.origin);
   }
   self Delete();
 }
@@ -626,9 +626,9 @@ blocker_init() {
           }
         }
       } else if(targets[j].script_parameters == "repair_board") {
-        targets[j].unbroken_section = GetEnt(targets[j].target, "targetname");
+        targets[j].unbroken_section = getEnt(targets[j].target, "targetname");
         if(isDefined(targets[j].unbroken_section)) {
-          targets[j].unbroken_section LinkTo(targets[j]);
+          targets[j].unbroken_section linkTo(targets[j]);
           targets[j] Hide();
           targets[j] notSolid();
           targets[j].unbroken = true;
@@ -664,7 +664,7 @@ blocker_init() {
   }
   if(use_boards) {
     assert(isDefined(self.clip));
-    self.trigger_location = getstruct(self.target, "targetname");
+    self.trigger_location = getStruct(self.target, "targetname");
     self thread blocker_think();
   }
 }
@@ -753,7 +753,7 @@ blocker_trigger_think() {
     trigger thread[[level._zombiemode_blocker_trigger_extra_thread]]();
   }
   trigger set_hint_string(self, "default_reward_barrier_piece");
-  trigger SetCursorHint("HINT_NOICON");
+  trigger setCursorHint("HINT_NOICON");
   while(1) {
     trigger waittill("trigger", player);
     if(player hasperk("specialty_fastreload")) {
@@ -769,7 +769,7 @@ blocker_trigger_think() {
       trigger notify("no valid boards");
       return;
     }
-    players = GetPlayers();
+    players = getPlayers();
     while(1) {
       if(!player IsTouching(trigger)) {
         break;
@@ -804,12 +804,12 @@ blocker_trigger_think() {
           if(!isDefined(chunk.material) || (isDefined(chunk.material) && chunk.material != "rock")) {
             chunk play_sound_on_ent("rebuild_barrier_piece");
           }
-          playsoundatposition("zmb_cha_ching", (0, 0, 0));
+          playSoundAtPosition("zmb_cha_ching", (0, 0, 0));
         }
       }
       if(chunk.script_parameters == "bar") {
         chunk play_sound_on_ent("rebuild_barrier_piece");
-        playsoundatposition("zmb_cha_ching", (0, 0, 0));
+        playSoundAtPosition("zmb_cha_ching", (0, 0, 0));
       }
       if(isDefined(chunk.script_parameters)) {
         if(chunk.script_parameters == "bar") {
@@ -825,7 +825,7 @@ blocker_trigger_think() {
       self thread replace_chunk(chunk, has_perk);
       assert(isDefined(self.clip));
       self.clip enable_trigger();
-      self.clip DisconnectPaths();
+      self.clip disconnectPaths();
       bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type repair", player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, original_cost, self.target, self.origin);
       if(!self script_delay()) {
         wait(1);
@@ -857,7 +857,7 @@ random_destroyed_chunk_show() {
   self Show();
 }
 door_repaired_rumble_n_sound() {
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(distance(players[i].origin, self.origin) < 150) {
       if(isalive(players[i])) {
@@ -933,7 +933,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
       } else {
         dest = trace["position"];
       }
-      chunk LinkTo(ent);
+      chunk linkTo(ent);
       time = ent fake_physicslaunch(dest, 300 + RandomInt(100));
       if(RandomInt(100) > 40) {
         ent RotatePitch(180, time * 0.5);
@@ -961,7 +961,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
       } else {
         dest = trace["position"];
       }
-      chunk LinkTo(ent);
+      chunk linkTo(ent);
       time = ent fake_physicslaunch(dest, 260 + RandomInt(100));
       if(RandomInt(100) > 40) {
         ent RotatePitch(180, time * 0.5);
@@ -993,7 +993,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
     } else {
       dest = trace["position"];
     }
-    chunk LinkTo(ent);
+    chunk linkTo(ent);
     time = ent fake_physicslaunch(dest, 200 + RandomInt(100));
     if(isDefined(chunk.unbroken_section)) {
       if(!isDefined(chunk.material) || chunk.material != "metal") {
@@ -1029,7 +1029,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
       } else {
         dest = trace["position"];
       }
-      chunk LinkTo(ent);
+      chunk linkTo(ent);
       time = ent fake_physicslaunch(dest, 200 + RandomInt(100));
       if(RandomInt(100) > 40) {
         ent RotatePitch(180, time * 0.5);
@@ -1122,21 +1122,21 @@ replace_chunk(chunk, perk, via_powerup) {
       chunk Show();
       if(has_perk) {
         if("specialty_fastreload" == perk) {
-          chunk RotateTo(chunk.og_angles, 0.15);
+          chunk rotateTo(chunk.og_angles, 0.15);
           chunk waittill_notify_or_timeout("rotatedone", 1);
           wait(0.1);
         } else if("specialty_fastreload_upgrade" == perk) {
-          chunk RotateTo(chunk.og_angles, 0.08);
+          chunk rotateTo(chunk.og_angles, 0.08);
           chunk waittill_notify_or_timeout("rotatedone", 1);
           wait(0.1);
         }
       } else {
-        chunk RotateTo(chunk.angles + (0, -9, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, -9, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.angles + (0, 18, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, 18, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk MoveTo(only_z, 0.15);
-        chunk RotateTo(chunk.og_angles, 0.3);
+        chunk moveTo(only_z, 0.15);
+        chunk rotateTo(chunk.og_angles, 0.3);
         chunk waittill_notify_or_timeout("rotatedone", 1);
         wait(0.2);
       }
@@ -1149,21 +1149,21 @@ replace_chunk(chunk, perk, via_powerup) {
       }
       if(has_perk) {
         if("specialty_fastreload" == perk) {
-          chunk RotateTo(chunk.og_angles, 0.15);
+          chunk rotateTo(chunk.og_angles, 0.15);
           chunk waittill_notify_or_timeout("rotatedone", 1);
           wait(0.1);
         } else if("specialty_fastreload_upgrade" == perk) {
-          chunk RotateTo(chunk.og_angles, 0.08);
+          chunk rotateTo(chunk.og_angles, 0.08);
           chunk waittill_notify_or_timeout("rotatedone", 1);
           wait(0.1);
         }
       } else {
-        chunk RotateTo(chunk.angles + (0, -9, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, -9, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.angles + (0, 18, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, 18, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk MoveTo(only_z, 0.15);
-        chunk RotateTo(chunk.og_angles, 0.3);
+        chunk moveTo(only_z, 0.15);
+        chunk rotateTo(chunk.og_angles, 0.3);
         chunk waittill_notify_or_timeout("rotatedone", 1);
         wait(0.2);
       }
@@ -1173,22 +1173,22 @@ replace_chunk(chunk, perk, via_powerup) {
         chunk Show();
         if(has_perk) {
           if("specialty_fastreload" == perk) {
-            chunk RotateTo(chunk.og_angles, 0.15);
+            chunk rotateTo(chunk.og_angles, 0.15);
             chunk waittill_notify_or_timeout("rotatedone", 1);
             wait(0.1);
           } else if("specialty_fastreload_upgrade" == perk) {
-            chunk RotateTo(chunk.og_angles, 0.08);
+            chunk rotateTo(chunk.og_angles, 0.08);
             chunk waittill_notify_or_timeout("rotatedone", 1);
             wait(0.1);
           }
         }
         if(chunk.script_noteworthy == "3" || chunk.script_noteworthy == "5") {}
-        chunk RotateTo(chunk.angles + (0, -9, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, -9, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.angles + (0, 18, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, 18, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk MoveTo(only_z, 0.15);
-        chunk RotateTo(chunk.og_angles, 0.3);
+        chunk moveTo(only_z, 0.15);
+        chunk rotateTo(chunk.og_angles, 0.3);
         chunk waittill_notify_or_timeout("rotatedone", 1);
         wait(0.2);
       }
@@ -1198,22 +1198,22 @@ replace_chunk(chunk, perk, via_powerup) {
     if(chunk.script_parameters == "board" || chunk.script_parameters == "repair_board" || chunk.script_parameters == "barricade_vents") {
       if(has_perk) {
         if("specialty_fastreload" == perk) {
-          chunk MoveTo(chunk.og_origin, 0.05);
+          chunk moveTo(chunk.og_origin, 0.05);
           chunk waittill_notify_or_timeout("movedone", 1);
           ensure_chunk_is_back_to_origin(chunk);
         } else if("specialty_fastreload_upgrade" == perk) {
-          chunk MoveTo(chunk.og_origin, 0.03);
+          chunk moveTo(chunk.og_origin, 0.03);
           chunk waittill_notify_or_timeout("movedone", 1);
           ensure_chunk_is_back_to_origin(chunk);
         }
       } else {
-        chunk RotateTo(chunk.angles + (0, -9, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, -9, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.angles + (0, 18, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, 18, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.og_angles, 0.1);
+        chunk rotateTo(chunk.og_angles, 0.1);
         chunk waittill_notify_or_timeout("RotateTo", 0.1);
-        chunk MoveTo(chunk.og_origin, 0.1);
+        chunk moveTo(chunk.og_origin, 0.1);
         chunk waittill_notify_or_timeout("movedone", 1);
         ensure_chunk_is_back_to_origin(chunk);
       }
@@ -1224,43 +1224,43 @@ replace_chunk(chunk, perk, via_powerup) {
       if(has_perk) {
         if("specialty_fastreload" == perk) {
           chunk Show();
-          chunk MoveTo(chunk.og_origin, 0.05);
+          chunk moveTo(chunk.og_origin, 0.05);
           chunk waittill_notify_or_timeout("movedone", 1);
           ensure_chunk_is_back_to_origin(chunk);
         } else if("specialty_fastreload_upgrade" == perk) {
           chunk Show();
-          chunk MoveTo(chunk.og_origin, 0.03);
+          chunk moveTo(chunk.og_origin, 0.03);
           chunk waittill_notify_or_timeout("movedone", 1);
           ensure_chunk_is_back_to_origin(chunk);
         }
       } else if(chunk.script_noteworthy == "3") {
-        chunk RotateTo(chunk.angles + (0, -9, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, -9, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.angles + (0, 18, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, 18, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.og_angles, 0.1);
-        chunk MoveTo(chunk.og_origin, 0.1);
+        chunk rotateTo(chunk.og_angles, 0.1);
+        chunk moveTo(chunk.og_origin, 0.1);
         chunk waittill_notify_or_timeout("movedone", 1);
         ensure_chunk_is_back_to_origin(chunk);
         chunk Show();
       } else if(chunk.script_noteworthy == "5") {
-        chunk RotateTo(chunk.angles + (0, -9, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, -9, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.angles + (0, 18, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, 18, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.og_angles, 0.1);
-        chunk MoveTo(chunk.og_origin, 0.1);
+        chunk rotateTo(chunk.og_angles, 0.1);
+        chunk moveTo(chunk.og_origin, 0.1);
         chunk waittill_notify_or_timeout("movedone", 1);
         ensure_chunk_is_back_to_origin(chunk);
         chunk Show();
       } else {
         chunk Show();
-        chunk RotateTo(chunk.angles + (0, -9, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, -9, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.angles + (0, 18, 0), 0.1);
+        chunk rotateTo(chunk.angles + (0, 18, 0), 0.1);
         chunk waittill("rotatedone");
-        chunk RotateTo(chunk.og_angles, 0.1);
-        chunk MoveTo(chunk.og_origin, 0.1);
+        chunk rotateTo(chunk.og_angles, 0.1);
+        chunk moveTo(chunk.og_origin, 0.1);
         chunk waittill_notify_or_timeout("movedone", 1);
         ensure_chunk_is_back_to_origin(chunk);
       }
@@ -1274,8 +1274,8 @@ replace_chunk(chunk, perk, via_powerup) {
         time1 = RandomfloatRange(0.3, 0.4);
         chunk vibrate((0, 180, 0), amplitude1, period1, time1);
         wait(0.3);
-        chunk RotateTo(chunk.og_angles, 0.1);
-        chunk MoveTo(chunk.og_origin, 0.1);
+        chunk rotateTo(chunk.og_angles, 0.1);
+        chunk moveTo(chunk.og_origin, 0.1);
         chunk waittill_notify_or_timeout("movedone", 1);
         ensure_chunk_is_back_to_origin(chunk);
         chunk thread zombie_gratetear_audio_plus_fx_offset_repair_horizontal(chunk);
@@ -1340,7 +1340,7 @@ replace_chunk(chunk, perk, via_powerup) {
     play_sound_at_pos(sound, chunk.origin);
   }
   if(!isDefined(self.clip)) {
-    chunk Disconnectpaths();
+    chunk disconnectPaths();
   }
 }
 zombie_boardtear_audio_plus_fx_offset_repair_horizontal(chunk) {
@@ -1555,7 +1555,7 @@ flag_blocker() {
     return;
   }
   if(type == "disconnectpaths") {
-    self DisconnectPaths();
+    self disconnectPaths();
     self disable_trigger();
     return;
   }
@@ -1584,7 +1584,7 @@ shutter_init() {
     }
   }
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   min_size = 4;
   if(isDefined(self.script_int)) {
     min_size = self.script_int;
@@ -1762,7 +1762,7 @@ replace_chunk_instant(chunk) {
   chunk Solid();
   chunk update_states("repaired");
   if(!isDefined(self.clip)) {
-    chunk Disconnectpaths();
+    chunk disconnectPaths();
   }
 }
 quantum_bomb_open_nearest_door_validation(position) {

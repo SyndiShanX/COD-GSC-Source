@@ -29,28 +29,28 @@ function boxingpickupupdate() {
   leftglove = spawn("script_model", self.origin + (0, 60, 32));
   leftglove.targetname = "leftglove";
   leftglove setModel("zombietron_boxing_gloves_lt");
-  leftglove setplayercollision(0);
-  leftglove linkto(org, "tag_origin", (0, 60, 32), vectorscale((1, 0, 0), 90));
+  leftglove setPlayerCollision(0);
+  leftglove linkTo(org, "tag_origin", (0, 60, 32), vectorscale((1, 0, 0), 90));
   trigger = spawn("trigger_radius", leftglove.origin, 1, 40, 50);
   trigger.targetname = "leftGlove";
-  trigger enablelinkto();
-  trigger linkto(leftglove);
+  trigger enablelinkTo();
+  trigger linkTo(leftglove);
   trigger thread function_80bf1f40(self, note, "zmb_pwup_boxing_punch", "boxing_pow", "MOD_IMPACT", &function_fa8666fa);
   org.var_1ab55691 = leftglove;
   org.trigger1 = trigger;
   rightglove = spawn("script_model", self.origin + (0, -60, 32));
   rightglove.targetname = "rightGlove";
   rightglove setModel("zombietron_boxing_gloves_rt");
-  rightglove setplayercollision(0);
-  rightglove linkto(org, "tag_origin", (0, -60, 32), vectorscale((1, 0, 0), 90));
+  rightglove setPlayerCollision(0);
+  rightglove linkTo(org, "tag_origin", (0, -60, 32), vectorscale((1, 0, 0), 90));
   trigger = spawn("trigger_radius", rightglove.origin, 1, 40, 50);
   trigger.targetname = "rightGlove";
-  trigger enablelinkto();
-  trigger linkto(rightglove);
+  trigger enablelinkTo();
+  trigger linkTo(rightglove);
   trigger thread function_80bf1f40(self, note, "zmb_pwup_boxing_punch", "boxing_pow", "MOD_IMPACT", &function_fa8666fa);
   org.var_40b7d0fa = rightglove;
   org.trigger2 = trigger;
-  org linkto(self, "", vectorscale((0, 0, 1), 10), (0, 0, 0));
+  org linkTo(self, "", vectorscale((0, 0, 1), 10), (0, 0, 0));
   self thread function_3c5a0d64(org, note, undefined, "zmb_pwup_boxing_end");
   self thread function_6143f535(org, note);
   org thread function_121caed2(self);
@@ -76,34 +76,34 @@ function barrelupdate() {
   barrel = spawn("script_model", self.origin + vectorscale((0, 1, 0), 90));
   barrel.targetname = "barrel1";
   barrel setModel(level.doa.var_f6947407);
-  barrel setplayercollision(0);
-  barrel linkto(org, "tag_origin", vectorscale((0, 1, 0), 90));
+  barrel setPlayerCollision(0);
+  barrel linkTo(org, "tag_origin", vectorscale((0, 1, 0), 90));
   trigger = spawn("trigger_radius", barrel.origin, 1, 40, 50);
   trigger.targetname = "barrel1";
-  trigger enablelinkto();
-  trigger linkto(barrel);
+  trigger enablelinkTo();
+  trigger linkTo(barrel);
   trigger thread function_80bf1f40(self, note, "zmb_pwup_barrel_impact");
   org.barrel1 = barrel;
   org.trigger1 = trigger;
   barrel = spawn("script_model", self.origin + (vectorscale((0, -1, 0), 90)));
   barrel.targetname = "barrel2";
   barrel setModel(level.doa.var_f6947407);
-  barrel setplayercollision(0);
-  barrel linkto(org, "tag_origin", vectorscale((0, -1, 0), 90));
+  barrel setPlayerCollision(0);
+  barrel linkTo(org, "tag_origin", vectorscale((0, -1, 0), 90));
   trigger = spawn("trigger_radius", barrel.origin, 1, 40, 50);
   trigger.targetname = "barrel2";
-  trigger enablelinkto();
-  trigger linkto(barrel);
+  trigger enablelinkTo();
+  trigger linkTo(barrel);
   trigger thread function_80bf1f40(self, note, "zmb_pwup_barrel_impact");
   org.barrel2 = barrel;
   org.trigger2 = trigger;
-  org linkto(self, "", vectorscale((0, 0, 1), 10), (0, 0, 0));
+  org linkTo(self, "", vectorscale((0, 0, 1), 10), (0, 0, 0));
   self thread function_3c5a0d64(org, note, "zmb_pwup_barrel_loop", "zmb_pwup_barrel_end");
   self thread function_6143f535(org, note);
   org thread function_121caed2(self);
   while(isDefined(org) && isDefined(self)) {
     org.origin = self.origin;
-    org rotateto(org.angles + vectorscale((0, 1, 0), 180), 1.2);
+    org rotateTo(org.angles + vectorscale((0, 1, 0), 180), 1.2);
     wait(1.2);
   }
 }
@@ -138,7 +138,7 @@ function private function_80bf1f40(player, note, sfx, var_5e61e69d, mod = "MOD_C
     } else {
       self dodamage(guy.health + 1, guy.origin, player, player, "none", mod, 0, getweapon("none"));
     }
-    player playrumbleonentity("damage_light");
+    player playRumbleOnEntity("damage_light");
   }
 }
 
@@ -293,7 +293,7 @@ function private function_5f0b5579(player) {
     if(guy.doa.stunned == 0) {
       guy thread namespace_1a381543::function_90118d8c("zmb_pwup_bear_stun");
       guy thread namespace_eaa992c::function_285a2999("stunbear_contact");
-      player playrumbleonentity("slide_rumble");
+      player playRumbleOnEntity("slide_rumble");
       guy thread function_a0a646c2();
     }
   }
@@ -341,8 +341,8 @@ function function_affe0c28() {
   self.doa.var_908e6b76 = 1;
   self.doa.var_21520b4e = spawn("trigger_radius", self.origin, 9, 130, 50);
   self.doa.var_21520b4e.targetname = "stunBear";
-  self.doa.var_21520b4e enablelinkto();
-  self.doa.var_21520b4e linkto(self);
+  self.doa.var_21520b4e enablelinkTo();
+  self.doa.var_21520b4e linkTo(self);
   self.doa.var_21520b4e thread function_5f0b5579(self);
   self playLoopSound("zmb_pwup_bear_loop");
   self thread namespace_eaa992c::function_285a2999("stunbear");
@@ -356,12 +356,12 @@ function function_45123d3c(player) {
   blade.targetname = "blade";
   blade setModel(level.doa.var_97bbae9c);
   blade setscale(def.scale);
-  blade setplayercollision(0);
-  blade linkto(self, "tag_origin", vectorscale((0, -1, 0), 70), (90 * self.blades.size, 0, 0));
+  blade setPlayerCollision(0);
+  blade linkTo(self, "tag_origin", vectorscale((0, -1, 0), 70), (90 * self.blades.size, 0, 0));
   trigger = spawn("trigger_radius", blade.origin, 1, 30, 50);
   trigger.targetname = "blade";
-  trigger enablelinkto();
-  trigger linkto(blade);
+  trigger enablelinkTo();
+  trigger linkTo(blade);
   trigger thread function_92374630(player);
   self.blades[self.blades.size] = blade;
   self.triggers[self.triggers.size] = trigger;
@@ -378,7 +378,7 @@ function sawbladeupdate() {
   blades = 1;
   org.blades = [];
   org.triggers = [];
-  org linkto(self, "tag_origin", vectorscale((0, 0, 1), 32));
+  org linkTo(self, "tag_origin", vectorscale((0, 0, 1), 32));
   org playLoopSound("zmb_pwup_blade_loop", 1);
   self thread function_f797c54(org, note);
   self thread function_595842c5(org, note);
@@ -391,7 +391,7 @@ function sawbladeupdate() {
       break;
     }
     org.origin = self.origin;
-    org rotateto(org.angles + vectorscale((0, 1, 0), 180), 0.4);
+    org rotateTo(org.angles + vectorscale((0, 1, 0), 180), 0.4);
     wait(0.4);
   }
 }
@@ -484,7 +484,7 @@ function function_2016b381(time) {
   orb = spawn("script_model", self.origin);
   orb.targetname = "magnet_update";
   orb setModel("tag_origin");
-  orb linkto(self, "", vectorscale((0, 0, 1), 50));
+  orb linkTo(self, "", vectorscale((0, 0, 1), 50));
   self.doa.var_3df27425 = orb;
   self thread function_64bb8338(orb);
   self thread namespace_1a381543::function_90118d8c("zmb_pwup_magnet_loop");

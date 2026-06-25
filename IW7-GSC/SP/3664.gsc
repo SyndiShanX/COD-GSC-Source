@@ -113,11 +113,11 @@ func_CF84() {
   self endon("disable_space");
   if(!isDefined(self.isent.var_1045D)) {
     self.isent.var_1045D = scripts\engine\utility::spawn_tag_origin();
-    self.isent.var_1045D linkto(self, "", (0, 0, 30), (0, 0, 0));
+    self.isent.var_1045D linkTo(self, "", (0, 0, 30), (0, 0, 0));
     self.isent.var_1045D.var_3800 = 1;
     self.isent.var_1045D.var_10AB9 = 0;
     self.isent.var_10463 = scripts\engine\utility::spawn_tag_origin();
-    self.isent.var_10463 linkto(self, "", (0, 0, 30), (0, 0, 0));
+    self.isent.var_10463 linkTo(self, "", (0, 0, 30), (0, 0, 0));
     self.isent.var_10463.var_BF43 = 0;
   }
 

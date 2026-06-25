@@ -75,7 +75,7 @@ function actor_killed_check_drops(params) {
           return;
         }
       }
-      playsoundatposition("fly_supply_bag_pick_up", killer.origin);
+      playSoundAtPosition("fly_supply_bag_pick_up", killer.origin);
     }
   } else if(isDefined(drop.onaikilled) && randomfloat(1) < drop.onaikilled) {
     origin = self.origin + vectorscale((0, 0, 1), 30);
@@ -125,7 +125,7 @@ function spawn_drop(drop, origin) {
   nd.model = spawn("script_model", nd.origin);
   nd.model setModel(drop.model);
   nd.model thread spin_it();
-  playsoundatposition("fly_supply_bag_drop", origin);
+  playSoundAtPosition("fly_supply_bag_drop", origin);
   return nd;
 }
 
@@ -163,7 +163,7 @@ function pickup(drop) {
       return false;
     }
   }
-  playsoundatposition("fly_supply_bag_pick_up", self.origin);
+  playSoundAtPosition("fly_supply_bag_pick_up", self.origin);
   drop.model delete();
   arrayremovevalue(level.item_drops_current, drop);
   return true;

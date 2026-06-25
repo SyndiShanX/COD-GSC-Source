@@ -169,7 +169,7 @@ func_1118C(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_3)) {
-    var_0.stun_struct.attack_bolt moveto(var_3, 0.05);
+    var_0.stun_struct.attack_bolt moveTo(var_3, 0.05);
     wait(0.05);
     if(isDefined(self) && var_2 == "MOD_MELEE") {
       self playSound("trap_electric_shock");

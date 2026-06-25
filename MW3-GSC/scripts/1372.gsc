@@ -176,7 +176,7 @@ _id_4254() {
     self._id_1199 = 1;
   }
 
-  var_1 = vectornormalize(self.enemy.origin - self.origin);
+  var_1 = vectorNormalize(self.enemy.origin - self.origin);
   var_2 = distance(self.enemy.origin, self.origin);
   var_2 = var_2 * 0.25;
   var_2 = clamp(var_2, 64, 128);

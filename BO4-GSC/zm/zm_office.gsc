@@ -244,11 +244,11 @@ registergondola_moving_watcher() {
   level._effect[#"zombie_light_board"] = #"hash_e1d8f427f2f23c6";
   level.var_6579276 = level._effect[#"zombie_light_board"];
   var_4ef1324a = getEntArray("yellow_conf_screen_part", "script_noteworthy");
-  var_4d8e3426 = getent("fx_light_origin", "script_noteworthy");
+  var_4d8e3426 = getEnt("fx_light_origin", "script_noteworthy");
   var_4d8e3426.fx_ent = util::spawn_model("tag_origin", var_4d8e3426.origin);
   var_4d8e3426.fx_ent.angles = var_4d8e3426.angles;
   var_4d8e3426.var_72873bf = playFXOnTag(level.var_6579276, var_4d8e3426.fx_ent, "tag_origin");
-  var_4d8e3426.var_72873bf linkto(var_4ef1324a[0]);
+  var_4d8e3426.var_72873bf linkTo(var_4ef1324a[0]);
   level waittill(#"hash_2124984d1ece329c");
   exploder::exploder("fxexp_script_power_on");
   level waittill(#"hash_21249b4d1ece37b5");
@@ -382,8 +382,8 @@ setup_personality_character_exerts() {
 }
 
 metal_detectors() {
-  trigger1 = getent("metal_detector", "targetname");
-  trigger2 = getent("metal_detector_2", "targetname");
+  trigger1 = getEnt("metal_detector", "targetname");
+  trigger2 = getEnt("metal_detector_2", "targetname");
   level thread function_4a3d7c9e(trigger1);
   level thread function_4a3d7c9e(trigger2);
 }
@@ -531,7 +531,7 @@ function_335eca01() {
   a_s_start_pos = struct::get_array("initial_spawn_points");
 
   for(i = 0; i < level.activeplayers.size; i++) {
-    level.activeplayers[i] setorigin(a_s_start_pos[i].origin);
+    level.activeplayers[i] setOrigin(a_s_start_pos[i].origin);
     level.activeplayers[i] setplayerangles(a_s_start_pos[i].angles);
     level.activeplayers[i] val::set(#"outro_scene", "freezecontrols", 0);
   }

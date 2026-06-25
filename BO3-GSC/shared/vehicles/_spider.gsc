@@ -216,7 +216,7 @@ function state_range_combat_attack() {
     if(can_attack) {
       if(self vehcansee(self.enemy)) {
         self setlookatent(self.enemy);
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
       }
       if(distance2dsquared(self.origin, self.enemy.origin) < (self.settings.engagementdistmax * 1.5) * (self.settings.engagementdistmax * 1.5) && vehicle_ai::iscooldownready("rocket") && self vehcansee(self.enemy)) {
         self do_ranged_attack(self.enemy);
@@ -232,7 +232,7 @@ function do_ranged_attack(enemy) {
   self vehicle_ai::clearallmovement(1);
   self.dont_move = 1;
   self setlookatent(enemy);
-  self setturrettargetent(enemy);
+  self setturrettargetEnt(enemy);
   self setvehgoalpos(enemy.origin, 0, 0);
   targetanglediff = 30;
   v_to_enemy = (enemy.origin - self.origin[0], enemy.origin - self.origin[1], 0);
@@ -397,7 +397,7 @@ function state_melee_combat_attack() {
     self vehicle_ai::evaluate_connections(undefined, state_params);
     if(self vehcansee(self.enemy)) {
       self setlookatent(self.enemy);
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
     }
     if(distance2dsquared(self.origin, self.enemy.origin) < (self.settings.meleereach * self.settings.meleereach) && self vehcansee(self.enemy)) {
       if(bullettracepassed(self.origin + vectorscale((0, 0, 1), 10), self.enemy.origin + vectorscale((0, 0, 1), 20), 0, self, self.enemy, 0, 1)) {

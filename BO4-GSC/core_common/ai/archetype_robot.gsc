@@ -517,7 +517,7 @@ mocomprobotstartwallrunupdate(entity, mocompanim, mocompanimblendouttime, mocomp
 
   if(isDefined(facenormal) && isDefined(positiononwall)) {
     facenormal = (facenormal[0], facenormal[1], 0);
-    facenormal = vectornormalize(facenormal);
+    facenormal = vectorNormalize(facenormal);
     movedirection = vectorcross(facenormal, (0, 0, 1));
 
     if(direction == "right") {
@@ -927,7 +927,7 @@ robotcanpreemptivejuke(entity) {
       enemyangles = entity.enemy getgunangles();
       toenemy = entity.enemy.origin - entity.origin;
       forward = anglesToForward(enemyangles);
-      dotproduct = abs(vectordot(vectornormalize(toenemy), forward));
+      dotproduct = abs(vectordot(vectorNormalize(toenemy), forward));
 
       record3dtext(acos(dotproduct), entity.origin + (0, 0, 10), (0, 1, 0), "<dev string:x38>");
 
@@ -1130,7 +1130,7 @@ robottargetservice(entity) {
   aienemies = [];
   playerenemies = [];
   ai = getaiarray();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(index, value in ai) {
     if(issentient(value) && entity getignoreent(value)) {
@@ -1436,7 +1436,7 @@ movetoplayerupdate(entity, asmstatename) {
 
           if(segmentlength + currentseglength > deviationdistance) {
             remaininglength = deviationdistance - segmentlength;
-            seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
+            seedposition = path[index - 1] + vectorNormalize(path[index] - path[index - 1]) * remaininglength;
 
             recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x38>", entity);
 
@@ -2021,7 +2021,7 @@ robottryreacquireservice(entity) {
     return false;
   }
 
-  dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+  dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
   forward = anglesToForward(entity.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {
@@ -2149,7 +2149,7 @@ robotdeployminiraps() {
 
   if(isDefined(entity) && isDefined(entity.miniraps)) {
     positiononnavmesh = getclosestpointonnavmesh(entity.origin, 200);
-    raps = spawnvehicle("spawner_bo3_mini_raps", positiononnavmesh, (0, 0, 0));
+    raps = spawnVehicle("spawner_bo3_mini_raps", positiononnavmesh, (0, 0, 0));
     raps.team = entity.team;
     raps thread robotsoldierserverutils::rapsdetonatecountdown(raps);
     entity.miniraps = undefined;
@@ -2564,7 +2564,7 @@ robotgivewasp(entity) {
     wasp = spawn("script_model", (0, 0, 0));
     wasp setModel(#"veh_t7_drone_attack_red");
     wasp setscale(0.75);
-    wasp linkto(entity, "j_spine4", (5, -15, 0), (0, 0, 90));
+    wasp linkTo(entity, "j_spine4", (5, -15, 0), (0, 0, 90));
     entity.wasp = wasp;
   }
 }
@@ -2581,7 +2581,7 @@ robotdeploywasp(entity) {
     }
 
     entity.wasp unlink();
-    wasp = spawnvehicle("spawner_bo3_wasp_enemy", entity.wasp.origin + spawnoffset, (0, 0, 0));
+    wasp = spawnVehicle("spawner_bo3_wasp_enemy", entity.wasp.origin + spawnoffset, (0, 0, 0));
     entity.wasp delete();
   }
 

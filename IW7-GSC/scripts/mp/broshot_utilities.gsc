@@ -120,7 +120,7 @@ processepictaunt(var_0, var_1, var_2) {
         var_7[0] = "IW7_mp_taunt_drone_crush_07_carepackage";
         var_8[0] = 6.6;
         var_25 = anglesToForward(level.camera_bro_shot.basecam.angles);
-        var_26 = vectornormalize((var_25[0], var_25[1], 0));
+        var_26 = vectorNormalize((var_25[0], var_25[1], 0));
         var_27 = vectorcross(var_26, (0, 0, 1));
         var_20[0] = level.charactercac.origin + var_26 * 80;
         var_1E = 4;
@@ -420,7 +420,7 @@ processepictaunt(var_0, var_1, var_2) {
         var_2D.angles = var_4 + var_2A;
         var_2D notsolid();
         var_2D dontinterpolate();
-        var_2D linkto(var_2B, var_10[var_28][var_2C], (0, 0, 0), (0, 0, 0));
+        var_2D linkTo(var_2B, var_10[var_28][var_2C], (0, 0, 0), (0, 0, 0));
         level.broshotepictauntsubprops[var_1][var_2C] = var_2D;
       }
     }
@@ -471,7 +471,7 @@ processepictaunt(var_0, var_1, var_2) {
 
   for(var_28 = 0; var_28 < var_1A.size; var_28++) {
     var_25 = anglesToForward(level.camera_bro_shot.basecam.angles);
-    var_26 = vectornormalize((var_25[0], var_25[1], 0));
+    var_26 = vectorNormalize((var_25[0], var_25[1], 0));
     var_27 = vectorcross(var_26, (0, 0, 1));
     var_30 = var_26 * var_1A[var_28][1];
     var_31 = var_27 * var_1A[var_28][0];

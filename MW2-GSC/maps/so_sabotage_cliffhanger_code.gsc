@@ -101,12 +101,12 @@ cliffhanger_dialogue() {
 
   radio_dialogue("cliff_pri_keepeyeonheart");
 }
-node = getstruct(self.target, "targetname");
+node = getStruct(self.target, "targetname");
 node stealth_ai_idle_and_react(self, "lean_balcony", "lean_react");
 }
 
 twostory_sitter() {
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
   node stealth_ai_idle_and_react(self, "sit_idle", "sit_react");
 }
 
@@ -129,7 +129,7 @@ tent_1_patrollers() {
 
 tent_1_crate_patroller() {
   self endon("death");
-  nearDoorStruct = getstruct("struct_crate_patroller_enterhut2", "targetname");
+  nearDoorStruct = getStruct("struct_crate_patroller_enterhut2", "targetname");
   while(1) {
     nearDoorStruct waittill("trigger", other);
 
@@ -553,7 +553,7 @@ level.plant_targets = [];
 plant_targets = getEntArray("explosive_obj_model", "script_noteworthy");
 foreach(obj_model in plant_targets) {
   obj_model hide();
-  planted_model = getent(obj_model.target, "targetname");
+  planted_model = getEnt(obj_model.target, "targetname");
   planted_model hide();
 }
 
@@ -578,7 +578,7 @@ for(i = 0; i < level.plant_targets.size; i++) {
 
 setup_explosive() {
   ID = level.plant_targets.size;
-  planted_model = getent(self.target, "targetname");
+  planted_model = getEnt(self.target, "targetname");
   planted_model hide();
 
   struct = spawnStruct();
@@ -600,8 +600,8 @@ explosive_think(exp_struct) {
   self thread threeD_objective_hint();
 
   self.obj_model MakeUsable();
-  self.obj_model SetCursorHint("HINT_ACTIVATE");
-  self.obj_model SetHintString(level.strings["hint_c4_plant"]);
+  self.obj_model setCursorHint("HINT_ACTIVATE");
+  self.obj_model setHintString(level.strings["hint_c4_plant"]);
 
   self.obj_model waittill("trigger");
 
@@ -639,7 +639,7 @@ explosives_planted_monitor() {
 
   Objective_State(1, "done");
 
-  outside_obj = getstruct("obj_outside_compound", "script_noteworthy");
+  outside_obj = getStruct("obj_outside_compound", "script_noteworthy");
   Objective_Add(2, "current", level.challenge_objective_escape, outside_obj.origin);
   playFX(getfx("extraction_smoke"), outside_obj.origin);
 

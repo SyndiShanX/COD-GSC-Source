@@ -406,7 +406,7 @@ function private function_eec699a0(position) {
 
   self.var_104bdc52.targetoutsidegoal = 1;
   var_9482199b = position - self.var_6d5624e1;
-  var_9482199b = vectornormalize(var_9482199b);
+  var_9482199b = vectorNormalize(var_9482199b);
   newposition = self.var_6d5624e1 + self.var_61ec1050 * var_9482199b;
   var_db87855d = 150;
   verticaloffset = 70;
@@ -428,7 +428,7 @@ function private function_8f80ae76(goalposition) {
     if(other != self && isDefined(other.var_104bdc52.enemy) && other.var_104bdc52.enemy == self.var_104bdc52.enemy && distancesquared(other.origin, goalposition) < sqr(128)) {
       var_ce7b333c = goalposition - other.origin;
       var_ce7b333c = (var_ce7b333c[0], var_ce7b333c[1], 0);
-      newgoalposition += vectornormalize(var_ce7b333c) * 128;
+      newgoalposition += vectorNormalize(var_ce7b333c) * 128;
       var_e3dbb13d = 1;
     }
   }
@@ -532,7 +532,7 @@ function private function_420d19e0(enemy, currentspeed, canseeenemy) {
       if(self.var_104bdc52.backuptime < gettime() && !is_true(self.var_104bdc52.backup) || curtime >= self.var_104bdc52.nextupdatetime) {
         var_d7231236 = self.origin - var_11dbb576;
         var_d7231236 = (var_d7231236[0], var_d7231236[1], 0);
-        self.var_104bdc52.stopposition = var_11dbb576 + vectornormalize(var_d7231236) * 150;
+        self.var_104bdc52.stopposition = var_11dbb576 + vectorNormalize(var_d7231236) * 150;
         self.var_104bdc52.stopposition = getclosestpointonnavmesh(self.var_104bdc52.stopposition, 500, 25);
         self.var_104bdc52.stopping = 1;
         self.var_104bdc52.backup = 1;
@@ -958,7 +958,7 @@ function private function_79851615(entity) {
 
     if(isDefined(self.grenade)) {
       if(util::time_has_passed(self.grenade.birthtime, 1.5) && distance(self.grenade.origin, self.origin) < self.grenade.weapon.explosionradius * 1.4) {
-        self.var_d5688d21 = self.grenade.origin + vectornormalize(self.origin - self.grenade.origin) * self.grenade.weapon.explosionradius * 1.2;
+        self.var_d5688d21 = self.grenade.origin + vectorNormalize(self.origin - self.grenade.origin) * self.grenade.weapon.explosionradius * 1.2;
         self.var_d5688d21 = getclosestpointonnavmesh(self.var_d5688d21, 64, 25);
       }
     } else {
@@ -1340,15 +1340,15 @@ function private function_23828655(entity) {
 
   entityangles = entity.angles;
   toenemy = entity.enemy.origin - entity.origin;
-  toenemy = vectornormalize((toenemy[0], toenemy[1], 0));
+  toenemy = vectorNormalize((toenemy[0], toenemy[1], 0));
   entityforward = anglesToForward(entityangles);
-  entityforward = vectornormalize((entityforward[0], entityforward[1], 0));
+  entityforward = vectorNormalize((entityforward[0], entityforward[1], 0));
 
   if(vectordot(toenemy, entityforward) < 0.5) {
     return false;
   }
 
-  allplayers = getplayers();
+  allplayers = getPlayers();
 
   if(isDefined(allplayers) && allplayers.size) {
     foreach(player in allplayers) {

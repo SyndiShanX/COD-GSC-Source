@@ -155,7 +155,7 @@ function activate_vehicle(type) {
     return false;
   }
 
-  vehicle = spawnvehicle(bundle.ksvehicle, player.var_b8878ba9, player.var_ddc03e10, type, 0, player);
+  vehicle = spawnVehicle(bundle.ksvehicle, player.var_b8878ba9, player.var_ddc03e10, type, 0, player);
   vehicle setowner(player);
   vehicle deployable::function_dd266e08(player);
   vehicle killstreaks::configure_team(type, killstreak_id, player, "small_vehicle", undefined, &function_5e2ea3ef);
@@ -773,7 +773,7 @@ function function_849819e9(missile, bundle, killstreakname, var_61bbac7a) {
   while(isDefined(self.owner) && self.owner util::function_63d27d4e(killstreakname)) {
     dist = distance(missile.origin, self.origin);
     velocity = missile getvelocity();
-    missile_dir = vectornormalize(velocity);
+    missile_dir = vectorNormalize(velocity);
     missile_speed = vectordot(missile_dir, velocity);
 
     if(missile_speed > 0) {

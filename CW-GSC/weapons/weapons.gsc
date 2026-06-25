@@ -1283,7 +1283,7 @@ function check_stuck_to_player(deleteonteamchange, awardscoreevent, weapon, var_
 
     if(isDefined(player)) {
       dir = player.origin - pos;
-      dir = vectornormalize(dir);
+      dir = vectorNormalize(dir);
       killcament.angles = vectortoangles(dir);
     }
 
@@ -1511,7 +1511,7 @@ function damage_trace(from, to, startradius, ignore) {
     midpos = to;
   }
 
-  dir = vectornormalize(diff);
+  dir = vectorNormalize(diff);
   midpos = from + (dir[0] * startradius, dir[1] * startradius, dir[2] * startradius);
   trace = bulletTrace(midpos, to, 0, ignore);
 
@@ -1578,7 +1578,7 @@ function play_concussion_sound(duration) {
   self endon(#"death", #"disconnect");
   concussionsound = spawn("script_origin", (0, 0, 1));
   concussionsound.origin = self.origin;
-  concussionsound linkto(self);
+  concussionsound linkTo(self);
   concussionsound thread delete_ent_on_owner_death(self);
   concussionsound playSound(#"");
   concussionsound playLoopSound(#"");
@@ -2006,7 +2006,7 @@ function multi_detonation_get_cluster_launch_dir(weapon, index, multival, normal
   f = vectorcross(c, normal);
   theta = 90 - pitch;
   dir = normal * cos(theta) + f * sin(theta);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   return dir;
 }
 

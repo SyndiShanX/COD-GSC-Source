@@ -32,7 +32,7 @@ init() {
   level.var_8200dc81.name = "ncom";
   level.var_8200dc81.isspeaking = 0;
   level.var_8200dc81.var_5b6ebfd0 = 0;
-  level.var_170ea961 = getent("atlas_ct", "targetname");
+  level.var_170ea961 = getEnt("atlas_ct", "targetname");
   level.var_170ea961.name = "mcca";
   level.var_170ea961.isspeaking = 0;
   level.var_170ea961.var_5b6ebfd0 = 0;
@@ -235,10 +235,10 @@ function_20681be5() {
   }
 
   destpos = self.origin - (0, 0, self.var_3de056e7);
-  self moveto(destpos, 0.5, 0.05, 0.05);
+  self moveTo(destpos, 0.5, 0.05, 0.05);
   self playSound(#"evt_bunker_door_interior_close");
-  e_collision = getent(self.linkname, "linkto");
-  e_collision disconnectpaths();
+  e_collision = getEnt(self.linkname, "linkto");
+  e_collision disconnectPaths();
 
   if(isDefined(self.var_61e10b48) && isDefined(self.var_d42d6fdf)) {
     level.zones[hash(self.var_61e10b48)].adjacent_zones[hash(self.var_d42d6fdf)].is_connected = 0;
@@ -264,10 +264,10 @@ function_46ed91c6() {
   }
 
   destpos = self.origin + (0, 0, self.var_3de056e7);
-  self moveto(destpos, 0.5, 0.05, 0.05);
+  self moveTo(destpos, 0.5, 0.05, 0.05);
   self playSound(#"evt_bunker_door_interior_open");
-  e_collision = getent(self.linkname, "linkto");
-  e_collision disconnectpaths();
+  e_collision = getEnt(self.linkname, "linkto");
+  e_collision disconnectPaths();
 
   if(isDefined(self.var_61e10b48) && isDefined(self.var_d42d6fdf)) {
     level.zones[hash(self.var_61e10b48)].adjacent_zones[hash(self.var_d42d6fdf)].is_connected = 1;
@@ -309,11 +309,11 @@ function_bf25aeb1(str) {
 }
 
 function_f2fa71ce() {
-  e_door = getent("apd_lockdown", "targetname");
-  e_col = getent(e_door.target, "targetname");
+  e_door = getEnt("apd_lockdown", "targetname");
+  e_col = getEnt(e_door.target, "targetname");
 
   if(!e_door.b_open) {
-    e_door rotateto(e_door.angles + (0, -90, 0), 1, 0.1, 0.2);
+    e_door rotateTo(e_door.angles + (0, -90, 0), 1, 0.1, 0.2);
     e_col notsolid();
     e_col connectpaths();
 
@@ -327,13 +327,13 @@ function_f2fa71ce() {
 }
 
 function_985c08e7() {
-  e_door = getent("apd_lockdown", "targetname");
-  e_col = getent(e_door.target, "targetname");
+  e_door = getEnt("apd_lockdown", "targetname");
+  e_col = getEnt(e_door.target, "targetname");
 
   if(e_door.b_open) {
-    e_door rotateto(e_door.angles + (0, -90, 0), 1, 0.1, 0.2);
+    e_door rotateTo(e_door.angles + (0, -90, 0), 1, 0.1, 0.2);
     e_col solid();
-    e_col disconnectpaths();
+    e_col disconnectPaths();
 
     if(isDefined(e_door.var_61e10b48) && isDefined(e_door.var_d42d6fdf)) {
       level.zones[hash(e_door.var_61e10b48)].adjacent_zones[hash(e_door.var_d42d6fdf)].is_connected = 0;
@@ -421,12 +421,12 @@ function_358da2a7(e_player) {
 
     if(isDefined(w_take)) {
       if(w_take == w_give) {
-        self sethintstring(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", #"hash_39d6b1ad0b94f111"));
+        self setHintString(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", #"hash_39d6b1ad0b94f111"));
       } else {
-        self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
+        self setHintString(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
       }
     } else {
-      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), w_give.displayname);
+      self setHintString(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), w_give.displayname);
     }
 
     return 1;

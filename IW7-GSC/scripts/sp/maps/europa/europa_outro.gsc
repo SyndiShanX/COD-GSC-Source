@@ -6,7 +6,7 @@
 func_C7C6() {
   setdvarifuninitialized("outro_nohelmet", "0");
   setdvarifuninitialized("new_dof", "1");
-  var_0 = getent("nrg_weapon", "targetname");
+  var_0 = getEnt("nrg_weapon", "targetname");
   var_0 delete();
   precachemodel("vm_hero_protagonist_helmet_glass_crack_clear");
   precachemodel("vm_hero_protagonist_helmet_glass_crack_01_clear");
@@ -20,9 +20,9 @@ func_C7C6() {
   thread func_FC0E();
   level._effect["kotch_muzzleflash"] = loadfx("vfx\iw7\core\muzflash\emc\vfx_muz_emc_v.vfx");
   var_1 = [];
-  var_1[var_1.size] = getent("outro_dropship_static", "targetname");
-  var_1[var_1.size] = getent("outro_mons", "targetname");
-  var_2 = getent("outro_tram_brushmodel", "targetname");
+  var_1[var_1.size] = getEnt("outro_dropship_static", "targetname");
+  var_1[var_1.size] = getEnt("outro_mons", "targetname");
+  var_2 = getEnt("outro_tram_brushmodel", "targetname");
   var_1[var_1.size] = var_2;
   var_1 = scripts\engine\utility::array_combine(var_1, getEntArray(var_2.target, "targetname"));
   foreach(var_4 in var_1) {
@@ -97,7 +97,7 @@ func_C7B4() {
   setglobalsoundcontext("storm", "storm_ext", 1);
   setglobalsoundcontext("atmosphere", "helmet", 1);
   scripts\engine\utility::exploder("outro_amb_fx");
-  var_1 = getent("intro_surface_vista_01", "targetname");
+  var_1 = getEnt("intro_surface_vista_01", "targetname");
   var_1 show();
   scripts\sp\maps\europa\europa_util::toggle_cockpit_lights(0);
   if(getdvarint("debug_europa")) {
@@ -175,7 +175,7 @@ func_EBEA() {
     lib_0E4B::func_8E0A();
   }
 
-  var_9 = scripts\engine\utility::getstruct("outro_anim_spot", "targetname");
+  var_9 = scripts\engine\utility::getStruct("outro_anim_spot", "targetname");
   level.player thread scripts\sp\maps\europa\europa_util::func_8E34(1);
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
   level.var_A70E attach("oxygen_bottle_air_boss", "tag_accessory_right");
@@ -187,7 +187,7 @@ func_EBEA() {
   var_1[var_1.size] = level.var_EBBC;
   level.player.var_E505 setModel("viewmodel_un_jackal_pilots_frost");
   level.player.var_8632 = spawn("script_origin", level.player.origin);
-  level.player.var_8632 linkto(level.player.var_E505, "tag_player", (0, 0, 0), (0, 0, 0));
+  level.player.var_8632 linkTo(level.player.var_E505, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player takeallweapons();
   level.player getradiuspathsighttestnodes();
   level.player getrawbaseweaponname(0.2, 0.2);
@@ -208,7 +208,7 @@ func_EBEA() {
   thread func_C7BC();
   setmusicstate("mx_173_cine_europaoutro");
   level.player.var_8632 = spawn("script_origin", level.player.origin);
-  level.player.var_8632 linkto(level.player.var_E505, "tag_player", (0, 0, 0), (0, 0, 0));
+  level.player.var_8632 linkTo(level.player.var_E505, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player.var_E505 thread func_D20A(var_9);
   thread func_C7D7();
   level.player giveplayerscore(1, 1, 1);
@@ -263,7 +263,7 @@ func_584C() {
   level endon("stop_dof_target_thread");
   var_0 = spawn("script_origin", level.player getEye());
   level.var_584B = level.var_EBBB;
-  var_1 = vectornormalize(level.var_584B gettagorigin("j_neck") - level.player getEye());
+  var_1 = vectorNormalize(level.var_584B gettagorigin("j_neck") - level.player getEye());
   var_0.origin = level.player getEye() + var_1 * 2;
   level.var_5840 = var_0;
   wait(5);
@@ -294,7 +294,7 @@ func_584C() {
 
 func_77D9(var_0, var_1, var_2) {
   var_3 = var_0 gettagorigin("j_neck");
-  var_4 = vectornormalize(var_3 - var_1);
+  var_4 = vectorNormalize(var_3 - var_1);
   var_5 = anglesToForward(var_2);
   return vectordot(var_5, var_4);
 }
@@ -308,7 +308,7 @@ func_5841() {
   for(;;) {
     scripts\engine\utility::flag_waitopen("pause_dynamic_dof");
     var_3 = level.var_584B gettagorigin("j_neck");
-    var_4 = vectornormalize(var_3 - self.origin);
+    var_4 = vectorNormalize(var_3 - self.origin);
     if(distancesquared(self.origin, var_3) > var_1) {
       self.origin = self.origin + var_4 * var_0;
       var_2 = distance(self.origin, level.player getEye());
@@ -424,11 +424,11 @@ func_C7C0(var_0) {
 }
 
 func_C7C9() {
-  var_0 = getent("outro_mons", "targetname");
+  var_0 = getEnt("outro_mons", "targetname");
   var_0 show();
   var_0 attach("veh_mil_air_ca_olympus_mons_detail_01", "tag_origin");
   var_0 attach("veh_mil_air_ca_olympus_mons", "tag_origin");
-  var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_0 scripts\engine\utility::delaycall(15, ::moveto, var_1.origin, 60, 0, 10);
   var_0.var_5020 = "idle";
   var_0.var_501F = "idle";
@@ -441,7 +441,7 @@ func_C7C9() {
 func_BA4A(var_0) {}
 
 func_C7BC() {
-  var_0 = getent("outro_dropship_static", "targetname");
+  var_0 = getEnt("outro_dropship_static", "targetname");
   var_0 show();
   var_0 thread func_5E0B();
   wait(22);
@@ -474,14 +474,14 @@ func_5E0B() {
     var_11 = randomfloatrange(var_7, var_8);
     var_12 = var_0 + (var_9, var_10, var_11);
     var_13 = randomfloatrange(var_1, var_2);
-    self moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    self moveTo(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
     wait(var_13);
     var_9 = randomfloatrange(var_3, var_4);
     var_10 = randomfloatrange(var_5, var_6);
     var_11 = randomfloatrange(var_7, var_8) * -1;
     var_12 = var_0 + (var_9, var_10, var_11);
     var_13 = randomfloatrange(var_1, var_2);
-    self moveto(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
+    self moveTo(var_12, var_13, var_13 * 0.5, var_13 * 0.5);
     wait(var_13);
   }
 }
@@ -520,14 +520,14 @@ func_5E0E() {
     var_8 = randomfloatrange(0, var_4);
     var_9 = var_2 * -1;
     var_10 = var_8 + var_9;
-    self rotateyaw(var_10, var_7, var_7 * 0.5, var_7 * 0.5);
+    self rotateYaw(var_10, var_7, var_7 * 0.5, var_7 * 0.5);
     var_2 = var_10;
     wait(var_7);
     var_7 = randomfloatrange(var_5, var_6);
     var_8 = randomfloatrange(var_3, 0);
     var_9 = var_2 * -1;
     var_10 = var_8 + var_9;
-    self rotateyaw(var_10, var_7, var_7 * 0.5, var_7 * 0.5);
+    self rotateYaw(var_10, var_7, var_7 * 0.5, var_7 * 0.5);
     var_2 = var_10;
     wait(var_7);
   }
@@ -590,7 +590,7 @@ func_11628() {
   foreach(var_3 in var_1) {
     foreach(var_5 in var_0) {
       if(isPlayer(var_5) && var_3.script_noteworthy == "player") {
-        var_5 setorigin(var_3.origin);
+        var_5 setOrigin(var_3.origin);
         var_5 setplayerangles(var_3.angles);
         var_5 freezecontrols(1);
         break;
@@ -615,9 +615,9 @@ func_FC0E() {
 
 func_FB84() {
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   var_1 = spawn("script_origin", level.player.origin);
-  var_1 linkto(level.player);
+  var_1 linkTo(level.player);
   var_0 thread func_FB47();
   var_1 thread func_FB33();
   level.player playSound("scn_europa_outro_fadeup");

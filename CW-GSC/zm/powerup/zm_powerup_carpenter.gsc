@@ -50,7 +50,7 @@ function grab_carpenter(e_player) {
       e_player.armor = e_player.maxarmor;
     }
   } else {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(e_player in players) {
       if(isDefined(e_player) && isPlayer(e_player) && isDefined(self.hint)) {
@@ -129,7 +129,7 @@ function start_carpenter(var_264cf1f9, var_ea1d8f06 = 1) {
 
         if(isDefined(window.clip)) {
           window.clip triggerenable(1);
-          window.clip disconnectpaths();
+          window.clip disconnectPaths();
         } else {
           zm_blockers::blocker_disconnect_paths(window.neg_start, window.neg_end);
         }
@@ -184,7 +184,7 @@ function start_carpenter(var_264cf1f9, var_ea1d8f06 = 1) {
 }
 
 function get_near_boards(windows) {
-  players = getplayers();
+  players = getPlayers();
   boards_near_players = [];
 
   for(j = 0; j < windows.size; j++) {
@@ -214,7 +214,7 @@ function get_near_boards(windows) {
 }
 
 function get_far_boards(windows) {
-  players = getplayers();
+  players = getPlayers();
   boards_far_from_players = [];
 
   for(j = 0; j < windows.size; j++) {
@@ -270,7 +270,7 @@ function repair_far_boards(barriers) {
 
     if(isDefined(barrier.clip)) {
       barrier.clip triggerenable(1);
-      barrier.clip disconnectpaths();
+      barrier.clip disconnectPaths();
     } else {
       zm_blockers::blocker_disconnect_paths(barrier.neg_start, barrier.neg_end);
     }

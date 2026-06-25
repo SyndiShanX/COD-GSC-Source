@@ -742,7 +742,7 @@ func_7AFF(var_0) {
   var_3 = 0.85;
   var_4 = 0.5;
   var_5 = undefined;
-  var_6 = vectornormalize(var_0 - var_2);
+  var_6 = vectorNormalize(var_0 - var_2);
   var_7 = vectordot(anglesToForward(var_1), var_6);
   var_8 = vectordot(anglestoright(var_1), var_6);
   if(var_7 <= var_3 * -1) {
@@ -911,7 +911,7 @@ func_CE43(var_0) {
 
     if(isDefined(self.stealth_vo_ent)) {
       if(isDefined(self.model) && scripts\sp\utility::hastag(self.model, "j_head")) {
-        self.stealth_vo_ent linkto(self, "j_head", (0, 0, 0), (0, 0, 0));
+        self.stealth_vo_ent linkTo(self, "j_head", (0, 0, 0), (0, 0, 0));
       }
 
       self.stealth_vo_ent playSound(var_0, "stealth_vo", 1);
@@ -1008,7 +1008,7 @@ func_10EDB(var_0) {
   var_3 = var_0;
   if(isDefined(var_3) && !isDefined(self.var_10E6D.music_ent[var_3])) {
     self.var_10E6D.music_ent[var_3] = spawn("script_model", self.origin);
-    self.var_10E6D.music_ent[var_3] linkto(self);
+    self.var_10E6D.music_ent[var_3] linkTo(self);
     self.var_10E6D.music_ent[var_3].var_4B15 = 0;
     self.var_10E6D.music_ent[var_3] ghostattack(0);
     self.var_10E6D.music_ent[var_3] playLoopSound(var_3);
@@ -1091,7 +1091,7 @@ func_10EE4(var_0) {
   }
 
   if(var_0) {
-    scripts\sp\utility::anim_stopanimscripted();
+    scripts\sp\utility::anim_stopanimScripted();
     self.var_E014 = 1;
     scripts\sp\utility::func_65E1("stealth_override_goal");
     lib_0F1B::func_F2E0(0);
@@ -1205,7 +1205,7 @@ func_CD58(var_0, var_1) {
   func_10EE4(1);
   func_F4C8("seek", 1, var_0);
   var_2 = var_0 - self.origin;
-  var_2 = vectornormalize((var_2[0], var_2[1], 0));
+  var_2 = vectorNormalize((var_2[0], var_2[1], 0));
   var_3 = spawnStruct();
   var_3.origin = var_0;
   var_3.angles = vectortoangles(var_2);

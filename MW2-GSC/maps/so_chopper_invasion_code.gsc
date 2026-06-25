@@ -61,10 +61,10 @@ get_targeted_line_array(start) {
   point = start;
 
   while(isDefined(point.target)) {
-    nextpoint = getstruct(point.target, "targetname");
+    nextpoint = getStruct(point.target, "targetname");
 
     if(!isDefined(nextpoint)) {
-      nextpoint = GetEnt(point.target, "targetname");
+      nextpoint = getEnt(point.target, "targetname");
     }
 
     if(!isDefined(nextpoint)) {
@@ -316,10 +316,10 @@ so_ads_slowdown_hint() {
 }
 
 so_fake_choppergunner() {
-  spawner = GetEnt("so_choppergunner_spawner", "targetname");
+  spawner = getEnt("so_choppergunner_spawner", "targetname");
   drone = maps\_spawner::spawner_dronespawn(spawner);
 
-  drone LinkTo(level.chopper, "tag_player");
+  drone linkTo(level.chopper, "tag_player");
 }
 
 test_chopper_paths() {
@@ -329,11 +329,11 @@ test_chopper_paths() {
   level.chopper chopper_defaults();
   level.chopper SetHoverParams(10, 2, 1);
   level.chopper ClearLookAtEnt();
-  level.chopper thread chopper_gun_face_entity(getstruct("so_chopper_gasstation_lookat", "targetname"));
+  level.chopper thread chopper_gun_face_entity(getStruct("so_chopper_gasstation_lookat", "targetname"));
 
   wait(1);
 
-  struct = getstruct("so_last_driveby_point", "script_noteworthy");
+  struct = getStruct("so_last_driveby_point", "script_noteworthy");
   level.chopper SetVehGoalPos(struct.origin, 1);
   level.chopper SetHoverParams(10, 2, 1);
   level.chopper Vehicle_SetSpeed(5, 1, 1);
@@ -393,7 +393,7 @@ chopper_gun_face_entity(ent, wait_for_goal, delay) {
       lookat_origin = ent.origin;
     }
 
-    forwardvec = VectorNormalize(lookat_origin - self.origin);
+    forwardvec = vectorNormalize(lookat_origin - self.origin);
     forwardangles = VectorToAngles(forwardvec);
     rightvec = AnglesToRight(forwardangles);
     backvec = rightvec * -1;
@@ -708,7 +708,7 @@ chopper_follow_path(path_targetname, follow_player_when_done, dialog, safe_fligh
     safe_flight = false;
   }
 
-  path_start = getstruct(path_targetname, "targetname");
+  path_start = getStruct(path_targetname, "targetname");
   path_point = path_start;
   going_to_start = true;
 
@@ -785,7 +785,7 @@ chopper_follow_path(path_targetname, follow_player_when_done, dialog, safe_fligh
       break;
     }
 
-    path_point = getstruct(path_point.target, "targetname");
+    path_point = getStruct(path_point.target, "targetname");
   }
 
   self notify("follow_path_done");
@@ -855,9 +855,9 @@ distance2d_squared(pos1, pos2) {
 }
 
 is_player_in_parking_lot() {
-  return level.groundplayer IsTouching(GetEnt("so_parkinglot", "targetname"));
+  return level.groundplayer IsTouching(getEnt("so_parkinglot", "targetname"));
 }
-level.truck_spawner = GetEnt("gas_station_truck", "targetname");
+level.truck_spawner = getEnt("gas_station_truck", "targetname");
 level.truck_ai_spawners = getEntArray("so_truck_ai_spawner", "targetname");
 }
 
@@ -905,9 +905,9 @@ smoke_mover_thread() {
       angles = VectorToAngles(vector2d(level.player.origin) - vector2d(self.origin));
       angles = (angles[0] + (full_pitch * percent), angles[1], angles[2]);
 
-      self RotateTo(spawn_angles + angles, 0.5);
+      self rotateTo(spawn_angles + angles, 0.5);
     } else {
-      self RotateTo(spawn_angles, 0.5);
+      self rotateTo(spawn_angles, 0.5);
     }
   }
 }
@@ -921,7 +921,7 @@ while(1) {
     break;
   }
 
-  next = GetEnt(current.target, "targetname");
+  next = getEnt(current.target, "targetname");
 
   if(!isDefined(next)) {
     break;
@@ -998,7 +998,7 @@ debug_player_pos() {
 
   if(GetDvarInt("debug_follow") != 0) {
     num = GetDvarInt("debug_follow");
-    start = getstruct("follow_player_path_start" + num, "targetname");
+    start = getStruct("follow_player_path_start" + num, "targetname");
     struct = start;
     speed = 200;
 
@@ -1007,13 +1007,13 @@ debug_player_pos() {
       dist = Distance(level.groundplayer.origin, struct.origin);
       time = dist / speed;
 
-      level.groundplayer MoveTo(struct.origin, time, 0, 0);
+      level.groundplayer moveTo(struct.origin, time, 0, 0);
       level.groundplayer waittill("movedone");
 
       struct script_delay();
 
       if(isDefined(struct.target)) {
-        struct = getstruct(struct.target, "targetname");
+        struct = getStruct(struct.target, "targetname");
       } else {
         struct = start;
         debug_trigger_everything();

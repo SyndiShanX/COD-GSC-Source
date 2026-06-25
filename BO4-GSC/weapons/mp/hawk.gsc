@@ -90,8 +90,8 @@ spawn_hawk() {
     return;
   }
 
-  vehicle = spawnvehicle(vehicletype, spawnpos, var_c7588ce0);
-  vehicle setplayercollision(0);
+  vehicle = spawnVehicle(vehicletype, spawnpos, var_c7588ce0);
+  vehicle setPlayerCollision(0);
   vehicle setteam(self.team);
   vehicle.team = self.team;
   vehicle.owner = self;
@@ -201,7 +201,7 @@ function_e219515e() {
   }
 
   player = self;
-  enemies = getplayers();
+  enemies = getPlayers();
 
   foreach(target in enemies) {
     if(player.team != target.team) {
@@ -513,7 +513,7 @@ getvalidtargets(hawk, &stance_offsets) {
     }
 
     stance_offset = stance_offsets[player getstance()];
-    toplayer = vectornormalize(player.origin + stance_offset - hawk.origin);
+    toplayer = vectorNormalize(player.origin + stance_offset - hawk.origin);
     in_sight = 0;
     var_131803ce = vectordot(toplayer, forward) >= bundle.tag_fov;
 
@@ -592,7 +592,7 @@ create_missile_hud(vehicle, var_a33bcd86) {
     uifield remote_missile_target_lockon::set_ishawktag(player, 1);
   }
 
-  enemies = getplayers();
+  enemies = getPlayers();
   ti = 0;
 
   foreach(enemy in enemies) {
@@ -704,7 +704,7 @@ targeting_hud_think(vehicle) {
 
 function_76b4c572() {
   player = self;
-  enemies = getplayers();
+  enemies = getPlayers();
 
   foreach(target in enemies) {
     if(player.team != target.team) {
@@ -795,7 +795,7 @@ function_9ace0fb6(targets) {
 
 function_2d7b62() {
   player = self;
-  enemies = getplayers();
+  enemies = getPlayers();
 
   foreach(target in enemies) {
     if(player.team != target.team) {

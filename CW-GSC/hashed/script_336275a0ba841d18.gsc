@@ -271,7 +271,7 @@ function function_c1d511f6() {
 
 function function_d6923f19() {
   level endon(#"end_game");
-  array::thread_all(getplayers(), &function_d3379a31);
+  array::thread_all(getPlayers(), &function_d3379a31);
   level zm_vo::function_7622cb70(#"matchstart", 3.5);
   level waittill(#"hash_221bff60f501cbaf");
   level thread zm_vo::function_7622cb70(#"hash_7ca80ff4ecb29f8e", 1);
@@ -307,7 +307,7 @@ function debug_spawns() {
   checkdist = 1000;
 
   while(true) {
-    player1 = getplayers()[0];
+    player1 = getPlayers()[0];
     var_273a84a9 = [];
 
     if(!isDefined(var_273a84a9)) {
@@ -495,7 +495,7 @@ function function_6071bedf() {
 function function_bfd2a58b() {
   level waittill(#"initial_fade_in_complete");
 
-  while(getplayers().size < 0) {
+  while(getPlayers().size < 0) {
     wait 1;
   }
 
@@ -720,7 +720,7 @@ function function_1495c8c(v_origin, v_angles, anim_name) {
 
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
 
   if(!isDefined(v_angles)) {
     v_angles = (0, 0, 0);
@@ -730,7 +730,7 @@ function function_1495c8c(v_origin, v_angles, anim_name) {
   anim_ang = v_angles;
   anim_org += (0, 0, 0);
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill(#"movedone");
   self unlink();
 
@@ -740,7 +740,7 @@ function function_1495c8c(v_origin, v_angles, anim_name) {
 
   self thread hide_pop();
   self orientmode("face default");
-  self animscripted("rise_anim", self.origin, v_angles, anim_name, "normal");
+  self animScripted("rise_anim", self.origin, v_angles, anim_name, "normal");
 
   if(self.health > 0) {
     playFX(level._effect[#"boss_appear"], origin);
@@ -763,7 +763,7 @@ function function_3fd720cc() {
   while(var_760da554 > 0) {
     if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e" || is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
       level.var_df7b46d1 fx::play(level._effect[#"boss_flash"], level.var_df7b46d1.origin, (0, 0, 0), "delete_boss_spawn_fx", 1);
-      level.var_df7b46d1 playrumbleonentity("zm_nova_phase_exit_rumble");
+      level.var_df7b46d1 playRumbleOnEntity("zm_nova_phase_exit_rumble");
     } else {
       playFX(level._effect[#"boss_flash"], origin);
       playrumbleonposition("zm_nova_phase_exit_rumble", origin);
@@ -788,7 +788,7 @@ function function_b5ba566b(v_origin, v_angles, anim_name) {
     origin = self gettagorigin("tag_origin");
     playFX(level._effect[#"boss_appear"], origin);
     playrumbleonposition("zm_nova_phase_exit_rumble", self.origin);
-    playsoundatposition(#"hash_3f974bee9fb4e319", self.origin);
+    playSoundAtPosition(#"hash_3f974bee9fb4e319", self.origin);
   }
 
   self notify(#"rise_anim_finished");
@@ -807,11 +807,11 @@ function function_6fcd98c5() {
 
 function function_46ff5efa(var_82ea43f2 = 1, var_f91adf76 = 0) {
   playFX(level._effect[#"orb_nuke"], level.var_df7b46d1.var_48fcd26a.origin);
-  playsoundatposition(#"hash_712929054f8c3fda", level.var_df7b46d1.var_48fcd26a.origin);
+  playSoundAtPosition(#"hash_712929054f8c3fda", level.var_df7b46d1.var_48fcd26a.origin);
   wait 1;
   lui::screen_flash(0.2, 0.5, 1, 0.8, "white", undefined, 1);
   level callback::callback(#"hash_c41074e4c29158a");
-  playsoundatposition(#"hash_7459371c7e21f143", level.var_df7b46d1.var_48fcd26a.origin);
+  playSoundAtPosition(#"hash_7459371c7e21f143", level.var_df7b46d1.var_48fcd26a.origin);
 
   if(var_f91adf76) {
     level.var_df7b46d1.var_48fcd26a ghost();
@@ -947,7 +947,7 @@ function function_33ac9c9e() {
 
   level.var_3a23a27 = max(level.var_3a23a27 - 2, 1);
   level.var_74af7499 = max(level.var_74af7499 - 3, 4);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_a7a4f67f(level.var_9b7bd0e8);
@@ -1071,7 +1071,7 @@ function function_b33a5cf4(var_ba65b6cb) {
 
   level.var_3a23a27 = max(level.var_3a23a27 - 2, 1);
   level.var_74af7499 = max(level.var_74af7499 - 3, 4);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_a7a4f67f(level.var_9b7bd0e8);
@@ -1156,7 +1156,7 @@ function function_a371376() {
 
   level.var_3a23a27 = max(level.var_3a23a27 - 2, 1);
   level.var_74af7499 = max(level.var_74af7499 - 3, 4);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_a7a4f67f(level.var_9b7bd0e8);
@@ -1192,7 +1192,7 @@ function function_c50adb68(wave_number) {
   level.wave_number = wave_number;
 
   if(wave_number == 1) {
-    var_d9aaf886 = getplayers().size;
+    var_d9aaf886 = getPlayers().size;
 
     if(var_d9aaf886 > 1) {
       level.var_3a23a27 = 10 * (0.8 * var_d9aaf886 - 1);
@@ -1205,7 +1205,7 @@ function function_c50adb68(wave_number) {
     level.var_6693a0b6 = 4 * var_d9aaf886;
     level.var_569d8a24 = 2 * var_d9aaf886;
   } else {
-    level.var_6693a0b6 = min(24, level.var_6693a0b6 + 2 * getplayers().size);
+    level.var_6693a0b6 = min(24, level.var_6693a0b6 + 2 * getPlayers().size);
     level.var_569d8a24 = min(24, level.var_569d8a24);
   }
 
@@ -1215,7 +1215,7 @@ function function_c50adb68(wave_number) {
   level.var_8f8a58c2 = 0;
   level flag::clear("onslaught_round_logic_complete");
   level flag::clear("onslaught_accelerated_round_end");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player clientfield::set_player_uimodel("hudItems.onslaught.wave_number", level.wave_number);
@@ -1252,7 +1252,7 @@ function function_b293ea58(wave_number) {
 function function_453afff4() {
   while(true) {
     var_88f09c5 = level.var_3a23a27;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       player function_813aaa72(int(level.var_bc2071f));
@@ -1289,7 +1289,7 @@ function function_ea32773(waitresult) {
     level.deathcircle.var_5c54ab33 delete();
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player.oobdisabled = 1;
@@ -1303,7 +1303,7 @@ function function_ea32773(waitresult) {
 }
 
 function give_match_bonus(data) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     assert(isDefined(player.var_9a2f93bd), "<dev string:xe8>");
@@ -1335,7 +1335,7 @@ function private function_13f485ad() {
   var_370ac26d = zm::function_d3113f01(level.wave_number).var_bd588afd;
   luinotifyevent(#"hash_3e6dd0ad7b864154", 1, var_370ac26d);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_1096b5c0)) {
       player.var_1096b5c0 = 0;
     }
@@ -1527,7 +1527,7 @@ function spawn_zombie(outer_radius, inner_radius, duration, var_d894caa2, var_8c
 
       dist_sq = distancesquared(rand_player.origin, tacpoint.origin);
       var_99b8deb8[i] = dist_sq / outer_radius * outer_radius;
-      var_152be849 = vectornormalize(tacpoint.origin - var_e5c52b73);
+      var_152be849 = vectorNormalize(tacpoint.origin - var_e5c52b73);
       dotproduct = vectordot(var_152be849, player_dir);
       var_c377abe7[i] = dotproduct;
       var_e28e2aaf[i] = var_99b8deb8[i] + var_c377abe7[i];
@@ -1582,7 +1582,7 @@ function spawn_zombie(outer_radius, inner_radius, duration, var_d894caa2, var_8c
     }
 
     var_d23463ac.used_time = gettime();
-    var_83959d6f = vectornormalize(rand_player.origin - var_d23463ac.origin);
+    var_83959d6f = vectorNormalize(rand_player.origin - var_d23463ac.origin);
     spawn_angle = vectortoangles(var_83959d6f);
     var_78da6163 = getclosesttacpoint(rand_player.origin);
 
@@ -1717,7 +1717,7 @@ function function_26667466() {
     switch (self.state) {
       case 0:
         level.var_a7bd1c53 = (0, 0, 0);
-        players = getplayers();
+        players = getPlayers();
 
         if(isDefined(players) && players.size > 0) {
           foreach(player in players) {
@@ -1748,7 +1748,7 @@ function function_26667466() {
         break;
       case 2:
         level.var_a7bd1c53 = (0, 0, 0);
-        players = getplayers();
+        players = getPlayers();
 
         if(isDefined(players) && players.size > 0) {
           foreach(player in players) {
@@ -1761,7 +1761,7 @@ function function_26667466() {
           level.var_a7bd1c53 += (0, 0, 68);
         }
 
-        var_e4547143 = vectornormalize(level.var_a7bd1c53 - self.origin);
+        var_e4547143 = vectorNormalize(level.var_a7bd1c53 - self.origin);
         var_531130b2 = distance2dsquared(level.var_a7bd1c53, self.origin);
         var_bf58cac7 = level.circle_radius * 0.5;
 
@@ -1816,7 +1816,7 @@ function function_26667466() {
             }
           }
 
-          var_e4547143 = vectornormalize(level.var_a7bd1c53 - self.origin);
+          var_e4547143 = vectorNormalize(level.var_a7bd1c53 - self.origin);
 
           if(isDefined(level.var_db2a4bc9) && is_true(level.var_75302c0e)) {
             if(level.var_8c02eebd === 0) {
@@ -1829,7 +1829,7 @@ function function_26667466() {
 
             if(var_189f09c7 > level.var_679cf74b) {
               var_481d90dc = level.var_db2a4bc9.pathpoints[level.var_679cf74b];
-              var_882aca32 = vectornormalize(var_481d90dc - self.origin);
+              var_882aca32 = vectorNormalize(var_481d90dc - self.origin);
               self.origin += var_882aca32 * 10 * (isDefined(level.var_51514f45) ? level.var_51514f45 : 1);
               point2d = level.var_db2a4bc9.pathpoints[level.var_679cf74b];
               point2d = (point2d[0], point2d[1], self.origin[2]);
@@ -2147,7 +2147,7 @@ function function_81c192d() {
   if(is_true(var_20955b70)) {
     var_37246f9a = tacticalquery("onslaught_tacticalquery", level.var_d4c0ef1a[0], level.var_d4c0ef1a[0]);
   } else {
-    players = getplayers();
+    players = getPlayers();
     var_bb96c5ab = players[0].origin;
     var_f21608fd = players[0].angles;
     player_dir = anglesToForward(var_f21608fd);
@@ -2175,7 +2175,7 @@ function function_81c192d() {
         continue;
       }
 
-      var_152be849 = vectornormalize(tacpoint.origin - var_bb96c5ab);
+      var_152be849 = vectorNormalize(tacpoint.origin - var_bb96c5ab);
       dotproduct = vectordot(var_152be849, player_dir);
 
       if(dotproduct > 0.8) {
@@ -2209,7 +2209,7 @@ function function_81c192d() {
   }
 
   level.var_8c02eebd = 0;
-  level.var_df7b46d1 = spawnvehicle("onslaught_orb_zm", var_9c387409, (0, 0, 0));
+  level.var_df7b46d1 = spawnVehicle("onslaught_orb_zm", var_9c387409, (0, 0, 0));
   level.var_df7b46d1 connectpaths();
   level.var_df7b46d1 function_d733412a(0);
   level.var_df7b46d1.var_48fcd26a = util::spawn_model("tag_origin", level.var_df7b46d1.origin);
@@ -2217,7 +2217,7 @@ function function_81c192d() {
   if(is_true(level.var_2d41db66) || util::get_game_type() === #"hash_5aa4949e75ab9d9c") {
     level.var_df7b46d1.var_48fcd26a.var_7e2d3fc6 = util::spawn_model(#"p7_zm_ctl_deathray_sphere", level.var_df7b46d1.origin);
     level.var_df7b46d1.var_48fcd26a.var_7e2d3fc6 setscale(0.2);
-    level.var_df7b46d1.var_48fcd26a.var_7e2d3fc6 linkto(level.var_df7b46d1.var_48fcd26a, "tag_origin", (0, 0, -8), (0, 0, 0));
+    level.var_df7b46d1.var_48fcd26a.var_7e2d3fc6 linkTo(level.var_df7b46d1.var_48fcd26a, "tag_origin", (0, 0, -8), (0, 0, 0));
     level.var_df7b46d1.var_48fcd26a.var_7e2d3fc6 val::set("onslaught", "takedamage", 1);
     level.var_df7b46d1.var_48fcd26a.var_7e2d3fc6 val::set("onslaught", "allowdeath", 0);
     level.var_df7b46d1.var_48fcd26a.var_7e2d3fc6 thread function_48faf7bb();
@@ -2352,7 +2352,7 @@ function function_6362d51(parent) {
 
       anchor_pos = parent.origin + (0, 0, 68);
       target_pos = anchor_pos + var_fe23b0e8;
-      var_e4547143 = vectornormalize(target_pos - anchor_pos);
+      var_e4547143 = vectorNormalize(target_pos - anchor_pos);
       dist = distancesquared(self.origin, target_pos);
 
       if(level.var_df7b46d1.state === 3) {
@@ -2368,7 +2368,7 @@ function function_6362d51(parent) {
         var_e2341364 = 6;
       }
 
-      var_591f5a95 = vectornormalize(target_pos - self.origin);
+      var_591f5a95 = vectorNormalize(target_pos - self.origin);
       point2d = target_pos;
       point2d = (point2d[0], point2d[1], self.origin[2]);
       dist = distancesquared(target_pos, self.origin);
@@ -2947,7 +2947,7 @@ function function_69e5b9b() {
   level thread function_d0d7faac();
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       player thread function_da556d60();
@@ -3499,7 +3499,7 @@ function on_host_migration_end(params) {
 function function_eb82ad56(v_origin) {
   if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e") {
     var_6cc0acda = util::spawn_model("tag_origin", level.var_df7b46d1.origin - (0, 0, 68));
-    var_6cc0acda linkto(level.var_df7b46d1);
+    var_6cc0acda linkTo(level.var_df7b46d1);
   } else {
     var_6cc0acda = util::spawn_model("tag_origin", v_origin);
   }

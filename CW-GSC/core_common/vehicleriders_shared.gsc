@@ -948,7 +948,7 @@ function deploy_fast_rope(vehicle, seat) {
   tagorigin = vehicle gettagorigin(attachtag);
   tagangles = vehicle gettagangles(attachtag);
   ropemodel = util::spawn_anim_model(var_4aedb29c, tagorigin, tagangles);
-  ropemodel linkto(vehicle, attachtag);
+  ropemodel linkTo(vehicle, attachtag);
 
   if(isDefined(deployanim)) {
     ropemodel animation::play(deployanim, vehicle, attachtag);
@@ -1055,7 +1055,7 @@ function private forward_euler_integration(e_move, v_target_landing, n_initial_s
     recordline(previousposition, position, (1, 0.5, 0), "<dev string:x39a>", self);
 
     hostmigration::waittillhostmigrationdone();
-    e_move moveto(position, 0.1);
+    e_move moveTo(position, 0.1);
 
     if(!landed) {
       wait 0.1;
@@ -1161,7 +1161,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
 
   if(function_8d8e91af(ai)) {
     ai notify(#"stop_idle");
-    ai stopanimscripted();
+    ai stopanimScripted();
   }
 
   if(!isDefined(seat) || seat == "undefined") {
@@ -1380,7 +1380,7 @@ function private function_15dbe5e9(params) {
     }
 
     if(!is_true(self.exitingvehicle) && isDefined(self.var_ec30f5da.ridedeathanim)) {
-      self linkto(self.vehicle, self.var_ec30f5da.aligntag);
+      self linkTo(self.vehicle, self.var_ec30f5da.aligntag);
     }
   }
 }
@@ -1443,8 +1443,8 @@ function private on_vehicle_killed() {
 function kill_rider(entity) {
   if(isDefined(entity)) {
     if(isalive(entity) && !gibserverutils::isgibbed(entity, 2)) {
-      if(entity isplayinganimscripted()) {
-        entity stopanimscripted();
+      if(entity isplayinganimScripted()) {
+        entity stopanimScripted();
       }
 
       if(getdvarint(#"tu1_vehicleridersinvincibility", 1)) {

@@ -42,6 +42,6 @@ function main_end() {
   spawncollision("collision_player_64x64x256", "collider", (-760.949, 1008.22, 460.75), vectorscale((0, 1, 0), 334.2));
   spawncollision("collision_player_wall_256x256x10", "collider", (84, -173.5, -44), vectorscale((0, 1, 0), 270));
   e_temp = spawncollision("collision_clip_wall_128x128x10", "collider", (-72, 1136, -421.5), vectorscale((0, 1, 0), 270));
-  e_temp disconnectpaths();
+  e_temp disconnectPaths();
   spawncollision("collision_clip_wall_128x128x10", "collider", (-72, 1136, -373.5), vectorscale((0, 1, 0), 270));
 }

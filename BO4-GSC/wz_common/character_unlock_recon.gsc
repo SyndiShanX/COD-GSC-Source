@@ -76,7 +76,7 @@ function_4ac25840(dead_team) {
   if(var_f63b894c > 0 && var_c503939b <= function_c816ea5b()) {
     foreach(team in level.teams) {
       if(teams::function_9dd75dad(team) && !teams::is_all_dead(team)) {
-        players = getplayers(team);
+        players = getPlayers(team);
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"recon_unlock")) {

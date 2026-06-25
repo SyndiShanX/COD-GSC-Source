@@ -1548,7 +1548,7 @@ _id_0DB5(var_0) {
   self endon("death");
   level endon("game_ended");
   var_1 = 3.125;
-  self moveto(self.origin + (0, 0, 2500), var_1);
+  self moveTo(self.origin + (0, 0, 2500), var_1);
   wait(var_1);
   _id_0DB3(var_0);
 }

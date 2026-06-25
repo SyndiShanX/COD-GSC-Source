@@ -229,7 +229,7 @@ func_3211() {
   var_00 = 1;
   var_01 = getEntArray("control_zone", "targetname");
   foreach(var_03 in var_01) {
-    var_03.var_ACB1 = getent(var_03.var_01A2, "targetname");
+    var_03.var_ACB1 = getEnt(var_03.var_01A2, "targetname");
     var_03.var_ACB1 method_805C();
   }
 
@@ -249,8 +249,8 @@ func_3211() {
 
   game["controlRoundNum"]++;
   level.var_3211 = [];
-  var_06[0] = getent(level.var_2609.var_ACB1.var_01A2, "targetname");
-  var_06[1] = getent(var_06[0].var_01A2, "targetname");
+  var_06[0] = getEnt(level.var_2609.var_ACB1.var_01A2, "targetname");
+  var_06[1] = getEnt(var_06[0].var_01A2, "targetname");
   var_06[1] scriptmodelplayanim("ctf_flag_flap");
   var_06[0].var_0116 = var_06[0].var_0116 + (0, 0, -10000);
   var_06[1].var_0116 = var_06[1].var_0116 + (0, 0, -10000);

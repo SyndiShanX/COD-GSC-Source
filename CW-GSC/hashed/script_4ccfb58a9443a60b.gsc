@@ -97,7 +97,7 @@ function function_db05041b(struct, hint_string, callbackfunction) {
   }
 
   forward = anglesToForward(scriptmodel.angles);
-  forward = vectornormalize(forward);
+  forward = vectorNormalize(forward);
   offset = forward * 24;
   offset = (offset[0], offset[1], offset[2] + 50);
   trigger = content_manager::spawn_interact(struct, callbackfunction, hint_string, undefined, 64, 128, undefined, offset);
@@ -105,7 +105,7 @@ function function_db05041b(struct, hint_string, callbackfunction) {
   scriptmodel.trigger = trigger;
 
   if(is_true(level.var_6c10f162)) {
-    trigger sethintstring(#"hash_14ddb2e3b11bc15f");
+    trigger setHintString(#"hash_14ddb2e3b11bc15f");
   }
 
   if(zm_utility::is_survival()) {
@@ -186,7 +186,7 @@ function function_366ba7f6() {
 
   if(!self.var_496b54df) {
     self.var_496b54df = 1;
-    playsoundatposition(#"hash_12cfa31c1fb4a04", self.origin + (0, 0, 50));
+    playSoundAtPosition(#"hash_12cfa31c1fb4a04", self.origin + (0, 0, 50));
     return;
   }
 
@@ -420,7 +420,7 @@ function function_4b23ad31(machine, trigger) {
             }
 
             if(var_3069fe3) {
-              self playrumbleonentity(#"zm_interact_rumble");
+              self playRumbleOnEntity(#"zm_interact_rumble");
               var_4e8c002b = {
                 #var_fa7f8efb: self namespace_2a9f256a::function_6f3fd157(), #var_7bded691: self namespace_2a9f256a::function_efd1d093(), #crafted_item: var_1a988176, #round_number: zm_utility::get_round_number(), #zombie_count: zombie_utility::get_current_zombie_count(), #var_92889c09: self.current_trigger.scriptmodel.objectiveid
               };
@@ -684,7 +684,7 @@ function function_7a1fc37c(params) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     str_item_name = hash(tokens[1]);
 
     if(function_3c3d4f17(str_item_name)) {

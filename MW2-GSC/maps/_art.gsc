@@ -328,7 +328,7 @@ updateCinematicDoF() {
   adsFrac = self PlayerAds();
 
   if(adsFrac == 1 && GetDvarInt("scr_cinematic_autofocus")) {
-    traceDir = VectorNormalize(anglesToForward(self GetPlayerAngles()));
+    traceDir = vectorNormalize(anglesToForward(self GetPlayerAngles()));
     trace = bulletTrace(self getEye(), self getEye() + vector_multiply(traceDir, 100000), true, self);
 
     enemies = GetAIArray();
@@ -340,7 +340,7 @@ updateCinematicDoF() {
     bestFocalPoint = undefined;
     for(index = 0; index < enemies.size; index++) {
       end_origin = enemies[index].origin;
-      normal = VectorNormalize(end_origin - start_origin);
+      normal = vectorNormalize(end_origin - start_origin);
       forward = anglesToForward(start_angles);
       dot = VectorDot(forward, normal);
 
@@ -391,7 +391,7 @@ updateDoF() {
 
   playerEye = self getEye();
   playerAngles = self GetPlayerAngles();
-  playerForward = VectorNormalize(anglesToForward(playerAngles));
+  playerForward = vectorNormalize(anglesToForward(playerAngles));
 
   trace = bulletTrace(playerEye, playerEye + vector_multiply(playerForward, 8192), true, self, true);
   enemies = GetAIArray("axis");
@@ -406,7 +406,7 @@ updateDoF() {
   farStart = -1;
 
   for(index = 0; index < enemies.size; index++) {
-    enemyDir = VectorNormalize(enemies[index].origin - playerEye);
+    enemyDir = vectorNormalize(enemies[index].origin - playerEye);
 
     dot = VectorDot(playerForward, enemyDir);
     if(dot < 0.923) {
@@ -472,7 +472,7 @@ javelin_dof(trace, enemies, playerEye, playerForward, adsFrac) {
   nearStart = 2400;
 
   for(index = 0; index < enemies.size; index++) {
-    enemyDir = VectorNormalize(enemies[index].origin - playerEye);
+    enemyDir = vectorNormalize(enemies[index].origin - playerEye);
 
     dot = VectorDot(playerForward, enemyDir);
     if(dot < 0.923) {

@@ -159,7 +159,7 @@ function flashbacktrailfx(slot, weapon, oldpos, newpos) {
   if(dirvec == (0, 0, 0)) {
     dirvec = (0, 0, 1);
   }
-  dirvec = vectornormalize(dirvec);
+  dirvec = vectorNormalize(dirvec);
   angles = vectortoangles(dirvec);
   fxorg = spawn("script_model", oldpos, 0, angles);
   fxorg.angles = angles;
@@ -168,7 +168,7 @@ function flashbacktrailfx(slot, weapon, oldpos, newpos) {
   fxorg clientfield::set("flashback_trail_fx", 1);
   util::wait_network_frame();
   tagpos = self gettagorigin("j_spineupper");
-  fxorg moveto(tagpos, 0.1);
+  fxorg moveTo(tagpos, 0.1);
   fxorg waittill("movedone");
   wait(1);
   fxorg clientfield::set("flashback_trail_fx", 0);

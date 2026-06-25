@@ -278,7 +278,7 @@ warbirdintroflightpath(var_0) {
   var_1 = var_0;
 
   for(;;) {
-    var_1 = common_scripts\utility::getstruct(var_1.target, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_1.target, "targetname");
     maps\mp\zombies\_extraction::warbirdmovetoattackpoint(self, var_1, 25);
 
     if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "warbird_exit") {
@@ -986,7 +986,7 @@ trap_gators(var_0) {
     var_0 thread maps\mp\zombies\traps\_trap_gator::trap_gator_pitfall_audio();
   }
 
-  var_1 = getent("gator_coll", "targetname");
+  var_1 = getEnt("gator_coll", "targetname");
   var_1.start_origin = var_1.origin;
   var_1.start_angles = var_1.angles;
   var_1.gator_killed = undefined;
@@ -1218,14 +1218,14 @@ spinningpitbullwheel() {
   var_0 = "hms_greece_sniperscramble_pitbull_destroyed_veh";
   precachempanim(var_0);
   wait 1;
-  var_1 = getent("pitbull_veh", "targetname");
+  var_1 = getEnt("pitbull_veh", "targetname");
   var_1 scriptmodelplayanim(var_0);
 }
 
 flyoverbink() {}
 
 setupflyoveranimation(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("env_bink_anim_node", "targetname");
+  var_4 = common_scripts\utility::getStruct("env_bink_anim_node", "targetname");
 
   if(!isDefined(var_4)) {
     var_4 = spawnStruct();
@@ -1286,7 +1286,7 @@ donotetrack(var_0, var_1, var_2, var_3) {
   var_0 waittillmatch(var_1, var_2);
 
   if(var_2 == "trigger_gater") {} else if(var_2 == "water_fx") {
-    var_4 = common_scripts\utility::getstruct("gator_water_level", "script_noteworthy");
+    var_4 = common_scripts\utility::getStruct("gator_water_level", "script_noteworthy");
     var_5 = var_4.origin;
     var_6 = (0, 0, 90);
     playFX(common_scripts\utility::getfx("trap_gator_enter_splash"), var_5, var_6);
@@ -1297,7 +1297,7 @@ donotetrack(var_0, var_1, var_2, var_3) {
 }
 
 setupscriptmodelanimation(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::getstruct("env_bink_anim_node", "targetname");
+  var_5 = common_scripts\utility::getStruct("env_bink_anim_node", "targetname");
 
   if(!isDefined(var_5)) {
     var_5 = spawnStruct();
@@ -1448,7 +1448,7 @@ toxicgaszonefx(var_0) {
   level notify("toxic_gas_started");
   var_1 = level.toxiczones[var_0].zones;
   var_2 = toxicgaszonelocstringreturn(var_0);
-  var_3 = common_scripts\utility::getstruct(var_0 + "_ToxicGas", "script_noteworthy");
+  var_3 = common_scripts\utility::getStruct(var_0 + "_ToxicGas", "script_noteworthy");
   var_4 = spawn("script_model", var_3.origin);
   var_4 setModel("tag_origin");
   var_4.angles = (270, 0, 0);
@@ -1592,7 +1592,7 @@ toxicgasspewaudio(var_0) {
 spawnanimationnotetrackhandlerassigner(var_0) {
   if(isDefined(var_0.script_wtf)) {
     var_1 = var_0.target;
-    self.spawnfxloc = common_scripts\utility::getstruct(var_1, "targetname");
+    self.spawnfxloc = common_scripts\utility::getStruct(var_1, "targetname");
 
     switch (var_0.script_wtf) {
       case "spawn_dirt":
@@ -1889,12 +1889,12 @@ exploittriggermonitor() {
               var_6 = common_scripts\utility::getclosest(var_0.origin, var_5);
 
               if(isDefined(var_6)) {
-                var_7 = vectornormalize((var_6.origin - var_0.origin) * (1, 1, 0));
+                var_7 = vectorNormalize((var_6.origin - var_0.origin) * (1, 1, 0));
               } else {
-                var_7 = vectornormalize((var_0.origin - var_3.origin) * (1, 1, 0));
+                var_7 = vectorNormalize((var_0.origin - var_3.origin) * (1, 1, 0));
               }
             } else {
-              var_7 = vectornormalize((var_3.origin - var_0.origin) * (1, 1, 0));
+              var_7 = vectorNormalize((var_3.origin - var_0.origin) * (1, 1, 0));
             }
 
             var_0 setvelocity(var_7 * 20);
@@ -2198,7 +2198,7 @@ windowexploitledgelogicthink() {
         var_4 = distance(var_0.origin, var_3.origin);
 
         if(var_4 < 75) {
-          var_5 = vectornormalize((var_3.origin - var_0.origin) * (1, 1, 0));
+          var_5 = vectorNormalize((var_3.origin - var_0.origin) * (1, 1, 0));
           var_0 setvelocity(var_5 * 100);
           break;
         }
@@ -2227,7 +2227,7 @@ shoveplayer() {
     wait 1.5;
 
     if(isPlayer(var_2)) {
-      var_3 = vectornormalize((var_2.origin + (-100, 0, 0) - var_2.origin) * (1, 1, 0));
+      var_3 = vectorNormalize((var_2.origin + (-100, 0, 0) - var_2.origin) * (1, 1, 0));
       var_2 setvelocity(var_3 * 300);
     }
   }
@@ -2239,7 +2239,7 @@ trapelectricfloorfix() {
   if(level.nextgen) {
     var_1 = spawn("trigger_radius", var_0[0], 0, 196, 6);
   } else {
-    var_1 = getent("elec_trap_trigger", "targetname");
+    var_1 = getEnt("elec_trap_trigger", "targetname");
   }
 
   var_1.script_noteworthy = "damage_over_time";

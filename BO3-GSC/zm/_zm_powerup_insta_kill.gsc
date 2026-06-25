@@ -50,7 +50,7 @@ function insta_kill_powerup(drop_item, player) {
   }
   wait(n_wait_time);
   level.zombie_vars[team]["zombie_insta_kill"] = 0;
-  players = getplayers(team);
+  players = getPlayers(team);
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
       players[i] notify("insta_kill_over");

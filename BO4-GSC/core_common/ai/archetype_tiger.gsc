@@ -250,10 +250,10 @@ get_favorite_enemy(tiger) {
     if(self.team == #"allies") {
       var_7c746996 = getaiteamarray(level.zombie_team);
     } else {
-      var_7c746996 = getplayers();
+      var_7c746996 = getPlayers();
     }
   } else {
-    var_7c746996 = arraycombine(getplayers(), getaiarray(), 0, 0);
+    var_7c746996 = arraycombine(getPlayers(), getaiarray(), 0, 0);
   }
 
   least_hunted = var_7c746996[0];
@@ -311,7 +311,7 @@ get_locomotion_target(behaviortreeentity) {
     spacing_horz_dist = ai::get_behavior_attribute("spacing_horz_dist");
     spacing_value = ai::get_behavior_attribute("spacing_value");
     to_enemy = behaviortreeentity.favoriteenemy.origin - behaviortreeentity.origin;
-    perp = vectornormalize((to_enemy[1] * -1, to_enemy[0], 0));
+    perp = vectorNormalize((to_enemy[1] * -1, to_enemy[0], 0));
     offset = perp * spacing_horz_dist * spacing_value;
     spacing_dist = math::clamp(length(to_enemy), spacing_near_dist, spacing_far_dist);
     lerp_amount = math::clamp((spacing_dist - spacing_near_dist) / (spacing_far_dist - spacing_near_dist), 0, 1);
@@ -457,7 +457,7 @@ function_36b5df8c(behaviortreeentity) {
     return false;
   }
 
-  offset = behaviortreeentity.favoriteenemy.origin - vectornormalize(behaviortreeentity.favoriteenemy.origin - behaviortreeentity.origin) * 36;
+  offset = behaviortreeentity.favoriteenemy.origin - vectorNormalize(behaviortreeentity.favoriteenemy.origin - behaviortreeentity.origin) * 36;
 
   if(enemydistsq < 256 * 256) {
     if(behaviortreeentity maymovetopoint(offset, 1, 1)) {
@@ -637,7 +637,7 @@ function_c0b7f4ce(entity, attribute, oldvalue, value) {
 
 function_1b7345aa(tiger, entity) {
   forward = anglesToForward(tiger.angles);
-  to_enemy = vectornormalize(entity.origin - tiger.origin);
+  to_enemy = vectorNormalize(entity.origin - tiger.origin);
   return vectordot(forward, to_enemy) >= 0.966;
 }
 
@@ -656,7 +656,7 @@ function_a4f5b046(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   entity.minigun_killstreak_minigun_inbound = getnotetracktimes(mocompanim, "stop_trace")[0];
 
   if(isDefined(entity.enemy)) {
-    dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+    dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
     entity forceteleport(entity.origin, vectortoangles(dirtoenemy));
   }
 
@@ -698,7 +698,7 @@ function_2e8439bf(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       }
     }
 
-    var_83fd29ee = vectornormalize(predictedenemypos - entity.origin);
+    var_83fd29ee = vectorNormalize(predictedenemypos - entity.origin);
     var_1efb2395 = predictedenemypos - var_83fd29ee * entity getpathfindingradius();
     self.meleeinfo.adjustedendpos = var_1efb2395;
     var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
@@ -722,7 +722,7 @@ function_2e8439bf(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       var_776ddabf = distancesquared(self.meleeinfo.var_cb28f380, self.meleeinfo.adjustedendpos);
       myforward = anglesToForward(self.angles);
       var_1c3641f2 = (entity.enemy.origin[0], entity.enemy.origin[1], entity.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - entity.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - entity.origin);
       zdiff = self.meleeinfo.var_cb28f380[2] - entity.enemy.origin[2];
       withinzrange = abs(zdiff) <= 30;
       withinfov = vectordot(myforward, dirtoenemy) > cos(30);
@@ -747,7 +747,7 @@ function_2e8439bf(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
         starttime = floor(starttime / timestep);
         stoptime = floor(stoptime / timestep);
         adjustduration = stoptime - starttime;
-        self.meleeinfo.var_10b8b6d1 = vectornormalize(self.meleeinfo.adjustedendpos - self.meleeinfo.var_cb28f380);
+        self.meleeinfo.var_10b8b6d1 = vectorNormalize(self.meleeinfo.adjustedendpos - self.meleeinfo.var_cb28f380);
         self.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
         self.meleeinfo.var_425c4c8b = 1;
         self.meleeinfo.adjustmentstarted = 1;

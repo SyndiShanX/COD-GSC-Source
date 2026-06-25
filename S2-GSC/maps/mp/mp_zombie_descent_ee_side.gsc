@@ -158,8 +158,8 @@ classic_setup_corpse() {
 }
 
 classic_wait_for_jolts() {
-  var_00 = getent("classic_jolt_drop_trigger_teamone", "targetname");
-  var_01 = getent("classic_jolt_drop_trigger_teamtwo", "targetname");
+  var_00 = getEnt("classic_jolt_drop_trigger_teamone", "targetname");
+  var_01 = getEnt("classic_jolt_drop_trigger_teamtwo", "targetname");
   var_02 = undefined;
   var_03 = undefined;
   for(;;) {
@@ -287,8 +287,8 @@ classic_game_logic(param_00, param_01) {
 }
 
 classic_head_popup(param_00, param_01, param_02) {
-  self.color moveto(self.color.upposition, 0.25);
-  self.var_18A8 moveto(self.var_18A8.upposition, 0.25);
+  self.color moveTo(self.color.upposition, 0.25);
+  self.var_18A8 moveTo(self.var_18A8.upposition, 0.25);
   var_03 = randomint(100);
   if(var_03 <= 90) {
     var_04 = "enemy";
@@ -382,8 +382,8 @@ classic_head_popup_waittill_timeout(param_00) {
 classic_reset_head_positions() {
   var_00 = common_scripts\utility::func_46B7("classic_corpse_object", "targetname");
   foreach(var_02 in var_00) {
-    var_02.color moveto(var_02.color.downposition, 0.5, 0.25, 0.25);
-    var_02.var_18A8 moveto(var_02.var_18A8.downposition, 0.5, 0.25, 0.25);
+    var_02.color moveTo(var_02.color.downposition, 0.5, 0.25, 0.25);
+    var_02.var_18A8 moveTo(var_02.var_18A8.downposition, 0.5, 0.25, 0.25);
     var_02 thread classic_head_remove_eye_glow();
     var_02.var_4B57 = 0;
   }
@@ -601,9 +601,9 @@ ravens() {
   level.raven_manager = spawnStruct();
   level.raven_manager.raven_spawns = common_scripts\utility::func_46B7("struct_raven", "targetname");
   level.raven_manager.gold_ravens = getEntArray("gold_ravens", "targetname");
-  var_00 = getent("starter_raven", "targetname");
+  var_00 = getEnt("starter_raven", "targetname");
   var_01 = common_scripts\utility::func_46B5("starter_raven_dir", "targetname");
-  var_02 = getent("trig_starter_raven", "targetname");
+  var_02 = getEnt("trig_starter_raven", "targetname");
   level.raven_manager.remaining = 4;
   level.raven_manager.selected_spawns = [];
   level.raven_manager.var_6E97 = [];
@@ -666,7 +666,7 @@ spawn_raven_guns() {
   var_01.var_1D = var_00.var_1D;
   var_02 = spawnfx(common_scripts\utility::func_44F5("zmb_desc_raven_feathers_pop"), var_00.var_116);
   triggerfx(var_02);
-  var_03 = getent(var_00.var_1A2, "targetname");
+  var_03 = getEnt(var_00.var_1A2, "targetname");
   var_01 thread raven_gun_pickup(var_03);
 }
 
@@ -941,7 +941,7 @@ dark_passenger_player_attach_to_host(param_00) {
   var_04 = get_passenger_offset(param_00.var_A4B);
   var_05 = param_00.var_116 + anglesToForward(param_00.var_1D) * var_04[1];
   var_01.passenger_org.var_116 = var_05;
-  var_01 setorigin(var_01.passenger_org.var_116 + var_04[0], 1);
+  var_01 setOrigin(var_01.passenger_org.var_116 + var_04[0], 1);
   var_01 setangles(var_01.passenger_org.var_1D);
   var_01.passenger_org method_8449(param_00, "TAG_ORIGIN");
   var_01 playerlinktoblend(var_01.passenger_org, "TAG_ORIGIN", 0.05);
@@ -1013,7 +1013,7 @@ dark_passenger_detach(param_00) {
   }
 
   var_01 unlink();
-  var_01 setorigin(var_04);
+  var_01 setOrigin(var_04);
   var_01.safeposbeforepassenger = undefined;
   if(lib_0547::func_5565(level.dark_passenger.complete, 0)) {
     var_01 lib_056A::func_95D2();
@@ -1157,7 +1157,7 @@ dark_passenger_host_eaten() {
   var_00.beingfedon = var_01;
   var_03 = level.dark_passenger.dark_passenger.passenger_org;
   var_03 unlink();
-  var_03 rotateto(vectortoangles(var_01.var_116 - var_03.var_116), 0.4);
+  var_03 rotateTo(vectortoangles(var_01.var_116 - var_03.var_116), 0.4);
   var_01 thread dark_passenger_end_condition();
 }
 
@@ -1250,7 +1250,7 @@ sewers_init() {
     var_02 method_805C();
   }
 
-  var_04 = getent("blitz_all_place_spike_trig", "targetname");
+  var_04 = getEnt("blitz_all_place_spike_trig", "targetname");
   var_04 thread sewers_spike_plinth_use_think(var_00);
   var_05 = common_scripts\utility::func_46B7("blitz_all_spikes_spawn", "targetname");
   var_06 = [];
@@ -1262,8 +1262,8 @@ sewers_init() {
 
   level.spike_spawns = var_06;
   foreach(var_02 in level.spike_spawns) {
-    var_02.use_trig = getent(var_02.var_1A2, "targetname");
-    var_02.use_trig usetriggerrequirelookat(1);
+    var_02.use_trig = getEnt(var_02.var_1A2, "targetname");
+    var_02.use_trig useTriggerRequireLookAt(1);
     var_02.spike_model = spawn("script_model", var_02.var_116);
     var_02.spike_model setModel("rem_railspike_01");
     var_02.spike_model.var_1D = var_02.var_1D;
@@ -1271,7 +1271,7 @@ sewers_init() {
   }
 
   foreach(var_02 in var_05) {
-    var_0B = getent(var_02.var_1A2, "targetname");
+    var_0B = getEnt(var_02.var_1A2, "targetname");
     if(isDefined(var_0B)) {
       var_0B delete();
     }
@@ -1472,7 +1472,7 @@ sewers_shelf_spawn_zombie(param_00, param_01) {
 
 sewers_shelf_zombie_track_zone() {
   self endon("death");
-  var_00 = getent("bridge_shelf", "targetname");
+  var_00 = getEnt("bridge_shelf", "targetname");
   while(self istouching(var_00) || !common_scripts\utility::func_562E(self.var_4BA0)) {
     wait 0.05;
   }
@@ -1518,7 +1518,7 @@ sewers_shelf_mark_shelf_event_goers() {
 }
 
 sewers_is_player_in_shelf() {
-  var_00 = getent("bridge_shelf", "targetname");
+  var_00 = getEnt("bridge_shelf", "targetname");
   if(self istouching(var_00)) {
     return 1;
   }
@@ -1586,8 +1586,8 @@ sewers_trial() {
 }
 
 sewers_handle_plinth_trap_door() {
-  var_00 = getent("mdl_sewers_exit_manhole", "targetname");
-  var_01 = getent("mdl_sewers_exit_manhole_clip", "targetname");
+  var_00 = getEnt("mdl_sewers_exit_manhole", "targetname");
+  var_01 = getEnt("mdl_sewers_exit_manhole_clip", "targetname");
   for(;;) {
     level waittill("all_perkmachine_activated", var_02);
     var_02 notify("sewers_exit");
@@ -1643,7 +1643,7 @@ sewers_spike_plinth_use_think(param_00) {
 sewers_spike_plinth_place() {
   self method_805B();
   var_00 = common_scripts\utility::func_46B5(self.var_1A2, "targetname");
-  self moveto(var_00.var_116, 0.5, 0.2, 0.2);
+  self moveTo(var_00.var_116, 0.5, 0.2, 0.2);
   level.sewer_spikes_placed++;
   self.placed = 1;
 }
@@ -1784,7 +1784,7 @@ sewers_spawn_zombie(param_00) {
 
 sewers_zombie_track_zone() {
   self endon("death");
-  var_00 = getent("zone_sewers", "targetname");
+  var_00 = getEnt("zone_sewers", "targetname");
   while(self istouching(var_00) || !common_scripts\utility::func_562E(self.var_4BA0)) {
     wait 0.05;
   }

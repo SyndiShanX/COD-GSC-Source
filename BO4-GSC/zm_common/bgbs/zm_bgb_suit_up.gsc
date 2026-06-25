@@ -34,7 +34,7 @@ validation() {
 }
 
 activation() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(self === player || !player laststand::player_is_in_laststand() && isalive(player) && distance2dsquared(player.origin, self.origin) < 250000) {
       player zm_armor::remove(#"hash_7bfec2f0ecb46104", 1);
       player zm_armor::add(#"hash_7bfec2f0ecb46104", 100, 100);

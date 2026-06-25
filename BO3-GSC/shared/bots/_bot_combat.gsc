@@ -608,7 +608,7 @@ function wait_damage_loop() {
     self waittill("damage", damage, attacker, direction, point, mod, unused1, unused2, unused3, weapon, flags, inflictor);
     self.bot.damage.entity = attacker;
     self.bot.damage.amount = damage;
-    self.bot.damage.attackdir = vectornormalize(attacker.origin - self.origin);
+    self.bot.damage.attackdir = vectorNormalize(attacker.origin - self.origin);
     self.bot.damage.weapon = weapon;
     self.bot.damage.mod = mod;
     self.bot.damage.time = gettime();
@@ -642,7 +642,7 @@ function combat_strafe(radiusmin = (isDefined(level.botsettings.strafemin) ? lev
   queryresult = positionquery_source_navigation(self.origin, radiusmin, radiusmax, 64, spacing, self);
   best_point = undefined;
   foreach(point in queryresult.data) {
-    movedir = vectornormalize(point.origin - self.origin);
+    movedir = vectorNormalize(point.origin - self.origin);
     dot = vectordot(movedir, fwd);
     if(dot >= sidedotmin && dot <= sidedotmax) {
       point.score = mapfloat(radiusmin, radiusmax, 0, 50, point.disttoorigin2d);

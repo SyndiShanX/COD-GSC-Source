@@ -38,8 +38,8 @@ function __init__() {
   callback::on_spawned(&on_player_spawned);
   callback::on_connect(&on_player_connected);
   level.var_40e8eaa5 = [];
-  level.var_40e8eaa5["bloody_walls"] = getent("vol_hallucinate_bloody_walls", "targetname");
-  level.var_40e8eaa5["corpses"] = getent("vol_hallucinate_corpses", "targetname");
+  level.var_40e8eaa5["bloody_walls"] = getEnt("vol_hallucinate_bloody_walls", "targetname");
+  level.var_40e8eaa5["corpses"] = getEnt("vol_hallucinate_corpses", "targetname");
 }
 
 function main() {
@@ -101,7 +101,7 @@ function function_5d6bcf98() {
   self endon("death");
   if(!self flag::get("hallucination_bloodywalls_on")) {
     self flag::set("hallucination_bloodywalls_on");
-    var_558d1e01 = getent("vol_hallucinate_bloody_walls", "targetname");
+    var_558d1e01 = getEnt("vol_hallucinate_bloody_walls", "targetname");
     var_58077680 = array("zone_jungle_lab_upper", "zone_swamp_lab_inside", "zone_operating_rooms");
     while(self.var_5f5af9f0 >= 15) {
       if(self zm_island_util::function_f2a55b5f(var_58077680) && self istouching(var_558d1e01)) {

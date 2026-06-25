@@ -158,8 +158,8 @@ _id_5CFB(var_0, var_1, var_2) {
   self._id_4C08 = 1;
   self._id_426B = 1;
   var_3 = (self.origin - var_0) * (1, 1, 0);
-  var_3 = vectornormalize(var_3);
-  var_3 = vectornormalize(var_3 + (0, 0, 1)) * 600;
+  var_3 = vectorNormalize(var_3);
+  var_3 = vectorNormalize(var_3 + (0, 0, 1)) * 600;
   self setvelocity(var_3);
   wait 0.5;
   self._id_5CF9 = 0;
@@ -177,7 +177,7 @@ _id_7EF4() {
 
   foreach(var_2 in var_0) {
     var_3 = [];
-    var_4 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_3[var_3.size] = var_2.origin;
     var_3[var_3.size] = var_4.origin;
     level._id_1B17[level._id_1B17.size] = var_3;

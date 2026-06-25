@@ -98,7 +98,7 @@ spawnmapcollision(collision_model, origin) {
 
   collision = spawn("script_model", origin, 1);
   collision setModel(collision_model);
-  collision disconnectpaths();
+  collision disconnectPaths();
 }
 
 turnperkon(perk) {
@@ -141,7 +141,7 @@ builddynamicwallbuy(location, weaponname) {
   match_string = level.scr_zm_ui_gametype + "_" + level.scr_zm_map_start_location;
 
   foreach(stub in level.chalk_builds) {
-    wallbuy = getstruct(stub.target, "targetname");
+    wallbuy = getStruct(stub.target, "targetname");
 
     if(isDefined(wallbuy.script_location) && wallbuy.script_location == location) {
       if(!isDefined(wallbuy.script_noteworthy) || issubstr(wallbuy.script_noteworthy, match_string)) {
@@ -207,13 +207,13 @@ deletebuildabletarp(location) {
 }
 
 powerswitchstate(on) {
-  trigger = getent("use_elec_switch", "targetname");
+  trigger = getEnt("use_elec_switch", "targetname");
 
   if(isDefined(trigger)) {
     trigger delete();
   }
 
-  master_switch = getent("elec_switch", "targetname");
+  master_switch = getEnt("elec_switch", "targetname");
 
   if(isDefined(master_switch)) {
     master_switch notsolid();

@@ -328,7 +328,7 @@ function function_33bab9aa() {
 }
 
 function function_d3fba20e() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_78083139();
@@ -488,7 +488,7 @@ function private function_bcd04944() {
   wait 3;
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     if(!isarray(players) || players.size == 0) {
       wait 1;

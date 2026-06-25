@@ -54,11 +54,11 @@ function private on_player_killed(params) {
 function private create_use_trigger() {
   usetrigger = spawn("trigger_radius_use", (0, 0, -10000), 0, 128, 64, 1);
   usetrigger.targetname = "dynent_use";
-  usetrigger triggerignoreteam();
+  usetrigger triggerIgnoreTeam();
   usetrigger setinvisibletoall();
   usetrigger setvisibletoplayer(self);
   usetrigger setteamfortrigger(#"none");
-  usetrigger setcursorhint("HINT_NOICON");
+  usetrigger setCursorHint("HINT_NOICON");
   usetrigger triggerenable(0);
   usetrigger usetriggerignoreuseholdtime();
   usetrigger function_4bf6de9a(0);
@@ -74,7 +74,7 @@ function private update_loop() {
   updatepass = 0;
 
   while(true) {
-    foreach(i, player in getplayers()) {
+    foreach(i, player in getPlayers()) {
       if(i % 5 == updatepass) {
         if(!isDefined(player.var_8a022726)) {
           continue;
@@ -117,7 +117,7 @@ function private function_2f394f36() {
   foreach(dynent in var_e86a4d9) {
     centroid = function_c5689a6a(dynent);
     var_966ddbb9 = centroid - vieworigin;
-    var_966ddbb9 = vectornormalize((var_966ddbb9[0], var_966ddbb9[1], 0));
+    var_966ddbb9 = vectorNormalize((var_966ddbb9[0], var_966ddbb9[1], 0));
     var_755fcbbd = vectordot(viewforward, var_966ddbb9);
 
     if(debug) {
@@ -199,7 +199,7 @@ function function_662eb91e(dynent, vieworigin, viewforward, drawframes = 1) {
     var_75b2d824 = var_806e6091 getboundsmidpoint();
     var_ed0847f8 = var_806e6091.origin + rotatepoint(var_75b2d824, var_806e6091.angles);
     var_7113bae6 = var_ed0847f8 - vieworigin;
-    var_5a188b65 = vectornormalize(var_7113bae6);
+    var_5a188b65 = vectorNormalize(var_7113bae6);
     var_99957205 = vectordot(viewforward, var_5a188b65);
 
     if(var_99957205 <= 0.7 || !bullettracepassed(vieworigin, var_ed0847f8, 0, self, var_806e6091)) {
@@ -231,7 +231,7 @@ function function_836af3b3(bundle, state) {
     hintstring = bundle.dynentstates[state].hintstring;
   }
 
-  self sethintstring(hintstring);
+  self setHintString(hintstring);
 }
 
 function private function_46502841(trigger_struct) {
@@ -375,7 +375,7 @@ function use_dynent(dynent, activator, overridestate, disablegesture = 0, var_c7
     if(!isDefined(overridestate) && isDefined(activator)) {
       var_b4b3af4c = anglesToForward(dynent.angles);
       playerdir = self.origin - activator.origin;
-      playerdir = vectornormalize((playerdir[0], playerdir[1], 0));
+      playerdir = vectorNormalize((playerdir[0], playerdir[1], 0));
       dot = vectordot(var_b4b3af4c, playerdir);
 
       if(dot >= 0) {

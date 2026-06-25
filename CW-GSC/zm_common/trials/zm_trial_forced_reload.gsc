@@ -30,7 +30,7 @@ function private on_begin() {
   callback::on_player_loadout_changed(&on_player_loadout_changed);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zm_trial_util::function_bf710271(1, 1, 1, 0, 1);
     player thread zm_trial_util::function_dc9ab223(1, 1);
   }
@@ -43,7 +43,7 @@ function private on_end(round_reset) {
   callback::function_824d206(&on_player_loadout_changed);
   callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"hash_1fbfdb0105f48f89");
     player thread zm_trial_util::function_dc0859e();
   }

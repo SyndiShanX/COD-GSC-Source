@@ -70,7 +70,7 @@ func_6134() {
     if(isDefined(var_7)) {
       var_10 = length(var_7);
       if(var_10 > 20) {
-        var_11 = vectornormalize(var_7);
+        var_11 = vectorNormalize(var_7);
         var_12 = 20;
         if(isDefined(var_9) && var_9 == "MOD_IMPACT") {
           var_12 = 3;
@@ -92,10 +92,10 @@ func_6134() {
     }
 
     var_14 = scripts\engine\utility::spawn_tag_origin(var_8);
-    var_15 = vectornormalize(self.origin - var_8);
+    var_15 = vectorNormalize(self.origin - var_8);
     var_16 = vectortoangles(var_15 * -1);
     var_14.angles = scripts\engine\utility::flat_angle(var_16);
-    var_14 linkto(self);
+    var_14 linkTo(self);
     if(!var_3) {
       var_3 = 1;
       if(soundexists("emp_battery_damaged_lp")) {

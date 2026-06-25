@@ -58,7 +58,7 @@ combat_two() {
   maps\_utility::stop_exploder("mc_flare");
   common_scripts\utility::exploder("combat2_flare");
   common_scripts\utility::exploder("mc_steam_01");
-  level.current_volume = getent("wave_3_in_debris_goal_volume", "targetname");
+  level.current_volume = getEnt("wave_3_in_debris_goal_volume", "targetname");
   level.current_high_volume = level.current_volume;
   level.allies[0] thread combat_two_ally_logic("y", "ally0", "combat_two_anim_intro_ally0_done");
   level.allies[1] thread combat_two_ally_logic("b", "ally1", "combat_two_anim_intro_ally1_done");
@@ -80,7 +80,7 @@ combat_two() {
   level thread fail_if_player_too_far();
   level thread combat_two_fire_straight_setup();
   level.combat_two_spawns = 0;
-  var_0 = getent("combat_two_second_wave_retreat", "targetname");
+  var_0 = getEnt("combat_two_second_wave_retreat", "targetname");
   thread maps\_utility::set_flag_on_trigger(var_0, "combat_two_stage_1_done");
   wait 0.5;
   level thread spawn_enemies_on_ai_count();
@@ -146,7 +146,7 @@ show_combat_two_intro_debris() {
 }
 
 trigger_enemy_spawn(var_0, var_1, var_2) {
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
 
   if(isDefined(var_3)) {
     var_3 waittill("trigger");
@@ -156,7 +156,7 @@ trigger_enemy_spawn(var_0, var_1, var_2) {
 }
 
 trigger_enemy_spawn_in_order(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
 
   if(isDefined(var_4)) {
     var_4 waittill("trigger");
@@ -221,15 +221,15 @@ detectexposedandreacquire() {
 set_ai_attackeraccuracy() {
   self endon("death");
   self.attackeraccuracy = 0.1;
-  var_0 = getent("combat_two_second_wave_retreat", "targetname");
-  var_1 = getent("no_cover", "targetname");
+  var_0 = getEnt("combat_two_second_wave_retreat", "targetname");
+  var_1 = getEnt("no_cover", "targetname");
 
   if(isDefined(var_0) && isDefined(var_1)) {
     common_scripts\utility::waittill_any_ents(var_0, "trigger", var_1, "trigger");
   }
 
   self.attackeraccuracy = 0.1;
-  var_0 = getent("combat_two_third_wave_extra", "targetname");
+  var_0 = getEnt("combat_two_third_wave_extra", "targetname");
 
   if(isDefined(var_0)) {
     common_scripts\utility::waittill_any_ents(var_0, "trigger");
@@ -239,7 +239,7 @@ set_ai_attackeraccuracy() {
 }
 
 wait_until_volume_empty(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   while(isDefined(self) && !common_scripts\utility::flag("combat_two_done")) {
     var_2 = getaiarray("axis");
@@ -261,7 +261,7 @@ wait_until_volume_empty(var_0) {
 
 teleport_enemies() {
   var_0 = getaiarray("axis");
-  var_1 = getent("combat_two_teleport_node", "targetname");
+  var_1 = getEnt("combat_two_teleport_node", "targetname");
   var_2 = 0;
 
   foreach(var_4 in var_0) {
@@ -274,7 +274,7 @@ teleport_enemies() {
 
 convert_moving_cover_enemies_to_wave_3() {
   level.moving_cover_guys = [];
-  var_0 = getent("ignore_volume", "targetname");
+  var_0 = getEnt("ignore_volume", "targetname");
   var_0 waittill("trigger");
   var_1 = getaiarray("axis");
   var_2 = maps\_utility::get_ai_group_ai("combat_two_enemies");
@@ -331,21 +331,21 @@ turn_off_triggers_until_trigger() {
   var_0 = ["combat_two_third_wave_push_0", "combat_two_third_wave_push_1", "combat_two_third_wave_push_2"];
 
   foreach(var_2 in var_0) {
-    var_2 = getent(var_2, "targetname");
+    var_2 = getEnt(var_2, "targetname");
 
     if(isDefined(var_2)) {
       var_2 common_scripts\utility::trigger_off();
     }
   }
 
-  var_2 = getent("combat_two_third_wave_extra", "targetname");
+  var_2 = getEnt("combat_two_third_wave_extra", "targetname");
 
   if(isDefined(var_2)) {
     var_2 waittill("trigger");
   }
 
   foreach(var_2 in var_0) {
-    var_2 = getent(var_2, "targetname");
+    var_2 = getEnt(var_2, "targetname");
 
     if(isDefined(var_2)) {
       var_2 common_scripts\utility::trigger_on();
@@ -417,7 +417,7 @@ wave_3_charge_spawn_func() {
   common_scripts\utility::flag_set("combat_two_charge_enemy_spawned");
   var_0 = level.enemy_chargers.size + 1;
   level.enemy_chargers[level.enemy_chargers.size] = self;
-  var_1 = getent("enemy_charge_target_" + var_0, "targetname");
+  var_1 = getEnt("enemy_charge_target_" + var_0, "targetname");
   self setentitytarget(var_1);
   self waittill("goal");
   common_scripts\utility::flag_set("enemies_above");
@@ -425,7 +425,7 @@ wave_3_charge_spawn_func() {
   self.ignoreme = 0;
   self.attackeraccuracy = 1.0;
   self clearentitytarget();
-  var_2 = getent("wave_3_in_debris_goal_volume", "targetname");
+  var_2 = getEnt("wave_3_in_debris_goal_volume", "targetname");
   self setgoalvolume(var_2);
   wait 1.0;
   self.favoriteenemy = level.player;
@@ -442,7 +442,7 @@ set_sneaky_player_flag_on_damage() {
 }
 
 set_sneaky_player_flag_on_trigger() {
-  var_0 = getent("combat_two_third_wave_extra", "targetname");
+  var_0 = getEnt("combat_two_third_wave_extra", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("sneaky_player");
 }
@@ -467,10 +467,10 @@ wave_3_extra_spawn_func() {
 }
 
 set_stop_ignore_flag() {
-  var_0 = getent("ignore_volume", "targetname");
+  var_0 = getEnt("ignore_volume", "targetname");
   var_0 thread ignore_timer(10);
-  var_1 = getent("combat_two_second_wave_retreat", "targetname");
-  var_2 = getent("no_cover", "targetname");
+  var_1 = getEnt("combat_two_second_wave_retreat", "targetname");
+  var_2 = getEnt("no_cover", "targetname");
 
   if(isDefined(var_1) && isDefined(var_2)) {
     common_scripts\utility::waittill_any_ents(var_1, "trigger", var_2, "trigger", var_0, "time_up");
@@ -486,8 +486,8 @@ ignore_timer(var_0) {
 }
 
 waittill_player_advances_or_timeout() {
-  var_0 = getent("ignore_volume", "targetname");
-  var_1 = getent("no_cover", "targetname");
+  var_0 = getEnt("ignore_volume", "targetname");
+  var_1 = getEnt("no_cover", "targetname");
 
   if(isDefined(var_0) && isDefined(var_1)) {
     common_scripts\utility::waittill_any_ents(var_0, "trigger", var_1, "trigger", self, "initial_path_completed", self, "stop_ignoring");
@@ -496,7 +496,7 @@ waittill_player_advances_or_timeout() {
 
 ai_advancing_logic() {
   level thread enemy_goal_volume_logic();
-  var_0 = getent("combat_two_third_wave", "targetname");
+  var_0 = getEnt("combat_two_third_wave", "targetname");
   var_0 waittill("trigger");
   var_1 = spawn("script_origin", level.player.origin);
   wait 0.1;
@@ -512,7 +512,7 @@ ai_advancing_logic() {
   level.allies[0] maps\_utility::set_goal_node_targetname("combat_two_ally0_node_start");
   wait 1.0;
   level.allies[1] maps\_utility::set_goal_node_targetname("combat_two_ally1_node_start");
-  var_0 = getent("combat_two_second_wave_push", "targetname");
+  var_0 = getEnt("combat_two_second_wave_push", "targetname");
   var_0 notify("trigger");
   level thread allies_color_advance_logic();
   wait 1.0;
@@ -537,7 +537,7 @@ ai_advancing_logic() {
 }
 
 set_flag_on_trigger_or_ai_count(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_1, "targetname");
+  var_4 = getEnt(var_1, "targetname");
 
   if(isDefined(var_4)) {
     var_4 waittill("trigger");
@@ -593,7 +593,7 @@ spawn_enemies_on_flag() {
 allies_color_advance_logic() {
   for(;;) {
     if(common_scripts\utility::flag("section5")) {
-      var_0 = getent("combat_two_third_wave_push_1_5", "targetname");
+      var_0 = getEnt("combat_two_third_wave_push_1_5", "targetname");
 
       if(isDefined(var_0)) {
         var_0 notify("trigger");
@@ -601,13 +601,13 @@ allies_color_advance_logic() {
 
       break;
     } else if(common_scripts\utility::flag("section4")) {
-      var_0 = getent("combat_two_third_wave_push_1", "targetname");
+      var_0 = getEnt("combat_two_third_wave_push_1", "targetname");
 
       if(isDefined(var_0)) {
         var_0 notify("trigger");
       }
     } else if(common_scripts\utility::flag("section3") || common_scripts\utility::flag("section3_justmove")) {
-      var_0 = getent("combat_two_third_wave_push_0", "targetname");
+      var_0 = getEnt("combat_two_third_wave_push_0", "targetname");
 
       if(isDefined(var_0)) {
         var_0 notify("trigger");
@@ -617,7 +617,7 @@ allies_color_advance_logic() {
         }
       }
     } else if(common_scripts\utility::flag("section2")) {
-      var_0 = getent("combat_two_second_wave_retreat", "targetname");
+      var_0 = getEnt("combat_two_second_wave_retreat", "targetname");
 
       if(isDefined(var_0)) {
         var_0 notify("trigger");
@@ -664,8 +664,8 @@ enemies_around_nitro(var_0) {
 
 wait_for_time_then_shoot_bomb(var_0) {
   level endon("first_enemies_dead");
-  var_1 = getent("nitro_target", "targetname");
-  var_2 = getent("nitro_target_first", "targetname");
+  var_1 = getEnt("nitro_target", "targetname");
+  var_2 = getEnt("nitro_target_first", "targetname");
   common_scripts\utility::flag_wait_or_timeout("section3", var_0);
 
   while(enemies_around_nitro(var_1)) {
@@ -731,25 +731,25 @@ orient_ally(var_0) {
 enemy_goal_volume_logic() {
   for(;;) {
     if(common_scripts\utility::flag("section5")) {
-      var_0 = getent("wave_3_push_advance_volume_2", "targetname");
+      var_0 = getEnt("wave_3_push_advance_volume_2", "targetname");
       level.current_volume = var_0;
-      var_0 = getent("wave_3_push_advance_volume_2_high", "targetname");
+      var_0 = getEnt("wave_3_push_advance_volume_2_high", "targetname");
       level.current_high_volume = var_0;
       break;
     } else if(common_scripts\utility::flag("section4")) {
-      var_0 = getent("wave_3_push_advance_volume_2", "targetname");
+      var_0 = getEnt("wave_3_push_advance_volume_2", "targetname");
       level.current_volume = var_0;
-      var_0 = getent("wave_3_push_advance_volume_2_high", "targetname");
+      var_0 = getEnt("wave_3_push_advance_volume_2_high", "targetname");
       level.current_high_volume = var_0;
     } else if(common_scripts\utility::flag("section3")) {
-      var_0 = getent("wave_3_push_advance_volume_1", "targetname");
+      var_0 = getEnt("wave_3_push_advance_volume_1", "targetname");
       level.current_volume = var_0;
-      var_0 = getent("wave_3_push_advance_volume_1_high", "targetname");
+      var_0 = getEnt("wave_3_push_advance_volume_1_high", "targetname");
       level.current_high_volume = var_0;
     } else {
-      var_0 = getent("wave_3_safe_volume", "targetname");
+      var_0 = getEnt("wave_3_safe_volume", "targetname");
       level.current_volume = var_0;
-      var_0 = getent("wave_3_safe_volume_high", "targetname");
+      var_0 = getEnt("wave_3_safe_volume_high", "targetname");
       level.current_high_volume = var_0;
     }
 
@@ -760,7 +760,7 @@ enemy_goal_volume_logic() {
 turn_off_trigger_on_notify(var_0, var_1) {
   level endon("end_of_combat_two");
   level waittill(var_1);
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(isDefined(var_2)) {
     var_2 delete();
@@ -770,10 +770,10 @@ turn_off_trigger_on_notify(var_0, var_1) {
 swap_goal_volumes(var_0) {
   self endon("death");
   self endon("stop_goal_volume_swap");
-  var_1 = getent("no_cover", "targetname");
-  var_2 = getent("wave_3_underside", "targetname");
-  var_3 = getent("wave_3_in_open_goal_volume", "targetname");
-  var_4 = getent("wave_3_everywhere_below_goal_volume", "targetname");
+  var_1 = getEnt("no_cover", "targetname");
+  var_2 = getEnt("wave_3_underside", "targetname");
+  var_3 = getEnt("wave_3_in_open_goal_volume", "targetname");
+  var_4 = getEnt("wave_3_everywhere_below_goal_volume", "targetname");
   wait 0.1;
 
   if(isalive(self)) {
@@ -831,12 +831,12 @@ send_guy_to_node_then_rotate() {
 }
 
 spinning_cover(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
-  var_3 = getent(var_0 + "_clip", "targetname");
+  var_2 = getEnt(var_0, "targetname");
+  var_3 = getEnt(var_0 + "_clip", "targetname");
 
   if(isDefined(var_1) && isalive(var_1)) {
     var_1 waittill("goal");
-    var_1 linkto(var_2);
+    var_1 linkTo(var_2);
     var_1.ignoreall = 0;
     var_2 rotatevelocity((0, 0, 2), 9999);
     var_3 rotatevelocity((0, 0, 2), 9999);
@@ -853,8 +853,8 @@ spinning_object(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4.target)) {
-      var_5 = getent(var_4.target, "targetname");
-      var_5 linkto(var_4);
+      var_5 = getEnt(var_4.target, "targetname");
+      var_5 linkTo(var_4);
     }
 
     var_4 rotatevelocity((0, 0, 2), 9999);
@@ -876,7 +876,7 @@ check_for_combat_two_done() {
 
   level.allies[0].goalradius = 4;
   level.allies[1].goalradius = 4;
-  var_0 = getent("combat_two_final_orders", "targetname");
+  var_0 = getEnt("combat_two_final_orders", "targetname");
   var_0 notify("trigger");
   common_scripts\utility::flag_set("combat_two_done");
 }
@@ -910,7 +910,7 @@ ignore_all_until_damaged() {
 
 ignore_player_after_time(var_0, var_1) {
   level thread set_flag_when_not_firing(var_0);
-  var_2 = getent("ignore_volume", "targetname");
+  var_2 = getEnt("ignore_volume", "targetname");
 
   for(;;) {
     if(level.player istouching(var_2) && !common_scripts\utility::flag("player_is_firing") && var_1 > 0) {
@@ -981,7 +981,7 @@ push_crates(var_0) {
 }
 
 ally_0_animation() {
-  self stopanimscripted();
+  self stopanimScripted();
   self pushplayer(1);
   self.fixednode = 1;
   self notify("stop_traversal_hit_detection");
@@ -1054,7 +1054,7 @@ ally_0_animation() {
 }
 
 ally_1_animation() {
-  self stopanimscripted();
+  self stopanimScripted();
   self pushplayer(1);
   self.fixednode = 1;
   self.goalradius = 40;
@@ -1069,11 +1069,11 @@ ally_1_animation() {
   var_3["combat_two_ally_02_trans_2_crate"] = var_2;
   var_1 maps\_anim::anim_first_frame(var_3, "combat_two_trans_2");
   var_4 = spawn("script_origin", var_2.origin);
-  var_4 linkto(var_2);
+  var_4 linkTo(var_2);
   var_5 = getEntArray("spinning_crate_collision", "targetname");
 
   foreach(var_7 in var_5) {
-    var_7 linkto(var_4);
+    var_7 linkTo(var_4);
   }
 
   var_3 = [];
@@ -1163,13 +1163,13 @@ turn_on_node_once_player_advances(var_0) {
 rotate_intel() {
   wait 3.0;
   var_0 = getEntArray("intel_laptop", "script_noteworthy");
-  var_1 = getent("intelligence_item", "targetname");
+  var_1 = getEnt("intelligence_item", "targetname");
   var_2 = undefined;
 
   foreach(var_4 in var_0) {
     if(var_4.classname == "script_model") {
       var_4 rotatevelocity((-2, 0, -7), 9999);
-      var_4 moveto(var_4.origin + (0, 0, 450), 120);
+      var_4 moveTo(var_4.origin + (0, 0, 450), 120);
       var_2 = var_4;
     }
   }
@@ -1370,7 +1370,7 @@ node_change_logic(var_0, var_1) {
 
 moving_large_debris() {
   var_0 = getEntArray("ambient_debris", "targetname");
-  var_1 = getent("ambient_debris_ref_node", "targetname");
+  var_1 = getEnt("ambient_debris_ref_node", "targetname");
   var_2 = 20000;
   var_3 = 2000;
 
@@ -1383,7 +1383,7 @@ moving_large_debris() {
   foreach(var_5 in var_0) {
     var_5 show();
     var_8 = var_5.origin - var_1.origin;
-    var_8 = vectornormalize(var_8);
+    var_8 = vectorNormalize(var_8);
 
     if(isDefined(var_5.script_noteworthy) && var_5.script_noteworthy == "small_debris") {
       var_9 = var_3 * randomfloatrange(0.2, 0.3);
@@ -1394,7 +1394,7 @@ moving_large_debris() {
     }
 
     var_11 = var_8 * var_2 + var_5.origin;
-    var_5 moveto(var_11, var_9);
+    var_5 moveTo(var_11, var_9);
     var_5 rotatevelocity(var_10, var_3);
   }
 
@@ -1407,7 +1407,7 @@ moving_large_debris() {
 
 fail_if_player_too_far() {
   level endon("charge_set");
-  var_0 = getent("player_too_far", "targetname");
+  var_0 = getEnt("player_too_far", "targetname");
   var_0 waittill("trigger");
   setDvar("ui_deadquote", &"LOKI_BOUNDS_FAIL");
   level thread maps\_utility::missionfailedwrapper();
@@ -1445,7 +1445,7 @@ combat_two_dialogue() {
   maps\_utility::battlechatter_off("allies");
   thread maps\loki_audio::sfx_end_combat_amb();
   maps\_utility::smart_radio_dialogue("loki_gs3_allclearmoveup");
-  var_0 = getent("combat_two_third_wave_push_2_trigger", "targetname");
+  var_0 = getEnt("combat_two_third_wave_push_2_trigger", "targetname");
 
   if(!level.player istouching(var_0)) {
     maps\_utility::smart_radio_dialogue("loki_mrk_icaruscommandourground");
@@ -1466,7 +1466,7 @@ vo_move_up() {
 }
 
 waittill_trigger_targetname(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   if(isDefined(var_2)) {
     if(isDefined(var_1)) {

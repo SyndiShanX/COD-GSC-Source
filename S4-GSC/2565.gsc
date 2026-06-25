@@ -163,7 +163,7 @@ _id_3824() {
             if(abs(var_15) > 32) {
               continue;
             }
-            var_16 = vectornormalize(var_10);
+            var_16 = vectorNormalize(var_10);
             var_17 = vectordot(var_16, var_4);
 
             if(var_17 < 0.86602) {

@@ -223,7 +223,7 @@ spawnAttackLittleBird(owner, origin, forward, flockIndex) {
   killCamOrigin = (lb.origin + ((anglesToForward(lb.angles) * -200) + (AnglesToRight(lb.angles) * -200))) + (0, 0, 50);
   mgTurret1.killCamEnt = spawn("script_model", killCamOrigin);
   mgTurret1.killCamEnt SetScriptMoverKillCam("explosive");
-  mgTurret1.killCamEnt LinkTo(lb, "tag_origin");
+  mgTurret1.killCamEnt linkTo(lb, "tag_origin");
 
   lb.mgTurret1 = mgTurret1;
   lb.mgTurret1 SetDefaultDropPitch(0);

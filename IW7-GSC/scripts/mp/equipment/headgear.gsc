@@ -69,7 +69,7 @@ func_8C70(var_0) {
   for(var_3 = 0; var_3 < 5; var_3++) {
     var_1[var_3] = ::scripts\engine\utility::spawn_tag_origin(self.origin + (0, 0, 36));
     var_2[var_3] = spawn("script_model", var_1[var_3].origin);
-    var_2[var_3] linkto(var_1[var_3]);
+    var_2[var_3] linkTo(var_1[var_3]);
   }
 
   scripts\engine\utility::waitframe();
@@ -114,5 +114,5 @@ func_68D8(var_0, var_1) {
     }
   }
 
-  var_0 moveto(var_4["position"], var_5);
+  var_0 moveTo(var_4["position"], var_5);
 }

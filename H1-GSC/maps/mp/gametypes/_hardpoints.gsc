@@ -335,7 +335,7 @@ airstrikedamageentsthread() {
       var_0 = level.airstrikedamagedents[level.airstrikedamagedentsindex];
 
       if(!isDefined(var_0.entity)) {} else if(!var_0.isplayer || isalive(var_0.entity)) {
-        var_0 maps\mp\gametypes\_weapons::damageent(var_0.einflictor, var_0.damageowner, var_0.damage, "MOD_PROJECTILE_SPLASH", "artillery_mp", var_0.pos, vectornormalize(var_0.damagecenter - var_0.pos));
+        var_0 maps\mp\gametypes\_weapons::damageent(var_0.einflictor, var_0.damageowner, var_0.damage, "MOD_PROJECTILE_SPLASH", "artillery_mp", var_0.pos, vectorNormalize(var_0.damagecenter - var_0.pos));
         level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
 
         if(var_0.isplayer) {
@@ -414,7 +414,7 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_12 thread playplanefx(var_13);
   }
 
-  var_12 moveto(var_11, var_6, 0, 0);
+  var_12 moveTo(var_11, var_6, 0, 0);
   thread callstrike_planesound(var_12, var_2);
   thread callstrike_bombeffect(var_12, var_11, var_6, var_5 - 1.0, var_0, var_1);
   wait(var_6);
@@ -434,11 +434,11 @@ callstrike_bombeffect(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8.starttime = gettime();
   var_8 thread deleteaftertime(15.0);
   var_8.angles = var_6;
-  var_8 moveto(var_1 + (0, 0, 100), var_2, 0, 0);
+  var_8 moveTo(var_1 + (0, 0, 100), var_2, 0, 0);
   wait 0.4;
-  var_8 moveto(var_8.origin + var_6 * 4000, 1, 0, 0);
+  var_8 moveTo(var_8.origin + var_6 * 4000, 1, 0, 0);
   wait 0.45;
-  var_8 moveto(var_8.origin + (var_6 + (0, 0, -0.2)) * 3500, 2, 0, 0);
+  var_8 moveTo(var_8.origin + (var_6 + (0, 0, -0.2)) * 3500, 2, 0, 0);
   wait 0.15;
   var_9 = spawn("script_model", var_7.origin);
   var_9 setModel("tag_origin");
@@ -450,11 +450,11 @@ callstrike_bombeffect(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_11 = var_9.angles;
   playFXOnTag(level.airstrikefx, var_9, "tag_origin");
   wait 0.05;
-  var_8 moveto(var_8.origin + (var_6 + (0, 0, -0.25)) * 2500, 2, 0, 0);
+  var_8 moveTo(var_8.origin + (var_6 + (0, 0, -0.25)) * 2500, 2, 0, 0);
   wait 0.25;
-  var_8 moveto(var_8.origin + (var_6 + (0, 0, -0.35)) * 2000, 2, 0, 0);
+  var_8 moveTo(var_8.origin + (var_6 + (0, 0, -0.35)) * 2000, 2, 0, 0);
   wait 0.2;
-  var_8 moveto(var_8.origin + (var_6 + (0, 0, -0.45)) * 1500, 2, 0, 0);
+  var_8 moveTo(var_8.origin + (var_6 + (0, 0, -0.45)) * 1500, 2, 0, 0);
   var_12 = 12;
   var_13 = 5;
   var_14 = 55;
@@ -479,7 +479,7 @@ callstrike_bombeffect(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   var_16 = var_16 / var_12 + (0, 0, 128);
-  var_8 moveto(var_7.killcament.origin * 0.35 + var_16 * 0.65, 1.5, 0, 0.5);
+  var_8 moveTo(var_7.killcament.origin * 0.35 + var_16 * 0.65, 1.5, 0, 0.5);
   wait 5.0;
   var_9 delete();
   var_7 delete();
@@ -612,7 +612,7 @@ targetisclose(var_0, var_1) {
 
 targetisinfront(var_0, var_1) {
   var_2 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
-  var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {

@@ -112,7 +112,7 @@ script_mover_init() {
         self.origin_ent = spawn("script_model", var_2.origin);
         self.origin_ent.angles = var_2.angles;
         self.origin_ent setModel("tag_origin");
-        self.origin_ent linkto(self);
+        self.origin_ent linkTo(self);
         break;
       case "scene_node":
       case "scripted_node":
@@ -142,15 +142,15 @@ script_mover_init() {
     foreach(var_8 in var_6) {
       switch (var_8) {
         case "use_trigger_link":
-          var_2 enablelinkto();
-          var_2 linkto(self);
+          var_2 enablelinkTo();
+          var_2 linkTo(self);
         case "use_trigger":
           var_2 script_mover_parse_targets();
           thread script_mover_use_trigger(var_2);
           self.use_triggers[self.use_triggers.size] = var_2;
           break;
         case "link":
-          var_2 linkto(self);
+          var_2 linkTo(self);
           self.linked_ents[self.linked_ents.size] = var_2;
           break;
         default:
@@ -377,8 +377,8 @@ script_mover_connectpaths(var_0) {
   self connectpaths();
 }
 
-script_mover_disconnectpaths(var_0) {
-  self disconnectpaths(var_0);
+script_mover_disconnectPaths(var_0) {
+  self disconnectPaths(var_0);
 }
 
 script_mover_solid(var_0) {
@@ -440,7 +440,7 @@ script_mover_update_paths() {
   }
   for(;;) {
     foreach(var_5 in var_0) {
-      var_5 script_mover_disconnectpaths();
+      var_5 script_mover_disconnectPaths();
     }
 
     self waittill("move_start");
@@ -551,7 +551,7 @@ script_mover_move_to_target(var_0) {
         var_2 dontinterpolate();
         var_2.origin = var_8["origin"];
       } else
-        var_2 moveto(var_8["origin"], var_3, var_4, var_5);
+        var_2 moveTo(var_8["origin"], var_3, var_4, var_5);
 
       var_6 = 1;
     }
@@ -561,7 +561,7 @@ script_mover_move_to_target(var_0) {
         var_2 dontinterpolate();
         var_2.angles = var_8["angles"];
       } else
-        var_2 rotateto(var_8["angles"], var_3, var_4, var_5);
+        var_2 rotateTo(var_8["angles"], var_3, var_4, var_5);
 
       var_7 = 1;
     }
@@ -752,8 +752,8 @@ script_mover_allow_usable(var_0) {
 script_mover_set_usable(var_0, var_1) {
   if(var_1) {
     var_0 makeusable();
-    var_0 setcursorhint("HINT_ACTIVATE");
-    var_0 sethintstring(level.script_mover_hintstrings[self.params["hintstring"]]);
+    var_0 setCursorHint("HINT_ACTIVATE");
+    var_0 setHintString(level.script_mover_hintstrings[self.params["hintstring"]]);
   } else
     var_0 makeunusable();
 }
@@ -905,7 +905,7 @@ unresolved_collision_nearest_node(var_0, var_1) {
   var_3 = (0, 0, -100);
   var_0 cancelmantle();
   var_0 dontinterpolate();
-  var_0 setorigin(var_0.origin + var_3);
+  var_0 setOrigin(var_0.origin + var_3);
 
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
     var_5 = var_2[var_4];
@@ -921,11 +921,11 @@ unresolved_collision_nearest_node(var_0, var_1) {
       var_0 setstance("crouch");
     }
 
-    var_0 setorigin(var_6);
+    var_0 setOrigin(var_6);
     return;
   }
 
-  var_0 setorigin(var_0.origin - var_3);
+  var_0 setOrigin(var_0.origin - var_3);
 
   if(!isDefined(var_1)) {
     var_1 = 1;
@@ -1041,7 +1041,7 @@ handle_moving_platforms(var_0) {
   }
 
   if(isDefined(var_0.linkparent)) {
-    self linkto(var_0.linkparent);
+    self linkTo(var_0.linkparent);
   }
 
   childthread handle_moving_platform_touch(var_0);

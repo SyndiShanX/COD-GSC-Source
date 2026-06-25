@@ -26,7 +26,7 @@ function init() {
 
 function stage_logic() {
   level flag::wait_till("");
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     wait(20);
     level notify("raise_crystal_1", 1);
     level waittill("hash_64e9e78e");
@@ -42,13 +42,13 @@ function oafc_switch() {
   level thread knocking_audio();
   self.on_pos = self.origin;
   self.off_pos = self.on_pos - (anglestoup(self.angles) * 5.5);
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self waittill("triggered", who);
   if(isDefined(who)) {
     level._player_who_pressed_the_switch = who;
   }
   self playSound("evt_sq_gen_button");
-  self moveto(self.off_pos, 0.25);
+  self moveTo(self.off_pos, 0.25);
   self waittill("movedone");
   level flag::set("oafc_switch_pressed");
   level thread oafc_story_vox();
@@ -61,7 +61,7 @@ function knocking_audio() {
     return;
   }
   while(!level flag::get("oafc_switch_pressed")) {
-    playsoundatposition("evt_sq_oafc_knock", struct.origin);
+    playSoundAtPosition("evt_sq_oafc_knock", struct.origin);
     wait(randomfloatrange(1.5, 4));
   }
 }
@@ -211,7 +211,7 @@ function tile_moves_up(delay) {
   for(i = 0; i < delay; i++) {
     util::wait_network_frame();
   }
-  self moveto(self.original_origin, 0.25);
+  self moveTo(self.original_origin, 0.25);
 }
 
 function set_tile_models(tiles, models) {
@@ -225,7 +225,7 @@ function set_tile_models(tiles, models) {
 }
 
 function player_in_trigger() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i].sessionstate != "spectator" && self istouching(players[i])) {
       return players[i];
@@ -294,8 +294,8 @@ function oafc_trigger_thread(tiles, set) {
                   matched = 1;
                   level.var_66c77de0.matched = 1;
                   level.var_d8ceed1b.matched = 1;
-                  level.var_66c77de0 moveto(level.var_66c77de0.origin - vectorscale((0, 0, 1), 24), 0.5);
-                  level.var_d8ceed1b moveto(level.var_d8ceed1b.origin - vectorscale((0, 0, 1), 24), 0.5);
+                  level.var_66c77de0 moveTo(level.var_66c77de0.origin - vectorscale((0, 0, 1), 24), 0.5);
+                  level.var_d8ceed1b moveTo(level.var_d8ceed1b.origin - vectorscale((0, 0, 1), 24), 0.5);
                   level.var_66c77de0 waittill("movedone");
                   level.var_66c77de0 = undefined;
                   level.var_d8ceed1b = undefined;
@@ -312,8 +312,8 @@ function oafc_trigger_thread(tiles, set) {
                     println("");
                     struct = struct::get("sq_location_oafc", "targetname");
                     if(isDefined(struct)) {
-                      playsoundatposition("evt_sq_oafc_glyph_complete", struct.origin);
-                      playsoundatposition("evt_sq_oafc_kachunk", struct.origin);
+                      playSoundAtPosition("evt_sq_oafc_glyph_complete", struct.origin);
+                      playSoundAtPosition("evt_sq_oafc_kachunk", struct.origin);
                     }
                     level notify("suspend_timer");
                     level notify("raise_crystal_1", 1);

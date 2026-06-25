@@ -542,7 +542,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     return charindexarray[0];
@@ -850,7 +850,7 @@ function function_869d6f66() {
   if(isDefined(level.var_b7572a82) && level.var_b7572a82) {
     return false;
   }
-  var_bfe88385 = getent("samanthas_room_zone", "targetname");
+  var_bfe88385 = getEnt("samanthas_room_zone", "targetname");
   if(self istouching(var_bfe88385)) {
     return false;
   }

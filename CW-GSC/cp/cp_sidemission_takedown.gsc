@@ -25,7 +25,7 @@ function event_handler[level_init] main(eventstruct) {
   function_37dfd679();
   load::main();
   init_callbacks();
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   level.var_30eb363 = #"hash_4e516e60f6798859";
   level.var_85b00b2b = #"hash_42cabf1b1466580";
   setDvar(#"compassmaxrange", "2100");

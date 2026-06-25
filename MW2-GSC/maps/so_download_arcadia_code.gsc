@@ -34,7 +34,7 @@ download_obj_setup() {
   computer setModel("com_laptop_rugged_open");
   computer.angles = self.angles;
 
-  dsmSpot = GetStruct(self.target, "targetname");
+  dsmSpot = getStruct(self.target, "targetname");
   dsm = spawn("script_model", dsmSpot.origin);
   dsm setModel("mil_wireless_dsm");
   dsm.angles = dsmSpot.angles;
@@ -49,18 +49,18 @@ download_obj_setup() {
   self.dsm = dsm;
   self.dsm_obj = dsm_obj;
 
-  self.trig = GetEnt(self.target, "targetname");
-  self.trig download_trig_sethintstring();
+  self.trig = getEnt(self.target, "targetname");
+  self.trig download_trig_setHintString();
 
   self thread download_obj_think();
 }
 
-download_trig_sethintstring() {
-  self SetHintString(&"SO_DOWNLOAD_ARCADIA_DSM_USE_HINT");
+download_trig_setHintString() {
+  self setHintString(&"SO_DOWNLOAD_ARCADIA_DSM_USE_HINT");
 }
 
 download_trig_clearhintstring() {
-  self SetHintString("");
+  self setHintString("");
 }
 
 download_obj_think() {
@@ -85,7 +85,7 @@ download_obj_think() {
       self.dsm Hide();
       break;
     } else {
-      self.trig download_trig_sethintstring();
+      self.trig download_trig_setHintString();
       self.dsm Hide();
       self.dsm_obj Show();
     }
@@ -505,7 +505,7 @@ download_files_spawn_charger(download) {
 }
 
 defender_charge_dsm(download) {
-  goal_ent = GetEnt(download.script_linkto, "script_linkname");
+  goal_ent = getEnt(download.script_linkto, "script_linkname");
 
   self.goalradius = 1800;
   self SetGoalEntity(goal_ent);
@@ -616,7 +616,7 @@ stryker = maps\_vehicle::spawn_vehicle_from_targetname("stryker");
 ASSERT(isDefined(stryker));
 level.stryker = stryker;
 org = spawn("script_origin", stryker.origin);
-org LinkTo(stryker);
+org linkTo(stryker);
 org.animname = "foley";
 level.foley = org;
 
@@ -816,11 +816,11 @@ stryker_enemy_reset_to_ignore(guy) {
 stryker_move_with_players() {
   level endon("all_downloads_finished");
 
-  trig1 = GetEnt("trig_stryker_house1", "targetname");
+  trig1 = getEnt("trig_stryker_house1", "targetname");
   node1 = GetVehicleNode("vnode_house1", "script_noteworthy");
-  trig2 = GetEnt("trig_stryker_house2", "targetname");
+  trig2 = getEnt("trig_stryker_house2", "targetname");
   node2 = GetVehicleNode("vnode_house2", "script_noteworthy");
-  trig3 = GetEnt("trig_stryker_house3", "targetname");
+  trig3 = getEnt("trig_stryker_house3", "targetname");
   node3 = GetVehicleNode("vnode_house3", "script_noteworthy");
 
   trigs[0] = trig1;
@@ -1050,8 +1050,8 @@ so_download_arcadia_outside_enemy_spawnfunc() {
   self endon("death");
 
   if(isDefined(self.script_linkto) && isDefined(self.script_parameters)) {
-    retreatTrig = GetEnt(self.script_linkto, "script_linkname");
-    retreatVol = GetEnt(self.script_parameters, "targetname");
+    retreatTrig = getEnt(self.script_linkto, "script_linkname");
+    retreatVol = getEnt(self.script_parameters, "targetname");
 
     ASSERT(isDefined(retreatTrig) && isDefined(retreatVol));
 
@@ -1077,7 +1077,7 @@ return true;
 }
 
 waittill_both_players_touch_targetname(tn) {
-  trig = GetEnt(tn, "targetname");
+  trig = getEnt(tn, "targetname");
   touchers = [];
 
   while(touchers.size < level.players.size) {

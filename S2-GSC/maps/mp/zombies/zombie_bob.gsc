@@ -561,7 +561,7 @@ zombie_bob_smoke_listen_for_damage(param_00, param_01) {
 zombie_bob_smoke_atk_spawn_hit_volumes(param_00, param_01) {
   var_02 = 2;
   wait(var_02);
-  var_03 = getent("bob_smoke_collision", "targetname");
+  var_03 = getEnt("bob_smoke_collision", "targetname");
   var_04 = undefined;
   if(isDefined(var_03)) {
     var_04 = spawn("script_model", param_01);
@@ -570,7 +570,7 @@ zombie_bob_smoke_atk_spawn_hit_volumes(param_00, param_01) {
     }
   }
 
-  var_05 = getent("bob_smoke_trigger_damage", "targetname");
+  var_05 = getEnt("bob_smoke_trigger_damage", "targetname");
   var_06 = undefined;
   if(isDefined(var_05)) {
     var_06 = var_05.var_116;
@@ -648,7 +648,7 @@ zombie_bob_make_sizzlers() {
       if(var_0B == "zombie_animclass" && var_02) {
         var_0C = var_0A.var_116 - var_05;
         var_0C = (var_0C[0], var_0C[1], 0);
-        var_0C = vectornormalize(var_0C);
+        var_0C = vectorNormalize(var_0C);
         if(vectordot(var_0C, var_08) < 0.94) {
           continue;
         }

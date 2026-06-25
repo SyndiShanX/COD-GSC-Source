@@ -125,7 +125,7 @@ function function_fd32a77c() {
       return;
     }
     for(i = 0; i < level.spider_clips.size; i++) {
-      level.spider_clips[i] disconnectpaths();
+      level.spider_clips[i] disconnectPaths();
       util::wait_network_frame();
     }
     var_26b8af54 = 1;
@@ -274,7 +274,7 @@ function function_2a424152() {
       level.round_spawn_func = &function_a2a299a1;
       level.round_wait_func = &function_872e306e;
       level.var_3013498 = level.round_number + randomintrange(4, 6);
-      getplayers()[0] iprintln("" + level.var_3013498);
+      getPlayers()[0] iprintln("" + level.var_3013498);
     } else if(level flag::get("spider_round")) {
       function_123b370a();
       level.round_spawn_func = old_spawn_func;
@@ -651,7 +651,7 @@ function function_82b6256d() {
   self waittill("death", e_attacker);
   self zm_spawner::check_zombie_death_event_callbacks(e_attacker);
   if(isPlayer(e_attacker) && (isDefined(level.var_26af7b39) && level.var_26af7b39) && (isDefined(level.var_a5d2ba4) && level.var_a5d2ba4)) {
-    var_46927a7e = getent("apothicon_belly_center", "targetname");
+    var_46927a7e = getEnt("apothicon_belly_center", "targetname");
     if(e_attacker istouching(var_46927a7e) && self istouching(var_46927a7e)) {
       level notify("hash_ca3a841");
     }
@@ -724,7 +724,7 @@ function function_49e57a3b(var_c79d3f71, ent = self, var_a79b986e = 0) {
       var_c79d3f71.var_75bf86b = spawner::simple_spawn_single("spider_mover_spawner");
       var_c79d3f71.origin = var_c79d3f71.var_75bf86b.origin;
       var_c79d3f71.angles = var_c79d3f71.var_75bf86b.angles;
-      var_c79d3f71 linkto(var_c79d3f71.var_75bf86b);
+      var_c79d3f71 linkTo(var_c79d3f71.var_75bf86b);
       s_end = struct::get(var_a8deb964.target, "targetname");
       var_c79d3f71.var_75bf86b vehicle::get_on_path(var_a8deb964);
       var_c79d3f71 show();
@@ -780,7 +780,7 @@ function spit_projectile(e_dest) {
   v_angles = self gettagangles("head_1");
   var_e9ad0294 = util::spawn_model("tag_origin", v_origin, v_angles);
   var_e9ad0294 thread fx::play("spider_web_spit_reweb", v_origin, v_angles, "movedone", 1);
-  var_e9ad0294 moveto(e_dest.origin, 0.5);
+  var_e9ad0294 moveTo(e_dest.origin, 0.5);
   var_e9ad0294 waittill("movedone");
   var_e9ad0294 delete();
 }

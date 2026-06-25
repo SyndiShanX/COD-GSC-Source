@@ -509,7 +509,7 @@ crateland(crate, category, owner, team, context) {
   }
 
   playFX(level.ai_tank_crate_explode_fx, origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"veh_talon_crate_exp", crate.origin);
+  playSoundAtPosition(#"veh_talon_crate_exp", crate.origin);
   level thread ai_tank_killstreak_start(owner, origin, crate.package_contents_id, category, undefined, context);
 
   if(!isDefined(context.vehicle)) {
@@ -558,7 +558,7 @@ function_9b13ebf(drone) {
   drone vehicle::friendly_fire_shield();
   drone enableaimassist();
   drone setneargoalnotifydist(40);
-  drone setplayercollision(0);
+  drone setPlayerCollision(0);
   drone setavoidancemask("avoid none");
   drone.fovcosine = 0;
   drone.fovcosinebusy = 0.574;
@@ -641,7 +641,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
   if(isDefined(context) && isDefined(context.vehicle)) {
     drone = context.vehicle;
   } else {
-    drone = spawnvehicle(tankarchetype, origin + (0, 0, 40), (0, 0, 0), "talon", undefined, 1, owner);
+    drone = spawnVehicle(tankarchetype, origin + (0, 0, 40), (0, 0, 0), "talon", undefined, 1, owner);
   }
 
   drone killstreak_bundles::spawned(level.killstreakbundle[#"tank_robot"]);
@@ -748,7 +748,7 @@ function_9868e24e(player) {
     uifield multi_stage_target_lockon::set_targetstate(player, 0);
   }
 
-  enemies = getplayers();
+  enemies = getPlayers();
   ti = 0;
 
   foreach(enemy in enemies) {
@@ -770,7 +770,7 @@ function_9868e24e(player) {
     fwd = vectorscale(var_5781dbe, 2000);
     locking = player adsButtonPressed();
     nlocks = 0;
-    enemies = getplayers();
+    enemies = getPlayers();
 
     foreach(target in enemies) {
       if(!isPlayer(target) || player.team === target.team) {
@@ -1849,7 +1849,7 @@ tank_low_health_fx() {
   }
 
   self.damage_fx setModel(#"tag_origin");
-  self.damage_fx linkto(self, "tag_turret", (0, 0, -14), (0, 0, 0));
+  self.damage_fx linkTo(self, "tag_turret", (0, 0, -14), (0, 0, 0));
   wait 0.1;
   playFXOnTag(level.ai_tank_damage_fx, self.damage_fx, "tag_origin");
 }
@@ -2026,7 +2026,7 @@ emp_crazy_death() {
   if(isDefined(self) && isDefined(level.ai_tank_explode_fx)) {
     if(validateorigin(self.origin)) {
       playFX(level.ai_tank_explode_fx, self.origin, (0, 0, 1));
-      playsoundatposition(#"exp_mantis", self.origin);
+      playSoundAtPosition(#"exp_mantis", self.origin);
     }
   }
 
@@ -2078,10 +2078,10 @@ tank_death_think(hardpointname) {
 
   if(isDefined(settings) && (self.timed_out === 1 || self.abandoned === 1)) {
     playFXOnTag(level.ai_tank_explode_fx, self, "tag_body");
-    playsoundatposition(isDefined(settings.timed_out_death_sound_1) ? settings.timed_out_death_sound_1 : "exp_mantis", self.origin);
+    playSoundAtPosition(isDefined(settings.timed_out_death_sound_1) ? settings.timed_out_death_sound_1 : "exp_mantis", self.origin);
   } else {
     playFXOnTag(level.ai_tank_explode_fx, self, "tag_body");
-    playsoundatposition(#"exp_mantis", self.origin);
+    playSoundAtPosition(#"exp_mantis", self.origin);
   }
 
   if(isDefined(self.owner)) {
@@ -2300,7 +2300,7 @@ perform_recoil_missile_turret(player) {
   self perform_recoil("tag_barrel", isDefined(self.controlled) && self.controlled ? bundle.ksmainturretrecoilforcecontrolled : bundle.ksmainturretrecoilforce, bundle.ksmainturretrecoilforcezoffset);
 
   if(self.controlled && isDefined(player)) {
-    player playrumbleonentity("sniper_fire");
+    player playRumbleOnEntity("sniper_fire");
   }
 }
 
@@ -2331,7 +2331,7 @@ shoot_targets(projectile, max_missiles) {
   weapon = getweapon("tank_robot_launcher_turret");
   origin = projectile.origin;
   owner = projectile.owner;
-  enemies = getplayers();
+  enemies = getPlayers();
 
   foreach(target in enemies) {
     if(isDefined(target) && isPlayer(target) && util::function_fbce7263(owner.team, target.team)) {
@@ -2346,7 +2346,7 @@ shoot_targets(projectile, max_missiles) {
 
       if(target_info.state == 3) {
         dir = target.origin + (0, 0, 40) - origin;
-        dir = vectornormalize(dir);
+        dir = vectorNormalize(dir);
         rocket = magicbullet(weapon, origin, origin + dir * 1000, owner);
 
         if(isDefined(rocket) && rocket.classname === "rocket") {

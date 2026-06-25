@@ -33,9 +33,9 @@ sun_rise_handling_init() {
   level.sunriseinterpcolors = [];
   init_sun_color("sun", (0.1, 0.1, 0.1));
   set_exterior_vision_and_light_set("icbm_sunrise0", "icbm", 0.05);
-  var_0 = getent("sunrise2", "targetname");
-  var_1 = getent("sunrise3", "targetname");
-  var_2 = getent("sunrise4", "targetname");
+  var_0 = getEnt("sunrise2", "targetname");
+  var_1 = getEnt("sunrise3", "targetname");
+  var_2 = getEnt("sunrise4", "targetname");
   var_0.interval = 60;
   var_1.interval = 20;
   var_2.interval = 20;
@@ -47,7 +47,7 @@ sun_rise_handling_init() {
 }
 
 handle_sunrise2_colors() {
-  var_0 = getent("sunrise2", "targetname");
+  var_0 = getEnt("sunrise2", "targetname");
   var_0 waittill("trigger");
   setsaveddvar("sm_sunEnable", 1);
   setsaveddvar("sm_spotEnable", 1);
@@ -64,7 +64,7 @@ set_global_sunrise2() {
 }
 
 skip_to_sunrise2() {
-  var_0 = getent("sunrise2", "targetname");
+  var_0 = getEnt("sunrise2", "targetname");
   wait 0.1;
   var_0.interval = 0.05;
   var_0 notify("trigger");
@@ -83,7 +83,7 @@ remove_cloud_cover() {
 }
 
 handle_sunrise3_colors() {
-  var_0 = getent("sunrise3", "targetname");
+  var_0 = getEnt("sunrise3", "targetname");
   var_0 waittill("trigger");
   var_1 = var_0.interval;
   sun_set_lerp_parameters("sun", maps\_utility::vector_multiply((1, 0.8, 0.6), 1), var_1);
@@ -93,8 +93,8 @@ handle_sunrise3_colors() {
 }
 
 skip_to_sunrise3() {
-  var_0 = getent("sunrise2", "targetname");
-  var_1 = getent("sunrise3", "targetname");
+  var_0 = getEnt("sunrise2", "targetname");
+  var_1 = getEnt("sunrise3", "targetname");
   var_0.interval = 0.05;
   var_1.interval = 0.05;
   wait 0.1;
@@ -104,7 +104,7 @@ skip_to_sunrise3() {
 }
 
 handle_sunrise4_colors() {
-  var_0 = getent("sunrise4", "targetname");
+  var_0 = getEnt("sunrise4", "targetname");
   var_0 waittill("trigger");
   var_1 = var_0.interval;
   sun_set_lerp_parameters("sun", maps\_utility::vector_multiply((1, 1, 1), 1), var_1);
@@ -113,9 +113,9 @@ handle_sunrise4_colors() {
 }
 
 skip_to_sunrise4() {
-  var_0 = getent("sunrise2", "targetname");
-  var_1 = getent("sunrise3", "targetname");
-  var_2 = getent("sunrise4", "targetname");
+  var_0 = getEnt("sunrise2", "targetname");
+  var_1 = getEnt("sunrise3", "targetname");
+  var_2 = getEnt("sunrise4", "targetname");
   var_0.interval = 0.05;
   var_1.interval = 0.05;
   var_2.interval = 0.05;
@@ -141,8 +141,8 @@ launchvision() {
 }
 
 handle_launch_cinematic_effects() {
-  var_0 = getent("icbm_missile01", "targetname");
-  var_1 = getent("icbm_missile02", "targetname");
+  var_0 = getEnt("icbm_missile01", "targetname");
+  var_1 = getEnt("icbm_missile02", "targetname");
   maps\_cinematography::dyndof("missile") maps\_cinematography::dyndof_values(0.2, -1, 10, 1) maps\_cinematography::dyndof_reference_entity(var_0) maps\_cinematography::dyndof_angles(-15, 15) maps\_cinematography::dyndof_view_model_fstop_scale(200);
   maps\_cinematography::dyndof("missile2") maps\_cinematography::dyndof_values(0.2, -1, 10, 1) maps\_cinematography::dyndof_reference_entity(var_1) maps\_cinematography::dyndof_angles(-15, 15) maps\_cinematography::dyndof_view_model_fstop_scale(200);
   maps\_cinematography::dyndof("everywhere_else") maps\_cinematography::dyndof_values(10, 1200, 5, 1) maps\_cinematography::dyndof_autofocus(1);

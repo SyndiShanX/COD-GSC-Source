@@ -23,7 +23,7 @@ function init() {
       turret_pos.in_use = 0;
       var_a9504f50 = turret_pos zm_unitrigger::create(&function_a5680385, 64, &function_5b0907b8);
       var_a9504f50.turret_pos = turret_pos;
-      var_51c78859 = getent(turret_pos.target, "targetname");
+      var_51c78859 = getEnt(turret_pos.target, "targetname");
 
       if(isDefined(var_51c78859)) {
         turret_pos.var_51c78859 = var_51c78859;

@@ -61,9 +61,9 @@ function turn_to_zombie() {
   }
   if(!level flag::get("pregame")) {
     self playsoundtoplayer("evt_spawn", self);
-    playsoundatposition("evt_disappear_3d", self.origin);
+    playSoundAtPosition("evt_disappear_3d", self.origin);
     if(!self.is_zombie) {
-      playsoundatposition((("vox_plr_" + randomintrange(0, 4)) + "_exert_death_high_") + randomintrange(0, 4), self.origin);
+      playSoundAtPosition((("vox_plr_" + randomintrange(0, 4)) + "_exert_death_high_") + randomintrange(0, 4), self.origin);
     }
   }
   self._can_score = 1;
@@ -100,8 +100,8 @@ function turn_to_zombie() {
   }
   self enableweapons();
   self show();
-  playsoundatposition("evt_appear_3d", self.origin);
-  playsoundatposition("zmb_zombie_spawn", self.origin);
+  playSoundAtPosition("evt_appear_3d", self.origin);
+  playSoundAtPosition("zmb_zombie_spawn", self.origin);
   self thread delay_turning_on_eyes();
   self thread turned_player_buttons();
   self setperk("specialty_playeriszombie");
@@ -153,7 +153,7 @@ function turn_to_human() {
     wait(0.1);
   }
   self playsoundtoplayer("evt_spawn", self);
-  playsoundatposition("evt_disappear_3d", self.origin);
+  playSoundAtPosition("evt_disappear_3d", self.origin);
   self clientfield::set("player_has_eyes", 0);
   self ghost();
   self notify("humanify");
@@ -210,7 +210,7 @@ function turn_to_human() {
     self freezecontrols(0);
   }
   self show();
-  playsoundatposition("evt_appear_3d", self.origin);
+  playSoundAtPosition("evt_appear_3d", self.origin);
   self.is_in_process_of_humanify = 0;
 }
 
@@ -341,7 +341,7 @@ function get_farthest_available_zombie(player) {
 }
 
 function get_available_human() {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!(isDefined(player.is_zombie) && player.is_zombie)) {
       return player;

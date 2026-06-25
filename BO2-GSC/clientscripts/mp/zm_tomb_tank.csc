@@ -35,7 +35,7 @@ flamethrower_fx_loop(localclientnum, str_tag) {
   self endon("stop_flamethrower");
   sndorigin = self gettagorigin(str_tag);
   sndent = spawn(0, sndorigin, "script_origin");
-  sndent linkto(self, str_tag);
+  sndent linkTo(self, str_tag);
   sndent playSound(0, "zmb_tank_flame_start");
   sndent playLoopSound("zmb_tank_flame_loop", 0.6);
   self thread sndstopflamethrower(sndent);
@@ -111,10 +111,10 @@ sndplayoverheat(origin) {
 sndplayexhaust() {
   origin1 = self gettagorigin("tag_exhaust_1");
   ent1 = spawn(0, origin1, "script_origin");
-  ent1 linkto(self, "tag_exhaust_1");
+  ent1 linkTo(self, "tag_exhaust_1");
   origin2 = self gettagorigin("tag_exhaust_2");
   ent2 = spawn(0, origin2, "script_origin");
-  ent2 linkto(self, "tag_exhaust_2");
+  ent2 linkTo(self, "tag_exhaust_2");
   ent1 playLoopSound("zmb_tank_exhaust_pipe", 1);
   ent2 playLoopSound("zmb_tank_exhaust_pipe", 1);
   self waittill("stop_exhaust_fx");
@@ -165,10 +165,10 @@ tread_fx_loop(localclientnum) {
 sndplaymud() {
   origin3 = self gettagorigin("tag_wheel_back_left");
   ent3 = spawn(0, origin3, "script_origin");
-  ent3 linkto(self, "tag_wheel_back_left");
+  ent3 linkTo(self, "tag_wheel_back_left");
   origin4 = self gettagorigin("tag_wheel_back_right");
   ent4 = spawn(0, origin4, "script_origin");
-  ent4 linkto(self, "tag_wheel_back_right");
+  ent4 linkTo(self, "tag_wheel_back_right");
   ent3 playLoopSound("zmb_tank_mud_tread", 1);
   ent4 playLoopSound("zmb_tank_mud_tread", 1);
   self waittill("tread_fx_stop");

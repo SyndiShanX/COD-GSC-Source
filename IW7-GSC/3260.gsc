@@ -44,7 +44,7 @@ main() {
   level thread func_97BA();
   level.var_7089 = ::get_closest_player_near_interaction_point;
   level.fn_get_closest_entrance = scripts\cp\utility::get_closest_entrance;
-  level.no_pain_volume = getent("no_pain_volume", "targetname");
+  level.no_pain_volume = getEnt("no_pain_volume", "targetname");
 }
 
 base_eligable_for_reward_func(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -2221,11 +2221,11 @@ impale(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   var_15 = anglestoup(var_0.angles);
   var_10 = vectorcross(var_14, var_15);
   var_11 = scripts\engine\utility::spawn_tag_origin(var_4, axistoangles(var_14, var_10, var_15));
-  var_11 moveto(var_10, var_13);
+  var_11 moveTo(var_10, var_13);
   var_12 = spawnragdollconstraint(var_1, var_6, var_7, var_8);
   var_12.origin = var_11.origin;
   var_12.angles = var_11.angles;
-  var_12 linkto(var_11);
+  var_12 linkTo(var_11);
   thread impale_cleanup(var_1, var_11, var_13 + 0.05, var_12);
 }
 
@@ -2251,7 +2251,7 @@ launch_and_kill(var_0, var_1, var_2) {
       var_4 = 150;
     }
 
-    self setvelocity(vectornormalize(self.origin - var_0.origin) * var_3 + (0, 0, var_4));
+    self setvelocity(vectorNormalize(self.origin - var_0.origin) * var_3 + (0, 0, var_4));
     wait(0.1);
   } else {
     self.full_gib = 1;

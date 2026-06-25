@@ -37,7 +37,7 @@ function function_6a2c832a(localclientnum, oldval, newval, bnewent, binitialsnap
     playFXOnTag(localclientnum, level._effect["lightning_miss"], self, "tag_origin");
     level.var_1d5f245c[localclientnum] = self;
     ent = spawn(0, self.origin, "script_origin");
-    ent linkto(self);
+    ent linkTo(self);
     self thread function_80209369(localclientnum, ent);
     level notify("lightning_ball_created");
   }
@@ -63,9 +63,9 @@ function function_749acb79(localclientnum) {
   self.fx_arc = playFXOnTag(localclientnum, level._effect["lightning_arc"], self.e_fx, "tag_origin");
   while(true) {
     var_8d0b58f1 = self gettagorigin("J_SpineUpper");
-    self.e_fx moveto(var_8d0b58f1, 0.1);
+    self.e_fx moveTo(var_8d0b58f1, 0.1);
     util::server_wait(localclientnum, 0.5);
-    self.e_fx moveto(var_46352a82.origin, 0.1);
+    self.e_fx moveTo(var_46352a82.origin, 0.1);
     util::server_wait(localclientnum, 0.5);
   }
 }

@@ -164,7 +164,7 @@ function private function_3e9077b(localclientnum) {
 
       player_angles = player getplayerangles();
       player_forward = anglesToForward(player_angles);
-      var_e1a2a16a = vectornormalize(to_self);
+      var_e1a2a16a = vectorNormalize(to_self);
 
       if(vectordot(player_forward, var_e1a2a16a) < var_81f254ba) {
         continue;
@@ -183,12 +183,12 @@ function private function_3e9077b(localclientnum) {
       }
 
       var_9e9288e5 = (to_self[0], to_self[1], 0);
-      var_77490c15 = vectornormalize(var_9e9288e5);
+      var_77490c15 = vectorNormalize(var_9e9288e5);
       var_8aea606c = vectorcross(var_77490c15, (0, 0, 1));
       var_fada11c4 = 15 + 20;
       var_f63b37c5 = vectorscale(var_8aea606c, var_fada11c4);
-      var_ace65a4d = vectordot(vectornormalize(var_9e9288e5 + var_f63b37c5), var_77490c15);
-      var_d885fce5 = vectornormalize((player_forward[0], player_forward[1], 0));
+      var_ace65a4d = vectordot(vectorNormalize(var_9e9288e5 + var_f63b37c5), var_77490c15);
+      var_d885fce5 = vectorNormalize((player_forward[0], player_forward[1], 0));
       var_cf2630c5 = vectordot(var_77490c15, var_d885fce5) > var_ace65a4d;
 
       if(!var_cf2630c5) {

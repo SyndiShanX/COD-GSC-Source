@@ -449,7 +449,7 @@ bombs() {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  trigger = getent("sd_bomb_pickup_trig", "targetname");
+  trigger = getEnt("sd_bomb_pickup_trig", "targetname");
 
   if(!isDefined(trigger)) {
     util::error("<dev string:x38>");
@@ -457,7 +457,7 @@ bombs() {
     return;
   }
 
-  visuals[0] = getent("sd_bomb", "targetname");
+  visuals[0] = getEnt("sd_bomb", "targetname");
 
   if(!isDefined(visuals[0])) {
     util::error("<dev string:x67>");
@@ -507,7 +507,7 @@ bombs() {
     bombzone.angles = visuals[0].angles;
     bombzone gameobjects::allow_use(#"enemy");
     bombzone gameobjects::set_use_time(level.planttime);
-    trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+    trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
 
     if(!level.multibomb) {
       bombzone gameobjects::set_key_object(level.sdbomb);
@@ -556,7 +556,7 @@ bombs() {
 
     level.bombzones[level.bombzones.size] = bombzone;
     level.var_b10236da[level.var_b10236da.size] = var_69bc8821;
-    bombzone.bombdefusetrig = getent(visuals[0].target, "targetname");
+    bombzone.bombdefusetrig = getEnt(visuals[0].target, "targetname");
     assert(isDefined(bombzone.bombdefusetrig));
     bombzone.bombdefusetrig.origin += (0, 0, -10000);
     bombzone.bombdefusetrig.label = label;
@@ -866,7 +866,7 @@ bombplanted(destroyedobj, player) {
     trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), 0, player);
     tempangle = randomfloat(360);
     forward = (cos(tempangle), sin(tempangle), 0);
-    forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
+    forward = vectorNormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
     dropangles = vectortoangles(forward);
     level.sdbombmodel = spawn("script_model", trace[#"position"]);
     level.sdbombmodel.angles = dropangles;
@@ -879,7 +879,7 @@ bombplanted(destroyedobj, player) {
   trigger = destroyedobj.bombdefusetrig;
   trigger function_682f34cf(-400);
   trigger.origin = level.sdbombmodel.origin;
-  trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  trigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   visuals = [];
   defuseobject = gameobjects::create_use_object(game.attackers, trigger, visuals, (0, 0, 32), #"sd_defuse_prompt", 1, 1);
   defuseobject gameobjects::allow_use(#"enemy");

@@ -144,7 +144,7 @@ func_E731(var_0, var_1, var_2, var_3) {
   }
 
   for(;;) {
-    self rotateyaw(var_0, var_1);
+    self rotateYaw(var_0, var_1);
     wait(var_1);
   }
 }
@@ -156,7 +156,7 @@ func_4A26(var_0, var_1) {
   var_5 = 10000;
   var_6 = cos(var_3) * var_4;
   var_7 = sin(var_3) * var_4;
-  var_8 = vectornormalize((var_6, var_7, var_5));
+  var_8 = vectorNormalize((var_6, var_7, var_5));
   var_8 = var_8 * var_4;
   var_9 = self.var_117AF.origin + var_8 + (0, 0, 1000);
   var_10 = self.var_117AF.origin + var_8;
@@ -200,7 +200,7 @@ func_117AE(var_0, var_1) {
   var_0 endon("death");
   level endon("game_ended");
   var_0.owner playlocalsound("thor_init_plr");
-  var_0 moveto(var_1, 1);
+  var_0 moveTo(var_1, 1);
   var_0 scriptmodelplayanim("iw7_mp_killstreak_thor_idle", 1);
   var_0 setscriptablepartstate("thrusters", "drop", 0);
   scripts\mp\shellshock::_earthquake(0.15, 2, var_0.origin, 2000);
@@ -248,7 +248,7 @@ func_117AE(var_0, var_1) {
   var_0 scriptmodelplayanim("iw7_mp_killstreak_thor_extend_idle", 1);
   var_0 setscriptablepartstate("thrusters", "idle", 0);
   scripts\mp\shellshock::_earthquake(0.2, 0.76, var_0.origin, 1000);
-  var_0 linkto(self.var_117AF, "tag_origin");
+  var_0 linkTo(self.var_117AF, "tag_origin");
   var_0 scripts\mp\killstreaks\_utility::func_1843(var_0.streakname, undefined, var_0.owner, 1);
   var_8 = "icon_minimap_thor_friendly";
   var_0.minimapid = var_0 scripts\mp\killstreaks\_airdrop::createobjective(var_8, undefined, 1, 1, 1);
@@ -491,7 +491,7 @@ func_11795(var_0) {
   self notify("gone");
   self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_to_up", 1);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
-  self moveto(self.origin + (0, 0, 15000), 5, 3.5);
+  self moveTo(self.origin + (0, 0, 15000), 5, 3.5);
   self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_up", 1);
   self setscriptablepartstate("thrusters", "leave", 0);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(5);
@@ -670,13 +670,13 @@ func_4CF1(var_0, var_1) {
 
 func_3239(var_0) {
   self earthquakeforplayer(0.15, 0.25, var_0 gettagorigin("tag_player"), 50);
-  self playrumbleonentity("damage_light");
+  self playRumbleOnEntity("damage_light");
   thread func_1349D(var_0, 0.4);
 }
 
 func_69E6(var_0) {
   self earthquakeforplayer(0.4, 0.45, var_0 gettagorigin("tag_player"), 1000);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   thread func_1349D(var_0, 0.7);
 }
 
@@ -890,7 +890,7 @@ thor_watchdebugtogglemovement(var_0) {
       continue;
     }
 
-    self linkto(var_0.var_117AF, "tag_origin");
+    self linkTo(var_0.var_117AF, "tag_origin");
     var_1 = 1;
   }
 }
@@ -1024,7 +1024,7 @@ delayseekopentargetinview(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(var_4)) {
-    self missile_settargetent(var_4);
+    self missile_settargetEnt(var_4);
     self missile_setflightmodedirect();
     var_4.thortargetted = 1;
     var_4 thread watchtarget(self);
@@ -1075,7 +1075,7 @@ func_50E6(var_0, var_1) {
   self.owner endon("disconnect");
   wait(var_0);
   if(isDefined(var_1)) {
-    self missile_settargetent(var_1);
+    self missile_settargetEnt(var_1);
   }
 
   self missile_setflightmodedirect();

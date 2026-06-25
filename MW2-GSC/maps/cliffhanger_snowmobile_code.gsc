@@ -108,7 +108,7 @@ modulate_speed_based_on_distance() {
 }
 
 stop_modulation_at_big_hill() {
-  price_goes_down_hill = getent("price_goes_down_hill", "targetname");
+  price_goes_down_hill = getEnt("price_goes_down_hill", "targetname");
   for(;;) {
     price_goes_down_hill waittill("trigger", other);
     if(!isalive(other)) {
@@ -145,7 +145,7 @@ price_leads_player_to_heli() {
   level.ending_heli ent_flag_wait("landed");
 
   level.ending_heli anim_reach_solo(level.price, "evac", "tag_detach");
-  level.price linkto(level.ending_heli, "tag_detach");
+  level.price linkTo(level.ending_heli, "tag_detach");
   delaythread(6, ::flag_set, "price_enters_heli");
   level.ending_heli anim_single_solo(level.price, "evac", "tag_detach");
 }
@@ -204,7 +204,7 @@ player_jolts_house() {
 
 friends_drive() {
   self.hero = true;
-  price_bike_path = getent("price_bike_path", "targetname");
+  price_bike_path = getEnt("price_bike_path", "targetname");
   for(;;) {
     self vehicleDriveTo(price_bike_path.origin, 20);
     if(distance(self.origin, price_bike_path.origin) < price_bike_path.radius) {
@@ -228,8 +228,8 @@ speed_print() {
 }
 
 track_player_ride_progress() {
-  avalanche_progress_org = getent("avalanche_progress_org", "targetname");
-  targ = getent(avalanche_progress_org.target, "targetname");
+  avalanche_progress_org = getEnt("avalanche_progress_org", "targetname");
+  targ = getEnt(avalanche_progress_org.target, "targetname");
   dist = distance(avalanche_progress_org.origin, targ.origin);
   for(;;) {
     array = get_progression_between_points(self.origin, avalanche_progress_org.origin, targ.origin);
@@ -260,8 +260,8 @@ avalache_chase_vehicle_spawner_think() {
 }
 
 snowmobile_maintains_distance_behind_player() {
-  avalanche_progress_org = getent("avalanche_progress_org", "targetname");
-  targ = getent(avalanche_progress_org.target, "targetname");
+  avalanche_progress_org = getEnt("avalanche_progress_org", "targetname");
+  targ = getEnt(avalanche_progress_org.target, "targetname");
   start_time = gettime();
 
   self Vehicle_SetSpeed(35, 25, 25);
@@ -320,7 +320,7 @@ avalanche_section() {
 
   level.avalanche_vehicles[level.avalanche_vehicles.size] = self;
   fxmodel = spawn_tag_origin();
-  fxmodel linkto(self, "tag_origin", (0, 0, 256), (0, 0, -90));
+  fxmodel linkTo(self, "tag_origin", (0, 0, 256), (0, 0, -90));
   playFXOnTag(level._effect["avalanche_loop_large"], fxmodel, "tag_origin");
   thread gopath(self);
   self.personal_offset = 2000;
@@ -330,15 +330,15 @@ avalanche_section() {
 avalanche_maintains_distance_behind_player() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "main_avalanche") {
     level.main_avalanche = self;
-    avalanche_trigger = getent("avalanche_trigger", "targetname");
+    avalanche_trigger = getEnt("avalanche_trigger", "targetname");
     avalanche_trigger playSound("avalanche_ambiance_main");
     self.progress = 0;
     avalanche_trigger thread trigger_follows_avalanche();
     avalanche_trigger thread trigger_kills_vehicles();
   }
 
-  avalanche_progress_org = getent("avalanche_progress_org", "targetname");
-  targ = getent(avalanche_progress_org.target, "targetname");
+  avalanche_progress_org = getEnt("avalanche_progress_org", "targetname");
+  targ = getEnt(avalanche_progress_org.target, "targetname");
   for(;;) {
     array = get_progression_between_points(self.origin, avalanche_progress_org.origin, targ.origin);
     progress = array["progress"];
@@ -369,8 +369,8 @@ avalanche_maintains_distance_behind_player() {
 }
 
 trigger_follows_avalanche() {
-  avalanche_progress_org = getent("avalanche_progress_org", "targetname");
-  targ = getent(avalanche_progress_org.target, "targetname");
+  avalanche_progress_org = getEnt("avalanche_progress_org", "targetname");
+  targ = getEnt(avalanche_progress_org.target, "targetname");
   angles = vectortoangles(avalanche_progress_org.origin - targ.origin);
   self.angles = angles + (0, 90, 0);
 
@@ -525,10 +525,10 @@ hk_heli() {
     flag_wait("enemies_persue_on_bike");
   }
 
-  hk_spawner = getent("hunter_killer", "targetname");
+  hk_spawner = getEnt("hunter_killer", "targetname");
 
   if(level.start_point == "snowspawn") {
-    hk_spawner = getent("hunter_killer_start", "targetname");
+    hk_spawner = getEnt("hunter_killer_start", "targetname");
     wait(1);
   }
 
@@ -557,7 +557,7 @@ hk_fires_on_player() {
   level.hk_lookat_ent.origin = level.player.origin;
   target_guide = spawn("script_origin", level.player.origin);
 
-  self setturrettargetent(level.hk_lookat_ent, (0, 0, 0));
+  self setturrettargetEnt(level.hk_lookat_ent, (0, 0, 0));
 
   self setlookatent(level.player);
 
@@ -573,7 +573,7 @@ hk_fires_on_player() {
   level.hk_lookat_ent.origin = level.player.origin + forward_org;
 
   target_guide.origin = level.hk_lookat_ent.origin;
-  target_guide linkto(level.player);
+  target_guide linkTo(level.player);
 
   printTime = 5;
 
@@ -826,11 +826,11 @@ set_obj_point_from_flag(index, flagname) {
   if(!isDefined(level.player_snowmobile)) {
     return;
   }
-  objective_end_org = getent("objective_end_org", "targetname");
+  objective_end_org = getEnt("objective_end_org", "targetname");
   dist = distance(objective_end_org.origin, level.player_snowmobile.origin);
 
   trigger = getentwithflag(flagname);
-  ent = getent(trigger.target, "targetname");
+  ent = getEnt(trigger.target, "targetname");
   angles = vectortoangles(ent.origin - trigger.origin);
   forward = anglesToForward(angles);
   ent.origin = trigger.origin + forward * 500000;
@@ -904,7 +904,7 @@ track_player_position() {
 
 cliff_attacker_think() {
   startPos = self.origin;
-  targ = getent(self.target, "targetname");
+  targ = getEnt(self.target, "targetname");
   angles = targ.angles;
   deathanim = level.cliffdeath_anims[level.cliffdeath_anims_index];
   level.cliffdeath_anims_index++;
@@ -1041,14 +1041,14 @@ ending_heli_think() {
   model = spawn_anim_model("player_rig");
   model hide();
 
-  model linkto(self, "tag_detach", (0, 0, 0), (0, 0, 0));
+  model linkTo(self, "tag_detach", (0, 0, 0), (0, 0, 0));
   self thread anim_single_solo(model, "player_evac", "tag_detach");
   level.player PlayerLinkToBlend(model, "tag_origin", 0.5, 0.2, 0.2);
   delaythread(0.5, ::reset_player_fov, model, "tag_origin");
 
   wait(6);
   flag_wait("price_enters_heli");
-  path = getstruct("ending_heli_escape_path", "targetname");
+  path = getStruct("ending_heli_escape_path", "targetname");
   self thread vehicle_paths(path);
   flag_wait("ending_heli_leaves");
 
@@ -1133,7 +1133,7 @@ ending_heli_fly_off_trigger_think() {
   }
   flag_set("bad_heli_goes_to_death_position");
 
-  path = getstruct(self.target, "targetname");
+  path = getStruct(self.target, "targetname");
   level.hk SetVehGoalPos(path.origin, true);
 }
 
@@ -1181,7 +1181,7 @@ player_path_trigger_think() {
 
 recover_vehicle_path_trigger() {
   for(;;) {
-    trigger = getent("recover_vehicle_path_trigger", "targetname");
+    trigger = getEnt("recover_vehicle_path_trigger", "targetname");
     trigger waittill("trigger", other);
     if(other.vehicletype == "snowmobile_friendly") {
       break;

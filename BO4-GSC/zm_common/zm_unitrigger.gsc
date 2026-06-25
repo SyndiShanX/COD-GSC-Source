@@ -576,9 +576,9 @@ function_5d7dd248(s_stub, trigger) {
 function_d0676c62(s_stub, trigger, player) {
   if(isDefined(s_stub.cursor_hint)) {
     if(function_68f2282d(s_stub.cursor_hint) && isDefined(s_stub.cursor_hint_weapon)) {
-      trigger setcursorhint(s_stub.cursor_hint, s_stub.cursor_hint_weapon);
+      trigger setCursorHint(s_stub.cursor_hint, s_stub.cursor_hint_weapon);
     } else {
-      trigger setcursorhint(s_stub.cursor_hint);
+      trigger setCursorHint(s_stub.cursor_hint);
     }
   }
 
@@ -587,7 +587,7 @@ function_d0676c62(s_stub, trigger, player) {
       if(isDefined(s_stub.var_8d306e51) && s_stub.var_8d306e51) {
         trigger sethintstringforplayer(player, s_stub.hint_string, s_stub.hint_parm1, s_stub.hint_parm2);
       } else {
-        trigger sethintstring(s_stub.hint_string, s_stub.hint_parm1, s_stub.hint_parm2);
+        trigger setHintString(s_stub.hint_string, s_stub.hint_parm1, s_stub.hint_parm2);
       }
 
       return;
@@ -597,7 +597,7 @@ function_d0676c62(s_stub, trigger, player) {
       if(isDefined(s_stub.var_8d306e51) && s_stub.var_8d306e51) {
         trigger sethintstringforplayer(player, s_stub.hint_string, s_stub.hint_parm1);
       } else {
-        trigger sethintstring(s_stub.hint_string, s_stub.hint_parm1);
+        trigger setHintString(s_stub.hint_string, s_stub.hint_parm1);
       }
 
       return;
@@ -608,7 +608,7 @@ function_d0676c62(s_stub, trigger, player) {
       return;
     }
 
-    trigger sethintstring(s_stub.hint_string);
+    trigger setHintString(s_stub.hint_string);
   }
 }
 
@@ -645,7 +645,7 @@ function_2565f0b0(s_stub, trigger) {
     return;
   }
 
-  trigger usetriggerrequirelookat(isDefined(s_stub.require_look_at) && s_stub.require_look_at);
+  trigger useTriggerRequireLookAt(isDefined(s_stub.require_look_at) && s_stub.require_look_at);
   trigger usetriggerrequirelooktoward(isDefined(s_stub.require_look_toward) && s_stub.require_look_toward);
 }
 
@@ -784,7 +784,7 @@ function_3c84a41e(stub, zone_name) {
 }
 
 function_f1854fb(stub) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isarray(player.var_13a302d2)) {
       player.var_13a302d2 = array::remove_undefined(player.var_13a302d2, 0);
     }
@@ -972,7 +972,7 @@ build_trigger_from_unitrigger_stub(s_stub, player) {
     }
 
     function_d0676c62(s_stub, trigger, player);
-    trigger triggerignoreteam();
+    trigger triggerIgnoreTeam();
     function_2565f0b0(s_stub, trigger);
     copy_zombie_keys_onto_trigger(trigger, s_stub);
 
@@ -1144,7 +1144,7 @@ function_bb454fe6() {
     }
 
     candidate_list = arraycombine(candidate_list, level._unitriggers.dynamic_stubs, 1, 0);
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       player = players[i];
@@ -1311,7 +1311,7 @@ run_visibility_function_for_all_triggers() {
       return;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(isDefined(self.playertrigger[players[i] getentitynumber()])) {
@@ -1323,7 +1323,7 @@ run_visibility_function_for_all_triggers() {
   }
 
   if(isDefined(self.trigger)) {
-    self.trigger[[self.prompt_and_visibility_func]](getplayers()[0]);
+    self.trigger[[self.prompt_and_visibility_func]](getPlayers()[0]);
   }
 }
 

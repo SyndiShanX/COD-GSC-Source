@@ -115,11 +115,11 @@ delete_zombie_noone_looking(how_close) {
 player_can_see_me(player) {
   playerangles = player getplayerangles();
   playerforwardvec = anglesToForward(playerangles);
-  playerunitforwardvec = vectornormalize(playerforwardvec);
+  playerunitforwardvec = vectorNormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player getorigin();
   playertobanzaivec = banzaipos - playerpos;
-  playertobanzaiunitvec = vectornormalize(playertobanzaivec);
+  playertobanzaiunitvec = vectorNormalize(playertobanzaivec);
   forwarddotbanzai = vectordot(playerunitforwardvec, playertobanzaiunitvec);
 
   if(forwarddotbanzai >= 1) {

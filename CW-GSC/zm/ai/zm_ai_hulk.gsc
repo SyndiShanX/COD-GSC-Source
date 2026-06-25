@@ -371,7 +371,7 @@ function private function_f4ca4a44() {
   self.var_d345ded2 = gettime() + 0;
   self.var_fa4cbfee = 1;
   self function_eb9ae5a8();
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self.var_bc8466c7 = 1;
   self.var_122bd98d = 1;
   self.var_f302bbc2 = self.origin;
@@ -406,7 +406,7 @@ function private function_91c27ca7(model_name, tag, origin_offset, angle_offset)
   tag_origin = self gettagorigin(tag);
   tag_angles = self gettagangles(tag);
   model = util::spawn_model(model_name, tag_origin, tag_angles);
-  model linkto(self, tag, origin_offset, angle_offset);
+  model linkTo(self, tag, origin_offset, angle_offset);
   model ghost();
   model val::set(#"hulk", "takedamage", 1);
   model.parent = self;
@@ -453,7 +453,7 @@ function function_da3fbd96() {
       function_e5717670(self.enemy);
     }
 
-    foreach(enemy in getplayers(undefined, self.origin, 1500)) {
+    foreach(enemy in getPlayers(undefined, self.origin, 1500)) {
       if(namespace_85745671::is_player_valid(enemy) && !isDefined(self.var_f7c25ec3[enemy getentitynumber()])) {
         function_e5717670(enemy);
       }
@@ -574,7 +574,7 @@ function private function_11258b29() {
 
 function private function_8fe2ab48(dist) {
   var_23d29c9b = self.var_da0b6672 * self.var_da0b6672;
-  players = getplayers();
+  players = getPlayers();
 
   if(self function_e0487da2()) {
     var_1b64c75 = getdvarint(#"hash_3f0d541dc7a39a10", 300);
@@ -871,7 +871,7 @@ function private function_13fb73f5(entity) {
   }
 
   if(function_5e80cd88(entity) && var_fb735662) {
-    nearby_players = getplayers(undefined, entity.origin, 500);
+    nearby_players = getPlayers(undefined, entity.origin, 500);
 
     if(nearby_players.size <= 0) {
       return true;
@@ -1006,7 +1006,7 @@ function private function_d952c34e(entity, var_978b5b05 = 1) {
     return false;
   }
 
-  if(entity.var_53a43cbf > getdvarint(#"hash_464e01979e8dff9d", 100) * getplayers().size) {
+  if(entity.var_53a43cbf > getdvarint(#"hash_464e01979e8dff9d", 100) * getPlayers().size) {
     return false;
   }
 
@@ -1097,7 +1097,7 @@ function private function_63dfbf49(entity, asmstatename) {
     return 4;
   }
 
-  nearby_players = getplayers(undefined, asmstatename.origin, 500);
+  nearby_players = getPlayers(undefined, asmstatename.origin, 500);
 
   if(nearby_players.size > 0) {
     return 4;
@@ -1142,7 +1142,7 @@ function private function_32ac1e84(entity) {
     }
 
     enemy = entity.favoriteenemy;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       enemy = undefined;
@@ -1176,7 +1176,7 @@ function private function_32ac1e84(entity) {
                 enemy clientfield::increment_to_player("hulk_melee_shake", 1);
               }
 
-              knock_dir = vectornormalize(vehicle.origin - var_1b0f41cd);
+              knock_dir = vectorNormalize(vehicle.origin - var_1b0f41cd);
               knock_dir = (knock_dir[0], knock_dir[1], 0.1);
               vehicle launchvehicle(knock_dir * 200, var_1b0f41cd, 0, 0);
               vehicle_damage = max(vehicle.maxhealth * 0.25, 500);
@@ -1199,7 +1199,7 @@ function private function_32ac1e84(entity) {
 
           enemy playerknockback(1);
           var_cbc73ac4 = anglestoup(entity gettagangles("j_pocketdown4_le")) * -1;
-          knock_dir = vectornormalize(var_cbc73ac4);
+          knock_dir = vectorNormalize(var_cbc73ac4);
           knock_dir = (knock_dir[0], knock_dir[1], 0.1);
           enemy applyknockback(200, knock_dir);
           enemy playerknockback(0);
@@ -1303,7 +1303,7 @@ function private function_59e78833(pos, damage, damage_min, inner_radius, outer_
 
     if(isDefined(knockback)) {
       player playerknockback(1);
-      knock_dir = vectornormalize(player.origin - pos);
+      knock_dir = vectorNormalize(player.origin - pos);
       knock_dir = (knock_dir[0], knock_dir[1], 0.1);
       player applyknockback(int(knockback * damage_ratio), knock_dir);
       player playerknockback(0);
@@ -1330,7 +1330,7 @@ function private function_59e78833(pos, damage, damage_min, inner_radius, outer_
     vehicle dodamage(vehicle_damage, self.origin, self, self);
 
     if(isDefined(vehicle)) {
-      knock_dir = vectornormalize(vehicle.origin - pos);
+      knock_dir = vectorNormalize(vehicle.origin - pos);
       knock_dir = (knock_dir[0], knock_dir[1], 0.1);
       vehicle launchvehicle(knock_dir * 100, pos, 0, 0);
     }
@@ -1447,7 +1447,7 @@ function private function_ee80ec78(entity) {
 }
 
 function private function_f39d491b(player) {
-  var_3ca7e6d4 = vectornormalize(self.origin - player.origin);
+  var_3ca7e6d4 = vectorNormalize(self.origin - player.origin);
   offset = player.origin + var_3ca7e6d4 * 250;
   return offset;
 }
@@ -1531,7 +1531,7 @@ function function_75a4863b(aitype, origin, target_pos, var_c165d3f1) {
   wait 0.75;
   function_81df7d97();
   ai_spawned = namespace_85745671::function_9d3ad056(aitype, origin, vectortoangles(target_pos - origin), "hulk_zombie");
-  players = getplayers(undefined, origin, 192);
+  players = getPlayers(undefined, origin, 192);
 
   foreach(player in players) {
     dist = distance(player.origin, origin);
@@ -1655,7 +1655,7 @@ function private function_8a252ee4(entity) {
   if(entity.arm_state === "arm_raised") {
     var_f11e58cf = getdvarfloat(#"hash_7b8c887955717388", 1.5);
     var_7480a4f1 = 900;
-    var_7ee6937e = vectornormalize((target_pos[0], target_pos[1], 0) - (var_8598bad6[0], var_8598bad6[1], 0));
+    var_7ee6937e = vectorNormalize((target_pos[0], target_pos[1], 0) - (var_8598bad6[0], var_8598bad6[1], 0));
     target_pos -= var_7ee6937e * 80;
   }
 
@@ -1674,7 +1674,7 @@ function private function_8a252ee4(entity) {
 
     var_ea3a82ca = length((to_target[0], to_target[1], to_target[2])) / var_b2ca2007;
     flat_dir = (dir[0], dir[1], 0);
-    flat_dir = vectornormalize(flat_dir);
+    flat_dir = vectorNormalize(flat_dir);
     velocity = flat_dir * var_ea3a82ca;
     launch_speed = var_b0eeef83;
     time = var_b2ca2007;
@@ -1682,9 +1682,9 @@ function private function_8a252ee4(entity) {
 
   velocity = (velocity[0], velocity[1], launch_speed);
   grenade = entity magicgrenadetype(var_d54a1968, var_8598bad6, velocity);
-  playsoundatposition(#"hash_4897d1a140f146f5", var_8598bad6);
+  playSoundAtPosition(#"hash_4897d1a140f146f5", var_8598bad6);
   var_b1d0a64 = util::spawn_model(#"c_t9_zmb_hellhound", var_8598bad6, grenade.angles);
-  var_b1d0a64 linkto(grenade, "tag_origin");
+  var_b1d0a64 linkTo(grenade, "tag_origin");
   var_b1d0a64 clientfield::set("dog_projectile_fx", 1);
   var_b1d0a64 useanimtree("generic");
   var_b1d0a64 thread animation::play(#"ai_t9_zm_zombie_dog_orda_pose_hellhound_01", var_b1d0a64, (30, var_b1d0a64.angles[1], var_b1d0a64.angles[2]));
@@ -1805,7 +1805,7 @@ function private function_e4520a56(entity) {
 
 function private function_fd09fbc0(entity) {
   assert(isDefined(entity.var_f01add23), "<dev string:x102>");
-  n_players = getplayers().size;
+  n_players = getPlayers().size;
   var_fc398f5e = n_players * 2;
   var_8214bfd5 = floor(var_fc398f5e / 4) + (3 - entity.var_f01add23 > var_fc398f5e % 4 ? 0 : 1);
   entity.var_f01add23 += 1;
@@ -1865,10 +1865,10 @@ function function_187bcbe(var_717ee5de) {
 
   if(isDefined(self.var_66a3d186)) {
     var_b048de07 = vectorlerp(self.var_66a3d186 gettagorigin("j_head_mouth1"), self.var_66a3d186 gettagorigin("j_head_mouth5"), 0.5);
-    launch_dir = vectornormalize(var_b048de07 - self.origin);
-    self moveto(self.origin + launch_dir * 100, 0.25);
+    launch_dir = vectorNormalize(var_b048de07 - self.origin);
+    self moveTo(self.origin + launch_dir * 100, 0.25);
     wait 0.25;
-    self moveto(self.origin + launch_dir * 100, 2, 0, 1.5);
+    self moveTo(self.origin + launch_dir * 100, 2, 0, 1.5);
     wait 2;
   }
 
@@ -1893,7 +1893,7 @@ function function_187bcbe(var_717ee5de) {
 
       var_f6107d1 = (self.origin[0], self.origin[1], var_2f769fb1[2] + sin(var_2d0b175) * 100);
       var_2d0b175 += 0.02;
-      var_8a380e81 = vectornormalize(var_2f769fb1 - var_f6107d1);
+      var_8a380e81 = vectorNormalize(var_2f769fb1 - var_f6107d1);
       circle_pos = -1 * var_8a380e81 * 200 + var_2f769fb1;
       self.var_88b20e7f = min(self.var_88b20e7f, 125);
 
@@ -1950,7 +1950,7 @@ function function_187bcbe(var_717ee5de) {
       }
 
       var_2f769fb1 = self.target_ent.origin + var_8134d046;
-      to_target = vectornormalize(var_2f769fb1 - self.origin);
+      to_target = vectorNormalize(var_2f769fb1 - self.origin);
       target_pos = to_target * self.var_88b20e7f + self.origin;
       self.var_88b20e7f = min(self.var_88b20e7f + 5, var_f21cd23e);
       target_pos += function_d321dcc8(1, to_target);
@@ -2019,12 +2019,12 @@ function function_187bcbe(var_717ee5de) {
 
       if(zombie_utility::is_player_valid(self.target_ent, 1, 1)) {
         var_74970a5b = self.target_ent getEye() - self.origin;
-        var_29f62e8d = vectornormalize(var_74970a5b);
+        var_29f62e8d = vectorNormalize(var_74970a5b);
 
         if(isDefined(self.momentum_dir) && vectordot(self.momentum_dir, var_29f62e8d) > 0) {
           target_pos = self.origin + var_29f62e8d * self.var_88b20e7f + var_74970a5b;
           target_pos = (target_pos[0], target_pos[1], self.origin[2]);
-          self moveto(target_pos, 0.2);
+          self moveTo(target_pos, 0.2);
           wait 0.2;
         }
       }
@@ -2042,9 +2042,9 @@ function function_187bcbe(var_717ee5de) {
       }
 
       self.var_88b20e7f = min(self.var_88b20e7f + 5, var_f21cd23e);
-      to_target = vectornormalize(var_2f769fb1 - (self.origin[0], self.origin[1], var_2f769fb1[2]));
+      to_target = vectorNormalize(var_2f769fb1 - (self.origin[0], self.origin[1], var_2f769fb1[2]));
       circle_pos = var_2f769fb1 - to_target * 200;
-      target_pos = vectornormalize(circle_pos - self.origin) * self.var_88b20e7f + self.origin;
+      target_pos = vectorNormalize(circle_pos - self.origin) * self.var_88b20e7f + self.origin;
       target_pos += function_4e15ba87(var_2f769fb1);
       target_pos += function_3a260c9e(var_c0500b76, to_target, var_584124bc, var_1f2ee4ae);
 
@@ -2077,7 +2077,7 @@ function private function_d321dcc8(var_af0000ca, to_target) {
     recordline(self.origin, var_d01d9a4b, (1, 1, 0));
 
     if(fraction > 0 && fraction < 1) {
-      debugstar(vectornormalize(var_d01d9a4b - self.origin) * fraction + self.origin, 20, (1, 0, 0));
+      debugstar(vectorNormalize(var_d01d9a4b - self.origin) * fraction + self.origin, 20, (1, 0, 0));
     }
   }
 
@@ -2134,7 +2134,7 @@ function private function_c9bcf1cb(var_2f769fb1, var_1f14bda8, var_4717cb50) {
   }
 
   if(!isDefined(self.momentum_dir)) {
-    self.momentum_dir = vectornormalize(var_2f769fb1 - self.origin);
+    self.momentum_dir = vectorNormalize(var_2f769fb1 - self.origin);
   }
 
   prev_position = self.origin;
@@ -2151,9 +2151,9 @@ function private function_c9bcf1cb(var_2f769fb1, var_1f14bda8, var_4717cb50) {
     }
   }
 
-  self moveto(target_pos, 0.2);
+  self moveTo(target_pos, 0.2);
   waitresult = self waittilltimeout(0.2, #"movedone");
-  self.momentum_dir = vectornormalize(self.origin - prev_position);
+  self.momentum_dir = vectorNormalize(self.origin - prev_position);
 
   if(waitresult._notify === "movedone") {
     return true;
@@ -2528,8 +2528,8 @@ function function_4306cd59(entity, target_node, var_970ba289) {
 function function_9ce857d4(entity, node, target_node) {
   if(isDefined(node) && !isinarray(entity.var_7f73c6e1, node) && node !== entity.var_6265733) {
     if(isDefined(entity.var_6265733)) {
-      var_389d01c3 = vectornormalize(target_node.origin - entity.var_6265733.origin);
-      var_8e6f4a26 = vectornormalize(node.origin - target_node.origin);
+      var_389d01c3 = vectorNormalize(target_node.origin - entity.var_6265733.origin);
+      var_8e6f4a26 = vectorNormalize(node.origin - target_node.origin);
 
       if(vectordot(var_389d01c3, var_8e6f4a26) < -0.5) {
         return undefined;
@@ -2565,10 +2565,10 @@ function function_5675af77(entity, target_node) {
     return target_node.origin;
   }
 
-  var_389d01c3 = vectornormalize(target_node.origin - entity.origin);
+  var_389d01c3 = vectorNormalize(target_node.origin - entity.origin);
   point = math::closest_point_on_line(entity.origin + var_389d01c3 * getdvarfloat(#"hash_51c7ebf6d0d5f3ad", 350), entity.var_6265733.origin, target_node.origin);
 
-  if(vectordot(vectornormalize(point - entity.origin), var_389d01c3) > 0.984808) {
+  if(vectordot(vectorNormalize(point - entity.origin), var_389d01c3) > 0.984808) {
     point = target_node.origin;
   }
 
@@ -3222,8 +3222,8 @@ function function_91f14f2() {
 
 function function_36bbd77f() {
   var_d610cbe2 = sqr(1000);
-  player = getplayers()[0];
-  player_vec = vectornormalize(anglesToForward(player getplayerangles()));
+  player = getPlayers()[0];
+  player_vec = vectorNormalize(anglesToForward(player getplayerangles()));
   player_eye = player.origin + (0, 0, player getplayerviewheight());
   node_radius = getdvarfloat(#"hash_316ed098dd9efb4c", 500);
   trace = bulletTrace(player_eye, player_eye + player_vec * 1000, 0, player);

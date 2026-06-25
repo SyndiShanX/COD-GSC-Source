@@ -1103,7 +1103,7 @@ _id_CC55(var_0) {
   var_1 setotherent(self);
   var_1 setscriptablepartstate("effects", "active", 0);
   var_2 = var_1.origin + anglesToForward(var_1.angles) * 256;
-  var_1 moveto(var_2, var_0);
+  var_1 moveTo(var_2, var_0);
   scripts\engine\utility::_id_108A8(var_0, "last_stand", "death");
 
   if(isDefined(var_1)) {
@@ -1750,7 +1750,7 @@ _id_CBD9(var_0, var_1) {
   var_0._id_6089 setotherent(var_0);
   var_0._id_6089 setscriptablepartstate("effects", "active", 0);
   var_2 = var_0._id_6089.origin + anglesToForward(var_0._id_6089.angles) * 1750;
-  var_0._id_6089 moveto(var_2, var_1);
+  var_0._id_6089 moveTo(var_2, var_1);
   var_0 scripts\engine\utility::_id_108B2(var_1, "last_stand", "death", "scope_radar_ads_out", "weapon_change", "unsetScopeRadar");
 
   if(isDefined(var_0._id_39F0)) {

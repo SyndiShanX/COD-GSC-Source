@@ -75,7 +75,7 @@ dragon_fireworks_think(str_tail_noteworthy, str_which_drg) {
   }
 
   for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
-    m_tail = getstruct(str_tail_noteworthy, "targetname");
+    m_tail = getStruct(str_tail_noteworthy, "targetname");
     playFX(localclientnum, level._effect[str_fx], m_tail.origin, anglesToForward(m_tail.angles));
     level thread play_fireworks_audio(m_tail.origin);
   }
@@ -87,7 +87,7 @@ dragon_fireworks_think(str_tail_noteworthy, str_which_drg) {
     str_firework_name = str_which_drg + "_drg_firework_" + n_firework_id;
 
     for(localclientnum = 0; localclientnum < level.localplayers.size; localclientnum++) {
-      m_firework_loc = getstruct(str_firework_name, "targetname");
+      m_firework_loc = getStruct(str_firework_name, "targetname");
       playFX(localclientnum, level._effect[str_fx], m_firework_loc.origin, anglesToForward(m_firework_loc.angles));
       level thread play_fireworks_audio(m_firework_loc.origin);
     }
@@ -135,7 +135,7 @@ dragon_fireball_go(localclientnum, str_which_dragon) {
       origin = m_fxanim gettagorigin("tag_mouth_fx");
       playSound(0, "zmb_sq_fireball_start", origin);
       ent = spawn(0, origin, "script_origin");
-      ent linkto(m_fxanim, "tag_mouth_fx");
+      ent linkTo(m_fxanim, "tag_mouth_fx");
       ent playLoopSound("zmb_sq_fireball_loop", 0.1);
     }
   }

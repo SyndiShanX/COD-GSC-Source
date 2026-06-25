@@ -87,9 +87,9 @@ update_hint_string(player) {
 
         if(var_12680c28 != level.weaponnone) {
           if(function_8b1a219a()) {
-            self sethintstring(#"hash_21247f6d4bd72b9");
+            self setHintString(#"hash_21247f6d4bd72b9");
           } else {
-            self sethintstring(#"hash_51194149fb39a693");
+            self setHintString(#"hash_51194149fb39a693");
           }
 
           return true;
@@ -100,7 +100,7 @@ update_hint_string(player) {
         return false;
       }
     } else {
-      self sethintstring(#"zombie/perk_packapunch_busy");
+      self setHintString(#"zombie/perk_packapunch_busy");
       return true;
     }
   }
@@ -122,7 +122,7 @@ update_hint_string(player) {
   }
 
   if(zm_trial_disable_buys::is_active()) {
-    self sethintstring(#"hash_55d25caf8f7bbb2f");
+    self setHintString(#"hash_55d25caf8f7bbb2f");
     return true;
   }
 
@@ -145,48 +145,48 @@ update_hint_string(player) {
     if(isDefined(level.var_e4e8d300) && level.var_e4e8d300) {
       if(player function_7352d8cc(w_current)) {
         if(function_8b1a219a()) {
-          self sethintstring(#"hash_1a0df3bc59a8029b");
+          self setHintString(#"hash_1a0df3bc59a8029b");
         } else {
-          self sethintstring(#"hash_11c1749ce5b09c1f");
+          self setHintString(#"hash_11c1749ce5b09c1f");
         }
       } else if(function_8b1a219a()) {
-        self sethintstring(#"hash_4614bd9a185769d4");
+        self setHintString(#"hash_4614bd9a185769d4");
       } else {
-        self sethintstring(#"hash_3dfc1041d71fc05e");
+        self setHintString(#"hash_3dfc1041d71fc05e");
       }
     } else if(isDefined(pap_machine.var_b64e889a) && pap_machine.var_b64e889a) {
       if(player function_7352d8cc(w_current)) {
         if(function_8b1a219a()) {
-          self sethintstring(#"hash_23e352cd04548513", current_cost);
+          self setHintString(#"hash_23e352cd04548513", current_cost);
         } else {
-          self sethintstring(#"hash_6cd48e5ddab079ed", current_cost);
+          self setHintString(#"hash_6cd48e5ddab079ed", current_cost);
         }
       } else if(function_8b1a219a()) {
-        self sethintstring(#"hash_6942dfa9737b6ac8", current_cost);
+        self setHintString(#"hash_6942dfa9737b6ac8", current_cost);
       } else {
-        self sethintstring(#"hash_117f528808767024", current_cost);
+        self setHintString(#"hash_117f528808767024", current_cost);
       }
     } else if(player function_7352d8cc(w_current)) {
       if(function_8b1a219a()) {
-        self sethintstring(#"hash_7f57747f6802bc18", current_cost);
+        self setHintString(#"hash_7f57747f6802bc18", current_cost);
       } else {
-        self sethintstring(#"zombie/perk_packapunch_aat", current_cost);
+        self setHintString(#"zombie/perk_packapunch_aat", current_cost);
       }
     } else if(function_8b1a219a()) {
-      self sethintstring(#"hash_4ded27bb7bc35a8d", current_cost);
+      self setHintString(#"hash_4ded27bb7bc35a8d", current_cost);
     } else {
-      self sethintstring(#"zombie/perk_packapunch_damage", current_cost);
+      self setHintString(#"zombie/perk_packapunch_damage", current_cost);
     }
   } else if(isDefined(level.var_e4e8d300) && level.var_e4e8d300) {
     if(function_8b1a219a()) {
-      self sethintstring(#"hash_12517f2f23bd1966");
+      self setHintString(#"hash_12517f2f23bd1966");
     } else {
-      self sethintstring(#"zombie/perk_packapunch_free");
+      self setHintString(#"zombie/perk_packapunch_free");
     }
   } else if(function_8b1a219a()) {
-    self sethintstring(#"zombie/perk_packapunch_keyboard", current_cost);
+    self setHintString(#"zombie/perk_packapunch_keyboard", current_cost);
   } else {
-    self sethintstring(#"zombie/perk_packapunch", current_cost);
+    self setHintString(#"zombie/perk_packapunch", current_cost);
   }
 
   return true;

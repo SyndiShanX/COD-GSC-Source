@@ -210,7 +210,7 @@ function function_f0f36d47(localclientnum, var_d5fa8477) {
 }
 
 function function_1a594d26(localclientnum, var_d5fa8477) {
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     if(!player function_f0f36d47(localclientnum, var_d5fa8477)) {
       return false;
     }
@@ -338,7 +338,7 @@ function function_fd0c6ab2(params) {
   switch (params.name) {
     case #"hash_42041dee5640342d":
       s_bundle = getscriptbundle(params.value);
-      var_e915a27 = getent(0, "<dev string:x19c>", "<dev string:x1b5>");
+      var_e915a27 = getEnt(0, "<dev string:x19c>", "<dev string:x1b5>");
 
       if(isDefined(s_bundle.var_6073bf8f)) {
         var_e915a27 setModel(s_bundle.var_6073bf8f);

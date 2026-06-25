@@ -329,7 +329,7 @@ _fire() {
   if(!isdummytarget(self.target)) {
     var_1 = spawn("script_model", self.target.origin);
     var_1 setModel("tag_origin");
-    var_1 linkto(self.target);
+    var_1 linkTo(self.target);
     var_1.isdummytarget = 1;
   }
 
@@ -348,7 +348,7 @@ _fire() {
   }
 
   thread deployrainingmissiles(var_6, var_1, self.target);
-  var_0 playrumbleonentity("heavygun_fire");
+  var_0 playRumbleOnEntity("heavygun_fire");
   earthquake(0.3, 0.6, var_0.origin, 5000);
   self.target thread target_monitorfreelockedon(var_0, var_6, var_1);
 }
@@ -385,7 +385,7 @@ deployrainingmissiles(var_0, var_1, var_2) {
   var_0 delete();
   var_8 = anglesToForward(var_5);
   playFX(common_scripts\utility::getfx("FX_apache_raining_missile_spawn"), var_4, -1 * var_8);
-  var_7 playrumbleonentity("heavygun_fire");
+  var_7 playRumbleOnEntity("heavygun_fire");
   earthquake(0.2, 0.4, var_7.origin, 5000);
   var_9 = (0, 0, 1);
   var_5 = vectortoangles(var_9);
@@ -463,7 +463,7 @@ missile_ondeathdeletetarget(var_0) {
   var_1 = self.owner;
   self waittill("death");
   var_0 delete();
-  var_1 playrumbleonentity("heavygun_fire");
+  var_1 playRumbleOnEntity("heavygun_fire");
   earthquake(0.15, 0.3, var_1.origin, 5000);
 }
 
@@ -481,7 +481,7 @@ waittill_ent_moving_dir_world_relative(var_0, var_1, var_2) {
     if(!isDefined(var_0)) {
       return;
     }
-    var_4 = vectornormalize(var_0.origin - var_3);
+    var_4 = vectorNormalize(var_0.origin - var_3);
 
     if(vectordot(var_1, var_4) > 0) {
       break;

@@ -30,7 +30,7 @@ function proptrap_downdraft_rumble(localclientnum, oldval, newval, bnewent, bini
       }
     }
     foreach(e_pos in player.var_69abefde) {
-      e_pos playrumbleonentity(localclientnum, "zm_island_rumble_proptrap_downdraft");
+      e_pos playRumbleOnEntity(localclientnum, "zm_island_rumble_proptrap_downdraft");
     }
   } else {
     if(isDefined(player.var_69abefde)) {
@@ -64,7 +64,7 @@ function walltrap_draft_rumble(localclientnum, oldval, newval, bnewent, binitial
       }
     }
     foreach(e_pos in player.var_d33c558c) {
-      e_pos playrumbleonentity(localclientnum, "zm_island_rumble_proptrap_downdraft");
+      e_pos playRumbleOnEntity(localclientnum, "zm_island_rumble_proptrap_downdraft");
     }
   } else {
     if(isDefined(player.var_d33c558c)) {

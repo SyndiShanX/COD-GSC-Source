@@ -61,7 +61,7 @@ opening_main() {
 
   level thread lower_accuracy_for_event_2();
 
-  end_trigger = getent("event_1_ends", "targetname");
+  end_trigger = getEnt("event_1_ends", "targetname");
   end_trigger waittill("trigger");
   level notify("event_1_ends");
 
@@ -117,7 +117,7 @@ see1_intro() {
 
   level notify("start_chant");
 
-  spawn_trigger = getent("opening_vig_start", "targetname");
+  spawn_trigger = getEnt("opening_vig_start", "targetname");
   spawn_trigger trigger_off();
 
   all_friends_hold_fire();
@@ -127,11 +127,11 @@ see1_intro() {
     players[i] SetBlur(2, 0.05);
   }
 
-  spawner_1 = getent("opening_german_1", "targetname");
-  spawner_2 = getent("opening_german_2", "targetname");
-  spawner_3 = getent("opening_german_3", "targetname");
-  spawner_4 = getent("opening_russian_1", "targetname");
-  spawner_5 = getent("opening_russian_2", "targetname");
+  spawner_1 = getEnt("opening_german_1", "targetname");
+  spawner_2 = getEnt("opening_german_2", "targetname");
+  spawner_3 = getEnt("opening_german_3", "targetname");
+  spawner_4 = getEnt("opening_russian_1", "targetname");
+  spawner_5 = getEnt("opening_russian_2", "targetname");
 
   german_1 = spawn_guy(spawner_1);
   german_2 = spawn_guy(spawner_2);
@@ -142,7 +142,7 @@ see1_intro() {
 
   level thread opening_name_hide();
 
-  orig = getstruct("see1_collect_anim", "targetname");
+  orig = getStruct("see1_collect_anim", "targetname");
 
   level.russian_corpse = spawn("script_model", german_1.origin);
   level.russian_corpse.angles = german_1.angles;
@@ -222,7 +222,7 @@ see1_intro() {
     german_3 Detach(german_3.gearmodel, "");
   }
 
-  animspot = getent("intro_anim_node", "targetname");
+  animspot = getEnt("intro_anim_node", "targetname");
   reznov thread intro_wait_anim_done();
   level thread intro_russian_1_death(russian_1);
   level thread intro_german_1_death(russian_2);
@@ -241,7 +241,7 @@ see1_intro() {
   opening_knife = spawn("script_model", german_3 gettagorigin("TAG_WEAPON_LEFT"));
   opening_knife.angles = german_3 gettagangles("TAG_WEAPON_LEFT");
   opening_knife setModel("static_berlin_ger_knife");
-  opening_knife linkto(german_3, "TAG_WEAPON_LEFT");
+  opening_knife linkTo(german_3, "TAG_WEAPON_LEFT");
 
   level thread opening_timing();
 
@@ -316,7 +316,7 @@ drop_all_weapons(german) {
 
 #using_animtree("generic_human");
 opening_russian_corpse() {
-  animspot = getent("intro_anim_node", "targetname");
+  animspot = getEnt("intro_anim_node", "targetname");
   level.russian_corpse show();
   level.russian_corpse UseAnimTree(#animtree);
   level anim_loop_solo(level.russian_corpse, "intro_death", undefined, "stop_death_loop", animspot);
@@ -324,14 +324,14 @@ opening_russian_corpse() {
   level.russian_corpse show();
 }
 test_tanks() {
-  tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", (2800, -6613, -666), (0, 0, 0));
+  tank = spawnVehicle("vehicle_rus_tracked_t34", "tank", "t34", (2800, -6613, -666), (0, 0, 0));
 
   level.ev2_tank_3_can_mount = true;
   level thread maps\see1_event2::pacing_get_on_tank_3b(tank);
 }
 
 opening_fake_german() {
-  spawner = getent("opening_fake_german", "targetname");
+  spawner = getEnt("opening_fake_german", "targetname");
   spawned = spawner stalingradspawn(true);
   if(spawn_failed(spawned)) {
     return;
@@ -340,7 +340,7 @@ opening_fake_german() {
   spawned hold_fire();
   spawned.health = 99999;
 
-  trigger = getent("opening_field_spawners", "script_noteworthy");
+  trigger = getEnt("opening_field_spawners", "script_noteworthy");
   trigger waittill("trigger");
 
   spawned dodamage(spawned.health + 100, (0, 0, 0));
@@ -365,11 +365,11 @@ waking_up() {
     players[i] playerSetGroundReferenceEnt(level.ground_ref_ent);
   }
 
-  level.ground_ref_ent rotateto((-50, 30, 10), .2, 0.1, 0.1);
+  level.ground_ref_ent rotateTo((-50, 30, 10), .2, 0.1, 0.1);
 
   level waittill("stright_up_player");
 
-  level.ground_ref_ent rotateto((0, 0, 0), 4, 1, 1);
+  level.ground_ref_ent rotateTo((0, 0, 0), 4, 1, 1);
 }
 
 release_player_later(time) {}
@@ -418,7 +418,7 @@ intro_german_dialog() {
 intro_russian_1_death(guy) {
   guy waittillmatch("single anim", "end");
 
-  animspot = getent("intro_anim_node", "targetname");
+  animspot = getEnt("intro_anim_node", "targetname");
   level thread anim_loop_solo(level.russian_corpse, "intro_death", undefined, "stop_death_loop", animspot);
 
   while(1) {
@@ -451,7 +451,7 @@ intro_russian_1_death(guy) {
 
 intro_german_1_death(guy) {
   guy waittillmatch("single anim", "end");
-  guy stopanimscripted();
+  guy stopanimScripted();
   guy dodamage(guy.health + 10, (0, 0, 0));
   guy notify("death");
 }
@@ -510,7 +510,7 @@ opening_attach_watch(guy) {
   level.opening_watch = spawn("script_model", guy gettagorigin("TAG_WEAPON_LEFT"));
   level.opening_watch.angles = guy gettagangles("TAG_WEAPON_LEFT");
   level.opening_watch setModel("anim_seelow_pocketwatch");
-  level.opening_watch linkto(guy, "TAG_WEAPON_LEFT");
+  level.opening_watch linkTo(guy, "TAG_WEAPON_LEFT");
 }
 
 opening_detach_watch(guy) {
@@ -520,7 +520,7 @@ opening_detach_watch(guy) {
 opening_attach_book(guy) {
   level.opening_book.origin = guy gettagorigin("TAG_WEAPON_LEFT");
   level.opening_book.angles = guy gettagangles("TAG_WEAPON_LEFT");
-  level.opening_book linkto(guy, "TAG_WEAPON_LEFT");
+  level.opening_book linkTo(guy, "TAG_WEAPON_LEFT");
 }
 
 opening_detach_book(guy) {
@@ -578,7 +578,7 @@ opening_attach_detach_player_weapon(new_guy) {
 intro_german_end_anim_at_damage(guy, flag_name) {
   level endon("event_1_ends");
   guy waittill("damage", amount, attacker);
-  guy stopanimscripted();
+  guy stopanimScripted();
   guy.health = 5;
   guy dodamage(10000, (0, 0, 0), attacker, attacker);
   flag_set(flag_name);
@@ -595,12 +595,12 @@ opening_zeitzev_explosion(guy) {
 
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] PlayRumbleOnEntity("artillery_rumble");
+    players[i] playRumbleOnEntity("artillery_rumble");
   }
 
   level notify("opening_house_explosion");
 
-  book_struct = getstruct("opening_fake_book", "targetname");
+  book_struct = getStruct("opening_fake_book", "targetname");
   level.opening_book = spawn("script_model", book_struct.origin);
   level.opening_book.angles = book_struct.angles;
   level.opening_book setModel("static_berlin_books_diary");
@@ -612,11 +612,11 @@ opening_zeitzev_explosion(guy) {
 opening_objectives() {
   objective_add(1, "current", level.obj1_string, (2810, -6138, -662));
 
-  trigger = getent("opening_obj_trig1", "targetname");
+  trigger = getEnt("opening_obj_trig1", "targetname");
   trigger waittill("trigger");
   objective_position(1, (2999, -3940, -673.1));
 
-  trigger = getent("flame_spawn_trigger", "targetname");
+  trigger = getEnt("flame_spawn_trigger", "targetname");
   trigger waittill("trigger");
   objective_position(1, (3537, -2243, -913));
 
@@ -627,7 +627,7 @@ opening_objectives() {
 melee_comabt_1_vignette() {
   anim_node = getnode("melee_combat_1", "targetname");
 
-  spawner = getent("melee_combat_1_german", "targetname");
+  spawner = getEnt("melee_combat_1_german", "targetname");
   german = spawner stalingradspawn();
   if(!maps\_utility::spawn_failed(german)) {
     german setup_vig_ai("german");
@@ -640,7 +640,7 @@ melee_comabt_1_vignette() {
   german.dropweapon = false;
   german.grenadeammo = 0;
 
-  spawner2 = getent("melee_combat_1_russian", "targetname");
+  spawner2 = getEnt("melee_combat_1_russian", "targetname");
   russian = spawner2 stalingradspawn();
   if(!maps\_utility::spawn_failed(russian)) {
     russian setup_vig_ai("russian");
@@ -695,7 +695,7 @@ monitor_other_guys_death2(otherguy) {
 
   otherguy waittill("death");
 
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self resume_fire();
 
@@ -749,7 +749,7 @@ killed_by_player_only() {
 melee_comabt_2_vignette() {
   anim_node = getnode("melee_combat_2", "targetname");
 
-  spawner = getent("melee_combat_2_german", "targetname");
+  spawner = getEnt("melee_combat_2_german", "targetname");
   german = spawner stalingradspawn();
   if(!maps\_utility::spawn_failed(german)) {
     german setup_vig_ai("german");
@@ -762,7 +762,7 @@ melee_comabt_2_vignette() {
   german.dropweapon = false;
   german.grenadeammo = 0;
 
-  spawner2 = getent("melee_combat_2_russian", "targetname");
+  spawner2 = getEnt("melee_combat_2_russian", "targetname");
   russian = spawner2 stalingradspawn();
   if(!maps\_utility::spawn_failed(russian)) {
     russian setup_vig_ai("russian");
@@ -851,7 +851,7 @@ randomly_get_shot_from_behind() {
 }
 
 opening_spawn_fake_tank() {
-  drone_trigger = getent("intro_fake_drones", "script_noteworthy");
+  drone_trigger = getEnt("intro_fake_drones", "script_noteworthy");
   drone_trigger trigger_off();
 
   level waittill("intro_spawns");
@@ -860,12 +860,12 @@ opening_spawn_fake_tank() {
 
   wait(8);
 
-  tank_trigger = getent("intro_fake_tank_trigger", "script_noteworthy");
+  tank_trigger = getEnt("intro_fake_tank_trigger", "script_noteworthy");
   tank_trigger notify("trigger");
 
   wait(1);
 
-  tank = getent("opening_fake_tank", "targetname");
+  tank = getEnt("opening_fake_tank", "targetname");
   tank SetTurretTargetVec((1706, -5651, -666));
 
   tank waittill("reached_end_node");
@@ -950,20 +950,20 @@ fake_throw_molotov() {
   molotov = spawn("script_model", self gettagorigin("tag_weapon_left"));
   molotov.angles = self gettagangles("tag_weapon_left");
   molotov setModel("weapon_rus_molotov_grenade");
-  molotov linkto(self, "tag_weapon_left");
+  molotov linkTo(self, "tag_weapon_left");
   wait(3.5);
   playFXOnTag(level._effect["molotov_trail_fire"], molotov, "tag_flash");
 
   wait(2.2);
   molotov unlink();
-  molotov_target = getstruct(self.script_noteworthy, "targetname");
-  forward = VectorNormalize((molotov_target.origin + (0, 0, 300)) - molotov.origin);
+  molotov_target = getStruct(self.script_noteworthy, "targetname");
+  forward = vectorNormalize((molotov_target.origin + (0, 0, 300)) - molotov.origin);
   velocities = forward * 12000;
   molotov physicslaunch((molotov.origin), velocities);
 
   wait(1.2);
   playFX(level._effect["molotov_explosion"], molotov_target.origin);
-  playsoundatposition("weap_molotov_impact", molotov.origin);
+  playSoundAtPosition("weap_molotov_impact", molotov.origin);
   level thread start_spreading_fire(molotov_target.origin, 0.2);
   molotov delete();
 }
@@ -983,14 +983,14 @@ opening_react_to_tank_fire() {
         if(isalive(self)) {
           if(self.angles[1] > 70 && self.angles[1] < 110) {
             if(level.molotov_tosser_fall_down == 1) {
-              trigger = getent("dont_flinch", "targetname");
+              trigger = getEnt("dont_flinch", "targetname");
               if(self istouching(trigger)) {
                 return;
               } else {
                 self anim_single_solo(self, "flinching_run_1");
               }
             } else if(self != level.hero1) {
-              trigger = getent("dont_flinch", "targetname");
+              trigger = getEnt("dont_flinch", "targetname");
               if(self istouching(trigger)) {
                 return;
               } else {
@@ -1024,7 +1024,7 @@ opening_spawn_tanks() {
 }
 
 wait_for_move_trigger() {
-  trigger = getent("opening_move_tanks", "targetname");
+  trigger = getEnt("opening_move_tanks", "targetname");
   trigger waittill("trigger");
   level notify("move_tanks");
 
@@ -1092,15 +1092,15 @@ play_puddle_fx(tank_origin, target_origin) {
 
 opening_tank_1() {
   start_node_1 = getvehiclenode("opening_tank_1_start", "targetname");
-  tank1 = spawnvehicle("vehicle_rus_tracked_t34", "tank1", "t34", start_node_1.origin, start_node_1.angles);
+  tank1 = spawnVehicle("vehicle_rus_tracked_t34", "tank1", "t34", start_node_1.origin, start_node_1.angles);
   tank1.vehicletype = "t34";
   vehicle_init(tank1);
   tank1 attachPath(start_node_1);
   tank1.health = 100000;
 
-  tank1_target1 = getent("opening_tank_1_target_1", "targetname");
-  tank1_target2 = getent("opening_tank_1_target_2", "targetname");
-  tank1_target3 = getent("opening_tank_1_target_3", "targetname");
+  tank1_target1 = getEnt("opening_tank_1_target_1", "targetname");
+  tank1_target2 = getEnt("opening_tank_1_target_2", "targetname");
+  tank1_target3 = getEnt("opening_tank_1_target_3", "targetname");
 
   tank1 thread opening_loop_fire_at_target(tank1_target1, "tank_fires", "move_tanks");
   level waittill("move_tanks");
@@ -1125,15 +1125,15 @@ opening_tank_1() {
 
 opening_tank_2() {
   start_node_2 = getvehiclenode("opening_tank_2_start", "targetname");
-  tank2 = spawnvehicle("vehicle_rus_tracked_t34", "tank2", "t34", start_node_2.origin, start_node_2.angles);
+  tank2 = spawnVehicle("vehicle_rus_tracked_t34", "tank2", "t34", start_node_2.origin, start_node_2.angles);
   tank2.vehicletype = "t34";
   vehicle_init(tank2);
   tank2 attachPath(start_node_2);
   tank2.health = 100000;
 
-  tank2_target1 = getent("opening_tank_2_target_1", "targetname");
-  tank2_target2 = getent("opening_tank_2_target_2", "targetname");
-  tank2_target3 = getent("opening_tank_2_target_3", "targetname");
+  tank2_target1 = getEnt("opening_tank_2_target_1", "targetname");
+  tank2_target2 = getEnt("opening_tank_2_target_2", "targetname");
+  tank2_target3 = getEnt("opening_tank_2_target_3", "targetname");
 
   tank2 thread opening_loop_fire_at_target(tank2_target1, "tank_fires", "move_tanks");
   level waittill("move_tanks");
@@ -1146,11 +1146,11 @@ opening_tank_2() {
   level.house_blown_up = false;
   tank2 thread opening_tank_2_wait();
 
-  player_trigger = getent("flame_spawn_trigger", "targetname");
+  player_trigger = getEnt("flame_spawn_trigger", "targetname");
   player_trigger waittill("trigger");
 
   level notify("stop_firing_2");
-  house_target = getent("opening_house_explosion_target", "targetname");
+  house_target = getEnt("opening_house_explosion_target", "targetname");
   tank2 SetTurretTargetEnt(house_target);
   wait(2);
   tank2 FireWeapon();
@@ -1191,7 +1191,7 @@ opening_tank_2_wait() {
 opening_spawn_more_tanks() {
   level endon("event_1_ends");
 
-  trigger = getent("flame_spawn_trigger", "targetname");
+  trigger = getEnt("flame_spawn_trigger", "targetname");
   trigger waittill("trigger");
 
   start_node = getvehiclenode("opening_tank_3_start", "targetname");
@@ -1212,7 +1212,7 @@ opening_spawn_more_tanks() {
 }
 
 opening_spawn_move_tank(start_node) {
-  tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
+  tank = spawnVehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
   tank attachPath(start_node);
   tank.health = 100000;
   tank startpath();
@@ -1253,14 +1253,14 @@ additional_fires() {
 }
 
 force_move_friends() {
-  init_trigger = getent("opening_initial_move_friends", "targetname");
+  init_trigger = getEnt("opening_initial_move_friends", "targetname");
   init_trigger waittill("trigger");
 
   level thread pacing_dialog();
   wait(6);
 
   init_trigger trigger_off();
-  init_trigger_2 = getent("opening_initial_move_friends_1", "targetname");
+  init_trigger_2 = getEnt("opening_initial_move_friends_1", "targetname");
   if(isDefined(init_trigger_2)) {
     init_trigger_2 notify("trigger");
   }
@@ -1275,7 +1275,7 @@ shoot_from_behind_dialog() {
 }
 
 pacing_dialog() {
-  trigger = getent("scurve_pacing", "targetname");
+  trigger = getEnt("scurve_pacing", "targetname");
   trigger waittill("trigger");
 
   level.hero1 say_dialogue("reznov", "things_changed");
@@ -1435,7 +1435,7 @@ goal_die_to_player() {
 spawn_flaming_guys() {}
 
 running_on_fire_1_vignette() {
-  spawner = getent("opening_fire_runner_1_death", "targetname");
+  spawner = getEnt("opening_fire_runner_1_death", "targetname");
   german = spawner Stalingradspawn();
   spawn_failed(german);
   german.animname = "german";
@@ -1449,7 +1449,7 @@ running_on_fire_1_vignette() {
 }
 
 running_on_fire_2_vignette() {
-  spawner = getent("opening_fire_runner_1_death", "targetname");
+  spawner = getEnt("opening_fire_runner_1_death", "targetname");
   german = spawner Stalingradspawn();
   spawn_failed(german);
   german.animname = "german";
@@ -1464,16 +1464,16 @@ running_on_fire_2_vignette() {
 
 early_kill_german(german) {
   german waittill("damage");
-  german stopanimscripted();
+  german stopanimScripted();
   german startragdoll();
 }
 
 spawn_flaming_guys_side() {
-  trigger = getent("opening_fire_hole_trig", "targetname");
+  trigger = getEnt("opening_fire_hole_trig", "targetname");
   trigger waittill("trigger");
 
-  pos1 = getstruct("opening_fire_hole_target", "targetname");
-  pos2 = getstruct("opening_fire_hole_target_2", "targetname");
+  pos1 = getStruct("opening_fire_hole_target", "targetname");
+  pos2 = getStruct("opening_fire_hole_target_2", "targetname");
 
   playFX(level._effect["molotov_explosion"], pos1.origin);
   playFX(level._effect["molotov_explosion"], pos2.origin);
@@ -1486,7 +1486,7 @@ spawn_flaming_guys_side() {
 }
 
 running_on_fire_3_vignette() {
-  spawner = getent("opening_fire_runner_1_death", "targetname");
+  spawner = getEnt("opening_fire_runner_1_death", "targetname");
   german = spawner Stalingradspawn();
   spawn_failed(german);
   german hold_fire();
@@ -1513,7 +1513,7 @@ running_on_fire_4_vignette() {
 }
 
 running_on_fire_5_vignette() {
-  spawner = getent("opening_fire_runner_2_death", "targetname");
+  spawner = getEnt("opening_fire_runner_2_death", "targetname");
   german = spawner Stalingradspawn();
   spawn_failed(german);
   german hold_fire();
@@ -1531,7 +1531,7 @@ running_on_fire_5_vignette() {
 }
 
 opening_plane_flash() {
-  trigger = getent("opening_obj_trig1", "targetname");
+  trigger = getEnt("opening_obj_trig1", "targetname");
   trigger waittill("trigger");
 
   wait(2);
@@ -1540,7 +1540,7 @@ opening_plane_flash() {
 
   start_node = getvehiclenode("opening_plane_start", "targetname");
 
-  plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
+  plane = spawnVehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
 
   plane attachPath(start_node);
   plane startpath();
@@ -1556,28 +1556,28 @@ opening_plane_flash() {
 }
 
 opening_flashes() {
-  flash_points1 = getstruct("opening_flash_1", "targetname");
-  flash_points2 = getstruct("opening_flash_2_new", "targetname");
-  flash_points3 = getstruct("opening_flash_3", "targetname");
+  flash_points1 = getStruct("opening_flash_1", "targetname");
+  flash_points2 = getStruct("opening_flash_2_new", "targetname");
+  flash_points3 = getStruct("opening_flash_3", "targetname");
 
   wait(5);
 
   playFX(level._effect["napalm"], flash_points1.origin);
-  playsoundatposition("bomb1L", flash_points1.origin);
+  playSoundAtPosition("bomb1L", flash_points1.origin);
   wait(0.7);
   playFX(level._effect["napalm"], flash_points2.origin);
-  playsoundatposition("bomb2L", flash_points2.origin);
+  playSoundAtPosition("bomb2L", flash_points2.origin);
 }
 
 lower_accuracy_for_event_2() {
-  start_trigger = getent("opening_initial_move_friends_2", "targetname");
+  start_trigger = getEnt("opening_initial_move_friends_2", "targetname");
   start_trigger waittill("trigger");
 
   level thread lower_friendlies_accuracy(0.1, "restore_accuracy");
 
-  end_trigger1 = getent("ev1_move_init_enemies", "targetname");
-  end_trigger2 = getent("restore_accuracy_1", "targetname");
-  end_trigger3 = getent("restore_accuracy_2", "targetname");
+  end_trigger1 = getEnt("ev1_move_init_enemies", "targetname");
+  end_trigger2 = getEnt("restore_accuracy_1", "targetname");
+  end_trigger3 = getEnt("restore_accuracy_2", "targetname");
 
   level thread wait_for_trigger_and_notify(end_trigger2, "restore_accuracy");
   level thread wait_for_trigger_and_notify(end_trigger3, "restore_accuracy");
@@ -1587,7 +1587,7 @@ lower_accuracy_for_event_2() {
 }
 
 dialog_player_into_wheat_field() {
-  trigger = getent("opening_into_wheat_field", "targetname");
+  trigger = getEnt("opening_into_wheat_field", "targetname");
   trigger waittill("trigger");
 
   level.hero2 say_dialogue_wait("chernov", "stay_out");
@@ -1610,7 +1610,7 @@ dialog_player_into_wheat_field() {
 }
 
 opening_molotov_instructions() {
-  trigger = getent("opening_initial_move_friends", "targetname");
+  trigger = getEnt("opening_initial_move_friends", "targetname");
   trigger waittill("trigger");
 
   print_text_on_screen(&"SEE1_USE_MOLOTOV");

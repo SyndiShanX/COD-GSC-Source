@@ -289,7 +289,7 @@ function_dba8e076(entity) {
   player_owner = function_f00b611e();
 
   if(!isDefined(player_owner)) {
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size > 0) {
       entity.var_93a62fe = arraygetclosest(entity.origin, players);
@@ -417,7 +417,7 @@ function_f7c7a416(entity) {
             hit_enemy zombie_utility::gib_random_part();
           }
 
-          force = vectornormalize((hit_enemy.origin - entity.origin) * (1, 1, 0));
+          force = vectorNormalize((hit_enemy.origin - entity.origin) * (1, 1, 0));
 
           if(isDefined(entity.meleeinfo)) {
             force = anglesToForward(entity.angles * (0, 1, 0));
@@ -514,8 +514,8 @@ function_14a8c157(entity) {
 
     if(isPlayer(entity.enemy) && distancesq >= 100 * 100) {
       if(entity.enemy issprinting()) {
-        enemyvelocity = vectornormalize(entity.enemy getvelocity());
-        var_7a61ad67 = vectornormalize(entity getvelocity());
+        enemyvelocity = vectorNormalize(entity.enemy getvelocity());
+        var_7a61ad67 = vectorNormalize(entity getvelocity());
 
         if(vectordot(var_7a61ad67, enemyvelocity) > cos(20)) {
           record3dtext("<dev string:xcf>", entity.origin + (0, 0, 60), (1, 0, 0), "<dev string:xea>");
@@ -555,7 +555,7 @@ function_26fcd34f(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   entity pushplayer(0);
 
   if(isDefined(entity.enemy)) {
-    dirtoenemy = vectornormalize(entity.enemy.origin - entity.origin);
+    dirtoenemy = vectorNormalize(entity.enemy.origin - entity.origin);
     entity forceteleport(entity.origin, vectortoangles(dirtoenemy));
   }
 
@@ -618,7 +618,7 @@ function_e023eac9(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     var_535d098c = 0;
 
     if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
-      var_cc075bd0 = vectornormalize(entity.origin - entity.meleeinfo.adjustedendpos);
+      var_cc075bd0 = vectorNormalize(entity.origin - entity.meleeinfo.adjustedendpos);
       entity.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
       var_535d098c = 1;
     }
@@ -647,7 +647,7 @@ function_e023eac9(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
       var_776ddabf = distancesquared(entity.meleeinfo.var_cb28f380, entity.meleeinfo.adjustedendpos);
       myforward = anglesToForward(entity.angles);
       var_1c3641f2 = (entity.enemy.origin[0], entity.enemy.origin[1], entity.origin[2]);
-      dirtoenemy = vectornormalize(var_1c3641f2 - entity.origin);
+      dirtoenemy = vectorNormalize(var_1c3641f2 - entity.origin);
       zdiff = entity.meleeinfo.var_cb28f380[2] - entity.enemy.origin[2];
       withinzrange = abs(zdiff) <= 45;
       withinfov = vectordot(myforward, dirtoenemy) > cos(30);
@@ -671,7 +671,7 @@ function_e023eac9(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
         starttime = floor(starttime / timestep);
         stoptime = floor(stoptime / timestep);
         adjustduration = stoptime - starttime;
-        entity.meleeinfo.var_10b8b6d1 = vectornormalize(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
+        entity.meleeinfo.var_10b8b6d1 = vectorNormalize(entity.meleeinfo.adjustedendpos - entity.meleeinfo.var_cb28f380);
         entity.meleeinfo.var_8b9a15a6 = var_90c3cdd2 / adjustduration;
         entity.meleeinfo.var_425c4c8b = 1;
         entity.meleeinfo.adjustmentstarted = 1;

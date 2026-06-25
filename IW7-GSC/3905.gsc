@@ -17,7 +17,7 @@ func_CEE2(var_0, var_1, var_2, var_3) {
   self.var_201C = level.var_4B17;
   self.var_2023 = "rise";
   self.var_2029 = scripts\engine\utility::spawn_tag_origin();
-  self linkto(self.var_2029);
+  self linkTo(self.var_2029);
   self.var_2020 = undefined;
   thread func_197A(var_1);
   lib_0A1E::func_2364(var_0, var_1, var_2);
@@ -51,11 +51,11 @@ func_197A(var_0) {
   var_8 = randomfloatrange(0.3, 0.6);
   var_9 = 3.2;
   wait(var_8);
-  self.var_2029 moveto(self.var_2021 + (0, 0, self.var_201E), var_9, 0.1, var_9 - 0.1);
+  self.var_2029 moveTo(self.var_2021 + (0, 0, self.var_201E), var_9, 0.1, var_9 - 0.1);
   wait(var_9);
   if(self.var_201F == 0) {
     var_10 = self.var_201D - self.var_2022 - var_9 - var_8;
-    self.var_2029 moveto(self.var_2029.origin + (0, 0, 10), var_10);
+    self.var_2029 moveTo(self.var_2029.origin + (0, 0, 10), var_10);
   }
 }
 
@@ -90,7 +90,7 @@ func_3EAD(var_0, var_1, var_2) {
 func_1976(var_0) {
   self endon(var_0 + "_finished");
   var_1 = 0.3;
-  self.var_2029 moveto(self.var_2021, var_1, var_1 - 0.1, 0);
+  self.var_2029 moveTo(self.var_2021, var_1, var_1 - 0.1, 0);
   wait(var_1);
   func_1973(1);
   self.var_2023 = "getup";
@@ -103,11 +103,11 @@ func_CEDD(var_0, var_1, var_2, var_3) {
 
 func_1977() {
   var_0 = 3.2;
-  self.var_2029 moveto(self.var_2021 + (0, 0, self.var_201E), var_0, 0.1, var_0 - 0.1);
+  self.var_2029 moveTo(self.var_2021 + (0, 0, self.var_201E), var_0, 0.1, var_0 - 0.1);
   wait(var_0);
   if(isDefined(self) && self.var_201F == 0) {
     var_1 = self.var_201D - self.var_2022 - var_0;
-    self.var_2029 moveto(self.var_2029.origin + (0, 0, 10), var_1);
+    self.var_2029 moveTo(self.var_2029.origin + (0, 0, 10), var_1);
   }
 }
 
@@ -141,7 +141,7 @@ func_3391(var_0, var_1, var_2, var_3) {
 func_197B() {
   self.var_2023 = "rise";
   self.var_2029 = scripts\engine\utility::spawn_tag_origin();
-  self linkto(self.var_2029);
+  self linkTo(self.var_2029);
 }
 
 func_1973(var_0) {

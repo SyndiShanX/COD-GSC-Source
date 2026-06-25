@@ -196,7 +196,7 @@ gravityspikes_attack_watcher(w_gravityspikes, n_level) {
     }
 
     if(s_result.weapon == w_gravityspikes) {
-      self playrumbleonentity("talon_spike");
+      self playRumbleOnEntity("talon_spike");
       self thread knockdown_zombies_slam(1);
       self thread no_damage_gravityspikes_slam();
     }
@@ -317,7 +317,7 @@ gravityspikes_altfire_watcher(w_gravityspikes) {
 
     if(s_result.weapon == w_gravityspikes && !(isDefined(self.var_de01b5c2) && self.var_de01b5c2)) {
       self.var_de01b5c2 = 1;
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       self thread function_26a4b7f5(w_gravityspikes);
       self waittilltimeout(5, #"stop_shockwave");
       self.var_de01b5c2 = undefined;
@@ -786,7 +786,7 @@ create_gravity_trap_spikes_in_ground(a_s_spawn_pos) {
     self.mdl_gravity_trap_spikes[i] show();
 
     if(isDefined(a_s_spawn_pos[i].entity) && isvehicle(a_s_spawn_pos[i].entity) && a_s_spawn_pos[i].entity ismovingplatform()) {
-      self.mdl_gravity_trap_spikes[i] linkto(a_s_spawn_pos[i].entity);
+      self.mdl_gravity_trap_spikes[i] linkTo(a_s_spawn_pos[i].entity);
     }
 
     waitframe(1);
@@ -844,7 +844,7 @@ gravity_trap_fx_on(s_spawn_pos) {
   self.mdl_gravity_trap_fx_source unlink();
 
   if(isDefined(s_spawn_pos.entity) && isvehicle(s_spawn_pos.entity) && s_spawn_pos.entity ismovingplatform()) {
-    self.mdl_gravity_trap_fx_source linkto(s_spawn_pos.entity);
+    self.mdl_gravity_trap_fx_source linkTo(s_spawn_pos.entity);
   }
 
   waitframe(1);
@@ -1001,7 +1001,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
   if(level.n_zombies_lifted_for_ragdoll < 8 && !(isDefined(self.ignore_gravityspikes_ragdoll) && self.ignore_gravityspikes_ragdoll)) {
     self thread track_lifted_for_ragdoll_count();
     v_centroid = self getcentroid();
-    v_away_from_source = vectornormalize(v_centroid - v_attack_source);
+    v_away_from_source = vectorNormalize(v_centroid - v_attack_source);
     v_away_from_source *= n_push_away;
     v_away_from_source = (v_away_from_source[0], v_away_from_source[1], n_lift_height);
     a_trace = physicstraceex(v_centroid + (0, 0, 32), v_centroid + v_away_from_source, (-16, -16, -16), (16, 16, 16), self);
@@ -1019,7 +1019,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
     n_lift_time = length(v_lift) / n_lift_speed;
 
     if(isDefined(self) && isDefined(self.b_melee_kill) && self.b_melee_kill) {
-      self setplayercollision(0);
+      self setPlayerCollision(0);
 
       if(!(isDefined(level.ignore_gravityspikes_ragdoll) && level.ignore_gravityspikes_ragdoll)) {
         self startragdoll();
@@ -1030,7 +1030,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
       self clientfield::set("sparky_zombie_trail_fx", 1);
       waitframe(1);
     } else if(isDefined(self) && v_lift[2] > 0) {
-      self setplayercollision(0);
+      self setPlayerCollision(0);
       self clientfield::set("sparky_beam_fx", 1);
       self clientfield::set("sparky_zombie_fx", 1);
       self playSound("zmb_talon_electrocute");
@@ -1043,8 +1043,8 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
 
       self.mdl_trap_mover = util::spawn_model("tag_origin", v_centroid, self.angles);
       self thread util::delete_on_death(self.mdl_trap_mover);
-      self linkto(self.mdl_trap_mover);
-      self.mdl_trap_mover moveto(v_centroid + v_lift, n_lift_time, 0, n_lift_time * 0.4);
+      self linkTo(self.mdl_trap_mover);
+      self.mdl_trap_mover moveTo(v_centroid + v_lift, n_lift_time, 0, n_lift_time * 0.4);
       self thread zombie_lift_wacky_rotate(n_lift_time, player);
       self thread gravity_trap_notify_watcher(player);
       self waittill(#"gravity_trap_complete");
@@ -1124,7 +1124,7 @@ zombie_lift_wacky_rotate(n_lift_time, player) {
   while(true) {
     negative_x = randomintrange(0, 10) > 5 ? -1 : 1;
     negative_z = randomintrange(0, 10) > 5 ? -1 : 1;
-    self.mdl_trap_mover rotateto((randomintrange(90, 180) * negative_x, randomintrange(-90, 90), randomintrange(90, 180) * negative_z), n_lift_time < 2 ? 5 : n_lift_time, 0);
+    self.mdl_trap_mover rotateTo((randomintrange(90, 180) * negative_x, randomintrange(-90, 90), randomintrange(90, 180) * negative_z), n_lift_time < 2 ? 5 : n_lift_time, 0);
     self.mdl_trap_mover waittill(#"rotatedone");
   }
 }

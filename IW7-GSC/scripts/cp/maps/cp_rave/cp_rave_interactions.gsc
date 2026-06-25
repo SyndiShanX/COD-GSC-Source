@@ -149,7 +149,7 @@ item_keep_rotating(var_0) {
   var_0 endon("death");
   var_1 = var_0.angles;
   for(;;) {
-    var_0 rotateto(var_1 + (randomintrange(-40, 40), randomintrange(-40, 90), randomintrange(-40, 90)), 3);
+    var_0 rotateTo(var_1 + (randomintrange(-40, 40), randomintrange(-40, 90), randomintrange(-40, 90)), 3);
     wait(3);
   }
 }
@@ -157,7 +157,7 @@ item_keep_rotating(var_0) {
 fuse_pick_up_monitor(var_0, var_1) {
   var_0 endon("death");
   var_0 makeusable();
-  var_0 sethintstring(&"CP_RAVE_PICKUP_ITEM");
+  var_0 setHintString(&"CP_RAVE_PICKUP_ITEM");
   for(;;) {
     var_0 waittill("trigger", var_2);
     if(isPlayer(var_2)) {
@@ -810,7 +810,7 @@ crytsal_capture_killed_essense(var_0, var_1) {
       var_7 = 0.05;
     }
 
-    var_2 moveto(var_3, var_7);
+    var_2 moveTo(var_3, var_7);
     var_2 waittill("movedone");
     if(distance(var_2.origin, var_1.origin) > 16) {
       var_3 = var_1.origin;
@@ -1429,7 +1429,7 @@ init_lair_door() {
 use_lair_door(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   var_0.pressed = 1;
-  getent(var_0.script_objective, "targetname") setscriptablepartstate("light", "on");
+  getEnt(var_0.script_objective, "targetname") setscriptablepartstate("light", "on");
   var_1 playlocalsound("zmb_power_switch");
   while(var_1 scripts\cp\utility::is_valid_player() && var_1 useButtonPressed() && distance(var_1.origin, var_0.origin) < 96 && !scripts\engine\utility::flag("survivor_released")) {
     try_to_release_survivor();
@@ -1439,7 +1439,7 @@ use_lair_door(var_0, var_1) {
   if(scripts\engine\utility::flag("survivor_released")) {
     return;
   } else {
-    getent(var_0.script_objective, "targetname") setscriptablepartstate("light", "off");
+    getEnt(var_0.script_objective, "targetname") setscriptablepartstate("light", "off");
   }
 
   wait(0.25);
@@ -1487,10 +1487,10 @@ init_lair_door_switches() {
     wait(1);
   }
 
-  var_0 = getent("trap_door_switch1", "targetname");
-  var_1 = getent("trap_door_switch2", "targetname");
-  var_2 = getent("trap_door_switch3", "targetname");
-  var_3 = getent("trap_door_switch4", "targetname");
+  var_0 = getEnt("trap_door_switch1", "targetname");
+  var_1 = getEnt("trap_door_switch2", "targetname");
+  var_2 = getEnt("trap_door_switch3", "targetname");
+  var_3 = getEnt("trap_door_switch4", "targetname");
   var_0 setscriptablepartstate("light", "off");
   var_1 setscriptablepartstate("light", "off");
   var_2 setscriptablepartstate("light", "off");
@@ -1504,10 +1504,10 @@ init_lair_door_switches() {
 
 lair_door_player_monitor() {
   var_0 = 0;
-  var_1 = getent("trap_door_switch1", "targetname");
-  var_2 = getent("trap_door_switch2", "targetname");
-  var_3 = getent("trap_door_switch3", "targetname");
-  var_4 = getent("trap_door_switch4", "targetname");
+  var_1 = getEnt("trap_door_switch1", "targetname");
+  var_2 = getEnt("trap_door_switch2", "targetname");
+  var_3 = getEnt("trap_door_switch3", "targetname");
+  var_4 = getEnt("trap_door_switch4", "targetname");
   while(!scripts\engine\utility::flag("survivor_released")) {
     if(level.players.size == var_0) {
       wait(0.25);

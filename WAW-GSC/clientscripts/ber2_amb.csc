@@ -133,7 +133,7 @@ main() {
 
 gramophone() {
   level waittill("requiem");
-  gramophone = getstruct("gramophone", "targetname");
+  gramophone = getStruct("gramophone", "targetname");
 
   playSound(0, "gramophone", gramophone.origin);
 }

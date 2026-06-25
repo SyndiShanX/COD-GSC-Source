@@ -121,7 +121,7 @@ skipto_solar_fight() {
   level.player allowstand(0);
   init_club_battle_damage_timing();
   level.player.overrideplayerdamage = ::player_damage_override;
-  bm_clip = getent("dance_floor_clip", "targetname");
+  bm_clip = getEnt("dance_floor_clip", "targetname");
   bm_clip delete();
   level.player maps\createart\karma_art::vision_set_change("sp_karma_clubmain_dancefloor");
   maps\karma_anim::club_anims();
@@ -136,13 +136,13 @@ skipto_solar_fight() {
     ent delete();
   }
 
-  getent("sick_girls_clip", "targetname") delete();
+  getEnt("sick_girls_clip", "targetname") delete();
   level thread change_club_lights();
   level.player thread inner_club_dialog();
   flag_set("entered_inner_club");
 
   for(i = 1; i <= 12; i++) {
-    m_laser = getent("fxanim_club_top_laser_" + i, "targetname");
+    m_laser = getEnt("fxanim_club_top_laser_" + i, "targetname");
     m_laser setforcenocull();
     str_tag = "laser_attach_jnt";
     m_laser play_fx("club_dance_floor_laser", undefined, undefined, "stop_fx", 1, str_tag, 1);
@@ -191,7 +191,7 @@ club_intro() {
   setsaveddvar("g_speed", level.default_run_speed);
   level.player enableinvulnerability();
   clientnotify("lull");
-  bm_clip = getent("dance_floor_clip", "targetname");
+  bm_clip = getEnt("dance_floor_clip", "targetname");
   bm_clip delete();
 
   foreach(ent in getEntArray("velvet_rope", "targetname")) {
@@ -209,7 +209,7 @@ club_intro() {
   level thread play_notify_music_start();
   end_scene("seductive_woman_loop");
   end_scene("sick_girls");
-  getent("sick_girls_clip", "targetname") delete();
+  getEnt("sick_girls_clip", "targetname") delete();
   scene_wait("club_encounter");
   setsaveddvar("Cg_aggressivecullradius", level.n_aggressivecullradius);
   setsaveddvar("mantle_enable", 1);
@@ -317,7 +317,7 @@ bar_fight_cover_spawn() {
   }
 
   ai_guy forceteleport(self.origin, self.angles);
-  ai_guy set_goalradius(8);
+  ai_guy set_goalRadius(8);
   ai_guy thread force_goal(getnode(self.target, "targetname"), 8);
   ai_guy thread shoot_at_target_untill_dead(level.player);
 
@@ -398,7 +398,7 @@ bar_fight_spawn_fore() {
   ai_guy = simple_spawn_single("club_terrorist_" + self.script_noteworthy);
   ai_guy forceteleport(self.origin, self.angles);
   ai_guy thread shoot_at_target_untill_dead(level.player);
-  ai_guy set_goalradius(8);
+  ai_guy set_goalRadius(8);
   ai_guy force_goal(self, 8);
 }
 
@@ -416,7 +416,7 @@ bar_fight_spawn_mid() {
   nd_node = getnode(self.target, "targetname");
   ai_guy forceteleport(self.origin, self.angles);
   ai_guy thread shoot_at_target_untill_dead(level.player);
-  ai_guy set_goalradius(8);
+  ai_guy set_goalRadius(8);
   ai_guy force_goal(nd_node, 8);
 
   if(isDefined(nd_node.script_noteworthy) && nd_node.script_noteworthy == "crouch") {
@@ -437,7 +437,7 @@ bar_fight_spawn_back() {
 
   ai_guy forceteleport(self.origin, self.angles);
   ai_guy thread shoot_at_target_untill_dead(level.player);
-  ai_guy set_goalradius(8);
+  ai_guy set_goalRadius(8);
   nd_cover = self;
 
   if(isDefined(self.target)) {
@@ -524,7 +524,7 @@ club_fx() {
   wait 2.0;
 
   for(i = 1; i <= 12; i++) {
-    m_laser = getent("fxanim_club_top_laser_" + i, "targetname");
+    m_laser = getEnt("fxanim_club_top_laser_" + i, "targetname");
     m_laser setforcenocull();
     str_tag = "laser_attach_jnt";
     m_laser play_fx("club_dance_floor_laser", undefined, undefined, "stop_fx", 1, str_tag, 1);
@@ -543,24 +543,24 @@ club_fx() {
   delete_exploder(620);
 
   for(i = 1; i <= 12; i++) {
-    m_laser = getent("fxanim_club_top_laser_" + i, "targetname");
+    m_laser = getEnt("fxanim_club_top_laser_" + i, "targetname");
     m_laser notify("stop_fx");
   }
 
   wait 0.05;
-  m_laser = getent("fxanim_club_dj_laser_1", "targetname");
+  m_laser = getEnt("fxanim_club_dj_laser_1", "targetname");
   m_laser.fx_origin delete();
   wait 0.05;
-  m_laser = getent("fxanim_club_dj_laser_2", "targetname");
+  m_laser = getEnt("fxanim_club_dj_laser_2", "targetname");
   m_laser.fx_origin delete();
   m_laser.fx_origin = spawn_model("tag_origin", m_laser gettagorigin("laser_attach_jnt"), m_laser gettagangles("laser_attach_jnt"));
-  m_laser.fx_origin linkto(m_laser, "laser_attach_jnt");
+  m_laser.fx_origin linkTo(m_laser, "laser_attach_jnt");
   playFXOnTag(level._effect["club_dj_front_laser_static"], m_laser.fx_origin, "tag_origin");
   flag_wait("restart_club_fx");
   m_laser.fx_origin delete();
 
   for(i = 1; i <= 12; i++) {
-    m_laser = getent("fxanim_club_top_laser_" + i, "targetname");
+    m_laser = getEnt("fxanim_club_top_laser_" + i, "targetname");
     m_laser setforcenocull();
     str_tag = "laser_attach_jnt";
     m_laser play_fx("club_dance_floor_laser", undefined, undefined, "stop_fx", 1, str_tag, 1);
@@ -578,14 +578,14 @@ club_fx() {
 
 club_dj_front_lasers() {
   level endon("stop_club_fx");
-  m_laser1 = getent("fxanim_club_dj_laser_1", "targetname");
+  m_laser1 = getEnt("fxanim_club_dj_laser_1", "targetname");
   m_laser1 setforcenocull();
   m_laser1.fx_origin = spawn_model("tag_origin", m_laser1 gettagorigin("laser_attach_jnt"), m_laser1 gettagangles("laser_attach_jnt"));
-  m_laser1.fx_origin linkto(m_laser1, "laser_attach_jnt");
-  m_laser2 = getent("fxanim_club_dj_laser_2", "targetname");
+  m_laser1.fx_origin linkTo(m_laser1, "laser_attach_jnt");
+  m_laser2 = getEnt("fxanim_club_dj_laser_2", "targetname");
   m_laser2 setforcenocull();
   m_laser2.fx_origin = spawn_model("tag_origin", m_laser2 gettagorigin("laser_attach_jnt"), m_laser2 gettagangles("laser_attach_jnt"));
-  m_laser2.fx_origin linkto(m_laser2, "laser_attach_jnt");
+  m_laser2.fx_origin linkTo(m_laser2, "laser_attach_jnt");
   level notify("fxanim_club_dj_lasers_start");
 
   while(true) {
@@ -906,7 +906,7 @@ fire_at_bar() {
     v_start = s_origin.origin;
     v_random = (randomfloatrange(-1.0, 1.0), 0, randomfloatrange(-1.0, 1.0));
     v_end = s_end.origin + v_random * 16;
-    v_direction = vectornormalize(v_end - v_start);
+    v_direction = vectorNormalize(v_end - v_start);
     playFX(level._effect["club_tracers"], v_start, v_direction);
     magicbullet("hk416_silencer_sp", v_start, v_end);
     radiusdamage(v_end, 5, 100, 100);
@@ -919,20 +919,20 @@ ready_explosions(b_run_immediate) {
     self waittill("trigger");
   }
 
-  s_squib = getstruct(self.target, "targetname");
+  s_squib = getStruct(self.target, "targetname");
 
   if(!isDefined(s_squib)) {
     s_squib = getnode(self.target, "targetname");
   }
 
   while(isDefined(s_squib)) {
-    playsoundatposition("dst_club_lights", s_squib.origin);
+    playSoundAtPosition("dst_club_lights", s_squib.origin);
     physicsexplosioncylinder(s_squib.origin, 50, 10, 1.5);
     radiusdamage(s_squib.origin, 20, 500, 500, level.ai_harper);
     wait 0.3;
 
     if(isDefined(s_squib.target)) {
-      s_squib = getstruct(s_squib.target, "targetname");
+      s_squib = getStruct(s_squib.target, "targetname");
     } else {
       break;
     }
@@ -1114,9 +1114,9 @@ grenade_toss() {
   n_goal = getnode(self.target, "targetname");
   self force_goal(n_goal, 8);
 
-  if(level.player istouching(getent("trig_floor_bar", "targetname"))) {
+  if(level.player istouching(getEnt("trig_floor_bar", "targetname"))) {
     v_start_pos = self.origin + vectorscale((0, 0, 1), 48.0);
-    s_end_pos = getstruct("grenade_target", "targetname");
+    s_end_pos = getStruct("grenade_target", "targetname");
 
     if(isalive(self)) {
       self magicgrenade(v_start_pos, s_end_pos.origin, 7);
@@ -1205,10 +1205,10 @@ player_bar_fight() {
   level.player thread player_infinite_ammo();
   level.disable_damage_blur = 1;
   wait 2.0;
-  getent("t_explosions1", "targetname") thread ready_explosions();
-  getent("t_explosions2", "targetname") thread ready_explosions();
-  getent("t_explosions3", "targetname") thread ready_explosions();
-  getent("t_explosions4", "targetname") thread ready_explosions();
+  getEnt("t_explosions1", "targetname") thread ready_explosions();
+  getEnt("t_explosions2", "targetname") thread ready_explosions();
+  getEnt("t_explosions3", "targetname") thread ready_explosions();
+  getEnt("t_explosions4", "targetname") thread ready_explosions();
   level thread bar_fight_spawn_cover_guys();
   wait 3.5;
   simple_spawn("club_terrorist_floor", ::club_terrorist_think);
@@ -1337,7 +1337,7 @@ player_cover_fire_kills_think(n_target_kills) {
 }
 
 final_grenade() {
-  level.ai_harper magicgrenade(getstruct("club_fight_magic_grenade_start", "targetname").origin, getstruct("club_fight_magic_grenade_end", "targetname").origin, 1.5);
+  level.ai_harper magicgrenade(getStruct("club_fight_magic_grenade_start", "targetname").origin, getStruct("club_fight_magic_grenade_end", "targetname").origin, 1.5);
 }
 
 player_infinite_ammo() {
@@ -1402,7 +1402,7 @@ player_whizbys_start(n_delay, n_time) {
 
 player_whizby_think(n_time) {
   self endon("stop_whizbys");
-  s_end = getstruct(self.target, "targetname");
+  s_end = getStruct(self.target, "targetname");
   wait(randomfloatrange(0.0, 0.5));
   self thread notify_delay("stop_whizbys", n_time);
 
@@ -1431,9 +1431,9 @@ player_dynents_start(str_structs, n_delay, n_time) {
 
 player_dynents_think(n_time) {
   self endon("stop_dynents");
-  s_end = getstruct(self.target, "targetname");
+  s_end = getStruct(self.target, "targetname");
   v_force_dir = s_end.origin - self.origin;
-  v_force_dir = vectornormalize(v_force_dir);
+  v_force_dir = vectorNormalize(v_force_dir);
   wait(randomfloatrange(0.0, 0.5));
   self thread notify_delay("stop_dynents", n_time);
 

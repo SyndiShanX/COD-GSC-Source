@@ -220,7 +220,7 @@ func_23DA() {
 
     if(!scripts\engine\utility::istrue(var_15.already_used)) {
       if(isDefined(var_15.target)) {
-        var_13 = scripts\engine\utility::getstruct(var_15.target, "targetname");
+        var_13 = scripts\engine\utility::getStruct(var_15.target, "targetname");
         var_14 = var_13.origin;
         var_15 = var_13.angles;
       } else {

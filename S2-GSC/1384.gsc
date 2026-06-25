@@ -214,7 +214,7 @@ klaus_knockback_effect_think() {
 
 klaus_knockback(param_00, param_01) {
   var_02 = self.var_0116 - param_00;
-  var_03 = param_01 * vectornormalize(var_02);
+  var_03 = param_01 * vectorNormalize(var_02);
   var_03 = (var_03[0], var_03[1], 150);
   if(param_01 > 0) {
     self setvelocity(var_03);

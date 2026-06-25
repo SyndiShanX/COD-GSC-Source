@@ -137,7 +137,7 @@ run_menendez_start() {
   load_gump("blackout_gump_messiah");
   spawn_defalco_or_standin();
   e_streamer = createstreamerhint(level.defalco.origin, 1);
-  e_streamer linkto(level.defalco);
+  e_streamer linkTo(level.defalco);
   menendez_animations();
   maps\_fxanim::fxanim_delete("bridge_fxanims");
   set_light_flicker_fx_area(70900);
@@ -223,7 +223,7 @@ notetrack_defalco_drops_gun_setup(ai_defalco) {
   ai_defalco gun_switchto(ai_defalco.primaryweapon, "right");
   ai_defalco.temp_weapon = spawn("weapon_" + ai_defalco.primaryweapon, ai_defalco gettagorigin("tag_weapon_right"));
   ai_defalco.temp_weapon.angles = ai_defalco gettagangles("tag_weapon_right");
-  ai_defalco.temp_weapon linkto(ai_defalco, "tag_weapon_right");
+  ai_defalco.temp_weapon linkTo(ai_defalco, "tag_weapon_right");
   ai_defalco gun_switchto(ai_defalco.primaryweapon, "none");
 }
 
@@ -250,9 +250,9 @@ run_menendez_betrayal() {
   level thread run_kneepcap_scene_main_animations();
   defalco_was_alive = level.is_defalco_alive;
   scene_kneecap();
-  computer_trig = getent("computer_server_use", "targetname");
+  computer_trig = getEnt("computer_server_use", "targetname");
   computer_trig trigger_on();
-  computer_trig setcursorhint("HINT_NOICON");
+  computer_trig setCursorHint("HINT_NOICON");
   s_objective = get_struct("server_room_objective_struct", "targetname");
   trigger_use("computer_server_use");
   computer_trig trigger_off();
@@ -271,7 +271,7 @@ run_menendez_betrayal() {
   setsaveddvar("player_standingViewHeight", 64);
   scene_wait("menendez_hack_player");
   level.player setlowready(0);
-  level.player enableclientlinkto();
+  level.player enableclientlinkTo();
   setDvar("r_znear", n_znear_old);
   server_room_exit_door_close();
   clientnotify("_gasmask_off");
@@ -312,7 +312,7 @@ briggs_wound_watch() {
   }
 
   set_briggs_killed();
-  playsoundatposition("evt_briggs_dead_stinger", (0, 0, 0));
+  playSoundAtPosition("evt_briggs_dead_stinger", (0, 0, 0));
   kill_all_pending_dialog(level.briggs);
 
   if(!level.briggs.knocked_out) {
@@ -357,11 +357,11 @@ briggs_wound() {
   level.briggs.knocked_out = 0;
   self.overrideactordamage = ::briggs_wound_callback;
   self waittill_any("damage", "death", "knockout");
-  playsoundatposition("evt_briggs_shot_stinger", (0, 0, 0));
+  playSoundAtPosition("evt_briggs_shot_stinger", (0, 0, 0));
 
   if(damagelocationisany("torso_upper", "neck", "head", "helmet")) {
     set_briggs_killed();
-    playsoundatposition("evt_briggs_dead_stinger", (0, 0, 0));
+    playSoundAtPosition("evt_briggs_dead_stinger", (0, 0, 0));
     kill_all_pending_dialog(level.briggs);
   }
 
@@ -514,7 +514,7 @@ menendez_turret_start() {
   level.player.e_menendez_turret = spawn("script_model", v_spawn);
   level.player.e_menendez_turret setModel("tag_origin_animate");
   level.player.e_menendez_turret.angles = level.player.angles;
-  level.player disableclientlinkto();
+  level.player disableclientlinkTo();
   level.player playerlinktodelta(level.player.e_menendez_turret, "tag_origin", 1, 25, 25, 20, 40);
   level.player allowcrouch(0);
   level.player allowsprint(0);
@@ -573,7 +573,7 @@ notetrack_start_virus_bink(m_player_body) {
   m_console_bink.n_bink_id_virus_1 = play_movie_on_surface_async("blackout_virus", 1, 0, undefined, undefined, undefined, 1);
   m_console_bink.n_bink_id_virus_2 = play_movie_on_surface_async("blackout_virus_2", 0, 0, undefined, undefined, undefined, 1);
   level waittill("start_virus_2_bink");
-  playsoundatposition("evt_blackout_virus_2_movie", (2573, 260, -264));
+  playSoundAtPosition("evt_blackout_virus_2_movie", (2573, 260, -264));
   stop3dcinematic(m_console_bink.n_bink_id_virus_1);
   scene_wait("menendez_hack_player");
   stop3dcinematic(m_console_bink.n_bink_id_virus_2);
@@ -631,7 +631,7 @@ lock_light_switch() {
 }
 
 setup_lock_lights() {
-  lock_light = getstruct("lock_light_position", "targetname");
+  lock_light = getStruct("lock_light_position", "targetname");
   play_fx("door_light_locked", lock_light.origin, lock_light.angles, "door_light_switch");
   lock_light thread lock_light_run();
 }
@@ -641,7 +641,7 @@ notetrack_super_kill_ground_impact(ai_guy) {
 }
 
 notetrack_super_kill_flash_on_camera_cut(m_player_body) {
-  playsoundatposition("evt_smashcut_flash", (0, 0, 0));
+  playSoundAtPosition("evt_smashcut_flash", (0, 0, 0));
   screen_fade_out(0.05, "white");
   wait 0.2;
   screen_fade_in(0.05, "white");

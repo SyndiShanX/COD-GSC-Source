@@ -158,9 +158,9 @@ lib_055B::func_5987() {
 
 lib_055B::func_AA2F(param_00) {
   var_01 = self.var_5978 - param_00 getEye();
-  var_02 = vectornormalize((var_01[0], var_01[1], 0));
+  var_02 = vectorNormalize((var_01[0], var_01[1], 0));
   var_03 = anglesToForward(param_00.var_001D);
-  var_04 = vectornormalize((var_03[0], var_03[1], 0));
+  var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = vectordot(var_02, var_04);
   var_05 = clamp(var_05, -1, 1);
   var_06 = acos(var_05);
@@ -201,7 +201,7 @@ lib_055B::func_AA30(param_00) {
     }
 
     var_03 lib_055B::func_AA36(0);
-    var_09 = getent(var_03.var_01A2, "targetname");
+    var_09 = getEnt(var_03.var_01A2, "targetname");
     if(isDefined(var_09) && isDefined(var_09.var_0165) && var_09.var_0165 == "js_trigger") {
       var_03.var_597B = var_09;
     }
@@ -442,7 +442,7 @@ lib_055B::func_5989() {
 }
 
 lib_055B::func_598A() {
-  self playrumbleonentity("grenade_rumble");
+  self playRumbleOnEntity("grenade_rumble");
   earthquake(0.2, 1.5, self.var_0116, 850, self);
 }
 
@@ -493,7 +493,7 @@ lib_055B::func_8A74() {
     var_06 = var_05 getEye();
     var_07 = var_05 geteyeangles();
     var_08 = anglesToForward(var_07);
-    var_09 = vectornormalize(self.var_5978 - var_06);
+    var_09 = vectorNormalize(self.var_5978 - var_06);
     if(vectordot(var_08, var_09) > 0.766) {
       thread lib_055B::func_8A72(var_05, self.var_0116, self.var_001D);
       if(var_00 == 0) {
@@ -524,7 +524,7 @@ lib_055B::func_8A72(param_00, param_01, param_02) {
   var_07 = getanimlength(var_06);
   var_08 = getstartorigin(param_01, param_02, var_06);
   var_09 = getstartangles(param_01, param_02, var_06);
-  var_04 setorigin(var_08);
+  var_04 setOrigin(var_08);
   var_04.var_00FB = int(var_04.var_00FB * var_03);
   var_04.var_00BC = var_04.var_00FB;
   var_04 childthread lib_0547::func_AB18(var_07, 1);
@@ -628,7 +628,7 @@ lib_055B::func_9053(param_00, param_01) {
       }
 
       var_0D = distance2d(var_07, var_0C);
-      if(var_0D < self.var_502E.var_8276 && vectordot(vectornormalize(var_06), vectornormalize(var_0B - var_0C)) > 0.5) {
+      if(var_0D < self.var_502E.var_8276 && vectordot(vectorNormalize(var_06), vectorNormalize(var_0B - var_0C)) > 0.5) {
         var_10 = var_05 getEye() + self.var_502E.var_82E5 + 0.05 * var_06;
         var_11 = distance2d(var_10, var_0C);
         if(var_0D <= var_11) {
@@ -638,7 +638,7 @@ lib_055B::func_9053(param_00, param_01) {
             foreach(var_15 in level.var_744A) {
               if(var_15 != var_05) {
                 var_16 = var_15 getEye();
-                if(distance(var_16, var_0C) < 195 || vectordot(vectornormalize(var_0C - var_16), anglesToForward(var_15 geteyeangles())) > 0 && sighttracepassed(var_16, var_0C + (0, 0, 60), 0, undefined) || sighttracepassed(var_16, self.var_0186.var_0116, 0, undefined)) {
+                if(distance(var_16, var_0C) < 195 || vectordot(vectorNormalize(var_0C - var_16), anglesToForward(var_15 geteyeangles())) > 0 && sighttracepassed(var_16, var_0C + (0, 0, 60), 0, undefined) || sighttracepassed(var_16, self.var_0186.var_0116, 0, undefined)) {
                   var_13 = 1;
                   break;
                 }
@@ -1108,7 +1108,7 @@ lib_055B::func_3DB3() {
       var_03 = var_01 getEye();
       var_04 = var_01 geteyeangles();
       var_05 = anglesToForward(var_04);
-      var_06 = vectornormalize(self.var_5978 - var_03);
+      var_06 = vectorNormalize(self.var_5978 - var_03);
       if(vectordot(var_05, var_06) > 0.766) {
         var_02 = 1;
       } else {}

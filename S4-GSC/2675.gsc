@@ -72,13 +72,13 @@ _id_E2FE(var_0, var_1, var_2) {
   var_7 = spawn("script_model", var_0);
   var_6 setModel(var_3);
   var_7 setModel(var_4);
-  var_7 linkto(var_6, "j_neck", (-9, 1, 0), (0, 0, 0));
-  var_6 linkto(var_5, "", (0, 0, -48), (0, 0, 0));
+  var_7 linkTo(var_6, "j_neck", (-9, 1, 0), (0, 0, 0));
+  var_6 linkTo(var_5, "", (0, 0, -48), (0, 0, 0));
   var_8 = spawn("script_model", var_0);
   var_8.team = var_1;
   var_8._id_4823 = var_0;
   var_5.trigger = var_8;
-  var_8 linkto(var_5);
+  var_8 linkTo(var_5);
   var_5.trigger makeuseable();
   var_5._id_25CA = var_6;
   var_5._id_75DA = var_7;
@@ -102,7 +102,7 @@ _id_E2FE(var_0, var_1, var_2) {
   var_5 thread _id_07D6::_id_FE97();
   var_9 = "icon_minimap_tac_ops_hostage_unknown";
   var_10 = spawn("script_model", var_0);
-  var_10 linkto(var_5);
+  var_10 linkTo(var_5);
   var_5._id_1DBA = var_10;
 
   if(var_1 == "neutral") {
@@ -169,14 +169,14 @@ _id_E3AB() {
   var_1 = spawn("script_model", self.origin);
   var_0 setModel("body_opforce_london_terrorist_1_2");
   var_1 setModel("head_male_bc_03");
-  var_1 linkto(var_0, "j_neck", (-9, 1, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "j_neck", (-9, 1, 0), (0, 0, 0));
 
   if(0) {
     var_0 _meth_82CC("wm_firemancarry_loop_mp_stand");
-    var_0 linkto(self, "j_shoulder_le");
+    var_0 linkTo(self, "j_shoulder_le");
   } else {
     var_0 _meth_82CC("hm_grnd_civ_react02_idle04");
-    var_0 linkto(self, "j_shoulder_le", (-12, -8, -8), (0, 0, 30));
+    var_0 linkTo(self, "j_shoulder_le", (-12, -8, -8), (0, 0, 30));
     var_1 hidefromplayer(self);
     var_0 hidefromplayer(self);
   }
@@ -213,7 +213,7 @@ _id_7A94(var_0) {
   var_0 _id_E3AB();
   var_0._id_7A89._id_25CA hide(1);
   var_0._id_7A89._id_75DA hide(1);
-  self linkto(var_0, "tag_eye", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_eye", (0, 0, 0), (0, 0, 0));
 
   if(isDefined(self._id_F3FE)) {
     self._id_F3FE._id_ADAE = var_0.team;
@@ -247,15 +247,15 @@ _id_7A94(var_0) {
     self._id_FE90 = spawn("script_model", var_0.origin);
   }
 
-  self._id_FE90 linkto(var_0, "tag_eye");
+  self._id_FE90 linkTo(var_0, "tag_eye");
   self._id_FE90 makeuseable();
-  self._id_FE90 setcursorhint("HINT_NOICON");
+  self._id_FE90 setCursorHint("HINT_NOICON");
   self._id_FE90 _meth_84D9("show");
 
   if(scripts\mp\utility\game::getgametype() == "vip") {
-    self._id_FE90 sethintstring(&"MP/HOLD_TO_DROP_VIP");
+    self._id_FE90 setHintString(&"MP/HOLD_TO_DROP_VIP");
   } else {
-    self._id_FE90 sethintstring(&"MP/HOLD_TO_DROP_HOSTAGE");
+    self._id_FE90 setHintString(&"MP/HOLD_TO_DROP_HOSTAGE");
   }
 
   self._id_FE90 sethintdisplayfov(360);
@@ -572,7 +572,7 @@ _id_A242(var_0) {
     }
     var_6 = var_5 / var_1;
     self.angles = vectortoangles(var_4 - self.origin);
-    self moveto(var_4, var_6, 0, 0);
+    self moveTo(var_4, var_6, 0, 0);
     wait(var_6);
   }
 
@@ -726,13 +726,13 @@ _id_5032(var_0, var_1, var_2, var_3, var_4) {
       }
     }
 
-    var_1.trigger sethintstring(&"MP/HOLD_TO_PICKUP_VIP");
+    var_1.trigger setHintString(&"MP/HOLD_TO_PICKUP_VIP");
     level thread scripts\mp\hud_message::_id_FCBF(var_1.team, 10, 12);
   } else if(scripts\mp\utility\game::getgametype() == "btm") {
-    var_1.trigger sethintstring(&"MP/HOLD_TO_PICKUP_VIP");
+    var_1.trigger setHintString(&"MP/HOLD_TO_PICKUP_VIP");
     level thread scripts\mp\hud_message::_id_FCBF(var_1.team, 10, 12);
   } else
-    var_1.trigger sethintstring(&"MP/HOLD_TO_PICKUP_HOSTAGE");
+    var_1.trigger setHintString(&"MP/HOLD_TO_PICKUP_HOSTAGE");
 
   var_1 _meth_83A1(-300);
 
@@ -741,7 +741,7 @@ _id_5032(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(isDefined(var_1._id_25CA)) {
-    var_1._id_25CA linkto(var_1, "", (0, 0, 0), (0, 0, 0));
+    var_1._id_25CA linkTo(var_1, "", (0, 0, 0), (0, 0, 0));
     var_1._id_25CA _meth_82CC("hm_grnd_civ_react02_idle07");
   }
 

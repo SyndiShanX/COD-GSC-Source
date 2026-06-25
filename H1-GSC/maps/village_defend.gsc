@@ -113,13 +113,13 @@ main() {
   level.killzonefuelexplosion_fx = loadfx("fx\explosions\grenadeExp_fuel");
   killzonefxprogram();
   maps\_compass::setupminimap("compass_map_village_defend");
-  level.price = getent("price", "targetname");
+  level.price = getEnt("price", "targetname");
   level.price maps\_utility::make_hero();
   level.price.animname = "price";
-  level.gaz = getent("redshirt2", "targetname");
+  level.gaz = getEnt("redshirt2", "targetname");
   level.gaz maps\_utility::make_hero();
   level.gaz.animname = "gaz";
-  level.redshirt = getent("redshirt1", "targetname");
+  level.redshirt = getEnt("redshirt1", "targetname");
   maps\_utility::battlechatter_off("allies");
   maps\_utility::battlechatter_off("axis");
   setDvar("village_defend_one_minute", "0");
@@ -306,9 +306,9 @@ main() {
   level thread return_trip_enemy_acc_prep();
   maps\_utility::add_hint_string("minigun_spin_left_trigger", &"SCRIPT_PLATFORM_SPOOL_MINIGUN", ::should_break_minigun_spin_hint);
   maps\_utility::add_hint_string("minigun_spin_keyboard", &"SCRIPT_PLATFORM_SPOOL_MINIGUN_KEYBOARD", ::should_break_minigun_spin_hint);
-  level.playersafetyblocker = getent("helo_safety_blocker", "targetname");
+  level.playersafetyblocker = getEnt("helo_safety_blocker", "targetname");
   level.playersafetyblocker notsolid();
-  level.playerheliblocker = getent("heli_blocker", "targetname");
+  level.playerheliblocker = getEnt("heli_blocker", "targetname");
   level.playerheliblocker notsolid();
   thread village_defend_wibble_think();
 }
@@ -330,7 +330,7 @@ stash_counter() {
 }
 
 should_break_minigun_spin_hint() {
-  var_0 = getent("minigun", "targetname");
+  var_0 = getEnt("minigun", "targetname");
   var_1 = var_0 getturretowner();
 
   if(!isDefined(var_1)) {
@@ -366,9 +366,9 @@ start_southern_hill() {
   common_scripts\utility::flag_set("objective_player_on_ridgeline");
   common_scripts\utility::flag_set("objective_on_ridgeline");
   var_0 = getnode("player_southern_start", "targetname");
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   var_1 = getnode("price_southern_start", "targetname");
-  level.price = getent("price", "targetname");
+  level.price = getEnt("price", "targetname");
   level.price teleport(var_1.origin);
   var_2 = getEntArray("introHillTrig", "targetname");
 
@@ -388,9 +388,9 @@ start_minigun_fallback() {
   common_scripts\utility::flag_set("objective_on_ridgeline");
   common_scripts\utility::flag_set("southern_hill_killzone_detonate");
   var_0 = getnode("player_southern_start", "targetname");
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   var_1 = getnode("price_southern_start", "targetname");
-  level.price = getent("price", "targetname");
+  level.price = getEnt("price", "targetname");
   level.price teleport(var_1.origin);
   thread moveredshirts("redshirt_southern_start1", "redshirt_southern_start2");
   var_2 = getEntArray("introHillTrig", "targetname");
@@ -414,9 +414,9 @@ start_minigun() {
   common_scripts\utility::flag_set("objective_price_orders_minigun");
   common_scripts\utility::flag_set("southern_hill_smoke_entry");
   var_0 = getnode("player_start_minigun", "targetname");
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   var_1 = getnode("fallback_price", "targetname");
-  level.price = getent("price", "targetname");
+  level.price = getEnt("price", "targetname");
   level.price teleport(var_1.origin);
   level.price setgoalnode(var_1);
   thread moveredshirts("fallback_redshirt1", "fallback_redshirt2");
@@ -439,9 +439,9 @@ start_helidrop() {
   common_scripts\utility::flag_set("objective_minigun_baglimit_done");
   common_scripts\utility::flag_set("divert_for_clacker");
   var_0 = getnode("player_start_minigun", "targetname");
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   var_1 = getnode("fallback_price", "targetname");
-  level.price = getent("price", "targetname");
+  level.price = getEnt("price", "targetname");
   level.price teleport(var_1.origin);
   level.price setgoalnode(var_1);
   thread moveredshirts("fallback_redshirt1", "fallback_redshirt2");
@@ -464,7 +464,7 @@ start_clackers() {
   common_scripts\utility::flag_set("objective_detonators");
   common_scripts\utility::flag_set("detonators_activate");
   var_0 = getnode("player_start_clacker", "targetname");
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   thread southern_hill_mortars_killtimer();
   thread minigun_primary_attack();
   thread minigun_smokescreens();
@@ -491,7 +491,7 @@ start_field_fallback() {
   common_scripts\utility::flag_set("objective_armor_arrival");
   common_scripts\utility::flag_set("storm_the_tavern");
   var_0 = getnode("player_start_clacker", "targetname");
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   thread southern_hill_mortars_killtimer();
   thread minigun_primary_attack();
   thread minigun_smokescreens();
@@ -515,7 +515,7 @@ start_javelin() {
   common_scripts\utility::flag_set("barn_assault_begins");
   common_scripts\utility::flag_set("objective_armor_arrival");
   common_scripts\utility::flag_set("storm_the_tavern");
-  level.player setorigin((1021, 7309, 1006));
+  level.player setOrigin((1021, 7309, 1006));
   thread saw_gunner_friendly();
 }
 
@@ -540,7 +540,7 @@ start_final_battle() {
   common_scripts\utility::flag_set("airstrikes_ready");
   common_scripts\utility::flag_set("storm_the_tavern");
   common_scripts\utility::flag_set("start_final_battle");
-  level.player setorigin((1021, 7309, 1006));
+  level.player setOrigin((1021, 7309, 1006));
   thread saw_gunner_friendly();
   var_0 = getEntArray("barbed_wire_detonator", "targetname");
   thread minigun_barbed_wire_detonate("southern_hill_barbed_wire_wall_1", var_0);
@@ -571,7 +571,7 @@ start_seaknight() {
   common_scripts\utility::flag_set("airstrikes_ready");
   common_scripts\utility::flag_set("storm_the_tavern");
   common_scripts\utility::flag_set("rescue_chopper_ingress");
-  level.player setorigin((-64, -1904, -80));
+  level.player setOrigin((-64, -1904, -80));
   thread saw_gunner_friendly();
   var_0 = getEntArray("barbed_wire_detonator", "targetname");
   thread minigun_barbed_wire_detonate("southern_hill_barbed_wire_wall_1", var_0);
@@ -586,8 +586,8 @@ start_seaknight() {
 }
 
 moveredshirts(var_0, var_1) {
-  var_2 = getent("redshirt1", "targetname");
-  var_3 = getent("redshirt2", "targetname");
+  var_2 = getEnt("redshirt1", "targetname");
+  var_3 = getEnt("redshirt2", "targetname");
   var_4 = getnode(var_0, "targetname");
   var_5 = getnode(var_1, "targetname");
   var_2 teleport(var_4.origin);
@@ -625,8 +625,8 @@ intro() {
 
   wait 18;
   var_3 = getnode("price_intro_route", "targetname");
-  var_4 = getent("redshirt1", "targetname");
-  var_5 = getent("redshirt2", "targetname");
+  var_4 = getEnt("redshirt1", "targetname");
+  var_5 = getEnt("redshirt2", "targetname");
   var_6 = getnode("sas1_intro_route", "targetname");
   var_7 = getnode("sas2_intro_route", "targetname");
   level.price thread followscriptedpath(var_3, undefined, "prone");
@@ -643,7 +643,7 @@ intro() {
 }
 
 intro_church_tower_explode() {
-  var_0 = getent("intro_tank_tower_target", "targetname");
+  var_0 = getEnt("intro_tank_tower_target", "targetname");
   wait 2;
   var_0 playSound("artillery_incoming");
   wait 1;
@@ -653,7 +653,7 @@ intro_church_tower_explode() {
   var_0 playSound("exp_bell_tower");
   earthquake(0.65, 1, var_0.origin, 3000);
   common_scripts\utility::flag_set("church_tower_explodes");
-  var_1 = getent("church_explosion_damage", "targetname");
+  var_1 = getEnt("church_explosion_damage", "targetname");
 
   for(var_2 = 0; var_2 < 20; var_2++) {
     if(level.player istouching(var_1)) {
@@ -665,7 +665,7 @@ intro_church_tower_explode() {
 }
 
 intro_hillpatrol_check() {
-  var_0 = getent("hill_patrol_trig", "targetname");
+  var_0 = getEnt("hill_patrol_trig", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("objective_player_on_ridgeline");
 }
@@ -751,7 +751,7 @@ magic_sniper() {
   wait 2;
   var_0 = undefined;
   var_1 = 0;
-  var_2 = getent("southern_hill_magic_sniper", "targetname");
+  var_2 = getEnt("southern_hill_magic_sniper", "targetname");
 
   for(;;) {
     var_3 = [];
@@ -980,14 +980,14 @@ southern_hill_ambush() {
 southern_hill_killzone_sequence() {
   var_0 = [];
   var_1 = [];
-  var_2 = getent("southern_hill_killzone_1", "targetname");
-  var_3 = getent("southern_hill_killzone_2", "targetname");
+  var_2 = getEnt("southern_hill_killzone_1", "targetname");
+  var_3 = getEnt("southern_hill_killzone_2", "targetname");
 
   for(;;) {
     var_0[var_0.size] = var_2;
 
     if(isDefined(var_2.target)) {
-      var_2 = getent(var_2.target, "targetname");
+      var_2 = getEnt(var_2.target, "targetname");
     } else {
       break;
     }
@@ -999,7 +999,7 @@ southern_hill_killzone_sequence() {
     var_1[var_1.size] = var_3;
 
     if(isDefined(var_3.target)) {
-      var_3 = getent(var_3.target, "targetname");
+      var_3 = getEnt(var_3.target, "targetname");
     } else {
       break;
     }
@@ -1068,7 +1068,7 @@ southern_hill_panic_screaming() {
 }
 
 southern_hill_ambush_mg() {
-  var_0 = getent("southern_house_manual_mg", "targetname");
+  var_0 = getEnt("southern_house_manual_mg", "targetname");
   var_0 setmode("manual");
   var_0 thread southern_hill_mg_targeting();
   common_scripts\utility::flag_wait("southern_mg_openfire");
@@ -1174,13 +1174,13 @@ southern_hill_damagemonitor() {
 }
 
 southern_hill_shotmonitor() {
-  var_0 = getent("hill_patrol_shotdetector", "targetname");
+  var_0 = getEnt("hill_patrol_shotdetector", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("southern_hill_action_started");
 }
 
 saw_gunner_friendly() {
-  var_0 = getent("sasGunner", "targetname");
+  var_0 = getEnt("sasGunner", "targetname");
   level.sasgunner = var_0 dospawn();
 
   if(maps\_utility::spawn_failed(level.sasgunner)) {
@@ -1288,7 +1288,7 @@ southern_hill_mortars_killtimer() {
 
 southern_hill_mortars_killplayer() {
   level endon("arm_delaying_action");
-  var_0 = getent("ridgeline_dangerarea", "targetname");
+  var_0 = getEnt("ridgeline_dangerarea", "targetname");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -1307,8 +1307,8 @@ southern_hill_mortars_killplayer() {
 minigun_fallback() {
   common_scripts\utility::flag_wait("ridgeline_targeted");
   maps\_utility::autosave_by_name("ridgeline_under_mortar_fire");
-  var_0 = getent("redshirt1", "targetname");
-  var_1 = getent("redshirt2", "targetname");
+  var_0 = getEnt("redshirt1", "targetname");
+  var_1 = getEnt("redshirt2", "targetname");
   var_2 = getnode("fallback_redshirt1", "targetname");
   var_3 = getnode("fallback_redshirt2", "targetname");
   maps\_utility::radio_dialogue_queue("targetingour");
@@ -1382,7 +1382,7 @@ minigun_orders() {
 
 minigun_fallback_shouting() {
   level endon("stop_minigun_fallback_shouting");
-  var_0 = getent("minigun", "targetname");
+  var_0 = getEnt("minigun", "targetname");
   var_1 = 5;
   var_2 = 10;
   var_3 = 0;
@@ -1437,7 +1437,7 @@ minigun_fallback_shouting() {
 }
 
 minigun_fallback_shouting_cancel() {
-  var_0 = getent("minigun_fallback_shouting", "targetname");
+  var_0 = getEnt("minigun_fallback_shouting", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("stop_minigun_fallback_shouting");
   thread clacker_use_shouting();
@@ -1548,7 +1548,7 @@ minigun_barbed_wire_detonate(var_0, var_1) {
 
 minigun_firstuse_check() {
   while(!common_scripts\utility::flag("minigun_lesson_learned")) {
-    var_0 = getent("minigun", "targetname");
+    var_0 = getEnt("minigun", "targetname");
     var_0 waittill("turretownerchange");
     var_1 = var_0 getturretowner();
 
@@ -1564,7 +1564,7 @@ minigun_firstuse_check() {
 }
 
 minigun_arming_check() {
-  var_0 = getent("minigun", "targetname");
+  var_0 = getEnt("minigun", "targetname");
 
   for(;;) {
     var_1 = var_0 getturretowner();
@@ -1639,11 +1639,11 @@ helidrop() {
   var_1 = getnode("clacker_fallback_price", "targetname");
   level.price setgoalnode(var_1);
   level.price thread hero_scripted_travel();
-  var_2 = getent("redshirt1", "targetname");
+  var_2 = getEnt("redshirt1", "targetname");
   var_3 = getnode("clacker_fallback_redshirt1", "targetname");
   var_2 setgoalnode(var_3);
   var_2 thread hero_scripted_travel();
-  var_4 = getent("redshirt2", "targetname");
+  var_4 = getEnt("redshirt2", "targetname");
   var_5 = getnode("clacker_fallback_redshirt2", "targetname");
   var_4 setgoalnode(var_5);
   var_4 thread hero_scripted_travel();
@@ -1687,7 +1687,7 @@ hunt_player(var_0) {
   self.goalradius = 1800;
   self.pathenemyfightdist = 1800;
   self.pathenemylookahead = 1800;
-  var_1 = getent("player_in_blackhawk_detector", "targetname");
+  var_1 = getEnt("player_in_blackhawk_detector", "targetname");
   var_2 = getnode("bait_crashsite", "targetname");
 
   while(self.goalradius > 640) {
@@ -1781,7 +1781,7 @@ helidrop_clacker_divert(var_0) {
 }
 
 tavern_storming_delay() {
-  var_0 = getent("tavern_fallback_shouting", "targetname");
+  var_0 = getEnt("tavern_fallback_shouting", "targetname");
   var_0 thread tavern_stop_shouting();
   thread tavern_storming_hints();
   wait 5;
@@ -1838,7 +1838,7 @@ clacker_primary_attack() {
   var_2 = "clacker_far_and_near_slope_done";
   var_3 = "spawnHillFlank";
   level endon(var_2);
-  var_4 = getent("nearfarslope_activation", "targetname");
+  var_4 = getEnt("nearfarslope_activation", "targetname");
   var_4 waittill("trigger");
   common_scripts\utility::flag_set("player_entered_clacker_house_top_floor");
   maps\_utility::autosave_by_name("player_entered_clacker_house");
@@ -1902,13 +1902,13 @@ clacker_init() {
 
 clacker_marker_setup() {
   var_0 = [];
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
 
   for(;;) {
     var_0[var_0.size] = var_1;
 
     if(isDefined(var_1.target)) {
-      var_1 = getent(var_1.target, "targetname");
+      var_1 = getEnt(var_1.target, "targetname");
     } else {
       break;
     }
@@ -1920,8 +1920,8 @@ clacker_marker_setup() {
 }
 
 clacker_standby(var_0) {
-  var_1 = getent(self.targetname, "target");
-  var_2 = getent(self.script_noteworthy, "targetname");
+  var_1 = getEnt(self.targetname, "target");
+  var_2 = getEnt(self.script_noteworthy, "targetname");
   common_scripts\utility::flag_wait("detonators_activate");
   self show();
   var_3 = var_1.script_flag_true;
@@ -1929,7 +1929,7 @@ clacker_standby(var_0) {
   thread clacker_markers(var_2, var_0);
 
   for(;;) {
-    var_1 sethintstring(&"SCRIPT_PLATFORM_HINT_GET_DETONATOR");
+    var_1 setHintString(&"SCRIPT_PLATFORM_HINT_GET_DETONATOR");
     var_1 waittill("trigger");
 
     while(common_scripts\utility::flag("putting_clacker_away")) {
@@ -2225,7 +2225,7 @@ player_interior_detect_init() {
 
 enemy_interior_flashbangs() {
   level endon("farm_reached");
-  var_0 = getent("enemy_near_interior_trig", "targetname");
+  var_0 = getEnt("enemy_near_interior_trig", "targetname");
   common_scripts\utility::flag_wait("fall_back_to_barn");
 
   for(;;) {
@@ -2299,16 +2299,16 @@ tanks_engage(var_0) {
 
   if(var_0 == "tank_backyard_01") {
     var_1 = getvehiclenode("tank1_fire_position", "script_noteworthy");
-    var_2 = getent("tank_killzone_east", "targetname");
+    var_2 = getEnt("tank_killzone_east", "targetname");
   } else if(var_0 == "tank_backyard_02") {
     var_1 = getvehiclenode("tank2_fire_position", "script_noteworthy");
-    var_2 = getent("tank_killzone_west", "targetname");
+    var_2 = getEnt("tank_killzone_west", "targetname");
   } else if(var_0 == "tank_backyard_03") {
     var_1 = getvehiclenode("tank3_fire_position", "script_noteworthy");
-    var_2 = getent("tank_killzone_west", "targetname");
+    var_2 = getEnt("tank_killzone_west", "targetname");
   } else if(var_0 == "tank_backyard_04") {
     var_1 = getvehiclenode("tank4_fire_position", "script_noteworthy");
-    var_2 = getent("tank_killzone_east", "targetname");
+    var_2 = getEnt("tank_killzone_east", "targetname");
   }
 
   self setwaitnode(var_1);
@@ -2368,7 +2368,7 @@ tank_ping(var_0) {
 
 barn_helidrop() {
   if(getDvar("start") != "final_battle" && getDvar("start") != "javelin" && getDvar("start") != "seaknight") {
-    var_0 = getent("barn_helidrop", "targetname");
+    var_0 = getEnt("barn_helidrop", "targetname");
     common_scripts\utility::flag_wait("barn_assault_begins");
     var_0 waittill("trigger");
     level notify("halfway_through_field");
@@ -2382,8 +2382,8 @@ barn_helidrop() {
 }
 
 field_fallback() {
-  var_0 = getent("redshirt1", "targetname");
-  var_1 = getent("redshirt2", "targetname");
+  var_0 = getEnt("redshirt1", "targetname");
+  var_1 = getEnt("redshirt2", "targetname");
   var_2 = getnode("field_fallback_redshirt1", "targetname");
   var_3 = getnode("field_fallback_redshirt2", "targetname");
   var_4 = getnode("field_fallback_price", "targetname");
@@ -2399,9 +2399,9 @@ field_fallback() {
 }
 
 barn_fallback() {
-  var_0 = getent("redshirt1", "targetname");
+  var_0 = getEnt("redshirt1", "targetname");
   var_1 = getnode("barn_fallback_redshirt1", "targetname");
-  var_2 = getent("redshirt2", "targetname");
+  var_2 = getEnt("redshirt2", "targetname");
   var_3 = getnode("barn_fallback_redshirt2", "targetname");
   var_4 = getnode("barn_fallback_price", "targetname");
   var_5 = getnode("barn_fallback_sasGunner", "targetname");
@@ -2416,10 +2416,10 @@ barn_fallback() {
 }
 
 escape_fallback() {
-  var_0 = getent("final_lz", "targetname");
-  var_1 = getent("redshirt1", "targetname");
+  var_0 = getEnt("final_lz", "targetname");
+  var_1 = getEnt("redshirt1", "targetname");
   var_2 = getnode("final_rally_gaz", "targetname");
-  var_3 = getent("redshirt2", "targetname");
+  var_3 = getEnt("redshirt2", "targetname");
   var_4 = getnode("final_rally_redshirt2", "targetname");
   var_5 = getnode("final_rally_price", "targetname");
   var_6 = getnode("final_rally_redshirt1", "targetname");
@@ -2541,10 +2541,10 @@ farm_javelin_nag() {
 }
 
 objectives() {
-  var_0 = getent("minigun", "targetname");
+  var_0 = getEnt("minigun", "targetname");
   var_1 = getEntArray("clacker_objective_marker", "script_noteworthy");
-  var_2 = getent("farm_reached_trig", "targetname");
-  var_3 = getent("extraction_point", "targetname");
+  var_2 = getEnt("farm_reached_trig", "targetname");
+  var_3 = getEnt("extraction_point", "targetname");
 
   if(maps\_utility::is_default_start()) {
     wait 25;
@@ -2631,13 +2631,13 @@ objectives() {
   maps\_utility::autosave_by_name("get_to_the_choppah");
   maps\_utility::arcademode_checkpoint(7, "g");
   var_6 = length(level.price.origin - level.player.origin);
-  var_7 = getent("price_seaknight_doppel", "targetname");
+  var_7 = getEnt("price_seaknight_doppel", "targetname");
   var_8 = length(level.gaz.origin - level.player.origin);
-  var_9 = getent("gaz_seaknight_doppel", "targetname");
+  var_9 = getEnt("gaz_seaknight_doppel", "targetname");
   var_10 = length(level.redshirt.origin - level.player.origin);
-  var_11 = getent("redshirt_seaknight_doppel", "targetname");
+  var_11 = getEnt("redshirt_seaknight_doppel", "targetname");
   var_12 = length(level.sasgunner.origin - level.player.origin);
-  var_13 = getent("sasGunner_seaknight_doppel", "targetname");
+  var_13 = getEnt("sasGunner_seaknight_doppel", "targetname");
   var_14 = [];
   var_14[0] = level.price;
   var_14[1] = level.gaz;
@@ -2669,9 +2669,9 @@ objectives() {
 autosaves_return_trip() {
   level endon("outtahere");
   common_scripts\utility::flag_wait("return_trip_begins");
-  var_0 = getent("first_return_save", "targetname");
-  var_1 = getent("second_return_save", "targetname");
-  var_2 = getent("third_return_save", "targetname");
+  var_0 = getEnt("first_return_save", "targetname");
+  var_1 = getEnt("second_return_save", "targetname");
+  var_2 = getEnt("third_return_save", "targetname");
   var_3 = level.stopwatch * 60 * 1000;
   var_4 = gettime();
   var_0 waittill("trigger");
@@ -2899,7 +2899,7 @@ countdown_events() {
 }
 
 early_chopper() {
-  var_0 = getent("early_chopper", "targetname");
+  var_0 = getEnt("early_chopper", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("rescue_chopper_ingress");
 }
@@ -2955,7 +2955,7 @@ rescue_chopper() {
     wait 1;
     maps\_utility::nextmission();
   } else {
-    var_1 = getent("intro_tank_tower_target", "targetname");
+    var_1 = getEnt("intro_tank_tower_target", "targetname");
     var_1 playSound(level.sniperfx);
     wait 0.1;
     level.player kill();
@@ -2965,13 +2965,13 @@ rescue_chopper() {
 rescue_teleport_friendlies() {
   wait 2;
   var_0 = length(level.price.origin - level.player.origin);
-  var_1 = getent("price_seaknight_doppel", "targetname");
+  var_1 = getEnt("price_seaknight_doppel", "targetname");
   var_2 = length(level.gaz.origin - level.player.origin);
-  var_3 = getent("gaz_seaknight_doppel", "targetname");
+  var_3 = getEnt("gaz_seaknight_doppel", "targetname");
   var_4 = length(level.redshirt.origin - level.player.origin);
-  var_5 = getent("redshirt_seaknight_doppel", "targetname");
+  var_5 = getEnt("redshirt_seaknight_doppel", "targetname");
   var_6 = length(level.sasgunner.origin - level.player.origin);
-  var_7 = getent("sasGunner_seaknight_doppel", "targetname");
+  var_7 = getEnt("sasGunner_seaknight_doppel", "targetname");
   var_8 = 1800;
 
   if(var_0 > var_8) {
@@ -3020,7 +3020,7 @@ rescue_ride() {
   var_0 = maps\_utility::spawn_anim_model("player_carry");
   var_0 hide();
   level.seaknight1 maps\_anim::anim_first_frame_solo(var_0, "village_player_getin", "tag_detach");
-  var_0 linkto(level.seaknight1, "tag_detach");
+  var_0 linkTo(level.seaknight1, "tag_detach");
   var_0 maps\_utility::lerp_player_view_to_tag("tag_player", 0.5, 0.9, 35, 35, 45, 0);
   var_1 = [];
   var_1[var_1.size] = var_0;
@@ -3043,7 +3043,7 @@ music() {
 }
 
 mandown_reverse_spawn() {
-  var_0 = getent("back_spawning_activator", "script_noteworthy");
+  var_0 = getEnt("back_spawning_activator", "script_noteworthy");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("back_spawn_stoppable");
 }
@@ -3074,11 +3074,11 @@ killzone_detonation(var_0, var_1) {
       var_11 = common_scripts\utility::ter_op(var_7, "generic_attack_heavy_500", "generic_attack_heavy_1000");
 
       if(var_3 == var_0.size - 1) {
-        level.player playrumbleonentity(var_11);
+        level.player playRumbleOnEntity(var_11);
       } else if(randomint(3) == 0) {
-        level.player playrumbleonentity(var_9);
+        level.player playRumbleOnEntity(var_9);
       } else {
-        level.player playrumbleonentity(var_10);
+        level.player playRumbleOnEntity(var_10);
       }
     }
 
@@ -3215,7 +3215,7 @@ encroach_start(var_0, var_1, var_2, var_3, var_4) {
     }
 
     var_7 thread encroach_nav(var_0, var_2);
-    var_9 = getent("minigun", "targetname");
+    var_9 = getEnt("minigun", "targetname");
     var_10 = var_9 getturretowner();
 
     if(isDefined(var_4)) {
@@ -3301,7 +3301,7 @@ begin_delaying_action() {
     level.detectioncycletime = 19;
   }
 
-  var_0 = getent("delaying_action_trigger", "targetname");
+  var_0 = getEnt("delaying_action_trigger", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("engage_delaying_action");
 }
@@ -3789,7 +3789,7 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   var_11 setModel("vehicle_av8b_harrier_jet");
   var_11.angles = var_5;
   var_11 thread playcontrail();
-  var_11 moveto(var_10, var_4, 0, 0);
+  var_11 moveTo(var_10, var_4, 0, 0);
   thread callstrike_planesound(var_11, var_0);
   thread callstrike_bombeffect(var_11, var_3 - 1.0, var_6);
   wait(var_4);
@@ -3829,7 +3829,7 @@ callstrike_planesound(var_0, var_1) {
 
 targetisinfront(var_0, var_1) {
   var_2 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
-  var_3 = vectornormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_1) - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {
@@ -3938,7 +3938,7 @@ friendly_player_tracking_nav() {
   self.fixednode = 0;
   self._id_9097 = 2000;
   self.coversearchinterval = 6000;
-  var_0 = getent("player_in_blackhawk_detector", "targetname");
+  var_0 = getEnt("player_in_blackhawk_detector", "targetname");
   var_1 = getnode("bait_crashsite", "targetname");
 
   for(;;) {
@@ -3981,7 +3981,7 @@ toggle_detonator(var_0, var_1) {
     var_2 hide();
     var_2.origin = var_0 gettagorigin("tag_inhand");
     var_2.angles = var_0 gettagangles("tag_inhand");
-    var_2 linkto(var_0, "tag_inhand");
+    var_2 linkTo(var_0, "tag_inhand");
     var_2 show();
     var_0.detonatorobject = var_2;
   } else {

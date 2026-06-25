@@ -164,7 +164,7 @@ set_stage(var_0, var_1, var_2) {
   }
 
   var_3 = get_stage_nodes(var_0, var_2);
-  var_4 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_4 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_5 = spawn("script_model", (0, 0, 0));
   var_5 setModel(self.model);
 

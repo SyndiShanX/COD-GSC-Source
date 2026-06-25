@@ -34,7 +34,7 @@ on_begin() {
 on_end(round_reset) {
   if(!round_reset) {
     if(!(isDefined(level.var_84199d1) && level.var_84199d1)) {
-      zm_trial::fail(undefined, getplayers());
+      zm_trial::fail(undefined, getPlayers());
     }
   }
 

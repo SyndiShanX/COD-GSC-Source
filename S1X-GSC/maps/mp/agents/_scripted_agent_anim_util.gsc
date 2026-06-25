@@ -137,7 +137,7 @@ getanimscalefactors(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2) {
     var_9 = (var_1[0], var_1[1], 0);
-    var_10 = vectornormalize(var_9);
+    var_10 = vectorNormalize(var_9);
 
     if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;

@@ -112,7 +112,7 @@ function do_that_sam_rumble() {
   self endon("disconnect");
   count = 0;
   while(count <= 4 && isDefined(self)) {
-    self playrumbleonentity(0, "damage_heavy");
+    self playRumbleOnEntity(0, "damage_heavy");
     wait(0.1);
     count = count + 0.1;
   }

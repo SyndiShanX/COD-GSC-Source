@@ -190,12 +190,12 @@ function function_e415c864(var_5da09c55) {
 
   var_912fa366 = spawn("trigger_radius_use", var_5da09c55.origin + (0, 0, 16), 0, var_5da09c55.radius, var_5da09c55.height);
   var_912fa366.var_5da09c55 = var_5da09c55;
-  var_912fa366 triggerignoreteam();
+  var_912fa366 triggerIgnoreTeam();
   var_912fa366 setvisibletoall();
   var_912fa366 setteamfortrigger(#"none");
-  var_912fa366 setcursorhint("HINT_NOICON");
+  var_912fa366 setCursorHint("HINT_NOICON");
   hint = #"hash_5ca3696cb6c3bea9";
-  var_912fa366 sethintstring(hint);
+  var_912fa366 setHintString(hint);
   var_912fa366 callback::on_trigger(&zipline_use);
   var_912fa366 function_2e7a1fba();
 
@@ -217,7 +217,7 @@ function function_e415c864(var_5da09c55) {
 function function_77fde59c(var_5da09c55) {
   var_912fa366 = spawn("trigger_radius", var_5da09c55.origin + (0, 0, 16), 0, 96, 128);
   var_912fa366.var_5da09c55 = var_5da09c55;
-  var_912fa366 triggerignoreteam();
+  var_912fa366 triggerIgnoreTeam();
   var_912fa366 setvisibletoall();
   var_912fa366 setteamfortrigger(#"none");
   var_912fa366 callback::on_trigger(&function_5abc3f1f);
@@ -254,7 +254,7 @@ function function_5abc3f1f(trigger_info) {
 
   velocity = player getvelocity();
   var_aba19503 = self.var_5da09c55.endstruct.origin - self.var_5da09c55.origin;
-  var_aba19503 = vectornormalize(var_aba19503);
+  var_aba19503 = vectorNormalize(var_aba19503);
   velocitymag = vectordot(var_aba19503, velocity);
 
   if(velocitymag < getdvarfloat(#"hash_22b8f78d9b451771", 170)) {
@@ -285,7 +285,7 @@ function function_2a1bd467(struct) {
     struct.cooldown = [];
 
     if(isDefined(struct.script_string)) {
-      struct.clip = getent(struct.script_string, "targetname");
+      struct.clip = getEnt(struct.script_string, "targetname");
     }
   }
 
@@ -385,7 +385,7 @@ function private function_c4035adb(zipline) {
 function private function_33111d8d(inuse) {
   self.inuse += inuse ? 1 : -1;
   assert(self.inuse >= 0 && self.inuse <= 4);
-  array::thread_all(getplayers(), &function_c4035adb, self);
+  array::thread_all(getPlayers(), &function_c4035adb, self);
 }
 
 function private function_f7f636b8() {

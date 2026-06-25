@@ -323,7 +323,7 @@ function _cybercom_notify_toggle_on() {
     } else {
       level clientfield::set("cybercom_disabled", 0);
       setDvar("cybercom_enabled", 1);
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player enablecybercom();
       }
     }
@@ -340,7 +340,7 @@ function _cybercom_notify_toggle_off() {
     } else {
       level clientfield::set("cybercom_disabled", 1);
       setDvar("cybercom_enabled", 0);
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player disablecybercom();
       }
     }
@@ -358,7 +358,7 @@ function cybercom_getadjusteddamage(player, eattacker, einflictor, idamage, weap
 
 function function_d240e350(var_7872e02, target, var_9bc2efcb = 1, upgraded = 0) {
   self endon("death");
-  while(var_9bc2efcb && self isplayinganimscripted()) {
+  while(var_9bc2efcb && self isplayinganimScripted()) {
     wait(0.1);
   }
   switch (var_7872e02) {

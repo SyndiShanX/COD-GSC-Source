@@ -60,7 +60,7 @@ func_90A1() {
   var_05 method_83D5("vlobby_animclass");
   var_05 method_83D7("lobby_idle", "selfie_01", 1);
   var_05 setcostumemodels(level.var_721C.var_9042.var_267E);
-  var_05 linkto(level.var_83C4.var_7300);
+  var_05 linkTo(level.var_83C4.var_7300);
   level.var_83C4.var_242C = var_05;
   self.var_83C3 = var_05;
 }

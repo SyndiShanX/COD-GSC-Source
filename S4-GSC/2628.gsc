@@ -123,7 +123,7 @@ _id_8E45(var_0, var_1, var_2, var_3) {
       }
 
       scripts\cp_mp\utility\weapon_utility::_id_3971(var_0);
-      var_0 missile_settargetent(var_5);
+      var_0 missile_settargetEnt(var_5);
       var_0 notify("missile_pairedWithFlare");
       break;
     }
@@ -178,7 +178,7 @@ _id_5C86(var_0, var_1, var_2, var_3) {
           for(var_8 = 0; var_8 < var_3.size; var_8++) {
             if(isDefined(var_3[var_8])) {
               scripts\cp_mp\utility\weapon_utility::_id_3971(var_3[var_8]);
-              var_3[var_8] missile_settargetent(var_7);
+              var_3[var_8] missile_settargetEnt(var_7);
               var_3[var_8] notify("missile_pairedWithFlare");
             }
           }
@@ -234,7 +234,7 @@ _id_5C87(var_0, var_1, var_2, var_3) {
       var_2 thread _id_5C82(undefined, var_3);
       var_6 = var_2 _id_5C76();
       scripts\cp_mp\utility\weapon_utility::_id_3971(self);
-      self missile_settargetent(var_6);
+      self missile_settargetEnt(var_6);
       self notify("missile_pairedWithFlare");
       return;
     }
@@ -304,8 +304,8 @@ _id_8E46(var_0) {
     self.owner thread _id_8E4B(self, "missile_incoming");
 
     if(isDefined(var_0)) {
-      var_2 = vectornormalize(var_1[0].origin - self.origin);
-      var_3 = vectornormalize(anglestoright(self.angles));
+      var_2 = vectorNormalize(var_1[0].origin - self.origin);
+      var_3 = vectorNormalize(anglestoright(self.angles));
       var_4 = vectordot(var_2, var_3);
       var_5 = 1;
 
@@ -342,7 +342,7 @@ _id_8E47(var_0) {
 
       if(isDefined(var_2)) {
         scripts\cp_mp\utility\weapon_utility::_id_3971(var_0);
-        var_0 missile_settargetent(var_2);
+        var_0 missile_settargetEnt(var_2);
         var_0 notify("missile_pairedWithFlare");
         self.owner _meth_83EF("missile_incoming");
         break;

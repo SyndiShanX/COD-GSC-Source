@@ -252,9 +252,9 @@ func_62D0(param_00, param_01) {
     var_04 lib_0502::func_7997();
   }
 
-  var_06 = getent(self.var_81EF, "script_linkname");
-  var_07 = getent(var_06.var_81EF, "script_linkname");
-  var_08 = getent(var_07.var_81EF, "script_linkname");
+  var_06 = getEnt(self.var_81EF, "script_linkname");
+  var_07 = getEnt(var_06.var_81EF, "script_linkname");
+  var_08 = getEnt(var_07.var_81EF, "script_linkname");
   var_06 method_805C();
   lib_04FF::func_6983(self.var_62C7.var_695A);
   var_09 = lib_04FF::func_45CE(self);
@@ -307,7 +307,7 @@ updateflagprogress() {
   var_03 = var_00.var_116;
   var_04 = self.var_A23F;
   var_05 = distance(var_02, var_03);
-  var_06 = vectornormalize(var_02 - var_03);
+  var_06 = vectorNormalize(var_02 - var_03);
   var_07 = var_04 / 2;
   var_08 = 1;
   for(;;) {

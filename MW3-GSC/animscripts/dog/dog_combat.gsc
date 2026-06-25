@@ -132,7 +132,7 @@ _id_3B0B() {
 
   if(isDefined(self.enemy)) {
     var_1 = anglesToForward((0, self.desiredangle, 0));
-    var_2 = vectornormalize(self.enemy.origin - self.origin);
+    var_2 = vectorNormalize(self.enemy.origin - self.origin);
     var_3 = self.enemy.origin - (self.origin + var_1 * 40);
 
     if(vectordot(var_2, var_1) > 0.707 || vectordot(var_3, var_1) > 0) {
@@ -811,7 +811,7 @@ _id_3B3C() {
   self clearanim(var_0[0], 0.1);
   self setflaggedanimrestart("aianim", var_0[1], 1, 0.1, 1);
   wait 0.15;
-  self.syncedmeleetarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedmeleetarget linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   self waittillmatch("aianim", "end");
   self._id_3B3D = 1;
 
@@ -1011,7 +1011,7 @@ _id_3B4A(var_0) {
   thread _id_3B48(var_0);
   self dontinterpolate();
   var_1 playerlinktoabsolute(self, "tag_player");
-  var_0 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   var_5 = self gettagangles("tag_sync");
   var_0 orientmode("face angle", var_5[1]);
   var_0 orientmode("face default");
@@ -1084,7 +1084,7 @@ _id_3B4D(var_0) {
 _id_3B4F(var_0) {
   var_0 show();
   var_0 unlink();
-  var_0 setorigin(self.origin);
+  var_0 setOrigin(self.origin);
   var_0 setplayerangles(self._id_103B);
   var_0 setCanDamage(1);
   var_1 = var_0._id_1EC3;
@@ -1111,7 +1111,7 @@ _id_3B51(var_0) {
 
   if(maps\_utility::_id_12C1()) {
     var_1 = _id_3B40(var_0);
-    var_1 linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    var_1 linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     var_1 thread _id_3B41(1);
     self._id_3B4E = var_1;
 

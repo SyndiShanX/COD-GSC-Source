@@ -76,7 +76,7 @@ func_6B82() {
 
 func_9B93() {
   self endon("death");
-  var_00 = getent("grenade_death_trigger", "targetname");
+  var_00 = getEnt("grenade_death_trigger", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -92,8 +92,8 @@ func_9B93() {
 
 func_0E99() {
   wait 0.05;
-  var_00 = getent("yacht", "targetname");
-  var_01 = getent("steamer", "targetname");
+  var_00 = getEnt("yacht", "targetname");
+  var_01 = getEnt("steamer", "targetname");
   playFXOnTag(common_scripts\utility::func_44F5("lon_boat_wake_01"), var_01, "boat");
   playFXOnTag(common_scripts\utility::func_44F5("lon_boat_smk_02"), var_01, "tag_fx_smoke");
   if(isDefined(var_00)) {

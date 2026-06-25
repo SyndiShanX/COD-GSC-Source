@@ -17,7 +17,7 @@ vignette_register_wait(var_0, var_1) {
 }
 
 vignette_drone_spawn(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2.script_forcespawn = 1;
   var_3 = maps\_spawner::spawner_dronespawn(var_2);
   var_3.animname = var_1;
@@ -25,7 +25,7 @@ vignette_drone_spawn(var_0, var_1) {
 }
 
 vignette_actor_spawn(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2.script_forcespawn = 1;
   var_2 thread maps\_utility::add_spawn_function(::vignette_actor_spawn_func);
   var_3 = var_2 maps\_utility::spawn_ai();

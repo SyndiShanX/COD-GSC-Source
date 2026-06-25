@@ -2423,7 +2423,7 @@ function_7355c240(actionparams) {
 
 calculate_aim_offset(var_9d9ae85, eyes, fwd, right, up, var_ea5b64df, close) {
   attachmentisselectable = var_9d9ae85 - eyes;
-  var_df4809a5 = vectornormalize(attachmentisselectable);
+  var_df4809a5 = vectorNormalize(attachmentisselectable);
   aimoffset = undefined;
 
   if(vectordot(fwd, var_df4809a5) > 0.7) {

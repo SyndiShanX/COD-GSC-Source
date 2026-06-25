@@ -153,12 +153,12 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
 
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]), (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]), (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
 
-    target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
+    target_org moveTo(targ_point, randomfloatrange(0.5, 6.0));
 
     for(i = 0; i < burst; i++) {
       target = target_org.origin;
 
-      fx_angles = VectorNormalize(target - self.origin);
+      fx_angles = vectorNormalize(target - self.origin);
 
       players = getlocalplayers();
 

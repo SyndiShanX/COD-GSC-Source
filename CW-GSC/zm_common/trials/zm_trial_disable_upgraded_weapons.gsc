@@ -30,7 +30,7 @@ function private on_begin() {
     level.var_af806901[upgraded_weapon.name] = upgraded_weapon;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_6a8979c9();
     player callback::on_player_loadout_changed(&on_player_loadout_changed);
     player zm_trial_util::function_7dbb1712(1);
@@ -42,7 +42,7 @@ function private on_begin() {
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player callback::function_824d206(&on_player_loadout_changed);
     player callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
 

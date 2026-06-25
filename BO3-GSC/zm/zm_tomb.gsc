@@ -153,7 +153,7 @@ function main() {
   setDvar("bg_chargeShotExponentialAmmoPerChargeLevel", 1);
   setDvar("dlc2_fix_scripted_looping_linked_animations", 1);
   level thread setup_tomb_spawn_groups();
-  spawner_main_chamber_capture_zombies = getent("chamber_capture_zombie_spawner", "targetname");
+  spawner_main_chamber_capture_zombies = getEnt("chamber_capture_zombie_spawner", "targetname");
   spawner_main_chamber_capture_zombies spawner::add_spawn_function(&chamber_capture_zombie_spawn_init);
   level.has_richtofen = 0;
   level.givecustomcharacters = &give_personality_characters;
@@ -352,7 +352,7 @@ function function_2d0e5eb6() {
 
 function function_56848b85() {
   zombie_in_chamber = zm_tomb_chamber::is_point_in_chamber(self.origin);
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     if(!zombie_utility::is_player_valid(a_players[i]) || (isDefined(a_players[i].ignoreme) && a_players[i].ignoreme)) {
       continue;
@@ -558,7 +558,7 @@ function revive_watcher() {
 }
 
 function function_a5d4f26d() {
-  var_22082ed0 = getent("specialty_additionalprimaryweapon", "script_noteworthy");
+  var_22082ed0 = getEnt("specialty_additionalprimaryweapon", "script_noteworthy");
   if(isDefined(var_22082ed0) && isDefined(var_22082ed0)) {
     var_22082ed0.clip ghost();
     var_22082ed0.clip connectpaths();
@@ -617,7 +617,7 @@ function tomb_round_spawn_failsafe() {
     if(isDefined(self.is_inert) && self.is_inert) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     zombie_blood = 0;
     foreach(player in players) {
       if(zm_utility::is_player_valid(player)) {
@@ -718,7 +718,7 @@ function assign_lowest_unused_character_index() {
   charindexarray[1] = 1;
   charindexarray[2] = 2;
   charindexarray[3] = 3;
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1) {
     charindexarray = array::randomize(charindexarray);
     if(charindexarray[0] == 2) {
@@ -791,13 +791,13 @@ function fall_down(vdir, stance) {
   angles = (angles[0], angles[1], angles[2] + (randomfloatrange(-5, 5)));
   if(isDefined(vdir) && length(vdir) > 0) {
     xyspeedmag = (40 + randomint(12)) + randomint(12);
-    xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+    xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
   }
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = origin;
   linker.angles = angles;
   self._fall_down_anchor = linker;
-  self playerlinkto(linker);
+  self playerlinkTo(linker);
   self playsoundtoplayer("zmb_player_death_fall", self);
   falling = stance != "prone";
   if(falling) {
@@ -806,8 +806,8 @@ function fall_down(vdir, stance) {
     floor_height = (10 + origin[2]) - eye[2];
     origin = origin + (0, 0, floor_height);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
   }
   self freezecontrols(1);
   if(falling) {
@@ -819,13 +819,13 @@ function fall_down(vdir, stance) {
     bounce = randomint(4) + 8;
     origin = (origin + (0, 0, bounce)) - (xyspeed * 0.1);
     lerptime = bounce / 50;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = (origin + (0, 0, bounce * -1)) + (xyspeed * 0.1);
     lerptime = lerptime / 2;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
   }
   wait(15);
   linker delete();
@@ -940,13 +940,13 @@ function watch_devgui_oneinchpunch() {
   while(true) {
     if(getdvarstring("") == "") {
       setDvar("", "");
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
       }
     } else {
       if(getdvarstring("") == "") {
         setDvar("", "");
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           player.b_punch_upgraded = 1;
           player.str_punch_element = "";
           player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
@@ -954,7 +954,7 @@ function watch_devgui_oneinchpunch() {
       } else {
         if(getdvarstring("") == "") {
           setDvar("", "");
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             player.b_punch_upgraded = 1;
             player.str_punch_element = "";
             player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
@@ -962,7 +962,7 @@ function watch_devgui_oneinchpunch() {
         } else {
           if(getdvarstring("") == "") {
             setDvar("", "");
-            foreach(player in getplayers()) {
+            foreach(player in getPlayers()) {
               player.b_punch_upgraded = 1;
               player.str_punch_element = "";
               player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
@@ -970,14 +970,14 @@ function watch_devgui_oneinchpunch() {
           } else {
             if(getdvarstring("") == "") {
               setDvar("", "");
-              foreach(player in getplayers()) {
+              foreach(player in getPlayers()) {
                 player.b_punch_upgraded = 1;
                 player.str_punch_element = "";
                 player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
               }
             } else if(getdvarstring("") == "") {
               setDvar("", "");
-              foreach(player in getplayers()) {
+              foreach(player in getPlayers()) {
                 player.b_punch_upgraded = 1;
                 player.str_punch_element = "";
                 player thread _zm_weap_one_inch_punch::one_inch_punch_melee_attack();
@@ -1002,7 +1002,7 @@ function setup_tablet_devgui() {
 function watch_devgui_tablet() {
   while(true) {
     if(getdvarstring("") != "") {
-      player = getplayers()[0];
+      player = getPlayers()[0];
       n_tablet_state = int(getdvarint(""));
       player clientfield::set_to_player("", n_tablet_state);
       setDvar("", "");
@@ -1209,7 +1209,7 @@ function working_zone_init() {
 }
 
 function activate_zone_trig(str_name, str_zone1, str_zone2) {
-  trig = getent(str_name, "targetname");
+  trig = getEnt(str_name, "targetname");
   trig waittill("trigger");
   if(isDefined(str_zone1)) {
     level flag::set(str_zone1);

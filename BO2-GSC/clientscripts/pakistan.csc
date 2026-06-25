@@ -89,7 +89,7 @@ set_claw_boot_sequence() {
 
 frogger_street_wave() {
   level waittill("frogger_water_surge");
-  s_wave_origin = getstruct("frogger_water_surge_struct", "targetname");
+  s_wave_origin = getStruct("frogger_water_surge_struct", "targetname");
   x_pos = s_wave_origin.origin[0] * -1;
   y_pos = s_wave_origin.origin[1] * -1;
   setripplewave(0, x_pos, y_pos, 900, 1.6, 0.04, 0.0, 900.0, 1000, 1750);
@@ -97,7 +97,7 @@ frogger_street_wave() {
 
 bus_street_wave() {
   level waittill("bus_wave_start");
-  s_wave_origin = getstruct("bus_wave_struct", "targetname");
+  s_wave_origin = getStruct("bus_wave_struct", "targetname");
   x_pos = s_wave_origin.origin[0] * -1;
   y_pos = s_wave_origin.origin[1] * -1;
   setripplewave(0, x_pos, y_pos, 650, 1.1, 0.067, 0.0, 5.0, 900, 1500);
@@ -105,7 +105,7 @@ bus_street_wave() {
 
 bus_street_initial_wave() {
   level waittill("bus_wave_initial_start");
-  s_wave_origin = getstruct("bus_wave_initial", "targetname");
+  s_wave_origin = getStruct("bus_wave_initial", "targetname");
   x_pos = s_wave_origin.origin[0] * -1;
   y_pos = s_wave_origin.origin[1] * -1;
   setripplewave(0, x_pos, y_pos, 450, 0.8, 0.03, 0.0, 10.0, 4100, 5100);

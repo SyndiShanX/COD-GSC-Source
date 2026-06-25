@@ -95,7 +95,7 @@ function onplaceemp(emp) {
   player = self;
   assert(isPlayer(player));
   assert(!isDefined(emp.vehicle));
-  emp.vehicle = spawnvehicle("emp_turret", emp.origin, emp.angles);
+  emp.vehicle = spawnVehicle("emp_turret", emp.origin, emp.angles);
   emp.vehicle thread util::ghost_wait_show(0.05);
   emp.vehicle.killstreaktype = emp.killstreaktype;
   emp.vehicle.owner = player;
@@ -148,7 +148,7 @@ function hackedcallbackpost(hacker) {
 
 function doneempfx(fxtagorigin) {
   playFX("killstreaks/fx_emp_exp_death", fxtagorigin);
-  playsoundatposition("mpl_emp_turret_deactivate", fxtagorigin);
+  playSoundAtPosition("mpl_emp_turret_deactivate", fxtagorigin);
 }
 
 function playempfx() {

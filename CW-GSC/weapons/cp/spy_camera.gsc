@@ -153,7 +153,7 @@ function function_b83af2a9() {
   if(isPlayer(self)) {
     player = self;
   } else {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   if(player hasweapon(level.var_e3f5eafc)) {
@@ -172,7 +172,7 @@ function function_d9015b8c() {
   if(isPlayer(self)) {
     player = self;
   } else {
-    player = getplayers()[0];
+    player = getPlayers()[0];
   }
 
   if(player hasweapon(level.var_42db149f)) {
@@ -193,7 +193,7 @@ function function_f91a82ef(b_enabled = 1, var_b3649521 = #"hash_12be6ba1327c64b1
 
   if(b_enabled == 0) {
     level flag::wait_till("flg_spy_cam_player_spawned");
-    getplayers()[0] thread util::hide_hint_text();
+    getPlayers()[0] thread util::hide_hint_text();
   }
 }
 

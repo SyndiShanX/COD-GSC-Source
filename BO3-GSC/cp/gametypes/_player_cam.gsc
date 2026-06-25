@@ -118,7 +118,7 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
     vdir = (forwarddir[0], forwarddir[1], forwarddir[2]);
     target_angles = vectortoangles(vdir);
     vdir = (forwarddir[0], forwarddir[1], -1);
-    vdir = vectornormalize(vdir);
+    vdir = vectorNormalize(vdir);
   }
   if(isDefined(lookdir)) {
     target_angles = vectortoangles(lookdir);
@@ -146,7 +146,7 @@ function function_c003e53f(vdir, var_f120d111, var_f40ed68d, var_9aadeff9, var_9
     var_582dff76 = 1;
   }
   forwardvec = (vdir[0], vdir[1], 0);
-  forwardvec = vectornormalize(forwardvec);
+  forwardvec = vectorNormalize(forwardvec);
   while(!(isDefined(var_505f8faa) && var_505f8faa && (isDefined(var_582dff76) && var_582dff76))) {
     if(!(isDefined(var_505f8faa) && var_505f8faa)) {
       var_e79cd0f2 = vectorscale(forwardvec, var_933bfc9b);
@@ -254,7 +254,7 @@ function function_f05a5931(einflictor, attacker, idamage, weapon, vdir, shitloc)
   end_wait = getdvarfloat("cam_bullet_end_wait", 2.75);
   sign = self function_22196132();
   thread function_c003e53f(vdir, 0, var_f40ed68d, var_9aadeff9, var_933bfc9b, var_67ca400f, undefined, 60 * sign, undefined, undefined, 1);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   wait(end_wait);
   self notify("hash_d3468831");
 }
@@ -268,7 +268,7 @@ function function_6e880b57(einflictor, attacker, idamage, weapon, vdir, shitloc)
   var_f40ed68d = getdvarfloat("cam_bullet_max_f_length", 50);
   end_wait = getdvarfloat("cam_bullet_end_wait", 2.75);
   sign = self function_22196132();
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   thread function_c003e53f(vdir, 0, var_f40ed68d, var_9aadeff9, var_933bfc9b, var_67ca400f, undefined, 60 * sign);
   wait(end_wait);
   self notify("hash_d3468831");
@@ -284,7 +284,7 @@ function function_1e43c03b(einflictor, attacker, idamage, weapon, vdir, shitloc)
   var_f40ed68d = getdvarfloat("cam_bullet_max_f_length", 50);
   end_wait = getdvarfloat("cam_bullet_end_wait", 2.75);
   thread function_c003e53f(undefined, 0, var_f40ed68d, var_9aadeff9, var_933bfc9b, var_67ca400f, undefined, 60 * sign, undefined, undefined, 1);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   wait(end_wait);
   self notify("hash_d3468831");
 }
@@ -301,7 +301,7 @@ function function_7a3707a6(einflictor, attacker, idamage, weapon, vdir, shitloc)
   if(isDefined(attacker) && attacker != self) {
     var_7ec6acc8 = (attacker getabsmins() + attacker getabsmaxs()) * 0.5;
     lookdir = var_7ec6acc8 - self.origin;
-    lookdir = vectornormalize(lookdir);
+    lookdir = vectorNormalize(lookdir);
   }
   var_45918a20 = getdvarfloat("cam_explosion_fade_value", 0);
   var_638a5f4a = getdvarfloat("cam_explosion_first_fade_time", 0.4);
@@ -310,7 +310,7 @@ function function_7a3707a6(einflictor, attacker, idamage, weapon, vdir, shitloc)
   var_30ffabcb = getdvarfloat("cam_explosion_second_wait", 2);
   sign = self function_22196132();
   thread function_c003e53f(vdir, 0, var_f40ed68d, var_9aadeff9, var_933bfc9b, var_67ca400f, undefined, 60 * sign, lookdir, undefined, 1);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   wait(var_30ffabcb);
   self notify("hash_d3468831");
 }

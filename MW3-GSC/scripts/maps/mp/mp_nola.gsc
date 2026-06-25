@@ -44,7 +44,7 @@ hovercraft_fan_blades() {
     var_3 = getEntArray(var_2.target, "targetname");
 
     foreach(var_5 in var_3) {}
-    var_5 linkto(var_2);
+    var_5 linkTo(var_2);
 
     var_2 childthread rotate_forever();
   }

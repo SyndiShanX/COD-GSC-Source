@@ -378,7 +378,7 @@ event_trigger(event) {
         if(event.data.param2 == "player") {
           target = level.rts.player;
         } else {
-          target = getent(event.data.param2, "targetname");
+          target = getEnt(event.data.param2, "targetname");
         }
       }
 
@@ -422,7 +422,7 @@ event_trigger(event) {
         if(event.data.param2 == "player") {
           position = level.rts.player.origin;
         } else {
-          target = getent(event.data.param2, "targetname");
+          target = getEnt(event.data.param2, "targetname");
           assert(isDefined(target), "entity not found");
 
           if(isDefined(target)) {
@@ -438,7 +438,7 @@ event_trigger(event) {
       if(isDefined(entity)) {
         entity playSound(alias);
       } else if(isDefined(position)) {
-        playsoundatposition(alias, position);
+        playSoundAtPosition(alias, position);
       } else {
         level.rts.player playlocalsound(alias);
       }
@@ -459,7 +459,7 @@ event_trigger(event) {
         if(isDefined(event.dparam)) {
           entity = event.dparam;
         } else if(isDefined(event.data.param2)) {
-          entity = getent(event.data.param2, "targetname");
+          entity = getEnt(event.data.param2, "targetname");
         }
 
         assert(isDefined(entity), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
@@ -471,7 +471,7 @@ event_trigger(event) {
           if(event.data.param2 == "player") {
             position = level.rts.player.origin;
           } else {
-            entity = getent(event.data.param2, "targetname");
+            entity = getEnt(event.data.param2, "targetname");
             assert(isDefined(entity), "entity not found");
             position = entity.origin;
           }

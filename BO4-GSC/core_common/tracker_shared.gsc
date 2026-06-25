@@ -45,13 +45,13 @@ function_43084f6c(player) {
   if(level.teambased) {
     otherteam = util::getotherteam(player.team);
 
-    foreach(var_f53fe24c in getplayers(otherteam)) {
+    foreach(var_f53fe24c in getPlayers(otherteam)) {
       if(var_f53fe24c function_d210981e(player.origin)) {
         return true;
       }
     }
   } else {
-    enemies = getplayers();
+    enemies = getPlayers();
 
     foreach(enemy in enemies) {
       if(enemy == player) {

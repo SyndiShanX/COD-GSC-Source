@@ -914,7 +914,7 @@ GlowStickSetupAndWaitForDeath(owner) {
   dummyGlowStick.angles = self.angles;
   dummyGlowStick setModel(level.spawnGlowModel["friendly"]);
   dummyGlowStick setContents(0);
-  dummyGlowStick LinkTo(self);
+  dummyGlowStick linkTo(self);
 
   dummyGlowStick playLoopSound("emt_road_flare_burn");
 
@@ -1043,7 +1043,7 @@ deleteTI(TI) {
 
   dummyGlowStick setContents(0);
   if(isDefined(parent)) {
-    dummyGlowStick LinkTo(parent);
+    dummyGlowStick linkTo(parent);
   }
 
   thread dummyGlowStickDelete(dummyGlowStick);

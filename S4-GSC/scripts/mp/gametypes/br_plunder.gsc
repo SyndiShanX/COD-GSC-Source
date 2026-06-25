@@ -1519,7 +1519,7 @@ _id_5030(var_0) {
 
   if(var_7 > 0) {
     var_8 = _func_0218(2 * var_7 / 800);
-    var_1 moveto(var_6, var_8, var_8, 0);
+    var_1 moveTo(var_6, var_8, var_8, 0);
     wait(var_8);
   }
 
@@ -1607,13 +1607,13 @@ _id_7768(var_0) {
 _id_E362(var_0) {
   var_1 = spawn("script_model", (0, 0, 0));
   var_1 setModel("misc_rapelling_rope_01_fiber_br");
-  var_1 linkto(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
   var_1._id_18AF = var_0._id_18AF;
   var_1 _id_06C6::_id_D47B();
   var_0 _id_06C6::_id_17C2(var_1, "rope_in", "origin_animate_jnt");
   var_2 = spawn("script_model", (0, 0, 0));
   var_2 setModel("br_plunder_extraction_delivery_bag");
-  var_2 linkto(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_0, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
   var_2._id_18AF = var_0._id_18AF;
   var_2 _id_06C6::_id_D47B();
   var_0 _id_06C6::_id_17C2(var_2, "bag_in", "origin_animate_jnt");

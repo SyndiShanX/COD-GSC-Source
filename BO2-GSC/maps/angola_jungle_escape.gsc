@@ -27,7 +27,7 @@ skipto_jungle_escape() {
   level.ai_hudson detach("c_usa_angola_hudson_glasses");
   level.ai_hudson detach("c_usa_angola_hudson_hat");
   flag_init("player_has_beartraps");
-  m_radio_tower = getent("radio_tower", "targetname");
+  m_radio_tower = getEnt("radio_tower", "targetname");
   m_radio_tower ignorecheapentityflag(1);
   m_radio_tower setscale(1);
   level.player thread maps\createart\angola_art::jungle_escape();
@@ -129,7 +129,7 @@ truck_spawn_func() {
   self.overridevehicledamage = ::truck_damage_override;
   self.health = 500;
   self maps\_vehicle::lights_off();
-  ai_gunner = getent("truck_0_gunner_ai", "targetname");
+  ai_gunner = getEnt("truck_0_gunner_ai", "targetname");
   ai_gunner thread truck_0_gunner_logic();
   self playSound("evt_turret_truck_arrive");
   self thread truck_mortar_death();
@@ -581,7 +581,7 @@ je_battle1_jungle_chasers(str_category) {
 push_chasers_forward_as_defend1_develops() {
   flag_wait("je_mason_drops_down_from_village");
   wait 12;
-  e_volume = getent("village_exit_volume", "targetname");
+  e_volume = getEnt("village_exit_volume", "targetname");
   a_enemies = getaispeciesarray("axis", "all");
   a_ai_targets = [];
 
@@ -616,7 +616,7 @@ kill_player_hut_for_not_advancing(b_wait_time) {
 
   foreach(trigger_string in a_trigger_strings) {
     level thread disable_flag_for_hut_when_trigger_hit(trigger_string);
-    e_trigger = getent(trigger_string, "targetname");
+    e_trigger = getEnt(trigger_string, "targetname");
     e_trigger endon("trigger");
   }
 
@@ -644,7 +644,7 @@ hut_kill_triggers_hit_first_time() {
   level endon("kill_player_hut_enabled");
   trigger_wait("trigger_kill_player_with_hut");
   level notify("stop_disabling_the_hut_function");
-  trigger = getent("trigger_turn_off_hut_kill", "targetname");
+  trigger = getEnt("trigger_turn_off_hut_kill", "targetname");
   trigger activate_trigger();
   wait 0.1;
   level thread kill_player_hut_for_not_advancing(0);
@@ -667,7 +667,7 @@ kill_player_battle_1_for_not_advancing(b_wait_time) {
 
   foreach(trigger_string in a_trigger_strings) {
     level thread disable_flag_for_wave1_when_trigger_hit(trigger_string);
-    e_trigger = getent(trigger_string, "targetname");
+    e_trigger = getEnt(trigger_string, "targetname");
     e_trigger endon("trigger");
   }
 
@@ -723,7 +723,7 @@ kill_player_battle_2_for_not_advancing(b_wait_time) {
 
   foreach(trigger_string in a_trigger_strings) {
     level thread disable_flag_for_wave2_when_trigger_hit(trigger_string);
-    e_trigger = getent(trigger_string, "targetname");
+    e_trigger = getEnt(trigger_string, "targetname");
     e_trigger endon("trigger");
   }
 
@@ -793,13 +793,13 @@ disable_flag_for_wave2_when_trigger_hit(s_trigger) {
 
 kill_player_rpg_logic(s_spawner, a_s_trigger) {
   foreach(trigger_string in a_s_trigger) {
-    e_trigger = getent(trigger_string, "targetname");
+    e_trigger = getEnt(trigger_string, "targetname");
     e_trigger endon("trigger");
     self thread kill_ai_if_not_in_view_and_player_hit_trigger(trigger_string);
   }
 
   self waittill("goal");
-  self set_goalradius(2048);
+  self set_goalRadius(2048);
   self thread shoot_and_kill(level.player);
   self waittill("death");
   ai = simple_spawn_single(s_spawner, ::kill_player_rpg_logic, s_spawner, a_s_trigger);
@@ -808,14 +808,14 @@ kill_player_rpg_logic(s_spawner, a_s_trigger) {
 kill_player_regular_logic(s_spawner, a_s_trigger) {
   if(isDefined(a_s_trigger)) {
     foreach(trigger_string in a_s_trigger) {
-      e_trigger = getent(trigger_string, "targetname");
+      e_trigger = getEnt(trigger_string, "targetname");
       e_trigger endon("trigger");
       self thread kill_ai_if_not_in_view_and_player_hit_trigger(trigger_string);
     }
   }
 
   self waittill("goal");
-  self set_goalradius(2048);
+  self set_goalRadius(2048);
   self thread shoot_and_kill(level.player);
   self waittill("death");
   spawn_array = getEntArray(s_spawner, "targetname");
@@ -956,7 +956,7 @@ defend1_set_ai_pathing_distances(delay) {
 }
 
 je_battle2_chasers(str_category) {
-  e_trigger = getent("defend2_chaser_spawners_trigger", "targetname");
+  e_trigger = getEnt("defend2_chaser_spawners_trigger", "targetname");
   e_trigger waittill("trigger");
   a_spawners = getEntArray("je_defend2_chaser_spawner", "targetname");
 
@@ -993,7 +993,7 @@ temp_defend2_dogs_text() {
 
 je_battle2_wave1_trigger(str_category) {
   flag_wait("je_hudson_heads_to_battle_2");
-  e_trigger = getent("defend2_chaser_spawners_trigger", "targetname");
+  e_trigger = getEnt("defend2_chaser_spawners_trigger", "targetname");
   e_trigger waittill("trigger");
   min_start_time = 4;
   max_start_time = 8;
@@ -1062,7 +1062,7 @@ behind_us_vo_node() {
   v_forward = anglesToForward(nd_node.angles);
 
   while(true) {
-    v_dir = vectornormalize(level.player.origin - nd_node.origin);
+    v_dir = vectorNormalize(level.player.origin - nd_node.origin);
     dot = vectordot(v_forward, v_dir);
 
     if(dot > 0.3) {
@@ -1118,7 +1118,7 @@ je_battle3_wave2_trigger(str_category) {
   }
 
   level.ai_hudson thread say_dialog("huds_they_re_all_over_w_0", 2);
-  trigger = getent("spawn_truck_wave_2", "targetname");
+  trigger = getEnt("spawn_truck_wave_2", "targetname");
   trigger activate_trigger();
 }
 
@@ -1155,7 +1155,7 @@ je_battle3_wave4_trigger(str_category) {
 je_battle3_wave_drones_trigger(str_category) {
   flag_wait("je_hudson_heads_to_beach");
   wait 8;
-  sp_drone = getent("je_drone1_spawner", "targetname");
+  sp_drone = getEnt("je_drone1_spawner", "targetname");
   drones_assign_spawner("drone1_end_level_trigger", sp_drone);
   drones_speed_modifier("drone1_end_level_trigger", -0.3, -0.1);
   drones_start("drone1_end_level_trigger");
@@ -1187,7 +1187,7 @@ je_battle3_mortar_attack() {
     }
 
     v_end = level.player.origin;
-    v_dir = vectornormalize(v_start - v_end);
+    v_dir = vectorNormalize(v_start - v_end);
     r_dist = randomfloatrange(252, 924);
     v_end = v_end + v_dir * r_dist;
     level thread fire_angola_mortar(v_start, v_end, speed_scale, height_scale, 84);
@@ -1251,7 +1251,7 @@ mason_woods_goto_jungle_fight1_anim() {
 mason_woods_goto_jungle_fight2_anim() {
   flag_wait("je_hudson_heads_to_battle_2");
   level thread hudson_throwing_smoke_grenade_vo_wave_1();
-  struct_grenade = getstruct("smoke_grenade_throw_pos_exit_wave_2", "targetname");
+  struct_grenade = getStruct("smoke_grenade_throw_pos_exit_wave_2", "targetname");
   badplace_delete("badplace_woods");
   level.ai_hudson.badplaceawareness = 1;
   level.ai_hudson hudson_throw_smoke_grenade("org_hudson_smoke_grenade_1", struct_grenade.origin);
@@ -1278,7 +1278,7 @@ hudson_throwing_smoke_grenade_vo_wave_1() {
 mason_woods_goto_jungle_fight3_anim() {
   flag_wait("je_hudson_heads_to_battle_3");
   level thread hudson_throwing_smoke_grenade_vo_wave_2();
-  struct_grenade = getstruct("smoke_grenade_throw_pos_exit_wave_3", "targetname");
+  struct_grenade = getStruct("smoke_grenade_throw_pos_exit_wave_3", "targetname");
   badplace_delete("badplace_woods");
   level.ai_hudson.badplaceawareness = 1;
   level.ai_hudson hudson_throw_smoke_grenade("org_hudson_smoke_grenade_2", struct_grenade.origin);

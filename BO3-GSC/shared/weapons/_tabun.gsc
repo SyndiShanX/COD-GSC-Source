@@ -85,7 +85,7 @@ function damageeffectarea(owner, position, radius, height, killcament) {
   loopwaittime = 0.5;
   durationoftabun = level.tabungasduration;
   while(durationoftabun > 0) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(level.friendlyfire == 0) {
         if(players[i] != owner) {

@@ -117,7 +117,7 @@ default_rules() {
       }
     } else if(level.scorelimit) {
       highestscore = 0;
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(players[i].pointstowin > highestscore) {

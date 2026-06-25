@@ -424,7 +424,7 @@ earlyendon(var_0) {
 }
 
 boat_area_kill_trigger() {
-  var_0 = getent("player_kill_trig", "targetname");
+  var_0 = getEnt("player_kill_trig", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(!isPlayer(var_1)) {
@@ -547,7 +547,7 @@ remove_escape_entities() {
     }
   }
 
-  var_4 = getent("escape_1_blocker_brush", "targetname");
+  var_4 = getEnt("escape_1_blocker_brush", "targetname");
   if(isDefined(var_4)) {
     var_4 delete();
   }
@@ -575,7 +575,7 @@ remove_escape_entities() {
 }
 
 setup_slide() {
-  var_0 = getent("slide_trig", "targetname");
+  var_0 = getEnt("slide_trig", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(scripts\engine\utility::istrue(var_1.onslide)) {
@@ -594,10 +594,10 @@ player_down_slide(var_0) {
   self.is_slide_sfx_playing = 0;
   self.is_slide_land_sfx_playing = 0;
   var_1 = scripts\engine\utility::getclosest(self.origin, scripts\engine\utility::getStructArray("slide_start_spot", "targetname"));
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   if(distance2dsquared(self.origin, var_1.origin) > 65536) {
     while(self istouching(var_0)) {
-      self setvelocity(vectornormalize(var_2.origin - self.origin) * 200);
+      self setvelocity(vectorNormalize(var_2.origin - self.origin) * 200);
       wait(0.05);
     }
 
@@ -630,7 +630,7 @@ player_down_slide(var_0) {
       self.is_slide_sfx_playing = 1;
     }
 
-    self setvelocity(vectornormalize(var_2.origin - self.origin) * 500);
+    self setvelocity(vectorNormalize(var_2.origin - self.origin) * 500);
     wait(0.05);
   }
 
@@ -692,17 +692,17 @@ last_stand_player_down_slide(var_0) {
   self notify("stopslideanim");
   if(scripts\cp\cp_laststand::self_revive_activated()) {
     reset_slide_variables();
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
     return;
   }
 
   if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && scripts\cp\utility::has_zombie_perk("perk_machine_revive")) {
     reset_slide_variables();
-    self setorigin(var_0.origin);
+    self setOrigin(var_0.origin);
     return;
   }
 
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   reset_slide_variables();
 }
 
@@ -763,14 +763,14 @@ cp_zmb_respawn_loc_func(var_0) {
 
 gator_mouth() {
   wait(5);
-  var_0 = getent("gator_mouth", "targetname");
-  var_1 = getent("gator_mouth_trig", "targetname");
-  level.gator_mouth_trig = getent("gator_mouth_trig", "targetname");
+  var_0 = getEnt("gator_mouth", "targetname");
+  var_1 = getEnt("gator_mouth_trig", "targetname");
+  level.gator_mouth_trig = getEnt("gator_mouth_trig", "targetname");
   var_0.twitching = 0;
-  var_2 = getent("croc_mouth_clip", "targetname");
+  var_2 = getEnt("croc_mouth_clip", "targetname");
   var_2 connectpaths();
   var_2 notsolid();
-  level.gator_light = getent("gator_mouth_light", "targetname");
+  level.gator_light = getEnt("gator_mouth_light", "targetname");
   level.gator_light setlightintensity(0);
   var_0 setModel("zmb_croc_chomp_head_toothless");
   var_0.origin = var_0.origin + (0, 0, -10);
@@ -807,17 +807,17 @@ bumper_cars() {
 gator_mouth_twitch(var_0, var_1, var_2, var_3) {
   var_2 endon("stop_twitch");
   playsoundatpos((-1696, 1201, 550), "croc_trap_idle_mechanics");
-  var_1 moveto(var_1.origin + (0, 0, -5), 0.5, 0.4, 0.1);
+  var_1 moveTo(var_1.origin + (0, 0, -5), 0.5, 0.4, 0.1);
   var_1 waittill("movedone");
-  var_1 moveto(var_1.origin + (0, 0, 5), 0.5, 0.4, 0.1);
+  var_1 moveTo(var_1.origin + (0, 0, 5), 0.5, 0.4, 0.1);
   var_1 waittill("movedone");
-  var_1 moveto(var_1.origin + (0, 0, -5), 0.5, 0.4, 0.1);
+  var_1 moveTo(var_1.origin + (0, 0, -5), 0.5, 0.4, 0.1);
   var_1 waittill("movedone");
-  var_1 moveto(var_1.origin + (0, 0, 5), 0.5, 0.4, 0.1);
+  var_1 moveTo(var_1.origin + (0, 0, 5), 0.5, 0.4, 0.1);
   var_1 waittill("movedone");
-  var_1 moveto(var_1.origin + (0, 0, -5), 0.5, 0.4, 0.1);
+  var_1 moveTo(var_1.origin + (0, 0, -5), 0.5, 0.4, 0.1);
   var_1 waittill("movedone");
-  var_1 moveto(var_1.origin + (0, 0, 5), 0.5, 0.4, 0.1);
+  var_1 moveTo(var_1.origin + (0, 0, 5), 0.5, 0.4, 0.1);
   var_1 waittill("movedone");
   wait(1);
   var_1.twitching = 0;
@@ -854,13 +854,13 @@ gator_mouth_crush(var_0, var_1, var_2, var_3) {
       }
 
       if(var_5) {
-        var_2 moveto(var_3 + (0, 0, -100), 0.15);
+        var_2 moveTo(var_3 + (0, 0, -100), 0.15);
         var_1 playSound("croc_trap_bite");
         earthquake(0.45, 3, var_1.origin, 750);
         var_1 thread mouth_trig_kill(var_4);
         wait(0.15);
         scripts\engine\utility::exploder(255);
-        var_0 disconnectpaths();
+        var_0 disconnectPaths();
         var_0 solid();
         var_1 notify("stop_killing");
         var_2 setModel("zmb_croc_chomp_head_toothless");
@@ -868,17 +868,17 @@ gator_mouth_crush(var_0, var_1, var_2, var_3) {
         wait(1);
         var_0 connectpaths();
         var_0 notsolid();
-        var_2 moveto(var_3, 1);
+        var_2 moveTo(var_3, 1);
         wait(5);
         var_2.twitching = 0;
         level.gator_light setlightintensity(4);
         var_2 setModel("zmb_croc_chomp_head_toothless_on");
       } else if(isDefined(var_7)) {
-        var_2 moveto(var_3 + (0, 0, -40), 0.1);
+        var_2 moveTo(var_3 + (0, 0, -40), 0.1);
         var_1 playSound("trap_laser_activate");
         earthquake(0.45, 3, var_1.origin, 450);
         wait(1.5);
-        var_2 moveto(var_3, 0.25);
+        var_2 moveTo(var_3, 0.25);
         wait(1);
         var_2.twitching = 0;
       } else {
@@ -893,12 +893,12 @@ gator_mouth_crush(var_0, var_1, var_2, var_3) {
           level thread break_gator_teeth(0.1);
         }
 
-        var_2 moveto(var_3 + (0, 0, -40), 0.1);
+        var_2 moveTo(var_3 + (0, 0, -40), 0.1);
         var_1 playSound("trap_laser_activate");
         earthquake(0.45, 3, var_1.origin, 450);
         wait(1.5);
         scripts\engine\utility::flag_set("gator_tooth_broken");
-        var_2 moveto(var_3, 0.25);
+        var_2 moveTo(var_3, 0.25);
         wait(1);
         var_2.twitching = 0;
       }
@@ -1231,7 +1231,7 @@ cp_zmb_should_continue_progress_bar_think(var_0) {
 boat_ride() {
   for(;;) {
     var_0 = getvehiclenode("boat_ride_start", "targetname");
-    var_1 = spawnvehicle("park_boat_ride_boat", "boat", "cp_kevin", var_0.origin, var_0.angles);
+    var_1 = spawnVehicle("park_boat_ride_boat", "boat", "cp_kevin", var_0.origin, var_0.angles);
     var_1 attachpath(var_0);
     var_1 startpath(var_0);
     if(!isDefined(level.shredder_battery)) {
@@ -1257,7 +1257,7 @@ shredder_battery_spawn() {
   thread delete_battery_at_end_node(var_0);
   var_0 setModel("alien_crafting_battery_single_01");
   self setCanDamage(1);
-  var_0 linkto(self, "tag", (-80, 0, 15), (0, 0, 0));
+  var_0 linkTo(self, "tag", (-80, 0, 15), (0, 0, 0));
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     if(isDefined(var_2) && isPlayer(var_2)) {
@@ -1363,18 +1363,18 @@ launch_battery_from_geyser(var_0) {
   var_1 = var_0.origin;
   var_2 = level.shredder_battery;
   var_2.origin = var_0.origin;
-  var_2 moveto(var_1 + (0, 0, 60), 0.25);
+  var_2 moveTo(var_1 + (0, 0, 60), 0.25);
   var_2 waittill("movedone");
   var_2 makeusable();
-  var_2 sethintstring(&"CP_QUEST_WOR_PART");
+  var_2 setHintString(&"CP_QUEST_WOR_PART");
   var_2 thread pick_up_battery();
   for(var_3 = 0; var_3 < 8; var_3++) {
-    var_2 rotateto(var_2.angles + (90, 0, 0), 0.2);
+    var_2 rotateTo(var_2.angles + (90, 0, 0), 0.2);
     wait(0.2);
   }
 
   var_2 makeunusable();
-  var_2 moveto(var_1 + (0, 0, -10), 0.5);
+  var_2 moveTo(var_1 + (0, 0, -10), 0.5);
   var_2 waittill("movedone");
   level.battery_launched = undefined;
 }
@@ -1413,7 +1413,7 @@ launch_players(var_0) {
       var_6 notify("cancel_ims");
       var_6 notify("cancel_gascan");
       if(var_0.script_noteworthy == "a") {
-        var_2 = vectornormalize((-2549.5, -163.5, 353.8) - var_0.origin) * 500 + (0, 0, 920);
+        var_2 = vectorNormalize((-2549.5, -163.5, 353.8) - var_0.origin) * 500 + (0, 0, 920);
         var_3 = (-2549.5, -163.5, 353.8);
         var_6 thread launch_player_to_kepler(var_3, var_0);
         wait(0.25);
@@ -1439,7 +1439,7 @@ launch_player_to_kepler(var_0, var_1) {
   self.anchor = spawn("script_model", self.origin);
   self.anchor setModel("tag_origin");
   self limitedmovement(1);
-  self playerlinkto(self.anchor);
+  self playerlinkTo(self.anchor);
   thread unset_player_flung(2);
   playfxontagforclients(level._effect["geyser_fullscreen_fx"], self, "tag_eye", self);
   var_2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
@@ -1456,7 +1456,7 @@ launch_player_to_kepler(var_0, var_1) {
       var_7 = 0.05;
     }
 
-    self.anchor moveto(var_3.origin, var_7);
+    self.anchor moveTo(var_3.origin, var_7);
     wait(var_7 + 0.05);
     if(!isDefined(var_3.target)) {
       break;
@@ -1466,11 +1466,11 @@ launch_player_to_kepler(var_0, var_1) {
     var_3 = scripts\engine\utility::random(var_2);
   }
 
-  self setorigin(self.anchor.origin);
+  self setOrigin(self.anchor.origin);
   self unlink();
   self.anchor delete();
   self setvelocity((0, 0, 0));
-  var_8 = vectornormalize((-2613.5, -131.5, 353.8) - self.origin) * 500 + (0, 0, 650);
+  var_8 = vectorNormalize((-2613.5, -131.5, 353.8) - self.origin) * 500 + (0, 0, 650);
   self setvelocity(var_8);
 }
 
@@ -1484,8 +1484,8 @@ launch_player(var_0, var_1, var_2) {
   self earthquakeforplayer(0.25, 3, self.origin, 700);
   self.anchor = spawn("script_model", self.origin);
   self.anchor setModel("tag_origin");
-  self playerlinkto(self.anchor);
-  self.anchor moveto(self.origin + (0, 0, 90), 0.25);
+  self playerlinkTo(self.anchor);
+  self.anchor moveTo(self.origin + (0, 0, 90), 0.25);
   self.anchor waittill("movedone");
   self unlink();
   self.anchor delete();
@@ -1560,7 +1560,7 @@ watch_player_landing(var_0, var_1, var_2) {
       }
 
       if(self istouching(var_12)) {
-        var_12 setvelocity(vectornormalize(var_12.origin - self.origin) * 800 + (0, 0, 50));
+        var_12 setvelocity(vectorNormalize(var_12.origin - self.origin) * 800 + (0, 0, 50));
       }
     }
 
@@ -1610,7 +1610,7 @@ handle_host_migration_during_launch() {
     }
   }
 
-  self setorigin(var_0, 1);
+  self setOrigin(var_0, 1);
   var_3 = 2304;
   var_4 = 1;
   var_5 = gettime();
@@ -1637,7 +1637,7 @@ handle_host_migration_during_launch() {
       }
 
       if(self istouching(var_11)) {
-        var_11 setvelocity(vectornormalize(var_11.origin - self.origin) * 800 + (0, 0, 50));
+        var_11 setvelocity(vectorNormalize(var_11.origin - self.origin) * 800 + (0, 0, 50));
       }
     }
 
@@ -1849,24 +1849,24 @@ gator_tooth_init() {
   var_2 = getEntArray("broken_gator_tooth_3", "targetname");
   level.gator_teeth_array = scripts\engine\utility::array_combine(level.gator_teeth_array, var_2);
   level.gold_tooth_3_pickup = getEntArray("broken_gator_gold_tooth_3_pickup", "targetname");
-  level.gator_mouth_door = getent("gator_mouth_door", "targetname");
-  var_3 = getent("croc_mouth_door", "targetname");
+  level.gator_mouth_door = getEnt("gator_mouth_door", "targetname");
+  var_3 = getEnt("croc_mouth_door", "targetname");
   if(isDefined(var_3)) {
     level.gator_mouth_door delete();
-    level.gator_mouth_door = getent("croc_mouth_door", "targetname");
+    level.gator_mouth_door = getEnt("croc_mouth_door", "targetname");
   }
 
-  var_4 = getent("gator_mouth", "targetname");
-  level.gator_mouth_light = getent("gator_mouth_room_light", "targetname");
+  var_4 = getEnt("gator_mouth", "targetname");
+  level.gator_mouth_light = getEnt("gator_mouth_room_light", "targetname");
   level.gator_mouth_light setlightintensity(0);
   level.gator_tooth_use_trig = spawn("script_origin", level.gator_teeth_array[0].origin + (0, 0, -75));
   foreach(var_6 in level.gator_teeth_array) {
-    var_6 linkto(var_4);
+    var_6 linkTo(var_4);
   }
 
   level thread gator_tooth_broken();
   if(scripts\cp\utility::is_codxp()) {
-    var_8 = scripts\engine\utility::getstruct("gold_teeth", "script_noteworthy");
+    var_8 = scripts\engine\utility::getStruct("gold_teeth", "script_noteworthy");
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_8);
   }
 }
@@ -1876,7 +1876,7 @@ gator_tooth_broken() {
   scripts\engine\utility::flag_wait("gator_gold_tooth_placed");
   level.gator_mouth_door unlink();
   level.gator_mouth_door playSound("croc_trap_door_open");
-  level.gator_mouth_door moveto(level.gator_mouth_door.origin + (0, 0, -200), 2);
+  level.gator_mouth_door moveTo(level.gator_mouth_door.origin + (0, 0, -200), 2);
   var_0 = scripts\engine\utility::getStructArray("gator_door_dust", "targetname");
   if(var_0.size > 0) {
     var_0 = scripts\engine\utility::array_randomize(var_0);
@@ -1916,7 +1916,7 @@ break_gator_teeth(var_0) {
 
 gold_teeth_pickup_debug() {
   level waittill("gold_tooth_pickup_trigger");
-  var_0 = scripts\engine\utility::getstruct("gold_teeth", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("gold_teeth", "script_noteworthy");
   var_1 = level.players[0];
   gold_teeth_pickup(var_0, var_1);
 }
@@ -1989,10 +1989,10 @@ gator_mouth_activation_func(var_0, var_1) {
 }
 
 put_tooth_in_gator_mouth() {
-  var_0 = getent("gator_mouth", "targetname");
+  var_0 = getEnt("gator_mouth", "targetname");
   scripts\engine\utility::flag_wait("gator_gold_tooth_pickup");
   level.gator_tooth_use_trig makeusable();
-  level.gator_tooth_use_trig sethintstring(&"CP_QUEST_WOR_PLACE_PART");
+  level.gator_tooth_use_trig setHintString(&"CP_QUEST_WOR_PLACE_PART");
   level.gator_tooth_use_trig waittill("trigger");
   scripts\engine\utility::flag_set("gator_gold_tooth_placed");
   foreach(var_2 in level.gator_teeth_array) {
@@ -2090,7 +2090,7 @@ zmb_power_gate_handler() {
   scripts\engine\utility::flag_wait("doors_initialized");
   var_0 = getEntArray("bollard_trigger", "targetname");
   foreach(var_2 in var_0) {
-    var_2 sethintstring(&"COOP_INTERACTIONS_REQUIRES_POWER");
+    var_2 setHintString(&"COOP_INTERACTIONS_REQUIRES_POWER");
   }
 
   var_4 = getEntArray("first_gate_bollard", "targetname");
@@ -2120,7 +2120,7 @@ zmb_power_gate_handler() {
   }
 
   foreach(var_13 in var_4) {
-    var_13 moveto(var_13.origin - (0, 0, 37), 2, 0.1, 0.1);
+    var_13 moveTo(var_13.origin - (0, 0, 37), 2, 0.1, 0.1);
   }
 
   wait(1);
@@ -2510,7 +2510,7 @@ bump_check(var_0, var_1, var_2, var_3) {
   var_4 = 0;
   if(is_in_box(var_0, var_1)) {
     if(isDefined(level.standing_list[var_3][self.name])) {
-      self setvelocity(vectornormalize(var_2) * 100);
+      self setvelocity(vectorNormalize(var_2) * 100);
       var_4 = 1;
     }
 

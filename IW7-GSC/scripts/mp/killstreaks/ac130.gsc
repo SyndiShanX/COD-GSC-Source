@@ -292,7 +292,7 @@ setac130player(var_0) {
   level.ac130.planemodel thermaldrawenable();
   var_1 = spawnplane(var_0, "script_model", level.ac130.planemodel.origin, "compass_objpoint_c130_friendly", "compass_objpoint_c130_enemy");
   var_1 notsolid();
-  var_1 linkto(level.ac130, "tag_player", (0, 80, 32), (0, -90, 0));
+  var_1 linkTo(level.ac130, "tag_player", (0, 80, 32), (0, -90, 0));
   var_1 thread deleteonac130playerremoved();
   thread scripts\mp\utility::teamplayercardsplash("used_ac130", var_0);
   var_0 thread waitsetthermal(1);
@@ -491,9 +491,9 @@ removeac130player(var_0, var_1) {
   var_4 = var_3.origin + anglestoright(var_3.angles) * 20000;
   var_4 = var_4 + (0, 0, 10000);
   var_3 thread playac130effects();
-  var_3 moveto(var_4, 40, 0, 0);
+  var_3 moveTo(var_4, 40, 0, 0);
   var_5 = (0, var_3.angles[1], -20);
-  var_3 rotateto(var_5, 30, 1, 1);
+  var_3 rotateTo(var_5, 30, 1, 1);
   var_3 thread deployflares(1);
   wait(5);
   var_3 thread deployflares(1);
@@ -562,14 +562,14 @@ ac130_spawn() {
   var_0 setCanDamage(1);
   var_0.maxhealth = 1000;
   var_0.health = var_0.maxhealth;
-  var_0 linkto(level.ac130, "tag_player", (0, 80, 32), (-25, 0, 0));
+  var_0 linkTo(level.ac130, "tag_player", (0, 80, 32), (-25, 0, 0));
   level.ac130.planemodel = var_0;
   level.ac130.planemodel hide();
   var_1 = spawn("script_model", level.ac130 gettagorigin("tag_player"));
   var_1 setModel("tag_origin");
   var_1 hide();
   var_1.var_336 = "ac130CameraModel";
-  var_1 linkto(level.ac130, "tag_player", (0, 0, 32), (5, 0, 0));
+  var_1 linkTo(level.ac130, "tag_player", (0, 0, 32), (5, 0, 0));
   level.ac130.cameramodel = var_1;
 }
 
@@ -629,9 +629,9 @@ rotateplane(var_0) {
   if(var_0 == "on") {
     var_1 = 10;
     var_2 = level.ac130_speed["rotate"] / 360 * var_1;
-    level.ac130 rotateyaw(level.ac130.angles[2] + var_1, var_2, var_2, 0);
+    level.ac130 rotateYaw(level.ac130.angles[2] + var_1, var_2, var_2, 0);
     for(;;) {
-      level.ac130 rotateyaw(360, level.ac130_speed["rotate"]);
+      level.ac130 rotateYaw(360, level.ac130_speed["rotate"]);
       wait(level.ac130_speed["rotate"]);
     }
 
@@ -641,13 +641,13 @@ rotateplane(var_0) {
   if(var_0 == "off") {
     var_3 = 10;
     var_2 = level.ac130_speed["rotate"] / 360 * var_3;
-    level.ac130 rotateyaw(level.ac130.angles[2] + var_3, var_2, 0, var_2);
+    level.ac130 rotateYaw(level.ac130.angles[2] + var_3, var_2, 0, var_2);
   }
 }
 
 attachplayer(var_0) {
   if(isbot(var_0)) {
-    var_0 cameralinkto(level.ac130, "tag_player");
+    var_0 cameralinkTo(level.ac130, "tag_player");
   }
 
   self playerlinkweaponviewtodelta(level.ac130.cameramodel, "tag_player", 1, 35, 35, 35, 35);
@@ -1418,7 +1418,7 @@ ks_laserguidedmissile_monitorproximity(var_0, var_1, var_2, var_3) {
         var_5 = flares_getflarereserve(var_3);
       }
 
-      var_0 missile_settargetent(var_5);
+      var_0 missile_settargetEnt(var_5);
       var_0 notify("missile_pairedWithFlare");
       level.ac130player stoplocalsound("missile_incoming");
       break;
@@ -1466,7 +1466,7 @@ ks_airsuperiority_monitorproximity(var_0) {
       }
 
       if(isDefined(var_2)) {
-        var_0 missile_settargetent(var_2);
+        var_0 missile_settargetEnt(var_2);
         var_0 notify("missile_pairedWithFlare");
         level.ac130player stoplocalsound("missile_incoming");
         break;

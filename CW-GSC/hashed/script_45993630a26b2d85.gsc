@@ -26,7 +26,7 @@ function private on_begin(var_d34d02af) {
   level.var_d34d02af = zm_trial::function_5769f26a(var_d34d02af);
   callback::on_weapon_fired(&on_weapon_fired);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_a5a431f6();
   }
 }

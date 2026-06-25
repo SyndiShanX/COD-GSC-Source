@@ -40,7 +40,7 @@ setup_player_for_animated_sequence(var_0, var_1, var_2, var_3, var_4, var_5, var
   level.player_mover = var_8;
   var_8.origin = var_2;
   var_8.angles = var_3;
-  var_7 linkto(var_8);
+  var_7 linkTo(var_8);
 
   if(var_0) {
     level.player playerlinktodelta(var_7, "tag_player", 1, var_1, var_1, var_1, var_1, 1);
@@ -137,7 +137,7 @@ player_sway() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = level.player_ground_ref_mover gettagorigin("tag_player");
   var_0.angles = level.player_ground_ref_mover gettagangles("tag_player");
-  var_0 linkto(level.player_ground_ref_mover, "tag_player");
+  var_0 linkTo(level.player_ground_ref_mover, "tag_player");
   level.player playersetgroundreferenceent(var_0);
   wait 0.5;
   thread player_sway_loop(level.player_ground_ref_mover);
@@ -221,7 +221,7 @@ player_wind_blendto(var_0, var_1) {
 
 heli_shake(var_0) {
   earthquake(0.25, 4, level.player.origin, 1600);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player screenshakeonentity(randomfloatrange(0.125, 0.175), randomfloatrange(0.125, 0.175), randomfloatrange(0.125, 0.175), 60, 0, 2, 500, 8, 12, 12, 1.8);
   var_1 = maps\_utility::get_rumble_ent();
   var_1.intensity = 0;

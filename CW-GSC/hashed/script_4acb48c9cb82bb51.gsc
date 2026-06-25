@@ -869,7 +869,7 @@ function private function_56b5dd3f(team) {
     level thread function_33587c8c(team);
     multiplier = 3;
 
-    foreach(player in getplayers(team)) {
+    foreach(player in getPlayers(team)) {
       player luinotifyevent(#"hash_4e128be5bc1a0226", 1, multiplier);
       player playsoundtoplayer(#"hash_691ccafec8b6c07f", player);
     }
@@ -881,7 +881,7 @@ function private function_56b5dd3f(team) {
       level.var_a9be97d8[team] = 1;
       multiplier = 2;
 
-      foreach(player in getplayers(team)) {
+      foreach(player in getPlayers(team)) {
         player luinotifyevent(#"hash_4e128be5bc1a0226", 1, multiplier);
         player playsoundtoplayer(#"hash_691ccbfec8b6c232", player);
       }

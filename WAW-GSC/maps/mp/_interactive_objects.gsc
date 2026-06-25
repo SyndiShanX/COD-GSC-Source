@@ -370,7 +370,7 @@ flammable_crate_explode() {
 
 breakable_clip() {
   if(isDefined(self.target)) {
-    targ = getent(self.target, "targetname");
+    targ = getEnt(self.target, "targetname");
 
     if(targ.classname == "script_brushmodel") {
       self.remove = targ;

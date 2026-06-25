@@ -145,7 +145,7 @@ JumpInternal(startPos, startAngles, endPos, endAngles, nextPos, jumpCBs, scripta
 
   self ScrAgentSetAnimScale(1.0, 1.0);
 
-  self SetOrigin(endPos, false);
+  self setOrigin(endPos, false);
 
   self notify("jump_finished");
 }
@@ -205,7 +205,7 @@ GetJumpInfo(startPos, startAngles, endPos, endAngles, nextPos) {
 
   startToEnd = endPos - startPos;
   startToEnd2D = startToEnd * (1, 1, 0);
-  startToEnd2D = VectorNormalize(startToEnd2D);
+  startToEnd2D = vectorNormalize(startToEnd2D);
 
   AssertEx(isDefined(level.alienAnimData.jumpLaunchGroundDelta), "Jump launch table has not been initialized");
 
@@ -347,7 +347,7 @@ GetJumpAnimStates(jumpInfo, animStates) {
 
 GetJumpStartAngles(startPos, startAngles, endPos) {
   startUp = AnglesToUp(startAngles);
-  startForward = VectorNormalize(endPos - startPos);
+  startForward = vectorNormalize(endPos - startPos);
   if(VectorDot(startUp, startForward) > 0.98) {
     startForward = (0, 0, 1);
   }
@@ -360,7 +360,7 @@ GetLaunchAnimState(jumpInfo) {
   LEVEL_DEGREE_RANGE = 20;
   cosLimitForLevel = Cos(90 - LEVEL_DEGREE_RANGE);
 
-  startToEnd = VectorNormalize(jumpInfo.jumpVector);
+  startToEnd = vectorNormalize(jumpInfo.jumpVector);
   startToEndDotUp = VectorDot(startToEnd, jumpInfo.startUpVector);
 
   if(abs(startToEndDotUp) <= cosLimitForLevel) {
@@ -373,7 +373,7 @@ GetLaunchAnimState(jumpInfo) {
 }
 
 GetLaunchAnimEntry(jumpInfo, launchAnimState) {
-  launchDirection = VectorNormalize(jumpInfo.launchVelocity);
+  launchDirection = vectorNormalize(jumpInfo.launchVelocity);
   launchDirection = RotateVector(launchDirection, jumpInfo.startAngles);
 
   AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection), "Alien jump table has not been initialized");
@@ -414,7 +414,7 @@ GetInAirAnimEntry(jumpInfo, launchAnimState, landAnimState) {
 
 GetJumpEndAngles(startPos, endPos, endAngles) {
   endUp = AnglesToUp(endAngles);
-  endForward = VectorNormalize(endPos - startPos);
+  endForward = vectorNormalize(endPos - startPos);
   if(VectorDot(endUp, endForward) > 0.98) {
     endForward = (0, 0, 1);
   }
@@ -455,7 +455,7 @@ GetLandAnimEntry(jumpInfo, landAnimState) {
   thirdVector = incomingVectorWithoutNormal - outgoingVectorWithoutNormal;
 
   outgoingRightVector = VectorCross(outgoingVectorWithoutNormal, jumpInfo.endUpVector);
-  outgoingRightVectorWithoutNormal = VectorNormalize(maps\mp\agents\alien\_alien_anim_utils::ProjectVectorToPlane(outgoingRightVector, jumpInfo.endUpVector)) * 100;
+  outgoingRightVectorWithoutNormal = vectorNormalize(maps\mp\agents\alien\_alien_anim_utils::ProjectVectorToPlane(outgoingRightVector, jumpInfo.endUpVector)) * 100;
 
   projectionIncomingToOutgoingRight = VectorDot(incomingVectorWithoutNormal * -1, outgoingRightVectorWithoutNormal);
 

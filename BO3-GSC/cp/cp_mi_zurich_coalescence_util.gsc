@@ -313,7 +313,7 @@ function move_player_to_respawn_point() {
   a_respawn_points_filtered = skipto::filter_player_spawnpoints(self, a_respawn_points, str_skipto);
   assert(a_respawn_points_filtered.size, "");
   s_warp = arraygetclosest(self.origin, a_respawn_points_filtered);
-  self setorigin(s_warp.origin);
+  self setOrigin(s_warp.origin);
   self setplayerangles(s_warp.angles);
 }
 
@@ -378,7 +378,7 @@ function ai_surreal_spawn_fx() {
           self.holdfire = 0;
         } else {
           self.e_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
-          self linkto(self.e_anchor);
+          self linkTo(self.e_anchor);
           self thread function_c9e8f95a(self.e_anchor);
           self.e_anchor clientfield::set("vehicle_spawn_fx", 1);
           wait(0.15);
@@ -808,14 +808,14 @@ function function_f5b7f741(var_f19447c4) {
     self.e_anchor = util::spawn_model("tag_origin", self gettagorigin("J_Spine4"), var_4fa09666);
     wait(0.05);
     self.e_anchor clientfield::increment("raven_juke_effect");
-    self linkto(self.e_anchor);
+    self linkTo(self.e_anchor);
     self thread function_c9e8f95a(self.e_anchor);
-    self.e_anchor moveto(var_f19447c4 + vectorscale((0, 0, 1), 25), n_time);
+    self.e_anchor moveTo(var_f19447c4 + vectorscale((0, 0, 1), 25), n_time);
     self.e_anchor waittill("movedone");
     self unlink();
     self forceteleport(var_f19447c4, var_fb20f2e1, 1, 0);
     self setgoalpos(var_f19447c4, 1);
-    self.e_anchor moveto(self gettagorigin("J_Spine4"), 0.05);
+    self.e_anchor moveTo(self gettagorigin("J_Spine4"), 0.05);
     self.e_anchor clientfield::increment("raven_teleport_in_effect");
     wait(1.4);
     self forceteleport(var_f19447c4, var_fb20f2e1, 1, 0);
@@ -899,14 +899,14 @@ function function_bfc7e6a6(v_pos) {
   } else {
     self.e_anchor clientfield::increment("raven_juke_effect");
   }
-  self linkto(self.e_anchor);
+  self linkTo(self.e_anchor);
   self thread function_c9e8f95a(self.e_anchor);
-  self.e_anchor moveto(v_pos + vectorscale((0, 0, 1), 25), n_time);
+  self.e_anchor moveTo(v_pos + vectorscale((0, 0, 1), 25), n_time);
   self.e_anchor waittill("movedone");
   self unlink();
   self forceteleport(v_pos, var_fb20f2e1, 0, 0);
   self setgoalpos(v_pos, 1);
-  self.e_anchor moveto(self gettagorigin("J_Spine4"), 0.05);
+  self.e_anchor moveTo(self gettagorigin("J_Spine4"), 0.05);
   self.e_anchor clientfield::increment("raven_teleport_in_effect");
   wait(1.4);
   self forceteleport(v_pos, var_fb20f2e1, 0, 0);
@@ -967,14 +967,14 @@ function function_3287bea1() {
     } else {
       self.e_anchor clientfield::increment("raven_juke_effect");
     }
-    self linkto(self.e_anchor);
+    self linkTo(self.e_anchor);
     self thread function_c9e8f95a(self.e_anchor);
-    self.e_anchor moveto(var_f5cd6771.origin + vectorscale((0, 0, 1), 25), n_move_time);
+    self.e_anchor moveTo(var_f5cd6771.origin + vectorscale((0, 0, 1), 25), n_move_time);
     self.e_anchor waittill("movedone");
     self unlink();
     self forceteleport(var_f5cd6771.origin, var_fb20f2e1, 1, 0);
     self setgoalpos(var_f5cd6771.origin, 1);
-    self.e_anchor moveto(self gettagorigin("J_Spine4"), 0.05);
+    self.e_anchor moveTo(self gettagorigin("J_Spine4"), 0.05);
     self.e_anchor clientfield::increment("raven_teleport_in_effect");
     wait(1.4);
     self ai::set_ignoreall(0);
@@ -1011,14 +1011,14 @@ function function_ff6b67ed(target) {
   } else {
     self.e_anchor clientfield::increment("raven_juke_effect");
   }
-  self linkto(self.e_anchor);
+  self linkTo(self.e_anchor);
   self thread function_c9e8f95a(self.e_anchor);
-  self.e_anchor moveto(target.origin + vectorscale((0, 0, 1), 25), n_move_time);
+  self.e_anchor moveTo(target.origin + vectorscale((0, 0, 1), 25), n_move_time);
   self.e_anchor waittill("movedone");
   self unlink();
   self forceteleport(target.origin, var_fb20f2e1, 1, 0);
   self setgoalpos(target.origin, 1);
-  self.e_anchor moveto(self gettagorigin("J_Spine4"), 0.05);
+  self.e_anchor moveTo(self gettagorigin("J_Spine4"), 0.05);
   self.e_anchor clientfield::increment("raven_teleport_in_effect");
   wait(1.4);
   self ai::set_ignoreall(0);
@@ -1217,7 +1217,7 @@ function function_3da5d43b(str_objective) {
   if(!isDefined(str_objective)) {
     assert(isDefined(str_objective), "");
   }
-  var_779fea3 = getent(self.target, "targetname");
+  var_779fea3 = getEnt(self.target, "targetname");
   level thread function_8bd6820f(str_objective);
   self thread function_61f7fc15();
   self.var_afacae68 = 0;
@@ -1246,7 +1246,7 @@ function function_8bd6820f(str_objective) {
   level thread scene::play(var_9e7910c3, "targetname");
   level waittill(str_objective + "_done");
   level thread scene::stop(var_9e7910c3, "targetname");
-  playsoundatposition("evt_heart_burn", (0, 0, 0));
+  playSoundAtPosition("evt_heart_burn", (0, 0, 0));
 }
 
 function function_17b739e2(var_779fea3) {
@@ -1263,7 +1263,7 @@ function function_61f7fc15() {
 function function_dd842585(str_objective, var_ed1d0e16, str_trig) {
   level endon(str_objective + "_done");
   level endon(var_ed1d0e16 + "_done");
-  var_50f524fe = getent(str_trig, "targetname");
+  var_50f524fe = getEnt(str_trig, "targetname");
   while(true) {
     var_50f524fe waittill("trigger", who);
     if(isPlayer(who) && (!(isDefined(who.teleporting) && who.teleporting))) {
@@ -1277,7 +1277,7 @@ function function_dd842585(str_objective, var_ed1d0e16, str_trig) {
 function function_c51939f4(str_objective, var_ed1d0e16) {
   level notify(str_objective + "enter_vortex");
   str_shader = "black";
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   self.teleporting = 1;
   self enableinvulnerability();
   self thread hud::fade_to_black_for_x_sec(0, 2, 0.5, 1, str_shader);
@@ -1285,7 +1285,7 @@ function function_c51939f4(str_objective, var_ed1d0e16) {
   wait(0 + 2);
   a_s_spots = skipto::get_spots(var_ed1d0e16, 0);
   s_spot = array::random(a_s_spots);
-  self setorigin(s_spot.origin);
+  self setOrigin(s_spot.origin);
   self setplayerangles(s_spot.angles);
   wait(0.5);
   self.teleporting = undefined;
@@ -1595,12 +1595,12 @@ function move_model(n_multiplier = 1, str_start, var_bd62ea22) {
     s_start = s_next;
   }
   while(isDefined(s_start.target));
-  self rotateto(s_next.angles, 0.05);
+  self rotateTo(s_next.angles, 0.05);
 }
 
 function function_2153e0ef(s_start = self, s_next, n_multiplier, var_bd62ea22 = 1) {
   n_move = (distance(s_next.origin, s_start.origin) / 72) / n_multiplier;
-  self moveto(s_next.origin, n_move);
+  self moveTo(s_next.origin, n_move);
   if(var_bd62ea22) {
     var_d9f4bdfd = s_next.origin - s_start.origin;
     self.angles = vectortoangles(var_d9f4bdfd);
@@ -1624,7 +1624,7 @@ function function_12141c31() {
 }
 
 function function_3adbd846(str_val, str_key = "targetname", var_34b81fdb = 0) {
-  t_trig = getent(str_val, str_key);
+  t_trig = getEnt(str_val, str_key);
   if(isDefined(t_trig)) {
     t_trig endon("death");
     while(true) {
@@ -1641,7 +1641,7 @@ function function_3adbd846(str_val, str_key = "targetname", var_34b81fdb = 0) {
 }
 
 function function_1b3dfa61(str_name, str_type = "trigger_radius", n_width = 128, n_height = 128, n_length, var_88090aa5 = 1, str_objective) {
-  t_trig = getent(str_name, "targename");
+  t_trig = getEnt(str_name, "targename");
   if(var_88090aa5) {
     t_trig = function_3789d4db(str_name, str_type, n_width, n_height, n_length, str_objective);
   }
@@ -1671,7 +1671,7 @@ function function_3789d4db(str_name, str_type = "trigger_radius", n_width, n_hei
 function function_5bb4d484(str_val, str_key = "targetname", n_count, var_a3e7056a = 0.05) {
   sp_spawner = self;
   if(sp_spawner == level) {
-    sp_spawner = getent(str_val, str_key);
+    sp_spawner = getEnt(str_val, str_key);
   }
   a_ai = [];
   for(i = 0; i < n_count; i++) {
@@ -1723,7 +1723,7 @@ function function_33ec653f(str_val, str_key = "targetname", var_a3e7056a = 0.05,
 
 function function_a569867c(nd_point = self, spawn_func, i = 0, param1, param2, param3, param4, param5) {
   assert(isDefined(nd_point.script_noteworthy), ((("" + nd_point.origin) + "") + self.targetname) + "");
-  var_2a999a2c = getent(nd_point.script_noteworthy, "targetname");
+  var_2a999a2c = getEnt(nd_point.script_noteworthy, "targetname");
   assert(isDefined(var_2a999a2c), "" + nd_point.script_noteworthy);
   self.a_ai[i] = spawner::simple_spawn_single(var_2a999a2c);
   if(!isalive(self.a_ai[i])) {
@@ -2081,7 +2081,7 @@ function function_f3e247d6(a_ents) {
 }
 
 function function_c83720c9() {
-  var_347ccc07 = getent("garage_bounds", "targetname");
+  var_347ccc07 = getEnt("garage_bounds", "targetname");
   var_347ccc07 setinvisibletoall();
   trigger::wait_till("triage_regroup");
   var_347ccc07 setvisibletoall();
@@ -2113,7 +2113,7 @@ function function_2e1830eb(str_station, str_objective) {
     recordent(var_3bc473a5[i]);
   }
   foreach(j, mdl_part in var_3bc473a5) {
-    mdl_part linkto(mdl_origin);
+    mdl_part linkTo(mdl_origin);
     mdl_origin.var_3bc473a5[j] = mdl_part;
   }
   mdl_origin.s_scene = s_scene;
@@ -2123,7 +2123,7 @@ function function_27904cd4(str_station, str_objective, n_count = 0, var_31561fde
   level endon(str_objective + "_completed");
   str_scenedef = "cin_zur_02_01_climb_aie_charging_station";
   var_18dfedfa = array("sec_assault_ar", "sec_suppressor_ar", "sec_cqb_shotgun", "sec_rpg_rocket", "sec_suppressor_mg", "sec_sniper", "sec_rusher", "sec_exploder");
-  var_ce83537c = getent(str_station, "targetname");
+  var_ce83537c = getEnt(str_station, "targetname");
   var_ce83537c endon("death");
   var_ce83537c endon("disable");
   if(!isDefined(var_ce83537c.mdl_origin)) {
@@ -2142,7 +2142,7 @@ function function_27904cd4(str_station, str_objective, n_count = 0, var_31561fde
     } else {
       str_spawner = array::random(var_18dfedfa);
       var_ce83537c.ai_spawned = spawner::simple_spawn_single(str_spawner);
-      var_ce83537c.mdl_origin linkto(var_ce83537c);
+      var_ce83537c.mdl_origin linkTo(var_ce83537c);
       if(!isalive(var_ce83537c.ai_spawned)) {
         wait(0.05);
       } else {
@@ -2158,9 +2158,9 @@ function function_27904cd4(str_station, str_objective, n_count = 0, var_31561fde
         var_ce83537c.a_ai[var_ce83537c.a_ai.size] = var_ce83537c.ai_spawned;
         var_ce83537c.n_spawned++;
         var_ce83537c.ai_spawned forceteleport(var_ce83537c.mdl_origin.origin, var_ce83537c.mdl_origin.angles);
-        var_ce83537c.ai_spawned linkto(var_ce83537c.mdl_origin);
+        var_ce83537c.ai_spawned linkTo(var_ce83537c.mdl_origin);
         var_ce83537c.mdl_origin scene::init(str_scenedef, var_ce83537c.ai_spawned);
-        var_ce83537c rotateyaw(180, randomfloatrange(0.89, 1.4));
+        var_ce83537c rotateYaw(180, randomfloatrange(0.89, 1.4));
         var_ce83537c waittill("rotatedone");
         if(!isalive(var_ce83537c.ai_spawned)) {
           var_ce83537c.mdl_origin unlink();
@@ -2188,7 +2188,7 @@ function function_27904cd4(str_station, str_objective, n_count = 0, var_31561fde
 }
 
 function function_5b0d9c63(str_station) {
-  var_ce83537c = getent(str_station, "targetname");
+  var_ce83537c = getEnt(str_station, "targetname");
   if(!isDefined(var_ce83537c)) {
     iprintln(("" + str_station) + "");
     return;
@@ -2198,7 +2198,7 @@ function function_5b0d9c63(str_station) {
   if(isalive(var_ce83537c.ai_spawned)) {
     var_ce83537c.ai_spawned kill();
   }
-  var_ce83537c rotateto(var_ce83537c.v_start_angles, 1);
+  var_ce83537c rotateTo(var_ce83537c.v_start_angles, 1);
 }
 
 function function_6d571441() {

@@ -378,7 +378,7 @@ func_6E03() {
 
   if(distancesquared(self.origin, self.enemy.origin) > 4096) {
     var_0 = (0, 0, 50);
-    var_1 = vectornormalize(self.enemy.origin - self.origin);
+    var_1 = vectorNormalize(self.enemy.origin - self.origin);
     var_2 = self.origin + var_0;
     var_3 = var_2 + var_1 * 64;
     return !bullettracepassed(var_2, var_3, 0, self);
@@ -1277,7 +1277,7 @@ func_100AD(var_0) {
     return level.failure;
   }
 
-  var_7 = vectornormalize(var_4);
+  var_7 = vectorNormalize(var_4);
   if(vectordot(var_3, var_7) < 0) {
     return level.failure;
   }

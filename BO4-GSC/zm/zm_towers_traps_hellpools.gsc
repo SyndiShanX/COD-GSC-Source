@@ -70,7 +70,7 @@ function_7cc8a854() {
     part hide();
   }
 
-  mdl_clip = getent("mdl_acid_trap_cauldron_piece_clip", "targetname");
+  mdl_clip = getEnt("mdl_acid_trap_cauldron_piece_clip", "targetname");
   mdl_clip notsolid();
   var_d58ee8b5 = getweapon(#"hash_72cba96681a7af18");
   zm_items::function_4d230236(var_d58ee8b5, &function_b54b9d5e);
@@ -108,7 +108,7 @@ function_a3661fef() {
   while(true) {
     level waittill(#"component_collected");
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       if(zm_crafting::function_6d1e4410(e_player, s_blueprint)) {
         level scene::function_27f5972e(#"p8_fxanim_zm_towers_trap_acid_bundle");
         level notify(#"hash_476cae376318f3d5");
@@ -221,7 +221,7 @@ function_55d14d78() {
 }
 
 function_b54b9d5e(e_holder, w_item) {
-  mdl_clip = getent("mdl_acid_trap_cauldron_piece_clip", "targetname");
+  mdl_clip = getEnt("mdl_acid_trap_cauldron_piece_clip", "targetname");
 
   if(isDefined(mdl_clip)) {
     mdl_clip delete();

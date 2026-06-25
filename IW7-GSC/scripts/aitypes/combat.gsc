@@ -827,7 +827,7 @@ func_FFC2() {
     return 0;
   }
 
-  var_0 = vectornormalize(self.enemy.origin - self.origin);
+  var_0 = vectorNormalize(self.enemy.origin - self.origin);
   var_1 = anglesToForward(self.angles);
 
   if(vectordot(var_0, var_1) < 0.5) {
@@ -958,7 +958,7 @@ func_E84D(var_0) {
 
   if(self.unittype == "soldier") {
     var_1 = self.var_F126.origin;
-    var_2 = vectornormalize(self.origin - var_1);
+    var_2 = vectorNormalize(self.origin - var_1);
     var_3 = self.origin + var_2 * 200;
     var_4 = getclosestpointonnavmesh(var_3);
     self.combatmode = "no_cover";
@@ -1118,7 +1118,7 @@ func_12F1D(var_0) {
 
   if(scripts\asm\asm_bb::func_2985() && isDefined(self._blackboard.shootparams.pos)) {
     var_3 = self func_853C();
-    var_4 = vectornormalize(self._blackboard.shootparams.pos - self getEye());
+    var_4 = vectorNormalize(self._blackboard.shootparams.pos - self getEye());
     var_5 = vectordot(var_3, var_4);
 
     if(var_5 < 0.906) {

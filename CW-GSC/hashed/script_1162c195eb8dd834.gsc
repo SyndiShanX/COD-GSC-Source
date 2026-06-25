@@ -421,7 +421,7 @@ function function_f91a4fac(script_model) {
   script_model show_solid();
 
   if(script_model.classname == "script_brushmodel") {
-    script_model disconnectpaths();
+    script_model disconnectPaths();
   }
 }
 
@@ -678,7 +678,7 @@ function function_6410533e(obj_struct) {
         obj_struct.var_dffd37e7 = 1;
 
         if(isDefined(obj_struct.target)) {
-          obj_struct.search_vol = getent(obj_struct.target, "targetname");
+          obj_struct.search_vol = getEnt(obj_struct.target, "targetname");
         } else if(!isDefined(obj_struct.radius)) {
           obj_struct.radius = 512;
 
@@ -1255,7 +1255,7 @@ function function_a6298abd() {
     }
 
     waitframe(1);
-    player = getplayers()[0];
+    player = getPlayers()[0];
     dist = distance(player.origin, self.origin);
 
     if(dist > var_88351da) {

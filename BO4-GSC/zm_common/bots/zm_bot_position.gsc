@@ -48,7 +48,7 @@ function_6300517d(params, tacbundle) {
 function_a3d8f155(params, tacbundle) {
   allies = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player == self) {
       continue;
     }

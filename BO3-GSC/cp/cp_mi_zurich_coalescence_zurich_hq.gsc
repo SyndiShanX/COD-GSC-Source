@@ -82,7 +82,7 @@ function function_44ee5cb7() {
   level endon("game_ended");
   while(true) {
     wait(1);
-    playsoundatposition("amb_troop_alarm", (-8326, 37739, 559));
+    playSoundAtPosition("amb_troop_alarm", (-8326, 37739, 559));
   }
 }
 
@@ -111,21 +111,21 @@ function function_2436a71e() {
 }
 
 function function_19d7c072() {
-  var_e26726e5 = getent("hq_atrium_door_01", "targetname");
+  var_e26726e5 = getEnt("hq_atrium_door_01", "targetname");
   var_e26726e5.v_start = var_e26726e5.origin;
-  var_9a7f401d = getent("hq_atrium_door_02", "targetname");
+  var_9a7f401d = getEnt("hq_atrium_door_02", "targetname");
   var_9a7f401d.v_start = var_9a7f401d.origin;
-  e_door_clip = getent("hq_atrium_door_clip", "targetname");
-  var_e26726e5 moveto(var_e26726e5.origin + vectorscale((0, 0, 1), 44), 0.5);
-  var_9a7f401d moveto(var_9a7f401d.origin + (vectorscale((0, 0, -1), 44)), 0.5);
+  e_door_clip = getEnt("hq_atrium_door_clip", "targetname");
+  var_e26726e5 moveTo(var_e26726e5.origin + vectorscale((0, 0, 1), 44), 0.5);
+  var_9a7f401d moveTo(var_9a7f401d.origin + (vectorscale((0, 0, -1), 44)), 0.5);
   var_9a7f401d waittill("movedone");
   e_door_clip notsolid();
   e_door_clip connectpaths();
   trigger::wait_till("hq_exit_zone_trig");
-  var_e26726e5 moveto(var_e26726e5.v_start, 0.05);
-  var_9a7f401d moveto(var_9a7f401d.v_start, 0.05);
+  var_e26726e5 moveTo(var_e26726e5.v_start, 0.05);
+  var_9a7f401d moveTo(var_9a7f401d.v_start, 0.05);
   e_door_clip solid();
-  e_door_clip disconnectpaths();
+  e_door_clip disconnectPaths();
 }
 
 function function_f05c4095() {
@@ -188,7 +188,7 @@ function function_6c64938e() {
     foreach(var_530f952d in var_6a2c8ee9) {
       if(isDefined(var_530f952d.target)) {
         var_73c9db2b = struct::get(var_530f952d.target, "targetname");
-        var_530f952d moveto(var_73c9db2b.origin, 1.5);
+        var_530f952d moveTo(var_73c9db2b.origin, 1.5);
         var_530f952d thread function_eaedd1eb();
       }
     }
@@ -202,7 +202,7 @@ function function_eaedd1eb() {
 }
 
 function function_66b77465() {
-  e_door = getent("siegebot_elevator_door", "targetname");
+  e_door = getEnt("siegebot_elevator_door", "targetname");
   e_door movez(140, 3);
   e_door playSound("evt_siegebot_elevator_door");
   e_door thread function_a8bf6ebc();
@@ -245,23 +245,23 @@ function function_47e79f7() {
 }
 
 function function_c5e1700c() {
-  getent("trig_zurich_hq_door_hack", "targetname") setcursorhint("HINT_NOICON");
+  getEnt("trig_zurich_hq_door_hack", "targetname") setCursorHint("HINT_NOICON");
 }
 
 function function_e2ca7f8f() {
-  var_5cca3f31 = getent("trig_zurich_hq_door_hack", "targetname");
+  var_5cca3f31 = getEnt("trig_zurich_hq_door_hack", "targetname");
   var_5cca3f31 zurich_util::function_d1996775();
   level function_e6db4b20();
   level flag::set("flag_hq_hack_door_open");
 }
 
 function function_e6db4b20() {
-  mdl_door = getent("hq_siegebot_exitdoor", "targetname");
+  mdl_door = getEnt("hq_siegebot_exitdoor", "targetname");
   mdl_door.v_start = mdl_door.origin;
   mdl_door.v_end = mdl_door.origin + vectorscale((0, 0, 1), 128);
   n_open_time = 2;
   mdl_door playSound("evt_decon_door_open");
-  mdl_door moveto(mdl_door.v_end, n_open_time);
+  mdl_door moveTo(mdl_door.v_end, n_open_time);
   mdl_door thread function_45d5a571();
   wait(n_open_time / 2);
 }
@@ -283,8 +283,8 @@ function function_2950b33d() {
 }
 
 function function_ae937789() {
-  mdl_door = getent("hq_decon_door_entrance", "targetname");
-  e_clip = getent("hq_decon_door_entrance_clip", "targetname");
+  mdl_door = getEnt("hq_decon_door_entrance", "targetname");
+  e_clip = getEnt("hq_decon_door_entrance_clip", "targetname");
   e_clip notsolid();
   level flag::wait_till("hq_decon_active");
   e_clip solid();
@@ -298,24 +298,24 @@ function function_ae937789() {
 }
 
 function function_3319c9ae() {
-  mdl_door = getent("hq_decon_door", "targetname");
+  mdl_door = getEnt("hq_decon_door", "targetname");
   mdl_door.v_start = mdl_door.origin;
   mdl_door.v_end = mdl_door.origin + vectorscale((0, 0, 1), 128);
   n_open_time = 2;
   mdl_door playSound("evt_decon_door_open");
-  mdl_door moveto(mdl_door.v_end, n_open_time);
+  mdl_door moveTo(mdl_door.v_end, n_open_time);
 }
 
 function function_b52a0060() {
-  mdl_door = getent("hq_decon_door", "targetname");
+  mdl_door = getEnt("hq_decon_door", "targetname");
   mdl_door playSound("evt_decon_door_close");
-  mdl_door moveto(mdl_door.v_start, 0.5);
+  mdl_door moveTo(mdl_door.v_start, 0.5);
 }
 
 function function_8cb99e45() {
-  var_107d713c = getent("hq_decon_door", "targetname");
-  var_2049505e = getent("hq_decon_door_entrance", "targetname");
-  e_clip = getent("hq_decon_door_entrance_clip", "targetname");
+  var_107d713c = getEnt("hq_decon_door", "targetname");
+  var_2049505e = getEnt("hq_decon_door_entrance", "targetname");
+  e_clip = getEnt("hq_decon_door_entrance_clip", "targetname");
   var_107d713c delete();
   var_2049505e delete();
   e_clip delete();
@@ -427,8 +427,8 @@ function turret_think() {
   self.var_61ba68c8 = util::spawn_model("tag_origin", self.origin, self.angles);
   self.var_61ba68c8.script_objective = self.script_objective;
   s_moveto = struct::get(self.target);
-  self linkto(self.var_61ba68c8, "tag_origin");
-  self.var_61ba68c8 moveto(s_moveto.origin, n_move_time);
+  self linkTo(self.var_61ba68c8, "tag_origin");
+  self.var_61ba68c8 moveTo(s_moveto.origin, n_move_time);
   self.var_61ba68c8 waittill("movedone");
   wait(var_39178da3);
   self turret_activate();
@@ -497,7 +497,7 @@ function function_f3b250de() {
 
 function function_371b16ae() {
   zurich_util::function_1b3dfa61("hq_start_ravens_struct_trig", undefined, 600, 512);
-  playsoundatposition("mus_coalescence_theme_lobby", (-8698, 38395, 594));
+  playSoundAtPosition("mus_coalescence_theme_lobby", (-8698, 38395, 594));
 }
 
 function function_f8e4b283() {

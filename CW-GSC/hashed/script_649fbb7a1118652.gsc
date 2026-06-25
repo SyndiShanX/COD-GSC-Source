@@ -57,10 +57,10 @@ function function_8e1c74f9() {
     end_spot.triggers[end_spot.triggers.size] = var_6a4d6895;
     var_6a4d6895.var_f15d0100 = var_f15d0100;
     var_6a4d6895.end_spot = end_spot;
-    var_6a4d6895 triggerignoreteam();
+    var_6a4d6895 triggerIgnoreTeam();
     var_6a4d6895 setvisibletoall();
     var_6a4d6895 setteamfortrigger(#"none");
-    var_6a4d6895 setcursorhint("HINT_NOICON");
+    var_6a4d6895 setCursorHint("HINT_NOICON");
     hint = #"hash_3836c584d365660c";
     var_4fbbe184 = &function_4d3d6ee0;
 
@@ -68,7 +68,7 @@ function function_8e1c74f9() {
       hint = #"hash_3836c584d365660c";
     }
 
-    var_6a4d6895 sethintstring(hint);
+    var_6a4d6895 setHintString(hint);
     var_6a4d6895 callback::on_trigger(var_4fbbe184);
 
     level thread function_be9add5(fastrope_point, end_spot.origin);
@@ -108,14 +108,14 @@ function function_4d3d6ee0(var_19a365) {
     var_137ae0b1 = spawn("trigger_radius_use", player.origin, 0, 32, 32);
     zipline playSound("evt_rappel_start");
     zipline playLoopSound("evt_rappel_loop");
-    var_137ae0b1 enablelinkto();
-    var_137ae0b1 linkto(player);
-    var_137ae0b1 triggerignoreteam();
+    var_137ae0b1 enablelinkTo();
+    var_137ae0b1 linkTo(player);
+    var_137ae0b1 triggerIgnoreTeam();
     var_137ae0b1 setinvisibletoall();
     var_137ae0b1 setvisibletoplayer(player);
     var_137ae0b1 setteamfortrigger(#"none");
-    var_137ae0b1 setcursorhint("HINT_NOICON");
-    var_137ae0b1 sethintstring(hint);
+    var_137ae0b1 setCursorHint("HINT_NOICON");
+    var_137ae0b1 setHintString(hint);
 
     if(isDefined(zipline)) {
       zipline setmovingplatformenabled(1);
@@ -128,7 +128,7 @@ function function_4d3d6ee0(var_19a365) {
       player allowjump(0);
       distance = distance(var_f15d0100.origin, end_pos);
       time = distance / speed;
-      zipline moveto(end_pos, time, 0.2, 0.2);
+      zipline moveTo(end_pos, time, 0.2, 0.2);
       zipline waittilltimeout(time, #"death", #"player_bailed");
 
       if(isalive(player)) {
@@ -143,7 +143,7 @@ function function_4d3d6ee0(var_19a365) {
         level thread function_cec4ff58(player, zipline);
         distance = distance(zipline.origin, end_offset);
         time = distance / speed;
-        zipline moveto(end_offset, time);
+        zipline moveTo(end_offset, time);
         zipline waittilltimeout(time, #"death", #"player_bailed");
       }
 

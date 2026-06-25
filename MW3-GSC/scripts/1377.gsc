@@ -230,7 +230,7 @@ _id_4299() {
         var_8 = self gettagangles("tag_eye");
         var_9 = self getEye();
         var_10 = anglesToForward(var_8);
-        var_11 = vectornormalize(var_2.origin - var_9);
+        var_11 = vectorNormalize(var_2.origin - var_9);
 
         if(vectordot(var_10, var_11) > 0.55) {
           if(self cansee(var_2)) {

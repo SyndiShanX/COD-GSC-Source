@@ -79,13 +79,13 @@ main() {
   level.player endon("death");
   wait 0.2;
   var_5 = level.player common_scripts\utility::spawn_tag_origin();
-  var_5 linkto(level.player);
+  var_5 linkTo(level.player);
   var_5 makeusable();
 
   if(!level.console) {
-    var_5 sethintstring(&"SHIP_GRAVEYARD_HINT_DIVE");
+    var_5 setHintString(&"SHIP_GRAVEYARD_HINT_DIVE");
   } else {
-    var_5 sethintstring(&"SHIP_GRAVEYARD_HINT_DIVE_CONSOLE");
+    var_5 setHintString(&"SHIP_GRAVEYARD_HINT_DIVE_CONSOLE");
   }
 
   var_5 common_scripts\utility::trigger_on();
@@ -147,10 +147,10 @@ intro_anim_scene() {
   level.player_rig = maps\_player_rig::get_player_rig();
   level.player_rig.origin = var_1 gettagorigin("tag_guy1");
   level.player_rig.angles = var_1 gettagangles("tag_guy1");
-  level.player_rig linkto(var_1, "tag_guy1", (0, 0, 0), (0, 0, 0));
+  level.player_rig linkTo(var_1, "tag_guy1", (0, 0, 0), (0, 0, 0));
   level.player playerlinktodelta(level.player_rig, "tag_player", 1, 16, 29, 45, 9, 1);
   var_0 thread maps\_anim::anim_loop_solo(var_1, "rocking", "stop_rocking");
-  level.baker linkto(var_1, "tag_guy1");
+  level.baker linkTo(var_1, "tag_guy1");
   var_1 thread maps\_anim::anim_single_solo(level.baker, "on_boat_intro", "tag_guy1");
   level.baker thread maps\_utility::play_sound_on_entity("scn_npc_roll_off");
   var_1 thread intro_baker_unlink(var_1);
@@ -169,7 +169,7 @@ thunder_big_sound_moving() {
   var_0 playSound("elm_thunder_distant", "sounddone");
   var_0 thread maps\_utility::play_sound_on_entity("elm_thunder_strike");
   wait 0.4;
-  var_0 moveto(level.player.origin + (1200, -800, 300), 5);
+  var_0 moveTo(level.player.origin + (1200, -800, 300), 5);
   var_0 waittill("sounddone");
   var_0 delete();
 }
@@ -195,7 +195,7 @@ intro_baker_unlink(var_0) {
 
 baker_dive() {
   var_0 = level.baker common_scripts\utility::spawn_tag_origin();
-  level.baker linkto(var_0);
+  level.baker linkTo(var_0);
   var_0 movez(8, 0.5, 0.1, 0.2);
   var_0 waittill("movedone");
   level notify("stop_ripple");
@@ -219,7 +219,7 @@ spotlight_hind() {
   level.heli thread heli_bullhorn_lines();
   level.heli waittill("reached_dynamic_path_end");
   level.heli notify("new_spotlight_target");
-  level.heli setturrettargetent(level.player);
+  level.heli setturrettargetEnt(level.player);
   common_scripts\utility::flag_clear("lightning_bloom");
   wait 1;
 
@@ -247,9 +247,9 @@ spotlight_think() {
   var_0.origin = var_5 + var_3 * 50 - (0, 0, 25);
   var_1.origin = var_5 + var_3 * 50 - (0, 0, 25) - 15 * var_4;
   var_2.origin = var_5 + var_3 * 50 - (0, 0, 25) + 15 * var_4;
-  var_0 linkto(self);
-  var_1 linkto(self);
-  var_2 linkto(self);
+  var_0 linkTo(self);
+  var_1 linkTo(self);
+  var_2 linkTo(self);
   playFXOnTag(common_scripts\utility::getfx("abv_spotlight"), self, "TAG_BARREL");
   var_6 = [var_0, var_1, var_2];
   thread spotlight_loop(var_6);
@@ -266,7 +266,7 @@ spotlight_loop(var_0) {
 
   for(;;) {
     var_1 = common_scripts\utility::random(var_0);
-    self setturrettargetent(var_1);
+    self setturrettargetEnt(var_1);
     wait(randomfloatrange(0.5, 1.5));
   }
 }
@@ -300,7 +300,7 @@ bobbing_updown(var_0) {
     var_7 = 0;
     var_8 = randomfloatrange(var_2, var_3);
     var_9 = randomfloatrange(var_4, var_5);
-    var_0.bob_ref moveto(var_0.start_origin + (var_6, var_7, var_8), var_9, var_9 / 4.0, var_9 / 4.0);
+    var_0.bob_ref moveTo(var_0.start_origin + (var_6, var_7, var_8), var_9, var_9 / 4.0, var_9 / 4.0);
     wait(var_9);
   }
 }
@@ -372,9 +372,9 @@ pitch_and_roll() {
   for(;;) {
     var_6 = (randomfloatrange(var_3, var_2), 0, randomfloatrange(var_3, var_2));
     var_7 = randomfloatrange(var_5, var_4);
-    self rotateto(var_1 + var_6, var_7, var_7 * 0.2, var_7 * 0.2);
+    self rotateTo(var_1 + var_6, var_7, var_7 * 0.2, var_7 * 0.2);
     self waittill("rotatedone");
-    self rotateto(var_1 - var_6, var_7, var_7 * 0.2, var_7 * 0.2);
+    self rotateTo(var_1 - var_6, var_7, var_7 * 0.2, var_7 * 0.2);
     self waittill("rotatedone");
   }
 }
@@ -426,7 +426,7 @@ bobbing_ally(var_0) {
     var_0 forceteleport(var_1.origin, var_1.angles);
   }
 
-  var_0 linkto(var_1, "tag_origin");
+  var_0 linkTo(var_1, "tag_origin");
   var_0 thread bobbing_actor(var_1, 0.5);
 }
 

@@ -17,8 +17,8 @@ precache() {
 }
 
 town_treasure_chest_init() {
-  chest1 = getstruct("town_chest", "script_noteworthy");
-  chest2 = getstruct("town_chest_2", "script_noteworthy");
+  chest1 = getStruct("town_chest", "script_noteworthy");
+  chest2 = getStruct("town_chest_2", "script_noteworthy");
   setDvar("disable_rope", 1);
   setDvar("disableLookAtEntityLogic", 1);
   level.chests = [];
@@ -33,7 +33,7 @@ main() {
   level.enemy_location_override_func = ::enemy_location_override;
   collision = spawn("script_model", (1363, 471, 0), 1);
   collision setModel("zm_collision_transit_town_survival");
-  collision disconnectpaths();
+  collision disconnectPaths();
   flag_wait("initial_blackscreen_passed");
   maps\mp\zombies\_zm_game_module::turn_power_on_and_open_doors();
   flag_wait("start_zombie_round_logic");

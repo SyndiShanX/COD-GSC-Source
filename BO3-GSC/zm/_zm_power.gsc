@@ -74,7 +74,7 @@ function electric_switch(switch_array) {
     }
   }
   while(isDefined(self)) {
-    self sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
+    self setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
     self setvisibletoall();
     self waittill("trigger", user);
     self setinvisibletoall();
@@ -101,7 +101,7 @@ function electric_switch(switch_array) {
       self delete();
       return;
     }
-    self sethintstring(&"ZOMBIE_ELECTRIC_SWITCH_OFF");
+    self setHintString(&"ZOMBIE_ELECTRIC_SWITCH_OFF");
     self setvisibletoall();
     self waittill("trigger", user);
     self setinvisibletoall();
@@ -608,7 +608,7 @@ function turn_power_off_and_close_doors(power_zone) {
       door notify("power_on");
       if(isDefined(level.temporary_power_switch_logic)) {
         door.power_on = 0;
-        door sethintstring(&"ZOMBIE_NEED_POWER");
+        door setHintString(&"ZOMBIE_NEED_POWER");
         door notify("kill_door_think");
         door thread zm_blockers::door_think();
       }

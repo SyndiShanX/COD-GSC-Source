@@ -335,7 +335,7 @@ melee_zombies(weapon = level.weaponnone) {
       continue;
     }
 
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
 
     if(dot <= 0) {
@@ -521,7 +521,7 @@ function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched = 0, var_
   if(b_launched && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"enhanced")) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
-    v_fling = 200 * vectornormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));
+    v_fling = 200 * vectorNormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));
     e_target zm_utility::function_ffc279(v_fling, self, undefined, w_hero);
   }
 }
@@ -1038,7 +1038,7 @@ beacon_rumble() {
   self endon(#"disconnect", #"beacon_fx_off");
 
   while(isDefined(self.mdl_beacon)) {
-    self.mdl_beacon playrumbleonentity(#"zm_weap_scepter_planted_idle_rumble");
+    self.mdl_beacon playRumbleOnEntity(#"zm_weap_scepter_planted_idle_rumble");
     wait 0.5;
   }
 }
@@ -1278,13 +1278,13 @@ scepter_rumble(var_b2e05bae) {
   if(var_b2e05bae) {
     switch (var_b2e05bae) {
       case 1:
-        self playrumbleonentity("zm_weap_special_activate_rumble");
+        self playRumbleOnEntity("zm_weap_special_activate_rumble");
         break;
       case 2:
         self clientfield::increment_to_player("" + #"scepter_rumble", 2);
         break;
       case 3:
-        self playrumbleonentity("zm_weap_scepter_melee_hit_rumble");
+        self playRumbleOnEntity("zm_weap_scepter_melee_hit_rumble");
         break;
       case 4:
         playrumbleonposition("zm_weap_scepter_plant_rumble", self.origin);

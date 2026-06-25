@@ -198,7 +198,7 @@ function function_db073473(e_player) {
     return false;
   }
 
-  self sethintstring(#"hash_78573012d7272fae");
+  self setHintString(#"hash_78573012d7272fae");
   return true;
 }
 
@@ -259,7 +259,7 @@ function function_ed6d34fb() {
     foreach(portal_fx in var_73524bb4) {
       portal_fx.var_2c517d4c = util::spawn_model("tag_origin", portal_fx.origin, portal_fx.angles);
       level clientfield::set("" + #"hash_666ad912cb4541f1", 1);
-      playsoundatposition(#"hash_5f27432854b069c9", portal_fx.var_2c517d4c.origin);
+      playSoundAtPosition(#"hash_5f27432854b069c9", portal_fx.var_2c517d4c.origin);
     }
   }
 }

@@ -34,7 +34,7 @@ on_begin() {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_6a8979c9();
     player callback::on_player_loadout_changed(&on_player_loadout_changed);
     player zm_trial_util::function_9bf8e274();
@@ -44,7 +44,7 @@ on_begin() {
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player callback::function_824d206(&on_player_loadout_changed);
 
     foreach(weapon in player getweaponslist(1)) {

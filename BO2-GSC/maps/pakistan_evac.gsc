@@ -59,7 +59,7 @@ skipto_standoff() {
   level thread assign_spotlight_to_end_scene();
   level thread standoff_ai_setup();
   purple_smoke();
-  set_objective(level.obj_evac_point, getstruct("evac_point", "targetname"), "breadcrumb");
+  set_objective(level.obj_evac_point, getStruct("evac_point", "targetname"), "breadcrumb");
   level thread maps\createart\pakistan_3_art::standoff();
 }
 
@@ -114,7 +114,7 @@ hangar_approach_swap_to_soct() {
 }
 
 hanger_wait_for_player_to_enter() {
-  e_trigger = getent("hanger_faceburn_trigger", "targetname");
+  e_trigger = getEnt("hanger_faceburn_trigger", "targetname");
   e_trigger waittill("trigger");
   level.player_reaches_hanger = 1;
 }
@@ -126,7 +126,7 @@ init_faceburn() {
 }
 
 faceburn_volume_check() {
-  e_info_volume = getent("faceburn_info_volume", "targetname");
+  e_info_volume = getEnt("faceburn_info_volume", "targetname");
 
   while(true) {
     if(level.vh_player_soct istouching(e_info_volume)) {
@@ -149,7 +149,7 @@ harper_face_burned() {
   earthquake(0.4, 2.0, level.vh_player_soct.origin, 512);
 
   for(i = 0; i < 10; i++) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     wait 0.1;
   }
 }
@@ -164,7 +164,7 @@ player_enters_hanger() {
   level notify("player_control_ends");
   level.vh_player_soct thread kill_boost_if_active();
   level.vh_player_soct showpart("tag_gunner_turret1");
-  s_align = getstruct("chinese_standoff", "targetname");
+  s_align = getStruct("chinese_standoff", "targetname");
   v_player_soct_start_pos = getstartorigin(s_align.origin, (0, 0, 0), %v_pakistan_9_4_standoff_approach_soct1);
   level.vh_player_soct setvehgoalpos(v_player_soct_start_pos, 0, 0);
   level.vh_player_soct setneargoalnotifydist(768);
@@ -215,7 +215,7 @@ player_enters_hanger() {
     level thread standoff_savepoint(str_soct_scene);
     level thread set_objective_when_player_ready(1, str_player_scene);
     level thread attach_steering_wheel();
-    level.harper = getent("harper_ai", "targetname");
+    level.harper = getEnt("harper_ai", "targetname");
     level.harper set_ignoreall(1);
     level.harper set_ignoreme(1);
     level.harper thread say_dialog("harp_aargh_0");
@@ -224,7 +224,7 @@ player_enters_hanger() {
     level.player thread player_arms_transition(str_player_scene);
     scene_wait("standoff_approach_burned_player");
     level thread burned_dialog("sect_there_s_our_evac_sit_0", "harp_finally_0");
-    s_align = getstruct("chinese_standoff", "targetname");
+    s_align = getStruct("chinese_standoff", "targetname");
     v_harper_idle_pos = getstartorigin(s_align.origin, (0, 0, 0), %ch_pakistan_9_4_standoff_burned_idle_harper);
     str_harper_exit_scene = "harper_burned_walk";
   } else {
@@ -240,7 +240,7 @@ player_enters_hanger() {
     level thread standoff_savepoint(str_soct_scene);
     level thread set_objective_when_player_ready(1, str_player_scene);
     level thread attach_steering_wheel();
-    level.harper = getent("harper_ai", "targetname");
+    level.harper = getEnt("harper_ai", "targetname");
     level.harper set_ignoreall(1);
     level.harper set_ignoreme(1);
     level.harper thread say_dialog("harp_that_was_a_fucking_n_0");
@@ -248,7 +248,7 @@ player_enters_hanger() {
     level.player thread player_arms_transition(str_player_scene);
     scene_wait("standoff_approach_not_burned_harper");
     level thread burned_dialog("sect_there_s_our_evac_sit_0", undefined);
-    s_align = getstruct("chinese_standoff", "targetname");
+    s_align = getStruct("chinese_standoff", "targetname");
     v_harper_idle_pos = getstartorigin(s_align.origin, (0, 0, 0), %ch_pakistan_9_4_standoff_idle_harper);
     str_harper_exit_scene = "harper_standoff_idle_not_burned";
   }
@@ -276,7 +276,7 @@ standoff_savepoint(str_scene) {
 set_objective_when_player_ready(delay, str_player_scene) {
   wait(delay);
   scene_wait(str_player_scene);
-  set_objective(level.obj_evac_point, getstruct("evac_point", "targetname"), "breadcrumb");
+  set_objective(level.obj_evac_point, getStruct("evac_point", "targetname"), "breadcrumb");
 }
 
 burned_dialog(str_player, str_harper) {
@@ -288,11 +288,11 @@ burned_dialog(str_player, str_harper) {
 }
 
 attach_steering_wheel() {
-  e_soct = getent("player_soc_t", "targetname");
+  e_soct = getEnt("player_soc_t", "targetname");
   v_origin = e_soct gettagorigin("tag_steeringwheel");
   v_angles = e_soct gettagangles("tag_steeringwheel");
   e_wheel = spawn_model("veh_t6_mil_soc_t_steeringwheel", v_origin, v_angles);
-  e_wheel linkto(e_soct, "tag_steeringwheel");
+  e_wheel linkTo(e_soct, "tag_steeringwheel");
 }
 
 burn_harpers_face(delay) {
@@ -332,7 +332,7 @@ collision_chain_reaction_hanger_effects_new_version() {
 
   for(i = start_exploder_number; i <= end_exploder_number; i++) {
     exploder(i);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     delay = randomfloatrange(0.4, 0.45);
     wait(delay);
   }
@@ -345,7 +345,7 @@ collision_chain_reaction_hanger_effects_new_version() {
 
   for(i = start_exploder_number; i <= end_exploder_number; i++) {
     exploder(i);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     delay = randomfloatrange(0.4, 0.45);
     wait(delay);
   }
@@ -369,7 +369,7 @@ collision_chain_reaction_hanger_effects_new_version() {
 
   for(i = start_exploder_number; i <= end_exploder_number; i++) {
     exploder(i);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     wait 0.2;
   }
 }
@@ -413,7 +413,7 @@ foreground_tower_collapses() {
 }
 
 standoff() {
-  e_ent = getent("zhao_ending_friendly_chopper", "targetname");
+  e_ent = getEnt("zhao_ending_friendly_chopper", "targetname");
   e_ent hidepart("tag_main_rotor_blur");
   e_ent hidepart("tag_tail_rotor_blur");
   str_main_scene = "standoff_chinese_important";
@@ -463,7 +463,7 @@ standoff_ai_setup() {
 
   for(i = 0; i < num_seals; i++) {
     ai_seal = simple_spawn_single("seal_team");
-    s_spot = getstruct("seal_" + i, "targetname");
+    s_spot = getStruct("seal_" + i, "targetname");
 
     if(i == 0) {
       add_scene_properties("soldier_idle_seal_1", s_spot.targetname);
@@ -484,7 +484,7 @@ standoff_ai_setup() {
 
   for(i = 0; i < num_chinese; i++) {
     ai_chinese = simple_spawn_single("chinese_force");
-    s_spot = getstruct("chinese_" + i, "targetname");
+    s_spot = getStruct("chinese_" + i, "targetname");
 
     if(i == 0 || i == 1 || i == 2) {
       add_scene_properties("soldier_idle_chinese_3", s_spot.targetname);
@@ -512,7 +512,7 @@ standoff_aim_chinese() {
 
   while(true) {
     n_random = randomint(12);
-    ai_target = getent("seal_team_ai_" + n_random, "script_noteworthy");
+    ai_target = getEnt("seal_team_ai_" + n_random, "script_noteworthy");
     self aim_at_target(ai_target);
     wait(randomintrange(3, 6));
   }
@@ -524,7 +524,7 @@ standoff_aim_seal() {
 
   while(true) {
     n_random = randomint(12);
-    ai_target = getent("chinese_force_ai_" + n_random, "script_noteworthy");
+    ai_target = getEnt("chinese_force_ai_" + n_random, "script_noteworthy");
     self aim_at_target(ai_target);
     wait(randomintrange(3, 6));
   }

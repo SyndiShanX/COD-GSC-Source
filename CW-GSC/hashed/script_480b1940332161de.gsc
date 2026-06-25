@@ -224,7 +224,7 @@ function private function_f3a2a643() {
     }
 
     poi = var_a9af01c3.origin;
-    var_49277a4f = vectornormalize(poi - self.origin);
+    var_49277a4f = vectorNormalize(poi - self.origin);
     var_6045790a = acos(vectordot(anglesToForward(self.angles), var_49277a4f));
 
     if(var_6045790a >= 50) {
@@ -335,7 +335,7 @@ function private function_a6d41d6e(poi) {
 
   assert(isDefined(poi));
   myforward = anglesToForward(self.angles);
-  var_82b1379b = acos(vectordot(myforward, vectornormalize(poi.origin - self getEye())));
+  var_82b1379b = acos(vectordot(myforward, vectorNormalize(poi.origin - self getEye())));
   return var_82b1379b < (isDefined(self.poi.poi_fovlimit) ? self.poi.poi_fovlimit : 90);
 }
 

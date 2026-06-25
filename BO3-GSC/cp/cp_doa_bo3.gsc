@@ -123,7 +123,7 @@ function init() {
 }
 
 function function_dbb56674() {
-  if(getplayers().size > 1) {
+  if(getPlayers().size > 1) {
     mapname = namespace_3ca3c537::function_d2d75f5d();
     if(mapname == "vengeance") {
       return 8;
@@ -152,13 +152,13 @@ function function_d1c7245c() {
   level.doa.var_1332e37a = [];
   guardian = spawnStruct();
   guardian.type = 30;
-  guardian.spawner = getent("spawner_zombietron_skeleton", "targetname");
+  guardian.spawner = getEnt("spawner_zombietron_skeleton", "targetname");
   guardian.spawnfunction = &namespace_51bd792::function_862e15fa;
   guardian.initfunction = &function_89a2ffc4;
   level.doa.var_af875fb7[level.doa.var_af875fb7.size] = guardian;
   guardian = spawnStruct();
   guardian.type = 31;
-  guardian.spawner = getent("zombietron_guardian_robot", "targetname");
+  guardian.spawner = getEnt("zombietron_guardian_robot", "targetname");
   guardian.spawnfunction = &namespace_51bd792::function_575e3933;
   guardian.initfunction = &function_75772673;
   level.doa.var_af875fb7[level.doa.var_af875fb7.size] = guardian;
@@ -187,7 +187,7 @@ function function_75772673(player) {
   self thread function_8e619e60(player);
   color = namespace_831a4a7c::function_ee495f41(player.entnum);
   trail = "gem_trail_" + color;
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self namespace_51bd792::droptoground(self.origin, trail, "turret_impact", 0, 0);
   self namespace_1a381543::function_90118d8c("evt_robot_land");
   self namespace_eaa992c::function_285a2999("player_trail_" + color);
@@ -219,8 +219,8 @@ function function_8e619e60(player) {
     self waittill("missile_fire", projectile, weapon);
     trigger = spawn("trigger_radius", projectile.origin, 9, 16, 24);
     trigger.targetname = "sawBladeProjectile";
-    trigger enablelinkto();
-    trigger linkto(projectile);
+    trigger enablelinkTo();
+    trigger linkTo(projectile);
     trigger thread function_e1cd643e(projectile, weapon, player);
     trigger thread doa_utility::function_1bd67aef(3);
     trigger thread doa_utility::function_75e76155(projectile, "death");
@@ -239,7 +239,7 @@ function function_89a2ffc4(player) {
   self.holdfire = 0;
   self.updatesight = 1;
   self setthreatbiasgroup("players");
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self notify("hash_6e8326fc");
   self cleartargetentity();
   if(!isDefined(player.doa)) {
@@ -350,7 +350,7 @@ function function_1de9db1b(name) {
     case "margwa": {
       namespace_51bd792::function_4ce6d0ea();
       level notify("hash_593b80cb");
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player notify("hash_593b80cb");
       }
       break;
@@ -358,7 +358,7 @@ function function_1de9db1b(name) {
     case "silverback": {
       namespace_a3646565::function_fc48f9f3();
       level notify("hash_593b80cb");
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player notify("hash_593b80cb");
       }
       break;
@@ -654,14 +654,14 @@ function function_ceb822db(var_fed4dbb3) {
 
 function function_9d32f5d() {
   if(!isDefined(level.doa.var_43e34d24)) {
-    level.doa.var_43e34d24 = getent("blood_riser_spawner", "targetname");
+    level.doa.var_43e34d24 = getEnt("blood_riser_spawner", "targetname");
   }
   return namespace_51bd792::function_17de14f1(level.doa.var_43e34d24);
 }
 
 function function_b8aa2b56() {
   if(!isDefined(level.doa.var_8fb5dd7d)) {
-    level.doa.var_8fb5dd7d = getent("zombie_riser", "targetname");
+    level.doa.var_8fb5dd7d = getEnt("zombie_riser", "targetname");
   }
   return namespace_51bd792::function_45849d81(level.doa.var_8fb5dd7d);
 }

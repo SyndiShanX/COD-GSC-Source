@@ -122,7 +122,7 @@ function function_470f56e6(origin, ignore, var_fcfb8b8d = 1) {
       continue;
     }
 
-    player setorigin(origin);
+    player setOrigin(origin);
   }
 }
 
@@ -134,7 +134,7 @@ function function_ec0b503f(var_499e2f80) {
   idx = function_61e1a1cb(var_499e2f80);
   assert(isDefined(idx), "<dev string:x38>");
   topper = struct::get(var_499e2f80 + "_topper", "targetname");
-  var_8f13e4c5 = getent(var_499e2f80 + "_WaitVolume", "targetname");
+  var_8f13e4c5 = getEnt(var_499e2f80 + "_WaitVolume", "targetname");
   startnode = struct::get(var_499e2f80, "targetname");
   assert(isDefined(startnode), "<dev string:x8a>");
   assert(isDefined(startnode.target), "<dev string:xac>");
@@ -148,7 +148,7 @@ function function_ec0b503f(var_499e2f80) {
 
   profilestart();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify(#"hash_279998c5df86c04d");
     player thread namespace_7f5aeb59::turnplayershieldon(0);
 
@@ -195,7 +195,7 @@ function function_ec0b503f(var_499e2f80) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_fe17d41e();
 
     if(!isDefined(level.doa.var_6f3d327)) {
@@ -540,7 +540,7 @@ function function_c153f40() {
     [[level.doa.var_a7ccb320]]();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_10d89d49();
   }
 }
@@ -557,7 +557,7 @@ function function_10d89d49() {
 
     if(self.origin[2] <= basez) {
       namespace_1e25ad94::debugmsg("Player " + self.name + " FELL out of the active dungeon at location: " + self.origin + "Failsafe warp to start point: " + level.doa.var_187ed224.origin, 1);
-      self setorigin(level.doa.var_187ed224.origin);
+      self setOrigin(level.doa.var_187ed224.origin);
     }
 
     wait 1;
@@ -603,7 +603,7 @@ function function_73730269(var_f3c8eb3) {
   level function_8790b64a();
   namespace_1e25ad94::function_4e3cfad("\tDungeon destroyed", undefined, undefined, undefined, 10);
 
-  foreach(player in getplayers()) {}
+  foreach(player in getPlayers()) {}
 
   if(result._notify === "game_over") {
     return;

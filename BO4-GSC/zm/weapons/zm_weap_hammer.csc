@@ -151,9 +151,9 @@ lightning_arc_play_fx_thread(localclientnum) {
     var_a05eed18 = self gettagorigin(self zm_utility::function_467efa7b());
 
     if(isDefined(var_a05eed18)) {
-      self.e_fx moveto(var_a05eed18, 0.1);
+      self.e_fx moveTo(var_a05eed18, 0.1);
     } else {
-      self.e_fx moveto(self.origin, 0.1);
+      self.e_fx moveTo(self.origin, 0.1);
     }
 
     util::server_wait(localclientnum, 0.1);
@@ -162,7 +162,7 @@ lightning_arc_play_fx_thread(localclientnum) {
       return;
     }
 
-    self.e_fx moveto(e_ball.origin, 0.1);
+    self.e_fx moveTo(e_ball.origin, 0.1);
     util::server_wait(localclientnum, 0.1);
   }
 }
@@ -218,7 +218,7 @@ hammer_rumble(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldna
   if(newvalue) {
     switch (newvalue) {
       case 4:
-        self playrumbleonentity(localclientnum, "zm_weap_hammer_swipe_hit_rumble");
+        self playRumbleOnEntity(localclientnum, "zm_weap_hammer_swipe_hit_rumble");
         break;
     }
   }

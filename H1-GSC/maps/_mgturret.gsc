@@ -444,13 +444,13 @@ mg42_think() {
   if(!isDefined(var_0)) {
     return;
   }
-  var_1 = getent(var_0.target, "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_1.org = var_0.origin;
 
   if(isDefined(var_1.target)) {
     if(!isDefined(level.mg42_trigger) || !isDefined(level.mg42_trigger[var_1.target])) {
       level.mg42_trigger[var_1.target] = 0;
-      getent(var_1.target, "targetname") thread mg42_trigger();
+      getEnt(var_1.target, "targetname") thread mg42_trigger();
     }
 
     var_2 = 1;
@@ -595,7 +595,7 @@ mg42_gunner_manual_think(var_0, var_1) {
       var_7 = var_2.origin;
 
       if(distance(var_7, var_5[self.gun_targ].origin) > var_8) {
-        var_12 = vectornormalize(var_5[self.gun_targ].origin - var_7);
+        var_12 = vectorNormalize(var_5[self.gun_targ].origin - var_7);
         var_12 = var_12 * var_8;
         var_7 = var_7 + var_12;
       } else
@@ -643,7 +643,7 @@ mg42_gunner_manual_think(var_0, var_1) {
         var_7 = var_2.origin;
 
         if(distance(var_7, var_5[self.gun_targ].origin) > var_8) {
-          var_12 = vectornormalize(var_5[self.gun_targ].origin - var_7);
+          var_12 = vectorNormalize(var_5[self.gun_targ].origin - var_7);
           var_12 = var_12 * var_8;
           var_7 = var_7 + var_12;
         } else
@@ -764,7 +764,7 @@ temp_think(var_0, var_1) {
 }
 
 turret_think(var_0) {
-  var_1 = getent(var_0.auto_mg42_target, "targetname");
+  var_1 = getEnt(var_0.auto_mg42_target, "targetname");
   var_2 = 0.5;
 
   if(isDefined(var_1.script_turret_reuse_min)) {
@@ -1287,7 +1287,7 @@ aim_turret_at_ambush_point_or_visible_enemy(var_0, var_1) {
 
   for(var_3 = var_1.bread_crumbs.size - 3; var_3 >= 0; var_3--) {
     var_4 = var_1.bread_crumbs[var_3];
-    var_5 = vectornormalize(var_4 - var_0.origin);
+    var_5 = vectorNormalize(var_4 - var_0.origin);
     var_6 = vectordot(var_2, var_5);
 
     if(var_6 < 0.75) {
@@ -1406,7 +1406,7 @@ run_to_new_spot_and_setup_gun(var_0) {
     thread common_scripts\utility::play_sound_in_space("weapon_setup");
   }
 
-  self animscripted("setup_done", var_0.origin, var_0.angles, var_2);
+  self animScripted("setup_done", var_0.origin, var_0.angles, var_2);
   restoredefaults();
   self waittillmatch("setup_done", "end");
   var_0 notify("restore_default_drop_pitch");

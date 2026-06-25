@@ -55,7 +55,7 @@ aud_player_falls() {
 
   if(!isDefined(level.heartbeat_ent)) {
     level.heartbeat_ent = spawn("script_origin", level.player.origin);
-    level.heartbeat_ent linkto(level.player);
+    level.heartbeat_ent linkTo(level.player);
   }
 
   level.heartbeat_ent stoploopsound();

@@ -216,13 +216,13 @@ begin_defend() {
 }
 
 disable_bag_trigger(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1.force_off = 1;
   var_1 common_scripts\utility::trigger_off();
 }
 
 enable_bag_trigger(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1.force_off = 0;
   var_1 common_scripts\utility::trigger_on();
 }
@@ -251,7 +251,7 @@ defend_intro() {
   common_scripts\utility::flag_wait("defend_room_entered");
 
   if(!isDefined(level.player_woke_scientists)) {
-    var_0 = common_scripts\utility::getstruct("defend_animate_to_me", "targetname");
+    var_0 = common_scripts\utility::getStruct("defend_animate_to_me", "targetname");
     var_1 = spawn("script_origin", var_0.origin + (0, 0, 12));
     var_1.angles = var_0.angles;
     var_1 maps\_anim::anim_reach_solo(level.allies[0], "baker_fire_air");
@@ -272,8 +272,8 @@ defend_intro() {
   thread set_bag_objective_visibility(1);
   common_scripts\utility::flag_wait("player_on_podium");
   common_scripts\utility::flag_set("Obj_datacenter_complete");
-  var_2 = getent("defend_player_drop_bag_trigger", "targetname");
-  var_3 = getent("defend_duffle_bag_turret", "targetname");
+  var_2 = getEnt("defend_player_drop_bag_trigger", "targetname");
+  var_3 = getEnt("defend_duffle_bag_turret", "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_2, var_3);
   common_scripts\utility::flag_set("defend_player_drop_bag");
   thread delay_show_blow_doors();
@@ -299,7 +299,7 @@ defend_platform() {
     return;
   }
   thread maps\_utility::autosave_by_name("defend_bag_dropoff");
-  var_0 = getent("defend_player_drop_bag_trigger", "targetname");
+  var_0 = getEnt("defend_player_drop_bag_trigger", "targetname");
 
   if(isDefined(var_0)) {
     var_0 common_scripts\utility::trigger_off();
@@ -337,7 +337,7 @@ defend_platform() {
       }
 
       level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_theyllbefollowingus");
-      var_5 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+      var_5 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
       var_5 notify("baker_stop_table_loop");
       level.allies[0] maps\_utility::disable_ai_color();
       level.allies[0].fixednode = 0;
@@ -347,8 +347,8 @@ defend_platform() {
       level.allies[1].goalraidus = 64;
       level.allies[1] allowedstances("crouch", "prone");
       level.allies[0] allowedstances("crouch", "prone");
-      var_6 = getent("def_ally_middle", "targetname");
-      var_7 = getent("defend_ally_split", "targetname");
+      var_6 = getEnt("def_ally_middle", "targetname");
+      var_7 = getEnt("defend_ally_split", "targetname");
       level.allies[0] setgoalvolumeauto(var_6);
       level.allies[1] setgoalvolumeauto(var_7);
       wait 5;
@@ -361,15 +361,15 @@ defend_platform() {
       level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_30secsdefenses");
     }
   } else {
-    var_5 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+    var_5 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
     var_5 notify("baker_stop_table_loop");
     level.allies[0] maps\_utility::disable_ai_color();
     level.allies[1] maps\_utility::disable_ai_color();
     wait 0.3;
     level.allies[1] allowedstances("crouch", "prone");
     level.allies[0] allowedstances("crouch", "prone");
-    var_6 = getent("def_ally_middle", "targetname");
-    var_7 = getent("defend_ally_split", "targetname");
+    var_6 = getEnt("def_ally_middle", "targetname");
+    var_7 = getEnt("defend_ally_split", "targetname");
     level.allies[0] setgoalvolumeauto(var_6);
     level.allies[1] setgoalvolumeauto(var_7);
     common_scripts\utility::flag_set("def_wave1_done");
@@ -428,14 +428,14 @@ watch_player_leave_area() {
 }
 
 player_drop_bag() {
-  var_0 = getent("defend_duffle_bag_turret", "targetname");
+  var_0 = getEnt("defend_duffle_bag_turret", "targetname");
   var_1 = maps\_utility::spawn_anim_model("player_rig");
   var_2 = maps\_utility::spawn_anim_model("player_bag");
-  var_3 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+  var_3 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_4.origin = var_3.origin;
   var_4.angles = var_3.angles;
-  var_1 linkto(var_4, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_4, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.player_bag.animname = "player_bag";
   var_4 maps\_anim::anim_first_frame_solo(var_1, "defend_bagdrop");
   var_5 = [];
@@ -484,7 +484,7 @@ cleanup_sentry_hud_outline() {
 }
 
 handle_ally_bag_vis() {
-  var_0 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+  var_0 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
   self pushplayer(1);
   var_0 maps\_anim::anim_reach_solo(self, "defend_bagdrop");
   common_scripts\utility::flag_wait("player_on_podium");
@@ -515,7 +515,7 @@ bag_vis_callback(var_0) {
     var_0 thread cipher_vo();
   }
 
-  var_1 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+  var_1 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
   var_2 = undefined;
 
   switch (var_0.animname) {
@@ -543,7 +543,7 @@ bag_vis_callback(var_0) {
   wait 0.1;
   var_0 maps\clockwork_code::hide_dufflebag();
   var_0 waittill("single anim", var_3);
-  var_1 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+  var_1 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
 
   switch (var_0.animname) {
     case "cypher":
@@ -630,14 +630,14 @@ cipher_vo() {
 }
 
 cipher_podium() {
-  var_0 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+  var_0 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
   var_0 thread maps\_anim::anim_loop_solo(level.allies[2], "laptop_sit_idle_calm", "stop_hacking");
   common_scripts\utility::flag_set("cypher_in_position");
   level.allies[2] pushplayer(0);
 
   if(isDefined(level.spiral_blocker)) {
     level.spiral_blocker solid();
-    level.spiral_blocker disconnectpaths();
+    level.spiral_blocker disconnectPaths();
   }
 }
 
@@ -734,9 +734,9 @@ defend_wave_1() {
   level.allies[0] maps\_utility::disable_ai_color();
   level.allies[1] maps\_utility::disable_ai_color();
   wait 0.3;
-  var_0 = getent("def_ally_middle", "targetname");
+  var_0 = getEnt("def_ally_middle", "targetname");
   level.allies[1] maps\_utility::set_goal_pos(level.allies[1].origin);
-  var_1 = getent("defend_ally_split", "targetname");
+  var_1 = getEnt("defend_ally_split", "targetname");
   level.allies[0] setgoalvolumeauto(var_0);
   level.allies[1] setgoalvolumeauto(var_1);
   thread defend_start_player_shield();
@@ -776,7 +776,7 @@ handle_accuracy() {
 
 setup_ai_for_end() {
   var_0 = getaiarray("axis");
-  var_1 = getent("def_ground_middle_mid", "targetname");
+  var_1 = getEnt("def_ground_middle_mid", "targetname");
   common_scripts\utility::array_call(var_0, ::setgoalvolumeauto, var_1);
   common_scripts\utility::array_thread(var_0, maps\_utility::set_baseaccuracy, 0.01);
 
@@ -785,7 +785,7 @@ setup_ai_for_end() {
   }
 
   common_scripts\utility::array_thread(level.allies, ::handle_accuracy);
-  var_5 = getent("defend_upper_area", "targetname");
+  var_5 = getEnt("defend_upper_area", "targetname");
   var_6 = var_5 maps\_utility::get_ai_touching_volume("axis");
   common_scripts\utility::array_thread(var_6, maps\_utility::set_ignoreall, 1);
   wait 8;
@@ -805,10 +805,10 @@ defend_end() {
   level.allies[0] allowedstances("crouch", "prone", "stand");
   common_scripts\utility::array_thread(level.allies, maps\_utility::enable_ai_color);
   thread setup_ai_for_end();
-  var_0 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+  var_0 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
   var_0 notify("stop_hacking");
   waittillframeend;
-  var_1 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
+  var_1 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
   var_1 thread maps\_anim::anim_single_solo(level.allies[2], "laptop_stand");
   wait 1;
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_datasecure");
@@ -840,7 +840,7 @@ vault_nag() {
 
 defend_exit_objective() {
   var_0 = maps\_utility::obj("defendexit");
-  var_1 = common_scripts\utility::getstruct("defend_exit_obj", "targetname");
+  var_1 = common_scripts\utility::getStruct("defend_exit_obj", "targetname");
   objective_add(var_0, "active", &"CLOCKWORK_OBJ_DEFEND_ESCAPE");
   objective_current(var_0);
   objective_position(var_0, var_1.origin);
@@ -971,24 +971,24 @@ neutralize_turret() {
 }
 
 handle_defend_vault() {
-  var_0 = getent("entrance_tunnel_door", "targetname");
-  var_0 rotateyaw(210, 0.1);
+  var_0 = getEnt("entrance_tunnel_door", "targetname");
+  var_0 rotateYaw(210, 0.1);
 }
 
 open_vault_door() {
-  var_0 = common_scripts\utility::getstruct("defend_vault_door_pos", "targetname");
-  var_1 = getent("defend_exit_vault_door", "targetname");
+  var_0 = common_scripts\utility::getStruct("defend_vault_door_pos", "targetname");
+  var_1 = getEnt("defend_exit_vault_door", "targetname");
   var_1.animname = "vault_door";
   var_1 maps\_utility::assign_animtree();
   var_0 thread maps\_anim::anim_first_frame_solo(var_1, "defend_open");
-  var_2 = getent("defend_exit_vault_door_block", "targetname");
-  var_2 linkto(var_1);
+  var_2 = getEnt("defend_exit_vault_door_block", "targetname");
+  var_2 linkTo(var_1);
   level waittill("defend_open_door");
   thread maps\clockwork_audio::defend_door_open();
   var_0 maps\_anim::anim_single_solo(var_1, "defend_open");
   var_2 connectpaths();
   waittill_allies_exit();
-  var_2 disconnectpaths();
+  var_2 disconnectPaths();
   thread maps\clockwork_audio::defend_door_close();
   var_0 thread maps\_anim::anim_single_solo(var_1, "defend_close");
   wait 11;
@@ -1028,7 +1028,7 @@ watch_ally_throw_end_smoke(var_0, var_1, var_2) {
   if(isDefined(var_2) && var_2) {
     var_0 maps\_utility::disable_ai_color();
     common_scripts\utility::flag_wait("other_allies_post_vault");
-    var_3 = common_scripts\utility::getstruct("defend_vault_door_pos", "targetname");
+    var_3 = common_scripts\utility::getStruct("defend_vault_door_pos", "targetname");
     var_3 maps\_anim::anim_reach_solo(var_0, "defend_close_door");
     var_3 maps\_anim::anim_single_solo(var_0, "defend_close_door");
     var_0 maps\_utility::enable_ai_color();
@@ -1043,11 +1043,11 @@ grenade_tossed(var_0) {
     var_1 = 0.5;
   }
 
-  var_2 = common_scripts\utility::getstruct(var_0.grenade_roll_end_struct, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0.grenade_roll_end_struct, "targetname");
   var_3 = var_0 magicgrenade(var_0 gettagorigin("tag_weapon_left"), var_2.origin, var_1);
 
   if(!isDefined(var_3)) {
-    var_2 = common_scripts\utility::getstruct(var_0.grenade_roll_end_struct + "2", "targetname");
+    var_2 = common_scripts\utility::getStruct(var_0.grenade_roll_end_struct + "2", "targetname");
 
     if(isDefined(var_2)) {
       var_3 = var_0 magicgrenade(var_0 gettagorigin("tag_weapon_left"), var_2.origin, var_1);
@@ -1060,7 +1060,7 @@ grenade_tossed(var_0) {
 }
 
 waittill_allies_exit() {
-  var_0 = getent("exit_defend_room_trigger", "targetname");
+  var_0 = getEnt("exit_defend_room_trigger", "targetname");
   var_1 = 0;
 
   while(var_1 < 3) {
@@ -1283,9 +1283,9 @@ watch_backfill() {
       var_9 = randomint(var_7.size);
 
       if(common_scripts\utility::flag("defend_combat_finished")) {
-        var_10 = getent("def_ground_middle_mid", "targetname");
+        var_10 = getEnt("def_ground_middle_mid", "targetname");
       } else {
-        var_10 = getent(var_7[var_9].target, "targetname");
+        var_10 = getEnt(var_7[var_9].target, "targetname");
       }
 
       var_11 = undefined;
@@ -1342,7 +1342,7 @@ watch_backfill() {
         var_15 = common_scripts\utility::flag_wait_any_return("defend_timeout", "defend_looking_south_doors", "defend_looking_north_doors");
 
         if(var_15 == "defend_timeout") {
-          var_16 = getent("defend_looking_north_trigger", "targetname");
+          var_16 = getEnt("defend_looking_north_trigger", "targetname");
 
           if(isDefined(var_16)) {
             var_15 = "defend_looking_north_doors";
@@ -1400,8 +1400,8 @@ watch_backfill() {
 set_blow_doors_vis(var_0) {
   var_1 = getEntArray("door_blow_north", "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, getEntArray("door_blow_south", "targetname"));
-  var_2 = getent("blowdoors_playerclip_north", "script_noteworthy");
-  var_3 = getent("blowdoors_playerclip_south", "script_noteworthy");
+  var_2 = getEnt("blowdoors_playerclip_north", "script_noteworthy");
+  var_3 = getEnt("blowdoors_playerclip_south", "script_noteworthy");
 
   if(var_0) {
     common_scripts\utility::array_thread(var_1, maps\_utility::show_solid);
@@ -1430,16 +1430,16 @@ blowdoors(var_0) {
   }
 
   if(issubstr(var_0, "north")) {
-    var_5 = getent("blowdoors_playerclip_north", "script_noteworthy");
+    var_5 = getEnt("blowdoors_playerclip_north", "script_noteworthy");
     var_5 notsolid();
     var_5 connectpaths();
   } else {
-    var_6 = getent("blowdoors_playerclip_south", "script_noteworthy");
+    var_6 = getEnt("blowdoors_playerclip_south", "script_noteworthy");
     var_6 notsolid();
     var_6 connectpaths();
   }
 
-  var_7 = common_scripts\utility::getstruct(var_0 + "_struct", "targetname");
+  var_7 = common_scripts\utility::getStruct(var_0 + "_struct", "targetname");
   thread maps\clockwork_audio::defend_door_explosion(var_7.origin);
   magicgrenade("smoke_grenade_american", var_7.origin, var_7.origin + (0, 0, -30), 0);
   playFX(common_scripts\utility::getfx("throwbot_explode"), var_7.origin, anglesToForward(var_7.angles), anglestoup(var_7.angles));
@@ -1484,7 +1484,7 @@ setup_trickle_guy(var_0) {
   common_scripts\utility::flag_wait("trickle_spawn_all");
 
   if(isDefined(self.script_noteworthy)) {
-    var_1 = getent(self.script_noteworthy, "targetname");
+    var_1 = getEnt(self.script_noteworthy, "targetname");
 
     if(isDefined(var_1)) {
       self setgoalvolumeauto(var_1);
@@ -1553,7 +1553,7 @@ monitor_guy_moveup(var_0) {
     return;
   }
   while(isDefined(var_1.script_noteworthy)) {
-    var_3 = getent(var_1.script_noteworthy, "targetname");
+    var_3 = getEnt(var_1.script_noteworthy, "targetname");
     var_4 = var_0[var_2] + randomfloat(5) - 2;
 
     if(level.moveup_doublespeed) {
@@ -1603,9 +1603,9 @@ cypher_defend_self() {
   self.sidearm = "m9a1";
   level endon("defend_combat_finished");
   self endon("death");
-  var_0 = common_scripts\utility::getstruct("defend_player_drop_bag_location_mod", "targetname");
-  var_1 = getent("cypher_shoot_left", "targetname");
-  var_2 = getent("cypher_shoot_right", "targetname");
+  var_0 = common_scripts\utility::getStruct("defend_player_drop_bag_location_mod", "targetname");
+  var_1 = getEnt("cypher_shoot_left", "targetname");
+  var_2 = getEnt("cypher_shoot_right", "targetname");
 
   for(;;) {
     if(!level.defend_save_safe) {
@@ -1676,7 +1676,7 @@ watch_pod_blocker(var_0, var_1) {
   var_5 = 0;
   var_1.last_defend_time = gettime();
   var_1 thread cypher_defend_self();
-  var_6 = getent("defend_last_stand", "targetname");
+  var_6 = getEnt("defend_last_stand", "targetname");
 
   for(;;) {
     common_scripts\utility::flag_wait(var_0);
@@ -1746,8 +1746,8 @@ watch_pod_blocker(var_0, var_1) {
     }
 
     common_scripts\utility::flag_set("can_save");
-    var_6 = getent("def_ally_middle", "targetname");
-    var_10 = getent("defend_ally_split", "targetname");
+    var_6 = getEnt("def_ally_middle", "targetname");
+    var_10 = getEnt("defend_ally_split", "targetname");
     level.allies[0] setgoalvolumeauto(var_6);
     level.allies[1] setgoalvolumeauto(var_10);
     var_1.allowdeath = 0;
@@ -1765,8 +1765,8 @@ watch_pod_blocker(var_0, var_1) {
 set_bag_objective_visibility(var_0) {
   level notify("set_bag_objective_visibility");
   level endon("set_bag_objective_visibility");
-  var_1 = getent("defend_duffle_obj", "targetname");
-  var_2 = getent("defend_player_drop_bag_trigger", "targetname");
+  var_1 = getEnt("defend_duffle_obj", "targetname");
+  var_2 = getEnt("defend_player_drop_bag_trigger", "targetname");
 
   if(var_0) {
     var_1 show();
@@ -1798,9 +1798,9 @@ set_bags_invisible() {
   level.allies[2].bag_name = var_0[2];
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2, "targetname");
+    var_3 = getEnt(var_2, "targetname");
     var_4 = var_2 + "_trigger";
-    var_5 = getent(var_4, "targetname");
+    var_5 = getEnt(var_4, "targetname");
     var_3 hide();
     var_5 common_scripts\utility::trigger_off();
   }
@@ -1827,7 +1827,7 @@ set_bag_visibility(var_0, var_1) {
 
   foreach(var_4 in var_2) {
     var_5 = var_4 + "_trigger";
-    var_6 = getent(var_5, "targetname");
+    var_6 = getEnt(var_5, "targetname");
 
     if(var_2.size == 1) {
       common_scripts\utility::flag_wait("defend_player_drop_bag");
@@ -1920,7 +1920,7 @@ listen_for_use_shockwave_duffle_bag() {
     var_0 = var_0 + 1;
 
     if(var_0 >= 2) {
-      var_1 = getent("defend_duffle_bag_shockwave_trigger", "targetname");
+      var_1 = getEnt("defend_duffle_bag_shockwave_trigger", "targetname");
       var_1 delete();
       return;
     }
@@ -1998,7 +1998,7 @@ shockwavedetonation() {
       var_3 = [];
 
       foreach(var_5 in getaiarray(common_scripts\utility::get_enemy_team(self.owner.team))) {
-        if(distance2dsquared(self.origin, var_5.origin) < pow(var_0 * 2.0, 2.0) && vectordot(anglesToForward(self.angles), vectornormalize(var_5.origin - self.origin)) > 0.13397 && var_5 damageconetrace(self.origin, self) > 0) {
+        if(distance2dsquared(self.origin, var_5.origin) < pow(var_0 * 2.0, 2.0) && vectordot(anglesToForward(self.angles), vectorNormalize(var_5.origin - self.origin)) > 0.13397 && var_5 damageconetrace(self.origin, self) > 0) {
           var_5 thread watch_for_shockwave_hit();
           var_3[var_3.size] = var_5;
         }
@@ -2126,7 +2126,7 @@ listen_for_use_turret_duffle_bag() {
     common_scripts\utility::flag_clear("get_turret");
 
     if(var_0 >= 1) {
-      var_2 = getent("defend_duffle_bag_turret_trigger", "targetname");
+      var_2 = getEnt("defend_duffle_bag_turret_trigger", "targetname");
       var_2 delete();
       return;
     }
@@ -2155,7 +2155,7 @@ listen_for_use_teargas_duffle_bag() {
     common_scripts\utility::waitframe();
     common_scripts\utility::flag_clear("get_teargas");
     common_scripts\utility::flag_set("defend_used_duffel");
-    var_0 = getent("defend_duffle_bag_teargas_trigger", "targetname");
+    var_0 = getEnt("defend_duffle_bag_teargas_trigger", "targetname");
     var_0 delete();
     maps\_utility::display_hint_timeout("teargas_hint", 2.5);
     return;
@@ -2164,8 +2164,8 @@ listen_for_use_teargas_duffle_bag() {
 
 bag_trigger_wait(var_0, var_1, var_2) {
   level endon("defend_finished");
-  var_3 = getent(var_0, "targetname");
-  var_4 = getent(var_1, "targetname");
+  var_3 = getEnt(var_0, "targetname");
+  var_4 = getEnt(var_1, "targetname");
   maps\player_scripted_anim_util::waittill_trigger_activate_looking_at(var_3, var_4);
 
   if(isDefined(var_2)) {
@@ -2175,7 +2175,7 @@ bag_trigger_wait(var_0, var_1, var_2) {
 
 bag_trigger_off_if_player_has_weapon(var_0, var_1) {
   level endon("defend_finished");
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   while(isDefined(var_2)) {
     if(level.player hasweapon(var_1)) {
@@ -2242,7 +2242,7 @@ listen_for_use_proximity_duffle_bag() {
     var_0 = var_0 + 1;
 
     if(var_0 >= 4) {
-      var_1 = getent("defend_duffle_bag_proximity_trigger", "targetname");
+      var_1 = getEnt("defend_duffle_bag_proximity_trigger", "targetname");
       var_1 delete();
       return;
     }
@@ -2358,7 +2358,7 @@ arm_mine() {
     var_0["normal"] = var_0["normal"] * -1;
   }
 
-  var_2 = vectornormalize(var_0["normal"]);
+  var_2 = vectorNormalize(var_0["normal"]);
   var_3 = vectortoangles(var_2);
   var_3 = var_3 + (90, 0, 0);
   var_4 = spawnmine(var_1, var_3);
@@ -2526,7 +2526,7 @@ handle_autoturret_chatter() {
 
 handle_teargas_chatter() {
   level endon("defend_combat_finished");
-  var_0 = getent("teargas_flush_volume", "targetname");
+  var_0 = getEnt("teargas_flush_volume", "targetname");
   var_0 waittill("teargas_exploded");
   wait 5;
   level.player maps\clockwork_code::radio_dialog_add_and_go("clockwork_rs4_teargas");
@@ -2539,15 +2539,15 @@ setup_blockers() {
   level.fire_blockers_hurt[0] = getEntArray("fire_blocker_north_hurt", "targetname");
   level.fire_blockers_jet[0] = common_scripts\utility::getStructArray("fire_blocker_north_jet", "targetname");
   level.fire_blockers_body[0] = common_scripts\utility::getStructArray("fire_blocker_north_body", "targetname");
-  level.fire_radiusdamage[0] = common_scripts\utility::getstruct("fire_blocker_north_radiusdamage", "targetname");
+  level.fire_radiusdamage[0] = common_scripts\utility::getStruct("fire_blocker_north_radiusdamage", "targetname");
   level.phys_blockers_brush[1] = getEntArray("phys_blocker_south_brush", "targetname");
   level.phys_blockers_model[1] = getEntArray("phys_blocker_south_model", "targetname");
   level.fire_blockers_brush[1] = getEntArray("fire_blocker_south_brush", "targetname");
   level.fire_blockers_hurt[1] = getEntArray("fire_blocker_south_hurt", "targetname");
   level.fire_blockers_jet[1] = common_scripts\utility::getStructArray("fire_blocker_south_jet", "targetname");
   level.fire_blockers_body[1] = common_scripts\utility::getStructArray("fire_blocker_south_body", "targetname");
-  level.fire_radiusdamage[1] = common_scripts\utility::getstruct("fire_blocker_south_radiusdamage", "targetname");
-  level.spiral_blocker = getent("spiral_stair_blocker", "targetname");
+  level.fire_radiusdamage[1] = common_scripts\utility::getStruct("fire_blocker_south_radiusdamage", "targetname");
+  level.spiral_blocker = getEnt("spiral_stair_blocker", "targetname");
 
   if(isDefined(level.spiral_blocker)) {
     level.spiral_blocker connectpaths();
@@ -2586,8 +2586,8 @@ setup_blockers() {
 
 handle_platform_blockers() {
   level waittill("blow_fire_blocker");
-  var_0 = getent("def_ally_south", "targetname");
-  var_1 = getent("def_ally_north", "targetname");
+  var_0 = getEnt("def_ally_south", "targetname");
+  var_1 = getEnt("def_ally_north", "targetname");
   var_2 = 15;
   var_3 = gettime() + var_2 * 100;
   var_4 = -1;
@@ -2670,7 +2670,7 @@ handle_fire_blocker(var_0) {
     var_11 solid();
 
     if(isDefined(var_11.script_noteworthy) && var_11.script_noteworthy == "hideme") {
-      var_11 disconnectpaths();
+      var_11 disconnectPaths();
       var_11 hide();
       var_11 notsolid();
     }
@@ -2738,8 +2738,8 @@ handle_cypher_backups() {
   var_1 = [];
 
   for(var_2 = 1; var_2 < 6; var_2++) {
-    var_0[var_0.size] = getent("cypher_backup_" + var_2, "targetname");
-    var_1[var_1.size] = getent("cypher_backup_obj_" + var_2, "targetname");
+    var_0[var_0.size] = getEnt("cypher_backup_" + var_2, "targetname");
+    var_1[var_1.size] = getEnt("cypher_backup_obj_" + var_2, "targetname");
     var_0[var_0.size - 1] hide();
     var_1[var_1.size - 1] hide();
   }
@@ -2852,7 +2852,7 @@ handle_dog_combat_defend_static() {
   level.dog.goalheight = 64;
   level.dog.pathenemyfightdist = 0;
   level.dog setdogattackradius(256);
-  var_0 = getent("defend_last_stand", "targetname");
+  var_0 = getEnt("defend_last_stand", "targetname");
 
   for(;;) {
     common_scripts\utility::flag_wait("def_south_has_enemy");
@@ -2875,7 +2875,7 @@ handle_dog_combat_defend_static() {
 
 updatesentrypositionclockwork(var_0) {
   var_1 = 0;
-  var_2 = getent("no_turret", "targetname");
+  var_2 = getEnt("no_turret", "targetname");
 
   if(isDefined(var_2) && !common_scripts\utility::flag("cypher_baker_interaction_done")) {
     var_1 = var_0 istouching(var_2);

@@ -195,7 +195,7 @@ lib_0560::func_AB80(param_00) {
 }
 
 lib_0560::func_AB7F(param_00, param_01) {
-  var_02 = getent("overcharge_trig", "targetname");
+  var_02 = getEnt("overcharge_trig", "targetname");
   var_03 = 0;
   if(isDefined(var_02)) {
     var_03 = var_02.var_17A9;
@@ -300,7 +300,7 @@ lib_0560::func_9009(param_00) {
 }
 
 lib_0560::func_52F0() {
-  level.var_179A = getent("nest_ee_blimp", "targetname");
+  level.var_179A = getEnt("nest_ee_blimp", "targetname");
   level.var_179A lib_0560::func_89D3();
   common_scripts\utility::func_2CB4(5, ::lib_0560::func_516A);
 }
@@ -318,7 +318,7 @@ lib_0560::func_89D3() {
 lib_0560::func_113A(param_00) {
   var_01 = getEntArray(param_00, "targetname");
   foreach(var_03 in var_01) {
-    var_03.var_65D8 = getent(var_03.var_01A2, "targetname");
+    var_03.var_65D8 = getEnt(var_03.var_01A2, "targetname");
     var_04 = common_scripts\utility::func_46B5(var_03.var_65D8.var_01A2, "targetname");
     var_05 = spawn("script_model", var_04.var_0116);
     var_05 setModel("tag_origin");
@@ -326,7 +326,7 @@ lib_0560::func_113A(param_00) {
   }
 
   foreach(var_08 in var_01) {
-    var_08 enablelinkto();
+    var_08 enablelinkTo();
     var_08 method_8449(self);
     var_08.var_65D8 method_8449(self);
     var_08.var_65D9 method_8449(self);
@@ -344,7 +344,7 @@ lib_0560::func_113E(param_00, param_01) {
 }
 
 lib_0560::func_113D(param_00) {
-  self.var_1F5D = getent(param_00, "targetname");
+  self.var_1F5D = getEnt(param_00, "targetname");
   self.var_1F5D method_8449(self);
 }
 
@@ -521,7 +521,7 @@ lib_0560::func_17B2(param_00) {
 }
 
 lib_0560::func_17AE() {
-  return level.var_179A.var_6655 getturrettargetent();
+  return level.var_179A.var_6655 getturrettargetEnt();
 }
 
 lib_0560::func_17AD() {
@@ -614,7 +614,7 @@ lib_0560::func_9025(param_00) {
     while(var_07 < 11) {
       var_09 = vectorlerp(var_01.var_0116, level.var_179A.var_0116, var_07 / 10);
       var_0A = distance(var_01.var_0116, var_09) / 125 + 25 * var_07;
-      var_01 moveto(var_09, var_0A);
+      var_01 moveTo(var_09, var_0A);
       var_08 = launchbeam("zmb_electricity_reg_beam_med", var_01, "tag_origin", level.var_179A, "tag_origin");
       wait(0.1);
       var_08 delete();
@@ -793,7 +793,7 @@ lib_0560::func_4306() {
     return (0, 0, 0);
   }
 
-  return 64 * vectornormalize(anglesToForward(self.var_001D)) + (0, 0, 16);
+  return 64 * vectorNormalize(anglesToForward(self.var_001D)) + (0, 0, 16);
 }
 
 lib_0560::func_3BAE(param_00) {
@@ -961,11 +961,11 @@ lib_0560::func_AAEE() {
         var_07 = level.var_179A.var_6655 gettagorigin("TAG_AIM");
         var_08 = level.var_179A.var_6655 gettagangles("TAG_AIM");
         var_09 = anglesToForward(var_08);
-        var_0A = vectornormalize(var_02.var_0116 - var_07);
+        var_0A = vectorNormalize(var_02.var_0116 - var_07);
         var_0B = vectordot(var_09, var_0A);
         level.var_8C4C = level.var_179A.var_6655 gettagorigin("TAG_AIM");
         var_0C = (var_02.var_001D[0], var_02.var_001D[1], var_02.var_001D[0]);
-        var_0D = 128 + randomint(128) * vectornormalize(anglesToForward(var_0C));
+        var_0D = 128 + randomint(128) * vectorNormalize(anglesToForward(var_0C));
         level.var_8C46 = var_02.var_0116 + var_0D;
         level.var_8C4B = spawnsighttrace(level.var_8C4C, level.var_8C4C, level.var_8C46, 0);
         var_0E = bulletTrace(level.var_179A.var_6655 gettagorigin("TAG_AIM"), level.var_8C46, 0, level.var_179A.var_6655);
@@ -1211,13 +1211,13 @@ lib_0560::func_863B() {
 
 lib_0560::func_90B9(param_00, param_01) {
   wait(param_01 / 2);
-  var_02 = getent("nest_ee_blimp_attack_gun", "targetname");
+  var_02 = getEnt("nest_ee_blimp_attack_gun", "targetname");
   var_02 method_8449(level.var_179A);
   var_03 = spawn("script_model", var_02.var_0116);
   var_03 setModel("tag_origin");
   playFXOnTag(common_scripts\utility::func_44F5("zmb_zeppelin_projectile"), var_03, "tag_origin");
   var_03 lib_0378::func_8D74("blimp_projectile");
-  var_03 moveto(param_00.var_0116, param_01 / 2);
+  var_03 moveTo(param_00.var_0116, param_01 / 2);
   wait(param_01 / 2);
   var_03 delete();
 }
@@ -1254,7 +1254,7 @@ lib_0560::func_180A(param_00, param_01) {
   var_0A = var_08 * (var_09, var_09, 0);
   var_02 gravitymove(var_0A, var_05);
   if(isDefined(var_07.var_4DEA.var_001D)) {
-    var_02 rotateto(var_07.var_4DEA.var_001D, var_05);
+    var_02 rotateTo(var_07.var_4DEA.var_001D, var_05);
   }
 
   wait(var_05);
@@ -1322,11 +1322,11 @@ lib_0560::func_8427() {
       if(isPlayer(var_03)) {
         var_04 = self.var_0116;
         if(canspawn(var_04)) {
-          var_03 setorigin(var_04);
+          var_03 setOrigin(var_04);
         } else {
           var_05 = getclosestpointonnavmesh(var_04);
           if(canspawn(var_05)) {
-            var_03 setorigin(var_05);
+            var_03 setOrigin(var_05);
           } else {
             maps\mp\_movers::func_A047(var_03, 0);
           }
@@ -1368,11 +1368,11 @@ blimp_clip_exploit_listener() {
       if(isDefined(var_02) && var_02 == self.var_241F) {
         var_03 = self.var_0116;
         if(canspawn(var_03)) {
-          var_01 setorigin(var_03);
+          var_01 setOrigin(var_03);
         } else {
           var_04 = getclosestpointonnavmesh(var_03);
           if(canspawn(var_04)) {
-            var_01 setorigin(var_04);
+            var_01 setOrigin(var_04);
           } else {
             maps\mp\_movers::func_A047(var_01, 0);
           }

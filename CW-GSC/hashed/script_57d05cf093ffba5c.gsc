@@ -56,7 +56,7 @@ function function_7b9feaa3(var_8d70424c, b_play, var_ad7bbec = undefined) {
 }
 
 function function_3515d5cb() {
-  trig = getent("backtrack_observation_lights_on", "targetname");
+  trig = getEnt("backtrack_observation_lights_on", "targetname");
 
   if(isDefined(trig)) {
     trig waittill(#"trigger");
@@ -68,7 +68,7 @@ function function_3515d5cb() {
 }
 
 function function_a2df4bff() {
-  trig = getent("backtrack_observation_lights_off", "targetname");
+  trig = getEnt("backtrack_observation_lights_off", "targetname");
 
   if(isDefined(trig)) {
     trig waittill(#"trigger");
@@ -80,7 +80,7 @@ function function_a2df4bff() {
 }
 
 function function_bdf9ac3e() {
-  var_93a64e41 = getent("t_lgt_escape", "targetname");
+  var_93a64e41 = getEnt("t_lgt_escape", "targetname");
   var_93a64e41 trigger::wait_till();
   exploder::exploder("lgtexp_escape_facility");
   exploder::stop_exploder("lgtexp_perf_escape");
@@ -91,7 +91,7 @@ function function_bdf9ac3e() {
 }
 
 function function_14faa6d8(str_trigger, b_play, var_8d70424c) {
-  t_trigger = getent(str_trigger, "targetname");
+  t_trigger = getEnt(str_trigger, "targetname");
   t_trigger endon(#"entitydeleted");
 
   while(isDefined(t_trigger)) {
@@ -113,10 +113,10 @@ function function_14faa6d8(str_trigger, b_play, var_8d70424c) {
 
 function function_a677563d() {
   var_d5535d9a = getvehiclearray("control_tower_elevator", "targetname")[0];
-  var_d5535d9a.probe = getent("elevator_probe_dyn", "targetname");
+  var_d5535d9a.probe = getEnt("elevator_probe_dyn", "targetname");
 
   if(isDefined(var_d5535d9a.probe)) {
-    var_d5535d9a.probe linkto(var_d5535d9a, undefined, (-3, 0, -21.5), (0, 0, 180));
+    var_d5535d9a.probe linkTo(var_d5535d9a, undefined, (-3, 0, -21.5), (0, 0, 180));
   }
 
   light_origin = var_d5535d9a.origin + (0, 0, 32.5);
@@ -132,6 +132,6 @@ function function_811985a1() {
 }
 
 function function_4699a51c() {
-  ai_enemy_helipad_left = getent("ai_lgt_enemy_helipad_left", "script_noteworthy", 1);
+  ai_enemy_helipad_left = getEnt("ai_lgt_enemy_helipad_left", "script_noteworthy", 1);
   ai_enemy_helipad_left waittill(#"death");
 }

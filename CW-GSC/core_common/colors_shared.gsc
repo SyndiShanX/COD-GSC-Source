@@ -236,7 +236,7 @@ function debug_colornodes() {
   array[#"axis"] = [];
   array[#"allies"] = [];
   array[#"team3"] = [];
-  aiarray = arraycombine(getplayers(), getaiarray(), 0, 0);
+  aiarray = arraycombine(getPlayers(), getaiarray(), 0, 0);
 
   foreach(ai in aiarray) {
     if(!isDefined(ai.currentcolorcode) || !isai(ai) && !isbot(ai) || !isDefined(array[ai.team])) {
@@ -1388,7 +1388,7 @@ function colornode_replace_on_death() {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
     correct_colored_guy = arraysort(correct_colored_friendlies, players[0].origin, 1)[0];
     assert(correct_colored_guy.script_forcecolor != color, "<dev string:x3c9>" + color + "<dev string:x3e0>");
     waittillframeend();
@@ -1436,7 +1436,7 @@ function friendly_spawner_vision_checker() {
     }
 
     spawner = level.respawn_spawner;
-    players = getplayers();
+    players = getPlayers();
     player_sees_spawner = 0;
 
     for(q = 0; q < players.size; q++) {
@@ -1449,7 +1449,7 @@ function friendly_spawner_vision_checker() {
       }
 
       forward = anglesToForward((0, players[q] getplayerangles()[1], 0));
-      difference = vectornormalize(difference_vec);
+      difference = vectorNormalize(difference_vec);
       dot = vectordot(forward, difference);
 
       if(dot < 0.2) {

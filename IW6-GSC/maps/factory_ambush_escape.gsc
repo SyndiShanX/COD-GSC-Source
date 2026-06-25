@@ -86,7 +86,7 @@ loading_dock_vehicle_setup() {
 loading_dock_enemies() {
   self endon("death");
   self.health = 1;
-  var_0 = getent("loading_dock_enemies_goal", "targetname");
+  var_0 = getEnt("loading_dock_enemies_goal", "targetname");
   self setgoalvolume(var_0);
 
   while(!self istouching(var_0)) {

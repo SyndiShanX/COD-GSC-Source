@@ -19,7 +19,7 @@ function init() {
 }
 
 function function_30fe7a2() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_2c918ed();
   }
 }

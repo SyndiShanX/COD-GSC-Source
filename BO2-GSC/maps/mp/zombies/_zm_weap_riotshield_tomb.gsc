@@ -261,7 +261,7 @@ player_damage_shield(idamage, bheld) {
 
   if(self.shielddamagetaken >= damagemax) {
     if(bheld || !isDefined(self.shield_ent)) {
-      self playrumbleonentity("damage_heavy");
+      self playRumbleOnEntity("damage_heavy");
       earthquake(1.0, 0.75, self.origin, 100);
     } else if(isDefined(self.shield_ent)) {
       if(is_true(self.shield_ent.destroy_begun)) {
@@ -271,13 +271,13 @@ player_damage_shield(idamage, bheld) {
       shield_origin = self.shield_ent.origin;
       level thread maps\mp\zombies\_zm_equipment::equipment_disappear_fx(shield_origin, level._riotshield_dissapear_fx);
       wait 1;
-      playsoundatposition("wpn_riotshield_zm_destroy", shield_origin);
+      playSoundAtPosition("wpn_riotshield_zm_destroy", shield_origin);
     }
 
     self thread player_take_riotshield();
   } else {
     if(bheld) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
       earthquake(0.5, 0.5, self.origin, 100);
     }
 
@@ -307,7 +307,7 @@ deployed_damage_shield(idamage) {
     }
 
     maps\mp\zombies\_zm_equipment::equipment_disappear_fx(shield_origin, level._riotshield_dissapear_fx);
-    playsoundatposition("wpn_riotshield_zm_destroy", shield_origin);
+    playSoundAtPosition("wpn_riotshield_zm_destroy", shield_origin);
     self_delete();
   } else
     self deployed_set_shield_health(self.shielddamagetaken, damagemax);
@@ -401,8 +401,8 @@ zombie_knockdown(player, gib) {
 
 riotshield_knockdown_zombie(player, gib) {
   self endon("death");
-  playsoundatposition("vox_riotshield_forcehit", self.origin);
-  playsoundatposition("wpn_riotshield_proj_impact", self.origin);
+  playSoundAtPosition("vox_riotshield_forcehit", self.origin);
+  playSoundAtPosition("wpn_riotshield_proj_impact", self.origin);
 
   if(!isDefined(self) || !isalive(self)) {
     return;
@@ -450,7 +450,7 @@ riotshield_get_enemies_in_range() {
       return;
     }
 
-    normal = vectornormalize(test_origin - view_pos);
+    normal = vectorNormalize(test_origin - view_pos);
     dot = vectordot(forward_view_angles, normal);
 
     if(0 > dot) {
@@ -473,10 +473,10 @@ riotshield_get_enemies_in_range() {
     if(test_range_squared < fling_range_squared) {
       level.riotshield_fling_enemies[level.riotshield_fling_enemies.size] = zombies[i];
       dist_mult = (fling_range_squared - test_range_squared) / fling_range_squared;
-      fling_vec = vectornormalize(test_origin - view_pos);
+      fling_vec = vectorNormalize(test_origin - view_pos);
 
       if(5000 < test_range_squared) {
-        fling_vec = fling_vec + vectornormalize(test_origin - radial_origin);
+        fling_vec = fling_vec + vectorNormalize(test_origin - radial_origin);
       }
 
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
@@ -582,7 +582,7 @@ attack_shield(shield) {
   }
 
   self orientmode("face point", shield.origin);
-  self animscripted(self.origin, flat_angle(vectortoangles(shield.origin - self.origin)), attackanim);
+  self animScripted(self.origin, flat_angle(vectortoangles(shield.origin - self.origin)), attackanim);
 
   if(isDefined(shield.owner.player_shield_apply_damage)) {
     shield.owner[[shield.owner.player_shield_apply_damage]](100, 0);
@@ -601,7 +601,7 @@ attack_shield_stop(shield) {
   self endon("attack_shield_stop");
   self endon("death");
   shield waittill("death");
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(isDefined(self.doing_shield_attack) && self.doing_shield_attack) {
     breachanim = "zm_riotshield_breakthrough";
@@ -610,7 +610,7 @@ attack_shield_stop(shield) {
       breachanim = breachanim + "_crawl";
     }
 
-    self animscripted(self.origin, flat_angle(self.angles), breachanim);
+    self animScripted(self.origin, flat_angle(self.angles), breachanim);
   }
 }
 

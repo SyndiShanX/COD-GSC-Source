@@ -137,8 +137,8 @@ give_player_shiv() {
 }
 
 grief_treasure_chest_init() {
-  chest1 = getstruct("start_chest", "script_noteworthy");
-  chest2 = getstruct("cafe_chest", "script_noteworthy");
+  chest1 = getStruct("start_chest", "script_noteworthy");
+  chest2 = getStruct("cafe_chest", "script_noteworthy");
   setDvar("disableLookAtEntityLogic", 1);
   level.chests = [];
   level.chests[level.chests.size] = chest1;
@@ -227,13 +227,13 @@ main() {
     }
   }
 
-  t_temp = getent("tower_trap_activate_trigger", "targetname");
+  t_temp = getEnt("tower_trap_activate_trigger", "targetname");
   t_temp delete();
-  t_temp = getent("tower_trap_range_trigger", "targetname");
+  t_temp = getEnt("tower_trap_range_trigger", "targetname");
   t_temp delete();
-  e_model = getent("trap_control_docks", "targetname");
+  e_model = getEnt("trap_control_docks", "targetname");
   e_model delete();
-  e_brush = getent("tower_shockbox_door", "targetname");
+  e_brush = getEnt("tower_shockbox_door", "targetname");
   e_brush delete();
   a_t_travel_triggers = getEntArray("travel_trigger", "script_noteworthy");
 
@@ -271,9 +271,9 @@ main() {
     model delete();
   }
 
-  m_gondola = getent("zipline_gondola", "targetname");
+  m_gondola = getEnt("zipline_gondola", "targetname");
   m_gondola delete();
-  t_ride_trigger = getent("gondola_ride_trigger", "targetname");
+  t_ride_trigger = getEnt("gondola_ride_trigger", "targetname");
   t_ride_trigger delete();
   a_classic_clips = getEntArray("classic_clips", "targetname");
 
@@ -288,7 +288,7 @@ main() {
     m_prop delete();
   }
 
-  spork_portal = getent("afterlife_show_spork", "targetname");
+  spork_portal = getEnt("afterlife_show_spork", "targetname");
   spork_portal delete();
   a_audio = getEntArray("at_headphones", "script_noteworthy");
 
@@ -296,9 +296,9 @@ main() {
     model delete();
   }
 
-  m_spoon_pickup = getent("pickup_spoon", "targetname");
+  m_spoon_pickup = getEnt("pickup_spoon", "targetname");
   m_spoon_pickup delete();
-  t_sq_bg = getent("sq_bg_reward_pickup", "targetname");
+  t_sq_bg = getEnt("sq_bg_reward_pickup", "targetname");
   t_sq_bg delete();
   t_crafting_table = getEntArray("open_craftable_trigger", "targetname");
 
@@ -306,53 +306,53 @@ main() {
     trigger delete();
   }
 
-  t_warden_fence = getent("warden_fence_damage", "targetname");
+  t_warden_fence = getEnt("warden_fence_damage", "targetname");
   t_warden_fence delete();
-  m_plane_about_to_crash = getent("plane_about_to_crash", "targetname");
+  m_plane_about_to_crash = getEnt("plane_about_to_crash", "targetname");
   m_plane_about_to_crash delete();
-  m_plane_craftable = getent("plane_craftable", "targetname");
+  m_plane_craftable = getEnt("plane_craftable", "targetname");
   m_plane_craftable delete();
 
   for(i = 1; i <= 5; i++) {
-    m_key_lock = getent("masterkey_lock_" + i, "targetname");
+    m_key_lock = getEnt("masterkey_lock_" + i, "targetname");
     m_key_lock delete();
   }
 
-  m_shower_door = getent("shower_key_door", "targetname");
+  m_shower_door = getEnt("shower_key_door", "targetname");
   m_shower_door delete();
-  m_nixie_door = getent("nixie_door_left", "targetname");
+  m_nixie_door = getEnt("nixie_door_left", "targetname");
   m_nixie_door delete();
-  m_nixie_door = getent("nixie_door_right", "targetname");
+  m_nixie_door = getEnt("nixie_door_right", "targetname");
   m_nixie_door delete();
-  m_nixie_brush = getent("nixie_tube_weaponclip", "targetname");
+  m_nixie_brush = getEnt("nixie_tube_weaponclip", "targetname");
   m_nixie_brush delete();
 
   for(i = 1; i <= 3; i++) {
-    m_nixie_tube = getent("nixie_tube_" + i, "targetname");
+    m_nixie_tube = getEnt("nixie_tube_" + i, "targetname");
     m_nixie_tube delete();
   }
 
-  t_elevator_door = getent("nixie_elevator_door", "targetname");
+  t_elevator_door = getEnt("nixie_elevator_door", "targetname");
   t_elevator_door delete();
-  e_elevator_clip = getent("elevator_door_playerclip", "targetname");
+  e_elevator_clip = getEnt("elevator_door_playerclip", "targetname");
   e_elevator_clip delete();
-  e_elevator_bottom_gate = getent("elevator_bottom_gate_l", "targetname");
+  e_elevator_bottom_gate = getEnt("elevator_bottom_gate_l", "targetname");
   e_elevator_bottom_gate delete();
-  e_elevator_bottom_gate = getent("elevator_bottom_gate_r", "targetname");
+  e_elevator_bottom_gate = getEnt("elevator_bottom_gate_r", "targetname");
   e_elevator_bottom_gate delete();
-  m_docks_puzzle = getent("cable_puzzle_gate_01", "targetname");
+  m_docks_puzzle = getEnt("cable_puzzle_gate_01", "targetname");
   m_docks_puzzle delete();
-  m_docks_puzzle = getent("cable_puzzle_gate_02", "targetname");
+  m_docks_puzzle = getEnt("cable_puzzle_gate_02", "targetname");
   m_docks_puzzle delete();
-  m_infirmary_case = getent("infirmary_case_door_left", "targetname");
+  m_infirmary_case = getEnt("infirmary_case_door_left", "targetname");
   m_infirmary_case delete();
-  m_infirmary_case = getent("infirmary_case_door_right", "targetname");
+  m_infirmary_case = getEnt("infirmary_case_door_right", "targetname");
   m_infirmary_case delete();
-  fake_plane_part = getent("fake_veh_t6_dlc_zombie_part_control", "targetname");
+  fake_plane_part = getEnt("fake_veh_t6_dlc_zombie_part_control", "targetname");
   fake_plane_part delete();
 
   for(i = 1; i <= 3; i++) {
-    m_generator = getent("generator_panel_" + i, "targetname");
+    m_generator = getEnt("generator_panel_" + i, "targetname");
     m_generator delete();
   }
 
@@ -362,13 +362,13 @@ main() {
     generator delete();
   }
 
-  e_playerclip = getent("electric_chair_playerclip", "targetname");
+  e_playerclip = getEnt("electric_chair_playerclip", "targetname");
   e_playerclip delete();
 
   for(i = 1; i <= 4; i++) {
-    t_use = getent("trigger_electric_chair_" + i, "targetname");
+    t_use = getEnt("trigger_electric_chair_" + i, "targetname");
     t_use delete();
-    m_chair = getent("electric_chair_" + i, "targetname");
+    m_chair = getEnt("electric_chair_" + i, "targetname");
     m_chair delete();
   }
 

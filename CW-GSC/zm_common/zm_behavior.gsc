@@ -729,7 +729,7 @@ function zombiefindflesh(behaviortreeentity) {
 
   zombie_poi = behaviortreeentity zm_utility::get_zombie_point_of_interest(behaviortreeentity.origin);
   behaviortreeentity.zombie_poi = zombie_poi;
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(level.zombie_targets) && level.zombie_targets.size > 0) {
     function_1eaaceab(level.zombie_targets);
@@ -1189,7 +1189,7 @@ function zombieupdategoalcode() {
 
           if(segmentlength + currentseglength > deviationdistance) {
             remaininglength = deviationdistance - segmentlength;
-            seedposition = path[index - 1] + vectornormalize(path[index] - path[index - 1]) * remaininglength;
+            seedposition = path[index - 1] + vectorNormalize(path[index] - path[index - 1]) * remaininglength;
 
             recordcircle(seedposition, 2, (1, 0.5, 0), "<dev string:x5a>", self);
 
@@ -1615,7 +1615,7 @@ function zombieshouldattackthroughboardscondition(behaviortreeentity) {
   }
 
   freq = getdvarint(#"zombie_reachin_freq", 0);
-  players = getplayers();
+  players = getPlayers();
   attack = 0;
   behaviortreeentity.player_targets = [];
 
@@ -2813,7 +2813,7 @@ function function_4a99b560(entity, enemy) {
 
       time = max(length((to_target[0], to_target[1], 0)) / 700, 0.1);
       launch_speed = (0.5 * getdvarfloat(#"bg_lowgravity", 400) * sqr(time) + to_target[2]) / time;
-      to_target = vectornormalize((to_target[0], to_target[1], 0)) * 700;
+      to_target = vectorNormalize((to_target[0], to_target[1], 0)) * 700;
     }
 
     var_8a34a513 = isDefined(enemy) && isarray(enemy.var_f904e440);
@@ -2848,7 +2848,7 @@ function function_4a99b560(entity, enemy) {
   }
 
   launch_speed = (0.5 * getdvarfloat(#"bg_lowgravity", 400) * sqr(time) + to_target[2]) / time;
-  to_target = vectornormalize((to_target[0], to_target[1], 0)) * 700;
+  to_target = vectorNormalize((to_target[0], to_target[1], 0)) * 700;
 
   if(zm_utility::is_survival() && isDefined(entity.current_state) && entity.current_state.name !== #"chase" || zm_utility::is_survival() && distance2dsquared(entity.origin, enemy.origin) <= sqr(100) || !isinarray(enemy.var_f904e440, entity) || !entity function_92dcde87(start_pos, target_pos, (to_target[0], to_target[1], launch_speed), time, enemy)) {
     return false;
@@ -2946,7 +2946,7 @@ function function_e5f60f55(entity) {
 
 function private function_c41c61e8(step_size) {
   dir = self.origin - self.enemy.origin;
-  dir = vectornormalize((dir[0], dir[1], 0));
+  dir = vectorNormalize((dir[0], dir[1], 0));
   start_point = getclosestpointonnavmesh(self.origin);
 
   if(isDefined(start_point)) {

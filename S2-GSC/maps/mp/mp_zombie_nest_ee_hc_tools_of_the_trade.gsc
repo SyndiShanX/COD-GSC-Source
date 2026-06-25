@@ -17,8 +17,8 @@ func_00F9() {
 
 func_52EC() {
   var_00 = common_scripts\utility::func_46B5("nest_ee_hc_com_fuse_struct", "targetname");
-  var_01 = getent(var_00.var_01A2, "targetname");
-  var_02 = getent("nest_ee_hc_com_door_trig", "targetname");
+  var_01 = getEnt(var_00.var_01A2, "targetname");
+  var_02 = getEnt("nest_ee_hc_com_door_trig", "targetname");
   level.var_6874 = 0;
   var_03 = common_scripts\utility::func_46B7("nest_ee_hc_safe_struct", "targetname");
   foreach(var_05 in var_03) {
@@ -71,9 +71,9 @@ func_52EC() {
   }
 
   var_11 = common_scripts\utility::func_46B5("nest_ee_hc_com_power_struct", "targetname");
-  var_12 = getent(var_11.var_01A2, "targetname");
+  var_12 = getEnt(var_11.var_01A2, "targetname");
   var_13 = common_scripts\utility::func_46B5("nest_ee_hc_com_power_door_struct", "targetname");
-  var_14 = getent(var_13.var_01A2, "targetname");
+  var_14 = getEnt(var_13.var_01A2, "targetname");
   var_15["original_objective_trigs"] = level.var_358E;
   var_15["fuse_trigger"] = var_02;
   var_15["secret_door"] = var_01;
@@ -108,7 +108,7 @@ func_760C() {
 
 func_2575(param_00, param_01, param_02, param_03) {
   var_04 = common_scripts\utility::func_46B5("nest_ee_hc_com_power_struct", "targetname");
-  var_05 = getent(var_04.var_01A2, "targetname");
+  var_05 = getEnt(var_04.var_01A2, "targetname");
   var_06 = anglesToForward(var_05.var_001D);
   if(common_scripts\utility::func_562E(level.var_665E)) {
     return 1;
@@ -227,7 +227,7 @@ func_80D6() {
     var_04 = self.var_801E gettagorigin("dial_0" + var_01 + 1);
     var_05 = self.var_3B9C[var_01].var_65DB.var_0116;
     var_06 = distance(var_04, var_05);
-    self.var_3B9C[var_01].var_65DB linkto(self.var_801E, "dial_0" + var_01 + 1);
+    self.var_3B9C[var_01].var_65DB linkTo(self.var_801E, "dial_0" + var_01 + 1);
   }
 
   return var_00;
@@ -269,8 +269,8 @@ func_3B8A(param_00, param_01, param_02) {
     var_08 = param_01[var_05] - param_00.var_0116;
     var_07 = var_07 * (1, 1, 0);
     var_08 = var_08 * (1, 1, 0);
-    var_08 = vectornormalize(var_08);
-    var_07 = vectornormalize(var_07);
+    var_08 = vectorNormalize(var_08);
+    var_07 = vectorNormalize(var_07);
     var_09 = vectordot(var_08, var_07);
     if(var_09 > var_03) {
       var_03 = var_09;
@@ -299,8 +299,8 @@ func_7E67() {
     return;
   }
 
-  var_01 = getent("nest_hc_sword_door_trig", "targetname");
-  var_02 = getent(var_01.var_01A2, "targetname");
+  var_01 = getEnt("nest_hc_sword_door_trig", "targetname");
+  var_02 = getEnt(var_01.var_01A2, "targetname");
   var_02.var_6C02 = 0;
   level.var_665E = 1;
   for(;;) {

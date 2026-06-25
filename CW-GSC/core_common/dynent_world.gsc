@@ -45,7 +45,7 @@ function private event_handler[event_9673dc9a] function_3981d015(eventstruct) {
 
     if(is_true(bundle.var_fd4bc8dd) && !teleport && isDefined(newstate.dynent_sound)) {
       if(!is_true(dynent.var_c78a0afc)) {
-        playsoundatposition(newstate.dynent_sound, dynent.origin);
+        playSoundAtPosition(newstate.dynent_sound, dynent.origin);
       }
     }
 

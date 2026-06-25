@@ -26,7 +26,7 @@ init_fan_trap_animtree() {
 }
 
 init_fan_fxanim(str_loc) {
-  e_fan = getent("fxanim_fan_" + str_loc, "targetname");
+  e_fan = getEnt("fxanim_fan_" + str_loc, "targetname");
   level.fan_trap_fxanims = [];
   level.fan_trap_fxanims["fan_trap_start"] = % fxanim_zom_al_trap_fan_start_anim;
   level.fan_trap_fxanims["fan_trap_idle"] = % fxanim_zom_al_trap_fan_idle_anim;
@@ -39,13 +39,13 @@ fan_trap_think() {
   self.in_use = 0;
   self.is_available = 1;
   self.has_been_used = 0;
-  self.zombie_dmg_trig = getent(self.target, "targetname");
+  self.zombie_dmg_trig = getEnt(self.target, "targetname");
   self.zombie_dmg_trig.script_string = self.script_string;
   self.zombie_dmg_trig.in_use = 0;
-  self.rumble_trig = getent("fan_trap_rumble", "targetname");
+  self.rumble_trig = getEnt("fan_trap_rumble", "targetname");
   light_name = self get_trap_light_name();
   zapper_light_red(light_name);
-  self sethintstring(&"ZM_PRISON_FAN_TRAP_UNAVAILABLE");
+  self setHintString(&"ZM_PRISON_FAN_TRAP_UNAVAILABLE");
   flag_wait("activate_warden_office");
   zapper_light_green(light_name);
   self hint_string(&"ZM_PRISON_FAN_TRAP", self.cost);
@@ -100,7 +100,7 @@ fan_trap_think() {
 
 activate_fan_trap() {
   self.zombie_dmg_trig thread fan_trap_damage(self);
-  e_fan = getent("fxanim_fan_" + self.script_string, "targetname");
+  e_fan = getEnt("fxanim_fan_" + self.script_string, "targetname");
   e_fan useanimtree(#animtree);
   e_fan playSound("zmb_trap_fan_start");
   e_fan playLoopSound("zmb_trap_fan_loop", 2);
@@ -114,7 +114,7 @@ activate_fan_trap() {
   self thread fan_trap_rumble_think();
   self.zombie_dmg_trig waittill("trap_finished_" + self.script_string);
   e_fan setanim(level.fan_trap_fxanims["fan_trap_end"], 1, 0.1, 1);
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     if(is_true(player.fan_trap_rumble)) {
@@ -199,7 +199,7 @@ fan_trap_damage(parent) {
 
 fan_trap_move_switch(parent) {
   light_name = "";
-  tswitch = getent("trap_handle_" + parent.script_linkto, "targetname");
+  tswitch = getEnt("trap_handle_" + parent.script_linkto, "targetname");
   light_name = parent get_trap_light_name();
   zapper_light_red(light_name);
   tswitch rotatepitch(-180, 0.5);
@@ -252,11 +252,11 @@ acid_trap_think() {
   self.has_been_used = 0;
   self.cost = 1000;
   self.in_use = 0;
-  self.zombie_dmg_trig = getent(self.target, "targetname");
+  self.zombie_dmg_trig = getEnt(self.target, "targetname");
   self.zombie_dmg_trig.in_use = 0;
   light_name = self get_trap_light_name();
   zapper_light_red(light_name);
-  self sethintstring(&"ZM_PRISON_ACID_TRAP_UNAVAILABLE");
+  self setHintString(&"ZM_PRISON_ACID_TRAP_UNAVAILABLE");
   flag_wait_any("activate_cafeteria", "activate_infirmary");
   zapper_light_green(light_name);
   self hint_string(&"ZM_PRISON_ACID_TRAP", self.cost);
@@ -322,7 +322,7 @@ acid_trap_think() {
 
 acid_trap_move_switch(parent) {
   light_name = "";
-  tswitch = getent("trap_handle_" + parent.script_linkto, "targetname");
+  tswitch = getEnt("trap_handle_" + parent.script_linkto, "targetname");
   light_name = parent get_trap_light_name();
   zapper_light_red(light_name);
   tswitch rotatepitch(-180, 0.5);
@@ -450,8 +450,8 @@ init_tower_trap_trigs() {
 }
 
 tower_trap_trigger_think() {
-  self.range_trigger = getent(self.target, "targetname");
-  self.upgrade_trigger = getent(self.script_string, "script_noteworthy");
+  self.range_trigger = getEnt(self.target, "targetname");
+  self.upgrade_trigger = getEnt(self.script_string, "script_noteworthy");
   self.cost = 1000;
   light_name = self get_trap_light_name();
   zapper_light_green(light_name);
@@ -502,7 +502,7 @@ tower_trap_trigger_think() {
           self.sndtowerent playSound("zmb_trap_tower_end");
           self.upgrade_trigger notify("afterlife_interact_reset");
           self.active = 0;
-          self sethintstring(&"ZOMBIE_TRAP_COOLDOWN");
+          self setHintString(&"ZOMBIE_TRAP_COOLDOWN");
           zapper_light_red(light_name);
           wait 25;
           self playSound("zmb_trap_available");
@@ -536,10 +536,10 @@ tower_upgrade_trigger_think() {
 }
 
 open_tower_trap_upgrade_panel() {
-  e_door = getent("tower_shockbox_door", "targetname");
-  e_door moveto(e_door.origin + vectorscale((0, -1, 0), 40.0), 1.0);
+  e_door = getEnt("tower_shockbox_door", "targetname");
+  e_door moveTo(e_door.origin + vectorscale((0, -1, 0), 40.0), 1.0);
   level waittill("close_tower_trap_upgrade_panel");
-  e_door moveto(e_door.origin + vectorscale((0, 1, 0), 40.0), 1.0);
+  e_door moveTo(e_door.origin + vectorscale((0, 1, 0), 40.0), 1.0);
 }
 
 tower_trap_upgrade_panel_closes_early() {
@@ -551,7 +551,7 @@ tower_trap_upgrade_panel_closes_early() {
 
 tower_trap_move_switch(parent) {
   light_name = "";
-  tswitch = getent("trap_handle_" + parent.script_linkto, "targetname");
+  tswitch = getEnt("trap_handle_" + parent.script_linkto, "targetname");
   light_name = parent get_trap_light_name();
   zapper_light_red(light_name);
   tswitch rotatepitch(-180, 0.5);
@@ -624,7 +624,7 @@ tower_trap_fires(a_zombies) {
   }
 
   self endon("tower_trap_off");
-  e_org = getstruct(self.range_trigger.target, "targetname");
+  e_org = getStruct(self.range_trigger.target, "targetname");
   n_index = randomintrange(0, a_zombies.size);
 
   while(isalive(a_zombies[n_index])) {
@@ -649,12 +649,12 @@ tower_trap_fires(a_zombies) {
 
 hint_string(string, cost) {
   if(isDefined(cost)) {
-    self sethintstring(string, cost);
+    self setHintString(string, cost);
   } else {
-    self sethintstring(string);
+    self setHintString(string);
   }
 
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 }
 
 zapper_light_red(lightname) {
@@ -674,7 +674,7 @@ zapper_light_green(lightname) {
 }
 
 get_trap_light_name() {
-  tswitch = getent("trap_handle_" + self.script_linkto, "targetname");
+  tswitch = getEnt("trap_handle_" + self.script_linkto, "targetname");
 
   switch (tswitch.script_linkname) {
     case "1":

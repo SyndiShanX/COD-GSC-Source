@@ -207,10 +207,10 @@ function function_308e6c6f() {
       wait(randomfloatrange(0.1, 0.2));
     }
     level.var_a9ac7b97 = gettime();
-    self moveto(self.origin + vectorscale((0, 0, 1), 96), 1.4);
+    self moveTo(self.origin + vectorscale((0, 0, 1), 96), 1.4);
     self rotatepitch(-90, 0.4);
     wait(1.4);
-    self moveto(self.origin, 0.1);
+    self moveTo(self.origin, 0.1);
     self clientfield::set("demongate_chomper_fx", 0);
     wait(3);
     self notify("hash_16664ab4");
@@ -240,7 +240,7 @@ function function_a3e439a5(e_player, var_67eb721b) {
   self.angles = (self.angles[0] + (randomintrange(-30, 30)), self.angles[1] + (randomintrange(-45, 45)), self.angles[2]);
   var_69a783ad = self.origin + (anglesToForward(self.angles) * 96);
   self.angles = (0, self.angles[1], 0);
-  self moveto(var_69a783ad, 0.4);
+  self moveTo(var_69a783ad, 0.4);
   wait(0.4);
   self.var_e3146903 = 0;
   self function_ab77890b(e_player);
@@ -280,7 +280,7 @@ function function_9fcea3e8(e_player) {
     var_150aaea = self.origin;
   }
   var_9ef67615 = (var_6073ac1c[0] + var_13fe538c, var_6073ac1c[1] + var_3a00cdf5, var_6073ac1c[2] + var_6003485e);
-  var_962558f1 = vectornormalize(anglesToForward(var_9ef67615));
+  var_962558f1 = vectorNormalize(anglesToForward(var_9ef67615));
   a_trace = physicstraceex(var_150aaea, var_150aaea + (var_962558f1 * 512), vectorscale((-1, -1, -1), 16), vectorscale((1, 1, 1), 16));
   var_69a783ad = a_trace["position"] + (var_962558f1 * -32);
   n_dist = distance(self.origin, var_69a783ad);
@@ -293,8 +293,8 @@ function function_9fcea3e8(e_player) {
     wait(randomfloatrange(0.1, 0.2));
   }
   level.var_a9ac7b97 = gettime();
-  self moveto(var_69a783ad, n_time);
-  self rotateto(vectortoangles(v_rotate), n_time * 0.5);
+  self moveTo(var_69a783ad, n_time);
+  self rotateTo(vectortoangles(v_rotate), n_time * 0.5);
   self thread function_f9dd2ee2(e_player);
   self util::waittill_any_timeout(n_time * 2, "movedone", "demongate_chomper_found_target", "demongate_chomper_despawning", "death");
   if(isDefined(self.target_enemy)) {
@@ -336,7 +336,7 @@ function function_b6e7ec91(e_player) {
         self.var_fcd07456 = 0;
       } else {
         n_wait_time = randomfloatrange(2, 3);
-        self.target_enemy setplayercollision(0);
+        self.target_enemy setPlayerCollision(0);
       }
     }
     self.target_enemy util::waittill_notify_or_timeout("death", n_wait_time);
@@ -455,8 +455,8 @@ function function_5dee133f() {
       wait(randomfloatrange(0.1, 0.2));
     }
     level.var_a9ac7b97 = gettime();
-    self moveto(var_74490e48, n_time);
-    self rotateto(vectortoangles(v_rotate), n_time * 0.5);
+    self moveTo(var_74490e48, n_time);
+    self rotateTo(vectortoangles(v_rotate), n_time * 0.5);
     n_time = n_time * 0.3;
     n_time = (n_time < 0.1 ? 0.1 : n_time);
     wait(n_time);
@@ -478,7 +478,7 @@ function function_67903a83(e_player) {
   }
   n_damage = e_target.health;
   self waittill("hash_368634cd");
-  e_target setplayercollision(1);
+  e_target setPlayerCollision(1);
   e_target.var_bc9b5fbd = 0;
   e_target.var_98056717 = 0;
   if(zm_utility::is_player_valid(e_player)) {

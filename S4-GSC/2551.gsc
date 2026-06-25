@@ -782,7 +782,7 @@ _id_5AB1(var_0, var_1) {
   self._id_A54D = var_6;
   self._id_1697 = gettime() + self._id_1696;
   self._id_A54D._id_26FE = self._id_1697;
-  var_8 = vectornormalize(self._id_B9B2 - self._id_A54D.origin);
+  var_8 = vectorNormalize(self._id_B9B2 - self._id_A54D.origin);
   var_9 = vectortoangles(var_8);
   self._id_16CA = var_9[1];
   return 1;

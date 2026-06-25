@@ -39,7 +39,7 @@ mutatorarmor() {
   var_6 = spawn("script_model", var_4);
   var_6.angles = var_5;
   var_6 setModel("zombie_helmet");
-  var_6 linkto(self, var_0, (-0.2, -0.45, -4.7), (0, 90, 0));
+  var_6 linkTo(self, var_0, (-0.2, -0.45, -4.7), (0, 90, 0));
   thread mutatorhelmetdetach(var_6);
   self waittill("death");
   self.hashelmet = undefined;

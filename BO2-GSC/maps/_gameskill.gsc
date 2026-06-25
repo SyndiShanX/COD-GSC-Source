@@ -1020,7 +1020,7 @@ play_hurt_vox() {
   if(isDefined(self.veryhurt)) {
     if(self.veryhurt == 0) {
       if(randomintrange(0, 1) == 1) {
-        playsoundatposition("chr_breathing_hurt_start", self.origin);
+        playSoundAtPosition("chr_breathing_hurt_start", self.origin);
       }
     }
   }

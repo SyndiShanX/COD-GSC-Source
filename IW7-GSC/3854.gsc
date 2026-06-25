@@ -53,7 +53,7 @@ func_F900(var_0, var_1, var_2) {
     var_2 = 0;
   }
 
-  var_3 = getent(var_0, "targetname");
+  var_3 = getEnt(var_0, "targetname");
   var_3.script_disconnectpaths = 0;
 
   if(isDefined(var_1)) {
@@ -133,7 +133,7 @@ func_88BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   }
 
   scripts\engine\utility::flag_set("event_turrets_down");
-  var_10 = getent(var_2, "targetname");
+  var_10 = getEnt(var_2, "targetname");
 
   if(isDefined(var_5) && var_5) {
     if(isDefined(var_10) && isDefined(var_10.script_parameters)) {
@@ -202,7 +202,7 @@ func_88BE(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   }
 
   scripts\engine\utility::flag_set("event_turrets_down");
-  var_11 = getent(var_2, "targetname");
+  var_11 = getEnt(var_2, "targetname");
 
   if(isDefined(var_5) && var_5) {
     if(isDefined(var_11) && isDefined(var_11.script_parameters)) {
@@ -266,7 +266,7 @@ func_88D0(var_0, var_1) {
 func_C28F() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
   var_1 = "tag_origin";
-  var_0 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   _target_set(var_0, (0, 0, 60));
   _target_setminsize(var_0, 100, 0);
   _target_setmaxsize(var_0, 100);
@@ -297,7 +297,7 @@ func_FA4E(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_8 getrandomweaponfromcategory();
   var_8 func_0BDC::func_105DB("turret");
   var_8 setModel(var_1);
-  var_8 linkto(var_0, var_2, (0, 0, 0), (0, 0, 0));
+  var_8 linkTo(var_0, var_2, (0, 0, 0), (0, 0, 0));
   var_8.var_4D1E = spawnStruct();
   var_8.var_4D1E.fx = spawnStruct();
   var_8.var_4D1E.fx.var_1037F = "capital_turret_smolder_lg";
@@ -374,7 +374,7 @@ func_B2DB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 func_EF53(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_4)) {
     return;
@@ -787,7 +787,7 @@ func_F43B(var_0, var_1) {
     var_3 = "tag_origin";
   }
 
-  var_2 linkto(self, var_3, (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(self, var_3, (0, 0, 0), (0, 0, 0));
   _target_set(var_2, var_0);
   thread func_A294(var_2);
   thread func_A292(var_2, var_1);

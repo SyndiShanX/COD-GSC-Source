@@ -50,8 +50,8 @@ stage_logic_1() {
 
 wait_for_zombies_launched() {
   level thread richtofen_zombies_launched();
-  t_tower = getent("pts_tower_trig", "targetname");
-  s_tower_top = getstruct("sq_zombie_launch_target", "targetname");
+  t_tower = getEnt("pts_tower_trig", "targetname");
+  s_tower_top = getStruct("sq_zombie_launch_target", "targetname");
 
   while(level.n_launched_zombies < 16) {
     wait 0.5;
@@ -95,10 +95,10 @@ wait_for_balls_launched() {
 
   foreach(s_lion_spot in a_lion_spots) {
     s_lion_spot.a_place_ball_trigs = [];
-    s_lion_spot.springpad_buddy = getstruct(s_lion_spot.script_string, "script_noteworthy");
+    s_lion_spot.springpad_buddy = getStruct(s_lion_spot.script_string, "script_noteworthy");
   }
 
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(player in a_players) {
     player.a_place_ball_trigs = [];
@@ -125,11 +125,11 @@ player_set_down_ball_watcher() {
 
 sq_pts_create_use_trigger(v_origin, radius, height, str_hint_string) {
   t_pickup = spawn("trigger_radius_use", v_origin, 0, radius, height);
-  t_pickup setcursorhint("HINT_NOICON");
-  t_pickup sethintstring(str_hint_string);
+  t_pickup setCursorHint("HINT_NOICON");
+  t_pickup setHintString(str_hint_string);
   t_pickup.targetname = "ball_place_trig";
-  t_pickup triggerignoreteam();
-  t_pickup usetriggerrequirelookat();
+  t_pickup triggerIgnoreTeam();
+  t_pickup useTriggerRequireLookAt();
   return t_pickup;
 }
 
@@ -214,8 +214,8 @@ is_springpad_in_place(m_springpad, is_generator) {
     n_dist = distance2dsquared(m_springpad.origin, s_spot.origin);
 
     if(n_dist < 1024) {
-      v_spot_forward = vectornormalize(anglesToForward(s_spot.angles));
-      v_pad_forward = vectornormalize(anglesToForward(m_springpad.angles));
+      v_spot_forward = vectorNormalize(anglesToForward(s_spot.angles));
+      v_pad_forward = vectorNormalize(anglesToForward(m_springpad.angles));
       n_dot = vectordot(v_spot_forward, v_pad_forward);
 
       iprintlnbold("Trample Steam OFF: Dist(" + sqrt(n_dist) + ") Dot(" + n_dot + ")");
@@ -237,8 +237,8 @@ is_springpad_in_place(m_springpad, is_generator) {
         }
 
         if(isDefined(s_spot.script_float)) {
-          s_target = getstruct("sq_zombie_launch_target", "targetname");
-          v_override_dir = vectornormalize(s_target.origin - m_springpad.origin);
+          s_target = getStruct("sq_zombie_launch_target", "targetname");
+          v_override_dir = vectorNormalize(s_target.origin - m_springpad.origin);
           v_override_dir = vectorscale(v_override_dir, 1024);
           m_springpad.direction_vec_override = v_override_dir;
           m_springpad.fling_scaler = s_spot.script_float;
@@ -353,7 +353,7 @@ pts_should_player_create_trigs(player) {
 
 pts_should_springpad_create_trigs(s_lion_spot) {
   if(isDefined(s_lion_spot.springpad) && isDefined(s_lion_spot.springpad_buddy.springpad)) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(isDefined(player.zm_sq_has_ball) && player.zm_sq_has_ball) {
@@ -392,7 +392,7 @@ pts_reset_ball(s_lion_spot) {
   if(isDefined(s_lion_spot.which_ball)) {
     s_lion_spot.sq_pickup_reset = 1;
     s_lion_spot.which_ball notify("sq_pickup_reset");
-    m_ball_anim = getent("trample_gen_" + s_lion_spot.script_noteworthy, "targetname");
+    m_ball_anim = getEnt("trample_gen_" + s_lion_spot.script_noteworthy, "targetname");
     playFX(level._effect["sidequest_flash"], m_ball_anim gettagorigin("fxanim_zom_highrise_trample_gen1_jnt"));
     flag_clear("pts_2_generator_" + s_lion_spot.which_generator + "_started");
     level.current_generator--;
@@ -401,7 +401,7 @@ pts_reset_ball(s_lion_spot) {
   } else if(isDefined(s_lion_spot.springpad_buddy.which_ball)) {
     s_lion_spot.springpad_buddy.sq_pickup_reset = 1;
     s_lion_spot.springpad_buddy.which_ball notify("sq_pickup_reset");
-    m_ball_anim = getent("trample_gen_" + s_lion_spot.springpad_buddy.script_noteworthy, "targetname");
+    m_ball_anim = getEnt("trample_gen_" + s_lion_spot.springpad_buddy.script_noteworthy, "targetname");
     playFX(level._effect["sidequest_flash"], m_ball_anim gettagorigin("fxanim_zom_highrise_trample_gen1_jnt"));
     flag_clear("pts_2_generator_" + s_lion_spot.springpad_buddy.which_generator + "_started");
     level.current_generator--;

@@ -203,7 +203,7 @@ func_40CB() {
   foreach(var_11 in var_0B) {
     if(!common_scripts\utility::func_0F79(self.var_93AB.var_5E6C, var_11)) {
       var_12 = func_93AA(var_11);
-      var_13 = vectordot(vectornormalize(var_12 - var_0C), var_0D);
+      var_13 = vectordot(vectorNormalize(var_12 - var_0C), var_0D);
       if(var_13 > var_0F) {
         var_14 = undefined;
         var_15 = !1;
@@ -233,7 +233,7 @@ func_5E73(param_00) {
     return 0;
   }
 
-  if(vectordot(vectornormalize(var_03 - var_01), var_02) > cos(5)) {
+  if(vectordot(vectorNormalize(var_03 - var_01), var_02) > cos(5)) {
     if(!1 || bullettracepassed(var_01, var_03, 0, param_00)) {
       return 1;
     }
@@ -306,7 +306,7 @@ func_5E71() {
     }
 
     self method_8615("wpn_stingerm7_locking");
-    self playrumbleonentity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
     wait(0.6);
   }
 }
@@ -331,7 +331,7 @@ func_5E6B() {
     }
 
     self method_8615("wpn_stingerm7_locked");
-    self playrumbleonentity("heavygun_fire");
+    self playRumbleOnEntity("heavygun_fire");
     wait(0.25);
   }
 }

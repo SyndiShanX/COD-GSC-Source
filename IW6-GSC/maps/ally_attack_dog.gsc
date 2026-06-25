@@ -107,7 +107,7 @@ set_dog_arrow(var_0, var_1) {
   level.aim_arrow.origin = var_0;
 
   if(isDefined(var_1)) {
-    level.aim_arrow linkto(var_1, "tag_origin", (0, 0, 0), (-90, 0, -90));
+    level.aim_arrow linkTo(var_1, "tag_origin", (0, 0, 0), (-90, 0, -90));
     wait 0.05;
     playFXOnTag(common_scripts\utility::getfx("target_marker_red"), level.aim_arrow, "tag_origin");
   } else {
@@ -395,9 +395,9 @@ ally_dog_follow_owner_internal(var_0, var_1) {
     }
 
     if(isPlayer(var_0)) {
-      var_10 = vectornormalize(vector2d(var_0 getvelocity()));
+      var_10 = vectorNormalize(vector2d(var_0 getvelocity()));
     } else {
-      var_10 = vectornormalize(vector2d(var_9 - var_8));
+      var_10 = vectorNormalize(vector2d(var_9 - var_8));
     }
 
     var_11 = getnodesinradiussorted(var_0.origin, var_2, var_4, 64, "Path");
@@ -466,7 +466,7 @@ _pick_best_node_behind_owner(var_0, var_1, var_2) {
   var_4["best_dist_to_node_sq"] = distance2dsquared(self.origin, var_0[0].origin);
 
   foreach(var_6 in var_0) {
-    var_7 = vectornormalize(vector2d(var_6.origin - var_1.origin));
+    var_7 = vectorNormalize(vector2d(var_6.origin - var_1.origin));
     var_8 = vectordot(var_2, var_7);
 
     if(var_8 > var_3) {
@@ -495,7 +495,7 @@ _pick_best_node_heeled_by_owner(var_0, var_1, var_2) {
   var_9 = [];
 
   foreach(var_11 in var_0) {
-    var_12 = vectornormalize(vector2d(var_11.origin - var_1.origin));
+    var_12 = vectorNormalize(vector2d(var_11.origin - var_1.origin));
     var_13 = vectordot(var_2, var_12);
 
     if(var_13 > var_3 || var_13 < var_4) {
@@ -1088,7 +1088,7 @@ check_against_active_zones(var_0, var_1) {
     var_8 = undefined;
 
     if(isDefined(var_2.script_linkto)) {
-      var_8 = common_scripts\utility::getstruct(var_2.script_linkto, "script_linkname");
+      var_8 = common_scripts\utility::getStruct(var_2.script_linkto, "script_linkname");
     } else if(isDefined(var_2.target)) {
       var_8 = var_2 common_scripts\utility::get_target_ent();
     }
@@ -1276,11 +1276,11 @@ check_start_attack(var_0) {
 
 _get_guard_node_behind_player(var_0) {
   var_1 = 40;
-  var_2 = vectornormalize(vector2d(level.player getvelocity()));
+  var_2 = vectorNormalize(vector2d(level.player getvelocity()));
   var_3 = length(var_2);
 
   if(var_3 == 0) {
-    var_2 = vectornormalize(anglesToForward(level.player.angles));
+    var_2 = vectorNormalize(anglesToForward(level.player.angles));
   }
 
   var_4 = getnodesinradiussorted(level.player.origin, var_0, var_1, 64, "Path");

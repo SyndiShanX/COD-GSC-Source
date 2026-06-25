@@ -187,13 +187,13 @@ drone_death_thread() {
 }
 drone_play_looping_anim(droneAnim, rate) {
   self ClearAnim(%body, 0.2);
-  self StopAnimScripted();
+  self StopanimScripted();
 
   self SetFlaggedAnimKnobAllRestart("drone_anim", droneAnim, %body, 1, 0.2, rate);
 }
 drone_play_scripted_anim(droneAnim, deathplant) {
   self clearAnim(%body, 0.2);
-  self stopAnimScripted();
+  self stopanimScripted();
 
   mode = "normal";
   if(isDefined(deathplant)) {
@@ -201,7 +201,7 @@ drone_play_scripted_anim(droneAnim, deathplant) {
   }
 
   flag = "drone_anim";
-  self animscripted(flag, self.origin, self.angles, droneAnim, mode);
+  self animScripted(flag, self.origin, self.angles, droneAnim, mode);
 
   self waittillmatch("drone_anim", "end");
 }
@@ -276,7 +276,7 @@ drone_fight(animset, struct, moveToDest) {
   self.angles = (0, self.angles[1], self.angles[2]);
 
   if(animset == "coverprone") {
-    self moveto(self.origin + (0, 0, 8), .05);
+    self moveTo(self.origin + (0, 0, 8), .05);
   }
 
   self.noragdoll = true;
@@ -406,7 +406,7 @@ drone_init_path() {
   level.drone_paths[self.target] = true;
 
   target = self.target;
-  node = getstruct(target, "targetname");
+  node = getStruct(target, "targetname");
   if(!isDefined(node)) {
     return;
   }
@@ -456,7 +456,7 @@ drone_init_path() {
   }
 
   target = self.target;
-  node = getstruct(target, "targetname");
+  node = getStruct(target, "targetname");
   prevNode = node;
   completed_nodes = [];
 

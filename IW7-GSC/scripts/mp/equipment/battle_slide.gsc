@@ -214,7 +214,7 @@ func_28E7(var_0, var_1, var_2) {
 func_28E9(var_0, var_1) {
   if(isDefined(var_0.hasriotshield) && var_0.hasriotshield) {
     var_2 = var_1 - var_0.origin;
-    var_3 = vectornormalize((var_2[0], var_2[1], 0));
+    var_3 = vectorNormalize((var_2[0], var_2[1], 0));
     var_4 = anglesToForward(var_0.angles);
     var_5 = vectordot(var_4, var_2);
     if(var_0.hasriotshieldequipped) {
@@ -243,8 +243,8 @@ func_28E6(var_0) {
 }
 
 func_28E4(var_0) {
-  self playrumbleonentity("artillery_rumble");
-  var_0 playrumbleonentity("artillery_rumble");
+  self playRumbleOnEntity("artillery_rumble");
+  var_0 playRumbleOnEntity("artillery_rumble");
   playrumbleonposition("slide_collision", self.origin);
   earthquake(0.5, 0.5, self.origin, 144);
   playsoundatpos(self.origin, "slide_impact");

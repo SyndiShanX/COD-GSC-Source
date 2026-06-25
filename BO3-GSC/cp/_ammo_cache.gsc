@@ -90,7 +90,7 @@ class cammocrate {
       e_player setweaponammoclip(w_weapon, w_weapon.clipsize);
     }
     e_player notify("ammo_refilled");
-    e_player playrumbleonentity("damage_light");
+    e_player playRumbleOnEntity("damage_light");
     e_player util::_enableweapon();
     if(single_use) {
       objective_clearentity(objectiveid);
@@ -116,18 +116,18 @@ class cammocrate {
 
   function init_ammo_cache(mdl_ammo_cache) {
     t_use = spawn("trigger_radius_use", mdl_ammo_cache.origin + vectorscale((0, 0, 1), 30), 0, 94, 64);
-    t_use triggerignoreteam();
+    t_use triggerIgnoreTeam();
     t_use setvisibletoall();
-    t_use usetriggerrequirelookat();
+    t_use useTriggerRequireLookAt();
     t_use setteamfortrigger("none");
-    t_use setcursorhint("HINT_INTERACTIVE_PROMPT");
-    t_use sethintstring(&"COOP_REFILL_AMMO");
+    t_use setCursorHint("HINT_INTERACTIVE_PROMPT");
+    t_use setHintString(&"COOP_REFILL_AMMO");
     if(isDefined(mdl_ammo_cache.script_linkto)) {
-      moving_platform = getent(mdl_ammo_cache.script_linkto, "targetname");
-      mdl_ammo_cache linkto(moving_platform);
+      moving_platform = getEnt(mdl_ammo_cache.script_linkto, "targetname");
+      mdl_ammo_cache linkTo(moving_platform);
     }
-    t_use enablelinkto();
-    t_use linkto(mdl_ammo_cache);
+    t_use enablelinkTo();
+    t_use linkTo(mdl_ammo_cache);
     mdl_ammo_cache oed::enable_keyline(1);
     if(mdl_ammo_cache.script_string === "single_use") {
       s_ammo_cache_object = gameobjects::create_use_object("any", t_use, array(mdl_ammo_cache), vectorscale((0, 0, 1), 32), &"cp_ammo_box");
@@ -158,8 +158,8 @@ class cammocrate {
       var_bd13c94b = spawn("trigger_radius", t_use.origin, 0, 94, 64);
       var_bd13c94b setvisibletoall();
       var_bd13c94b setteamfortrigger("allies");
-      var_bd13c94b enablelinkto();
-      var_bd13c94b linkto(mdl_ammo_cache);
+      var_bd13c94b enablelinkTo();
+      var_bd13c94b linkTo(mdl_ammo_cache);
       var_bd13c94b thread function_e76edd0b(var_60a09143);
     }
     mdl_ammo_cache.gameobject = s_ammo_cache_object;

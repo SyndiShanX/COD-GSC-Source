@@ -218,7 +218,7 @@ handle_trial_b_flow() {
   level endon("game_ended");
   level endon("mq_trial_b_done");
   level endon("start_rbz_exfil");
-  level.main_obelisk_b = scripts\engine\utility::getstruct("mq_main_obelisk", "script_noteworthy");
+  level.main_obelisk_b = scripts\engine\utility::getStruct("mq_main_obelisk", "script_noteworthy");
 
   if(!isDefined(level.main_obelisk_b.mdl)) {
     childthread spawn_obelisk_model(level.main_obelisk_b);
@@ -235,7 +235,7 @@ handle_trial_b_flow() {
   level.lighting_torches = 0;
   scripts\engine\utility::_id_1BE2(level.a_torches, ::handle_lighting_torche);
   level scripts\engine\utility::_id_5C24("trial_b_all_torches_lighting");
-  var_4 = scripts\engine\utility::getstruct("orb_trial_b_loc", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStruct("orb_trial_b_loc", "script_noteworthy");
   var_5 = scripts\cp\utility::_id_459B(level.last_torch, var_4);
   level.red_orb = scripts\cp\utility::_id_E190("tag_origin", var_5.origin, var_5.angles);
   level.last_torch = undefined;
@@ -244,11 +244,11 @@ handle_trial_b_flow() {
   playFXOnTag(scripts\engine\utility::getfx("mq_trial_b_orb"), level.red_orb, "tag_origin");
   level.red_orb playSound("zmb_trail_orb_spawn");
   level.red_orb playLoopSound("zmb_trial_orb_lp");
-  level.red_orb moveto(level.red_orb.origin + (0, 0, 50), 1, 0.5, 0.1);
+  level.red_orb moveTo(level.red_orb.origin + (0, 0, 50), 1, 0.5, 0.1);
   wait 1.2;
   var_6 = distance(var_4.origin, level.red_orb.origin) / 250;
   var_6 = max(0.7, var_6);
-  level.red_orb moveto(var_4.origin, var_6, 0.5, 0.1);
+  level.red_orb moveTo(var_4.origin, var_6, 0.5, 0.1);
   level.red_orb waittill("movedone");
   level.main_obelisk_b.origin = level.red_orb.origin;
   level.red_orb playSound("zmb_trial_orb_voice_stinger");
@@ -342,9 +342,9 @@ obelisk_defeat_jugg_charge(var_0) {
   var_5 = [2, 2, 4, 4];
   level childthread spawn_zombies_defeat("base", "enemy_base_zombie_cp", var_2[var_1 - 1], var_3[var_1 - 1], "obelisk_b_charged_fail");
   level childthread spawn_zombies_defeat("screamer", "enemy_zombie_screamer_cp", var_4[var_1 - 1], var_5[var_1 - 1], "obelisk_b_charged_fail");
-  var_6 = scripts\engine\utility::getstruct("mq_trial_b_jugg_spawn_loc", "script_noteworthy").origin;
+  var_6 = scripts\engine\utility::getStruct("mq_trial_b_jugg_spawn_loc", "script_noteworthy").origin;
   var_7 = vectortoangles(var_0.origin - var_6);
-  level.red_orb moveto(var_6 + (0, 0, 50), 1, 0.5, 0.1);
+  level.red_orb moveTo(var_6 + (0, 0, 50), 1, 0.5, 0.1);
   level.red_orb waittill("movedone");
   level.red_orb hide();
   play_vo_to_players(get_players_in_trial_zone(level.trial_b_zones), ["zm_cpm5_mqs5_krft_qiie", "zm_cpm5_mqs5_krft_qiif", "zm_cpm5_mqs5_krft_qiig", "zm_cpm5_mqs5_krft_qiih"]);
@@ -382,7 +382,7 @@ obelisk_defeat_jugg_charge(var_0) {
   playFXOnTag(scripts\engine\utility::getfx("mq_trial_b_orb"), level.red_orb, "tag_origin");
   level.red_orb playSound("zmb_trail_orb_spawn");
   level.red_orb playLoopSound("zmb_trial_orb_lp");
-  level.red_orb moveto(level.red_orb.origin + (0, 0, 50), 1, 0.5, 0.1);
+  level.red_orb moveTo(level.red_orb.origin + (0, 0, 50), 1, 0.5, 0.1);
   wait 1.2;
   var_12 = (0, 0, 0);
 
@@ -393,7 +393,7 @@ obelisk_defeat_jugg_charge(var_0) {
 
   var_13 = distance(level.main_obelisk_b.origin, level.red_orb.origin) / 250;
   var_13 = max(0.7, var_13);
-  level.red_orb moveto(level.main_obelisk_b.origin + var_12, var_13, 0.5, 0.1);
+  level.red_orb moveTo(level.main_obelisk_b.origin + var_12, var_13, 0.5, 0.1);
   level.red_orb waittill("movedone");
 
   if(!var_10) {
@@ -651,7 +651,7 @@ ring_of_fire_challenge_flow() {
     var_9.n_charged_max = var_7[var_6 - 1];
   }
 
-  var_11 = scripts\engine\utility::getstruct("mq_trial_b_magic_stone", "script_noteworthy");
+  var_11 = scripts\engine\utility::getStruct("mq_trial_b_magic_stone", "script_noteworthy");
   level.e_field_upgrade_stone = scripts\cp\utility::_id_E190("s4_zm_soul_capture_runestone_02", var_11.origin, var_11.angles);
   level.e_field_upgrade_stone thread scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_papq::do_bob();
   waitframe();
@@ -779,7 +779,7 @@ obelisk_send_fx_trail(var_0, var_1, var_2, var_3) {
   var_5 playLoopSound("zmb_trial_obelisk_link_lp");
   playFXOnTag(scripts\engine\utility::getfx(var_2), var_5, "tag_origin");
   wait 0.2;
-  var_5 moveto(var_1, var_4);
+  var_5 moveTo(var_1, var_4);
   var_5 waittill("movedone");
   wait 2;
   var_5 delete();
@@ -790,7 +790,7 @@ spawn_obelisk_model(var_0) {
   var_0.mdl = var_1;
 
   if(isDefined(var_0._id_0481)) {
-    var_2 = getent(var_0._id_0481, "target");
+    var_2 = getEnt(var_0._id_0481, "target");
 
     if(isDefined(var_2)) {
       var_2 solid();
@@ -824,17 +824,17 @@ obelisk_model_bob(var_0, var_1, var_2, var_3, var_4) {
   var_11 = var_5.origin - (0, 0, var_7);
 
   for(;;) {
-    var_5 moveto(var_10, var_6, var_8, var_9);
+    var_5 moveTo(var_10, var_6, var_8, var_9);
 
     if(var_4) {
-      var_5 rotateyaw(var_5.angles[2] + 45, var_6);
+      var_5 rotateYaw(var_5.angles[2] + 45, var_6);
     }
 
     wait(var_6);
-    var_5 moveto(var_11, var_6, var_8, var_9);
+    var_5 moveTo(var_11, var_6, var_8, var_9);
 
     if(var_4) {
-      var_5 rotateyaw(var_5.angles[2] + 45, var_6);
+      var_5 rotateYaw(var_5.angles[2] + 45, var_6);
     }
 
     wait(var_6);

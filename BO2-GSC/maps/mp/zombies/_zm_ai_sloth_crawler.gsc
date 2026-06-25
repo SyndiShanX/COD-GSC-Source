@@ -53,7 +53,7 @@ crawler_action() {
       continue;
     }
 
-    vec_forward = vectornormalize(anglesToForward(self.crawler.angles));
+    vec_forward = vectorNormalize(anglesToForward(self.crawler.angles));
     start_pos = self.crawler.origin - vec_forward * sloth_offset;
     raised_start_pos = (start_pos[0], start_pos[1], start_pos[2] + sloth_offset);
     ground_pos = groundpos(raised_start_pos);
@@ -91,15 +91,15 @@ crawler_action() {
   self.anchor.angles = self.crawler.angles;
   sloth_pickup = self append_hunched("zm_sloth_pickup_crawler");
   crawler_pickup = self append_hunched("zm_crawler_pickup_by_sloth");
-  self animscripted(self.anchor.origin, self.anchor.angles, sloth_pickup);
-  self.crawler animscripted(self.anchor.origin, self.anchor.angles, crawler_pickup);
+  self animScripted(self.anchor.origin, self.anchor.angles, sloth_pickup);
+  self.crawler animScripted(self.anchor.origin, self.anchor.angles, crawler_pickup);
   maps\mp\animscripts\zm_shared::donotetracks("sloth_pickup_crawler_anim");
   self.carrying_crawler = 1;
   self.crawler.guts_explosion = 1;
   self.pre_traverse = ::crawler_pre_traverse;
   self.post_traverse = ::crawler_post_traverse;
   self.crawler notsolid();
-  self.crawler linkto(self, "tag_weapon_right");
+  self.crawler linkTo(self, "tag_weapon_right");
   self.ignore_common_run = 1;
   self set_zombie_run_cycle("walk_crawlerhold");
   self.locomotion = "walk_crawlerhold";
@@ -127,11 +127,11 @@ crawler_action() {
       self setgoalpos(self.origin);
       sloth_idle = self append_hunched("zm_sloth_crawlerhold_idle");
       crawler_idle = self append_hunched("zm_crawler_crawlerhold_idle");
-      self animscripted(self.origin, self.angles, sloth_idle);
-      self.crawler animscripted(self.origin, self.angles, crawler_idle);
+      self animScripted(self.origin, self.angles, sloth_idle);
+      self.crawler animScripted(self.origin, self.angles, crawler_idle);
     } else {
-      self stopanimscripted();
-      self.crawler stopanimscripted();
+      self stopanimScripted();
+      self.crawler stopanimScripted();
 
       if(should_ignore_candybooze(self.candy_player)) {
         dist = distancesquared(self.origin, roam[roam_index].origin);
@@ -168,16 +168,16 @@ crawler_action() {
   self.crawler unlink();
   sloth_putdown = self append_hunched("zm_sloth_putdown_crawler");
   crawler_putdown = self append_hunched("zm_crawler_putdown_by_sloth");
-  self animscripted(self.origin, self.angles, sloth_putdown);
-  self.crawler animscripted(self.origin, self.angles, crawler_putdown);
+  self animScripted(self.origin, self.angles, sloth_putdown);
+  self.crawler animScripted(self.origin, self.angles, crawler_putdown);
   maps\mp\animscripts\zm_shared::donotetracks("sloth_putdown_crawler_anim");
   self.carrying_crawler = 0;
   self.crawler.deathfunction = ::crawler_death;
   sloth_kill = self append_hunched("zm_sloth_kill_crawler_stomp");
   crawler_kill = self append_hunched("zm_crawler_slothkill_stomp");
   self notify("stop_crawler_watch");
-  self animscripted(self.origin, self.angles, sloth_kill);
-  self.crawler animscripted(self.origin, self.angles, crawler_kill);
+  self animScripted(self.origin, self.angles, sloth_kill);
+  self.crawler animScripted(self.origin, self.angles, crawler_kill);
   maps\mp\animscripts\zm_shared::donotetracks("sloth_kill_crawler_anim");
 
   if(isDefined(self.crawler)) {

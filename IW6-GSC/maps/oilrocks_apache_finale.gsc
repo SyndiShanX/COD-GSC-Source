@@ -25,7 +25,7 @@ main() {
 
 blackhawk_path_to_end() {
   var_0 = maps\oilrocks_apache_code::get_blackhawk_ally();
-  var_0 maps\_vehicle::vehicle_paths(common_scripts\utility::getstruct("blackhawk_to_end", "targetname"));
+  var_0 maps\_vehicle::vehicle_paths(common_scripts\utility::getStruct("blackhawk_to_end", "targetname"));
 }
 
 apache_player_adjust() {

@@ -222,7 +222,7 @@ function function_f6d3c3c4(ai_array) {
 
   foreach(ai in ai_array) {
     if(isalive(ai)) {
-      ai stopanimscripted();
+      ai stopanimScripted();
       ai.fixednode = 1;
     }
   }
@@ -385,7 +385,7 @@ function function_e6c0e11d() {
 
   foreach(ai in ai_array) {
     if(isalive(ai)) {
-      ai stopanimscripted();
+      ai stopanimScripted();
     }
   }
 

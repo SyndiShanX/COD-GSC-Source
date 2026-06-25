@@ -133,7 +133,7 @@ function function_ff057a95() {
         if(isDefined(self.stealth.var_9f4ce919[warnmsg])) {
           continue;
         }
-        dir = vectornormalize(var_bbf94a49 - eye);
+        dir = vectorNormalize(var_bbf94a49 - eye);
         if(vectordot(var_fd26df34, dir) > 0.99) {
           if(sighttracepassed(var_bbf94a49, eye, 0, undefined)) {
             self stealth_vo::function_e3ae87b3(warnmsg);
@@ -417,7 +417,7 @@ function function_509ca7a6(enemy) {
     str_shader = "white_stealth_spotting";
     color = (1, 1, 1);
     if(isDefined(enemy.stealth.status.icon_ent) && isDefined(enemy.stealth.status.icons[index])) {
-      enemy.stealth.status.icons[index] settargetent(enemy.stealth.status.icon_ent);
+      enemy.stealth.status.icons[index] settargetEnt(enemy.stealth.status.icon_ent);
       enemy.stealth.status.icons[index] setshader(str_shader, 5, 5);
       enemy.stealth.status.icons[index] setwaypoint(0, str_shader, 0, 0);
       enemy.stealth.status.icons[index].color = color;

@@ -135,7 +135,7 @@ attackmiss() {
 
   if(isDefined(self.enemy)) {
     var_1 = anglesToForward((0, self.desiredangle, 0));
-    var_2 = vectornormalize(self.enemy.origin - self.origin);
+    var_2 = vectorNormalize(self.enemy.origin - self.origin);
     var_3 = self.enemy.origin - (self.origin + var_1 * 40);
 
     if(vectordot(var_2, var_1) > 0.707 || vectordot(var_3, var_1) > 0) {
@@ -1008,7 +1008,7 @@ meleestrugglevsdog() {
   self clearanim(var_0[0], 0.1);
   self setflaggedanimrestart("aianim", var_0[1], 1, 0.1, 1);
   wait 0.15;
-  self.syncedmeleetarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedmeleetarget linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   self waittillmatch("aianim", "end");
   self.meleeseq = 1;
 
@@ -1188,7 +1188,7 @@ playerview_startsequence(var_0) {
   thread playerview_knockdownanim(var_0);
   self dontinterpolate();
   var_1 playerlinktoabsolute(self, "tag_player");
-  var_0 linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   var_5 = self gettagangles("tag_sync");
   var_0 orientmode("face angle", var_5[1]);
   var_0 orientmode("face default");
@@ -1249,7 +1249,7 @@ playerview_endsequence(var_0) {
 playerview_unlinkplayeranddelete(var_0) {
   var_0 show();
   var_0 unlink();
-  var_0 setorigin(self.origin);
+  var_0 setOrigin(self.origin);
   var_0 setplayerangles(self.startangles);
   var_0 setCanDamage(1);
   var_1 = var_0.player_view;

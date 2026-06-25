@@ -144,8 +144,8 @@ func_4304() {
 func_669D(param_00, param_01, param_02) {
   if(isDefined(level.var_78AC) && level.var_78AC.size) {}
 
-  var_03 = getent(param_02, "targetname");
-  var_04 = vectornormalize(anglesToForward(var_03.var_001D)) * 40;
+  var_03 = getEnt(param_02, "targetname");
+  var_04 = vectorNormalize(anglesToForward(var_03.var_001D)) * 40;
   level.var_78AC[param_00] = [];
   level.var_78AD[param_00]["view_start"] = param_01;
   level.var_78AD[param_00]["view_pos"] = var_03.var_0116 + var_04;
@@ -154,7 +154,7 @@ func_669D(param_00, param_01, param_02) {
 }
 
 func_669C(param_00, param_01, param_02, param_03) {
-  var_04 = getent(param_02, "targetname");
+  var_04 = getEnt(param_02, "targetname");
   var_05 = func_463D(param_00, var_04);
   var_06 = spawnStruct();
   var_06.var_7584 = var_04.var_0116;
@@ -327,12 +327,12 @@ func_ACC8(param_00, param_01) {
 func_463D(param_00, param_01) {
   var_02 = level.var_78AD[param_00]["view_angles"];
   var_03 = level.var_78AD[param_00]["view_pos"];
-  var_03 = var_03 + vectornormalize(anglesToForward(var_02)) * 40;
+  var_03 = var_03 + vectorNormalize(anglesToForward(var_02)) * 40;
   var_04 = anglesToForward(var_02);
-  var_05 = vectornormalize(anglestoup(var_02));
+  var_05 = vectorNormalize(anglestoup(var_02));
   var_06 = param_01.var_001D;
   var_07 = param_01.var_0116;
-  var_08 = vectornormalize(vectorfromlinetopoint(var_03, var_03 + var_04, var_07));
+  var_08 = vectorNormalize(vectorfromlinetopoint(var_03, var_03 + var_04, var_07));
   var_09 = acos(vectordot(var_08, var_05));
   if(vectordot(anglestoright(var_02), var_08) < 0) {
     var_09 = 360 - var_09;
@@ -344,7 +344,7 @@ func_463D(param_00, param_01) {
 func_78A9(param_00, param_01) {
   var_02 = (270 - param_00, 0, 0);
   var_03 = anglesToForward(var_02);
-  var_04 = vectornormalize(var_03);
+  var_04 = vectorNormalize(var_03);
   var_05 = var_04 * param_01;
   return var_05;
 }
@@ -409,10 +409,10 @@ func_A4AB() {
 
 func_1D19(param_00) {
   level.var_A4AC[param_00] = [];
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   level.var_A4AC[param_00][level.var_A4AC[param_00].size] = var_01;
   while(isDefined(var_01) && isDefined(var_01.var_01A2)) {
-    var_02 = getent(var_01.var_01A2, "targetname");
+    var_02 = getEnt(var_01.var_01A2, "targetname");
     level.var_A4AC[param_00][level.var_A4AC[param_00].size] = var_02;
     var_01 = var_02;
   }
@@ -423,8 +423,8 @@ func_47F2(param_00) {
     var_01 = level.var_A4AC[param_00][0];
     level.var_34D5 = spawn("script_model", var_01.var_0116);
     level.var_34D5.var_001D = var_01.var_001D;
-    self setorigin(level.var_34D5.var_0116 - (0, 0, 65));
-    self linkto(level.var_34D5);
+    self setOrigin(level.var_34D5.var_0116 - (0, 0, 65));
+    self linkTo(level.var_34D5);
     wait 0.05;
     self setangles(level.var_34D5.var_001D);
     thread func_3DF9();
@@ -447,8 +447,8 @@ func_47F2(param_00) {
       }
     }
 
-    level.var_34D5 moveto(var_06.var_0116, var_02, var_02 * 0.5, 0);
-    level.var_34D5 rotateto(var_06.var_001D, var_02, var_02 * 0.5, 0);
+    level.var_34D5 moveTo(var_06.var_0116, var_02, var_02 * 0.5, 0);
+    level.var_34D5 rotateTo(var_06.var_001D, var_02, var_02 * 0.5, 0);
     wait(var_02);
   }
 }
@@ -467,8 +467,8 @@ func_47F3(param_00, param_01) {
   if(!1) {
     for(var_05 = level.var_A4AC[param_00].size - 1; var_05 >= 0; var_05--) {
       var_06 = level.var_A4AC[param_00][var_05];
-      level.var_34D5 moveto(var_06.var_0116, var_02);
-      level.var_34D5 rotateto(var_06.var_001D, var_02);
+      level.var_34D5 moveTo(var_06.var_0116, var_02);
+      level.var_34D5 rotateTo(var_06.var_001D, var_02);
       wait(var_02);
     }
   }
@@ -476,8 +476,8 @@ func_47F3(param_00, param_01) {
   thread func_1883(3, var_02);
   var_07 = level.var_78AD[param_01]["player_view_pos"];
   var_08 = level.var_78AD[param_01]["view_angles"];
-  level.var_34D5 moveto(var_07, var_02, var_02 * 0.5, 0);
-  level.var_34D5 rotateto(var_08, var_02, var_02 * 0.5, 0);
+  level.var_34D5 moveTo(var_07, var_02, var_02 * 0.5, 0);
+  level.var_34D5 rotateTo(var_08, var_02, var_02 * 0.5, 0);
   wait(var_02);
 }
 

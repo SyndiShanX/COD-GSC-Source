@@ -86,7 +86,7 @@ moving_cover() {
 }
 
 white_hide() {
-  var_0 = getent("face_explosion", "targetname");
+  var_0 = getEnt("face_explosion", "targetname");
   level.player maps\_hud_util::fade_out(0.01, "white");
   wait 0.15;
   level.player maps\_hud_util::fade_in(0.15, "white");
@@ -96,10 +96,10 @@ moving_cover_main() {
   common_scripts\utility::waitframe();
   thread maps\loki_audio::sfx_moving_cover_2();
   level.friendlyfiredisabled = 1;
-  var_0 = common_scripts\utility::getstruct("moving_cover_ally_0", "targetname");
-  var_1 = common_scripts\utility::getstruct("moving_cover_ally_1", "targetname");
-  level.allies[0] stopanimscripted();
-  level.allies[1] stopanimscripted();
+  var_0 = common_scripts\utility::getStruct("moving_cover_ally_0", "targetname");
+  var_1 = common_scripts\utility::getStruct("moving_cover_ally_1", "targetname");
+  level.allies[0] stopanimScripted();
+  level.allies[1] stopanimScripted();
   level.allies[0] forceteleport(var_0.origin, var_0.angles);
   level.allies[1] forceteleport(var_1.origin, var_1.angles);
   level.allies[0] setgoalpos(var_0.origin);
@@ -127,7 +127,7 @@ moving_cover_main() {
   }
 
   var_6 = 12.5;
-  var_7 = getent("explosion_node2", "targetname");
+  var_7 = getEnt("explosion_node2", "targetname");
   var_8 = maps\_utility::spawn_anim_model("player_rig");
   level.player playerlinktodelta(var_8, "tag_player", 1, 0, 0, 0, 0, 1);
   level thread manage_control(var_8);
@@ -169,7 +169,7 @@ moving_cover_opfor_death_tracker() {
   }
 
   self startragdollfromimpact("torso_lower", (3500, 0, 0));
-  self stopanimscripted();
+  self stopanimScripted();
   maps\loki_util::jkuprint("DEAD!!!");
   self notify("faux_death");
 }
@@ -183,7 +183,7 @@ moving_cover_death(var_0) {
 
   if(isDefined(var_0) && var_0) {
     if(isDefined(self)) {
-      self stopanimscripted();
+      self stopanimScripted();
     }
 
     if(isDefined(self)) {
@@ -205,7 +205,7 @@ take_control(var_0) {
   level thread animate_combat_two_intro_debris();
   level thread delete_moving_cover_objects();
   level thread hit_panel(var_0, 0.5, 0.5, 1, 0.0);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   level.moving_cover_opfor moving_cover_death(1);
   common_scripts\utility::flag_clear("no_steam_on_death");
   level thread maps\loki_combat_two::combat_two_intro_vignette(0.5);
@@ -214,13 +214,13 @@ take_control(var_0) {
 }
 
 animate_combat_two_intro_debris() {
-  var_0 = getent("combat_two_intro_debris_move_main", "script_noteworthy");
+  var_0 = getEnt("combat_two_intro_debris_move_main", "script_noteworthy");
   var_0.animname = "combat_two_intro_debris";
   var_0 maps\_utility::assign_animtree();
   var_1 = getEntArray("combat_two_intro_debris_move", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(var_0);
+    var_3 linkTo(var_0);
   }
 
   level.moving_cover_start_node maps\_anim::anim_single_solo(var_0, "combat_two_intro_debris_move");
@@ -247,7 +247,7 @@ firstframe_moving_cover(var_0) {
     var_0 = 0;
   }
 
-  level.moving_cover_start_node = getent("moving_cover_vignette", "targetname");
+  level.moving_cover_start_node = getEnt("moving_cover_vignette", "targetname");
   level.moving_cover_obj1 = maps\_utility::spawn_anim_model("moving_cover_obj1");
   level.moving_cover_obj1 maps\loki_util::spawn_and_link_models_to_tags("combat_one_cleanup", undefined, var_0);
   level.moving_cover_opfor = maps\loki_util::spawn_space_ai_from_targetname("enemy_moving_cover_final_new");
@@ -392,7 +392,7 @@ start_moving_cover(var_0, var_1, var_2) {
   var_3 = getEntArray("explosion_debris_col", "targetname");
 
   foreach(var_5 in var_3) {
-    var_5 linkto(var_5 common_scripts\utility::get_target_ent());
+    var_5 linkTo(var_5 common_scripts\utility::get_target_ent());
   }
 
   var_7 = var_1;
@@ -401,7 +401,7 @@ start_moving_cover(var_0, var_1, var_2) {
     var_9 = getEntArray(var_0 + var_8, "script_noteworthy");
 
     foreach(var_11 in var_9) {
-      var_11 moveto(var_11 common_scripts\utility::getstruct(var_11.target, "targetname").origin, var_2, 0, 0);
+      var_11 moveTo(var_11 common_scripts\utility::getStruct(var_11.target, "targetname").origin, var_2, 0, 0);
       var_11 rotatevelocity((randomfloatrange(-55, 55), randomfloatrange(-55, 55), randomfloatrange(-55, 55)), 999);
     }
   }
@@ -414,13 +414,13 @@ start_moving_cover3(var_0, var_1, var_2) {
     var_5 = getEntArray(var_0 + var_4, "script_noteworthy");
 
     foreach(var_7 in var_5) {
-      var_8 = getent(var_7.script_linkto, "targetname");
-      var_7 linkto(var_8);
+      var_8 = getEnt(var_7.script_linkto, "targetname");
+      var_7 linkTo(var_8);
     }
 
     foreach(var_7 in var_5) {
-      var_8 = getent(var_7.script_linkto, "targetname");
-      var_8 moveto(var_8 common_scripts\utility::getstruct(var_8.target, "targetname").origin, var_2);
+      var_8 = getEnt(var_7.script_linkto, "targetname");
+      var_8 moveTo(var_8 common_scripts\utility::getStruct(var_8.target, "targetname").origin, var_2);
       var_8 rotatevelocity((randomfloatrange(-5, 5), 0, randomfloatrange(-5, 5)), 999);
     }
   }
@@ -498,7 +498,7 @@ movement_input_think(var_0, var_1) {
 
         if(distance2d(var_10, var_1.origin) <= 360) {
           var_0.origin = var_10;
-          var_0 linkto(var_1, "tag_player");
+          var_0 linkTo(var_1, "tag_player");
         } else
           iprintln("max distance reached");
 
@@ -519,7 +519,7 @@ movement_input_think(var_0, var_1) {
 
         if(distance2d(var_10, var_1.origin) <= 360) {
           var_0.origin = var_10;
-          var_0 linkto(var_1, "tag_player");
+          var_0 linkTo(var_1, "tag_player");
         }
 
         common_scripts\utility::waitframe();
@@ -538,7 +538,7 @@ moving_cover_cleanup() {
 }
 
 lastframe_moving_cover() {
-  var_0 = getent("moving_cover_vignette", "targetname");
+  var_0 = getEnt("moving_cover_vignette", "targetname");
   var_1 = maps\_utility::spawn_anim_model("moving_cover_obj1");
   var_0 thread maps\_anim::anim_last_frame_solo(var_1, "explosion_part2");
   var_1 maps\loki_util::spawn_and_link_models_to_tags("combat_one_cleanup");
@@ -577,5 +577,5 @@ hit_panel(var_0, var_1, var_2, var_3, var_4) {
 }
 
 hit_panel_rumble(var_0) {
-  var_0 playrumbleonentity("light_1s");
+  var_0 playRumbleOnEntity("light_1s");
 }

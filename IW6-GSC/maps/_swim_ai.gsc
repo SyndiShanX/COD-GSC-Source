@@ -541,8 +541,8 @@ jumpintowater(var_0) {
   var_5.origin = var_3;
   var_6 = common_scripts\utility::spawn_tag_origin();
   self forceteleport(var_3, self.angles);
-  self linkto(var_5);
-  var_6 linkto(self, "tag_origin", (0, 0, 0), (90, 0, 0));
+  self linkTo(var_5);
+  var_6 linkTo(self, "tag_origin", (0, 0, 0), (90, 0, 0));
   self hide();
   var_5 thread maps\_anim::anim_generic_first_frame(self, "swimming_heli_deploy_end", "tag_origin");
   maps\_utility::script_delay();

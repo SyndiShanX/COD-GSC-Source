@@ -126,7 +126,7 @@ mutatorteleport_handleteleport() {
       if(var_7 > var_3) {
         continue;
       }
-      var_8 = vectornormalize(var_6.origin - self.origin);
+      var_8 = vectorNormalize(var_6.origin - self.origin);
       var_9 = vectordot(var_8, var_0);
 
       if(var_9 < 0) {
@@ -162,7 +162,7 @@ mutatorteleport_handleteleport() {
 
       thread play_zombie_teleport_sound();
       var_15 = self getvelocity();
-      self setorigin(var_11.origin, 1);
+      self setOrigin(var_11.origin, 1);
       self setplayerangles(var_14);
       self setvelocity(anglesToForward(var_14) * length(var_15));
       self scragenttrimpath(var_11);

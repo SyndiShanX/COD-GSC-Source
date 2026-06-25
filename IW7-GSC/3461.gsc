@@ -125,7 +125,7 @@ setairdropcratecollision(var_0) {
   if(!isDefined(var_1) || var_1.size == 0) {
     return;
   }
-  level.airdropcratecollision = getent(var_1[0].target, "targetname");
+  level.airdropcratecollision = getEnt(var_1[0].target, "targetname");
 
   foreach(var_3 in var_1) {
     var_3 deletecrateold();
@@ -334,7 +334,7 @@ initairdropcrate() {
   self hide();
 
   if(isDefined(self.target)) {
-    self.collision = getent(self.target, "targetname");
+    self.collision = getEnt(self.target, "targetname");
     self.collision notsolid();
   } else {
     self.collision = undefined;
@@ -343,7 +343,7 @@ initairdropcrate() {
 
 deleteonownerdeath(var_0) {
   wait 0.25;
-  self linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0 waittill("death");
   self delete();
 }
@@ -572,7 +572,7 @@ createairdropcrate(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6.inuse = 0;
   var_6.killcament = spawn("script_model", var_6.origin + (0, 0, 300), 0, 1);
   var_6.killcament setscriptmoverkillcam("explosive");
-  var_6.killcament linkto(var_6);
+  var_6.killcament linkTo(var_6);
   level.numdropcrates++;
   var_6 thread dropcrateexistence(var_4);
   level notify("createAirDropCrate", var_6);
@@ -591,8 +591,8 @@ dropcrateexistence(var_0) {
 }
 
 cratesetupforuse(var_0, var_1, var_2, var_3) {
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(var_0);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(var_0);
   self func_84A7("none");
   self makeusable();
 
@@ -673,12 +673,12 @@ fakererollcratesetupforuse(var_0, var_1) {
   var_8.userate = 3000;
   var_8.inuse = 0;
   var_8.id = self.id;
-  var_8 linkto(self);
+  var_8 linkTo(self);
   var_8 makeusable();
   var_8 disableplayeruse(var_0);
-  var_8 setcursorhint("HINT_NOICON");
+  var_8 setCursorHint("HINT_NOICON");
   var_8 func_84A9("show");
-  var_8 sethintstring(var_2);
+  var_8 setHintString(var_2);
   var_8 func_84A6(var_4);
   var_8 setusefov(var_6);
   var_8 func_84A4(var_3);
@@ -704,10 +704,10 @@ watchcratereroll(var_0) {
     var_3 = game["strings"][self.cratetype + "_hint"];
   }
 
-  self sethintstring(var_3);
+  self setHintString(var_3);
 
   if(isDefined(self.fakeuseobj)) {
-    self.fakeuseobj sethintstring(var_3);
+    self.fakeuseobj setHintString(var_3);
   }
 
   var_4 = scripts\mp\utility\game::getkillstreakoverheadicon(self.cratetype);
@@ -940,14 +940,14 @@ dropthecrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
     case "airdrop_juggernaut_maniac":
     case "airdrop_juggernaut_recon":
     case "airdrop_juggernaut":
-      var_9 linkto(self, "tag_ground", (64, 32, -128), (0, 0, 0));
+      var_9 linkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
       break;
     case "airdrop_osprey_gunner":
     case "airdrop_escort":
-      var_9 linkto(self, var_8, (0, 0, 0), (0, 0, 0));
+      var_9 linkTo(self, var_8, (0, 0, 0), (0, 0, 0));
       break;
     default:
-      var_9 linkto(self, "tag_ground", (32, 0, 5), (0, 0, 0));
+      var_9 linkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
       break;
   }
 
@@ -1066,7 +1066,7 @@ waitfordropcratemsg(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_8 = bulletTrace(var_0.origin, var_0.origin + (0, 0, -10000), 0, var_0);
     var_9 = distance(var_0.origin, var_8["position"]);
     var_10 = var_9 / 800;
-    var_0.killcament moveto(var_8["position"] + (0, 0, 300) + (var_7, 0, 0), var_10);
+    var_0.killcament moveTo(var_8["position"] + (0, 0, 300) + (var_7, 0, 0), var_10);
   }
 }
 
@@ -1171,7 +1171,7 @@ getpathend(var_0, var_1) {
 
 getflyheightoffset(var_0) {
   var_1 = 850;
-  var_2 = getent("airstrikeheight", "targetname");
+  var_2 = getEnt("airstrikeheight", "targetname");
 
   if(!isDefined(var_2)) {
     if(isDefined(level.airstrikeheightscale)) {
@@ -1304,7 +1304,7 @@ func_5CC7(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 scripts\mp\killstreaks\utility::func_1843(var_9.helitype, "Killstreak_Air", var_0, 1);
   var_10 = getcratetypefordroptype(var_3);
   var_11 = var_9 createairdropcrate(var_0, var_3, var_10, var_9.origin);
-  var_11 linkto(var_9, "tag_origin", (0, 0, 5), (0, 0, 0));
+  var_11 linkTo(var_9, "tag_origin", (0, 0, 5), (0, 0, 0));
   var_11.streakinfo = var_5;
   var_9.var_5D26 = var_11;
   var_9 thread watchtimeout(60);
@@ -1605,12 +1605,12 @@ func_BA1C(var_0, var_1) {
   self endon("death");
   self endon("stop_MonitorSpeed");
   var_2 = "none";
-  var_3 = vectornormalize(var_1 - var_0);
+  var_3 = vectorNormalize(var_1 - var_0);
   var_4 = distance(var_0, var_1);
 
   for(;;) {
     var_5 = distance(self.origin, var_0);
-    var_6 = vectornormalize(var_0 - self.origin);
+    var_6 = vectorNormalize(var_0 - self.origin);
     var_7 = vectordot(var_3, var_6);
     var_8 = 0;
 
@@ -1719,7 +1719,7 @@ doc130flyby(var_0, var_1, var_2, var_3) {
   var_13 playLoopSound("veh_ac130_dist_loop");
   var_13.angles = var_7;
   var_14 = anglesToForward(var_7);
-  var_13 moveto(var_10, var_12, 0, 0);
+  var_13 moveTo(var_10, var_12, 0, 0);
   var_15 = distance2d(var_13.origin, var_1);
   var_16 = 0;
 
@@ -1751,7 +1751,7 @@ doc130flyby(var_0, var_1, var_2, var_3) {
   wait 0.05;
   var_13 notify("drop_crate");
   var_20 = var_1 + anglesToForward(var_7) * (var_4 * 1.5);
-  var_13 moveto(var_20, var_12 / 2, 0, 0);
+  var_13 moveTo(var_20, var_12 / 2, 0, 0);
   wait 6;
   var_13 delete();
 }
@@ -1780,7 +1780,7 @@ domegac130flyby(var_0, var_1, var_2, var_3, var_4) {
   var_15 playLoopSound("veh_ac130_dist_loop");
   var_15.angles = var_8;
   var_9 = anglesToForward(var_8);
-  var_15 moveto(var_12, var_14, 0, 0);
+  var_15 moveTo(var_12, var_14, 0, 0);
   var_16 = distance2d(var_15.origin, var_1);
   var_17 = 0;
 
@@ -1844,7 +1844,7 @@ dropnuke(var_0, var_1, var_2) {
   var_12 playLoopSound("veh_ac130_dist_loop");
   var_12.angles = var_6;
   var_13 = anglesToForward(var_6);
-  var_12 moveto(var_9, var_11, 0, 0);
+  var_12 moveTo(var_9, var_11, 0, 0);
   var_14 = 0;
   var_15 = distance2d(var_12.origin, var_0);
 
@@ -1890,7 +1890,7 @@ playlooponent(var_0) {
   thread scripts\engine\utility::delete_on_death(var_1);
   var_1.origin = self.origin;
   var_1.angles = self.angles;
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 playLoopSound(var_0);
   self waittill("stop sound" + var_0);
   var_1 stoploopsound(var_0);
@@ -2293,7 +2293,7 @@ killstreakbombcratethink(var_0) {
 
   if(isDefined(self.killcament)) {
     self.killcament unlink();
-    self.killcament moveto(self.origin + (0, 0, 30), 0.05);
+    self.killcament moveTo(self.origin + (0, 0, 30), 0.05);
   }
 
   self waittill("captured", var_4);
@@ -2310,7 +2310,7 @@ killstreakbombcratethink(var_0) {
     var_5.weapon_name = "dummy_spike_mp";
   }
 
-  var_5 linkto(self);
+  var_5 linkTo(self);
   var_6 = 0.1;
   var_7 = 0;
 
@@ -2602,7 +2602,7 @@ createuseent() {
   var_0.userate = 3000;
   var_0.inuse = 0;
   var_0.id = self.id;
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 thread deleteuseent(self);
   return var_0;
 }

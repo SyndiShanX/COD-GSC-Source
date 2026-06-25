@@ -148,7 +148,7 @@ playscrapeforframes(client_num, effect, tag, frames) {
     wait 0.01;
 
     if(isDefined(self) && distancesquared(self.origin, prevorigin) > 1) {
-      forward = vectornormalize(self.origin - prevorigin);
+      forward = vectorNormalize(self.origin - prevorigin);
       forward = vectorscale(forward, -1);
       prevorigin = self.origin;
     }

@@ -249,7 +249,7 @@ soundlinethink() {
   if(!isDefined(self.target)) {
     return;
   }
-  target = getstruct(self.target, "targetname");
+  target = getStruct(self.target, "targetname");
 
   if(!isDefined(target)) {
     return;
@@ -1006,7 +1006,7 @@ play_water_loop(loop, splash, maxspeed) {
   self endon("entityshutdown");
   self endon("exit_vehicle");
   newsoundent = spawn(0, self.origin, "script_origin");
-  newsoundent linkto(self, "tag_origin", (0, 100, 100));
+  newsoundent linkTo(self, "tag_origin", (0, 100, 100));
   level.watersoundent[level.watersoundent.size] = newsoundent;
   volume = 0.0;
   id = newsoundent playLoopSound(loop);

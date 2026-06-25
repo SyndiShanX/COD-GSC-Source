@@ -224,7 +224,7 @@ get_alive_players(players) {
 
 function_108c4b65() {
   if(platoons::function_382a49e0()) {
-    teammates = getplayers(self.team);
+    teammates = getPlayers(self.team);
     var_2927adba = get_alive_players(teammates);
 
     if(var_2927adba.size) {

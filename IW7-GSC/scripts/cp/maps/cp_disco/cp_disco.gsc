@@ -357,8 +357,8 @@ setup_pap_token() {
   scripts\engine\utility::flag_init("disable_portals");
   scripts\engine\utility::flag_init("pap_portal_used");
   scripts\engine\utility::flag_init("fuses_inserted");
-  var_0 = getent("take_peepshow_token", "targetname");
-  var_1 = getent("peepshow_token", "targetname");
+  var_0 = getEnt("take_peepshow_token", "targetname");
+  var_1 = getEnt("peepshow_token", "targetname");
   var_1 setModel("tag_origin_crafting");
   var_1 setscriptablepartstate("coin", "on");
   var_1.origin = var_1.origin + (-3, 0, 0);
@@ -383,7 +383,7 @@ take_peepshow_token(var_0, var_1) {
   var_0 playlocalsound("pap_quest_coin_pickup");
   playFX(level._effect["crafting_pickup"], var_1.origin);
   level.peepshow_token_found = 1;
-  var_2 = scripts\engine\utility::getstruct("enter_stall", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct("enter_stall", "script_noteworthy");
   var_2.script_noteworthy = "enter_stall_allowed";
   var_0 thread scripts\cp\cp_vo::try_to_play_vo("pap_quest_collect_coin", "disco_comment_vo", "low", 10, 0, 2, 0, 40);
   var_1 delete();
@@ -806,7 +806,7 @@ watchforplayerzonechange(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   scripts\engine\utility::flag_wait("init_interaction_done");
-  var_1 = getent("zone_change", "targetname");
+  var_1 = getEnt("zone_change", "targetname");
   if(isDefined(var_1)) {
     for(;;) {
       if(var_0 istouching(var_1)) {
@@ -927,7 +927,7 @@ movepentstostructs(var_0) {
     foreach(var_6 in var_4) {
       var_7 = undefined;
       if(isDefined(var_6.target)) {
-        var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+        var_7 = scripts\engine\utility::getStruct(var_6.target, "targetname");
       }
 
       var_8 = 0;
@@ -986,7 +986,7 @@ movepentstostructs(var_0) {
         var_9.used = 1;
         var_9 dontinterpolate();
         if(isDefined(var_6.target)) {
-          var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
+          var_7 = scripts\engine\utility::getStruct(var_6.target, "targetname");
           var_9.origin = var_7.origin;
           if(isDefined(var_7.angles)) {
             var_9.angles = var_7.angles;
@@ -1058,7 +1058,7 @@ resetents(var_0, var_1) {
       }
 
       if(isDefined(var_7.target)) {
-        var_8 = scripts\engine\utility::getstruct(var_7.target, "targetname");
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
         if(var_4.origin == var_8.origin) {
           var_5 = 1;
           break;
@@ -1143,7 +1143,7 @@ hasplayerentattached(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       if(var_3.origin == var_4.origin) {
         var_3.used = 1;
         return 1;
@@ -1207,7 +1207,7 @@ getattachedpersonalent(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_5 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_1.target, "targetname");
       if(var_4.origin == var_5.origin) {
         return var_4;
       }
@@ -1234,7 +1234,7 @@ getunclaimedpersonalent(var_0, var_1) {
       }
 
       if(isDefined(var_7.target)) {
-        var_8 = scripts\engine\utility::getstruct(var_7.target, "targetname");
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
         if(var_4.origin == var_8.origin) {
           var_5 = 1;
           break;
@@ -1257,7 +1257,7 @@ getunclaimedpersonalent(var_0, var_1) {
 
 run_pap_machine_logic(var_0) {
   wait(3);
-  var_1 = getent("pap_machine", "targetname");
+  var_1 = getEnt("pap_machine", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   if(scripts\engine\utility::istrue(level.placed_alien_fuses)) {
@@ -1581,7 +1581,7 @@ enter_pap_stall(var_0, var_1) {
     }
 
     if(isDefined(var_4.model) && var_4.model == "p7_door_wood_global_01_deco") {
-      var_4 rotateyaw(150, 0.5);
+      var_4 rotateYaw(150, 0.5);
       var_4 playSound("pap_quest_wooden_door");
     }
   }
@@ -1607,7 +1607,7 @@ enter_peepshow(var_0, var_1) {
         continue;
       }
 
-      var_8 rotateto(var_8.script_angles, 0.75);
+      var_8 rotateTo(var_8.script_angles, 0.75);
       var_8 playSound("pap_quest_peep_show_door");
     }
   }
@@ -1634,7 +1634,7 @@ take_peepshow_flyer(var_0, var_1) {
 init_peepshow_flyer() {
   var_0 = scripts\engine\utility::getStructArray("peepshow_flyer", "script_noteworthy");
   var_1 = scripts\engine\utility::random(var_0);
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_1.randomintrange = spawn("script_model", var_2.origin);
   if(isDefined(var_2.angles)) {
     var_1.randomintrange.angles = var_2.angles;
@@ -1653,14 +1653,14 @@ init_peepshow_flyer() {
 }
 
 init_projector() {
-  level.booth_projector = getent("booth_projector", "targetname");
-  level.booth_projector_struct = scripts\engine\utility::getstruct("add_reel", "script_noteworthy");
+  level.booth_projector = getEnt("booth_projector", "targetname");
+  level.booth_projector_struct = scripts\engine\utility::getStruct("add_reel", "script_noteworthy");
   scripts\cp\cp_interaction::remove_from_current_interaction_list(level.booth_projector_struct);
   level.interactions["add_reel"].disable_guided_interactions = 1;
   level.interactions["pickup_reel"].disable_guided_interactions = 1;
   var_0 = scripts\engine\utility::getStructArray("pickup_reel", "script_noteworthy");
   var_1 = scripts\engine\utility::random(var_0);
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_1.randomintrange = spawn("script_model", var_2.origin);
   var_1.randomintrange setModel("cp_disco_film_reel_case");
   if(isDefined(var_2.angles)) {
@@ -1675,19 +1675,19 @@ init_projector() {
     }
   }
 
-  level.pap_fusebox_switch = scripts\engine\utility::getstruct("pap_fuse_switch", "script_noteworthy");
-  level.pap_fuses_interaction = scripts\engine\utility::getstruct("pap_fusebox", "script_noteworthy");
+  level.pap_fusebox_switch = scripts\engine\utility::getStruct("pap_fuse_switch", "script_noteworthy");
+  level.pap_fuses_interaction = scripts\engine\utility::getStruct("pap_fusebox", "script_noteworthy");
   level.interactions["pap_fuse_switch"].disable_guided_interactions = 1;
   level.interactions["pap_fusebox"].disable_guided_interactions = 1;
 }
 
 use_pap_upgrade_switch(var_0, var_1) {
   level endon("fuses_pickedup");
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2 setModel("mp_frag_button_on_green");
   playsoundatpos(var_2.origin, "disco_pap_room_button_press");
-  var_3 = getent("pap_fusebox", "targetname");
-  var_3 rotateyaw(-110, 1);
+  var_3 = getEnt("pap_fusebox", "targetname");
+  var_3 rotateYaw(-110, 1);
   if(var_1 scripts\cp\utility::is_valid_player(1)) {
     playsoundatpos(var_3.origin, "disco_pap_fuse_box_open");
   }
@@ -1697,7 +1697,7 @@ use_pap_upgrade_switch(var_0, var_1) {
   wait(25);
   scripts\cp\cp_interaction::add_to_current_interaction_list(level.pap_fusebox_switch);
   level.pap_upgrade_fuses_available = undefined;
-  var_3 rotateyaw(110, 1);
+  var_3 rotateYaw(110, 1);
   if(var_1 scripts\cp\utility::is_valid_player(1)) {
     playsoundatpos(var_3.origin, "disco_pap_fuse_box_close");
   }
@@ -2324,7 +2324,7 @@ play_char_intro_music() {
 
 activate_pap(var_0) {
   var_1 = level._effect["vfx_pap_portal"];
-  var_2 = scripts\engine\utility::getstruct("portal_effect_location", "targetname");
+  var_2 = scripts\engine\utility::getStruct("portal_effect_location", "targetname");
   var_2.origin = var_2.origin + (0, -24, 0);
   var_2.angles = (0, 90, 0);
   var_3 = spawnStruct();
@@ -2337,7 +2337,7 @@ activate_pap(var_0) {
   var_3.custom_search_dist = 96;
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
   level thread turn_on_room_exit_portal();
-  var_4 = scripts\engine\utility::getstruct("projector_fx_struct", "targetname");
+  var_4 = scripts\engine\utility::getStruct("projector_fx_struct", "targetname");
   var_5 = spawnfx(level._effect["projector_light"], var_4.origin, anglesToForward(var_4.angles), anglestoup(var_4.angles));
   var_3.portal = spawn("script_model", var_2.origin);
   var_3.portal.angles = var_2.angles;
@@ -2382,7 +2382,7 @@ activate_pap(var_0) {
 }
 
 turn_on_room_exit_portal() {
-  var_0 = getent("hidden_room_portal", "targetname");
+  var_0 = getEnt("hidden_room_portal", "targetname");
   var_1 = anglesToForward(var_0.angles);
   var_2 = spawnfx(level._effect["vfx_pap_return_portal"], var_0.origin, var_1);
   thread scripts\engine\utility::play_loopsound_in_space("zmb_portal_powered_on_activate_lp", var_0.origin);
@@ -2392,7 +2392,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(var_0) {
   var_0 makeusable();
-  var_0 sethintstring(&"CP_DISCO_INTERACTIONS_LEAVE_PAP");
+  var_0 setHintString(&"CP_DISCO_INTERACTIONS_LEAVE_PAP");
   var_0.portal_is_open = 1;
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -2484,11 +2484,11 @@ teleport_to_hidden_room() {
   scripts\cp\utility::adddamagemodifier("papRoom", 0, 0);
   self.is_off_grid = 1;
   self.disable_consumables = undefined;
-  var_0 = scripts\engine\utility::getstruct("hidden_room_spot", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hidden_room_spot", "targetname");
   self unlink();
   self dontinterpolate();
   scripts\cp\powers\coop_powers::power_enablepower();
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   self setplayerangles(var_0.angles);
   self playershow();
   thread hidden_room_timer();
@@ -2570,7 +2570,7 @@ teleport_to_safe_spot(var_0) {
   var_0 playershow();
   var_0 unlink();
   var_0 dontinterpolate();
-  var_0 setorigin(var_2.origin);
+  var_0 setOrigin(var_2.origin);
   var_0 setplayerangles(var_2.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();
@@ -2608,8 +2608,8 @@ move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 endon("disconnect");
   var_0 endon("move_through_tube");
   var_0 earthquakeforplayer(0.3, 0.2, var_0.origin, 200);
-  var_4 = getent(var_1, "targetname");
-  var_5 = getent(var_2, "targetname");
+  var_4 = getEnt(var_1, "targetname");
+  var_5 = getEnt(var_2, "targetname");
   var_0 cancelmantle();
   var_0.no_outline = 1;
   var_0.no_team_outlines = 1;
@@ -2619,15 +2619,15 @@ move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 scripts\cp\utility::adddamagemodifier("fast_travel", 0, 0);
   var_0 scripts\cp\utility::allow_player_ignore_me(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_6);
+  var_0 setOrigin(var_6);
   var_0 setplayerangles(var_4.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_8 = spawn("script_origin", var_6);
-  var_0 playerlinkto(var_8);
+  var_0 playerlinkTo(var_8);
   var_0 getweaponrankxpmultiplier();
   wait(0.1);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
-  var_8 moveto(var_7, 1);
+  var_8 moveTo(var_7, 1);
   wait(1);
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
@@ -2671,20 +2671,20 @@ subway_trains() {
   var_2 setModel("cp_disco_subway_train_bsp2xmodel");
   var_5 = spawn("script_model", var_2.origin);
   scripts\engine\utility::waitframe();
-  var_1 linkto(var_0);
-  var_2 linkto(var_1);
+  var_1 linkTo(var_0);
+  var_2 linkTo(var_1);
   level waittill("disco_subway power_on");
-  var_3 linkto(var_0, "tag_origin", (0, 420, 100), (0, 0, 0));
-  var_4 linkto(var_1, "tag_origin", (-91, 0, 180), (0, 0, 0));
-  var_5 linkto(var_2, "tag_origin", (0, -420, 100), (0, 0, 0));
+  var_3 linkTo(var_0, "tag_origin", (0, 420, 100), (0, 0, 0));
+  var_4 linkTo(var_1, "tag_origin", (-91, 0, 180), (0, 0, 0));
+  var_5 linkTo(var_2, "tag_origin", (0, -420, 100), (0, 0, 0));
   var_6 = getEntArray("subway_power_gates_front", "targetname");
   var_7 = getEntArray("subway_power_gates_rear", "targetname");
   foreach(var_9 in var_6) {
     if(var_9.script_noteworthy == "left") {
-      var_9 rotateyaw(90, 1);
+      var_9 rotateYaw(90, 1);
       playsoundatpos(var_9.origin, "power_buy_subway_track_gate_open_left");
     } else {
-      var_9 rotateyaw(-90, 1);
+      var_9 rotateYaw(-90, 1);
     }
 
     wait(0.15);
@@ -2692,10 +2692,10 @@ subway_trains() {
 
   foreach(var_9 in var_7) {
     if(var_9.script_noteworthy == "left") {
-      var_9 rotateyaw(90, 1);
+      var_9 rotateYaw(90, 1);
       playsoundatpos(var_9.origin, "power_buy_subway_track_gate_open_right");
     } else {
-      var_9 rotateyaw(-90, 1);
+      var_9 rotateYaw(-90, 1);
     }
 
     wait(0.15);
@@ -2762,9 +2762,9 @@ subway_trains() {
     var_1 setscriptablepartstate("sparks", "off");
     var_2 setscriptablepartstate("sparks", "off");
     scripts\engine\utility::waitframe();
-    var_0 moveto(var_0.origin + (0, 0, -300), 0.1);
+    var_0 moveTo(var_0.origin + (0, 0, -300), 0.1);
     var_0 waittill("movedone");
-    var_0 moveto((-2794, -3203, -108), 0.1);
+    var_0 moveTo((-2794, -3203, -108), 0.1);
     var_0 waittill("movedone");
   }
 }
@@ -2907,7 +2907,7 @@ setup_pap_camos() {
 
 init_shock_subway_barriers() {
   level thread init_placed_fuse();
-  var_0 = getent("shock_barrier", "targetname");
+  var_0 = getEnt("shock_barrier", "targetname");
   var_1 = spawn("script_origin", (-2794.95, 2239.35, 187.998));
   var_2 = spawn("script_origin", (-2794.49, 3398.74, 187.998));
   level waittill("disco_subway power_on");
@@ -2921,7 +2921,7 @@ init_shock_subway_barriers() {
       var_4 = playfxontagforclients(level._effect["electric_shock_plyr"], var_3, "tag_eye", var_3);
       var_3.padding_damage = 1;
       var_3 dodamage(25, var_3.origin);
-      var_3 setvelocity(vectornormalize(var_0.origin - var_3.origin) * 500);
+      var_3 setvelocity(vectorNormalize(var_0.origin - var_3.origin) * 500);
       var_3 thread scripts\cp\maps\cp_disco\cp_disco_interactions::remove_padding_damage();
     }
   }
@@ -3084,7 +3084,7 @@ do_damage_cone_nunchucks(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_10 = var_6 - var_8 * 128;
   var_11 = 384;
   var_12 = var_2.origin - var_1.origin;
-  var_12 = vectornormalize((var_12[0], var_12[1], 0));
+  var_12 = vectorNormalize((var_12[0], var_12[1], 0));
   var_12 = var_12 * 2;
   if(issubstr(var_0, "pap1")) {
     thread scripts\engine\utility::play_sound_in_space("nunchucks_pap1_impact", var_6);
@@ -3304,9 +3304,9 @@ dual_katana_windforce(var_0) {
         var_14.customdeath = 1;
         playsoundatpos(var_14.origin, "perk_blue_bolts_sparks");
         var_15 = anglesToForward(self.angles);
-        var_10 = vectornormalize(var_15) * -100;
+        var_10 = vectorNormalize(var_15) * -100;
         if(isDefined(var_14.agent_type) && var_14.agent_type != "slasher" && var_14.agent_type != "superslasher") {
-          var_14 setvelocity(vectornormalize(var_14.origin - self.origin + var_10) * 800 + (200, 0, 200));
+          var_14 setvelocity(vectorNormalize(var_14.origin - self.origin + var_10) * 800 + (200, 0, 200));
         }
 
         wait(0.2);
@@ -3331,7 +3331,7 @@ katana_wind_attack_triggered(var_0, var_1, var_2, var_3) {
 
   var_4 = var_1.origin - var_3.origin;
   var_5 = anglesToForward(var_2.angles);
-  var_6 = vectornormalize(var_5) * -100;
+  var_6 = vectorNormalize(var_5) * -100;
   if(isDefined(var_2)) {
     var_1.do_immediate_ragdoll = 1;
     var_1.disable_armor = 1;
@@ -3416,13 +3416,13 @@ katana_recent_kills(var_0, var_1) {
 
 rat_king_lair_doors() {
   level waittill("activate_power");
-  getent("power_door_light_1", "targetname") setscriptablepartstate("light", "on");
+  getEnt("power_door_light_1", "targetname") setscriptablepartstate("light", "on");
   level waittill("activate_power");
-  getent("power_door_light_2", "targetname") setscriptablepartstate("light", "on");
+  getEnt("power_door_light_2", "targetname") setscriptablepartstate("light", "on");
   level waittill("activate_power");
-  getent("power_door_light_3", "targetname") setscriptablepartstate("light", "on");
+  getEnt("power_door_light_3", "targetname") setscriptablepartstate("light", "on");
   level waittill("activate_power");
-  getent("power_door_light_4", "targetname") setscriptablepartstate("light", "on");
+  getEnt("power_door_light_4", "targetname") setscriptablepartstate("light", "on");
   level notify("sewer_underground power_on");
 }
 
@@ -3493,19 +3493,19 @@ discointeractiontriggerproperties(var_0, var_1, var_2) {
       case "rk_relic_pos":
       case "disco_fever_interact":
       case "turnstile":
-        self.interaction_trigger usetriggerrequirelookat(0);
+        self.interaction_trigger useTriggerRequireLookAt(0);
         self.interaction_trigger setusefov(360);
         break;
 
       case "black_cat":
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(360);
         break;
 
       case "puzzle":
       case "peepshow_flyer":
         self.interaction_trigger.origin = var_1.origin + (0, 0, 10);
-        self.interaction_trigger usetriggerrequirelookat(1);
+        self.interaction_trigger useTriggerRequireLookAt(1);
         self.interaction_trigger setusefov(270);
         break;
     }
@@ -3894,19 +3894,19 @@ is_in_box(var_0, var_1, var_2, var_3, var_4) {
 
 kung_fu_interaction_func(var_0) {
   if(!scripts\engine\utility::istrue(var_0.kung_fu_mode)) {
-    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_lavalamp", "script_noteworthy"), var_0);
-    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_boombox", "script_noteworthy"), var_0);
-    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_turret", "script_noteworthy"), var_0);
-    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_robot", "script_noteworthy"), var_0);
-    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_zombgone", "script_noteworthy"), var_0);
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_lavalamp", "script_noteworthy"), var_0);
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_boombox", "script_noteworthy"), var_0);
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_turret", "script_noteworthy"), var_0);
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_robot", "script_noteworthy"), var_0);
+    scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_zombgone", "script_noteworthy"), var_0);
     return;
   }
 
-  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_lavalamp", "script_noteworthy"), var_0);
-  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_boombox", "script_noteworthy"), var_0);
-  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_turret", "script_noteworthy"), var_0);
-  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_robot", "script_noteworthy"), var_0);
-  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getstruct("craft_zombgone", "script_noteworthy"), var_0);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_lavalamp", "script_noteworthy"), var_0);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_boombox", "script_noteworthy"), var_0);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_turret", "script_noteworthy"), var_0);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_robot", "script_noteworthy"), var_0);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(scripts\engine\utility::getStruct("craft_zombgone", "script_noteworthy"), var_0);
 }
 
 init_punk_record() {

@@ -42,7 +42,7 @@ __main__() {}
 
 function_61418721(point, line_start, line_end) {
   var_13d62e0a = point - line_start;
-  var_1ad356b8 = vectornormalize(line_end - line_start);
+  var_1ad356b8 = vectorNormalize(line_end - line_start);
   var_f6451fc1 = vectordot(var_13d62e0a, var_1ad356b8);
   closest_point = line_start + var_1ad356b8 * var_f6451fc1;
   return closest_point;
@@ -86,7 +86,7 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
 
       if(isDefined(var_6f06d19d) && isDefined(var_ca144d1e)) {
         var_af2e4b51 = function_61418721(self.var_b20b0960.origin, var_6f06d19d, var_ca144d1e);
-        var_2b30dcba = vectornormalize(self.var_b20b0960.origin - var_af2e4b51);
+        var_2b30dcba = vectorNormalize(self.var_b20b0960.origin - var_af2e4b51);
         var_41aabd6d = number_b_(self.var_b20b0960.origin, (0, 0, 1), var_af2e4b51, var_2b30dcba);
 
         if(isDefined(var_41aabd6d)) {
@@ -99,12 +99,12 @@ function_dc61ccae(vnd_start, var_6f06d19d, var_ca144d1e) {
 
         var_3a080e11 = function_61418721(var_8e89eaf2, var_6f06d19d, var_ca144d1e);
         var_2eb8d479 = var_3a080e11 + (0, 0, 1);
-        forward = vectornormalize(var_bb4eaebf.origin - vnd_start.origin);
+        forward = vectorNormalize(var_bb4eaebf.origin - vnd_start.origin);
         right = vectorcross((0, 0, 1), forward);
         up = vectorcross(forward, right);
         angles = axistoangles(forward, up);
         var_c246e8d5 = coordtransformtranspose(var_3a080e11, var_8e89eaf2, angles);
-        var_e941deaa = vectornormalize(var_c246e8d5);
+        var_e941deaa = vectorNormalize(var_c246e8d5);
 
         line(var_8e89eaf2, var_8e89eaf2 + var_c246e8d5, (1, 0, 1));
         line(var_6f06d19d, var_ca144d1e, (1, 0.5, 0));
@@ -131,7 +131,7 @@ function_aeb6539c(origin, angles) {
   self.var_e75517b1 = 1;
   self.allowpain = 0;
   self forceteleport(origin, angles);
-  self linkto(self.var_b20b0960, "tag_origin", (0, 0, 0), angles * (-1, 0, 0));
+  self linkTo(self.var_b20b0960, "tag_origin", (0, 0, 0), angles * (-1, 0, 0));
 }
 
 function_dedfe444(entity) {
@@ -150,7 +150,7 @@ function_79554a79(entity) {
 
 function_4e6fe1be() {
   self endon(#"death");
-  self.var_b20b0960 = spawner::simple_spawn_single(getent("veh_fasttravel", "targetname"));
+  self.var_b20b0960 = spawner::simple_spawn_single(getEnt("veh_fasttravel", "targetname"));
 }
 
 function_fc646a7e(entity, asmstatename) {

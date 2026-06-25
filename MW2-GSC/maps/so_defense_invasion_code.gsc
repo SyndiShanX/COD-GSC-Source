@@ -15,7 +15,7 @@ while(1) {
   if(!isDefined(current.target)) {
     break;
   }
-  next = getent(current.target, "targetname");
+  next = getEnt(current.target, "targetname");
   if(!isDefined(next)) {
     break;
   }
@@ -170,7 +170,7 @@ btr80_fire_at_player(player) {
   burstsize = randomintrange(3, 5);
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
+    self setturrettargetEnt(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
@@ -187,7 +187,7 @@ btr80_miss_player(player) {
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
     offset = randomvector(15) + miss_vec + (0, 0, 64);
-    self setturrettargetent(player, offset);
+    self setturrettargetEnt(player, offset);
     self fireweapon();
     wait fireTime;
   }
@@ -290,7 +290,7 @@ btr80_new_target_think() {
     }
     vehicle notify("new_target");
 
-    vehicle setturrettargetent(targets[0]);
+    vehicle setturrettargetEnt(targets[0]);
 
     thread btr80_fire_at_targets(vehicle);
   }
@@ -1035,7 +1035,7 @@ dialog_fill_nates_stinger() {
 }
 level endon("special_op_terminated");
 
-level.stingers[stinger_id] = getent(stinger_id, "script_noteworthy");
+level.stingers[stinger_id] = getEnt(stinger_id, "script_noteworthy");
 stinger = level.stingers[stinger_id];
 
 assertex(isDefined(stinger), "stinger_keep_available() was unable to find a stinger of script_noteworthy " + stinger_id);
@@ -1043,7 +1043,7 @@ assertex(isDefined(stinger), "stinger_keep_available() was unable to find a stin
 stinger_origin = stinger.origin;
 stinger_angles = stinger.angles;
 
-garbage_dump = getstruct("stinger_garbage_dump", "script_noteworthy");
+garbage_dump = getStruct("stinger_garbage_dump", "script_noteworthy");
 stinger Delete();
 stinger = stinger_respawn(stinger_id, stinger_origin, stinger_angles);
 level.stingers[stinger_id] = stinger;
@@ -1132,7 +1132,7 @@ hellfire_spawn_uav(player, delay) {
     wait delay;
   }
 
-  hellfire_uav = getent("uav", "targetname");
+  hellfire_uav = getEnt("uav", "targetname");
   hellfire_uav.target = "so_uav_start";
   hellfire_uav = spawn_vehicle_from_targetname_and_drive("uav");
   hellfire_uav playLoopSound("uav_engine_loop");
@@ -1479,23 +1479,23 @@ hud_display_enemies_pulse_vehicle(hudelem_title, hudelem_count, enemy_total) {
   hudelem_title thread so_hud_pulse_default();
   hudelem_count thread so_hud_pulse_default();
 }
-diner_back_door = getent("diner_back_door", "targetname");
-diner_back_door rotateyaw(85, .3);
+diner_back_door = getEnt("diner_back_door", "targetname");
+diner_back_door rotateYaw(85, .3);
 diner_back_door playSound("diner_backdoor_slams_open");
 diner_back_door connectpaths();
 }
 
 door_nates_locker_open() {
-  nates_meat_locker_door = getent("nates_meat_locker_door", "targetname");
-  nates_meat_locker_door_model = getent(nates_meat_locker_door.target, "targetname");
-  nates_meat_locker_door_model LinkTo(nates_meat_locker_door);
-  nates_meat_locker_door rotateyaw(-82, .1, 0, 0);
+  nates_meat_locker_door = getEnt("nates_meat_locker_door", "targetname");
+  nates_meat_locker_door_model = getEnt(nates_meat_locker_door.target, "targetname");
+  nates_meat_locker_door_model linkTo(nates_meat_locker_door);
+  nates_meat_locker_door rotateYaw(-82, .1, 0, 0);
   nates_meat_locker_door connectpaths();
 }
 
 door_bt_locker_open() {
-  BT_locker_door = getent("BT_locker_door", "targetname");
-  BT_locker_door rotateyaw(-172, .1, 0, 0);
+  BT_locker_door = getEnt("BT_locker_door", "targetname");
+  BT_locker_door rotateYaw(-172, .1, 0, 0);
   BT_locker_door connectpaths();
 }
 convert_enemies = getEntArray("diner_enemy_defenders", "targetname");
@@ -1509,7 +1509,7 @@ for(i = 0; i < convert_enemies.size; i++) {
   convert_enemies[i].targetname = "burger_town_enemies";
 }
 convert_enemies = getEntArray("burger_town_enemies", "targetname");
-burger_town_include = getent("so_burger_town_enemy_include", "script_noteworthy");
+burger_town_include = getEnt("so_burger_town_enemy_include", "script_noteworthy");
 for(i = convert_enemies.size - 1; i >= 0; i--) {
   if(!(convert_enemies[i] istouching(burger_town_include))) {
     convert_enemies[i].targetname = "ignoreme";

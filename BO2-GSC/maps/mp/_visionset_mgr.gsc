@@ -56,7 +56,7 @@ vsmgr_activate(type, name, player, opt_param_1, opt_param_2) {
   if(isDefined(state.lerp_thread)) {
     state thread lerp_thread_wrapper(state.lerp_thread, opt_param_1, opt_param_2);
   } else {
-    players = getplayers();
+    players = getPlayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
       state vsmgr_set_state_active(players[player_index], 1);
@@ -81,7 +81,7 @@ vsmgr_deactivate(type, name, player) {
   }
 
   state notify("deactivate");
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     state vsmgr_set_state_inactive(players[player_index]);
@@ -109,7 +109,7 @@ vsmgr_set_state_inactive(player) {
 }
 
 vsmgr_timeout_lerp_thread(timeout, opt_param_2) {
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     self vsmgr_set_state_active(players[player_index], 1);
@@ -140,7 +140,7 @@ vsmgr_duration_lerp_thread(duration, max_duration) {
       break;
     }
 
-    players = getplayers();
+    players = getPlayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
       self vsmgr_set_state_active(players[player_index], lerp);

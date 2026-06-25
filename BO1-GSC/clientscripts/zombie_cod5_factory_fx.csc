@@ -176,7 +176,7 @@ perk_wire_fx(notify_wait, init_targetname, done_notify) {
 }
 perk_wire_fx_client(clientnum, init_targetname, done_notify) {
   println("perk_wire_fx_client for client #" + clientnum);
-  targ = getstruct(init_targetname, "targetname");
+  targ = getStruct(init_targetname, "targetname");
   if(!isDefined(targ)) {
     return;
   }
@@ -191,8 +191,8 @@ perk_wire_fx_client(clientnum, init_targetname, done_notify) {
   while(isDefined(targ)) {
     if(isDefined(targ.target)) {
       println("perk_wire_fx_client#" + clientnum + " next target: " + targ.target);
-      target = getstruct(targ.target, "targetname");
-      mover MoveTo(target.origin, 0.1);
+      target = getStruct(targ.target, "targetname");
+      mover moveTo(target.origin, 0.1);
       wait(0.1);
       targ = target;
     } else {
@@ -426,9 +426,9 @@ flytrap_lev_objects() {
   level waittill("ag1");
   i = 0;
   hover_spots = [];
-  hover_spots[i] = GetStruct("trap_ag_spot0", "targetname");
+  hover_spots[i] = getStruct("trap_ag_spot0", "targetname");
   while(isDefined(hover_spots[i].target)) {
-    hover_spots[i + 1] = GetStruct(hover_spots[i].target, "targetname");
+    hover_spots[i + 1] = getStruct(hover_spots[i].target, "targetname");
     i++;
   }
   players = getlocalplayers();
@@ -446,7 +446,7 @@ anti_grav_move(clientnum, spots, start_index) {
   self thread flytrap_audio_mover(sound_ent);
   playFXOnTag(clientnum, level._effect["powerup_on"], self, "tag_origin");
   playSound(0, "flytrap_spin", self.origin);
-  self MoveTo(spots[start_index].origin, 4);
+  self moveTo(spots[start_index].origin, 4);
   wait(4);
   stop_spinning = false;
   index = start_index;
@@ -466,11 +466,11 @@ anti_grav_move(clientnum, spots, start_index) {
       stop_spinning = true;
     }
     offset = offset + z_increment;
-    self MoveTo(spots[index].origin + (0, 0, offset), interval);
+    self moveTo(spots[index].origin + (0, 0, offset), interval);
     wait(interval);
   }
-  end_spot = GetStruct("trap_flyaway_spot", "targetname");
-  self MoveTo(end_spot.origin + (RandomFloatRange(-100, 100), 0, 0), 5);
+  end_spot = getStruct("trap_flyaway_spot", "targetname");
+  self moveTo(end_spot.origin + (RandomFloatRange(-100, 100), 0, 0), 5);
   playSound(0, "shoot_off", self.origin);
   wait(4.7);
   level notify("delete_sound_ent");

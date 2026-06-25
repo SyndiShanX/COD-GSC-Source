@@ -85,7 +85,7 @@ func_3DAD() {
 func_48A0() {
   var_0 = getEntArray("intelligence_item", "targetname");
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
-    var_0[var_1].randomintrange = getent(var_0[var_1].target, "targetname");
+    var_0[var_1].randomintrange = getEnt(var_0[var_1].target, "targetname");
     var_0[var_1].found = 0;
   }
 
@@ -123,8 +123,8 @@ func_26CA() {
 func_135F5() {
   self endon("end_trigger_thread");
   if(self.classname == "trigger_use") {
-    self sethintstring(&"SCRIPT_RORKEFILE_PICKUP");
-    self usetriggerrequirelookat(1);
+    self setHintString(&"SCRIPT_RORKEFILE_PICKUP");
+    self useTriggerRequireLookAt(1);
   }
 
   thread func_12F84();

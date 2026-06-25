@@ -129,7 +129,7 @@ func_21D9() {
   thread func_284C();
   var_04 = ["trig_call_out", "trig_kill_germans", "trig_lightset", "trig_pickup_elec_crawl", "trig_awaken_first_z", "trig_buckle_beam", "trig_see_corpse", "trig_see_corpse_2", "trig_see_massacre"];
   foreach(var_06 in var_04) {
-    var_07 = getent(var_06, "targetname");
+    var_07 = getEnt(var_06, "targetname");
     if(isDefined(var_07)) {
       var_07 common_scripts\utility::func_9D9F();
     }
@@ -149,7 +149,7 @@ func_21D8() {
 
   var_04 = ["trig_awaken_field_horde", "trig_entered_house", "trig_awaken_first_z_lure", "trig_reach_shovel", "trig_awaken_first_z_tree"];
   foreach(var_06 in var_04) {
-    var_07 = getent(var_06, "targetname");
+    var_07 = getEnt(var_06, "targetname");
     if(isDefined(var_07)) {
       var_07 common_scripts\utility::func_9D9F();
     }
@@ -219,7 +219,7 @@ quest_collectible_purchase_blitz_think() {
 }
 
 func_787D() {
-  var_00 = getent("first_door_lock", "targetname");
+  var_00 = getEnt("first_door_lock", "targetname");
   var_01 = lib_0557::func_782F(undefined, var_00);
   lib_0557::func_781D("Training Quest", var_01);
   var_02 = lib_053F::func_44A6("field_to_yard");
@@ -408,7 +408,7 @@ func_2845(param_00) {
 
 func_284F() {
   thread func_284E();
-  var_00 = getent("static_creek_shovel", "targetname");
+  var_00 = getEnt("static_creek_shovel", "targetname");
   var_01 = lib_0547::func_AAFA("trig_reach_shovel", "targetname");
   var_01 maps\mp\_utility::func_3E8E(1);
   var_02 = common_scripts\utility::func_46B5("shovel_lerp_struct", "targetname");
@@ -419,8 +419,8 @@ func_284F() {
     var_04 = var_02.var_001D * (1, 0, 0) + var_01.var_001D * (0, 1, 0);
     var_03.var_001D = var_04;
     var_01 playerlinktoblend(var_03, "tag_origin", 0.25);
-    var_03 moveto(var_02.var_0116, 0.25);
-    var_03 rotateto(var_02.var_001D, 0.25);
+    var_03 moveTo(var_02.var_0116, 0.25);
+    var_03 rotateTo(var_02.var_001D, 0.25);
     var_05 = var_00.var_0116 - var_01 getEye();
     var_01 setangles(vectortoangles(var_05));
     wait(0.25);
@@ -507,8 +507,8 @@ func_5C82(param_00, param_01) {
     var_04 = var_02.var_001D * (1, 0, 0) + param_00.var_001D * (0, 1, 0);
     var_03.var_001D = var_04;
     param_00 playerlinktoblend(var_03, "tag_origin", 0.15);
-    var_03 moveto(var_02.var_0116, 0.15);
-    var_03 rotateto(var_02.var_001D, 0.15);
+    var_03 moveTo(var_02.var_0116, 0.15);
+    var_03 rotateTo(var_02.var_001D, 0.15);
     wait(0.15);
   }
 
@@ -552,22 +552,22 @@ func_0A37() {
     var_05 = var_04 * 1.8 * level.var_A089;
     var_06 = sin(var_00) * 1 * level.var_A089;
     var_07 = sin(var_01) * 1.8 * level.var_A089;
-    level.var_953D rotateto((var_05, var_07, var_06), var_02, var_02 * 0.5, var_02 * 0.5);
+    level.var_953D rotateTo((var_05, var_07, var_06), var_02, var_02 * 0.5, var_02 * 0.5);
     wait 0.05;
   }
 }
 
 func_0A39() {
   level endon("flag_stop_aftermath_sway");
-  var_00 = getent("trig_see_corpse", "targetname");
+  var_00 = getEnt("trig_see_corpse", "targetname");
   var_00 common_scripts\utility::func_A71A(5, "trigger");
   level.var_A089 = 2;
   level.var_721C setscriptmotionblurparams(1.5, 0.75, 0.75);
-  var_00 = getent("trig_see_corpse_2", "targetname");
+  var_00 = getEnt("trig_see_corpse_2", "targetname");
   var_00 common_scripts\utility::func_A71A(5, "trigger");
   level.var_A089 = 1;
   level.var_721C setscriptmotionblurparams(1, 0.5, 0.5);
-  var_00 = getent("trig_reach_shovel", "targetname");
+  var_00 = getEnt("trig_reach_shovel", "targetname");
   var_00 common_scripts\utility::func_A71A(5, "trigger");
   level.var_A089 = 0.5;
   level.var_721C setscriptmotionblurparams(0.5, 0.25, 0.25);
@@ -576,7 +576,7 @@ func_0A39() {
 func_0A38() {
   common_scripts\utility::func_3C9F("flag_stop_aftermath_sway");
   var_00 = 0.8;
-  level.var_953D rotateto((0, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
+  level.var_953D rotateTo((0, 0, 0), var_00, var_00 * 0.5, var_00 * 0.5);
   wait(var_00);
   level.var_953D delete();
   level.var_721C playersetgroundreferenceent(undefined);
@@ -618,7 +618,7 @@ func_2850() {
   level.var_7317 setModel("player_zom_marie_world_arms");
   self setstance("stand");
   self method_848D();
-  self setorigin(level.var_7317.var_0116);
+  self setOrigin(level.var_7317.var_0116);
   self setangles(level.var_7317.var_001D);
   self playerlinktoabsolute(level.var_7317, "tag_player");
   level.var_7317 method_8278("s2_zom_va_intro_wake_up");
@@ -646,7 +646,7 @@ func_2850() {
   waittillframeend;
   self method_8112(0);
   maps\mp\_utility::func_3E8E(1);
-  self setorigin(var_01.var_0116);
+  self setOrigin(var_01.var_0116);
   self setangles(var_01.var_001D);
   self allowmovement(0);
   wait(0.5);
@@ -683,9 +683,9 @@ func_2851() {
   while(!common_scripts\utility::func_3C77("flag_stop_crawl_sway")) {
     var_00 = randomfloatrange(0.25, 1);
     var_01 = randomfloatrange(3, 4);
-    level.var_953D rotateto((var_00, 0, 0), var_01, var_01 * 0.5, var_01 * 0.5);
+    level.var_953D rotateTo((var_00, 0, 0), var_01, var_01 * 0.5, var_01 * 0.5);
     wait(var_01);
-    level.var_953D rotateto((0 - var_00, 0, 0), var_01, var_01 * 0.5, var_01 * 0.5);
+    level.var_953D rotateTo((0 - var_00, 0, 0), var_01, var_01 * 0.5, var_01 * 0.5);
     wait(var_01);
   }
 }
@@ -697,7 +697,7 @@ func_2852() {
   for(;;) {
     if(common_scripts\utility::func_3C77("player_heartbeat_sound")) {
       wait 0.05;
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
 
     wait(self.var_729F);
@@ -1014,32 +1014,32 @@ func_4051() {
 }
 
 func_404A() {
-  var_00 = getent("creek_crawl2_body", "targetname");
+  var_00 = getEnt("creek_crawl2_body", "targetname");
   var_01 = undefined;
   var_02 = undefined;
   var_03 = undefined;
   if(isDefined(var_00)) {
-    var_01 = getent(var_00.var_01A2, "targetname");
+    var_01 = getEnt(var_00.var_01A2, "targetname");
   }
 
   if(isDefined(var_01)) {
-    var_02 = getent(var_01.var_01A2, "targetname");
-    var_02 linkto(var_01, "J_Head");
+    var_02 = getEnt(var_01.var_01A2, "targetname");
+    var_02 linkTo(var_01, "J_Head");
   }
 
   if(isDefined(var_02)) {
-    var_03 = getent(var_02.var_01A2, "targetname");
-    var_03 linkto(var_00);
+    var_03 = getEnt(var_02.var_01A2, "targetname");
+    var_03 linkTo(var_00);
   }
 
-  var_04 = getent("crawler_elec", "targetname");
+  var_04 = getEnt("crawler_elec", "targetname");
   if(isDefined(var_00)) {
     if(isDefined(var_01)) {
-      var_01 linkto(var_00, "j_spineupper", (-1, 0, 0), (0, 0, 0));
+      var_01 linkTo(var_00, "j_spineupper", (-1, 0, 0), (0, 0, 0));
       var_00.var_39F2 = var_01;
     }
 
-    var_04 linkto(var_00, "J_MainRoot");
+    var_04 linkTo(var_00, "J_MainRoot");
     playFXOnTag(common_scripts\utility::func_44F5("zmb_electroschnelle_reg_chg_wv"), var_04, "J_Gun");
     var_00 method_8495(var_00.var_8109, var_00.var_0116, var_00.var_001D);
     if(isDefined(var_03)) {
@@ -1071,23 +1071,23 @@ func_404A() {
 }
 
 func_4049() {
-  var_00 = getent("creek_crawl2_body", "targetname");
+  var_00 = getEnt("creek_crawl2_body", "targetname");
   var_01 = undefined;
   var_02 = undefined;
   var_03 = undefined;
   if(isDefined(var_00)) {
-    var_01 = getent(var_00.var_01A2, "targetname");
+    var_01 = getEnt(var_00.var_01A2, "targetname");
   }
 
   if(isDefined(var_01)) {
-    var_02 = getent(var_01.var_01A2, "targetname");
+    var_02 = getEnt(var_01.var_01A2, "targetname");
   }
 
   if(isDefined(var_02)) {
-    var_03 = getent(var_02.var_01A2, "targetname");
+    var_03 = getEnt(var_02.var_01A2, "targetname");
   }
 
-  var_04 = getent("crawler_elec", "targetname");
+  var_04 = getEnt("crawler_elec", "targetname");
   if(isDefined(var_00)) {
     var_00 delete();
   }
@@ -1114,13 +1114,13 @@ func_4056() {
 }
 
 func_284E() {
-  var_00 = getent("static_creek_shovel", "targetname");
+  var_00 = getEnt("static_creek_shovel", "targetname");
   common_scripts\utility::func_3C9F("flag_player_has_weapon");
   func_284D();
 }
 
 func_284D() {
-  var_00 = getent("static_creek_shovel", "targetname");
+  var_00 = getEnt("static_creek_shovel", "targetname");
   if(isDefined(var_00)) {
     var_00 delete();
   }
@@ -1195,14 +1195,14 @@ func_2846() {
 }
 
 func_2843() {
-  var_00 = getent("crawl_buckle_beam", "targetname");
+  var_00 = getEnt("crawl_buckle_beam", "targetname");
   var_01 = common_scripts\utility::func_46B5("crawl_buckle_beam_dest", "targetname");
   var_02 = common_scripts\utility::func_46B5("crawl_buckle_beam_fx", "targetname");
   var_03 = lib_0547::func_AAFB("trig_buckle_beam");
   thread lib_0378::func_8D74("crawl_beam_buckle");
   if(isDefined(var_00) && isDefined(var_01)) {
-    var_00 moveto(var_01.var_0116, 0.15, 0.05, 0);
-    var_00 rotateto(var_01.var_001D, 0.15, 0.05, 0);
+    var_00 moveTo(var_01.var_0116, 0.15, 0.05, 0);
+    var_00 rotateTo(var_01.var_001D, 0.15, 0.05, 0);
   }
 
   if(isDefined(var_02)) {
@@ -1214,10 +1214,10 @@ func_2843() {
 }
 
 func_2844() {
-  var_00 = getent("crawl_collapse_beam", "targetname");
+  var_00 = getEnt("crawl_collapse_beam", "targetname");
   var_01 = common_scripts\utility::func_46B5("crawl_collapse_beam_dest", "targetname");
   var_02 = common_scripts\utility::func_46B5("crawl_buckle_beam_fx", "targetname");
-  var_03 = getent("creek_beam_blocker", "targetname");
+  var_03 = getEnt("creek_beam_blocker", "targetname");
   if(isDefined(var_03)) {
     var_03 notsolid();
   }
@@ -1225,8 +1225,8 @@ func_2844() {
   var_04 = lib_0547::func_AAFB("trig_spawn_crawler2");
   thread lib_0378::func_8D74("crawl_beam_collapse");
   if(isDefined(var_00) && isDefined(var_01)) {
-    var_00 moveto(var_01.var_0116, 0.15, 0.05, 0);
-    var_00 rotateto(var_01.var_001D, 0.15, 0.05, 0);
+    var_00 moveTo(var_01.var_0116, 0.15, 0.05, 0);
+    var_00 rotateTo(var_01.var_001D, 0.15, 0.05, 0);
   }
 
   if(isDefined(var_02)) {
@@ -1240,23 +1240,23 @@ func_2844() {
 }
 
 func_284C() {
-  var_00 = getent("crawl_buckle_beam", "targetname");
+  var_00 = getEnt("crawl_buckle_beam", "targetname");
   var_01 = common_scripts\utility::func_46B5("crawl_buckle_beam_dest", "targetname");
-  var_02 = getent("crawl_collapse_beam", "targetname");
+  var_02 = getEnt("crawl_collapse_beam", "targetname");
   var_03 = common_scripts\utility::func_46B5("crawl_collapse_beam_dest", "targetname");
-  var_04 = getent("creek_beam_blocker", "targetname");
+  var_04 = getEnt("creek_beam_blocker", "targetname");
   if(isDefined(var_04)) {
     var_04 solid();
   }
 
   if(isDefined(var_00)) {
-    var_00 moveto(var_01.var_0116, 0.15, 0.05, 0);
-    var_00 rotateto(var_01.var_001D, 0.15, 0.05, 0);
+    var_00 moveTo(var_01.var_0116, 0.15, 0.05, 0);
+    var_00 rotateTo(var_01.var_001D, 0.15, 0.05, 0);
   }
 
   if(isDefined(var_02)) {
-    var_02 moveto(var_03.var_0116, 0.15, 0.05, 0);
-    var_02 rotateto(var_03.var_001D, 0.15, 0.05, 0);
+    var_02 moveTo(var_03.var_0116, 0.15, 0.05, 0);
+    var_02 rotateTo(var_03.var_001D, 0.15, 0.05, 0);
   }
 }
 
@@ -1387,7 +1387,7 @@ func_AC02() {
 }
 
 func_ABD8() {
-  var_00 = getent("trig_awaken_first_z_lure", "targetname");
+  var_00 = getEnt("trig_awaken_first_z_lure", "targetname");
   var_01 = common_scripts\utility::func_A70E(level, "flag_first_zombie_dead", var_00, "trigger");
   var_02 = var_01[0];
   var_03 = var_01[1];
@@ -2342,7 +2342,7 @@ func_327D() {
 func_327C() {
   level.var_4EE7 = getEntArray("house_door", "targetname");
   foreach(var_01 in level.var_4EE7) {
-    var_02 = getent(var_01.var_01A2, "targetname");
+    var_02 = getEnt(var_01.var_01A2, "targetname");
     var_03 = common_scripts\utility::func_46B5(var_02.var_01A2, "targetname");
     var_04 = common_scripts\utility::func_46B5(var_03.var_01A2, "targetname");
     var_01.var_326B = var_02;
@@ -2355,14 +2355,14 @@ func_3281(param_00, param_01) {
   if(common_scripts\utility::func_562E(param_01)) {
     if(isDefined(param_00.var_326C) && isDefined(param_00.var_326D)) {
       if(param_00.var_326C.var_0116 != param_00.var_6BF1) {
-        param_00.var_326C moveto(param_00.var_6BF1, 1, 0.25, 0.5);
+        param_00.var_326C moveTo(param_00.var_6BF1, 1, 0.25, 0.5);
       }
 
       if(param_00.var_326D.var_0116 != param_00.var_6BF2) {
-        param_00.var_326D moveto(param_00.var_6BF2, 1, 0.25, 0.5);
+        param_00.var_326D moveTo(param_00.var_6BF2, 1, 0.25, 0.5);
       }
     } else if(param_00.var_326B.var_001D != param_00.var_6BE3) {
-      param_00.var_326B rotateto(param_00.var_6BE3, 1, 0.25, 0.5);
+      param_00.var_326B rotateTo(param_00.var_6BE3, 1, 0.25, 0.5);
     }
 
     param_00 lib_0378::func_8D74("door_open");
@@ -2373,14 +2373,14 @@ func_3281(param_00, param_01) {
 
   if(isDefined(param_00.var_326C) && isDefined(param_00.var_326D)) {
     if(param_00.var_326C.var_0116 != param_00.var_2445) {
-      param_00.var_326C moveto(param_00.var_2445, 1, 0.25, 0.5);
+      param_00.var_326C moveTo(param_00.var_2445, 1, 0.25, 0.5);
     }
 
     if(param_00.var_326D.var_0116 != param_00.var_2446) {
-      param_00.var_326D moveto(param_00.var_2446, 1, 0.25, 0.5);
+      param_00.var_326D moveTo(param_00.var_2446, 1, 0.25, 0.5);
     }
   } else if(param_00.var_326B.var_001D != param_00.var_2443) {
-    param_00.var_326B rotateto(param_00.var_2443, 1, 0.25, 0.5);
+    param_00.var_326B rotateTo(param_00.var_2443, 1, 0.25, 0.5);
   }
 
   param_00 lib_0378::func_8D74("door_close");
@@ -2410,7 +2410,7 @@ func_3263() {
 
 func_3279() {
   self endon("flag_exit_door_opened");
-  var_00 = getent("trig_near_door", "targetname");
+  var_00 = getEnt("trig_near_door", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!isPlayer(var_01)) {
@@ -2429,7 +2429,7 @@ func_3279() {
 
 func_326E() {
   level endon("field_to_yard");
-  var_00 = getent("trig_near_yard_door", "targetname");
+  var_00 = getEnt("trig_near_yard_door", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!isPlayer(var_01)) {
@@ -2591,9 +2591,9 @@ func_4205(param_00) {
     var_01 = self.var_0116 - var_01 getEye();
   }
 
-  var_02 = vectornormalize((var_01[0], var_01[1], 0));
+  var_02 = vectorNormalize((var_01[0], var_01[1], 0));
   var_03 = anglesToForward(param_00.var_001D);
-  var_04 = vectornormalize((var_03[0], var_03[1], 0));
+  var_04 = vectorNormalize((var_03[0], var_03[1], 0));
   var_05 = vectordot(var_02, var_04);
   var_05 = clamp(var_05, -1, 1);
   var_06 = acos(var_05);

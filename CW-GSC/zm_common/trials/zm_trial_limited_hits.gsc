@@ -24,7 +24,7 @@ function private preinit() {
 }
 
 function private on_begin(var_85af3be4, var_752d90ad) {
-  if(getplayers().size == 1) {
+  if(getPlayers().size == 1) {
     level.var_b529249b = zm_trial::function_5769f26a(var_752d90ad);
   } else {
     level.var_b529249b = zm_trial::function_5769f26a(var_85af3be4);

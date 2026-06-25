@@ -29,7 +29,7 @@ crouch_hint() {
     return;
   }
   common_scripts\utility::flag_wait("player_up");
-  var_0 = getent("player_approaching_stage", "targetname");
+  var_0 = getEnt("player_approaching_stage", "targetname");
   var_1 = 30625;
 
   while(distance2dsquared(level.player.origin, var_0.origin) > var_1) {
@@ -71,10 +71,10 @@ player_control() {
 }
 
 intro_scene_player() {
-  var_0 = getent("player_gate", "targetname");
+  var_0 = getEnt("player_gate", "targetname");
   var_1 = (-7499.94, 9432.14, -345.875);
   var_2 = (0, 57.7601, 0);
-  level.player setorigin(var_1);
+  level.player setOrigin(var_1);
   level.player setplayerangles(var_2);
   level.player setstance("crouch");
   level.player allowstand(0);
@@ -154,7 +154,7 @@ intro_vo() {
       wait 2;
       var_0 = spawn("script_origin", (-8928, 10464, -368));
       var_0 playSound("scn_deer_birds_flyaway_chips");
-      var_0 moveto((-8784, 10560, 16), 1);
+      var_0 moveTo((-8784, 10560, 16), 1);
       common_scripts\utility::flag_set("exit_theater");
       level.hesh maps\_utility::smart_dialogue_generic("deerhunt_hsh_coverme");
       wait 8;
@@ -315,7 +315,7 @@ flashlight_on() {
   self.flashlight_tag_origin.origin = self gettagorigin("tag_flash");
   self.flashlight_tag_origin.angles = self gettagangles("tag_flash");
   wait 0.05;
-  self.flashlight_tag_origin linkto(self, "tag_flash");
+  self.flashlight_tag_origin linkTo(self, "tag_flash");
   wait 0.1;
   playFXOnTag(common_scripts\utility::getfx("flashlight"), self.flashlight_tag_origin, "tag_origin");
 }
@@ -330,7 +330,7 @@ team2_nav_logic() {
   common_scripts\utility::flag_wait("road_chasm_approach");
   spawn_team2();
   level.team2[1].colornode_setgoal_func = ::hesh_does_360;
-  var_0 = common_scripts\utility::getstruct("meetup", "targetname");
+  var_0 = common_scripts\utility::getStruct("meetup", "targetname");
   var_1 = [level.hesh, level.team2[0]];
   level.hesh.animname = "generic";
   level.team2[0].animname = "guy2";
@@ -356,9 +356,9 @@ spawn_team2() {
 }
 
 spawn_hesh_and_dog() {
-  getent("hesh", "targetname") maps\_utility::add_spawn_function(::hesh_logic);
+  getEnt("hesh", "targetname") maps\_utility::add_spawn_function(::hesh_logic);
   level.hesh = maps\_utility::spawn_targetname("hesh", 1);
-  getent("dog", "targetname") maps\_utility::add_spawn_function(::dog_logic);
+  getEnt("dog", "targetname") maps\_utility::add_spawn_function(::dog_logic);
   level.dog = maps\_utility::spawn_targetname("dog", 1);
   level.dog.name = "Riley";
   level.squad = [level.hesh, level.dog];
@@ -403,7 +403,7 @@ sniff_trig_logic() {
 
   for(;;) {
     self waittill("trigger");
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(!isDefined(level.current_sniff_zone)) {
       level.current_sniff_zone = var_0;
@@ -469,7 +469,7 @@ dog_logic() {
       maps\_utility_dogs::dog_bark();
     case "outside":
       common_scripts\utility::flag_wait("lobby_exit");
-      var_0 = getent("bark", "targetname");
+      var_0 = getEnt("bark", "targetname");
 
       while(!self istouching(var_0)) {
         wait 0.5;
@@ -496,7 +496,7 @@ dog_logic() {
       self setgoalnode(var_1);
       thread maps\deer_hunt_util::dog_node_wait(var_1, "dog_in_affection_position");
       common_scripts\utility::flag_wait("player_out_of_chasm");
-      var_2 = getent("dropdown_blocker", "targetname");
+      var_2 = getEnt("dropdown_blocker", "targetname");
       var_2.origin = var_2.origin + (0, 0, 400);
       var_2 connectpaths();
       wait 0.05;
@@ -555,7 +555,7 @@ dog_stays_in_front_of_player() {
   var_3 = level.player.origin + var_2;
   level.target_ent = spawn("script_origin", var_3);
   level.target_ent.angles = (0, var_0[1], 0);
-  level.target_ent linkto(level.player);
+  level.target_ent linkTo(level.player);
   var_4 = common_scripts\utility::getStructArray("sniff_spots", "targetname");
   maps\_utility_dogs::disable_dog_sniff();
 
@@ -621,7 +621,7 @@ dog_sniff_spots(var_0) {
 }
 
 dog_teleport_trig_logic() {
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   self waittill("trigger", var_1);
 
   if(var_1.type == "dog") {
@@ -634,9 +634,9 @@ dog_teleport_trig_logic() {
 intro_enemies() {
   maps\_utility::battlechatter_off();
   level.gasstation_guys = [];
-  getent("dog_victim", "targetname") maps\_utility::add_spawn_function(::dog_attack_victim_logic);
-  getent("dog_attack_guard", "targetname") maps\_utility::add_spawn_function(::dog_attack_guard_logic, "dog_attack_guard");
-  getent("dog_attack_guard_stairs", "targetname") maps\_utility::add_spawn_function(::dog_attack_guard_logic, "dog_attack_guard_stairs");
+  getEnt("dog_victim", "targetname") maps\_utility::add_spawn_function(::dog_attack_victim_logic);
+  getEnt("dog_attack_guard", "targetname") maps\_utility::add_spawn_function(::dog_attack_guard_logic, "dog_attack_guard");
+  getEnt("dog_attack_guard_stairs", "targetname") maps\_utility::add_spawn_function(::dog_attack_guard_logic, "dog_attack_guard_stairs");
   maps\_utility::array_spawn_function_targetname("dog_attack_back_enemies", ::dog_attack_back_enemies_logic);
   createthreatbiasgroup("dog_attack_enemies");
   createthreatbiasgroup("player");
@@ -674,7 +674,7 @@ intro_enemies() {
       thread wall_alarm_start();
       maps\_utility::array_spawn_targetname("executioners", 1);
       common_scripts\utility::flag_wait("player_dropped_down");
-      var_4 = getent("gasstation_flag_trig", "targetname");
+      var_4 = getEnt("gasstation_flag_trig", "targetname");
 
       if(!level.hesh istouching(var_4)) {
         level.backdoor_guy = maps\_utility::spawn_targetname("backdoor_runner", 1);
@@ -714,9 +714,9 @@ gasstation_execution_timing() {
   common_scripts\utility::array_call(level.team2, ::setthreatbiasgroup, "allies");
   level.player setthreatbiasgroup("allies");
   common_scripts\utility::array_thread(getaiarray("allies"), maps\deer_hunt_util::ignore_me_ignore_all_off);
-  var_1 = getent("hill_pos1", "targetname");
+  var_1 = getEnt("hill_pos1", "targetname");
   var_1 common_scripts\utility::trigger_off();
-  var_1 = getent("hesh_to_lookout", "targetname");
+  var_1 = getEnt("hesh_to_lookout", "targetname");
   var_1 common_scripts\utility::trigger_off();
   maps\_utility::activate_trigger_with_targetname("hill_pos2");
   common_scripts\utility::array_thread(getaiarray("axis"), maps\deer_hunt_util::ignore_me_ignore_all_off);
@@ -833,7 +833,7 @@ gasstation_executioners_logic() {
   self.goalradius = 24;
   self setgoalpos(self.origin);
   self.anchor = spawn("script_origin", self.origin);
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   thread gasstation_guard_damage_detection();
 
   while(!isDefined(level.execuioner_targets)) {
@@ -846,7 +846,7 @@ gasstation_executioners_logic() {
   maps\deer_hunt_util::ignore_me_ignore_all_off();
   common_scripts\utility::flag_wait("civilians_shot");
   self unlink();
-  var_0 = getent("gasstation_enemy_vol", "targetname");
+  var_0 = getEnt("gasstation_enemy_vol", "targetname");
   self setgoalvolumeauto(var_0);
 }
 
@@ -895,7 +895,7 @@ dog_attack_victim_logic() {
   maps\_utility::disable_surprise();
   self.ragdoll_immediate = 1;
   self.forceragdollimmediate = 1;
-  var_0 = common_scripts\utility::getstruct("dog_attack", "targetname");
+  var_0 = common_scripts\utility::getStruct("dog_attack", "targetname");
   var_1 = maps\_utility::getanim("dog_kill_long");
   thread dog_victim_radio_sounds();
   var_2 = getstartorigin(var_0.origin, var_0.angles, var_1);
@@ -904,7 +904,7 @@ dog_attack_victim_logic() {
   self.anchor = spawn("script_origin", var_2);
   self.anchor.angles = var_3;
   self forceteleport(var_2, var_3);
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   common_scripts\utility::flag_wait("player_at_shop_door");
   thread dog_victim_enemy_early_damage_detection();
   self endon("death");
@@ -977,7 +977,7 @@ dog_attack() {
     wait 0.05;
   }
 
-  var_0 = common_scripts\utility::getstruct("dog_attack", "targetname");
+  var_0 = common_scripts\utility::getStruct("dog_attack", "targetname");
   var_1 = [level.dog_victim, level.dog];
   common_scripts\utility::flag_wait("player_entered_coffee_shop");
 
@@ -1017,7 +1017,7 @@ dog_attack_dog_ends_early() {
   level endon("encounter1_approach");
   thread maps\_utility::play_sound_on_entity("anml_dog_attack_npc_jump");
   common_scripts\utility::flag_wait("dog_kill_aborted");
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility_dogs::disable_dog_walk();
   maps\_utility::enable_ai_color();
 }
@@ -1061,7 +1061,7 @@ replace_my_models(var_0, var_1) {
 #using_animtree("generic_human");
 
 gasstation_bully_kick() {
-  var_0 = common_scripts\utility::getstruct("bully_kick", "targetname");
+  var_0 = common_scripts\utility::getStruct("bully_kick", "targetname");
   var_1 = maps\_utility::spawn_targetname("bully_guard", 1);
   level.bully = var_1;
   var_1.animname = "guard";
@@ -1086,7 +1086,7 @@ kick_bully_logic() {
   maps\deer_hunt_util::ignore_me_ignore_all();
   maps\_utility::delaythread(3.5, maps\_utility::play_sound_on_tag_endon_death, "deerhunt_saf1_yourcountrywillfall", "tag_eye");
   self waittill("damage");
-  self stopanimscripted();
+  self stopanimScripted();
   common_scripts\utility::flag_set("bully_kick_aborted");
   common_scripts\utility::flag_set("bully_kick_complete");
 }
@@ -1129,7 +1129,7 @@ gasstation_civs_logic() {
   }
 
   var_0 = spawn("script_origin", self getEye());
-  var_0 linkto(self, "tag_eye");
+  var_0 linkTo(self, "tag_eye");
   level.execuioner_targets = common_scripts\utility::add_to_array(level.execuioner_targets, var_0);
 
   if(common_scripts\utility::cointoss()) {
@@ -1146,7 +1146,7 @@ gasstation_civs_logic() {
 
   if(isalive(self)) {
     self notify("stop_loop");
-    self stopanimscripted();
+    self stopanimScripted();
     maps\_utility::die();
   }
 }
@@ -1165,7 +1165,7 @@ gasstation_enemy_globals() {
 
 intro_scene() {
   common_scripts\utility::flag_wait("start_intro_scene");
-  var_0 = common_scripts\utility::getstruct("intro_scene", "targetname");
+  var_0 = common_scripts\utility::getStruct("intro_scene", "targetname");
   level.intro_ball = maps\_utility::spawn_anim_model("intro_ball", var_0.origin);
   var_1 = [level.hesh, level.dog, level.intro_ball];
   thread intro_scene_player();
@@ -1209,10 +1209,10 @@ hesh_logic() {
     case "default":
     case "intro":
       maps\deer_hunt_util::switch_from_cqb_to_creepwalk();
-      var_0 = getent("theater_curtain", "targetname");
+      var_0 = getEnt("theater_curtain", "targetname");
       var_0.animname = "curtain";
       var_0 maps\_utility::assign_animtree();
-      var_1 = common_scripts\utility::getstruct("curtain_open", "targetname");
+      var_1 = common_scripts\utility::getStruct("curtain_open", "targetname");
       var_2 = "curtain_cut_in";
       var_1 thread maps\_anim::anim_first_frame_solo(var_0, var_2);
       self.ignoreme = 1;
@@ -1223,7 +1223,7 @@ hesh_logic() {
       maps\_utility::enable_readystand();
       common_scripts\utility::flag_wait("intro_scene_complete");
       common_scripts\utility::flag_wait("hallway_halfway");
-      var_3 = common_scripts\utility::getstruct("crouch_test", "targetname");
+      var_3 = common_scripts\utility::getStruct("crouch_test", "targetname");
       var_4 = "creepwalk_duck";
       maps\_utility::disable_ai_color();
       var_3 maps\_anim::anim_reach_solo(self, var_4);
@@ -1231,7 +1231,7 @@ hesh_logic() {
       var_3 maps\_anim::anim_single_solo(self, var_4);
       maps\deer_hunt_util::switch_from_creepwalk_to_cqb();
       common_scripts\utility::flag_wait("player_approaching_stage");
-      var_5 = getent("theater_curtain_blocker", "targetname");
+      var_5 = getEnt("theater_curtain_blocker", "targetname");
       maps\_utility::disable_ai_color();
       var_1 maps\_anim::anim_reach_solo(self, var_2);
       thread maps\deer_hunt_util::flag_set_delayed(14.5, "curtain_cut");
@@ -1258,7 +1258,7 @@ hesh_logic() {
       maps\_utility::disable_readystand();
 
       if(!common_scripts\utility::flag("promenade_exit")) {
-        var_6 = common_scripts\utility::getstruct("pie_slice", "targetname");
+        var_6 = common_scripts\utility::getStruct("pie_slice", "targetname");
         maps\_utility::disable_ai_color();
         var_6 maps\_anim::anim_reach_solo(level.hesh, "360");
         maps\_utility::delaythread(2, maps\_utility::enable_ai_color);
@@ -1274,7 +1274,7 @@ hesh_logic() {
       common_scripts\utility::flag_wait("meetup_completed");
       level thread hesh_dog_interaction();
       common_scripts\utility::flag_wait("encounter1_affection_done");
-      var_6 = common_scripts\utility::getstruct("shop_door_anim_ent", "targetname");
+      var_6 = common_scripts\utility::getStruct("shop_door_anim_ent", "targetname");
       var_7 = spawn("script_origin", var_6.origin);
       var_7.angles = var_6.angles;
       maps\_utility::disable_ai_color();
@@ -1317,7 +1317,7 @@ hesh_logic() {
       maps\_utility::activate_trigger_with_targetname("player_on_bus");
       wait 3;
       common_scripts\utility::flag_wait("hesh_moves_from_encounter1");
-      var_6 = common_scripts\utility::getstruct("wall_kick", "targetname");
+      var_6 = common_scripts\utility::getStruct("wall_kick", "targetname");
       var_6.origin = (-13736.5, 14092, -232);
       var_7 = spawn("script_origin", var_6.origin);
       var_7.angles = var_6.angles;
@@ -1366,7 +1366,7 @@ hesh_dog_interaction() {
 
   common_scripts\utility::flag_wait("meetup_completed");
   level.hesh maps\_utility::disable_ai_color();
-  var_0 = common_scripts\utility::getstruct("dog_interact", "targetname");
+  var_0 = common_scripts\utility::getStruct("dog_interact", "targetname");
   var_0 maps\_anim::anim_reach_solo(level.hesh, "affection");
   common_scripts\utility::flag_wait_all("player_out_of_chasm", "dog_in_affection_position");
   level.dog.animname = "dog";
@@ -1386,8 +1386,8 @@ bus_movement() {
 }
 
 bus_movement_model_logic() {
-  var_0 = getent(self.targetname + "_clip", "targetname");
-  var_0 linkto(self);
+  var_0 = getEnt(self.targetname + "_clip", "targetname");
+  var_0 linkTo(self);
   var_0 connectpaths();
 }
 
@@ -1413,7 +1413,7 @@ bus_movement_sounds_rumble_etc() {
 }
 
 hesh_does_360(var_0) {
-  var_1 = common_scripts\utility::getstruct("360_turn", "targetname");
+  var_1 = common_scripts\utility::getStruct("360_turn", "targetname");
   var_1 maps\_anim::anim_reach_solo(self, "360");
   var_1 maps\_anim::anim_single_solo(self, "360");
   maps\_utility::enable_ai_color();
@@ -1425,7 +1425,7 @@ hesh_gasstation_logic() {
   var_0 = getEntArray("pipe_trigs", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, common_scripts\utility::trigger_off);
   common_scripts\utility::flag_wait("execution_start");
-  var_1 = getent("hesh_foliage_clip", "targetname");
+  var_1 = getEnt("hesh_foliage_clip", "targetname");
   var_1 delete();
   self.baseaccuracy = 5;
   common_scripts\utility::flag_wait("gasstation_front_approach");
@@ -1490,21 +1490,21 @@ get_my_meeting_group() {
 }
 
 move_player_to_start(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
 
     if(!isDefined(var_1)) {
       return;
     }
   }
 
-  level.player setorigin(var_1.origin);
+  level.player setOrigin(var_1.origin);
   var_2 = undefined;
 
   if(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
   }
 
   if(isDefined(var_2)) {
@@ -1552,7 +1552,7 @@ deer_init() {
   }
 
   thread theatre_doors(var_3);
-  var_10 = common_scripts\utility::getstruct("deer_reveal", "targetname");
+  var_10 = common_scripts\utility::getStruct("deer_reveal", "targetname");
 
   foreach(var_8, var_12 in var_3) {
     var_12.animname = "deer" + var_8;
@@ -1582,7 +1582,7 @@ deer_init() {
 }
 
 deer_player_leaning_detect() {
-  var_0 = getent("deer_doorway", "targetname");
+  var_0 = getEnt("deer_doorway", "targetname");
   level endon("lobby_entrance");
 
   for(;;) {
@@ -1599,7 +1599,7 @@ deer_reveal_chairs() {
   level.drone_lookahead_value = 800;
   var_0 = "chair_";
   var_1 = "reveal";
-  var_2 = common_scripts\utility::getstruct("deer_reveal", "targetname");
+  var_2 = common_scripts\utility::getStruct("deer_reveal", "targetname");
   var_3 = "lv_redchair_dust";
   level.chair_models = [];
   level.chair_anim_ent = spawnStruct();
@@ -1613,15 +1613,15 @@ deer_reveal_chairs() {
     level.chair_models[var_4] = maps\_utility::spawn_anim_model(var_0 + var_4, level.chair_anim_ent.origin);
     level.chair_models[var_4].attached_actor = spawn("script_model", level.chair_anim_ent.origin);
     level.chair_models[var_4].attached_actor setModel(var_3);
-    level.chair_models[var_4].attached_actor linkto(level.chair_models[var_4]);
+    level.chair_models[var_4].attached_actor linkTo(level.chair_models[var_4]);
     level.chair_anim_ent thread maps\_anim::anim_first_frame_solo(level.chair_models[var_4], var_1);
     wait 0.1;
   }
 }
 
 theatre_doors(var_0) {
-  var_1 = [getent("theatre_doors_a_1", "targetname"), getent("theatre_doors_a_2", "targetname")];
-  var_2 = [getent("theatre_doors_b_1", "targetname"), getent("theatre_doors_b_2", "targetname")];
+  var_1 = [getEnt("theatre_doors_a_1", "targetname"), getEnt("theatre_doors_a_2", "targetname")];
+  var_2 = [getEnt("theatre_doors_b_1", "targetname"), getEnt("theatre_doors_b_2", "targetname")];
   thread theater_door_deer_dist_check(var_1, var_0);
   thread theater_door_deer_dist_check(var_2, var_0);
 }
@@ -1656,7 +1656,7 @@ smash_open(var_0) {
 
 open_and_connect(var_0) {
   var_1 = 0.1;
-  self rotateyaw(var_0, var_1);
+  self rotateYaw(var_0, var_1);
   self connectpaths();
   self waittill("rotatedone");
   var_2 = randomintrange(18, 27);
@@ -1668,7 +1668,7 @@ open_and_connect(var_0) {
   var_3 = randomintrange(10, 15);
   var_4 = 0.1;
   var_5 = var_3 - var_4;
-  self rotateyaw(var_2, var_3, var_4, var_5);
+  self rotateYaw(var_2, var_3, var_4, var_5);
   thread connect_while_opening();
   self waittill("rotatedone");
   self notify("stop_updating_door_paths");
@@ -1679,7 +1679,7 @@ connect_while_opening() {
 
   for(;;) {
     self connectpaths();
-    self disconnectpaths();
+    self disconnectPaths();
     wait 0.05;
   }
 }
@@ -1729,7 +1729,7 @@ deer_player_aim_detection() {
   self endon("stop_deciding_when_to_move");
 
   for(;;) {
-    var_0 = vectornormalize(anglesToForward(level.player getplayerangles()));
+    var_0 = vectorNormalize(anglesToForward(level.player getplayerangles()));
     var_1 = level.player.origin + var_0 * 10000;
     var_2 = bulletTrace(level.player getEye(), var_1, 1, level.player);
 
@@ -1803,8 +1803,8 @@ lariver_global_setup() {
 
   level.matv = maps\_vehicle::spawn_vehicle_from_targetname("gate_matv");
   level.matv.godmode = 1;
-  level.matv.obj_ent = getent("obj_ramp", "targetname");
-  level.matv.obj_ent linkto(level.matv);
+  level.matv.obj_ent = getEnt("obj_ramp", "targetname");
+  level.matv.obj_ent linkTo(level.matv);
   level.matv.obj_ent hide();
   wait 0.05;
   var_0 = getvehiclenode("matv_start", "targetname");
@@ -1820,7 +1820,7 @@ lariver_defend_spawn_choppers() {
   var_0 = ["lariver_defend_chopper_left"];
 
   foreach(var_2 in var_0) {
-    getent(var_2, "targetname") maps\_utility::add_spawn_function(::chopper_spawn_func);
+    getEnt(var_2, "targetname") maps\_utility::add_spawn_function(::chopper_spawn_func);
   }
 
   common_scripts\utility::flag_wait("defend_chopp1_dead");
@@ -1845,14 +1845,14 @@ chopper_spawn_func() {
   self.is_strafing = 0;
   self.preferred_crash_style = 0;
   self setmaxpitchroll(10, 10);
-  self.node_array = maps\deer_hunt_util::return_struct_spline(common_scripts\utility::getstruct(self.spawner.target, "targetname"));
+  self.node_array = maps\deer_hunt_util::return_struct_spline(common_scripts\utility::getStruct(self.spawner.target, "targetname"));
   thread chopper_attacker_check();
   thread chopper_outline_monitor();
   maps\_vehicle::godon();
   maps\_vehicle::mgoff();
   self setyawspeedbyname("faster");
   level.player.head_target = spawn("script_origin", level.player getEye());
-  level.player.head_target linkto(level.player);
+  level.player.head_target linkTo(level.player);
   self.had_mercy = 0;
   self.mgturret[0].bottomarc = 180;
   self.mgturret[0].leftarc = 180;
@@ -1915,7 +1915,7 @@ chopper_strafe_attack() {
 
   thread chopper_attack_logic();
   thread chopper_destroys_cover();
-  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
   self.attack_pos = var_2.origin;
 
   while(self.is_dodging) {
@@ -1940,8 +1940,8 @@ chopper_resume_path(var_0) {
   if(self.is_dying) {
     return;
   }
-  var_1 = common_scripts\utility::getstruct("right_spline", "script_noteworthy");
-  var_2 = common_scripts\utility::getstruct("left_spline", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("right_spline", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("left_spline", "script_noteworthy");
 
   if(maps\_utility::is_in_array(self.node_array, var_2)) {
     self.node_array = maps\deer_hunt_util::return_struct_spline(var_1);
@@ -2039,7 +2039,7 @@ chopper_missile_burst() {
     var_1 = "tag_missile_right";
   }
 
-  var_7 = getent("player_defend_area", "script_noteworthy");
+  var_7 = getEnt("player_defend_area", "script_noteworthy");
 
   if(level.player istouching(var_7)) {
     level.player_is_stunned = 1;
@@ -2048,7 +2048,7 @@ chopper_missile_burst() {
     level.player maps\_utility::blend_movespeedscale_percent(20, 0.1);
     level.player maps\_utility::delaythread(3, maps\_utility::blend_movespeedscale_percent, 95, 0.1);
     level.player shellshock("default", 4);
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
     level.player disableweapons();
     wait 3;
     level.player enableweapons();
@@ -2357,7 +2357,7 @@ lariver_defend_globals(var_0) {
   maps\_utility::activate_trigger_with_targetname("squad_to_defend");
   var_1 = getaiarray("allies");
   common_scripts\utility::array_thread(var_1, maps\deer_hunt_util::ignore_me_ignore_all);
-  var_6 = common_scripts\utility::getstruct("dog_drag_defend", "targetname");
+  var_6 = common_scripts\utility::getStruct("dog_drag_defend", "targetname");
   level maps\deer_hunt_util::dog_drag_to_cover(var_6, 6);
   thread lariver_defend_destructible_cover();
   thread lariver_defend_enemy_population();
@@ -2368,7 +2368,7 @@ lariver_defend_globals(var_0) {
   var_1 = getaiarray("axis");
 
   if(var_1.size > 0) {
-    getent("squad_to_defend", "targetname") common_scripts\utility::trigger_off();
+    getEnt("squad_to_defend", "targetname") common_scripts\utility::trigger_off();
     common_scripts\utility::array_thread(getaiarray("allies"), maps\_utility::enable_ai_color);
     maps\_utility::activate_trigger_with_targetname("squad_charges_final_enemies");
     wait 6;
@@ -2455,7 +2455,7 @@ lariver_defend_destructible_cover() {
     }
 
     var_3 = "hesco_" + var_2;
-    level.hescos[var_1] = getent(var_3, "targetname");
+    level.hescos[var_1] = getEnt(var_3, "targetname");
     var_1++;
   }
 
@@ -2614,7 +2614,7 @@ la_river_defend_missile_dist_check() {
 
   for(;;) {
     level.player waittill("missile_fire", var_0);
-    var_0 missile_settargetent(level.missile_target);
+    var_0 missile_settargetEnt(level.missile_target);
 
     if(!common_scripts\utility::flag("defend_chopp2_dead")) {
       var_0 thread missile_dist_internal();
@@ -2710,7 +2710,7 @@ lariver_defend_player_laser_toggle() {
 
 lariver_ignore_player_if_in_defend_area() {
   level endon("load_matv");
-  var_0 = getent("player_defend_area", "script_noteworthy");
+  var_0 = getEnt("player_defend_area", "script_noteworthy");
 
   for(;;) {
     if(level.player istouching(var_0)) {
@@ -2805,7 +2805,7 @@ check_weapon(var_0) {
 lariver_defend_enemy_population() {
   maps\_utility::array_spawn_function_targetname("defend_bridge_spawner", ::lariver_bridge_enemy_logic);
   maps\_utility::array_spawn_function_noteworthy("slide", ::lariver_defend_slide_down_river_wall);
-  level.close_enemy_volume = getent("close_volume", "targetname");
+  level.close_enemy_volume = getEnt("close_volume", "targetname");
   thread lariver_defend_is_player_in_defend_area();
   common_scripts\utility::flag_wait_or_timeout("player_in_defend_area", 20);
   maps\deer_hunt_util::set_flag_if_not_set("player_in_defend_area");
@@ -2908,8 +2908,8 @@ lariver_transition_to_beach() {
   level.player common_scripts\utility::delaycall(1, ::stoprumble, "vegas_drag");
   maps\_utility::transient_switch("deer_hunt_intro_tr", "deer_hunt_beach_tr");
   common_scripts\utility::flag_set("la_river_complete");
-  getent("hesh", "targetname") maps\_utility::remove_spawn_function(::hesh_logic);
-  getent("dog", "targetname") maps\_utility::remove_spawn_function(::dog_logic);
+  getEnt("hesh", "targetname") maps\_utility::remove_spawn_function(::hesh_logic);
+  getEnt("dog", "targetname") maps\_utility::remove_spawn_function(::dog_logic);
   maps\deer_hunt_ride::jeep_ride_setup();
 }
 
@@ -2956,15 +2956,15 @@ player_gets_in_matv() {
   level.player_rig = maps\_utility::spawn_anim_model("player_rig", var_1);
   level.player_rig.angles = level.matv.angles;
   level.player_rig hide();
-  level.player_rig linkto(level.matv, "tag_player");
+  level.player_rig linkTo(level.matv, "tag_player");
   var_2 = maps\_utility::groundpos(var_1 + (0, 0, 300));
   var_3 = spawn("script_origin", var_2, 0, 300, 200);
   var_4 = maps\deer_hunt_util::getactionbind("matv_enter");
-  var_3 sethintstring(var_4.hint);
+  var_3 setHintString(var_4.hint);
   var_3 makeusable();
   thread matv_player_jumped_in(var_3);
   var_3 waittill("trigger");
-  var_3 sethintstring("");
+  var_3 setHintString("");
   common_scripts\utility::flag_set("player_in_matv");
   level.player disableweapons();
   level.player setstance("stand");
@@ -3015,10 +3015,10 @@ matv_player_jumped_in(var_0) {
 wall_ride_cilivians() {
   common_scripts\utility::flag_wait("load_matv");
   var_0 = common_scripts\utility::getStructArray("river_gate_civs", "targetname");
-  var_1 = getent("river_gate_civ", "targetname");
+  var_1 = getEnt("river_gate_civ", "targetname");
   level.river_drones = maps\deer_hunt_ride::spawn_ai_for_structs(var_1, var_0, 1);
   var_0 = common_scripts\utility::getStructArray("river_gate_soldiers", "targetname");
-  var_1 = getent("river_soldier_spawner", "targetname");
+  var_1 = getEnt("river_soldier_spawner", "targetname");
   var_2 = maps\deer_hunt_ride::spawn_ai_for_structs(var_1, var_0, 1);
   level.river_drones = common_scripts\utility::array_combine(level.river_drones, var_2);
   common_scripts\utility::flag_wait("lariver_turn");
@@ -3030,7 +3030,7 @@ dog_gets_in_matv() {
   wait 2;
   level.dog.animname = "dog";
   level.matv maps\_anim::anim_single_solo(level.dog, "matv_enter", "tag_dog");
-  level.dog linkto(level.matv, "tag_dog");
+  level.dog linkTo(level.matv, "tag_dog");
   level.matv thread maps\_anim::anim_loop_solo(level.dog, "matv_idle", "stop_loop", "tag_dog");
 }
 
@@ -3067,7 +3067,7 @@ lariver_matv_open_doors() {
   maps\deer_hunt_util::set_flag_if_not_set("gate_opening");
 
   foreach(var_4, var_2 in var_0) {
-    var_2 = getent(var_2, "targetname");
+    var_2 = getEnt(var_2, "targetname");
 
     if(var_4 == 1) {
       var_3 = (120, 0, 0);
@@ -3075,15 +3075,15 @@ lariver_matv_open_doors() {
       var_3 = (-120, 0, 0);
     }
 
-    var_2 moveto(var_2.origin + var_3, 5.6, 2.8, 2.8);
+    var_2 moveTo(var_2.origin + var_3, 5.6, 2.8, 2.8);
     var_2 common_scripts\utility::delaycall(5.6, ::connectpaths);
     var_2 common_scripts\utility::delaycall(5.6, ::disconnectpaths);
   }
 }
 
 lariver_doors_sound_setup() {
-  var_0 = getent("river_door_left", "targetname");
-  var_1 = getent("river_door_right", "targetname");
+  var_0 = getEnt("river_door_left", "targetname");
+  var_1 = getEnt("river_door_right", "targetname");
   var_0 create_door_sound_ents((-18417, 15837, -535), (-18696, 15837, -535));
   var_1 create_door_sound_ents((-18349, 15858, -537), (-18057, 15858, -537));
   var_2 = spawn("script_origin", (-18371, 15820, -349));
@@ -3155,8 +3155,8 @@ siren_logic(var_0) {
 create_door_sound_ents(var_0, var_1) {
   self.corner_sound_ent = spawn("script_origin", var_1);
   self.edge_sound_ent = spawn("script_origin", var_0);
-  self.corner_sound_ent linkto(self);
-  self.edge_sound_ent linkto(self);
+  self.corner_sound_ent linkTo(self);
+  self.edge_sound_ent linkTo(self);
 }
 
 door_play_sounds(var_0, var_1) {
@@ -3171,7 +3171,7 @@ door_play_sounds(var_0, var_1) {
 
 lariver_defend_is_player_in_defend_area() {
   level endon("player_in_defend_area");
-  var_0 = getent("player_defend_area", "script_noteworthy");
+  var_0 = getEnt("player_defend_area", "script_noteworthy");
 
   while(!level.player istouching(var_0)) {
     wait 0.25;
@@ -3293,11 +3293,11 @@ lariver_defend_populate_close_area() {
 }
 
 player_is_on_right_incline() {
-  return level.player istouching(getent("defend_right_incline", "targetname"));
+  return level.player istouching(getEnt("defend_right_incline", "targetname"));
 }
 
 player_is_on_left_incline() {
-  return level.player istouching(getent("defend_left_incline", "targetname"));
+  return level.player istouching(getEnt("defend_left_incline", "targetname"));
 }
 
 lariver_defend_enemy_global_logic() {
@@ -3306,7 +3306,7 @@ lariver_defend_enemy_global_logic() {
 
 lariver_defend_slide_down_river_wall() {
   thread lariver_defend_enemy_global_logic();
-  lariver_slide_anim(self, common_scripts\utility::getstruct(self.target, "targetname"));
+  lariver_slide_anim(self, common_scripts\utility::getStruct(self.target, "targetname"));
   self setgoalvolumeauto(level.close_enemy_volume);
 }
 
@@ -3356,7 +3356,7 @@ lariver_stop_pilot_stand_on_death() {
 lariver_frontline_logic() {
   self endon("death");
   var_0 = getnode(self.target, "targetname");
-  var_1 = getent("enemy_line_2", "targetname");
+  var_1 = getEnt("enemy_line_2", "targetname");
   self.ignoreall = 1;
   self.ignoreme = 1;
   self.script_forcegoal = 1;
@@ -3410,16 +3410,16 @@ lariver_bridge_rappel_enemies() {
   var_9.ignoreme = 1;
   var_9 thread maps\_utility::magic_bullet_shield();
   var_9 thread rappel_guy_internal();
-  var_9 linkto(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_9 linkTo(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_9.team = "axis";
   var_10 = spawn("script_model", var_2);
   var_10 setModel("fastrope_80ft_ri");
   var_10 useanimtree(#animtree);
-  var_10 linkto(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_10 linkTo(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_11 = 0.5 / getanimlength(%bh_1_drop);
   var_12 = 4 / getanimlength(%bh_rope_drop_ri);
-  var_9 animscripted("start_rappel", var_7.origin + var_5, var_6, %bh_1_drop);
-  var_10 animscripted("start_rappel", var_7.origin + var_4, var_7.angles, %bh_rope_drop_ri);
+  var_9 animScripted("start_rappel", var_7.origin + var_5, var_6, %bh_1_drop);
+  var_10 animScripted("start_rappel", var_7.origin + var_4, var_7.angles, %bh_rope_drop_ri);
   wait 0.05;
   var_9 setanimtime(%bh_1_drop, var_12);
   var_10 setanimtime(%bh_rope_drop_ri, var_11);
@@ -3452,7 +3452,7 @@ rappel_guy_internal() {
           maps\_utility::stop_magic_bullet_shield();
         }
 
-        self stopanimscripted();
+        self stopanimScripted();
         maps\_utility::die();
         self startragdoll();
       }
@@ -3496,7 +3496,7 @@ lariver_backline_guys_logic() {
   }
   self setthreatbiasgroup("axis");
   self clearentitytarget();
-  var_0 = getent("enemy_line_4", "targetname");
+  var_0 = getEnt("enemy_line_4", "targetname");
   self setgoalvolumeauto(var_0);
 
   if(isDefined(self.magic_bullet_shield)) {
@@ -3532,7 +3532,7 @@ lariver_balcony_friendly_logic(var_0) {
   }
 
   var_1 = spawn("script_origin", self.origin + (0, 0, 85));
-  var_1 linkto(self);
+  var_1 linkTo(self);
   level.drone_targets = common_scripts\utility::add_to_array(level.drone_targets, var_1);
 }
 

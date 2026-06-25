@@ -16,7 +16,7 @@ oneinchpunch_impact(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
     level.punching_players[self getentitynumber()] = gettime();
     self earthquake(0.5, 0.5, self.origin, 300);
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
 
     if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded && isDefined(self.str_punch_element) && self.str_punch_element == "air") {
       phys_explosion_outer_radius = phys_explosion_outer_radius * 2;
@@ -48,7 +48,7 @@ oneinchpunch_physics_launchragdoll(localclientnum, oldval, newval, bnewent, bini
     }
 
     if(isDefined(punching_player)) {
-      v_launch = vectornormalize(self.origin - punching_player.origin) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
+      v_launch = vectorNormalize(self.origin - punching_player.origin) * randomintrange(125, 150) + (0, 0, randomintrange(75, 150));
     }
 
     if(isDefined(v_launch)) {

@@ -29,7 +29,7 @@ function private on_begin(var_faecf84e, var_142bab9f, var_2b2cdb01, var_85e291cf
     var_b3c8256b = zm_trial::function_5769f26a(var_b3c8256b);
   }
 
-  a_players = getplayers();
+  a_players = getPlayers();
 
   switch (a_players.size) {
     case 1:
@@ -86,7 +86,7 @@ function function_a2c43fea(var_d42c8aaa = 2000) {
   while(true) {
     n_score_total = 0;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isalive(player)) {
         n_score_total += isDefined(player.score) ? player.score : 0;
       }

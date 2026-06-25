@@ -78,12 +78,12 @@ _id_1DC8() {
   var_0 = getEntArray("shutter", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = getent(var_2.target, "targetname");
+    var_3 = getEnt(var_2.target, "targetname");
     var_4 = spawn("script_origin", var_2.origin);
     var_4.angles = var_3.angles;
     var_4.startyaw = var_4.angles[1];
     var_2._id_1DC9 = var_4;
-    var_2 linkto(var_4);
+    var_2 linkTo(var_4);
     var_4 addyaw(randomfloatrange(-90, 90));
     var_2 thread _id_1DCF();
   }
@@ -142,7 +142,7 @@ _id_1DCA(var_0, var_1) {
     if(var_10 < 0.25) {
       var_10 = 0.25;
     }
-    var_2 rotateto((0, var_8, 0), var_10, var_10 * 0.5, var_10 * 0.5);
+    var_2 rotateTo((0, var_8, 0), var_10, var_10 * 0.5, var_10 * 0.5);
     wait(var_10);
   }
 }
@@ -157,7 +157,7 @@ shutterwanderleft(var_0, var_1) {
     var_2 = var_2 + 179.9;
   }
   var_3 = 0.2;
-  var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
+  var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3);
   wait(var_3 + 0.1);
 
   for(;;) {
@@ -179,7 +179,7 @@ shutterwanderleft(var_0, var_1) {
     if(var_3 < 0.3) {
       var_3 = 0.3;
     }
-    var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
+    var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
   }
 }
@@ -194,7 +194,7 @@ shutterwanderright(var_0, var_1) {
     var_2 = var_2 + 179.9;
   }
   var_3 = 0.2;
-  var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3);
+  var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3);
   wait(var_3 + 0.1);
 
   for(;;) {
@@ -216,7 +216,7 @@ shutterwanderright(var_0, var_1) {
     if(var_3 < 0.3) {
       var_3 = 0.3;
     }
-    var_0 rotateto((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
+    var_0 rotateTo((var_0.angles[0], var_2, var_0.angles[2]), var_3, var_3 * 0.5, var_3 * 0.5);
     wait(var_3);
   }
 }
@@ -237,7 +237,7 @@ wirewander(var_0) {
   var_5 = spawn("script_model", (0, 0, 0));
   var_5.origin = var_2 * 0.5 + var_3 * 0.5;
   var_5.angles = var_4;
-  var_0 linkto(var_5);
+  var_0 linkTo(var_5);
   var_6 = 2;
   var_7 = 0.9;
   var_8 = 4 + randomfloat(2);

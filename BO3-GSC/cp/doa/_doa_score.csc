@@ -157,7 +157,7 @@ function function_cdb6d911() {
         var_324ecf57 = doa;
       }
     }
-    if(getplayers(0).size > 1 && isDefined(var_324ecf57)) {
+    if(getPlayers(0).size > 1 && isDefined(var_324ecf57)) {
       setuimodelvalue(getuimodel(var_324ecf57.ui_model, "ribbon"), 1);
     }
     wait(1);

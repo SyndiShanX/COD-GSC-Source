@@ -174,7 +174,7 @@ func_5903(var_0) {
     return level.failure;
   }
 
-  if(isDefined(self.melee.target) && !isPlayer(self.melee.target) && self.melee.target scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(isDefined(self.melee.target) && !isPlayer(self.melee.target) && self.melee.target scripts\asm\asm_bb::bb_isanimScripted()) {
     return level.failure;
   }
 
@@ -337,7 +337,7 @@ melee_shouldabort() {
     return 1;
   }
 
-  if(!isPlayer(var_0) && var_0 scripts\asm\asm_bb::bb_isanimscripted()) {
+  if(!isPlayer(var_0) && var_0 scripts\asm\asm_bb::bb_isanimScripted()) {
     return 1;
   }
 
@@ -483,7 +483,7 @@ func_B5F0(var_0) {
   }
 
   var_12 = max(sqrt(var_1) - 24, 0);
-  var_13 = vectornormalize(self.origin - var_2.origin);
+  var_13 = vectorNormalize(self.origin - var_2.origin);
   var_14 = var_2.origin + var_13 * var_12;
   var_15 = 36;
   if(isDefined(self.var_B64F)) {
@@ -548,7 +548,7 @@ func_B5F0(var_0) {
 gettargetchargepos(var_0) {
   var_1 = var_0.origin;
   var_2 = var_0.origin - self.origin;
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_1 = var_1 - var_2 * self.meleeactorboundsradius;
   var_3 = getclosestpointonnavmesh(var_1, self);
   if(abs(var_1[2] - var_3[2]) > self.maxzdiff) {

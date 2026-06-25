@@ -185,7 +185,7 @@ intro_special_zombies_attach() {
     self.prop_decorator setModel("bsh_life_preserve_01_snow");
   }
 
-  self.prop_decorator linkto(self, "J_SpineLower", (0, 0, 0), (0, 90, -90));
+  self.prop_decorator linkTo(self, "J_SpineLower", (0, 0, 0), (0, 90, -90));
 }
 
 special_decorator_zombie_killed(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08) {

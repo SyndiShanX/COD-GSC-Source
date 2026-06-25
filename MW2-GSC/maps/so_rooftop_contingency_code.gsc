@@ -35,7 +35,7 @@ get_vehicle_type_count(wave_num, type) {
   return count;
 }
 uav_pickup_setup() {
-  uav_pickup = GetEnt("uav_controller", "targetname");
+  uav_pickup = getEnt("uav_controller", "targetname");
   AssertEx(isDefined(uav_pickup), "Missing UAV controller pickup objective model in level.");
 
   uav_pickup Hide();
@@ -51,9 +51,9 @@ uav_pickup_setup() {
     uav_pickup Show();
 
     uav_pickup MakeUsable();
-    uav_pickup SetCursorHint("HINT_NOICON");
+    uav_pickup setCursorHint("HINT_NOICON");
 
-    uav_pickup SetHintString(&"SO_ROOFTOP_CONTINGENCY_DRONE_PICKUP");
+    uav_pickup setHintString(&"SO_ROOFTOP_CONTINGENCY_DRONE_PICKUP");
     uav_pickup waittill("trigger", player);
 
     uav_pickup playSound("detpack_pickup");
@@ -163,8 +163,8 @@ uav_rig_aiming() {
     closest_focus = getClosest(level.player.origin, focus_points);
     targetPos = closest_focus.origin;
     angles = VectorToAngles(targetPos - level.uav.origin);
-    level.uavRig MoveTo(level.uav.origin, 0.10, 0, 0);
-    level.uavRig RotateTo(ANGLES, 0.10, 0, 0);
+    level.uavRig moveTo(level.uav.origin, 0.10, 0, 0);
+    level.uavRig rotateTo(ANGLES, 0.10, 0, 0);
     wait(0.05);
   }
 }
@@ -210,7 +210,7 @@ vehicle_death_paths() {
         death_origin = self.origin;
       }
 
-      self DisconnectPaths();
+      self disconnectPaths();
     }
 
     wait(0.05);

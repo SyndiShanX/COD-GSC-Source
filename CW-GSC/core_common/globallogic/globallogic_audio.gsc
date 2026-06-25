@@ -435,7 +435,7 @@ function function_61e17de0(dialogkey, players, objectivekey, killstreakid, dialo
 function function_248fc9f7(dialogkey, team, excludelist, objectivekey, killstreakid, dialogbufferkey, skippable, var_6ad14004) {
   assert(isDefined(excludelist));
   assert(isDefined(level.players));
-  players = isDefined(team) ? getplayers(team) : level.players;
+  players = isDefined(team) ? getPlayers(team) : level.players;
   players = array::exclude(players, excludelist);
   function_61e17de0(dialogkey, players, objectivekey, killstreakid, dialogbufferkey, skippable, var_6ad14004);
 }
@@ -443,7 +443,7 @@ function function_248fc9f7(dialogkey, team, excludelist, objectivekey, killstrea
 function function_b4319f8e(dialogkey, team, exclude, objectivekey, killstreakid, dialogbufferkey, skippable, var_6ad14004) {
   assert(isDefined(exclude));
   assert(isDefined(level.players));
-  players = isDefined(team) ? getplayers(team) : level.players;
+  players = isDefined(team) ? getPlayers(team) : level.players;
   arrayremovevalue(players, exclude);
   function_61e17de0(dialogkey, players, objectivekey, killstreakid, dialogbufferkey, skippable, var_6ad14004);
 }
@@ -457,7 +457,7 @@ function leader_dialog(dialogkey, team, objectivekey, killstreakid, dialogbuffer
     }
   }
 
-  players = getplayers(team);
+  players = getPlayers(team);
   function_61e17de0(dialogkey, players, objectivekey, killstreakid, dialogbufferkey, undefined, skippable, var_6ad14004);
 }
 
@@ -877,7 +877,7 @@ function function_abf21f69(alias, players) {
 }
 
 function play_2d_on_team(alias, team) {
-  function_abf21f69(alias, getplayers(team));
+  function_abf21f69(alias, getPlayers(team));
 }
 
 function on_end_game() {

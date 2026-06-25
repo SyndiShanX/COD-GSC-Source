@@ -184,7 +184,7 @@ function_5a46c509(var_d53fd9d8) {
 }
 
 spawn_a_zombie() {
-  players = getplayers();
+  players = getPlayers();
   spawn_position = players[0].origin + vectorscale(anglesToForward(level.players[0].angles), 100);
   spawned = spawnactor(#"spawner_boct_zombie_wz", spawn_position, (0, 0, 0), "<dev string:x38>");
 
@@ -261,7 +261,7 @@ devgui_wz_ai() {
     } else if(strstartswith(cmd, "<dev string:x618>")) {
       weapon_name = strreplace(cmd, "<dev string:x618>", "<dev string:x44>");
       weapon = getweapon(weapon_name);
-      players = getplayers();
+      players = getPlayers();
       players[0] giveweapon(weapon);
       players[0] switchtoweapon(weapon);
       players[0] setweaponammostock(weapon, weapon.maxammo);
@@ -573,7 +573,7 @@ move_box(n_duration, n_dist) {
     n_duration = 0.25;
   }
 
-  self moveto(end_point, n_duration, 0.1, 0.1);
+  self moveTo(end_point, n_duration, 0.1, 0.1);
   wait n_duration;
 
   if(isDefined(self)) {
@@ -603,7 +603,7 @@ function_9e142fa2(n_duration, n_dist) {
     n_duration = 0.25;
   }
 
-  self moveto(end_point, n_duration, 0.1, 0.1);
+  self moveTo(end_point, n_duration, 0.1, 0.1);
   wait n_duration;
 
   if(isDefined(self)) {
@@ -914,7 +914,7 @@ function_71d1b294() {
           foreach(spawn_point in ai_zone.spawn_points) {
             circle(spawn_point.origin + (0, 0, 1), 15, (1, 0, 0), 0, 1);
             nodeforward = anglesToForward(spawn_point.angles);
-            nodeforward = vectornormalize(nodeforward);
+            nodeforward = vectorNormalize(nodeforward);
             endpt = spawn_point.origin + nodeforward * 20;
             line(spawn_point.origin, endpt, (1, 0, 0), 0);
           }
@@ -1305,7 +1305,7 @@ function_7b0c014e() {
           if(isDefined(ai_zone.is_global) && ai_zone.is_global) {
             ai_zone.is_occupied = 1;
           } else if(isDefined(ai_zone.is_active) && ai_zone.is_active) {
-            players = getplayers();
+            players = getPlayers();
 
             for(i = 0; i < players.size; i++) {
               if(isDefined(players[i].ai_zone) && players[i].ai_zone == ai_zone) {
@@ -1372,7 +1372,7 @@ function_4b95d880() {
       }
 
       if(isDefined(self.var_1cbdb7bb) && self.var_1cbdb7bb) {
-        spawned = spawnvehicle(self.var_cafac64a, s_loc.origin, s_loc.angles, "wz_vehicle_ai");
+        spawned = spawnVehicle(self.var_cafac64a, s_loc.origin, s_loc.angles, "wz_vehicle_ai");
       } else if(isDefined(self.var_fbb29fb7)) {
         var_39480d4 = randomint(100) <= level.var_76fc612e;
 

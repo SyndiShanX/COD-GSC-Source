@@ -105,7 +105,7 @@ was_dialog_said(str_line) {
 }
 
 say_dialog_targetname(targetname, str_vo_line, delay) {
-  e_guy = getent(targetname, "targetname");
+  e_guy = getEnt(targetname, "targetname");
   assert(isDefined(e_guy), "say_dialog_targetname - no entity with targetname: " + targetname);
   e_guy say_dialog(str_vo_line, delay);
 }
@@ -127,7 +127,7 @@ say_dialog_trigger(str_trigger_targetname, str_vo_line, delay_after_trigger) {
   self endon("death");
   level endon("kill_pending_dialog");
   self endon("kill_pending_dialog");
-  t_trig = getent(str_trigger_targetname, "targetname");
+  t_trig = getEnt(str_trigger_targetname, "targetname");
   assert(isDefined(t_trig), "Dialog trigger not found: " + str_trigger_targetname);
   t_trig waittill("trigger");
   self say_dialog(str_vo_line, delay_after_trigger);

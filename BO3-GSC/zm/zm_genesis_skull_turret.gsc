@@ -182,37 +182,37 @@ function function_d4781758(e_player) {
 
 function function_c31e47a5(e_player, v_start_origin, v_start_angles) {
   util::wait_network_frame();
-  e_player setorigin(v_start_origin);
+  e_player setOrigin(v_start_origin);
   e_player setplayerangles(v_start_angles);
   e_player showviewmodel();
 }
 
 function function_ff090b49(e_player) {
   if(isDefined(e_player.zombie_vars["zombie_powerup_minigun_on"]) && e_player.zombie_vars["zombie_powerup_minigun_on"]) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(isDefined(self.stub.script_int) && !level flag::get("power_on" + self.stub.script_int)) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.vh_turret flag::get("turret_active")) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(self.stub.vh_turret flag::get("turret_cooldown")) {
-    self sethintstring(&"ZM_GENESIS_SKULL_TURRET_COOLDOWN");
+    self setHintString(&"ZM_GENESIS_SKULL_TURRET_COOLDOWN");
     return false;
   }
   if(self.stub.vh_turret.var_5015d1a3 === e_player) {
-    self sethintstring(&"ZM_GENESIS_REUSE_TURRET");
+    self setHintString(&"ZM_GENESIS_REUSE_TURRET");
     return true;
   }
   if(isDefined(self.stub.vh_turret.var_5015d1a3)) {
-    self sethintstring(&"ZM_GENESIS_TURRET_IN_USE");
+    self setHintString(&"ZM_GENESIS_TURRET_IN_USE");
     return false;
   }
-  self sethintstring(&"ZM_GENESIS_USE_TURRET", 2000);
+  self setHintString(&"ZM_GENESIS_USE_TURRET", 2000);
   return true;
 }
 
@@ -376,12 +376,12 @@ function function_67c99c8d(glow = 2) {}
 function function_e4ac9f57() {}
 
 function function_3d36386() {
-  playsoundatposition("wpn_skull_turret_start", self.origin);
+  playSoundAtPosition("wpn_skull_turret_start", self.origin);
   self playLoopSound("wpn_skull_turret_loop");
 }
 
 function function_d54746f0() {
-  playsoundatposition("wpn_skull_turret_stop", self.origin);
+  playSoundAtPosition("wpn_skull_turret_stop", self.origin);
   self stoploopsound();
 }
 
@@ -407,7 +407,7 @@ function function_7fd518ea() {
 function function_13eaa39c() {
   while(true) {
     n_random = randomfloatrange(5, 7);
-    self rotateto((randomintrange(-90, 90), randomintrange(-90, 90), randomintrange(-90, 90)), n_random);
+    self rotateTo((randomintrange(-90, 90), randomintrange(-90, 90), randomintrange(-90, 90)), n_random);
     wait(n_random);
     while(isDefined(self.var_827db0f2) && self.var_827db0f2) {
       wait(1);
@@ -460,7 +460,7 @@ function sophia_beam_locked(w_weapon, e_player) {
   }
   w_weapon clientfield::set("turret_beam_fire_crystal", 1);
   w_weapon notify("turret_locked");
-  w_weapon setturrettargetent(self);
+  w_weapon setturrettargetEnt(self);
   e_player thread function_13705ce6(self);
   level flag::wait_till("sophia_activated");
   w_weapon clientfield::set("turret_beam_fire_crystal", 0);

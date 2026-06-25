@@ -158,7 +158,7 @@ _id_3D83() {
     }
 
     var_13 = anglesToForward(self gettagangles("tag_eye"));
-    var_14 = vectornormalize(var_6 + (0, 0, 30) - self getEye());
+    var_14 = vectorNormalize(var_6 + (0, 0, 30) - self getEye());
 
     if(vectordot(var_13, var_14) > 0.55) {
       if(!isDefined(var_4._id_D026) && self _meth_8067(var_4)) {
@@ -314,7 +314,7 @@ _id_EBEC() {
     }
 
     var_13 = anglesToForward(self gettagangles("tag_eye"));
-    var_14 = vectornormalize(var_6 + (0, 0, 30) - self getEye());
+    var_14 = vectorNormalize(var_6 + (0, 0, 30) - self getEye());
 
     if(vectordot(var_13, var_14) > 0.55) {
       if(!isDefined(var_3._id_D026) && self _meth_8067(var_3) && scripts\engine\utility::_id_30FE(var_3.origin, self, level._id_0408._id_31FA)) {

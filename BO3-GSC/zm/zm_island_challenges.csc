@@ -32,7 +32,7 @@ function init() {
 }
 
 function pillar_challenge_0_1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_0", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_0", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 0) {
@@ -42,7 +42,7 @@ function pillar_challenge_0_1(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_0_2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_0", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_0", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 0) {
@@ -52,7 +52,7 @@ function pillar_challenge_0_2(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_0_3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_0", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_0", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 0) {
@@ -62,7 +62,7 @@ function pillar_challenge_0_3(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_1_1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_1", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_1", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 1) {
@@ -72,7 +72,7 @@ function pillar_challenge_1_1(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_1_2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_1", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_1", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 1) {
@@ -82,7 +82,7 @@ function pillar_challenge_1_2(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_1_3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_1", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_1", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 1) {
@@ -92,7 +92,7 @@ function pillar_challenge_1_3(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_2_1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_2", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_2", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 2) {
@@ -102,7 +102,7 @@ function pillar_challenge_2_1(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_2_2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_2", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_2", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 2) {
@@ -112,7 +112,7 @@ function pillar_challenge_2_2(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_2_3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_2", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_2", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 2) {
@@ -122,7 +122,7 @@ function pillar_challenge_2_3(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_3_1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_3", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_3", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 3) {
@@ -132,7 +132,7 @@ function pillar_challenge_3_1(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_3_2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_3", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_3", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 3) {
@@ -142,7 +142,7 @@ function pillar_challenge_3_2(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function pillar_challenge_3_3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_4c6172ff = getent(localclientnum, "challenge_pillar_3", "targetname");
+  var_4c6172ff = getEnt(localclientnum, "challenge_pillar_3", "targetname");
   var_2ca030e2 = 0;
   player = getlocalplayer(localclientnum);
   if(player getentitynumber() == 3) {

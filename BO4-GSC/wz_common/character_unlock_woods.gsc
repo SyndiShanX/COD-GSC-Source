@@ -123,7 +123,7 @@ function_1c4b5097(item) {
 
 function_4ac25840(params) {
   foreach(team in params.teams_alive) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     foreach(player in players) {
       if(isalive(player) && player character_unlock::function_f0406288(#"woods_unlock") && player.deaths === 0 && player.suicides === 0) {

@@ -54,7 +54,7 @@ func_3E49(var_0) {
   }
 
   if(isDefined(self.var_EF7E)) {
-    self scragentsetgoalradius(self.var_EF7E);
+    self scragentsetgoalRadius(self.var_EF7E);
     var_3 = self.var_EF7E;
   } else {
     var_3 = 4;
@@ -242,13 +242,13 @@ func_3DE6(var_0) {
       return anim.success;
     }
 
-    var_5 = vectornormalize(self.origin - self.enemy.origin);
+    var_5 = vectorNormalize(self.origin - self.enemy.origin);
     var_6 = 100;
     var_7 = self.origin + var_5 * var_6;
     var_7 = getclosestpointonnavmesh(var_7, self);
     var_8 = var_7 - self.origin;
     var_8 = (var_8[0], var_8[1], 0);
-    var_9 = vectornormalize(var_8);
+    var_9 = vectorNormalize(var_8);
     var_10 = vectordot(var_9, var_5);
 
     if(var_10 > 0) {

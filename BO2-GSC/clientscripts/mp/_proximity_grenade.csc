@@ -94,9 +94,9 @@ taserhudfx(localclientnum, position) {
         for(j = 0; j < cycles; j++) {
           if(getclientfieldtoplayer("tazered") == 1) {
             menuname = "fullscreen_proximity";
-            forwardvec = vectornormalize(anglesToForward(self.angles));
-            rightvec = vectornormalize(anglestoright(self.angles));
-            explosionvec = vectornormalize(position - self.origin);
+            forwardvec = vectorNormalize(anglesToForward(self.angles));
+            rightvec = vectorNormalize(anglestoright(self.angles));
+            explosionvec = vectorNormalize(position - self.origin);
             fdot = vectordot(explosionvec, forwardvec);
             rdot = vectordot(explosionvec, rightvec);
 
@@ -132,9 +132,9 @@ reducedshock(localclientnum, position) {
   menuname = "fullscreen_proximity";
   self thread flickervisionset(localclientnum, 0.03, 0.15, 0.0);
   self playSound(0, "wpn_taser_mine_tacmask");
-  forwardvec = vectornormalize(anglesToForward(self.angles));
-  rightvec = vectornormalize(anglestoright(self.angles));
-  explosionvec = vectornormalize(position - self.origin);
+  forwardvec = vectorNormalize(anglesToForward(self.angles));
+  rightvec = vectorNormalize(anglestoright(self.angles));
+  explosionvec = vectorNormalize(position - self.origin);
   fdot = vectordot(explosionvec, forwardvec);
   rdot = vectordot(explosionvec, rightvec);
 

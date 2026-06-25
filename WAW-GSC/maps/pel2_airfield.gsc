@@ -30,7 +30,7 @@ main() {
   level thread move_wave_2_2();
   level thread spawn_airfield_pickup_weapons();
 
-  trig = getent("trigger_airfield_wave", "script_noteworthy");
+  trig = getEnt("trigger_airfield_wave", "script_noteworthy");
   trig notify("trigger");
 }
 
@@ -68,7 +68,7 @@ airfield_initial_chains() {
 
   flag_wait("chi_1b_wave_dead");
 
-  color_chain = getent("trig_chain_past_wing", "script_noteworthy");
+  color_chain = getEnt("trig_chain_past_wing", "script_noteworthy");
   if(isDefined(color_chain)) {
     color_chain notify("trigger");
   }
@@ -252,18 +252,18 @@ ambient_left_battle() {
 
   wait_network_frame();
 
-  trig = getent("airfield_ally_drones_ambient_1", "script_noteworthy");
+  trig = getEnt("airfield_ally_drones_ambient_1", "script_noteworthy");
   trig notify("trigger");
 
   wait_network_frame();
 
-  trig = getent("airfield_axis_drones_ambient_1", "script_noteworthy");
+  trig = getEnt("airfield_axis_drones_ambient_1", "script_noteworthy");
   trig notify("trigger");
 
   wait(0.05);
 
-  axis_tank = getent("airfield_ambient_tank_2", "targetname");
-  ally_tank = getent("airfield_ambient_tank_1", "targetname");
+  axis_tank = getEnt("airfield_ambient_tank_2", "targetname");
+  ally_tank = getEnt("airfield_ambient_tank_1", "targetname");
 
   ally_tank notify("stop_vehicle_compasshandle");
 
@@ -330,10 +330,10 @@ aa_ambient_fire() {
 
   wait(2);
 
-  aaGun_1 = getent("aaGun_1", "targetname");
-  aaGun_2 = getent("aaGun_2", "targetname");
-  aaGun_3 = getent("aaGun_3", "targetname");
-  aaGun_4 = getent("aaGun_4", "targetname");
+  aaGun_1 = getEnt("aaGun_1", "targetname");
+  aaGun_2 = getEnt("aaGun_2", "targetname");
+  aaGun_3 = getEnt("aaGun_3", "targetname");
+  aaGun_4 = getEnt("aaGun_4", "targetname");
 
   aaGun_1.client_side_fire = true;
   aaGun_2.client_side_fire = true;
@@ -367,15 +367,15 @@ aa_move_target(orig_name, end_spot) {
   self endon("change target");
   self endon("crew dismount");
 
-  org = getent(orig_name, "script_noteworthy");
+  org = getEnt(orig_name, "script_noteworthy");
 
   targ_1 = org.origin + (400, 0, 0);
   targ_2 = org.origin - (400, 0, 0);
 
   while(1) {
-    org MoveTo(targ_1, 8);
+    org moveTo(targ_1, 8);
     org waittill("movedone");
-    org MoveTo(targ_2, 8);
+    org moveTo(targ_2, 8);
     org waittill("movedone");
   }
 }
@@ -487,13 +487,13 @@ napalm_plane_1_release() {
   org = spawn("script_model", self.origin);
   org setModel("aircraft_bomb");
 
-  dest = getstruct("orig_plane_1_napalm", "targetname");
+  dest = getStruct("orig_plane_1_napalm", "targetname");
 
   wait(0.05);
 
   level notify("napalm_release_1");
 
-  org moveto(dest.origin, 0.4);
+  org moveTo(dest.origin, 0.4);
   wait(0.4);
 
   sound_origin = spawn("script_origin", (2004, 9577, -11.6));
@@ -503,7 +503,7 @@ napalm_plane_1_release() {
 
   exploder(502);
 
-  orig = getent("node_end_vigenette", "targetname");
+  orig = getEnt("node_end_vigenette", "targetname");
   PlayRumbleOnPosition("explosion_generic", orig.origin);
 }
 
@@ -514,17 +514,17 @@ napalm_plane_2_release() {
   org = spawn("script_model", self.origin);
   org setModel("aircraft_bomb");
 
-  dest = getstruct("orig_plane_2_napalm", "targetname");
+  dest = getStruct("orig_plane_2_napalm", "targetname");
 
   wait(0.05);
 
-  org moveto(dest.origin, 0.4);
+  org moveTo(dest.origin, 0.4);
   wait(0.4);
   org delete();
 
   exploder(503);
 
-  orig = getent("node_end_vigenette", "targetname");
+  orig = getEnt("node_end_vigenette", "targetname");
   PlayRumbleOnPosition("explosion_generic", orig.origin);
 }
 
@@ -535,11 +535,11 @@ napalm_plane_3_release() {
   org = spawn("script_model", self.origin);
   org setModel("aircraft_bomb");
 
-  dest = getstruct("orig_plane_3_napalm", "targetname");
+  dest = getStruct("orig_plane_3_napalm", "targetname");
 
   wait(0.05);
 
-  org moveto(dest.origin, 0.4);
+  org moveTo(dest.origin, 0.4);
   wait(0.4);
 
   sound_origin = spawn("script_origin", (2004, 9577, -11.6));
@@ -557,11 +557,11 @@ napalm_plane_4_release() {
   org = spawn("script_model", self.origin);
   org setModel("aircraft_bomb");
 
-  dest = getstruct("orig_plane_4_napalm", "targetname");
+  dest = getStruct("orig_plane_4_napalm", "targetname");
 
   wait(0.05);
 
-  org moveto(dest.origin, 0.4);
+  org moveTo(dest.origin, 0.4);
   wait(0.4);
 
   exploder(505);
@@ -692,7 +692,7 @@ last_trench_banzai() {
   for(i = 0; i < 2; i++) {
     wait(RandomIntRange(14, 18) + (i * RandomIntRange(3, 6)));
 
-    vol = getent("vol_last_trench", "targetname");
+    vol = getEnt("vol_last_trench", "targetname");
 
     while(1) {
       if(any_player_IsTouching(vol)) {
@@ -730,7 +730,7 @@ last_trench_chain() {
 
   set_color_chain("trig_past_last_trench");
 
-  old_trig = getent("trig_past_last_trench_pre", "targetname");
+  old_trig = getEnt("trig_past_last_trench_pre", "targetname");
   if(isDefined(old_trig)) {
     old_trig delete();
   }
@@ -767,7 +767,7 @@ pacing_vignette() {
 
   pacing_vignette_in_place();
 
-  goal_node = getent("node_end_vigenette", "targetname");
+  goal_node = getEnt("node_end_vigenette", "targetname");
 
   animguys = [];
   animguys[0] = level.roebuck;
@@ -888,8 +888,8 @@ last_counterattack_vo() {
 }
 
 player_not_on_triple25() {
-  left_aa_gun = getent("aaGun_2", "targetname");
-  right_aa_gun = getent("aaGun_3", "targetname");
+  left_aa_gun = getEnt("aaGun_2", "targetname");
+  right_aa_gun = getEnt("aaGun_3", "targetname");
 
   if(isDefined(right_aa_gun) && right_aa_gun.health) {
     right_aa_owner = right_aa_gun GetVehicleOwner();
@@ -999,7 +999,7 @@ last_counterattack() {
   level.ladder_wait_timer = 10000;
 
   simple_floodspawn("outro_mg_guy", ::outro_mg_guy_strat);
-  mg = getent("end_watchtower_mg", "targetname");
+  mg = getEnt("end_watchtower_mg", "targetname");
   mg setturretignoregoals(true);
 
   wait_until_this_many_end_guys_killed(14);
@@ -1401,10 +1401,10 @@ last_aa_guns() {
 
   level notify("obj_airfield_tanks_complete");
 
-  aaGun_1 = getent("aaGun_1", "targetname");
-  aaGun_2 = getent("aaGun_2", "targetname");
-  aaGun_3 = getent("aaGun_3", "targetname");
-  aaGun_4 = getent("aaGun_4", "targetname");
+  aaGun_1 = getEnt("aaGun_1", "targetname");
+  aaGun_2 = getEnt("aaGun_2", "targetname");
+  aaGun_3 = getEnt("aaGun_3", "targetname");
+  aaGun_4 = getEnt("aaGun_4", "targetname");
 
   aaGun_1 stop_keep_tank_alive();
   aaGun_2 stop_keep_tank_alive();
@@ -1473,10 +1473,10 @@ make_aa_crew_ignored_think() {
 
 last_aa_guns_objective() {
   aaGuns = [];
-  aaGuns[0] = getent("aaGun_1", "targetname");
-  aaGuns[1] = getent("aaGun_2", "targetname");
-  aaGuns[2] = getent("aaGun_3", "targetname");
-  aaGuns[3] = getent("aaGun_4", "targetname");
+  aaGuns[0] = getEnt("aaGun_1", "targetname");
+  aaGuns[1] = getEnt("aaGun_2", "targetname");
+  aaGuns[2] = getEnt("aaGun_3", "targetname");
+  aaGuns[3] = getEnt("aaGun_4", "targetname");
 
   for(i = 0; i < aaGuns.size; i++) {
     Objective_additionalPosition(5, i, aaGuns[i].origin);
@@ -1504,7 +1504,7 @@ aa_manually_add_crew(aa_crew) {
 
   for(i = 0; i < aa_crew.size; i++) {
     self.triple25_gunner[self.triple25_gunner.size] = aa_crew[i] maps\_triple25::spawn_gunner();
-    self.triple25_gunner[i] linkto(self, "tag_driver" + (i + 1), (0, 0, 0), (0, 0, 0));
+    self.triple25_gunner[i] linkTo(self, "tag_driver" + (i + 1), (0, 0, 0), (0, 0, 0));
     self.triple25_gunner[i].position = i;
 
     self.triple25_gunner[i] thread maps\_triple25::monitor_gunner(self, triple25_dismount_trig);
@@ -1546,7 +1546,7 @@ aa_guns_cleared(aa_gun, ai_group_name, blocker_name, obj_index) {
     aa_gun makevehicleusable();
   }
 
-  blocker = getent(blocker_name, "targetname");
+  blocker = getEnt(blocker_name, "targetname");
   blocker connectpaths();
   blocker delete();
 }
@@ -1967,12 +1967,12 @@ rush_guys_die() {
 }
 
 color_chains_near_tanks() {
-  trig = getent("chain_airfield_end_a", "targetname");
+  trig = getEnt("chain_airfield_end_a", "targetname");
   trig trigger_off();
 }
 
 bazooka_respawn() {
-  respawn_schrek = getent("airfield_bazooka", "targetname");
+  respawn_schrek = getEnt("airfield_bazooka", "targetname");
   respawn_origin = respawn_schrek.origin;
   respawn_angles = respawn_schrek.angles;
 
@@ -2091,9 +2091,9 @@ tank_wave_2() {
   flag_set("tank_spawn_n_move_2");
   quick_text("tank_spawn_n_move_2", 3, true);
 
-  sherman_2a = getent("sherman_wave_2a", "targetname");
+  sherman_2a = getEnt("sherman_wave_2a", "targetname");
   sherman_2a thread sherman_2a_strat();
-  sherman_2b = getent("sherman_wave_2b", "targetname");
+  sherman_2b = getEnt("sherman_wave_2b", "targetname");
   sherman_2b thread sherman_2b_strat();
 
   level thread shermans_2_dead();
@@ -2106,15 +2106,15 @@ tank_wave_2() {
 
   wait(0.05);
 
-  chi_3c = getent("chi_wave_3c", "targetname");
+  chi_3c = getEnt("chi_wave_3c", "targetname");
   chi_3c thread chi_3c_strat();
 
   flag_set("chi_3c_spawned");
 
-  sherman_wave_3a = getent("sherman_wave_3a", "targetname");
+  sherman_wave_3a = getEnt("sherman_wave_3a", "targetname");
   sherman_wave_3a thread sherman_3a_strat();
 
-  sherman_wave_3b = getent("sherman_wave_3b", "targetname");
+  sherman_wave_3b = getEnt("sherman_wave_3b", "targetname");
   sherman_wave_3b thread sherman_3b_strat();
 
   level thread shermans_3_dead();
@@ -2134,10 +2134,10 @@ tank_wave_3() {
 
   wait(0.05);
 
-  chi_3a = getent("chi_wave_3a", "targetname");
+  chi_3a = getEnt("chi_wave_3a", "targetname");
   chi_3a thread chi_3a_strat();
 
-  chi_3b = getent("chi_wave_3b", "targetname");
+  chi_3b = getEnt("chi_wave_3b", "targetname");
   chi_3b thread chi_3b_strat();
 
   level thread chi_3_wave_dead();
@@ -2154,18 +2154,18 @@ chi_3_kill_shermans_2() {
 }
 
 tank_wave_1_strats() {
-  sherman_1a = getent("sherman_wave_1a", "targetname");
-  sherman_1b = getent("sherman_wave_1b", "targetname");
+  sherman_1a = getEnt("sherman_wave_1a", "targetname");
+  sherman_1b = getEnt("sherman_wave_1b", "targetname");
 
   sherman_1a thread sherman_1a_strat();
   sherman_1b thread sherman_1b_strat();
 
-  chi_wave_1a = getent("chi_wave_1a", "targetname");
-  chi_wave_1c = getent("chi_wave_1c", "targetname");
-  chi_wave_1d = getent("chi_wave_1d", "targetname");
-  chi_wave_1e = getent("chi_wave_1e", "targetname");
-  chi_wave_1f = getent("chi_wave_1f", "targetname");
-  chi_wave_1g = getent("chi_wave_1g", "targetname");
+  chi_wave_1a = getEnt("chi_wave_1a", "targetname");
+  chi_wave_1c = getEnt("chi_wave_1c", "targetname");
+  chi_wave_1d = getEnt("chi_wave_1d", "targetname");
+  chi_wave_1e = getEnt("chi_wave_1e", "targetname");
+  chi_wave_1f = getEnt("chi_wave_1f", "targetname");
+  chi_wave_1g = getEnt("chi_wave_1g", "targetname");
 
   chi_wave_1a thread chi_1a_strat();
   chi_wave_1c thread chi_1c_strat();
@@ -2235,8 +2235,8 @@ sherman_1b_strat() {
 sherman_1b_shoot_strat() {
   self endon("death");
 
-  truck = getent("airfield_type94", "targetname");
-  self setturrettargetent(truck);
+  truck = getEnt("airfield_type94", "targetname");
+  self setturrettargetEnt(truck);
 
   self waittill("turret_on_target");
   wait(3.5);
@@ -2586,9 +2586,9 @@ shermans_fire_towards_bunkers() {
   level endon("stop_sherman_bunker_shooting");
 
   targs = [];
-  targs[0] = getstruct("orig_sherman_targ_1", "targetname");
-  targs[1] = getstruct("orig_sherman_targ_2", "targetname");
-  targs[2] = getstruct("orig_sherman_targ_3", "targetname");
+  targs[0] = getStruct("orig_sherman_targ_1", "targetname");
+  targs[1] = getStruct("orig_sherman_targ_2", "targetname");
+  targs[2] = getStruct("orig_sherman_targ_3", "targetname");
 
   wait(4);
 
@@ -2607,10 +2607,10 @@ chi_3a_strat() {
   self.pel2_objective_index = 0;
 
   self.invulnerable_against_these_ents = [];
-  self.invulnerable_against_these_ents[0] = getent("sherman_wave_2a", "targetname");
-  self.invulnerable_against_these_ents[1] = getent("sherman_wave_2b", "targetname");
-  self.invulnerable_against_these_ents[2] = getent("sherman_wave_3a", "targetname");
-  self.invulnerable_against_these_ents[3] = getent("sherman_wave_3b", "targetname");
+  self.invulnerable_against_these_ents[0] = getEnt("sherman_wave_2a", "targetname");
+  self.invulnerable_against_these_ents[1] = getEnt("sherman_wave_2b", "targetname");
+  self.invulnerable_against_these_ents[2] = getEnt("sherman_wave_3a", "targetname");
+  self.invulnerable_against_these_ents[3] = getEnt("sherman_wave_3b", "targetname");
 
   source_node = getvehiclenode("chi_wave_3a_avoid_1", "script_noteworthy");
   dest_node = getvehiclenode("chi_wave_3a_avoid_2", "script_noteworthy");
@@ -2694,9 +2694,9 @@ chis_fire_towards_shermans() {
   level endon("stop_chi_wave_3_shooting");
 
   targs = [];
-  targs[0] = getstruct("orig_chi_targ_1", "targetname");
-  targs[1] = getstruct("orig_chi_targ_2", "targetname");
-  targs[2] = getstruct("orig_chi_targ_3", "targetname");
+  targs[0] = getStruct("orig_chi_targ_1", "targetname");
+  targs[1] = getStruct("orig_chi_targ_2", "targetname");
+  targs[2] = getStruct("orig_chi_targ_3", "targetname");
 
   while(1) {
     self tank_fire_at_struct(targs[RandomInt(targs.size)]);
@@ -2716,7 +2716,7 @@ chis_fire_at_players() {
       targetted_player = players[RandomInt(players.size)];
     }
 
-    self setturrettargetent(targetted_player);
+    self setturrettargetEnt(targetted_player);
 
     self waittill_notify_or_timeout("turret_on_target", 4);
     self ClearTurretTarget();
@@ -2748,11 +2748,11 @@ chis_fire_at_players_and_bunker() {
 
   targs = getStructArray("orig_last_tank_targ", "targetname");
 
-  left_aa_gun = getent("aaGun_2", "targetname");
-  right_aa_gun = getent("aaGun_3", "targetname");
+  left_aa_gun = getEnt("aaGun_2", "targetname");
+  right_aa_gun = getEnt("aaGun_3", "targetname");
 
-  left_mg = getent("left_aa_bunker_mg", "targetname");
-  right_mg = getent("right_aa_bunker_mg", "targetname");
+  left_mg = getEnt("left_aa_bunker_mg", "targetname");
+  right_mg = getEnt("right_aa_bunker_mg", "targetname");
 
   while(1) {
     player_touching_left_trig = get_player_touching(level.aa_player_trig_left);
@@ -2773,7 +2773,7 @@ chis_fire_at_players_and_bunker() {
 
           quick_text("player on left aa gun being fired at now!");
 
-          self setturrettargetent(left_aa_gun, (0, 0, 15));
+          self setturrettargetEnt(left_aa_gun, (0, 0, 15));
           self waittill_notify_or_timeout("turret_on_target", 3);
           self ClearTurretTarget();
           wait(RandomFloatRange(0.45, 1.2));
@@ -2798,7 +2798,7 @@ chis_fire_at_players_and_bunker() {
 
           quick_text("player on right aa gun being fired at now!");
 
-          self setturrettargetent(right_aa_gun, (0, 0, 15));
+          self setturrettargetEnt(right_aa_gun, (0, 0, 15));
           self waittill_notify_or_timeout("turret_on_target", 3);
           self ClearTurretTarget();
           wait(RandomFloatRange(0.45, 1.2));
@@ -2814,7 +2814,7 @@ chis_fire_at_players_and_bunker() {
       quick_text("firing on left mg!");
 
       random_offset = RandomIntRange(29, 35);
-      self setturrettargetent(left_turret_owner, (0, 0, random_offset));
+      self setturrettargetEnt(left_turret_owner, (0, 0, random_offset));
 
       self waittill_notify_or_timeout("turret_on_target", 3);
       self ClearTurretTarget();
@@ -2829,7 +2829,7 @@ chis_fire_at_players_and_bunker() {
       quick_text("firing on right mg!");
 
       random_offset = RandomIntRange(29, 35);
-      self setturrettargetent(right_turret_owner, (0, 0, random_offset));
+      self setturrettargetEnt(right_turret_owner, (0, 0, random_offset));
 
       self waittill_notify_or_timeout("turret_on_target", 3);
       self ClearTurretTarget();
@@ -2852,7 +2852,7 @@ chis_fire_at_players_and_bunker() {
         players = get_players();
         targetted_player = players[RandomInt(players.size)];
 
-        self setturrettargetent(targetted_player, (0, 0, RandomIntRange(15, 26)));
+        self setturrettargetEnt(targetted_player, (0, 0, RandomIntRange(15, 26)));
 
         self waittill_notify_or_timeout("turret_on_target", 4);
         self ClearTurretTarget();
@@ -2911,10 +2911,10 @@ chi_3b_strat() {
   self.pel2_objective_index = 1;
 
   self.invulnerable_against_these_ents = [];
-  self.invulnerable_against_these_ents[0] = getent("sherman_wave_2a", "targetname");
-  self.invulnerable_against_these_ents[1] = getent("sherman_wave_2b", "targetname");
-  self.invulnerable_against_these_ents[2] = getent("sherman_wave_3a", "targetname");
-  self.invulnerable_against_these_ents[3] = getent("sherman_wave_3b", "targetname");
+  self.invulnerable_against_these_ents[0] = getEnt("sherman_wave_2a", "targetname");
+  self.invulnerable_against_these_ents[1] = getEnt("sherman_wave_2b", "targetname");
+  self.invulnerable_against_these_ents[2] = getEnt("sherman_wave_3a", "targetname");
+  self.invulnerable_against_these_ents[3] = getEnt("sherman_wave_3b", "targetname");
 
   source_node = getvehiclenode("chi_wave_3b_avoid_1", "script_noteworthy");
   dest_node = getvehiclenode("chi_wave_3b_avoid_2", "script_noteworthy");
@@ -2960,10 +2960,10 @@ chi_3c_strat() {
   self.pel2_objective_index = 2;
 
   self.invulnerable_against_these_ents = [];
-  self.invulnerable_against_these_ents[0] = getent("sherman_wave_2a", "targetname");
-  self.invulnerable_against_these_ents[1] = getent("sherman_wave_2b", "targetname");
-  self.invulnerable_against_these_ents[2] = getent("sherman_wave_3a", "targetname");
-  self.invulnerable_against_these_ents[3] = getent("sherman_wave_3b", "targetname");
+  self.invulnerable_against_these_ents[0] = getEnt("sherman_wave_2a", "targetname");
+  self.invulnerable_against_these_ents[1] = getEnt("sherman_wave_2b", "targetname");
+  self.invulnerable_against_these_ents[2] = getEnt("sherman_wave_3a", "targetname");
+  self.invulnerable_against_these_ents[3] = getEnt("sherman_wave_3b", "targetname");
 
   self endon("death");
 
@@ -3046,10 +3046,10 @@ chi_3c_shoot_strat() {
 
   wait(3);
 
-  targ = getent("sherman_wave_3b", "targetname");
+  targ = getEnt("sherman_wave_3b", "targetname");
 
   while(targ.health > 0) {
-    self setturrettargetent(targ);
+    self setturrettargetEnt(targ);
 
     self waittill("turret_on_target");
     self ClearTurretTarget();
@@ -3109,7 +3109,7 @@ deathroll_off_notify() {
 }
 
 bazooka_respawner() {
-  bazooka_spawner = getent("bazooka_spawner", "targetname");
+  bazooka_spawner = getEnt("bazooka_spawner", "targetname");
   bazooka_spawner thread bazooka_spawn_think();
 }
 
@@ -3208,12 +3208,12 @@ attack_this_tank(tank_name, fatal_shot, min_delay, max_delay) {
     max_delay = 4.0;
   }
 
-  targ = getent(tank_name, "targetname");
+  targ = getEnt(tank_name, "targetname");
 
   shots_fired = 0;
 
   while(targ.health > 0) {
-    self setturrettargetent(targ, (0, 0, 50));
+    self setturrettargetEnt(targ, (0, 0, 50));
 
     self waittill("turret_on_target");
 
@@ -3239,7 +3239,7 @@ tighten_up_color_chains() {
 
   level notify("stop_bazooka_spawn");
 
-  guy = getent("bazooka_spawner_alive", "targetname");
+  guy = getEnt("bazooka_spawner_alive", "targetname");
   if(isDefined(guy)) {
     guy set_force_color("y");
   }
@@ -3266,34 +3266,34 @@ tighten_up_color_chains() {
 delete_old_turrets() {
   get_players_off_turrets();
 
-  mg = getent("flame_bunker_mg_r", "targetname");
+  mg = getEnt("flame_bunker_mg_r", "targetname");
   if(isDefined(mg)) {
     mg delete();
   }
 
-  mg = getent("flame_bunker_mg_l", "targetname");
+  mg = getEnt("flame_bunker_mg_l", "targetname");
   if(isDefined(mg)) {
     mg delete();
   }
 
-  mg = getent("bunker_1_mg_2", "targetname");
+  mg = getEnt("bunker_1_mg_2", "targetname");
   if(isDefined(mg)) {
     mg delete();
   }
 
-  mg = getent("bunker_1_mg_1", "targetname");
+  mg = getEnt("bunker_1_mg_1", "targetname");
   if(isDefined(mg)) {
     mg delete();
   }
 
   flag_wait("at_cinch_point");
 
-  mg = getent("admin_mg_r", "targetname");
+  mg = getEnt("admin_mg_r", "targetname");
   if(isDefined(mg)) {
     mg delete();
   }
 
-  mg = getent("admin_mg_l", "targetname");
+  mg = getEnt("admin_mg_l", "targetname");
   if(isDefined(mg)) {
     mg delete();
   }
@@ -3317,7 +3317,7 @@ get_players_off_turrets() {
 truck_crash() {
   wait_network_frame();
 
-  truck = getent("airfield_type94", "targetname");
+  truck = getEnt("airfield_type94", "targetname");
   truck thread truck_crash_fx();
 
   truck_crash_guys();
@@ -3326,7 +3326,7 @@ truck_crash() {
 
   anim_node = getnode("node_truck_crash", "targetname");
 
-  truck animscripted("airfield_truck_done", anim_node.origin, anim_node.angles, level.scr_anim["airfield"]["truck_crash"]);
+  truck animScripted("airfield_truck_done", anim_node.origin, anim_node.angles, level.scr_anim["airfield"]["truck_crash"]);
   truck waittill("airfield_truck_done");
 
   truck notsolid();
@@ -3334,7 +3334,7 @@ truck_crash() {
 
 #using_animtree("generic_human");
 truck_crash_guys() {
-  truck = getent("airfield_type94", "targetname");
+  truck = getEnt("airfield_type94", "targetname");
 
   truck_crash_drivers(truck);
 
@@ -3396,7 +3396,7 @@ truck_crash_drivers(truck) {
     }
 
     guys[i] thread truck_crash_behavior(idle_anim);
-    guys[i] linkto(truck, starting_position, (0, 0, 0), (0, 0, 0));
+    guys[i] linkTo(truck, starting_position, (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -3523,7 +3523,7 @@ plane_pole() {
 
   anim_node = getnode("node_telepole", "targetname");
 
-  rig_model = getent("tele_rig_model", "targetname");
+  rig_model = getEnt("tele_rig_model", "targetname");
   rig_model UseAnimTree(#animtree);
   rig_model.animname = "airfield";
 
@@ -3566,7 +3566,7 @@ plane_tower() {
 
   exploder(500);
 
-  brush = getent("sb_model_AA_tower", "targetname");
+  brush = getEnt("sb_model_AA_tower", "targetname");
   brush delete();
 
   plane delete();
@@ -3581,13 +3581,13 @@ plane_tower_sound(hit_node) {
 }
 
 plane_tower_aa_direct_fire() {
-  original_aaTarget = getent("aaGun_1_target", "script_noteworthy");
+  original_aaTarget = getEnt("aaGun_1_target", "script_noteworthy");
   original_aaTarget notify("change target");
 
   new_aaTarget = convert_aiming_struct_to_origin("orig_tower_plane_new_targ");
   level thread flame_move_target(new_aaTarget, 3.5);
 
-  aaGun_1 = getent("aaGun_1", "targetname");
+  aaGun_1 = getEnt("aaGun_1", "targetname");
   aaGun_1 thread maps\_triple25::triple25_shoot(new_aaTarget);
 
   aaGun_1 endon("crew dead");
@@ -3599,14 +3599,14 @@ plane_tower_aa_direct_fire() {
   new_aaTarget notify("stop_fakefire_mover");
   new_aaTarget notify("change target");
 
-  new_aaTarget.origin = getstruct("orig_tower_plane_new_targ_2", "targetname").origin;
+  new_aaTarget.origin = getStruct("orig_tower_plane_new_targ_2", "targetname").origin;
   aaGun_1 thread maps\_triple25::triple25_shoot(new_aaTarget);
 
   wait(2);
 
   new_aaTarget notify("change target");
 
-  new_aaTarget.origin = getstruct("orig_tower_plane_new_targ_3", "targetname").origin;
+  new_aaTarget.origin = getStruct("orig_tower_plane_new_targ_3", "targetname").origin;
   aaGun_1 thread maps\_triple25::triple25_shoot(new_aaTarget);
 
   wait(2.5);
@@ -3654,9 +3654,9 @@ corsair_turret_think() {
 }
 
 strafe_squibs(origin_name, dest_name) {
-  shot_origin = getent(origin_name, "script_noteworthy");
+  shot_origin = getEnt(origin_name, "script_noteworthy");
 
-  ultimate_destination = getstruct(dest_name, "script_noteworthy");
+  ultimate_destination = getStruct(dest_name, "script_noteworthy");
   shot_origin thread move_shot_destination(ultimate_destination, 1.3);
 
   shot_origin endon("done_squib");
@@ -3668,7 +3668,7 @@ strafe_squibs(origin_name, dest_name) {
 }
 
 move_shot_destination(end, duration) {
-  self moveto(end.origin, duration);
+  self moveTo(end.origin, duration);
   self waittill("movedone");
 
   self notify("done_squib");

@@ -259,7 +259,7 @@ towerCollapse(initialDelay) {
 
 playRumble(rumbleType) {
   foreach(player in level.players) {
-    player PlayRumbleOnEntity(rumbleType);
+    player playRumbleOnEntity(rumbleType);
   }
 }
 
@@ -268,7 +268,7 @@ clearPath() {
   self NotSolid();
 
   if(isDefined(self.target)) {
-    clip = GetEnt(self.target, "targetname");
+    clip = getEnt(self.target, "targetname");
     self.clip = clip;
 
     clip ConnectPaths();
@@ -284,7 +284,7 @@ blockPath() {
   if(isDefined(self.clip)) {
     self.clip Show();
     self.clip Solid();
-    self.clip DisconnectPaths();
+    self.clip disconnectPaths();
   }
 }
 
@@ -321,19 +321,19 @@ tryUsePirateShip(lifeId, streakName) {
 
 CONST_SHIP_SPEED = 300;
 shipRun(name, firstNode) {
-  ship = GetEnt(name, "targetname");
+  ship = getEnt(name, "targetname");
 
   shipModels = getEntArray("ship_bits", "targetname");
   foreach(detail in shipModels) {
     detail Show();
-    detail LinkTo(ship);
+    detail linkTo(ship);
   }
 
   ship thread shipBarragePlayMusic();
 
   ship thread shipVO();
 
-  struct = getstruct(firstNode, "targetname");
+  struct = getStruct(firstNode, "targetname");
   ship.origin = struct.origin;
 
   ship.angles = struct.angles;
@@ -357,7 +357,7 @@ shipRun(name, firstNode) {
 }
 
 shipSetup(name) {
-  ship = GetEnt(name, "targetname");
+  ship = getEnt(name, "targetname");
 
   forward = anglesToForward(ship.angles);
   right = 350 * AnglesToRight(ship.angles);
@@ -370,7 +370,7 @@ shipSetup(name) {
     cannon = spawn("script_model", shipModel GetTagOrigin(tagName));
     cannon.angles = shipModel GetTagAngles(tagName);
     cannon setModel("tag_origin");
-    cannon LinkTo(ship);
+    cannon linkTo(ship);
     cannon.targetname = "ship_cannons";
   }
 
@@ -379,7 +379,7 @@ shipSetup(name) {
   wakeTag = spawn("script_model", shipModel GetTagOrigin("tag_wake") + (0, 0, 85));
   wakeTag.angles = ship.angles + (-90, 0, 0);
   wakeTag setModel("tag_origin");
-  wakeTag LinkTo(ship);
+  wakeTag linkTo(ship);
   ship.wakeTag = wakeTag;
 
   foreach(detail in shipModels) {
@@ -388,15 +388,15 @@ shipSetup(name) {
 }
 
 shipMove(nodeName, speed) {
-  struct = getstruct(nodeName, "targetname");
+  struct = getStruct(nodeName, "targetname");
 
   if(isDefined(struct)) {
     if(!isDefined(struct.moveTime)) {
       struct.moveTime = Distance2D(struct.origin, self.origin) / speed;
     }
 
-    self MoveTo(struct.origin, struct.moveTime, 0, 0);
-    self RotateTo(struct.angles, struct.moveTime, 0, 0);
+    self moveTo(struct.origin, struct.moveTime, 0, 0);
+    self rotateTo(struct.angles, struct.moveTime, 0, 0);
 
     wait(struct.moveTime);
 
@@ -500,7 +500,7 @@ bellsHitSway(attacker) {
   level endon("game_ended");
 
   vec = AnglesToRight(self.angles);
-  vec2 = VectorNormalize(attacker.origin - self.origin);
+  vec2 = vectorNormalize(attacker.origin - self.origin);
   swing_dir = vectordot(vec, vec2) * 2.0;
   if(swing_dir > 0.0) {
     swing_dir = Max(0.3, swing_dir);
@@ -549,7 +549,7 @@ setupGrog(entName) {
     wait(timeLeft);
   }
 
-  grogtrigger = GetEnt(entName, "targetname");
+  grogtrigger = getEnt(entName, "targetname");
 
   if(isDefined(grogtrigger)) {
     grog = maps\mp\gametypes\_gameobjects::createUseObject("neutral", grogtrigger, [grogtrigger], (0, 0, 0));
@@ -690,7 +690,7 @@ convoPlayOne(minWait, maxWait) {
     index = RandomInt(level.convoLocs.size);
   }
 
-  soundStruct = getstruct(level.convoLocs[index], "targetname");
+  soundStruct = getStruct(level.convoLocs[index], "targetname");
 
   PlaySoundAtPos(soundStruct.origin, level.convoVos[index]);
 
@@ -704,7 +704,7 @@ jailVO() {
 
   jailLines = ["mp_pirate_prs_jail_1", "mp_pirate_prs_jail_2", "mp_pirate_prs_jail_3", "mp_pirate_prs_jail_4", "mp_pirate_prs_jail_5"];
 
-  soundStruct = getstruct("convo_jail_1", "targetname");
+  soundStruct = getStruct("convo_jail_1", "targetname");
   soundEnt = spawn("script_origin", soundStruct.origin);
 
   while(true) {
@@ -730,7 +730,7 @@ debugConversations(conversation) {
   if(i == level.convoLocs.size) {
     i = 0;
   }
-  soundStruct = getstruct(level.convoLocs[i], "targetname");
+  soundStruct = getStruct(level.convoLocs[i], "targetname");
   PlaySoundAtPos(soundStruct.origin, level.convoVos[i]);
 
   Sphere(soundStruct.origin, 5, (0, 1, 0), 1, 200);

@@ -570,7 +570,7 @@ update_selected_object_position() {
     if(trace["fraction"] != 1) {
       vector = trace["position"] + (0, 0, level.selected_object_z_offset);
       if(vector != object.origin) {
-        object MoveTo(vector, 0.1);
+        object moveTo(vector, 0.1);
         object waittill("movedone");
       }
     }
@@ -602,7 +602,7 @@ move_selected_object(with_trace) {
       vector = level.debug_player getEye() + vector_scale(forward, level.selected_object_dist);
     }
     if(vector != self.origin) {
-      self MoveTo(vector, 0.1);
+      self moveTo(vector, 0.1);
       self waittill("movedone");
     } else {
       wait(0.1);
@@ -881,7 +881,7 @@ object_highlight(objects) {
       objects[i] select_icon_think();
     }
     ent = objects[i];
-    difference = VectorNormalize(ent.origin - (level.debug_player.origin + (0, 0, 55)));
+    difference = vectorNormalize(ent.origin - (level.debug_player.origin + (0, 0, 55)));
     newdot = VectorDot(forward, difference);
     if(newdot < dot) {
       continue;

@@ -21,7 +21,7 @@ randomize_craftable_spawns() {
   a_randomized_craftables = array("gramophone_vinyl_ice", "gramophone_vinyl_air", "gramophone_vinyl_elec", "gramophone_vinyl_fire", "gramophone_vinyl_master", "gramophone_vinyl_player");
 
   foreach(str_craftable in a_randomized_craftables) {
-    s_original_pos = getstruct(str_craftable, "targetname");
+    s_original_pos = getStruct(str_craftable, "targetname");
     a_alt_locations = getStructArray(str_craftable + "_alt", "targetname");
     n_loc_index = randomintrange(0, a_alt_locations.size + 1);
 
@@ -122,7 +122,7 @@ autocraft_staffs() {
 
   flag_wait("start_zombie_round_logic");
   keys = getarraykeys(level.cheat_craftables);
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(key in keys) {
     if(issubstr(key, "staff") || issubstr(key, "record")) {
@@ -161,7 +161,7 @@ run_craftables_devgui() {
       piece_spawn = level.cheat_craftables[craftable_id].piecespawn;
 
       if(isDefined(piece_spawn)) {
-        players = getplayers();
+        players = getPlayers();
         players[0] maps\mp\zombies\_zm_craftables::player_take_piece(piece_spawn);
       }
 
@@ -486,7 +486,7 @@ tankcraftableupdateprompt(player, sethintstringnow, buildabletrigger) {
       self.hint_string = "";
 
       if(isDefined(sethintstringnow) && sethintstringnow && isDefined(buildabletrigger)) {
-        buildabletrigger sethintstring(self.hint_string);
+        buildabletrigger setHintString(self.hint_string);
       }
     }
 
@@ -505,10 +505,10 @@ ondrop_crystal(player) {
   s_piece = self.piecestub;
   s_piece.piecespawn.canmove = 1;
   maps\mp\zombies\_zm_unitrigger::reregister_unitrigger_as_dynamic(s_piece.piecespawn.unitrigger);
-  s_original_pos = getstruct(self.craftablename + "_" + self.piecename);
+  s_original_pos = getStruct(self.craftablename + "_" + self.piecename);
   s_piece.piecespawn.unitrigger trigger_off();
   s_piece.piecespawn.model ghost();
-  s_piece.piecespawn.model moveto(s_original_pos.origin, 0.05);
+  s_piece.piecespawn.model moveTo(s_original_pos.origin, 0.05);
   s_piece.piecespawn.model waittill("movedone");
   s_piece.piecespawn.model show();
   s_piece.piecespawn.unitrigger trigger_on();
@@ -714,7 +714,7 @@ onbuyweapon_riotshield(player) {
 
 staff_fullycrafted(modelname, elementenum) {
   player = get_closest_player(self.origin);
-  staff_model = getent(modelname, "targetname");
+  staff_model = getEnt(modelname, "targetname");
   staff_info = get_staff_info_from_element_index(elementenum);
   staff_model useweaponmodel(staff_info.weapname);
   staff_model showallparts();
@@ -813,7 +813,7 @@ quadrotor_control_thread() {
         str_vehicle = "heli_quadrotor_upgraded_zm";
       }
 
-      qr = spawnvehicle("veh_t6_dlc_zm_quadrotor", "quadrotor_ai", str_vehicle, self.origin + vectorscale((0, 0, 1), 96.0), self.angles);
+      qr = spawnVehicle("veh_t6_dlc_zm_quadrotor", "quadrotor_ai", str_vehicle, self.origin + vectorscale((0, 0, 1), 96.0), self.angles);
       level thread quadrotor_death_watcher(qr);
       qr thread quadrotor_instance_watcher(self);
       return;
@@ -992,7 +992,7 @@ setup_quadrotor_purchase(player) {
 }
 
 players_has_weapon(weaponname) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i] hasweapon(weaponname)) {
@@ -1062,16 +1062,16 @@ tomb_check_crafted_weapon_persistence(player) {
         self.stub.hint_string = "";
       }
 
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       player track_craftables_pickedup(self.stub.craftablespawn);
-      model = getent("craftable_" + self.stub.weaponname, "targetname");
+      model = getEnt("craftable_" + self.stub.weaponname, "targetname");
       model ghost();
       self.stub thread track_crafted_staff_trigger();
       self.stub thread track_staff_weapon_respawn(player);
       set_player_staff(self.stub.weaponname, player);
     } else {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
 
     return true;
@@ -1199,7 +1199,7 @@ track_staff_weapon_respawn(player) {
   }
 
   b_staff_in_use = 0;
-  a_players = getplayers();
+  a_players = getPlayers();
 
   foreach(check_player in a_players) {
     weapons = check_player getweaponslistprimaries();
@@ -1212,7 +1212,7 @@ track_staff_weapon_respawn(player) {
   }
 
   if(!b_staff_in_use) {
-    model = getent("craftable_" + self.base_weaponname, "targetname");
+    model = getEnt("craftable_" + self.base_weaponname, "targetname");
     model show();
     flag_set(self.base_weaponname + "_enabled");
   }

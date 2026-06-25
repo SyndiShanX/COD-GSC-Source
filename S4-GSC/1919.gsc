@@ -314,7 +314,7 @@ _id_A230(var_0) {
   }
 
   var_5 = _func_02AB(scripts\engine\utility::_id_5000(var_1.origin, 32, -100)) + (0, 0, 50);
-  var_0._id_605B moveto(var_5, var_4);
+  var_0._id_605B moveTo(var_5, var_4);
   var_0._id_605B waittill("movedone");
   var_0 dontinterpolate();
   var_0.origin = var_0._id_605B.origin;

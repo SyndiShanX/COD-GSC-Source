@@ -38,7 +38,7 @@ spawn_hero(var_0, var_1) {
   var_3 = array_get_noteworthy(var_2, var_0);
 
   if(!isDefined(var_3)) {
-    var_3 = getent(var_0, "script_noteworthy");
+    var_3 = getEnt(var_0, "script_noteworthy");
   }
 
   if(isDefined(var_1)) {
@@ -97,7 +97,7 @@ spawn_rorke() {
   if(isDefined(level.rorke)) {
     return;
   }
-  var_0 = getent("rorke_spawner", "targetname");
+  var_0 = getEnt("rorke_spawner", "targetname");
   var_0.count = 3;
   level.rorke = var_0 maps\_utility::spawn_ai(1);
   level.rorke.animname = "rorke";
@@ -157,7 +157,7 @@ set_goal_any(var_0, var_1, var_2, var_3) {
 
 old_set_goal_volume(var_0, var_1, var_2) {
   if(!isDefined(var_1)) {
-    var_1 = getent(var_2, "targetname");
+    var_1 = getEnt(var_2, "targetname");
   }
 
   if(!isDefined(var_0)) {
@@ -264,7 +264,7 @@ waittill_trigger_and_kill(var_0, var_1, var_2, var_3) {
   self endon("death");
 
   if(isstring(var_0)) {
-    var_0 = getent(var_0, "targetname");
+    var_0 = getEnt(var_0, "targetname");
   }
 
   var_0 waittill("trigger");
@@ -307,10 +307,10 @@ trigger_waittill_trigger(var_0, var_1, var_2, var_3) {
 }
 
 getent_targetname_or_noteworthy(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "script_noteworthy");
+    var_1 = getEnt(var_0, "script_noteworthy");
   }
 
   return var_1;
@@ -550,7 +550,7 @@ idle_and_react(var_0, var_1, var_2, var_3) {
   self.stealth_radius_multiplier = 0;
   var_5 = waittill_stealth_notify();
   var_0 notify("stop_anim");
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::set_ignoreme(0);
   maps\_utility::set_ignoreall(0);
 
@@ -578,7 +578,7 @@ waittill_dead_and_stop_anim(var_0, var_1) {
     return;
   }
   var_0 notify("stop_anim");
-  self stopanimscripted();
+  self stopanimScripted();
 
   if(isalive(self)) {
     self kill();
@@ -807,13 +807,13 @@ waittill_stealth_notify_goloud(var_0) {
   maps\_utility::set_baseaccuracy(2);
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "kitchen_flashlight_enemy") {
-    self stopanimscripted();
+    self stopanimScripted();
 
     if(isDefined(self.flashlight)) {
       self.flashlight unlink();
       var_1 = 0.5;
-      self.flashlight moveto(self.origin + (0, 0, 1), var_1, var_1, 0);
-      self.flashlight rotateto((90, 63, 0), var_1, var_1, 0);
+      self.flashlight moveTo(self.origin + (0, 0, 1), var_1, var_1, 0);
+      self.flashlight rotateTo((90, 63, 0), var_1, var_1, 0);
       level maps\_utility::notify_delay("unlink_flashlight", var_1);
     }
 
@@ -858,13 +858,13 @@ set_start_locations(var_0, var_1) {
 
 set_player_location(var_0) {
   if(isDefined(var_0)) {
-    var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+    var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   } else {
     var_1 = self;
   }
 
   var_2 = common_scripts\utility::drop_to_ground(var_1.origin, 10, -100);
-  level.player setorigin(var_2);
+  level.player setOrigin(var_2);
   level.player setplayerangles(var_1.angles);
 }
 
@@ -983,7 +983,7 @@ doors_open(var_0, var_1, var_2, var_3, var_4, var_5) {
       var_8 playSound(var_2);
     }
 
-    var_8 rotateto(var_8.angles + (0, var_9, 0), var_10, var_4, var_5);
+    var_8 rotateTo(var_8.angles + (0, var_9, 0), var_10, var_4, var_5);
     var_8 connectpaths();
     var_8 thread door_waittill_rotatedone();
   }
@@ -1032,7 +1032,7 @@ door_open(var_0, var_1, var_2, var_3, var_4) {
     var_4 = 0;
   }
 
-  self rotateto(self.angles + (0, var_2, 0), var_0, var_3, var_4);
+  self rotateTo(self.angles + (0, var_2, 0), var_0, var_3, var_4);
   self connectpaths();
 
   if(isDefined(self.script_sound)) {
@@ -1062,9 +1062,9 @@ func_waittill_msg(var_0, var_1, var_2, var_3, var_4) {
 
 link_two_entites(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_2)) {
-    var_0 linkto(var_1, var_2, var_3, var_4);
+    var_0 linkTo(var_1, var_2, var_3, var_4);
   } else {
-    var_0 linkto(var_1);
+    var_0 linkTo(var_1);
   }
 }
 
@@ -1268,7 +1268,7 @@ death_wait() {
 }
 
 sniper_ragdoll_death() {
-  var_0 = vectornormalize(self.damagedir);
+  var_0 = vectorNormalize(self.damagedir);
   var_0 = var_0 * randomfloatrange(2000, 3000);
   var_1 = "torso_upper";
 
@@ -1299,7 +1299,7 @@ set_not_wounded() {
   maps\_utility::clear_archetype();
 }
 
-stop_animscripted(var_0, var_1) {
+stop_animScripted(var_0, var_1) {
   var_2 = getanimlength(var_0) - var_1;
   wait(var_2);
 }
@@ -1579,7 +1579,7 @@ get_movement_node(var_0) {
     var_1 = getnode(var_0, "targetname");
 
     if(!isDefined(var_1)) {
-      var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+      var_1 = common_scripts\utility::getStruct(var_0, "targetname");
     }
   }
 
@@ -1822,7 +1822,7 @@ chopper_shooter_init(var_0) {
   self setneargoalnotifydist(100);
   self setyawspeed(120, 60);
   self sethoverparams(60, 20, 50);
-  var_1 = common_scripts\utility::getstruct(var_0, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0, "targetname");
   var_1 init_follow_path();
 
   if(!isDefined(self.shooter_side)) {
@@ -2053,7 +2053,7 @@ path_unlocks() {
       continue;
     }
     var_2 waittill("trigger");
-    var_3 = common_scripts\utility::getstruct(var_2.script_linkto, "script_linkname");
+    var_3 = common_scripts\utility::getStruct(var_2.script_linkto, "script_linkname");
 
     for(var_4 = 0; var_4 < var_5; var_4++) {
       var_0[var_4].skip = 1;
@@ -2079,7 +2079,7 @@ get_path_pos_from_dist(var_0, var_1, var_2) {
       if(var_1 > var_0.path[var_4 + 1].dist) {
         continue;
       }
-      var_5 = vectornormalize(var_0.path[var_4 + 1].origin - var_0.path[var_4].origin);
+      var_5 = vectorNormalize(var_0.path[var_4 + 1].origin - var_0.path[var_4].origin);
       var_6 = var_1 - var_0.path[var_4].dist;
       var_3 = var_0.path[var_4].origin + var_5 * var_6;
       break;
@@ -2111,7 +2111,7 @@ get_path_pos_from_dist_and_origin(var_0, var_1, var_2, var_3, var_4) {
   }
 
   self.goal_pos_stop = 1;
-  var_7 = vectornormalize(var_1.path[var_6 + 1].origin - var_1.path[var_6].origin);
+  var_7 = vectorNormalize(var_1.path[var_6 + 1].origin - var_1.path[var_6].origin);
   var_8 = var_2 - var_1.path[var_6].dist;
   return var_1.path[var_6].origin + var_7 * var_8;
 }
@@ -2130,7 +2130,7 @@ get_path_pos_from_dist_ignore_segments(var_0, var_1, var_2) {
     return var_1.path[var_1.path.size - 1].origin;
   }
 
-  var_7 = vectornormalize(var_1.path[var_3 + 1].origin - var_1.path[var_3].origin);
+  var_7 = vectorNormalize(var_1.path[var_3 + 1].origin - var_1.path[var_3].origin);
   var_8 = var_2 - var_1.path[var_3].dist;
   return var_1.path[var_3].origin + var_7 * var_8;
 }
@@ -2359,7 +2359,7 @@ init_enemy_radio(var_0) {
   level.enemy_radio setModel("com_hand_radio");
 
   if(isDefined(var_0)) {
-    level.enemy_radio linkto(level.hesh, "tag_stowed_hip_rear", (6, -8, 10), (90, 20, -5));
+    level.enemy_radio linkTo(level.hesh, "tag_stowed_hip_rear", (6, -8, 10), (90, 20, -5));
   }
 }
 
@@ -2640,10 +2640,10 @@ setup_player_body(var_0, var_1) {
   wait 0.05;
   level.player.link.origin = level.player.body gettagorigin("tag_sync");
   level.player.link.angles = level.player.body gettagangles("j_head");
-  level.player.link linkto(level.player.body, "j_head");
+  level.player.link linkTo(level.player.body, "j_head");
   level.player.rig.origin = level.player.body gettagorigin("tag_sync");
   level.player.rig.angles = level.player.body gettagangles("tag_sync");
-  level.player.rig linkto(level.player.body, "tag_sync", (0, 0, 2), (0, 0, 0));
+  level.player.rig linkTo(level.player.body, "tag_sync", (0, 0, 2), (0, 0, 0));
 }
 
 do_player_drag(var_0) {
@@ -2654,14 +2654,14 @@ do_player_drag(var_0) {
   init_player_body(1);
   level.player.body.origin = common_scripts\utility::drop_to_ground(var_0.origin, 10, -100);
   level.player.body maps\_anim::anim_first_frame_solo(level.player.body, "drag_single");
-  var_1 = getent("drag_enemy_spawner", "targetname");
+  var_1 = getEnt("drag_enemy_spawner", "targetname");
   var_2 = var_1 spawndrone();
   var_2.animname = "enemy";
   var_2 maps\_anim::setanimtree();
   level.drag_mover = var_2;
   var_2.origin = common_scripts\utility::drop_to_ground(var_0.origin, 10, -100);
   var_2.angles = var_0.angles;
-  level.player.body linkto(var_2, "tag_origin");
+  level.player.body linkTo(var_2, "tag_origin");
   setup_player_body();
   level.player playerlinktodelta(level.player.rig, "tag_origin", 0.5, 0, 0, 0, 40, 0);
   level.player lerpviewangleclamp(10, 0, 0, 45, 45, 60, 35);
@@ -2680,15 +2680,15 @@ do_player_drag(var_0) {
 }
 
 do_hesh_drag(var_0) {
-  var_1 = getent("drag_enemy_spawner", "targetname");
+  var_1 = getEnt("drag_enemy_spawner", "targetname");
   var_2 = var_1 spawndrone();
   var_2.animname = "enemy";
   var_2 maps\_anim::setanimtree();
-  var_1 = getent("drag_hesh_spawner", "targetname");
+  var_1 = getEnt("drag_hesh_spawner", "targetname");
   var_3 = var_1 spawndrone();
   var_3.animname = "hesh";
   var_3 maps\_anim::setanimtree();
-  var_3 linkto(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_2, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_4 = [var_3, var_2];
   var_2 thread drone_anim_loop(var_4, "drag");
   var_2 maps\_utility::delaythread(3.0, maps\_utility::play_sound_on_entity, "scn_vegas_dragged1_npc");
@@ -2749,15 +2749,15 @@ drag_path(var_0) {
       var_7 = 1;
     } else {
       var_10 = get_path_pos_from_dist_ignore_segments(var_6, var_0, var_1 + var_9);
-      var_11 = vectornormalize(var_10 - var_6);
+      var_11 = vectorNormalize(var_10 - var_6);
       var_10 = var_6 + var_11 * var_4;
     }
 
     var_6 = var_10;
     var_10 = common_scripts\utility::drop_to_ground(var_10, 10, -100);
-    self moveto(var_10, var_5);
+    self moveTo(var_10, var_5);
     var_2 = vectortoangles(var_10 - self.origin);
-    self rotateto(var_2, var_5);
+    self rotateTo(var_2, var_5);
     wait(var_5 - 0.05);
 
     if(var_7) {
@@ -2768,7 +2768,7 @@ drag_path(var_0) {
 
 cleanup_player_drag() {
   if(isDefined(level.drag_mover)) {
-    level.drag_mover maps\_utility::anim_stopanimscripted();
+    level.drag_mover maps\_utility::anim_stopanimScripted();
     level.drag_mover delete();
     level notify("stop_debug_drag_lines");
     level.player.body unlink();
@@ -2785,7 +2785,7 @@ debug_drag_lines(var_0, var_1, var_2, var_3) {
 }
 
 spawn_drone_dog() {
-  var_0 = getent("riley_drone_spawner", "targetname");
+  var_0 = getEnt("riley_drone_spawner", "targetname");
   var_0.count = 1;
   var_1 = var_0 spawndrone();
   var_1 maps\_utility_dogs::set_dog_model("fullbody_dog_b_hurt");
@@ -2799,7 +2799,7 @@ dog_init_pickup() {
   level.dog.reg_model = "fullbody_dog_b_hurt";
   level.dog maps\_utility_dogs::set_dog_model(level.dog.obj_model);
   level.dog notsolid();
-  level.dog.use_trigger = getent("dog_trigger", "targetname");
+  level.dog.use_trigger = getEnt("dog_trigger", "targetname");
   level.dog.use_trigger.og_origin = level.dog.use_trigger.origin;
 
   if(!level.dog maps\_utility::ent_flag_exist("picked_up")) {
@@ -2829,11 +2829,11 @@ dog_thread() {
   dog_blood_pool();
 
   if(level.console || level.player usinggamepad()) {
-    self sethintstring(&"LAS_VEGAS_PICKUP_RILEY");
-    self.use_trigger sethintstring(&"LAS_VEGAS_PUTDOWN_RILEY");
+    self setHintString(&"LAS_VEGAS_PICKUP_RILEY");
+    self.use_trigger setHintString(&"LAS_VEGAS_PUTDOWN_RILEY");
   } else {
-    self sethintstring(&"LAS_VEGAS_PICKUP_RILEY_PC");
-    self.use_trigger sethintstring(&"LAS_VEGAS_PUTDOWN_RILEY_PC");
+    self setHintString(&"LAS_VEGAS_PICKUP_RILEY_PC");
+    self.use_trigger setHintString(&"LAS_VEGAS_PUTDOWN_RILEY_PC");
   }
 
   dog_disable_trigger();
@@ -3067,7 +3067,7 @@ dog_pickup() {
   badplace_delete("dog_place");
   var_0 waittillmatch("single anim", "end");
   dog_player_pickup_end();
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   thread dog_carry_thread();
   level.player unlink();
   var_0 delete();
@@ -3261,7 +3261,7 @@ dog_player_put_down_end() {
 }
 
 dog_too_far_fail() {
-  var_0 = common_scripts\utility::getstruct("ground_progression", "targetname");
+  var_0 = common_scripts\utility::getStruct("ground_progression", "targetname");
   var_0 init_follow_path();
   var_1 = 1200;
   var_2 = 800;
@@ -3442,7 +3442,7 @@ launch_gas_grenade(var_0, var_1) {
     thread common_scripts\utility::play_sound_in_space("gas_grenade_launch", var_2);
   }
 
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_3 = var_0.origin;
   var_3 = common_scripts\utility::drop_to_ground(var_3, 10, -100);
   var_3 = var_3 + (0, 0, 0);
@@ -3458,12 +3458,12 @@ launch_gas_grenade(var_0, var_1) {
     return;
   }
   var_5 = common_scripts\utility::drop_to_ground(var_4.origin, 10, -100);
-  var_4 moveto(var_5 + (0, 0, 1), 0.2);
-  var_4 rotateto((-90, 0, 0), 0.1);
+  var_4 moveTo(var_5 + (0, 0, 1), 0.2);
+  var_4 rotateTo((-90, 0, 0), 0.1);
   wait 0.2;
   var_4 playSound("gas_grenade_land_roll");
   var_6 = 50;
-  var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_4 endon("death");
   var_4.fx = playFX(common_scripts\utility::getfx("gas_grenade"), var_4.origin);
   var_4 thread ambush_nade_rotate();
@@ -3472,20 +3472,20 @@ launch_gas_grenade(var_0, var_1) {
     var_5 = common_scripts\utility::drop_to_ground(var_0.origin, 10, -100) + (0, 0, 1);
     var_7 = distance(var_4.origin, var_5);
     var_8 = var_7 / var_6;
-    var_4 moveto(var_5, var_8);
+    var_4 moveTo(var_5, var_8);
     wait(var_8 - 0.05);
 
     if(!isDefined(var_0.target)) {
       break;
     }
 
-    var_0 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_0 = common_scripts\utility::getStruct(var_0.target, "targetname");
   }
 
   wait(randomfloatrange(1, 3));
   stopFXOnTag(common_scripts\utility::getfx("gas_grenade_trail"), var_4, "polysurface22");
   var_4 notify("stop_rotate");
-  var_4 rotateyaw(900, 3, 0, 3);
+  var_4 rotateYaw(900, 3, 0, 3);
 }
 
 ambush_nade_rotate() {
@@ -3494,7 +3494,7 @@ ambush_nade_rotate() {
 
   while(isDefined(self)) {
     var_0 = randomfloatrange(0.05, 0.1);
-    self rotateyaw(90, var_0);
+    self rotateYaw(90, var_0);
     wait(var_0);
   }
 }
@@ -3511,7 +3511,7 @@ movegravity_scripted(var_0, var_1, var_2) {
   wait(var_6);
 }
 
-struct_stopanimscripted() {
+struct_stopanimScripted() {
   self notify("stop_loop");
   self notify("single anim", "end");
   self notify("looping anim", "end");
@@ -3574,7 +3574,7 @@ ground_ref_rotate(var_0, var_1, var_2, var_3) {
   var_9 = combineangles(var_8, var_4);
   var_9 = var_9 + var_0;
   var_9 = combineangles(var_9, var_7);
-  level.ground_ref_ent rotateto(var_9, var_1, var_1 * 0.5, var_1 * 0.25);
+  level.ground_ref_ent rotateTo(var_9, var_1, var_1 * 0.5, var_1 * 0.25);
   wait(var_1);
 }
 
@@ -3661,7 +3661,7 @@ spawn_model_at_tag(var_0, var_1, var_2) {
 spawn_linked_model(var_0, var_1, var_2) {
   var_3 = spawn("script_model", var_1.origin);
   var_3 setModel(var_0);
-  var_3 linkto(var_1, var_2, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_1, var_2, (0, 0, 0), (0, 0, 0));
   return var_3;
 }
 
@@ -3684,11 +3684,11 @@ custom_playsound_on_ent(var_0, var_1, var_2) {
   thread maps\_utility::delete_on_death_wait_sound(var_3, "sounddone");
 
   if(isDefined(var_1)) {
-    var_3 linkto(self, var_1, (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(self, var_1, (0, 0, 0), (0, 0, 0));
   } else {
     var_3.origin = self.origin;
     var_3.angles = self.angles;
-    var_3 linkto(self);
+    var_3 linkTo(self);
   }
 
   var_3.soundalias = var_0;
@@ -3838,7 +3838,7 @@ player_smash_use() {
         level.player.sound_ent scalevolume(1, 0.2);
       }
 
-      level.player playrumbleonentity("vegas_struggle");
+      level.player playRumbleOnEntity("vegas_struggle");
       cam_shake();
     } else if(var_7 > var_1 + 50) {
       level.hand_hint.meter = level.hand_hint.meter - var_3;

@@ -211,7 +211,7 @@ presat_ally_movement() {
   maps\_utility::waittill_aigroupcleared("presat_enemies_backup");
   maps\factory_util::safe_trigger_by_targetname("presat_allies_wait_at_sat_door");
   common_scripts\utility::flag_wait("sat_open_moment");
-  var_5 = getent("sat_room_enter_node", "targetname");
+  var_5 = getEnt("sat_room_enter_node", "targetname");
   thread pre_sat_door_alpha_get_ready(var_5);
   thread pre_sat_door_charlie_get_ready(var_5);
   common_scripts\utility::flag_wait_all("pre_sat_door_alpha_in_position", "pre_sat_door_charlie_in_position", "sat_entrance_allies_go");
@@ -381,7 +381,7 @@ presat_react_stop_patrol(var_0) {
   self endon("death");
   common_scripts\utility::flag_wait("alert_platform_guards");
   self.ignoreall = 0;
-  self stopanimscripted();
+  self stopanimScripted();
   maps\_utility::clear_generic_run_anim();
 
   if(isDefined(var_0)) {
@@ -406,13 +406,13 @@ presat_moving_platform() {
   common_scripts\utility::flag_wait("presat_open_revolving_door");
   var_0 thread platform_lights("platform_warning_light_01", "platform_brake_light_01");
   var_0 thread path_disconnector();
-  var_1 = getent("moving_platform_start_position", "targetname");
-  var_0 moveto(var_1.origin, 0.1);
+  var_1 = getEnt("moving_platform_start_position", "targetname");
+  var_0 moveTo(var_1.origin, 0.1);
   var_0 waittill("movedone");
   var_0 thread maps\factory_audio::moving_platform_warning_beeps_sfx(var_1.origin);
   var_0 thread maps\factory_audio::moving_platform_movement_loop_sfx(var_1.origin, 42.8);
   var_0 notify("spawn_enemies");
-  var_2 = getent("moving_platform_end_position", "targetname");
+  var_2 = getEnt("moving_platform_end_position", "targetname");
   var_0 thread platform_speed_changer(var_1, var_2);
   var_0 thread platform_stop_for_actors(var_2);
   var_0 movex(1450, 90, 5, 5);
@@ -426,10 +426,10 @@ presat_moving_platform_02() {
   common_scripts\utility::flag_wait("presat_open_revolving_door");
   var_0 thread platform_lights("platform_warning_light_02", "platform_brake_light_02");
   var_0 thread path_disconnector();
-  var_1 = getent("moving_platform_02_start_position", "targetname");
-  var_0 moveto(var_1.origin, 0.1);
+  var_1 = getEnt("moving_platform_02_start_position", "targetname");
+  var_0 moveTo(var_1.origin, 0.1);
   var_0 waittill("movedone");
-  var_2 = getent("moving_platform_02_end_position", "targetname");
+  var_2 = getEnt("moving_platform_02_end_position", "targetname");
   var_3 = abs(var_1.origin[0] - var_2.origin[0]);
   var_0 thread maps\factory_audio::moving_platform_movement_loop_sfx(var_1.origin, 26);
   var_0 movex(var_3, 30, 5, 5);
@@ -438,7 +438,7 @@ presat_moving_platform_02() {
 }
 
 create_loader_platform(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_3 = getEntArray(var_1, "targetname");
 
   foreach(var_5 in var_3) {
@@ -448,12 +448,12 @@ create_loader_platform(var_0, var_1) {
       } else if(var_5.script_noteworthy == "disconnector_node") {
         var_2.disconnector_node = var_5;
       } else if(var_5.script_noteworthy == "platform_collision_detection_volume") {
-        var_5 enablelinkto();
+        var_5 enablelinkTo();
         var_2.platform_collision_detection_volume = var_5;
       }
     }
 
-    var_5 linkto(var_2);
+    var_5 linkTo(var_2);
   }
 
   return var_2;
@@ -485,7 +485,7 @@ platform_enemies() {
       return;
     }
     var_5 forceteleport(var_1[var_6].origin, var_1[var_6].angles);
-    var_5 linkto(self);
+    var_5 linkTo(self);
     var_5.ignoreall = 1;
     var_2[var_2.size] = var_5;
     var_5 thread wait_for_waking_event();
@@ -515,7 +515,7 @@ alert_platform_guards(var_0) {
       continue;
     }
     var_2.ignoreall = 0;
-    var_2 stopanimscripted();
+    var_2 stopanimScripted();
     var_2.animname = "enemy";
     var_2.favoriteenemy = level.player;
   }
@@ -551,7 +551,7 @@ path_disconnector(var_0, var_1) {
     foreach(var_4 in var_2) {
       if(var_4.connected && var_6 istouching(var_4)) {
         var_4 solid();
-        var_4 disconnectpaths();
+        var_4 disconnectPaths();
         var_4.connected = 0;
         var_4 notsolid();
         continue;
@@ -570,13 +570,13 @@ path_disconnector(var_0, var_1) {
 }
 
 platform_lights(var_0, var_1) {
-  var_2 = getent(var_0, "script_noteworthy");
+  var_2 = getEnt(var_0, "script_noteworthy");
 
   if(!isDefined(var_2)) {
     return;
   }
   var_3 = var_2 common_scripts\utility::spawn_tag_origin();
-  var_3 linkto(self);
+  var_3 linkTo(self);
   playFXOnTag(level._effect["amber_light_45_beacon_nolight_beam"], var_3, "tag_origin");
   playFXOnTag(level._effect["amber_light_45_beacon_glow"], var_3, "tag_origin");
   playFXOnTag(level._effect["factory_amber_flare"], var_3, "tag_origin");
@@ -585,7 +585,7 @@ platform_lights(var_0, var_1) {
 
   foreach(var_7 in var_4) {
     var_5[var_5.size] = var_7 common_scripts\utility::spawn_tag_origin();
-    var_5[var_5.size - 1] linkto(self);
+    var_5[var_5.size - 1] linkTo(self);
     playFXOnTag(level._effect["factory_presat_brake_light"], var_5[var_5.size - 1], "tag_origin");
   }
 
@@ -609,7 +609,7 @@ platform_speed_changer(var_0, var_1) {
   var_3 = var_2 / 32.0;
 
   if(var_3 > 10.0) {
-    self moveto(var_1.origin, var_3, 5.0, 5.0);
+    self moveTo(var_1.origin, var_3, 5.0, 5.0);
   }
 }
 
@@ -626,7 +626,7 @@ platform_stop_for_actors(var_0) {
     var_2 = var_1 maps\_utility::get_ai_touching_volume();
 
     if(level.player istouching(var_1) || var_2.size >= 1 || var_0 istouching(var_1)) {
-      self moveto(self.origin + (15, 0, 0), 1.0, 0.5, 0.5);
+      self moveTo(self.origin + (15, 0, 0), 1.0, 0.5, 0.5);
       return;
     }
 
@@ -653,17 +653,17 @@ presat_init_revolving_door() {
   common_scripts\utility::flag_wait("entered_factory_1");
   thread maps\factory_fx::fx_show_hide("fx_sat_revolving_door_light_off", "fx_sat_revolving_door_light_on");
   wait 3.0;
-  var_0 = getent("revolving_door_origin", "targetname");
+  var_0 = getEnt("revolving_door_origin", "targetname");
   var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(var_0);
+    var_3 linkTo(var_0);
     var_3 connectpaths();
   }
 
   level.presat_door = var_0;
-  level.presat_door_slider_01 = getent("revolving_door_slider_01", "targetname");
-  level.presat_door_slider_02 = getent("revolving_door_slider_02", "targetname");
+  level.presat_door_slider_01 = getEnt("revolving_door_slider_01", "targetname");
+  level.presat_door_slider_02 = getEnt("revolving_door_slider_02", "targetname");
 
   if(isDefined(level.presat_door_slider_01)) {
     level.presat_door_slider_01 movex(110, 0.1);
@@ -681,14 +681,14 @@ presat_revolving_door() {
   thread maps\factory_audio::sfx_revolving_door_open(level.presat_door);
   thread maps\factory_fx::fx_sat_revolving_door_light_setup();
   common_scripts\utility::exploder("presat_ambient");
-  level.presat_door rotateyaw(90, 4.83);
+  level.presat_door rotateYaw(90, 4.83);
   level.presat_door_slider_01 movex(-110, 4.83);
   level.presat_door_slider_02 movex(110, 4.83);
   wait 5.0;
   common_scripts\utility::flag_set("presat_revolving_door_opened");
   common_scripts\utility::flag_wait("presat_close_revolving_door");
   level notify("stop_box_conveyor_system");
-  var_0 = getent("presat_door_safe_vol", "targetname");
+  var_0 = getEnt("presat_door_safe_vol", "targetname");
 
   for(;;) {
     var_1 = var_0 maps\_utility::get_ai_touching_volume("allies");
@@ -700,7 +700,7 @@ presat_revolving_door() {
     wait 1.0;
   }
 
-  level.presat_door rotateyaw(-90, 2);
+  level.presat_door rotateYaw(-90, 2);
   level.presat_door waittill("rotatedone");
   wait 0.25;
   level notify("stop_box_conveyor_system");
@@ -719,11 +719,11 @@ presat_tube_cleanser(var_0, var_1) {
 
 presat_agvs() {
   common_scripts\utility::flag_wait("presat_started");
-  var_0 = getent("presat_forklift_01_spawner", "targetname");
+  var_0 = getEnt("presat_forklift_01_spawner", "targetname");
   var_0 maps\_utility::add_spawn_function(maps\factory_util::forklift_run_over_monitor, "presat_forklift_02");
-  var_0 = getent("presat_forklift_02_spawner", "targetname");
+  var_0 = getEnt("presat_forklift_02_spawner", "targetname");
   var_0 maps\_utility::add_spawn_function(maps\factory_util::forklift_run_over_monitor);
-  var_0 = getent("presat_forklift_03_spawner", "targetname");
+  var_0 = getEnt("presat_forklift_03_spawner", "targetname");
   var_0 maps\_utility::add_spawn_function(maps\factory_util::forklift_run_over_monitor);
   common_scripts\utility::flag_wait("presat_open_revolving_door");
   maps\factory_util::safe_trigger_by_targetname("presat_forklift_01");
@@ -768,7 +768,7 @@ cleanup_all_axis() {
 presat_glass_decals(var_0) {
   level endon("lock_presat_01");
   var_1 = getglass(var_0);
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   for(;;) {
     if(isglassdestroyed(var_1)) {
@@ -785,7 +785,7 @@ presat_glass_decals(var_0) {
 
 presat_fans(var_0, var_1) {
   level endon("presat_locked");
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
 
   for(;;) {
     var_2 rotatepitch(360, var_1, 0, 0);
@@ -801,7 +801,7 @@ sat_room_start() {
   thread maps\factory_util::create_automatic_sliding_door("sliding_door_sat_enter_01", 0.75, 0.1, "lock_presat_01");
   thread maps\factory_util::create_automatic_sliding_door("sliding_door_sat_enter_02", 0.75, 0.1, "lock_presat_02", "open_sat_entrance");
   maps\factory_util::safe_trigger_by_targetname("presat_allies_wait_at_sat_door");
-  var_0 = getent("sat_room_enter_node", "targetname");
+  var_0 = getEnt("sat_room_enter_node", "targetname");
   thread pre_sat_door_alpha_get_ready(var_0);
   thread pre_sat_door_charlie_get_ready(var_0);
   common_scripts\utility::flag_wait_all("pre_sat_door_alpha_in_position", "pre_sat_door_charlie_in_position", "sat_open_moment");
@@ -812,7 +812,7 @@ sat_room_start() {
   wait 0.35;
   common_scripts\utility::flag_set("sat_entrance_allies_go");
   level.squad["ALLY_ALPHA"] maps\_utility::smart_dialogue("factory_mrk_bingo");
-  var_0 = getent("sat_room_enter_node", "targetname");
+  var_0 = getEnt("sat_room_enter_node", "targetname");
   maps\_utility::delaythread(2, common_scripts\utility::flag_set, "weapon_room_dialogue_trigger");
   var_0 thread maps\_anim::anim_single_solo(level.squad["ALLY_ALPHA"], "sat_room_enter_alpha");
   var_0 thread maps\_anim::anim_single_solo(level.squad["ALLY_CHARLIE"], "sat_room_enter_charlie");
@@ -937,7 +937,7 @@ sat_room_ally_movement() {
   level.squad["ALLY_BRAVO"] thread maps\factory_anim::sat_room_bravo_typing_01();
   common_scripts\utility::flag_wait("cam_B_confirmed");
   wait 0.2;
-  var_0 = getent("automated_bridge_blocker", "script_noteworthy");
+  var_0 = getEnt("automated_bridge_blocker", "script_noteworthy");
   var_0 connectpaths();
   var_0 delete();
   maps\factory_util::safe_trigger_by_targetname("sat_room_ally_wait_for_bridge");
@@ -984,7 +984,7 @@ sat_room_doors() {
   common_scripts\utility::flag_wait_all("pre_sat_door_alpha_in_position", "pre_sat_door_charlie_in_position", "sat_open_moment");
   level notify("lock_presat_01");
   common_scripts\utility::flag_wait("sat_room_player_down_stairs");
-  var_0 = getent("sat_room_vol", "targetname");
+  var_0 = getEnt("sat_room_vol", "targetname");
 
   while(var_0 maps\_utility::get_ai_touching_volume("allies").size < 3) {
     wait 0.1;
@@ -1052,9 +1052,9 @@ delete_jumpsuits() {
 }
 
 setup_assembly_room_door() {
-  var_0 = getent("factory_assembly_room_door", "targetname");
-  var_1 = getent("reveal_room_exit_door_connector", "targetname");
-  var_1 linkto(var_0);
+  var_0 = getEnt("factory_assembly_room_door", "targetname");
+  var_1 = getEnt("reveal_room_exit_door_connector", "targetname");
+  var_1 linkTo(var_0);
   var_0.connector = var_1;
   level.assembly_room_door = var_0;
   thread maps\factory_fx::fx_show_hide("assembly_cardreader_lock", "assembly_cardreader_unlock");
@@ -1067,11 +1067,11 @@ sat_cpu_cover(var_0) {
 }
 
 sat_automated_bridge() {
-  var_0 = getent("sat_automated_bridge_right_org", "targetname");
+  var_0 = getEnt("sat_automated_bridge_right_org", "targetname");
   var_1 = getEntArray("sat_automated_bridge_right", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(var_0);
+    var_3 linkTo(var_0);
   }
 
   thread sat_automated_bridge_struts();
@@ -1086,11 +1086,11 @@ sat_automated_bridge() {
 }
 
 sat_automated_bridge_struts() {
-  var_0 = getent("sat_automated_bridge_right_struts_org", "targetname");
+  var_0 = getEnt("sat_automated_bridge_right_struts_org", "targetname");
   var_1 = getEntArray("sat_automated_bridge_right_lifts", "targetname");
 
   foreach(var_3 in var_1) {
-    var_3 linkto(var_0);
+    var_3 linkTo(var_0);
   }
 
   common_scripts\utility::flag_wait("sat_drawbridge_up");
@@ -1126,108 +1126,108 @@ sat_interact_activate_hint(var_0, var_1, var_2) {
 }
 
 sat_room_move_pieces() {
-  var_0 = getent("satellite_room_nosecone_org", "targetname");
-  var_1 = getent("satellite_room_vert1_org", "targetname");
-  var_2 = getent("satellite_room_rog_holder_org", "targetname");
-  var_3 = getent("satellite_room_rog_rack_system_org", "targetname");
-  var_4 = getent("satellite_ROG_01_org", "targetname");
-  var_5 = getent("satellite_ROG_02_org", "targetname");
-  var_6 = getent("satellite_ROG_03_org", "targetname");
-  var_7 = getent("satellite_ROG_04_org", "targetname");
-  var_8 = getent("satellite_ROG_05_org", "targetname");
-  var_9 = getent("satellite_ROG_06_org", "targetname");
-  var_10 = getent("satellite_room_dest_org", "targetname");
+  var_0 = getEnt("satellite_room_nosecone_org", "targetname");
+  var_1 = getEnt("satellite_room_vert1_org", "targetname");
+  var_2 = getEnt("satellite_room_rog_holder_org", "targetname");
+  var_3 = getEnt("satellite_room_rog_rack_system_org", "targetname");
+  var_4 = getEnt("satellite_ROG_01_org", "targetname");
+  var_5 = getEnt("satellite_ROG_02_org", "targetname");
+  var_6 = getEnt("satellite_ROG_03_org", "targetname");
+  var_7 = getEnt("satellite_ROG_04_org", "targetname");
+  var_8 = getEnt("satellite_ROG_05_org", "targetname");
+  var_9 = getEnt("satellite_ROG_06_org", "targetname");
+  var_10 = getEnt("satellite_room_dest_org", "targetname");
   var_11 = getEntArray(var_0.target, "targetname");
 
   foreach(var_13 in var_11) {
-    var_13 linkto(var_0);
+    var_13 linkTo(var_0);
   }
 
   var_15 = getEntArray(var_1.target, "targetname");
 
   foreach(var_13 in var_15) {
-    var_13 linkto(var_1);
+    var_13 linkTo(var_1);
   }
 
   var_18 = getEntArray(var_2.target, "targetname");
 
   foreach(var_13 in var_18) {
-    var_13 linkto(var_2);
+    var_13 linkTo(var_2);
   }
 
   var_21 = getEntArray(var_3.target, "targetname");
 
   foreach(var_13 in var_21) {
-    var_13 linkto(var_3);
+    var_13 linkTo(var_3);
   }
 
   var_24 = getEntArray(var_4.target, "targetname");
 
   foreach(var_13 in var_24) {
-    var_13 linkto(var_4);
+    var_13 linkTo(var_4);
   }
 
   var_27 = getEntArray(var_5.target, "targetname");
 
   foreach(var_13 in var_27) {
-    var_13 linkto(var_5);
+    var_13 linkTo(var_5);
   }
 
   var_30 = getEntArray(var_6.target, "targetname");
 
   foreach(var_13 in var_30) {
-    var_13 linkto(var_6);
+    var_13 linkTo(var_6);
   }
 
   var_33 = getEntArray(var_7.target, "targetname");
 
   foreach(var_13 in var_33) {
-    var_13 linkto(var_7);
+    var_13 linkTo(var_7);
   }
 
   var_36 = getEntArray(var_8.target, "targetname");
 
   foreach(var_13 in var_36) {
-    var_13 linkto(var_8);
+    var_13 linkTo(var_8);
   }
 
   var_39 = getEntArray(var_9.target, "targetname");
 
   foreach(var_13 in var_39) {
-    var_13 linkto(var_9);
+    var_13 linkTo(var_9);
   }
 
   var_42 = getEntArray(var_10.target, "targetname");
 
   foreach(var_13 in var_42) {
-    var_13 linkto(var_10);
+    var_13 linkTo(var_10);
   }
 
-  var_5 linkto(var_4);
-  var_6 linkto(var_5);
-  var_7 linkto(var_6);
-  var_8 linkto(var_7);
-  var_9 linkto(var_8);
-  var_3 linkto(var_2);
-  var_1 moveto((var_10.origin[0], var_1.origin[1], var_1.origin[2]), 1);
-  var_2 moveto((var_10.origin[0], var_2.origin[1], var_2.origin[2]), 1);
-  var_4 moveto((var_10.origin[0], var_4.origin[1], var_4.origin[2]), 1);
+  var_5 linkTo(var_4);
+  var_6 linkTo(var_5);
+  var_7 linkTo(var_6);
+  var_8 linkTo(var_7);
+  var_9 linkTo(var_8);
+  var_3 linkTo(var_2);
+  var_1 moveTo((var_10.origin[0], var_1.origin[1], var_1.origin[2]), 1);
+  var_2 moveTo((var_10.origin[0], var_2.origin[1], var_2.origin[2]), 1);
+  var_4 moveTo((var_10.origin[0], var_4.origin[1], var_4.origin[2]), 1);
   var_0 movez(205, 20, 0, 6);
   wait 5;
   thread maps\factory_audio::sfx_rods_move();
-  var_2 moveto((var_4.origin[0], var_4.origin[1], var_10.origin[2]), 10, 0, 3);
-  var_4 moveto((var_4.origin[0], var_4.origin[1], var_10.origin[2]), 10, 0, 3);
+  var_2 moveTo((var_4.origin[0], var_4.origin[1], var_10.origin[2]), 10, 0, 3);
+  var_4 moveTo((var_4.origin[0], var_4.origin[1], var_10.origin[2]), 10, 0, 3);
   wait 6;
-  var_1 moveto((var_10.origin[0], var_10.origin[1] + 130, var_1.origin[2]), 10, 0, 3);
-  var_2 moveto((var_10.origin[0], var_10.origin[1] + 130, var_10.origin[2]), 10, 0, 3);
-  var_4 moveto((var_10.origin[0], var_10.origin[1] + 130, var_10.origin[2]), 10, 0, 3);
+  var_1 moveTo((var_10.origin[0], var_10.origin[1] + 130, var_1.origin[2]), 10, 0, 3);
+  var_2 moveTo((var_10.origin[0], var_10.origin[1] + 130, var_10.origin[2]), 10, 0, 3);
+  var_4 moveTo((var_10.origin[0], var_10.origin[1] + 130, var_10.origin[2]), 10, 0, 3);
   var_2 waittill("movedone");
   thread maps\factory_audio::sfx_rods_hallway_stop();
   wait 1;
   thread maps\factory_audio::sfx_rods_load();
   var_3 unlink();
   var_45 = var_5.origin[1] - var_4.origin[1];
-  var_3 moveto((var_3.origin[0], var_4.origin[1] + var_45, var_3.origin[2]), 3, 0.3, 0.3);
+  var_3 moveTo((var_3.origin[0], var_4.origin[1] + var_45, var_3.origin[2]), 3, 0.3, 0.3);
   var_3 waittill("movedone");
   rog_move_and_rotate(var_4, var_5, var_4, var_3, var_45, var_10);
   rog_move_and_rotate(var_5, var_6, var_4, var_3, var_45, var_10);
@@ -1236,13 +1236,13 @@ sat_room_move_pieces() {
   rog_move_and_rotate(var_8, undefined, var_4, var_3, var_45, var_10);
   wait 1;
   var_9 unlink();
-  var_9 linkto(var_3);
+  var_9 linkTo(var_3);
   var_3 unlink();
-  var_3 moveto((var_3.origin[0], var_9.origin[1] + var_45 * 2, var_3.origin[2]), 3, 0.3, 0.3);
+  var_3 moveTo((var_3.origin[0], var_9.origin[1] + var_45 * 2, var_3.origin[2]), 3, 0.3, 0.3);
   var_3 waittill("movedone");
-  var_3 linkto(var_2);
-  var_1 moveto((var_1.origin[0], var_1.origin[1] + var_45 * 2, var_1.origin[2]), 10, 3, 3);
-  var_2 moveto((var_2.origin[0], var_2.origin[1] + var_45 * 2, var_2.origin[2] - var_45), 10, 3, 3);
+  var_3 linkTo(var_2);
+  var_1 moveTo((var_1.origin[0], var_1.origin[1] + var_45 * 2, var_1.origin[2]), 10, 3, 3);
+  var_2 moveTo((var_2.origin[0], var_2.origin[1] + var_45 * 2, var_2.origin[2] - var_45), 10, 3, 3);
   common_scripts\utility::flag_wait("player_used_computer");
   var_46 = getEntArray("satellite_room_moving_parts", "script_noteworthy");
 
@@ -1254,23 +1254,23 @@ sat_room_move_pieces() {
 }
 
 rog_move_and_rotate(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_3 linkto(var_0);
-  var_0 moveto((var_5.origin[0], var_5.origin[1], var_5.origin[2]), 3, 0.3, 0.3);
+  var_3 linkTo(var_0);
+  var_0 moveTo((var_5.origin[0], var_5.origin[1], var_5.origin[2]), 3, 0.3, 0.3);
   var_0 waittill("movedone");
 
   if(isDefined(var_1)) {
     var_1 unlink();
     var_3 unlink();
-    var_3 moveto((var_3.origin[0], var_1.origin[1] + var_4, var_3.origin[2]), 3, 0.3, 0.3);
+    var_3 moveTo((var_3.origin[0], var_1.origin[1] + var_4, var_3.origin[2]), 3, 0.3, 0.3);
     wait 1;
 
     if(var_2 != var_0) {
-      var_0 linkto(var_2);
+      var_0 linkTo(var_2);
     } else {
-      var_5 linkto(var_2);
+      var_5 linkTo(var_2);
     }
 
-    var_2 rotateyaw(-72, 3, 0.5, 0.5);
+    var_2 rotateYaw(-72, 3, 0.5, 0.5);
     var_2 waittill("rotatedone");
   }
 }

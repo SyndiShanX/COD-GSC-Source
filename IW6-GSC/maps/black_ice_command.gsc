@@ -61,7 +61,7 @@ main() {
   thread set_command_dof();
   thread door_close();
   thread maps\black_ice_audio::sfx_blackice_cmd_fire();
-  var_1 = getent("trig_flag_command_done", "targetname");
+  var_1 = getEnt("trig_flag_command_done", "targetname");
   var_1 common_scripts\utility::trigger_off();
   common_scripts\utility::exploder("command_center_flashing_button");
   maps\black_ice_util::waittill_trigger_activate_looking_at(level._command.player_enemy, "hint_command_button_press");
@@ -126,11 +126,11 @@ section_post_inits() {
   level.player_lever_input = -0.0036;
   level.water_supression_level = 1;
   level.color_status = 0;
-  level._command.player_struct = common_scripts\utility::getstruct("struct_command_player", "targetname");
-  level._command.baker_struct = common_scripts\utility::getstruct("struct_command_baker", "targetname");
+  level._command.player_struct = common_scripts\utility::getStruct("struct_command_player", "targetname");
+  level._command.baker_struct = common_scripts\utility::getStruct("struct_command_baker", "targetname");
 
   if(isDefined(level._command.player_struct)) {
-    level._command.baker_enter_struct = common_scripts\utility::getstruct("vignette_controlroom_enter", "script_noteworthy");
+    level._command.baker_enter_struct = common_scripts\utility::getStruct("vignette_controlroom_enter", "script_noteworthy");
     level._command.door_in = maps\black_ice_util::setup_door("model_command_door_in", "blackice_door_refinery");
     level._command.door_out = maps\black_ice_util::setup_door("model_command_door_out", "blackice_door_refinery");
     level._command.baker_enter_struct maps\_anim::anim_first_frame_solo(level._command.door_in, "command_enter");
@@ -273,7 +273,7 @@ command_fail_late_death() {
   common_scripts\utility::flag_set("flag_player_dying_on_rig");
   maps\_utility::vision_set_fog_changes("black_ice_exfil_explosive_death", 0.5);
   earthquake(0.5, 0.5, level.player.origin, 2048);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   common_scripts\utility::exploder("exfil_pull_early_explosion");
   thread maps\black_ice_audio::sfx_blackice_tanks_dist_explo();
   level.player thread maps\_gameskill::blood_splat_on_screen("left");
@@ -693,7 +693,7 @@ monitor_controls_and_fx(var_0) {
   level.monitor_fx = [var_11, var_12, var_13];
 
   foreach(var_15 in level.monitor_fx) {
-    var_15 linkto(var_0, "j_monitor");
+    var_15 linkTo(var_0, "j_monitor");
     var_15 setanim(level.scr_anim["command_monitor_fx_green"]["command_monitor_fx_1"], 1, 0.0, 0.0);
     var_15 setanim(level.scr_anim["command_monitor_fx_green"]["command_monitor_fx_2"], 1, 0.0, 0.0);
     var_15 setanim(level.scr_anim["command_monitor_fx_green"]["command_monitor_fx_3"], 1, 0.0, 0.0);
@@ -813,10 +813,10 @@ monitor_controls_and_fx(var_0) {
         case 0:
           break;
         case 1:
-          level.player playrumbleonentity("lever_feedback_light");
+          level.player playRumbleOnEntity("lever_feedback_light");
           break;
         case 2:
-          level.player playrumbleonentity("lever_feedback_heavy");
+          level.player playRumbleOnEntity("lever_feedback_heavy");
           break;
       }
     }
@@ -940,13 +940,13 @@ explosions_success(var_0) {
   common_scripts\utility::flag_set("flag_blowup_pipes");
   wait 2.0;
   earthquake(0.35, 1, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1;
   earthquake(0.4, 0.8, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   wait 1.6;
   earthquake(0.4, 1.3, level.player.origin, 3000);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
 }
 
 explode_wait_quake(var_0, var_1, var_2, var_3, var_4) {
@@ -977,8 +977,8 @@ sucess_swelling_rumble(var_0, var_1, var_2) {
 
 command_light_change() {
   level endon("flag_ladder_jumpcheck");
-  var_0 = getent("comms_overhead_1", "targetname");
-  var_1 = getent("comms_overhead_2", "targetname");
+  var_0 = getEnt("comms_overhead_1", "targetname");
+  var_1 = getEnt("comms_overhead_2", "targetname");
   var_2 = [var_0, var_1];
   var_3 = getEntArray("emergency_red_exfil_light", "targetname");
 
@@ -997,7 +997,7 @@ command_light_change() {
     var_11[var_12] = common_scripts\utility::spawn_tag_origin();
     var_11[var_12].origin = var_14 gettagorigin("TAG_fx_main");
     var_11[var_12].angles = var_14 gettagangles("TAG_fx_main");
-    var_11[var_12] linkto(var_14, "TAG_fx_main");
+    var_11[var_12] linkTo(var_14, "TAG_fx_main");
     var_12 = var_12 + 1;
   }
 
@@ -1008,7 +1008,7 @@ command_light_change() {
     var_16[var_12] = common_scripts\utility::spawn_tag_origin();
     var_16[var_12].origin = var_14 gettagorigin("TAG_fx_main");
     var_16[var_12].angles = var_14 gettagangles("TAG_fx_main");
-    var_16[var_12] linkto(var_14, "TAG_fx_main");
+    var_16[var_12] linkTo(var_14, "TAG_fx_main");
     var_12 = var_12 + 1;
   }
 
@@ -1111,7 +1111,7 @@ command_light_change() {
 }
 
 allies_baker_console_anims(var_0, var_1) {
-  var_2 = getent("ally_01_command", "targetname");
+  var_2 = getEnt("ally_01_command", "targetname");
   var_2.script_friendname = "Merrick";
   var_2 maps\_utility::add_spawn_function(maps\black_ice_util::spawnfunc_ally);
   var_3 = var_2 maps\_utility::spawn_ai();
@@ -1233,7 +1233,7 @@ event_pipe_explosions() {
 
 dim_overhead_light() {
   wait 3.5;
-  var_0 = getent("comms_overhead_1", "targetname");
+  var_0 = getEnt("comms_overhead_1", "targetname");
   var_1 = var_0 getlightintensity();
   var_2 = (0.89, 0.75, 0.57);
   var_3 = 1.4;
@@ -1312,7 +1312,7 @@ notetrack_blast_shake_late(var_0) {
 }
 
 command_godrays() {
-  var_0 = getent("cc_gr_origin", "targetname");
+  var_0 = getEnt("cc_gr_origin", "targetname");
 
   if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_command_start", "flag_teleport_rig", undefined, undefined);
@@ -1333,7 +1333,7 @@ shrink_pdeck_lights() {
   var_0 = getEntArray("lights_pipedeck_a", "targetname");
   var_1 = getEntArray("lights_pipedeck_b", "targetname");
   var_2 = getEntArray("lights_pipedeck_c", "targetname");
-  var_3 = [getent("escape_emergency_1", "targetname")];
+  var_3 = [getEnt("escape_emergency_1", "targetname")];
 
   foreach(var_5 in var_0) {
     var_5 setlightradius(12);

@@ -581,8 +581,8 @@ lib_056A::func_6F5D(param_00, param_01) {
   var_03 = self.var_741E.var_001D * (1, 0, 0) + param_00.var_001D * (0, 1, 0);
   var_02.var_001D = var_03;
   param_00 playerlinktoblend(var_02, "tag_origin", 0.25);
-  var_02 moveto(self.var_741E.var_0116, 0.25);
-  var_02 rotateto(self.var_741E.var_001D, 0.25);
+  var_02 moveTo(self.var_741E.var_0116, 0.25);
+  var_02 rotateTo(self.var_741E.var_001D, 0.25);
   param_00 common_scripts\utility::func_0603();
   param_00 common_scripts\utility::func_0600();
   param_00 maps\mp\_utility::func_3E8E(1);
@@ -620,7 +620,7 @@ lib_056A::func_6F5D(param_00, param_01) {
     var_07 = spawn("script_model", (0, 0, 0));
     var_07.var_001D = level.groundrefent.var_001D;
     param_00 playersetgroundreferenceent(var_07);
-    var_07 rotateto((0, 0, 0), 0.3325);
+    var_07 rotateTo((0, 0, 0), 0.3325);
   }
 
   wait(1.33);
@@ -637,7 +637,7 @@ lib_056A::func_6F5D(param_00, param_01) {
   param_00.var_5799 = 0;
   param_00.has_purchased_any_blitz = 1;
   if(common_scripts\utility::func_562E(level.zmb_player_safe_teleport_on_perk_buy)) {
-    param_00 setorigin(getclosestpointonnavmesh(self.var_741E.var_0116, param_00) + (0, 0, 1));
+    param_00 setOrigin(getclosestpointonnavmesh(self.var_741E.var_0116, param_00) + (0, 0, 1));
   }
 }
 
@@ -1009,7 +1009,7 @@ lib_056A::func_35B0() {
   var_01.var_258C = 0;
   var_01.var_AAC1 = spawn("script_model", (0, 0, 0));
   var_01.var_AAC1 setModel("tag_origin");
-  var_01.var_AAC1 linkto(var_00, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_01.var_AAC1 linkTo(var_00, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_00 thread maps\mp\gametypes\_playerlogic::deleteentonplayerdisconnect(var_01.var_AAC1);
   var_01.var_AAC0 = spawnlinkedfx(common_scripts\utility::func_44F5("zmb_elec_cherry_wv"), var_01.var_AAC1, "tag_origin");
   var_01.var_AAC0 hidefromclient(var_00);
@@ -1156,12 +1156,12 @@ lib_056A::func_5F1E() {
       if(isDefined(var_03)) {
         var_02 usetouchtriggerrequirefacingposition(1, var_03.var_0116);
       } else {
-        var_02 usetriggerrequirelookat(1);
+        var_02 useTriggerRequireLookAt(1);
       }
     }
 
     if(isDefined(var_03) && isDefined(var_03.var_01A2)) {
-      var_02.var_191E = getent(var_03.var_01A2, "targetname");
+      var_02.var_191E = getEnt(var_03.var_01A2, "targetname");
     }
 
     lib_0547::func_8A4F(var_02, ::lib_056A::func_5F22);

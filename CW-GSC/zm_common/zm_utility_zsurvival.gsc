@@ -32,7 +32,7 @@ function function_548f282() {
 }
 
 function end_match(b_success = 1, var_131cc614 = 1) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     level.var_31028c5d prototype_hud::function_817e4d10(player, 0);
   }
 
@@ -104,7 +104,7 @@ function switch_map(map_name) {
   namespace_cf6efd05::function_c484a9be(#"initialized", 1);
   namespace_cf6efd05::function_c484a9be(#"hash_1601cc3215f4f8b3", level.var_b48509f9);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(is_true(player.var_e8bee75e)) {
       player stats::function_d0de7686(#"hash_5da5da5770a64639", 1, #"hash_4edbfffde3c9a22e");
     }

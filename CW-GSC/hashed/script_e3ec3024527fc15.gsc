@@ -63,7 +63,7 @@ function function_eebd1c52() {
 function function_3204d0a4(var_57ef78ed) {
   var_8e4bb68e = spawn("script_origin", level.var_77be18d2.origin + anglesToForward(level.var_77be18d2.angles) * -10);
   var_8e4bb68e.angles = level.var_77be18d2.angles;
-  var_8e4bb68e linkto(level.var_77be18d2);
+  var_8e4bb68e linkTo(level.var_77be18d2);
   level.player val::set(#"intro", "allow_crouch", 0);
   level.player val::set(#"intro", "allow_prone", 0);
 
@@ -119,7 +119,7 @@ function function_880b83fd(flg_exit_fav) {
   level.player val::reset(#"intro", "allow_prone");
   level.player enableweaponcycling();
   s_player_fav_exit_loc = struct::get("s_player_fav_exit_loc");
-  level.player setorigin(s_player_fav_exit_loc.origin);
+  level.player setOrigin(s_player_fav_exit_loc.origin);
   level.player setplayerangles(s_player_fav_exit_loc.angles);
   savegame::checkpoint_save();
 }

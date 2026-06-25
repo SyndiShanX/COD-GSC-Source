@@ -36,12 +36,12 @@ riverbed_intro() {
   level.savimbi = init_hero("savimbi", ::savimbi_setup);
   level thread prep_intro_fx();
   level thread turn_on_convoy_headlights();
-  blocker = getent("buffel_start_blocker", "targetname");
+  blocker = getEnt("buffel_start_blocker", "targetname");
   blocker hide();
   blocker notsolid();
-  drone = getent("drone_name", "targetname");
+  drone = getEnt("drone_name", "targetname");
   drone hide();
-  m_buffel_windshield = getent("buffel_windshield", "targetname");
+  m_buffel_windshield = getEnt("buffel_windshield", "targetname");
   a_buffel_cracked_windshields = [];
   a_buffel_cracked_windshields[0] = spawn_model("veh_t6_mil_buffelapc_windshield_cracked01", m_buffel_windshield.origin - (1, 0, 0), m_buffel_windshield.angles);
   a_buffel_cracked_windshields[1] = spawn_model("veh_t6_mil_buffelapc_windshield_cracked02", m_buffel_windshield.origin - (1, 0, 0), m_buffel_windshield.angles);
@@ -144,7 +144,7 @@ riverbed_intro_player() {
   level thread run_scene("level_intro_chopper");
   level thread set_react_ai_goals();
   level thread riverbed_intro_mortars();
-  m_player_body = getent("player_body", "targetname");
+  m_player_body = getEnt("player_body", "targetname");
   m_player_body attach("t6_wpn_machete_prop", "tag_weapon");
 
   if(is_mature()) {
@@ -197,7 +197,7 @@ reveal_lighting_swap() {
 }
 
 player_head_look(m_body) {
-  m_player_body = getent("player_body", "targetname");
+  m_player_body = getEnt("player_body", "targetname");
   level.player playerlinktodelta(m_player_body, "tag_player", 1, 10, 20, 20, 0, 1, 1);
 }
 
@@ -291,12 +291,12 @@ riverbed_savimbi() {
 
 riverbed_savimbi_intro_buffel() {
   level thread run_scene("level_intro_savimbi_buffel");
-  veh_buffel = getent("savimbi_buffel", "targetname");
+  veh_buffel = getEnt("savimbi_buffel", "targetname");
   veh_buffel veh_magic_bullet_shield(1);
   veh_buffel.drivepath = 1;
   veh_buffel hidepart("tag_mirror");
   nd_start = getvehiclenode("savimbi_intro_path", "targetname");
-  veh_convoy = getent("riverbed_convoy_eland", "targetname");
+  veh_convoy = getEnt("riverbed_convoy_eland", "targetname");
   veh_convoy.drivepath = 1;
   scene_wait("level_intro_savimbi");
   veh_convoy thread go_path();
@@ -304,10 +304,10 @@ riverbed_savimbi_intro_buffel() {
   veh_buffel thread play_dust_fx();
   veh_buffel waittill("reached_end_node");
   wait 0.1;
-  blocker = getent("buffel_start_blocker", "targetname");
+  blocker = getEnt("buffel_start_blocker", "targetname");
   blocker show();
   blocker solid();
-  riverbed_blocker = getent("riverbed_blocker", "targetname");
+  riverbed_blocker = getEnt("riverbed_blocker", "targetname");
   riverbed_blocker solid();
   flag_set("savimbi_reached_savannah");
 }
@@ -555,7 +555,7 @@ spawn_burned_guy() {
 }
 
 player_hit_rumble(m_body) {
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
 }
 
 vo_riverbed() {
@@ -567,7 +567,7 @@ vo_riverbed() {
 vo_riverbed_savimbi_nag() {
   level endon("savannah_base_reached");
   n_count = 1;
-  vh_savimbi_buffel = getent("savimbi_buffel", "targetname");
+  vh_savimbi_buffel = getEnt("savimbi_buffel", "targetname");
 
   while(!flag("savannah_base_reached")) {
     n_delta = distance2d(level.player.origin, vh_savimbi_buffel.origin);
@@ -589,9 +589,9 @@ vo_riverbed_savimbi_nag() {
 }
 
 mortar_react() {
-  mortar_struct = getstruct("mortar_react", "targetname");
+  mortar_struct = getStruct("mortar_react", "targetname");
   playFX(getfx("mortar_savannah"), mortar_struct.origin);
-  playsoundatposition("exp_mortar", mortar_struct.origin);
+  playSoundAtPosition("exp_mortar", mortar_struct.origin);
   run_scene("riverbed_mortar_react");
   run_scene("riverbed_mortar_react_end");
 }

@@ -106,7 +106,7 @@ checkpoint_save_restored() {
 
   foreach(poi in level.rts.poi) {
     if(!isDefined(poi.entity)) {
-      poi.entity = getent(poi.ref, "targetname");
+      poi.entity = getEnt(poi.ref, "targetname");
     }
 
     if(isDefined(poi.entity)) {
@@ -251,7 +251,7 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
 
     if(isDefined(poi.model) && poi.model != "") {
       poi.entity setModel(poi.model);
-      poi.entity disconnectpaths();
+      poi.entity disconnectPaths();
     }
 
     claimpoi(poi, poi.team);
@@ -273,7 +273,7 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
           fakevehicle.team = team;
           fakevehicle.vteam = team;
           fakevehicle.origin = target.origin;
-          fakevehicle linkto(poi.entity);
+          fakevehicle linkTo(poi.entity);
           poi.fakevehicle[poi.fakevehicle.size] = fakevehicle;
         }
       } else if(poi.entity.classname == "script_model") {
@@ -281,7 +281,7 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
         poi.fakevehicle.team = team;
         poi.fakevehicle.vteam = team;
         poi.fakevehicle.origin = poi.origin + vectorscale((0, 0, 1), 24.0);
-        poi.fakevehicle linkto(poi.entity);
+        poi.fakevehicle linkTo(poi.entity);
       }
     } else {
       poi.entity.health = 100;
@@ -319,8 +319,8 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
 
 initpois() {
   level.poiobjectivenum = 10;
-  level.rts.allied_center = getent("rts_player_center", "targetname");
-  level.rts.enemy_center = getent("rts_enemy_center", "targetname");
+  level.rts.allied_center = getEnt("rts_player_center", "targetname");
+  level.rts.enemy_center = getEnt("rts_enemy_center", "targetname");
   assert(isDefined(level.rts.allied_center), "spawn center not defined");
   assert(isDefined(level.rts.enemy_center), "spawn center not defined");
   assert(maps\_so_rts_support::clampenttomapboundary(level.rts.allied_center), "This location is out of boundary");
@@ -330,13 +330,13 @@ initpois() {
 
   if(level.rts.game_mode == "attack") {
     level.rts.enemy_base = getpoibyref("rts_base_enemy");
-    level.rts.enemy_base.entity = getent("rts_base_enemy", "targetname");
+    level.rts.enemy_base.entity = getEnt("rts_base_enemy", "targetname");
     claimpoi(level.rts.enemy_base, "axis");
   }
 
   foreach(poi in level.rts.poi) {
     if(!isDefined(poi.entity)) {
-      poi.entity = getent(poi.ref, "targetname");
+      poi.entity = getEnt(poi.ref, "targetname");
     }
 
     if(isDefined(poi.entity)) {
@@ -650,7 +650,7 @@ poi_capturewatch(poi) {
   }
 
   if(isDefined(poi.alttrig)) {
-    poi.trigger = getent(poi.alttrig, "targetname");
+    poi.trigger = getEnt(poi.alttrig, "targetname");
   } else {
     poi.trigger = spawn("trigger_radius", poi.entity.origin, 0, isDefined(poi.entity.radius) ? poi.entity.radius : level.rts.poiradius, 72);
   }
@@ -660,7 +660,7 @@ poi_capturewatch(poi) {
   poi_addobjective(poi);
 
   if(isDefined(poi.alttrig)) {
-    poi.intruder_trigger = getent(poi.alttrig, "targetname");
+    poi.intruder_trigger = getEnt(poi.alttrig, "targetname");
   } else {
     poi.intruder_trigger = spawn("trigger_radius", poi.entity.origin, 0, isDefined(poi.entity.radius) ? poi.entity.radius : level.rts.poiradius / 2, 128);
   }

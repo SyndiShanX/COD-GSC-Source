@@ -156,7 +156,7 @@ _id_217A(var_0, var_1) {
   var_4 = cos(var_2) * var_3;
   var_5 = sin(var_2) * var_3;
   var_6 = getdvarint("#x37a9a1c1030528402", 8000);
-  var_7 = vectornormalize((var_4, var_5, var_6));
+  var_7 = vectorNormalize((var_4, var_5, var_6));
   var_7 = var_7 * var_6;
   level._id_21B9 = 1;
 
@@ -343,11 +343,11 @@ _id_2181(var_0) {
       if(_func_010F(var_5)) {
         if(_func_0037(var_1 / self.maxhealth) >= 0.166667) {
           self.owner earthquakeforplayer(0.25, 0.2, self._id_2FF8.origin, 150);
-          self.owner playrumbleonentity("damage_heavy");
+          self.owner playRumbleOnEntity("damage_heavy");
           var_12 = "heavy";
         } else {
           self.owner earthquakeforplayer(0.15, 0.15, self._id_2FF8.origin, 150);
-          self.owner playrumbleonentity("damage_light");
+          self.owner playRumbleOnEntity("damage_light");
         }
       }
     }
@@ -473,7 +473,7 @@ _id_216C(var_0) {
 
   thread _id_084C::ball_turret_gunner_exit(self);
   _id_2175(var_0);
-  self moveto(self.origin + var_2 * 50000, 10, 5);
+  self moveTo(self.origin + var_2 * 50000, 10, 5);
   _id_2180(self.origin + var_2 * 50000);
   _id_2173(0);
 }
@@ -549,7 +549,7 @@ _id_2176(var_0, var_1, var_2, var_3) {
   var_5._id_9F26 = var_8;
   var_5.origin = level._id_21B8.origin + var_3;
   var_5.angles = (0, var_2 + 90, -30);
-  var_5 linkto(level._id_21B8, "tag_origin");
+  var_5 linkTo(level._id_21B8, "tag_origin");
   level notify("matchrecording_plane", var_5);
   return var_5;
 }
@@ -561,7 +561,7 @@ _id_2177(var_0, var_1) {
   self._id_F81F.team = var_0.team;
   self._id_F81F.streakinfo = var_1;
   self._id_F81F.origin = self gettagorigin("tag_turret") - (0, 0, 50);
-  self._id_F81F linkto(self);
+  self._id_F81F linkTo(self);
   self._id_F81F.angles = vectortoangles(level._id_21B8.origin - self._id_F81F.origin);
   self._id_F81F _meth_83A0(self.team);
   self._id_F81F _meth_839D(0);
@@ -587,7 +587,7 @@ _id_2177(var_0, var_1) {
   self._id_F81F._id_C316 = 0;
   self._id_F81F._id_5803 = spawn("script_model", self._id_F81F.origin);
   self._id_F81F._id_5803 setModel("plane_boscar17_00_tur_main");
-  self._id_F81F._id_5803 linkto(self, "", (0, 0, 0), (0, 0, 0));
+  self._id_F81F._id_5803 linkTo(self, "", (0, 0, 0), (0, 0, 0));
   self._id_F81F._id_5803 hidefromplayer(var_0);
 }
 
@@ -655,24 +655,24 @@ _id_C923(var_0) {
   if(var_0 == "on") {
     var_1 = 10;
     var_2 = level._id_2178["rotate"] / 360 * var_1;
-    level._id_21B8 rotateyaw(level._id_21B8.angles[2] + var_1, var_2, var_2, 0);
+    level._id_21B8 rotateYaw(level._id_21B8.angles[2] + var_1, var_2, var_2, 0);
     var_3 = 360 / level._id_2178["rotate"];
     var_4 = var_3 * 0.0174533;
     var_5 = getdvarint("#x33652b41c2f9a74f5", 9000);
     level._id_2170 = var_4 * var_5;
 
     for(;;) {
-      level._id_21B8 rotateyaw(360, level._id_2178["rotate"]);
+      level._id_21B8 rotateYaw(360, level._id_2178["rotate"]);
       wait(level._id_2178["rotate"]);
     }
   } else if(var_0 == "off") {
     var_6 = 10;
     var_2 = level._id_2178["rotate"] / 360 * var_6;
-    level._id_21B8 rotateyaw(level._id_21B8.angles[2] + var_6, var_2, 0, var_2);
+    level._id_21B8 rotateYaw(level._id_21B8.angles[2] + var_6, var_2, 0, var_2);
   } else if(var_0 == "crash") {
     var_1 = 50;
     var_2 = level._id_2178["rotate"] / 360 * var_1;
-    level._id_21B8 rotateyaw(level._id_21B8.angles[2] + var_1, var_2, var_2, 0);
+    level._id_21B8 rotateYaw(level._id_21B8.angles[2] + var_1, var_2, var_2, 0);
   }
 }
 
@@ -688,7 +688,7 @@ _id_215F(var_0) {
   _id_2177(var_0, self.streakinfo);
 
   if(isbot(var_0)) {
-    var_0 cameralinkto(self._id_2FF8, "tag_player");
+    var_0 cameralinkTo(self._id_2FF8, "tag_player");
   } else {
     var_0 scripts\cp_mp\utility\killstreak_utility::_id_B86F("ball_turret_gunner_engage");
     var_0._id_FF07 = 1;
@@ -787,14 +787,14 @@ _id_2172(var_0) {
   var_2 = spawn("script_model", var_1.origin);
   var_2.angles = var_1.angles;
   var_2 setModel("plane_boscar17_vista_des");
-  var_2 linkto(var_1, "tag_body");
+  var_2 linkTo(var_1, "tag_body");
   self.crashmodel = var_2;
   var_3 = spawn("script_model", self.origin);
   var_3 setModel("ks_ac130_mp");
   var_3.angles = self.angles;
   var_3._id_18AF = self.streakinfo.streakname;
   var_3 _id_06C6::_id_D47B();
-  var_3 linkto(var_1, "tag_body", (0, 0, -10), (0, 0, 0));
+  var_3 linkTo(var_1, "tag_body", (0, 0, -10), (0, 0, 0));
   var_4 = self.origin + anglesToForward(self.angles) * 3000 - (0, 0, 8000);
   var_6 = "crash_air";
   var_3 setscriptablepartstate(var_6, "on", 0);
@@ -893,13 +893,13 @@ _id_216D() {
   self._id_91A2 setModel("ks_ac130_mp");
   self._id_91A2.angles = self.angles;
   self._id_91A2 setotherent(self.owner);
-  self._id_91A2 linkto(self, "tag_wing_l_fx", (0, 0, 0), (0, 0, 0));
+  self._id_91A2 linkTo(self, "tag_wing_l_fx", (0, 0, 0), (0, 0, 0));
   var_1 = self gettagorigin("tag_wing_r_fx");
   self._id_C868 = spawn("script_model", var_1);
   self._id_C868 setModel("ks_ac130_mp");
   self._id_C868.angles = self.angles;
   self._id_C868 setotherent(self.owner);
-  self._id_C868 linkto(self, "tag_wing_r_fx", (0, 0, 0), (0, 0, 0));
+  self._id_C868 linkTo(self, "tag_wing_r_fx", (0, 0, 0), (0, 0, 0));
   self setscriptablepartstate("contrails", "on");
 }
 

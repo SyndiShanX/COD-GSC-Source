@@ -25,7 +25,7 @@ function init() {
 }
 
 function function_cb5a4b1a() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 
@@ -62,14 +62,14 @@ function function_3e83eb5e() {
 
   while(true) {
     wait 15;
-    playsoundatposition(#"hash_18465a9117b3208f", (-6006, 18086, 1905));
+    playSoundAtPosition(#"hash_18465a9117b3208f", (-6006, 18086, 1905));
   }
 }
 
 function function_8e50d09b() {
   while(true) {
     wait 65;
-    playsoundatposition(#"hash_62c19eac25ff3f3c", (-6006, 18086, 1905));
+    playSoundAtPosition(#"hash_62c19eac25ff3f3c", (-6006, 18086, 1905));
   }
 }
 
@@ -80,7 +80,7 @@ function function_acd83a15() {
     waitresult = level waittill(#"musroundend", #"hash_350a3e373494a400");
 
     if(waitresult._notify === "musRoundEnd") {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_to_player("" + #"music_underscore", 2);
       }
 
@@ -88,7 +88,7 @@ function function_acd83a15() {
     }
 
     if(function_e840d5a5()) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player clientfield::set_to_player("" + #"music_underscore", 3);
       }
     }
@@ -119,7 +119,7 @@ function function_3c734339() {
   level endon(#"game_over");
   level flag::wait_till("start_zombie_round_logic");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 0);
   }
 }
@@ -129,7 +129,7 @@ function function_8f85d169(var_dbd74b22 = 1) {
     level thread zm_audio::sndmusicsystem_stopandflush();
     level.musicsystemoverride = 1;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clientfield::set_to_player("" + #"music_underscore", 2);
     }
 
@@ -138,13 +138,13 @@ function function_8f85d169(var_dbd74b22 = 1) {
 
   level.musicsystemoverride = 0;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 3);
   }
 }
 
 function function_da00670e() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 
@@ -168,7 +168,7 @@ function function_d0f24e17() {
   }
 
   if(function_e840d5a5()) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clientfield::set_to_player("" + #"music_underscore", 3);
     }
   }

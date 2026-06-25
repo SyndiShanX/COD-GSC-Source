@@ -118,14 +118,14 @@ walkway_collapse() {
   swap_time = GetNotetrackTimes(%mp_sovereign_walkway_collapse_top, "bottom_anim_begin")[0];
   swap_time *= collapse_top_length;
 
-  walkway_trigger_damage = GetEnt("walkway_trigger_damage", "targetname");
+  walkway_trigger_damage = getEnt("walkway_trigger_damage", "targetname");
 
-  animated_walkway_tank = GetEnt("walkway_tank_animated", "targetname");
+  animated_walkway_tank = getEnt("walkway_tank_animated", "targetname");
   animated_walkway_tank ScriptModelPlayAnimDeltaMotion("mp_sovereign_walkway_collapse_top_idle");
   if(isDefined(animated_walkway_tank.target)) {
-    animated_walkway_tank.clip = GetEnt(animated_walkway_tank.target, "targetname");
+    animated_walkway_tank.clip = getEnt(animated_walkway_tank.target, "targetname");
     if(isDefined(animated_walkway_tank.clip)) {
-      animated_walkway_tank.clip LinkTo(animated_walkway_tank, "j_canister_main");
+      animated_walkway_tank.clip linkTo(animated_walkway_tank, "j_canister_main");
 
       killcam_ent = spawn("script_model", (568, -722, 568));
       animated_walkway_tank.clip.killCamEnt = killcam_ent;
@@ -135,12 +135,12 @@ walkway_collapse() {
   walkway_clip_end = getEntArray("walkway_clip_end", "targetname");
   array_thread(walkway_clip_end, ::walkway_collapse_clip_hide);
 
-  walkway_tank_trigger_hurt = GetEnt("walkway_tank_trigger_hurt", "targetname");
+  walkway_tank_trigger_hurt = getEnt("walkway_tank_trigger_hurt", "targetname");
   if(isDefined(walkway_tank_trigger_hurt)) {
     walkway_tank_trigger_hurt Delete();
   }
 
-  animated_walkway = GetEnt("walkway_animated", "targetname");
+  animated_walkway = getEnt("walkway_animated", "targetname");
   animated_walkway ScriptModelPlayAnimDeltaMotion("mp_sovereign_walkway_collapse_bottom_idle");
   animated_walkway Hide();
 
@@ -332,7 +332,7 @@ walkway_collapse_clip_show() {
   self Show();
 
   if(self is_dynamic_path()) {
-    self DisconnectPaths();
+    self disconnectPaths();
   }
 
   if(self is_ai_sight_line()) {
@@ -341,7 +341,7 @@ walkway_collapse_clip_show() {
 }
 
 walkway_collapse_group(targetname) {
-  struct = GetStruct(targetname, "targetname");
+  struct = getStruct(targetname, "targetname");
   if(!isDefined(struct)) {
     return undefined;
   }
@@ -358,7 +358,7 @@ walkway_collapse_group(targetname) {
       parent.clip[parent.clip.size] = ent;
     } else {
       parent.linked[parent.linked.size] = ent;
-      ent LinkTo(parent);
+      ent linkTo(parent);
     }
   }
 
@@ -379,8 +379,8 @@ walkway_collapse_group(targetname) {
 
 #using_animtree("animated_props");
 malfunctioning_crane() {
-  arm = GetEnt("malfunctioning_crane_arm", "targetname");
-  arm_clip = GetEnt("malfunctioning_crane_arm_clip", "targetname");
+  arm = getEnt("malfunctioning_crane_arm", "targetname");
+  arm_clip = getEnt("malfunctioning_crane_arm_clip", "targetname");
 
   anim_length = GetAnimLength(%mp_sovereign_malfunctioning_crane_arm);
 
@@ -388,13 +388,13 @@ malfunctioning_crane() {
     return;
   }
   if(isDefined(arm_clip)) {
-    arm_clip EnableLinkTo();
-    arm_clip LinkTo(arm, "basetwist_jnt", (0, 0, 0), (180, 0, 0));
+    arm_clip EnablelinkTo();
+    arm_clip linkTo(arm, "basetwist_jnt", (0, 0, 0), (180, 0, 0));
   }
 
   sound_ent = spawn("script_model", arm.origin);
   sound_ent setModel("tag_origin");
-  sound_ent LinkTo(arm, "basetwist_jnt");
+  sound_ent linkTo(arm, "basetwist_jnt");
 
   arm ScriptModelPlayAnimDeltaMotion("mp_sovereign_malfunctioning_crane_arm");
 
@@ -410,37 +410,37 @@ robot_arm() {
 
   waitframe();
 
-  robot_arm = GetEnt("robot_arm", "targetname");
+  robot_arm = getEnt("robot_arm", "targetname");
   if(!isDefined(robot_arm)) {
     return;
   }
   if(isDefined(robot_arm.target)) {
-    clip = GetEnt(robot_arm.target, "targetname");
-    clip LinkTo(robot_arm, "j_anim_001");
+    clip = getEnt(robot_arm.target, "targetname");
+    clip linkTo(robot_arm, "j_anim_001");
   }
 
   robot_arm_parent = spawn("script_model", robot_arm.origin);
   robot_arm_parent setModel("tag_origin");
   robot_arm_parent.angles = robot_arm.angles;
 
-  robot_arm LinkTo(robot_arm_parent);
+  robot_arm linkTo(robot_arm_parent);
 
   robot_arm.ends = [];
   links = robot_arm get_links();
   foreach(link in links) {
-    end = getstruct(link, "script_linkname");
+    end = getStruct(link, "script_linkname");
     robot_arm.ends[robot_arm.ends.size] = end;
   }
 
-  robot_arm_top = GetEnt("robot_arm_top", "targetname");
-  robot_arm_top LinkTo(robot_arm_parent);
+  robot_arm_top = getEnt("robot_arm_top", "targetname");
+  robot_arm_top linkTo(robot_arm_parent);
 
-  robot_track = GetEnt("robot_arm_track", "targetname");
+  robot_track = getEnt("robot_arm_track", "targetname");
 
   robot_track.ends = [];
   links = robot_track get_links();
   foreach(link in links) {
-    end = getstruct(link, "script_linkname");
+    end = getStruct(link, "script_linkname");
     robot_track.ends[robot_track.ends.size] = end;
   }
 
@@ -477,9 +477,9 @@ robot_arm() {
         new_yaw = VectorToYaw(topPlayer.origin - robot_arm.origin);
 
         move_time = dist / move_speed;
-        robot_arm_parent MoveTo(new_pos_arm, move_time);
-        robot_arm_parent RotateTo((robot_arm.angles[0], new_yaw, robot_arm.angles[2]), move_time / 2);
-        robot_track MoveTo(new_pos_track, move_time);
+        robot_arm_parent moveTo(new_pos_arm, move_time);
+        robot_arm_parent rotateTo((robot_arm.angles[0], new_yaw, robot_arm.angles[2]), move_time / 2);
+        robot_track moveTo(new_pos_track, move_time);
         wait max(move_time, 6);
         continue;
       }

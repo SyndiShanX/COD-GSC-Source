@@ -29,7 +29,7 @@
 function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
   level.player util::delay(0.05, undefined, &clientfield::set_to_player, "stream_adler_assault_assets", 1);
-  level thread scene::init_streamer("scene_kgb_bunker_intro_elevator", getplayers());
+  level thread scene::init_streamer("scene_kgb_bunker_intro_elevator", getPlayers());
 }
 
 function main(str_skipto, b_starting) {
@@ -351,7 +351,7 @@ function function_19b7217e() {
 function function_3c9ae8b3() {
   self endon(#"death");
   self waittill(#"trigger");
-  volume = getent(self.target, "targetname");
+  volume = getEnt(self.target, "targetname");
 
   if(isDefined(volume)) {
     enemies = volume ai::function_18c4ff86("axis");

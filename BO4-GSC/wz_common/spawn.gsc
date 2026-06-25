@@ -27,9 +27,9 @@ function_f468d9a5(spawnpoint) {
   dir = anglesToForward(spawnpoint.angles);
   pos = spawnpoint.origin - dir * distance;
   hold_origin = (pos[0], pos[1], spawnpoint.origin[2] + height);
-  hold_angles = vectortoangles(vectornormalize(spawnpoint.origin - pos));
+  hold_angles = vectortoangles(vectorNormalize(spawnpoint.origin - pos));
   vec = anglesToForward(hold_angles);
-  vec = vectornormalize(vec);
+  vec = vectorNormalize(vec);
   vec *= velocity;
   return {
     #origin: hold_origin, #angles: hold_angles, #freefall: vec
@@ -263,7 +263,7 @@ function_c263fd97() {
   self endon(#"disconnect");
   self unlink();
   self.spawn_anchor = spawn("script_origin", self.resurrect_origin);
-  self playerlinkto(self.spawn_anchor);
+  self playerlinkTo(self.spawn_anchor);
   self setplayerangles(self.resurrect_angles);
   self setclientuivisibilityflag("weapon_hud_visible", 0);
   self ghost();
@@ -320,7 +320,7 @@ function_c263fd97() {
 
   self unlink();
   self function_8cef1872();
-  self setorigin(self.resurrect_origin);
+  self setOrigin(self.resurrect_origin);
   self show();
   self forcefreefall(1, self.var_df8c6469, 0);
   self.var_df8c6469 = undefined;

@@ -33,7 +33,7 @@ vector3d_magnitude(
 }
 vector3d_normalize(
   vector) {
-  result = VectorNormalize(vector);
+  result = vectorNormalize(vector);
 
   return result;
 }

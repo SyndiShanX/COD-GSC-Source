@@ -439,7 +439,7 @@ func_131FA() {
     var_10 = undefined;
     if(isDefined(var_1)) {
       var_10 = self.origin - var_1.origin;
-      var_10 = vectornormalize(var_10);
+      var_10 = vectorNormalize(var_10);
     }
 
     thread func_A5CC(self.classname);
@@ -451,7 +451,7 @@ func_131FA() {
     if(isDefined(self.delete_on_death)) {
       wait(0.05);
       if(!isDefined(self.var_5958) && !self func_83E2()) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       _freezelookcontrols();
@@ -464,7 +464,7 @@ func_131FA() {
     if(isDefined(self.var_736A)) {
       self notify("newpath");
       if(!isDefined(self.var_5958)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       func_131FB();
@@ -508,7 +508,7 @@ func_131FA() {
           return;
         }
 
-        self disconnectpaths();
+        self disconnectPaths();
         self notify("kill_badplace_forever");
         self func_81D0();
         self notify("newpath");
@@ -688,7 +688,7 @@ func_131CE(var_0, var_1, var_2, var_3) {
 
       self notify("deadstop");
       if(!isDefined(self.var_5958)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       if(isDefined(self.var_114E0) && self.var_114E0 > 0) {
@@ -700,7 +700,7 @@ func_131CE(var_0, var_1, var_2, var_3) {
       self func_83EF();
       self notify("deadstop");
       if(!isDefined(self.var_5958)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       if(isDefined(self.var_114E0) && self.var_114E0 > 0) {
@@ -1057,7 +1057,7 @@ func_8DAB(var_0, var_1) {
 func_8DAC(var_0) {
   self endon("death");
   while(isDefined(var_0.target)) {
-    var_0 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_1 = 56;
     if(isDefined(var_0.fgetarg)) {
       var_1 = var_0.fgetarg;
@@ -1231,8 +1231,8 @@ isdestroyed() {
 func_12FC(var_0, var_1) {
   if(isDefined(var_0) && isDefined(var_1)) {
     var_2 = self getentityvelocity();
-    var_2 = vectornormalize(var_2);
-    var_0 = vectornormalize(var_0);
+    var_2 = vectorNormalize(var_2);
+    var_0 = vectorNormalize(var_0);
     var_3 = vectorlerp(var_2, var_0, var_1);
     return var_3;
   }
@@ -1360,7 +1360,7 @@ func_4E49() {
     var_0.angles = self.angles;
     var_0 notsolid();
     var_0 hide();
-    var_0 linkto(self);
+    var_0 linkTo(self);
     self.var_4E49 = var_0;
   } else {
     self.var_4E49 setModel(self.model);
@@ -1496,7 +1496,7 @@ func_12E33(var_0) {
 }
 
 func_79D5(var_0) {
-  return scripts\engine\utility::getstruct(var_0, "targetname");
+  return scripts\engine\utility::getStruct(var_0, "targetname");
 }
 
 func_79D3(var_0) {
@@ -1513,7 +1513,7 @@ func_79D7(var_0) {
 }
 
 func_F471(var_0) {
-  var_1 = getent(var_0.script_linkto, "script_linkname");
+  var_1 = getEnt(var_0.script_linkto, "script_linkname");
   if(!isDefined(var_1)) {
     return;
   }
@@ -1795,7 +1795,7 @@ func_5636() {
   while(isDefined(self)) {
     if(self vehicle_getspeed() < 1) {
       if(!isDefined(self.var_5958)) {
-        self disconnectpaths();
+        self disconnectPaths();
       }
 
       self notify("speed_zero_path_disconnect");
@@ -1846,9 +1846,9 @@ func_B6B7() {
 
     var_7 = spawnturret("misc_turret", (0, 0, 0), var_6.info);
     if(isDefined(var_6.var_C367)) {
-      var_7 linkto(self, var_6.physics_setgravitydynentscalar, var_6.var_C367, (0, -1 * var_1, 0));
+      var_7 linkTo(self, var_6.physics_setgravitydynentscalar, var_6.var_C367, (0, -1 * var_1, 0));
     } else {
-      var_7 linkto(self, var_6.physics_setgravitydynentscalar, (0, 0, 0), (0, -1 * var_1, 0));
+      var_7 linkTo(self, var_6.physics_setgravitydynentscalar, (0, 0, 0), (0, -1 * var_1, 0));
     }
 
     var_7 setModel(var_6.model);
@@ -2088,8 +2088,8 @@ func_1322A() {
   var_2 = var_1.fgetarg * 2;
   var_3 = -1 * var_1.fgetarg;
   var_4 = spawn("trigger_radius", self.origin + (0, 0, var_3), 0, var_1.fgetarg, var_2);
-  var_4 enablelinkto();
-  var_4 linkto(self);
+  var_4 enablelinkTo();
+  var_4 linkTo(self);
   self.var_E7D2 = var_4;
   self endon("death");
   if(!isDefined(self.var_E7D0)) {
@@ -2169,11 +2169,11 @@ func_131EC() {
 func_7D48(var_0) {
   var_1 = getvehiclenode(var_0, "targetname");
   if(!isDefined(var_1)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   } else if(func_12F8()) {}
 
   if(!isDefined(var_1)) {
-    var_1 = scripts\engine\utility::getstruct(var_0, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0, "targetname");
   }
 
   return var_1;
@@ -2324,7 +2324,7 @@ func_9029(var_0) {
 
 func_DE7F(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(var_0.origin - self.origin);
+  var_3 = vectorNormalize(var_0.origin - self.origin);
   if(vectordot(var_2, var_3) > 0.86) {
     self.health = self.health + int(var_1 * level.vehicle.var_116CE.var_7448[self.var_380]);
   }
@@ -2727,7 +2727,7 @@ func_A5CD(var_0) {
     var_1 scripts\sp\anim::func_1F35(self, var_0);
   } else {
     self glinton(#animtree);
-    self animscripted("vehicle_death_anim", var_1.origin, var_1.angles, var_0);
+    self animScripted("vehicle_death_anim", var_1.origin, var_1.angles, var_0);
     self setneargoalnotifydist(30);
     self setvehgoalpos(var_1.origin, 1);
     self setgoalyaw(var_1.angles[1]);

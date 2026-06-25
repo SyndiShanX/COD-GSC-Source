@@ -41,10 +41,10 @@ alien_wave_init() {
 escape_choke_init() {
   level.choke_trigs = [];
 
-  level.choke_trigs[0] = GetEnt("choke_trig_0", "targetname");
-  level.choke_trigs[1] = GetEnt("choke_trig_1", "targetname");
-  level.choke_trigs[2] = GetEnt("choke_trig_2", "targetname");
-  level.choke_trigs[3] = GetEnt("choke_trig_3", "targetname");
+  level.choke_trigs[0] = getEnt("choke_trig_0", "targetname");
+  level.choke_trigs[1] = getEnt("choke_trig_1", "targetname");
+  level.choke_trigs[2] = getEnt("choke_trig_2", "targetname");
+  level.choke_trigs[3] = getEnt("choke_trig_3", "targetname");
 
   if(!isDefined(level.choke_trigs) || !level.choke_trigs.size) {
     return;
@@ -52,10 +52,10 @@ escape_choke_init() {
   foreach(trig in level.choke_trigs) {
     assert(isDefined(trig.target));
 
-    choke_point = getstruct(trig.target, "targetname");
+    choke_point = getStruct(trig.target, "targetname");
     assert(isDefined(choke_point));
 
-    spit_at_struct = getstruct(choke_point.target, "targetname");
+    spit_at_struct = getStruct(choke_point.target, "targetname");
     assert(isDefined(spit_at_struct));
 
     trig.choke_loc = choke_point.origin;
@@ -263,7 +263,7 @@ scene_loop() {
 
   while(isDefined(cur_node)) {
     self ScrAgentSetGoalPos(cur_node.origin);
-    self ScrAgentSetGoalRadius(32);
+    self ScrAgentSetgoalRadius(32);
 
     self waittill("goal_reached");
 
@@ -358,7 +358,7 @@ alien_lurker_init() {
         spawn_types = array_remove(spawn_types, spawn_types[0]);
       }
 
-      spawn_loc.spawn_trigger = getent(spawn_loc.target, "targetname");
+      spawn_loc.spawn_trigger = getEnt(spawn_loc.target, "targetname");
       assert(isDefined(spawn_loc.spawn_trigger));
 
       assertex(spawn_types.size > 0, msg_prefix + "does not have enough spawn types");
@@ -675,7 +675,7 @@ monitor_looked_at() {
       angles = player gettagangles("tag_eye");
       origin = player getEye();
       sight = anglesToForward(angles);
-      vec = vectornormalize(self.origin - origin);
+      vec = vectorNormalize(self.origin - origin);
       cone = 0.55;
 
       if(VectorDot(sight, vec) > cone) {
@@ -765,7 +765,7 @@ port_to_player_loc(alien_type, radius) {
   if(alien_type == "spitter" || alien_type == "seeder") {
     centering_factor = 4;
   }
-  origin_infront_of_player = selected_player.origin + VectorNormalize(choke_loc - selected_player.origin) * radius * centering_factor;
+  origin_infront_of_player = selected_player.origin + vectorNormalize(choke_loc - selected_player.origin) * radius * centering_factor;
   nodes = GetNodesInRadius(origin_infront_of_player, radius, 0, 1024, "Path");
 
   if(GetDvarInt("alien_debug_escape") > 0) {
@@ -1122,7 +1122,7 @@ send_away_and_die() {
   far_nodes = GetNodesInRadiusSorted(self.origin, 1000, 10);
 
   self ScrAgentSetGoalNode(far_nodes[far_nodes.size - 1]);
-  self ScrAgentSetGoalRadius(64);
+  self ScrAgentSetgoalRadius(64);
   self waittill_any_timeout(5, "goal_reached");
 
   self clear_ignore_enemy();
@@ -1286,14 +1286,14 @@ walk_patrol_loop() {
 
     while(true) {
       self ScrAgentSetGoalPos(node.origin);
-      self ScrAgentSetGoalRadius(32);
+      self ScrAgentSetgoalRadius(32);
       self waittill("goal_reached");
 
       if(isDefined(node.script_delay)) {
         wait node.script_delay;
       }
 
-      node = Getstruct(node.target, "targetname");
+      node = getStruct(node.target, "targetname");
     }
   }
 }
@@ -1358,12 +1358,12 @@ setup_meteoroid_paths() {
         impact_node.meteoroid_final_angles = targeted.angles;
         impact_node.meteoroid = targeted;
 
-        start = getstruct(targeted.target, "targetname");
+        start = getStruct(targeted.target, "targetname");
         if(isDefined(start)) {
           impact_node.meteoroid_start_pos = start.origin;
           impact_node.meteoroid_start_angles = start.angles;
 
-          end = getstruct(start.target, "targetname");
+          end = getStruct(start.target, "targetname");
           if(isDefined(end)) {
             impact_node.meteoroid_end_pos = end.origin;
             impact_node.meteoroid_end_angles = end.angles;
@@ -1518,7 +1518,7 @@ spawn_alien_meteoroid(alien_type, count, respawn, spm, lasting_time) {
 
   level thread maps\mp\alien\_music_and_dialog::playVOForMeteor();
 
-  impact_node.meteoroid.ent MoveTo(final_pos, travel_time, accel);
+  impact_node.meteoroid.ent moveTo(final_pos, travel_time, accel);
   thread playSoundInSpace("alien_minion_spawn_mtr_incoming", final_pos);
 
   impact_node.meteoroid.ent RotateVelocity((0, 360, 0), travel_time, accel);
@@ -1540,7 +1540,7 @@ spawn_alien_meteoroid(alien_type, count, respawn, spm, lasting_time) {
   RadiusDamage(impact_node.origin, 256, 150, 10);
 
   clip.origin = impact_node.origin;
-  clip DisconnectPaths();
+  clip disconnectPaths();
 
   playFX(level._effect["vfx_alien_lightning_bolt"], final_pos);
 
@@ -1559,7 +1559,7 @@ spawn_alien_meteoroid(alien_type, count, respawn, spm, lasting_time) {
 
   playFX(level._effect["vfx_alien_lightning_bolt"], final_pos);
   thread playSoundInSpace("alien_minion_spawn_lightning", final_pos);
-  impact_node.meteoroid.ent MoveTo(end_pos, travel_time / 2, accel / 2);
+  impact_node.meteoroid.ent moveTo(end_pos, travel_time / 2, accel / 2);
 
   impact_node.meteoroid.ent RotateVelocity((0, 90, 0), travel_time / 2, accel / 2);
 
@@ -1611,7 +1611,7 @@ spawn_meteoroid_aliens(impact_node, alien_type, count, respawn, spm, spawn_time)
     }
 
     CoM = get_center_of_players();
-    direction_vec = VectorNormalize(CoM - pos);
+    direction_vec = vectorNormalize(CoM - pos);
     direction_vec = RotateVector(direction_vec, (0, 120 - randomint(120), 0));
     spawner_angles = VectorToAngles(direction_vec);
 
@@ -1663,12 +1663,12 @@ crawl_out(pos, direction_vec) {
   default_rate = self.moveplaybackrate;
   self.moveplaybackrate = 0.5;
 
-  self ScrAgentSetGoalRadius(4000);
+  self ScrAgentSetgoalRadius(4000);
   self ScrAgentSetAnimMode("anim deltas");
   self ScrAgentSetOrientMode("face angle abs", self.angles);
   self ScrAgentSetPhysicsMode("noclip");
 
-  self SetOrigin(pos + VectorNormalize(direction_vec) * 64);
+  self setOrigin(pos + vectorNormalize(direction_vec) * 64);
   self moveToEndOnGround("traverse_climb_up", 4);
 
   self SetAnimState("traverse_climb_up", 4);
@@ -1712,7 +1712,7 @@ moveToEndOnGround(animState, animIndex, animState2, animIndex2) {
   ground_pos = self AIPhysicsTrace(trace_start_pos, trace_end_pos, AI_PHYSICS_TRACE_RADIUS, 65);
   lerp_target_pos = ground_pos - offsetFromStart + (0, 0, VERTICAL_DELTA_BUFFER);
 
-  self SetOrigin(lerp_target_pos);
+  self setOrigin(lerp_target_pos);
 
   playFX(level._effect["drone_ground_spawn"], (self.origin[0], self.origin[1], ground_pos[2]), (0, 0, 1));
 

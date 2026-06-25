@@ -13,21 +13,21 @@ open_door(door, direction, move_x, wait_trig) {
   } else {
     wait(randomfloat(3));
   }
-  door1 = getent(door, "targetname");
+  door1 = getEnt(door, "targetname");
   if(direction == "r") {
     door1 connectpaths();
     if(move_x) {
-      door1 MoveTo(door1.origin + (56, 0, 0), randomfloatrange(1, 1.5), 0, .05);
+      door1 moveTo(door1.origin + (56, 0, 0), randomfloatrange(1, 1.5), 0, .05);
     } else {
-      door1 MoveTo(door1.origin + (0, 56, 0), randomfloatrange(1, 1.5), 0, .05);
+      door1 moveTo(door1.origin + (0, 56, 0), randomfloatrange(1, 1.5), 0, .05);
     }
   }
   if(direction == "l") {
     door connectpaths();
     if(move_x) {
-      door1 MoveTo(door1.origin + (-56, 0, 0), randomfloatrange(1, 1.5), 0, .05);
+      door1 moveTo(door1.origin + (-56, 0, 0), randomfloatrange(1, 1.5), 0, .05);
     } else {
-      door1 MoveTo(door1.origin + (0, -56, 0), randomfloatrange(1, 1.5), 0, .05);
+      door1 moveTo(door1.origin + (0, -56, 0), randomfloatrange(1, 1.5), 0, .05);
     }
   }
 }
@@ -128,7 +128,7 @@ move_players(spots) {
   }
 
   for(x = 0; x < players.size; x++) {
-    players[x] setorigin(points[x].origin);
+    players[x] setOrigin(points[x].origin);
     if(isDefined(points[x].angles)) {
       players[x] setplayerangles(points[x].angles);
     }
@@ -182,8 +182,8 @@ move_ai(spots) {
     ai = array_remove(ai, level.sarge);
 
     level.sarge.anchor = spawn("script_origin", level.sarge.origin);
-    level.sarge linkto(level.sarge.anchor);
-    level.sarge.anchor moveto(sarge_point.origin, .05);
+    level.sarge linkTo(level.sarge.anchor);
+    level.sarge.anchor moveTo(sarge_point.origin, .05);
     level.sarge.anchor waittill("movedone");
     level.sarge.anchor.angles = sarge_point.angles;
     level.sarge unlink();
@@ -197,8 +197,8 @@ move_ai(spots) {
 
     level.polonsky.anchor = spawn("script_origin", level.polonsky.origin);
     level.polonsky.anchor.angles = level.polonsky.angles;
-    level.polonsky linkto(level.polonsky.anchor);
-    level.polonsky.anchor moveto(polonsky_point.origin, .05);
+    level.polonsky linkTo(level.polonsky.anchor);
+    level.polonsky.anchor moveTo(polonsky_point.origin, .05);
     level.polonsky.anchor waittill("movedone");
     level.polonsky.anchor.angles = polonsky_point.angles;
     level.polonsky unlink();
@@ -211,8 +211,8 @@ move_ai(spots) {
     ai = array_remove(ai, level.sniper_pawn);
 
     level.sniper_pawn.anchor = spawn("script_origin", level.sniper_pawn.origin);
-    level.sniper_pawn linkto(level.sniper_pawn.anchor);
-    level.sniper_pawn.anchor moveto(pawn_point.origin, .05);
+    level.sniper_pawn linkTo(level.sniper_pawn.anchor);
+    level.sniper_pawn.anchor moveTo(pawn_point.origin, .05);
     level.sniper_pawn.anchor waittill("movedone");
     level.sniper_pawn.anchor.angles = pawn_point.angles;
     level.sniper_pawn unlink();
@@ -222,8 +222,8 @@ move_ai(spots) {
 
   for(x = 0; x < ai.size; x++) {
     ai[x].anchor = spawn("script_origin", ai[x].origin);
-    ai[x] linkto(ai[x].anchor);
-    ai[x].anchor moveto(points[x].origin, .05);
+    ai[x] linkTo(ai[x].anchor);
+    ai[x].anchor moveTo(points[x].origin, .05);
     ai[x].anchor waittill("movedone");
     if(isDefined(points[x].angles)) {
       ai[x].anchor.angles = points[x].angles;
@@ -432,7 +432,7 @@ do_redshirt_dialogue(dialogue, trig) {
   for(i = 0; i < guys.size; i++) {
     if(guys[i] != level.sarge && guys[i] != level.polonsky) {
       if(isDefined(trig)) {
-        if(guys[i] istouching(getent(trig, "targetname"))) {
+        if(guys[i] istouching(getEnt(trig, "targetname"))) {
           add_to_array(redshirts, guys[i]);
         }
       } else {
@@ -451,7 +451,7 @@ do_redshirt_dialogue(dialogue, trig) {
 
 #using_animtree("supply_drop");
 do_supply_drop(drop, plane) {
-  supply_drop = getent("supply_drop" + drop, "targetname");
+  supply_drop = getEnt("supply_drop" + drop, "targetname");
   org1 = supply_drop.origin;
 
   if(drop == 4) {
@@ -463,7 +463,7 @@ do_supply_drop(drop, plane) {
   supply_drop.animname = "drop";
   supply_drop useanimtree(#animtree);
 
-  supply_drop moveto(org1 + (0, 0, -80), randomfloatrange(3.5, 5));
+  supply_drop moveTo(org1 + (0, 0, -80), randomfloatrange(3.5, 5));
   supply_drop waittill("movedone");
   supply_drop notify("stop_looping");
 
@@ -554,8 +554,8 @@ do_airstrike_hud_elem() {
 
 mortar_round_think(trig) {
   self endon("stop_thinking");
-  ent = getent("use_mortars_" + trig, "targetname");
-  ent sethintstring(&"OKI3_USE_MORTAR");
+  ent = getEnt("use_mortars_" + trig, "targetname");
+  ent setHintString(&"OKI3_USE_MORTAR");
   ent thread mortar_hint();
   while(1) {
     ent waittill("trigger", user);
@@ -755,7 +755,7 @@ throw_smoke_from_pos(force, start_pos) {
   smoke = self;
 
   if(isDefined(start_pos)) {
-    smoke = getstruct(start_pos, "targetname");
+    smoke = getStruct(start_pos, "targetname");
   }
 
   throw_force = 980;
@@ -788,7 +788,7 @@ smoke_trailFX() {
     ent = spawn("script_model", grenade.origin);
     ent.angles = grenade.angles;
     ent setModel("tag_origin");
-    ent linkto(grenade);
+    ent linkTo(grenade);
     playFXOnTag(level._effect["smoke_grn_trail"], ent, "TAG_ORIGIN");
     wait(5);
     ent delete();
@@ -837,14 +837,14 @@ monitor_spiderhole_lid() {
     self.tag_lid delete();
   }
   self notsolid();
-  self moveto(self.origin + (0, 0, -200), 8);
+  self moveTo(self.origin + (0, 0, -200), 8);
   self waittill("movedone");
   self delete();
 }
 
 choose_random_redshirt(target, dist_from_target, excluder) {
   guys = getaiarray("allies");
-  targ = getent(target, "targetname");
+  targ = getEnt(target, "targetname");
 
   excluded_guy = level.sarge;
 
@@ -990,7 +990,7 @@ warp_player(pos) {
   self.warpblack.alpha = 1;
 
   wait(.75);
-  self setorigin(pos.origin);
+  self setOrigin(pos.origin);
   if(isDefined(pos.angles)) {
     self setplayerangles(pos.angles);
   }
@@ -1037,7 +1037,7 @@ reset_run_anim() {
 }
 
 monitor_volume_for_enemies(volume, level_notify, auto_trigger) {
-  volume = getent(volume, "targetname");
+  volume = getEnt(volume, "targetname");
   guys_dead = false;
 
   while(!guys_dead && isDefined(volume)) {
@@ -1061,7 +1061,7 @@ monitor_volume_for_enemies(volume, level_notify, auto_trigger) {
   }
 
   if(isDefined(auto_trigger) && auto_trigger == "mortarpits_front_chain") {
-    ent = getent("mortar_block", "targetname");
+    ent = getEnt("mortar_block", "targetname");
     if(isDefined(ent)) {
       ent connectpaths();
       ent delete();
@@ -1069,7 +1069,7 @@ monitor_volume_for_enemies(volume, level_notify, auto_trigger) {
   }
 
   if(isDefined(auto_trigger)) {
-    trig = getent(auto_trigger, "targetname");
+    trig = getEnt(auto_trigger, "targetname");
     trig notify("trigger");
   }
 }
@@ -1173,12 +1173,12 @@ mortar_guy_alert() {
   }
 
   if(isDefined(trig)) {
-    trig = getent(self.target, "targetname");
+    trig = getEnt(self.target, "targetname");
     trig waittill("trigger");
     goto_node = getnode(trig.target, "targetname");
 
     node notify("stop_mortar");
-    self stopanimscripted();
+    self stopanimScripted();
 
     if(isDefined(self.mortarAmmo) && self.mortarAmmo) {
       self detach(level.prop_mortar_ammunition, "TAG_WEAPON_RIGHT");
@@ -1254,7 +1254,7 @@ setup_client_hintelem() {
 
 hint_trigger_think() {
   level endon("stop_hint");
-  trig = getent("show_prone", "targetname");
+  trig = getEnt("show_prone", "targetname");
   while(1) {
     trig waittill("trigger", ent);
     ent give_hint(&"OKI3_HINT_PRONE", "crouch");

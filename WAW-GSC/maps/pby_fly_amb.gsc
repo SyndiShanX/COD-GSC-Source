@@ -68,36 +68,36 @@ start_planes_sounds() {
 }
 start_music_intro() {
   level endon("start strafing music special");
-  playsoundatposition("in_the_clouds", (21928, 42504, -32));
+  playSoundAtPosition("in_the_clouds", (21928, 42504, -32));
   wait(130);
-  playsoundatposition("strafing_run", (21928, 42504, -32));
+  playSoundAtPosition("strafing_run", (21928, 42504, -32));
 }
 
 start_music_intro_m() {
   level notify("start strafing music special");
-  playsoundatposition("strafing_run", (21928, 42504, -32));
+  playSoundAtPosition("strafing_run", (21928, 42504, -32));
 }
 
 start_merchant_ship_siren() {
-  level.alarm_struct = GetEnt("merch_ship_alarm", "targetname");
+  level.alarm_struct = getEnt("merch_ship_alarm", "targetname");
   level.alarm_struct playLoopSound("merch_ship_alarm");
 }
 
 start_merchant_ship_klaxon() {
-  level.klaxon_struct = GetEnt("merch_ship_klaxon", "targetname");
+  level.klaxon_struct = getEnt("merch_ship_klaxon", "targetname");
   level.klaxon_struct playLoopSound("merch_ship_klaxon");
-  level.bell_struct = GetEnt("merch_ship_bell", "targetname");
+  level.bell_struct = getEnt("merch_ship_bell", "targetname");
   level.bell_struct playLoopSound("merch_ship_bell");
 }
 
 start_merchant_ship_coll() {
-  level.coll_struct = GetEnt("merch_ship_coll", "targetname");
+  level.coll_struct = getEnt("merch_ship_coll", "targetname");
   level.coll_struct playLoopSound("merch_ship_collision");
 }
 
 start_merchant_ship_pa() {
-  level.pa_struct = GetEnt("merch_ship_pa", "targetname");
-  PlaySoundAtPosition("merch_ship_pa", level.pa_struct.origin);
+  level.pa_struct = getEnt("merch_ship_pa", "targetname");
+  playSoundAtPosition("merch_ship_pa", level.pa_struct.origin);
 }
 
 stop_merchant_ship_siren() {
@@ -120,29 +120,29 @@ stop_merchant_ship_coll() {
   level.coll_struct Delete();
 }
 start_plane_landed_sound() {
-  playsoundatposition("plane_land", self.origin);
+  playSoundAtPosition("plane_land", self.origin);
 }
 start_plane_prop_sounds() {
   self.audio_node_propl = spawn("script_model", self.origin);
   self.audio_node_propl setModel("tag_origin");
-  self.audio_node_propl LinkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
+  self.audio_node_propl linkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
 
   self.audio_node_propl playSound("pby_propeller_left");
 
   self.audio_node_propr = spawn("script_model", self.origin);
   self.audio_node_propr setModel("tag_origin");
-  self.audio_node_propr LinkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
+  self.audio_node_propr linkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
 
   self.audio_node_propr playSound("pby_propeller_right");
 
   self.audio_node_propl_ramp = spawn("script_origin", self.audio_node_propl.origin);
   self.audio_node_propl_ramp setModel("tag_origin");
-  self.audio_node_propl_ramp LinkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
+  self.audio_node_propl_ramp linkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
   self.audio_node_propl_ramp playSound("pby_engine_ramp_up", "sound_done");
 
   self.audio_node_propr_ramp = spawn("script_origin", self.audio_node_propr.origin);
   self.audio_node_propr_ramp setModel("tag_origin");
-  self.audio_node_propr_ramp LinkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
+  self.audio_node_propr_ramp linkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
   self.audio_node_propr_ramp playSound("pby_engine_ramp_up", "sound_done");
 
   self.audio_node_propl waittill("sound_done");
@@ -159,7 +159,7 @@ stop_prop_sound_with_ramp(right) {
     if(isDefined(self.audio_node_propl)) {
       self.audio_node_propl_ramp = spawn("script_origin", self.audio_node_propl.origin);
       self.audio_node_propl_ramp setModel("tag_origin");
-      self.audio_node_propl_ramp LinkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
+      self.audio_node_propl_ramp linkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
       self.audio_node_propl_ramp playSound("pby_engine_ramp_down", "sound_done");
       self.audio_node_propl stoploopsound(2);
       self.audio_node_propl waittill("sound_done");
@@ -173,7 +173,7 @@ stop_prop_sound_with_ramp(right) {
     if(isDefined(self.audio_node_propr)) {
       self.audio_node_propr_ramp = spawn("script_origin", self.audio_node_propr.origin);
       self.audio_node_propr_ramp setModel("tag_origin");
-      self.audio_node_propr_ramp LinkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
+      self.audio_node_propr_ramp linkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
       self.audio_node_propr_ramp playSound("pby_engine_ramp_down_other", "sound_done");
       self.audio_node_propr stoploopsound(2);
       self.audio_node_propr waittill("sound_done");
@@ -207,13 +207,13 @@ setup_plane_sounds(player) {
     maps\_utility::ok_to_spawn(5.0);
     self.audio_node_nose3p = spawn("script_model", self.origin);
     self.audio_node_nose3p setModel("tag_origin");
-    self.audio_node_nose3p LinkTo(self, "tag_gunner_barrel1", (0, 0, 0), (0, 0, 0));
+    self.audio_node_nose3p linkTo(self, "tag_gunner_barrel1", (0, 0, 0), (0, 0, 0));
     self.audio_node_nose3p playLoopSound("pby_3p");
   } else if(player) {
     maps\pby_fly::pby_ok_to_spawn();
     self.audio_node_propl = spawn("script_model", self.origin);
     self.audio_node_propl setModel("tag_origin");
-    self.audio_node_propl LinkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
+    self.audio_node_propl linkTo(self, "prop_left_jnt", (0, 0, 0), (0, 0, 0));
     self.audio_node_propl playLoopSound("pby_propeller");
 
     self.audio_node_propl playLoopSound("pby_propeller_left");
@@ -221,32 +221,32 @@ setup_plane_sounds(player) {
     maps\pby_fly::pby_ok_to_spawn();
     self.audio_node_propr = spawn("script_model", self.origin);
     self.audio_node_propr setModel("tag_origin");
-    self.audio_node_propr LinkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
+    self.audio_node_propr linkTo(self, "prop_right_jnt", (0, 0, 0), (0, 0, 0));
 
     self.audio_node_propr playLoopSound("pby_propeller_right");
 
     maps\pby_fly::pby_ok_to_spawn();
     self.audio_node_nose = spawn("script_model", self.origin);
     self.audio_node_nose setModel("tag_origin");
-    self.audio_node_nose LinkTo(self, "tag_gunner_barrel1", (0, 0, 0), (0, 0, 0));
+    self.audio_node_nose linkTo(self, "tag_gunner_barrel1", (0, 0, 0), (0, 0, 0));
     self.audio_node_nose playLoopSound("wind_mono");
 
     maps\pby_fly::pby_ok_to_spawn();
     self.audio_node_left = spawn("script_model", self.origin);
     self.audio_node_left setModel("tag_origin");
-    self.audio_node_left LinkTo(self, "tag_gunner_barrel2", (0, 0, 0), (0, 0, 0));
+    self.audio_node_left linkTo(self, "tag_gunner_barrel2", (0, 0, 0), (0, 0, 0));
     self.audio_node_left playLoopSound("wind_mono");
 
     maps\pby_fly::pby_ok_to_spawn();
     self.audio_node_right = spawn("script_model", self.origin);
     self.audio_node_right setModel("tag_origin");
-    self.audio_node_right LinkTo(self, "tag_gunner_barrel3", (0, 0, 0), (0, 0, 0));
+    self.audio_node_right linkTo(self, "tag_gunner_barrel3", (0, 0, 0), (0, 0, 0));
     self.audio_node_right playLoopSound("wind_mono");
 
     maps\pby_fly::pby_ok_to_spawn();
     self.audio_node_ventral = spawn("script_model", self.origin);
     self.audio_node_ventral setModel("tag_origin");
-    self.audio_node_ventral LinkTo(self, "tag_gunner_barrel4", (0, 0, 0), (0, 0, 0));
+    self.audio_node_ventral linkTo(self, "tag_gunner_barrel4", (0, 0, 0), (0, 0, 0));
     self.audio_node_ventral playLoopSound("wind_mono");
   }
 }
@@ -282,18 +282,18 @@ mph_to_ups(mph, seconds_before_plane_overhead) {
 play_plane_passby(my_sound) {}
 
 destroyer1_alarm() {
-  level.destroyer1_alarm = GetEnt("destroyer1", "targetname");
+  level.destroyer1_alarm = getEnt("destroyer1", "targetname");
   level.destroyer1_alarm playLoopSound("fleet_alarm1");
 }
 
 destroyer2_alarm() {
-  level.destroyer2_alarm = GetEnt("destroyer2", "targetname");
+  level.destroyer2_alarm = getEnt("destroyer2", "targetname");
   level.destroyer2_alarm playLoopSound("fleet_alarm2");
   org = spawn("script_origin", level.destroyer2_alarm.origin);
   org playLoopSound("fires_and_screams");
 }
 destroyer3_alarm() {
-  level.destroyer3_alarm = GetEnt("sinking_ship", "targetname");
+  level.destroyer3_alarm = getEnt("sinking_ship", "targetname");
   level.destroyer3_alarm playLoopSound("fleet_gq");
 }
 play_zeros_track() {

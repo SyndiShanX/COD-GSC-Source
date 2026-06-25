@@ -34,7 +34,7 @@ function_5d400be9() {
   while(true) {
     waitframe(1);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isalive(player) && function_325b468a(player)) {
         if(!(isDefined(player.var_325b468a) && player.var_325b468a)) {
           player.var_325b468a = 1;

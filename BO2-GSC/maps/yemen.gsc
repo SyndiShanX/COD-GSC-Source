@@ -80,9 +80,9 @@ autoexec _brute_force_perk() {
   trigger_off("use_bruteforce", "targetname");
   flag_wait("player_has_bruteforce");
   trigger_on("use_bruteforce", "targetname");
-  t_bruteforce = getent("use_bruteforce", "targetname");
-  t_bruteforce sethintstring(&"SCRIPT_HINT_BRUTE_FORCE");
-  t_bruteforce setcursorhint("HINT_NOICON");
+  t_bruteforce = getEnt("use_bruteforce", "targetname");
+  t_bruteforce setHintString(&"SCRIPT_HINT_BRUTE_FORCE");
+  t_bruteforce setCursorHint("HINT_NOICON");
   set_objective_perk(level.obj_bruteforce, t_bruteforce.origin);
   trigger_wait("use_bruteforce");
   remove_objective_perk(level.obj_bruteforce);
@@ -227,7 +227,7 @@ meet_menendez_objectives() {
   objective_breadcrumb(level.obj_market_meet_menendez, "market_end");
   objective_breadcrumb(level.obj_market_meet_menendez, "rockethall_objective_trigger");
   objective_breadcrumb(level.obj_market_meet_menendez, "street_end");
-  s_metal_storms_meet = getstruct("obj_metalstorm_meet_manendez", "targetname");
+  s_metal_storms_meet = getStruct("obj_metalstorm_meet_manendez", "targetname");
   set_objective(level.obj_market_meet_menendez, s_metal_storms_meet, "breadcrumb");
 }
 
@@ -240,25 +240,25 @@ objectives_morals_rail() {
   flag_wait("morals_rail_start");
   set_objective(level.obj_morals_rail);
   flag_wait("drone_control_started");
-  s_obj_gauntlet = getstruct("obj_drone_control");
+  s_obj_gauntlet = getStruct("obj_drone_control");
   set_objective(level.obj_drone_control_bridge, level.salazar, "follow");
   set_objective(level.obj_morals_rail, undefined, "done");
 }
 
 objectives_morals_rail_skipped() {
   flag_wait("drone_control_started");
-  s_obj_gauntlet = getstruct("obj_drone_control");
+  s_obj_gauntlet = getStruct("obj_drone_control");
   set_objective(level.obj_drone_control_bridge, level.salazar, "follow");
 }
 
 objectives_drone_control() {
   flag_wait("drone_control_guantlet_started");
-  s_obj_gauntlet = getstruct("obj_drone_control_guantlet");
-  s_obj_alley = getstruct("obj_drone_control");
+  s_obj_gauntlet = getStruct("obj_drone_control_guantlet");
+  s_obj_alley = getStruct("obj_drone_control");
   set_objective(level.obj_drone_control_bridge, s_obj_alley, "remove");
   set_objective(level.obj_drone_control_bridge, s_obj_gauntlet, "breadcrumb");
   flag_wait("drone_control_farmhouse_started");
-  s_obj_bridge = getstruct("obj_drone_control_bridge");
+  s_obj_bridge = getStruct("obj_drone_control_bridge");
   set_objective(level.obj_drone_control_bridge, s_obj_gauntlet, "remove");
   set_objective(level.obj_drone_control_bridge, s_obj_bridge, "breadcrumb");
 }
@@ -267,12 +267,12 @@ objectives_hijacked() {}
 
 objectives_capture() {
   flag_wait("obj_capture_sitrep");
-  t_obj_capture_bc = getent("trig_obj_capture_bc", "targetname");
-  s_obj_bridge = getstruct("obj_drone_control_bridge");
+  t_obj_capture_bc = getEnt("trig_obj_capture_bc", "targetname");
+  s_obj_bridge = getStruct("obj_drone_control_bridge");
   set_objective(level.obj_drone_control_bridge, s_obj_bridge, "remove");
   set_objective(level.obj_drone_control_bridge, t_obj_capture_bc, "breadcrumb");
   trigger_wait("sm_capture_objective");
-  s_capture_spot = getent("mission_sucess_trigger", "targetname");
+  s_capture_spot = getEnt("mission_sucess_trigger", "targetname");
   set_objective(level.obj_drone_control_bridge, t_obj_capture_bc, "remove");
   set_objective(level.obj_drone_control_bridge, s_capture_spot, "breadcrumb");
 }

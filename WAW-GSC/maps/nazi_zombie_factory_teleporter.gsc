@@ -26,7 +26,7 @@ teleporter_init() {
   wait_for_all_players();
 
   for(i = 0; i < 3; i++) {
-    trig = GetEnt("trigger_teleport_pad_" + i, "targetname");
+    trig = getEnt("trigger_teleport_pad_" + i, "targetname");
     if(isDefined(trig)) {
       level.teleporter_pad_trig[i] = trig;
     }
@@ -42,7 +42,7 @@ teleporter_init() {
 
   setDvar("factoryAftereffectOverride", "-1");
 
-  packapunch_see = getent("packapunch_see", "targetname");
+  packapunch_see = getEnt("packapunch_see", "targetname");
   if(isDefined(packapunch_see)) {
     packapunch_see thread play_packa_see_vox();
   }
@@ -60,7 +60,7 @@ teleporter_init() {
   level.teleport_ae_funcs[level.teleport_ae_funcs.size] = maps\nazi_zombie_factory_teleporter::teleport_aftereffect_flare_vision;
 }
 init_pack_door() {
-  door = getent("pack_door", "targetname");
+  door = getEnt("pack_door", "targetname");
 
   door movez(-50, 0.05, 0);
   wait(1.0);
@@ -94,7 +94,7 @@ init_pack_door() {
 }
 pad_manager() {
   for(i = 0; i < level.teleporter_pad_trig.size; i++) {
-    level.teleporter_pad_trig[i] sethintstring(&"ZOMBIE_TELEPORT_COOLDOWN");
+    level.teleporter_pad_trig[i] setHintString(&"ZOMBIE_TELEPORT_COOLDOWN");
     level.teleporter_pad_trig[i] teleport_trigger_invisible(false);
   }
 
@@ -104,9 +104,9 @@ pad_manager() {
 
   for(i = 0; i < level.teleporter_pad_trig.size; i++) {
     if(level.teleporter_pad_trig[i].teleport_active) {
-      level.teleporter_pad_trig[i] sethintstring(&"ZOMBIE_TELEPORT_TO_CORE");
+      level.teleporter_pad_trig[i] setHintString(&"ZOMBIE_TELEPORT_TO_CORE");
     } else {
-      level.teleporter_pad_trig[i] sethintstring(&"ZOMBIE_LINK_TPAD");
+      level.teleporter_pad_trig[i] setHintString(&"ZOMBIE_LINK_TPAD");
     }
   }
 }
@@ -117,7 +117,7 @@ start_black_room_fx() {
   }
 }
 teleport_pad_think(index) {
-  tele_help = getent("tele_help_" + index, "targetname");
+  tele_help = getEnt("tele_help_" + index, "targetname");
   if(isDefined(tele_help)) {
     tele_help thread play_tele_help_vox();
   }
@@ -128,12 +128,12 @@ teleport_pad_think(index) {
 
   trigger = level.teleporter_pad_trig[index];
 
-  trigger setcursorhint("HINT_NOICON");
-  trigger sethintstring(&"ZOMBIE_FLAMES_UNAVAILABLE");
+  trigger setCursorHint("HINT_NOICON");
+  trigger setHintString(&"ZOMBIE_FLAMES_UNAVAILABLE");
 
   flag_wait("electricity_on");
 
-  trigger sethintstring(&"ZOMBIE_POWER_UP_TPAD");
+  trigger setHintString(&"ZOMBIE_POWER_UP_TPAD");
   trigger.teleport_active = false;
 
   if(isDefined(trigger)) {
@@ -141,7 +141,7 @@ teleport_pad_think(index) {
       trigger waittill("trigger");
 
       if(level.active_links < 3) {
-        trigger_core = getent("trigger_teleport_core", "targetname");
+        trigger_core = getEnt("trigger_teleport_core", "targetname");
         trigger_core teleport_trigger_invisible(false);
       }
 
@@ -204,7 +204,7 @@ teleport_pad_countdown(index, time) {
   level.countdown--;
 }
 teleport_pad_active_think(index) {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self.teleport_active = true;
 
   user = undefined;
@@ -253,7 +253,7 @@ player_teleporting(index) {
   }
 
   wait(2.0);
-  ss = getstruct("teleporter_powerup", "targetname");
+  ss = getStruct("teleporter_powerup", "targetname");
   if(isDefined(ss)) {
     ss thread maps\_zombiemode_powerups::special_powerup_drop(ss.origin);
   }
@@ -297,7 +297,7 @@ teleport_pad_end_exploder(index) {
   }
 }
 teleport_trigger_invisible(enable) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
@@ -322,7 +322,7 @@ teleport_pad_player_fx(delay) {
   self endon("fx_done");
 
   while(1) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(players[i])) {
         if(self player_is_near_pad(players[i])) {
@@ -338,7 +338,7 @@ teleport_pad_player_fx(delay) {
 teleport_players() {
   player_radius = 16;
 
-  players = getplayers();
+  players = getPlayers();
 
   core_pos = [];
   occupied = [];
@@ -352,9 +352,9 @@ teleport_players() {
   stand_offset = (0, 0, 0);
 
   for(i = 0; i < 4; i++) {
-    core_pos[i] = getent("origin_teleport_player_" + i, "targetname");
+    core_pos[i] = getEnt("origin_teleport_player_" + i, "targetname");
     occupied[i] = false;
-    image_room[i] = getent("teleport_room_" + i, "targetname");
+    image_room[i] = getEnt("teleport_room_" + i, "targetname");
 
     if(isDefined(players[i])) {
       players[i] settransported(0);
@@ -376,7 +376,7 @@ teleport_players() {
 
           players[i].teleport_origin = spawn("script_origin", players[i].origin);
           players[i].teleport_origin.angles = players[i].angles;
-          players[i] linkto(players[i].teleport_origin);
+          players[i] linkTo(players[i].teleport_origin);
           players[i].teleport_origin.origin = desired_origin;
           players[i] FreezeControls(true);
           wait_network_frame();
@@ -392,7 +392,7 @@ teleport_players() {
 
   wait(2);
 
-  core = GetEnt("trigger_teleport_core", "targetname");
+  core = getEnt("trigger_teleport_core", "targetname");
   core thread teleport_nuke(undefined, 300);
 
   for(i = 0; i < players.size; i++) {
@@ -430,7 +430,7 @@ teleport_players() {
     }
     occupied[slot] = true;
     pos_name = "origin_teleport_player_" + slot;
-    teleport_core_pos = getent(pos_name, "targetname");
+    teleport_core_pos = getEnt(pos_name, "targetname");
 
     player unlink();
 
@@ -440,7 +440,7 @@ teleport_players() {
 
     player enableweapons();
     player enableoffhandweapons();
-    player setorigin(core_pos[slot].origin);
+    player setOrigin(core_pos[slot].origin);
     player setplayerangles(core_pos[slot].angles);
     player FreezeControls(false);
     player thread teleport_aftereffects();
@@ -457,24 +457,24 @@ teleport_players() {
   exploder(106);
 }
 teleport_core_hint_update() {
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
 
   while(1) {
     if(!flag("electricity_on")) {
-      self sethintstring(&"ZOMBIE_FLAMES_UNAVAILABLE");
+      self setHintString(&"ZOMBIE_FLAMES_UNAVAILABLE");
     } else if(teleport_pads_are_active()) {
-      self sethintstring(&"ZOMBIE_LINK_TPAD");
+      self setHintString(&"ZOMBIE_LINK_TPAD");
     } else if(level.active_links == 0) {
-      self sethintstring(&"ZOMBIE_INACTIVE_TPAD");
+      self setHintString(&"ZOMBIE_INACTIVE_TPAD");
     } else {
-      self sethintstring("");
+      self setHintString("");
     }
 
     wait(.05);
   }
 }
 teleport_core_think() {
-  trigger = getent("trigger_teleport_core", "targetname");
+  trigger = getEnt("trigger_teleport_core", "targetname");
   if(isDefined(trigger)) {
     trigger thread teleport_core_hint_update();
 
@@ -506,7 +506,7 @@ teleport_core_think() {
               }
 
               pad = "trigger_teleport_pad_" + i;
-              trigger_pad = getent(pad, "targetname");
+              trigger_pad = getEnt(pad, "targetname");
               trigger_pad stop_countdown();
               ClientNotify("TRs");
               level.active_timer = -1;
@@ -561,7 +561,7 @@ teleport_2d_audio() {
   self endon("fx_done");
 
   while(1) {
-    players = getplayers();
+    players = getPlayers();
 
     wait(1.7);
 
@@ -594,7 +594,7 @@ teleport_nuke(max_zombies, range) {
     }
 
     zombies[i] dodamage(10000, zombies[i].origin);
-    playsoundatposition("nuked", zombies[i].origin);
+    playSoundAtPosition("nuked", zombies[i].origin);
   }
 }
 
@@ -654,14 +654,14 @@ play_packa_see_vox() {
   }
 }
 teleporter_wire_wait(index) {
-  targ = getstruct("pad_" + index + "_wire", "targetname");
+  targ = getStruct("pad_" + index + "_wire", "targetname");
   if(!isDefined(targ)) {
     return;
   }
 
   while(isDefined(targ)) {
     if(isDefined(targ.target)) {
-      target = getstruct(targ.target, "targetname");
+      target = getStruct(targ.target, "targetname");
       wait(0.1);
 
       targ = target;

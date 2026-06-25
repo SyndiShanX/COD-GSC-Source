@@ -81,7 +81,7 @@ create_fresh_friendly_icon(var_0) {
   self.friendlyicon setshader(var_0, 1, 1);
   self.friendlyicon setwaypoint(1, 1, 0);
   self.friendlyicon setwaypointiconoffscreenonly();
-  self.friendlyicon settargetent(maps\_utility::get_other_player(self));
+  self.friendlyicon settargetEnt(maps\_utility::get_other_player(self));
   self.friendlyicon.material = var_0;
   self.friendlyicon.hidewheninmenu = 1;
 

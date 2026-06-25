@@ -33,7 +33,7 @@ function function_8806675d(var_45e9e49f, activatefunc) {
 }
 
 function function_c5d20b5c(owner, context, position, ksweapon) {
-  self sethintstring("");
+  self setHintString("");
 
   if(isDefined(level.var_d2c88dc5[ksweapon.rootweapon.name])) {
     [[level.var_d2c88dc5[ksweapon.rootweapon.name]]](owner, context, position);
@@ -59,7 +59,7 @@ function function_f625256f(killstreak_id, context) {
     trigger_event = "weapon_fired";
   }
 
-  player sethintstring("MP/DEPLOY_MARKER");
+  player setHintString("MP/DEPLOY_MARKER");
   self thread function_ef6c4a46(killstreak_id, trigger_event, var_9eb4725b, context);
 
   while(true) {
@@ -106,7 +106,7 @@ function cleanup(context, player) {
 
     if(isDefined(player)) {
       player clientfield::set_to_player("marker_state", 0);
-      player sethintstring("");
+      player setHintString("");
     }
   }
 
@@ -426,7 +426,7 @@ function private function_2cbae477(var_babebdbc = #"weapon/fx8_equip_swat_smk_si
   playFXOnTag(var_babebdbc, self, var_76361c1a);
   self playSound(#"evt_strobe_start");
   self.sndent = spawn("script_origin", self.origin);
-  self.sndent linkto(self);
+  self.sndent linkTo(self);
   self.sndent playLoopSound(#"evt_strobe_lp");
 }
 

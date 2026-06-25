@@ -128,14 +128,14 @@ rocketengine() {
   var_01 = 5;
   var_02 = 10;
   var_03 = 120;
-  var_04 = getent("rocket_engine_trigger", "targetname");
+  var_04 = getEnt("rocket_engine_trigger", "targetname");
   var_04.var_6C4E = var_04.var_116;
   var_04 method_808C();
   var_04.var_116 = var_04.var_116 + (0, 0, -5000);
   var_04.damage_on = 0;
-  var_05 = getent("rocket_button", "targetname");
+  var_05 = getEnt("rocket_button", "targetname");
   var_05 makeusable();
-  var_05 sethintstring(&"MAP_DLC2_V2_START_ENGINE");
+  var_05 setHintString(&"MAP_DLC2_V2_START_ENGINE");
   var_06 = common_scripts\utility::func_46B5("button_blink", "targetname");
   var_05 setuprocketkillcament();
   var_07 = common_scripts\utility::func_46B7("rocket_smoke", "targetname");
@@ -188,9 +188,9 @@ rocketengine() {
 
 hidealarmmeshes() {
   foreach(var_01 in level.alarmarray) {
-    var_01.light_mesh = getent(var_01.var_1A2, "targetname");
+    var_01.light_mesh = getEnt(var_01.var_1A2, "targetname");
     if(isDefined(var_01.light_mesh)) {
-      var_01.light_mesh linkto(var_01);
+      var_01.light_mesh linkTo(var_01);
       var_01.light_mesh method_805C();
     }
   }

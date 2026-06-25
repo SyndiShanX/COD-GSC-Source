@@ -76,67 +76,67 @@ func_5357() {
 }
 
 func_27CA() {
-  var_00 = getent("1v1_clip_spawn1", "targetname");
+  var_00 = getEnt("1v1_clip_spawn1", "targetname");
   if(isDefined(var_00)) {
     var_00 delete();
   }
 
-  var_01 = getent("1v1_clip_spawn2", "targetname");
+  var_01 = getEnt("1v1_clip_spawn2", "targetname");
   if(isDefined(var_01)) {
     var_01 delete();
   }
 
-  var_02 = getent("1v1_clip_spawn3", "targetname");
+  var_02 = getEnt("1v1_clip_spawn3", "targetname");
   if(isDefined(var_02)) {
     var_02 delete();
   }
 
-  var_03 = getent("1v1_clip_spawn4", "targetname");
+  var_03 = getEnt("1v1_clip_spawn4", "targetname");
   if(isDefined(var_03)) {
     var_03 delete();
   }
 
-  var_04 = getent("1v1_clip_cover6", "targetname");
+  var_04 = getEnt("1v1_clip_cover6", "targetname");
   if(isDefined(var_04)) {
     var_04 delete();
   }
 
-  var_05 = getent("1v1_clip_cover5", "targetname");
+  var_05 = getEnt("1v1_clip_cover5", "targetname");
   if(isDefined(var_05)) {
     var_05 delete();
   }
 
-  var_06 = getent("1v1_clip_cover3", "targetname");
+  var_06 = getEnt("1v1_clip_cover3", "targetname");
   if(isDefined(var_06)) {
     var_06 delete();
   }
 
-  var_07 = getent("1v1_clip_cover11", "targetname");
+  var_07 = getEnt("1v1_clip_cover11", "targetname");
   if(isDefined(var_07)) {
     var_07 delete();
   }
 
-  var_08 = getent("1v1_clip_cover12", "targetname");
+  var_08 = getEnt("1v1_clip_cover12", "targetname");
   if(isDefined(var_08)) {
     var_08 delete();
   }
 
-  var_09 = getent("1v1_clip_cover13", "targetname");
+  var_09 = getEnt("1v1_clip_cover13", "targetname");
   if(isDefined(var_09)) {
     var_09 delete();
   }
 
-  var_0A = getent("1v1_clip_cover7", "targetname");
+  var_0A = getEnt("1v1_clip_cover7", "targetname");
   if(isDefined(var_0A)) {
     var_0A delete();
   }
 
-  var_0B = getent("1v1_clip_cover2", "targetname");
+  var_0B = getEnt("1v1_clip_cover2", "targetname");
   if(isDefined(var_0B)) {
     var_0B delete();
   }
 
-  var_0C = getent("1v1_clip_generic", "targetname");
+  var_0C = getEnt("1v1_clip_generic", "targetname");
   if(isDefined(var_0C)) {
     var_0C delete();
   }
@@ -1127,7 +1127,7 @@ func_9086(param_00, param_01) {
 
   param_01.var_252A[0] maps\mp\gametypes\_hub_unk1::func_7D1D(1);
   param_01.var_252A[1] maps\mp\gametypes\_hub_unk1::func_7D1D(1);
-  self setorigin(function_0236(param_00.var_0116), 1);
+  self setOrigin(function_0236(param_00.var_0116), 1);
   self setangles(param_00.var_001D);
 }
 
@@ -1325,7 +1325,7 @@ func_75DE(param_00, param_01) {
 
 func_35AC() {
   level endon("game_ended");
-  level.var_6B2B = getent("trigger_onevone", "targetname");
+  level.var_6B2B = getEnt("trigger_onevone", "targetname");
   if(!isDefined(level.var_6B2B)) {
     return;
   }

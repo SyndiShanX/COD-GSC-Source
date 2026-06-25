@@ -234,7 +234,7 @@ leaper_can_use_anim(local_mid, local_end, dir) {
   end = self localtoworldcoords(local_end);
   real_mid = mid;
   forward_dist = length(end - start) * 0.5;
-  forward_vec = vectornormalize(end - start);
+  forward_vec = vectorNormalize(end - start);
   temp_org = start + vectorscale(forward_vec, forward_dist);
   forward_org = (temp_org[0], temp_org[1], real_mid[2]);
   end_top = end + vectorscale((0, 0, 1), 24.0);
@@ -328,7 +328,7 @@ leaper_building_jump() {
   self endon("death");
 
   if(isDefined(self.spawn_point.script_string) && self.spawn_point.script_string != "find_flesh") {
-    self animscripted(self.spawn_point.origin, self.spawn_point.angles, "zm_building_leap", self.spawn_point.script_string);
+    self animScripted(self.spawn_point.origin, self.spawn_point.angles, "zm_building_leap", self.spawn_point.script_string);
     self maps\mp\animscripts\zm_shared::donotetracks("building_leap_anim");
   }
 
@@ -439,7 +439,7 @@ leaper_start_trail_fx() {
   self leaper_stop_trail_fx();
   self.trail_fx = spawn("script_model", self.origin);
   self.trail_fx setModel("tag_origin");
-  self.trail_fx linkto(self);
+  self.trail_fx linkTo(self);
   wait 0.1;
   playFXOnTag(level._effect["leaper_trail"], self.trail_fx, "tag_origin");
 }
@@ -513,7 +513,7 @@ leaper_round_tracker() {
 leaper_round_spawning() {
   level endon("intermission");
   level endon("leaper_round_ending");
-  level.leaper_targets = getplayers();
+  level.leaper_targets = getPlayers();
 
   for(i = 0; i < level.leaper_targets.size; i++) {
     level.leaper_targets[i].hunted_by = 0;
@@ -532,7 +532,7 @@ leaper_round_spawning() {
   level thread leaper_round_aftermath();
   players = get_players();
   wait 1;
-  playsoundatposition("vox_zmba_event_dogstart_0", (0, 0, 0));
+  playSoundAtPosition("vox_zmba_event_dogstart_0", (0, 0, 0));
   wait 1;
 
   if(level.leaper_round_count < 3) {
@@ -593,7 +593,7 @@ leaper_round_spawning() {
 }
 
 leaper_round_accuracy_tracking() {
-  players = getplayers();
+  players = getPlayers();
   level.leaper_round_accurate_players = 0;
 
   for(i = 0; i < players.size; i++) {
@@ -602,7 +602,7 @@ leaper_round_accuracy_tracking() {
   }
 
   level waittill("last_leaper_down");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     total_shots_end_leaper_round = players[i] maps\mp\gametypes_zm\_globallogic_score::getpersstat("total_shots") - players[i].total_shots_start_leaper_round;
@@ -645,7 +645,7 @@ leaper_round_wait() {
 }
 
 leaper_health_increase() {
-  players = getplayers();
+  players = getPlayers();
 
   if(level.leaper_round_count == 1) {
     level.leaper_health = 400;
@@ -663,7 +663,7 @@ leaper_health_increase() {
 }
 
 get_favorite_enemy() {
-  leaper_targets = getplayers();
+  leaper_targets = getPlayers();
   least_hunted = leaper_targets[0];
 
   for(i = 0; i < leaper_targets.size; i++) {
@@ -770,8 +770,8 @@ leaper_spawn_logic(leaper_array, favorite_enemy) {
     a_spawn_points_in_view = [];
 
     for(i = 0; i < a_leaper_spawn_points.size; i++) {
-      player_vec = vectornormalize(anglesToForward(player.angles));
-      player_spawn = vectornormalize(a_leaper_spawn_points[i].origin - player.origin);
+      player_vec = vectorNormalize(anglesToForward(player.angles));
+      player_spawn = vectorNormalize(a_leaper_spawn_points[i].origin - player.origin);
       dot = vectordot(player_vec, player_spawn);
 
       if(dot > 0.707) {
@@ -848,7 +848,7 @@ leaper_spawn_fx(ai, ent) {
   }
 
   playFX(level._effect["leaper_spawn"], v_fx_origin);
-  playsoundatposition("zmb_leaper_spawn_fx", v_fx_origin);
+  playSoundAtPosition("zmb_leaper_spawn_fx", v_fx_origin);
 }
 
 waiting_for_next_leaper_spawn(count, max) {
@@ -950,7 +950,7 @@ leaper_playable_area_failsafe() {
     b_can_delete = b_leaper_has_been_alive_long_enough && !b_leaper_is_in_scripted_state && b_leaper_has_been_out_of_playable_space_long_enough_to_delete;
 
     if(b_can_delete) {
-      playsoundatposition("zmb_vocals_leaper_fall", self.origin);
+      playSoundAtPosition("zmb_vocals_leaper_fall", self.origin);
       self leaper_cleanup();
 
       str_traversal_data = "";
@@ -1069,9 +1069,9 @@ leaper_emerge() {
   self endon("death");
 
   if(self.spawn_point.script_parameters == "emerge_bottom") {
-    self animscripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_floor");
+    self animScripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_floor");
   } else {
-    self animscripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_ceiling");
+    self animScripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_ceiling");
   }
 
   self maps\mp\animscripts\zm_shared::donotetracks("spawn_anim");
@@ -1096,8 +1096,8 @@ wait_for_player_to_see_leaper() {
     leapers = getaiarray(level.zombie_team);
 
     foreach(leaper in leapers) {
-      player_vec = vectornormalize(anglesToForward(self.angles));
-      player_leaper = vectornormalize(leaper.origin - self.origin);
+      player_vec = vectorNormalize(anglesToForward(self.angles));
+      player_leaper = vectorNormalize(leaper.origin - self.origin);
       dot = vectordot(player_vec, player_leaper);
 
       if(dot > 0.707) {

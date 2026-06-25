@@ -225,7 +225,7 @@ guy_deathimate_me(guy, animpos) {
   [[level.global_kill_func]]("MOD_RIFLE_BULLET", "torso_upper", origin);
   detach_models_with_substr(guy, "weapon_");
 
-  guy LinkTo(self);
+  guy linkTo(self);
   guy NotSolid();
   guy setanim(animpos.death);
 
@@ -577,7 +577,7 @@ link_to_sittag(guy, type, tag) {
   if(type == "snowmobile") {
     guy LinkToBlendToTag(self, tag, false);
   } else {
-    guy _linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    guy _linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -1127,7 +1127,7 @@ getout_rigspawn(animatemodel, pos, bIdletillunload) {
 
   getoutrig_model UseAnimTree(#animtree);
 
-  getoutrig_model LinkTo(animatemodel, level.vehicle_attachedmodels[type][animpos.fastroperig].tag, (0, 0, 0), (0, 0, 0));
+  getoutrig_model linkTo(animatemodel, level.vehicle_attachedmodels[type][animpos.fastroperig].tag, (0, 0, 0), (0, 0, 0));
   thread getoutrig_model(animpos, getoutrig_model, level.vehicle_attachedmodels[type][animpos.fastroperig].tag, level.vehicle_attachedmodels[type][animpos.fastroperig].dropanim, bIdletillunload);
   return getoutrig_model;
 }
@@ -1489,7 +1489,7 @@ animontag(guy, tag, animation, notetracks, sthreads, flag) {
     level thread animontag_ragdoll_death(guy, self);
   }
 
-  guy AnimScripted(flag, org, angles, animation);
+  guy animScripted(flag, org, angles, animation);
 
   if(IsAI(guy)) {
     thread DoNoteTracks(guy, animatemodel, flag);
@@ -1502,7 +1502,7 @@ animontag(guy, tag, animation, notetracks, sthreads, flag) {
       wait(animWait);
     }
 
-    guy StopAnimScripted();
+    guy StopanimScripted();
     guy.interval = 0;
     guy thread recover_interval();
   } else {
@@ -1584,7 +1584,7 @@ animontag_ragdoll_death_fall(guy, vehicle, attacker) {
     distanceFromGround = Distance(guy.origin + (0, 0, 16), groundPos);
     if(abs(moveDelta[2] + 16) <= abs(distanceFromGround)) {
       guy thread play_sound_on_entity("generic_death_falling");
-      guy AnimScripted("fastrope_fall", guy.origin, guy.angles, guy.ragdoll_fall_anim);
+      guy animScripted("fastrope_fall", guy.origin, guy.angles, guy.ragdoll_fall_anim);
       guy waittillmatch("fastrope_fall", "start_ragdoll");
     }
   }
@@ -1609,7 +1609,7 @@ DoNoteTracks(guy, vehicle, flag) {
 }
 
 animatemoveintoplace(guy, org, angles, movetospotanim) {
-  guy AnimScripted("movetospot", org, angles, movetospotanim);
+  guy animScripted("movetospot", org, angles, movetospotanim);
   guy waittillmatch("movetospot", "end");
 }
 
@@ -1805,7 +1805,7 @@ guy_blowup(guy) {
   guy.origin = origin;
   guy.angles = angles;
 
-  guy AnimScripted("deathanim", origin, angles, anim_pos.explosion_death);
+  guy animScripted("deathanim", origin, angles, anim_pos.explosion_death);
   fraction = .3;
   if(isDefined(anim_pos.explosion_death_ragdollfraction)) {
     fraction = anim_pos.explosion_death_ragdollfraction;

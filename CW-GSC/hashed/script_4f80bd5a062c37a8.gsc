@@ -172,7 +172,7 @@ function function_5945a362() {
           dotrange = 0.8;
         }
 
-        to_obj = vectornormalize(enemyorigin - v_origin);
+        to_obj = vectorNormalize(enemyorigin - v_origin);
         dot = vectordot(to_obj, forward);
 
         if(dot < dotrange) {
@@ -194,7 +194,7 @@ function function_5945a362() {
           continue;
         }
       } else {
-        to_obj = vectornormalize(enemyorigin - v_origin);
+        to_obj = vectorNormalize(enemyorigin - v_origin);
         dot = vectordot(to_obj, forward);
 
         if(dot < 0.7) {
@@ -225,7 +225,7 @@ function function_5945a362() {
           v_angles = self gettagangles("tag_flash");
           forward = anglesToForward(v_angles);
           enemyorigin = (enemy.origin[0], enemy.origin[1], 0);
-          to_obj = vectornormalize(enemyorigin - v_origin);
+          to_obj = vectorNormalize(enemyorigin - v_origin);
           dot = vectordot(to_obj, forward);
 
           if(dot < 0.85) {
@@ -262,7 +262,7 @@ function function_aa217b6c(enemy) {
     level.doa.var_23e902a0 = getweapon("zombietron_missile_turret_weapon");
   }
 
-  v_dir = vectornormalize(enemy.origin - self.origin);
+  v_dir = vectorNormalize(enemy.origin - self.origin);
   var_a64609fe = v_dir * 200;
   owner = isDefined(self.owner) ? self.owner : self;
 

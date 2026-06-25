@@ -156,8 +156,8 @@ planeturn(localclientnum, plane, yaw, halflife, starttime, isturningright) {
       plane waittill("movedone");
     }
 
-    waitformovedone = plane servertimedmoveto(localclientnum, plane.origin, endpoint, starttime, waitamount);
-    plane servertimedrotateto(localclientnum, angles, starttime, waitamount);
+    waitformovedone = plane servertimedmoveTo(localclientnum, plane.origin, endpoint, starttime, waitamount);
+    plane servertimedrotateTo(localclientnum, angles, starttime, waitamount);
     looptime = looptime + waitamount;
     starttime = starttime + waitamount * 1000;
   }
@@ -201,8 +201,8 @@ planeturn(localclientnum, plane, yaw, halflife, starttime, isturningright) {
       plane waittill("movedone");
     }
 
-    waitformovedone = plane servertimedmoveto(localclientnum, plane.origin, endpoint, starttime, waitamount);
-    plane servertimedrotateto(localclientnum, angles, starttime, waitamount);
+    waitformovedone = plane servertimedmoveTo(localclientnum, plane.origin, endpoint, starttime, waitamount);
+    plane servertimedrotateTo(localclientnum, angles, starttime, waitamount);
     looptime = looptime + waitamount;
     starttime = starttime + waitamount * 1000;
   }
@@ -258,8 +258,8 @@ doabarrelroll(localclientnum, plane, endpoint, flytime, starttime) {
       plane waittill("movedone");
     }
 
-    waitformovedone = plane servertimedmoveto(localclientnum, plane.origin, nextpoint, starttime, waitamount);
-    plane servertimedrotateto(localclientnum, angles, starttime, waitamount);
+    waitformovedone = plane servertimedmoveTo(localclientnum, plane.origin, nextpoint, starttime, waitamount);
+    plane servertimedrotateTo(localclientnum, angles, starttime, waitamount);
     starttime = starttime + waitamount * 1000;
   }
 }
@@ -270,7 +270,7 @@ planegostraight(localclientnum, plane, startpoint, endpoint, movetime, starttime
   distanceincreaseratio = 2;
   destpoint = getpointonline(startpoint, endpoint, distanceincreaseratio);
 
-  if(plane servertimedmoveto(localclientnum, startpoint, destpoint, starttime, movetime)) {
+  if(plane servertimedmoveTo(localclientnum, startpoint, destpoint, starttime, movetime)) {
     plane waittill("movedone");
   }
 }

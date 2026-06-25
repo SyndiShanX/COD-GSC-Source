@@ -177,7 +177,7 @@ func_54D0(param_00) {
 
           var_0D = spawn("weapon_" + var_0B, (0, 0, 0), 1);
           var_0D thread lib_0502::func_8C21(var_0C, 0);
-          var_0D linkto(var_09.var_13B3, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+          var_0D linkTo(var_09.var_13B3, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
           var_0D thread lib_0502::func_2FA6();
           var_09.var_7490 = var_0D;
         }
@@ -396,7 +396,7 @@ func_54E3(param_00) {
     if(var_05 != "none") {
       var_06 = spawn("weapon_" + var_05, (0, 0, 0), 1);
       var_06 thread lib_0502::func_8C21(var_04, 0);
-      var_06 linkto(level.var_54D0[param_00].var_8CA7[var_01].var_13B3, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+      var_06 linkTo(level.var_54D0[param_00].var_8CA7[var_01].var_13B3, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
       var_06 thread lib_0502::func_2FA6();
       if(isDefined(level.var_54D0[param_00].var_8CA7[var_01].var_7490)) {
         level.var_54D0[param_00].var_8CA7[var_01].var_7490 delete();
@@ -711,7 +711,7 @@ dirt_fx(param_00) {
     }
 
     self.spawnpos_postraidvignette = level.var_54D0[param_00].var_8CA7[var_01].var_907B;
-    self setorigin(level.var_54D0[param_00].var_8CA7[var_01].var_907B, 1);
+    self setOrigin(level.var_54D0[param_00].var_8CA7[var_01].var_907B, 1);
     self setangles(level.var_54D0[param_00].var_8CA7[var_01].var_9029);
   }
 
@@ -1122,10 +1122,10 @@ createfakenameplate(param_00, param_01, param_02, param_03) {
   var_07.maxsightdistsqrd = 0;
   var_07.var_1D7 = 0;
   if(param_00 method_8445("j_head") == -1) {
-    var_07 settargetent(param_00);
+    var_07 settargetEnt(param_00);
     var_07.var_1D9 = 0;
   } else {
-    var_07 settargetent(param_00, "j_head");
+    var_07 settargetEnt(param_00, "j_head");
     var_07.var_1D9 = 10.5 + param_03;
   }
 

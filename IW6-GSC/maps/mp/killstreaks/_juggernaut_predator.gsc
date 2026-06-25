@@ -1114,7 +1114,7 @@ predatorMeleeKillEffect(victim) {
   attackDir = self.origin - victim.origin;
   hitPos = victim GetTagOrigin("j_neck");
 
-  playFX(level._effect["predator_kill"], hitPos, VectorNormalize(attackDir), AnglesToUp(victim GetTagAngles("j_neck")));
+  playFX(level._effect["predator_kill"], hitPos, vectorNormalize(attackDir), AnglesToUp(victim GetTagAngles("j_neck")));
 
   if(self checkTimeStamp("victoryCry") && self checkTimeStamp("painCry")) {
     self setTimeStamp("victoryCry", 10000);

@@ -91,7 +91,7 @@ func_11666() {
   self playSound("reaper_dash_npc");
   thread func_D504();
   scripts\mp\utility::_magicbullet("iw7_erad_mp", self.origin + (0, 0, 1000), self.origin + (0, 0, 2000), self);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   earthquake(0.25, 0.25, self.origin, 32);
   self.isreaping++;
   thread func_11668();
@@ -134,8 +134,8 @@ func_139E6() {
         continue;
       }
 
-      var_3 playrumbleonentity("artillery_rumble");
-      self playrumbleonentity("artillery_rumble");
+      var_3 playRumbleOnEntity("artillery_rumble");
+      self playRumbleOnEntity("artillery_rumble");
       var_3 dodamage(150, self.origin, self, self, "MOD_MELEE");
       playrumbleonposition("artillery_rumble", self.origin);
       earthquake(0.5, 0.5, self.origin, 256);
@@ -177,7 +177,7 @@ func_DD93(var_0, var_1, var_2, var_3) {
   var_6 = lengthsquared(var_5);
   var_7 = self getentityvelocity();
   var_8 = lengthsquared(var_4 - var_0);
-  self playerlinkto(var_1, "tag_origin");
+  self playerlinkTo(var_1, "tag_origin");
   self playlocalsound("synaptic_dash");
   self playSound("synaptic_dash_npc");
   if(var_3 < 0.1) {
@@ -191,17 +191,17 @@ func_DD93(var_0, var_1, var_2, var_3) {
   }
 
   if(!isDefined(self.var_11667)) {
-    var_1 moveto(var_0, var_3, var_9, 0);
+    var_1 moveTo(var_0, var_3, var_9, 0);
     wait(var_3);
   } else {
     var_10 = func_8089(var_4);
-    var_1 moveto(var_10 + var_2, var_3, var_9, 0);
+    var_1 moveTo(var_10 + var_2, var_3, var_9, 0);
     wait(var_3 / 4);
     var_10 = func_8089(var_4);
-    var_1 moveto(var_10 + var_2, var_3, 0, 0);
+    var_1 moveTo(var_10 + var_2, var_3, 0, 0);
     wait(var_3 / 4);
     var_10 = func_8089(var_4);
-    var_1 moveto(var_10 + var_2, var_3, 0, 0);
+    var_1 moveTo(var_10 + var_2, var_3, 0, 0);
     wait(var_3 / 2);
   }
 
@@ -291,8 +291,8 @@ closestenemies(var_0) {
       continue;
     }
 
-    var_8 = vectornormalize(var_5);
-    var_9 = vectornormalize(var_6);
+    var_8 = vectorNormalize(var_5);
+    var_9 = vectorNormalize(var_6);
     var_7 = vectordot(var_8, var_9);
     var_4.var_5AC7 = var_7;
     var_2[var_2.size] = var_7;
@@ -336,8 +336,8 @@ func_11668() {
       continue;
     }
 
-    var_8 = vectornormalize(var_5);
-    var_9 = vectornormalize(var_6);
+    var_8 = vectorNormalize(var_5);
+    var_9 = vectorNormalize(var_6);
     var_7 = vectordot(var_8, var_9);
     if(var_7 < 0.9) {
       continue;

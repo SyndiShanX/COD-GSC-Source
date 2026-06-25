@@ -199,7 +199,7 @@ mig29_wait_fire_missile() {
 a10_missile_set_target(var_0) {
   var_0 endon("death");
   wait 0.2;
-  self missile_settargetent(var_0);
+  self missile_settargetEnt(var_0);
 
   if(!var_0 maps\skyway_code::istank() && isDefined(var_0.godmode) && var_0.godmode == 1) {
     var_0 maps\_vehicle::godoff();
@@ -211,7 +211,7 @@ a10_missile_set_target(var_0) {
 mig29_missile_set_target(var_0) {
   var_0 endon("death");
   wait 0.2;
-  self missile_settargetent(var_0);
+  self missile_settargetEnt(var_0);
 
   if(!var_0 maps\skyway_code::istank() && isDefined(var_0.godmode) && var_0.godmode == 1) {
     var_0 maps\_vehicle::godoff();

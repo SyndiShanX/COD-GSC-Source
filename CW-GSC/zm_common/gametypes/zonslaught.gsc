@@ -190,7 +190,7 @@ function tu21_t9_onslaught_gold_zm_firebase_fixedup() {
 
   level flag::wait_till("initial_fade_in_complete");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     var_cf5c212a = player stats::get_stat_global("tu21_t9_onslaught_gold_zm_firebase_fixedup");
 
     if(!is_true(var_cf5c212a) && function_26bd1471()) {
@@ -301,7 +301,7 @@ function on_bleedout() {
   self endon(#"disconnect");
   level endon(#"game_ended", #"end_game");
   var_887826bc = function_a1ef346b();
-  var_eccdd51c = getplayers();
+  var_eccdd51c = getPlayers();
 
   if(var_eccdd51c.size >= 2 && var_887826bc.size >= 1) {
     level waittill(#"boss_killed");

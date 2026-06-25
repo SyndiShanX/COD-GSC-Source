@@ -32,5 +32,5 @@ lightning_near_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_5cb90582(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   s_lightning_bridge = struct::get("lightning_bridge");
-  playFX(localclientnum, level._effect[#"lightning_bridge"], s_lightning_bridge.origin, vectornormalize(anglesToForward(s_lightning_bridge.angles)), vectornormalize(anglestoup(s_lightning_bridge.angles)));
+  playFX(localclientnum, level._effect[#"lightning_bridge"], s_lightning_bridge.origin, vectorNormalize(anglesToForward(s_lightning_bridge.angles)), vectorNormalize(anglestoup(s_lightning_bridge.angles)));
 }

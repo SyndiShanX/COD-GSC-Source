@@ -74,7 +74,7 @@ playerdamagecallback(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
 onplayerspawned() {
   self function_dee3f41b(1);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(player != self) {
       self setignoreent(player, 1);
       player setignoreent(self, 1);

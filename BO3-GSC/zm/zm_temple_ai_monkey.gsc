@@ -134,7 +134,7 @@ function barrier_test(zone, ent, mindist, checkvisible) {
   if(checkvisible) {
     playervisdist = 1800;
     playervisdist2 = playervisdist * playervisdist;
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < players.size; i++) {
       player = players[i];
       disttoplayer2 = distancesquared(player.origin, self.origin);
@@ -157,7 +157,7 @@ function ent_gathervalidbarriers(zoneoverride, ignoreoccupied, ignorevisible) {
   if(isDefined(monkeyzone)) {
     s = spawnStruct();
     zonenames = _getconnectedzonenames(monkeyzone, s);
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < zonenames.size; i++) {
       name = zonenames[i];
       zone = level.zones[name];
@@ -208,7 +208,7 @@ function printtextstop() {
 function _get_non_visible_barriers(barriers) {
   returnbarriers = [];
   if(isDefined(barriers)) {
-    players = getplayers();
+    players = getPlayers();
     for(i = 0; i < barriers.size; i++) {
       cansee = 0;
       for(j = 0; j < players.size; j++) {
@@ -230,11 +230,11 @@ function _get_non_visible_barriers(barriers) {
 function player_can_see_me(player) {
   playerangles = player getplayerangles();
   playerforwardvec = anglesToForward(playerangles);
-  playerunitforwardvec = vectornormalize(playerforwardvec);
+  playerunitforwardvec = vectorNormalize(playerforwardvec);
   banzaipos = self.origin;
   playerpos = player geteyeapprox();
   playertobanzaivec = banzaipos - playerpos;
-  playertobanzaiunitvec = vectornormalize(playertobanzaivec);
+  playertobanzaiunitvec = vectorNormalize(playertobanzaivec);
   forwarddotbanzai = vectordot(playerunitforwardvec, playertobanzaiunitvec);
   anglefromcenter = acos(forwarddotbanzai);
   playerfov = getdvarfloat("cg_fov");
@@ -311,7 +311,7 @@ function _monkey_templethinkinternal(spawner) {
   spawner.count = 100;
   spawner.last_spawn_time = gettime();
   playFX(level._effect["monkey_death"], self.origin);
-  playsoundatposition("zmb_bolt", self.origin);
+  playSoundAtPosition("zmb_bolt", self.origin);
   self.deathfunction = &_monkey_zombietempledeathcallback;
   self.spawnzone = spawner.script_noteworthy;
   self.shrink_ray_fling = &_monkey_templefling;
@@ -460,7 +460,7 @@ function _monkey_play_stolen_loop() {
   self endon("death");
   self endon("powerup_dropped");
   while(true) {
-    playsoundatposition("zmb_stealer_stolen", self.origin);
+    playSoundAtPosition("zmb_stealer_stolen", self.origin);
     wait(0.845);
   }
 }
@@ -498,7 +498,7 @@ function _monkey_pathcheck() {
   self waittill("bad_path");
   self notify("end_monkey_steal");
   self.melee_count = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(zombie_utility::is_player_valid(players[i])) {
       self.player_stole_power_up = players[i];
@@ -536,7 +536,7 @@ function _monkey_grabpowerup() {
 }
 
 function player_random_response_to_theft() {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(distancesquared(self.origin, players[i].origin) <= 250000) {
       players[i] thread zm_audio::create_and_play_dialog("general", "thief_steal");
@@ -555,7 +555,7 @@ function powerup_red(monkey) {
   monkey endon("death");
   self.fx_red = zm_net::network_safe_spawn("monkey_red_powerup", 2, "script_model", self.origin);
   self.fx_red setModel("tag_origin");
-  self.fx_red linkto(self);
+  self.fx_red linkTo(self);
   playFXOnTag(level._effect["powerup_on_red"], self.fx_red, "tag_origin");
   self clientfield::set("powerup_fx", 3);
 }
@@ -598,7 +598,7 @@ function _monkey_escape() {
     }
     escape_anim = "rtrg_ai_zm_dlc5_monkey_pap_escape";
     time = getanimlength(escape_anim);
-    self animscripted("escape_anim", self.origin, self.angles, escape_anim);
+    self animScripted("escape_anim", self.origin, self.angles, escape_anim);
     wait(time);
   }
   haspowerup = isDefined(self.powerup);
@@ -631,7 +631,7 @@ function launch_monkey() {
     effectent.angles = vectorscale((1, 0, 0), 90);
     playFXOnTag(level._effect["monkey_launch"], effectent, "tag_origin");
     launchtime = 6;
-    effectent moveto(effectent.origin + vectorscale((0, 0, 1), 2500), launchtime, 3);
+    effectent moveTo(effectent.origin + vectorscale((0, 0, 1), 2500), launchtime, 3);
     wait(launchtime);
     effectent delete();
   }
@@ -676,7 +676,7 @@ function _monkey_add_time() {
 
 function _monkey_zombietempleescapedeathcallback(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
   self.grenadeammo = 0;
-  playsoundatposition("zmb_stealer_death", self.origin);
+  playSoundAtPosition("zmb_stealer_death", self.origin);
   self thread zombie_utility::zombie_eye_glow_stop();
   if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     self.attacker zm_audio::create_and_play_dialog("kill", "thief");
@@ -862,7 +862,7 @@ function _monkey_bindpowerup(powerup) {
   powerup.origin = self.origin;
   offset = vectorscale((0, 0, 1), 40);
   angles = (0, 0, 0);
-  powerup linkto(self, "tag_origin", offset, angles);
+  powerup linkTo(self, "tag_origin", offset, angles);
 }
 
 function _monkey_gib() {
@@ -916,8 +916,8 @@ function monkey_ambient_init() {
 }
 
 function monkey_crowd_noise() {
-  origin1 = getent("evt_monkey_crowd01_origin", "targetname");
-  origin2 = getent("evt_monkey_crowd02_origin", "targetname");
+  origin1 = getEnt("evt_monkey_crowd01_origin", "targetname");
+  origin2 = getEnt("evt_monkey_crowd02_origin", "targetname");
   if(!isDefined(origin1) || !isDefined(origin2)) {
     return;
   }
@@ -1016,7 +1016,7 @@ function monkey_ambient_wait_to_be_shot() {
   self waittill("damage", damage, attacker, direction_vec, point, type, modelname, tagname, partname, idflags);
   self.alive = 0;
   self notify("monkey_killed");
-  playsoundatposition("zmb_stealer_death", self.origin);
+  playSoundAtPosition("zmb_stealer_death", self.origin);
   self animation::stop();
   self startragdoll();
 }
@@ -1222,7 +1222,7 @@ function monkey_zombie_grenade_pickup() {
       self setgoalpos(self.monkey_thrower.origin);
       target_dir = self.monkey_thrower.origin - self.origin;
       monkey_dir = anglesToForward(self.angles);
-      dot = vectordot(vectornormalize(target_dir), vectornormalize(monkey_dir));
+      dot = vectordot(vectorNormalize(target_dir), vectorNormalize(monkey_dir));
       if(dot >= 0.5) {
         break;
       }
@@ -1255,7 +1255,7 @@ function monkey_attack_player() {
   self endon("death");
   self.attack_player = 1;
   self.attacking_player = 1;
-  players = getplayers();
+  players = getPlayers();
   self.ignore_player = [];
   player = undefined;
   if(isDefined(self.player_stole_power_up) && zombie_utility::is_player_valid(self.player_stole_power_up)) {

@@ -190,7 +190,7 @@ on_soid_interact(var_0, var_1) {
   if(!istrue(var_1.b_got_shovel)) {
     return;
   }
-  var_1 playrumbleonentity("damage_heavy");
+  var_1 playRumbleOnEntity("damage_heavy");
 
   if(isDefined(var_0) && isDefined(var_0.mdl_dust) && isDefined(var_0.mdl_dust.fx_proxy)) {
     stopFXOnTag(level._effect["dig_site_dust_fx"], var_0.mdl_dust.fx_proxy, "tag_origin");
@@ -278,7 +278,7 @@ play_script_mover(var_0) {
   level endon("game_ended");
 
   if(isDefined(var_0.mdl_dust)) {
-    var_0.mdl_dust moveto(var_0.mdl_dust.origin - (0, 0, 30), 1);
+    var_0.mdl_dust moveTo(var_0.mdl_dust.origin - (0, 0, 30), 1);
   }
 
   var_0.mdl_dust waittill("movedone");
@@ -298,7 +298,7 @@ start_subquest(var_0, var_1) {
 
 init_radios() {
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstruct("th_radio_start", "targetname");
+  var_0 = scripts\engine\utility::getStruct("th_radio_start", "targetname");
   var_0.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_0.origin, var_0.angles);
   var_0.spawn_locations = [];
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
@@ -336,7 +336,7 @@ init_radios() {
     }
   }
 
-  var_10 = scripts\engine\utility::getstruct("th_radio_end", "targetname");
+  var_10 = scripts\engine\utility::getStruct("th_radio_end", "targetname");
   var_10.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_10.origin, var_10.angles);
   var_10.spawn_locations = [];
   var_11 = scripts\engine\utility::getStructArray(var_10.target, "targetname");
@@ -440,21 +440,21 @@ on_shovel_interact(var_0, var_1) {
 
 init_lock_heart() {
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstruct("lost_pages_quest_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("lost_pages_quest_pos", "targetname");
   var_0.mdl_heart = scripts\cp\utility::_id_E190("vm_fromeo45_00_comp", var_0.origin, var_0.angles);
   var_0.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles);
   playFXOnTag(level._effect["forever_blitz_page"], var_0.fx_proxy, "tag_origin");
-  var_1 = scripts\engine\utility::getstruct("lock_door_fx_pos", "targetname");
+  var_1 = scripts\engine\utility::getStruct("lock_door_fx_pos", "targetname");
   var_1.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_1.origin + (0, 0, -35), var_1.angles);
   playFXOnTag(level._effect["door_locked_fx"], var_1.fx_proxy, "tag_origin");
   var_1.fx_proxy playLoopSound("zmb_paperdoor_lp");
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_2.blocker = spawn("script_model", var_2.origin);
   var_2.blocker.angles = var_2.angles;
   var_2.blocker setModel("vfx_zm_obj_holdout_barrier_mod_bottom_center_56x48");
   var_3 = scripts\engine\utility::getfx("objective_barrier");
   var_2.blocker.barrier_fx = playFXOnTag(var_3, var_2.blocker, "tag_origin");
-  var_4 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct(var_0.target, "targetname");
   var_4.mdl_fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_4.origin + (0, 0, 5), var_4.angles);
   playFXOnTag(level._effect["domination_rune_capturing_1"], var_4.mdl_fx_proxy, "tag_origin");
   var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
@@ -629,7 +629,7 @@ on_sub_radio_interact(var_0, var_1) {
 
   if(isDefined(var_0.mdl_antenna)) {
     var_2 = randomintrange(45, 135);
-    var_0.mdl_antenna rotateto(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
+    var_0.mdl_antenna rotateTo(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_antennae_rotate");
     var_0.mdl_antenna waittill("rotatedone");
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_tuning_success");
@@ -649,7 +649,7 @@ on_end_radio_interact(var_0, var_1) {
 
   if(isDefined(var_0.mdl_antenna)) {
     var_2 = randomintrange(45, 135);
-    var_0.mdl_antenna rotateto(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
+    var_0.mdl_antenna rotateTo(var_0.mdl_antenna.angles + (0, var_2, 0), 3);
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_antennae_rotate");
     var_0.mdl_antenna waittill("rotatedone");
     scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_radio_tuning_success");
@@ -733,7 +733,7 @@ find_lost_pages_start(var_0, var_1) {
   _id_0737::_id_C266("place_page_inactive", ::get_page_placed_hint_func, ::on_page_placed_interact, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 80);
   _id_0737::addinteractionhinttypecallback("place_page_inactive", ::page_placed_hint_type);
   var_2 = scripts\engine\utility::getStructArray("place_page_inactive", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstruct("lock_door_fx_pos", "targetname");
+  var_3 = scripts\engine\utility::getStruct("lock_door_fx_pos", "targetname");
 
   foreach(var_5 in var_2) {
     var_5 thread face_to_interact_check();
@@ -774,31 +774,31 @@ find_lost_pages_start(var_0, var_1) {
   _id_0737::_id_C4AB("place_page_inactive");
   wait 2;
   scripts\cp\utility::_id_B8ED(var_3.origin, "zmb_paperdoor_end");
-  var_12 = scripts\engine\utility::getstruct("lost_pages_quest_pos", "targetname");
-  var_13 = scripts\engine\utility::getstruct(var_12.target, "targetname");
+  var_12 = scripts\engine\utility::getStruct("lost_pages_quest_pos", "targetname");
+  var_13 = scripts\engine\utility::getStruct(var_12.target, "targetname");
 
   if(isDefined(var_13.mdl_fx_proxy)) {
     stopFXOnTag(level._effect["domination_rune_capturing_1"], var_13.mdl_fx_proxy, "tag_origin");
     playFXOnTag(level._effect["domination_rune_idle"], var_13.mdl_fx_proxy, "tag_origin");
   }
 
-  var_3 = scripts\engine\utility::getstruct("lock_door_fx_pos", "targetname");
+  var_3 = scripts\engine\utility::getStruct("lock_door_fx_pos", "targetname");
 
   if(isDefined(var_3.fx_proxy)) {
     var_3.fx_proxy stoploopsound("zmb_paperdoor_lp");
     var_3.fx_proxy delete();
   }
 
-  var_14 = scripts\engine\utility::getstruct(var_3.target, "targetname");
+  var_14 = scripts\engine\utility::getStruct(var_3.target, "targetname");
 
   if(isDefined(var_14.blocker)) {
     var_14.blocker delete();
   }
 
-  var_15 = getent("lock_door_bullet_clip", "targetname");
+  var_15 = getEnt("lock_door_bullet_clip", "targetname");
   var_15 delete();
-  var_12 = scripts\engine\utility::getstruct("lost_pages_quest_pos", "targetname");
-  var_13 = scripts\engine\utility::getstruct(var_12.target, "targetname");
+  var_12 = scripts\engine\utility::getStruct("lost_pages_quest_pos", "targetname");
+  var_13 = scripts\engine\utility::getStruct(var_12.target, "targetname");
   var_16 = scripts\engine\utility::getStructArray(var_13.target, "targetname");
 
   for(var_17 = 0; var_17 < var_16.size; var_17++) {
@@ -927,13 +927,13 @@ on_page_placed_interact(var_0, var_1) {
 }
 
 find_lost_pages_cleanup(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct("lost_pages_quest_pos", "targetname");
+  var_2 = scripts\engine\utility::getStruct("lost_pages_quest_pos", "targetname");
 
   if(isDefined(var_2.fx_proxy)) {
     var_2.fx_proxy delete();
   }
 
-  var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+  var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
   if(isDefined(var_3.mdl_fx_proxy)) {
     var_3.mdl_fx_proxy delete();
@@ -959,7 +959,7 @@ capture_golden_ball_start(var_0, var_1) {
   var_0.golden_ball = scripts\cp\utility::_id_E190("s4_zm_golden_ball", var_0.origin, var_0.angles);
   var_0.golden_ball._id_039B = "golden_ball_inactive";
   var_0.golden_ball.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.origin + (0, 0, 5), var_0.angles);
-  var_0.golden_ball.fx_proxy linkto(var_0.golden_ball);
+  var_0.golden_ball.fx_proxy linkTo(var_0.golden_ball);
   playFXOnTag(level._effect["golden_ball_fx"], var_0.golden_ball.fx_proxy, "tag_origin");
   var_0.golden_ball playLoopSound("zmb_orb_lp_close");
   var_2 = pickup_free_damage_proxy();
@@ -1085,7 +1085,7 @@ start_moving() {
   level endon("end_game");
   level endon("game_ended");
   level endon("golden_ball_stun_down");
-  self moveto(self.origin + (0, 0, 30), 3);
+  self moveTo(self.origin + (0, 0, 30), 3);
 
   if(isDefined(self.target_area)) {
     self.target_area.b_used = 0;
@@ -1115,7 +1115,7 @@ start_moving() {
       var_6 = 1;
     }
 
-    self moveto(var_5.origin, var_6);
+    self moveTo(var_5.origin, var_6);
     self waittill("movedone");
     self.b_finish_moving = 1;
     start_point_stop();
@@ -1137,7 +1137,7 @@ start_point_stop() {
     var_3 = gettime() / 1000 - var_1;
     var_4 = scripts\engine\utility::_id_C019(1);
     var_5 = var_4 * 100;
-    self moveto(var_2 + var_5, 3);
+    self moveTo(var_2 + var_5, 3);
     self waittill("movedone");
   }
 }
@@ -1162,7 +1162,7 @@ start_stun_down() {
     var_4 = self.origin;
   }
 
-  self moveto(var_4 + (0, 0, 30), 3);
+  self moveTo(var_4 + (0, 0, 30), 3);
   self waittill("movedone");
   _id_C266("golden_ball_inactive", ::get_golden_ball_hint_func, ::on_golden_ball_interact, undefined, undefined, undefined, undefined, undefined, 64);
   _id_0737::addinteractionhinttypecallback("golden_ball_inactive", ::golden_ball_type);
@@ -1318,7 +1318,7 @@ big_bomb_start(var_0, var_1) {
   var_7._id_A15E.angles = var_7.angles;
   var_7._id_A15E setModel("wpn_s4_zm_monkey_bomb_main_world");
   var_7._id_A15E._id_0203 = var_7;
-  var_7._id_A15E linkto(var_7);
+  var_7._id_A15E linkTo(var_7);
   var_7._id_A15E.originating_player = var_1;
   var_7._id_10D0B = spawnStruct();
   var_7._id_10D0B._id_014B = 400;
@@ -1354,10 +1354,10 @@ bury_back_start(var_0, var_1) {
   level endon("game_ended");
   var_0.mdl_heart = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles);
   var_0.fx_float = playFXOnTag(level._effect["evil_curse"], var_0.mdl_heart, "tag_origin");
-  var_0.mdl_heart moveto(var_0.mdl_heart.origin + (0, 0, 30), 3);
+  var_0.mdl_heart moveTo(var_0.mdl_heart.origin + (0, 0, 30), 3);
   var_0.mdl_heart playSound("zmb_debuff_spawn");
   var_0.mdl_heart waittill("movedone");
-  var_0.mdl_heart moveto(var_1.origin, 1);
+  var_0.mdl_heart moveTo(var_1.origin, 1);
   var_0.mdl_heart waittill("movedone");
   var_0.mdl_heart delete();
 
@@ -1505,14 +1505,14 @@ play_bury_heart_back_anim(var_0) {
   if(!isDefined(var_0.mdl_heart)) {
     var_0.mdl_heart = scripts\cp\utility::_id_E190("tag_origin", var_0.origin + (0, 0, 20), var_0.angles);
     playFXOnTag(level._effect["evil_curse"], var_0.mdl_heart, "tag_origin");
-    var_0.mdl_heart moveto(var_0.origin + (0, 0, -15), 3);
+    var_0.mdl_heart moveTo(var_0.origin + (0, 0, -15), 3);
     var_0.mdl_heart waittill("movedone");
     var_0.mdl_heart delete();
   }
 
   if(!isDefined(var_0.mdl_dust)) {
     var_0.parent.mdl_dust = scripts\cp\utility::_id_E190("s4_zm_dust_pile", var_0.parent.origin - (0, 0, 20), var_0.parent.angles);
-    var_0.parent.mdl_dust moveto(var_0.origin + (0, 0, -5), 3);
+    var_0.parent.mdl_dust moveTo(var_0.origin + (0, 0, -5), 3);
     var_0.parent.mdl_dust waittill("movedone");
     var_0.parent.mdl_dust.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.parent.mdl_dust.origin, var_0.parent.mdl_dust.angles);
     playFXOnTag(level._effect["dig_site_dust_fx"], var_0.parent.mdl_dust.fx_proxy, "tag_origin");
@@ -1570,15 +1570,15 @@ find_ray_gun_start(var_0, var_1) {
   } else {
     var_4 = scripts\cp\utility::_id_E190("wm_ralpha_zm_200", var_0.origin, var_0.angles);
     var_4.fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, var_0.angles);
-    var_4.fx_proxy linkto(var_4);
+    var_4.fx_proxy linkTo(var_4);
     playFXOnTag(level._effect["forever_blitz_page"], var_4.fx_proxy, "tag_origin");
     var_4 playLoopSound("zmb_tor_page_lp");
-    var_4 moveto(var_0.origin + (0, 0, 20), 3);
+    var_4 moveTo(var_0.origin + (0, 0, 20), 3);
     var_4 waittill("movedone");
     level thread spawn_zombies_on_generate_points(var_0, "enemy_zombie_screamer_cp", var_1, 20);
-    var_5 = scripts\engine\utility::getstruct("lost_pages_quest_pos", "targetname");
-    var_4 moveto(var_5.origin + (11, 0, 10), 3);
-    var_4 rotateto(var_5.angles, 3);
+    var_5 = scripts\engine\utility::getStruct("lost_pages_quest_pos", "targetname");
+    var_4 moveTo(var_5.origin + (11, 0, 10), 3);
+    var_4 rotateTo(var_5.angles, 3);
     scripts\cp\utility::_id_459B(var_5.a_mdl_ray_gun, []);
     var_5.a_mdl_ray_gun = scripts\engine\utility::_id_1B8D(var_5.a_mdl_ray_gun, var_4);
     level.n_find_ray_gun_piece++;

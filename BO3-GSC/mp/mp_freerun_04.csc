@@ -27,6 +27,6 @@ function player_rain(localclientnum) {
   self.e_link = spawn(localclientnum, self.origin, "script_model");
   self.e_link setModel("tag_origin");
   self.e_link.angles = self.angles;
-  self.e_link linkto(self);
+  self.e_link linkTo(self);
   self.var_88aec2ed = playFXOnTag(localclientnum, level._effect["blood_rain"], self.e_link, "tag_origin");
 }

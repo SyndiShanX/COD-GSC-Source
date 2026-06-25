@@ -162,9 +162,9 @@ begin_exfil() {
     thread maps\clockwork_code::hold_fire_unless_ads("ally_start_path_exfil");
   }
 
-  level.crashed_trucks = getent("crashed_trucks", "targetname");
-  level.crashed_truck1 = getent("crashed_truck1", "targetname");
-  level.crashed_truck2 = getent("crashed_truck2", "targetname");
+  level.crashed_trucks = getEnt("crashed_trucks", "targetname");
+  level.crashed_truck1 = getEnt("crashed_truck1", "targetname");
+  level.crashed_truck2 = getEnt("crashed_truck2", "targetname");
   level.crashed_trucks hide();
   level.crashed_truck1 hide();
   level.crashed_truck2 hide();
@@ -245,9 +245,9 @@ begin_exfil_tank() {
   place_allies_in_jeep();
   thread enemy_zodiacs_spawn_and_attack();
   level.player.progress = level.player.progress + 14750;
-  level.crashed_trucks = getent("crashed_trucks", "targetname");
-  level.crashed_truck1 = getent("crashed_truck1", "targetname");
-  level.crashed_truck2 = getent("crashed_truck2", "targetname");
+  level.crashed_trucks = getEnt("crashed_trucks", "targetname");
+  level.crashed_truck1 = getEnt("crashed_truck1", "targetname");
+  level.crashed_truck2 = getEnt("crashed_truck2", "targetname");
   level.crashed_trucks hide();
   level.crashed_truck1 hide();
   level.crashed_truck2 hide();
@@ -281,9 +281,9 @@ begin_exfil_bridge() {
   place_allies_in_jeep();
   thread enemy_zodiacs_spawn_and_attack();
   level.player.progress = level.player.progress + 34000;
-  level.crashed_trucks = getent("crashed_trucks", "targetname");
-  level.crashed_truck1 = getent("crashed_truck1", "targetname");
-  level.crashed_truck2 = getent("crashed_truck2", "targetname");
+  level.crashed_trucks = getEnt("crashed_trucks", "targetname");
+  level.crashed_truck1 = getEnt("crashed_truck1", "targetname");
+  level.crashed_truck2 = getEnt("crashed_truck2", "targetname");
   level.crashed_trucks hide();
   level.crashed_truck1 hide();
   level.crashed_truck2 hide();
@@ -318,9 +318,9 @@ begin_exfil_cave() {
   place_allies_in_jeep();
   thread enemy_zodiacs_spawn_and_attack();
   level.player.progress = level.player.progress + 61000;
-  level.crashed_trucks = getent("crashed_trucks", "targetname");
-  level.crashed_truck1 = getent("crashed_truck1", "targetname");
-  level.crashed_truck2 = getent("crashed_truck2", "targetname");
+  level.crashed_trucks = getEnt("crashed_trucks", "targetname");
+  level.crashed_truck1 = getEnt("crashed_truck1", "targetname");
+  level.crashed_truck2 = getEnt("crashed_truck2", "targetname");
   level.crashed_trucks hide();
   level.crashed_truck1 hide();
   level.crashed_truck2 hide();
@@ -344,7 +344,7 @@ place_allies_in_jeep() {
   }
 
   wait 0.01;
-  level.player playerlinkto(level.playerjeep, "tag_guy_turret", 0.5);
+  level.player playerlinkTo(level.playerjeep, "tag_guy_turret", 0.5);
   level.player setstance("stand");
   level.allies[2] notify("newanim");
   level.allies[2].desired_anim_pose = "crouch";
@@ -372,11 +372,11 @@ place_allies_in_jeep() {
 }
 
 setup_chaos_collision() {
-  var_0 = getent("chaos_collision", "targetname");
-  var_1 = common_scripts\utility::getstruct("chaos_collision_origin", "targetname");
-  var_0 moveto(var_1.origin, 1);
+  var_0 = getEnt("chaos_collision", "targetname");
+  var_1 = common_scripts\utility::getStruct("chaos_collision_origin", "targetname");
+  var_0 moveTo(var_1.origin, 1);
   wait 2;
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
   common_scripts\utility::flag_wait("go_to_jeep");
   var_0 connectpaths();
 }
@@ -472,21 +472,21 @@ handle_aggressive_cleanup() {
 #using_animtree("generic_human");
 
 elevator_movement() {
-  var_0 = getent("elevator_to_exfil", "targetname");
-  var_1 = getent("start_stop_exfil_elevator_rdoor", "targetname");
-  var_2 = getent("start_stop_exfil_elevator_ldoor", "targetname");
+  var_0 = getEnt("elevator_to_exfil", "targetname");
+  var_1 = getEnt("start_stop_exfil_elevator_rdoor", "targetname");
+  var_2 = getEnt("start_stop_exfil_elevator_ldoor", "targetname");
   var_3 = maps\_utility::getstruct_delete("start_stop_exfil_elevator", "targetname");
   var_4 = maps\_utility::getstruct_delete("end_stop_exfil_elevator", "targetname");
-  var_5 = getent("chaos_elevator_block", "targetname");
+  var_5 = getEnt("chaos_elevator_block", "targetname");
   var_6 = getEntArray("elevator_to_exfil_models", "targetname");
   var_5 notsolid();
 
   if(!isDefined(level.tunnel_door)) {
     level.tunnel_door = maps\_utility::spawn_anim_model("vault_door");
-    level.tunnel_door_scene = getent("lights_out_scene", "targetname");
+    level.tunnel_door_scene = getEnt("lights_out_scene", "targetname");
     level.tunnel_door_scene thread maps\_anim::anim_first_frame_solo(level.tunnel_door, "tunnel_vault");
-    level.tunnel_door_clip = getent("entrance_door_clip", "targetname");
-    level.tunnel_door_clip linkto(level.tunnel_door);
+    level.tunnel_door_clip = getEnt("entrance_door_clip", "targetname");
+    level.tunnel_door_clip linkTo(level.tunnel_door);
     level.tunnel_door_clip connectpaths();
   } else {
     level.tunnel_door_scene thread maps\_anim::anim_first_frame_solo(level.tunnel_door, "tunnel_vault");
@@ -525,14 +525,14 @@ elevator_movement() {
   }
 
   foreach(var_17 in var_6) {
-    var_17 linkto(var_0);
+    var_17 linkTo(var_0);
   }
 
-  var_0 moveto(var_3.origin, 0.01);
+  var_0 moveTo(var_3.origin, 0.01);
   var_19 = var_1.origin - (54, 0, 0);
-  var_1 moveto(var_19, 2, 0.25, 0.25);
+  var_1 moveTo(var_19, 2, 0.25, 0.25);
   var_20 = var_2.origin + (54, 0, 0);
-  var_2 moveto(var_20, 2, 0.25, 0.25);
+  var_2 moveTo(var_20, 2, 0.25, 0.25);
   var_1 connectpaths();
   var_2 connectpaths();
   thread elevator_vo();
@@ -544,14 +544,14 @@ elevator_movement() {
   thread cypher_enter(var_3);
   common_scripts\utility::flag_wait_all("in_elevator_ally_01", "in_elevator_ally_02", "in_elevator_ally_03");
   common_scripts\utility::flag_wait("inpos_player_elevator");
-  var_21 = getent("inpos_player_elevator", "targetname");
+  var_21 = getEnt("inpos_player_elevator", "targetname");
 
   while(!level.player istouching(var_21) || anyone_touching_blocker(var_5)) {
     wait 0.05;
   }
 
   var_5 solid();
-  var_5 linkto(var_0);
+  var_5 linkTo(var_0);
   var_1 notsolid();
   var_2 notsolid();
   level.player allowsprint(0);
@@ -584,9 +584,9 @@ elevator_movement() {
   common_scripts\utility::flag_wait("door_close");
   thread maps\clockwork_audio::elevator_door_close();
   var_19 = var_1.origin + (54, 0, 0);
-  var_1 moveto(var_19, 2, 0.25, 0.25);
+  var_1 moveTo(var_19, 2, 0.25, 0.25);
   var_20 = var_2.origin - (54, 0, 0);
-  var_2 moveto(var_20, 2, 0.25, 0.25);
+  var_2 moveTo(var_20, 2, 0.25, 0.25);
   var_1 connectpaths();
   var_2 connectpaths();
   wait 2;
@@ -594,9 +594,9 @@ elevator_movement() {
   var_29[1] = level.allies[1];
   var_29[2] = level.allies[2];
   common_scripts\utility::array_call(var_29, ::linkto, var_0);
-  var_1 linkto(var_0);
-  var_2 linkto(var_0);
-  var_0 moveto(var_4.origin, 11, 1, 1);
+  var_1 linkTo(var_0);
+  var_2 linkTo(var_0);
+  var_0 moveTo(var_4.origin, 11, 1, 1);
   thread maps\clockwork_audio::elevator();
   maps\clockwork_code::screenshakefade(0.05, 0.5);
 
@@ -616,9 +616,9 @@ elevator_movement() {
   maps\clockwork_code::screenshakefade(0.1, 0.5);
   thread maps\clockwork_audio::elevator_door_open();
   var_19 = var_1.origin - (54, 0, 0);
-  var_1 moveto(var_19, 2, 0.25, 0.25);
+  var_1 moveTo(var_19, 2, 0.25, 0.25);
   var_20 = var_2.origin + (54, 0, 0);
-  var_2 moveto(var_20, 2, 0.25, 0.25);
+  var_2 moveTo(var_20, 2, 0.25, 0.25);
   var_1 connectpaths();
   var_2 connectpaths();
   common_scripts\utility::array_call(var_29, ::unlink, var_0);
@@ -631,9 +631,9 @@ elevator_movement() {
   thread handle_stairs("chaos_stairs_1");
   thread handle_stairs("chaos_stairs_2");
   common_scripts\utility::array_thread(level.allies, maps\_utility::disable_ai_color);
-  var_32 = common_scripts\utility::getstruct("keeganpath", "targetname");
-  var_33 = common_scripts\utility::getstruct("cypherpath", "targetname");
-  var_34 = common_scripts\utility::getstruct("bakerpath", "targetname");
+  var_32 = common_scripts\utility::getStruct("keeganpath", "targetname");
+  var_33 = common_scripts\utility::getStruct("cypherpath", "targetname");
+  var_34 = common_scripts\utility::getStruct("bakerpath", "targetname");
   level.allies[0].moveplaybackrate = 1.2;
   level.allies[1].moveplaybackrate = 1.2;
   level.allies[2].moveplaybackrate = 1.2;
@@ -677,7 +677,7 @@ handle_second_doorway_allies() {
 handle_stairs(var_0) {
   level endon("exfil_fire_fail");
   level endon("go_to_jeep");
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   for(;;) {
     var_1 waittill("trigger", var_2);
@@ -809,9 +809,9 @@ elevator_anims(var_0, var_1) {
       var_1 maps\_anim::anim_single_solo(var_4, "exit_ele_g3");
     }
   } else {
-    level.allies[0] maps\_utility::anim_stopanimscripted();
-    level.allies[1] maps\_utility::anim_stopanimscripted();
-    level.allies[2] maps\_utility::anim_stopanimscripted();
+    level.allies[0] maps\_utility::anim_stopanimScripted();
+    level.allies[1] maps\_utility::anim_stopanimScripted();
+    level.allies[2] maps\_utility::anim_stopanimScripted();
 
     if(isDefined(var_2) && isalive(var_2)) {
       maps\clockwork_code::reassign_goal_volume(var_2, "chaos_lab_vol");
@@ -831,9 +831,9 @@ elevator_anims(var_0, var_1) {
       var_1 thread maps\_anim::anim_loop_solo(var_4, "rev_ele_g3");
     }
   } else {
-    level.allies[0] maps\_utility::anim_stopanimscripted();
-    level.allies[1] maps\_utility::anim_stopanimscripted();
-    level.allies[2] maps\_utility::anim_stopanimscripted();
+    level.allies[0] maps\_utility::anim_stopanimScripted();
+    level.allies[1] maps\_utility::anim_stopanimScripted();
+    level.allies[2] maps\_utility::anim_stopanimScripted();
 
     if(isDefined(var_2) && isalive(var_2)) {
       maps\clockwork_code::reassign_goal_volume(var_2, "chaos_lab_vol");
@@ -867,9 +867,9 @@ elevator_anims(var_0, var_1) {
       var_4 setgoalnode(var_8);
     }
   } else {
-    level.allies[0] maps\_utility::anim_stopanimscripted();
-    level.allies[1] maps\_utility::anim_stopanimscripted();
-    level.allies[2] maps\_utility::anim_stopanimscripted();
+    level.allies[0] maps\_utility::anim_stopanimScripted();
+    level.allies[1] maps\_utility::anim_stopanimScripted();
+    level.allies[2] maps\_utility::anim_stopanimScripted();
 
     if(isDefined(var_2) && isalive(var_2)) {
       maps\clockwork_code::reassign_goal_volume(var_2, "chaos_lab_vol");
@@ -954,11 +954,11 @@ limp() {
 stumble(var_0, var_1, var_2, var_3) {
   level endon("stop_stumble");
   var_0 = adjust_angles_to_player(var_0);
-  level.ground_ref_ent rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  level.ground_ref_ent rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   level.ground_ref_ent waittill("rotatedone");
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = adjust_angles_to_player(var_4);
-  level.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
+  level.ground_ref_ent rotateTo(var_4, var_2, 0, var_2 / 2);
   level.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(var_3)) {
@@ -1016,10 +1016,10 @@ security_room_transition() {
 
   common_scripts\utility::exploder(300);
   thread maps\_utility::autosave_now();
-  var_0 = common_scripts\utility::getstruct("chaos_computer_guys", "targetname");
-  var_1 = common_scripts\utility::getstruct("chaos_computer_low_loc", "targetname");
-  var_2 = common_scripts\utility::getstruct("chaos_drag_loc", "targetname");
-  var_3 = common_scripts\utility::getstruct("chaos_balcony", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_computer_guys", "targetname");
+  var_1 = common_scripts\utility::getStruct("chaos_computer_low_loc", "targetname");
+  var_2 = common_scripts\utility::getStruct("chaos_drag_loc", "targetname");
+  var_3 = common_scripts\utility::getStruct("chaos_balcony", "targetname");
   thread vaultguys();
   maps\_utility::battlechatter_off("allies");
   thread runnerguys();
@@ -1113,7 +1113,7 @@ walkout_vo() {
 }
 
 drag_metal_detector() {
-  var_0 = common_scripts\utility::getstruct("chaos_drag_loc", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_drag_loc", "targetname");
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
     var_1 = maps\_utility::spawn_targetname("chaos_dragger");
@@ -1268,19 +1268,19 @@ runner_vo(var_0, var_1) {
 }
 
 vaultguys() {
-  var_0 = common_scripts\utility::getstruct("vault_door_talk_guy", "targetname");
-  var_1 = common_scripts\utility::getstruct("vault_door_idle_guy", "targetname");
-  var_2 = common_scripts\utility::getstruct("vault_door_drill_guy", "targetname");
+  var_0 = common_scripts\utility::getStruct("vault_door_talk_guy", "targetname");
+  var_1 = common_scripts\utility::getStruct("vault_door_idle_guy", "targetname");
+  var_2 = common_scripts\utility::getStruct("vault_door_drill_guy", "targetname");
   var_3 = maps\_utility::spawn_targetname("chaos_direction_b1_vault");
   var_4 = maps\_utility::spawn_targetname("chaos_direction_b2_vault");
   var_5 = maps\_utility::spawn_targetname("chaos_direction_b3_vault");
   var_6 = maps\_utility::spawn_targetname("chaos_vault_door");
   var_7 = maps\_utility::spawn_anim_model("chaos_drill", var_6.origin);
   var_8 = maps\_utility::spawn_anim_model("chaos_drill_j", var_6.origin);
-  var_7 linkto(var_8, "J_prop_1");
+  var_7 linkTo(var_8, "J_prop_1");
   var_9 = maps\_utility::spawn_anim_model("chaos_tablet", var_6.origin);
   var_10 = maps\_utility::spawn_anim_model("chaos_tablet_j", var_6.origin);
-  var_9 linkto(var_10, "J_prop_1");
+  var_9 linkTo(var_10, "J_prop_1");
   thread reassign_vault_guys(var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
@@ -1323,14 +1323,14 @@ vaultguys() {
     level.physlaunchoccurred = 1;
 
     if(isDefined(var_7)) {
-      var_8 stopanimscripted();
+      var_8 stopanimScripted();
       var_7 unlink();
       common_scripts\utility::waitframe();
       var_7 physicslaunchclient(var_7.origin, (0, 0, 0));
     }
 
     if(isDefined(var_9)) {
-      var_10 stopanimscripted();
+      var_10 stopanimScripted();
       var_9 unlink();
       common_scripts\utility::waitframe();
       var_9 physicslaunchclient(var_9.origin, (0, 0, 0));
@@ -1353,26 +1353,26 @@ reassign_vault_guys(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     }
 
     if(isalive(var_2)) {
-      var_2 maps\_utility::anim_stopanimscripted();
+      var_2 maps\_utility::anim_stopanimScripted();
       var_2 maps\_utility::gun_recall();
       var_2 maps\_utility::enable_ai_color();
     }
 
     if(isalive(var_3)) {
-      var_3 maps\_utility::anim_stopanimscripted();
+      var_3 maps\_utility::anim_stopanimScripted();
       var_3 maps\_utility::gun_recall();
       var_3 maps\_utility::enable_ai_color();
     }
 
     if(isDefined(var_4)) {
-      var_5 stopanimscripted();
+      var_5 stopanimScripted();
       var_4 unlink();
       common_scripts\utility::waitframe();
       var_4 physicslaunchclient(var_4.origin, (0, 0, 0));
     }
 
     if(isDefined(var_6)) {
-      var_7 stopanimscripted();
+      var_7 stopanimScripted();
       var_6 unlink();
       common_scripts\utility::waitframe();
       var_6 physicslaunchclient(var_6.origin, (0, 0, 0));
@@ -1393,8 +1393,8 @@ vaultguys_vo(var_0, var_1) {
 }
 
 tendwounded() {
-  var_0 = common_scripts\utility::getstruct("chaos_wounded_scene1", "targetname");
-  var_1 = common_scripts\utility::getstruct("chaos_bug_find_scene", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_wounded_scene1", "targetname");
+  var_1 = common_scripts\utility::getStruct("chaos_bug_find_scene", "targetname");
   var_2 = maps\_utility::spawn_targetname("chaos_extinguisher");
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
@@ -1410,7 +1410,7 @@ tendwounded() {
     var_0 notify("kill_wounded");
 
     if(isalive(var_2)) {
-      var_2 stopanimscripted();
+      var_2 stopanimScripted();
       var_2 maps\_utility::gun_recall();
     }
   } else
@@ -1428,8 +1428,8 @@ tendwounded() {
 }
 
 meetuptalkscene() {
-  var_0 = common_scripts\utility::getstruct("chaos_dont_look", "targetname");
-  var_1 = common_scripts\utility::getstruct("chaos_meetup_location", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_dont_look", "targetname");
+  var_1 = common_scripts\utility::getStruct("chaos_meetup_location", "targetname");
 
   while(common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, cos(65))) {
     common_scripts\utility::waitframe();
@@ -1490,9 +1490,9 @@ meetup_vo(var_0, var_1) {
 }
 
 drag_interrogate_scene() {
-  var_0 = common_scripts\utility::getstruct("chaos_drag_scene", "targetname");
-  var_1 = common_scripts\utility::getstruct("chaos_drag_talker", "targetname");
-  var_2 = common_scripts\utility::getstruct("chaos_drag_talkee", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_drag_scene", "targetname");
+  var_1 = common_scripts\utility::getStruct("chaos_drag_talker", "targetname");
+  var_2 = common_scripts\utility::getStruct("chaos_drag_talkee", "targetname");
   var_3 = maps\_utility::spawn_targetname("chaos_dragger_interrogate");
   var_4 = maps\_utility::spawn_targetname("chaos_drag_inter");
   var_5 = maps\_utility::spawn_targetname("chaos_drag_talker");
@@ -1569,7 +1569,7 @@ drag_interrogate_vo(var_0, var_1) {
 }
 
 computer_guys_runin() {
-  var_0 = common_scripts\utility::getstruct("chaos_computer_runin_loc", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_computer_runin_loc", "targetname");
   var_1 = maps\_utility::spawn_targetname("chaos_computer_runin");
   add_to_agressive_cleanup(var_1);
   var_1 endon("death");
@@ -1587,7 +1587,7 @@ computer_guys_runin() {
   if(isalive(var_1)) {
     if(common_scripts\utility::flag("spawn_jeeps")) {
       var_0 notify("computer_stop");
-      var_1 stopanimscripted();
+      var_1 stopanimScripted();
       var_1 delete();
     } else
       maps\clockwork_code::reassign_goal_volume(var_1, "chaos_security_vol");
@@ -1625,9 +1625,9 @@ computer_guys_runin_vo(var_0) {
 }
 
 help_near_comps() {
-  var_0 = common_scripts\utility::getstruct("chaos_dont_look", "targetname");
-  var_1 = common_scripts\utility::getstruct("chaos_bug_find_scene", "targetname");
-  var_2 = common_scripts\utility::getstruct("chaos_help_near_comp_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_dont_look", "targetname");
+  var_1 = common_scripts\utility::getStruct("chaos_bug_find_scene", "targetname");
+  var_2 = common_scripts\utility::getStruct("chaos_help_near_comp_struct", "targetname");
 
   while(common_scripts\utility::within_fov(level.player.origin, level.player.angles, var_0.origin, cos(65))) {
     common_scripts\utility::waitframe();
@@ -1703,7 +1703,7 @@ help_vo(var_0, var_1) {
 }
 
 bugfinders() {
-  var_0 = common_scripts\utility::getstruct("chaos_bug_find_scene", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_bug_find_scene", "targetname");
   var_1 = maps\_utility::spawn_targetname("chaos_bug_finder");
   var_2 = maps\_utility::spawn_targetname("chaos_bug_director");
   thread reassign_bug(var_1, var_2);
@@ -1712,7 +1712,7 @@ bugfinders() {
     var_1.animname = "generic";
     var_2.animname = "generic";
     var_3 = maps\_utility::spawn_anim_model("bug_device", var_1 gettagorigin("TAG_INHAND"), var_1 gettagangles("TAG_INHAND"));
-    var_3 linkto(var_1, "TAG_INHAND");
+    var_3 linkTo(var_1, "TAG_INHAND");
     thread bug_finders_vo(var_1, var_2);
     var_0 thread maps\_anim::anim_single_solo(var_1, "bug_finder");
     var_0 maps\_anim::anim_single_solo(var_2, "bug_finder2");
@@ -1761,7 +1761,7 @@ bug_finders_vo(var_0, var_1) {
 }
 
 cypher_helps_out() {
-  var_0 = common_scripts\utility::getstruct("chaos_bug_find_scene", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_bug_find_scene", "targetname");
   var_1 = maps\_utility::spawn_targetname("chaos_cypher_helps");
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
@@ -1848,7 +1848,7 @@ reassign_walkers(var_0) {
 
 waver_moment() {
   var_0 = maps\_utility::spawn_targetname("chaos_lt", 1);
-  var_1 = common_scripts\utility::getstruct("dog_talk_guy", "targetname");
+  var_1 = common_scripts\utility::getStruct("dog_talk_guy", "targetname");
   var_0 forceteleport(var_1.origin, var_0.angles, 1000);
 
   if(isDefined(var_0) && !common_scripts\utility::flag("exfil_fire_fail")) {
@@ -1865,9 +1865,9 @@ waver_moment() {
 }
 
 commander_moment() {
-  var_0 = common_scripts\utility::getstruct("chaos_commander_and_lt", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_commander_and_lt", "targetname");
   var_1 = getnode("choas_walkers_goal", "targetname");
-  var_2 = common_scripts\utility::getstruct("chaos_dog_scene", "targetname");
+  var_2 = common_scripts\utility::getStruct("chaos_dog_scene", "targetname");
   var_3 = maps\_utility::spawn_targetname("chaos_commander");
   var_4 = maps\_utility::spawn_targetname("chaos_dog_handler", 1);
   thread reassign_commander(var_3, var_4);
@@ -1952,7 +1952,7 @@ dog_bark() {
 direction_group_dog() {
   var_0 = maps\_utility::spawn_targetname("chaos_direction_b1_dog");
   var_1 = maps\_utility::spawn_targetname("chaos_direction_b2_dog");
-  var_2 = common_scripts\utility::getstruct("dog_talk_guy", "targetname");
+  var_2 = common_scripts\utility::getStruct("dog_talk_guy", "targetname");
   thread reassign_dog_group(var_0, var_1);
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
@@ -1992,8 +1992,8 @@ direction_group() {
   var_1 = maps\_utility::spawn_targetname("chaos_direction_b2");
   var_2 = maps\_utility::spawn_targetname("chaos_direction1");
   var_3 = maps\_utility::spawn_targetname("chaos_direction2");
-  var_4 = common_scripts\utility::getstruct("chaos_talking_a", "targetname");
-  var_5 = common_scripts\utility::getstruct("chaos_talking_b", "targetname");
+  var_4 = common_scripts\utility::getStruct("chaos_talking_a", "targetname");
+  var_5 = common_scripts\utility::getStruct("chaos_talking_b", "targetname");
   thread reassign_dir_group(var_2, var_3, var_0, var_1);
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
@@ -2098,7 +2098,7 @@ carry_in() {
   wait 2;
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
-    var_0 = common_scripts\utility::getstruct("chaos_carry_loc", "targetname");
+    var_0 = common_scripts\utility::getStruct("chaos_carry_loc", "targetname");
     var_1 = maps\_utility::spawn_targetname("chaos_carrier");
     var_2 = maps\_utility::spawn_targetname("chaos_carried");
     var_1.animname = "generic";
@@ -2127,9 +2127,9 @@ carry_in() {
 }
 
 dieing_revival() {
-  var_0 = common_scripts\utility::getstruct("chaos_dieing_patient_loc", "targetname");
-  var_1 = common_scripts\utility::getstruct("chaos_dead_patient_loc", "targetname");
-  var_2 = common_scripts\utility::getstruct("chaos_doctor_loc", "targetname");
+  var_0 = common_scripts\utility::getStruct("chaos_dieing_patient_loc", "targetname");
+  var_1 = common_scripts\utility::getStruct("chaos_dead_patient_loc", "targetname");
+  var_2 = common_scripts\utility::getStruct("chaos_doctor_loc", "targetname");
   var_3 = common_scripts\utility::getStructArray("chaos_dead_patient_mdloc", "targetname");
   var_4 = maps\_utility::spawn_targetname("chaos_dieing_doctor");
   var_5 = maps\_utility::spawn_targetname("chaos_dieing_patient");
@@ -2179,7 +2179,7 @@ stumbler_upstairs() {
   wait 1;
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
-    var_1 = common_scripts\utility::getstruct("chaos_stumbler_struct", "targetname");
+    var_1 = common_scripts\utility::getStruct("chaos_stumbler_struct", "targetname");
     var_0.animname = "generic";
     var_0 maps\_utility::gun_remove();
     var_1 maps\_anim::anim_single_solo(var_0, "stumble_to_wall");
@@ -2205,8 +2205,8 @@ in_to_jeep() {
   common_scripts\utility::flag_wait("spawn_jeeps");
   thread chaos_kill_player();
   wait 0.01;
-  var_0 = getent("car_park_door_intro", "targetname");
-  var_0 rotateyaw(-90, 0.2, 0.1, 0.1);
+  var_0 = getEnt("car_park_door_intro", "targetname");
+  var_0 rotateYaw(-90, 0.2, 0.1, 0.1);
   var_0 connectpaths();
   var_1 = maps\_utility::array_spawn_targetname("car_park_base_jeep", 1);
   var_2 = maps\_utility::array_spawn_targetname("car_park_enter_jeep", 1);
@@ -2252,13 +2252,13 @@ in_to_jeep() {
   var_11 = spawn("script_model", level.playerjeep gettagorigin("tag_body"));
   var_11 setModel("vehicle_brave_warrior_turretring");
   var_11.angles = level.playerjeep gettagangles("tag_turret");
-  var_11 linkto(level.playerjeep, "tag_body");
+  var_11 linkTo(level.playerjeep, "tag_body");
   level.allies[1] thread waittoturnlightson(level.playerjeep);
   thread baker_anim();
   level.gold_jeep_player_door_exfil = spawn("script_model", level.playerjeep.origin);
   level.gold_jeep_player_door_exfil setModel("chinese_brave_warrior_obj_door_back_RI");
   level.gold_jeep_player_door_exfil.angles = level.playerjeep.angles;
-  level.gold_jeep_player_door_exfil linkto(level.playerjeep);
+  level.gold_jeep_player_door_exfil linkTo(level.playerjeep);
   wait 2;
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
@@ -2297,18 +2297,18 @@ in_to_jeep() {
   level.playerjeep thread maps\clockwork_code::listen_player_collision();
   level.playerjeep thread maps\clockwork_code::listen_player_jolt();
   thread kill_player();
-  var_13 = getent("car_park_door", "targetname");
-  var_13 rotateyaw(90, 0.2, 0.1, 0.1);
+  var_13 = getEnt("car_park_door", "targetname");
+  var_13 rotateYaw(90, 0.2, 0.1, 0.1);
   var_13 connectpaths();
   level.player setstance("stand");
   level.player disableweapons();
   level.player disableweapons();
   wait 0.25;
-  var_14 = common_scripts\utility::getstruct("exfil_move_player_enter_jeep", "targetname");
+  var_14 = common_scripts\utility::getStruct("exfil_move_player_enter_jeep", "targetname");
   level.player.isanimating = 1;
   level.jeep_player_arms = maps\_utility::spawn_anim_model("player_rig");
   level.jeep_player_arms hide();
-  level.jeep_player_arms linkto(level.playerjeep, "tag_guy1", (-10, -45, -32), (0, 90, 0));
+  level.jeep_player_arms linkTo(level.playerjeep, "tag_guy1", (-10, -45, -32), (0, 90, 0));
   level.playerjeep thread maps\_anim::anim_first_frame_solo(level.jeep_player_arms, "player_getin", "tag_guy1");
   level.player playerlinktoblend(level.jeep_player_arms, "tag_player", 0.25);
   wait 0.25;
@@ -2480,7 +2480,7 @@ punchit_start(var_0) {
     }
   }
 
-  var_11 = common_scripts\utility::getstruct("punchit_scene", "targetname");
+  var_11 = common_scripts\utility::getStruct("punchit_scene", "targetname");
   level.startjeep.animname = "cw_punchit";
   level.startjeep setflaggedanimrestart("vehicle_anim_flag", level.startjeep maps\_utility::getanim("punchit_start_enemy_jeep"));
   level.playerjeep.animname = "cw_punchit";
@@ -2506,7 +2506,7 @@ punchit_start(var_0) {
   level.playerjeep thread vehicle_play_guy_anim("punchit_start_cypher", level.allies[2], 2);
   level.pistol = maps\_utility::spawn_anim_model("cw_pistol", level.allies[2].origin);
   level.pistol.angles = level.allies[2].angles;
-  level.pistol linkto(level.playerjeep, "tag_guy0");
+  level.pistol linkTo(level.playerjeep, "tag_guy0");
   level.allies[2] thread maps\_anim::anim_single_solo(level.pistol, "start");
   level.stopguy1.animname = "generic";
   level.stopguy2.animname = "generic";
@@ -2542,7 +2542,7 @@ punchit_end(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
   level.skiptoend = 1;
-  var_5 = common_scripts\utility::getstruct("punchit_scene", "targetname");
+  var_5 = common_scripts\utility::getStruct("punchit_scene", "targetname");
 
   if(!common_scripts\utility::flag("exfil_fire_fail")) {
     thread punchit_jeeps(var_0, var_5);
@@ -2576,7 +2576,7 @@ punchit_end(var_0, var_1, var_2, var_3, var_4) {
     level.stopguy1.animname = "generic";
     var_5 thread maps\_anim::anim_single_solo(level.stopguy1, "punchit_end_guard1");
   } else if(isDefined(level.stopguy1)) {
-    level.stopguy1 maps\_utility::anim_stopanimscripted();
+    level.stopguy1 maps\_utility::anim_stopanimScripted();
     common_scripts\utility::waitframe();
     level.stopguy1 kill();
   }
@@ -2585,7 +2585,7 @@ punchit_end(var_0, var_1, var_2, var_3, var_4) {
     level.stopguy2.animname = "generic";
     var_5 thread maps\_anim::anim_single_solo(level.stopguy2, "punchit_end_guard2");
   } else if(isDefined(level.stopguy2)) {
-    level.stopguy2 maps\_utility::anim_stopanimscripted();
+    level.stopguy2 maps\_utility::anim_stopanimScripted();
     common_scripts\utility::waitframe();
     level.stopguy2 kill();
   }
@@ -2598,7 +2598,7 @@ punchit_end(var_0, var_1, var_2, var_3, var_4) {
   common_scripts\utility::flag_set("chase_punch_it");
   common_scripts\utility::flag_set("punchit_go");
   level.player disableoffhandweapons();
-  var_1 rotateyaw(-90, 12, 8, 1);
+  var_1 rotateYaw(-90, 12, 8, 1);
 
   foreach(var_7 in var_2) {
     if(isDefined(var_7)) {
@@ -2635,7 +2635,7 @@ guard3_anim_delay(var_0) {
     level.stopguy3.animname = "generic";
     var_0 thread maps\_anim::anim_single_solo(level.stopguy3, "punchit_end_guard3");
   } else if(isDefined(level.stopguy3)) {
-    level.stopguy3 maps\_utility::anim_stopanimscripted();
+    level.stopguy3 maps\_utility::anim_stopanimScripted();
     common_scripts\utility::waitframe();
     level.stopguy3 kill();
   }
@@ -2685,7 +2685,7 @@ baker_anim() {
 
   if(!common_scripts\utility::flag("baker_ready")) {
     level.playerjeep notify("end_loop");
-    level.allies[0] maps\_utility::anim_stopanimscripted();
+    level.allies[0] maps\_utility::anim_stopanimScripted();
   }
 }
 
@@ -2694,13 +2694,13 @@ baker_in_to_jeep_anim() {
   wait 1;
 
   if(common_scripts\utility::flag("exfil_fire_fail")) {
-    level.allies[0] maps\_utility::anim_stopanimscripted();
+    level.allies[0] maps\_utility::anim_stopanimScripted();
   } else {
     level.playerjeep notify("end_loop");
   }
 
-  var_0 = common_scripts\utility::getstruct("get_in_keegan", "targetname");
-  var_1 = common_scripts\utility::getstruct("get_in_cipher", "targetname");
+  var_0 = common_scripts\utility::getStruct("get_in_keegan", "targetname");
+  var_1 = common_scripts\utility::getStruct("get_in_cipher", "targetname");
   level.allies[1] forceteleport(var_0.origin, var_0.angles);
   level.allies[2] forceteleport(var_1.origin, var_1.angles);
   common_scripts\utility::waitframe();
@@ -2881,7 +2881,7 @@ getinturret() {
   level.allies[1] maps\_utility::clear_generic_idle_anim();
   level.allies[2] maps\_utility::clear_generic_idle_anim();
   level.player disableweapons();
-  level.jeep_player_arms linkto(level.playerjeep, "tag_guy1", (50, 0, 0), (0, 0, 0));
+  level.jeep_player_arms linkTo(level.playerjeep, "tag_guy1", (50, 0, 0), (0, 0, 0));
   level.jeep_player_arms thread maps\_anim::anim_first_frame_solo(level.jeep_player_arms, "player_toturret");
   level.jeep_player_arms show();
   thread standally(0, 0.5);
@@ -2918,7 +2918,7 @@ standally(var_0, var_1) {
   wait(var_1);
   level.allies[var_0] notify("newanim");
   level.allies[var_0].desired_anim_pose = "crouch";
-  level.allies[var_0] maps\_utility::anim_stopanimscripted();
+  level.allies[var_0] maps\_utility::anim_stopanimScripted();
   level.allies[var_0] allowedstances("crouch");
   level.allies[var_0].baseaccuracy = 0.1;
   level.allies[var_0].accuracystationarymod = 0.5;
@@ -2965,12 +2965,12 @@ canal_event() {
   thread maps\clockwork_audio::chase_tower_fire();
   var_1 = missile_createrepulsorent(level.playerjeep, 750, 10000);
   var_2 = var_0[2].origin + (-60, 0, 75);
-  var_3 = common_scripts\utility::getstruct("rpg_hit_enemy_jeep", "targetname");
+  var_3 = common_scripts\utility::getStruct("rpg_hit_enemy_jeep", "targetname");
   magicbullet("rpg_straight", var_2, var_3.origin);
   wait 1.25;
   missile_deleteattractor(var_1);
   var_2 = var_0[0].origin + (-60, 0, 75);
-  var_3 = common_scripts\utility::getstruct("rpg_hit_enemy_jeep", "targetname");
+  var_3 = common_scripts\utility::getStruct("rpg_hit_enemy_jeep", "targetname");
   magicbullet("rpg_straight", var_2, var_3.origin);
   wait 1.25;
   thread maps\clockwork_code::add_ice_radius(50, var_3.origin);
@@ -2980,7 +2980,7 @@ canal_event() {
   }
 
   var_2 = var_0[1].origin + (0, -60, 75);
-  var_3 = common_scripts\utility::getstruct("rpg_target_ally_jeep", "targetname");
+  var_3 = common_scripts\utility::getStruct("rpg_target_ally_jeep", "targetname");
   magicbullet("rpg_straight", var_2, var_3.origin);
   wait 1.25;
   thread maps\clockwork_code::add_ice_radius(50, var_3.origin);
@@ -3170,7 +3170,7 @@ bridge_event() {
 new_cliff_moment() {
   common_scripts\utility::flag_wait("enemy_cave_spawn");
   maps\_utility::autosave_by_name("cliff");
-  level.iceblocker = getent("sub_ice_blocker", "targetname");
+  level.iceblocker = getEnt("sub_ice_blocker", "targetname");
   level.iceblocker hide();
   level.enemy_snowmobile = maps\_utility::array_removedead(level.enemy_snowmobile);
 
@@ -3235,7 +3235,7 @@ new_cliff_moment() {
 }
 
 new_nxsub_breach_moment() {
-  var_0 = common_scripts\utility::getstruct("submarine_origin_height", "targetname");
+  var_0 = common_scripts\utility::getStruct("submarine_origin_height", "targetname");
   common_scripts\utility::flag_wait("exfil_exit_cave");
   level.playerjeep.dontunloadonend = 1;
   wait 1;
@@ -3254,10 +3254,10 @@ new_nxsub_breach_moment() {
   thread play_fx_for_sub_blow();
   var_1 = maps\_utility::spawn_anim_model("cw_sub_ice", var_0.origin);
   var_2 = maps\_utility::spawn_anim_model("cw_sub_sub", var_0.origin);
-  var_3 = getent("sub_collision", "targetname");
+  var_3 = getEnt("sub_collision", "targetname");
   var_3.origin = var_2 gettagorigin("j_sub_anim");
   var_3.angles = var_2 gettagangles("j_sub_anim");
-  var_3 linkto(var_2, "j_sub_anim");
+  var_3 linkTo(var_2, "j_sub_anim");
   level.allies[1].animname = "generic";
   level.playerjeep thread vehicle_play_guy_anim("nxsubdriver", level.allies[1], 0);
   level.allies[0].animname = "generic";
@@ -3320,7 +3320,7 @@ surfacing_now_vo() {
 }
 
 fire_tracers() {
-  var_0 = common_scripts\utility::getstruct("exfil_ending_tracer_start", "targetname");
+  var_0 = common_scripts\utility::getStruct("exfil_ending_tracer_start", "targetname");
   bullettracer(var_0.origin, level.player.origin + (32, 0, 64), 1);
   wait 0.15;
   bullettracer(var_0.origin, level.player.origin + (32, 16, 64), 1);
@@ -3506,7 +3506,7 @@ fire_fail_exfil_vo() {
   if(!common_scripts\utility::flag("start_exfil_ride")) {
     foreach(var_1 in level.allies) {
       if(!isDefined(var_1.boarding_vehicle) || !var_1.boarding_vehicle) {
-        var_1 maps\_utility::anim_stopanimscripted();
+        var_1 maps\_utility::anim_stopanimScripted();
       }
     }
   }
@@ -3557,7 +3557,7 @@ fire_fail_exfil_vo() {
 
   if(common_scripts\utility::flag("punchit_jeep_play_anim")) {
     common_scripts\utility::flag_wait("punchit_car_two");
-    var_5 = vectornormalize(level.playerjeep vehicle_getvelocity()) * 5000;
+    var_5 = vectorNormalize(level.playerjeep vehicle_getvelocity()) * 5000;
     level.startjeep vehphys_launch(var_5);
   }
 
@@ -3772,7 +3772,7 @@ jeep_ai(var_0) {
     return;
   }
   self notify("newanim");
-  maps\_utility::anim_stopanimscripted();
+  maps\_utility::anim_stopanimScripted();
   maps\_utility::gun_recall();
 
   if(self == level.allies[0] || self == level.allies[1]) {
@@ -3856,8 +3856,8 @@ handle_dog_chaos() {
   level.dog maps\_utility::set_ignoreme(1);
   thread watch_dog_hot_dog();
   common_scripts\utility::flag_wait("door_close");
-  var_0 = getent("elevator_to_exfil", "targetname");
-  level.dog linkto(var_0);
+  var_0 = getEnt("elevator_to_exfil", "targetname");
+  level.dog linkTo(var_0);
   common_scripts\utility::flag_wait("door_open");
   thread handle_dog_targeting_chaos();
   wait 0.1;
@@ -3868,7 +3868,7 @@ handle_dog_chaos() {
   level.dog maps\ally_attack_dog::dog_disable_ai_color();
   common_scripts\utility::flag_wait("chaos_ally_run");
   level.dog.dontavoidplayer = 0;
-  var_1 = getent("dog_to_jeep", "targetname");
+  var_1 = getEnt("dog_to_jeep", "targetname");
   var_1 waittill("trigger");
   level.dog maps\ally_attack_dog::dog_enable_ai_color();
   maps\clockwork_code::dog_run();
@@ -3955,7 +3955,7 @@ player_view_clamp() {
   common_scripts\utility::waitframe();
 
   while(!common_scripts\utility::flag("enemy_cave_spawn")) {
-    var_0 = vectornormalize(self.mgturret[0] gettagorigin("tag_flash") - self.origin);
+    var_0 = vectorNormalize(self.mgturret[0] gettagorigin("tag_flash") - self.origin);
     var_1 = anglesToForward(self.angles);
     var_2 = vectordot(var_1, var_0);
 

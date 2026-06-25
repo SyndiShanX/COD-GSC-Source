@@ -29,7 +29,7 @@ initmpqflags() {
 
 initmpqsystems() {
   scripts\engine\utility::flag_wait("interactions_initialized");
-  level.neil_console = getent("neil_console", "targetname");
+  level.neil_console = getEnt("neil_console", "targetname");
   level.neil_console.nextneilvotime = 0;
   spawnn31lhead();
   initpuzzlecombinations();
@@ -51,7 +51,7 @@ initmpqsystems() {
 }
 
 initneilconsolehead() {
-  var_0 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+  var_0 = scripts\engine\utility::getStruct("console_neil_head", "targetname");
   var_0.entanglerangleupdate = ::updateneilheadangles;
   var_0.nextneilvotime = 0;
 }
@@ -69,7 +69,7 @@ updateneilheadangles(var_0, var_1, var_2) {
     }
   }
 
-  var_4 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStruct("pap_portal", "script_noteworthy");
   if(isDefined(var_2.pathtogoal)) {
     if(scripts\engine\utility::istrue(var_0.isfasttravelling)) {
       var_2.fasttravelling = 1;
@@ -101,7 +101,7 @@ updateneilheadangles(var_0, var_1, var_2) {
         if(scripts\engine\utility::istrue(var_10.var_4284)) {
           var_11 = anglesToForward(var_0.angles);
           var_12 = 0;
-          if(!var_12 && vectordot(vectornormalize(var_6 - var_0.origin), var_11) > 0.75 && vectordot(vectornormalize(var_10.origin - var_0.origin), var_11) > 0.75) {
+          if(!var_12 && vectordot(vectorNormalize(var_6 - var_0.origin), var_11) > 0.75 && vectordot(vectorNormalize(var_10.origin - var_0.origin), var_11) > 0.75) {
             if(distance(var_0.origin, var_6) > distance(var_0.origin, var_2.origin)) {
               if(scripts\engine\utility::istrue(var_10.var_4284)) {
                 var_13 = scripts\engine\utility::getStructArray(var_10.script_noteworthy, "script_noteworthy");
@@ -130,7 +130,7 @@ updateneilheadangles(var_0, var_1, var_2) {
 }
 
 initmedbaybutton() {
-  var_0 = scripts\engine\utility::getstruct("button_entangle_target", "targetname");
+  var_0 = scripts\engine\utility::getStruct("button_entangle_target", "targetname");
   if(isDefined(var_0.model)) {
     var_0.model scripts\cp\cp_weapon::placeequipmentfailed("pillage", 1, var_0.model.origin);
     var_0.model delete();
@@ -330,7 +330,7 @@ usepuzzlebutton(var_0, var_1) {
     scripts\cp\utility::playsoundatpos_safe(var_0.origin, "zmb_mpq_puzzle_turn");
     scripts\engine\utility::flag_set("toggle_puzzle_button_pressed");
     deactivateinteractionsbynoteworthy("puzzle_door_button");
-    var_2 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+    var_2 = scripts\engine\utility::getStruct("entangler_button", "script_noteworthy");
     scripts\cp\utility::playsoundatpos_safe(var_2.origin, "zmb_rhino_door_explo");
   }
 }
@@ -371,7 +371,7 @@ checkfornearbydisk(var_0) {
           var_3 = 0.25;
         }
 
-        level.undergratepuzzlepiece moveto(var_0.origin, var_3, var_3 - 0.15, 0);
+        level.undergratepuzzlepiece moveTo(var_0.origin, var_3, var_3 - 0.15, 0);
         wait(var_3);
         var_0 notify("vent_grabbed_puzzle_piece");
         level notify("vent_grabbed_puzzle_piece", level.undergratepuzzlepiece);
@@ -474,7 +474,7 @@ initpuzzlebuttoninternal() {
 }
 
 initentanglerspawner() {
-  var_0 = scripts\engine\utility::getstruct("entangler_spawner", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("entangler_spawner", "script_noteworthy");
   var_0.groupname = "locOverride";
 }
 
@@ -715,7 +715,7 @@ reenableneilheadentangleitem(var_0, var_1) {
     scripts\engine\utility::flag_wait("disable_evil_neil");
   }
 
-  var_2 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+  var_2 = scripts\engine\utility::getStruct("console_neil_head", "targetname");
   itemallowentangle(var_2, var_1);
   thread disabledoorswhenentangled(var_0, var_1);
   thread watchforitementangled(var_0, var_1);
@@ -731,8 +731,8 @@ checkneilheadcollision(var_0, var_1, var_2) {
   level endon("game_ended");
   var_0 waittill("collision");
   var_3 = var_0.origin;
-  var_4 = scripts\engine\utility::getstruct("neil_head_final_pos", "script_noteworthy");
-  var_5 = scripts\engine\utility::getstruct(var_4.target, "targetname");
+  var_4 = scripts\engine\utility::getStruct("neil_head_final_pos", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStruct(var_4.target, "targetname");
   var_0 notify("end_entangler_funcs");
   if(distance(var_3, var_5.origin) <= 48) {
     deactivateinteractionsbynoteworthy("entangler_button");
@@ -816,7 +816,7 @@ runtogglepuzzlevalidation(var_0, var_1) {
   if(validatepuzzle(var_0)) {
     scripts\engine\utility::flag_set("completed_toggle_puzzle_once");
     thread deactivateneil();
-    var_2 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+    var_2 = scripts\engine\utility::getStruct("console_neil_head", "targetname");
     thread scripts\cp\crafted_entangler::outlineitemforplayers(var_2, var_2.headmodel);
     thread scripts\cp\crafted_entangler::watchforentanglerdamage(var_2, var_2.headmodel);
     getneilheadpath(var_1, var_2.headmodel);
@@ -847,18 +847,18 @@ togglebutton(var_0) {
   switch (var_0.color) {
     case "horizontal":
       var_0.color = "vertical";
-      var_0 rotateto((0, 90, 90), 0.1);
+      var_0 rotateTo((0, 90, 90), 0.1);
       break;
 
     case "vertical":
       var_0.color = "horizontal";
-      var_0 rotateto((0, 90, 0), 0.1);
+      var_0 rotateTo((0, 90, 0), 0.1);
       break;
   }
 }
 
 initentanglerbutton() {
-  var_0 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("entangler_button", "script_noteworthy");
   var_0.nextneilvotime = 0;
   var_0.dontdelaytrigger = 1;
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
@@ -880,10 +880,10 @@ initentanglerbutton() {
     var_5 = "cp_final_pod_wall_handle";
     if(var_6 < 8) {
       var_4.color = "horizontal";
-      var_4 rotateto((0, 90, 0), 0.1);
+      var_4 rotateTo((0, 90, 0), 0.1);
     } else {
       var_4.color = "vertical";
-      var_4 rotateto((0, 90, 90), 0.1);
+      var_4 rotateTo((0, 90, 90), 0.1);
     }
 
     var_4 setModel(var_5);
@@ -896,11 +896,11 @@ initentanglerbutton() {
 
 solvetogglepuzzle() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("entangler_button", "script_noteworthy");
   var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     var_3.var_32D9.color = "horizontal";
-    var_3.var_32D9 rotateto((0, 90, 0), 0.1);
+    var_3.var_32D9 rotateTo((0, 90, 0), 0.1);
   }
 
   wait(0.25);
@@ -925,8 +925,8 @@ choosedoordecoys(var_0) {
 
 getneilheadpath(var_0, var_1) {
   choosedoordecoys(var_1);
-  var_2 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstruct("neil_head_final_pos", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStruct("pap_portal", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStruct("neil_head_final_pos", "script_noteworthy");
   var_4 = buildpath(level.players[0], var_1.origin, var_1.firstdoorpath.origin);
   var_5 = buildpath(level.players[0], var_4[var_4.size - 1], var_1.seconddoorpath.origin);
   var_6 = buildpath(level.players[0], var_5[var_5.size - 1], var_1.thirddoorpath.origin);
@@ -985,7 +985,7 @@ buildpath(var_0, var_1, var_2) {
     if(isDefined(var_9.target)) {
       var_8 = [];
       var_8[var_8.size] = var_9.origin;
-      var_13 = scripts\engine\utility::getstruct(var_9.target, "targetname");
+      var_13 = scripts\engine\utility::getStruct(var_9.target, "targetname");
       if(isstruct(var_13)) {
         var_8[var_8.size] = var_13.origin;
         var_3 = scripts\engine\utility::array_combine(var_3, var_8);
@@ -1519,7 +1519,7 @@ watchforplayerlookat(var_0) {
   var_0 endon("watchForPlayerLookat");
   var_0 endon("stop_interaction_logic");
   var_0 thread unsetplayerlookat(var_0);
-  var_1 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStruct("entangler_button", "script_noteworthy");
   var_2 = var_1.var_32F7;
   var_3 = undefined;
   var_4 = undefined;
@@ -1691,7 +1691,7 @@ spawnpuzzlepiece(var_0, var_1) {
   }
 
   if(isDefined(var_1.target)) {
-    var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   } else {
     var_2 = var_2;
   }
@@ -1788,9 +1788,9 @@ disableaftermovethroughvent(var_0) {
   var_1 dontinterpolate();
   var_1.origin = var_6.origin;
   var_1.angles = var_6.angles;
-  var_7 = scripts\engine\utility::getstruct(var_6.target, "targetname");
-  var_1 moveto(var_7.origin, 0.5, 0.1, 0);
-  var_1 rotateto(var_7.angles, 0.5);
+  var_7 = scripts\engine\utility::getStruct(var_6.target, "targetname");
+  var_1 moveTo(var_7.origin, 0.5, 0.1, 0);
+  var_1 rotateTo(var_7.angles, 0.5);
   var_7.model = var_1;
   var_7.script_noteworthy = "puzzle_pieces";
   var_7.var_336 = "interaction";
@@ -1861,7 +1861,7 @@ spawnn31lhead() {
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   var_1 = var_0[0];
   if(isDefined(var_1.target)) {
-    var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   } else {
     var_2 = var_2;
   }
@@ -1918,7 +1918,7 @@ puzzlepiecehintfunc(var_0, var_1) {
 puzzlepieceusefunc(var_0, var_1) {
   if(!isDefined(var_1.haspuzzlepiece) || isDefined(var_1.haspuzzlepiece) && var_1.haspuzzlepiece != var_0.state) {
     if(isDefined(var_0.target)) {
-      var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+      var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     } else {
       var_2 = var_1;
     }
@@ -2173,7 +2173,7 @@ completeplaceneilshead() {
   activateinteractionsbynoteworthy("fuse_puzzle");
   activateinteractionsbynoteworthy("puzzle_pieces");
   activateinteractionsbynoteworthy("portal_gun_button");
-  var_0 = scripts\engine\utility::getstruct("console_neil_head", "targetname");
+  var_0 = scripts\engine\utility::getStruct("console_neil_head", "targetname");
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 setModel("final_kevin_head_dynamic");
@@ -2375,7 +2375,7 @@ securitydoorsdestroyed() {
     var_1 delete();
   }
 
-  var_3 = getent("med_bay_door_clip", "targetname");
+  var_3 = getEnt("med_bay_door_clip", "targetname");
   var_3 notsolid();
   activateinteractionsbynoteworthy("entangler_button");
 }
@@ -2515,7 +2515,7 @@ spawnastronauts() {
     var_3 thread astronautwatchfordamage();
   }
 
-  var_5 = getent("astronaut_aide_trigger", "script_noteworthy");
+  var_5 = getEnt("astronaut_aide_trigger", "script_noteworthy");
   if(isDefined(var_5)) {
     var_5 thread astronautaidetriggerwatch(var_5);
   }
@@ -2534,7 +2534,7 @@ astronautwatchfordamage() {
 }
 
 astronautaidetriggerwatch(var_0) {
-  var_0 = getent(self.target + "_model", "targetname");
+  var_0 = getEnt(self.target + "_model", "targetname");
   var_0 endon("released");
   for(;;) {
     self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_1, var_1, var_1, var_1, var_6);
@@ -2749,7 +2749,7 @@ movieswapdebug() {
 constructbridgeinit() {
   scripts\engine\utility::flag_init("bridge_constructed");
   level.bridgepiecesplaced = 0;
-  scripts\engine\utility::getstruct("construct_bridge", "script_noteworthy").name = "construct_bridge";
+  scripts\engine\utility::getStruct("construct_bridge", "script_noteworthy").name = "construct_bridge";
 }
 
 constructbridgehint(var_0, var_1) {
@@ -2770,14 +2770,14 @@ constructbridgehint(var_0, var_1) {
 }
 
 bridgeconstructionfeedback(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstruct("construction_point_" + var_0, "targetname");
+  var_2 = scripts\engine\utility::getStruct("construction_point_" + var_0, "targetname");
   playFX(level._effect["bridge_place"], var_2.origin, anglesToForward(var_2.angles));
   wait(1.2);
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("debris_exterior_damaged_metal_panels_08_scl50");
   var_3.angles = var_2.angles;
   var_4 = (60, 60, 0);
-  var_5 = getent("bridge_blocker", "targetname");
+  var_5 = getEnt("bridge_blocker", "targetname");
   var_5.origin = var_5.origin + var_4;
   var_1.origin = var_1.origin + var_4 + (8, 4, 0);
   playsoundatpos(var_1.origin, "zmb_bridge_build_01");
@@ -2807,7 +2807,7 @@ constructbridgeuse(var_0, var_1) {
 }
 
 openbridge() {
-  var_0 = getent("bridge_blocker", "targetname");
+  var_0 = getEnt("bridge_blocker", "targetname");
   var_0 notsolid();
   var_0 connectpaths();
   scripts\engine\utility::flag_set("bridge_constructed");
@@ -2886,7 +2886,7 @@ spawnenergydoor() {
 watchfordamageondoor(var_0) {
   level endon("game_ended");
   level endon("kill_energy_doors");
-  var_1 = getent("med_bay_door_clip", "targetname");
+  var_1 = getEnt("med_bay_door_clip", "targetname");
   var_1.health = 9999999;
   var_1.maxhealth = 9999999;
   var_1 setCanDamage(1);

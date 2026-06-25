@@ -142,7 +142,7 @@ function_a86d28fc(attacker, victim) {
     return;
   }
 
-  var_f557e840 = getplayers(attacker.team);
+  var_f557e840 = getPlayers(attacker.team);
 
   foreach(teammate in var_f557e840) {
     if(!isDefined(teammate)) {
@@ -313,7 +313,7 @@ function_4b3bc61d(attacker, weapon, target) {
   }
 
   if(validateorigin(self.origin)) {
-    playsoundatposition(#"hash_330c9380b91a673", self.origin);
+    playSoundAtPosition(#"hash_330c9380b91a673", self.origin);
   }
 
   if(isDefined(level.var_d2600afc)) {

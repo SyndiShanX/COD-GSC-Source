@@ -108,7 +108,7 @@ function init() {
 }
 
 function function_dc2735aa() {
-  var_7ead9349 = getent("boss_skeleton_spawner", "targetname");
+  var_7ead9349 = getEnt("boss_skeleton_spawner", "targetname");
   var_7ead9349.script_noteworthy = "zombie_spawner";
   while(!isDefined(level.zombie_spawners)) {
     wait(0.05);
@@ -150,7 +150,7 @@ function function_b18f59bf() {
   var_293d02aa hidepart("tag_prestine_can");
   var_293d02aa.targetname = "undercroft_pyramid";
   var_293d02aa playSound("zmb_ee_mpd_spawn_pyramid");
-  var_293d02aa disconnectpaths();
+  var_293d02aa disconnectPaths();
   var_82a4f07b notify("delete_fx");
   callback::remove_on_connect(&zm_castle_util::function_fa7da172);
   level.var_8ef26cd9 = undefined;
@@ -181,7 +181,7 @@ function function_1fd76e61(var_293d02aa) {
             str_player_zone = var_5e72aed6 zm_zonemgr::get_player_zone();
             if(str_player_zone === "zone_undercroft") {
               if(distance2dsquared(var_5e72aed6.origin, s_panel.origin) > 16384) {
-                player setorigin(s_panel.origin);
+                player setOrigin(s_panel.origin);
                 s_panel.b_occupied = 1;
                 break;
               }
@@ -239,7 +239,7 @@ function function_91a378e3() {
   var_da3dbbdf delete();
   var_82a4f07b = struct::get("keeper_end_loc");
   var_82a4f07b notify("delete_fx");
-  var_293d02aa = getent("undercroft_pyramid", "targetname");
+  var_293d02aa = getEnt("undercroft_pyramid", "targetname");
   var_293d02aa delete();
 }
 
@@ -269,7 +269,7 @@ function function_735d5e85() {
 
 function function_434db4ff() {
   var_4b421e18 = 0;
-  var_ca36f4cf = getent("zone_boss_arena", "targetname");
+  var_ca36f4cf = getEnt("zone_boss_arena", "targetname");
   if(self.mdl_gravity_trap_spikes[0] istouching(var_ca36f4cf)) {
     var_4b421e18 = 1;
   }
@@ -298,7 +298,7 @@ function function_77025eb5(spot) {
   }
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   if(!isDefined(spot.angles)) {
     spot.angles = (0, 0, 0);
   }
@@ -306,12 +306,12 @@ function function_77025eb5(spot) {
   anim_ang = spot.angles;
   anim_org = anim_org + (0, 0, 0);
   self ghost();
-  self.anchor moveto(anim_org, 0.05);
+  self.anchor moveTo(anim_org, 0.05);
   self.anchor waittill("movedone");
   target_org = zombie_utility::get_desired_origin();
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill("rotatedone");
   }
   self unlink();
@@ -333,9 +333,9 @@ function function_77025eb5(spot) {
   }
   self orientmode("face default");
   if(isDefined(level.custom_riseanim)) {
-    self animscripted("rise_anim", self.origin, spot.angles, level.custom_riseanim);
+    self animScripted("rise_anim", self.origin, spot.angles, level.custom_riseanim);
   } else {
-    self animscripted("rise_anim", self.origin, spot.angles, "ai_zombie_traverse_ground_climbout_fast");
+    self animScripted("rise_anim", self.origin, spot.angles, "ai_zombie_traverse_ground_climbout_fast");
   }
   self zombie_shared::donotetracks("rise_anim", &zombie_utility::handle_rise_notetracks, spot);
   self notify("rise_anim_finished");
@@ -485,23 +485,23 @@ function function_71130ea() {
   }
   var_8880cc35 = struct::get("boss_keeper", "targetname");
   self.var_40b46e43 = util::spawn_anim_model("c_zom_dlc1_keeper_archon_fb", var_8880cc35.origin, var_8880cc35.angles);
-  self.var_40b46e43 enablelinkto();
+  self.var_40b46e43 enablelinkTo();
   var_b444c5cd = self.var_40b46e43 gettagorigin("tag_aim");
   var_9f10f5d3 = self.var_40b46e43 gettagangles("tag_aim");
-  self.var_e3d9917e = getent("boss_weak_point", "targetname");
+  self.var_e3d9917e = getEnt("boss_weak_point", "targetname");
   self.var_e3d9917e.origin = var_b444c5cd;
   self.var_e3d9917e.angles = var_9f10f5d3;
   self.var_e3d9917e.takedamage = 1;
-  self.var_e3d9917e linkto(self.var_40b46e43, "tag_aim", (-7, 0, -15));
-  self.var_64274e35 = getent("boss_weak_point_blocker", "targetname");
+  self.var_e3d9917e linkTo(self.var_40b46e43, "tag_aim", (-7, 0, -15));
+  self.var_64274e35 = getEnt("boss_weak_point_blocker", "targetname");
   self.var_64274e35.origin = var_b444c5cd;
   self.var_64274e35.angles = var_9f10f5d3;
-  self.var_64274e35 linkto(self.var_40b46e43, "tag_aim", (-17, 0, -15));
-  self.var_a2e9e777 = getent("boss_player_collision", "targetname");
-  self.var_a2e9e777 linkto(self.var_40b46e43);
-  self.var_83296dfe = getent("boss_dot_area", "targetname");
+  self.var_64274e35 linkTo(self.var_40b46e43, "tag_aim", (-17, 0, -15));
+  self.var_a2e9e777 = getEnt("boss_player_collision", "targetname");
+  self.var_a2e9e777 linkTo(self.var_40b46e43);
+  self.var_83296dfe = getEnt("boss_dot_area", "targetname");
   self.var_83296dfe notsolid();
-  self.var_83296dfe linkto(self.var_40b46e43);
+  self.var_83296dfe linkTo(self.var_40b46e43);
   self.var_40b46e43 ghost();
   self.var_1e4b92cb = [];
   self.var_1e4b92cb = struct::get_array("boss_teleport_point", "targetname");
@@ -564,7 +564,7 @@ function function_71130ea() {
 }
 
 function function_a86bf815() {
-  a_players = getplayers();
+  a_players = getPlayers();
   n_player_modifier = 1;
   switch (a_players.size) {
     case 0:
@@ -685,7 +685,7 @@ function function_4bea595() {
   level endon("_zombie_game_over");
   self endon("bleed_out");
   self endon("disconnect");
-  var_67f6c267 = getent("boss_dot_area", "targetname");
+  var_67f6c267 = getEnt("boss_dot_area", "targetname");
   while(!level flag::get("boss_fight_completed")) {
     if(self istouching(var_67f6c267) && !self laststand::player_is_in_laststand()) {
       self dodamage(5, self.origin);
@@ -704,7 +704,7 @@ function function_4f5e3970() {
     v_pos = var_7fcbf214[player.characterindex].origin;
     v_angles = var_7fcbf214[player.characterindex].angles;
     player zm_utility::create_streamer_hint(v_pos, v_angles, 0.25);
-    player playrumbleonentity("zm_castle_pulsing_rumble");
+    player playRumbleOnEntity("zm_castle_pulsing_rumble");
   }
   wait(0.5);
   level thread lui::screen_flash(0.5, 2, 1, 1, "white");
@@ -713,7 +713,7 @@ function function_4f5e3970() {
   foreach(player in level.players) {
     v_pos = var_7fcbf214[player.characterindex].origin;
     v_angles = var_7fcbf214[player.characterindex].angles;
-    player setorigin(v_pos);
+    player setOrigin(v_pos);
     player setplayerangles(v_angles);
     player clientfield::increment_to_player("player_snow_fx_off");
     player zm_utility::clear_streamer_hint();
@@ -737,7 +737,7 @@ function boss_fight_complete() {
   exploder::stop_exploder("lgt_low_gravity_on");
   level clientfield::set("snd_low_gravity_state", 0);
   foreach(player in level.players) {
-    player playrumbleonentity("zm_castle_pulsing_rumble");
+    player playRumbleOnEntity("zm_castle_pulsing_rumble");
   }
   level thread lui::screen_flash(1, 6, 3, 1, "white");
   wait(3);
@@ -762,7 +762,7 @@ function function_8ac50ad(v_pos, v_angles) {
   wait(1);
   self clientfield::increment_to_player("player_snow_fx");
   self thread function_735d5e85();
-  self setorigin(v_pos);
+  self setOrigin(v_pos);
   self setplayerangles(v_angles);
   self zm_utility::clear_streamer_hint();
 }
@@ -1255,7 +1255,7 @@ function function_10739686(var_466a9f43) {
 function function_abdb4498() {
   level flag::set("boss_elemental_storm_cast_in_progress");
   self.var_cc5c4782 = 0;
-  var_a7ddd99 = getent("boss_gravity_spike_stun_area", "targetname");
+  var_a7ddd99 = getEnt("boss_gravity_spike_stun_area", "targetname");
   foreach(player in level.players) {
     player.var_7b3316ec = 0;
     self thread function_e20da5e0(player, var_a7ddd99);
@@ -1485,8 +1485,8 @@ function function_36927923(var_67eb721b, var_ef983cc5, var_ea42537d, var_4a243bd
   if(!isDefined(var_4a243bdd)) {
     var_ba9ce66e = util::spawn_anim_model("c_zom_chomper_boss", var_67eb721b, self.var_40b46e43.angles);
     var_ba9ce66e.e_mover = util::spawn_model("tag_origin", var_67eb721b, self.var_40b46e43.angles);
-    var_ba9ce66e.e_mover enablelinkto();
-    var_ba9ce66e linkto(var_ba9ce66e.e_mover);
+    var_ba9ce66e.e_mover enablelinkTo();
+    var_ba9ce66e linkTo(var_ba9ce66e.e_mover);
     var_ba9ce66e.takedamage = 1;
     self.var_29204bf[var_ea42537d] = var_ba9ce66e;
   } else {
@@ -1503,7 +1503,7 @@ function function_36927923(var_67eb721b, var_ef983cc5, var_ea42537d, var_4a243bd
   var_ba9ce66e.e_mover.origin = var_ba9ce66e.e_mover.origin + (0, 0, randomintrange(int(-51.2), int(51.2)));
   var_ba9ce66e.e_mover.angles = (var_ba9ce66e.e_mover.angles[0] + (randomintrange(-30, 30)), var_ba9ce66e.e_mover.angles[1] + (randomintrange(-45, 45)), var_ba9ce66e.e_mover.angles[2]);
   var_69a783ad = var_ba9ce66e.e_mover.origin + (anglesToForward(var_ba9ce66e.e_mover.angles) * 128);
-  var_ba9ce66e.e_mover moveto(var_69a783ad, 0.6, 0.36, 0.12);
+  var_ba9ce66e.e_mover moveTo(var_69a783ad, 0.6, 0.36, 0.12);
   wait(0.6);
   var_ba9ce66e function_30e15c1e(var_ef983cc5);
 }
@@ -1512,7 +1512,7 @@ function boss_demongate_chomper_despawn() {
   self.b_spawned = 0;
   self clientfield::set("boss_demongate_chomper_fx", 0);
   wait(0.25);
-  self.e_mover moveto(self.origin, 0.1);
+  self.e_mover moveTo(self.origin, 0.1);
   wait(0.15);
   self.e_mover.origin = self.origin - vectorscale((0, 0, 1), 1000);
   self.e_mover scene::stop();
@@ -1585,8 +1585,8 @@ function function_9a0bf5f4() {
     var_c5a0d28e = var_c5a0d28e * var_5d76b65c;
     var_c5a0d28e = var_c5a0d28e * var_4e26e12a;
     var_74490e48 = (var_b710c4e5 + var_c5a0d28e) + var_ef096040;
-    var_ba9ce66e moveto(var_74490e48, n_time, 0, 0);
-    var_ba9ce66e rotateto(vectortoangles(var_74490e48 - var_ba9ce66e.origin), n_time * 0.5, n_time * 0.5);
+    var_ba9ce66e moveTo(var_74490e48, n_time, 0, 0);
+    var_ba9ce66e rotateTo(vectortoangles(var_74490e48 - var_ba9ce66e.origin), n_time * 0.5, n_time * 0.5);
     n_time = n_time * 0.3;
     n_time = (n_time < 0.1 ? 0.1 : n_time);
     wait(n_time);
@@ -1985,7 +1985,7 @@ function function_8a46476() {
     ai.exclude_cleanup_adding_to_total = 1;
     e_player = zm_utility::get_closest_player(s_location.origin);
     v_dir = e_player.origin - s_location.origin;
-    v_dir = vectornormalize(v_dir);
+    v_dir = vectorNormalize(v_dir);
     v_angles = vectortoangles(v_dir);
     s_spawn_location = s_location;
     trace = bulletTrace(s_spawn_location.origin, s_spawn_location.origin + (vectorscale((0, 0, -1), 256)), 0, s_location);

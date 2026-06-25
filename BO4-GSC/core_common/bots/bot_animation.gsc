@@ -18,7 +18,7 @@ play_animation(var_f6550bae) {
   }
 
   animation = self animmappingsearch(astresult[#"animation"]);
-  self animscripted("bot_play_animation", self.origin, self.angles, animation, "server script", undefined, undefined, astresult[#"blend_in_time"], undefined, undefined, 1);
+  self animScripted("bot_play_animation", self.origin, self.angles, animation, "server script", undefined, undefined, astresult[#"blend_in_time"], undefined, undefined, 1);
   self thread function_33f98f4(animation, astresult[#"animation_mocomp"], astresult[#"blend_out_time"]);
 }
 
@@ -35,7 +35,7 @@ function_33f98f4(animation, mocomp, blendout) {
   animlength = getanimlength(animation);
   animtime = self getanimtime(animation) * animlength;
 
-  while(self isplayinganimscripted() && animtime < animinfo.duration) {
+  while(self isplayinganimScripted() && animtime < animinfo.duration) {
     animtime = self getanimtime(animation) * animlength;
     animinfo.status = 1;
     animationstatenetwork::runanimationmocomp(animinfo);
@@ -44,5 +44,5 @@ function_33f98f4(animation, mocomp, blendout) {
 
   animinfo.status = 2;
   animationstatenetwork::runanimationmocomp(animinfo);
-  self stopanimscripted(blendout);
+  self stopanimScripted(blendout);
 }

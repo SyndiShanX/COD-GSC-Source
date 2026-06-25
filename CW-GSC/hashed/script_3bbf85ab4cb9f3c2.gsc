@@ -41,7 +41,7 @@ function init() {
 }
 
 function main() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player initplayer();
   }
 
@@ -120,7 +120,7 @@ function function_72c32279() {
 }
 
 function function_d519e318() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player function_143fa1b9();
@@ -270,7 +270,7 @@ function function_cb7b5503(commit = 1) {
   }
 
   self stats::inc_stat(#"doaglobalstats", #"hash_2ee36cbdfb5f4bc1", 1);
-  self stats::inc_stat(self.doa.var_bcfd90a5, getplayers().size - 1, #"hash_293184ce9f1b2938", 1);
+  self stats::inc_stat(self.doa.var_bcfd90a5, getPlayers().size - 1, #"hash_293184ce9f1b2938", 1);
 
   if(commit) {
     self commitstats();
@@ -978,7 +978,7 @@ function commitstats(gameover) {
 }
 
 function function_47498d07(gameover = 0, var_87786b84 = 0, var_5262eeaf = 0) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(var_87786b84) {
@@ -1027,7 +1027,7 @@ function function_ca76d4a() {
 }
 
 function upload_leaderboards() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {}
 }

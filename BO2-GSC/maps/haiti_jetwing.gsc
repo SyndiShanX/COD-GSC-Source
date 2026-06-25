@@ -118,12 +118,12 @@ jetwing_rumble() {
       wait 0.3;
     } else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
       earthquake(0.15, 0.1, self.origin, 200);
-      level.player playrumbleonentity("pullout_small");
+      level.player playRumbleOnEntity("pullout_small");
       wait 0.2;
     } else if(vr >= 0.8) {
       time = randomfloatrange(0.2, 0.25);
       earthquake(0.2, time, self.origin, 200);
-      level.player playrumbleonentity("pullout_small");
+      level.player playRumbleOnEntity("pullout_small");
       wait(time);
     } else
       wait 0.1;
@@ -137,7 +137,7 @@ jetwing_landing_rumble() {
   for(rumble_time = 16; rumble_time > 0; rumble_time = rumble_time - time) {
     time = randomfloatrange(0.1, 0.15);
     earthquake(0.2, time, self.origin, 200);
-    self playrumbleonentity("pullout_small");
+    self playRumbleOnEntity("pullout_small");
     wait(time);
   }
 }
@@ -156,7 +156,7 @@ jetwing_collision() {
 
     if(isDefined(trace["entity"]) && trace["entity"].classname != "script_vehicle") {
       if(trace["fraction"] < 0.08) {
-        level.player playrumbleonentity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
         screen_fade_out(0);
         missionfailed();
         level.player dodamage(self.health + 1, self.origin);
@@ -287,7 +287,7 @@ ai_jetwing_death() {
   r = randomintrange(100, 300) * -1;
   launch_spot = level.jetwing.origin + fwd * 1500;
   launch_velocity = launch_spot - self.origin;
-  launch_velocity = vectornormalize(launch_velocity) * 500;
+  launch_velocity = vectorNormalize(launch_velocity) * 500;
   self setvehvelocity(launch_velocity);
   self setangularvelocity((0, 0, randomintrange(-360, 360)));
 }
@@ -301,7 +301,7 @@ ai_jetwing_avoid_fire() {
       if(isDefined(missile)) {
         delta = missile.origin - self.origin;
         dist = length(delta);
-        dir = vectornormalize(delta);
+        dir = vectorNormalize(delta);
         angles = self.angles;
         angles = (angles[0], angles[1], 0);
         fwd = anglesToForward(angles);
@@ -388,7 +388,7 @@ ai_landing_jetwing_think2() {
   self.origin = v_desired_pos;
   wait 0.05;
   b_first = 1;
-  player_body = getent("player_body", "targetname");
+  player_body = getEnt("player_body", "targetname");
 
   while(true) {
     v_angles = level.player getplayerangles();
@@ -411,7 +411,7 @@ ai_landing_jetwing_think2() {
     v_delta = v_desired_pos - self.origin;
     v_desired_vel = v_delta / 0.05;
     v_vel = self.velocity;
-    v = vectornormalize(v_desired_vel);
+    v = vectorNormalize(v_desired_vel);
     d = vectordot(v, (0, 0, 1));
 
     if(d != 0 && abs(d) < 0.9) {

@@ -217,7 +217,7 @@ function function_b0edb6ef(var_12ebe63d) {
         currentseglength = distance(path[index - 1], path[index]);
         if((segmentlength + currentseglength) > deviationdistance) {
           remaininglength = deviationdistance - segmentlength;
-          seedposition = (path[index - 1]) + ((vectornormalize(path[index] - (path[index - 1]))) * remaininglength);
+          seedposition = (path[index - 1]) + ((vectorNormalize(path[index] - (path[index - 1]))) * remaininglength);
           recordcircle(seedposition, 2, (1, 0.5, 0), "", self);
           innerzigzagradius = 0;
           outerzigzagradius = 200;
@@ -324,7 +324,7 @@ function function_a1761846(behaviortreeentity) {
   if(behaviortreeentity.team == "team3") {
     return false;
   }
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!isDefined(player.doa)) {
       continue;
@@ -958,7 +958,7 @@ function function_ab6f6263() {
     self.var_58acb0e3 = 1;
     if(isDefined(self.var_96437a17) && self.var_96437a17 && (!(isDefined(self.rising) && self.rising))) {
       idleanim = var_2c143867[randomint(var_2c143867.size)];
-      self animscripted("zombieanim", self.origin, self.angles, idleanim, "normal", %generic::body, 1, 0.3, 0.3);
+      self animScripted("zombieanim", self.origin, self.angles, idleanim, "normal", %generic::body, 1, 0.3, 0.3);
       self waittillmatch("hash_24281fe0");
     } else {
       self setgoal(self.origin, 0);

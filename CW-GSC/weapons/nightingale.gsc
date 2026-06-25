@@ -231,7 +231,7 @@ function function_db24f032() {
   decoy.team = self.team;
   decoy clientfield::set("enemyequip", 1);
   decoy.aitype = #"hash_25454a5a4de341b8";
-  decoy linkto(self);
+  decoy linkTo(self);
 
   if(isDefined(self.originalowner) && isPlayer(self.originalowner)) {
     decoy setowner(self.originalowner);

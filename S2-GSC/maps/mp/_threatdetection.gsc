@@ -365,7 +365,7 @@ func_A576(param_00, param_01, param_02) {
   param_00 unlink();
   param_00.var_0116 = self gettagorigin(param_02);
   param_00.var_001D = self gettagangles(param_02);
-  param_00 linkto(self, param_02);
+  param_00 linkTo(self, param_02);
   wait 0.05;
   playFXOnTag(param_00.var_3F2F, param_00, "tag_origin");
 }
@@ -546,7 +546,7 @@ func_0850(param_00) {
 }
 
 func_45B7(param_00) {
-  return vectornormalize(common_scripts\utility::func_3D5D(param_00));
+  return vectorNormalize(common_scripts\utility::func_3D5D(param_00));
 }
 
 func_63EC() {
@@ -712,7 +712,7 @@ func_9976(param_00) {
       var_08 method_805B();
       var_08.var_0116 = self gettagorigin(var_03[0]);
       var_08.var_001D = self gettagangles(var_03[0]);
-      var_08 linkto(self, var_03[0]);
+      var_08 linkTo(self, var_03[0]);
       var_08.var_3F2F = var_03[1];
       var_01.var_3F3F[var_05] = var_08;
     }

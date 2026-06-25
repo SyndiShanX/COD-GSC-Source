@@ -297,7 +297,7 @@ init_blood_plates() {
 setup_blood_plates(param_00) {
   var_01 = self;
   if(isDefined(self.blood_pool)) {
-    var_01.blood_pool moveto(var_01.blood_pool.var_116 + (0, 0, 30), 0.05);
+    var_01.blood_pool moveTo(var_01.blood_pool.var_116 + (0, 0, 30), 0.05);
   }
 
   var_02 = "flag_plate_filled_" + param_00;
@@ -442,7 +442,7 @@ blood_move_gutters(param_00) {
     return;
   }
 
-  self.blood_pool moveto(self.blood_pool.min_pos + (0, 0, 28 * param_00), 0.05);
+  self.blood_pool moveTo(self.blood_pool.min_pos + (0, 0, 28 * param_00), 0.05);
   self.blood_pool.old_frac = param_00;
 }
 
@@ -715,7 +715,7 @@ pressure_plate_press(param_00) {
   common_scripts\utility::func_3C8F(var_01.pressed_flagname);
   level notify("plate_pressed", var_01.plate_name);
   lib_0378::func_8D74("aud_blood_plate_press", var_01.plate_model);
-  var_01.plate_model moveto(var_01.model_start_origin + (0, 0, -5), 1, 0.25, 0.25);
+  var_01.plate_model moveTo(var_01.model_start_origin + (0, 0, -5), 1, 0.25, 0.25);
   wait(1);
 }
 
@@ -725,7 +725,7 @@ pressure_plate_release() {
   common_scripts\utility::func_3C7B(var_00.pressed_flagname);
   level notify("plate_unpressed", var_00.plate_name);
   lib_0378::func_8D74("aud_blood_plate_release", var_00.plate_model);
-  var_00.plate_model moveto(var_00.model_start_origin, 1, 0.25, 0.25);
+  var_00.plate_model moveTo(var_00.model_start_origin, 1, 0.25, 0.25);
   wait(1);
 }
 
@@ -837,7 +837,7 @@ text_log_player_near_or_looking(param_00, param_01) {
   var_03 = param_00 getEye();
   var_04 = param_00 geteyeangles();
   var_05 = anglesToForward(var_04);
-  var_06 = vectornormalize(param_01.var_116 - var_03);
+  var_06 = vectorNormalize(param_01.var_116 - var_03);
   if(vectordot(var_05, var_06) > 0.766) {
     return 1;
   }
@@ -1317,7 +1317,7 @@ assign_collision_handling(param_00, param_01, param_02) {
 
 assign_door_collision_node(param_00, param_01) {
   var_02 = spawnStruct();
-  var_02.var_116 = getclosestpointonnavmesh(param_00.var_116 + pow(-1, !common_scripts\utility::func_562E(param_01)) * 32 * vectornormalize(anglestoright(param_00.var_1D)));
+  var_02.var_116 = getclosestpointonnavmesh(param_00.var_116 + pow(-1, !common_scripts\utility::func_562E(param_01)) * 32 * vectorNormalize(anglestoright(param_00.var_1D)));
   self.var_A048 = common_scripts\utility::func_F6F(self.var_A048, var_02);
 }
 

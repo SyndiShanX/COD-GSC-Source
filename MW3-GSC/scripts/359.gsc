@@ -303,7 +303,7 @@ _id_206E() {
     self allowedstances("stand", "crouch", "prone");
     self._id_117F = 0;
     self._id_1199 = 0;
-    self stopanimscripted();
+    self stopanimScripted();
     self notify("stop_animmode");
     self._id_206F = undefined;
     self.goalradius = level._id_2070;
@@ -424,7 +424,7 @@ _id_2076() {
   self.goalradius = 4;
   self.allowdeath = 1;
   var_0 = _id_2078();
-  var_1 = vectornormalize(self.origin - self._id_206C.origin);
+  var_1 = vectorNormalize(self.origin - self._id_206C.origin);
   var_2 = anglestoright(self._id_206C.angles);
   var_3 = "left";
 

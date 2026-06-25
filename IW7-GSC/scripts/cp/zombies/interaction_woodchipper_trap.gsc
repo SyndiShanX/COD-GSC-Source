@@ -134,7 +134,7 @@ suck_zombie(var_0, var_1) {
   wait(randomfloatrange(0, 1));
   var_4 = 4096;
   while(distancesquared(self.origin, var_3.origin) > var_4) {
-    self setvelocity(vectornormalize(var_3.origin - self.origin) * 150 + (0, 0, 30));
+    self setvelocity(vectorNormalize(var_3.origin - self.origin) * 150 + (0, 0, 30));
     wait(0.05);
   }
 
@@ -149,9 +149,9 @@ suck_zombie(var_0, var_1) {
   self.precacheleaderboards = 1;
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
-  self.anchor rotateto((-90, 0, 0), 0.2);
-  self.anchor moveto(var_2.origin, 0.5);
+  self linkTo(self.anchor);
+  self.anchor rotateTo((-90, 0, 0), 0.2);
+  self.anchor moveTo(var_2.origin, 0.5);
   wait(0.5);
   playFX(level._effect["woodchipper_entry"], self.origin, anglesToForward((0, 0, 0)), anglestoup((0, 0, 0)));
   self.anchor delete();

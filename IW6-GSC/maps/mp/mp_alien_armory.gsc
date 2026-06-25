@@ -200,7 +200,7 @@ spider_initial_intro() {
   thread maps\mp\mp_alien_armory_vignettes::first_spider_fence();
   maps\mp\agents\_scriptedagents::playanimnatrateuntilnotetrack("spawn", 0, 1.0, "spawn", "end");
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(4096);
+  self scragentsetgoalRadius(4096);
   self waittill("goal_reached");
 }
 
@@ -220,7 +220,7 @@ debris_fx() {
 
 spider_play_snow_debris_anim() {
   wait 2.66;
-  var_0 = getent("snow_debris_static", "targetname");
+  var_0 = getEnt("snow_debris_static", "targetname");
   var_1 = getscriptablearray("snow_debris", "targetname");
 
   foreach(var_3 in var_1) {
@@ -230,7 +230,7 @@ spider_play_snow_debris_anim() {
   var_0 delete();
 
   if(maps\mp\_utility::is_gen4()) {
-    var_5 = common_scripts\utility::getstruct("spider_blocker_01", "targetname");
+    var_5 = common_scripts\utility::getStruct("spider_blocker_01", "targetname");
     playFX(level._effect["spider_reveal_dense_particles"], var_5.origin, (1, 0, 0), (0, 0, 1));
   }
 
@@ -345,7 +345,7 @@ human_notetracks(var_0, var_1, var_2, var_3) {}
 
 setup_first_spider() {
   level endon("first_spider_fight_skipped");
-  var_0 = common_scripts\utility::getstruct("spider_blocker_01", "targetname");
+  var_0 = common_scripts\utility::getStruct("spider_blocker_01", "targetname");
   var_0.retreatstate = "retreat";
   var_0.retreatindex = 0;
   level.spider = spawn_spider(var_0.origin, var_0.angles);
@@ -382,13 +382,13 @@ spider_start_cycle(var_0) {
 }
 
 link_spider_collision() {
-  var_0 = getent("spider_collision_00", "targetname");
+  var_0 = getEnt("spider_collision_00", "targetname");
   var_0.originalorigin = var_0.origin;
   var_0.originalangles = var_0.angles;
   var_0.origin = self.origin;
   var_0.angles = self.angles;
   self.collision_brush = var_0;
-  var_0 linkto(self);
+  var_0 linkTo(self);
 }
 
 unlink_spider_collision() {
@@ -401,12 +401,12 @@ unlink_spider_collision() {
 }
 
 disconnect_snow_paths() {
-  var_0 = getent("spider_mound_clip", "targetname");
-  var_0 disconnectpaths();
+  var_0 = getEnt("spider_mound_clip", "targetname");
+  var_0 disconnectPaths();
 }
 
 connect_snow_paths() {
-  var_0 = getent("spider_mound_clip", "targetname");
+  var_0 = getEnt("spider_mound_clip", "targetname");
   var_0 hide();
   var_0 connectpaths();
   var_0 delete();
@@ -581,12 +581,12 @@ third_spider_fight() {
   maps\mp\alien\_gamescore::reset_encounter_performance();
   level.encounter_name = "final_spider_fight";
   level notify("final_spider_fight");
-  var_1 = common_scripts\utility::getstruct("spider_ending_01", "targetname");
+  var_1 = common_scripts\utility::getStruct("spider_ending_01", "targetname");
   var_1.retreatstate = "retreat";
   var_1.retreatindex = 3;
   maps\mp\mp_alien_armory_vignettes::spider_entrance_c();
   level.spider.retreatstruct = var_1;
-  level.spider.elevatedretreatstruct = common_scripts\utility::getstruct("spider_ending_retreat_01", "targetname");
+  level.spider.elevatedretreatstruct = common_scripts\utility::getStruct("spider_ending_retreat_01", "targetname");
   level.spider link_spider_collision();
   level thread spider_start_cycle(2);
   var_2 = gettime();
@@ -702,7 +702,7 @@ spawn_second_spider_in_third_fight(var_0) {
     wait 0.05;
   }
 
-  var_2 = common_scripts\utility::getstruct("spider_ending_02", "targetname");
+  var_2 = common_scripts\utility::getStruct("spider_ending_02", "targetname");
   var_2.retreatstate = "retreat";
   var_2.retreatindex = 3;
   var_3 = spawn_spider(var_2.origin.spawn_struct.angles);
@@ -768,7 +768,7 @@ last_facility_hive() {
 }
 
 watch_spider_fight_trigger() {
-  var_0 = getent("archer_escape", "targetname");
+  var_0 = getEnt("archer_escape", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("start_spider_encounter");
 }
@@ -1079,24 +1079,24 @@ mp_alien_armory_intermission_func() {
   self.anchor = spawn("script_model", self.origin);
   self.anchor.angles = var_1.angles;
   self.anchor setModel("tag_origin");
-  self cameralinkto(self.anchor, "tag_origin");
+  self cameralinkTo(self.anchor, "tag_origin");
   common_scripts\utility::waitframe();
 
   if(!isDefined(var_1.target)) {
     return;
   }
-  var_2 = common_scripts\utility::getstruct(var_1.target, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_1.target, "targetname");
 
   for(;;) {
-    self.anchor moveto(var_2.origin, 25);
-    self.anchor rotateto(var_2.angles, 25);
+    self.anchor moveTo(var_2.origin, 25);
+    self.anchor rotateTo(var_2.angles, 25);
     wait 25;
 
     if(!isDefined(var_2.target)) {
       break;
     }
 
-    var_2 = common_scripts\utility::getstruct(var_2.target, "targetname");
+    var_2 = common_scripts\utility::getStruct(var_2.target, "targetname");
   }
 }
 
@@ -1134,7 +1134,7 @@ create_dropped_pillage_item(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnStruct();
   var_5.pillage_trigger = spawn("script_model", self.origin);
   var_5.pillage_trigger setModel(var_1);
-  var_5.pillage_trigger setcursorhint("HINT_NOICON");
+  var_5.pillage_trigger setCursorHint("HINT_NOICON");
 
   if(maps\mp\alien\_utility::alien_mode_has("outline")) {
     maps\mp\alien\_outline_proto::add_to_outline_pillage_watch_list(var_5.pillage_trigger, 0);
@@ -1152,7 +1152,7 @@ create_dropped_pillage_item(var_0, var_1, var_2, var_3, var_4) {
   var_6.count = var_2;
   var_7 = var_6 get_string_for_hintstring();
   var_8 = maps\mp\alien\_pillage::get_hintstring_for_item_pickup(var_7);
-  var_5.pillage_trigger sethintstring(var_8);
+  var_5.pillage_trigger setHintString(var_8);
   var_5.pillage_trigger makeusable();
   var_5.pillageinfo = spawnStruct();
   var_5.pillageinfo.type = var_0;
@@ -1172,7 +1172,7 @@ create_dropped_pillage_item(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_9 = common_scripts\utility::drop_to_ground(var_5.pillage_trigger.origin);
-  var_5.pillage_trigger moveto(var_9 + (0, 0, 4), 0.75);
+  var_5.pillage_trigger moveTo(var_9 + (0, 0, 4), 0.75);
   var_5 thread maps\mp\alien\_pillage::pillage_spot_think();
   var_5.enabled = 1;
   var_5.searched = 1;
@@ -1278,7 +1278,7 @@ force_all_players_in_final_area() {
 
   level thread teleport_dog_tags();
   wait 3;
-  var_8 = getent("final_battle_player_check", "targetname");
+  var_8 = getEnt("final_battle_player_check", "targetname");
 
   foreach(var_3 in level.players) {
     if(isalive(var_3) && var_3 istouching(var_8)) {
@@ -1309,7 +1309,7 @@ teleport_dog_tags() {
 }
 
 should_teleport_player() {
-  var_0 = getent("final_battle_player_check", "targetname");
+  var_0 = getEnt("final_battle_player_check", "targetname");
 
   if(isDefined(self.being_teleported)) {
     return 0;
@@ -1341,14 +1341,14 @@ teleport_player_to_final_area(var_0) {
   wait 1;
   self cancelmantle();
   self dontinterpolate();
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   self setplayerangles(var_0.angles);
   self notify("teleport_finished");
 }
 
 do_teleport_messaging() {
   self endon("death");
-  var_0 = getent("final_battle_player_check", "targetname");
+  var_0 = getEnt("final_battle_player_check", "targetname");
   self iprintlnbold(&"MP_ALIEN_ARMORY_TELEPORT_PLAYER");
   wait 1;
 
@@ -1493,45 +1493,45 @@ move_box_models() {
 }
 
 move_player256x256x8() {
-  var_0 = getent("player256x256x8", "targetname");
+  var_0 = getEnt("player256x256x8", "targetname");
   var_1 = spawn("script_model", (-3440, -5001, 860));
   var_1.angles = (270, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 move_player256x256x128() {
-  var_0 = getent("player256x256x128", "targetname");
+  var_0 = getEnt("player256x256x128", "targetname");
   var_1 = spawn("script_model", (-4084, -5168, 860));
   var_1.angles = (270, 270, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 move_player512x512x8() {
-  var_0 = getent("player512x512x8", "targetname");
+  var_0 = getEnt("player512x512x8", "targetname");
   var_1 = spawn("script_model", (-3700, -5048, 984));
   var_1.angles = (270, 270, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 move_clip512x512x8() {
-  var_0 = getent("player512x512x8", "targetname");
+  var_0 = getEnt("player512x512x8", "targetname");
   var_1 = spawn("script_model", (-2828, -5128, 1072));
   var_1.angles = (270, 180, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 move_clip256x256x8() {
-  var_0 = getent("player256x256x8", "targetname");
+  var_0 = getEnt("player256x256x8", "targetname");
   var_1 = spawn("script_model", (-2692, -5162, 938));
   var_1.angles = (270, 90, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 move_clip256x256x128() {
-  var_0 = getent("clip256x256x128", "targetname");
+  var_0 = getEnt("clip256x256x128", "targetname");
   var_0.origin = (-2570, -5172, 938);
   var_0.angles = (270, 0, 0);
-  var_0 disconnectpaths();
+  var_0 disconnectPaths();
 }
 
 set_end_cam_position() {
@@ -1606,14 +1606,14 @@ set_hardcore_extinction_spawn_table() {
 }
 
 move_clip_brush_checkpoint_lakeside() {
-  var_0 = getent("player512x512x8", "targetname");
+  var_0 = getEnt("player512x512x8", "targetname");
   var_1 = spawn("script_model", (-1414, -6356, 650));
   var_1.angles = (270, 0, 0);
   var_1 clonebrushmodeltoscriptmodel(var_0);
 }
 
 move_clip_brush_checkpoint_lakeside_boxes() {
-  var_0 = getent("player128x128x8", "targetname");
+  var_0 = getEnt("player128x128x8", "targetname");
   var_1 = spawn("script_model", (-1554, -5942, 892));
   var_1.angles = (270.5, 6.19994, -89.9999);
   var_1 clonebrushmodeltoscriptmodel(var_0);

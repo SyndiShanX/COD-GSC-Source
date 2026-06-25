@@ -271,7 +271,7 @@ function player_exit_beastmode(name, trigger) {
 }
 
 function wait_and_appear(no_ignore) {
-  self setorigin(self.beast_mode_return_origin);
+  self setOrigin(self.beast_mode_return_origin);
   self freezecontrols(1);
   v_return_pos = self.beast_mode_return_origin + vectorscale((0, 0, 1), 60);
   a_ai = getaiteamarray(level.zombie_team);
@@ -577,7 +577,7 @@ function function_92acebd3() {
   self endon("player_exit_beastmode");
   self endon("death");
   self waittill("player_did_a_revive");
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   wait(1.5);
   self player_take_mana(1);
   self notify("altbody_end");
@@ -719,12 +719,12 @@ function player_check_grenades() {
 
 function watch_round_start_mana() {
   level waittill("start_of_round");
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player player_check_grenades();
   }
   while(true) {
     level waittill("start_of_round");
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!(isDefined(player.beastmode) && player.beastmode)) {
         player player_give_mana(1);
       }
@@ -853,7 +853,7 @@ function player_beast_melee_juke(weapon) {
   self endon("weapon_melee_charge");
   start_time = gettime();
   while((start_time + 3000) > gettime()) {
-    self playrumbleonentity("zod_beast_juke");
+    self playRumbleOnEntity("zod_beast_juke");
     wait(0.1);
   }
 }
@@ -868,7 +868,7 @@ function trigger_melee_only() {
   self endon("death");
   level flagsys::wait_till("start_zombie_round_logic");
   if(isDefined(self.target)) {
-    target = getent(self.target, "targetname");
+    target = getEnt(self.target, "targetname");
     if(isDefined(target)) {
       target enableaimassist();
     }
@@ -1051,7 +1051,7 @@ function player_beast_grapple_rumble(weapon, rumble, length) {
   self endon("grapple_cancel");
   start_time = gettime();
   while((start_time + 3000) > gettime()) {
-    self playrumbleonentity(rumble);
+    self playRumbleOnEntity(rumble);
     wait(length);
   }
 }
@@ -1089,14 +1089,14 @@ function player_watch_grappled_object() {
     self waittill("grapple_stick", weapon, target);
     if(weapon == grapple) {
       self notify("grapplable_grappled");
-      self playrumbleonentity("zod_beast_grapple_hit");
+      self playRumbleOnEntity("zod_beast_grapple_hit");
       if(isDefined(target)) {
         if(isDefined(target.is_zombie) && target.is_zombie) {
           target zombie_gets_pulled(self);
         }
       }
       level notify("grapple_hit", target, self, isDefined(self.pivotentity) && !isPlayer(self.pivotentity));
-      playsoundatposition("wpn_beastmode_grapple_imp", target.origin);
+      playSoundAtPosition("wpn_beastmode_grapple_imp", target.origin);
     }
   }
 }
@@ -1124,7 +1124,7 @@ function player_watch_grapple_landing(origin) {
   self endon("player_watch_grapple_landing");
   self waittill("grapple_landed", weapon, target);
   if(distance2dsquared(self.origin, origin) > 1024) {
-    self setorigin(origin + (vectorscale((0, 0, -1), 60)));
+    self setOrigin(origin + (vectorscale((0, 0, -1), 60)));
   }
 }
 
@@ -1160,11 +1160,11 @@ function player_kill_grappled_zombies() {
 function zombie_gets_pulled(player) {
   self.grapple_is_fatal = 1;
   zombie_to_player = player.origin - self.origin;
-  zombie_to_player_2d = vectornormalize((zombie_to_player[0], zombie_to_player[1], 0));
+  zombie_to_player_2d = vectorNormalize((zombie_to_player[0], zombie_to_player[1], 0));
   zombie_forward = anglesToForward(self.angles);
-  zombie_forward_2d = vectornormalize((zombie_forward[0], zombie_forward[1], 0));
+  zombie_forward_2d = vectorNormalize((zombie_forward[0], zombie_forward[1], 0));
   zombie_right = anglestoright(self.angles);
-  zombie_right_2d = vectornormalize((zombie_right[0], zombie_right[1], 0));
+  zombie_right_2d = vectorNormalize((zombie_right[0], zombie_right[1], 0));
   dot = vectordot(zombie_to_player_2d, zombie_forward_2d);
   if(dot >= 0.5) {
     self.grapple_direction = "front";
@@ -1220,7 +1220,7 @@ function lightning_zombie_damage_response(mod, hit_location, hit_origin, player,
   }
   if(weapon === getweapon("zombie_beast_grapple_dwr")) {
     if(amount > 0 && isDefined(player)) {
-      player playrumbleonentity("damage_heavy");
+      player playRumbleOnEntity("damage_heavy");
       earthquake(1, 0.75, player.origin, 100);
     }
     return true;
@@ -1276,7 +1276,7 @@ function beast_mode_death_watch(attacker) {
       if(self.damagemod === "MOD_MELEE") {
         player = self.attacker;
         if(isDefined(player)) {
-          player playrumbleonentity("damage_heavy");
+          player playRumbleOnEntity("damage_heavy");
           earthquake(1, 0.75, player.origin, 100);
         }
         self clientfield::set("bm_zombie_grapple_kill", 1);
@@ -1284,7 +1284,7 @@ function beast_mode_death_watch(attacker) {
       } else {
         player = self.attacker;
         if(isDefined(player)) {
-          player playrumbleonentity("damage_heavy");
+          player playRumbleOnEntity("damage_heavy");
           earthquake(1, 0.75, player.origin, 100);
         }
         self clientfield::set("bm_zombie_melee_kill", 1);
@@ -1420,7 +1420,7 @@ function beastmode_devgui() {
   adddebugcommand("");
   adddebugcommand("");
   adddebugcommand("");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     ip1 = i + 1;
     adddebugcommand(((("" + players[i].name) + "") + ip1) + "");
@@ -1429,7 +1429,7 @@ function beastmode_devgui() {
 }
 
 function beastmode_devgui_callback(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
   switch (cmd) {
     case "": {

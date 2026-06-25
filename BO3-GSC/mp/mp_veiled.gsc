@@ -45,13 +45,13 @@ function rocket_launch() {
   wait(var_c6821b9b + var_810de4c4);
   var_13d61abf = struct::get("tag_align_rocket_2", "targetname");
   var_13d61abf thread scene::play("p7_fxanim_mp_veiled_rocket_launch_2");
-  playsoundatposition("evt_rocket_launch_01", (-4313, 623, 316));
+  playSoundAtPosition("evt_rocket_launch_01", (-4313, 623, 316));
   wait(var_7b825480);
   var_a1ceab84 = struct::get("tag_align_rocket_1", "targetname");
   var_a1ceab84 thread scene::play("p7_fxanim_mp_veiled_rocket_launch_1");
-  playsoundatposition("evt_rocket_launch_01", (-4313, 623, 316));
+  playSoundAtPosition("evt_rocket_launch_01", (-4313, 623, 316));
   wait(var_da509659);
   var_edd3a056 = struct::get("tag_align_rocket_3", "targetname");
   var_edd3a056 thread scene::play("p7_fxanim_mp_veiled_rocket_launch_3");
-  playsoundatposition("evt_rocket_launch_01", (-3696, -2879, 322));
+  playSoundAtPosition("evt_rocket_launch_01", (-3696, -2879, 322));
 }

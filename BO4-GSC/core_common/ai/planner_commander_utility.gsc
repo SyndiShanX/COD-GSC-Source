@@ -798,7 +798,7 @@ _updatehistoricalgameobjects(commander) {
 
 daemonupdateclients(commander) {
   team = blackboard::getstructblackboardattribute(commander, #"team");
-  clients = getplayers(team);
+  clients = getPlayers(team);
   doppelbots = [];
   players = [];
   vehicles = [];
@@ -1100,7 +1100,7 @@ daemonupdateobjective(commander) {
       if(isDefined(objective.m_a_player_game_obj) && objective.m_a_player_game_obj.size > 0) {
         currentbreadcrumb = 0;
         furthestobjective = undefined;
-        teamplayers = getplayers(commanderteam);
+        teamplayers = getPlayers(commanderteam);
 
         foreach(player in teamplayers) {
           playerentitynumber = player getentitynumber();

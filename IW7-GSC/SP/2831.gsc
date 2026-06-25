@@ -340,7 +340,7 @@ func_48B2(var_0, var_1, var_2) {
     var_7 = "allies";
   }
 
-  var_8 = spawnvehicle(var_6, var_0.target + "_chase", "jackal_un", var_4, var_5);
+  var_8 = spawnVehicle(var_6, var_0.target + "_chase", "jackal_un", var_4, var_5);
   var_8.script_team = var_0.script_team;
   var_8.origin = var_0.origin;
   var_8.angles = var_0.angles;
@@ -364,7 +364,7 @@ func_48B2(var_0, var_1, var_2) {
   var_8.var_B921 = var_10;
   var_11 = 1000;
   var_1 = (randomint(var_11), randomint(500), randomint(var_11));
-  var_10 linkto(var_8, "tag_origin", var_1, (0, 0, 0));
+  var_10 linkTo(var_8, "tag_origin", var_1, (0, 0, 0));
   var_8 thread lib_0BDC::func_A342(var_3);
   var_8 waittill("death");
   var_10 delete();
@@ -421,7 +421,7 @@ func_4958(var_0) {
   }
 
   var_2 = (var_3, var_4, var_2[2]);
-  var_1 linkto(self, "tag_origin", var_2, (0, 0, 0));
+  var_1 linkTo(self, "tag_origin", var_2, (0, 0, 0));
   self waittill("death");
   if(isDefined(var_1)) {
     var_1 delete();
@@ -515,7 +515,7 @@ func_1A01() {
 func_19FF(var_0) {
   var_1 = self;
   if(isDefined(var_0)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   }
 
   if(var_1 func_9B57()) {
@@ -770,7 +770,7 @@ func_1A00(var_0) {
 func_19FE(var_0) {
   var_1 = self;
   if(isDefined(var_0)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   }
 
   if(!var_1 func_9B57()) {
@@ -822,7 +822,7 @@ func_39BC() {
       switch (var_4) {
         case "start_entry":
           var_0 = scripts\engine\utility::spawn_tag_origin();
-          var_0 linkto(self, "fx_entryburn_1", (0, 0, 0), (0, 0, 0));
+          var_0 linkTo(self, "fx_entryburn_1", (0, 0, 0), (0, 0, 0));
           playFXOnTag(scripts\engine\utility::getfx("enemy_entry_fireball_base_a"), var_0, "tag_origin");
           break;
 

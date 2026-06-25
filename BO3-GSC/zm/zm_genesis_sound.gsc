@@ -178,17 +178,17 @@ function function_d75eac4e() {
   self zm_unitrigger::create_unitrigger(undefined, 35);
   while(true) {
     self waittill("trigger_activated");
-    playsoundatposition(self.script_sound, self.origin);
+    playSoundAtPosition(self.script_sound, self.origin);
     wait(200);
   }
 }
 
 function function_44448bcb() {
   var_bc15748 = spawn("trigger_radius_use", self.origin, 0, 100, 100);
-  var_bc15748 sethintstring("");
-  var_bc15748 setcursorhint("HINT_NOICON");
-  var_bc15748 triggerignoreteam();
-  var_bc15748 usetriggerrequirelookat();
+  var_bc15748 setHintString("");
+  var_bc15748 setCursorHint("HINT_NOICON");
+  var_bc15748 triggerIgnoreTeam();
+  var_bc15748 useTriggerRequireLookAt();
   var_bc15748 waittill("trigger");
   var_bc15748 playSound(self.script_sound);
   wait(120);
@@ -372,7 +372,7 @@ function function_97997a8c(perk_machine, var_326ccfe3, var_3628045a) {
   perk_machine.var_1afc1154 = 1;
   perk_machine stopsound(perk_machine.str_jingle_alias);
   perk_machine playSound("vox_lyrics_bump");
-  playsoundatposition(var_3628045a, var_326ccfe3.origin);
+  playSoundAtPosition(var_3628045a, var_326ccfe3.origin);
   wait(60);
   perk_machine.var_1afc1154 = 0;
   perk_machine.sndjinglecooldown = 0;

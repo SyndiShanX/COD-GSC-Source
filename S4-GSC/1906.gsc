@@ -217,7 +217,7 @@ _id_9EF0() {
   var_1 = self.origin + (0, 0, self._id_3B73._id_90F9);
   var_2 = self._id_3B73._id_9102;
   var_3 = self._id_3B73._id_9102 + 0.1;
-  var_0 moveto(var_1, var_3, 0, var_2);
+  var_0 moveTo(var_1, var_3, 0, var_2);
   var_0 rotatevelocity((0, 1100, 32), var_3, 0, var_2);
   var_0 thread _id_B8F6();
   wait(var_2);
@@ -249,8 +249,8 @@ _id_9ECE() {
   }
 
   var_0 = self.origin + (0, 0, 64);
-  self moveto(var_0, 0.7, 0, 0.65);
-  self.killcament moveto(var_0 + self._id_8D6B, 0.7, 0, 0.65);
+  self moveTo(var_0, 0.7, 0, 0.65);
+  self.killcament moveTo(var_0 + self._id_8D6B, 0.7, 0, 0.65);
   self rotatevelocity((0, 750, 32), 0.7, 0, 0.65);
   thread _id_B8F6();
   wait 0.65;
@@ -2037,7 +2037,7 @@ _id_4D61(var_0, var_1, var_2) {
 
       var_11 = anglesToForward(var_7 getplayerangles());
       var_12 = var_0 - var_8;
-      var_12 = vectornormalize(var_12);
+      var_12 = vectorNormalize(var_12);
       var_13 = 0.5 * (1.0 + vectordot(var_11, var_12));
       var_14 = 1;
       var_7 notify("flashbang", var_0, var_10, var_13, var_1, var_14);
@@ -2262,7 +2262,7 @@ _id_9EE1(var_0) {
 
   if(isDefined(var_0)) {
     var_2 _meth_80DB();
-    var_2 linkto(var_0);
+    var_2 linkTo(var_0);
   }
 
   self._id_42E1 = var_2;
@@ -2563,7 +2563,7 @@ _id_F1BE(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_2 setorigin(var_1.origin, !var_3);
+  var_2 setOrigin(var_1.origin, !var_3);
   var_2 setplayerangles(var_12);
   _id_F1BF(var_2, var_1);
 }
@@ -2571,8 +2571,8 @@ _id_F1BE(var_0, var_1, var_2, var_3) {
 _id_F1C0(var_0, var_1) {
   var_2 = var_1.origin - var_0.origin;
   var_3 = var_0.origin + (0, 0, 32);
-  var_4 = vectornormalize(var_2);
-  var_5 = vectornormalize(_func_025B(var_2, (0, 0, 1)));
+  var_4 = vectorNormalize(var_2);
+  var_5 = vectorNormalize(_func_025B(var_2, (0, 0, 1)));
   var_6 = _func_025B(var_5, var_4);
   var_7 = _func_0017(var_4, var_5, var_6);
   var_8 = 0;
@@ -2785,7 +2785,7 @@ _id_9EF5(var_0, var_1, var_2, var_3) {
     var_5["normal"] = var_5["normal"] * -1;
   }
 
-  var_7 = vectornormalize(var_5["normal"]);
+  var_7 = vectorNormalize(var_5["normal"]);
   var_8 = vectortoangles(var_7);
   var_8 = var_8 + (90, 0, 0);
   var_9 = [[var_2]](var_6, var_0, var_1, var_8);
@@ -2929,7 +2929,7 @@ _id_3829(var_0) {
 
   if(isDefined(var_0)) {
     var_1 _meth_80DB();
-    var_1 linkto(var_0);
+    var_1 linkTo(var_0);
   }
 
   thread _id_4777(var_1);
@@ -2998,7 +2998,7 @@ _id_DAF9(var_0) {
     return 0;
   }
 
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_5 = vectordot(var_2, var_3);
   return var_5 > level._id_3825;
 }
@@ -3152,7 +3152,7 @@ _id_10AAB() {
   self.owner endon("disconnect");
   var_0 = self.owner;
   var_1 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   thread _id_5334();
   self endon("end_explode");
   self waittill("explode", var_2);
@@ -3325,14 +3325,14 @@ _id_3A09() {
   }
 
   var_7 = spawn("script_model", self.origin);
-  var_7 linkto(self);
+  var_7 linkTo(self);
   var_7 setModel("tag_origin");
   var_7 _meth_8375("explosive");
   var_7 thread _id_43E2(self, var_3 + 5);
   var_7 thread _id_ADA1(self.owner);
   var_7._id_F170 = self._id_F170;
   var_8 = var_0 scripts\cp\utility::_id_0C48("cluster_grenade_indicator_mp", self.origin, (0, 0, 0));
-  var_8 linkto(self);
+  var_8 linkTo(self);
   var_8 thread _id_43E2(self, var_3);
   var_8 thread _id_ADA1(self.owner);
   thread scripts\cp\utility::_id_A695("death", "end_explode");
@@ -4149,9 +4149,9 @@ _id_49CD(var_0) {
   if(!scripts\cp_mp\utility\player_utility::_isalive()) {
     return;
   }
-  var_1 = vectornormalize(anglesToForward(self.angles));
-  var_2 = vectornormalize(anglestoright(self.angles));
-  var_3 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(anglesToForward(self.angles));
+  var_2 = vectorNormalize(anglestoright(self.angles));
+  var_3 = vectorNormalize(var_0 - self.origin);
   var_4 = vectordot(var_3, var_1);
   var_5 = vectordot(var_3, var_2);
   var_6 = ["death", "damage"];
@@ -5172,7 +5172,7 @@ _id_A0FF(var_0, var_1, var_2, var_3, var_4, var_5) {
     self waittill("damage", var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20);
 
     if(var_5) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
 
     if(isDefined(self._id_77E7) && self._id_77E7 == "littlebird") {
@@ -5416,7 +5416,7 @@ _id_558D(var_0, var_1) {
   self endon("spawned_player");
   self endon("disconnect");
   self endon("equipmentWatchUse");
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
   self.trigger _id_0728::_id_D549(self.weapon_name);
   self.trigger scripts\cp\utility::_id_D6C2(var_0);
   self.trigger thread scripts\cp\utility::_id_A6C3(var_0);
@@ -6181,11 +6181,11 @@ _id_74CB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     var_14 = anglestoup(var_1.angles);
     var_15 = _func_025B(var_13, var_14);
     var_16 = scripts\engine\utility::spawn_tag_origin(var_3, _func_0017(var_13, var_15, var_14));
-    var_16 moveto(var_9, var_12);
+    var_16 moveTo(var_9, var_12);
     var_17 = _func_0212(var_2, var_5, var_6, var_7);
     var_17.origin = var_16.origin;
     var_17.angles = var_16.angles;
-    var_17 linkto(var_16);
+    var_17 linkTo(var_16);
     thread _id_B227(var_9, var_1);
     thread _id_7D5C(var_2, var_16, var_12 + 0.05, var_17);
   }
@@ -6762,7 +6762,7 @@ _id_5CD7(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -7426,7 +7426,7 @@ _id_DE4E(var_0, var_1) {
   var_2 = scripts\cp\cp_outline_utility::_id_110A(var_0, 330);
   var_3 = spawn("script_model", var_0);
   var_3 show();
-  var_4 = getent("smoke_grenade_sight_clip_256", "targetname");
+  var_4 = getEnt("smoke_grenade_sight_clip_256", "targetname");
 
   if(isDefined(var_4)) {
     level notify("grenade_exploded_during_stealth", var_3, "smoke_grenade_mp", var_1);

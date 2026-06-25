@@ -9,7 +9,7 @@ init() {
   level.active_mini_ufo_trap["beam"] = 0;
   level.active_mini_ufo_trap["blackhole"] = 0;
   level.active_mini_ufo_trap["rocket"] = 0;
-  var_0 = getent("pap_room_mini_ufo_trigger", "targetname");
+  var_0 = getEnt("pap_room_mini_ufo_trigger", "targetname");
   var_1 = scripts\engine\utility::getStructArray("pap_room_mini_ufos", "targetname");
   var_0.miniufos = [];
   level thread waitforplayertriggered(var_0);
@@ -95,7 +95,7 @@ getminiufopath(var_0, var_1) {
 
     var_1.path[var_1.path.size] = var_4;
     if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == "mini_ufo_teleport_to_center") {
-      var_3 = scripts\engine\utility::getstruct("mini_ufo_center_struct", "targetname");
+      var_3 = scripts\engine\utility::getStruct("mini_ufo_center_struct", "targetname");
     }
 
     var_2 = var_4;
@@ -175,7 +175,7 @@ spawnuniversaldangerzone(var_0, var_1) {
     } else {
       var_6 = get_move_rate(var_0, var_2.origin, var_3.origin, var_4);
       thread changeangledelay(var_0, var_6, var_5, var_2, var_3);
-      var_0 moveto(var_3.origin, var_6);
+      var_0 moveTo(var_3.origin, var_6);
       var_0 waittill("movedone");
       if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "mini_ufo_ready") {
         var_4 = 150;
@@ -197,7 +197,7 @@ update_ufo_angles(var_0, var_1) {
 
     var_0 waittill("next_position_found", var_2, var_3);
     var_4 = vectortoangles(var_3.origin - var_2.origin) + (180, 0, 0);
-    var_0 rotateto(var_4, 0.5, 0.05, 0.05);
+    var_0 rotateTo(var_4, 0.5, 0.05, 0.05);
   }
 }
 
@@ -236,7 +236,7 @@ startrotationwhenneargoal(var_0, var_1, var_2) {
   }
 
   wait(var_3);
-  var_0 rotateto(var_2, var_4, 0.05, 0.05);
+  var_0 rotateTo(var_2, var_4, 0.05, 0.05);
 }
 
 get_move_rate(var_0, var_1, var_2, var_3) {

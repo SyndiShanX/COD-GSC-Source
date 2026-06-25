@@ -161,7 +161,7 @@ function function_657f1d1(s_stub, str_zone, var_6d359b2e, var_db6533 = 0) {
   nd_end = getvehiclenode("apothicon_spline_" + s_stub.name, "targetname");
   var_413ea50f = vehicle::spawn(undefined, "player_vehicle", "flinger_vehicle", self.origin, self.angles);
   self playerlinktodelta(var_413ea50f);
-  self playrumbleonentity("zm_castle_flinger_launch");
+  self playRumbleOnEntity("zm_castle_flinger_launch");
   self clientfield::set_to_player("flinger_flying_postfx", 1);
   self thread zm_genesis_flingers::function_c1f1756a();
   var_413ea50f setignorepauseworld(1);
@@ -193,7 +193,7 @@ function function_657f1d1(s_stub, str_zone, var_6d359b2e, var_db6533 = 0) {
 }
 
 function ground_slam() {
-  self playrumbleonentity("zm_castle_flinger_land");
+  self playRumbleOnEntity("zm_castle_flinger_land");
   self clientfield::set_to_player("flinger_flying_postfx", 0);
   earthquake(0.5, 1, self.origin, 100);
 }
@@ -234,7 +234,7 @@ function private function_3298b25f(s_stub) {
     var_a05a47c7 = array::random(a_s_spots);
   }
   self unlink();
-  self setorigin(var_a05a47c7.origin);
+  self setOrigin(var_a05a47c7.origin);
   self setplayerangles(var_a05a47c7.angles);
   self clientfield::increment_to_player("flinger_land_smash");
 }
@@ -336,7 +336,7 @@ function function_dd6ccbfc() {
   while(true) {
     foreach(e_player in level.activeplayers) {
       if(isDefined(e_player.var_e033e4dc) && e_player.var_e033e4dc) {
-        e_player playrumbleonentity("zm_genesis_apothicon_roar");
+        e_player playRumbleOnEntity("zm_genesis_apothicon_roar");
       }
     }
     wait(randomfloatrange(40, 50));
@@ -736,9 +736,9 @@ function function_411feb6a() {
     function_9ccb8410(n_delay);
     level.var_a5d2ba4 = 1;
     foreach(player in level.var_b8b48a73) {
-      player playrumbleonentity("zm_genesis_apothicon_gas");
+      player playRumbleOnEntity("zm_genesis_apothicon_gas");
       earthquake(0.7, 3, s_center.origin, 2000);
-      playsoundatposition("evt_belly_digest", (0, 0, 0));
+      playSoundAtPosition("evt_belly_digest", (0, 0, 0));
     }
     level clientfield::set("gas_fog_bank_switch", 1);
     exploder::exploder("fxexp_106");
@@ -773,10 +773,10 @@ function function_79912fdc() {
 }
 
 function function_c73dbcf0(var_21e43ff6) {
-  self enablelinkto();
+  self enablelinkTo();
   var_e777b564 = self gettagorigin("ovary_egg_tag_jnt");
   var_1436760b = util::spawn_model("tag_origin", self.origin, vectorscale((1, 0, 0), 90));
-  var_1436760b linkto(self, "ovary_egg_tag_jnt");
+  var_1436760b linkTo(self, "ovary_egg_tag_jnt");
   var_1436760b clientfield::set("egg_spawn_fx", 1);
   self movez(-1000, 4);
   wait(4);
@@ -796,10 +796,10 @@ function function_c73dbcf0(var_21e43ff6) {
 
 function function_e3dd263c(e_player) {
   if(e_player flag::get("holding_egg") || e_player flag::get("holding_gateworm")) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
-  self sethintstring("");
+  self setHintString("");
   return true;
 }
 
@@ -815,7 +815,7 @@ function function_9071b894() {
 }
 
 function function_ff65120e() {
-  var_3e51eb2c = getent(self.script_string, "targetname");
+  var_3e51eb2c = getEnt(self.script_string, "targetname");
   self.var_3e51eb2c = var_3e51eb2c;
   var_3e51eb2c thread scene::init("p7_fxanim_zm_gen_gateworm_ovary_egg_deposit_bundle", var_3e51eb2c);
   var_5e99fdc8 = "lgt_apoth_int_" + self.script_string;
@@ -844,7 +844,7 @@ function function_ff65120e() {
   level thread function_5c65688b(mdl_gateworm);
   mdl_gateworm clientfield::set("gateworm_mtl", 1);
   mdl_gateworm thread scene::play("zm_dlc4_gateworm_idle_basin", mdl_gateworm);
-  mdl_gateworm linkto(var_3e51eb2c, "ovary_gateworm_tag");
+  mdl_gateworm linkTo(var_3e51eb2c, "ovary_gateworm_tag");
   self thread util::delay(6, undefined, &function_7fd5874f, mdl_gateworm);
   var_3e51eb2c scene::play("p7_fxanim_zm_gen_gateworm_ovary_worm_birth_bundle", var_3e51eb2c);
   var_3e51eb2c thread scene::play("p7_fxanim_zm_gen_gateworm_ovary_worm_birth_idle_bundle", var_3e51eb2c);
@@ -875,19 +875,19 @@ function function_7fd5874f(mdl_gateworm) {
 
 function function_5bd5869a(e_player) {
   if(e_player flag::get("holding_egg")) {
-    self sethintstring("");
+    self setHintString("");
     return true;
   }
-  self sethintstring("");
+  self setHintString("");
   return false;
 }
 
 function function_4661867f(e_player) {
   if(e_player flag::get("holding_gateworm") || e_player flag::get("holding_egg") || (isDefined(self.stub.related_parent.var_22ee51d7) && self.stub.related_parent.var_22ee51d7 !== e_player)) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
-  self sethintstring("");
+  self setHintString("");
   return true;
 }
 

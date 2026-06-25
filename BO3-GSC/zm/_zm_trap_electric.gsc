@@ -61,7 +61,7 @@ function trap_audio(trap) {
   self thread play_electrical_sound(trap);
   trap util::waittill_any_timeout(trap._trap_duration, "trap_done");
   if(isDefined(sound_origin)) {
-    playsoundatposition("wpn_zmb_inlevel_trap_stop", sound_origin.origin);
+    playSoundAtPosition("wpn_zmb_inlevel_trap_stop", sound_origin.origin);
     sound_origin stoploopsound();
     wait(0.05);
     sound_origin delete();
@@ -72,7 +72,7 @@ function play_electrical_sound(trap) {
   trap endon("trap_done");
   while(true) {
     wait(randomfloatrange(0.1, 0.5));
-    playsoundatposition("amb_sparks", self.origin);
+    playSoundAtPosition("amb_sparks", self.origin);
   }
 }
 
@@ -110,7 +110,7 @@ function damage(trap) {
       refs[5] = "no_legs";
       refs[6] = "head";
       self.a.gib_ref = refs[randomint(refs.size)];
-      playsoundatposition("wpn_zmb_electrap_zap", self.origin);
+      playSoundAtPosition("wpn_zmb_electrap_zap", self.origin);
       if(randomint(100) > 50) {
         self thread zm_traps::electroctute_death_fx();
       }

@@ -197,7 +197,7 @@ function private function_b66d4fac() {
 
   while(true) {
     self function_9132ad8e();
-    self.var_310a3632.mdl_target moveto(self.var_310a3632.var_689f4026, float(function_60d95f53()) / 1000);
+    self.var_310a3632.mdl_target moveTo(self.var_310a3632.var_689f4026, float(function_60d95f53()) / 1000);
     b_valid = function_b864b947(self.var_310a3632.var_6164d302);
     self.var_310a3632.mdl_target clientfield::set("" + #"hash_547dd74a97b1fdba", is_true(b_valid) ? 1 : 2);
     wait 0.1;
@@ -386,11 +386,11 @@ function cmd(cmd) {
 }
 
 function function_605ea132() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level thread function_e7136ed2(player);
 }
 
 function function_f4e829d6() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level thread function_2d3ad651(player);
 }

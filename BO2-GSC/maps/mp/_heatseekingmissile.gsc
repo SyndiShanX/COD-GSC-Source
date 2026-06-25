@@ -302,7 +302,7 @@ looplocalseeksound(alias, interval) {
 
   for(;;) {
     self playlocalsound(alias);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(interval / 2);
   }
 }
@@ -319,13 +319,13 @@ looplocallocksound(alias, interval) {
 
   for(;;) {
     self playlocalsound(alias);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(interval / 6);
     self playlocalsound(alias);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(interval / 6);
     self playlocalsound(alias);
-    self playrumbleonentity("stinger_lock_rumble");
+    self playRumbleOnEntity("stinger_lock_rumble");
     wait(interval / 6);
     self stoprumble("stinger_lock_rumble");
   }
@@ -603,7 +603,7 @@ missiletarget_deployflares(origin, angles) {
     sign = -1;
   }
 
-  flare_dir = vectornormalize(vectorscale(vec_toforward, -0.5) + vectorscale(vec_toright, sign));
+  flare_dir = vectorNormalize(vectorscale(vec_toforward, -0.5) + vectorscale(vec_toright, sign));
   velocity = vectorscale(flare_dir, randomintrange(200, 400));
   velocity = (velocity[0], velocity[1], velocity[2] - randomintrange(10, 100));
   flareorigin = self.origin;

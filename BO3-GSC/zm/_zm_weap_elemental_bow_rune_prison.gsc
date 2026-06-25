@@ -94,8 +94,8 @@ function function_94ba3a15(e_player, v_hit_origin, str_weapon_name, var_3fee16b8
     if(isai(self) && isalive(self)) {
       self.var_a320d911 = 1;
       self.var_98056717 = 1;
-      self linkto(var_c8bd3127);
-      self setplayercollision(0);
+      self linkTo(var_c8bd3127);
+      self setPlayerCollision(0);
       self thread function_5c74632();
     }
   }
@@ -132,7 +132,7 @@ function function_94ba3a15(e_player, v_hit_origin, str_weapon_name, var_3fee16b8
       }
       self dodamage(self.health, var_c8bd3127.origin, e_player, e_player, undefined, "MOD_BURNED", 0, level.var_791ba87b);
     }
-    self setplayercollision(1);
+    self setPlayerCollision(1);
     self unlink();
   }
   var_852420bf = array::get_all_closest(var_c8bd3127.origin, getaiteamarray(level.zombie_team), undefined, undefined, 96);

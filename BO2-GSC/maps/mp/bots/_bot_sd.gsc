@@ -297,7 +297,7 @@ bot_sd_defender_think(zone) {
     self.bot["lookat_update"] = gettime() + randomintrange(1500, 3000);
 
     if(distancesquared(origin, self.origin) > 65536) {
-      dir = vectornormalize(self.origin - origin);
+      dir = vectorNormalize(self.origin - origin);
       dir = vectorscale(dir, 256);
       origin = origin + dir;
     }

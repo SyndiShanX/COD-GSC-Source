@@ -168,8 +168,8 @@ main() {
 
   flag_init("bmp_has_spotted_player");
 
-  yards_roof_parachute_guy = getent("roof_parachute_landing_guy_yards", "targetname");
-  humvee_roof_parachute_guy = getent("humvee_ride_roof_landing", "targetname");
+  yards_roof_parachute_guy = getEnt("roof_parachute_landing_guy_yards", "targetname");
+  humvee_roof_parachute_guy = getEnt("humvee_ride_roof_landing", "targetname");
 
   yards_roof_parachute_guy add_spawn_function(::setup_roof_parachute_guy);
   humvee_roof_parachute_guy add_spawn_function(::setup_roof_parachute_guy, "humvee_guy");
@@ -215,14 +215,14 @@ main() {
   add_global_spawn_function("axis", ::setup_remote_missile_target_guy);
 
   flag_init("player_has_predator_drones");
-  predator_drone_control = getent("predator_drone_control", "targetname");
+  predator_drone_control = getEnt("predator_drone_control", "targetname");
   predator_drone_control hide();
 
   thread bt_locker_door_open();
   thread nates_locker_door_open();
 
-  level.paradropper_left = getent("paradrop_guy_left", "script_noteworthy");
-  level.paradropper_right = getent("paradrop_guy_right", "script_noteworthy");
+  level.paradropper_left = getEnt("paradrop_guy_left", "script_noteworthy");
+  level.paradropper_right = getEnt("paradrop_guy_right", "script_noteworthy");
 
   paradrop_plane_triggers = getEntArray("paradrop_plane_trigger", "targetname");
   array_thread(paradrop_plane_triggers, ::paradrop_vehicle);
@@ -236,7 +236,7 @@ main() {
   thread UAVRigAiming();
 
   flag_init("sentry_in_position");
-  level.obj_sentry = getent("obj_sentry", "script_noteworthy");
+  level.obj_sentry = getEnt("obj_sentry", "script_noteworthy");
   level.obj_sentry thread sentry_init_owner();
 
   thread diner_window_traverses();
@@ -300,14 +300,14 @@ start_humvee() {
 }
 
 start_bmp_paradrop() {
-  start = getstruct("start_yards", "targetname");
+  start = getStruct("start_yards", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
   level.bmp_paradrop = true;
 }
 
 start_yards() {
-  start = getstruct("start_yards", "targetname");
+  start = getStruct("start_yards", "targetname");
   level.player setOrigin(start.origin);
   level.player setPlayerAngles(start.angles);
 
@@ -325,7 +325,7 @@ start_yards() {
 }
 
 start_bmp() {
-  start_bmp = getstruct("start_bmp", "targetname");
+  start_bmp = getStruct("start_bmp", "targetname");
   level.player setOrigin(start_bmp.origin);
   level.player setPlayerAngles(start_bmp.angles);
 
@@ -343,7 +343,7 @@ start_bmp() {
 }
 
 start_pizza() {
-  start_pizza = getstruct("start_pizza", "targetname");
+  start_pizza = getStruct("start_pizza", "targetname");
   level.player setOrigin(start_pizza.origin);
   level.player setPlayerAngles(start_pizza.angles);
 
@@ -364,7 +364,7 @@ start_pizza() {
 }
 
 start_gas_station() {
-  player_start = getstruct("start_gas_station", "targetname");
+  player_start = getStruct("start_gas_station", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
@@ -384,7 +384,7 @@ start_gas_station() {
 }
 
 start_crash() {
-  player_start = getstruct("start_crash", "targetname");
+  player_start = getStruct("start_crash", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
@@ -413,7 +413,7 @@ start_crash() {
 }
 
 start_nates_roof() {
-  player_start = getstruct("start_nates_roof", "targetname");
+  player_start = getStruct("start_nates_roof", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
@@ -435,7 +435,7 @@ start_nates_roof() {
 }
 
 start_roof_northside() {
-  player_start = getstruct("start_nates_roof", "targetname");
+  player_start = getStruct("start_nates_roof", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
@@ -462,7 +462,7 @@ start_roof_northside() {
 }
 
 start_attack_diner() {
-  player_start = getstruct("start_nates_roof", "targetname");
+  player_start = getStruct("start_nates_roof", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
@@ -489,7 +489,7 @@ start_attack_diner() {
 }
 
 start_btr80_smash() {
-  player_start = getstruct("start_nates_roof", "targetname");
+  player_start = getStruct("start_nates_roof", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
@@ -515,17 +515,17 @@ start_btr80_smash() {
 }
 
 start_diner_defend() {
-  player_start = getstruct("start_diner", "targetname");
+  player_start = getStruct("start_diner", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
-  taco_spawner = getent("taco", "script_noteworthy");
-  friendly_start = getstruct("start_diner_taco", "targetname");
+  taco_spawner = getEnt("taco", "script_noteworthy");
+  friendly_start = getStruct("start_diner_taco", "targetname");
   taco_spawner.origin = friendly_start.origin;
   taco_spawner.angles = friendly_start.angles;
   taco_spawner spawn_ai();
 
-  raptor_spawner = getent("commander", "script_noteworthy");
+  raptor_spawner = getEnt("commander", "script_noteworthy");
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
@@ -547,17 +547,17 @@ start_diner_defend() {
 }
 
 start_diner() {
-  player_start = getstruct("start_diner", "targetname");
+  player_start = getStruct("start_diner", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
-  taco_spawner = getent("taco", "script_noteworthy");
-  friendly_start = getstruct("start_diner_taco", "targetname");
+  taco_spawner = getEnt("taco", "script_noteworthy");
+  friendly_start = getStruct("start_diner_taco", "targetname");
   taco_spawner.origin = friendly_start.origin;
   taco_spawner.angles = friendly_start.angles;
   taco_spawner spawn_ai();
 
-  raptor_spawner = getent("commander", "script_noteworthy");
+  raptor_spawner = getEnt("commander", "script_noteworthy");
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
@@ -581,17 +581,17 @@ start_diner() {
 }
 
 start_burgertown() {
-  player_start = getstruct("start_BT", "targetname");
+  player_start = getStruct("start_BT", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
-  taco_spawner = getent("taco", "script_noteworthy");
-  friendly_start = getstruct("start_BT_taco", "targetname");
+  taco_spawner = getEnt("taco", "script_noteworthy");
+  friendly_start = getStruct("start_BT_taco", "targetname");
   taco_spawner.origin = friendly_start.origin;
   taco_spawner.angles = friendly_start.angles;
   taco_spawner spawn_ai();
 
-  raptor_spawner = getent("commander", "script_noteworthy");
+  raptor_spawner = getEnt("commander", "script_noteworthy");
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
@@ -615,17 +615,17 @@ start_burgertown() {
 }
 
 start_vip_escort() {
-  player_start = getstruct("start_vip_escort", "targetname");
+  player_start = getStruct("start_vip_escort", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
-  taco_spawner = getent("taco", "script_noteworthy");
-  friendly_start = getstruct("start_BT_taco", "targetname");
+  taco_spawner = getEnt("taco", "script_noteworthy");
+  friendly_start = getStruct("start_BT_taco", "targetname");
   taco_spawner.origin = friendly_start.origin;
   taco_spawner.angles = friendly_start.angles;
   taco_spawner spawn_ai();
 
-  raptor_spawner = getent("commander", "script_noteworthy");
+  raptor_spawner = getEnt("commander", "script_noteworthy");
   friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
@@ -655,18 +655,18 @@ start_vip_escort() {
 }
 
 start_defend_BT() {
-  player_start = getstruct("start_BT", "targetname");
+  player_start = getStruct("start_BT", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
-  taco_spawner = getent("taco", "script_noteworthy");
-  friendly_start = getstruct("start_BT_taco", "targetname");
+  taco_spawner = getEnt("taco", "script_noteworthy");
+  friendly_start = getStruct("start_BT_taco", "targetname");
   taco_spawner.origin = friendly_start.origin;
   taco_spawner.angles = friendly_start.angles;
   taco_spawner spawn_ai();
 
-  raptor_spawner = getent("commander", "script_noteworthy");
-  raptor_start = getent("president_in_burgertown_meat_locker", "targetname");
+  raptor_spawner = getEnt("commander", "script_noteworthy");
+  raptor_start = getEnt("president_in_burgertown_meat_locker", "targetname");
   raptor_spawner.origin = raptor_start.origin;
   raptor_spawner.angles = raptor_start.angles;
   raptor_spawner spawn_ai();
@@ -691,18 +691,18 @@ start_defend_BT() {
 }
 
 start_helis() {
-  player_start = getstruct("start_nates_roof", "targetname");
+  player_start = getStruct("start_nates_roof", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
-  taco_spawner = getent("taco", "script_noteworthy");
-  friendly_start = getstruct("start_BT_taco", "targetname");
+  taco_spawner = getEnt("taco", "script_noteworthy");
+  friendly_start = getStruct("start_BT_taco", "targetname");
   taco_spawner.origin = friendly_start.origin;
   taco_spawner.angles = friendly_start.angles;
   taco_spawner spawn_ai();
 
-  raptor_spawner = getent("commander", "script_noteworthy");
-  raptor_start = getent("president_in_burgertown_meat_locker", "targetname");
+  raptor_spawner = getEnt("commander", "script_noteworthy");
+  raptor_start = getEnt("president_in_burgertown_meat_locker", "targetname");
   raptor_spawner.origin = raptor_start.origin;
   raptor_spawner.angles = raptor_start.angles;
   raptor_spawner spawn_ai();
@@ -730,7 +730,7 @@ start_helis() {
 }
 
 start_convoy() {
-  player_start = getstruct("start_nates_roof", "targetname");
+  player_start = getStruct("start_nates_roof", "targetname");
   level.player setOrigin(player_start.origin);
   level.player setPlayerAngles(player_start.angles);
 
@@ -798,7 +798,7 @@ handler_humvee_to_yards() {
 
   wait 2.5;
 
-  first_planes = getent("first_flight", "script_noteworthy");
+  first_planes = getEnt("first_flight", "script_noteworthy");
   first_planes notify("trigger");
   first_planes trigger_off();
 
@@ -808,9 +808,9 @@ handler_humvee_to_yards() {
   level.humvee_front = spawn_vehicle_from_targetname_and_drive("humvee_front");
   level.humvee_front.dontunloadonend = true;
 
-  shotgun_guy = getent("shotgun", "script_noteworthy");
+  shotgun_guy = getEnt("shotgun", "script_noteworthy");
   shotgun_guy add_spawn_function(::setup_shotgun_guy);
-  backseat_right_guy = getent("backseat_right", "script_noteworthy");
+  backseat_right_guy = getEnt("backseat_right", "script_noteworthy");
   backseat_right_guy add_spawn_function(::setup_backseat_right_guy);
 
   humvee_blows_up_riders = getEntArray("humvee_blows_up_riders", "targetname");
@@ -871,7 +871,7 @@ handler_humvee_to_yards() {
 handler_yards_to_house_destroyer() {
   battlechatter_off("allies");
 
-  spawner = getent("roof_parachute_landing_guy_yards", "targetname");
+  spawner = getEnt("roof_parachute_landing_guy_yards", "targetname");
 
   flag_wait("entering_yards");
 
@@ -944,7 +944,7 @@ handler_pizza_to_gas_station() {
 handler_gas_station_to_crash() {
   flag_wait("leaving_gas_station");
 
-  burning_tree = getent("burning_tree", "script_noteworthy");
+  burning_tree = getEnt("burning_tree", "script_noteworthy");
   burning_tree notify("stop_burning_tree");
 
   level.obj_direction = "north";
@@ -956,7 +956,7 @@ handler_gas_station_to_crash() {
   thread spawn_president();
 
   if(!isDefined(level.wells)) {
-    wells_spawner = getent("wells", "script_noteworthy");
+    wells_spawner = getEnt("wells", "script_noteworthy");
     wells_spawner spawn_ai();
   }
 
@@ -970,7 +970,7 @@ handler_gas_station_to_crash() {
 
 handler_crash() {
   if(!isDefined(level.wells)) {
-    wells_spawner = getent("wells", "script_noteworthy");
+    wells_spawner = getEnt("wells", "script_noteworthy");
     wells_spawner spawn_ai();
   }
 
@@ -993,7 +993,7 @@ handler_crash() {
 }
 
 police_car_cover_moment() {
-  anim_node = getstruct("police_car_moment", "script_noteworthy");
+  anim_node = getStruct("police_car_moment", "script_noteworthy");
 
   BadPlace_Cylinder("police_car_moment", -1, anim_node.origin, 600, 300, "axis");
 
@@ -1085,7 +1085,7 @@ handler_crash_to_roof() {
 
   level.obj_direction = "south";
 
-  nates_roof_volume_south = getent("nates_roof_volume_south", "targetname");
+  nates_roof_volume_south = getEnt("nates_roof_volume_south", "targetname");
   friendlies = getaiarray("allies");
   for(i = 0; i < friendlies.size; i++) {
     if(i == 5) {
@@ -1193,7 +1193,7 @@ handler_roof_north_side() {
 
   south_side_nodes = getnodearray("south_side_nodes", "targetname");
   n = 0;
-  nates_roof_volume_south = getent("nates_roof_volume_south", "targetname");
+  nates_roof_volume_south = getEnt("nates_roof_volume_south", "targetname");
   friendlies = getaiarray("allies");
   for(i = 0; i < friendlies.size; i++) {
     if(cointoss()) {
@@ -1297,7 +1297,7 @@ handler_diner_to_burgertown() {
 
   BT_goal = getnode("taco_in_BT", "script_noteworthy");
   BT_org = BT_goal.origin;
-  BT_goal_volume = getent("BT_goal_volume", "targetname");
+  BT_goal_volume = getEnt("BT_goal_volume", "targetname");
 
   redshirts_desired = 3;
   level.redshirts = redshirts_respawn(redshirts_desired);
@@ -1344,8 +1344,8 @@ handler_burgertown() {
 handler_vip_escort() {
   flag_set("move_president_to_prep");
 
-  end_volume = getent("BT_goal_volume", "targetname");
-  end_goal = getent("president_in_burgertown_meat_locker", "targetname").origin;
+  end_volume = getEnt("BT_goal_volume", "targetname");
+  end_goal = getEnt("president_in_burgertown_meat_locker", "targetname").origin;
 
   redshirts_desired = 3;
   level.redshirts = redshirts_respawn(redshirts_desired);
@@ -1365,12 +1365,12 @@ handler_vip_escort() {
 
   thread wells_cover_path();
 
-  bt_locker = getent("president_in_burgertown_meat_locker", "targetname");
+  bt_locker = getEnt("president_in_burgertown_meat_locker", "targetname");
 
   level.president invisibleNotSolid();
   level.raptor pushplayer(true);
   level.raptor.dontchangepushplayer = true;
-  wounded_carry_path = getent("wounded_carry_path", "targetname");
+  wounded_carry_path = getEnt("wounded_carry_path", "targetname");
 
   level.raptor thread maps\_carry_ai::move_president_to_node(level.president, wounded_carry_path);
 
@@ -1623,10 +1623,10 @@ player_enters_convoy_humvee() {
   org = spawn_tag_origin();
   org.origin = level.player.origin;
   org.angles = level.player.angles;
-  level.player PlayerLinkTo(org, "tag_origin", 0.8, 180, 180, 40, 40);
+  level.player PlayerlinkTo(org, "tag_origin", 0.8, 180, 180, 40, 40);
 
   goal_pos = humvee gettagorigin("tag_guy1");
-  org MoveTo(goal_pos + (0, 0, -30), move_time, move_time * 0.5, move_time * 0.5);
+  org moveTo(goal_pos + (0, 0, -30), move_time, move_time * 0.5, move_time * 0.5);
 
   wait(move_time);
 }
@@ -1695,7 +1695,7 @@ dialog_enemies_on_roof() {
 
   current_line = 0;
 
-  trig = getent("enemies_on_roof", "targetname");
+  trig = getEnt("enemies_on_roof", "targetname");
   while(1) {
     trig waittill("trigger", other);
 
@@ -1734,11 +1734,11 @@ setup_remote_missile_target_guy() {
 }
 
 get_friendlies_away_from_nates_destruction() {
-  nates_roof_volume_south = getent("nates_roof_volume_south", "targetname");
-  destroyed_nates_inaccessable_volume = getent("destroyed_nates_inaccessable_volume", "targetname");
+  nates_roof_volume_south = getEnt("nates_roof_volume_south", "targetname");
+  destroyed_nates_inaccessable_volume = getEnt("destroyed_nates_inaccessable_volume", "targetname");
 
-  destroyed_nates_safe_volume = getent("destroyed_nates_safe_volume", "targetname");
-  destroyed_nates_safe_goal = getent("raptor_in_nates_prep", "targetname");
+  destroyed_nates_safe_volume = getEnt("destroyed_nates_safe_volume", "targetname");
+  destroyed_nates_safe_goal = getEnt("raptor_in_nates_prep", "targetname");
 
   friendlies = getaiarray("allies");
   foreach(friend in friendlies) {
@@ -1761,7 +1761,7 @@ get_friendlies_away_from_nates_destruction() {
 
 kill_friendlies_on_roof() {
   level endon("player_on_roof");
-  roof_volume = getent("roof_volume", "targetname");
+  roof_volume = getEnt("roof_volume", "targetname");
   friendlies = getaiarray("allies");
   foreach(friend in friendlies) {
     if(friend istouching(roof_volume)) {
@@ -1775,7 +1775,7 @@ kill_friendlies_on_roof() {
 }
 
 btr80_smash() {
-  scripted_node = getent("btr80_smash", "targetname");
+  scripted_node = getEnt("btr80_smash", "targetname");
 
   scripted_node.origin = (805.9, -1688.8, 2309.7);
 
@@ -1792,7 +1792,7 @@ btr80_smash() {
 
 friendlies_shift_north() {
   north_side_nodes = getnodearray("north_side_nodes", "targetname");
-  nates_roof_volume_north = getent("nates_roof_volume_north", "targetname");
+  nates_roof_volume_north = getEnt("nates_roof_volume_north", "targetname");
   friendlies = getaiarray("allies");
 
   level.raptor.goalheight = 80;
@@ -1972,7 +1972,7 @@ dialog_get_stinger() {
       continue;
     }
 
-    diner_stinger = getent("diner", "script_noteworthy");
+    diner_stinger = getEnt("diner", "script_noteworthy");
     if(isDefined(diner_stinger)) {
       selected_line = diner_dialog[diner_dialog_current];
       radio_dialogue(selected_line);
@@ -2162,8 +2162,8 @@ smart_barney(end_flag, end_goal, end_volume) {
 
   self.fixednode = false;
 
-  nates_roof_goal_volume = getent("nates_roof_goal_volume", "targetname");
-  BT_roof_goal_volume = getent("BT_roof_goal_volume", "targetname");
+  nates_roof_goal_volume = getEnt("nates_roof_goal_volume", "targetname");
+  BT_roof_goal_volume = getEnt("BT_roof_goal_volume", "targetname");
 
   if(!isDefined(self.favoriteenemy)) {
     goal_enemies = end_volume get_ai_touching_volume("axis");
@@ -2182,7 +2182,7 @@ smart_barney(end_flag, end_goal, end_volume) {
     } else {
       self cleargoalvolume();
       player = level.player.origin;
-      vec = VectorNormalize(end_goal - player);
+      vec = vectorNormalize(end_goal - player);
       forward = vector_multiply(vec, 400);
       goal = forward + player;
       self setgoalpos(goal);
@@ -2213,8 +2213,8 @@ smart_roaming_barney() {
   }
   self.fixednode = false;
 
-  nates_roof_goal_volume = getent("nates_roof_goal_volume", "targetname");
-  BT_roof_goal_volume = getent("BT_roof_goal_volume", "targetname");
+  nates_roof_goal_volume = getEnt("nates_roof_goal_volume", "targetname");
+  BT_roof_goal_volume = getEnt("BT_roof_goal_volume", "targetname");
 
   while(1) {
     if(flag("player_on_burgertown_roof")) {
@@ -2228,7 +2228,7 @@ smart_roaming_barney() {
       if(isDefined(level.obj_pos)) {
         end_goal = level.obj_pos;
         player = level.player.origin;
-        vec = VectorNormalize(end_goal - player);
+        vec = vectorNormalize(end_goal - player);
         forward = vector_multiply(vec, 400);
 
         my_origin = self.origin;
@@ -2427,10 +2427,10 @@ mission_fail_if_leaves_BT_waiter() {
 }
 
 nates_locker_door_open() {
-  nates_meat_locker_door = getent("nates_meat_locker_door", "targetname");
-  nates_meat_locker_door_model = getent(nates_meat_locker_door.target, "targetname");
-  nates_meat_locker_door_model LinkTo(nates_meat_locker_door);
-  nates_meat_locker_door rotateyaw(-82, .1, 0, 0);
+  nates_meat_locker_door = getEnt("nates_meat_locker_door", "targetname");
+  nates_meat_locker_door_model = getEnt(nates_meat_locker_door.target, "targetname");
+  nates_meat_locker_door_model linkTo(nates_meat_locker_door);
+  nates_meat_locker_door rotateYaw(-82, .1, 0, 0);
   nates_meat_locker_door connectpaths();
 
   flag_wait("player_on_roof");
@@ -2439,13 +2439,13 @@ nates_locker_door_open() {
 
   flag_wait("player_on_roof");
 
-  nates_meat_locker_door rotateyaw(82, .1, 0, 0);
-  nates_meat_locker_door disconnectpaths();
+  nates_meat_locker_door rotateYaw(82, .1, 0, 0);
+  nates_meat_locker_door disconnectPaths();
 }
 
 bt_locker_door_open() {
-  BT_locker_door = getent("BT_locker_door", "targetname");
-  BT_locker_door rotateyaw(-172, .1, 0, 0);
+  BT_locker_door = getEnt("BT_locker_door", "targetname");
+  BT_locker_door rotateYaw(-172, .1, 0, 0);
   BT_locker_door connectpaths();
 }
 
@@ -2453,9 +2453,9 @@ bt_locker_door_close() {
   wait 1;
   flag_waitopen("player_is_near_BT_locker_door");
 
-  BT_locker_door = getent("BT_locker_door", "targetname");
-  BT_locker_door rotateyaw(172, .1, 0, 0);
-  BT_locker_door disconnectpaths();
+  BT_locker_door = getEnt("BT_locker_door", "targetname");
+  BT_locker_door rotateYaw(172, .1, 0, 0);
+  BT_locker_door disconnectPaths();
 
   thread radio_dialogue("inv_six_gotthepresident2");
 
@@ -2472,9 +2472,9 @@ bt_locker_door_close() {
 }
 
 keep_enemies_away() {
-  vip_escort_bad_place1 = getent("vip_escort_bad_place1", "targetname");
-  vip_escort_bad_place2 = getent("vip_escort_bad_place2", "targetname");
-  vip_escort_bad_place3 = getent("vip_escort_bad_place3", "targetname");
+  vip_escort_bad_place1 = getEnt("vip_escort_bad_place1", "targetname");
+  vip_escort_bad_place2 = getEnt("vip_escort_bad_place2", "targetname");
+  vip_escort_bad_place3 = getEnt("vip_escort_bad_place3", "targetname");
 
   BadPlace_Brush("vip_escort_bad_place1", -1, vip_escort_bad_place1, "axis");
   BadPlace_Brush("vip_escort_bad_place2", -1, vip_escort_bad_place2, "axis");
@@ -2565,7 +2565,7 @@ friendlies_try_to_get_off_roof() {
   wait 5;
   off_roof_array = getnodearray("off_roof", "targetname");
   pos = 0;
-  roof_volume = getent("roof_volume", "targetname");
+  roof_volume = getEnt("roof_volume", "targetname");
   friendlies = getaiarray("allies");
   foreach(friend in friendlies) {
     if(friend == level.taco) {
@@ -2682,7 +2682,7 @@ diner_backdoor_attack() {
 
   thread diner_back_door_open();
 
-  trigger = getent("diner_enemy_counter_attack_trigger", "targetname");
+  trigger = getEnt("diner_enemy_counter_attack_trigger", "targetname");
   spawners = getEntArray(trigger.target, "targetname");
   array_thread(spawners, ::add_spawn_function, ::setup_diner_backdoor_attackers);
   activate_trigger_with_targetname("diner_enemy_counter_attack_trigger");
@@ -2692,8 +2692,8 @@ diner_backdoor_attack() {
 }
 
 diner_back_door_open() {
-  diner_back_door = getent("diner_back_door", "targetname");
-  diner_back_door rotateyaw(85, .3);
+  diner_back_door = getEnt("diner_back_door", "targetname");
+  diner_back_door rotateYaw(85, .3);
   diner_back_door playSound("diner_backdoor_slams_open");
   diner_back_door connectpaths();
 }
@@ -2710,10 +2710,10 @@ dialog_smoke_to_north() {
 }
 
 prep_prez_for_run() {
-  wells_in_nates_prep = getent("wells_in_nates_prep", "targetname");
+  wells_in_nates_prep = getEnt("wells_in_nates_prep", "targetname");
   level.wells setgoalpos(wells_in_nates_prep.origin);
 
-  raptor_prep = getent("raptor_in_nates_prep", "targetname");
+  raptor_prep = getEnt("raptor_in_nates_prep", "targetname");
   level.raptor maps\_carry_ai::move_president_to_node(level.president, raptor_prep);
 }
 
@@ -2793,7 +2793,7 @@ dialog_regroup_at_nates_nag() {
   flag_wait("bmp_north_left_dead");
   flag_wait("bmp_north_mid_dead");
 
-  diner_backdoor_fight_area = getent("diner_backdoor_fight_area", "targetname");
+  diner_backdoor_fight_area = getEnt("diner_backdoor_fight_area", "targetname");
   diner_backdoor_fight_area waittill_volume_dead();
 
   if(flag("leaving_diner")) {
@@ -2818,7 +2818,7 @@ spawn_wells(start_ent) {
   if(isDefined(level.wells)) {
     return;
   }
-  spawner = getent("wells", "script_noteworthy");
+  spawner = getEnt("wells", "script_noteworthy");
   level.wells = spawner spawn_ai();
 
   if(isDefined(start_ent)) {
@@ -2833,7 +2833,7 @@ spawn_president() {
   if(isDefined(level.president)) {
     return;
   }
-  president_spawner = getent("president", "script_noteworthy");
+  president_spawner = getEnt("president", "script_noteworthy");
   level.president = president_spawner spawn_ai();
 }
 
@@ -2842,13 +2842,13 @@ setup_president() {
   level.president = self;
   self thread magic_bullet_shield();
 
-  president_start_node = getent("president_in_nates_meat_locker", "targetname");
+  president_start_node = getEnt("president_in_nates_meat_locker", "targetname");
   self thread maps\_carry_ai::setWounded(president_start_node);
 
   flag_wait("move_president_to_prep");
   president_start_node notify("stop_wounded_idle");
 
-  president_start_node = getent("president_in_nates_prep", "targetname");
+  president_start_node = getEnt("president_in_nates_prep", "targetname");
   self maps\_carry_ai::setWounded(president_start_node);
 }
 
@@ -2974,7 +2974,7 @@ hint_drone_steering() {
 wait_till_time_to_destroy_BMPS() {
   level endon("leaving_diner");
 
-  diner_backdoor_fight_area = getent("diner_backdoor_fight_area", "targetname");
+  diner_backdoor_fight_area = getEnt("diner_backdoor_fight_area", "targetname");
   diner_backdoor_fight_area waittill_volume_dead();
 
   wait 2;
@@ -3172,7 +3172,7 @@ taco_goes_to_BT() {
 
   BT_goal = getnode("taco_in_BT", "script_noteworthy");
   BT_org = BT_goal.origin;
-  BT_goal_volume = getent("BT_goal_volume", "targetname");
+  BT_goal_volume = getEnt("BT_goal_volume", "targetname");
 
   level.taco thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
 
@@ -3190,8 +3190,8 @@ taco_goes_to_diner() {
   wait 2;
   flag_waitopen("player_inside_nates");
 
-  diner_goal_volume = getent("diner_goal_volume", "targetname");
-  diner_org = getent("predator_drone_control", "targetname").origin;
+  diner_goal_volume = getEnt("diner_goal_volume", "targetname");
+  diner_org = getEnt("predator_drone_control", "targetname").origin;
 
   level.taco thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
   level.redshirts = spawn_redshirts(3);
@@ -3212,7 +3212,7 @@ smart_barney_on_raptor(end_goal, end_volume) {
 
   while(!flag("president_in_BT_meat_locker")) {
     leader = level.raptor.origin;
-    vec = VectorNormalize(end_goal - leader);
+    vec = vectorNormalize(end_goal - leader);
     forward = vector_multiply(vec, 400);
     goal = forward + leader;
     self setgoalpos(goal);
@@ -3274,7 +3274,7 @@ taco_goes_to_BT_roof() {
 }
 
 set_up_predator_drone_control_pickup() {
-  predator_drone_control = getent("predator_drone_control", "targetname");
+  predator_drone_control = getEnt("predator_drone_control", "targetname");
   predator_drone_control show();
   predator_drone_control glow();
 
@@ -3297,7 +3297,7 @@ give_player_predator_drone() {
 
   level.player maps\_remotemissile::give_remotemissile_weapon("remote_missile_detonator");
 
-  predator_drone_control = getent("predator_drone_control", "targetname");
+  predator_drone_control = getEnt("predator_drone_control", "targetname");
   predator_drone_control hide();
   predator_drone_control makeUnusable();
 }
@@ -3326,7 +3326,7 @@ dialog_pickup_drone_control_nag() {
   flag_wait("back_door_attack_start");
   wait 4;
 
-  diner_backdoor_fight_area = getent("diner_backdoor_fight_area", "targetname");
+  diner_backdoor_fight_area = getEnt("diner_backdoor_fight_area", "targetname");
   diner_backdoor_fight_area waittill_volume_dead();
 
   wait 4;
@@ -3463,7 +3463,7 @@ sentry_is_on_roof() {
     return false;
   }
 
-  roof_volume = getent("roof_volume", "targetname");
+  roof_volume = getEnt("roof_volume", "targetname");
   if(level.obj_sentry isTouching(roof_volume)) {
     return true;
   } else {
@@ -3528,7 +3528,7 @@ dialog_bmp_hasnt_spotted_us() {
 spawn_tangled_chute_struggler() {
   flag_wait("take_point");
 
-  tangled_parachute_guy = getent("tangled_parachute_guy", "script_noteworthy");
+  tangled_parachute_guy = getEnt("tangled_parachute_guy", "script_noteworthy");
   guy = tangled_parachute_guy spawn_ai();
 }
 
@@ -3744,11 +3744,11 @@ dialog_goto_alley() {
 }
 
 diner_window_traverses() {
-  diner_window_traverses = getent("diner_window_traverses", "targetname");
+  diner_window_traverses = getEnt("diner_window_traverses", "targetname");
   if(!isDefined(diner_window_traverses)) {
     return;
   }
-  diner_window_traverses disconnectpaths();
+  diner_window_traverses disconnectPaths();
 
   flag_wait("crash_objective");
 
@@ -3771,9 +3771,9 @@ truck_group_enemies_setup_retreat() {
   flag_wait("truck_guys_retreat");
 
   if(isDefined(self.target)) {
-    self setgoalpos(getent(self.target, "targetname").origin);
+    self setgoalpos(getEnt(self.target, "targetname").origin);
   } else {
-    self setgoalpos(getent("truck_guy_retreat_goal", "targetname").origin);
+    self setgoalpos(getEnt("truck_guy_retreat_goal", "targetname").origin);
   }
 
   self.goalradius = 32;
@@ -3788,7 +3788,7 @@ bank_enemies_setup_retreat() {
   self endon("death");
   flag_wait("bank_guys_retreat");
 
-  self setgoalpos(getent("north_trucks_retreat_point", "targetname").origin);
+  self setgoalpos(getEnt("north_trucks_retreat_point", "targetname").origin);
 
   self.ignoreme = true;
   self.goalradius = 32;
@@ -3824,7 +3824,7 @@ one_bmp_from_south() {
 
   bmp endon("death");
 
-  current = getent("west_side", "targetname");
+  current = getEnt("west_side", "targetname");
   bmp SetTurretTargetVec(current.origin);
 
   pos = getvehiclenode("first_volley_at_nates", "script_noteworthy");
@@ -4053,7 +4053,7 @@ new_target_think() {
     }
     vehicle notify("new_target");
 
-    vehicle setturrettargetent(targets[0]);
+    vehicle setturrettargetEnt(targets[0]);
 
     thread btr_fire_at_targets(vehicle);
   }
@@ -4078,7 +4078,7 @@ btr_fire_at_targets(vehicle) {
 
 rush_restaurant_enemies_setup() {
   self endon("death");
-  nates_restaurant_goal = getent("nates_restaurant_goal", "targetname");
+  nates_restaurant_goal = getEnt("nates_restaurant_goal", "targetname");
   self ClearGoalVolume();
   self.goalheight = 100;
 
@@ -4089,7 +4089,7 @@ rush_restaurant_enemies_setup() {
 
   flag_wait("truck_guys_retreat");
 
-  self setgoalpos(getent("truck_guy_retreat_goal", "targetname").origin);
+  self setgoalpos(getEnt("truck_guy_retreat_goal", "targetname").origin);
 
   self.goalradius = 32;
   self waittill("goal");
@@ -4103,7 +4103,7 @@ truck_group_enemies_setup() {
   self waittill("jumpedout");
   level endon("truck_guys_retreat");
   self endon("death");
-  nates_restaurant_goal = getent("nates_restaurant_goal", "targetname");
+  nates_restaurant_goal = getEnt("nates_restaurant_goal", "targetname");
   self.goalheight = 100;
 
   self enable_danger_react(5);
@@ -4272,7 +4272,7 @@ setup_wells() {
 
   flag_wait("move_president_to_prep");
 
-  wells_in_nates_prep = getent("wells_in_nates_prep", "targetname");
+  wells_in_nates_prep = getEnt("wells_in_nates_prep", "targetname");
   level.wells setgoalpos(wells_in_nates_prep.origin);
 }
 
@@ -4295,7 +4295,7 @@ setup_raptor() {
   flag_wait("move_president_to_prep");
 
   level.raptor.goalradius = 64;
-  raptor_prep = getent("raptor_in_nates_prep", "targetname");
+  raptor_prep = getEnt("raptor_in_nates_prep", "targetname");
   level.raptor setgoalpos(raptor_prep.origin);
 }
 
@@ -4450,11 +4450,11 @@ drop_bmp() {
   chuteC = spawn_anim_model("paradrop_cargo_tank_chuteC");
   bmp = spawn_anim_model("bmp_paradrop");
 
-  bmp linkto(self);
-  chute linkto(self);
-  chuteA linkto(self);
-  chuteB linkto(self);
-  chuteC linkto(self);
+  bmp linkTo(self);
+  chute linkTo(self);
+  chuteA linkTo(self);
+  chuteB linkTo(self);
+  chuteC linkTo(self);
 
   self thread anim_single_solo(chute, "bmp_chute_paradrop");
   self thread anim_single_solo(chuteA, "paradrop_cargo_tank_chuteA");
@@ -4516,8 +4516,8 @@ setup_paradrop_guy_left(paradrop_airplane, drop_time) {
   self.health = 1;
   self.ignoreme = true;
   chute = spawn_anim_model("distant_parachute_guy");
-  self linkto(paradrop_airplane);
-  chute linkto(paradrop_airplane);
+  self linkTo(paradrop_airplane);
+  chute linkTo(paradrop_airplane);
   if(cointoss()) {
     paradrop_airplane thread anim_single_solo(chute, "distant_parachute_guy_left1");
     paradrop_airplane thread anim_generic(self, "distant_parachute_guy_left1");
@@ -4540,8 +4540,8 @@ setup_paradrop_guy_right(paradrop_airplane, drop_time) {
   self.health = 1;
   self.ignoreme = true;
   chute = spawn_anim_model("distant_parachute_guy");
-  self linkto(paradrop_airplane);
-  chute linkto(paradrop_airplane);
+  self linkTo(paradrop_airplane);
+  chute linkTo(paradrop_airplane);
   if(cointoss()) {
     paradrop_airplane thread anim_single_solo(chute, "distant_parachute_guy_right1");
     paradrop_airplane thread anim_generic(self, "distant_parachute_guy_right1");
@@ -4559,7 +4559,7 @@ setup_paradrop_guy_right(paradrop_airplane, drop_time) {
 }
 
 setup_shotgun_guy2() {
-  humvee_opening_node = getent("humvee_opening", "targetname");
+  humvee_opening_node = getEnt("humvee_opening", "targetname");
   humvee_opening_node anim_generic(self, "invasion_opening_hummer1_soldier2");
 
   self.allowdeath = true;
@@ -4568,7 +4568,7 @@ setup_shotgun_guy2() {
 }
 
 setup_backseat_right_guy2() {
-  humvee_opening_node = getent("humvee_opening", "targetname");
+  humvee_opening_node = getEnt("humvee_opening", "targetname");
   humvee_opening_node anim_generic(self, "invasion_opening_hummer1_soldier1");
 
   self.allowdeath = true;
@@ -4577,7 +4577,7 @@ setup_backseat_right_guy2() {
 }
 
 setup_player_humvee_driver() {
-  humvee_opening_node = getent("humvee_opening", "targetname");
+  humvee_opening_node = getEnt("humvee_opening", "targetname");
   humvee_opening_node anim_generic(self, "invasion_opening_hummer2_soldier1");
 }
 
@@ -4598,7 +4598,7 @@ fire_at_chain(current) {
     if(!isDefined(current.target)) {
       break;
     }
-    next = getent(current.target, "targetname");
+    next = getEnt(current.target, "targetname");
     if(!isDefined(next)) {
       break;
     }
@@ -4608,14 +4608,14 @@ fire_at_chain(current) {
 
 bmp_fires_first_volley_at_nates() {
   self endon("death");
-  current = getent("north_side_low", "targetname");
+  current = getEnt("north_side_low", "targetname");
 
   self SetTurretTargetVec(current.origin);
   self waittill("turret_on_target");
 
   self fire_at_chain(current);
 
-  current = getent("north_side_high", "targetname");
+  current = getEnt("north_side_high", "targetname");
 
   self SetTurretTargetVec(current.origin);
   self waittill("turret_on_target");
@@ -4640,7 +4640,7 @@ bmp_fires_more_volleys_at_nates() {
 }
 
 setup_nates_kitchen_ladder_clip() {
-  nates_kitchen_ladder_clip = getent("nates_kitchen_ladder_clip", "targetname");
+  nates_kitchen_ladder_clip = getEnt("nates_kitchen_ladder_clip", "targetname");
 
   while(1) {
     nates_kitchen_ladder_clip notsolid();
@@ -4657,7 +4657,7 @@ setup_nates_kitchen_ladder_clip() {
 }
 
 setup_bt_ktichen_ladder_clip() {
-  bt_ktichen_ladder_clip = getent("bt_ktichen_ladder_clip", "targetname");
+  bt_ktichen_ladder_clip = getEnt("bt_ktichen_ladder_clip", "targetname");
 
   while(1) {
     bt_ktichen_ladder_clip notsolid();
@@ -4674,7 +4674,7 @@ setup_bt_ktichen_ladder_clip() {
 }
 
 bmp_fires_at_nates() {
-  current = getent("west_side", "targetname");
+  current = getEnt("west_side", "targetname");
 
   self SetTurretTargetVec(current.origin);
   self waittill("turret_on_target");
@@ -4689,7 +4689,7 @@ add_org_to_tank_targets(ent, org, exploder) {
 }
 
 roof_parachute_landing_guy_humvee() {
-  roof_parachute_landing_guy_humvee = getent("humvee_ride_roof_landing", "targetname");
+  roof_parachute_landing_guy_humvee = getEnt("humvee_ride_roof_landing", "targetname");
   level.roof_parachute_landing_guy_humvee = roof_parachute_landing_guy_humvee spawn_ai();
   if(isDefined(level.animated_ride_in)) {
     level.roof_parachute_landing_guy_humvee.ignoreme = true;
@@ -4700,7 +4700,7 @@ roof_parachute_landing_guy_humvee() {
     return;
   }
   turret = level.humvee_front.mgturret[0];
-  target = getent("humvee_destroyer_init_target", "targetname");
+  target = getEnt("humvee_destroyer_init_target", "targetname");
   turret_guy = turret getTurretOwner();
   turret_guy.ignoreall = true;
   turret thread animscripts\hummer_turret\common::set_manual_target(target);
@@ -4727,7 +4727,7 @@ humvee_destroyer_action() {
   level.humvee_front.health = 30000;
   level.humvee_player.health = 30000;
 
-  self setturrettargetent(level.humvee_front, (0, 0, 40));
+  self setturrettargetEnt(level.humvee_front, (0, 0, 40));
 
   wait 1.5;
 
@@ -4748,7 +4748,7 @@ humvee_destroyer_action() {
     wait .2;
   }
 
-  self setturrettargetent(level.humvee_player, (0, 0, 40));
+  self setturrettargetEnt(level.humvee_player, (0, 0, 40));
   wait 1;
 
   for(j = 0; j < 3; j++) {
@@ -4759,7 +4759,7 @@ humvee_destroyer_action() {
   level.humvee_player maps\_vehicle::godoff();
   level.humvee_player kill();
 
-  self setturrettargetent(level.humvee_front, (0, 0, 40));
+  self setturrettargetEnt(level.humvee_front, (0, 0, 40));
   wait 1;
 
   for(j = 0; j < 5; j++) {
@@ -4774,11 +4774,11 @@ humvee_destroyer_fires_at_pillars_and_player() {
   self endon("death");
   ent = spawnStruct();
   ent.targets = [];
-  org = getstruct("pillar1", "targetname").origin;
+  org = getStruct("pillar1", "targetname").origin;
   add_org_to_tank_targets(ent, org, 9990);
-  org = getstruct("pillar2", "targetname").origin;
+  org = getStruct("pillar2", "targetname").origin;
   add_org_to_tank_targets(ent, org, 9991);
-  org = getstruct("pillar3", "targetname").origin;
+  org = getStruct("pillar3", "targetname").origin;
   add_org_to_tank_targets(ent, org, 9992);
 
   self setturrettargetvec(ent.targets[0]["origin"]);
@@ -4814,13 +4814,13 @@ setup_house_destroyer() {
 
   ent = spawnStruct();
   ent.targets = [];
-  org = getstruct("bh_roof", "targetname").origin;
+  org = getStruct("bh_roof", "targetname").origin;
   add_org_to_tank_targets(ent, org, 12);
-  org = getstruct("bh_corner", "targetname").origin;
+  org = getStruct("bh_corner", "targetname").origin;
   add_org_to_tank_targets(ent, org, 13);
-  org = getstruct("bh_garage_left", "targetname").origin;
+  org = getStruct("bh_garage_left", "targetname").origin;
   add_org_to_tank_targets(ent, org, 10);
-  org = getstruct("bh_garage_right", "targetname").origin;
+  org = getStruct("bh_garage_right", "targetname").origin;
   add_org_to_tank_targets(ent, org, 11);
 
   for(i = 0; i < ent.targets.size; i++) {
@@ -4833,7 +4833,7 @@ setup_house_destroyer() {
     }
   }
 
-  t = getstruct("cop_car", "targetname");
+  t = getStruct("cop_car", "targetname");
   self setturrettargetvec(t.origin);
   self waittill("turret_on_target");
 
@@ -4854,13 +4854,13 @@ setup_house_destroyer() {
 
   ent = spawnStruct();
   ent.targets = [];
-  org = getstruct("roof_corner", "targetname").origin;
+  org = getStruct("roof_corner", "targetname").origin;
   add_org_to_tank_targets(ent, org, 4);
-  org = getstruct("bh_corner", "targetname").origin;
+  org = getStruct("bh_corner", "targetname").origin;
   add_org_to_tank_targets(ent, org, 2);
-  org = getstruct("big_windows", "targetname").origin;
+  org = getStruct("big_windows", "targetname").origin;
   add_org_to_tank_targets(ent, org, 1);
-  org = getstruct("back_windows", "targetname").origin;
+  org = getStruct("back_windows", "targetname").origin;
   add_org_to_tank_targets(ent, org, 3);
 
   thread animate_burning_tree();
@@ -4878,7 +4878,7 @@ setup_house_destroyer() {
   self endon("stop_shooting");
   thread house_destroyer_shoot_agro_player();
 
-  t = getstruct("beemer", "targetname");
+  t = getStruct("beemer", "targetname");
   self setturrettargetvec(t.origin);
   self waittill("turret_on_target");
 
@@ -4888,7 +4888,7 @@ setup_house_destroyer() {
     wait .2;
   }
 
-  t = getstruct("barrier_car", "targetname");
+  t = getStruct("barrier_car", "targetname");
   self setturrettargetvec(t.origin);
   self waittill("turret_on_target");
 
@@ -5036,7 +5036,7 @@ fire_at_player(player) {
   println(" **HITTING PLAYER, burst: " + burstsize);
   fireTime = .2;
   for(i = 0; i < burstsize; i++) {
-    self setturrettargetent(player, randomvector(20) + (0, 0, 32));
+    self setturrettargetEnt(player, randomvector(20) + (0, 0, 32));
     self fireweapon();
     wait fireTime;
   }
@@ -5052,7 +5052,7 @@ miss_player(player) {
   for(i = 0; i < burstsize; i++) {
     offset = randomvector(15) + miss_vec + (0, 0, 64);
 
-    self setturrettargetent(player, offset);
+    self setturrettargetEnt(player, offset);
     self fireweapon();
     wait fireTime;
   }
@@ -5155,7 +5155,7 @@ setObjectiveLocation_nearest_enemy(objName) {
   objective = level.objectives[objName];
   closest_enemy = undefined;
   setObjectiveWaypoint(objName, &"INVASION_WAYPOINT_HOSTILES");
-  north_trucks_retreat_point = getent("north_trucks_retreat_point", "targetname");
+  north_trucks_retreat_point = getEnt("north_trucks_retreat_point", "targetname");
 
   while(objective.state != "done") {
     enemies = getaiarray("axis");
@@ -5261,7 +5261,7 @@ magic_glass_breaker() {
   toweaken = getdvarfloat("glass_damageToWeaken");
   todestroy = getdvarfloat("glass_damageToDestroy");
   bullets = (toweaken + todestroy) / 100;
-  trgt = getent(self.target, "targetname");
+  trgt = getEnt(self.target, "targetname");
   for(i = 0; i < bullets; i++) {
     magicbullet("nosound_magicbullet", self.origin, trgt.origin);
   }
@@ -5280,14 +5280,14 @@ UAVRigAiming() {
 
     angles = VectorToAngles(targetPos - level.uav.origin);
 
-    level.uavRig MoveTo(level.uav.origin, 0.10, 0, 0);
-    level.uavRig RotateTo(ANGLES, 0.10, 0, 0);
+    level.uavRig moveTo(level.uav.origin, 0.10, 0, 0);
+    level.uavRig rotateTo(ANGLES, 0.10, 0, 0);
     wait 0.05;
   }
 }
 
 cleanse_the_world() {
-  volume = getent("house_area_volume", "targetname");
+  volume = getEnt("house_area_volume", "targetname");
 
   entities = getEntArray();
 
@@ -5357,7 +5357,7 @@ needs_ent_testing() {
 }
 
 delete_house_area_entities() {
-  house_area_volume = getent("house_area_volume", "targetname");
+  house_area_volume = getEnt("house_area_volume", "targetname");
   ents = getEntArray();
   foreach(thing in ents) {
     if(!isDefined(thing)) {
@@ -5410,7 +5410,7 @@ wait_for_yards() {
 }
 
 objective_crash() {
-  obj = getstruct("police_car_moment", "script_noteworthy");
+  obj = getStruct("police_car_moment", "script_noteworthy");
   origin = obj.origin;
 
   registerObjective("obj_crash", &"INVASION_OBJ_FOLEY", level.raptor.origin);
@@ -5437,7 +5437,7 @@ objective_roof() {
 }
 
 objective_defend_roof() {
-  south_side_of_roof = getstruct("south_side_of_roof_obj_loc", "targetname");
+  south_side_of_roof = getStruct("south_side_of_roof_obj_loc", "targetname");
   origin = south_side_of_roof.origin;
 
   registerObjective("obj_defend", &"INVASION_OBJ_DEFEND", origin);
@@ -5446,13 +5446,13 @@ objective_defend_roof() {
 
   flag_wait("northside_roof");
 
-  northside_roof = getstruct("northside_roof", "targetname");
+  northside_roof = getStruct("northside_roof", "targetname");
   setObjectiveLocation("obj_defend", northside_roof.origin);
   setObjectiveWaypoint("obj_defend", &"INVASION_WAYPOINT_DEFEND");
 
   flag_wait("truck_guys_retreat");
 
-  off_the_roof = getstruct("off_the_roof", "targetname");
+  off_the_roof = getStruct("off_the_roof", "targetname");
   setObjectiveLocation("obj_defend", off_the_roof.origin);
   setObjectiveWaypoint("obj_defend");
 
@@ -5462,7 +5462,7 @@ objective_defend_roof() {
 }
 
 objective_predator() {
-  predator_drone_control = getent("predator_drone_control", "targetname");
+  predator_drone_control = getEnt("predator_drone_control", "targetname");
   origin = predator_drone_control.origin;
 
   registerObjective("obj_predator", &"INVASION_OBJ_PREDATOR", origin);
@@ -5474,7 +5474,7 @@ objective_predator() {
 }
 
 objective_burgertown() {
-  nates_restaurant_goal = getent("nates_restaurant_goal", "targetname");
+  nates_restaurant_goal = getEnt("nates_restaurant_goal", "targetname");
   origin = nates_restaurant_goal.origin;
 
   registerObjective("obj_burgertown", &"INVASION_OBJ_REGROUP", origin);
@@ -5482,7 +5482,7 @@ objective_burgertown() {
 
   flag_wait("time_to_clear_burgertown");
 
-  objective_burgertown_groundfloor = getent("objective_burgertown_groundfloor", "targetname");
+  objective_burgertown_groundfloor = getEnt("objective_burgertown_groundfloor", "targetname");
   origin = objective_burgertown_groundfloor.origin;
 
   setObjectiveString("obj_burgertown", &"INVASION_OBJ_BURGERTOWN");
@@ -5519,7 +5519,7 @@ objective_BMPs() {
 }
 
 objective_regroup_at_nates() {
-  objective = getent("raptor_in_nates_prep", "targetname");
+  objective = getEnt("raptor_in_nates_prep", "targetname");
   origin = objective.origin;
 
   registerObjective("obj_nates_regroup", &"INVASION_OBJ_NATES_REGROUP", origin);
@@ -5550,14 +5550,14 @@ objective_defend_raptor() {
 
 setup_stingers() {
   level.nates_stinger = [];
-  nates_stinger = getent("nates_stinger", "script_noteworthy");
+  nates_stinger = getEnt("nates_stinger", "script_noteworthy");
   level.nates_stinger["origin"] = nates_stinger.origin;
   level.nates_stinger["angles"] = nates_stinger.angles;
   level.nates_stinger["classname"] = nates_stinger.classname;
 
   level waittill("attack_heli_spawned");
 
-  diner_stinger = getent("diner", "script_noteworthy");
+  diner_stinger = getEnt("diner", "script_noteworthy");
   if(isDefined(diner_stinger)) {
     diner_stinger setModel("weapon_stinger_obj");
   }
@@ -5581,7 +5581,7 @@ setup_stingers() {
     if(!needs_stinger) {
       continue;
     }
-    nates_stinger = getent("nates_stinger", "script_noteworthy");
+    nates_stinger = getEnt("nates_stinger", "script_noteworthy");
     if(!isDefined(nates_stinger)) {
       weapon = spawn(level.nates_stinger["classname"], level.nates_stinger["origin"], 1);
       weapon.angles = level.nates_stinger["angles"];
@@ -5604,7 +5604,7 @@ objective_destroy_helicopter(second_heli) {
   if(needs_stinger) {
     stinger_loc = level.nates_stinger["origin"];
 
-    diner_stinger = getent("diner", "script_noteworthy");
+    diner_stinger = getEnt("diner", "script_noteworthy");
     if(isDefined(diner_stinger)) {
       stinger_loc = diner_stinger.origin;
       level.obj_direction = "west";
@@ -5678,7 +5678,7 @@ objective_convoy() {
   flag_wait("time_to_goto_convoy");
 
   if(!isDefined(level.convoy)) {
-    level.convoy = getent("convoy_obj", "targetname");
+    level.convoy = getEnt("convoy_obj", "targetname");
   }
 
   registerObjective("obj_convoy", &"INVASION_OBJ_CONVOY", level.convoy.origin);

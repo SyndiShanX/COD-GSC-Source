@@ -906,7 +906,7 @@ function audio_loop() {
   while(true) {
     foreach(zone in level.zones) {
       if(is_zone_contested(zone.gameobject)) {
-        playsoundatposition(#"mpl_zone_contested", zone.gameobject.origin);
+        playSoundAtPosition(#"mpl_zone_contested", zone.gameobject.origin);
         break;
       }
     }
@@ -1816,7 +1816,7 @@ function on_decay_complete() {
 
 function score_capture_progress(var_277695bd) {
   trig = self.owningzone.trigger;
-  players = getplayers();
+  players = getPlayers();
   var_2a493d33 = undefined;
 
   for(i = 0; i < players.size; i++) {
@@ -1881,7 +1881,7 @@ function on_use_update(team, progress, change) {
   if(change > 0 && self.currentlyunoccupied) {
     level.numzonesoccupied++;
     self.currentlyunoccupied = 0;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(player.team == game.attackers) {

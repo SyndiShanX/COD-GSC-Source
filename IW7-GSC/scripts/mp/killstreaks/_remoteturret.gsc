@@ -363,8 +363,8 @@ func_12A2A() {
   }
 
   self.ownertrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 32, 64);
-  self.ownertrigger enablelinkto();
-  self.ownertrigger linkto(self);
+  self.ownertrigger enablelinkTo();
+  self.ownertrigger linkTo(self);
   var_0 thread turret_handlepickup(self);
   thread func_13A1D();
   thread func_129FB();

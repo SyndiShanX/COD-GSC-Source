@@ -277,7 +277,7 @@ sentry_initSentry(sentryType, owner) {
       self.laser_on = false;
 
       killCamEnt = spawn("script_model", self GetTagOrigin("tag_laser"));
-      killCamEnt LinkTo(self);
+      killCamEnt linkTo(self);
       self.killCamEnt = killCamEnt;
       self.killCamEnt SetScriptMoverKillCam("explosive");
       break;
@@ -338,7 +338,7 @@ sentry_createBombSquadModel(sentryType) {
 
     bombSquadModel thread maps\mp\gametypes\_weapons::bombSquadVisibilityUpdater(self.owner);
     bombSquadModel setModel(level.sentrySettings[sentryType].modelBombSquad);
-    bombSquadModel LinkTo(self);
+    bombSquadModel linkTo(self);
     bombSquadModel SetContents(0);
     self.bombSquadModel = bombSquadModel;
 
@@ -698,8 +698,8 @@ sentry_setPlaced() {
       }
 
       self.ownerTrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 105, 64);
-      self.ownerTrigger EnableLinkTo();
-      self.ownerTrigger LinkTo(self);
+      self.ownerTrigger EnablelinkTo();
+      self.ownerTrigger linkTo(self);
       assert(isDefined(self.ownerTrigger));
       self.originalOwner thread turret_handlePickup(self);
       self thread turret_handleUse();

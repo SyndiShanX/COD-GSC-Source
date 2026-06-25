@@ -174,7 +174,7 @@ function reenable_quickrevive(machine_clip, solo_mode) {
   if(isDefined(solo_mode) && solo_mode) {
     power_state = 1;
     should_pause = 1;
-    players = getplayers();
+    players = getPlayers();
     foreach(player in players) {
       if(isDefined(player.lives) && player.lives > 0 && power_state) {
         should_pause = 0;
@@ -240,7 +240,7 @@ function reenable_quickrevive(machine_clip, solo_mode) {
     return;
   }
   should_pause = 1;
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!zm_utility::is_player_valid(player)) {
       continue;
@@ -283,7 +283,7 @@ function check_quickrevive_for_hotjoin() {
   solo_mode = 0;
   should_update = 0;
   wait(0.05);
-  players = getplayers();
+  players = getPlayers();
   if(players.size == 1 || (isDefined(level.force_solo_quick_revive) && level.force_solo_quick_revive)) {
     solo_mode = 1;
     if(!level flag::get("solo_game")) {
@@ -320,11 +320,11 @@ function revive_solo_fx(machine_clip, blocker_model) {
   }
   wait(2);
   self playSound("zmb_box_move");
-  playsoundatposition("zmb_whoosh", self.origin);
+  playSoundAtPosition("zmb_whoosh", self.origin);
   if(isDefined(self._linked_ent)) {
     self unlink();
   }
-  self moveto(self.origin + vectorscale((0, 0, 1), 40), 3);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 40), 3);
   if(isDefined(level.custom_vibrate_func)) {
     [[level.custom_vibrate_func]](self);
   } else {
@@ -339,7 +339,7 @@ function revive_solo_fx(machine_clip, blocker_model) {
   }
   self waittill("movedone");
   playFX(level._effect["poltergeist"], self.origin);
-  playsoundatposition("zmb_box_poof", self.origin);
+  playSoundAtPosition("zmb_box_poof", self.origin);
   if(isDefined(self.fx)) {
     self.fx unlink();
     self.fx delete();
@@ -383,7 +383,7 @@ function disable_quickrevive(machine_clip) {
       }
       level.quick_revive_machine unlink();
     }
-    level.quick_revive_machine moveto(move_org + vectorscale((0, 0, 1), 40), 3);
+    level.quick_revive_machine moveTo(move_org + vectorscale((0, 0, 1), 40), 3);
     direction = level.quick_revive_machine.origin;
     direction = (direction[1], direction[0], 0);
     if(direction[1] < 0 || (direction[0] > 0 && direction[1] > 0)) {
@@ -413,7 +413,7 @@ function unhide_quickrevive() {
   }
   if(isDefined(level.quick_revive_machine_clip)) {
     level.quick_revive_machine_clip show();
-    level.quick_revive_machine_clip disconnectpaths();
+    level.quick_revive_machine_clip disconnectPaths();
   }
   if(isDefined(level.quick_revive_final_pos)) {
     level.quick_revive_machine.origin = level.quick_revive_final_pos;
@@ -443,7 +443,7 @@ function unhide_quickrevive() {
     }
   }
   if(!(isDefined(level.quick_revive_linked_ent_moves) && level.quick_revive_linked_ent_moves) && level.quick_revive_machine.origin != org) {
-    level.quick_revive_machine moveto(org, 3);
+    level.quick_revive_machine moveTo(org, 3);
     level.quick_revive_machine vibrate(direction, 10, 0.5, 2.9);
     level.quick_revive_machine waittill("movedone");
     level.quick_revive_machine.angles = level.quick_revive_default_angles;
@@ -458,7 +458,7 @@ function unhide_quickrevive() {
     level.quick_revive_machine vibrate(vectorscale((0, -1, 0), 100), 0.3, 0.4, 3);
   }
   if(isDefined(level.quick_revive_linked_ent)) {
-    level.quick_revive_machine linkto(level.quick_revive_linked_ent);
+    level.quick_revive_machine linkTo(level.quick_revive_linked_ent);
   }
   level.quick_revive_machine.ishidden = 0;
 }

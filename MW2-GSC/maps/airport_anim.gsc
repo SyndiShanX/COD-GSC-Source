@@ -742,22 +742,22 @@ lookat_off(guy) {
 }
 
 doorkick_basement(guy) {
-  door = getent("basement_door", "targetname");
+  door = getEnt("basement_door", "targetname");
   door connectpaths();
 
   door playSound("wood_door_kick");
-  door rotateyaw(95, .25, 0, .25);
+  door rotateYaw(95, .25, 0, .25);
   door waittill("rotatedone");
-  door rotateyaw(-20, 2, 0, 2);
+  door rotateYaw(-20, 2, 0, 2);
 }
 
 doorkick_escape(guy) {
-  door = getent("escape_door", "targetname");
+  door = getEnt("escape_door", "targetname");
   door connectpaths();
   door playSound("wood_door_kick");
-  door rotateyaw(-95, .25, 0, .25);
+  door rotateYaw(-95, .25, 0, .25);
   door waittill("rotatedone");
-  door rotateyaw(20, 2, 0, 2);
+  door rotateYaw(20, 2, 0, 2);
 }
 
 cop_shout(guy) {
@@ -780,7 +780,7 @@ nadethrow_elev(guy) {
   ri = vector_multiply(ri, -.25);
   end = guy.origin + vector_multiply(vec, 50);
   end = end + (0, 0, 14) + ri;
-  vec = vectornormalize(end - guy.origin);
+  vec = vectorNormalize(end - guy.origin);
   vec = vector_multiply(vec, 800);
 
   time = 2.5;
@@ -800,7 +800,7 @@ nadethrow_mak(guy) {
   ri = vector_multiply(ri, 4);
   end = guy.origin + vector_multiply(vec, 50);
   end = end + (0, 0, 6) + ri;
-  vec = vectornormalize(end - guy.origin);
+  vec = vectorNormalize(end - guy.origin);
   vec = vector_multiply(vec, 1300);
 
   flag_set("massacre_nadethrow");
@@ -815,7 +815,7 @@ nadethrow(guy) {
   end = guy.origin + vector_multiply(vec, 50);
   end = end + (0, 0, 5);
   dmg = end + (0, 0, 30);
-  vec = vectornormalize(end - guy.origin);
+  vec = vectorNormalize(end - guy.origin);
   vec = vector_multiply(vec, 512);
 
   guy magicgrenademanual(guy gettagorigin("TAG_INHAND"), vec, 1.5);
@@ -856,7 +856,7 @@ slide_death(guy) {
 
   origin = guy gettagorigin("J_SpineUpper");
   enemy = getclosest(guy.origin, level.team);
-  vec = vectornormalize(enemy.origin - origin);
+  vec = vectorNormalize(enemy.origin - origin);
   vec2 = vector_multiply(vec, 10);
 
   playFX(getfx("killshot"), origin + vec2, vec);
@@ -881,7 +881,7 @@ smoke_throw(guy) {
 
   wait .5;
 
-  guy stopanimscripted();
+  guy stopanimScripted();
   guy notify("grenade_throw_done");
 }
 

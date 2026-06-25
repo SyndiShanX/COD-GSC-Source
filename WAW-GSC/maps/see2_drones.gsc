@@ -264,7 +264,7 @@ do_single_dummy_vehicle(pathnum, model, maxTimeBeforeDestroy, minSpeed, maxSpeed
   wait(randomfloat(staggerAmt));
   speed = randomfloatrange(minSpeed, maxSpeed);
   time = 0;
-  toNode = GetEnt(level.vehicle_starts[pathnum].target, "targetname");
+  toNode = getEnt(level.vehicle_starts[pathnum].target, "targetname");
   fromNode = level.vehicle_starts[pathnum];
   toVec = toNode.origin - fromNode.origin;
   myModel = spawn("script_model", fromNode.origin + (0, 0, 15));
@@ -278,7 +278,7 @@ do_single_dummy_vehicle(pathnum, model, maxTimeBeforeDestroy, minSpeed, maxSpeed
   self thread run_timer(time);
   while(level.valid_path[pathnum]) {
     if(isDefined(fromNode.target)) {
-      toNode = GetEnt(fromNode.target, "targetname");
+      toNode = getEnt(fromNode.target, "targetname");
       if(isDefined(fromNode.script_string)) {
         myModel notify("stop anim");
         myModel play_vehicle_anim(fromNode.script_string);
@@ -300,7 +300,7 @@ do_single_dummy_vehicle(pathnum, model, maxTimeBeforeDestroy, minSpeed, maxSpeed
       wait(1);
       myModel = spawn("script_model", toNode.origin);
       myModel setModel(model);
-      myModel.angles = VectorToAngles(GetEnt(toNode.target, "targetname").origin - toNode.origin);
+      myModel.angles = VectorToAngles(getEnt(toNode.target, "targetname").origin - toNode.origin);
       myModel.animname = "dummy";
       myModel setAnimTree();
       myModel notify("stop anim");
@@ -531,7 +531,7 @@ see2_drone_death() {
   }
 
   drone notify("death");
-  drone stopAnimScripted();
+  drone stopanimScripted();
 
   if(isDefined(drone.special_death_fx)) {
     drone.special_death_fx = "drone_burst";

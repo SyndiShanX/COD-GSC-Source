@@ -367,12 +367,12 @@ crafting_item_timeout(var_0) {
   var_4 = 0;
   while(gettime() < var_2) {
     if(var_4 == 0) {
-      self rotateyaw(360, 2);
+      self rotateYaw(360, 2);
       self movez(5, 2);
     }
 
     if(var_4 == 2) {
-      self rotateyaw(360, 2);
+      self rotateYaw(360, 2);
       self movez(-5, 2);
     }
 

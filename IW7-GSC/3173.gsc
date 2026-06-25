@@ -842,9 +842,9 @@ func_1E80() {
   var_2 = var_0 - var_1;
   var_3 = anglesToForward(self.angles);
   var_4 = vectorcross(var_3, var_2);
-  var_5 = vectornormalize(var_4);
-  var_6 = vectornormalize(var_2);
-  var_7 = vectornormalize(var_3);
+  var_5 = vectorNormalize(var_4);
+  var_6 = vectorNormalize(var_2);
+  var_7 = vectorNormalize(var_3);
   var_8 = vectordot(var_6, var_7);
   if(isDefined(self.var_13862)) {
     var_9 = scripts\engine\utility::anglebetweenvectors(var_2, var_3);

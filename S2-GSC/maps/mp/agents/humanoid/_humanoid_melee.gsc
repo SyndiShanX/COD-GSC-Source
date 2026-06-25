@@ -189,7 +189,7 @@ func_11AF(param_00) {
 }
 
 func_56DA(param_00, param_01) {
-  var_02 = vectornormalize(param_00.var_0116 - self.var_0116 * (1, 1, 0));
+  var_02 = vectorNormalize(param_00.var_0116 - self.var_0116 * (1, 1, 0));
   var_03 = anglesToForward(self.var_001D);
   var_04 = vectordot(var_02, var_03);
   return var_04 > param_01;
@@ -253,14 +253,14 @@ func_A12D(param_00, param_01, param_02, param_03) {
 
     var_09 = var_07 - var_04;
     if(lengthsquared(var_09) > var_08 * var_08) {
-      var_07 = var_04 + vectornormalize(var_09) * var_08;
+      var_07 = var_04 + vectorNormalize(var_09) * var_08;
     }
 
     if(self method_85DF()) {
       var_0A = common_scripts\utility::func_3D5D(var_07 - self.var_0116);
       var_0B = length(var_0A);
       if(var_0B > 1) {
-        var_0C = vectornormalize(common_scripts\utility::func_3D5D(anglesToForward(self.var_001D)));
+        var_0C = vectorNormalize(common_scripts\utility::func_3D5D(anglesToForward(self.var_001D)));
         var_0D = var_0A / var_0B;
         var_0E = acos(clamp(vectordot(var_0D, var_0C), -1, 1));
         var_0F = self method_85DD();
@@ -268,7 +268,7 @@ func_A12D(param_00, param_01, param_02, param_03) {
         if(var_0E > var_10) {
           var_11 = self.var_0116 + var_0C * var_0B * max(0, vectordot(var_0C, var_0D));
           if(distance(var_04, var_11) > var_08) {
-            var_11 = var_04 + vectornormalize(var_11 - var_04) * var_08;
+            var_11 = var_04 + vectorNormalize(var_11 - var_04) * var_08;
           }
 
           var_07 = var_11;
@@ -307,7 +307,7 @@ func_4707(param_00, param_01) {
 func_5797(param_00) {
   if(param_00 maps\mp\_riotshield::func_4B8C()) {
     var_01 = self.var_0116 - param_00.var_0116;
-    var_02 = vectornormalize((var_01[0], var_01[1], 0));
+    var_02 = vectorNormalize((var_01[0], var_01[1], 0));
     var_03 = anglesToForward(param_00.var_001D);
     var_04 = vectordot(var_03, var_01);
     if(param_00 maps\mp\_riotshield::func_4B8D()) {

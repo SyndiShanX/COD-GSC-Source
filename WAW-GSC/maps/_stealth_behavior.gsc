@@ -76,7 +76,7 @@ enemy_try_180_turn(pos) {
     return;
   }
   vec1 = anglesToForward(self.angles);
-  vec2 = vectornormalize(pos - self.origin);
+  vec2 = vectorNormalize(pos - self.origin);
   if(vectordot(vec1, vec2) < -.8) {
     start = self.origin + (0, 0, 16);
     end = pos + (0, 0, 16);
@@ -167,7 +167,7 @@ ai_clear_custom_animation_reaction_and_idle() {
     return;
   }
   self._stealth.behavior.event.custom_animation.node notify("stop_loop");
-  self stopanimscripted();
+  self stopanimScripted();
   self ai_clear_custom_animation_reaction();
 }
 
@@ -998,7 +998,7 @@ enemy_alert_level_alerted_once(enemy) {
     self.disableexits = true;
   }
 
-  vec = vectornormalize(enemy.origin - self.origin);
+  vec = vectorNormalize(enemy.origin - self.origin);
   dist = distance(enemy.origin, self.origin);
   dist *= .25;
 
@@ -1217,7 +1217,7 @@ enemy_saw_corpse_logic() {
 
 enemy_stop_current_behavior() {
   if(!self ent_flag("_stealth_behavior_reaction_anim")) {
-    self stopanimscripted();
+    self stopanimScripted();
     self notify("stop_animmode");
     self notify("stop_loop");
   }
@@ -1463,7 +1463,7 @@ friendly_state_spotted() {
   self.Accuracy = self._stealth.behavior.badaccuracy;
   self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
   self allowedstances("prone", "crouch", "stand");
-  self stopanimscripted();
+  self stopanimScripted();
   self.ignoreall = false;
   self.ignoreme = false;
   self disable_cqbwalk();
@@ -1634,7 +1634,7 @@ friendly_stance_handler_set_stance_up() {
 
 friendly_stance_handler_return_ai_sight(ai, stance) {
   vec1 = anglesToForward(ai.angles);
-  vec2 = vectornormalize(self.origin - ai.origin);
+  vec2 = vectorNormalize(self.origin - ai.origin);
 
   vecdot = vectordot(vec1, vec2);
   state = level._stealth.logic.detection_level;

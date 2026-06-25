@@ -1887,7 +1887,7 @@ player_killstreak_threat_tracking(killstreaktype) {
 
       lookdir = anglesToForward(lookangles);
       eyepoint = player getEye();
-      streakdir = vectornormalize(self.origin - eyepoint);
+      streakdir = vectorNormalize(self.origin - eyepoint);
       dot = vectordot(streakdir, lookdir);
 
       if(dot < 0.94) {
@@ -3265,9 +3265,9 @@ update_dog_threat(dog) {
 }
 
 missile_valid_target_check(missiletarget) {
-  heli2target_normal = vectornormalize(missiletarget.origin - self.origin);
+  heli2target_normal = vectorNormalize(missiletarget.origin - self.origin);
   heli2forward = anglesToForward(self.angles);
-  heli2forward_normal = vectornormalize(heli2forward);
+  heli2forward_normal = vectorNormalize(heli2forward);
   heli_dot_target = vectordot(heli2target_normal, heli2forward_normal);
 
   if(heli_dot_target >= level.heli_valid_target_cone) {

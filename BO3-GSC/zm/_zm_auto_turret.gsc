@@ -42,9 +42,9 @@ function __main__() {
     level.auto_turret_timeout = 30;
   }
   for(i = 0; i < level.auto_turret_array.size; i++) {
-    level.auto_turret_array[i] setcursorhint("HINT_NOICON");
-    level.auto_turret_array[i] sethintstring(&"ZOMBIE_NEED_POWER");
-    level.auto_turret_array[i] usetriggerrequirelookat();
+    level.auto_turret_array[i] setCursorHint("HINT_NOICON");
+    level.auto_turret_array[i] setHintString(&"ZOMBIE_NEED_POWER");
+    level.auto_turret_array[i] useTriggerRequireLookAt();
     level.auto_turret_array[i].curr_time = -1;
     level.auto_turret_array[i].turret_active = 0;
     level.auto_turret_array[i] thread auto_turret_think();
@@ -81,7 +81,7 @@ function auto_turret_think() {
   }
   for(;;) {
     cost = level.auto_turret_cost;
-    self sethintstring(&"ZOMBIE_AUTO_TURRET", cost);
+    self setHintString(&"ZOMBIE_AUTO_TURRET", cost);
     self waittill("trigger", player);
     index = zm_utility::get_player_index(player);
     if(player laststand::player_is_in_laststand()) {
@@ -99,13 +99,13 @@ function auto_turret_think() {
     self.turret.activated_by_player = player;
     self thread auto_turret_activate();
     var_736ddf4 = spawn("script_origin", self.origin);
-    playsoundatposition("zmb_cha_ching", self.origin);
-    playsoundatposition("zmb_turret_startup", self.origin);
+    playSoundAtPosition("zmb_cha_ching", self.origin);
+    playSoundAtPosition("zmb_turret_startup", self.origin);
     var_736ddf4 playLoopSound("zmb_turret_loop");
     self triggerenable(0);
     self waittill("turret_deactivated");
     var_736ddf4 stoploopsound();
-    playsoundatposition("zmb_turret_down", self.audio_origin);
+    playSoundAtPosition("zmb_turret_down", self.audio_origin);
     var_736ddf4 delete();
     self triggerenable(1);
   }

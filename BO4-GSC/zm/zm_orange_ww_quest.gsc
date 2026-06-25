@@ -124,7 +124,7 @@ function_d997ba18() {
 
 function_575a8040(e_player) {
   str_hint = zm_utility::function_d6046228(#"hash_6649759b63221feb", #"hash_aed756161e44fe1");
-  self sethintstring(str_hint);
+  self setHintString(str_hint);
   return true;
 }
 
@@ -165,7 +165,7 @@ function_401b015a(e_player) {
   }
 
   str_hint = zm_utility::function_d6046228(#"hash_53753033c9262930", #"hash_79ec41cce109821c");
-  self sethintstring(str_hint);
+  self setHintString(str_hint);
   return true;
 }
 
@@ -189,7 +189,7 @@ function_f7a8831a() {
     level.s_ww_quest.var_27a40ea3 hidepart("tag_icicle", "p8_fxanim_zm_orange_frozen_key", 1);
     level.s_ww_quest.s_icicle_in_pot scene::play("evaporate");
     var_3eb924ae delete();
-    playsoundatposition(#"hash_1fe7d157e75bcb38", self.origin);
+    playSoundAtPosition(#"hash_1fe7d157e75bcb38", self.origin);
     level flag::clear(#"ww_icicle_melting");
     level flag::set(#"ww_icicle_melted");
   }
@@ -214,7 +214,7 @@ ww_quest_step3_cleanup(var_5ea5c94d, ended_early) {
 
 function_10aa0f27(e_player) {
   str_hint = zm_utility::function_d6046228(#"hash_7830e4902246743f", #"hash_6a4ef97c05602fdd");
-  self sethintstring(str_hint);
+  self setHintString(str_hint);
   return true;
 }
 
@@ -223,7 +223,7 @@ function_993730f4() {
   s_result = self waittill(#"trigger_activated");
   e_who = s_result.e_who;
   level zm_ui_inventory::function_7df6bb60("zm_orange_ww_quest", 2);
-  playsoundatposition(#"evt_key_pickup", self.origin);
+  playSoundAtPosition(#"evt_key_pickup", self.origin);
   level.s_ww_quest.var_27a40ea3 hidepart("tag_key");
   self thread function_a67de655(e_who);
   level flag::set(#"ww_key_picked_up");
@@ -239,7 +239,7 @@ function_a67de655(e_player) {
 }
 
 ww_quest_step4_setup(var_5ea5c94d) {
-  level.s_ww_quest.var_aaedf111 = getent("ww_quest_safe_door", "targetname");
+  level.s_ww_quest.var_aaedf111 = getEnt("ww_quest_safe_door", "targetname");
   level.s_ww_quest.s_safe = struct::get("ww_quest_safe_use", "targetname");
 
   if(!var_5ea5c94d) {
@@ -270,7 +270,7 @@ function_731665dd() {
 }
 
 function_8613de32() {
-  self rotateyaw(-195, 1.5);
+  self rotateYaw(-195, 1.5);
   self playSound("evt_safe_open");
   self waittill(#"rotatedone");
 }
@@ -291,10 +291,10 @@ function_29d4087d(player) {
 }
 
 ww_quest_step5_setup(var_5ea5c94d) {
-  level.s_ww_quest.var_a90a158b = getent("ww_quest_vril_device", "targetname");
+  level.s_ww_quest.var_a90a158b = getEnt("ww_quest_vril_device", "targetname");
   level.s_ww_quest.var_e0942fa0 = struct::get("ww_quest_vril_device_struct", "targetname");
   level.s_ww_quest.var_e0942fa0.var_b9989e12 = hash(level.s_ww_quest.var_e0942fa0.script_noteworthy);
-  level.s_ww_quest.var_e0942fa0.var_c5e93537 = getent(level.s_ww_quest.var_e0942fa0.target, "targetname");
+  level.s_ww_quest.var_e0942fa0.var_c5e93537 = getEnt(level.s_ww_quest.var_e0942fa0.target, "targetname");
 
   if(!var_5ea5c94d) {
     level.s_ww_quest.var_e0942fa0.var_7944be4a = 0;
@@ -326,9 +326,9 @@ is_soul_capture(var_88206a50, ent) {
 soul_captured(var_f0e6c7a2, ent) {
   n_souls_required = 10;
 
-  if(getplayers().size > 2) {
+  if(getPlayers().size > 2) {
     n_souls_required = 20;
-  } else if(getplayers().size > 1) {
+  } else if(getPlayers().size > 1) {
     n_souls_required = 15;
   }
 
@@ -369,7 +369,7 @@ ww_quest_step6_cleanup(var_5ea5c94d, ended_early) {
 
 function_cb9653f9(e_player) {
   str_hint = zm_utility::function_d6046228(#"hash_188b62454f9ad5e2", #"hash_63560b3154dd8df6");
-  self sethintstring(str_hint);
+  self setHintString(str_hint);
   return true;
 }
 
@@ -377,7 +377,7 @@ function_2187358d() {
   level endon(#"end_game", #"hash_45b20bfeff570913");
   s_result = self waittill(#"trigger_activated");
   e_who = s_result.e_who;
-  playsoundatposition(#"hash_565a70d2b5a64e2", self.origin);
+  playSoundAtPosition(#"hash_565a70d2b5a64e2", self.origin);
   level thread function_53bfbec4(e_who);
   level flag::set(#"hash_45b20bfeff570913");
 }
@@ -435,9 +435,9 @@ function_2b590a59() {
 ww_quest_step9_setup(var_5ea5c94d) {
   level.s_ww_quest.var_16c37c7f = struct::get("reward_crate_dg1", "targetname");
   var_16c37c7f = level.s_ww_quest.var_16c37c7f;
-  var_16c37c7f.e_lid = getent(var_16c37c7f.var_c8166135, "targetname");
-  var_16c37c7f.e_lock = getent(var_16c37c7f.target_lock, "targetname");
-  var_16c37c7f.e_weapon = getent(var_16c37c7f.target_weapon, "targetname");
+  var_16c37c7f.e_lid = getEnt(var_16c37c7f.var_c8166135, "targetname");
+  var_16c37c7f.e_lock = getEnt(var_16c37c7f.target_lock, "targetname");
+  var_16c37c7f.e_weapon = getEnt(var_16c37c7f.target_weapon, "targetname");
 
   if(!var_5ea5c94d) {
     var_16c37c7f zm_unitrigger::create(&function_54e8826c, 64);
@@ -462,7 +462,7 @@ ww_quest_step9_cleanup(var_5ea5c94d, ended_early) {
 
 function_54e8826c(e_player) {
   str_hint = zm_utility::function_d6046228(#"hash_509dd10b32275ac6", #"hash_1fbdd38541c13a62");
-  self sethintstring(str_hint);
+  self setHintString(str_hint);
   return true;
 }
 
@@ -509,7 +509,7 @@ ww_quest_step10_cleanup(var_5ea5c94d, ended_early) {
       var_16c37c7f.e_weapon delete();
     }
 
-    a_e_players = getplayers();
+    a_e_players = getPlayers();
 
     foreach(e_player in a_e_players) {
       if(!e_player util::is_spectating()) {

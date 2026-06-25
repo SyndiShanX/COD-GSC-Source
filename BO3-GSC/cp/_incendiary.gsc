@@ -61,13 +61,13 @@ function watchforexplode(owner) {
   killcament = spawn("script_model", self.origin);
   killcament util::deleteaftertime(15);
   killcament.starttime = gettime();
-  killcament linkto(self);
+  killcament linkTo(self);
   killcament setweapon(self.weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
   self waittill("projectile_impact_explode", origin, normal, surface);
   killcament unlink();
   updateincendiaryfromdvars();
-  playsoundatposition("wpn_incendiary_core_start", self.origin);
+  playSoundAtPosition("wpn_incendiary_core_start", self.origin);
   generatelocations(origin, owner, normal, killcament);
 }
 
@@ -85,7 +85,7 @@ function generatelocations(position, owner, normal, killcament) {
   desiredendpos = startpos + vectorscale((0, 0, 1), 60);
   phystrace = physicstrace(startpos, desiredendpos, vectorscale((-1, -1, -1), 4), vectorscale((1, 1, 1), 4), self, 1);
   goalpos = (phystrace["fraction"] < 1 ? phystrace["position"] : desiredendpos);
-  killcament moveto(goalpos, 0.5);
+  killcament moveTo(goalpos, 0.5);
   rotation = randomint(360);
   if(normal[2] < 0.1) {
     black = vectorscale((1, 1, 1), 0.1);
@@ -203,7 +203,7 @@ function getpotentialtargets(owner) {
   if(level.teambased && isDefined(owner_team) && level.friendlyfire == 0) {
     enemy_team = (owner_team == "axis" ? "allies" : "axis");
     potential_targets = [];
-    potential_targets = arraycombine(potential_targets, getplayers(enemy_team), 0, 0);
+    potential_targets = arraycombine(potential_targets, getPlayers(enemy_team), 0, 0);
     potential_targets = arraycombine(potential_targets, getaiteamarray(enemy_team), 0, 0);
     potential_targets = arraycombine(potential_targets, getvehicleteamarray(enemy_team), 0, 0);
     potential_targets[potential_targets.size] = owner;
@@ -282,7 +282,7 @@ function sndfiredamage() {
   self endon("sndfire");
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
-    self.sndfireent linkto(self, "tag_origin");
+    self.sndfireent linkTo(self, "tag_origin");
     self.sndfireent playSound("chr_burn_start");
     self thread sndfiredamage_deleteent(self.sndfireent);
   }

@@ -106,7 +106,7 @@ _id_28C1(var_0, var_1, var_2, var_3, var_4) {
       }
 
       if(distancesquared(var_9.origin, var_2.origin) > 90000) {
-        if(vectordot(var_7, vectornormalize(var_9.origin - var_2.origin)) < 0.4) {
+        if(vectordot(var_7, vectorNormalize(var_9.origin - var_2.origin)) < 0.4) {
           var_6[var_6.size] = var_9;
         }
       }
@@ -413,7 +413,7 @@ _id_2767(var_0, var_1, var_2, var_3) {
       var_9 = _func_00B5(var_8, 256, 0);
 
       for(var_10 = 0; var_10 < var_9.size; var_10++) {
-        var_11 = vectornormalize(var_9[var_10].origin - var_8);
+        var_11 = vectorNormalize(var_9[var_10].origin - var_8);
         var_12 = var_8 + var_11 * 15;
 
         if(_func_0202(var_12, var_9[var_10].origin, 0, undefined)) {
@@ -1103,12 +1103,12 @@ _id_285D() {
 
   for(;;) {
     var_0 = anglesToForward(self._id_2764 getplayerangles()) * (1, 1, 0);
-    var_0 = vectornormalize(var_0);
+    var_0 = vectorNormalize(var_0);
 
     foreach(var_2 in self._id_10A77) {
       var_2._id_10A75[self._id_5501] = var_2._id_10A74[self._id_5501];
       var_3 = var_2.origin - self._id_2764.origin;
-      var_3 = vectornormalize(var_3);
+      var_3 = vectorNormalize(var_3);
       var_4 = vectordot(var_0, var_3);
 
       if(var_4 > 0.6) {
@@ -1128,14 +1128,14 @@ _id_285D() {
 
 _id_551F(var_0) {
   var_1 = _func_00B8(var_0);
-  var_2 = vectornormalize(var_0.origin - self.origin);
+  var_2 = vectorNormalize(var_0.origin - self.origin);
 
   for(var_3 = 0; var_3 < level._id_110E1; var_3++) {
     if(_func_0029(var_3, self.team, "enemy_predict") > 0) {
       if(isDefined(var_1) && var_3 == var_1) {
         return 1;
       } else {
-        var_4 = vectornormalize(_func_00F9(var_3) - self.origin);
+        var_4 = vectorNormalize(_func_00F9(var_3) - self.origin);
         var_5 = vectordot(var_2, var_4);
 
         if(var_5 > 0.2) {
@@ -1162,7 +1162,7 @@ _id_BD26(var_0) {
       break;
     }
 
-    var_3 = vectornormalize(_func_00F9(var_2) - self.origin);
+    var_3 = vectorNormalize(_func_00F9(var_2) - self.origin);
 
     for(var_4 = 0; var_4 < var_1.size; var_4++) {
       var_5 = _func_00B8(var_1[var_4]);
@@ -1171,7 +1171,7 @@ _id_BD26(var_0) {
       if(isDefined(var_5) && var_2 == var_5) {
         var_6 = 1;
       } else {
-        var_7 = vectornormalize(var_1[var_4].origin - self.origin);
+        var_7 = vectorNormalize(var_1[var_4].origin - self.origin);
         var_8 = vectordot(var_7, var_3);
 
         if(var_8 > 0.2) {
@@ -1207,7 +1207,7 @@ _id_5521(var_0) {
 
 _id_5522(var_0, var_1) {
   var_2 = anglesToForward(var_0 getplayerangles());
-  var_3 = vectornormalize(var_1.origin - var_0.origin);
+  var_3 = vectorNormalize(var_1.origin - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0.6) {
@@ -1353,8 +1353,8 @@ _id_A0C6() {
         if(distancesquared(var_2, self._id_2764.origin) > var_1 * var_1) {
           var_2 = self._id_2764.origin;
           var_4 = 1;
-          var_8 = vectornormalize(var_5 - self._id_2764.origin);
-          var_9 = vectornormalize(var_6);
+          var_8 = vectorNormalize(var_5 - self._id_2764.origin);
+          var_9 = vectorNormalize(var_6);
 
           if(vectordot(var_8, var_9) < 0.1) {
             self notify("defend_force_node_recalculation");
@@ -1397,10 +1397,10 @@ _id_5AC1() {
 
   if(isDefined(var_1)) {
     if(isDefined(var_0)) {
-      var_2 = vectornormalize(var_0 - var_1.origin);
+      var_2 = vectorNormalize(var_0 - var_1.origin);
       self._id_412B = vectortoangles(var_2);
     } else {
-      var_3 = vectornormalize(var_1.origin - scripts\mp\bots\bots_util::_id_45E3());
+      var_3 = vectorNormalize(var_1.origin - scripts\mp\bots\bots_util::_id_45E3());
       self._id_412B = vectortoangles(var_3);
     }
 
@@ -1418,10 +1418,10 @@ _id_5AC2() {
 
   if(isDefined(var_1)) {
     if(isDefined(var_0)) {
-      var_2 = vectornormalize(var_0 - var_1.origin);
+      var_2 = vectorNormalize(var_0 - var_1.origin);
       self._id_412B = vectortoangles(var_2);
     } else {
-      var_3 = vectornormalize(var_1.origin - scripts\mp\bots\bots_util::_id_45E3());
+      var_3 = vectorNormalize(var_1.origin - scripts\mp\bots\bots_util::_id_45E3());
       self._id_412B = vectortoangles(var_3);
     }
 
@@ -1437,7 +1437,7 @@ _id_5AC4() {
   var_0 = scripts\mp\bots\bots_util::_id_2790(scripts\mp\bots\bots_util::_id_45E3(), self._id_276D);
 
   if(isDefined(var_0)) {
-    var_1 = vectornormalize(scripts\mp\bots\bots_util::_id_45E3() - var_0.origin);
+    var_1 = vectorNormalize(scripts\mp\bots\bots_util::_id_45E3() - var_0.origin);
     self._id_412B = vectortoangles(var_1);
     self._id_412C = var_0;
   } else
@@ -1496,13 +1496,13 @@ _id_27E7(var_0, var_1) {
     }
 
     if(isDefined(var_0)) {
-      var_2 = vectornormalize(var_0 - self._id_412D);
+      var_2 = vectorNormalize(var_0 - self._id_412D);
       self._id_412B = vectortoangles(var_2);
       return;
     }
 
     if(isDefined(var_1)) {
-      var_2 = vectornormalize(self._id_412D - var_1);
+      var_2 = vectorNormalize(self._id_412D - var_1);
       self._id_412B = vectortoangles(var_2);
     }
   }

@@ -104,15 +104,15 @@ function_c11071a8() {
     waitframe(1);
   }
 
-  array::thread_all(getplayers(), &initial_black);
+  array::thread_all(getPlayers(), &initial_black);
 
   while(!aretexturesloaded()) {
     waitframe(1);
   }
 
   wait 0.5;
-  array::thread_all(getplayers(), &function_92c29649);
-  player = getplayers()[0];
+  array::thread_all(getPlayers(), &function_92c29649);
+  player = getPlayers()[0];
 
   if(isDefined(player)) {
     player thread function_b4ebcd8a();
@@ -133,7 +133,7 @@ function_5e1029a() {
   player = undefined;
 
   while(!isDefined(player)) {
-    player = getplayers()[0];
+    player = getPlayers()[0];
     waitframe(1);
   }
 
@@ -146,7 +146,7 @@ function_5e1029a() {
 }
 
 function_edd52efc() {
-  specialist = getplayers()[0] function_76785843();
+  specialist = getPlayers()[0] function_76785843();
   assert(player_role::is_valid(specialist));
 
   if(player_role::is_valid(specialist)) {
@@ -176,7 +176,7 @@ play_interstitial() {
   var_743bf28b = 0;
   level.b_movie = 1;
   s_result = level waittill(#"result");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(s_result.outcome.team === player.team) {
     var_d4002929 = 1;
@@ -198,7 +198,7 @@ play_interstitial() {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_f77362e3 = player function_2037c576();
   fields = getscriptbundle(#"t8_specialist_archives");
 
@@ -244,7 +244,7 @@ function_6cc515f7(str_difficulty) {
   var_d4002929 = 0;
   level.b_movie = 0;
   s_result = level waittill(#"result");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   specialist = player function_76785843();
 
   if(s_result.outcome.team === player.team) {
@@ -278,7 +278,7 @@ function_6cc515f7(str_difficulty) {
 }
 
 function_ccc3b1e3(var_d6602dc0) {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
 
   if(isDefined(e_player) && isPlayer(e_player)) {
     e_player function_95e72b33(var_d6602dc0);
@@ -594,7 +594,7 @@ function_1833fe3e(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 check_leaderboard() {
   level notify(#"check_leaderboard");
   level endon(#"check_leaderboard");
-  a_players = getplayers();
+  a_players = getPlayers();
   a_scores = [];
 
   foreach(player in a_players) {
@@ -602,7 +602,7 @@ check_leaderboard() {
   }
 
   a_scores = array::sort_by_value(a_scores);
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(player.score != a_scores[0]) {
     return;
@@ -776,7 +776,7 @@ function_5f516f9d(stathash, var_16538d01 = 0) {
 }
 
 function_9a022fbc(str_state) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   lui_menu = lui::get_luimenu("FullScreenBlack");
 
   if(str_state == "open") {

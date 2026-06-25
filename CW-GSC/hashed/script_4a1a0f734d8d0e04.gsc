@@ -121,7 +121,7 @@ function main(str_objective, b_starting) {
     level.adler battlechatter::function_2ab9360b(0);
   }
 
-  cctv_entrance_door_clip = getent("cctv_entrance_door_clip", "targetname");
+  cctv_entrance_door_clip = getEnt("cctv_entrance_door_clip", "targetname");
   cctv_entrance_door_clip hide();
   cctv_entrance_door_clip notsolid();
 }
@@ -132,7 +132,7 @@ function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   level notify(#"hash_2fb605a6c7053f96");
   namespace_a789f8ae::function_afa9528d(0);
   var_cdb289d1 = getEntArray("land_mine_placed", "targetname");
-  e_vol = getent("first_courtyard_landmine_volume", "targetname");
+  e_vol = getEnt("first_courtyard_landmine_volume", "targetname");
 
   foreach(e_mine in var_cdb289d1) {
     if(e_mine istouching(e_vol)) {
@@ -208,7 +208,7 @@ function function_b441e79f() {
   level flag::set("flg_vo_mines");
   self waittill(#"reached_path_end");
   self ai::set_behavior_attribute(#"_civ_mode", "panic");
-  var_200e33ac = getent("mine_intro", "script_noteworthy");
+  var_200e33ac = getEnt("mine_intro", "script_noteworthy");
   var_200e33ac.t_proximity notify(#"trigger");
   wait 1;
   savegame::checkpoint_save();
@@ -239,7 +239,7 @@ function function_41dd485b() {
 }
 
 function function_fc9b8c7e() {
-  t_spawn = getent("right_1_enemy_trigger", "targetname");
+  t_spawn = getEnt("right_1_enemy_trigger", "targetname");
   t_spawn waittill(#"trigger");
   level.park.grenadeammo = 5;
   level.lazar.grenadeammo = 5;
@@ -269,7 +269,7 @@ function function_c1ed8300() {
   level flag::wait_till("flg_right_courtyard_initial_spawn");
   savegame::checkpoint_save();
   var_864dbd75 = spawner::simple_spawn("right_courtyard_initial_enemies");
-  t_spawn = getent("first_floor_allies_trigger", "targetname");
+  t_spawn = getEnt("first_floor_allies_trigger", "targetname");
   t_spawn waittill(#"trigger");
   var_727580f3 = spawner::simple_spawn("right_courtyard_enemy_spawner");
   var_425b2d39 = arraycombine(var_864dbd75, var_727580f3);
@@ -352,9 +352,9 @@ function function_c8f482ed() {
     waitframe(1);
   }
 
-  var_fc6c4527 = getent("panic_room_door", "targetname");
+  var_fc6c4527 = getEnt("panic_room_door", "targetname");
   var_3b7aad05 = struct::get("panic_room_door_moveto_closed", "targetname");
-  var_fc6c4527 moveto(var_3b7aad05.origin, 3.5);
+  var_fc6c4527 moveTo(var_3b7aad05.origin, 3.5);
   snd::play("evt_panic_room_door", var_fc6c4527);
   var_50f5aa55 = struct::get("panic_room_interact", "targetname");
   var_35c66d32 = util::spawn_model("tag_origin", var_50f5aa55.origin, var_50f5aa55.angles);
@@ -362,7 +362,7 @@ function function_c8f482ed() {
   var_35c66d32 waittill(#"trigger");
   level namespace_a789f8ae::function_5997824f();
   var_72b63413 = struct::get("panic_room_door_moveto_open", "targetname");
-  var_fc6c4527 moveto(var_72b63413.origin, 3.5);
+  var_fc6c4527 moveTo(var_72b63413.origin, 3.5);
   snd::play("evt_panic_room_door", var_fc6c4527);
   wait 1.5;
 
@@ -459,8 +459,8 @@ function function_25e8f9d6() {
 }
 
 function function_40626d6c() {
-  posent = getent("cctv_soldier_slide_phys_loc", "targetname");
-  var_39cfa734 = getent("cctv_soldier_slide_phys_loc_2", "targetname");
+  posent = getEnt("cctv_soldier_slide_phys_loc", "targetname");
+  var_39cfa734 = getEnt("cctv_soldier_slide_phys_loc_2", "targetname");
   physicsexplosionsphere(posent.origin, 90, 0, 0.16);
   wait 1;
   physicsexplosionsphere(var_39cfa734.origin, 90, 0, 0.16);
@@ -477,21 +477,21 @@ function function_d210173f(var_3c97f36d, var_5442a320, var_f4145afc, var_695971f
     level flag::wait_till(var_695971f7);
   }
 
-  self thread ai::shoot_at_target("normal", getent(var_5442a320, "targetname"), "tag_origin", 10, 100, 1);
+  self thread ai::shoot_at_target("normal", getEnt(var_5442a320, "targetname"), "tag_origin", 10, 100, 1);
   self waittill(#"shoot");
   self ai::stop_shoot_at_target();
   level thread function_b23f3226();
-  self setgoal(getent(var_f4145afc, "targetname"), 1);
+  self setgoal(getEnt(var_f4145afc, "targetname"), 1);
   self val::set(#"hash_722c2bad015d62bc", "ignoreall", 0);
 }
 
 function function_b23f3226() {
   level endon(#"flg_hands_up_played");
-  vol = getent("scripted_rpg_hands_up_trig", "targetname");
+  vol = getEnt("scripted_rpg_hands_up_trig", "targetname");
 
   if(istouching(level.player.origin, vol)) {
     wait 0.5;
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     screenshake(level.player.origin, 12, 6, 6, 1.5, 0, 0.8, 0, 2, 0.5, 0.5, 2);
     level.player playgestureviewmodel(#"hash_5723248289b2a00b");
     level flag::set("flg_hands_up_played");
@@ -569,7 +569,7 @@ function function_8269cbf() {
     level.lazar battlechatter::function_2ab9360b(0);
   }
 
-  var_241fd810 = getent("t_extra_vo_talk", "targetname");
+  var_241fd810 = getEnt("t_extra_vo_talk", "targetname");
   level flag::wait_till("flg_dead_bodies_entrance");
   var_4a3daa0b = struct::get("entrance_bodies_struct", "targetname");
 
@@ -598,7 +598,7 @@ function function_8269cbf() {
   var_18f35bb2 = struct::get("first_floor_woods_vo", "targetname");
   var_ab0186f6 = spawner::get_ai_group_ai("table_room_guys");
   ai::waittill_dead_or_dying(var_ab0186f6, 3, 200);
-  var_527d6757 = getent("trig_side_table_room", "targetname");
+  var_527d6757 = getEnt("trig_side_table_room", "targetname");
   wait randomfloatrange(2, 4);
 
   if(!flag::get("flg_right_courtyard_initial_spawn") && level.player istouching(var_527d6757)) {
@@ -701,7 +701,7 @@ function function_8880c1e3(var_305d3956) {
 }
 
 function function_efdab146() {
-  var_aa87baf1 = getent("pallet_destruction_trigger", "targetname");
+  var_aa87baf1 = getEnt("pallet_destruction_trigger", "targetname");
   var_aa87baf1 trigger::wait_till();
   snd::client_msg("rpg_vs_pillar");
   scene::play_from_time("p9_fxanim_cp_revolucion_pallet_destruction_bundle", "play");
@@ -710,7 +710,7 @@ function function_efdab146() {
 
 function function_1a77e8e2(t_trig, var_c68d51a8) {
   level.player endon(#"death");
-  var_9e332b5a = getent(t_trig, "targetname");
+  var_9e332b5a = getEnt(t_trig, "targetname");
   var_9e332b5a waittill(#"trigger");
   veh = vehicle::simple_spawn_and_drive(var_c68d51a8);
   var_a974a435 = getEntArray("floor_1_riders", "targetname");
@@ -735,7 +735,7 @@ function function_1a77e8e2(t_trig, var_c68d51a8) {
 
 function function_4becb74d(t_trig) {
   level.player endon(#"death");
-  var_1aaaab19 = getent(t_trig, "targetname");
+  var_1aaaab19 = getEnt(t_trig, "targetname");
   var_1c12e0b4 = struct::get("vol_goal");
   var_1aaaab19 waittill(#"trigger");
   var_d293bb3b = randomintrangeinclusive(0, 2);

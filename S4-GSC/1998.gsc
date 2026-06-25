@@ -311,7 +311,7 @@ _id_8D7C(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     var_17 = anglesToForward(self getplayerangles());
     var_18 = var_1.origin - var_15;
-    var_19 = vectornormalize(var_18);
+    var_19 = vectorNormalize(var_18);
     var_20 = vectordot(var_17, var_19);
     var_21 = scripts\engine\utility::_id_8794(var_3);
 

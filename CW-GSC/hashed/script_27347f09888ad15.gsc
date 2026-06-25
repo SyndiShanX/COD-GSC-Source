@@ -196,7 +196,7 @@ function private function_622c131e(&var_5c120708, &var_fcfdb752, var_e1be5b85, v
 }
 
 function function_b9ea4226(value, scale) {
-  count = getplayers().size - 1;
+  count = getPlayers().size - 1;
 
   if(getdvarint(#"hash_4b8ad6985e0ad109", 0) > 0) {
     count = getdvarint(#"hash_4b8ad6985e0ad109", 0) - 1;
@@ -206,7 +206,7 @@ function function_b9ea4226(value, scale) {
 }
 
 function function_c60389b6(var_e3c68634, var_b0abb10e) {
-  count = getplayers().size - 1;
+  count = getPlayers().size - 1;
 
   if(getdvarint(#"hash_718bfcd5ab690a9c", 0) > 0) {
     count = getdvarint(#"hash_718bfcd5ab690a9c", 0) - 1;

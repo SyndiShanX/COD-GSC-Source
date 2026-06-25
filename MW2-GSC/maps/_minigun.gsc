@@ -99,7 +99,7 @@ minigun_rumble() {
   between = fardist - closedist;
 
   self.rumble_ent = spawn("script_origin", self.minigunUser.origin);
-  self.rumble_ent linkto(self.minigunUser);
+  self.rumble_ent linkTo(self.minigunUser);
   while(flag("player_on_minigun")) {
     wait .05;
     if(self.momentum <= 0 || !flag("player_on_minigun")) {
@@ -107,7 +107,7 @@ minigun_rumble() {
     }
 
     self.rumble_ent.origin = self.minigunUser getEye() + (0, 0, fardist - (between * self.momentum));
-    self.rumble_ent PlayRumbleOnentity("minigun_rumble");
+    self.rumble_ent playRumbleOnEntity("minigun_rumble");
   }
   self.rumble_ent delete();
 }

@@ -42,8 +42,8 @@ function init_zeppelin(str_script_noteworthy, str_ender) {
 function move_zeppelin_down_new_path(a_structs) {
   s_path_start = get_unused_struct(a_structs);
   self ghost();
-  self moveto(s_path_start.origin, 0.1);
-  self rotateto(s_path_start.angles, 0.1);
+  self moveTo(s_path_start.origin, 0.1);
+  self rotateTo(s_path_start.angles, 0.1);
   self waittill("movedone");
   self show();
   if(!isDefined(s_path_start.goal_struct)) {
@@ -52,7 +52,7 @@ function move_zeppelin_down_new_path(a_structs) {
     assert(isDefined(s_path_start.goal_struct), "" + s_path_start.origin);
   }
   n_move_time = randomfloatrange(120, 150);
-  self moveto(s_path_start.goal_struct.origin, n_move_time);
+  self moveTo(s_path_start.goal_struct.origin, n_move_time);
   self waittill("movedone");
 }
 
@@ -83,8 +83,8 @@ function get_unused_struct(a_structs) {
 }
 
 function function_add29756() {
-  var_e1149395 = getent("ambiance_dogfights_1", "targetname");
-  var_7170dfe = getent("ambiance_dogfights_2", "targetname");
+  var_e1149395 = getEnt("ambiance_dogfights_1", "targetname");
+  var_7170dfe = getEnt("ambiance_dogfights_2", "targetname");
   if(!level.optimise_for_splitscreen) {
     level flag::init("animation_plane_1_done");
     level flag::init("animation_plane_2_done");
@@ -110,8 +110,8 @@ function function_b6165329() {
 }
 
 function function_511ab91d() {
-  var_e1149395 = getent("ambiance_dogfights_1", "targetname");
-  var_7170dfe = getent("ambiance_dogfights_2", "targetname");
+  var_e1149395 = getEnt("ambiance_dogfights_1", "targetname");
+  var_7170dfe = getEnt("ambiance_dogfights_2", "targetname");
   while(true) {
     var_f4570d42 = randomint(3);
     if(level.var_1766c187) {

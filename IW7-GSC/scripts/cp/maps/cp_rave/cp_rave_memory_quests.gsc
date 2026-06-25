@@ -150,7 +150,7 @@ memories_end_use_func(var_0, var_1) {
     var_1 playlocalsound("part_pickup");
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
     if(isDefined(var_0.target)) {
-      var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+      var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
       var_2.name = var_0.name;
       var_2.activated = 1;
       var_2.script_noteworthy = "memory_quest_end_pos";
@@ -534,16 +534,16 @@ run_toad_quest(var_0) {
   level endon("game_ended");
   level.toads_killed = 0;
   level.toad_ent_array = [];
-  var_1 = scripts\engine\utility::getstruct("toad_move_struct_one", "targetname");
-  var_2 = scripts\engine\utility::getstruct("toad_move_struct_two", "targetname");
-  var_3 = scripts\engine\utility::getstruct("toad_move_struct_three", "targetname");
-  var_4 = scripts\engine\utility::getstruct("toad_move_struct_four", "targetname");
-  var_5 = scripts\engine\utility::getstruct("toad_move_struct_five", "targetname");
-  var_6 = scripts\engine\utility::getstruct("toad_move_struct_six", "targetname");
-  var_7 = scripts\engine\utility::getstruct("toad_move_struct_seven", "targetname");
-  var_8 = scripts\engine\utility::getstruct("toad_move_struct_eight", "targetname");
-  var_9 = scripts\engine\utility::getstruct("toad_move_struct_nine", "targetname");
-  var_10 = scripts\engine\utility::getstruct("toad_move_struct_ten", "targetname");
+  var_1 = scripts\engine\utility::getStruct("toad_move_struct_one", "targetname");
+  var_2 = scripts\engine\utility::getStruct("toad_move_struct_two", "targetname");
+  var_3 = scripts\engine\utility::getStruct("toad_move_struct_three", "targetname");
+  var_4 = scripts\engine\utility::getStruct("toad_move_struct_four", "targetname");
+  var_5 = scripts\engine\utility::getStruct("toad_move_struct_five", "targetname");
+  var_6 = scripts\engine\utility::getStruct("toad_move_struct_six", "targetname");
+  var_7 = scripts\engine\utility::getStruct("toad_move_struct_seven", "targetname");
+  var_8 = scripts\engine\utility::getStruct("toad_move_struct_eight", "targetname");
+  var_9 = scripts\engine\utility::getStruct("toad_move_struct_nine", "targetname");
+  var_10 = scripts\engine\utility::getStruct("toad_move_struct_ten", "targetname");
   var_11 = [var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10];
   var_12 = 0;
   for(var_12 = 0; var_12 < 10; var_12++) {
@@ -647,7 +647,7 @@ move_ent_function(var_0, var_1, var_2, var_3) {
   self endon("toad_movement_complete");
   self setscriptablepartstate("quest_effects", "toad_move");
   while(gettime() < var_1 + 6000) {
-    var_0 moveto(var_3.origin, 20, 1, 0);
+    var_0 moveTo(var_3.origin, 20, 1, 0);
     wait(10);
     self notify("toad_movement_complete");
   }
@@ -770,7 +770,7 @@ bump_check(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = 0;
   if(is_in_box(var_0, var_1, var_2, var_3)) {
     if(isDefined(level.standing_list[var_5][self.name])) {
-      self setvelocity(vectornormalize(var_4) * 500);
+      self setvelocity(vectorNormalize(var_4) * 500);
       var_6 = 1;
     }
 
@@ -927,8 +927,8 @@ set_up_ring_quest_interactions() {
     var_7.model setModel("tag_origin_memory_quest");
     var_7.model.angles = var_7.angles + (0, 90 * var_7.parent_struct.rotationgoal, 0);
     if(isDefined(var_7.target)) {
-      var_7.fx_struct = scripts\engine\utility::getstruct(var_7.target, "targetname");
-      var_7.fx_struct.angles = vectortoangles(scripts\engine\utility::getstruct(var_7.fx_struct.target, "targetname").origin - var_7.fx_struct.origin);
+      var_7.fx_struct = scripts\engine\utility::getStruct(var_7.target, "targetname");
+      var_7.fx_struct.angles = vectortoangles(scripts\engine\utility::getStruct(var_7.fx_struct.target, "targetname").origin - var_7.fx_struct.origin);
       var_7.fx_struct thread play_lantern_light_effects(var_7.model, var_7.fx_struct);
     }
   }
@@ -954,7 +954,7 @@ start_fish_path(var_0) {
   var_2 thread cleanup_fish_model(var_2);
   var_3 = 1;
   for(;;) {
-    var_2 moveto(var_1[var_3].origin, 3);
+    var_2 moveTo(var_1[var_3].origin, 3);
     var_2 waittill("movedone");
     var_3++;
     if(var_3 >= var_1.size) {
@@ -981,7 +981,7 @@ cleanup_fish_model(var_0) {
 run_arrowhead_quest(var_0) {
   level endon("game_ended");
   var_1 = 0;
-  var_2 = getent("archery_clip", "targetname");
+  var_2 = getEnt("archery_clip", "targetname");
   for(;;) {
     var_3 = arrange_archery_targets();
     foreach(var_5 in var_3) {
@@ -1108,7 +1108,7 @@ make_active_target(var_0, var_1) {
 
 arrange_archery_targets(var_0) {
   var_1 = scripts\engine\utility::getStructArray("archery_quest_target", "script_noteworthy");
-  var_2 = scripts\engine\utility::getstruct("last_archery_target", "targetname");
+  var_2 = scripts\engine\utility::getStruct("last_archery_target", "targetname");
   var_1 = scripts\engine\utility::array_remove(var_1, var_2);
   var_1 = scripts\engine\utility::array_randomize(var_1);
   var_1[var_1.size] = var_2;
@@ -1141,8 +1141,8 @@ run_shovel_quest(var_0) {
     var_2 = 1;
   }
 
-  var_7 = scripts\engine\utility::getstruct("shovel_lightning_point", "script_noteworthy");
-  var_8 = getent("shovel_mud", "script_noteworthy");
+  var_7 = scripts\engine\utility::getStruct("shovel_lightning_point", "script_noteworthy");
+  var_8 = getEnt("shovel_mud", "script_noteworthy");
   playsoundatpos(var_7.origin, "memory_quest_lightning_strike");
   playFX(level._effect["hammer_of_dawn_lightning"], var_7.origin);
   var_8 delete();
@@ -1252,12 +1252,12 @@ skeleton_arrival_cowbell(var_0) {
 
 run_tiki_quest(var_0) {
   level endon("game_ended");
-  var_1 = getent("tiki_key", "targetname");
+  var_1 = getEnt("tiki_key", "targetname");
   if(!isDefined(var_1)) {
     return;
   }
 
-  var_2 = getent("tiki_key_clip", "targetname");
+  var_2 = getEnt("tiki_key_clip", "targetname");
   var_3 = var_1.angles;
   var_4 = 10;
   var_5 = 0;
@@ -1278,35 +1278,35 @@ run_tiki_quest(var_0) {
     wait(var_6);
   }
 
-  var_1 rotateto(var_3, 0.15);
+  var_1 rotateTo(var_3, 0.15);
   wait(0.15);
   var_2 setCanDamage(1);
   var_2 waittill("damage");
   var_2 delete();
-  var_8 = scripts\engine\utility::getstruct(var_1.target, "targetname");
-  var_9 = scripts\engine\utility::getstruct(var_8.target, "targetname");
+  var_8 = scripts\engine\utility::getStruct(var_1.target, "targetname");
+  var_9 = scripts\engine\utility::getStruct(var_8.target, "targetname");
   var_10 = var_1.origin;
   var_11 = var_1.angles;
-  var_1 moveto(var_8.origin, 0.1);
-  var_1 rotateto(var_8.angles, 0.1);
+  var_1 moveTo(var_8.origin, 0.1);
+  var_1 rotateTo(var_8.angles, 0.1);
   wait(0.1);
-  var_1 moveto(var_9.origin, 0.25);
-  var_1 rotateto(var_9.angles, 0.15);
+  var_1 moveTo(var_9.origin, 0.25);
+  var_1 rotateTo(var_9.angles, 0.15);
   playsoundatpos(var_1.origin, "memory_quest_key_into_cup");
   return 1;
 }
 
 run_binocular_quest(var_0) {
   level endon("game_ended");
-  var_1 = getent("gazebo_volume", "targetname");
-  var_2 = scripts\engine\utility::getstruct("beach_target_struct_one", "targetname");
-  var_3 = scripts\engine\utility::getstruct("beach_target_struct_two", "targetname");
-  var_4 = scripts\engine\utility::getstruct("beach_target_struct_three", "targetname");
-  var_5 = scripts\engine\utility::getstruct("beach_target_struct_four", "targetname");
-  var_6 = scripts\engine\utility::getstruct("totem_struct_one", "targetname");
-  var_7 = scripts\engine\utility::getstruct("totem_struct_two", "targetname");
-  var_8 = scripts\engine\utility::getstruct("totem_struct_three", "targetname");
-  var_9 = scripts\engine\utility::getstruct("totem_struct_four", "targetname");
+  var_1 = getEnt("gazebo_volume", "targetname");
+  var_2 = scripts\engine\utility::getStruct("beach_target_struct_one", "targetname");
+  var_3 = scripts\engine\utility::getStruct("beach_target_struct_two", "targetname");
+  var_4 = scripts\engine\utility::getStruct("beach_target_struct_three", "targetname");
+  var_5 = scripts\engine\utility::getStruct("beach_target_struct_four", "targetname");
+  var_6 = scripts\engine\utility::getStruct("totem_struct_one", "targetname");
+  var_7 = scripts\engine\utility::getStruct("totem_struct_two", "targetname");
+  var_8 = scripts\engine\utility::getStruct("totem_struct_three", "targetname");
+  var_9 = scripts\engine\utility::getStruct("totem_struct_four", "targetname");
   var_10 = [var_2, var_3, var_4, var_5];
   var_11 = [var_6, var_7, var_8, var_9];
   var_12 = 15;
@@ -1458,10 +1458,10 @@ play_vfx_between_points_mem_quest_binoculars(var_0, var_1) {
 
 run_boots_quest(var_0) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::getstruct("boot_spooky_guy", "targetname");
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct("boot_spooky_guy", "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_3 = undefined;
-  var_4 = scripts\engine\utility::getstruct("footprint_start", "targetname");
+  var_4 = scripts\engine\utility::getStruct("footprint_start", "targetname");
   var_5 = var_4;
   var_6 = 0;
   var_7 = 0;
@@ -1470,7 +1470,7 @@ run_boots_quest(var_0) {
     if(!isDefined(var_5.target)) {
       break;
     } else {
-      var_5 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_5.target, "targetname");
     }
   }
 
@@ -1483,7 +1483,7 @@ run_boots_quest(var_0) {
   var_8 hide();
   var_8.origin = var_3 gettagorigin("tag_inhand");
   var_8.angles = var_3 gettagangles("tag_inhand");
-  var_8 linkto(var_3, "tag_inhand");
+  var_8 linkTo(var_3, "tag_inhand");
   while(!var_6) {
     foreach(var_10 in level.players) {
       if(distance2dsquared(var_10.origin, var_2.origin) <= 26896) {
@@ -1506,14 +1506,14 @@ run_boots_quest(var_0) {
   wait(var_12);
   var_3 delete();
   var_8 delete();
-  var_1 = scripts\engine\utility::getstruct("boot_spooky_guy_2", "targetname");
+  var_1 = scripts\engine\utility::getStruct("boot_spooky_guy_2", "targetname");
   if(!isDefined(var_1)) {
     return 1;
   }
 
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_3 = undefined;
-  var_4 = scripts\engine\utility::getstruct("footprint_start_2", "targetname");
+  var_4 = scripts\engine\utility::getStruct("footprint_start_2", "targetname");
   var_5 = var_4;
   var_6 = 0;
   var_7 = 0;
@@ -1522,7 +1522,7 @@ run_boots_quest(var_0) {
     if(!isDefined(var_5.target)) {
       break;
     } else {
-      var_5 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_5.target, "targetname");
     }
   }
 
@@ -1535,7 +1535,7 @@ run_boots_quest(var_0) {
   var_8 hide();
   var_8.origin = var_3 gettagorigin("tag_inhand");
   var_8.angles = var_3 gettagangles("tag_inhand");
-  var_8 linkto(var_3, "tag_inhand");
+  var_8 linkTo(var_3, "tag_inhand");
   while(!var_6) {
     foreach(var_10 in level.players) {
       if(distance2dsquared(var_10.origin, var_2.origin) <= 26896) {
@@ -1560,10 +1560,10 @@ run_boots_quest(var_0) {
   wait(var_12 * 0.75);
   var_3 delete();
   var_8 delete();
-  var_1 = scripts\engine\utility::getstruct("boot_spooky_guy_3", "targetname");
-  var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+  var_1 = scripts\engine\utility::getStruct("boot_spooky_guy_3", "targetname");
+  var_2 = scripts\engine\utility::getStruct(var_1.target, "targetname");
   var_3 = undefined;
-  var_4 = scripts\engine\utility::getstruct("footprint_start_3", "targetname");
+  var_4 = scripts\engine\utility::getStruct("footprint_start_3", "targetname");
   var_5 = var_4;
   var_6 = 0;
   var_7 = 0;
@@ -1572,7 +1572,7 @@ run_boots_quest(var_0) {
     if(!isDefined(var_5.target)) {
       break;
     } else {
-      var_5 = scripts\engine\utility::getstruct(var_5.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_5.target, "targetname");
     }
   }
 
@@ -1585,7 +1585,7 @@ run_boots_quest(var_0) {
   var_8 hide();
   var_8.origin = var_3 gettagorigin("tag_inhand");
   var_8.angles = var_3 gettagangles("tag_inhand");
-  var_8 linkto(var_3, "tag_inhand");
+  var_8 linkTo(var_3, "tag_inhand");
   while(!var_6) {
     foreach(var_10 in level.players) {
       if(distance2dsquared(var_10.origin, var_2.origin) <= 26896) {

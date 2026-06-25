@@ -222,7 +222,7 @@ function_96f55844() {
   navmeshpoint = getclosestpointonnavmesh(self.origin, 64, radius);
 
   if(isDefined(navmeshpoint)) {
-    self setorigin(navmeshpoint);
+    self setOrigin(navmeshpoint);
     return true;
   }
 
@@ -238,7 +238,7 @@ function_e336d9() {
     navmeshpoint = getclosestpointonnavmesh(pos.origin, 64, radius);
 
     if(isDefined(navmeshpoint)) {
-      self setorigin(navmeshpoint);
+      self setOrigin(navmeshpoint);
       return true;
     }
   }
@@ -249,7 +249,7 @@ function_e336d9() {
 function_6afa53fe() {
   players = [];
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isbot(player)) {
       continue;
     }
@@ -267,7 +267,7 @@ function_6afa53fe() {
   var_28054200 = self function_28d02a32(player, 250, 500);
 
   if(isDefined(var_28054200)) {
-    self setorigin(var_28054200);
+    self setOrigin(var_28054200);
     return 1;
   }
 
@@ -275,7 +275,7 @@ function_6afa53fe() {
 }
 
 can_teleport() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isbot(player)) {
       continue;
     }

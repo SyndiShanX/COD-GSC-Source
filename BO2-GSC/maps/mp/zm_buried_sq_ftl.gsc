@@ -72,7 +72,7 @@ sq_ftl_maxis_vo_on_holder(str_vox) {
 }
 
 sq_ftl_show_marker() {
-  m_marker = getent("sq_lantern_symbol", "targetname");
+  m_marker = getEnt("sq_lantern_symbol", "targetname");
   m_marker.origin = m_marker.origin + vectorscale((0, 0, 1), 2.0);
   level.sq_lamp_generator_unitrig.origin = level.sq_lamp_generator_unitrig.realorigin;
 }
@@ -119,7 +119,7 @@ max_lantern_zombie_death_watcher() {
   if(!isDefined(attacker) || isPlayer(attacker)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player player_get_buildable_piece(2)) && isDefined(player player_get_buildable_piece(2).buildablename == "sq_ghost_lamp")) {
@@ -152,7 +152,7 @@ ric_lantern_ghost_death_watcher() {
     return;
   }
   self waittill("death", attacker);
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player player_get_buildable_piece(2)) && isDefined(player player_get_buildable_piece(2).buildablename == "sq_ghost_lamp")) {

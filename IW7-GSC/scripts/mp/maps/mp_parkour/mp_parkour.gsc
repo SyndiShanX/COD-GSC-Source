@@ -31,19 +31,19 @@ main() {
 }
 
 fix_collision() {
-  var_0 = getent("player512x512x8", "targetname");
+  var_0 = getEnt("player512x512x8", "targetname");
   var_1 = spawn("script_model", (-1152, 1656, 768));
   var_1.angles = (0, 315, -90);
   var_1 clonebrushmodeltoscriptmodel(var_0);
-  var_2 = getent("player32x32x8", "targetname");
+  var_2 = getEnt("player32x32x8", "targetname");
   var_3 = spawn("script_model", (-652, 3340, -26));
   var_3.angles = (285, 315, 0);
   var_3 clonebrushmodeltoscriptmodel(var_2);
-  var_4 = getent("player32x32x8", "targetname");
+  var_4 = getEnt("player32x32x8", "targetname");
   var_5 = spawn("script_model", (-795, 2944, -28));
   var_5.angles = (286, 0, 0);
   var_5 clonebrushmodeltoscriptmodel(var_4);
-  var_6 = getent("player512x512x8", "targetname");
+  var_6 = getEnt("player512x512x8", "targetname");
   var_7 = spawn("script_model", (864, 152, 832));
   var_7.angles = (0, 45, -90);
   var_7 clonebrushmodeltoscriptmodel(var_6);
@@ -74,7 +74,7 @@ fix_collision() {
   var_10 = spawn("script_model", (355, 2068, 144));
   var_10.angles = (270, 270, 0);
   var_10 setModel("panel_metal_02_16x176_mp_parkour_patch");
-  var_11 = getent("clip64x64x8", "targetname");
+  var_11 = getEnt("clip64x64x8", "targetname");
   var_12 = spawn("script_model", (784, 2232, 150));
   var_12.angles = (0, 330, 0);
   var_12 clonebrushmodeltoscriptmodel(var_11);
@@ -82,7 +82,7 @@ fix_collision() {
   var_13.angles = (350, 30, 0);
   var_13 setModel("mp_desert_uplink_col_01");
   if(scripts\mp\utility::isanymlgmatch()) {
-    var_14 = getent("player128x128x8", "targetname");
+    var_14 = getEnt("player128x128x8", "targetname");
     var_15 = spawn("script_model", (-1596, 3, 320));
     var_15.angles = (0, 0, 0);
     var_15 clonebrushmodeltoscriptmodel(var_14);
@@ -90,14 +90,14 @@ fix_collision() {
 }
 
 func_90EF(var_0, var_1) {
-  var_2 = getent(var_0, "targetname");
+  var_2 = getEnt(var_0, "targetname");
   var_2.areanynavvolumesloaded = var_2.origin;
   var_2.var_10D6C = var_2.angles;
   var_2.var_BE10 = getEntArray(var_1, "targetname");
   var_2.var_BE1E = getEntArray("vfx_drop_ship_thrusters", "script_noteworthy");
   var_2.var_BE10 = scripts\engine\utility::array_combine(var_2.var_BE10, var_2.var_BE1E);
   foreach(var_4 in var_2.var_BE10) {
-    var_4 linkto(var_2);
+    var_4 linkTo(var_2);
   }
 
   thread func_5EE7(var_2);
@@ -109,7 +109,7 @@ func_5EE1(var_0) {
   for(;;) {
     var_1 = randomintrange(4, 10);
     var_0.objective_playermask_hidefromall = var_0.areanynavvolumesloaded + (randomintrange(-16, 16), randomintrange(-16, 16), randomintrange(-8, 32));
-    var_0 moveto(var_0.objective_playermask_hidefromall, var_1, var_1 * 0.25, var_1 * 0.25);
+    var_0 moveTo(var_0.objective_playermask_hidefromall, var_1, var_1 * 0.25, var_1 * 0.25);
     wait(var_1);
   }
 }
@@ -118,7 +118,7 @@ func_5EE9(var_0) {
   for(;;) {
     var_1 = randomintrange(5, 8);
     var_0.energy_getrestorerate = var_0.var_10D6C + (randomintrange(-5, 0), randomintrange(-3, 3), randomintrange(-4, 4));
-    var_0 rotateto(var_0.energy_getrestorerate, var_1, var_1 * 0.25, var_1 * 0.25);
+    var_0 rotateTo(var_0.energy_getrestorerate, var_1, var_1 * 0.25, var_1 * 0.25);
     wait(var_1);
   }
 }
@@ -133,7 +133,7 @@ func_5EE8() {
   wait(5);
   var_0 = scripts\engine\utility::spawn_tag_origin();
   var_0 show();
-  var_0 linkto(self);
+  var_0 linkTo(self);
   scripts\engine\utility::waitframe();
   if(isDefined(self.var_336)) {
     playFXOnTag(scripts\engine\utility::getfx(self.var_336), var_0, "tag_origin");

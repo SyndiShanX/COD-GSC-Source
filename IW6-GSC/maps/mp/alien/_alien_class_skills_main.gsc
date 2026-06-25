@@ -322,7 +322,7 @@ proto_hack_flare_update() {
     glowStick = spawn("script_model", self GetTagOrigin("tag_weapon_right"));
     glowstick setModel("mil_emergency_flare_mp");
     glowstick.angles = self GetTagAngles("tag_weapon_right");
-    glowStick LinkTo(self, "tag_weapon_right");
+    glowStick linkTo(self, "tag_weapon_right");
 
     wait .05;
 
@@ -445,7 +445,7 @@ create_heal_ring(variables) {
   wait .1;
   playFXOnTag(level._effect["smoke_green_signal"], carriedObj, "tag_origin");
   sound_heal = spawn("script_model", self.origin);
-  sound_heal LinkTo(carriedObj);
+  sound_heal linkTo(carriedObj);
   sound_heal playLoopSound("alien_skill_medic_lp");
   self thread heal_logic();
   self thread death_deletes_heal_ring(carriedObj);
@@ -780,7 +780,7 @@ sound_audio_weapon_activate() {
   audio_weapon = spawn_tag_origin();
   audio_weapon.origin = self.origin;
   audio_weapon.angles = self.angles;
-  audio_weapon LinkTo(self);
+  audio_weapon linkTo(self);
   audio_weapon playSound("alien_skill_activate");
   wait 2;
   audio_weapon delete();

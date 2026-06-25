@@ -766,7 +766,7 @@ playerBreathingSound(healthcap) {
       continue;
     }
     if(level.player_pain_vox == 0) {
-      playsoundatposition("chr_breathing_hurt_start", (0, 0, 0));
+      playSoundAtPosition("chr_breathing_hurt_start", (0, 0, 0));
       level.player_pain_vox = 1;
     } else {
       player playLocalSound("chr_breathing_hurt");
@@ -843,7 +843,7 @@ event_heart_beat(emotion, loudness) {
       case "none":
         level.last_emotion = "none";
         level notify("no_more_heartbeat");
-        playsoundatposition("vox_breath_scared_stop", (0, 0, 0));
+        playSoundAtPosition("vox_breath_scared_stop", (0, 0, 0));
         level.emotional_state_system = 0;
         break;
       default:
@@ -864,7 +864,7 @@ heartbeat_state_transitions() {
   level.current_heart_waittime = level.heart_waittime;
 }
 play_heart_beat() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level endon("no_more_heartbeat");
   if(!isDefined(level.heart_wait_counter)) {
     level.heart_wait_counter = 0;
@@ -875,9 +875,9 @@ play_heart_beat() {
       level.heart_wait_counter = level.heart_wait_counter + 0.1;
     }
     if(level.loudness == 0) {
-      playsoundatposition("chr_heart_beat_ingame", (0, 0, 0));
+      playSoundAtPosition("chr_heart_beat_ingame", (0, 0, 0));
     } else {
-      playsoundatposition("chr_heart_beat_ingame", (0, 0, 0));
+      playSoundAtPosition("chr_heart_beat_ingame", (0, 0, 0));
     }
     level.heart_wait_counter = 0;
   }
@@ -892,7 +892,7 @@ play_breathing() {
       wait(0.1);
       level.breathing_wait_counter = level.breathing_wait_counter + 0.1;
     }
-    playsoundatposition("amb_player_breath_cold", (0, 0, 0));
+    playSoundAtPosition("amb_player_breath_cold", (0, 0, 0));
     level.breathing_wait_counter = 0;
   }
 }
@@ -1021,7 +1021,7 @@ play_hurt_vox() {
   if(isDefined(self.veryhurt)) {
     if(self.veryhurt == 0) {
       if(randomintrange(0, 1) == 1) {
-        playsoundatposition("chr_breathing_hurt_start", self.origin);
+        playSoundAtPosition("chr_breathing_hurt_start", self.origin);
       }
     }
   }

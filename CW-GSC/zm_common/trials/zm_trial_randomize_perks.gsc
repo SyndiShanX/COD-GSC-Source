@@ -27,13 +27,13 @@ function private preinit() {
 function private on_begin() {
   zm_trial_util::function_8036c103();
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_83fa47e8();
   }
 }
 
 function private on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_50b92441();
   }
 

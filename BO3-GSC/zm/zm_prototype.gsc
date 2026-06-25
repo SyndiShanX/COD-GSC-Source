@@ -345,9 +345,9 @@ function init_weapon_cabinet() {
 
 function weapon_cabinet_door_open(var_4ed1d865) {
   if(var_4ed1d865 == "left") {
-    self rotateyaw(120, 0.3, 0.2, 0.1);
+    self rotateYaw(120, 0.3, 0.2, 0.1);
   } else if(var_4ed1d865 == "right") {
-    self rotateyaw(-120, 0.3, 0.2, 0.1);
+    self rotateYaw(-120, 0.3, 0.2, 0.1);
   }
 }
 
@@ -388,7 +388,7 @@ function function_9b3e5ee2() {
 function function_ab3e14a3() {
   self zm_unitrigger::create_unitrigger();
   self waittill("trigger_activated");
-  playsoundatposition("zmb_sam_egg_button", self.origin);
+  playSoundAtPosition("zmb_sam_egg_button", self.origin);
   level notify("hash_672c1b1a");
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
 }

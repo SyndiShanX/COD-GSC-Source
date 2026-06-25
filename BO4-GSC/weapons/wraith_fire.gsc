@@ -62,7 +62,7 @@ function_13f6636b(owner, weapon) {
   killcament.targetname = "wraith_fire_killcament";
   killcament util::deleteaftertime(15);
   killcament.starttime = gettime();
-  killcament linkto(self);
+  killcament linkTo(self);
   killcament setweapon(self.weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
   self thread function_b66b2f4d();
@@ -82,7 +82,7 @@ function_13f6636b(owner, weapon) {
 }
 
 function_3932cbd9(owner, origin, normal, velocity, killcament, weapon, team, customsettings) {
-  playsoundatposition("", origin);
+  playSoundAtPosition("", origin);
   self thread function_e8ad1d81(origin, owner, normal, velocity, killcament, weapon, team, customsettings);
 }
 
@@ -121,7 +121,7 @@ function_7cbeb2f0(normal) {
 function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, customsettings) {
   originalposition = position;
   var_493d36f9 = normal;
-  var_96609105 = vectornormalize(velocity);
+  var_96609105 = vectorNormalize(velocity);
   var_87d082a9 = vectorscale(var_96609105, -1);
   var_d6d43109 = 1;
   var_e76400c0 = undefined;
@@ -230,7 +230,7 @@ function_e8ad1d81(position, owner, normal, velocity, killcament, weapon, team, c
   goalpos = phystrace[#"fraction"] > 1 ? desiredendpos : phystrace[#"position"];
 
   if(isDefined(killcament)) {
-    killcament moveto(goalpos, 0.5);
+    killcament moveTo(goalpos, 0.5);
   }
 
   rotation = randomint(360);
@@ -372,7 +372,7 @@ function_8a03d3f3(owner, impactpos, startpos, normal, multiplier, rotation, kill
   s_trace = groundtrace(mdl_anchor.origin + (0, 0, 10), mdl_anchor.origin + (0, 0, -100), 0, mdl_anchor);
 
   if(isDefined(s_trace[#"entity"]) && s_trace[#"entity"] ismovingplatform()) {
-    mdl_anchor linkto(s_trace[#"entity"]);
+    mdl_anchor linkTo(s_trace[#"entity"]);
   } else {
     mdl_anchor delete();
   }
@@ -460,8 +460,8 @@ function_a25dee15(weapon, loc, normal, duration, team) {
 
 function_4e5a1dd3(mdl_anchor) {
   if(isDefined(self) && isDefined(mdl_anchor)) {
-    self enablelinkto();
-    self linkto(mdl_anchor);
+    self enablelinkTo();
+    self linkTo(mdl_anchor);
   }
 }
 
@@ -710,7 +710,7 @@ getpotentialtargets(owner, customsettings) {
 
     foreach(team, _ in level.teams) {
       if(customsettings.var_14e16318 === 1 || util::function_fbce7263(team, owner_team)) {
-        potential_targets = arraycombine(potential_targets, getplayers(team), 0, 0);
+        potential_targets = arraycombine(potential_targets, getPlayers(team), 0, 0);
       }
     }
 
@@ -941,7 +941,7 @@ sndfiredamage() {
 
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
-    self.sndfireent linkto(self, "tag_origin");
+    self.sndfireent linkTo(self, "tag_origin");
     self.sndfireent playSound(#"chr_burn_start");
     self thread sndfiredamage_deleteent(self.sndfireent);
   }

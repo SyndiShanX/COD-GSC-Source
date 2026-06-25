@@ -187,7 +187,7 @@ shell_logic(model, index, v_start, localclientnum) {
   v_start_trace = v_start - vectorscale((0, 0, 1), 5000.0);
   trace = bulletTrace(v_start_trace, v_land, 0, undefined);
   v_land = trace["position"];
-  self moveto(v_land, 3);
+  self moveTo(v_land, 3);
   playFXOnTag(localclientnum, level._effect["beacon_shell_trail"], self, "tag_origin");
   self playSound(0, "zmb_homingbeacon_missile_boom");
   self thread sndplayincoming(v_land);

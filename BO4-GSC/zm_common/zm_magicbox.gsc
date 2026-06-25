@@ -206,7 +206,7 @@ set_treasure_chest_cost(cost) {
 }
 
 get_chest_pieces() {
-  self.chest_box = getent(self.script_noteworthy + "_zbarrier", "script_noteworthy");
+  self.chest_box = getEnt(self.script_noteworthy + "_zbarrier", "script_noteworthy");
   self.chest_rubble = [];
   rubble = getEntArray(self.script_noteworthy + "_rubble", "script_noteworthy");
 
@@ -216,7 +216,7 @@ get_chest_pieces() {
     }
   }
 
-  self.zbarrier = getent(self.script_noteworthy + "_zbarrier", "script_noteworthy");
+  self.zbarrier = getEnt(self.script_noteworthy + "_zbarrier", "script_noteworthy");
 
   if(isDefined(self.zbarrier)) {
     self.zbarrier zbarrierpieceuseboxriselogic(3);
@@ -242,9 +242,9 @@ boxtrigger_update_prompt(player) {
 
   if(isDefined(self.hint_string)) {
     if(isDefined(self.hint_parm1)) {
-      self sethintstring(self.hint_string, self.hint_parm1);
+      self setHintString(self.hint_string, self.hint_parm1);
     } else {
-      self sethintstring(self.hint_string);
+      self setHintString(self.hint_string);
     }
   }
 
@@ -279,7 +279,7 @@ boxstub_update_prompt(player) {
   if(isDefined(self.stub.trigger_target.grab_weapon_hint) && self.stub.trigger_target.grab_weapon_hint) {
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = self.stub.trigger_target.grab_weapon;
-    self setcursorhint(cursor_hint, cursor_hint_weapon);
+    self setCursorHint(cursor_hint, cursor_hint_weapon);
 
     if(isDefined(level.magic_box_check_equipment) && [[level.magic_box_check_equipment]](cursor_hint_weapon)) {
       if(function_8b1a219a()) {
@@ -311,10 +311,10 @@ boxstub_update_prompt(player) {
       }
     }
   } else if(zm_trial_disable_buys::is_active()) {
-    self sethintstring(#"hash_55d25caf8f7bbb2f");
+    self setHintString(#"hash_55d25caf8f7bbb2f");
     return true;
   } else {
-    self setcursorhint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
     self.hint_parm1 = self.stub.trigger_target.zombie_cost;
     self.hint_string = zm_utility::get_hint_string(self, "default_treasure_chest");
   }
@@ -1024,7 +1024,7 @@ default_box_move_logic() {
 
 treasure_chest_move(player_vox) {
   level waittill(#"weapon_fly_away_start");
-  players = getplayers();
+  players = getPlayers();
   array::thread_all(players, &play_crazi_sound);
   level thread function_f81251c9();
 
@@ -1378,7 +1378,7 @@ decide_hide_show_hint(endon_notify, second_endon_notify, onlyplayer, can_buy_wea
         self setinvisibletoplayer(onlyplayer, 1);
       }
     } else {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         if(players[i] can_buy_weapon(var_5429ee1f) && (!isDefined(can_buy_weapon_extra_check_func) || players[i][[can_buy_weapon_extra_check_func]](self.weapon)) && !players[i] bgb::is_enabled(#"zm_bgb_disorderly_combat")) {
@@ -1775,12 +1775,12 @@ treasure_chest_weapon_spawn(chest, player, respin) {
 
       if(isDefined(self.weapon_model)) {
         v_fly_away = self.origin + anglestoup(self.angles) * 500;
-        self.weapon_model moveto(v_fly_away, 4, 3);
+        self.weapon_model moveTo(v_fly_away, 4, 3);
       }
 
       if(isDefined(self.weapon_model_dw)) {
         v_fly_away = self.origin + anglestoup(self.angles) * 500;
-        self.weapon_model_dw moveto(v_fly_away, 4, 3);
+        self.weapon_model_dw moveTo(v_fly_away, 4, 3);
       }
 
       if(isDefined(self.weapon_model)) {
@@ -1869,7 +1869,7 @@ chest_get_min_usage() {
 
 chest_get_max_usage() {
   max_usage = 6;
-  players = getplayers();
+  players = getPlayers();
 
   if(level.chest_moves == 0) {
     if(players.size == 1) {
@@ -1902,7 +1902,7 @@ timer_til_despawn(v_float) {
   }
 
   var_3be81b3b = isDefined(level.var_ad2674fe) ? level.var_ad2674fe : 12;
-  self moveto(self.origin - v_float * 0.85, var_3be81b3b, var_3be81b3b * 0.5);
+  self moveTo(self.origin - v_float * 0.85, var_3be81b3b, var_3be81b3b * 0.5);
   wait var_3be81b3b;
 
   if(isDefined(self)) {
@@ -1934,7 +1934,7 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
   }
 
   if(weapon.name == #"ray_gun" || weapon.name == #"ray_gun_mk2") {
-    playsoundatposition(#"mus_raygun_stinger", (0, 0, 0));
+    playSoundAtPosition(#"mus_raygun_stinger", (0, 0, 0));
     str_vo_line = #"raygun";
 
     if(weapon.name == #"ray_gun_mk2" && zm_audio::function_63f85f39(#"magicbox", #"raygun_mk2")) {
@@ -2078,7 +2078,7 @@ function_4873c058() {
       var_3208e12a = 1;
 
       if(!isDefined(chest.zone_name)) {
-        var_bbab3105 = vectornormalize(anglestoright(chest.zbarrier.angles)) * -64;
+        var_bbab3105 = vectorNormalize(anglestoright(chest.zbarrier.angles)) * -64;
         chest.zone_name = zm_zonemgr::get_zone_from_position(chest.zbarrier.origin + var_bbab3105, 1);
         n_z_offset = 8;
 
@@ -2102,7 +2102,7 @@ function_4873c058() {
   var_f6497afb = 0;
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
     var_27bcd4e3 = 0;
 
     foreach(chest in level.chests) {

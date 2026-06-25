@@ -77,7 +77,7 @@ _id_DBF4(var_0, var_1, var_2, var_3) {
 
   var_5 = _func_0261(self._id_027F);
 
-  if(vectordot(vectornormalize(self._id_04DF), vectornormalize(self._id_027F)) < 0.9) {
+  if(vectordot(vectorNormalize(self._id_04DF), vectorNormalize(self._id_027F)) < 0.9) {
     return 0;
   }
 
@@ -260,7 +260,7 @@ _id_B33A(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_19)) {
-      var_20 = vectornormalize(var_19 - var_16);
+      var_20 = vectorNormalize(var_19 - var_16);
       var_13 = _func_0261(var_20);
       var_14 = var_19;
     }

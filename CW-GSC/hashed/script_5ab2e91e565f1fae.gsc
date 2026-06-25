@@ -55,10 +55,10 @@ function main(str_objective, b_starting) {
   level.park.ignoreall = 0;
   level.lazar.ignoreall = 0;
   var_322fd646 = struct::get("ride_initial_explosion", "targetname");
-  var_5094cb26 = getent("ride_sfx_ent", "targetname");
+  var_5094cb26 = getEnt("ride_sfx_ent", "targetname");
   level exploder::exploder("fxexp_church_explosion_falling_dust_fx");
   earthquake(0.5, 1, var_322fd646.origin, 2000);
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   snd::client_msg("church_explosion_event");
 }
 

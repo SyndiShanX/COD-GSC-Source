@@ -68,7 +68,7 @@ _infected(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
 }
 
 function_e5f3924e(localclientnum) {
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
 
   foreach(player in players) {
     player stoprenderoverridebundle("rob_wz_zombievision");
@@ -79,7 +79,7 @@ function_325e85a2(localclientnum) {
   self endon(#"hash_4f90e54d76985430");
 
   while(true) {
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
 
     foreach(player in players) {
       corpse = player getplayercorpse();

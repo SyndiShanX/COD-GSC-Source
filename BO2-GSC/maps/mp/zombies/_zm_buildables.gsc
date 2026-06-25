@@ -72,8 +72,8 @@ anystub_get_unitrigger_origin() {
 
 anystub_on_spawn_trigger(trigger) {
   if(isDefined(self.link_parent)) {
-    trigger enablelinkto();
-    trigger linkto(self.link_parent);
+    trigger enablelinkTo();
+    trigger linkTo(self.link_parent);
     trigger setmovingplatformenabled(1);
   }
 }
@@ -440,16 +440,16 @@ piecetrigger_update_prompt(player) {
   self setinvisibletoplayer(player, !can_use);
 
   if(isDefined(self.stub.hint_parm1)) {
-    self sethintstring(self.stub.hint_string, self.stub.hint_parm1);
+    self setHintString(self.stub.hint_string, self.stub.hint_parm1);
   } else {
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
   }
 
   if(isDefined(self.stub.cursor_hint)) {
     if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon)) {
-      self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
+      self setCursorHint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
     } else {
-      self setcursorhint(self.stub.cursor_hint);
+      self setCursorHint(self.stub.cursor_hint);
     }
   }
 
@@ -524,7 +524,7 @@ piece_unitrigger_think() {
 
     if(!status) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     } else
       player thread player_take_piece(self.stub.piece);
   }
@@ -606,7 +606,7 @@ player_throw_piece(piece, origin, dir, return_to_spawn, return_time, endangles) 
 
       altmodel.origin = grenade.angles;
       altmodel.angles = grenade.angles;
-      altmodel linkto(grenade, "", (0, 0, 0), (0, 0, 0));
+      altmodel linkTo(grenade, "", (0, 0, 0), (0, 0, 0));
       grenade.altmodel = altmodel;
       grenade waittill("stationary");
       grenade_origin = grenade.origin;
@@ -843,7 +843,7 @@ piece_allocate_spawn(piecespawn) {
   self.piecespawn = piecespawn;
 
   if(isDefined(piecespawn.str_force_spawn_kvp)) {
-    s_struct = getstruct(piecespawn.str_force_spawn_name, piecespawn.str_force_spawn_kvp);
+    s_struct = getStruct(piecespawn.str_force_spawn_name, piecespawn.str_force_spawn_kvp);
 
     if(isDefined(s_struct)) {
       for(i = 0; i < self.spawns.size; i++) {
@@ -1239,13 +1239,13 @@ buildable_piece_unitriggers(buildable_name, origin) {
 }
 
 hide_buildable_table_model(trigger_targetname) {
-  trig = getent(trigger_targetname, "targetname");
+  trig = getEnt(trigger_targetname, "targetname");
 
   if(!isDefined(trig)) {
     return;
   }
   if(isDefined(trig.target)) {
-    model = getent(trig.target, "targetname");
+    model = getEnt(trig.target, "targetname");
 
     if(isDefined(model)) {
       model hide();
@@ -1255,7 +1255,7 @@ hide_buildable_table_model(trigger_targetname) {
 }
 
 setup_unitrigger_buildable(trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
-  trig = getent(trigger_targetname, "targetname");
+  trig = getEnt(trigger_targetname, "targetname");
 
   if(!isDefined(trig)) {
     return;
@@ -1343,7 +1343,7 @@ setup_unitrigger_buildable_internal(trig, equipname, weaponname, trigger_hintstr
   unitrigger_stub.zombie_weapon_upgrade = trig.zombie_weapon_upgrade;
 
   if(isDefined(unitrigger_stub.target)) {
-    unitrigger_stub.model = getent(unitrigger_stub.target, "targetname");
+    unitrigger_stub.model = getEnt(unitrigger_stub.target, "targetname");
 
     if(isDefined(unitrigger_stub.model)) {
       if(isDefined(unitrigger_stub.zombie_weapon_upgrade)) {
@@ -1555,13 +1555,13 @@ buildablestub_remove() {
 
 buildabletrigger_update_prompt(player) {
   can_use = self.stub buildablestub_update_prompt(player);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
 
   if(isDefined(self.stub.cursor_hint)) {
     if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon)) {
-      self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
+      self setCursorHint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
     } else {
-      self setcursorhint(self.stub.cursor_hint);
+      self setCursorHint(self.stub.cursor_hint);
     }
   }
 
@@ -1866,7 +1866,7 @@ buildable_place_think() {
 
     if(!status) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
 
       if(isDefined(self.stub.oncantuse)) {
         self.stub[[self.stub.oncantuse]](player);
@@ -1898,7 +1898,7 @@ buildable_place_think() {
         self.stub.hint_string = prompt;
       }
 
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
   }
 
@@ -1939,13 +1939,13 @@ bptrigger_think_one_use_and_fly(player_built) {
 
   if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
     self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return;
   }
 
   if(isDefined(self.stub.bought) && self.stub.bought) {
     self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     return;
   }
 
@@ -1962,13 +1962,13 @@ bptrigger_think_one_use_and_fly(player_built) {
     }
     if(!maps\mp\zombies\_zm_weapons::limited_weapon_below_quota(self.stub.weaponname, undefined)) {
       self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX_LIMITED";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return;
     }
 
     if(!(isDefined(self.stub.built) && self.stub.built)) {
       self.stub.hint_string = "";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       return;
     }
 
@@ -1998,7 +1998,7 @@ bptrigger_think_one_use_and_fly(player_built) {
       self.stub.hint_string = &"ZOMBIE_GO_TO_THE_BOX";
     }
 
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
     player track_buildables_pickedup(self.stub.weaponname);
   }
 }
@@ -2018,8 +2018,8 @@ bptrigger_think_persistent(player_built) {
       }
       if(!(isDefined(self.stub.built) && self.stub.built)) {
         self.stub.hint_string = "";
-        self sethintstring(self.stub.hint_string);
-        self setcursorhint("HINT_NOICON");
+        self setHintString(self.stub.hint_string);
+        self setCursorHint("HINT_NOICON");
         return;
       }
 
@@ -2051,7 +2051,7 @@ bptrigger_think_persistent(player_built) {
 
         self.stub.cursor_hint = "HINT_NOICON";
         self.stub.cursor_hint_weapon = undefined;
-        self setcursorhint(self.stub.cursor_hint);
+        self setCursorHint(self.stub.cursor_hint);
 
         if(isDefined(level.zombie_buildables[self.stub.equipname].bought)) {
           self.stub.hint_string = level.zombie_buildables[self.stub.equipname].bought;
@@ -2059,14 +2059,14 @@ bptrigger_think_persistent(player_built) {
           self.stub.hint_string = "";
         }
 
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
         player track_buildables_pickedup(self.stub.weaponname);
       } else {
         self.stub.hint_string = "";
-        self sethintstring(self.stub.hint_string);
+        self setHintString(self.stub.hint_string);
         self.stub.cursor_hint = "HINT_NOICON";
         self.stub.cursor_hint_weapon = undefined;
-        self setcursorhint(self.stub.cursor_hint);
+        self setCursorHint(self.stub.cursor_hint);
       }
     }
   }
@@ -2082,7 +2082,7 @@ bpstub_set_custom_think_callback(callback) {
 }
 
 model_fly_away() {
-  self moveto(self.origin + vectorscale((0, 0, 1), 40.0), 3);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 40.0), 3);
   direction = self.origin;
   direction = (direction[1], direction[0], 0);
 
@@ -2214,7 +2214,7 @@ buildable_set_unbuild_notify_delay(str_equipname, str_unbuild_notify, unbuild_re
 }
 
 setup_vehicle_unitrigger_buildable(parent, trigger_targetname, equipname, weaponname, trigger_hintstring, delete_trigger, persistent) {
-  trig = getent(trigger_targetname, "targetname");
+  trig = getEnt(trigger_targetname, "targetname");
 
   if(!isDefined(trig)) {
     return;

@@ -527,10 +527,10 @@ monitor_aerial_danger(var_0) {
   }
 
   self.aerial_dangers_monitoring[self.aerial_dangers_monitoring.size] = var_0;
-  var_1 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
+  var_1 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
 
   while(isalive(var_0)) {
-    var_2 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
+    var_2 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
     var_3 = vectordot(var_1, var_2);
 
     if(var_3 <= 0) {

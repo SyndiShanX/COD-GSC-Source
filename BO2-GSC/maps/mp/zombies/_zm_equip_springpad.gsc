@@ -342,8 +342,8 @@ springpadthink(weapon, electricradius, armed) {
   trigger = spawn("trigger_box", weapon getcentroid(), 1, 48, 48, 32);
   trigger.origin = trigger.origin + anglesToForward(flat_angle(weapon.angles)) * -15;
   trigger.angles = weapon.angles;
-  trigger enablelinkto();
-  trigger linkto(weapon);
+  trigger enablelinkTo();
+  trigger linkTo(weapon);
   weapon.trigger = trigger;
 
   trigger.extent = (24.0, 24.0, 16.0);
@@ -512,7 +512,7 @@ player_fling(origin, angles, velocity, weapon) {
     return;
   }
 
-  self setorigin(aorigin);
+  self setOrigin(aorigin);
   wait_network_frame();
   self setvelocity(velocity);
 }

@@ -13,7 +13,7 @@
 event2_start() {
   setmusicstate("SNIPER_DEAD");
   tp_to_start("event2");
-  getent("E1_player_near_building_trig", "targetname") delete();
+  getEnt("E1_player_near_building_trig", "targetname") delete();
   flag_set("outof_event1");
   flag_set("hero_ready_upstairs");
 
@@ -30,32 +30,32 @@ event2b_start() {
   level notify("event2_started");
   tp_to_start("event2b");
 
-  spot = getstruct("mannequin", "targetname");
+  spot = getStruct("mannequin", "targetname");
   level.hero.animname = "hero";
 
   animtime = getanimlength(level.scr_anim["hero"]["mannequin_out"]);
   spot thread anim_single_solo(level.hero, "mannequin_out");
   wait animtime - 0.08;
-  level.hero stopanimscripted();
-  spot = getstruct("new_crawlout_align_node", "targetname");
+  level.hero stopanimScripted();
+  spot = getStruct("new_crawlout_align_node", "targetname");
   animtime = getanimlength(level.scr_anim["hero"]["bb_intro_hop_down"]);
   spot anim_reach_solo(level.hero, "bb_intro_hop_down");
   spot anim_single_solo(level.hero, "bb_intro_hop_down");
   spot thread anim_loop_solo(level.hero, "bb_intro_hop_loop", undefined, "stop_loop");
 
   flag_set("hop_down_complete");
-  getent("downstairs_clip", "targetname") delete();
+  getEnt("downstairs_clip", "targetname") delete();
   setmusicstate("SNIPER_DEAD");
 
-  getent("E1_player_near_building_trig", "targetname") delete();
+  getEnt("E1_player_near_building_trig", "targetname") delete();
   event2_trigsoff();
   level.hero.animname = "hero";
 
   level thread hero_downstairs_bb();
   level.hero.ignoreall = true;
-  getent("e2_sarge_into_flame_building", "targetname") notify("trigger");
+  getEnt("e2_sarge_into_flame_building", "targetname") notify("trigger");
 
-  getent("E2_mean_patrollers", "target") waittill("trigger");
+  getEnt("E2_mean_patrollers", "target") waittill("trigger");
   patrol_passes();
   thread building_burn();
 
@@ -70,7 +70,7 @@ event2c_start() {
   level.beamskipto = true;
   wait 8;
 
-  spot = getstruct("new_crawlout_align_node", "targetname");
+  spot = getStruct("new_crawlout_align_node", "targetname");
   level.hero.animname = "hero";
   spot anim_single_solo(level.hero, "bb_stairs_out");
   level.hero set_run_anim("stair_run");
@@ -116,7 +116,7 @@ event2a_start() {
 #using_animtree("sniper_crows");
 bookcase_fire() {
   wait 3;
-  bookshelf = getent("bookcase", "targetname");
+  bookshelf = getEnt("bookcase", "targetname");
   playFXOnTag(level._effect["bookcase_fire"], bookshelf, "tag_fx4");
   playFXOnTag(level._effect["bookcase_fire"], bookshelf, "tag_fx5");
   playFXOnTag(level._effect["bookcase_fire"], bookshelf, "tag_fx6");
@@ -125,9 +125,9 @@ bookcase_fire() {
 
 #using_animtree("sniper_crows");
 bookcase_fun() {
-  bookshelf = getent("bookcase", "targetname");
+  bookshelf = getEnt("bookcase", "targetname");
 
-  trig = getent("bookcase_trig", "targetname");
+  trig = getEnt("bookcase_trig", "targetname");
   trig waittill("trigger");
 
   bookshelf UseAnimTree(#animtree);
@@ -136,9 +136,9 @@ bookcase_fun() {
   level thread anim_ents_solo(bookshelf, "fall", undefined, undefined, bookshelf, "bookshelf");
 
   wait 2.4;
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
   wait 0.6;
-  spot = getstruct("bookcase_fall_fx", "targetname");
+  spot = getStruct("bookcase_fall_fx", "targetname");
   playFX(level._effect["bookcase_bounce"], spot.origin);
   earthquake(0.3, 0.5, level.player.origin, 500);
 
@@ -153,7 +153,7 @@ charge_player_at_storefight() {
 }
 
 player_panics() {
-  trig = getent("player_panic_inshop", "targetname");
+  trig = getEnt("player_panic_inshop", "targetname");
   trig trigger_on();
   trig waittill("trigger");
   guys = getaiarray("axis");
@@ -168,7 +168,7 @@ hero_finish_barwalk() {
     flag_waitopen("opening_bar_still");
   }
   if(flag("opening_bar_still")) {
-    level.hero stopanimscripted();
+    level.hero stopanimScripted();
     spot = getstructent("sarge_walk_along_spot", "targetname");
     spot anim_reach_solo(level.hero, "bar_lift_only");
     spot anim_single_solo(level.hero, "bar_lift_only");
@@ -199,7 +199,7 @@ break_stealth_but_player_canwin() {
   level notify("stop_talking");
   wait 0.01;
   thread say_dialogue("u_gave_away");
-  getent("fight_in_shop_chain", "targetname") notify("trigger");
+  getEnt("fight_in_shop_chain", "targetname") notify("trigger");
   nodes = getnodearray("shop_fight_axis_nodes", "script_noteworthy");
   nodecounter = 0;
   axis = getaiarray("axis");
@@ -290,10 +290,10 @@ move_along_road() {
   thread break_stealth_but_player_canwin();
   level endon("player_broke_stealth_inshop");
 
-  spot = getstruct("sarge_walk_along_spot", "targetname");
+  spot = getStruct("sarge_walk_along_spot", "targetname");
   flag_wait("resnov_outof_event1");
 
-  ramp = getent("e1_bar_ai_ramp", "targetname");
+  ramp = getEnt("e1_bar_ai_ramp", "targetname");
   ramp trigger_on();
   ramp connectpaths();
 
@@ -314,12 +314,12 @@ move_along_road() {
 }
 
 move_along_road2() {
-  spot = getstruct("sarge_walk_along_spot", "targetname");
+  spot = getStruct("sarge_walk_along_spot", "targetname");
   level.hero.animname = "hero";
 
   animtime = getanimlength(level.scr_anim["hero"]["building_spin_door"]);
   spot thread anim_single_solo(level.hero, "building_spin_door");
-  playsoundatposition("bar_door_squeak", level.hero.origin);
+  playSoundAtPosition("bar_door_squeak", level.hero.origin);
 
   level endon("player_broke_stealth_inshop");
   level endon("player_broke_stealth");
@@ -327,12 +327,12 @@ move_along_road2() {
 
   spot notify("stoploop");
 
-  spot = getstruct("sarge_nextbuilding_align", "targetname");
+  spot = getStruct("sarge_nextbuilding_align", "targetname");
 
-  getent("E2_sniper_nearmiss_trig", "targetname") trigger_on();
+  getEnt("E2_sniper_nearmiss_trig", "targetname") trigger_on();
   spot thread anim_loop_solo(level.hero, "pacing_car_idle1", undefined, "stoploop");
 
-  getent("E2_sniper_nearmiss_trig", "targetname") thread notify_and_set_flag("trigger", "player_at_nearshot_place");
+  getEnt("E2_sniper_nearmiss_trig", "targetname") thread notify_and_set_flag("trigger", "player_at_nearshot_place");
   flag_wait("approach_nearshot");
   player_inopen_check();
   spot notify("stoploop");
@@ -365,12 +365,12 @@ sniper_battle_intro() {
   level notify("event2_started");
   flag_clear("player_is_exposed");
 
-  spot1 = getstruct("E2_sniper_nearmiss_shotspot", "targetname");
-  spot2 = getstruct("E2_sniper_nearmiss_hitspot", "targetname");
+  spot1 = getStruct("E2_sniper_nearmiss_shotspot", "targetname");
+  spot2 = getStruct("E2_sniper_nearmiss_hitspot", "targetname");
   bullettracer(spot1.origin, spot2.origin, true);
   wait 0.25;
 
-  spot = getstruct("sarge_nextbuilding_align", "targetname");
+  spot = getStruct("sarge_nextbuilding_align", "targetname");
 
   thread reznov_wait_at_stair();
 
@@ -404,8 +404,8 @@ sniper_battle_intro() {
   thread sniper_battle_start();
   wait 1.2;
 
-  spot1 = getstruct("instore_shotspot", "targetname");
-  spot2 = getstruct("instore_hitspot", "targetname");
+  spot1 = getStruct("instore_shotspot", "targetname");
+  spot2 = getStruct("instore_hitspot", "targetname");
   bullettracer(spot1.origin, spot2.origin, true);
   magicbullet("mosin_rifle_scoped_noflash", spot1.origin, spot2.origin);
   maps\_spawner::kill_spawnernum(200);
@@ -413,10 +413,10 @@ sniper_battle_intro() {
 
 reznov_wait_at_stair() {
   maps\_spawner::kill_spawnernum(8);
-  spot = getstruct("sarge_nextbuilding_align", "targetname");
+  spot = getStruct("sarge_nextbuilding_align", "targetname");
   animtime = getanimlength(level.scr_anim["hero"]["pacing_window_roll"]);
   spot thread anim_single_solo(level.hero, "pacing_window_roll");
-  spot = getstruct("stairbottom_node", "targetname");
+  spot = getStruct("stairbottom_node", "targetname");
   wait animtime - 0.5;
   if(level.hero.a.pose != "prone") {
     level.hero.a.pose = "prone";
@@ -447,11 +447,11 @@ reznov_wait_at_stair() {
 flame_building() {
   level thread hero_downstairs_bb();
   level.hero.ignoreall = true;
-  getent("e2_sarge_into_flame_building", "targetname") notify("trigger");
-  trig = getent("e2_sarge_into_flame_building2", "targetname");
+  getEnt("e2_sarge_into_flame_building", "targetname") notify("trigger");
+  trig = getEnt("e2_sarge_into_flame_building2", "targetname");
   trig trigger_on();
   trig thread hero_opendoor_2();
-  getent("E2_mean_patrollers", "target") waittill("trigger");
+  getEnt("E2_mean_patrollers", "target") waittill("trigger");
   patrol_passes();
   thread building_burn();
 
@@ -510,7 +510,7 @@ building_burn() {
     level thread maps\_autosave::autosave_game_now("bb_escape");
   }
   if(level.difficulty > 2) {
-    getent("start_dem_flames", "script_noteworthy") delete();
+    getEnt("start_dem_flames", "script_noteworthy") delete();
   }
 
   level notify("bb_escape_ison");
@@ -523,7 +523,7 @@ building_burn() {
   level thread bb_stairtop_scare();
   level.hero.grenadeawareness = 0;
 
-  getent("dog_came_chain", "targetname") notify("trigger");
+  getEnt("dog_came_chain", "targetname") notify("trigger");
   burntrigs = getEntArray("window_flamer_trigs", "targetname");
   for(i = 0; i < burntrigs.size; i++) {
     level.player thread trig_burn_u(burntrigs[i]);
@@ -532,11 +532,11 @@ building_burn() {
   level.hero thread waittill_and_setflag("goal", "sarge_redy2_prone_bb");
 
   wait 1;
-  blocker = getent("block_player_by_dog", "targetname");
+  blocker = getEnt("block_player_by_dog", "targetname");
   thread move_blocker_slowly(blocker, 20);
   level thread easy_prone_check();
 
-  getent("bb_floor2_trig", "script_noteworthy") thread notify_and_set_flag("trigger", "player_on_bb_floor2");
+  getEnt("bb_floor2_trig", "script_noteworthy") thread notify_and_set_flag("trigger", "player_on_bb_floor2");
   spawners = getEntArray("bb_outside_shooters", "targetname");
   for(i = 0; i < spawners.size; i++) {
     spawners[i] stalingradspawn();
@@ -549,7 +549,7 @@ building_burn() {
     if(guys[i].classname != "actor_axis_ger_ber_wehr_reg_flamethrower") {
       guys[i] notify("enemy");
       guys[i] solo_set_pacifist(false);
-      guys[i] stopanimscripted();
+      guys[i] stopanimScripted();
       guys[i] reset_run_anim();
       guys[i].goalradius = 32;
       guys[i] setgoalnode(nodes[nodecounter]);
@@ -562,7 +562,7 @@ building_burn() {
     }
   }
 
-  trig = getent("e2_flamer1", "target");
+  trig = getEnt("e2_flamer1", "target");
   trig thread wait_and_notify(3, "trigger");
   trig waittill("trigger");
   VisionSetNaked("sniper_inside_fire", 12);
@@ -575,18 +575,18 @@ building_burn() {
 
   wait 1;
 
-  getent("e2_flamer5", "targetname") stalingradspawn();
+  getEnt("e2_flamer5", "targetname") stalingradspawn();
   sarge_getup_xcoord = 3440;
 
   players = get_players();
   array_thread(players, ::make_player_prone, sarge_getup_xcoord);
   wait 2;
   for(i = 1; i < 5; i++) {
-    trig = getent("fake_shots_" + i + "_trig", "targetname");
+    trig = getEnt("fake_shots_" + i + "_trig", "targetname");
     trig thread fake_shots_init(i);
   }
-  getent("burning_building_enemy_clip", "targetname") trigger_on();
-  getent("burning_building_enemy_clip", "targetname") disconnectpaths();
+  getEnt("burning_building_enemy_clip", "targetname") trigger_on();
+  getEnt("burning_building_enemy_clip", "targetname") disconnectPaths();
 
   array_thread(players, ::player_knocked_down2);
   thread bb_sdk_own_wall();
@@ -636,8 +636,8 @@ make_player_prone(xcoord) {
 
 fake_shots_init(num) {
   self waittill("trigger");
-  spot1 = getstruct("fake_shots_" + num + "_start", "targetname");
-  spot2 = getstruct("fake_shots_" + num + "_target", "targetname");
+  spot1 = getStruct("fake_shots_" + num + "_start", "targetname");
+  spot2 = getStruct("fake_shots_" + num + "_target", "targetname");
   maxshots = randomintrange(3, 6);
   for(x = 0; x < maxshots; x++) {
     shootspot = spot1.origin + ((randomint(20) - randomint(20)), 0, 0);
@@ -659,7 +659,7 @@ player_broke_bb_stealth() {
 tank_luvs_u() {
   self endon("death");
   self setspeed(0, 5, 5);
-  getent("bb_sdk", "targetname") setspeed(0, 10, 10);
+  getEnt("bb_sdk", "targetname") setspeed(0, 10, 10);
   while(isalive(self)) {
     shoottime = randomintrange(2, 6);
     cantanksee = false;
@@ -683,14 +683,14 @@ tank_luvs_u() {
 }
 
 upstairs_checker() {
-  trig = getent("player_upstairs_now_trig", "targetname");
+  trig = getEnt("player_upstairs_now_trig", "targetname");
   trig waittill("trigger");
   level notify("player_just_got_upstairs");
   wait 1.5;
   level thread upstairs_burn_trigs();
 
   for(i = 1; i < 7; i++) {
-    trig = getent("fire_chase_" + i, "targetname");
+    trig = getEnt("fire_chase_" + i, "targetname");
     players = get_players();
     array_thread(players, ::trig_burn_u, trig);
   }
@@ -734,7 +734,7 @@ downstairs_burn_trigs() {
   }
 
   for(i = 1; i < 13; i++) {
-    trig = getent("start_dem_flames", "script_noteworthy");
+    trig = getEnt("start_dem_flames", "script_noteworthy");
     if(i == 2 && isDefined(trig)) {
       trig delete();
     }
@@ -752,7 +752,7 @@ downstairs_burn_trigs() {
       wait 3;
       waittime = 3;
     }
-    trig = getent("fire_chase_" + i, "targetname");
+    trig = getEnt("fire_chase_" + i, "targetname");
 
     players = get_players();
     array_thread(players, ::trig_burn_u, trig);
@@ -778,7 +778,7 @@ upstairs_burn_trigs() {
       flag_wait("player_up_after_fall");
       wait 10;
     }
-    trig = getent("fire_chase_" + i, "targetname");
+    trig = getEnt("fire_chase_" + i, "targetname");
 
     players = get_players();
     array_thread(players, ::trig_burn_u, trig);
@@ -806,7 +806,7 @@ trig_burn_u(trig) {
 
 by_window_trig() {
   flag_wait("player_on_bb_floor2");
-  trig = getent("player_close_to_window_trig", "targetname");
+  trig = getEnt("player_close_to_window_trig", "targetname");
   while(1) {
     if(self istouching(trig) && self getstance() == "stand") {
       magicbullet("mosin_rifle_scoped_noflash", (self getEye()) + (0, -30, 0), self getEye());
@@ -845,7 +845,7 @@ player_out_of_bb() {
   animtime = getanimlength(level.scr_anim["hero"]["kicked_vignette"]);
 
   wait animtime - 1;
-  getent("e3_allies_saveu_chain", "targetname") notify("trigger");
+  getEnt("e3_allies_saveu_chain", "targetname") notify("trigger");
   wait 1;
   spot thread anim_loop_solo(level.hero, "kicked_loop", undefined, "stoploop");
 
@@ -883,9 +883,9 @@ player_knocked_down2() {
 
   beams = getEntArray("burning_beam", "targetname");
   for(i = 0; i < beams.size; i++) {
-    beams[i] moveto(beams[i].origin + (0, 0, 300), 0.1);
+    beams[i] moveTo(beams[i].origin + (0, 0, 300), 0.1);
   }
-  getent("falling_boards_pos6_trig", "targetname") waittill("trigger");
+  getEnt("falling_boards_pos6_trig", "targetname") waittill("trigger");
 
   level notify("boardfall_time");
   level.hero.ignoreall = true;
@@ -894,7 +894,7 @@ player_knocked_down2() {
   level.hero ClearEnemy();
   level.hero allowedstances("prone", "stand", "crouch");
 
-  level.hero stopanimscripted();
+  level.hero stopanimScripted();
 
   level.hero set_run_anim("runcough1");
   earthquake(0.5, 1, level.player.origin, 500);
@@ -907,7 +907,7 @@ player_knocked_down2() {
   spots = getstructent("bb_debris_fallonu", "targetname");
   playFX(level._effect["debris_fall"], spots.origin, anglesToForward(spots.angles));
 
-  playsoundatposition("celing_collapse_start", (0, 0, 0));
+  playSoundAtPosition("celing_collapse_start", (0, 0, 0));
 
   setmusicstate("CELING");
   player thread player_speed_set(5, 3);
@@ -920,7 +920,7 @@ player_knocked_down2() {
   wait 0.5;
   spots delete();
 
-  spot = getstruct("new_crawlout_align_node", "targetname");
+  spot = getStruct("new_crawlout_align_node", "targetname");
   spot notify("stoploop");
 
   level thread beams_fall();
@@ -940,7 +940,7 @@ player_knocked_down2() {
   animtime = getanimlength(level.scr_anim["hero"]["resnov_beam_up"]);
   resnov_align thread hero_liftbeam_torun();
 
-  board = getent("board_tomove", "script_noteworthy");
+  board = getEnt("board_tomove", "script_noteworthy");
 
   level waittill("beam_lift_time");
 
@@ -948,10 +948,10 @@ player_knocked_down2() {
 
   blocker = getEntArray("bb_doorblocker", "targetname");
   for(i = 0; i < blocker.size; i++) {
-    blocker[i] moveto(blocker[i].origin + (0, 0, 10000), 0.1);
+    blocker[i] moveTo(blocker[i].origin + (0, 0, 10000), 0.1);
   }
 
-  getent("player_postsave_chain", "targetname") notify("trigger");
+  getEnt("player_postsave_chain", "targetname") notify("trigger");
 
   player Setclientdvar("bg_prone_yawcap", "85");
   player.nopronerotation = false;
@@ -975,16 +975,16 @@ hero_liftbeam_torun() {
   animtime = getanimlength(level.scr_anim["hero"]["bb_stumble1"]);
   spot thread anim_single_solo(level.hero, "bb_stumble1");
   wait animtime - 0.5;
-  level.hero stopanimscripted();
+  level.hero stopanimScripted();
   level.hero enable_ai_color();
 }
 
 player_bb_jumpout() {
-  getent("jump_now_comrade_trig", "targetname") waittill("trigger");
+  getEnt("jump_now_comrade_trig", "targetname") waittill("trigger");
   thread say_dialogue("jump");
   player = get_players()[0];
 
-  trig = getent("jump_trig", "targetname");
+  trig = getEnt("jump_trig", "targetname");
   trig waittill("trigger");
 
   player playSound("player_land_outside");
@@ -997,7 +997,7 @@ player_bb_jumpout() {
     guys[i] delete();
   }
 
-  ospot = getstruct("jump_spot", "targetname");
+  ospot = getStruct("jump_spot", "targetname");
   spot = ospot swap_struct_with_origin();
 
   exploder(12);
@@ -1006,7 +1006,7 @@ player_bb_jumpout() {
 
   spot delete();
 
-  ospot = getstruct("roll_spot", "targetname");
+  ospot = getStruct("roll_spot", "targetname");
   spot = ospot swap_struct_with_origin();
 
   player lerp_player_view_to_position(spot.origin, spot.angles, .2, .7, 2, 2, 2, 2, undefined);
@@ -1017,7 +1017,7 @@ player_bb_jumpout() {
   player playerlinktoabsolute(spot);
 
   player disableweapons();
-  spot moveto(spot.origin + (0, 30, 0), 0.5);
+  spot moveTo(spot.origin + (0, 30, 0), 0.5);
   spots = getStructArray("rollspots", "script_noteworthy");
   time = 0;
   VisionSetNaked("Sniper_default", 1);
@@ -1045,7 +1045,7 @@ player_bb_jumpout() {
     if(i == 7) {
       time = 0.13;
       level notify("outta_sight_outta_mind");
-      spot moveto(spot.origin + (0, 125, 0), 0.5);
+      spot moveTo(spot.origin + (0, 125, 0), 0.5);
     }
     if(i == 8) {
       time = 0.12;
@@ -1053,8 +1053,8 @@ player_bb_jumpout() {
     if(i == 9) {
       time = 0.11;
     }
-    rollspot = getstruct("rollspot" + i, "targetname");
-    spot rotateto(rollspot.angles, time);
+    rollspot = getStruct("rollspot" + i, "targetname");
+    spot rotateTo(rollspot.angles, time);
     wait time;
   }
 
@@ -1078,10 +1078,10 @@ guy_jumpout_window() {
   guy.animname = "hero";
   spot = spawn("script_origin", guy.origin);
 
-  ospot = getstruct("animspot", "targetname");
+  ospot = getStruct("animspot", "targetname");
   animspot = ospot swap_struct_with_origin();
 
-  ospot = getstruct("alleyguys_node", "targetname");
+  ospot = getStruct("alleyguys_node", "targetname");
   animspot2 = ospot swap_struct_with_origin();
 
   animspot thread anim_single_solo(guy, "bb_jumpout");
@@ -1090,17 +1090,17 @@ guy_jumpout_window() {
   fxspot = getstructent("blowspot", "targetname");
   playFX(level._effect["temp_bb_explode"], fxspot.origin, anglesToForward(fxspot.angles));
   earthquake(0.4, 2, level.player.origin, 500);
-  level.player playrumbleonentity("explosion_generic");
+  level.player playRumbleOnEntity("explosion_generic");
 
   fxspot playSound("exp_second_floor");
 
   setmusicstate("EXPLOSION");
 
-  level.hero linkto(animspot);
+  level.hero linkTo(animspot);
   level waittill("roll_done");
   wait 0.1;
 
-  level.hero stopanimscripted();
+  level.hero stopanimScripted();
   animtime = getanimlength(level.scr_anim["hero"]["bb_jumproll"]);
   animspot2 thread anim_single_solo(guy, "bb_jumproll");
   level.hero unlink();
@@ -1108,8 +1108,8 @@ guy_jumpout_window() {
   wait animtime;
 
   animspot2 thread anim_loop_solo(level.hero, "bb_proneloop", undefined, "stoploop");
-  getent("e3_alley_kicker", "targetname") stalingradspawn();
-  getent("e3_alley_leader", "targetname") thread wait_and_spawn(1.3);
+  getEnt("e3_alley_kicker", "targetname") stalingradspawn();
+  getEnt("e3_alley_leader", "targetname") thread wait_and_spawn(1.3);
   level waittill("alley_kicker_inplace");
   animspot2 notify("stoploop");
   animspot2 thread anim_single_solo(level.hero, "kicked_vignette");
@@ -1128,15 +1128,15 @@ hero_wait_byhole() {
 bb_sdk_own_wall() {
   level thread yahoo_fx();
   level thread beams_shot();
-  getent("sdk_fire_trig", "targetname") waittill("trigger");
+  getEnt("sdk_fire_trig", "targetname") waittill("trigger");
 
   level thread hero_wait_byhole();
   flag_set("limp2");
-  sdk = getent("bb_sdk", "targetname");
+  sdk = getEnt("bb_sdk", "targetname");
   for(i = 13; i > 0; i--) {
     spots = getEntArray("hole_" + i, "targetname");
 
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     wait 0.217;
 
     earthquake(0.35, 0.2, get_players()[0].origin, 500);
@@ -1184,9 +1184,9 @@ sniper_battle_start() {
 
   level.player_hits_sustained = 1;
   if(cointoss()) {
-    level.e2sniper = getent("sniper1", "script_noteworthy") stalingradspawn();
+    level.e2sniper = getEnt("sniper1", "script_noteworthy") stalingradspawn();
   } else {
-    level.e2sniper = getent("sniper2", "script_noteworthy") stalingradspawn();
+    level.e2sniper = getEnt("sniper2", "script_noteworthy") stalingradspawn();
   }
 
   level.e2sniper endon("death");
@@ -1196,10 +1196,10 @@ sniper_battle_start() {
   level.hero.disableexits = true;
   wait 2;
   level.hero.animname = "hero";
-  spot = getstruct("stairbottom_node", "targetname");
+  spot = getStruct("stairbottom_node", "targetname");
   flag_set("hero_ready_upstairs");
   level waittill("up_stairs");
-  newspot = getstruct("mannequin", "targetname");
+  newspot = getStruct("mannequin", "targetname");
   newspot anim_reach_solo(level.hero, "mannequin_entrance");
   newspot anim_single_solo(level.hero, "mannequin_entrance");
   newspot thread anim_loop_solo(level.hero, "mannequin_wait", undefined, "stoploop");
@@ -1224,11 +1224,11 @@ sniper_battle_start() {
   animtime = getanimlength(level.scr_anim["hero"]["mannequin_in"]);
   wait animtime - 0.09;
   level.hero set_run_anim("e1_street_run");
-  level.hero stopanimscripted();
+  level.hero stopanimScripted();
   level.hero set_run_anim("e1_street_run");
   level.sniper_looking_max = 1;
 
-  ospot = getstruct("sniper_aim_here", "targetname");
+  ospot = getStruct("sniper_aim_here", "targetname");
   aimspot = ospot swap_struct_with_origin();
 
   nodenum = level.e2sniper.currentnum;
@@ -1279,7 +1279,7 @@ hero_mannequin_anims(newspot) {
 dontlet_player_on_snipers_back() {
   level.e2sniper endon("death");
   while(1) {
-    windowtrig = getent("sniper_hidespot_bot", "targetname");
+    windowtrig = getEnt("sniper_hidespot_bot", "targetname");
     if(level.player istouching(windowtrig) && level.e2sniper.currentnum == 7) {
       flag_set("player_shotat_sniper");
       wait 10;
@@ -1323,7 +1323,7 @@ sniper_on_u(trig, player) {
 
       level notify("animspot_clean");
 
-      level.e2sniper stopanimscripted();
+      level.e2sniper stopanimScripted();
 
       while(1) {
         if(cointoss()) {
@@ -1334,7 +1334,7 @@ sniper_on_u(trig, player) {
               continue;
             }
 
-            windowtrig = getent("sniper_hidespot_bot", "targetname");
+            windowtrig = getEnt("sniper_hidespot_bot", "targetname");
             if(level.player istouching(windowtrig) && num == 7) {
               continue;
             }
@@ -1407,7 +1407,7 @@ sniper_on_u(trig, player) {
           hero_call_sniper_pos(nodenum, facial) {
             nodes = getnodearray(level.e2sniper.script_noteworthy + "_hide_nodes", "script_noteworthy");
             halfsize = nodes.size / 2;
-            animspot = getstruct("mannequin", "targetname");
+            animspot = getStruct("mannequin", "targetname");
             level.hero.animname = "hero";
             if(level.e2sniper.script_noteworthy == "sniper1") {
               if(nodenum > halfsize) {
@@ -1461,7 +1461,7 @@ sniper_on_u(trig, player) {
             setmusicstate("SNIPER_DEAD");
 
             if(flag("pushing_mannequin")) {
-              newspot = getstruct("mannequin", "targetname");
+              newspot = getStruct("mannequin", "targetname");
               newspot notify("stoploop");
               flag_set("mannequin_hit");
               org = guy gettagorigin("tag_inhand");
@@ -1474,7 +1474,7 @@ sniper_on_u(trig, player) {
             }
 
             if(flag("pushing_mannequin_d")) {
-              newspot = getstruct("mannequin", "targetname");
+              newspot = getStruct("mannequin", "targetname");
               newspot notify("stoploop");
               flag_set("mannequin_hit");
               org = guy gettagorigin("tag_inhand");
@@ -1485,7 +1485,7 @@ sniper_on_u(trig, player) {
               mannequin.angles = ang;
               mannequin setModel("anim_berlin_mannequin_d");
             }
-            level.hero stopanimscripted();
+            level.hero stopanimScripted();
 
             objective_controller(5);
             level notify("stop_talking");
@@ -1509,16 +1509,16 @@ sniper_on_u(trig, player) {
 
           #using_animtree("sniper_crows");
           bb_opendoors() {
-            newspot = getstruct("mannequin", "targetname");
+            newspot = getStruct("mannequin", "targetname");
 
-            door1 = getent("store_door", "targetname");
+            door1 = getEnt("store_door", "targetname");
             door1.script_linkto = "origin_animate_jnt";
 
-            door1 = GetEnt("store_door", "targetname");
+            door1 = getEnt("store_door", "targetname");
             door1 ConnectPaths();
             level thread anim_ents_solo(door1, "open", undefined, undefined, door1, "rightdoor");
 
-            door2 = getent("store_door2", "targetname");
+            door2 = getEnt("store_door2", "targetname");
 
             door2.script_linkto = "origin_animate_jnt";
             door2 ConnectPaths();
@@ -1527,9 +1527,9 @@ sniper_on_u(trig, player) {
           }
 
           hero_opendoor_2() {
-            newspot = getstruct("mannequin", "targetname");
+            newspot = getStruct("mannequin", "targetname");
             newspot notify("stoploop");
-            spot = getstruct("mannequin", "targetname");
+            spot = getStruct("mannequin", "targetname");
             level.hero.animname = "hero";
             spot anim_reach_solo(level.hero, "mannequin_out");
             animtime = getanimlength(level.scr_anim[level.hero.animname]["mannequin_out"]);
@@ -1537,14 +1537,14 @@ sniper_on_u(trig, player) {
             level thread bb_opendoors();
             spot thread anim_single_solo(level.hero, "mannequin_out");
 
-            getent("e2_sarge_into_flame_building2_chain", "targetname") notify("trigger");
+            getEnt("e2_sarge_into_flame_building2_chain", "targetname") notify("trigger");
 
             level.hero.disablearrivals = true;
             level.hero.disableexits = true;
             wait animtime - 0.1;
-            level.hero stopanimscripted();
-            getent("downstairs_clip", "targetname") delete();
-            spot = getstruct("new_crawlout_align_node", "targetname");
+            level.hero stopanimScripted();
+            getEnt("downstairs_clip", "targetname") delete();
+            spot = getStruct("new_crawlout_align_node", "targetname");
             animtime = getanimlength(level.scr_anim["hero"]["bb_intro_hop_down"]);
             spot anim_reach_solo(level.hero, "bb_intro_hop_down");
             spot anim_single_solo(level.hero, "bb_intro_hop_down");
@@ -1554,23 +1554,23 @@ sniper_on_u(trig, player) {
           }
 
           e2_backtrack_blocking() {
-            getent("inside_sniper_building_trig", "script_noteworthy") waittill("trigger");
-            getent("sniper_building_playerclip", "targetname") trigger_on();
+            getEnt("inside_sniper_building_trig", "script_noteworthy") waittill("trigger");
+            getEnt("sniper_building_playerclip", "targetname") trigger_on();
             flag_set("inside_sniper_building");
             level notify("sniper_second_shot");
           }
 
           glass_break() {
             wait 3;
-            spot1 = getstruct("E2_sniper_nearmiss_shotspot", "targetname");
-            spot2 = getstruct("E2_sniper_nearmiss_hitspot2", "targetname");
+            spot1 = getStruct("E2_sniper_nearmiss_shotspot", "targetname");
+            spot2 = getStruct("E2_sniper_nearmiss_hitspot2", "targetname");
             bullettracer(spot1.origin, spot2.origin, true);
 
             wait 0.35;
 
-            pos = getstruct("glass_break_pos", "targetname");
+            pos = getStruct("glass_break_pos", "targetname");
             playFX(level._effect["glass_break"], pos.origin);
-            playsoundatposition("break_window", (1616, -272, 8));
+            playSoundAtPosition("break_window", (1616, -272, 8));
 
             windows = getEntArray("shot_window", "targetname");
             for(i = 0; i < windows.size; i++) {
@@ -1579,16 +1579,16 @@ sniper_on_u(trig, player) {
 
             wait 0.1;
             magicbullet("mosin_rifle_scoped_noflash", spot1.origin, spot2.origin);
-            getent("sniper_building_playerclip", "targetname") trigger_off();
+            getEnt("sniper_building_playerclip", "targetname") trigger_off();
           }
 
           player_lingers_by_nearmiss() {
             level endon("e2_sniper_dead");
             level endon("newspot");
-            spot1 = getstruct("E2_sniper_nearmiss_shotspot", "targetname");
-            getent("inside_sniper_building_trig", "script_noteworthy") waittill("trigger");
+            spot1 = getStruct("E2_sniper_nearmiss_shotspot", "targetname");
+            getEnt("inside_sniper_building_trig", "script_noteworthy") waittill("trigger");
             wait 2;
-            trig = getent("player_hugging_wall_by_nearmiss", "targetname");
+            trig = getEnt("player_hugging_wall_by_nearmiss", "targetname");
             while(1) {
               players = get_players();
               for(i = 0; i < players.size; i++) {
@@ -1613,13 +1613,13 @@ sniper_on_u(trig, player) {
           }
 
           event2_trigsoff() {
-            getent("e2_sarge_into_flame_building2", "targetname") trigger_off();
-            getent("burning_building_enemy_clip", "targetname") connectpaths();
-            getent("burning_building_enemy_clip", "targetname") trigger_off();
+            getEnt("e2_sarge_into_flame_building2", "targetname") trigger_off();
+            getEnt("burning_building_enemy_clip", "targetname") connectpaths();
+            getEnt("burning_building_enemy_clip", "targetname") trigger_off();
           }
 
           mannequin_damage_control(spot) {
-            trig = getent("mannequin_damage_trig", "targetname");
+            trig = getEnt("mannequin_damage_trig", "targetname");
             trig.origin = spot.origin;
             while(1) {
               trig waittill("damage", amount, attacker);
@@ -1633,7 +1633,7 @@ sniper_on_u(trig, player) {
 
           #using_animtree("generic_human");
           hero_downstairs_bb() {
-            trig = getent("hero_downstairs_bb", "script_noteworthy");
+            trig = getEnt("hero_downstairs_bb", "script_noteworthy");
             if(isDefined(trig)) {
               trig waittill("trigger");
             }
@@ -1641,9 +1641,9 @@ sniper_on_u(trig, player) {
             maps\_spawner::kill_spawnernum(201);
 
             level.hero.animname = "hero";
-            spot = getstruct("new_crawlout_align_node", "targetname");
-            getent("sarge_over_table", "targetname") waittill("trigger");
-            getent("player_backup_bbstairs_blocker", "targetname") trigger_on();
+            spot = getStruct("new_crawlout_align_node", "targetname");
+            getEnt("sarge_over_table", "targetname") waittill("trigger");
+            getEnt("player_backup_bbstairs_blocker", "targetname") trigger_on();
 
             flag_wait("hop_down_complete");
 
@@ -1663,7 +1663,7 @@ sniper_on_u(trig, player) {
             level.hero allowedstances("prone");
 
             wait animtime * (5 / 8);
-            getent("e2_flamer6", "targetname") stalingradspawn();
+            getEnt("e2_flamer6", "targetname") stalingradspawn();
 
             wait animtime * (1 / 8);
 
@@ -1697,12 +1697,12 @@ sniper_on_u(trig, player) {
             level.hero set_run_anim("sneaky_walk1");
 
             flag_wait("hero_moveto_stairs");
-            spot = getstruct("falling_boards_react", "targetname");
+            spot = getStruct("falling_boards_react", "targetname");
             level.hero.animname = "hero";
 
             spot anim_single_solo(level.hero, "bb_stumble4");
             level.hero set_run_anim("runcough1");
-            spot = getstruct("new_crawlout_align_node", "targetname");
+            spot = getStruct("new_crawlout_align_node", "targetname");
             spot anim_reach_solo(level.hero, "bb_stairs_loop_reach");
             spot thread anim_loop_solo(level.hero, "bb_stairs_loop", undefined, "stoploop");
             flag_wait("hero_moveup_stairs");
@@ -1731,7 +1731,7 @@ sniper_on_u(trig, player) {
           }
 
           ceiling1_fall() {
-            trig = getent("falling_boards_pos4_trig", "targetname");
+            trig = getEnt("falling_boards_pos4_trig", "targetname");
             trig waittill("trigger");
 
             spot = getstructent("falling_boards_react", "targetname");
@@ -1754,18 +1754,18 @@ sniper_on_u(trig, player) {
             earthquake(0.4, 2, level.player.origin, 500);
             playFX(level._effect["collapse_1"], (3838, -351, 147));
 
-            playsoundatposition("celing_fall_1", (3838, -351, 147));
+            playSoundAtPosition("celing_fall_1", (3838, -351, 147));
 
             animlength = getanimlength(level.scr_anim["celing1_fall"]["fall"]);
             level thread maps\_anim::anim_ents(beams, "fall", undefined, undefined, spot, "celing1_fall");
-            level.player playrumbleonentity("explosion_generic");
+            level.player playRumbleOnEntity("explosion_generic");
             wait animlength;
 
             spot delete();
           }
 
           ceiling2_fall() {
-            trig = getent("bb_floor2_trig", "script_noteworthy");
+            trig = getEnt("bb_floor2_trig", "script_noteworthy");
             trig waittill("trigger");
             newspot = getnode("celing2_fall", "targetname");
             spot = spawn("script_model", newspot.origin);
@@ -1777,15 +1777,15 @@ sniper_on_u(trig, player) {
               beams[i].script_linkto = beams[i].script_noteworthy;
             }
 
-            level.player playrumbleonentity("explosion_generic");
+            level.player playRumbleOnEntity("explosion_generic");
             earthquake(0.4, 4, level.player.origin, 1000);
             playFX(level._effect["collapse_2"], (3821, -108, 388));
-            playsoundatposition("celing_fall_2", (3821, -108, 388));
+            playSoundAtPosition("celing_fall_2", (3821, -108, 388));
 
             animlength = getanimlength(level.scr_anim["celing2_fall"]["fall"]);
             level thread maps\_anim::anim_ents(beams, "fall", undefined, undefined, spot, "celing2_fall");
             wait 2;
-            level.player playrumbleonentity("explosion_generic");
+            level.player playRumbleOnEntity("explosion_generic");
             wait animlength - 2;
 
             spot delete();
@@ -1801,11 +1801,11 @@ sniper_on_u(trig, player) {
           #using_animtree("sniper_crows");
           chandolier_loop() {
             level endon("chandelier_fall");
-            node = getstruct("chandolier_align", "targetname");
+            node = getStruct("chandolier_align", "targetname");
             spot = spawn("script_origin", node.origin);
             spot.angles = node.angles;
 
-            model = getent("anim_chandolier", "targetname");
+            model = getEnt("anim_chandolier", "targetname");
             model UseAnimTree(#animtree);
             model.animname = "chandelier";
             while(1) {
@@ -1817,14 +1817,14 @@ sniper_on_u(trig, player) {
           chandolier_fall() {
             chandolier_loop();
             stop_exploder(8);
-            node = getstruct("chandolier_align", "targetname");
+            node = getStruct("chandolier_align", "targetname");
             spot = spawn("script_origin", node.origin);
             spot.angles = node.angles;
 
-            model = getent("anim_chandolier", "targetname");
+            model = getEnt("anim_chandolier", "targetname");
             model UseAnimTree(#animtree);
             model.animname = "chandelier";
-            model stopanimscripted();
+            model stopanimScripted();
             model playSound("beam_break");
 
             beams = getEntArray("chandelier_fall", "targetname");
@@ -1835,7 +1835,7 @@ sniper_on_u(trig, player) {
               beams[i].script_linkto = beams[i].script_noteworthy;
             }
 
-            level.player playrumbleonentity("explosion_generic");
+            level.player playRumbleOnEntity("explosion_generic");
             earthquake(0.3, 0.5, level.player.origin, 1000);
             playFX(level._effect["collapse_chand"], (2841, -717, 301));
             model thread anim_single_solo(model, "fall");
@@ -1843,11 +1843,11 @@ sniper_on_u(trig, player) {
             level thread maps\_anim::anim_ents(beams, "fall", undefined, undefined, spot2, "chandelier_frame");
             level thread chandolier_2_shake();
             wait 1.7;
-            level.player playrumbleonentity("explosion_generic");
+            level.player playRumbleOnEntity("explosion_generic");
             earthquake(0.5, 1, level.player.origin, 1000);
             model playSound("explosion_fake");
             wait 1.2;
-            level.player playrumbleonentity("explosion_generic");
+            level.player playRumbleOnEntity("explosion_generic");
             earthquake(0.3, 0.4, level.player.origin, 1000);
             wait animlength - 2.9;
             model playSound("beam_break_2");
@@ -1857,7 +1857,7 @@ sniper_on_u(trig, player) {
 
           chandolier_2_shake() {
             level endon("roll_done");
-            chand = getent("chandolier_2", "targetname");
+            chand = getEnt("chandolier_2", "targetname");
             chand UseAnimTree(#animtree);
             chand.animname = "chandelier_2";
             while(1) {
@@ -1867,12 +1867,12 @@ sniper_on_u(trig, player) {
           }
 
           beams_shot() {
-            getent("fire_chase_11", "targetname") waittill("trigger");
-            getent("b1_d", "targetname") show();
-            getent("b1", "targetname") delete();
+            getEnt("fire_chase_11", "targetname") waittill("trigger");
+            getEnt("b1_d", "targetname") show();
+            getEnt("b1", "targetname") delete();
             wait 0.25;
-            getent("b2_d", "targetname") show();
-            getent("b2", "targetname") delete();
+            getEnt("b2_d", "targetname") show();
+            getEnt("b2", "targetname") delete();
           }
 
           furnace_burst() {
@@ -1881,22 +1881,22 @@ sniper_on_u(trig, player) {
             spot.angles = node.angles;
             spot setModel("anim_sniper_pipe_bust");
 
-            pipe = getent("dstairs_furnace", "targetname");
+            pipe = getEnt("dstairs_furnace", "targetname");
             pipe.script_linkto = "pipe";
-            trig = getent("sarge_moveon_towardstairs_chain", "script_noteworthy");
+            trig = getEnt("sarge_moveon_towardstairs_chain", "script_noteworthy");
             trig waittill("trigger");
 
             exploder(24);
             level._effect["pipe_trail"] = loadfx("maps/sniper/fx_sys_element_flame_trail_small_emitter");
             level._effect["pipe_flame"] = loadfx("maps/sniper/fx_oven_pipe_flame");
 
-            fxspot = getstruct("first_pipefx_spot", "targetname");
+            fxspot = getStruct("first_pipefx_spot", "targetname");
             playFX(level._effect["pipe_flame"], fxspot.origin, anglesToForward(fxspot.angles));
             pipe playSound("explosion_heater");
 
             pipefx = spawn("script_model", pipe.origin);
             pipefx setModel("tag_origin");
-            pipefx linkto(pipe);
+            pipefx linkTo(pipe);
             playFXOnTag(level._effect["pipe_trail"], pipefx, "tag_origin");
             pipe playLoopSound("heater_loop");
 
@@ -1918,18 +1918,18 @@ sniper_on_u(trig, player) {
                 first_limp_point = (0, 0, 11);
                 angles = adjust_angles_to_player(first_limp_point);
                 level.player thread player_speed_set(170, 0.4);
-                level.ground_ref_ent rotateto(angles, 0.6, 0.55, 0.05);
+                level.ground_ref_ent rotateTo(angles, 0.6, 0.55, 0.05);
                 wait 0.5;
                 get_players()[0] setblur(0, 0.5);
                 second_limp_point = (0, 0, 6);
                 angles = adjust_angles_to_player(second_limp_point);
                 level.player thread player_speed_set(90, 0.2);
-                level.ground_ref_ent rotateto(angles, 0.7, 0.65, 0.05);
+                level.ground_ref_ent rotateTo(angles, 0.7, 0.65, 0.05);
                 wait 0.3;
                 level.player thread player_speed_set(130, 1);
                 third_limp_point = (0, 0, -5);
                 angles = adjust_angles_to_player(third_limp_point);
-                level.ground_ref_ent rotateto(angles, 0.5, 0.45, 0.05);
+                level.ground_ref_ent rotateTo(angles, 0.5, 0.45, 0.05);
                 wait 0.5;
               }
               wait 0.05;
@@ -1946,19 +1946,19 @@ sniper_on_u(trig, player) {
                 first_limp_point = (0, 0, 7 + (modifier * -1));
                 angles = adjust_angles_to_player(first_limp_point);
                 level.player thread player_speed_set(180, 0.4);
-                level.ground_ref_ent rotateto(angles, 0.6, 0.55, 0.05);
+                level.ground_ref_ent rotateTo(angles, 0.6, 0.55, 0.05);
                 wait 0.5;
 
                 get_players()[0] setblur(0, 0.5);
                 second_limp_point = (0, 0, 5 + (modifier * -1));
                 angles = adjust_angles_to_player(second_limp_point);
                 level.player thread player_speed_set(100 * speed_modifier, 0.2);
-                level.ground_ref_ent rotateto(angles, 0.7, 0.65, 0.05);
+                level.ground_ref_ent rotateTo(angles, 0.7, 0.65, 0.05);
                 wait 0.3;
                 level.player thread player_speed_set(140 * speed_modifier, 1);
                 third_limp_point = (0, 0, -3 + (modifier * 1));
                 angles = adjust_angles_to_player(third_limp_point);
-                level.ground_ref_ent rotateto(angles, 0.5, 0.45, 0.05);
+                level.ground_ref_ent rotateTo(angles, 0.5, 0.45, 0.05);
                 wait 0.5;
               }
               modifier = modifier + 0.4;
@@ -1971,7 +1971,7 @@ sniper_on_u(trig, player) {
 
           recover() {
             flag_set("recovering");
-            level.ground_ref_ent RotateTo((0, 0, 0), 1, 0.2, 0.8);
+            level.ground_ref_ent rotateTo((0, 0, 0), 1, 0.2, 0.8);
             level.ground_ref_ent waittill("rotatedone");
             flag_clear("recovering");
           }
@@ -1982,7 +1982,7 @@ sniper_on_u(trig, player) {
           }
 
           yahoo_fx() {
-            trig = getent("falling_boards_pos7_trig", "targetname");
+            trig = getEnt("falling_boards_pos7_trig", "targetname");
             trig waittill("trigger");
             for(i = 0; i < 9; i++) {
               stop_exploder(i);
@@ -2032,12 +2032,12 @@ sniper_on_u(trig, player) {
           }
 
           bb_stairtop_scare() {
-            trig = getent("player_upstairs_now_trig", "targetname");
+            trig = getEnt("player_upstairs_now_trig", "targetname");
             trig waittill("trigger");
             level thread maps\sniper::say_dialogue("b4_burned_alive");
 
-            spot1 = getstruct("bb_nade_start", "targetname");
-            spot2 = getstruct("bb_nade_aim", "targetname");
+            spot1 = getStruct("bb_nade_start", "targetname");
+            spot2 = getStruct("bb_nade_aim", "targetname");
             ai = getaiarray("axis");
             if(level.difficulty != 1) {
               ai[0] magicgrenade(spot1.origin, spot2.origin, 5);
@@ -2074,7 +2074,7 @@ sniper_on_u(trig, player) {
           e2_fall_effects() {
             wait 3;
             for(i = 1; i < 5; i++) {
-              spot = getstruct("e2_fall_effect_" + i, "targetname");
+              spot = getStruct("e2_fall_effect_" + i, "targetname");
               playFX(level._effect["fallingboards_fire"], spot.origin);
               wait randomfloatrange(1, 4);
               if(i == 2) {
@@ -2099,9 +2099,9 @@ sniper_on_u(trig, player) {
           helmet_ona_stick(node) {
             flag_set("helmet_trick_time");
             level.helmet_trick_done = true;
-            helmet = getent("fake_helmet", "targetname");
-            dtrig = getent("helmet_dtrig", "targetname");
-            stick = getent("helmet_ona_stick", "targetname");
+            helmet = getEnt("fake_helmet", "targetname");
+            dtrig = getEnt("helmet_dtrig", "targetname");
+            stick = getEnt("helmet_ona_stick", "targetname");
             xcoordmod = 0;
             switch (node.type) {
               case "Cover Right":
@@ -2112,9 +2112,9 @@ sniper_on_u(trig, player) {
                 break;
             }
             dtrigorg = spawn("script_origin", dtrig.origin);
-            dtrigorg linkto(helmet);
+            dtrigorg linkTo(helmet);
             dtrig thread drag_trig_with_org(dtrigorg);
-            stick linkto(helmet);
+            stick linkTo(helmet);
 
             helmet.origin = node.origin + (xcoordmod, 0, 15);
             level thread waittill_and_setflag("stealthbreak", "player_shotat_helmet");
@@ -2180,13 +2180,13 @@ sniper_on_u(trig, player) {
             }
             if(flag("player_shotat_helmet")) {
               stick delete();
-              helmet moveto(helmet.origin + (0, -200, -10), 1);
+              helmet moveTo(helmet.origin + (0, -200, -10), 1);
               helmet rotatepitch(180, 1.5);
               level thread say_dialogue("just_decoy");
               level thread say_dialogue("stay_focused", undefined, 1);
             } else {
               stick delete();
-              helmet moveto(helmet.origin + (0, 0, -15), 3);
+              helmet moveTo(helmet.origin + (0, 0, -15), 3);
               wait randomint(3, 7);
             }
             level thread wait_and_openflag(3, "helmet_trick_time");
@@ -2201,7 +2201,7 @@ sniper_on_u(trig, player) {
           }
 
           armored_car_line() {
-            trig = getent("fire_chase_9", "targetname");
+            trig = getEnt("fire_chase_9", "targetname");
             trig waittill("trigger");
             level thread say_dialogue("armored_car");
             level thread say_dialogue("keep_moving");
@@ -2209,9 +2209,9 @@ sniper_on_u(trig, player) {
 
           player_tooeager_toface_sniper(ender, trigtargetname) {
             level endon(ender);
-            trig = getent(trigtargetname, "targetname");
+            trig = getEnt(trigtargetname, "targetname");
             trig waittill("trigger");
-            shotspot = getstruct("E2_sniper_nearmiss_shotspot", "targetname");
+            shotspot = getStruct("E2_sniper_nearmiss_shotspot", "targetname");
             flag_set("player_is_exposed");
             wait 3;
 
@@ -2247,9 +2247,9 @@ sniper_on_u(trig, player) {
 
           no_sniper_backtracking() {
             level endon("inside_sniper_building");
-            trig = getent("nobacktrack_fromsniper", "targetname");
+            trig = getEnt("nobacktrack_fromsniper", "targetname");
             trig waittill("trigger");
-            spot1 = getstruct("E2_sniper_nearmiss_shotspot", "targetname");
+            spot1 = getStruct("E2_sniper_nearmiss_shotspot", "targetname");
             magicbullet("mosin_rifle_scoped_noflash", spot1.origin, level.player getEye());
             level.player dodamage(level.player.health * 10, spot1.origin);
             level thread say_dialogue("sniper");

@@ -27,8 +27,8 @@ player_fudge_move_rotate_to(var_0, var_1, var_2, var_3) {
   var_5 = var_4 / var_2;
   var_6 = var_5 * 0.05;
   var_7 = var_5 * 0.05;
-  var_3 moveto(var_0, var_5, var_6, var_7);
-  var_3 rotateto(var_1, var_5, var_6, var_7);
+  var_3 moveTo(var_0, var_5, var_6, var_7);
+  var_3 rotateTo(var_1, var_5, var_6, var_7);
   wait(var_5);
   level.player unlink();
 }
@@ -44,7 +44,7 @@ player_link_update(var_0) {
     var_0 = level.playerlinkinfluence;
   }
 
-  level.player playerlinkto(level.playerlinkmodel, "polySurface1", var_0);
+  level.player playerlinkTo(level.playerlinkmodel, "polySurface1", var_0);
 }
 
 player_link_update_delta(var_0) {
@@ -107,7 +107,7 @@ fake_position(var_0, var_1) {
     }
     var_2 unlink();
     var_4 = "polySurface1";
-    var_2 linkto(var_0, var_4, (0, 0, 0), (0, 0, 0));
+    var_2 linkTo(var_0, var_4, (0, 0, 0), (0, 0, 0));
     wait 1;
 
     if(!isai(var_2)) {
@@ -136,7 +136,7 @@ put_stinger_guy_here(var_0) {
   }
   waittillframeend;
   var_1 unlink();
-  var_1 linkto(var_0, "polySurface1", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_0, "polySurface1", (0, 0, 0), (0, 0, 0));
 }
 
 in_getweaponslist(var_0) {
@@ -159,7 +159,7 @@ rpg_spot(var_0) {
   var_3 = spawn("weapon_" + var_2, self.origin, 1);
   var_3 hide();
   var_3.angles = self.angles;
-  var_3 linkto(self);
+  var_3 linkTo(self);
   var_0.jeepride_linked_weapon = var_3;
   wait 0.1;
   var_3 show();
@@ -225,7 +225,7 @@ local_drone_animontag(var_0, var_1, var_2, var_3, var_4) {
   var_5 = self gettagorigin(var_1);
   var_6 = self gettagangles(var_1);
   var_7 = "animontag";
-  var_0 animscripted(var_7, var_5, var_6, var_2);
+  var_0 animScripted(var_7, var_5, var_6, var_2);
 
   if(!var_3) {
     var_0 waittillmatch(var_7, "end");
@@ -238,7 +238,7 @@ local_drone_animontag(var_0, var_1, var_2, var_3, var_4) {
 
 rider_drone_toai(var_0, var_1, var_2, var_3) {
   var_4 = maps\_utility::swap_drone_to_ai(var_0);
-  var_4 linkto(var_1, var_2, (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_1, var_2, (0, 0, 0), (0, 0, 0));
   var_1 thread local_drone_animontag(var_4, var_2, var_3);
   var_4.desired_anim_pose = "crouch";
   var_4 allowedstances("crouch");
@@ -408,7 +408,7 @@ sethindtarget(var_0) {
 
   var_1 = spawn("script_origin", var_0 gettagorigin("tag_light_belly"));
   var_1.origin = var_0 gettagorigin("tag_light_belly") + (0, 0, -24);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 thread attractorent_delete_on_vehicle_death(var_0);
   self clearentitytarget();
   self setentitytarget(var_1);
@@ -698,17 +698,17 @@ magic_missileguy_spawner() {
   var_4 = getEntArray("assist_brush", "targetname")[0];
   var_4 notsolid();
   var_4 unlink();
-  var_4 linkto(var_3, "J_Head", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_3, "J_Head", (0, 0, 0), (0, 0, 0));
   var_4 enableaimassist();
   var_4 hide();
   var_5 = "polySurface1";
-  var_3 linkto(var_2, var_5, (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_2, var_5, (0, 0, 0), (0, 0, 0));
   var_1.magic_missile_guy = var_3;
   var_6 = spawn("script_model", level.player getEye());
   var_6.origin = level.player getEye() + maps\_utility::vector_multiply(anglesToForward(self.angles), 64);
   var_6 hide();
   var_6 setModel("fx");
-  var_6 linkto(level.playersride);
+  var_6 linkTo(level.playersride);
   player_link_update(0.1);
   var_3.delayeddeath = 0;
   var_3 thread maps\_spawner::ai_damage_think();
@@ -746,9 +746,9 @@ magic_missileguy_takehits(var_0, var_1) {
     self unlink();
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
   var_5 = % death_stand_dropinplace;
-  self animscripted("death_stand_dropinplac", self.origin, self.angles, var_5);
+  self animScripted("death_stand_dropinplac", self.origin, self.angles, var_5);
   thread ragdoll_or_death_duringanimation(var_5);
 }
 
@@ -855,7 +855,7 @@ fake_rpg_shot(var_0, var_1) {
   playFXOnTag(level._effect["rpg_flash"], var_4, "TAG_FX");
   var_4 thread maps\_utility::play_sound_on_tag_endon_death("magic_missile_guy_fire");
   var_5 = 2400;
-  var_6 = vectornormalize(var_0.origin - var_2);
+  var_6 = vectorNormalize(var_0.origin - var_2);
   var_7 = var_2 + maps\_utility::vector_multiply(var_6, 5000);
   playFXOnTag(level._effect["rpg_trail"], var_4, "TAG_FX");
   var_8 = var_2;
@@ -882,7 +882,7 @@ fake_rpg_shot(var_0, var_1) {
   var_4 thread common_scripts\utility::play_sound_in_space("magic_missile_guy_rocket_exp", var_4.origin);
   playFX(level._effect["rpg_explode"], var_4.origin);
   radiusdamage(var_4.origin, 400, 150, 26);
-  level.player playrumbleonentity("tank_rumble");
+  level.player playRumbleOnEntity("tank_rumble");
   earthquake(0.8, 0.8, level.player.origin, 2000);
   wait 0.01;
   var_4 delete();
@@ -911,7 +911,7 @@ physicslaunch_loc(var_0, var_1, var_2) {
 
   var_3 = self.origin;
   wait(var_2);
-  var_4 = vectornormalize(self.origin - var_3);
+  var_4 = vectorNormalize(self.origin - var_3);
   var_5 = anglestoup(self.angles);
   self unlink();
 
@@ -939,7 +939,7 @@ can_cannon() {
 fire_can() {
   var_0 = spawn("script_model", level.player getEye());
   var_0 setModel("com_trashcan_metal");
-  var_1 = maps\_utility::vector_multiply(vectornormalize(anglesToForward(level.player getplayerangles())), level.cannonpower);
+  var_1 = maps\_utility::vector_multiply(vectorNormalize(anglesToForward(level.player getplayerangles())), level.cannonpower);
   var_0 physicslaunchclient(var_0.origin + (0, 0, 17), var_1 + (0, 0, 17));
   wait 0.05;
 }
@@ -1106,7 +1106,7 @@ loosejunk(var_0) {
     }
     self unlink();
     var_5 = anglesToForward(var_0.angles);
-    var_6 = maps\_utility::vector_multiply(vectornormalize(var_4 - self.origin), randomfloat(2));
+    var_6 = maps\_utility::vector_multiply(vectorNormalize(var_4 - self.origin), randomfloat(2));
     self.origin = self.origin + maps\_utility::vector_multiply(var_5, 32);
     var_7 = maps\_utility::vector_multiply(var_5, 18000);
     self.physlaunched = 1;
@@ -1228,7 +1228,7 @@ killthrow() {
 heli_focusonplayer() {
   self waittill("trigger", var_0);
   var_0 setlookatent(level.playersride);
-  var_0 setturrettargetent(level.playersride);
+  var_0 setturrettargetEnt(level.playersride);
 }
 
 heli_mg_burst(var_0) {
@@ -1314,7 +1314,7 @@ shootenemytarget(var_0, var_1) {
   self endon("mg_off");
   var_0 endon("death");
   self endon("gunner_new_target");
-  self setturrettargetent(var_0);
+  self setturrettargetEnt(var_0);
   wait(var_1);
   var_2 = "mg";
   var_3 = var_0;
@@ -1322,7 +1322,7 @@ shootenemytarget(var_0, var_1) {
 
   while(self.health > 0) {
     if(level.lock_on_player) {
-      self setturrettargetent(var_0);
+      self setturrettargetEnt(var_0);
       var_0 = level.lock_on_player_ent;
     } else if(isDefined(var_0.offshoot_ent)) {
       var_0 = var_0.offshoot_ent;
@@ -1388,7 +1388,7 @@ shootenemytarget(var_0, var_1) {
 }
 
 missile_offshoot() {
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   self.script_attackmetype = "missile";
   var_0.offshoot_ent = self;
   self.oldmissiletype = 0;
@@ -1568,7 +1568,7 @@ ghetto_tag() {
     level.ghettotag = [];
   }
 
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
 
   if(!isDefined(level.ghettotag[var_0.model])) {
     level.ghettotag[var_0.model] = [];
@@ -1599,7 +1599,7 @@ attack_dummy_path() {
     var_1 = self.script_delay;
   }
 
-  var_2 = getent(self.script_linkto, "script_linkname");
+  var_2 = getEnt(self.script_linkto, "script_linkname");
   var_2 waittill("trigger", var_3);
   var_4 = spawn("script_model", var_0[0].origin);
   var_4 setModel("fx");
@@ -1632,7 +1632,7 @@ rpgers_to_dummy(var_0) {
   }
   for(var_1 = 0; var_1 < self.rocketmen.size; var_1++) {
     var_2 = maps\_vehicle_aianim::anim_pos(self, self.rocketmen[var_1].rocketattachpos);
-    self.rocketmen[var_1] linkto(self.truckjunk[0], "polySurface1", (0, 0, 0), (0, 0, 0));
+    self.rocketmen[var_1] linkTo(self.truckjunk[0], "polySurface1", (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -1780,7 +1780,7 @@ animated_crash(var_0, var_1, var_2) {
     var_3.origin = var_0 gettagorigin("body_animate_jnt");
     var_3 dontinterpolate();
     var_3 notsolid();
-    var_3 linkto(var_0, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
+    var_3 linkTo(var_0, "body_animate_jnt", (0, 0, 0), (0, 0, 0));
     var_0 useanimtree(level.jeepride_crash_animtree[self.script_parameters]);
     var_8 thread maps\jeepride_fx::transfer_ghettotag_to(var_3, var_7, "tag_origin");
   }
@@ -1791,7 +1791,7 @@ animated_crash(var_0, var_1, var_2) {
   var_0 movewithrate(self.origin, self.angles, var_1);
   var_9 = "crashanim";
   var_0 thread animated_crashtracks(var_9);
-  var_0 animscripted(var_9, self.origin, self.angles, level.jeepride_crash_anim[self.script_parameters]);
+  var_0 animScripted(var_9, self.origin, self.angles, level.jeepride_crash_anim[self.script_parameters]);
   var_0 waittillmatch(var_9, "end");
   var_2 delete();
   var_10 = common_scripts\utility::ter_op(isDefined(var_3), var_3, var_0);
@@ -1884,11 +1884,11 @@ fire_missile(var_0, var_1, var_2, var_3) {
     }
 
     if(isDefined(var_2.vehicletype) && var_2.vehicletype == "hind") {
-      var_9 missile_settargetent(var_2, (0, 0, -56));
+      var_9 missile_settargetEnt(var_2, (0, 0, -56));
     } else if(var_2.oldmissiletype) {
-      var_9 missile_settargetent(var_2, (80, 20, -200));
+      var_9 missile_settargetEnt(var_2, (80, 20, -200));
     } else {
-      var_9 missile_settargetent(var_2);
+      var_9 missile_settargetEnt(var_2);
     }
 
     if(var_8 < var_1 - 1) {
@@ -1919,9 +1919,9 @@ view_turn(var_0, var_1) {
   var_3.origin = level.player getEye();
   var_3.angles = level.player getplayerangles();
   level.player playerlinktoabsolute(var_2, "polySurface1");
-  var_4 = vectortoangles(vectornormalize(var_0 - var_3.origin));
+  var_4 = vectortoangles(vectorNormalize(var_0 - var_3.origin));
   var_5 = 0.5;
-  var_2 rotateto(var_4, var_5, 0.2, 0.2);
+  var_2 rotateTo(var_4, var_5, 0.2, 0.2);
 }
 
 delaythread_loc(var_0, var_1, var_2, var_3, var_4, var_5) {
@@ -2030,7 +2030,7 @@ hillbump() {
   var_0 endon("death");
 
   if(common_scripts\utility::flag("slam_zoom_done")) {
-    level.playersride playrumbleonentity("tank_rumble");
+    level.playersride playRumbleOnEntity("tank_rumble");
     thread common_scripts\utility::play_sound_in_space("jeepride_grassride_thud", level.player.origin, 1);
   }
 
@@ -2069,10 +2069,10 @@ sideswipe() {
   var_0 joltbody(level.playersride.origin + (0, 0, 64), 16);
   level.playersride joltbody(var_0.origin + (0, 0, 64), 16);
   var_1 = distance(var_0.origin, level.playersride.origin);
-  var_2 = maps\_utility::vector_multiply(vectornormalize(var_0.origin - level.playersride.origin), var_1 / 2) + level.playersride.origin + (0, 0, 48);
+  var_2 = maps\_utility::vector_multiply(vectorNormalize(var_0.origin - level.playersride.origin), var_1 / 2) + level.playersride.origin + (0, 0, 48);
   level.playersride maps\_utility::play_sound_on_entity("jeepride_sideswipe");
   earthquake(0.45, 1, level.player.origin, 1000);
-  level.player playrumbleonentity("tank_rumble");
+  level.player playRumbleOnEntity("tank_rumble");
 }
 
 jolter() {
@@ -2227,7 +2227,7 @@ exploder_animate() {
   }
 
   exploder_linktargets();
-  var_1 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(self.target, "targetname");
 
   if(!isDefined(var_1)) {
     return;
@@ -2237,7 +2237,7 @@ exploder_animate() {
   level waittill("exploded_" + var_0);
   var_3 = spawn("script_model", var_1.origin);
   var_3.angles = var_1.angles;
-  self linkto(var_3);
+  self linkTo(var_3);
   exploder_showlinks();
 
   if(isDefined(self.is_end_tanker)) {
@@ -2332,7 +2332,7 @@ exploder_linktargets() {
     if(var_0[var_1].classname != "script_model") {
       continue;
     }
-    var_0[var_1] linkto(self);
+    var_0[var_1] linkTo(self);
     var_0[var_1] hide();
   }
 
@@ -2591,7 +2591,7 @@ ghetto_animate_through_chain(var_0, var_1, var_2, var_3, var_4) {
       var_1 movewithrate(var_10.origin, var_13, var_2, var_12, var_5, var_7, var_8);
 
     if(isDefined(var_10.script_disconnectpaths)) {
-      script_disconnectpaths(var_10.script_disconnectpaths);
+      script_disconnectPaths(var_10.script_disconnectpaths);
     }
 
     if(isDefined(var_10.script_noteworthy)) {
@@ -2609,24 +2609,24 @@ ghetto_animate_through_chain(var_0, var_1, var_2, var_3, var_4) {
   }
 }
 
-script_disconnectpaths(var_0) {
+script_disconnectPaths(var_0) {
   if(self.classname == "script_model") {
     return;
   }
   if(var_0) {
     self connectpaths();
-    self disconnectpaths();
+    self disconnectPaths();
   } else
     self connectpaths();
 }
 
 bridge_bumper() {
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
 
   for(;;) {
     level waittill("bridge_bump");
-    var_0 playrumbleonentity("jeepride_bridgesink");
+    var_0 playRumbleOnEntity("jeepride_bridgesink");
     earthquake(0.25, 1, level.player.origin, 1000);
   }
 }
@@ -2665,7 +2665,7 @@ movewithrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   var_7 = distance(self.origin, var_0);
   var_8 = var_7 / var_2;
-  var_9 = vectornormalize(var_0 - self.origin);
+  var_9 = vectorNormalize(var_0 - self.origin);
   var_10 = 0;
   var_11 = 0;
 
@@ -2679,7 +2679,7 @@ movewithrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(var_4) {
     self movegravity(self.velocity, var_8);
-    self rotateto(var_1, var_8, var_10, var_11);
+    self rotateTo(var_1, var_8, var_10, var_11);
 
     if(isDefined(self.linkedobject.linkedtargets)) {
       common_scripts\utility::array_thread(self.linkedobject.linkedtargets, ::_notsolid);
@@ -2710,11 +2710,11 @@ movewithrate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       }
     }
 
-    self moveto(self.origin + (0, 0, 24), 0.5, 0, 0);
-    self rotateto(var_1, 0.5, 0, 0);
+    self moveTo(self.origin + (0, 0, 24), 0.5, 0, 0);
+    self rotateTo(var_1, 0.5, 0, 0);
   } else {
-    self moveto(var_0, var_8, var_10, var_11);
-    self rotateto(var_1, var_8, var_10, var_11);
+    self moveTo(var_0, var_8, var_10, var_11);
+    self rotateTo(var_1, var_8, var_10, var_11);
     wait(var_8);
   }
 
@@ -2837,7 +2837,7 @@ tire_deflater(var_0, var_1, var_2) {
   var_3 hide();
   var_3 playSound("mtl_steam_pipe_hit");
   thread tire_deflater_interuptable(var_3);
-  var_3 linkto(self, var_2, (32, 0, 0), (0, 0, 0));
+  var_3 linkTo(self, var_2, (32, 0, 0), (0, 0, 0));
   self joltbody(self.origin + (23, 33, 64), 1);
   playFXOnTag(level._effect["tire_deflate"], var_3, "polySurface1");
   wait 3;
@@ -2851,7 +2851,7 @@ tire_deflater_interuptable(var_0) {
   var_0 delete();
 }
 
-nodisconnectpaths() {
+nodisconnectPaths() {
   self waittill("trigger", var_0);
   var_0.dontdisconnectpaths = 1;
 }
@@ -2898,7 +2898,7 @@ vehicle_turret_think() {
   var_1[1] = level.griggs;
   var_1[2] = level.gaz;
   var_2 = undefined;
-  self setturrettargetent(level.player);
+  self setturrettargetEnt(level.player);
   thread vehicle_mgmanage();
 
   for(;;) {
@@ -3299,7 +3299,7 @@ blead(var_0) {
   }
 
   var_1 = maps\_utility::groundpos(self gettagorigin("J_Head"));
-  var_1 = var_1 + maps\_utility::vector_multiply(vectornormalize(common_scripts\utility::flat_origin(level.player.origin) - common_scripts\utility::flat_origin(var_1)), var_0);
+  var_1 = var_1 + maps\_utility::vector_multiply(vectorNormalize(common_scripts\utility::flat_origin(level.player.origin) - common_scripts\utility::flat_origin(var_1)), var_0);
   wait 0.5;
   playFX(level._effect["bloodpool"], var_1 + (15, 35, 0), (0, 0, 1));
 }
@@ -3309,7 +3309,7 @@ shot_in_the_head(var_0) {
     return;
   }
   var_1 = common_scripts\utility::spawn_tag_origin();
-  var_1 linkto(var_0, "tag_eye", (0, 0, 0), (15, 180, 0));
+  var_1 linkTo(var_0, "tag_eye", (0, 0, 0), (15, 180, 0));
   playFXOnTag(level._effect["griggs_brains"], var_1, "tag_origin");
 }
 
@@ -3634,7 +3634,7 @@ kill_unload_que_single_vehicle() {
 
 bridge_defence_bounds() {
   level endon("bridge_zakhaev_setup");
-  var_0 = getent("defence_bounds", "targetname");
+  var_0 = getEnt("defence_bounds", "targetname");
   var_1 = 0;
 
   switch (level.gameskill) {
@@ -3798,7 +3798,7 @@ drag_shots() {
   level endon("stop_drag_shots");
   var_0 = 4;
   var_1 = 0.4;
-  var_2 = getent(self.target, "targetname");
+  var_2 = getEnt(self.target, "targetname");
   var_3 = self.origin;
   var_4 = var_2.origin;
 
@@ -3817,7 +3817,7 @@ drag_shots() {
 
       var_6 = var_7["position"];
       bullettracer(var_3, var_6, 0);
-      var_8 = var_6 - maps\_utility::vector_multiply(vectornormalize(var_6 - var_3), 5);
+      var_8 = var_6 - maps\_utility::vector_multiply(vectorNormalize(var_6 - var_3), 5);
       magicbullet("ak47", var_3, var_3 + (0, 0, 66));
       var_9 = ak_fx_lookup(var_7["surfacetype"]);
       playFX(var_9, var_6, var_7["normal"]);
@@ -3865,7 +3865,7 @@ honker_think() {
 
 playervehicle_infront_of_honkingvehicle_vehicle(var_0, var_1) {
   var_2 = anglesToForward(common_scripts\utility::flat_angle(var_1.angles));
-  var_3 = vectornormalize(common_scripts\utility::flat_origin(var_0.origin) - common_scripts\utility::flat_origin(var_1.origin));
+  var_3 = vectorNormalize(common_scripts\utility::flat_origin(var_0.origin) - common_scripts\utility::flat_origin(var_1.origin));
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0) {
@@ -3892,7 +3892,7 @@ bridge_fall() {
   player_kill();
 }
 
-player_fudge_rotateto(var_0, var_1) {
+player_fudge_rotateTo(var_0, var_1) {
   var_2 = spawn("script_origin", level.player.origin);
   var_2.origin = level.player getEye();
   var_2.angles = level.player getplayerangles();
@@ -3901,7 +3901,7 @@ player_fudge_rotateto(var_0, var_1) {
     var_1 = 0.5;
   }
 
-  var_2 rotateto(var_0, var_1, 0.2, 0.2);
+  var_2 rotateTo(var_0, var_1, 0.2, 0.2);
   var_3 = int(var_1 / 0.05);
 
   for(var_4 = 0; var_4 < var_3; var_4++) {
@@ -4056,22 +4056,22 @@ mountain_bridge() {
   self show();
 }
 
-bridge_linkto(var_0, var_1) {
+bridge_linkTo(var_0, var_1) {
   var_2 = getEntArray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
-    var_4 linkto(self, var_1);
+    var_4 linkTo(self, var_1);
   }
 }
 
 stumble(var_0, var_1, var_2, var_3) {
   level endon("stop_stumble");
   var_0 = adjust_angles_to_player(var_0);
-  level.ground_ref_ent rotateto(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
+  level.ground_ref_ent rotateTo(var_0, var_1, var_1 / 4 * 3, var_1 / 4);
   level.ground_ref_ent waittill("rotatedone");
   var_4 = (randomfloat(4) - 4, randomfloat(5), 0);
   var_4 = adjust_angles_to_player(var_4);
-  level.ground_ref_ent rotateto(var_4, var_2, 0, var_2 / 2);
+  level.ground_ref_ent rotateTo(var_4, var_2, 0, var_2 / 2);
   level.ground_ref_ent waittill("rotatedone");
 
   if(!isDefined(var_3)) {
@@ -4132,12 +4132,12 @@ adjust_angles_to_player(var_0) {
 }
 
 helicopter_hide_crash_seq() {
-  var_0 = getent("heli_destroy", "targetname");
+  var_0 = getEnt("heli_destroy", "targetname");
   var_0 hide();
 }
 
 helicopter_show_crash_seq() {
-  var_0 = getent("heli_destroy", "targetname");
+  var_0 = getEnt("heli_destroy", "targetname");
   var_0.animname = "vehicles";
   var_0 maps\_anim::setanimtree();
   wait 0.35;
@@ -4172,12 +4172,12 @@ set_final_visionset_rescue() {
 
 bloodtrail_spawn() {
   wait 7;
-  var_0 = getent("bloodspawn", "targetname");
+  var_0 = getEnt("bloodspawn", "targetname");
   var_0 show();
 }
 
 bloodtrail_hide() {
-  var_0 = getent("bloodspawn", "targetname");
+  var_0 = getEnt("bloodspawn", "targetname");
   var_0 hide();
 }
 
@@ -4187,14 +4187,14 @@ spawn_griggs_pistol() {
   self.scriptedweaponmodel setModel("wpn_h1_pst_m1911_vm");
   self.scriptedweaponmodel.animname = "pistol_griggs";
   self.scriptedweaponmodel maps\_utility::assign_animtree();
-  var_0 = getent("player_drag_node", "targetname");
+  var_0 = getEnt("player_drag_node", "targetname");
   var_0 thread maps\_anim::anim_single_solo(self.scriptedweaponmodel, "drag_pistol");
 }
 
 light_sequence_00() {
-  var_0 = getent("light_2_sequence_00", "targetname");
-  var_1 = getent("light_3_sequence_00", "targetname");
-  var_2 = getent("light_4_sequence_00", "targetname");
+  var_0 = getEnt("light_2_sequence_00", "targetname");
+  var_1 = getEnt("light_3_sequence_00", "targetname");
+  var_2 = getEnt("light_4_sequence_00", "targetname");
   var_0 setlightintensity(1);
   var_2 setlightintensity(200000);
   wait 1;
@@ -4202,11 +4202,11 @@ light_sequence_00() {
 }
 
 disable_light_finalseq() {
-  var_0 = getent("light_2_sequence_00", "targetname");
-  var_1 = getent("light_3_sequence_00", "targetname");
-  var_2 = getent("light_4_sequence_00", "targetname");
-  var_3 = getent("light_1_sequence_01", "targetname");
-  var_4 = getent("light_1_sequence_02", "targetname");
+  var_0 = getEnt("light_2_sequence_00", "targetname");
+  var_1 = getEnt("light_3_sequence_00", "targetname");
+  var_2 = getEnt("light_4_sequence_00", "targetname");
+  var_3 = getEnt("light_1_sequence_01", "targetname");
+  var_4 = getEnt("light_1_sequence_02", "targetname");
   var_0 setlightintensity(1);
   var_1 setlightintensity(1);
   var_2 setlightintensity(1);
@@ -4215,14 +4215,14 @@ disable_light_finalseq() {
 }
 
 light_sequence_01() {
-  var_0 = getent("light_1_sequence_01", "targetname");
+  var_0 = getEnt("light_1_sequence_01", "targetname");
   var_0 setlightintensity(100000);
 }
 
 light_sequence_02() {
-  var_0 = getent("light_1_sequence_01", "targetname");
+  var_0 = getEnt("light_1_sequence_01", "targetname");
   var_0 setlightintensity(1);
-  var_1 = getent("light_1_sequence_02", "targetname");
+  var_1 = getEnt("light_1_sequence_02", "targetname");
   var_1 setlightintensity(4000);
 }
 

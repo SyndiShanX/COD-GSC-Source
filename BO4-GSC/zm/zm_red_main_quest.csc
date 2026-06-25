@@ -404,7 +404,7 @@ function_d02ccc7c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 spear_fire_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, #"hash_230077451d7197c1");
+  self playRumbleOnEntity(localclientnum, #"hash_230077451d7197c1");
 }
 
 greek_fire_annihilate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -458,7 +458,7 @@ function_613a43b6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_b1017eda(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self playrumbleonentity(localclientnum, #"hash_112f9d14b803778e");
+  self playRumbleOnEntity(localclientnum, #"hash_112f9d14b803778e");
 }
 
 oil_trail_decal(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -472,7 +472,7 @@ oil_trail_decal(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 }
 
 function_405ead09(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self playrumbleonentity(localclientnum, #"zm_red_skylight_rumble");
+  self playRumbleOnEntity(localclientnum, #"zm_red_skylight_rumble");
 }
 
 monument_eyes(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -1095,7 +1095,7 @@ function_67b43987(localclientnum, newval, str_ww) {
     if(!isDefined(self.var_2ebd37a3)) {
       var_2ebd37a3 = util::spawn_model(localclientnum, var_cfc545ad, self.origin);
       var_2ebd37a3 setscale(0.75);
-      var_2ebd37a3 linkto(self);
+      var_2ebd37a3 linkTo(self);
       var_2ebd37a3 playSound(localclientnum, #"hash_a4627a5894c615a");
       var_2ebd37a3.var_b3673abf = var_2ebd37a3 playLoopSound(#"hash_bd407bab72c8280");
       var_2ebd37a3 thread zm_red_ww_quests::function_58806d4f(localclientnum, undefined, 1);
@@ -1303,7 +1303,7 @@ blood_disable_keyline(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
   for(localclientnum = 0; localclientnum < maxclients; localclientnum++) {
     if(isDefined(function_5c10bd79(localclientnum))) {
-      foreach(e_player in getplayers(localclientnum)) {
+      foreach(e_player in getPlayers(localclientnum)) {
         e_player zm::function_92f0c63(localclientnum);
       }
     }
@@ -1316,7 +1316,7 @@ blood_graphic_content(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     return;
   }
 
-  foreach(e_player in getplayers(localclientnum)) {
+  foreach(e_player in getPlayers(localclientnum)) {
     if(e_player postfx::function_556665f2(#"pstfx_fsblur")) {
       e_player postfx::exitpostfxbundle(#"pstfx_fsblur");
       e_player notify(#"stop_blur_postfx");

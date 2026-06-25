@@ -11,8 +11,8 @@ main() {
     /
     homepad_loop() {
       level waittill("pap1");
-      homepad = getstruct("homepad_power_looper", "targetname");
-      home_breaker = getstruct("homepad_breaker", "targetname");
+      homepad = getStruct("homepad_power_looper", "targetname");
+      home_breaker = getStruct("homepad_breaker", "targetname");
 
       if(isDefined(homepad)) {
         clientscripts\_audio::playloopat(0, "homepad_power_loop", homepad.origin, 1);

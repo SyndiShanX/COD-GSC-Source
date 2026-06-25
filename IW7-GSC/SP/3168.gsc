@@ -208,7 +208,7 @@ func_34F8(var_0, var_1) {
   var_3 = getsubstr(var_2, 3);
   if(!isDefined(var_0.var_4E67)) {
     var_0.var_4E67 = spawn("script_origin", var_0.origin);
-    var_0.var_4E67 linkto(var_0, "");
+    var_0.var_4E67 linkTo(var_0, "");
   }
 
   var_4 = var_0.var_4E67;
@@ -691,7 +691,7 @@ func_58CB() {
   }
 
   if(isDefined(self.var_57E1) && self.var_57E1 == 1) {
-    var_5 = vectornormalize((self.var_DC[0], self.var_DC[1], self.var_DC[2]));
+    var_5 = vectorNormalize((self.var_DC[0], self.var_DC[1], self.var_DC[2]));
     var_5 = var_5 * 1500;
   }
 
@@ -906,8 +906,8 @@ func_C703() {
 
     var_2 = self.origin - self.var_4F.origin;
     var_3 = anglesToForward(self.angles);
-    var_4 = vectornormalize((var_2[0], var_2[1], 0));
-    var_5 = vectornormalize((var_3[0], var_3[1], 0));
+    var_4 = vectorNormalize((var_2[0], var_2[1], 0));
+    var_5 = vectorNormalize((var_3[0], var_3[1], 0));
     var_6 = func_B60C(var_5, var_4);
     var_7 = var_6 * 90;
     var_8 = (-1 * var_4[0], -1 * var_4[1], 0);
@@ -1051,9 +1051,9 @@ func_10051(var_0, var_1, var_2, var_3) {
 func_5AA8(var_0, var_1, var_2, var_3) {
   func_11043();
   scripts\anim\shared::func_5D1A();
-  var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30));
+  var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30));
   if(self.var_E2 == "iw7_c6hack_melee" || self.var_E2 == "iw7_c6worker_fists") {
-    var_4 = vectornormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
+    var_4 = vectorNormalize(self.origin - level.player.origin + (0, 0, 30) + anglestoright(level.player.angles) * 50);
   }
 
   self func_82B1(lib_0A1E::func_2342(), 0);

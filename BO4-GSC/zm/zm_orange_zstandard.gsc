@@ -225,11 +225,11 @@ function_c87db3f7(str_next_defend) {
 }
 
 function_c7e2bbe2(n_max) {
-  return getplayers().size;
+  return getPlayers().size;
 }
 
 function_ae7c2601(n_max) {
-  return getplayers().size;
+  return getPlayers().size;
 }
 
 on_round_begin() {

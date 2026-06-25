@@ -475,7 +475,7 @@ function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     if(weapon_utils::isbulletdamage(smeansofdeath)) {
       angles = self getplayerangles();
       forward = anglesToForward((0, angles[1], 0));
-      dirtoattacker = vectornormalize(eattacker.origin - self.origin);
+      dirtoattacker = vectorNormalize(eattacker.origin - self.origin);
 
       if(vectordot(forward, dirtoattacker) < 0.7) {
         if(!isDefined(self.var_ea1458aa.var_64ffda50)) {
@@ -685,7 +685,7 @@ does_player_completely_avoid_damage(idflags, shitloc, weapon, friendlyfire, atta
     }
 
     dirtoplayer = self.origin - vpoint;
-    dir = vectornormalize((dirtoplayer[0], dirtoplayer[1], 0));
+    dir = vectorNormalize((dirtoplayer[0], dirtoplayer[1], 0));
     dot = vectordot(forward, dir);
     dot_threshold = -0.7;
 
@@ -1005,7 +1005,7 @@ modify_player_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     angles = self getplayerangles();
     forward = anglesToForward((0, angles[1], 0));
     dirtoplayer = self.origin - vpoint;
-    dir = vectornormalize((dirtoplayer[0], dirtoplayer[1], 0));
+    dir = vectorNormalize((dirtoplayer[0], dirtoplayer[1], 0));
     dot = vectordot(forward, dir);
 
     if(dot < -0.7) {
@@ -1317,7 +1317,7 @@ function_a774b4ed(eattacker, einflictor, weapon, smeansofdeath, idamage) {
   if(!self util::isusingremote()) {
     if(sessionmodeiswarzonegame() && smeansofdeath == "MOD_DEATH_CIRCLE") {
       if(!isDefined(self.var_2f5355a6) || gettime() > self.var_2f5355a6) {
-        self playrumbleonentity("damage_death_circle");
+        self playRumbleOnEntity("damage_death_circle");
         self.var_2f5355a6 = gettime();
       }
 
@@ -1326,7 +1326,7 @@ function_a774b4ed(eattacker, einflictor, weapon, smeansofdeath, idamage) {
 
     if(sessionmodeiswarzonegame() && smeansofdeath == "MOD_BLED_OUT") {
       if(!isDefined(self.var_2c725854) || gettime() > self.var_2c725854) {
-        self playrumbleonentity("damage_bleed");
+        self playRumbleOnEntity("damage_bleed");
         self.var_2c725854 = gettime();
       }
 
@@ -1335,7 +1335,7 @@ function_a774b4ed(eattacker, einflictor, weapon, smeansofdeath, idamage) {
 
     if(smeansofdeath != "MOD_DOT" && smeansofdeath != "MOD_DOT_SELF") {
       if(!isDefined(self.var_6d9f302e) || gettime() > self.var_6d9f302e) {
-        self playrumbleonentity("damage_heavy");
+        self playRumbleOnEntity("damage_heavy");
         self.var_6d9f302e = gettime();
       }
 
@@ -1343,7 +1343,7 @@ function_a774b4ed(eattacker, einflictor, weapon, smeansofdeath, idamage) {
     }
 
     if(!isDefined(self.var_b82529f5) || gettime() > self.var_b82529f5) {
-      self playrumbleonentity("damage_light");
+      self playRumbleOnEntity("damage_light");
       self.var_b82529f5 = gettime();
     }
   }
@@ -1377,7 +1377,7 @@ function_201c298c() {
   }
 
   if(isDefined(var_28214e57)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.clientid === var_28214e57) {
         return player;
       }

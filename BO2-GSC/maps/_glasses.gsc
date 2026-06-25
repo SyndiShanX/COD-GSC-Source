@@ -133,7 +133,7 @@ perform_visor_wipe(duration) {
   }
 
   luinotifyevent(&"hud_perform_wipe", 1, int(duration * 1000));
-  playsoundatposition("evt_hud_sweep", (0, 0, 0));
+  playSoundAtPosition("evt_hud_sweep", (0, 0, 0));
 }
 
 add_visor_text(string_to_display, duration, color, alpha, flicker, flicker_time_low, flicker_time_high) {

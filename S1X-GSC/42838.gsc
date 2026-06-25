@@ -363,7 +363,7 @@ visitorrelink(var_0, var_1, var_2) {
   var_0 unlink();
   var_0.origin = self gettagorigin(var_2);
   var_0.angles = self gettagangles(var_2);
-  var_0 linkto(self, var_2);
+  var_0 linkTo(self, var_2);
   wait 0.05;
   playFXOnTag(var_0.fx, var_0, "tag_origin");
 }
@@ -522,7 +522,7 @@ accessallmarkers(var_0) {
 }
 
 getnormaldirectionvec(var_0) {
-  return vectornormalize(common_scripts\utility::flat_origin(var_0));
+  return vectorNormalize(common_scripts\utility::flat_origin(var_0));
 }
 
 monitorthreathighlight() {
@@ -687,7 +687,7 @@ threat_init(var_0) {
       var_8 show();
       var_8.origin = self gettagorigin(var_3[0]);
       var_8.angles = self gettagangles(var_3[0]);
-      var_8 linkto(self, var_3[0]);
+      var_8 linkTo(self, var_3[0]);
       var_8.fx = var_3[1];
       var_1.fx_ent[var_5] = var_8;
     }

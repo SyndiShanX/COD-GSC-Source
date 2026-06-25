@@ -101,7 +101,7 @@ within_fov_set_dot(var_0, var_1, var_2, var_3, var_4) {
     return 0;
   }
 
-  var_6 = vectornormalize(var_5 - var_0);
+  var_6 = vectorNormalize(var_5 - var_0);
 
   if(!isDefined(var_4) || var_4 == "forward") {
     var_7 = anglesToForward(var_1);
@@ -130,7 +130,7 @@ missile_bullet_trace(var_0, var_1, var_2, var_3) {
 
 get_forward_point(var_0, var_1) {
   var_2 = anglesToForward(var_1);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_2 = (var_2[0] * 2, var_2[1] * 2, var_2[2] * 2);
   var_2 = var_2 + var_0;
   return var_2;
@@ -245,7 +245,7 @@ fire_missile_at_angles(var_0, var_1, var_2, var_3, var_4) {
         var_9 = (0, 0, 110);
       }
 
-      var_6 missile_settargetent(var_8, var_9);
+      var_6 missile_settargetEnt(var_8, var_9);
     } else {
       wait 0.1;
       thread scan_for_targets(var_6, var_4);
@@ -286,7 +286,7 @@ scan_for_targets(var_0, var_1) {
         var_3 = (0, 0, 110);
       }
 
-      var_0 missile_settargetent(var_2, var_3);
+      var_0 missile_settargetEnt(var_2, var_3);
       break;
     }
 

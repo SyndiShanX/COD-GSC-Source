@@ -463,9 +463,9 @@ function _trigger_wait_think(s_tracker, e_entity) {
   });
 }
 
-function use(str_name, str_key = "targetname", ent = getplayers()[0], b_assert = 1) {
+function use(str_name, str_key = "targetname", ent = getPlayers()[0], b_assert = 1) {
   if(isDefined(str_name)) {
-    e_trig = getent(str_name, str_key);
+    e_trig = getEnt(str_name, str_key);
 
     if(!isDefined(e_trig)) {
       if(b_assert) {
@@ -623,7 +623,7 @@ function trigger_on_timeout(n_time, b_cancel_on_triggered = 1, str_name, str_key
   trig = self;
 
   if(isDefined(str_name)) {
-    trig = getent(str_name, str_key);
+    trig = getEnt(str_name, str_key);
   }
 
   if(b_cancel_on_triggered) {
@@ -770,7 +770,7 @@ function trigger_wait() {
   self endon(#"trigger");
 
   if(isDefined(self.targetname)) {
-    trig = getent(self.targetname, "target");
+    trig = getEnt(self.targetname, "target");
 
     if(isDefined(trig)) {
       trig wait_till();

@@ -197,9 +197,9 @@ spotlight_damage_think() {
 
   ASSERTEX(isDefined(trig) && isDefined(model_undamaged), "spotlight_damage_think(): couldn't find either the damage trigger or the undamaged model for fxspot at origin " + self.origin);
 
-  model_damaged = GetEnt(model_undamaged.target, "targetname");
-  middleman = GetStruct(trig.target, "targetname");
-  light = GetEnt(middleman.target, "targetname");
+  model_damaged = getEnt(model_undamaged.target, "targetname");
+  middleman = getStruct(trig.target, "targetname");
+  light = getEnt(middleman.target, "targetname");
 
   ASSERTEX(isDefined(trig.classname) && trig.classname == "trigger_damage", "Trigger fx spot at origin " + self.origin + " does not target a damage trigger.");
 
@@ -474,9 +474,9 @@ ambient_aaa_fx_rotate(endonString) {
   }
 
   while(1) {
-    self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
+    self rotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
-    self RotateTo((307.4, 1.7, 90), RandomFloatRange(3.5, 6));
+    self rotateTo((307.4, 1.7, 90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
   }
 }

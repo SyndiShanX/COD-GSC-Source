@@ -211,7 +211,7 @@ function_4662df7a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   v_trace = bulletTrace(self.origin, self.origin + (0, 0, 4000), 0, self)[#"position"];
   self.var_76385ab5 = util::spawn_model(localclientnum, "tag_origin", self.origin + (0, 0, 4000));
-  self.var_76385ab5 linkto(self);
+  self.var_76385ab5 linkTo(self);
   self.var_f53452ad = level beam::function_cfb2f62a(localclientnum, self.var_76385ab5, "tag_origin", self, "tag_origin", "beam8_zm_ww_hemera_ray");
 }
 

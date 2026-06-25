@@ -21,8 +21,8 @@ marktarget_execute(var_0) {
   var_1 = var_0 scripts\engine\utility::spawn_tag_origin();
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("tag_origin");
-  var_2 linkto(var_1, "tag_origin", (0, 0, 45), (0, 0, 0));
-  var_1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_origin", (0, 0, 45), (0, 0, 0));
+  var_1 linkTo(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.ismarkedtarget = 1;
   var_0.healthregendisabled = 1;
   wait 0.1;

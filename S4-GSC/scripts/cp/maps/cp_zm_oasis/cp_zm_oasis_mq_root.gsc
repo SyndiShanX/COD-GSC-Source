@@ -75,7 +75,7 @@ setup_mq_trial_block() {
 }
 
 init_charge_mirror() {
-  var_0 = scripts\engine\utility::getstruct("mq_altar_start_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_altar_start_loc", "script_noteworthy");
   level.mdl_altar = scripts\cp\utility::_id_E190("s4_zm_blood_altar_sand", var_0.origin, var_0.angles);
   level.n_mirror_charge_kills = 0;
   level.n_mirror_charge_requirement = 0;
@@ -105,12 +105,12 @@ altar_rise() {
   level endon("mq_step_one_done");
   level endon("debug_force_quit");
   wait 5;
-  var_0 = scripts\engine\utility::getstruct("mq_altar_end_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_altar_end_loc", "script_noteworthy");
   thread altar_rise_vfx();
   thread altar_rise_sfx();
   thread altar_rise_cam_shake_and_rumble();
   set_altar_clip(1);
-  self moveto(var_0.origin, 6, 0, 0);
+  self moveTo(var_0.origin, 6, 0, 0);
   self waittill("movedone");
   level play_vo_altar_revealed();
 }
@@ -183,7 +183,7 @@ set_up_mirror_model() {
   level.mdl_mirror = scripts\cp\utility::_id_E190("s4_zm_bronze_mirror_full_break", level.mdl_altar.origin + (0, 0, 65), level.mdl_altar.angles + (0, 0, 90));
   level.mdl_mirror _meth_82CB("s4_zm_bronze_mirror_combine_idle_01");
   level.mdl_mirror.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", level.mdl_mirror.origin, level.mdl_mirror.angles + (0, 0, 90));
-  level.mdl_mirror.mdl_fx linkto(level.mdl_mirror);
+  level.mdl_mirror.mdl_fx linkTo(level.mdl_mirror);
   waitframe();
   playFX(level._effect["mq_mirror_despawn_fx"], level.mdl_mirror.origin);
   waitframe();
@@ -329,7 +329,7 @@ send_fx_trail(var_0, var_1, var_2, var_3) {
   if(isDefined(var_5)) {
     playFXOnTag(level._effect[var_2], var_5, "tag_origin");
     wait 0.2;
-    var_5 moveto(var_1, var_4);
+    var_5 moveTo(var_1, var_4);
     var_5 waittill("movedone");
     wait 2;
   }
@@ -345,7 +345,7 @@ send_fx_trail(var_0, var_1, var_2, var_3) {
 }
 
 set_altar_clip(var_0) {
-  var_1 = getent("mq_altar_clip", "script_noteworthy");
+  var_1 = getEnt("mq_altar_clip", "script_noteworthy");
 
   if(istrue(var_0)) {
     var_1 solid();
@@ -357,7 +357,7 @@ set_altar_clip(var_0) {
 }
 
 set_portal_clip(var_0) {
-  var_1 = getent("mq_1st_portal_col", "script_noteworthy");
+  var_1 = getEnt("mq_1st_portal_col", "script_noteworthy");
 
   if(istrue(var_0)) {
     var_1 solid();
@@ -417,7 +417,7 @@ debug_free_ktfx() {
   waitframe();
   level notify("mq_step_two_done");
   waitframe();
-  var_0 = scripts\engine\utility::getstruct("mq_1st_portal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_1st_portal_loc", "script_noteworthy");
   level thread do_interact_1st_portal(var_0);
 }
 
@@ -445,7 +445,7 @@ ktfx_show_up() {
     level.mdl_mirror delete();
   }
 
-  var_0 = scripts\engine\utility::getstruct("mq_ktfx_spawn_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_ktfx_spawn_loc", "script_noteworthy");
   playFX(level._effect["mq_scepter_despawn_fx"], var_0.origin);
   level.mdl_scepter = scripts\cp\utility::_id_E190("s4_zm_scepter_rig", var_0.origin, var_0.angles);
   level.mdl_scepter _meth_82CB("s4_zm_scepter_01", "scepter_showup");
@@ -463,7 +463,7 @@ ktfx_show_up() {
   level.mdl_ktfx = scripts\cp\utility::_id_E190("c_s4_zmb_kortifex", var_0.origin + (0, 0, -50), var_0.angles + (0, -90, 0));
   level.mdl_ktfx _meth_82CB("ai_s4_zm_zombie_Kortifex_Vignette_01", "ktfx_free");
   level.mdl_ktfx playLoopSound("zmb_amb_kortifex_lp");
-  level.t_dmg_ktfx_s2 = getent("t_dmg_ktfx_step_two", "script_noteworthy");
+  level.t_dmg_ktfx_s2 = getEnt("t_dmg_ktfx_step_two", "script_noteworthy");
   level.t_dmg_ktfx_s2 thread ktfx_dmg_watcher("mq_step_two_done");
   level thread play_vo_ktfx_liberation_dialogue();
   level.mdl_ktfx waittillmatch("ktfx_free", "free");
@@ -492,16 +492,16 @@ do_bob(var_0, var_1, var_2) {
   var_4 = self.origin - (0, 0, var_2);
 
   for(;;) {
-    self moveto(var_3, var_1, 0, 0);
+    self moveTo(var_3, var_1, 0, 0);
     self waittill("movedone");
-    self moveto(var_4, var_1, 0, 0);
+    self moveTo(var_4, var_1, 0, 0);
     self waittill("movedone");
   }
 }
 
 force_check_health_bar(var_0) {
   if(isDefined(var_0)) {
-    var_1 = vectornormalize(var_0.origin - self.origin);
+    var_1 = vectorNormalize(var_0.origin - self.origin);
     var_2 = self getplayerangles();
     var_3 = anglesToForward(var_2);
     var_4 = vectordot(var_1, var_3);
@@ -570,7 +570,7 @@ play_sequence_3d_vos(var_0) {
 
 init_first_visit_ktfx() {
   set_portal_clip(1);
-  var_0 = scripts\engine\utility::getstruct("mq_ktfx_loc_da", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_ktfx_loc_da", "script_noteworthy");
   level.mdl_ktfx_da = scripts\cp\utility::_id_E190("c_s4_zmb_kortifex", var_0.origin, var_0.angles);
   level.mdl_ktfx_da _meth_82CB("ai_s4_zm_kortifex_absorb_energy_01");
   level.mdl_ktfx_da.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", level.mdl_ktfx_da.origin + (0, 0, 50), level.mdl_ktfx_da.angles);
@@ -599,7 +599,7 @@ init_first_visit_ktfx() {
     var_2 thread handle_player_outofmap();
   }
 
-  level.t_dmg_ktfx = getent("t_dmg_ktfx_sml", "script_noteworthy");
+  level.t_dmg_ktfx = getEnt("t_dmg_ktfx_sml", "script_noteworthy");
   level.t_dmg_ktfx thread ktfx_dmg_watcher("mq_step_three_done");
 }
 
@@ -623,9 +623,9 @@ cleanup_first_visit_ktfx() {
     var_1 delete();
   }
 
-  var_3 = getent("mq_ktfx_fight_fall_check", "script_noteworthy");
+  var_3 = getEnt("mq_ktfx_fight_fall_check", "script_noteworthy");
   var_3 delete();
-  var_4 = getent("mq_ktfx_path_blocker", "script_noteworthy");
+  var_4 = getEnt("mq_ktfx_path_blocker", "script_noteworthy");
   var_4 delete();
   level.set_min_last_stand_wait_override_func = undefined;
   level.self_revive_override_func = undefined;
@@ -644,7 +644,7 @@ cleanup_first_visit_ktfx() {
   level.mdl_ktfx_da.mdl_fx delete();
   level.mdl_ktfx_da delete();
   level.t_dmg_ktfx delete();
-  var_8 = scripts\engine\utility::getstruct("mq_1st_portal_loc", "script_noteworthy");
+  var_8 = scripts\engine\utility::getStruct("mq_1st_portal_loc", "script_noteworthy");
   var_8.mdl_chain_a_fx = scripts\cp\utility::_id_E190("tag_origin", var_8.origin + (15, 0, 0), var_8.angles + (45, 90, 45));
   var_8.mdl_chain_b_fx = scripts\cp\utility::_id_E190("tag_origin", var_8.origin + (15, 0, 0), var_8.angles + (140, 90, 60));
   var_8.mdl_chain_c_fx = scripts\cp\utility::_id_E190("tag_origin", var_8.origin + (15, 0, 0), var_8.angles + (90, 90, 120));
@@ -679,7 +679,7 @@ on_interact_1st_portal(var_0, var_1) {
 
 init_interact_1st_portal(var_0) {
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstruct(var_2._id_CD99, "script_noteworthy");
+    var_3 = scripts\engine\utility::getStruct(var_2._id_CD99, "script_noteworthy");
     var_2.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", var_3.origin, var_3.angles);
     var_2.mdl_portal_img = scripts\cp\utility::_id_E190("vfx_zm_hub_portal_center_dest_oasis_dark_aether", var_3.origin, var_3.angles);
     var_2.mdl_fx thread play_portal_effect();
@@ -874,7 +874,7 @@ handle_player_outofmap() {
   level endon("game_ended");
   self endon("disconnect");
   level endon("mq_step_three_done");
-  var_0 = getent("mq_ktfx_fight_fall_check", "script_noteworthy");
+  var_0 = getEnt("mq_ktfx_fight_fall_check", "script_noteworthy");
   var_1 = scripts\engine\utility::getStructArray("mq_1sr_portal_dest", "targetname");
 
   for(;;) {
@@ -1038,7 +1038,7 @@ init_trails() {
   level thread portal_unlock_watcher_trail_a();
   level thread portal_unlock_watcher_trail_b();
   level thread portal_unlock_watcher_trail_c();
-  var_0 = scripts\engine\utility::getstruct("mq_1st_portal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_1st_portal_loc", "script_noteworthy");
   level.mdl_portal_sfx = scripts\cp\utility::_id_E190("tag_origin", var_0.origin);
   level.mdl_portal_sfx playLoopSound("zmb_portal_blocker_beams_lp");
   _func_01E3("none");
@@ -1071,7 +1071,7 @@ trial_progress_watcher() {
 portal_unlock_watcher_trail_a() {
   level endon("game_ended");
   level endon("mq_step_four_done");
-  var_0 = scripts\engine\utility::getstruct("mq_1st_portal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_1st_portal_loc", "script_noteworthy");
   level waittill("mq_trial_a_done");
   stopFXOnTag(level._effect["mq_portal_lock_a"], var_0.mdl_chain_a_fx, "tag_origin");
   var_0.mdl_chain_a_fx delete();
@@ -1080,7 +1080,7 @@ portal_unlock_watcher_trail_a() {
 portal_unlock_watcher_trail_b() {
   level endon("game_ended");
   level endon("mq_step_four_done");
-  var_0 = scripts\engine\utility::getstruct("mq_1st_portal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_1st_portal_loc", "script_noteworthy");
   level waittill("mq_trial_b_done");
   stopFXOnTag(level._effect["mq_portal_lock_b"], var_0.mdl_chain_b_fx, "tag_origin");
   var_0.mdl_chain_b_fx delete();
@@ -1089,7 +1089,7 @@ portal_unlock_watcher_trail_b() {
 portal_unlock_watcher_trail_c() {
   level endon("game_ended");
   level endon("mq_step_four_done");
-  var_0 = scripts\engine\utility::getstruct("mq_1st_portal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("mq_1st_portal_loc", "script_noteworthy");
   level waittill("mq_trial_c_done");
   stopFXOnTag(level._effect["mq_portal_lock_c"], var_0.mdl_chain_c_fx, "tag_origin");
   var_0.mdl_chain_c_fx delete();
@@ -1230,7 +1230,7 @@ do_interact_2nd_portal(var_0) {
   if(isDefined(level.trial_of_mindfulness_obelisk.mdl)) {
     _func_0130(level.trial_of_mindfulness_obelisk.mdl);
     level.trial_of_mindfulness_obelisk.mdl delete();
-    var_5 = getent("mq_trial_of_mindfulness_obelisk_clip", "script_noteworthy");
+    var_5 = getEnt("mq_trial_of_mindfulness_obelisk_clip", "script_noteworthy");
     var_5 _meth_8093();
     var_5 delete();
   }
@@ -1246,7 +1246,7 @@ do_interact_2nd_portal(var_0) {
   if(isDefined(level.main_obelisk_c.mdl)) {
     _func_0130(level.main_obelisk_c.mdl);
     level.main_obelisk_c.mdl delete();
-    var_5 = getent("trial_of_resilience_obelisk_clip", "script_noteworthy");
+    var_5 = getEnt("trial_of_resilience_obelisk_clip", "script_noteworthy");
     var_5 _meth_8093();
     var_5 delete();
   }

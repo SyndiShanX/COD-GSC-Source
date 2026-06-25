@@ -90,13 +90,13 @@ _id_1014C(var_0, var_1) {
   var_12 = (var_9 - var_8) * (1, 1, 0);
   var_13 = (var_8 - var_10) * (1, 1, 0);
   var_14 = var_8 - var_1.origin;
-  var_15 = vectordot(vectornormalize(_id_10146(var_12)), var_14);
+  var_15 = vectordot(vectorNormalize(_id_10146(var_12)), var_14);
 
   if(var_15 > var_3._id_0359) {
     return 0;
   }
 
-  var_15 = vectordot(vectornormalize(_id_10146(var_13)), var_14);
+  var_15 = vectordot(vectorNormalize(_id_10146(var_13)), var_14);
 
   if(var_15 > var_3._id_0359) {
     return 0;
@@ -105,13 +105,13 @@ _id_1014C(var_0, var_1) {
   var_16 = (var_10 - var_11) * (1, 1, 0);
   var_17 = (var_11 - var_9) * (1, 1, 0);
   var_14 = var_11 - var_1.origin;
-  var_15 = vectordot(vectornormalize(_id_10146(var_16)), var_14);
+  var_15 = vectordot(vectorNormalize(_id_10146(var_16)), var_14);
 
   if(var_15 > var_3._id_0359) {
     return 0;
   }
 
-  var_15 = vectordot(vectornormalize(_id_10146(var_17)), var_14);
+  var_15 = vectordot(vectorNormalize(_id_10146(var_17)), var_14);
 
   if(var_15 > var_3._id_0359) {
     return 0;

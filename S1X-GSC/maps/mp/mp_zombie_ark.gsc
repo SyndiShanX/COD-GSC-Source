@@ -534,9 +534,9 @@ zombiearkrunboatsway() {
   for(;;) {
     var_0 = randomfloatrange(0.25, 1);
     var_1 = randomfloatrange(3, 4);
-    level.swayent rotateto((var_0, 0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+    level.swayent rotateTo((var_0, 0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
     wait(var_1);
-    level.swayent rotateto((0 - var_0, 0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
+    level.swayent rotateTo((0 - var_0, 0, 0), var_1, var_1 * 0.5, var_1 * 0.5);
     wait(var_1);
   }
 }
@@ -728,7 +728,7 @@ zombiearkfilterrespawns(var_0) {
 }
 
 zmbteleportgrenadefindzonecustom(var_0, var_1, var_2) {
-  var_3 = getent("zomboni_room_volume", "targetname");
+  var_3 = getEnt("zomboni_room_volume", "targetname");
 
   if(isDefined(var_3) && ispointinvolume(var_2, var_3)) {
     return "cargo_bay";
@@ -851,7 +851,7 @@ killglass() {
 
   for(var_1 = 0; var_1 <= 1; var_1++) {
     var_2 = getglass("ark_glass_" + var_1);
-    var_3 = getent("ark_glass_trigger_" + var_1, "targetname");
+    var_3 = getEnt("ark_glass_trigger_" + var_1, "targetname");
 
     if(isDefined(var_2) && isDefined(var_3)) {
       var_0[var_1] = [var_2, var_3];
@@ -902,7 +902,7 @@ flyoverbink() {
 }
 
 setupflyoveranimation(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstruct("shark_anim_node", "targetname");
+  var_4 = common_scripts\utility::getStruct("shark_anim_node", "targetname");
 
   if(!isDefined(var_4)) {
     return;
@@ -990,7 +990,7 @@ donotetrack(var_0, var_1, var_2, var_3) {
 }
 
 setupscriptmodelanimation(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::getstruct("env_bink_anim_node", "targetname");
+  var_5 = common_scripts\utility::getStruct("env_bink_anim_node", "targetname");
 
   if(!isDefined(var_5)) {
     var_5 = spawnStruct();
@@ -1104,7 +1104,7 @@ zombiearkpatchshove(var_0, var_1) {
         var_2 = self getnearestnode();
 
         if(isDefined(var_2) && abs(var_2.origin[2] - self.origin[2]) > 120) {
-          var_3 = vectornormalize((var_2.origin - self.origin) * (1, 1, 0));
+          var_3 = vectorNormalize((var_2.origin - self.origin) * (1, 1, 0));
           self setvelocity(var_3 * 100);
         }
       }

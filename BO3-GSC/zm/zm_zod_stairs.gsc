@@ -38,12 +38,12 @@ class cstair {
   destructor() {}
 
   function move_blocker() {
-    self moveto(origin - vectorscale((0, 0, 1), 10000), 0.05);
+    self moveTo(origin - vectorscale((0, 0, 1), 10000), 0.05);
     wait(0.05);
   }
 
   function function_15ee241e(e_mover, v_angles, n_rotate, n_duration) {
-    e_mover rotateto(v_angles + (0, n_rotate, 0), n_duration);
+    e_mover rotateTo(v_angles + (0, n_rotate, 0), n_duration);
   }
 
   function element_move(e_mover, b_is_extending, n_step_rise_distance, n_duration) {
@@ -51,7 +51,7 @@ class cstair {
       n_step_rise_distance = n_step_rise_distance * -1;
     }
     v_offset = anglestoup((0, 0, 0)) * n_step_rise_distance;
-    e_mover moveto(e_mover.origin + v_offset, n_duration);
+    e_mover moveTo(e_mover.origin + v_offset, n_duration);
   }
 
   function stair_move(b_is_extending, b_is_instant) {
@@ -105,7 +105,7 @@ class cstair {
     } else {
       m_n_state = 0;
       m_a_e_clip[0] setvisibletoall();
-      m_a_e_clip[0] disconnectpaths();
+      m_a_e_clip[0] disconnectPaths();
     }
     if(b_is_extending) {
       if(isDefined(m_a_e_steps[0].script_flag_set)) {

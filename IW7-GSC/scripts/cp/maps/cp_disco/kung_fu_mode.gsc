@@ -291,7 +291,7 @@ throw_zombie_left(var_0, var_1, var_2, var_3) {
   self.disable_armor = 1;
   var_4 = vectortoangles(self.origin - var_2.origin);
   var_5 = anglestoleft(var_4);
-  var_6 = vectornormalize(var_5) * 2000;
+  var_6 = vectorNormalize(var_5) * 2000;
   self setvelocity(var_6 + (0, 0, 200));
   wait(0.1);
   self dodamage(self.health + 1000, var_1.origin, var_2, var_1, "MOD_UNKNOWN", var_3);
@@ -444,7 +444,7 @@ get_enemies_within_reticle(var_0, var_1) {
   var_3 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_4 = scripts\engine\utility::get_array_of_closest(self.origin, var_3, undefined, 24, var_0, 1);
   var_5 = anglesToForward(self.angles);
-  var_6 = vectornormalize(var_5) * -35;
+  var_6 = vectorNormalize(var_5) * -35;
   var_7 = 0;
   foreach(var_9 in var_4) {
     if(scripts\engine\utility::istrue(var_9.pinched)) {
@@ -552,7 +552,7 @@ throw_zombie(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  self setvelocity(vectornormalize(self.origin - var_1.origin) * 500 + (0, 0, 100));
+  self setvelocity(vectorNormalize(self.origin - var_1.origin) * 500 + (0, 0, 100));
   wait(0.1);
   if(isDefined(var_2)) {
     self dodamage(self.health + 1000, var_1.origin, var_2, var_1, "MOD_UNKNOWN", var_4);
@@ -669,7 +669,7 @@ getenemiesleftofcenter(var_0, var_1, var_2) {
   var_4 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_5 = scripts\engine\utility::get_array_of_closest(self.origin, var_4, undefined, 24, var_1, 1);
   var_6 = anglesToForward(self.angles);
-  var_7 = vectornormalize(var_6) * -35;
+  var_7 = vectorNormalize(var_6) * -35;
   var_8 = 0;
   var_9 = anglestoup(self.angles);
   for(var_10 = 1; var_10 <= var_0; var_10++) {
@@ -685,7 +685,7 @@ getenemiesleftofcenter(var_0, var_1, var_2) {
     foreach(var_13 in var_5) {
       var_14 = 0;
       var_15 = var_13.origin;
-      var_10 = vectornormalize(var_13.origin - self.origin);
+      var_10 = vectorNormalize(var_13.origin - self.origin);
       var_11 = scripts\engine\utility::anglebetweenvectorssigned(var_6, var_10, var_9);
       if(var_11 > 0 && var_11 < 30) {
         if(isDefined(var_1)) {
@@ -722,7 +722,7 @@ get_enemies_within_fov(var_0, var_1, var_2) {
   var_4 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_5 = scripts\engine\utility::get_array_of_closest(self.origin, var_4, undefined, 24, var_1, 1);
   var_6 = anglesToForward(self.angles);
-  var_7 = vectornormalize(var_6) * -35;
+  var_7 = vectorNormalize(var_6) * -35;
   var_8 = 0;
   for(var_9 = 1; var_9 <= var_0; var_9++) {
     if(var_5.size < 1) {
@@ -843,7 +843,7 @@ ma_style_init() {
     }
 
     if(isDefined(var_2.target)) {
-      var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
       var_3.origin = var_3.origin + (0, 0, 8);
       var_3.gourd_model = var_2.gourd_model;
       var_3.name = var_2.name;
@@ -879,7 +879,7 @@ guord_interaction_init() {
   level.all_gourds = [];
   foreach(var_2 in var_0) {
     if(isDefined(var_2.target)) {
-      var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+      var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
       var_3.origin = var_3.origin + (0, 0, 2);
     } else {
       var_2.origin = var_2.origin + (0, 0, 2);
@@ -957,7 +957,7 @@ init_martial_arts_trainer() {
   level.trainer_quests[level.trainer_quests.size] = ::start_phase_2_task2;
   level.trainer_quests[level.trainer_quests.size] = ::start_phase_2_task3;
   level.trainer_quests[level.trainer_quests.size] = ::completephase3;
-  level.trainer = getent("ma_trainer", "targetname");
+  level.trainer = getEnt("ma_trainer", "targetname");
   level.trainer.origin = level.trainer.origin + (25, 0, -25);
   if(isDefined(level.trainer)) {
     level.trainer thread handle_trainer_anims();

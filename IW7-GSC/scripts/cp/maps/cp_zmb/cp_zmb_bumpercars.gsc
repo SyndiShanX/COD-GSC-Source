@@ -16,11 +16,11 @@ init_bumper_cars() {
       var_2.fast_mover = 0;
     }
 
-    var_2.dmgtrigger = getent(var_2.target, "targetname");
-    var_2.dmgtrigger enablelinkto();
-    var_2.dmgtrigger linkto(var_2);
-    var_2.fwd_spot = scripts\engine\utility::getstruct(var_2.target, "targetname");
-    var_2.rear_spot = scripts\engine\utility::getstruct(var_2.fwd_spot.target, "targetname");
+    var_2.dmgtrigger = getEnt(var_2.target, "targetname");
+    var_2.dmgtrigger enablelinkTo();
+    var_2.dmgtrigger linkTo(var_2);
+    var_2.fwd_spot = scripts\engine\utility::getStruct(var_2.target, "targetname");
+    var_2.rear_spot = scripts\engine\utility::getStruct(var_2.fwd_spot.target, "targetname");
     var_2.can_damage = 0;
     var_2.fwd_spot.origin = (var_2.fwd_spot.origin[0], var_2.fwd_spot.origin[1], var_2.origin[2]);
     var_2.rear_spot.origin = (var_2.rear_spot.origin[0], var_2.rear_spot.origin[1], var_2.origin[2]);
@@ -28,7 +28,7 @@ init_bumper_cars() {
   }
 
   level waittill("moon_bumpercars power_on");
-  var_4 = getent("bumpercar_clip", "targetname");
+  var_4 = getEnt("bumpercar_clip", "targetname");
   var_4 connectpaths();
   var_4 notsolid();
   foreach(var_6, var_2 in var_0) {
@@ -112,7 +112,7 @@ activate_bumper_car(var_0) {
     wait(0.5);
     self setscriptablepartstate("lights", "lights_on");
     self.can_damage = 1;
-    self moveto(self.fwd_spot.origin, var_3);
+    self moveTo(self.fwd_spot.origin, var_3);
     self.state = "rear";
   } else {
     for(;;) {
@@ -166,7 +166,7 @@ activate_bumper_car(var_0) {
     wait(0.5);
     self setscriptablepartstate("lights", "lights_on");
     self.can_damage = 1;
-    self moveto(self.rear_spot.origin, var_3);
+    self moveTo(self.rear_spot.origin, var_3);
     self.state = "fwd";
   }
 
@@ -245,8 +245,8 @@ push_and_damage_player(var_0) {
   self playSound("bumpercars_push_damage_plr");
   self.flung = 1;
   var_1 = sortbydistance(scripts\engine\utility::getStructArray("bumper_car_throw_spots", "targetname"), self.origin);
-  self setorigin(var_1[0].origin, 0);
-  self setvelocity(vectornormalize(self.origin - var_0.origin) * 300 + (0, 0, 100));
+  self setOrigin(var_1[0].origin, 0);
+  self setvelocity(vectorNormalize(self.origin - var_0.origin) * 300 + (0, 0, 100));
   wait(0.1);
   if(isPlayer(self) && !scripts\engine\utility::istrue(self.isrewinding)) {
     self dodamage(self.health + 100, var_0.origin);

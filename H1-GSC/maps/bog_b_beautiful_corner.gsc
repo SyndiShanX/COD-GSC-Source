@@ -103,13 +103,13 @@ remove_all_weapons() {
 }
 
 player_position() {
-  var_0 = getent("info_player_start", "classname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("info_player_start", "classname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
 }
 
 open_all_doors() {
-  var_0 = getent("alley_door", "targetname");
-  var_0 rotateyaw(-140, 0.5, 0, 0);
-  getent("alley_door_player_clip", "targetname") delete();
+  var_0 = getEnt("alley_door", "targetname");
+  var_0 rotateYaw(-140, 0.5, 0, 0);
+  getEnt("alley_door_player_clip", "targetname") delete();
 }

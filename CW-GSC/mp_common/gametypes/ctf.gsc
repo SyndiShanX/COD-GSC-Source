@@ -372,7 +372,7 @@ function function_ef8d5fb5() {
 
 function createflag(trigger) {
   if(isDefined(trigger.target)) {
-    visuals[0] = getent(trigger.target, "targetname");
+    visuals[0] = getEnt(trigger.target, "targetname");
   } else {
     visuals[0] = spawn("script_model", trigger.origin);
     visuals[0].angles = trigger.angles;
@@ -474,8 +474,8 @@ function createflaghint(team, origin) {
   radius = 128;
   height = 64;
   trigger = spawn("trigger_radius", origin, 0, radius, height);
-  trigger sethintstring(#"mp/ctf_cant_capture_flag");
-  trigger setcursorhint("HINT_NOICON");
+  trigger setHintString(#"mp/ctf_cant_capture_flag");
+  trigger setCursorHint("HINT_NOICON");
   trigger.original_origin = origin;
   trigger turn_off();
   return trigger;
@@ -521,8 +521,8 @@ function ctf() {
     facing_angle = getdvarint(#"scr_ctf_spawnpointfacingangle", 0);
   }
 
-  var_786a6f75 = getent("ctf_flag_allies_base", "targetname");
-  var_846ab111 = getent("ctf_flag_axis_base", "targetname");
+  var_786a6f75 = getEnt("ctf_flag_allies_base", "targetname");
+  var_846ab111 = getEnt("ctf_flag_axis_base", "targetname");
 
   if(isDefined(var_786a6f75) && isDefined(var_846ab111)) {
     if(game.switchedsides) {
@@ -616,7 +616,7 @@ function function_18d7960(flagteam, player) {
 function ondrop(player) {
   self gameobjects::set_flags(1);
   self gameobjects::set_owner_team(util::get_enemy_team(self.team));
-  flag_allies = getplayers(self.team);
+  flag_allies = getPlayers(self.team);
 
   foreach(var_ba17692e in flag_allies) {
     objective_setvisibletoplayer(self.objectiveid, var_ba17692e);
@@ -784,13 +784,13 @@ function onpickup(player) {
   self.var_94885886 setinvisibletoall();
   self.var_94885886 setvisibletoteam(team);
   self.var_94885886 setinvisibletoplayer(player);
-  self.var_94885886 linkto(player, "tag_stowed_back");
+  self.var_94885886 linkTo(player, "tag_stowed_back");
   self.var_fa01a5fa = util::spawn_model(level.var_537d7278[team].enemy, flagorigin, flagangles);
   self.var_fa01a5fa setinvisibletoall();
   self.var_fa01a5fa setvisibletoteam(otherteam);
   self.var_fa01a5fa setinvisibletoplayer(player);
-  self.var_fa01a5fa linkto(player, "tag_stowed_back");
-  flag_allies = getplayers(util::get_enemy_team(self.team));
+  self.var_fa01a5fa linkTo(player, "tag_stowed_back");
+  flag_allies = getPlayers(util::get_enemy_team(self.team));
 
   foreach(var_ba17692e in flag_allies) {
     objective_setinvisibletoplayer(self.objectiveid, var_ba17692e);
@@ -949,7 +949,7 @@ function oncapture(player) {
   flag gameobjects::return_home();
   flag gameobjects::set_owner_team(util::get_enemy_team(flag.team));
   flag.dontannouncereturn = undefined;
-  flag_allies = getplayers(flag.team);
+  flag_allies = getPlayers(flag.team);
 
   foreach(var_ba17692e in flag_allies) {
     objective_setvisibletoplayer(flag.objectiveid, var_ba17692e);

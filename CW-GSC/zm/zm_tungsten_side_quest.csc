@@ -219,11 +219,11 @@ function function_b6ea5740(localclientnum, oldval, newval, bnewent, binitialsnap
   util::playFXOnTag(bwasdemojump, #"hash_61e3c7a179d7cdfb", e_fx, "tag_origin");
   e_fx playSound(bwasdemojump, #"hash_14182939d9e547b2");
   e_fx.var_1398d03 = e_fx playLoopSound(#"hash_20b1d2b1a7ca4646");
-  e_fx moveto(e_fx.origin + (0, 0, 40), 0.8);
+  e_fx moveTo(e_fx.origin + (0, 0, 40), 0.8);
   wait 0.75;
   var_5f90c92a = struct::get("side_quest_gp_machine_screen");
   n_time = distance(e_fx.origin, var_5f90c92a.origin) / 400;
-  e_fx moveto(var_5f90c92a.origin + (0, 0, 32), n_time);
+  e_fx moveTo(var_5f90c92a.origin + (0, 0, 32), n_time);
   e_fx waittill(#"movedone");
   e_fx playSound(bwasdemojump, #"hash_282ba4e04a5fa817");
   e_fx stoploopsound(e_fx.var_1398d03);
@@ -551,7 +551,7 @@ function function_69ffb9e7(localclientnum, e_vehicle, var_e15e9f2a) {
 
   while(dist > threshold) {
     var_2b1dc7a6 = var_11e5eff8 + (0, 0, 16);
-    self moveto(var_2b1dc7a6, max(dist / speed, 0.016));
+    self moveTo(var_2b1dc7a6, max(dist / speed, 0.016));
     waitframe(1);
     dist = distance(self.origin, var_2b1dc7a6);
   }
@@ -595,7 +595,7 @@ function function_58ef33dd(localclientnum, oldval, newval, bnewent, binitialsnap
     if(!isDefined(self.fx_tag) && !isDefined(self.var_66eb3636)) {
       self.fx_tag = util::spawn_model(fieldname, "tag_origin", self.origin + (0, 0, 40), self.angles);
       self.var_66eb3636 = util::playFXOnTag(fieldname, #"hash_61e3c7a179d7cdfb", self.fx_tag, "tag_origin");
-      self.fx_tag linkto(self);
+      self.fx_tag linkTo(self);
     }
 
     self playSound(fieldname, #"hash_4a1a9d55eee5995f");
@@ -620,7 +620,7 @@ function function_3cfac49e(localclientnum, oldval, newval, bnewent, binitialsnap
     if(!isDefined(self.var_8dc5c1c3)) {
       self.var_8dc5c1c3 = util::spawn_model(fieldname, "tag_origin", self.origin, self.angles);
       self.eye_fx = util::playFXOnTag(fieldname, #"hash_76394ace7e94981f", self.var_8dc5c1c3, "tag_origin");
-      self.var_8dc5c1c3 linkto(self);
+      self.var_8dc5c1c3 linkTo(self);
       self playSound(fieldname, #"hash_2c4dfc38f6bf9d69");
       self.var_8dc5c1c3 playLoopSound(#"hash_b3b9bf3b225b9ae");
     }
@@ -648,7 +648,7 @@ function function_ecd6d914(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_96148291(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     self.var_bf8913a5 = util::spawn_model(fieldname, "tag_origin", self.origin, self.angles);
-    self.var_bf8913a5 linkto(self);
+    self.var_bf8913a5 linkTo(self);
     self.var_61fe2578 = util::playFXOnTag(fieldname, #"hash_15c57e68fc22a6c", self.var_bf8913a5, "tag_origin");
     self playSound(fieldname, #"hash_45ad71e8a13fe765");
     return;

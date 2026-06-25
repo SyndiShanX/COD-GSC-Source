@@ -2641,14 +2641,14 @@ laststandtimer(var_0, var_1) {
   if(level.diehardmode == 1 && level.diehardmode != 2) {
     var_2 = spawn("script_model", self.origin);
     var_2 setModel("tag_origin");
-    var_2 setcursorhint("HINT_NOICON");
-    var_2 sethintstring(&"PLATFORM_REVIVE");
+    var_2 setCursorHint("HINT_NOICON");
+    var_2 setHintString(&"PLATFORM_REVIVE");
     var_2 revivesetup(self);
     var_2 endon("death");
     var_3 = newteamhudelem(self.team);
     var_3 setshader("waypoint_revive", 8, 8);
     var_3 setwaypoint(1, 1);
-    var_3 settargetent(self);
+    var_3 settargetEnt(self);
     var_3 thread destroyonreviveentdeath(var_2);
     var_3.color = (0.33, 0.75, 0.24);
     maps\mp\_utility::playdeathsound();
@@ -2666,14 +2666,14 @@ laststandtimer(var_0, var_1) {
     thread laststandkeepoverlay();
     var_2 = spawn("script_model", self.origin);
     var_2 setModel("tag_origin");
-    var_2 setcursorhint("HINT_NOICON");
-    var_2 sethintstring(&"PLATFORM_REVIVE");
+    var_2 setCursorHint("HINT_NOICON");
+    var_2 setHintString(&"PLATFORM_REVIVE");
     var_2 revivesetup(self);
     var_2 endon("death");
     var_3 = newteamhudelem(self.team);
     var_3 setshader("waypoint_revive", 8, 8);
     var_3 setwaypoint(1, 1);
-    var_3 settargetent(self);
+    var_3 settargetEnt(self);
     var_3 thread destroyonreviveentdeath(var_2);
     var_3.color = (0.33, 0.75, 0.24);
     maps\mp\_utility::playdeathsound();
@@ -2981,13 +2981,13 @@ damageshellshockandrumble(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(self.lastdamagerumbletime) || var_6 > self.lastdamagerumbletime) {
     self.lastdamagerumbletime = var_6;
-    self playrumbleonentity("sniper_fire");
+    self playRumbleOnEntity("sniper_fire");
   }
 }
 
 revivesetup(var_0) {
   var_1 = var_0.team;
-  self linkto(var_0, "tag_origin");
+  self linkTo(var_0, "tag_origin");
   self.owner = var_0;
   self.inuse = 0;
   self makeusable();
@@ -3087,7 +3087,7 @@ reviveholdthink(var_0, useTime, var_2) {
   var_3 = 3000;
   var_4 = spawn("script_origin", self.origin);
   var_4 hide();
-  var_0 playerlinkto(var_4);
+  var_0 playerlinkTo(var_4);
   var_0 playerlinkedoffsetenable();
 
   if(!isDefined(var_2)) {
@@ -3397,7 +3397,7 @@ processdamagetaken(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   if(isDefined(var_1) && !maps\mp\gametypes\_weapons::friendlyfirecheck(self.owner, var_1)) {
     return;
   }
-  var_1 playrumbleonentity("damage_light");
+  var_1 playRumbleOnEntity("damage_light");
 
   if(isDefined(self.iscrashing) && self.iscrashing) {
     return;

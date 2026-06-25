@@ -25,7 +25,7 @@ func_351B() {
   var_1 = 0.4;
   var_2 = func_361C(self);
   var_2 scripts\engine\utility::delaycall(var_1, ::show);
-  var_2 linkto(self, "j_spineupper");
+  var_2 linkTo(self, "j_spineupper");
   var_2.var_3919 = 0;
   var_2.var_13CCC = var_0;
   self.var_D267 = var_2;
@@ -156,7 +156,7 @@ func_35F1(var_0, var_1, var_2) {
   var_6 = func_4A09(var_1);
   if(isDefined(var_2) && var_2) {
     level.player viewkick(30, var_6.origin, 0);
-    level.player playrumbleonentity("light_1s");
+    level.player playRumbleOnEntity("light_1s");
   }
 
   var_7 = func_D3B0();
@@ -193,7 +193,7 @@ func_35F2(var_0) {
   var_1 = lib_0A1E::func_2356("rodeo_right", "struggle");
   var_2 = scripts\engine\utility::spawn_tag_origin();
   var_2 func_81E2(level.player, "tag_origin", (50, 0, -15), (0, 0, 0), 1);
-  var_2 setcursorhint("HINT_BUTTON");
+  var_2 setCursorHint("HINT_BUTTON");
   var_2 func_84B8(1);
   var_2 setuserange(500);
   var_2 func_84A4(500);
@@ -267,7 +267,7 @@ func_35F2(var_0) {
   var_0 stoprumble("steady_rumble");
   wait(0.05);
   setslowmotion(1, 0.2, 0.2);
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   level.player func_81DE(var_10, 1);
   wait(0.3);
   setslowmotion(0.2, 1, 2);
@@ -368,7 +368,7 @@ func_116C9() {
 
 func_35EF() {
   var_0 = spawn("script_origin", level.player.origin);
-  var_0 linkto(level.player);
+  var_0 linkTo(level.player);
   wait(0.05);
   var_0 playSound("ui_c12_rodeo_temperature_warning_lp_start");
   wait(0.5);
@@ -425,7 +425,7 @@ func_6D73() {
         if(isDefined(var_10["entity"]) && var_10["entity"] == self) {
           var_14 = 0.6;
           playFXOnTag(self.var_E5EF, self, "j_helmet");
-          level.player playrumbleonentity("light_1s");
+          level.player playRumbleOnEntity("light_1s");
           if(!var_9) {
             thread scripts\sp\utility::play_loop_sound_on_tag(var_8, "j_head");
             var_9 = 1;
@@ -492,12 +492,12 @@ func_4A09(var_0) {
   }
 
   var_3 = scripts\engine\utility::spawn_tag_origin();
-  var_3 linkto(self, var_1, var_2, (0, 0, 0));
+  var_3 linkTo(self, var_1, var_2, (0, 0, 0));
   var_3 func_84A3("+melee");
-  var_3 setcursorhint("HINT_BUTTON");
+  var_3 setCursorHint("HINT_BUTTON");
   var_3 setuserange(50);
   var_3 func_84A4(100);
-  var_3 sethintstring(&"SCRIPT_C12_RODEO_MELEE");
+  var_3 setHintString(&"SCRIPT_C12_RODEO_MELEE");
   return var_3;
 }
 
@@ -559,8 +559,8 @@ func_D3F4(var_0, var_1, var_2) {
   }
 
   level.player playSound("double_jump_boost_plr");
-  level.player playrumbleonentity("doublejumpboost_start");
-  var_0 animscripted(var_3, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_4);
+  level.player playRumbleOnEntity("doublejumpboost_start");
+  var_0 animScripted(var_3, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_4);
   var_0 scripts\anim\shared::donotetracks(var_3, ::func_D403);
 }
 
@@ -572,7 +572,7 @@ func_D3FA(var_0, var_1) {
     var_3 = % titan_c12_rodeo_gun_player_mount;
   }
 
-  var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
+  var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_D403);
 }
 
@@ -584,7 +584,7 @@ func_D3F0(var_0, var_1) {
     var_3 = % titan_c12_rodeo_gun_player_hit;
   }
 
-  var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
+  var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_D403);
 }
 
@@ -592,7 +592,7 @@ func_D3F2(var_0, var_1) {
   func_E5FE(" --- PlayerRig_HitQuickMiss");
   var_2 = "rodeoQuickMiss";
   if(var_1 == "right") {
-    var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_miss_quick);
+    var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_miss_quick);
   } else {
     var_0 func_82E7(var_2, %titan_c12_rodeo_gun_player_miss_quick);
   }
@@ -604,7 +604,7 @@ func_D3F3(var_0, var_1) {
   func_E5FE(" --- PlayerRig_Idle");
   var_2 = "rodeoIdle";
   if(var_1 == "right") {
-    var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_idle);
+    var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_idle);
   } else {
     var_0 func_82E7(var_2, %titan_c12_rodeo_gun_player_idle);
   }
@@ -615,7 +615,7 @@ func_D3F3(var_0, var_1) {
 func_D404(var_0) {
   func_E5FE(" --- PlayerRig_Struggle");
   var_1 = "rodeoStruggle";
-  var_0 animscripted(var_1, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_0.var_11169);
+  var_0 animScripted(var_1, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_0.var_11169);
   var_0 scripts\anim\shared::donotetracks(var_1, ::func_D403);
 }
 
@@ -628,7 +628,7 @@ func_D3ED(var_0, var_1) {
   }
 
   thread func_D3EF(var_0, var_1, var_3);
-  var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
+  var_0 animScripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_3);
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_D403);
 }
 
@@ -641,7 +641,7 @@ func_D3F6(var_0, var_1, var_2) {
   }
 
   thread func_D3F7(var_0, var_1, var_2);
-  var_0 animscripted(var_3, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_4);
+  var_0 animScripted(var_3, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), var_4);
   var_0 scripts\anim\shared::donotetracks(var_3, ::func_D403);
 }
 
@@ -699,7 +699,7 @@ func_D403(var_0, var_1) {
       break;
 
     case "rocket_pop":
-      var_3.var_E601 linkto(self, "tag_knife_attach2", (0, 0, 0), (0, 0, 0));
+      var_3.var_E601 linkTo(self, "tag_knife_attach2", (0, 0, 0), (0, 0, 0));
       break;
 
     case "jump_off":
@@ -707,7 +707,7 @@ func_D403(var_0, var_1) {
       break;
 
     case "weapons_free":
-      level.player playerlinkto(self, "tag_player");
+      level.player playerlinkTo(self, "tag_player");
       var_3 thread func_D3EE(self.var_13CCC);
       self.var_13CC9 = 1;
       self unlink();
@@ -715,7 +715,7 @@ func_D403(var_0, var_1) {
       break;
 
     case "rumble":
-      self playrumbleonentity("light_1s");
+      self playRumbleOnEntity("light_1s");
       break;
   }
 }
@@ -731,7 +731,7 @@ func_D3EF(var_0, var_1, var_2) {
     wait(0.05);
     var_5 = level.player.origin;
     if(!level.player scripts\common\trace::player_trace_passed(var_5, var_5 + var_5 - var_4, level.player.angles, [var_0, level.player, self])) {
-      level.player setorigin(var_4);
+      level.player setOrigin(var_4);
       break;
     }
   }
@@ -860,7 +860,7 @@ func_CC50(var_0) {
   var_3 = spawn("script_model", var_1);
   var_3.angles = var_2;
   var_3 setModel(level.var_EC8C["asm_c12_rodeo_rocket"]);
-  var_3 linkto(self, "j_neck");
+  var_3 linkTo(self, "j_neck");
   self.var_E601 = var_3;
   self waittill("can_damage_rocket");
   var_3 scripts\sp\utility::func_9196(3, 1, 1);
@@ -911,14 +911,14 @@ func_10907() {
   var_2 = (0, -90, 0);
   var_3 = "j_weaponshoulder_ri";
   var_4 = self gettagangles(var_3);
-  var_0 linkto(self, var_3, var_1, var_2);
+  var_0 linkTo(self, var_3, var_1, var_2);
   self.var_E601 = var_0;
 }
 
 func_D3F7(var_0, var_1, var_2) {
   self.playerwillunlink = 1;
   wait(var_2);
-  level.player playrumbleonentity("heavy_1s");
+  level.player playRumbleOnEntity("heavy_1s");
   thread lib_0F3D::func_50E8(0);
   level.player func_84AF(0);
   if(var_1 == "right") {
@@ -928,7 +928,7 @@ func_D3F7(var_0, var_1, var_2) {
   }
 
   var_4 = self gettagorigin(var_3);
-  var_5 = vectornormalize(level.player.origin - var_4);
+  var_5 = vectorNormalize(level.player.origin - var_4);
   var_6 = var_5 * 500;
   level.player setvelocity(var_6);
   level.player viewkick(75, var_4);

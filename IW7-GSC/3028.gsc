@@ -30,7 +30,7 @@ func_9640() {
   self setneargoalnotifydist(128.0);
 
   if(isDefined(self.target)) {
-    var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
 
     if(isDefined(var_0)) {
       return;
@@ -58,7 +58,7 @@ func_A329(var_0) {
   }
 
   level.player lib_0BCE::func_A2B2(self, undefined, var_0);
-  level.player setorigin((100000, 100000, 100000));
+  level.player setOrigin((100000, 100000, 100000));
   level.player.var_D409 = self;
   _setsaveddvar("spaceship_disableViewModelNotetracks", 1);
 }
@@ -370,7 +370,7 @@ func_104A7() {
   var_0 = getEntArray("jackal_landingzone", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_2.target, "targetname");
     var_4 = scripts\engine\utility::spawn_tag_origin();
     var_4.origin = var_3.origin;
     var_4.angles = var_3.angles;
@@ -392,7 +392,7 @@ func_104A7() {
     var_5 = undefined;
 
     if(isDefined(var_2.script_noteworthy)) {
-      var_5 = getent(var_2.script_noteworthy, "targetname");
+      var_5 = getEnt(var_2.script_noteworthy, "targetname");
 
       if(isDefined(var_5)) {
         if(issubstr(var_5.classname, "_vehicle")) {
@@ -401,9 +401,9 @@ func_104A7() {
 
         var_2 getrankxp();
         var_2 func_8314();
-        var_2 linkto(var_5);
-        var_4 linkto(var_5);
-        var_4.tag_origin linkto(var_5);
+        var_2 linkTo(var_5);
+        var_4 linkTo(var_5);
+        var_4.tag_origin linkTo(var_5);
       }
     }
 
@@ -417,7 +417,7 @@ func_104A7() {
         var_9.origin = var_8.origin;
 
         if(isDefined(var_5)) {
-          var_9 linkto(var_5);
+          var_9 linkTo(var_5);
         }
 
         var_4.lights = scripts\engine\utility::array_add(var_4.lights, var_9);

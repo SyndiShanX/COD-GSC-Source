@@ -83,7 +83,7 @@ teleporter_disable() {
   }
 
   self.disabled = 1;
-  self.start sethintstring(&"ZOMBIES_EMPTY_STRING");
+  self.start setHintString(&"ZOMBIES_EMPTY_STRING");
   self.start setsecondaryhintstring(&"ZOMBIES_EMPTY_STRING");
   self.start maps\mp\zombies\_util::tokenhintstring(0);
 }
@@ -97,7 +97,7 @@ teleporter_enable() {
     return;
   }
   self.disabled = 0;
-  self.start sethintstring(level.zmteleportreadyhint);
+  self.start setHintString(level.zmteleportreadyhint);
   var_0 = teleporter_get_cost();
   self.start setsecondaryhintstring(maps\mp\zombies\_util::getcoststring(var_0));
   self.start maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(var_0));
@@ -109,7 +109,7 @@ teleporter_run() {
   waitframe();
 
   if(isDefined(self.script_flag_true)) {
-    self.start sethintstring(&"ZOMBIES_REQUIRES_POWER");
+    self.start setHintString(&"ZOMBIES_REQUIRES_POWER");
     self.start maps\mp\zombies\_util::tokenhintstring(0);
     common_scripts\utility::flag_wait(self.script_flag_true);
   }
@@ -122,8 +122,8 @@ teleporter_run() {
   var_0 = 1;
 
   for(;;) {
-    self.start setcursorhint("HINT_NOICON");
-    self.start sethintstring(level.zmteleportreadyhint);
+    self.start setCursorHint("HINT_NOICON");
+    self.start setHintString(level.zmteleportreadyhint);
     self.start maps\mp\zombies\_util::tokenhintstring(1);
     self.inuse = 0;
     self notify("teleportReady");
@@ -156,7 +156,7 @@ teleporter_run() {
 
     self.inuse = 1;
     level notify("teleportUse", self, var_2);
-    self.start sethintstring(&"ZOMBIES_EMPTY_STRING");
+    self.start setHintString(&"ZOMBIES_EMPTY_STRING");
     self.start maps\mp\zombies\_util::tokenhintstring(0);
 
     if(isDefined(level.zmteleporterused)) {
@@ -292,7 +292,7 @@ teleport_players_through_chute(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_8.target)) {
-      var_11 = common_scripts\utility::getstruct(var_8.target, "targetname");
+      var_11 = common_scripts\utility::getStruct(var_8.target, "targetname");
 
       if(!isDefined(var_8.playerlinkent)) {
         var_8.playerlinkent = spawn("script_model", var_8.origin);
@@ -306,7 +306,7 @@ teleport_players_through_chute(var_0, var_1, var_2) {
       var_14 = level.zmteleportlookarcs[2];
       var_15 = level.zmteleportlookarcs[3];
       var_6 playerlinktodelta(var_8.playerlinkent, "tag_origin", 1, var_12, var_13, var_14, var_15);
-      var_8.playerlinkent moveto(var_11.origin + var_4, var_3, var_3, 0);
+      var_8.playerlinkent moveTo(var_11.origin + var_4, var_3, var_3, 0);
       var_6 thread player_teleport_unlink(var_3);
     }
 
@@ -386,7 +386,7 @@ reset_teleport_flag_after_time(var_0, var_1) {
 }
 
 player_teleport(var_0, var_1) {
-  self setorigin(var_0, 1);
+  self setOrigin(var_0, 1);
   self setplayerangles(var_1);
 }
 

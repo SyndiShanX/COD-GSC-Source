@@ -227,7 +227,7 @@ function tesla_play_arc_fx(target) {
   fxorg setModel("tag_origin");
   fxorg thread namespace_eaa992c::function_285a2999("tesla_trail");
   fxorg thread namespace_1a381543::function_90118d8c("zmb_pwup_coco_bounce");
-  fxorg moveto(target_origin, timemove);
+  fxorg moveTo(target_origin, timemove);
   fxorg util::waittill_any_timeout(timemove + 1, "movedone");
   fxorg delete();
 }
@@ -289,7 +289,7 @@ function tesla_blockers_timeout(org, note) {
 }
 
 function function_ccf71744(org, vel) {
-  self moveto(org.origin, 0.5);
+  self moveTo(org.origin, 0.5);
   self util::waittill_any_timeout(1, "movedone");
   vel = vel * 0.4;
   self thread namespace_eaa992c::function_285a2999("tesla_launch");
@@ -372,7 +372,7 @@ function tesla_blockers_move(org, note) {
   self endon(note);
   org endon("death");
   while(true) {
-    org rotateto(org.angles + vectorscale((0, 1, 0), 180), 1);
+    org rotateTo(org.angles + vectorscale((0, 1, 0), 180), 1);
     wait(1);
   }
 }
@@ -403,17 +403,17 @@ function tesla_blockers_update() {
   def = doa_pickups::function_bac08508(6);
   self.doa.tesla_blockers = org;
   org setModel("tag_origin");
-  org linkto(self, "tag_origin");
+  org linkTo(self, "tag_origin");
   if(mayspawnentity() && mayspawnfakeentity()) {
     tesla = spawn("script_model", self.origin);
     tesla.targetname = "teslaball1";
     tesla setModel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
-    tesla linkto(org, "tag_origin", (0, 60, 50));
+    tesla linkTo(org, "tag_origin", (0, 60, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);
     trigger.targetname = "tesla1";
-    trigger enablelinkto();
-    trigger linkto(tesla);
+    trigger enablelinkTo();
+    trigger linkTo(tesla);
     trigger thread tesla_blockers_damage_trigger(self, note);
     org.objects[org.objects.size] = tesla;
     org.triggers[org.triggers.size] = trigger;
@@ -423,11 +423,11 @@ function tesla_blockers_update() {
     tesla.targetname = "teslaball2";
     tesla setModel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
-    tesla linkto(org, "tag_origin", (0, -60, 50));
+    tesla linkTo(org, "tag_origin", (0, -60, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);
     trigger.targetname = "tesla2";
-    trigger enablelinkto();
-    trigger linkto(tesla);
+    trigger enablelinkTo();
+    trigger linkTo(tesla);
     trigger thread tesla_blockers_damage_trigger(self, note);
     org.objects[org.objects.size] = tesla;
     org.triggers[org.triggers.size] = trigger;
@@ -437,11 +437,11 @@ function tesla_blockers_update() {
     tesla.targetname = "teslaball3";
     tesla setModel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
-    tesla linkto(org, "tag_origin", (60, 0, 50));
+    tesla linkTo(org, "tag_origin", (60, 0, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);
     trigger.targetname = "tesla3";
-    trigger enablelinkto();
-    trigger linkto(tesla);
+    trigger enablelinkTo();
+    trigger linkTo(tesla);
     trigger thread tesla_blockers_damage_trigger(self, note);
     org.objects[org.objects.size] = tesla;
     org.triggers[org.triggers.size] = trigger;
@@ -451,11 +451,11 @@ function tesla_blockers_update() {
     tesla.targetname = "teslaball4";
     tesla setModel(level.doa.var_f6e22ab8);
     tesla setscale(def.scale);
-    tesla linkto(org, "tag_origin", (-60, 0, 50));
+    tesla linkTo(org, "tag_origin", (-60, 0, 50));
     trigger = spawn("trigger_radius", tesla.origin, 9, 18, 50);
     trigger.targetname = "tesla4";
-    trigger enablelinkto();
-    trigger linkto(tesla);
+    trigger enablelinkTo();
+    trigger linkTo(tesla);
     trigger thread tesla_blockers_damage_trigger(self, note);
     org.objects[org.objects.size] = tesla;
     org.triggers[org.triggers.size] = trigger;

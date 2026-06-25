@@ -5,14 +5,14 @@
 
 init_logswing_trap() {
   wait(1);
-  var_0 = getent("logswing_trap", "targetname");
-  var_1 = getent("logswing_trig", "targetname");
+  var_0 = getEnt("logswing_trap", "targetname");
+  var_1 = getEnt("logswing_trig", "targetname");
   if(!isDefined(var_0) || !isDefined(var_1)) {
     return;
   }
 
-  var_1 enablelinkto();
-  var_1 linkto(var_0, "tag_trigger");
+  var_1 enablelinkTo();
+  var_1 linkTo(var_0, "tag_trigger");
   var_2 = getEntArray("swing_trap_pole", "targetname");
   foreach(var_4 in var_2) {
     var_4 setscriptablepartstate("light", "on");
@@ -22,13 +22,13 @@ init_logswing_trap() {
 use_logswing_trap(var_0, var_1) {
   var_1 playlocalsound("purchase_generic");
   scripts\cp\cp_interaction::disable_linked_interactions(var_0);
-  var_2 = getent("logswing_trig", "targetname");
+  var_2 = getEnt("logswing_trig", "targetname");
   var_3 = getEntArray("swing_trap_pole", "targetname");
   foreach(var_5 in var_3) {
     var_5 setscriptablepartstate("light", "off");
   }
 
-  var_7 = getent("logswing_trap", "targetname");
+  var_7 = getEnt("logswing_trap", "targetname");
   var_7 thread log_swing_trap_sfx();
   var_8 = getanimlength(%iw7_cp_log_swing);
   var_7 scriptmodelplayanimdeltamotion("IW7_cp_log_swing", 1);
@@ -49,7 +49,7 @@ use_logswing_trap(var_0, var_1) {
 log_swing_trap_sfx() {
   var_0 = spawn("script_model", self.origin);
   wait(0.05);
-  var_0 linkto(self, "tag_trigger");
+  var_0 linkTo(self, "tag_trigger");
   wait(0.05);
   var_0 playsoundonmovingent("rave_log_swing_trap_sfx");
   wait(9);

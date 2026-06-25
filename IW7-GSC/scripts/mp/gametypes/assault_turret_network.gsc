@@ -29,7 +29,7 @@ init() {
 
 func_FAF1(var_0, var_1) {
   wait(5);
-  var_2 = getent(var_1, "targetname");
+  var_2 = getEnt(var_1, "targetname");
   var_3 = getEntArray(var_0, "targetname");
   var_2.settings = level.var_23AB["turret"];
   var_2.turrets = [];
@@ -58,7 +58,7 @@ func_108E9(var_0, var_1) {
   var_2 give_crafted_gascan(60);
   var_2 setdefaultdroppitch(15);
   var_3 = spawn("script_model", var_2 gettagorigin("tag_laser"));
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_2.killcament = var_3;
   var_2.killcament setscriptmoverkillcam("explosive");
   var_2 setturretmodechangewait(1);
@@ -200,7 +200,7 @@ func_12A5C(var_0) {
   var_1 hide();
   var_1 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
   var_1 setModel(var_0);
-  var_1 linkto(self);
+  var_1 linkTo(self);
   var_1 setcontents(0);
   self.bombsquadmodel = var_1;
   level notify("update_bombsquad");
@@ -343,7 +343,7 @@ func_E11F(var_0) {
 func_45CC(var_0) {
   var_1 = undefined;
   if(isDefined(var_0.script_noteworthy)) {
-    var_1 = getent(var_0.script_noteworthy, "targetname");
+    var_1 = getEnt(var_0.script_noteworthy, "targetname");
   }
 
   if(!isDefined(var_1)) {

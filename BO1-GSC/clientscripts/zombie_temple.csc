@@ -105,7 +105,7 @@ water_trail_monitor(localClientNum, set, newEnt) {
     for(i = 0; i < players.size; i++) {
       self.fx_ents[i] = spawn(i, (0, 0, 0), "script_model");
       self.fx_ents[i] setModel("tag_origin");
-      self.fx_ents[i] LinkTo(self, "tag_origin");
+      self.fx_ents[i] linkTo(self, "tag_origin");
       playFXOnTag(i, level._effect["fx_crystal_water_trail"], self.fx_ents[i], "tag_origin");
     }
   } else {
@@ -154,7 +154,7 @@ crystal_trail_runner(localClientNum, fx_name, dest) {
   PrintLn("Running " + fx_name + " from " + self.origin + " to " + dest);
   playFXOnTag(localClientNum, level._effect[fx_name], self, "tag_origin");
   self playLoopSound("evt_sq_bag_crystal_bounce_loop", .05);
-  self MoveTo(dest, 0.5);
+  self moveTo(dest, 0.5);
   self waittill("movedone");
   self Delete();
 }
@@ -291,7 +291,7 @@ daybreak_watcher() {
 start_generator_movement() {
   players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    ent = GetEnt(i, "power_generator", "targetname");
+    ent = getEnt(i, "power_generator", "targetname");
     ent thread generator_move();
   }
 }
@@ -315,7 +315,7 @@ water_wheel_watch(waitFor, entName, rotate, time) {
   level waittill(waitFor);
   players = GetLocalPlayers();
   for(i = 0; i < players.size; i++) {
-    wheel = GetEnt(i, entName, "targetname");
+    wheel = getEnt(i, entName, "targetname");
     wheel thread rotateWheel(rotate, time);
   }
 }
@@ -480,7 +480,7 @@ init_arms() {
   }
 }
 cave_vision_trigger_init() {
-  caveTrigger = getent(0, "cave_vision_trig", "targetname");
+  caveTrigger = getEnt(0, "cave_vision_trig", "targetname");
   if(isDefined(caveTrigger)) {
     caveTrigger thread cave_vision_trigger_watch();
   }
@@ -784,13 +784,13 @@ spear_move(localClientNum, active, playSound) {
     playFX(localClientNum, level._effect["punji_dust"], endPos);
     playSound(0, "evt_spiketrap", self.origin);
     moveTime = randomFloatRange(.08, .22);
-    self MoveTo(endPos, moveTime);
+    self moveTo(endPos, moveTime);
   } else {
     if(playSound) {
       playSound(0, "evt_spiketrap_retract", self.origin);
     }
     moveTime = randomFloatRange(.1, .2);
-    self MoveTo(self.start, moveTime);
+    self moveTo(self.start, moveTime);
   }
 }
 floating_boards_init() {
@@ -826,7 +826,7 @@ board_bob() {
 board_rotate() {
   while(true) {
     yaw = RandomFloatRange(-360.0, 360.0);
-    self RotateYaw(yaw, RandomFloatRange(60.0, 90.0));
+    self rotateYaw(yaw, RandomFloatRange(60.0, 90.0));
     self waittill("rotatedone");
   }
 }
@@ -969,7 +969,7 @@ ragdoll_impact_watch(localClientNum) {
     vel = self.origin - prevOrigin;
     speed = length(vel);
     if(speed < prevSpeed * .5 && prevSpeed > gibSpeed * waitTime) {
-      dir = VectorNormalize(prevVel);
+      dir = vectorNormalize(prevVel);
       self gib_ragdoll(localClientNum, dir);
       break;
     }
@@ -1006,7 +1006,7 @@ maze_floor_controller_rumble(localClientNum, set, newEnt) {
 maze_rumble_while_floor_shakes(int_client_num) {
   self endon("stop_maze_rumble");
   while(isDefined(self)) {
-    self PlayRumbleOnEntity(int_client_num, "slide_rumble");
+    self playRumbleOnEntity(int_client_num, "slide_rumble");
     wait(0.05);
   }
 }

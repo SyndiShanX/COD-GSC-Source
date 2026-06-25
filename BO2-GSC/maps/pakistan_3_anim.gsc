@@ -166,7 +166,7 @@ event_9_anims() {
 }
 
 drone_intro_glass_break(m_table) {
-  s_radius = getstruct("glass_break_radius", "targetname");
+  s_radius = getStruct("glass_break_radius", "targetname");
   radiusdamage(s_radius.origin, 16, 100, 100, undefined, "MOD_PROJECTILE");
 }
 

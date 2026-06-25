@@ -24,7 +24,7 @@ on_begin(var_e38c7612, var_2d4ba9d4) {
   self.var_e38c7612 = zm_trial::function_5769f26a(var_e38c7612);
   self.var_2d4ba9d4 = isDefined(var_2d4ba9d4);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_e4c3443c(self);
   }
 }
@@ -33,7 +33,7 @@ on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(!(isDefined(player.var_167bc422) && player.var_167bc422)) {
         if(!isDefined(var_696c3b4)) {
           var_696c3b4 = [];

@@ -57,7 +57,7 @@ on_begin(var_7720abf7, var_2d5ebf67, var_530e040f, zone1, zone2, zone3, zone4, z
     self thread function_5a68cb9f();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread zone_watcher(self, var_2d5ebf67, var_530e040f);
 
     if(isDefined(level.var_b691023c)) {
@@ -93,7 +93,7 @@ on_end(round_reset) {
     self[[level.var_a975ca2c]]();
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::close(player);
       player zm_trial_util::stop_timer();
@@ -229,7 +229,7 @@ damage_watcher(var_a4a28ac7) {
 function_ff66b979() {
   level endon(#"end_of_round");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_e5cde66)) {
       continue;
     }
@@ -240,7 +240,7 @@ function_ff66b979() {
   var_a0328dd5 = gettime();
   wait 5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_e5cde66)) {
       player thread damage_watcher(0);
       continue;
@@ -303,7 +303,7 @@ function_dae80de6() {
 }
 
 function_e1378d07() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isalive(player) && !isbot(player) && !player laststand::player_is_in_laststand()) {
       return true;
     }

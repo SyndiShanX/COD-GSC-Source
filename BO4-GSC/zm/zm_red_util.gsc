@@ -153,7 +153,7 @@ function_b952264e(var_3de28ed8 = 1) {
 
 can_see(v_pos, var_7b20e52b, n_dot = 0.7) {
   v_forward = anglesToForward(self.angles);
-  v_dir = vectornormalize(v_pos - self.origin);
+  v_dir = vectorNormalize(v_pos - self.origin);
   dp = vectordot(v_forward, v_dir);
 
   if(dp > n_dot) {
@@ -197,7 +197,7 @@ function_dd9dd1cd() {
 }
 
 function_9dcee9e4(vol_area) {
-  a_players = getplayers();
+  a_players = getPlayers();
   var_2a4957b4 = function_f17015c8(a_players, vol_area);
   return var_2a4957b4;
 }
@@ -428,7 +428,7 @@ function_d24a0f09(str_vo_line, var_e688ce8f = 0) {
 }
 
 function_f0ed2a66(v_pos) {
-  vol_stands = getent("stands_vol", "script_noteworthy");
+  vol_stands = getEnt("stands_vol", "script_noteworthy");
 
   if(istouching(v_pos, vol_stands)) {
     return false;

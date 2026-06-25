@@ -169,7 +169,7 @@ function function_b3d993e9(deployable_weapon, sethintstring = 0) {
 
 function private function_ab25be55(weapon, sethintstring) {
   if(self isplayerswimming() && !(isDefined(sethintstring.canuseunderwater) ? sethintstring.canuseunderwater : 0)) {
-    self sethintstring(#"weapon/cant_plant_equipment");
+    self setHintString(#"weapon/cant_plant_equipment");
     return false;
   }
 
@@ -354,7 +354,7 @@ function private function_f0adf9c() {
 
     if(var_7a3f3edf) {
       if(isDefined(level._deployable_weapons[deployable_weapon.statindex].placehintstr)) {
-        player sethintstring(level._deployable_weapons[deployable_weapon.statindex].placehintstr);
+        player setHintString(level._deployable_weapons[deployable_weapon.statindex].placehintstr);
         player.var_c702a701 = 1;
       }
 
@@ -362,7 +362,7 @@ function private function_f0adf9c() {
     }
 
     if(isDefined(level._deployable_weapons[deployable_weapon.statindex].var_a39cb3db)) {
-      player sethintstring(level._deployable_weapons[deployable_weapon.statindex].var_a39cb3db);
+      player setHintString(level._deployable_weapons[deployable_weapon.statindex].var_a39cb3db);
       player.var_c702a701 = 1;
     }
   }
@@ -371,7 +371,7 @@ function private function_f0adf9c() {
 function function_765a2e96() {
   self endon(#"death", #"disconnect");
   wait 1.5;
-  self sethintstring("");
+  self setHintString("");
 }
 
 function function_db9eb027(entity) {

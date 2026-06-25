@@ -106,7 +106,7 @@ main() {
   level thread radio_egg_init("radio_three", "radio_three_origin");
   level thread radio_egg_init("radio_four", "radio_four_origin");
   level thread radio_egg_init("radio_five", "radio_five_origin");
-  level.monk_scream_trig = getent("monk_scream_trig", "targetname");
+  level.monk_scream_trig = getEnt("monk_scream_trig", "targetname");
   level thread play_giant_mythos_lines();
   level thread play_level_easteregg_vox("vox_corkboard_1");
   level thread play_level_easteregg_vox("vox_corkboard_2");
@@ -231,7 +231,7 @@ script_anims_init() {
 
 factory_playanim(animname) {
   self UseAnimTree(#animtree);
-  self animscripted("door_anim", self.origin, self.angles, level.scr_anim[animname]);
+  self animScripted("door_anim", self.origin, self.angles, level.scr_anim[animname]);
 }
 
 #using_animtree("generic_human");
@@ -266,21 +266,21 @@ lock_additional_player_spawner() {
 }
 bridge_init() {
   flag_init("bridge_down");
-  wnuen_bridge = getent("wnuen_bridge", "targetname");
+  wnuen_bridge = getEnt("wnuen_bridge", "targetname");
   wnuen_bridge_coils = getEntArray("wnuen_bridge_coils", "targetname");
   for(i = 0; i < wnuen_bridge_coils.size; i++) {
-    wnuen_bridge_coils[i] LinkTo(wnuen_bridge);
+    wnuen_bridge_coils[i] linkTo(wnuen_bridge);
   }
   wnuen_bridge rotatepitch(90, 1, .5, .5);
 
-  warehouse_bridge = getent("warehouse_bridge", "targetname");
+  warehouse_bridge = getEnt("warehouse_bridge", "targetname");
   warehouse_bridge_coils = getEntArray("warehouse_bridge_coils", "targetname");
   for(i = 0; i < warehouse_bridge_coils.size; i++) {
-    warehouse_bridge_coils[i] LinkTo(warehouse_bridge);
+    warehouse_bridge_coils[i] linkTo(warehouse_bridge);
   }
   warehouse_bridge rotatepitch(-90, 1, .5, .5);
 
-  bridge_audio = getstruct("bridge_audio", "targetname");
+  bridge_audio = getStruct("bridge_audio", "targetname");
 
   flag_wait("electricity_on");
 
@@ -288,7 +288,7 @@ bridge_init() {
   warehouse_bridge rotatepitch(90, 4, .5, 1.5);
 
   if(isDefined(bridge_audio)) {
-    playsoundatposition("bridge_lower", bridge_audio.origin);
+    playSoundAtPosition("bridge_lower", bridge_audio.origin);
   }
 
   wnuen_bridge connectpaths();
@@ -300,20 +300,20 @@ bridge_init() {
 
   flag_set("bridge_down");
   if(isDefined(bridge_audio)) {
-    playsoundatposition("bridge_hit", bridge_audio.origin);
+    playSoundAtPosition("bridge_hit", bridge_audio.origin);
   }
 
-  wnuen_bridge_clip = getent("wnuen_bridge_clip", "targetname");
+  wnuen_bridge_clip = getEnt("wnuen_bridge_clip", "targetname");
   wnuen_bridge_clip delete();
 
-  warehouse_bridge_clip = getent("warehouse_bridge_clip", "targetname");
+  warehouse_bridge_clip = getEnt("warehouse_bridge_clip", "targetname");
   warehouse_bridge_clip delete();
 
   maps\_zombiemode_zone_manager::connect_zones("wnuen_bridge_zone", "bridge_zone");
   maps\_zombiemode_zone_manager::connect_zones("warehouse_top_zone", "bridge_zone");
 }
 jump_from_bridge() {
-  trig = GetEnt("trig_outside_south_zone", "targetname");
+  trig = getEnt("trig_outside_south_zone", "targetname");
   trig waittill("trigger");
 
   maps\_zombiemode_zone_manager::connect_zones("outside_south_zone", "bridge_zone", true);
@@ -511,10 +511,10 @@ magic_box_init() {
 }
 
 power_electric_switch() {
-  trig = getent("use_power_switch", "targetname");
-  master_switch = getent("power_switch", "targetname");
+  trig = getEnt("use_power_switch", "targetname");
+  master_switch = getEnt("power_switch", "targetname");
   master_switch notsolid();
-  trig sethintstring(&"ZOMBIE_ELECTRIC_SWITCH");
+  trig setHintString(&"ZOMBIE_ELECTRIC_SWITCH");
 
   cheat = false;
 
@@ -564,7 +564,7 @@ power_electric_switch() {
 
   trig delete();
 
-  playFX(level._effect["switch_sparks"], getstruct("power_switch_fx", "targetname").origin);
+  playFX(level._effect["switch_sparks"], getStruct("power_switch_fx", "targetname").origin);
 
   maps\_zombiemode_zone_manager::connect_zones("outside_east_zone", "outside_south_zone");
   maps\_zombiemode_zone_manager::connect_zones("outside_west_zone", "outside_south_zone", true);
@@ -605,7 +605,7 @@ electric_trap_dialog() {
 }
 
 electric_trap_think(enable_flag) {
-  self sethintstring(&"ZOMBIE_FLAMES_UNAVAILABLE");
+  self setHintString(&"ZOMBIE_FLAMES_UNAVAILABLE");
   self.zombie_cost = 1000;
 
   self thread electric_trap_dialog();
@@ -613,13 +613,13 @@ electric_trap_think(enable_flag) {
   triggers = getEntArray(self.targetname, "targetname");
   flag_wait("electricity_on");
 
-  self.zombie_dmg_trig = getent(self.target, "targetname");
+  self.zombie_dmg_trig = getEnt(self.target, "targetname");
   self.zombie_dmg_trig.in_use = 0;
 
-  self sethintstring(&"ZOMBIE_BUTTON_NORTH_FLAMES");
+  self setHintString(&"ZOMBIE_BUTTON_NORTH_FLAMES");
 
   light_name = "";
-  tswitch = getent(self.script_linkto, "script_linkname");
+  tswitch = getEnt(self.script_linkto, "script_linkname");
   switch (tswitch.script_linkname) {
     case "10":
     case "11":
@@ -701,7 +701,7 @@ electric_trap_think(enable_flag) {
 }
 electric_trap_move_switch(parent) {
   light_name = "";
-  tswitch = getent(parent.script_linkto, "script_linkname");
+  tswitch = getEnt(parent.script_linkto, "script_linkname");
   switch (tswitch.script_linkname) {
     case "10":
     case "11":
@@ -771,7 +771,7 @@ play_electrical_sound() {
   level endon("arc_done");
   while(1) {
     wait(randomfloatrange(0.1, 0.5));
-    playsoundatposition("elec_arc", self.origin);
+    playSoundAtPosition("elec_arc", self.origin);
   }
 }
 elec_barrier_damage() {
@@ -792,9 +792,9 @@ play_elec_vocals() {
   if(isDefined(self)) {
     org = self.origin;
     wait(0.15);
-    playsoundatposition("elec_vocals", org);
-    playsoundatposition("zombie_arc", org);
-    playsoundatposition("exp_jib_zombie", org);
+    playSoundAtPosition("elec_vocals", org);
+    playSoundAtPosition("zombie_arc", org);
+    playSoundAtPosition("exp_jib_zombie", org);
   }
 }
 player_elec_damage() {
@@ -849,7 +849,7 @@ zombie_elec_death(flame_chance) {
     refs[6] = "head";
     self.a.gib_ref = refs[randomint(refs.size)];
 
-    playsoundatposition("zombie_arc", self.origin);
+    playSoundAtPosition("zombie_arc", self.origin);
     if(!self enemy_is_dog() && randomint(100) > 50) {
       self thread electroctute_death_fx();
       self thread play_elec_vocals();
@@ -977,11 +977,11 @@ check_for_change() {
 }
 
 extra_events() {
-  self UseTriggerRequireLookAt();
-  self SetCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
   self waittill("trigger");
 
-  targ = GetEnt(self.target, "targetname");
+  targ = getEnt(self.target, "targetname");
   if(isDefined(targ)) {
     targ MoveZ(-10, 5);
   }
@@ -997,7 +997,7 @@ flytrap() {
   level thread hide_and_seek_target("ee_perk_bear");
   wait_network_frame();
 
-  trig_control_panel = GetEnt("trig_ee_flytrap", "targetname");
+  trig_control_panel = getEnt("trig_ee_flytrap", "targetname");
 
   upgrade_hit = false;
   while(!upgrade_hit) {
@@ -1010,7 +1010,7 @@ flytrap() {
   }
 
   trig_control_panel playSound("flytrap_hit");
-  playsoundatposition("flytrap_creeper", trig_control_panel.origin);
+  playSoundAtPosition("flytrap_creeper", trig_control_panel.origin);
   thread play_sound_2d("sam_fly_laugh");
 
   level achievement_notify("DLC3_ZOMBIE_ANTI_GRAVITY");
@@ -1035,7 +1035,7 @@ hide_and_seek_target(target_name) {
     obj_array[i] Hide();
   }
 
-  trig = GetEnt("trig_" + target_name, "targetname");
+  trig = getEnt("trig_" + target_name, "targetname");
   trig trigger_off();
   flag_wait("hide_and_seek");
 
@@ -1059,16 +1059,16 @@ phono_egg_init(trigger_name, origin_name) {
   if(!isDefined(level.phono_counter)) {
     level.phono_counter = 0;
   }
-  players = getplayers();
-  phono_trig = getent(trigger_name, "targetname");
-  phono_origin = getent(origin_name, "targetname");
+  players = getPlayers();
+  phono_trig = getEnt(trigger_name, "targetname");
+  phono_origin = getEnt(origin_name, "targetname");
 
   if((!isDefined(phono_trig)) || (!isDefined(phono_origin))) {
     return;
   }
 
-  phono_trig UseTriggerRequireLookAt();
-  phono_trig SetCursorHint("HINT_NOICON");
+  phono_trig useTriggerRequireLookAt();
+  phono_trig setCursorHint("HINT_NOICON");
 
   for(i = 0; i < players.size; i++) {
     phono_trig waittill("trigger", players);
@@ -1094,16 +1094,16 @@ play_phono_egg() {
 }
 
 radio_egg_init(trigger_name, origin_name) {
-  players = getplayers();
-  radio_trig = getent(trigger_name, "targetname");
-  radio_origin = getent(origin_name, "targetname");
+  players = getPlayers();
+  radio_trig = getEnt(trigger_name, "targetname");
+  radio_origin = getEnt(origin_name, "targetname");
 
   if((!isDefined(radio_trig)) || (!isDefined(radio_origin))) {
     return;
   }
 
-  radio_trig UseTriggerRequireLookAt();
-  radio_trig SetCursorHint("HINT_NOICON");
+  radio_trig useTriggerRequireLookAt();
+  radio_trig setCursorHint("HINT_NOICON");
   radio_origin playLoopSound("radio_static");
 
   for(i = 0; i < players.size; i++) {
@@ -1114,7 +1114,7 @@ radio_egg_init(trigger_name, origin_name) {
   }
 }
 hanging_dead_guy(name) {
-  dead_guy = getent(name, "targetname");
+  dead_guy = getEnt(name, "targetname");
 
   if(!isDefined(dead_guy)) {
     return;
@@ -1141,13 +1141,13 @@ meteor_egg(trigger_name) {
       level.meteor_counter = 0;
     }
 
-    meteor_trig = getent(trigger_name, "targetname");
+    meteor_trig = getEnt(trigger_name, "targetname");
 
     if(!isDefined(meteor_trig)) {
       return;
     }
-    meteor_trig UseTriggerRequireLookAt();
-    meteor_trig SetCursorHint("HINT_NOICON");
+    meteor_trig useTriggerRequireLookAt();
+    meteor_trig setCursorHint("HINT_NOICON");
 
     meteor_trig waittill("trigger", player);
     player playSound("meteor_affirm");
@@ -1213,14 +1213,14 @@ play_giant_mythos_lines() {
 play_level_easteregg_vox(object) {
   percent = 35;
 
-  trig = getent(object, "targetname");
+  trig = getEnt(object, "targetname");
 
   if(!isDefined(trig)) {
     return;
   }
 
-  trig UseTriggerRequireLookAt();
-  trig SetCursorHint("HINT_NOICON");
+  trig useTriggerRequireLookAt();
+  trig setCursorHint("HINT_NOICON");
 
   while(1) {
     trig waittill("trigger", who);

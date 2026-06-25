@@ -153,8 +153,8 @@ restockAmmoAura(config) {
   self thread maps\mp\gametypes\_weapons::deleteOnDeath(trigger);
 
   if(isDefined(self.moving_platform)) {
-    trigger EnableLinkTo();
-    trigger LinkTo(self.moving_platform);
+    trigger EnablelinkTo();
+    trigger linkTo(self.moving_platform);
   }
 
   rangeSq = config.triggerRadius * config.triggerRadius;

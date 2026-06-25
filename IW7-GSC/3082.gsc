@@ -36,7 +36,7 @@ func_170A() {
 func_4911(var_0) {
   var_1 = spawn("script_model", self.origin);
   var_1 setModel("tag_origin");
-  var_1 linkto(self, var_0, (10, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, var_0, (10, 0, 0), (0, 0, 0));
   if(self.team == "axis") {
     playFXOnTag(level.var_7649["c12_enemy_light"], var_1, "tag_origin");
   } else {

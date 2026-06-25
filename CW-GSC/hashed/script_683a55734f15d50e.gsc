@@ -101,7 +101,7 @@ function random_weighted(array, weights) {
 function function_60eeb02c(spawninfo) {
   self setModel(spawninfo.modelname);
   self solid();
-  self disconnectpaths();
+  self disconnectPaths();
   self.modelname = spawninfo.modelname;
   self.angles = spawninfo.angles;
   self.targetname = spawninfo.targetname;
@@ -257,8 +257,8 @@ function function_7df596c3(item) {
       };
       idx = 0;
 
-      foreach(player in getplayers()) {
-        player setorigin(var_4200bfbf[idx].origin);
+      foreach(player in getPlayers()) {
+        player setOrigin(var_4200bfbf[idx].origin);
         player setplayerangles(var_4200bfbf[idx].angles);
         idx++;
       }

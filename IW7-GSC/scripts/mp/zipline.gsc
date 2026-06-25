@@ -16,13 +16,13 @@ init() {
     var_3.onbeginuse = ::onbeginuse;
     var_3.onuse = ::onuse;
     var_4 = [];
-    var_5 = getent(var_1[var_2].target, "targetname");
+    var_5 = getEnt(var_1[var_2].target, "targetname");
     if(!isDefined(var_5)) {}
 
     while(isDefined(var_5)) {
       var_4[var_4.size] = var_5;
       if(isDefined(var_5.target)) {
-        var_5 = getent(var_5.target, "targetname");
+        var_5 = getEnt(var_5.target, "targetname");
         continue;
       }
 
@@ -63,9 +63,9 @@ func_13EFA(var_0) {
       var_5 = var_4 * 0.2;
     }
 
-    var_1 moveto(var_2[var_3].origin, var_4, var_5);
+    var_1 moveTo(var_2[var_3].origin, var_4, var_5);
     if(var_1.angles != var_2[var_3].angles) {
-      var_1 rotateto(var_2[var_3].angles, var_4 * 0.8);
+      var_1 rotateTo(var_2[var_3].angles, var_4 * 0.8);
     }
 
     wait(var_4);

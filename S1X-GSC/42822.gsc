@@ -57,7 +57,7 @@ determine_sticky_position(var_0) {
         var_5["entity"] thread show_stuck_fanfare();
       }
 
-      var_6 linkto(var_5["entity"]);
+      var_6 linkTo(var_5["entity"]);
     }
 
     var_6 thread sticky_timer(var_0);
@@ -173,17 +173,17 @@ microdrone_think(var_0) {
     var_5 = 0;
 
     if(var_2 >= 0.35) {
-      var_6 = microdrone_get_best_target(var_1, vectornormalize(var_3), var_4, var_0);
+      var_6 = microdrone_get_best_target(var_1, vectorNormalize(var_3), var_4, var_0);
 
       if(isDefined(var_6)) {
-        self missile_settargetent(var_6, microdrone_get_target_offset(var_6));
+        self missile_settargetEnt(var_6, microdrone_get_target_offset(var_6));
         var_5 = 1;
         var_3 = var_4;
       }
     } else {}
 
     if(!var_5) {
-      var_7 = vectornormalize(var_3 + (0, 0, -400.0 * squared(var_2)));
+      var_7 = vectorNormalize(var_3 + (0, 0, -400.0 * squared(var_2)));
       self missile_settargetpos(self.origin + var_7 * 10000);
     }
 
@@ -205,7 +205,7 @@ microdrone_get_best_target(var_0, var_1, var_2, var_3) {
       continue;
     }
     var_9 = microdrone_get_target_pos(var_8);
-    var_10 = vectordot(vectornormalize(var_2), vectornormalize(var_9 - self.origin));
+    var_10 = vectordot(vectorNormalize(var_2), vectorNormalize(var_9 - self.origin));
 
     if(var_10 > var_6) {
       if(bullettracepassed(self.origin, var_9, 0, var_8)) {

@@ -40,7 +40,7 @@ set_deathmodel(v_point, v_dir) {
     str_deathmodel = self.deathmodel;
     self setModel(str_deathmodel);
     self playSound("evt_f35_explo");
-    playsoundatposition("evt_debris_flythrough", self.origin);
+    playSoundAtPosition("evt_debris_flythrough", self.origin);
   }
 
   deathmodel_pieces = [];
@@ -54,7 +54,7 @@ set_deathmodel(v_point, v_dir) {
     deathmodel_pieces[i] = spawn("script_model", self gettagorigin(str_model_tag));
     deathmodel_pieces[i].angles = self gettagangles(str_model_tag);
     deathmodel_pieces[i] setModel(str_model);
-    deathmodel_pieces[i] linkto(self, str_model_tag);
+    deathmodel_pieces[i] linkTo(self, str_model_tag);
   }
 
   if(isDefined(deathmodel_pieces) && deathmodel_pieces.size > 0) {
@@ -68,7 +68,7 @@ set_deathmodel(v_point, v_dir) {
     }
 
     for(i = 0; i < num_pieces; i++) {
-      vel_dir = vectornormalize(self.velocity);
+      vel_dir = vectorNormalize(self.velocity);
       deathmodel_pieces[i] unlink();
       deathmodel_pieces[i] movegravity(vel_dir * 1000, 5);
       deathmodel_pieces[i] rotate_dead_piece();

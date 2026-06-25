@@ -17,8 +17,8 @@ dead_script() {
 }
 
 player_start() {
-  var_0 = getent("player_intro_start", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = getEnt("player_intro_start", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
 }
 
@@ -144,7 +144,7 @@ main() {
   level.playerspeed = 0.85;
   level.player setmovespeedscale(level.playerspeed);
   common_scripts\utility::array_thread(getEntArray("civilian", "script_noteworthy"), ::ai_civilian_think);
-  level.org_view_roll = getent("org_view_roll", "targetname");
+  level.org_view_roll = getEnt("org_view_roll", "targetname");
   level.arollers = [];
   level.arollers = common_scripts\utility::array_add(level.arollers, level.org_view_roll);
   thread airmasks();
@@ -171,7 +171,7 @@ main() {
 
 start_default() {
   aa_intro_init();
-  var_0 = getent("plane_shell", "targetname");
+  var_0 = getEnt("plane_shell", "targetname");
   var_0 hide();
 }
 
@@ -214,14 +214,14 @@ aa_intro_init() {
 
 intro_fade_in() {
   var_0 = maps\jake_tools::create_overlay_element("black", 1);
-  var_1 = getent("cutaway_geo_floor", "targetname");
+  var_1 = getEnt("cutaway_geo_floor", "targetname");
   var_1 hide();
   var_2 = maps\jake_tools::create_overlay_element("airplane_hole_overlay", 1);
   level.player disableweapons();
-  var_3 = getent("cutaway_geo", "targetname");
-  var_4 = getent("org_intro_playerview", "targetname");
+  var_3 = getEnt("cutaway_geo", "targetname");
+  var_4 = getEnt("org_intro_playerview", "targetname");
   level.player.origin = var_4.origin;
-  level.player playerlinkto(var_4, undefined, 0, 0, 0, 0);
+  level.player playerlinkTo(var_4, undefined, 0, 0, 0, 0);
   var_4.origin = var_4.origin + (0, 20, -52);
   level.player freezecontrols(1);
   var_5 = spawn("script_origin", var_4.origin);
@@ -244,9 +244,9 @@ intro_fade_in() {
   level.player playersetgroundreferenceent(level.org_view_roll);
   level.price show();
   level.player unlink();
-  var_6 = getent("player_intro_start", "targetname");
+  var_6 = getEnt("player_intro_start", "targetname");
   thread common_scripts\utility::play_sound_in_space("gear_rattle_plr_run", level.player.origin);
-  level.player setorigin(var_6.origin);
+  level.player setOrigin(var_6.origin);
   level.player setplayerangles(var_6.angles);
   level.player.angles = var_6.angles;
   common_scripts\utility::flag_set("intro_fade_in_complete");
@@ -264,13 +264,13 @@ intro_fade_in() {
 
 intro_fade_in_h1() {
   var_0 = maps\jake_tools::create_overlay_element("black", 1);
-  var_1 = getent("player_intro_start", "targetname");
-  level.player setorigin(var_1.origin);
+  var_1 = getEnt("player_intro_start", "targetname");
+  level.player setOrigin(var_1.origin);
   level.player setplayerangles(var_1.angles);
   level.player.angles = var_1.angles;
   level.player disableweapons();
   level.player freezecontrols(1);
-  var_2 = getent("cutaway_geo", "targetname");
+  var_2 = getEnt("cutaway_geo", "targetname");
   var_2 hide();
   var_2 notsolid();
   wait 0.1;
@@ -296,11 +296,11 @@ cutaway_geo(var_0) {
   wait 0.15;
   wait 0.15;
   earthquake(0.1, 0.5, level.player.origin, 500);
-  level.player playrumbleonentity("generic_attack_light_500");
+  level.player playRumbleOnEntity("generic_attack_light_500");
 }
 
 intro_fade_in2() {
-  var_0 = getent("cutaway_geo", "targetname");
+  var_0 = getEnt("cutaway_geo", "targetname");
   var_0 hide();
   var_0 notsolid();
   level.player disableweapons();
@@ -349,7 +349,7 @@ stealth_intro() {
 
   level thread maps\_utility::radio_dialogue_queue("airplane_first_hostile_killed_2");
   maps\_utility::battlechatter_on("axis");
-  var_1 = getent("colornodes_intro", "script_noteworthy");
+  var_1 = getEnt("colornodes_intro", "script_noteworthy");
   var_1 notify("trigger", level.player);
   level.player.ignoreme = 0;
 
@@ -365,11 +365,11 @@ intro_setup() {
   common_scripts\utility::flag_wait("intro_fade_in_complete");
   maps\jake_tools::triggeractivate("trig_spawn_patrollers");
   level.price thread maps\_anim::anim_generic(level.price, "enemy_cornerR");
-  var_0 = getent("hostile_bathroom", "targetname");
+  var_0 = getEnt("hostile_bathroom", "targetname");
   var_0.script_forcespawn = 1;
   level.hostile_bathroom = var_0 maps\_utility::spawn_ai();
   level.hostile_bathroom thread hostile_bathroom_think();
-  var_1 = getent("bathroom_flush", "targetname");
+  var_1 = getEnt("bathroom_flush", "targetname");
   thread common_scripts\utility::play_sound_in_space("airplane_toiletflush", var_1.origin);
   wait 1;
   thread bathroom_door_open("bathroomdoor_01", "bathroomdoor_02");
@@ -419,7 +419,7 @@ dialogue_breach() {
 }
 
 hull_breach_rumble(var_0, var_1) {
-  level.player playrumbleonentity("generic_attack_heavy_1500");
+  level.player playRumbleOnEntity("generic_attack_heavy_1500");
   var_0 playrumblelooponentity("breach_loop");
 
   if(!var_1) {
@@ -431,7 +431,7 @@ hull_breach_rumble(var_0, var_1) {
     level.player playrumblelooponentity("generic_quake_loop");
     common_scripts\utility::flag_wait("plane_explodes");
     level.player stoprumble("generic_quake_loop");
-    level.player playrumbleonentity("generic_attack_heavy_1500");
+    level.player playRumbleOnEntity("generic_attack_heavy_1500");
     level.player playrumblelooponentity("generic_quake_loop");
     common_scripts\utility::flag_wait("cut_to_black");
     level.player stoprumble("generic_quake_loop");
@@ -441,8 +441,8 @@ hull_breach_rumble(var_0, var_1) {
 fuselage_breached() {
   common_scripts\utility::array_thread(getEntArray("animated_air_masks_breach", "targetname"), ::animated_breach_entity, "air_mask", "air_masks_breach_fall", "air_masks_breach_loop", 1, 0, 0.9);
   common_scripts\utility::array_thread(getEntArray("animated_air_masks", "targetname"), ::animated_breach_entity, "air_mask", "air_masks_fall", "air_masks_loop", 1, 0, 0.9);
-  var_0 = getent("breach_org1", "targetname");
-  var_1 = getent("breach_org2", "targetname");
+  var_0 = getEnt("breach_org1", "targetname");
+  var_1 = getEnt("breach_org2", "targetname");
   common_scripts\utility::flag_wait("player_approaching_breach");
 
   if(isDefined(level.macey.magic_bullet_shield)) {
@@ -509,7 +509,7 @@ animated_breach_entity(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(isDefined(self.target)) {
-    var_6 = getent(self.target, "targetname");
+    var_6 = getEnt(self.target, "targetname");
 
     if(isDefined(var_6) && issubstr(var_6.classname, "trigger_multiple")) {
       var_6 waittill("trigger");
@@ -563,7 +563,7 @@ breach_compartment_setup() {
 }
 
 breach_compartment_open(var_0, var_1) {
-  var_2 = getent(self.target, "targetname");
+  var_2 = getEnt(self.target, "targetname");
 
   if(isDefined(var_0)) {
     common_scripts\utility::flag_wait(var_0);
@@ -576,8 +576,8 @@ breach_compartment_open(var_0, var_1) {
 }
 
 breach_seat(var_0) {
-  var_1 = getent(self.target, "targetname");
-  var_2 = getent(var_1.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
+  var_2 = getEnt(var_1.target, "targetname");
   var_3 = undefined;
   var_4 = undefined;
   var_5 = undefined;
@@ -608,23 +608,23 @@ breach_seat(var_0) {
   }
 
   wait(var_3);
-  self rotateyaw(var_4, var_5, var_5 / 3);
+  self rotateYaw(var_4, var_5, var_5 / 3);
   wait(var_5);
-  self moveto(var_1.origin, var_6);
-  self rotateto(var_1.angles, var_6);
+  self moveTo(var_1.origin, var_6);
+  self rotateTo(var_1.angles, var_6);
   wait(var_6);
-  self moveto(var_2.origin, var_7);
-  self rotateto(var_2.angles, var_7);
+  self moveTo(var_2.origin, var_7);
+  self rotateTo(var_2.angles, var_7);
   wait(var_7);
   self delete();
 }
 
 breach_gravity_shift() {
-  var_0 = getent("org_breach_push", "targetname");
+  var_0 = getEnt("org_breach_push", "targetname");
   wait 1;
   thread gravity_shift(25);
-  var_1 = getent("breach_physics", "targetname");
-  var_2 = getent("breach_org1", "targetname");
+  var_1 = getEnt("breach_physics", "targetname");
+  var_2 = getEnt("breach_org1", "targetname");
   var_1 thread maps\_utility::physicsjolt_proximity(5000, 2500, (0, 0, 0.25));
   common_scripts\utility::flag_wait("player_up_breach_stairs");
   common_scripts\utility::flag_clear("aa_first_floor_section");
@@ -632,14 +632,14 @@ breach_gravity_shift() {
   var_1 notify("stop_physicsjolt");
   common_scripts\utility::flag_wait("exit_door_blown");
   thread final_roll();
-  var_3 = getent("shake_org", "targetname");
+  var_3 = getEnt("shake_org", "targetname");
   var_3 thread maps\_utility::physicsjolt_proximity(5000, 2500, (0, 0, 0.25));
   common_scripts\utility::flag_wait("player_jumped_out");
   var_3 notify("stop_physicsjolt");
 }
 
 airplane_tirescheat() {
-  var_0 = common_scripts\utility::getstruct("airplane_tires_destination", "targetname");
+  var_0 = common_scripts\utility::getStruct("airplane_tires_destination", "targetname");
 
   if(!isDefined(var_0)) {
     return;
@@ -651,7 +651,7 @@ airplane_tirescheat() {
           continue;
         }
         var_3 = var_0.origin - var_2.origin;
-        var_3 = vectornormalize(var_3);
+        var_3 = vectorNormalize(var_3);
         var_3 = var_3 + (0, 0, 1);
         var_3 = maps\_utility::vector_multiply(var_3, randomintrange(1600, 3200));
         applyaccelerationonentity(var_2, (0, 0, 0), var_3);
@@ -719,7 +719,7 @@ dialogue_humanshield() {
 }
 
 blood_pool() {
-  var_0 = getent("blood_pool", "targetname");
+  var_0 = getEnt("blood_pool", "targetname");
   common_scripts\utility::flag_wait("human_shield_over");
 
   if(level.playergotheadshot) {
@@ -758,7 +758,7 @@ teleport_human_shield(var_0) {
   maps\_utility::disable_ai_color();
   self forceteleport(var_0.origin, var_0.angles);
   self setgoalpos(self.origin);
-  maps\jake_tools::setgoalradius(var_0.radius);
+  maps\jake_tools::setgoalRadius(var_0.radius);
   self setgoalnode(var_0);
 }
 
@@ -777,7 +777,7 @@ humanshield() {
   thread door_open_double(getEntArray("door_bar", "targetname"));
   maps\_utility::delaythread(1, ::player_hearbeat);
   thread humanshield_player_weapon();
-  var_0 = getent("org_humanshield_playerview", "targetname");
+  var_0 = getEnt("org_humanshield_playerview", "targetname");
   var_0.origin = level.player.origin;
   create_playerview(var_0);
   var_1 = 0.5;
@@ -975,8 +975,8 @@ headshot_fx() {
 }
 
 suitcase_splatter() {
-  var_0 = getent("splatter", "targetname");
-  var_1 = getent("bomb_flash", "targetname");
+  var_0 = getEnt("splatter", "targetname");
+  var_1 = getEnt("bomb_flash", "targetname");
   var_2 = var_0.angles;
   var_3 = anglesToForward(var_2);
   var_4 = maps\_utility::vector_multiply(var_3, 10000);
@@ -1105,7 +1105,7 @@ dialogue_jumped_out() {
 }
 
 bomb_think() {
-  var_0 = getent("bomb_flash", "targetname");
+  var_0 = getEnt("bomb_flash", "targetname");
   level waittill("timer_tick");
   playFX(common_scripts\utility::getfx("c4_light_blink"), var_0.origin + (0, 0, 0));
 }
@@ -1188,7 +1188,7 @@ freefall() {
   common_scripts\utility::flag_wait("exit_door_blown");
   common_scripts\utility::flag_set("obj_freefall_given");
   thread exit_door_fx();
-  var_0 = getent("trig_exit_door", "targetname");
+  var_0 = getEnt("trig_exit_door", "targetname");
   var_0 waittill("trigger");
 
   if(getdvarint("use_old_airplane_jump") != 1) {
@@ -1217,7 +1217,7 @@ freefall() {
     var_1 show();
     level.nodefreefall thread maps\_anim::anim_single_solo(var_1, "airplane_end_player");
     wait 0.45;
-    level.player playrumbleonentity("generic_attack_heavy_1500");
+    level.player playRumbleOnEntity("generic_attack_heavy_1500");
   }
 
   thread freefall_camerashake();
@@ -1233,32 +1233,32 @@ freefall() {
     wait 0.5;
   }
 
-  var_2 = getent("plane_shell", "targetname");
+  var_2 = getEnt("plane_shell", "targetname");
   var_2 show();
-  var_3 = getent("plane_wings", "targetname");
+  var_3 = getEnt("plane_wings", "targetname");
   var_3 hide();
   level.player_sound_org = spawn("script_origin", level.player.origin + (0, 0, 32));
-  level.player_sound_org linkto(level.player);
+  level.player_sound_org linkTo(level.player);
   level.player_sound_org playLoopSound("airplane_wind_loop");
   var_4 = 1;
   var_5 = 1;
   var_6 = 1;
   var_7 = 1;
   var_8 = 1;
-  var_9 = getent("org_player_freefall", "targetname");
+  var_9 = getEnt("org_player_freefall", "targetname");
   var_10 = 0.2;
 
   if(getdvarint("use_old_airplane_jump") == 1) {
     common_scripts\utility::flag_wait("white_done");
     level.player setplayerangles(var_9.angles);
-    level.player setorigin(var_9.origin);
-    level.player playerlinkto(var_9);
-    var_11 = getent(var_9.target, "targetname");
+    level.player setOrigin(var_9.origin);
+    level.player playerlinkTo(var_9);
+    var_11 = getEnt(var_9.target, "targetname");
     var_10 = 4;
     thread plane_explodes();
     level.player unlink();
     maps\_utility::lerp_player_view_to_position(var_11.origin, var_11.angles, var_10, var_4, var_5, var_6, var_7, var_8);
-    level.player playerlinkto(var_11);
+    level.player playerlinkTo(var_11);
   } else {
     wait 0.3;
     thread plane_explodes();
@@ -1287,8 +1287,8 @@ white_flash(var_0) {
 
 exit_door_fx() {
   common_scripts\utility::array_thread(level.fxexitdoor, maps\_utility::restarteffect);
-  var_0 = getent("exit_org1", "targetname");
-  var_1 = getent("exit_org2", "targetname");
+  var_0 = getEnt("exit_org1", "targetname");
+  var_1 = getEnt("exit_org2", "targetname");
   var_0 playLoopSound("airplane_wind_loop");
   wait 1;
   var_1 playLoopSound("airplane_wind_loop");
@@ -1347,12 +1347,12 @@ end_sound_stop() {
 }
 
 friendly_blows_door() {
-  var_0 = getent("org_exit_door", "targetname");
+  var_0 = getEnt("org_exit_door", "targetname");
   var_1 = getnode("node_door", "targetname");
   var_2 = spawn("script_origin", var_1.origin);
   var_2.origin = var_2.origin + (0, -50, 0);
   var_2.angles = var_2.angles + (0, 90, 0);
-  var_3 = getent("c4_door", "targetname");
+  var_3 = getEnt("c4_door", "targetname");
   level.grigsby maps\_utility::disable_ai_color();
   level.grigsby.ignoreme = 1;
   level.grigsby.goalradius = 32;
@@ -1470,7 +1470,7 @@ airmask_think() {
   self.dummy = spawn("script_origin", self.origin + (0, 0, 30));
   self.dummy.angles = level.org_view_roll.angles;
   level.arollers = common_scripts\utility::array_add(level.arollers, self.dummy);
-  self linkto(self.dummy);
+  self linkTo(self.dummy);
   self.dummy movez(45, 0.1);
   self hide();
   common_scripts\utility::flag_wait("fuselage_breached");
@@ -1503,7 +1503,7 @@ airmask_think() {
 airmask_breach_think() {
   self.dummy = spawn("script_origin", self.origin);
   self.dummy.angles = level.org_view_roll.angles;
-  self linkto(self.dummy);
+  self linkTo(self.dummy);
   self.dummy movez(45, 0.1);
   self hide();
   common_scripts\utility::flag_wait("fuselage_breached");
@@ -1533,11 +1533,11 @@ airmask_breach_think() {
 obj_rescue_vip() {
   common_scripts\utility::flag_wait("obj_rescue_vip_given");
   var_0 = 1;
-  var_1 = getent("obj_rescue_vip1", "targetname");
+  var_1 = getEnt("obj_rescue_vip1", "targetname");
   objective_add(var_0, "active", &"AIRPLANE_OBJ_RESCUE_VIP", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("player_up_breach_stairs");
-  var_2 = getent("obj_rescue_vip2", "targetname");
+  var_2 = getEnt("obj_rescue_vip2", "targetname");
   objective_position(var_0, var_2.origin);
   common_scripts\utility::flag_wait("obj_rescue_vip_complete");
   objective_state(var_0, "done");
@@ -1546,7 +1546,7 @@ obj_rescue_vip() {
 obj_freefall() {
   common_scripts\utility::flag_wait("obj_freefall_given");
   var_0 = 2;
-  var_1 = getent("obj_freefall", "targetname");
+  var_1 = getEnt("obj_freefall", "targetname");
   objective_add(var_0, "active", &"AIRPLANE_OBJ_FREEFALL", var_1.origin);
   objective_current(var_0);
   common_scripts\utility::flag_wait("obj_freefall_complete");
@@ -1555,7 +1555,7 @@ obj_freefall() {
 
 weapon_detect() {
   level endon("enemies_alerted");
-  var_0 = getent("intro_damage", "targetname");
+  var_0 = getEnt("intro_damage", "targetname");
   var_0 waittill("trigger");
 
   if(!common_scripts\utility::flag("enemies_alerted")) {
@@ -1587,9 +1587,9 @@ player_breach_jump() {
   common_scripts\utility::flag_wait("player_breach_jump");
   level notify("mission failed");
   thread white_flash(0.35);
-  var_0 = getent("plane_shell", "targetname");
+  var_0 = getEnt("plane_shell", "targetname");
   var_0 show();
-  var_1 = getent("plane_wings", "targetname");
+  var_1 = getEnt("plane_wings", "targetname");
   var_1 hide();
   thread killtimer();
   level notify("kill_timer");
@@ -1648,7 +1648,7 @@ create_playerview(var_0) {
   level.eplayerview hide();
   level.eplayerview.origin = var_0.origin;
   level.eplayerview.angles = var_0.angles;
-  level.eplayerview linkto(var_0);
+  level.eplayerview linkTo(var_0);
 }
 
 door_open_double(var_0) {
@@ -1680,13 +1680,13 @@ door_open_double(var_0) {
     }
   }
 
-  var_3 linkto(var_1);
-  var_4 linkto(var_2);
+  var_3 linkTo(var_1);
+  var_4 linkTo(var_2);
   thread common_scripts\utility::play_sound_in_space("wood_door_kick", var_5.origin);
   playFX(common_scripts\utility::getfx("door_kick_dust"), var_5.origin);
   var_8 = 0.6;
-  var_1 rotateyaw(-165, var_8, 0, var_8 / 2);
-  var_2 rotateyaw(175, var_8, 0, var_8 / 2);
+  var_1 rotateYaw(-165, var_8, 0, var_8 / 2);
+  var_2 rotateYaw(175, var_8, 0, var_8 / 2);
   var_1 connectpaths();
   var_2 connectpaths();
   var_1 movex(2, var_8);
@@ -1695,27 +1695,27 @@ door_open_double(var_0) {
 
 bathroom_door_open(var_0, var_1) {
   thread bathroom_dude_clear();
-  var_2 = getent("blocker_bathroom_door", "targetname");
+  var_2 = getEnt("blocker_bathroom_door", "targetname");
   var_2 hide();
   var_2 notsolid();
   var_2 connectpaths();
-  var_3 = getent(var_0, "targetname");
-  var_4 = getent(var_1, "targetname");
-  var_5 = getent(var_0 + "_model", "targetname");
-  var_6 = getent(var_1 + "_model", "targetname");
-  var_5 linkto(var_3);
-  var_6 linkto(var_4);
+  var_3 = getEnt(var_0, "targetname");
+  var_4 = getEnt(var_1, "targetname");
+  var_5 = getEnt(var_0 + "_model", "targetname");
+  var_6 = getEnt(var_1 + "_model", "targetname");
+  var_5 linkTo(var_3);
+  var_6 linkTo(var_4);
   thread common_scripts\utility::play_sound_in_space("airplane_bathroom_door_open", var_3.origin);
   var_7 = 1;
-  var_3 rotateyaw(90, var_7, var_7 / 2, var_7 / 2);
+  var_3 rotateYaw(90, var_7, var_7 / 2, var_7 / 2);
   var_3 movey(1, var_7);
   var_3 connectpaths();
-  var_4 rotateyaw(-90, var_7, var_7 / 2, var_7 / 2);
+  var_4 rotateYaw(-90, var_7, var_7 / 2, var_7 / 2);
   var_4 connectpaths();
   var_4 movex(25, var_7);
   wait 2;
   common_scripts\utility::flag_wait("bathroom_dude_clear");
-  var_8 = getent("bathroom_volume", "targetname");
+  var_8 = getEnt("bathroom_volume", "targetname");
   badplace_brush("badplace_bathroom", 0, var_8, "allies", "axis");
 
   for(;;) {
@@ -1729,17 +1729,17 @@ bathroom_door_open(var_0, var_1) {
   thread common_scripts\utility::play_sound_in_space("airplane_bathroom_door_close", var_3.origin);
   var_2 show();
   var_2 solid();
-  var_2 disconnectpaths();
-  var_3 rotateyaw(-90, var_7, var_7 / 2, var_7 / 2);
-  var_3 disconnectpaths();
-  var_4 rotateyaw(90, var_7, var_7 / 2, var_7 / 2);
-  var_4 disconnectpaths();
+  var_2 disconnectPaths();
+  var_3 rotateYaw(-90, var_7, var_7 / 2, var_7 / 2);
+  var_3 disconnectPaths();
+  var_4 rotateYaw(90, var_7, var_7 / 2, var_7 / 2);
+  var_4 disconnectPaths();
   var_4 movex(-25, var_7);
   badplace_delete("badplace_bathroom");
 }
 
 bathroom_dude_clear() {
-  var_0 = getent("bathroom_dude_clear", "targetname");
+  var_0 = getEnt("bathroom_dude_clear", "targetname");
 
   while(!common_scripts\utility::flag("bathroom_dude_clear")) {
     var_0 waittill("trigger", var_1);
@@ -1955,7 +1955,7 @@ ai_allies_think() {
 }
 
 ai_civilian_think() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = var_0.script_noteworthy;
   var_2 = maps\_vehicle_aianim::convert_guy_to_drone(self);
   var_2.allowdeath = 0;
@@ -2151,7 +2151,7 @@ initfriendlies(var_0) {
   }
 
   common_scripts\utility::flag_wait("intro_fade_in_complete");
-  level.player setorigin(var_5.origin);
+  level.player setOrigin(var_5.origin);
   level.player setplayerangles(var_5.angles);
 }
 
@@ -2167,7 +2167,7 @@ demo_setup() {
   common_scripts\utility::flag_set("part3");
   common_scripts\utility::flag_set("part4");
   common_scripts\utility::flag_set("part5");
-  var_0 = getent("demo_spawners", "target");
+  var_0 = getEnt("demo_spawners", "target");
   var_0 notify("trigger");
   wait 0.1;
   var_1 = getaiarray("allies");
@@ -2307,7 +2307,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
       var_10 = getanimlength(level.scr_anim[self.animname][var_3]);
       var_9 thread maps\_anim::anim_single_solo(self, var_3);
       wait(var_10 - 0.2);
-      self stopanimscripted();
+      self stopanimScripted();
       var_9 delete();
       var_3 = undefined;
 
@@ -2373,7 +2373,7 @@ enable_cqbwalk_ign_demo_wrapper() {
 
 addgasmaskcracks() {
   var_0 = 250;
-  var_1 = getent("breach_physics", "targetname");
+  var_1 = getEnt("breach_physics", "targetname");
 
   if(distancesquared(level.player.origin, var_1.origin) < var_0 * var_0) {
     level.maskcracksfx = spawnfx(level._effect["goggles_cracks"], level.player.origin);

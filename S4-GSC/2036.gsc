@@ -59,7 +59,7 @@ _id_9842() {
     }
 
     self playlocalsound("maaws_reticle_tracking");
-    self playrumbleonentity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
     wait 0.6;
   }
 }
@@ -78,7 +78,7 @@ _id_9841() {
       level._id_731C playlocalsound("maaws_incoming_lp");
     }
 
-    self playrumbleonentity("ac130_25mm_fire");
+    self playRumbleOnEntity("ac130_25mm_fire");
     wait 0.25;
   }
 }

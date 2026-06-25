@@ -213,12 +213,12 @@ _id_48B0(var_0, var_1, var_2) {
     var_26 = 20.0;
     var_27 = anglesToForward(var_22);
     var_28 = var_27 * self _meth_864B();
-    var_29 = vectornormalize(var_27) * 5.0;
+    var_29 = vectorNormalize(var_27) * 5.0;
     var_30 = self _meth_86F4(var_26, var_28, var_29);
 
     switch (var_30[0]) {
       case 1:
-        var_30[1] = vectornormalize(var_30[1]);
+        var_30[1] = vectorNormalize(var_30[1]);
         var_31 = vectortoangles(var_30[1]);
         var_32 = scripts\engine\math::_id_10FA2(-179, 179, _func_000B(var_31[1] - var_10[1]));
         var_33 = _func_0325(var_32, 45);
@@ -858,7 +858,7 @@ _id_DBF4(var_0, var_1, var_2, var_3) {
 
   var_7 = _func_0261(self._id_027F);
 
-  if(vectordot(vectornormalize(self._id_04DF), vectornormalize(self._id_027F)) < 0.9) {
+  if(vectordot(vectorNormalize(self._id_04DF), vectorNormalize(self._id_027F)) < 0.9) {
     return 0;
   }
 
@@ -1041,7 +1041,7 @@ _id_B33A(var_0, var_1, var_2) {
     }
 
     if(isDefined(var_19)) {
-      var_20 = vectornormalize(var_19 - var_16);
+      var_20 = vectorNormalize(var_19 - var_16);
       var_13 = _func_0261(var_20);
       var_14 = var_19;
     }
@@ -1442,9 +1442,9 @@ _id_178F() {
   var_2 = var_0 - var_1;
   var_3 = anglesToForward(self.angles);
   var_4 = _func_025B(var_3, var_2);
-  var_5 = vectornormalize(var_4);
-  var_6 = vectornormalize(var_2);
-  var_7 = vectornormalize(var_3);
+  var_5 = vectorNormalize(var_4);
+  var_6 = vectorNormalize(var_2);
+  var_7 = vectorNormalize(var_3);
   var_8 = vectordot(var_6, var_7);
 
   if(isDefined(self._id_1098C)) {

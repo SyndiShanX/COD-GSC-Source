@@ -82,7 +82,7 @@ main() {
 
   if(isDefined(claymores)) {
     foreach(struct in claymores) {
-      weapon_model = getstruct(struct.target, "targetname");
+      weapon_model = getStruct(struct.target, "targetname");
 
       if(isDefined(weapon_model)) {
         weapon_model.script_vector = vectorscale((0, -1, 0), 90.0);
@@ -142,7 +142,7 @@ rumble_and_shake_the_player(localclientnum, fieldname) {
     if(!self islocalplayer() || isspectating(localclientnum, 0) || isDefined(level.localplayers[localclientnum]) && self getentitynumber() != level.localplayers[localclientnum] getentitynumber()) {
       return;
     }
-    self playrumbleonentity(localclientnum, "grenade_rumble");
+    self playRumbleOnEntity(localclientnum, "grenade_rumble");
     time = randomfloatrange(0.5, 1);
 
     if(counter % 3 == 0 && randomint(100) > 50) {
@@ -156,13 +156,13 @@ rumble_and_shake_the_player(localclientnum, fieldname) {
       wait 0.1;
 
       if(randomint(100) > 25) {
-        self playrumbleonentity(localclientnum, "pullout_small");
+        self playRumbleOnEntity(localclientnum, "pullout_small");
       }
     }
   }
 
   self earthquake(0.5, 1, self.origin, 100);
-  self playrumbleonentity(localclientnum, "grenade_rumble");
+  self playRumbleOnEntity(localclientnum, "grenade_rumble");
 }
 
 infog_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

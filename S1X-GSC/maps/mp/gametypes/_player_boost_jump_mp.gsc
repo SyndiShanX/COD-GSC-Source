@@ -28,7 +28,7 @@ play_boost_sound() {
     is_jumping = self IsJumping();
     if(is_jumping) {
       if(is_jumping != was_jumping) {
-        self PlayRumbleOnEntity("damage_heavy");
+        self playRumbleOnEntity("damage_heavy");
         playSoundinSpace("boost_jump_plr_mp", self.origin);
       }
     }

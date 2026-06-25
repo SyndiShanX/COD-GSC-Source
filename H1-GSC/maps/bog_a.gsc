@@ -36,9 +36,9 @@ main() {
 
   setDvar("use_old_meleestruggle", 1);
   setsaveddvar("r_specularColorScale", "2.42");
-  var_0 = getent("real", "targetname");
+  var_0 = getEnt("real", "targetname");
   level.player setplayerangles(var_0.angles);
-  level.player setorigin(var_0.origin);
+  level.player setOrigin(var_0.origin);
   setsaveddvar("compassMaxRange", 2500);
   precacheitem("rpg_straight");
   precacheitem("cobra_ffar_bog_a_lite");
@@ -204,7 +204,7 @@ main() {
   var_8 = getEntArray("threatbias_normal", "targetname");
   common_scripts\utility::array_thread(var_8, maps\bog_a_code::threatbias_normal_trigger);
   thread apartment_second_floor();
-  var_9 = getent("alley_balcony_guy", "script_noteworthy");
+  var_9 = getEnt("alley_balcony_guy", "script_noteworthy");
   var_9 thread maps\_utility::add_spawn_function(maps\bog_a_code::alley_balcony_guy);
   var_10 = getEntArray("alley_longrange_guy", "script_noteworthy");
   common_scripts\utility::array_thread(var_10, maps\_utility::add_spawn_function, maps\bog_a_code::alley_sniper_engagementdistance);
@@ -216,9 +216,9 @@ main() {
   common_scripts\utility::array_thread(var_13, maps\_utility::add_spawn_function, maps\bog_a_code::alley_roof_guy);
   var_14 = getEntArray("alley_playerseeker", "script_noteworthy");
   common_scripts\utility::array_thread(var_14, maps\_utility::add_spawn_function, maps\bog_a_code::alley_smg_playerseeker);
-  var_15 = getent("breach_1", "script_noteworthy");
+  var_15 = getEnt("breach_1", "script_noteworthy");
   var_15 thread maps\_utility::add_spawn_function(maps\bog_a_code::die_after_spawn, 1.5);
-  var_16 = getent("breach_2", "script_noteworthy");
+  var_16 = getEnt("breach_2", "script_noteworthy");
   var_16 thread maps\_utility::add_spawn_function(maps\bog_a_code::die_after_spawn, 4.95);
   thread maps\bog_a_code::shanty_fence_cut_setup();
   thread music();
@@ -237,20 +237,20 @@ ambush() {
   maps\bog_a_code::remove_corner_ai_blocker();
   var_1 = getEntArray("initial_friendly", "targetname");
   common_scripts\utility::array_thread(var_1, maps\bog_a_code::initial_friendly_setup);
-  level.price = getent("price", "targetname");
+  level.price = getEnt("price", "targetname");
   maps\_utility::spawn_failed(level.price);
   level.price maps\_utility::make_hero();
   level.price thread run_down_street();
   level.price.animname = "price";
   level.price thread maps\_utility::magic_bullet_shield();
   level.price.animplaybackrate = 1;
-  level.mark = getent("friendly3", "script_noteworthy");
+  level.mark = getEnt("friendly3", "script_noteworthy");
   level.mark thread maps\_utility::magic_bullet_shield();
   level.mark maps\_utility::make_hero();
   thread friendlies_advance_up_the_bridge();
   level.price thread maps\_anim::anim_single_queue(level.price, "tank_is_stuck");
-  var_2 = getent("friendly1", "script_noteworthy");
-  var_3 = getent("friendly2", "script_noteworthy");
+  var_2 = getEnt("friendly1", "script_noteworthy");
+  var_3 = getEnt("friendly2", "script_noteworthy");
   var_2.animname = "generic";
   var_3.animname = "generic";
   var_2 maps\_utility::delaythread(0, maps\_anim::anim_single_solo, var_2, "spin");
@@ -262,7 +262,7 @@ ambush() {
 }
 
 price_blends_into_run() {
-  level.price stopanimscripted();
+  level.price stopanimScripted();
   level.price notify("single anim", "end");
 }
 
@@ -273,26 +273,26 @@ ambush_enemies() {
   common_scripts\utility::array_thread(var_1, maps\bog_a_code::increase_goal_radius_when_friendlies_flank);
   var_2 = getEntArray("ambusher_spawner", "targetname");
   common_scripts\utility::array_thread(var_2, maps\_spawner::flood_spawner_think);
-  var_3 = getent("window_mg_spawner", "script_noteworthy");
+  var_3 = getEnt("window_mg_spawner", "script_noteworthy");
   var_3 maps\_utility::add_spawn_function(maps\bog_a_code::set_threatbias_group, "upstairs_window_enemies");
   waittillframeend;
 }
 
 friendlies_advance_up_the_bridge() {
-  var_0 = getent("lose_goal_volume_trigger", "targetname");
+  var_0 = getEnt("lose_goal_volume_trigger", "targetname");
   var_0 thread maps\bog_a_code::lose_goal_volume();
   maps\_utility::clear_promotion_order();
   maps\_utility::set_promotion_order("c", "y");
   maps\_utility::set_promotion_order("b", "y");
-  level.respawn_spawner = getent("respawn_spawner", "targetname");
+  level.respawn_spawner = getEnt("respawn_spawner", "targetname");
   thread ambush_trigger();
-  var_1 = getent("friendly1", "script_noteworthy");
-  var_2 = getent("friendly2", "script_noteworthy");
-  var_3 = getent("friendly3", "script_noteworthy");
-  var_4 = getent("friendly4", "script_noteworthy");
-  var_5 = getent("friendly5", "script_noteworthy");
-  var_6 = getent("friendly6", "script_noteworthy");
-  var_7 = getent("friendly7", "script_noteworthy");
+  var_1 = getEnt("friendly1", "script_noteworthy");
+  var_2 = getEnt("friendly2", "script_noteworthy");
+  var_3 = getEnt("friendly3", "script_noteworthy");
+  var_4 = getEnt("friendly4", "script_noteworthy");
+  var_5 = getEnt("friendly5", "script_noteworthy");
+  var_6 = getEnt("friendly6", "script_noteworthy");
+  var_7 = getEnt("friendly7", "script_noteworthy");
   var_3 allowedstances("crouch");
   var_4 allowedstances("crouch");
   var_7 allowedstances("crouch");
@@ -327,7 +327,7 @@ friendlies_advance_up_the_bridge() {
   wait 2.5;
   thread maps\_flare::flare_from_targetname("flare");
   common_scripts\_exploder::exploder(1);
-  var_12 = getent("underground_obj_org", "targetname");
+  var_12 = getEnt("underground_obj_org", "targetname");
   common_scripts\utility::run_thread_on_targetname("update_underground_obj_trigger", maps\bog_a_code::update_apartment_objective_position);
   objective_add(2, "active", &"BOG_A_ELIMINATE_ENEMY_FORCES", var_12.origin);
   objective_indentlevel(2, 1);
@@ -407,7 +407,7 @@ ambush_trigger() {
   common_scripts\utility::array_thread(var_0, maps\bog_a_code::scr_setmode, "manual");
   var_1 = var_0[0];
   var_2 = var_0[1];
-  var_3 = getent("ambush_trigger", "targetname");
+  var_3 = getEnt("ambush_trigger", "targetname");
   var_4 = [];
   var_5 = [];
 
@@ -495,7 +495,7 @@ handle_player_flanking() {
 
 player_flanks_right_or_goes_straight() {
   handle_player_flanking();
-  var_0 = getent("ai_apartment_flank_blocker", "targetname");
+  var_0 = getEnt("ai_apartment_flank_blocker", "targetname");
   var_0 connectpaths();
   var_0 delete();
   maps\_utility::activate_trigger_with_targetname("friendlies_moves_through_first_building");
@@ -594,7 +594,7 @@ flanks_apartment() {
 friendly_bridge_flank_grabber() {
   level endon("player_heads_towards_apartment");
   thread friendly_flank_deleter();
-  var_0 = getent("friendly_bridge_trigger", "targetname");
+  var_0 = getEnt("friendly_bridge_trigger", "targetname");
   var_1 = 2;
   wait 5;
 
@@ -625,7 +625,7 @@ friendly_bridge_flank_grabber() {
 
 friendly_flank_deleter() {
   level endon("player_heads_towards_apartment");
-  var_0 = getent("allies_apartment_delete", "targetname");
+  var_0 = getEnt("allies_apartment_delete", "targetname");
 
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -703,7 +703,7 @@ apartment_second_floor() {
   wait 3;
   maps\_utility::activate_trigger_with_targetname("friendlies_storm_second_floor");
   common_scripts\utility::flag_set("player_can_trigger_rubble_attack");
-  var_1 = getent("second_floor_pacifist_trigger", "script_noteworthy");
+  var_1 = getEnt("second_floor_pacifist_trigger", "script_noteworthy");
   var_1 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("rubble_room_cleared");
   common_scripts\utility::flag_set("second_floor_door_breach_initiated");
@@ -723,7 +723,7 @@ apartment_second_floor() {
   var_3 = common_scripts\utility::array_combine(var_3, var_5);
   common_scripts\utility::array_thread(var_3, maps\bog_a_code::die_shortly);
   wait 1;
-  var_6 = getent("door_trace_org", "targetname");
+  var_6 = getEnt("door_trace_org", "targetname");
   maps\bog_a_code::waittill_player_not_looking(var_6.origin);
   thread open_laundrymat();
   thread price_talks_to_hq();
@@ -793,8 +793,8 @@ player_mg_laser_hint() {
   if(common_scripts\utility::flag("unreachable_apartment_cleared")) {
     return;
   }
-  var_0 = getent("laser_hint_ent", "targetname");
-  var_1 = getent(var_0.target, "targetname");
+  var_0 = getEnt("laser_hint_ent", "targetname");
+  var_1 = getEnt(var_0.target, "targetname");
   var_2 = var_0 maps\bog_a_code::get_laser();
   var_2.origin = var_0.origin;
   var_2.angles = vectortoangles(var_1.origin - var_0.origin);
@@ -849,7 +849,7 @@ fight_across_the_gap_until_the_enemies_die() {
     wait 1;
   }
 
-  var_2 = getent("upper_floor_hiding_blocker", "targetname");
+  var_2 = getEnt("upper_floor_hiding_blocker", "targetname");
   var_2 connectpaths();
   var_2 delete();
   var_3 = maps\bog_a_code::spawn_guy_from_targetname("upper_floor_hiding_spawner");
@@ -872,7 +872,7 @@ javelin_guy_spawns() {
   common_scripts\utility::flag_wait("contact_on_the_overpado!");
   maps\bog_a_code::wait_until_price_reaches_his_trigger();
   maps\bog_a_code::wait_for_friendlies_to_reach_alley_goal();
-  var_0 = getent("javelin_spawner", "targetname");
+  var_0 = getEnt("javelin_spawner", "targetname");
   var_1 = var_0 maps\_utility::try_forever_spawn();
   var_1 thread javelin_guy_runs_in();
 }
@@ -887,15 +887,15 @@ javelin_guy_runs_in() {
   maps\_utility::make_hero();
   var_0 = spawn("script_model", (0, 0, 0));
   var_0 setModel("weapon_javelin");
-  var_0 linkto(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "tag_weapon_right", (0, 0, 0), (0, 0, 0));
   level.javmodel = var_0;
-  var_1 = getent(self.target, "targetname");
+  var_1 = getEnt(self.target, "targetname");
   var_1 maps\_anim::anim_reach_solo(self, "hangout_arrival");
   var_1 maps\_anim::anim_single_solo(self, "hangout_arrival");
   var_1 thread maps\_anim::anim_loop_solo(self, "hangout_idle", undefined, "stop_looping");
   common_scripts\utility::flag_set("jav_guy_ready_for_briefing");
   var_1 notify("stop_looping");
-  self stopanimscripted();
+  self stopanimScripted();
   var_2 = getnode("jav_drop", "targetname");
   var_1.origin = var_2.origin;
   self.ignorerandombulletdamage = 1;
@@ -1011,10 +1011,10 @@ open_laundrymat() {
   maps\_utility::set_empty_promotion_order("o");
   maps\_utility::set_empty_promotion_order("g");
   maps\_utility::set_promotion_order("r", "o");
-  var_0 = getent("apartment_door", "targetname");
+  var_0 = getEnt("apartment_door", "targetname");
   var_0 playSound("door_wood_slow_open");
   var_0 connectpaths();
-  var_0 rotateyaw(-100, 1, 0.5, 0);
+  var_0 rotateYaw(-100, 1, 0.5, 0);
   wait 1;
   objective_state(2, "done");
   maps\_utility::arcademode_checkpoint(8, "a");
@@ -1027,7 +1027,7 @@ open_laundrymat() {
 }
 
 kick_ac_unit(var_0) {
-  var_1 = getent("window_ac_unit", "targetname");
+  var_1 = getEnt("window_ac_unit", "targetname");
   var_1 stoploopsound("bog_ac_loop");
   var_1 playSound("bog_ac_kick");
   wait 1;
@@ -1048,9 +1048,9 @@ laundryroom_saw_gunner() {
   var_0 maps\_utility::make_hero();
   var_0.goalradius = 4;
   var_0.interval = 0;
-  var_1 = getent("friendly_enters_laundrymat", "targetname");
+  var_1 = getEnt("friendly_enters_laundrymat", "targetname");
   var_2 = getnode(var_1.target, "targetname");
-  var_3 = getent("window_ac_unit", "targetname");
+  var_3 = getEnt("window_ac_unit", "targetname");
   var_3 playLoopSound("bog_ac_loop");
   var_3.animname = "ac";
   var_3 maps\_utility::assign_animtree();
@@ -1066,7 +1066,7 @@ laundryroom_saw_gunner() {
   var_4 = [];
   var_4[var_4.size] = var_3;
   var_4[var_4.size] = var_0;
-  var_5 = getent("mark_ac_block", "targetname");
+  var_5 = getEnt("mark_ac_block", "targetname");
   var_5 connectpaths();
   var_5 delete();
   var_0.ignorepathchange = 1;
@@ -1113,7 +1113,7 @@ player_enters_laundrymat() {
   common_scripts\utility::flag_wait_or_timeout("friendlies_charge_alley", 45);
   common_scripts\utility::flag_set("friendlies_charge_alley");
   maps\_utility::activate_trigger_with_targetname("friendly_alley_charge_trigger");
-  var_3 = getent("friendly_alley_blocker", "targetname");
+  var_3 = getEnt("friendly_alley_blocker", "targetname");
   var_3 delete();
   maps\_spawner::kill_spawnernum(10);
   maps\_spawner::kill_spawnernum(9);
@@ -1240,8 +1240,8 @@ defend_the_roof_with_javelin() {
   maps\_utility::delaythread(3, maps\bog_a_code::set_flag_when_bmps_are_dead);
   maps\_colors::kill_color_replacements();
   common_scripts\utility::flag_wait("player_has_javelin");
-  var_7 = getent("apartment_door", "targetname");
-  var_7 rotateyaw(100, 1, 0.5, 0);
+  var_7 = getEnt("apartment_door", "targetname");
+  var_7 rotateYaw(100, 1, 0.5, 0);
   thread maps\bog_a_code::update_obj_on_dropped_jav(var_5.origin);
   level.price maps\_utility::delaythread(1, maps\_anim::anim_single_queue, level.price, "second_floor_hint_2");
   objective_add(4, "active", &"BOG_A_DESTROY_THE_ARMORED_VEHICLES", var_5.origin);
@@ -1321,7 +1321,7 @@ shanty_opens() {
   var_7 = getEntArray("bog_ambient_spawner", "targetname");
   common_scripts\utility::array_thread(var_7, maps\_utility::add_spawn_function, maps\bog_a_code::bog_ambient_fighting);
   common_scripts\utility::array_thread(var_7, maps\_utility::spawn_ai);
-  var_8 = getent("shanty_run_trigger", "targetname");
+  var_8 = getEnt("shanty_run_trigger", "targetname");
   var_8.trigger_num = 1;
   level.shanty_timer = 0;
   level.player.trigger_num = 0;
@@ -1346,7 +1346,7 @@ shanty_opens() {
 }
 
 shanty_speedrun_monitor() {
-  var_0 = getent("trigger_shanty_speedrun", "targetname");
+  var_0 = getEnt("trigger_shanty_speedrun", "targetname");
   var_0 waittill("trigger");
 
   if(!common_scripts\utility::flag("shanty_progress")) {
@@ -1380,7 +1380,7 @@ run_until_ambush() {
   var_0 = self;
 
   for(;;) {
-    var_0 = getent(var_0.target, "targetname");
+    var_0 = getEnt(var_0.target, "targetname");
     self.goalradius = var_0.radius;
     self setgoalpos(var_0.origin);
     self waittill("goal");
@@ -1445,7 +1445,7 @@ run_down_street(var_0) {
   self.goalradius = 4000;
 
   if(!common_scripts\utility::flag("friendlies_move_up_the_bridge")) {
-    var_5 = getent("bridge_volume", "targetname");
+    var_5 = getEnt("bridge_volume", "targetname");
 
     if(!isDefined(self.dont_use_goal_volume)) {
       self setgoalvolume(var_5);
@@ -1490,7 +1490,7 @@ price_directs_players_upstairs() {
   if(common_scripts\utility::flag("melee_sequence_begins")) {
     return;
   }
-  var_0 = getent("price_sends_you_upstairs_trigger", "targetname");
+  var_0 = getEnt("price_sends_you_upstairs_trigger", "targetname");
   var_0 waittill("trigger");
   level.player.end_nightvision_hint = 1;
 
@@ -1503,9 +1503,9 @@ price_directs_players_upstairs() {
 helicopters_fly_by() {
   thread maps\bog_a_code::helis_ambient();
   soundscripts\_snd::snd_message("play_intro_scripted_cobra_pass_by");
-  var_0 = getent("armada_trigger", "targetname");
+  var_0 = getEnt("armada_trigger", "targetname");
   var_0 waittill("trigger");
-  var_0 = getent("vehicle_crash_trigger", "targetname");
+  var_0 = getEnt("vehicle_crash_trigger", "targetname");
   var_0 thread maps\bog_a_code::cobra_crash();
   thread maps\bog_a_code::helicopters_flies_by_overhead("intro_heli5", 0, 135, 95);
   thread maps\bog_a_code::helicopter_flies_by_overhead("heli_crash", 0, 135, 95);
@@ -1555,10 +1555,10 @@ move_in_on_goal(var_0) {
 }
 
 music() {
-  var_0 = getent("shantyMusicTrig", "targetname");
+  var_0 = getEnt("shantyMusicTrig", "targetname");
   var_0 waittill("trigger");
   maps\_utility::musicplaywrapper("bog_a_shantytown");
-  var_1 = getent("bogMusicTrig", "targetname");
+  var_1 = getEnt("bogMusicTrig", "targetname");
   var_1 waittill("trigger");
   musicstop(3);
   wait 3.25;

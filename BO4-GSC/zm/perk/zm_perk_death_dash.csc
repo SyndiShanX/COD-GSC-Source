@@ -50,7 +50,7 @@ function_bfd817c1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_51a4a975 = self playLoopSound(#"hash_4d72f993ab3784d0");
     }
 
-    self playrumbleonentity(localclientnum, #"damage_light");
+    self playRumbleOnEntity(localclientnum, #"damage_light");
     return;
   }
 
@@ -78,7 +78,7 @@ function_fe2634b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_51a4a975 = undefined;
     }
 
-    self playrumbleonentity(localclientnum, #"damage_light");
+    self playRumbleOnEntity(localclientnum, #"damage_light");
     return;
   }
 
@@ -106,7 +106,7 @@ function_237b1f1e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_51a4a975 = undefined;
     }
 
-    self playrumbleonentity(localclientnum, #"damage_heavy");
+    self playRumbleOnEntity(localclientnum, #"damage_heavy");
     return;
   }
 
@@ -144,7 +144,7 @@ function_dced8aba(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_884925ad = undefined;
   }
 
-  self playrumbleonentity(localclientnum, "damage_heavy");
+  self playRumbleOnEntity(localclientnum, "damage_heavy");
 }
 
 function_fbdede2b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

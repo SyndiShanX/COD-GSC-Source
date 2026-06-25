@@ -180,7 +180,7 @@ _id_A245(var_0) {
         var_11 = undefined;
 
         if(isDefined(var_10.target)) {
-          var_11 = scripts\engine\utility::getstruct(var_10.target, "targetname");
+          var_11 = scripts\engine\utility::getStruct(var_10.target, "targetname");
         }
 
         if(var_10 _id_759A(var_0, var_10)) {
@@ -367,7 +367,7 @@ _id_C610(var_0, var_1) {
       }
 
       if(isDefined(var_4.target)) {
-        var_9 = scripts\engine\utility::getstruct(var_4.target, "targetname");
+        var_9 = scripts\engine\utility::getStruct(var_4.target, "targetname");
 
         if(isDefined(var_9) && var_6.origin == var_9.origin) {
           var_3 = var_4._id_039B;
@@ -453,7 +453,7 @@ _id_759A(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
       if(isDefined(var_4) && var_3.origin == var_4.origin) {
         var_3._id_FE3A = 1;
@@ -513,7 +513,7 @@ _id_68DD(var_0, var_1) {
     }
 
     if(isDefined(var_1.target)) {
-      var_5 = scripts\engine\utility::getstruct(var_1.target, "targetname");
+      var_5 = scripts\engine\utility::getStruct(var_1.target, "targetname");
 
       if(isDefined(var_5) && var_4.origin == var_5.origin) {
         return var_4;
@@ -543,7 +543,7 @@ _id_6E1E(var_0, var_1) {
       }
 
       if(isDefined(var_7.target)) {
-        var_8 = scripts\engine\utility::getstruct(var_7.target, "targetname");
+        var_8 = scripts\engine\utility::getStruct(var_7.target, "targetname");
 
         if(isDefined(var_8) && var_4.origin == var_8.origin) {
           var_5 = 1;
@@ -569,7 +569,7 @@ _id_10B43(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   scripts\engine\utility::_id_5C24("init_interaction_done");
-  var_1 = getent("zone_change", "targetname");
+  var_1 = getEnt("zone_change", "targetname");
 
   if(isDefined(var_1)) {
     for(;;) {
@@ -719,7 +719,7 @@ _id_10A44(var_0, var_1, var_2, var_3) {
     if(!_id_759A(var_2, var_1)) {
       return;
     }
-    var_3 sethintstring(var_4);
+    var_3 setHintString(var_4);
   }
 }
 

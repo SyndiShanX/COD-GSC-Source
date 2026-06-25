@@ -106,7 +106,7 @@ remote_turret_activate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   setsaveddvar("actionSlotsHide", "1");
   setsaveddvar("cg_fov", level.remote_turret_current_fov);
   setsaveddvar("hud_showStance", 0);
-  self setorigin(var_1);
+  self setOrigin(var_1);
   self setplayerangles(var_2);
 
   if(!isDefined(self.player_view_controller_model)) {
@@ -201,7 +201,7 @@ remote_turret_deactivate() {
   self disableslowaim();
   self unlink();
   self setstance(self.prev_stance);
-  self setorigin(level.old_player_origin);
+  self setOrigin(level.old_player_origin);
   self setplayerangles(level.old_player_angles);
   self freezecontrols(1);
   restore_weapons_no_first_raise("remote_turret");
@@ -1268,7 +1268,7 @@ remote_turret_monitor_ammo(var_0) {
     }
 
     earthquake(0.1, 0.3, self.origin, 100);
-    level.player playrumbleonentity("heavygun_fire");
+    level.player playRumbleOnEntity("heavygun_fire");
 
     if(self getammocount(var_0) <= 0) {
       if(!isDefined(self.remote_canreload) || self.remote_canreload == 0) {

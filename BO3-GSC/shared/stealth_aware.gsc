@@ -363,7 +363,7 @@ function function_933965f6(eventpackage) {
     goalpos = var_62bc230d getfinalpathpos();
     delta = goalpos - var_62bc230d.origin;
     if(lengthsquared(delta) > 250000) {
-      var_fbbdb5f6 = var_62bc230d.origin + (vectornormalize(delta) * 500);
+      var_fbbdb5f6 = var_62bc230d.origin + (vectorNormalize(delta) * 500);
       deltaorigin = var_62bc230d.origin - self.origin;
       deltaangles = vectortoangles(deltaorigin);
       self.react_yaw = absangleclamp360(self.angles[1] - deltaangles[1]);
@@ -462,7 +462,7 @@ function enter_combat_with(enemy) {
     return;
   }
   self stealth_behavior::investigate_stop();
-  self stopanimscripted();
+  self stopanimScripted();
   enemyentnum = enemy getentitynumber();
   self set_awareness("combat");
   self set_ignore_sentient(enemy, 0);

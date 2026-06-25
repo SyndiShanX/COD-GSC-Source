@@ -127,9 +127,9 @@ function init_clientfields() {
 function function_a2f341e2(key, value, trigger, var_e41ae6e2, var_784eb2cc) {
   entarray = getEntArray(value, key);
   var_7dcda7ca = [];
-  aabbmin = getent(var_e41ae6e2, "targetname");
-  aabbmax = getent(var_784eb2cc, "targetname");
-  var_fb71415b = getent(trigger, "targetname");
+  aabbmin = getEnt(var_e41ae6e2, "targetname");
+  aabbmax = getEnt(var_784eb2cc, "targetname");
+  var_fb71415b = getEnt(trigger, "targetname");
   i = 0;
 
   foreach(ent in entarray) {

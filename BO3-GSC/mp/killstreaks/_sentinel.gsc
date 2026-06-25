@@ -108,7 +108,7 @@ function drone_pain_for_time(time, stablizeparam, restorelookpoint, weapon) {
       restorelookent setModel("tag_origin");
       self clearlookatent();
       self setlookatent(restorelookent);
-      self setturrettargetent(restorelookent);
+      self setturrettargetEnt(restorelookent);
       wait(1.5);
       self clearlookatent();
       self clearturrettarget();
@@ -225,7 +225,7 @@ function activatesentinel(killstreaktype) {
     return false;
   }
   player addweaponstat(getweapon("sentinel"), "used", 1);
-  sentinel = spawnvehicle("veh_sentinel_mp", spawnpos.origin, spawnpos.angles, "dynamic_spawn_ai");
+  sentinel = spawnVehicle("veh_sentinel_mp", spawnpos.origin, spawnpos.angles, "dynamic_spawn_ai");
   sentinel killstreaks::configure_team("sentinel", killstreak_id, player, "small_vehicle", undefined, &configureteampost);
   sentinel killstreak_hacking::enable_hacking("sentinel", &hackedcallbackpre, &hackedcallbackpost);
   sentinel.killstreak_id = killstreak_id;
@@ -347,7 +347,7 @@ function ontimeout() {
   if(isDefined(sentinel.owner)) {
     radiusdamage(sentinel.origin, params.ksexplosionouterradius, params.ksexplosioninnerdamage, params.ksexplosionouterdamage, sentinel.owner, "MOD_EXPLOSIVE", getweapon("sentinel"));
     if(isDefined(params.ksexplosionrumble)) {
-      sentinel.owner playrumbleonentity(params.ksexplosionrumble);
+      sentinel.owner playRumbleOnEntity(params.ksexplosionrumble);
     }
   }
   sentinel notify("sentinel_shutdown");

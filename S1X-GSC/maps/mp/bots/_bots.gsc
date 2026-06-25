@@ -1976,7 +1976,7 @@ bot_think_crate() {
           var_29.action_thread = ::use_box;
           var_31 = crate_get_bot_target(var_13) - var_13.origin;
           var_32 = length(var_31) * randomfloat(1.0);
-          var_30 = var_13.origin + vectornormalize(var_31) * var_32 + (0, 0, 12);
+          var_30 = var_13.origin + vectorNormalize(var_31) * var_32 + (0, 0, 12);
         }
       } else {
         var_29.action_thread = ::use_crate;
@@ -2514,7 +2514,7 @@ handle_smoke(var_0) {
   var_3 = 0.8;
   wait(var_3);
   var_3 = 0.5;
-  var_4 = getent("smoke_grenade_sight_clip_64_short", "targetname");
+  var_4 = getEnt("smoke_grenade_sight_clip_64_short", "targetname");
 
   if(isDefined(var_4)) {
     var_2 clonebrushmodeltoscriptmodel(var_4);
@@ -2522,7 +2522,7 @@ handle_smoke(var_0) {
 
   wait(var_3);
   var_3 = 0.6;
-  var_5 = getent("smoke_grenade_sight_clip_64_tall", "targetname");
+  var_5 = getEnt("smoke_grenade_sight_clip_64_tall", "targetname");
 
   if(isDefined(var_5)) {
     var_2 clonebrushmodeltoscriptmodel(var_5);
@@ -2530,7 +2530,7 @@ handle_smoke(var_0) {
 
   wait(var_3);
   var_3 = var_0;
-  var_6 = getent("smoke_grenade_sight_clip_256", "targetname");
+  var_6 = getEnt("smoke_grenade_sight_clip_256", "targetname");
 
   if(isDefined(var_6)) {
     var_2 clonebrushmodeltoscriptmodel(var_6);

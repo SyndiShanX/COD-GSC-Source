@@ -10,13 +10,13 @@
 
 init() {
   level.var_b4fcac11 = [];
-  level.var_b4fcac11[0] = getent("thief_floor_1", "targetname");
-  level.var_b4fcac11[1] = getent("thief_floor_2", "targetname");
-  level.var_b4fcac11[2] = getent("thief_floor_3", "targetname");
-  level.var_b4fcac11[3] = getent("thief_floor_4", "targetname");
+  level.var_b4fcac11[0] = getEnt("thief_floor_1", "targetname");
+  level.var_b4fcac11[1] = getEnt("thief_floor_2", "targetname");
+  level.var_b4fcac11[2] = getEnt("thief_floor_3", "targetname");
+  level.var_b4fcac11[3] = getEnt("thief_floor_4", "targetname");
   level.var_83225f64 = [];
-  level.var_83225f64[0] = getent("elevator1_shaft", "targetname");
-  level.var_83225f64[1] = getent("elevator2_shaft", "targetname");
+  level.var_83225f64[0] = getEnt("elevator1_shaft", "targetname");
+  level.var_83225f64[1] = getEnt("elevator2_shaft", "targetname");
 }
 
 function_35babccd(ent) {
@@ -59,7 +59,7 @@ function_35babccd(ent) {
 }
 
 function_713b735(floor_num) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player laststand::player_is_in_laststand() || player.sessionstate == "spectator") {

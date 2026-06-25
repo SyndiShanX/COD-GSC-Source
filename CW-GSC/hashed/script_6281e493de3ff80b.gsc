@@ -155,7 +155,7 @@ function private function_46d5894d(entity) {
 }
 
 function private function_b4c86753(entity) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     var_9f06b4e9 = entity.origin + vectorscale(anglesToForward(self.angles), 60);
@@ -890,10 +890,10 @@ function function_6337506a(vdir, limit, front = 1) {
   }
 
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = vdir * -1;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > limit;
 }

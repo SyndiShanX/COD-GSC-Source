@@ -51,7 +51,7 @@ on_end(round_reset) {
   level.var_2bb6b2ba = undefined;
   zm_utility::function_75fd65f9(self.var_f7f308cd, 0);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_utility::function_ba39d198(self.var_df62490a, 0);
     player.var_356935bb = undefined;
   }
@@ -75,7 +75,7 @@ function_452ec7b3() {
     self.var_f7f308cd = s_hill.targetname;
     self thread function_492f4c79();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player thread zone_watcher(self, self.var_a7d4f51b, self.str_return, level.var_9fc7133d);
       player thread damage_watcher();
     }
@@ -84,7 +84,7 @@ function_452ec7b3() {
     arrayremovevalue(level.active_powerups, undefined);
     var_5579e5fa = function_c30f9a6e(s_hill.origin);
 
-    switch (getplayers().size) {
+    switch (getPlayers().size) {
       case 1:
       case 2:
         switch (var_2fe28f97) {
@@ -145,7 +145,7 @@ function_452ec7b3() {
     do {
       var_5630b1e = 1;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isalive(player) && !(isDefined(player.var_4cb0b91f) && player.var_4cb0b91f)) {
           var_5630b1e = 0;
         }
@@ -167,7 +167,7 @@ function_452ec7b3() {
     var_2fe28f97++;
     zm_utility::function_75fd65f9(self.var_f7f308cd, 0);
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_utility::function_ba39d198(self.var_df62490a, 0);
     }
 
@@ -314,7 +314,7 @@ function_c30f9a6e(v_start_pos, n_radius = 500) {
 function_ff66b979() {
   level endon(#"end_of_round");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_356935bb)) {
       continue;
     }
@@ -325,7 +325,7 @@ function_ff66b979() {
   var_a0328dd5 = gettime();
   wait 5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!isDefined(player.var_356935bb)) {
       player thread damage_watcher();
       continue;

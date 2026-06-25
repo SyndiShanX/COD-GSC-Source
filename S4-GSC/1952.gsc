@@ -12,8 +12,8 @@ _id_178E(var_0, var_1) {
 }
 
 _id_178D(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_0);
-  var_4 = vectornormalize(var_1);
+  var_3 = vectorNormalize(var_0);
+  var_4 = vectorNormalize(var_1);
   var_5 = _func_0002(clamp(vectordot(var_3, var_4), -1, 1));
   var_6 = _func_025B(var_3, var_4);
 
@@ -41,14 +41,14 @@ _id_1786(var_0, var_1, var_2) {
 }
 
 _id_645E(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_2 - var_0);
+  var_3 = vectorNormalize(var_2 - var_0);
   var_4 = anglesToForward(var_1);
   var_5 = vectordot(var_4, var_3);
   return var_5;
 }
 
 _id_FFDC(var_0, var_1) {
-  return vectornormalize(var_0 - vectordot(var_1, var_0) * var_1);
+  return vectorNormalize(var_0 - vectordot(var_1, var_0) * var_1);
 }
 
 _id_FFDB(var_0, var_1, var_2) {
@@ -59,7 +59,7 @@ _id_FFDB(var_0, var_1, var_2) {
 }
 
 _id_FFDD(var_0, var_1) {
-  return vectornormalize(2 * _id_FFDC(var_0, var_1) - var_0);
+  return vectorNormalize(2 * _id_FFDC(var_0, var_1) - var_0);
 }
 
 _id_FFD9(var_0, var_1, var_2) {
@@ -67,7 +67,7 @@ _id_FFD9(var_0, var_1, var_2) {
 }
 
 _id_CB75(var_0, var_1) {
-  return vectordot(vectornormalize(var_0), var_1);
+  return vectordot(vectorNormalize(var_0), var_1);
 }
 
 _id_66AE(var_0, var_1, var_2, var_3) {
@@ -334,13 +334,13 @@ _id_B9AB(var_0, var_1, var_2) {
     var_3 = anglesToForward(self.angles);
   }
 
-  var_4 = vectornormalize(var_0 - self.origin);
+  var_4 = vectorNormalize(var_0 - self.origin);
   var_5 = vectordot(var_3, var_4);
   return var_5 > var_1;
 }
 
 _id_10E77(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize((var_2[0], var_2[1], 0) - (var_0[0], var_0[1], 0));
+  var_4 = vectorNormalize((var_2[0], var_2[1], 0) - (var_0[0], var_0[1], 0));
   var_5 = anglesToForward((0, var_1[1], 0));
   return vectordot(var_5, var_4) >= var_3;
 }

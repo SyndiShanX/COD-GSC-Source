@@ -710,7 +710,7 @@ inert_substate_override(substate) {
 
 attack_item() {
   if(isDefined(self.isonbus) && self.isonbus) {
-    self linkto(level.the_bus);
+    self linkTo(level.the_bus);
   }
 }
 
@@ -754,7 +754,7 @@ find_exit_loc() {
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
 
@@ -826,7 +826,7 @@ revive_trigger_move_with_player() {
     my_position = self gettagorigin("J_SpineLower");
     self.revivetrigger unlink();
     self.revivetrigger.origin = my_position;
-    self.revivetrigger linkto(level.the_bus);
+    self.revivetrigger linkTo(level.the_bus);
     wait 0.1;
   }
 }
@@ -842,17 +842,17 @@ revive_trigger_should_ignore_sight_checks(player_down) {
 revive_trigger_spawn_override_link(player_down) {
   radius = getdvarint(#"_id_A17166B0");
   player_down.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
-  player_down.revivetrigger sethintstring("");
-  player_down.revivetrigger setcursorhint("HINT_NOICON");
+  player_down.revivetrigger setHintString("");
+  player_down.revivetrigger setCursorHint("HINT_NOICON");
   player_down.revivetrigger setmovingplatformenabled(1);
-  player_down.revivetrigger enablelinkto();
+  player_down.revivetrigger enablelinkTo();
 
   if(isDefined(player_down.isonbus) && player_down.isonbus) {
-    player_down.revivetrigger linkto(level.the_bus);
+    player_down.revivetrigger linkTo(level.the_bus);
     player_down thread revive_trigger_move_with_player();
   } else {
     player_down.revivetrigger.origin = player_down.origin;
-    player_down.revivetrigger linkto(player_down);
+    player_down.revivetrigger linkTo(player_down);
   }
 
   player_down.revivetrigger.beingrevived = 0;
@@ -1231,15 +1231,15 @@ transit_intermission() {
     }
 
     if(near_bridge) {
-      trig = getent("bridge_trig", "targetname");
+      trig = getEnt("bridge_trig", "targetname");
       trig notify("trigger");
     }
 
     org = spawn("script_model", level.the_bus gettagorigin("tag_camera"));
     org setModel("tag_origin");
     org.angles = level.the_bus gettagangles("tag_camera");
-    org linkto(level.the_bus);
-    self setorigin(org.origin);
+    org linkTo(level.the_bus);
+    self setOrigin(org.origin);
     self.angles = org.angles;
 
     if(!flag("OnPriDoorYar") || !flag("OnPriDoorYar2")) {
@@ -1347,7 +1347,7 @@ transit_standard_intermission() {
         speed = point.speed;
       }
 
-      target_point = getstruct(point.target, "targetname");
+      target_point = getStruct(point.target, "targetname");
       dist = distance(point.origin, target_point.origin);
       time = dist / speed;
       q_time = time * 0.25;
@@ -1358,8 +1358,8 @@ transit_standard_intermission() {
 
       self.game_over_bg fadeovertime(q_time);
       self.game_over_bg.alpha = 0;
-      org moveto(target_point.origin, time, q_time, q_time);
-      org rotateto(target_point.angles, time, q_time, q_time);
+      org moveTo(target_point.origin, time, q_time, q_time);
+      org rotateTo(target_point.angles, time, q_time, q_time);
       wait(time - q_time);
       self.game_over_bg fadeovertime(q_time);
       self.game_over_bg.alpha = 1;
@@ -1535,13 +1535,13 @@ transit_bus_update_retrieve_trigger(player) {
     wait 2.0;
     trigger = self.retrievabletrigger;
     trigger.origin = (self.origin[0], self.origin[1], self.origin[2] + 10);
-    self linkto(level.the_bus);
-    trigger linkto(self);
+    self linkTo(level.the_bus);
+    trigger linkTo(self);
   } else {
     self waittill("stationary");
     trigger = self.retrievabletrigger;
     trigger.origin = (self.origin[0], self.origin[1], self.origin[2] + 10);
-    trigger linkto(self);
+    trigger linkTo(self);
   }
 }
 
@@ -1579,7 +1579,7 @@ claymore_planted(weapon) {
   }
 }
 
-fakelinkto(linkee) {
+fakelinkTo(linkee) {
   self.backlinked = 1;
 
   while(isDefined(self) && isDefined(linkee)) {
@@ -1596,7 +1596,7 @@ knife_planted(knife, trigger, parent) {
   weaponbus = knife maps\mp\zm_transit_bus::object_is_on_bus();
 
   if(weaponbus) {
-    trigger linkto(knife);
+    trigger linkTo(knife);
     trigger setmovingplatformenabled(1);
     trigger.isonbus = 1;
     knife setmovingplatformenabled(1);
@@ -1619,9 +1619,9 @@ grenade_planted(grenade, model) {
 
       if(isDefined(model)) {
         model setmovingplatformenabled(1);
-        model linkto(level.the_bus);
+        model linkTo(level.the_bus);
         model.isonbus = 1;
-        grenade fakelinkto(model);
+        grenade fakelinkTo(model);
       }
     }
   }
@@ -1685,7 +1685,7 @@ equipment_planted(weapon, equipname, groundfrom) {
         reregister_unitrigger_as_dynamic(weapon.stub);
       }
 
-      weapon linkto(level.the_bus);
+      weapon linkTo(level.the_bus);
       weapon setmovingplatformenabled(1);
 
       if(isDefined(weapon.stub)) {
@@ -1953,7 +1953,7 @@ transit_player_fake_death(vdir) {
   self enableinvulnerability();
   self takeallweapons();
 
-  if(isDefined(self.insta_killed) && self.insta_killed || self istouching(getent("depot_lava_pit", "targetname")) || isDefined(self.isonbus) && self.isonbus && level.the_bus.ismoving) {
+  if(isDefined(self.insta_killed) && self.insta_killed || self istouching(getEnt("depot_lava_pit", "targetname")) || isDefined(self.isonbus) && self.isonbus && level.the_bus.ismoving) {
     self maps\mp\zombies\_zm::player_fake_death();
     self allowprone(1);
     self allowcrouch(0);
@@ -1998,14 +1998,14 @@ fall_down(vdir, stance) {
 
   if(isDefined(vdir) && length(vdir) > 0) {
     xyspeedmag = 40 + randomint(12) + randomint(12);
-    xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+    xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
   }
 
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = origin;
   linker.angles = angles;
   self._fall_down_anchor = linker;
-  self playerlinkto(linker);
+  self playerlinkTo(linker);
   self playsoundtoplayer("zmb_player_death_fall", self);
   falling = stance != "prone";
 
@@ -2015,8 +2015,8 @@ fall_down(vdir, stance) {
     floor_height = 10 + origin[2] - eye[2];
     origin = origin + (0, 0, floor_height);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
   }
 
   self freezecontrols(1);
@@ -2026,7 +2026,7 @@ fall_down(vdir, stance) {
   }
 
   if(isDefined(self.isonbus) && self.isonbus) {
-    linker linkto(level.the_bus);
+    linker linkTo(level.the_bus);
   }
 
   self giveweapon("death_throe_zm");
@@ -2036,13 +2036,13 @@ fall_down(vdir, stance) {
     bounce = randomint(4) + 8;
     origin = origin + (0, 0, bounce) - xyspeed * 0.1;
     lerptime = bounce / 50.0;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = origin + (0, 0, bounce * -1) + xyspeed * 0.1;
     lerptime = lerptime / 2.0;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
   }
 
   wait 15;
@@ -2081,7 +2081,7 @@ bunkerdoorrotate(open, time) {
 
   if(isDefined(self.script_angles)) {
     self notsolid();
-    self rotateto(self.script_angles, time, 0, 0);
+    self rotateTo(self.script_angles, time, 0, 0);
     self thread maps\mp\zombies\_zm_blockers::door_solid_thread();
   }
 }
@@ -2097,7 +2097,7 @@ zm_transit_emp_detonate(grenade_origin) {
 
   if(test_ent maps\mp\zombies\_zm_zonemgr::entity_in_zone("zone_prr")) {
     if(flag("power_on")) {
-      trig = getent("powerswitch_buildable_trigger_power", "targetname");
+      trig = getEnt("powerswitch_buildable_trigger_power", "targetname");
       trig notify("trigger");
     }
   }
@@ -2310,7 +2310,7 @@ zombie_transit_devgui(cmd) {
 
       break;
     case "teleport_to_bus":
-      get_players()[0] setorigin(level.the_bus localtoworldcoords(vectorscale((0, 0, 1), 25.0)));
+      get_players()[0] setOrigin(level.the_bus localtoworldcoords(vectorscale((0, 0, 1), 25.0)));
       break;
     case "teleport_bus":
       node = getvehiclenode(cmd_strings[1], "script_noteworthy");
@@ -2393,7 +2393,7 @@ zombie_transit_audio_alias_override() {
 }
 
 falling_death_init() {
-  trig = getent("transit_falling_death", "targetname");
+  trig = getEnt("transit_falling_death", "targetname");
 
   if(isDefined(trig)) {
     while(true) {
@@ -2425,7 +2425,7 @@ insta_kill_player() {
     if(getnumconnectedplayers() == 1) {
       if(isDefined(self.lives) && self.lives > 0) {
         self.waiting_to_revive = 1;
-        points = getstruct("zone_pcr", "script_noteworthy");
+        points = getStruct("zone_pcr", "script_noteworthy");
         spawn_points = getStructArray(points.target, "targetname");
         point = spawn_points[0];
         self dodamage(self.health + 1000, (0, 0, 0));
@@ -2433,7 +2433,7 @@ insta_kill_player() {
         wait 0.5;
         self freezecontrols(1);
         wait 0.25;
-        self setorigin(point.origin + vectorscale((0, 0, 1), 20.0));
+        self setOrigin(point.origin + vectorscale((0, 0, 1), 20.0));
         self.angles = point.angles;
 
         if(in_last_stand) {
@@ -2500,7 +2500,7 @@ delete_bus_pieces() {
     return;
   }
   level._bus_pieces_deleted = 1;
-  hatch_mantle = getent("hatch_mantle", "targetname");
+  hatch_mantle = getEnt("hatch_mantle", "targetname");
 
   if(isDefined(hatch_mantle)) {
     hatch_mantle delete();
@@ -2510,19 +2510,19 @@ delete_bus_pieces() {
   array_thread(hatch_clip, ::self_delete);
   plow_clip = getEntArray("plow_clip", "targetname");
   array_thread(plow_clip, ::self_delete);
-  light = getent("busLight2", "targetname");
+  light = getEnt("busLight2", "targetname");
 
   if(isDefined(light)) {
     light delete();
   }
 
-  light = getent("busLight1", "targetname");
+  light = getEnt("busLight1", "targetname");
 
   if(isDefined(light)) {
     light delete();
   }
 
-  blocker = getent("bus_path_blocker", "targetname");
+  blocker = getEnt("bus_path_blocker", "targetname");
 
   if(isDefined(blocker)) {
     blocker delete();
@@ -2534,25 +2534,25 @@ delete_bus_pieces() {
   array_thread(orgs, ::self_delete);
   door_blocker = getEntArray("bus_door_blocker", "targetname");
   array_thread(door_blocker, ::self_delete);
-  driver = getent("bus_driver_head", "targetname");
+  driver = getEnt("bus_driver_head", "targetname");
 
   if(isDefined(driver)) {
     driver delete();
   }
 
-  plow = getent("trigger_plow", "targetname");
+  plow = getEnt("trigger_plow", "targetname");
 
   if(isDefined(plow)) {
     plow delete();
   }
 
-  plow_attach_point = getent("plow_attach_point", "targetname");
+  plow_attach_point = getEnt("plow_attach_point", "targetname");
 
   if(isDefined(plow_attach_point)) {
     plow_attach_point delete();
   }
 
-  bus = getent("the_bus", "targetname");
+  bus = getEnt("the_bus", "targetname");
 
   if(isDefined(bus)) {
     bus delete();
@@ -2609,7 +2609,7 @@ in_playable_zone() {
 
 lava_damage_depot() {
   trigs = getEntArray("lava_damage", "targetname");
-  volume = getent("depot_lava_volume", "targetname");
+  volume = getEnt("depot_lava_volume", "targetname");
   exploder(2);
 
   foreach(trigger in trigs) {
@@ -2634,7 +2634,7 @@ lava_damage_depot() {
     trig.script_float = 0.4;
     earthquake(0.5, 1.5, trig.origin, 1000);
     level clientnotify("earth_crack");
-    crust = getent("depot_black_lava", "targetname");
+    crust = getEnt("depot_black_lava", "targetname");
     crust delete();
   }
 
@@ -2643,7 +2643,7 @@ lava_damage_depot() {
 }
 
 depot_lava_seen() {
-  check_volume = getent("depot_lava_check", "targetname");
+  check_volume = getEnt("depot_lava_check", "targetname");
   players = get_players();
 
   foreach(player in players) {
@@ -3059,7 +3059,7 @@ buildable_build_custom_func(stub) {
 }
 
 bank_pap_hint() {
-  volume = getent("zone_ban", "targetname");
+  volume = getEnt("zone_ban", "targetname");
 
   while(true) {
     players = get_players();
@@ -3157,8 +3157,8 @@ sndplaymusicegg(player, ent) {
 
 sndtoiletflush() {
   toilettrig = spawn("trigger_radius", (11182, 7584, -596), 0, 150, 5);
-  toilettrig sethintstring("");
-  toilettrig setcursorhint("HINT_NOICON");
+  toilettrig setHintString("");
+  toilettrig setCursorHint("HINT_NOICON");
 
   while(true) {
     toilettrig waittill("trigger", who);

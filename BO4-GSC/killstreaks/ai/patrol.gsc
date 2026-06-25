@@ -99,7 +99,7 @@ function_cd106dcf(left, right) {
 
 function_12270700(origin, angles, points) {
   foreach(point in points) {
-    point.dot = vectordot(self.var_ffa7c9d, vectornormalize(point.origin - origin));
+    point.dot = vectordot(self.var_ffa7c9d, vectorNormalize(point.origin - origin));
   }
 
   return array::merge_sort(points, &function_cd106dcf);
@@ -165,7 +165,7 @@ function_94d884e4(var_9033671b) {
       newpos = getclosestpointonnavmesh(tacpoints[0].origin, self.goalradius, self.ai.patrol.var_861daf20);
 
       if(isDefined(newpos)) {
-        self.var_ffa7c9d = vectornormalize(newpos - self.origin);
+        self.var_ffa7c9d = vectorNormalize(newpos - self.origin);
         return newpos;
       }
     }

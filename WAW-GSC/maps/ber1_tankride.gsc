@@ -71,8 +71,8 @@ tankride_deathwatch() {
   self waittill("death", attacker);
 
   if(isPlayer(attacker)) {
-    tank_1 = getent("street_tank_1", "targetname");
-    tank_2 = getent("street_tank_2", "targetname");
+    tank_1 = getEnt("street_tank_1", "targetname");
+    tank_2 = getEnt("street_tank_2", "targetname");
 
     tank_occupants_1 = tank_1 getvehoccupants();
     tank_occupants_2 = tank_2 getvehoccupants();
@@ -314,14 +314,14 @@ chain_outro_1() {
 
   flag_wait("player_mounted_on_tank");
 
-  chain_trig = getent("outro_tank_move_1", "script_noteworthy");
+  chain_trig = getEnt("outro_tank_move_1", "script_noteworthy");
   if(isDefined(chain_trig)) {
     chain_trig notify("trigger");
   }
 }
 
 tank_1_outro() {
-  tank = getent("street_tank_1", "targetname");
+  tank = getEnt("street_tank_1", "targetname");
 
   tank makevehicleusable();
 
@@ -378,7 +378,7 @@ tank_1_outro() {
 }
 
 tank_2_outro() {
-  tank = getent("street_tank_2", "targetname");
+  tank = getEnt("street_tank_2", "targetname");
 
   tank makevehicleusable();
 
@@ -451,7 +451,7 @@ tank_3_outro() {
 
   wait(0.05);
 
-  tank = getent("street_tank_3", "targetname");
+  tank = getEnt("street_tank_3", "targetname");
 
   tank maps\_vehicle::godon();
   tank maps\_vehicle::mgoff();
@@ -467,7 +467,7 @@ tank_3_outro() {
 }
 
 remove_tank_blocker(blocker_name) {
-  blocker = getent(blocker_name, "targetname");
+  blocker = getEnt(blocker_name, "targetname");
   blocker connectpaths();
   blocker delete();;
 }
@@ -512,7 +512,7 @@ tank_1_shoot_strat() {
 
   while(!flag("outro_tank_move_3")) {
     if(shots_counter == 1) {
-      struct_targ = getstruct("orig_glass_blowout", "targetname");
+      struct_targ = getStruct("orig_glass_blowout", "targetname");
       self SetTurretTargetVec(struct_targ.origin);
       self waittill_notify_or_timeout("turret_on_target", 3);
       wait(1);

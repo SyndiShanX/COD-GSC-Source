@@ -4,10 +4,10 @@
 **************************************/
 
 strafing_runs() {
-  my_trig = GetEnt("start_zero_test", "targetname");
+  my_trig = getEnt("start_zero_test", "targetname");
   my_trig waittill("trigger");
 
-  target = GetEnt("strafing_target_one", "targetname");
+  target = getEnt("strafing_target_one", "targetname");
 
   while(1) {
     level thread strafe_a_zero("back_strafe_right", target);
@@ -27,7 +27,7 @@ strafe_a_zero(type_of_attack, target) {
     ASSERTEX(false, "the spawn point for the new plane was all messed up");
   }
 
-  plane = SpawnVehicle("vehicle_jap_airplane_zero_d_fuselage", "new_plane", "zero", starting_points["org"], starting_points["ang"]);
+  plane = spawnVehicle("vehicle_jap_airplane_zero_d_fuselage", "new_plane", "zero", starting_points["org"], starting_points["ang"]);
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
 
@@ -85,7 +85,7 @@ get_pathpoints_straight_strafe_bank_away(target, direction) {
   self.pathpoints["fly_cond"][0] = "end_curve";
   self.pathpoints["kill_on_range"][0] = 999999;
 
-  new_path_point_org = target.origin + (VectorNormalize(anglesToForward(target.angles)) * 50000) + (0, 0, 1200);
+  new_path_point_org = target.origin + (vectorNormalize(anglesToForward(target.angles)) * 50000) + (0, 0, 1200);
   new_path_point_ang = target.angles;
 
   self.pathpoints["fly_org"][1] = new_path_point_org;
@@ -126,7 +126,7 @@ draw_debug_lines(id) {
 
   while(1) {
     Line(self.origin, self.pathpoints["fly_org"][id], (0, 0, 1));
-    Line(self.origin, (self.origin + VectorNormalize(self.pathpoints["fly_ang"][id]) * 5000), (1, 0, 0));
+    Line(self.origin, (self.origin + vectorNormalize(self.pathpoints["fly_ang"][id]) * 5000), (1, 0, 0));
     wait(0.01);
   }
 }
@@ -156,7 +156,7 @@ ai_turret_think(target) {
     self_forward = anglesToForward(self.angles);
     target_vector = self.origin + (self_forward * 5000) - (0, 0, .2679491 * 5000);
 
-    player_dir = VectorNormalize(level.player.origin - self.origin);
+    player_dir = vectorNormalize(level.player.origin - self.origin);
     angle = VectorDot(self_forward, player_dir);
     if(angle > .965) {
       target_vector = level.player.origin + (0, 0, 45);
@@ -209,14 +209,14 @@ strafe_a_moving_target(target) {
   level.total_zeros_spawned++;
 
   starting_points = [];
-  ref_ent = GetEnt("ev5_ref_origin", "targetname");
+  ref_ent = getEnt("ev5_ref_origin", "targetname");
 
   starting_points["org"] = target.origin - ((anglesToForward(ref_ent.angles)[0] * 20000, (anglesToForward(ref_ent.angles)[1] * 20000), 0));
   z_value = Tan(RandomIntRange(8, 15)) * Distance2D(target.origin, starting_points["org"]);
   starting_points["org"] += (0, 0, z_value);
   starting_points["ang"] = ref_ent.angles;
 
-  plane = SpawnVehicle("vehicle_jap_airplane_zero_d_fuselage", "new_plane", "zero", starting_points["org"], starting_points["ang"]);
+  plane = spawnVehicle("vehicle_jap_airplane_zero_d_fuselage", "new_plane", "zero", starting_points["org"], starting_points["ang"]);
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
 

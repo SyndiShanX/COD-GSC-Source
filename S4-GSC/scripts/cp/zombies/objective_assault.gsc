@@ -1268,7 +1268,7 @@ send_sacrifice_zombie_energy(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_0)) {
     var_11 = playFXOnTag(level._effect[var_2], var_10, "tag_origin");
-    var_10 moveto(var_7, var_9);
+    var_10 moveTo(var_7, var_9);
     var_10 waittill("movedone");
 
     if(isDefined(var_11)) {
@@ -1610,8 +1610,8 @@ is_s2_mq_event(var_0) {
 init_dormant_shield(var_0) {
   level endon("end_game");
   wait 3;
-  var_1 = scripts\engine\utility::getstruct("s2_mq_shield_loc", "targetname");
-  var_2 = scripts\engine\utility::getstruct("s2_mq_shield_portal", "targetname");
+  var_1 = scripts\engine\utility::getStruct("s2_mq_shield_loc", "targetname");
+  var_2 = scripts\engine\utility::getStruct("s2_mq_shield_portal", "targetname");
   var_3 = scripts\cp\utility::_id_E190("tag_origin", var_2.origin, var_2.angles);
   var_3 playSound("zmb_exfil_portal_open");
   waitframe();
@@ -1659,7 +1659,7 @@ charge_dormant_shield() {
       if(var_1 <= 0) {
         return;
       }
-      var_0 moveto(level.mdl_dormant_shield_fx.origin, var_1, 0, 0);
+      var_0 moveTo(level.mdl_dormant_shield_fx.origin, var_1, 0, 0);
       var_0 thread shield_energy_trail_travel_watcher();
     }
 
@@ -1726,7 +1726,7 @@ setup_s2_mq_ui() {
 
 zabala_intro() {
   level endon("end_game");
-  var_0 = scripts\engine\utility::getstruct("zabala_spawn_loc", "targetname");
+  var_0 = scripts\engine\utility::getStruct("zabala_spawn_loc", "targetname");
 
   if(!isDefined(level.first_zabala)) {
     level.skip_trickster_intro = 1;
@@ -1769,9 +1769,9 @@ shield_bob() {
   var_1 = self.origin;
 
   for(;;) {
-    self moveto(var_0, 1, 0, 0.3);
+    self moveTo(var_0, 1, 0, 0.3);
     self waittill("movedone");
-    self moveto(var_1, 1, 0, 0.3);
+    self moveTo(var_1, 1, 0, 0.3);
     self waittill("movedone");
   }
 }

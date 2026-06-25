@@ -6,7 +6,7 @@
 init_pap_boat() {
   level.meleevignetteanimfunc = ::zombie_boat_melee_func;
   level.boat_start_node = getvehiclenode("boat_start_struct", "targetname");
-  level.boat_vehicle = spawnvehicle("cp_rave_pap_boat_animated", "boat", "cp_rave_boat", level.boat_start_node.origin, level.boat_start_node.angles);
+  level.boat_vehicle = spawnVehicle("cp_rave_pap_boat_animated", "boat", "cp_rave_boat", level.boat_start_node.origin, level.boat_start_node.angles);
   level.boat_vehicle attachpath(level.boat_start_node);
   level.boat_vehicle.linked_players = [];
   scripts\engine\utility::flag_init("packboat_started");
@@ -17,7 +17,7 @@ init_pap_boat() {
   level.boat_vehicle setnonstick(0);
   level.boat_vehicle.attach_points = getEntArray(level.boat_start_node.target, "targetname");
   foreach(var_1 in level.boat_vehicle.attach_points) {
-    var_1 linkto(level.boat_vehicle);
+    var_1 linkTo(level.boat_vehicle);
   }
 
   level.boat_vehicle hidepart("tag_motor");
@@ -27,7 +27,7 @@ init_pap_boat() {
 
 activate_pap(var_0) {
   var_1 = level._effect["vfx_rave_pap_room_portal"];
-  var_2 = scripts\engine\utility::getstruct("porta_effect_location", "targetname");
+  var_2 = scripts\engine\utility::getStruct("porta_effect_location", "targetname");
   var_2.script_noteworthy = "pap_portal";
   var_2.portal_can_be_started = 1;
   var_2.requires_power = 0;
@@ -36,7 +36,7 @@ activate_pap(var_0) {
   var_2.custom_search_dist = 96;
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
   level thread turn_on_room_exit_portal();
-  var_3 = scripts\engine\utility::getstruct("projector_fx_struct", "targetname");
+  var_3 = scripts\engine\utility::getStruct("projector_fx_struct", "targetname");
   var_4 = spawnfx(level._effect["projector_light"], var_3.origin, anglesToForward(var_3.angles), anglestoup(var_3.angles));
   var_5 = spawnfx(var_1, var_2.origin, anglesToForward(var_2.angles), anglestoup(var_2.angles));
   wait(0.5);
@@ -49,7 +49,7 @@ activate_pap(var_0) {
 }
 
 turn_on_room_exit_portal() {
-  var_0 = getent("hidden_room_portal", "targetname");
+  var_0 = getEnt("hidden_room_portal", "targetname");
   var_1 = anglesToForward(var_0.angles);
   var_2 = spawnfx(level._effect["vfx_slasher_cabin"], var_0.origin, var_1);
   thread scripts\engine\utility::play_loopsound_in_space("zmb_portal_powered_on_activate_lp", var_0.origin);
@@ -59,7 +59,7 @@ turn_on_room_exit_portal() {
 
 teleport_from_hidden_room_before_time_up(var_0) {
   var_0 makeusable();
-  var_0 sethintstring(&"CP_RAVE_HIDDEN_LEAVE");
+  var_0 setHintString(&"CP_RAVE_HIDDEN_LEAVE");
   var_0.portal_is_open = 1;
   for(;;) {
     var_0 waittill("trigger", var_1);
@@ -133,11 +133,11 @@ teleport_to_hidden_room() {
   scripts\cp\utility::adddamagemodifier("papRoom", 0, 0);
   self.is_off_grid = 1;
   self.disable_consumables = undefined;
-  var_0 = scripts\engine\utility::getstruct("hidden_room_spot", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hidden_room_spot", "targetname");
   self unlink();
   self dontinterpolate();
   scripts\cp\powers\coop_powers::power_enablepower();
-  self setorigin(var_0.origin);
+  self setOrigin(var_0.origin);
   self setplayerangles(var_0.angles);
   self playershow();
   thread hidden_room_timer();
@@ -200,7 +200,7 @@ set_in_pap_room(var_0, var_1) {
 }
 
 teleport_to_safe_spot(var_0) {
-  var_1 = scripts\engine\utility::getStructArray(scripts\engine\utility::getstruct("porta_effect_location", "targetname").target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(scripts\engine\utility::getStruct("porta_effect_location", "targetname").target, "targetname");
   var_2 = undefined;
   while(!isDefined(var_2)) {
     foreach(var_4 in var_1) {
@@ -220,7 +220,7 @@ teleport_to_safe_spot(var_0) {
   var_0 playershow();
   var_0 unlink();
   var_0 dontinterpolate();
-  var_0 setorigin(var_2.origin);
+  var_0 setOrigin(var_2.origin);
   var_0 setplayerangles(var_2.angles);
   var_0.disable_consumables = undefined;
   var_0 scripts\cp\powers\coop_powers::power_enablepower();
@@ -254,8 +254,8 @@ pap_vo(var_0) {
 
 move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 earthquakeforplayer(0.3, 0.2, var_0.origin, 200);
-  var_4 = getent(var_1, "targetname");
-  var_5 = getent(var_2, "targetname");
+  var_4 = getEnt(var_1, "targetname");
+  var_5 = getEnt(var_2, "targetname");
   var_0 cancelmantle();
   var_0.no_outline = 1;
   var_0.no_team_outlines = 1;
@@ -265,15 +265,15 @@ move_through_tube(var_0, var_1, var_2, var_3) {
   var_0 scripts\cp\utility::adddamagemodifier("fast_travel", 0, 0);
   var_0 scripts\cp\utility::allow_player_ignore_me(1);
   var_0 dontinterpolate();
-  var_0 setorigin(var_6);
+  var_0 setOrigin(var_6);
   var_0 setplayerangles(var_4.angles);
   var_0 playlocalsound("zmb_portal_travel_lr");
   var_8 = spawn("script_origin", var_6);
-  var_0 playerlinkto(var_8);
+  var_0 playerlinkTo(var_8);
   var_0 getweaponrankxpmultiplier();
   wait(0.1);
   var_0 thread scripts\cp\zombies\zombie_afterlife_arcade::remove_white_screen(0.1);
-  var_8 moveto(var_7, 1);
+  var_8 moveTo(var_7, 1);
   wait(1);
   var_0.is_fast_traveling = undefined;
   var_0 scripts\cp\utility::removedamagemodifier("fast_travel", 0);
@@ -380,8 +380,8 @@ setup_boat_sounds() {
   }
 
   wait(0.05);
-  level.boat_vehicle.sfx_front linkto(level.boat_vehicle, "tag_body");
-  level.boat_vehicle.sfx_rear linkto(level.boat_vehicle, "tag_motor");
+  level.boat_vehicle.sfx_front linkTo(level.boat_vehicle, "tag_body");
+  level.boat_vehicle.sfx_rear linkTo(level.boat_vehicle, "tag_motor");
   wait(0.05);
   level.boat_vehicle.sfx_front playSound("scn_boatride_startup");
   level.boat_vehicle.sfx_rear playSound("scn_boatride_startup_lsrs");
@@ -412,7 +412,7 @@ reset_player_spots(var_0) {
 }
 
 link_player_to_boat(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstruct("boat_player_" + level.boat_vehicle.linked_players.size, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStruct("boat_player_" + level.boat_vehicle.linked_players.size, "script_noteworthy");
   var_3.linked_player = var_0;
   if(isDefined(var_2)) {
     var_3 = spawnStruct();
@@ -421,9 +421,9 @@ link_player_to_boat(var_0, var_1, var_2) {
   }
 
   level.boat_vehicle.linked_players[level.boat_vehicle.linked_players.size] = var_0;
-  var_0 setorigin(var_3.origin);
+  var_0 setOrigin(var_3.origin);
   var_0 setplayerangles(var_3.angles);
-  var_0 playerlinkto(level.boat_vehicle, undefined, 1, 45, 45, 30, 30, 0);
+  var_0 playerlinkTo(level.boat_vehicle, undefined, 1, 45, 45, 30, 30, 0);
   var_0 playerlinkedoffsetenable();
   var_0.ignoreme = 1;
   if(!isDefined(level.boat_vehicle.first_player)) {
@@ -554,7 +554,7 @@ drop_off_player(var_0, var_1) {
     var_8 = var_4.origin;
   }
 
-  var_0 setorigin(var_8 + (0, 0, 1));
+  var_0 setOrigin(var_8 + (0, 0, 1));
   var_0 setplayerangles(var_4.angles);
   var_0 allowstand(1);
   var_0 allowprone(1);
@@ -585,7 +585,7 @@ boat_last_stand_monitor(var_0) {
     }
   }
 
-  var_0 setorigin(var_3.origin);
+  var_0 setOrigin(var_3.origin);
   var_0 setplayerangles(var_3.angles);
   var_0 allowstand(1);
   var_0 getnumownedagentsonteambytype(1);
@@ -697,7 +697,7 @@ spawn_survivor_on_boat() {
   var_1 = spawn("script_model", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 setModel("zmb_world_k_smith");
-  var_1 linkto(level.boat_vehicle);
+  var_1 linkTo(level.boat_vehicle);
   level.boat_survivor = var_1;
   level.boat_survivor thread survivor_boat_nag();
   for(;;) {
@@ -911,7 +911,7 @@ move_player_to_shore(var_0, var_1) {
     }
   }
 
-  var_0 setorigin(var_4.origin);
+  var_0 setOrigin(var_4.origin);
   var_0 setplayerangles(var_4.angles);
   var_0 allowstand(1);
   var_0 allowprone(1);

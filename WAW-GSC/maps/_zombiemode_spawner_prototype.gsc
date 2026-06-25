@@ -228,9 +228,9 @@ zombie_think() {
 
 get_desired_origin() {
   if(isDefined(self.target)) {
-    ent = GetEnt(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     if(!isDefined(ent)) {
-      ent = getstruct(self.target, "targetname");
+      ent = getStruct(self.target, "targetname");
     }
 
     if(!isDefined(ent)) {
@@ -373,7 +373,7 @@ tear_into_building() {
       self zombie_history("tear_into_building -> animating");
 
       tear_anim = get_tear_anim(chunk);
-      self AnimScripted("tear_anim", self.origin, self.first_node.angles, tear_anim);
+      self animScripted("tear_anim", self.origin, self.first_node.angles, tear_anim);
       self zombie_tear_notetracks("tear_anim", chunk, self.first_node);
     }
 
@@ -1161,7 +1161,7 @@ zombie_eye_glow() {
   self.fx_eye_glow = spawn("script_model", self GetTagOrigin(linkTag));
   self.fx_eye_glow.angles = self GetTagAngles(linkTag);
   self.fx_eye_glow setModel(fxModel);
-  self.fx_eye_glow LinkTo(self, linkTag);
+  self.fx_eye_glow linkTo(self, linkTag);
 
   playFXOnTag(level._effect["eye_glow"], self.fx_eye_glow, fxTag);
 }

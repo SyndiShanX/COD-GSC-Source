@@ -245,7 +245,7 @@ function play_quad_first_sounds() {
 
 function play_wood_land_sound(origin) {
   wait(1);
-  playsoundatposition("zmb_quad_roof_break_land", origin - vectorscale((0, 0, 1), 150));
+  playSoundAtPosition("zmb_quad_roof_break_land", origin - vectorscale((0, 0, 1), 150));
 }
 
 function rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumble_range, low_rumble_range) {
@@ -253,13 +253,13 @@ function rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, h
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playrumbleonentity(high_rumble_string);
+        players[i] playRumbleOnEntity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playrumbleonentity(low_rumble_string);
+        players[i] playRumbleOnEntity(low_rumble_string);
       }
       continue;
     }
-    players[i] playrumbleonentity(high_rumble_string);
+    players[i] playRumbleOnEntity(high_rumble_string);
   }
 }
 
@@ -490,18 +490,18 @@ function quad_stage_roof_break() {
 }
 
 function quad_stage_roof_break_single(index) {
-  trigger = getent("quad_roof_crumble_fx_origin_" + index, "target");
+  trigger = getEnt("quad_roof_crumble_fx_origin_" + index, "target");
   trigger thread quad_roof_crumble_fx_play(index);
 }
 
 function play_quad_start_vo() {
-  players = getplayers();
+  players = getPlayers();
   player = players[randomintrange(0, players.size)];
   player zm_audio::create_and_play_dialog("general", "quad_spawn");
 }
 
 function function_79dea782() {
-  trigger = getent("quad_roof_crumble_fx_origin_10", "target");
+  trigger = getEnt("quad_roof_crumble_fx_origin_10", "target");
   trigger waittill("trigger", who);
   level notify("hash_e1db2a20");
   roof_parts = getEntArray(trigger.target, "targetname");

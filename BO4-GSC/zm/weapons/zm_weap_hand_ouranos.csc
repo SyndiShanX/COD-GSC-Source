@@ -90,9 +90,9 @@ function_f89a4434(localclientnum) {
 
   self endon(#"death");
   self.enemy endon(#"death");
-  vol_center = getent(localclientnum, "vol_ww_ouranos_center_fletching", "targetname");
-  vol_cliff = getent(localclientnum, "vol_ww_ouranos_cliff_fletching", "targetname");
-  vol_serpent = getent(localclientnum, "vol_ww_ouranos_serpent_fletching", "targetname");
+  vol_center = getEnt(localclientnum, "vol_ww_ouranos_center_fletching", "targetname");
+  vol_cliff = getEnt(localclientnum, "vol_ww_ouranos_cliff_fletching", "targetname");
+  vol_serpent = getEnt(localclientnum, "vol_ww_ouranos_serpent_fletching", "targetname");
 
   while(isDefined(self)) {
     if(isDefined(vol_center) && istouching(self.origin, vol_center)) {

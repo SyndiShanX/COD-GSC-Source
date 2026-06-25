@@ -757,7 +757,7 @@ function bb_getlocomotionexityaw(blackboard, yaw) {
           }
           start = self.origin;
           end = self.pathgoalpos;
-          exityaw = getangleusingdirection(vectornormalize(end - start));
+          exityaw = getangleusingdirection(vectorNormalize(end - start));
         }
       }
     }
@@ -1773,7 +1773,7 @@ function shouldchargemelee(entity) {
   if(enemydistsq < (64 * 64)) {
     return 0;
   }
-  offset = entity.enemy.origin - ((vectornormalize(entity.enemy.origin - entity.origin)) * 36);
+  offset = entity.enemy.origin - ((vectorNormalize(entity.enemy.origin - entity.origin)) * 36);
   chargedistsq = (isDefined(entity.melee_charge_rangesq) ? entity.melee_charge_rangesq : 140 * 140);
   if(enemydistsq < chargedistsq && entity maymovetopoint(offset, 1, 1)) {
     yawtoenemy = angleclamp180(entity.angles[1] - (vectortoangles(entity.enemy.origin - entity.origin)[1]));

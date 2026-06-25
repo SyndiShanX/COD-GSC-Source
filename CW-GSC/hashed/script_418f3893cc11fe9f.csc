@@ -327,7 +327,7 @@ function function_bc09ffc1(localclientnum) {
       dist_sq = distancesquared(player.origin, self.origin);
 
       if(dist_sq < 1000000) {
-        player playrumbleonentity(localclientnum, "tank_rumble");
+        player playRumbleOnEntity(localclientnum, "tank_rumble");
       }
     }
 

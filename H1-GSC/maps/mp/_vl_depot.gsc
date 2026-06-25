@@ -514,11 +514,11 @@ spawnandinitdepotents() {
   if(isDefined(var_0.depotsceneent)) {
     return;
   }
-  while(!isDefined(common_scripts\utility::getstruct("characterBM", "targetname"))) {
+  while(!isDefined(common_scripts\utility::getStruct("characterBM", "targetname"))) {
     wait 0.05;
   }
 
-  var_1 = common_scripts\utility::getstruct("characterBM", "targetname");
+  var_1 = common_scripts\utility::getStruct("characterBM", "targetname");
   var_0.depotsceneent = spawn("script_model", var_1.origin);
   var_0.depotsceneent setModel("genericprop");
   var_0.depotsceneent.scriptednode = var_1;
@@ -574,7 +574,7 @@ spawnandinitdepotents() {
   level.depotspecialanimprops["knife"] = level.depotagent.props["cloth"];
   level.depotspecialanimprops["laptop"] = level.depotagent.props["laptop"];
   level.depotspecialanimprops["lackey"] = level.depotlackey.props["cards"];
-  var_4 = common_scripts\utility::getstruct("drop_crate", "targetname");
+  var_4 = common_scripts\utility::getStruct("drop_crate", "targetname");
   level.depotcrate = spawn("script_model", var_4.origin);
   level.depotcrate.angles = var_4.angles;
   level.depotcrate setModel("h1_supply_drop_crate_a_anim");
@@ -602,7 +602,7 @@ playerspawndepotcharacter(var_0, var_1, var_2, var_3, var_4) {
   }
 
   var_5 = maps\mp\gametypes\_class::getloadout(self.pers["team"], var_0);
-  var_6 = common_scripts\utility::getstruct("characterBM", "targetname");
+  var_6 = common_scripts\utility::getStruct("characterBM", "targetname");
   var_7 = maps\mp\_vl_avatar::spawn_an_avatar(self, var_6, var_5.primaryname, self.costume, var_5._id_A7ED, undefined, undefined, var_4, 1, var_2, var_3);
   var_7._id_A7EA = var_5.emblemindex;
   var_7 _meth_8577(var_5._id_A7EC);

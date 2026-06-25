@@ -39,7 +39,7 @@ run_black_hole_logic() {
   var_4 = 256;
   var_5 = self getplayerangles();
   var_6 = anglesToForward(var_5);
-  var_6 = vectornormalize(var_6);
+  var_6 = vectorNormalize(var_6);
   var_7 = self getEye();
   var_8 = var_7 + var_6 * var_4;
   var_9 = scripts\cp\cp_agent_utils::getaliveagents();
@@ -71,8 +71,8 @@ grabclosestzombies(var_0, var_1) {
   var_2 = anglestoup(var_0.angles);
   var_3 = spawn("trigger_rotatable_radius", scripts\cp\powers\coop_blackholegrenade::getblackholecenter(var_0) - var_2 * 64 * 0.5, 0, 200, 64);
   var_3.angles = var_0.angles;
-  var_3 enablelinkto();
-  var_3 linkto(var_0);
+  var_3 enablelinkTo();
+  var_3 linkTo(var_0);
   var_3 thread scripts\cp\powers\coop_blackholegrenade::cleanuponparentdeath(var_0);
   while(isDefined(var_3)) {
     var_4 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.spawned_enemies, undefined, undefined, 200);
@@ -215,7 +215,7 @@ fling_enemy(var_0, var_1, var_2, var_3, var_4) {
     return;
   }
 
-  self setvelocity(vectornormalize(var_1) * 500);
+  self setvelocity(vectorNormalize(var_1) * 500);
   wait(0.1);
   if(isDefined(var_2)) {
     self dodamage(self.health + 1000, self.origin, var_2, var_2, "MOD_UNKNOWN", var_4);
@@ -258,7 +258,7 @@ slam_executeinternal(var_0, var_1, var_2, var_3) {
     var_7 = 11664;
   }
 
-  var_0 playerlinkto(var_2, "tag_origin");
+  var_0 playerlinkTo(var_2, "tag_origin");
   wait(0.25);
   var_0 thread scripts\cp\cp_weapon::grenade_earthquake(0);
   if(!isDefined(var_3)) {

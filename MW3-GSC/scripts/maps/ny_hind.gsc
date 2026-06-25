@@ -34,13 +34,13 @@ _id_44FA(var_0, var_1, var_2, var_3) {
     var_4 = 0;
     var_8 = var_1.origin - self.origin;
     var_5 = length(var_8);
-    var_8 = vectornormalize(var_8);
+    var_8 = vectorNormalize(var_8);
   } else {
     var_6 = var_0.origin;
     var_9 = self.origin;
     var_8 = var_1.origin - var_0.origin;
     var_5 = length(var_8);
-    var_8 = vectornormalize(var_8);
+    var_8 = vectorNormalize(var_8);
     var_10 = var_9 - var_0.origin;
     var_4 = vectordot(var_8, var_10);
 
@@ -66,14 +66,14 @@ _id_44FA(var_0, var_1, var_2, var_3) {
     var_5 = length(var_13);
 
     if(var_4 < var_5) {
-      var_13 = var_4 * vectornormalize(var_13);
+      var_13 = var_4 * vectorNormalize(var_13);
       var_12 = var_1.origin + var_13;
     } else {
       var_0 = var_1;
       var_1 = var_2;
 
       if(isDefined(var_2.target)) {
-        var_2 = common_scripts\utility::getstruct(var_2.target, "targetname");
+        var_2 = common_scripts\utility::getStruct(var_2.target, "targetname");
       } else {
         var_2 = undefined;
       }
@@ -283,7 +283,7 @@ _id_4510(var_0, var_1, var_2) {
   self._id_4511 = undefined;
 
   if(isDefined(self._id_44F8.target)) {
-    self._id_4511 = common_scripts\utility::getstruct(self._id_44F8.target, "targetname");
+    self._id_4511 = common_scripts\utility::getStruct(self._id_44F8.target, "targetname");
   }
   while(isDefined(self._id_44F8)) {
     var_3 = self._id_44F8.origin;
@@ -298,7 +298,7 @@ _id_4510(var_0, var_1, var_2) {
       var_5 = (var_5[0], var_5[1], self._id_295F);
     }
     var_6 = self.origin - var_5;
-    var_7 = vectornormalize(var_6);
+    var_7 = vectorNormalize(var_6);
     var_8 = self.origin - var_3;
 
     if(!isDefined(self._id_4511)) {
@@ -317,7 +317,7 @@ _id_4510(var_0, var_1, var_2) {
       self._id_4511 = undefined;
 
       if(isDefined(self._id_44F8) && isDefined(self._id_44F8.target)) {
-        self._id_4511 = common_scripts\utility::getstruct(self._id_44F8.target, "targetname");
+        self._id_4511 = common_scripts\utility::getStruct(self._id_44F8.target, "targetname");
       }
       continue;
     }
@@ -344,7 +344,7 @@ _id_4513(var_0, var_1, var_2, var_3, var_4) {
   var_5 = var_0;
 
   if(isDefined(var_0.target)) {
-    var_5 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_5 = common_scripts\utility::getStruct(var_0.target, "targetname");
 
     if(!isDefined(var_5)) {
       var_5 = var_0;
@@ -357,7 +357,7 @@ _id_4513(var_0, var_1, var_2, var_3, var_4) {
     var_6[var_6.size] = var_5;
 
     if(isDefined(var_5.target)) {
-      var_5 = common_scripts\utility::getstruct(var_5.target, "targetname");
+      var_5 = common_scripts\utility::getStruct(var_5.target, "targetname");
 
       if(!isDefined(var_5)) {
         break;
@@ -378,7 +378,7 @@ _id_4513(var_0, var_1, var_2, var_3, var_4) {
   } else {
     var_8 = self vehicle_getvelocity();
   }
-  var_8 = vectornormalize(var_8);
+  var_8 = vectorNormalize(var_8);
   var_9 = undefined;
   var_10 = 1000000;
   var_11 = undefined;
@@ -386,7 +386,7 @@ _id_4513(var_0, var_1, var_2, var_3, var_4) {
 
   foreach(var_5 in var_6) {
     var_14 = var_5.origin - var_7;
-    var_15 = vectornormalize(var_14);
+    var_15 = vectorNormalize(var_14);
     var_16 = vectordot(var_15, var_8);
     var_17 = length(var_14);
 
@@ -470,17 +470,17 @@ _id_4519(var_0, var_1, var_2, var_3) {
     var_6 = var_0 vehicle_getvelocity();
     var_7 = self vehicle_getvelocity();
     var_8 = var_0 vehicle_getspeed();
-    var_9 = vectornormalize(var_6);
+    var_9 = vectorNormalize(var_6);
     var_10 = maps\_shg_common::_id_1684((0, 0, 1), var_9);
-    var_10 = vectornormalize(var_10);
+    var_10 = vectorNormalize(var_10);
     var_11 = maps\_shg_common::_id_1684(var_9, var_10);
-    var_11 = vectornormalize(var_11);
+    var_11 = vectorNormalize(var_11);
     var_12 = var_5 + var_1[0] * var_9 + var_1[1] * var_10 + var_1[2] * var_11;
     var_13 = var_12 - self.origin;
     var_14 = length(var_13);
     var_15 = length(self.origin - var_5);
     var_16 = length(var_1);
-    var_17 = vectornormalize(var_1);
+    var_17 = vectorNormalize(var_1);
     var_18 = vectordot(var_9, var_13);
     var_19 = var_8;
 
@@ -562,11 +562,11 @@ _id_451A(var_0, var_1, var_2, var_3) {
     var_4 = var_0.origin;
     var_5 = var_0 vehicle_getvelocity();
     var_6 = var_0 vehicle_getspeed();
-    var_7 = vectornormalize(var_5);
+    var_7 = vectorNormalize(var_5);
     var_8 = maps\_shg_common::_id_1684((0, 0, 1), var_7);
-    var_8 = vectornormalize(var_8);
+    var_8 = vectorNormalize(var_8);
     var_9 = maps\_shg_common::_id_1684(var_7, var_8);
-    var_9 = vectornormalize(var_9);
+    var_9 = vectorNormalize(var_9);
     var_10 = var_0._id_450C;
     var_11 = var_0._id_450D;
     var_12 = var_0._id_450E;
@@ -578,7 +578,7 @@ _id_451A(var_0, var_1, var_2, var_3) {
     var_18 = length(var_17);
     var_19 = length(self.origin - var_4);
     var_20 = length(var_1);
-    var_21 = vectornormalize(var_1);
+    var_21 = vectorNormalize(var_1);
     var_22 = vectordot(var_7, var_17);
     var_23 = var_6;
 
@@ -659,7 +659,7 @@ _id_451B(var_0, var_1) {
 _id_451C(var_0, var_1, var_2) {
   var_3 = var_1 - var_0;
   var_4 = length(var_3);
-  var_5 = vectordot(vectornormalize(var_3), var_2);
+  var_5 = vectordot(vectorNormalize(var_3), var_2);
 
   if(var_5 != 0) {
     var_6 = 0.5 * var_4 / var_5;
@@ -678,17 +678,17 @@ _id_451D(var_0, var_1, var_2, var_3, var_4) {
     var_5[0] = var_2.origin;
 
     if(isDefined(var_4)) {
-      var_6 = vectornormalize(var_4.origin - var_5[0]);
+      var_6 = vectorNormalize(var_4.origin - var_5[0]);
       var_5[2] = var_5[3] - _id_451C(var_5[0], var_5[3], var_6);
 
       if(isDefined(var_1)) {
-        var_6 = vectornormalize(var_3.origin - var_1);
+        var_6 = vectorNormalize(var_3.origin - var_1);
         var_5[1] = var_5[0] + _id_451C(var_5[0], var_5[3], var_6);
       } else {
         var_5[1] = var_5[2];
       }
     } else if(isDefined(var_1)) {
-      var_6 = vectornormalize(var_3.origin - var_1);
+      var_6 = vectorNormalize(var_3.origin - var_1);
       var_5[1] = var_5[0] + _id_451C(var_5[0], var_5[3], var_6);
       var_5[2] = var_5[1];
     } else {
@@ -700,7 +700,7 @@ _id_451D(var_0, var_1, var_2, var_3, var_4) {
     if(!isDefined(var_4)) {
       var_5[4] = 1;
     } else {
-      var_6 = vectornormalize(var_4.origin - var_5[0]);
+      var_6 = vectorNormalize(var_4.origin - var_5[0]);
       var_5[2] = var_5[3] - _id_451C(var_5[0], var_5[3], var_6);
       var_5[1] = var_5[2];
     }
@@ -740,7 +740,7 @@ _id_451F(var_0, var_1, var_2) {
   self._id_4511 = undefined;
 
   if(isDefined(self._id_44F8.target)) {
-    self._id_4511 = common_scripts\utility::getstruct(self._id_44F8.target, "targetname");
+    self._id_4511 = common_scripts\utility::getStruct(self._id_44F8.target, "targetname");
   }
   while(isDefined(self._id_44F8)) {
     var_4 = _id_451D(self.origin, self._id_4520, self._id_450B, self._id_44F8, self._id_4511);
@@ -814,7 +814,7 @@ _id_451F(var_0, var_1, var_2) {
     self._id_4511 = undefined;
 
     if(isDefined(self._id_44F8) && isDefined(self._id_44F8.target)) {
-      self._id_4511 = common_scripts\utility::getstruct(self._id_44F8.target, "targetname");
+      self._id_4511 = common_scripts\utility::getStruct(self._id_44F8.target, "targetname");
     }
   }
 

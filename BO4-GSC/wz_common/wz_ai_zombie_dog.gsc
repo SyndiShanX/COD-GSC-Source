@@ -153,11 +153,11 @@ zombiedogintro() {
   self val::set(#"dog_spawn", "allowdeath", 0);
   self setfreecameralockonallowed(0);
   self clientfield::increment("dog_spawn_fx");
-  playsoundatposition(#"zmb_hellhound_prespawn", self.origin);
+  playSoundAtPosition(#"zmb_hellhound_prespawn", self.origin);
   wait 1.5;
-  playsoundatposition(#"zmb_hellhound_bolt", self.origin);
+  playSoundAtPosition(#"zmb_hellhound_bolt", self.origin);
   earthquake(0.5, 0.75, self.origin, 1000);
-  playsoundatposition(#"zmb_hellhound_spawn", self.origin);
+  playSoundAtPosition(#"zmb_hellhound_spawn", self.origin);
 
   if(isDefined(self.favoriteenemy)) {
     angle = vectortoangles(self.favoriteenemy.origin - self.origin);
@@ -187,7 +187,7 @@ on_dog_killed(params) {
   self clientfield::set("dog_fx", 0);
   self ghost();
   self notsolid();
-  playsoundatposition(#"zmb_hellhound_explode", self.origin);
+  playSoundAtPosition(#"zmb_hellhound_explode", self.origin);
 }
 
 function_69c3e2ac() {
@@ -285,7 +285,7 @@ function_648f6c9b(behaviortreeentity) {
   behaviortreeentity ghost();
   behaviortreeentity notsolid();
   behaviortreeentity pathmode("dont move", 1);
-  playsoundatposition(#"zmb_hellhound_explode", behaviortreeentity.origin);
+  playSoundAtPosition(#"zmb_hellhound_explode", behaviortreeentity.origin);
 }
 
 function_a5c4f83b(behaviortreeentity) {

@@ -137,7 +137,7 @@ deathcard_grab() {
           playFX(level._effect["powerup_grabbed_wave"], self.origin);
           players[i] deathcard_give(i);
           wait(0.1);
-          playsoundatposition("zmb_powerup_grabbed_3p", self.origin);
+          playSoundAtPosition("zmb_powerup_grabbed_3p", self.origin);
           self stoploopsound();
           self delete();
           self notify("deathcard_grabbed");
@@ -255,7 +255,7 @@ deathcard_wobble() {
     self playLoopSound("evt_death_card_loop");
   }
   while(isDefined(self)) {
-    self rotateyaw(360, 3, 3, 0);
+    self rotateYaw(360, 3, 3, 0);
     wait(3);
   }
 }

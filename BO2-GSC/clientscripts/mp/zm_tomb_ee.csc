@@ -43,7 +43,7 @@ toggle_wagon_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 wagon_fire_fx_loop(localclientnum, fieldname) {
   level notify("stop_" + fieldname);
   self endon("stop_" + fieldname);
-  s_pos = getstruct(fieldname, "targetname");
+  s_pos = getStruct(fieldname, "targetname");
 
   while(true) {
     playFX(localclientnum, level._effect["wagon_fire"], s_pos.origin, anglesToForward(s_pos.angles), anglestoup(s_pos.angles));
@@ -52,7 +52,7 @@ wagon_fire_fx_loop(localclientnum, fieldname) {
 }
 
 sndwagonfire(ison, fieldname) {
-  struct = getstruct(fieldname, "targetname");
+  struct = getStruct(fieldname, "targetname");
   origin = struct.origin;
 
   if(ison) {
@@ -72,7 +72,7 @@ toggle_fist_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     if(!isDefined(self.sndfist)) {
       self.sndfist = spawn(0, self.origin, "script_origin");
-      self.sndfist linkto(self);
+      self.sndfist linkTo(self);
       self.sndfist playLoopSound("zmb_squest_punchtime_fist_loop", 1);
       self thread snddeletesndent(self.sndfist);
     }
@@ -93,12 +93,12 @@ snddeletesndent(ent) {
 }
 
 zombie_soul_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  v_dest = getent(localclientnum, "ee_sam_portal", "targetname").origin;
+  v_dest = getEnt(localclientnum, "ee_sam_portal", "targetname").origin;
   e_fx = spawn(localclientnum, self gettagorigin("J_SpineUpper"), "script_model");
   e_fx setModel("tag_origin");
   playSound(localclientnum, "zmb_squest_charge_soul_leave", self.origin);
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(v_dest + vectorscale((0, 0, 1), 5.0), 1);
+  e_fx moveTo(v_dest + vectorscale((0, 0, 1), 5.0), 1);
   e_fx waittill("movedone");
   playSound(localclientnum, "zmb_squest_charge_soul_impact", v_dest);
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
@@ -107,7 +107,7 @@ zombie_soul_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 set_ee_portal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  e_fx = getent(localclientnum, "ee_sam_portal", "targetname");
+  e_fx = getEnt(localclientnum, "ee_sam_portal", "targetname");
 
   if(isDefined(e_fx.fx_id)) {
     e_fx stoploopsound(5);
@@ -151,7 +151,7 @@ tablet_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   e_fx setModel("tag_origin");
   e_fx playSound(localclientnum, "zmb_squest_charge_soul_leave");
   playFXOnTag(localclientnum, level._effect["staff_soul"], e_fx, "tag_origin");
-  e_fx moveto(s_box.origin, 1);
+  e_fx moveTo(s_box.origin, 1);
   e_fx waittill("movedone");
   playSound(localclientnum, "zmb_squest_charge_soul_impact", e_fx.origin);
   playFXOnTag(localclientnum, level._effect["staff_charge"], e_fx, "tag_origin");
@@ -186,7 +186,7 @@ rotate_beacon(localclientnum) {
   self waittill("movedone");
 
   while(true) {
-    self rotateyaw(360, 4);
+    self rotateYaw(360, 4);
     self waittill("rotatedone");
   }
 }

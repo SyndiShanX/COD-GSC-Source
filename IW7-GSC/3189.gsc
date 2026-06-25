@@ -835,7 +835,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
   }
 
   self.var_6378 = var_5;
-  self.traversalvector = vectornormalize(var_5 - var_4.origin);
+  self.traversalvector = vectorNormalize(var_5 - var_4.origin);
   var_6 = undefined;
   var_6 = var_4.var_48;
   if(var_1 == "traverse_external") {
@@ -909,7 +909,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
     self.endnode = var_1E;
     if(var_13.size > 0) {
       scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_13, "traverse", var_14, var_12, 0, ::func_13FAE);
-      var_1F = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
+      var_1F = scripts\engine\utility::getStruct(self.endnode.target, "targetname");
       if(isDefined(var_1F.script_noteworthy) && var_1F.script_noteworthy == "continue_flex_height") {
         scripts\mp\agents\_scriptedagents::func_5AC1(var_6 + "_norestart", var_7, var_13, "traverse", var_12, var_10, 1, ::func_13FAE);
       }
@@ -921,7 +921,7 @@ func_5AC4(var_0, var_1, var_2, var_3) {
       self scragentsetanimscale(1, 1);
       scripts\mp\agents\_scriptedagents::func_CED5(var_6 + "_norestart", var_7, "traverse", "end", ::func_13FAE);
     } else {
-      var_1F = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
+      var_1F = scripts\engine\utility::getStruct(self.endnode.target, "targetname");
       var_20 = var_15[0];
       scripts\mp\agents\_scriptedagents::func_5AC2(var_6 + "_norestart", var_7, "traverse", var_13, var_14, var_10, var_1F.origin, var_20, ::func_13FAE);
       if(var_15[0] - var_11[0] > 0.02) {
@@ -1076,7 +1076,7 @@ func_126D8(var_0, var_1, var_2) {
     }
 
     var_6 = scripts\mp\agents\zombie\zombie_util::func_AB6F(var_5, var_0, var_1);
-    self setorigin((self.origin[0], self.origin[1], var_6), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_6), 0);
     wait(0.05);
   }
 }
@@ -1095,7 +1095,7 @@ func_ABB8() {
   var_2 = var_1[2];
   var_3 = self.origin[2];
   if(var_3 < var_2) {
-    self setorigin((self.origin[0], self.origin[1], var_2 + var_0), 0);
+    self setOrigin((self.origin[0], self.origin[1], var_2 + var_0), 0);
   }
 }
 
@@ -1542,10 +1542,10 @@ func_662E(var_0, var_1, var_2, var_3) {
   self.is_traversing = 1;
   if(isDefined(self.attack_spot.script_parameters) && self.attack_spot.script_parameters == "script_adjust") {
     var_4 = anglesToForward(self.attack_spot.angles);
-    var_4 = vectornormalize(var_4);
+    var_4 = vectorNormalize(var_4);
     var_4 = var_4 * -3.5;
     var_4 = (var_4[0], var_4[1], -1);
-    self setorigin(self.origin + var_4, 0);
+    self setOrigin(self.origin + var_4, 0);
   }
 
   scripts\asm\asm_mp::func_2365(var_0, var_1, var_2, scripts\asm\asm_mp::asm_getanim(var_0, var_1), self.traverseratescale);
@@ -1644,7 +1644,7 @@ func_BA3D() {
   self ghostskulls_complete_status(var_2);
   self waittill("goal_reached");
   var_3 = (self.attack_spot.origin[0], self.attack_spot.origin[1], self.origin[2]);
-  self setorigin(var_3, 0);
+  self setOrigin(var_3, 0);
   self.noturnanims = 0;
   scripts\cp\zombies\zombie_entrances::func_E005(self.var_6658);
   self.var_6659 = 1;

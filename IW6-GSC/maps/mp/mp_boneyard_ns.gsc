@@ -77,7 +77,7 @@ main() {
 
 initExtraCollision() {
   if(level.gametype == "horde" || level.gameType == "infect") {
-    collision1 = GetEnt("clip128x128x8", "targetname");
+    collision1 = getEnt("clip128x128x8", "targetname");
     collision1Ent = spawn("script_model", (-1352, 168, 150));
     collision1Ent.angles = (0, 0, 0);
     collision1Ent CloneBrushmodelToScriptmodel(collision1);
@@ -121,7 +121,7 @@ setup_events() {
   maps\mp\mp_boneyard_ns_killstreak::boneyard_killstreak_setup();
   boneyard_fire_horizontal_setup();
 
-  GetEnt("remd_02_proxy", "targetname") Delete();
+  getEnt("remd_02_proxy", "targetname") Delete();
 
   level.rocket_explo = getEntArray("rocket_explo_obj", "targetname");
   foreach(part in level.rocket_explo) {
@@ -148,7 +148,7 @@ setup_events() {
 }
 
 setup_no_events(enable_killstreak, killstreak_exception) {
-  GetEnt("rocket_explo_rocket", "targetname") Delete();
+  getEnt("rocket_explo_rocket", "targetname") Delete();
 
   rocket_explo = getEntArray("rocket_explo_obj", "targetname");
   foreach(part in rocket_explo) {
@@ -169,8 +169,8 @@ setup_no_events(enable_killstreak, killstreak_exception) {
   thread sound_fire_elements();
   level notify("rocket_crash_01");
 
-  GetEnt("remd_02_proxy", "targetname") Delete();
-  GetEnt("tunnel_exit_A_mantles", "targetname") Delete();
+  getEnt("remd_02_proxy", "targetname") Delete();
+  getEnt("tunnel_exit_A_mantles", "targetname") Delete();
 
   facade = getEntArray("unbroken_facade", "targetname");
   array_call(facade, ::Delete);
@@ -224,7 +224,7 @@ setup_safeguard() {
   top_node = GetNode("crawler_ladder_top_node", "targetname");
   DisconnectNodePair(top_node, bottom_node);
 
-  ladder = GetEnt("crawler_ladder", "targetname");
+  ladder = getEnt("crawler_ladder", "targetname");
   ladder delete();
 }
 
@@ -287,8 +287,8 @@ play_and_stop_spotlight_fx() {
 }
 
 setup_rocket_explo_part() {
-  self.clip = GetEnt(self.target, "targetname");
-  self.clip LinkTo(self);
+  self.clip = getEnt(self.target, "targetname");
+  self.clip linkTo(self);
 
   self.crash_delete = getEntArray(self.target + "_delete", "targetname");
   self.crash_before = getEntArray(self.target + "_before", "targetname");
@@ -299,7 +299,7 @@ setup_rocket_explo_part() {
   self.kill_ents = [self.clip];
   if(isDefined(self.clip.target)) {
     foreach(ent in getEntArray(self.clip.target, "targetname")) {
-      ent LinkTo(self);
+      ent linkTo(self);
       self.linked_ents[self.linked_ents.size] = ent;
 
       if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "push_kill") {
@@ -309,7 +309,7 @@ setup_rocket_explo_part() {
   }
 
   self.fall_anim = self.script_label;
-  self.start_org = GetEnt("rocket_explo_explosion", "targetname");
+  self.start_org = getEnt("rocket_explo_explosion", "targetname");
 
   self Hide();
   array_call(self.linked_ents, ::Hide);
@@ -413,7 +413,7 @@ event_rocket_countdown(count_time, count_sfx) {
 event_rocket_success(count_time, launch_time) {
   level notify("rocket_success_start");
 
-  rocket = GetEnt("rocket_success_rocket", "targetname");
+  rocket = getEnt("rocket_success_rocket", "targetname");
 
   count_sfx = [];
 
@@ -436,7 +436,7 @@ event_rocket_success(count_time, launch_time) {
 
   rocket ScriptModelClearAnim();
   up_vector = AnglesToUp(rocket.angles);
-  rocket MoveTo(up_vector * 62512.5, 64);
+  rocket moveTo(up_vector * 62512.5, 64);
   wait 64;
   stopFXOnTag(level._effect["vfx_rocket_shuttle_smoke_geotrail_xlarge"], rocket, "tag_origin");
   rocket Delete();
@@ -451,8 +451,8 @@ event_rocket_explode(count_time, launch_time) {
   level notify("rocket_explo_start");
   GetScriptableArray("countdown_clock", "targetname")[0] SetScriptablePartState(0, 1);
 
-  org = GetEnt("rocket_explo_explosion", "targetname");
-  rocket = GetEnt("rocket_explo_rocket", "targetname");
+  org = getEnt("rocket_explo_explosion", "targetname");
+  rocket = getEnt("rocket_explo_rocket", "targetname");
   rocket_anim = level.animations["rocket_explo"]["launch"];
 
   count_sfx = [];
@@ -708,7 +708,7 @@ sound_logic_impacts(piece) {
 
 remove_mantles() {
   level waittill("rocket_crash_02");
-  mantles = GetEnt("tunnel_exit_A_mantles", "targetname");
+  mantles = getEnt("tunnel_exit_A_mantles", "targetname");
   mantles Delete();
 }
 
@@ -808,14 +808,14 @@ mp_exploder(num, startTime) {
 
 boneyard_fire_horizontal_setup() {
   level.fire_horiz = spawnStruct();
-  level.fire_horiz.dam = GetEnt("damage_test_fire_horizontal", "targetname");
+  level.fire_horiz.dam = getEnt("damage_test_fire_horizontal", "targetname");
   level.fire_horiz.player = undefined;
   level.fire_horiz.team = undefined;
   level.fire_horiz.trig = spawn("script_model", (471, 1601, -17));
   level.fire_horiz.trig setModel("tag_origin");
-  level.fire_horiz.trig SetHintString(&"MP_BONEYARD_NS_HORIZONTAL_TEST");
+  level.fire_horiz.trig setHintString(&"MP_BONEYARD_NS_HORIZONTAL_TEST");
 
-  level.fire_horiz.inflictor = GetEnt("horiz_fire_ent", "targetname");
+  level.fire_horiz.inflictor = getEnt("horiz_fire_ent", "targetname");
 
   flag_init("boneyard_fire_horizontal_active");
   flag_init("fire_horiz_alarm_on");

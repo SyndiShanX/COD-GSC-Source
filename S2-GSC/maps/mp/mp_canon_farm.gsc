@@ -33,6 +33,6 @@ func_00F9() {
 }
 
 func_7EEB() {
-  var_00 = getent("windmill", "targetname");
+  var_00 = getEnt("windmill", "targetname");
   var_00 rotatepitch(7200, 1800);
 }

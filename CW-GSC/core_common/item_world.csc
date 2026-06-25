@@ -778,7 +778,7 @@ function private _draw(localclientnum, draworigin) {
         model.origin += rotatepoint(originoffset, model.angles);
 
         if(item_world_util::function_da09de95(item.networkid)) {
-          model linkto(item);
+          model linkTo(item);
         }
 
         clientdata.modellist[item.networkid] = model;
@@ -2455,7 +2455,7 @@ function private function_22a3abde(localclientnum) {
 function private function_94db1536(localclientnum, origin, angles, maxdist = undefined) {
   assert(isPlayer(self));
   clientdata = function_a7e98a1a(localclientnum);
-  forward = vectornormalize(anglesToForward(angles));
+  forward = vectorNormalize(anglesToForward(angles));
 
   if(!isDefined(maxdist)) {
     maxdist = util::function_16fb0a3b();

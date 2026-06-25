@@ -406,7 +406,7 @@ freefallend(localclientnum) {
     }
 
     self thread audio::dorattle(self.origin, 200, 700);
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
     self thread function_577c7bd0(localclientnum);
   }
 }
@@ -458,7 +458,7 @@ parachute_detach() {
   parachute = util::spawn_model(local_client_num, chute.parachutelit, self.origin, self.angles);
 
   if(isDefined(parachute)) {
-    parachute linkto(self);
+    parachute linkTo(self);
     parachute useanimtree("generic");
     parachute playrenderoverridebundle(#"hash_336cece53ae2342f");
     parachute thread function_5789287a();

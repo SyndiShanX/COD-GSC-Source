@@ -569,16 +569,16 @@ rotatePlane(toggle) {
   if(toggle == "on") {
     rampupDegrees = 10;
     rotateTime = (level.ac130_Speed["rotate"] / 360) * rampupDegrees;
-    level.ac130 rotateyaw(level.ac130.angles[2] + rampupDegrees, rotateTime, rotateTime, 0);
+    level.ac130 rotateYaw(level.ac130.angles[2] + rampupDegrees, rotateTime, rotateTime, 0);
 
     for(;;) {
-      level.ac130 rotateyaw(360, level.ac130_Speed["rotate"]);
+      level.ac130 rotateYaw(360, level.ac130_Speed["rotate"]);
       wait level.ac130_Speed["rotate"];
     }
   } else if(toggle == "off") {
     slowdownDegrees = 10;
     rotateTime = (level.ac130_Speed["rotate"] / 360) * slowdownDegrees;
-    level.ac130 rotateyaw(level.ac130.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
+    level.ac130 rotateYaw(level.ac130.angles[2] + slowdownDegrees, rotateTime, 0, rotateTime);
   }
 }
 
@@ -620,7 +620,7 @@ getFlyingAC130AnglesToPoint(vec) {
 
 movePlaneToWaypoint(sWaypointTargetname, rotationWait) {
   assert(isDefined(sWaypointTargetname));
-  waypoint = getent(sWaypointTargetname, "targetname");
+  waypoint = getEnt(sWaypointTargetname, "targetname");
   assert(isDefined(waypoint));
   assert(isDefined(waypoint.origin));
   movePlaneToPoint(waypoint.origin, rotationWait);
@@ -665,13 +665,13 @@ movePlaneToPoint(coordinate, rotationWait) {
         decelTime = 3.0;
       }
       assert(rotateTime > 0);
-      level.ac130 rotateyaw(angDiff, rotateTime, 0, decelTime);
+      level.ac130 rotateYaw(angDiff, rotateTime, 0, decelTime);
       wait rotateTime - decelTime;
       thread ac130_move_out();
     }
   }
 
-  level.ac130 moveto(coordinate, moveTime, accel, decel);
+  level.ac130 moveTo(coordinate, moveTime, accel, decel);
   if(moveTime > 2.0) {
     wait(moveTime - 2.0);
     level notify("ac130_almost_at_destination");

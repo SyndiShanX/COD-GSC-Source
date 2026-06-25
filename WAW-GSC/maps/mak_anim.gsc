@@ -273,7 +273,7 @@ event1_mitch_slash(guy) {
     return;
   }
 
-  struct = getstruct("event1_blood_spray_target", "targetname");
+  struct = getStruct("event1_blood_spray_target", "targetname");
 
   origin = guy GetTagOrigin("j_neck");
   angles = VectorToAngles(struct.origin - origin);
@@ -306,8 +306,8 @@ event1_intro_sullivan_start(guy) {
 
   level thread event1_redshirts_move_up();
 
-  redshirts[0] = GetEnt("scout1", "script_noteworthy");
-  redshirts[1] = GetEnt("scout2", "script_noteworthy");
+  redshirts[0] = getEnt("scout1", "script_noteworthy");
+  redshirts[1] = getEnt("scout2", "script_noteworthy");
   level thread maps\mak::event1_redshirts_regroup();
   level thread event1_rescuers();
 
@@ -316,7 +316,7 @@ event1_intro_sullivan_start(guy) {
   level thread anim_single_solo_earlyout(level.sullivan, "intro", undefined, node, undefined, undefined, 0.5);
 
   wait(.5);
-  officer = GetEnt("intro_officer", "script_noteworthy");
+  officer = getEnt("intro_officer", "script_noteworthy");
   level anim_single_solo(officer, "intro2", undefined, node);
 
   officer thread death_after_anim();
@@ -333,9 +333,9 @@ event1_intro_sullivan_start(guy) {
 event1_redshirts_move_up() {
   node = GetNode("intro", "targetname");
   redshirts = [];
-  redshirts[0] = GetEnt("scout1", "script_noteworthy");
+  redshirts[0] = getEnt("scout1", "script_noteworthy");
   redshirts[0].animname = "intro_redshirt1";
-  redshirts[1] = GetEnt("scout2", "script_noteworthy");
+  redshirts[1] = getEnt("scout2", "script_noteworthy");
   redshirts[1].animname = "intro_redshirt2";
 
   for(i = 0; i < redshirts.size; i++) {
@@ -366,10 +366,10 @@ event1_rescuers(no_waittill) {
   } else {
     wait(2);
   }
-  pows[0] = GetEnt("pow1", "script_noteworthy");
-  pows[1] = GetEnt("pow3", "script_noteworthy");
+  pows[0] = getEnt("pow1", "script_noteworthy");
+  pows[1] = getEnt("pow3", "script_noteworthy");
 
-  boat = GetEnt("event1_rescue_raft", "targetname");
+  boat = getEnt("event1_rescue_raft", "targetname");
   v_node = GetVehicleNode("event1_rescuer_boatpath", "targetname");
   boat AttachPath(v_node);
 
@@ -400,17 +400,17 @@ event1_rescue_pow(pow, num, counter) {
 
   self.animname = "rescuer" + (num + 1);
 
-  boat = GetEnt("event1_rescue_raft", "targetname");
+  boat = getEnt("event1_rescue_raft", "targetname");
 
   self thread set_generic_run_anim("rescue_pow_cycle" + (num + 1), true);
 
   pow notify("stop_tied_up_loop");
-  pow StopAnimScripted();
+  pow StopanimScripted();
 
   pow.animname = "rescued_pow" + (num + 1);
   pow thread pow_loop(pow_anims[num], self);
 
-  pow LinkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  pow linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
 
   level anim_reach_solo(self, "castoff", undefined, boat);
 
@@ -421,11 +421,11 @@ event1_rescue_pow(pow, num, counter) {
 
   boat thread anim_single(guys, "castoff", undefined, boat);
   wait(.05);
-  pow LinkTo(boat, "tag_origin");
+  pow linkTo(boat, "tag_origin");
   wait(6);
 
   for(i = 0; i < guys.size; i++) {
-    guys[i] LinkTo(boat, "tag_origin", (0, 0, 0), (0, 0, 0));
+    guys[i] linkTo(boat, "tag_origin", (0, 0, 0), (0, 0, 0));
   }
 
   counter.count++;
@@ -538,7 +538,7 @@ event2() {
 
 event2_snare_trap(guy) {
   node = GetNode("event2_snare", "targetname");
-  branch = getstruct("event2_snare_branch", "targetname");
+  branch = getStruct("event2_snare_branch", "targetname");
 
   pos = (branch.origin[0], branch.origin[1], node.origin[2]);
 
@@ -597,7 +597,7 @@ event2_snare_dialog() {
   wait(1);
   level.sullivan anim_single_solo(level.sullivan, "hold_ground");
 
-  check_trigger = GetEnt("event2_goatpath_check_axis", "targetname");
+  check_trigger = getEnt("event2_goatpath_check_axis", "targetname");
   maps\mak::trigger_waittill_dead("axis", "team", check_trigger);
 
   flag_set("event2_banzai_dead");
@@ -905,7 +905,7 @@ switch_to_sidearm(guy) {
 }
 
 mitch_beatstick_hit(guy) {
-  struct = getstruct("event1_beatstick_target", "targetname");
+  struct = getStruct("event1_beatstick_target", "targetname");
 
   origin = guy GetTagOrigin("TAG_EYE");
   angles = VectorToAngles(struct.origin - origin);
@@ -955,7 +955,7 @@ event1_flashlight(guy) {
     light_ent = spawn("script_model", (0, 0, 0));
     light_ent setModel("tag_origin");
 
-    light_ent LinkTo(guy, "tag_fx", (0, 0, 0), (0, 0, 0));
+    light_ent linkTo(guy, "tag_fx", (0, 0, 0), (0, 0, 0));
     playFXOnTag(level._effect["flash_light"], light_ent, "tag_origin");
 
     wait(0.4);
@@ -1029,7 +1029,7 @@ event1_delete_helmet(guy) {
     players[i].viewhands Show();
   }
 
-  helmet = GetEnt("event1_helmet", "targetname");
+  helmet = getEnt("event1_helmet", "targetname");
   helmet Delete();
 }
 
@@ -1222,12 +1222,12 @@ hut4_hit_hut(ent) {
 }
 
 hut1_splash(ent) {
-  parent = GetEnt("hut1_parent", "targetname");
+  parent = getEnt("hut1_parent", "targetname");
 
   if(!isDefined(parent.play_fx)) {
     parent.played_fx = true;
     playFX(level._effect["hut1_splash"], parent.origin);
-    playsoundatposition("", parent.origin);
+    playSoundAtPosition("", parent.origin);
 
     WaterPlop(parent.origin, 2, 4);
   }
@@ -1300,9 +1300,9 @@ fx_on_pieces(pieces, effect, max, timeout) {
     fx_model = spawn("script_model", pieces[i].origin);
     fx_model setModel("tag_origin");
     fx_model.angles = (-90, 0, 0);
-    fx_model LinkTo(pieces[i]);
+    fx_model linkTo(pieces[i]);
 
-    playsoundatposition("wood_pre_crack", fx_model.origin);
+    playSoundAtPosition("wood_pre_crack", fx_model.origin);
     playFXOnTag(level._effect[effect], fx_model, "tag_origin");
 
     fx_model thread fx_on_piece_timeout(pieces[i], timeout);
@@ -1334,7 +1334,7 @@ showdown_fire(guy) {
   }
   guy.fire_count++;
 
-  enemy = GetEnt("axis_showdown", "targetname");
+  enemy = getEnt("axis_showdown", "targetname");
 
   if(guy.fire_count == 5) {
     enemy notify("stop_showdown_damage");
@@ -1358,9 +1358,9 @@ showdown_fire(guy) {
 }
 
 showdown_hut_door(guy) {
-  door = GetEnt("roundhut_door2", "targetname");
+  door = getEnt("roundhut_door2", "targetname");
   door ConnectPaths();
-  door RotateTo((0, 115, 0), 0.5, 0.1, 0);
+  door rotateTo((0, 115, 0), 0.5, 0.1, 0);
 }
 
 showdown_water_splash(guy) {
@@ -1373,21 +1373,21 @@ showdown_water_splash(guy) {
 }
 
 beatdown_hut_door(guy) {
-  door1 = GetEnt("makin_door3", "targetname");
-  door1 RotateTo((0, 120, 0), 0.3, 0.1, 0);
+  door1 = getEnt("makin_door3", "targetname");
+  door1 rotateTo((0, 120, 0), 0.3, 0.1, 0);
 
-  door2 = GetEnt("makin_door2", "targetname");
-  door2 RotateTo((0, -105, 0), 0.5, 0.1, 0);
+  door2 = getEnt("makin_door2", "targetname");
+  door2 rotateTo((0, -105, 0), 0.5, 0.1, 0);
 
   wait(0.5);
 
   boards = getEntArray("event1_door_collapse", "targetname");
-  parent = GetEnt("event1_door_collapse_parent", "script_noteworthy");
+  parent = getEnt("event1_door_collapse_parent", "script_noteworthy");
   level anim_ents(boards, "collapse", undefined, undefined, parent, "event1_door_collapse");
 }
 
 beatdown_break_apart(guy) {
-  axis = GetEnt("event1_axis_fire_beatdown", "targetname");
+  axis = getEnt("event1_axis_fire_beatdown", "targetname");
 
   flag_set("beatdown_break_apart");
 
@@ -1406,11 +1406,11 @@ beatdown_break_apart(guy) {
   node = GetNode("event1_fire_beatdown_sync", "targetname");
 
   if(isDefined(axis)) {
-    axis StopAnimScripted();
+    axis StopanimScripted();
     level thread anim_single_solo(axis, "vignette2", undefined, node);
   }
 
-  guy StopAnimScripted();
+  guy StopanimScripted();
   level thread anim_single_solo(guy, "vignette2", undefined, node);
 
   tag = "J_Elbow_RI";
@@ -1467,7 +1467,7 @@ event3_flare(guy) {
 }
 
 event3_charge() {
-  trigger = GetEnt("event3_charge_trigger", "targetname");
+  trigger = getEnt("event3_charge_trigger", "targetname");
 
   while(1) {
     trigger waittill("trigger", other);
@@ -1503,7 +1503,7 @@ event4_tower_impact(ent) {
 }
 
 held_guy_blood_Fx(guy) {
-  ally = GetEnt("ally_held_down", "targetname");;
+  ally = getEnt("ally_held_down", "targetname");;
   origin = ally GetTagOrigin("j_neck");
 
   playFX(level._effect["flesh_hit"], origin);
@@ -1750,7 +1750,7 @@ play_viewhands(anime, node, lerp, lerp_time, fraction, right_arc, left_arc, top_
     if(anime == "intro" && !is_mature()) {
       self thread non_mature_intro(viewhands, fraction, right_arc, left_arc, top_arc, bottom_arc);
     } else {
-      self PlayerLinkTo(viewhands, "tag_player", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
+      self PlayerlinkTo(viewhands, "tag_player", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
     }
   }
 
@@ -1778,7 +1778,7 @@ non_mature_intro(viewhands, fraction, right_arc, left_arc, top_arc, bottom_arc) 
 
   wait(0.1);
 
-  self PlayerLinkTo(viewhands, "tag_player", 0);
+  self PlayerlinkTo(viewhands, "tag_player", 0);
 
   self FreezeControls(true);
 
@@ -1786,14 +1786,14 @@ non_mature_intro(viewhands, fraction, right_arc, left_arc, top_arc, bottom_arc) 
 
   self thread lerp_fov(30, 0.1, 10);
 
-  officer = GetEnt("intro_officer", "script_noteworthy");
+  officer = getEnt("intro_officer", "script_noteworthy");
 
   self thread lerp_player_view_at_ent(officer, 0.1, "j_neck", (-11, 14, 0));
 
   wait(10);
 
   self thread lerp_fov(22, 4, 20);
-  ent = getstruct("event1_blood_spray_target", "targetname");
+  ent = getStruct("event1_blood_spray_target", "targetname");
   self thread lerp_player_view_at_ent(ent, 4, undefined, (-2, 0, 0));
 
   wait(20);
@@ -1808,7 +1808,7 @@ non_mature_intro(viewhands, fraction, right_arc, left_arc, top_arc, bottom_arc) 
 
   self Unlink();
   waittillframeend;
-  self PlayerLinkTo(viewhands, "tag_player", fraction, right_arc, left_arc, top_arc, bottom_arc, false);
+  self PlayerlinkTo(viewhands, "tag_player", fraction, right_arc, left_arc, top_arc, bottom_arc, false);
 
   self FreezeControls(false);
 }
@@ -1912,10 +1912,10 @@ player_into_character(spawner) {
   org = spawn("script_origin", start_pos);
   org.angles = VectorToAngles((guy GetTagOrigin(tag) - (0, 0, view_height)) - org.origin);
 
-  self PlayerLinkTo(org, "", 1, 5, 5, 5, 5);
+  self PlayerlinkTo(org, "", 1, 5, 5, 5, 5);
 
-  org MoveTo(guy GetTagOrigin(tag) - (0, 0, view_height), time, 0, time * 0.5);
-  org RotateTo(guy.angles, time, 0, time * 0.5);
+  org moveTo(guy GetTagOrigin(tag) - (0, 0, view_height), time, 0, time * 0.5);
+  org rotateTo(guy.angles, time, 0, time * 0.5);
 
   while(DistanceSquared(org.origin, guy GetTagOrigin(tag) - (0, 0, view_height)) > 12 * 12) {
     wait(0.05);

@@ -191,7 +191,7 @@ _id_5196(var_0) {
     var_7 = var_7 + 55.3;
   }
 
-  var_13 = vectornormalize(var_5 - var_10) * 1000 + var_10;
+  var_13 = vectorNormalize(var_5 - var_10) * 1000 + var_10;
   var_14 = spawnStruct();
   var_14._id_0405 = var_5;
   var_14._id_4BC1 = var_13;

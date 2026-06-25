@@ -103,7 +103,7 @@ soap_fires_flare(soap) {
   burn = getfx("flare_gulag");
   playFXOnTag(burn, tag_origin, "tag_origin");
 
-  tag_origin MoveTo(tag_origin.origin + (0, 0, 2000), 3, 0, 0);
+  tag_origin moveTo(tag_origin.origin + (0, 0, 2000), 3, 0, 0);
   wait(4);
   tag_origin delete();
 }

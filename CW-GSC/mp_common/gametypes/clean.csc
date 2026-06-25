@@ -62,7 +62,7 @@ function function_11abf5b2(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(bwastimejump == 1) {
-    self.var_47b256ef linkto(self);
+    self.var_47b256ef linkTo(self);
     return;
   }
 
@@ -97,9 +97,9 @@ function bounce_effect(localclientnum) {
   bottompos = self.origin;
 
   while(true) {
-    self.var_47b256ef moveto(toppos, 0.5, 0, 0);
+    self.var_47b256ef moveTo(toppos, 0.5, 0, 0);
     self.var_47b256ef waittill(#"movedone");
-    self.var_47b256ef moveto(bottompos, 0.5, 0, 0);
+    self.var_47b256ef moveTo(bottompos, 0.5, 0, 0);
     self.var_47b256ef waittill(#"movedone");
   }
 }

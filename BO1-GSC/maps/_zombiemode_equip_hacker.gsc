@@ -152,8 +152,8 @@ add_eligable_pooled_items() {
       height = candidate.height;
     }
     trigger = spawn("trigger_radius_use", candidate.origin, 0, radius, height);
-    trigger UseTriggerRequireLookAt();
-    trigger SetCursorHint("HINT_NOICON");
+    trigger useTriggerRequireLookAt();
+    trigger setCursorHint("HINT_NOICON");
     trigger.radius = radius;
     trigger.height = height;
     trigger.beingHacked = false;
@@ -181,7 +181,7 @@ register_hackable(name, callback_func, qualifier_func) {
       structs[i]._hack_qualifier_func = qualifier_func;
       structs[i].pooled = level._hacker_pooled;
       if(isDefined(structs[i].targetname)) {
-        structs[i].hacker_target = GetEnt(structs[i].targetname, "targetname");
+        structs[i].hacker_target = getEnt(structs[i].targetname, "targetname");
       }
       level._hackable_objects[level._hackable_objects.size] = structs[i];
       if(isDefined(level._hacker_pooled)) {
@@ -198,7 +198,7 @@ register_hackable_struct(struct, callback_func, qualifier_func) {
     struct._hack_qualifier_func = qualifier_func;
     struct.pooled = level._hacker_pooled;
     if(isDefined(struct.targetname)) {
-      struct.hacker_target = GetEnt(struct.targetname, "targetname");
+      struct.hacker_target = getEnt(struct.targetname, "targetname");
     }
     level._hackable_objects[level._hackable_objects.size] = struct;
     if(isDefined(level._hacker_pooled)) {
@@ -281,10 +281,10 @@ is_facing(facee) {
   orientation = self getPlayerAngles();
   forwardVec = anglesToForward(orientation);
   forwardVec2D = (forwardVec[0], forwardVec[1], 0);
-  unitForwardVec2D = VectorNormalize(forwardVec2D);
+  unitForwardVec2D = vectorNormalize(forwardVec2D);
   toFaceeVec = facee.origin - self.origin;
   toFaceeVec2D = (toFaceeVec[0], toFaceeVec[1], 0);
-  unitToFaceeVec2D = VectorNormalize(toFaceeVec2D);
+  unitToFaceeVec2D = vectorNormalize(toFaceeVec2D);
   dotProduct = VectorDot(unitForwardVec2D, unitToFaceeVec2D);
   dot_limit = 0.8;
   if(isDefined(facee.dot_limit)) {
@@ -355,12 +355,12 @@ is_hacking(hackable) {
 set_hack_hint_string() {
   if(isDefined(self._trigger)) {
     if(isDefined(self.custom_string)) {
-      self._trigger SetHintString(self.custom_string);
+      self._trigger setHintString(self.custom_string);
     } else {
       if(!isDefined(self.script_int) || self.script_int <= 0) {
-        self._trigger SetHintString(&"ZOMBIE_HACK_NO_COST");
+        self._trigger setHintString(&"ZOMBIE_HACK_NO_COST");
       } else {
-        self._trigger SetHintString(&"ZOMBIE_HACK", self.script_int);
+        self._trigger setHintString(&"ZOMBIE_HACK", self.script_int);
       }
     }
   }
@@ -455,8 +455,8 @@ hackable_object_thread() {
   }
   if(!isDefined(self.pooled)) {
     trigger = spawn("trigger_radius_use", self.origin, 0, radius, height);
-    trigger UseTriggerRequireLookAt();
-    trigger SetCursorHint("HINT_NOICON");
+    trigger useTriggerRequireLookAt();
+    trigger setCursorHint("HINT_NOICON");
     trigger.radius = radius;
     trigger.height = height;
     trigger.beingHacked = false;
@@ -477,7 +477,7 @@ hackable_object_thread() {
     }
     players = get_players();
     if(isDefined(self._trigger)) {
-      self._trigger SetHintString("");
+      self._trigger setHintString("");
       if(isDefined(self.entity)) {
         self.origin = self.entity.origin;
         self._trigger.origin = self.entity.origin;

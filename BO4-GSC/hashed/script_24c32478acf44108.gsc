@@ -264,8 +264,8 @@ function_865a83f8(zombie, target, predictedpos, var_95342913) {
   enemyvec = zombie.origin - origin;
   var_3e3c8075 = (enemyvec[0], enemyvec[1], 0);
   var_c2ee8451 = (facingvec[0], facingvec[1], 0);
-  var_3e3c8075 = vectornormalize(var_3e3c8075);
-  var_c2ee8451 = vectornormalize(var_c2ee8451);
+  var_3e3c8075 = vectorNormalize(var_3e3c8075);
+  var_c2ee8451 = vectorNormalize(var_c2ee8451);
   enemydot = vectordot(var_c2ee8451, var_3e3c8075);
 
   if(enemydot < 0) {

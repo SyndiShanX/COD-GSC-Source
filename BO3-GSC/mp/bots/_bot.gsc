@@ -239,8 +239,8 @@ function monitor_bot_team_population(maxallies, maxaxis) {
   fill_balanced_teams(maxallies, maxaxis);
   while(true) {
     wait(3);
-    allies = getplayers("allies");
-    axis = getplayers("axis");
+    allies = getPlayers("allies");
+    axis = getPlayers("axis");
     if(allies.size > maxallies && remove_best_bot(allies)) {
       continue;
     }
@@ -254,12 +254,12 @@ function monitor_bot_team_population(maxallies, maxaxis) {
 }
 
 function fill_balanced_teams(maxallies, maxaxis) {
-  allies = getplayers("allies");
-  axis = getplayers("axis");
+  allies = getPlayers("allies");
+  axis = getPlayers("axis");
   while(allies.size < maxallies || axis.size < maxaxis && add_balanced_bot(allies, maxallies, axis, maxaxis)) {
     wait(0.05);
-    allies = getplayers("allies");
-    axis = getplayers("axis");
+    allies = getPlayers("allies");
+    axis = getPlayers("axis");
   }
 }
 
@@ -278,15 +278,15 @@ function monitor_bot_population(maxfree) {
   if(!maxfree) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   while(players.size < maxfree) {
     add_bot();
     wait(0.05);
-    players = getplayers();
+    players = getPlayers();
   }
   while(true) {
     wait(3);
-    players = getplayers();
+    players = getPlayers();
     if(players.size < maxfree) {
       add_bot();
     } else if(players.size > maxfree) {
@@ -411,7 +411,7 @@ function get_enemies(on_radar = 0) {
 }
 
 function set_rank() {
-  players = getplayers();
+  players = getPlayers();
   ranks = [];
   bot_ranks = [];
   human_ranks = [];
@@ -591,7 +591,7 @@ function function_682f20bc(cmd) {
       return true;
     }
     case "": {
-      players = getplayers();
+      players = getPlayers();
       foreach(player in players) {
         if(!player util::is_bot()) {
           continue;
@@ -623,7 +623,7 @@ function system_devgui_gadget_think() {
 }
 
 function bot_turn_on_gadget(gadget) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     if(!player util::is_bot()) {
       continue;
@@ -652,7 +652,7 @@ function fixed_spawn_override() {
   spawnangles = self.angles;
   while(true) {
     self waittill("spawned_player");
-    self setorigin(spawnorigin);
+    self setOrigin(spawnorigin);
     self setplayerangles(spawnangles);
   }
 }

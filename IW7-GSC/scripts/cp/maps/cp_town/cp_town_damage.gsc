@@ -177,12 +177,12 @@ cp_town_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
       var_37 = 7000;
       self.ragdollhitloc = var_8;
       if(!isDefined(var_7)) {
-        var_7 = vectornormalize(self.origin - var_1.origin);
+        var_7 = vectorNormalize(self.origin - var_1.origin);
       }
 
       if(lengthsquared(var_7) < 1) {
         var_38 = self.origin - var_1.origin;
-        var_38 = vectornormalize((var_38[0], var_38[1], var_38[2]));
+        var_38 = vectorNormalize((var_38[0], var_38[1], var_38[2]));
         self.ragdollimpactvector = var_38 * var_37;
       } else {
         self.ragdollimpactvector = var_7 * var_37;
@@ -280,12 +280,12 @@ cp_town_onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
         self.kung_fu_punched = 1;
         self.ragdollhitloc = var_8;
         if(!isDefined(var_7)) {
-          var_7 = vectornormalize(self.origin - var_1.origin);
+          var_7 = vectorNormalize(self.origin - var_1.origin);
         }
 
         if(lengthsquared(var_7) < 1) {
           var_38 = self.origin - var_1.origin;
-          var_38 = vectornormalize((var_38[0], var_38[1], var_38[2]));
+          var_38 = vectorNormalize((var_38[0], var_38[1], var_38[2]));
           self.ragdollimpactvector = var_38 * var_37;
         } else {
           self.ragdollimpactvector = var_7 * var_37;
@@ -549,7 +549,7 @@ cp_town_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
       var_15 = 3;
       var_10 = self.origin + (0, 0, 20);
       var_11 = (randomint(350), randomint(350), randomint(350));
-      var_11 = vectornormalize(var_11) * var_14;
+      var_11 = vectorNormalize(var_11) * var_14;
       var_12 = self launchgrenade("frag_grenade_zm", var_10, var_11, var_15);
     }
   }
@@ -1062,7 +1062,7 @@ kung_fu_damage_everyone_in_radius(var_0, var_1, var_2, var_3) {
 flying_ghost_body(var_0, var_1, var_2) {
   var_3 = 100;
   var_4 = 20;
-  var_5 = vectornormalize(self.origin - var_0.origin) * var_3 + (0, 0, var_4);
+  var_5 = vectorNormalize(self.origin - var_0.origin) * var_3 + (0, 0, var_4);
   var_6 = self.origin + var_5;
   var_7 = level._effect["chi_ghost_hit_blue"];
   if(isDefined(var_0.kung_fu_progression.active_discipline)) {

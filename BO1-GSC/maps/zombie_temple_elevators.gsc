@@ -35,13 +35,13 @@ init_temple_geyser() {
     if(!isDefined(geyserTrigger.top.angles)) {
       geyserTrigger.top.angles = (0, 0, 0);
     }
-    geyserTrigger.trigger_dust = getent("trigger_" + geyserTrigger.script_noteworthy + "_dust", "targetname");
+    geyserTrigger.trigger_dust = getEnt("trigger_" + geyserTrigger.script_noteworthy + "_dust", "targetname");
     if(isDefined(geyserTrigger.trigger_dust)) {
       geyserTrigger.trigger_dust thread geyser_trigger_dust_think();
     }
     if(isDefined(geyserTrigger.script_noteworthy)) {
       flag_init(geyserTrigger.script_noteworthy + "_active");
-      blocker = GetEnt(geyserTrigger.script_noteworthy + "_blocker", "targetname");
+      blocker = getEnt(geyserTrigger.script_noteworthy + "_blocker", "targetname");
       if(isDefined(blocker)) {
         geyserTrigger thread geyser_blocker_think(blocker);
       }
@@ -186,7 +186,7 @@ player_geyser_move(geyser) {
   scale = (geyser.top.origin[2] - self.origin[2]) / (geyser.top.origin[2] - geyser.bottom.origin[2]);
   scale = clamp(scale, .4, 1.0);
   mover = spawn("script_origin", self.origin);
-  self PlayerLinkTo(mover);
+  self PlayerlinkTo(mover);
   x = geyser.push_x;
   y = geyser.push_y;
   z = geyser.push_z * scale;
@@ -296,7 +296,7 @@ geyser_blocker_think(blocker) {
   level notify("geyser_enabled", self);
 }
 geyser_sounds(struct_name, sfx_start, sfx_loop, sfx_loop_delay) {
-  sound_struct = getstruct(struct_name, "targetname");
+  sound_struct = getStruct(struct_name, "targetname");
   if(isDefined(sound_struct)) {
     level thread play_sound_in_space(sfx_start, sound_struct.origin);
     if(isDefined(sfx_loop_delay) && sfx_loop_delay > 0.0) {
@@ -310,7 +310,7 @@ geyser_sounds(struct_name, sfx_start, sfx_loop, sfx_loop_delay) {
   }
 }
 geyser_blocker_remove() {
-  clip = GetEnt(self.target, "targetname");
+  clip = getEnt(self.target, "targetname");
   clip Delete();
   struct = spawnStruct();
   struct.origin = self.origin + (0, 0, 500);

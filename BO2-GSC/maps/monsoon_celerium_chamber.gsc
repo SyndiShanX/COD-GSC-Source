@@ -47,35 +47,35 @@ turn_off_all_lab_trigs() {
   }
 
   a_lab_trigs = [];
-  a_lab_trigs[0] = getent("trig_spawn_lobby_guys", "targetname");
-  a_lab_trigs[1] = getent("trig_lab_1_1_color_cleared", "targetname");
-  a_lab_trigs[2] = getent("trig_color_lobby_mid", "targetname");
-  a_lab_trigs[3] = getent("trig_vo_player_asd", "targetname");
-  a_lab_trigs[4] = getent("trig_sm_lab_dumby", "targetname");
-  a_lab_trigs[5] = getent("trig_sm_lab_2_1_frontline", "targetname");
-  a_lab_trigs[6] = getent("trig_sm_lab_1_1_frontline", "targetname");
-  a_lab_trigs[7] = getent("trig_lab_1_1_frontline_half", "targetname");
-  a_lab_trigs[8] = getent("trig_lab_2_1_frontline_half", "targetname");
-  a_lab_trigs[9] = getent("trig_spawn_ambient_2_1_asd", "targetname");
-  a_lab_trigs[10] = getent("trig_sm_lab_1_1", "targetname");
-  a_lab_trigs[11] = getent("trig_window_jumper", "targetname");
-  a_lab_trigs[12] = getent("trig_lab_2_1_frontline_cleared", "targetname");
-  a_lab_trigs[13] = getent("trig_lab_1_1_guys_half", "targetname");
-  a_lab_trigs[14] = getent("trig_stair_tumble_guy", "targetname");
-  a_lab_trigs[15] = getent("trig_harper_railing_throw", "targetname");
-  a_lab_trigs[16] = getent("trig_sm_lab_1_2_frontline", "targetname");
-  a_lab_trigs[17] = getent("trig_lab_2_1_guys_half", "targetname");
-  a_lab_trigs[18] = getent("trig_sm_lab_2_2", "targetname");
-  a_lab_trigs[19] = getent("interior_lift_trigger", "targetname");
-  a_lab_trigs[20] = getent("trig_lab_2_2_frontline_half", "targetname");
-  a_lab_trigs[21] = getent("trig_lab_1_2_frontline_half", "targetname");
-  a_lab_trigs[22] = getent("trig_sm_lab_1_2", "targetname");
-  a_lab_trigs[23] = getent("trig_lab_2_2_guys_half", "targetname");
-  a_lab_trigs[24] = getent("trig_lab_1_2_guys_half", "targetname");
-  a_lab_trigs[25] = getent("trig_harper_speed_up", "targetname");
-  a_lab_trigs[26] = getent("trig_salazar_crosby_speed_up", "targetname");
-  a_lab_trigs[27] = getent("trig_lab_2_2_guys_cleared", "targetname");
-  a_lab_trigs[28] = getent("trig_lab_1_2_guys_cleared", "targetname");
+  a_lab_trigs[0] = getEnt("trig_spawn_lobby_guys", "targetname");
+  a_lab_trigs[1] = getEnt("trig_lab_1_1_color_cleared", "targetname");
+  a_lab_trigs[2] = getEnt("trig_color_lobby_mid", "targetname");
+  a_lab_trigs[3] = getEnt("trig_vo_player_asd", "targetname");
+  a_lab_trigs[4] = getEnt("trig_sm_lab_dumby", "targetname");
+  a_lab_trigs[5] = getEnt("trig_sm_lab_2_1_frontline", "targetname");
+  a_lab_trigs[6] = getEnt("trig_sm_lab_1_1_frontline", "targetname");
+  a_lab_trigs[7] = getEnt("trig_lab_1_1_frontline_half", "targetname");
+  a_lab_trigs[8] = getEnt("trig_lab_2_1_frontline_half", "targetname");
+  a_lab_trigs[9] = getEnt("trig_spawn_ambient_2_1_asd", "targetname");
+  a_lab_trigs[10] = getEnt("trig_sm_lab_1_1", "targetname");
+  a_lab_trigs[11] = getEnt("trig_window_jumper", "targetname");
+  a_lab_trigs[12] = getEnt("trig_lab_2_1_frontline_cleared", "targetname");
+  a_lab_trigs[13] = getEnt("trig_lab_1_1_guys_half", "targetname");
+  a_lab_trigs[14] = getEnt("trig_stair_tumble_guy", "targetname");
+  a_lab_trigs[15] = getEnt("trig_harper_railing_throw", "targetname");
+  a_lab_trigs[16] = getEnt("trig_sm_lab_1_2_frontline", "targetname");
+  a_lab_trigs[17] = getEnt("trig_lab_2_1_guys_half", "targetname");
+  a_lab_trigs[18] = getEnt("trig_sm_lab_2_2", "targetname");
+  a_lab_trigs[19] = getEnt("interior_lift_trigger", "targetname");
+  a_lab_trigs[20] = getEnt("trig_lab_2_2_frontline_half", "targetname");
+  a_lab_trigs[21] = getEnt("trig_lab_1_2_frontline_half", "targetname");
+  a_lab_trigs[22] = getEnt("trig_sm_lab_1_2", "targetname");
+  a_lab_trigs[23] = getEnt("trig_lab_2_2_guys_half", "targetname");
+  a_lab_trigs[24] = getEnt("trig_lab_1_2_guys_half", "targetname");
+  a_lab_trigs[25] = getEnt("trig_harper_speed_up", "targetname");
+  a_lab_trigs[26] = getEnt("trig_salazar_crosby_speed_up", "targetname");
+  a_lab_trigs[27] = getEnt("trig_lab_2_2_guys_cleared", "targetname");
+  a_lab_trigs[28] = getEnt("trig_lab_1_2_guys_cleared", "targetname");
 
   foreach(trig in a_lab_trigs) {
     trig trigger_off();
@@ -145,10 +145,10 @@ escape_lab() {
   delete_exploder(9888);
   wait 0.05;
   wait_network_frame();
-  e_lab_stair_blocker_m = getent("lab_stair_blocker_m", "targetname");
+  e_lab_stair_blocker_m = getEnt("lab_stair_blocker_m", "targetname");
   e_lab_stair_blocker_m show();
   e_lab_stair_blocker_m solid();
-  e_lab_stair_blocker_clip = getent("lab_stair_blocker_clip", "targetname");
+  e_lab_stair_blocker_clip = getEnt("lab_stair_blocker_clip", "targetname");
   e_lab_stair_blocker_clip show();
   e_lab_stair_blocker_clip solid();
   level thread escape_vo();
@@ -162,10 +162,10 @@ escape_lab() {
   }
 
   kill_spawnernum(202);
-  e_escape_blast_doors = getent("escape_blast_doors", "targetname");
+  e_escape_blast_doors = getEnt("escape_blast_doors", "targetname");
   e_escape_blast_doors show();
   e_escape_blast_doors solid();
-  e_escape_blast_doors disconnectpaths();
+  e_escape_blast_doors disconnectPaths();
   a_escape_trigs = getEntArray("escape_trigs", "script_noteworthy");
 
   foreach(trig in a_escape_trigs) {
@@ -182,18 +182,18 @@ escape_lab() {
     asd solid();
   }
 
-  e_player_chair_clip = getent("player_chair_clip", "targetname");
+  e_player_chair_clip = getEnt("player_chair_clip", "targetname");
   e_player_chair_clip show();
   e_player_chair_clip solid();
   trigger_wait("trig_escape_doors_1");
-  playsoundatposition("evt_escape_doors", (8777, 56337, -1139));
-  m_escape_door_01l = getent("escape_door_01l", "targetname");
-  m_escape_door_01r = getent("escape_door_01r", "targetname");
+  playSoundAtPosition("evt_escape_doors", (8777, 56337, -1139));
+  m_escape_door_01l = getEnt("escape_door_01l", "targetname");
+  m_escape_door_01r = getEnt("escape_door_01r", "targetname");
   m_escape_door_01l movex(-90, 0.5);
   m_escape_door_01r movex(90, 0.5);
   trigger_wait("trig_escape_doors_2");
-  m_escape_door_02l = getent("escape_door_02l", "targetname");
-  m_escape_door_02r = getent("escape_door_02r", "targetname");
+  m_escape_door_02l = getEnt("escape_door_02l", "targetname");
+  m_escape_door_02r = getEnt("escape_door_02r", "targetname");
   m_escape_door_02l movey(90, 0.5);
   m_escape_door_02r movey(-90, 0.5);
   flag_wait("spawn_top_stairs_guys");
@@ -250,7 +250,7 @@ escape_lab() {
   level.player thread player_walk_speed_adjustment(level.briggs, "briggs_in_position", 512, 1024, 0.5, 0.6);
   clean_room_ending();
   flag_wait("briggs_in_position");
-  trig_briggs_player_use = getent("briggs_player_use", "targetname");
+  trig_briggs_player_use = getEnt("briggs_player_use", "targetname");
   trig_briggs_player_use trigger_on();
   trig_briggs_player_use waittill("trigger");
   trig_briggs_player_use trigger_off();
@@ -298,8 +298,8 @@ crawl_back_victim() {
   ai_hallway_victim_killer.ignoreme = 1;
   ai_hallway_victim_killer.ignoreall = 1;
   ai_hallway_victim_killer magic_bullet_shield();
-  s_last_stand_magicbullet = getstruct("last_stand_magicbullet", "targetname");
-  s_last_stand_magicbullet_end = getstruct(s_last_stand_magicbullet.target, "targetname");
+  s_last_stand_magicbullet = getStruct("last_stand_magicbullet", "targetname");
+  s_last_stand_magicbullet_end = getStruct(s_last_stand_magicbullet.target, "targetname");
   magicbullet("scar_sp", s_last_stand_magicbullet.origin, s_last_stand_magicbullet_end.origin);
   magicbullet("scar_sp", s_last_stand_magicbullet.origin, s_last_stand_magicbullet_end.origin);
   magicbullet("scar_sp", s_last_stand_magicbullet.origin, s_last_stand_magicbullet_end.origin);
@@ -330,22 +330,22 @@ clean_room_ending() {
 }
 
 escape_doors_setup() {
-  m_escape_door_01l = getent("escape_door_01l", "targetname");
-  m_escape_door_01l_clip = getent("escape_door_01l_clip", "targetname");
-  m_escape_door_01l_clip linkto(m_escape_door_01l);
-  m_escape_door_01r = getent("escape_door_01r", "targetname");
-  m_escape_door_01r_clip = getent("escape_door_01r_clip", "targetname");
-  m_escape_door_01r_clip linkto(m_escape_door_01r);
+  m_escape_door_01l = getEnt("escape_door_01l", "targetname");
+  m_escape_door_01l_clip = getEnt("escape_door_01l_clip", "targetname");
+  m_escape_door_01l_clip linkTo(m_escape_door_01l);
+  m_escape_door_01r = getEnt("escape_door_01r", "targetname");
+  m_escape_door_01r_clip = getEnt("escape_door_01r_clip", "targetname");
+  m_escape_door_01r_clip linkTo(m_escape_door_01r);
   m_escape_door_01l_clip connectpaths();
   m_escape_door_01r_clip connectpaths();
   m_escape_door_01l connectpaths();
   m_escape_door_01r connectpaths();
-  m_escape_door_02l = getent("escape_door_02l", "targetname");
-  m_escape_door_02l_clip = getent("escape_door_02l_clip", "targetname");
-  m_escape_door_02l_clip linkto(m_escape_door_02l);
-  m_escape_door_02r = getent("escape_door_02r", "targetname");
-  m_escape_door_02r_clip = getent("escape_door_02r_clip", "targetname");
-  m_escape_door_02r_clip linkto(m_escape_door_02r);
+  m_escape_door_02l = getEnt("escape_door_02l", "targetname");
+  m_escape_door_02l_clip = getEnt("escape_door_02l_clip", "targetname");
+  m_escape_door_02l_clip linkTo(m_escape_door_02l);
+  m_escape_door_02r = getEnt("escape_door_02r", "targetname");
+  m_escape_door_02r_clip = getEnt("escape_door_02r_clip", "targetname");
+  m_escape_door_02r_clip linkTo(m_escape_door_02r);
   m_escape_door_02l_clip connectpaths();
   m_escape_door_02r_clip connectpaths();
   m_escape_door_02l connectpaths();
@@ -435,7 +435,7 @@ celerium_retrieval() {
 }
 
 celerium_vision_set_tracking() {
-  s_pos = getstruct("back_celerium_door_rumble_dist", "targetname");
+  s_pos = getStruct("back_celerium_door_rumble_dist", "targetname");
 
   while(true) {
     while(level.player.origin[0] > s_pos.origin[0]) {
@@ -465,7 +465,7 @@ data_stream_rotate_think() {
   level.n_data_stream_speed = 14;
 
   while(!flag("shutdown_lights")) {
-    self rotateyaw(-360, level.n_data_stream_speed);
+    self rotateYaw(-360, level.n_data_stream_speed);
     self waittill("rotatedone");
   }
 }
@@ -513,29 +513,29 @@ celerium_enemies() {
 celerium_entrance_doors() {
   flag_wait("player_triggered_celerium_door");
   level thread maps\_audio::switch_music_wait("MONSOON_CELERIUM", 3);
-  bm_celerium_door_front_l = getent("celerium_door_front_l", "targetname");
-  bm_celerium_door_front_r = getent("celerium_door_front_r", "targetname");
-  e_celerium_door_left_clip = getent("celerium_door_left_clip", "targetname");
-  e_celerium_door_right_clip = getent("celerium_door_right_clip", "targetname");
-  e_celerium_door_left_clip linkto(bm_celerium_door_front_l);
-  e_celerium_door_right_clip linkto(bm_celerium_door_front_r);
-  bm_celerium_door_rear_l = getent("celerium_door_rear_l", "targetname");
-  bm_celerium_door_rear_r = getent("celerium_door_rear_r", "targetname");
-  e_celerium_door_left_rear_clip = getent("celerium_door_left_rear_clip", "targetname");
-  e_celerium_door_right_rear_clip = getent("celerium_door_right_rear_clip", "targetname");
-  e_celerium_door_left_rear_clip linkto(bm_celerium_door_rear_l);
-  e_celerium_door_right_rear_clip linkto(bm_celerium_door_rear_r);
+  bm_celerium_door_front_l = getEnt("celerium_door_front_l", "targetname");
+  bm_celerium_door_front_r = getEnt("celerium_door_front_r", "targetname");
+  e_celerium_door_left_clip = getEnt("celerium_door_left_clip", "targetname");
+  e_celerium_door_right_clip = getEnt("celerium_door_right_clip", "targetname");
+  e_celerium_door_left_clip linkTo(bm_celerium_door_front_l);
+  e_celerium_door_right_clip linkTo(bm_celerium_door_front_r);
+  bm_celerium_door_rear_l = getEnt("celerium_door_rear_l", "targetname");
+  bm_celerium_door_rear_r = getEnt("celerium_door_rear_r", "targetname");
+  e_celerium_door_left_rear_clip = getEnt("celerium_door_left_rear_clip", "targetname");
+  e_celerium_door_right_rear_clip = getEnt("celerium_door_right_rear_clip", "targetname");
+  e_celerium_door_left_rear_clip linkTo(bm_celerium_door_rear_l);
+  e_celerium_door_right_rear_clip linkTo(bm_celerium_door_rear_r);
   bm_celerium_door_front_l playSound("evt_celerium_doors");
   bm_celerium_door_front_l movey(-90, 5, 1);
   bm_celerium_door_front_r movey(90, 5, 1);
   wait 1.5;
   bm_celerium_door_rear_l movey(-83, 5, 1);
   bm_celerium_door_rear_r movey(83, 5, 1);
-  s_front_celerium_door_rumble_dist = getstruct("front_celerium_door_rumble_dist", "targetname");
+  s_front_celerium_door_rumble_dist = getStruct("front_celerium_door_rumble_dist", "targetname");
   s_front_celerium_door_rumble_dist.is_moving = 1;
   s_front_celerium_door_rumble_dist.is_big_door = 1;
   s_front_celerium_door_rumble_dist thread player_door_rumble();
-  s_back_celerium_door_rumble_dist = getstruct("back_celerium_door_rumble_dist", "targetname");
+  s_back_celerium_door_rumble_dist = getStruct("back_celerium_door_rumble_dist", "targetname");
   s_back_celerium_door_rumble_dist.is_moving = 1;
   s_back_celerium_door_rumble_dist.is_big_door = 1;
   s_back_celerium_door_rumble_dist thread player_door_rumble();
@@ -544,7 +544,7 @@ celerium_entrance_doors() {
   n_distance = distance2d(s_front_celerium_door_rumble_dist.origin, level.player.origin);
 
   if(n_distance < 500) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 
   bm_celerium_door_rear_l waittill("movedone");
@@ -552,7 +552,7 @@ celerium_entrance_doors() {
   n_distance = distance2d(s_back_celerium_door_rumble_dist.origin, level.player.origin);
 
   if(n_distance < 500) {
-    level.player playrumbleonentity("damage_heavy");
+    level.player playRumbleOnEntity("damage_heavy");
   }
 
   bm_celerium_door_front_l connectpaths();
@@ -574,7 +574,7 @@ celerium_lighting() {
     data hide();
   }
 
-  c_data_00 = getent("c_data_00", "targetname");
+  c_data_00 = getEnt("c_data_00", "targetname");
   c_data_00 hide();
   level thread exterior_rim_lights();
   exploder(9888);
@@ -647,7 +647,7 @@ celerium_door_visor_text() {
 player_celerium() {
   flag_wait("set_celerium_door_obj");
   setmusicstate("MONSOON_DEFEND_EVENT_END");
-  trig_player_celerium_door = getent("trig_player_celerium_door", "targetname");
+  trig_player_celerium_door = getEnt("trig_player_celerium_door", "targetname");
   trig_player_celerium_door trigger_on();
   trig_player_celerium_door waittill("trigger");
   trig_player_celerium_door delete();
@@ -690,7 +690,7 @@ player_celerium() {
   wait 0.75;
   clientnotify("light_celerium_entrance");
   flag_wait("set_celerium_chip_obj");
-  trig_player_celerium = getent("trig_player_celerium", "targetname");
+  trig_player_celerium = getEnt("trig_player_celerium", "targetname");
   trig_player_celerium trigger_on();
   trig_player_celerium waittill("trigger");
   trig_player_celerium delete();
@@ -714,8 +714,8 @@ player_celerium() {
   level thread run_scene("enemy_wounded_3");
   level thread run_scene("belly_crawl_long_2");
   autosave_by_name("celerium_event_save");
-  s_window_jumper_target = getstruct("window_jumper_target", "targetname");
-  s_window_jumper_target_end = getstruct(s_window_jumper_target.target, "targetname");
+  s_window_jumper_target = getStruct("window_jumper_target", "targetname");
+  s_window_jumper_target_end = getStruct(s_window_jumper_target.target, "targetname");
   radiusdamage(s_window_jumper_target.origin, 100, 400, 200);
   radiusdamage(s_window_jumper_target_end.origin, 100, 400, 200);
 }
@@ -741,7 +741,7 @@ isaac_celerium() {
   run_scene("isaac_celerium_door_open");
   run_scene("isaac_celerium_approach");
   flag_set("set_celerium_chip_obj");
-  playsoundatposition("evt_celerium_interact", (5793, 56153, -1164));
+  playSoundAtPosition("evt_celerium_interact", (5793, 56153, -1164));
   level thread run_scene("isaac_celerium_loop");
   flag_wait("player_at_celerium");
   self stop_magic_bullet_shield();
@@ -753,17 +753,17 @@ attach_device_to_player(guy) {}
 
 celerium_glass() {
   flag_wait("player_at_celerium");
-  e_celerium_shield_screen = getent("celerium_shield_screen", "targetname");
+  e_celerium_shield_screen = getEnt("celerium_shield_screen", "targetname");
   e_celerium_shield_screen show();
   e_celerium_shield_screen movez(14.5, 1);
   flag_wait("open_celerium_glass");
   exploder(9777);
   e_celerium_shield_screen movez(-14.5, 1);
   level clientnotify("clrm_x");
-  playsoundatposition("evt_celerium_glass", (5793, 56153, -1164));
-  e_celerium_shield_glow = getent("celerium_shield_glow", "targetname");
+  playSoundAtPosition("evt_celerium_glass", (5793, 56153, -1164));
+  e_celerium_shield_glow = getEnt("celerium_shield_glow", "targetname");
   e_celerium_shield_glow hide();
-  e_celerium_shield = getent("celerium_shield", "targetname");
+  e_celerium_shield = getEnt("celerium_shield", "targetname");
   e_celerium_shield movez(-58, 6);
   e_celerium_shield_screen waittill("movedone");
   e_celerium_shield_screen hide();

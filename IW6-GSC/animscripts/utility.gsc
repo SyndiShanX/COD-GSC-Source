@@ -733,7 +733,7 @@ throwgun() {
   var_3 = "weapon_" + self.weapon;
   var_4 = spawn(var_3, var_0.origin);
   var_4.angles = self gettagangles("tag_weapon_right");
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   var_5 = var_0.origin;
 
   while(isDefined(var_4) && isDefined(var_4.origin)) {
@@ -1206,7 +1206,7 @@ findgoodsuppressspot(var_0) {
   var_2 = bulletTrace(self.lastenemysightpos, var_1, 0, undefined);
   var_3 = var_2["position"];
   var_4 = self.lastenemysightpos - var_3;
-  var_5 = vectornormalize(self.lastenemysightpos - var_0);
+  var_5 = vectorNormalize(self.lastenemysightpos - var_0);
   var_4 = var_4 - var_5 * vectordot(var_4, var_5);
   var_6 = 20.0;
   var_7 = int(length(var_4) / var_6 + 0.5);

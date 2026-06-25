@@ -58,7 +58,7 @@ function init_flags() {
 
 function function_60f7b1b6() {
   level endon("hash_ee3f7dc5");
-  struct = getent("igc_kane_khalil_1", "targetname");
+  struct = getEnt("igc_kane_khalil_1", "targetname");
   level flag::wait_till("flag_kayne_pre_water");
   wait(6);
   struct scene::play("cin_aqu_03_19_pre_water_room_kane", level.kayne);
@@ -71,7 +71,7 @@ function function_1ecf48ef() {
   scene::init("cin_aqu_05_01_enter_1st_look");
   level waittill("hash_7e64f485");
   var_5b5cfed1 = trigger::wait_till("water_room_igc");
-  struct = getent("igc_kane_khalil_1", "targetname");
+  struct = getEnt("igc_kane_khalil_1", "targetname");
   level notify("hash_ee3f7dc5");
   if(isDefined(level.bzm_aquiferdialogue1_7callback)) {
     level thread[[level.bzm_aquiferdialogue1_7callback]]();
@@ -129,11 +129,11 @@ function function_4a90c357() {
   }
   level thread lui::screen_fade_out(1);
   wait(1);
-  level.kayne stopanimscripted();
+  level.kayne stopanimScripted();
   setDvar("player_swimSpeed", 150);
   level.kayne clientfield::set("kane_bubbles_fx", 0);
   thread function_3ed240f1();
-  var_31b9fd4a = getent("doubledoor_sbm", "targetname");
+  var_31b9fd4a = getEnt("doubledoor_sbm", "targetname");
   var_31b9fd4a hide();
   level thread namespace_71a63eac::function_8210b658();
   level thread scene::play("cin_aqu_02_01_floodroom_1st_dragged", level.kayne);
@@ -149,10 +149,10 @@ function function_4a90c357() {
 
 function function_8aec0a4c() {
   level endon("hash_66250ae7");
-  trig = getent("trig_trap_door", "targetname");
+  trig = getEnt("trig_trap_door", "targetname");
   trig triggerenable(0);
-  struct = getent("igc_kane_water", "targetname");
-  var_31b9fd4a = getent("doubledoor_sbm", "targetname");
+  struct = getEnt("igc_kane_water", "targetname");
+  var_31b9fd4a = getEnt("doubledoor_sbm", "targetname");
   var_31b9fd4a show();
   struct scene::play("cin_aqu_03_21_server_room_enter", level.kayne);
   struct thread scene::play("cin_aqu_03_21_server_room_idle", level.kayne);
@@ -227,7 +227,7 @@ function function_ee430caa() {
     level thread[[level.bzm_aquiferdialogue3callback]]();
   }
   thread function_ddc03444();
-  struct = getent("igc_kane_khalil_1", "targetname");
+  struct = getEnt("igc_kane_khalil_1", "targetname");
   if(!isDefined(level.activeplayers[0].pvtol)) {
     level.activeplayers[0] aquifer_util::function_d683f26a(0);
   }
@@ -282,7 +282,7 @@ function emprumbleloop(duration) {
   self notify("emp_rumble_loop");
   goaltime = gettime() + (duration * 1000);
   while(gettime() < goaltime) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }
@@ -431,7 +431,7 @@ function function_a1b52577() {
   level flag::wait_till_all(array("flag_maretti_trap_door", "flag_kayne_ready_trap", "flag_door_explodes"));
   exploder::exploder("server_room_boobytrap");
   level thread cp_mi_cairo_aquifer_sound::function_ceaeaa5a();
-  trapdoor = getent("mdl_trapdoor", "targetname");
+  trapdoor = getEnt("mdl_trapdoor", "targetname");
   trapdoor delete();
   level thread function_cb3decf1();
   thread function_a05b1c8c();
@@ -454,10 +454,10 @@ function function_71af9864() {
   spawn_manager::enable("spawn_manager_water_robots");
   spawn_manager::enable("spawn_manager_flood_robots2");
   wait(2);
-  struct = getent("igc_kane_water", "targetname");
+  struct = getEnt("igc_kane_water", "targetname");
   struct thread scene::play("cin_aqu_03_21_server_room_doors_open");
   level thread cp_mi_cairo_aquifer_sound::function_ed6114d2();
-  var_31b9fd4a = getent("doubledoor_sbm", "targetname");
+  var_31b9fd4a = getEnt("doubledoor_sbm", "targetname");
   var_31b9fd4a delete();
 }
 
@@ -486,18 +486,18 @@ function function_8fdcc95b(delay) {
 
 function function_67c72b6() {
   level endon("hash_bf1c950c");
-  struct = getent("igc_kane_water", "targetname");
+  struct = getEnt("igc_kane_water", "targetname");
   struct scene::play("cin_aqu_03_22_water_room_escape_start", level.kayne);
   struct thread scene::play("cin_aqu_03_22_water_room_escape_fire_loop", level.kayne);
   spawner::waittill_ai_group_cleared("interior_robots_water");
-  level.kayne stopanimscripted();
+  level.kayne stopanimScripted();
   struct scene::play("cin_aqu_03_22_water_room_escape_end", level.kayne);
   struct scene::play("cin_aqu_03_22_water_room_escape_end_loop", level.kayne);
 }
 
 function function_cb3decf1() {
-  var_e9dd177b = getent("trig_trap_door", "targetname");
-  t_inner = getent("inner_explosion_area", "targetname");
+  var_e9dd177b = getEnt("trig_trap_door", "targetname");
+  t_inner = getEnt("inner_explosion_area", "targetname");
   foreach(player in level.activeplayers) {
     if(player istouching(var_e9dd177b)) {
       if(player istouching(t_inner)) {
@@ -506,7 +506,7 @@ function function_cb3decf1() {
       } else {
         earthquake(0.6, 1, player.origin, 800);
       }
-      player playrumbleonentity("damage_heavy");
+      player playRumbleOnEntity("damage_heavy");
     }
   }
 }
@@ -519,8 +519,8 @@ function function_a476832a(delay, duration) {
 function function_a05b1c8c() {
   closest = level.activeplayers[0];
   var_e34a3797 = [];
-  kane = getent("look_at_kane_origin", "targetname");
-  var_be38fd90 = getent("door_trap_origin", "targetname");
+  kane = getEnt("look_at_kane_origin", "targetname");
+  var_be38fd90 = getEnt("door_trap_origin", "targetname");
   foreach(player in level.activeplayers) {
     if(distance(player.origin, var_be38fd90.origin) < 175) {
       array::add(var_e34a3797, player);
@@ -542,15 +542,15 @@ function function_a05b1c8c() {
 function function_a0faf694(var_4b70f64, kane, var_be38fd90) {
   rotator = spawn("script_origin", var_4b70f64.origin);
   rotator.angles = var_4b70f64 getplayerangles();
-  var_4b70f64 playerlinkto(rotator, undefined, 1, 0, 0, 0, 0);
+  var_4b70f64 playerlinkTo(rotator, undefined, 1, 0, 0, 0, 0);
   player_eye = var_4b70f64 getEye();
   if(distance(var_4b70f64.origin, var_be38fd90.origin) < 175) {
     if(var_4b70f64.origin[1] < var_be38fd90.origin[1]) {
-      rotator moveto(rotator.origin + vectorscale((0, 1, 0), 40), 0.3, 0.15, 0.15);
+      rotator moveTo(rotator.origin + vectorscale((0, 1, 0), 40), 0.3, 0.15, 0.15);
     }
-    rotator rotateto(vectortoangles(kane.origin - var_4b70f64.origin), 0.7, 0.3, 0.3);
+    rotator rotateTo(vectortoangles(kane.origin - var_4b70f64.origin), 0.7, 0.3, 0.3);
   } else {
-    rotator rotateto(vectortoangles(kane.origin - player_eye), 0.7, 0.3, 0.3);
+    rotator rotateTo(vectortoangles(kane.origin - player_eye), 0.7, 0.3, 0.3);
   }
   rotator waittill("rotatedone");
   var_4b70f64 unlink();

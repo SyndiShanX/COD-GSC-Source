@@ -23,7 +23,7 @@ function function_de15dc32(killed_player, disconnected_player) {
   };
 
   foreach(team in level.teams) {
-    players = getplayers(team);
+    players = getPlayers(team);
 
     if(players.size == 0) {
       continue;

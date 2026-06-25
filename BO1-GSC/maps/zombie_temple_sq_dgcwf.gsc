@@ -151,7 +151,7 @@ sw1_thread() {
   while(1) {
     if(flag("dgcwf_on_plate")) {
       self.pressed = false;
-      self moveto(self.on_pos, 0.25);
+      self moveTo(self.on_pos, 0.25);
       self playSound("evt_sq_dgcwf_lever_kachunk");
       self waittill("movedone");
       self.trigger trigger_on();
@@ -169,7 +169,7 @@ sw1_thread() {
       self.pressed = false;
       self.trigger trigger_off();
       self playSound("evt_sq_dgcwf_lever_dechunk");
-      self moveto(self.off_pos, 0.25);
+      self moveTo(self.off_pos, 0.25);
       self waittill("movedone");
       while(!flag("dgcwf_on_plate")) {
         wait(0.05);
@@ -185,7 +185,7 @@ init_stage() {
   }
   flag_clear("dgcwf_sw1_pressed");
   flag_clear("dgcwf_plot_vo_done");
-  trig = GetEnt("sq_dgcwf_trig", "targetname");
+  trig = getEnt("sq_dgcwf_trig", "targetname");
   trig trigger_on();
   maps\zombie_temple_sq_brock::delete_radio();
   level thread delayed_start_skit();
@@ -226,7 +226,7 @@ exit_stage(success) {
     level.on_plate_text Destroy();
     level.on_plate_text = undefined;
   }
-  trig = GetEnt("sq_dgcwf_trig", "targetname");
+  trig = getEnt("sq_dgcwf_trig", "targetname");
   trig trigger_off();
   if(success) {
     maps\zombie_temple_sq_brock::create_radio(3);
@@ -242,7 +242,7 @@ exit_stage(success) {
 }
 dgcwf_story_vox() {
   level endon("sq_DgCWf_over");
-  struct = getstruct("sq_location_dgcwf", "targetname");
+  struct = getStruct("sq_location_dgcwf", "targetname");
   if(!isDefined(struct)) {
     return;
   }

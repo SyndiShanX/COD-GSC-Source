@@ -87,13 +87,13 @@ dig_srv_round_end() {
 
 dig_srv_blood_founts() {
   lib_0547::func_A78B();
-  var_00 = getent("blood_fount_NE", "targetname");
+  var_00 = getEnt("blood_fount_NE", "targetname");
   var_00.is_activated = 0;
-  var_01 = getent("blood_fount_SE", "targetname");
+  var_01 = getEnt("blood_fount_SE", "targetname");
   var_01.is_activated = 0;
-  var_02 = getent("blood_fount_SW", "targetname");
+  var_02 = getEnt("blood_fount_SW", "targetname");
   var_02.is_activated = 0;
-  var_03 = getent("blood_fount_NW", "targetname");
+  var_03 = getEnt("blood_fount_NW", "targetname");
   var_03.is_activated = 0;
   thread blood_fount_single_listen(var_00, 213);
   thread blood_fount_single_listen(var_01, 214);
@@ -117,7 +117,7 @@ dig_door_listener_arena() {
 }
 
 dig_kill_z_listener() {
-  var_00 = getent("dig_kill_z", "targetname");
+  var_00 = getEnt("dig_kill_z", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(isPlayer(var_01)) {
@@ -265,7 +265,7 @@ srv_basalt_init() {
     }
   }
 
-  var_06 = getent("srv_pap_fuse_spawn_loc", "targetname");
+  var_06 = getEnt("srv_pap_fuse_spawn_loc", "targetname");
   if(isDefined(var_06)) {
     var_00.elec_model = var_06;
   }
@@ -294,7 +294,7 @@ srv_basalt_event() {
 srv_basalt_move_to_dest() {
   level thread common_scripts\_exploder::func_88E(212);
   var_00 = self;
-  var_00 moveto(var_00.dest_pos.var_116, 5, 1, 1);
+  var_00 moveTo(var_00.dest_pos.var_116, 5, 1, 1);
   wait(5);
 }
 
@@ -356,7 +356,7 @@ srv_flare_crate_init() {
       case "pickaxe_pickup_trig":
         var_00.var_6FC5 = var_03;
         var_00.var_6FC5 common_scripts\utility::func_9D9F();
-        var_00.var_6FC5 sethintstring(&"ZOMBIE_DLC3_PICKUP_TABUN");
+        var_00.var_6FC5 setHintString(&"ZOMBIE_DLC3_PICKUP_TABUN");
         break;
 
       case "flare_crate_model":
@@ -364,7 +364,7 @@ srv_flare_crate_init() {
         if(isDefined(var_03.var_1A2)) {
           var_05 = common_scripts\utility::func_44BE(var_03.var_1A2, "targetname");
           foreach(var_07 in var_05) {
-            var_07 linkto(var_03);
+            var_07 linkTo(var_03);
             if(isDefined(var_07.var_165) && var_07.var_165 == "tabun_model") {
               var_00.flare_model = var_07;
             }

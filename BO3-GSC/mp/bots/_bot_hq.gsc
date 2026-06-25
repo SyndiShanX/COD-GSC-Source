@@ -80,7 +80,7 @@ function patrol_hq() {
       }
       self lookat(origin + (0, 0, z));
       if(distancesquared(origin, self.origin) > 65536) {
-        dir = vectornormalize(self.origin - origin);
+        dir = vectorNormalize(self.origin - origin);
         dir = vectorscale(dir, 256);
         origin = origin + dir;
       }
@@ -189,7 +189,7 @@ function capture_hq() {
     }
     self lookat(origin + (0, 0, z));
     if(distancesquared(origin, self.origin) > 65536) {
-      dir = vectornormalize(self.origin - origin);
+      dir = vectorNormalize(self.origin - origin);
       dir = vectorscale(dir, 256);
       origin = origin + dir;
     }
@@ -244,7 +244,7 @@ function hq_grenade() {
   } else {
     origin = level.radio.baseorigin;
   }
-  dir = vectornormalize(self.origin - origin);
+  dir = vectorNormalize(self.origin - origin);
   dir = (0, dir[1], 0);
   origin = origin + vectorscale(dir, 128);
   if(!self bot_combat::combat_throw_lethal(origin)) {

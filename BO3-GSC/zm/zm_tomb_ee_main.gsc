@@ -219,14 +219,14 @@ function get_zombie_blood_hint_generic_vox() {
 function complete_sidequest() {
   level lui::prime_movie("zm_outro_tomb", 0, "");
   level.sndgameovermusicoverride = "game_over_ee";
-  a_players = getplayers();
+  a_players = getPlayers();
   foreach(player in a_players) {
     player freezecontrols(1);
     player enableinvulnerability();
   }
   level flag::clear("spawn_zombies");
   level thread function_ab51bfd();
-  playsoundatposition("zmb_squest_whiteout", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_whiteout", (0, 0, 0));
   level lui::screen_fade_out(1, "white", "starting_ee_screen");
   util::delay(0.5, undefined, &remove_portal_beam);
   level thread lui::play_movie("zm_outro_tomb", "fullscreen", 0, 0, "");
@@ -286,7 +286,7 @@ function ee_samantha_say(str_vox) {
   level flag::wait_till_clear("story_vo_playing");
   level flag::set("story_vo_playing");
   zm_tomb_vo::set_players_dontspeak(1);
-  zm_tomb_vo::samanthasay(str_vox, getplayers()[0]);
+  zm_tomb_vo::samanthasay(str_vox, getPlayers()[0]);
   zm_tomb_vo::set_players_dontspeak(0);
   level flag::clear("story_vo_playing");
 }
@@ -333,8 +333,8 @@ function player_intermission_ee() {
         }
         org.origin = points[i].origin;
         org.angles = points[i].angles;
-        for(j = 0; j < getplayers().size; j++) {
-          player = getplayers()[j];
+        for(j = 0; j < getPlayers().size; j++) {
+          player = getPlayers()[j];
           player camerasetposition(org);
           player camerasetlookat();
           player cameraactivate(1);
@@ -352,8 +352,8 @@ function player_intermission_ee() {
         }
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
-        org moveto(target_point.origin, time, q_time, q_time);
-        org rotateto(target_point.angles, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait(time - q_time);
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 1;
@@ -372,7 +372,7 @@ function setup_ee_main_devgui() {
   wait(5);
   b_activated = 0;
   while(!b_activated) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if((distance2d(player.origin, (2904, 5040, -336))) < 100 && player useButtonPressed()) {
         wait(2);
         if(player useButtonPressed()) {
@@ -415,7 +415,7 @@ function watch_devgui_ee_main() {
         }
         case "": {
           level flag::set("");
-          m_floor = getent("", "");
+          m_floor = getEnt("", "");
           if(isDefined(m_floor)) {
             m_floor delete();
           }
@@ -463,7 +463,7 @@ function watch_devgui_ee_main() {
       setDvar("", "");
       setDvar("", "");
       level flag::set("");
-      array::thread_all(getplayers(), &zm_weapons::weapon_give, "");
+      array::thread_all(getPlayers(), &zm_weapons::weapon_give, "");
     }
     wait(0.05);
   }

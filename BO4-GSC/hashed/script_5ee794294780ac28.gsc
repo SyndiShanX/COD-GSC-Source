@@ -27,7 +27,7 @@ __init__() {
 on_begin(var_49106f6b) {
   level.var_60aa7ebf = zm_trial::function_5769f26a(var_49106f6b);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_e47444a5 = [];
     player zm_trial_util::function_2190356a(0);
     player zm_trial_util::function_c2cd0cba(level.var_60aa7ebf);
@@ -40,7 +40,7 @@ on_end(round_reset) {
   if(!round_reset) {
     var_696c3b4 = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_e47444a5.size < level.var_60aa7ebf) {
         if(!isDefined(var_696c3b4)) {
           var_696c3b4 = [];
@@ -60,7 +60,7 @@ on_end(round_reset) {
   callback::remove_on_ai_killed(&on_ai_killed);
   level.var_60aa7ebf = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 }

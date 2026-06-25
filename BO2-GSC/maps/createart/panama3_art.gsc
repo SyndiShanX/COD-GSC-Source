@@ -93,7 +93,7 @@ dof_noriega(m_player_body) {}
 
 dof_noriega_shoots(m_player_body) {
   wait 0.1;
-  sniper = getent("end_roof_sniper_ai", "targetname");
+  sniper = getEnt("end_roof_sniper_ai", "targetname");
   playFXOnTag(level._effect["soldier_impact_blood"], sniper, "j_clavicle_le");
 }
 

@@ -59,7 +59,7 @@ function quadrotor_medallions() {
   s_mg_spawn = struct::get("mgspawn", "targetname");
   v_spawnpt = s_mg_spawn.origin;
   v_spawnang = s_mg_spawn.angles;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   var_67f03e82 = getweapon("lmg_mg08_upgraded");
   options = player zm_weapons::get_pack_a_punch_weapon_options(var_67f03e82);
   var_c91432f = zm_utility::spawn_weapon_model(var_67f03e82, undefined, v_spawnpt, v_spawnang, options);
@@ -113,7 +113,7 @@ function swap_mg(e_player) {
 }
 
 function wall_hole_poster() {
-  m_poster = getent("hole_poster", "targetname");
+  m_poster = getEnt("hole_poster", "targetname");
   m_poster setCanDamage(1);
   m_poster.health = 1000;
   m_poster.maxhealth = m_poster.health;
@@ -251,12 +251,12 @@ function sq_one_inch_punch() {
   for(n_player_id = 0; n_player_id < level.n_tablets_remaining; n_player_id++) {
     a_tablets[n_player_id] = spawn_tablet_model(n_player_id + 1, "bunker", "muddy");
   }
-  t_bunker = getent("trigger_oneinchpunch_bunker_table", "targetname");
+  t_bunker = getEnt("trigger_oneinchpunch_bunker_table", "targetname");
   t_bunker thread bunker_trigger_thread();
-  t_bunker setcursorhint("HINT_NOICON");
-  t_birdbath = getent("trigger_oneinchpunch_church_birdbath", "targetname");
+  t_bunker setCursorHint("HINT_NOICON");
+  t_birdbath = getEnt("trigger_oneinchpunch_church_birdbath", "targetname");
   t_birdbath thread birdbath_trigger_thread();
-  t_birdbath setcursorhint("HINT_NOICON");
+  t_birdbath setCursorHint("HINT_NOICON");
 }
 
 function bunker_trigger_thread() {
@@ -269,7 +269,7 @@ function bunker_trigger_thread() {
       player playSound("zmb_squest_oiptablet_pickup");
       player thread sq_one_inch_punch_disconnect_watch();
       player thread sq_one_inch_punch_death_watch();
-      m_tablet = getent("tablet_bunker_" + level.n_tablets_remaining, "targetname");
+      m_tablet = getEnt("tablet_bunker_" + level.n_tablets_remaining, "targetname");
       m_tablet delete();
       level.n_tablets_remaining--;
       iprintln("");
@@ -370,7 +370,7 @@ function bunker_volume_death_check() {
     return;
   }
   volume_name = "oneinchpunch_bunker_volume";
-  volume = getent(volume_name, "targetname");
+  volume = getEnt(volume_name, "targetname");
   assert(isDefined(volume), volume_name + "");
   attacker = self.attacker;
   if(isDefined(attacker) && isPlayer(attacker)) {
@@ -404,7 +404,7 @@ function church_volume_death_check() {
     return;
   }
   volume_name = "oneinchpunch_church_volume";
-  volume = getent(volume_name, "targetname");
+  volume = getEnt(volume_name, "targetname");
   assert(isDefined(volume), volume_name + "");
   attacker = self.attacker;
   if(isDefined(attacker) && isPlayer(attacker)) {
@@ -481,7 +481,7 @@ function radio_ee_think() {
     }
     if(zombie_utility::is_player_valid(player)) {
       level.found_ee_radio_count++;
-      playsoundatposition("zmb_ee_mus_activate", self.origin);
+      playSoundAtPosition("zmb_ee_mus_activate", self.origin);
       if(level.found_ee_radio_count == 3) {
         level thread zm_audio::sndmusicsystem_playstate("shepherd_of_fire");
       }

@@ -116,7 +116,7 @@ function createcarryqrdrone(streakname, owner) {
   carryqrdrone.scale = 3;
   carryqrdrone.inheliproximity = 0;
   carryqrdrone thread carryqrdrone_handleexistence();
-  carryqrdrone.rangetrigger = getent("qrdrone_range", "targetname");
+  carryqrdrone.rangetrigger = getEnt("qrdrone_range", "targetname");
   if(!isDefined(carryqrdrone.rangetrigger)) {
     carryqrdrone.maxheight = int(airsupport::getminimumflyheight());
     carryqrdrone.maxdistance = 3600;
@@ -125,7 +125,7 @@ function createcarryqrdrone(streakname, owner) {
   carryqrdrone.soundent = spawn("script_origin", carryqrdrone.origin);
   carryqrdrone.soundent.angles = carryqrdrone.angles;
   carryqrdrone.soundent.origin = carryqrdrone.origin;
-  carryqrdrone.soundent linkto(carryqrdrone);
+  carryqrdrone.soundent linkTo(carryqrdrone);
   carryqrdrone.soundent playLoopSound("recondrone_idle_high");
   return carryqrdrone;
 }
@@ -280,7 +280,7 @@ function startqrdrone(lifeid, streakname, origin, angles) {
 function lockplayerforqrdronelaunch() {
   lockspot = spawn("script_origin", self.origin);
   lockspot hide();
-  self playerlinkto(lockspot);
+  self playerlinkTo(lockspot);
   self thread clearplayerlockfromqrdronelaunch(lockspot);
 }
 
@@ -329,7 +329,7 @@ function createqrdrone(lifeid, owner, streakname, origin, angles, killstreak_id)
   qrdrone thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile("crashing");
   qrdrone.emp_fx = spawn("script_model", self.origin);
   qrdrone.emp_fx setModel("tag_origin");
-  qrdrone.emp_fx linkto(self, "tag_origin", (vectorscale((0, 0, -1), 20)) + (anglesToForward(self.angles) * 6));
+  qrdrone.emp_fx linkTo(self, "tag_origin", (vectorscale((0, 0, -1), 20)) + (anglesToForward(self.angles) * 6));
   qrdrone spawning::create_entity_enemy_influencer("small_vehicle", qrdrone.team);
   qrdrone spawning::create_entity_enemy_influencer("qrdrone_cylinder", qrdrone.team);
   return qrdrone;
@@ -397,7 +397,7 @@ function play_lockon_sounds(player) {
   self endon("end_remote");
   self.locksounds = spawn("script_model", self.origin);
   wait(0.1);
-  self.locksounds linkto(self, "tag_player");
+  self.locksounds linkTo(self, "tag_player");
   while(true) {
     self waittill("hash_b081980b");
     while(true) {
@@ -556,7 +556,7 @@ function qrdrone_damagewatcher() {
     if(!isDefined(attacker) || !isPlayer(attacker)) {
       continue;
     }
-    self.owner playrumbleonentity("damage_heavy");
+    self.owner playRumbleOnEntity("damage_heavy");
     self.damage_debug = ((damage + "") + weapon.name) + "";
     if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET") {
       if(isPlayer(attacker)) {
@@ -645,7 +645,7 @@ function qrdrone_crash_movement(attacker, hitdir) {
   side_dir_mag = side_dir_mag + (math::sign(side_dir_mag) * 80);
   side_dir = side_dir * side_dir_mag;
   velocity = self getvelocity();
-  self setvehvelocity((velocity + vectorscale((0, 0, 1), 100)) + vectornormalize(side_dir));
+  self setvehvelocity((velocity + vectorscale((0, 0, 1), 100)) + vectorNormalize(side_dir));
   ang_vel = self getangularvelocity();
   ang_vel = (ang_vel[0] * 0.3, ang_vel[1], ang_vel[2] * 0.3);
   yaw_vel = randomfloatrange(0, 210) * math::sign(ang_vel[1]);
@@ -667,7 +667,7 @@ function qrdrone_crash_movement(attacker, hitdir) {
 
 function qrdrone_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
-  dmg_ent linkto(self);
+  dmg_ent linkTo(self);
   dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
   self util::waittill_any("crash_done", "death");
   dmg_ent stoploopsound(0.2);
@@ -1035,7 +1035,7 @@ function qrdrone_blowup(attacker, weapon) {
   }
   physicsexplosionsphere(origin, radius, radius, 1, max_damage, min_damage);
   shellshock::rcbomb_earthquake(origin);
-  playsoundatposition("veh_qrdrone_explo", self.origin);
+  playSoundAtPosition("veh_qrdrone_explo", self.origin);
   playFX(level.qrdrone_fx["explode"], explosionorigin, (0, 0, 1));
   self hide();
   if(isDefined(self.owner)) {

@@ -162,7 +162,7 @@ function function_ce927147() {
   level flag::set("flag_infinite_hallway_corridor_blocker_2");
   level.infinite_hallway_exit_door_facade = getEntArray("infinite_hallway_exit_door_facade", "script_noteworthy");
   level.infinite_hallway_loop_door_facade = getEntArray("infinite_hallway_loop_door_facade", "script_noteworthy");
-  level.infinite_hallway_cart_clip = getent("infinite_hallway_cart_clip", "targetname");
+  level.infinite_hallway_cart_clip = getEnt("infinite_hallway_cart_clip", "targetname");
   level.var_5ab10178 = [];
   level.var_4adb0f8 = struct::get_array("infinite_hallway_hallway_door_struct", "targetname");
 
@@ -199,14 +199,14 @@ function function_ce927147() {
     }
   }
 
-  level.infinite_hallway_lab_backtrack_blocker = getent("infinite_hallway_lab_backtrack_blocker", "targetname");
+  level.infinite_hallway_lab_backtrack_blocker = getEnt("infinite_hallway_lab_backtrack_blocker", "targetname");
   level.infinite_hallway_lab_floor = getEntArray("infinite_hallway_lab_floor", "targetname");
   level.infinite_hallway_bunker_ceiling = getEntArray("infinite_hallway_bunker_ceiling", "targetname");
   level.corridor_1_pipe_script_brushmodels = getEntArray("corridor_1_pipe_script_brushmodels", "targetname");
   level.corridor_2_corner_pipe_script_brushmodels = getEntArray("corridor_2_corner_pipe_script_brushmodels", "targetname");
   level.corridor_2_pipe_script_brushmodels = getEntArray("corridor_2_pipe_script_brushmodels", "targetname");
   level.corridor_3_pipe_script_brushmodels = getEntArray("corridor_3_pipe_script_brushmodels", "targetname");
-  level.player_exiting_shrinking_loop_trigger = getent("player_exiting_shrinking_loop_trigger", "targetname");
+  level.player_exiting_shrinking_loop_trigger = getEnt("player_exiting_shrinking_loop_trigger", "targetname");
   level.player_exiting_shrinking_loop_trigger triggerenable(0);
   level.player_exiting_shrinking_loop_trigger.trigger_off = 1;
   level thread function_e0c00554();
@@ -252,7 +252,7 @@ function function_e0c00554() {
 
   foreach(ent in level.var_4620ea49) {
     if(isDefined(ent)) {
-      ent linkto(level.var_2a353790, "tag_origin");
+      ent linkTo(level.var_2a353790, "tag_origin");
     }
   }
 }
@@ -275,13 +275,13 @@ function function_bb1aba0a() {
 
   foreach(ent in level.var_be8a7ed0) {
     if(isDefined(ent)) {
-      ent linkto(level.var_3814631a, "tag_origin");
+      ent linkTo(level.var_3814631a, "tag_origin");
     }
   }
 
   foreach(ent in level.var_30d625b7) {
     if(isDefined(ent)) {
-      ent linkto(level.var_a77dd496, "tag_origin");
+      ent linkTo(level.var_a77dd496, "tag_origin");
     }
   }
 }
@@ -304,13 +304,13 @@ function function_8eda618a() {
 
   foreach(ent in level.var_340b140b) {
     if(isDefined(ent)) {
-      ent linkto(level.var_1193c77e, "tag_origin");
+      ent linkTo(level.var_1193c77e, "tag_origin");
     }
   }
 
   foreach(ent in level.var_723c531e) {
     if(isDefined(ent)) {
-      ent linkto(level.var_a47ab6eb, "tag_origin");
+      ent linkTo(level.var_a47ab6eb, "tag_origin");
     }
   }
 }
@@ -333,13 +333,13 @@ function function_d7ce7371() {
 
   foreach(ent in level.var_8f1b4e46) {
     if(isDefined(ent)) {
-      ent linkto(level.var_92bf0856, "tag_origin");
+      ent linkTo(level.var_92bf0856, "tag_origin");
     }
   }
 
   foreach(ent in level.var_624718c0) {
     if(isDefined(ent)) {
-      ent linkto(level.var_ff9012a, "tag_origin");
+      ent linkTo(level.var_ff9012a, "tag_origin");
     }
   }
 }
@@ -399,10 +399,10 @@ function function_801debe2() {
   self thread namespace_d9b153b9::ent_cleanup("infinite_hallway_exited", 1);
 
   if(isDefined(self.script_noteworthy)) {
-    clip = getent(self.script_noteworthy + "_clip", "targetname");
+    clip = getEnt(self.script_noteworthy + "_clip", "targetname");
 
     if(isDefined(clip)) {
-      clip linkto(self.door_left);
+      clip linkTo(self.door_left);
       clip thread namespace_d9b153b9::ent_cleanup("infinite_hallway_exited", 1);
     }
   }
@@ -432,7 +432,7 @@ function function_3f816598(open, time, sfx, var_e0b06bb2) {
       self.open = 1;
       fwd = anglesToForward(self.angles);
       yaw_angle = int(fwd[1]) + 90;
-      self rotateyaw(yaw_angle, time);
+      self rotateYaw(yaw_angle, time);
       wait time;
     }
 
@@ -443,7 +443,7 @@ function function_3f816598(open, time, sfx, var_e0b06bb2) {
     self.open = undefined;
     fwd = anglesToForward(self.angles);
     yaw_angle = int(fwd[1]) + -90;
-    self rotateyaw(yaw_angle, time);
+    self rotateYaw(yaw_angle, time);
 
     if(isDefined(sfx)) {
       level thread namespace_b6fe1dbe::function_46fb07f8(self);
@@ -455,7 +455,7 @@ function function_3f816598(open, time, sfx, var_e0b06bb2) {
       level notify(var_e0b06bb2);
     }
 
-    level.player playrumbleonentity("anim_med");
+    level.player playRumbleOnEntity("anim_med");
   }
 }
 
@@ -537,7 +537,7 @@ function function_7841bdbc(door_struct, door_model, var_139422, var_7360fbce) {
 
   origin = getstartorigin(door_struct.origin, door_struct.angles, "t9_pri_bunker_door_player_open");
   angles = getstartangles(door_struct.origin, door_struct.angles, "t9_pri_bunker_door_player_open");
-  level.player setorigin(origin);
+  level.player setOrigin(origin);
   level.player setplayerangles(angles);
   waitframe(1);
   door_struct scene::play(var_7360fbce, var_e4697d75);
@@ -648,15 +648,15 @@ function function_19d60154(var_35b4eb77) {
 
   foreach(ent in self.linked_ents) {
     if(isDefined(ent)) {
-      ent enablelinkto();
-      ent linkto(level.var_ffd4e184);
+      ent enablelinkTo();
+      ent linkTo(level.var_ffd4e184);
     }
   }
 
   foreach(ent in var_35b4eb77) {
     if(isDefined(ent)) {
-      ent enablelinkto();
-      ent linkto(level.var_ffd4e184);
+      ent enablelinkTo();
+      ent linkTo(level.var_ffd4e184);
     }
   }
 }
@@ -735,10 +735,10 @@ function function_eb3444fe() {
   level.player endon(#"death");
 
   while(!level flag::get("flag_start_door_jump_3")) {
-    level.player playrumbleonentity("heartbeat_low");
+    level.player playRumbleOnEntity("heartbeat_low");
     wait 0.1;
     wait 0.2;
-    level.player playrumbleonentity("heartbeat_low");
+    level.player playRumbleOnEntity("heartbeat_low");
     wait 0.1;
     wait 0.2;
   }
@@ -944,7 +944,7 @@ function function_5f2165df(hide, var_6cd0b669) {
 
 function function_bf2933ed(var_158dfaa2, loop_count, activate) {
   level endon(#"infinite_hallway_visit_loop_complete");
-  var_6dcda4d1 = getent("corridor_" + var_158dfaa2 + "_volume", "targetname");
+  var_6dcda4d1 = getEnt("corridor_" + var_158dfaa2 + "_volume", "targetname");
   var_5f7546ed = "infinite_hallway_corridor_loop_" + loop_count;
   var_c79810e5 = struct::get_array(var_5f7546ed, "targetname");
   var_6cd0b669 = "infinite_hallway_corridor_" + var_158dfaa2 + "_loop_" + loop_count;
@@ -1392,7 +1392,7 @@ function function_b9455f01(modelscale, var_158dfaa2) {
             if(isDefined(struct.linked_ents)) {
               foreach(linked_ent in struct.linked_ents) {
                 if(isDefined(linked_ent.script_noteworthy) && linked_ent.script_noteworthy != "door_frame") {
-                  linked_ent linkto(struct.door_frame);
+                  linked_ent linkTo(struct.door_frame);
                 }
 
                 if(isDefined(struct.var_3deb0c3d.script_parameters) && (linked_ent.script_noteworthy == "door_left" || linked_ent.script_noteworthy == "door_frame" || linked_ent.script_noteworthy == "door_script_brushmodels")) {
@@ -1752,7 +1752,7 @@ function infinite_hallway_visit_4() {
   level thread scene::play("scene_pri_lab_floor");
   level thread exploder::exploder("CinFX_InfHall_FloorCollapse");
   screenshake(level.player.origin, 1, 0, 1, 2, 0, -1, 0, 4, 0, 7, 2);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player clientfield::set_to_player("lerp_fov", 5);
   level thread function_6a361dc1();
   level.infinite_hallway_lab_backtrack_blocker solid();
@@ -1790,7 +1790,7 @@ function infinite_hallway_visit_4() {
 function function_6a361dc1() {
   level endon(#"infinite_hallway_exited");
   level.player enableinvulnerability();
-  corridor_2_volume = getent("corridor_2_volume", "targetname");
+  corridor_2_volume = getEnt("corridor_2_volume", "targetname");
   count = 0;
 
   while(!level.player istouching(corridor_2_volume) || count > 150) {
@@ -1852,7 +1852,7 @@ function function_be61f4c4() {
   }
 
   if(!isDefined(level.infinite_hallway_cart_clip)) {
-    level.infinite_hallway_cart_clip = getent("infinite_hallway_cart_clip", "targetname");
+    level.infinite_hallway_cart_clip = getEnt("infinite_hallway_cart_clip", "targetname");
   }
 
   level.infinite_hallway_cart_clip thread namespace_d9b153b9::ent_cleanup();
@@ -1874,7 +1874,7 @@ function function_be61f4c4() {
   array::thread_all(infinite_hallway_door_facades, &namespace_d9b153b9::ent_cleanup);
 
   if(!isDefined(level.infinite_hallway_lab_backtrack_blocker)) {
-    level.infinite_hallway_lab_backtrack_blocker = getent("infinite_hallway_lab_backtrack_blocker", "targetname");
+    level.infinite_hallway_lab_backtrack_blocker = getEnt("infinite_hallway_lab_backtrack_blocker", "targetname");
   }
 
   level.infinite_hallway_lab_backtrack_blocker thread namespace_d9b153b9::ent_cleanup();

@@ -84,7 +84,7 @@ nukeEffects() {
   foreach(player in level.players) {
     playerForward = anglesToForward(player.angles);
     playerForward = (playerForward[0], playerForward[1], 0);
-    playerForward = VectorNormalize(playerForward);
+    playerForward = vectorNormalize(playerForward);
 
     nukeDistance = 5000;
 

@@ -71,7 +71,7 @@ function function_773ef6a0() {
   self endon("death");
   self endon("disconnect");
   level endon("hash_ec8fe31d");
-  trigger = getent("apartment_light_fire_trigger", "targetname");
+  trigger = getEnt("apartment_light_fire_trigger", "targetname");
   while(true) {
     trigger waittill("trigger", e_other);
     if(e_other == self && isPlayer(self)) {
@@ -246,12 +246,12 @@ function function_352b4f2e() {
 }
 
 function intro_hendricks() {
-  var_cb5f6358 = getent("apt_door_l", "targetname");
-  var_7af28d51 = getent("apt_door_l_clip", "targetname");
-  var_7af28d51 linkto(var_cb5f6358);
-  var_1f32c7f6 = getent("apt_door_r", "targetname");
-  var_46820983 = getent("apt_door_r_clip", "targetname");
-  var_46820983 linkto(var_1f32c7f6);
+  var_cb5f6358 = getEnt("apt_door_l", "targetname");
+  var_7af28d51 = getEnt("apt_door_l_clip", "targetname");
+  var_7af28d51 linkTo(var_cb5f6358);
+  var_1f32c7f6 = getEnt("apt_door_r", "targetname");
+  var_46820983 = getEnt("apt_door_r_clip", "targetname");
+  var_46820983 linkTo(var_1f32c7f6);
   level.var_469a8d0d = struct::get("hendricks_apartment_anim_struct", "targetname");
   var_6a07eb6c = [];
   var_6a07eb6c[0] = "dead_door_civilian";
@@ -402,7 +402,7 @@ function function_5274de79() {
     level.var_469a8d0d scene::stop("cin_ven_02_10_apthorror_secondfloorapt_vign");
   }
   level.var_469a8d0d scene::stop();
-  level.ai_hendricks stopanimscripted();
+  level.ai_hendricks stopanimScripted();
   level.ai_hendricks ai::set_behavior_attribute("cqb", 0);
   if(!level flag::get("apartment_enemies_dead")) {
     level.ai_hendricks.goalradius = 16;
@@ -441,7 +441,7 @@ function function_5274de79() {
   node = getnode("hendricks_takedown_rooftop_node", "targetname");
   level.ai_hendricks setgoal(node);
   level.ai_hendricks ai::set_behavior_attribute("cqb", 1);
-  clip = getent("chair_a_clip_top", "targetname");
+  clip = getEnt("chair_a_clip_top", "targetname");
   if(isDefined(clip)) {
     clip delete();
   }
@@ -472,20 +472,20 @@ function function_5ef7fdc2() {
   var_6a00e3c4 = spawner::simple_spawn(var_71e5f989, &function_1f707d1e);
   var_12d51ad2 = getEntArray("apartment_civilian", "script_noteworthy");
   var_c5b87ef7 = spawner::simple_spawn(var_12d51ad2, &function_a645cfd9);
-  var_1cef4611 = getent("bedroom_door_right", "targetname");
-  var_59f550ce = getent("bedroom_door_right_clip", "targetname");
-  var_59f550ce linkto(var_1cef4611);
-  var_517e2322 = getent("bedroom_door_left", "targetname");
-  var_702c9f7 = getent("bedroom_door_left_clip", "targetname");
-  var_702c9f7 linkto(var_517e2322);
+  var_1cef4611 = getEnt("bedroom_door_right", "targetname");
+  var_59f550ce = getEnt("bedroom_door_right_clip", "targetname");
+  var_59f550ce linkTo(var_1cef4611);
+  var_517e2322 = getEnt("bedroom_door_left", "targetname");
+  var_702c9f7 = getEnt("bedroom_door_left_clip", "targetname");
+  var_702c9f7 linkTo(var_517e2322);
   level.var_5bc00cbb thread scene::init("cin_ven_02_20_synckill_vign");
   level.var_7819b21b = level.var_1dca7888.size;
   namespace_523da15d::function_dab879d0();
-  trigger = getent("syncshot_lookat_trigger", "targetname");
+  trigger = getEnt("syncshot_lookat_trigger", "targetname");
   foreach(player in level.players) {
     player thread function_4e050c10(trigger, "syncshot_lookat_failsafe");
   }
-  trigger = getent("syncshot_stair_lookat_trigger", "targetname");
+  trigger = getEnt("syncshot_stair_lookat_trigger", "targetname");
   foreach(player in level.players) {
     player thread function_4e050c10(trigger, "syncshot_lookat_failsafe");
   }
@@ -590,7 +590,7 @@ function function_1d07a130() {
   }
   self notify("alert");
   if(level flag::get("apartment_enemies_alerted") || level flag::get("syncshot_lookat_failsafe")) {
-    self stopanimscripted();
+    self stopanimScripted();
     wait(0.05);
   }
   node = getnode(self.target, "targetname");
@@ -621,7 +621,7 @@ function function_cce1e811() {
 
 function function_c55b72a5() {
   level endon("hash_a2cf5f81");
-  var_ba1e1975 = getent("bedroom_audio_origin", "targetname");
+  var_ba1e1975 = getEnt("bedroom_audio_origin", "targetname");
   level thread function_a5bf9c17(var_ba1e1975);
   level flag::wait_till_any(array("apartment_enemies_alerted", "syncshot_lookat_failsafe"));
   level notify("kill_pending_dialog");
@@ -631,7 +631,7 @@ function function_c55b72a5() {
 function function_a5bf9c17(var_ba1e1975) {
   level endon("hash_1d07a130");
   level endon("hash_1047ee39");
-  var_ba1e1975 = getent("bedroom_audio_origin", "targetname");
+  var_ba1e1975 = getEnt("bedroom_audio_origin", "targetname");
   var_ba1e1975 vengeance_util::function_5fbec645("ffim1_what_are_you_going_t_0");
   var_ba1e1975 vengeance_util::function_5fbec645("mciv_leave_us_alone_0");
   var_ba1e1975 vengeance_util::function_5fbec645("ffim2_no_no_he_s_mine_0");
@@ -671,27 +671,27 @@ function function_7acb5fc4() {
   level.var_5bc00cbb scene::init("cin_ven_02_30_masterbedroom_vign");
   wait(0.5);
   var_dad63b6d = [];
-  var_a0eb961c = getent("chair_a", "targetname");
+  var_a0eb961c = getEnt("chair_a", "targetname");
   array::add(var_dad63b6d, var_a0eb961c);
-  var_f55990dd = getent("chair_a_clip", "targetname");
+  var_f55990dd = getEnt("chair_a_clip", "targetname");
   array::add(var_dad63b6d, var_f55990dd);
-  var_f55990dd linkto(var_a0eb961c);
-  var_a6f749a8 = getent("door_exit", "targetname");
+  var_f55990dd linkTo(var_a0eb961c);
+  var_a6f749a8 = getEnt("door_exit", "targetname");
   array::add(var_dad63b6d, var_a6f749a8);
-  var_c7bdecc1 = getent("door_exit_clip", "targetname");
+  var_c7bdecc1 = getEnt("door_exit_clip", "targetname");
   array::add(var_dad63b6d, var_c7bdecc1);
-  var_c7bdecc1 linkto(var_a6f749a8);
+  var_c7bdecc1 linkTo(var_a6f749a8);
   var_7f0731c6 = var_a6f749a8.origin;
   var_c815eaa0 = var_a6f749a8.angles;
   civilians = [];
-  civilians[civilians.size] = getent("synckill_dead_civilian_ai", "targetname");
-  civilians[civilians.size] = getent("synckill_husband_ai", "targetname");
-  civilians[civilians.size] = getent("synckill_wife_ai", "targetname");
+  civilians[civilians.size] = getEnt("synckill_dead_civilian_ai", "targetname");
+  civilians[civilians.size] = getEnt("synckill_husband_ai", "targetname");
+  civilians[civilians.size] = getEnt("synckill_wife_ai", "targetname");
   foreach(civ in civilians) {
     civ.ignoreme = 1;
   }
   level flag::wait_till("start_takedown_igc");
-  var_a6f749a8 stopanimscripted();
+  var_a6f749a8 stopanimScripted();
   var_a6f749a8.origin = var_7f0731c6;
   var_a6f749a8.angles = var_c815eaa0;
   level flag::wait_till("start_dogleg_1_intro");
@@ -771,7 +771,7 @@ function function_fb3f26d6(b_starting) {
     wait(1);
   }
   level flag::clear("player_looking");
-  trigger = getent("takedown_window_gunfire_trigger", "targetname");
+  trigger = getEnt("takedown_window_gunfire_trigger", "targetname");
   foreach(player in level.players) {
     player thread function_4e050c10(trigger, "start_takedown_igc");
   }
@@ -784,7 +784,7 @@ function function_fb3f26d6(b_starting) {
     card show();
   }
   magicbullet(level.ai_hendricks.weapon, start.origin, end.origin);
-  playsoundatposition("evt_apt_win_gunfire_1", (20497, -4382, 492));
+  playSoundAtPosition("evt_apt_win_gunfire_1", (20497, -4382, 492));
   wait(0.15);
   foreach(card in var_9c1589f3) {
     card hide();
@@ -794,7 +794,7 @@ function function_fb3f26d6(b_starting) {
     card show();
   }
   magicbullet(level.ai_hendricks.weapon, start.origin, end.origin);
-  playsoundatposition("evt_apt_win_gunfire_2", (20497, -4382, 492));
+  playSoundAtPosition("evt_apt_win_gunfire_2", (20497, -4382, 492));
   wait(0.15);
   foreach(card in var_9c1589f3) {
     card hide();
@@ -804,7 +804,7 @@ function function_fb3f26d6(b_starting) {
     card show();
   }
   magicbullet(level.ai_hendricks.weapon, start.origin, end.origin);
-  playsoundatposition("evt_apt_win_gunfire_3", (20497, -4382, 492));
+  playSoundAtPosition("evt_apt_win_gunfire_3", (20497, -4382, 492));
   wait(0.15);
   foreach(card in var_9c1589f3) {
     card hide();
@@ -848,7 +848,7 @@ function function_d07dfdc1() {
 
 function function_caf96976() {
   level endon("hash_ec8fe31d");
-  var_abd40945 = getent("takedown_enemy_leader_audio_origin", "targetname");
+  var_abd40945 = getEnt("takedown_enemy_leader_audio_origin", "targetname");
   var_abd40945 vengeance_util::function_5fbec645("ffim1_today_we_rise_agains_0");
   var_abd40945 vengeance_util::function_5fbec645("ffim1_these_things_do_not_0");
   var_abd40945 vengeance_util::function_5fbec645("ffim1_do_not_make_it_quick_0");
@@ -862,7 +862,7 @@ function function_caf96976() {
 }
 
 function function_c6be5e1d() {
-  var_e022aef3 = getent("takedown_igc_trigger", "targetname");
+  var_e022aef3 = getEnt("takedown_igc_trigger", "targetname");
   var_e022aef3 endon("death");
   var_e022aef3 trigger::wait_till();
   return var_e022aef3.who;
@@ -870,16 +870,16 @@ function function_c6be5e1d() {
 
 function takedown_scene() {
   level.var_3d63f698 thread scene::init("cin_ven_03_11_gate_convo_vign");
-  var_642e55f9 = getent("takedown_gate_right", "targetname");
+  var_642e55f9 = getEnt("takedown_gate_right", "targetname");
   var_642e55f9 thread takedown_cleanup();
-  var_f8d3fbd6 = getent("takedown_gate_right_clip", "targetname");
+  var_f8d3fbd6 = getEnt("takedown_gate_right_clip", "targetname");
   var_f8d3fbd6 thread takedown_cleanup();
-  var_f8d3fbd6 linkto(var_642e55f9, "tag_animate");
-  var_eec324aa = getent("takedown_gate_left", "targetname");
+  var_f8d3fbd6 linkTo(var_642e55f9, "tag_animate");
+  var_eec324aa = getEnt("takedown_gate_left", "targetname");
   var_eec324aa thread takedown_cleanup();
-  var_3a87217f = getent("takedown_gate_left_clip", "targetname");
+  var_3a87217f = getEnt("takedown_gate_left_clip", "targetname");
   var_3a87217f thread takedown_cleanup();
-  var_3a87217f linkto(var_eec324aa, "tag_animate");
+  var_3a87217f linkTo(var_eec324aa, "tag_animate");
   var_fde961b5 = function_c6be5e1d();
   level flag::wait_till("start_takedown_igc");
   level function_a2b65bd2(var_fde961b5);
@@ -1027,7 +1027,7 @@ function function_9c3eb25d() {
   wait(0.25);
   level.var_e7c1ffa = array::remove_dead(level.var_e7c1ffa);
   ai::waittill_dead(level.var_e7c1ffa, 3);
-  volume = getent("takedown_backup_volume", "targetname");
+  volume = getEnt("takedown_backup_volume", "targetname");
   foreach(ai in level.var_e7c1ffa) {
     if(isDefined(ai) && isalive(ai)) {
       ai setgoalvolume(volume);
@@ -1061,7 +1061,7 @@ function function_9c3eb25d() {
     level.var_e7c1ffa = array::remove_dead(level.var_e7c1ffa);
     wait(0.05);
   }
-  volume = getent("takedown_backup_front_volume", "targetname");
+  volume = getEnt("takedown_backup_front_volume", "targetname");
   foreach(ai in level.var_e7c1ffa) {
     if(isDefined(ai) && isalive(ai)) {
       ai setgoalvolume(volume);
@@ -1092,7 +1092,7 @@ function function_296cfddf() {
   self thread function_8fb2d768();
   level waittill("hash_ea1f086f");
   level flag::set("takedown_backup_truck_stopped_flag");
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 function function_8fb2d768() {
@@ -1120,10 +1120,10 @@ function function_4d5e399c() {
       level flag::wait_till("takedown_backup_truck_stopped_flag");
     }
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "takedown_backup_right_3" || self.script_noteworthy == "takedown_backup_right_4" || self.script_noteworthy == "takedown_backup_right_extra_2") {
-      volume = getent("takedown_backup_middle_volume", "targetname");
+      volume = getEnt("takedown_backup_middle_volume", "targetname");
       wait(randomfloatrange(1, 3));
     } else {
-      volume = getent("takedown_backup_left_volume", "targetname");
+      volume = getEnt("takedown_backup_left_volume", "targetname");
       wait(randomfloatrange(0.3, 0.75));
     }
     self setgoalvolume(volume);
@@ -1136,10 +1136,10 @@ function function_4d5e399c() {
     self ai::set_ignoreall(1);
     self ai::set_ignoreme(1);
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "takedown_backup_left_extra_2") {
-      volume = getent("takedown_backup_middle_volume", "targetname");
+      volume = getEnt("takedown_backup_middle_volume", "targetname");
       wait(randomfloatrange(0.3, 0.5));
     } else {
-      volume = getent("takedown_backup_right_volume", "targetname");
+      volume = getEnt("takedown_backup_right_volume", "targetname");
       wait(randomfloatrange(0.3, 0.5));
     }
     self setgoalvolume(volume);
@@ -1147,7 +1147,7 @@ function function_4d5e399c() {
     self ai::set_ignoreall(0);
     self ai::set_ignoreme(0);
     if(level.var_e7c1ffa.size > 3) {
-      volume = getent("takedown_backup_volume", "targetname");
+      volume = getEnt("takedown_backup_volume", "targetname");
       self setgoalvolume(volume);
     }
   }
@@ -1168,7 +1168,7 @@ function function_4d5e399c() {
         self vehicle::get_out();
       }
     }
-    volume = getent("takedown_backup_right_volume", "targetname");
+    volume = getEnt("takedown_backup_right_volume", "targetname");
     if(isDefined(self.script_noteworthy) && self.script_noteworthy != "gunner1") {
       self ai::set_ignoreall(0);
       self ai::set_ignoreme(0);
@@ -1216,7 +1216,7 @@ function takedown_scene_setup() {
   level.var_3d63f698 = struct::get("tag_align_takedown", "targetname");
   level.takedown_truck_54i = spawner::simple_spawn_single("truck_54i");
   level.takedown_truck_54i.animname = "truck_54i";
-  level.takedown_truck_54i disconnectpaths();
+  level.takedown_truck_54i disconnectPaths();
   level.takedown_truck_54i thread takedown_cleanup();
   level.takedown_truck_54i vehicle::lights_off();
   level.takedown_siegebot = spawner::simple_spawn_single("takedown_siegebot");
@@ -1228,29 +1228,29 @@ function takedown_scene_setup() {
   level.takedown_siegebot vehicle_ai::start_scripted(1);
   level.takedown_siegebot thread takedown_cleanup();
   level.takedown_siegebot thread function_9d478f6a();
-  level.outer_door = getent("outer_door", "targetname");
+  level.outer_door = getEnt("outer_door", "targetname");
   level.outer_door thread takedown_cleanup();
-  level.sign = getent("sign", "targetname");
+  level.sign = getEnt("sign", "targetname");
   level.sign.animname = "sign";
   level.sign thread takedown_cleanup();
-  var_320a972b = getent("sign_clip", "targetname");
-  var_320a972b linkto(level.sign);
+  var_320a972b = getEnt("sign_clip", "targetname");
+  var_320a972b linkTo(level.sign);
   var_320a972b thread takedown_cleanup();
-  level.var_338fd2fb = getent("p1wire", "targetname");
+  level.var_338fd2fb = getEnt("p1wire", "targetname");
   level.var_338fd2fb.animname = "p1wire";
   level.var_338fd2fb thread takedown_cleanup();
   if(level.players.size == 4) {
-    level.var_639480c0 = getent("takedown_p4door_l", "targetname");
+    level.var_639480c0 = getEnt("takedown_p4door_l", "targetname");
     level.var_639480c0.animname = "p4door_l";
     level.var_639480c0 thread takedown_cleanup();
-    level.var_d7ded90e = getent("takedown_p4door_r", "targetname");
+    level.var_d7ded90e = getEnt("takedown_p4door_r", "targetname");
     level.var_d7ded90e.animname = "p4door_r";
     level.var_d7ded90e thread takedown_cleanup();
   }
-  level.trashcan = getent("takedown_trashcan", "targetname");
+  level.trashcan = getEnt("takedown_trashcan", "targetname");
   level.trashcan thread takedown_cleanup();
-  level.var_efe271b8 = getent("takedown_trashcan_clip", "targetname");
-  level.var_efe271b8 linkto(level.trashcan);
+  level.var_efe271b8 = getEnt("takedown_trashcan_clip", "targetname");
+  level.var_efe271b8 linkTo(level.trashcan);
   level.var_efe271b8 thread takedown_cleanup();
   level.takedown_enemies = [];
   level.var_d9f6d6 = [];
@@ -1274,7 +1274,7 @@ function function_9d478f6a() {
   self endon("death");
   thread cp_mi_sing_vengeance_sound::takedown_siegebot(self);
   self waittill("hash_77e3a76");
-  var_26993771 = getent("takedown_siegebot_death_clip", "targetname");
+  var_26993771 = getEnt("takedown_siegebot_death_clip", "targetname");
   var_26993771 delete();
   self.allowdeath = 1;
   self kill();

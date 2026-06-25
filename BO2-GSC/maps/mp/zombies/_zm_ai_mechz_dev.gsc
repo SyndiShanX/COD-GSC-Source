@@ -216,7 +216,7 @@ setup_force_behavior() {
     player = get_players()[0];
     pos = player.origin;
     offset = anglesToForward(player.angles);
-    offset = vectornormalize(offset);
+    offset = vectorNormalize(offset);
     level.test_align_struct = spawn("script_model", pos + 300 * offset);
     level.test_align_struct setModel("tag_origin");
     level.test_align_struct.angles = player.angles + vectorscale((0, 1, 0), 180.0);
@@ -224,7 +224,7 @@ setup_force_behavior() {
     level.test_align_struct.angles = player.angles + vectorscale((0, 1, 0), 180.0);
   }
 
-  self linkto(level.test_align_struct, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(level.test_align_struct, "tag_origin", (0, 0, 0), (0, 0, 0));
   self.fx_field = self.fx_field &~64;
   self.fx_field = self.fx_field &~128;
   self.fx_field = self.fx_field &~256;
@@ -234,7 +234,7 @@ align_test_struct() {
   while(true) {
     pos = level.players[0].origin;
     offset = anglesToForward(level.players[0].angles);
-    offset = vectornormalize(offset);
+    offset = vectorNormalize(offset);
     dist = getdvarint(#"_id_6DCD047E");
     level.test_align_struct.origin = pos + dist * offset;
     level.test_align_struct.angles = get_behavior_orient();
@@ -243,7 +243,7 @@ align_test_struct() {
 }
 
 scripted_behavior(anim_scripted_name, notify_name) {
-  self animscripted(level.test_align_struct.origin, level.test_align_struct.angles, anim_scripted_name);
+  self animScripted(level.test_align_struct.origin, level.test_align_struct.angles, anim_scripted_name);
   self maps\mp\animscripts\zm_shared::donotetracks(notify_name);
 }
 
@@ -252,7 +252,7 @@ mechz_force_jump_in() {
   self setup_force_behavior();
 
   while(true) {
-    self animscripted(self.origin, self.angles, "zm_idle");
+    self animScripted(self.origin, self.angles, "zm_idle");
     wait 0.2;
     self scripted_behavior("zm_spawn", "jump_anim");
   }
@@ -263,11 +263,11 @@ mechz_force_jump_out() {
   self setup_force_behavior();
 
   while(true) {
-    self animscripted(self.origin, self.angles, "zm_idle");
+    self animScripted(self.origin, self.angles, "zm_idle");
     wait 0.2;
     self scripted_behavior("zm_fly_out", "jump_anim");
     self ghost();
-    self animscripted(self.origin, self.angles, "zm_fly_hover");
+    self animScripted(self.origin, self.angles, "zm_fly_hover");
     wait(level.mechz_jump_delay);
     self show();
     self scripted_behavior("zm_fly_in", "jump_anim");
@@ -281,7 +281,7 @@ mechz_force_flamethrower() {
   self setup_force_behavior();
   curr_aim_anim = 1;
   curr_timer = 0;
-  self animscripted(self.origin, self.angles, "zm_idle");
+  self animScripted(self.origin, self.angles, "zm_idle");
   wait 0.2;
   self scripted_behavior("zm_flamethrower_aim_start", "flamethrower_anim");
 
@@ -322,20 +322,20 @@ fake_launch_claw() {
   self.m_claw.fx_ent = spawn("script_model", self.m_claw gettagorigin("tag_claw"));
   self.m_claw.fx_ent.angles = self.m_claw gettagangles("tag_claw");
   self.m_claw.fx_ent setModel("tag_origin");
-  self.m_claw.fx_ent linkto(self.m_claw, "tag_claw");
+  self.m_claw.fx_ent linkTo(self.m_claw, "tag_claw");
   network_safe_play_fx_on_tag("mech_claw", 1, level._effect["mechz_claw"], self.m_claw.fx_ent, "tag_origin");
   self.m_claw clearanim(%root, 0.2);
   self.m_claw setanim(%ai_zombie_mech_grapple_arm_open_idle, 1, 0.2, 1);
   offset = anglesToForward(self.angles);
-  offset = vectornormalize(offset);
+  offset = vectorNormalize(offset);
   target_pos = self.origin + offset * 500 + vectorscale((0, 0, 1), 36.0);
   n_time = 0.0833333;
-  self.m_claw moveto(target_pos, n_time);
+  self.m_claw moveTo(target_pos, n_time);
   self.m_claw waittill("movedone");
   self.m_claw clearanim(%root, 0.2);
   self.m_claw setanim(%ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
   wait 0.5;
-  self.m_claw moveto(v_claw_origin, 0.5);
+  self.m_claw moveTo(v_claw_origin, 0.5);
   self.m_claw waittill("movedone");
   self.m_claw.fx_ent delete();
   self.fx_field = self.fx_field &~256;
@@ -344,7 +344,7 @@ fake_launch_claw() {
   v_claw_angles = self gettagangles("tag_claw");
   self.m_claw.origin = v_claw_origin;
   self.m_claw.angles = v_claw_angles;
-  self.m_claw linkto(self, "tag_claw");
+  self.m_claw linkTo(self, "tag_claw");
   self.launching_claw = 0;
 }
 
@@ -353,7 +353,7 @@ mechz_force_claw_attack() {
   self setup_force_behavior();
 
   while(true) {
-    self animscripted(self.origin, self.angles, "zm_idle");
+    self animScripted(self.origin, self.angles, "zm_idle");
     wait 0.2;
     self scripted_behavior("zm_grapple_aim_start", "grapple_anim");
     self thread fake_launch_claw();
@@ -434,7 +434,7 @@ mechz_force_melee() {
   self setup_force_behavior();
 
   while(true) {
-    self animscripted(self.origin, self.angles, "zm_idle");
+    self animScripted(self.origin, self.angles, "zm_idle");
     wait 0.2;
     self scripted_behavior("zm_melee_stand", "melee_anim");
   }

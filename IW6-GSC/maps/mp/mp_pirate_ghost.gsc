@@ -335,7 +335,7 @@ customizeSquadmate(isMelee) {
 giveHat() {
   hat = spawn("script_model", self.origin);
   hat setModel(CONST_GHOST_HAT_MODEL);
-  hat LinkTo(self, "j_head", (4, 0, 0), (90, 0, 0));
+  hat linkTo(self, "j_head", (4, 0, 0), (90, 0, 0));
 
   self.hat = hat;
 }

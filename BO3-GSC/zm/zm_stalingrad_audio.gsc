@@ -115,7 +115,7 @@ function function_f021c688() {
     self.b_activated = 1;
     level.var_62e63d78++;
     level notify("hash_ce64d360");
-    playsoundatposition("zmb_card_activate", self.origin);
+    playSoundAtPosition("zmb_card_activate", self.origin);
   }
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
 }
@@ -158,7 +158,7 @@ function function_d75eac4e() {
   self zm_unitrigger::create_unitrigger(undefined, 50);
   while(true) {
     self waittill("trigger_activated");
-    playsoundatposition(self.script_sound, self.origin);
+    playSoundAtPosition(self.script_sound, self.origin);
     wait(200);
   }
 }
@@ -171,7 +171,7 @@ function function_e01c1b04(var_99ad39b9) {
     var_4237d65e = randomintrange(0, var_99ad39b9.size);
     var_99ad39b9[var_4237d65e] zm_unitrigger::create_unitrigger(undefined, 24);
     var_99ad39b9[var_4237d65e] waittill("trigger_activated");
-    playsoundatposition(var_99ad39b9[var_4237d65e].script_sound, var_99ad39b9[var_4237d65e].origin);
+    playSoundAtPosition(var_99ad39b9[var_4237d65e].script_sound, var_99ad39b9[var_4237d65e].origin);
     zm_unitrigger::unregister_unitrigger(var_99ad39b9[var_4237d65e].unitrigger);
     wait(150);
   }
@@ -361,13 +361,13 @@ function function_663128e3() {
 function function_6b495bd6(restart = 0) {
   s_ballerina_start = struct::get("s_ballerina_start", "targetname");
   if(!(isDefined(restart) && restart)) {
-    playsoundatposition("zmb_sam_egg_success", (0, 0, 0));
+    playSoundAtPosition("zmb_sam_egg_success", (0, 0, 0));
     var_ac086ffb = util::spawn_model(s_ballerina_start.model, s_ballerina_start.origin - vectorscale((0, 0, 1), 20), s_ballerina_start.angles);
     var_ac086ffb clientfield::set("ee_ballerina", 2);
-    var_ac086ffb moveto(s_ballerina_start.origin, 2);
+    var_ac086ffb moveTo(s_ballerina_start.origin, 2);
     var_ac086ffb waittill("movedone");
   } else {
-    playsoundatposition("zmb_sam_egg_fail", (0, 0, 0));
+    playSoundAtPosition("zmb_sam_egg_fail", (0, 0, 0));
     var_ac086ffb = util::spawn_model(s_ballerina_start.model, s_ballerina_start.origin, s_ballerina_start.angles);
     var_ac086ffb clientfield::set("ee_ballerina", 1);
   }
@@ -414,7 +414,7 @@ function function_631d8c1() {
   self endon("ballerina_destroyed");
   self endon("ballerina_timeout");
   while(true) {
-    self.var_ac086ffb rotateyaw(360, 4);
+    self.var_ac086ffb rotateYaw(360, 4);
     wait(4);
   }
 }
@@ -445,7 +445,7 @@ function function_db914e() {
 }
 
 function function_d64d6d35() {
-  playsoundatposition("zmb_sam_egg_success", (0, 0, 0));
+  playSoundAtPosition("zmb_sam_egg_success", (0, 0, 0));
   s_ballerina_end = struct::get("s_ballerina_end", "targetname");
   s_ballerina_end.var_ac086ffb = util::spawn_model(s_ballerina_end.model, s_ballerina_end.origin, s_ballerina_end.angles);
   s_ballerina_end.var_ac086ffb clientfield::set("ee_ballerina", 1);
@@ -489,7 +489,7 @@ function function_24ff7a78(owner, weapon) {
     if(array::contains(level.var_a31a784f, var_c4311d6f)) {
       return false;
     }
-    var_12bd8497 = getent(var_c4311d6f + "_1_damage", "targetname");
+    var_12bd8497 = getEnt(var_c4311d6f + "_1_damage", "targetname");
     if(isDefined(var_12bd8497.var_3eb19318) && var_12bd8497.var_3eb19318 && self istouching(var_12bd8497)) {
       array::add(level.var_a31a784f, var_c4311d6f);
       level.var_bf88fef7++;

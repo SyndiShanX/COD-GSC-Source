@@ -336,7 +336,7 @@ cheat_enabled(val) {
 }
 
 fade_out_intro_screen_zm(hold_black_time = 0.2) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] clientfield::set("ClearStreamerLoadingHints", 1);
@@ -383,7 +383,7 @@ onallplayersready() {
   player_count_actual = 0;
 
   while(player_count_actual < getnumexpectedplayers(1)) {
-    players = getplayers();
+    players = getPlayers();
     player_count_actual = 0;
 
     for(i = 0; i < players.size; i++) {
@@ -398,7 +398,7 @@ onallplayersready() {
 
   setinitialplayersconnected();
   println("<dev string:x7e>");
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(a_e_players.size == 1) {
     level flag::set("solo_game");
@@ -436,7 +436,7 @@ function_9a8ab40f() {
   do {
     waitframe(1);
     var_183929a8 = 0;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(!player isloadingcinematicplaying()) {
@@ -457,7 +457,7 @@ function_d797f41f(n_waittime = 1) {
 
 _outro_slow(func) {
   level endon(#"all_players_connected", #"game_ended");
-  array::thread_all(getplayers(), func);
+  array::thread_all(getPlayers(), func);
 
   while(true) {
     result = level waittill(#"connected");
@@ -539,7 +539,7 @@ post_all_players_connected() {
   level flag::wait_till("start_zombie_round_logic");
   level.var_aaf21bbb = level.players.size;
   level.var_5caadd40 = util::get_human_players(#"allies").size;
-  println("<dev string:xaf>", level.script, "<dev string:xc4>", getplayers().size);
+  println("<dev string:xaf>", level.script, "<dev string:xc4>", getPlayers().size);
   level thread round_end_monitor();
 
   if(!level.zombie_anim_intro) {
@@ -958,10 +958,10 @@ zombie_intro_screen(string1, string2, string3, string4, string5) {
 }
 
 players_playing() {
-  players = getplayers();
+  players = getPlayers();
   level.players_playing = players.size;
   wait 20;
-  players = getplayers();
+  players = getPlayers();
   level.players_playing = players.size;
 }
 
@@ -1178,7 +1178,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     }
 
     if(isPlayer(attacker) && attacker issplitscreen()) {
-      players = getplayers();
+      players = getPlayers();
 
       if(players.size == 4) {
         var_6b5f7089 = 1;
@@ -1478,7 +1478,7 @@ function_d723e40() {
 }
 
 restart_prompt() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread function_51133aa1();
@@ -1544,7 +1544,7 @@ end_game() {
     level thread zm_audio::sndmusicsystem_playstate("game_over");
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player val::set(#"end_game", "ignoreme", 1);
@@ -1588,7 +1588,7 @@ end_game() {
   wait 0.1;
   game_over = [];
   survived = [];
-  players = getplayers();
+  players = getPlayers();
   setmatchflag("disableIngameMenu", 1);
 
   foreach(player in players) {
@@ -1621,7 +1621,7 @@ end_game() {
   }
 
   util::preload_frontend();
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(level.custom_end_screen)) {
     level[[level.custom_end_screen]]();
@@ -1637,7 +1637,7 @@ end_game() {
   zm_stats::update_global_counters_on_match_end();
   zm_stats::set_match_stat("gameLength", game_length);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_stats::function_9daadcaa("gameLength", game_length);
     player zm_stats::function_ae547e45("boas_gameLength", game_length);
     player zm_stats::function_ae547e45("boas_numZombieRounds", level.round_number);
@@ -1659,7 +1659,7 @@ end_game() {
   globallogic_player::recordactiveplayersendgamematchrecordstats();
   recordnumzombierounds(level.round_number);
   finalizematchrecord();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player.sessionstate) && player.sessionstate == "spectator") {
@@ -1676,7 +1676,7 @@ end_game() {
   }
 
   luinotifyevent(#"force_scoreboard", 1, 1);
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] val::set(#"end_of_game", "freezecontrols");
@@ -1696,7 +1696,7 @@ end_game() {
     wait zombie_utility::get_zombie_var(#"zombie_intermission_time");
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(level.var_7c7c6c35 zm_game_over::is_open(players[i])) {
@@ -1705,9 +1705,9 @@ end_game() {
   }
 
   level notify(#"stop_intermission");
-  array::thread_all(getplayers(), &zm_player::player_exit_level);
+  array::thread_all(getPlayers(), &zm_player::player_exit_level);
   wait 1.5;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] cameraactivate(0);
@@ -1748,7 +1748,7 @@ check_end_game_intermission_delay() {
 }
 
 upload_leaderboards() {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] uploadleaderboards();
@@ -1826,7 +1826,7 @@ intermission() {
 
   level.intermission = 1;
   level notify(#"intermission");
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] setclientthirdperson(0);
@@ -1853,7 +1853,7 @@ intermission() {
   }
 
   wait 5.25;
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     players[i] clientfield::set("zmbLastStand", 0);
@@ -1951,7 +1951,7 @@ default_find_exit_point() {
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = [];
 
@@ -1995,7 +1995,7 @@ register_sidequest(id, sidequest_stat) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i] zm_stats::get_global_stat(level.zombie_sidequest_stat[id])) {
@@ -2021,7 +2021,7 @@ set_sidequest_completed(id) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(level.zombie_sidequest_stat[id])) {
@@ -2059,7 +2059,7 @@ precache_zombie_leaderboards() {
 }
 
 increment_dog_round_stat(stat) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player zm_stats::increment_client_stat("zdog_rounds_" + stat);
@@ -2073,8 +2073,8 @@ player_too_many_players_check() {
     max_players = 8;
   }
 
-  if(getplayers().size > max_players) {
-    foreach(player in getplayers()) {
+  if(getPlayers().size > max_players) {
+    foreach(player in getPlayers()) {
       player val::set(#"too_many_players", "freezecontrols");
     }
 

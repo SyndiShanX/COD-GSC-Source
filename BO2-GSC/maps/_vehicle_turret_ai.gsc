@@ -82,7 +82,7 @@ fire_turret_for_time(turret_index, time) {
     if(isDefined(self.turret_audio_override)) {
       if(!isDefined(self.sound_ent)) {
         self.sound_ent = spawn("script_origin", self.origin);
-        self.sound_ent linkto(self);
+        self.sound_ent linkTo(self);
         self thread kill_audio_ent(self.sound_ent);
       }
 
@@ -239,7 +239,7 @@ choose_target(turret_index, enemy_team) {
       best_target = score_target(self._forced_target_ent_array, turret_index);
 
       if(isDefined(best_target)) {
-        self setgunnertargetent(best_target, vectorscale((0, 0, 1), 30.0), turret_index);
+        self setgunnertargetEnt(best_target, vectorscale((0, 0, 1), 30.0), turret_index);
         return true;
       } else {
         self cleargunnertarget(turret_index);
@@ -257,7 +257,7 @@ choose_target(turret_index, enemy_team) {
     self.turret_ai_array[turret_index].target_ent = best_target;
 
     if(isDefined(best_target)) {
-      self setgunnertargetent(best_target, vectorscale((0, 0, 1), 30.0), turret_index);
+      self setgunnertargetEnt(best_target, vectorscale((0, 0, 1), 30.0), turret_index);
       return true;
     }
 
@@ -340,12 +340,12 @@ setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
 
       if(isDefined(driver_turret)) {
         if(isDefined(best_target)) {
-          self setgunnertargetent(best_target, target_offset, driver_turret);
+          self setgunnertargetEnt(best_target, target_offset, driver_turret);
         } else {
           self cleargunnertarget(driver_turret);
         }
       } else if(isDefined(best_target))
-        self setturrettargetent(best_target, target_offset, driver_turret);
+        self setturrettargetEnt(best_target, target_offset, driver_turret);
       else {
         self clearturrettarget(driver_turret);
       }

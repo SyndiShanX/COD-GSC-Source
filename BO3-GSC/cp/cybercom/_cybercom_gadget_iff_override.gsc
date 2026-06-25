@@ -384,7 +384,7 @@ function ai_activateiffoverride(target, var_9bc2efcb = 1) {
   if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
-    self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
+    self animScripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self waittillmatch("ai_cybercom_anim");
   }
   weapon = getweapon("gadget_iff_override");

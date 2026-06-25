@@ -37,7 +37,7 @@ function init_spawns() {
     println("");
     return;
   }
-  dog_spawner = getent("dog_spawner", "targetname");
+  dog_spawner = getEnt("dog_spawner", "targetname");
   if(!isDefined(dog_spawner)) {
     println("");
     return;
@@ -98,7 +98,7 @@ function ownerhadactivedogs() {
 }
 
 function dog_killstreak_init() {
-  dog_spawner = getent("dog_spawner", "targetname");
+  dog_spawner = getEnt("dog_spawner", "targetname");
   if(!isDefined(dog_spawner)) {
     println("");
     return false;
@@ -149,7 +149,7 @@ function get_spawn_node(owner, team) {
 }
 
 function get_score_for_spawn(origin, team) {
-  players = getplayers();
+  players = getPlayers();
   score = 0;
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -184,7 +184,7 @@ function dog_create_spawn_influencer(team) {
 }
 
 function dog_manager_spawn_dog(owner, team, spawn_node, requireddeathcount) {
-  dog_spawner = getent("dog_spawner", "targetname");
+  dog_spawner = getEnt("dog_spawner", "targetname");
   dog = dog_spawner spawnfromspawner();
   dog forceteleport(spawn_node.origin, spawn_node.angles);
   dog init_dog();
@@ -379,7 +379,7 @@ function dog_patrol_near_objective() {
 }
 
 function dog_patrol_near_enemy() {
-  players = getplayers();
+  players = getPlayers();
   closest = undefined;
   distsq = 99999999;
   foreach(player in players) {
@@ -597,7 +597,7 @@ function devgui_dog_think() {
 
 function devgui_dog_spawn(team) {
   player = util::gethostplayer();
-  dog_spawner = getent("", "");
+  dog_spawner = getEnt("", "");
   level.dog_abort = 0;
   if(!isDefined(dog_spawner)) {
     iprintln("");
@@ -646,7 +646,7 @@ function devgui_dog_camera() {
       forward = anglesToForward(dog.angles);
       dog.cam = spawn("", (dog.origin + vectorscale((0, 0, 1), 50)) + (forward * -100));
       dog.cam setModel("");
-      dog.cam linkto(dog);
+      dog.cam linkTo(dog);
     }
     if(dog getentitynumber() <= level.devgui_dog_camera) {
       dog = undefined;

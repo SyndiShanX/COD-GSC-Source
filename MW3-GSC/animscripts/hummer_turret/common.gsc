@@ -239,7 +239,7 @@ _id_48A8(var_0, var_1, var_2, var_3) {
 _id_48A9(var_0, var_1, var_2, var_3) {
   self endon("death");
   var_2 endon("death");
-  self stopanimscripted();
+  self stopanimScripted();
   self notify("newanim");
   self._id_0EEA = undefined;
   self._id_10EF = 1;
@@ -253,9 +253,9 @@ _id_48A9(var_0, var_1, var_2, var_3) {
   var_6 = var_0 gettagangles(var_4._id_24F2);
   var_2 setdefaultdroppitch(0);
   var_2 thread _id_48AC(var_2._id_48AB);
-  self animscripted("passenger2turret", var_5, var_6, var_3);
+  self animScripted("passenger2turret", var_5, var_6, var_3);
   wait(getanimlength(var_3));
-  self stopanimscripted();
+  self stopanimScripted();
   var_2 _id_48C6();
   self useturret(var_2);
 }
@@ -565,7 +565,7 @@ _id_48C3(var_0) {
   var_4 = self gettagorigin("tag_aim") + var_3;
   self._id_48C5 = spawn("script_origin", var_4);
   self._id_48C5.ignoreme = 1;
-  self._id_48C5 linkto(self._id_2A38);
+  self._id_48C5 linkTo(self._id_2A38);
   self cleartargetentity();
   self settargetentity(self._id_48C5);
   self waittill("turret_on_target");

@@ -234,7 +234,7 @@ function get_closest_enemy_in_view(distance, fov) {
 }
 
 function get_closest_player(v_origin, maxdist) {
-  playerlist = getplayers();
+  playerlist = getPlayers();
   playerlist = arraysortclosest(playerlist, v_origin, 1, 0, maxdist);
   if(isDefined(playerlist) && playerlist.size > 0 && isalive(playerlist[0])) {
     return playerlist[0];

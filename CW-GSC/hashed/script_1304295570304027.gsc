@@ -437,7 +437,7 @@ function function_ea620e62(dialog, players, objectivekey) {
 }
 
 function function_66d7165e(user) {
-  return getplayers(user);
+  return getPlayers(user);
 }
 
 function function_67e581be(team) {
@@ -628,7 +628,7 @@ function function_95470569() {
 
   foreach(team, _ in level.teams) {
     if(function_88134907(team) == 0) {
-      players = arraycombine(players, getplayers(team));
+      players = arraycombine(players, getPlayers(team));
     }
   }
 

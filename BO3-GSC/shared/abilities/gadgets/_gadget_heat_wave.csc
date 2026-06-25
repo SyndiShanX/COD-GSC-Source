@@ -48,7 +48,7 @@ function update_victim(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   if(newval) {
     self endon("entityshutdown");
     self util::waittill_dobj(localclientnum);
-    self playrumbleonentity(localclientnum, "heat_wave_damage");
+    self playRumbleOnEntity(localclientnum, "heat_wave_damage");
     playtagfxset(localclientnum, "ability_hero_heat_wave_player_impact", self);
   }
 }

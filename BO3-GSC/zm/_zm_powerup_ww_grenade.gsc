@@ -73,7 +73,7 @@ function detect_reentry() {
 }
 
 function ww_grenade_devgui_callback(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
   switch (cmd) {
     case "": {

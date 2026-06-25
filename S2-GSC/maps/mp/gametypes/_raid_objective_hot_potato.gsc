@@ -358,8 +358,8 @@ throwphysicspotato(param_00, param_01, param_02) {
   var_06 = (clamp(var_06[0], -85, 85), var_06[1], var_06[2]);
   var_07 = anglesToForward(var_06);
   var_08 = param_00 getvelocity();
-  var_09 = vectornormalize((var_07[0], var_07[1], 0));
-  var_0A = vectornormalize((var_08[0], var_08[1], 0));
+  var_09 = vectorNormalize((var_07[0], var_07[1], 0));
+  var_0A = vectorNormalize((var_08[0], var_08[1], 0));
   var_0B = 0;
   if(vectordot(var_09, var_0A) >= 0.42 && length(var_08) > 120) {
     var_0B = 6000;

@@ -261,7 +261,7 @@ knockdown_zombie_animate() {
   animation_legs = "";
   animation_side = undefined;
   animation_duration = "_default";
-  v_forward = vectordot(anglesToForward(self.angles), vectornormalize(self.v_punched_from - self.origin));
+  v_forward = vectordot(anglesToForward(self.angles), vectorNormalize(self.v_punched_from - self.origin));
 
   if(v_forward > 0.6) {
     animation_direction = "back";

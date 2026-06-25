@@ -195,7 +195,7 @@ function function_bc0ce7d5(slot, weapon) {
 
 function function_941ed5d6() {
   if(isDefined(self.team)) {
-    var_1594ab5 = getplayers(self.team, self.origin, 1500);
+    var_1594ab5 = getPlayers(self.team, self.origin, 1500);
   } else {
     var_1594ab5 = array(self);
   }
@@ -315,7 +315,7 @@ function enable_healing(slot, weapon, player) {
       if(isDefined(self.var_f2a5bd01) && self.var_f2a5bd01 > 0) {
         self function_6eef7f4f(self.var_f2a5bd01 - 1);
         var_b16fafc9 = 1;
-        self playrumbleonentity("stim_heal");
+        self playRumbleOnEntity("stim_heal");
       }
     }
   }

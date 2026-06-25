@@ -106,9 +106,9 @@ function function_5ea427bf(player) {
   }
   if(isDefined(str_msg)) {
     if(isDefined(param1)) {
-      self sethintstring(str_msg, param1);
+      self setHintString(str_msg, param1);
     } else {
-      self sethintstring(str_msg);
+      self setHintString(str_msg);
     }
   }
   return b_visible;
@@ -510,7 +510,7 @@ function function_48cfc7df(s_spot) {
     s_spot.angles = (0, 0, 0);
   }
   mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
-  self linkto(mdl_anchor);
+  self linkTo(mdl_anchor);
   self thread anchor_delete_watcher(mdl_anchor);
   mdl_anchor endon("death");
   mdl_anchor.origin = s_spot.origin;
@@ -559,7 +559,7 @@ function function_37a5b776() {
   var_a8951c29 = [];
   var_9e84b959 = array("start_island", "apothicon_island", "temple_island", "prototype_island", "asylum_island", "prison_island", "arena_island");
   for(i = 0; i < var_9e84b959.size; i++) {
-    e_island = getent(var_9e84b959[i], "targetname");
+    e_island = getEnt(var_9e84b959[i], "targetname");
     for(j = 0; j < level.activeplayers.size; j++) {
       if(isDefined(level.activeplayers[j].is_flung) && level.activeplayers[j].is_flung) {
         return true;
@@ -581,7 +581,7 @@ function function_37a5b776() {
 }
 
 function monitor_wallrun_trigger(str_trigger, str_flag) {
-  t_trigger = getent(str_trigger, "targetname");
+  t_trigger = getEnt(str_trigger, "targetname");
   level flag::init(str_flag);
   while(true) {
     t_trigger waittill("trigger", e_triggerer);
@@ -592,7 +592,7 @@ function monitor_wallrun_trigger(str_trigger, str_flag) {
 }
 
 function function_88777efd(str_trigger, str_flag) {
-  t_trigger = getent(str_trigger, "targetname");
+  t_trigger = getEnt(str_trigger, "targetname");
   level flag::init(str_flag);
   while(true) {
     t_trigger waittill("trigger", e_triggerer);
@@ -752,7 +752,7 @@ function function_e42cebb6(v_pos, var_5ca58060, var_8f4ca4be, str_rumble_type) {
   self endon("death");
   for(i = 0; i < var_8f4ca4be; i++) {
     if(distancesquared(v_pos, self.origin) <= var_5ca58060) {
-      self playrumbleonentity(str_rumble_type);
+      self playRumbleOnEntity(str_rumble_type);
     }
     wait(0.1);
   }
@@ -928,13 +928,13 @@ function function_442d17f2(v_start_pos, v_angles) {
   v_spawn_pos = self getEye() + (anglesToForward(self getplayerangles()) * 64);
   var_7add4736 = util::spawn_model("tag_origin", v_spawn_pos, v_angles);
   mdl_gateworm = util::spawn_model("p7_zm_dlc4_gateworm", v_spawn_pos, v_angles);
-  mdl_gateworm linkto(var_7add4736);
+  mdl_gateworm linkTo(var_7add4736);
   mdl_gateworm thread scene::play("zm_dlc4_gateworm_idle_basin", mdl_gateworm);
   self thread util::delete_on_death(var_7add4736);
   self thread util::delete_on_death(mdl_gateworm);
   mdl_gateworm thread function_9646de9a();
   v_ground_pos = bulletTrace(v_start_pos, v_start_pos + (vectorscale((0, 0, -1), 100000)), 0, mdl_gateworm)["position"];
-  var_7add4736 moveto(v_ground_pos, 4);
+  var_7add4736 moveTo(v_ground_pos, 4);
   var_7add4736 playSound("zmb_main_searchparty_worm_appear");
   var_7add4736 playLoopSound("zmb_main_omelettes_worm_lp", 1);
   var_7add4736 waittill("movedone");
@@ -1060,7 +1060,7 @@ function function_bb26d959(var_e4342d5d) {
 }
 
 function function_1e620a08(str_tag_name) {
-  var_c0132a00 = getent("rift_entrance_rune_portal", "targetname");
+  var_c0132a00 = getEnt("rift_entrance_rune_portal", "targetname");
   var_c0132a00 hidepart(("tag_" + str_tag_name) + "_off");
   var_c0132a00 showpart(("tag_" + str_tag_name) + "_on");
 }
@@ -1150,7 +1150,7 @@ function function_8d431c98(var_887c2fcb) {
 
 function function_32c765c5(v_origin) {
   n_closest_dist = 1E+07;
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     n_dist = distance(a_players[i].origin, v_origin);
     if(n_dist < n_closest_dist) {
@@ -1171,7 +1171,7 @@ function function_a3c6e02f(e_to_delete, str_notify, n_delay) {
 
 function get_lookat_angles(v_start, v_end) {
   v_dir = v_end - v_start;
-  v_dir = vectornormalize(v_dir);
+  v_dir = vectorNormalize(v_dir);
   v_angles = vectortoangles(v_dir);
   return v_angles;
 }

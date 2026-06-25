@@ -159,7 +159,7 @@ function explodable_barrel_explode() {
 
 function breakable_clip() {
   if(isDefined(self.target)) {
-    targ = getent(self.target, "targetname");
+    targ = getEnt(self.target, "targetname");
     if(targ.classname == "script_brushmodel") {
       self.remove = targ;
       return;

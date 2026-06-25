@@ -140,11 +140,11 @@ slide_explosion(n_slot) {
 
     while(self issliding()) {
       var_fe40b467 = self getenemiesinradius(self.origin, 80);
-      var_a2bdc08a = vectornormalize(self getvelocity());
+      var_a2bdc08a = vectorNormalize(self getvelocity());
       var_1574e1cf = [];
 
       foreach(ai in var_fe40b467) {
-        if(vectordot(var_a2bdc08a, vectornormalize(ai.origin - self.origin)) > 0.8) {
+        if(vectordot(var_a2bdc08a, vectorNormalize(ai.origin - self.origin)) > 0.8) {
           if(!isDefined(var_1574e1cf)) {
             var_1574e1cf = [];
           } else if(!isarray(var_1574e1cf)) {
@@ -190,11 +190,11 @@ slide_explosion(n_slot) {
           }
 
           if(var_708c0444 < 3 && var_c97aef2) {
-            if(vectordot(anglesToForward(self.angles), vectornormalize(ai.origin - self.origin)) > 0.6) {
+            if(vectordot(anglesToForward(self.angles), vectorNormalize(ai.origin - self.origin)) > 0.6) {
               n_kill_count++;
               var_708c0444++;
               ai.var_fc11268c = 1;
-              v_fling = vectornormalize(ai.origin - self.origin) * 150;
+              v_fling = vectorNormalize(ai.origin - self.origin) * 150;
               v_fling = (v_fling[0], v_fling[1], 75);
               ai zm_utility::function_ffc279(v_fling, self, var_fd11502e);
             }

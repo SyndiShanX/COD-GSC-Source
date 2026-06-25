@@ -310,7 +310,7 @@ neighborhood() {
   thread n_watchers();
   thread n_door_knock();
   thread n_walla();
-  var_0 = getent("town_sedan", "targetname");
+  var_0 = getEnt("town_sedan", "targetname");
   var_0 thread neighborhood_vehicle_delete();
 }
 
@@ -537,7 +537,7 @@ mansion_ext() {
 mansion_flyaway_birds_sfx() {
   var_0 = spawn("script_origin", (1235, -104262, -114722));
   var_0 playSound("scn_yb_birds_flyaway", "sounddone");
-  var_0 moveto((1437, -105698, -114721), 6);
+  var_0 moveTo((1437, -105698, -114721), 6);
   wait 20;
   var_0 delete();
 }
@@ -596,8 +596,8 @@ mansion() {
   var_2.angles = var_0.angles;
   var_2.animname = "door";
   var_2 maps\_anim::setanimtree();
-  var_1 linkto(var_2);
-  var_0 linkto(var_2, "tag_origin", (0, 0, 0), (0, 180, 0));
+  var_1 linkTo(var_2);
+  var_0 linkTo(var_2, "tag_origin", (0, 0, 0), (0, 180, 0));
   var_3 = common_scripts\utility::get_target_ent("mansion_middle_door_right");
   var_4 = common_scripts\utility::get_target_ent("clip_mansion_mid_door_R");
   var_5 = common_scripts\utility::spawn_tag_origin();
@@ -605,8 +605,8 @@ mansion() {
   var_5.angles = var_3.angles;
   var_5.animname = "door";
   var_5 maps\_anim::setanimtree();
-  var_4 linkto(var_3);
-  var_3 linkto(var_5);
+  var_4 linkTo(var_3);
+  var_3 linkTo(var_5);
 
   if(isDefined(level.prologue) && level.prologue == 1) {
     level.player setviewmodel("viewhands_gs_hostage_clean");
@@ -621,7 +621,7 @@ mansion() {
   common_scripts\utility::trigger_off("player_near_2nd_door", "targetname");
   common_scripts\utility::trigger_off("trig_player_enter_2nd_door", "targetname");
   common_scripts\utility::trigger_off("player_near_mansion_exit", "targetname");
-  var_6 = getent("mansion_front_door_left", "targetname");
+  var_6 = getEnt("mansion_front_door_left", "targetname");
   level.hesh notify("stop_path");
   var_7 = common_scripts\utility::get_target_ent("mansion_anim_ref");
   var_7 maps\_anim::anim_generic_reach(level.hesh, "youngblood_house_entry_friendly");
@@ -632,8 +632,8 @@ mansion() {
   var_10.angles = var_8.angles;
   var_10.animname = "door";
   var_10 maps\_anim::setanimtree();
-  var_9 linkto(var_8);
-  var_8 linkto(var_10);
+  var_9 linkTo(var_8);
+  var_8 linkTo(var_10);
   var_7 thread maps\_anim::anim_single_solo(var_10, "youngblood_house_entry_door");
   var_7 maps\_anim::anim_generic(level.hesh, "youngblood_house_entry_friendly");
   var_7 thread maps\_anim::anim_generic_loop(level.hesh, "youngblood_house_entry_idle");
@@ -712,15 +712,15 @@ mansion() {
   var_14.angles = var_8.angles;
   var_14.animname = "door";
   var_14 maps\_anim::setanimtree();
-  var_13 linkto(var_8);
-  var_8 linkto(var_14);
+  var_13 linkTo(var_8);
+  var_8 linkTo(var_14);
   var_15 = common_scripts\utility::get_target_ent("mansion_exit_door_right");
   var_16 = common_scripts\utility::spawn_tag_origin();
   var_16.origin = var_15.origin;
   var_16.angles = var_15.angles;
   var_16.animname = "door";
   var_16 maps\_anim::setanimtree();
-  var_15 linkto(var_16);
+  var_15 linkTo(var_16);
   var_7 notify("stop_loop");
   level.hesh common_scripts\utility::delaycall(0.2, ::stopsounds);
   var_7 maps\_utility::delaythread(0.1, maps\_anim::anim_generic, level.hesh, "youngblood_house_exit_friendly_open_door");
@@ -789,7 +789,7 @@ exp14_sounds() {
   var_2 = common_scripts\utility::spawn_tag_origin();
   var_2.origin = var_0;
   var_2 thread maps\_utility::play_sound_on_entity("scn_yb_glass_wood_burst");
-  var_2 moveto(var_1, 1);
+  var_2 moveTo(var_1, 1);
   var_2 waittill("movedone");
   wait 3;
   var_2 delete();
@@ -895,14 +895,14 @@ chaos_a() {
   var_3.angles = var_2.angles;
   var_3.animname = "door";
   var_3 maps\_anim::setanimtree();
-  var_2 linkto(var_3);
+  var_2 linkTo(var_3);
   var_4 = common_scripts\utility::get_target_ent("mansion_exit_door_right");
   var_5 = common_scripts\utility::spawn_tag_origin();
   var_5.origin = var_4.origin;
   var_5.angles = var_4.angles;
   var_5.animname = "door";
   var_5 maps\_anim::setanimtree();
-  var_4 linkto(var_5);
+  var_4 linkTo(var_5);
   var_6 = maps\_utility::spawn_anim_model("player_rig", level.player.origin);
   var_6 hide();
   var_1 maps\_anim::anim_first_frame_solo(var_6, "youngblood_house_exit_player_part2");
@@ -979,10 +979,10 @@ chaos_a() {
   level.hesh maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("forward_walk_into"), 9999);
   level.hesh maps\_utility::follow_path(common_scripts\utility::get_target_ent("exit_basement_pos"), 9999);
   var_0 = common_scripts\utility::get_target_ent("debris_door_ref");
-  var_8 = getent("basement_debris_door", "targetname");
+  var_8 = getEnt("basement_debris_door", "targetname");
   var_9 = maps\_utility::spawn_anim_model("tag_origin", var_8.origin);
   var_9.angles = var_8.angles;
-  var_8 linkto(var_9, "tag_origin");
+  var_8 linkTo(var_9, "tag_origin");
   var_0 maps\_anim::anim_first_frame_solo(var_9, "youngblood_basement_approach_debris_1");
   var_0 maps\_anim::anim_reach_solo(level.hesh, "youngblood_basement_approach_hesh");
   level.hesh maps\_utility::disable_exits();
@@ -1005,7 +1005,7 @@ chaos_a() {
   common_scripts\utility::flag_clear("player_unsafe");
   maps\_utility::activate_trigger_with_targetname("basement_vfx_trig");
   maps\_utility::activate_trigger_with_noteworthy("street_flying_house");
-  var_10 = getent("street_flying_chunk_sound", "targetname");
+  var_10 = getEnt("street_flying_chunk_sound", "targetname");
   var_10 maps\_utility::delaythread(1.0, maps\_utility::play_sound_on_entity, "scn_yb_final_big_street_piece_incoming");
   thread maps\youngblood_util::rog_incoming();
   maps\_utility::delaythread(1.0, common_scripts\utility::play_sound_in_space, "scn_yb_final_big_street_piece_hit_quake", level.player.origin);
@@ -1115,7 +1115,7 @@ chaos_rog_think() {
 
 rog_moving_sound(var_0, var_1, var_2, var_3) {
   var_4 = spawn("script_origin", var_1);
-  var_4 moveto(var_2, var_3);
+  var_4 moveTo(var_2, var_3);
   var_4 playSound(var_0, "rog_sound_done");
   var_4 waittill("rog_sound_done");
   common_scripts\utility::waitframe();
@@ -1135,7 +1135,7 @@ chaos_moving_head(var_0) {
 
 chaos_moving_clip() {
   var_0 = common_scripts\utility::get_target_ent("moving_clip_start");
-  var_1 = common_scripts\utility::getstruct("moving_clip_dest", "targetname");
+  var_1 = common_scripts\utility::getStruct("moving_clip_dest", "targetname");
   var_0 delete();
 }
 
@@ -1173,7 +1173,7 @@ chaos_a_wait_for_player_jump(var_0) {
   var_0 maps\_anim::anim_first_frame_solo(var_1, "youngblood_player_roof_smash");
   var_1 hide();
   common_scripts\utility::flag_wait("player_jumped_into_house");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread common_scripts\utility::play_sound_in_space("scn_yb_player_jump_through_roof", level.player.origin);
   common_scripts\utility::flag_set("suppress_crash_player_fx");
   common_scripts\utility::flag_set("chaos_player_safe");
@@ -1234,13 +1234,13 @@ chaos_a_house_jump_nag() {
 
 chaos_a_hesh_landing(var_0) {
   common_scripts\utility::flag_wait("player_on_house_floor");
-  var_1 = common_scripts\utility::getstruct("landing_spot_hesh", "targetname");
+  var_1 = common_scripts\utility::getStruct("landing_spot_hesh", "targetname");
   level.hesh forceteleport(var_1.origin, var_1.angles);
   level.hesh setgoalpos(var_1.origin);
-  var_2 = getent("chunk_main_s", "targetname");
+  var_2 = getEnt("chunk_main_s", "targetname");
   var_2 maps\_utility::delaythread(6.0, maps\_utility::play_sound_on_entity, "scn_yb_house_move4");
   var_2 maps\_utility::delaythread(6.0, maps\_utility::play_sound_on_entity, "scn_yb_house_move4_layer_lfe");
-  var_3 = getent("chaos_pool_table", "targetname");
+  var_3 = getEnt("chaos_pool_table", "targetname");
   var_3 maps\_utility::delaythread(11.55, maps\_utility::play_sound_on_entity, "scn_yb_house_pool_table_slide");
   maps\_utility::delaythread(14.5, common_scripts\utility::play_sound_in_space, "scn_yb_house_tiles_crashing", (-1572, -97979, -115057));
   maps\_utility::delaythread(14.9, common_scripts\utility::play_sound_in_space, "scn_yb_house_tiles_crashing", (-1620, -97966, -115045));
@@ -1250,7 +1250,7 @@ chaos_a_hesh_landing(var_0) {
   var_0 maps\_anim::anim_first_frame_solo(level.hesh, "youngblood_hesh_underbar");
   var_0 thread maps\_anim::anim_single_solo(level.hesh, "youngblood_hesh_underbar");
   wait 9;
-  level.hesh stopanimscripted();
+  level.hesh stopanimScripted();
   level.hesh maps\_utility::disable_exits();
   level.hesh thread maps\_utility::smart_dialogue("youngblood_hsh_runupstairswehave");
   common_scripts\utility::flag_set("trig_player_inside_house");
@@ -1302,7 +1302,7 @@ chaos_b() {
   var_1 maps\_anim::setanimtree();
   level waittill("hesh_in_position");
   wait 2.5;
-  level.player playrumbleonentity("light_1s");
+  level.player playRumbleOnEntity("light_1s");
   var_1 maps\_utility::delaythread(0.45, maps\_utility::play_sound_on_entity, "scn_yb_truck_incoming");
   var_0 maps\_anim::anim_first_frame_solo(var_1, "youngblood_semitanker_ygb_explode_A");
   var_0 thread maps\_anim::anim_single_solo(var_1, "youngblood_semitanker_ygb_explode_A");
@@ -1360,7 +1360,7 @@ player_fall_down(var_0, var_1) {
   level.player playerlinktoblend(var_2, "tag_player", 0.2);
   thread maps\_hud_util::fade_out(1.7);
   level.player setblurforplayer(10, 0.85);
-  level.player playrumbleonentity("light_2s");
+  level.player playRumbleOnEntity("light_2s");
   level.player notify("player_safe");
   level.player shellshock("ygb_end", 999);
   var_4 = spawnStruct();
@@ -1552,16 +1552,16 @@ player_fall_down_trigger() {
   level.player maps\_anim::anim_single_solo(var_0, "youngblood_player_fall_down");
   maps\youngblood_util::viewmodel_anim_off();
   var_0 delete();
-  level.player setorigin(level.player.origin + (0, 0, 24));
+  level.player setOrigin(level.player.origin + (0, 0, 24));
 }
 
 n_door_knock() {
-  var_0 = getent("n_knock_m", "script_noteworthy");
+  var_0 = getEnt("n_knock_m", "script_noteworthy");
   var_1 = var_0 maps\_utility::spawn_ai();
   var_1 thread maps\youngblood_util::init_jog_animset_alert();
   var_1 thread maps\_anim::anim_generic_loop(var_1, "london_civ_idle_wave");
   common_scripts\utility::flag_wait("player_past_fence");
-  var_1 stopanimscripted();
+  var_1 stopanimScripted();
   var_2 = getnode("house_across_street", "targetname");
   var_1 thread delete_on_path_end(var_2);
 }
@@ -1628,7 +1628,7 @@ n_vehicle_2() {
   level.car_1.animname = "coupe";
   level.car_1 useanimtree(level.scr_animtree["coupe"]);
   common_scripts\utility::flag_wait("load_car_1");
-  var_0 = getent("car_2_m", "script_noteworthy");
+  var_0 = getEnt("car_2_m", "script_noteworthy");
   var_1 = var_0 maps\_utility::spawn_ai();
   thread n_vehicle_2_anim_link_guy(var_1);
   common_scripts\utility::flag_wait("passenger_1_in");
@@ -1661,7 +1661,7 @@ n_vehicle_2_anim_link_guy(var_0) {
   level.car_1 thread maps\_anim::anim_single_solo(level.car_1, "YB_car_entrance_driver_B_car");
   level.car_1 maps\_anim::anim_generic(var_0, "YB_car_entrance_driver_B", "tag_driver");
   level.car_1 thread maps\_anim::anim_generic_loop(var_0, "car_sitting_idle_driver", "stop_loop", "tag_driver");
-  var_0 linkto(level.car_1);
+  var_0 linkTo(level.car_1);
   common_scripts\utility::flag_set("passenger_1_in");
 }
 
@@ -1682,7 +1682,7 @@ player_falls_down_flat() {
   level.player maps\youngblood_util::yb_player_speed_percent(25);
   maps\youngblood_util::viewmodel_anim_on();
   earthquake(0.4, 3.3, level.player.origin, 64);
-  level.player playrumbleonentity("heavy_3s");
+  level.player playRumbleOnEntity("heavy_3s");
   common_scripts\utility::exploder("mansion_door_crash");
   thread common_scripts\utility::exploder("exp15");
   maps\_utility::delaythread(1.3, ::mansion_debris_switch);
@@ -1710,7 +1710,7 @@ player_falls_down_flat() {
 }
 
 mansion_debris_switch() {
-  var_0 = common_scripts\utility::getstruct("mansion_destruction_ref", "targetname");
+  var_0 = common_scripts\utility::getStruct("mansion_destruction_ref", "targetname");
   var_1 = common_scripts\utility::get_target_ent("mansion_destruction_piece");
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
@@ -1747,7 +1747,7 @@ trigger_threads_after_chaos() {
 
   var_4 = common_scripts\utility::get_target_ent("animate_cab");
   var_4 hide();
-  var_5 = common_scripts\utility::getstruct("church_first_frame", "targetname");
+  var_5 = common_scripts\utility::getStruct("church_first_frame", "targetname");
   level.fake_church = spawn("script_model", var_5.origin);
   level.fake_church.angles = var_5.angles;
   level.fake_church setModel("vfx_ygb_churchcollapse_first_frame");
@@ -1796,7 +1796,7 @@ chaos_faster_hesh() {
 
   while(level.player_anim_not_on) {
     wait 0.1;
-    var_0 = vectornormalize(level.player.origin - level.hesh.origin);
+    var_0 = vectorNormalize(level.player.origin - level.hesh.origin);
     var_1 = anglesToForward(level.hesh.angles);
     var_2 = vectordot(var_1, var_0);
     var_3 = distance(level.player.origin, level.hesh.origin);
@@ -1808,7 +1808,7 @@ chaos_faster_hesh() {
       continue;
     }
 
-    var_0 = vectornormalize(level.player.origin - level.hesh.origin);
+    var_0 = vectorNormalize(level.player.origin - level.hesh.origin);
     var_1 = anglesToForward(level.hesh.angles);
     var_2 = vectordot(var_1, var_0);
 
@@ -1836,64 +1836,64 @@ yb_save_trigger() {
 
 setup_play_street_2_anims_think() {
   var_0 = common_scripts\utility::get_target_ent("chaos_street_pos");
-  var_1 = getent("chunk_main_f", "targetname");
-  var_2 = common_scripts\utility::getstruct("chunk_main_f_pos", "targetname");
+  var_1 = getEnt("chunk_main_f", "targetname");
+  var_2 = common_scripts\utility::getStruct("chunk_main_f_pos", "targetname");
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_1.origin;
   var_3.angles = var_1.angles;
   var_3.animname = "moving_pieces";
   var_3 maps\_anim::setanimtree();
-  var_1 linkto(var_3);
+  var_1 linkTo(var_3);
   var_0 maps\_anim::anim_first_frame_solo(var_3, "youngblood_chaos_chunk_f");
-  var_4 = getent("chunk_main_g", "targetname");
-  var_5 = common_scripts\utility::getstruct("chunk_main_g_pos", "targetname");
+  var_4 = getEnt("chunk_main_g", "targetname");
+  var_5 = common_scripts\utility::getStruct("chunk_main_g_pos", "targetname");
   var_6 = common_scripts\utility::spawn_tag_origin();
   var_6.origin = var_4.origin;
   var_6.angles = var_4.angles;
   var_6.animname = "moving_pieces";
   var_6 maps\_anim::setanimtree();
-  var_4 linkto(var_6);
+  var_4 linkTo(var_6);
   var_0 maps\_anim::anim_first_frame_solo(var_6, "youngblood_chaos_chunk_g");
-  var_7 = getent("chunk_main_n", "targetname");
-  var_8 = common_scripts\utility::getstruct("chunk_main_n_pos", "targetname");
+  var_7 = getEnt("chunk_main_n", "targetname");
+  var_8 = common_scripts\utility::getStruct("chunk_main_n_pos", "targetname");
   var_9 = common_scripts\utility::spawn_tag_origin();
   var_9.origin = var_7.origin;
   var_9.angles = var_7.angles;
   var_9.animname = "moving_pieces";
   var_9 maps\_anim::setanimtree();
-  var_7 linkto(var_9);
+  var_7 linkTo(var_9);
   var_0 maps\_anim::anim_first_frame_solo(var_9, "youngblood_chaos_chunk_n");
-  var_10 = getent("chunk_main_h", "targetname");
-  var_11 = common_scripts\utility::getstruct("chunk_main_h_pos", "targetname");
+  var_10 = getEnt("chunk_main_h", "targetname");
+  var_11 = common_scripts\utility::getStruct("chunk_main_h_pos", "targetname");
   var_12 = common_scripts\utility::spawn_tag_origin();
   var_12.origin = var_10.origin;
   var_12.angles = var_10.angles;
   var_12.animname = "moving_pieces";
   var_12 maps\_anim::setanimtree();
-  var_10 linkto(var_12);
+  var_10 linkTo(var_12);
   var_0 maps\_anim::anim_first_frame_solo(var_12, "youngblood_chaos_chunk_h");
-  var_13 = getent("chunk_main_j", "targetname");
-  var_14 = common_scripts\utility::getstruct("chunk_main_j_pos", "targetname");
+  var_13 = getEnt("chunk_main_j", "targetname");
+  var_14 = common_scripts\utility::getStruct("chunk_main_j_pos", "targetname");
   var_15 = common_scripts\utility::spawn_tag_origin();
   var_15.origin = var_13.origin;
   var_15.angles = var_13.angles;
   var_15.animname = "moving_pieces";
   var_15 maps\_anim::setanimtree();
-  var_13 linkto(var_15);
+  var_13 linkTo(var_15);
   var_0 maps\_anim::anim_first_frame_solo(var_15, "youngblood_chaos_chunk_j");
-  var_16 = getent("chunk_main_j1", "targetname");
-  var_17 = common_scripts\utility::getstruct("chunk_main_j1_pos", "targetname");
+  var_16 = getEnt("chunk_main_j1", "targetname");
+  var_17 = common_scripts\utility::getStruct("chunk_main_j1_pos", "targetname");
   var_18 = common_scripts\utility::spawn_tag_origin();
   var_18.origin = var_16.origin;
   var_18.angles = var_16.angles;
   var_18.animname = "moving_pieces";
   var_18 maps\_anim::setanimtree();
-  var_16 linkto(var_18);
+  var_16 linkTo(var_18);
   var_0 maps\_anim::anim_first_frame_solo(var_18, "youngblood_chaos_chunk_j1");
-  var_19 = getent("chunk_main_k", "targetname");
-  var_20 = common_scripts\utility::getstruct("vfx_yb_house_h_furniture_a", "targetname");
-  var_21 = common_scripts\utility::getstruct("vfx_yb_house_h_dustfall_a", "targetname");
-  var_22 = common_scripts\utility::getstruct("vfx_yb_house_h_dustfall_b", "targetname");
+  var_19 = getEnt("chunk_main_k", "targetname");
+  var_20 = common_scripts\utility::getStruct("vfx_yb_house_h_furniture_a", "targetname");
+  var_21 = common_scripts\utility::getStruct("vfx_yb_house_h_dustfall_a", "targetname");
+  var_22 = common_scripts\utility::getStruct("vfx_yb_house_h_dustfall_b", "targetname");
   var_23 = common_scripts\utility::spawn_tag_origin();
   var_23.origin = var_20.origin;
   var_23.angles = var_20.angles;
@@ -1903,34 +1903,34 @@ setup_play_street_2_anims_think() {
   var_25 = common_scripts\utility::spawn_tag_origin();
   var_25.origin = var_22.origin;
   var_25.angles = var_22.angles;
-  var_26 = common_scripts\utility::getstruct("chunk_main_k_pos", "targetname");
+  var_26 = common_scripts\utility::getStruct("chunk_main_k_pos", "targetname");
   var_27 = common_scripts\utility::spawn_tag_origin();
   var_27.origin = var_19.origin;
   var_27.angles = var_19.angles;
   var_27.animname = "moving_pieces";
   var_27 maps\_anim::setanimtree();
-  var_23 linkto(var_27);
-  var_24 linkto(var_27);
-  var_25 linkto(var_27);
-  var_19 linkto(var_27);
+  var_23 linkTo(var_27);
+  var_24 linkTo(var_27);
+  var_25 linkTo(var_27);
+  var_19 linkTo(var_27);
   var_0 maps\_anim::anim_first_frame_solo(var_27, "youngblood_chaos_chunk_k_1");
-  var_28 = getent("chunk_main_l", "targetname");
-  var_29 = common_scripts\utility::getstruct("chunk_main_l_pos", "targetname");
+  var_28 = getEnt("chunk_main_l", "targetname");
+  var_29 = common_scripts\utility::getStruct("chunk_main_l_pos", "targetname");
   var_30 = common_scripts\utility::spawn_tag_origin();
   var_30.origin = var_28.origin;
   var_30.angles = var_28.angles;
   var_30.animname = "moving_pieces";
   var_30 maps\_anim::setanimtree();
-  var_28 linkto(var_30);
+  var_28 linkTo(var_30);
   var_0 maps\_anim::anim_first_frame_solo(var_30, "youngblood_chaos_chunk_l");
-  var_31 = getent("chunk_main_m", "targetname");
-  var_32 = common_scripts\utility::getstruct("chunk_main_m_pos", "targetname");
+  var_31 = getEnt("chunk_main_m", "targetname");
+  var_32 = common_scripts\utility::getStruct("chunk_main_m_pos", "targetname");
   var_33 = common_scripts\utility::spawn_tag_origin();
   var_33.origin = var_31.origin;
   var_33.angles = var_31.angles;
   var_33.animname = "moving_pieces";
   var_33 maps\_anim::setanimtree();
-  var_31 linkto(var_33);
+  var_31 linkTo(var_33);
   var_0 maps\_anim::anim_first_frame_solo(var_33, "youngblood_chaos_chunk_m");
   self waittill("trigger");
   thread sfx_for_street_chunks(var_3.origin);
@@ -1953,10 +1953,10 @@ setup_play_street_2_anims_think() {
 
 sfx_for_p_r_s_t_pieces() {
   self waittill("trigger");
-  var_0 = getent("chunk_main_p", "targetname");
-  var_1 = getent("street_jump_house", "targetname");
-  var_2 = getent("chunk_main_s", "targetname");
-  var_3 = getent("chunk_main_t", "targetname");
+  var_0 = getEnt("chunk_main_p", "targetname");
+  var_1 = getEnt("street_jump_house", "targetname");
+  var_2 = getEnt("chunk_main_s", "targetname");
+  var_3 = getEnt("chunk_main_t", "targetname");
   var_0 thread sfx_loop_for_mover_piece(11.5, 1, 4, "scn_yb_destruct_loop_rocks2");
   var_1 thread sfx_loop_for_mover_piece(8, 1, 4.5, "scn_yb_destruct_loop_rocks3");
   var_2 thread sfx_loop_for_mover_piece(13.5, 1, 5.5, "scn_yb_destruct_loop_rocks1");
@@ -2024,8 +2024,8 @@ play_street_2_k_move(var_0, var_1, var_2, var_3, var_4, var_5) {
 play_2_k_sfx(var_0, var_1) {
   var_2 = spawn("script_origin", self.origin + (450, 0, 200));
   var_3 = spawn("script_origin", self.origin + (-150, 0, 200));
-  var_2 linkto(self);
-  var_3 linkto(self);
+  var_2 linkTo(self);
+  var_3 linkTo(self);
   var_2 playSound(var_0, "soundrightdone");
   var_3 playSound(var_1, "soundleftdone");
   var_2 thread waittill_delete("soundrightdone");
@@ -2039,46 +2039,46 @@ waittill_delete(var_0) {
 
 setup_play_chaos_chunk_anims() {
   var_0 = common_scripts\utility::get_target_ent("mansion_anim_ref");
-  var_1 = getent("chunk_main_a", "targetname");
-  var_2 = common_scripts\utility::getstruct("chunk_main_a_pos", "targetname");
+  var_1 = getEnt("chunk_main_a", "targetname");
+  var_2 = common_scripts\utility::getStruct("chunk_main_a_pos", "targetname");
   var_3 = maps\_utility::spawn_anim_model("tag_origin", var_2.origin);
   var_3.angles = var_2.angles;
   var_0 maps\_anim::anim_first_frame_solo(var_3, "youngblood_chaos_chunk_a");
   var_1.origin = var_3.origin;
   var_1.angles = var_3.angles;
-  var_1 linkto(var_3, "tag_origin");
-  var_4 = getent("chunk_main_b", "targetname");
-  var_5 = common_scripts\utility::getstruct("chunk_main_b_pos", "targetname");
+  var_1 linkTo(var_3, "tag_origin");
+  var_4 = getEnt("chunk_main_b", "targetname");
+  var_5 = common_scripts\utility::getStruct("chunk_main_b_pos", "targetname");
   var_6 = maps\_utility::spawn_anim_model("tag_origin", var_5.origin);
   var_6.angles = var_5.angles;
   var_0 maps\_anim::anim_first_frame_solo(var_6, "youngblood_chaos_chunk_b");
   var_4.origin = var_6.origin;
   var_4.angles = var_6.angles;
-  var_4 linkto(var_6, "tag_origin");
-  var_7 = getent("chunk_main_c", "targetname");
-  var_8 = common_scripts\utility::getstruct("chunk_main_c_pos", "targetname");
+  var_4 linkTo(var_6, "tag_origin");
+  var_7 = getEnt("chunk_main_c", "targetname");
+  var_8 = common_scripts\utility::getStruct("chunk_main_c_pos", "targetname");
   var_9 = maps\_utility::spawn_anim_model("tag_origin", var_8.origin);
   var_9.angles = var_8.angles;
   var_0 maps\_anim::anim_first_frame_solo(var_9, "youngblood_chaos_chunk_c");
   var_7.origin = var_9.origin;
   var_7.angles = var_9.angles;
-  var_7 linkto(var_9, "tag_origin");
-  var_10 = getent("chunk_main_d", "targetname");
-  var_11 = common_scripts\utility::getstruct("chunk_main_d_pos", "targetname");
+  var_7 linkTo(var_9, "tag_origin");
+  var_10 = getEnt("chunk_main_d", "targetname");
+  var_11 = common_scripts\utility::getStruct("chunk_main_d_pos", "targetname");
   var_12 = maps\_utility::spawn_anim_model("tag_origin", var_11.origin);
   var_12.angles = var_11.angles;
   var_0 maps\_anim::anim_first_frame_solo(var_12, "youngblood_chaos_chunk_d");
   var_10.origin = var_12.origin;
   var_10.angles = var_12.angles;
-  var_10 linkto(var_12, "tag_origin");
-  var_13 = getent("chunk_main_e", "targetname");
-  var_14 = common_scripts\utility::getstruct("chunk_main_e_pos", "targetname");
+  var_10 linkTo(var_12, "tag_origin");
+  var_13 = getEnt("chunk_main_e", "targetname");
+  var_14 = common_scripts\utility::getStruct("chunk_main_e_pos", "targetname");
   var_15 = maps\_utility::spawn_anim_model("tag_origin", var_14.origin);
   var_15.angles = var_14.angles;
   var_0 maps\_anim::anim_first_frame_solo(var_15, "youngblood_chaos_chunk_e");
   var_13.origin = var_15.origin;
   var_13.angles = var_15.angles;
-  var_13 linkto(var_15, "tag_origin");
+  var_13 linkTo(var_15, "tag_origin");
   waittillframeend;
   common_scripts\utility::flag_set("load_1");
   common_scripts\utility::flag_wait("play_street_cracking");
@@ -2100,7 +2100,7 @@ vfx_for_street_destroy(var_0) {
 }
 
 play_street_crack_1_think() {
-  var_0 = common_scripts\utility::getstruct("ref_street_crack_piece", "targetname");
+  var_0 = common_scripts\utility::getStruct("ref_street_crack_piece", "targetname");
   var_0.no_delete = 1;
   var_0.origin = var_0.origin + (0, 0, 0);
   var_1 = getEntArray("ygb_roadcrack_street_1", "script_noteworthy");
@@ -2120,7 +2120,7 @@ play_street_crack_1_think() {
     var_4 hide();
   }
 
-  var_7 = getent("roadcrack_0", "targetname");
+  var_7 = getEnt("roadcrack_0", "targetname");
   var_8 = spawnStruct();
   var_8.origin = var_7.origin;
   var_8.angles = var_7.angles;
@@ -2153,7 +2153,7 @@ delete_on_crack1_done() {
 }
 
 spawn_street_fake_first_frame() {
-  var_0 = common_scripts\utility::getstruct("ref_fake_street_crack", "targetname");
+  var_0 = common_scripts\utility::getStruct("ref_fake_street_crack", "targetname");
   var_1 = spawn("script_model", var_0.origin + (0, 0, -0.5));
   var_1.angles = var_0.angles;
   var_1 setModel("vfx_ygb_roadcrack_a_to_e_first_frame");
@@ -2163,7 +2163,7 @@ spawn_street_fake_first_frame() {
 }
 
 play_house_fall_think() {
-  var_0 = getent("house_cliff_0", "targetname");
+  var_0 = getEnt("house_cliff_0", "targetname");
   var_1 = spawnStruct();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
@@ -2209,7 +2209,7 @@ delete_on_house_done() {
 }
 
 play_church_fall_think() {
-  var_0 = getent("church_piece_0", "targetname");
+  var_0 = getEnt("church_piece_0", "targetname");
   var_1 = spawnStruct();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
@@ -2253,7 +2253,7 @@ delete_on_church_done() {
 }
 
 play_street_crack_2_think() {
-  var_0 = common_scripts\utility::getstruct("street_crack_2_ref_struct", "targetname");
+  var_0 = common_scripts\utility::getStruct("street_crack_2_ref_struct", "targetname");
   var_0.no_delete = 1;
   var_1 = spawnStruct();
   var_1.origin = var_0.origin;

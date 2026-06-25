@@ -24,16 +24,16 @@ setupclingtrigger() {
     level.cling_triggers[i] = spawnStruct();
     level.cling_triggers[i].trigger = triggers[i];
     trigger = level.cling_triggers[i].trigger;
-    trigger sethintstring("Hold [{+activate}] To Cling To The Bus.");
-    trigger setcursorhint("HINT_NOICON");
+    trigger setHintString("Hold [{+activate}] To Cling To The Bus.");
+    trigger setCursorHint("HINT_NOICON");
     makevisibletoall(trigger);
-    trigger enablelinkto();
-    trigger linkto(level.the_bus, "", level.the_bus worldtolocalcoords(trigger.origin), trigger.angles - level.the_bus.angles);
+    trigger enablelinkTo();
+    trigger linkTo(level.the_bus, "", level.the_bus worldtolocalcoords(trigger.origin), trigger.angles - level.the_bus.angles);
     trigger thread setclingtriggervisibility(i);
     trigger thread clingtriggerusethink(i);
-    level.cling_triggers[i].position = getent(trigger.target, "targetname");
+    level.cling_triggers[i].position = getEnt(trigger.target, "targetname");
     position = level.cling_triggers[i].position;
-    position linkto(level.the_bus, "", level.the_bus worldtolocalcoords(position.origin), position.angles - level.the_bus.angles);
+    position linkTo(level.the_bus, "", level.the_bus worldtolocalcoords(position.origin), position.angles - level.the_bus.angles);
     level.cling_triggers[i].player = undefined;
   }
 
@@ -45,7 +45,7 @@ enablecling() {
 
   if(isDefined(level.cling_triggers)) {
     foreach(struct in level.cling_triggers) {
-      struct.trigger sethintstring("Hold [{+activate}] To Cling To The Bus.");
+      struct.trigger setHintString("Hold [{+activate}] To Cling To The Bus.");
       struct.trigger setteamfortrigger("allies");
     }
   }
@@ -57,7 +57,7 @@ disablecling() {
 
   if(isDefined(level.cling_triggers)) {
     foreach(struct in level.cling_triggers) {
-      struct.trigger sethintstring("");
+      struct.trigger setHintString("");
       struct.trigger setteamfortrigger("none");
     }
   }
@@ -156,7 +156,7 @@ attachplayertobus(player, positionindex) {
     return;
   }
 
-  level.cling_triggers[positionindex].trigger sethintstring("Hold [{+activate}] To Let Go Of The Bus.");
+  level.cling_triggers[positionindex].trigger setHintString("Hold [{+activate}] To Let Go Of The Bus.");
   player disableplayerweapons(positionindex);
 }
 
@@ -173,7 +173,7 @@ positionisupgraded(positionindex) {
 }
 
 dettachplayerfrombus(player, positionindex) {
-  level.cling_triggers[positionindex].trigger sethintstring("Hold [{+activate}] To Cling To The Bus.");
+  level.cling_triggers[positionindex].trigger setHintString("Hold [{+activate}] To Cling To The Bus.");
 
   if(!isDefined(level.cling_triggers[positionindex].player)) {
     return;

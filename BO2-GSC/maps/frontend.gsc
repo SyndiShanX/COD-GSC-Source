@@ -170,7 +170,7 @@ setfirstmusicstate() {
 frontend_init_common() {
   get_level_era();
   holo_table_system_init();
-  level.e_player_align = getent("player_align_node", "targetname");
+  level.e_player_align = getEnt("player_align_node", "targetname");
   level.m_rts_warmap_offset = [];
   level.m_rts_warmap_offset["so_rts_mp_dockside"] = (0.0, -0.3, 1.0);
   level.m_rts_warmap_offset["so_rts_afghanistan"] = (0.0, -0.3, 1.0);
@@ -191,12 +191,12 @@ frontend_init_common() {
   level.m_rts_city_tag["so_rts_mp_overflow"] = "tag_fx_pakistan";
   add_global_spawn_function("axis", ::no_grenade_bag_drop);
   trigger_off("table_interact_trigger");
-  table_trig = getent("table_interact_trigger", "targetname");
-  table_trig sethintstring(&"FRONTEND_USE_STRIKEFORCE");
+  table_trig = getEnt("table_interact_trigger", "targetname");
+  table_trig setHintString(&"FRONTEND_USE_STRIKEFORCE");
   level.m_drone_collision = getEntArray("drone_collision", "targetname");
   level thread frontend_init_shaders();
   globe = build_globe();
-  float_pos = getent("holo_table_floating", "targetname");
+  float_pos = getEnt("holo_table_floating", "targetname");
   globe.origin = float_pos.origin;
 }
 

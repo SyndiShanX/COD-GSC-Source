@@ -35,19 +35,19 @@ function init_clientfield() {
 
 function function_ceb6041f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, #"hash_44eeee909d5a03fd");
+    self playRumbleOnEntity(fieldname, #"hash_44eeee909d5a03fd");
   }
 }
 
 function function_b56e6c7e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, #"hash_6f2efd46e3afdbda");
+    self playRumbleOnEntity(fieldname, #"hash_6f2efd46e3afdbda");
   }
 }
 
 function function_483f3ae0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, #"hash_26108e3d29c29f8a");
+    self playRumbleOnEntity(fieldname, #"hash_26108e3d29c29f8a");
   }
 }
 
@@ -72,7 +72,7 @@ function function_840cc260(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_6902ffa4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     earthquake(fieldname, 0.2, 2, self.origin, 100);
-    self playrumbleonentity(fieldname, "damage_light");
+    self playRumbleOnEntity(fieldname, "damage_light");
   }
 }
 
@@ -125,7 +125,7 @@ function function_4dff5056(localclientnum, oldval, newval, bnewent, binitialsnap
     e_player postfx::stoppostfxbundle(#"hash_7f1cd473dc07762");
   }
 
-  foreach(player in getplayers(fieldname)) {
+  foreach(player in getPlayers(fieldname)) {
     player thread function_b28348c(fieldname);
   }
 }

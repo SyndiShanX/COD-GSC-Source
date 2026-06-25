@@ -39,7 +39,7 @@ force_spawn_guy(spawner) {
   return (guy);
 }
 spawn_flame_runner(value, key) {
-  spawner = getent(value, key);
+  spawner = getEnt(value, key);
   runner = force_spawn_guy(spawner);
 
   runner.goalradius = 16;
@@ -92,7 +92,7 @@ create_new_origin_ent(origin) {
   level.temp_spawned_origins[level.temp_spawned_origins.size - 1].health = 1000000;
 }
 set_turret_target_by_name(point_name) {
-  point = getstruct(point_name, "targetname");
+  point = getStruct(point_name, "targetname");
   self SetTurretTargetVecSafe(point.origin);
 }
 
@@ -103,12 +103,12 @@ trace_turret_target_by_name(point_name, end_msg) {
   level endon(end_msg);
 
   point_line = [];
-  point_line[0] = getstruct(point_name, "targetname");
+  point_line[0] = getStruct(point_name, "targetname");
   next_point_name = point_line[0].target;
   done = false;
 
   while(1) {
-    point_line[point_line.size] = getstruct(next_point_name, "targetname");
+    point_line[point_line.size] = getStruct(next_point_name, "targetname");
     if(isDefined(point_line[point_line.size - 1].target)) {
       next_point_name = point_line[point_line.size - 1].target;
     } else {
@@ -137,9 +137,9 @@ load_bombs(bomb_num) {
     self.bomb[i].dropped = false;
     wait(.1);
     if(i % 2 == 0) {
-      self.bomb[i] LinkTo(self, "tag_gunLeft", (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, "tag_gunLeft", (0, 0, -4), (-10, 0, 0));
     } else {
-      self.bomb[i] LinkTo(self, "tag_gunRight", (0, 0, -4), (-10, 0, 0));
+      self.bomb[i] linkTo(self, "tag_gunRight", (0, 0, -4), (-10, 0, 0));
     }
   }
 }
@@ -159,7 +159,7 @@ drop_bombs(node_name, fire_fx, num) {
   level notify(node_name);
 
   if(fire_fx) {
-    fire_fx_origin = getstruct(node_name, "targetname");
+    fire_fx_origin = getStruct(node_name, "targetname");
     playFX(level._effect["fire_foliage_large"], fire_fx_origin.origin);
     playFX(level._effect["smoke_column"], fire_fx_origin.origin);
   }
@@ -177,22 +177,22 @@ drop_bombs_rumble() {
   }
 }
 additional_bomb(struct_name, start_msg) {
-  struct_target = getstruct(struct_name, "targetname");
+  struct_target = getStruct(struct_name, "targetname");
   level waittill(start_msg);
   wait(0.3);
   playFX(level._effect["napalm_explosion"], struct_target.origin);
   playFX(level._effect["fire_foliage_large"], struct_target.origin);
-  playsoundatposition("mortar_dirt", struct_target.origin);
+  playSoundAtPosition("mortar_dirt", struct_target.origin);
 }
 
 napalm_chain(start_struct_name) {
   point_line = [];
-  point_line[0] = getstruct(start_struct_name, "targetname");
+  point_line[0] = getStruct(start_struct_name, "targetname");
   next_point_name = point_line[0].target;
   done = false;
 
   while(1) {
-    point_line[point_line.size] = getstruct(next_point_name, "targetname");
+    point_line[point_line.size] = getStruct(next_point_name, "targetname");
     if(isDefined(point_line[point_line.size - 1].target)) {
       next_point_name = point_line[point_line.size - 1].target;
     } else {
@@ -202,7 +202,7 @@ napalm_chain(start_struct_name) {
 
   for(i = 0; i < point_line.size; i++) {
     playFX(level._effect["napalm_explosion"], point_line[i].origin);
-    playsoundatposition("mortar_dirt", point_line[i].origin);
+    playSoundAtPosition("mortar_dirt", point_line[i].origin);
     if(isDefined(point_line[i].script_noteworthy)) {
       level notify(point_line[i].script_noteworthy);
     }
@@ -213,13 +213,13 @@ napalm_chain(start_struct_name) {
 }
 
 trigger_wait_with_notify(value, key, msg) {
-  trigger = getent(value, key);
+  trigger = getEnt(value, key);
   trigger waittill("trigger");
   level notify(msg);
 }
 
 play_explosion_death_anim(struct_value, struct_key) {
-  struct_org = getstruct(struct_value, struct_key);
+  struct_org = getStruct(struct_value, struct_key);
 
   guy = spawn_fake_guy(struct_org.origin, struct_org.angles, "axis", "generic");
 
@@ -251,7 +251,7 @@ spawn_fake_guy(startpoint, startangles, side, animname) {
 }
 
 jog_waittill_stop() {
-  stop_trigger = getent("ev2_initial_plane_spawn", "targetname");
+  stop_trigger = getEnt("ev2_initial_plane_spawn", "targetname");
   while(1) {
     players = get_players();
     for(i = 0; i < players.size; i++) {
@@ -322,7 +322,7 @@ jog_internal() {
 }
 
 tree_fall() {
-  tree = getent("ev2_tree_fall", "targetname");
+  tree = getEnt("ev2_tree_fall", "targetname");
   tree RotatePitch(80, 2, 1.5, 0.1);
 }
 play_dust_fx_near_players() {
@@ -349,15 +349,15 @@ play_dust_fx_near_players() {
   for(i = 0; i < org_closest.size; i++) {
     if(i < 3) {
       playFX(level._effect["dirt_fall_huge"], org_closest[i]);
-      playsoundatposition("ceiling_dust", org_closest[i]);
+      playSoundAtPosition("ceiling_dust", org_closest[i]);
       wait(0.05);
     } else if(i < 8) {
       playFX(level._effect["dirt_fall_md"], org_closest[i]);
-      playsoundatposition("ceiling_dust", org_closest[i]);
+      playSoundAtPosition("ceiling_dust", org_closest[i]);
       wait(0.05);
     } else {
       playFX(level._effect["dirt_fall_sm"], org_closest[i]);
-      playsoundatposition("ceiling_dust", org_closest[i]);
+      playSoundAtPosition("ceiling_dust", org_closest[i]);
       wait(0.1);
     }
   }

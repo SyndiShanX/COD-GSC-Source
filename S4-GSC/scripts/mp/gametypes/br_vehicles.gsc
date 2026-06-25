@@ -209,7 +209,7 @@ _id_E26B(var_0, var_1, var_2) {
   var_5.origin = var_3;
   var_5.angles = var_4;
   var_5.spawntype = "GAME_MODE";
-  var_6 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle(var_0, var_5, var_2);
+  var_6 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle(var_0, var_5, var_2);
 
   if(isDefined(var_6)) {
     scripts\mp\gametypes\br_analytics::_id_2B0D(var_6, var_0);

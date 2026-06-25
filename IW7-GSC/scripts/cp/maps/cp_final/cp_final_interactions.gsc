@@ -528,7 +528,7 @@ init_pap_fuses() {
 }
 
 watch_for_open_fusebox() {
-  var_0 = getent("fuse_box_damage_trigger", "targetname");
+  var_0 = getEnt("fuse_box_damage_trigger", "targetname");
   for(;;) {
     if(isDefined(var_0)) {
       var_0 waittill("damage", var_1, var_2);
@@ -536,9 +536,9 @@ watch_for_open_fusebox() {
         continue;
       }
 
-      var_3 = getent("fuse_box_door_moveable", "script_noteworthy");
-      var_4 = scripts\engine\utility::getstruct("fuse_box_door_open", "script_noteworthy");
-      var_3 rotateto(var_4.angles, 0.3);
+      var_3 = getEnt("fuse_box_door_moveable", "script_noteworthy");
+      var_4 = scripts\engine\utility::getStruct("fuse_box_door_open", "script_noteworthy");
+      var_3 rotateTo(var_4.angles, 0.3);
       scripts\engine\utility::flag_set("opened_fusebox");
       playsoundatpos(var_3.origin, "zmb_pap_fuse_box_open");
       var_0 delete();
@@ -573,7 +573,7 @@ pickupfuse(var_0, var_1) {
 init_pap_portal() {
   scripts\engine\utility::flag_init("disable_portals");
   scripts\engine\utility::flag_init("fuses_inserted");
-  var_0 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStruct("pap_portal", "script_noteworthy");
   var_0.end_positions = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 }
 
@@ -603,7 +603,7 @@ init_sasquatch_func() {
 use_sasquatch_func(var_0, var_1) {
   if(scripts\engine\utility::flag("fuses_charged") && !scripts\engine\utility::flag("picked_up_charged_fuses")) {
     scripts\engine\utility::flag_set("picked_up_charged_fuses");
-    var_2 = getent("fuses_to_power", "targetname");
+    var_2 = getEnt("fuses_to_power", "targetname");
     generic_pickup_gesture_and_fx(var_1, var_2.origin);
     foreach(var_4 in level.players) {
       var_4 setclientomnvar("zm_special_item", 1);
@@ -621,7 +621,7 @@ use_sasquatch_func(var_0, var_1) {
     }
 
     scripts\engine\utility::flag_set("placed_uncharged_fuses");
-    var_8 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_8 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_9 = var_8.origin;
     generic_place_gesture_and_fx(var_1, var_9);
     var_10 = spawn("script_model", var_9);
@@ -636,7 +636,7 @@ use_sasquatch_func(var_0, var_1) {
 use_brute_func(var_0, var_1) {
   if(scripts\engine\utility::flag("obtained_brute_helmet") && !scripts\engine\utility::flag("placed_brute_helmet")) {
     scripts\engine\utility::flag_set("placed_brute_helmet");
-    var_2 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_2 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     generic_place_gesture_and_fx(var_1, var_2);
     level.helmet_on_brute.origin = var_2.origin;
     level.helmet_on_brute.angles = var_2.angles;
@@ -650,7 +650,7 @@ use_brute_func(var_0, var_1) {
 
 check_for_charge_fuse_sequence(var_0, var_1) {
   if(scripts\engine\utility::flag("placed_brute_helmet") && scripts\engine\utility::flag("placed_uncharged_fuses")) {
-    var_2 = scripts\engine\utility::getstruct("helmet_shoot_point", "targetname");
+    var_2 = scripts\engine\utility::getStruct("helmet_shoot_point", "targetname");
     var_3 = spawn("script_model", var_2.origin);
     var_3 setModel("tag_origin");
     thread playfusechargesounds(var_2, var_3);
@@ -658,7 +658,7 @@ check_for_charge_fuse_sequence(var_0, var_1) {
     var_4 = playfxontagsbetweenclients(scripts\engine\utility::getfx("vfx_charge_fuse_beam"), var_3, "tag_origin", level.fuse_in_hand, "tag_origin");
     level thread charging_sequence_rumble(var_0);
     level thread changetochargedfuses();
-    var_5 = getent("fuse_laser_trigger", "script_noteworthy");
+    var_5 = getEnt("fuse_laser_trigger", "script_noteworthy");
     var_5 thread scripts\cp\maps\cp_final\cp_final_traps::damage_enemies_in_trigger(var_3, level.fuse_in_hand, var_5, 1);
     wait(6);
     var_4 delete();
@@ -753,7 +753,7 @@ init_zis_reel() {
 pickup_zis_reel(var_0, var_1) {
   scripts\engine\utility::flag_set("has_film_reel");
   scripts\cp\utility::set_quest_icon(3);
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   generic_pickup_gesture_and_fx(var_1, var_2.origin);
   var_2 hide();
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
@@ -911,7 +911,7 @@ closeslidingdoor(var_0, var_1) {
       if(scripts\engine\utility::istrue(var_0.player_opened)) {
         var_13 connectpaths();
       } else {
-        var_13 disconnectpaths();
+        var_13 disconnectPaths();
       }
 
       var_13 solid();
@@ -923,11 +923,11 @@ closeslidingdoor(var_0, var_1) {
 
   wait(0.3);
   if(isDefined(var_6)) {
-    var_15 = vectornormalize(var_6.origin - var_0.origin);
+    var_15 = vectorNormalize(var_6.origin - var_0.origin);
     var_10 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.characters, undefined, undefined, 40, 0);
     var_11 = var_0.doors[0].origin;
     foreach(var_13 in var_10) {
-      if(vectordot(vectornormalize(var_6.origin - var_0.origin), var_15) > 0.75) {
+      if(vectordot(vectorNormalize(var_6.origin - var_0.origin), var_15) > 0.75) {
         if(distance(var_0.origin, var_6.origin) > distance(var_13.origin, var_0.origin)) {
           if(distance(var_11, var_13.origin) <= 16) {
             var_14 = scripts\engine\utility::getclosest(var_13.origin, [var_6, var_0]);
@@ -963,7 +963,7 @@ closeslidingdoor(var_0, var_1) {
 
 helmet_useable() {
   self makeusable();
-  self sethintstring(&"CP_FINAL_INTERACTIONS_PICKUP_BRUTE_HELMET");
+  self setHintString(&"CP_FINAL_INTERACTIONS_PICKUP_BRUTE_HELMET");
 }
 
 helmet_not_useable() {

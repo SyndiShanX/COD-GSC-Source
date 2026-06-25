@@ -65,7 +65,7 @@ do_samantha_step_one() {
     }
   }
 
-  var_5 = scripts\engine\utility::getstruct("evil_doll_pos1", "targetname");
+  var_5 = scripts\engine\utility::getStruct("evil_doll_pos1", "targetname");
   var_5.mdl_doll = scripts\cp\utility::_id_E190("s4_zm_samantha_toy", var_5.origin, var_5.angles);
   playFX(level._effect["evil_doll_disappear"], var_5.mdl_doll.origin);
   _id_0737::_id_C266("evil_doll_pos1", ::hint_interact_doll, ::on_interact_doll, undefined, undefined, undefined, undefined, undefined, 0, undefined, 80);
@@ -205,22 +205,22 @@ init_samantha_step_three() {}
 
 do_samantha_step_three() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("evil_doll_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("evil_doll_pos", "targetname");
   var_0.mdl_doll = scripts\cp\utility::_id_E190("s4_zm_samantha_toy", var_0.origin, var_0.angles);
   var_0.mdl_doll playLoopSound("mus_zm_musicbox_lp");
   var_0.mdl_doll thread rotate_by_time();
   _id_0737::_id_C266("evil_doll_pos", ::hint_interact_doll, ::on_interact_doll, undefined, undefined, undefined, undefined, undefined, 0, undefined, 80);
   level waittill("interact_doll");
   var_0.mdl_doll notify("stop_rotate");
-  var_1 = scripts\engine\utility::getstruct("evil_hand_pos", "targetname");
+  var_1 = scripts\engine\utility::getStruct("evil_hand_pos", "targetname");
   var_1.mdl = scripts\cp\utility::_id_E190("s4_zm_skeleton_hand", var_1.origin, var_1.angles);
-  var_1.mdl linkto(var_0.mdl_doll);
+  var_1.mdl linkTo(var_0.mdl_doll);
   playFX(level._effect["evil_doll_dust"], var_0.mdl_doll.origin, anglesToForward(var_0.mdl_doll.angles), anglestoup(var_0.mdl_doll.angles));
   var_0.mdl_doll stoploopsound("mus_zm_musicbox_lp");
-  var_0.mdl_doll moveto(var_0.mdl_doll.origin + (0, 0, 15), 1);
+  var_0.mdl_doll moveTo(var_0.mdl_doll.origin + (0, 0, 15), 1);
   scripts\cp\utility::_id_B8ED(var_0.origin, "zmb_skel_arm_up");
   var_0.mdl_doll waittill("movedone");
-  var_0.mdl_doll moveto(var_0.mdl_doll.origin + (0, 0, -50), 1);
+  var_0.mdl_doll moveTo(var_0.mdl_doll.origin + (0, 0, -50), 1);
   var_0.mdl_doll playLoopSound("zmb_skel_arm_lp");
   var_0.mdl_doll waittill("movedone");
   var_0.mdl_doll stoploopsound("zmb_skel_arm_lp");
@@ -252,7 +252,7 @@ init_the_one_step_one() {
 
 do_the_one_step_one() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("the_one_song_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("the_one_song_pos", "targetname");
   var_0.mdl = scripts\cp\utility::_id_E190("s4_zm_par_rotary_phone", var_0.origin, var_0.angles);
   var_0._id_039B = "the_one_song";
   _id_0737::_id_C266("the_one_song", ::hint_interact_telephone, ::on_interact_telephone, undefined, undefined, undefined, undefined, undefined, 0, undefined, 50);
@@ -294,7 +294,7 @@ init_creepy_sounds_step_one() {
 
 do_creepy_sounds_step_one() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstruct("the_creepy_sounds_pos", "targetname");
+  var_0 = scripts\engine\utility::getStruct("the_creepy_sounds_pos", "targetname");
   var_0._id_039B = "creepy_sound_interaction";
   var_0.b_cool_down = 1;
   _id_0737::_id_C266("creepy_sound_interaction", ::hint_interact_creepy_machine, ::on_interact_creepy_machine, undefined, undefined, undefined, undefined, undefined, 0, undefined, 50);

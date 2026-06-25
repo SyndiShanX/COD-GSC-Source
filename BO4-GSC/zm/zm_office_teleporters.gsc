@@ -40,8 +40,8 @@ __main__() {
   level thread open_portal_rooms();
   level thread function_93530fe9();
   level.var_f0ff37fe = struct::get_array("conference_level2_spawns", "targetname");
-  level.pack_room_trigger = getent("pack_room_trigger", "targetname");
-  level.pack_door_slam = getent("slam_pack_door", "targetname");
+  level.pack_room_trigger = getEnt("pack_room_trigger", "targetname");
+  level.pack_door_slam = getEnt("slam_pack_door", "targetname");
 }
 
 init_clientfields() {
@@ -65,16 +65,16 @@ init_clientfields() {
 }
 
 function_93530fe9() {
-  var_89b4f417 = getent("warroom_map_opaque", "script_noteworthy");
+  var_89b4f417 = getEnt("warroom_map_opaque", "script_noteworthy");
   var_89b4f417 show();
-  var_5485b418 = getent("warroom_map_transp", "script_noteworthy");
+  var_5485b418 = getEnt("warroom_map_transp", "script_noteworthy");
   var_5485b418 hide();
 }
 
 function_884a609e() {
-  var_89b4f417 = getent("warroom_map_opaque", "script_noteworthy");
+  var_89b4f417 = getEnt("warroom_map_opaque", "script_noteworthy");
   var_89b4f417 hide();
-  var_5485b418 = getent("warroom_map_transp", "script_noteworthy");
+  var_5485b418 = getEnt("warroom_map_transp", "script_noteworthy");
   var_5485b418 show();
   waitframe(1);
   var_5485b418 clientfield::set("war_room_map_control", 1);
@@ -84,8 +84,8 @@ teleporter_init() {
   level.teleport_ae_funcs = [];
   level flag::init(#"portals_active");
   level thread setup_portals();
-  poi1 = getent("pack_room_poi1", "targetname");
-  poi2 = getent("pack_room_poi2", "targetname");
+  poi1 = getEnt("pack_room_poi1", "targetname");
+  poi2 = getEnt("pack_room_poi2", "targetname");
   poi1 zm_utility::create_zombie_point_of_interest(undefined, 30, 0, 0);
   poi1 zm_utility::create_zombie_point_of_interest_attractor_positions(undefined, undefined, 128);
   poi2 zm_utility::create_zombie_point_of_interest(undefined, 30, 0, 0);
@@ -267,7 +267,7 @@ teleport_player(user) {
   destination = var_298e4578.var_52a6f692;
   playFX(level._effect[#"teleport_depart"], user.origin);
   playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_out", self.origin);
+  playSoundAtPosition(#"evt_teleporter_out", self.origin);
   level thread function_fe50866d(user, self, var_298e4578);
   user.var_298e4578 = var_298e4578;
   self function_134670b9(1);
@@ -282,7 +282,7 @@ teleport_player(user) {
   user thread function_c234a5ce();
   playFX(level._effect[#"teleport_arrive"], user.origin);
   playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
+  playSoundAtPosition(#"evt_teleporter_go", var_298e4578.origin);
   user playsoundtoplayer(#"evt_teleporter_go_plr", user);
   wait 0.5;
   user function_96e88318();
@@ -427,17 +427,17 @@ find_portal_destination(var_210b4680) {
 }
 
 open_portal_rooms() {
-  yellow_conf_screen = getent("yellow_conf_screen", "targetname");
-  power_room_screen = getent("power_room_screen", "targetname");
-  war_room_screen_ramp = getent("war_room_screen_ramp", "targetname");
-  war_room_screen_north = getent("war_room_screen_north", "targetname");
-  war_room_screen_south = getent("war_room_screen_south", "targetname");
-  server_room_portal_door = getent("server_room_portal_door", "targetname");
-  yellow_conf_screen disconnectpaths();
-  power_room_screen disconnectpaths();
-  war_room_screen_north disconnectpaths();
-  war_room_screen_south disconnectpaths();
-  server_room_portal_door disconnectpaths();
+  yellow_conf_screen = getEnt("yellow_conf_screen", "targetname");
+  power_room_screen = getEnt("power_room_screen", "targetname");
+  war_room_screen_ramp = getEnt("war_room_screen_ramp", "targetname");
+  war_room_screen_north = getEnt("war_room_screen_north", "targetname");
+  war_room_screen_south = getEnt("war_room_screen_south", "targetname");
+  server_room_portal_door = getEnt("server_room_portal_door", "targetname");
+  yellow_conf_screen disconnectPaths();
+  power_room_screen disconnectPaths();
+  war_room_screen_north disconnectPaths();
+  war_room_screen_south disconnectPaths();
+  server_room_portal_door disconnectPaths();
   level waittill(#"hash_2124984d1ece329c");
   power_room_screen playSound("evt_teleporter_door_short");
   power_room_screen movez(116, 1.5);
@@ -457,11 +457,11 @@ open_portal_rooms() {
 }
 
 function_3e7ccc56() {
-  yellow_conf_screen = getent("yellow_conf_screen", "targetname");
+  yellow_conf_screen = getEnt("yellow_conf_screen", "targetname");
   yellow_conf_screen_parts = getEntArray("yellow_conf_screen_part", "script_noteworthy");
 
   foreach(part in yellow_conf_screen_parts) {
-    part linkto(yellow_conf_screen);
+    part linkTo(yellow_conf_screen);
   }
 
   yellow_conf_screen playSound("evt_teleporter_door_short");
@@ -472,7 +472,7 @@ function_3e7ccc56() {
 }
 
 war_room_portal_door() {
-  war_room_screen_south = getent("war_room_screen_south", "targetname");
+  war_room_screen_south = getEnt("war_room_screen_south", "targetname");
   war_room_screen_south playSound("evt_teleporter_door_short");
   war_room_screen_south movez(-120, 1.5);
   war_room_screen_south thread function_4d547f18();
@@ -616,7 +616,7 @@ function_71be28e1(zombie, start_portal, end_portal) {
   zombie disableaimassist();
   playFX(level._effect[#"teleport_depart"], zombie.origin);
   playFX(level._effect[#"portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_out", zombie.origin);
+  playSoundAtPosition(#"evt_teleporter_out", zombie.origin);
   zombie function_1f034d46(end_portal.origin);
   zombie.b_ignore_cleanup = 1;
   zombie forceteleport(level.s_zombie_teleport_room.origin);
@@ -628,7 +628,7 @@ function_71be28e1(zombie, start_portal, end_portal) {
   zombie function_1f034d46();
   playFX(level._effect[#"teleport_arrive"], zombie.origin);
   playFX(level._effect[#"portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
-  playsoundatposition(#"evt_teleporter_go", zombie.origin);
+  playSoundAtPosition(#"evt_teleporter_go", zombie.origin);
   zombie.b_ignore_cleanup = zombie.var_693b80bb;
   zombie enableaimassist();
 }
@@ -914,11 +914,11 @@ cage_portal_init() {
   level.s_cage_portal = struct::get("cage_portal");
   level.s_cage_portal.var_a1cf77d2 = util::spawn_model("tag_origin", level.s_cage_portal.origin, level.s_cage_portal.angles);
   level.s_cage_portal.n_dest = 3;
-  level.var_a23b5c5 = getent("cage_portal_blocker", "targetname");
+  level.var_a23b5c5 = getEnt("cage_portal_blocker", "targetname");
   level.var_a23b5c5.v_start_pos = level.var_a23b5c5.origin;
-  getent("bunker_gate", "targetname") linkto(level.var_a23b5c5);
-  getent("bunker_gate_2", "targetname") linkto(level.var_a23b5c5);
-  getent("bunker_gate_3", "targetname") linkto(level.var_a23b5c5);
+  getEnt("bunker_gate", "targetname") linkTo(level.var_a23b5c5);
+  getEnt("bunker_gate_2", "targetname") linkTo(level.var_a23b5c5);
+  getEnt("bunker_gate_3", "targetname") linkTo(level.var_a23b5c5);
 }
 
 enable_cage_portal(b_enable = 1) {
@@ -953,7 +953,7 @@ function_a6bb56f6() {
       s_portal notify(#"kill_portal_cooldown");
       s_portal.a_e_users = [];
 
-      foreach(e_player in getplayers()) {
+      foreach(e_player in getPlayers()) {
         s_portal function_cb7c6fc7(e_player, 0);
       }
 
@@ -968,7 +968,7 @@ function_cc9b97b0() {
   foreach(s_portal in level.a_s_portals) {
     s_portal.var_cd2f1fed = 0;
 
-    foreach(e_player in getplayers()) {
+    foreach(e_player in getPlayers()) {
       s_portal function_cb7c6fc7(e_player, 1);
     }
   }
@@ -992,7 +992,7 @@ on_player_spawn() {
 }
 
 function_2143dc13() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   foreach(e_player in a_e_players) {
     if(e_player.var_298e4578 === level.a_s_portals[#"portal_panic_room"]) {

@@ -1020,7 +1020,7 @@ _id_7821(var_0) {
     thread _id_7863(500, 10, 0.1, var_2);
   }
 
-  var_1 linkto(self);
+  var_1 linkTo(self);
 }
 
 _id_7863(var_0, var_1, var_2, var_3) {
@@ -1072,7 +1072,7 @@ _id_784D(var_0, var_1, var_2) {
   var_3 = spawn("script_model", self.origin);
   var_3.team = self.owner.team;
   var_3 _meth_8223(self.owner, var_0);
-  var_3 linkto(self);
+  var_3 linkTo(self);
   return var_3;
 }
 
@@ -1360,9 +1360,9 @@ _id_7843(var_0) {
   level endon("game_ended");
   self setscriptablepartstate("rotors", "on", 0);
   self playLoopSound("veh_scrambler_drone_idle_high");
-  self moveto(var_0 - (0, 0, 20), 3, 2, 1);
+  self moveTo(var_0 - (0, 0, 20), 3, 2, 1);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(3.2);
-  self moveto(var_0, 1, 0.5, 0.5);
+  self moveTo(var_0, 1, 0.5, 0.5);
   scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(1.2);
 
   for(;;) {
@@ -1372,7 +1372,7 @@ _id_7843(var_0) {
     var_4 = var_0[1] + var_1;
     var_5 = var_0[2] + var_2;
     var_6 = (var_3, var_4, var_5);
-    self moveto(var_6, 3, 2, 1);
+    self moveTo(var_6, 3, 2, 1);
     scripts\cp_mp\hostmigration::hostmigration_waitlongdurationwithpause(3.2);
   }
 }
@@ -1508,7 +1508,7 @@ _id_D546(var_0) {
 _id_D69B(var_0) {
   self._id_B7AB = spawn("script_origin", self.origin);
   self._id_B7AB _meth_83CA(self.owner);
-  self._id_B7AB linkto(self);
+  self._id_B7AB linkTo(self);
   self._id_B7AB playLoopSound("recon_drone_overlay");
   self.owner _meth_867F("mp_recon_drone", 1);
 
@@ -1527,7 +1527,7 @@ _id_D69B(var_0) {
   var_1 = 0;
   self.owner._id_C707 = self.owner.angles;
   self.owner setplayerangles(self.angles);
-  self.owner cameralinkto(self, "tag_origin");
+  self.owner cameralinkTo(self, "tag_origin");
   self.owner remotecontrolvehicle(self);
   self.owner painvisionoff();
 
@@ -2692,10 +2692,10 @@ _id_7840(var_0) {
     if(_func_010F(var_1)) {
       if(_func_0037(var_2 / self.maxhealth) >= 0.4) {
         earthquake(0.25, 0.2, self.origin, 150);
-        self.owner playrumbleonentity("damage_heavy");
+        self.owner playRumbleOnEntity("damage_heavy");
       } else {
         earthquake(0.15, 0.15, self.origin, 150);
-        self.owner playrumbleonentity("damage_light");
+        self.owner playRumbleOnEntity("damage_light");
       }
     }
   }
@@ -3144,7 +3144,7 @@ _id_5AD3(var_0, var_1) {
 
     var_15 = var_12[var_14];
     var_16 = var_10 + var_15;
-    var_17 = vectornormalize(var_15) * 50;
+    var_17 = vectorNormalize(var_15) * 50;
     var_18 = var_10 + var_17;
     var_19 = physics_createcontents(["physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
     var_20 = scripts\engine\trace::ray_trace(var_10, var_18, self, var_19);

@@ -338,7 +338,7 @@ function intro_mix_5() {
 }
 
 function function_890e00a5() {
-  explo = getent("intro_long_anim_done_magicgrenade", "targetname");
+  explo = getEnt("intro_long_anim_done_magicgrenade", "targetname");
   snd::play([5, "wpn_rice_paddies_water_impact", 0], explo.origin);
 }
 
@@ -516,9 +516,9 @@ function function_cb7fb7e7() {
   level flag::wait_till("level_is_go");
   players = snd::function_da785aa8();
   player = players[0];
-  bridge = getent("audio_bridge_vol", "targetname");
-  var_184f2cbe = getent("audio_bridge_debris1", "targetname");
-  var_6998953 = getent("audio_bridge_debris2", "targetname");
+  bridge = getEnt("audio_bridge_vol", "targetname");
+  var_184f2cbe = getEnt("audio_bridge_debris1", "targetname");
+  var_6998953 = getEnt("audio_bridge_debris2", "targetname");
   snd::play("amb_pris_bridge_wind_rope_lp", (-1179, 2764, 386));
 
   while(true) {
@@ -870,7 +870,7 @@ function function_8d29676a() {
   players = snd::function_da785aa8();
   player = players[0];
   tiles = snd::play("evt_cp_nam_prisoner_hall_tile_destruct", player.origin);
-  tiles moveto((4809, 16823, -1009), 5, 0, 0);
+  tiles moveTo((4809, 16823, -1009), 5, 0, 0);
   rumble = snd::play(["amb_cp_nam_prisoner_memory_lp", 3]);
   var_2c28f512 = [(4786.68, 16669.8, -965.327), (4862.88, 16593.1, -914.642), (4785.5, 16206.1, -951.072), (4859.87, 16066.4, -940.508), (4779.83, 15766.9, -941.054), (4849.75, 15382.3, -940.286), (4776.56, 15097.4, -947.083), (4830.7, 14657.6, -945.2), (4763.43, 14197.2, -939.182), (4840.77, 13903.6, -953.905), (4761.13, 13491.4, -934.264), (4857.89, 13106.7, -942.509), (4788.84, 12685.5, -945.196)];
   tiles = snd::emitter("amb_cp_nam_pris_tiles", var_2c28f512, [3, 12]);
@@ -1037,7 +1037,7 @@ function function_2982df9f(door_locked) {
   }
 
   if(isDefined(drone)) {
-    drone linkto(player);
+    drone linkTo(player);
     snd::stop(drone, 8);
   }
 }

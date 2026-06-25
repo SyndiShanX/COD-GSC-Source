@@ -157,7 +157,7 @@ function player_static_cb(localclientnum, oldval, newval, bnewent, binitialsnap,
 function static_sound(val) {
   if(!isDefined(level.static_soundent)) {
     level.static_soundent = spawn(0, self.origin, "script_origin");
-    level.static_soundent linkto(self);
+    level.static_soundent linkTo(self);
   }
   if(val == 0) {
     level.static_soundent delete();
@@ -175,7 +175,7 @@ function sndindrivablevehicle(localclientnum, oldval, newval, bnewent, binitials
   if(newval == 1) {
     if(!isDefined(level.plr_dist_soundent)) {
       level.plr_dist_soundent = spawn(0, self.origin, "script_origin");
-      level.plr_dist_soundent linkto(self);
+      level.plr_dist_soundent linkTo(self);
       level.plr_dist_soundent playLoopSound("gdt_securitybreach_silence");
     }
   } else {

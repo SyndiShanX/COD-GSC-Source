@@ -61,15 +61,15 @@ ee_init_flags() {
 }
 
 audio_log_init() {
-  var_00 = getent("lore_primary", "script_noteworthy");
-  var_00.var_9D5E = getent(var_00.var_1A2, "targetname");
+  var_00 = getEnt("lore_primary", "script_noteworthy");
+  var_00.var_9D5E = getEnt(var_00.var_1A2, "targetname");
   var_00 method_805C();
   var_00.var_9D5E common_scripts\utility::func_9D9F();
   audio_log_listen(var_00);
 }
 
 audio_log_listen(param_00) {
-  var_01 = getent("audio_log_hanging_model", "targetname");
+  var_01 = getEnt("audio_log_hanging_model", "targetname");
   var_01 setCanDamage(1);
   var_01 waittill("damage");
   var_02 = param_00.var_116 - var_01.var_116;
@@ -77,7 +77,7 @@ audio_log_listen(param_00) {
   var_04 = 1 / var_03;
   var_05 = var_02 * (var_04, var_04, 0);
   var_01 gravitymove(var_05, var_03);
-  var_01 rotateto(param_00.var_1D, var_03);
+  var_01 rotateTo(param_00.var_1D, var_03);
   wait(var_03);
   var_01.var_116 = param_00.var_116;
   var_01 delete();
@@ -226,8 +226,8 @@ cheat_show_all_bodyparts() {
 ________________step_find_rope______________________() {}
 
 ee_quest_step_find_rope_init() {
-  var_00 = getent("rope_pull_animorg", "targetname");
-  var_01 = getent("rope_fall", "targetname");
+  var_00 = getEnt("rope_pull_animorg", "targetname");
+  var_01 = getEnt("rope_fall", "targetname");
   var_01 method_8278("zmb_windmill_rope_hanging");
   var_00 method_8278("zmb_windmill_branch_start");
   thread ee_quest_step_find_rope_waitfor_rope_shot();
@@ -249,10 +249,10 @@ ee_quest_step_find_rope() {
 
 ee_quest_step_find_rope_waitfor_rope_shot() {
   level endon("ee_find_rope_part_shot");
-  var_00 = getent("rope_bundle_damage_trig", "targetname");
+  var_00 = getEnt("rope_bundle_damage_trig", "targetname");
   var_00 method_80B0(var_00 method_85A0() | 256);
   var_00 waittill("damage");
-  var_01 = getent("rope_fall", "targetname");
+  var_01 = getEnt("rope_fall", "targetname");
   var_01 method_8278("zmb_windmill_rope_fall");
   var_00 lib_0378::func_8D74("frank_rope_shot");
   wait(getanimlength(%zmb_windmill_rope_fall));
@@ -263,9 +263,9 @@ ee_quest_step_find_rope_waitfor_rope_shot() {
 
 ee_quest_step_find_rope_waitfor_rope_recovered() {
   level endon("ee_find_rope_part_collected");
-  var_00 = getent("rope_pull_animorg", "targetname");
-  var_01 = getent("branch_pull_trigger", "targetname");
-  var_02 = getent("rope_collect_trigger", "targetname");
+  var_00 = getEnt("rope_pull_animorg", "targetname");
+  var_01 = getEnt("branch_pull_trigger", "targetname");
+  var_02 = getEnt("rope_collect_trigger", "targetname");
   var_03 = 0;
   var_04 = 0;
   var_00 scriptmodelclearanim();
@@ -398,8 +398,8 @@ ee_quest_step_find_rods_throw_rod(param_00, param_01) {
   level endon("ee_find_rods_rods_found");
   param_00 unlink();
   var_02 = 0.25;
-  param_00 moveto(param_01.var_116, var_02);
-  param_00 rotateto(param_01.var_1D, var_02);
+  param_00 moveTo(param_01.var_116, var_02);
+  param_00 rotateTo(param_01.var_1D, var_02);
   wait(var_02);
   param_00.var_116 = param_01.var_116;
 }
@@ -501,10 +501,10 @@ ee_quest_step_hang_frank_acquire_wustling_arm_drop_arm(param_00) {
 }
 
 ee_quest_step_hang_frank_jam_windmill() {
-  var_00 = getent("windmill_jam_trigger", "targetname");
-  var_01 = getent("wustling_arm_jam_model", "targetname");
-  var_02 = getent("wustling_arm_jam_model_start", "targetname");
-  var_03 = getent("wustling_arm_jam_model_end", "targetname");
+  var_00 = getEnt("windmill_jam_trigger", "targetname");
+  var_01 = getEnt("wustling_arm_jam_model", "targetname");
+  var_02 = getEnt("wustling_arm_jam_model_start", "targetname");
+  var_03 = getEnt("wustling_arm_jam_model_end", "targetname");
   var_01.var_116 = var_02.var_116;
   var_01.var_1D = var_02.var_1D;
   var_01 method_805C();
@@ -515,8 +515,8 @@ ee_quest_step_hang_frank_jam_windmill() {
     var_01 lib_0378::func_8D74("wustling_arm_jam");
     maps\mp\mp_zombie_windmill_util::windmill_stop_idle();
     var_01 method_805B();
-    var_01 moveto(var_03.var_116, 0.5, 0, 0.05);
-    var_01 rotateto(var_03.var_1D, 0.5, 0, 0.05);
+    var_01 moveTo(var_03.var_116, 0.5, 0, 0.05);
+    var_01 rotateTo(var_03.var_1D, 0.5, 0, 0.05);
     level waittill("done_accelerating");
     iprintlnbold("JAMMED");
     common_scripts\utility::func_3C8F("ee_hang_frank_windmill_jammed");
@@ -536,9 +536,9 @@ ee_quest_step_hang_frank_place_parts_think() {
   level endon("ee_hang_frank_complete");
   var_00 = 0;
   var_01 = 0;
-  var_02 = getent("windmill_place_part_trig", "targetname");
-  var_03 = getent("windmill_fan", "targetname");
-  var_04 = getent("frank_fanblade_models_org", "targetname");
+  var_02 = getEnt("windmill_place_part_trig", "targetname");
+  var_03 = getEnt("windmill_fan", "targetname");
+  var_04 = getEnt("frank_fanblade_models_org", "targetname");
   var_05 = getEntArray("frank_fanblade_models", "script_noteworthy");
   foreach(var_07 in var_05) {
     var_07 method_8449(var_04);
@@ -625,7 +625,7 @@ ee_quest_step_hang_frank_place_acquired_parts() {
 }
 
 ee_quest_step_hang_frank_show_part_with_targetname(param_00) {
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   var_02 = getEntArray(var_01.var_1A2, "targetname");
   var_01 method_805B();
   foreach(var_04 in var_02) {
@@ -634,7 +634,7 @@ ee_quest_step_hang_frank_show_part_with_targetname(param_00) {
 }
 
 ee_quest_step_hang_frank_delete_part_with_targetname(param_00) {
-  var_01 = getent(param_00, "targetname");
+  var_01 = getEnt(param_00, "targetname");
   if(!isDefined(var_01)) {
     return;
   }
@@ -679,7 +679,7 @@ warp_hang_frank() {
   common_scripts\utility::func_3C8F("ee_hang_frank_arm_acquired");
   common_scripts\utility::func_3C8F("ee_hang_frank_complete");
   ee_quest_step_hang_frank_place_acquired_parts();
-  var_00 = getent("windmill_fan", "targetname");
+  var_00 = getEnt("windmill_fan", "targetname");
   var_00.current_speed = 0;
   wait(1);
   var_00.var_1D = (270, var_00.var_1D[1], var_00.var_1D[2]);
@@ -705,7 +705,7 @@ ee_quest_step_call_lightning() {
 ee_quest_step_call_lightning_think() {
   level endon("ee_call_lightning_complete");
   if(!common_scripts\utility::func_3C77("ee_call_lightning_complete")) {
-    var_00 = getent("windmill_fan", "targetname");
+    var_00 = getEnt("windmill_fan", "targetname");
     level.windmill_charged = 0;
     while(!level.windmill_charged) {
       ee_quest_step_call_lightning_monitor_progress_for_round(var_00);
@@ -737,7 +737,7 @@ ee_quest_step_call_lightning_monitor_progress_for_round(param_00) {
 
 ee_quest_step_call_lightning_do_strike() {
   common_scripts\utility::func_3C9F("ee_call_lightning_complete");
-  var_00 = getent("frank_fanblade_models_org", "targetname");
+  var_00 = getEnt("frank_fanblade_models_org", "targetname");
   maps\mp\zombies\sg_events_v1\extermination::func_5D67(var_00.var_116 - (0, 0, 40));
   level thread common_scripts\_exploder::func_88E(202);
   wait(randomfloatrange(0.05, 0.07));
@@ -758,8 +758,8 @@ ee_quest_step_call_lightning_frank_fall() {
   level.frank_escort_health = 100;
   maps\mp\mp_zombie_windmill_util::spawn_frank();
   level.frank_dudebroman method_805C();
-  var_00 = getent("frank_fall_animorg", "targetname");
-  level.frank_dudebroman setorigin(var_00.var_116 - (0, 0, 20), 0);
+  var_00 = getEnt("frank_fall_animorg", "targetname");
+  level.frank_dudebroman setOrigin(var_00.var_116 - (0, 0, 20), 0);
   level.frank_dudebroman.var_1D = var_00.var_1D - (0, 90, 0);
   wait 0.05;
   var_01 = "s2_zom_frank_lightning_fall";
@@ -775,7 +775,7 @@ ee_quest_step_call_lightning_frank_fall() {
   level.frank_dudebroman scragentsetscripted(0);
   level.frank_dudebroman method_839D("gravity");
   wait 0.05;
-  var_00 = getent("frank_fall_animorg", "targetname");
+  var_00 = getEnt("frank_fall_animorg", "targetname");
   level.frank_dudebroman scragentsetscripted(1);
   level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
   level.frank_dudebroman method_839C("anim deltas");
@@ -875,9 +875,9 @@ warp_defend_frank() {
 _____________step_escort_frank____________() {}
 
 ee_quest_step_escort_frank_init() {
-  var_00 = getent("escort_battery", "targetname");
+  var_00 = getEnt("escort_battery", "targetname");
   var_00 method_805C();
-  var_01 = getent("wine_cellar_batt", "targetname");
+  var_01 = getEnt("wine_cellar_batt", "targetname");
   var_01 method_805C();
 }
 
@@ -946,7 +946,7 @@ ee_quest_step_escort_frank_wake_up_anim() {
     level.frank_dudebroman scragentsetscripted(0);
     level.frank_dudebroman method_839D("gravity");
     wait 0.05;
-    var_00 = getent("frank_fall_animorg", "targetname");
+    var_00 = getEnt("frank_fall_animorg", "targetname");
     level.frank_dudebroman scragentsetscripted(1);
     level.frank_dudebroman maps\mp\agents\_scripted_agent_anim_util::func_8732(1, "ScriptedAnimation");
     level.frank_dudebroman method_839C("anim deltas");
@@ -1013,7 +1013,7 @@ ee_quest_step_escort_frank_move_to_door_destination() {
 
 ee_quest_step_escort_frank_battery_setup() {
   if(!isDefined(level.frank_battery) || !isDefined(level.frank_battery.fx_tag)) {
-    level.frank_battery = getent("escort_battery", "targetname");
+    level.frank_battery = getEnt("escort_battery", "targetname");
     level.frank_battery method_805B();
     level.frank_battery.fx_tag = spawn("script_model", level.frank_battery.var_116);
     level.frank_battery.fx_tag setModel("tag_origin");
@@ -1052,7 +1052,7 @@ ee_quest_step_escort_frank_drop_charged_battery() {
   var_03 = 1 / var_02;
   var_04 = var_01 * (var_03, var_03, 0);
   level.frank_battery gravitymove(var_04, var_02);
-  level.frank_battery rotateto((0, 0, 0), var_02);
+  level.frank_battery rotateTo((0, 0, 0), var_02);
   wait(var_02);
   level.frank_battery.var_116 = var_00;
   level.var_8E3 = common_scripts\utility::func_F93(level.var_8E3, level.frank_battery.fx_tag);
@@ -1066,10 +1066,10 @@ ee_quest_step_escort_frank_drop_charged_battery() {
 }
 
 ee_quest_step_escort_frank_collect_prize_think() {
-  var_00 = getent("wine_cellar_batt_trig", "targetname");
-  var_01 = getent("wine_cellar_batt", "targetname");
-  var_02 = getent("wine_cellar_door_clip", "targetname");
-  var_03 = getent("wine_cellar_door", "targetname");
+  var_00 = getEnt("wine_cellar_batt_trig", "targetname");
+  var_01 = getEnt("wine_cellar_batt", "targetname");
+  var_02 = getEnt("wine_cellar_door_clip", "targetname");
+  var_03 = getEnt("wine_cellar_door", "targetname");
   var_02 method_8449(var_03);
   var_00 waittill("trigger", var_04);
   level thread maps\mp\zombies\weapons\_zombie_dlc3_melee::sword_post_ee_complete_handler();
@@ -1079,7 +1079,7 @@ ee_quest_step_escort_frank_collect_prize_think() {
   var_03 rotateby((0, -120, 0), 1, 0.25, 0.25);
   var_02 method_8060();
   lib_0378::func_8D74("wine_cellar_door_open", var_03.var_116);
-  var_05 = getent("sword_hilt", "targetname");
+  var_05 = getEnt("sword_hilt", "targetname");
   var_05 lib_0547::func_AC41(&"ZOMBIE_DLC3_PICKUP_PART_1");
   var_05 waittill("player_used", var_04);
   var_05 lib_0547::func_AC40();
@@ -1093,7 +1093,7 @@ warp_skip_escort_part01() {
   common_scripts\utility::func_3C8F("ee_escort_frank_reached_battery");
   common_scripts\utility::func_3C9F("ee_call_lightning_frank_fell");
   var_00 = common_scripts\utility::func_46B5("frank_first_half_escort_end", "script_noteworthy");
-  level.frank_dudebroman setorigin(var_00.var_116);
+  level.frank_dudebroman setOrigin(var_00.var_116);
 }
 
 warp_skip_escort_part02() {
@@ -1102,7 +1102,7 @@ warp_skip_escort_part02() {
   common_scripts\utility::func_3C8F("ee_escort_frank_soul_collection_complete");
   var_00 = common_scripts\utility::func_46B5("frank_second_half_escort_end", "script_noteworthy");
   level.battery_drop_org = var_00.var_116;
-  level.frank_dudebroman setorigin(var_00.var_116);
+  level.frank_dudebroman setOrigin(var_00.var_116);
   ee_quest_step_escort_frank_battery_setup();
   level.frank_dudebroman.var_480F = 0;
   level.frank_dudebroman dodamage(level.frank_dudebroman.var_BC * 2, level.frank_dudebroman.var_116);

@@ -48,7 +48,7 @@ function function_818e69da(localclientnum, oldval, newval, bnewent, binitialsnap
   util::waittill_dobj(fieldname);
 
   if(bwastimejump) {
-    self playrumbleonentity(fieldname, level.var_30e551f4.var_12c482a2);
+    self playRumbleOnEntity(fieldname, level.var_30e551f4.var_12c482a2);
     return;
   }
 

@@ -319,7 +319,7 @@ function function_dc86efaa(var_b6c35df6, str_state) {
       visionset_mgr::activate("visionset", "hijack_vehicle_blur", player);
       player hide();
       player notsolid();
-      player setplayercollision(0);
+      player setPlayerCollision(0);
       player clientfield::set("camo_shader", 1);
       player clientfield::set_to_player("sndInDrivableVehicle", 1);
       player player::take_weapons();
@@ -340,7 +340,7 @@ function function_dc86efaa(var_b6c35df6, str_state) {
     case "finish": {
       player show();
       player solid();
-      player setplayercollision(1);
+      player setPlayerCollision(1);
       player setstance(var_b6c35df6.oldstance);
       player setlowready(0);
       player.b_tactical_mode_enabled = var_b6c35df6.var_d40d5a7d;
@@ -488,7 +488,7 @@ function private _playerspectatechase(vehicle) {
   cam = spawn("script_model", vehicle.origin + moveamount);
   cam setModel("tag_origin");
   if(!(isDefined(vehicle.crash_style) && vehicle.crash_style)) {
-    cam linkto(vehicle, "tag_origin");
+    cam linkTo(vehicle, "tag_origin");
   }
   self startcameratween(1);
   origin = vehicle.origin;
@@ -542,7 +542,7 @@ function private _wait_for_return(player) {
   self.vehdontejectoccupantsondeath = 1;
   player waittill("return_to_body", reason);
   wait(0.05);
-  player setorigin(original_location);
+  player setOrigin(original_location);
   player setplayerangles(original_angles);
   wait(0.05);
   if(isDefined(self)) {

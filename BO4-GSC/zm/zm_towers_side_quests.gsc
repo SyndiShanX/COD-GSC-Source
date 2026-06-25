@@ -29,7 +29,7 @@ init() {
   level.s_side_quests.var_25f5a473 = struct::get_array("s_pyre");
 
   foreach(s_stub in level.s_side_quests.var_25f5a473) {
-    mdl = getent(s_stub.target, "targetname");
+    mdl = getEnt(s_stub.target, "targetname");
     mdl hide();
   }
 
@@ -38,7 +38,7 @@ init() {
   }
 
   level.s_side_quests.var_3e762bf6 = 0;
-  level.s_side_quests.var_f06465e0 = getent("t_pyre_on", "targetname");
+  level.s_side_quests.var_f06465e0 = getEnt("t_pyre_on", "targetname");
   level.s_side_quests.var_a1d1197d = 0;
   callback::on_connect(&function_4ff8ad95);
   callback::on_ai_killed(&function_aee836e9);
@@ -95,7 +95,7 @@ function_fb74fc5f() {
     level.s_side_quests.var_37676611 = array(level.s_side_quests.var_37676611);
   }
 
-  level.s_side_quests.var_37676611[level.s_side_quests.var_37676611.size] = getent("mdl_toothpick", "targetname");
+  level.s_side_quests.var_37676611[level.s_side_quests.var_37676611.size] = getEnt("mdl_toothpick", "targetname");
 
   if(!isDefined(level.s_side_quests.var_37676611)) {
     level.s_side_quests.var_37676611 = [];
@@ -103,7 +103,7 @@ function_fb74fc5f() {
     level.s_side_quests.var_37676611 = array(level.s_side_quests.var_37676611);
   }
 
-  level.s_side_quests.var_37676611[level.s_side_quests.var_37676611.size] = getent("mdl_feathers", "targetname");
+  level.s_side_quests.var_37676611[level.s_side_quests.var_37676611.size] = getEnt("mdl_feathers", "targetname");
 
   if(!isDefined(level.s_side_quests.var_37676611)) {
     level.s_side_quests.var_37676611 = [];
@@ -111,7 +111,7 @@ function_fb74fc5f() {
     level.s_side_quests.var_37676611 = array(level.s_side_quests.var_37676611);
   }
 
-  level.s_side_quests.var_37676611[level.s_side_quests.var_37676611.size] = getent("mdl_tankard", "targetname");
+  level.s_side_quests.var_37676611[level.s_side_quests.var_37676611.size] = getEnt("mdl_tankard", "targetname");
 
   foreach(mdl in level.s_side_quests.var_37676611) {
     level flag::init(mdl.model + "_picked_up");
@@ -126,7 +126,7 @@ function_fb74fc5f() {
     waitframe(1);
   }
 
-  playsoundatposition(#"hash_7f8f5a20e4b87aac", (0, 0, 0));
+  playSoundAtPosition(#"hash_7f8f5a20e4b87aac", (0, 0, 0));
 
   while(true) {
     s_waitresult = level waittill(#"wraith_fire_impact");
@@ -169,7 +169,7 @@ function_77df7138(e_player) {
 function_3a6ce932() {
   level endon(#"end_game");
   zm_unitrigger::function_fac87205(&function_135e7d64);
-  e_target = getent(self.target, "targetname");
+  e_target = getEnt(self.target, "targetname");
   e_target show();
   e_target playSound(#"hash_27013ebd10f7b8c3");
   level flag::set(e_target.model + "_placed");
@@ -178,7 +178,7 @@ function_3a6ce932() {
 
 function_135e7d64(e_player) {
   s_parent = self.stub.related_parent;
-  mdl_stub = getent(s_parent.target, "targetname");
+  mdl_stub = getEnt(s_parent.target, "targetname");
   b_have = level flag::get(mdl_stub.model + "_picked_up");
   b_placed = level flag::get(mdl_stub.model + "_placed");
   var_5168e40f = e_player zm_utility::is_player_looking_at(s_parent.origin, 0.96, 0);
@@ -198,7 +198,7 @@ function_ad85b216() {
     level waittill(#"end_of_round");
   }
 
-  playsoundatposition("zmb_ee_brewing_done", (0, 0, 0));
+  playSoundAtPosition("zmb_ee_brewing_done", (0, 0, 0));
   s_loc = struct::get("s_perk_drop");
 
   for(perk = zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, #"allies", undefined, undefined, 1, 1); !isDefined(perk); perk = zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, #"allies", undefined, undefined, 1, 1)) {
@@ -350,7 +350,7 @@ arena_rock() {
   callback::on_ai_killed(&function_4670ef4d);
   level function_c846dfc3();
   callback::remove_on_ai_killed(&function_4670ef4d);
-  var_c2b730ca = getent("viking_salute", "targetname");
+  var_c2b730ca = getEnt("viking_salute", "targetname");
   var_c2b730ca thread function_3ce07a2b();
   level waittill(#"21_guns");
   level flag::set(#"arena_rock_unlocked");
@@ -359,7 +359,7 @@ arena_rock() {
 
 function_5ca13573() {
   level endon(#"end_game");
-  var_bbd88248 = getent("firestorm_detector", "targetname");
+  var_bbd88248 = getEnt("firestorm_detector", "targetname");
 
   while(true) {
     var_6aa0de02 = var_bbd88248 waittill(#"damage");

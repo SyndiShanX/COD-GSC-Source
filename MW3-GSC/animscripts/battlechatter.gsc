@@ -1615,7 +1615,7 @@ _id_0BD9(var_0, var_1) {
     }
     var_8 = gettime();
     var_9 = spawn("script_origin", self gettagorigin("j_head"));
-    var_9 linkto(self);
+    var_9 linkTo(self);
 
     if(var_0._id_0BAB && self.team == "allies") {
       thread maps\_anim::_id_0BDB(var_0._id_0BB0[var_7], var_0._id_0BAE);
@@ -2279,7 +2279,7 @@ _id_0C00(var_0) {
 
 _id_0C01(var_0, var_1, var_2) {
   var_3 = anglesToForward(var_0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = vectortoangles(var_4);
   var_6 = vectortoangles(var_2 - var_1);
   var_7 = var_5[1] - var_6[1];
@@ -2877,7 +2877,7 @@ _id_0C29(var_0, var_1, var_2) {
 _id_0C2A(var_0, var_1) {
   anim endon("battlechatter disabled");
   var_2 = spawn("script_origin", var_0 gettagorigin("j_head"));
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_2 playSound(var_1, var_1, 1);
   var_2 waittill(var_1);
   var_2 delete();

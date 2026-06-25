@@ -35,7 +35,7 @@ castaway_on_player_land(localclientnum, player, ground_type, firstperson, quiet,
   if(ground_type == "water") {
     down = (0, 0, -1);
     velocity = player getvelocity();
-    velocity = vectornormalize(velocity);
+    velocity = vectorNormalize(velocity);
     v = vectordot(velocity, down);
 
     if(v > 0.2) {

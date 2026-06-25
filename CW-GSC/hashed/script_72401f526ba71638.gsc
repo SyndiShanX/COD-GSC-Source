@@ -310,7 +310,7 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
   }
 
   if(function_7fb7c83c(eventstruct.weapon.name) && isDefined(level.var_dbd3b871[eventstruct.weapon.name])) {
-    self playrumbleonentity(#"hash_116369f6e589c9fd");
+    self playRumbleOnEntity(#"hash_116369f6e589c9fd");
     self function_5f81a103(eventstruct.weapon);
     self function_9a67c8c7(eventstruct.weapon.name);
     self thread[[level.var_dbd3b871[eventstruct.weapon.name]]](eventstruct);
@@ -854,13 +854,13 @@ function function_35216077(params) {
 
       break;
     case #"hash_6ace867d48136ede":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player function_6457e4cd(hash(params.value));
       }
 
       break;
     case #"hash_31bd3f1a2ffb2b7":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isalive(player) && isDefined(player.var_8da24ed0) && isDefined(player.inventory) && isDefined(player.var_fc8023b4)) {
           player.var_8da24ed0 = player.var_fc8023b4;
           player function_fe8d21ed();
@@ -869,7 +869,7 @@ function function_35216077(params) {
 
       break;
     case #"hash_78ea4420d95a6213":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(params.value == 1) {
           player function_7a0afa38();
           continue;

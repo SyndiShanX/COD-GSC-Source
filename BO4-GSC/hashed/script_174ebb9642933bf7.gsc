@@ -26,7 +26,7 @@ autoexec __init__system__() {
 
 __init__() {
   level.var_f4f794bf = array(5, 7, 9, 12);
-  level.nova_crawler_spawner = getent("nova_crawler_spawner", "script_noteworthy");
+  level.nova_crawler_spawner = getEnt("nova_crawler_spawner", "script_noteworthy");
   spawner::add_archetype_spawn_function(#"nova_crawler", &nova_crawler_init);
   zm_round_spawning::register_archetype(#"nova_crawler", &function_c73902fd, &crawler_round_spawn, &spawn_nova_crawler, 10);
   zm_score::function_e5d6e6dd(#"nova_crawler", 60);
@@ -232,7 +232,7 @@ function_e2bab5ec(spot) {
 
   self.anchor = spawn("script_origin", self.origin);
   self.anchor.angles = self.angles;
-  self linkto(self.anchor);
+  self linkTo(self.anchor);
   self.anchor thread zm_utility::anchor_delete_failsafe(self);
 
   if(!isDefined(spot.angles)) {
@@ -240,13 +240,13 @@ function_e2bab5ec(spot) {
   }
 
   self ghost();
-  self.anchor moveto(spot.origin, 0.05);
+  self.anchor moveTo(spot.origin, 0.05);
   self.anchor waittill(#"movedone");
   target_org = zombie_utility::get_desired_origin();
 
   if(isDefined(target_org)) {
     anim_ang = vectortoangles(target_org - self.origin);
-    self.anchor rotateto((0, anim_ang[1], 0), 0.05);
+    self.anchor rotateTo((0, anim_ang[1], 0), 0.05);
     self.anchor waittill(#"rotatedone");
   }
 
@@ -304,7 +304,7 @@ function_de265920(var_d25bbdd5) {
 }
 
 function_70a8e26c() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_max = zm_round_logic::get_zombie_count_for_round(level.var_f5419c22, a_e_players.size);
   return int(n_max * 0.6);
 }

@@ -492,7 +492,7 @@ _id_0F60() {
 
 _id_0F61(var_0, var_1) {
   var_2 = anglesToForward(self.angles);
-  var_3 = vectornormalize(var_1.origin - self.origin);
+  var_3 = vectorNormalize(var_1.origin - self.origin);
 
   if(vectordot(var_2, var_3) < 0) {
     return 0;

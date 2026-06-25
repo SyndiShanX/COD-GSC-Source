@@ -449,17 +449,17 @@ func_6B2D() {
 
 func_6B2E() {
   var_00 = self;
-  var_00.var_24A7 = getent(var_00.var_01A2, "targetname");
+  var_00.var_24A7 = getEnt(var_00.var_01A2, "targetname");
   var_01 = var_00.var_24A7.var_0116;
   var_02 = (150, 0, 0);
   for(;;) {
     var_00 waittill("trigger", var_03);
-    var_00.var_24A7 moveto(var_00.var_24A7.var_0116 + var_02, 1);
+    var_00.var_24A7 moveTo(var_00.var_24A7.var_0116 + var_02, 1);
     while(var_03 istouching(var_00)) {
       wait 0.05;
     }
 
-    var_00.var_24A7 moveto(var_01, 0.5);
+    var_00.var_24A7 moveTo(var_01, 0.5);
   }
 }
 
@@ -540,7 +540,7 @@ func_52E1() {
   }
 
   var_04 = common_scripts\utility::func_46B5("zmb_flamethrower_trap_light", "script_noteworthy");
-  var_05 = getent("pilot_light_trigger", "targetname");
+  var_05 = getEnt("pilot_light_trigger", "targetname");
   self.var_3F4E = common_scripts\utility::func_0F6F(self.var_3F4E, var_04);
   self.var_9DC2 = common_scripts\utility::func_0F6F(self.var_9DC2, var_05);
 }
@@ -615,7 +615,7 @@ func_2EA1() {
 
 func_2E8B() {
   level endon("power_sz2");
-  var_00 = getent("generator_sign_dialogue", "targetname");
+  var_00 = getEnt("generator_sign_dialogue", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!isDefined(var_01.var_3069) && isPlayer(var_01)) {
@@ -627,7 +627,7 @@ func_2E8B() {
 
 func_2E8A() {
   level endon("power_sz2");
-  var_00 = getent("fuel_tank_dialogue", "targetname");
+  var_00 = getEnt("fuel_tank_dialogue", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -643,7 +643,7 @@ func_2E8A() {
 
 func_2E77() {
   level endon("power_sz2");
-  var_00 = getent("bunker_ent_dialogue", "targetname");
+  var_00 = getEnt("bunker_ent_dialogue", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -718,7 +718,7 @@ func_2E90() {
 
 func_2E89() {
   level endon("flag_ww_part_01_picked_up");
-  var_00 = getent("trig_see_forge", "targetname");
+  var_00 = getEnt("trig_see_forge", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -753,7 +753,7 @@ func_2E89() {
 
 func_2E95() {
   level endon("flag_ww_forged");
-  var_00 = getent("trig_see_med_office", "targetname");
+  var_00 = getEnt("trig_see_med_office", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -788,7 +788,7 @@ func_2E95() {
 
 func_2E93() {
   level endon("flag_correct_code_entered");
-  var_00 = getent("trig_enter_klaus_office", "targetname");
+  var_00 = getEnt("trig_enter_klaus_office", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
@@ -981,7 +981,7 @@ func_3540() {
     }
 
     if(isDefined(var_02)) {
-      var_0B = vectornormalize(vectornormalize(var_01.var_0116 - getglassorigin(var_02)) + common_scripts\utility::func_7A5F(0.3));
+      var_0B = vectorNormalize(vectorNormalize(var_01.var_0116 - getglassorigin(var_02)) + common_scripts\utility::func_7A5F(0.3));
       destroyglass(var_02, var_0B);
     }
   }
@@ -1225,7 +1225,7 @@ func_3BF6() {
 }
 
 func_6E18() {
-  var_00 = getent("move_cart_button_console", "targetname");
+  var_00 = getEnt("move_cart_button_console", "targetname");
   playFXOnTag(level.var_0611["zmb_com_room_fire_panel"], var_00, "tag_origin");
   wait(18);
   stopFXOnTag(level.var_0611["zmb_com_room_fire_panel"], var_00, "tag_origin");
@@ -1332,7 +1332,7 @@ func_3BFA() {
 }
 
 func_347A() {
-  var_00 = getent("disable_clocktower_jumpscare", "targetname");
+  var_00 = getEnt("disable_clocktower_jumpscare", "targetname");
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(isPlayer(var_01) && level.var_2F29 == 0) {
@@ -1407,7 +1407,7 @@ func_415E(param_00) {
 
 func_4D47() {
   var_00 = func_415E(["start_to_gallows"]);
-  var_01 = getent("first_door_lock", "targetname");
+  var_01 = getEnt("first_door_lock", "targetname");
   var_02 = func_415E(["start_to_bridge", "start_to_gallows", "start_to_riverside"]);
   var_03 = spawnStruct();
   var_03.var_3290 = var_00;

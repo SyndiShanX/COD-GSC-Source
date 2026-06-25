@@ -654,9 +654,9 @@ covenant_bob() {
   var_6 = self.origin - (0, 0, var_2);
 
   for(;;) {
-    self moveto(var_5, var_0, var_3, var_4);
+    self moveTo(var_5, var_0, var_3, var_4);
     wait(var_1);
-    self moveto(var_6, var_0, var_3, var_4);
+    self moveTo(var_6, var_0, var_3, var_4);
     wait(var_1);
   }
 }

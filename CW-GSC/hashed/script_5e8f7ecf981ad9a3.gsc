@@ -64,7 +64,7 @@ function function_8cff66e5() {
   self.animrate = 1;
   self.var_df416181 = "annhilate";
   self.var_d1bf288 = 3000;
-  self.health = 600 + getplayers().size * 400;
+  self.health = 600 + getPlayers().size * 400;
   self.no_gib = 1;
   self asmsetanimationrate(self.animrate);
   self namespace_83eb6304::function_3ecfde67("demon_burst");

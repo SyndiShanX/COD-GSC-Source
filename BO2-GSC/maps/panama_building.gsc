@@ -22,7 +22,7 @@ skipto_building() {
 
 main() {
   add_spawn_function_group("hallway_gun_guys", "targetname", ::turn_off_badplace);
-  hurt_trigger = getent("fight_room_hurt_trigger", "targetname");
+  hurt_trigger = getEnt("fight_room_hurt_trigger", "targetname");
   hurt_trigger trigger_off();
   level.digbat_gauntlet_vo = [];
   level.digbat_gauntlet_vo[level.digbat_gauntlet_vo.size] = "db1_in_here_americans_0";
@@ -84,13 +84,13 @@ init_flags() {
 }
 
 create_dead_bodies() {
-  doctor_model = getent("dead_nurse_1", "targetname");
+  doctor_model = getEnt("dead_nurse_1", "targetname");
   doctor_model attach("c_mul_redcross_nurse_head1");
-  doctor_model = getent("dead_nurse_2", "targetname");
+  doctor_model = getEnt("dead_nurse_2", "targetname");
   doctor_model attach("c_mul_redcross_nurse_head1");
-  doctor_model = getent("dead_nurse_3", "targetname");
+  doctor_model = getEnt("dead_nurse_3", "targetname");
   doctor_model attach("c_mul_redcross_nurse_head1");
-  doctor_model = getent("dead_doctor_1", "targetname");
+  doctor_model = getEnt("dead_doctor_1", "targetname");
   doctor_model attach("c_mul_redcross_doctor_head1");
   level thread run_scene("dead_nurse_1");
   level thread run_scene("dead_nurse_2");
@@ -120,10 +120,10 @@ clinic_spookies() {
 clinic_ceiling_collapse() {
   flag_wait("clinic_ceiling_collapsed");
   autosave_by_name("digbat_tackle");
-  e_door = getent("clinic_stairwell_door", "targetname");
+  e_door = getEnt("clinic_stairwell_door", "targetname");
   e_door delete();
   level notify("fxanim_ceiling_collapse_start");
-  v_ceiling_position = getstruct("building_ceiling_collapse", "targetname").origin;
+  v_ceiling_position = getStruct("building_ceiling_collapse", "targetname").origin;
   earthquake(0.3, 0.5, v_ceiling_position, 1000);
   e_sound_pos = spawn("script_origin", v_ceiling_position);
   level.player playSound("evt_hospital_shake_1");
@@ -207,18 +207,18 @@ give_player_max_ammo() {
 }
 
 digbat_kick_open_door() {
-  left_door = getent("hospital_door_left", "targetname");
-  right_door = getent("hospital_door_right", "targetname");
-  left_door rotateyaw(-78, 0.5);
-  right_door rotateyaw(87, 0.5);
-  door_clip = getent("clinic_double_door_clip", "targetname");
+  left_door = getEnt("hospital_door_left", "targetname");
+  right_door = getEnt("hospital_door_right", "targetname");
+  left_door rotateYaw(-78, 0.5);
+  right_door rotateYaw(87, 0.5);
+  door_clip = getEnt("clinic_double_door_clip", "targetname");
   door_clip trigger_off();
   door_clip connectpaths();
 }
 
 player_tackle_player_control_logic() {
   level endon("end_gauntlet");
-  player_align = getent("player_tackle_sequence", "targetname");
+  player_align = getEnt("player_tackle_sequence", "targetname");
   flag_init("player_moved_during_gauntlet");
   align = _get_align_object("digbat_tackle_body");
   level thread gauntlet_recover();
@@ -229,7 +229,7 @@ digbat_tackle_wall(e_digbat) {
   exploder(640);
   level.player playSound("evt_dingbat_wall_break");
   wait 1;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   overlay = newclienthudelem(level.player);
   overlay.x = 0;
   overlay.y = 0;
@@ -253,7 +253,7 @@ digbat_tackle_wall(e_digbat) {
 digbat_blood_pool() {
   run_scene("digbat_blood_pool");
   level thread run_scene("digbat_blood_pool_loop");
-  e_blood_pool = getent("blood_pool", "targetname");
+  e_blood_pool = getEnt("blood_pool", "targetname");
   e_blood_pool setclientflag(13);
 }
 
@@ -332,7 +332,7 @@ building_stairwell() {
 
 building_stairwell_mason_movement() {
   nd_stairwell_entrance = getnode("stairwell_entrance", "targetname");
-  level.mason set_goalradius(32);
+  level.mason set_goalRadius(32);
   level.mason setgoalnode(nd_stairwell_entrance);
   wait 0.5;
   level.mason waittill("goal");
@@ -433,9 +433,9 @@ digbat_tackle_dialog() {
 
 outside_vo() {
   level.player endon("weapon_fired");
-  trigger = getent("chase_stair_VO", "targetname");
+  trigger = getEnt("chase_stair_VO", "targetname");
   flag_wait("outside_vo");
-  solider = getent("solider_outside_VO", "targetname");
+  solider = getEnt("solider_outside_VO", "targetname");
   solider say_dialog("usr1_gunshots_came_from_i_0", 0, 1);
   solider say_dialog("usr2_did_another_team_mov_0", 0, 1);
   solider say_dialog("usr1_don_t_think_so_0", 0, 1);

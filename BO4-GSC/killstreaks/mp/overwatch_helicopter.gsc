@@ -133,7 +133,7 @@ function_ca6698c6() {
   startnode = level.heli_paths[0][random_path];
   protectlocation = (player.origin[0], player.origin[1], int(airsupport::getminimumflyheight()));
   bundle = struct::get_script_bundle("killstreak", "killstreak_overwatch_helicopter");
-  helicopter = spawnvehicle(bundle.ksvehicle, startnode.origin, startnode.angles);
+  helicopter = spawnVehicle(bundle.ksvehicle, startnode.origin, startnode.angles);
   helicopter setowner(player);
   helicopter killstreaks::configure_team("overwatch_helicopter", killstreak_id, player, "helicopter");
   helicopter.killstreak_id = killstreak_id;
@@ -400,7 +400,7 @@ function_5c15f6d6() {
       self.var_eaf98cf = self.protectdest;
       self.var_d9b0ae19 = self.heligoalpos;
       var_5eb30267 = (self.protectdest[0] - self.heligoalpos[0], self.protectdest[1] - self.heligoalpos[1], 0);
-      var_5eb30267 = vectornormalize(var_5eb30267);
+      var_5eb30267 = vectorNormalize(var_5eb30267);
       angles = vectortoangles(var_5eb30267);
       var_d24d4fe2 = isDefined(self.leftgunner) && isalive(self.leftgunner);
       var_ccfa6c33 = isDefined(self.var_e8b1fa34) && isalive(self.var_e8b1fa34);
@@ -576,19 +576,19 @@ function_ab667e1c(owner, helicopter) {
     swat_gunner callback::function_d8abfc3d(#"on_ai_damage", &function_8338a92d);
 
     if(i == 0) {
-      swat_gunner linkto(helicopter, "tag_rider1", (0, 0, 0), (0, 90, 0));
+      swat_gunner linkTo(helicopter, "tag_rider1", (0, 0, 0), (0, 90, 0));
       swat_gunner.ai.swat_gunner = 1;
       helicopter.leftgunner = swat_gunner;
       swat_gunner function_7fac6670(swat_gunner);
       swat_gunner thread function_64b435c4(swat_gunner);
     } else if(i == 1) {
-      swat_gunner linkto(helicopter, "tag_rider2", (0, 0, 0), (0, -90, 0));
+      swat_gunner linkTo(helicopter, "tag_rider2", (0, 0, 0), (0, -90, 0));
       swat_gunner.ai.swat_gunner = 1;
       helicopter.var_e8b1fa34 = swat_gunner;
       swat_gunner function_7fac6670(swat_gunner);
       swat_gunner thread function_64b435c4(swat_gunner);
     } else {
-      swat_gunner linkto(helicopter, "tag_driver", (0, 0, 0), (0, 0, 0));
+      swat_gunner linkTo(helicopter, "tag_driver", (0, 0, 0), (0, 0, 0));
       swat_gunner.ai.var_f185cb34 = 1;
       swat_gunner.ai.swat_gunner = 1;
       swat_gunner.ignoreall = 1;

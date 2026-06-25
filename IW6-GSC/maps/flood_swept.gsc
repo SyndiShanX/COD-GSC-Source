@@ -44,7 +44,7 @@ swept_start() {
 }
 
 swept() {
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
   level.player maps\_utility::ent_flag_set("player_in_swept");
 
   if(!isalive(level.allies[0])) {
@@ -74,7 +74,7 @@ swept() {
   thread maps\flood_anim::sweptaway_spawn();
   common_scripts\utility::exploder("swept_under_fx");
   thread maps\flood_fx::set_enter_swept_vf();
-  var_0 = common_scripts\utility::getstruct("vignette_sweptaway_end_b", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_sweptaway_end_b", "script_noteworthy");
   level.sweptaway_antenna_01 = maps\_utility::spawn_anim_model("sweptaway_antenna_01");
   level.sweptaway_antenna_02 = maps\_utility::spawn_anim_model("sweptaway_antenna_02");
   var_1 = [];
@@ -109,7 +109,7 @@ swept_hint() {
 }
 
 start_swept_control() {
-  var_0 = common_scripts\utility::getstruct("vignette_sweptaway", "script_noteworthy");
+  var_0 = common_scripts\utility::getStruct("vignette_sweptaway", "script_noteworthy");
   var_1 = maps\_utility::spawn_anim_model("swept_path_rig", var_0.origin);
   var_0 maps\_anim::anim_first_frame_solo(var_1, "flood_sweptaway_player_path");
   var_2 = maps\_utility::spawn_anim_model("player_rig", var_0.origin);
@@ -117,7 +117,7 @@ start_swept_control() {
   var_3 = maps\_utility::spawn_anim_model("swept_start_debris", var_0.origin);
   level.swept_path_rig = var_1;
   level.hands_rig = var_2;
-  var_2 linkto(var_1, "tag_player", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_1, "tag_player", (0, 0, 0), (0, 0, 0));
   level.player playerlinktodelta(var_2, "tag_player", 1, 25, 25, 15, 15);
   level.player springcamenabled(1, 3.2, 1.6);
   var_0 thread maps\_anim::anim_single_solo(var_3, "flood_sweptaway_player_start_underwater");
@@ -131,7 +131,7 @@ start_swept_control() {
 
 swept_path_anim(var_0, var_1) {
   level endon("swept_success");
-  var_2 = common_scripts\utility::getstruct("vignette_sweptaway_end_b", "script_noteworthy");
+  var_2 = common_scripts\utility::getStruct("vignette_sweptaway_end_b", "script_noteworthy");
   maps\_anim::anim_single_solo(var_0, "flood_sweptaway_player_path");
   thread swept_end_player(var_2);
   thread swept_end(var_2);
@@ -236,7 +236,7 @@ watch_input(var_0, var_1) {
 
         if(distance2d(var_4, var_0.origin) <= level.swept_allowed_slide) {
           var_1.origin = var_4;
-          var_1 linkto(var_0, "tag_player");
+          var_1 linkTo(var_0, "tag_player");
         }
       }
     } else if(var_2[1] <= -0.15) {
@@ -249,7 +249,7 @@ watch_input(var_0, var_1) {
 
         if(distance2d(var_4, var_0.origin) <= level.swept_allowed_slide) {
           var_1.origin = var_4;
-          var_1 linkto(var_0, "tag_player");
+          var_1 linkTo(var_0, "tag_player");
         }
       }
     } else {
@@ -299,7 +299,7 @@ start_blend_to_endpos() {
     }
 
     level.hands_rig.origin = var_4;
-    level.hands_rig linkto(level.swept_path_rig, "tag_player");
+    level.hands_rig linkTo(level.swept_path_rig, "tag_player");
     common_scripts\utility::waitframe();
   }
 }
@@ -335,13 +335,13 @@ player_play_anims(var_0) {
 #using_animtree("player");
 
 start_swept_control_old() {
-  var_0 = getent("swept_vehicle", "targetname");
+  var_0 = getEnt("swept_vehicle", "targetname");
   var_0 = maps\_vehicle::vehicle_spawn(var_0);
   var_1 = common_scripts\utility::spawn_tag_origin();
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
-  var_1 linkto(var_0, "", (0, 0, 0), (0, 0, 0));
-  var_2 = common_scripts\utility::getstruct("vignette_sweptaway", "script_noteworthy");
+  var_1 linkTo(var_0, "", (0, 0, 0), (0, 0, 0));
+  var_2 = common_scripts\utility::getStruct("vignette_sweptaway", "script_noteworthy");
   var_3 = maps\_utility::spawn_anim_model("player_rig", var_2.origin);
   var_3.angles = var_2.angles;
   var_3 setanim(%flood_sweptaway_player_path, 1, 0);
@@ -372,7 +372,7 @@ watch_input_old(var_0, var_1, var_2) {
 
         if(distance2d(var_6, var_1.origin) <= var_3) {
           var_0.origin = var_6;
-          var_0 linkto(var_1);
+          var_0 linkTo(var_1);
         }
       }
     } else if(var_4[1] <= -0.15) {
@@ -385,7 +385,7 @@ watch_input_old(var_0, var_1, var_2) {
 
         if(distance2d(var_6, var_1.origin) <= var_3) {
           var_0.origin = var_6;
-          var_0 linkto(var_1);
+          var_0 linkTo(var_1);
         }
       }
     } else {
@@ -561,12 +561,12 @@ building_slide_control_hint() {
 
 truck_rumble(var_0) {
   earthquake(0.5, 1, level.player.origin, 1600);
-  level.player playrumbleonentity("heavy_2s");
+  level.player playRumbleOnEntity("heavy_2s");
 }
 
 antenna_rumble(var_0) {
   earthquake(0.15, 0.5, level.player.origin, 1600);
-  level.player playrumbleonentity("light_3s");
+  level.player playRumbleOnEntity("light_3s");
 }
 
 play_rumble_pole_hit(var_0) {

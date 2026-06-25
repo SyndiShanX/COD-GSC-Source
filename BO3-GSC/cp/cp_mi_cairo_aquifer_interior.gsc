@@ -167,7 +167,7 @@ function function_ff024877() {
 }
 
 function function_3a77d1bf() {
-  struct = getent("run_out_cinematic2", "targetname");
+  struct = getEnt("run_out_cinematic2", "targetname");
   struct scene::init("cin_aqu_07_10_escape_vign_crush_death_ally");
   level waittill("collapse");
   thread aquifer_util::toggle_door("ceiling_ac_unit", 1);
@@ -235,7 +235,7 @@ function leave_hideout_scene() {
 }
 
 function function_246476fd(var_8a6d11, var_f17304b7, var_75422735, var_b6b983f4, struct_name, var_2d3b4a98, waitflag) {
-  struct = getent(struct_name, "targetname");
+  struct = getEnt(struct_name, "targetname");
   var_482ba61c = 1.2;
   level.hendricks.n_script_anim_rate = var_482ba61c;
   if(var_8a6d11) {
@@ -255,7 +255,7 @@ function function_246476fd(var_8a6d11, var_f17304b7, var_75422735, var_b6b983f4,
       struct thread scene::play(var_b6b983f4, level.hendricks);
     }
     level flag::wait_till(waitflag);
-    level.hendricks stopanimscripted();
+    level.hendricks stopanimScripted();
     return true;
   }
   struct waittill("scene_done");

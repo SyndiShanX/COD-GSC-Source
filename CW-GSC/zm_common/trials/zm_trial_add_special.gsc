@@ -23,7 +23,7 @@ function private preinit() {
 function private on_begin(enemy_type, var_1f950d4d, var_81dcf087, var_d631185a, var_fe1bdf31) {
   level.var_1c7412f9 = enemy_type;
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       level.var_e34a018e = zm_trial::function_5769f26a(var_1f950d4d);
       break;

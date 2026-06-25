@@ -109,8 +109,8 @@ main() {
 }
 
 fx_hide_top_deck_water() {
-  var_0 = getent("top_deck_water", "targetname");
-  var_1 = getent("intro_water", "targetname");
+  var_0 = getEnt("top_deck_water", "targetname");
+  var_1 = getEnt("intro_water", "targetname");
   var_0 hide();
   level waittill("crane_started");
   wait 8;
@@ -247,11 +247,11 @@ ship_camera_tilting() {
 
     if(level.pause_tilting) {
       if(!var_1) {
-        var_0 rotateto((0, 0, 0), var_7, var_8, var_8);
+        var_0 rotateTo((0, 0, 0), var_7, var_8, var_8);
         var_1 = 1;
       }
     } else {
-      var_0 rotateto((var_5, 0, var_6), var_7, var_8, var_8);
+      var_0 rotateTo((var_5, 0, var_6), var_7, var_8, var_8);
       var_1 = 0;
     }
 

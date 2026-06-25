@@ -173,7 +173,7 @@ _id_E40A(var_0, var_1, var_2, var_3, var_4) {
   var_8 = (1, 0, 1);
   var_9 = 0;
   var_10 = distance(var_0, var_1);
-  var_11 = vectornormalize(var_1 - var_0);
+  var_11 = vectorNormalize(var_1 - var_0);
   var_12 = vectortoangles(var_1 - var_0);
   var_12 = _func_0047(var_12, (90, 0, 0));
   var_13 = var_0 - var_11 * var_2;

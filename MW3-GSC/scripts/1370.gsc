@@ -663,7 +663,7 @@ _id_420C(var_0) {
   self._id_0B6E._id_41D0._id_0EFE._id_4202.node notify("stop_loop");
 
   if(!isDefined(var_0) || var_0 == 0) {
-    self stopanimscripted();
+    self stopanimScripted();
   }
   _id_420B();
 }

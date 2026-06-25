@@ -212,7 +212,7 @@ function_5ac0441c() {
   level endon(#"combattraining_logic_finished");
   level.var_e72728b8 = array(#"eq_localheal", #"gadget_supplypod");
   level.var_32ae304 = undefined;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level notify(#"start_tak_5_collision");
   level notify(#"start_tak_5_rear_collision");
   ct_vo::function_3ca1b77d();
@@ -264,7 +264,7 @@ function_5ac0441c() {
 function_6dd7691f() {
   level endon(#"combattraining_logic_finished");
   level.var_32ae304 = &ct_bots::function_32ae304;
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.var_986d14aa = undefined;
   level.var_3cdb14a8 = 12;
   level flag::set("goto_second_battle");
@@ -515,7 +515,7 @@ function_8ab81320() {
     level flag::clear("mantis_enemies");
 
     while(true) {
-      level.mantis = getent("talon", "targetname");
+      level.mantis = getEnt("talon", "targetname");
 
       if(isDefined(level.mantis)) {
         break;
@@ -1313,7 +1313,7 @@ function_370c032b(s_loc) {
 
 function_c1069664() {
   level endon(#"squad_health_40");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   a_bots = player ct_bots::function_71ec2b36();
   n_start_health = 600;
   n_current_health = 0;

@@ -36,7 +36,7 @@ light_on() {
   self.spotlight_org = spawn("script_model", self gettagorigin("tag_flash"));
   self.spotlight_org setModel("tag_origin");
   self.spotlight_org.angles = self gettagangles("tag_flash");
-  self.spotlight_org linkto(self, "tag_flash");
+  self.spotlight_org linkTo(self, "tag_flash");
 
   playFXOnTag(level._effect["search_light_fx"], self.spotlight_org, "tag_origin");
   self setModel("anim_lights_searchlight_on");

@@ -343,7 +343,7 @@ function spawn_think_action(spawner) {
     }
 
     if(!var_8e8b0300) {
-      e_goal = getent(self.target, "targetname");
+      e_goal = getEnt(self.target, "targetname");
 
       if(isDefined(e_goal) && e_goal.classname !== "info_volume") {
         self setgoal(e_goal);
@@ -367,7 +367,7 @@ function function_27fb21d8(s_scene) {
     return;
   }
 
-  e_goal = getent(self.target, "targetname");
+  e_goal = getEnt(self.target, "targetname");
 
   if(isDefined(e_goal)) {
     self setgoal(e_goal);
@@ -475,7 +475,7 @@ function private function_b6317f7e(node) {
     }
   }
 
-  targetent = getent(node.target, "targetname");
+  targetent = getEnt(node.target, "targetname");
 
   if(isDefined(targetent) && targetent.classname === "info_volume") {
     if(istouching(node.origin, targetent)) {
@@ -733,7 +733,7 @@ function private function_e63d4581(params) {
 }
 
 function private go_to_node_wait_for_player(node, get_target_func, dist) {
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -749,7 +749,7 @@ function private go_to_node_wait_for_player(node, get_target_func, dist) {
     temp = [[get_target_func]](node.target);
 
     if(temp.size == 1) {
-      vec = vectornormalize(temp[0].origin - node.origin);
+      vec = vectorNormalize(temp[0].origin - node.origin);
     } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
@@ -761,7 +761,7 @@ function private go_to_node_wait_for_player(node, get_target_func, dist) {
 
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    vec2[vec2.size] = vectornormalize(player.origin - self.origin);
+    vec2[vec2.size] = vectorNormalize(player.origin - self.origin);
   }
 
   for(i = 0; i < vec2.size; i++) {

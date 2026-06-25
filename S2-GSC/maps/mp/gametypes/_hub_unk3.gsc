@@ -53,7 +53,7 @@ func_636A(param_00) {
 }
 
 func_8482(param_00, param_01) {
-  var_02 = getent(param_00, "targetname");
+  var_02 = getEnt(param_00, "targetname");
   if(isDefined(var_02)) {
     var_02 method_81DF(param_01);
   }

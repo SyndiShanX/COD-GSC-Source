@@ -35,11 +35,11 @@ main() {
 event1_aaa_client() {
   level waittill("aaa_begin");
 
-  point1 = getent(0, "field_aaa_tracer_1", "targetname");
-  point2 = getent(0, "field_aaa_tracer_2", "targetname");
-  point3 = getent(0, "field_aaa_tracer_3", "targetname");
-  point4 = getent(0, "field_aaa_tracer_4", "targetname");
-  point5 = getent(0, "field_aaa_tracer_5", "targetname");
+  point1 = getEnt(0, "field_aaa_tracer_1", "targetname");
+  point2 = getEnt(0, "field_aaa_tracer_2", "targetname");
+  point3 = getEnt(0, "field_aaa_tracer_3", "targetname");
+  point4 = getEnt(0, "field_aaa_tracer_4", "targetname");
+  point5 = getEnt(0, "field_aaa_tracer_5", "targetname");
 
   point1 thread event1_ambient_aaa_fx_think("end_field_fire");
   point1 thread event1_ambient_aaa_fx_rotate();
@@ -81,9 +81,9 @@ event1_ambient_aaa_fx_rotate() {
   going_forward = true;
 
   while(1) {
-    self rotateto((312.6, 180, -90), randomfloatrange(3.5, 6));
+    self rotateTo((312.6, 180, -90), randomfloatrange(3.5, 6));
     self waittill("rotatedone");
-    self rotateto((307.4, 1.7, 90), randomfloatrange(3.5, 6));
+    self rotateTo((307.4, 1.7, 90), randomfloatrange(3.5, 6));
     self waittill("rotatedone");
   }
 }
@@ -183,7 +183,7 @@ client_spawn_and_path_plane(client_num) {
   plane = spawn(client_num, self.origin, "script_model");
   plane thread delete_plane_on_save_restore();
   plane setModel(_modelname);
-  plane RotateTo(self.angles, 0.05);
+  plane rotateTo(self.angles, 0.05);
   wait(0.05);
 
   thread plane_sound_thread(client_num, plane);
@@ -193,10 +193,10 @@ client_spawn_and_path_plane(client_num) {
   next_node = self;
 
   while(isDefined(current_node.target)) {
-    next_node = GetStruct(current_node.target, "targetname");
+    next_node = getStruct(current_node.target, "targetname");
 
-    plane MoveTo(next_node.origin, _trans_time);
-    plane RotateTo(next_node.angles, _trans_time);
+    plane moveTo(next_node.origin, _trans_time);
+    plane rotateTo(next_node.angles, _trans_time);
 
     realWait(_trans_time - 0.05);
 
@@ -239,7 +239,7 @@ delete_rocket_on_saverestore() {
 client_plane_fire_rocket(client_num) {
   self endon("save_restore");
   start_pos = self.origin;
-  end_pos_struct = GetStruct(self.current_node.script_string, "targetname");
+  end_pos_struct = getStruct(self.current_node.script_string, "targetname");
   end_pos = end_pos_struct.origin;
 
   rocket = spawn(client_num, self.origin, "script_model");
@@ -255,7 +255,7 @@ client_plane_fire_rocket(client_num) {
   time = distance / 4200;
 
   rocket thread client_rocket_trail(client_num);
-  rocket MoveTo(end_pos, time);
+  rocket moveTo(end_pos, time);
 
   realWait(time);
 

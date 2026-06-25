@@ -68,7 +68,7 @@ function init() {
   zm_temple_sq_bag::init();
   level._num_gongs = 0;
   randomize_gongs();
-  trig = getent("sq_dgcwf_trig", "targetname");
+  trig = getEnt("sq_dgcwf_trig", "targetname");
   trig triggerenable(0);
   level thread force_eclipse_watcher();
   level thread raise_all_crystals();
@@ -207,7 +207,7 @@ function force_eclipse_watcher() {
 
 function gong_trigger_handler() {
   if(isDefined(self.owner_ent) && isDefined(self.owner_ent.target)) {
-    self.owner_ent.var_4ba5f5f1 = getent(self.owner_ent.target, "targetname");
+    self.owner_ent.var_4ba5f5f1 = getEnt(self.owner_ent.target, "targetname");
     self.owner_ent.var_4ba5f5f1.takedamage = 1;
   } else {
     return;
@@ -229,7 +229,7 @@ function ptt_dial_handler() {
 }
 
 function bttp2_dial_handler() {
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self thread zm_temple_sq_bttp2::dud_dial_handler();
 }
 
@@ -286,7 +286,7 @@ function sundial_monitor() {
     level._sundial_active = 1;
     self playSound("evt_sq_gen_transition_start");
     self playSound("evt_sq_gen_sundial_emerge");
-    self moveto(self.original_pos, 0.25);
+    self moveTo(self.original_pos, 0.25);
     self waittill("movedone");
     self thread spin_dial();
     wait(0.5);
@@ -295,19 +295,19 @@ function sundial_monitor() {
     amount = 8.5;
     level waittill("timed_stage_75_percent");
     self playSound("evt_sq_gen_sundial_timer");
-    self moveto(self.origin - (anglestoup(self.angles) * amount), 1);
+    self moveTo(self.origin - (anglestoup(self.angles) * amount), 1);
     self thread short_dial_spin();
     level waittill("timed_stage_50_percent");
     self playSound("evt_sq_gen_sundial_timer");
-    self moveto(self.origin - (anglestoup(self.angles) * amount), 1);
+    self moveTo(self.origin - (anglestoup(self.angles) * amount), 1);
     self thread short_dial_spin();
     level waittill("timed_stage_25_percent");
     self playSound("evt_sq_gen_sundial_timer");
-    self moveto(self.origin - (anglestoup(self.angles) * amount), 1);
+    self moveTo(self.origin - (anglestoup(self.angles) * amount), 1);
     self thread short_dial_spin();
     level waittill("timed_stage_10_seconds_to_go");
     self thread play_one_second_increments();
-    self moveto(self.origin - (anglestoup(self.angles) * amount), 10);
+    self moveTo(self.origin - (anglestoup(self.angles) * amount), 10);
     self thread spin_dial();
     self waittill("movedone");
     level._sundial_active = 0;
@@ -325,7 +325,7 @@ function play_one_second_increments() {
 }
 
 function sundial_button_already_pressed_by(who, buttons) {
-  if(getplayers().size < 4) {
+  if(getPlayers().size < 4) {
     return false;
   }
   for(i = 0; i < buttons.size; i++) {
@@ -343,7 +343,7 @@ function sundial_button() {
     self.dont_rethread = 1;
     self.on_pos = self.origin - anglestoup(self.angles);
     self.off_pos = self.on_pos - (anglestoup(self.angles) * 5.5);
-    self moveto(self.off_pos, 0.01);
+    self moveTo(self.off_pos, 0.01);
   }
   if(isDefined(self.trigger)) {
     self.trigger delete();
@@ -351,14 +351,14 @@ function sundial_button() {
   }
   self.triggering_player = undefined;
   level flag::wait_till("power_on");
-  self moveto(self.on_pos, 0.25);
+  self moveTo(self.on_pos, 0.25);
   wait(0.25);
   buttons = getEntArray("sq_sundial_button", "targetname");
   offset = (anglesToForward(self.angles) * 5) - vectorscale((0, 0, 1), 16);
   self.trigger = spawn("trigger_radius_use", self.on_pos + offset, 0, 48, 32);
-  self.trigger triggerignoreteam();
+  self.trigger triggerIgnoreTeam();
   self.trigger.radius = 48;
-  self.trigger setcursorhint("HINT_NOICON");
+  self.trigger setCursorHint("HINT_NOICON");
   while(true) {
     self.trigger waittill("trigger", who);
     if(sundial_button_already_pressed_by(who, buttons)) {
@@ -368,9 +368,9 @@ function sundial_button() {
       self.triggering_player = who;
       level._sundial_buttons_pressed++;
       self playSound("evt_sq_gen_button");
-      self moveto(self.off_pos, 0.25);
+      self moveTo(self.off_pos, 0.25);
       delay = 1;
-      if(getplayers().size == 1 || getdvarint("") == 2) {
+      if(getPlayers().size == 1 || getdvarint("") == 2) {
         delay = 10;
       }
       wait(delay);
@@ -378,7 +378,7 @@ function sundial_button() {
         wait(0.1);
       }
       self.triggering_player = undefined;
-      self moveto(self.on_pos, 0.25);
+      self moveTo(self.on_pos, 0.25);
       if(level._sundial_buttons_pressed > 0) {
         level._sundial_buttons_pressed--;
       }
@@ -401,7 +401,7 @@ function init_sidequest() {
     back_to_the_future();
     level._sidequest_firsttime = 0;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     var_8e0fe378 = players[i].characterindex;
     if(isDefined(players[i].zm_random_char)) {
@@ -414,7 +414,7 @@ function init_sidequest() {
   }
   zm_temple_sq_brock::create_radio(1);
   init_gongs();
-  wall = getent("sq_wall", "targetname");
+  wall = getEnt("sq_wall", "targetname");
   wall setModel("p7_zm_sha_wall_temple_brick_02");
   wall solid();
   crystals = getEntArray("sq_crystals", "targetname");
@@ -430,7 +430,7 @@ function init_sidequest() {
   level flag::clear("radio_7_played");
   level flag::clear("radio_9_played");
   level flag::clear("meteorite_shrunk");
-  meteorite = getent("sq_meteorite", "targetname");
+  meteorite = getEnt("sq_meteorite", "targetname");
   meteorite setModel("p7_zm_sha_meteorite");
   meteorite ghost();
   if(!isDefined(meteorite.original_origin)) {
@@ -439,7 +439,7 @@ function init_sidequest() {
   }
   meteorite.origin = meteorite.original_origin;
   meteorite.angles = meteorite.original_angles;
-  anti115 = getent("sq_anti_115", "targetname");
+  anti115 = getEnt("sq_anti_115", "targetname");
   anti115 show();
   level thread pap_watcher();
 }
@@ -497,22 +497,22 @@ function complete_sidequest() {
 function spin_115() {
   self endon("picked_up");
   while(true) {
-    self rotateyaw(180, 0.4);
+    self rotateYaw(180, 0.4);
     wait(0.4);
   }
 }
 
 function sidequest_done() {
-  wall = getent("sq_wall", "targetname");
+  wall = getEnt("sq_wall", "targetname");
   wall setModel("p7_zm_sha_wall_temple_brick_02_dmg");
   wall notsolid();
-  anti115 = getent("sq_anti_115", "targetname");
+  anti115 = getEnt("sq_anti_115", "targetname");
   anti115 thread spin_115();
   anti115 playLoopSound("zmb_meteor_loop");
   exploder::exploder("fxexp_520");
   trigger = spawn("trigger_radius_use", anti115.origin, 0, 32, 72);
-  trigger triggerignoreteam();
-  trigger setcursorhint("HINT_NOICON");
+  trigger triggerIgnoreTeam();
+  trigger setCursorHint("HINT_NOICON");
   trigger.radius = 48;
   trigger.height = 72;
   while(true) {
@@ -535,7 +535,7 @@ function sidequest_done() {
   anti115 ghost();
   exploder::stop_exploder("fxexp_520");
   players_far = 0;
-  players = getplayers();
+  players = getPlayers();
   while(players_far < players.size) {
     players_far = 0;
     for(i = 0; i < players.size; i++) {
@@ -544,7 +544,7 @@ function sidequest_done() {
       }
     }
     wait(0.1);
-    players = getplayers();
+    players = getPlayers();
   }
   level flag::clear("pap_override");
   level thread reset_sidequest();
@@ -552,7 +552,7 @@ function sidequest_done() {
 
 function delayed_loser_response() {
   wait(5);
-  losers = getplayers();
+  losers = getPlayers();
   arrayremovevalue(losers, self);
   if(losers.size >= 1) {
     losers[randomintrange(0, losers.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 8);
@@ -586,7 +586,7 @@ function reset_sidequest() {
       crystals[i] delete();
     }
   }
-  dynamite = getent("dynamite", "targetname");
+  dynamite = getEnt("dynamite", "targetname");
   dynamite delete();
   buttons = getEntArray("sq_sundial_button", "targetname");
   for(i = 0; i < buttons.size; i++) {
@@ -596,7 +596,7 @@ function reset_sidequest() {
     }
   }
   start_temple_sidequest();
-  dial = getent("sq_sundial", "targetname");
+  dial = getEnt("sq_sundial", "targetname");
   dial thread sundial_monitor();
 }
 
@@ -659,7 +659,7 @@ function function_7aca917c(var_8182276a = 0) {
 }
 
 function reveal_meteor() {
-  ent = getent("sq_meteorite", "targetname");
+  ent = getEnt("sq_meteorite", "targetname");
   if(isDefined(ent)) {
     ent show();
     exploder::exploder("fxexp_518");
@@ -667,7 +667,7 @@ function reveal_meteor() {
 }
 
 function hide_meteor() {
-  ent = getent("sq_meteorite", "targetname");
+  ent = getEnt("sq_meteorite", "targetname");
   if(isDefined(ent)) {
     ent ghost();
     exploder::stop_exploder("fxexp_518");
@@ -693,11 +693,11 @@ function remove_skel() {
 }
 
 function reset_dynamite() {
-  dynamite = getent("dynamite", "targetname");
+  dynamite = getEnt("dynamite", "targetname");
   dynamite.angles = dynamite.original_angles;
   dynamite.origin = dynamite.original_origin;
   dynamite unlink();
-  dynamite linkto(dynamite.owner_ent, "", dynamite.origin - dynamite.owner_ent.origin, dynamite.angles - dynamite.owner_ent.angles);
+  dynamite linkTo(dynamite.owner_ent, "", dynamite.origin - dynamite.owner_ent.origin, dynamite.angles - dynamite.owner_ent.angles);
   dynamite.dropped = undefined;
   dynamite show();
 }
@@ -724,7 +724,7 @@ function crystal_handler() {
     dynamite.original_origin = dynamite.origin;
     dynamite.original_angles = dynamite.angles;
     dynamite.owner_ent = self;
-    dynamite linkto(self, "", dynamite.origin - self.origin, dynamite.angles - self.angles);
+    dynamite linkTo(self, "", dynamite.origin - self.origin, dynamite.angles - self.angles);
     self.dynamite = dynamite;
   }
   if(!isDefined(self.original_origin)) {
@@ -740,7 +740,7 @@ function crystal_handler() {
   self show();
   self playSound("evt_sq_gen_crystal_start");
   self playLoopSound("evt_sq_gen_crystal_loop", 2);
-  self moveto(self.origin + vectorscale((0, 0, 1), 154), 4, 0.8, 0.4);
+  self moveTo(self.origin + vectorscale((0, 0, 1), 154), 4, 0.8, 0.4);
   self waittill("movedone");
   self stoploopsound(1);
   self playSound("evt_sq_gen_crystal_end");
@@ -836,9 +836,9 @@ function shrink_time() {
   level flag::set("meteorite_shrunk");
   level thread shut_off_all_looping_sounds();
   self playSound("evt_sq_bag_meteor_fall");
-  self moveto(self.origin - vectorscale((0, 0, 1), 120), 2, 0.5);
+  self moveTo(self.origin - vectorscale((0, 0, 1), 120), 2, 0.5);
   self waittill("movedone");
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 4);
 }
 
@@ -852,7 +852,7 @@ function crystal_shrink_logic(hotsauce) {
     for(i = 0; i < bounce_path.size; i++) {
       if(("" + bounce_path[i]) == "M") {
         if(zm_sidequests::sidequest_stage_active("sq", "BaG") && !level flag::get("meteorite_shrunk")) {
-          ent = getent("sq_meteorite", "targetname");
+          ent = getEnt("sq_meteorite", "targetname");
           if(hotsauce) {
             start playSound("evt_sq_bag_crystal_bounce_correct");
             exploder::exploder("fxexp_509");
@@ -860,7 +860,7 @@ function crystal_shrink_logic(hotsauce) {
           } else {
             start playSound("evt_sq_bag_crystal_bounce_fail");
             exploder::exploder("fxexp_529");
-            players = getplayers();
+            players = getPlayers();
             players[randomintrange(0, players.size)] thread zm_audio::create_and_play_dialog("eggs", "quest8", 3);
           }
         } else {
@@ -942,17 +942,17 @@ function pack_a_punch_hide() {
   pap_clip notsolid();
   pap_clip connectpaths();
   pap_machine_trig = level.pack_a_punch.triggers[0];
-  pap_machine_trig enablelinkto();
+  pap_machine_trig enablelinkTo();
   pap_machine = pap_machine_trig.pap_machine;
   if(!isDefined(pap_machine_trig.original_origin)) {
     pap_machine_trig.original_origin = pap_machine_trig.origin;
   }
   link_ent = spawn("script_origin", pap_machine_trig.origin);
   link_ent.angles = pap_machine.angles;
-  pap_machine_trig linkto(link_ent);
+  pap_machine_trig linkTo(link_ent);
   level._original_pap_spot = pap_machine_trig.origin;
-  pap_machine linkto(link_ent);
-  link_ent moveto(link_ent.origin + (vectorscale((0, 0, -1), 350)), 5);
+  pap_machine linkTo(link_ent);
+  link_ent moveTo(link_ent.origin + (vectorscale((0, 0, -1), 350)), 5);
   link_ent waittill("movedone");
   pap_machine_trig unlink();
   pap_machine unlink();
@@ -978,11 +978,11 @@ function pack_a_punch_show() {
   pap_machine = pap_machine_trig.pap_machine;
   link_ent = spawn("script_origin", pap_machine_trig.origin);
   link_ent.angles = pap_machine.angles;
-  pap_machine_trig linkto(link_ent);
-  pap_machine linkto(link_ent);
+  pap_machine_trig linkTo(link_ent);
+  pap_machine linkTo(link_ent);
   pap_machine solid();
   pap_machine show();
-  link_ent moveto(level._original_pap_spot, 5);
+  link_ent moveTo(level._original_pap_spot, 5);
   link_ent waittill("movedone");
   pap_machine_trig unlink();
   pap_machine unlink();

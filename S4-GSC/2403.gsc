@@ -41,7 +41,7 @@ _id_E5D3() {
 
 _id_C05D(var_0) {
   var_0 endon("death");
-  var_1 = scripts\engine\utility::getstruct("enemy_target_vehicle_end_point", "targetname");
+  var_1 = scripts\engine\utility::getStruct("enemy_target_vehicle_end_point", "targetname");
 
   for(;;) {
     if(distance2dsquared(var_1.origin, var_0.origin) <= 22500) {
@@ -122,11 +122,11 @@ _id_53B2(var_0) {
 }
 
 _id_107C(var_0) {
-  var_1 = scripts\engine\utility::getstruct("enemy_hvt_weak_spot_marker", "targetname");
+  var_1 = scripts\engine\utility::getStruct("enemy_hvt_weak_spot_marker", "targetname");
   var_2 = spawn("script_model", var_1.origin);
   var_2 setModel("crate_plastic_box_red");
   var_2.angles = var_1.angles;
-  var_2 linkto(var_0);
+  var_2 linkTo(var_0);
   var_2 thread _id_383B(var_2, var_0);
   var_2 thread _id_7C14(var_2, var_0);
 }
@@ -206,7 +206,7 @@ _id_3476(var_0) {
 
 _id_3475(var_0) {
   if(isDefined(var_0.target)) {
-    var_1 = scripts\engine\utility::getstruct(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStruct(var_0.target, "targetname");
     var_2 = var_1._id_DD31;
     var_2 = scripts\engine\utility::_id_1BD1(var_2);
     var_3 = scripts\engine\utility::_id_6369(var_0.origin, var_2)[0];
@@ -286,8 +286,8 @@ _id_5E13(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 }
 
 _id_1011B(var_0, var_1) {
-  var_2 = vectornormalize(var_0 _meth_8431());
-  var_3 = vectornormalize(var_1.origin - var_0.origin);
+  var_2 = vectorNormalize(var_0 _meth_8431());
+  var_3 = vectorNormalize(var_1.origin - var_0.origin);
   var_4 = vectordot(var_3, var_2);
   return var_4 > 0;
 }
@@ -317,10 +317,10 @@ _id_53B9(var_0, var_1, var_2) {
 _id_634A(var_0, var_1) {
   var_2 = var_0 _meth_8431();
   var_2 = (var_2[0], var_2[1], 0);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_1.origin - var_0.origin;
   var_3 = (var_3[0], var_3[1], 0);
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = vectordot(var_2, var_3);
   var_4 = clamp(var_4, -1, 1);
   return _func_0002(var_4);
@@ -548,10 +548,10 @@ _id_EAE4(var_0) {
   if(distance2dsquared(var_1, (0, 0, 0)) > 40000) {
     var_2 = var_0 _meth_8431();
     var_2 = (var_2[0], var_2[1], 0);
-    var_2 = vectornormalize(var_2);
+    var_2 = vectorNormalize(var_2);
     var_3 = var_1 - var_0.origin;
     var_3 = (var_3[0], var_3[1], 0);
-    var_3 = vectornormalize(var_3);
+    var_3 = vectorNormalize(var_3);
     var_4 = vectordot(var_2, var_3);
     return var_4 < 0;
   }
@@ -745,7 +745,7 @@ _id_53FE(var_0) {
   foreach(var_2 in var_0._id_C835) {
     if(isai(var_2) && isalive(var_2)) {
       var_2 unlink();
-      var_3 = vectornormalize(var_2.origin - var_0.origin);
+      var_3 = vectorNormalize(var_2.origin - var_0.origin);
       var_2 setvelocity(var_3 * 1200);
       var_2 dodamage(var_2.health + 100, var_2.origin);
     }
@@ -781,7 +781,7 @@ _id_5E15(var_0) {
 _id_E777(var_0) {
   var_0 endon("death");
   var_0 _meth_8438(75, 75, 75);
-  _id_107B4(var_0, scripts\engine\utility::getstruct(var_0._id_71F4._id_7218 + "_target", "targetname"));
+  _id_107B4(var_0, scripts\engine\utility::getStruct(var_0._id_71F4._id_7218 + "_target", "targetname"));
 
   for(;;) {
     if(_id_6DED(var_0, level._id_B4E2)) {
@@ -819,10 +819,10 @@ _id_7BEA(var_0, var_1) {
 
   var_2 = var_0 _meth_8431();
   var_2 = (var_2[0], var_2[1], 0);
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_3 = var_1.origin - var_0.origin;
   var_3 = (var_3[0], var_3[1], 0);
-  var_3 = vectornormalize(var_3);
+  var_3 = vectorNormalize(var_3);
   var_4 = vectordot(var_2, var_3);
   var_5 = _func_0002(var_4);
 
@@ -1037,13 +1037,13 @@ _id_53B1(var_0) {
   var_2 = spawn("script_model", var_1 gettagorigin("tag_eye"));
   var_2 setModel("tag_origin");
   var_2.angles = var_1 getplayerangles();
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   var_1._id_7BF0 = var_2;
   var_3 = spawn("script_model", var_1.origin);
   var_3 setModel("tag_origin");
   var_3.angles = var_1 getplayerangles();
   var_1._id_7BF2 = var_3;
-  var_1 linkto(var_3, "tag_origin");
+  var_1 linkTo(var_3, "tag_origin");
   var_3 thread _id_7BF4(var_3);
   var_3 thread _id_7BF3(var_3);
   var_1 thread _id_7BEC(var_1);
@@ -1191,7 +1191,7 @@ _id_EC2C(var_0) {
   var_1 = var_1 + var_3;
   var_4 = level._id_B4E2;
   var_5 = _func_0143("juliet_missile_cp", var_1, var_4.origin);
-  var_5 missile_settargetent(var_4);
+  var_5 missile_settargetEnt(var_4);
   var_5 _meth_8232();
   var_5 thread _id_4676(var_5);
 }
@@ -1234,7 +1234,7 @@ _id_7BF3(var_0) {
   for(;;) {
     var_1 = level._id_B4E2.origin - var_0.origin;
     var_1 = (var_1[0], var_1[1], 0);
-    var_1 = vectornormalize(var_1);
+    var_1 = vectorNormalize(var_1);
     var_0.angles = vectortoangles(var_1);
     waitframe();
   }

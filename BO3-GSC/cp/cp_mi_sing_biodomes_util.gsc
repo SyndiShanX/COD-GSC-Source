@@ -126,7 +126,7 @@ function aigroup_retreat(str_aigroup, str_volume, n_delay_min = 0, n_delay_max =
 }
 
 function set_group_goal_volume(str_volume, n_delay_min = 0, n_delay_max = 0) {
-  volume = getent(str_volume, "targetname");
+  volume = getEnt(str_volume, "targetname");
   assert(isDefined(volume), ("" + str_volume) + "");
   if(isDefined(volume)) {
     foreach(ai in self) {
@@ -237,8 +237,8 @@ function function_cc20e187(str_area, var_da49671a = 0) {
   if(sessionmodeiscampaignzombiesgame()) {
     return;
   }
-  var_9108873 = getent("trig_out_of_bound_" + str_area, "targetname");
-  e_clip = getent("player_clip_" + str_area, "targetname");
+  var_9108873 = getEnt("trig_out_of_bound_" + str_area, "targetname");
+  e_clip = getEnt("player_clip_" + str_area, "targetname");
   if(var_da49671a) {
     var_9108873 triggerenable(0);
     e_clip notsolid();

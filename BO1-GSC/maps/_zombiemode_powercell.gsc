@@ -29,17 +29,17 @@ powercell_precache() {
   PrecacheShader("zom_pack_a_punch_battery_icon");
 }
 powercell_init() {
-  self.trigger = GetEnt(self.target, "targetname");
+  self.trigger = getEnt(self.target, "targetname");
   if(!isDefined(self.trigger)) {
     return;
   }
-  self.trigger SetHintString(&"ZOMBIE_POWERCELL_PICKUP");
-  self.trigger SetCursorHint("HINT_NOICON");
+  self.trigger setHintString(&"ZOMBIE_POWERCELL_PICKUP");
+  self.trigger setCursorHint("HINT_NOICON");
   self thread powercell_wait();
 }
 powercell_wait() {
   self thread powercell_fx();
-  self.trigger UseTriggerRequireLookAt();
+  self.trigger useTriggerRequireLookAt();
   for(;;) {
     self.trigger waittill("trigger", user);
     if(!user.powercellEquipped) {
@@ -67,7 +67,7 @@ powercell_replace() {
   self thread powercell_wait();
 }
 powercell_init_dropoff() {
-  dropoff_trigger = GetEnt("powercell_dropoff", "targetname");
+  dropoff_trigger = getEnt("powercell_dropoff", "targetname");
   if(!isDefined(dropoff_trigger)) {
     return;
   }
@@ -75,7 +75,7 @@ powercell_init_dropoff() {
 }
 powercell_init_hud() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i].powercellHud = create_simple_hud(players[i]);
     players[i].powercellHud.foreground = true;
@@ -108,9 +108,9 @@ powercell_check_for_loss() {
   }
 }
 powercell_dropoff() {
-  self UseTriggerRequireLookAt();
-  self SetHintString(&"ZOMBIE_POWERCELL_DROPOFF");
-  self SetCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setHintString(&"ZOMBIE_POWERCELL_DROPOFF");
+  self setCursorHint("HINT_NOICON");
   self thread powercell_dropoff_done();
   for(;;) {
     self waittill("trigger", user);

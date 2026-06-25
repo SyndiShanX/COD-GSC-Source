@@ -651,10 +651,10 @@ func_B878(var_0, var_1, var_2) {
   var_0.health = 2000;
   var_0 glinton(#animtree);
   var_0.var_BEED = scripts\engine\utility::spawn_tag_origin();
-  var_0.var_BEED linkto(var_0, "tag_origin", (500, 0, 0), (0, 0, 0));
+  var_0.var_BEED linkTo(var_0, "tag_origin", (500, 0, 0), (0, 0, 0));
   var_0.var_5978 = spawn("script_model", var_1.origin);
   var_0.var_5978 setModel("veh_mil_air_ca_missile_boat_turret_door");
-  var_0.var_5978 linkto(var_1, var_2, (0, 0, 0), (0, 0, 0));
+  var_0.var_5978 linkTo(var_1, var_2, (0, 0, 0), (0, 0, 0));
   var_0.var_5978.var_1BE4 = 1;
   var_0.var_5978.state = "open";
   var_0.var_5978 glinton(#animtree);
@@ -711,7 +711,7 @@ func_CA98(var_0) {
   if(!isDefined(self.var_B04A) && isDefined(self.var_10241.var_6D32)) {
     self.var_B04A = spawn("script_origin", self gettagorigin("TAG_FLASH"));
     self.var_B04A.angles = self gettagangles("TAG_FLASH");
-    self.var_B04A linkto(self);
+    self.var_B04A linkTo(self);
     self.var_B04A playLoopSound(self.var_10241.var_6D32);
   }
 }

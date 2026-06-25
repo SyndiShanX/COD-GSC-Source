@@ -95,7 +95,7 @@ _id_4844(var_0) {
           var_2 = getnode(var_2.target, "targetname");
           break;
         case "ent":
-          var_2 = getent(var_2.target, "targetname");
+          var_2 = getEnt(var_2.target, "targetname");
           break;
         default:
       }
@@ -174,7 +174,7 @@ _id_4849(var_0, var_1) {
     default:
   }
 
-  var_4 = spawnvehicle(var_3, "plane", "truck", var_2.origin, var_2.angles);
+  var_4 = spawnVehicle(var_3, "plane", "truck", var_2.origin, var_2.angles);
 
   if(var_1 == "truck") {
     var_4 _id_484A();
@@ -195,7 +195,7 @@ _id_484B(var_0, var_1) {
   self endon("death");
 
   if(isDefined(var_0)) {
-    var_1 = getent(var_0, "targetname");
+    var_1 = getEnt(var_0, "targetname");
   }
   var_2 = getnode(var_1.target, "targetname");
   self._id_484C = var_1;
@@ -291,7 +291,7 @@ _id_4854(var_0) {
 }
 
 _id_4855(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 waittill("trigger");
   var_1 common_scripts\utility::trigger_off();
 }
@@ -307,7 +307,7 @@ _id_4856(var_0, var_1, var_2) {
 }
 
 _id_4857(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_1 notify("trigger", level.player);
   var_1 common_scripts\utility::trigger_off();
 }
@@ -485,7 +485,7 @@ _id_4874(var_0, var_1) {
 
 _id_4875(var_0, var_1, var_2) {
   if(!isDefined(var_2)) {
-    var_2 = getent(var_1, "targetname");
+    var_2 = getEnt(var_1, "targetname");
   }
   if(var_0 == "all") {
     var_3 = getaiarray();
@@ -509,7 +509,7 @@ _id_4876(var_0, var_1, var_2, var_3) {
     var_3[0] = level._id_4877;
   }
 
-  var_4 = getent(var_0, "targetname");
+  var_4 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_2)) {
     var_2 = 0;
@@ -659,7 +659,7 @@ _id_4880() {
 
 _id_4881(var_0) {
   self endon("death");
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = getnode(var_1.target, "targetname");
   self setgoalnode(var_2);
   self setgoalvolume(var_1);
@@ -681,10 +681,10 @@ _id_4042(var_0, var_1, var_2) {
     self playSound(level.scr_sound["snd_wood_door_kick"]);
   }
   if(self.classname == "script_brushmodel") {
-    var_3 = getent(self.target, "targetname");
+    var_3 = getEnt(self.target, "targetname");
   } else {
-    var_4 = getent(self.target, "targetname");
-    var_3 = getent(var_4.script_linkto, "script_linkname");
+    var_4 = getEnt(self.target, "targetname");
+    var_3 = getEnt(var_4.script_linkto, "script_linkname");
   }
 
   switch (var_0) {
@@ -696,7 +696,7 @@ _id_4042(var_0, var_1, var_2) {
       radiusdamage(self.origin, 56, level._id_4044, level._id_4043);
       break;
     case "kicked":
-      self rotateyaw(-175, 0.5);
+      self rotateYaw(-175, 0.5);
       _id_4045(var_2);
       break;
     case "kicked_down":
@@ -704,7 +704,7 @@ _id_4042(var_0, var_1, var_2) {
       _id_4045(var_2);
       break;
     default:
-      self rotateyaw(-175, 0.5);
+      self rotateYaw(-175, 0.5);
       _id_4045();
       break;
   }
@@ -717,7 +717,7 @@ _id_4045(var_0) {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
   } else {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
     var_1 hide();
     var_1 notsolid();
     var_1 connectpaths();
@@ -727,7 +727,7 @@ _id_4045(var_0) {
 _id_4046() {
   var_0 = anglesToForward(self.angles);
   var_1 = (var_0[0] * 20, var_0[1] * 20, var_0[2] * 20);
-  self moveto(self.origin + var_1, 0.5, 0, 0.5);
+  self moveTo(self.origin + var_1, 0.5, 0, 0.5);
   self rotatepitch(90, 0.45, 0.4);
   wait 0.449;
   self rotatepitch(-4, 0.2, 0, 0.2);

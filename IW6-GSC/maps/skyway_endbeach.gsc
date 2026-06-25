@@ -26,8 +26,8 @@ hint_drag() {
 
 section_post_inits() {
   level._endbeach = spawnStruct();
-  level._endbeach.ally_start = common_scripts\utility::getstruct("ally1_start_end_beach", "targetname");
-  level._endbeach.player_start = common_scripts\utility::getstruct("player_start_end_beach", "targetname");
+  level._endbeach.ally_start = common_scripts\utility::getStruct("ally1_start_end_beach", "targetname");
+  level._endbeach.player_start = common_scripts\utility::getStruct("player_start_end_beach", "targetname");
 
   if(isDefined(level._endbeach.player_start)) {
     var_0 = ["surface", "rock"];
@@ -48,7 +48,7 @@ section_post_inits() {
     var_4 = ["end_dest1", "end_dest2", "end_dest3", "end_dest4", "end_dest5", "end_dest6", "end_dest7", "end_dest8", "end_dest9", "end_dest10", "end_dest11", "end_dest12", "end_cruiser1", "end_cruiser2", "end_cruiser3", "end_dvora1", "end_dvora2", "end_dvora3", "end_dvora4"];
 
     foreach(var_6 in var_4) {
-      var_7 = getent(var_6, "targetname");
+      var_7 = getEnt(var_6, "targetname");
       var_7.animname = var_6;
       var_7 maps\_anim::setanimtree();
       level._endbeach.boats = common_scripts\utility::array_add(level._endbeach.boats, var_7);
@@ -105,13 +105,13 @@ main() {
   var_3 = [];
 
   for(var_4 = 0; var_4 < 3; var_4++) {
-    var_3 = common_scripts\utility::array_add(var_3, getent("model_rog_hit_ref_end" + (var_4 + 1), "targetname"));
+    var_3 = common_scripts\utility::array_add(var_3, getEnt("model_rog_hit_ref_end" + (var_4 + 1), "targetname"));
   }
 
   var_5 = [];
 
   for(var_4 = 0; var_4 < 10; var_4++) {
-    var_5 = common_scripts\utility::array_add(var_5, getent("model_rog_hit_ref_end_far" + (var_4 + 1), "targetname"));
+    var_5 = common_scripts\utility::array_add(var_5, getEnt("model_rog_hit_ref_end_far" + (var_4 + 1), "targetname"));
   }
 
   thread dialogue_intro();
@@ -139,7 +139,7 @@ main() {
   var_10 = [var_7, var_8, var_9];
   var_11 = [var_7, var_8, var_9, var_6];
   var_7 show();
-  var_12 = common_scripts\utility::getstruct("beach_drag", "script_noteworthy");
+  var_12 = common_scripts\utility::getStruct("beach_drag", "script_noteworthy");
   thread maps\skyway_audio::sfx_beach_transition();
 
   if(level.start_point != "end_beach_final") {
@@ -328,7 +328,7 @@ pit_of_despair(var_0) {
   var_3 = maps\_utility::spawn_anim_model("sun_pit");
   var_4 = maps\_utility::spawn_anim_model("moon_pit");
   var_5 = maps\_utility::spawn_anim_model("moonlight_pit");
-  var_6 = common_scripts\utility::getstruct("pit_of_despair", "script_noteworthy");
+  var_6 = common_scripts\utility::getStruct("pit_of_despair", "script_noteworthy");
   level.player lerpviewangleclamp(0.05, 0, 0, 0, 0, 0, 0);
   level.player lerpfov(90, 0.05);
   wait 0.2;
@@ -714,7 +714,7 @@ event_player_grabs_knife(var_0) {
   level waittill("notify_beach_knife_grab");
   var_1 = maps\_utility::spawn_anim_model("beach_knife", level.player_rig gettagorigin("tag_knife_attach2"));
   var_1.angles = level.player_rig gettagangles("tag_knife_attach2");
-  var_1 linkto(level.player_rig, "tag_knife_attach2");
+  var_1 linkTo(level.player_rig, "tag_knife_attach2");
   level waittill("delete_knife");
   var_1 unlink();
   var_1 delete();
@@ -739,7 +739,7 @@ event_player_arm_break() {
   maps\_utility::vision_set_changes("skyway_beach_pain", 0);
   maps\_utility::vision_set_changes("skyway_beach_sick", 8);
   earthquake(1.0, 0.6, level.player.origin, 128);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   level.player shellshock("skyway_beach_pain", 10);
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_ent, 1, 0, 0.05, 0.0, 3);
 }
@@ -831,7 +831,7 @@ rog_hits_solo() {
   playFXOnTag(common_scripts\utility::getfx("rog_impact_end_01"), self, "tag_shockwave");
   thread maps\skyway_fx::fx_playerview_fieryflash_01();
   earthquake(0.3, 1.5, level.player.origin, 100000);
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_rog_ent, 0.8, 0.0, 0.2, 0.0, 2.0);
 }
 
@@ -844,7 +844,7 @@ rog_hits_solo_far() {
     playFXOnTag(common_scripts\utility::getfx("rog_impact_end_01"), self, "tag_shockwave");
     thread maps\skyway_fx::fx_playerview_fieryflash_01();
     earthquake(0.2, 1.3, level.player.origin, 100000);
-    level.player playrumbleonentity("damage_light");
+    level.player playRumbleOnEntity("damage_light");
     thread maps\skyway_util::player_rumble_bump(level.player_rumble_rog_ent, 0.4, 0.0, 0.2, 0.0, 2.0);
   }
 }

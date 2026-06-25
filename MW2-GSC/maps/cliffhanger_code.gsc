@@ -117,7 +117,7 @@ global_inits() {
   speedy_littlebird_spawners = getEntArray("speedy_littlebird_spawner", "script_noteworthy");
   array_thread(speedy_littlebird_spawners, ::add_spawn_function, ::speedy_littlebird_spawner_think);
 
-  ending_heli = GetEnt("ending_heli", "script_noteworthy");
+  ending_heli = getEnt("ending_heli", "script_noteworthy");
   ending_heli add_spawn_function(::ending_heli_think);
 
   magic_bullet_spawners = getEntArray("magic_bullet_spawner", "script_noteworthy");
@@ -186,11 +186,11 @@ global_inits() {
 
   level.radioForcedTransmissionQueue = [];
   level.player_radio = spawn("script_origin", level.player.origin);
-  level.player_radio LinkTo(level.player);
+  level.player_radio linkTo(level.player);
   level.player_radio_interupt = spawn("script_origin", level.player.origin);
-  level.player_radio_interupt LinkTo(level.player);
+  level.player_radio_interupt linkTo(level.player);
 
-  ending_heli_fly_off_triggers = GetEnt("ending_heli_fly_off_trigger", "targetname");
+  ending_heli_fly_off_triggers = getEnt("ending_heli_fly_off_trigger", "targetname");
   ending_heli_fly_off_triggers thread ending_heli_fly_off_trigger_think();
 
   triggers = getEntArray("end_heli_trigger", "targetname");
@@ -399,7 +399,7 @@ return_spawning() {
   }
 
   foreach(noteworthy_name in to_be_spawned) {
-    guy = GetEnt(noteworthy_name, "script_noteworthy");
+    guy = getEnt(noteworthy_name, "script_noteworthy");
     if(isDefined(guy)) {
       guy.count = 1;
       guy = guy spawn_ai();
@@ -409,7 +409,7 @@ return_spawning() {
 
 spawn_if_dead() {
   if(flag(self.dead_flag)) {
-    GetEnt(self.triggername, "targetname") notify("trigger");
+    getEnt(self.triggername, "targetname") notify("trigger");
   }
 }
 
@@ -464,7 +464,7 @@ price_teleport_fallback(flag, loc_ent, dist) {
   player = get_closest_player(level.price.origin);
   p_dist = Distance(player.origin, level.price.origin);
   if(p_dist > dist) {
-    loc_ent = GetEnt(loc_ent, "targetname");
+    loc_ent = getEnt(loc_ent, "targetname");
     level.price Teleport(loc_ent.origin, loc_ent.angles);
   } else {
     PrintLn(" skipping price teleport, distance: " + p_dist);
@@ -616,12 +616,12 @@ stealth_music_busted_loop() {
 }
 
 setup_welders() {
-  light = GetEnt("welding_light", "targetname");
+  light = getEnt("welding_light", "targetname");
   light SetLightIntensity(0);
 
   flag_wait("starting_hanger_backdoor_path");
 
-  node = GetEnt("mig_origin", "targetname");
+  node = getEnt("mig_origin", "targetname");
 
   welder_wing = get_guy_with_script_noteworthy_from_spawner("welder_wing");
   welder_wing.animname = "welder_wing";
@@ -649,7 +649,7 @@ setup_welders() {
 }
 
 flashing_welding_death_handler(welder) {
-  light = GetEnt("welding_light", "targetname");
+  light = getEnt("welding_light", "targetname");
   welder waittill("death");
 
   light stop_loop_sound_on_entity("scn_cliffhanger_welders_loop");
@@ -684,7 +684,7 @@ flashing_welding_fx_only(welder, tag) {
 flashing_welding(welder, tag) {
   welder endon("death");
 
-  light = GetEnt("welding_light", "targetname");
+  light = getEnt("welding_light", "targetname");
   light SetLightColor((0.909804, 0.482353, 0.200000));
 
   light thread play_loop_sound_on_entity("scn_cliffhanger_welders_loop");
@@ -729,7 +729,7 @@ flashing_welding(welder, tag) {
 mig_landing1() {
   flag_wait("mig_landing");
 
-  mig_spawner = GetEnt("mig1", "targetname");
+  mig_spawner = getEnt("mig1", "targetname");
   mig = mig_spawner spawn_vehicle();
   mig.animname = "mig";
   node = GetNode("jet_landing", "targetname");
@@ -877,7 +877,7 @@ tent_1_patrollers() {
 tent_1_crate_patroller() {
   self endon("death");
 
-  nearDoorStruct = getstruct("struct_crate_patroller_enterhut", "targetname");
+  nearDoorStruct = getStruct("struct_crate_patroller_enterhut", "targetname");
 
   while(1) {
     nearDoorStruct waittill("trigger", other);
@@ -1120,7 +1120,7 @@ chatter_play_sound(alias) {
 
   org.origin = self.origin;
   org.angles = self.angles;
-  org LinkTo(self);
+  org linkTo(self);
 
   org playSound(alias, "sounddone");
 
@@ -1172,12 +1172,12 @@ camp_smartstance_settings() {
 }
 
 camp_leaner() {
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
   node stealth_ai_idle_and_react(self, "lean_balcony", "lean_react");
 }
 
 twostory_sitter() {
-  node = getstruct(self.target, "targetname");
+  node = getStruct(self.target, "targetname");
   node stealth_ai_idle_and_react(self, "sit_idle", "sit_react");
 }
 
@@ -1222,8 +1222,8 @@ c4_player_obj() {
   }
 
   self MakeUsable();
-  self SetCursorHint("HINT_ACTIVATE");
-  self SetHintString(level.strings["hint_c4_plant"]);
+  self setCursorHint("HINT_ACTIVATE");
+  self setHintString(level.strings["hint_c4_plant"]);
 
   self waittill("trigger");
 
@@ -1311,7 +1311,7 @@ ch_teleport_player(name) {
     nodes[nodes.size] = ent;
   }
 
-  level.player SetOrigin(nodes[0].origin);
+  level.player setOrigin(nodes[0].origin);
   level.player SetPlayerAngles(nodes[0].angles);
 }
 
@@ -1341,13 +1341,13 @@ objective_enter_camp() {
 }
 
 objective_c4_both() {
-  fuel_tank_c4 = GetEnt("fuel_tank_c4", "script_noteworthy");
+  fuel_tank_c4 = getEnt("fuel_tank_c4", "script_noteworthy");
   origin = fuel_tank_c4.origin;
 
   registerObjective("obj_fuel", &"CLIFFHANGER_OBJ_C4", origin);
   setObjectiveState("obj_fuel", "current");
 
-  mig_c4 = GetEnt("mig_c4", "script_noteworthy");
+  mig_c4 = getEnt("mig_c4", "script_noteworthy");
   origin = mig_c4.origin;
 
   registerObjective("obj_mig", &"CLIFFHANGER_OBJ_C4_MIG", origin);
@@ -1366,7 +1366,7 @@ objective_c4_both() {
 }
 
 objective_c4_fuel_tanks() {
-  fuel_tank_c4 = GetEnt("fuel_tank_c4", "script_noteworthy");
+  fuel_tank_c4 = getEnt("fuel_tank_c4", "script_noteworthy");
   origin = fuel_tank_c4.origin;
 
   registerObjective("obj_fuel", &"CLIFFHANGER_OBJ_C4", origin);
@@ -1378,7 +1378,7 @@ objective_c4_fuel_tanks() {
 }
 
 objective_c4_mig() {
-  mig_c4 = GetEnt("mig_c4", "script_noteworthy");
+  mig_c4 = getEnt("mig_c4", "script_noteworthy");
   origin = mig_c4.origin;
 
   registerObjective("obj_mig", &"CLIFFHANGER_OBJ_C4_MIG", origin);
@@ -1393,7 +1393,7 @@ objective_c4_mig() {
 }
 
 objective_c4_fuel_station() {
-  mig_c4 = GetEnt("mig_c4", "script_noteworthy");
+  mig_c4 = getEnt("mig_c4", "script_noteworthy");
   origin = mig_c4.origin;
 
   registerObjective("obj_mig", &"CLIFFHANGER_OBJ_FUEL_STATION", origin);
@@ -1430,7 +1430,7 @@ objective_satellite() {
   flag_wait("player_in_hanger");
   wait(3.5);
 
-  dsm = GetEnt("dsm", "targetname");
+  dsm = getEnt("dsm", "targetname");
 
   setObjectiveLocation("obj_satellite", dsm.origin);
   flag_wait("keyboard_used");
@@ -1472,7 +1472,7 @@ objective_snowmobile() {
 
   setObjectiveState("obj_snowmobile", "done");
 
-  objective_end_org = GetEnt("objective_end_org", "targetname");
+  objective_end_org = getEnt("objective_end_org", "targetname");
   ent = spawn("script_origin", (0, 0, 0));
   ent thread objective_ent_leads_player();
 
@@ -1690,43 +1690,43 @@ ShootEnemyWrapper_SSNotify() {
 }
 
 climbing_test_init() {
-  level.price_a = GetEnt("price_a", "targetname");
+  level.price_a = getEnt("price_a", "targetname");
   level.price_a make_hero();
   level.price_a.animname = "price_a";
 
-  level.price_b = GetEnt("price_b", "targetname");
+  level.price_b = getEnt("price_b", "targetname");
   level.price_b make_hero();
   level.price_b.animname = "price_b";
 
-  level.price_c = GetEnt("price_c", "targetname");
+  level.price_c = getEnt("price_c", "targetname");
   level.price_c make_hero();
   level.price_c.animname = "price_c";
 
-  level.price_d = GetEnt("price_d", "targetname");
+  level.price_d = getEnt("price_d", "targetname");
   level.price_d make_hero();
   level.price_d.animname = "price_d";
 
-  level.cake_a = GetEnt("cake_a", "targetname");
+  level.cake_a = getEnt("cake_a", "targetname");
   level.cake_a make_hero();
   level.cake_a.animname = "cake_a";
 
-  level.cake_b = GetEnt("cake_b", "targetname");
+  level.cake_b = getEnt("cake_b", "targetname");
   level.cake_b make_hero();
   level.cake_b.animname = "cake_b";
 
-  level.cake_c = GetEnt("cake_c", "targetname");
+  level.cake_c = getEnt("cake_c", "targetname");
   level.cake_c make_hero();
   level.cake_c.animname = "cake_c";
 
-  level.cake_d = GetEnt("cake_d", "targetname");
+  level.cake_d = getEnt("cake_d", "targetname");
   level.cake_d make_hero();
   level.cake_d.animname = "cake_d";
 
-  level.price_jump = GetEnt("price_jump", "targetname");
+  level.price_jump = getEnt("price_jump", "targetname");
   level.price_jump make_hero();
   level.price_jump.animname = "price_jump";
 
-  climbing_ref = GetEnt("climbing_ref", "targetname");
+  climbing_ref = getEnt("climbing_ref", "targetname");
 
   guys = [];
   guys[guys.size] = level.price_a;
@@ -1891,7 +1891,7 @@ dialog_price_battlechatter() {
         start_angles = level.player.angles;
         end_origin = enemy.origin;
 
-        normal = VectorNormalize(end_origin - start_origin);
+        normal = vectorNormalize(end_origin - start_origin);
         forward = anglesToForward(start_angles);
         dot = VectorDot(forward, normal);
 
@@ -2042,7 +2042,7 @@ dialog_hes_mine_think() {
 
   if(IsAlive(self)) {
     aim_spot = self getEye();
-    vec = VectorNormalize(level.price.origin - aim_spot);
+    vec = vectorNormalize(level.price.origin - aim_spot);
     vec *= 20;
     start_spot = aim_spot + vec;
     MagicBullet(level.price.weapon, start_spot, aim_spot);
@@ -2150,7 +2150,7 @@ dialog_near_fueling_station() {
   flag_wait("give_c4_obj");
   level.player endon("death");
   level endon("one_c4_planted");
-  obj_origin = GetEnt("base_c4_models", "targetname").origin;
+  obj_origin = getEnt("base_c4_models", "targetname").origin;
 
   level.player waittill_in_range(obj_origin, 600);
 
@@ -2485,7 +2485,7 @@ price_move_speed_think(pushdist, sprintdist, stopdist, jogdist, crouchdist) {
     }
 
     vec = anglesToForward(self.angles);
-    vec2 = VectorNormalize((player.origin - self.origin));
+    vec2 = vectorNormalize((player.origin - self.origin));
     vecdot = VectorDot(vec, vec2);
 
     dist2rd = DistanceSquared(self.origin, player.origin);
@@ -2692,10 +2692,10 @@ vehicle_tumble_in_avalanche() {
   self endon("death");
   self waittill_either("veh_collision", "driver_died");
 
-  avalanche_progress_org = GetEnt("avalanche_progress_org", "targetname");
-  targ = GetEnt(avalanche_progress_org.target, "targetname");
+  avalanche_progress_org = getEnt("avalanche_progress_org", "targetname");
+  targ = getEnt(avalanche_progress_org.target, "targetname");
 
-  direction = VectorNormalize(targ.origin - avalanche_progress_org.origin);
+  direction = vectorNormalize(targ.origin - avalanche_progress_org.origin);
   delayThread(13, ::self_delete);
 
   for(;;) {
@@ -2839,7 +2839,7 @@ keyboard_nag() {
 
 init_slope_trees() {
   slope_trees = getEntArray("slope_tree", "targetname");
-  top_of_hill = getstruct("top_of_hill", "targetname");
+  top_of_hill = getStruct("top_of_hill", "targetname");
 
   slope_trees = get_array_of_closest(top_of_hill.origin, slope_trees);
 
@@ -2873,7 +2873,7 @@ run_in_and_shout() {
   self SetGoalPos(self.origin);
   self.goalradius = 64;
   level waittill("kill_price");
-  self StopAnimScripted();
+  self StopanimScripted();
   self.ignoreall = false;
   for(;;) {
     self Shoot();
@@ -2940,10 +2940,10 @@ brawl_interupted(price, guy) {
   level endon("locker_brawl_becomes_uninteruptable");
   guy waittill("death");
   price notify("single anim", "end");
-  price StopAnimScripted();
+  price StopanimScripted();
   price.cutoff_brawl = true;
 
-  locker_brawl = GetEnt("locker_brawl", "targetname");
+  locker_brawl = getEnt("locker_brawl", "targetname");
   foreach(locker in level.lockers) {
     locker notify("single anim", "end");
     locker_brawl anim_first_frame(level.lockers, "locker_brawl");
@@ -2957,8 +2957,8 @@ cliffhanger_locker_brawl() {
     level.truck_patrol Delete();
   }
 
-  locker_brawl_spawner = GetEnt("locker_brawl_spawner", "targetname");
-  locker_brawl = GetEnt("locker_brawl", "targetname");
+  locker_brawl_spawner = getEnt("locker_brawl_spawner", "targetname");
+  locker_brawl = getEnt("locker_brawl", "targetname");
   locker_brawl anim_reach_solo(level.price, "locker_brawl");
 
   level.price.cutoff_brawl = true;
@@ -2984,7 +2984,7 @@ cliffhanger_locker_brawl() {
   guys[1] = level.price;
   guys = array_combine(guys, level.lockers);
 
-  org = GetEnt("price_locker_brawl_end_dest", "targetname");
+  org = getEnt("price_locker_brawl_end_dest", "targetname");
   level.price SetGoalPos(org.origin);
 
   locker_brawl thread anim_single(guys, "locker_brawl");
@@ -2992,7 +2992,7 @@ cliffhanger_locker_brawl() {
 }
 
 price_anims_satellite() {
-  satelite_sequence_node = GetEnt("satelite_sequence", "targetname");
+  satelite_sequence_node = getEnt("satelite_sequence", "targetname");
   thread price_goes_to_satellite();
   flag_wait("keyboard_used");
   satelite_sequence_node notify("stop_satellite_idle");
@@ -3002,7 +3002,7 @@ price_anims_satellite() {
 price_puts_his_hands_up() {
   level.price endon("death");
 
-  price_capture_node = GetEnt("price_capture_node", "targetname");
+  price_capture_node = getEnt("price_capture_node", "targetname");
 
   price_capture_node thread anim_loop_solo(level.price, "capture_idle", "stop_capture_idle");
 
@@ -3027,7 +3027,7 @@ price_goes_to_satellite() {
   }
   level endon("keyboard_used");
 
-  satelite_sequence_node = GetEnt("satelite_sequence", "targetname");
+  satelite_sequence_node = getEnt("satelite_sequence", "targetname");
   if(isDefined(level.price.cutoff_brawl)) {
     satelite_sequence_node anim_reach_solo(level.price, "enter");
   }
@@ -3040,7 +3040,7 @@ price_goes_to_satellite() {
 }
 
 set_first_alert_patrol(struct_targetname) {
-  struct = getstruct(struct_targetname, "targetname");
+  struct = getStruct(struct_targetname, "targetname");
   self.stealth_first_alert_new_patrol_path = struct;
 }
 
@@ -3058,7 +3058,7 @@ price_starts_moving() {
     set_custom_move_start_transition(level.price, "casual_crouch_exit");
   }
 
-  GetEnt("price_starts_moving", "targetname") notify("trigger");
+  getEnt("price_starts_moving", "targetname") notify("trigger");
   level.price.fixednode = false;
   level.price SetLookAtEntity();
 
@@ -3198,7 +3198,7 @@ price_climbs_ledge() {
   price_ledgeclimb[0] anim_single_solo(level.price, "ledge_climb");
 
   level.price enable_ai_color();
-  GetEnt("price_position_on_ridge", "targetname") notify("trigger");
+  getEnt("price_position_on_ridge", "targetname") notify("trigger");
 }
 
 price_goes_in_two() {
@@ -3506,7 +3506,7 @@ price_died_you_lose() {
   wait(0.5);
   if(IsAlive(level.price)) {
     level.price.allowdeath = true;
-    level.price StopAnimScripted();
+    level.price StopanimScripted();
     level.price Kill();
   }
   wait(2.5);
@@ -3578,7 +3578,7 @@ price_talks_about_compromised() {
   level.player endon("player_shot");
   wait(2);
 
-  level.petrov = GetEnt("petrov_org", "targetname");
+  level.petrov = getEnt("petrov_org", "targetname");
   level.petrov.animname = "price";
 
   level.petrov dialogue_queue("petrov");
@@ -3660,7 +3660,7 @@ soap_opens_hanger_door() {
   level.price dialogue_queue("letsgo");
   level.price enable_cqbwalk();
 
-  anim_ent = GetEnt("hanger_entrance_animent", "targetname");
+  anim_ent = getEnt("hanger_entrance_animent", "targetname");
   anim_ent anim_reach_and_approach_solo(level.price, "hunted_open_barndoor", undefined, "Cover Right");
 
   anim_ent thread anim_single_solo(level.price, "hunted_open_barndoor");
@@ -3670,13 +3670,13 @@ soap_opens_hanger_door() {
   level.lockers = [];
   level.lockers[level.lockers.size] = locker_1;
   level.lockers[level.lockers.size] = locker_2;
-  locker_brawl = GetEnt("locker_brawl", "targetname");
+  locker_brawl = getEnt("locker_brawl", "targetname");
   locker_brawl anim_first_frame(level.lockers, "locker_brawl");
 
-  door = GetEnt("hanger_entrance_door", "targetname");
+  door = getEnt("hanger_entrance_door", "targetname");
   attachments = getEntArray(door.target, "targetname");
   for(i = 0; i < attachments.size; i++) {
-    attachments[i] LinkTo(door);
+    attachments[i] linkTo(door);
   }
   door hunted_style_door_open();
 
@@ -3763,12 +3763,12 @@ explosion_reaction() {
 }
 
 open_hanger_doors() {
-  hangar_leftdoor_goal = GetEnt("hangar_leftdoor_goal", "targetname");
-  hangar_leftdoor = GetEnt("hangar_leftdoor", "targetname");
+  hangar_leftdoor_goal = getEnt("hangar_leftdoor_goal", "targetname");
+  hangar_leftdoor = getEnt("hangar_leftdoor", "targetname");
   hangar_leftdoor thread door_slides_open(hangar_leftdoor_goal);
 
-  hangar_rightdoor_goal = GetEnt("hangar_rightdoor_goal", "targetname");
-  hangar_rightdoor = GetEnt("hangar_rightdoor", "targetname");
+  hangar_rightdoor_goal = getEnt("hangar_rightdoor_goal", "targetname");
+  hangar_rightdoor = getEnt("hangar_rightdoor", "targetname");
   hangar_rightdoor thread door_slides_open(hangar_rightdoor_goal);
 
   hangar_leftdoor playSound("door_hanger_metal_open");
@@ -3778,7 +3778,7 @@ open_hanger_doors() {
 door_slides_open(door_goal) {
   dif = 0.985;
   fraction_door_goal = self.origin * dif + door_goal.origin * (1 - dif);
-  self MoveTo(fraction_door_goal, 1.15, 0.4, 0.7);
+  self moveTo(fraction_door_goal, 1.15, 0.4, 0.7);
   self ConnectPaths();
   self playSound("door_hanger_metal_open");
 
@@ -3786,18 +3786,18 @@ door_slides_open(door_goal) {
   dif = 0.15;
   fraction_door_goal = self.origin * dif + door_goal.origin * (1 - dif);
   timer = 4.2;
-  self MoveTo(fraction_door_goal, timer, 1, 0.4);
+  self moveTo(fraction_door_goal, timer, 1, 0.4);
   wait(timer);
-  self DisconnectPaths();
+  self disconnectPaths();
 }
 
 instant_open_hangar_doors() {
-  hangar_leftdoor_goal = GetEnt("hangar_leftdoor_goal", "targetname");
-  hangar_leftdoor = GetEnt("hangar_leftdoor", "targetname");
+  hangar_leftdoor_goal = getEnt("hangar_leftdoor_goal", "targetname");
+  hangar_leftdoor = getEnt("hangar_leftdoor", "targetname");
   hangar_leftdoor thread door_instantly_open(hangar_leftdoor_goal);
 
-  hangar_rightdoor_goal = GetEnt("hangar_rightdoor_goal", "targetname");
-  hangar_rightdoor = GetEnt("hangar_rightdoor", "targetname");
+  hangar_rightdoor_goal = getEnt("hangar_rightdoor_goal", "targetname");
+  hangar_rightdoor = getEnt("hangar_rightdoor", "targetname");
   hangar_rightdoor thread door_instantly_open(hangar_rightdoor_goal);
 }
 
@@ -3805,7 +3805,7 @@ door_instantly_open(door_goal) {
   dif = 0.15;
   fraction_door_goal = self.origin * dif + door_goal.origin * (1 - dif);
   self.origin = fraction_door_goal;
-  self DisconnectPaths();
+  self disconnectPaths();
 }
 
 dont_shoot_till_explosion() {

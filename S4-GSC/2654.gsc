@@ -132,7 +132,7 @@ _id_3FA9(var_0, var_1) {
   var_3._id_CB76 = 3;
   var_3._id_7EB2 = 0;
   var_3 thread _id_32F4();
-  var_3._id_C021 = getent("remote_uav_range", "targetname");
+  var_3._id_C021 = getEnt("remote_uav_range", "targetname");
 
   if(!isDefined(var_3._id_C021)) {
     var_4 = scripts\cp_mp\utility\killstreak_utility::_id_6ADB();
@@ -143,7 +143,7 @@ _id_3FA9(var_0, var_1) {
   var_3._id_E061 = spawn("script_origin", var_3.origin);
   var_3._id_E061.angles = var_3.angles;
   var_3._id_E061.origin = var_3.origin;
-  var_3._id_E061 linkto(var_3);
+  var_3._id_E061 linkTo(var_3);
   var_3._id_E061 playLoopSound("recondrone_idle_high");
   return var_3;
 }
@@ -372,7 +372,7 @@ _id_E71D(var_0, var_1, var_2, var_3) {
 _id_9704() {
   var_0 = spawn("script_origin", self.origin);
   var_0 hide();
-  self playerlinkto(var_0);
+  self playerlinkTo(var_0);
   thread _id_396C(var_0);
 }
 
@@ -407,7 +407,7 @@ _id_403D(var_0, var_1, var_2, var_3, var_4) {
   var_5 _id_0812::_id_C2B2("Killstreak_Air", var_1);
   var_5.maxhealth = 250;
   var_5._id_CC54 = spawn("script_model", var_3);
-  var_5._id_CC54 linkto(var_5, "tag_origin", (0, 0, -160), (0, 0, 0));
+  var_5._id_CC54 linkTo(var_5, "tag_origin", (0, 0, -160), (0, 0, 0));
   var_5._id_CC54 _meth_8223(var_1);
   var_5._id_DE57 = 0;
   var_5._id_7EB2 = 0;
@@ -440,7 +440,7 @@ _id_C361(var_0, var_1, var_2) {
     scripts\mp\utility\player::setthirdpersondof(0);
   }
 
-  self cameralinkto(var_1, "tag_origin");
+  self cameralinkTo(var_1, "tag_origin");
   self remotecontrolvehicle(var_1);
   thread _id_C35E(var_1);
   thread _id_C364(var_1);
@@ -683,7 +683,7 @@ _id_C365(var_0, var_1, var_2) {
 _id_C345(var_0, var_1) {
   if(isDefined(var_1._id_F904)) {
     var_2 = anglesToForward(self getplayerangles());
-    var_3 = vectornormalize(var_1.origin - var_0 gettagorigin("tag_turret"));
+    var_3 = vectorNormalize(var_1.origin - var_0 gettagorigin("tag_turret"));
     var_4 = vectordot(var_2, var_3);
 
     if(var_4 > 0.985) {
@@ -728,7 +728,7 @@ _id_C362(var_0, var_1) {
   var_0 endon("end_rumble");
 
   for(var_2 = 0; var_2 < var_1; var_2++) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -883,14 +883,14 @@ _id_C35D(var_0) {
   var_0 endon("end_remote");
 
   for(;;) {
-    self playrumbleonentity("damage_light");
+    self playRumbleOnEntity("damage_light");
     wait 0.5;
   }
 }
 
 _id_C367() {
   self endon("death");
-  self._id_C021 = getent("remote_uav_range", "targetname");
+  self._id_C021 = getEnt("remote_uav_range", "targetname");
 
   if(!isDefined(self._id_C021)) {
     var_0 = scripts\cp_mp\utility\killstreak_utility::_id_6ADB();
@@ -1114,8 +1114,8 @@ _id_C354() {
 _id_10C06(var_0) {
   level endon("game_ended");
   self endon("death");
-  self missile_settargetent(var_0);
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  self missile_settargetEnt(var_0);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
 
   while(isDefined(var_0)) {
     var_2 = var_0 _meth_8174(0, 0, 0);
@@ -1123,10 +1123,10 @@ _id_10C06(var_0) {
 
     if(var_0._id_A783 > 0 && var_3 < 4000) {
       var_4 = var_0 _id_47EA();
-      self missile_settargetent(var_4);
+      self missile_settargetEnt(var_4);
       return;
     } else {
-      var_5 = vectornormalize(var_0.origin - self.origin);
+      var_5 = vectorNormalize(var_0.origin - self.origin);
 
       if(vectordot(var_5, var_1) < 0) {
         self playSound("exp_stinger_armor_destroy");
@@ -1155,8 +1155,8 @@ _id_10BF7(var_0, var_1) {
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3)) {
-      var_3 missile_settargetent(var_0);
-      var_3._id_90C2 = vectornormalize(var_0.origin - var_3.origin);
+      var_3 missile_settargetEnt(var_0);
+      var_3._id_90C2 = vectorNormalize(var_0.origin - var_3.origin);
     }
   }
 
@@ -1178,7 +1178,7 @@ _id_10BF7(var_0, var_1) {
 
             foreach(var_10 in var_1) {
               if(isDefined(var_10)) {
-                var_10 missile_settargetent(var_8);
+                var_10 missile_settargetEnt(var_8);
               }
             }
 
@@ -1188,7 +1188,7 @@ _id_10BF7(var_0, var_1) {
           continue;
         }
 
-        var_12 = vectornormalize(var_0.origin - var_3.origin);
+        var_12 = vectorNormalize(var_0.origin - var_3.origin);
 
         if(vectordot(var_12, var_3._id_90C2) < 0) {
           var_3 playSound("exp_stinger_armor_destroy");
@@ -1265,7 +1265,7 @@ _id_C348() {
 }
 
 _id_9F64(var_0, var_1) {
-  var_2 = vectornormalize(var_1.origin - var_0.origin);
+  var_2 = vectorNormalize(var_1.origin - var_0.origin);
   var_3 = anglesToForward(var_0.angles);
   return vectordot(var_2, var_3) > 0;
 }

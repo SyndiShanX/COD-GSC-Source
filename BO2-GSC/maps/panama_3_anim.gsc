@@ -464,7 +464,7 @@ menendez_caps_hudsons_right_knee() {
     tag_angles = menendez_gun gettagangles("TAG_FLASH");
     menendez_gun playSound("wpn_spas_fire_npc");
     menendez_gun play_fx("shotgun_flash", tag_origin, tag_angles, undefined, 1, "TAG_FLASH");
-    hudson = getent("hudson_ai", "targetname");
+    hudson = getEnt("hudson_ai", "targetname");
     tag_origin = hudson gettagorigin("J_Knee_RI");
     tag_angles = hudson gettagangles("J_Knee_RI");
     hudson play_fx("knee_blood_hudson", tag_origin, tag_angles, undefined, 1, "J_Knee_RI");
@@ -480,7 +480,7 @@ menendez_caps_hudsons_left_knee() {
     tag_angles = menendez_gun gettagangles("TAG_FLASH");
     menendez_gun playSound("wpn_spas_fire_npc");
     menendez_gun play_fx("shotgun_flash", tag_origin, tag_angles, undefined, 1, "TAG_FLASH");
-    hudson = getent("hudson_ai", "targetname");
+    hudson = getEnt("hudson_ai", "targetname");
     tag_origin = hudson gettagorigin("J_Knee_LE");
     tag_angles = hudson gettagangles("J_Knee_LE");
     hudson play_fx("knee_2_blood_hudson", tag_origin, tag_angles, undefined, 1, "J_Knee_LE");
@@ -491,7 +491,7 @@ menendez_caps_hudsons_left_knee() {
 
 menendez_slits_hudsons_throat() {
   if(is_mature()) {
-    hudson = getent("hudson_ai", "targetname");
+    hudson = getEnt("hudson_ai", "targetname");
     tag_origin = hudson gettagorigin("J_Neck");
     tag_angles = hudson gettagangles("J_Neck");
     hudson play_fx("neck_blood_hudson", tag_origin, tag_angles, undefined, 1, "J_Neck");
@@ -502,7 +502,7 @@ menendez_slits_hudsons_throat() {
 
 hudson_blood_pool() {
   if(is_mature()) {
-    hudson = getent("hudson_ai", "targetname");
+    hudson = getEnt("hudson_ai", "targetname");
     tag_origin = hudson gettagorigin("J_Neck");
     tag_angles = hudson gettagangles("J_Neck");
     hudson play_fx("blood_pool", tag_origin, tag_angles, undefined, 1, "J_Neck");

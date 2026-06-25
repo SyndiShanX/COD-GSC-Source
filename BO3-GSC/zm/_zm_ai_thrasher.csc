@@ -119,12 +119,12 @@ function private function_4cf5760d(localclientnum, thrasher, player) {
     var_bef3bf12 = getcamposbylocalclientnum(player.localclientnum) - forwardoffset;
     var_622b2c1a = desiredposition - var_bef3bf12;
     if(lengthsquared(var_622b2c1a) > var_3c524399) {
-      var_622b2c1a = vectornormalize(var_622b2c1a) * var_7b5d5a9;
+      var_622b2c1a = vectorNormalize(var_622b2c1a) * var_7b5d5a9;
     }
     desiredposition = var_bef3bf12 + var_622b2c1a;
     var_e8cd6d4 = var_622b2c1a - var_2f57a8ba;
     if(lengthsquared(var_e8cd6d4) > var_dadc8424) {
-      var_622b2c1a = var_2f57a8ba + (vectornormalize(var_e8cd6d4) * var_11a41486);
+      var_622b2c1a = var_2f57a8ba + (vectorNormalize(var_e8cd6d4) * var_11a41486);
     }
     thrasher.var_18fd72ff.origin = var_bef3bf12 + var_622b2c1a;
     var_2f57a8ba = var_622b2c1a;

@@ -118,7 +118,7 @@ ghost_round_presentation_light_state_cb(localclientnum, oldval, newval, bnewent,
 sndghostaudio(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isDefined(self.sndent)) {
     self.sndent = spawn(0, self.origin, "script_origin");
-    self.sndent linkto(self);
+    self.sndent linkTo(self);
     self thread sndghostaudiodeleteent(self.sndent);
   }
 
@@ -139,7 +139,7 @@ sndghostaudiodeleteent(ent) {
 sndghostattackaudio() {
   if(!isDefined(self.sndattackent)) {
     self.sndattackent = spawn(0, self.origin, "script_origin");
-    self.sndattackent linkto(self);
+    self.sndattackent linkTo(self);
     self thread sndghostattackaudiodeleteent(self.sndattackent);
   }
 

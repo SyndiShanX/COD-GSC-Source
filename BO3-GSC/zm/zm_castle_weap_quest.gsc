@@ -44,7 +44,7 @@ function __init__() {
   for(i = 0; i < level.var_f302359b.size; i++) {
     clientfield::register("world", level.var_f302359b[i].script_parameters, 5000, 3, "int");
     level.soul_catchers[i] = level.var_f302359b[i];
-    level.soul_catchers_vol[i] = getent(level.var_f302359b[i].target, "targetname");
+    level.soul_catchers_vol[i] = getEnt(level.var_f302359b[i].target, "targetname");
   }
   for(i = 0; i < level.soul_catchers.size; i++) {
     level.soul_catchers[i].var_98730ffa = 0;
@@ -52,7 +52,7 @@ function __init__() {
     level.soul_catchers[i] thread soul_catcher_check();
     level.soul_catchers[i] thread soul_catcher_state_manager();
     level.soul_catchers[i] thread function_e775e6a4("bow_door_sign_" + (i + 1));
-    level.soul_catchers_vol[i] = getent(level.soul_catchers[i].target, "targetname");
+    level.soul_catchers_vol[i] = getEnt(level.soul_catchers[i].target, "targetname");
   }
   level.n_soul_catchers_charged = 0;
 }
@@ -119,8 +119,8 @@ function zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sw
       }
     }
   }
-  var_816fc685 = getent("docked_tram_car_interior", "targetname");
-  var_a35e6789 = getent("player_tram_car_interior", "targetname");
+  var_816fc685 = getEnt("docked_tram_car_interior", "targetname");
+  var_a35e6789 = getEnt("player_tram_car_interior", "targetname");
   if(self istouching(var_816fc685) || self istouching(var_a35e6789)) {
     self zombie_utility::zombie_gut_explosion();
   }
@@ -219,7 +219,7 @@ function function_edf4b761() {
 
 function which_eating_anim() {
   soul_catcher = self.var_56269cbf;
-  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectornormalize(self.origin - soul_catcher.origin));
+  forward_dot = vectordot(anglesToForward(soul_catcher.angles), vectorNormalize(self.origin - soul_catcher.origin));
   if(forward_dot > 0.7) {
     return 3;
   }
@@ -254,10 +254,10 @@ function soul_catcher_check() {
 function function_e775e6a4(var_63530679) {
   self waittill("fully_charged");
   if(self.script_label == "dragonhead_1") {
-    m_collision = getent("uc_dragoncollision", "targetname");
+    m_collision = getEnt("uc_dragoncollision", "targetname");
     m_collision delete();
   } else if(self.script_label == "dragonhead_2") {
-    m_collision = getent("lc_dragoncollision", "targetname");
+    m_collision = getEnt("lc_dragoncollision", "targetname");
     m_collision delete();
   }
 }
@@ -276,7 +276,7 @@ function function_a01a53de() {
   var_14ea0734 = struct::get("base_bow_pickup_struct", "targetname");
   level thread scene::play("p7_fxanim_zm_castle_quest_base_bow_idle_bundle");
   wait(0.25);
-  level.var_15acc392 = getent("base_bow_pickup", "targetname");
+  level.var_15acc392 = getEnt("base_bow_pickup", "targetname");
   var_14ea0734 function_bb60c970();
   array::thread_all(level.players, &function_9376cff9);
   callback::on_connect(&function_c9cdf051);
@@ -371,10 +371,10 @@ function function_bb60c970() {
 
 function function_65fb1c47(e_player) {
   if(e_player function_e464049a() || e_player function_9dfa159b()) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
-  self sethintstring(&"ZM_CASTLE_PICK_UP_BASE_BOW");
+  self setHintString(&"ZM_CASTLE_PICK_UP_BASE_BOW");
   return true;
 }
 

@@ -971,7 +971,7 @@ devgui_player_connect() {
 
   wait 2;
   root = level.var_630fbd77 + "<dev string:x28d>";
-  players = getplayers();
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(players[i] != self) {
@@ -1120,7 +1120,7 @@ function_cc5baf7f(callback, par) {
   pid = getdvarint(#"hash_324a391b56cb100", 0);
 
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
 
     if(isDefined(player)) {
       if(isDefined(par)) {
@@ -1133,7 +1133,7 @@ function_cc5baf7f(callback, par) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(par)) {

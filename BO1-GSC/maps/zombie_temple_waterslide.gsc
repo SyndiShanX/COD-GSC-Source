@@ -21,24 +21,24 @@ waterslide_main() {
   if(getDvar("waterslide_debug") == "") {
     setDvar("waterslide_debug", "0");
   }
-  messageTrigger = GetEnt("waterslide_message_trigger", "targetname");
+  messageTrigger = getEnt("waterslide_message_trigger", "targetname");
   if(isDefined(messageTrigger)) {
-    messageTrigger setcursorhint("HINT_NOICON");
+    messageTrigger setCursorHint("HINT_NOICON");
   }
   cheat = false;
   if(!cheat) {
     if(isDefined(messageTrigger)) {
-      messageTrigger SetHintString(&"ZOMBIE_NEED_POWER");
+      messageTrigger setHintString(&"ZOMBIE_NEED_POWER");
     }
     flag_wait("power_on");
     if(isDefined(messageTrigger)) {
-      messageTrigger SetHintString(&"ZOMBIE_TEMPLE_DESTINATION_NOT_OPEN");
+      messageTrigger setHintString(&"ZOMBIE_TEMPLE_DESTINATION_NOT_OPEN");
     }
     flag_wait_any("cave01_to_cave02", "pressure_to_cave01");
   }
   flag_set("waterslide_open");
   if(isDefined(messageTrigger)) {
-    messageTrigger SetHintString("");
+    messageTrigger setHintString("");
   }
   waterSlideBlocker = getEnt("water_slide_blocker", "targetname");
   if(isDefined(waterSlideBlocker)) {
@@ -59,7 +59,7 @@ zombie_cave_slide_init() {
   level thread zombie_caveslide_anim_failsafe();
 }
 zombie_caveslide_anim_failsafe() {
-  trig = getent("zombie_cave_slide_failsafe", "targetname");
+  trig = getEnt("zombie_cave_slide_failsafe", "targetname");
   if(isDefined(trig)) {
     while(1) {
       trig waittill("trigger", who);
@@ -296,7 +296,7 @@ slide_anim_change_throttle() {
 }
 slide_player_enter_watch() {
   level endon("fake_death");
-  trig = GetEnt("cave_slide_force_crouch", "targetname");
+  trig = getEnt("cave_slide_force_crouch", "targetname");
   while(true) {
     trig waittill("trigger", who);
     if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && !is_true(who.on_slide)) {
@@ -307,7 +307,7 @@ slide_player_enter_watch() {
   }
 }
 slide_player_exit_watch() {
-  trig = GetEnt("cave_slide_force_stand", "targetname");
+  trig = getEnt("cave_slide_force_stand", "targetname");
   while(true) {
     trig waittill("trigger", who);
     if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && is_true(who.on_slide)) {

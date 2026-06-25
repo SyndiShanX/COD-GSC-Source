@@ -183,7 +183,7 @@ func_E734(var_0, var_1, var_2) {
   }
 
   for(;;) {
-    self rotateyaw(var_1, var_0);
+    self rotateYaw(var_1, var_0);
     wait(var_0);
   }
 }
@@ -346,9 +346,9 @@ launchuav(var_0, var_1, var_2) {
   var_15 = randomint(1000) + 4000;
   var_16 = cos(var_14) * var_15;
   var_17 = sin(var_14) * var_15;
-  var_18 = vectornormalize((var_16, var_17, var_11));
+  var_18 = vectorNormalize((var_16, var_17, var_11));
   var_18 = var_18 * var_11;
-  var_5 linkto(var_4, "tag_origin", var_18, (0, var_14 - 90, 0));
+  var_5 linkTo(var_4, "tag_origin", var_18, (0, var_14 - 90, 0));
   var_5 thread func_12F50();
   var_5[[level.uavsettings[var_1].var_17C8]]();
   if(isDefined(level.activeuavs[var_3])) {
@@ -377,7 +377,7 @@ launchuav(var_0, var_1, var_2) {
   if(var_5.var_E1 < var_5.maxhealth) {
     var_5 unlink();
     var_1C = var_5.origin + anglesToForward(var_5.angles) * 20000;
-    var_5 moveto(var_1C, 60);
+    var_5 moveTo(var_1C, 60);
     if(isDefined(level.uavsettings[var_1].var_7631) && isDefined(level.uavsettings[var_1].fx_leave_tag)) {
       playFXOnTag(level.uavsettings[var_1].var_7631, var_5, level.uavsettings[var_1].fx_leave_tag);
     }
@@ -387,7 +387,7 @@ launchuav(var_0, var_1, var_2) {
       var_5 notify("leaving");
       var_5 setscriptablepartstate("trail", "on", 0);
       var_5.isleaving = 1;
-      var_5 moveto(var_1C, 4, 4, 0);
+      var_5 moveTo(var_1C, 4, 4, 0);
     }
 
     var_5 scripts\mp\hostmigration::waittill_notify_or_timeout_hostmigration_pause("death", 4 + var_5.var_11938);

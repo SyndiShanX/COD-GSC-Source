@@ -145,7 +145,7 @@ perform_move(var_0) {
 clean_up_move() {
   self.idle_move_data.active = 0;
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(4096);
+  self scragentsetgoalRadius(4096);
 }
 
 play_move_anim(var_0, var_1, var_2, var_3) {
@@ -196,21 +196,21 @@ get_move_target_position_index() {
 }
 
 get_move_target_facing(var_0) {
-  var_1 = vectornormalize(var_0 - self.origin);
+  var_1 = vectorNormalize(var_0 - self.origin);
   var_2 = maps\mp\agents\alien\_alien_anim_utils::getprojectiondata(anglesToForward(self.angles), var_1, anglestoup(self.angles));
 
   if(var_2.rotatedyaw < 45) {
-    var_3["direction"] = vectornormalize(var_0 - self.origin);
+    var_3["direction"] = vectorNormalize(var_0 - self.origin);
     var_3["animIndex"] = 0;
   } else if(var_2.rotatedyaw > 135) {
-    var_3["direction"] = vectornormalize(self.origin - var_0);
+    var_3["direction"] = vectorNormalize(self.origin - var_0);
     var_3["animIndex"] = 1;
   } else {
     if(var_2.projintooutright > 0) {
-      var_4 = vectornormalize(var_0 - self.origin);
+      var_4 = vectorNormalize(var_0 - self.origin);
       var_3["animIndex"] = 2;
     } else {
-      var_4 = vectornormalize(self.origin - var_0);
+      var_4 = vectorNormalize(self.origin - var_0);
       var_3["animIndex"] = 3;
     }
 

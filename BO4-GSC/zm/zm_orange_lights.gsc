@@ -73,13 +73,13 @@ infusion_lights_cold() {
 }
 
 function_e9f6e0f7() {
-  e_sam = getent("sam", "targetname");
+  e_sam = getEnt("sam", "targetname");
   s_lgt_spawner = struct::get("s_lgt_spawner", "targetname");
   e_sam.tag = util::spawn_model("tag_origin", s_lgt_spawner.origin);
   e_sam.tag.angles = s_lgt_spawner.angles;
   level.registerglass_railing_kickedleader = level._effect[#"hash_723a7c4a495d1008"];
   e_sam.var_82acd734 = playFXOnTag(level.registerglass_railing_kickedleader, e_sam.tag, "tag_origin");
-  e_sam.var_82acd734 linkto(e_sam);
+  e_sam.var_82acd734 linkTo(e_sam);
 }
 
 function_35b30784(string) {

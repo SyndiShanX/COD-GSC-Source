@@ -278,7 +278,7 @@ start_debug() {
   thread open_gate(true);
   level.player set_speed(1);
 
-  eNodeIntro = getent("org_stealth_kill", "targetname");
+  eNodeIntro = getEnt("org_stealth_kill", "targetname");
   eSDV_02 = SDV_spawn("02", eNodeIntro);
   eSDV_02.origin = level.player.origin + (0, 0, 100);
   eSDV_02 thread maps\oilrig_fx::sdv02_fx();
@@ -298,9 +298,9 @@ start_surface() {
   killtrigger_ocean_off();
   flag_set("player_is_done_swimming");
   flag_set("player_breaks_surface");
-  eNode = getent("org_stealth_kill", "targetname");
+  eNode = getEnt("org_stealth_kill", "targetname");
   grate_enemies_setup();
-  level.player setorigin(eNode.origin + (0, -65, 0));
+  level.player setOrigin(eNode.origin + (0, -65, 0));
   level.player setplayerangles(eNode.angles);
   level.player disableweapons();
   thread player_breaks_surface();
@@ -338,9 +338,9 @@ start_deck1() {
   triggersEnable("colornodes_deck1", "script_noteworthy", true);
   initFriendlies("Deck1");
   thread AA_deck1_init();
-  door_deck1 = getent("door_deck1", "targetname");
+  door_deck1 = getEnt("door_deck1", "targetname");
   door_deck1 open_door_deck1();
-  door_deck1_opposite = getent("door_deck1_opposite", "targetname");
+  door_deck1_opposite = getEnt("door_deck1_opposite", "targetname");
   door_deck1_opposite open_door_deck1_opposite();
   MusicPlayWrapper("oilrig_suspense_01_music_alt");
   flag_set("player_ready_to_be_helped_from_water");
@@ -460,9 +460,9 @@ AA_intro_init() {
 
 underwater_sequence() {
   thread underwater_set_culldist(0, 20000);
-  underwater_box = getent("underwater_box", "targetname");
+  underwater_box = getEnt("underwater_box", "targetname");
   underwater_box show();
-  eNodeIntro = getent("org_stealth_kill", "targetname");
+  eNodeIntro = getEnt("org_stealth_kill", "targetname");
   assert(isDefined(eNodeIntro));
 
   black_overlay = create_client_overlay("black", 1);
@@ -511,7 +511,7 @@ underwater_sequence() {
   eSub_01.DoorDDS unlink();
   eSub_01.DoorDDS dds_door_open();
   wait(1);
-  level.player PlayRumbleOnEntity("light_3s");
+  level.player playRumbleOnEntity("light_3s");
   wait(3.5);
 
   flag_set("intro_anim_sequence_starting");
@@ -545,7 +545,7 @@ underwater_sequence() {
   eSDV_02 delete();
 
   underwater_box hide();
-  iceberg = getent("iceberg", "targetname");
+  iceberg = getEnt("iceberg", "targetname");
   iceberg hide();
 }
 
@@ -593,7 +593,7 @@ underwater_friendly_setup() {
 }
 
 grate_enemies_setup() {
-  eNodeIntro = getent("org_stealth_kill", "targetname");
+  eNodeIntro = getEnt("org_stealth_kill", "targetname");
   level.eNodeIntroDuplicate = spawn("script_origin", eNodeIntro.origin);
   level.eNodeIntroDuplicate.origin = eNodeIntro.origin;
   level.eNodeIntroDuplicate.angles = eNodeIntro.angles;
@@ -642,9 +642,9 @@ DDS_water_rise() {
 submarine_rumble() {
   self endon("death");
   org = spawn("script_origin", self.origin + (0, -900, -1800));
-  org linkto(self);
+  org linkTo(self);
   while(!flag("player_ready_to_be_helped_from_water")) {
-    org PlayRumbleOnEntity("mig_rumble");
+    org playRumbleOnEntity("mig_rumble");
     wait(.4);
   }
   org delete();
@@ -689,9 +689,9 @@ player_sdv_think(eSDV, eNodeIntro) {
   ePlayer_rig = spawn_anim_model("player_rig");
   ePlayer_rig thread underwater_player_flags();
   eSDV anim_first_frame_solo(ePlayer_rig, "underwater_player_start", "origin_animate_jnt");
-  ePlayer_rig linkto(eSDV, "origin_animate_jnt");
+  ePlayer_rig linkTo(eSDV, "origin_animate_jnt");
 
-  level.player setorigin(ePlayer_rig gettagorigin("tag_player"));
+  level.player setOrigin(ePlayer_rig gettagorigin("tag_player"));
   level.player setplayerangles(ePlayer_rig gettagangles("tag_player"));
   wait(1);
 
@@ -713,10 +713,10 @@ player_sdv_think(eSDV, eNodeIntro) {
 }
 
 player_breaks_surface() {
-  eNodeIntro = getent("org_stealth_kill", "targetname");
+  eNodeIntro = getEnt("org_stealth_kill", "targetname");
   assert(isDefined(eNodeIntro));
 
-  grate_blocker = getent("grate_blocker", "targetname");
+  grate_blocker = getEnt("grate_blocker", "targetname");
   assert(isDefined(grate_blocker));
   grate_blocker hide();
   grate_blocker notsolid();
@@ -733,7 +733,7 @@ player_breaks_surface() {
 }
 
 water_bob() {
-  org_water_level = getent("org_water_level", "targetname");
+  org_water_level = getEnt("org_water_level", "targetname");
   org_water_level.origin = org_water_level.origin + (0, 0, 0);
   org_view_bob = spawn("script_origin", (0, 0, 0));
 
@@ -798,8 +798,8 @@ water_movement(org_view_bob) {
   moveRate = 1;
   updateTime = 0.05;
 
-  org_grate_top_left = getent("org_grate_top_left", "targetname");
-  org_grate_bot_right = getent("org_grate_bot_right", "targetname");
+  org_grate_top_left = getEnt("org_grate_top_left", "targetname");
+  org_grate_bot_right = getEnt("org_grate_bot_right", "targetname");
 
   maxValueX = org_grate_top_left.origin[0];
   maxValueY = org_grate_bot_right.origin[1];
@@ -830,7 +830,7 @@ water_movement(org_view_bob) {
     newLocation = (valueX, valueY, valueZ);
 
     self.angles = (level.player.angles[0], level.player.angles[1], org_view_bob.angles[2]);
-    self moveto(newLocation, updateTime, 0, 0);
+    self moveTo(newLocation, updateTime, 0, 0);
   }
   if(isDefined(org_view_bob)) {
     org_view_bob delete();
@@ -847,7 +847,7 @@ underwater_player_flags() {
 
 friendly_sdv_think(eSDV, eNodeIntro) {
   eSDV anim_first_frame_solo(self, "sdv_ride_in", "origin_animate_jnt");
-  self linkto(eSDV, "origin_animate_jnt");
+  self linkTo(eSDV, "origin_animate_jnt");
   flag_wait("intro_anim_sequence_starting");
 
   eSDV thread anim_single_solo(self, "sdv_ride_in", "origin_animate_jnt");
@@ -875,7 +875,7 @@ AA_surface_init() {
 
 water_monitor() {
   level endon("obj_stealthkill_complete");
-  org_water_level = getent("org_water_level", "targetname");
+  org_water_level = getEnt("org_water_level", "targetname");
   assert(isDefined(org_water_level));
   water_level = org_water_level.origin[2];
 
@@ -918,7 +918,7 @@ water_streaks() {
 }
 
 friendlies_help_player_from_water() {
-  eNodeIntro = getent("org_stealth_kill", "targetname");
+  eNodeIntro = getEnt("org_stealth_kill", "targetname");
   assert(isDefined(eNodeIntro));
   aWaterHelpers = [];
   aWaterHelpers[0] = get_AI_with_script_noteworthy("allies", "water_helper_01");
@@ -999,11 +999,11 @@ dialogue_stealth_kill() {
 }
 
 player_grate_sequence_think() {
-  org_water_exit = getent("org_water_exit", "targetname");
+  org_water_exit = getEnt("org_water_exit", "targetname");
   assert(isDefined(org_water_exit));
   org_water_exit.origin = org_water_exit.origin + (0, 0, 10);
 
-  eNodeIntro = getent("org_stealth_kill", "targetname");
+  eNodeIntro = getEnt("org_stealth_kill", "targetname");
   assert(isDefined(eNodeIntro));
   flag_wait("player_is_done_swimming");
 
@@ -1054,7 +1054,7 @@ player_grate_sequence_think() {
 
   array_thread(level.effects_underwater, ::pauseEffect);
 
-  mantle_platform = getent("mantle_platform", "targetname");
+  mantle_platform = getEnt("mantle_platform", "targetname");
   assert(isDefined(mantle_platform));
   mantle_platform show();
   mantle_platform solid();
@@ -1066,8 +1066,8 @@ player_grate_sequence_think() {
 player_looking_at_grate_guard_logic() {
   level endon("player_starting_stealth_kill");
   bInFOV = undefined;
-  trig_player_near_grate_guard = getent("trig_player_near_grate_guard", "script_noteworthy");
-  org = getent(trig_player_near_grate_guard.target, "targetname");
+  trig_player_near_grate_guard = getEnt("trig_player_near_grate_guard", "script_noteworthy");
+  org = getEnt(trig_player_near_grate_guard.target, "targetname");
   while(true) {
     wait(0.05);
     if(flag("player_near_grate_guard")) {
@@ -1128,7 +1128,7 @@ player_in_water_monitor() {
   level.player set_speed(level.playerWaterSpeed);
   level.player disableWeapons();
 
-  trig_out_of_water = getent("trig_out_of_water", "targetname");
+  trig_out_of_water = getEnt("trig_out_of_water", "targetname");
   assert(isDefined(trig_out_of_water));
   trig_out_of_water waittill("trigger");
 
@@ -1139,7 +1139,7 @@ player_in_water_monitor() {
   level.player set_speed(level.playerCQBSpeed);
   level.player enableWeapons();
 
-  trig_in_water = getent("trig_in_water", "targetname");
+  trig_in_water = getEnt("trig_in_water", "targetname");
   assert(isDefined(trig_in_water));
   while(level.player isTouching(trig_in_water)) {
     wait(0.05);
@@ -1152,7 +1152,7 @@ player_out_of_water_monitor() {
   level endon("player_in_water");
   level endon("lower_decks_closed_off");
   thread killtrigger_ocean_on();
-  trig_in_water = getent("trig_in_water", "targetname");
+  trig_in_water = getEnt("trig_in_water", "targetname");
   assert(isDefined(trig_in_water));
   trig_in_water waittill("trigger");
 
@@ -1167,7 +1167,7 @@ player_kill_fx() {
 }
 
 friendly_surface_think() {
-  eNodeIntro = getent("org_stealth_kill", "targetname");
+  eNodeIntro = getEnt("org_stealth_kill", "targetname");
   assert(isDefined(eNodeIntro));
 
   self waittill("finished_swim_animation");
@@ -1190,7 +1190,7 @@ friendly_surface_think() {
 friendly_gear_takeoff() {
   flag_wait("player_ready_to_be_helped_from_water");
 
-  eGearNode = getent("node_gear_takeoff", "targetname");
+  eGearNode = getEnt("node_gear_takeoff", "targetname");
   eGearNode anim_generic_first_frame(level.friendly02, "oilrig_seal_surface_rebreather_off_guy2");
   eGearNode anim_generic_first_frame(level.friendly03, "oilrig_seal_surface_rebreather_off_guy1");
 
@@ -1327,7 +1327,7 @@ friendly_speed_adjustment_breach_01() {
 
 door_to_deck1_think() {
   flag_wait("lower_room_breached");
-  volume_first_room = getent("volume_first_room", "script_noteworthy");
+  volume_first_room = getEnt("volume_first_room", "script_noteworthy");
 
   wait(2);
   eNode = getnode("node_deck1_door", "targetname");
@@ -1336,9 +1336,9 @@ door_to_deck1_think() {
   wait(.5);
   level.teamleader setgoalnode(eNode);
 
-  door_deck1 = getent("door_deck1", "targetname");
+  door_deck1 = getEnt("door_deck1", "targetname");
   door_deck1 open_door_deck1();
-  door_deck1_opposite = getent("door_deck1_opposite", "targetname");
+  door_deck1_opposite = getEnt("door_deck1_opposite", "targetname");
   door_deck1_opposite open_door_deck1_opposite();
 
   flag_wait("player_approaching_deck1");
@@ -1364,7 +1364,7 @@ teleport_when_out_of_sight(eNode) {
 first_breach_ambient_guys() {
   flag_wait("player_at_lower_breach");
 
-  sound_org = getent("origin_breach1_dialogue", "targetname");
+  sound_org = getEnt("origin_breach1_dialogue", "targetname");
   sound_org thread play_loop_sound_on_entity("oilrig_muffled_breach_voices");
   aSpawners = getEntArray("hostiles_ambient_breach1", "targetname");
   aHostiles = array_spawn(aSpawners);
@@ -1444,7 +1444,7 @@ dialogue_nag_to_deck1() {
   level endon("upper_room_breached");
   flag_wait("start_nagging_to_go_to_deck1");
 
-  volume_first_room = getent("volume_first_room", "script_noteworthy");
+  volume_first_room = getEnt("volume_first_room", "script_noteworthy");
   while(!flag("upper_room_breached")) {
     if(level.player istouching(volume_first_room)) {
       dialogue_random_manhandler_nag_to_deck1();
@@ -1486,7 +1486,7 @@ is_player_looking_at_railing() {
   level endon("player_at_lower_breach");
   level endon("player_looking_at_railing");
 
-  railing_org = getent("railing_org", "targetname");
+  railing_org = getEnt("railing_org", "targetname");
   while(true) {
     wait(.25);
     if(self adsButtonPressed()) {
@@ -1538,7 +1538,7 @@ railing_patroller_player_detect() {
   eNode = getnode(self.target, "targetname");
   eNode notify("stop_idle");
   self notify("stop_idle");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   battlechatter_on("axis");
   ignoreme_off_squad_and_player();
 }
@@ -1558,7 +1558,7 @@ railing_patroller_react(eNode) {
   level waittill("stealth_broken");
   eNode notify("stop_idle");
   self notify("stop_idle");
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   battlechatter_on("axis");
   ignoreme_off_squad_and_player();
 }
@@ -1591,7 +1591,7 @@ breach_lower_setup() {
   thread autosave_by_name("lower_breach");
 
   level waittill("A door in breach group 100 has been activated.");
-  volume_first_room = getent("volume_first_room", "script_noteworthy");
+  volume_first_room = getEnt("volume_first_room", "script_noteworthy");
   level.hostageNodes = getnodearray("node_hostage_bottom", "targetname");
 
   flag_wait("lower_room_cleared");
@@ -1671,7 +1671,7 @@ friendly_speed_adjustment_breach_02() {
 deck1_breach_ambient_guys() {
   flag_wait("player_ignoring_heli_flyby");
 
-  sound_org = getent("origin_ambush_discovery_dialogue", "targetname");
+  sound_org = getEnt("origin_ambush_discovery_dialogue", "targetname");
   sound_org thread play_loop_sound_on_entity("oilrig_muffled_breach_voices");
   aSpawners = getEntArray("hostiles_ambient_deckbreach", "targetname");
   aHostiles = array_spawn(aSpawners);
@@ -1688,7 +1688,7 @@ deck1_breach_ambient_guys() {
 }
 
 delete_first_breach_room_ai() {
-  volume_first_room = getent("volume_first_room", "script_noteworthy");
+  volume_first_room = getEnt("volume_first_room", "script_noteworthy");
   aAI_to_delete = volume_first_room get_ai_touching_volume();
   if(aAI_to_delete.size) {
     foreach(guy in aAI_to_delete) {
@@ -1776,7 +1776,7 @@ breach_upper_desk_triggers_think() {
 dialogue_last_hostages() {
   level endon("mission failed");
 
-  volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");
+  volume_ambush_room = getEnt("volume_ambush_room", "script_noteworthy");
   volume_ambush_room endon("breached");
 
   flag_wait("player_at_last_breach_building");
@@ -1792,7 +1792,7 @@ ambush_sequence() {
   level endon("missionfailed");
 
   radio = level.player;
-  volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");
+  volume_ambush_room = getEnt("volume_ambush_room", "script_noteworthy");
 
   level waittill("A door in breach group 200 has been activated.");
 
@@ -1803,8 +1803,8 @@ ambush_sequence() {
   flag_wait("upper_room_breached");
 
   aFriendlyC4Orgs = [];
-  aFriendlyC4Orgs[0] = getent("origin_c4_friendly", "targetname");
-  aFriendlyC4Orgs[1] = getent("origin_c4_friendly2", "targetname");
+  aFriendlyC4Orgs[0] = getEnt("origin_c4_friendly", "targetname");
+  aFriendlyC4Orgs[1] = getEnt("origin_c4_friendly2", "targetname");
   aC4Nodes = [];
   aC4Nodes[0] = getnode("ambush_guard_01", "targetname");
   aC4Nodes[1] = getnode("ambush_guard_02", "targetname");
@@ -1812,9 +1812,9 @@ ambush_sequence() {
   eC4Node = getfarthest(level.player.origin, aC4Nodes);
 
   flag_set("lower_decks_closed_off");
-  door_deck1 = getent("door_deck1", "targetname");
+  door_deck1 = getEnt("door_deck1", "targetname");
   door_deck1 close_door_deck1();
-  door_deck1_opposite = getent("door_deck1_opposite", "targetname");
+  door_deck1_opposite = getEnt("door_deck1_opposite", "targetname");
   door_deck1_opposite close_door_deck1_opposite();
 
   bottom_deck_destructibles = getEntArray("bottom_deck_destructibles", "script_noteworthy");
@@ -1941,15 +1941,15 @@ switch_player_weapons_to_loud_versions() {
 }
 
 hostage_manhandle_sequence() {
-  prison_sequence_dummies_walk = getent("prison_sequence_dummies_walk", "script_noteworthy");
-  prison_sequence_dummies_run = getent("prison_sequence_dummies_run", "script_noteworthy");
+  prison_sequence_dummies_walk = getEnt("prison_sequence_dummies_walk", "script_noteworthy");
+  prison_sequence_dummies_run = getEnt("prison_sequence_dummies_run", "script_noteworthy");
   walkReference = prison_sequence_dummies_walk;
   runReference = prison_sequence_dummies_run;
   lookatPoint = runReference.origin + (0, 0, 36);
 
   flag_wait("obj_c4_ambush_plant_given");
 
-  volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");
+  volume_ambush_room = getEnt("volume_ambush_room", "script_noteworthy");
   aHostagesForSequence = volume_ambush_room get_ai_touching_volume("neutral");
 
   aWalkActors = [];
@@ -1990,7 +1990,7 @@ hostage_manhandle_sequence() {
     hostage show();
   }
 
-  player_looking_at_prisoner_sequence = getent("player_looking_at_prisoner_sequence", "targetname");
+  player_looking_at_prisoner_sequence = getEnt("player_looking_at_prisoner_sequence", "targetname");
   player_looking_at_prisoner_sequence trigger_on();
 
   thread trig_prisoner_sequence_failsafe();
@@ -2013,7 +2013,7 @@ play_anim_and_delete(eAnimNode, sAnim) {
 }
 
 trig_prisoner_sequence_failsafe() {
-  trig_prisoner_sequence_failsafe = getent("trig_prisoner_sequence_failsafe", "targetname");
+  trig_prisoner_sequence_failsafe = getEnt("trig_prisoner_sequence_failsafe", "targetname");
   trig_prisoner_sequence_failsafe waittill("trigger");
   flag_set("trig_prisoner_sequence_failsafe");
 }
@@ -2026,9 +2026,9 @@ friendly_plant_c4(eAnimOrg, eNode) {
   self endon("death");
   level.player endon("death");
   level.player endon("death");
-  c4 = getent(eAnimOrg.target, "targetname");
+  c4 = getEnt(eAnimOrg.target, "targetname");
   assert(isDefined(c4));
-  safeVolume = getent(c4.target, "targetname");
+  safeVolume = getEnt(c4.target, "targetname");
   assert(isDefined(safeVolume));
 
   self disable_ai_color();
@@ -2063,7 +2063,7 @@ c4_ambush_hints() {
   wait(2);
   thread c4_ambush_hints_cleanup();
 
-  eTrig = getent("ambush_area", "targetname");
+  eTrig = getEnt("ambush_area", "targetname");
   bC4hint = false;
   bAmbushHint = false;
   while(true) {
@@ -2100,7 +2100,7 @@ c4_ambush_hints_cleanup() {
 }
 
 ambush_nag() {
-  eTrig = getent("ambush_area", "targetname");
+  eTrig = getEnt("ambush_area", "targetname");
   eTrig endon("trigger");
   wait(randomintrange(14, 18));
 }
@@ -2123,7 +2123,7 @@ teamleader_ambush_think() {
     }
   }
   assert(isDefined(eNode));
-  eTrig = getent("ambush_area", "targetname");
+  eTrig = getEnt("ambush_area", "targetname");
   eTrig waittill("trigger");
 
   if((flag("player_in_ambush_position")) || (flag("player_on_ladder"))) {
@@ -2175,7 +2175,7 @@ c4_drone_think(deathanim) {
   c4_dead_drone = self spawn_ai();
   c4_dead_drone gun_remove();
 
-  c4_player_on_deadguy = getent(c4_dead_drone.target, "targetname");
+  c4_player_on_deadguy = getEnt(c4_dead_drone.target, "targetname");
   reference anim_generic_first_frame(c4_dead_drone, deathanim);
   dummy = maps\_vehicle_aianim::convert_guy_to_drone(c4_dead_drone);
   dummy setanim(sAnim, 1, .2);
@@ -2215,14 +2215,14 @@ hideC4() {
   stopFXOnTag(getfx("c4_light_blink"), self, "tag_fx");
 }
 ambush_c4_triggered() {
-  volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");
-  volume_c4_ambush = getent("volume_c4_ambush", "targetname");
+  volume_ambush_room = getEnt("volume_ambush_room", "script_noteworthy");
+  volume_c4_ambush = getEnt("volume_c4_ambush", "targetname");
   flag_wait("ambush_c4_triggered");
   flag_set("ambush_enemies_alerted");
   fail_on_friendly_fire();
   thread play_sound_in_space("oilrig_ambush_explosion", volume_ambush_room.origin);
   earthquake(0.6, 2, level.player.origin, 1500);
-  level.player PlayRumbleOnEntity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   exploder(1);
   if(level.player istouching(volume_ambush_room)) {
     playFX(getfx("player_death_explosion"), level.player.origin);
@@ -2260,11 +2260,11 @@ ambush_c4_triggered() {
 ambush_room_aftermath() {
   exploder("exploder_ambush_afterfx");
 
-  light_ambush_room2 = getent("light_ambush_room2", "targetname");
+  light_ambush_room2 = getEnt("light_ambush_room2", "targetname");
   light_ambush_room2 thread fluorescentFlicker();
 
-  light_ambush_room = getent("light_ambush_room", "targetname");
-  light_ambush_room.lit_model = getent("light_ambush_room_model", "targetname");
+  light_ambush_room = getEnt("light_ambush_room", "targetname");
+  light_ambush_room.lit_model = getEnt("light_ambush_room_model", "targetname");
   light_ambush_room.unlit_model = spawn("script_model", (0, 0, 0));
   light_ambush_room.unlit_model setModel("com_floodlight");
   light_ambush_room.unlit_model.origin = light_ambush_room.lit_model.origin;
@@ -2305,10 +2305,10 @@ enemies_approach_ambush() {
   aHostilesAmbush = array_spawn(aSpawners);
   flag_set("ambush_enemies_spawned");
   level endon("ambush_enemies_alerted_prematurely");
-  eTrig = getent("ambush_enemies_approaching", "targetname");
+  eTrig = getEnt("ambush_enemies_approaching", "targetname");
   eTrig waittill("trigger");
   flag_set("ambush_enemies_approaching");
-  eTrig = getent("enemies_discovered_bodies", "targetname");
+  eTrig = getEnt("enemies_discovered_bodies", "targetname");
   eTrig waittill("trigger");
   flag_set("enemies_discovered_bodies");
 }
@@ -2356,7 +2356,7 @@ ambush_dialogue() {
 }
 
 enemy_discovers_body_dialogue() {
-  org = getent("origin_ambush_discovery_dialogue", "targetname");
+  org = getEnt("origin_ambush_discovery_dialogue", "targetname");
 
   org thread play_sound_on_tag_endon_death("temp_vo_alarm");
   if(!flag("ambush_c4_triggered")) {
@@ -2381,7 +2381,7 @@ enemies_alerted() {
   battlechatter_on("allies");
   wait(1.5);
   flag_set("obj_ambush_complete");
-  alarm_org = getent("origin_alarm", "targetname");
+  alarm_org = getEnt("origin_alarm", "targetname");
   alarm_org playLoopSound("emt_oilrig_alarm_alert");
   wait(20);
   alarm_org stopLoopSound("emt_oilrig_alarm_alert");
@@ -2389,7 +2389,7 @@ enemies_alerted() {
 }
 
 guy_blown_out_door() {
-  eSpawner = getent("hostile_c4_blowup", "targetname");
+  eSpawner = getEnt("hostile_c4_blowup", "targetname");
   eGuy = eSpawner spawn_ai();
   org = eGuy.origin + (0, 20, 35);
   eGuy.skipdeathanim = true;
@@ -2723,7 +2723,7 @@ breach_save_deck3_triggers_think() {
   level endon("breach_deck3_autosave_threaded");
   level endon("A door in breach group 300 has been activated.");
   aEnemies = undefined;
-  volumeAbove = getent(self.script_linkto, "script_linkname");
+  volumeAbove = getEnt(self.script_linkto, "script_linkname");
   enemiesDeleted = false;
   while(true) {
     self waittill("trigger");
@@ -2775,7 +2775,7 @@ samsite_turret_think() {
   time = 4.4;
 
   wait(randomfloatrange(0, 1.5));
-  targetOrg = getent(self.target, "targetname");
+  targetOrg = getEnt(self.target, "targetname");
   while(!flag("top_deck_room_breached")) {
     self detach("projectile_slamraam_missile", self.missileTags[0]);
     earthquake(.3, .5, self.origin, 1600);
@@ -2784,10 +2784,10 @@ samsite_turret_think() {
     if(self.missileTags.size < 1) {
       break;
     }
-    self rotateyaw(45, time, time / 2, time / 2);
+    self rotateYaw(45, time, time / 2, time / 2);
     wait(time);
     wait(randomfloatrange(0, 2));
-    self rotateyaw(-45, time, time / 2, time / 2);
+    self rotateYaw(-45, time, time / 2, time / 2);
     wait(time);
     wait(randomfloatrange(0, 1.5));
   }
@@ -3128,14 +3128,14 @@ escape_sequence() {
   level.teamleader.script_startingposition = 4;
 
   level.littlebird_escape = spawn_vehicle_from_targetname("littlebird_escape");
-  obj_escape = getent("obj_escape", "targetname");
+  obj_escape = getEnt("obj_escape", "targetname");
 
   flag_set("littlebird_escape_spawned");
 
   flag_wait("player_headed_out_of_barracks");
   level.teamleader disable_ai_color();
 
-  pickup_node_before_stage = getstruct("pickup_node_before_stage", "script_noteworthy");
+  pickup_node_before_stage = getStruct("pickup_node_before_stage", "script_noteworthy");
   level.littlebird_escape set_stage(pickup_node_before_stage, aRoof_riders_left, "left");
   level.littlebird_escape set_stage(pickup_node_before_stage, aRoof_riders_right, "right");
 
@@ -3190,7 +3190,7 @@ escape_sequence() {
 
   exploder("ride_smoke");
 
-  heli_escape_path = getstruct("heli_escape_path", "targetname");
+  heli_escape_path = getStruct("heli_escape_path", "targetname");
   level.littlebird_escape thread vehicle_paths(heli_escape_path);
   level.littlebird_escape setmaxpitchroll(50, 50);
 
@@ -3204,7 +3204,7 @@ escape_sequence() {
 
   flag_wait("heli_escape_path_01");
   blackhawk_main_deck = spawn_vehicle_from_targetname_and_drive("blackhawk_main_deck");
-  view_derrick_building_01 = getent("view_derrick_building_01", "targetname");
+  view_derrick_building_01 = getEnt("view_derrick_building_01", "targetname");
 
   flag_wait("heli_escape_path_03");
   friendlies_deck3_stairs = array_spawn(getEntArray("friendlies_deck3_stairs", "targetname"));
@@ -3262,19 +3262,19 @@ sub_through_ice() {
   level.subDummy = spawn("script_origin", eSub.origin);
   level.subDummy.origin = eSub.origin;
   level.subDummy.angles = eSub.angles;
-  eProp linkto(eSub);
-  eSub linkto(level.subDummy);
+  eProp linkTo(eSub);
+  eSub linkTo(level.subDummy);
 
   moveTime = 12;
   moveDist = 1024;
 
-  level.subDummy moveto(level.subDummy.origin + (0, 0, (-1 * moveDist)), .1);
+  level.subDummy moveTo(level.subDummy.origin + (0, 0, (-1 * moveDist)), .1);
   eSub show();
   eProp show();
 
   flag_wait("sub_comes_through_ice");
 
-  level.subDummy moveto(eSub.origin + (0, 0, moveDist), moveTime, moveTime / 3, moveTime / 3);
+  level.subDummy moveTo(eSub.origin + (0, 0, moveDist), moveTime, moveTime / 3, moveTime / 3);
 }
 
 liner(blah) {
@@ -3295,7 +3295,7 @@ player_gets_on_littlebird(sPlayerRideTag) {
   player_seat.origin = self gettagorigin(sPlayerRideTag);
   player_seat.angles = self gettagangles(sPlayerRideTag);
   player_seat.angles = player_seat.angles + (0, 0, 0);
-  player_seat linkto(self, sPlayerRideTag, (0, 0, 0), (0, -90, 0));
+  player_seat linkTo(self, sPlayerRideTag, (0, 0, 0), (0, -90, 0));
   trigger waittill("trigger");
 
   level.player freezeControls(true);
@@ -3332,7 +3332,7 @@ samsite_01_destroy() {
   flag_wait("barracks_cleared");
   flag_wait("player_exiting_derrick_building");
 
-  samsite1_heli_unload = getstruct("samsite1_heli_unload", "targetname");
+  samsite1_heli_unload = getStruct("samsite1_heli_unload", "targetname");
   blackhawk_samsite_01 = spawn_vehicle_from_targetname_and_drive("blackhawk_samsite_01");
 
   blackhawk_samsite_01 waittill("reached_dynamic_path_end");
@@ -3510,7 +3510,7 @@ obj_escape() {
   flag_wait("escape_littlebird_landed");
   objective_position(objective_number, (0, 0, 0));
 
-  obj_escape = getent("obj_escape", "targetname");
+  obj_escape = getEnt("obj_escape", "targetname");
   obj_escape.origin = level.littlebird_escape gettagorigin("tag_guy3");
   obj_escape.origin = obj_escape.origin + (0, 0, 30);
   objective_position(objective_number, obj_escape.origin);
@@ -3832,7 +3832,7 @@ turret_rains_down_shells() {
 }
 
 level_think() {
-  eDerrick_thing = getent("derrick_thing", "targetname");
+  eDerrick_thing = getEnt("derrick_thing", "targetname");
   eDerrick_thing.origin = eDerrick_thing.origin + (0, 0, -2816);
   assert(isDefined(eDerrick_thing));
   time = 2;
@@ -4029,10 +4029,10 @@ init_difficulty() {
 }
 
 spawn_trigger_dummy(sDummyTargetname) {
-  ent = getent(sDummyTargetname, "targetname");
+  ent = getEnt(sDummyTargetname, "targetname");
   assert(isDefined(ent));
   assert(isDefined(ent.script_linkTo));
-  trig = getent(ent.script_linkTo, "script_linkname");
+  trig = getEnt(ent.script_linkTo, "script_linkname");
   assert(isDefined(trig));
   trig notify("trigger", level.player);
 }
@@ -4042,18 +4042,18 @@ disable_color_trigs() {
 }
 
 open_gate(bImmediately, bDontWaitForFlags) {
-  eGate = getent("gate_01", "targetname");
+  eGate = getEnt("gate_01", "targetname");
   assert(isDefined(eGate));
   eGate connectpaths();
 
   if(isDefined(bImmediately)) {
-    eGate moveto((eGate.origin - (0, -170, 0)), 1);
+    eGate moveTo((eGate.origin - (0, -170, 0)), 1);
   } else {
     if(!isDefined(bDontWaitForFlags)) {
       flag_wait_either("ambush_enemies_approaching", "ambush_enemies_alerted_prematurely");
     }
     eGate thread play_sound_on_entity("scn_oilrig_fence_open");
-    eGate moveto((eGate.origin - (0, -170, 0)), 8, 3, 3);
+    eGate moveTo((eGate.origin - (0, -170, 0)), 8, 3, 3);
     wait(8);
   }
   flag_set("ambush_gate_opened");
@@ -4313,7 +4313,7 @@ player_in_exposed_ambush_spot() {
   self endon("death");
   level endon("ambush_enemies_alerted");
   level endon("ambush_enemies_alerted_prematurely");
-  trigger_exposed_ambush_spot = getent("exposed_ambush_spot", "targetname");
+  trigger_exposed_ambush_spot = getEnt("exposed_ambush_spot", "targetname");
   while(true) {
     wait(1.5);
     if(self istouching(trigger_exposed_ambush_spot)) {
@@ -4344,16 +4344,16 @@ spawn_group_staggered(aSpawners) {
 open_door_deck1() {
   self.startingpos = self.origin;
   self.startingangles = self.angles;
-  self rotateyaw(160, 0.5);
-  self moveto(self.origin + (3, 0, 0), 0.1);
+  self rotateYaw(160, 0.5);
+  self moveTo(self.origin + (3, 0, 0), 0.1);
   self connectpaths();
 }
 
 open_door_deck1_opposite() {
   self.startingpos = self.origin;
   self.startingangles = self.angles;
-  self rotateyaw(-110, 0.5);
-  self moveto(self.origin + (3, 0, 0), 0.1);
+  self rotateYaw(-110, 0.5);
+  self moveTo(self.origin + (3, 0, 0), 0.1);
   self connectpaths();
 }
 close_door_deck1() {
@@ -4404,15 +4404,15 @@ submarine_spawn(sSubNumber, eNode) {
       }
     }
     foreach(part in eSub.aDDSparts) {
-      part linkto(eSub.DDS);
+      part linkTo(eSub.DDS);
     }
   } else {
-    eSub.DDS = getent("sub_dds_" + sSubNumber, "targetname");
+    eSub.DDS = getEnt("sub_dds_" + sSubNumber, "targetname");
   }
-  eSub.DoorDDS = getent("dds_door_" + sSubNumber, "targetname");
+  eSub.DoorDDS = getEnt("dds_door_" + sSubNumber, "targetname");
   eSub.DoorDDS.eDoorSeal = undefined;
   if(sSubNumber == "01") {
-    eSub.DoorDDS.eDoorSeal = getent("dds_door_01_seal", "targetname");
+    eSub.DoorDDS.eDoorSeal = getEnt("dds_door_01_seal", "targetname");
     eSub.DoorDDS.eDoorSeal linkTo(eSub.DoorDDS);
   }
   assert(isDefined(eSub));
@@ -4424,18 +4424,18 @@ submarine_spawn(sSubNumber, eNode) {
   eSub.body.angles = eSub.angles;
   eSub.animname = "submarine_" + sSubNumber;
   if(eSub.animname == "submarine_01") {
-    eSub.body linkto(eSub, "TAG_ORIGIN", (-10, 0, -324), (0, 0, 0));
+    eSub.body linkTo(eSub, "TAG_ORIGIN", (-10, 0, -324), (0, 0, 0));
   } else {
-    eSub.body linkto(eSub, "TAG_ORIGIN", (-10, 0, -348), (0, 0, 0));
+    eSub.body linkTo(eSub, "TAG_ORIGIN", (-10, 0, -348), (0, 0, 0));
   }
 
   eSub.body show();
 
-  eSub.DoorDDS linkto(eSub.DDS);
+  eSub.DoorDDS linkTo(eSub.DDS);
   eSub.DDS.origin = eSub.origin;
   eSub.DDS.angles = eSub.angles;
 
-  eSub.DDS LinkTo(eSub, "TAG_ORIGIN", (330, 0, 100), (0, 0, 0));
+  eSub.DDS linkTo(eSub, "TAG_ORIGIN", (330, 0, 100), (0, 0, 0));
 
   eSub assign_animtree();
 
@@ -4490,18 +4490,18 @@ sdv_think() {
 submarine_think() {}
 
 dds_door_open() {
-  self rotateto(self.angles + (0, -90, 0), 12, 2, 2);
+  self rotateTo(self.angles + (0, -90, 0), 12, 2, 2);
   self playSound("hatch_and_bubbles");
 }
 
 killtrigger_ocean_off() {
-  killtrigger_ocean = getent("killtrigger_ocean", "targetname");
+  killtrigger_ocean = getEnt("killtrigger_ocean", "targetname");
   assert(isDefined(killtrigger_ocean));
   killtrigger_ocean notify("turn_off");
 }
 
 killtrigger_ocean_on() {
-  killtrigger_ocean = getent("killtrigger_ocean", "targetname");
+  killtrigger_ocean = getEnt("killtrigger_ocean", "targetname");
   assert(isDefined(killtrigger_ocean));
   killtrigger_ocean notify("turn_off");
   killtrigger_ocean endon("turn_off");
@@ -4572,7 +4572,7 @@ friendlies_shoot_heli_with_rockets(eHeli) {
         } else {
           eHeliTarget = spawn("script_origin", eHeli.origin + (0, 0, -200));
           eHeli thread delete_on_death(eHeliTarget);
-          eHeliTarget linkto(eHeli);
+          eHeliTarget linkTo(eHeli);
           if(!bullettracepassed(guy gettagorigin("tag_flash") + (0, 0, zOffset), eHeliTarget.origin, true, guy)) {
             eHeliTarget delete();
             continue;
@@ -4646,7 +4646,7 @@ AI_stealth_monitor() {
 AI_become_alerted() {
   if((isDefined(self)) && (isalive(self)) && (!isDefined(self.scriptedDying))) {
     level notify("stealth_broken");
-    self anim_stopanimscripted();
+    self anim_stopanimScripted();
     self notify("alerted");
   }
 }
@@ -4809,10 +4809,10 @@ fx_management() {
   level.effects_mid_decks = [];
   level.effects_top_deck = [];
 
-  effects_underwater = getent("effects_underwater", "script_noteworthy");
-  effects_lower_rig = getent("effects_lower_rig", "script_noteworthy");
-  effects_mid_decks = getent("effects_mid_decks", "script_noteworthy");
-  effects_top_deck = getent("effects_top_deck", "script_noteworthy");
+  effects_underwater = getEnt("effects_underwater", "script_noteworthy");
+  effects_lower_rig = getEnt("effects_lower_rig", "script_noteworthy");
+  effects_mid_decks = getEnt("effects_mid_decks", "script_noteworthy");
+  effects_top_deck = getEnt("effects_top_deck", "script_noteworthy");
 
   dummy = spawn("script_origin", (0, 0, 0));
   for(i = 0; i < level.createfxent.size; i++) {

@@ -763,7 +763,7 @@ function set_origin(v_origin) {
     adddebugcommand("<dev string:x476>");
   }
 
-  self setorigin(v_origin);
+  self setOrigin(v_origin);
 }
 
 function toggle_postfx_igc_loop() {

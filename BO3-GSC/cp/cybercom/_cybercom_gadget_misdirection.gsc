@@ -114,7 +114,7 @@ function private _get_valid_targets(weapon) {
     if(distsq > (getdvarint("scr_misdirection_max_distanceSQR", getdvarint("scr_misdirection_max_distance", 1750) * getdvarint("scr_misdirection_max_distance", 1750)))) {
       continue;
     }
-    dot = vectordot(playerforward, vectornormalize(guy.origin - self.origin));
+    dot = vectordot(playerforward, vectorNormalize(guy.origin - self.origin));
     if(dot < self.cybercom.var_e5260c29) {
       continue;
     }
@@ -168,7 +168,7 @@ function function_10cd71b(decoy, &potentialtargets) {
   mins = function_44a2ae85(rangemin, mins);
   center = (maxs + mins) * 0.5;
   var_412aa3ee = distance(center, self.origin);
-  var_eec44088 = vectornormalize(center - self.origin);
+  var_eec44088 = vectorNormalize(center - self.origin);
   var_b333c85b = self.origin + (var_eec44088 * var_412aa3ee);
   var_6a0945f2 = var_b333c85b;
   maxtries = 6;
@@ -179,7 +179,7 @@ function function_10cd71b(decoy, &potentialtargets) {
     v_ground = bulletTrace(left + vectorscale((0, 0, 1), 72), left + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     left = (left[0], left[1], v_ground[2]);
     v_trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 24), left + vectorscale((0, 0, 1), 24), 1, self)["position"];
-    dir = vectornormalize(v_trace - self.origin);
+    dir = vectorNormalize(v_trace - self.origin);
     v_trace = v_trace + -48 * dir;
     v_ground = bulletTrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     if(self function_7074260(v_ground)) {
@@ -190,7 +190,7 @@ function function_10cd71b(decoy, &potentialtargets) {
     v_ground = bulletTrace(right + vectorscale((0, 0, 1), 72), right + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     right = (right[0], right[1], v_ground[2]);
     v_trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 24), right + vectorscale((0, 0, 1), 24), 1, self)["position"];
-    dir = vectornormalize(v_trace - self.origin);
+    dir = vectorNormalize(v_trace - self.origin);
     v_trace = v_trace + -48 * dir;
     v_ground = bulletTrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, undefined, 1)["position"];
     if(self function_7074260(v_ground)) {
@@ -228,7 +228,7 @@ function function_4adc7dc8(&potentialtargets) {
   decoy initthreatbias();
   foreach(target in potentialtargets) {
     v_trace = bulletTrace(self.origin + vectorscale((0, 0, 1), 24), target.origin + vectorscale((0, 0, 1), 24), 1, self)["position"];
-    dir = vectornormalize(v_trace - self.origin);
+    dir = vectorNormalize(v_trace - self.origin);
     v_trace = v_trace + -48 * dir;
     v_ground = bulletTrace(v_trace, v_trace + (vectorscale((0, 0, -1), 2048)), 0, target, 1)["position"];
     if(self function_7074260(v_ground) == 0) {

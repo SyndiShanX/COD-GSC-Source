@@ -173,7 +173,7 @@ function function_94c482e0() {
 function function_131f5dc5() {
   level flag::wait_till("level_is_go");
   waitframe(1);
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::reset("apartment_to_warehouse", "freezecontrols");
   level battlechatter::function_2ab9360b(0);
   level.adler val::set("warehouse_intro", "ignoreme", 1);
@@ -213,10 +213,10 @@ function function_131f5dc5() {
 }
 
 function function_44f6ffee() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!player player_decision::function_2da4c32c()) {
-    level.var_66d09511 = getent("warehouse_informant", "targetname", 1);
+    level.var_66d09511 = getEnt("warehouse_informant", "targetname", 1);
     scene::play("scene_z_stk_warehouse_dt_informant", "intro_start");
     scene::play("scene_z_stk_warehouse_dt_informant", "intro_info");
     scene::play("scene_z_stk_warehouse_dt_informant", "intro_end");
@@ -231,8 +231,8 @@ function function_44f6ffee() {
 }
 
 function function_66685f() {
-  player = getplayers()[0];
-  level.var_ffeb9413 = getent("warehouse_greta", "targetname", 1);
+  player = getPlayers()[0];
+  level.var_ffeb9413 = getEnt("warehouse_greta", "targetname", 1);
   scene::play("scene_z_stk_warehouse_dt_greta", "intro_start");
 
   if(!player player_decision::function_2da4c32c()) {
@@ -259,7 +259,7 @@ function function_e736d047() {
 }
 
 function function_cddf31f8() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level thread function_bae99775();
   scene::play("scene_z_stk_warehouse_dt", "intro_start");
 
@@ -373,7 +373,7 @@ function function_c63cd141() {
 }
 
 function function_1f6e9d44() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   self ai::set_behavior_attribute("demeanor", "combat");
 }
 
@@ -388,13 +388,13 @@ function function_dc4b560d() {
 
 function function_332986a1(break_notify, var_8c04d509, var_ada1e239) {
   level waittill(break_notify);
-  var_af827872 = getent(var_8c04d509, "targetname");
-  var_af2e70d5 = getent(var_ada1e239, "targetname");
+  var_af827872 = getEnt(var_8c04d509, "targetname");
+  var_af2e70d5 = getEnt(var_ada1e239, "targetname");
   magicbullet(getweapon(#"pistol_semiauto_t9", "suppressed"), var_af827872.origin, var_af2e70d5.origin);
 }
 
 function function_677b97d8(var_ef943c8, var_2d29a1e2, var_79efa269) {
-  decal = getent(var_2d29a1e2, "targetname");
+  decal = getEnt(var_2d29a1e2, "targetname");
   decal hide();
   level waittill(var_ef943c8);
   decal show();
@@ -461,7 +461,7 @@ function start(str_objective) {
   level.park clearforcedgoal();
   level.park val::set("warehouse_combat", "ignoreall", 1);
   level thread function_aba6a2e8();
-  level.var_375ea1c1 = getent("warehouse_volkov", "targetname", 1);
+  level.var_375ea1c1 = getEnt("warehouse_volkov", "targetname", 1);
   level.var_375ea1c1 thread function_ef769f0d("warehouse_outro_volkov_end_pos");
   level.var_375ea1c1 setCanDamage(0);
   level.park thread function_ef769f0d("warehouse_combat_park_node");
@@ -477,12 +477,12 @@ function function_a0f6825d() {
 }
 
 function main(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     namespace_5ceacc03::music("16.0_finale");
     tag_align = struct::get("tag_align_warehouse_start", "targetname");
-    briefcase = getent("warehouse_briefcase", "targetname");
+    briefcase = getEnt("warehouse_briefcase", "targetname");
     briefcase useanimtree("generic");
     kraus = spawner::simple_spawn_single("warehouse_kraus");
     kraus.a.nodeath = 1;
@@ -509,7 +509,7 @@ function main(str_objective, b_starting) {
   createthreatbiasgroup("allies");
   createthreatbiasgroup("player");
   createthreatbiasgroup("warehouse_enemies");
-  getplayers()[0] setthreatbiasgroup("player");
+  getPlayers()[0] setthreatbiasgroup("player");
   level.adler setthreatbiasgroup("allies");
   level.lazar setthreatbiasgroup("allies");
   level thread scene::init("scene_z_stk_warehouse_door_kick");
@@ -520,11 +520,11 @@ function main(str_objective, b_starting) {
   level thread function_2f72365();
   level flag::wait_till("flag_warehouse_outro_door");
   skipto::function_4e3ab877("warehouse");
-  getplayers()[0] namespace_6cecf2d8::function_9fa1a484();
+  getPlayers()[0] namespace_6cecf2d8::function_9fa1a484();
 }
 
 function function_ad178f3f() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   objectives::scripted(#"kill_or_capture_obj", undefined, #"hash_1c73a293c174c216");
   wait 0.5;
   var_f8d522f5 = struct::get("obj_outro_door_pos", "targetname");
@@ -638,7 +638,7 @@ function function_ef769f0d(teleport_node) {
 
 function function_85177212() {
   level endon(#"warehouse_kill_bathroom_event");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("flag_warehouse_toilet_enemy");
   wait 0.5;
   namespace_5ceacc03::function_875a6922();
@@ -659,7 +659,7 @@ function function_85177212() {
 function function_2cc3a1be() {
   level endon(#"warehouse_kill_breakroom_event");
   level endon(#"warehouse_retreat_enemy_1");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("flag_warehouse_breakroom_enemy");
 
   if(!level flag::get("warehouse_kill_breakroom_event") || !level flag::get("warehouse_retreat_enemy_1")) {
@@ -677,7 +677,7 @@ function function_2cc3a1be() {
 }
 
 function function_57e42128() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("flag_warehouse_door_kick");
   kicker = spawner::simple_spawn_single("warehouse_door_kicker");
   scene::play("scene_z_stk_warehouse_door_kick", "Enter");
@@ -698,7 +698,7 @@ function function_be7a4072() {
 
 function function_e47b21fa() {
   level flag::wait_till("flag_warehouse_combat_vo");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(distance(level.adler.origin, player.origin) <= 256) {
     level.adler dialogue::queue("vox_cp_stkt_13500_adlr_bellvolkovwentt_2b");
@@ -746,11 +746,11 @@ function function_73b1f5c7() {
   self endon(#"death");
   var_55cfeb82 = 256;
   self.ignoresuppression = 1;
-  self setgoal(getplayers()[0], 0, var_55cfeb82);
+  self setgoal(getPlayers()[0], 0, var_55cfeb82);
   level flag::wait_till("flag_warehouse_enemy_cleanup");
 
   if(isDefined(self) && isalive(self)) {
-    vol = getent("warehouse_enemy_vol_04", "targetname");
+    vol = getEnt("warehouse_enemy_vol_04", "targetname");
     self setgoal(vol, 1);
     self.health = 1;
   }
@@ -758,7 +758,7 @@ function function_73b1f5c7() {
 
 function function_4112631f() {
   level endon(#"mission_failed");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   enemies = spawner::get_ai_group_ai("warehouse_enemies");
 
   foreach(guy in enemies) {
@@ -775,7 +775,7 @@ function function_592bf7fa() {
 
   foreach(guy in enemies) {
     if(isDefined(guy) && isalive(guy)) {
-      vol = getent("warehouse_enemy_vol_03", "targetname");
+      vol = getEnt("warehouse_enemy_vol_03", "targetname");
       guy setgoal(vol, 1);
       guy.health = 1;
     }
@@ -810,11 +810,11 @@ function outro_start(str_objective) {
 }
 
 function outro_main(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(b_starting) {
     tag_align = struct::get("tag_align_warehouse_start", "targetname");
-    briefcase = getent("warehouse_briefcase", "targetname");
+    briefcase = getEnt("warehouse_briefcase", "targetname");
     briefcase useanimtree("generic");
     kraus = spawner::simple_spawn_single("warehouse_kraus");
     kraus.a.nodeath = 1;
@@ -857,7 +857,7 @@ function outro_main(str_objective, b_starting) {
 }
 
 function function_82d03a33() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   wait 0.5;
   objectives::goto(#"kill_or_capture_obj", level.var_375ea1c1.origin + (0, 0, 75), #"hash_1c73a293c174c216", 1, 0);
   level flag::wait_till("flag_warehouse_outro_scene_start");
@@ -874,16 +874,16 @@ function function_82d03a33() {
 
 function function_b22fe3db() {
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level waittill(#"hash_6bc4c4f5b21da722");
 
   if(isalive(self) && isDefined(self)) {
     level.var_cb14744d = util::spawn_model("tag_origin", self.origin, self.angles);
-    level.var_cb14744d linkto(self);
+    level.var_cb14744d linkTo(self);
     level.var_cb14744d util::create_cursor_hint("tag_origin", (0, 0, 43), #"hash_42fb441288499922", 110, undefined, undefined, undefined, undefined, undefined, 0, 1);
     level.var_cb14744d prompts::set_objective("kill_or_capture_obj");
     level.var_cb14744d waittill(#"trigger");
-    player playrumbleonentity(#"anim_med");
+    player playRumbleOnEntity(#"anim_med");
     level flag::set("flag_warehouse_outro_volkov_capture");
     self stopsounds();
     namespace_5ceacc03::music("17.0_capture_volkov");
@@ -895,7 +895,7 @@ function function_b22fe3db() {
 }
 
 function function_6aa51edd() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("stun_over");
   self.health = 999;
   self.a.nodeath = 1;
@@ -980,7 +980,7 @@ function function_e7edd44c() {
 
 function function_433af336() {
   level endon(#"flag_warehouse_outro_volkov_killed");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("flag_warehouse_outro_volkov_capture");
   scene::stop("scene_z_stk_warehouse_cornered");
 
@@ -1002,7 +1002,7 @@ function function_da8622e6() {
   level endon(#"flag_warehouse_outro_volkov_killed");
   level endon(#"flag_warehouse_outro_volkov_capture");
   level flag::wait_till("warehouse_outro_volkov_attack");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   scene::stop("scene_z_stk_warehouse_cornered");
   level thread scene::play("scene_z_stk_warehouse_cornered", "shoot");
   level waittill(#"hash_501366e9fb99c760");
@@ -1021,7 +1021,7 @@ function function_3fcd41b5() {
     return;
   }
 
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.var_375ea1c1.perfectaim = 1;
   level.var_375ea1c1.script_accuracy = 1000;
 
@@ -1057,8 +1057,8 @@ function function_6b148d96() {
   level endon(#"flag_warehouse_outro_volkov_killed");
   level endon(#"flag_warehouse_outro_volkov_capture");
   level endon(#"warehouse_outro_volkov_attack");
-  player = getplayers()[0];
-  checkvol = getent("warehouse_outro_player_check_vol", "targetname");
+  player = getPlayers()[0];
+  checkvol = getEnt("warehouse_outro_player_check_vol", "targetname");
   level flag::wait_till("warehouse_outro_volkov_attack_start");
 
   while(true) {
@@ -1072,16 +1072,16 @@ function function_6b148d96() {
 }
 
 function function_b7a12bcc() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level flag::wait_till("flag_warehouse_outro_start_flash");
-  var_455bdfc6 = getent("warehouse_concussion_start", "targetname");
-  var_e27a70ee = getent("warehouse_concussion_end", "targetname");
-  var_4788e488 = getent("warehouse_concussion_start2", "targetname");
-  var_cfb34b60 = getent("warehouse_concussion_end2", "targetname");
+  var_455bdfc6 = getEnt("warehouse_concussion_start", "targetname");
+  var_e27a70ee = getEnt("warehouse_concussion_end", "targetname");
+  var_4788e488 = getEnt("warehouse_concussion_start2", "targetname");
+  var_cfb34b60 = getEnt("warehouse_concussion_end2", "targetname");
   var_2362d320 = getweapon(#"eq_slow_grenade");
-  var_a54779bb = vectornormalize(var_e27a70ee.origin - var_455bdfc6.origin) * 400;
+  var_a54779bb = vectorNormalize(var_e27a70ee.origin - var_455bdfc6.origin) * 400;
   var_2bc9761c = var_455bdfc6 magicgrenadetype(var_2362d320, var_455bdfc6.origin, var_a54779bb, 0.5);
-  var_b2f6951d = vectornormalize(var_cfb34b60.origin - var_4788e488.origin) * 400;
+  var_b2f6951d = vectorNormalize(var_cfb34b60.origin - var_4788e488.origin) * 400;
   var_6022a8e = var_4788e488 magicgrenadetype(var_2362d320, var_4788e488.origin, var_b2f6951d, 1);
   wait 1.2;
   var_7aa562ca = spawner::simple_spawn("warehouse_slowmo_enemies", &function_44ad2b11);
@@ -1119,8 +1119,8 @@ function function_233956ed() {
 function function_59e47159() {
   node = getnode("warehouse_combat_adler_start_node", "targetname");
   level.adler setgoal(node, 1);
-  explo_pos = getent("warehouse_adler_explo_pos", "targetname");
-  var_af2e70d5 = getent("warehouse_adler_explo_end_pos", "targetname");
+  explo_pos = getEnt("warehouse_adler_explo_pos", "targetname");
+  var_af2e70d5 = getEnt("warehouse_adler_explo_end_pos", "targetname");
   var_8cafb845 = spawner::simple_spawn("warehouse_adler_enemies");
   namespace_5ceacc03::function_af3d3d18(var_8cafb845);
   level flag::wait_till_any_timeout(3, array("flag_start_lazar_event", "flag_start_forklift_event"));
@@ -1139,7 +1139,7 @@ function function_55737f44() {
 }
 
 function function_ea2f2e25() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   setDvar(#"hash_252e699c41531f1a", 0);
   player clientfield::set_to_player("knock_out_vision", 1);
   level thread namespace_5ceacc03::warehouse_plr_breathing_start();
@@ -1156,7 +1156,7 @@ function function_ea2f2e25() {
 
 function function_5b10af6b() {
   level endon(#"warehouse_combat_over");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player endon(#"death");
   distsquared = 160000;
   fov = cos(45);
@@ -1226,14 +1226,14 @@ function function_639f072c() {
 function function_a099daab(var_9c878bb5) {
   wait 1.5;
 
-  if(isDefined(getent(var_9c878bb5, "targetname"))) {
+  if(isDefined(getEnt(var_9c878bb5, "targetname"))) {
     trigger::use(var_9c878bb5);
   }
 }
 
 function function_a2c72e4b(var_9c878bb5, set_flag) {
-  if(flag::get(set_flag) && isDefined(getent(var_9c878bb5, "targetname"))) {
-    trigger = getent(var_9c878bb5, "targetname");
+  if(flag::get(set_flag) && isDefined(getEnt(var_9c878bb5, "targetname"))) {
+    trigger = getEnt(var_9c878bb5, "targetname");
     trigger delete();
   }
 }
@@ -1252,7 +1252,7 @@ function function_3266ad2c() {
 
 function function_69f192ab(distsquared, fov = 160000, var_a729919a = cos(45)) {
   self endon(#"death");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
 
   while(true) {

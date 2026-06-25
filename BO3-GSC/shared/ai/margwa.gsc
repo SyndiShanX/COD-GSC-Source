@@ -149,7 +149,7 @@ function private bb_getshouldturn() {
 }
 
 function private margwanotetracksmashattack(entity) {
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     smashpos = entity.origin + vectorscale(anglesToForward(self.angles), 60);
     distsq = distancesquared(smashpos, player.origin);
@@ -465,7 +465,7 @@ function private margwateleportoutterminate(entity) {
   entity ghost();
   entity pathmode("dont move");
   if(isDefined(entity.traveler)) {
-    entity linkto(entity.traveler);
+    entity linkTo(entity.traveler);
   }
   if(isDefined(entity.margwawait)) {
     entity thread[[entity.margwawait]]();
@@ -1073,7 +1073,7 @@ function private margwawait() {
   }
   if(isDefined(self.traveler)) {
     self thread margwatell();
-    self.traveler moveto(destpos, time);
+    self.traveler moveTo(destpos, time);
     self.traveler util::waittill_any_ex(time + 0.1, "movedone", self, "death");
     self.travelertell clientfield::set("margwa_fx_travel_tell", 0);
   }
@@ -1098,10 +1098,10 @@ function private shieldfacing(vdir, limit, front = 1) {
     forwardvec = forwardvec * -1;
   }
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = vdir * -1;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > limit;
 }

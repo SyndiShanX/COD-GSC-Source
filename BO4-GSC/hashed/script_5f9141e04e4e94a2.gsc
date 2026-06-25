@@ -64,14 +64,14 @@ function_f6048ee(e_player) {
   if(isDefined(e_player)) {
     if(!isDefined(level.var_23674b8f.e_player)) {
       if(isDefined(e_player.var_9c20e2c9)) {
-        self sethintstring(#"hash_744b68f010abb05");
+        self setHintString(#"hash_744b68f010abb05");
       } else {
-        self sethintstring(#"hash_12346bdab086516e");
+        self setHintString(#"hash_12346bdab086516e");
       }
     } else if(level.var_23674b8f.e_player == e_player) {
-      self sethintstring(#"hash_74fc96e8d58ff646");
+      self setHintString(#"hash_74fc96e8d58ff646");
     } else {
-      self sethintstring(#"hash_2054e8fdb6521566");
+      self setHintString(#"hash_2054e8fdb6521566");
     }
 
     return true;
@@ -205,15 +205,15 @@ start_step_2() {
   level.var_23674b8f.e_wisp = util::spawn_model(#"tag_origin", s_canister.origin - (0, 0, 64), s_canister.angles);
   e_wisp = level.var_23674b8f.e_wisp;
   e_wisp.e_model = util::spawn_model(#"p7_zm_ori_orb_wind", e_wisp.origin, e_wisp.angles);
-  e_wisp.e_model linkto(e_wisp);
+  e_wisp.e_model linkTo(e_wisp);
   e_wisp.e_model ghost();
   e_wisp clientfield::set("" + #"hash_b0298e980bd8da0", 1);
-  e_wisp moveto(s_canister.origin + (0, 0, 64), 0.75);
+  e_wisp moveTo(s_canister.origin + (0, 0, 64), 0.75);
   e_wisp waittill(#"movedone");
   level thread function_eddc2ed3();
   wait 3;
   n_time = distance(e_wisp.origin, level.var_23674b8f.var_80284ca5[0].origin) / 400;
-  e_wisp moveto(level.var_23674b8f.var_80284ca5[0].origin + (0, 0, 64), n_time);
+  e_wisp moveTo(level.var_23674b8f.var_80284ca5[0].origin + (0, 0, 64), n_time);
   e_wisp waittill(#"movedone");
   e_wisp thread function_fe82c566();
   level.var_23674b8f.e_player thread function_92344a03();
@@ -242,10 +242,10 @@ function_fe82c566() {
     s_notify = self.e_model waittill(#"damage");
     self.e_model setCanDamage(0);
     var_bc569584 = level.var_23674b8f.var_80284ca5[level.var_23674b8f.var_c8a6d360].origin;
-    self moveto(var_bc569584, 0.3);
+    self moveTo(var_bc569584, 0.3);
     self waittill(#"movedone");
     playFX(level._effect[#"portal_origin"], var_bc569584, (1, 0, 0), (0, 0, 1));
-    playsoundatposition(#"evt_teleporter_out", var_bc569584);
+    playSoundAtPosition(#"evt_teleporter_out", var_bc569584);
     self clientfield::set("" + #"hash_b0298e980bd8da0", 0);
     level flag::set(#"hash_11513646e875455c");
     wait 10;
@@ -259,10 +259,10 @@ function_fe82c566() {
     self clientfield::set("" + #"hash_b0298e980bd8da0", 1);
     var_838db546 = level.var_23674b8f.var_80284ca5[level.var_23674b8f.var_c8a6d360].origin;
     self.origin = var_838db546 - (0, 0, 64);
-    self moveto(var_838db546 + (0, 0, 64), 1);
+    self moveTo(var_838db546 + (0, 0, 64), 1);
     wait 0.5;
     playFX(level._effect[#"portal_dest"], var_838db546, (1, 0, 0), (0, 0, 1));
-    playsoundatposition(#"evt_teleporter_go", var_838db546);
+    playSoundAtPosition(#"evt_teleporter_go", var_838db546);
     self waittill(#"movedone");
 
     iprintlnbold("<dev string:x89>" + level.var_23674b8f.var_80284ca5[level.var_23674b8f.var_c8a6d360].script_noteworthy);
@@ -291,14 +291,14 @@ function_92344a03() {
     if(var_8a3d3cf4 && var_86812839 && var_58ab2e2c) {
       wait 0.1;
       e_wisp = level.var_23674b8f.e_wisp;
-      var_59bd625c = self getcentroid() + 20 * vectornormalize(anglesToForward(self.angles));
-      var_59bd625c += 2 * vectornormalize(anglestoright(self.angles));
+      var_59bd625c = self getcentroid() + 20 * vectorNormalize(anglesToForward(self.angles));
+      var_59bd625c += 2 * vectorNormalize(anglestoright(self.angles));
       var_59bd625c += (0, 0, 22);
       e_wisp.origin = var_59bd625c;
       e_wisp.angles = self.angles;
       e_wisp clientfield::set("" + #"hash_1e4555a911a24ab7", 1);
       wait 1.5;
-      e_wisp moveto(self getcentroid(), 1);
+      e_wisp moveTo(self getcentroid(), 1);
       e_wisp waittill(#"movedone");
       e_wisp clientfield::set("" + #"hash_1e4555a911a24ab7", 0);
       var_135425aa = 1;
@@ -338,9 +338,9 @@ start_step_3() {
   e_wisp clientfield::set("" + #"hash_b0298e980bd8da0", 1);
   e_wisp.origin = level.var_23674b8f.e_player getcentroid();
   e_wisp.angles = level.var_23674b8f.e_player.angles;
-  var_59bd625c = level.var_23674b8f.e_player getcentroid() + 96 * vectornormalize(anglesToForward(level.var_23674b8f.e_player.angles));
+  var_59bd625c = level.var_23674b8f.e_player getcentroid() + 96 * vectorNormalize(anglesToForward(level.var_23674b8f.e_player.angles));
   var_59bd625c += (0, 0, 32);
-  e_wisp moveto(var_59bd625c, 0.5);
+  e_wisp moveTo(var_59bd625c, 0.5);
   e_wisp waittill(#"movedone");
   wait 3;
 
@@ -350,13 +350,13 @@ start_step_3() {
 
   var_3d7dfe05 = struct::get("mk2y_defend");
   n_time = distance(e_wisp.origin, var_3d7dfe05.origin) / 400;
-  e_wisp moveto(var_3d7dfe05.origin, n_time);
+  e_wisp moveTo(var_3d7dfe05.origin, n_time);
   e_wisp waittill(#"movedone");
   var_3d7dfe05 = struct::get("mk2y_defend");
   var_3d7dfe05 zm_unitrigger::function_fac87205(&function_18a1849f, 96, 0, 1);
   level.var_23674b8f.var_fead3ae9 = util::spawn_model(var_3d7dfe05.model, var_3d7dfe05.origin, var_3d7dfe05.angles);
   level.var_23674b8f.var_fead3ae9 thread function_2b0060b8();
-  playsoundatposition("evt_rgun_frame_putback", (1046, -1606, -259));
+  playSoundAtPosition("evt_rgun_frame_putback", (1046, -1606, -259));
   zm_white_defend_soul_capture::start(#"sc_mk2y");
 }
 
@@ -367,9 +367,9 @@ function_2b0060b8() {
 
   for(var_4814cac6 = 1; true; var_4814cac6 = !var_4814cac6) {
     if(var_4814cac6) {
-      self moveto(var_a28e7c1f, 2, 1, 1);
+      self moveTo(var_a28e7c1f, 2, 1, 1);
     } else {
-      self moveto(var_ae661658, 2, 1, 1);
+      self moveTo(var_ae661658, 2, 1, 1);
     }
 
     self rotatevelocity((0, 90, 0), 4);
@@ -413,9 +413,9 @@ function_17f3e9e2() {
 function_7015dc35(e_player) {
   if(isDefined(e_player)) {
     if(level.var_23674b8f.e_player === e_player) {
-      self sethintstring(#"hash_14eae7c162ebb8d2");
+      self setHintString(#"hash_14eae7c162ebb8d2");
     } else {
-      self sethintstring(#"hash_2054e8fdb6521566");
+      self setHintString(#"hash_2054e8fdb6521566");
     }
 
     return true;

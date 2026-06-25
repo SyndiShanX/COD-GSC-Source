@@ -441,7 +441,7 @@ func_12E59() {
   func_12E77();
   var_5 = !isDefined(self.enemy);
   if(!var_5) {
-    self.missionfailed = vectornormalize(self.enemy.origin - self.origin);
+    self.missionfailed = vectorNormalize(self.enemy.origin - self.origin);
   }
 
   foreach(var_7 in self.var_B661) {

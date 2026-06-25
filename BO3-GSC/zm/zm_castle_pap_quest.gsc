@@ -63,7 +63,7 @@ function function_c4641d12(is_powered) {
     wait(0.05);
   }
   self.zbarrier show();
-  pap_machine = getent("pap_prefab", "prefabname");
+  pap_machine = getEnt("pap_prefab", "prefabname");
   self.zbarrier _zm_pack_a_punch::set_state_initial();
   self.zbarrier _zm_pack_a_punch::set_state_power_on();
   level waittill("pack_machine_in_use");
@@ -82,10 +82,10 @@ function function_c4641d12(is_powered) {
       while(self.zbarrier.state == "eject_gun" || self.zbarrier.state == "take_gun") {
         wait(0.05);
       }
-      e_clip = getent(("pap_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy) + "_clip", "targetname");
+      e_clip = getEnt(("pap_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy) + "_clip", "targetname");
       e_clip function_2209afdf();
       e_clip solid();
-      var_4a6273cc = getent("pap_debris_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy, "targetname");
+      var_4a6273cc = getEnt("pap_debris_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy, "targetname");
       var_4a6273cc show();
       var_92f094dc = var_6eb9e3e5[level.var_2eccab0d];
       var_b57a445e = level.var_22ce1993[level.var_2eccab0d];
@@ -104,9 +104,9 @@ function function_c4641d12(is_powered) {
       var_94e7d6ca setModel("tag_origin");
       var_94e7d6ca.angles = var_39796348;
       self.zbarrier waittill("leave_anim_done");
-      var_4a6273cc = getent("pap_debris_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy, "targetname");
+      var_4a6273cc = getEnt("pap_debris_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy, "targetname");
       var_4a6273cc hide();
-      e_clip = getent(("pap_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy) + "_clip", "targetname");
+      e_clip = getEnt(("pap_" + level.var_94c82bf8[level.var_2eccab0d].script_noteworthy) + "_clip", "targetname");
       e_clip notsolid();
       var_3c7c9ebd clientfield::increment("pap_tp_fx");
       var_94e7d6ca clientfield::increment("pap_tp_fx");
@@ -122,8 +122,8 @@ function function_c4641d12(is_powered) {
       self.zbarrier.angles = var_39796348;
       self thread function_5f17a55c();
       wait(0.05);
-      e_brush = getent("pap_clip", "targetname");
-      var_f72d376e = (vectornormalize(anglesToForward(level.var_94c82bf8[level.var_2eccab0d].angles + (vectorscale((0, -1, 0), 90))))) * 16;
+      e_brush = getEnt("pap_clip", "targetname");
+      var_f72d376e = (vectorNormalize(anglesToForward(level.var_94c82bf8[level.var_2eccab0d].angles + (vectorscale((0, -1, 0), 90))))) * 16;
       e_brush.origin = (var_528227ee + var_f72d376e) + vectorscale((0, 0, 1), 64);
       e_brush.angles = var_39796348 + vectorscale((0, 1, 0), 90);
       e_brush function_88c193db();
@@ -166,7 +166,7 @@ function function_5f17a55c() {
 }
 
 function function_53bc4f86(pap_machine) {
-  e_clip = getent(self.script_string, "targetname");
+  e_clip = getEnt(self.script_string, "targetname");
   e_clip.targetname = ("pap_" + self.script_noteworthy) + "_clip";
   var_4a6273cc = function_23193d81(self.script_noteworthy);
   var_4a6273cc hide();
@@ -217,7 +217,7 @@ function function_53bc4f86(pap_machine) {
     }
     level flag::set("pap_reform_available");
   }
-  var_4a6273cc = getent("pap_debris_" + self.script_noteworthy, "targetname");
+  var_4a6273cc = getEnt("pap_debris_" + self.script_noteworthy, "targetname");
   var_4a6273cc show();
   while(level.var_e1ee8457) {
     wait(0.05);
@@ -302,8 +302,8 @@ function function_eb56512() {
   level.pap_machine.angles = var_39796348;
   level.pap_machine.zbarrier.origin = var_528227ee + (vectorscale((0, 0, -1), 16));
   level.pap_machine.zbarrier.angles = var_39796348;
-  e_brush = getent("pap_clip", "targetname");
-  var_f72d376e = (vectornormalize(anglesToForward(var_fc5d165.angles + (vectorscale((0, -1, 0), 90))))) * 16;
+  e_brush = getEnt("pap_clip", "targetname");
+  var_f72d376e = (vectorNormalize(anglesToForward(var_fc5d165.angles + (vectorscale((0, -1, 0), 90))))) * 16;
   e_brush.origin = (var_528227ee + var_f72d376e) + vectorscale((0, 0, 1), 64);
   e_brush.angles = var_39796348 + vectorscale((0, 1, 0), 90);
   e_brush function_88c193db();
@@ -311,7 +311,7 @@ function function_eb56512() {
   exploder::exploder_stop(var_9e129aa9);
   level.pap_machine.zbarrier thread function_a8c41b9();
   level.pap_machine.zbarrier _zm_pack_a_punch::set_state_power_on();
-  e_clip = getent(("pap_" + s_pap_location.script_noteworthy) + "_clip", "targetname");
+  e_clip = getEnt(("pap_" + s_pap_location.script_noteworthy) + "_clip", "targetname");
   e_clip notsolid();
   exploder::exploder(var_6eb9e3e5[s_pap_location.script_noteworthy]);
 }
@@ -375,7 +375,7 @@ function function_99664e8() {
   str_msg = &"";
   str_msg = self.stub.hint_string;
   if(level.var_e1ee8457 > 0) {
-    self sethintstring(&"ZM_CASTLE_PAP_TP_UNAVAILABLE");
+    self setHintString(&"ZM_CASTLE_PAP_TP_UNAVAILABLE");
     return false;
   }
   if(self.stub.parent_struct.activated === 1) {
@@ -384,17 +384,17 @@ function function_99664e8() {
     var_32a8ab39[1] = "rocket";
     var_32a8ab39[2] = "roof";
     if(isDefined(level.var_2eccab0d) && self.stub.parent_struct.script_noteworthy == var_32a8ab39[level.var_2eccab0d]) {
-      self sethintstring("");
+      self setHintString("");
     } else {
       if(!isDefined(level.var_2eccab0d)) {
-        self sethintstring("");
+        self setHintString("");
       } else {
-        self sethintstring(&"ZM_CASTLE_PAP_TP_AWAY");
+        self setHintString(&"ZM_CASTLE_PAP_TP_AWAY");
       }
     }
     return false;
   }
-  self sethintstring(&"ZM_CASTLE_PAP_TP_ACTIVATE");
+  self setHintString(&"ZM_CASTLE_PAP_TP_ACTIVATE");
   return true;
 }
 
@@ -423,7 +423,7 @@ function function_f04119b5(cmd) {
       }
       level.var_1e4d46e3 = 10;
       wait(1);
-      pap_machine = getent("", "");
+      pap_machine = getEnt("", "");
       level.var_54cd8d06 = level.var_1c602ba8[0];
       array::thread_all(level.players, &function_b9cca08f, pap_machine);
       return true;

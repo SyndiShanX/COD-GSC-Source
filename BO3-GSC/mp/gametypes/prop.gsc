@@ -803,7 +803,7 @@ function propwhistle() {
           continue;
         }
         if(player util::isprop() && isalive(player)) {
-          playsoundatposition("mpl_phunt_char_whistle", player.origin + vectorscale((0, 0, 1), 60));
+          playSoundAtPosition("mpl_phunt_char_whistle", player.origin + vectorscale((0, 0, 1), 60));
           hostmigration::waitlongdurationwithhostmigrationpause(1.5);
         }
       }
@@ -913,7 +913,7 @@ function propwatchdeath() {
   self endon("disconnect");
   self waittill("death");
   corpse = self.body;
-  playsoundatposition("wpn_flash_grenade_explode", self.prop.origin + vectorscale((0, 0, 1), 4));
+  playSoundAtPosition("wpn_flash_grenade_explode", self.prop.origin + vectorscale((0, 0, 1), 4));
   playFX(fx::get("propDeathFX"), self.prop.origin + vectorscale((0, 0, 1), 4));
   if(isDefined(corpse)) {
     corpse delete();
@@ -1092,23 +1092,23 @@ function setupprop() {
   } else {
     self setcontents(0);
   }
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   propinfo = self.propinfo;
   if(!isDefined(self.propinfo)) {
     propinfo = getnextprop(self);
   }
   self.propanchor = spawn("script_model", self.origin);
   self.propanchor.targetname = "propAnchor";
-  self.propanchor linkto(self);
+  self.propanchor linkTo(self);
   self.propanchor setcontents(0);
   self.propanchor notsolid();
-  self.propanchor setplayercollision(0);
+  self.propanchor setPlayerCollision(0);
   self.propent = spawn("script_model", self.origin);
   self.propent.targetname = "propEnt";
-  self.propent linkto(self.propanchor);
+  self.propent linkTo(self.propanchor);
   self.propent setcontents(0);
   self.propent notsolid();
-  self.propent setplayercollision(0);
+  self.propent setPlayerCollision(0);
   self.prop = spawn("script_model", self.propent.origin);
   self.prop.targetname = "prop";
   self.prop setModel(propinfo.modelname);
@@ -1120,10 +1120,10 @@ function setupprop() {
   self.prop.anglesoffset = propinfo.anglesoffset;
   self applyxyzoffset();
   self applyanglesoffset();
-  self.prop linkto(self.propent);
+  self.prop linkTo(self.propent);
   self.prop.owner = self;
   self.prop.health = 10000;
-  self.prop setplayercollision(0);
+  self.prop setPlayerCollision(0);
   self.prop notsolidcapsule();
   self.prop clientfield::set("enemyequip", 1);
   if(function_503c9413()) {
@@ -2024,7 +2024,7 @@ function function_4bdf92a7() {
 function function_9bb11de9(eattacker, einflictor, weapon, smeansofdeath, idamage, vpoint) {
   self thread function_b37cf698(eattacker, einflictor, weapon, smeansofdeath, idamage, vpoint);
   if(!self util::isusingremote()) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -2209,7 +2209,7 @@ function function_543b1a75(isvisible) {
     self solidcapsule();
     self function_cd929fef(1);
     if(isDefined(self.var_11d543b4)) {
-      self setorigin(self.var_11d543b4);
+      self setOrigin(self.var_11d543b4);
       self setplayerangles(self.var_f806489a);
     }
     if(isDefined(self.var_c83b06b4)) {
@@ -2358,7 +2358,7 @@ function function_98636e21(origin, model) {
   target.health = 99999;
   target.maxhealth = 99999;
   target thread function_500dc7d9(&function_8d5e52a2);
-  target setplayercollision(0);
+  target setPlayerCollision(0);
   target makesentient();
   target notsolidcapsule();
   target setteam(game["defenders"]);
@@ -2583,7 +2583,7 @@ function function_83efbfcf() {
   origin = getclosestpointonnavmesh(origin, 600);
   clone = spawnactor("spawner_bo3_robot_grunt_assault_mp", origin, self.angles, "", 1);
   clone.var_9352d14f = function_16efb8e6(origin + vectorscale((0, 0, 1), 40));
-  clone.var_9352d14f linkto(clone);
+  clone.var_9352d14f linkTo(clone);
   level.var_abcf2d12[level.var_abcf2d12.size] = clone;
   function_ec41bbd2(clone, self, forward);
 }
@@ -2738,7 +2738,7 @@ function function_16efb8e6(origin) {
   target.health = 99999;
   target.maxhealth = 99999;
   target thread function_500dc7d9(&function_12f9ab17);
-  target setplayercollision(0);
+  target setPlayerCollision(0);
   target makesentient();
   target notsolidcapsule();
   target setteam(game["defenders"]);

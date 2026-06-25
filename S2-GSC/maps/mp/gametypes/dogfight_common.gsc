@@ -1265,7 +1265,7 @@ setup_formation_spawn_struct() {
 }
 
 random_point_on_cylinder(param_00, param_01) {
-  var_02 = vectornormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0));
+  var_02 = vectorNormalize((randomfloatrange(-1, 1), randomfloatrange(-1, 1), 0));
   var_03 = param_00 + param_01 * var_02;
   var_04 = get_spawn_height(0) * 0.5;
   var_03 = var_03 + (0, 0, randomfloatrange(var_04 * -1, var_04));
@@ -1323,8 +1323,8 @@ is_spawn_targeted(param_00) {
       continue;
     }
 
-    var_03 = vectornormalize(var_03);
-    var_04 = vectornormalize(var_04);
+    var_03 = vectorNormalize(var_03);
+    var_04 = vectorNormalize(var_04);
     var_05 = vectordot(var_03, var_04);
     if(var_05 < 0.9961947) {
       continue;
@@ -1416,10 +1416,10 @@ allow_controls_after_trans(param_00, param_01, param_02) {
 }
 
 spawner_fog_enable() {
-  var_00 = getent(level.dogfightalliesspawner, "targetname");
+  var_00 = getEnt(level.dogfightalliesspawner, "targetname");
   var_00 method_8400();
   if(level.var_984D) {
-    var_01 = getent(level.dogfightaxisspawner, "targetname");
+    var_01 = getEnt(level.dogfightaxisspawner, "targetname");
     var_01 method_8400();
   }
 }
@@ -1427,11 +1427,11 @@ spawner_fog_enable() {
 get_spawner(param_00) {
   var_01 = undefined;
   if(!isDefined(level.attacker_pp_spawner)) {
-    level.attacker_pp_spawner = getent(level.dogfightalliesspawner, "targetname");
+    level.attacker_pp_spawner = getEnt(level.dogfightalliesspawner, "targetname");
   }
 
   if(!isDefined(level.defender_pp_spawner)) {
-    level.defender_pp_spawner = getent(level.dogfightaxisspawner, "targetname");
+    level.defender_pp_spawner = getEnt(level.dogfightaxisspawner, "targetname");
   }
 
   var_01 = undefined;
@@ -1853,9 +1853,9 @@ watch_boundary(param_00) {
       }
 
       if(common_scripts\utility::func_562E(var_07) && var_03 <= gettime()) {
-        var_08 = vectornormalize(param_00.var_0116 - var_05);
-        var_09 = vectornormalize(param_00.var_001D);
-        var_0A = vectornormalize(rotatevectorinverted(var_08, param_00.var_001D));
+        var_08 = vectorNormalize(param_00.var_0116 - var_05);
+        var_09 = vectorNormalize(param_00.var_001D);
+        var_0A = vectorNormalize(rotatevectorinverted(var_08, param_00.var_001D));
         var_0B = function_01E3(var_0A[1], var_0A[0]);
         var_08 = undefined;
         if(var_0B < -45 && var_0B > -135) {
@@ -2283,7 +2283,7 @@ bot_planeshootthink(param_00) {
       continue;
     }
 
-    var_0B = vectornormalize(var_0A.var_0116 - param_00.var_0116);
+    var_0B = vectorNormalize(var_0A.var_0116 - param_00.var_0116);
     var_0C = vectortoangles(var_0B);
     var_0D = param_00.var_001D;
     var_0E = angleclamp180(var_0C[1] - var_0D[1]);
@@ -2333,7 +2333,7 @@ bot_planeflythink(param_00) {
       continue;
     }
 
-    var_08 = vectornormalize(var_03 - param_00.var_0116);
+    var_08 = vectorNormalize(var_03 - param_00.var_0116);
     var_09 = 9437184;
     if(function_01EF(var_01) && isDefined(var_04)) {
       var_09 = 0;

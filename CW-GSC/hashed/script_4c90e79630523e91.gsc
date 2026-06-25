@@ -29,7 +29,7 @@
 
 function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
-  level thread scene::init_streamer("scene_kgb_env_server_loops", getplayers());
+  level thread scene::init_streamer("scene_kgb_env_server_loops", getPlayers());
 }
 
 function main(str_skipto, b_starting) {
@@ -119,12 +119,12 @@ function function_b735db01() {
 }
 
 function function_bfe40bf0(var_b1e77977) {
-  vault_ai_nav_clip = getent("vault_ai_nav_clip", "targetname");
+  vault_ai_nav_clip = getEnt("vault_ai_nav_clip", "targetname");
 
   if(isDefined(vault_ai_nav_clip)) {
     if(is_true(var_b1e77977)) {
       vault_ai_nav_clip solid();
-      vault_ai_nav_clip disconnectpaths();
+      vault_ai_nav_clip disconnectPaths();
       return;
     }
 

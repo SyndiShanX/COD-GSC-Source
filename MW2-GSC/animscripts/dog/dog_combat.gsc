@@ -870,7 +870,7 @@ meleeStruggleVsDog() {
   self setflaggedanimrestart("aianim", meleeSeqAnim[1], 1, 0.1, 1);
 
   wait 0.15;
-  self.syncedMeleeTarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedMeleeTarget linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
 
   self waittillmatch("aianim", "end");
 
@@ -1089,7 +1089,7 @@ PlayerView_StartSequence(dog) {
   self dontInterpolate();
 
   player playerLinkToAbsolute(self, "tag_player");
-  dog linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  dog linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
 
   syncTagAngles = self gettagangles("tag_sync");
   dog orientmode("face angle", syncTagAngles[1]);
@@ -1197,7 +1197,7 @@ PlayerView_Show(player) {
 
   if(is_coop()) {
     playerDrone = playerDrone_create(player);
-    playerDrone linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    playerDrone linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     playerDrone thread playerDrone_anim_knockdown(1);
 
     self.playerDrone = playerDrone;

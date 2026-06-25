@@ -357,7 +357,7 @@ func_117CE() {
         self.var_10E6D.var_B4CB = max(self.var_10E6D.var_B4CB, var_6 func_84E9(self));
         var_10 = var_9 && scripts\engine\utility::istrue(level.var_10E6D.var_5659) || var_6 lib_0F22::func_9B2C() && var_8 > 0;
         if(var_10) {
-          var_11 = vectornormalize(var_3 - var_6 getEye());
+          var_11 = vectorNormalize(var_3 - var_6 getEye());
           var_12 = anglestoright(var_6 gettagangles("j_spineupper"));
           var_10 = vectordot(var_11, var_12) > var_4;
         }
@@ -424,7 +424,7 @@ func_117D0(var_0, var_1, var_2) {
     self.var_10E6D.var_117D9 = 0;
     foreach(var_9 in var_7) {
       var_10 = spawn("script_origin", self.origin);
-      var_10 linkto(self);
+      var_10 linkTo(self);
       var_10 ghostattack(0, 0);
       var_10.var_9F00 = 0;
       self.var_10E6D.var_117D8[var_9] = var_10;

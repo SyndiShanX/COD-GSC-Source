@@ -1601,7 +1601,7 @@ func_BA27() {
         var_2 = distancesquared(self.origin, var_1.origin);
 
         if(var_2 < squared(15)) {
-          self setorigin(var_1.origin, 0);
+          self setOrigin(var_1.origin, 0);
         }
       }
     }
@@ -1696,7 +1696,7 @@ func_13F9F(var_0, var_1) {
         }
         var_8 = var_3.origin - self.origin;
         var_8 = (var_8[0], var_8[1], 0);
-        var_9 = vectornormalize(var_8);
+        var_9 = vectorNormalize(var_8);
 
         if(var_7 < 60) {
           var_7 = 60;
@@ -1730,7 +1730,7 @@ func_13F9F(var_0, var_1) {
               var_7 = var_11;
             }
 
-            var_9 = vectornormalize(var_13);
+            var_9 = vectorNormalize(var_13);
           }
         }
 

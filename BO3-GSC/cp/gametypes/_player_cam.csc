@@ -46,7 +46,7 @@ function player_cam_bubbles(localclientnum, oldval, newval, bnewent, binitialsna
       deletefx(localclientnum, self.n_fx_id, 1);
     }
     self.n_fx_id = playfxoncamera(localclientnum, "player/fx_plyr_swim_bubbles_body", (0, 0, 0), (1, 0, 0), (0, 0, 1));
-    self playrumbleonentity(localclientnum, "damage_heavy");
+    self playRumbleOnEntity(localclientnum, "damage_heavy");
   } else if(isDefined(self.n_fx_id)) {
     deletefx(localclientnum, self.n_fx_id, 1);
   }

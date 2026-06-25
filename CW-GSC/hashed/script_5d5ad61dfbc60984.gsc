@@ -126,7 +126,7 @@ function function_def22e6(vehiclename, vehicleorigin, vehicleangles) {
 
 function function_38411346() {
   foreach(spawnpoint in level.var_ed091a74) {
-    vehicle = spawnvehicle(spawnpoint.def, spawnpoint.origin, spawnpoint.angles);
+    vehicle = spawnVehicle(spawnpoint.def, spawnpoint.origin, spawnpoint.angles);
     vehicle makeusable();
   }
 }
@@ -203,7 +203,7 @@ function function_bbf9ef52() {
 }
 
 function function_d33f46a4(spawnpoint, index) {
-  vehicle = spawnvehicle("veh_t9_mil_truck_hemtt_cargo_wz", spawnpoint.origin, spawnpoint.angles);
+  vehicle = spawnVehicle("veh_t9_mil_truck_hemtt_cargo_wz", spawnpoint.origin, spawnpoint.angles);
   vehicle makeusable();
   vehicle.var_b09e50c3 = gameobjects::get_next_obj_id();
   objective_add(vehicle.var_b09e50c3, "active", vehicle, #"hash_3f89a8c368d3848a");
@@ -216,7 +216,7 @@ function function_d33f46a4(spawnpoint, index) {
   missile.takedamage = 1;
   missile.health = 100;
   missile.var_86a21346 = &function_67d3750a;
-  missile linkto(vehicle, "tag_interior_d0", level.missileoffset, (78, 0, 0));
+  missile linkTo(vehicle, "tag_interior_d0", level.missileoffset, (78, 0, 0));
   missile.var_f990f05b = 78;
   missile.truck = vehicle;
   missile thread function_bbf9ef52();
@@ -228,9 +228,9 @@ function function_f4ad14e2(vehicle, index) {
   level endon(#"game_ended");
   vehicle endon(#"death");
   wait 10;
-  upangle = vectorscale(vectornormalize(anglestoup(vehicle.angles)), 5);
+  upangle = vectorscale(vectorNormalize(anglestoup(vehicle.angles)), 5);
   var_a5435776 = spawn("trigger_radius_use", vehicle.origin + upangle, 0, 128, 200);
-  var_a5435776 setcursorhint("HINT_INTERACTIVE_PROMPT");
+  var_a5435776 setCursorHint("HINT_INTERACTIVE_PROMPT");
   var_31b5f1bc = gameobjects::create_use_object(game.attackers, var_a5435776, [], undefined, #"hash_7c8dfdab6fd04459" + index, 1, 1, 1);
   var_31b5f1bc gameobjects::set_visible(#"group_all");
   var_31b5f1bc gameobjects::allow_use(#"group_friendly");
@@ -387,9 +387,9 @@ function firemissile(vehicle) {
   lasttime = gettime();
   fxorg = spawn("script_model", (0, 0, 0));
   fxorg setModel(#"tag_origin");
-  fxorg linkto(missile, undefined, (0, 0, 0), (90, 0, 0));
+  fxorg linkTo(missile, undefined, (0, 0, 0), (90, 0, 0));
   playFXOnTag("_t7/dlc1/castle/fx_rocket_exhaust_takeoff", fxorg, "tag_origin");
-  missile moveto(missile.origin + (0, 0, 60000), 60, 10);
+  missile moveTo(missile.origin + (0, 0, 60000), 60, 10);
 
   foreach(player in level.players) {
     if(player.team == game.attackers) {
@@ -463,9 +463,9 @@ function function_71db2f7c(vehicle, var_31cac59e) {
     }
   }
 
-  upangle = vectorscale(vectornormalize(anglestoup(var_31cac59e.angles)), 5);
+  upangle = vectorscale(vectorNormalize(anglestoup(var_31cac59e.angles)), 5);
   defusetrigger = spawn("trigger_radius_use", var_31cac59e.origin + upangle, 0, 128, 200);
-  defusetrigger setcursorhint("HINT_INTERACTIVE_PROMPT");
+  defusetrigger setCursorHint("HINT_INTERACTIVE_PROMPT");
   defuseobject = gameobjects::create_use_object(game.attackers, defusetrigger, [], undefined, #"hash_12ac522cdf799e82", 1, 1, 1);
   defuseobject gameobjects::set_visible(#"group_all");
   defuseobject gameobjects::allow_use(#"group_enemy");

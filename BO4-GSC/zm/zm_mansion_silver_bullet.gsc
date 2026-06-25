@@ -107,7 +107,7 @@ function_62018caa(e_player) {
     var_b3c7df1a = zm_crafting::function_b18074d0(#"zblueprint_mansion_silver_molten");
 
     if(!zm_items::player_has(e_player, var_87d6e5ff.component04) && zm_items::player_has(e_player, var_b3c7df1a.component01) && zm_items::player_has(e_player, var_b3c7df1a.component02) && zm_items::player_has(e_player, var_b3c7df1a.component03)) {
-      self sethintstring(#"hash_3da7f56d63678947");
+      self setHintString(#"hash_3da7f56d63678947");
     }
   }
 
@@ -215,26 +215,26 @@ function_252cf612(player) {
 
     if(player zm_utility::function_aa45670f(var_12680c28, 0)) {
       if(player function_ec89dca9()) {
-        self sethintstring(#"hash_4731c9534a6055b");
+        self setHintString(#"hash_4731c9534a6055b");
       } else if(isDefined(self.stub.var_6646a22) && self.stub.var_6646a22) {
         str_prompt = zm_utility::function_d6046228(#"hash_5d4b4dfdc53fd671", #"hash_7bd012fd92e7aaf");
-        self sethintstring(str_prompt, 0);
+        self setHintString(str_prompt, 0);
       } else {
         n_cost = function_8051ebe7(player, var_12680c28, 1);
         str_prompt = zm_utility::function_d6046228(#"hash_5d4b4dfdc53fd671", #"hash_7bd012fd92e7aaf");
-        self sethintstring(str_prompt, n_cost);
+        self setHintString(str_prompt, n_cost);
       }
     } else if(!player flag::get(#"hash_56504ef435e17076")) {
       str_prompt = zm_utility::function_d6046228(#"hash_558dab41980bd79b", #"hash_7bc5748f7802e011");
-      self sethintstring(str_prompt);
+      self setHintString(str_prompt);
     } else if(isDefined(self.stub.var_6646a22) && self.stub.var_6646a22) {
       str_prompt = zm_utility::function_d6046228(#"hash_558dab41980bd79b", #"hash_7bc5748f7802e011");
-      self sethintstring(str_prompt);
+      self setHintString(str_prompt);
     } else {
       n_cost = function_8051ebe7(player, var_12680c28, 1);
 
       if(isDefined(n_cost)) {
-        self sethintstring(#"hash_9c2f7742abf6acb", n_cost);
+        self setHintString(#"hash_9c2f7742abf6acb", n_cost);
       } else {
         iprintln("<dev string:x4f>" + hashtostring(var_12680c28.name) + "<dev string:x59>");
 

@@ -192,7 +192,7 @@ _id_FC02(var_0) {
   var_10 = var_0[0];
 
   foreach(var_3 in var_0) {
-    var_12 = getent(var_3.target, "targetname");
+    var_12 = getEnt(var_3.target, "targetname");
 
     foreach(var_6 in var_3._id_FF63) {
       var_3._id_A57A = var_3._id_A57A + 1;
@@ -207,7 +207,7 @@ _id_FC02(var_0) {
     }
   }
 
-  return getent(var_10.target, "targetname");
+  return getEnt(var_10.target, "targetname");
 }
 
 _id_7750(var_0, var_1, var_2, var_3, var_4) {
@@ -896,8 +896,8 @@ _id_3522(var_0, var_1) {
   var_3 = var_1.origin - self.origin;
   var_2 = var_2 * (1, 1, 0);
   var_3 = var_3 * (1, 1, 0);
-  var_3 = vectornormalize(var_3);
-  var_2 = vectornormalize(var_2);
+  var_3 = vectorNormalize(var_3);
+  var_2 = vectorNormalize(var_2);
   var_4 = vectordot(var_3, var_2);
   var_5 = cos(var_0);
 
@@ -921,8 +921,8 @@ _id_8849(var_0, var_1) {
     var_3 = var_1.origin - self.origin;
     var_2 = var_2 * (1, 1, 0);
     var_3 = var_3 * (1, 1, 0);
-    var_3 = vectornormalize(var_3);
-    var_2 = vectornormalize(var_2);
+    var_3 = vectorNormalize(var_3);
+    var_2 = vectorNormalize(var_2);
     var_4 = vectordot(var_3, var_2);
     var_5 = cos(var_0);
 
@@ -960,7 +960,7 @@ _id_5B81(var_0) {
       var_3._id_100A9 = self;
     }
 
-    var_3 missile_settargetent(var_0);
+    var_3 missile_settargetEnt(var_0);
     var_3.owner = self;
     var_3 _meth_8231();
     wait(0.5 / var_1);
@@ -1108,7 +1108,7 @@ _id_76BF(var_0) {
   var_1 = var_0;
 
   while(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
 
     if(isDefined(var_1._id_CC90) && isDefined(var_1._id_CC89)) {
       var_3 = var_1._id_CC90;
@@ -1155,7 +1155,7 @@ _id_76BE(var_0) {
   var_1 = var_0;
 
   while(isDefined(var_1.target)) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
 
     if(isDefined(self._id_8978) && self._id_8978) {
       wait 0.25;

@@ -113,7 +113,7 @@ play_charge_fx() {
       }
 
       time_to_pulse = time_to_pulse + 1000;
-      self playrumbleonentity("reload_small");
+      self playRumbleOnEntity("reload_small");
     }
 
     if(time_to_pulse > 2400 && self.current_tactical_grenade != "upgraded_tomahawk_zm") {
@@ -184,7 +184,7 @@ tomahawk_thrown(grenade) {
 
     foreach(powerup in a_powerups) {
       powerup.origin = grenade_origin;
-      powerup linkto(m_tomahawk);
+      powerup linkTo(m_tomahawk);
       m_tomahawk.a_has_powerup = a_powerups;
     }
 
@@ -279,7 +279,7 @@ tomahawk_attack_zombies(m_tomahawk, a_zombies) {
 
       if(isDefined(a_zombies[i].hit_by_tomahawk) && !a_zombies[i].hit_by_tomahawk) {
         v_target = a_zombies[i] gettagorigin(tag);
-        m_tomahawk moveto(v_target, 0.3);
+        m_tomahawk moveTo(v_target, 0.3);
         m_tomahawk waittill("movedone");
 
         if(isDefined(a_zombies[i]) && isalive(a_zombies[i])) {
@@ -314,7 +314,7 @@ tomahawk_return_player(m_tomahawk, num_zombie_hit) {
   }
 
   while(n_dist > 4096) {
-    m_tomahawk moveto(self getEye(), 0.25);
+    m_tomahawk moveTo(self getEye(), 0.25);
 
     if(num_zombie_hit < 5) {
       self tomahawk_check_for_zombie(m_tomahawk);
@@ -372,7 +372,7 @@ tomahawk_hit_zombie(ai_zombie, grenade) {
     }
 
     v_target = ai_zombie gettagorigin(tag);
-    grenade moveto(v_target, 0.3);
+    grenade moveTo(v_target, 0.3);
     grenade waittill("movedone");
 
     if(isDefined(ai_zombie) && isalive(ai_zombie)) {
@@ -423,29 +423,29 @@ tomahawk_spin() {
 tomahawk_pickup() {
   flag_wait("soul_catchers_charged");
   flag_init("tomahawk_pickup_complete");
-  door = getent("tomahawk_room_door", "targetname");
+  door = getEnt("tomahawk_room_door", "targetname");
   door trigger_off();
   door connectpaths();
-  s_pos_tomahawk = getstruct("tomahawk_pickup_pos", "targetname");
+  s_pos_tomahawk = getStruct("tomahawk_pickup_pos", "targetname");
   m_tomahawk = spawn("script_model", s_pos_tomahawk.origin);
   m_tomahawk.targetname = "spinning_tomahawk_pickup";
   m_tomahawk setModel("t6_wpn_zmb_tomahawk_world");
   m_tomahawk setclientfield("play_tomahawk_fx", 1);
   m_tomahawk thread tomahawk_pickup_spin();
   m_tomahawk playLoopSound("amb_tomahawk_swirl");
-  s_pos_trigger = getstruct("tomahawk_trigger_pos", "targetname");
+  s_pos_trigger = getStruct("tomahawk_trigger_pos", "targetname");
   trigger = spawn("trigger_radius_use", s_pos_trigger.origin, 0, 100, 150);
   trigger.script_noteworthy = "retriever_pickup_trigger";
-  trigger usetriggerrequirelookat();
-  trigger triggerignoreteam();
-  trigger sethintstring(&"ZM_PRISON_TOMAHAWK_PICKUP");
-  trigger setcursorhint("HINT_NOICON");
+  trigger useTriggerRequireLookAt();
+  trigger triggerIgnoreTeam();
+  trigger setHintString(&"ZM_PRISON_TOMAHAWK_PICKUP");
+  trigger setCursorHint("HINT_NOICON");
   trigger_upgraded = spawn("trigger_radius_use", s_pos_trigger.origin, 0, 100, 150);
-  trigger_upgraded usetriggerrequirelookat();
-  trigger_upgraded triggerignoreteam();
+  trigger_upgraded useTriggerRequireLookAt();
+  trigger_upgraded triggerIgnoreTeam();
   trigger_upgraded.script_noteworthy = "redeemer_pickup_trigger";
-  trigger_upgraded sethintstring(&"ZM_PRISON_TOMAHAWK_UPGRADED_PICKUP");
-  trigger_upgraded setcursorhint("HINT_NOICON");
+  trigger_upgraded setHintString(&"ZM_PRISON_TOMAHAWK_UPGRADED_PICKUP");
+  trigger_upgraded setCursorHint("HINT_NOICON");
 
   iprintlnbold("GO FIND THE TOMAHAWK");
 
@@ -527,7 +527,7 @@ tomahawk_pickup_spin() {
   self endon("death");
 
   while(true) {
-    self rotateyaw(90, 1);
+    self rotateYaw(90, 1);
     wait 0.15;
   }
 }

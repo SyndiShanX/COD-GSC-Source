@@ -599,7 +599,7 @@ _id_9D73(var_0) {
   }
 
   var_17 = max(_func_0218(var_3) - 24, 0);
-  var_18 = vectornormalize(self.origin - var_4.origin);
+  var_18 = vectorNormalize(self.origin - var_4.origin);
   var_19 = scripts\engine\utility::ter_op(isPlayer(var_4) && istrue(self._id_9DAA), var_4.origin, var_4.origin + var_18 * var_17);
   var_20 = 36;
 
@@ -671,7 +671,7 @@ _id_9D73(var_0) {
 _id_6DBC(var_0) {
   var_1 = var_0.origin;
   var_2 = var_0.origin - self.origin;
-  var_2 = vectornormalize(var_2);
+  var_2 = vectorNormalize(var_2);
   var_1 = var_1 - var_2 * self._id_9D64;
   var_3 = _func_02AB(var_1, self);
 
@@ -781,7 +781,7 @@ _id_892B(var_0, var_1) {
       if(var_3 > 60) {
         var_2 = var_2 / var_3;
         var_4 = self _meth_84A6(30);
-        var_5 = vectornormalize(var_4 - self.origin);
+        var_5 = vectorNormalize(var_4 - self.origin);
 
         if(vectordot(var_5, var_2) < -0.5) {
           return 0;

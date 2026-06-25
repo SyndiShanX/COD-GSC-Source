@@ -454,7 +454,7 @@ function run(ai_actor, anim_struct, timer, activator, var_5bab29d8 = 0, var_cf6d
   if(isDefined(activator) && isPlayer(activator)) {
     self.activator = activator;
   } else {
-    self.activator = getplayers()[0];
+    self.activator = getPlayers()[0];
   }
 
   if(!isDefined(self.activator)) {
@@ -588,7 +588,7 @@ function run(ai_actor, anim_struct, timer, activator, var_5bab29d8 = 0, var_cf6d
     level notify(#"dialog_tree_choice_made");
     ai_actor flag::wait_till_clear("dialog_wait_for_animation");
     var_b7751c0b = self.options[var_8989140b];
-    bb::function_7977c093(self.scriptbundle, self.options[var_8989140b].hudstring, getplayers()[0]);
+    bb::function_7977c093(self.scriptbundle, self.options[var_8989140b].hudstring, getPlayers()[0]);
 
     if(isai(ai_actor)) {
       ai_actor stopsounds();
@@ -772,7 +772,7 @@ function private function_27059a7f(ai_actor, anim_struct) {
 
   while(true) {
     self.activator namespace_61e6d095::function_b0bad5ff("dialog_tree_end", "watch_dt_skips");
-    bb::function_7977c093(self.scriptbundle, #"ui_cancel", getplayers()[0]);
+    bb::function_7977c093(self.scriptbundle, #"ui_cancel", getPlayers()[0]);
 
     if(ai_actor flag::get("_dialog_vo_playing")) {
       if(isDefined(ai_actor.var_e744d1aa)) {

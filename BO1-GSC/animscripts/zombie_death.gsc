@@ -107,7 +107,7 @@ play_hit_by_vehicle_anim() {
   return false;
 }
 goSlowMo() {
-  if(GetPlayers().size > 1) {
+  if(getPlayers().size > 1) {
     return;
   }
   if(!isPlayer(self.attacker)) {

@@ -53,7 +53,7 @@ function_6607df78() {
   while(true) {
     self waittill(#"end_death_dash");
     self clientfield::increment("death_dash_pulse", 1);
-    self playrumbleonentity("talon_spike");
+    self playRumbleOnEntity("talon_spike");
     var_baf7d060 = getaiteamarray(level.zombie_team);
     a_ai_zombies = array::get_all_closest(self.origin, var_baf7d060, undefined, undefined, 256);
 

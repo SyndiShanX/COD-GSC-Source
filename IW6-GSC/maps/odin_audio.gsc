@@ -132,7 +132,7 @@ sfx_bg_fighting_line_emitter() {
     }
 
     var_2 = pointonsegmentnearesttopoint((3200, 47190, 48558), (3280, 46530, 48558), level.player.origin);
-    var_0 moveto(var_2, 0.01);
+    var_0 moveTo(var_2, 0.01);
 
     if(var_1 == 0) {
       var_0 playLoopSound("emt_odin_bg_fighting_01_lp");
@@ -165,7 +165,7 @@ sfx_bg_fighting_stop() {
 
 sfx_ally_plr_grapple() {
   level.sfx_player_grapple = spawn("script_origin", self.origin);
-  level.sfx_player_grapple linkto(self);
+  level.sfx_player_grapple linkTo(self);
   wait 0.4;
   level.sfx_player_grapple playSound("scn_odin_player_grapple");
   common_scripts\utility::flag_wait("saved_ally");
@@ -188,12 +188,12 @@ sfx_ally_ally_grapple() {
 sfx_ally_plr_grapple_loop_init() {
   if(!isDefined(level.sfx_plr_grapple_lp)) {
     level.sfx_plr_grapple_lp = spawn("script_origin", self.origin);
-    level.sfx_plr_grapple_lp linkto(self);
+    level.sfx_plr_grapple_lp linkTo(self);
   }
 
   if(!isDefined(level.sfx_plr_grapple_lt_lp)) {
     level.sfx_plr_grapple_lt_lp = spawn("script_origin", self.origin);
-    level.sfx_plr_grapple_lt_lp linkto(self);
+    level.sfx_plr_grapple_lt_lp linkTo(self);
     level.sfx_plr_grapple_lt_lp playLoopSound("scn_odin_player_grapple_lt_lp");
   }
 }
@@ -550,7 +550,7 @@ sfx_play_alarms() {
 emt_scn_move() {
   var_0 = spawn("script_origin", (3217, -46399, -13043));
   var_0 playSound("emt_scn_odin_on");
-  var_0 moveto((3951, 46358, -12977), 3);
+  var_0 moveTo((3951, 46358, -12977), 3);
 }
 
 sfx_scuttle_alarm() {
@@ -655,7 +655,7 @@ sfx_rcs_damage(var_0) {}
 
 sfx_sat_first_explosion() {
   level.player playSound("scn_odin_sat_expl_01_lr");
-  var_0 = getent("fx_sat_rcs_damage_1", "script_noteworthy");
+  var_0 = getEnt("fx_sat_rcs_damage_1", "script_noteworthy");
   var_0 stoploopsound("scn_odin_rcs_fire_lp_01");
   level.player playSound("scn_odin_sat_plr_expl_foley_01");
   thread sfx_sat_big_fire_lp(var_0);
@@ -676,7 +676,7 @@ sfx_sat_big_fire_lp(var_0) {
 sfx_sat_second_explosion() {
   common_scripts\utility::flag_set("sat_second_expl");
   level.player playSound("scn_odin_sat_expl_02_lr");
-  var_0 = getent("fx_sat_rcs_damage_1", "script_noteworthy");
+  var_0 = getEnt("fx_sat_rcs_damage_1", "script_noteworthy");
   var_0 stoploopsound("scn_odin_rcs_fire_lp_02");
   level.player playSound("scn_odin_sat_plr_expl_foley_02");
   wait 3;
@@ -780,7 +780,7 @@ sfx_spin_debris_passby() {
   wait 2.16;
   wait 4.51;
   var_0 playSound("scn_odin_spin_debris_03");
-  var_0 moveto((-2610, 46210, -15895), 3.5);
+  var_0 moveTo((-2610, 46210, -15895), 3.5);
   wait 10;
   var_0 delete();
 }

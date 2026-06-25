@@ -85,7 +85,7 @@ _start(var_0, var_1, var_2) {
   var_3.cockpit_tubes = spawn("script_model", self.origin);
   var_3.cockpit_tubes.angles = self.angles;
   var_3.cockpit_tubes setModel("apache_cockpit_player_pipe");
-  var_3.cockpit_tubes linkto(self, "tag_origin");
+  var_3.cockpit_tubes linkTo(self, "tag_origin");
   level.cover_warnings_disabled = 1;
   level.treadfx_maxheight = 9000;
   setsaveddvar("g_friendlyNameDist", 150000);
@@ -454,10 +454,10 @@ monitoraltitude() {
   disable_altitude_control();
   self endon("monitor_altitude_disable");
   self endon("LISTEN_heli_end");
-  var_0 = common_scripts\utility::getstruct("struct_altitude_trace_start", "targetname");
-  var_1 = common_scripts\utility::getstruct("struct_altitude_offset", "targetname");
-  var_2 = common_scripts\utility::getstruct("struct_altitude_trace_end", "targetname");
-  var_3 = common_scripts\utility::getstruct("struct_altitude_default", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_altitude_trace_start", "targetname");
+  var_1 = common_scripts\utility::getStruct("struct_altitude_offset", "targetname");
+  var_2 = common_scripts\utility::getStruct("struct_altitude_trace_end", "targetname");
+  var_3 = common_scripts\utility::getStruct("struct_altitude_default", "targetname");
 
   if(!isDefined(var_3) || !isDefined(var_1) || !isDefined(var_0) || !isDefined(var_2)) {
     return;
@@ -505,9 +505,9 @@ monitoraltitude() {
 }
 
 get_altitude_min() {
-  var_0 = common_scripts\utility::getstruct("struct_altitude_offset", "targetname");
-  var_1 = common_scripts\utility::getstruct("struct_altitude_trace_end", "targetname");
-  var_2 = common_scripts\utility::getstruct("struct_altitude_default", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_altitude_offset", "targetname");
+  var_1 = common_scripts\utility::getStruct("struct_altitude_trace_end", "targetname");
+  var_2 = common_scripts\utility::getStruct("struct_altitude_default", "targetname");
   return var_2.origin[2] - (var_0.origin[2] - var_1.origin[2]);
 }
 
@@ -1220,7 +1220,7 @@ damage_state_quake(var_0) {
 
   if(self.quake_scale > 0 && gettime() - var_0 >= self.quake_interval_msec) {
     earthquake(self.quake_scale, self.quake_time, self.vehicle.heli.owner.origin, 1024);
-    self.vehicle.heli.owner playrumbleonentity("damage_light");
+    self.vehicle.heli.owner playRumbleOnEntity("damage_light");
     var_1 = 1;
   }
 
@@ -1291,7 +1291,7 @@ damage_state_tag_ent_get(var_0) {
     var_1 = common_scripts\utility::spawn_tag_origin();
     var_1.origin = self.vehicle gettagorigin(var_0);
     var_1.angles = self.vehicle gettagangles(var_0);
-    var_1 linkto(self.vehicle, var_0);
+    var_1 linkTo(self.vehicle, var_0);
     self.vehicle.damage_state_tag_ents[var_0] = var_1;
   }
 

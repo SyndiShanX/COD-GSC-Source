@@ -48,13 +48,13 @@ hc_quest_bat_step01_handler() {
 }
 
 hc_quest_bat_step01_register_listen() {
-  var_00 = getent("hc_smuggler_register", "script_noteworthy");
-  var_01 = getent("hc_smuggler_register_clip_open", "script_noteworthy");
+  var_00 = getEnt("hc_smuggler_register", "script_noteworthy");
+  var_01 = getEnt("hc_smuggler_register_clip_open", "script_noteworthy");
   var_01 notsolid();
-  var_02 = getent("hc_smuggler_register_trig", "script_noteworthy");
+  var_02 = getEnt("hc_smuggler_register_trig", "script_noteworthy");
   var_02 method_80B0(var_02 method_85A0() | 256);
-  var_03 = getent("hc_register_date", "script_noteworthy");
-  var_03 linkto(var_00, "drawer");
+  var_03 = getEnt("hc_register_date", "script_noteworthy");
+  var_03 linkTo(var_00, "drawer");
   while(!common_scripts\utility::func_3C77("flag_hc_quest_bat_step01_open_register_complete")) {
     var_02 waittill("damage", var_04, var_05, var_06, var_07, var_08, var_09, var_0A, var_0B, var_0C, var_0D);
     if(var_0D == "wunderbuss_zm") {
@@ -110,7 +110,7 @@ hc_quest_bat_step01_generate_code() {
     var_07 = var_04;
   }
 
-  var_08 = getent("hc_register_date", "script_noteworthy");
+  var_08 = getEnt("hc_register_date", "script_noteworthy");
   var_08 method_8695("TAG_DATE");
   var_09 = "TAG_DATE_T0" + var_02;
   var_08 method_8696(var_09);
@@ -184,14 +184,14 @@ hc_quest_bat_step02_handler() {
 hc_quest_bat_step02_vo_hole_discovery(param_00) {
   var_01 = self;
   if(param_00 == "hc_smuggler_hole_weapon") {
-    var_02 = getent("hc_org_smuggler_hole_weapon_place", "script_noteworthy");
+    var_02 = getEnt("hc_org_smuggler_hole_weapon_place", "script_noteworthy");
     var_01 lib_0367::func_8E3C("hc_smuggler_found");
     lib_0380::func_6844("zmb_berl_gsmg_hc_smuggler_found", undefined, var_02);
     return;
   }
 
   if(param_00 == "hc_smuggler_hole_jolt") {
-    var_02 = getent("hc_bat_trig_use_jolt_drop", "script_noteworthy");
+    var_02 = getEnt("hc_bat_trig_use_jolt_drop", "script_noteworthy");
     var_01 lib_0367::func_8E3C("hc_smuggler_found_jolts");
     lib_0380::func_6844("zmb_berl_gsmg_hc_smuggler_found_jolts", undefined, var_02);
   }
@@ -311,7 +311,7 @@ hc_quest_bat_step02_manhole_wait_for_damage(param_00) {
 
 hc_quest_bat_step02_gun_drop_listen() {
   level endon("weapon_given");
-  var_00 = getent("hc_bat_trig_use_gun_drop_1", "script_noteworthy");
+  var_00 = getEnt("hc_bat_trig_use_gun_drop_1", "script_noteworthy");
   var_01 = undefined;
   for(;;) {
     var_00 waittill("trigger", var_02);
@@ -332,17 +332,17 @@ hc_quest_bat_step02_gun_drop_listen() {
       var_02 switchtoweapon(var_05);
     }
 
-    var_06 = getent("hc_org_smuggler_hole_weapon_place", "script_noteworthy");
+    var_06 = getEnt("hc_org_smuggler_hole_weapon_place", "script_noteworthy");
     var_06.var_92F0 = var_06.var_116;
     var_06.var_92B8 = var_06.var_1D;
     var_06 rotatepitch(-90, 0.05);
     wait 0.05;
-    var_06 rotateyaw(90, 0.05);
+    var_06 rotateYaw(90, 0.05);
     wait 0.05;
     lib_0378::func_8D74("smugglers_bat_weapon_drop", var_00.var_116);
     var_07 = "weapon_" + var_03;
     var_08 = spawn(var_07, var_06.var_116);
-    var_08 linkto(var_06);
+    var_08 linkTo(var_06);
     var_08 makeunusable();
     var_06 movez(-80, 2);
     wait(3);
@@ -413,7 +413,7 @@ hc_quest_bat_step02_wave_wait(param_00) {
 
 hc_quest_bat_step02_jolt_drop_listen() {
   level.bat_hc_jolts_dropped = 0;
-  var_00 = getent("hc_bat_trig_use_jolt_drop", "script_noteworthy");
+  var_00 = getEnt("hc_bat_trig_use_jolt_drop", "script_noteworthy");
   while(!isDefined(level.var_8AD2)) {
     wait 0.05;
   }
@@ -438,7 +438,7 @@ hc_quest_bat_step02_jolt_drop_listen() {
     wait 0.05;
   }
 
-  var_06 = getent("hc_smuggler_drop_pod", "script_noteworthy");
+  var_06 = getEnt("hc_smuggler_drop_pod", "script_noteworthy");
   var_06 scriptmodelplayanim("s2_zom_drop_pod_open", "smuggler_drop_pod_open");
   iprintlnbold("Danke! Come to my apartment");
   lib_0380::func_6844("zmb_berl_gsmg_hc_smuggler_jolts_used", undefined, var_00);
@@ -453,7 +453,7 @@ hc_quest_bat_step03_handler() {
 }
 
 hc_quest_bat_step03_door_listen() {
-  var_00 = getent("hc_bat_dmg_trig_smuggler_door", "script_noteworthy");
+  var_00 = getEnt("hc_bat_dmg_trig_smuggler_door", "script_noteworthy");
   var_01 = 0;
   while(var_01 < 3) {
     var_00 waittill("trigger");
@@ -471,19 +471,19 @@ hc_quest_bat_step03_door_listen() {
     var_03 thread hc_quest_bat_step03_vo_smuggler_room();
   }
 
-  var_05 = getent("bat_pickup_trigger", "targetname");
+  var_05 = getEnt("bat_pickup_trigger", "targetname");
   maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_05, "bat");
 }
 
 hc_quest_bat_step03_door_open_follower() {
-  var_00 = getent("hc_bat_smuggler_body", "script_noteworthy");
+  var_00 = getEnt("hc_bat_smuggler_body", "script_noteworthy");
   var_00 method_805B();
-  var_01 = getent("hc_bat_smuggler_bat", "script_noteworthy");
+  var_01 = getEnt("hc_bat_smuggler_bat", "script_noteworthy");
   var_01 method_805B();
   var_02 = common_scripts\utility::func_46B5("hc_bat_smuggler_door_follower_spawner", "targetname");
   var_03 = lib_054D::func_90BA("zombie_heavy", var_02, "smuggler jumpscare", 0, 1, 1);
-  var_04 = getent("hc_bat_smuggler_door", "script_noteworthy");
-  var_05 = getent("hc_bat_smuggler_door_clip", "script_noteworthy");
+  var_04 = getEnt("hc_bat_smuggler_door", "script_noteworthy");
+  var_05 = getEnt("hc_bat_smuggler_door_clip", "script_noteworthy");
   var_05 notsolid();
   var_05 method_8060();
   var_05 solid();
@@ -497,14 +497,14 @@ hc_quest_bat_step03_door_open_follower() {
 }
 
 hc_quest_bat_step03_door_open_escaped() {
-  var_00 = getent("hc_bat_follower_body", "script_noteworthy");
+  var_00 = getEnt("hc_bat_follower_body", "script_noteworthy");
   var_00 method_805B();
-  var_01 = getent("hc_bat_follower_bat", "script_noteworthy");
+  var_01 = getEnt("hc_bat_follower_bat", "script_noteworthy");
   var_01 method_805B();
-  var_02 = getent("hc_bat_smuggler_door", "script_noteworthy");
-  var_03 = getent("hc_bat_smuggler_door_clip", "script_noteworthy");
+  var_02 = getEnt("hc_bat_smuggler_door", "script_noteworthy");
+  var_03 = getEnt("hc_bat_smuggler_door_clip", "script_noteworthy");
   lib_0378::func_8D74("smugglers_bat_door_open_squeaky", var_02.var_116);
-  var_02 rotateyaw(120, 2, 0.8, 0.4);
+  var_02 rotateYaw(120, 2, 0.8, 0.4);
   var_03 notsolid();
   var_03 method_8060();
   var_04 = getEntArray("hc_bat_smuggler_door_escape", "script_noteworthy");
@@ -514,7 +514,7 @@ hc_quest_bat_step03_door_open_escaped() {
 }
 
 hc_quest_bat_step03_vo_smuggler_room() {
-  var_00 = getent("bat_pickup_trigger", "targetname");
+  var_00 = getEnt("bat_pickup_trigger", "targetname");
   for(;;) {
     if(distance(self.var_116, var_00.var_116) < 100) {
       if(level.survivor_wep_is_pap) {} else {
@@ -637,13 +637,13 @@ hc_quest_dagger_step01_handler() {
 }
 
 hc_quest_dagger_step01_film_reel() {
-  var_00 = getent("film_final_location", "targetname");
-  var_01 = getent("film_start_location", "targetname");
-  var_02 = getent("film_placed", "targetname");
-  var_03 = getent("film_pickup_trigger", "targetname");
-  var_04 = getent("projector_use_trig", "targetname");
-  var_05 = getent("projector", "targetname");
-  var_06 = getent("projector_full", "targetname");
+  var_00 = getEnt("film_final_location", "targetname");
+  var_01 = getEnt("film_start_location", "targetname");
+  var_02 = getEnt("film_placed", "targetname");
+  var_03 = getEnt("film_pickup_trigger", "targetname");
+  var_04 = getEnt("projector_use_trig", "targetname");
+  var_05 = getEnt("projector", "targetname");
+  var_06 = getEnt("projector_full", "targetname");
   var_00 method_805C();
   var_02 method_805C();
   var_06 method_805C();
@@ -655,7 +655,7 @@ hc_quest_dagger_step01_film_reel() {
   var_09 = 1 / var_08;
   var_0A = var_07 * (var_09, var_09, 0);
   var_01 gravitymove(var_0A, var_08);
-  var_01 rotateto(var_00.var_1D, var_08);
+  var_01 rotateTo(var_00.var_1D, var_08);
   wait(var_08);
   var_01.var_116 = var_00.var_116;
   var_01 delete();
@@ -684,7 +684,7 @@ hc_quest_dagger_step01_painting() {
     }
   }
 
-  var_05 = getent("apartment_dagger_painting_trig", "targetname");
+  var_05 = getEnt("apartment_dagger_painting_trig", "targetname");
   var_05 waittill("trigger");
   var_05 delete();
   common_scripts\utility::func_3C8F("apartment_dagger_painting_found");
@@ -693,7 +693,7 @@ hc_quest_dagger_step01_painting() {
   var_07 = hc_quest_dagger_step01_painting_get_org(var_06);
   lib_0378::func_8D74("ddagger_picture_remove", var_07.var_116);
   hc_quest_dagger_step01_painting_apartment_cleanup(var_06);
-  var_08 = getent("projector_use_trig", "targetname");
+  var_08 = getEnt("projector_use_trig", "targetname");
   var_08 waittill("trigger", var_09);
   lib_0378::func_8D74("ddagger_picture_placement", var_01.var_116);
   hc_quest_dagger_step01_painting_place_on_projector(var_00, var_01);
@@ -726,13 +726,13 @@ hc_quest_dagger_step01_painting_place_on_projector(param_00, param_01) {
     }
   }
 
-  var_05 = getent("painting_end_org", "targetname");
-  param_01 moveto(var_05.var_116, 2, 1, 1);
-  param_01 rotateto(var_05.var_1D, 2, 1, 1);
+  var_05 = getEnt("painting_end_org", "targetname");
+  param_01 moveTo(var_05.var_116, 2, 1, 1);
+  param_01 rotateTo(var_05.var_1D, 2, 1, 1);
 }
 
 hc_quest_dagger_step01_turn_on_projector() {
-  var_00 = getent("projector_damage_trig", "targetname");
+  var_00 = getEnt("projector_damage_trig", "targetname");
   var_00 method_80B0(var_00 method_85A0() | 256);
   for(;;) {
     var_00 waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_0A);
@@ -744,8 +744,8 @@ hc_quest_dagger_step01_turn_on_projector() {
   }
 
   level childthread common_scripts\_exploder::func_88E(204);
-  var_0B = getent("projector", "targetname");
-  var_0C = getent("projector_full", "targetname");
+  var_0B = getEnt("projector", "targetname");
+  var_0C = getEnt("projector_full", "targetname");
   if(isDefined(var_0B)) {
     var_0B method_8278("hub_movie_projector_anim_01");
   }
@@ -759,7 +759,7 @@ hc_quest_dagger_step01_turn_on_projector() {
 }
 
 hc_quest_dagger_step01_turn_on_projection() {
-  var_00 = getent("map_projection", "targetname");
+  var_00 = getEnt("map_projection", "targetname");
   var_00 method_805C();
   common_scripts\utility::func_3CA0("flag_hc_quest_dagger_step01_painting_complete", "flag_hc_quest_dagger_step01_projector_on_complete");
   level notify("suspend_node_vfx");
@@ -770,7 +770,7 @@ hc_quest_dagger_step01_turn_on_projection() {
 }
 
 hc_quest_dagger_step01_cleanup() {
-  var_00 = getent("projector_use_trig", "targetname");
+  var_00 = getEnt("projector_use_trig", "targetname");
   if(isDefined(var_00)) {
     var_00 delete();
   }
@@ -947,9 +947,9 @@ hc_quest_dagger_step03_safe_think() {
     var_0A = var_07.var_1D;
     var_01.var_116 = var_09;
     var_01.var_1D = var_0A;
-    var_08 playerlinkto(var_01, undefined, 0.1, 0, 0, 0, 0);
-    var_01 moveto(var_02.var_116, 0.5, 0, 0);
-    var_01 rotateto(var_02.var_1D, 0.5, 0, 0);
+    var_08 playerlinkTo(var_01, undefined, 0.1, 0, 0, 0, 0);
+    var_01 moveTo(var_02.var_116, 0.5, 0, 0);
+    var_01 rotateTo(var_02.var_1D, 0.5, 0, 0);
     wait(0.5);
     var_08 thread hc_quest_dagger_step03_safe_attempt_unlock();
     var_08 waittill("stop_using_station");
@@ -958,8 +958,8 @@ hc_quest_dagger_step03_safe_think() {
     }
 
     var_08 method_8323();
-    var_01 moveto(var_09 + (0, 0, 1), 0.5);
-    var_01 rotateto(var_0A, 0.5);
+    var_01 moveTo(var_09 + (0, 0, 1), 0.5);
+    var_01 rotateTo(var_0A, 0.5);
     wait(0.5);
     var_08 unlink();
     var_08 method_812C(1);
@@ -1304,11 +1304,11 @@ hc_quest_axe_init() {
   common_scripts\utility::func_3C87("flag_hc_quest_axe_step03_placed_another_thing");
   common_scripts\utility::func_3C87("flag_hc_quest_axe_step04_opened_museum_compartment");
   common_scripts\utility::func_3C87("flag_hc_quest_axe_step04_obtained_axe");
-  var_00 = getent("hc_ee_axe_scale_sizzler_head", "script_noteworthy");
-  var_01 = getent("hc_ee_axe_scale_cup", "script_noteworthy");
-  var_02 = getent("hc_ee_axe_scale_cup_church", "script_noteworthy");
-  var_03 = getent("hc_ee_axe_scale_needle", "script_noteworthy");
-  var_04 = getent("map_board_mover_selector", "script_noteworthy");
+  var_00 = getEnt("hc_ee_axe_scale_sizzler_head", "script_noteworthy");
+  var_01 = getEnt("hc_ee_axe_scale_cup", "script_noteworthy");
+  var_02 = getEnt("hc_ee_axe_scale_cup_church", "script_noteworthy");
+  var_03 = getEnt("hc_ee_axe_scale_needle", "script_noteworthy");
+  var_04 = getEnt("map_board_mover_selector", "script_noteworthy");
   var_00 method_805C();
   var_01 method_805C();
   var_04 method_805C();
@@ -1516,7 +1516,7 @@ map_board_think() {
   var_02 = undefined;
   var_03 = undefined;
   level.mapboard_pos = [1, 1];
-  var_04 = getent("map_board_mover_selector", "script_noteworthy");
+  var_04 = getEnt("map_board_mover_selector", "script_noteworthy");
   level.map_start_pos = common_scripts\utility::func_46B5("map_board_start_pos", "script_noteworthy");
   foreach(var_06 in var_00) {
     if(isDefined(var_06.var_8260)) {
@@ -1557,16 +1557,16 @@ map_board_think() {
     var_0B = var_08.var_1D;
     var_02.var_116 = var_0A;
     var_02.var_1D = var_0B;
-    var_09 playerlinkto(var_02, undefined, 0.1, 0, 0, 0, 0);
-    var_02 moveto(var_03.var_116, 0.5, 0, 0);
-    var_02 rotateto(var_03.var_1D, 0.5, 0, 0);
+    var_09 playerlinkTo(var_02, undefined, 0.1, 0, 0, 0, 0);
+    var_02 moveTo(var_03.var_116, 0.5, 0, 0);
+    var_02 rotateTo(var_03.var_1D, 0.5, 0, 0);
     wait(0.5);
     var_09 thread map_board_start_moving(var_01);
     var_09 waittill("stop_using_station");
     level notify("stop_using_mapboard");
     var_09 method_8323();
-    var_02 moveto(var_0A + (0, 0, 1), 0.5);
-    var_02 rotateto(var_0B, 0.5);
+    var_02 moveTo(var_0A + (0, 0, 1), 0.5);
+    var_02 rotateTo(var_0B, 0.5);
     wait(0.5);
     var_09 unlink();
     var_09 method_812C(1);
@@ -1611,7 +1611,7 @@ map_board_handle_inputs() {
 map_board_update_mover(param_00) {
   var_01 = self.var_116;
   var_02 = var_01;
-  var_03 = getent("map_board_mover_selector", "script_noteworthy");
+  var_03 = getEnt("map_board_mover_selector", "script_noteworthy");
   var_03 map_board_send_mover_to_offsets(param_00[0], param_00[1]);
 }
 
@@ -1647,15 +1647,15 @@ hc_quest_axe_map_board_check_solution(param_00, param_01) {
       common_scripts\utility::func_3C8F("flag_hc_quest_axe_step01_map_location_found");
       iprintlnbold("You done it!");
       wait(0.5);
-      var_02 = getent("mapboard_lockbox_door", "script_noteworthy");
+      var_02 = getEnt("mapboard_lockbox_door", "script_noteworthy");
       var_02 lib_0378::func_8D74("aud_axe_hc_amoire_open");
-      var_02 rotateyaw(42, 1, 0.25, 0.25);
+      var_02 rotateYaw(42, 1, 0.25, 0.25);
     }
   }
 }
 
 hc_quest_axe_find_scale_pickup(param_00) {
-  var_01 = getent("map_board_take_scale", "script_noteworthy");
+  var_01 = getEnt("map_board_take_scale", "script_noteworthy");
   while(!common_scripts\utility::func_3C77("flag_hc_quest_axe_step02_obtained_scale_cup")) {
     var_01 waittill("trigger", var_02);
     if(common_scripts\utility::func_3C77("flag_hc_quest_axe_step01_map_location_found")) {
@@ -1673,7 +1673,7 @@ hc_quest_axe_find_scale_pickup(param_00) {
 }
 
 hc_quest_axe_placed_scale_in_museum(param_00, param_01, param_02) {
-  var_03 = getent("scale_use", "script_noteworthy");
+  var_03 = getEnt("scale_use", "script_noteworthy");
   while(!common_scripts\utility::func_3C77("flag_hc_quest_axe_step02_placed_scale_cup")) {
     var_03 waittill("trigger", var_04);
     if(common_scripts\utility::func_3C77("flag_hc_quest_axe_step02_obtained_scale_cup")) {
@@ -1728,12 +1728,12 @@ hc_quest_axe_placed_scale_in_museum(param_00, param_01, param_02) {
 
   lib_0547::func_2D8C(::hc_quest_axe_enemykilled_sizzlerneararmor);
   lib_054D::giveplayersexp("berlin_exp_ref_8");
-  var_05 = getent("hc_ee_axe_scale_soul_collector", "script_noteworthy");
+  var_05 = getEnt("hc_ee_axe_scale_soul_collector", "script_noteworthy");
   var_05 maps\mp\mp_zombies_soul_collection::func_170B(10, 140, 100, "zmb_hc_ee_axe_scale_zombie_killed", undefined, "tag_origin", undefined, "tag_origin");
   iprintlnbold("The Nazi War Axe is revealed beneath the scale!");
-  var_06 = getent("hc_ee_axe_scale_drawer", "script_noteworthy");
-  var_07 = getent("hc_ee_axe_pickup_axe", "script_noteworthy");
-  var_08 = getent("hc_ee_axe_origin_mover", "script_noteworthy");
+  var_06 = getEnt("hc_ee_axe_scale_drawer", "script_noteworthy");
+  var_07 = getEnt("hc_ee_axe_pickup_axe", "script_noteworthy");
+  var_08 = getEnt("hc_ee_axe_origin_mover", "script_noteworthy");
   var_06 method_8449(var_08);
   var_07 method_8449(var_08);
   lib_0378::func_8D74("aud_axe_hc_drawer_open", var_06);
@@ -1744,12 +1744,12 @@ hc_quest_axe_placed_scale_in_museum(param_00, param_01, param_02) {
     }
   }
 
-  var_0B = getent("axe_pickup_trigger", "targetname");
+  var_0B = getEnt("axe_pickup_trigger", "targetname");
   level thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_0B, "pickaxe");
 }
 
 test_bunny_collection() {
-  var_00 = getent("hc_ee_axe_scale_soul_collector", "script_noteworthy");
+  var_00 = getEnt("hc_ee_axe_scale_soul_collector", "script_noteworthy");
   var_00 maps\mp\mp_zombies_soul_collection::func_170B(10, 140, 100, "zmb_hc_ee_axe_scale_zombie_killed", undefined, "tag_origin", undefined, "tag_origin");
 }
 
@@ -1910,8 +1910,8 @@ hc_quest_axe_clear_other_head_flags(param_00) {
 }
 
 hc_quest_axe_map_pin_found(param_00) {
-  var_01 = getent("script_pickup_map_pin", "script_noteworthy");
-  var_02 = getent("trigger_use_cabaret_map", "script_noteworthy");
+  var_01 = getEnt("script_pickup_map_pin", "script_noteworthy");
+  var_02 = getEnt("trigger_use_cabaret_map", "script_noteworthy");
   var_02 waittill("trigger", var_03);
   common_scripts\utility::func_3C8F("flag_hc_quest_axe_step01_map_pin_found");
   var_01 delete();
@@ -1925,16 +1925,16 @@ hc_quest_axe_debug_skip_step01a() {
 hc_quest_axe_debug_skip_step01b() {
   hc_quest_axe_debug_skip_step01a();
   common_scripts\utility::func_3C8F("flag_hc_quest_axe_step01_map_location_found");
-  var_00 = getent("mapboard_lockbox_door", "script_noteworthy");
-  var_00 rotateyaw(40, 1, 0.25, 0.25);
+  var_00 = getEnt("mapboard_lockbox_door", "script_noteworthy");
+  var_00 rotateYaw(40, 1, 0.25, 0.25);
 }
 
 hc_quest_axe_debug_skip_step02() {
   hc_quest_axe_debug_skip_step01b();
   common_scripts\utility::func_3C8F("flag_hc_quest_axe_step02_obtained_scale_cup");
   common_scripts\utility::func_3C8F("flag_hc_quest_axe_step02_placed_scale_cup");
-  var_00 = getent("hc_ee_axe_scale_cup", "script_noteworthy");
-  var_01 = getent("hc_ee_axe_scale_needle", "script_noteworthy");
+  var_00 = getEnt("hc_ee_axe_scale_cup", "script_noteworthy");
+  var_01 = getEnt("hc_ee_axe_scale_needle", "script_noteworthy");
   var_00 method_805B();
   var_01 rotatepitch(-5, 1, 0.25, 0.25);
 }
@@ -1944,7 +1944,7 @@ hc_quest_axe_debug_skip_step03() {
   common_scripts\utility::func_3C87("flag_hc_quest_axe_step03_obtained_sizzler_armored_head");
   common_scripts\utility::func_3C8F("flag_hc_quest_axe_step03_obtained_sizzler_armored_head");
   common_scripts\utility::func_3C8F("flag_hc_quest_axe_step03_placed_sizzler_armored_head");
-  var_00 = getent("hc_ee_axe_scale_sizzler_head", "script_noteworthy");
+  var_00 = getEnt("hc_ee_axe_scale_sizzler_head", "script_noteworthy");
   var_00 method_805B();
 }
 
@@ -1959,7 +1959,7 @@ hc_quest_finale_init() {
   common_scripts\utility::func_3C87("flag_hc_quest_finale_door_open");
   common_scripts\utility::func_3C87("statue_puzzle_success");
   common_scripts\utility::func_3C87("flag_hc_quest_finale_sword_door_open");
-  var_00 = getent("garden_keyhole_placed_sword", "targetname");
+  var_00 = getEnt("garden_keyhole_placed_sword", "targetname");
   var_00 method_805C();
   hc_quest_finale_logic();
 }
@@ -1986,9 +1986,9 @@ hc_quest_finale_step01_place_weapons_handler() {
     wait 0.05;
   }
 
-  var_00 = getent("garden_keyhole_placed_dagger", "targetname");
-  var_01 = getent("garden_keyhole_placed_bat", "targetname");
-  var_02 = getent("garden_keyhole_placed_pickaxe", "targetname");
+  var_00 = getEnt("garden_keyhole_placed_dagger", "targetname");
+  var_01 = getEnt("garden_keyhole_placed_bat", "targetname");
+  var_02 = getEnt("garden_keyhole_placed_pickaxe", "targetname");
   var_03 = spawn("script_model", var_00.var_116 - (5, 0, 0));
   var_03 setModel("tag_origin");
   var_03.desired_zombie_type = "zombie_generic";
@@ -2018,7 +2018,7 @@ hc_quest_finale_step02_handler() {
   lib_0547::playerspawneroverrideset("blade");
   maps\mp\gametypes\zombies::register_addition_revive_rule(::hc_quest_finale_step02_separated_by_combat_event, ::hc_quest_finale_step02_debug_highlight_player_separation, "scr_hightLightPlayerSeparation");
   hc_quest_finale_step02_statue_puzzle_init();
-  var_03 = getent("sword_pickup_trig", "targetname");
+  var_03 = getEnt("sword_pickup_trig", "targetname");
   thread maps\mp\mp_zombie_berlin_utils::special_melee_weapon_pickup_think(var_03, "sword");
   foreach(var_05 in level.var_744A) {
     if(distance(var_05.var_116, var_03.var_116) < 450) {
@@ -2206,7 +2206,7 @@ raven_puzzle_wall_statue_apply_angle_offset(param_00, param_01) {
     var_04 = angleclamp360(self.var_1D[1] - param_01);
     var_04 = raven_puzzle_wall_statue_clamp_yaw(var_04);
     var_05 = (0, var_04, 0);
-    self rotateto(var_05, var_02, 0.2, 0.2);
+    self rotateTo(var_05, var_02, 0.2, 0.2);
     wait(var_02);
     self.var_1D = var_05;
   }
@@ -2289,8 +2289,8 @@ hc_quest_finale_step02_statue_puzzle_init() {
   level.bird_data["placed"] = [];
   level.bird_data["placed_models"] = [];
   level.bird_data["base_model"] = "zbr_statue_puzzle_bird_";
-  level.bird_data["statue"] = getent("bird_statue", "targetname");
-  level.bird_data["start_vol"] = getent("bird_puzzle_start", "targetname");
+  level.bird_data["statue"] = getEnt("bird_statue", "targetname");
+  level.bird_data["start_vol"] = getEnt("bird_puzzle_start", "targetname");
   foreach(var_01 in level.bird_models) {
     thread hc_quest_finale_step02_statue_puzzle_bird_model_think(var_01);
   }
@@ -2434,7 +2434,7 @@ hc_quest_finale_step02_statue_puzzle_play_crumble_fx() {
   level thread common_scripts\_exploder::func_88E(206);
   lib_0378::func_8D74("aud_sword_reveal");
   wait(0.7);
-  var_00 = getent("bird_statue_sword_bit", "targetname");
+  var_00 = getEnt("bird_statue_sword_bit", "targetname");
   var_00 delete();
 }
 
@@ -2545,8 +2545,8 @@ hc_quest_finale_step03_handler() {
 }
 
 hc_quest_finale_utility_place_weapon_with_name(param_00, param_01, param_02) {
-  var_03 = getent("garden_door_" + param_00 + "_keyhole", "targetname");
-  var_04 = getent("garden_keyhole_placed_" + param_00, "targetname");
+  var_03 = getEnt("garden_door_" + param_00 + "_keyhole", "targetname");
+  var_04 = getEnt("garden_keyhole_placed_" + param_00, "targetname");
   var_04 method_805C();
   var_05 = 0;
   while(!var_05) {
@@ -2586,14 +2586,14 @@ hc_quest_finale_utility_place_weapon_set_boolean(param_00, param_01) {
 }
 
 hc_quest_finale_utility_open_doors(param_00) {
-  var_01 = getent("hc_finale_gate_l", "targetname");
-  var_02 = getent("hc_finale_gate_clip_l", "targetname");
-  var_03 = getent("hc_finale_gate_l_org", "targetname");
+  var_01 = getEnt("hc_finale_gate_l", "targetname");
+  var_02 = getEnt("hc_finale_gate_clip_l", "targetname");
+  var_03 = getEnt("hc_finale_gate_l_org", "targetname");
   var_01 method_8449(var_03);
   var_02 method_8449(var_03);
-  var_04 = getent("hc_finale_gate_r", "targetname");
-  var_05 = getent("hc_finale_gate_clip_r", "targetname");
-  var_06 = getent("hc_finale_gate_r_org", "targetname");
+  var_04 = getEnt("hc_finale_gate_r", "targetname");
+  var_05 = getEnt("hc_finale_gate_clip_r", "targetname");
+  var_06 = getEnt("hc_finale_gate_r_org", "targetname");
   var_04 method_8449(var_06);
   var_05 method_8449(var_06);
   var_02 notsolid();
@@ -2603,22 +2603,22 @@ hc_quest_finale_utility_open_doors(param_00) {
   var_02 solid();
   var_05 solid();
   lib_0378::func_8D74("aud_open_barbarosa_area_door", var_01.var_116);
-  var_06 rotateto((0, 75, 0), 3, 0.5, 0.5);
-  var_03 rotateto((0, 285, 0), 3, 0.5, 0.5);
+  var_06 rotateTo((0, 75, 0), 3, 0.5, 0.5);
+  var_03 rotateTo((0, 285, 0), 3, 0.5, 0.5);
   wait(3);
   var_02 method_805F();
   var_05 method_805F();
 }
 
 hc_quest_finale_utility_close_doors() {
-  var_00 = getent("hc_finale_gate_l", "targetname");
-  var_01 = getent("hc_finale_gate_clip_l", "targetname");
-  var_02 = getent("hc_finale_gate_l_org", "targetname");
+  var_00 = getEnt("hc_finale_gate_l", "targetname");
+  var_01 = getEnt("hc_finale_gate_clip_l", "targetname");
+  var_02 = getEnt("hc_finale_gate_l_org", "targetname");
   var_00 method_8449(var_02);
   var_01 method_8449(var_02);
-  var_03 = getent("hc_finale_gate_r", "targetname");
-  var_04 = getent("hc_finale_gate_clip_r", "targetname");
-  var_05 = getent("hc_finale_gate_r_org", "targetname");
+  var_03 = getEnt("hc_finale_gate_r", "targetname");
+  var_04 = getEnt("hc_finale_gate_clip_r", "targetname");
+  var_05 = getEnt("hc_finale_gate_r_org", "targetname");
   var_03 method_8449(var_05);
   var_04 method_8449(var_05);
   var_01 notsolid();
@@ -2628,8 +2628,8 @@ hc_quest_finale_utility_close_doors() {
   var_01 solid();
   var_04 solid();
   lib_0378::func_8D74("aud_close_barbarosa_area_door", var_00.var_116);
-  var_02 rotateto((0, 0, 0), 1.5, 0, 0);
-  var_05 rotateto((0, 0, 0), 1.5, 0, 0);
+  var_02 rotateTo((0, 0, 0), 1.5, 0, 0);
+  var_05 rotateTo((0, 0, 0), 1.5, 0, 0);
   wait(1.5);
   var_01 method_805F();
   var_04 method_805F();
@@ -2660,7 +2660,7 @@ hat_spawn() {
   var_02 = spawn("script_model", var_01.var_116);
   var_02 setModel("aac_hats_men_02");
   var_02.var_1D = var_01.var_1D;
-  var_03 = getent("hat_1_trig", "targetname");
+  var_03 = getEnt("hat_1_trig", "targetname");
   var_03.var_116 = var_01.var_116;
   var_03 common_scripts\utility::func_9DA3();
   for(;;) {
@@ -2684,7 +2684,7 @@ hat_spawn_2() {
   var_02 = spawn("script_model", var_01.var_116);
   var_02 setModel("ger_m43cap_org2");
   var_02.var_1D = var_01.var_1D;
-  var_03 = getent("hat_2_trig", "targetname");
+  var_03 = getEnt("hat_2_trig", "targetname");
   var_03.var_116 = var_01.var_116;
   var_03 common_scripts\utility::func_9DA3();
   for(;;) {
@@ -2708,7 +2708,7 @@ hat_spawn_3() {
   var_02 = spawn("script_model", var_01.var_116);
   var_02 setModel("ger_alfakey_m34capm44hp_r1c1");
   var_02.var_1D = var_01.var_1D;
-  var_03 = getent("hat_3_trig", "targetname");
+  var_03 = getEnt("hat_3_trig", "targetname");
   var_03.var_116 = var_01.var_116;
   var_03 common_scripts\utility::func_9DA3();
   for(;;) {
@@ -2732,7 +2732,7 @@ hat_spawn_4() {
   var_02 = spawn("script_model", var_01.var_116);
   var_02 setModel("zom_m40officercap_org1");
   var_02.var_1D = var_01.var_1D;
-  var_03 = getent("hat_4_trig", "targetname");
+  var_03 = getEnt("hat_4_trig", "targetname");
   var_03.var_116 = var_01.var_116;
   var_03 common_scripts\utility::func_9DA3();
   for(;;) {
@@ -2756,7 +2756,7 @@ hat_spawn_5() {
   var_02 = spawn("script_model", var_01.var_116);
   var_02 setModel("rus_balthazar_m35pilotka_r4c3");
   var_02.var_1D = var_01.var_1D;
-  var_03 = getent("hat_5_trig", "targetname");
+  var_03 = getEnt("hat_5_trig", "targetname");
   var_03.var_116 = var_01.var_116;
   var_03 common_scripts\utility::func_9DA3();
   for(;;) {
@@ -2862,7 +2862,7 @@ hatrack_table_think() {
 
 hat_stacker() {
   level endon("flag_hat_stack_ee_complete");
-  var_00 = getent("hatrack_trig_new", "targetname");
+  var_00 = getEnt("hatrack_trig_new", "targetname");
   var_01 = common_scripts\utility::func_46B5("hat_stack_reward", "targetname");
   level.hatrack = [];
   level.officer_hat = 0;

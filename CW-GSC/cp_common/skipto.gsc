@@ -1336,7 +1336,7 @@ function private function_b7e9926c(name, starting, var_23522927) {
 }
 
 function private function_9ab01465() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_cdbc8d16(1);
   }
 }
@@ -1620,7 +1620,7 @@ function function_3a9156bf(mission_index) {
 }
 
 function function_6914f647() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   currentmission = savegame::function_8136eb5a();
   safehouse = savegame::function_2ee66e93("previous_safehouse", "");
 
@@ -1703,7 +1703,7 @@ function function_16c5b1f7() {
 }
 
 function function_521de2b3() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isDefined(player)) {
     return;
@@ -1738,7 +1738,7 @@ function function_521de2b3() {
 }
 
 function function_1c2dfc20(var_83104433 = function_60ca00f5(), var_585e39fb = function_455cb6c5(var_83104433)) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(!isPlayer(player)) {
     return;
@@ -1821,7 +1821,7 @@ function function_1c2dfc20(var_83104433 = function_60ca00f5(), var_585e39fb = fu
   util::wait_network_frame();
   function_8722a51a(var_585e39fb);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player player::take_weapons();
     player savegame::set_player_data("saved_weapon", player._current_weapon.rootweapon.name);
     player savegame::set_player_data("saved_weapon_attachments", util::function_2146bd83(player._current_weapon));
@@ -1846,7 +1846,7 @@ function function_1c2dfc20(var_83104433 = function_60ca00f5(), var_585e39fb = fu
   savegame::function_81534803(#"transient");
   world.var_b86bf11e = undefined;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread achievements::function_f854bc50(player, level.map_name, level.gameskill);
   }
 
@@ -1911,7 +1911,7 @@ function function_e8abcd84(var_7a179706 = 0) {
       self val::reset(#"credits", "freezecontrols");
       self.var_993d990c = undefined;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player function_16c5b1f7();
       }
     }
@@ -2040,7 +2040,7 @@ function function_4e6fcdc(name) {
 }
 
 function function_8916f54(trigger) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(!player istouching(trigger)) {
       return false;
     }
@@ -2161,12 +2161,12 @@ function function_28af793c(mover) {
     script_mover.angles = var_c4572c87.angles;
 
     foreach(target in targets) {
-      target linkto(script_mover, "", script_mover worldtolocalcoords(target.origin), target.angles - script_mover.angles);
+      target linkTo(script_mover, "", script_mover worldtolocalcoords(target.origin), target.angles - script_mover.angles);
     }
 
     util::wait_network_frame();
-    script_mover moveto(mover.origin, speed);
-    script_mover rotateto(mover.angles, speed);
+    script_mover moveTo(mover.origin, speed);
+    script_mover rotateTo(mover.angles, speed);
     script_mover waittill(#"movedone");
 
     foreach(target in targets) {

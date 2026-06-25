@@ -309,7 +309,7 @@ play_loop_on_machine() {
 
   sound_ent = spawn("script_origin", self.origin);
   sound_ent playLoopSound(#"zmb_perks_machine_loop");
-  sound_ent linkto(self);
+  sound_ent linkTo(self);
   self waittill(#"stop_loopsound");
   sound_ent unlink();
   sound_ent delete();
@@ -352,7 +352,7 @@ electric_perks_dialog() {
   self endon(#"death");
   wait 0.01;
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
 
   if(players.size == 1) {
     return;
@@ -364,7 +364,7 @@ electric_perks_dialog() {
 
   while(true) {
     wait 0.5;
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i])) {
@@ -404,7 +404,7 @@ reset_vending_hint_string() {
   if(isDefined(level._custom_perks)) {
     if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].cost) && isDefined(level._custom_perks[perk].hint_string)) {
       n_cost = function_6f418fda(perk);
-      self sethintstring(level._custom_perks[perk].hint_string, n_cost);
+      self setHintString(level._custom_perks[perk].hint_string, n_cost);
     }
   }
 }
@@ -586,7 +586,7 @@ vending_trigger_think() {
     }
 
     sound = "evt_bottle_dispense";
-    playsoundatposition(sound, self.origin);
+    playSoundAtPosition(sound, self.origin);
     player zm_score::minus_to_player_score(current_cost);
     bb::logpurchaseevent(player, self, current_cost, perk, 0, "_perk", "_purchased");
     perkhash = -1;
@@ -890,7 +890,7 @@ quantum_bomb_give_nearest_perk_result(position) {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
   perk = vending_machines[nearest].script_noteworthy;
 
   for(i = 0; i < players.size; i++) {
@@ -912,8 +912,8 @@ perk_pause(perk) {
     return;
   }
 
-  for(j = 0; j < getplayers().size; j++) {
-    player = getplayers()[j];
+  for(j = 0; j < getPlayers().size; j++) {
+    player = getPlayers()[j];
 
     if(player function_e56d8ef4(perk)) {
       continue;
@@ -960,8 +960,8 @@ perk_unpause(perk) {
     return;
   }
 
-  for(j = 0; j < getplayers().size; j++) {
-    player = getplayers()[j];
+  for(j = 0; j < getPlayers().size; j++) {
+    player = getPlayers()[j];
 
     if(isDefined(player.var_c4890291) && isDefined(player.var_c4890291[perk]) && player.var_c4890291[perk]) {
       player.var_c4890291[perk] = 0;
@@ -1067,7 +1067,7 @@ perk_machine_removal(machine, replacement_model) {
     return;
   }
 
-  trig = getent(machine, "script_noteworthy");
+  trig = getEnt(machine, "script_noteworthy");
   machine_model = undefined;
 
   if(isDefined(trig)) {
@@ -1237,7 +1237,7 @@ perk_machine_spawn_init() {
         collision.angles = s_spawn_pos.angles;
         collision setModel(#"zm_collision_perks1");
         collision.script_noteworthy = "clip";
-        collision disconnectpaths();
+        collision disconnectPaths();
       }
 
       unitrigger_stub.clip = collision;
@@ -1332,7 +1332,7 @@ check_player_has_perk(perk) {
   dist = 16384;
 
   while(true) {
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(distancesquared(players[i].origin, self.origin) < dist) {
@@ -1592,7 +1592,7 @@ players_are_in_perk_area(perk_machine) {
   }
 
   in_area = 0;
-  players = getplayers();
+  players = getPlayers();
   dist_check = 9216;
 
   foreach(player in players) {
@@ -1935,7 +1935,7 @@ perk_vapor_altar_init() {
         collision.angles = s_spawn_pos.angles;
         collision setModel(#"zm_collision_perks1");
         collision.script_noteworthy = "clip";
-        collision disconnectpaths();
+        collision disconnectPaths();
       }
 
       unitrigger_stub.clip = collision;
@@ -2001,7 +2001,7 @@ function_8c7cee86() {
       }
 
       foreach(var_7a9ec77b in var_ec770e5d) {
-        e_clip = getent(var_7a9ec77b.target2, "targetname");
+        e_clip = getEnt(var_7a9ec77b.target2, "targetname");
         var_528a3a32 = struct::get(var_7a9ec77b.target2);
 
         if(isDefined(e_clip)) {
@@ -2210,10 +2210,10 @@ function_f5da744e() {
     }
 
     player thread zm_audio::create_and_play_dialog(#"altar", #"interact");
-    playsoundatposition(#"hash_489cdfeed1ac55bd", self.origin);
+    playSoundAtPosition(#"hash_489cdfeed1ac55bd", self.origin);
 
     if(level.var_c3e5c4cd == 1 && !self.var_3cfb2018) {
-      playsoundatposition(#"hash_1e20f59360c2377e", self.origin);
+      playSoundAtPosition(#"hash_1e20f59360c2377e", self.origin);
     }
 
     player zm_score::minus_to_player_score(current_cost);
@@ -2263,7 +2263,7 @@ function_9da4880b() {
     if(math::cointoss() && !self.var_3cfb2018) {
       self.var_3cfb2018 = 1;
       str_alias = #"hash_84373a7c4b63d22" + randomintrangeinclusive(1, 5);
-      playsoundatposition(str_alias, self.origin);
+      playSoundAtPosition(str_alias, self.origin);
       n_wait = float(soundgetplaybacktime(str_alias)) / 1000;
       wait n_wait;
       self.var_3cfb2018 = 0;
@@ -2327,14 +2327,14 @@ function_d11d4952() {
   self endon(#"death");
   wait 0.01;
   level flag::wait_till("start_zombie_round_logic");
-  players = getplayers();
+  players = getPlayers();
   self endon(#"warning_dialog");
   level endon(#"switch_flipped");
   timer = 0;
 
   for(;;) {
     wait 0.5;
-    players = getplayers();
+    players = getPlayers();
 
     for(i = 0; i < players.size; i++) {
       if(!isDefined(players[i])) {
@@ -3060,7 +3060,7 @@ function_3b63b27f(s_vapor_altar) {
 
     if(!level.var_46cdd0e7) {
       level.var_46cdd0e7 = 1;
-      playsoundatposition(str_soundalias, s_vapor_altar.origin);
+      playSoundAtPosition(str_soundalias, s_vapor_altar.origin);
       wait 30;
       level.var_46cdd0e7 = 0;
     }
@@ -3184,7 +3184,7 @@ function_c99f4d81(var_c188cf87, var_59ad3e22) {
 }
 
 function_66c0d837(e_player, var_c188cf87, var_59ad3e22) {
-  if(zm_utility::is_player_valid(e_player) && distancesquared(e_player.origin, var_c188cf87) < 562500 && abs(e_player.origin[2] - var_c188cf87[2]) < 85 && vectordot(vectornormalize(e_player.origin - var_c188cf87), anglesToForward(var_59ad3e22)) > 0) {
+  if(zm_utility::is_player_valid(e_player) && distancesquared(e_player.origin, var_c188cf87) < 562500 && abs(e_player.origin[2] - var_c188cf87[2]) < 85 && vectordot(vectorNormalize(e_player.origin - var_c188cf87), anglesToForward(var_59ad3e22)) > 0) {
     return true;
   }
 

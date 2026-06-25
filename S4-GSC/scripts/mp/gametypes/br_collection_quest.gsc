@@ -183,12 +183,12 @@ _id_E313(var_0) {
   var_1 = spawn("script_model", var_0);
   var_1 setModel("box_wooden_grenade_01");
   var_1 makeuseable();
-  var_1 setcursorhint("HINT_NOICON");
+  var_1 setCursorHint("HINT_NOICON");
   var_1 setuseholdduration("duration_short");
   var_1 sethintdisplayfov(150);
   var_1 setusefov(150);
   var_1 setuserange(150);
-  var_1 sethintstring(&"MP/SCAV_PICKUP_PROMPT");
+  var_1 setHintString(&"MP/SCAV_PICKUP_PROMPT");
   var_1 setasgametypeobjective();
   var_1._id_96C9 = self;
   var_1 thread _id_E743();

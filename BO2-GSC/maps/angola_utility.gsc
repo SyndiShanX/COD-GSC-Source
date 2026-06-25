@@ -238,7 +238,7 @@ enemy_melee_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_mean
     return new_damage;
   } else if(self.a.pose != "back") {
     if(isai(e_inflictor)) {
-      savimbi = getent("savimbi", "targetname");
+      savimbi = getEnt("savimbi", "targetname");
 
       if(e_inflictor != savimbi) {
         n_damage = int(n_damage / 4);
@@ -253,7 +253,7 @@ enemy_melee_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_mean
 }
 
 _get_fight_node() {
-  vh_lead_buffel = getent("savimbi_buffel", "targetname");
+  vh_lead_buffel = getEnt("savimbi_buffel", "targetname");
 
   for(i = 0; i < level.a_nd_engage.size; i++) {
     nd_eval = level.a_nd_engage[i];
@@ -428,7 +428,7 @@ equip_machete() {
   self.melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_right"));
   self.melee_weapon.angles = self gettagangles("tag_weapon_right");
   self.melee_weapon setModel("t6_wpn_machete_prop");
-  self.melee_weapon linkto(self, "tag_weapon_right");
+  self.melee_weapon linkTo(self, "tag_weapon_right");
 }
 
 unequip_machete() {
@@ -440,7 +440,7 @@ equip_savimbi_machete() {
   self.melee_weapon = spawn("script_model", self gettagorigin("tag_weapon_left"));
   self.melee_weapon.angles = self gettagangles("tag_weapon_left");
   self.melee_weapon setModel("t6_wpn_machete_prop");
-  self.melee_weapon linkto(self, "tag_weapon_left");
+  self.melee_weapon linkTo(self, "tag_weapon_left");
 }
 
 unequip_savimbi_machete() {
@@ -494,7 +494,7 @@ load_buffel(b_less_full, real_gunner) {
       continue;
     }
     if(real_gunner && i == 9) {
-      sp_gunner_spawner = getent("buffel_gunner", "targetname");
+      sp_gunner_spawner = getEnt("buffel_gunner", "targetname");
       ai_buffel_gunner = simple_spawn_single(sp_gunner_spawner, ::buffel_gunner, self, level.vehicle_aianims["apc_buffel"][i].sittag);
       self.riders[self.riders.size] = ai_buffel_gunner;
       continue;
@@ -502,12 +502,12 @@ load_buffel(b_less_full, real_gunner) {
 
     m_rider = self create_friendly_model_actor(i);
     m_rider useanimtree(#animtree);
-    m_rider linkto(self, level.vehicle_aianims["apc_buffel"][i].sittag);
+    m_rider linkTo(self, level.vehicle_aianims["apc_buffel"][i].sittag);
     m_rider.seat = i;
     v_origin = self gettagorigin(level.vehicle_aianims["apc_buffel"][i].sittag);
     v_angles = self gettagangles(level.vehicle_aianims["apc_buffel"][i].sittag);
     anim_ride = level.vehicle_aianims["apc_buffel"][i].idle;
-    m_rider animscripted("ride_buffel_" + i, v_origin, v_angles, anim_ride);
+    m_rider animScripted("ride_buffel_" + i, v_origin, v_angles, anim_ride);
     self.riders[self.riders.size] = m_rider;
   }
 }
@@ -538,11 +538,11 @@ load_gaz66(b_less_full) {
   for(i = 0; i < n_random_max; i++) {
     m_rider = create_friendly_model_actor();
     m_rider useanimtree(#animtree);
-    m_rider linkto(self, level.vehicle_aianims["truck_gaz66_cargo_doors"][i].sittag);
+    m_rider linkTo(self, level.vehicle_aianims["truck_gaz66_cargo_doors"][i].sittag);
     v_origin = self gettagorigin(level.vehicle_aianims["truck_gaz66_cargo_doors"][i].sittag);
     v_angles = self gettagangles(level.vehicle_aianims["truck_gaz66_cargo_doors"][i].sittag);
     anim_ride = % ai_crew_gaz66_driver_idle;
-    m_rider animscripted("ride_gaz66_" + i, v_origin, v_angles, anim_ride);
+    m_rider animScripted("ride_gaz66_" + i, v_origin, v_angles, anim_ride);
     self.riders[self.riders.size] = m_rider;
   }
 }
@@ -564,13 +564,13 @@ destroy_buffel() {
 }
 
 create_friendly_model_actor(index) {
-  sp_model = getent("post_heli_friendly", "targetname");
+  sp_model = getEnt("post_heli_friendly", "targetname");
 
   if(isDefined(self.targetname) && self.targetname == "convoy_destroy_1" && index == 0) {
-    drone = getent("drone_name", "targetname");
+    drone = getEnt("drone_name", "targetname");
     sp_model.script_friendname = drone.script_noteworthy;
   } else if(isDefined(self.targetname) && self.targetname == "convoy_destroy_2" && index == 0) {
-    drone = getent("drone_name", "targetname");
+    drone = getEnt("drone_name", "targetname");
     sp_model.script_friendname = drone.script_string;
   } else
     sp_model.script_friendname = undefined;
@@ -580,7 +580,7 @@ create_friendly_model_actor(index) {
 }
 
 create_enemy_model_actor() {
-  sp_model = getent("post_heli_enemy", "targetname");
+  sp_model = getEnt("post_heli_enemy", "targetname");
   m_actor = sp_model spawn_drone(1);
   return m_actor;
 }
@@ -594,19 +594,19 @@ savimbi_setup() {
 
 savimbi_fire_mgl_left(savimbi) {
   v_start = savimbi gettagorigin("tag_flash");
-  fire_node = getent("mgl_fire_left", "targetname");
+  fire_node = getEnt("mgl_fire_left", "targetname");
   magicbullet("mgl_sp", v_start, fire_node.origin);
 }
 
 savimbi_fire_mgl_right(savimbi) {
   v_start = savimbi gettagorigin("tag_flash");
-  fire_node = getent("mgl_fire_right", "targetname");
+  fire_node = getEnt("mgl_fire_right", "targetname");
   magicbullet("mgl_sp", v_start, fire_node.origin);
 }
 
 savimbi_fire_mgl_forward(savimbi) {
   v_start = savimbi gettagorigin("tag_flash");
-  fire_node = getent("mgl_fire_forward", "targetname");
+  fire_node = getEnt("mgl_fire_forward", "targetname");
   magicbullet("mgl_sp", v_start, fire_node.origin);
 }
 
@@ -744,7 +744,7 @@ set_fail_mortars(n_side) {
 
 watch_savannah_deep_fail() {
   level endon("savannah_player_boarded_buffel");
-  deep_fail_trig = getent("savannah_deep_fail", "targetname");
+  deep_fail_trig = getEnt("savannah_deep_fail", "targetname");
   deep_fail_trig waittill("trigger");
   level.player kill();
 }
@@ -752,7 +752,7 @@ watch_savannah_deep_fail() {
 watch_savannah_deep_warn() {
   level endon("savannah_player_boarded_buffel");
   level thread watch_savannah_deep_fail();
-  t_deep_warn = getent("savannah_deep_warn", "targetname");
+  t_deep_warn = getEnt("savannah_deep_warn", "targetname");
 
   while(!flag("savannah_player_boarded_buffel")) {
     if(level.player istouching(t_deep_warn)) {
@@ -775,7 +775,7 @@ watch_savannah_deep_warn() {
 
 watch_savannah_short_fail() {
   level endon("savannah_start_hill");
-  fail_trig = getent("savannah_short_fail", "targetname");
+  fail_trig = getEnt("savannah_short_fail", "targetname");
   fail_trig waittill("trigger");
   missionfailedwrapper_nodeath(&"ANGOLA_ABANDON_FAIL");
 }
@@ -783,7 +783,7 @@ watch_savannah_short_fail() {
 watch_savannah_short_warn() {
   level endon("savannah_start_hudson");
   level thread watch_savannah_short_fail();
-  t_warn = getent("savannah_short_warn", "targetname");
+  t_warn = getEnt("savannah_short_warn", "targetname");
 
   while(!flag("savannah_start_hudson")) {
     if(level.player istouching(t_warn)) {
@@ -836,8 +836,8 @@ create_after_strafe_fights(n_heli_runs) {
 }
 
 _fight_vignette(align, scene, goal_array) {
-  sp_enemy = getent("post_heli_enemy", "targetname");
-  sp_friend = getent("post_heli_friendly", "targetname");
+  sp_enemy = getEnt("post_heli_enemy", "targetname");
+  sp_friend = getEnt("post_heli_friendly", "targetname");
   m_align = spawn("script_origin", align.origin);
 
   if(isDefined(align.angles)) {
@@ -1090,8 +1090,8 @@ enemy_rpg_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_
 }
 
 show_victory_vehicles(b_show) {
-  m_buffel = getent("destroyed_buffel", "targetname");
-  m_tank = getent("destroyed_tank", "targetname");
+  m_buffel = getEnt("destroyed_buffel", "targetname");
+  m_tank = getEnt("destroyed_tank", "targetname");
 
   if(b_show) {
     m_buffel show();
@@ -1176,7 +1176,7 @@ mpla_scripted_attach_machete(ai_guy) {
   ai_guy.scripted_melee_weapon = spawn("script_model", ai_guy gettagorigin("tag_weapon_left"));
   ai_guy.scripted_melee_weapon.angles = ai_guy gettagangles("tag_weapon_left");
   ai_guy.scripted_melee_weapon setModel("t6_wpn_machete_prop");
-  ai_guy.scripted_melee_weapon linkto(ai_guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
+  ai_guy.scripted_melee_weapon linkTo(ai_guy, "tag_weapon_left", (0, 0, 0), (0, 0, 0));
 }
 
 mpla_scripted_drop_machete(ai_guy) {
@@ -1222,9 +1222,9 @@ riverbed_lockbreaker_perk() {
   }
 
   run_scene_first_frame("lockbreaker");
-  t_open = getent("lockbreaker_buffel_trigger", "targetname");
-  t_open sethintstring(&"SCRIPT_HINT_BRUTE_FORCE");
-  t_open setcursorhint("HINT_NOICON");
+  t_open = getEnt("lockbreaker_buffel_trigger", "targetname");
+  t_open setHintString(&"SCRIPT_HINT_BRUTE_FORCE");
+  t_open setCursorHint("HINT_NOICON");
   t_open trigger_off();
   a_weapons = getEntArray("lockbreaker_weapon", "script_noteworthy");
 
@@ -1294,7 +1294,7 @@ warn_to_kill_player(n_time_to_fail) {
 
   level endon("strafe_run_called");
   fake_mortar = spawn("script_origin", (0, 0, 0));
-  savimbi_buffel = getent("savimbi_buffel", "targetname");
+  savimbi_buffel = getEnt("savimbi_buffel", "targetname");
 
   for(x = 1; x < n_time_to_fail + 1; x++) {
     area_forward = anglesToForward(savimbi_buffel.angles) * 500 * (n_time_to_fail + 1 - x);

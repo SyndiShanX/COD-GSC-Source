@@ -178,7 +178,7 @@ function function_4e61a018() {
   self.s_unitrigger.require_look_at = 0;
   self.s_unitrigger.inactive_reassess_time = 0.1;
   zm_unitrigger::unitrigger_force_per_player_triggers(self.s_unitrigger, 1);
-  self.var_b2a5207f = getent("challenge_gravestone_" + self.script_int, "targetname");
+  self.var_b2a5207f = getEnt("challenge_gravestone_" + self.script_int, "targetname");
   self.var_407ba908 = [];
   if(!isDefined(self.var_407ba908)) {
     self.var_407ba908 = [];
@@ -493,9 +493,9 @@ function function_b1f54cb4(e_player, s_reward, var_17b3dc96, var_21d0cf95) {
   } else {
     self notify("hash_422dba45");
     self.var_3609adde stoploopsound(0.25);
-    self.var_3609adde moveto(s_reward.origin, 1);
-    self.var_2a9b65c7 moveto(s_reward.origin + var_f6c28cea, 1);
-    self.var_79dc7980 moveto(s_reward.origin + var_e97ebb83, 1);
+    self.var_3609adde moveTo(s_reward.origin, 1);
+    self.var_2a9b65c7 moveTo(s_reward.origin + var_f6c28cea, 1);
+    self.var_79dc7980 moveTo(s_reward.origin + var_e97ebb83, 1);
     self.var_3609adde waittill("movedone");
     if(isDefined(self.var_3609adde.var_9cab68e0) && self.var_3609adde.var_9cab68e0) {
       self.var_3609adde.origin = self.var_3609adde.origin - var_f39a667b;
@@ -741,7 +741,7 @@ function function_8494f9a2() {
 
 function function_4322fb5f() {
   self endon("disconnect");
-  var_d0e8cd34 = getent("finger_trap_slide_trigger", "targetname");
+  var_d0e8cd34 = getEnt("finger_trap_slide_trigger", "targetname");
   level.var_7ee8825e = self;
   while(!self flag::get("flag_player_completed_challenge_2")) {
     self waittill("hash_ad9aba38");
@@ -1100,7 +1100,7 @@ function function_34a8c625(s_candle) {
       var_8112eb05 = distancesquared(var_7dda366c, var_cb78916d);
     }
     for(;;) {
-      v_normal = vectornormalize(var_cb78916d - var_7dda366c);
+      v_normal = vectorNormalize(var_cb78916d - var_7dda366c);
       n_dot = vectordot(var_9c5bd97c, v_normal);
     }
     if(var_8112eb05 > var_ae93125) {}
@@ -1160,12 +1160,12 @@ function function_9ffe5c12() {
 function function_a231bc42() {
   self notify("hash_4c1b1a28");
   n_ent_num = self getentitynumber();
-  var_32f0d800 = getent("pr_g_b_" + n_ent_num, "targetname");
+  var_32f0d800 = getEnt("pr_g_b_" + n_ent_num, "targetname");
   var_32f0d800 show();
-  var_79f3942a = getent("pr_g_c_" + n_ent_num, "targetname");
+  var_79f3942a = getEnt("pr_g_c_" + n_ent_num, "targetname");
   var_79f3942a show();
   var_79f3942a clientfield::set("pr_g_c_fx", 1);
-  var_eaad475 = getent("pr_g_cn_" + n_ent_num, "targetname");
+  var_eaad475 = getEnt("pr_g_cn_" + n_ent_num, "targetname");
   var_eaad475 show();
   self waittill("disconnect");
   var_79f3942a clientfield::set("pr_g_c_fx", 0);

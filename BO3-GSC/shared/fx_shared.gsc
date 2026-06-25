@@ -70,9 +70,9 @@ function play(str_fx, v_origin = (0, 0, 0), v_angles = (0, 0, 0), time_to_delete
     m_fx = util::spawn_model("tag_origin", v_origin, v_angles);
     if(isDefined(b_link_to_self) && b_link_to_self) {
       if(isDefined(str_tag)) {
-        m_fx linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
+        m_fx linkTo(self, str_tag, (0, 0, 0), (0, 0, 0));
       } else {
-        m_fx linkto(self);
+        m_fx linkTo(self);
       }
     }
     if(isDefined(b_no_cull) && b_no_cull) {

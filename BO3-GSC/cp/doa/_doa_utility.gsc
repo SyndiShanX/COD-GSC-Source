@@ -99,7 +99,7 @@ function function_a5821e05(time = 1) {
   level.var_a7749866 = gettime();
   debugmsg("" + level.var_a7749866);
   level thread function_1d62c13a();
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player freezecontrols(1);
     player thread namespace_831a4a7c::function_4519b17(1);
   }
@@ -113,12 +113,12 @@ function function_a5821e05(time = 1) {
 function function_c85960dd(hold_black_time = 1.2, unfreeze = 1) {
   debugmsg("");
   wait(hold_black_time);
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player notify("hash_ff28e404");
   }
   level lui::screen_fade_in(1.5);
   if(unfreeze) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player freezecontrols(0);
       player thread namespace_831a4a7c::function_4519b17(0);
     }
@@ -192,7 +192,7 @@ function getclosesttome(&entarray) {
 }
 
 function function_999bba85(origin, time) {
-  self moveto(origin, time, 0, 0);
+  self moveTo(origin, time, 0, 0);
   wait(time);
   if(isDefined(self.trigger)) {
     self.trigger delete();
@@ -420,10 +420,10 @@ function function_e3c30240(dir, var_e3e1b987 = 100, var_1f32eac0 = 0.1, attacker
     return;
   }
   self endon("death");
-  self setplayercollision(0);
+  self setPlayerCollision(0);
   self startragdoll();
   if(isDefined(dir)) {
-    dir = vectornormalize(dir);
+    dir = vectorNormalize(dir);
     self launchragdoll(dir * var_e3e1b987);
   }
 }
@@ -448,7 +448,7 @@ function function_ba30b321(time, attacker, mod = "MOD_HIT_BY_OBJECT") {
 
 function function_308fa126(num = 5) {
   locs = [];
-  players = getplayers();
+  players = getPlayers();
   if(isDefined(level.doa.arenas[level.doa.current_arena].var_1d2ed40)) {
     foreach(spot in level.doa.arenas[level.doa.current_arena].var_1d2ed40) {
       locs[locs.size] = spot.origin;
@@ -723,8 +723,8 @@ function function_dbcf48a0(delay = 0, width = 40, height = 40) {
   }
   trigger = spawn("trigger_radius", self.origin, 1, width, height);
   trigger.targetname = "touchmeTrigger";
-  trigger enablelinkto();
-  trigger linkto(self);
+  trigger enablelinkTo();
+  trigger linkTo(self);
   trigger thread function_981c685d(self);
   trigger endon("death");
   while(isDefined(self)) {
@@ -862,7 +862,7 @@ function set_lighting_state(state) {
 }
 
 function function_5233dbc0() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.doa) && isDefined(player.doa.vehicle)) {
       return true;
     }

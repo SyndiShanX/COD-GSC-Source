@@ -69,8 +69,8 @@ weapon_floats_up() {
     self.weapon_models[i] = spawn_weapon_model(i, rand, modelname, self.origin, self.angles + vectorscale((0, 1, 0), 180.0));
     self.weapon_models[i].dw = spawn_weapon_model(i, rand, modelname, self.origin - vectorscale((1, 1, 1), 3.0), self.angles + vectorscale((0, 1, 0), 180.0));
     self.weapon_models[i].dw hide();
-    self.weapon_models[i] moveto(self.origin + (0, 0, floatheight), 3, 2, 0.9);
-    self.weapon_models[i].dw moveto(self.origin + (0, 0, floatheight) - vectorscale((1, 1, 1), 3.0), 3, 2, 0.9);
+    self.weapon_models[i] moveTo(self.origin + (0, 0, floatheight), 3, 2, 0.9);
+    self.weapon_models[i].dw moveTo(self.origin + (0, 0, floatheight) - vectorscale((1, 1, 1), 3.0), 3, 2, 0.9);
   }
 
   for(i = 0; i < number_cycles; i++) {
@@ -210,7 +210,7 @@ init() {
     }
 
     registerclientfield("world", spawn_list[i].script_label, 1, numbits, "int", ::wallbuy_callback, 0);
-    target_struct = getstruct(spawn_list[i].target, "targetname");
+    target_struct = getStruct(spawn_list[i].target, "targetname");
 
     if(spawn_list[i].targetname == "buildable_wallbuy") {
       bits = 4;
@@ -245,7 +245,7 @@ wallbuy_player_connect(localclientnum) {
     }
 
     wallbuy.fx[localclientnum] = playFX(localclientnum, fx, wallbuy.origin, anglesToForward(wallbuy.angles), anglestoup(wallbuy.angles), 0.1);
-    target_struct = getstruct(wallbuy.target, "targetname");
+    target_struct = getStruct(wallbuy.target, "targetname");
 
     if(wallbuy.targetname == "buildable_wallbuy") {
       continue;
@@ -303,7 +303,7 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
         struct.models[localclientnum].origin = struct.models[localclientnum].parent_struct.origin + anglestoright(struct.models[localclientnum].angles + vec_offset) * 8;
         struct.models[localclientnum] show();
-        struct.models[localclientnum] moveto(struct.models[localclientnum].parent_struct.origin, 1);
+        struct.models[localclientnum] moveTo(struct.models[localclientnum].parent_struct.origin, 1);
       }
 
       break;
@@ -332,7 +332,7 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     }
 
     if(!isDefined(struct.models[localclientnum])) {
-      target_struct = getstruct(struct.target, "targetname");
+      target_struct = getStruct(struct.target, "targetname");
       model = undefined;
 
       if(isDefined(level.buildable_wallbuy_weapon_models[weaponname])) {

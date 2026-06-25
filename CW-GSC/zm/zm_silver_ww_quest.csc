@@ -110,13 +110,13 @@ function function_1534626e(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_48124b82(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     earthquake(fieldname, 0.2, 2, self.origin, 100);
-    self playrumbleonentity(fieldname, "damage_heavy");
+    self playRumbleOnEntity(fieldname, "damage_heavy");
   }
 }
 
 function interact_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    self playrumbleonentity(fieldname, "damage_light");
+    self playRumbleOnEntity(fieldname, "damage_light");
   }
 }
 
@@ -199,7 +199,7 @@ function function_5bd0643d(localclientnum) {
   while(true) {
     if(isDefined(self)) {
       earthquake(localclientnum, 0.2, 1, self.origin, 100);
-      self playrumbleonentity(localclientnum, "damage_light");
+      self playRumbleOnEntity(localclientnum, "damage_light");
     }
 
     waitframe(1);
@@ -211,7 +211,7 @@ function function_f875612b(localclientnum, oldval, newval, bnewent, binitialsnap
     mdl_fx = util::spawn_model(fieldname, "tag_origin", self.origin);
     playSound(fieldname, #"hash_58583b7b5bcacbbc", (-85, -408, 79));
     wait 1;
-    mdl_fx moveto(mdl_fx.origin + (270, 0, 0), 0.5);
+    mdl_fx moveTo(mdl_fx.origin + (270, 0, 0), 0.5);
     util::playFXOnTag(fieldname, #"hash_47d98c0644ec2ecd", mdl_fx, "tag_origin");
     mdl_fx waittill(#"movedone");
 
@@ -361,7 +361,7 @@ function private function_564a4c6(localclientnum, var_9b6b8f9a, var_d4ece4fd) {
 }
 
 function function_1385b26c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self playrumbleonentity(bwasdemojump, #"hash_6fed0a32376b64b2");
+  self playRumbleOnEntity(bwasdemojump, #"hash_6fed0a32376b64b2");
 }
 
 function private function_7532a0ff(weapon_name) {

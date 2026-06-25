@@ -81,7 +81,7 @@ throwattack_init(var_0) {
   self.bt.instancedata[var_0].starttime = gettime();
   self.bt.instancedata[var_0].target = self.bt.enemy;
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   scripts\asm\asm_bb::bb_requestthrowgrenade(1, self.bt.enemy);
 }
 
@@ -213,7 +213,7 @@ melee_charge(var_0) {
 
   if(distance2dsquared(var_10, self.bt.instancedata[var_0].prevgoalpos) > var_11) {
     self scragentsetgoalpos(var_10);
-    self scragentsetgoalradius(24);
+    self scragentsetgoalRadius(24);
     self.bt.instancedata[var_0].prevgoalpos = var_10;
   }
 
@@ -233,7 +233,7 @@ melee_attack_init(var_0) {
   self.bt.instancedata[var_0].starttime = gettime();
   scripts\asm\asm_bb::bb_requestmelee(self.bt.meleetarget);
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
 }
 
 melee_attack(var_0) {
@@ -357,9 +357,9 @@ rush_charge(var_0) {
     var_9 = 1000;
 
     if(var_4 > self.bt.instancedata[var_0].starttime + var_9) {
-      var_10 = vectornormalize((var_7[0], var_7[1], 0));
+      var_10 = vectorNormalize((var_7[0], var_7[1], 0));
       var_11 = self getlookaheaddir();
-      var_11 = vectornormalize((var_11[0], var_11[1], 0));
+      var_11 = vectorNormalize((var_11[0], var_11[1], 0));
 
       if(vectordot(var_7, var_11) < 0.966) {
         var_12 = self.origin + var_11 * 208;
@@ -371,15 +371,15 @@ rush_charge(var_0) {
         }
 
         self scragentsetgoalpos(var_12);
-        self scragentsetgoalradius(24);
+        self scragentsetgoalRadius(24);
         self.bt.instancedata[var_0].btracking = 0;
       } else {
         self scragentsetgoalpos(self.bt.meleetarget.origin);
-        self scragentsetgoalradius(24);
+        self scragentsetgoalRadius(24);
       }
     } else {
       self scragentsetgoalpos(self.bt.meleetarget.origin);
-      self scragentsetgoalradius(24);
+      self scragentsetgoalRadius(24);
     }
   } else if(self pathdisttogoal() < 144) {
     return anim.success;
@@ -418,7 +418,7 @@ rush_attack(var_0) {
   }
 
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(36);
+  self scragentsetgoalRadius(36);
   return anim.running;
 }
 
@@ -441,7 +441,7 @@ taunt_init(var_0) {
   self.bt.instancedata[var_0] = gettime();
   self._blackboard.btauntrequested = 1;
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
 }
 
 dotaunt(var_0) {

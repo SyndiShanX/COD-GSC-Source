@@ -189,7 +189,7 @@ empeffects() {
   foreach(player in level.players) {
     playerforward = anglesToForward(player.angles);
     playerforward = (playerforward[0], playerforward[1], 0);
-    playerforward = vectornormalize(playerforward);
+    playerforward = vectorNormalize(playerforward);
     empdistance = 20000;
     empent = spawn("script_model", player.origin + vectorscale((0, 0, 1), 8000.0) + playerforward * empdistance);
     empent setModel("tag_origin");

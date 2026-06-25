@@ -380,7 +380,7 @@ spitter_ammo_think() {
   self endon("death");
   var_0 = 30;
   self makeusable();
-  self sethintstring(&"MP_ALIEN_DESCENT_SPITTER_AMMO_PICKUP");
+  self setHintString(&"MP_ALIEN_DESCENT_SPITTER_AMMO_PICKUP");
   thread spitter_ammo_delete(var_0);
 
   for(;;) {
@@ -431,7 +431,7 @@ spitter_ammo_rotate() {
   self endon("death");
 
   for(;;) {
-    self rotateyaw(360, 5);
+    self rotateYaw(360, 5);
     wait 5;
   }
 }

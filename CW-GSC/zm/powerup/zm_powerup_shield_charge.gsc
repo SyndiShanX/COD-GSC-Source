@@ -27,7 +27,7 @@ function private preinit() {
 }
 
 function func_drop_when_players_own() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if((isDefined(player.armortier) ? player.armortier : 0) > 0) {
@@ -66,7 +66,7 @@ function shield_devgui() {
 }
 
 function shield_devgui_callback(cmd) {
-  players = getplayers();
+  players = getPlayers();
   retval = 0;
 
   switch (cmd) {

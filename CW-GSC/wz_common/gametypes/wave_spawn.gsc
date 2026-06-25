@@ -36,7 +36,7 @@ function function_301b775b() {
 
 function private function_a27362d0(params) {
   if(level.deathcircleindex >= level.deathcircles.size - 2) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 0);
       player thread function_ca1398a7();
     }
@@ -74,7 +74,7 @@ function function_1540761c(params) {
 }
 
 function function_832ecb3d(params) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 0);
   }
 }

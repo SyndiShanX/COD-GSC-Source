@@ -155,7 +155,7 @@ find_air_attack_node(var_0) {
 get_air_node_rated(var_0, var_1) {
   var_2 = [];
   var_2["direction"] = "override";
-  var_2["direction_override"] = vectornormalize(self.origin - var_0.origin);
+  var_2["direction_override"] = vectorNormalize(self.origin - var_0.origin);
   var_2["direction_weight"] = 3.0;
   var_2["min_height"] = 0.0;
   var_2["max_height"] = 512.0;
@@ -286,8 +286,8 @@ get_possible_fly_node_points(var_0, var_1) {
   var_4[0] = self.origin + var_3 * var_1 + var_0;
   var_4[1] = self.origin + var_2 * var_1 + var_0;
   var_4[2] = self.origin + var_2 * -1 * var_1 + var_0;
-  var_4[3] = self.origin + vectornormalize(var_2 + var_3) * var_1 + var_0;
-  var_4[4] = self.origin + vectornormalize(var_2 * -1 + var_3) * var_1 + var_0;
+  var_4[3] = self.origin + vectorNormalize(var_2 + var_3) * var_1 + var_0;
+  var_4[4] = self.origin + vectorNormalize(var_2 * -1 + var_3) * var_1 + var_0;
   var_4 = common_scripts\utility::array_randomize(var_4);
   return var_4;
 }
@@ -308,8 +308,8 @@ should_fly_to_node(var_0, var_1, var_2, var_3) {
 
   for(var_11 = 0; var_11 < var_9.size; var_11++) {
     var_12 = var_9[var_11];
-    var_13 = vectornormalize(var_0.origin - self.origin);
-    var_14 = vectornormalize(var_12 - self.origin);
+    var_13 = vectorNormalize(var_0.origin - self.origin);
+    var_14 = vectorNormalize(var_12 - self.origin);
     var_15 = vectordot(var_13, var_14) > var_4 && abs(var_8[2]) < var_5 || distancesquared(var_0.origin, var_12) < var_7;
 
     if(!var_15 && self aiphysicstracepassed(self.origin, var_12, self.radius, self.height, 1)) {
@@ -349,7 +349,7 @@ should_strafe_run(var_0, var_1, var_2) {
     return 0;
   }
 
-  var_7 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
+  var_7 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
   var_8 = var_1 + var_7 * var_6;
 
   if(!self aiphysicstracepassed(var_1, var_8, self.radius, self.height, 1)) {
@@ -407,7 +407,7 @@ air_damage_monitor() {
 proceed_to_air_node(var_0) {
   self endon("death");
   self scragentsetgoalnode(self.air_jump_node);
-  self scragentsetgoalradius(32);
+  self scragentsetgoalRadius(32);
   thread check_player_proximity();
   var_1 = common_scripts\utility::waittill_any_return("goal_reached", "close_range_attack");
 
@@ -496,7 +496,7 @@ do_takeoff_lerp(var_0, var_1, var_2) {
 
 clear_goal_position() {
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(4096);
+  self scragentsetgoalRadius(4096);
 }
 
 land(var_0) {
@@ -589,7 +589,7 @@ perform_melee(var_0, var_1) {
   if(maps\mp\agents\alien\_alien_think::melee_okay()) {
     self scragentbeginmelee(var_0);
     self scragentsetgoalpos(self.origin);
-    self scragentsetgoalradius(4096.0);
+    self scragentsetgoalRadius(4096.0);
     self waittill("melee_complete");
   } else
     wait 0.2;
@@ -707,7 +707,7 @@ do_dodge(var_0, var_1) {
   var_3 = self getanimentry(var_2, var_1);
   var_4 = getmovedelta(var_3);
   var_5 = length(var_4);
-  var_6 = vectornormalize(var_4) * (var_5 + 50);
+  var_6 = vectorNormalize(var_4) * (var_5 + 50);
   var_7 = self localtoworldcoords(var_6);
 
   if(!self aiphysicstracepassed(self.origin, var_7, self.radius, self.height, 1)) {
@@ -734,7 +734,7 @@ try_damage_air_dodge() {
     var_4 = self getanimentry(var_0, var_3);
     var_5 = getmovedelta(var_4);
     var_6 = length(var_5);
-    var_7 = vectornormalize(var_5) * (var_6 + 50);
+    var_7 = vectorNormalize(var_5) * (var_6 + 50);
     var_8 = self localtoworldcoords(var_7);
 
     if(self aiphysicstracepassed(self.origin, var_8, self.radius, self.height, 1)) {
@@ -842,7 +842,7 @@ strafe_run(var_0) {
 }
 
 get_fly_end_anim(var_0) {
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  var_1 = vectorNormalize(var_0.origin - self.origin);
   var_2 = anglesToForward(self.angles);
 
   if(vectordot(var_1, var_2) > 0.0) {
@@ -867,14 +867,14 @@ strafing_shoot(var_0, var_1) {
   var_3 = 300;
   var_4 = 300;
   var_5 = 20;
-  var_6 = vectornormalize(anglesToForward(self.angles) * (1, 1, 0));
+  var_6 = vectorNormalize(anglesToForward(self.angles) * (1, 1, 0));
   var_7 = vectortoangles(var_6);
   var_8 = var_6;
   wait(var_2);
 
   for(;;) {
     if(isDefined(var_0)) {
-      var_9 = vectornormalize((var_0.origin - self.origin) * (1, 1, 0));
+      var_9 = vectorNormalize((var_0.origin - self.origin) * (1, 1, 0));
       var_10 = vectortoangles(var_9);
 
       if(anglesdelta(var_10, var_7) > var_5) {
@@ -939,7 +939,7 @@ setup_hover_turret() {
   self.hover_turret = [];
   var_0 = "TAG_tail";
   self.hover_turret = spawnturret("misc_turret", self gettagorigin(var_0), "gargoyle_beam_mp");
-  self.hover_turret linkto(self, var_0);
+  self.hover_turret linkTo(self, var_0);
   self.hover_turret setModel("gargoyle_beam_gun");
   self.hover_turret.angles = self gettagangles(var_0);
   self.hover_turret.team = "axis";

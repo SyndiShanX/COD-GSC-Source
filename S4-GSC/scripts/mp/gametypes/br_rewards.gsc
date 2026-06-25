@@ -496,7 +496,7 @@ _id_E29E(var_0) {
       var_5 = scripts\mp\gametypes\br_circle::_id_6D03();
 
       if(distance2dsquared(var_4, var_3) > var_5 * var_5) {
-        var_6 = vectornormalize(var_3 - var_4);
+        var_6 = vectorNormalize(var_3 - var_4);
         var_7 = var_4 + var_6 * var_5 * 0.95;
 
         if(_func_03DC()) {

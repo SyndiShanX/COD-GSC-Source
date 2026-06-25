@@ -27,7 +27,7 @@ main() {
 
 sndspectatorsetup() {
   flag_wait("initial_players_connected");
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player thread sndspectatorafterliferevert();
@@ -100,11 +100,11 @@ sndeventstingertriggers() {
 }
 
 sndeventstingertriggerthink() {
-  struct = getstruct(self.target, "targetname");
+  struct = getStruct(self.target, "targetname");
 
   while(true) {
     self waittill("trigger");
-    playsoundatposition(struct.script_sound, struct.origin);
+    playSoundAtPosition(struct.script_sound, struct.origin);
     level thread maps\mp\zombies\_zm_audio::sndmusicstingerevent("trigger_stinger");
     wait 5;
   }
@@ -126,7 +126,7 @@ sndeventtension() {
 
 sndgettensionlevel(struct) {
   tension_level = 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(is_true(player.laststand)) {
@@ -168,7 +168,7 @@ waitfornexttension(time) {
 sndboardmonitor() {
   while(true) {
     level waittill("last_board_torn", barrier_origin);
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(distancesquared(player.origin, barrier_origin) <= 22500) {
@@ -248,7 +248,7 @@ sndlocationshouldplay(array, activezone) {
   }
 
   playersinlocal = 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(player maps\mp\zombies\_zm_zonemgr::is_player_in_zone(activezone)) {
@@ -290,7 +290,7 @@ sndlocationbetweenrounds() {
     if(isDefined(level.sndlastzone) && zone == level.sndlastzone) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(is_true(player.afterlife)) {
@@ -509,7 +509,7 @@ sndlastlifesetup() {
 
 sndlastlife_solo() {
   return;
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(true) {
     player waittill("sndLifeGone");
@@ -534,7 +534,7 @@ sndlastlife_multi() {
   while(true) {
     level waittill("bleed_out");
     sndplayersdead++;
-    players = getplayers();
+    players = getPlayers();
 
     if(players.size - sndplayersdead <= 1) {
       last_alive = sndlastlife_multi_getlastplayer();
@@ -557,7 +557,7 @@ sndlastlife_multi() {
 sndlastlife_multi_getlastplayer() {
   level endon("end_of_round");
   wait 0.5;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(dude in players) {
     if(dude.sessionstate == "spectator") {

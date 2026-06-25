@@ -58,7 +58,7 @@ __main__() {
   }
 
   level flag::wait_till("all_players_spawned");
-  level.var_4cca20a9 = getent("mdl_ww_trap_machine", "targetname");
+  level.var_4cca20a9 = getEnt("mdl_ww_trap_machine", "targetname");
   level.var_4cca20a9 clientfield::set("" + #"trap_light_wolf", 1);
 }
 
@@ -79,7 +79,7 @@ function_670dda89() {
   level exploder::exploder("fxexp_ele_trap_activate");
 
   if(!isDefined(self.mdl_handle)) {
-    self.mdl_handle = getent("mdl_ww_trap_lever", "targetname");
+    self.mdl_handle = getEnt("mdl_ww_trap_lever", "targetname");
   }
 
   self.mdl_handle rotatepitch(90, 0.5);
@@ -100,10 +100,10 @@ function_670dda89() {
 }
 
 function_408fcb87() {
-  t_trap = getent("werewolfer", "script_noteworthy");
+  t_trap = getEnt("werewolfer", "script_noteworthy");
 
   while(level flag::get(#"werewolf_trap_active")) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player) && player istouching(t_trap) && player.currentweapon === getweapon(#"zhield_dw")) {
         player riotshield::player_damage_shield(5);
       }
@@ -169,7 +169,7 @@ ai_damage(e_trap) {
   }
 
   self fx::play("werewolfer_impact", self.origin, self.angles, "death");
-  playsoundatposition(#"wpn_zmb_electrap_zap", self.origin);
+  playSoundAtPosition(#"wpn_zmb_electrap_zap", self.origin);
 
   if(self.archetype === #"werewolf") {
     self thread zm_traps::electroctute_death_fx();

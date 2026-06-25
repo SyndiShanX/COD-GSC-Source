@@ -284,7 +284,7 @@ function_b952c1b(ai_zombie) {
   n_total_time = 0;
 
   while(n_dist_sq > 256 && isalive(self)) {
-    var_88f24b00 moveto(self function_7eae6d92(var_88f24b00), n_move_time);
+    var_88f24b00 moveTo(self function_7eae6d92(var_88f24b00), n_move_time);
     wait 0.1;
 
     if(isalive(self)) {
@@ -394,7 +394,7 @@ function_cb1c46b8(b_enabled) {
     if(!self clientfield::get("" + #"afterlife_vision_play")) {
       self clientfield::set("" + #"afterlife_vision_play", 1);
       self.snd_ent = spawn("script_origin", self.origin);
-      self.snd_ent linkto(self);
+      self.snd_ent linkTo(self);
       self.snd_ent playLoopSound(#"hash_197dd6d18afad004");
     }
 
@@ -441,7 +441,7 @@ function_92a54dac() {
 
     if(n_dist_sq < 262144) {
       v_view_pos = self getweaponmuzzlepoint();
-      v_normal = vectornormalize(e_afterlife.origin - v_view_pos);
+      v_normal = vectorNormalize(e_afterlife.origin - v_view_pos);
       var_ee5864e0 = self getweaponforwarddir();
       n_dot = vectordot(var_ee5864e0, v_normal);
 
@@ -565,13 +565,13 @@ function_750abd36() {
       return;
     }
 
-    normal = vectornormalize(v_zombie_origin - v_view_pos);
+    normal = vectorNormalize(v_zombie_origin - v_view_pos);
     dot = vectordot(var_ee5864e0, normal);
 
     if(var_a155935 < var_d6b10e11) {
       level.var_2f7aae6c[level.var_2f7aae6c.size] = a_zombies[i];
       dist_mult = 1;
-      fling_vec = vectornormalize(v_zombie_origin - v_view_pos);
+      fling_vec = vectorNormalize(v_zombie_origin - v_view_pos);
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 50 + 50 * dist_mult);
       level.var_8cd4a995[level.var_8cd4a995.size] = fling_vec;
@@ -605,10 +605,10 @@ function_750abd36() {
     if(var_a155935 < n_fling_range_sq) {
       level.var_2f7aae6c[level.var_2f7aae6c.size] = a_zombies[i];
       dist_mult = (n_fling_range_sq - var_a155935) / n_fling_range_sq;
-      fling_vec = vectornormalize(v_zombie_origin - v_view_pos);
+      fling_vec = vectorNormalize(v_zombie_origin - v_view_pos);
 
       if(5000 < var_a155935) {
-        fling_vec += vectornormalize(v_zombie_origin - radial_origin);
+        fling_vec += vectorNormalize(v_zombie_origin - radial_origin);
       }
 
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));

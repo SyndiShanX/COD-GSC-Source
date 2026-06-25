@@ -89,7 +89,7 @@ function perk_wire_fx_client(clientnum, init_targetname, done_notify) {
     if(isDefined(targ.target)) {
       println((("" + clientnum) + "") + targ.target);
       target = struct::get(targ.target, "targetname");
-      mover moveto(target.origin, 0.1);
+      mover moveTo(target.origin, 0.1);
       wait(0.1);
       targ = target;
     } else {

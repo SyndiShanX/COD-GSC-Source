@@ -30,7 +30,7 @@ main() {
 }
 
 drone_setstart() {
-  ent = getent("rts_player_start", "targetname");
+  ent = getEnt("rts_player_start", "targetname");
   assert(isDefined(ent), "Player starting location must be defined.");
   self.origin = ent.origin;
   self setplayerangles(ent.angles);

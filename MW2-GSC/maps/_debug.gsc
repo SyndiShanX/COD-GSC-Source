@@ -862,7 +862,7 @@ create_reflection_object() {
   level.debug_reflectionobject = spawn("script_model", level.player getEye() + (vector_multiply(anglesToForward(level.player.angles), 100)));
   level.debug_reflectionobject setModel("test_sphere_silver");
   level.debug_reflectionobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), 100));
-  level.debug_reflectionobject LinkTo(level.player);
+  level.debug_reflectionobject linkTo(level.player);
   thread debug_reflection_buttons();
 }
 
@@ -908,7 +908,7 @@ debug_reflection_buttons() {
     level.debug_reflectionobject Unlink();
     level.debug_reflectionobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), offset));
     lastoffset = offset;
-    level.debug_reflectionobject LinkTo(level.player);
+    level.debug_reflectionobject linkTo(level.player);
 
     wait .05;
   }
@@ -924,7 +924,7 @@ create_fxlighting_object() {
   level.debug_fxlightingobject = spawn("script_model", level.player getEye() + (vector_multiply(anglesToForward(level.player.angles), 100)));
   level.debug_fxlightingobject setModel("tag_origin");
   level.debug_fxlightingobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), 100));
-  level.debug_fxlightingobject LinkTo(level.player);
+  level.debug_fxlightingobject linkTo(level.player);
   level.debug_fxlightingobject thread play_fxlighting_fx();
   thread debug_fxlighting_buttons();
 }
@@ -968,7 +968,7 @@ debug_fxlighting_buttons() {
     level.debug_fxlightingobject Unlink();
     level.debug_fxlightingobject.origin = level.player getEye() + (vector_multiply(anglesToForward(level.player GetPlayerAngles()), offset));
     lastoffset = offset;
-    level.debug_fxlightingobject LinkTo(level.player);
+    level.debug_fxlightingobject linkTo(level.player);
     wait .05;
   }
 }
@@ -1156,7 +1156,7 @@ camera() {
   wait(0.05);
   cameras = getEntArray("camera", "targetname");
   for(i = 0; i < cameras.size; i++) {
-    ent = GetEnt(cameras[i].target, "targetname");
+    ent = getEnt(cameras[i].target, "targetname");
     cameras[i].origin2 = ent.origin;
     cameras[i].angles = VectorToAngles(ent.origin - cameras[i].origin);
   }
@@ -1201,7 +1201,7 @@ camera() {
       angles = (0, difference[1], 0);
       forward = anglesToForward(angles);
 
-      difference = VectorNormalize(end - level.player.origin);
+      difference = vectorNormalize(end - level.player.origin);
       dot = VectorDot(forward, difference);
       if(dot < 0.85) {
         continue;
@@ -1298,10 +1298,10 @@ dollyGo() {
 
       org = spawn("script_origin", (0, 0, 0));
       org.origin = level.dollystart;
-      level.player SetOrigin(org.origin);
-      level.player LinkTo(org);
+      level.player setOrigin(org.origin);
+      level.player linkTo(org);
 
-      org MoveTo(level.dollyend, level.dollyTime);
+      org moveTo(level.dollyend, level.dollyTime);
       wait(level.dollyTime);
       org Delete();
     }
@@ -1513,7 +1513,7 @@ getchain() {
     if(!isDefined(ent) || !isDefined(ent.target)) {
       break;
     }
-    ent = GetEnt(ent.target, "targetname");
+    ent = getEnt(ent.target, "targetname");
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
       break;
@@ -1539,10 +1539,10 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
   diaglen = Length(mincorner - maxcorner);
 
   mincorneroffset = (mincorner - viewpos);
-  mincorneroffset = VectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
+  mincorneroffset = vectorNormalize((mincorneroffset[0], mincorneroffset[1], 0));
   mincorner = mincorner + vecscale(mincorneroffset, diaglen * 1 / 800 * 0);
   maxcorneroffset = (maxcorner - viewpos);
-  maxcorneroffset = VectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
+  maxcorneroffset = vectorNormalize((maxcorneroffset[0], maxcorneroffset[1], 0));
   maxcorner = maxcorner + vecscale(maxcorneroffset, diaglen * 1 / 800 * 0);
 
   north = (Cos(GetNorthYaw()), Sin(GetNorthYaw()), 0);
@@ -1575,8 +1575,8 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
 }
 
 islookingatorigin(origin) {
-  normalvec = VectorNormalize(origin - self GetShootAtPos());
-  veccomp = VectorNormalize((origin - (0, 0, 24)) - self GetShootAtPos());
+  normalvec = vectorNormalize(origin - self GetShootAtPos());
+  veccomp = vectorNormalize((origin - (0, 0, 24)) - self GetShootAtPos());
   insidedot = VectorDot(normalvec, veccomp);
 
   anglevec = anglesToForward(self GetPlayerAngles());
@@ -2066,7 +2066,7 @@ debug_animSound() {
       animSound = level.animSounds_thisframe[i];
       animSound.animsound_color = (0.25, 1.0, 0.5);
 
-      difference = VectorNormalize((animSound.origin + (0, 0, 40)) - (level.player.origin + (0, 0, 55)));
+      difference = vectorNormalize((animSound.origin + (0, 0, 40)) - (level.player.origin + (0, 0, 55)));
       newdot = VectorDot(forward, difference);
       if(newdot < dot) {
         continue;
@@ -2446,7 +2446,7 @@ chaseCam_onEnt(ent) {
     angles = level.player GetPlayerAngles();
     forward = anglesToForward(angles);
     forward *= -200;
-    level.chase_cam_ent MoveTo(start + forward, 0.2);
+    level.chase_cam_ent moveTo(start + forward, 0.2);
   }
 }
 

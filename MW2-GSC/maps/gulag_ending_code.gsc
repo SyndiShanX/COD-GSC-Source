@@ -316,12 +316,12 @@ stumble_trigger_think() {
   level endon("skip_stumble_trigger_think");
   wait(3);
 
-  eq_view_roller = getent("eq_view_roller", "targetname");
+  eq_view_roller = getEnt("eq_view_roller", "targetname");
 
   player_ent = spawn_tag_origin();
 
   eq_view_roller.origin = player_ent.origin;
-  player_ent linkto(eq_view_roller);
+  player_ent linkTo(eq_view_roller);
 
   level.player PlayerSetGroundReferenceEnt(player_ent);
   ent = spawn_tag_origin();
@@ -354,19 +354,19 @@ stumble_trigger_think() {
     ent addpitch(30);
     ent addroll(5);
 
-    eq_view_roller RotateTo(ent.angles, 1, 0.5, 0.5);
+    eq_view_roller rotateTo(ent.angles, 1, 0.5, 0.5);
     wait(1);
 
     ent addpitch(-35);
     ent addroll(-15);
-    eq_view_roller RotateTo(ent.angles, 1, 0.5, 0.5);
+    eq_view_roller rotateTo(ent.angles, 1, 0.5, 0.5);
     wait(1);
 
-    eq_view_roller RotateTo(start_angles, 1, 0.5, 0.5);
+    eq_view_roller rotateTo(start_angles, 1, 0.5, 0.5);
 
     flag_wait("exit_collapses");
     flag_set("controlled_player_rumble");
-    level.player PlayRumbleOnEntity("heavy_3s");
+    level.player playRumbleOnEntity("heavy_3s");
     delaythread(3.0, ::flag_clear, "controlled_player_rumble");
 
     thread stumble_baddie();
@@ -375,13 +375,13 @@ stumble_trigger_think() {
   if(!flag("big_earthquake_hits")) {
     flag_wait("big_earthquake_hits");
     trigger = getentwithflag("big_earthquake_hits");
-    eq_view_roller = getent(trigger.target, "targetname");
+    eq_view_roller = getEnt(trigger.target, "targetname");
     jolt_origin = eq_view_roller.origin;
     start_angles = eq_view_roller.angles;
 
     eq_view_roller.origin = player_ent.origin;
 
-    player_ent linkto(eq_view_roller);
+    player_ent linkTo(eq_view_roller);
 
     quake(0.25, 4, self.origin, 5000);
 
@@ -398,7 +398,7 @@ stumble_trigger_think() {
 
   flag_set("controlled_player_rumble");
 
-  level.player PlayRumbleOnEntity("light_3s");
+  level.player playRumbleOnEntity("light_3s");
   level.player delaycall(1.5, ::PlayRumbleOnEntity, "heavy_2s");
   delaythread(3.5, ::flag_clear, "controlled_player_rumble");
 
@@ -410,7 +410,7 @@ stumble_trigger_think() {
   eq_view_roller.angles = (0, player_angles[1], 0);
   ent.angles = eq_view_roller.angles;
 
-  player_ent linkto(eq_view_roller);
+  player_ent linkTo(eq_view_roller);
 
   forward = anglesToForward(eq_view_roller.angles);
   right = anglestoright(eq_view_roller.angles);
@@ -436,7 +436,7 @@ stumble_trigger_think() {
   ent addroll(25);
 
   timer = 0.2;
-  eq_view_roller RotateTo(ent.angles, timer, timer * 0.5, timer * 0.5);
+  eq_view_roller rotateTo(ent.angles, timer, timer * 0.5, timer * 0.5);
   wait(timer);
 
   thread fx_fall_around_player(eq_view_roller.angles);
@@ -447,19 +447,19 @@ stumble_trigger_think() {
 
   ent addpitch(-35);
   ent addroll(-25);
-  eq_view_roller RotateTo(ent.angles, timer, timer * 0.5, timer * 0.5);
+  eq_view_roller rotateTo(ent.angles, timer, timer * 0.5, timer * 0.5);
   wait(timer);
 
   timer = 0.5;
 
   ent addpitch(5);
   ent addroll(-15);
-  eq_view_roller RotateTo(ent.angles, timer, 0, timer);
+  eq_view_roller rotateTo(ent.angles, timer, 0, timer);
   wait(timer);
   timer = 0.55;
   ent addpitch(15);
   ent addroll(-60);
-  eq_view_roller RotateTo(ent.angles, timer, 0, 0);
+  eq_view_roller rotateTo(ent.angles, timer, 0, 0);
 
   level.player setstance("prone");
   wait(0.65);
@@ -610,7 +610,7 @@ hallway_flicker_light() {
   on = "com_floodlight_on";
 
   model = self;
-  light = getent(model.target, "targetname");
+  light = getEnt(model.target, "targetname");
   intensity = light getLightIntensity();
 
   for(;;) {
@@ -660,7 +660,7 @@ first_hallway_collapse(pos) {
 }
 
 stumble_baddie() {
-  spawner = getent("stumble_baddie_spawner", "targetname");
+  spawner = getEnt("stumble_baddie_spawner", "targetname");
 
   if(within_fov_of_players(spawner.origin, 0.7)) {
     return;
@@ -672,7 +672,7 @@ stumble_baddie() {
   guy = spawner stalingradspawn();
   guy.animname = "stumble_baddie";
 
-  ent = getstruct(guy.target, "targetname");
+  ent = getStruct(guy.target, "targetname");
   guy gun_remove();
   guy.allowDeath = true;
   guy endon("death");
@@ -723,11 +723,11 @@ path_anim(time, time_in, time_out) {
   self.path_index++;
 
   if(isDefined(time_in)) {
-    self moveto(path["origin"], time, time_in, time_out);
-    self rotateto(path["angles"], time, time_in, time_out);
+    self moveTo(path["origin"], time, time_in, time_out);
+    self rotateTo(path["angles"], time, time_in, time_out);
   } else {
-    self moveto(path["origin"], time);
-    self rotateto(path["angles"], time);
+    self moveTo(path["origin"], time);
+    self rotateTo(path["angles"], time);
   }
 }
 
@@ -735,58 +735,58 @@ pillar_anim_show() {
   models = getEntArray("pillar_anim", "targetname");
   models = array_index_by_parameters(models);
 
-  model1targ = getent(models["1"].target, "targetname");
-  model2targ = getent(models["2"].target, "targetname");
+  model1targ = getEnt(models["1"].target, "targetname");
+  model2targ = getEnt(models["2"].target, "targetname");
 
-  models["1"] linkto(model1targ);
-  models["2"] linkto(models["1"]);
-  model2targ linkto(model1targ);
+  models["1"] linkTo(model1targ);
+  models["2"] linkTo(models["1"]);
+  model2targ linkTo(model1targ);
 
   flag_wait("enter_final_room");
 
   wait(1);
 
-  targ2 = getent(model1targ.target, "targetname");
+  targ2 = getEnt(model1targ.target, "targetname");
 
-  model1targ moveto(targ2.origin, 5, 1, 2);
-  model1targ rotateto(targ2.angles, 5, 1, 2);
+  model1targ moveTo(targ2.origin, 5, 1, 2);
+  model1targ rotateTo(targ2.angles, 5, 1, 2);
   wait(5);
 
-  pillar_rotater = getent("pillar_rotater", "targetname");
-  model1targ linkto(pillar_rotater);
+  pillar_rotater = getEnt("pillar_rotater", "targetname");
+  model1targ linkTo(pillar_rotater);
 
-  pillar_targ = getent(pillar_rotater.target, "targetname");
-  pillar_rotater rotateto(pillar_targ.angles, 2, 2, 0);
-  pillar_rotater moveto(pillar_targ.origin, 2, 2, 0);
+  pillar_targ = getEnt(pillar_rotater.target, "targetname");
+  pillar_rotater rotateTo(pillar_targ.angles, 2, 2, 0);
+  pillar_rotater moveTo(pillar_targ.origin, 2, 2, 0);
   wait(2);
 
-  pillar_rotater = getent(pillar_rotater.target, "targetname");
-  model1targ linkto(pillar_rotater);
+  pillar_rotater = getEnt(pillar_rotater.target, "targetname");
+  model1targ linkTo(pillar_rotater);
 
   timer = 0.75;
-  pillar_targ = getent(pillar_rotater.target, "targetname");
-  pillar_rotater rotateto(pillar_targ.angles, timer);
-  pillar_rotater moveto(pillar_targ.origin, timer);
+  pillar_targ = getEnt(pillar_rotater.target, "targetname");
+  pillar_rotater rotateTo(pillar_targ.angles, timer);
+  pillar_rotater moveTo(pillar_targ.origin, timer);
   wait(timer);
 
   targets = getEntArray(pillar_targ.target, "targetname");
   targets = array_index_by_classname(targets);
 
-  models["2"] linkto(model2targ);
-  model2targ linkto(targets["script_origin_pillar2"]);
+  models["2"] linkTo(model2targ);
+  model2targ linkTo(targets["script_origin_pillar2"]);
 
-  models["1"] linkto(model1targ);
-  model1targ linkto(targets["script_origin_pillar1"]);
+  models["1"] linkTo(model1targ);
+  model1targ linkTo(targets["script_origin_pillar1"]);
 
   timer = 0.4;
   model1targ unlink();
-  model1targ rotateto(targets["script_origin_pillar1"].angles, timer);
-  model1targ moveto(targets["script_origin_pillar1"].origin, timer);
+  model1targ rotateTo(targets["script_origin_pillar1"].angles, timer);
+  model1targ moveTo(targets["script_origin_pillar1"].origin, timer);
 
   timer = 1.5;
   model2targ unlink();
-  model2targ rotateto(targets["script_origin_pillar2"].angles, timer, 0, timer);
-  model2targ moveto(targets["script_origin_pillar2"].origin, timer, 0, timer);
+  model2targ rotateTo(targets["script_origin_pillar2"].angles, timer, 0, timer);
+  model2targ moveTo(targets["script_origin_pillar2"].origin, timer, 0, timer);
 }
 
 delete_tree_think() {
@@ -795,7 +795,7 @@ delete_tree_think() {
     if(!isDefined(ent.target)) {
       break;
     }
-    newent = getent(ent.target, "targetname");
+    newent = getEnt(ent.target, "targetname");
     ent delete();
     ent = newent;
   }
@@ -864,7 +864,7 @@ player_dies_to_cavein(start_index) {
           level.player DoDamage(15 / level.player.damageMultiplier, randomvector(500));
         }
 
-        level.player PlayRumbleOnEntity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
       }
       wait(0.05);
     }
@@ -909,7 +909,7 @@ black_death() {
 
 trigger_damage_think() {
   self waittill("trigger");
-  ent = getstruct(self.target, "targetname");
+  ent = getStruct(self.target, "targetname");
   RadiusDamage(ent.origin + (0, 0, 16), 32, 500, 500, level.player);
   wait(0.2);
   RadiusDamage(ent.origin - (0, 0, 16), 32, 500, 500, level.player);
@@ -920,7 +920,7 @@ chase_player_dies_if_goes_wrong_way() {
   flag_wait("chase_brush_kill_volume_activates");
   wait(2.5);
 
-  volume = getent("player_cavein_kill_volume", "targetname");
+  volume = getEnt("player_cavein_kill_volume", "targetname");
   time = 5;
   frames = time * 20;
 
@@ -994,7 +994,7 @@ chase_train() {
   speed /= 19.76;
   speed = 6;
 
-  chase_vehicle_spawner = getent("chase_brush_vehicle", "targetname");
+  chase_vehicle_spawner = getEnt("chase_brush_vehicle", "targetname");
   fx_vehicle = chase_vehicle_spawner vehicle_dospawn();
   level.fx_vehicle = fx_vehicle;
   fx_vehicle thread chase_train_fx();
@@ -1011,16 +1011,16 @@ chase_train() {
 
   wait(3.5);
 
-  chase_brush = getent("chase_brush", "targetname");
+  chase_brush = getEnt("chase_brush", "targetname");
   chase_brush show();
 
-  chase_vehicle_spawner = getent("chase_brush_vehicle", "targetname");
+  chase_vehicle_spawner = getEnt("chase_brush_vehicle", "targetname");
   chase_vehicle = chase_vehicle_spawner vehicle_dospawn();
   chase_vehicle thread chase_train_kills_player_if_it_gets_close();
   level.chase_vehicle = chase_vehicle;
   chase_vehicle attachpath(path);
   chase_vehicle startpath();
-  chase_brush linkto(chase_vehicle);
+  chase_brush linkTo(chase_vehicle);
   chase_vehicle thread chase_train_chases(900, false);
 
   level waittill("stop_chase_fx");
@@ -1034,7 +1034,7 @@ chase_train_fx() {
   ent = spawn_tag_origin();
 
   fx = getfx("hallway_collapsing_chase");
-  ent linkto(self, "tag_origin", (0, 0, 0), (0, 0, -90));
+  ent linkTo(self, "tag_origin", (0, 0, 0), (0, 0, -90));
 
   count = 5;
   for(;;) {
@@ -1106,7 +1106,7 @@ ceiling_collapse_think() {
   self CastShadows();
   script_delay();
 
-  self moveto(org, 1, 0.2, 0);
+  self moveTo(org, 1, 0.2, 0);
   Earthquake(1.0, 4, org, 1000);
 }
 
@@ -1114,14 +1114,14 @@ set_friendly_endpoint_think() {
   level.friendly_endpoint = self.origin;
   flag_wait("exit_collapses");
 
-  new_org = getstruct(self.target, "targetname");
+  new_org = getStruct(self.target, "targetname");
   level.friendly_endpoint = new_org.origin;
   flag_clear("friendlies_turn_corner");
   flag_wait("friendlies_turn_corner");
 
   level.redshirt thread dialogue_queue("gulag_wrm_thisway");
 
-  hall_org = getstruct(new_org.target, "targetname");
+  hall_org = getStruct(new_org.target, "targetname");
   level.friendly_endpoint = hall_org.origin;
 
   flag_wait("friendlies_turn_to_cafeteria");
@@ -1211,8 +1211,8 @@ cafe_fx() {
 
 ceiling_collapse_begins() {
   level endon("collapse_fx_stop");
-  org = getstruct("ceiling_collapse_org", "targetname");
-  target = getstruct(org.target, "targetname");
+  org = getStruct("ceiling_collapse_org", "targetname");
+  target = getStruct(org.target, "targetname");
   angles = vectortoangles(target.origin - org.origin);
   dist = distance(org.origin, target.origin);
   forward = anglesToForward(angles);
@@ -1257,7 +1257,7 @@ get_anim_paths() {
       break;
     }
 
-    path = getent(path.target, "targetname");
+    path = getEnt(path.target, "targetname");
 
     array = [];
     array["angles"] = path.angles;
@@ -1274,7 +1274,7 @@ get_anim_paths() {
 }
 
 friendly_car_slide_trigger() {
-  targ = getent(self.target, "targetname");
+  targ = getEnt(self.target, "targetname");
   targ thread price_slide_box_topples();
   flag_wait("exit_collapses");
 
@@ -1311,7 +1311,7 @@ price_slide_box_topples() {
   }
 
   crate = models["script_model"];
-  models["script_brushmodel"] linkto(crate);
+  models["script_brushmodel"] linkTo(crate);
 
   paths = crate get_anim_paths();
 
@@ -1320,8 +1320,8 @@ price_slide_box_topples() {
   models["script_brushmodel"] thread kill_player_on_touch();
 
   foreach(path in paths) {
-    crate moveto(path["origin"], 0.1);
-    crate rotateto(path["angles"], 0.1);
+    crate moveTo(path["origin"], 0.1);
+    crate rotateTo(path["angles"], 0.1);
     wait(0.1);
   }
   models["script_brushmodel"] notify("stop_killing");
@@ -1340,19 +1340,19 @@ kill_player_on_touch() {
 }
 
 price_hurdles() {
-  car_slide_org = getstruct("car_slide_org", "targetname");
+  car_slide_org = getStruct("car_slide_org", "targetname");
 
   wait(0.35);
   car_slide_org thread anim_generic(level.redshirt, "slide_across_car");
   wait(1.7);
-  level.redshirt anim_stopanimscripted();
+  level.redshirt anim_stopanimScripted();
   flag_set("match_up_for_final_room");
   setsaveddvar("player_sprintSpeedScale", level.default_sprint);
 }
 
 ambient_flicker_light_think() {
   ent = spawnStruct();
-  light = getent(self.target, "targetname");
+  light = getEnt(self.target, "targetname");
 
   turn_on["ch_street_wall_light_01_on"] = "ch_street_wall_light_01_on";
   turn_on["ch_street_wall_light_01_off"] = "ch_street_wall_light_01_on";
@@ -1443,15 +1443,15 @@ cafe_table_org_think() {
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = self.origin;
   ent.angles = self.angles;
-  table linkto(ent);
+  table linkTo(ent);
 
   wait(1);
 
-  target = getstruct(self.target, "targetname");
+  target = getStruct(self.target, "targetname");
 
   timer = 5;
-  ent moveto(target.origin, timer, timer * 0.1, timer * 0.1);
-  ent rotateto(target.angles, timer, timer * 0.1, timer * 0.1);
+  ent moveTo(target.origin, timer, timer * 0.1, timer * 0.1);
+  ent rotateTo(target.angles, timer, timer * 0.1, timer * 0.1);
 
   frames = timer * 20;
   org = ent.origin + (0, 0, 32);
@@ -1462,8 +1462,8 @@ cafe_table_org_think() {
 }
 
 cafe_table_think() {
-  model = getent(self.target, "targetname");
-  model linkto(self);
+  model = getEnt(self.target, "targetname");
+  model linkTo(self);
 }
 
 cafe_table_eq_org_think() {
@@ -1502,7 +1502,7 @@ swing_light_think() {
     yaw = randomfloatrange(range * -1, range);
     ref_ent addyaw(yaw);
 
-    self rotateto(ref_ent.angles, 1, 0.3, 0.3);
+    self rotateTo(ref_ent.angles, 1, 0.3, 0.3);
     forward = anglesToForward(ref_ent.angles);
 
     wait(1);
@@ -1513,11 +1513,11 @@ evil_hidden_spawner() {
   self hide();
   self setcontents(0);
   self.health = 50000;
-  ent = getstruct("weapon_drop_org", "targetname");
+  ent = getStruct("weapon_drop_org", "targetname");
   org = spawn_taG_origin();
   org.origin = ent.origin;
   org.angles = ent.angles;
-  self linkto(org, "tag_origin", (0, 0, 0), (0, 0, 0));
+  self linkTo(org, "tag_origin", (0, 0, 0), (0, 0, 0));
   self.team = "neutral";
   self.ignoreme = true;
   self.ignoreall = true;
@@ -1539,7 +1539,7 @@ evil_hidden_spawner() {
   org delete();
   self delete();
 
-  weapon_impact_org = getstruct("weapon_impact_org", "targetname");
+  weapon_impact_org = getStruct("weapon_impact_org", "targetname");
 
   delaythread(0.20, ::play_sound_in_space, "physics_brick_default", weapon_impact_org.origin);
   delaythread(0.20, ::play_sound_in_space, "physics_brick_default", weapon_impact_org.origin);
@@ -1572,7 +1572,7 @@ white_punch_screen() {
 
 player_gets_knocked_out_by_price(player_rig) {
   tag_origin = spawn_tag_origin();
-  tag_origin LinkTo(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(player_rig, "tag_player", (0, 0, 0), (0, 0, 0));
 
   thread spawn_ak47();
   queue = gettime();
@@ -1588,8 +1588,8 @@ player_gets_knocked_out_by_price(player_rig) {
   level.player delaycall(0.05, ::disableweapons);
   time = 0.25;
   level.price_breach_ent unlink();
-  level.price_breach_ent moveto(level.price_breach_struct.origin, 0.5, 0.2, 0.2);
-  level.price_breach_ent rotateto(level.price_breach_struct.angles, 0.5, 0.2, 0.2);
+  level.price_breach_ent moveTo(level.price_breach_struct.origin, 0.5, 0.2, 0.2);
+  level.price_breach_ent rotateTo(level.price_breach_struct.angles, 0.5, 0.2, 0.2);
   level.price_breach_ent notify("stop_following_player");
 
   noself_delayCall(0.1, ::Earthquake, 1.0, 0.6, level.player.origin, 128);
@@ -1629,7 +1629,7 @@ spawn_ak47() {
   ak47 setModel("gulag_price_ak47");
   foreach(part, _ in hide_parts) {}
 
-  ak47 linkto(level.price, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  ak47 linkTo(level.price, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   wait(1.4);
 
   println("ak update info:");
@@ -1637,7 +1637,7 @@ spawn_ak47() {
   println("	ak47.angles = " + ak47.angles + ";");
 
   wait_for_buffer_time_to_pass(queue, 11.3);
-  ak47 linkto(level.price, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
+  ak47 linkTo(level.price, "tag_weapon_chest", (0, 0, 0), (0, 0, 0));
   level.price waittill("change_to_regular_weapon");
   ak47 delete();
 }
@@ -1729,7 +1729,7 @@ gulag_glass_shatter() {
 
   index = 0;
 
-  struct = getstruct("glass_shatter_struct", "targetname");
+  struct = getStruct("glass_shatter_struct", "targetname");
   for(;;) {
     RadiusDamage(struct.origin, 64, 350, 250);
     delay = delays[index];
@@ -1744,7 +1744,7 @@ gulag_glass_shatter() {
     if(!isDefined(struct.target)) {
       return;
     }
-    struct = getstruct(struct.target, "targetname");
+    struct = getStruct(struct.target, "targetname");
   }
 }
 
@@ -1940,17 +1940,17 @@ rubble_think() {
   flag_wait("enter_final_room");
   wait(4);
   exploder("cafeteria_collapse");
-  chase_brush = getent("chase_brush", "targetname");
+  chase_brush = getEnt("chase_brush", "targetname");
   chase_brush unlink();
   thread player_touch_kill();
   self show();
   self solid();
-  self moveto(self.origin + (0, 0, offset), 4, 1, 3);
-  chase_brush moveto(chase_brush.origin + (0, 0, -300), 4, 2);
+  self moveTo(self.origin + (0, 0, offset), 4, 1, 3);
+  chase_brush moveTo(chase_brush.origin + (0, 0, -300), 4, 2);
   wait(4);
   level notify("stop_chase_fx");
   chase_brush delete();
-  self disconnectpaths();
+  self disconnectPaths();
 }
 
 player_touch_kill() {
@@ -1967,7 +1967,7 @@ hunted_hanging_light() {
   fx = getfx("gulag_cafe_spotlight");
   tag_origin = spawn_tag_origin();
 
-  tag_origin LinkTo(self.lamp, "j_hanging_light_04", (0, 0, -32), (0, 0, 0));
+  tag_origin linkTo(self.lamp, "j_hanging_light_04", (0, 0, -32), (0, 0, 0));
   playFXOnTag(fx, tag_origin, "tag_origin");
 
   flag_wait("time_to_evac");
@@ -2013,7 +2013,7 @@ lamp_rotates_yaw() {
     yaw = randomfloatrange(-30, 30);
     ent addyaw(yaw);
     time = randomfloatrange(0.5, 1.5);
-    self rotateto(ent.angles, time, time * 0.4, time * 0.4);
+    self rotateTo(ent.angles, time, time * 0.4, time * 0.4);
     wait(time);
   }
 }
@@ -2037,12 +2037,12 @@ orient_player_to_rig(player_rig) {
 }
 
 map_spawners_to_starts(orgs) {
-  spawner = GetEnt("price_spawner", "targetname");
+  spawner = getEnt("price_spawner", "targetname");
   spawner.origin = orgs["price"].origin;
   spawner.angles = orgs["price"].angles;
   spawner spawn_ai();
 
-  spawner = GetEnt("endlog_soap_spawner", "targetname");
+  spawner = getEnt("endlog_soap_spawner", "targetname");
   spawner.origin = orgs["soap"].origin;
   spawner.angles = orgs["soap"].angles;
   spawner spawn_ai();

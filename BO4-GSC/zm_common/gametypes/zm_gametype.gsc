@@ -521,7 +521,7 @@ menu_onmenuresponse() {
           self zm_stats::increment_player_stat("deaths");
           level.host_ended_game = 1;
 
-          foreach(player in getplayers()) {
+          foreach(player in getPlayers()) {
             player val::set(#"game_end", "freezecontrols");
             player val::set(#"game_end", "disablegadgets");
           }
@@ -545,7 +545,7 @@ menu_onmenuresponse() {
         self closeingamemenu();
         level.host_ended_game = 1;
 
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           player val::set(#"game_end", "freezecontrols");
           player val::set(#"game_end", "disablegadgets");
         }

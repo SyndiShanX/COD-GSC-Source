@@ -848,7 +848,7 @@ init_spawnable_weapon_upgrade() {
     }
 
     registerclientfield("world", clientfieldname, 1, numbits, "int");
-    target_struct = getstruct(spawn_list[i].target, "targetname");
+    target_struct = getStruct(spawn_list[i].target, "targetname");
 
     if(spawn_list[i].targetname == "buildable_wallbuy") {
       bits = 4;
@@ -960,7 +960,7 @@ add_dynamic_wallbuy(weapon, wallbuy, pristine) {
     return;
   }
 
-  target_struct = getstruct(wallbuy, "targetname");
+  target_struct = getStruct(wallbuy, "targetname");
   wallmodel = spawn_weapon_model(weapon, undefined, target_struct.origin, target_struct.angles);
   clientfieldname = spawned_wallbuy.clientfieldname;
   model = getweaponmodel(weapon);
@@ -1065,12 +1065,12 @@ wall_weapon_update_prompt(player) {
     if(!player_has_weapon) {
       cost = get_weapon_cost(weapon);
       self.stub.hint_string = get_weapon_hint(weapon);
-      self sethintstring(self.stub.hint_string, cost);
+      self setHintString(self.stub.hint_string, cost);
     } else if(isDefined(level.use_legacy_weapon_prompt_format) && level.use_legacy_weapon_prompt_format) {
       cost = get_weapon_cost(weapon);
       ammo_cost = get_ammo_cost(weapon);
       self.stub.hint_string = get_weapon_hint_ammo();
-      self sethintstring(self.stub.hint_string, cost, ammo_cost);
+      self setHintString(self.stub.hint_string, cost, ammo_cost);
     } else {
       if(player has_upgrade(weapon)) {
         ammo_cost = get_upgraded_ammo_cost(weapon);
@@ -1079,7 +1079,7 @@ wall_weapon_update_prompt(player) {
       }
 
       self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
-      self sethintstring(self.stub.hint_string, ammo_cost);
+      self setHintString(self.stub.hint_string, ammo_cost);
     }
   } else if(!player has_weapon_or_upgrade(weapon)) {
     string_override = 0;
@@ -1097,7 +1097,7 @@ wall_weapon_update_prompt(player) {
       }
 
       self.stub.hint_string = &"ZOMBIE_WEAPONCOSTONLY";
-      self sethintstring(self.stub.hint_string, weapon_display, cost);
+      self setHintString(self.stub.hint_string, weapon_display, cost);
     }
   } else {
     if(player has_upgrade(weapon)) {
@@ -1107,17 +1107,17 @@ wall_weapon_update_prompt(player) {
     }
 
     self.stub.hint_string = &"ZOMBIE_WEAPONAMMOONLY";
-    self sethintstring(self.stub.hint_string, ammo_cost);
+    self setHintString(self.stub.hint_string, ammo_cost);
   }
 
   if(getdvarint(#"tu12_zombies_allow_hint_weapon_from_script")) {
     self.stub.cursor_hint = "HINT_WEAPON";
     self.stub.cursor_hint_weapon = weapon;
-    self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
+    self setCursorHint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
   } else {
     self.stub.cursor_hint = "HINT_NOICON";
     self.stub.cursor_hint_weapon = undefined;
-    self setcursorhint(self.stub.cursor_hint);
+    self setCursorHint(self.stub.cursor_hint);
   }
 
   return true;
@@ -1134,7 +1134,7 @@ reset_wallbuy_internal(set_hint_string) {
     if(set_hint_string) {
       hint_string = get_weapon_hint(self.zombie_weapon_upgrade);
       cost = get_weapon_cost(self.zombie_weapon_upgrade);
-      self sethintstring(hint_string, cost);
+      self setHintString(hint_string, cost);
     }
   }
 }
@@ -1192,8 +1192,8 @@ init_weapon_upgrade() {
     if(!(isDefined(level.monolingustic_prompt_format) && level.monolingustic_prompt_format)) {
       hint_string = get_weapon_hint(weapon_spawns[i].zombie_weapon_upgrade);
       cost = get_weapon_cost(weapon_spawns[i].zombie_weapon_upgrade);
-      weapon_spawns[i] sethintstring(hint_string, cost);
-      weapon_spawns[i] setcursorhint("HINT_NOICON");
+      weapon_spawns[i] setHintString(hint_string, cost);
+      weapon_spawns[i] setCursorHint("HINT_NOICON");
     } else {
       cost = get_weapon_cost(weapon_spawns[i].zombie_weapon_upgrade);
       weapon_display = get_weapon_display_name(weapon_spawns[i].zombie_weapon_upgrade);
@@ -1203,12 +1203,12 @@ init_weapon_upgrade() {
       }
 
       hint_string = &"ZOMBIE_WEAPONCOSTONLY";
-      weapon_spawns[i] sethintstring(hint_string, weapon_display, cost);
+      weapon_spawns[i] setHintString(hint_string, weapon_display, cost);
     }
 
-    weapon_spawns[i] usetriggerrequirelookat();
+    weapon_spawns[i] useTriggerRequireLookAt();
     weapon_spawns[i] thread weapon_spawn_think();
-    model = getent(weapon_spawns[i].target, "targetname");
+    model = getEnt(weapon_spawns[i].target, "targetname");
 
     if(isDefined(model)) {
       model useweaponhidetags(weapon_spawns[i].zombie_weapon_upgrade);
@@ -1267,9 +1267,9 @@ init_weapon_toggle() {
       }
     }
 
-    struct.trigger sethintstring(level.zombie_weapon_toggle_disabled_hint);
-    struct.trigger setcursorhint("HINT_NOICON");
-    struct.trigger usetriggerrequirelookat();
+    struct.trigger setHintString(level.zombie_weapon_toggle_disabled_hint);
+    struct.trigger setCursorHint("HINT_NOICON");
+    struct.trigger useTriggerRequireLookAt();
     struct thread weapon_toggle_think();
     level.zombie_weapon_toggles[struct.weapon_name] = struct;
   }
@@ -1315,7 +1315,7 @@ disable_weapon_toggle(weapon_name) {
   toggle.active = 0;
   toggle.light setModel(level.zombie_weapon_toggle_disabled_light);
   toggle.weapon_model hide();
-  toggle.trigger sethintstring(level.zombie_weapon_toggle_disabled_hint);
+  toggle.trigger setHintString(level.zombie_weapon_toggle_disabled_hint);
 }
 
 enable_weapon_toggle(weapon_name) {
@@ -1351,7 +1351,7 @@ activate_weapon_toggle(weapon_name, trig_for_vox) {
   level.zombie_weapon_toggle_active_count++;
   toggle.active = 1;
   toggle.light setModel(level.zombie_weapon_toggle_active_light);
-  toggle.trigger sethintstring(level.zombie_weapon_toggle_deactivate_hint);
+  toggle.trigger setHintString(level.zombie_weapon_toggle_deactivate_hint);
 }
 
 deactivate_weapon_toggle(weapon_name, trig_for_vox) {
@@ -1370,7 +1370,7 @@ deactivate_weapon_toggle(weapon_name, trig_for_vox) {
 
   toggle.active = 0;
   toggle.light setModel(level.zombie_weapon_toggle_inactive_light);
-  toggle.trigger sethintstring(level.zombie_weapon_toggle_activate_hint);
+  toggle.trigger setHintString(level.zombie_weapon_toggle_activate_hint);
 }
 
 acquire_weapon_toggle(weapon_name, player) {
@@ -1384,7 +1384,7 @@ acquire_weapon_toggle(weapon_name, player) {
   }
   toggle.acquired = 1;
   toggle.light setModel(level.zombie_weapon_toggle_acquired_light);
-  toggle.trigger sethintstring(level.zombie_weapon_toggle_acquired_hint);
+  toggle.trigger setHintString(level.zombie_weapon_toggle_acquired_hint);
   toggle thread unacquire_weapon_toggle_on_death_or_disconnect_thread(player);
 }
 
@@ -1406,7 +1406,7 @@ unacquire_weapon_toggle(weapon_name) {
   }
   toggle.acquired = 0;
   toggle.light setModel(level.zombie_weapon_toggle_active_light);
-  toggle.trigger sethintstring(level.zombie_weapon_toggle_deactivate_hint);
+  toggle.trigger setHintString(level.zombie_weapon_toggle_deactivate_hint);
   toggle notify("end_unacquire_weapon_thread");
 }
 
@@ -1856,7 +1856,7 @@ get_weapon_hint_ammo() {
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {
-  self sethintstring(get_weapon_hint_ammo(), cost, ammo_cost);
+  self setHintString(get_weapon_hint_ammo(), cost, ammo_cost);
 }
 
 weapon_spawn_think() {
@@ -1880,7 +1880,7 @@ weapon_spawn_think() {
   if(is_grenade) {
     self.first_time_triggered = 0;
     hint = get_weapon_hint(self.zombie_weapon_upgrade);
-    self sethintstring(hint, cost);
+    self setHintString(hint, cost);
   } else if(!isDefined(self.first_time_triggered)) {
     self.first_time_triggered = 0;
 
@@ -2060,7 +2060,7 @@ weapon_spawn_think() {
 }
 
 show_all_weapon_buys(player, cost, ammo_cost, is_grenade) {
-  model = getent(self.target, "targetname");
+  model = getEnt(self.target, "targetname");
 
   if(isDefined(model)) {
     model thread weapon_show(player);
@@ -2089,7 +2089,7 @@ show_all_weapon_buys(player, cost, ammo_cost, is_grenade) {
         if(isDefined(wallbuy.trigger_stub) && isDefined(wallbuy.trigger_stub.clientfieldname)) {
           level setclientfield(wallbuy.trigger_stub.clientfieldname, 1);
         } else if(isDefined(wallbuy.target)) {
-          model = getent(wallbuy.target, "targetname");
+          model = getEnt(wallbuy.target, "targetname");
 
           if(isDefined(model)) {
             model thread weapon_show(player);
@@ -2143,7 +2143,7 @@ weapon_show(player) {
   time = 1;
 
   if(!isDefined(self._linked_ent)) {
-    self moveto(self.og_origin, time);
+    self moveTo(self.og_origin, time);
   }
 }
 
@@ -2333,7 +2333,7 @@ weapon_give(weapon, is_upgrade, magic_box, nosound) {
   }
 
   if(weapon == "ray_gun_zm") {
-    playsoundatposition("mus_raygun_stinger", (0, 0, 0));
+    playSoundAtPosition("mus_raygun_stinger", (0, 0, 0));
   }
 
   if(!is_weapon_upgraded(weapon)) {

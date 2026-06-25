@@ -123,8 +123,8 @@ func_18A6(var_0) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_0 endon("death");
-  self.trigger setcursorhint("HINT_NOICON");
-  self.trigger sethintstring(&"MP_PICKUP_ADRENALINE_MIST");
+  self.trigger setCursorHint("HINT_NOICON");
+  self.trigger setHintString(&"MP_PICKUP_ADRENALINE_MIST");
   self.trigger scripts\mp\utility\game::setselfusable(var_0);
   self.trigger thread scripts\mp\utility\game::notusableforjoiningplayers(var_0);
 

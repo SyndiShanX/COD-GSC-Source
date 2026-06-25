@@ -39,7 +39,7 @@ function function_22b7fffd() {
 }
 
 function start(str_objective) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player namespace_979752dc::set_disguised(1);
   level thread namespace_fba81a7f::function_37acd633();
   level thread namespace_fba81a7f::function_47620ece();
@@ -54,7 +54,7 @@ function start(str_objective) {
 }
 
 function main(str_objective, b_starting) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level thread function_1c58d4d4();
   level thread namespace_11998b8f::function_7ad4f5cb();
 
@@ -111,7 +111,7 @@ function main(str_objective, b_starting) {
 }
 
 function function_a3fa5d6f() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player val::set("electronics_store", "disable_weapons", 1);
   player util::function_749362d7(0);
   wait 0.7;
@@ -145,7 +145,7 @@ function function_36844b0c() {
 }
 
 function function_a168b5dc() {
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(player adsButtonPressed()) {
     while(player adsButtonPressed()) {
@@ -176,9 +176,9 @@ function function_9df174aa(a_ents) {
 function function_8d76ed51() {
   level namespace_e6b6aea1::function_3141d875();
   level thread scene::play("aib_vign_stakeout_safehouse_surveillance_wife", "z_stk_surveillance_stove_smoking_edda_transition", level.var_3559e9e);
-  kitchen_window_right_closed = getent("kitchen_window_right_closed", "targetname");
+  kitchen_window_right_closed = getEnt("kitchen_window_right_closed", "targetname");
   kitchen_window_right_closed hide();
-  kitchen_window_left_closed = getent("kitchen_window_left_closed", "targetname");
+  kitchen_window_left_closed = getEnt("kitchen_window_left_closed", "targetname");
   kitchen_window_left_closed hide();
   level flag::wait_till("flag_meetup_park");
 

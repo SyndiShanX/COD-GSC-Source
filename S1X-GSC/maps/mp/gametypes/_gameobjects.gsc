@@ -607,7 +607,7 @@ setDropped() {
 
     if(angleTrace["fraction"] < 1 && distance(angleTrace["position"], trace) < 10.0) {
       forward = (cos(tempAngle), sin(tempAngle), 0);
-      forward = VectorNormalize(forward - (angleTrace["normal"] * VectorDot(forward, angleTrace["normal"])));
+      forward = vectorNormalize(forward - (angleTrace["normal"] * VectorDot(forward, angleTrace["normal"])));
       dropAngles = vectortoangles(forward);
     } else {
       dropAngles = (0, tempAngle, 0);
@@ -1366,7 +1366,7 @@ proxTriggerLOS(player, ignoreEnts) {
 
   dir_offset = player.origin - self.trigger.origin;
   dir_offset = (dir_offset[0], dir_offset[1], 0);
-  dir_offset = VectorNormalize(dir_offset);
+  dir_offset = vectorNormalize(dir_offset);
   dir_offset = dir_offset * 5;
 
   foreach(z_offset in offsets) {
@@ -1721,9 +1721,9 @@ attachUseModel() {
 useHoldThink(player) {
   player notify("use_hold");
   if(isPlayer(player)) {
-    player playerLinkTo(self.trigger);
+    player playerlinkTo(self.trigger);
   } else {
-    player LinkTo(self.trigger);
+    player linkTo(self.trigger);
   }
 
   player PlayerLinkedOffsetEnable();

@@ -64,7 +64,7 @@ main() {
   }
 
   scripts\cp\zombies\zm_ww_riotshield::init();
-  level.outofmap_volume = getent("drk_aether_fall_volume", "targetname");
+  level.outofmap_volume = getEnt("drk_aether_fall_volume", "targetname");
   level.outofmap_teleport_points = scripts\engine\utility::getStructArray("drk_aether_fall_respawn_point", "targetname");
   _id_06CB::_id_AA4E(::onplayerconnect);
   level thread setup_animation_models();

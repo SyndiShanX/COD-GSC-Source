@@ -95,7 +95,7 @@ _id_526E() {
   var_0 = _id_8E2E(self._id_8E2F);
   self._id_413F = _id_4007(var_0, self._id_5F03);
   _id_07D6::_id_D8D1(&"MP/PLANTING_EXPLOSIVE");
-  self sethintstring(_id_8E2D(self._id_8E2F));
+  self setHintString(_id_8E2D(self._id_8E2F));
   self _meth_83A1(0);
   level thread _id_ED12(self);
 }

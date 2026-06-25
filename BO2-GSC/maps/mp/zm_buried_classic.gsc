@@ -95,7 +95,7 @@ main() {
   blockers = getEntArray("main_street_blocker", "targetname");
 
   foreach(blocker in blockers) {
-    blocker disconnectpaths();
+    blocker disconnectPaths();
   }
 
   level.insta_kill_triggers = getEntArray("instant_death", "targetname");
@@ -526,7 +526,7 @@ sliding_bookcase_activate(open) {
           q_time = 1;
         }
 
-        self moveto(movetopos, time, q_time, q_time);
+        self moveTo(movetopos, time, q_time, q_time);
         self thread maps\mp\zombies\_zm_blockers::door_solid_thread();
       }
 
@@ -578,10 +578,10 @@ sliding_bookcase_occupied() {
 sliding_bookcase_wobble(model) {
   while(true) {
     if(isDefined(self.doors[0].door_moving) && self.doors[0].door_moving) {
-      model rotateto((randomfloatrange(-2.5, 2.5), randomfloatrange(-0.5, 0.5), randomfloatrange(-0.5, 0.5)), 0.5, 0.125, 0.125);
+      model rotateTo((randomfloatrange(-2.5, 2.5), randomfloatrange(-0.5, 0.5), randomfloatrange(-0.5, 0.5)), 0.5, 0.125, 0.125);
       wait(0.5 - 0.125);
     } else if(isDefined(model.startang) && model.angles != model.startang) {
-      model rotateto(model.startang, 0.5, 0.125, 0.125);
+      model rotateTo(model.startang, 0.5, 0.125, 0.125);
       model waittill("rotatedone");
     } else
       wait 0.5;
@@ -667,9 +667,9 @@ piano_init() {
 
 pianothink() {
   note = self.script_noteworthy;
-  self usetriggerrequirelookat();
-  self sethintstring(&"NULL_EMPTY");
-  self setcursorhint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setHintString(&"NULL_EMPTY");
+  self setCursorHint("HINT_NOICON");
 
   for(;;) {
     self waittill("trigger", who);
@@ -715,7 +715,7 @@ zm_treasure_chest_init() {
   }
 
   maps\mp\zombies\_zm_magicbox::init_starting_chest_location("start_chest");
-  trig = getent("maze_box_trigger", "targetname");
+  trig = getEnt("maze_box_trigger", "targetname");
 
   if(isDefined(trig)) {
     trig waittill("trigger", who);
@@ -910,7 +910,7 @@ restore_worldstate_for_minigame() {
 
   foreach(blocker in blockers) {
     blocker.origin = blocker.origin + vectorscale((0, 0, 1), 360.0);
-    blocker disconnectpaths();
+    blocker disconnectPaths();
   }
 
   unhide_boxes_for_minigame();
@@ -1003,7 +1003,7 @@ minigame_blockers_enable() {
 
   foreach(clip_ai in a_clip_brushes_full) {
     clip_ai solid();
-    clip_ai disconnectpaths();
+    clip_ai disconnectPaths();
   }
 
   a_structs = get_minigame_blocker_structs();
@@ -1171,11 +1171,11 @@ close_open_door() {
         self.doors[i].saved_angles = self.doors[i].angles;
 
         if(isDefined(self.doors[i].script_string) && self.doors[i].script_string == "rotate") {
-          self.doors[i] rotateto(self.doors[i].og_angles, 0.05, 0, 0);
+          self.doors[i] rotateTo(self.doors[i].og_angles, 0.05, 0, 0);
         }
 
         self.doors[i] solid();
-        self.doors[i] disconnectpaths();
+        self.doors[i] disconnectPaths();
         self.doors[i].closed_by_minigame = 1;
       }
     }
@@ -1199,7 +1199,7 @@ open_closed_door(bignoreminigameflag) {
     for(i = 0; i < self.doors.size; i++) {
       if(bignoreminigameflag || isDefined(self.doors[i].closed_by_minigame) && self.doors[i].closed_by_minigame) {
         if(isDefined(self.doors[i].script_string) && self.doors[i].script_string == "rotate") {
-          self.doors[i] rotateto(self.doors[i].script_angles, 1, 0, 0);
+          self.doors[i] rotateTo(self.doors[i].script_angles, 1, 0, 0);
         }
 
         self.doors[i] connectpaths();
@@ -1344,7 +1344,7 @@ insta_kill_player(perks_can_respawn_player, kill_if_falling) {
         wait 0.5;
         self freezecontrols(1);
         wait 0.25;
-        self setorigin(v_point + vectorscale((0, 0, 1), 20.0));
+        self setOrigin(v_point + vectorscale((0, 0, 1), 20.0));
         self.angles = v_angles;
 
         if(in_last_stand) {
@@ -1419,7 +1419,7 @@ get_insta_kill_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_heig
 
   if(isDefined(found_node)) {
     level.chugabud_spawn_struct.origin = found_node.origin;
-    v_dir = vectornormalize(v_origin - level.chugabud_spawn_struct.origin);
+    v_dir = vectorNormalize(v_origin - level.chugabud_spawn_struct.origin);
     level.chugabud_spawn_struct.angles = vectortoangles(v_dir);
     return true;
   }
@@ -1460,10 +1460,10 @@ is_player_killable(player, checkignoremeflag) {
 }
 
 buried_set_underground_lighting() {
-  e_info_volume = getent("flashlight_found_info_volume", "targetname");
+  e_info_volume = getEnt("flashlight_found_info_volume", "targetname");
 
   while(true) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     if(isDefined(a_players)) {
       for(i = 0; i < a_players.size; i++) {
@@ -1520,7 +1520,7 @@ sloth_crawler_pickup_vulture_fx_correction_func() {
     e_temp maps\mp\zombies\_zm_perk_vulture::vulture_clientfield_scriptmover_set("vulture_stink_fx");
     wait_network_frame();
     e_temp.origin = self gettagorigin("J_SpineLower");
-    e_temp linkto(self, "J_SpineLower");
+    e_temp linkTo(self, "J_SpineLower");
 
     while(isalive(self)) {
       wait_network_frame();

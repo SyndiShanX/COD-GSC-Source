@@ -15,9 +15,9 @@ init() {
   PreCacheModel("p_glo_data_recorder01_static_reel");
   ss_buttons = getEntArray("sq_ss_button", "targetname");
   for(i = 0; i < ss_buttons.size; i++) {
-    ss_buttons[i] UseTriggerRequireLookAt();
-    ss_buttons[i] SetHintString("");
-    ss_buttons[i] SetCursorHint("HINT_NOICON");
+    ss_buttons[i] useTriggerRequireLookAt();
+    ss_buttons[i] setHintString("");
+    ss_buttons[i] setCursorHint("HINT_NOICON");
   }
   flag_init("first_tanks_charged");
   flag_init("second_tanks_charged");
@@ -149,9 +149,9 @@ rocket_raise(player_num) {
     level waittill("rl");
     level clientnotify("R_R");
     rockets[i] playSound("evt_rocket_move_up");
-    s = getstruct(rockets[i].target, "targetname");
-    rockets[i] MoveTo(s.origin, 4);
-    rockets[i] RotateTo((0, 0, 0), 4);
+    s = getStruct(rockets[i].target, "targetname");
+    rockets[i] moveTo(s.origin, 4);
+    rockets[i] rotateTo((0, 0, 0), 4);
   }
   level waittill("rl");
   array_thread(rockets, ::launch);
@@ -177,7 +177,7 @@ launch() {
   level._n_rockets++;
   PrintLn("Rocket " + self.rocket_num + " launching!");
   PrintLn("Rocket " + self.rocket_num + " target : " + self.target);
-  s = getstruct(self.target, "targetname");
+  s = getStruct(self.target, "targetname");
   PrintLn("Rocket " + self.rocket_num + " target's target : " + s.target);
   if(isDefined(s.target)) {
     start = GetVehicleNode(s.target, "targetname");
@@ -186,10 +186,10 @@ launch() {
     }
     origin_animate = spawn("script_model", start.origin);
     origin_animate setModel("tag_origin_animate");
-    self LinkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
+    self linkTo(origin_animate, "origin_animate_jnt", (0, 0, 0), (0, 0, 0));
     playFXOnTag(level._effect["rocket_booster"], self, "tag_origin");
-    vehicle = SpawnVehicle("tag_origin", "rocket_mover", "misc_freefall", start.origin, start.angles);
-    origin_animate LinkTo(vehicle);
+    vehicle = spawnVehicle("tag_origin", "rocket_mover", "misc_freefall", start.origin, start.angles);
+    origin_animate linkTo(vehicle);
     vehicle maps\_vehicle::getonpath(start);
     vehicle thread maps\_vehicle::gopath();
     vehicle waittill("reached_end_node");
@@ -284,7 +284,7 @@ get_specific_player(num) {
   return undefined;
 }
 maxis_story_vox() {
-  s = getstruct("sq_vg_final", "targetname");
+  s = getStruct("sq_vg_final", "targetname");
   level.skit_vox_override = true;
   play_sound_in_space("vox_plr_3_quest_step6_9", s.origin);
   wait(2.3);

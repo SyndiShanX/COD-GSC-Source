@@ -40,5 +40,5 @@ function function_86e8d9af(localclientnum, oldval, newval, bnewent, binitialsnap
 
   util::playFXOnTag(bwastimejump, str_fx, self, "tag_origin");
   self playSound(bwastimejump, #"hash_3b04ee47d31da098");
-  self playrumbleonentity(bwastimejump, "damage_heavy");
+  self playRumbleOnEntity(bwastimejump, "damage_heavy");
 }

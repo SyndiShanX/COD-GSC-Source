@@ -222,7 +222,7 @@ _id_1CA7(var_0) {
 
       if(isDefined(var_1)) {
         var_2 = var_1 - self.origin;
-        var_3 = vectornormalize(var_2);
+        var_3 = vectorNormalize(var_2);
         var_4 = vectortoangles(var_3);
         self _meth_8251("face angle", var_4[1]);
         break;

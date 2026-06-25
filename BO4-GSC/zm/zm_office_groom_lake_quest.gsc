@@ -88,8 +88,8 @@ function_b540b576() {
     var_2e2b46e8 zm_item_pickup::item_pickup_init(&function_1792ae3, 1);
   }
 
-  screen_a = getent("projecter_screen_a", "targetname");
-  screen_b = getent("projecter_screen_b", "targetname");
+  screen_a = getEnt("projecter_screen_a", "targetname");
+  screen_b = getEnt("projecter_screen_b", "targetname");
   screen_a show();
   screen_b hide();
 
@@ -126,9 +126,9 @@ function_6fb01110(player) {
   }
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_6d85deef99bf45a0");
+    self setHintString(#"hash_6d85deef99bf45a0");
   } else {
-    self sethintstring(#"hash_3d0bedfa0fcd62c");
+    self setHintString(#"hash_3d0bedfa0fcd62c");
   }
 
   return true;
@@ -157,8 +157,8 @@ function_aa07edab() {
 function_8352562a() {
   self endon(#"death");
   var_e578920c = 0;
-  screen_a = getent("projecter_screen_a", "targetname");
-  screen_b = getent("projecter_screen_b", "targetname");
+  screen_a = getEnt("projecter_screen_a", "targetname");
+  screen_b = getEnt("projecter_screen_b", "targetname");
 
   while(true) {
     self waittill(#"play_audio");
@@ -241,9 +241,9 @@ function_6ef57d1f() {
 }
 
 function_ed9142aa(player) {
-  self usetriggerrequirelookat();
-  self setcursorhint("HINT_NOICON");
-  self sethintstring("");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
+  self setHintString("");
   return true;
 }
 
@@ -260,16 +260,16 @@ function_43ef7a9a(a_audio, v_pos) {
     var_d34b6d2b = function_b116e882(self.var_614bfc5c, i, 1);
 
     if(isDefined(var_d34b6d2b)) {
-      playsoundatposition(var_d34b6d2b, v_pos);
+      playSoundAtPosition(var_d34b6d2b, v_pos);
     }
 
-    playsoundatposition(a_audio[i], v_pos);
+    playSoundAtPosition(a_audio[i], v_pos);
     n_wait_time = float(soundgetplaybacktime(a_audio[i])) / 1000;
     wait n_wait_time;
     var_d34b6d2b = function_b116e882(self.var_614bfc5c, i, 0);
 
     if(isDefined(var_d34b6d2b)) {
-      playsoundatposition(var_d34b6d2b, v_pos);
+      playSoundAtPosition(var_d34b6d2b, v_pos);
     }
 
     function_cfb5afb3(self.var_614bfc5c, i);
@@ -496,12 +496,12 @@ function_d4c6dc0d() {
   }
 
   var_df4e73a7[0] stoploopsound(0.5);
-  playsoundatposition(#"hash_1f7edbf8f3a60766", self.origin);
+  playSoundAtPosition(#"hash_1f7edbf8f3a60766", self.origin);
 }
 
 function_46d6aa5a() {
   zm_crafting::function_d1f16587(#"ztable_office_open", &function_2767c5d7);
-  level.var_2de08508 = getent("trigger_modify_teleporter_use", "targetname");
+  level.var_2de08508 = getEnt("trigger_modify_teleporter_use", "targetname");
   level.var_2de08508 thread function_a27356f6();
 
   if(!zm_utility::is_standard()) {
@@ -546,18 +546,18 @@ function_a27356f6() {
   self triggerenable(0);
   level waittill(#"modifier_acquired");
   self triggerenable(1);
-  self usetriggerrequirelookat();
-  self setcursorhint("HINT_NOICON");
+  self useTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
 
   if(function_8b1a219a()) {
-    self sethintstring(#"hash_6ff8d3f3a8d96c2a");
+    self setHintString(#"hash_6ff8d3f3a8d96c2a");
   } else {
-    self sethintstring(#"hash_4f0f148274f0dd3e");
+    self setHintString(#"hash_4f0f148274f0dd3e");
   }
 
   waitresult = self waittill(#"trigger");
   waitresult.activator thread zm_vo::function_a2bd5a0c(#"hash_7e0df5eda50fd3f3");
-  self sethintstring("");
+  self setHintString("");
   self triggerenable(0);
   place_modifier();
 }
@@ -572,7 +572,7 @@ function_7f4bdad3() {
   s_org = struct::get("telporter_modifier_model_org", "targetname");
   e_modifier = spawn("script_model", s_org.origin);
   e_modifier setModel("p8_zm_off_teleporter_together");
-  playsoundatposition(#"hash_4490540f4d90c6dd", e_modifier.origin);
+  playSoundAtPosition(#"hash_4490540f4d90c6dd", e_modifier.origin);
 }
 
 enable_groom_lake() {
@@ -800,7 +800,7 @@ function_3290d759() {
     }
 
     self.a_e_clip[self.a_e_clip.size] = e_junk;
-    e_junk disconnectpaths();
+    e_junk disconnectPaths();
   }
 
   self.a_s_powerups = struct::get_array(self.target);
@@ -837,7 +837,7 @@ function_55ca39d8() {
     wait 3;
   }
 
-  playsoundatposition(#"hash_4bddd546f43487cf", self.origin);
+  playSoundAtPosition(#"hash_4bddd546f43487cf", self.origin);
   var_19400951 stoploopsound(0.5);
   var_19400951 delete();
   array::run_all(self.a_e_clip, &delete);

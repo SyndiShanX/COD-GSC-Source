@@ -2747,7 +2747,7 @@ damageShellshockAndRumble(eInflictor, sWeapon, sMeansOfDeath, iDamage, iDFlags, 
   self thread maps\mp\gametypes\_weapons::onWeaponDamage(eInflictor, sWeapon, sMeansOfDeath, iDamage, eAttacker);
 
   if(!IsAI(self)) {
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -2866,7 +2866,7 @@ useHoldThink(player, useTime) {
 
   reviveSpot = spawn("script_origin", self.origin);
   reviveSpot hide();
-  player playerLinkTo(reviveSpot);
+  player playerlinkTo(reviveSpot);
   player PlayerLinkedOffsetEnable();
 
   player _disableWeapon();
@@ -2967,11 +2967,11 @@ emitFallDamage(iDamage) {
 isFlankKill(victim, attacker) {
   victimForward = anglesToForward(victim.angles);
   victimForward = (victimForward[0], victimForward[1], 0);
-  victimForward = VectorNormalize(victimForward);
+  victimForward = vectorNormalize(victimForward);
 
   attackDirection = victim.origin - attacker.origin;
   attackDirection = (attackDirection[0], attackDirection[1], 0);
-  attackDirection = VectorNormalize(attackDirection);
+  attackDirection = vectorNormalize(attackDirection);
 
   dotProduct = VectorDot(victimForward, attackDirection);
   if(dotProduct > 0) {
@@ -3053,7 +3053,7 @@ monitorDamage(maxHealth, damageFeedback, onDeathFunc, modifyDamageFunc, bIsKills
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
     if(rumble) {
-      self PlayRumbleOnEntity("damage_light");
+      self playRumbleOnEntity("damage_light");
     }
 
     if(isDefined(self.heliType) && self.heliType == "littlebird") {

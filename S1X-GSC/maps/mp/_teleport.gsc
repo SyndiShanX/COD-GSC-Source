@@ -454,11 +454,11 @@ teleport_get_matching_dom_flag(flag, from_zone) {
 
 teleport_onTeleportCTF(next_zone_name) {
   if(game["switchedsides"]) {
-    level.ctf_second_zones["axis"] = getent("post_event_capzone_allies", "targetname");
-    level.ctf_second_zones["allies"] = getent("post_event_capzone_axis", "targetname");
+    level.ctf_second_zones["axis"] = getEnt("post_event_capzone_allies", "targetname");
+    level.ctf_second_zones["allies"] = getEnt("post_event_capzone_axis", "targetname");
   } else {
-    level.ctf_second_zones["allies"] = getent("post_event_capzone_allies", "targetname");
-    level.ctf_second_zones["axis"] = getent("post_event_capzone_axis", "targetname");
+    level.ctf_second_zones["allies"] = getEnt("post_event_capzone_allies", "targetname");
+    level.ctf_second_zones["axis"] = getEnt("post_event_capzone_axis", "targetname");
   }
 
   zones = [];
@@ -525,11 +525,11 @@ teleport_onTeleportHP(next_zone_name) {
 teleport_onTeleportBALL(next_zone_name) {
   level.ball_starts_post_event = getStructArray("ball_start_post_event", "targetname");
   if(game["switchedsides"]) {
-    level.ball_goals_post_event["allies"] = getstruct("ball_goal_axis_post_event", "targetname");
-    level.ball_goals_post_event["axis"] = getstruct("ball_goal_allies_post_event", "targetname");
+    level.ball_goals_post_event["allies"] = getStruct("ball_goal_axis_post_event", "targetname");
+    level.ball_goals_post_event["axis"] = getStruct("ball_goal_allies_post_event", "targetname");
   } else {
-    level.ball_goals_post_event["axis"] = getstruct("ball_goal_axis_post_event", "targetname");
-    level.ball_goals_post_event["allies"] = getstruct("ball_goal_allies_post_event", "targetname");
+    level.ball_goals_post_event["axis"] = getStruct("ball_goal_axis_post_event", "targetname");
+    level.ball_goals_post_event["allies"] = getStruct("ball_goal_allies_post_event", "targetname");
   }
 
   goals = [];
@@ -963,7 +963,7 @@ teleport_to_zone_character(zone_name, character) {
 
     spawnPoint = spawnPoints[0];
     character DontInterpolate();
-    character SetOrigin(spawnPoint.origin);
+    character setOrigin(spawnPoint.origin);
     character SetPlayerAngles(spawnPoint.angles);
     return;
   }
@@ -1029,7 +1029,7 @@ teleport_to_zone_character(zone_name, character) {
   } else {
     character CancelMantle();
     character DontInterpolate();
-    character SetOrigin(teleport_origin);
+    character setOrigin(teleport_origin);
     character SetPlayerAngles(teleport_angles);
 
     thread teleport_validate_success(character);

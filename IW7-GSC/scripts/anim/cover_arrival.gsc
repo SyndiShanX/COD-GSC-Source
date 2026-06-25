@@ -304,7 +304,7 @@ func_4710(var_0, var_1, var_2, var_3, var_4) {
     return 0;
   }
 
-  if(abs(self getspawnpoint_searchandrescue()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectornormalize(self.enemy.origin - self.origin)) > 0.8) {
+  if(abs(self getspawnpoint_searchandrescue()) > 45 && isDefined(self.enemy) && vectordot(anglesToForward(self.angles), vectorNormalize(self.enemy.origin - self.origin)) > 0.8) {
     return 0;
   }
 
@@ -369,7 +369,7 @@ func_10D80(var_0, var_1, var_2, var_3, var_4) {
     self endon("goal_changed");
     self.var_22F0 = level.var_4754[var_0];
     func_20F4(var_5, self.var_22F0);
-    var_11 = vectornormalize(var_1 - self.origin);
+    var_11 = vectorNormalize(var_1 - self.origin);
     var_6 = func_3DEE(var_1, var_3, var_0, var_11, var_7, var_8, var_9);
     self.var_22F0 = length(scripts\anim\utility::func_B031("cover_trans_dist", var_0, var_10));
     func_20F4(var_5, self.var_22F0);
@@ -431,7 +431,7 @@ func_3DEE(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     }
 
     if(!var_6) {
-      var_14 = vectornormalize(self.var_4718 - self.origin);
+      var_14 = vectorNormalize(self.var_4718 - self.origin);
       var_15 = var_1 - scripts\anim\utility::func_B031("cover_trans_angles", var_2, var_8.var_20F0);
       var_10 = anglesToForward((0, var_15, 0));
       var_11 = vectordot(var_14, var_10);
@@ -596,7 +596,7 @@ func_58E6() {
     var_0 = func_53C4(var_2);
   }
 
-  var_4 = vectornormalize(self.vehicle_getspawnerarray - self.origin);
+  var_4 = vectorNormalize(self.vehicle_getspawnerarray - self.origin);
   var_5 = vectortoyaw(var_4);
   if(isDefined(self.var_6A6C)) {
     var_5 = self.angles[1];
@@ -664,7 +664,7 @@ func_58E6() {
     }
 
     var_14 = var_14 - var_12;
-    var_11 = self.origin + vectornormalize(self.vehicle_getspawnerarray - self.origin) * var_14;
+    var_11 = self.origin + vectorNormalize(self.vehicle_getspawnerarray - self.origin) * var_14;
   } else {
     var_10 = self.angles[1];
     var_11 = self.origin;

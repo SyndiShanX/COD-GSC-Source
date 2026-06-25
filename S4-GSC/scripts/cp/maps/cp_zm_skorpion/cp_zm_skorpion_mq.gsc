@@ -27,18 +27,18 @@ init() {
 }
 
 init_common_elements() {
-  var_0 = scripts\engine\utility::getstruct("s2_mq_crystal_hand_lock_loc", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s2_mq_crystal_hand_lock_loc", "targetname");
   level.e_crystal_hand = scripts\cp\utility::_id_E190("s4_zm_crystalized_hand", var_0.origin, var_0.angles);
-  var_1 = scripts\engine\utility::getstruct("lock_shield", "targetname");
+  var_1 = scripts\engine\utility::getStruct("lock_shield", "targetname");
   level.e_shield_eye_closed = scripts\cp\utility::_id_E190("vm_shield_demonic_zm_closeeye_200", var_1.origin, var_1.angles);
   playFXOnTag(level._effect["mq_shield_ambient"], level.e_shield_eye_closed, "tag_riot_shield");
-  level.e_shield_clip = getent("s2_mq_shield_clip", "targetname");
+  level.e_shield_clip = getEnt("s2_mq_shield_clip", "targetname");
   level.e_shield_clip notsolid();
-  level.e_dominaiton_portal_clip = getent("s2_mq_domination_portal_clip", "targetname");
+  level.e_dominaiton_portal_clip = getEnt("s2_mq_domination_portal_clip", "targetname");
   level.e_dominaiton_portal_clip notsolid();
-  level.e_assault_portal_clip = getent("s2_mq_assault_portal_clip", "targetname");
+  level.e_assault_portal_clip = getEnt("s2_mq_assault_portal_clip", "targetname");
   level.e_assault_portal_clip notsolid();
-  level.e_void_portal_clip = getent("s2_mq_void_portal_clip", "targetname");
+  level.e_void_portal_clip = getEnt("s2_mq_void_portal_clip", "targetname");
   level.e_void_portal_clip notsolid();
 }
 
@@ -161,7 +161,7 @@ play_vercanna_trust_vo() {
 }
 
 init_open_domination_arena() {
-  var_0 = scripts\engine\utility::getstruct("s2_mq_speaking_stone_01_loc", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s2_mq_speaking_stone_01_loc", "targetname");
 
   if(!isDefined(level.mdl_domination_stone)) {
     level.mdl_domination_stone = scripts\cp\utility::_id_E190("s4_zm_soul_capture_runestone_02", var_0.origin, var_0.angles);
@@ -299,7 +299,7 @@ domination_portal_show_up() {
   level.objective_override_vo_func = ::init_override_objective_vos;
   level.objective_override_vo_cleanup_func = ::reset_objective_vo;
   level.active_objective_instances = scripts\cp\utility::_id_1B8C(level.active_objective_instances, level._id_A883);
-  var_0 = scripts\engine\utility::getstruct("s2_mq_unique_domination_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s2_mq_unique_domination_portal", "targetname");
   _id_06EF::_id_E16F(level._id_A883);
   level.e_dominaiton_portal_clip solid();
   level.e_dominaiton_portal_clip _meth_80B5();
@@ -322,7 +322,7 @@ mq_portal_reactive_watcher() {
 }
 
 init_unique_assault() {
-  var_0 = scripts\engine\utility::getstruct("s2_mq_speaking_stone_02_loc", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s2_mq_speaking_stone_02_loc", "targetname");
 
   if(!isDefined(level.mdl_assault_stone)) {
     level.mdl_assault_stone = scripts\cp\utility::_id_E190("s4_zm_soul_capture_runestone_02", var_0.origin, var_0.angles);
@@ -479,7 +479,7 @@ debug_unique_assault() {
 
 shield_crystal_damage_watcher() {
   level endon("end_game");
-  self.t_dmg = getent(self._id_0481, "target");
+  self.t_dmg = getEnt(self._id_0481, "target");
   self.t_dmg.n_health = 300;
 
   for(;;) {
@@ -532,7 +532,7 @@ play_crystal_trail_fx(var_0, var_1) {
 
   if(isDefined(self.mdl_energy)) {
     playFXOnTag(level._effect["mq_shield_crystal_trail"], self.mdl_energy, "tag_origin");
-    self.mdl_energy moveto(var_1, var_2);
+    self.mdl_energy moveTo(var_1, var_2);
     self.mdl_energy waittill("movedone");
 
     foreach(var_4 in level.players) {
@@ -582,7 +582,7 @@ assault_portal_show_up() {
   level._id_A883.hide_round_message_hud = 1;
   level.objective_override_vo_func = ::override_assault_vo_func;
   level.objective_override_vo_cleanup_func = ::override_assaultvo_cleanup_func;
-  var_0 = scripts\engine\utility::getstruct("s2_mq_unique_assault_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s2_mq_unique_assault_portal", "targetname");
   _id_06EF::_id_E16F(level._id_A883);
   level.e_assault_portal_clip solid();
   level.e_assault_portal_clip _meth_80B5();
@@ -629,7 +629,7 @@ override_assaultvo_cleanup_func(var_0) {
 
 init_void() {
   level.fn_forever_blitz_start_wait_override = ::cp_zm_skorpion_forever_blitz_start_wait_override;
-  var_0 = scripts\engine\utility::getstruct("s2_mq_speaking_stone_03_loc", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s2_mq_speaking_stone_03_loc", "targetname");
 
   if(!isDefined(level.mdl_stone_void)) {
     level.mdl_stone_void = scripts\cp\utility::_id_E190("s4_zm_soul_capture_runestone_02", var_0.origin, var_0.angles);
@@ -678,7 +678,7 @@ show_up_void_portal() {
   level waittill("void_portal_vo_done");
   level.e_void_portal_clip solid();
   level.e_void_portal_clip _meth_80B5();
-  var_0 = scripts\engine\utility::getstruct("forever_blitz_portal", "targetname");
+  var_0 = scripts\engine\utility::getStruct("forever_blitz_portal", "targetname");
   playsoundatpos(var_0.origin, "zmb_exfil_portal_open");
   var_1 = scripts\cp\utility::_id_E190("tag_origin", var_0.origin, anglesToForward(var_0.angles));
   playFX(level._effect["mq_portal_open_green"], var_1.origin, anglesToForward(var_1.angles + (90, 90, 0)));
@@ -710,7 +710,7 @@ do_void() {
   level.str_portal_first_person_effect_label_override = undefined;
   level.str_portal_end_first_person_effect_label_override = undefined;
   wait 2;
-  var_0 = scripts\engine\utility::getstruct("s2_mq_hand_explode_loc", "targetname");
+  var_0 = scripts\engine\utility::getStruct("s2_mq_hand_explode_loc", "targetname");
   playFX(level._effect["mq_crystal_hand_explode"], var_0.origin);
   level.e_shield_eye_closed playSound("zmb_hand_shatter");
 
@@ -723,7 +723,7 @@ do_void() {
     }
   }
 
-  var_5 = scripts\engine\utility::getstruct("s2_mq_crystal_hand_lock_dmg_loc", "targetname");
+  var_5 = scripts\engine\utility::getStruct("s2_mq_crystal_hand_lock_dmg_loc", "targetname");
 
   if(!isDefined(level.e_crystal_hand_dmg)) {
     level.e_crystal_hand_dmg = scripts\cp\utility::_id_E190("s4_zm_crystalized_hand_dmg", var_5.origin, var_5.angles);
@@ -737,7 +737,7 @@ do_void() {
     level.e_shield_eye_closed delete();
   }
 
-  var_6 = scripts\engine\utility::getstruct("lock_shield", "targetname");
+  var_6 = scripts\engine\utility::getStruct("lock_shield", "targetname");
   level.e_shield = scripts\cp\utility::_id_E190("vm_shield_demonic_zm_200", var_6.origin, var_6.angles);
   level thread player_ignore_watcher(level.e_shield.origin);
   level thread shield_vignette_music_watcher();

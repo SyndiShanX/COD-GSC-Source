@@ -264,7 +264,7 @@ domelee(var_0) {
   }
 
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(36);
+  self scragentsetgoalRadius(36);
   return anim.running;
 }
 
@@ -498,10 +498,10 @@ getfastteleportdest(var_0, var_1) {
       var_12 = length2dsquared(var_11);
 
       if(var_12 > 16129) {
-        var_7 = vectornormalize(var_0.origin - self.origin);
+        var_7 = vectorNormalize(var_0.origin - self.origin);
         var_8 = anglesToForward(var_0.angles);
         var_13 = vectordot(var_7, var_8);
-        var_14 = vectornormalize(var_11);
+        var_14 = vectorNormalize(var_11);
         var_15 = vectordot(var_8, var_14);
 
         if(var_13 > var_1.cplayerfacingawayfrommedot && var_15 > 0.9) {

@@ -128,7 +128,7 @@ _id_3D2F(var_0, var_1) {
   var_0.modelname = "veh8_civ_lnd_skilo_rus_police_physics_mp";
   var_0._id_0481 = "cop_car";
   var_0._id_04DE = "skilo_police_physics_mp";
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;

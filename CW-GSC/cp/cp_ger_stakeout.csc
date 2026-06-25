@@ -536,7 +536,7 @@ function render_emissive_blacklight_material(localclientnum, oldval, newval, bne
       fwd = anglesToForward(player getcamangles());
       dotlimit = 0.9744;
       delta = self.origin - eye;
-      dir = vectornormalize(delta);
+      dir = vectorNormalize(delta);
       vector_dot = vectordot(dir, fwd);
       dist = distance2dsquared(self.origin, eye);
 

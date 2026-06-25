@@ -15,7 +15,7 @@ function init() {
   callback::on_ai_killed(&function_df8c20ce);
   level.var_d8104f84 = 100;
   level.var_2a5adcff = 14;
-  level.var_4b8d723f = getent("zone_kill_achievement", "script_noteworthy");
+  level.var_4b8d723f = getEnt("zone_kill_achievement", "script_noteworthy");
   callback::add_callback(#"crafted_item", &function_a6f7e3da);
 }
 

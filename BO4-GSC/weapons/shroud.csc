@@ -96,7 +96,7 @@ function_a252eaf0(localclientnum, entnum, team) {
 
   level.var_effa221[entnum] = undefined;
 
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     if(isDefined(player) && player.team == team) {
       player function_90fc4e4c();
     }
@@ -126,7 +126,7 @@ function_e3a084cd(localclientnum, bwastimejump) {
 
   self.iconent = spawn(localclientnum, self.origin, "script_model", localplayer getentitynumber(), self.team);
   self.iconent setModel(#"tag_origin");
-  self.iconent linkto(self);
+  self.iconent linkTo(self);
   self.iconent setcompassicon("minimap_shroud_flying");
   self.iconent function_8e04481f();
   self.iconent function_5e00861(0.25);
@@ -177,7 +177,7 @@ function_e3a084cd(localclientnum, bwastimejump) {
 }
 
 function_99c31219(localclientnum) {
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
 
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -211,7 +211,7 @@ function_25f0bf77(localclientnum) {
       function_99c31219(localclientnum);
     }
 
-    players = getplayers(localclientnum);
+    players = getPlayers(localclientnum);
     endpoint = var_bec8c458 + var_e74c7608;
     i = var_bec8c458;
 
@@ -226,7 +226,7 @@ function_25f0bf77(localclientnum) {
         if(!isDefined(player.var_981be9e8)) {
           player.var_981be9e8 = spawn(localclientnum, player.origin, "script_model", player getentitynumber(), self.team);
           player.var_981be9e8 setModel(#"tag_origin");
-          player.var_981be9e8 linkto(player);
+          player.var_981be9e8 linkTo(player);
           player.var_981be9e8 setcompassicon("minimap_shroud_friendly_ping");
           player.var_981be9e8 function_8e04481f();
           player.var_981be9e8 function_5e00861(1.3);

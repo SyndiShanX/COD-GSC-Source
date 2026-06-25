@@ -36,7 +36,7 @@ function function_94c7c0d9(type = 1, var_5653e2ee = 2, context) {
   self.script_noteworthy = "dungeon_door";
 
   if(context !== 2) {
-    self disconnectpaths();
+    self disconnectPaths();
   }
 
   self.type = type;
@@ -153,7 +153,7 @@ function function_4c065330(door) {
   door thread function_2740974(2);
   wait 0.5;
   door solid();
-  door disconnectpaths();
+  door disconnectPaths();
 }
 
 function function_2740974(state) {
@@ -218,7 +218,7 @@ function function_2740974(state) {
 function play_anim(animation, rate = 1, mode = "server script") {
   self endon(#"death");
   self notify(#"stop_idle");
-  self stopanimscripted();
+  self stopanimScripted();
   animorigin = self.origin;
   animangles = self.angles;
   self thread animation::play(animation, animorigin, animangles, rate, 0.2, 0.2, 0, 0, 0, 0, undefined, 0, mode);

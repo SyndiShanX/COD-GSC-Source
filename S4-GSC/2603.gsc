@@ -169,7 +169,7 @@ _id_73F1() {
   var_3 = spawn("script_model", var_2._id_0405);
   var_3 setModel("tag_origin");
   var_3.angles = (90, 0, 0);
-  self cameralinkto(var_3, "tag_origin");
+  self cameralinkTo(var_3, "tag_origin");
 
   if(0) {
     var_4 = spawn("script_model", var_2._id_0405 + (-1 * var_1, 0, -1 * var_0 - 52));
@@ -373,7 +373,7 @@ _id_3008(var_0, var_1) {
     var_9 = var_0.origin - var_3;
 
     if(length(var_9) > 0.01) {
-      var_10 = vectornormalize(var_9);
+      var_10 = vectorNormalize(var_9);
 
       if(var_4) {
         if(_func_00B9() != 0) {
@@ -422,7 +422,7 @@ _id_3008(var_0, var_1) {
     }
 
     var_3 = var_0.origin;
-    var_1 playrumbleonentity("damage_light");
+    var_1 playRumbleOnEntity("damage_light");
     wait 0.05;
   }
 }
@@ -566,7 +566,7 @@ _id_690E() {
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3.target)) {
-      var_3._id_EEA2 = getent(var_3.target, "targetname");
+      var_3._id_EEA2 = getEnt(var_3.target, "targetname");
     }
   }
 
@@ -588,7 +588,7 @@ _id_690E() {
       var_6 = level._id_C332;
     }
 
-    var_7 = vectornormalize(var_0._id_0405 - var_0._id_EEF5);
+    var_7 = vectorNormalize(var_0._id_0405 - var_0._id_EEF5);
     var_0._id_0405 = var_7 * var_6 + var_0._id_EEF5;
   } else {
     var_8 = (0, 0, level._id_0C64["Launch_Value"]._id_103AD);

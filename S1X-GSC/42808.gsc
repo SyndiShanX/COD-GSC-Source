@@ -86,8 +86,8 @@ exo_knife_touch_watch() {
   self endon("death");
   self.owner endon("disconnect");
   var_0 = spawn("trigger_radius", self.origin, 0, 15, 5);
-  var_0 enablelinkto();
-  var_0 linkto(self);
+  var_0 enablelinkTo();
+  var_0 linkTo(self);
   var_0.knife = self;
   thread common_scripts\utility::delete_on_death(var_0);
 
@@ -190,7 +190,7 @@ exo_knife_recall_watch() {
   var_5 = self.owner getvelocity();
   var_1 = var_1 + var_5 * var_4;
   var_6 = var_1 - var_0;
-  var_6 = vectornormalize(var_6);
+  var_6 = vectorNormalize(var_6);
   var_7 = 0;
 
   if(var_7 != 0) {
@@ -201,7 +201,7 @@ exo_knife_recall_watch() {
   var_9 = magicgrenademanual(self.weaponname, var_0, var_8, 30, self.owner, 1);
   var_9.owner = self.owner;
   var_9.recall = 1;
-  var_9 missile_settargetent(self.owner);
+  var_9 missile_settargetEnt(self.owner);
   var_9 thread exo_knife_recall_stuck_watch();
   var_9 thread exo_knife_passed_target();
   exo_knife_delete();

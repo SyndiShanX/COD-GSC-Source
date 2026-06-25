@@ -379,7 +379,7 @@ dogfight_ambient_drone_spawn_manager() {
 }
 
 zone_trigger_watch(zone_name) {
-  trigger = getent(zone_name, "targetname");
+  trigger = getEnt(zone_name, "targetname");
 
   while(true) {
     trigger waittill("trigger");
@@ -394,7 +394,7 @@ zone_trigger_watch(zone_name) {
 
 zone_spawn_planes(zone_name, start_nodes) {
   level endon("kill_ambient_drone_spawn_manager");
-  trigger = getent(zone_name, "targetname");
+  trigger = getEnt(zone_name, "targetname");
   n_spawn_count_axis = 5;
   n_spawn_count_allies = 2;
   current_track = 0;
@@ -456,7 +456,7 @@ cleanup_ambient_drones(desired_delete_count, delete_dist, min_dot) {
 
   for(i = 0; i < level.aerial_vehicles.axis.size; i++) {
     if(isDefined(level.aerial_vehicles.axis[i]) && !isDefined(level.aerial_vehicles.axis[i].is_convoy_plane)) {
-      dot = vectordot(vectornormalize(level.aerial_vehicles.axis[i].origin - level.player.origin), player_forward);
+      dot = vectordot(vectorNormalize(level.aerial_vehicles.axis[i].origin - level.player.origin), player_forward);
 
       if(dot < -0.5) {
         potential_deletes[potential_deletes.size] = level.aerial_vehicles.axis[i];
@@ -475,7 +475,7 @@ cleanup_ambient_drones(desired_delete_count, delete_dist, min_dot) {
 
   for(i = 0; i < level.aerial_vehicles.allies.size; i++) {
     if(isDefined(level.aerial_vehicles.allies[i]) && !isDefined(level.aerial_vehicles.allies[i].is_convoy_plane)) {
-      dot = vectordot(vectornormalize(level.aerial_vehicles.allies[i].origin - level.player.origin), player_forward);
+      dot = vectordot(vectorNormalize(level.aerial_vehicles.allies[i].origin - level.player.origin), player_forward);
 
       if(dot < -0.5) {
         potential_deletes[potential_deletes.size] = level.aerial_vehicles.allies[i];
@@ -516,7 +516,7 @@ get_best_spline_node(node_start) {
     dist = length(delta);
 
     if(dist < closest_dist) {
-      dot = vectordot(vectornormalize(delta), player_forward);
+      dot = vectordot(vectorNormalize(delta), player_forward);
 
       if(dot > 0) {
         closest_node = current_node;

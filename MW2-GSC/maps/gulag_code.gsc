@@ -14,7 +14,7 @@
 spawn_player_heli() {
   level.player_repulsor = Missile_CreateRepulsorEnt(level.player, 10000, 800);
 
-  looker_guy = GetEnt("looker_guy", "script_noteworthy");
+  looker_guy = getEnt("looker_guy", "script_noteworthy");
   looker_guy add_spawn_function(::looker_guy);
 
   level.heli_time_tracker = [];
@@ -42,12 +42,12 @@ spawn_player_heli() {
 
   tag_origin = spawn_tag_origin();
 
-  tag_origin LinkTo(level.player_heli, "tag_origin", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(level.player_heli, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.ground_ref = tag_origin;
 
   level.player PlayerSetGroundReferenceEnt(tag_origin);
 
-  gulag_center = GetEnt("gulag_center", "targetname");
+  gulag_center = getEnt("gulag_center", "targetname");
   level.view_org = spawn("script_origin", (0, 0, 0));
   level.view_org.origin = gulag_center.origin;
 
@@ -62,7 +62,7 @@ spawn_player_heli() {
   arcBottom = 30;
 
   start_org = level.player_heli GetTagOrigin("tag_guy2");
-  level.player SetOrigin(start_org);
+  level.player setOrigin(start_org);
 
   wait(0.1);
   level.player SetPlayerAngles((-15, -115, 0));
@@ -117,7 +117,7 @@ draw_ent_line(ent) {
 
 player_view_blends_to_heli_tag() {
   ent = spawn_tag_origin();
-  ent LinkTo(level.player_heli, "tag_guy2", (0, 0, -16), (0, 90, 0));
+  ent linkTo(level.player_heli, "tag_guy2", (0, 0, -16), (0, 90, 0));
 
   level.player LerpViewAngleClamp(1, 0.25, 0.25, 25, 25, 15, 25);
   wait(1);
@@ -233,7 +233,7 @@ friendlies_traverse_gulag_exterior() {
   activate_trigger_with_targetname("friendlies_leave_courtyard");
 
   for(i = 1; i <= 5; i++) {
-    trigger = GetEnt(msg, "targetname");
+    trigger = getEnt(msg, "targetname");
     if(flag_exist(msg)) {
       flag_wait(msg);
     }
@@ -259,7 +259,7 @@ friendlies_traverse_showers() {
   level endon("leaving_bathroom_vol2");
 
   for(i = 1; i <= 5; i++) {
-    trigger = GetEnt(msg, "targetname");
+    trigger = getEnt(msg, "targetname");
     flag_wait(msg);
     volume = trigger get_color_volume_from_trigger();
     if(isDefined(volume)) {
@@ -378,7 +378,7 @@ fire_until_flag_clears() {
   forward = anglesToForward(self.angles);
   up = AnglesToUp(self.angles);
   target.origin = self.origin + forward * 400 + up * -400;
-  target LinkTo(self);
+  target linkTo(self);
   self.turretTarget = target;
 
   foreach(turret in turrets) {
@@ -474,15 +474,15 @@ modify_player_heli_yaw_over_time() {
     return;
   }
 
-  yaw_progress_ent = getstruct("yaw_progress_ent", "targetname");
-  yaw_progress_ent_target = getstruct(yaw_progress_ent.target, "targetname");
+  yaw_progress_ent = getStruct("yaw_progress_ent", "targetname");
+  yaw_progress_ent_target = getStruct(yaw_progress_ent.target, "targetname");
 
-  pitch_target_org = getstruct("pitch_target", "targetname");
+  pitch_target_org = getStruct("pitch_target", "targetname");
   pitch_target = spawn("script_origin", pitch_target_org.origin);
   self SetLookAtEnt(pitch_target);
 
-  fly_in_progress = getstruct("fly_in_progress", "targetname");
-  fly_in_progress_target = getstruct(fly_in_progress.target, "targetname");
+  fly_in_progress = getStruct("fly_in_progress", "targetname");
+  fly_in_progress_target = getStruct(fly_in_progress.target, "targetname");
   fly_in_progress_dist = Distance(fly_in_progress.origin, fly_in_progress_target.origin);
 
   for(;;) {
@@ -577,7 +577,7 @@ tv_movies_stop() {
 armed_heli_fires_turrets() {
   heli = level.heli_armed;
 
-  armed_target_1 = GetEnt("armed_target_1", "targetname");
+  armed_target_1 = getEnt("armed_target_1", "targetname");
 
   foreach(turret in heli.mgturret) {
     turret SetTargetEntity(armed_target_1);
@@ -598,7 +598,7 @@ glassy_pain() {
 
 player_heli_rotates_properly_around_gulag() {
   level endon("stop_moving_gulag_center");
-  gulag_center = GetEnt("gulag_center", "targetname");
+  gulag_center = getEnt("gulag_center", "targetname");
   org = gulag_center.origin;
   follow_ent = spawn("script_origin", (0, 0, 0));
 
@@ -606,9 +606,9 @@ player_heli_rotates_properly_around_gulag() {
   thread player_heli_processess_rotation(gulag_center, follow_ent);
   flag_wait("stab2_clear");
 
-  targ = GetEnt(gulag_center.target, "targetname");
-  targ2 = GetEnt(targ.target, "targetname");
-  level.view_org MoveTo(targ.origin, 4, 1, 1);
+  targ = getEnt(gulag_center.target, "targetname");
+  targ2 = getEnt(targ.target, "targetname");
+  level.view_org moveTo(targ.origin, 4, 1, 1);
 
   level.player.ignoreme = true;
   level.soap.ignoreme = true;
@@ -623,7 +623,7 @@ player_heli_rotates_properly_around_gulag() {
   delayThread(2.5, ::exploder, 93);
   delayThread(3, ::kill_deathflag, "final_tower_died");
 
-  player_heli_landing_path = getstruct("player_heli_landing_path", "targetname");
+  player_heli_landing_path = getStruct("player_heli_landing_path", "targetname");
 
   level.player_heli delayThread(1.5, ::vehicle_paths, player_heli_landing_path);
 
@@ -631,8 +631,8 @@ player_heli_rotates_properly_around_gulag() {
 
   wait(1);
 
-  gulag_center MoveTo(targ2.origin, 2, 1, 1);
-  level.view_org MoveTo(targ2.origin, 1.5, 0.5, 0.5);
+  gulag_center moveTo(targ2.origin, 2, 1, 1);
+  level.view_org moveTo(targ2.origin, 1.5, 0.5, 0.5);
 
   level.player_heli delayThread(2.7, ::play_sound_on_entity, "scn_gulag_heli_atlitude_alarm");
   level.player delayThread(2.7, ::play_sound_on_entity, "scn_gulag_heli_shakes");
@@ -663,20 +663,20 @@ player_heli_rotates_properly_around_gulag() {
 
   thread ground_ref_freaks_out();
 
-  ent = GetEnt("f15_hli_target_ent", "targetname");
-  gulag_center MoveTo(ent.origin, 3, 0.5, 0.5);
-  level.view_org MoveTo(ent.origin, 3, 0.5, 0.5);
+  ent = getEnt("f15_hli_target_ent", "targetname");
+  gulag_center moveTo(ent.origin, 3, 0.5, 0.5);
+  level.view_org moveTo(ent.origin, 3, 0.5, 0.5);
 
   delayThread(3.5, ::flag_clear, "clear_dof");
 
   wait(5);
-  gulag_center MoveTo(org, 3, 0.5, 0.5);
-  level.view_org MoveTo(org, 3, 0.5, 0.5);
+  gulag_center moveTo(org, 3, 0.5, 0.5);
+  level.view_org moveTo(org, 3, 0.5, 0.5);
 
   flag_wait("stop_rotating_around_gulag");
   level notify("stop_rotating_around_gulag_break");
 
-  fly_in_lookat_ent = GetEnt("fly_in_lookat_ent", "targetname");
+  fly_in_lookat_ent = getEnt("fly_in_lookat_ent", "targetname");
   self SetLookAtEnt(fly_in_lookat_ent);
 
   flag_wait("player_lands");
@@ -685,18 +685,18 @@ player_heli_rotates_properly_around_gulag() {
 
 f15_explosion_causes_heli_to_look_away(gulag_center, follow_ent) {
   wait(4.9);
-  ent = GetEnt("f15_hli_target_ent", "targetname");
+  ent = getEnt("f15_hli_target_ent", "targetname");
 
   old_org = gulag_center.origin;
   old_view_org = level.view_org.origin;
 
-  gulag_center MoveTo(ent.origin, 2, 1, 1);
-  level.view_org MoveTo(ent.origin, 2, 1, 1);
+  gulag_center moveTo(ent.origin, 2, 1, 1);
+  level.view_org moveTo(ent.origin, 2, 1, 1);
 
   wait(3);
 
-  gulag_center MoveTo(old_org, 2, 1, 1);
-  level.view_org MoveTo(old_view_org, 2, 1, 1);
+  gulag_center moveTo(old_org, 2, 1, 1);
+  level.view_org moveTo(old_view_org, 2, 1, 1);
   wait(2);
   gulag_center.origin = old_org;
   level.view_org.origin = old_view_org;
@@ -712,19 +712,19 @@ ground_ref_freaks_out() {
   model AddPitch(15 * mult);
   model AddRoll(25 * mult);
 
-  tag_origin RotateTo(model.angles, 1, 0.4, 0.4);
+  tag_origin rotateTo(model.angles, 1, 0.4, 0.4);
   wait(1.5);
 
   model AddPitch(-35 * mult);
   model AddRoll(-55 * mult);
 
-  tag_origin RotateTo(model.angles, 1, 0.4, 0.4);
+  tag_origin rotateTo(model.angles, 1, 0.4, 0.4);
   wait(1);
 
-  tag_origin RotateTo(level.player_heli.angles, 1, 0.4, 0.4);
+  tag_origin rotateTo(level.player_heli.angles, 1, 0.4, 0.4);
 
   wait(1);
-  tag_origin LinkTo(level.player_heli, "tag_origin", (0, 0, 0), (0, 0, 0));
+  tag_origin linkTo(level.player_heli, "tag_origin", (0, 0, 0), (0, 0, 0));
 }
 
 player_heli_processess_rotation(gulag_center, follow_ent) {
@@ -760,7 +760,7 @@ toggle_f15_viewing(dvar_val) {
 }
 
 spawn_intro_plane(scene, looker) {
-  spawner = GetEnt(scene + "_f15", "targetname");
+  spawner = getEnt(scene + "_f15", "targetname");
   plane = spawner spawn_vehicle();
   waittillframeend;
   plane.animname = "f15";
@@ -773,7 +773,7 @@ spawn_intro_plane(scene, looker) {
   }
 
   level.intro_plane[scene] = plane;
-  org = GetEnt("plane_org", "targetname");
+  org = getEnt("plane_org", "targetname");
 
   org thread anim_single_solo(plane, scene);
   missile1 = spawn_anim_model(scene + "_missile");
@@ -802,7 +802,7 @@ spawn_intro_plane(scene, looker) {
   pilot.animname = "pilot";
   pilot assign_animtree();
   pilot character\character_sp_pilot_zack_woodland::main();
-  pilot LinkTo(plane, "tag_body", (0, 0, 0), (0, 0, 0));
+  pilot linkTo(plane, "tag_body", (0, 0, 0), (0, 0, 0));
 
   plane thread anim_loop_solo(pilot, "idle", "stop_idle", "tag_body");
   plane waittill("death");
@@ -816,7 +816,7 @@ delete_on_animend() {
 
 spawn_intro_missile(name) {
   model = spawn_anim_model(name);
-  org = GetEnt("plane_org", "targetname");
+  org = getEnt("plane_org", "targetname");
 
   org thread anim_single_solo(model, "intro");
 }
@@ -850,7 +850,7 @@ looker_guy() {
 
     wait(0.05);
     ent = spawn_tag_origin();
-    ent LinkTo(level.looker_f15, "tag_origin", (0, 0, 250), (0, 0, 0));
+    ent linkTo(level.looker_f15, "tag_origin", (0, 0, 250), (0, 0, 0));
     self SetLookAtEntity(ent);
     level waittill("switch_look");
     ent Delete();
@@ -863,7 +863,7 @@ looker_guy() {
     self forceUseWeapon("m14_scoped_arctic", "primary");
   }
 
-  gulag_center = GetEnt("gulag_center", "targetname");
+  gulag_center = getEnt("gulag_center", "targetname");
   gulag_center_above = spawn_tag_origin();
   gulag_center_above.origin = gulag_center.origin + (0, 0, 1000);
   level.gulag_center_above = gulag_center_above;
@@ -872,7 +872,7 @@ looker_guy() {
   soap_looks_at_targets();
   wait(1.1);
 
-  tower_ent = GetEnt("soap_tower_lookat", "targetname");
+  tower_ent = getEnt("soap_tower_lookat", "targetname");
   self SetLookAtEntity(tower_ent);
   gulag_center_above Delete();
 
@@ -957,9 +957,9 @@ slamraam_tracks_player() {
       if(first_rotate) {
         time = yaw_dif * 0.011;
         first_rotate = false;
-        self RotateTo((0, yaw, 0), time, time * 0.25, time * 0.25);
+        self rotateTo((0, yaw, 0), time, time * 0.25, time * 0.25);
       } else {
-        self RotateTo((0, yaw, 0), time, 0, 0);
+        self rotateTo((0, yaw, 0), time, 0, 0);
       }
       wait(time);
     } else {
@@ -984,7 +984,7 @@ slamraam_attacks(fire_delay, between_sets_delay) {
   launcher = self.launcher;
   launcher thread slamraam_tracks_player();
 
-  self.all_missiles_model LinkTo(launcher);
+  self.all_missiles_model linkTo(launcher);
 
   self endon("lose_operation");
 
@@ -1004,7 +1004,7 @@ slamraam_attacks(fire_delay, between_sets_delay) {
     model.origin = launcher GetTagOrigin(tag);
     model.angles = launcher GetTagAngles(tag);
     model setModel("projectile_slamraam_missile");
-    model LinkTo(launcher);
+    model linkTo(launcher);
     missiles[index] = model;
   }
 
@@ -1191,7 +1191,7 @@ gulag_top_drones() {
 }
 
 gulag_drone_trigger_think() {
-  spawner = GetEnt(self.target, "targetname");
+  spawner = getEnt(self.target, "targetname");
   self waittill("trigger");
 
   spawner spawn_a_drone();
@@ -1293,7 +1293,7 @@ blow_up_first_tower_soon() {
 remove_rpgs() {
   flag_wait("remove_rpgs");
 
-  tower_height_ent = GetEnt("tower_height_ent", "targetname");
+  tower_height_ent = getEnt("tower_height_ent", "targetname");
 
   ai = GetAIArray("axis");
   foreach(guy in ai) {
@@ -1346,7 +1346,7 @@ gulag_cellblock_friendlies_postup_at_chain(name) {
 gulag_cellblocks_friendlies_go_to_control_room() {
   level notify("new_ai_move_command");
 
-  friendly_respawn_trigger = GetEnt("friendly_reinforcement_trigger", "targetname");
+  friendly_respawn_trigger = getEnt("friendly_reinforcement_trigger", "targetname");
   friendly_respawn_trigger thread reinforcement_friendlies();
 
   nodes = GetNodeChain("control_room_chain", "targetname");
@@ -1425,7 +1425,7 @@ gulag_cellblocks_friendlies_go_to_goalvolume(goalvolNum) {
   }
   AssertEx(node.script_goalvolume == goalvolNum, "Didnt find cell_goalnode with vol " + goalvolNum);
 
-  volume = GetEnt(node.target, "targetname");
+  volume = getEnt(node.target, "targetname");
 
   ai = get_cellblock_friendlies();
   foreach(guy in ai) {
@@ -1498,7 +1498,7 @@ setup_celldoor(targetname) {
     model.origin = array["origin"];
     model.angles = array["angles"];
     model setModel(array["model"]);
-    model LinkTo(door);
+    model linkTo(door);
   }
 
   door.org = org;
@@ -1601,7 +1601,7 @@ door_logic() {
 
   self thread play_dlight("red");
 
-  self DisconnectPaths();
+  self disconnectPaths();
 
   buzz_sound_org = self.origin + right * 128 + forward * -64 + (0, 0, 32);
 
@@ -1622,7 +1622,7 @@ door_logic() {
     if(self.targetname == "cell_door_weapons") {
       self playSound("scn_gulag_armory_door_open");
 
-      self MoveTo(self.start_pos + forward * 16, movetime * 0.25, move_in, 0);
+      self moveTo(self.start_pos + forward * 16, movetime * 0.25, move_in, 0);
 
       wait(movetime * 0.25);
       self playSound("door_bounce");
@@ -1661,12 +1661,12 @@ door_logic() {
 
       self playSound("scn_gulag_armory_door_open2");
 
-      self MoveTo(self.start_pos + forward * 48, movetime * 0.75, move_in, 0);
+      self moveTo(self.start_pos + forward * 48, movetime * 0.75, move_in, 0);
       wait(movetime * 0.75);
     } else {
       self playSound("scn_gulag_jail_door_open");
 
-      self MoveTo(self.start_pos + forward * 64, movetime, move_in, move_out);
+      self moveTo(self.start_pos + forward * 64, movetime, move_in, move_out);
       wait(movetime);
     }
 
@@ -1687,9 +1687,9 @@ door_logic() {
 
     wait(0.5);
 
-    self MoveTo(self.start_pos, movetime, move_in, move_out);
+    self moveTo(self.start_pos, movetime, move_in, move_out);
     wait(movetime);
-    self DisconnectPaths();
+    self disconnectPaths();
   }
 }
 
@@ -1737,7 +1737,7 @@ blue_light_flickers() {
 friendly_cellblock_respawner() {
   level endon("stop_cellblock_respawn");
 
-  level.cellblock_spawner = GetEnt("friendly_cellblock_spawner", "targetname");
+  level.cellblock_spawner = getEnt("friendly_cellblock_spawner", "targetname");
 
   for(;;) {
     flag_wait("cellblock_respawn");
@@ -1779,11 +1779,11 @@ fake_celldoor(name) {
   AssertEx(isDefined(door), "Found no script_brushmodel for " + name);
 
   foreach(model in models) {
-    model LinkTo(door);
+    model linkTo(door);
   }
 
-  door LinkTo(org);
-  org RotateYaw(-115, 5, 0, 3);
+  door linkTo(org);
+  org rotateYaw(-115, 5, 0, 3);
 }
 
 get_cellblock_friendlies() {
@@ -1834,7 +1834,7 @@ kill_all_axis() {
 }
 
 hero_rappels() {
-  ent = GetEnt("rappel_ent_int", "targetname");
+  ent = getEnt("rappel_ent_int", "targetname");
 
   self.fixednode = true;
 
@@ -1858,7 +1858,7 @@ cellblock_rappel_player() {
   ent.rope = level.cellblock_rope_player;
   ent.flag_name = "player_rappels";
   ent.rope_obj Show();
-  ent.rope_ent = GetEnt("rappel_player_ent", "targetname");
+  ent.rope_ent = getEnt("rappel_player_ent", "targetname");
   ent.scene = "rappel_start";
   ent.unlink_time = 5.35;
   player_rappels(ent);
@@ -1870,9 +1870,9 @@ cellblock_rappel_player() {
 }
 
 player_rappels(ent) {
-  trigger_ent = GetEnt("rappel_trigger", "script_noteworthy");
+  trigger_ent = getEnt("rappel_trigger", "script_noteworthy");
 
-  trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
+  trigger_ent setHintString(&"GULAG_HOLD_1_TO_RAPPEL");
   flag_wait(ent.flag_name);
   trigger_ent Delete();
 
@@ -1915,13 +1915,13 @@ switch_to_other_primary() {
 }
 
 spawn_rappel_rope() {
-  ent = GetEnt("rappel_ent_int", "targetname");
+  ent = getEnt("rappel_ent_int", "targetname");
   level.cellblock_rope_ai = spawn_anim_model("ai_rope");
   rope = [];
   rope[0] = level.cellblock_rope_ai;
   ent anim_first_frame(rope, "rappel_start");
 
-  ent = GetEnt("rappel_player_ent", "targetname");
+  ent = getEnt("rappel_player_ent", "targetname");
 
   level.cellblock_rope_player = spawn_anim_model("player_rope");
   level.cellblock_rope_player_obj = spawn_anim_model("player_rope_obj");
@@ -2013,7 +2013,7 @@ bhd_heli_rotates_left_and_right() {
   }
   self SetYawSpeed(80, 60, 60, 0);
   self SetTurningAbility(1);
-  ent = getstruct("bhd_heli_rotate_node", "script_noteworthy");
+  ent = getStruct("bhd_heli_rotate_node", "script_noteworthy");
 
   yaw = ent.angles[1];
 
@@ -2291,7 +2291,7 @@ bhd_heli_think() {
   maps\_spawner::killspawner(0);
   wait(15);
 
-  bhd_kill_trigger = GetEnt("bhd_kill_trigger", "targetname");
+  bhd_kill_trigger = getEnt("bhd_kill_trigger", "targetname");
   ai = GetAIArray("axis");
   foreach(guy in ai) {
     if(guy IsTouching(bhd_kill_trigger)) {
@@ -2302,7 +2302,7 @@ bhd_heli_think() {
 
 test_bhd() {
   activate_trigger("bhd_scene", "targetname");
-  bhd_scene = GetEnt("bhd_scene", "targetname");
+  bhd_scene = getEnt("bhd_scene", "targetname");
   bhd_scene Delete();
   activate_trigger("bhd_spawner_trigger", "script_noteworthy");
 }
@@ -2310,31 +2310,31 @@ test_bhd() {
 iprint(msg) {}
 
 pow_org() {
-  return GetEnt("find_pow_org", "targetname").origin;
+  return getEnt("find_pow_org", "targetname").origin;
 }
 
 control_room_org() {
-  return GetEnt("control_room_org", "targetname").origin;
+  return getEnt("control_room_org", "targetname").origin;
 }
 
 cellblock_sweep_org() {
-  return GetEnt("cellblock_sweep_org", "targetname").origin;
+  return getEnt("cellblock_sweep_org", "targetname").origin;
 }
 
 breach_org() {
-  return GetEnt("pipe_breach_org", "targetname").origin;
+  return getEnt("pipe_breach_org", "targetname").origin;
 }
 
 breach_rescue_org() {
-  return GetEnt("breach_rescue_org", "targetname").origin;
+  return getEnt("breach_rescue_org", "targetname").origin;
 }
 
 evac_obj_org() {
-  return getstruct("false_objective", "script_noteworthy").origin + (0, 0, 180);
+  return getStruct("false_objective", "script_noteworthy").origin + (0, 0, 180);
 }
 
 evac_obj_org_end() {
-  return GetEnt("evac_obj_org", "targetname").origin;
+  return getEnt("evac_obj_org", "targetname").origin;
 }
 
 hallway_runner_spawner_think() {
@@ -2448,7 +2448,7 @@ ai_hole_rappel_trigger_think() {
 
   guy endon("death");
 
-  ent = GetEnt("bathroom_rappel_" + index, "targetname");
+  ent = getEnt("bathroom_rappel_" + index, "targetname");
   ent anim_generic_reach(guy, "hole_rappel_start" + index);
   guy.rappelling = true;
   guy delayThread(6.3, ::anim_stopanimscripted);
@@ -2474,10 +2474,10 @@ bathroom_spawn_rappel_rope() {
   level.bathroom_rope_ai[1] = spawn_anim_model("ai_rope1");
   level.bathroom_rope_ai[2] = spawn_anim_model("ai_rope2");
 
-  ent = GetEnt("bathroom_rappel_2", "targetname");
+  ent = getEnt("bathroom_rappel_2", "targetname");
   ent anim_first_frame_solo(level.bathroom_rope_ai2, "hole_rappel_start");
 
-  ent = GetEnt("bathroom_rappel_1", "targetname");
+  ent = getEnt("bathroom_rappel_1", "targetname");
   ent anim_first_frame_solo(level.bathroom_rope_ai1, "hole_rappel_start");
 }
 
@@ -2487,7 +2487,7 @@ bathroom_rappel_player() {
   ent.rope_obj = level.bathroom_rope_player_obj;
   ent.flag_name = "player_hole_rappel";
   ent.rope_obj Show();
-  ent.rope_ent = GetEnt("bathroom_rappel_player", "targetname");
+  ent.rope_ent = getEnt("bathroom_rappel_player", "targetname");
   ent.scene = "hole_rappel_start";
   ent.unlink_time = 1.55;
   player_rappels(ent);
@@ -2524,7 +2524,7 @@ earthquakes() {
 ending_rope() {
   ending_start = level.start_point == "ending";
 
-  rope = GetEnt("hookup_rope_ent", "targetname");
+  rope = getEnt("hookup_rope_ent", "targetname");
   rope.origin += (0, 0, 12);
   rope Hide();
   level.ending_rope = rope;
@@ -2537,20 +2537,20 @@ ending_rope() {
   }
 
   rope Show();
-  rope MoveTo(org, 1, 1, 0);
+  rope moveTo(org, 1, 1, 0);
   wait(1.1);
   rope MakeUsable();
   rope glow();
 
   trigger_ent = getEntWithFlag("player_ropes");
 
-  trigger_ent SetHintString(&"GULAG_HOLD_1_TO_RAPPEL");
+  trigger_ent setHintString(&"GULAG_HOLD_1_TO_RAPPEL");
 
   escape_lift = spawn_vehicle_from_targetname("escape_lift");
   escape_lift_ent = spawn_tag_origin();
-  escape_lift_ent LinkTo(escape_lift, "tag_origin", (0, 0, 0), (0, 180, 0));
+  escape_lift_ent linkTo(escape_lift, "tag_origin", (0, 0, 0), (0, 180, 0));
 
-  look_ent = GetEnt("evac_obj_org", "targetname");
+  look_ent = getEnt("evac_obj_org", "targetname");
 
   player_view_controller = get_player_view_controller(escape_lift, "tag_origin", (0, 0, -16));
   player_view_controller SetTargetEntity(look_ent);
@@ -2579,7 +2579,7 @@ gulag_become_soap() {
 }
 
 going_in_hot() {
-  fly_in_attack_org = GetEnt("fly_in_attack_org", "targetname");
+  fly_in_attack_org = getEnt("fly_in_attack_org", "targetname");
   foreach(turret in self.mgturret) {
     turret SetMode("manual");
     turret SetTargetEntity(fly_in_attack_org);
@@ -2610,13 +2610,13 @@ handle_gulag_world_fx() {
   volumes = [];
   fx_collection = [];
 
-  endlog_volume = GetEnt("gulag_endlog_destructibles", "script_noteworthy");
+  endlog_volume = getEnt("gulag_endlog_destructibles", "script_noteworthy");
   endlog_volume_name = endlog_volume.targetname;
   volumes[endlog_volume_name] = endlog_volume;
   fx_collection[endlog_volume_name] = [];
 
   foreach(volname in volnames) {
-    volumes[volname] = GetEnt(volname, "targetname");
+    volumes[volname] = getEnt(volname, "targetname");
     fx_collection[volname] = [];
   }
 
@@ -2679,7 +2679,7 @@ cleanse_the_world() {
     }
   }
 
-  volume = GetEnt("interior_entity_volume", "targetname");
+  volume = getEnt("interior_entity_volume", "targetname");
 
   entities = getEntArray();
 
@@ -2910,7 +2910,7 @@ armory_grenade_think() {
   }
   wait(RandomFloat(3));
 
-  targ = getstruct(self.target, "targetname");
+  targ = getStruct(self.target, "targetname");
   timer = RandomFloatRange(11.5, 13.5);
   MagicGrenade("fraggrenade", self.origin, targ.origin, timer);
 }
@@ -3228,7 +3228,7 @@ gulag_center_shifts_as_we_move_in() {
 
   flag_wait("slamraam_gets_players_attention");
 
-  center = GetEnt("gulag_center", "targetname");
+  center = getEnt("gulag_center", "targetname");
   ent = center;
 
   if(!isDefined(level.player_view_controller)) {
@@ -3242,7 +3242,7 @@ gulag_center_shifts_as_we_move_in() {
 
   if(level.start_point == "perimeter") {
     waits[1]["time"] = 1;
-    next_ent = GetEnt(center.target, "targetname");
+    next_ent = getEnt(center.target, "targetname");
     ent = next_ent;
     center.origin = ent.origin;
     index = 1;
@@ -3250,7 +3250,7 @@ gulag_center_shifts_as_we_move_in() {
 
   for(;;) {
     level.times[index] = GetTime();
-    next_ent = GetEnt(ent.target, "targetname");
+    next_ent = getEnt(ent.target, "targetname");
 
     array = waits[index];
 
@@ -3261,7 +3261,7 @@ gulag_center_shifts_as_we_move_in() {
       wait(array["pre_delay"]);
     }
 
-    center MoveTo(next_ent.origin, array["time"], array["in"], array["out"]);
+    center moveTo(next_ent.origin, array["time"], array["in"], array["out"]);
 
     center thread ent_debug_print(index);
 
@@ -3596,7 +3596,7 @@ delete_on_player_land() {
 
 control_room_destructibles_turn_on() {
   flag_wait("enable_interior_fx");
-  volume = GetEnt("gulag_cellblock_destructibles", "script_noteworthy");
+  volume = getEnt("gulag_cellblock_destructibles", "script_noteworthy");
   volume activate_destructibles_in_volume();
   volume activate_interactives_in_volume();
 }
@@ -3614,7 +3614,7 @@ damage_targ_trigger_think() {
     break;
   }
 
-  targ = getstruct(self.target, "targetname");
+  targ = getStruct(self.target, "targetname");
   RadiusDamage(targ.origin, 80, 5000, 5000);
   self Delete();
 }
@@ -3677,7 +3677,7 @@ friendlies_ditch_riot_shields_trigger_think() {
 }
 
 update_soap_spawner(spawners) {
-  soap_spawner = GetEnt("endlog_soap_spawner", "targetname");
+  soap_spawner = getEnt("endlog_soap_spawner", "targetname");
   soap_spawner.origin = spawners[0].origin;
   spawners[0] Delete();
   spawners[0] = soap_spawner;
@@ -3733,7 +3733,7 @@ gulag_cellblocks_spotlight() {
   SetSavedDvar("r_spotlightbrightness", 3.5);
   SetSavedDvar("r_spotlightfovinnerfraction", "0.9");
 
-  turret = GetEnt("gulag_spotlight", "targetname");
+  turret = getEnt("gulag_spotlight", "targetname");
   turret SetMode("manual");
   ent = spawn("script_origin", (0, 0, 0));
 
@@ -3796,7 +3796,7 @@ gulag_spotlight_searches(ent, turret) {
       spotlight_org = level.spotlight_override_pos;
     }
 
-    ent MoveTo(spotlight_org, time, time * 0.4, time * 0.4);
+    ent moveTo(spotlight_org, time, time * 0.4, time * 0.4);
     wait(time);
   }
 }
@@ -3810,7 +3810,7 @@ print3dforever() {
 
 catwalk_spawner() {
   self.attackeraccuracy = 0;
-  volume = GetEnt("armory_clear_enemy_volume", "targetname");
+  volume = getEnt("armory_clear_enemy_volume", "targetname");
 
   ai = GetAIArray("axis");
   foreach(guy in ai) {
@@ -3835,7 +3835,7 @@ insure_player_has_enemies_to_fight_for_door_sequence() {
 
   level endon("open_cell_door2");
   spawners = getEntArray("close_fighter_spawner", "targetname");
-  vol = GetEnt("door_guys_fight_vol", "targetname");
+  vol = getEnt("door_guys_fight_vol", "targetname");
 
   vol waittill_volume_dead();
 
@@ -4139,7 +4139,7 @@ friendly_clears_cell_trigger() {
   }
 
   level.nvg_hall_flags[myFlag]++;
-  volume = GetEnt(self.target, "targetname");
+  volume = getEnt(self.target, "targetname");
   node = getnode(self.target, "targetname");
 
   found_enemy = undefined;
@@ -4199,7 +4199,7 @@ nvg_hallway_fight() {
 
   flag_wait("nvg_enemy_flag");
   wait(1.5);
-  vol = GetEnt("nvg_vol", "targetname");
+  vol = getEnt("nvg_vol", "targetname");
   for(;;) {
     vol waittill_volume_dead_or_dying();
     wait(2.8);
@@ -4307,7 +4307,7 @@ gulag_landing_update_entities() {
 
   delayThread(6, ::player_can_be_shot);
 
-  landing_death_volume = GetEnt("landing_death_volume", "targetname");
+  landing_death_volume = getEnt("landing_death_volume", "targetname");
   ai = GetAIArray("axis");
   foreach(guy in ai) {
     if(guy IsTouching(landing_death_volume)) {
@@ -4408,7 +4408,7 @@ ent_blends_out_fov() {
   wait(0.15);
   blend_out_fov_time = 0.6;
 
-  self MoveTo((65, 0, 0), blend_out_fov_time, blend_out_fov_time * 0.5, blend_out_fov_time * 0.5);
+  self moveTo((65, 0, 0), blend_out_fov_time, blend_out_fov_time * 0.5, blend_out_fov_time * 0.5);
   wait(blend_out_fov_time);
   wait(0.1);
   self Delete();
@@ -4451,9 +4451,9 @@ guy_does_sewer_slide(org) {
 ai_field_blocker() {
   flag_wait("a_heli_landed");
 
-  ai_field_blocker = GetEnt("ai_field_blocker", "targetname");
+  ai_field_blocker = getEnt("ai_field_blocker", "targetname");
   ai_field_blocker Solid();
-  ai_field_blocker DisconnectPaths();
+  ai_field_blocker disconnectPaths();
 }
 
 lasers_scan_armory() {
@@ -4471,11 +4471,11 @@ laser_scans_armory(target) {
   wait(1);
   dest notify("stop_jitter");
 
-  targ = getstruct(target, "targetname");
-  dest MoveTo(targ.origin, 3, 1, 2);
+  targ = getStruct(target, "targetname");
+  dest moveTo(targ.origin, 3, 1, 2);
   wait(3);
-  targ = getstruct(targ.target, "targetname");
-  dest MoveTo(targ.origin, 1.5, 0.5, 0.7);
+  targ = getStruct(targ.target, "targetname");
+  dest moveTo(targ.origin, 1.5, 0.5, 0.7);
   wait(1.5);
   self notify("stop_line");
   self Delete();
@@ -4489,7 +4489,7 @@ laser_jitters() {
   for(;;) {
     neworg = org + randomvector(30);
     movetime = RandomFloatRange(0.5, 0.75);
-    self MoveTo(neworg, movetime);
+    self moveTo(neworg, movetime);
     wait(movetime);
   }
 }
@@ -4503,7 +4503,7 @@ draw_laser_line(dest) {
   self.angles = VectorToAngles(dest.origin - self.origin);
   wait(0.05);
   for(;;) {
-    self RotateTo(VectorToAngles(dest.origin - self.origin), 0.1);
+    self rotateTo(VectorToAngles(dest.origin - self.origin), 0.1);
 
     wait(0.1);
   }
@@ -4594,7 +4594,7 @@ kill_slide_trigger() {
   flag_wait("kill_slide_trigger");
   wait(1);
   trigger = getEntWithFlag("kill_slide_trigger");
-  slide_trigger = GetEnt(trigger.target, "targetname");
+  slide_trigger = getEnt(trigger.target, "targetname");
   slide_trigger trigger_off();
 }
 
@@ -4636,7 +4636,7 @@ landing_blocker_think() {
 
   foreach(blocker in landing_blockers) {
     blocker Solid();
-    blocker DisconnectPaths();
+    blocker disconnectPaths();
   }
 }
 
@@ -4645,7 +4645,7 @@ ghost_uses_laptop() {
   level.ghost endon("death");
 
   flag_wait("ghost_goes_to_laptop");
-  struct = getstruct("ghost_laptop_struct", "targetname");
+  struct = getStruct("ghost_laptop_struct", "targetname");
 
   chair = spawn_anim_model("folding_chair");
 
@@ -4668,7 +4668,7 @@ teleport_ghost_to_laptop_if_possible() {
   }
   level endon("ghost_uses_laptop");
 
-  struct = getstruct("ghost_teleport_look_target_struct", "targetname");
+  struct = getStruct("ghost_teleport_look_target_struct", "targetname");
 
   for(;;) {
     if(!player_looking_at(struct.origin, 0.7, true)) {
@@ -4732,7 +4732,7 @@ friendlies_traverse_bathroom() {
   volumes = getEntArray("bathroom_enemy_volume", "targetname");
   volumes = array_index_by_script_index(volumes);
   foreach(volume in volumes) {
-    volume.friendly_trigger = GetEnt(volume.target, "targetname");
+    volume.friendly_trigger = getEnt(volume.target, "targetname");
   }
 
   for(;;) {
@@ -4931,7 +4931,7 @@ player_loses_ads_briefly() {
 }
 
 throw_flash_trigger() {
-  throw_flash_trigger = getent("throw_flash_trigger", "targetname");
+  throw_flash_trigger = getEnt("throw_flash_trigger", "targetname");
   node = getnode(throw_flash_trigger.target, "targetname");
 
   throw_flash_trigger waittill("trigger", other);
@@ -4952,7 +4952,7 @@ throw_flash_trigger() {
   }
 
   ai = getaiarray("axis");
-  volume = GetEnt("tunnel_pre_hallway_volume", "targetname");
+  volume = getEnt("tunnel_pre_hallway_volume", "targetname");
   if(!volume array_touches_self(ai)) {
     return;
   }
@@ -4982,7 +4982,7 @@ move_on_pipe() {
   }
 
   self.fixednode = false;
-  self anim_stopanimscripted();
+  self anim_stopanimScripted();
   wait(2);
   self.fixednode = true;
 }
@@ -4993,7 +4993,7 @@ old_soap() {
   }
   wait(2.7);
 
-  spawner = GetEnt("endlog_soap_spawner", "targetname");
+  spawner = getEnt("endlog_soap_spawner", "targetname");
   spawner.spawn_functions = [];
   spawner.origin = (0, 0, 0);
   spawner.count = 1;

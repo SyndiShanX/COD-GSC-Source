@@ -198,8 +198,8 @@ get_player_push_nodes(param_00, param_01) {
   while(var_06 < var_05 - var_02) {
     var_06 = var_06 + var_02;
     var_08 = getclosestpointonnavmesh(vectorlerp(param_00.var_116, param_01.var_116, var_06 / var_05), self);
-    var_09 = var_08 + var_02 * vectornormalize(anglestoright(var_07));
-    var_0A = var_08 + var_02 * vectornormalize(anglestoright(var_07 + (0, 180, 0)));
+    var_09 = var_08 + var_02 * vectorNormalize(anglestoright(var_07));
+    var_0A = var_08 + var_02 * vectorNormalize(anglestoright(var_07 + (0, 180, 0)));
     var_04 = common_scripts\utility::func_F6F(var_04, var_09);
     var_04 = common_scripts\utility::func_F6F(var_04, var_0A);
   }
@@ -258,7 +258,7 @@ pushplayervib() {
   var_02 = 32;
   for(;;) {
     var_03 = 0;
-    var_04 = self.var_116 + var_01 * vectornormalize(anglesToForward(self.var_1D));
+    var_04 = self.var_116 + var_01 * vectorNormalize(anglesToForward(self.var_1D));
     foreach(var_06 in level.var_744A) {
       if(var_06 istouching(self) || distance2d(var_06.var_116, var_04) < var_02 && abs(var_06.var_116[2] - var_04[2]) < 64) {
         if(!isDefined(var_06.lastvibpush)) {
@@ -270,7 +270,7 @@ pushplayervib() {
           var_06.lastvibpush = gettime();
           var_07 = var_06.var_116 - self.var_116;
           var_07 = (var_07[0], var_07[1], 0);
-          var_08 = var_00 * vectornormalize(var_07);
+          var_08 = var_00 * vectorNormalize(var_07);
           var_08 = (var_08[0], var_08[1], 50);
           var_06 dodamage(20, self.var_116, self, self);
           var_06 setvelocity(var_08);

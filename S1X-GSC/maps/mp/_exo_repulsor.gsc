@@ -226,7 +226,7 @@ do_exo_repulsor() {
           player_to_grenade_angles = VectorToAngles(player_to_grenade_vector);
           player_to_grenade_up = AnglesToUp(player_to_grenade_angles);
           player_to_grenade_forward = anglesToForward(player_to_grenade_angles);
-          player_to_grenade_forward_norm = VectorNormalize(player_to_grenade_forward);
+          player_to_grenade_forward_norm = vectorNormalize(player_to_grenade_forward);
           fx_origin = grenade.origin - (0.2 * player_to_grenade_dist * player_to_grenade_forward_norm);
           playFX(level.exo_repulsor_impact, fx_origin, player_to_grenade_forward_norm, player_to_grenade_up);
 
@@ -272,7 +272,7 @@ do_exo_repulsor() {
           player_to_rocket_angles = VectorToAngles(player_to_rocket_vector);
           player_to_rocket_up = AnglesToUp(player_to_rocket_angles);
           player_to_rocket_forward = anglesToForward(player_to_rocket_angles);
-          player_to_rocket_forward_norm = VectorNormalize(player_to_rocket_forward);
+          player_to_rocket_forward_norm = vectorNormalize(player_to_rocket_forward);
           fx_origin = rocket.origin - (0.2 * player_to_rocket_dist * player_to_rocket_forward_norm);
           playFX(level.exo_repulsor_impact, fx_origin, player_to_rocket_forward_norm, player_to_rocket_up);
 
@@ -317,7 +317,7 @@ do_exo_repulsor() {
             player_to_explosiveDrone_angles = VectorToAngles(player_to_explosiveDrone_vector);
             player_to_explosiveDrone_up = AnglesToUp(player_to_explosiveDrone_angles);
             player_to_explosiveDrone_forward = anglesToForward(player_to_explosiveDrone_angles);
-            player_to_explosiveDrone_forward_norm = VectorNormalize(player_to_explosiveDrone_forward);
+            player_to_explosiveDrone_forward_norm = vectorNormalize(player_to_explosiveDrone_forward);
             fx_origin = explosiveDrone.origin - (0.2 * player_to_explosiveDrone_dist * player_to_explosiveDrone_forward_norm);
             playFX(level.exo_repulsor_impact, fx_origin, player_to_explosiveDrone_forward_norm, player_to_explosiveDrone_up);
 
@@ -360,7 +360,7 @@ do_exo_repulsor() {
           player_to_tdrone_angles = VectorToAngles(player_to_tdrone_vector);
           player_to_tdrone_up = AnglesToUp(player_to_tdrone_angles);
           player_to_tdrone_forward = anglesToForward(player_to_tdrone_angles);
-          player_to_tdrone_forward_norm = VectorNormalize(player_to_tdrone_forward);
+          player_to_tdrone_forward_norm = vectorNormalize(player_to_tdrone_forward);
           fx_origin = tdrone.origin - (0.2 * player_to_tdrone_dist * player_to_tdrone_forward_norm);
           playFX(level.exo_repulsor_impact, fx_origin, player_to_tdrone_forward_norm, player_to_tdrone_up);
 

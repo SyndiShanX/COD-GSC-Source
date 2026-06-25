@@ -499,7 +499,7 @@ playerdamagerumble() {
     if(isDefined(self.specialdamage)) {
       continue;
     }
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
   }
 }
 
@@ -512,7 +512,7 @@ map_is_early_in_the_game() {
 }
 
 traversethink() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   self.traverse_height = var_0.origin[2];
   self.traverse_height_delta = var_0.origin[2] - self.origin[2];
   var_0 delete();
@@ -532,7 +532,7 @@ pianodamagethink() {
 pianothink() {
   var_0 = self getorigin();
   var_1 = "piano_" + self.script_noteworthy;
-  self sethintstring(&"SCRIPT_PLATFORM_PIANO");
+  self setHintString(&"SCRIPT_PLATFORM_PIANO");
 
   for(;;) {
     self waittill("trigger");
@@ -541,7 +541,7 @@ pianothink() {
 }
 
 waterthink() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = var_0.origin[2];
   var_0 = undefined;
   level.depth_allow_prone = 8;
@@ -1300,7 +1300,7 @@ recon_player() {
   if(isDefined(var_0)) {
     var_4 = var_0.classname;
     var_5 = var_0.origin;
-    var_6 = vectornormalize(var_5 - self.origin);
+    var_6 = vectorNormalize(var_5 - self.origin);
     var_7 = anglesToForward(self getplayerangles());
     var_3 = vectordot(var_6, var_7);
   }
@@ -1504,8 +1504,8 @@ loop_friendly_thermal_reflector_effect(var_0, var_1) {
 claymore_pickup_think_global() {
   precacheitem("claymore");
   self endon("deleted");
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"WEAPON_CLAYMORE_PICKUP");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"WEAPON_CLAYMORE_PICKUP");
   self makeusable();
   var_0 = weaponmaxammo("claymore") + weaponclipsize("claymore");
 
@@ -1571,14 +1571,14 @@ ammo_cache_think_global(var_0) {
   self.use_trigger = spawn("script_model", self.origin + (0, 0, 28));
   self.use_trigger setModel("tag_origin");
   self.use_trigger makeusable();
-  self.use_trigger setcursorhint("HINT_NOICON");
+  self.use_trigger setCursorHint("HINT_NOICON");
   var_1 = &"WEAPON_CACHE_USE_HINT";
 
   if(getDvar("consoleGame") == "true") {
     var_1 = &"WEAPON_CACHE_USE_CONTROLLER_HINT";
   }
 
-  self.use_trigger sethintstring(var_1);
+  self.use_trigger setHintString(var_1);
 
   if(!isDefined(var_0) || isDefined(var_0) && var_0) {
     thread ammo_icon_think();

@@ -31,10 +31,10 @@ section_precache() {
 section_post_inits() {
   level._pipe_deck = spawnStruct();
   level._fire_damage_ent = common_scripts\utility::spawn_tag_origin();
-  level._pipe_deck.boats_struct = common_scripts\utility::getstruct("vignette_lifeboats", "script_noteworthy");
+  level._pipe_deck.boats_struct = common_scripts\utility::getStruct("vignette_lifeboats", "script_noteworthy");
 
   if(isDefined(level._pipe_deck.boats_struct)) {
-    level._pipe_deck.derrick_scene_struct = common_scripts\utility::getstruct("struct_derrick_scene", "targetname");
+    level._pipe_deck.derrick_scene_struct = common_scripts\utility::getStruct("struct_derrick_scene", "targetname");
 
     if(maps\black_ice_util::start_point_is_before("mudpumps")) {
       common_scripts\utility::array_call(getEntArray("opt_hide_derrick", "script_noteworthy"), ::hide);
@@ -185,7 +185,7 @@ enemies() {
   level waittill("notify_heli_support_final");
   thread maps\_spawner::killspawner(20);
   wait 3;
-  var_1 = getent("vol_retreat_derrick_final", "script_noteworthy");
+  var_1 = getEnt("vol_retreat_derrick_final", "script_noteworthy");
   var_2 = getnodearray("node_command_ground_retreat", "targetname");
   var_3 = getnode("node_command_balcony_retreat", "targetname");
   var_4 = sortbydistance(maps\_utility::remove_dead_from_array(level._enemies["derrick_main"]), var_1.origin);
@@ -245,7 +245,7 @@ spawnfunc_enemies_boats(var_0) {
     self.v.prop hidepart("jbone_02");
     self.v.prop hidepart("jbone_04");
     self.v.prop hidepart("jbone_05");
-    getent("brush_pipedeck_crate_1", "targetname") linkto(self.v.prop, "jbone_03", (0, 0, 0), (0, 0, 0));
+    getEnt("brush_pipedeck_crate_1", "targetname") linkTo(self.v.prop, "jbone_03", (0, 0, 0), (0, 0, 0));
     var_1 maps\_anim::anim_first_frame_solo(self.v.prop, "lifeboat_deploy");
   }
 
@@ -255,7 +255,7 @@ spawnfunc_enemies_boats(var_0) {
     self.v.prop hidepart("jbone_02");
     self.v.prop hidepart("jbone_03");
     self.v.prop hidepart("jbone_04");
-    getent("brush_pipedeck_crate_2", "targetname") linkto(self.v.prop, "jbone_05", (0, 0, 0), (0, 0, 0));
+    getEnt("brush_pipedeck_crate_2", "targetname") linkTo(self.v.prop, "jbone_05", (0, 0, 0), (0, 0, 0));
     var_1 maps\_anim::anim_first_frame_solo(self.v.prop, "lifeboat_deploy");
   }
 
@@ -287,7 +287,7 @@ spawnfunc_enemies_pipe_run() {
   self endon("death");
   thread maps\black_ice_util_ai::ignore_to_goal();
   common_scripts\utility::flag_wait("flag_derrick_pipe_run_jump");
-  var_0 = getent("brush_pipe_run_blocker", "targetname");
+  var_0 = getEnt("brush_pipe_run_blocker", "targetname");
 
   if(isDefined(var_0)) {
     var_0 connectpaths();
@@ -334,12 +334,12 @@ spawnfunc_enemies_generic_rush() {
 }
 
 enemies_mg_watcher(var_0, var_1, var_2) {
-  var_3 = getent(var_1, "targetname");
+  var_3 = getEnt(var_1, "targetname");
   var_3.toparc = 0;
-  var_4 = getent("brush_shield_" + var_1, "targetname");
+  var_4 = getEnt("brush_shield_" + var_1, "targetname");
   var_4.angles = (0, 0, -25);
   var_4.origin = var_3 gettagorigin("TAG_BARREL") + anglesToForward(var_3 gettagangles("TAG_FLASH")) * -20;
-  var_4 linkto(var_3, "TAG_BARREL");
+  var_4 linkTo(var_3, "TAG_BARREL");
   var_4 delete();
   maps\_utility::trigger_wait("trig_derrick_balcony_spawn", "script_noteworthy");
   wait 2;
@@ -458,13 +458,13 @@ heli_support_pipe_deck() {
   common_scripts\utility::flag_wait("flag_mudpumps_end");
   common_scripts\utility::flag_waitopen("flag_mudpumps_heli_scene_active");
   thread maps\black_ice_audio::sfx_heli_flyin_pipedeck(self);
-  var_0 = common_scripts\utility::getstruct("struct_heli_mudpumps_stairs", "targetname");
+  var_0 = common_scripts\utility::getStruct("struct_heli_mudpumps_stairs", "targetname");
   self setvehgoalpos(var_0.origin, 1);
-  var_1 = getent("origin_heli_aim_boats_1", "script_noteworthy");
+  var_1 = getEnt("origin_heli_aim_boats_1", "script_noteworthy");
   self setlookatent(var_1);
   maps\_utility::trigger_wait_targetname("trig_pipe_deck_boats_scene_start");
   thread maps\black_ice_audio::sfx_heli_move_pipedeck(self);
-  var_2 = common_scripts\utility::getstruct("struct_heli_boats", "targetname");
+  var_2 = common_scripts\utility::getStruct("struct_heli_boats", "targetname");
   self setvehgoalpos(var_2.origin, 1);
   thread heli_spot_on_single(var_1, 2);
   wait 5;
@@ -476,7 +476,7 @@ heli_support_pipe_deck() {
     wait 1;
   }
 
-  var_5 = common_scripts\utility::getstruct("struct_heli_boats_exit", "targetname");
+  var_5 = common_scripts\utility::getStruct("struct_heli_boats_exit", "targetname");
   maps\_utility::vehicle_detachfrompath();
   self.currentnode = var_5;
   maps\_utility::vehicle_resumepath();
@@ -486,7 +486,7 @@ heli_support_pipe_deck() {
   heli_fire_turret_stop();
   thread heli_support_leave();
   level waittill("notify_heli_leave");
-  var_5 = common_scripts\utility::getstruct("struct_heli_leave_boats", "targetname");
+  var_5 = common_scripts\utility::getStruct("struct_heli_leave_boats", "targetname");
   maps\_utility::vehicle_detachfrompath();
   self.currentnode = var_5;
   maps\_utility::vehicle_resumepath();
@@ -511,25 +511,25 @@ heli_support_final() {
   thread maps\black_ice_audio::sfx_assault_heli_flyin();
   thread heli_fire_anim();
   self.turret_aim unlink();
-  var_0 = getent("brushmodel_command_glass", "targetname");
+  var_0 = getEnt("brushmodel_command_glass", "targetname");
   var_0 delete();
-  var_1 = common_scripts\utility::getstruct("struct_heli_support", "script_noteworthy");
+  var_1 = common_scripts\utility::getStruct("struct_heli_support", "script_noteworthy");
   maps\_utility::vehicle_detachfrompath();
   var_2 = [self, self.turret_aim];
   var_1 maps\_anim::anim_single(var_2, "final_support", undefined, 12);
   self notify("notify_stop_anim_turret_fire");
-  self.turret_aim maps\_utility::anim_stopanimscripted();
+  self.turret_aim maps\_utility::anim_stopanimScripted();
   light_com_center_lights_off();
   thread maps\_vehicle_code::animate_drive_idle();
   self vehicle_setspeed(5);
-  thread maps\_utility::vehicle_dynamicpath(common_scripts\utility::getstruct("struct_pipedeck_heli_idle", "targetname"));
+  thread maps\_utility::vehicle_dynamicpath(common_scripts\utility::getStruct("struct_pipedeck_heli_idle", "targetname"));
   thread heli_spot_on_single(level._allies[0], 1.5);
   common_scripts\utility::flag_wait("flag_command_allies_enter");
   heli_spot_stop();
   self vehicle_setspeed(50);
   maps\_utility::vehicle_detachfrompath();
   thread maps\black_ice_audio::sfx_heli_flyaway_cmd_center(self);
-  thread maps\_utility::vehicle_dynamicpath(common_scripts\utility::getstruct("struct_heli_leave_final", "targetname"));
+  thread maps\_utility::vehicle_dynamicpath(common_scripts\utility::getStruct("struct_heli_leave_final", "targetname"));
   self waittill("reached_dynamic_path_end");
   self notify("deleted");
   self delete();
@@ -557,7 +557,7 @@ heli_spot_on_single(var_0, var_1, var_2) {
         self setlookatent(var_0);
       }
 
-      self.turret_aim moveto(var_0.origin + (0, 0, 32), var_3);
+      self.turret_aim moveTo(var_0.origin + (0, 0, 32), var_3);
       wait 0.05;
     }
   } else if(var_0 == level.player) {
@@ -566,7 +566,7 @@ heli_spot_on_single(var_0, var_1, var_2) {
         self setlookatent(var_0);
       }
 
-      self.turret_aim moveto(var_0.origin + (0, 0, 32), var_3);
+      self.turret_aim moveTo(var_0.origin + (0, 0, 32), var_3);
       wait 0.05;
     }
   } else {
@@ -574,7 +574,7 @@ heli_spot_on_single(var_0, var_1, var_2) {
       self setlookatent(var_0);
     }
 
-    self.turret_aim moveto(var_0.origin + (0, 0, 32), var_3);
+    self.turret_aim moveTo(var_0.origin + (0, 0, 32), var_3);
     wait 0.05;
   }
 }
@@ -583,13 +583,13 @@ heli_spot_stop() {
   self notify("notify_stop_heli_spot_single");
   self clearlookatent();
   self clearturrettarget();
-  self.turret_aim linkto(self);
+  self.turret_aim linkTo(self);
 }
 
 debug_heli_spot() {
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = self.turret_aim.origin;
-  var_0 linkto(self.turret_aim);
+  var_0 linkTo(self.turret_aim);
   var_0 thread maps\black_ice_util::debug_pos_3d();
 }
 
@@ -635,7 +635,7 @@ heli_player_rumble() {
   self endon("deleted");
 
   for(;;) {
-    self playrumbleonentity("hind_flyover");
+    self playRumbleOnEntity("hind_flyover");
     wait 0.15;
   }
 }
@@ -736,8 +736,8 @@ fx_command_snow() {
 }
 
 light_com_center_lights_on() {
-  var_0 = getent("comms_overhead_1", "targetname");
-  var_1 = getent("comms_overhead_2", "targetname");
+  var_0 = getEnt("comms_overhead_1", "targetname");
+  var_1 = getEnt("comms_overhead_2", "targetname");
   var_0 setlightintensity(10);
   var_1 setlightintensity(10);
   var_2 = getEntArray("comms_uplight", "targetname");
@@ -748,8 +748,8 @@ light_com_center_lights_on() {
 }
 
 light_com_center_lights_off() {
-  var_0 = getent("comms_overhead_1", "targetname");
-  var_1 = getent("comms_overhead_2", "targetname");
+  var_0 = getEnt("comms_overhead_1", "targetname");
+  var_1 = getEnt("comms_overhead_2", "targetname");
   var_0 setlightintensity(2);
   var_1 setlightintensity(2);
   var_2 = getEntArray("comms_uplight", "targetname");
@@ -760,7 +760,7 @@ light_com_center_lights_off() {
 }
 
 pipedeck_godrays() {
-  var_0 = getent("cc_gr_origin", "targetname");
+  var_0 = getEnt("cc_gr_origin", "targetname");
 
   if(maps\_utility::is_gen4()) {
     maps\black_ice_util::god_rays_from_world_location(var_0.origin, "flag_pd_godrays_start", "flag_teleport_rig", undefined, undefined);
@@ -776,7 +776,7 @@ pipedecklights() {
   var_0 = getEntArray("lights_pipedeck_a", "targetname");
   var_1 = getEntArray("lights_pipedeck_b", "targetname");
   var_2 = getEntArray("lights_pipedeck_c", "targetname");
-  var_3 = [getent("escape_emergency_1", "targetname")];
+  var_3 = [getEnt("escape_emergency_1", "targetname")];
 
   foreach(var_5 in var_1) {
     var_5 setlightradius(12);

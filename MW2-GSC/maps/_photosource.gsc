@@ -296,7 +296,7 @@ psource_hudshow() {
     level.photosource setshader(self.image, 640, 480);
   }
   level.player freezecontrols(true);
-  level.player setorigin(self.origin + (level.player.origin - level.player getEye()) - vector_multiply(anglesToForward(self.angles), 3));
+  level.player setOrigin(self.origin + (level.player.origin - level.player getEye()) - vector_multiply(anglesToForward(self.angles), 3));
   level.player setplayerangles(self.angles);
   level.photosource.alpha = 1;
   flag_set("psource_refresh");

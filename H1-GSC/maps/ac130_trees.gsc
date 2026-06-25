@@ -25,7 +25,7 @@ ac130_tree_setup() {
   self.ac130_tree_anims["sway"][3] = % ac130_pine01_sway04;
 
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(isDefined(var_0)) {
       var_0 setCanDamage(1);

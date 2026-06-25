@@ -1392,17 +1392,17 @@ default_gametype_think() {}
 
 monitor_smoke_grenades() {
   maps\mp\bots\_bots_util::bot_waittill_bots_enabled();
-  level.bot_smoke_sight_clip_small = getent("smoke_grenade_sight_clip_small", "targetname");
+  level.bot_smoke_sight_clip_small = getEnt("smoke_grenade_sight_clip_small", "targetname");
 
   if(!isDefined(level.bot_smoke_sight_clip_small)) {
     return;
   }
-  level.bot_smoke_sight_clip_medium = getent("smoke_grenade_sight_clip_medium", "targetname");
+  level.bot_smoke_sight_clip_medium = getEnt("smoke_grenade_sight_clip_medium", "targetname");
 
   if(!isDefined(level.bot_smoke_sight_clip_medium)) {
     return;
   }
-  level.bot_smoke_sight_clip_large = getent("smoke_grenade_sight_clip_large", "targetname");
+  level.bot_smoke_sight_clip_large = getEnt("smoke_grenade_sight_clip_large", "targetname");
 
   if(!isDefined(level.bot_smoke_sight_clip_large)) {
     return;

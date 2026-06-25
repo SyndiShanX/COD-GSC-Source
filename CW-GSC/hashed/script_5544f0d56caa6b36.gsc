@@ -41,7 +41,7 @@ function private preinit() {
 
 function function_2d9abf0f() {
   if(getdvarint(#"hash_505f9e51193386d9", 0)) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       player zm_stats::increment_challenge_stat(#"hash_3551fbb8f9272df6");
     }
   }

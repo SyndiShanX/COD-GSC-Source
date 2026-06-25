@@ -76,7 +76,7 @@ autosave_after_balcony() {
 }
 
 collectible_corpse() {
-  orig = getstruct("orig_collectible_loop", "targetname");
+  orig = getStruct("orig_collectible_loop", "targetname");
 
   corpse = spawn("script_model", orig.origin);
   corpse.angles = orig.angles;
@@ -128,7 +128,7 @@ wait_for_wave2_trig() {
 }
 
 hero_chain_start() {
-  hero_chain_trig = getent("go_upstairs", "script_noteworthy");
+  hero_chain_trig = getEnt("go_upstairs", "script_noteworthy");
   hero_chain_trig waittill("trigger");
 
   allies = getaiarray("allies");
@@ -143,23 +143,23 @@ hero_chain_start() {
 }
 
 color_chain_cleanup() {
-  chain_trig = getent("chain_before_stairs", "script_noteworthy");
+  chain_trig = getEnt("chain_before_stairs", "script_noteworthy");
   chain_trig waittill("trigger");
 
   flag_set("atrium_color_chain");
 }
 
 color_chain_cleanup_2() {
-  chain_trig = getent("flag_indoor_chain", "script_noteworthy");
+  chain_trig = getEnt("flag_indoor_chain", "script_noteworthy");
   chain_trig waittill("trigger");
 
   flag_set("indoor_chain");
 }
 
 delete_route1_fs() {
-  route1_trig = getent("route1_fs_backup", "script_noteworthy");
+  route1_trig = getEnt("route1_fs_backup", "script_noteworthy");
 
-  delete_trig = getent("delete_route1_trig", "script_noteworthy");
+  delete_trig = getEnt("delete_route1_trig", "script_noteworthy");
   delete_trig waittill("trigger");
 
   if(isDefined(route1_trig)) {
@@ -170,31 +170,31 @@ delete_route1_fs() {
 back_hallway_battle() {}
 
 enemy_trigspawn() {
-  hallway_defender_trig = getent("window_panzer_wait", "targetname");
+  hallway_defender_trig = getEnt("window_panzer_wait", "targetname");
   hallway_defender_trig waittill("trigger");
   simple_floodspawn("hallway_defenders_fs");
 
-  roof_trig = getent("panzer_wait", "targetname");
+  roof_trig = getEnt("panzer_wait", "targetname");
   roof_trig waittill("trigger");
 
   simple_floodspawn("rooftop_panzers", ::rooftop_germ_behaviour);
   simple_floodspawn("terrace_germ");
   simple_floodspawn("rooftop_panzers_fs", ::roof_panzer_behaviour);
 
-  mg_gunner_trig = getent("mg_gunner_trig", "script_noteworthy");
+  mg_gunner_trig = getEnt("mg_gunner_trig", "script_noteworthy");
   mg_gunner_trig waittill("trigger");
   thread mg_setup();
   simple_floodspawn("mg_gunner", ::mg_gunner_behavior);
 
-  mg_spawn_room_trig = getent("mg_spawn_room_trig", "targetname");
+  mg_spawn_room_trig = getEnt("mg_spawn_room_trig", "targetname");
   mg_spawn_room_trig waittill("trigger");
   simple_floodspawn("mg_room_spawners");
 
-  last_defenders_trig = getent("trig_last_defenders", "script_noteworthy");
+  last_defenders_trig = getEnt("trig_last_defenders", "script_noteworthy");
   last_defenders_trig waittill("trigger");
   simple_floodspawn("last_defenders");
 
-  berlin_runner_trig = getent("berlin_runner_trig", "targetname");
+  berlin_runner_trig = getEnt("berlin_runner_trig", "targetname");
   berlin_runner_trig waittill("trigger");
 
   if(!level.wii && !NumRemoteClients()) {
@@ -232,14 +232,14 @@ mg_shooting() {
 }
 
 mg_setup() {
-  hallway_mg = getent("hallway_mg", "targetname");
+  hallway_mg = getEnt("hallway_mg", "targetname");
   hallway_mg setturretignoregoals(true);
 }
 
 first_floor_chain_delete() {
-  upstairs_chain = getent("go_upstairs", "script_noteworthy");
-  right_chain = getent("chain_before_stairs", "script_noteworthy");
-  atrium_chain = getent("flag_indoor_chain", "script_noteworthy");
+  upstairs_chain = getEnt("go_upstairs", "script_noteworthy");
+  right_chain = getEnt("chain_before_stairs", "script_noteworthy");
+  atrium_chain = getEnt("flag_indoor_chain", "script_noteworthy");
 
   upstairs_chain waittill("trigger");
   if(isDefined(right_chain)) {
@@ -252,9 +252,9 @@ first_floor_chain_delete() {
 }
 
 courtyard_color_chain() {
-  delete_trig = getent("yellow_courtyard_trig", "targetname");
+  delete_trig = getEnt("yellow_courtyard_trig", "targetname");
 
-  wait_trig = getent("asylum_entry_vo", "targetname");
+  wait_trig = getEnt("asylum_entry_vo", "targetname");
   wait_trig waittill("trigger");
 
   if(isDefined(delete_trig)) {
@@ -265,7 +265,7 @@ courtyard_color_chain() {
 front_bathroom_cleared() {
   waittill_aigroupcleared("front_bathroom_spawners");
 
-  front_bathroom_chain = getent("front_bathroom_chain", "targetname");
+  front_bathroom_chain = getEnt("front_bathroom_chain", "targetname");
   if(isDefined(front_bathroom_chain)) {
     front_bathroom_chain notify("trigger");
   }
@@ -274,12 +274,12 @@ front_bathroom_cleared() {
 back_bathroom_cleared() {
   waittill_aigroupcleared("back_bathroom_spawners");
 
-  front_bathroom_chain = getent("front_bathroom_chain", "targetname");
+  front_bathroom_chain = getEnt("front_bathroom_chain", "targetname");
   if(isDefined(front_bathroom_chain)) {
     front_bathroom_chain notify("trigger");
   }
 
-  back_bathroom_chain = getent("back_bathroom_chain", "targetname");
+  back_bathroom_chain = getEnt("back_bathroom_chain", "targetname");
   if(isDefined(back_bathroom_chain)) {
     back_bathroom_chain notify("trigger");
   }
@@ -288,7 +288,7 @@ back_bathroom_cleared() {
 rooftop_cleared() {
   waittill_aigroupcleared("rooftop_germans");
 
-  chain_trig = getent("hallway_color_chain", "targetname");
+  chain_trig = getEnt("hallway_color_chain", "targetname");
   if(isDefined(chain_trig)) {
     chain_trig notify("trigger");
   }
@@ -297,14 +297,14 @@ rooftop_cleared() {
 last_defenders_cleared() {
   waittill_aigroupcleared("last_defenders");
 
-  chain_trig = getent("color_chain_exit_asylum", "script_noteworthy");
+  chain_trig = getEnt("color_chain_exit_asylum", "script_noteworthy");
   if(isDefined(chain_trig)) {
     chain_trig delete();
   }
 
   wait(randomfloatrange(1.25, 3.0));
 
-  exit_trig = getent("trig_asylum_exit", "script_noteworthy");
+  exit_trig = getEnt("trig_asylum_exit", "script_noteworthy");
   if(isDefined(exit_trig)) {
     exit_trig notify("trigger");
   }
@@ -313,7 +313,7 @@ last_defenders_cleared() {
 front_mg_room_cleared() {
   waittill_aigroupcleared("front_mg_germs");
 
-  chain_trig = getent("green_chain_team2", "targetname");
+  chain_trig = getEnt("green_chain_team2", "targetname");
   if(isDefined(chain_trig)) {
     chain_trig notify("trigger");
   }
@@ -322,30 +322,30 @@ front_mg_room_cleared() {
 mg_room_cleared() {
   waittill_aigroupcleared("mg_room_germs");
 
-  chain_trig = getent("green_chain_team2", "targetname");
+  chain_trig = getEnt("green_chain_team2", "targetname");
   if(isDefined(chain_trig)) {
     chain_trig notify("trigger");
   }
 
-  chain_trig = getent("yellow_chain_team2", "targetname");
+  chain_trig = getEnt("yellow_chain_team2", "targetname");
   if(isDefined(chain_trig)) {
     chain_trig notify("trigger");
   }
 }
 
 roof_panzer_guy() {
-  panzer_target = getstruct("panzer_guy_target", "targetname");
+  panzer_target = getStruct("panzer_guy_target", "targetname");
 
-  trigger = getent("panzer_wait", "targetname");
+  trigger = getEnt("panzer_wait", "targetname");
   trigger waittill("trigger");
 
   simple_spawn("berlin_panzer_guy", ::roof_panzer_guy_behaviour);
 
-  earthquake_trig = getent("earthquake_trig", "targetname");
+  earthquake_trig = getEnt("earthquake_trig", "targetname");
   earthquake_trig waittill("trigger");
 
-  touch_trig = getent("earthquake_touch_trig", "targetname");
-  players = getplayers();
+  touch_trig = getEnt("earthquake_touch_trig", "targetname");
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && players[i] IsTouching(touch_trig)) {
@@ -368,7 +368,7 @@ roof_panzer_guy_behaviour() {
 
   node = getnode("panzer_wait_fire", "targetname");
 
-  wait_trig = getent("panzer_wait", "targetname");
+  wait_trig = getEnt("panzer_wait", "targetname");
 
   wait_trig waittill("trigger");
 
@@ -388,7 +388,7 @@ roof_panzer_guy_behaviour() {
 panzer_fire() {
   self endon("death");
 
-  panzer_target = getstruct("panzer_guy_target", "targetname");
+  panzer_target = getStruct("panzer_guy_target", "targetname");
   panzer_target_ent = spawn("script_origin", panzer_target.origin);
   panzer_target_ent.health = 1000000;
 
@@ -400,18 +400,18 @@ rumble() {
 }
 
 window_panzer() {
-  window_target = getstruct("window_panzer_target", "targetname");
+  window_target = getStruct("window_panzer_target", "targetname");
 
-  trigger = getent("window_panzer_wait", "targetname");
+  trigger = getEnt("window_panzer_wait", "targetname");
   trigger waittill("trigger");
 
   simple_spawn("window_panzer", ::window_panzer_behaviour);
 
-  earthquake_trig_2 = getent("earthquake_trig_2", "targetname");
+  earthquake_trig_2 = getEnt("earthquake_trig_2", "targetname");
   earthquake_trig_2 waittill("trigger");
 
-  touch_trig = getent("earthquake_touch_trig", "targetname");
-  players = getplayers();
+  touch_trig = getEnt("earthquake_touch_trig", "targetname");
+  players = getPlayers();
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i]) && players[i] IsTouching(touch_trig)) {
@@ -444,7 +444,7 @@ window_panzer_behaviour() {
 window_panzer_fire() {
   self endon("death");
 
-  window_panzer_target = getstruct("window_panzer_target", "targetname");
+  window_panzer_target = getStruct("window_panzer_target", "targetname");
   window_panzer_target_ent = spawn("script_origin", window_panzer_target.origin);
   window_panzer_target_ent.health = 1000000;
 
@@ -547,7 +547,7 @@ run_germ_setup() {
   self.ignoreme = false;
 }
 hallway_popnrun() {
-  trig = getent("window_panzer_wait", "targetname");
+  trig = getEnt("window_panzer_wait", "targetname");
   trig waittill("trigger");
 
   if(!level.wii && !NumRemoteClients()) {
@@ -557,7 +557,7 @@ hallway_popnrun() {
 }
 
 bathroom_ambush() {
-  spawn_trig = getent("wc_suprise_trig", "targetname");
+  spawn_trig = getEnt("wc_suprise_trig", "targetname");
   spawn_trig waittill("trigger");
 
   simple_spawn("wc_suprise_germans", ::ambush_behaviour_setup);
@@ -565,7 +565,7 @@ bathroom_ambush() {
   wait(0.05);
   thread begin_ambush_early();
 
-  ambush_trig = getent("ambush_trig", "script_noteworthy");
+  ambush_trig = getEnt("ambush_trig", "script_noteworthy");
   ambush_trig waittill("trigger");
 
   level notify("start_ambush");
@@ -718,7 +718,7 @@ ghost_german_behavior() {
   self.drawoncompass = false;
   self allowedstances("crouch");
 
-  shadow_trig = getent("shadow_trig", "targetname");
+  shadow_trig = getEnt("shadow_trig", "targetname");
   shadow_trig waittill("trigger");
 
   self allowedstances("stand");
@@ -728,7 +728,7 @@ ghost_german_behavior() {
   self waittill("goal");
   self allowedstances("stand", "crouch");
 
-  ambush_trig = getent("ambush_trig", "script_noteworthy");
+  ambush_trig = getEnt("ambush_trig", "script_noteworthy");
   ambush_trig waittill("trigger");
 
   self allowedstances("crouch", "stand");
@@ -784,7 +784,7 @@ event2_rejoin_squad() {
 }
 
 atrium_crow_damage_trig() {
-  damage_trig = getent("crows_fly_trig", "targetname");
+  damage_trig = getEnt("crows_fly_trig", "targetname");
   damage_trig waittill("trigger");
 
   flag_set("fly_crow_fly");
@@ -1016,7 +1016,7 @@ crow8_atrium() {
 }
 
 indoor_crow_damage_trig() {
-  damage_trig = getent("indoor_crows_fly_trig", "targetname");
+  damage_trig = getEnt("indoor_crows_fly_trig", "targetname");
   damage_trig waittill("trigger");
 
   flag_set("indoor_crow_fly");
@@ -1136,7 +1136,7 @@ indoor_crow4() {
 
 #using_animtree("generic_human");
 kill_off_rooftop_germans() {
-  kill_trig = getent("kill_off_rooftop_germans", "targetname");
+  kill_trig = getEnt("kill_off_rooftop_germans", "targetname");
   kill_trig waittill("trigger");
 
   rooftop_germans = get_ai_group_ai("rooftop_germans");
@@ -1163,7 +1163,7 @@ berlin_runner_behaviour() {
 }
 
 fallingdebris_think() {
-  trig = GetEnt("debris_fall_trig", "targetname");
+  trig = getEnt("debris_fall_trig", "targetname");
   trig waittill("trigger");
 
   level thread second_floor_threads();
@@ -1176,7 +1176,7 @@ fallingdebris_think() {
     return;
   }
 
-  earthquake_struct = getstruct("earthquake_struct", "targetname");
+  earthquake_struct = getStruct("earthquake_struct", "targetname");
   Earthquake(0.3, 2, earthquake_struct.origin, 500);
 
   array_thread(debrisGroup, ::fallingdebris_drop);
@@ -1207,17 +1207,17 @@ dialogue_waittills() {
   thread wait_for_entry_vo();
   thread wait_for_creepy_vo();
 
-  upstairs_vo_trig = getent("go_upstairs", "script_noteworthy");
+  upstairs_vo_trig = getEnt("go_upstairs", "script_noteworthy");
   upstairs_vo_trig waittill("trigger");
 
   thread asylum_stairs_vo();
 
-  balcony_vo_trig = getent("balcony_vo_trig", "targetname");
+  balcony_vo_trig = getEnt("balcony_vo_trig", "targetname");
   balcony_vo_trig waittill("trigger");
 
   thread asylum_balcony_vo();
 
-  moveup_vo_trig = getent("hallway_color_chain", "targetname");
+  moveup_vo_trig = getEnt("hallway_color_chain", "targetname");
   moveup_vo_trig waittill("trigger");
 
   thread move_up_vo();

@@ -31,7 +31,7 @@ main(model, type) {
 
 turret_sound_init() {
   self.sound_org = spawn("script_origin", self.origin);
-  self.sound_org linkto(self);
+  self.sound_org linkTo(self);
 
   switch (self.vehicletype) {
     case "truck_gaz63_quad50":

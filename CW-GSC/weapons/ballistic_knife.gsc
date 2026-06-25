@@ -58,7 +58,7 @@ function onspawn(watcher, player) {
         if(isalive(prey) || !isDefined(prey gettagorigin(bone))) {
           retrievable_model droptoground(retrievable_model.origin, 80);
         } else {
-          retrievable_model linkto(prey, bone);
+          retrievable_model linkTo(prey, bone);
         }
       } else if(isfriendly) {
         retrievable_model physicslaunch(normal, (randomint(10), randomint(10), randomint(10)));
@@ -117,16 +117,16 @@ function onspawnretrievetrigger(watcher, player) {
   }
 
   retrievable_model weaponobjects::function_57152a5(watcher, player, trigger_pos);
-  retrievable_model.pickuptrigger enablelinkto();
+  retrievable_model.pickuptrigger enablelinkTo();
 
   if(isDefined(prey)) {
     if(sessionmodeiszombiesgame()) {
       retrievable_model thread function_8e6a040(prey);
     }
 
-    retrievable_model.pickuptrigger linkto(prey);
+    retrievable_model.pickuptrigger linkTo(prey);
   } else {
-    retrievable_model.pickuptrigger linkto(retrievable_model);
+    retrievable_model.pickuptrigger linkTo(retrievable_model);
   }
 
   retrievable_model thread weaponobjects::watchshutdown(player);
@@ -182,7 +182,7 @@ function updateretrievetrigger() {
 
   if(isDefined(trigger)) {
     trigger.origin = (self.origin[0], self.origin[1], self.origin[2] + 10);
-    trigger linkto(self);
+    trigger linkTo(self);
   }
 }
 

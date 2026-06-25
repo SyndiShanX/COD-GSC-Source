@@ -690,7 +690,7 @@ function function_98cf45ae() {
   }
 
   level flag::set(#"hash_18141f1491e42a85");
-  level.deathcircle.var_5c54ab33 moveto(level.deathcircle.var_5c54ab33.origin, 0.1);
+  level.deathcircle.var_5c54ab33 moveTo(level.deathcircle.var_5c54ab33.origin, 0.1);
   level clientfield::set_world_uimodel("hudItems.warzone.collapseTimerState", 0);
   setmatchflag("bomb_timer_a", 0);
 }
@@ -744,7 +744,7 @@ function private countdown(waitsec, circleindex, nextcircle) {
   }
 
   callback::callback(#"hash_166e273d927bf6a3");
-  playsoundatposition(#"hash_3fb30e7a85b2bf7e", (0, 0, 0));
+  playSoundAtPosition(#"hash_3fb30e7a85b2bf7e", (0, 0, 0));
 }
 
 function function_2b2fc512(waitsec, var_b96c8a8f) {
@@ -792,7 +792,7 @@ function function_9229c3b3(circle, newradius, neworigin, scalesec = 0) {
   time = gettime();
   endtime = time + int(scalesec * 1000);
   level clientfield::set_world_uimodel("hudItems.warzone.collapseProgress", 0);
-  circle moveto(neworigin, scalesec);
+  circle moveTo(neworigin, scalesec);
   scaledelta = newradius - circle.radius;
   frames = scalesec / float(function_60d95f53()) / 1000;
   framedelta = scaledelta / frames;
@@ -805,7 +805,7 @@ function function_9229c3b3(circle, newradius, neworigin, scalesec = 0) {
       level flag::wait_till_clear(#"hash_18141f1491e42a85");
       var_9bd64c7b = gettime();
       endtime += var_9bd64c7b - pausetime;
-      circle moveto(neworigin, float(endtime - var_9bd64c7b) / 1000);
+      circle moveTo(neworigin, float(endtime - var_9bd64c7b) / 1000);
     }
 
     function_55ffaf7(circle, circle.radius + framedelta);
@@ -874,7 +874,7 @@ function function_dc15ad60(deathcircle) {
     level.deathcircle.players = [];
     time = gettime();
 
-    foreach(i, player in getplayers()) {
+    foreach(i, player in getPlayers()) {
       if(is_true(deathcircle.scaling) && i % 5 == updatepass) {
         player function_ba02cfb5();
       }
@@ -963,7 +963,7 @@ function function_dc15ad60(deathcircle) {
 }
 
 function private cleanup_feedback(notifyhash) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player function_60d14da8(0);
     player hide_effects();
   }
@@ -988,7 +988,7 @@ function function_ba02cfb5() {
   }
 
   nextcenter = isDefined(nextcircle) ? nextcircle.origin : var_46fc3d6e.origin;
-  dir = vectornormalize(playerorigin - nextcenter);
+  dir = vectorNormalize(playerorigin - nextcenter);
   nextpoint = nextcenter;
 
   if(isDefined(nextcircle)) {

@@ -88,7 +88,7 @@ func_B9DE(var_0) {
         var_6 = var_2 getlinkedparent();
 
         if(isDefined(var_6)) {
-          var_5 linkto(var_6);
+          var_5 linkTo(var_6);
         }
 
         if(isDefined(var_2)) {
@@ -206,8 +206,8 @@ func_13B9C(var_0, var_1) {
   level endon("game_ended");
   var_0 endon("disconnect");
   var_2 = level.var_D671[var_1];
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(var_2.usehintstring);
+  self setCursorHint("HINT_NOICON");
+  self setHintString(var_2.usehintstring);
   scripts\mp\utility\game::setselfusable(var_0);
 
   for(;;) {

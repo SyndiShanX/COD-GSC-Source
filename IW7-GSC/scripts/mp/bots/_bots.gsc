@@ -2011,7 +2011,7 @@ bot_think_crate() {
           }
           var_28 = var_28 - var_10.origin;
           var_29 = length(var_28) * randomfloat(1.0);
-          var_27 = var_10.origin + vectornormalize(var_28) * var_29 + (0, 0, 12);
+          var_27 = var_10.origin + vectorNormalize(var_28) * var_29 + (0, 0, 12);
         }
       } else {
         var_26.action_thread = ::use_crate;
@@ -2511,7 +2511,7 @@ monitor_smoke_grenade() {
   wait 1;
   var_1 = spawn("script_model", var_0);
   var_1 show();
-  var_2 = getent("smoke_grenade_sight_clip_256", "targetname");
+  var_2 = getEnt("smoke_grenade_sight_clip_256", "targetname");
 
   if(isDefined(var_2)) {
     var_1 clonebrushmodeltoscriptmodel(var_2);

@@ -225,7 +225,7 @@ function_23b6897(player, position) {
     centerpoint = player.origin;
     var_bb96e272 = position - centerpoint;
     var_bb96e272 = (var_bb96e272[0], var_bb96e272[1], 0);
-    var_bb96e272 = vectornormalize(var_bb96e272);
+    var_bb96e272 = vectorNormalize(var_bb96e272);
     forward = (1, 0, 0);
     theta = vectortoangles(var_bb96e272)[1] - vectortoangles(forward)[1];
     var_9942a6e3 = 13;
@@ -455,7 +455,7 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
             continue;
           }
 
-          self linkto(parentent);
+          self linkTo(parentent);
 
           if(!var_74e79ee3) {
             if(!isDefined(parentent.var_7b500c20)) {
@@ -560,7 +560,7 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
       }
 
       if(!var_fe7058af && self !== parentent) {
-        self linkto(parentent);
+        self linkTo(parentent);
 
         if(!isDefined(parentent.var_7b500c20)) {
           parentent.var_7b500c20 = [];
@@ -877,9 +877,9 @@ drop_inventory(player) {
     }
 
     deathstash.stationary = 1;
-    deathstash animscripted("death_stash_open", deathstash.origin, deathstash.angles, "p8_fxanim_wz_death_stash_used_anim", "normal", "root", 1, 0);
+    deathstash animScripted("death_stash_open", deathstash.origin, deathstash.angles, "p8_fxanim_wz_death_stash_used_anim", "normal", "root", 1, 0);
     deathstash waittill(#"death_stash_open");
-    deathstash animscripted("death_stash_empty", deathstash.origin, deathstash.angles, "p8_fxanim_wz_death_stash_empty_anim", "normal", "root", 1, 0);
+    deathstash animScripted("death_stash_empty", deathstash.origin, deathstash.angles, "p8_fxanim_wz_death_stash_empty_anim", "normal", "root", 1, 0);
     deathstash.var_bad13452 = 2;
     deathstash clientfield::set("dynamic_stash", 2);
   } else {
@@ -1089,7 +1089,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
     dropitem.origin = parentent.origin;
 
     if(!(isDefined(parentent.stationary) && parentent.stationary) || isDefined(parentent getlinkedent())) {
-      dropitem linkto(parentent);
+      dropitem linkTo(parentent);
     }
   }
 

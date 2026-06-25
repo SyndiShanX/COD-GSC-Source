@@ -43,12 +43,12 @@ mason_intro() {
   flag_wait("mason_intro_started");
   exploder(25);
   setmusicstate("NIC_INTRO");
-  ai_hudson = getent("hudson_ai", "targetname");
+  ai_hudson = getEnt("hudson_ai", "targetname");
   ai_hudson attach("p6_binoculars_anim", "tag_weapon_left");
   level.player setclientdvar("cg_aggressiveCullRadius", 495);
   delay_thread(0.25, ::screen_fade_in, 2);
   flag_set("mason_introscreen");
-  ai_noriega = getent("noriega_ai", "targetname");
+  ai_noriega = getEnt("noriega_ai", "targetname");
   ai_noriega attach("com_hand_radio", "tag_weapon_right");
   ai_noriega attach("t6_wpn_shotty_spas_world", "tag_weapon_left");
   rpc("clientscripts/nicaragua_amb", "levelIntroSnapAndLoop");
@@ -115,9 +115,9 @@ menendez_intro() {
 }
 
 menendez_intro_scene() {
-  m_scorch_marks = getent("josefina_hall_scorch", "targetname");
+  m_scorch_marks = getEnt("josefina_hall_scorch", "targetname");
   m_scorch_marks hide();
-  m_shards = getent("picture_frame_shards", "targetname");
+  m_shards = getEnt("picture_frame_shards", "targetname");
   m_shards hide();
   level notify("fxanim_blanket_start");
   run_scene_first_frame("menendez_intro_part2_picture");
@@ -151,7 +151,7 @@ noriega_arrives_scene() {
     m_player_body setModel("c_mul_menendez_nicaragua_d_viewbody");
   }
 
-  ai_noriega = getent("noriega_ai", "targetname");
+  ai_noriega = getEnt("noriega_ai", "targetname");
   ai_noriega attach("p_anim_rus_key", "tag_weapon_left");
   ai_noriega bloodimpact("none");
   model_restore_area("menendez_lower_village");
@@ -212,14 +212,14 @@ menendez_intro_not_mature_black_screen(m_player_body) {
 
 menendez_intro_part1_rage_notetrack(guy) {
   level.player rage_high();
-  m_shards = getent("picture_frame_shards", "targetname");
+  m_shards = getEnt("picture_frame_shards", "targetname");
   m_shards ignorecheapentityflag(1);
   m_shards setscale(0.2);
   m_shards show();
 }
 
 intro_guard_fx(ai_pdf_4) {
-  ai_cartel_guard = getent("intro_cartel_guard_ai", "targetname");
+  ai_cartel_guard = getEnt("intro_cartel_guard_ai", "targetname");
   playFXOnTag(getfx("intro_cartel_blood"), ai_cartel_guard, "j_head");
   exploder(59);
 }
@@ -227,7 +227,7 @@ intro_guard_fx(ai_pdf_4) {
 menendez_intro_glass_stab(m_player_body) {
   m_glass_shard = get_model_or_models_from_scene("menendez_intro_part2", "intro_shard");
   playFXOnTag(getfx("neck_stab_glass"), m_glass_shard, "tag_origin");
-  ai_intro_pdf_1 = getent("intro_pdf01_ai", "targetname");
+  ai_intro_pdf_1 = getEnt("intro_pdf01_ai", "targetname");
   playFXOnTag(getfx("neck_stab_blood"), ai_intro_pdf_1, "j_neck");
 }
 
@@ -286,7 +286,7 @@ noriega_arrives_muddy_viewbody(m_player_body) {
 
 noriega_arrives_head_switch(m_player_body) {
   if(is_mature()) {
-    ai_noriega = getent("noriega_ai", "targetname");
+    ai_noriega = getEnt("noriega_ai", "targetname");
     ai_noriega detach(ai_noriega.headmodel, "", 1);
     ai_noriega.headmodel = "c_pan_noriega_military_head_wnded";
     ai_noriega attach(ai_noriega.headmodel, "", 1);
@@ -294,7 +294,7 @@ noriega_arrives_head_switch(m_player_body) {
 }
 
 noriega_arrives_spas_swap(m_player_body) {
-  ai_noriega = getent("noriega_ai", "targetname");
+  ai_noriega = getEnt("noriega_ai", "targetname");
   ai_noriega gun_remove();
   m_player_body attach("t6_wpn_shotty_spas_world", "tag_weapon");
 }

@@ -111,9 +111,9 @@ aud_open_fisrt_door() {
     level.aud.door_first_house_trigger common_scripts\utility::trigger_on();
   }
 
-  var_0 = getent("first_door_ambient_emitter_01", "targetname");
+  var_0 = getEnt("first_door_ambient_emitter_01", "targetname");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("emt_icbm_ambient_door_transition");
-  var_1 = getent("footstep_amb_emitter_02", "targetname");
+  var_1 = getEnt("footstep_amb_emitter_02", "targetname");
   var_1 thread common_scripts\utility::play_loop_sound_on_entity("emt_overhead_footsteps");
   soundscripts\_audio_mix_manager::mm_clear_submix("mix_first_house_search");
   soundscripts\_audio_mix_manager::mm_add_submix("mix_rescue_griggs");
@@ -122,7 +122,7 @@ aud_open_fisrt_door() {
 }
 
 first_house_mix() {
-  var_0 = getent("footstep_amb_emitter_01", "targetname");
+  var_0 = getEnt("footstep_amb_emitter_01", "targetname");
   var_0 thread common_scripts\utility::play_loop_sound_on_entity("emt_overhead_footsteps");
   soundscripts\_audio_mix_manager::mm_add_submix("mix_first_house_search");
   common_scripts\utility::flag_wait_either("house1_cleared", "_stealth_spotted");
@@ -174,6 +174,6 @@ handle_start_vehicle(var_0, var_1) {
 }
 
 disable_azm_trigger_open_door_first_house() {
-  level.aud.door_first_house_trigger = getent("flag_before_open_door_first_house", "script_noteworthy");
+  level.aud.door_first_house_trigger = getEnt("flag_before_open_door_first_house", "script_noteworthy");
   level.aud.door_first_house_trigger common_scripts\utility::trigger_off();
 }

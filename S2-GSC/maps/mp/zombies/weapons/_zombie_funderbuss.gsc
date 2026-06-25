@@ -70,7 +70,7 @@ fire_funderbuss_grenades(param_00, param_01) {
 
     var_0A = anglesToForward(var_03 + (0, -1 * var_09 + var_07 * var_09, 0));
     var_0B = 2;
-    var_0C = magicgrenademanual("frag_grenade_funderbuss_zm", var_08, 2250 * vectornormalize(var_0A), var_0B, var_02);
+    var_0C = magicgrenademanual("frag_grenade_funderbuss_zm", var_08, 2250 * vectorNormalize(var_0A), var_0B, var_02);
     var_0C.var_0117 = var_02;
     var_02.zmb_blundergrenades = common_scripts\utility::func_0F6F(var_02.zmb_blundergrenades, var_0C);
     level.zmb_blundergrenades = common_scripts\utility::func_0F6F(level.zmb_blundergrenades, var_0C);

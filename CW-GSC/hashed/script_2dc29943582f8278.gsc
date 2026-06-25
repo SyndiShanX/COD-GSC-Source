@@ -216,7 +216,7 @@ function spawnclones() {
   timeout = self namespace_1c2a96f9::function_4808b985(25);
   velocity = self getvelocity();
   velocity += (0, 0, velocity[2] * -1);
-  velocity = vectornormalize(velocity);
+  velocity = vectorNormalize(velocity);
   origin = self.origin + velocity * 17 + vectorscale(anglesToForward(self getangles()), 17);
   validspawns = calculatespawnorigin(origin, self getangles(), 300);
 
@@ -339,7 +339,7 @@ function _cloneorbfx(endpos, traveltime) {
 
   fxorg namespace_83eb6304::function_3ecfde67("clone_orb");
   fxendpos = endpos + (0, 0, 35);
-  fxorg moveto(fxendpos, traveltime);
+  fxorg moveTo(fxendpos, traveltime);
   self waittilltimeout(traveltime, #"player_died", #"disconnect");
 
   if(isDefined(self)) {

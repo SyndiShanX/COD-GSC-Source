@@ -107,7 +107,7 @@ _id_51A9(var_0) {
   var_1._id_FE46 = 0;
   var_1._id_EB31 = level._id_EB2B._id_E76D["super_emp_drone"]._id_7C8C;
   self _meth_8094(var_1);
-  self cameralinkto(var_1, "tag_origin");
+  self cameralinkTo(var_1, "tag_origin");
   self setplayerangles(var_1.angles);
   self painvisionoff();
   scripts\cp_mp\utility\killstreak_utility::_id_8DBE();
@@ -126,7 +126,7 @@ _id_5199(var_0) {
   var_3._id_0481 = "rcplane";
   var_3._id_31A0 = 1;
   var_4 = spawnStruct();
-  var_5 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_3, var_4);
+  var_5 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_3, var_4);
 
   if(!isDefined(var_5)) {
     return;

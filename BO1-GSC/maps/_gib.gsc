@@ -206,7 +206,7 @@ gib_player(iDamage, sMeansOfDeath, sWeapon, sHitLoc, vDamageDir, vAttackerOrigin
         pos2[pos2.size] = self GetTagOrigin(limb_data["spawn_tags"][i]);
       }
       for(i = 0; i < pos1.size; i++) {
-        forward = VectorNormalize(pos2[i] - pos1[i]);
+        forward = vectorNormalize(pos2[i] - pos1[i]);
         velocities[i] = forward * RandomIntRange(600, 1000);
         velocities[i] = velocities[i] + (0, 0, RandomIntRange(400, 700));
       }

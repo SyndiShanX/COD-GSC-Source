@@ -92,7 +92,7 @@ ShouldDoExtendedKill(victim) {
     return undefined;
   }
 
-  victimToMe2D = VectorNormalize((victimToMe[0], victimToMe[1], 0));
+  victimToMe2D = vectorNormalize((victimToMe[0], victimToMe[1], 0));
   victimFacing = anglesToForward(victim.angles);
   angleToMe = VectorDot(victimFacing, victimToMe2D);
 
@@ -172,7 +172,7 @@ ExtendedKill_StickToVictim(attackAnim, targetOrigin, targetAngles) {
   }
   corpse = self.curMeleeTarget GetCorpseEntity();
   assert(isDefined(corpse));
-  self LinkTo(corpse);
+  self linkTo(corpse);
 
   self ScrAgentDoAnimRelative(attackAnim, targetOrigin, targetAngles);
 }
@@ -295,7 +295,7 @@ GetUpdatedAttackPos(enemy, bCanMove) {
 IsProtectedByRiotshield(enemy) {
   if(isDefined(enemy.hasRiotShield) && enemy.hasRiotShield) {
     enemyToMe = self.origin - enemy.origin;
-    meToEnemy = VectorNormalize((enemyToMe[0], enemyToMe[1], 0));
+    meToEnemy = vectorNormalize((enemyToMe[0], enemyToMe[1], 0));
 
     enemyFacing = anglesToForward(enemy.angles);
     angleToMe = VectorDot(enemyFacing, enemyToMe);

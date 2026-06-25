@@ -94,7 +94,7 @@ sticky_fx(firing_player) {
   self.fx_origin.angles = self.angles;
   self.fx_origin Show();
 
-  self.fx_origin LinkTo(self);
+  self.fx_origin linkTo(self);
 
   wait(0.1);
 

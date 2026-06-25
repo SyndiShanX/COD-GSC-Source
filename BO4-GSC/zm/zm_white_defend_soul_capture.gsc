@@ -13,7 +13,7 @@
 register(id, version, script_noteworthy, var_92f252fd, func_fail) {
   zm_sq_modules::function_d8383812(id, version, script_noteworthy, &is_soul_capture, &soul_captured, 1);
   s_sc = struct::get(script_noteworthy, "script_noteworthy");
-  s_sc.var_f929d531 = getent(s_sc.player_area, "targetname");
+  s_sc.var_f929d531 = getEnt(s_sc.player_area, "targetname");
   s_sc.var_f929d531.id = id;
   s_sc.var_92f252fd = var_92f252fd;
   s_sc.func_fail = func_fail;
@@ -62,9 +62,9 @@ is_soul_capture(var_88206a50, ent) {
 soul_captured(var_f0e6c7a2, ent) {
   n_souls_required = 12;
 
-  if(getplayers().size > 2) {
+  if(getPlayers().size > 2) {
     n_souls_required = 24;
-  } else if(getplayers().size > 1) {
+  } else if(getPlayers().size > 1) {
     n_souls_required = 18;
   }
 

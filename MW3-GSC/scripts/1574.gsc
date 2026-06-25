@@ -103,10 +103,10 @@ rotateplane() {
   level endon("stop_rotatePlane_thread");
   var_0 = 10;
   var_1 = level.ac130_speed["rotate"] / 360 * var_0;
-  level.ac130 rotateyaw(level.ac130.angles[2] + var_0, var_1, var_1, 0);
+  level.ac130 rotateYaw(level.ac130.angles[2] + var_0, var_1, var_1, 0);
 
   for(;;) {
-    level.ac130 rotateyaw(360, level.ac130_speed["rotate"]);
+    level.ac130 rotateYaw(360, level.ac130_speed["rotate"]);
     wait(level.ac130_speed["rotate"]);
   }
 }
@@ -117,7 +117,7 @@ ac130_spawn() {
   var_0 setModel("vehicle_ac130_coop");
   var_0 setCanDamage(0);
   var_0.health = 1000;
-  var_0 linkto(level.ac130, "tag_origin", (0, 3000, 4500), (25, -90, 0));
+  var_0 linkTo(level.ac130, "tag_origin", (0, 3000, 4500), (25, -90, 0));
   level.ac130.planemodel = var_0;
   level.ac130.planemodel hide();
   wait 0.05;
@@ -178,7 +178,7 @@ _id_3EBF(var_0, var_1, var_2) {
 }
 
 _id_3EC7(var_0, var_1, var_2, var_3) {
-  var_4 = getent("armory_" + var_0, "targetname");
+  var_4 = getEnt("armory_" + var_0, "targetname");
 
   if(!isDefined(var_4)) {
     return;
@@ -187,8 +187,8 @@ _id_3EC7(var_0, var_1, var_2, var_3) {
   var_4.icon = var_1;
   var_4._id_3EC9 = var_2;
   var_4.menu = "survival_armory_" + var_0;
-  var_4._id_3ECA = getent(var_4.target, "targetname");
-  var_4._id_3ECB = getent(var_4._id_3ECA.target, "targetname");
+  var_4._id_3ECA = getEnt(var_4.target, "targetname");
+  var_4._id_3ECB = getEnt(var_4._id_3ECA.target, "targetname");
   var_4._id_3ECB hide();
   var_4 thread _id_3ECE();
   return var_4;
@@ -233,7 +233,7 @@ _id_3ECE() {
   var_0 setshader(self.icon, 12, 12);
   var_0 setwaypoint(1, 1, 0);
   self._id_3BCC = var_0;
-  self sethintstring(self._id_3EC9);
+  self setHintString(self._id_3EC9);
   self makeusable();
   level notify("armory_open", self);
 
@@ -592,12 +592,12 @@ _id_3EE3(var_0) {
 }
 
 _id_3EE4(var_0) {
-  var_1 = -12 * vectornormalize(anglesToForward(var_0.angles));
+  var_1 = -12 * vectorNormalize(anglesToForward(var_0.angles));
   var_2 = var_0 gettagorigin("mg01") + (0, 0, 12) + var_1;
   self._id_3EDA.entity unlink();
   self._id_3EDA.entity.origin = var_2;
   self._id_3EDA.entity.angles = var_0.angles;
-  self._id_3EDA.entity linkto(var_0, "mg01");
+  self._id_3EDA.entity linkTo(var_0, "mg01");
 }
 
 _id_3EE5() {
@@ -1605,10 +1605,10 @@ _id_3F27() {
     if(isDefined(var_9)) {
       if(isai(var_9)) {
         var_0.origin = var_9 gettagorigin("j_mainroot");
-        var_0 linkto(var_9, "j_mainroot");
+        var_0 linkTo(var_9, "j_mainroot");
       } else {
         var_0.origin = var_9.origin;
-        var_0 linkto(var_9);
+        var_0 linkTo(var_9);
       }
 
       for(;;) {

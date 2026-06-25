@@ -167,7 +167,7 @@ mechz_screen_shake_loop(localclientnum) {
   self endon("kill_screen_shake");
 
   while(true) {
-    self playrumbleonentity(localclientnum, "mechz_footsteps");
+    self playRumbleOnEntity(localclientnum, "mechz_footsteps");
     waitrealtime(0.1);
   }
 }
@@ -259,7 +259,7 @@ sndflamethrower_start(localclientnum, index, tag_name) {
   self endon("stop_flamethrower");
   sndorigin = self gettagorigin(tag_name);
   sndent = spawn(0, sndorigin, "script_origin");
-  sndent linkto(self, tag_name);
+  sndent linkTo(self, tag_name);
   sndent playSound(0, "zmb_ai_mechz_flame_start");
   sndent playLoopSound("zmb_ai_mechz_flame_loop", 0.6);
   self thread sndflamethrower_stop(sndent, index);

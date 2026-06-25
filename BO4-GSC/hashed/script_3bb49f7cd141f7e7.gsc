@@ -35,7 +35,7 @@ on_begin(var_2e5ed433, var_1532dab3, var_94d24883) {
     var_94d24883 = zm_trial::function_5769f26a(var_94d24883);
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread point_watcher(var_1532dab3, var_94d24883);
   }
 }

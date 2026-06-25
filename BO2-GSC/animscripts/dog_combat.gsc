@@ -685,7 +685,7 @@ meleestrugglevsdog() {
   self clearanim(meleeseqanim[0], 0.1);
   self setflaggedanimrestart("aianim", meleeseqanim[1], 1, 0.1, 1);
   wait 0.15;
-  self.syncedmeleetarget linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  self.syncedmeleetarget linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   self waittillmatch("aianim", "end");
   self.meleeseq = 1;
 
@@ -856,7 +856,7 @@ playerview_startsequence(dog, player) {
   self thread playerview_knockdownanim(dog, player);
   self dontinterpolate();
   player playerlinktoabsolute(self, "tag_player");
-  dog linkto(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  dog linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   synctagangles = self gettagangles("tag_sync");
   dog orientmode("face angle", synctagangles[1]);
   dog orientmode("face default");
@@ -906,7 +906,7 @@ playerview_endsequence(player) {
       player setCanDamage(1);
       player notify("player_saved_from_dog");
       player unlink();
-      player setorigin(self.origin);
+      player setOrigin(self.origin);
       self.inseq = undefined;
       player.player_view delete();
       angles = player getplayerangles();

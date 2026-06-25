@@ -24,7 +24,7 @@ __init__() {
 }
 
 on_begin(var_2a54eca1, var_b3fc75a6, var_40988d98, var_968ac18f) {
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
       level.var_5a9bcbe4 = zm_trial::function_5769f26a(var_2a54eca1);
       break;
@@ -39,7 +39,7 @@ on_begin(var_2a54eca1, var_b3fc75a6, var_40988d98, var_968ac18f) {
       break;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_5a9bcbe4 = 0;
     player zm_trial_util::function_c2cd0cba(level.var_5a9bcbe4);
     player zm_trial_util::function_2190356a(player.var_5a9bcbe4, 1);
@@ -50,14 +50,14 @@ on_begin(var_2a54eca1, var_b3fc75a6, var_40988d98, var_968ac18f) {
 }
 
 on_end(round_reset) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player zm_trial_util::function_f3aacffb();
   }
 
   if(!round_reset) {
     var_57807cdc = [];
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(player.var_5a9bcbe4 < level.var_5a9bcbe4) {
         array::add(var_57807cdc, player, 0);
       }
@@ -70,7 +70,7 @@ on_end(round_reset) {
     }
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_5a9bcbe4 = undefined;
   }
 
@@ -108,7 +108,7 @@ function_7f62f098(challenge) {
 function_138aec8e(attacker) {
   if(isDefined(self.var_6e2628f7) && self.var_6e2628f7) {
     if(isDefined(self.nuked) && self.nuked) {
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player.var_5a9bcbe4++;
       }
 

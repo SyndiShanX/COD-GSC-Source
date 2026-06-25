@@ -65,7 +65,7 @@ func_667E(param_00) {
   var_03 = anglesToForward(var_01 gettagangles("tag_flash"));
   var_04 = var_01 gettagorigin("tag_flash") + var_03 * 300;
   var_05 = spawn("script_origin", var_04);
-  var_05 linkto(var_01);
+  var_05 linkTo(var_01);
   var_01.var_6680 = var_05;
   var_06 = spawn("script_origin", var_04);
   var_01.var_11B6 = var_06;
@@ -279,7 +279,7 @@ func_97B8() {
   foreach(var_06 in var_00) {
     var_07 = var_06.var_116 + func_46C0(var_06);
     var_08 = var_07 - var_03;
-    var_09 = vectornormalize(var_08);
+    var_09 = vectorNormalize(var_08);
     var_0A = vectordot(var_03, var_09);
     if(!isDefined(var_02) || var_0A > var_01) {
       var_01 = var_0A;
@@ -328,7 +328,7 @@ func_9783(param_00) {
   } else {
     self.var_11B6.var_116 = param_00.var_116 + var_01;
     if(!self.var_11B6 islinked()) {
-      self.var_11B6 linkto(param_00);
+      self.var_11B6 linkTo(param_00);
     }
   }
 
@@ -337,7 +337,7 @@ func_9783(param_00) {
   var_04 = distance(var_02, var_03);
   if(var_04 < 500) {
     var_05 = var_03 - var_02;
-    var_06 = vectornormalize(var_05);
+    var_06 = vectorNormalize(var_05);
     var_07 = var_02 + var_06 * getdvarfloat("scr_raid_panzerSafeTargetDistance", 1000);
     self method_825B(var_07);
     self.var_8030 = var_07;

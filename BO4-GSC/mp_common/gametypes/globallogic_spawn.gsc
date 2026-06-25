@@ -835,7 +835,7 @@ respawn_asspectator(origin, angles) {
 
 function_3ee5119e() {
   if(self.pers[#"team"] != #"spectator" && level.spectatetype == 4 && self.spectatorteam == #"invalid") {
-    team_players = getplayers(self.team);
+    team_players = getPlayers(self.team);
 
     foreach(player in team_players) {
       if(player != self && isalive(player)) {
@@ -1009,7 +1009,7 @@ spawninterroundintermission() {
   self.spectatekillcam = 0;
   self.friendlydamage = undefined;
   self globallogic_defaults::default_onspawnintermission();
-  self setorigin(self.origin);
+  self setOrigin(self.origin);
   self setplayerangles(self.angles);
   self clientfield::set_to_player("player_dof_settings", 2);
 }

@@ -27,7 +27,7 @@ init_no_mans_land() {
   maps\_zombiemode_zone_manager::zone_init("nml_zone");
   SetSavedDvar("r_skyTransition", 1);
   teleporter_to_nml_init();
-  ent = getent("nml_dogs_volume", "targetname");
+  ent = getEnt("nml_dogs_volume", "targetname");
   ent thread check_players_in_nml_dogs_volume();
   level.num_nml_dog_targets = 0;
   get_perk_machine_ents();
@@ -40,7 +40,7 @@ init_no_mans_land() {
 zombie_moon_start_init() {
   flag_wait("begin_spawning");
   level thread nml_dogs_init();
-  teleporter = getent("generator_teleporter", "targetname");
+  teleporter = getEnt("generator_teleporter", "targetname");
   teleporter_ending(teleporter, 0);
 }
 nml_dogs_init() {
@@ -188,7 +188,7 @@ resume_moon_rounds(target_round) {
 }
 nml_round_manager() {
   level endon("restart_round");
-  level.dog_targets = getplayers();
+  level.dog_targets = getPlayers();
   for(i = 0; i < level.dog_targets.size; i++) {
     level.dog_targets[i].hunted_by = 0;
   }
@@ -450,17 +450,17 @@ rumble_all_players(high_rumble_string, low_rumble_string, rumble_org, high_rumbl
   for(i = 0; i < players.size; i++) {
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
-        players[i] playrumbleonentity(high_rumble_string);
+        players[i] playRumbleOnEntity(high_rumble_string);
       } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
-        players[i] playrumbleonentity(low_rumble_string);
+        players[i] playRumbleOnEntity(low_rumble_string);
       }
     } else {
-      players[i] playrumbleonentity(high_rumble_string);
+      players[i] playRumbleOnEntity(high_rumble_string);
     }
   }
 }
 get_perk_machine_ents() {
-  nml_position_helper = getstruct("nml_perk_location_helper", "script_noteworthy");
+  nml_position_helper = getStruct("nml_perk_location_helper", "script_noteworthy");
   nml_dist = 42 * 100;
   level.speed_cola_ents = get_vending_ents("vending_sleight", "speedcola_perk", nml_position_helper.origin, nml_dist);
   level.jugg_ents = get_vending_ents("vending_jugg", "jugg_perk", nml_position_helper.origin, nml_dist);
@@ -488,11 +488,11 @@ get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius) {
 move_perk(dist, time, accel) {
   ent = level.speed_cola_ents[0];
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] + dist);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   level.speed_cola_ents[1] trigger_off();
   ent = level.jugg_ents[0];
   pos = (ent.origin[0], ent.origin[1], ent.origin[2] + dist);
-  ent moveto(pos, time, accel, accel);
+  ent moveTo(pos, time, accel, accel);
   level.jugg_ents[1] trigger_off();
 }
 perk_machines_hide(cola, jug, moving) {
@@ -576,12 +576,12 @@ perk_machine_arrival_update() {
 perk_arrive_fx(pos) {
   wait(0.15);
   playFX(level._effect["lightning_dog_spawn"], pos);
-  playsoundatposition("zmb_hellhound_spawn", pos);
-  playsoundatposition("zmb_hellhound_bolt", pos);
+  playSoundAtPosition("zmb_hellhound_spawn", pos);
+  playSoundAtPosition("zmb_hellhound_bolt", pos);
   wait(1.1);
   playFX(level._effect["lightning_dog_spawn"], pos);
-  playsoundatposition("zmb_hellhound_spawn", pos);
-  playsoundatposition("zmb_hellhound_bolt", pos);
+  playSoundAtPosition("zmb_hellhound_spawn", pos);
+  playSoundAtPosition("zmb_hellhound_bolt", pos);
 }
 nml_round_never_ends() {
   wait(2);

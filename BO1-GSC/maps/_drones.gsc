@@ -303,7 +303,7 @@ spawnpoint_playersView() {
   for(i = 0; i < players.size; i++) {
     prof_begin("drone_math");
     forwardvec = anglesToForward(players[i].angles);
-    normalvec = VectorNormalize(self.origin - players[i] GetOrigin());
+    normalvec = vectorNormalize(self.origin - players[i] GetOrigin());
     vecdot = vectordot(forwardvec, normalvec);
     prof_end("drone_math");
     if(vecdot > level.cos80) {
@@ -464,7 +464,7 @@ drone_think(firstNode) {
   level notify("new_drone");
   if(isDefined(level._drones_mg_target)) {
     self.turrettarget = spawn("script_origin", self.origin + (0, 0, 50));
-    self.turrettarget LinkTo(self);
+    self.turrettarget linkTo(self);
   }
   self endon("drone_death");
   assert(isDefined(firstNode));
@@ -490,7 +490,7 @@ drone_think(firstNode) {
   idleAnim[1] = % stand_alert_2;
   idleAnim[2] = % stand_alert_3;
   while(isDefined(self)) {
-    self AnimScripted("drone_idle_anim", idle_org, idle_ang, idleAnim[RandomInt(idleAnim.size)]);
+    self animScripted("drone_idle_anim", idle_org, idle_ang, idleAnim[RandomInt(idleAnim.size)]);
     self waittillmatch("drone_idle_anim", "end");
   }
 }
@@ -658,7 +658,7 @@ drone_doDeath(deathAnim, deathRemoveNotify) {
   if(cancelRunningDeath) {
     deathAnim = % death_stand_dropinplace;
   }
-  self animscripted("drone_death_anim", self.origin, self.angles, deathAnim, "deathplant");
+  self animScripted("drone_death_anim", self.origin, self.angles, deathAnim, "deathplant");
   self thread drone_ragdoll(deathAnim);
   self waittillmatch("drone_death_anim", "end");
   if(!isDefined(self)) {
@@ -674,7 +674,7 @@ drone_doDeath(deathAnim, deathRemoveNotify) {
     return;
   }
   if(!isDefined(self.no_death_sink) || (isDefined(self.no_death_sink) && !self.no_death_sink)) {
-    self MoveTo(self.origin - (0, 0, 100), 7);
+    self moveTo(self.origin - (0, 0, 100), 7);
     wait(3);
   }
   if(!isDefined(self)) {
@@ -904,7 +904,7 @@ ShooterRun(destinationPoint, event, target_targetname, script_int) {
         break;
       case "shoot_at_vehicle_then_move":
         AssertEx(isDefined(target_targetname), "Drone shooting at vehicle, but doesn't know which one, set .script_string on node");
-        vehicleTarget = GetEnt(target_targetname, "targetname");
+        vehicleTarget = getEnt(target_targetname, "targetname");
         self.shootTarget = vehicleTarget;
         self.num_shots = script_int;
         self thread ShooterShoot(self.shootTarget, true);
@@ -968,7 +968,7 @@ ShooterRun(destinationPoint, event, target_targetname, script_int) {
     assert(t > 0);
     self ClearAnim(self.drone_run_cycle, 0);
     self notify("stop_run_anim");
-    self moveto(endPos, t, 0, 0);
+    self moveTo(endPos, t, 0, 0);
     self SetFlaggedAnimKnobRestart("drone_custom_anim", customFirstAnim);
     self waittillmatch("drone_custom_anim", "end");
     self.origin = endPos;
@@ -1221,7 +1221,7 @@ aimAtTargetThread(target, stopString) {
 getTargetUpDownOffset(target) {
   pos = self.origin;
   dir = (target[0] - pos[0], target[1] - pos[1], target[2] - pos[2]);
-  dir = VectorNormalize(dir);
+  dir = vectorNormalize(dir);
   return dir[2];
 }
 setAnimArray() {
@@ -1327,14 +1327,14 @@ drone_get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) 
   if(Distance2D(self_pos, explosion_pos) < up_distance) {
     return "up";
   }
-  p1 = self_pos - VectorNormalize(anglesToForward(self_angle)) * 10000;
-  p2 = self_pos + VectorNormalize(anglesToForward(self_angle)) * 10000;
+  p1 = self_pos - vectorNormalize(anglesToForward(self_angle)) * 10000;
+  p2 = self_pos + vectorNormalize(anglesToForward(self_angle)) * 10000;
   p_intersect = PointOnSegmentNearestToPoint(p1, p2, explosion_pos);
   side_away_dist = Distance2D(p_intersect, explosion_pos);
   side_close_dist = Distance2D(p_intersect, self_pos);
   if(side_close_dist != 0) {
     angle = ATan(side_away_dist / side_close_dist);
-    dot_product = vectordot(anglesToForward(self_angle), VectorNormalize(explosion_pos - self_pos));
+    dot_product = vectordot(anglesToForward(self_angle), vectorNormalize(explosion_pos - self_pos));
     if(dot_product < 0) {
       angle = 180 - angle;
     }
@@ -1344,7 +1344,7 @@ drone_get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) 
       return "forward";
     }
   }
-  self_right_angle = VectorNormalize(AnglesToRight(self_angle));
+  self_right_angle = vectorNormalize(AnglesToRight(self_angle));
   right_point = self_pos + self_right_angle * (up_distance * 0.5);
   if(Distance2D(right_point, explosion_pos) < Distance2D(self_pos, explosion_pos)) {
     return "left";

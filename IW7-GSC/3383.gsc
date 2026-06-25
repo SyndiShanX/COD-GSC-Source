@@ -171,9 +171,9 @@ init_magic_wheel(var_0) {
     level.current_active_wheel = var_0;
 
     if(isDefined(level.magic_wheel_spin_hint)) {
-      var_0 sethintstring(level.magic_wheel_spin_hint);
+      var_0 setHintString(level.magic_wheel_spin_hint);
     } else {
-      var_0 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+      var_0 setHintString(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
     }
   }
 }
@@ -218,11 +218,11 @@ func_100ED(var_0) {
   var_0 setuserange(72);
 
   if(scripts\engine\utility::flag_exist("fire_sale") && scripts\engine\utility::flag("fire_sale")) {
-    var_0 sethintstring(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
+    var_0 setHintString(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
   } else if(isDefined(level.magic_wheel_spin_hint)) {
-    var_0 sethintstring(level.magic_wheel_spin_hint);
+    var_0 setHintString(level.magic_wheel_spin_hint);
   } else {
-    var_0 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+    var_0 setHintString(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
   }
 }
 
@@ -895,7 +895,7 @@ func_10C4D(var_0, var_1, var_2) {
 
   foreach(var_5 in level.var_B163) {
     if(var_5.area_name == level.var_A8E2) {
-      var_5 sethintstring(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
+      var_5 setHintString(&"COOP_INTERACTIONS_SPIN_WHEEL_FIRE_SALE");
       var_3 = var_5;
       continue;
     }
@@ -928,9 +928,9 @@ func_4DB4(var_0, var_1, var_2) {
         func_BC3F();
       } else if(var_5 == var_2) {
         if(isDefined(level.magic_wheel_spin_hint)) {
-          var_5 sethintstring(level.magic_wheel_spin_hint);
+          var_5 setHintString(level.magic_wheel_spin_hint);
         } else {
-          var_5 sethintstring(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
+          var_5 setHintString(&"CP_ZMB_INTERACTIONS_SPIN_WHEEL");
         }
 
         continue;

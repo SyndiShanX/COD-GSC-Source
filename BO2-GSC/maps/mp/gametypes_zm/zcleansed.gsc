@@ -668,7 +668,7 @@ destroystartmsghud() {
 
 delay_box_hide() {
   wait 2.0;
-  start_chest = getstruct("start_chest", "script_noteworthy");
+  start_chest = getStruct("start_chest", "script_noteworthy");
 
   if(isDefined(start_chest)) {
     start_chest maps\mp\zombies\_zm_magicbox::hide_chest();
@@ -845,7 +845,7 @@ cover_transition() {
 }
 
 disappear_in_flash(washuman) {
-  playsoundatposition("zmb_bolt", self.origin);
+  playSoundAtPosition("zmb_bolt", self.origin);
 
   if(washuman) {
     playFX(level._effect["human_disappears"], self.origin);
@@ -945,20 +945,20 @@ playerfakedeath(vdir) {
 
     if(isDefined(vdir) && length(vdir) > 0) {
       xyspeedmag = 40 + randomint(12) + randomint(12);
-      xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+      xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
     }
 
     linker = spawn("script_origin", (0, 0, 0));
     linker.origin = origin;
     linker.angles = angles;
     self._fall_down_anchor = linker;
-    self playerlinkto(linker);
+    self playerlinkTo(linker);
     self playsoundtoplayer("zmb_player_death_fall", self);
     origin = playerphysicstrace(origin, origin + xyspeed);
     origin = origin + vectorscale((0, 0, -1), 52.0);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
     self freezecontrolswrapper(1);
     linker waittill("movedone");
     self giveweapon("death_throe_zm");
@@ -966,13 +966,13 @@ playerfakedeath(vdir) {
     bounce = randomint(4) + 8;
     origin = origin + (0, 0, bounce) - xyspeed * 0.1;
     lerptime = bounce / 50.0;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = origin + (0, 0, bounce * -1) + xyspeed * 0.1;
     lerptime = lerptime / 2.0;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
     wait 5;
     linker delete();
     self.ignoreme = 0;
@@ -1832,7 +1832,7 @@ turned_powerup_yellow_nuke(player) {
 playturnedmusic() {
   ent = spawn("script_origin", (0, 0, 0));
   ent thread stopturnedmusic();
-  playsoundatposition("mus_zmb_gamemode_start", (0, 0, 0));
+  playSoundAtPosition("mus_zmb_gamemode_start", (0, 0, 0));
   wait 5;
   ent playLoopSound("mus_zmb_gamemode_loop", 5);
 }

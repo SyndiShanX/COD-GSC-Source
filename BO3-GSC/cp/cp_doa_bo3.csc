@@ -265,7 +265,7 @@ function function_c8020bd9(localclientnum) {
   setuimodelvalue(createuimodel(level.var_7e2a814c, "gpr1"), 0);
   setuimodelvalue(createuimodel(level.var_7e2a814c, "gpr2"), 0);
   setuimodelvalue(createuimodel(level.var_7e2a814c, "gpr3"), 0);
-  foreach(player in getplayers(localclientnum)) {
+  foreach(player in getPlayers(localclientnum)) {
     setuimodelvalue(getuimodel(level.var_b9d30140[player getentitynumber()], "generic_txt"), "");
   }
   setDvar("doa_redins_rally", 0);
@@ -374,7 +374,7 @@ function function_787f2b69(localclientnum) {
       setuimodelvalue(getuimodel(level.var_b9d30140[i], "name"), "");
       setuimodelvalue(getuimodel(level.var_b9d30140[i], "generic_txt"), "");
     }
-    foreach(player in getplayers(localclientnum)) {
+    foreach(player in getPlayers(localclientnum)) {
       setuimodelvalue(getuimodel(level.var_b9d30140[player getentitynumber()], "name"), "");
       setuimodelvalue(getuimodel(level.var_b9d30140[player getentitynumber()], "generic_txt"), (isDefined(player.name) ? player.name : ""));
       switch (player getentitynumber()) {

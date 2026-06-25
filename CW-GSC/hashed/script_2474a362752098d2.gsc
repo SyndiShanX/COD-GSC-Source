@@ -142,7 +142,7 @@ function function_bcedb01d() {
       if(!isDefined(item.script_model)) {
         var_10316202 = 0;
 
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           distsq = distancesquared(player.origin, item.origin);
 
           if(distsq < sqr(2000)) {
@@ -168,7 +168,7 @@ function function_bcedb01d() {
 
       var_191a010a = 1;
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(abs(player.origin[2] - item.origin[2]) > 1000) {
           continue;
         }
@@ -248,7 +248,7 @@ function function_3bfccb4() {
   var_2158df5f = self.doa.var_a594a0d0;
   var_2158df5f.origin = self.origin + (0, 0, -30000);
   var_2158df5f.var_806ce8f = undefined;
-  var_2158df5f sethintstring(#"");
+  var_2158df5f setHintString(#"");
   var_2158df5f triggerenable(0);
   self.doa.var_96175d8a = undefined;
 }
@@ -290,7 +290,7 @@ function function_8328d4bc(item) {
   }
 
   if(item.var_cbff4088 == -1) {
-    if(getplayers().size <= 2) {
+    if(getPlayers().size <= 2) {
       item.var_cbff4088 = 1;
     } else {
       item.var_cbff4088 = 2;
@@ -303,41 +303,41 @@ function function_8328d4bc(item) {
 
   self.lastitem = self.var_806ce8f;
   self.var_806ce8f = item;
-  self sethintstring(#"hash_bf1faaf9f4ab783");
+  self setHintString(#"hash_bf1faaf9f4ab783");
 
   switch (item.var_d6118311) {
     case 9:
-      self sethintstring(#"hash_116cdb7f4910b48f");
+      self setHintString(#"hash_116cdb7f4910b48f");
       break;
     case 4:
       if(is_true(level.doa.hardcoremode)) {
-        self sethintstring(#"hash_7ee185f0146bd791");
+        self setHintString(#"hash_7ee185f0146bd791");
         break;
       }
 
       fate = item.data;
 
       if(self.player namespace_1c2a96f9::function_afe89b8c(fate.var_c8386627)) {
-        self sethintstring(#"hash_35d21b3088f19ee7");
+        self setHintString(#"hash_35d21b3088f19ee7");
       } else {
-        self sethintstring(#"hash_26f6da6f6ca5dfa4");
+        self setHintString(#"hash_26f6da6f6ca5dfa4");
       }
 
       break;
     case 1:
-      self sethintstring(#"hash_226d9049ece37c17");
+      self setHintString(#"hash_226d9049ece37c17");
       break;
     case 8:
       if(self.doorstate === 1) {
-        self sethintstring(#"hash_7ee185f0146bd791");
+        self setHintString(#"hash_7ee185f0146bd791");
       } else {
-        self sethintstring(#"hash_1830b9b637fcebaa");
+        self setHintString(#"hash_1830b9b637fcebaa");
       }
 
       break;
     case 2:
       if(isDefined(item.var_fc5f2aa0) && isDefined(item.var_fc5f2aa0.var_115ea089) && isDefined(item.var_fc5f2aa0.hintstring)) {
-        ent = getent(item.var_fc5f2aa0.var_115ea089, "script_noteworthy");
+        ent = getEnt(item.var_fc5f2aa0.var_115ea089, "script_noteworthy");
 
         if(!isDefined(ent)) {
           item.var_fc5f2aa0.hintstring = item.var_fc5f2aa0.var_e8dff5e5;
@@ -346,11 +346,11 @@ function function_8328d4bc(item) {
       }
 
       if(isDefined(item.var_fc5f2aa0) && isDefined(item.var_fc5f2aa0.hintstring)) {
-        self sethintstring(item.var_fc5f2aa0.hintstring);
+        self setHintString(item.var_fc5f2aa0.hintstring);
       } else if(self.player.doa.score.keys == 0) {
-        self sethintstring(#"hash_5c2a90001a3be8b5");
+        self setHintString(#"hash_5c2a90001a3be8b5");
       } else {
-        self sethintstring(#"hash_156739736ad89c28");
+        self setHintString(#"hash_156739736ad89c28");
       }
 
       break;
@@ -358,24 +358,24 @@ function function_8328d4bc(item) {
     case 7:
       if(is_true(item.locked)) {
         if(self.player.doa.score.keys == 0) {
-          self sethintstring(#"hash_2f8c4610353b9754");
+          self setHintString(#"hash_2f8c4610353b9754");
         } else {
-          self sethintstring(#"hash_692637e6361aa6fd");
+          self setHintString(#"hash_692637e6361aa6fd");
         }
       } else {
-        self sethintstring(#"hash_7c3502418402b5ea");
+        self setHintString(#"hash_7c3502418402b5ea");
       }
 
       break;
     case 6:
       if(is_true(level.doa.hardcoremode)) {
-        self sethintstring(#"hash_7ee185f0146bd791");
+        self setHintString(#"hash_7ee185f0146bd791");
         break;
       }
 
       if(is_true(item.locked)) {
         if(self.player.doa.score.keys == 0) {
-          self sethintstring(#"hash_39ebdbb0226b329f");
+          self setHintString(#"hash_39ebdbb0226b329f");
 
           if(namespace_ec06fe4a::function_a8975c67()) {
             if(isDefined(self.lastitem) && self.lastitem != self.var_806ce8f) {
@@ -383,33 +383,33 @@ function function_8328d4bc(item) {
             }
           }
         } else if(item.var_cbff4088 > 1 && item.var_cbff4088 != item.var_950bcf12) {
-          self sethintstring(#"hash_7b23848ec07aad08");
+          self setHintString(#"hash_7b23848ec07aad08");
         } else {
-          self sethintstring(#"hash_54b6fea6bd91db7c");
+          self setHintString(#"hash_54b6fea6bd91db7c");
         }
       } else {
-        self sethintstring(#"hash_20c1284622784d1d");
+        self setHintString(#"hash_20c1284622784d1d");
       }
 
       break;
     case 10:
       if(is_true(item.locked)) {
         if(self.player.doa.score.keys == 0) {
-          self sethintstring(#"hash_58986e95c81fb59f");
+          self setHintString(#"hash_58986e95c81fb59f");
         } else {
-          self sethintstring(#"hash_14f6fd1b195d968f");
+          self setHintString(#"hash_14f6fd1b195d968f");
         }
       } else {
-        self sethintstring(#"hash_2eb890855923e721");
+        self setHintString(#"hash_2eb890855923e721");
       }
 
       break;
     case 3:
       if(is_true(item.locked)) {
         if(self.player.doa.score.keys == 0) {
-          self sethintstring(#"hash_ce3afacfc4ce084");
+          self setHintString(#"hash_ce3afacfc4ce084");
         } else {
-          self sethintstring(#"hash_d0088d8ea0c0b0d");
+          self setHintString(#"hash_d0088d8ea0c0b0d");
         }
       } else {
         switch (item.loottype) {
@@ -417,18 +417,18 @@ function function_8328d4bc(item) {
           case 2:
           case 3:
           case 4:
-            self sethintstring(#"hash_7dbf76733550293a");
+            self setHintString(#"hash_7dbf76733550293a");
             break;
           case 6:
-            self sethintstring(#"hash_4bfbefc2b26dbccf");
+            self setHintString(#"hash_4bfbefc2b26dbccf");
             self function_dae4ab9b(0.15);
             break;
           case 12:
-            self sethintstring(#"hash_2ae2e0909bc1c560");
+            self setHintString(#"hash_2ae2e0909bc1c560");
             self function_dae4ab9b(0.15);
             break;
           default:
-            self sethintstring(#"hash_49306fb46908df39");
+            self setHintString(#"hash_49306fb46908df39");
             break;
         }
       }
@@ -443,7 +443,7 @@ function function_f143eef7() {
   usetrigger = namespace_ec06fe4a::spawntrigger("trigger_radius_use", (0, 0, 0), 0, 96, 96);
 
   if(isDefined(usetrigger)) {
-    usetrigger setcursorhint("HINT_NOICON");
+    usetrigger setCursorHint("HINT_NOICON");
     usetrigger callback::on_trigger(&onusecallback);
   }
 
@@ -478,7 +478,7 @@ function onusecallback(trigger_struct) {
       case 2:
         if(isDefined(targ.var_fc5f2aa0)) {
           if(isDefined(targ.var_fc5f2aa0.var_115ea089)) {
-            ent = getent(targ.var_fc5f2aa0.var_115ea089, "script_noteworthy");
+            ent = getEnt(targ.var_fc5f2aa0.var_115ea089, "script_noteworthy");
 
             if(isDefined(ent)) {
               profilestop();
@@ -489,7 +489,7 @@ function onusecallback(trigger_struct) {
             targ.var_d6118311 = 1;
           }
         } else {
-          player playrumbleonentity("door_kick");
+          player playRumbleOnEntity("door_kick");
 
           if(player.doa.score.keys == 0) {
             targ namespace_e32bb68::function_3a59ec34("door_locked");
@@ -545,7 +545,7 @@ function onusecallback(trigger_struct) {
       case 10:
         if(is_true(targ.locked)) {
           assert(targ.var_95b43d0 > 0);
-          player playrumbleonentity("door_kick");
+          player playRumbleOnEntity("door_kick");
 
           if(player.doa.score.keys == 0) {
             targ namespace_e32bb68::function_3a59ec34("item_locked");
@@ -578,7 +578,7 @@ function onusecallback(trigger_struct) {
         }
 
         if(is_true(targ.locked)) {
-          player playrumbleonentity("door_kick");
+          player playRumbleOnEntity("door_kick");
 
           if(player.doa.score.keys == 0) {
             targ namespace_e32bb68::function_3a59ec34("item_locked");

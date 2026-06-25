@@ -158,7 +158,7 @@ function inithelicopterseat(index, destroytag) {
   assistant.targetent = spawn("script_model", (0, 0, 0));
   assistant.targetent.usevtoltime = 1;
   assistant.targetent setModel("p7_dogtags_enemy");
-  assistant.targetent linkto(level.vtol, assistant.targettag, (0, 0, 0), (0, 0, 0));
+  assistant.targetent linkTo(level.vtol, assistant.targettag, (0, 0, 0), (0, 0, 0));
   assistant.targetent.team = level.vtol.team;
   target_set(assistant.targetent, (0, 0, 0));
   target_setallowhighsteering(assistant.targetent, 1);
@@ -232,7 +232,7 @@ function spawnheligunner() {
     return 0;
   }
   startnode = level.heli_primary_path[0];
-  level.vtol = spawnvehicle("veh_bo3_mil_gunship_mp", startnode.origin, startnode.angles, "dynamic_spawn_ai");
+  level.vtol = spawnVehicle("veh_bo3_mil_gunship_mp", startnode.origin, startnode.angles, "dynamic_spawn_ai");
   level.vtol killstreaks::configure_team("helicopter_gunner", killstreak_id, player, "helicopter");
   level.vtol killstreak_hacking::enable_hacking("helicopter_gunner", &hackedprefunction, &hackedpostfunction);
   level.vtol.killstreak_id = killstreak_id;
@@ -431,7 +431,7 @@ function enterhelicopter(isowner) {
   killcament setModel("tag_origin");
   killcament.angles = (0, 0, 0);
   killcament setweapon(getweapon("helicopter_gunner_turret_primary"));
-  killcament linkto(level.vtol, "tag_barrel", (370, 0, 25), (0, 0, 0));
+  killcament linkTo(level.vtol, "tag_barrel", (370, 0, 25), (0, 0, 0));
   level.vtol.killcament = killcament;
   level.vtol.usage[player.entnum] = 1;
   level.vtol thread audio::sndupdatevehiclecontext(1);
@@ -564,7 +564,7 @@ function allowmainturretlockon() {
     if(!isDefined(helicopter.targetent)) {
       helicopter.targetent = spawn("script_model", (0, 0, 0));
       helicopter.targetent setModel("p7_dogtags_enemy");
-      helicopter.targetent linkto(level.vtol, "tag_barrel", (0, 0, 0), (0, 0, 0));
+      helicopter.targetent linkTo(level.vtol, "tag_barrel", (0, 0, 0), (0, 0, 0));
       helicopter.targetent.parent = level.vtol;
       helicopter.targetent.team = level.vtol.team;
       target_set(helicopter.targetent, (0, 0, 0));
@@ -694,7 +694,7 @@ function helicoptergunnerdamageoverride(einflictor, eattacker, idamage, idflags,
     if(helicopter.assistants[0].destroyed && helicopter.assistants[1].destroyed && !isDefined(helicopter.targetent)) {
       helicopter.targetent = spawn("script_model", (0, 0, 0));
       helicopter.targetent setModel("p7_dogtags_enemy");
-      helicopter.targetent linkto(level.vtol, "tag_barrel", (0, 0, 0), (0, 0, 0));
+      helicopter.targetent linkTo(level.vtol, "tag_barrel", (0, 0, 0), (0, 0, 0));
       helicopter.targetent.parent = level.vtol;
       helicopter.targetent.team = level.vtol.team;
       target_set(helicopter.targetent, (0, 0, 0));
@@ -814,7 +814,7 @@ function playlockonsoundsthread(player, heli) {
   heli endon("leaving");
   heli.locksounds = spawn("script_model", heli.origin);
   wait(0.1);
-  heli.locksounds linkto(heli, "tag_player");
+  heli.locksounds linkTo(heli, "tag_player");
   while(true) {
     heli waittill("hash_b081980b");
     while(true) {
@@ -848,7 +848,7 @@ function helicopterthinkthread(startnode, destnodes) {
   self endon("death");
   self endon("crashing");
   self endon("leaving");
-  nextnode = getent(startnode.target, "targetname");
+  nextnode = getEnt(startnode.target, "targetname");
   assert(isDefined(nextnode), "");
   self setspeed(150, 80);
   self setvehgoalpos(nextnode.origin + (0, 0, 2000), 1);
@@ -857,7 +857,7 @@ function helicopterthinkthread(startnode, destnodes) {
   if(!self.playermovedrecently) {
     node = self updateareanodes(destnodes, 0);
     level.vtol.currentnode = node;
-    targetnode = getent(node.target, "targetname");
+    targetnode = getEnt(node.target, "targetname");
     traveltonode(targetnode);
     if(isDefined(targetnode.script_airspeed) && isDefined(targetnode.script_accel)) {
       heli_speed = targetnode.script_airspeed;
@@ -921,7 +921,7 @@ function watchlocationchangethread(destnodes) {
       player thread setplayermovedrecentlythread();
       node = self updateareanodes(destnodes, 1);
       helicopter.currentnode = node;
-      targetnode = getent(node.target, "targetname");
+      targetnode = getEnt(node.target, "targetname");
       player playlocalsound("mpl_cgunner_nav");
       helicopter traveltonode(targetnode);
       if(isDefined(targetnode.script_airspeed) && isDefined(targetnode.script_accel)) {
@@ -983,7 +983,7 @@ function updateareanodes(areanodes, forcemove) {
     if(isDefined(level.vtol.currentnode) && node == level.vtol.currentnode) {
       continue;
     }
-    helinode = getent(node.target, "targetname");
+    helinode = getEnt(node.target, "targetname");
     foreach(player in node.validplayers) {
       node.nodescore = node.nodescore + 1;
       if(bullettracepassed(player.origin + vectorscale((0, 0, 1), 32), helinode.origin, 0, player)) {

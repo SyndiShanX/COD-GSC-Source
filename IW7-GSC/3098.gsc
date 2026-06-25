@@ -149,7 +149,7 @@ func_1112F() {
 
 func_31C0() {
   var_0 = scripts\engine\utility::spawn_tag_origin();
-  var_0 linkto(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
+  var_0 linkTo(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
   self.var_4074[self.var_4074.size] = var_0;
   return var_0;
 }
@@ -189,7 +189,7 @@ func_A1D5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_4)) {
     var_10 = spawn("script_origin", self.origin);
-    var_10 linkto(self);
+    var_10 linkTo(self);
     self.var_4074[self.var_4074.size] = var_10;
     thread func_A1D3(var_10, var_4);
   }
@@ -449,7 +449,7 @@ func_A381() {
         }
 
         self.var_A381 ghostattack(var_1, 0.1);
-        self.var_A381 moveto(var_4, 0.1);
+        self.var_A381 moveTo(var_4, 0.1);
         wait 0.2;
       }
     } else if(var_5 > var_2) {

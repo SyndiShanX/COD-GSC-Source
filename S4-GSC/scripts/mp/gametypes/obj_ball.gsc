@@ -226,7 +226,7 @@ _id_2155(var_0, var_1) {
     var_5 = spawn("trigger_radius", var_3.origin - (0, 0, var_4 / 2), 0, var_4, var_4);
 
   var_5 _meth_80DB();
-  var_5 linkto(var_3);
+  var_5 linkTo(var_3);
   var_5._id_A51C = 1;
   var_5._id_9514 = 1;
   var_5._id_2323 = var_5.origin;
@@ -462,7 +462,7 @@ _id_2137(var_0, var_1) {
   self._id_10430[0] _id_E89D();
   self._id_10430[0] show();
   self._id_10430[0] hide(1);
-  self._id_10430[0] linkto(var_0, "j_wrist_ri", (0, 0, 0), var_0.angles);
+  self._id_10430[0] linkTo(var_0, "j_wrist_ri", (0, 0, 0), var_0.angles);
   self._id_10430[0] setscriptablepartstate("uplink_drone_hide", "hide", 0);
   self.trigger scripts\mp\movers::_id_E8A3();
   self._id_419D._id_7D7E = 0;
@@ -788,7 +788,7 @@ _id_213A() {
 
   if(scripts\mp\utility\game::getgametype() != "tdef") {
     _id_07D6::_id_D684(var_0._id_2323 + (0, 0, 4000), (0, 0, 0));
-    var_0 moveto(var_0._id_2323, 3, 0, 3);
+    var_0 moveTo(var_0._id_2323, 3, 0, 3);
     var_0 rotatevelocity((0, 720, 0), 3, 0, 3);
   } else {
     if(!level._id_F263) {
@@ -1041,12 +1041,12 @@ _id_213E(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     self._id_BD9B = scripts\cp_mp\utility\weapon_utility::_magicbullet(makeweapon("uplinkball_tracking_mp"), var_7 + var_6 * var_10, var_8, var_0);
-    self._id_BD9B missile_settargetent(var_1, var_1 _id_6DC1());
+    self._id_BD9B missile_settargetEnt(var_1, var_1 _id_6DC1());
   }
 
   self.trigger.origin = self.trigger.origin - (0, 0, 10000);
   var_1 thread _id_1194(self._id_BD9B);
-  self._id_10430[0] linkto(self._id_BD9B);
+  self._id_10430[0] linkTo(self._id_BD9B);
   _id_211B();
   _id_2118();
   _id_2115();
@@ -1124,7 +1124,7 @@ _id_FF4F(var_0, var_1, var_2) {
     return 0;
   }
 
-  var_8 = vectornormalize(var_6 - var_4);
+  var_8 = vectorNormalize(var_6 - var_4);
   var_9 = vectordot(var_5, var_8);
 
   if(var_9 > var_3) {
@@ -1209,7 +1209,7 @@ _id_1194(var_0) {
   var_0 endon("pass_end");
 
   while(isDefined(var_1) && isDefined(var_0)) {
-    var_0 missile_settargetent(var_1, var_1 _id_6DC1());
+    var_0 missile_settargetEnt(var_1, var_1 _id_6DC1());
     waitframe();
   }
 }
@@ -1372,7 +1372,7 @@ _id_215A() {
 
   for(;;) {
     if(isDefined(var_0)) {
-      self._id_9026 = vectornormalize(self._id_BD9B.origin - var_0);
+      self._id_9026 = vectorNormalize(self._id_BD9B.origin - var_0);
     }
 
     var_0 = self._id_BD9B.origin;
@@ -1460,7 +1460,7 @@ _id_2144(var_0, var_1) {
     }
 
     var_6 = var_3;
-    var_7 = vectornormalize(var_0) * 80;
+    var_7 = vectorNormalize(var_0) * 80;
     var_8 = ["physicscontents_clipshot", "physicscontents_missileclip", "physicscontents_vehicle", "physicscontents_characterproxy", "physicscontents_glass", "physicscontents_itemclip"];
     var_9 = physics_createcontents(var_8);
     var_10 = scripts\engine\trace::_id_E409(var_6, var_6 + var_7, 38, var_1, var_9);
@@ -1477,7 +1477,7 @@ _id_2144(var_0, var_1) {
   self._id_10430[0] physics_registerforcollisioncallback();
   scripts\mp\utility\entity::_id_C208(self._id_10430[0], ::_id_212F);
   self._id_10430[0].origin = self.trigger.origin;
-  self.trigger linkto(self._id_10430[0]);
+  self.trigger linkTo(self._id_10430[0]);
   level._id_3A18 = self._id_10430[0];
   level._id_3A1B = var_4;
   level._id_3A1A = var_0;
@@ -1537,7 +1537,7 @@ _id_2143(var_0) {
   } else
     var_4 = length(var_3) / 10;
 
-  var_5 = vectornormalize(var_3);
+  var_5 = vectorNormalize(var_3);
   var_5 = (-1, -1, -0.5) * var_5;
   var_1 physicslaunchserver(var_1.origin, (0, 0, 0));
   var_1 _meth_8545();
@@ -1668,12 +1668,12 @@ _id_E6BA() {
   self notify("hoverAnimStart");
   self endon("hoverAnimStart");
   var_0 = self._id_10430[0].origin;
-  self._id_10430[0] rotateyaw(2000, 60, 0.2, 0.2);
+  self._id_10430[0] rotateYaw(2000, 60, 0.2, 0.2);
 
   for(;;) {
-    self._id_10430[0] moveto(var_0 + (0, 0, 5), 1, 0.5, 0.5);
+    self._id_10430[0] moveTo(var_0 + (0, 0, 5), 1, 0.5, 0.5);
     wait 1;
-    self._id_10430[0] moveto(var_0 - (0, 0, 5), 1, 0.5, 0.5);
+    self._id_10430[0] moveTo(var_0 - (0, 0, 5), 1, 0.5, 0.5);
     wait 1;
   }
 }
@@ -1910,7 +1910,7 @@ _id_2118() {
   }
 
   self.killcament = spawn("script_model", self._id_10430[0].origin);
-  self.killcament linkto(self._id_10430[0]);
+  self.killcament linkTo(self._id_10430[0]);
   self.killcament notsolid();
   self.killcament _meth_8375("explosive");
 }
@@ -2183,7 +2183,7 @@ _id_A224() {
             break;
         }
 
-        level._id_21B2[0]._id_10430[0] moveto(self.origin + (0, 0, var_0), 0.3, 0.15, 0.1);
+        level._id_21B2[0]._id_10430[0] moveTo(self.origin + (0, 0, var_0), 0.3, 0.15, 0.1);
         wait 0.1;
       }
     }

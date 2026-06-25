@@ -25,6 +25,6 @@ main() {
 }
 
 animate_fan() {
-  var_0 = getent("sphere_fan_animated_01", "targetname");
+  var_0 = getEnt("sphere_fan_animated_01", "targetname");
   var_0 _meth_82CC("s4_mp_electronics_fan_box_01_spin");
 }

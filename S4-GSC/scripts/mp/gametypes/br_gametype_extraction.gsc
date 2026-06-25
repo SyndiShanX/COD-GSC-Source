@@ -131,7 +131,7 @@ _id_6A28() {
   var_4 = level._id_2A73._id_2A25[0] * 2;
   var_5 = var_1 + var_3 * var_4;
   var_5 = scripts\mp\gametypes\br_c130::_id_DEAF(var_1, var_5);
-  var_6 = getent("airstrikeheight", "targetname");
+  var_6 = getEnt("airstrikeheight", "targetname");
   var_7 = (var_5[0], var_5[1], var_6.origin[2]);
   var_8 = _id_F3CB(var_7);
   var_5 = var_8 + (0, 0, var_0);
@@ -941,7 +941,7 @@ _id_4C85(var_0, var_1, var_2) {
     var_4.angles = var_3.angles;
     var_4.spawntype = "GAME_MODE";
     var_5 = spawnStruct();
-    var_6 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnvehicle("little_bird", var_4, var_5);
+    var_6 = scripts\cp_mp\vehicles\vehicle_spawn::vehicle_spawn_spawnVehicle("little_bird", var_4, var_5);
 
     if(isDefined(var_6)) {
       var_3._id_DD67 = var_0;
@@ -1001,7 +1001,7 @@ _id_B691(var_0, var_1) {
 
 _id_B7CF(var_0) {
   var_1 = var_0;
-  var_2 = getent("airstrikeheight", "targetname");
+  var_2 = getEnt("airstrikeheight", "targetname");
   var_3 = var_2.origin[2] - 300;
   var_4 = (var_1[0], var_1[1], var_3);
   var_5 = (0, randomfloat(360), 0);
@@ -1023,7 +1023,7 @@ _id_5030(var_0) {
 
   if(var_7 > 0) {
     var_8 = _func_0218(2 * var_7 / 800);
-    var_1 moveto(var_6, var_8, var_8, 0);
+    var_1 moveTo(var_6, var_8, var_8, 0);
     wait(var_8);
   }
 
@@ -1136,11 +1136,11 @@ _id_77C3() {
   self._id_FDB2 = self._id_3E6D;
   var_0 = self._id_FDB2;
   var_0 makeuseable();
-  var_0 setcursorhint("HINT_NOICON");
+  var_0 setCursorHint("HINT_NOICON");
   var_0 setuseholdduration("duration_medium");
   var_0 sethintrequiresholding(1);
   var_0 setuserange(230);
-  var_0 sethintstring(&"MP/BR_USE_PLUNDER_CACHE");
+  var_0 setHintString(&"MP/BR_USE_PLUNDER_CACHE");
   var_1 = level._id_2A35.size;
   level._id_2A35[var_1] = var_0;
 

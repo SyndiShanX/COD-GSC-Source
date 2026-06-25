@@ -105,7 +105,7 @@ function_834ab8cc() {
 
 function_ee662714() {
   level.var_9912ef7a = "p8_fxanim_zm_white_perk_machine_dummy_fly_in";
-  level.var_dcd1e798 = getent("perk_machine_mover", "targetname");
+  level.var_dcd1e798 = getEnt("perk_machine_mover", "targetname");
   level.var_dcd1e798 useanimtree("generic");
 }
 
@@ -113,7 +113,7 @@ function_22bf8bd4(n_perk_index) {
   assert(isDefined(n_perk_index) && n_perk_index > -1 && n_perk_index < 5, "<dev string:x62>");
 
   if(n_perk_index == 4) {
-    var_5e879929 = getent("zm_pack_a_punch", "targetname");
+    var_5e879929 = getEnt("zm_pack_a_punch", "targetname");
     var_fc50707f = getEntArray("zm_random_machine_blocker", "script_noteworthy");
     var_46d6340f = arraygetclosest(var_5e879929.origin, var_fc50707f);
     var_46d6340f thread function_da95f7();
@@ -168,7 +168,7 @@ function_71461330() {
   var_ebfeac73 setModel("p7_zm_vending_packapunch");
   var_ebfeac73 hide();
   level.var_dcd1e798.origin = var_ebfeac73.origin;
-  var_ebfeac73 linkto(level.var_dcd1e798, "tag_animate_origin");
+  var_ebfeac73 linkTo(level.var_dcd1e798, "tag_animate_origin");
   level.var_dcd1e798 thread animation::play(level.var_9912ef7a);
   waitframe(2);
   var_ebfeac73 show();
@@ -184,7 +184,7 @@ function_4204dba2() {
   var_2379bb0e setModel(e_machine.model);
   var_2379bb0e hide();
   level.var_dcd1e798.origin = var_2379bb0e.origin;
-  var_2379bb0e linkto(level.var_dcd1e798, "tag_animate_origin");
+  var_2379bb0e linkTo(level.var_dcd1e798, "tag_animate_origin");
   level.var_dcd1e798 thread animation::play(level.var_9912ef7a);
   waitframe(2);
   var_2379bb0e show();

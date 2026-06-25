@@ -704,7 +704,7 @@ bb_getlocomotionexityaw(blackboard, yaw) {
         return exityaw;
       }
 
-      exityaw = getangleusingdirection(vectornormalize(self.pathgoalpos - self.origin));
+      exityaw = getangleusingdirection(vectorNormalize(self.pathgoalpos - self.origin));
 
       record3dtext("<dev string:x82>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x75>", undefined, 0.4);
 
@@ -1819,7 +1819,7 @@ shouldchargemelee(entity) {
     return false;
   }
 
-  offset = entity.enemy.origin - vectornormalize(entity.enemy.origin - entity.origin) * 36;
+  offset = entity.enemy.origin - vectorNormalize(entity.enemy.origin - entity.origin) * 36;
 
   if(enemydistsq < 140 * 140 && entity maymovetopoint(offset, 1, 1)) {
     yawtoenemy = angleclamp180(entity.angles[1] - vectortoangles(entity.enemy.origin - entity.origin)[1]);
@@ -2138,7 +2138,7 @@ generictryreacquireservice(behaviortreeentity) {
     return false;
   }
 
-  dirtoenemy = vectornormalize(behaviortreeentity.enemy.origin - behaviortreeentity.origin);
+  dirtoenemy = vectorNormalize(behaviortreeentity.enemy.origin - behaviortreeentity.origin);
   forward = anglesToForward(behaviortreeentity.angles);
 
   if(vectordot(dirtoenemy, forward) < 0.5) {

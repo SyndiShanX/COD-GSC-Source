@@ -280,7 +280,7 @@ event_handler[level_init] main(eventstruct) {
   scene::add_scene_func("p_zm_seer_stone_s_in_male", &function_78276077, "done");
   scene::add_scene_func("p_zm_seer_stone_s_out_male", &function_48276a5e, "play");
 
-  t_kill_ai = getent("<dev string:x84>", "<dev string:x90>");
+  t_kill_ai = getEnt("<dev string:x84>", "<dev string:x90>");
   t_kill_ai callback::on_trigger(&function_d4ff1dd6);
 }
 
@@ -495,7 +495,7 @@ function_4972130a() {
 update_player_hud(str_type) {
   switch (str_type) {
     case #"ww2":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isDefined(player.hud_ww)) {
           player.hud_ww settext("<dev string:xac>" + level.var_8442091f + "<dev string:xba>");
         }
@@ -503,7 +503,7 @@ update_player_hud(str_type) {
 
       break;
     case #"ww3":
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         if(isDefined(player.hud_ww)) {
           player.hud_ww settext("<dev string:xc2>" + level.var_6930d2fd + "<dev string:xd0>");
         }
@@ -525,7 +525,7 @@ function_91430bcc(str_weapon) {
   }
 
   while(!b_ww_obtained) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       a_weapons = player getweaponslistprimaries();
 
       foreach(weapon in a_weapons) {
@@ -543,7 +543,7 @@ function_91430bcc(str_weapon) {
 
 function_ea36bce3(str_weapon) {
   if(str_weapon == "ww2") {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if(isDefined(player.hud_ww)) {
         player.hud_ww settext("<dev string:xc2>" + level.var_6930d2fd + "<dev string:xd0>");
       }
@@ -554,7 +554,7 @@ function_ea36bce3(str_weapon) {
 
   level flag::set("ww3_obtained");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(isDefined(player.hud_ww)) {
       player.hud_ww destroy();
     }
@@ -899,9 +899,9 @@ function_2d164b86() {
     level.var_229f30cd = &function_d9848d71;
   }
 
-  mdl_artifact = getent("artifact_mind", "script_noteworthy");
-  var_3f772556 = getent("artifact_mind_card", "targetname");
-  var_3f772556 linkto(mdl_artifact);
+  mdl_artifact = getEnt("artifact_mind", "script_noteworthy");
+  var_3f772556 = getEnt("artifact_mind_card", "targetname");
+  var_3f772556 linkTo(mdl_artifact);
   mdl_artifact clientfield::set("" + #"activate_mansion_artifact", 1);
   var_3f772556 clientfield::set("" + #"activate_mansion_artifact_card", 1);
   mdl_artifact notsolid();
@@ -909,7 +909,7 @@ function_2d164b86() {
   fx_holder = util::spawn_model("tag_origin", mdl_artifact.origin, mdl_artifact.angles);
 
   if(zm_utility::is_standard()) {
-    var_6152b664 = getent("use_elec_switch", "targetname");
+    var_6152b664 = getEnt("use_elec_switch", "targetname");
     var_6152b664 triggerenable(0);
   }
 
@@ -957,7 +957,7 @@ function_2d164b86() {
   mdl_artifact clientfield::set("" + #"activate_mansion_artifact", 3);
   var_8a281f69 = getvehiclenode("power_on_projectile_path_1", "targetname");
   v_pos = var_8a281f69.origin + (0, 0, -16);
-  mdl_artifact moveto(v_pos, 1.5, 1, 0.5);
+  mdl_artifact moveTo(v_pos, 1.5, 1, 0.5);
   mdl_artifact waittill(#"movedone");
 
   if(isalive(var_d11a4648)) {
@@ -970,13 +970,13 @@ function_2d164b86() {
   mdl_artifact delete();
 
   foreach(e_active_player in util::get_active_players()) {
-    e_active_player playrumbleonentity("zm_power_on_rumble");
+    e_active_player playRumbleOnEntity("zm_power_on_rumble");
   }
 
   fx_holder notify(#"stop_glow");
   fx_holder delete();
-  playsoundatposition(#"hash_3d8fef5997663b17", (0, 0, 0));
-  var_5314bd63 = getent("veh_power_on_projectile", "targetname");
+  playSoundAtPosition(#"hash_3d8fef5997663b17", (0, 0, 0));
+  var_5314bd63 = getEnt("veh_power_on_projectile", "targetname");
 
   for(i = 0; i < 4; i++) {
     var_a11e6097[i] = spawner::simple_spawn_single(var_5314bd63);
@@ -1157,7 +1157,7 @@ power_on_projectile_end(_hash) {
 
 power_on_impact() {
   self fx::play("power_on_impact", self.origin);
-  playsoundatposition(#"zmb_sq_souls_release", self.origin);
+  playSoundAtPosition(#"zmb_sq_souls_release", self.origin);
 }
 
 debris_scene(str_targetname, str_script_flag, var_d46cd47, var_d6d5180b) {
@@ -1338,7 +1338,7 @@ function_5bfd87e9() {
 
     if(isDefined(v_position)) {
       e_player dontinterpolate();
-      e_player setorigin(v_position);
+      e_player setOrigin(v_position);
     }
   }
 }
@@ -1737,11 +1737,11 @@ function_3f147b12(cmd) {
       zm_ai_nosferatu::function_74f25f8a(1, undefined, 1);
       break;
     case #"reset_rings":
-      level.mdl_ring_outer rotateto(level.mdl_ring_outer.v_start, 1);
+      level.mdl_ring_outer rotateTo(level.mdl_ring_outer.v_start, 1);
       level.mdl_ring_outer waittill(#"rotatedone");
-      level.mdl_ring_middle.angles rotateto(level.mdl_ring_middle.v_start, 1);
+      level.mdl_ring_middle.angles rotateTo(level.mdl_ring_middle.v_start, 1);
       level.mdl_ring_middle waittill(#"rotatedone");
-      level.mdl_ring_inner.angles rotateto(level.mdl_ring_inner.v_start, 1);
+      level.mdl_ring_inner.angles rotateTo(level.mdl_ring_inner.v_start, 1);
       level.mdl_ring_inner waittill(#"rotatedone");
       break;
     case #"solve_rings":
@@ -1767,9 +1767,9 @@ function_3f147b12(cmd) {
       level.var_71561996 = 1;
       level thread open_sesame();
     case #"hash_7b299dd5674009bb":
-      var_99a245 = getent("<dev string:x3bf9>", "<dev string:x90>");
-      var_d8f56b29 = getent("<dev string:x3c12>", "<dev string:x90>");
-      var_aa527474 = getent("<dev string:x3c28>", "<dev string:x90>");
+      var_99a245 = getEnt("<dev string:x3bf9>", "<dev string:x90>");
+      var_d8f56b29 = getEnt("<dev string:x3c12>", "<dev string:x90>");
+      var_aa527474 = getEnt("<dev string:x3c28>", "<dev string:x90>");
       var_99a245 magicgrenadetype(getweapon(#"eq_frag_grenade"), var_99a245.origin + (0, 0, 24), (0, 0, 1), 0.1);
       var_d8f56b29 magicgrenadetype(getweapon(#"eq_frag_grenade"), var_d8f56b29.origin + (0, 0, 24), (0, 0, 1), 0.1);
       var_aa527474 magicgrenadetype(getweapon(#"eq_frag_grenade"), var_aa527474.origin + (0, 0, 24), (0, 0, 1), 0.1);
@@ -1788,7 +1788,7 @@ function_3f147b12(cmd) {
         a_stones = array(a_stones);
       }
 
-      a_stones[a_stones.size] = getent("<dev string:x3bf9>", "<dev string:x90>");
+      a_stones[a_stones.size] = getEnt("<dev string:x3bf9>", "<dev string:x90>");
 
       if(!isDefined(a_stones)) {
         a_stones = [];
@@ -1796,7 +1796,7 @@ function_3f147b12(cmd) {
         a_stones = array(a_stones);
       }
 
-      a_stones[a_stones.size] = getent("<dev string:x3c12>", "<dev string:x90>");
+      a_stones[a_stones.size] = getEnt("<dev string:x3c12>", "<dev string:x90>");
 
       if(!isDefined(a_stones)) {
         a_stones = [];
@@ -1804,7 +1804,7 @@ function_3f147b12(cmd) {
         a_stones = array(a_stones);
       }
 
-      a_stones[a_stones.size] = getent("<dev string:x3c28>", "<dev string:x90>");
+      a_stones[a_stones.size] = getEnt("<dev string:x3c28>", "<dev string:x90>");
       spawners = getspawnerarray("<dev string:x3c62>", "<dev string:x90>");
 
       foreach(stone in a_stones) {
@@ -2209,7 +2209,7 @@ function_cdb82bab() {
     var_8f129c8e = array(var_8f129c8e);
   }
 
-  var_8f129c8e[var_8f129c8e.size] = getent("<dev string:x3f81>", "<dev string:x90>");
+  var_8f129c8e[var_8f129c8e.size] = getEnt("<dev string:x3f81>", "<dev string:x90>");
 
   if(!isDefined(var_8f129c8e)) {
     var_8f129c8e = [];
@@ -2217,7 +2217,7 @@ function_cdb82bab() {
     var_8f129c8e = array(var_8f129c8e);
   }
 
-  var_8f129c8e[var_8f129c8e.size] = getent("<dev string:x3f90>", "<dev string:x90>");
+  var_8f129c8e[var_8f129c8e.size] = getEnt("<dev string:x3f90>", "<dev string:x90>");
 
   if(!isDefined(var_8f129c8e)) {
     var_8f129c8e = [];
@@ -2225,7 +2225,7 @@ function_cdb82bab() {
     var_8f129c8e = array(var_8f129c8e);
   }
 
-  var_8f129c8e[var_8f129c8e.size] = getent("<dev string:x3fa4>", "<dev string:x90>");
+  var_8f129c8e[var_8f129c8e.size] = getEnt("<dev string:x3fa4>", "<dev string:x90>");
   level thread function_89244213(var_8f129c8e);
 
   do {
@@ -2260,7 +2260,7 @@ function_6802b9c8() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3cdf>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3cdf>", "<dev string:x90>");
 
   if(!isDefined(a_paintings)) {
     a_paintings = [];
@@ -2268,7 +2268,7 @@ function_6802b9c8() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3cec>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3cec>", "<dev string:x90>");
 
   if(!isDefined(a_paintings)) {
     a_paintings = [];
@@ -2276,7 +2276,7 @@ function_6802b9c8() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3cf9>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3cf9>", "<dev string:x90>");
 
   if(!isDefined(a_paintings)) {
     a_paintings = [];
@@ -2284,7 +2284,7 @@ function_6802b9c8() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3d06>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3d06>", "<dev string:x90>");
   array::thread_all(a_paintings, &clientfield::set, "<dev string:x3f5a>" + #"hash_11eb6b7dc7db71ad", 1);
 }
 
@@ -2297,7 +2297,7 @@ function_7a1bd36c() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3cdf>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3cdf>", "<dev string:x90>");
 
   if(!isDefined(a_paintings)) {
     a_paintings = [];
@@ -2305,7 +2305,7 @@ function_7a1bd36c() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3cec>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3cec>", "<dev string:x90>");
 
   if(!isDefined(a_paintings)) {
     a_paintings = [];
@@ -2313,7 +2313,7 @@ function_7a1bd36c() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3cf9>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3cf9>", "<dev string:x90>");
 
   if(!isDefined(a_paintings)) {
     a_paintings = [];
@@ -2321,7 +2321,7 @@ function_7a1bd36c() {
     a_paintings = array(a_paintings);
   }
 
-  a_paintings[a_paintings.size] = getent("<dev string:x3d06>", "<dev string:x90>");
+  a_paintings[a_paintings.size] = getEnt("<dev string:x3d06>", "<dev string:x90>");
   array::thread_all(a_paintings, &clientfield::set, "<dev string:x3f5a>" + #"hash_11eb6b7dc7db71ad", 0);
 }
 

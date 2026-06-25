@@ -235,7 +235,7 @@ function activateturret(killstreaktype) {
 
   turret_team = player.team;
   player.var_c306ebe3 = killstreakid;
-  player sethintstring("MP/SENTRY_DEPLOY");
+  player setHintString("MP/SENTRY_DEPLOY");
 
   if(false) {
     var_e454da90 = getweapon(#"ultimate_turret_deploy");
@@ -259,7 +259,7 @@ function activateturret(killstreaktype) {
       killstreakrules::killstreakstop(killstreaktype, turret_team, killstreakid);
 
       if(isDefined(player)) {
-        player sethintstring("");
+        player setHintString("");
       }
 
       return false;
@@ -279,7 +279,7 @@ function activateturret(killstreaktype) {
       killstreakrules::killstreakstop(killstreaktype, turret_team, killstreakid);
 
       if(isDefined(player)) {
-        player sethintstring("");
+        player setHintString("");
       }
 
       return false;
@@ -314,7 +314,7 @@ function activateturret(killstreaktype) {
   if(isDefined(player)) {
     player.var_5e6eba64 = undefined;
     player val::reset(#"ultimate_turret", "disable_offhand_weapons");
-    player sethintstring("");
+    player setHintString("");
   }
 
   if(!isDefined(waitresult._notify) || waitresult._notify != "ultimate_turret_deployed") {
@@ -486,7 +486,7 @@ function onplaceturret(turret) {
       vehicle_name = "veh_ultimate_turret";
     }
 
-    turret.vehicle = spawnvehicle(vehicle_name, turret.origin, turret.angles, "dynamic_spawn_ai");
+    turret.vehicle = spawnVehicle(vehicle_name, turret.origin, turret.angles, "dynamic_spawn_ai");
     turret.vehicle.owner = player;
     turret.vehicle setowner(player);
     turret.vehicle.ownerentnum = player.entnum;
@@ -609,7 +609,7 @@ function onplaceturret(turret) {
 }
 
 function onbeginuse(player) {
-  self.trigger sethintstring("");
+  self.trigger setHintString("");
 
   if(isPlayer(player)) {
     player.var_fd61a0f4 = 1;
@@ -617,7 +617,7 @@ function onbeginuse(player) {
 }
 
 function onenduse(team, player, success) {
-  self.trigger sethintstring(#"hash_2c90cbfdfac140bf");
+  self.trigger setHintString(#"hash_2c90cbfdfac140bf");
 
   if(isPlayer(success)) {
     success.var_fd61a0f4 = undefined;
@@ -733,7 +733,7 @@ function onpickupturret(turret) {
   player = self;
   turret.vehicle ghost();
   turret.vehicle.turret_enabled = 0;
-  turret.vehicle linkto(turret);
+  turret.vehicle linkTo(turret);
   target_remove(turret.vehicle);
   turret clientfield::set("ultimate_turret_close", 1);
   turret.othermodel clientfield::set("ultimate_turret_close", 1);
@@ -1000,7 +1000,7 @@ function function_fefefcc4() {
     if(!isDefined(veh.enemy) && !is_true(veh.isstunned) && !is_true(veh.isjammed)) {
       var_beeadda8 = isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 300;
 
-      nearby_enemies = getplayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
+      nearby_enemies = getPlayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
 
       if(nearby_enemies.size > 0) {
         if(veh.var_3413afc5 != #"hash_2d94a5f22d36fc73") {

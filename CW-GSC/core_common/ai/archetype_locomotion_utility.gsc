@@ -294,7 +294,7 @@ function private function_bb046570() {
   points = self function_f14f56a8();
 
   for(i = 1; i < points.size - 1; i++) {
-    direction = vectornormalize(points[i + 1] - points[i]);
+    direction = vectorNormalize(points[i + 1] - points[i]);
     checkpoint = points[i] + direction;
 
     if(ispointonstairs(checkpoint)) {
@@ -302,7 +302,7 @@ function private function_bb046570() {
       endpoint = self.pathgoalpos;
 
       for(j = i + 1; j < points.size; j++) {
-        direction = vectornormalize(points[j] - points[j - 1]);
+        direction = vectorNormalize(points[j] - points[j - 1]);
 
         if(!ispointonstairs(points[j] + direction)) {
           endpoint = points[j];
@@ -340,7 +340,7 @@ function private function_bb046570() {
 function private function_37ae0b11() {
   var_25f63bae = self.ai.var_4183a6fc.endpos - self.ai.var_4183a6fc.startpos;
   var_25f63bae = (var_25f63bae[0], var_25f63bae[1], 0);
-  var_25f63bae = vectornormalize(var_25f63bae);
+  var_25f63bae = vectorNormalize(var_25f63bae);
   startorigin = self.origin;
   var_c0292a97 = 0;
 
@@ -369,7 +369,7 @@ function private function_37ae0b11() {
   var_93cae7cc = distance2dsquared(var_ba319abd, self.ai.var_4183a6fc.endpos);
 
   if(var_92cbdd4c < var_afc4c793 && var_afc4c793 < var_93cae7cc) {
-    if(vectordot(var_25f63bae, vectornormalize(dirtogoal)) > 0.7) {
+    if(vectordot(var_25f63bae, vectorNormalize(dirtogoal)) > 0.7) {
       self.ai.var_4183a6fc.var_ba319abd = (self.var_14b548c5[0], self.var_14b548c5[1], self.ai.var_4183a6fc.startpos[2]);
       self.ai.var_4183a6fc.var_4a6a42e4 = 1;
     } else {

@@ -196,7 +196,7 @@ _id_93B3(var_0, var_1) {
   var_0._id_04DE = "veh_bradley_mp";
   var_0._id_31A0 = 1;
   var_0._id_E728 = 0;
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;
@@ -245,7 +245,7 @@ _id_93B4(var_0, var_1) {
   }
 
   var_4 = spawnturret("misc_turret", var_0 gettagorigin("tag_turret"), var_3, 0);
-  var_4 linkto(var_0, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0, "tag_turret", (0, 0, 0), (0, 0, 0));
 
   if(istrue(var_1._id_FE22)) {
     var_4 setModel("veh8_mil_lnd_coscar_east_turret");
@@ -275,7 +275,7 @@ _id_93B5(var_0, var_1) {
   }
 
   var_5 = spawnturret("misc_turret", var_3 gettagorigin("turret_animate_jnt"), var_4, 0);
-  var_5 linkto(var_3, "turret_animate_jnt", (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_3, "turret_animate_jnt", (0, 0, 0), (0, 0, 0));
 
   if(istrue(var_1._id_FE22)) {
     var_5 setModel("veh8_mil_lnd_coscar_east_turret_gun");
@@ -1166,7 +1166,7 @@ _id_93C7(var_0, var_1) {
   var_7.streakinfo = self.streakinfo;
 
   if(isDefined(var_1)) {
-    var_7 missile_settargetent(var_1);
+    var_7 missile_settargetEnt(var_1);
     thread scripts\cp_mp\utility\weapon_utility::_id_10C14(var_1, var_7);
   }
 }
@@ -1485,7 +1485,7 @@ _id_9415(var_0) {
   var_2 = anglestoup(self.angles);
   var_3 = vectordot(var_1, var_2);
   var_4 = var_0.point + var_2 * var_3;
-  var_5 = vectornormalize(var_4 - self.origin);
+  var_5 = vectorNormalize(var_4 - self.origin);
   var_6 = anglesToForward(self.angles);
   var_7 = anglestoright(self.angles);
 

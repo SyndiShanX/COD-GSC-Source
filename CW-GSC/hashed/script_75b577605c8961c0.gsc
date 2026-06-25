@@ -34,7 +34,7 @@ function function_7a20f9a3(watcher, owner) {
   self waittill(#"stationary");
   spawn_locs = namespace_85745671::function_e4791424(self.origin, 8, 32, 512, 256);
 
-  switch (getplayers().size) {
+  switch (getPlayers().size) {
     case 1:
     default:
       var_a244d61b = 3;

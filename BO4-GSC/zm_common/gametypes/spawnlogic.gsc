@@ -871,7 +871,7 @@ spawnpointupdate_zm(spawnpoint) {
     spawnpoint.enemydistsum[team] = 0;
   }
 
-  players = getplayers();
+  players = getPlayers();
   spawnpoint.numplayersatlastupdate = players.size;
 
   foreach(player in players) {

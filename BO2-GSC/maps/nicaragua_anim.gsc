@@ -109,14 +109,14 @@ menendez_intro_anims() {
 show_spas() {
   noriega = get_ais_from_scene("noriega_arrives", "noriega");
   noriega gun_remove();
-  spas = getent("spas", "targetname");
+  spas = getEnt("spas", "targetname");
   spas show();
 }
 
 hide_spas() {
   noriega = get_ais_from_scene("noriega_arrives", "noriega");
   noriega gun_recall();
-  spas = getent("spas", "targetname");
+  spas = getEnt("spas", "targetname");
   spas hide();
 }
 
@@ -778,9 +778,9 @@ mason_outro() {
 }
 
 play_bell_rings(guy) {
-  playsoundatposition("amb_bell_chime", (-3485, -9689, 2306));
+  playSoundAtPosition("amb_bell_chime", (-3485, -9689, 2306));
   wait 2.9;
-  playsoundatposition("amb_bell_chime", (-3485, -9689, 2306));
+  playSoundAtPosition("amb_bell_chime", (-3485, -9689, 2306));
 }
 
 sndsnapshotintro(guy) {

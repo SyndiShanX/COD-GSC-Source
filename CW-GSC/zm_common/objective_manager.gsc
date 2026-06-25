@@ -442,7 +442,7 @@ function start_objective(instance, activator = undefined) {
   level thread[[script.var_11dcc37e]](instance, activator);
 
   if(isDefined(activator)) {
-    activator playrumbleonentity(#"key_press");
+    activator playRumbleOnEntity(#"key_press");
   }
 
   level notify(#"objective_started");
@@ -473,11 +473,11 @@ function private function_1e8b7f8(scriptmodel) {
   bottompos = scriptmodel.origin - (0, 0, 4);
 
   while(true) {
-    scriptmodel moveto(toppos, 0.5, 0.15, 0.15);
-    scriptmodel rotateyaw(scriptmodel.angles[2] + 45, 0.5);
+    scriptmodel moveTo(toppos, 0.5, 0.15, 0.15);
+    scriptmodel rotateYaw(scriptmodel.angles[2] + 45, 0.5);
     wait 0.5;
-    scriptmodel moveto(bottompos, 0.5, 0.15, 0.15);
-    scriptmodel rotateyaw(scriptmodel.angles[2] + 45, 0.5);
+    scriptmodel moveTo(bottompos, 0.5, 0.15, 0.15);
+    scriptmodel rotateYaw(scriptmodel.angles[2] + 45, 0.5);
     wait 0.5;
   }
 }
@@ -528,7 +528,7 @@ function private function_fa47c63e(scriptname) {
   level flag::wait_till(#"all_players_connected");
   script_struct = content_manager::get_script(scriptname);
   var_5fc990bf = isDefined(script_struct.var_b4fae213) ? script_struct.var_b4fae213 : 0;
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player luinotifyevent(#"hash_5159e35a62fb7083", 3, 0, var_5fc990bf, level.var_b48509f9);
@@ -540,7 +540,7 @@ function start_timer(n_seconds, str_label = #"", var_7ae7852d = 0) {
   assert(n_seconds <= 900);
   level thread function_d3b93d12(n_seconds, str_label, var_7ae7852d);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player clientfield::set_to_player("sr_defend_timer", 0);
 
     if(!level.var_4f12f6d0 sr_objective_timer::is_open(player)) {
@@ -567,7 +567,7 @@ function function_73a53c87(params) {
     return;
   }
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_bdeca498(params);
   }
 }
@@ -639,7 +639,7 @@ function function_b8278876(n_seconds, str_label = #"") {
 }
 
 function stop_timer() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_4f12f6d0 sr_objective_timer::is_open(player)) {
       level.var_4f12f6d0 sr_objective_timer::close(player);
     }
@@ -676,7 +676,7 @@ function function_9d4e6125(scriptname) {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player luinotifyevent(#"hash_5159e35a62fb7083", 3, 2, var_5fc990bf, level.var_b48509f9);
@@ -690,7 +690,7 @@ function function_ae039b4(objective) {
 }
 
 function function_2f9d355c() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player inlaststand()) {
       e_player zm_laststand::revive_force_revive();
       e_player notify(#"player_revived", {
@@ -706,7 +706,7 @@ function function_2f9d355c() {
 }
 
 function function_589654ad() {
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     if(e_player inlaststand()) {
       e_player zm_laststand::revive_force_revive();
       e_player notify(#"player_revived", {
@@ -791,7 +791,7 @@ function function_67b313bb() {
 
       foreach(s_objective in var_2cd4e005) {
         print3d(s_objective.origin, "<dev string:x398>" + var_83aaaa47 + "<dev string:x3a9>" + (isDefined(s_objective.targetname) ? s_objective.targetname : "<dev string:x3ba>"), (1, 1, 0), undefined, 1);
-        n_distance = distance(getplayers()[0].origin, s_objective.origin);
+        n_distance = distance(getPlayers()[0].origin, s_objective.origin);
         var_5d97a083 = 150 * n_distance * 0.0001;
         var_5d97a083 = max(150 / 1.5, var_5d97a083);
         sphere(s_objective.origin, var_5d97a083, v_color);
@@ -805,7 +805,7 @@ function function_67b313bb() {
 }
 
 function function_caba1575(instance) {
-  self setorigin(instance.origin);
+  self setOrigin(instance.origin);
 }
 
 function function_7a7ab1a2(params) {
@@ -821,7 +821,7 @@ function function_7a7ab1a2(params) {
       level.var_cf558bf++;
       zm_utility_zsurvival::function_7c97e961(level.var_b48509f9 + 1);
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, 2, level.var_b48509f9, 0);
       }
 
@@ -830,7 +830,7 @@ function function_7a7ab1a2(params) {
       level.var_cf558bf--;
       zm_utility_zsurvival::function_7c97e961(level.var_b48509f9 - 1);
 
-      foreach(player in getplayers()) {
+      foreach(player in getPlayers()) {
         player luinotifyevent(#"hash_5b1ff06d07e9002a", 3, 2, level.var_b48509f9, 0);
       }
 
@@ -862,7 +862,7 @@ function function_7a7ab1a2(params) {
       }
 
       if(isDefined(instance)) {
-        foreach(player in getplayers()) {
+        foreach(player in getPlayers()) {
           player function_caba1575(instance);
         }
       }

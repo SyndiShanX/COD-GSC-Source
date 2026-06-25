@@ -126,7 +126,7 @@ _id_443E(var_0) {
   var_2._id_13FE = 0;
   var_2._id_13FF = 0;
   var_2 maps\_utility::_id_18B9();
-  var_1 linkto(self, var_0);
+  var_1 linkTo(self, var_0);
   return var_1;
 }
 
@@ -152,7 +152,7 @@ _id_443F(var_0) {
 
 _id_4440(var_0) {
   var_1 = anglesToForward(common_scripts\utility::flat_angle(var_0.angles));
-  var_2 = vectornormalize(common_scripts\utility::flat_origin(level.player.origin) - var_0.origin);
+  var_2 = vectorNormalize(common_scripts\utility::flat_origin(level.player.origin) - var_0.origin);
   var_3 = vectordot(var_1, var_2);
 
   if(var_3 > 0) {

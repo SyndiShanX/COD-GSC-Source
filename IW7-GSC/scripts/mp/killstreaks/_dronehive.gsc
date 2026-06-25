@@ -7,7 +7,7 @@ init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("drone_hive", ::tryusedronehive, undefined, undefined, undefined, ::func_13C8C);
   level.dronemissilespawnarray = getEntArray("remoteMissileSpawn", "targetname");
   foreach(var_1 in level.dronemissilespawnarray) {
-    var_1.var_1155F = getent(var_1.target, "targetname");
+    var_1.var_1155F = getEnt(var_1.target, "targetname");
   }
 
   var_3 = ["passive_predator", "passive_no_missiles", "passive_implosion", "passive_rapid_missiles"];
@@ -273,7 +273,7 @@ spawnswitchblade(var_0, var_1, var_2, var_3) {
   var_12 = scripts\mp\utility::_magicbullet(var_3, var_10, var_11, var_0.owner);
   var_13 = var_0 getclosesttargetinview(var_0.owner, var_11);
   if(isDefined(var_13) && !scripts\mp\killstreaks\_utility::func_A69F(var_2, "passive_rapid_missiles")) {
-    var_12 missile_settargetent(var_13);
+    var_12 missile_settargetEnt(var_13);
   }
 
   var_12 setCanDamage(1);
@@ -442,8 +442,8 @@ func_7DFE(var_0, var_1) {
 missileeyes(var_0, var_1) {
   var_2 = 0.5;
   var_0 scripts\mp\utility::freezecontrolswrapper(1);
-  var_0 cameralinkto(var_1, "tag_origin");
-  var_0 controlslinkto(var_1);
+  var_0 cameralinkTo(var_1, "tag_origin");
+  var_0 controlslinkTo(var_1);
   var_0 thermalvisionon();
   var_0 thermalvisionfofoverlayon();
   var_0 playlocalsound("trinity_rocket_plr");
@@ -547,13 +547,13 @@ watchmissileextraeffect(var_0, var_1) {
   var_4 = self.owner;
   var_5 = self.weapon_name;
   var_6 = scripts\engine\utility::spawn_tag_origin();
-  var_6 linkto(self);
+  var_6 linkTo(self);
   var_4.extraeffectkillcam = var_6;
   self.explosiontarget = spawn("script_model", self.origin);
   self.explosiontarget setModel("ks_drone_hive_target_mp");
   self.explosiontarget setentityowner(var_4);
   self.explosiontarget setotherent(var_4);
-  self.explosiontarget linkto(self, "tag_origin");
+  self.explosiontarget linkTo(self, "tag_origin");
   self.explosiontarget.weapon_name = var_5;
   self.explosiontarget.streakinfo = var_0;
   var_7 = self.explosiontarget;

@@ -206,7 +206,7 @@ spin_globe(str_endon, n_orbit_time, n_orbit_direction) {
   }
 
   while(true) {
-    self rotateyaw(n_orbit_direction * 360, n_orbit_time);
+    self rotateYaw(n_orbit_direction * 360, n_orbit_time);
     wait(n_orbit_time);
   }
 }
@@ -218,9 +218,9 @@ outer_door() {
 
   for(i = 0; i < a_doors.size; i++) {
     e_door = a_doors[i];
-    e_clip = getent(e_door.target, "targetname");
-    e_clip linkto(e_door);
-    e_door rotateyaw(e_door.script_int, time, 0, 0.15);
+    e_clip = getEnt(e_door.target, "targetname");
+    e_clip linkTo(e_door);
+    e_door rotateYaw(e_door.script_int, time, 0, 0.15);
   }
 }
 
@@ -231,14 +231,14 @@ lounge_door() {
   wait 1.3;
   clientnotify("scms");
   setmusicstate("KARMA_1_ENTER_CLUB");
-  m_lounge_door = getent("lounge_door", "targetname");
-  m_lounge_door_clip = getent("lounge_door_clip", "targetname");
-  m_lounge_door_clip linkto(m_lounge_door);
-  m_lounge_door rotateyaw(110, 1.8, 0, 0.15);
+  m_lounge_door = getEnt("lounge_door", "targetname");
+  m_lounge_door_clip = getEnt("lounge_door_clip", "targetname");
+  m_lounge_door_clip linkTo(m_lounge_door);
+  m_lounge_door rotateYaw(110, 1.8, 0, 0.15);
   trigger_wait("t_lounge_door_close");
   level thread cleanup_ents("cleanup_outersolar");
   level thread maps\karma_util::cleanup_structs("cleanup_outersolar");
-  m_lounge_door rotateyaw(-110, 2.0, 0, 0.15);
+  m_lounge_door rotateYaw(-110, 2.0, 0, 0.15);
   wait 2.0;
 }
 
@@ -393,9 +393,9 @@ seductive_lady_in_outer_bar() {
 blocking_club_bouncer() {
   str_anim_name = "main_bouncer_loop";
   level thread run_scene_and_delete(str_anim_name);
-  e_trigger = getent("player_approaches_main_bouncer_trigger", "targetname");
+  e_trigger = getEnt("player_approaches_main_bouncer_trigger", "targetname");
   e_trigger waittill("trigger");
-  e_bouncer = getent("club_main_enterance_bouncer_ai", "targetname");
+  e_bouncer = getEnt("club_main_enterance_bouncer_ai", "targetname");
   level notify("salazar_enter_club");
   end_scene(str_anim_name);
   e_bouncer thread blocking_bouncer_vo_and_wristband();
@@ -423,11 +423,11 @@ blocking_club_bouncer() {
 
 blocking_bouncer_vo_and_wristband() {
   level thread player_show_wristband(0.75);
-  e_dialog_pos = spawn("script_origin", getstruct("club_line_female_vo", "targetname").origin);
+  e_dialog_pos = spawn("script_origin", getStruct("club_line_female_vo", "targetname").origin);
   e_dialog_pos say_dialog("woma_hey_how_come_they_0", undefined, 1);
   e_dialog_pos delete();
   self say_dialog("door_their_ids_say_vip_0");
-  e_dialog_pos = spawn("script_origin", getstruct("club_line_male_vo", "targetname").origin);
+  e_dialog_pos = spawn("script_origin", getStruct("club_line_male_vo", "targetname").origin);
   e_dialog_pos say_dialog("dude_come_on_man_the_chi_0", undefined, 1);
   e_dialog_pos delete();
   self say_dialog("door_sorry_sir_we_re_v_0");

@@ -91,7 +91,7 @@ playerteleportgrenadecleanup(var_0) {
 playerteleport(var_0, var_1) {
   if(isDefined(var_0)) {
     givecoast2coastachievement(var_0);
-    self setorigin(var_0, 1);
+    self setOrigin(var_0, 1);
   }
 
   if(isDefined(var_1)) {
@@ -117,7 +117,7 @@ doteleportinstant(var_0, var_1, var_2, var_3, var_4) {
     }
 
     playerteleport(var_7);
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     earthquake(randomfloatrange(0.25, 0.35), 1, self.origin, 100, self);
     playertelefragzombie(var_4, var_7);
     self radiusdamage(var_7, 300, 200 * level.wavecounter, 100 * level.wavecounter, self, "MOD_EXPLOSIVE", "teleport_zombies_mp");
@@ -188,7 +188,7 @@ findsafeposition(var_0, var_1, var_2) {
   }
   foreach(var_4 in level.teleport_grenade_override_triggers) {
     if(ispointinvolume(var_0, var_4)) {
-      var_5 = common_scripts\utility::getstruct(var_4.target, "targetname");
+      var_5 = common_scripts\utility::getStruct(var_4.target, "targetname");
       return var_5.origin;
     }
   }
@@ -215,7 +215,7 @@ findsafeposition(var_0, var_1, var_2) {
     }
   }
 
-  var_13 = vectornormalize(var_2 - var_0);
+  var_13 = vectorNormalize(var_2 - var_0);
   var_14 = var_0 + var_13 * 30;
   var_15 = 50;
   var_16 = 0;
@@ -243,7 +243,7 @@ findlastzone(var_0, var_1, var_2) {
   var_4 = 0;
   var_5 = var_2 - var_0;
   var_6 = length(var_5);
-  var_7 = vectornormalize(var_5);
+  var_7 = vectorNormalize(var_5);
 
   if(isDefined(level.zmbteleportgrenadefindzonecustom)) {
     var_8 = [[level.zmbteleportgrenadefindzonecustom]](var_0, var_1, var_2);

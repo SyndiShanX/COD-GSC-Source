@@ -115,7 +115,7 @@ init() {
   level.var_C321["odin_assault"].weapon["juggernaut"].var_D5E4 = "null";
   level.var_C321["odin_assault"].weapon["juggernaut"].var_D5DD = "odin_jugg_launch";
   if(!isDefined(level.heli_pilot_mesh)) {
-    level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
+    level.heli_pilot_mesh = getEnt("heli_pilot_mesh", "targetname");
     if(!isDefined(level.heli_pilot_mesh)) {} else {
       level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility::gethelipilotmeshoffset();
     }
@@ -654,7 +654,7 @@ func_13AAF() {
       if(isDefined(var_2)) {
         var_0 scripts\mp\utility::leaderdialogonplayer(var_1.var_1352B);
         var_0 scripts\mp\utility::_playlocalsound("odin_positive_action");
-        var_0 playrumbleonentity("pistol_fire");
+        var_0 playRumbleOnEntity("pistol_fire");
         self.var_A4A3 scripts\mp\bots\_bots_strategy::bot_protect_point(var_2.origin, 128);
         var_0 setclientomnvar(var_1.var_1E44, level.var_C321[self.odintype].var_12B20);
       } else {
@@ -750,14 +750,14 @@ func_C2E6(var_0) {
   var_6 = gettime() + var_2.var_DF5D * 1000;
   if(var_0 == "large_rod") {
     wait(0.5);
-    var_1 playrumbleonentity(var_2.var_E7BA);
+    var_1 playRumbleOnEntity(var_2.var_E7BA);
     earthquake(0.3, 1.5, self.origin, 1000);
     var_1 playsoundtoplayer(var_2.var_D5DD, var_1);
     playsoundatpos(self.origin, var_2.var_C195);
     wait(1.5);
   } else if(var_0 == "small_rod") {
     wait(0.5);
-    var_1 playrumbleonentity(var_2.var_E7BA);
+    var_1 playRumbleOnEntity(var_2.var_E7BA);
     earthquake(0.2, 1, self.origin, 1000);
     var_1 playsoundtoplayer(var_2.var_D5DD, var_1);
     playsoundatpos(self.origin, var_2.var_C195);
@@ -771,7 +771,7 @@ func_C2E6(var_0) {
       playsoundatpos(self.origin, var_2.var_C195);
     }
 
-    var_1 playrumbleonentity(var_2.var_E7BA);
+    var_1 playRumbleOnEntity(var_2.var_E7BA);
   }
 
   var_7 = scripts\mp\utility::_magicbullet(var_2.projectile, var_4, var_5, var_1);
@@ -939,7 +939,7 @@ func_58EE(var_0) {
 
     var_14 = anglesToForward(var_9 getplayerangles());
     var_15 = var_0 - var_12;
-    var_15 = vectornormalize(var_15);
+    var_15 = vectorNormalize(var_15);
     var_10 = 0.5 * 1 + vectordot(var_14, var_15);
     var_11 = 1;
     var_9 notify("flashbang", var_0, var_13, var_10, var_1, var_11);

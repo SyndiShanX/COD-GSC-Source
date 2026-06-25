@@ -6,8 +6,8 @@
 _id_5998() {
   level._id_58D2 = maps\hijack_code::_id_594A("commander_tarmac");
   waittillframeend;
-  var_0 = common_scripts\utility::getstruct("player_start_end_scene", "targetname");
-  level.player setorigin(var_0.origin);
+  var_0 = common_scripts\utility::getStruct("player_start_end_scene", "targetname");
+  level.player setOrigin(var_0.origin);
   level.player setplayerangles(var_0.angles);
   maps\_compass::setupminimap("compass_map_hijack_tarmac", "tarmac_minimap_corner");
   setsaveddvar("compassmaxrange", 3500);
@@ -29,7 +29,7 @@ _id_5998() {
   level.player setweaponammoclip("flash_grenade", 4);
   level.player setweaponammostock("flash_grenade", 4);
   wait 0.4;
-  var_1 = common_scripts\utility::getstruct("heli_approach", "targetname");
+  var_1 = common_scripts\utility::getStruct("heli_approach", "targetname");
   level._id_5943 vehicle_teleport(var_1.origin, var_1.angles);
   thread maps\hijack_tarmac::_id_599C();
   wait 0.1;
@@ -48,7 +48,7 @@ _id_5998() {
 }
 
 _id_599D() {
-  var_0 = getent("end_scene_fail_trigger", "targetname");
+  var_0 = getEnt("end_scene_fail_trigger", "targetname");
   var_0 common_scripts\utility::trigger_off();
   common_scripts\utility::flag_wait("player_entered_end_area");
   var_0 common_scripts\utility::trigger_on();
@@ -73,7 +73,7 @@ _id_599F() {
   if(isDefined(level._id_59A0)) {
     level._id_59A0 notify("stop_debate_advisor_loop");
   }
-  level._id_59A1 = getent("commander_pistol_on_ground", "targetname");
+  level._id_59A1 = getEnt("commander_pistol_on_ground", "targetname");
   level._id_59A1 hide();
   thread _id_59B9();
   thread _id_599D();
@@ -93,7 +93,7 @@ _id_599F() {
   var_0 = [];
   var_0[1] = level._id_58C6;
   var_0[2] = level._id_59A2;
-  level._id_59A3 = common_scripts\utility::getstruct("heli_end_node", "targetname");
+  level._id_59A3 = common_scripts\utility::getStruct("heli_end_node", "targetname");
   level._id_59A3 thread maps\_anim::_id_124E(level._id_58BA, "end_part1", "stop_part_1");
   level._id_59A3 thread maps\_anim::_id_11D6(var_0, "end_part1", "stop_part_1");
   var_0[0] = level._id_58BA;
@@ -153,7 +153,7 @@ _id_599F() {
   maps\_audio::aud_send_msg("makarov_slow");
   maps\_audio::aud_send_msg("blackout");
   level.player lerpfov(45, 2);
-  var_8 = common_scripts\utility::getstruct("makarov_heli_light_struct", "targetname");
+  var_8 = common_scripts\utility::getStruct("makarov_heli_light_struct", "targetname");
   var_9 = anglesToForward(var_8.angles);
   var_10 = anglestoup(var_8.angles);
   playFX(common_scripts\utility::getfx("makarov_heli_interior_light"), var_8.origin, var_9, var_10);
@@ -190,7 +190,7 @@ _id_0115() {
 
 _id_59AA() {
   level endon("door_used");
-  var_0 = getent("ending_distant_combat1", "targetname");
+  var_0 = getEnt("ending_distant_combat1", "targetname");
   level._id_59AB = 0;
 
   for(;;) {
@@ -231,7 +231,7 @@ _id_59AA() {
 
 _id_59AC() {
   level endon("door_used");
-  var_0 = getent("ending_distant_combat2", "targetname");
+  var_0 = getEnt("ending_distant_combat2", "targetname");
   level._id_59AB = 0;
 
   for(;;) {
@@ -426,13 +426,13 @@ _id_59B9() {
   common_scripts\utility::flag_wait("heli_landed");
   var_0 = common_scripts\utility::spawn_tag_origin();
   var_0.origin = level._id_5943 gettagorigin("tag_left_door_handle");
-  var_0 setcursorhint("HINT_ACTIVATE");
-  var_0 sethintstring(&"HIJACK_OPEN_HELI_DOOR");
+  var_0 setCursorHint("HINT_ACTIVATE");
+  var_0 setHintString(&"HIJACK_OPEN_HELI_DOOR");
   var_0 makeusable();
   level._id_59A9 maps\_utility::_id_27B0();
   thread _id_59BA();
   var_0 waittill("trigger", var_1);
-  var_0 sethintstring("");
+  var_0 setHintString("");
   level._id_59A9 maps\_utility::_id_27B2();
   level notify("door_used");
 }
@@ -455,7 +455,7 @@ _id_59BB(var_0) {
   level._id_59A3 notify("stop_part_1");
 
   foreach(var_2 in var_0) {}
-  var_2 stopanimscripted();
+  var_2 stopanimScripted();
 
   common_scripts\utility::flag_set("start_heli_descent");
 
@@ -479,7 +479,7 @@ _id_59BC() {
   level notify("stop_spotlight_fx");
   maps\_utility::_id_1654("makarov_heli_reached_end");
   maps\_utility::_id_2698();
-  level._id_59A3 = common_scripts\utility::getstruct("heli_end_node", "targetname");
+  level._id_59A3 = common_scripts\utility::getStruct("heli_end_node", "targetname");
   self setgoalyaw(level._id_59A3.angles[1]);
   self settargetyaw(level._id_59A3.angles[1]);
   self sethoverparams(0, 0, 0);
@@ -498,7 +498,7 @@ _id_59BD(var_0) {
     var_1 = (randomfloatrange(-150, 150), randomfloatrange(-150, 150), 0);
     var_2 = var_0.origin + var_1;
     var_3 = randomfloatrange(1.5, 2.5);
-    self moveto(var_2, var_3);
+    self moveTo(var_2, var_3);
     var_4 = randomfloatrange(0, 1);
     wait(var_3 + var_4);
   }
@@ -508,7 +508,7 @@ _id_59BE() {
   self endon("death");
   self notify("start_random_spotlight_targets");
   self notify("shine_spotlight_on_president");
-  var_0 = common_scripts\utility::getstruct("objective_end_3", "targetname");
+  var_0 = common_scripts\utility::getStruct("objective_end_3", "targetname");
   var_1 = spawn("script_origin", var_0.origin);
   self._id_2891 settargetentity(var_1);
   var_1 thread _id_59BD(var_0);
@@ -518,7 +518,7 @@ _id_59BE() {
   var_2 = anglesToForward(self.angles + (60, 90, 0));
   var_3 = self gettagorigin("tag_turret") + var_2 * 200;
   self._id_59BF = spawn("script_origin", var_3);
-  self._id_59BF linkto(self);
+  self._id_59BF linkTo(self);
   self._id_2891 settargetentity(self._id_59BF);
 }
 

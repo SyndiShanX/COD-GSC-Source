@@ -94,7 +94,7 @@ onplayerconnectfunctions() {
 }
 
 create_clientside_water_ents() {
-  var_0 = common_scripts\utility::getstruct(self.target, "targetname");
+  var_0 = common_scripts\utility::getStruct(self.target, "targetname");
   var_0.origin = var_0.origin + (0, 0, level.waterline_offset);
   var_1 = var_0 common_scripts\utility::spawn_tag_origin();
   var_1 show();
@@ -380,7 +380,7 @@ inwaterwake(var_0) {
     }
 
     if(var_1 > 5) {
-      var_4 = vectornormalize((var_3[0], var_3[1], 0));
+      var_4 = vectorNormalize((var_3[0], var_3[1], 0));
       var_5 = anglesToForward(vectortoangles(var_4) + (270, 180, 0));
       var_2 = (self.origin[0], self.origin[1], getwaterline(var_0)) + var_1 / 4 * var_4;
       playFX(level._effect["water_wake"], var_2, var_5);
@@ -469,7 +469,7 @@ getplayereyeheight() {
 }
 
 getwaterline(var_0) {
-  var_1 = common_scripts\utility::getstruct(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getStruct(var_0.target, "targetname");
   var_2 = var_1.origin[2];
   return var_2;
 }

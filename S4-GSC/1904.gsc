@@ -131,7 +131,7 @@ _id_1D12() {
 
     if(!istrue(var_16._id_1642)) {
       if(isDefined(var_16.target)) {
-        var_22 = scripts\engine\utility::getstruct(var_16.target, "targetname");
+        var_22 = scripts\engine\utility::getStruct(var_16.target, "targetname");
         var_23 = var_22.origin;
         var_24 = var_22.angles;
       } else {
@@ -776,7 +776,7 @@ _id_B514(var_0, var_1) {
     var_2 = var_0 getplayerangles();
     var_3 = anglesToForward(var_2);
     var_4 = var_0 getEye();
-    var_5 = vectornormalize(var_1 - var_4);
+    var_5 = vectorNormalize(var_1 - var_4);
     var_6 = vectordot(var_3, var_5);
 
     if(var_6 > 0) {

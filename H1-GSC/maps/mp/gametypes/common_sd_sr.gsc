@@ -87,7 +87,7 @@ bombs() {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  var_0 = getent("sd_bomb_pickup_trig", "targetname");
+  var_0 = getEnt("sd_bomb_pickup_trig", "targetname");
 
   if(!isDefined(var_0)) {
     common_scripts\utility::error("No sd_bomb_pickup_trig trigger found in map.");
@@ -157,7 +157,7 @@ bombs() {
     var_9.onuse = ::onuseplantobject;
     var_9.oncantuse = ::oncantuse;
     level.bombzones[level.bombzones.size] = var_9;
-    var_9.bombdefusetrig = getent(var_1[0].target, "targetname");
+    var_9.bombdefusetrig = getEnt(var_1[0].target, "targetname");
     var_9.bombdefusetrig.origin = var_9.bombdefusetrig.origin + (0, 0, -10000);
     var_9.bombdefusetrig.label = var_9.label;
     var_9.bombdefusetrig usetriggertouchcheckstance(1);
@@ -277,7 +277,7 @@ onenduse(var_0, var_1, var_2) {
 bombplantedanim(var_0) {
   var_0 endon("death");
   var_0 endon("disconnect");
-  var_0 playerlinkto(level.sdbombmodel);
+  var_0 playerlinkTo(level.sdbombmodel);
   var_0 playerlinkedoffsetenable();
 
   while(var_0 getcurrentweapon() == self.useweapon) {

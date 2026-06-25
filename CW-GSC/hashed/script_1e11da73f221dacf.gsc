@@ -299,7 +299,7 @@ function function_3367d18d() {
   self endon(#"death");
   level endon(#"flag_obj_plaza_done");
   self waittill(#"exit_turret");
-  fallback_vol = getent("plaza_stairway_fallback_fallback", "targetname");
+  fallback_vol = getEnt("plaza_stairway_fallback_fallback", "targetname");
   self ai::force_goal(fallback_vol, 0);
   aiutility::releaseclaimnode(self);
   aiutility::choosebestcovernodeasap(self);
@@ -308,18 +308,18 @@ function function_3367d18d() {
 function function_87504f69() {
   level.player endon(#"death");
   var_2c3b91fc = struct::get_array("turret_point_plaza");
-  e_turret = getent("plaza_mg_left_intro_gun", "targetname");
+  e_turret = getEnt("plaza_mg_left_intro_gun", "targetname");
   n_shots = 4;
   e_turret turret::enable(0, 1, undefined);
   e_turret waittill(#"hash_47d72700d29f432e");
   e_turret turret::function_aecc6bed(var_2c3b91fc, n_shots, 0);
-  var_896dcb0c = getent("plaza_dest_car", "script_noteworthy");
+  var_896dcb0c = getEnt("plaza_dest_car", "script_noteworthy");
   var_896dcb0c dodamage(5000, var_896dcb0c.origin);
 }
 
 function function_f8d17019(var_63610c73) {
   self endon(#"death");
-  var_a9224983 = getent(var_63610c73, "targetname");
+  var_a9224983 = getEnt(var_63610c73, "targetname");
 
   while(true) {
     var_c83de2f = var_a9224983 waittill(#"damage");
@@ -337,7 +337,7 @@ function function_1bdb683(var_9608b240, min_delay = 2, max_delay = 8) {
   level endon(#"flag_obj_plaza_done");
   wait randomfloatrange(min_delay, max_delay);
   self val::set(#"hash_58e0e1db15cf1334", "ignoreall", 1);
-  fallback_vol = getent(var_9608b240, "targetname");
+  fallback_vol = getEnt(var_9608b240, "targetname");
   self ai::force_goal(fallback_vol, 0);
   self waittill(#"goal");
   self val::reset(#"hash_58e0e1db15cf1334", "ignoreall");
@@ -347,7 +347,7 @@ function function_302b4058(var_9608b240, min_delay = 1, max_delay = 4, var_22660
   self endon(#"death");
   level endon(#"flag_obj_plaza_done");
   wait randomfloatrange(min_delay, max_delay);
-  fallback_vol = getent(var_9608b240, "targetname");
+  fallback_vol = getEnt(var_9608b240, "targetname");
   self ai::force_goal(fallback_vol, var_226603c5);
 }
 
@@ -505,8 +505,8 @@ function function_560a377b() {
 }
 
 function function_a6d837d0() {
-  var_a765d3ea = getent("RPG_origin", "targetname");
-  var_da43ffcd = getent("RPG_destination", "targetname");
+  var_a765d3ea = getEnt("RPG_origin", "targetname");
+  var_da43ffcd = getEnt("RPG_destination", "targetname");
   level flag::wait_till("flg_rpg_shoots");
   var_4a3daa0b = struct::get("plaza_column_look_at", "targetname");
 
@@ -692,7 +692,7 @@ function function_7ad3c858() {
 function function_60645fdb() {
   level endon(#"game_ended");
   var_9a1edfd9 = struct::get("annihilator_spawn");
-  var_78088964 = getent("first_floor_painting", "targetname");
+  var_78088964 = getEnt("first_floor_painting", "targetname");
   var_78088964 setCanDamage(1);
 
   while(true) {

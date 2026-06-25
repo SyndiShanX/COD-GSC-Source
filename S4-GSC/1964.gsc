@@ -34,7 +34,7 @@ _id_D8BF(var_0) {
     if(isDefined(var_2._id_039B) && scripts\engine\utility::string_starts_with(var_2._id_039B, "vfx_")) {
       var_3 = var_2 scripts\engine\utility::spawn_tag_origin();
       var_3 show();
-      var_3 linkto(var_2);
+      var_3 linkTo(var_2);
       waitframe();
 
       if(!_id_8ADC("setupVFXObjs(): obj", var_2)) {
@@ -114,7 +114,7 @@ _id_18EA(var_0, var_1) {
       if(var_3 == var_0) {
         continue;
       }
-      var_3 linkto(var_0);
+      var_3 linkTo(var_0);
     }
   }
 }
@@ -162,7 +162,7 @@ _id_18F1() {
 
   for(;;) {
     var_6 = self.origin;
-    self moveto(self.origin + var_0, var_1[0], var_1[1], var_1[2]);
+    self moveTo(self.origin + var_0, var_1[0], var_1[1], var_1[2]);
 
     if(isDefined(var_4)) {
       thread _id_18EB(var_1[0], var_4);
@@ -177,7 +177,7 @@ _id_18F1() {
       playsoundatpos(self.origin, var_3);
     }
 
-    self moveto(var_6, var_1[0], var_1[1], var_1[2]);
+    self moveTo(var_6, var_1[0], var_1[1], var_1[2]);
 
     if(isDefined(var_4)) {
       thread _id_18EB(var_1[0], var_4);

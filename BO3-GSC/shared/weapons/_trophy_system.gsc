@@ -209,7 +209,7 @@ function trophysystemdetonate(attacker, weapon, target) {
     attacker challenges::destroyedequipment(weapon);
     scoreevents::processscoreevent("destroyed_trophy_system", attacker, self.owner, weapon);
   }
-  playsoundatposition("exp_trophy_system", self.origin);
+  playSoundAtPosition("exp_trophy_system", self.origin);
   self delete();
 }
 

@@ -77,7 +77,7 @@ stop(n_blend = 0.2) {
   flagsys::clear(#"scriptedanim");
 
   if(isDefined(self)) {
-    self stopanimscripted(n_blend);
+    self stopanimScripted(n_blend);
   }
 }
 
@@ -152,7 +152,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
     if(isactor(self)) {
       self forceteleport(v_origin, v_angles);
     } else if(isPlayer(self)) {
-      self setorigin(v_origin);
+      self setOrigin(v_origin);
       self setplayerangles(v_angles);
     } else {
       self.origin = v_origin;
@@ -161,9 +161,9 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
 
     if(v_origin_or_ent != self) {
       if(isstring(str_tag)) {
-        self linkto(v_origin_or_ent, str_tag, (0, 0, 0), (0, 0, 0));
+        self linkTo(v_origin_or_ent, str_tag, (0, 0, 0), (0, 0, 0));
       } else {
-        self linkto(v_origin_or_ent);
+        self linkTo(v_origin_or_ent);
       }
     }
 
@@ -171,7 +171,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
       if(isactor(self)) {
         self forceteleport(prevorigin, prevangles);
       } else if(isPlayer(self)) {
-        self setorigin(prevorigin);
+        self setOrigin(prevorigin);
         self setplayerangles(prevangles);
       } else {
         self.origin = prevorigin;
@@ -180,7 +180,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
     }
   }
 
-  self animscripted(animation, v_origin, v_angles, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon, var_f4b34dc1, paused);
+  self animScripted(animation, v_origin, v_angles, animation, "normal", undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon, var_f4b34dc1, paused);
 
   if(isPlayer(self)) {
     set_player_clamps();
@@ -242,7 +242,7 @@ _blend_out(animation, n_blend, n_rate, n_start_time) {
     n_time_left = n_server_length - n_current_time;
 
     if(n_time_left <= n_blend) {
-      self stopanimscripted(n_blend);
+      self stopanimScripted(n_blend);
       break;
     }
 
@@ -301,7 +301,7 @@ teleport(animation, v_origin_or_ent, v_angles_or_tag, time = 0) {
   }
 
   if(isPlayer(self)) {
-    self setorigin(v_pos);
+    self setOrigin(v_pos);
     self setplayerangles(v_ang);
     return;
   }
@@ -328,7 +328,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
   n_delta = distancesquared(goal, self.origin);
 
   if(n_delta > 16) {
-    self stopanimscripted(0.2);
+    self stopanimScripted(0.2);
 
     if(b_disable_arrivals) {
       if(ai::has_behavior_attribute("disablearrivals")) {

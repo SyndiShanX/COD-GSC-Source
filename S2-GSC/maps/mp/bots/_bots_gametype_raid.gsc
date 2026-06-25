@@ -3228,10 +3228,10 @@ bot_vehicle_turret_watch_for_contested(param_00) {
   for(;;) {
     if(var_01.var_0112.var_5024 == "contested") {
       if(!isDefined(self.var_0088) || !self method_8371(self.var_0088)) {
-        var_02 = vectornormalize(anglesToForward(self.var_001D) * (1, 1, 0));
+        var_02 = vectorNormalize(anglesToForward(self.var_001D) * (1, 1, 0));
         var_03 = [];
         foreach(var_05 in var_01.var_1B49) {
-          var_06 = vectornormalize(var_05.var_0116 - self.var_0116 * (1, 1, 0));
+          var_06 = vectorNormalize(var_05.var_0116 - self.var_0116 * (1, 1, 0));
           var_07 = vectordot(var_02, var_06);
           if(var_07 <= 0) {
             var_03[var_03.size] = var_05;
@@ -3264,7 +3264,7 @@ bot_force_exit_turret_on_damage(param_00) {
       continue;
     }
 
-    var_04 = vectornormalize(var_04);
+    var_04 = vectorNormalize(var_04);
     if(vectordot(var_01, var_04) >= 0) {
       break;
     }
@@ -4225,9 +4225,9 @@ func_1AAC() {
 
   if(var_02 == "prioritize_objective_center") {
     var_04 = maps\mp\_utility::func_442E(var_03.var_1B39.var_1D2B);
-    var_05 = vectornormalize(var_04 - self.var_0116);
+    var_05 = vectorNormalize(var_04 - self.var_0116);
     foreach(var_07 in self.var_A8C9) {
-      var_08 = vectornormalize(var_07.var_0116 - self.var_0116);
+      var_08 = vectorNormalize(var_07.var_0116 - self.var_0116);
       var_09 = vectordot(var_05, var_08);
       if(var_09 < 0) {
         var_07.var_A8C7[self.var_37CD] = 0;

@@ -215,7 +215,7 @@ func_6B15() {
 
   self func_839E();
   if(isDefined(self.target)) {
-    var_0 = scripts\engine\utility::getstruct(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStruct(self.target, "targetname");
     if(isDefined(var_0) && var_0 scripts\sp\fakeactor_node_MAYBE::func_9BE0()) {
       if(func_9B69()) {
         func_1164B(var_0);
@@ -575,10 +575,10 @@ func_BC82() {
     thread func_CE00(func_7A2A());
     var_7 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
     func_174D(var_7);
-    self linkto(var_7);
+    self linkTo(var_7);
     var_8 = 0.2;
-    var_7 moveto(var_6["origin"], var_8);
-    var_7 rotateto(var_6["angles"], var_8);
+    var_7 moveTo(var_6["origin"], var_8);
+    var_7 rotateTo(var_6["angles"], var_8);
     scripts\engine\utility::waittill_notify_or_timeout("death", var_8);
     self unlink();
     var_7 delete();
@@ -669,7 +669,7 @@ func_BC82() {
           var_20 = self.var_C039[self.var_C039.size - 1]["origin"] - self.origin;
           var_21 = length(var_20);
           var_1E = anglestoup(self.angles);
-          var_1D = vectornormalize(var_20);
+          var_1D = vectorNormalize(var_20);
           var_1F = vectorcross(var_1D, var_1E);
           var_1D = vectorcross(var_1E, var_1F);
           if(var_21 > 0) {
@@ -684,23 +684,23 @@ func_BC82() {
 
         if(var_23 > 0) {
           if(var_6) {
-            self moveto(var_7["origin"], var_23);
+            self moveTo(var_7["origin"], var_23);
             if(func_9B69()) {
-              self rotateto(axistoangles(var_1D, var_1F, var_1E), var_23);
+              self rotateTo(axistoangles(var_1D, var_1F, var_1E), var_23);
             } else {
-              self rotateto(var_1D, var_23 * 0.25);
+              self rotateTo(var_1D, var_23 * 0.25);
             }
 
             wait(var_23);
           } else {
             var_7 = scripts\engine\utility::spawn_script_origin(self.origin, self.angles);
             func_174D(var_21);
-            self linkto(var_21);
-            var_21 moveto(var_6["origin"], var_22);
+            self linkTo(var_21);
+            var_21 moveTo(var_6["origin"], var_22);
             if(func_9B69()) {
-              var_21 rotateto(axistoangles(var_23, var_1E, var_1D), var_22);
+              var_21 rotateTo(axistoangles(var_23, var_1E, var_1D), var_22);
             } else {
-              var_21 rotateto(var_23, var_22 * 0.25);
+              var_21 rotateTo(var_23, var_22 * 0.25);
             }
 
             scripts\engine\utility::waittill_notify_or_timeout("death", var_22);
@@ -743,10 +743,10 @@ func_BC82() {
 
     if(func_9B69()) {
       var_1E = anglestoup(self.angles);
-      var_1D = vectornormalize(var_1F - self.origin);
+      var_1D = vectorNormalize(var_1F - self.origin);
       var_1F = vectorcross(var_20, var_1F);
       var_1F = vectorcross(var_1E, var_20);
-      self rotateto(axistoangles(var_1F, var_20, var_1E), self.var_B04E);
+      self rotateTo(axistoangles(var_1F, var_20, var_1E), self.var_B04E);
     } else {
       var_16 = vectortoangles(var_1D - self.origin);
       childthread func_6B40(var_16, self.var_B04E);
@@ -754,10 +754,10 @@ func_BC82() {
 
     if(var_8) {
       var_24 = var_7 * self.var_B04E * self.var_BC68;
-      var_25 = vectornormalize(var_1D - self.origin);
+      var_25 = vectorNormalize(var_1D - self.origin);
       var_23 = var_25 * var_24;
       var_23 = var_23 + self.origin;
-      self moveto(var_23, self.var_B04E);
+      self moveTo(var_23, self.var_B04E);
     }
 
     if(getDvar("debug_fakeactor") == "1") {}
@@ -986,7 +986,7 @@ func_6D53(var_0) {
             }
 
             var_11 = self.var_1A2C.origin + var_13 * var_14 + var_15 * var_10;
-            var_8 = vectornormalize(var_11 - var_6);
+            var_8 = vectorNormalize(var_11 - var_6);
             var_9 = var_6 + var_8 * 1000;
           }
         }
@@ -1758,7 +1758,7 @@ func_CE00(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_5 = 0.2;
   }
 
-  self animscripted("fakeactor_anim", var_7, var_8, var_0, var_6);
+  self animScripted("fakeactor_anim", var_7, var_8, var_0, var_6);
   if(isDefined(var_2)) {
     thread scripts\anim\shared::donotetracks(var_3, var_2);
   }
@@ -2121,7 +2121,7 @@ func_12735(var_0) {
     return;
   }
 
-  var_1 = getent("target", self.var_336);
+  var_1 = getEnt("target", self.var_336);
   for(;;) {
     var_0 waittill("trigger", var_2);
     var_1 func_F613(1);

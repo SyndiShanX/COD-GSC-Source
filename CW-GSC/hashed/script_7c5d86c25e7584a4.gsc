@@ -30,7 +30,7 @@ function main(str_objective, b_starting) {
 
   var_b6ac0499 = struct::get("rooftop_regroup_obj_pos", "targetname");
   level thread function_e6b30b71();
-  var_d929545b = getent("rooftop_backgate_blocker", "targetname");
+  var_d929545b = getEnt("rooftop_backgate_blocker", "targetname");
   var_d929545b hide();
   var_d929545b notsolid();
 
@@ -63,7 +63,7 @@ function main(str_objective, b_starting) {
   objectives::goto("obj_rooftop_regroup", var_b6ac0499.origin, #"hash_4ac509ec6068df31");
   level flag::wait_till("flg_player_in_defend_arena");
   namespace_232ddc52::music("13.0_rooftop_transition");
-  var_d929545b = getent("rooftop_backgate_blocker", "targetname");
+  var_d929545b = getEnt("rooftop_backgate_blocker", "targetname");
   var_d929545b show();
   var_d929545b solid();
   level flag::wait_till("flg_defend_ready_to_start");

@@ -108,7 +108,7 @@ cargo_truck_susp_create(var_0, var_1) {
   var_0.modelname = "veh_s4_mil_lnd_truck_opapa40_wz";
   var_0._id_0481 = "cargo_truck_susp";
   var_0._id_04DE = "cargo_truck_susp";
-  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnvehicle(var_0, var_1);
+  var_2 = scripts\cp_mp\vehicles\vehicle_tracking::_spawnVehicle(var_0, var_1);
 
   if(!isDefined(var_2)) {
     return undefined;

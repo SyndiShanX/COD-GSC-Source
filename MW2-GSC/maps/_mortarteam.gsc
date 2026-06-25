@@ -20,7 +20,7 @@ mortarTeam(spawners, node, mortar_targets, delay_base, delay_range) {
 }
 
 mortarTrigger() {
-  spawner = getent(self.target, "targetname");
+  spawner = getEnt(self.target, "targetname");
   spawner endon("death");
   self waittill("trigger");
   spawner mortarSpawner(self);
@@ -33,7 +33,7 @@ mortarSpawner(delayEnt) {
 
   spawners[0] = self;
 
-  aimguySpawner = getent(self.target, "targetname");
+  aimguySpawner = getEnt(self.target, "targetname");
   if(isDefined(aimguySpawner)) {
     spawners[1] = aimGuySpawner;
   }

@@ -130,7 +130,7 @@ add_contrail(fx_tag_name, offset) {
   ent.yaw = 0;
   ent.pitch = 0;
   ent translate_local();
-  fx_tag LinkTo(self, fx_tag_name);
+  fx_tag linkTo(self, fx_tag_name);
   return fx_tag;
 }
 

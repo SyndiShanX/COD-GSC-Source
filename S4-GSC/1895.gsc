@@ -41,7 +41,7 @@ _id_3F5D(var_0, var_1, var_2) {
       self._id_81F1.angles = self._id_ADBB._id_109C1;
     }
 
-    var_0 setorigin(self._id_81F1.origin);
+    var_0 setOrigin(self._id_81F1.origin);
     var_0 setplayerangles(self._id_81F1.angles);
   }
 
@@ -205,7 +205,7 @@ _id_D648(var_0) {
         self._id_ADBB._id_25A6 = 0;
 
         if(var_1 != 4) {
-          self._id_ADBB setorigin(self._id_ADBB _meth_812D(self._id_ADBB.origin));
+          self._id_ADBB setOrigin(self._id_ADBB _meth_812D(self._id_ADBB.origin));
         }
       }
 
@@ -501,7 +501,7 @@ _id_3F9B() {
   self._id_26BC _id_5270();
   var_0 = self._id_ADBB gettagorigin("J_Wrist_RI");
   self._id_26BC.origin = var_0;
-  self._id_26BC linkto(self._id_ADBB, "J_Wrist_RI", (0, 0, 10), (0, 0, 0));
+  self._id_26BC linkTo(self._id_ADBB, "J_Wrist_RI", (0, 0, 10), (0, 0, 0));
 
   foreach(var_2 in level.players) {
     if(var_2 == self._id_ADBB) {
@@ -543,7 +543,7 @@ _id_4068() {
   self._id_F34C _id_5270();
   var_0 = self._id_ADBE gettagorigin("J_Wrist_RI");
   self._id_F34C.origin = var_0;
-  self._id_F34C linkto(self._id_ADBE, "J_Wrist_RI", (0, 0, 0), (0, 0, 0));
+  self._id_F34C linkTo(self._id_ADBE, "J_Wrist_RI", (0, 0, 0), (0, 0, 0));
 
   foreach(var_2 in level.players) {
     if(var_2 != self._id_ADBE) {
@@ -603,7 +603,7 @@ _id_4037() {
   self._id_BE1D _id_5270();
   var_0 = self._id_ADBE gettagorigin("J_Wrist_RI");
   self._id_BE1D.origin = var_0;
-  self._id_BE1D linkto(self._id_ADBE, "J_Wrist_RI", (0, 0, 0), (0, 0, 0));
+  self._id_BE1D linkTo(self._id_ADBE, "J_Wrist_RI", (0, 0, 0), (0, 0, 0));
 
   foreach(var_2 in level.players) {
     if(var_2 == self._id_ADBE) {
@@ -644,7 +644,7 @@ _id_BE1E() {
 
 _id_B65D(var_0, var_1) {
   if(getdvarint("#x3e0f9b894ae62ec9e", 2) == 2) {
-    var_0 setorigin(self._id_81F1.origin);
+    var_0 setOrigin(self._id_81F1.origin);
     var_0 setplayerangles(self._id_81F1.angles);
   }
 
@@ -882,7 +882,7 @@ _id_0FAC() {
     var_3.angles = var_2.angles;
 
     if(isDefined(var_2.target)) {
-      var_4 = scripts\engine\utility::getstruct(var_2.target, "targetname");
+      var_4 = scripts\engine\utility::getStruct(var_2.target, "targetname");
 
       if(isDefined(var_4)) {
         var_3._id_B9A5 = var_4.origin;
@@ -891,7 +891,7 @@ _id_0FAC() {
       }
     }
 
-    var_3._id_02F7 = vectornormalize(anglesToForward(var_2.angles) * -1);
+    var_3._id_02F7 = vectorNormalize(anglesToForward(var_2.angles) * -1);
     var_5 = var_3._id_B9A4 + var_3._id_02F7 * 23.5;
     var_6 = scripts\engine\utility::_id_5000(var_5, 50.0, -200.0);
     var_3._id_FE7A = var_5[2] - var_6[2] > 150;

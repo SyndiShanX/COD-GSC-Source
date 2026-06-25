@@ -71,7 +71,7 @@ _id_93F9(var_0) {
 _id_93F3(var_0, var_1) {
   var_2 = scripts\cp_mp\vehicles\vehicle::_id_100CC(var_0, "tur_bradley_mp");
   var_3 = spawn("script_model", var_2 gettagorigin("TAG_PLAYER"));
-  var_3 linkto(var_2);
+  var_3 linkTo(var_2);
   var_3 _id_940C(0.5);
   var_3.vehicle = var_0;
   var_0._id_AD9E = var_3;
@@ -83,7 +83,7 @@ _id_93F3(var_0, var_1) {
 _id_93F2(var_0) {
   var_1 = scripts\cp_mp\vehicles\vehicle::_id_100CC(var_0, "tur_bradley_mp");
   var_2 = spawn("script_model", var_1 gettagorigin("TAG_PLAYER"));
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   var_2 _id_940C(3);
   var_2.vehicle = var_0;
   var_0._id_AC9B = var_2;
@@ -93,10 +93,10 @@ _id_93F2(var_0) {
 }
 
 _id_940C(var_0) {
-  self setcursorhint("HINT_BUTTON");
+  self setCursorHint("HINT_BUTTON");
 
   if(!scripts\cp_mp\utility\game_utility::_id_89EC()) {
-    self sethintstring(&"KILLSTREAKS_HINTS/BRADLEY_CAPTURE");
+    self setHintString(&"KILLSTREAKS_HINTS/BRADLEY_CAPTURE");
   }
 
   self _meth_84D7("none");

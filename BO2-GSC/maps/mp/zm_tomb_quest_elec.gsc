@@ -28,7 +28,7 @@ main() {
   electric_puzzle_2_init();
   level thread electric_puzzle_1_run();
   flag_wait("electric_puzzle_1_complete");
-  playsoundatposition("zmb_squest_step1_finished", (0, 0, 0));
+  playSoundAtPosition("zmb_squest_step1_finished", (0, 0, 0));
   level thread rumble_players_in_chamber(5, 3.0);
   level thread electric_puzzle_2_run();
   flag_wait("electric_puzzle_2_complete");
@@ -52,7 +52,7 @@ electric_puzzle_watch_staff() {
 
         if(isDefined(n_index)) {
           a_piano_keys[n_index] notify("piano_key_shot");
-          a_players = getplayers();
+          a_players = getPlayers();
 
           foreach(e_player in a_players) {
             if(e_player hasweapon("staff_lightning_zm")) {
@@ -111,7 +111,7 @@ piano_run_chords() {
   a_chord_order = array("a_minor", "e_minor", "d_minor");
 
   foreach(chord_name in a_chord_order) {
-    s_chord = getstruct("piano_chord_" + chord_name, "script_noteworthy");
+    s_chord = getStruct("piano_chord_" + chord_name, "script_noteworthy");
 
     show_chord_debug(s_chord.notes);
 
@@ -134,7 +134,7 @@ piano_run_chords() {
         if(correct_notes_playing == 3) {
           chord_solved = 1;
         } else {
-          a_players = getplayers();
+          a_players = getPlayers();
 
           foreach(e_player in a_players) {
             if(e_player hasweapon("staff_lightning_zm")) {
@@ -145,7 +145,7 @@ piano_run_chords() {
       }
     }
 
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(e_player in a_players) {
       if(e_player hasweapon("staff_lightning_zm")) {
@@ -318,7 +318,7 @@ update_relay_fx_and_sound() {
 }
 
 update_relay_rotation() {
-  self.e_switch rotateto((self.position * 90, self.e_switch.angles[1], self.e_switch.angles[2]), 0.1, 0, 0);
+  self.e_switch rotateTo((self.position * 90, self.e_switch.angles[1], self.e_switch.angles[2]), 0.1, 0, 0);
   self.e_switch playSound("zmb_squest_elec_switch");
   self.e_switch waittill("rotatedone");
 }

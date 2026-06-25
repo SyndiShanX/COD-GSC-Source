@@ -63,7 +63,7 @@ function function_e95b2776() {
         break;
       }
 
-      v_tangent = vectornormalize(v_tangent);
+      v_tangent = vectorNormalize(v_tangent);
       n_angle = acos(v_tangent[2]) - 90;
       a_safe = [n_angle + 50, n_angle + 160];
       var_19e2c116 = [self.angles[0] - a_safe[0], a_safe[1] - self.angles[0]];

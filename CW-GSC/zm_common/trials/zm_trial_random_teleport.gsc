@@ -28,7 +28,7 @@ function private on_begin(n_min_time, n_max_time) {
   level.var_935c100a = zm_trial::function_5769f26a(n_min_time);
   level.var_33146b2e = zm_trial::function_5769f26a(n_max_time);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_6a04c6e6();
   }
 }
@@ -36,7 +36,7 @@ function private on_begin(n_min_time, n_max_time) {
 function private on_end(round_reset) {
   level notify(#"hash_34f9cf7500b33c6b");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player val::reset(#"bgb_anywhere_but_here", "freezecontrols");
     player val::reset(#"bgb_anywhere_but_here", "ignoreme");
   }

@@ -81,7 +81,7 @@ function function_5db32126() {
 function private function_ed40d523() {
   player = self;
   aliveteammates = 0;
-  teammembers = getplayers(player.team);
+  teammembers = getPlayers(player.team);
 
   foreach(member in teammembers) {
     if(isalive(member)) {
@@ -99,7 +99,7 @@ function function_e91890a7() {
 
   util::waittillslowprocessallowed();
   player_counts = util::function_de15dc32();
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     aliveplayercount = player_counts.alive;

@@ -40,7 +40,7 @@ onplayerspawned() {
 
     if(isDefined(self.remotecontroltrigger)) {
       self.remotecontroltrigger.origin = self.origin;
-      self.remotecontroltrigger linkto(self);
+      self.remotecontroltrigger linkTo(self);
     }
   }
 }
@@ -172,11 +172,11 @@ removeremotecontrolledweapon(weaponname) {
 
 createremoteweapontrigger(weaponname) {
   trigger = spawn("trigger_radius_use", self.origin, 32, 32);
-  trigger enablelinkto();
-  trigger linkto(self);
+  trigger enablelinkTo();
+  trigger linkTo(self);
   trigger sethintlowpriority(1);
-  trigger setcursorhint("HINT_NOICON");
-  trigger sethintstring(level.remoteweapons[weaponname].hintstring);
+  trigger setCursorHint("HINT_NOICON");
+  trigger setHintString(level.remoteweapons[weaponname].hintstring);
 
   if(level.teambased) {
     trigger setteamfortrigger(self.team);

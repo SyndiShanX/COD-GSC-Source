@@ -264,7 +264,7 @@ function_53ef16ed(var_b6acc0c9, var_5563d1e7, var_8b1294a8, var_20d50849, var_4d
   level endon(#"combattraining_logic_finished");
 
   if(isDefined(str_objective)) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_61c3d59c(str_objective, undefined);
   }
 
@@ -285,7 +285,7 @@ function_53ef16ed(var_b6acc0c9, var_5563d1e7, var_8b1294a8, var_20d50849, var_4d
     ct_utils::function_79957328(undefined);
 
     if(isDefined(str_objective)) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       e_player thread ct_utils::function_61c3d59c(str_objective, undefined);
     }
 
@@ -311,7 +311,7 @@ function_bc194310() {
   ct_utils::function_e9ab1003("s_grapple_fail_obj");
   level notify(#"start_grapple_fail_collision");
   a_str_vo = array("vox_tvoi_tutor_ruin_slide_3_nag");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_61c3d59c(#"hash_61e22ffdad8a6ee4", a_str_vo);
   waitframe(1);
   s_loc = struct::get("s_grapple_hook_dist_fail", "targetname");
@@ -334,11 +334,11 @@ function_bc194310() {
       n_start_time = gettime() / 1000;
 
       while(true) {
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
 
         if(!isalive(e_player)) {
           while(true) {
-            e_player = getplayers()[0];
+            e_player = getPlayers()[0];
 
             if(isalive(e_player)) {
               b_respawn_player = 0;
@@ -368,8 +368,8 @@ function_bc194310() {
       level thread ct_utils::function_821edb7e("grapple_fail_complete");
     } else if(isDefined(level.var_9d2a5e6d) && level.var_9d2a5e6d) {
       level.var_9d2a5e6d = undefined;
-      e_player = getplayers()[0];
-      v_dir = vectornormalize(s_loc.origin - e_player.origin);
+      e_player = getPlayers()[0];
+      v_dir = vectorNormalize(s_loc.origin - e_player.origin);
       v_forward = anglesToForward(e_player.angles);
       dp = vectordot(v_dir, v_forward);
 
@@ -394,7 +394,7 @@ function_cc2f8b4() {
   level.var_9d2a5e6d = 0;
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     waitresult = e_player waittill(#"gadget_grapple_failed");
     level.var_9d2a5e6d = 1;
   }
@@ -428,7 +428,7 @@ function_34a100e1() {
 
 function_af9bb307() {
   level endon(#"combattraining_logic_finished");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_61c3d59c(#"hash_46099ddc56532a3", undefined);
   s_loc = struct::get("s_grapple_available_loc", "targetname");
   var_56b89658 = 3;
@@ -443,14 +443,14 @@ function_af9bb307() {
       wait 1.5;
     }
 
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(e_player isgrappling()) {
       break;
     }
 
     v_forward = anglesToForward(s_loc.angles);
-    v_dir = vectornormalize(s_loc.origin - e_player.origin);
+    v_dir = vectorNormalize(s_loc.origin - e_player.origin);
     dp = vectordot(v_forward, v_dir);
 
     if(dp > 0 && var_56b89658 != 0) {
@@ -494,7 +494,7 @@ function_8d8bad52() {
 
     n_time = gettime() / 1000;
     var_965b7e01 = n_time - n_start_time;
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(e_player fragButtonPressed()) {
       if(!var_2d3e1b92) {
@@ -530,11 +530,11 @@ function_6eaaed7b() {
   level notify(#"start_grapple_ledgel_door_collision");
 
   while(!(isDefined(level.var_801f2e81) && level.var_801f2e81)) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(!isalive(e_player)) {
       while(true) {
-        e_player = getplayers()[0];
+        e_player = getPlayers()[0];
 
         if(isalive(e_player)) {
           break;
@@ -568,14 +568,14 @@ function_acfa05d1(var_4b28bc8) {
   b_played_vo = 0;
 
   while(!(isDefined(level.var_801f2e81) && level.var_801f2e81)) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     v_forward = anglesToForward(var_4b28bc8.angles);
-    v_dir = vectornormalize(var_4b28bc8.origin - e_player.origin);
+    v_dir = vectorNormalize(var_4b28bc8.origin - e_player.origin);
     dp = vectordot(v_forward, v_dir);
 
     if(dp < 0) {
       if(isDefined(level.var_3a8650d5) && level.var_3a8650d5) {
-        v_dir = vectornormalize(s_target.origin - e_player.origin);
+        v_dir = vectorNormalize(s_target.origin - e_player.origin);
         v_forward = anglesToForward(e_player.angles);
         dp = vectordot(v_dir, v_forward);
 
@@ -618,7 +618,7 @@ function_d08e9d7f() {
   level thread ct_vo::function_5172b052(#"hash_6f4e6b000c475a08", "stop_nag");
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_61c3d59c(#"hash_1a96b4c95e637091", undefined);
     level thread function_c4629797();
     level thread ct_vo::function_14b08e49(array(#"hash_2774943be9e5dbd9"), "stop_nag");
@@ -650,10 +650,10 @@ function_d08e9d7f() {
 function_c4629797() {
   level endon(#"combattraining_logic_finished", #"chasm_complete");
   level.var_8d109684 = undefined;
-  vol_chasm = getent("vol_player_chase_jump", "targetname");
+  vol_chasm = getEnt("vol_player_chase_jump", "targetname");
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(e_player istouching(vol_chasm)) {
       if(e_player isgrappling()) {
@@ -692,7 +692,7 @@ function_fecd2528() {
   ct_utils::function_9aca2fa0("ct_action2");
   ct_vo::function_831e0584(array(#"hash_2559f328a2274691"), 1);
   level.var_eb5015e6 = 1;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   var_8e5c536e = function_8b1a219a() ? #"hash_4fb346435e061201" : #"hash_75c2aca845270377";
   e_player thread ct_utils::function_61c3d59c(var_8e5c536e, undefined);
   level thread ct_vo::function_14b08e49(array(#"hash_7e4f395a02d8ed35"), "grav_slam_complete");
@@ -710,7 +710,7 @@ function_fecd2528() {
 function_baae9a51() {
   level endon(#"combattraining_logic_finished");
   ct_utils::function_e9ab1003("s_grav_slam_start");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   n_slot = e_player ct_gadgets::get_slot(#"eq_gravityslam");
   e_player.var_f3d589a1[n_slot] = 3;
   level.var_d4668c34 = undefined;
@@ -729,7 +729,7 @@ function_baae9a51() {
     level.a_spawn_beacons[level.a_spawn_beacons.size] = e_beacon;
   }
 
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_KillSpawnBeacons");
   e_player ct_utils::function_80bf685b(2);
   ct_vo::function_831e0584(array(#"hash_1222e2a3c005f09e", #"hash_1222e1a3c005eeeb"), 1);
@@ -746,7 +746,7 @@ function_baae9a51() {
       e_player ct_utils::function_80bf685b(1);
     }
 
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     a_bots = e_player ct_bots::function_dde6edbd();
 
     if(a_bots.size < 5) {
@@ -775,7 +775,7 @@ function_baae9a51() {
   level notify(#"stop_nag");
   e_player ct_utils::function_80bf685b(0);
   wait 2.5;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player thread ct_utils::function_61c3d59c(#"hash_299761fcf7f3a316", undefined);
   ct_utils::function_654280be();
   ct_utils::function_9aca2fa0("ct_action");
@@ -793,7 +793,7 @@ function_baae9a51() {
   }
 
   setDvar(#"hash_3fb2952874e511c2", #"hash_5811622173a6e63a");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player ct_bots::function_26d45f32(1, 1, 1);
   e_player ct_gadgets::function_b81240c1();
   level thread ct_vo::function_831e0584(array(#"hash_625ae794a1d19842"), 0);
@@ -807,11 +807,11 @@ function_96e7c232() {
 
   while(!b_vo_played) {
     foreach(beacon in level.a_spawn_beacons) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       n_dist = distance(e_player.origin, beacon.origin);
 
       if(n_dist < 700) {
-        v_dir = vectornormalize(e_player.origin - beacon.origin);
+        v_dir = vectorNormalize(e_player.origin - beacon.origin);
         v_pos = beacon.origin + v_dir * 50;
 
         if(e_player ct_utils::can_see(v_pos, 1)) {
@@ -889,25 +889,25 @@ function_8678055f() {
 
     ct_vo::function_3ca1b77d();
     level thread ct_vo::function_14b08e49(array(#"vox_tvoi_tutor_ruin_slide_3_nag"), "slam_started");
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player.var_657a47ca = undefined;
     level thread function_5de4ec62();
     a_str_vo = array("vox_tvoi_tutor_ruin_slide_10_0", "vox_tvoi_tutor_ruin_slide_10_1", "vox_tvoi_tutor_ruin_slide_10_2");
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_61c3d59c(#"hash_2f23ec2a153dce52", a_str_vo);
     s_loc = struct::get("s_ruin_jump_over_ajax_obj", "targetname");
     waypoint = ct_utils::create_waypoint(#"hash_43f27b76957da4d2", s_loc.origin, s_loc.angles, #"any", undefined, 30, undefined);
     var_6a9e5fbd = 1;
 
     while(true) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
 
       if(e_player isgrappling()) {
         level notify(#"stop_ajax_area_collision");
         e_player.var_5c88ac33 = undefined;
         level.var_5bed374e = undefined;
         v_dir = anglesToForward(e_player.angles);
-        v_forward = vectornormalize(level.var_6b1458ad.origin - e_player.origin);
+        v_forward = vectorNormalize(level.var_6b1458ad.origin - e_player.origin);
         dp = vectordot(v_dir, v_forward);
 
         if(dp < 0.9) {
@@ -924,7 +924,7 @@ function_8678055f() {
 
     level notify(#"slam_started");
     level.var_e72728b8 = undefined;
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     n_slot = e_player ct_gadgets::get_slot(#"eq_gravityslam");
     level thread ct_gadgets::function_144e61da(n_slot, "stop_grav_slam_charge");
     var_5c76e8d = e_player gamepadusedlast() ? #"hash_69996f3f10b734ca" : #"hash_94c2bd8b788ebca";
@@ -932,7 +932,7 @@ function_8678055f() {
 
     if(var_6a9e5fbd) {}
 
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread function_5df282fc();
     n_start_time = gettime() / 1000;
     b_timeout = 0;
@@ -1017,11 +1017,11 @@ function_5de4ec62() {
   self endon("4192ae070f807dc6");
   level endon(#"hash_af88f301d383cc9");
   level.var_5bed374e = undefined;
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(isalive(e_player) && e_player isgrappling()) {
       break;
@@ -1031,7 +1031,7 @@ function_5de4ec62() {
   }
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(isDefined(e_player.var_657a47ca) && (e_player.var_657a47ca == #"eq_gravityslam" || e_player.var_657a47ca == #"eq_gravityslam_ct")) {
       break;
@@ -1211,7 +1211,7 @@ function_1c78b967() {
     startpos = targetpos + (0, 0, 1000);
     rocket = magicbullet(getweapon(#"remote_missile_missile"), startpos, targetpos);
     rocket.forceonemissile = 1;
-    forceanglevector = vectornormalize(targetpos - startpos);
+    forceanglevector = vectorNormalize(targetpos - startpos);
     rocket.angles = vectortoangles(forceanglevector);
     rocket missile_settarget(e_player);
     rocket.targetname = "remote_missile";
@@ -1348,7 +1348,7 @@ update_momentum() {
   level endon(#"combattraining_logic_finished", #"killstreak_end_event");
 
   while(true) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
 
     if(isalive(e_player)) {
       e_player ct_utils::function_80bf685b(e_player.momentum);
@@ -1393,7 +1393,7 @@ function_356af630() {
   while(true) {
     otherteam = util::getotherteam(e_player.team);
     newpos = getclosestpointonnavmesh(e_player.origin + (-600, -600, 0), 800, 60);
-    drone = spawnvehicle(#"archetype_mini_quadtank_ct", newpos + (0, 0, 20), (0, 0, 0), "talon", undefined, 1);
+    drone = spawnVehicle(#"archetype_mini_quadtank_ct", newpos + (0, 0, 20), (0, 0, 0), "talon", undefined, 1);
     drone.vehicletype = #"archetype_mini_quadtank_ct";
     ai_tank::function_9b13ebf(drone);
     drone.controlled = 0;
@@ -1487,7 +1487,7 @@ function_bbdd4fa9() {
     e_player waittill(#"remote_missile_fired");
     a_s_player_hellstorm_safe = struct::get_array("s_player_hellstorm_safe", "targetname");
     s_player_hellstorm_safe = arraygetclosest(e_player.origin, a_s_player_hellstorm_safe);
-    e_player setorigin(s_player_hellstorm_safe.origin);
+    e_player setOrigin(s_player_hellstorm_safe.origin);
 
     if(!(isDefined(e_player.var_48ad58e3) && e_player.var_48ad58e3)) {
       e_player.var_48ad58e3 = 1;
@@ -1502,7 +1502,7 @@ function_bbdd4fa9() {
     level notify(#"hellstorm_fired");
     ct_vo::function_831e0584(array("vox_tvoi_tutor_ruin_final_3_active"), 0);
     level notify(#"stop_nag");
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     result = e_player waittill(#"stopped_using_remote");
     level.play_taacom_dialog = undefined;
     level.var_4b6a7a3a = 1;
@@ -1535,17 +1535,17 @@ function_a9e139d7() {
   level endon(#"combattraining_logic_finished");
   level.var_e70f7774 = 1;
   s_loc = struct::get("s_player_hide_loc", "targetname");
-  e_player = getplayers()[0];
+  e_player = getPlayers()[0];
   e_player endon(#"death");
   v_origin = e_player.origin;
-  e_player setorigin(s_loc.origin);
+  e_player setOrigin(s_loc.origin);
   e_player hide();
 
   while(!(isDefined(level.var_4b6a7a3a) && level.var_4b6a7a3a)) {
     waitframe(1);
   }
 
-  e_player setorigin(v_origin);
+  e_player setOrigin(v_origin);
   e_player show();
   level.var_e70f7774 = 0;
 }
@@ -1594,7 +1594,7 @@ function_4150d677(n_goal_radius, b_ignoreall, b_keyline, var_4d39247d) {
   self endon(#"death");
 
   if(isDefined(var_4d39247d) && var_4d39247d) {
-    self setorigin(s_loc.origin);
+    self setOrigin(s_loc.origin);
     self setplayerangles(s_loc.angles);
   } else {
     self ct_utils::function_61d750d4(s_loc.origin, s_loc.angles);

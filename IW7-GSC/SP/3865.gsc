@@ -133,7 +133,7 @@ func_468A() {
     }
 
     var_13 = anglesToForward(self gettagangles("tag_eye"));
-    var_14 = vectornormalize(var_6 + (0, 0, 30) - self getEye());
+    var_14 = vectorNormalize(var_6 + (0, 0, 30) - self getEye());
     if(vectordot(var_13, var_14) > 0.55) {
       if(!isDefined(var_4.var_F182) && self cansee(var_4)) {
         var_2 = var_4;

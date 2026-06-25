@@ -1019,7 +1019,7 @@ function init_utility() {
 }
 
 function within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -1742,7 +1742,7 @@ function function_63320ea1(vector, deadzone, var_edfc4672 = 0) {
     return (function_b5338ccb(vector[0], deadzone), function_b5338ccb(vector[1], deadzone), 0);
   }
 
-  return vectornormalize(vector) * function_b5338ccb(length(vector), deadzone);
+  return vectorNormalize(vector) * function_b5338ccb(length(vector), deadzone);
 }
 
 function function_5ff170ee() {

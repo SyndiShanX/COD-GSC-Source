@@ -304,7 +304,7 @@ play_looping_fx_on_tag(_fx, tag, offset_org, offset_ang, z_value) {
     offset_org = (0, 0, 0);
   }
 
-  fx_marker LinkTo(self, tag, offset_org, offset_ang);
+  fx_marker linkTo(self, tag, offset_org, offset_ang);
   fx_marker.parent = self;
 
   playFXOnTag(_fx, fx_marker, "tag_origin");
@@ -329,7 +329,7 @@ fx_watch_z_value(z_value, tag) {
 
       height_delta = z_value - ref_point[2];
       wait(0.05);
-      self LinkTo(self.parent, tag, (0, 0, height_delta), (0, 0, 0));
+      self linkTo(self.parent, tag, (0, 0, height_delta), (0, 0, 0));
     }
 
     wait(0.05);
@@ -579,6 +579,6 @@ swim_splash_left() {
 zero_cloud() {
   self waittill("cloud_spawn");
 
-  _struct = maps\_utility::GetStruct("cloud_spawn_struct", "targetname");
+  _struct = maps\_utility::getStruct("cloud_spawn_struct", "targetname");
   playFX(level._effect["cloud_zero"], _struct.origin);
 }

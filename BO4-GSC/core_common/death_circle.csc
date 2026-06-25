@@ -67,7 +67,7 @@ function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       self.var_2c8e49d2 = spawn(localclientnum, self.origin, "script_model");
       self.var_2c8e49d2 setModel("p8_big_cylinder");
       self.var_2c8e49d2 playrenderoverridebundle(#"rob_wz_boundary");
-      self.var_2c8e49d2 linkto(self);
+      self.var_2c8e49d2 linkTo(self);
       self.var_29b256b0 = spawn(0, self.origin, "script_origin");
       self.var_29b256b0.handle = self.var_29b256b0 playLoopSound(level.var_cb450873);
     } else {
@@ -238,7 +238,7 @@ function_e1273acb(localclientnum, intensity = 0) {
   origin = getlocalclientpos(localclientnum);
   angles = getlocalclientangles(localclientnum);
   fwd = anglesToForward(angles);
-  players = getplayers(localclientnum);
+  players = getPlayers(localclientnum);
   players = arraysortclosest(players, origin);
   rob = level.var_c465fd31[intensity];
   robfade = level.var_7d949aad[intensity];
@@ -322,7 +322,7 @@ function_32f7227c(deathcircle, currentradius, localclientnum) {
 
   if(isDefined(localplayer)) {
     endpos = (localplayer.origin[0], localplayer.origin[1], 0);
-    toplayervec = vectornormalize(endpos - startpos) * currentradius;
+    toplayervec = vectorNormalize(endpos - startpos) * currentradius;
     eyepos = localplayer geteyeapprox();
   }
 

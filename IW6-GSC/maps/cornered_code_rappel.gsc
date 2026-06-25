@@ -75,7 +75,7 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
   cnd_rpl_stealth_ckpt(var_3);
   var_4 = level.player common_scripts\utility::spawn_tag_origin();
   var_4.angles = level.player getplayerangles();
-  var_5 = common_scripts\utility::getstruct(var_1, "targetname");
+  var_5 = common_scripts\utility::getStruct(var_1, "targetname");
   var_0.rope_origin = var_5 common_scripts\utility::spawn_tag_origin();
 
   if(var_3.rappel_type == "stealth") {
@@ -86,13 +86,13 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
   level.rpl_rope_anim_origin.angles = var_0.rope_origin.angles + (0, -90, 0);
   level.rpl_rope_anim_origin setModel("generic_prop_raven");
   level.rpl_rope_anim_origin useanimtree(#animtree);
-  level.rpl_rope_anim_origin linkto(var_0.rope_origin, "tag_origin");
+  level.rpl_rope_anim_origin linkTo(var_0.rope_origin, "tag_origin");
   level.rpl_physical_rope_origin = var_5 common_scripts\utility::spawn_tag_origin();
   level.rpl_physical_rope_anim_origin = spawn("script_model", var_0.rope_origin.origin);
   level.rpl_physical_rope_anim_origin.angles = var_0.rope_origin.angles + (0, -90, 0);
   level.rpl_physical_rope_anim_origin setModel("generic_prop_raven");
   level.rpl_physical_rope_anim_origin useanimtree(#animtree);
-  level.rpl_physical_rope_anim_origin linkto(level.rpl_physical_rope_origin, "tag_origin");
+  level.rpl_physical_rope_anim_origin linkTo(level.rpl_physical_rope_origin, "tag_origin");
   var_6 = (0, 90, 0);
 
   if(var_3.lateral_plane == 2) {
@@ -103,13 +103,13 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
   level.rpl_jump_anim_origin.angles = var_6;
   level.rpl_jump_anim_origin setModel("generic_prop_raven");
   level.rpl_jump_anim_origin useanimtree(#animtree);
-  level.rpl_jump_anim_origin linkto(level.rpl_rope_anim_origin, "J_prop_1");
+  level.rpl_jump_anim_origin linkTo(level.rpl_rope_anim_origin, "J_prop_1");
   level.rpl_plyr_anim_origin = var_4 common_scripts\utility::spawn_tag_origin();
   level.rpl_plyr_anim_origin.angles = var_6;
   level.rpl_plyr_anim_origin setModel("generic_prop_raven");
   level.rpl_plyr_anim_origin useanimtree(#animtree);
-  level.rpl_plyr_anim_origin linkto(level.rpl_jump_anim_origin, "J_prop_1");
-  level.plyr_rpl_groundref = getent(var_2, "targetname");
+  level.rpl_plyr_anim_origin linkTo(level.rpl_jump_anim_origin, "J_prop_1");
+  level.plyr_rpl_groundref = getEnt(var_2, "targetname");
   level.plyr_rpl_groundref.origin = var_4.origin;
 
   if(var_3.rappel_type == "inverted") {
@@ -118,7 +118,7 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
 
   level.plyr_rpl_groundref setModel("tag_origin");
   level.player playersetgroundreferenceent(level.plyr_rpl_groundref);
-  level.plyr_rpl_groundref linkto(level.rpl_plyr_anim_origin, "J_prop_1");
+  level.plyr_rpl_groundref linkTo(level.rpl_plyr_anim_origin, "J_prop_1");
   level.player.dof_ref_ent = level.plyr_rpl_groundref;
   var_7 = level.plyr_rpl_groundref;
 
@@ -136,14 +136,14 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
 
     level.player_torso_offset_origin = level.plyr_rpl_groundref common_scripts\utility::spawn_tag_origin();
     level.player_torso_offset_origin.origin = level.player_torso_offset_origin.origin + (var_9, var_10, var_11);
-    level.player_torso_offset_origin linkto(level.plyr_rpl_groundref);
+    level.player_torso_offset_origin linkTo(level.plyr_rpl_groundref);
     var_7 = level.player_torso_offset_origin;
   }
 
   wait 0.1;
 
   if(var_3.rappel_type == "inverted") {
-    level.player playerlinkto(var_7, "tag_origin", 1, var_3.right_arc, var_3.left_arc, var_3.top_arc, var_3.bottom_arc, 0);
+    level.player playerlinkTo(var_7, "tag_origin", 1, var_3.right_arc, var_3.left_arc, var_3.top_arc, var_3.bottom_arc, 0);
   } else {
     level.player playerlinktodelta(var_7, "tag_origin", 1, var_3.right_arc, var_3.left_arc, var_3.top_arc, var_3.bottom_arc, 1);
   }
@@ -164,11 +164,11 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
       var_11 = -5;
       level.rpl_plyr_legs_link_ent = level.rpl_plyr_anim_origin common_scripts\utility::spawn_tag_origin();
       level.rpl_plyr_legs_link_ent.origin = level.rpl_plyr_legs_link_ent.origin + (var_9, var_10, var_11);
-      level.rpl_plyr_legs_link_ent linkto(level.rpl_plyr_anim_origin);
+      level.rpl_plyr_legs_link_ent linkTo(level.rpl_plyr_anim_origin);
     }
 
     level.rappel_player_legs dontcastshadows();
-    level.rappel_player_legs linkto(level.rpl_plyr_legs_link_ent);
+    level.rappel_player_legs linkTo(level.rpl_plyr_legs_link_ent);
   }
 
   var_4 delete();
@@ -190,7 +190,7 @@ cnd_rpl_rope_setup(var_0, var_1) {
   level.cnd_rappel_tele_rope = maps\_utility::spawn_anim_model("cnd_rappel_tele_rope");
   level.cnd_rappel_tele_rope.origin = level.rpl_physical_rope_anim_origin.origin;
   level.cnd_rappel_tele_rope.angles = (0, 0, 0);
-  level.cnd_rappel_tele_rope linkto(level.rpl_physical_rope_anim_origin, "J_prop_1");
+  level.cnd_rappel_tele_rope linkTo(level.rpl_physical_rope_anim_origin, "J_prop_1");
 
   if(!isDefined(level.cnd_rappel_player_rope)) {
     level.cnd_rappel_player_rope = maps\_utility::spawn_anim_model("cnd_rappel_player_rope");
@@ -201,7 +201,7 @@ cnd_rpl_rope_setup(var_0, var_1) {
   var_2 = (0, 0, 0);
 
   if(var_1.rappel_type == "stealth") {
-    level.cnd_rappel_player_rope linkto(level.cnd_rappel_tele_rope, "J_Tele_50", (0, 0, 0), var_2);
+    level.cnd_rappel_player_rope linkTo(level.cnd_rappel_tele_rope, "J_Tele_50", (0, 0, 0), var_2);
   } else {
     thread cnd_delay_rope_link();
   }
@@ -221,7 +221,7 @@ cnd_rpl_rope_setup(var_0, var_1) {
 
 cnd_delay_rope_link() {
   common_scripts\utility::waitframe();
-  level.cnd_rappel_player_rope linkto(level.cnd_rappel_tele_rope, "J_Tele_50");
+  level.cnd_rappel_player_rope linkTo(level.cnd_rappel_tele_rope, "J_Tele_50");
 }
 
 cnd_plyr_rope_set_idle() {
@@ -247,10 +247,10 @@ cnd_plyr_rpl_legs_setup(var_0, var_1) {
   var_0.move["up"].vector = (0, -1, 0);
   var_0.move["right"].vector = (1, 0, 0);
   var_0.move["left"].vector = (-1, 0, 0);
-  var_0.move["right_down"].vector = vectornormalize((1, 1, 0));
-  var_0.move["right_up"].vector = vectornormalize((1, -1, 0));
-  var_0.move["left_down"].vector = vectornormalize((-1, 1, 0));
-  var_0.move["left_up"].vector = vectornormalize((-1, -1, 0));
+  var_0.move["right_down"].vector = vectorNormalize((1, 1, 0));
+  var_0.move["right_up"].vector = vectorNormalize((1, -1, 0));
+  var_0.move["left_down"].vector = vectorNormalize((-1, 1, 0));
+  var_0.move["left_up"].vector = vectorNormalize((-1, -1, 0));
   var_0.move["down"].playing = 0;
   var_0.move["up"].playing = 0;
   var_0.move["right"].playing = 0;
@@ -329,16 +329,16 @@ cnd_plyr_rpl_setup_globals(var_0, var_1, var_2) {
   var_0.player_anim_origin thread watch_footstep_notetrack();
 
   if(var_2 == "rope_ref_stealth") {
-    var_3 = getent("player_rappel_ground_ref_stealth", "targetname");
+    var_3 = getEnt("player_rappel_ground_ref_stealth", "targetname");
   } else if(var_2 == "rope_ref_combat") {
-    var_3 = getent("player_rappel_ground_ref_combat", "targetname");
+    var_3 = getEnt("player_rappel_ground_ref_combat", "targetname");
   } else {
-    var_3 = getent("player_rappel_ground_ref_stealth", "targetname");
+    var_3 = getEnt("player_rappel_ground_ref_stealth", "targetname");
   }
 
-  var_0.forward_direction_worldspace = vectornormalize(anglesToForward(var_3.angles * (0, 1, 0)));
-  var_0.right_direction_worldspace = vectornormalize(anglestoright(var_3.angles * (0, 1, 0)));
-  var_0.up_direction_worldspace = vectornormalize(anglestoup(var_3.angles * (0, 1, 0)));
+  var_0.forward_direction_worldspace = vectorNormalize(anglesToForward(var_3.angles * (0, 1, 0)));
+  var_0.right_direction_worldspace = vectorNormalize(anglestoright(var_3.angles * (0, 1, 0)));
+  var_0.up_direction_worldspace = vectorNormalize(anglestoup(var_3.angles * (0, 1, 0)));
 }
 
 cnd_plyr_rpl_setup_dvars(var_0, var_1) {
@@ -410,14 +410,14 @@ cnd_rpl_calc_move(var_0, var_1) {
   var_12 = var_0.player_at_lower_limit || var_0.player_at_upper_limit || var_0.player_at_vertical_upper_cap;
   var_13 = var_7 * var_4[0];
   var_14 = var_8 * var_4[1];
-  var_15 = vectornormalize(var_13 + var_14);
+  var_15 = vectorNormalize(var_13 + var_14);
   var_16 = vectordot(var_15, var_0.right_direction_worldspace);
   var_17 = common_scripts\utility::sign(var_16);
   var_0.right_move_strength = var_0.player_stick_magnitude * var_17 * sqrt(abs(var_16));
   var_18 = abs(vectordot(var_7, var_0.forward_direction_worldspace));
   var_19 = var_9 * var_4[0] * var_18;
   var_20 = var_7 * var_4[0] * (1 - var_18);
-  var_21 = vectornormalize(var_19 + var_20 + var_14);
+  var_21 = vectorNormalize(var_19 + var_20 + var_14);
   var_22 = vectordot(var_21, -1 * var_0.up_direction_worldspace);
   var_22 = var_22 * (2 - var_18);
   var_22 = clamp(var_22, -1.0, 1.0);
@@ -568,7 +568,7 @@ cnd_rpl_do_vertical_move(var_0, var_1) {
     if(abs(var_0.vertical_change_this_update) > 0) {
       level.rpl_plyr_anim_origin unlink();
       level.rpl_plyr_anim_origin.origin = level.rpl_plyr_anim_origin.origin + var_3 * var_0.vertical_change_this_update;
-      level.rpl_plyr_anim_origin linkto(level.rpl_jump_anim_origin, "J_prop_1");
+      level.rpl_plyr_anim_origin linkTo(level.rpl_jump_anim_origin, "J_prop_1");
     }
 
     if(var_0.vertical_change_this_update < 0 || var_0.jumping) {
@@ -861,7 +861,7 @@ cnd_rpl_do_wind(var_0, var_1) {
     var_8 = 0.2;
     var_0.wind_pushing_player = 1;
     var_0.player_anim_origin setanimrestart(var_7, 1.0, var_8, 1.0);
-    var_0.player_anim_origin playrumbleonentity("light_in_out_2s");
+    var_0.player_anim_origin playRumbleOnEntity("light_in_out_2s");
 
     if(var_0.player_anim_origin getanimweight(%rappel_player_stop_l) > 0) {
       var_0.player_anim_origin clearanim(%rappel_player_stop_l, var_8);
@@ -1119,7 +1119,7 @@ cnd_rpl_do_legs(var_0, var_1) {
     return;
   }
   rpl_legs_set_anim_move_strength(var_0);
-  var_0.cur_move_vect_norm = vectornormalize((var_0.anim_right_move_strength, var_0.anim_down_move_strength, 0));
+  var_0.cur_move_vect_norm = vectorNormalize((var_0.anim_right_move_strength, var_0.anim_down_move_strength, 0));
   var_3 = abs(var_0.anim_down_move_strength) > 0 || abs(var_0.anim_right_move_strength) > 0;
   var_0.last_move_vect_norm = var_0.cur_move_vect_norm;
   var_0.last_move_state = var_0.move_state;
@@ -1944,7 +1944,7 @@ rpl_calc_max_rot_speed(var_0, var_1) {
       var_0.anim_down_move_strength = 0;
     }
 
-    var_0.cur_move_vect_norm = vectornormalize((var_0.anim_right_move_strength, var_0.anim_down_move_strength, 0));
+    var_0.cur_move_vect_norm = vectorNormalize((var_0.anim_right_move_strength, var_0.anim_down_move_strength, 0));
     var_3 = abs(var_0.anim_down_move_strength) > 0 || abs(var_0.anim_right_move_strength) > 0;
     var_4 = rpl_legs_traveling_horizontal(var_0, var_3);
 
@@ -2239,12 +2239,12 @@ plyr_rappel_legs_set_origin(var_0) {
 
   if(abs(var_4) > 0) {
     var_6 = -1 * anglestoup(level.rpl_rope_anim_origin gettagangles("J_prop_1"));
-    var_7 = vectornormalize(var_6) * var_4;
+    var_7 = vectorNormalize(var_6) * var_4;
     var_3 = var_3 + var_7;
   }
 
   level.rappel_player_legs.origin = var_3;
-  level.rappel_player_legs linkto(level.rpl_plyr_legs_link_ent);
+  level.rappel_player_legs linkTo(level.rpl_plyr_legs_link_ent);
 }
 
 plyr_rappel_jump_down(var_0, var_1) {

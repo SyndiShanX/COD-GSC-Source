@@ -240,7 +240,7 @@ orientToNormal(normal) {
     return (0, 0, 0);
   }
 
-  hor_dir = vectornormalize(hor_normal);
+  hor_dir = vectorNormalize(hor_normal);
   neg_height = normal[2] * -1;
   tangent = (hor_dir[0] * neg_height, hor_dir[1] * neg_height, hor_length);
   plant_angle = vectortoangles(tangent);
@@ -3509,8 +3509,8 @@ findIsFacing(ent1, ent2, tolerance) {
   ent1ForwardVector *= (1, 1, 0);
   ent1ToTarget *= (1, 1, 0);
 
-  ent1ToTarget = VectorNormalize(ent1ToTarget);
-  ent1ForwardVector = VectorNormalize(ent1ForwardVector);
+  ent1ToTarget = vectorNormalize(ent1ToTarget);
+  ent1ForwardVector = vectorNormalize(ent1ForwardVector);
 
   targetCosine = VectorDot(ent1ToTarget, ent1ForwardVector);
 

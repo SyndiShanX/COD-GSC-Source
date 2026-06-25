@@ -205,7 +205,7 @@ tunnels_wave_guy() {
 }
 
 tunnels_twirl_guy() {
-  animent = getent("tunnels_twirl_animent", "targetname");
+  animent = getEnt("tunnels_twirl_animent", "targetname");
 
   self walkdist_zero();
   animent anim_generic_reach(self, "combatwalk_F_spin");
@@ -221,7 +221,7 @@ whitehouse_main() {
   array_spawn_function_noteworthy("whitehouse_drone", ::whitehouse_drone);
   array_spawn_function_noteworthy("drone_war_drone", ::whitehouse_drone_war_drone);
 
-  spawner = getent("marshall", "script_noteworthy");
+  spawner = getEnt("marshall", "script_noteworthy");
   spawner add_spawn_function(::whitehouse_marshall);
   spawner spawn_ai();
 
@@ -308,7 +308,7 @@ objectives() {
       wait 5;
       Objective_state(9, "done");
 
-      pos = getstruct("objective_entrance", "targetname");
+      pos = getStruct("objective_entrance", "targetname");
       Objective_Add(10, "current", &"DC_WHITEHOUSE_OBJ_BREACH_WH", pos.origin);
 
       flag_wait("oval_office_scene");
@@ -413,12 +413,12 @@ oval_office_dialogue() {
 }
 
 oval_office_window() {
-  window_closed = getent("oval_office_window_closed", "targetname");
-  window_opened = getent("oval_office_window_open", "targetname");
-  barrel_clip = getent("oval_office_barrel_blocker", "targetname");
-  barrel = getent(barrel_clip.target, "targetname");
-  barrel_target = getstruct(barrel.target, "targetname");
-  barrel_clip linkto(barrel);
+  window_closed = getEnt("oval_office_window_closed", "targetname");
+  window_opened = getEnt("oval_office_window_open", "targetname");
+  barrel_clip = getEnt("oval_office_barrel_blocker", "targetname");
+  barrel = getEnt(barrel_clip.target, "targetname");
+  barrel_target = getStruct(barrel.target, "targetname");
+  barrel_clip linkTo(barrel);
 
   window_opened hide();
 
@@ -435,15 +435,15 @@ oval_office_window() {
 }
 
 oval_office_door() {
-  animent = getent("oval_office_door_animent", "targetname");
-  door = getent("oval_office_door", "targetname");
+  animent = getEnt("oval_office_door_animent", "targetname");
+  door = getEnt("oval_office_door", "targetname");
 
   flag_wait("oval_office_door_open");
 
   autosave_by_name("oval_office_door");
 
-  door = getent("oval_office_door", "targetname");
-  door RotateYaw(door.angles[1] + 170, 9, 0, 9);
+  door = getEnt("oval_office_door", "targetname");
+  door rotateYaw(door.angles[1] + 170, 9, 0, 9);
   door connectpaths();
 
   wait 4;
@@ -769,7 +769,7 @@ tunnel_foley() {
   self setgoalnode(node);
   self waittill("goal");
 
-  animent = getent("whitehouse_briefing_ent", "targetname");
+  animent = getEnt("whitehouse_briefing_ent", "targetname");
   animent anim_reach_solo(self, "DCemp_whitehouse_briefing");
 
   level thread whitehouse_briefing(animent);
@@ -789,13 +789,13 @@ oval_office_foley() {
   flag_wait("oval_office_scene");
 
   if(distance(level.player.origin, level.foley.origin) > 500) {
-    teleport_ent = getstruct("oval_office_foley_teleport", "targetname");
+    teleport_ent = getStruct("oval_office_foley_teleport", "targetname");
     level.foley ForceTeleport(teleport_ent.origin, teleport_ent.angles);
   }
 
   self disable_ai_color();
 
-  animent = getent("oval_office_animent", "targetname");
+  animent = getEnt("oval_office_animent", "targetname");
   animent anim_reach_solo(self, "dcemp_wh_radio_1");
   animent anim_single_solo(self, "dcemp_wh_radio_1");
 
@@ -820,11 +820,11 @@ whitehouse_foley() {
   flag_wait("whitehouse_breached");
   self disable_ai_color();
 
-  door = getent("whitehouse_kitchen_door", "targetname");
+  door = getEnt("whitehouse_kitchen_door", "targetname");
   parts = getEntArray(door.target, "targetname");
   array_call(parts, ::linkto, door);
 
-  animent = getent("whitehouse_kitchen_kick", "targetname");
+  animent = getEnt("whitehouse_kitchen_kick", "targetname");
   animent anim_generic_reach(level.foley, "doorburst_wave");
   animent thread anim_generic_gravity(level.foley, "doorburst_wave");
   door thread door_open_kick();
@@ -884,10 +884,10 @@ oval_office_dunn() {
   self.neverenablecqb = undefined;
   self enable_cqbwalk();
 
-  struct = getstruct("oval_office_dune_start", "targetname");
+  struct = getStruct("oval_office_dune_start", "targetname");
   self ForceTeleport(struct.origin, struct.angles);
 
-  animent = getent("oval_office_animent", "targetname");
+  animent = getEnt("oval_office_animent", "targetname");
   level thread oval_office_clear_axis(animent);
 
   self walkdist_zero();
@@ -914,7 +914,7 @@ oval_office_clear_axis(animent) {
 }
 
 oval_office_painting() {
-  animent = getent("oval_office_animent", "targetname");
+  animent = getEnt("oval_office_animent", "targetname");
 
   level.painting = spawn_anim_model("painting", animent.origin);
 
@@ -952,7 +952,7 @@ whitehouse_marshall() {
 
   self AllowedStances("crouch");
 
-  animent = getent("whitehouse_briefing_ent", "targetname");
+  animent = getEnt("whitehouse_briefing_ent", "targetname");
   animent thread anim_first_frame_solo(self, "DCemp_whitehouse_briefing");
 
   self Attach("weapon_binocular", "tag_inhand");
@@ -1001,8 +1001,8 @@ whitehouse_interior() {
   }
 
   flag_wait("whitehouse_chandelier");
-  source_ent = getent("chandelier_grenade_source", "targetname");
-  target_ent = getent(source_ent.target, "targetname");
+  source_ent = getEnt("chandelier_grenade_source", "targetname");
+  target_ent = getEnt(source_ent.target, "targetname");
   MagicGrenade("fraggrenade", source_ent.origin, target_ent.origin, 1.5);
 
   flag_wait("whitehouse_path_stairs");
@@ -1155,7 +1155,7 @@ whitehouse_flare_guy() {
 
   wait 0.1;
 
-  animent = getent("ramp_flare_animent", "targetname");
+  animent = getEnt("ramp_flare_animent", "targetname");
 
   animent thread anim_loop_solo(self, "dcemp_flare_reshoot_start_idle");
 
@@ -1174,7 +1174,7 @@ whitehouse_flare_guy() {
   wait 4;
 
   if(!flag("whitehouse_flare_run") || !flag("player_looking_at_flareguy")) {
-    self anim_stopanimscripted();
+    self anim_stopanimScripted();
 
     animent anim_first_frame_solo(self, "dcemp_flare_reshoot_start_short");
 
@@ -1189,7 +1189,7 @@ whitehouse_flare_guy() {
     animent waittill("dcemp_flare_reshoot_start");
   }
 
-  animent = getent("flare_scene_upper_animent", "targetname");
+  animent = getEnt("flare_scene_upper_animent", "targetname");
   animent anim_reach_solo(self, "dcemp_flare_reshoot_end");
 
   if(!flag("whitehouse_path_roof")) {

@@ -16,14 +16,14 @@ main() {
 }
 house_explosion2() {
   level waittill("house_explosion");
-  house_explo = getstruct("house_explo", "targetname");
+  house_explo = getStruct("house_explo", "targetname");
 
   playSound(0, "explosion_house", house_explo.origin);
 }
 camp_audio() {
   level waittill("camp_audio_on");
-  klaxxon = getstruct("klaxxon", "targetname");
-  pa_speaker = getstruct("pa_speaker", "targetname");
+  klaxxon = getStruct("klaxxon", "targetname");
+  pa_speaker = getStruct("pa_speaker", "targetname");
 
   e1 = clientscripts\_audio::playloopat(0, "klaxxon", klaxxon.origin);
   e2 = clientscripts\_audio::playloopat(0, "pa_speaker", pa_speaker.origin);

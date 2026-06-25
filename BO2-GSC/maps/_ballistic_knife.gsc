@@ -35,7 +35,7 @@ on_spawn(watcher, player) {
       }
 
       if(!isfriendly) {
-        retrievable_model linkto(prey, bone);
+        retrievable_model linkTo(prey, bone);
       } else if(isfriendly) {
         retrievable_model physicslaunch(normal, (randomint(10), randomint(10), randomint(10)));
         normal = (0, 0, 1);
@@ -66,7 +66,7 @@ wait_to_show_glowing_model(prey) {
   glowing_retrievable_model = spawn("script_model", self.origin);
   self.glowing_model = glowing_retrievable_model;
   glowing_retrievable_model.angles = self.angles;
-  glowing_retrievable_model linkto(self);
+  glowing_retrievable_model linkTo(self);
 
   if(isDefined(prey)) {
     wait 2;
@@ -102,12 +102,12 @@ on_spawn_retrieve_trigger(watcher, player) {
   retrievable_model.retrievabletrigger = pickup_trigger;
   pickup_trigger setteamfortrigger(player.team);
   player clientclaimtrigger(pickup_trigger);
-  pickup_trigger enablelinkto();
+  pickup_trigger enablelinkTo();
 
   if(isDefined(prey)) {
-    pickup_trigger linkto(prey);
+    pickup_trigger linkTo(prey);
   } else {
-    pickup_trigger linkto(retrievable_model);
+    pickup_trigger linkTo(retrievable_model);
   }
 
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.weapon, watcher.pickupsoundplayer, watcher.pickupsound);
@@ -236,5 +236,5 @@ update_retrieve_trigger(player) {
   self waittill("stationary");
   trigger = self.retrievabletrigger;
   trigger.origin = (self.origin[0], self.origin[1], self.origin[2] + 10);
-  trigger linkto(self);
+  trigger linkTo(self);
 }

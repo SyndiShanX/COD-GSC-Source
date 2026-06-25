@@ -376,7 +376,7 @@ box_init() {
   }
 
   if(isDefined(s_unitrigger_stub.m_box.target)) {
-    s_unitrigger_stub.m_board = getent(s_unitrigger_stub.m_box.target, "targetname");
+    s_unitrigger_stub.m_board = getEnt(s_unitrigger_stub.m_box.target, "targetname");
     s_unitrigger_stub board_init(s_unitrigger_stub.m_board);
   }
 
@@ -400,7 +400,7 @@ update_box_prompt(player) {
   str_hint = &"";
   str_old_hint = &"";
   m_board = self.stub.m_board;
-  self sethintstring(str_hint);
+  self setHintString(str_hint);
 
   while(true) {
     s_hint_tag = undefined;
@@ -425,7 +425,7 @@ update_box_prompt(player) {
           continue;
         }
         v_tag_origin = s_tag.v_origin;
-        v_eye_to_tag = vectornormalize(v_tag_origin - v_eye_origin);
+        v_eye_to_tag = vectorNormalize(v_tag_origin - v_eye_origin);
         n_dot = vectordot(v_eye_to_tag, v_eye_direction);
 
         if(n_dot > n_closest_dot) {
@@ -472,7 +472,7 @@ update_box_prompt(player) {
         } else {}
       }
 
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
     }
 
     wait 0.1;
@@ -513,7 +513,7 @@ box_think() {
 
     if(self.b_can_open) {
       self.stub.hint_string = &"";
-      self sethintstring(self.stub.hint_string);
+      self setHintString(self.stub.hint_string);
       level thread open_box(player, self.stub);
     }
   }

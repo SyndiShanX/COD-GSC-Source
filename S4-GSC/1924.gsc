@@ -54,8 +54,8 @@ _id_F649(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   thread _id_D805();
   level thread scripts\cp\cp_weapon::_id_1046(self);
   var_3 = &"CP_STRIKE/DEFUSE";
-  var_11 sethintstring(var_3);
-  var_11 setcursorhint("HINT_BUTTON");
+  var_11 setHintString(var_3);
+  var_11 setCursorHint("HINT_BUTTON");
   var_11 makeuseable();
   return var_11;
 }

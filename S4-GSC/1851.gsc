@@ -849,14 +849,14 @@ _id_F02F() {
   }
   level endon("game_ended");
   scripts\engine\utility::_id_108A7(3, "revive");
-  self setorigin(level._id_9A57);
+  self setOrigin(level._id_9A57);
 }
 
 _id_BE70(var_0) {
   if(!var_0 isonground()) {
     var_1 = scripts\engine\utility::_id_5000(var_0.origin, 5, -1500);
     var_1 = _func_02AB(var_1);
-    var_0 setorigin(var_1);
+    var_0 setOrigin(var_1);
   }
 }
 
@@ -939,7 +939,7 @@ _id_9092(var_0) {
         var_1 scripts\common\utility::_id_158D(1);
       } else {
         if(isDefined(var_1._id_C7CA)) {
-          var_1 setorigin(var_1._id_C7CA);
+          var_1 setOrigin(var_1._id_C7CA);
           var_1._id_C7CA = undefined;
         }
 
@@ -995,7 +995,7 @@ _id_9092(var_0) {
       }
 
       if(isDefined(var_1._id_C7CA)) {
-        var_1 setorigin(var_1._id_C7CA);
+        var_1 setOrigin(var_1._id_C7CA);
         var_1._id_C7CA = undefined;
       }
 
@@ -1303,11 +1303,11 @@ _id_9A09(var_0, var_1, var_2, var_3, var_4) {
   var_6 = anglesToForward(var_0.angles) * 30;
   var_1 = scripts\engine\utility::_id_5000(var_1 + var_5 + var_6, 32, -64);
   var_7 = spawn("script_model", var_1);
-  var_7 sethintstring(&"COOP_GAME_PLAY/REVIVE_USE");
+  var_7 setHintString(&"COOP_GAME_PLAY/REVIVE_USE");
   var_7 _meth_84D4(256);
   var_7 setuserange(84);
   var_7 setusefov(180);
-  var_7 setcursorhint("HINT_NOICON");
+  var_7 setCursorHint("HINT_NOICON");
   var_7 sethintdisplayfov(180);
   var_7 _meth_84D9("hide");
   var_7 setuseholdduration("duration_none");
@@ -1324,7 +1324,7 @@ _id_9A09(var_0, var_1, var_2, var_3, var_4) {
   }
 
   if(var_4) {
-    var_7 linkto(var_0, "tag_origin", var_5, (0, 0, 0));
+    var_7 linkTo(var_0, "tag_origin", var_5, (0, 0, 0));
   }
 
   var_7 disableplayeruse(var_0);
@@ -1397,11 +1397,11 @@ _id_99E9(var_0, var_1) {
   var_2 = (0, 0, 20);
   var_1 = scripts\engine\utility::_id_5000(var_1 + var_2, 32, -64);
   var_3 = spawn("script_model", var_1);
-  var_3 setcursorhint("HINT_NOICON");
-  var_3 sethintstring(&"COOP_GAME_PLAY/EXECUTE");
+  var_3 setCursorHint("HINT_NOICON");
+  var_3 setHintString(&"COOP_GAME_PLAY/EXECUTE");
   var_3.owner = var_0;
   var_3._id_84EF = 0;
-  var_3 linkto(var_0, "tag_origin", var_2, (0, 0, 0));
+  var_3 linkTo(var_0, "tag_origin", var_2, (0, 0, 0));
   var_3 thread _id_56EC(var_3);
   var_3 thread _id_388E(var_0);
   var_0._id_56EB = var_3;
@@ -1772,8 +1772,8 @@ _id_3080(var_0, var_1, var_2) {
   var_13 setModel("tag_origin");
   var_13.angles = vectortoangles((0, 0, -1));
   var_13 thread _id_388E(var_0);
-  var_0 cameralinkto(var_13, "tag_origin");
-  var_13 moveto(var_12, var_6, var_7, var_8);
+  var_0 cameralinkTo(var_13, "tag_origin");
+  var_13 moveTo(var_12, var_6, var_7, var_8);
   var_13 waittill("movedone");
   var_13 delete();
   var_0 _id_5490(var_0);
@@ -1960,10 +1960,10 @@ _id_85C8(var_0) {
   var_1 = self getplayerangles();
   var_2 = anglesToForward(var_1);
   var_3 = (var_2[0], var_2[1], 0);
-  var_4 = vectornormalize(var_3);
+  var_4 = vectorNormalize(var_3);
   var_5 = var_0.origin - self.origin;
   var_6 = (var_5[0], var_5[1], 0);
-  var_7 = vectornormalize(var_6);
+  var_7 = vectorNormalize(var_6);
   var_8 = vectordot(var_4, var_7);
   return var_8 > cos(30);
 }
@@ -3149,7 +3149,7 @@ _id_7412(var_0) {
   var_1 = spawn("script_model", self gettagorigin("tag_accessory_right"));
   var_1.angles = self gettagangles("tag_accessory_right");
   var_1 setModel("offhand_wm_stim");
-  var_1 linkto(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(self, "tag_accessory_right", (0, 0, 0), (0, 0, 0));
   self._id_C7D0 = var_1;
   scripts\engine\utility::_id_10888(self, "remove_stim", self, "revive_done", self, "revive_teammate", self, "disconnect", self, "last_stand", var_0, "disconnect", var_0, "entered_spectate");
 

@@ -22,7 +22,7 @@ func_A0F0() {
   level.var_D127 func_0BDC::func_F420(500, 135, -30, 0, 1);
   level.var_D127 func_0BDC::func_A19F();
   func_107C1();
-  var_0 = scripts\engine\utility::getstruct("jackal_callin_launch_animnode", "targetname");
+  var_0 = scripts\engine\utility::getStruct("jackal_callin_launch_animnode", "targetname");
   var_0 = scripts\engine\utility::spawn_tag_origin(var_0.origin, var_0.angles);
   var_1 = "jackal_callin";
 
@@ -164,7 +164,7 @@ func_C12F(var_0) {
 }
 
 func_1130D(var_0) {
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;

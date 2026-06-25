@@ -35,7 +35,7 @@ function private function_538c9c9b(params) {
   assert(paramarray.size == 2);
   notetype = paramarray[0];
   noteid = paramarray[1];
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread function_32402e29(notetype, noteid);
 }
 

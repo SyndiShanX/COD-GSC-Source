@@ -943,14 +943,14 @@ function pod_hunt_vo() {
     }
 
     if(hunters.size > 1) {
-      hunters = arraysortclosest(hunters, getplayers()[0].origin);
+      hunters = arraysortclosest(hunters, getPlayers()[0].origin);
 
       if(!is_true(hunters[0].ignoreall)) {
         leader = hunters[0];
         arrayremovevalue(hunters, leader);
         wait randomfloatrange(2, 2.5);
         function_1eaaceab(hunters);
-        hunters = arraysortclosest(hunters, getplayers()[0].origin);
+        hunters = arraysortclosest(hunters, getPlayers()[0].origin);
         hunter = undefined;
 
         switch (hunters.size) {

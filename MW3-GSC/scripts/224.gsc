@@ -78,7 +78,7 @@ _id_1A3F(var_0) {
   self._id_1A3D setshader(var_0, 1, 1);
   self._id_1A3D setwaypoint(1, 1, 0);
   self._id_1A3D setwaypointiconoffscreenonly();
-  self._id_1A3D settargetent(maps\_utility::_id_133A(self));
+  self._id_1A3D settargetEnt(maps\_utility::_id_133A(self));
   self._id_1A3D._id_1A3E = var_0;
   self._id_1A3D.hidewheninmenu = 1;
 

@@ -35,7 +35,7 @@ function finalize() {
 }
 
 function function_a92a93e9(v_location, v_angles, var_75b5cef0 = 0, n_delay = 1) {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     switch (level.var_b48509f9) {
       default:
         level scoreevents::doscoreeventcallback("scoreEventZM", {
@@ -88,7 +88,7 @@ function function_bdd95292(struct) {
   struct.state = 0;
   struct.usetriggers = [];
   struct.players = [];
-  players = getplayers();
+  players = getPlayers();
   assert(players.size > 0, "<dev string:x6a>");
 
   foreach(player in players) {
@@ -224,7 +224,7 @@ function function_39340834(struct, trigger) {
 }
 
 function function_621d45bc(list, struct) {
-  players = getplayers();
+  players = getPlayers();
   struct.var_f0f92268 = [];
 
   foreach(player in players) {
@@ -449,7 +449,7 @@ function function_39d87af7(currentselection) {
 }
 
 function function_80bbb50b(chest, trigger) {
-  trigger sethintstring("");
+  trigger setHintString("");
 
   if(isDefined(self.var_524f43cb[trigger.var_7fadf788])) {
     objid = self.var_524f43cb[trigger.var_7fadf788];
@@ -549,7 +549,7 @@ function function_80bbb50b(chest, trigger) {
     }
 
     if(self stancebuttonPressed() || distance2d(self.origin, chest.origin) > 128 || self laststand::player_is_in_laststand() || self isinvehicle()) {
-      trigger sethintstring(#"hash_4703982104472957");
+      trigger setHintString(#"hash_4703982104472957");
 
       if(isDefined(self.var_524f43cb[trigger.var_7fadf788])) {
         objid = self.var_524f43cb[trigger.var_7fadf788];
@@ -574,11 +574,11 @@ function function_578918d1() {
   while(true) {
     if(getdvarint(#"hash_316815357b0bca3a", 0)) {
       setDvar(#"hash_316815357b0bca3a", 0);
-      player = getplayers()[0];
+      player = getPlayers()[0];
 
       if(isPlayer(player)) {
         forwardvec = anglesToForward(player.angles);
-        forwardvec = vectornormalize(forwardvec);
+        forwardvec = vectorNormalize(forwardvec);
         forwardvec *= 128;
         loc = player.origin + forwardvec;
         function_a92a93e9(loc, player.angles + (0, 180, 0), 0);

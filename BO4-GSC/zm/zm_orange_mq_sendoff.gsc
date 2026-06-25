@@ -81,7 +81,7 @@ function_39c9e020() {
 
   a_e_players = [];
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     str_zone = e_player zm_zonemgr::get_player_zone();
 
     if(str_zone === "main_entrance" || str_zone === "loading_platform") {
@@ -120,13 +120,13 @@ sun_deck_watcher() {
 
 function_d096f18f() {
   level.var_ab11c23d notify(#"lighthouse_state_change");
-  level.var_ab11c23d rotateto((10, level.var_ab11c23d.angles[1] - 5, 0), 0.2);
+  level.var_ab11c23d rotateTo((10, level.var_ab11c23d.angles[1] - 5, 0), 0.2);
   level.var_ab11c23d waittill(#"rotatedone");
   level.var_ab11c23d rotatevelocity((0, -1440, 0), 4.5, 3);
   level thread function_39d9b290();
   exploder::exploder("fxexp_portal_115_start");
   wait 5;
-  level.var_ab11c23d rotateto((-90, level.var_ab11c23d.angles[1], 0), 0.2);
+  level.var_ab11c23d rotateTo((-90, level.var_ab11c23d.angles[1], 0), 0.2);
   level zm_orange_util::function_fd24e47f(#"hash_1003004a8ca44bb3", -1, 1);
   var_6df66af8 = float(soundgetplaybacktime(#"hash_2e5e53739622d4e5")) / 1000;
   s_start = struct::get("pablo_rise_start");
@@ -134,13 +134,13 @@ function_d096f18f() {
   e_mover = util::spawn_model("tag_origin", level.npc_pablo.origin);
   e_orb = util::spawn_model("p8_fxp_hell_sphere", e_mover.origin);
   e_orb setscale(1.5);
-  e_orb linkto(e_mover);
-  level.npc_pablo linkto(e_mover);
-  e_mover moveto(s_start.origin, 1);
+  e_orb linkTo(e_mover);
+  level.npc_pablo linkTo(e_mover);
+  e_mover moveTo(s_start.origin, 1);
   level thread zm_orange_pablo::function_e44c7c0c(#"hash_1a974fe7a0edddab");
   wait 1;
   zm_ui_inventory::function_7df6bb60(#"zm_orange_objective_progress", 12);
-  e_mover moveto(e_mover.origin + (0, 0, 4000), var_6df66af8 - 1);
+  e_mover moveTo(e_mover.origin + (0, 0, 4000), var_6df66af8 - 1);
   wait var_6df66af8 - 3;
   exploder::stop_exploder("fxexp_portal_115_start");
   exploder::exploder("fxexp_portal_115_end");
@@ -182,7 +182,7 @@ function_39d9b290() {
 }
 
 function_bf106bdf() {
-  for(vh_wisp = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_wisp); vh_wisp = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
+  for(vh_wisp = spawner::simple_spawn_single(getEnt("virgil", "targetname")); !isDefined(vh_wisp); vh_wisp = spawner::simple_spawn_single(getEnt("virgil", "targetname"))) {
     waitframe(1);
   }
 
@@ -196,7 +196,7 @@ function_bf106bdf() {
 }
 
 pickup_device(e_item, e_player) {
-  e_player playrumbleonentity("zm_mansion_atlas_interact_rumble");
+  e_player playRumbleOnEntity("zm_mansion_atlas_interact_rumble");
   level flag::set(#"hash_2c3411c8b8b421d8");
 
   iprintlnbold("<dev string:x6b>");

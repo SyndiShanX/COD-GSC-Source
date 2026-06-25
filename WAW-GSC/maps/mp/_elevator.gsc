@@ -262,7 +262,7 @@ move_platform(platform_start, platform_name) {
           speed = get_speed(org, speed);
 
           time = distance(self.origin, org.origin) / speed;
-          self moveto(org.origin, time);
+          self moveTo(org.origin, time);
           wait time;
         }
       }
@@ -302,7 +302,7 @@ move_platform(platform_start, platform_name) {
           speed = get_speed(org, speed);
 
           time = distance(self.origin, org.origin) / speed;
-          self moveto(org.origin, time);
+          self moveTo(org.origin, time);
           wait time;
         }
       }

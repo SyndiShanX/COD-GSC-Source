@@ -157,7 +157,7 @@ odin_script_setup() {
     level.scr_model["player_rig"] = "viewhands_player_us_space";
   }
 
-  var_0 = getent("ally_0", "targetname");
+  var_0 = getEnt("ally_0", "targetname");
   level.ally = var_0 maps\_utility::spawn_ai(1);
   level.squad[0] = level.ally;
   level.ally thread maps\_utility::deletable_magic_bullet_shield();
@@ -307,7 +307,7 @@ mission_objective_logic() {
 add_marker_helper(var_0) {
   level endon("safe_marker_thread_deletion");
   common_scripts\utility::flag_wait("astronaut_needs_help");
-  var_1 = getent("intro_hatch_door_blocker_org", "targetname");
+  var_1 = getEnt("intro_hatch_door_blocker_org", "targetname");
   objective_position(var_0, var_1.origin);
 }
 

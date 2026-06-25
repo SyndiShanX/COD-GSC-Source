@@ -291,7 +291,7 @@ moveeffecttoclosestplayer(var_0) {
   }
 
   var_5 = getclosestpointonnavmesh(scripts\engine\utility::drop_to_ground(var_1.origin, 32, -100)) + (0, 0, 50);
-  var_0.fx moveto(var_5, var_4);
+  var_0.fx moveTo(var_5, var_4);
   var_0.fx waittill("movedone");
   var_0 dontinterpolate();
   var_0.origin = var_0.fx.origin;

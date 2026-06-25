@@ -90,7 +90,7 @@ friendly_stance_handler_check_mightbeseen(var_0) {
 
 friendly_stance_handler_return_ai_sight(var_0, var_1) {
   var_2 = anglesToForward(var_0.angles);
-  var_3 = vectornormalize(self.origin - var_0.origin);
+  var_3 = vectorNormalize(self.origin - var_0.origin);
   var_4 = vectordot(var_2, var_3);
 
   if(var_4 > 0.3) {

@@ -684,13 +684,13 @@ getbackpedalspot() {
   }
 
   var_0 = scripts\mp\agents\elvira\elvira_tunedata::gettunedata();
-  var_1 = vectornormalize(self.origin - self.enemy.origin);
+  var_1 = vectorNormalize(self.origin - self.enemy.origin);
   var_2 = var_0.backupdist;
   var_3 = self.origin + var_1 * var_2;
   var_3 = getclosestpointonnavmesh(var_3, self);
   var_4 = var_3 - self.origin;
   var_4 = (var_4[0], var_4[1], 0);
-  var_5 = vectornormalize(var_4);
+  var_5 = vectorNormalize(var_4);
   var_6 = vectordot(var_5, var_1);
 
   if(var_6 > 0) {
@@ -808,7 +808,7 @@ combat_end(var_0) {
 revealanomaly_begin(var_0) {
   self scragentsetgoalpos(self.reveal_anomaly_origin);
   self.og_goalradius = self.goalradius;
-  self scragentsetgoalradius(108);
+  self scragentsetgoalRadius(108);
   self.reveal_dialogue_spoken = undefined;
   self.started_reveal_dialogue = undefined;
   thread elvira_reveal_vo();
@@ -860,7 +860,7 @@ revealanomaly_tick(var_0) {
 }
 
 revealanomaly_end(var_0) {
-  self scragentsetgoalradius(self.og_goalradius);
+  self scragentsetgoalRadius(self.og_goalradius);
   self.og_goalradius = undefined;
   var_1 = scripts\aitypes\dlc3\bt_state_api::btstate_getinstancedata(var_0);
   var_1.breveal_started = undefined;

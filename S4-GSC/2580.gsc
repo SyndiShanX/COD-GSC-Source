@@ -65,13 +65,13 @@ _id_DEC4(var_0) {
   var_1 endon("death");
   var_2 = scripts\mp\utility\weapon::_id_0C48("snapshot_grenade_danger_mp", var_1.origin, (0, 0, 0), 100, 1);
   var_2.weapon_name = "snapshot_grenade_danger_mp";
-  var_2 linkto(var_1);
+  var_2 linkTo(var_1);
   var_2 hidefromplayer(self);
   var_1 thread _id_DEB2(var_2);
   var_3 = spawn("script_model", var_1.origin);
   var_3.angles = var_1.angles;
   var_3 setModel("tag_origin");
-  var_1 linkto(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_1 linkTo(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_1 thread _id_DEB3(var_3);
   var_4 = (0, 0, 1);
   var_5 = _id_DEB0(var_0, var_4, [var_1, var_2]);
@@ -86,11 +86,11 @@ _id_DEC4(var_0) {
     var_12 = 0.3 * var_8;
     var_13 = var_9 * 0;
     var_14 = var_9 * 0.35;
-    var_3 rotateto(var_7, var_12, var_13, var_14);
+    var_3 rotateTo(var_7, var_12, var_13, var_14);
     wait 0.3;
     var_1 setscriptablepartstate("dust", "active", 0);
     var_1 setscriptablepartstate("anims", "idle", 0);
-    var_3 moveto(var_5, var_9, var_10, var_11);
+    var_3 moveTo(var_5, var_9, var_10, var_11);
     wait(var_9);
   } else {
     var_3.angles = var_7;
@@ -373,7 +373,7 @@ _id_DEB5(var_0, var_1, var_2) {
   var_3.angles = var_1;
 
   if(isDefined(var_2) && 1) {
-    var_3 linkto(var_2);
+    var_3 linkTo(var_2);
   }
 
   var_3 setModel("equip_snapshot_marker_mp");

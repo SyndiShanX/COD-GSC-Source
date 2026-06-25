@@ -127,14 +127,14 @@ pain_smear_teleport_forward(teleport_dist) {
   pain_smear_ent.angles = self.angles;
 
   forward = anglesToForward(self.angles);
-  forward = VectorNormalize(forward) * smear_dist;
+  forward = vectorNormalize(forward) * smear_dist;
 
-  teleport_forward = VectorNormalize(forward) * teleport_dist;
+  teleport_forward = vectorNormalize(forward) * teleport_dist;
 
   destination = self.origin + forward;
   teleport_destination = self.origin + teleport_forward;
 
-  pain_smear_ent MoveTo(destination, move_time);
+  pain_smear_ent moveTo(destination, move_time);
   pain_smear_ent thread pain_smear_for_time(splatter_time);
   pain_smear_ent delayCall(move_time, ::Delete);
 
@@ -183,7 +183,7 @@ eq_changes(val, fade_time) {
   }
 
   if(fade_time) {
-    level.eq_ent MoveTo((val, 0, 0), fade_time);
+    level.eq_ent moveTo((val, 0, 0), fade_time);
   } else {
     level.eq_ent.origin = (val, 0, 0);
   }
@@ -208,7 +208,7 @@ fade_in(fade_time) {
 get_anim_node() {
   if(!isDefined(level.knife_fight_animnode)) {
     level.knife_fight_animnode = spawn("script_origin", (0, 0, 0));
-    anim_node = getstruct("end_scene_org", "targetname");
+    anim_node = getStruct("end_scene_org", "targetname");
     level.knife_fight_animnode.origin = anim_node.origin;
     level.knife_fight_animnode.angles = anim_node.angles;
   }
@@ -219,11 +219,11 @@ get_anim_node() {
 get_anim_node_rotated() {
   if(1) return get_anim_node();
 
-  return getstruct("end_scene_org_new", "targetname");
+  return getStruct("end_scene_org_new", "targetname");
 }
 
 spawn_price() {
-  spawner = GetEnt("boatrider0", "targetname");
+  spawner = getEnt("boatrider0", "targetname");
   spawner.count = 1;
 
   guy = spawner spawn_ai(true);
@@ -237,7 +237,7 @@ spawn_price() {
 
 spawn_nikolai() {
   Assert(!isDefined(level.nikolai));
-  spawner = GetEnt("nikolai", "targetname");
+  spawner = getEnt("nikolai", "targetname");
   spawner.count = 1;
   level.nikolai = spawner spawn_ai(true);
   Assert(isDefined(level.nikolai));
@@ -327,8 +327,8 @@ give_knife_fight_weapon() {
 spawn_fake_wrestlers() {
   wait 0.05;
   spawners = [];
-  spawners["shepherd"] = GetEnt("shepard", "targetname");
-  spawners["price"] = GetEnt("boatrider0", "targetname");
+  spawners["shepherd"] = getEnt("shepard", "targetname");
+  spawners["price"] = getEnt("boatrider0", "targetname");
 
   guys = [];
 
@@ -353,14 +353,14 @@ spawn_fake_wrestlers() {
 
   scene = "fight_D3_swapped";
   tag_origin = spawn_tag_origin();
-  struct = getstruct("endorg_new_fight", "targetname");
+  struct = getStruct("endorg_new_fight", "targetname");
   tag_origin.origin = struct.origin;
   tag_origin.angles = struct.angles;
 
   struct thread anim_first_frame(guys, scene);
 
   foreach(guy in guys) {
-    guy LinkTo(tag_origin);
+    guy linkTo(tag_origin);
   }
 
   flag_wait("price_shepherd_fight_e_flag");
@@ -377,13 +377,13 @@ spawn_fake_wrestlers() {
   wait 0.05;
 
   time = 1.2;
-  tag_origin MoveTo(struct.origin, time, 0, time);
+  tag_origin moveTo(struct.origin, time, 0, time);
 
   new_origin = spawn_tag_origin();
-  level.price LinkTo(new_origin);
-  level.shepherd LinkTo(new_origin);
+  level.price linkTo(new_origin);
+  level.shepherd linkTo(new_origin);
   new_org = new_origin.origin + right * 15 + forward * -50;
-  new_origin MoveTo(new_org, time, time, 0);
+  new_origin moveTo(new_org, time, time, 0);
 
   foreach(guy in guys) {
     guy show_solid();
@@ -411,7 +411,7 @@ spawn_fake_wrestlers() {
 }
 
 spawn_shepherd() {
-  shepherd_spawner = GetEnt("shepard", "targetname");
+  shepherd_spawner = getEnt("shepard", "targetname");
   shepherd = shepherd_spawner Stalingradspawn(0, "spawned_shepherd");
   spawn_fail = spawn_failed(shepherd);
 
@@ -463,7 +463,7 @@ get_gun_model() {
 }
 
 shepherd_stumbles_out_of_helicopter() {
-  spawner = GetEnt("shepherd_stumble_spawner", "targetname");
+  spawner = getEnt("shepherd_stumble_spawner", "targetname");
   spawner add_spawn_function(::shepherd_stumbles);
   spawner spawn_ai();
 }
@@ -472,7 +472,7 @@ play_helicopter_exit_sound() {
   if(flag("helicopter_sound_played")) {
     return;
   }
-  spawner = GetEnt("shepherd_stumble_spawner", "targetname");
+  spawner = getEnt("shepherd_stumble_spawner", "targetname");
   flag_set("helicopter_sound_played");
   thread play_sound_in_space("helicopter_door_slams", spawner.origin);
 }
@@ -547,7 +547,7 @@ shepherd_stumbles() {
   level.shepherd hide();
 
   level.shepherd_stumble = self;
-  struct = getstruct("shepherd_spawncheck_struct", "targetname");
+  struct = getStruct("shepherd_spawncheck_struct", "targetname");
 
   scene = "flee";
   prone_anim = "prone_stand";
@@ -579,11 +579,11 @@ self AllowedStances("stand");
 
 thread play_helicopter_exit_sound();
 
-struct = getstruct(self.target, "targetname");
+struct = getStruct(self.target, "targetname");
 struct anim_reach_solo(self, "flee");
 
 level notify("shepherd_runs");
-goal_struct = getstruct("start_player_turnbuckle", "targetname");
+goal_struct = getStruct("start_player_turnbuckle", "targetname");
 self SetGoalPos(goal_struct.origin);
 thread make_clouds_near_goal_struct(goal_struct);
 
@@ -599,20 +599,20 @@ wait_for_buffer_time_to_pass(start_time, time - 2.4);
 
 wait_for_buffer_time_to_pass(start_time, time - 2.0);
 
-stumble_path = getstruct("stumble_path", "targetname");
+stumble_path = getStruct("stumble_path", "targetname");
 self thread maps\_spawner::go_to_node(stumble_path, "struct");
 path = stumble_path;
 for(;;) {
   if(!isDefined(path.target)) {
     break;
   }
-  path = getstruct(path.target, "targetname");
+  path = getStruct(path.target, "targetname");
 }
 path.radius = 86.7;
 
 wait_for_buffer_time_to_pass(start_time, time - 0.8);
 self notify("stop_animmode");
-self anim_stopanimscripted();
+self anim_stopanimScripted();
 
 level notify("stop_random_breathing_sounds");
 
@@ -629,9 +629,9 @@ ent = spawn_tag_origin();
 ent.origin = self.origin;
 ent.angles = self.angles;
 
-self LinkTo(ent);
+self linkTo(ent);
 time = 1.1;
-ent MoveTo(level.shepherd.origin, time, 0, time);
+ent moveTo(level.shepherd.origin, time, 0, time);
 wait time;
 Objective_OnEntity(obj("get_shepherd"), level.shepherd);
 level.compass_ent = level.shepherd;
@@ -662,7 +662,7 @@ scale_player_if_close_to_shepherd() {
 
     if(!limped && dist < 300) {
       level.player StunPlayer(1.5);
-      level.player PlayRumbleOnEntity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
       level.player thread play_sound_on_entity("breathing_hurt");
       noself_delayCall(0.5, ::setblur, 4, 0.25);
       noself_delayCall(1.2, ::setblur, 0, 1);
@@ -812,14 +812,14 @@ get_knife() {
 
 get_dof_targetEnt() {
   if(!isDefined(level.dof_targetent)) {
-    level.dof_targetent = create_dof_targetent();
+    level.dof_targetent = create_dof_targetEnt();
   }
 
   level.dof_targetent Unlink();
   return level.dof_targetent;
 }
 
-create_dof_targetent() {
+create_dof_targetEnt() {
   level notify("new_dof_targetent");
   level endon("new_dof_targetent");
   level endon("kill_dof_management");
@@ -1149,10 +1149,10 @@ impaled_spawner() {
   glock.angles = (14.9096, 214.163, -108.396);
 
   thread impaled_died();
-  struct = getstruct("impaled_guy", "targetname");
+  struct = getStruct("impaled_guy", "targetname");
 
   struct thread anim_loop_solo(self, "idle");
-  glock LinkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
+  glock linkTo(self, "tag_sync", (0, 0, 0), (0, 0, 0));
   glock Unlink();
   wait_until_time_to_twitch();
   struct notify("stop_loop");
@@ -1495,10 +1495,10 @@ player_pulls_out_knife(animation_name) {
       }
 
       if(randomint(100) > self.min_heavy) {
-        level.player PlayRumbleOnEntity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
       } else
       if(randomint(100) > self.min_light) {
-        level.player PlayRumbleOnEntity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
       }
 
       occumulator.presses[occumulator.presses.size] = GetTime();
@@ -1749,7 +1749,7 @@ hint_crawl_left() {
 }
 
 teleport_to_truck_area() {
-  struct = getstruct("turnbuckle_start", "targetname");
+  struct = getStruct("turnbuckle_start", "targetname");
   level.player teleport_ent(struct);
 }
 
@@ -1779,14 +1779,14 @@ dof_to_gun_kick_gun(dof_target_ent) {
 }
 
 gun_crawl_move_fighters_away() {
-  level.gun_crawl_fight_node MoveTo(level.gun_crawl_fight_node.origin + (100, 0, 0), 4.7, 0, 0);
+  level.gun_crawl_fight_node moveTo(level.gun_crawl_fight_node.origin + (100, 0, 0), 4.7, 0, 0);
 }
 
 gun_crawl_price_falls() {
   level endon("stop_idle_crawl_fight");
   flag_set("fade_away_idle_crawl_fight");
   movetime = 1;
-  level.gun_crawl_fight_node MoveTo(level.gun_crawl_fight_node.origin + (120, 0, 0), movetime, 0, 0);
+  level.gun_crawl_fight_node moveTo(level.gun_crawl_fight_node.origin + (120, 0, 0), movetime, 0, 0);
   wait movetime;
   level.shepherd Unlink();
 
@@ -1811,9 +1811,9 @@ gun_crawl_price_falls() {
 
   level.price thread play_sound_on_entity("scn_afchase_collapse_foley_stereo");
   new_anim_node thread anim_single_solo(level.price, scene);
-  level.price LinkTo(new_anim_node);
+  level.price linkTo(new_anim_node);
   wait .05;
-  new_anim_node MoveTo(new_anim_node_base_origin, .5, 0, 0);
+  new_anim_node moveTo(new_anim_node_base_origin, .5, 0, 0);
 
   level notify("stop_idle_crawl_fight_just_the_fight");
   anim_node anim_first_frame_solo(level.shepherd, "turn_buckle");
@@ -1856,7 +1856,7 @@ gun_crawl_fight_idle() {
   wait(0.05);
   foreach(guy in guys) {
     guy DontInterpolate();
-    guy LinkTo(new_anim_node);
+    guy linkTo(new_anim_node);
     guy Show();
   }
 
@@ -1868,14 +1868,14 @@ gun_crawl_fight_idle() {
   level.shepherd delaycall(3.25, ::playsound, "scn_afchase_b_longoff_headbutt3");
 
   while(1) {
-    new_anim_node MoveTo(destorg, 2, 0, 0);
+    new_anim_node moveTo(destorg, 2, 0, 0);
     new_anim_node anim_set_time(guys, "fight_B", b_start);
 
     move_out_time = 1;
     wait(b_totaltime - move_out_time);
 
     if(!flag("fade_away_idle_crawl_fight")) {
-      new_anim_node MoveTo(out_of_sight_offset, move_out_time, 0, 0);
+      new_anim_node moveTo(out_of_sight_offset, move_out_time, 0, 0);
     }
 
     wait(move_out_time);
@@ -1996,7 +1996,7 @@ track_buttons(button_track, button_alt, button_hints) {
 player_links_to_rig_and_looks_left(player_rig, tag, left_degree) {
   tag_origin = spawn_tag_origin();
 
-  tag_origin LinkTo(player_rig, tag, (0, 0, 0), (0, left_degree, 0));
+  tag_origin linkTo(player_rig, tag, (0, 0, 0), (0, left_degree, 0));
 
   level.player PlayerLinkToDelta(tag_origin, "tag_origin", 1, 0, 0, 0, 0, true);
 }
@@ -2011,13 +2011,13 @@ movetotag_internal(ent, tag, time) {
   timer = GetTime() + (time * 1000);
   tag_origin = ent GetTagOrigin(tag);
   self Unlink();
-  self MoveTo(tag_origin, time);
+  self moveTo(tag_origin, time);
   while(GetTime() < timer) {
     updated_tag_origin = ent GetTagOrigin(tag);
     if(updated_tag_origin != tag_origin) {
       tag_origin = updated_tag_origin;
       time = (timer - GetTime()) / 1000;
-      self MoveTo(tag_origin, time);
+      self moveTo(tag_origin, time);
     }
     wait .05;
   }
@@ -2145,7 +2145,7 @@ fade_turn_buckle(fade_out_time) {
 scene_gun_monologue_dialogue(start_time_offset) {
   level.override_eq = true;
 
-  level.eq_ent MoveTo((0.8, 0, 0), 4);
+  level.eq_ent moveTo((0.8, 0, 0), 4);
   wait 3.5;
   start_time = GetTime() - start_time_offset * 1000;
 
@@ -2159,7 +2159,7 @@ scene_gun_monologue_dialogue(start_time_offset) {
   wait extra_wait;
   flag_set("gloat_fade_in");
 
-  level.eq_ent MoveTo((0.6, 0, 0), 2);
+  level.eq_ent moveTo((0.6, 0, 0), 2);
 
   wait_for_buffer_time_to_pass(start_time, 16.8 + extra_wait);
 
@@ -2169,7 +2169,7 @@ scene_gun_monologue_dialogue(start_time_offset) {
 
   level.shepherd thread play_sound_on_tag("afchase_shp_iknow", "J_Jaw");
   wait 0.5;
-  level.eq_ent MoveTo((0.0, 0, 0), 4);
+  level.eq_ent moveTo((0.0, 0, 0), 4);
   level.override_eq = false;
 }
 
@@ -2230,8 +2230,8 @@ fade_out_gun_kick(guy) {
 
 cast_structs_to_origins() {
   structs = [];
-  structs["b"] = getstruct("end_scene_org_fight_B", "targetname");
-  structs["c"] = getstruct("end_scene_org_fight_C", "targetname");
+  structs["b"] = getStruct("end_scene_org_fight_B", "targetname");
+  structs["c"] = getStruct("end_scene_org_fight_C", "targetname");
 
   root = get_anim_node();
   root2 = get_anim_node_rotated();
@@ -2307,7 +2307,7 @@ wounded_show_player_view(player_rig) {
   waittillframeend;
 
   player_offset_tag = spawn_tag_origin();
-  player_offset_tag LinkTo(player_rig, "tag_player", (0, 0, 0), (0, 25, 0));
+  player_offset_tag linkTo(player_rig, "tag_player", (0, 0, 0), (0, 25, 0));
 
   thread player_links_to_rig_and_looks_left(player_offset_tag, "tag_origin", 0);
   wait(1);
@@ -2319,7 +2319,7 @@ wounded_show_player_view(player_rig) {
 pullout_player_view(player_rig) {
   waittillframeend;
   player_offset_tag = spawn_tag_origin();
-  player_offset_tag LinkTo(player_rig, "tag_player", (0, 0, 0), (0, 10, 0));
+  player_offset_tag linkTo(player_rig, "tag_player", (0, 0, 0), (0, 10, 0));
 
   thread player_links_to_rig_and_looks_left(player_offset_tag, "tag_origin", -20);
   wait(0.25);
@@ -2328,7 +2328,7 @@ pullout_player_view(player_rig) {
   level waittill("waiting_for_player_to_look_at_knife");
 
   left_limit = 28 + 10;
-  player_offset_tag LinkTo(player_rig, "tag_player", (0, 0, 0), (0, -15, 0));
+  player_offset_tag linkTo(player_rig, "tag_player", (0, 0, 0), (0, -15, 0));
 
   thread player_links_to_rig_and_looks_left(player_offset_tag, "tag_origin", 13 + 20);
   wait(0.5);
@@ -2346,14 +2346,14 @@ pullout_player_view(player_rig) {
   lerp_time = 3.0;
 
   player_offset_tag = spawn_tag_origin();
-  player_offset_tag LinkTo(player_rig, "tag_player", (0, 0, 0), (0, -5, 0));
+  player_offset_tag linkTo(player_rig, "tag_player", (0, 0, 0), (0, -5, 0));
   level.player PlayerLinkToBlend(player_offset_tag, "tag_origin", lerp_time, lerp_time * 0.5, lerp_time * 0.5, 0, 0, 0, 0);
 
   level waittill("second_knife_pull");
 
   wait 0.5;
   player_offset_tag = spawn_tag_origin();
-  player_offset_tag LinkTo(player_rig, "tag_player", (0, 0, 0), (0, -10, 0));
+  player_offset_tag linkTo(player_rig, "tag_player", (0, 0, 0), (0, -10, 0));
   time = 0.5;
   level.player PlayerLinkToBlend(player_offset_tag, "tag_origin", time, time * 0.3, time * 0.5);
 }
@@ -2704,10 +2704,10 @@ helicopter_sound_blend() {
   land = "afchase_littlebird_landed";
 
   flyblend = spawn("sound_blend", (0.0, 0.0, 0.0));
-  flyblend thread manual_linkto(self, (0, 0, 0));
+  flyblend thread manual_linkTo(self, (0, 0, 0));
 
   idleblend = spawn("sound_blend", (0.0, 0.0, 0.0));
-  idleblend thread manual_linkto(self, (0, 0, 64));
+  idleblend thread manual_linkTo(self, (0, 0, 64));
 
   flyblend thread mix_up(fly);
   wait 4;

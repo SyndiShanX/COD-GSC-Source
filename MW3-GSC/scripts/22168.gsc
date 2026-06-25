@@ -335,11 +335,11 @@ _id_568A(var_0) {
   var_1 = 0;
 
   if(isDefined(var_0.target)) {
-    var_2 = common_scripts\utility::getstruct(var_0.target, "targetname");
+    var_2 = common_scripts\utility::getStruct(var_0.target, "targetname");
 
     if(isDefined(var_2)) {
       var_3 = anglesToForward(level.player getplayerangles());
-      var_4 = vectornormalize(var_2.origin - level.player.origin);
+      var_4 = vectorNormalize(var_2.origin - level.player.origin);
 
       if(vectordot(var_3, var_4) < 0.6) {
         var_1 = 1;

@@ -46,7 +46,7 @@ setupDogState() {
 
   self.allowCrouch = true;
 
-  self ScrAgentSetGoalRadius(24);
+  self ScrAgentSetgoalRadius(24);
 }
 
 init() {
@@ -501,7 +501,7 @@ wantsToGrowlAtTarget() {
 
 getAttackPoint(enemy) {
   meToTarget = enemy.origin - self.origin;
-  meToTarget = VectorNormalize(meToTarget);
+  meToTarget = vectorNormalize(meToTarget);
 
   pathGoalPos = self GetPathGoalPos();
   closeEnough = self.attackOffset + 4;
@@ -535,10 +535,10 @@ cross2D(a, b) {
 findPointNearOwner() {
   assert(isDefined(self.owner));
 
-  ownerToMe = VectorNormalize(self.origin - self.owner.origin);
+  ownerToMe = vectorNormalize(self.origin - self.owner.origin);
   ownerForward = anglesToForward(self.owner.angles);
   ownerForward = (ownerForward[0], ownerForward[1], 0);
-  ownerForward = VectorNormalize(ownerForward);
+  ownerForward = vectorNormalize(ownerForward);
   currentDirFromOwner = cross2D(ownerToMe, ownerForward);
 
   nodeClosestToOwner = GetClosestNodeInSight(self.owner.origin);
@@ -627,7 +627,7 @@ findPointNearOwner() {
     if(VectorDot(ownerToOwnerNode, ownerToNode / ownerToNodeDist) < 0) {
       resultPos = bestLink.origin;
     } else {
-      ownerNodeToNode = VectorNormalize(bestLink.origin - nodeClosestToOwner.origin);
+      ownerNodeToNode = vectorNormalize(bestLink.origin - nodeClosestToOwner.origin);
       resultPos = nodeClosestToOwner.origin + ownerNodeToNode * self.preferredOffsetFromOwner;
     }
   } else {
@@ -873,7 +873,7 @@ watchFavoriteEnemyDeath() {
 OnDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset) {
   self.timeOfLastDamage = GetTime();
   if(isDefined(self.owner)) {
-    self.damagedOwnerToMe = VectorNormalize(self.origin - self.owner.origin);
+    self.damagedOwnerToMe = vectorNormalize(self.origin - self.owner.origin);
   }
 
   if(self ShouldPlayHitReaction(iDamage, sWeapon, sMeansOfDeath)) {

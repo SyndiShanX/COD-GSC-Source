@@ -279,13 +279,13 @@ _blundersplat_target_acid_stun_anim() {
     ground_ent = self getgroundent();
 
     if(isDefined(ground_ent) && !is_true(ground_ent.classname == "worldspawn")) {
-      self linkto(ground_ent);
+      self linkTo(ground_ent);
     }
 
     if(is_true(self.has_legs)) {
-      self animscripted(self.origin, self.angles, "zm_blundersplat_stun");
+      self animScripted(self.origin, self.angles, "zm_blundersplat_stun");
     } else {
-      self animscripted(self.origin, self.angles, "zm_blundersplat_stun_crawl");
+      self animScripted(self.origin, self.angles, "zm_blundersplat_stun_crawl");
     }
 
     self maps\mp\animscripts\zm_shared::donotetracks("blundersplat_stunned_anim");

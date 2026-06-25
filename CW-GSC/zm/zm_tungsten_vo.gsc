@@ -172,16 +172,16 @@ function function_81e4abd(player) {
 
     if(isDefined(self.stub.var_b57b8b27.var_d1c178a)) {
       if(level flag::get(self.stub.var_b57b8b27.var_d1c178a)) {
-        self sethintstring(#"hash_7438d0d92b1eb60");
+        self setHintString(#"hash_7438d0d92b1eb60");
         return true;
       } else if(isDefined(self.stub.var_b57b8b27.var_2b65c496) && self.stub.var_b57b8b27.var_df272b25 < self.stub.var_b57b8b27.var_2b65c496) {
-        self sethintstring(#"hash_7438d0d92b1eb60");
+        self setHintString(#"hash_7438d0d92b1eb60");
         return true;
       } else {
         return false;
       }
     } else if(self.stub.var_b57b8b27.var_df272b25 <= self.stub.var_b57b8b27.var_4c2e6c3e) {
-      self sethintstring(#"hash_7438d0d92b1eb60");
+      self setHintString(#"hash_7438d0d92b1eb60");
       return true;
     } else {
       return false;

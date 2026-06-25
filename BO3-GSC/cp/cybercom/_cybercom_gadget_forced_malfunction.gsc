@@ -225,7 +225,7 @@ function private _force_malfunction(attacker, disabletimemsec) {
     }
     type = self cybercom::function_5e3d3aa();
     variant = attacker cybercom::getanimationvariant(base);
-    self animscripted("malfunction_intro_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_rifle_malfunction") + variant);
+    self animScripted("malfunction_intro_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_rifle_malfunction") + variant);
     self thread cybercom::stopanimscriptedonnotify("damage_pain", "malfunction_intro_anim", 1, attacker, weapon);
     self thread cybercom::stopanimscriptedonnotify("notify_melee_damage", "malfunction_intro_anim", 1, attacker, weapon);
     self waittillmatch("malfunction_intro_anim");
@@ -272,7 +272,7 @@ function ai_activateforcedmalfuncton(target, var_9bc2efcb = 1) {
   }
   if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
-    self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
+    self animScripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self waittillmatch("ai_cybercom_anim");
   }
   weapon = getweapon("gadget_forced_malfunction");

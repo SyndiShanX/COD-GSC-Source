@@ -104,7 +104,7 @@ bot_killstreak_remote_control(var_0, var_1, var_2, var_3, var_4) {
   var_6 = 1;
   var_7 = undefined;
   if(isDefined(self.node_ambushing_from)) {
-    var_8 = self botgetscriptgoalradius();
+    var_8 = self botgetscriptgoalRadius();
     var_9 = distancesquared(self.origin, self.node_ambushing_from.origin);
     if(var_9 < squared(var_8)) {
       var_5 = 0;
@@ -345,8 +345,8 @@ bot_control_switchblade_cluster() {
             continue;
           }
 
-          var_1E = vectornormalize(var_16.origin - var_1.origin);
-          var_1F = vectornormalize(var_1D.origin - var_1.origin);
+          var_1E = vectorNormalize(var_16.origin - var_1.origin);
+          var_1F = vectorNormalize(var_1D.origin - var_1.origin);
           var_20 = anglesToForward(var_1.angles);
           var_21 = vectordot(var_1E, var_20);
           var_22 = vectordot(var_1F, var_20);
@@ -441,7 +441,7 @@ bot_control_switchblade_cluster() {
 
 missile_get_desired_angles_to_target(var_0, var_1) {
   var_2 = missile_find_ground_target(var_0, var_1[2]);
-  var_3 = vectornormalize(var_1 - var_2);
+  var_3 = vectorNormalize(var_1 - var_2);
   return vectortoangles(var_3);
 }
 
@@ -596,7 +596,7 @@ bot_control_vanguard() {
           var_14 = self.vehicle_controlling.origin;
         }
 
-        var_11 = vectornormalize(var_12.origin - self.vehicle_controlling.origin);
+        var_11 = vectorNormalize(var_12.origin - self.vehicle_controlling.origin);
         self botsetscriptmove(vectortoangles(var_11)[1], 0.2);
         self botlookatpoint(var_12.origin, 0.2, "script_forced");
         var_12 = var_12.origin[2] + 64;
@@ -1023,7 +1023,7 @@ heli_pilot_control_heli_aiming() {
 
       var_2 = var_2 + var_5;
       var_14 = self.vehicle_controlling gettagorigin("tag_player");
-      var_15 = vectornormalize(var_2 - var_14);
+      var_15 = vectorNormalize(var_2 - var_14);
       var_10 = anglesToForward(self getplayerangles());
       var_11 = vectordot(var_15, var_10);
       if(var_11 > 0.5) {
@@ -1402,8 +1402,8 @@ func_2E2F(var_0) {
   var_2 = gettime();
   var_3 = var_2 - self.odin_predicted_loc_time_for_player[var_1];
   if(var_3 <= 400) {
-    var_4 = vectornormalize(var_0 getentityvelocity());
-    var_5 = vectornormalize(self.odin_predicted_loc_for_player[var_1] - var_0.origin);
+    var_4 = vectorNormalize(var_0 getentityvelocity());
+    var_5 = vectorNormalize(self.odin_predicted_loc_for_player[var_1] - var_0.origin);
     if(vectordot(var_4, var_5) < -0.5) {
       return var_0.origin;
     }

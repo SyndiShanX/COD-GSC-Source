@@ -80,65 +80,65 @@ initHideyModels() {
   lid2 setModel("com_trashcan_metallid");
   lid2.angles = (3.4983, 102.922, 81.874);
 
-  collision1 = GetEnt("clip64x64x64", "targetname");
+  collision1 = getEnt("clip64x64x64", "targetname");
   collision1Ent = spawn("script_model", (-1515, 3215, 194));
   collision1Ent CloneBrushmodelToScriptmodel(collision1);
 
-  collision2 = GetEnt("player64x64x256", "targetname");
+  collision2 = getEnt("player64x64x256", "targetname");
   collision2Ent = spawn("script_model", (-1515, 3215, 258));
   collision2Ent CloneBrushmodelToScriptmodel(collision2);
 
-  collision3 = GetEnt("clip32x32x32", "targetname");
+  collision3 = getEnt("clip32x32x32", "targetname");
   collision3ent = spawn("script_model", (-1446.5, 3004.47, 249.201));
   collision3ent.angles = (3.68833, 23.7315, -8.32483);
   collision3ent CloneBrushmodelToScriptmodel(collision3);
 
-  collision4 = GetEnt("player32x32x128", "targetname");
+  collision4 = getEnt("player32x32x128", "targetname");
   collision4Ent = spawn("script_model", (-78, -1222, 380));
   collision4Ent CloneBrushmodelToScriptmodel(collision4);
 
-  collision5 = GetEnt("player32x32x128", "targetname");
+  collision5 = getEnt("player32x32x128", "targetname");
   collision5Ent = spawn("script_model", (-78, -1234, 380));
   collision5Ent CloneBrushmodelToScriptmodel(collision5);
 
-  collision6 = GetEnt("player64x64x256", "targetname");
+  collision6 = getEnt("player64x64x256", "targetname");
   collision6Ent = spawn("script_model", (896, -1330, 404));
   collision6Ent CloneBrushmodelToScriptmodel(collision6);
 
-  collision7 = GetEnt("player32x32x128", "targetname");
+  collision7 = getEnt("player32x32x128", "targetname");
   collision7Ent = spawn("script_model", (912, -1084, 352));
   collision7Ent CloneBrushmodelToScriptmodel(collision7);
 
-  collision8 = GetEnt("clip64x64x64", "targetname");
+  collision8 = getEnt("clip64x64x64", "targetname");
   collision8Ent = spawn("script_model", (320, 571, 245));
   collision8ent.angles = (0, 330, 0);
   collision8Ent CloneBrushmodelToScriptmodel(collision8);
 
-  collision9 = GetEnt("player64x64x256", "targetname");
+  collision9 = getEnt("player64x64x256", "targetname");
   collision9Ent = spawn("script_model", (-238, 5466, 180));
   collision9Ent CloneBrushmodelToScriptmodel(collision9);
 
-  collision10 = GetEnt("clip256x256x256", "targetname");
+  collision10 = getEnt("clip256x256x256", "targetname");
   collision10Ent = spawn("script_model", (-1960, -860, -17));
   collision10ent.angles = (0, 0, 0);
   collision10Ent CloneBrushmodelToScriptmodel(collision10);
 
-  collision11 = GetEnt("clip256x256x256", "targetname");
+  collision11 = getEnt("clip256x256x256", "targetname");
   collision11Ent = spawn("script_model", (-672, 5664, 577));
   collision11ent.angles = (0, 0, 0);
   collision11Ent CloneBrushmodelToScriptmodel(collision11);
 
-  collision12 = GetEnt("clip256x256x256", "targetname");
+  collision12 = getEnt("clip256x256x256", "targetname");
   collision12Ent = spawn("script_model", (-672, 5664, 845));
   collision12ent.angles = (0, 0, 0);
   collision12Ent CloneBrushmodelToScriptmodel(collision12);
 
-  collision13 = GetEnt("clip256x256x256", "targetname");
+  collision13 = getEnt("clip256x256x256", "targetname");
   collision13Ent = spawn("script_model", (-2344, 5376, 309));
   collision13ent.angles = (0, 0, 0);
   collision13Ent CloneBrushmodelToScriptmodel(collision13);
 
-  collision14 = GetEnt("clip32x32x128", "targetname");
+  collision14 = getEnt("clip32x32x128", "targetname");
   collision14Ent = spawn("script_model", (-118, -1307.03, 380.887));
   collision14ent.angles = (0, 0, -80);
   collision14Ent CloneBrushmodelToScriptmodel(collision14);
@@ -228,11 +228,11 @@ fake_missile_launch(target_array, missile_launch_height, missile_drop_height, ca
 move_fake_missile(missile_target, missile_launch_height, missile_drop_height, calling_player, target_player) {
   playFXOnTag(level._effect["hashima_missile_lens_flare"], self, "tag_origin");
   move_time = 4.0;
-  self MoveTo(missile_target + (0, 0, missile_launch_height), move_time, 1.5, 1.5);
+  self moveTo(missile_target + (0, 0, missile_launch_height), move_time, 1.5, 1.5);
 
   start_pos = missile_target + (0, 0, 40) + (anglesToForward(target_player.angles) * 100);
   kill_cam_ent = spawn("script_model", start_pos);
-  kill_cam_ent LinkTo(target_player);
+  kill_cam_ent linkTo(target_player);
 
   wait(move_time);
 
@@ -247,7 +247,7 @@ move_fake_missile(missile_target, missile_launch_height, missile_drop_height, ca
   playFX(level._effect["hashima_missile_turn_obscurer"], self.origin);
   waitframe();
   self.angles = VectorToAngles(missile_target - self.origin);
-  self MoveTo(missile_target + (0, 0, missile_drop_height), 0.5, 0.5, 0.0);
+  self moveTo(missile_target + (0, 0, missile_drop_height), 0.5, 0.5, 0.0);
   wait(0.5);
 
   flight_time = 1.0;
@@ -352,15 +352,15 @@ tryUseHashimaMissiles(lifeId, streakName) {
 #using_animtree("animated_props");
 
 coal_car_init() {
-  spawn_struct = getstruct("coal_car_spawn", "targetname");
-  coal_car_clip = GetEnt("coal_car_clip", "targetname");
+  spawn_struct = getStruct("coal_car_spawn", "targetname");
+  coal_car_clip = getEnt("coal_car_clip", "targetname");
 
   coal_car = spawn("script_model", spawn_struct.origin);
   coal_car setModel("has_coal_mine_cart_anim");
   coal_car_collision_origin = spawn("script_model", spawn_struct.origin);
   coal_car_collision_origin setModel("generic_prop_raven");
   waitframe();
-  coal_car_clip LinkTo(coal_car_collision_origin, "tag_origin");
+  coal_car_clip linkTo(coal_car_collision_origin, "tag_origin");
   coal_car.clip = coal_car_clip;
   coal_car.collision_origin = coal_car_collision_origin;
   waitframe();
@@ -375,8 +375,8 @@ coal_car_init() {
 }
 
 coal_car_run() {
-  ai_sight_brush_start = GetEnt("ai_sight_brush_start", "targetname");
-  ai_sight_brush_end = GetEnt("ai_sight_brush_end", "targetname");
+  ai_sight_brush_start = getEnt("ai_sight_brush_start", "targetname");
+  ai_sight_brush_end = getEnt("ai_sight_brush_end", "targetname");
 
   ai_sight_brush_start NotSolid();
   ai_sight_brush_start Show();
@@ -393,7 +393,7 @@ coal_car_run() {
   initial_collision_origin = self.collision_origin.origin;
   initial_collision_angles = self.collision_origin.angles;
   waitframe();
-  self.clip DisconnectPaths();
+  self.clip disconnectPaths();
 
   while(1) {
     self waittill_any("trigger", "reset");
@@ -419,7 +419,7 @@ coal_car_run() {
     self notify("stop_disconnect_path_periodic");
     self ScriptModelPlayAnimDeltaMotion("mp_hashima_coal_cart_end_idle");
     self.collision_origin ScriptModelPlayAnimDeltaMotion("mp_hashima_coal_cart_end_idle_origin");
-    self.clip DisconnectPaths();
+    self.clip disconnectPaths();
 
     ai_sight_brush_start SetAISightLineVisible(false);
 
@@ -451,7 +451,7 @@ coal_car_run() {
     self ScriptModelPlayAnimDeltaMotion("mp_hashima_coal_cart_start_idle");
     self.collision_origin ScriptModelPlayAnimDeltaMotion("mp_hashima_coal_cart_start_idle_origin_scripted");
 
-    self.clip DisconnectPaths();
+    self.clip disconnectPaths();
 
     ai_sight_brush_start Show();
     ai_sight_brush_start SetAISightLineVisible(true);
@@ -466,7 +466,7 @@ disconnect_path_periodic(interval) {
 
   while(1) {
     wait(interval);
-    self.clip DisconnectPaths();
+    self.clip disconnectPaths();
   }
 }
 
@@ -517,11 +517,11 @@ use_switch_toggle_multiple_init() {
 
 use_switch_toggle_wait() {
   wait_struct = spawnStruct();
-  buzzer_sound_loc = GetEnt("buzzer_sound_loc", "targetname");
+  buzzer_sound_loc = getEnt("buzzer_sound_loc", "targetname");
 
   while(1) {
     foreach(use_trigger in self.use_triggers) {
-      use_trigger SetHintString(self.off_hintString);
+      use_trigger setHintString(self.off_hintString);
       use_trigger thread notify_struct_on_use(wait_struct);
     }
 
@@ -535,7 +535,7 @@ use_switch_toggle_wait() {
     buzzer_sound_loc playSound("scn_cargo_button_buzzer");
 
     foreach(use_trigger in self.use_triggers) {
-      use_trigger SetHintString("");
+      use_trigger setHintString("");
     }
 
     self thread pop_up_targets_set_buttons(false);
@@ -547,7 +547,7 @@ use_switch_toggle_wait() {
     wait level.start_to_end_length;
 
     foreach(use_trigger in self.use_triggers) {
-      use_trigger SetHintString(self.on_hintString);
+      use_trigger setHintString(self.on_hintString);
       use_trigger thread notify_struct_on_use(wait_struct);
     }
 
@@ -561,7 +561,7 @@ use_switch_toggle_wait() {
     buzzer_sound_loc playSound("scn_cargo_button_buzzer");
 
     foreach(use_trigger in self.use_triggers) {
-      use_trigger SetHintString("");
+      use_trigger setHintString("");
     }
 
     self thread pop_up_targets_set_buttons(false);

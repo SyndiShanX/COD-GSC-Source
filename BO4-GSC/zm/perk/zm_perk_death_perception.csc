@@ -87,7 +87,7 @@ function_fff5377e(localclientnum) {
 
       foreach(ai in a_ai) {
         if(isalive(ai)) {
-          if(vectordot(var_8475afc1, vectornormalize(ai.origin - self.origin)) < 0.35) {
+          if(vectordot(var_8475afc1, vectorNormalize(ai.origin - self.origin)) < 0.35) {
             var_f2c7b8b0 = ai.origin;
 
             if(ai.type === #"vehicle") {

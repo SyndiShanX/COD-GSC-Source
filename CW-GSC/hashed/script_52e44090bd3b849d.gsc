@@ -51,7 +51,7 @@ function starting(str_skipto) {
   level.last_player_attacker = level;
   level flag::set(#"hash_5601fb6019314f30");
   level flag::set("aldrich_kill_confirmed");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player thread namespace_f464d565::function_8896f07c();
   snd::client_msg("stop_camera_zoom");
 }
@@ -175,9 +175,9 @@ function function_9c431ddc(array, var_6ab9c420, flag, rush = 1) {
 
   if(rush) {
     foreach(agent in array) {
-      if(isDefined(agent) && isalive(agent) && isDefined(getplayers()[0])) {
+      if(isDefined(agent) && isalive(agent) && isDefined(getPlayers()[0])) {
         agent.goalradius = 256;
-        agent ai::set_goal_ent(getplayers()[0]);
+        agent ai::set_goal_ent(getPlayers()[0]);
       }
     }
   }
@@ -327,7 +327,7 @@ function function_848ad996() {
 }
 
 function function_7f59e31f(var_b4a49886, side) {
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player disableweapons();
   level thread dialogue::radio("vox_cp_chao_03200_chp1_hoponinmason_86");
   var_b4a49886 scene::play("scene_sm_tundra_heli_load", side + "_enter");
@@ -353,16 +353,16 @@ function heli_logic() {
   wait var_3a924007;
   var_377893ba = struct::get("org_heli_missile_launch", "targetname");
   level flag::delay_set(3, "heli_explosion_done");
-  v_vel = vectornormalize(level.var_9a3944f4.origin - var_377893ba.origin) * 100;
+  v_vel = vectorNormalize(level.var_9a3944f4.origin - var_377893ba.origin) * 100;
   m = level.woods magicmissile(getweapon(#"launcher_standard_t9"), var_377893ba.origin, v_vel, level.var_9a3944f4);
   org = util::spawn_model("tag_origin", m.origin, m.angles);
-  org linkto(m);
+  org linkTo(m);
   org clientfield::set("heli_rpg_trail", 1);
   level thread namespace_61150688::function_d27e1651();
   m waittill(#"projectile_impact_explode", #"death");
   level flag::set("flag_rpg_struck_heli");
   screenshake((-35250.6, 19974.8, 857.25), 2.5, 2.1, 1.6, 1.6, 0.5, -1, 1280, 6.9, 2.5, 2.3, 1.15);
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   level thread dialogue::function_9e580f95();
   org clientfield::set("heli_rpg_trail", 0);
   level.var_9a3944f4 clientfield::set("exfil_heli_exp", 1);
@@ -456,7 +456,7 @@ function function_3f06810a(aigroup, var_9fe12ee0, targetname) {
 
   foreach(agent in var_5f4052dd) {
     agent.goalradius = 1500;
-    agent ai::set_goal_ent(getplayers()[0]);
+    agent ai::set_goal_ent(getPlayers()[0]);
   }
 
   level flag::wait_till(var_9fe12ee0);
@@ -466,11 +466,11 @@ function function_3f06810a(aigroup, var_9fe12ee0, targetname) {
       agent.goalradius = 256;
 
       if(isDefined(targetname)) {
-        agent ai::force_goal(getent(targetname, "targetname"));
+        agent ai::force_goal(getEnt(targetname, "targetname"));
         continue;
       }
 
-      agent ai::force_goal(getplayers()[0]);
+      agent ai::force_goal(getPlayers()[0]);
     }
   }
 
@@ -497,7 +497,7 @@ function function_d38f3cd1(value, key = "targetname") {
   foreach(agent in enemies) {
     if(isDefined(agent) && isalive(agent)) {
       agent.goalradius = 256;
-      agent ai::set_goal_ent(getplayers()[0]);
+      agent ai::set_goal_ent(getPlayers()[0]);
     }
   }
 }
@@ -510,10 +510,10 @@ function function_ed60fe85(array, flag, var_7e81cdfd) {
   }
 
   foreach(agent in array) {
-    if(isDefined(agent) && isalive(agent) && isDefined(getplayers()[0])) {
+    if(isDefined(agent) && isalive(agent) && isDefined(getPlayers()[0])) {
       agent.goalradius = 256;
       agent.ignoresuppression = 1;
-      agent ai::set_goal_ent(getplayers()[0]);
+      agent ai::set_goal_ent(getPlayers()[0]);
     }
   }
 }

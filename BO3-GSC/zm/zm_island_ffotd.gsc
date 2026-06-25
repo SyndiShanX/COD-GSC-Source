@@ -26,9 +26,9 @@ function main_end() {
   zm::spawn_life_brush((-4573, 1301, -409), 256, 300);
   zm::spawn_life_brush((2190, 800, -213), 32, 128);
   zm::spawn_life_brush((1900, -24, -694), 196, 64);
-  spawn("trigger_box", (-1100, 7740, -750), 0, 350, 200, 300) disconnectpaths();
-  spawncollision("collision_monster_32x32x32", "collider", (272, 5120, -626), (0, 0, 0)) disconnectpaths();
-  spawncollision("collision_monster_32x32x32", "collider", (225, 5120, -626), (0, 0, 0)) disconnectpaths();
+  spawn("trigger_box", (-1100, 7740, -750), 0, 350, 200, 300) disconnectPaths();
+  spawncollision("collision_monster_32x32x32", "collider", (272, 5120, -626), (0, 0, 0)) disconnectPaths();
+  spawncollision("collision_monster_32x32x32", "collider", (225, 5120, -626), (0, 0, 0)) disconnectPaths();
   spawncollision("collision_player_256x256x256", "collider", (1759, 1186, -604), (0, 0, 0));
   spawncollision("collision_player_256x256x256", "collider", (1724, 1007, -599), (0, 0, 0));
   spawncollision("collision_player_64x64x64", "collider", (2202, 805, -250), (12, 45, 0));

@@ -51,10 +51,10 @@ run_shellshock(param_00, param_01, param_02) {
   self endon("death");
   self shellshock("zm_heavy_hit", param_00 * 1.4, param_01);
   self method_8308(0);
-  self playrumbleonentity("damage_heavy");
+  self playRumbleOnEntity("damage_heavy");
   var_04 = self.var_116 - param_02;
   var_04 = (var_04[0], var_04[1], 0);
-  var_04 = var_03 * vectornormalize(var_04);
+  var_04 = var_03 * vectorNormalize(var_04);
   var_04 = (var_04[0], var_04[1], 125);
   self setvelocity(var_04);
   self method_8308(1);
@@ -113,7 +113,7 @@ throw_debris() {
         break;
       }
 
-      var_0D = 215 * vectornormalize(anglesToForward(vectortoangles(var_09.var_116 - self.var_116)));
+      var_0D = 215 * vectorNormalize(anglesToForward(vectortoangles(var_09.var_116 - self.var_116)));
       var_0D = (var_0D[0], var_0D[1], var_02);
       var_0E = magicgrenademanual("jack_in_box_decoy_zm", getclosestpointonnavmesh(self.var_116, self) + (0, 0, 32), var_0D, 10, self, 1);
       lib_057D::func_737D(var_0E, 30, ::do_shellshock_jack_buff);
@@ -121,7 +121,7 @@ throw_debris() {
     }
 
     var_06 = var_06 + 45;
-    var_0F = var_01 * vectornormalize(anglesToForward((0, var_06, 0)));
+    var_0F = var_01 * vectorNormalize(anglesToForward((0, var_06, 0)));
     var_0F = (var_0F[0], var_0F[1], var_02);
     var_0E = spawn("script_model", self.var_116 + (randomint(64) - 64, randomint(64) - 64, 0));
     var_0E setModel(var_08);

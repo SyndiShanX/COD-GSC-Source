@@ -248,7 +248,7 @@ bot_patrol_flag() {
       self lookat(origin + (0, 0, z));
 
       if(distancesquared(origin, self.origin) > 65536) {
-        dir = vectornormalize(self.origin - origin);
+        dir = vectorNormalize(self.origin - origin);
         dir = vectorscale(dir, 256);
         origin = origin + dir;
       }

@@ -90,7 +90,7 @@ levelspawndvars(reset_dvars) {
 }
 
 geo_changes() {
-  rts_floor = getent("overwatch_floor", "targetname");
+  rts_floor = getEnt("overwatch_floor", "targetname");
 
   if(isDefined(rts_floor)) {
     rts_floor delete();

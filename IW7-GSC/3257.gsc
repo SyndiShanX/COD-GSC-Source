@@ -142,8 +142,8 @@ onzombiedamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
         if(var_27) {
           if(var_2 >= self.health) {
             var_29 = anglesToForward(var_1.angles);
-            var_2A = vectornormalize(var_29) * -100;
-            self setvelocity(vectornormalize(self.origin - var_1.origin + var_2A) * 400 + (0, 0, 10));
+            var_2A = vectorNormalize(var_29) * -100;
+            self setvelocity(vectorNormalize(self.origin - var_1.origin + var_2A) * 400 + (0, 0, 10));
             self.do_immediate_ragdoll = 1;
             self.customdeath = 1;
           }

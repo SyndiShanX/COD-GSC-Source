@@ -48,7 +48,7 @@ spidergrenade_stuckground(var_0, var_1) {
 spidergrenade_stuckplayer(var_0, var_1) {
   spidergrenade_proxyinitialize(var_0);
   if(scripts\mp\utility::isreallyalive(var_1)) {
-    var_0 linkto(var_1, "j_head", (3, -5, 0), (0, 0, 90));
+    var_0 linkTo(var_1, "j_head", (3, -5, 0), (0, 0, 90));
   }
 
   scripts\mp\weapons::grenadestuckto(var_0, var_1);
@@ -271,12 +271,12 @@ spidergrenade_proxytoagent(var_0, var_1) {
   thread scripts\mp\weapons::outlineequipmentforowner(var_1, var_1.owner);
   var_4 = spawn("script_model", var_1.origin);
   var_4 setModel("tag_origin");
-  var_4 linkto(var_1);
+  var_4 linkTo(var_1);
   var_4 thread spidergrenade_cleanuponparentdeath(var_0);
   var_0.var_A638 = var_4;
   var_0 hide(1);
   var_0 setCanDamage(0);
-  var_0 linkto(var_4);
+  var_0 linkTo(var_4);
   var_0 thread spidergrenade_setstate(4);
   var_1 thread spidergrenade_trackdebuff(undefined, var_1.var_F181);
 }

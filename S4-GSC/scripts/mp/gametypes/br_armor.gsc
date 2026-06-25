@@ -119,7 +119,7 @@ _id_B9E4(var_0, var_1, var_2) {
   var_4.angles = var_1;
   var_5 = anglestoup(var_1);
   var_6 = var_0;
-  var_7 = vectornormalize(var_6 + var_5) * 2500;
+  var_7 = vectorNormalize(var_6 + var_5) * 2500;
   var_4 physicslaunchserver(var_4.origin, var_7);
   var_8 = "brloot_armor_helmet_" + self._id_2A5A;
   var_9 = 15;

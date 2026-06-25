@@ -69,7 +69,7 @@ updateeveryframe(var_0) {
 
   if(isDefined(self.scripted) && self.scripted || isDefined(self._blackboard.bgameended)) {
     self clearpath();
-    self scragentsetgoalradius(512);
+    self scragentsetgoalRadius(512);
     return anim.failure;
   }
 
@@ -205,7 +205,7 @@ walktoroof(var_0) {
   }
 
   self scragentsetgoalpos(self.bt.instancedata[var_0].goalpos);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   return anim.running;
 }
 
@@ -227,7 +227,7 @@ jumptoroof(var_0) {
   var_2 = gettime();
 
   if(gettime() > self.bt.instancedata[var_0] + var_1) {
-    self setorigin(level.superslasherrooftopspot, 1);
+    self setOrigin(level.superslasherrooftopspot, 1);
     self.angles = level.superslasherrooftopangles;
     self.bt.locationstate = 0;
     roof_initbehaviors();
@@ -250,7 +250,7 @@ jumptoroof_cleanup(var_0) {
 
 roof_initbehaviors() {
   self clearpath();
-  self scragentsetgoalradius(512);
+  self scragentsetgoalRadius(512);
   var_0 = gettime();
   self.bt.onroofstarttime = var_0;
   self._blackboard.bonroof = 1;
@@ -280,7 +280,7 @@ dostagger(var_0) {
   }
 
   self clearpath(self.origin);
-  self scragentsetgoalradius(36);
+  self scragentsetgoalRadius(36);
   return anim.running;
 }
 
@@ -334,7 +334,7 @@ gotoground(var_0) {
 
 ground_initbehaviors() {
   self clearpath(self.origin);
-  self scragentsetgoalradius(24);
+  self scragentsetgoalRadius(24);
   var_0 = gettime();
   self.bt.ongroundstarttime = var_0;
   self._blackboard.bonroof = 0;
@@ -429,7 +429,7 @@ dotaunt(var_0) {
   }
 
   self clearpath(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   return anim.running;
 }
 
@@ -441,7 +441,7 @@ taunt_cleanup(var_0) {
 
 dotauntcontinuously(var_0) {
   self clearpath(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
 
   if(isDefined(self._blackboard.bstoptauntingcontinuously)) {
     if(scripts\asm\asm::asm_ephemeraleventfired("tauntanim", "end")) {
@@ -477,7 +477,7 @@ shouldgroundpound(var_0) {
 groundpound_init(var_0) {
   self.bt.instancedata[var_0] = gettime();
   self clearpath(self.origin);
-  self scragentsetgoalradius(36);
+  self scragentsetgoalRadius(36);
   self.bt.bcaninterruptfortimer = 0;
   self._blackboard.bgroundpoundrequested = 1;
 }
@@ -589,7 +589,7 @@ melee_charge(var_0) {
 
   var_9 = getclosestpointonnavmesh(self.bt.target.origin, self);
   self scragentsetgoalpos(var_9);
-  self scragentsetgoalradius(24);
+  self scragentsetgoalRadius(24);
   return anim.running;
 }
 
@@ -624,10 +624,10 @@ domelee(var_0) {
   if(isDefined(self.bt.meleetarget)) {
     var_2 = getclosestpointonnavmesh(self.bt.meleetarget.origin, self);
     self scragentsetgoalpos(var_2);
-    self scragentsetgoalradius(24);
+    self scragentsetgoalRadius(24);
   } else {
     self clearpath(self.origin);
-    self scragentsetgoalradius(36);
+    self scragentsetgoalRadius(36);
   }
 
   return anim.running;
@@ -711,7 +711,7 @@ dothrowsaw(var_0) {
   }
 
   self clearpath(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   return anim.running;
 }
 
@@ -783,7 +783,7 @@ dothrowsawfan(var_0) {
   }
 
   self clearpath(self.origin);
-  self scragentsetgoalradius(64);
+  self scragentsetgoalRadius(64);
   return anim.running;
 }
 
@@ -1128,7 +1128,7 @@ move(var_0) {
       var_2 = 5000;
       var_3 = getclosestpointonnavmesh(self.bt.target.origin, self);
       self scragentsetgoalpos(var_3);
-      self scragentsetgoalradius(36);
+      self scragentsetgoalRadius(36);
       self.bt.instancedata[var_0] = var_1 + var_2;
     }
   }

@@ -12,7 +12,7 @@ error(message) {
   wait 0.05;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   if(!isDefined(level.struct_class_names)) {
     return undefined;
   }
@@ -417,7 +417,7 @@ waittill_multiple(string1, string2, string3, string4, string5) {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = vectornormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = vectordot(forward, normal);
   return dot >= fov;
@@ -572,7 +572,7 @@ init_exploders() {
       ent.needs_fixup = exploder_id;
       exploder_id++;
       fixup_set = 1;
-      temp_ent = getstruct(ent.v["target"], "targetname");
+      temp_ent = getStruct(ent.v["target"], "targetname");
 
       if(isDefined(temp_ent)) {
         org = temp_ent.origin;

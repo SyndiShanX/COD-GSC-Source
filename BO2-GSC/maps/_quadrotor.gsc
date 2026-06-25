@@ -157,7 +157,7 @@ quadrotor_fireupdate() {
       }
 
       if(distancesquared(self.enemy.origin, self.origin) < 1638400 || enemy_is_hind) {
-        self setturrettargetent(self.enemy);
+        self setturrettargetEnt(self.enemy);
         self quadrotor_fire_for_time(randomfloatrange(0.3, 0.6));
       }
 
@@ -478,7 +478,7 @@ quadrotor_play_single_fx_on_tag(effect, tag) {
   ent.angles = self gettagangles(tag);
   ent notsolid();
   ent hide();
-  ent linkto(self, tag);
+  ent linkTo(self, tag);
   ent.effect = effect;
   playFXOnTag(effect, ent, "tag_origin");
   ent playSound("veh_qrdrone_sparks");
@@ -515,7 +515,7 @@ quadrotor_damage() {
       continue;
     }
     if(type == "MOD_EXPLOSIVE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") {
-      self setvehvelocity(self.velocity + vectornormalize(dir) * 300);
+      self setvehvelocity(self.velocity + vectorNormalize(dir) * 300);
       ang_vel = self getangularvelocity();
       ang_vel = ang_vel + (randomfloatrange(-300, 300), randomfloatrange(-300, 300), randomfloatrange(-300, 300));
       self setangularvelocity(ang_vel);
@@ -610,7 +610,7 @@ quadrotor_crash_movement(attacker, hitdir) {
   side_dir_mag = randomfloatrange(-100, 100);
   side_dir_mag = side_dir_mag + sign(side_dir_mag) * 80;
   side_dir = side_dir * side_dir_mag;
-  self setvehvelocity(self.velocity + vectorscale((0, 0, 1), 100.0) + vectornormalize(side_dir));
+  self setvehvelocity(self.velocity + vectorscale((0, 0, 1), 100.0) + vectorNormalize(side_dir));
   ang_vel = self getangularvelocity();
   ang_vel = (ang_vel[0] * 0.3, ang_vel[1], ang_vel[2] * 0.3);
   yaw_vel = randomfloatrange(0, 210) * sign(ang_vel[1]);
@@ -643,7 +643,7 @@ quadrotor_crash_movement(attacker, hitdir) {
 
 qrotor_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
-  dmg_ent linkto(self);
+  dmg_ent linkTo(self);
   dmg_ent playLoopSound("veh_qrdrone_dmg_loop");
   self waittill_any("crash_done", "death");
   dmg_ent stoploopsound(1);
@@ -741,7 +741,7 @@ quadrotor_collision_player() {
 
     if(isDefined(driver) && lengthsquared(velocity) > 4900) {
       earthquake(0.25, 0.25, driver.origin, 50);
-      driver playrumbleonentity("damage_heavy");
+      driver playRumbleOnEntity("damage_heavy");
     }
   }
 }
@@ -855,12 +855,12 @@ quadrotor_update_rumble() {
     vr = abs(self getspeed() / self getmaxspeed());
 
     if(vr < 0.1) {
-      level.player playrumbleonentity("quadrotor_fly");
+      level.player playRumbleOnEntity("quadrotor_fly");
       wait 0.35;
     } else {
       time = randomfloatrange(0.1, 0.2);
       earthquake(randomfloatrange(0.1, 0.15), time, self.origin, 200);
-      level.player playrumbleonentity("quadrotor_fly");
+      level.player playRumbleOnEntity("quadrotor_fly");
       wait(time);
     }
   }
@@ -923,7 +923,7 @@ quadrotor_emped() {
   self notify("emped");
   self endon("emped");
   self.emped = 1;
-  playsoundatposition("veh_qrdrone_emp_down", self.origin);
+  playSoundAtPosition("veh_qrdrone_emp_down", self.origin);
   self quadrotor_off();
   self setphysacceleration(vectorscale((0, 0, -1), 600.0));
   self thread quadrotor_level_out_for_landing();
@@ -932,7 +932,7 @@ quadrotor_emped() {
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
     self.stun_fx setModel("tag_origin");
-    self.stun_fx linkto(self, "tag_origin", (0, 0, 0), (0, 0, 0));
+    self.stun_fx linkTo(self, "tag_origin", (0, 0, 0), (0, 0, 0));
     playFXOnTag(level._effect["quadrotor_stun"], self.stun_fx, "tag_origin");
   }
 

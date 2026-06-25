@@ -71,7 +71,7 @@ function onallplayersready() {
   player_count_actual = 0;
 
   while(player_count_actual < getnumexpectedplayers(1)) {
-    players = getplayers();
+    players = getPlayers();
     player_count_actual = 0;
 
     foreach(player in players) {
@@ -103,7 +103,7 @@ function function_9a8ab40f() {
   do {
     wait 0.1;
     var_183929a8 = 0;
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(!player isloadingcinematicplaying()) {

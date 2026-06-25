@@ -24,25 +24,25 @@ function precache_assets() {
 function waterslide_main() {
   level flag::init("waterslide_open");
   zombie_cave_slide_init();
-  messagetrigger = getent("waterslide_message_trigger", "targetname");
+  messagetrigger = getEnt("waterslide_message_trigger", "targetname");
   if(isDefined(messagetrigger)) {
-    messagetrigger setcursorhint("HINT_NOICON");
+    messagetrigger setCursorHint("HINT_NOICON");
   }
   cheat = 0;
   cheat = getdvarint("") > 0;
   if(!cheat) {
     if(isDefined(messagetrigger)) {
-      messagetrigger sethintstring(&"ZOMBIE_NEED_POWER");
+      messagetrigger setHintString(&"ZOMBIE_NEED_POWER");
     }
     level flag::wait_till("power_on");
     if(isDefined(messagetrigger)) {
-      messagetrigger sethintstring(&"ZM_TEMPLE_DESTINATION_NOT_OPEN");
+      messagetrigger setHintString(&"ZM_TEMPLE_DESTINATION_NOT_OPEN");
     }
     level flag::wait_till_any(array("cave01_to_cave02", "pressure_to_cave01"));
   }
   level flag::set("waterslide_open");
   if(isDefined(messagetrigger)) {
-    messagetrigger sethintstring("");
+    messagetrigger setHintString("");
   }
   var_144a9b89 = getEntArray("water_slide_blocker", "targetname");
   if(isDefined(var_144a9b89) && var_144a9b89.size > 0) {
@@ -67,7 +67,7 @@ function zombie_cave_slide_init() {
 }
 
 function zombie_caveslide_anim_failsafe() {
-  trig = getent("zombie_cave_slide_failsafe", "targetname");
+  trig = getEnt("zombie_cave_slide_failsafe", "targetname");
   if(isDefined(trig)) {
     while(true) {
       trig waittill("trigger", who);
@@ -244,7 +244,7 @@ function array_remove(array, object) {
 
 function slide_player_enter_watch() {
   level endon("fake_death");
-  trig = getent("cave_slide_force_crouch", "targetname");
+  trig = getEnt("cave_slide_force_crouch", "targetname");
   while(true) {
     trig waittill("trigger", who);
     if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && (!(isDefined(who.on_slide) && who.on_slide))) {
@@ -256,7 +256,7 @@ function slide_player_enter_watch() {
 }
 
 function slide_player_exit_watch() {
-  trig = getent("cave_slide_force_stand", "targetname");
+  trig = getEnt("cave_slide_force_stand", "targetname");
   while(true) {
     trig waittill("trigger", who);
     if(isDefined(who) && isPlayer(who) && who.sessionstate != "spectator" && (isDefined(who.on_slide) && who.on_slide)) {

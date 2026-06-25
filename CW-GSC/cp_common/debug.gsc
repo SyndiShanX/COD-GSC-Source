@@ -233,7 +233,7 @@ function debugjump(num) {
       continue;
     }
 
-    players = getplayers();
+    players = getPlayers();
     line(players[0].origin, ai[i].origin, (0.2, 0.3, 1));
     return;
   }
@@ -400,7 +400,7 @@ function debugdvars() {
     }
 
     if(getdvarstring(#"debug_goalradius") == "<dev string:x99>") {
-      level thread debug_goalradius();
+      level thread debug_goalRadius();
     }
 
     if(getdvarstring(#"hash_400262ff40d7af83") == "<dev string:x99>") {
@@ -453,7 +453,7 @@ function debugdvars() {
 
     if(getdvarstring(#"debug_hurt") == "<dev string:x99>") {
       setDvar(#"debug_hurt", "<dev string:x73>");
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
@@ -462,7 +462,7 @@ function debugdvars() {
 
     if(getdvarstring(#"debug_hurt") == "<dev string:x99>") {
       setDvar(#"debug_hurt", "<dev string:x73>");
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         players[i] dodamage(50, (324234, 3423423, 2323));
@@ -537,7 +537,7 @@ function showdebugtrace() {
   assert(!isDefined(level.traceend));
 
   for(;;) {
-    players = getplayers();
+    players = getPlayers();
     waitframe(1);
     start = startoverride;
     end = endoverride;
@@ -688,7 +688,7 @@ function getchain() {
       break;
     }
 
-    ent = getent(ent.target, "<dev string:x1b4>");
+    ent = getEnt(ent.target, "<dev string:x1b4>");
 
     if(isDefined(ent) && ent == array[0]) {
       array[array.size] = ent;
@@ -710,8 +710,8 @@ function vecscale(vec, scalar) {
 }
 
 function function_e05e43c3(origin) {
-  normalvec = vectornormalize(origin - self getshootatpos());
-  var_b9593434 = vectornormalize(origin - (0, 0, 24) - self getshootatpos());
+  normalvec = vectorNormalize(origin - self getshootatpos());
+  var_b9593434 = vectorNormalize(origin - (0, 0, 24) - self getshootatpos());
   var_c2a09695 = vectordot(normalvec, var_b9593434);
   var_8194ae5a = anglesToForward(self getplayerangles());
   vectordot = vectordot(var_8194ae5a, normalvec);
@@ -738,7 +738,7 @@ function debugthreatcalc() {
   ai = getaiarray();
   entnum = getdvarstring(#"debug_threat");
   entity = undefined;
-  players = getplayers();
+  players = getPlayers();
 
   if(entnum == 0) {
     entity = players[0];
@@ -792,7 +792,7 @@ function displaythreat(entity, entitygroup) {
     selfthreat = "<dev string:x1c2>";
   }
 
-  players = getplayers();
+  players = getPlayers();
   col = (1, 0.5, 0.2);
   col2 = (0.2, 0.5, 1);
   pacifist = self != players[0] && self.pacifist;
@@ -974,7 +974,7 @@ function function_b03ecdf3() {
   level.var_b19c1dfd = [];
   arrayremovevalue(level.animsounds, undefined);
   array::thread_all(level.animsounds, &function_e5ad4202);
-  players = getplayers();
+  players = getPlayers();
 
   if(level.var_969ba98a) {
     for(i = 0; i < level.var_b19c1dfd.size; i++) {
@@ -988,7 +988,7 @@ function function_b03ecdf3() {
     for(i = 0; i < level.var_b19c1dfd.size; i++) {
       animsound = level.var_b19c1dfd[i];
       animsound.var_cdbf6838 = (0.25, 1, 0.5);
-      difference = vectornormalize(animsound.origin + (0, 0, 40) - players[0].origin + (0, 0, 55));
+      difference = vectorNormalize(animsound.origin + (0, 0, 40) - players[0].origin + (0, 0, 55));
       newdot = vectordot(forward, difference);
 
       if(newdot < dot) {
@@ -1032,7 +1032,7 @@ function function_21619947() {
   }
 
   level.var_fe79cec.label = "<dev string:x217>" + animname;
-  players = getplayers();
+  players = getPlayers();
 
   if(players[0] buttonPressed("<dev string:x2e8>")) {
     if(!level.var_9c80d401) {
@@ -1129,7 +1129,7 @@ function function_21619947() {
     }
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(players[0] buttonPressed("<dev string:x31b>")) {
     animsound = animsounds[level.var_d7c96297];
@@ -1169,7 +1169,7 @@ function is_from_animsound(animname, anime, notetrack) {
 }
 
 function function_e5ad4202() {
-  players = getplayers();
+  players = getPlayers();
 
   if(distance(players[0].origin, self.origin) > 1500) {
     return;
@@ -1287,7 +1287,7 @@ function function_f48a99b9() {
     return;
   }
 
-  players = getplayers();
+  players = getPlayers();
   filename = "<dev string:x556>" + level.var_3a8f95b4 + "<dev string:x56f>" + players[0].playername + "<dev string:x574>";
 
   file = openfile(filename, "<dev string:x57c>");
@@ -1380,7 +1380,7 @@ function debug_show_viewpos() {
   var_7125033d.fontscale = 1.2;
   var_7125033d setvalue(0);
   setDvar(#"debug_show_viewpos", 0);
-  players = getplayers();
+  players = getPlayers();
 
   while(true) {
     if(getdvarint(#"debug_show_viewpos", 0) > 0) {
@@ -1747,7 +1747,7 @@ function function_2fcd7502() {
     level.var_4c576f0 = 1;
   }
 
-  getplayers()[0] thread function_90edec37();
+  getPlayers()[0] thread function_90edec37();
   level waittill(#"hash_34e65f3c6ffc6a39");
 
   if(isDefined(level.dynamic_spawn_hud)) {
@@ -1789,7 +1789,7 @@ function function_3171027d() {
 function function_90edec37() {
   level endon(#"hash_34e65f3c6ffc6a39");
   assert(isDefined(level.aitypes) && level.aitypes.size > 0, "<dev string:x7e0>");
-  level.dynamic_spawn_hud = newdebughudelem(getplayers()[0]);
+  level.dynamic_spawn_hud = newdebughudelem(getPlayers()[0]);
   level.dynamic_spawn_hud.alignx = "<dev string:x1fd>";
   level.dynamic_spawn_hud.x = 0;
   level.dynamic_spawn_hud.y = 245;
@@ -1820,7 +1820,7 @@ function function_90edec37() {
       level.dynamic_spawn_dummy_model hide();
 
       if(level.aitypes[level.var_9f54edf5].isvehicle) {
-        spawn = spawnvehicle(level.aitypes[level.var_9f54edf5].classname, origin, angles, "<dev string:x8a1>");
+        spawn = spawnVehicle(level.aitypes[level.var_9f54edf5].classname, origin, angles, "<dev string:x8a1>");
       } else {
         spawn = spawnactor(level.aitypes[level.var_9f54edf5].classname, origin, angles, "<dev string:x8a1>", 1);
       }
@@ -1863,7 +1863,7 @@ function function_11228d34() {
   iprintlnbold("<dev string:x91b>" + level.script + "<dev string:x934>");
 }
 
-function debug_goalradius() {
+function debug_goalRadius() {
   guys = getaiarray();
 
   for(i = 0; i < guys.size; i++) {

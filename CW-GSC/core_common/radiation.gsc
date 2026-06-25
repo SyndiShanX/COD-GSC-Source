@@ -81,7 +81,7 @@ function private function_1e3ac913() {
   updatepass = 0;
 
   while(true) {
-    foreach(index, player in getplayers()) {
+    foreach(index, player in getPlayers()) {
       if(index % 10 == updatepass) {
         if(!isDefined(player.radiation)) {
           continue;

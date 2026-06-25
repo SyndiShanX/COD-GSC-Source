@@ -589,7 +589,7 @@ function function_b03cc199(obj) {
   radiussq = 1600;
   zdiffsq = 4096;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(distance2dsquared(obj.origin, player.origin) < radiussq && sqr(obj.origin[2] - player.origin[2]) < zdiffsq) {
       var_f9938c4c = vectortoyaw(player.origin - obj.origin);
 
@@ -627,7 +627,7 @@ function function_a49ba261(startpos, endpos, region, volume, var_9da4df29, var_a
   starttoend = endpos - startpos;
   linelen = length(starttoend);
   var_8afe96be = starttoend / linelen;
-  var_38bbcdf7 = vectornormalize((var_8afe96be[1], -1 * var_8afe96be[0], 0));
+  var_38bbcdf7 = vectorNormalize((var_8afe96be[1], -1 * var_8afe96be[0], 0));
   var_1d23c510 = 0;
   drawtime = undefined;
 
@@ -859,7 +859,7 @@ function function_feb48f7(obj) {
 function function_97a10998(obj) {
   assert(issentient(self));
   forward = anglesToForward(self.angles);
-  normal = vectornormalize(obj.origin - self.origin);
+  normal = vectorNormalize(obj.origin - self.origin);
 
   if(vectordot(forward, normal) >= cos(60)) {
     strafedist = 64;

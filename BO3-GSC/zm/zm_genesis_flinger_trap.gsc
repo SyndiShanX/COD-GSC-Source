@@ -107,22 +107,22 @@ function function_38d940ac(var_60532813) {
 
 function function_dc9dafb8(e_player) {
   if(isDefined(e_player.zombie_vars["zombie_powerup_minigun_on"]) && e_player.zombie_vars["zombie_powerup_minigun_on"]) {
-    self sethintstring(&"");
+    self setHintString(&"");
     return false;
   }
   if(isDefined(self.stub.script_int) && !level flag::get("power_on" + self.stub.script_int)) {
-    self sethintstring(&"ZOMBIE_NEED_POWER");
+    self setHintString(&"ZOMBIE_NEED_POWER");
     return false;
   }
   if(self.stub.var_60532813 flag::get("trap_active")) {
-    self sethintstring(&"ZOMBIE_TRAP_ACTIVE");
+    self setHintString(&"ZOMBIE_TRAP_ACTIVE");
     return false;
   }
   if(self.stub.var_60532813 flag::get("trap_cooldown")) {
-    self sethintstring(&"ZOMBIE_TRAP_COOLDOWN");
+    self setHintString(&"ZOMBIE_TRAP_COOLDOWN");
     return false;
   }
-  self sethintstring(&"ZM_GENESIS_FLINGER_TRAP_USE", 1000);
+  self setHintString(&"ZM_GENESIS_FLINGER_TRAP_USE", 1000);
   return true;
 }
 
@@ -206,7 +206,7 @@ function function_fce6cca8(e_trigger) {
   var_f4df9eab = array::random(e_trigger.var_3ad9e05d);
   var_848f1155 = spawn("script_model", self.origin);
   var_848f1155 setModel("tag_origin");
-  self playerlinkto(var_848f1155, "tag_origin");
+  self playerlinkTo(var_848f1155, "tag_origin");
   self notsolid();
   var_848f1155 notsolid();
   n_time = var_848f1155 zm_utility::fake_physicslaunch(var_f4df9eab.origin, 400);

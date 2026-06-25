@@ -1275,7 +1275,7 @@ brush_Show() {
     if(!isDefined(self.model.disconnect_paths)) {
       self.model ConnectPaths();
     } else {
-      self.model DisconnectPaths();
+      self.model disconnectPaths();
     }
   }
 
@@ -1298,11 +1298,11 @@ brush_throw() {
 
   ent = undefined;
   if(isDefined(self.v["target"])) {
-    ent = getent(self.v["target"], "targetname");
+    ent = getEnt(self.v["target"], "targetname");
   }
 
   if(!isDefined(ent)) {
-    ent = GetStruct(self.v["target"], "targetname");
+    ent = getStruct(self.v["target"], "targetname");
 
     if(!isDefined(ent)) {
       self.model Delete();
@@ -1325,7 +1325,7 @@ brush_throw() {
   if(physics) {
     target = undefined;
     if(isDefined(ent.target)) {
-      target = getent(ent.target, "targetname");
+      target = getEnt(ent.target, "targetname");
     }
 
     if(!isDefined(target)) {
@@ -1511,11 +1511,11 @@ play_sound_on_tag(alias, tag, ends_on_death) {
 
   thread delete_on_death_wait_sound(org, "sounddone");
   if(isDefined(tag)) {
-    org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
 
   org playSound(alias, "sounddone");
@@ -1550,11 +1550,11 @@ play_loop_sound_on_tag(alias, tag, bStopSoundOnDeath) {
     thread delete_on_death(org);
   }
   if(isDefined(tag)) {
-    org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
   org playLoopSound(alias);
   self waittill("stop sound" + alias);
@@ -1573,11 +1573,11 @@ play_loop_sound_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org LinkTo(self);
+    org linkTo(self);
   }
   org playLoopSound(alias);
   self waittill("stop sound" + alias);
@@ -1687,7 +1687,7 @@ spawn_anim_model(animname, origin) {
 }
 
 trigger_wait(strName, strKey) {
-  eTrigger = GetEnt(strName, strKey);
+  eTrigger = getEnt(strName, strKey);
   if(!isDefined(eTrigger)) {
     assertmsg("trigger not found: " + strName + " key: " + strKey);
     return;
@@ -1698,7 +1698,7 @@ trigger_wait(strName, strKey) {
 }
 
 trigger_wait_targetname(strName) {
-  eTrigger = getent(strName, "targetname");
+  eTrigger = getEnt(strName, "targetname");
   if(!isDefined(eTrigger)) {
     assertmsg("trigger not found: " + strName + " targetname ");
     return;
@@ -1721,7 +1721,7 @@ set_flag_on_targetname_trigger(msg) {
   if(flag(msg)) {
     return;
   }
-  trigger = GetEnt(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger waittill("trigger");
   flag_set(msg);
 }
@@ -2425,7 +2425,7 @@ get_linked_ents() {
   if(isDefined(self.script_linkto)) {
     linknames = get_links();
     for(i = 0; i < linknames.size; i++) {
-      ent = getent(linknames[i], "script_linkname");
+      ent = getEnt(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         array[array.size] = ent;
       }
@@ -2441,7 +2441,7 @@ get_linked_structs() {
   if(isDefined(self.script_linkto)) {
     linknames = get_links();
     for(i = 0; i < linknames.size; i++) {
-      ent = getstruct(linknames[i], "script_linkname");
+      ent = getStruct(linknames[i], "script_linkname");
       if(isDefined(ent)) {
         array[array.size] = ent;
       }
@@ -2464,7 +2464,7 @@ get_last_ent_in_chain(sEntityType) {
           ePathpoint = getnode(ePathpoint.target, "targetname");
           break;
         case "ent":
-          ePathpoint = getent(ePathpoint.target, "targetname");
+          ePathpoint = getEnt(ePathpoint.target, "targetname");
           break;
         default:
           assertmsg("sEntityType needs to be 'vehiclenode', 'pathnode' or 'ent'");
@@ -2637,7 +2637,7 @@ array_swap(array, index1, index2) {
   array[index2] = temp;
 }
 
-getstruct(name, type) {
+getStruct(name, type) {
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
   array = level.struct_class_names[type][name];
@@ -3197,7 +3197,7 @@ flashRumbleLoop(duration) {
   goalTime = GetTime() + duration * 1000;
 
   while(GetTime() < goalTime) {
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait(0.05);
   }
 }
@@ -3436,7 +3436,7 @@ change_player_health_packets(num) {
 }
 
 getvehiclespawner(targetname) {
-  spawner = getent(targetname + "_vehiclespawner", "targetname");
+  spawner = getEnt(targetname + "_vehiclespawner", "targetname");
   return spawner;
 }
 
@@ -3445,16 +3445,16 @@ getvehiclespawnerarray(targetname) {
   return spawner;
 }
 
-player_fudge_moveto(dest, moverate) {
+player_fudge_moveTo(dest, moverate) {
   if(!isDefined(moverate)) {
     moverate = 200;
   }
   org = spawn("script_origin", self.origin);
   org.origin = self.origin;
-  self LinkTo(org);
+  self linkTo(org);
   dist = Distance(self.origin, dest);
   movetime = dist / moverate;
-  org MoveTo(dest, dist / moverate, .05, .05);
+  org moveTo(dest, dist / moverate, .05, .05);
   wait(movetime);
   self UnLink();
 
@@ -3487,7 +3487,7 @@ linetime(start, end, color, timer) {
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
-  normal = VectorNormalize(end_origin - start_origin);
+  normal = vectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = VectorDot(forward, normal);
 
@@ -3541,7 +3541,7 @@ radio_dialogue(msg) {
   assertEX(isDefined(level.scr_radio[msg]), "Tried to play radio dialogue " + msg + " that did not exist! Add it to level.scr_radio");
   if(!isDefined(level.player_radio_emitter)) {
     ent = spawn("script_origin", (0, 0, 0));
-    ent linkto(players[0], "", (0, 0, 0), (0, 0, 0));
+    ent linkTo(players[0], "", (0, 0, 0), (0, 0, 0));
     level.player_radio_emitter = ent;
   }
 
@@ -3717,31 +3717,31 @@ delayThread(timer, func, param1, param2, param3, param4) {
 }
 
 activate_trigger_with_targetname(msg) {
-  trigger = getent(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger activate_trigger();
 }
 
 activate_trigger_with_noteworthy(msg) {
-  trigger = getent(msg, "script_noteworthy");
+  trigger = getEnt(msg, "script_noteworthy");
   trigger activate_trigger();
 }
 
 disable_trigger_with_targetname(msg) {
-  trigger = getent(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger trigger_off();
 }
 
 disable_trigger_with_noteworthy(msg) {
-  trigger = getent(msg, "script_noteworthy");
+  trigger = getEnt(msg, "script_noteworthy");
   trigger trigger_off();
 }
 enable_trigger_with_targetname(msg) {
-  trigger = getent(msg, "targetname");
+  trigger = getEnt(msg, "targetname");
   trigger trigger_on();
 }
 
 enable_trigger_with_noteworthy(msg) {
-  trigger = getent(msg, "script_noteworthy");
+  trigger = getEnt(msg, "script_noteworthy");
   trigger trigger_on();
 }
 
@@ -4365,7 +4365,7 @@ set_ignoreSuppression(val) {
   self.ignoreSuppression = val;
 }
 
-set_goalradius(radius) {
+set_goalRadius(radius) {
   self.goalradius = radius;
 }
 
@@ -4607,17 +4607,17 @@ lerp_player_view_to_position(origin, angles, lerptime, fraction, right_arc, left
   linker.angles = self getplayerangles();
 
   if(isDefined(hit_geo)) {
-    self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
+    self playerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc, hit_geo);
   } else if(isDefined(right_arc)) {
-    self playerlinkto(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
+    self playerlinkTo(linker, "", fraction, right_arc, left_arc, top_arc, bottom_arc);
   } else if(isDefined(fraction)) {
-    self playerlinkto(linker, "", fraction);
+    self playerlinkTo(linker, "", fraction);
   } else {
-    self playerlinkto(linker);
+    self playerlinkTo(linker);
   }
 
-  linker moveto(origin, lerptime, lerptime * 0.25);
-  linker rotateto(angles, lerptime, lerptime * 0.25);
+  linker moveTo(origin, lerptime, lerptime * 0.25);
+  linker rotateTo(angles, lerptime, lerptime * 0.25);
   linker waittill("movedone");
   linker delete();
 }
@@ -4647,8 +4647,8 @@ lerp_player_view_to_position_oldstyle(origin, angles, lerptime, fraction, right_
     self playerlinktodelta(linker);
   }
 
-  linker moveto(origin, lerptime, lerptime * 0.25);
-  linker rotateto(angles, lerptime, lerptime * 0.25);
+  linker moveTo(origin, lerptime, lerptime * 0.25);
+  linker rotateTo(angles, lerptime, lerptime * 0.25);
   linker waittill("movedone");
   linker delete();
 }
@@ -4680,8 +4680,8 @@ lerp_player_view_to_moving_position_oldstyle(ent, tag, lerptime, fraction, right
     origin = ent gettagorigin(tag);
     angles = ent gettagangles(tag);
 
-    linker moveto(origin, 0.0167 * (max_count - count));
-    linker rotateto(angles, 0.0167 * (max_count - count));
+    linker moveTo(origin, 0.0167 * (max_count - count));
+    linker rotateTo(angles, 0.0167 * (max_count - count));
     wait(0.0167);
     count++;
   }
@@ -4771,7 +4771,7 @@ geo_off() {
     return;
   }
   self.realorigin = self getorigin();
-  self moveto(self.realorigin + (0, 0, -10000), .2);
+  self moveTo(self.realorigin + (0, 0, -10000), .2);
 
   self.geo_off = true;
 }
@@ -4780,7 +4780,7 @@ geo_on() {
   if(!isDefined(self.geo_off)) {
     return;
   }
-  self moveto(self.realorigin, .2);
+  self moveTo(self.realorigin, .2);
   self waittill("movedone");
   self.geo_off = undefined;
 }
@@ -5031,10 +5031,10 @@ hunted_style_door_open(soundalias) {
     self playSound("door_wood_slow_open");
   }
 
-  self rotateto(self.angles + (0, 70, 0), 2, .5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self connectpaths();
   self waittill("rotatedone");
-  self rotateto(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 palm_style_door_open(soundalias) {
@@ -5046,10 +5046,10 @@ palm_style_door_open(soundalias) {
     self playSound("door_wood_slow_open");
   }
 
-  self rotateto(self.angles + (0, 70, 0), 2, .5, 0);
+  self rotateTo(self.angles + (0, 70, 0), 2, .5, 0);
   self connectpaths();
   self waittill("rotatedone");
-  self rotateto(self.angles + (0, 40, 0), 2, 0, 2);
+  self rotateTo(self.angles + (0, 40, 0), 2, 0, 2);
 }
 
 lerp_fov_overtime(time, destfov) {
@@ -5078,8 +5078,8 @@ apply_end_fog() {
   maps\_load::set_fog_progress(1);
 }
 
-anim_stopanimscripted() {
-  self stopanimscripted();
+anim_stopanimScripted() {
+  self stopanimScripted();
   self notify("single anim", "end");
   self notify("looping anim", "end");
 }
@@ -5111,20 +5111,20 @@ _setLightIntensity(val) {
   self setLightIntensity(val);
 }
 
-_linkto(targ, tag, org, angles) {
+_linkTo(targ, tag, org, angles) {
   if(isDefined(angles)) {
-    self linkto(targ, tag, org, angles);
+    self linkTo(targ, tag, org, angles);
     return;
   }
   if(isDefined(org)) {
-    self linkto(targ, tag, org);
+    self linkTo(targ, tag, org);
     return;
   }
   if(isDefined(tag)) {
-    self linkto(targ, tag);
+    self linkTo(targ, tag);
     return;
   }
-  self linkto(targ);
+  self linkTo(targ);
 }
 
 array_wait(array, msg, timeout) {
@@ -5384,7 +5384,7 @@ mix_down(sound) {
   }
 }
 
-manual_linkto(entity, offset) {
+manual_linkTo(entity, offset) {
   entity endon("death");
   self endon("death");
   if(!isDefined(offset)) {
@@ -5589,7 +5589,7 @@ coopGame() {
 }
 #using_animtree("generic_human");
 collectible_corpse_spawn(origin_target, enemy_char_model_function) {
-  orig = GetStruct(origin_target, "targetname");
+  orig = getStruct(origin_target, "targetname");
 
   if(!isDefined(orig)) {
     ASSERTMSG("collectible_corpse: couldn't GetStruct: '" + origin_target + "'");
@@ -5738,7 +5738,7 @@ share_screen(player, toggle, instant) {
 }
 
 get_players() {
-  players = GetPlayers();
+  players = getPlayers();
   return players;
 }
 
@@ -5997,7 +5997,7 @@ expandMaxs(maxs, point) {
 }
 getAIarrayTouchingVolume(sTeamName, sVolumeName, eVolume) {
   if(!isDefined(eVolume)) {
-    eVolume = getent(sVolumeName, "targetname");
+    eVolume = getEnt(sVolumeName, "targetname");
     assertEx(isDefined(eVolume), sVolumeName + " does not exist");
   }
 
@@ -6180,7 +6180,7 @@ trigger_coop_warp(trigger) {
     return;
   }
 
-  safe_trigger = GetEnt(trigger.target, "targetname");
+  safe_trigger = getEnt(trigger.target, "targetname");
 
   if(!isDefined(safe_trigger)) {
     AssertMsg("warp_trigger at " + trigger.origin + " does not target a safe trigger");
@@ -6310,11 +6310,11 @@ coop_warp_player(struct) {
     }
   }
 
-  self SetOrigin(pos);
+  self setOrigin(pos);
   self SetPlayerAngles(struct.angles);
 
   if(isDefined(struct.script_linkto)) {
-    trigger = GetEnt(struct.script_linkto, "script_linkname");
+    trigger = getEnt(struct.script_linkto, "script_linkname");
 
     if(!isDefined(trigger)) {
       return;

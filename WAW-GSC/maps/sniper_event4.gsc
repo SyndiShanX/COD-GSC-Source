@@ -14,7 +14,7 @@
 
 event4_start() {
   level thread player_fires();
-  spot = getstruct("reznov_laugh_node", "targetname");
+  spot = getStruct("reznov_laugh_node", "targetname");
   spot thread anim_single_solo(level.hero, "reznov_cheer");
   thread aicount();
   squad = [];
@@ -23,7 +23,7 @@ event4_start() {
     squad[i] = spawners[i] stalingradspawn();
   }
 
-  level.hero = getent("sniper_hero", "script_noteworthy");
+  level.hero = getEnt("sniper_hero", "script_noteworthy");
   players = get_players();
   event4_players_start = getStructArray("event4_player_start", "targetname");
   for(i = 0; i < players.size; i++) {
@@ -31,7 +31,7 @@ event4_start() {
     players[i] setplayerangles(event4_players_start[i].angles);
   }
   wait 0.1;
-  hero_start_spot = getstruct("e4_herostart", "targetname");
+  hero_start_spot = getStruct("e4_herostart", "targetname");
   level.hero teleport(hero_start_spot.origin, hero_start_spot.angles);
 
   wait 0.1;
@@ -58,7 +58,7 @@ event4_start() {
 
   level.hero.ignoreall = true;
   level notify("event4_started");
-  getent("russians_last_chain", "script_noteworthy") notify("trigger");
+  getEnt("russians_last_chain", "script_noteworthy") notify("trigger");
 
   players = get_players();
   array_thread(players, ::player_fires);
@@ -67,7 +67,7 @@ event4_start() {
 }
 
 event5_skipto() {
-  level.hero = getent("sniper_hero", "script_noteworthy");
+  level.hero = getEnt("sniper_hero", "script_noteworthy");
   players = get_players();
   event4_players_start = getStructArray("event4_player_start", "targetname");
   for(i = 0; i < players.size; i++) {
@@ -75,7 +75,7 @@ event5_skipto() {
     players[i] setplayerangles(event4_players_start[i].angles);
   }
   wait 0.1;
-  hero_start_spot = getstruct("e4_herostart", "targetname");
+  hero_start_spot = getStruct("e4_herostart", "targetname");
   level.hero teleport(hero_start_spot.origin, hero_start_spot.angles);
 
   wait 0.1;
@@ -101,12 +101,12 @@ event4_setup() {
   setmusicstate("CLEAR_ESCAPE");
 
   objective_controller(7);
-  getent("sarge_at_doore4door_chain", "script_noteworthy") notify("trigger");
+  getEnt("sarge_at_doore4door_chain", "script_noteworthy") notify("trigger");
   wait 0.1;
 
   open_factory_door();
   level notify("event4_started");
-  getent("e4_cqb_guys", "target") waittill("trigger");
+  getEnt("e4_cqb_guys", "target") waittill("trigger");
 
   setmusicstate("SURPRISED_AGAIN");
 
@@ -118,14 +118,14 @@ event4_setup() {
 
 sarge_cqb_control() {
   waittill_aigroupcleared("e4_cqb_guys_1");
-  getent("e4_cqb1_dead", "script_noteworthy") delete();
+  getEnt("e4_cqb1_dead", "script_noteworthy") delete();
   waittill_aigroupcleared("e4_cqb_guys_2");
   wait 1.5;
   level thread say_dialogue("perfect_spot");
 
   setmusicstate("VANTAGE_POINT");
 
-  getent("e4_cqb2_dead", "script_noteworthy") notify("trigger");
+  getEnt("e4_cqb2_dead", "script_noteworthy") notify("trigger");
   level.player thread player_fires();
   level.hero solo_set_pacifist(true);
   level.hero.ignoreall = true;
@@ -189,7 +189,7 @@ hold_fire_chat() {
   flag_wait("reznov_perch_speech1");
   if(flag("player_fired_in_e4")) {
     russian_diary_event("good");
-    level.hero stopanimscripted();
+    level.hero stopanimScripted();
     level notify("stop_talking");
     wait 0.05;
     level thread say_dialogue("u_fool", undefined, 0.5);
@@ -206,7 +206,7 @@ hold_fire_chat() {
 }
 
 spawn_officer() {
-  getent("officer_entourage", "target") waittill("trigger");
+  getEnt("officer_entourage", "target") waittill("trigger");
   level thread close_e3_door();
   level thread maps\_utility::autosave_by_name("officer_wait");
   level.hero.pacifist = true;
@@ -221,7 +221,7 @@ spawn_officer() {
   level thread maps\_utility::autosave_by_name("officer_spawned");
   wait 4;
 
-  getent("spawn_officer", "targetname") notify("trigger");
+  getEnt("spawn_officer", "targetname") notify("trigger");
 
   setmusicstate("AMSEL_IS_DOOMED");
 
@@ -237,24 +237,24 @@ spawn_officer() {
 }
 
 close_e3_door() {
-  door = getent("factory_door", "targetname");
-  door rotateyaw(120, 0.4, 0.3, .1);
-  door disconnectpaths();
+  door = getEnt("factory_door", "targetname");
+  door rotateYaw(120, 0.4, 0.3, .1);
+  door disconnectPaths();
 }
 
 horch_come() {
-  horch = getent("horch", "targetname");
-  trig1 = getent("back_right_tire_trig", "targetname");
-  trig2 = getent("front_right_tire_trig", "targetname");
+  horch = getEnt("horch", "targetname");
+  trig1 = getEnt("back_right_tire_trig", "targetname");
+  trig2 = getEnt("front_right_tire_trig", "targetname");
   thread wheels_shot(trig2);
   thread wheels_shot(trig1);
   flag_wait("officer_rdy_4_car");
-  getent("more_vehicles_come", "targetname") notify("trigger");
+  getEnt("more_vehicles_come", "targetname") notify("trigger");
 }
 
 driver_shot() {
   level endon("officer_shot_incar");
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   level endon("tires_shot");
   level.driver.animname = "driver";
   level.officer endon("death");
@@ -263,7 +263,7 @@ driver_shot() {
   horch notify("stoploop_driver");
   level notify("driver_dead");
   horch setspeed(0, 5, 5);
-  level.driver stopanimscripted();
+  level.driver stopanimScripted();
   flag_set("driver_dead");
   level notify("driver_shot");
   horch anim_single_solo(level.driver, "driver_death");
@@ -282,7 +282,7 @@ driver_wave() {
   }
   level endon("driver_dead");
 
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   level.driver.animname = "driver";
   tag = "tag_driver";
 
@@ -310,9 +310,9 @@ wheels_shot(wheel) {
   level.officer endon("death");
   level endon("driver_dead");
 
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   wheelorg = spawn("script_origin", wheel.origin);
-  wheelorg linkto(horch);
+  wheelorg linkTo(horch);
   wheel thread drag_trig_with_wheel(wheelorg);
   wheel waittill("damage");
   if(!flag("1_wheel_shot")) {
@@ -336,17 +336,17 @@ wheels_shot(wheel) {
 
 tank_shoot_while_backing() {
   wait 1;
-  tank = getent("tank_near_officer", "targetname");
+  tank = getEnt("tank_near_officer", "targetname");
   spot = getstructent("douchespot", "targetname");
   spot.origin = spot.origin + (0, 0, 30);
   wait 3;
-  tank setturrettargetent(spot);
+  tank setturrettargetEnt(spot);
   wait 3;
   tank fireweapon();
   spot2 = getstructent("douchespot2", "targetname");
   spot2.origin = spot2.origin + (0, 0, 30);
   wait 3;
-  tank setturrettargetent(spot2);
+  tank setturrettargetEnt(spot2);
   wait 3;
   tank fireweapon();
 }
@@ -408,14 +408,14 @@ officer_run() {
         setignoremegroup("badguys", "hero");
         setignoremegroup("hero", "badguys");
         level.player notify("action_notify_attack");
-        getent("cover_officer_inmid_guys", "script_noteworthy") notify("trigger");
+        getEnt("cover_officer_inmid_guys", "script_noteworthy") notify("trigger");
       }
       if(i == 4) {
         level thread say_dialogue("hide_flak");
       }
       if(i == 5) {
-        getent("cover_officer_onfoot_guys", "script_noteworthy") notify("trigger");
-        getent("e4_horch_come_trig", "targetname") thread wait_and_notify(5, "trigger");
+        getEnt("cover_officer_onfoot_guys", "script_noteworthy") notify("trigger");
+        getEnt("e4_horch_come_trig", "targetname") thread wait_and_notify(5, "trigger");
       }
 
       foundnode = 1;
@@ -457,7 +457,7 @@ officer_run() {
       flag_clear("officer_running");
 
       if(i == 2) {
-        tank = getent("tank_near_officer", "targetname");
+        tank = getEnt("tank_near_officer", "targetname");
         thread tank_shoot_while_backing();
         tank setspeed(3, 1, 1);
         if(cointoss()) {
@@ -489,12 +489,12 @@ officer_run() {
   }
 
   tag = "tag_passenger4";
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   org = horch gettagorigin(tag);
   spot = spawn("script_origin", org);
-  spot linkto(horch, tag);
+  spot linkTo(horch, tag);
 
-  self linkto(horch, tag, (0, 0, 0), (0, 0, 0));
+  self linkTo(horch, tag, (0, 0, 0), (0, 0, 0));
   animtime = getanimlength(level.scr_anim["officer"]["horch_getin"]);
   spot thread anim_single_solo(level.officer, "horch_getin", tag, horch);
   level thread driver_wave();
@@ -504,7 +504,7 @@ officer_run() {
   level thread say_dialogue("getting_into_car");
 
   if(flag("driver_dead")) {
-    level.officer stopanimscripted();
+    level.officer stopanimScripted();
     level.officer unlink();
     level thread officer_last_run();
     return;
@@ -515,7 +515,7 @@ officer_run() {
   wait animtime - 6;
 
   if(flag("driver_dead")) {
-    level.officer stopanimscripted();
+    level.officer stopanimScripted();
     level.officer unlink();
     level thread officer_last_run();
     return;
@@ -531,7 +531,7 @@ officer_run() {
   wait 5;
 
   if(flag("driver_dead")) {
-    level.officer stopanimscripted();
+    level.officer stopanimScripted();
     level.officer unlink();
     level thread officer_last_run();
     return;
@@ -637,21 +637,21 @@ officer_death() {
   level endon("officer_running");
   level.officer waittill("damage");
   level notify("officer_shot_incar");
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   tag = "tag_passenger4";
   org = horch gettagorigin(tag);
   ang = horch gettagangles(tag);
   spot = spawn("script_origin", org + (-30, 100, 0));
   spot.angles = ang;
   level.officer unlink();
-  level.officer linkto(spot);
-  spot moveto(spot.origin + (-200, 100, -25), 1);
+  level.officer linkTo(spot);
+  spot moveTo(spot.origin + (-200, 100, -25), 1);
   horch.animname = "horch";
   flag_set("did_officer_timescale");
 
   setmusicstate("AMSEL_IS_DEAD");
   level notify("stop_talking");
-  herospot = getstruct("reznov_laugh_node", "targetname");
+  herospot = getStruct("reznov_laugh_node", "targetname");
   herospot thread anim_single_solo(level.hero, "reznov_cheer");
 
   level thread do_death_timescale();
@@ -664,7 +664,7 @@ officer_ride() {
   level endon("officer_shot_incar");
   level endon("officer_running");
   level thread officer_death();
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   level endon("officer_running");
   level.officer endon("death");
   level.officer.health = 5000;
@@ -697,7 +697,7 @@ officer_last_run() {
   level notify("officer_running");
   level.officer.health = level.difficulty * 70;
   level.officer endon("death");
-  horch = getent("horch", "targetname");
+  horch = getEnt("horch", "targetname");
   tag = "tag_passenger4";
   horch notify("stoploop");
   level.officer.animname = "officer";
@@ -710,12 +710,12 @@ officer_last_run() {
 
   wait animtime - 0.2;
 
-  level.officer stopanimscripted();
+  level.officer stopanimScripted();
   level.officer set_run_anim("last_run");
   level.officer.deathanim = undefined;
   level.officer.deathanim = level.scr_anim["officer"]["amsel_shot"];
   node = getnode("officer_runto_node_6", "targetname");
-  getent("lastguys_shootatu3", "target") notify("trigger");
+  getEnt("lastguys_shootatu3", "target") notify("trigger");
   level thread say_dialogue("amsel_running", undefined, 0.5);
   level thread say_dialogue("do_not_let", undefined, 2);
   level thread say_dialogue("kill_him");
@@ -830,7 +830,7 @@ officer_dead(guy) {
   level.hero.ignoreall = true;
   level.hero.pacifist = true;
   level.player thread player_speed_set(30, 5);
-  spot = getstruct("reznov_laugh_node", "targetname");
+  spot = getStruct("reznov_laugh_node", "targetname");
 
   if(!flag("did_officer_timescale")) {
     setmusicstate("AMSEL_IS_DEAD");
@@ -851,9 +851,9 @@ open_factory_door() {
   animtime = getanimlength(level.scr_anim["hero"]["door_open3"]);
   spot thread anim_single_solo(level.hero, "door_open3");
   wait animtime - 0.5;
-  level.hero stopanimscripted();
+  level.hero stopanimScripted();
   level.hero enable_ai_color();
-  getent("post_door_charge_chain", "script_noteworthy") notify("trigger", level.player);
+  getEnt("post_door_charge_chain", "script_noteworthy") notify("trigger", level.player);
   spot delete();
 }
 
@@ -883,10 +883,10 @@ levelend() {
 
 tank_is_mad() {
   level notify("tank_luv_u");
-  tank = getent("tank_near_officer", "targetname");
+  tank = getEnt("tank_near_officer", "targetname");
 
   spot = getstructent("tank_with_vengeance_target", "targetname");
-  tank setturrettargetent(spot);
+  tank setturrettargetEnt(spot);
   wait 3;
   tank fireweapon();
   playFX(level._effect["building_wall_explode"], spot.origin, anglesToForward(spot.angles));
@@ -896,10 +896,10 @@ tank_is_mad() {
 
 tank_on_friendlies() {
   level endon("tank_luv_u");
-  tank = getent("tank_near_officer", "targetname");
+  tank = getEnt("tank_near_officer", "targetname");
   spot = getstructent("tank_shoot_friendlies_spot", "targetname");
   wait 6;
-  tank setturrettargetent(spot);
+  tank setturrettargetEnt(spot);
   wait 2;
   tank fireweapon();
   wait 0.1;
@@ -920,34 +920,34 @@ tank_on_friendlies() {
   wait 1;
   tank resumespeed(10);
 
-  ospot = getstruct("douchespot", "targetname");
+  ospot = getStruct("douchespot", "targetname");
   spot = ospot swap_struct_with_origin();
 
-  tank setturrettargetent(spot);
+  tank setturrettargetEnt(spot);
   node = getvehiclenode("tank_backupfrom_node", "script_noteworthy");
   spot = getstructent("douchespot", "targetname");
 
-  tank setturrettargetent(spot);
+  tank setturrettargetEnt(spot);
   node waittill("trigger");
   tank setspeed(0, 10, 10);
 
   tank fireweapon();
-  getent(ospot.targetname + "_geo", "targetname") delete();
+  getEnt(ospot.targetname + "_geo", "targetname") delete();
   playFX(level._effect["inside_tankhit"], spot.origin, anglesToForward(spot.angles));
 
-  ospot = getstruct("douchespot2", "targetname");
+  ospot = getStruct("douchespot2", "targetname");
   spot = ospot swap_struct_with_origin();
   wait randomintrange(2, 3);
-  tank setturrettargetent(spot);
+  tank setturrettargetEnt(spot);
   wait randomintrange(2, 5);
   tank fireweapon();
   wait 0.1;
-  getent(ospot.targetname + "_geo", "targetname") delete();
+  getEnt(ospot.targetname + "_geo", "targetname") delete();
   playFX(level._effect["inside_tankhit"], spot.origin, anglesToForward(spot.angles));
 
-  clip = getent("stay_out_of_building_clip", "targetname");
+  clip = getEnt("stay_out_of_building_clip", "targetname");
   clip trigger_on();
-  clip disconnectpaths();
+  clip disconnectPaths();
 
   clips = getEntArray("chargers_clip", "targetname");
   for(i = 0; i < clips.size; i++) {
@@ -970,7 +970,7 @@ tank_on_friendlies() {
     guys[i] ClearEnemy();
     guys[i] thread wait_and_kill(randomintrange(20, 40));
   }
-  getent("allies_retreat_chain", "targetname") notify("trigger");
+  getEnt("allies_retreat_chain", "targetname") notify("trigger");
 
   wait 2;
   enemies = getaiarray("axis");
@@ -1090,8 +1090,8 @@ hero_stumble() {
 
   level.hero pushplayer(true);
   level.hero.dontavoidplayer = true;
-  spot = getstruct("rambov_node", "targetname");
-  getent("e5_stairdudes", "target") notify("trigger");
+  spot = getStruct("rambov_node", "targetname");
+  getEnt("e5_stairdudes", "target") notify("trigger");
 
   spot anim_reach_solo(level.hero, "rambov");
   level thread reznov_pwn_stairdudes();
@@ -1111,7 +1111,7 @@ water_bullets() {
   counter = 0;
   while(counter < 3) {
     wait randomfloatrange(0.5, 2);
-    startspot = getstruct("riverfall_spot1", "targetname");
+    startspot = getStruct("riverfall_spot1", "targetname");
     magicbullet("kar98k", startspot.origin, (level.player getEye() + (randomintrange(3, 6), randomintrange(3, 6), 0)));
     wait randomfloatrange(0.5, 2);
     magicbullet("kar98k", startspot.origin, (level.player getEye() + (-1 * randomintrange(3, 6), -1 * randomintrange(3, 6), 0)));
@@ -1123,10 +1123,10 @@ drag_bubbles() {
   wait 3;
   spot = spawn("script_model", level.player.origin);
   spot setModel("tag_origin");
-  spot linkto(level.player);
+  spot linkTo(level.player);
   for(i = 1; i < 5; i++) {
     self unlink();
-    self linkto(spot, "tag_origin", (0, 0, i * -1));
+    self linkTo(spot, "tag_origin", (0, 0, i * -1));
     wait 1;
   }
 }
@@ -1157,11 +1157,11 @@ reznov_pwn_stairdudes() {
   level.hero.ignoreall = true;
   level.hero.pacifist = true;
   wait 0.2;
-  level.hero stopanimscripted();
+  level.hero stopanimScripted();
 }
 
 reznov_ready_tojump() {
-  spot = getstruct("e5_resnov_jump_node", "targetname");
+  spot = getStruct("e5_resnov_jump_node", "targetname");
   level.hero.animname = "hero";
   node = getnode("jump_target_node", "targetname");
   level.hero setgoalnode(node);
@@ -1175,21 +1175,21 @@ reznov_ready_tojump() {
   animtime = getanimlength(level.scr_anim["hero"]["reznov_fall_towater"]);
   spot anim_single_solo(level.hero, "reznov_fall_towater");
   level.hero playSound("grenade_bounce_water");
-  level.hero stopanimscripted();
+  level.hero stopanimScripted();
   newspot = spawn("script_model", level.hero.origin);
   newspot setModel("tag_origin");
   newspot.angles = (0, 270, 0);
-  level.hero linkto(newspot);
+  level.hero linkTo(newspot);
   newspot thread anim_loop_solo(level.hero, "swimming", undefined, "death");
-  dest = getstruct("hero_swim_spot", "targetname");
-  newspot moveto((level.hero.origin[0], level.hero.origin[1], dest.origin[2]), 0.5);
-  newspot rotateto(dest.angles, 1);
+  dest = getStruct("hero_swim_spot", "targetname");
+  newspot moveTo((level.hero.origin[0], level.hero.origin[1], dest.origin[2]), 0.5);
+  newspot rotateTo(dest.angles, 1);
   playFX(level._effect["river_splash"], newspot.origin);
-  playsoundatposition("dive_in_plr", (0, 0, 0));
+  playSoundAtPosition("dive_in_plr", (0, 0, 0));
   waterplayer = spawn("script_origin", newspot.origin);
   waterplayer playLoopSound("under_waterF");
   wait 0.5;
-  newspot moveto(dest.origin, 0.5);
+  newspot moveTo(dest.origin, 0.5);
 }
 
 limp_when_hit() {
@@ -1201,18 +1201,18 @@ limp_when_hit() {
   first_limp_point = (6, -18, 0);
   angles = adjust_angles_to_player(first_limp_point);
   level.player thread player_speed_set(110, 0.4);
-  level.ground_ref_ent rotateto(angles, 0.6, 0.55, 0.05);
+  level.ground_ref_ent rotateTo(angles, 0.6, 0.55, 0.05);
   wait 0.5;
   get_players()[0] setblur(0, 0.5);
   second_limp_point = (3, -9, 0);
   angles = adjust_angles_to_player(second_limp_point);
   level.player thread player_speed_set(140, 0.2);
-  level.ground_ref_ent rotateto(angles, 0.7, 0.65, 0.05);
+  level.ground_ref_ent rotateTo(angles, 0.7, 0.65, 0.05);
   wait 0.3;
   level.player thread player_speed_set(180, 1);
   third_limp_point = (0, 0, 0);
   angles = adjust_angles_to_player(third_limp_point);
-  level.ground_ref_ent rotateto(angles, 0.5, 0.45, 0.05);
+  level.ground_ref_ent rotateTo(angles, 0.5, 0.45, 0.05);
 }
 
 limp_when_hit_hard() {
@@ -1225,18 +1225,18 @@ limp_when_hit_hard() {
   first_limp_point = (11, -25, 0);
   angles = adjust_angles_to_player(first_limp_point);
   level.player thread player_speed_set(50, 0.4);
-  level.ground_ref_ent rotateto(angles, 0.6, 0.55, 0.05);
+  level.ground_ref_ent rotateTo(angles, 0.6, 0.55, 0.05);
   wait 1;
   get_players()[0] setblur(0, 0.5);
   second_limp_point = (6, 12, 0);
   angles = adjust_angles_to_player(second_limp_point);
   level.player thread player_speed_set(70, 0.2);
-  level.ground_ref_ent rotateto(angles, 0.7, 0.65, 0.05);
+  level.ground_ref_ent rotateTo(angles, 0.7, 0.65, 0.05);
   wait 0.6;
   level.player thread player_speed_set(180, 1);
   third_limp_point = (0, 0, 0);
   angles = adjust_angles_to_player(third_limp_point);
-  level.ground_ref_ent rotateto(angles, 0.5, 0.45, 0.05);
+  level.ground_ref_ent rotateTo(angles, 0.5, 0.45, 0.05);
 }
 
 fake_mg_fire(shotspot) {
@@ -1301,8 +1301,8 @@ e5_bomber_wave() {
   leadplane = undefined;
   leadplane1 = undefined;
 
-  playsoundatposition("bombers_dist_inc", (1384, 8016, -1944));
-  playsoundatposition("bombers_dist_exit", (1384, 8016, -1944));
+  playSoundAtPosition("bombers_dist_inc", (1384, 8016, -1944));
+  playSoundAtPosition("bombers_dist_exit", (1384, 8016, -1944));
 
   spots = getStructArray("e5_bombers", "targetname");
 
@@ -1318,7 +1318,7 @@ e5_bomber_wave() {
     if(dist < 2100) {
       shadowplane_org = (spots[i].origin[0], spots[i].origin[1], 0);
       vec = (1281.4, -892.6, -1853);
-      nvec = vectornormalize(vec);
+      nvec = vectorNormalize(vec);
       x = -30000;
       while(1) {
         spawnpos = shadowplane_org + (nvec * x);
@@ -1366,7 +1366,7 @@ e5_bomber_wave() {
 hat_floats() {
   level.player playSound("dive_in_plr");
   wait 0.7;
-  spot = getstruct("hatfall_animspot", "targetname");
+  spot = getStruct("hatfall_animspot", "targetname");
   hat = spawn("script_model", spot.origin);
   hat setModel("char_rus_guard_ushankaup1");
   wait 0.1;
@@ -1407,7 +1407,7 @@ event4_damage_control() {
 scareshots() {
   level endon("player_up_after_tankblast");
   scareshots = getStructArray("e5_playerdown_scareshot_start", "targetname");
-  endshot = getstruct("e5_playerdown_scareshot_target", "targetname");
+  endshot = getStruct("e5_playerdown_scareshot_target", "targetname");
   shots = randomintrange(100, 110);
   for(i = 0; i < shots; i++) {
     shotspot = scareshots[randomint(scareshots.size)];

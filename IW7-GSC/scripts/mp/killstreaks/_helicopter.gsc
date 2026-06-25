@@ -262,7 +262,7 @@ updateareanodes(var_0) {
 
   var_10 = var_0[0];
   foreach(var_3 in var_0) {
-    var_12 = getent(var_3.target, "targetname");
+    var_12 = getEnt(var_3.target, "targetname");
     foreach(var_6 in var_3.var_1314F) {
       var_3.var_C056 = var_3.var_C056 + 1;
       if(bullettracepassed(var_6.origin + (0, 0, 32), var_12.origin, 0, var_6)) {
@@ -275,7 +275,7 @@ updateareanodes(var_0) {
     }
   }
 
-  return getent(var_10.target, "targetname");
+  return getEnt(var_10.target, "targetname");
 }
 
 func_8D9B(var_0, var_1, var_2, var_3, var_4) {
@@ -876,7 +876,7 @@ attackgroundtarget(var_0) {
   self endon("attackGroundTarget");
   self stoploopsound();
   self.isattacking = 1;
-  self setturrettargetent(var_0);
+  self setturrettargetEnt(var_0);
   waitontargetordeath(var_0, 3);
   if(!isalive(var_0)) {
     self.isattacking = 0;
@@ -965,8 +965,8 @@ checkisfacing(var_0, var_1) {
   var_3 = var_1.origin - self.origin;
   var_2 = var_2 * (1, 1, 0);
   var_3 = var_3 * (1, 1, 0);
-  var_3 = vectornormalize(var_3);
-  var_2 = vectornormalize(var_2);
+  var_3 = vectorNormalize(var_3);
+  var_2 = vectorNormalize(var_2);
   var_4 = vectordot(var_3, var_2);
   var_5 = cos(var_0);
   if(var_4 >= var_5) {
@@ -988,8 +988,8 @@ isfacing(var_0, var_1) {
     var_3 = var_1.origin - self.origin;
     var_2 = var_2 * (1, 1, 0);
     var_3 = var_3 * (1, 1, 0);
-    var_3 = vectornormalize(var_3);
-    var_2 = vectornormalize(var_2);
+    var_3 = vectorNormalize(var_3);
+    var_2 = vectorNormalize(var_2);
     var_4 = vectordot(var_3, var_2);
     var_5 = cos(var_0);
     if(var_4 >= var_5) {
@@ -1032,7 +1032,7 @@ firemissile(var_0) {
       var_3.vehicle_fired_from = self;
     }
 
-    var_3 missile_settargetent(var_0);
+    var_3 missile_settargetEnt(var_0);
     var_3.owner = self;
     var_3 missile_setflightmodedirect();
     wait(0.5 / var_1);
@@ -1175,7 +1175,7 @@ heli_fly_simple_path(var_0) {
   self endon("flying");
   heli_reset();
   for(var_1 = var_0; isDefined(var_1.target); var_1 = var_2) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
     if(isDefined(var_1.script_airspeed) && isDefined(var_1.script_accel)) {
       var_3 = var_1.script_airspeed;
       var_4 = var_1.script_accel;
@@ -1217,7 +1217,7 @@ heli_fly_loop_path(var_0) {
   heli_reset();
   thread heli_loop_speed_control(var_0);
   for(var_1 = var_0; isDefined(var_1.target); var_1 = var_2) {
-    var_2 = getent(var_1.target, "targetname");
+    var_2 = getEnt(var_1.target, "targetname");
     if(isDefined(self.isperformingmaneuver) && self.isperformingmaneuver) {
       wait(0.25);
       continue;

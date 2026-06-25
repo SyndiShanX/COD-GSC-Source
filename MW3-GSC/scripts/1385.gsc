@@ -47,7 +47,7 @@ _id_435F() {
   var_14 = var_12 + var_13 / var_8;
   self movegravity(var_2, var_14);
   self waittill("movedone");
-  var_15 = vectornormalize(var_2);
+  var_15 = vectorNormalize(var_2);
   var_15 = var_15 * 320;
   var_3 = self.origin + var_15 + (0, 0, 512);
   var_4 = var_3 + (0, 0, -1024);
@@ -60,8 +60,8 @@ _id_435F() {
   var_21 = spawn("script_origin", self.origin);
   var_21.origin = self.origin;
   var_21.angles = (var_18[0], var_20[1], var_20[2]);
-  self linkto(var_21);
-  var_21 rotateto(var_20, 1.15, 0.5, 0);
+  self linkTo(var_21);
+  var_21 rotateTo(var_20, 1.15, 0.5, 0);
   var_21 waittill("rotatedone");
   var_21 rotatepitch(-2.5, 0.21, 0.05, 0.15);
   var_21 waittill("rotatedone");

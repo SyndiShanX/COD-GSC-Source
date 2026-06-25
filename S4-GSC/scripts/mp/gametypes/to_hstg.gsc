@@ -96,7 +96,7 @@ _id_ABAD() {
   level._id_7A8B = [];
   level._id_44D5 = 1;
   _id_3FF6();
-  level._id_5837 = getent("hvtExtractionLoc", "targetname");
+  level._id_5837 = getEnt("hvtExtractionLoc", "targetname");
   level._id_7A8C = [];
   level._id_7A8C[0] = ::scripts\engine\utility::getStructArray("hostage_waypoint_1", "targetname");
   level._id_7A8C[1] = ::scripts\engine\utility::getStructArray("hostage_waypoint_2", "targetname");
@@ -630,12 +630,12 @@ _id_6A2A() {
 }
 
 _id_3FF6() {
-  var_0 = getent("hvtSpawnLoc", "targetname");
+  var_0 = getEnt("hvtSpawnLoc", "targetname");
   level._id_7C24 = var_0;
 }
 
 _id_3FF7() {
-  var_0 = getent("hvtExtractionLoc", "targetname");
+  var_0 = getEnt("hvtExtractionLoc", "targetname");
   level._id_A8E8 = [];
   level._id_A8E8[0] = var_0;
   var_1 = scripts\mp\gametypes\obj_dom::_id_D896(level._id_A8E8[0]);

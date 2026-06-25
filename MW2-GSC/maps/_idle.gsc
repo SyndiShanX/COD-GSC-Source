@@ -37,8 +37,8 @@ idle() {
     node = self;
   } else {
     node = getnode(self.target, "targetname");
-    ent = getent(self.target, "targetname");
-    struct = getstruct(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
+    struct = getStruct(self.target, "targetname");
     getfunc = undefined;
 
     if(isDefined(node)) {
@@ -209,7 +209,7 @@ reaction_proc(node, ender, react_anim, tag) {
   }
 
   if(type == "stop_idle_proc") {
-    self anim_stopanimscripted();
+    self anim_stopanimScripted();
     return;
   }
 
@@ -306,7 +306,7 @@ check_animation(anime, node) {
 }
 
 get_ent(name, type) {
-  return getent(name, type);
+  return getEnt(name, type);
 }
 
 get_node(name, type) {

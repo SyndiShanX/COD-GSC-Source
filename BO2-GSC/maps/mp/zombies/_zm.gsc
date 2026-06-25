@@ -507,7 +507,7 @@ zbot_spawn_think(origin, yaw) {
 
   for(;;) {
     self waittill("spawned_player");
-    self setorigin(origin);
+    self setOrigin(origin);
     angles = (0, yaw, 0);
     self setplayerangles(angles);
   }
@@ -3153,7 +3153,7 @@ round_over() {
     return;
   }
   time = level.zombie_vars["zombie_between_round_time"];
-  players = getplayers();
+  players = getPlayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
     if(!isDefined(players[player_index].pers["previous_distance_traveled"])) {
@@ -3247,7 +3247,7 @@ round_think(restart) {
     level thread[[level.round_spawn_func]]();
     level notify("start_of_round");
     recordzombieroundstart();
-    players = getplayers();
+    players = getPlayers();
 
     for(index = 0; index < players.size; index++) {
       zonename = players[index] get_current_zone();
@@ -3766,10 +3766,10 @@ player_shield_facing_attacker(vdir, limit) {
   orientation = self getplayerangles();
   forwardvec = anglesToForward(orientation);
   forwardvec2d = (forwardvec[0], forwardvec[1], 0);
-  unitforwardvec2d = vectornormalize(forwardvec2d);
+  unitforwardvec2d = vectorNormalize(forwardvec2d);
   tofaceevec = vdir * -1;
   tofaceevec2d = (tofaceevec[0], tofaceevec[1], 0);
-  unittofaceevec2d = vectornormalize(tofaceevec2d);
+  unittofaceevec2d = vectorNormalize(tofaceevec2d);
   dotproduct = vectordot(unitforwardvec2d, unittofaceevec2d);
   return dotproduct > limit;
 }
@@ -3852,7 +3852,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, s
       self thread playswipesound(smeansofdeath, eattacker);
 
       if(isDefined(eattacker.is_zombie) && eattacker.is_zombie || isPlayer(eattacker)) {
-        self playrumbleonentity("damage_heavy");
+        self playRumbleOnEntity("damage_heavy");
       }
 
       canexert = 1;
@@ -4739,7 +4739,7 @@ player_intermission() {
           speed = points[i].speed;
         }
 
-        target_point = getstruct(points[i].target, "targetname");
+        target_point = getStruct(points[i].target, "targetname");
         dist = distance(points[i].origin, target_point.origin);
         time = dist / speed;
         q_time = time * 0.25;
@@ -4750,8 +4750,8 @@ player_intermission() {
 
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 0;
-        org moveto(target_point.origin, time, q_time, q_time);
-        org rotateto(target_point.angles, time, q_time, q_time);
+        org moveTo(target_point.origin, time, q_time, q_time);
+        org rotateTo(target_point.angles, time, q_time, q_time);
         wait(time - q_time);
         self.game_over_bg fadeovertime(q_time);
         self.game_over_bg.alpha = 1;
@@ -4816,7 +4816,7 @@ default_find_exit_point() {
   dist_zombie = 0;
   dist_player = 0;
   dest = 0;
-  away = vectornormalize(self.origin - player.origin);
+  away = vectorNormalize(self.origin - player.origin);
   endpos = self.origin + vectorscale(away, 600);
   locs = array_randomize(level.enemy_dog_locations);
 

@@ -236,7 +236,7 @@ trigger_multiple_audio_trigger(var_0) {
 }
 
 trigger_multiple_audio_progress(var_0, var_1, var_2, var_3) {
-  var_4 = vectornormalize(var_1 - var_0);
+  var_4 = vectorNormalize(var_1 - var_0);
   var_5 = var_3 - var_0;
   var_6 = vectordot(var_5, var_4);
   var_6 = var_6 / var_2;
@@ -244,7 +244,7 @@ trigger_multiple_audio_progress(var_0, var_1, var_2, var_3) {
 }
 
 trigger_multiple_audio_progress_point(var_0, var_1, var_2) {
-  var_3 = vectornormalize(var_1 - var_0);
+  var_3 = vectorNormalize(var_1 - var_0);
   var_4 = var_2 - var_0;
   var_5 = vectordot(var_4, var_3);
   return var_3 * var_5 + var_0;
@@ -353,9 +353,9 @@ play_linked_sound(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawn("script_origin", var_1.origin);
 
   if(isDefined(var_4)) {
-    var_5 linkto(var_1, "tag_origin", var_4, (0, 0, 0));
+    var_5 linkTo(var_1, "tag_origin", var_4, (0, 0, 0));
   } else {
-    var_5 linkto(var_1);
+    var_5 linkTo(var_1);
   }
 
   if(var_2 == "loop") {

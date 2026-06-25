@@ -33,7 +33,7 @@ function main() {
   scene::add_scene_func("p7_fxanim_zm_castle_gate_smash_lift_bundle", &function_ef9ad3c0, "init");
   level thread function_6a74bee8();
   level thread function_a61df505();
-  level.var_6ac4e9cb = getent("masher_gate", "script_noteworthy");
+  level.var_6ac4e9cb = getEnt("masher_gate", "script_noteworthy");
   level.var_6ac4e9cb thread function_faccc214();
   level thread scene::init("p7_fxanim_zm_castle_gate_smash_lift_bundle");
   level thread function_9087381a();
@@ -42,7 +42,7 @@ function main() {
 function register_clientfields() {}
 
 function function_a61df505() {
-  var_fb9e67a8 = getent("masher_buy_door", "script_noteworthy");
+  var_fb9e67a8 = getEnt("masher_buy_door", "script_noteworthy");
   if(isDefined(var_fb9e67a8)) {
     var_fb9e67a8 waittill("door_opened");
   }
@@ -128,7 +128,7 @@ function function_aaf2ece7() {
   while(true) {
     self waittill("trap_activate");
     if(isDefined(self.activated_by_player)) {
-      self.activated_by_player playrumbleonentity("zm_castle_interact_rumble");
+      self.activated_by_player playRumbleOnEntity("zm_castle_interact_rumble");
     }
     exploder::exploder("fxexp_116");
     self waittill("trap_done");
@@ -151,26 +151,26 @@ function function_5054a970() {
 
 function function_d7e7dcf9(player) {
   if(player.is_drinking > 0) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(!level flag::get("power_on")) {
-    self sethintstring(&"ZM_CASTLE_MASHER_POWER");
+    self setHintString(&"ZM_CASTLE_MASHER_POWER");
     return false;
   }
   if(!level flag::get("masher_unlocked")) {
-    self sethintstring(&"ZM_CASTLE_MASHER_UNAVAILABLE");
+    self setHintString(&"ZM_CASTLE_MASHER_UNAVAILABLE");
     return false;
   }
   if(level flag::get("masher_on")) {
-    self sethintstring("");
+    self setHintString("");
     return false;
   }
   if(level flag::get("masher_cooldown")) {
-    self sethintstring(&"ZM_CASTLE_MASHER_COOLDOWN");
+    self setHintString(&"ZM_CASTLE_MASHER_COOLDOWN");
     return false;
   }
-  self sethintstring(&"ZM_CASTLE_MASHER_TRAP", self.stub.hint_parm1);
+  self setHintString(&"ZM_CASTLE_MASHER_TRAP", self.stub.hint_parm1);
   return true;
 }
 
@@ -187,7 +187,7 @@ function function_b776b443() {
         e_who zm_score::minus_to_player_score(1500);
         self.stub.var_42d723eb thread function_d12a18d7(e_who);
         e_who zm_audio::create_and_play_dialog("trap", "start");
-        e_who playrumbleonentity("zm_castle_interact_rumble");
+        e_who playRumbleOnEntity("zm_castle_interact_rumble");
       }
     }
   }
@@ -271,11 +271,11 @@ function function_faccc214() {
 
 function function_1a554e00(var_6ac4e9cb, var_8f915eab) {
   self._trap_type = "masher";
-  self enablelinkto();
+  self enablelinkTo();
   if(isDefined(var_8f915eab)) {
-    self linkto(var_6ac4e9cb, var_8f915eab);
+    self linkTo(var_6ac4e9cb, var_8f915eab);
   } else {
-    self linkto(var_6ac4e9cb);
+    self linkTo(var_6ac4e9cb);
   }
   self thread trigger_damage(var_6ac4e9cb);
   self hide();

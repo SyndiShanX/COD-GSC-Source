@@ -45,11 +45,11 @@ function loop_on_tag(alias, tag, bstopsoundondeath) {
     thread util::delete_on_death(org);
   }
   if(isDefined(tag)) {
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
   org playLoopSound(alias);
   self waittill("stop sound" + alias);
@@ -63,11 +63,11 @@ function play_on_tag(alias, tag, ends_on_death) {
   thread delete_on_death_wait(org, "sounddone");
   if(isDefined(tag)) {
     org.origin = self gettagorigin(tag);
-    org linkto(self, tag, (0, 0, 0), (0, 0, 0));
+    org linkTo(self, tag, (0, 0, 0), (0, 0, 0));
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
   org playsoundwithnotify(alias, "sounddone");
   if(isDefined(ends_on_death)) {
@@ -100,11 +100,11 @@ function loop_on_entity(alias, offset) {
   if(isDefined(offset)) {
     org.origin = self.origin + offset;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   } else {
     org.origin = self.origin;
     org.angles = self.angles;
-    org linkto(self);
+    org linkTo(self);
   }
   org playLoopSound(alias);
   self waittill("stop sound" + alias);

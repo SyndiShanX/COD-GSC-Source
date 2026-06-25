@@ -67,7 +67,7 @@ function function_7403e82b() {
   model3 setModel("p7_shelf_modern_02_e");
   model3.angles = vectorscale((0, 1, 0), 356);
   var_5b36c229 = spawncollision("collision_clip_128x128x128", "collider", (-4348, 10350, 148), vectorscale((0, 1, 0), 180));
-  var_5b36c229 disconnectpaths();
+  var_5b36c229 disconnectPaths();
   var_81393c92 = spawncollision("collision_clip_128x128x128", "collider", (-4392, 10350, 148), vectorscale((0, 1, 0), 180));
-  var_81393c92 disconnectpaths();
+  var_81393c92 disconnectPaths();
 }

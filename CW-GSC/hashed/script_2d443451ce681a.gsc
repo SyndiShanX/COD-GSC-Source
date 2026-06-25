@@ -474,7 +474,7 @@ function private function_66d43d96() {
     if(self.custom_locomotion.moving) {
       point2d = self.custom_locomotion.path.pathpoints[self.custom_locomotion.path.index];
       point2d = (point2d[0], point2d[1], self.origin[2]);
-      delta = vectornormalize(point2d - self.origin);
+      delta = vectorNormalize(point2d - self.origin);
       self.custom_locomotion.face_angle = vectortoyaw(delta);
     }
 
@@ -506,7 +506,7 @@ function private function_f3a8861e(anims, loop, mode = "custom") {
 
   while(anims.size > 0) {
     animation = array::random(anims);
-    self animscripted(animation, self.origin, self.angles, animation, mode, undefined, 1, 0.2);
+    self animScripted(animation, self.origin, self.angles, animation, mode, undefined, 1, 0.2);
     wait getanimlength(animation);
 
     if(!is_true(loop)) {

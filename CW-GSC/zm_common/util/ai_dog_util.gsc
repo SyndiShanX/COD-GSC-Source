@@ -87,7 +87,7 @@ function dog_spawner_init() {
 }
 
 function function_dd162858() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
 
   if(level.dog_round_count < 3) {
     n_max = a_e_players.size * 6;
@@ -99,7 +99,7 @@ function function_dd162858() {
 }
 
 function function_20aadb5e() {
-  a_e_players = getplayers();
+  a_e_players = getPlayers();
   n_max = zm_round_logic::get_zombie_count_for_round(level.round_number, a_e_players.size);
   return int(n_max * 0.6);
 }
@@ -139,10 +139,10 @@ function dog_spawn_fx(ai, ent) {
   ai endon(#"death");
   ai val::set(#"dog_spawn", "takedamage", 0);
   ai setfreecameralockonallowed(0);
-  playsoundatposition(#"zmb_hellhound_prespawn", ent.origin);
+  playSoundAtPosition(#"zmb_hellhound_prespawn", ent.origin);
   wait 1.5;
   earthquake(0.5, 0.75, ent.origin, 1000);
-  playsoundatposition(#"zmb_hellhound_spawn", ent.origin);
+  playSoundAtPosition(#"zmb_hellhound_spawn", ent.origin);
 
   if(isDefined(ai.favoriteenemy)) {
     angle = vectortoangles(ai.favoriteenemy.origin - ent.origin);
@@ -186,7 +186,7 @@ function dog_spawn_factory_logic(favorite_enemy) {
 }
 
 function function_81f9083e() {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     player.var_230becc2 = 0;
@@ -195,7 +195,7 @@ function function_81f9083e() {
 }
 
 function function_a5abd591() {
-  dog_targets = getplayers();
+  dog_targets = getPlayers();
   var_d6c885ef = dog_targets[0];
 
   for(i = 0; i < dog_targets.size; i++) {
@@ -286,7 +286,7 @@ function get_favorite_enemy() {
   if(self.team == #"allies") {
     dog_targets = getaiteamarray(level.zombie_team);
   } else {
-    dog_targets = getplayers();
+    dog_targets = getPlayers();
   }
 
   least_hunted = dog_targets[0];
@@ -322,7 +322,7 @@ function get_favorite_enemy() {
 }
 
 function dog_health_increase() {
-  players = getplayers();
+  players = getPlayers();
 
   switch (level.dog_round_count) {
     case 1:
@@ -395,7 +395,7 @@ function dog_round_start() {
   level thread zm_audio::sndmusicsystem_playstate("dog_start");
   level thread clientfield::set("dog_round_fog_bank", 1);
   dog_health_increase();
-  players = getplayers();
+  players = getPlayers();
   array::thread_all(players, &play_dog_round);
   wait 5;
   level thread function_c5ab118d();
@@ -426,7 +426,7 @@ function dog_round_stop(var_d25bbdd5) {
 
   zm_round_spawning::function_b4a8f95a(#"zombie_dog", level.next_dog_round, &dog_round_start, &dog_round_stop, &function_dd162858, &waiting_for_next_dog_spawn, level.var_dc50acfa);
 
-  getplayers()[0] iprintln("<dev string:x5e>" + level.next_dog_round);
+  getPlayers()[0] iprintln("<dev string:x5e>" + level.next_dog_round);
 
   level thread clientfield::set("dog_round_fog_bank", 0);
 }
@@ -443,7 +443,7 @@ function function_5f1ef789(var_d25bbdd5) {
 function play_dog_round() {
   variation_count = 5;
   wait 4.5;
-  players = getplayers();
+  players = getPlayers();
   num = randomintrange(0, players.size);
   players[num] zm_audio::create_and_play_dialog(#"general", #"dog_spawn");
 }
@@ -614,7 +614,7 @@ function dog_clip_monitor() {
     }
 
     for(i = 0; i < level.dog_clips.size; i++) {
-      level.dog_clips[i] disconnectpaths();
+      level.dog_clips[i] disconnectPaths();
       util::wait_network_frame();
     }
 
@@ -706,7 +706,7 @@ function function_62db7b1c(b_force_spawn = 0, var_eb3a8721) {
     return undefined;
   }
 
-  players = getplayers();
+  players = getPlayers();
 
   if(isDefined(var_eb3a8721)) {
     s_spawn_loc = var_eb3a8721;

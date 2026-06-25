@@ -162,7 +162,7 @@ ee_tundragun_step2_setup(var_5ea5c94d) {
   e_lid waittill(#"rotatedone");
 
   if(isDefined(s_weapon_pickup)) {
-    e_weapon moveto(e_weapon.origin + (0, 0, 16), 1.5);
+    e_weapon moveTo(e_weapon.origin + (0, 0, 16), 1.5);
     e_weapon waittill(#"movedone");
     level.var_97da986d.s_weapon_pickup.e_weapon zm_orange_util::start_zombies_collision_manager(getweapon("tundragun"), &function_37d390f8);
   }

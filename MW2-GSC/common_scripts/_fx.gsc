@@ -293,7 +293,7 @@ gunfireloopfxVecthread(fxId, fxPos, fxPos2, shotsMin, shotsMax, shotdelayMin, sh
   shotsBase = shotsMin;
   shotsRange = shotsMax - shotsMin;
 
-  fxPos2 = vectornormalize(fxPos2 - fxPos);
+  fxPos2 = vectorNormalize(fxPos2 - fxPos);
 
   fxEnt = spawnFx(level._effect[fxId], fxPos, fxPos2);
   fxEnt willNeverChange();
@@ -329,7 +329,7 @@ setup_fx() {
 
   org = undefined;
   if(isDefined(self.target)) {
-    ent = getent(self.target, "targetname");
+    ent = getEnt(self.target, "targetname");
     if(isDefined(ent)) {
       org = ent.origin;
     }

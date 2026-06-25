@@ -191,7 +191,7 @@ ape_health_watch() {
 }
 ape_set_airstrike_damage() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 4) {
     self.maxAirstrikeDamage = 125;
   } else {
@@ -475,7 +475,7 @@ ape_round_stop() {
   }
 }
 ape_zombie_manager() {
-  start_ape = getent("start_boss_spawner", "script_noteworthy");
+  start_ape = getEnt("start_boss_spawner", "script_noteworthy");
   if(isDefined(start_ape)) {
     while(true) {
       if(level.num_ape_zombies < level.max_ape_zombies) {
@@ -518,7 +518,7 @@ ape_zombie_think() {
   self thread ape_zombie_choose_run();
   self thread ape_zombie_check_laststand();
   self thread[[level.ape_zombie_activation]]();
-  players = getplayers();
+  players = getPlayers();
   if(players.size > 1) {
     self thread ape_zombie_wait_for_switch();
   }
@@ -534,7 +534,7 @@ ape_zombie_think() {
     self.maxhealth = 1;
     self.health = 1;
   }
-  players = GetPlayers();
+  players = getPlayers();
   if(players.size == 4) {
     bonus = int(self.health * .5);
     self.maxhealth += bonus;
@@ -690,7 +690,7 @@ ape_zombie_wait_for_switch() {
   self ape_zombie_switch_player(1);
 }
 ape_zombie_switch_player(speed_up) {
-  players = getplayers();
+  players = getPlayers();
   if(players.size > 1) {
     self.ignore_player[self.ignore_player.size] = self.favoriteenemy;
     if(self.ignore_player.size >= get_number_of_valid_players()) {
@@ -812,13 +812,13 @@ ape_zombie_ground_hit() {
   }
   self.ground_hit = true;
   self thread groundhit_watcher("groundhit_anim");
-  self animscripted("groundhit_anim", self.origin, self.angles, %ai_zombie_simianaut_ground_pound);
+  self animScripted("groundhit_anim", self.origin, self.angles, %ai_zombie_simianaut_ground_pound);
   animscripts\traverse\zombie_shared::wait_anim_length(%ai_zombie_simianaut_ground_pound, .02);
   self.ground_hit = false;
   self.nextGroundHit = GetTime() + level.ape_ground_attack_delay;
   if(self.chest_beat) {
     time = getAnimLength(%ai_zombie_simianaut_taunt);
-    self animscripted("taunt_anim", self.origin, self.angles, %ai_zombie_simianaut_taunt);
+    self animScripted("taunt_anim", self.origin, self.angles, %ai_zombie_simianaut_taunt);
     wait(time);
     self.chest_beat = false;
   }
@@ -830,7 +830,7 @@ ape_zombie_ground_hit_think() {
   self.nextGroundHit = GetTime() + level.ape_ground_attack_delay;
   while(1) {
     if(!self.ground_hit && GetTime() >= self.nextGroundHit) {
-      players = GetPlayers();
+      players = getPlayers();
       closeEnough = false;
       origin = self getEye();
       for(i = 0; i < players.size; i++) {
@@ -1051,7 +1051,7 @@ ape_thundergun_disintegrate(player) {
   if(self.health > 0 && !flag("tgun_react")) {
     flag_set("tgun_react");
     time = getAnimLength(%ai_zombie_simianaut_react_tgun);
-    self animscripted("tgunreact_anim", self.origin, self.angles, %ai_zombie_simianaut_react_tgun);
+    self animScripted("tgunreact_anim", self.origin, self.angles, %ai_zombie_simianaut_react_tgun);
     wait(time);
     wait(2.5);
     flag_clear("tgun_react");
@@ -1125,7 +1125,7 @@ ape_nuke_damage(location) {
     self DoDamage(damage, self.origin);
     if(self.is_activated && self.health > 0) {
       time = getAnimLength(%ai_zombie_simianaut_react_nuke);
-      self animscripted("nukereact_anim", self.origin, self.angles, %ai_zombie_simianaut_react_nuke);
+      self animScripted("nukereact_anim", self.origin, self.angles, %ai_zombie_simianaut_react_nuke);
       wait(time);
     }
     self.is_activated = true;
@@ -1153,17 +1153,17 @@ ape_non_attacker(damage, weapon) {
 }
 ape_zombie_default_enter_level() {
   playFX(level._effect["ape_spawn"], self.origin);
-  playsoundatposition("zmb_bolt", self.origin);
+  playSoundAtPosition("zmb_bolt", self.origin);
   PlayRumbleOnPosition("explosion_generic", self.origin);
   self.entered_level = true;
 }
 ape_zombie_knockdown() {
   self endon("death");
   time = getAnimLength(%ai_zombie_thundergun_hit_forwardtoface);
-  self animscripted("down", self.origin, self.angles, %ai_zombie_thundergun_hit_forwardtoface, "normal", %body, 1);
+  self animScripted("down", self.origin, self.angles, %ai_zombie_thundergun_hit_forwardtoface, "normal", %body, 1);
   wait(time);
   time = getAnimLength(%ai_zombie_thundergun_getup_a);
-  self animscripted("up", self.origin, self.angles, %ai_zombie_thundergun_getup_a, "normal", %body, 1);
+  self animScripted("up", self.origin, self.angles, %ai_zombie_thundergun_getup_a, "normal", %body, 1);
   wait(time);
 }
 ape_zombie_push_zombies() {
@@ -1208,7 +1208,7 @@ ape_find_flesh() {
   self.helitarget = true;
   self maps\_zombiemode_spawner::zombie_history("ape find flesh -> start");
   self.goalradius = 48;
-  players = getplayers();
+  players = getPlayers();
   self.ignore_player = [];
   player = get_closest_valid_player(self.origin, self.ignore_player);
   if(!isDefined(player)) {

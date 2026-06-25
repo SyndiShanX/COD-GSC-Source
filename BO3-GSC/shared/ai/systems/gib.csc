@@ -297,7 +297,7 @@ function _gibpiece(localclientnum, entity, gibmodel, gibtag, gibfx, gibdir) {
     if(!isDefined(endposition) || !isDefined(endangles)) {
       return false;
     }
-    forwardvector = vectornormalize(endposition - startposition);
+    forwardvector = vectorNormalize(endposition - startposition);
     forwardvector = forwardvector * randomfloatrange(0.6, 1);
     forwardvector = forwardvector + (randomfloatrange(0, 0.2), randomfloatrange(0, 0.2), randomfloatrange(0.2, 0.7));
   }

@@ -97,7 +97,7 @@ main() {
 }
 
 splash_trigs() {
-  trig = getent(0, "sndSplashTrig", "targetname");
+  trig = getEnt(0, "sndSplashTrig", "targetname");
   trig thread splash_trig_think_plr();
   trig thread splash_trig_think_ai();
 }

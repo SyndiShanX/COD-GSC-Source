@@ -162,7 +162,7 @@ func_8481() {
     }
   }
 
-  var_2 linkto(self, "j_wrist_z_ri", (34, 3.4, 43.752), var_4);
+  var_2 linkTo(self, "j_wrist_z_ri", (34, 3.4, 43.752), var_4);
   if(isPlayer(self.melee.target)) {
     func_35DC();
     level.player dodamage(level.player.health * 0.6, self.origin, self);
@@ -205,7 +205,7 @@ func_11831() {
   wait(0.05);
   var_1 = self gettagorigin("j_wrist_z_ri") + (0, 0, 7) - var_0;
   var_2 = length(var_1);
-  var_3 = vectornormalize(var_1);
+  var_3 = vectorNormalize(var_1);
   var_4 = var_2 * 30 * var_3;
   var_5 = self.melee.target;
   if(!isalive(var_5)) {
@@ -231,7 +231,7 @@ func_11831() {
 
     self.melee.temp_ent unlink();
     var_7 = var_7 - self gettagangles("j_wrist_z_ri");
-    self.melee.temp_ent linkto(self, "j_wrist_z_ri", (34, 3.4, 43.752), var_7);
+    self.melee.temp_ent linkTo(self, "j_wrist_z_ri", (34, 3.4, 43.752), var_7);
     var_8 = 0.15;
     var_5 lerpviewangleclamp(var_8, 0, 0, 0, 0, 0, 0);
     var_5 func_8291(5, 0, 0, var_8);

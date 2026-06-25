@@ -132,14 +132,14 @@ _id_18B5(var_0) {
     if(isDefined(var_0) && var_0) {
       return var_3.origin;
     }
-    var_5 setorigin(var_3.origin);
+    var_5 setOrigin(var_3.origin);
     var_5 setplayerangles(var_3.angles);
     var_2[var_2.size] = var_3;
   }
 }
 
 _id_18B7(var_0, var_1) {
-  var_0 setorigin(var_1.origin);
+  var_0 setOrigin(var_1.origin);
 
   if(isDefined(var_1.angles)) {
     var_0 setplayerangles(var_1.angles);
@@ -148,13 +148,13 @@ _id_18B7(var_0, var_1) {
 
 _id_18B8() {
   level._id_1337 setplayerangles(level.player.angles + (0, -25, 0));
-  level._id_1337 setorigin(level.player.origin);
+  level._id_1337 setOrigin(level.player.origin);
   var_0 = spawnStruct();
   var_0.entity = level._id_1337;
   var_0.right = -20.0;
   var_0.forward = -50.0;
   var_0 maps\_utility::_id_18B9();
-  level._id_1337 setorigin(level._id_1337.origin);
+  level._id_1337 setOrigin(level._id_1337.origin);
 }
 
 _id_17EC(var_0) {

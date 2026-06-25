@@ -29,7 +29,7 @@ on_begin(timeout_time, var_b2c60867) {
   callback::add_callback(#"on_host_migration_end", &function_ff66b979);
   self.timeout_time = zm_trial::function_5769f26a(timeout_time);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player thread function_ad32d69(var_b2c60867, self.timeout_time, 0, 1);
     player thread damage_monitor(1);
   }
@@ -38,7 +38,7 @@ on_begin(timeout_time, var_b2c60867) {
 on_end(round_reset) {
   callback::remove_callback(#"on_host_migration_end", &function_ff66b979);
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     player.var_b2c60867 = undefined;
     player.var_e14296de = undefined;
     player.n_timeout_time = undefined;
@@ -124,7 +124,7 @@ damage_monitor(var_a4a28ac7) {
 function_ff66b979() {
   level endon(#"end_of_round");
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::close(player);
     }
@@ -135,7 +135,7 @@ function_ff66b979() {
   var_a0328dd5 = gettime();
   wait 5;
 
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     timer_delta = var_a0328dd5 - player.var_e14296de;
     player thread function_ad32d69(player.var_b2c60867, player.n_timeout_time, int(float(timer_delta) / 1000), 0);
     player thread damage_monitor(0);

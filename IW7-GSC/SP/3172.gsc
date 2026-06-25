@@ -119,7 +119,7 @@ donotetracks_vsplayer(var_0, var_1) {
 
                 level.player func_D0EA(self.origin, var_12);
                 earthquake(0.45, 0.35, level.player.origin, 1000);
-                level.player playrumbleonentity("damage_heavy");
+                level.player playRumbleOnEntity("damage_heavy");
                 if(!var_15) {
                   level.player thread scripts\sp\gameskill::func_2BDB(0.3, 0.25);
                   level.player viewkick(30, self.origin);
@@ -146,7 +146,7 @@ func_D0EA(var_0, var_1) {
     var_1 = var_1 * 0.1;
   }
 
-  var_2 = vectornormalize(self.origin + (0, 0, 45) - var_0);
+  var_2 = vectorNormalize(self.origin + (0, 0, 45) - var_0);
   var_3 = var_2 * var_1 * 10;
   self setvelocity(var_3);
 }
@@ -307,7 +307,7 @@ func_67D6(var_0, var_1, var_2, var_3) {
   }
 
   var_13 = self.origin - var_12;
-  var_14 = vectornormalize(var_4.origin - var_12);
+  var_14 = vectorNormalize(var_4.origin - var_12);
   var_15 = vectordot(var_14, var_13);
   if(var_15 > 12) {
     return 0;

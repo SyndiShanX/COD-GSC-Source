@@ -265,7 +265,7 @@ metalstorm_grenade_watcher() {
 
   while(true) {
     level.player waittill("grenade_fire", grenade);
-    vel_towards_me = vectordot(grenade getvelocity(), vectornormalize(self.origin - grenade.origin));
+    vel_towards_me = vectordot(grenade getvelocity(), vectorNormalize(self.origin - grenade.origin));
 
     if(vel_towards_me < 100 || !self vehcansee(grenade)) {
       continue;
@@ -285,14 +285,14 @@ metalstorm_grenade_watcher() {
     if(!isDefined(grenade)) {
       continue;
     }
-    vel_towards_me = vectordot(grenade getvelocity(), vectornormalize(self.origin - grenade.origin));
+    vel_towards_me = vectordot(grenade getvelocity(), vectorNormalize(self.origin - grenade.origin));
 
     if(vel_towards_me < 100) {
       continue;
     }
     self setspeed(0);
     self.turretrotscale = 2;
-    self setturrettargetent(grenade);
+    self setturrettargetEnt(grenade);
     self thread metalstorm_turret_on_vis_target_thread();
     wait 0.05;
 
@@ -332,7 +332,7 @@ metalstorm_weapon_think() {
 
     if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
       self.turretrotscale = 1;
-      self setturrettargetent(self.enemy);
+      self setturrettargetEnt(self.enemy);
 
       if(cant_see_enemy_count >= 2) {
         self clearvehgoalpos();
@@ -352,7 +352,7 @@ metalstorm_weapon_think() {
       if(isDefined(self.enemy) && self vehcansee(self.enemy)) {
         if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 640000 || enemy_is_tank) {
           if(enemy_is_hind) {
-            self setgunnertargetent(self.enemy, vectorscale((0, 0, -1), 40.0), 0);
+            self setgunnertargetEnt(self.enemy, vectorscale((0, 0, -1), 40.0), 0);
           }
 
           self firegunnerweapon(0);
@@ -575,7 +575,7 @@ metalstorm_find_new_position() {
   best_score = -999999;
 
   if(isDefined(self.enemy)) {
-    vec_enemy_to_self = vectornormalize((self.origin[0], self.origin[1], 0) - (self.enemy.origin[0], self.enemy.origin[1], 0));
+    vec_enemy_to_self = vectorNormalize((self.origin[0], self.origin[1], 0) - (self.enemy.origin[0], self.enemy.origin[1], 0));
 
     foreach(node in nodes) {
       if(!node has_spawnflag(1048576)) {
@@ -751,7 +751,7 @@ get_damage_fx_ent() {
   self.damage_fx_ent setModel("tag_origin");
   self.damage_fx_ent.origin = self.origin;
   self.damage_fx_ent.angles = self.angles;
-  self.damage_fx_ent linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
+  self.damage_fx_ent linkTo(self, "tag_turret", (0, 0, 0), (0, 0, 0));
   return self.damage_fx_ent;
 }
 
@@ -799,7 +799,7 @@ metalstorm_freeze_death(attacker, mod) {
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
     self.stun_fx setModel("tag_origin");
-    self.stun_fx linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
+    self.stun_fx linkTo(self, "tag_turret", (0, 0, 0), (0, 0, 0));
     playFXOnTag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
   }
 
@@ -985,14 +985,14 @@ metalstorm_emped() {
   self notify("emped");
   self endon("emped");
   self.emped = 1;
-  playsoundatposition("veh_asd_emp_down", self.origin);
+  playSoundAtPosition("veh_asd_emp_down", self.origin);
   self.turretrotscale = 0.2;
   self metalstorm_off();
 
   if(!isDefined(self.stun_fx)) {
     self.stun_fx = spawn("script_model", self.origin);
     self.stun_fx setModel("tag_origin");
-    self.stun_fx linkto(self, "tag_turret", (0, 0, 0), (0, 0, 0));
+    self.stun_fx linkTo(self, "tag_turret", (0, 0, 0), (0, 0, 0));
     playFXOnTag(level._effect["metalstorm_stun"], self.stun_fx, "tag_origin");
   }
 

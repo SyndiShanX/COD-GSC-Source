@@ -136,7 +136,7 @@ function function_c75159ad(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   bomb.angles = (90, 0, 0);
-  bomb moveto(var_7def0a05, 0.3, 0, 0);
+  bomb moveTo(var_7def0a05, 0.3, 0, 0);
   playSound(0, "evt_doa_powerup_nuke_activate", self.origin);
   bomb waittill(#"movedone");
   playSound(fieldname, "evt_doa_powerup_nuke_impact", var_7def0a05);
@@ -176,7 +176,7 @@ function function_43ae94e0(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   spot = (self.origin[0], self.origin[1], self.origin[2] + namespace_ac2a80f5::function_ccf8a968(lastmode));
-  level.doa.var_b73cc08 moveto(spot, 0.15);
+  level.doa.var_b73cc08 moveTo(spot, 0.15);
   level.doa.var_b73cc08 waittilltimeout(0.16, #"movedone");
   self cameraforcedisablescriptcam(0);
   self.doa.cameramode = lastmode;
@@ -243,7 +243,7 @@ function function_f32984d0(localclientnum, oldval, newval, bnewent, binitialsnap
   self.doa.cameramode = 7;
   level.doa.var_b73cc08.origin = self.var_45c6f27d;
   level.doa.var_b73cc08.angles = self.var_ca14ee83;
-  level.doa.var_b73cc08 moveto(origin + (0, 0, 72), 0.3);
+  level.doa.var_b73cc08 moveTo(origin + (0, 0, 72), 0.3);
   wait 0.2;
 
   if(isDefined(self)) {

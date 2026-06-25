@@ -1456,7 +1456,7 @@ ispointvulnerable(playerorigin) {
   forward = anglesToForward(self.angles);
 
   if(distsqrd < level.bettydetectionradius * level.bettydetectionradius) {
-    playerdir = vectornormalize(playerpos - pos);
+    playerdir = vectorNormalize(playerpos - pos);
     angle = acos(vectordot(playerdir, forward));
 
     if(angle < level.bettydetectionconeangle) {

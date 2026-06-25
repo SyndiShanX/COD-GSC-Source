@@ -159,12 +159,12 @@ function updatehardpoints() {
 
 function warpalltohost(team) {
   host = util::gethostplayer();
-  players = getplayers();
+  players = getPlayers();
   function_30d59c86(team, host, players);
 }
 
 function warpalltoplayer(team, player) {
-  players = getplayers();
+  players = getPlayers();
   target = undefined;
 
   for(i = 0; i < players.size; i++) {
@@ -186,7 +186,7 @@ function function_e8b29265(player) {
   players = [];
 
   foreach(team in level.teams) {
-    players_on_team = getplayers(team);
+    players_on_team = getPlayers(team);
 
     foreach(person in players_on_team) {
       if(isalive(person)) {
@@ -236,15 +236,15 @@ function function_30d59c86(team, target, players) {
         origin = function_98c05766(spiral);
         angle = function_4783f10c(spiral);
         function_df0b6f84(spiral);
-        player setorigin(origin);
+        player setOrigin(origin);
         player setplayerangles((0, angle, 0));
         goal = origin;
       } else if(nodes.size > 0) {
         node = array::random(nodes);
-        player setorigin(node.origin);
+        player setOrigin(node.origin);
         goal = node;
       } else {
-        player setorigin(origin);
+        player setOrigin(origin);
         goal = origin;
       }
 
@@ -317,7 +317,7 @@ function updatedevsettingszm() {
       }
 
       level.players[0] setplayerangles(averageangles);
-      level.players[0] setorigin(averageorigin);
+      level.players[0] setOrigin(averageorigin);
       wait 5;
       setDvar(#"r_streamdumpdistance", 2);
     }
@@ -350,7 +350,7 @@ function updatedevsettings() {
       name = getsubstr(playerwarp_string, 4);
       warpalltoplayer(undefined, name);
     } else if(playerwarp_string == "<dev string:x1be>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
 
       if(!isDefined(level.devgui_start_spawn_index)) {
@@ -365,7 +365,7 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_start_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_start_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_start_spawn_index].angles);
       }
 
@@ -375,7 +375,7 @@ function updatedevsettings() {
         level.devgui_start_spawn_index = 0;
       }
     } else if(playerwarp_string == "<dev string:x1d2>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
 
       if(!isDefined(level.devgui_start_spawn_index)) {
@@ -390,7 +390,7 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_start_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_start_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_start_spawn_index].angles);
       }
 
@@ -400,7 +400,7 @@ function updatedevsettings() {
         level.devgui_start_spawn_index = spawns.size - 1;
       }
     } else if(playerwarp_string == "<dev string:x1e6>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
 
       if(!isDefined(level.devgui_spawn_index)) {
@@ -415,7 +415,7 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_spawn_index].angles);
       }
 
@@ -425,7 +425,7 @@ function updatedevsettings() {
         level.devgui_spawn_index = 0;
       }
     } else if(playerwarp_string == "<dev string:x1f4>") {
-      players = getplayers();
+      players = getPlayers();
       setDvar(#"scr_playerwarp", "<dev string:x38>");
 
       if(!isDefined(level.devgui_spawn_index)) {
@@ -440,7 +440,7 @@ function updatedevsettings() {
       }
 
       for(i = 0; i < players.size; i++) {
-        players[i] setorigin(spawns[level.devgui_spawn_index].origin);
+        players[i] setOrigin(spawns[level.devgui_spawn_index].origin);
         players[i] setplayerangles(spawns[level.devgui_spawn_index].angles);
       }
 
@@ -488,7 +488,7 @@ function updatedevsettings() {
 
       setDvar(#"scr_devgui_spawninspection", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_ammo") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       if(!isDefined(level.devgui_unlimited_ammo)) {
         level.devgui_unlimited_ammo = 1;
@@ -535,7 +535,7 @@ function updatedevsettings() {
       level thread function_e88bdbcf();
       setDvar(#"scr_reset_player_score", "<dev string:x38>");
     } else if(getdvarstring(#"scr_player_zero_ammo") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         player = players[i];
@@ -554,7 +554,7 @@ function updatedevsettings() {
 
       setDvar(#"scr_player_zero_ammo", "<dev string:x38>");
     } else if(getdvarstring(#"scr_emp_jammed") != "<dev string:x38>") {
-      players = getplayers();
+      players = getPlayers();
 
       for(i = 0; i < players.size; i++) {
         player = players[i];
@@ -576,7 +576,7 @@ function updatedevsettings() {
       level globallogic::forceend();
       setDvar(#"scr_round_end", "<dev string:x38>");
     } else if(getdvarint(#"scr_health_debug", 0)) {
-      players = getplayers();
+      players = getPlayers();
       host = util::gethostplayer();
 
       if(!isDefined(host.devgui_health_debug)) {
@@ -656,7 +656,7 @@ function updatedevsettings() {
         }
 
         level.players[0] setplayerangles(averageangles);
-        level.players[0] setorigin(averageorigin);
+        level.players[0] setOrigin(averageorigin);
         wait 5;
         setDvar(#"r_streamdumpdistance", 2);
       }
@@ -664,7 +664,7 @@ function updatedevsettings() {
   }
 
   if(getdvarstring(#"scr_giveperk") == "<dev string:x44>") {
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x359>");
 
     for(i = 0; i < players.size; i++) {
@@ -678,7 +678,7 @@ function updatedevsettings() {
   if(getdvarstring(#"scr_giveperk") != "<dev string:x38>") {
     perk = getdvarstring(#"scr_giveperk");
     specialties = strtok(perk, "<dev string:x37e>");
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x383>" + perk + "<dev string:x3a1>");
 
     for(i = 0; i < players.size; i++) {
@@ -692,7 +692,7 @@ function updatedevsettings() {
   }
 
   if(getdvarstring(#"scr_giveskill") == "<dev string:x44>") {
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x3a6>");
 
     foreach(player in players) {
@@ -710,7 +710,7 @@ function updatedevsettings() {
   if(getdvarstring(#"scr_giveskill") != "<dev string:x38>") {
     talentname = getdvarstring(#"scr_giveskill");
     var_2fe3f7e3 = hash(talentname);
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x3cc>" + talentname + "<dev string:x3a1>");
 
     foreach(player in players) {
@@ -726,7 +726,7 @@ function updatedevsettings() {
   }
 
   if(getdvarstring(#"scr_givetalent") == "<dev string:x44>") {
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x3eb>");
 
     foreach(player in players) {
@@ -744,7 +744,7 @@ function updatedevsettings() {
   if(getdvarstring(#"scr_givetalent") != "<dev string:x38>") {
     talentname = getdvarstring(#"scr_givetalent");
     var_2fe3f7e3 = hash(talentname);
-    players = getplayers();
+    players = getPlayers();
     iprintln("<dev string:x411>" + talentname + "<dev string:x3a1>");
 
     foreach(player in players) {
@@ -931,7 +931,7 @@ function devgui_unlimited_momentum() {
 
   for(;;) {
     wait 1;
-    players = getplayers();
+    players = getPlayers();
 
     foreach(player in players) {
       if(!isDefined(player)) {
@@ -952,7 +952,7 @@ function devgui_unlimited_momentum() {
 }
 
 function devgui_increase_momentum(score) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(!isDefined(player)) {
@@ -972,7 +972,7 @@ function devgui_increase_momentum(score) {
 }
 
 function function_e88bdbcf(score) {
-  players = getplayers();
+  players = getPlayers();
 
   foreach(player in players) {
     if(isDefined(player) && isalive(player) && player.sessionstate == "<dev string:x475>") {
@@ -1602,7 +1602,7 @@ function larry_ai(larry) {
     }
   } else {
     foreach(team in level.teams) {
-      if(getplayers(team).size == 0) {
+      if(getPlayers(team).size == 0) {
         var_572bc68e = team;
         break;
       }
@@ -1922,7 +1922,7 @@ function force_grenade_throw(weapon) {
   angles = host getplayerangles();
   angles = (0, angles[1], 0);
   dir = anglesToForward(angles);
-  dir = vectornormalize(dir);
+  dir = vectorNormalize(dir);
   origin = host getEye() + vectorscale(dir, 256);
   velocity = vectorscale(dir, -1024);
   grenade = bot magicgrenadeplayer(weapon, origin, velocity);
@@ -2151,7 +2151,7 @@ function drawpath(linecolor, textcolor, textalpha, textscale, textoffset, drawti
   entfirsttarget = ent.targetname;
 
   while(isDefined(ent.target)) {
-    enttarget = getent(ent.target, "<dev string:x162>");
+    enttarget = getEnt(ent.target, "<dev string:x162>");
     ent thread drawpathsegment(enttarget, linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endonmsg);
 
     if(ent.targetname == "<dev string:x9e4>") {

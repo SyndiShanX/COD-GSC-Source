@@ -30,10 +30,10 @@ func_5356() {
   level.all_crates = [];
   level.all_empty_crates = [];
   foreach(var_02 in var_00) {
-    var_02.var_272F = getent(var_02.var_01A2, "targetname");
-    var_02.crate_empty = getent(var_02.var_272F.var_01A2, "targetname");
+    var_02.var_272F = getEnt(var_02.var_01A2, "targetname");
+    var_02.crate_empty = getEnt(var_02.var_272F.var_01A2, "targetname");
     var_02.crate_empty method_805C();
-    var_02.var_9D65 = getent(var_02.crate_empty.var_01A2, "targetname");
+    var_02.var_9D65 = getEnt(var_02.crate_empty.var_01A2, "targetname");
     var_02.var_5A6E = var_02.var_9D65.var_8260;
     var_02.var_00C5 = tablelookup("mp/killstreaktable.csv", 1, var_02.var_5A6E, 2);
     var_02.var_5A68 = tablelookup("mp/killstreaktable.csv", 1, var_02.var_5A6E, 19);
@@ -47,7 +47,7 @@ func_5356() {
       var_02.var_5A68 = "scorestreak_raid_superweapon_neutral_hud";
     }
 
-    var_02.var_9D65 sethintstring(level.var_A85D[var_02.var_5A6E]);
+    var_02.var_9D65 setHintString(level.var_A85D[var_02.var_5A6E]);
     var_02.var_A582 = getEntArray(var_02.var_9D65.var_01A2, "targetname");
     var_02.oncooldown = 0;
     var_02.var_6210 = undefined;

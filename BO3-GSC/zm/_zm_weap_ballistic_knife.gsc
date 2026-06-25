@@ -35,7 +35,7 @@ function on_spawn(watcher, player) {
         isfriendly = 1;
       }
       if(!isfriendly) {
-        retrievable_model linkto(prey, bone);
+        retrievable_model linkTo(prey, bone);
         retrievable_model thread force_drop_knives_to_ground_on_death(player, prey);
       } else if(isfriendly) {
         retrievable_model physicslaunch(normal, (randomint(10), randomint(10), randomint(10)));
@@ -87,23 +87,23 @@ function on_spawn_retrieve_trigger(watcher, player) {
     pickup_trigger = spawn("trigger_radius", (trigger_pos[0], trigger_pos[1], trigger_pos[2]), 0, 50, 100);
   } else {
     pickup_trigger = spawn("trigger_radius_use", (trigger_pos[0], trigger_pos[1], trigger_pos[2]));
-    pickup_trigger setcursorhint("HINT_NOICON");
+    pickup_trigger setCursorHint("HINT_NOICON");
   }
   pickup_trigger.owner = player;
   retrievable_model.retrievabletrigger = pickup_trigger;
   hint_string = &"WEAPON_BALLISTIC_KNIFE_PICKUP";
   if(isDefined(hint_string)) {
-    pickup_trigger sethintstring(hint_string);
+    pickup_trigger setHintString(hint_string);
   } else {
-    pickup_trigger sethintstring(&"GENERIC_PICKUP");
+    pickup_trigger setHintString(&"GENERIC_PICKUP");
   }
   pickup_trigger setteamfortrigger(player.team);
   player clientclaimtrigger(pickup_trigger);
-  pickup_trigger enablelinkto();
+  pickup_trigger enablelinkTo();
   if(isDefined(prey)) {
-    pickup_trigger linkto(prey);
+    pickup_trigger linkTo(prey);
   } else {
-    pickup_trigger linkto(retrievable_model);
+    pickup_trigger linkTo(retrievable_model);
   }
   if(isDefined(level.knife_planted)) {
     [[level.knife_planted]](retrievable_model, pickup_trigger, prey);
@@ -232,5 +232,5 @@ function update_retrieve_trigger(player) {
   self waittill("stationary");
   trigger = self.retrievabletrigger;
   trigger.origin = (self.origin[0], self.origin[1], self.origin[2] + 10);
-  trigger linkto(self);
+  trigger linkTo(self);
 }

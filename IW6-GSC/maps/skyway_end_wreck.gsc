@@ -30,8 +30,8 @@ section_precache() {
 
 section_post_inits() {
   level._end_wreck = spawnStruct();
-  level._end_wreck.ally_start = getent("ally1_start_end_swim", "targetname");
-  level._end_wreck.player_start = getent("player_start_end_swim", "targetname");
+  level._end_wreck.ally_start = getEnt("ally1_start_end_swim", "targetname");
+  level._end_wreck.player_start = getEnt("player_start_end_swim", "targetname");
 }
 
 start() {
@@ -66,7 +66,7 @@ start() {
 }
 
 main() {
-  var_0 = getent("enemy_target", "targetname");
+  var_0 = getEnt("enemy_target", "targetname");
   var_0 hide();
   level.player allowstand(1);
   level.player allowcrouch(1);
@@ -91,7 +91,7 @@ main() {
 part_2_setup() {
   maps\skyway_util::skyway_hide_hud();
   thread maps\skyway_audio::sfx_water_amb();
-  level.end_wreck_node = getent("end_wreck_origin", "targetname");
+  level.end_wreck_node = getEnt("end_wreck_origin", "targetname");
   var_0 = level._ally;
   var_0 maps\_utility::gun_remove();
   thread part_2_dialog(var_0);
@@ -119,7 +119,7 @@ part_2_setup() {
   level.playerviewmodel = maps\_utility::spawn_anim_model("player_rig_magnum", level.player.origin);
   level.playerviewmodel linktoplayerview(level.player, "tag_player", (0, 0, 0), (0, 0, 0), 1);
   var_4 = level.player common_scripts\utility::spawn_tag_origin();
-  level.player playerlinkto(var_4, "tag_origin", 0, 90, 90, 40, 40);
+  level.player playerlinkTo(var_4, "tag_origin", 0, 90, 90, 40, 40);
   level.player playSound("scn_sw_uw_pickup_gun_plr");
   level.player maps\_anim::anim_single_solo(level.playerviewmodel, "pt2_draw");
   level.player unlink();
@@ -153,20 +153,20 @@ part_2_dialog(var_0) {
 }
 
 part_2_animated_seafloor(var_0) {
-  var_0 = getent("sea_floor_animated", "targetname");
-  var_1 = getent("light_target_seafloor", "targetname");
+  var_0 = getEnt("sea_floor_animated", "targetname");
+  var_1 = getEnt("light_target_seafloor", "targetname");
   var_0 retargetscriptmodellighting(var_1);
   var_0.animname = "seafloor";
   var_0 maps\_anim::setanimtree();
   level.end_wreck_node thread maps\_anim::anim_single_solo(var_0, "pt2_crash");
   var_2 = common_scripts\utility::spawn_tag_origin();
-  var_2 linkto(var_0, "tag_fx_impact_dust_cloud", (0, 0, 0), (0, 0, 0));
+  var_2 linkTo(var_0, "tag_fx_impact_dust_cloud", (0, 0, 0), (0, 0, 0));
   var_3 = common_scripts\utility::spawn_tag_origin();
-  var_3 linkto(var_0, "tag_fx_impact_dust_cloud_2", (0, 0, 0), (0, 0, 0));
+  var_3 linkTo(var_0, "tag_fx_impact_dust_cloud_2", (0, 0, 0), (0, 0, 0));
   var_4 = common_scripts\utility::spawn_tag_origin();
-  var_4 linkto(var_0, "tag_fx_impact_dust_cloud_3", (0, 0, 0), (0, 0, 0));
+  var_4 linkTo(var_0, "tag_fx_impact_dust_cloud_3", (0, 0, 0), (0, 0, 0));
   var_5 = common_scripts\utility::spawn_tag_origin();
-  var_5 linkto(var_0, "tag_fx_impact_dust_cloud_4", (0, 0, 0), (0, 0, 0));
+  var_5 linkTo(var_0, "tag_fx_impact_dust_cloud_4", (0, 0, 0), (0, 0, 0));
   level waittill("notify_hit_floor_1");
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_ent, 0.8, 0.0, 0.2, 0.0, 0.8);
   earthquake(0.35, 0.7, level.player.origin, 3000);
@@ -184,17 +184,17 @@ part_2_animated_seafloor(var_0) {
   wait 1.5;
   maps\_utility::stop_exploder("underwater_loco_headlight");
   level waittill("notify_hit_floor_2");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 0.4, level.player.origin, 3000);
   level.player thread maps\_utility::play_sound_on_entity("sw_train_hit_seafloor_2");
   level.player thread maps\_utility::play_sound_on_entity("emt_skyway_mtl_crgtd_hit");
   level waittill("notify_hit_floor_3");
-  level.player playrumbleonentity("damage_light");
+  level.player playRumbleOnEntity("damage_light");
   earthquake(0.15, 0.3, level.player.origin, 3000);
   level.player thread maps\_utility::play_sound_on_entity("sw_train_hit_seafloor_3");
   level.player thread maps\_utility::play_sound_on_entity("emt_skyway_mtl_stress_big");
   level waittill("notify_hit_floor_4");
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   earthquake(0.3, 0.4, level.player.origin, 3000);
   level.player thread maps\_utility::play_sound_on_entity("sw_train_hit_seafloor_2");
   level.player thread maps\_utility::play_sound_on_entity("emt_skyway_mtl_crgtd_hit");
@@ -307,11 +307,11 @@ player_hurt_effects() {
 }
 
 glass_crack_effects() {
-  var_0 = getent("wreck_glass_crack_01", "targetname");
+  var_0 = getEnt("wreck_glass_crack_01", "targetname");
   var_0 hide();
-  var_1 = getent("wreck_glass_crack_02", "targetname");
+  var_1 = getEnt("wreck_glass_crack_02", "targetname");
   var_1 hide();
-  var_2 = getent("wreck_glass_crack_player", "targetname");
+  var_2 = getEnt("wreck_glass_crack_player", "targetname");
   var_2 hide();
   level waittill("glass_crack_01");
   var_0 show();
@@ -321,7 +321,7 @@ glass_crack_effects() {
 }
 
 player_glass_crack(var_0) {
-  var_1 = getent("get_speedloader_trigger", "targetname");
+  var_1 = getEnt("get_speedloader_trigger", "targetname");
 
   while(!level.player istouching(var_1)) {
     wait 0.01;
@@ -338,7 +338,7 @@ part_2_crawl_player(var_0, var_1, var_2, var_3) {
   setsaveddvar("player_view_pitch_down", 10);
   level.player unlink();
   var_2 delete();
-  level.ground_ref = getent("pt2_ground_ref", "targetname");
+  level.ground_ref = getEnt("pt2_ground_ref", "targetname");
   level.player playersetgroundreferenceent(level.ground_ref);
   level.ground_ref thread part_2_aim_waver();
   level.player enableslowaim(0.2, 0.2);
@@ -376,7 +376,7 @@ part_2_dynamic_crawl() {
 update_crawl_speed(var_0) {
   level notify("set_crawl_speed");
   level endon("set_crawl_speed");
-  var_1 = getent("pt2_ground_ref", "targetname");
+  var_1 = getEnt("pt2_ground_ref", "targetname");
 
   for(;;) {
     var_2 = distance(level.player.origin, var_1.origin);
@@ -402,7 +402,7 @@ enemy_fires_gun(var_0) {
   level waittill("enemy_gun_fire");
   playFXOnTag(level._effect["magnum_flash"], var_0, "TAG_flash");
   var_1 = anglesToForward(var_0 gettagangles("TAG_flash"));
-  var_2 = vectornormalize(var_1);
+  var_2 = vectorNormalize(var_1);
   var_3 = var_0 gettagorigin("TAG_Flash") + 1000 * var_2;
   magicbullet("coltanaconda_skyway", var_0 gettagorigin("TAG_Flash"), var_3, level.player);
   level.player playSound("sw_wreck_close_shot_1");
@@ -416,7 +416,7 @@ enemy_fires_gun(var_0) {
 
 part_2_draw_player(var_0, var_1, var_2, var_3) {
   level waittill("gun_available");
-  var_4 = getent("get_gun_trigger", "targetname");
+  var_4 = getEnt("get_gun_trigger", "targetname");
   create_qte_prompt(&"SKYWAY_HINT_PICK_UP_GUN", "hud_icon_colt_anaconda", 1.5);
   thread trigger_qte_prompt_check(var_4);
 
@@ -491,14 +491,14 @@ part_2_speedloader(var_0, var_1) {
   level.end_wreck_player_node = common_scripts\utility::spawn_tag_origin();
   level.end_wreck_player_node.angles = level.end_wreck_node.angles;
   level.end_wreck_player_node.origin = level.player.origin;
-  level.player_rig_grab linkto(level.end_wreck_player_node);
-  level.bullet_end linkto(level.end_wreck_player_node);
+  level.player_rig_grab linkTo(level.end_wreck_player_node);
+  level.bullet_end linkTo(level.end_wreck_player_node);
   level.bullet_blender = common_scripts\utility::spawn_tag_origin();
-  level.bullet_blender linkto(level.bullet_start, "tag_helo", (0, 0, 0), (0, 0, 0));
+  level.bullet_blender linkTo(level.bullet_start, "tag_helo", (0, 0, 0), (0, 0, 0));
   level.bullet_tumble = maps\_utility::spawn_anim_model("pt2_bullet_tumble");
-  level.bullet_tumble linkto(level.bullet_blender, "tag_origin", (0, 0, 0), (0, 0, 0));
+  level.bullet_tumble linkTo(level.bullet_blender, "tag_origin", (0, 0, 0), (0, 0, 0));
   level.bullet_catch = maps\_utility::spawn_anim_model("pt2_bullet");
-  level.bullet_catch linkto(level.bullet_tumble, "tag_helo", (0, 0, 0), (0, 0, 0));
+  level.bullet_catch linkTo(level.bullet_tumble, "tag_helo", (0, 0, 0), (0, 0, 0));
   level.bullet_catch hide();
   thread qte_bullet_blender();
   thread qte_bullet_shine();
@@ -507,8 +507,8 @@ part_2_speedloader(var_0, var_1) {
   var_2["enemy"] = var_1;
   var_2["speedloader"] = level.speedloader;
   var_2["pt2_bullet_start"] = level.bullet_start;
-  var_3 = getent("enemy_target", "targetname");
-  var_3 linkto(var_1, "J_SpineUpper");
+  var_3 = getEnt("enemy_target", "targetname");
+  var_3 linkTo(var_1, "J_SpineUpper");
   thread part_2_shoot_chance(var_0, var_1);
   level.bullet_tumble setanim(level.scr_anim["pt2_bullet_tumble"]["pt2_speedloader"]);
   level.end_wreck_player_node thread maps\_anim::anim_single_solo(level.bullet_end, "pt2_speedloader");
@@ -528,7 +528,7 @@ part_2_shoot_chance(var_0, var_1) {
     var_3 = common_scripts\utility::spawn_tag_origin();
     setslowmotion(1.0, 0.1, 0.25);
     level.end_wreck_node maps\_anim::anim_first_frame(var_2, "pt2_fire_win");
-    var_3 = getent("rorke_blood_fx_source", "targetname");
+    var_3 = getEnt("rorke_blood_fx_source", "targetname");
     playFX(common_scripts\utility::getfx("blood_rorke"), var_3.origin, anglesToForward(var_3.angles));
     level.end_wreck_node thread maps\_anim::anim_single(var_2, "pt2_fire_win");
     thread maps\skyway_fx::fx_glass_cracks_01();
@@ -599,11 +599,11 @@ part_2_gun_fire(var_0) {
     level.player waittill("firing");
 
     if(common_scripts\utility::flag("gun_loaded")) {
-      var_1 = getent("enemy_target", "targetname");
+      var_1 = getEnt("enemy_target", "targetname");
       thread maps\skyway_audio::skyway_endshot_sfx();
       thread maps\skyway_audio::sfx_wreck_03();
       var_2 = anglesToForward(level.player getplayerangles());
-      var_3 = vectornormalize(var_2);
+      var_3 = vectorNormalize(var_2);
       var_4 = level.player getEye() + 256 * var_3;
       var_5 = bulletTrace(level.player getEye(), var_4, 0, level.player);
 
@@ -620,9 +620,9 @@ part_2_gun_fire(var_0) {
       } else {
         level notify("player_missed");
         var_2 = anglesToForward(level.playerviewmodel gettagangles("tag_flash"));
-        var_3 = vectornormalize(var_2);
+        var_3 = vectorNormalize(var_2);
         var_4 = level.playerviewmodel gettagorigin("tag_flash") + 1000 * var_3;
-        level.player playrumbleonentity("damage_heavy");
+        level.player playRumbleOnEntity("damage_heavy");
         playFXOnTag(common_scripts\utility::getfx("magnum_flash"), level.playerviewmodel, "tag_flash");
         level.player playSound("weap_mag44_fire_plr");
         magicbullet("coltanaconda_skyway", level.playerviewmodel gettagorigin("TAG_Flash"), var_4, level.player);
@@ -631,7 +631,7 @@ part_2_gun_fire(var_0) {
       }
     } else {
       level.player playSound("skyway_dryfire_pistol_plr");
-      level.player playrumbleonentity("damage_light");
+      level.player playRumbleOnEntity("damage_light");
       level.playerviewmodel setanimrestart(level.scr_anim["player_rig_magnum"]["pt2_fire_empty"]);
 
       if(!common_scripts\utility::flag("dry_fire")) {
@@ -652,7 +652,7 @@ pt2_successful_shot() {
   var_0.angles = vectortoangles(var_1);
   level.player playerlinktoblend(var_0, "tag_origin", 0.05);
   wait 0.05;
-  level.player playrumbleonentity("damage_heavy");
+  level.player playRumbleOnEntity("damage_heavy");
   playFXOnTag(common_scripts\utility::getfx("magnum_flash"), level.playerviewmodel, "tag_flash");
   level.player playSound("weap_mag44_fire_plr");
   level.playerviewmodel unlinkfromplayerview(level.player);
@@ -783,7 +783,7 @@ event_qte_bullet_catch() {
         level.bullet_start delete();
         level.bullet_end delete();
         level.bullet_tumble delete();
-        level.player playrumbleonentity("damage_light");
+        level.player playRumbleOnEntity("damage_light");
         wait 0.4;
         level notify("notify_end_slomo");
         wait 0.3;

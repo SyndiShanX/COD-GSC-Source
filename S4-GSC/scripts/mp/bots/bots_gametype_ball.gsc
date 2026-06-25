@@ -185,7 +185,7 @@ _id_2707() {
               if(self _meth_8028(self._id_0192)) {
                 var_8 = anglesToForward(self.angles);
                 var_9 = self._id_0192.origin - self.origin;
-                var_10 = vectornormalize((var_9[0], var_9[1], 0));
+                var_10 = vectorNormalize((var_9[0], var_9[1], 0));
                 var_11 = vectordot(var_8, var_10);
 
                 if(var_11 > 0.707) {

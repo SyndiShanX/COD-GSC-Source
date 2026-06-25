@@ -323,7 +323,7 @@ setupExploders() {
     }
 
     if(isDefined(exploder.target)) {
-      org = getent(ent.v["target"], "targetname").origin;
+      org = getEnt(ent.v["target"], "targetname").origin;
       ent.v["angles"] = vectortoangles(org - ent.v["origin"]);
     }
 
@@ -626,13 +626,13 @@ script_gen_dumpprintln(file, string) {
 }
 
 traverseThink() {
-  ent = GetEnt(self.target, "targetname");
+  ent = getEnt(self.target, "targetname");
 
   if(isDefined(ent)) {
     self.traverse_height = ent.origin[2];
     ent Delete();
   } else {
-    struct = GetStruct(self.target, "targetname");
+    struct = getStruct(self.target, "targetname");
 
     if(isDefined(struct)) {
       self.traverse_height = struct.origin[2];

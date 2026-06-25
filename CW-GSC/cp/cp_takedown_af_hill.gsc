@@ -49,7 +49,7 @@ function starting(str_skipto) {
   exploder::exploder("airfield_assault_lighting");
   namespace_b100dd86::function_5aabc3fb();
   exploder::exploder("hit3_prop_mist");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player cp_takedown_fx::function_c8bc54e4();
   exploder::activate_radiant_exploder("airfield_intro_lights");
   thread namespace_a052577e::function_a42cfb58();
@@ -81,7 +81,7 @@ function main(str_skipto, b_starting) {
   level thread scene::play("scene_tkd_hit3_intro_overlook_enemy4", "initial_loop");
   level thread function_5dd4ff85();
   thread function_f7c7ce51();
-  player = getplayers()[0];
+  player = getPlayers()[0];
   level.player = player;
   player endon(#"death");
   level.chase_truck = getvehiclearray("af_chase_veh", "targetname")[0];
@@ -99,7 +99,7 @@ function main(str_skipto, b_starting) {
   clips = getEntArray("plane_floor_clip", "targetname");
 
   foreach(clip in clips) {
-    clip disconnectpaths(0, 1);
+    clip disconnectPaths(0, 1);
   }
 
   level music::setmusicstate("b2.0_recon", undefined, 6);
@@ -195,11 +195,11 @@ function function_84d4429e(player) {
 }
 
 function function_4f024edb() {
-  level.af_enemy2 stopanimscripted();
+  level.af_enemy2 stopanimScripted();
   af_enemy3 = getaiarray("af_enemy3", "targetname")[0];
 
   if(isalive(af_enemy3)) {
-    af_enemy3 stopanimscripted();
+    af_enemy3 stopanimScripted();
     af_enemy3 thread scene::play("scene_tkd_hit3_intro_overlook_guy3", "react_shot", [af_enemy3]);
   }
 
@@ -221,8 +221,8 @@ function function_ca9dd78b() {
 
 function function_32398bfb(player) {
   guy = getaiarray("af_enemy4", "targetname")[0];
-  guy stopanimscripted();
-  level.arash stopanimscripted();
+  guy stopanimScripted();
+  level.arash stopanimScripted();
   player.var_35ee6252 = undefined;
   setslowmotion(1, 0.5, 0);
   player_org = player.origin;
@@ -240,11 +240,11 @@ function function_32398bfb(player) {
   level waittill(#"hash_43ffc7bf753fe848");
   level thread lui::screen_fade_out(0, "black");
   level util::delay(0.005, undefined, &lui::screen_fade_in, 0, "black");
-  player stopanimscripted(0, 1);
+  player stopanimScripted(0, 1);
   level flag::set("arash_in_plane");
   snd::client_msg(#"hash_3620fe1626778dde");
   waitframe(1);
-  player setorigin(player_org);
+  player setOrigin(player_org);
   player setplayerangles(var_cac40761);
   namespace_61e6d095::function_4279fd02(#"hash_4fe4ea6c5e05ffb7");
   waitframe(1);
@@ -297,7 +297,7 @@ function function_b432f86a(nodename) {
   }
 
   self flag::wait_till_clear(#"scriptedanim");
-  self stopanimscripted();
+  self stopanimScripted();
   self val::reset(#"overlook", "ignoreme");
   self val::reset(#"radiant", "ignoreall");
   self val::reset(#"airfield", "ignoreall");
@@ -330,7 +330,7 @@ function function_4bc0b384(player) {
 }
 
 function function_ef1d8a47() {
-  plane = getent("cargo_plane", "targetname");
+  plane = getEnt("cargo_plane", "targetname");
 
   while(plane != undefined) {
     org = plane gettagorigin("tag_origin");
@@ -397,7 +397,7 @@ function function_94c3f34a(name, ents) {
   if(isDefined(ents[name])) {
     thing = ents[name];
     thing waittill(#"hash_1e6fd05dff685aca");
-    thing linkto(level.af_plane, "tag_body_animate");
+    thing linkTo(level.af_plane, "tag_body_animate");
   }
 }
 
@@ -413,7 +413,7 @@ function function_f7c7ce51() {
 
 function function_dd77a447() {
   level endoncallback(&function_8c38a6f0, #"car_arrive");
-  player = getplayers()[0];
+  player = getPlayers()[0];
   player util::show_hint_text(#"hash_a9076dcaa02f4e", 0, "camera_up", -1);
   waitframe(1);
   player notifyonplayercommand("binoculars", "+actionslot 4");
@@ -443,7 +443,7 @@ function function_dd77a447() {
 }
 
 function private function_8c38a6f0(parms) {
-  getplayers()[0] notifyonplayercommandremove("binoculars", "+actionslot 4");
+  getPlayers()[0] notifyonplayercommandremove("binoculars", "+actionslot 4");
 }
 
 function function_76b7bfa7() {
@@ -454,7 +454,7 @@ function function_76b7bfa7() {
 
 function function_8c011eca() {
   level endon(#"hash_5663f4acce350395");
-  targ = getent("car_look_point", "targetname");
+  targ = getEnt("car_look_point", "targetname");
   level waittill(#"hash_5a1f3e30c78ae9a2");
   thread function_d75e55a1(targ, "looked_at_car", 15);
   level waittill(#"hash_3130ba431262d090");
@@ -484,7 +484,7 @@ function function_d75e55a1(targets, lines, fov = 2, var_dc8ec980 = 5) {
   }
 
   i = 0;
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   while(!isDefined(player.spy_camera)) {
     waitframe(1);
@@ -574,19 +574,19 @@ function function_9967d19b(var_5077b72a) {
 
 function function_f1f9011d() {
   self endon(#"death");
-  player = getplayers()[0];
+  player = getPlayers()[0];
 
   if(self flag::get("no_interrupt")) {
     self flag::wait_till_clear("no_interrupt");
   }
 
-  self stopanimscripted();
+  self stopanimScripted();
   self function_a3fcf9e0("attack", player, player.origin);
   self ai::set_behavior_attribute("demeanor", "combat");
   self val::set(#"failed", "ignoreall", 0);
   self val::set(#"failed", "ignoreme", 0);
   waitframe(1);
-  self stopanimscripted();
+  self stopanimScripted();
 }
 
 function function_cc465a2(player) {
@@ -653,8 +653,8 @@ function function_a2015343(str_skipto) {
 
 function function_61f33d07() {
   car = vehicle::simple_spawn("airport_truck_approach")[0];
-  targ = getent("car_look_point", "targetname");
-  targ linkto(car, "tag_origin", (0, 0, 50));
+  targ = getEnt("car_look_point", "targetname");
+  targ linkTo(car, "tag_origin", (0, 0, 50));
   level waittill(#"hash_186d95ebb54fca9f");
   car vehicle::lights_on();
   car vehicle::toggle_force_driver_taillights(1);
@@ -663,15 +663,15 @@ function function_61f33d07() {
   exploder::exploder("airfield_assault_arash_car_lights");
   playFXOnTag("vehicle/fx9_light_ru_truck_light_head_source", car, "tag_fx_headlight_right");
   playFXOnTag("vehicle/fx9_light_ru_truck_light_head_source", car, "tag_fx_headlight_left");
-  light = getent("light_head_arash_truck_r", "targetname");
+  light = getEnt("light_head_arash_truck_r", "targetname");
 
   if(isDefined(light)) {
-    light linkto(car, "tag_fx_headlight_right", (-0.5, 0, 0), (15, 0, 0));
+    light linkTo(car, "tag_fx_headlight_right", (-0.5, 0, 0), (15, 0, 0));
   }
 
-  light = getent("light_head_arash_truck_l", "targetname");
+  light = getEnt("light_head_arash_truck_l", "targetname");
 
   if(isDefined(light)) {
-    light linkto(car, "tag_fx_headlight_left", (-0.5, 0, 0), (15, 0, 0));
+    light linkTo(car, "tag_fx_headlight_left", (-0.5, 0, 0), (15, 0, 0));
   }
 }

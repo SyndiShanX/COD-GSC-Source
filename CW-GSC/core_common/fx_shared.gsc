@@ -72,9 +72,9 @@ function play(str_fx, v_origin = (0, 0, 0), v_angles = (0, 0, 0), time_to_delete
 
     if(is_true(b_link_to_self)) {
       if(isDefined(str_tag)) {
-        m_fx linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
+        m_fx linkTo(self, str_tag, (0, 0, 0), (0, 0, 0));
       } else {
-        m_fx linkto(self);
+        m_fx linkTo(self);
       }
     }
 

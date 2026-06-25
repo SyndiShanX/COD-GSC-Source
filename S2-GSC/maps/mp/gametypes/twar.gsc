@@ -1030,7 +1030,7 @@ func_43F3(param_00) {
   var_01 = func_434B(0);
   var_02 = var_01["axis"] - var_01["allies"];
   var_02 = (var_02[0], var_02[1], 0);
-  return vectornormalize(var_02);
+  return vectorNormalize(var_02);
 }
 
 func_10D9() {
@@ -1044,7 +1044,7 @@ func_10D9() {
   var_05 = 9;
   var_06 = func_459F(var_04, 24, level.var_AC8B * 3, 0);
   foreach(var_02 in var_06) {
-    var_08 = vectornormalize(var_04.var_0116 - var_02.var_0116);
+    var_08 = vectorNormalize(var_04.var_0116 - var_02.var_0116);
     var_02.var_32B1 = vectordot(var_08, var_04.var_2F0C);
   }
 

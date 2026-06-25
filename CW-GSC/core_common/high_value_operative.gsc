@@ -159,7 +159,7 @@ function function_323c6715() {
   }
 
   var_e800bb6a = getscriptbundlelist("hvolist");
-  players = getplayers();
+  players = getPlayers();
 
   if(!isDefined(var_e800bb6a) || !isarray(var_e800bb6a) || !isDefined(players) || !isarray(players)) {
     return;

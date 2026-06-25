@@ -76,15 +76,15 @@ function main() {
     level.var_3cc6503b[j] = [];
     level.var_abd9e961[j] = [];
     for(i = 0; i < level.var_f302359b.size; i++) {
-      level.var_792780c0[j][level.var_f302359b[i].script_parameters] = getent(j, level.var_f302359b[i].script_label, "targetname");
+      level.var_792780c0[j][level.var_f302359b[i].script_parameters] = getEnt(j, level.var_f302359b[i].script_label, "targetname");
       level.var_792780c0[j][level.var_f302359b[i].script_parameters] useanimtree($zm_castle);
       level.var_792780c0[j][level.var_f302359b[i].script_parameters] flag::init("dragon_far_right");
       level.var_792780c0[j][level.var_f302359b[i].script_parameters] flag::init("dragon_far_left");
       level.var_792780c0[j][level.var_f302359b[i].script_parameters].var_7d382bfa = 1;
-      level.var_3cc6503b[j][level.var_f302359b[i].script_parameters] = getent(j, level.var_f302359b[i].script_friendname, "targetname");
+      level.var_3cc6503b[j][level.var_f302359b[i].script_parameters] = getEnt(j, level.var_f302359b[i].script_friendname, "targetname");
       level.var_3cc6503b[j][level.var_f302359b[i].script_parameters] hide();
       level.var_3cc6503b[j][level.var_f302359b[i].script_parameters] useanimtree($zm_castle);
-      level.var_abd9e961[j][level.var_f302359b[i].script_parameters] = getent(j, level.var_f302359b[i].script_label + "_mini", "targetname");
+      level.var_abd9e961[j][level.var_f302359b[i].script_parameters] = getEnt(j, level.var_f302359b[i].script_label + "_mini", "targetname");
     }
     array::run_all(level.var_abd9e961[j], &function_c9ca8c4b, j);
   }
@@ -337,7 +337,7 @@ function function_939ae9de(var_e88629ec, localclientnum, direction, var_3c6f5c75
   var_1d199979 = var_e88629ec.origin - self.origin;
   var_6ea7737a = vectorscale(var_1d199979, 0.2);
   self.var_bbb1ef87.angles = vectortoangles(var_1d199979);
-  self.var_bbb1ef87 linkto(self);
+  self.var_bbb1ef87 linkTo(self);
   wait(0.3);
   if(!isDefined(self)) {
     return;
@@ -345,15 +345,15 @@ function function_939ae9de(var_e88629ec, localclientnum, direction, var_3c6f5c75
   animlength = getanimlength(var_3c6f5c75);
   animlength = animlength - (animlength * var_e88629ec getanimtime(var_3c6f5c75));
   animlength = max(animlength, 0.05);
-  self moveto(self.origin + var_6ea7737a, animlength * 0.75, animlength * 0.75, 0);
+  self moveTo(self.origin + var_6ea7737a, animlength * 0.75, animlength * 0.75, 0);
   var_31e7de73 = var_e88629ec gettagangles("tag_attach");
-  self rotateto(var_31e7de73, animlength * 0.75);
+  self rotateTo(var_31e7de73, animlength * 0.75);
   self waittill("movedone");
   animlength = getanimlength(var_3c6f5c75);
   animlength = animlength - (animlength * var_e88629ec getanimtime(var_3c6f5c75));
   animlength = max(animlength, 0.05);
   var_6b61dff7 = var_e88629ec gettagorigin("tag_attach");
-  self moveto(var_6b61dff7, animlength, animlength, 0);
+  self moveTo(var_6b61dff7, animlength, animlength, 0);
   self waittill("movedone");
   if(!isDefined(self)) {
     return;

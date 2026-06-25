@@ -10,9 +10,9 @@ init_utility() {}
 lerp(chunk) {
   link = spawn("script_origin", self GetOrigin());
   link.angles = self.first_node.angles;
-  self LinkTo(link);
-  link RotateTo(self.first_node.angles, level._CONTEXTUAL_GRAB_LERP_TIME);
-  link MoveTo(self.attacking_spot, level._CONTEXTUAL_GRAB_LERP_TIME);
+  self linkTo(link);
+  link rotateTo(self.first_node.angles, level._CONTEXTUAL_GRAB_LERP_TIME);
+  link moveTo(self.attacking_spot, level._CONTEXTUAL_GRAB_LERP_TIME);
   link waittill_multiple("rotatedone", "movedone");
   self Unlink();
   link Delete();
@@ -1251,9 +1251,9 @@ get_zombie_hint(ref) {
 }
 set_hint_string(ent, default_ref) {
   if(isDefined(ent.script_hint)) {
-    self SetHintString(get_zombie_hint(ent.script_hint));
+    self setHintString(get_zombie_hint(ent.script_hint));
   } else {
-    self SetHintString(get_zombie_hint(default_ref));
+    self setHintString(get_zombie_hint(default_ref));
   }
 }
 add_sound(ref, alias) {
@@ -1265,7 +1265,7 @@ add_sound(ref, alias) {
 play_sound_at_pos(ref, pos, ent) {
   if(isDefined(ent)) {
     if(isDefined(ent.script_soundalias)) {
-      PlaySoundAtPosition(ent.script_soundalias, pos);
+      playSoundAtPosition(ent.script_soundalias, pos);
       return;
     }
     if(isDefined(self.script_sound)) {
@@ -1279,7 +1279,7 @@ play_sound_at_pos(ref, pos, ent) {
     AssertMsg("Sound \"" + ref + "\" was not put to the zombie sounds list, please use add_sound( ref, alias ) at the start of your level.");
     return;
   }
-  PlaySoundAtPosition(level.zombie_sounds[ref], pos);
+  playSoundAtPosition(level.zombie_sounds[ref], pos);
 }
 play_sound_on_ent(ref) {
   if(isDefined(self.script_soundalias)) {
@@ -1441,7 +1441,7 @@ include_powerup(powerup_name) {
   maps\_zombiemode_powerups::include_zombie_powerup(powerup_name);
 }
 trigger_invisible(enable) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i])) {
       self SetInvisibleToPlayer(players[i], enable);
@@ -1507,9 +1507,9 @@ isPlayerExplosiveWeapon(weapon, meansofdeath) {
 swap_to_dissolve_models() {}
 add_teampot_icon() {
   flag_wait("all_players_connected");
-  players = GetPlayers();
+  players = getPlayers();
   {
-    self SetCursorHint("HINT_NOICON");
+    self setCursorHint("HINT_NOICON");
   }
 }
 set_counter(value) {

@@ -7,7 +7,7 @@ init_ufo_quest() {
   level endon("game_ended");
   scripts\mp\agents\zombie_grey\zombie_grey_agent::registerscriptedagent();
   level thread power_on_monitor();
-  var_0 = scripts\engine\utility::getstruct("ufo_initial_position", "targetname");
+  var_0 = scripts\engine\utility::getStruct("ufo_initial_position", "targetname");
   init_ufo_vfx();
   init_ufo_anim();
   wait 3.0;
@@ -78,7 +78,7 @@ ufo_suicide_bomber_sequence() {
   level endon("debug_beat_UFO_suicide_bomber");
   var_0 = level.ufo;
   level thread transform_wave_zombies_to_suicide_bombers();
-  var_0 moveto((647, 621, 901), 5);
+  var_0 moveTo((647, 621, 901), 5);
   var_0 waittill("movedone");
 
   foreach(var_2 in level.fast_travel_spots) {
@@ -248,7 +248,7 @@ play_match_tone_sequence() {
       var_6 = distance(var_1.origin, var_5);
       var_7 = var_6 / 150;
       var_1 playSound("ufo_movement_start");
-      var_1 moveto(var_5, var_7);
+      var_1 moveTo(var_5, var_7);
       var_1 waittill("movedone");
     }
 
@@ -260,7 +260,7 @@ play_match_tone_sequence() {
     }
 
     var_1 playSound("ufo_movement_start");
-    var_1 moveto((647, 621, 901), var_7);
+    var_1 moveTo((647, 621, 901), var_7);
     var_1 waittill("movedone");
   }
 }
@@ -615,7 +615,7 @@ shakeplayershud() {
       continue;
     }
     var_1 setclientomnvar("ui_hud_shake", 1);
-    var_1 playrumbleonentity("artillery_rumble");
+    var_1 playRumbleOnEntity("artillery_rumble");
   }
 }
 
@@ -646,7 +646,7 @@ keep_rotate(var_0) {
 
   for(;;) {
     var_2 = var_0.angles[0];
-    var_0 rotateyaw(var_2 + 120, var_1);
+    var_0 rotateYaw(var_2 + 120, var_1);
     wait(var_1);
   }
 }
@@ -804,7 +804,7 @@ ufo_damage_monitor(ufo) {
     }
   }
 
-  ufo moveto((-554, -1488, 2280), 3.0, 1.5);
+  ufo moveTo((-554, -1488, 2280), 3.0, 1.5);
   ufo playsoundonmovingent("zmb_ufo_explo");
   playFXOnTag(level._effect["ufo_small_explosion"], ufo, "TAG_ORIGIN");
   wait 3.0;
@@ -867,7 +867,7 @@ create_alien_fuse(alien, alien_part) {
   fuse = spawn("script_model", alien gettagorigin(alien_part));
   fuse setModel("park_alien_gray_fuse");
   fuse.angles = alien gettagangles(alien_part);
-  fuse linkto(alien, alien_part, (0, 0, 0), angles);
+  fuse linkTo(alien, alien_part, (0, 0, 0), angles);
   fuse.owner = alien;
   fuse.tag_name = alien_part;
   return fuse;
@@ -955,7 +955,7 @@ soul_key_pick_up_monitor(key, key_glow) {
   key endon("death");
   cutscene_id = 137;
   key makeusable();
-  key sethintstring(&"CP_ZMB_UFO_PICK_UP_SOUL_KEY");
+  key setHintString(&"CP_ZMB_UFO_PICK_UP_SOUL_KEY");
 
   for(;;) {
     key waittill("trigger", player);
@@ -1078,11 +1078,11 @@ upgrade_pap(var_0, var_1) {
   }
 
   wait 3;
-  scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("weapon_upgrade", "script_noteworthy"));
+  scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getStruct("weapon_upgrade", "script_noteworthy"));
 }
 
 insert_alien_fuses() {
-  var_0 = getent("pap_machine", "targetname");
+  var_0 = getEnt("pap_machine", "targetname");
   var_0 setscriptablepartstate("door", "close");
   wait 0.5;
   var_0 setscriptablepartstate("machine", "upgraded");
@@ -1113,7 +1113,7 @@ can_use_pap_upgrade(var_0, var_1) {
 activate_ufo_turret(var_0) {
   var_1 = [];
   var_2 = setup_ufo_turret(var_0 gettagorigin("tag_origin"));
-  var_2 linkto(var_0, "tag_origin", (0, 0, -100), (180, 0, 0));
+  var_2 linkTo(var_0, "tag_origin", (0, 0, -100), (180, 0, 0));
   var_1[var_1.size] = var_2;
   var_0.turrets = var_1;
 }
@@ -1258,7 +1258,7 @@ ufo_beam_down_zombies(var_0) {
 ufo_fly_to_pos(var_0) {
   var_1 = distance(level.ufo.origin, var_0);
   var_2 = var_1 / 150;
-  level.ufo moveto(var_0, var_2);
+  level.ufo moveTo(var_0, var_2);
   level.ufo waittill("movedone");
 }
 
@@ -1319,16 +1319,16 @@ spawn_and_beam_down_zombie(var_0) {
 
   if(isDefined(var_3)) {
     var_3.entered_playspace = 1;
-    var_3 scragentsetgoalradius(var_3.defaultgoalradius);
+    var_3 scragentsetgoalRadius(var_3.defaultgoalradius);
     var_3.maxhealth = scripts\cp\zombies\zombies_spawning::calculatezombiehealth("generic_zombie");
     var_3.health = var_3.maxhealth;
     var_3 thread ufo_zombie_death_monitor(var_3);
     level.spawned_enemies[level.spawned_enemies.size] = var_3;
     var_4 = spawn("script_model", var_3.origin);
     var_4 setModel("tag_origin");
-    var_3 linkto(var_4, "tag_origin");
+    var_3 linkTo(var_4, "tag_origin");
     var_5 = bulletTrace(var_0 + var_1, var_0 + var_2, 0, level.ufo)["position"];
-    var_4 moveto(var_5, 1.5, 0, 0.75);
+    var_4 moveTo(var_5, 1.5, 0, 0.75);
     var_4 waittill("movedone");
     var_3 unlink();
     var_4 delete();
@@ -1370,19 +1370,19 @@ ufo_post_grey_regen_func() {}
 
 move_grey_fight_clip_down() {
   level endon("game_ended");
-  var_0 = getent("grey_fight_clip", "targetname");
+  var_0 = getEnt("grey_fight_clip", "targetname");
 
   if(isDefined(var_0)) {
     var_1 = var_0.origin;
     var_2 = (var_1[0], var_1[1], var_1[2] - 1024);
-    var_0 moveto(var_2, 0.05);
+    var_0 moveTo(var_2, 0.05);
     var_0 waittill("movedone");
-    var_0 disconnectpaths();
+    var_0 disconnectPaths();
   }
 }
 
 clear_grey_fight_clips() {
-  var_0 = getent("grey_fight_clip", "targetname");
+  var_0 = getEnt("grey_fight_clip", "targetname");
 
   if(isDefined(var_0)) {
     var_0 connectpaths();
@@ -1485,7 +1485,7 @@ fire_slow_projectile_from(var_0, var_1) {
   wait 0.6;
 
   if(isDefined(var_2) && isDefined(var_1) && !scripts\cp\cp_laststand::player_in_laststand(var_1)) {
-    var_2 missile_settargetent(var_1);
+    var_2 missile_settargetEnt(var_1);
   }
 }
 
@@ -1532,7 +1532,7 @@ activate_spaceland_powernode() {
 }
 
 spaceland_powernode_damage_monitor() {
-  var_0 = getent("main_gate_powernode_damage_trigger", "targetname");
+  var_0 = getEnt("main_gate_powernode_damage_trigger", "targetname");
   var_0 setCanDamage(1);
 
   for(;;) {
@@ -1558,7 +1558,7 @@ spaceland_powernode_damage_monitor() {
       level thread play_trigger_wmd_vo();
 
       if(should_play_arc_vfx(var_11)) {
-        var_13 = scripts\engine\utility::getstruct(var_11.target, "targetname");
+        var_13 = scripts\engine\utility::getStruct(var_11.target, "targetname");
         var_14 = var_13.origin;
         level thread play_arc_vfx_between_points("powernode_arc_small", var_12, var_14, "spaceland_arc_fired");
       }
@@ -1587,7 +1587,7 @@ get_nearby_gate_light_scriptable(var_0) {
   var_1 = 10000;
 
   for(var_2 = 1; var_2 <= 5; var_2++) {
-    var_3 = getent("gate_light_0" + var_2, "targetname");
+    var_3 = getEnt("gate_light_0" + var_2, "targetname");
 
     if(distancesquared(var_0.origin, var_3.origin) < var_1) {
       return var_3;
@@ -1646,7 +1646,7 @@ all_power_nodes_are_activated() {
   var_0 = ["main_gate_powernode_1", "main_gate_powernode_2", "main_gate_powernode_3", "main_gate_powernode_4", "main_gate_powernode_5"];
 
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstruct(var_2, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_2, "targetname");
 
     if(!scripts\engine\utility::is_true(var_3.is_activated)) {
       return 0;
@@ -1664,11 +1664,11 @@ trigger_wmd() {
   var_4 = (648, 611, 281);
   var_5 = (647, 632, 86);
   var_6 = (646, 694, 51);
-  var_7 = scripts\engine\utility::getstruct("main_gate_powernode_1", "targetname");
-  var_8 = scripts\engine\utility::getstruct("main_gate_powernode_2", "targetname");
-  var_9 = scripts\engine\utility::getstruct("main_gate_powernode_3", "targetname");
-  var_10 = scripts\engine\utility::getstruct("main_gate_powernode_4", "targetname");
-  var_11 = scripts\engine\utility::getstruct("main_gate_powernode_5", "targetname");
+  var_7 = scripts\engine\utility::getStruct("main_gate_powernode_1", "targetname");
+  var_8 = scripts\engine\utility::getStruct("main_gate_powernode_2", "targetname");
+  var_9 = scripts\engine\utility::getStruct("main_gate_powernode_3", "targetname");
+  var_10 = scripts\engine\utility::getStruct("main_gate_powernode_4", "targetname");
+  var_11 = scripts\engine\utility::getStruct("main_gate_powernode_5", "targetname");
   level thread play_arc_vfx_between_points("powernode_arc_medium", var_8.origin, var_0, "spaceland_arc_fired");
   level thread play_arc_vfx_between_points("powernode_arc_medium", var_10.origin, var_1, "spaceland_arc_fired");
   level thread play_arc_vfx_between_points("powernode_arc_medium", var_9.origin, var_2, "spaceland_arc_fired");
@@ -1694,7 +1694,7 @@ trigger_wmd() {
 
 change_gate_light_scriptable_to_on_state() {
   for(var_0 = 1; var_0 <= 5; var_0++) {
-    var_1 = getent("gate_light_0" + var_0, "targetname");
+    var_1 = getEnt("gate_light_0" + var_0, "targetname");
     var_1 setscriptablepartstate("main_gate_light", "on");
   }
 }
@@ -1712,7 +1712,7 @@ get_power_node_struct(var_0) {
   var_2 = ["main_gate_powernode_1", "main_gate_powernode_2", "main_gate_powernode_3", "main_gate_powernode_4", "main_gate_powernode_5"];
 
   foreach(var_4 in var_2) {
-    var_5 = scripts\engine\utility::getstruct(var_4, "targetname");
+    var_5 = scripts\engine\utility::getStruct(var_4, "targetname");
 
     if(distancesquared(var_5.origin, var_0) < var_1) {
       return var_5;

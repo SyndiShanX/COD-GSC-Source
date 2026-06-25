@@ -39,15 +39,15 @@ function function_db40057d(localclientnum, oldval, newval, bnewent, binitialsnap
   switch (bwastimejump) {
     case 1:
       playSound(0, #"hash_731251c4b03b5b09", (0, 0, 0));
-      self playrumbleonentity(binitialsnap, "ac130_weap_switch");
+      self playRumbleOnEntity(binitialsnap, "ac130_weap_switch");
       break;
     case 2:
       playSound(0, #"hash_731251c4b03b5b09", (0, 0, 0));
-      self playrumbleonentity(binitialsnap, "ac130_weap_switch");
+      self playRumbleOnEntity(binitialsnap, "ac130_weap_switch");
       break;
     case 3:
       playSound(0, #"hash_731251c4b03b5b09", (0, 0, 0));
-      self playrumbleonentity(binitialsnap, "ac130_weap_switch");
+      self playRumbleOnEntity(binitialsnap, "ac130_weap_switch");
       break;
   }
 }

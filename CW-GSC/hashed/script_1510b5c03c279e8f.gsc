@@ -292,7 +292,7 @@ function function_aea2bda3() {
 
     var_f5ad2338 = 1;
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       self getperfectinfo(player, 0);
 
       if(player.b_is_designated_target === 1 && self.enemy.b_is_designated_target !== 1) {
@@ -398,7 +398,7 @@ function function_aebf9e0f(params) {
   wait 0.5;
 
   for(;;) {
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       self getperfectinfo(player, 1);
 
       if(player.b_is_designated_target === 1) {
@@ -758,7 +758,7 @@ function nudge_collision() {
 }
 
 function force_get_enemies() {
-  foreach(player in getplayers()) {
+  foreach(player in getPlayers()) {
     if(self util::isenemyplayer(player) && !player.ignoreme) {
       self getperfectinfo(player, 1);
     }

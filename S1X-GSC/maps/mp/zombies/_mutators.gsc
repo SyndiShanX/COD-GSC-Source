@@ -534,7 +534,7 @@ mutatoremz_rumbleloop(var_0) {
   var_1 = gettime() + var_0 * 1000;
 
   while(gettime() < var_1) {
-    self playrumbleonentity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
     wait 0.05;
   }
 }
@@ -1063,7 +1063,7 @@ exploder_ambient_sound() {
 
 runner_ambient_sound() {
   var_0 = spawn("script_origin", self.origin);
-  var_0 linkto(self);
+  var_0 linkTo(self);
   var_0 playLoopSound("zmb_runner_ambient_loop");
   var_1 = 0;
 

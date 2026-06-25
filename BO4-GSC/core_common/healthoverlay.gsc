@@ -526,7 +526,7 @@ function_b506b922() {
     profilestart();
     var_1556c25 = getlevelframenumber();
 
-    foreach(player in getplayers()) {
+    foreach(player in getPlayers()) {
       if((player getentitynumber() + var_1556c25 & 1) != 0) {
         continue;
       }

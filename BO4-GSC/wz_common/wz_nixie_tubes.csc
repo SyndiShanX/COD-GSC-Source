@@ -98,12 +98,12 @@ function_97f8efcd(localclientnum) {
     nixie_cage.canuse = 1;
   }
 
-  var_243a1bdb = getent(localclientnum, "nixie_tube_1_on", "targetname");
-  var_4974664f = getent(localclientnum, "nixie_tube_2_on", "targetname");
-  var_37adc2c2 = getent(localclientnum, "nixie_tube_3_on", "targetname");
-  var_529f2403 = getent(localclientnum, "nixie_tube_1_off", "targetname");
-  var_66984bf5 = getent(localclientnum, "nixie_tube_2_off", "targetname");
-  var_3f227d0a = getent(localclientnum, "nixie_tube_3_off", "targetname");
+  var_243a1bdb = getEnt(localclientnum, "nixie_tube_1_on", "targetname");
+  var_4974664f = getEnt(localclientnum, "nixie_tube_2_on", "targetname");
+  var_37adc2c2 = getEnt(localclientnum, "nixie_tube_3_on", "targetname");
+  var_529f2403 = getEnt(localclientnum, "nixie_tube_1_off", "targetname");
+  var_66984bf5 = getEnt(localclientnum, "nixie_tube_2_off", "targetname");
+  var_3f227d0a = getEnt(localclientnum, "nixie_tube_3_off", "targetname");
   var_243a1bdb show();
   var_4974664f show();
   var_37adc2c2 show();

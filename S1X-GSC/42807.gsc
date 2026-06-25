@@ -83,7 +83,7 @@ sticky_fx(var_0) {
   self.fx_origin.origin = self.origin;
   self.fx_origin.angles = self.angles;
   self.fx_origin show();
-  self.fx_origin linkto(self);
+  self.fx_origin linkTo(self);
   wait 0.1;
   playFXOnTag(common_scripts\utility::getfx("exocrossbow_sticky_blinking"), self.fx_origin, "tag_origin");
   self playSound("exocrossbow_warning");

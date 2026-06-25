@@ -42,34 +42,34 @@ main() {
   common_scripts\utility::trigger_off("breach_save_trig_1", "targetname");
   common_scripts\utility::trigger_off("breach_save_trig_2", "targetname");
   common_scripts\utility::trigger_off("ready_to_pick_up_niko_save_trig", "targetname");
-  var_0 = getent("compound_turret1", "targetname");
+  var_0 = getEnt("compound_turret1", "targetname");
   var_0 makeunusable();
-  var_1 = getent("militia_window_mg", "targetname");
+  var_1 = getEnt("militia_window_mg", "targetname");
   var_1 makeunusable();
-  var_2 = getent("militia_window_mg2", "targetname");
+  var_2 = getEnt("militia_window_mg2", "targetname");
   var_2 makeunusable();
   var_3 = getEntArray("street_run_anim_check_triggers", "script_noteworthy");
 
   foreach(var_5 in var_3) {}
   var_5 common_scripts\utility::trigger_off();
 
-  var_7 = getent("sslight_01", "targetname");
+  var_7 = getEnt("sslight_01", "targetname");
   var_7 setlightintensity(0);
-  var_8 = getent("street_light_gate", "targetname");
+  var_8 = getEnt("street_light_gate", "targetname");
   var_8 setlightintensity(0);
   maps\payback_util::_id_64AB();
   maps\_utility::vision_set_fog_changes("payback", 0);
-  var_9 = getent("price", "script_noteworthy");
+  var_9 = getEnt("price", "script_noteworthy");
   var_9 maps\_utility::add_spawn_function(::_id_5296);
-  var_10 = getent("soap", "script_noteworthy");
+  var_10 = getEnt("soap", "script_noteworthy");
   var_10 maps\_utility::add_spawn_function(::_id_684A);
-  var_11 = getent("nikolai", "script_noteworthy");
+  var_11 = getEnt("nikolai", "script_noteworthy");
   var_11 maps\_utility::add_spawn_function(::_id_684C);
-  var_12 = getent("hannibal", "script_noteworthy");
+  var_12 = getEnt("hannibal", "script_noteworthy");
   var_12 maps\_utility::add_spawn_function(::_id_684E);
-  var_13 = getent("barracus", "script_noteworthy");
+  var_13 = getEnt("barracus", "script_noteworthy");
   var_13 maps\_utility::add_spawn_function(::_id_684F);
-  var_14 = getent("murdock", "script_noteworthy");
+  var_14 = getEnt("murdock", "script_noteworthy");
   var_14 maps\_utility::add_spawn_function(::_id_6850);
   level._id_139C = ::_id_6849;
   _id_6846();
@@ -80,15 +80,15 @@ main() {
 
   thread maps\payback_env_code::_id_6764();
   var_19 = getEntArray("construction_roof_blocker_volume", "targetname");
-  var_19[var_19.size] = getent("construction_roof_blocker_volume_during_anim", "targetname");
+  var_19[var_19.size] = getEnt("construction_roof_blocker_volume_during_anim", "targetname");
 
   foreach(var_21 in var_19) {
     var_21 notsolid();
     var_21 connectpaths();
   }
 
-  getent("pb_end_vista", "targetname") hide();
-  getent("compoundexit_vista", "targetname") hide();
+  getEnt("pb_end_vista", "targetname") hide();
+  getEnt("compoundexit_vista", "targetname") hide();
   var_23 = getEntArray("so_asset", "targetname");
 
   foreach(var_25 in var_23) {}

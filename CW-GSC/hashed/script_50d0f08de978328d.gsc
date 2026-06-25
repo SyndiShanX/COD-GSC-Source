@@ -830,7 +830,7 @@ function function_4a415293(time) {
 
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
     #eventtype: #"hardpoint_moved"});
-  playsoundatposition(#"mpl_hardpoint_move", (0, 0, 0));
+  playSoundAtPosition(#"mpl_hardpoint_move", (0, 0, 0));
 
   foreach(zone in level.active_zones) {
     zone.gameobject.onuse = undefined;

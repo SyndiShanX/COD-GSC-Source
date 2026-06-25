@@ -199,7 +199,7 @@ function_bcb3a1a1() {
 
 function_7a007bbf(skeleton, entity) {
   forward = anglesToForward(skeleton.angles);
-  to_enemy = vectornormalize(entity.origin - skeleton.origin);
+  to_enemy = vectorNormalize(entity.origin - skeleton.origin);
   return vectordot(forward, to_enemy) >= 0.966;
 }
 

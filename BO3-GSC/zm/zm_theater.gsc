@@ -132,7 +132,7 @@ function main() {
   level thread zm_zonemgr::manage_zones(init_zones);
   level.zombie_ai_limit = 24;
   setDvar("hkai_pathfindIterationLimit", 1200);
-  level.extracam_screen = getent("movie_screen_model", "script_noteworthy");
+  level.extracam_screen = getEnt("movie_screen_model", "script_noteworthy");
   util::clientnotify("camera_stop");
   init_sounds();
   setupmusic();
@@ -187,7 +187,7 @@ function function_823705c7() {
   if(isDefined(self.is_teleporting) && self.is_teleporting) {
     return false;
   }
-  var_7d7ca0ea = getent("trigger_teleport_pad_0", "targetname");
+  var_7d7ca0ea = getEnt("trigger_teleport_pad_0", "targetname");
   if(self istouching(var_7d7ca0ea)) {
     return false;
   }
@@ -198,11 +198,11 @@ function function_823705c7() {
 }
 
 function function_6452fa9d() {
-  var_174ba740 = getent("use_elec_switch", "targetname");
+  var_174ba740 = getEnt("use_elec_switch", "targetname");
   var_cf413835 = struct::get("power_switch", "targetname");
-  var_174ba740 setcursorhint("HINT_NOICON");
+  var_174ba740 setCursorHint("HINT_NOICON");
   var_174ba740 waittill("trigger", user);
-  playsoundatposition("zmb_switch_flip", var_cf413835.origin);
+  playSoundAtPosition("zmb_switch_flip", var_cf413835.origin);
   playFX(level._effect["switch_sparks"], struct::get("elec_switch_fx", "script_noteworthy").origin);
   var_cf413835 scene::play("p7_fxanim_zmhd_power_switch_bundle");
 }
@@ -313,9 +313,9 @@ function offhand_weapon_overrride() {
 
 function function_ce6ee03b() {
   scene::add_scene_func("p7_fxanim_zm_kino_curtains_stage_main_bundle", &function_9a38ad2c, "play");
-  var_5be55f14 = getent("theater_curtains", "targetname");
+  var_5be55f14 = getEnt("theater_curtains", "targetname");
   var_5be55f14 thread scene::play("p7_fxanim_zm_kino_curtains_stage_main_bundle", var_5be55f14);
-  playsoundatposition("evt_curtain_open", var_5be55f14.origin);
+  playSoundAtPosition("evt_curtain_open", var_5be55f14.origin);
 }
 
 function function_9a38ad2c(a_ents) {
@@ -370,8 +370,8 @@ function init_zombie_theater() {
 function teleporter_intro() {
   level flag::wait_till("initial_players_connected");
   wait(0.25);
-  playsoundatposition("evt_beam_fx_2d", (0, 0, 0));
-  playsoundatposition("evt_pad_cooldown_2d", (0, 0, 0));
+  playSoundAtPosition("evt_beam_fx_2d", (0, 0, 0));
+  playSoundAtPosition("evt_pad_cooldown_2d", (0, 0, 0));
 }
 
 function electric_switch() {

@@ -34,8 +34,8 @@ double_door_init() {
 
     for(j = 0; j < doors.size; j++) {
       if(doors[j].script_noteworthy == hinges[i].script_noteworthy) {
-        doors[j] linkto(hinges[i]);
-        doors[j] disconnectpaths();
+        doors[j] linkTo(hinges[i]);
+        doors[j] disconnectPaths();
       }
     }
     self.hinges[(self.hinges).size] = hinges[i];
@@ -48,8 +48,8 @@ double_door_init() {
   }
 
   self set_hint_string(self, "default_buy_door_" + cost);
-  self SetCursorHint("HINT_NOICON");
-  self UseTriggerRequireLookAt();
+  self setCursorHint("HINT_NOICON");
+  self useTriggerRequireLookAt();
 
   self thread double_door_think();
 }
@@ -72,13 +72,13 @@ double_door_think() {
 
         for(i = 0; i < (self.doors).size; i++) {
           self.doors[i] connectpaths();
-          playsoundatposition("door_rotate_open", self.doors[i].origin);
+          playSoundAtPosition("door_rotate_open", self.doors[i].origin);
         }
 
         play_sound_at_pos("purchase", self.doors[0].origin);
 
         for(i = 0; i < (self.hinges).size; i++) {
-          struct = getstruct(self.hinges[i].script_linkto, "script_linkname");
+          struct = getStruct(self.hinges[i].script_linkto, "script_linkname");
           self.hinges[i] thread swing_door(struct);
         }
 
@@ -97,7 +97,7 @@ double_door_think() {
 
         break;
       } else {
-        playsoundatposition("no_purchase_door", self.doors[0].origin);
+        playSoundAtPosition("no_purchase_door", self.doors[0].origin);
         who thread play_no_money_purchase_dialog();
       }
     }
@@ -132,8 +132,8 @@ swing_door(struct) {
     time = self.script_transition_time;
   }
 
-  self MoveTo(struct.origin, time, time * 0.5);
-  self RotateTo(struct.angles, time * 0.75);
+  self moveTo(struct.origin, time, time * 0.5);
+  self rotateTo(struct.angles, time * 0.75);
 
   self waittill("movedone");
 
@@ -154,7 +154,7 @@ dog_clip_watcher() {
 
     for(i = 0; i < zombie_dog_clip.size; i++) {
       zombie_dog_clip[i] solid();
-      zombie_dog_clip[i] disconnectpaths();
+      zombie_dog_clip[i] disconnectPaths();
       zombie_dog_clip[i] notsolid();
     }
 

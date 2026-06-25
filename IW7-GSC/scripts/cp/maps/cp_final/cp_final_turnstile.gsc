@@ -4,10 +4,10 @@
 ***********************************************************/
 
 turnstile_init() {
-  level.turnstile = getent("turnstile", "targetname");
+  level.turnstile = getEnt("turnstile", "targetname");
   level.turnstile thread turnstile_damage_listener();
   level thread shoot_piece_into_machine();
-  level.turnstile_portal = scripts\engine\utility::getstruct("turnstile_portal", "targetname");
+  level.turnstile_portal = scripts\engine\utility::getStruct("turnstile_portal", "targetname");
   if(!isDefined(level.turnstile_portal)) {
     level.turnstile_portal = spawnStruct();
     level.turnstile_portal.origin = (2403.5, 6996, 455);

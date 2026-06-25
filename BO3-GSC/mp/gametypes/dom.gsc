@@ -175,7 +175,7 @@ function domflags() {
   level.flags = [];
   foreach(dom_flag in primaryflags) {
     if(isDefined(dom_flag.target)) {
-      trigger = getent(dom_flag.target, "targetname");
+      trigger = getEnt(dom_flag.target, "targetname");
       if(isDefined(trigger)) {
         trigger.visual = dom_flag;
         trigger.script_label = dom_flag.script_label;

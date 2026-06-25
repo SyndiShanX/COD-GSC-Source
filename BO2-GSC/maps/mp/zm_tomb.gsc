@@ -145,7 +145,7 @@ main() {
   level_precache();
   maps\mp\gametypes_zm\_spawning::level_use_unified_spawning(1);
   level thread setup_tomb_spawn_groups();
-  spawner_main_chamber_capture_zombies = getent("chamber_capture_zombie_spawner", "targetname");
+  spawner_main_chamber_capture_zombies = getEnt("chamber_capture_zombie_spawner", "targetname");
   spawner_main_chamber_capture_zombies add_spawn_function(::chamber_capture_zombie_spawn_init);
   level.has_richtofen = 0;
   level.givecustomloadout = ::givecustomloadout;
@@ -833,14 +833,14 @@ fall_down(vdir, stance) {
 
   if(isDefined(vdir) && length(vdir) > 0) {
     xyspeedmag = 40 + randomint(12) + randomint(12);
-    xyspeed = xyspeedmag * vectornormalize((vdir[0], vdir[1], 0));
+    xyspeed = xyspeedmag * vectorNormalize((vdir[0], vdir[1], 0));
   }
 
   linker = spawn("script_origin", (0, 0, 0));
   linker.origin = origin;
   linker.angles = angles;
   self._fall_down_anchor = linker;
-  self playerlinkto(linker);
+  self playerlinkTo(linker);
   self playsoundtoplayer("zmb_player_death_fall", self);
   falling = stance != "prone";
 
@@ -850,8 +850,8 @@ fall_down(vdir, stance) {
     floor_height = 10 + origin[2] - eye[2];
     origin = origin + (0, 0, floor_height);
     lerptime = 0.5;
-    linker moveto(origin, lerptime, lerptime);
-    linker rotateto(angles, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
+    linker rotateTo(angles, lerptime, lerptime);
   }
 
   self freezecontrols(1);
@@ -867,13 +867,13 @@ fall_down(vdir, stance) {
     bounce = randomint(4) + 8;
     origin = origin + (0, 0, bounce) - xyspeed * 0.1;
     lerptime = bounce / 50.0;
-    linker moveto(origin, lerptime, 0, lerptime);
+    linker moveTo(origin, lerptime, 0, lerptime);
     linker waittill("movedone");
     origin = origin + (0, 0, bounce * -1) + xyspeed * 0.1;
     lerptime = lerptime / 2.0;
-    linker moveto(origin, lerptime, lerptime);
+    linker moveTo(origin, lerptime, lerptime);
     linker waittill("movedone");
-    linker moveto(origin, 5, 0);
+    linker moveTo(origin, 5, 0);
   }
 
   wait 15;
@@ -1441,7 +1441,7 @@ working_zone_init() {
 }
 
 activate_zone_trig(str_name, str_zone1, str_zone2) {
-  trig = getent(str_name, "targetname");
+  trig = getEnt(str_name, "targetname");
   trig waittill("trigger");
 
   if(isDefined(str_zone1)) {

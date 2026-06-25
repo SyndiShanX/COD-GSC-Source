@@ -53,7 +53,7 @@ func_2B3E(var_0) {
   var_1 setotherent(var_0.owner);
   var_1 setModel("prop_mp_black_hole_grenade_scr");
   var_1 give_player_tickets(1);
-  var_1 linkto(var_0);
+  var_1 linkTo(var_0);
   var_1 thread func_4116(var_0);
   var_0.physics_capsulecast = var_1;
   var_2 = getblackholecenter(var_0);
@@ -134,8 +134,8 @@ func_13A58(var_0, var_1) {
   var_2 = anglestoup(var_0.angles);
   var_3 = spawn("trigger_rotatable_radius", var_1 - var_2 * 20 * 0.5, 0, 20, 20);
   var_3.angles = var_0.angles;
-  var_3 enablelinkto();
-  var_3 linkto(var_0);
+  var_3 enablelinkTo();
+  var_3 linkTo(var_0);
   var_3 thread cleanuponparentdeath(var_0);
   var_4 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_sky", "physicscontents_water", "physicscontents_item"]);
   while(isDefined(var_3)) {
@@ -218,7 +218,7 @@ func_10835(var_0, var_1, var_2) {
   var_3 setotherent(var_0.owner);
   var_3 setentityowner(var_0);
   var_3 setModel("prop_mp_black_hole_grenade_scr");
-  var_3 linkto(var_0);
+  var_3 linkTo(var_0);
   var_3 thread func_4116(var_0);
   return var_3;
 }
@@ -261,7 +261,7 @@ func_4116(var_0) {
 spawnblackholephysicsvolume(var_0, var_1, var_2, var_3) {
   var_4 = physics_volumecreate(var_1, 256);
   var_4.angles = var_2;
-  var_4 linkto(var_0);
+  var_4 linkTo(var_0);
   var_4 physics_volumesetasfocalforce(1, var_1, var_3);
   var_4 physics_volumeenable(1);
   var_4 physics_volumesetactivator(1);
@@ -306,7 +306,7 @@ func_139AD() {
 func_10831(var_0, var_1, var_2, var_3, var_4) {
   var_5 = spawnimpulsefield(var_3, var_4, var_1);
   var_5.angles = var_2;
-  var_5 linkto(var_0);
+  var_5 linkTo(var_0);
   thread bhg_trackimpulsefielddebuff(var_5, var_3);
   var_5 thread cleanuponparentdeath(var_0);
 }

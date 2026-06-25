@@ -85,7 +85,7 @@ function monkeynotetrackgroundpound(entity) {
       zombies[i] dodamage(zombies[i].health * 10, entity.origin, entity);
     }
   }
-  players = getplayers();
+  players = getPlayers();
   affected_players = [];
   for(i = 0; i < players.size; i++) {
     if(!zombie_utility::is_player_valid(players[i])) {
@@ -495,7 +495,7 @@ function monkey_round_spawning() {
 
 function monkey_setup_packs() {
   level.monkey_packs_killed = 0;
-  players = getplayers();
+  players = getPlayers();
   if(players.size > level.monkey_encounters) {
     level.monkey_pack_max = players.size + level.monkey_encounters;
   } else {
@@ -579,7 +579,7 @@ function monkey_pack_man_setup_perks() {
     if(vending_triggers[i].targeted) {
       continue;
     }
-    players = getplayers();
+    players = getPlayers();
     for(j = 0; j < players.size; j++) {
       perk = vending_triggers[i].script_noteworthy;
       org = vending_triggers[i].origin;
@@ -721,7 +721,7 @@ function monkey_pack_set_machine() {
 
 function monkey_pack_choose_enemy() {
   monkey_enemy = [];
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(!zombie_utility::is_player_valid(players[i])) {
       continue;
@@ -738,7 +738,7 @@ function monkey_pack_choose_enemy() {
 
 function monkey_pack_update_enemy() {
   while(self.monkeys.size > 0) {
-    players = getplayers();
+    players = getPlayers();
     total_dist = 1000000;
     player_idx = 0;
     for(i = 0; i < players.size; i++) {
@@ -880,13 +880,13 @@ function monkey_round_start() {
   level monkey_pack_man_setup_perks();
   level thread monkey_grenade_watcher();
   util::clientnotify("monkey_start");
-  playsoundatposition("zmb_ape_intro_sonicboom_fnt", (0, 0, 0));
+  playSoundAtPosition("zmb_ape_intro_sonicboom_fnt", (0, 0, 0));
   level thread play_delayed_player_vox();
 }
 
 function play_delayed_player_vox() {
   wait(8);
-  players = getplayers();
+  players = getPlayers();
   players[randomintrange(0, players.size)] zm_audio::create_and_play_dialog("general", "monkey_spawn");
 }
 
@@ -898,7 +898,7 @@ function monkey_round_stop() {
   }
   util::clientnotify("monkey_stop");
   level notify("grenade_watcher_stop");
-  players = getplayers();
+  players = getPlayers();
   foreach(player in players) {
     self.perk_hud_flash = undefined;
   }
@@ -907,7 +907,7 @@ function monkey_round_stop() {
 function monkey_player_has_perk() {
   vending_triggers = function_5b9c3e11();
   for(i = 0; i < vending_triggers.size; i++) {
-    players = getplayers();
+    players = getPlayers();
     for(j = 0; j < players.size; j++) {
       perk = vending_triggers[i].script_noteworthy;
       org = vending_triggers[i].origin;
@@ -993,7 +993,7 @@ function monkey_zombie_think() {
 function monkey_zombie_debug() {
   self endon("death");
   while(true) {
-    forward = vectornormalize(anglesToForward(self.angles));
+    forward = vectorNormalize(anglesToForward(self.angles));
     end_pos = self.origin - vectorscale(forward, 120);
     util::wait_network_frame();
   }
@@ -1077,7 +1077,7 @@ function monkey_zombie_health_watcher() {
   health_limit = self.health * 0.75;
   while(true) {
     if(self.health <= health_limit) {
-      self stopanimscripted();
+      self stopanimScripted();
       util::wait_network_frame();
       self notify("stop_perk_attack");
       self monkey_zombie_set_state("charge_player");
@@ -1116,7 +1116,7 @@ function monkey_grenade_watcher() {
   self endon("death");
   level.monkey_grenades = [];
   level.monkey_bhbs = [];
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     players[i] thread monkey_grenade_watch();
   }
@@ -1168,7 +1168,7 @@ function monkey_zombie_grenade_throw_watcher(target, animname) {
 
 function monkey_zombie_grenade_throw(target) {
   self endon("death");
-  forward = vectornormalize(anglesToForward(self.angles));
+  forward = vectorNormalize(anglesToForward(self.angles));
   end_pos = self.origin + vector_scale(forward, 96);
   if(bullettracepassed(self.origin, end_pos, 0, undefined)) {
     self.var_cf51d24 = 1;
@@ -1280,7 +1280,7 @@ function monkey_zombie_attack_perk() {
   while(true) {
     monkey_pack_flash_perk(self.perk.script_noteworthy);
     self thread play_attack_impacts(time);
-    self animscripted("attack_perk_anim", self.attack.origin, self.attack.angles, perk_attack_anim);
+    self animScripted("attack_perk_anim", self.attack.origin, self.attack.angles, perk_attack_anim);
     if(self monkey_zombie_perk_damage(self.machine_damage)) {
       break;
     }
@@ -1319,7 +1319,7 @@ function play_player_perk_theft_vox(perk, monkey) {
   }
   level.perk_theft_vox[perk] = 1;
   while(true) {
-    player = getplayers();
+    player = getPlayers();
     rand = randomintrange(0, player.size);
     if(monkey monkey_zombie_perk_damage(monkey.machine_damage)) {
       level.perk_theft_vox[perk] = 0;
@@ -1375,7 +1375,7 @@ function monkey_zombie_default_spawn_heuristic(spawner) {
     return -1;
   }
   score = 0;
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     score = int(distancesquared(spawner.origin, players[i].origin));
   }
@@ -1455,7 +1455,7 @@ function monkey_zombie_ground_hit_think() {
       self.pack monkey_pack_update_ground_hit(self);
       self.var_aa9937 = 1;
     } else if(!self.ground_hit && self monkey_zombie_check_ground_hit()) {
-      players = getplayers();
+      players = getPlayers();
       closeenough = 0;
       origin = self getEye();
       for(i = 0; i < players.size; i++) {
@@ -1512,7 +1512,7 @@ function groundhit_watcher(animname) {
       zombies[i] dodamage(zombies[i].health * 10, self.origin, self);
     }
   }
-  players = getplayers();
+  players = getPlayers();
   affected_players = [];
   for(i = 0; i < players.size; i++) {
     if(!zombie_utility::is_player_valid(players[i])) {
@@ -1571,7 +1571,7 @@ function monkey_zombie_grenade_pickup() {
       self setgoalpos(self.monkey_thrower.origin);
       target_dir = self.monkey_thrower.origin - self.origin;
       monkey_dir = anglesToForward(self.angles);
-      dot = vectordot(vectornormalize(target_dir), vectornormalize(monkey_dir));
+      dot = vectordot(vectorNormalize(target_dir), vectorNormalize(monkey_dir));
       if(dot >= 0.5) {
         break;
       }
@@ -1651,11 +1651,11 @@ function monkey_zombie_bhb_teleport() {
     }
     locations[locations.size] = black_hole_teleport[i];
   }
-  self stopanimscripted();
+  self stopanimScripted();
   util::wait_network_frame();
   so = spawn("script_origin", self.origin);
   so.angles = self.angles;
-  self linkto(so);
+  self linkTo(so);
   if(locations.size > 0) {
     locations = array::randomize(locations);
     so.origin = locations[0].origin;
@@ -1794,7 +1794,7 @@ function monkey_remove_from_pack() {
   if(level.monkey_packs_killed >= level.monkey_pack_max) {
     level flag::set("last_monkey_down");
     if(self monkey_zombie_can_drop_free_perk()) {
-      forward = vectornormalize(anglesToForward(self.angles));
+      forward = vectorNormalize(anglesToForward(self.angles));
       end_pos = self.origin - vectorscale(forward, 32);
       level thread zm_powerups::specific_powerup_drop("free_perk", end_pos);
     }
@@ -1819,13 +1819,13 @@ function monkey_zombie_can_drop_free_perk() {
   }
   if(level flag::get("solo_game")) {
     if(level.solo_lives_given >= level.max_solo_lives) {
-      players = getplayers();
+      players = getPlayers();
       if(!players[0] hasperk("specialty_quickrevive")) {
         max_perks--;
       }
     }
   }
-  players = getplayers();
+  players = getPlayers();
   vending_triggers = function_5b9c3e11();
   for(i = 0; i < players.size; i++) {
     num_perks = 0;
@@ -1847,7 +1847,7 @@ function monkey_zombie_die(einflictor, attacker, idamage, smeansofdeath, weapon,
   self clientfield::set("monkey_eye_glow", 0);
   self.grenadeammo = 0;
   playFX(level._effect["monkey_death"], self.origin);
-  playsoundatposition("zmb_monkey_explode", self.origin);
+  playSoundAtPosition("zmb_monkey_explode", self.origin);
   level zm_spawner::zombie_death_points(self.origin, self.damagemod, self.damagelocation, self.attacker, self);
   if(randomintrange(0, 100) >= 75) {
     if(isDefined(self.attacker) && isPlayer(self.attacker)) {
@@ -1875,7 +1875,7 @@ function monkey_custom_damage(player) {
 
 function monkey_zombie_default_enter_level() {
   playFX(level._effect["monkey_spawn"], self.origin);
-  playsoundatposition("zmb_ape_intro_land", self.origin);
+  playSoundAtPosition("zmb_ape_intro_land", self.origin);
 }
 
 function monkey_pathing() {
@@ -1899,7 +1899,7 @@ function monkey_find_flesh() {
   }
   self zm_spawner::zombie_history("monkey find flesh -> start");
   self.goalradius = 48;
-  players = getplayers();
+  players = getPlayers();
   self.ignore_player = [];
   player = zm_utility::get_closest_valid_player(self.origin, self.ignore_player);
   if(!isDefined(player)) {
@@ -1957,7 +1957,7 @@ function monkey_zombie_perk_damage(amount) {
 }
 
 function monkey_pack_take_perk() {
-  players = getplayers();
+  players = getPlayers();
   self.perk.targeted = 0;
   perk = self.perk.script_noteworthy;
   for(i = 0; i < players.size; i++) {
@@ -1988,7 +1988,7 @@ function monkey_pack_flash_perk(perk) {
   if(!isDefined(perk)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] hasperk(perk)) {
       players[i] thread function_7acaa6b4(perk);
@@ -2010,7 +2010,7 @@ function function_7acaa6b4(perk) {
 }
 
 function monkey_pack_stop_flash(perk, taken) {
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {}
 }
 
@@ -2032,15 +2032,15 @@ function monkey_fling(player) {
   monkey_print("fling monkey damage");
   damage = int(level.monkey_zombie_health * 0.5);
   self dodamage(damage, self.origin, self);
-  forward = vectornormalize(anglesToForward(self.angles));
-  attack_dir = vectornormalize(self.origin - player.origin);
+  forward = vectorNormalize(anglesToForward(self.angles));
+  attack_dir = vectorNormalize(self.origin - player.origin);
   dot = vectordot(attack_dir, forward);
   if(dot < 0) {
     end_pos = self.origin - vectorscale(forward, 120);
     if(sighttracepassed(self.origin, end_pos, 0, self)) {
       flings = array::randomize(level.var_45abf882);
       length = getanimlength(flings[0]);
-      self animscripted("fling_anim", self.origin, self.angles, flings[0]);
+      self animScripted("fling_anim", self.origin, self.angles, flings[0]);
       wait(length);
     }
   }

@@ -200,7 +200,7 @@ time_bomb_model_init() {
   level.time_bomb_save_data.time_bomb_model = self;
   level.time_bomb_save_data.time_bomb_model playLoopSound("zmb_timebomb_3d_timer", 1);
   level notify("new_time_bomb_set");
-  playsoundatposition("zmb_timebomb_plant_2d", (0, 0, 0));
+  playSoundAtPosition("zmb_timebomb_plant_2d", (0, 0, 0));
 }
 
 delete_existing_time_bomb_model() {
@@ -215,7 +215,7 @@ setup_time_bomb_detonation_model() {
 
 detonate_time_bomb() {
   if(isDefined(level.time_bomb_save_data.time_bomb_model) && isDefined(level.time_bomb_save_data.time_bomb_model.origin)) {
-    playsoundatposition("zmb_timebomb_3d_timer_end", level.time_bomb_save_data.time_bomb_model.origin);
+    playSoundAtPosition("zmb_timebomb_3d_timer_end", level.time_bomb_save_data.time_bomb_model.origin);
   }
 
   delete_time_bomb_model();
@@ -393,12 +393,12 @@ restore_door_state(s_temp) {
     }
     for(i = 0; i < s_door_struct.doors.size; i++) {
       if(isDefined(self.doors[i].script_string) && self.doors[i].script_string == "rotate") {
-        self.doors[i] rotateto(self.doors[i].og_angles, 0.05, 0, 0);
+        self.doors[i] rotateTo(self.doors[i].og_angles, 0.05, 0, 0);
         wait 0.05;
       }
 
       self.doors[i] solid();
-      self.doors[i] disconnectpaths();
+      self.doors[i] disconnectPaths();
     }
 
     self._door_open = 0;
@@ -412,11 +412,11 @@ restore_door_state(s_temp) {
     }
     for(i = 0; i < s_door_struct.doors.size; i++) {
       if(isDefined(self.doors[i].script_string) && self.doors[i].script_string == "rotate") {
-        self.doors[i] rotateto(s_door_struct.doors[i].script_angles, 0.05, 0, 0);
+        self.doors[i] rotateTo(s_door_struct.doors[i].script_angles, 0.05, 0, 0);
       }
 
       self.doors[i] notsolid();
-      self.doors[i] disconnectpaths();
+      self.doors[i] disconnectPaths();
     }
 
     self._door_open = 1;
@@ -656,7 +656,7 @@ time_bomb_restores_saved_data(b_show_fx, save_struct) {
     return;
   }
   if(b_show_fx) {
-    playsoundatposition("zmb_timebomb_timechange_2d", (0, 0, 0));
+    playSoundAtPosition("zmb_timebomb_timechange_2d", (0, 0, 0));
     _time_bomb_show_overlay();
   }
 
@@ -880,7 +880,7 @@ _time_bomb_restores_player_data_internal(save_struct) {
       s_temp = save_struct.player_saves[self getentitynumber()];
     }
 
-    self setorigin(s_temp.player_origin);
+    self setOrigin(s_temp.player_origin);
     self setplayerangles(s_temp.player_angles);
     self setstance(s_temp.player_stance);
     self thread _restore_player_perks_and_weapons(s_temp);
@@ -1371,7 +1371,7 @@ _restore_zombie_data(s_info) {
   self.doing_equipment_attack = s_info.doing_equipment_attack;
 
   if(isDefined(self.doing_equipment_attack) && self.doing_equipment_attack) {
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   self.is_traversing = s_info.is_traversing;

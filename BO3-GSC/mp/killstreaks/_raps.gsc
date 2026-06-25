@@ -97,7 +97,7 @@ function rapshelicopterdynamicavoidanceupdate(index_to_update) {
       otherhelicopterforward = anglesToForward(level.raps_helicopters[i] getangles());
       otherhelicopterreforigin = level.raps_helicopters[i].origin + (otherhelicopterforward * 100);
       deltatoother = otherhelicopterreforigin - helicopterreforigin;
-      otherinfront = vectordot(helicopterforward, vectornormalize(deltatoother)) > 0.707;
+      otherinfront = vectordot(helicopterforward, vectorNormalize(deltatoother)) > 0.707;
       distancesqr = distance2dsquared(helicopterreforigin, otherhelicopterreforigin);
       if(distancesqr < (200 + 1200) * (200 + 1200) || helicopter getspeed() == 0 && (gettime() - helicopter.lastnewgoaltime) > 5000) {
         helicopter.__last_dynamic_avoidance_action = 20;
@@ -848,7 +848,7 @@ function stophelicopter() {
 function spawnraps(origin, angles) {
   originalowner = self;
   originalownerentnum = originalowner.entnum;
-  raps = spawnvehicle("spawner_bo3_raps_mp", origin, angles, "dynamic_spawn_ai");
+  raps = spawnVehicle("spawner_bo3_raps_mp", origin, angles, "dynamic_spawn_ai");
   if(!isDefined(raps)) {
     return;
   }
@@ -1025,7 +1025,7 @@ function createrapshelicopterinfluencer() {
   influencerent = spawn("script_model", helicopter.origin - (0, 0, self.assigned_fly_height));
   helicopter.influencerent = influencerent;
   helicopter.influencerent.angles = (0, 0, 0);
-  helicopter.influencerent linkto(helicopter);
+  helicopter.influencerent linkTo(helicopter);
   preset = getinfluencerpreset("helicopter");
   if(!isDefined(preset)) {
     return;

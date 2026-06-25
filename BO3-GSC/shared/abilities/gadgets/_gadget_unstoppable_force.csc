@@ -77,7 +77,7 @@ function boost_fx_on_velocity(localclientnum) {
   while(isDefined(self)) {
     v_player_velocity = self getvelocity();
     v_player_forward = anglesToForward(self.angles);
-    n_dot = vectordot(vectornormalize(v_player_velocity), v_player_forward);
+    n_dot = vectordot(vectorNormalize(v_player_velocity), v_player_forward);
     n_speed = length(v_player_velocity);
     if(n_speed >= getdvarint("scr_unstoppableforce_boost_speed_tol", 320) && n_dot > 0.8) {
       if(!isDefined(self.firstperson_fx_unstoppableforce)) {

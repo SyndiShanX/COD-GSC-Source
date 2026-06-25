@@ -24,7 +24,7 @@ init_teleport_portals(var_0) {
     if(isDefined(var_2.mdl)) {
       continue;
     }
-    var_2.mdl = getent(var_2.target, "targetname");
+    var_2.mdl = getEnt(var_2.target, "targetname");
 
     if(!isDefined(var_2.mdl)) {
       continue;
@@ -36,7 +36,7 @@ init_teleport_portals(var_0) {
     }
 
     var_2._id_605B = scripts\cp\utility::_id_E190("tag_origin", var_2.mdl.origin, var_2.mdl.angles);
-    var_3 = scripts\engine\utility::getstruct(var_2.mdl.target, "targetname");
+    var_3 = scripts\engine\utility::getStruct(var_2.mdl.target, "targetname");
 
     if(!isDefined(var_3)) {
       return;

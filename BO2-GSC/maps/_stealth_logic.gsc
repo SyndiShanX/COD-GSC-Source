@@ -902,7 +902,7 @@ enemy_corpse_logic() {
         angles = self gettagangles("tag_eye");
         origin = self gettagorigin("tag_eye");
         sight = anglesToForward(angles);
-        vec_to_corpse = vectornormalize(corpse.origin - origin);
+        vec_to_corpse = vectorNormalize(corpse.origin - origin);
 
         if(vectordot(sight, vec_to_corpse) > 0.55) {
           if(self cansee(corpse)) {
@@ -1348,7 +1348,7 @@ stealth_insure_enabled() {
 
 debug_stealth() {
   wait_for_all_players();
-  level.player = getplayers()[0];
+  level.player = getPlayers()[0];
   create_debug_hud_elemets();
   level thread debug_level_stealth();
   level thread debug_ai_stealth();

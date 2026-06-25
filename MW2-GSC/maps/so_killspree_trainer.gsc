@@ -147,7 +147,7 @@ start_map() {
     player.friendlies_hit = 0;
   }
 
-  melee_clip = getent("melee_clip", "targetname");
+  melee_clip = getEnt("melee_clip", "targetname");
   melee_clip thread hide_entity();
 
   init_course_triggers();
@@ -164,7 +164,7 @@ start_map() {
   array_thread(getEntArray("trainee_01", "script_noteworthy"), maps\trainer::AI_delete);
   array_thread(GetAiArray("allies"), maps\trainer::AI_delete);
 
-  trigger_ent = getent("end_trigger", "targetname");
+  trigger_ent = getEnt("end_trigger", "targetname");
   level thread maps\_specialops_code::wait_all_players_are_touching(trigger_ent);
 
   level thread so_pit_start_sequence();
@@ -194,7 +194,7 @@ calculate_finish() {
 
   fade_challenge_out();
 }
-so_trigger = GetEnt("so_player_melee_trigger", "targetname");
+so_trigger = getEnt("so_player_melee_trigger", "targetname");
 level thread maps\_load::flag_set_trigger(so_trigger);
 so_trigger trigger_off();
 trigger = get_script_flag_trigger("player_course_stairs2", so_trigger);
@@ -224,20 +224,20 @@ thread course_trigger_thread(triggers);
 
 course_trigger_sort(triggers) {
   sorted = [];
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 1);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 2);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 3);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 4);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 5);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 14);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 6);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 12);
-  sorted[sorted.size] = get_trigger_by_linkto(triggers, 13);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 1);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 2);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 3);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 4);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 5);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 14);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 6);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 12);
+  sorted[sorted.size] = get_trigger_by_linkTo(triggers, 13);
 
   return sorted;
 }
 
-get_trigger_by_linkto(triggers, num) {
+get_trigger_by_linkTo(triggers, num) {
   foreach(trigger in triggers) {
     if(trigger.script_linkto_num == num) {
       return trigger;
@@ -268,7 +268,7 @@ course_trigger_thread(triggers) {
     thread so_area_cleared();
 
     if(trigger.script_linkto_num == 5) {
-      so_melee_trigger = GetEnt("so_player_melee_trigger", "targetname");
+      so_melee_trigger = getEnt("so_player_melee_trigger", "targetname");
       so_melee_trigger trigger_on();
     }
   }
@@ -613,7 +613,7 @@ so_melee_hint_thread() {
   self.hintElem.alpha = 0;
   self.hintElem setText(&"TRAINER_HINT_MELEE");
 
-  trigger = GetEnt("so_player_melee_trigger", "targetname");
+  trigger = getEnt("so_player_melee_trigger", "targetname");
   while(!flag("melee_target_hit")) {
     if(self IsTouching(trigger)) {
       self.hintElem.alpha = 1;

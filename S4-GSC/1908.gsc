@@ -73,7 +73,7 @@ _id_80EE() {
   if(!isDefined(self._id_9923)) {
     var_1 = self.origin + (0, 0, 0);
     var_2 = self.angles + (0, 0, 0);
-    var_3 = vectornormalize(anglesToForward(self.angles));
+    var_3 = vectorNormalize(anglesToForward(self.angles));
     self.origin = self.origin + var_3 * 16.0;
     self._id_9923 = spawn("script_model", var_1);
     self._id_9923.angles = var_2;
@@ -239,7 +239,7 @@ _id_10D20(var_0) {
   var_11 = 0;
 
   if(var_4 && var_5 - 1 < level._id_AE11) {
-    var_12 = vectornormalize(anglesToForward(var_1.angles)) * 16;
+    var_12 = vectorNormalize(anglesToForward(var_1.angles)) * 16;
     var_13 = var_1 getweaponslistprimaries();
     var_1 _id_0741::_id_BD77("mt_upgrade_weapons");
 

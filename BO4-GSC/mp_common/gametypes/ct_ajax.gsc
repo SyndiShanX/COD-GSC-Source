@@ -68,7 +68,7 @@ function_7c4ef26b(predictedspawn) {
     nd_node = function_5d9ec9e5();
 
     if(isDefined(nd_node)) {
-      self setorigin(nd_node.origin);
+      self setOrigin(nd_node.origin);
       self setplayerangles(nd_node.angles);
     }
   } else if(level flag::get("attack_event_active")) {
@@ -97,7 +97,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 
   if(isDefined(weapon) && weapon == getweapon(#"sig_buckler_turret")) {
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_d471f8fa(2);
   }
 }
@@ -169,7 +169,7 @@ j_fore_le_01() {
       break;
     }
 
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_785eb2ca();
 
     if(level.var_347db8b6 + 1 < 3) {
@@ -212,7 +212,7 @@ function_7446a885() {
     level.var_cbcb0078 = 1;
 
     while(true) {
-      e_player = getplayers()[0];
+      e_player = getPlayers()[0];
       n_dist = distance(e_player.origin, level.var_a8a15809);
 
       if(n_dist < 1000) {
@@ -268,7 +268,7 @@ function_1082e3b7() {
 function_bf0cfe30() {
   nd_node = function_b2de37ed();
   self ct_utils::function_5b59f3b7(nd_node.origin, nd_node.angles, 256);
-  self setorigin(nd_node.origin);
+  self setOrigin(nd_node.origin);
   self setplayerangles(nd_node.angles);
 }
 
@@ -350,22 +350,22 @@ function_9e33a62() {
 
   while(true) {
     level waittill(#"hash_ac034f4f7553641");
-    e_player = getplayers()[0];
+    e_player = getPlayers()[0];
     e_player thread ct_utils::function_d471f8fa(3);
   }
 }
 
 function_d5b13da7() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_7fa79308d4e0fd8", 5, "green");
 }
 
 function_8aa1c633() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_443101fa69c21abf", 5, "green");
 }
 
 function_e268b155() {
-  e_player = getplayers(#"allies")[0];
+  e_player = getPlayers(#"allies")[0];
   e_player thread ct_utils::function_329f9ba6(#"hash_25fd00b5dda353c3", 5, "green");
 }

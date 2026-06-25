@@ -192,7 +192,7 @@ function ai_activatesystemoverload(target, var_9bc2efcb = 1, disabletimemsec) {
   if(isDefined(var_9bc2efcb) && var_9bc2efcb) {
     type = self cybercom::function_5e3d3aa();
     self orientmode("face default");
-    self animscripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
+    self animScripted("ai_cybercom_anim", self.origin, self.angles, ("ai_base_rifle_" + type) + "_exposed_cybercom_activate");
     self waittillmatch("ai_cybercom_anim");
   }
   weapon = getweapon("gadget_system_overload");
@@ -243,7 +243,7 @@ function system_overload(attacker, disabletimemsec, weapon = getweapon("gadget_s
   self thread function_53cfe88a();
   self orientmode("face default");
   self ai::set_behavior_attribute("robot_lights", 1);
-  self animscripted("shutdown_anim", self.origin, self.angles, ("ai_robot_base_" + type) + "_shutdown", "normal", %generic::root, 1, 0.2);
+  self animScripted("shutdown_anim", self.origin, self.angles, ("ai_robot_base_" + type) + "_shutdown", "normal", %generic::root, 1, 0.2);
   self thread cybercom::stopanimscriptedonnotify("damage_pain", "shutdown_anim", 1, attacker, weapon);
   self thread cybercom::stopanimscriptedonnotify("notify_melee_damage", "shutdown_anim", 1, attacker, weapon);
   self thread cybercom::stopanimscriptedonnotify("breakout_sysoverload_loop", "shutdown_anim", 0, attacker, weapon);
@@ -262,7 +262,7 @@ function system_overload(attacker, disabletimemsec, weapon = getweapon("gadget_s
     self ai::set_behavior_attribute("robot_lights", 0);
     self.ignoreall = 0;
     self clientfield::set("cybercom_sysoverload", 2);
-    self animscripted("restart_anim", self.origin, self.angles, ("ai_robot_base_" + type) + "_shutdown_2_alert");
+    self animScripted("restart_anim", self.origin, self.angles, ("ai_robot_base_" + type) + "_shutdown_2_alert");
     self thread cybercom::stopanimscriptedonnotify("damage_pain", "restart_anim", 1, attacker, weapon);
     self thread cybercom::stopanimscriptedonnotify("notify_melee_damage", "restart_anim", 1, attacker, weapon);
     self waittillmatch("restart_anim");

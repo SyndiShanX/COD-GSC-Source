@@ -599,7 +599,7 @@ bombs() {
   level.bombplanted = 0;
   level.bombdefused = 0;
   level.bombexploded = 0;
-  sdbomb = getent("sd_bomb", "targetname");
+  sdbomb = getEnt("sd_bomb", "targetname");
 
   if(isDefined(sdbomb)) {
     sdbomb delete();
@@ -614,7 +614,7 @@ bombs() {
     scriptlabel = trigger.script_label;
     visuals = getEntArray(bombzones[index].target, "targetname");
     clipbrushes = getEntArray("bombzone_clip" + scriptlabel, "targetname");
-    defusetrig = getent(visuals[0].target, "targetname");
+    defusetrig = getEnt(visuals[0].target, "targetname");
     bombsiteteamowner = game["defenders"];
     bombsiteallowuse = "enemy";
 
@@ -879,7 +879,7 @@ dropbombmodel(player, site) {
   trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
   tempangle = randomfloat(360);
   forward = (cos(tempangle), sin(tempangle), 0);
-  forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
+  forward = vectorNormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
   dropangles = vectortoangles(forward);
 
   if(isDefined(trace["surfacetype"]) && trace["surfacetype"] == "water") {
@@ -911,7 +911,7 @@ bombplanted(destroyedobj, player) {
   trace = bulletTrace(player.origin + vectorscale((0, 0, 1), 20.0), player.origin - vectorscale((0, 0, 1), 2000.0), 0, player);
   tempangle = randomfloat(360);
   forward = (cos(tempangle), sin(tempangle), 0);
-  forward = vectornormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
+  forward = vectorNormalize(forward - vectorscale(trace["normal"], vectordot(forward, trace["normal"])));
   dropangles = vectortoangles(forward);
   self dropbombmodel(player, destroyedobj.label);
   destroyedobj maps\mp\gametypes\_gameobjects::allowuse("none");

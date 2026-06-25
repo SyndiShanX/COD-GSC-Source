@@ -126,7 +126,7 @@ spawn_init() {
       level.pack_a_punch.interaction_trigger_height = 70;
     }
 
-    var_45fd85a3 = vectornormalize(anglestoright(zbarriers[i].angles)) * level.pack_a_punch.var_11fdb083;
+    var_45fd85a3 = vectorNormalize(anglestoright(zbarriers[i].angles)) * level.pack_a_punch.var_11fdb083;
 
     if(!isDefined(level.pack_a_punch.var_fcdf795b)) {
       level.pack_a_punch.var_fcdf795b = var_45fd85a3 + (0, 0, level.pack_a_punch.interaction_height);
@@ -180,7 +180,7 @@ spawn_init() {
       collision.angles = zbarriers[i].angles;
       collision setModel(#"zm_collision_perks1");
       collision.script_noteworthy = "clip";
-      collision disconnectpaths();
+      collision disconnectPaths();
     }
 
     zbarriers[i].unitrigger_stub.clip = collision;
@@ -193,8 +193,8 @@ spawn_init() {
 
     packa_rollers = spawn("script_origin", zbarriers[i].unitrigger_stub.origin);
     packa_timer = spawn("script_origin", zbarriers[i].unitrigger_stub.origin);
-    packa_rollers linkto(zbarriers[i]);
-    packa_timer linkto(zbarriers[i]);
+    packa_rollers linkTo(zbarriers[i]);
+    packa_timer linkTo(zbarriers[i]);
     zbarriers[i].packa_rollers = packa_rollers;
     zbarriers[i].packa_timer = packa_timer;
     zbarriers[i] zbarrierpieceuseattachweapon(3);
@@ -356,7 +356,7 @@ turn_on(origin, radius) {
   }
 
   println("<dev string:x7f>");
-  var_45fd85a3 = vectornormalize(anglestoright(pap_machine.angles)) * level.pack_a_punch.var_11fdb083;
+  var_45fd85a3 = vectorNormalize(anglestoright(pap_machine.angles)) * level.pack_a_punch.var_11fdb083;
   level.pack_a_punch.var_fcdf795b = var_45fd85a3 + (0, 0, level.pack_a_punch.interaction_height);
 
   if(!isDefined(pap_machine.unitrigger_stub)) {
@@ -495,7 +495,7 @@ function_72cf5db2() {
   b_power_off = !pap_machine is_on();
 
   if(b_power_off) {
-    self sethintstring(#"zombie/need_power");
+    self setHintString(#"zombie/need_power");
     pap_machine flag::wait_till("Pack_A_Punch_on");
   }
 
@@ -548,7 +548,7 @@ function_72cf5db2() {
         pap_machine flag::wait_till("pap_offering_gun");
 
         if(isDefined(pap_machine.pack_player)) {
-          self setcursorhint("HINT_WEAPON", pap_machine.unitrigger_stub.upgrade_weapon);
+          self setCursorHint("HINT_WEAPON", pap_machine.unitrigger_stub.upgrade_weapon);
           self wait_for_player_to_take(pap_machine.pack_player, pap_machine.unitrigger_stub.current_weapon, pap_machine.packa_timer, pap_machine.var_a86430cb, pap_machine.var_9c076b6, pap_machine.var_aa0d72d4);
         }
       }

@@ -47,7 +47,7 @@ init_stage() {
 }
 
 stage_vo_max() {
-  s_struct = getstruct("sq_gallows", "targetname");
+  s_struct = getStruct("sq_gallows", "targetname");
   m_maxis_vo_spot = spawn("script_model", s_struct.origin);
   m_maxis_vo_spot setModel("tag_origin");
   maxissay("vox_maxi_sidequest_ctw_5", m_maxis_vo_spot);
@@ -91,7 +91,7 @@ stage_logic_richtofen() {
 
   iprintlnbold("TPO: Richtofen started");
 
-  e_time_bomb_volume = getent("sq_tpo_timebomb_volume", "targetname");
+  e_time_bomb_volume = getEnt("sq_tpo_timebomb_volume", "targetname");
 
   do {
     flag_clear("sq_tpo_time_bomb_in_valid_location");
@@ -239,7 +239,7 @@ fake_time_warp() {
   maps\mp\zombies\_zm_weap_time_bomb::time_bomb_destroy_hud_elem();
   maps\mp\zombies\_zm_weap_time_bomb::_time_bomb_show_overlay();
   maps\mp\zombies\_zm_weap_time_bomb::_time_bomb_kill_all_active_enemies();
-  playsoundatposition("zmb_timebomb_timechange_2d_sq", (0, 0, 0));
+  playSoundAtPosition("zmb_timebomb_timechange_2d_sq", (0, 0, 0));
   maps\mp\zombies\_zm_weap_time_bomb::_time_bomb_hide_overlay();
 }
 
@@ -422,7 +422,7 @@ setup_unitrigger(str_hint, func_update) {
 piecetrigger_update_prompt(player) {
   can_use = self.stub piecestub_update_prompt(player);
   self setinvisibletoplayer(player, !can_use);
-  self sethintstring(self.stub.hint_string);
+  self setHintString(self.stub.hint_string);
   return can_use;
 }
 
@@ -473,7 +473,7 @@ unitrigger_think() {
 
   if(b_progress_bar_done) {
     self.stub.hint_string = "";
-    self sethintstring(self.stub.hint_string);
+    self setHintString(self.stub.hint_string);
 
     if(item_is_on_corpse()) {
       iprintlnbold(&"ZM_BURIED_SQ_FND");
@@ -567,7 +567,7 @@ ondrop_switch(player) {
 onspawn_switch(player) {}
 
 triggerthink_switch() {
-  if(isDefined(getent("guillotine_trigger", "targetname"))) {
+  if(isDefined(getEnt("guillotine_trigger", "targetname"))) {
     str_trigger_generator_name = "guillotine_trigger";
     level.sq_tpo_unitrig = maps\mp\zombies\_zm_buildables::buildable_trigger_think(str_trigger_generator_name, "buried_sq_tpo_switch", "none", "", 1, 0);
     level.sq_tpo_unitrig.ignore_open_sesame = 1;

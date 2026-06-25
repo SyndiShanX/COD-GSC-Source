@@ -24,11 +24,11 @@ main_end() {
 
 update_charger_position() {
   foreach(e_staff in level.a_elemental_staffs) {
-    e_staff moveto(e_staff.charger.origin, 0.05);
+    e_staff moveTo(e_staff.charger.origin, 0.05);
   }
 
   foreach(e_staff in level.a_elemental_staffs_upgraded) {
-    e_staff moveto(e_staff.charger.origin, 0.05);
+    e_staff moveTo(e_staff.charger.origin, 0.05);
   }
 }
 
@@ -53,7 +53,7 @@ spawned_collision_ffotd() {
   m_disconnector = spawn("script_model", (-568, -956, 160), 1);
   m_disconnector setModel("collision_ai_64x64x10");
   m_disconnector.angles = vectorscale((0, 1, 0), 35.0);
-  m_disconnector disconnectpaths();
+  m_disconnector disconnectPaths();
   m_disconnector ghost();
 
   if(!(isDefined(level.optimise_for_splitscreen) && level.optimise_for_splitscreen)) {
@@ -210,7 +210,7 @@ traversal_blocker_disabler() {
   b_too_close = 0;
 
   while(level.round_number < 10 && !b_too_close) {
-    a_players = getplayers();
+    a_players = getPlayers();
 
     foreach(player in a_players) {
       if(distancesquared(player.origin, pos1) < 4096 || distancesquared(player.origin, pos2) < 4096) {
@@ -221,7 +221,7 @@ traversal_blocker_disabler() {
     wait 1;
   }
 
-  m_traversal_blocker = getent("traversal_blocker", "targetname");
+  m_traversal_blocker = getEnt("traversal_blocker", "targetname");
   m_traversal_blocker.origin = m_traversal_blocker.origin + vectorscale((0, 0, -1), 10000.0);
   m_traversal_blocker connectpaths();
 }

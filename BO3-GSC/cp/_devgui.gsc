@@ -50,15 +50,15 @@ function devgui_player_commands() {
   level flag::wait_till("");
   rootclear = "";
   adddebugcommand(rootclear);
-  players = getplayers();
-  foreach(player in getplayers()) {
+  players = getPlayers();
+  foreach(player in getPlayers()) {
     rootclear = ("" + player.playername) + "";
     adddebugcommand(rootclear);
   }
   thread devgui_player_weapons();
   level.player_devgui_base = "";
   devgui_add_player_commands(level.player_devgui_base, "", 0);
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     ip1 = i + 1;
     devgui_add_player_commands(level.player_devgui_base, players[i].playername, ip1);
@@ -69,7 +69,7 @@ function devgui_player_connect() {
   if(!isDefined(level.player_devgui_base)) {
     return;
   }
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     if(players[i] != self) {
       continue;
@@ -131,7 +131,7 @@ function devgui_add_player_command(root, pid, cmdname, cmdindex, cmddvar) {
 function devgui_handle_player_command(cmd, playercallback, pcb_param) {
   pid = getdvarint("");
   if(pid > 0) {
-    player = getplayers()[pid - 1];
+    player = getPlayers()[pid - 1];
     if(isDefined(player)) {
       if(isDefined(pcb_param)) {
         player thread[[playercallback]](pcb_param);
@@ -140,7 +140,7 @@ function devgui_handle_player_command(cmd, playercallback, pcb_param) {
       }
     }
   } else {
-    array::thread_all(getplayers(), playercallback, pcb_param);
+    array::thread_all(getPlayers(), playercallback, pcb_param);
   }
   setDvar("", "");
 }
@@ -535,7 +535,7 @@ function devgui_player_weapons() {
   devgui_add_player_weapons(player_devgui_base_cp, "", 0, a_weapons_cp, "");
   devgui_add_player_weapons(player_devgui_base_cp, "", 0, a_misc_cp, "");
   devgui_add_player_gun_attachments(player_devgui_base_cp, "", 0, a_weapons_cp, "");
-  players = getplayers();
+  players = getPlayers();
   for(i = 0; i < players.size; i++) {
     ip1 = i + 1;
     adddebugcommand((((player_devgui_base_cp + players[i].playername) + "") + "") + "");
@@ -683,7 +683,7 @@ function devgui_test_chart_think() {
         level.test_chart_model = undefined;
       }
       if(val) {
-        player = getplayers()[0];
+        player = getPlayers()[0];
         direction = player getplayerangles();
         direction_vec = anglesToForward((0, direction[1], 0));
         scale = 120;

@@ -274,7 +274,7 @@ fire_rock_at_vtol_defalco(guy) {
   vtol_rpg = get_model_or_models_from_scene("speech_walk_with_defalco_defalco", "vtol_rpg");
   m_rocket = spawn_model("projectile_at4", vtol_rpg.origin, vtol_rpg.angles);
   playFXOnTag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
-  m_rocket moveto(level.veh_crashed_vtol.origin - vectorscale((0, 0, 1), 128.0), 0.5);
+  m_rocket moveTo(level.veh_crashed_vtol.origin - vectorscale((0, 0, 1), 128.0), 0.5);
   m_rocket waittill("movedone");
   m_rocket delete();
 }
@@ -283,7 +283,7 @@ fire_rock_at_vtol_nodefalco(guy) {
   vtol_rpg = get_model_or_models_from_scene("stage_backup_guards", "vtol_rpg");
   m_rocket = spawn_model("projectile_at4", vtol_rpg gettagorigin("tag_flash"), vtol_rpg.angles);
   playFXOnTag(getfx("morals_fhj_rocket_trail"), m_rocket, "tag_fx");
-  m_rocket moveto(level.veh_crashed_vtol.origin - vectorscale((0, 0, 1), 128.0), 0.5);
+  m_rocket moveTo(level.veh_crashed_vtol.origin - vectorscale((0, 0, 1), 128.0), 0.5);
   m_rocket waittill("movedone");
   m_rocket delete();
 }
@@ -622,11 +622,11 @@ sndchangeaudioroom(player) {
 }
 
 sndcrowdswell1(player) {
-  playsoundatposition("evt_morals_crowd_1", (-5557, -4576, 233));
+  playSoundAtPosition("evt_morals_crowd_1", (-5557, -4576, 233));
 }
 
 sndcrowdswell2(player) {
-  playsoundatposition("evt_morals_crowd_2", (-5557, -4576, 233));
+  playSoundAtPosition("evt_morals_crowd_2", (-5557, -4576, 233));
 }
 
 sndstartsnapshot(guy) {

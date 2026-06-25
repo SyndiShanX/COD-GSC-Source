@@ -71,7 +71,7 @@ function function_25d9a09f(vehicle) {
     }
 
     if(isDefined(enemy)) {
-      vectorfromenemy = vectornormalize(((vehicle.origin - enemy.origin)[0], (vehicle.origin - enemy.origin)[1], 0));
+      vectorfromenemy = vectorNormalize(((vehicle.origin - enemy.origin)[0], (vehicle.origin - enemy.origin)[1], 0));
       vehicle turretsettarget(0, enemy);
       vehicle waittilltimeout(1, #"turret_on_target");
       vehicle vehicle_ai::fire_for_time(2 + randomfloat(0.8), 0, enemy);

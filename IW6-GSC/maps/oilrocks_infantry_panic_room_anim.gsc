@@ -33,17 +33,17 @@ doors_swingopen(var_0) {
   thread common_scripts\utility::play_sound_in_space("scn_oilrocks_ending_door_kick", var_0 gettagorigin("J_Ankle_RI"));
   rotate_door_to_struct_ref("kick_door_left");
   rotate_door_to_struct_ref("kick_door_right");
-  var_1 = getent("kick_door_clip", "targetname");
+  var_1 = getEnt("kick_door_clip", "targetname");
   var_1 connectpaths();
   var_1 delete();
-  getent("kick_door_clip_player", "targetname") delete();
+  getEnt("kick_door_clip_player", "targetname") delete();
 }
 
 rotate_door_to_struct_ref(var_0) {
-  var_1 = getent(var_0, "targetname");
-  var_2 = common_scripts\utility::getstruct(var_0, "targetname");
-  var_1 rotateto(var_2.angles, 0.5, 0, 0.2);
-  var_1 moveto(var_2.origin, 0.5, 0, 0.2);
+  var_1 = getEnt(var_0, "targetname");
+  var_2 = common_scripts\utility::getStruct(var_0, "targetname");
+  var_1 rotateTo(var_2.angles, 0.5, 0, 0.2);
+  var_1 moveTo(var_2.origin, 0.5, 0, 0.2);
 }
 
 #using_animtree("vehicles");

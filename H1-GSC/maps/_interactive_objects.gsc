@@ -196,9 +196,9 @@ tv_logic() {
   }
 
   if(isDefined(self.target)) {
-    self.usetrig = getent(self.target, "targetname");
-    self.usetrig usetriggerrequirelookat();
-    self.usetrig setcursorhint("HINT_NOICON");
+    self.usetrig = getEnt(self.target, "targetname");
+    self.usetrig useTriggerRequireLookAt();
+    self.usetrig setCursorHint("HINT_NOICON");
   }
 
   if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "nolite") {
@@ -349,13 +349,13 @@ glass_logic() {
   var_3 = 0;
 
   if(isDefined(self.target)) {
-    var_2 = getent(self.target, "targetname");
+    var_2 = getEnt(self.target, "targetname");
   }
 
   if(isDefined(self.script_linkto)) {
     var_4 = common_scripts\utility::get_links();
-    var_5 = getent(var_4[0], "script_linkname");
-    self linkto(var_5);
+    var_5 = getEnt(var_4[0], "script_linkname");
+    self linkTo(var_5);
   }
 
   switch (self.destructible_type) {
@@ -371,7 +371,7 @@ glass_logic() {
 
   if(isDefined(var_2)) {
     var_3 = 99;
-    var_2 linkto(self);
+    var_2 linkTo(self);
     var_2 hide();
     var_1 = var_2 setcontents(0);
   }
@@ -446,8 +446,8 @@ glass_play_break_fx(var_0, var_1, var_2) {
 }
 
 oil_spill_think() {
-  self.end = common_scripts\utility::getstruct(self.target, "targetname");
-  self.start = common_scripts\utility::getstruct(self.end.target, "targetname");
+  self.end = common_scripts\utility::getStruct(self.target, "targetname");
+  self.start = common_scripts\utility::getStruct(self.end.target, "targetname");
   self.barrel = getclosestent(self.start.origin, getEntArray("explodable_barrel", "targetname"));
 
   if(isDefined(self.barrel)) {
@@ -455,7 +455,7 @@ oil_spill_think() {
     thread oil_spill_burn_after();
   }
 
-  self.extra = getent(self.target, "targetname");
+  self.extra = getEnt(self.target, "targetname");
   self setCanDamage(1);
   var_0 = undefined;
 
@@ -510,7 +510,7 @@ oil_spill_burn_after() {
 }
 
 oil_spill_burn(var_0, var_1) {
-  var_2 = vectornormalize(var_1 - var_0);
+  var_2 = vectorNormalize(var_1 - var_0);
   var_3 = distance(var_0, var_1);
   var_4 = 8;
   var_5 = maps\_utility::vector_multiply(var_2, var_4);
@@ -770,7 +770,7 @@ tincan_think() {
     var_2 = var_1.origin;
   }
 
-  var_3 = vectornormalize(self.origin - var_2);
+  var_3 = vectorNormalize(self.origin - var_2);
   var_3 = common_scripts\utility::vectorscale(var_3, 0.5 + randomfloat(1));
   self notify("death");
   playFX(level.breakables_fx["tincan"], self.origin, var_3);
@@ -800,7 +800,7 @@ helmet_logic() {
     var_2 = var_1.origin;
   }
 
-  var_3 = vectornormalize(self.origin - var_2);
+  var_3 = vectorNormalize(self.origin - var_2);
 
   if(!isDefined(self.dontremove) && var_1 == level.player) {
     thread animscripts\death::helmetlaunch(var_3);
@@ -988,7 +988,7 @@ breakable_think() {
     return;
   }
   if(isDefined(self.target)) {
-    var_1 = getent(self.target, "targetname");
+    var_1 = getEnt(self.target, "targetname");
 
     if(isDefined(var_1) && var_1.classname == "trigger_multiple") {
       var_1 thread breakable_think_triggered(self);
@@ -1170,7 +1170,7 @@ xenon_enable_auto_aim(var_0) {
 
 breakable_clip() {
   if(isDefined(self.target)) {
-    var_0 = getent(self.target, "targetname");
+    var_0 = getEnt(self.target, "targetname");
 
     if(var_0.classname == "script_brushmodel") {
       self.remove = var_0;
@@ -1366,7 +1366,7 @@ pieces_move(var_0) {
     return;
   }
   var_1 = spawn("script_origin", self.origin);
-  self linkto(var_1);
+  self linkTo(var_1);
   var_2 = self.origin + (randomfloat(10) - 5, randomfloat(10) - 5, randomfloat(10) + 5);
   var_3 = undefined;
 
@@ -1390,7 +1390,7 @@ pieces_move(var_0) {
 
     var_1 rotatevelocity((250 * var_4, 250 * var_5, randomfloat(100) * var_6), 2, 0, 0.5);
   } else if(isDefined(self.type) && self.type == "plate") {
-    var_3 = vectornormalize(var_2 - var_0);
+    var_3 = vectorNormalize(var_2 - var_0);
     var_3 = common_scripts\utility::vectorscale(var_3, 125 + randomfloat(25));
 
     if(randomint(100) > 50) {
@@ -1399,7 +1399,7 @@ pieces_move(var_0) {
       var_1 rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
-    var_3 = vectornormalize(var_2 - var_0);
+    var_3 = vectorNormalize(var_2 - var_0);
     var_3 = common_scripts\utility::vectorscale(var_3, 60 + randomfloat(50));
 
     if(randomint(100) > 50) {
@@ -1587,7 +1587,7 @@ fan_blade_rotate(var_0) {
 
   var_4 = self.angles;
   var_5 = anglestoright(self.angles) * 100;
-  var_5 = vectornormalize(var_5);
+  var_5 = vectorNormalize(var_5);
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "reverse") {
     var_1 = var_1 * -1;

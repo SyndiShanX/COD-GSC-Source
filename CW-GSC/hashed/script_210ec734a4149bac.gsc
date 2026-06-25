@@ -344,7 +344,7 @@ function private function_5c56272f(var_df71f499, var_c72571dd, var_2e23b67d) {
   }
 
   var_5f60ac6c = util::spawn_model(var_df71f499);
-  var_5f60ac6c linkto(self, var_c72571dd, (0, 0, 0), (0, 0, 0));
+  var_5f60ac6c linkTo(self, var_c72571dd, (0, 0, 0), (0, 0, 0));
   var_5f60ac6c.var_2e23b67d = var_2e23b67d;
   self.civilian_props[self.civilian_props.size] = var_5f60ac6c;
 }

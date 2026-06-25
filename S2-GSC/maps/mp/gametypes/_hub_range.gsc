@@ -17,7 +17,7 @@ func_52B9() {
   level.var_7081[2] = spawnStruct();
   level.var_7081[2].var_9087 = common_scripts\utility::func_46B5("plate_spawn_right", "targetname");
   level.var_7081[2].var_7083 = (2000, 600, 1500);
-  level.var_3C40 = getent("trigger_firing_range", "targetname");
+  level.var_3C40 = getEnt("trigger_firing_range", "targetname");
   if(!isDefined(level.var_3C40)) {
     return;
   }
@@ -51,7 +51,7 @@ func_52B9() {
     wait(1);
   }
 
-  level.var_3C3E = getent("firing_range_icon", "targetname");
+  level.var_3C3E = getEnt("firing_range_icon", "targetname");
   level.var_3C3E.var_50DA = 1;
   level.var_4F51[level.var_4F51.size] = level.var_3C3E;
 }
@@ -496,7 +496,7 @@ func_906D(param_00) {
     var_01.var_707D = param_00;
     param_00.var_4B11 = var_01;
     param_00.var_4B81 = 1;
-    var_01 linkto(param_00);
+    var_01 linkTo(param_00);
   }
 }
 
@@ -573,7 +573,7 @@ func_639A(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
     foreach(var_0F in level.var_707E[var_14]) {
       func_906D(var_0F);
-      var_0F moveto(var_0F.var_6C53, 1);
+      var_0F moveTo(var_0F.var_6C53, 1);
     }
   }
 }
@@ -700,11 +700,11 @@ func_63D4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   }
 
   if(self.var_001D[1] < 90) {
-    self rotateto((self.var_001D[0], 180, self.var_001D[2]), 0.5);
+    self rotateTo((self.var_001D[0], 180, self.var_001D[2]), 0.5);
     self.var_4DC9 = 1;
     self.var_8C3A = "blue";
   } else if(self.var_001D[1] > 90) {
-    self rotateto((self.var_001D[0], -0.0001, self.var_001D[2]), 0.5);
+    self rotateTo((self.var_001D[0], -0.0001, self.var_001D[2]), 0.5);
     self.var_4DC9 = 0;
     self.var_8C3A = "orange";
   }
@@ -744,11 +744,11 @@ func_63D4(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
 
     if(var_0E) {
-      level.var_9B6C["orange"] rotateto((0, 0, 0), 0.3);
+      level.var_9B6C["orange"] rotateTo((0, 0, 0), 0.3);
       level.var_9B6C["orange"] setCanDamage(1);
       level.var_9B6C["orange"].var_00BC = 99;
       level.var_9B6C["orange"].var_4DC9 = 0;
-      level.var_9B6C["blue"] rotateto((0, 0, 0), 0.3);
+      level.var_9B6C["blue"] rotateTo((0, 0, 0), 0.3);
       level.var_9B6C["blue"] setCanDamage(1);
       level.var_9B6C["blue"].var_00BC = 99;
       level.var_9B6C["blue"].var_4DC9 = 0;
@@ -786,7 +786,7 @@ func_63D3(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   param_01 thread maps\mp\gametypes\_missions::func_7750("ch_hq_firingrange");
   var_0C = playclientsound("mp_hub_allies_frange_wood_shot", undefined, self.var_0116);
-  self rotateto((90, 0, 0), 0.2);
+  self rotateTo((90, 0, 0), 0.2);
   self.var_4DC9 = 1;
   self setCanDamage(0);
   if(!isDefined(self.var_572E)) {
@@ -818,7 +818,7 @@ func_63D3(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     }
 
     wait(2);
-    self rotateto((0, 0, 0), 0.2);
+    self rotateTo((0, 0, 0), 0.2);
     self.var_4DC9 = 0;
     self setCanDamage(1);
     self.var_00BC = 99;
@@ -962,10 +962,10 @@ func_64D1(param_00, param_01, param_02) {
     param_02 = (0, 0, 0);
   }
 
-  self rotateto((0, self.var_001D[1], self.var_001D[2]), 0.5);
-  self moveto(param_00.var_0116 + param_02 + (0, 60, -10), param_01);
+  self rotateTo((0, self.var_001D[1], self.var_001D[2]), 0.5);
+  self moveTo(param_00.var_0116 + param_02 + (0, 60, -10), param_01);
   wait(param_01);
-  self rotateto((90, self.var_001D[1], self.var_001D[2]), 0.5);
+  self rotateTo((90, self.var_001D[1], self.var_001D[2]), 0.5);
   wait(0.5);
   if(self.var_4E00) {
     level.var_22FE = 1;
@@ -990,7 +990,7 @@ func_63D0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   var_0D = 0;
   if(self.var_7584 == "down") {
     self setCanDamage(0);
-    self rotateto((-90, 0, 0), 0.2);
+    self rotateTo((-90, 0, 0), 0.2);
     self.var_4DC9 = 1;
     self.var_7584 = "up";
     var_0D = 1;
@@ -1024,7 +1024,7 @@ func_63D1(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
   foreach(var_0F in self.var_3D77) {
     if(var_0F.var_7584 == "up") {
       var_0F setCanDamage(1);
-      var_0F rotateto((0, 0, 0), 0.2);
+      var_0F rotateTo((0, 0, 0), 0.2);
       var_0F.var_4DC9 = 0;
       var_0F.var_7584 = "down";
       var_0D++;
@@ -1056,7 +1056,7 @@ func_63D2(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
   var_0D = 0;
   if(!self.var_4DC9) {
-    self rotateto((-90, 0, 0), 0.2);
+    self rotateTo((-90, 0, 0), 0.2);
     self.var_4DC9 = 1;
     var_0D = 1;
   }
@@ -1128,19 +1128,19 @@ func_21F0(param_00, param_01) {
   switch (param_00) {
     case 1:
       for(var_05 = 0; var_05 < 5; var_05++) {
-        level.var_83EF[2][var_05] rotateto((level.var_83EF[2][var_05].var_001D[0], -0.0001, level.var_83EF[2][var_05].var_001D[2]), 0.5);
+        level.var_83EF[2][var_05] rotateTo((level.var_83EF[2][var_05].var_001D[0], -0.0001, level.var_83EF[2][var_05].var_001D[2]), 0.5);
         level.var_83EF[2][var_05].var_4DC9 = 0;
       }
 
       for(var_05 = 5; var_05 < 8; var_05++) {
-        level.var_83EF[2][var_05] rotateto((180, 0, 0), 0.2);
+        level.var_83EF[2][var_05] rotateTo((180, 0, 0), 0.2);
         level.var_83EF[2][var_05].var_4DC9 = 0;
       }
       break;
 
     case 2:
       foreach(var_03 in level.var_83EF[3]) {
-        var_03 rotateto((0, 0, 0), 0.3);
+        var_03 rotateTo((0, 0, 0), 0.3);
         var_03 setCanDamage(1);
         var_03.var_4DC9 = 0;
         var_03.var_00BC = 99;
@@ -1314,7 +1314,7 @@ func_2DDB(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
     foreach(var_0E in level.var_707E[var_12]) {
       func_906D(var_0E);
-      var_0E moveto(var_0E.var_6C53, 1);
+      var_0E moveTo(var_0E.var_6C53, 1);
     }
   }
 

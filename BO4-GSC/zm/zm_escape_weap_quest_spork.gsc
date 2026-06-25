@@ -58,7 +58,7 @@ __main__() {
   level flag::wait_till(#"spoon_quest_completed");
   zm_spawner::register_zombie_death_event_callback(&function_85cfc2a3);
 
-  foreach(e_player in getplayers()) {
+  foreach(e_player in getPlayers()) {
     e_player thread function_537f413d();
   }
 
@@ -120,8 +120,8 @@ function_cd53088e(params) {
       wait 0.1;
       e_player clientfield::set_to_player("" + #"fill_blood", 8);
       e_player flag::set(#"hash_3ade5b9424a14f81");
-      playsoundatposition(#"hash_70c32e03adb92ec1", level.var_92a01e03.origin);
-      playsoundatposition(#"hash_2f578ca03993ba56", level.var_4b9d0136.origin);
+      playSoundAtPosition(#"hash_70c32e03adb92ec1", level.var_92a01e03.origin);
+      playSoundAtPosition(#"hash_2f578ca03993ba56", level.var_4b9d0136.origin);
       level flag::set(#"hash_1a367a4a0dfb0471");
 
       if(level flag::get(#"hash_29dc018e9551ecf")) {
@@ -134,7 +134,7 @@ function_cd53088e(params) {
 
 function_5ec2f851() {
   self endon(#"disconnect", #"hash_17b0a36fa17ca61a");
-  var_5c4729d5 = getent("t_r_br_sp2_7", "targetname");
+  var_5c4729d5 = getEnt("t_r_br_sp2_7", "targetname");
 
   while(true) {
     if(self istouching(var_5c4729d5) && self zm_utility::is_player_looking_at(level.var_4b9d0136.origin, 0.7, 0)) {
@@ -331,7 +331,7 @@ function_adc74a0d(e_grenade, n_grenade_charge_power) {
     mdl_tomahawk = zm_weap_tomahawk::tomahawk_spawn(e_grenade.origin);
     mdl_tomahawk.n_grenade_charge_power = n_grenade_charge_power;
     var_7b566fb = util::spawn_model("wpn_t8_zm_spork_world", e_grenade.origin, s_spork.angles);
-    var_7b566fb linkto(mdl_tomahawk);
+    var_7b566fb linkTo(mdl_tomahawk);
     self thread zm_weap_tomahawk::tomahawk_return_player(mdl_tomahawk, undefined, 800);
     self thread function_55a05382(mdl_tomahawk, var_7b566fb);
     return true;

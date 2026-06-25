@@ -104,9 +104,9 @@ player_eject_watcher() {
         if(time >= 6) {
           if(isDefined(self.point)) {
             if(!positionwouldtelefrag(self.point.origin)) {
-              who setorigin(self.point.origin);
+              who setOrigin(self.point.origin);
               who playlocalsound(level.zmb_laugh_alias);
-              who playrumbleonentity("damage_light");
+              who playRumbleOnEntity("damage_light");
               earthquake(0.5, 0.5, who.origin, 100);
               who thread ejected_overrun(self);
             }

@@ -180,10 +180,10 @@ loadkrakenvariablenumberofstringentries(var_0) {
       break;
     }
 
-    var_6 = getent(var_5, "targetname");
+    var_6 = getEnt(var_5, "targetname");
 
     if(!isDefined(var_6)) {
-      var_6 = common_scripts\utility::getstruct(var_5, "targetname");
+      var_6 = common_scripts\utility::getStruct(var_5, "targetname");
     }
 
     if(isDefined(var_6)) {
@@ -365,7 +365,7 @@ waittil_goal_and_suicide(var_0) {
   self notify("alien_main_loop_restart");
   common_scripts\utility::waitframe();
   self scragentsetgoalnode(var_0);
-  self scragentsetgoalradius(128);
+  self scragentsetgoalRadius(128);
   common_scripts\utility::waittill_any_timeout(20, "goal_reached");
   self suicide();
 }
@@ -666,7 +666,7 @@ runheatedphase() {
 
 setupheatedsmashvolume() {
   var_0 = level.alien_types["kraken"].attributes["heated_smash_volume"];
-  var_1 = getent(var_0, "targetname");
+  var_1 = getEnt(var_0, "targetname");
   var_2 = level.alien_types["kraken"].attributes[self.stage]["heated_smash_tentacle_name"];
   thread attacktriggerwait(var_1, var_2);
 }
@@ -755,7 +755,7 @@ initializeattacktriggers() {
 
   foreach(var_2 in level.alien_types["kraken"].attributes["tentacle_names"]) {
     var_3 = level.alien_types["kraken"].attributes[var_2][var_0];
-    var_4 = getent(var_3, "targetname");
+    var_4 = getEnt(var_3, "targetname");
     self.current_smash_triggers[var_2] = var_4;
     thread attacktriggerwait(var_4, var_2);
   }
@@ -852,7 +852,7 @@ performmeleeattack(var_0) {
   }
 
   self scragentsetgoalpos(self.origin);
-  self scragentsetgoalradius(20000);
+  self scragentsetgoalRadius(20000);
   self scragentbeginmelee(var_0);
   self waittill("melee_complete");
 }

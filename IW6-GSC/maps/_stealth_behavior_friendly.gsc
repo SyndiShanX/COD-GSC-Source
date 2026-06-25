@@ -35,7 +35,7 @@ friendly_state_spotted() {
   self allowedstances("prone", "crouch", "stand");
 
   if(self.type != "dog" || !isDefined(self.in_melee) || !self.in_melee) {
-    maps\_utility::anim_stopanimscripted();
+    maps\_utility::anim_stopanimScripted();
   }
 }
 

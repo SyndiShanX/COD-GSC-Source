@@ -48,7 +48,7 @@ ber1_main() {
 
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    start = getent("player_train_start" + i, "targetname");
+    start = getEnt("player_train_start" + i, "targetname");
     players[i] setOrigin(start.origin);
     players[i] setPlayerAngles(start.angles);
   }
@@ -84,19 +84,19 @@ start_ruins() {
 
   wait(0.05);
 
-  tank = getent("ev1_tank2", "targetname");
+  tank = getEnt("ev1_tank2", "targetname");
   vnode = getvehiclenode("auto3484", "targetname");
   tank attachpath(vnode);
   tank thread maps\_vehicle::vehicle_paths(vnode);
 
-  tank = getent("ev1_tank1", "targetname");
+  tank = getEnt("ev1_tank1", "targetname");
   vnode = getvehiclenode("auto3398", "targetname");
   tank attachpath(vnode);
   tank thread maps\_vehicle::vehicle_paths(vnode);
   tank.rollingdeath = 1;
   tank thread maps\ber1_event1::tank_rolling_death();
 
-  tank = getent("tank_3", "targetname");
+  tank = getEnt("tank_3", "targetname");
   vnode = getvehiclenode("auto3412", "targetname");
   tank attachpath(vnode);
   tank thread maps\_vehicle::vehicle_paths(vnode);
@@ -130,7 +130,7 @@ start_midruins() {
   maps\ber1_event1::spawn_tanks();
   wait(0.05);
 
-  tank = getent("ev1_tank1", "targetname");
+  tank = getEnt("ev1_tank1", "targetname");
   vnode = getvehiclenode("auto3988", "targetname");
   tank attachpath(vnode);
   tank thread maps\_vehicle::vehicle_paths(vnode);
@@ -139,7 +139,7 @@ start_midruins() {
   tank.rollingdeath = 1;
   tank thread maps\ber1_event1::tank_rolling_death();
 
-  tank = getent("ev1_tank2", "targetname");
+  tank = getEnt("ev1_tank2", "targetname");
   vnode = getvehiclenode("auto3495", "targetname");
   tank attachpath(vnode);
   tank thread maps\_vehicle::vehicle_paths(vnode);
@@ -184,8 +184,8 @@ start_street() {
     pieces[i] notsolid();
     pieces[i] connectpaths();
   }
-  getent("delete_chunk", "targetname") connectpaths();
-  getent("delete_chunk", "targetname") delete();
+  getEnt("delete_chunk", "targetname") connectpaths();
+  getEnt("delete_chunk", "targetname") delete();
 
   allies = getaiarray("allies");
   for(i = 0; i < allies.size; i++) {
@@ -196,7 +196,7 @@ start_street() {
 
   level thread maps\ber1_event2::event2_split_squad();
 
-  friendly_trig = getent("auto3595", "target");
+  friendly_trig = getEnt("auto3595", "target");
   friendly_trig notify("trigger");
 
   simple_floodspawn("street_right_spawners_1");
@@ -205,7 +205,7 @@ start_street() {
 
   set_color_chain("courtyard_squad_split");
 
-  drone_trig = getent("street_drones_1", "script_noteworthy");
+  drone_trig = getEnt("street_drones_1", "script_noteworthy");
   drone_trig notify("trigger");
 
   level thread maps\ber1_event2::street_first_floodspawners();
@@ -261,12 +261,12 @@ start_tankride() {
 
   wait(0.05);
 
-  tank = getent("street_tank_1", "targetname");
+  tank = getEnt("street_tank_1", "targetname");
   vnode = getvehiclenode("auto3894", "targetname");
   tank attachpath(vnode);
   tank thread maps\_vehicle::vehicle_paths(vnode);
 
-  tank = getent("street_tank_2", "targetname");
+  tank = getEnt("street_tank_2", "targetname");
   vnode = getvehiclenode("auto3933", "targetname");
   tank attachpath(vnode);
   tank thread maps\_vehicle::vehicle_paths(vnode);
@@ -275,9 +275,9 @@ start_tankride() {
 setup_heroes() {
   level.heroes = [];
 
-  level.reznov = getent("sarge", "script_noteworthy");
-  level.chernov = getent("chernov", "script_noteworthy");
-  level.commissar = getent("commissar", "script_noteworthy");
+  level.reznov = getEnt("sarge", "script_noteworthy");
+  level.chernov = getEnt("chernov", "script_noteworthy");
+  level.commissar = getEnt("commissar", "script_noteworthy");
 
   level.heroes[0] = level.reznov;
   level.heroes[1] = level.chernov;

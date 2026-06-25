@@ -125,7 +125,7 @@ exo_hover_update() {
   Assert(dischargeRate > 0);
 
   while(true) {
-    self PlayRumbleOnEntity("damage_heavy");
+    self playRumbleOnEntity("damage_heavy");
 
     velocity = self GetVelocity();
     latSpeed = Length2D(velocity);

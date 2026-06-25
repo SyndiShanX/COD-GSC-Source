@@ -39,7 +39,7 @@ function gadget_combat_efficiency_enabled() {
 
 function function_43cda488() {
   if(isDefined(self.team)) {
-    teammates = getplayers(self.team);
+    teammates = getPlayers(self.team);
 
     foreach(player in teammates) {
       if(player gadget_combat_efficiency_enabled()) {
@@ -53,7 +53,7 @@ function function_43cda488() {
 
 function function_f71ec759(&suppliers, var_5ce08260) {
   if(isDefined(self.team)) {
-    teammates = getplayers(self.team);
+    teammates = getPlayers(self.team);
 
     foreach(teammate in teammates) {
       if(!isDefined(teammate)) {
@@ -367,7 +367,7 @@ function aoe_friendlies(weapon, aoe) {
       aoe_origin = self.origin;
     }
 
-    friendlies_in_radius = getplayers(aoe_team, aoe_origin, radius);
+    friendlies_in_radius = getPlayers(aoe_team, aoe_origin, radius);
 
     foreach(player in friendlies_in_radius) {
       if(has_reapply_check && player[[aoe.check_reapply_time_func]](aoe)) {

@@ -72,7 +72,7 @@ func_DE0C() {
     if(isDefined(var_5)) {
       var_14 = length(var_5);
       if(var_14 > 20) {
-        var_15 = vectornormalize(var_5);
+        var_15 = vectorNormalize(var_5);
         var_10 = 20;
         if(isDefined(var_7) && var_7 == "MOD_IMPACT") {
           var_10 = 3;
@@ -94,10 +94,10 @@ func_DE0C() {
     }
 
     var_12 = scripts\engine\utility::spawn_tag_origin(var_6);
-    var_13 = vectornormalize(self.origin - var_6);
+    var_13 = vectorNormalize(self.origin - var_6);
     var_14 = vectortoangles(var_13 * -1);
     var_12.angles = scripts\engine\utility::flat_angle(var_14);
-    var_12 linkto(self);
+    var_12 linkTo(self);
     if(soundexists("o2_barrel_hiss_loop")) {
       var_12 thread scripts\engine\utility::play_loop_sound_on_entity("o2_barrel_hiss_loop");
     }

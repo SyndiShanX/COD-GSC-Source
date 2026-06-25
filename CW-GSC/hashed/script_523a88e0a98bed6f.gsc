@@ -38,7 +38,7 @@ function function_25a6167c(str_objective) {
   level thread namespace_9e5ef376::function_b7e649c0(1);
   var_dbdb0082 = getEntArray("veh_courtyard_static", "targetname");
   array::run_all(var_dbdb0082, &val::set, #"hash_7d97d109d0838d04", "ignoreme", 1);
-  var_fd4c649f = getent("aa_courtyard", "targetname");
+  var_fd4c649f = getEnt("aa_courtyard", "targetname");
   var_fd4c649f namespace_534279a::function_86201bb7();
 }
 
@@ -79,13 +79,13 @@ function function_7376de2a() {
   level endon(#"game_ended");
   level flag::wait_till("flg_catacombs_fx_event");
   exploder::exploder("fxexp_catacomb_tunnel_debris_falling");
-  level.player playrumbleonentity("grenade_rumble");
+  level.player playRumbleOnEntity("grenade_rumble");
   snd::client_msg("audio_catacombs_bomb_rumble");
 }
 
 function catacombs_adler_catchup() {
   level flag::wait_till("flg_catacombs_adler_catchup");
-  var_fe52e195 = getent("catacombs_adler_catchup_volume", "targetname");
+  var_fe52e195 = getEnt("catacombs_adler_catchup_volume", "targetname");
 
   if(!level.adler istouching(var_fe52e195)) {
     var_57d1bda8 = struct::get("catacombs_adler_catchup");
@@ -96,15 +96,15 @@ function catacombs_adler_catchup() {
 function function_2cd9c163(params) {
   self endon(#"death");
   self endon(#"disconnected");
-  var_2406aadb = getent("vol_catacombs_advance_5", "targetname");
+  var_2406aadb = getEnt("vol_catacombs_advance_5", "targetname");
   var_2406aadb trigger::use();
   self callback::remove_on_weapon_fired(&function_2cd9c163);
   self callback::remove_on_grenade_fired(&function_2cd9c163);
 }
 
 function function_861ceb4d(b_enabled) {
-  var_c0d91128 = getent("catacomb_backtrack_door", "targetname");
-  var_a1c2e28e = getent("catacomb_backtrack_door_collision", "targetname");
+  var_c0d91128 = getEnt("catacomb_backtrack_door", "targetname");
+  var_a1c2e28e = getEnt("catacomb_backtrack_door_collision", "targetname");
 
   if(!isDefined(b_enabled)) {
     b_enabled = 0;
@@ -113,10 +113,10 @@ function function_861ceb4d(b_enabled) {
   if(b_enabled) {
     var_c0d91128 show();
     var_c0d91128 solid();
-    var_c0d91128 disconnectpaths();
+    var_c0d91128 disconnectPaths();
     var_a1c2e28e show();
     var_a1c2e28e solid();
-    var_a1c2e28e disconnectpaths();
+    var_a1c2e28e disconnectPaths();
     return;
   }
 
@@ -206,7 +206,7 @@ function private function_d044d1e1(var_14b6bdf, var_dab80c52) {
     function_1eaaceab(a_ai);
 
     if(a_ai.size > 0) {
-      vol_goal = getent(var_dab80c52, "targetname");
+      vol_goal = getEnt(var_dab80c52, "targetname");
       array::thread_all(a_ai, &ai::force_goal, vol_goal);
     }
   }
@@ -241,7 +241,7 @@ function private function_cf9cf841() {
     level.var_161f8862[0].favoriteenemy = level.player;
     level.var_161f8862[0] namespace_631d466b::function_6aedb63(var_65a28c66.origin, var_65a28c66.radius);
     level.var_161f8862[0] namespace_631d466b::function_90791fca(level.adler);
-    var_47acec0 = getent("catacomb_door", "targetname");
+    var_47acec0 = getEnt("catacomb_door", "targetname");
     var_47acec0 movez(96 * -1, 0.5);
     snd::client_targetname(var_47acec0, "juggernaut_door_close");
     level thread function_22082c46();
@@ -261,7 +261,7 @@ function private function_cf9cf841() {
     wait 3.5;
     var_47acec0 movez(96, 2);
     snd::client_targetname(var_47acec0, "juggernaut_door_open");
-    var_a861d028 = getent("catacomb_door_clip", "targetname");
+    var_a861d028 = getEnt("catacomb_door_clip", "targetname");
     var_a861d028 notsolid();
   }
 
@@ -300,7 +300,7 @@ function function_d64774a5() {
 }
 
 function function_b12347a2() {
-  var_9717fa06 = getent("jugg_spawn", "targetname");
+  var_9717fa06 = getEnt("jugg_spawn", "targetname");
   level thread trigger::look_trigger(var_9717fa06);
   var_9717fa06 waittill(#"trigger_look");
   var_9717fa06 notify(#"death");
@@ -324,7 +324,7 @@ function private function_7711f534(var_477935fc, str_notify) {
 }
 
 function function_e369720f(var_fed62d00) {
-  var_b853736f = getent("catacombs_juggernaut_entrance_trigger", "targetname");
+  var_b853736f = getEnt("catacombs_juggernaut_entrance_trigger", "targetname");
 
   while(!level flag::get("flg_catacombs_juggernaut_entered")) {
     s_notify = var_b853736f waittill(#"trigger");
@@ -346,7 +346,7 @@ function private function_45fc7e20() {
 function private function_59a85291() {
   self endon(#"flg_catacomb_first_juggernaut_killed");
   level.var_161f8862[0] endon(#"death");
-  v_goal = getent(self.target, "targetname");
+  v_goal = getEnt(self.target, "targetname");
 
   while(true) {
     self waittill(#"trigger");
@@ -412,7 +412,7 @@ function function_794e687() {
 }
 
 function function_842a2f86() {
-  var_ce25a17e = getplayers()[0];
+  var_ce25a17e = getPlayers()[0];
   var_9499e890 = ["chapel", "st_nicholas_church_02", "west_wall_blockout", "bell_tower_complete", "church_back_tower_01", "west_wall_blockout", "interior_cathedral_01"];
   level thread function_b43558fa(var_ce25a17e, var_9499e890);
   level flag::wait_till("flg_catacomb_all_juggernauts_killed");

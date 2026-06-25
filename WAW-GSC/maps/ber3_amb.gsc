@@ -50,11 +50,11 @@ main() {
 
 battle_cry() {
   level waittill("battle_cry");
-  yell = getent("battle_cry", "targetname");
-  playsoundatposition("See1_IGD_700A_RURS", yell.origin);
+  yell = getEnt("battle_cry", "targetname");
+  playSoundAtPosition("See1_IGD_700A_RURS", yell.origin);
 }
 battle_cry2() {
   level waittill("pwn_joyal");
-  yell = getent("battle_cry", "targetname");
-  playsoundatposition("See1_IGD_700A_RURS", yell.origin);
+  yell = getEnt("battle_cry", "targetname");
+  playSoundAtPosition("See1_IGD_700A_RURS", yell.origin);
 }

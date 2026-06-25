@@ -57,7 +57,7 @@ func_7879() {
     } else {
       if(!common_scripts\utility::func_3C77("flag_both_hints_seen") && !common_scripts\utility::func_3C77("flag_player_has_head")) {
         if(1) {
-          var_00 = getent("paintings_hint_head_jar", "targetname");
+          var_00 = getEnt("paintings_hint_head_jar", "targetname");
           var_01 = lib_0557::func_782F(undefined, var_00);
           lib_0557::func_781D("7 Voice paintings", var_01, 0);
         }
@@ -130,14 +130,14 @@ mainpathcompletionlistener() {
 
 func_8A24() {
   level endon("flag_both_hints_seen");
-  var_00 = getent("head_hint_trig", "targetname");
+  var_00 = getEnt("head_hint_trig", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
 
-  var_00.var_5877 = getent("paintings_hint_head_jar", "targetname");
+  var_00.var_5877 = getEnt("paintings_hint_head_jar", "targetname");
   var_00.var_5877 setModel("zmb_med_jar_04_nodecals");
-  var_00 usetriggerrequirelookat(1);
+  var_00 useTriggerRequireLookAt(1);
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!common_scripts\utility::func_562E(var_01.var_306F)) {
@@ -167,13 +167,13 @@ func_8A24() {
 
 func_8A25() {
   level endon("flag_both_hints_seen");
-  var_00 = getent("painting_hint_trig", "targetname");
+  var_00 = getEnt("painting_hint_trig", "targetname");
   if(!isDefined(var_00)) {
     return;
   }
 
-  var_00.var_6DEE = getent("paintings_hint_painting", "targetname");
-  var_00 usetriggerrequirelookat(1);
+  var_00.var_6DEE = getEnt("paintings_hint_painting", "targetname");
+  var_00 useTriggerRequireLookAt(1);
   for(;;) {
     var_00 waittill("trigger", var_01);
     if(!common_scripts\utility::func_562E(var_01.var_3070)) {
@@ -202,9 +202,9 @@ func_8A25() {
 }
 
 func_8A46() {
-  level.var_357F = getent("sonic_amp_confirm_code_trig", "targetname");
+  level.var_357F = getEnt("sonic_amp_confirm_code_trig", "targetname");
   level.var_357F common_scripts\utility::func_9D9F();
-  level.var_357F.var_0CAB = getent("sonic_amp_control", "targetname");
+  level.var_357F.var_0CAB = getEnt("sonic_amp_control", "targetname");
   if(isDefined(level.var_357F.var_0CAB)) {
     level.var_357F.var_0CAB thread maps\mp\mp_zombie_nest_ee_util::func_4D77("off");
   }
@@ -280,7 +280,7 @@ func_5308() {
   for(var_00 = 0; var_00 < level.var_3580.size; var_00++) {
     level.var_3580[var_00] func_A185(level.var_3584[var_00]);
     if(isDefined(level.var_3580[var_00].var_9E46)) {
-      level.var_3580[var_00].var_9E46 sethintstring(&"ZOMBIE_NEST_AMP_CHANGE_CODE");
+      level.var_3580[var_00].var_9E46 setHintString(&"ZOMBIE_NEST_AMP_CHANGE_CODE");
       level.var_3580[var_00].var_9E46.var_4D91 = lib_0559::func_7BE3(level.var_3580[var_00].var_9E46, "vog");
       level.var_3580[var_00] thread func_8B29(var_00);
     }
@@ -315,7 +315,7 @@ func_2580(param_00) {
   level endon("game_ended");
   level endon("vog_disabled");
   for(;;) {
-    self sethintstring(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
+    self setHintString(&"ZOMBIE_NEST_AMP_CONFIRM_CODE");
     self waittill("trigger", var_01);
     var_02 = common_scripts\utility::func_46B5("VOG_effects_attach", "targetname");
     var_03 = 1;
@@ -370,7 +370,7 @@ func_2580(param_00) {
         thread func_2EBA(0, var_01);
       }
 
-      self sethintstring(&"ZOMBIE_NEST_AMP_RESETTING");
+      self setHintString(&"ZOMBIE_NEST_AMP_RESETTING");
       wait(level.var_357E);
     }
   }
@@ -653,7 +653,7 @@ func_2E7D(param_00) {
     foreach(var_07 in var_05.var_9DC2) {
       if(var_01 lib_0547::func_0696(var_07)) {
         var_07 disableplayeruse(var_01);
-        var_07 sethintstring(&"ZOMBIES_EMPTY_STRING");
+        var_07 setHintString(&"ZOMBIES_EMPTY_STRING");
         var_07 notify("player_checked_a_painting");
       }
     }
@@ -743,7 +743,7 @@ func_455A() {
   var_00 = [];
   var_01 = self.var_01A2;
   for(;;) {
-    var_02 = getent(var_01, "targetname");
+    var_02 = getEnt(var_01, "targetname");
     if(common_scripts\utility::func_0F79(var_00, var_02)) {
       break;
     } else {

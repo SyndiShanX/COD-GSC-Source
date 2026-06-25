@@ -73,7 +73,7 @@ function function_2dc6261d() {
     #state: "disabled"});
 
   if(soundexists(#"fuse_switch")) {
-    playsoundatposition(#"fuse_switch", getplayers()[0].origin);
+    playSoundAtPosition(#"fuse_switch", getPlayers()[0].origin);
   }
 }
 

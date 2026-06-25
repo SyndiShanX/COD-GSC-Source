@@ -431,7 +431,7 @@ enemy_alert_level_forget(enemy, delay) {
 
 enemy_stop_current_behavior() {
   if(!self ent_flag("_stealth_behavior_reaction_anim")) {
-    self anim_stopanimscripted();
+    self anim_stopanimScripted();
     self notify("stop_animmode");
     self notify("stop_loop");
   }
@@ -779,7 +779,7 @@ ai_clear_custom_animation_reaction_and_idle(waitanimend) {
   }
   self._stealth.behavior.event.custom_animation.node notify("stop_loop");
   if(!isDefined(waitanimend) || waitanimend == false) {
-    self stopanimscripted();
+    self stopanimScripted();
   }
 
   self ai_clear_custom_animation_reaction();

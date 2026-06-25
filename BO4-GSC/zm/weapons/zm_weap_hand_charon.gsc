@@ -143,9 +143,9 @@ function_b04434cf(b_up) {
   forward_view_angles = anglesToForward(self getplayerangles());
 
   if(forward_view_angles[2] < -0.7) {
-    var_ccb70dad = vectornormalize((forward_view_angles[0], forward_view_angles[1], -0.25));
+    var_ccb70dad = vectorNormalize((forward_view_angles[0], forward_view_angles[1], -0.25));
   } else {
-    var_ccb70dad = vectornormalize(forward_view_angles);
+    var_ccb70dad = vectorNormalize(forward_view_angles);
   }
 
   a_e_targets = function_3874b38f();
@@ -282,7 +282,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
   }
 
   if(!isDefined(ai_zombie) || isDefined(ai_zombie.var_3df1a748) && ai_zombie.var_3df1a748) {
-    e_projectile moveto(v_end, n_time);
+    e_projectile moveTo(v_end, n_time);
     e_projectile waittill(#"movedone");
     e_projectile clientfield::set("" + #"charon_impact", 1);
     waitframe(1);
@@ -301,7 +301,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
       }
 
       if(isDefined(ai_zombie)) {
-        e_projectile moveto(ai_zombie getcentroid(), n_time);
+        e_projectile moveTo(ai_zombie getcentroid(), n_time);
         wait n_time - 0.05;
       }
     } else if(isDefined(ai_zombie)) {
@@ -323,11 +323,11 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
       }
 
       if(e_projectile.n_index === 1) {
-        e_projectile moveto(v_right_end, n_time);
+        e_projectile moveTo(v_right_end, n_time);
       } else if(e_projectile.n_index === 2) {
-        e_projectile moveto(v_left_end, n_time);
+        e_projectile moveTo(v_left_end, n_time);
       } else {
-        e_projectile moveto(v_end, n_time);
+        e_projectile moveTo(v_end, n_time);
       }
 
       wait n_time - 0.05;
@@ -379,7 +379,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
         }
 
         if(isDefined(v_end) && isDefined(ai_zombie)) {
-          e_projectile moveto(v_end, n_time);
+          e_projectile moveTo(v_end, n_time);
         }
 
         waitframe(1);
@@ -399,7 +399,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
   }
 
   if(isDefined(v_end)) {
-    e_projectile moveto(v_end, 0.05);
+    e_projectile moveTo(v_end, 0.05);
     e_projectile waittill(#"movedone");
   }
 
@@ -628,7 +628,7 @@ function_39e6dc29(v_end) {
     n_time = 0.1;
   }
 
-  self moveto(v_end, n_time);
+  self moveTo(v_end, n_time);
   self waittill(#"movedone");
   self clientfield::set("" + #"charon_impact", 2);
   wait 0.1;
@@ -776,7 +776,7 @@ function_31d8c58() {
   self.var_131a4fb0 = 1;
   self notsolid();
   self clientfield::set("" + #"charon_pool_victim", 1);
-  var_f9d1df1d = vectornormalize(anglesToForward(self.angles));
+  var_f9d1df1d = vectorNormalize(anglesToForward(self.angles));
   mdl_tag = util::spawn_model("tag_origin", self.origin, self.angles);
   mdl_tag.var_58b95 = util::spawn_model("tag_origin", anglestoright(self.angles) * 8 + self.origin + var_f9d1df1d * 6, self.angles + (0, -90, 0));
   mdl_tag.var_31436e10 = util::spawn_model("tag_origin", anglestoright(self.angles) * -6 + self.origin + var_f9d1df1d * 6, self.angles + (0, 90, 0));

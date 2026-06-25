@@ -60,8 +60,8 @@ func_A79C() {
   precachestring(&"EUROPA_DBL_JUMP1");
   level.player scripts\sp\utility::func_65E0("pressed_jump_once");
   level.player scripts\sp\utility::func_65E0("pressed_jump_twice");
-  var_0 = getent("office_breach_door", "targetname");
-  var_1 = scripts\engine\utility::getstruct("office_cutdoor_base_position", "targetname");
+  var_0 = getEnt("office_breach_door", "targetname");
+  var_1 = scripts\engine\utility::getStruct("office_cutdoor_base_position", "targetname");
   var_0.origin = var_1.origin;
   scripts\engine\utility::array_thread(getEntArray("posed_script_models", "targetname"), ::func_D6A7);
   thread func_94E6();
@@ -142,7 +142,7 @@ func_1351D() {
 }
 
 func_9287() {
-  var_0 = getent("ice_fall_trig", "targetname");
+  var_0 = getEnt("ice_fall_trig", "targetname");
   var_1 = 0;
   var_2 = var_0 scripts\engine\utility::get_target_ent();
   for(;;) {
@@ -183,7 +183,7 @@ func_1145E() {
 }
 
 func_CF8F() {
-  var_0 = scripts\engine\utility::getclosest(scripts\engine\utility::getstruct("platform_scene", "targetname").origin, level.var_EBCA, 99999);
+  var_0 = scripts\engine\utility::getclosest(scripts\engine\utility::getStruct("platform_scene", "targetname").origin, level.var_EBCA, 99999);
   if(getdvarint("debug_europa")) {
     thread scripts\sp\utility::func_5B4D(var_0, level.player, 1, 0, 0, 20);
   }
@@ -231,11 +231,11 @@ func_11462() {
 
 func_1146A() {
   scripts\sp\utility::func_22CA("takedown_enemy", ::func_11466);
-  var_0 = scripts\engine\utility::getstruct("takedown_struct", "targetname");
+  var_0 = scripts\engine\utility::getStruct("takedown_struct", "targetname");
   var_0.enemy = scripts\sp\utility::func_107EA("takedown_enemy", 1);
   var_0.enemy thread scripts\sp\maps\europa\europa_intro::func_1081C();
   level.var_EBBC.var_1A29 = var_0.enemy scripts\engine\utility::spawn_tag_origin();
-  level.var_EBBC.var_1A29 linkto(var_0.enemy, "tag_origin", (0, 0, 20), (0, 0, 0));
+  level.var_EBBC.var_1A29 linkTo(var_0.enemy, "tag_origin", (0, 0, 20), (0, 0, 0));
   scripts\engine\utility::flag_wait("takedown_start");
   level.var_EBBB scripts\sp\utility::func_61E7();
   level.var_EBBB.var_C9BD = undefined;
@@ -543,7 +543,7 @@ func_A77D() {
     iprintln("exploder le_clouds");
   }
 
-  level.var_A760 = getent("base_door", "targetname");
+  level.var_A760 = getEnt("base_door", "targetname");
   level.var_A760 hide();
   scripts\sp\utility::func_28D7("axis");
   scripts\engine\utility::exploder("le_clouds");
@@ -626,7 +626,7 @@ func_A77D() {
 func_DC1B() {
   level thread func_1B31();
   scripts\anim\shared::func_5D1A();
-  self giverankxp_regularmp("torso_upper", vectornormalize(level.player.origin - self.origin + (0, 0, 60)) * 1000);
+  self giverankxp_regularmp("torso_upper", vectorNormalize(level.player.origin - self.origin + (0, 0, 60)) * 1000);
   wait(10);
   if(isDefined(self)) {
     self delete();
@@ -682,12 +682,12 @@ func_5EAE() {
 
 func_28AD() {
   var_0 = spawnStruct();
-  var_0.var_2857 = getent("base_entrance_platform", "targetname");
+  var_0.var_2857 = getEnt("base_entrance_platform", "targetname");
   var_0.var_B926 = getEntArray("base_entrance_platform_models", "targetname");
   var_0.var_5924 = 0;
-  var_0.start = scripts\engine\utility::getstruct("platform_start", "targetname").origin;
+  var_0.start = scripts\engine\utility::getStruct("platform_start", "targetname").origin;
   foreach(var_2 in var_0.var_B926) {
-    var_2 linkto(var_0.var_2857);
+    var_2 linkTo(var_0.var_2857);
   }
 
   var_0.end = var_0.var_2857.origin;
@@ -1017,7 +1017,7 @@ func_517A(var_0) {
 }
 
 func_A770() {
-  level.var_A760 = getent("base_door", "targetname");
+  level.var_A760 = getEnt("base_door", "targetname");
   level.var_A760 hide();
   scripts\sp\maps\europa\europa_util::func_107C5();
   thread scripts\sp\maps\europa\europa_util::func_8E46(1);
@@ -1052,7 +1052,7 @@ func_A76D() {
 
 func_13509() {
   level endon("seeker_room_hot");
-  var_0 = getent("seeker_room_vol", "targetname");
+  var_0 = getEnt("seeker_room_vol", "targetname");
   var_1 = var_0 scripts\sp\utility::func_77E3("axis");
   var_2 = scripts\engine\utility::array_randomize(var_1);
   var_2[1] scripts\sp\utility::func_10347("europa_sf2_thereslockershe");
@@ -1074,11 +1074,11 @@ func_13509() {
 }
 
 func_A760() {
-  var_0 = getent("patform_flag_trig", "targetname");
+  var_0 = getEnt("patform_flag_trig", "targetname");
   scripts\engine\utility::flag_wait("scars_in_lab");
   scripts\engine\utility::flag_wait("entering_seeker_room");
   wait(1);
-  var_1 = scripts\engine\utility::getstruct("base_door_closed", "targetname");
+  var_1 = scripts\engine\utility::getStruct("base_door_closed", "targetname");
   while(!func_3825(var_1)) {
     wait(0.05);
   }
@@ -1107,7 +1107,7 @@ func_3825(var_0) {
 
 func_CFB0(var_0) {
   var_1 = 0.75;
-  var_2 = vectornormalize(var_0.origin - level.player getEye());
+  var_2 = vectorNormalize(var_0.origin - level.player getEye());
   var_3 = level.player getplayerangles();
   var_4 = anglesToForward(var_3);
   var_5 = 0;
@@ -1116,7 +1116,7 @@ func_CFB0(var_0) {
 }
 
 func_B99F() {
-  var_0 = getent("lab_entrance_trig", "targetname");
+  var_0 = getEnt("lab_entrance_trig", "targetname");
   var_1 = 0;
   var_2 = 0;
   for(;;) {
@@ -1144,7 +1144,7 @@ func_9068() {
   scripts\engine\utility::flag_wait("base_stairs_bottom");
   var_0 scripts\sp\utility::func_61E7();
   var_0 scripts\sp\utility::func_77B9(1.25);
-  var_1 = scripts\engine\utility::getstruct("seeker_arrive_hold", "targetname");
+  var_1 = scripts\engine\utility::getStruct("seeker_arrive_hold", "targetname");
   if(scripts\engine\utility::flag("entering_seeker_room")) {
     var_0 scripts\sp\utility::func_61C7();
     return;
@@ -1214,7 +1214,7 @@ func_F156() {
   scripts\engine\utility::flag_wait("entering_seeker_room");
   level.player.dontmelee = 1;
   thread scripts\sp\maps\europa\europa_util::func_67B6(2, "current", &"EUROPA_OBJECTIVE_FSPAR", "tram_move");
-  var_4 = getent("seeker_room_vol", "targetname");
+  var_4 = getEnt("seeker_room_vol", "targetname");
   var_5 = var_4 scripts\sp\utility::func_77E3("axis");
   var_6 = scripts\engine\utility::random(var_5).origin;
   thread func_E6DA();
@@ -1227,7 +1227,7 @@ func_F156() {
 
   scripts\sp\utility::func_15F5("seekers_thrown");
   scripts\engine\utility::flag_wait("seeker_room_hot");
-  var_4 = getent("seeker_axis_badplace", "targetname");
+  var_4 = getEnt("seeker_axis_badplace", "targetname");
   var_7 = createnavobstaclebyent(var_4, "axis");
   if(getdvarint("debug_europa")) {
     iprintln("seeker room hot");
@@ -1324,7 +1324,7 @@ func_F168() {
     }
 
     self.bt.var_F15D.var_1FBD notify("stop_loop");
-    self.bt.var_F15D scripts\sp\utility::anim_stopanimscripted();
+    self.bt.var_F15D scripts\sp\utility::anim_stopanimScripted();
     self.bt.var_F15D notify("seeker_attack");
     self.bt.var_F15D scripts\sp\maps\europa\europa_util::func_1108E();
   }
@@ -1390,7 +1390,7 @@ func_11803() {
         var_10 = anglesToForward(self.angles);
         var_11 = anglestoup(self.angles);
         var_11 = var_11 * 0.6;
-        var_12 = vectornormalize(var_10 + var_11);
+        var_12 = vectorNormalize(var_10 + var_11);
         var_13 = var_12 * var_9;
         var_2 = magicgrenademanual(self.grenadeweapon, var_8, var_13, 2);
         if(isDefined(var_2)) {
@@ -1646,13 +1646,13 @@ func_10FC3() {
 }
 
 func_8463() {
-  var_0 = getent("lab_airlock_dynpath", "targetname");
+  var_0 = getEnt("lab_airlock_dynpath", "targetname");
   var_0 connectpaths();
   var_0 notsolid();
   scripts\engine\utility::trigger_on("enter_airlock_color_move", "targetname");
   wait(0.05);
   scripts\sp\utility::func_15F5("enter_airlock_color_move");
-  var_1 = scripts\engine\utility::getstruct("lab_airlock_scene", "targetname");
+  var_1 = scripts\engine\utility::getStruct("lab_airlock_scene", "targetname");
   foreach(var_3 in level.var_EBCA) {
     var_3.var_C9BD = 1;
     var_3 scripts\sp\utility::func_5514();
@@ -1662,8 +1662,8 @@ func_8463() {
   var_1 scripts\sp\anim::func_1F17(var_5, "lab_airlock_close_intro");
   var_1 scripts\sp\anim::func_1F35(var_5, "lab_airlock_close_intro");
   var_1 thread scripts\sp\anim::func_1EEA(var_5, "lab_airlock_close_idle");
-  var_6 = getent("lab_entrance_door", "targetname");
-  var_7 = getent("lab_entrance_airlock_trig", "targetname");
+  var_6 = getEnt("lab_entrance_door", "targetname");
+  var_7 = getEnt("lab_entrance_airlock_trig", "targetname");
   var_8 = [level.player, level.var_EBBB];
   func_1378A(var_7, var_8);
   scripts\sp\utility::func_2669("in_airlock");
@@ -1677,7 +1677,7 @@ func_8463() {
     }
   }
 
-  var_13 = getent("lab_entrance_airlock_playerclip", "targetname");
+  var_13 = getEnt("lab_entrance_airlock_playerclip", "targetname");
   var_13 show();
   var_13 solid();
   var_14 = [var_5, var_6];
@@ -1773,16 +1773,16 @@ func_1AC0(var_0, var_1) {
     wait(6);
   }
 
-  level.var_1AB3 disconnectpaths();
+  level.var_1AB3 disconnectPaths();
   var_1 scripts\sp\utility::func_61C7();
 }
 
 func_94E6() {
-  var_0 = getent("lab_entrance_door", "targetname");
+  var_0 = getEnt("lab_entrance_door", "targetname");
   var_0 glinton(#animtree);
   var_0.var_1FBB = "door";
   var_0 thread scripts\sp\anim::func_1EC3(var_0, "lab_airlock_close");
-  var_1 = getent("lab_airlock_dynpath", "targetname");
+  var_1 = getEnt("lab_airlock_dynpath", "targetname");
   var_1 connectpaths();
   var_1 notsolid();
   createnavobstaclebyent(var_1, "allies");
@@ -1993,7 +1993,7 @@ func_2014(var_0) {
   level waittill("grenade_appear");
   var_1 = spawn("script_model", self gettagorigin("tag_accessory_left"));
   var_1.angles = self gettagangles("tag_accessory_left");
-  var_1 linkto(self, "tag_accessory_left");
+  var_1 linkTo(self, "tag_accessory_left");
   var_1 setModel("anti_grav_grenade_wm");
   level waittill("grenade_toss");
   var_1 delete();
@@ -2003,7 +2003,7 @@ func_2014(var_0) {
     var_3[var_3.size] = var_5.origin;
   }
 
-  var_7 = scripts\engine\utility::getstruct("locker_loop3", "targetname").origin;
+  var_7 = scripts\engine\utility::getStruct("locker_loop3", "targetname").origin;
   var_8 = var_7 - var_2;
   var_9 = magicgrenademanual("antigrav", var_2, var_8 * 10, 4);
   scripts\engine\utility::flag_wait("door_kick");
@@ -2016,7 +2016,7 @@ func_2014(var_0) {
     wait(0.05);
   }
 
-  var_5 = scripts\engine\utility::getstruct("antigrav_react3", "targetname");
+  var_5 = scripts\engine\utility::getStruct("antigrav_react3", "targetname");
   playFX(scripts\engine\utility::getfx("ag_extra"), var_5.origin);
   scripts\engine\utility::flag_set("antigrav_detonates");
   thread scripts\engine\utility::flag_set_delayed("antigrav_clear", 7);
@@ -2037,17 +2037,17 @@ func_2019() {
 }
 
 func_F8BF() {
-  var_0 = scripts\engine\utility::getstruct("antigrav_node", "targetname");
-  var_0.var_421F = getent("antigrav_breach_clip_outer", "targetname");
-  var_0.var_4220 = getent("antigrav_breach_clip_inner", "targetname");
-  var_0.var_99F4 = scripts\engine\utility::getstruct("antigrav_interact", "targetname");
-  var_0.var_5978 = getent("antigrav_breach_door", "targetname");
-  var_0.var_598A = scripts\engine\utility::getstruct("door_collision_marker", "targetname");
+  var_0 = scripts\engine\utility::getStruct("antigrav_node", "targetname");
+  var_0.var_421F = getEnt("antigrav_breach_clip_outer", "targetname");
+  var_0.var_4220 = getEnt("antigrav_breach_clip_inner", "targetname");
+  var_0.var_99F4 = scripts\engine\utility::getStruct("antigrav_interact", "targetname");
+  var_0.var_5978 = getEnt("antigrav_breach_door", "targetname");
+  var_0.var_598A = scripts\engine\utility::getStruct("door_collision_marker", "targetname");
   var_0.var_5978.var_1FBB = "antigrav_door";
   var_0.var_5978 glinton(#animtree);
   func_CF55(var_0);
-  var_0.var_421F linkto(var_0.var_5978);
-  var_0.var_4220 linkto(var_0.var_5978);
+  var_0.var_421F linkTo(var_0.var_5978);
+  var_0.var_4220 linkTo(var_0.var_5978);
   var_0.var_1684 = [var_0.var_D267, level.var_EBBB, var_0.var_5978];
   return var_0;
 }
@@ -2154,7 +2154,7 @@ func_A76F() {
       var_14 setModel("crr_light_overhead_01_off");
       var_14 thread scripts\sp\utility::play_sound_on_entity("lab_light_off");
       if(isDefined(var_14.target)) {
-        var_10 = getent(var_14.target, "targetname");
+        var_10 = getEnt(var_14.target, "targetname");
         var_10 setlightintensity(0);
       }
     }
@@ -2227,7 +2227,7 @@ func_A793() {
 }
 
 func_13DA2() {
-  var_0 = getent("window_c12", "targetname");
+  var_0 = getEnt("window_c12", "targetname");
   var_0 func_D6A7();
   scripts\sp\utility::func_16AE(var_0, "office_fight");
 }
@@ -2324,7 +2324,7 @@ func_E1C3() {
   thread func_13500();
   thread scripts\sp\maps\europa\europa_util::func_10690("office_fight");
   level.var_F10A.var_4C74 = ::func_F167;
-  var_0 = scripts\engine\utility::getstruct("wonder_room_walk1", "targetname");
+  var_0 = scripts\engine\utility::getStruct("wonder_room_walk1", "targetname");
   thread visionsetnakedforplayer();
   thread func_1B2F();
   thread vo_ambient_sdf_research_room();
@@ -2399,7 +2399,7 @@ visionsetnakedforplayer() {
 }
 
 func_26E5() {
-  var_0 = getent("axis_close", "targetname");
+  var_0 = getEnt("axis_close", "targetname");
   for(;;) {
     var_0 waittill("trigger", var_1);
     if(isDefined(var_1)) {
@@ -2573,7 +2573,7 @@ func_3385() {
   var_5 = 0;
   var_6 = 1;
   scripts\engine\utility::flag_wait("c6_lockers_go");
-  var_7 = getent("front_office_vol", "targetname") scripts\sp\utility::func_77E3("axis", "human");
+  var_7 = getEnt("front_office_vol", "targetname") scripts\sp\utility::func_77E3("axis", "human");
   if(var_7.size < 2) {
     var_5 = 1;
     var_6 = 1;
@@ -2647,7 +2647,7 @@ func_3371() {
   self.var_1FBB = "generic";
   self.ignoreme = 1;
   thread scripts\sp\utility::func_B14F();
-  var_0 = scripts\engine\utility::getstruct("hacker", "targetname");
+  var_0 = scripts\engine\utility::getStruct("hacker", "targetname");
   self.struct = var_0;
   var_0 scripts\sp\anim::func_1F17(self, "c6_hack_enter");
   thread func_B279();
@@ -2772,9 +2772,9 @@ func_5995() {
     var_1.objective_state_nomessage = 0;
   }
 
-  var_3 = scripts\engine\utility::getstruct("frag_start", "targetname");
-  var_4 = scripts\engine\utility::getstruct("frag_end", "targetname");
-  var_5 = vectornormalize(var_4.origin + (0, 0, 95) - var_3.origin);
+  var_3 = scripts\engine\utility::getStruct("frag_start", "targetname");
+  var_4 = scripts\engine\utility::getStruct("frag_end", "targetname");
+  var_5 = vectorNormalize(var_4.origin + (0, 0, 95) - var_3.origin);
   var_6 = magicgrenademanual("frag", var_3.origin, var_5 * 600, 4);
   while(isDefined(var_6)) {
     wait(0.05);
@@ -2803,7 +2803,7 @@ func_10009() {
   scripts\engine\utility::array_thread(var_0, ::func_F3D1);
   if(level.var_EBBB.var_114EB == 1 && level.var_EBBC.var_114EB == 1) {
     if(!scripts\engine\utility::flag("cancel_door_tap_scene")) {
-      var_1 = scripts\engine\utility::getstruct("scene_shoulder_tap", "targetname");
+      var_1 = scripts\engine\utility::getStruct("scene_shoulder_tap", "targetname");
       var_1 scripts\sp\anim::func_1F17(level.var_EBBB, "office_enter_idle");
       var_1 thread scripts\sp\anim::func_1EEA(level.var_EBBB, "office_enter_idle", "stop_loop");
       var_1 scripts\sp\anim::func_1F17(level.var_EBBC, "office_enter_tapgo");
@@ -2887,15 +2887,15 @@ func_A789() {
   level.var_F10A.var_4C74 = undefined;
   scripts\sp\utility::func_2669("cutter_room");
   level notify("stop_grenade_think");
-  var_0 = scripts\engine\utility::getstruct("scene_cutter_moving_cover", "targetname");
-  var_1 = getent("moving_lab_desk", "targetname");
-  var_2 = getent("moving_lab_desk_clip_dyn", "targetname");
-  var_2 linkto(var_1);
+  var_0 = scripts\engine\utility::getStruct("scene_cutter_moving_cover", "targetname");
+  var_1 = getEnt("moving_lab_desk", "targetname");
+  var_2 = getEnt("moving_lab_desk_clip_dyn", "targetname");
+  var_2 linkTo(var_1);
   var_1.var_1FBB = "desk";
   var_1 scripts\sp\utility::func_23B7("desk");
   getnode("moving_desk_node", "targetname") getrallyvehiclespawndata();
-  var_3 = getent("engineer_office_enemy3", "targetname") scripts\sp\utility::func_10619(1);
-  var_4 = getent("engineer_office_enemy4", "targetname") scripts\sp\utility::func_10619(1);
+  var_3 = getEnt("engineer_office_enemy3", "targetname") scripts\sp\utility::func_10619(1);
+  var_4 = getEnt("engineer_office_enemy4", "targetname") scripts\sp\utility::func_10619(1);
   var_5 = [var_3, var_4];
   foreach(var_7 in var_5) {
     var_7.var_1FBB = "generic";
@@ -2931,7 +2931,7 @@ func_A789() {
     var_11 = getnode("moving_desk_node", "targetname");
     var_11 func_808B();
     var_3 give_more_perk(var_11);
-    var_2 disconnectpaths();
+    var_2 disconnectPaths();
   }
 
   if(isalive(var_4)) {
@@ -2984,14 +2984,14 @@ func_13508(var_0) {
 }
 
 func_BEFD() {
-  var_0 = getent("office_breach_door", "targetname");
-  var_1 = scripts\engine\utility::getstruct("cutter_door_entry_scene", "targetname");
+  var_0 = getEnt("office_breach_door", "targetname");
+  var_1 = scripts\engine\utility::getStruct("cutter_door_entry_scene", "targetname");
   var_2 = getstartorigin(var_1.origin, var_1.angles, %europa_armory_seeker_door_fall);
   var_3 = getstartangles(var_1.origin, var_1.angles, %europa_armory_seeker_door_fall);
   var_1.var_59B2 = scripts\sp\utility::func_10639("tag_origin_mover", var_2, var_3);
   var_1.var_59B2.node = var_1 scripts\engine\utility::spawn_script_origin();
   var_1.var_5978 = var_0;
-  var_1.var_5978 linkto(var_1.var_59B2, "tag_origin");
+  var_1.var_5978 linkTo(var_1.var_59B2, "tag_origin");
   var_1.var_1684 = [level.var_EBBB, level.var_EBBC, var_1.var_59B2];
   var_1 scripts\sp\anim::func_1F17(level.var_EBBC, "new_armory_enter");
   thread func_5994(var_1);
@@ -3012,13 +3012,13 @@ func_5994(var_0) {
   thread scripts\engine\utility::exploder("doorfall_sparks");
   wait(1.1);
   thread scripts\engine\utility::exploder("doorfall_smoke");
-  var_1 = getent("office_exit_dynpath", "targetname");
+  var_1 = getEnt("office_exit_dynpath", "targetname");
   var_1 connectpaths();
   var_1 notsolid();
 }
 
 func_1C08() {
-  var_0 = getent("allies_at_exit_vol", "targetname");
+  var_0 = getEnt("allies_at_exit_vol", "targetname");
   var_1 = [level.var_EBBC, level.var_EBBB];
   func_1378A(var_0, var_1);
   scripts\engine\utility::flag_set("scars_in_cutter_room");
@@ -3026,9 +3026,9 @@ func_1C08() {
 
 func_F02F() {
   level.var_BCDA = scripts\sp\vehicle::func_1080C("cutter_script_vehicle");
-  var_0 = getent("sdf_cutter_device", "targetname");
+  var_0 = getEnt("sdf_cutter_device", "targetname");
   var_0.origin = level.var_BCDA.origin;
-  var_0 linkto(level.var_BCDA);
+  var_0 linkTo(level.var_BCDA);
   playFXOnTag(level._effect["welding"], level.var_BCDA, "tag_origin");
   level.var_BCDA startpath();
   var_0 playLoopSound("scn_europa_laser_cutter_lp");
@@ -3045,7 +3045,7 @@ func_F02F() {
   var_0 unlink();
   var_0 movey(-2.5, 0.05);
   var_0 waittill("movedone");
-  var_1 = scripts\engine\utility::getstruct("seeker_impulse_pos", "targetname");
+  var_1 = scripts\engine\utility::getStruct("seeker_impulse_pos", "targetname");
   var_2 = (0, -40, 0);
   var_0 physics_takecontrol(1, var_1.origin, var_2);
   scripts\engine\utility::flag_set("wall_cut_finished");
@@ -3054,13 +3054,13 @@ func_F02F() {
 func_A78A() {}
 
 func_1CC5() {
-  var_0 = getent(self.target, "targetname");
+  var_0 = getEnt(self.target, "targetname");
   var_1 = 0;
   if(isDefined(var_0.script_count)) {
     var_1 = var_0.script_count;
   }
 
-  var_2 = getent(var_0.target, "targetname");
+  var_2 = getEnt(var_0.target, "targetname");
   var_2 endon("trigger");
   self waittill("trigger");
   while(!var_0 scripts\sp\utility::func_77E3("axis").size) {

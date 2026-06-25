@@ -292,7 +292,7 @@ open_locker(var_0) {
 
 radioswitchinit() {
   thread radioalivemonitor();
-  var_0 = getent("island_radio", "targetname");
+  var_0 = getEnt("island_radio", "targetname");
   var_1 = common_scripts\utility::cointoss();
   var_2 = "temp";
 
@@ -380,7 +380,7 @@ radiosetvolumes(var_0) {
 }
 
 radioalivemonitor() {
-  var_0 = getent("island_radio_dmg", "targetname");
+  var_0 = getEnt("island_radio_dmg", "targetname");
   wait 0.5;
   var_0 waittill("trigger", var_1);
   level.radioalive = 0;

@@ -307,7 +307,7 @@ func_9371(var_0) {
 
 lavalamp_trap_setactive() {
   self endon("death");
-  self setcursorhint("HINT_NOICON");
+  self setCursorHint("HINT_NOICON");
   self makeunusable();
   scripts\cp\utility::addtotraplist();
   var_0 = self.owner;

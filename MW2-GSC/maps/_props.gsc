@@ -60,7 +60,7 @@ attach_clip(guy) {
   guy notify("new_prop_rotation");
 
   clip = spawn("script_model", (0, 0, 0));
-  clip linkto(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  clip linkTo(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
   clip setModel(getModel("clip"));
   guy.clip = clip;
 
@@ -81,7 +81,7 @@ attach_phone(guy) {
   guy notify("new_phone_rotation");
 
   phone = spawn("script_model", (0, 0, 0));
-  phone linkto(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  phone linkTo(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
   phone setModel(getModel("cellphone"));
   guy.phone = phone;
 
@@ -98,7 +98,7 @@ attach_cig(guy) {
   guy notify("new_cigar_rotation");
 
   cigar = spawn("script_model", (0, 0, 0));
-  cigar linkto(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
+  cigar linkTo(guy, "tag_inhand", (0, 0, 0), (0, 0, 0));
   cigar setModel(getModel("cigar"));
   playFXOnTag(getfx("cigar_glow"), cigar, "tag_cigarglow");
   guy.cigar = cigar;

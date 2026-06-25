@@ -73,7 +73,7 @@ function skit_interupt(fail_pos, group) {
     fail_pos = level._start_skit_pos;
   }
   while(true) {
-    players = getplayers();
+    players = getPlayers();
     if(isDefined(group)) {
       players = group;
     }
@@ -107,7 +107,7 @@ function skit_interupt(fail_pos, group) {
     wait(0.1);
   }
   level notify("skit_interupt");
-  speaker = getplayers()[0];
+  speaker = getPlayers()[0];
   if(isDefined(level._last_skit_line_speaker)) {
     speaker = level._last_skit_line_speaker;
   }
@@ -135,7 +135,7 @@ function skit_interupt(fail_pos, group) {
 }
 
 function do_skit_line(script_line) {
-  players = getplayers();
+  players = getPlayers();
   speaking_player = players[0];
   for(i = 0; i < players.size; i++) {
     if(isDefined(players[i].zm_random_char)) {
@@ -184,7 +184,7 @@ function fail_skit(first_time) {
   } else {
     fail_skits = array(level._skit_data["fail2"], level._skit_data["fail3"], level._skit_data["fail4"]);
   }
-  players = getplayers();
+  players = getPlayers();
   player_index = 0;
   proposed_group = undefined;
   while(player_index != players.size) {

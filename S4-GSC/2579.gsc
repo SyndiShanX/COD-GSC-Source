@@ -163,8 +163,8 @@ _id_BBD7() {
   self makeuseable();
   self _meth_83A1(-1);
   self enablemissilehint(1);
-  self setcursorhint("HINT_NOICON");
-  self sethintstring(&"EQUIPMENT_HINTS/PICKUP_TROPHY");
+  self setCursorHint("HINT_NOICON");
+  self setHintString(&"EQUIPMENT_HINTS/PICKUP_TROPHY");
   self setuserange(128);
   self setuseholdduration("duration_short");
   self sethintrequiresholding(0);

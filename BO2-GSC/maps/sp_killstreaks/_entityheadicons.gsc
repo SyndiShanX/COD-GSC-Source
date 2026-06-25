@@ -91,7 +91,7 @@ updateentityheadteamicon(entity, team, icon, constant_size, off) {
     headicon setwaypoint(constant_size);
   }
 
-  headicon settargetent(entity);
+  headicon settargetEnt(entity);
   entity.entityheadicons[entity.entityheadicons.size] = headicon;
 }
 
@@ -114,7 +114,7 @@ updateentityheadclienticon(entity, icon, constant_size, off) {
     headicon setwaypoint(constant_size);
   }
 
-  headicon settargetent(entity);
+  headicon settargetEnt(entity);
   entity.entityheadicons[entity.entityheadicons.size] = headicon;
 }
 

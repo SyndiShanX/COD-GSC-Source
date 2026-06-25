@@ -203,12 +203,12 @@ function_f8e8c129(entity) {
 
     if(dist_sq > 14400 && dist_sq < 360000) {
       vec_facing = anglesToForward(self.angles);
-      norm_facing = vectornormalize(vec_facing);
-      norm_enemy = vectornormalize(vec_enemy);
+      norm_facing = vectorNormalize(vec_facing);
+      norm_enemy = vectorNormalize(vec_enemy);
       dot = vectordot(norm_facing, norm_enemy);
       var_482d3bba = (vec_facing[0], vec_facing[1], 0);
-      var_45ed4f50 = vectornormalize((vec_facing[0], vec_facing[1], 0));
-      var_9743030a = vectornormalize((vec_enemy[0], vec_enemy[1], 0));
+      var_45ed4f50 = vectorNormalize((vec_facing[0], vec_facing[1], 0));
+      var_9743030a = vectorNormalize((vec_enemy[0], vec_enemy[1], 0));
       var_5e958f82 = vectordot(var_45ed4f50, var_9743030a);
 
       if(dot > 0.707 && var_5e958f82 > 0.99) {
@@ -279,7 +279,7 @@ shoot_bolt_wait(entity) {
   bolt endon(#"death");
   wait 0.1;
   bolt clientfield::set("" + #"avogadro_bolt_fx", 1);
-  bolt moveto(target_pos, 0.2);
+  bolt moveTo(target_pos, 0.2);
   bolt waittill(#"movedone");
   bolt check_bolt_impact(entity, enemy);
   bolt clientfield::set("" + #"avogadro_bolt_fx", 0);

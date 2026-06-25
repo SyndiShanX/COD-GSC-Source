@@ -160,12 +160,12 @@ function function_630f7ed5(v_origin) {
   v_navmesh = getclosestpointonnavmesh(v_origin, 512, 16);
   if(isDefined(v_navmesh)) {
     wait(2);
-    self moveto(v_navmesh + vectorscale((0, 0, 1), 40), 2);
+    self moveTo(v_navmesh + vectorscale((0, 0, 1), 40), 2);
   }
 }
 
 function function_5a772555() {
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size == 1) {
     n_num = 18;
   } else {
@@ -309,7 +309,7 @@ function function_1fe60e52() {
 }
 
 function function_6647fb88() {
-  a_players = getplayers();
+  a_players = getPlayers();
   if(a_players.size == 1) {
     n_num = 15;
   } else {
@@ -334,7 +334,7 @@ function function_1089db10() {
 }
 
 function function_f55d851b() {
-  a_players = getplayers();
+  a_players = getPlayers();
   e_player = function_25a4a7d4();
   queryresult = positionquery_source_navigation(e_player.origin, 600, 900, 128, 20);
   if(isDefined(queryresult) && queryresult.data.size > 0) {
@@ -379,7 +379,7 @@ function function_77d3a18d() {
 }
 
 function function_21bbe70d() {
-  a_players = getplayers();
+  a_players = getPlayers();
   e_player = function_25a4a7d4();
   queryresult = positionquery_source_navigation(e_player.origin, 600, 800, 128, 20);
   if(isDefined(queryresult) && queryresult.data.size > 0) {
@@ -418,21 +418,21 @@ function function_1f0a0b52(v_spawn_pos) {
   var_3dd66385 setModel("tag_origin");
   util::wait_network_frame();
   var_3dd66385 clientfield::set("apothicon_fury_spawn_meteor", 1);
-  var_3dd66385 moveto(v_spawn_pos, 1.5);
+  var_3dd66385 moveTo(v_spawn_pos, 1.5);
   var_3dd66385 waittill("movedone");
   var_3dd66385 delete();
   var_2c69e810 delete();
 }
 
 function function_e7ec74b4() {
-  a_players = getplayers();
+  a_players = getPlayers();
   for(i = 0; i < a_players.size; i++) {
     a_players[i].var_ddcf1ca1 = 0;
   }
 }
 
 function function_25a4a7d4() {
-  a_players = getplayers();
+  a_players = getPlayers();
   var_b474403b = 9999999;
   var_6c9f55e = a_players[0];
   for(i = 0; i < a_players.size; i++) {
